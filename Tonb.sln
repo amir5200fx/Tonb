@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tonb", "Tonb\Tonb.vcxproj", "{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbBase", "TnbBase\TnbBase.vcxproj", "{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}.Release|x64.Build.0 = Release|x64
 		{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}.Release|x86.ActiveCfg = Release|Win32
 		{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}.Release|x86.Build.0 = Release|Win32
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Debug|x64.ActiveCfg = Debug|x64
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Debug|x64.Build.0 = Debug|x64
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Debug|x86.ActiveCfg = Debug|Win32
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Debug|x86.Build.0 = Debug|Win32
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Release|x64.ActiveCfg = Release|x64
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Release|x64.Build.0 = Release|x64
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Release|x86.ActiveCfg = Release|Win32
+		{A8DD6B48-4327-40BD-B6A4-1C95E5160D0E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

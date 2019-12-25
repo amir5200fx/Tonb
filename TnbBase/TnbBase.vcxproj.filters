@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{f4f5c527-0a0d-4eaa-a167-ebb354111173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base">
+      <UniqueIdentifier>{9edd7726-a618-461a-bd09-c23276510096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives">
+      <UniqueIdentifier>{1cd9edb1-6693-4d8e-a5d0-2875877e6ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\BlockCoeff">
+      <UniqueIdentifier>{a74b12a4-fc40-469f-91ee-1ae36dd2e04a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\bools">
+      <UniqueIdentifier>{36dd218f-33f0-4d45-b121-460626d34329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\char">
+      <UniqueIdentifier>{8650dbbb-00a1-430f-8d0b-ea4cfa9f82e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\complex">
+      <UniqueIdentifier>{47ff6d0d-213a-44a6-bc25-a7f3d0c47cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\contiguous">
+      <UniqueIdentifier>{7149e7fb-ff5a-48ff-9e19-2c1fc77e5e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\DiagTensor">
+      <UniqueIdentifier>{a5e25886-d73e-45b1-ab65-ae34a2e7f066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\direction">
+      <UniqueIdentifier>{3b793ced-c478-4b23-a502-caa2b4ccec29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\expandContract">
+      <UniqueIdentifier>{ee9f0f77-c1d4-44e0-814e-5bb6f4b6c46b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\FadOne">
+      <UniqueIdentifier>{567089e2-6eaf-44de-87bd-b168bcaec092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\functions">
+      <UniqueIdentifier>{705288a2-f922-472d-b080-354c31f8c8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\hashes">
+      <UniqueIdentifier>{01b388d4-f830-4782-a1ec-db91650e50cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints">
+      <UniqueIdentifier>{c228ae1a-d1d4-4fd2-a631-2b0f29b2b993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Lists">
+      <UniqueIdentifier>{d80d2b03-bfce-40ea-8f37-c20278d6d041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\mathematicalConstants">
+      <UniqueIdentifier>{405304ef-98f9-4b30-8c29-4ee8d5e09a01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\nil">
+      <UniqueIdentifier>{b2355afa-e300-41c1-8b9c-1624389503c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\one">
+      <UniqueIdentifier>{2709ba03-1f44-4481-be65-a4911617624e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ops">
+      <UniqueIdentifier>{7754c6bf-dfad-44ab-ad5a-320e842b63fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Pair">
+      <UniqueIdentifier>{def09875-91f4-4576-ab53-d432f8bfd031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\pTraits">
+      <UniqueIdentifier>{0189e697-18f2-40f6-aafe-7da271d4928b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\quaternion">
+      <UniqueIdentifier>{72a3f30e-d7b4-4ed2-851d-1ab2e080f27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\random">
+      <UniqueIdentifier>{3c0892ca-5aa2-425b-bd83-ba6cec397ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Scalar">
+      <UniqueIdentifier>{a98de149-b0ae-46cb-9efe-b98093086ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\septernion">
+      <UniqueIdentifier>{86938f39-0c98-4c2f-8f67-56ca240dbb8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SphericalTensor">
+      <UniqueIdentifier>{d421e120-8efa-48ba-a628-cf4c792bea05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SphericalTensor2D">
+      <UniqueIdentifier>{a9f65bb8-e79d-4e71-a533-4647a689d50a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\strings">
+      <UniqueIdentifier>{a1828328-61c1-4efc-94c2-9a87d8aa1c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Swap">
+      <UniqueIdentifier>{e20c25ad-5270-49ad-b5d0-39d4acd035f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor">
+      <UniqueIdentifier>{1d8d26e9-6544-40aa-9f83-5e3945050ad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor2D">
+      <UniqueIdentifier>{0dea2c8b-75d3-49dc-9c93-03ed659c3838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor4thOrder">
+      <UniqueIdentifier>{a5ac79c0-b31d-4146-9d10-97fa59f89aed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Tensor">
+      <UniqueIdentifier>{cdee5408-5b6d-4872-b0ce-e5486193b2d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Tensor2D">
+      <UniqueIdentifier>{b241f9ed-99e2-4ef1-89d6-a98757f170ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\transform">
+      <UniqueIdentifier>{c64c4243-1d87-4b74-b40a-195c268d9f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Tuple2">
+      <UniqueIdentifier>{27bbab8d-aca1-4e9e-b524-88f9c6c4e1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Vector">
+      <UniqueIdentifier>{cfa565da-bf0b-402a-afcb-13cd2246cfb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Vector2D">
+      <UniqueIdentifier>{97ea1bd0-36a9-47c5-aa7a-ca9246f5a38a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\VectorN">
+      <UniqueIdentifier>{070628a1-2699-4f75-a47d-69efe1147fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\VectorSpace">
+      <UniqueIdentifier>{fc216e7c-a41b-4f6a-b1f6-2fd093a58bae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\zero">
+      <UniqueIdentifier>{cd288b1d-33b3-41f3-9f40-c3193c5297a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\bools\bool">
+      <UniqueIdentifier>{e4e6d482-9962-4e89-bc48-31f14b029ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\hashes\Hasher">
+      <UniqueIdentifier>{022d5698-dd56-4731-9ece-310a85ed1bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\strings\string">
+      <UniqueIdentifier>{16bd2b17-5748-4de6-82b5-510aa7712742}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
+      <Filter>TnbLib\Base\Primitives\one</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\one\oneI.hxx">
+      <Filter>TnbLib\Base\Primitives\one</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\zero\zero.hxx">
+      <Filter>TnbLib\Base\Primitives\zero</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\zero\zeroI.hxx">
+      <Filter>TnbLib\Base\Primitives\zero</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\nil\nil.hxx">
+      <Filter>TnbLib\Base\Primitives\nil</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\pTraits\pTraits.hxx">
+      <Filter>TnbLib\Base\Primitives\pTraits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\bools\bool\bool.hxx">
+      <Filter>TnbLib\Base\Primitives\bools\bool</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\char\char.hxx">
+      <Filter>TnbLib\Base\Primitives\char</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\Hasher\Hasher.hxx">
+      <Filter>TnbLib\Base\Primitives\hashes\Hasher</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\Hasher\HasherInt.hxx">
+      <Filter>TnbLib\Base\Primitives\hashes\Hasher</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\string\tnbString.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\string</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\string\tnbStringI.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\string</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
+      <Filter>TnbLib\Base\Primitives\one</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\hashes\Hasher\Hasher.cxx">
+      <Filter>TnbLib\Base\Primitives\hashes\Hasher</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\string\tnbString.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\string</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
