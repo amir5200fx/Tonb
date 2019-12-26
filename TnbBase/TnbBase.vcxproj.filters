@@ -136,6 +136,375 @@
     <Filter Include="TnbLib\Base\Primitives\strings\string">
       <UniqueIdentifier>{16bd2b17-5748-4de6-82b5-510aa7712742}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Primitives\bools\Switch">
+      <UniqueIdentifier>{cc4a2c8d-de1d-493b-9858-459b8b606d24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\strings\word">
+      <UniqueIdentifier>{75d3629d-b133-42c4-95b0-76302aa68e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\strings\keyType">
+      <UniqueIdentifier>{df128d87-8d4d-4cb6-b110-d28e2aa0f4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints\int">
+      <UniqueIdentifier>{730a3e48-7d85-40ea-855a-9736c838fdba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints\label">
+      <UniqueIdentifier>{ccfd97f2-4e71-4f13-98a2-bc729b073a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints\long">
+      <UniqueIdentifier>{2d4eb631-3528-47fe-b22d-ee1a7f1c16ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints\longLong">
+      <UniqueIdentifier>{961b1bed-d0da-4e6a-96be-367653434dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints\uint">
+      <UniqueIdentifier>{0d909ada-f034-4901-8a21-25646ed375a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints\uLabel">
+      <UniqueIdentifier>{4aecd52a-9cff-4d7d-b0e6-653b9a1e37a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\ints\ulong">
+      <UniqueIdentifier>{1a60d70e-5b93-425f-b9d6-a41c690d32c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Scalar\doubleScalar">
+      <UniqueIdentifier>{99ad83d7-6fa3-48fc-9473-1c78ca4e37d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Scalar\floatScalar">
+      <UniqueIdentifier>{51f61040-d2ca-474f-a2db-1277bcde0f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar">
+      <UniqueIdentifier>{93bc7581-e660-43e6-baa1-f6032b835e66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Scalar\scalar">
+      <UniqueIdentifier>{0a5dcfb3-0d34-47e2-a041-38de019f744e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\products">
+      <UniqueIdentifier>{92747313-489c-4f26-8add-240cfdeeb033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db">
+      <UniqueIdentifier>{bf4c0e81-7c43-406e-89d3-7eb987f434c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\Callback">
+      <UniqueIdentifier>{6430e08e-e0f0-4171-88a4-197c3cb2bf80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\CallbackRegistry">
+      <UniqueIdentifier>{0089212b-9625-4181-8ae7-05c43cf006e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary">
+      <UniqueIdentifier>{37ef89f2-3084-4409-80a4-98688cb4b004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dlLibraryTable">
+      <UniqueIdentifier>{a747cfab-8d75-4d1a-9e31-c9e4e63e6b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\error">
+      <UniqueIdentifier>{2bb382b7-e02f-4ee9-be53-4ab55536938d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\functionObjects">
+      <UniqueIdentifier>{a9e1f7ae-7690-4190-9a3e-c1cff0cf30c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobject">
+      <UniqueIdentifier>{31eff622-78a9-4a62-b328-262dc78841ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjectList">
+      <UniqueIdentifier>{8ec6f1d7-17dc-4591-85b5-cbe7eafa802c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjects">
+      <UniqueIdentifier>{057e08f7-abce-4831-9944-f06490d15739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams">
+      <UniqueIdentifier>{02ebd6e4-4331-4678-a89c-c28677b2818d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\memberFunctionSelection">
+      <UniqueIdentifier>{496f07b4-1c1d-4c33-90f5-0f6365fd6f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\objectRegistry">
+      <UniqueIdentifier>{0d32f7c1-98f3-4348-95ce-6e6df91f49fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\postfixedSubRegistry">
+      <UniqueIdentifier>{57498944-f805-48eb-b38b-2e060cdf64d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\regIOobject">
+      <UniqueIdentifier>{6bf765d1-499b-45be-8c23-16374dc60750}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\runTimeSelection">
+      <UniqueIdentifier>{64caada5-8d42-4443-af26-a34cd58c596f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\scalarRange">
+      <UniqueIdentifier>{36422ffc-4462-4c59-9e3c-588f458a976d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\Time">
+      <UniqueIdentifier>{7094c34b-c067-4014-bb9e-5ca1806ea133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\typeInfo">
+      <UniqueIdentifier>{8b45a75c-cead-46b4-aeff-4f404d906bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global">
+      <UniqueIdentifier>{0bf95fff-5e3d-4ce8-b987-4a0a3b2d0856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\memory">
+      <UniqueIdentifier>{407a1a6a-b339-42ef-8195-15fb31b03bc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\memory\autoPtr">
+      <UniqueIdentifier>{f8d93730-0aed-47cf-975c-6de8582c406b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\memory\tmp">
+      <UniqueIdentifier>{4b3c6d51-3d2c-40ab-828c-19ce15ac6ad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\memory\Xfer">
+      <UniqueIdentifier>{45da294d-9df4-45e7-8c97-f236bc9b9993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers">
+      <UniqueIdentifier>{fcca4399-24d3-4a8e-baaf-ce56653cbf8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Dictionaries">
+      <UniqueIdentifier>{8701194c-d917-4cb8-839e-ab8a7a35f0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\HashTables">
+      <UniqueIdentifier>{609ccb82-5e6f-4f15-9d38-0dcdd6d4216e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Identifiers">
+      <UniqueIdentifier>{ca5649b4-6c04-4f7c-af88-ae24da4c51ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists">
+      <UniqueIdentifier>{3616bead-57fb-4e7f-ab4d-bbd142176d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists">
+      <UniqueIdentifier>{e2b293c3-cdf6-43a8-8d99-2869fa2a4b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\NamedEnum">
+      <UniqueIdentifier>{46764f44-20c7-4a63-9336-226dd299eee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\BiIndirectList">
+      <UniqueIdentifier>{09457ffe-ad4c-4e70-9505-b6c7a2a9a238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\CompactListList">
+      <UniqueIdentifier>{3e464655-be11-4272-b227-029fdb95969d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\DynamicList">
+      <UniqueIdentifier>{e2caedb6-27b3-4825-9589-b373b3ce5914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\FixedList">
+      <UniqueIdentifier>{d196349b-5135-4bb6-af49-bfc23602ca1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\Histogram">
+      <UniqueIdentifier>{e6be7a2a-ced0-44e3-99b7-674b597998e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\IndirectList">
+      <UniqueIdentifier>{dca3882f-04da-4b08-bee5-412b302d3130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\List">
+      <UniqueIdentifier>{e2dc0ed6-365b-48d3-85d1-c7a55185ce3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\ListListOps">
+      <UniqueIdentifier>{5c02b31c-18ea-40f8-9eae-56ff2c1dfaab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\ListOps">
+      <UniqueIdentifier>{3165774b-1ed5-41b3-b36a-40facd874f3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\PackedList">
+      <UniqueIdentifier>{d4e741db-58d7-41a0-b4ed-d10acabe5b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\PriorityList">
+      <UniqueIdentifier>{60226689-9dcf-43ff-ad6e-23478a2db764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\PtrList">
+      <UniqueIdentifier>{61801162-38ac-4b67-9e69-9da541be16ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\SortableList">
+      <UniqueIdentifier>{74be9ffd-b3d5-489d-9818-fe5002293647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\Stack">
+      <UniqueIdentifier>{be7ff069-9439-4528-a054-ca0dad9e9879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\SubList">
+      <UniqueIdentifier>{ed3c17b4-908b-4fd8-8c2c-b5b0afead73d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\UIndirectList">
+      <UniqueIdentifier>{7c88a5bc-45eb-480e-acdc-577e5d808b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\UList">
+      <UniqueIdentifier>{2e8e5a94-ddc1-4d35-901a-642daa2e3cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Lists\UPtrList">
+      <UniqueIdentifier>{5e577ca6-8efd-4f8b-b1b3-e83320ade51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\Fstreams">
+      <UniqueIdentifier>{a66d4949-e643-436f-a276-e4d8be56f392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\gzstream">
+      <UniqueIdentifier>{8f154646-2aad-4229-832d-08958ad5a103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\hashes">
+      <UniqueIdentifier>{69647cfd-0543-407f-84ac-c92793e69008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\IOstreams">
+      <UniqueIdentifier>{e0724895-0e4a-49af-8970-fbf070ffea68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\Pstreams">
+      <UniqueIdentifier>{a1e55bb0-0288-4479-b651-46cc3c77b255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\Sstreams">
+      <UniqueIdentifier>{3ab094f5-0f82-41e0-ab35-93080c1f620c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\StringStreams">
+      <UniqueIdentifier>{45ae833a-36ea-4f38-92d8-4350dde947b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\token">
+      <UniqueIdentifier>{abffee98-75c8-4408-94b0-a33eb0c8bd4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\Tstreams">
+      <UniqueIdentifier>{7ea72e79-26ba-4ae5-b683-ccb996c0dd5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\argList">
+      <UniqueIdentifier>{061a3299-4b9a-4296-9a33-51a1c8d216de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\clock">
+      <UniqueIdentifier>{6a8d07d4-8953-4b8e-b7f1-0c17c03c1d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\controlSwitches">
+      <UniqueIdentifier>{2c2053ce-f0c1-4fcd-8e42-154c3494cd51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\debug">
+      <UniqueIdentifier>{d1e97016-b30c-406f-8c6d-f81c471442ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\dimensionedConstants">
+      <UniqueIdentifier>{9e5a522d-5755-4fc6-ae76-4a9eeda305ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\JobInfo">
+      <UniqueIdentifier>{e2fd992e-df8f-4ef2-843e-23faca736bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\profiling">
+      <UniqueIdentifier>{4e7b7ca4-d50a-468a-8e12-76f15d11ba51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\global\unitConversion">
+      <UniqueIdentifier>{a1bf4ba9-6a90-4822-9da4-4f7daeeb787d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\strings\fileName">
+      <UniqueIdentifier>{06073935-7dbb-47f8-8163-69c29a6e90e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\HashTables\HashPtrTable">
+      <UniqueIdentifier>{d8a90503-71c6-437a-a30f-a7a6d8734e91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\HashTables\HashSet">
+      <UniqueIdentifier>{45331cfa-648d-4469-8d60-16bb9ad02666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\HashTables\HashTable">
+      <UniqueIdentifier>{1207947b-a52a-4622-af60-4a8d7932f1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\HashTables\Map">
+      <UniqueIdentifier>{7816dd8f-a20e-41b7-ba89-5a3fcea14670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\HashTables\PtrMap">
+      <UniqueIdentifier>{e35356a7-27cc-4021-aedd-86338b4deded}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\HashTables\StaticHashTable">
+      <UniqueIdentifier>{e555a00d-ac6d-4d22-a0de-8af69ffe70a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOstreams\token\CompoundToken">
+      <UniqueIdentifier>{f3dcb3e8-6b38-42b3-b185-630a2c0576fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\accessTypes">
+      <UniqueIdentifier>{f8a2ad34-5189-4eaa-834e-1226a6ff91de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\linkTypes">
+      <UniqueIdentifier>{0a277f9d-2b37-49e9-b309-ebabf01d0461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\user">
+      <UniqueIdentifier>{862eddd4-8cd5-4b3e-802d-e20ec5a799c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList">
+      <UniqueIdentifier>{4f5fba4f-aacd-44d6-91a3-2ff768af9a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList">
+      <UniqueIdentifier>{e68dd09b-26dc-479a-a1d5-fe245a968477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList">
+      <UniqueIdentifier>{4d1a5f9e-e219-48ac-97bd-12f868199bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList">
+      <UniqueIdentifier>{074d728e-fa1f-4dfa-8912-7635d625575d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase">
+      <UniqueIdentifier>{e27de494-05c5-4f31-a220-f4788baaf40b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase">
+      <UniqueIdentifier>{7aa0897e-8063-4bf3-9d0a-fc443a696b35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\hashes\SHA1">
+      <UniqueIdentifier>{20710fca-fa92-48d6-a872-6a9dd940ae85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\hashes\Hash">
+      <UniqueIdentifier>{4a240d94-76d4-408e-a6c5-669d11910604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\include">
+      <UniqueIdentifier>{6aac15f1-f25a-427c-afa3-f5db7135d385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\Time\instant">
+      <UniqueIdentifier>{b46ca631-5cba-4e7d-849e-7f46a5efaef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\OSspecific">
+      <UniqueIdentifier>{2a5128a1-5c79-4171-9ba1-5dacca0358fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\OSspecific\MSWindows">
+      <UniqueIdentifier>{5985c671-ee03-4937-ab74-a4efc0d03e29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\OSspecific\MSWindows\clockTime">
+      <UniqueIdentifier>{18b35954-e2eb-404d-8530-653f1b208fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\OSspecific\MSWindows\cpuTime">
+      <UniqueIdentifier>{d1efea70-b0e5-4622-a249-434804e0e109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\OSspecific\MSWindows\multiThreader">
+      <UniqueIdentifier>{08ad9bc3-a93e-4322-8287-239aec78ba5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\OSspecific\MSWindows\signals">
+      <UniqueIdentifier>{227c38b5-e9a1-42bf-bf97-6cb98952ff39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjects\IOdictionary">
+      <UniqueIdentifier>{36d0a9dd-d9be-4918-8a39-18aac1b8ab8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjects\IOField">
+      <UniqueIdentifier>{f1800d17-bd79-45e3-8326-35a50fea5ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjects\IOList">
+      <UniqueIdentifier>{715dd4b3-f45b-4a7c-8b76-570e4446e5e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjects\IOMap">
+      <UniqueIdentifier>{eb818347-e3d3-42aa-9072-c88411fe8fed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjects\IOPtrList">
+      <UniqueIdentifier>{54832e63-b7b2-4ce8-8537-686d36a8b68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\IOobjects\IOReferencer">
+      <UniqueIdentifier>{89ef2faf-a52d-438c-bbf6-94fb086697bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\dictionaryEntry">
+      <UniqueIdentifier>{e4285d5a-3eb2-4f22-8142-c397d101035c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\entry">
+      <UniqueIdentifier>{5e4bbf8e-0740-4aa1-b7d7-b8f0ffca8780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\functionEntries">
+      <UniqueIdentifier>{dcb2bcf8-44a0-440e-beba-67e59ceaffec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\primitiveEntry">
+      <UniqueIdentifier>{31254abe-9ca7-4a59-b7a6-b542d72872df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\functionEntries\functionEntry">
+      <UniqueIdentifier>{6f571580-3c07-4b60-82bb-0685cc1afcaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\functionEntries\includeEntry">
+      <UniqueIdentifier>{887cd2fd-00fd-4092-808f-5fbba60d9903}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry">
+      <UniqueIdentifier>{92df9a70-a522-41ba-837b-fe4f5b14c769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\functionEntries\inputModeEntry">
+      <UniqueIdentifier>{c0a526a3-c558-4bf1-b71b-8c3311551fc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry">
+      <UniqueIdentifier>{7b84d969-1d1a-4f27-aa1e-8caa08ea8b87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -174,6 +543,573 @@
     <ClInclude Include="TnbLib\Base\Primitives\strings\string\tnbStringI.hxx">
       <Filter>TnbLib\Base\Primitives\strings\string</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\word\word.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\word</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\word\wordI.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\word</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\keyType\keyType.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\keyType</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\keyType\keyTypeI.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\keyType</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Swap\Swap.hxx">
+      <Filter>TnbLib\Base\Primitives\Swap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ints\int\int.hxx">
+      <Filter>TnbLib\Base\Primitives\ints\int</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ints\label\label.hxx">
+      <Filter>TnbLib\Base\Primitives\ints\label</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ints\long\long.hxx">
+      <Filter>TnbLib\Base\Primitives\ints\long</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ints\longLong\longLong.hxx">
+      <Filter>TnbLib\Base\Primitives\ints\longLong</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ints\uint\uint.hxx">
+      <Filter>TnbLib\Base\Primitives\ints\uint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ints\uLabel\uLabel.hxx">
+      <Filter>TnbLib\Base\Primitives\ints\uLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ints\ulong\ulong.hxx">
+      <Filter>TnbLib\Base\Primitives\ints\ulong</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\direction\direction.hxx">
+      <Filter>TnbLib\Base\Primitives\direction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\contiguous\contiguous.hxx">
+      <Filter>TnbLib\Base\Primitives\contiguous</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\ops\ops.hxx">
+      <Filter>TnbLib\Base\Primitives\ops</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\products\products.hxx">
+      <Filter>TnbLib\Base\Primitives\products</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\doubleFloat.hxx">
+      <Filter>TnbLib\Base\Primitives\Scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\floatScalar\floatScalar.hxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\floatScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\ScalarTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\Scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\doubleScalar\doubleScalar.hxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\doubleScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar\longDoubleScalar.hxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\longDoubleScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\scalar\scalar.hxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpace.hxx">
+      <Filter>TnbLib\Base\Primitives\VectorSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpaceI.hxx">
+      <Filter>TnbLib\Base\Primitives\VectorSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpaceM.hxx">
+      <Filter>TnbLib\Base\Primitives\VectorSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\memory\tmp\refCount.hxx">
+      <Filter>TnbLib\Base\memory\tmp</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\memory\tmp\tmp.hxx">
+      <Filter>TnbLib\Base\memory\tmp</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\memory\tmp\tmpI.hxx">
+      <Filter>TnbLib\Base\memory\tmp</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\memory\autoPtr\autoPtr.hxx">
+      <Filter>TnbLib\Base\memory\autoPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\memory\autoPtr\autoPtrI.hxx">
+      <Filter>TnbLib\Base\memory\autoPtr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\memory\Xfer\Xfer.hxx">
+      <Filter>TnbLib\Base\memory\Xfer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\memory\Xfer\XferI.hxx">
+      <Filter>TnbLib\Base\memory\Xfer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\InfoProxy.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\INew.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\safeBool.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\safeBoolI.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\tnbDebug.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\clock\clock.hxx">
+      <Filter>TnbLib\Base\global\clock</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\controlSwitches.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\controlSwitchesI.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\constantsSwitch.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\infoSwitch.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\debugSwitch.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\optimisationSwitch.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\tolerancesSwitch.hxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\IOstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\fileName\fileName.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\fileName</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\fileName\fileNameI.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\fileName</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\typeInfo\className.hxx">
+      <Filter>TnbLib\Base\db\typeInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\scalarRange\scalarRange.hxx">
+      <Filter>TnbLib\Base\db\scalarRange</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashTable\HashTable.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashTable\HashTableI.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\runTimeSelection\runTimeSelectionTables.hxx">
+      <Filter>TnbLib\Base\db\runTimeSelection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\runTimeSelection\addToRunTimeSelectionTable.hxx">
+      <Filter>TnbLib\Base\db\runTimeSelection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\token\token.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\token</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\error\messageStream.hxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\error\StaticAssert.hxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\error\error.hxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\error\errorManip.hxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\typeInfo\typeInfo.hxx">
+      <Filter>TnbLib\Base\db\typeInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\typeInfo\tokenI.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\token</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\token\CompoundToken\CompoundToken.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\token\CompoundToken</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\Istream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\Ostream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\IOmanip.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\OSstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\OSstreamI.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\prefixOSstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\readHexLabel.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\ISstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\ISstreamI.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\StringStreams\OStringStream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\StringStreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\StringStreams\IStringStream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\StringStreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\UList\UList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\UList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\UList\UListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\UList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\List\ListLoopM.hxx">
+      <Filter>TnbLib\Base\containers\Lists\List</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\List\List.hxx">
+      <Filter>TnbLib\Base\containers\Lists\List</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\List\ListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\List</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\UPtrList\UPtrList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\UPtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\UPtrList\UPtrListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\UPtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\UIndirectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\UIndirectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\SubList\SubList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\SubList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\SubList\SubListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\SubList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\PriorityList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\PtrList\PtrList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\PtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\PtrList\PtrListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\PtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\IndirectList\IndirectList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\IndirectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\IndirectList\IndirectListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\IndirectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\DynamicList\DynamicList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\DynamicList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\DynamicList\DynamicListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\DynamicList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\BiIndirectList\BiIndirectList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\BiIndirectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\BiIndirectList\BiIndirectListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\BiIndirectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBase.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBaseI.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBase.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBaseI.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\UILList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\ILList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\SLList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\SLPtrList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\UIDLList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\LIFOStack.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\ISLList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\IDLList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\FIFOStack.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\DLPtrList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\DLList.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\user</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\hashes\OSHA1stream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\hashes</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1Digest.hxx">
+      <Filter>TnbLib\Base\Primitives\hashes\SHA1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1.hxx">
+      <Filter>TnbLib\Base\Primitives\hashes\SHA1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1I.hxx">
+      <Filter>TnbLib\Base\Primitives\hashes\SHA1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\Hash\Hash.hxx">
+      <Filter>TnbLib\Base\Primitives\hashes\Hash</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.h">
+      <Filter>TnbLib\Base\db\IOstreams\gzstream</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\IFstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Fstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\OFstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Fstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\include\OSspecific.hxx">
+      <Filter>TnbLib\Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\boolList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\diagTensorList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\dynamicLabelList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\fileNameList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\labelIOList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\labelList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\labelPairList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\PackedBoolList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\scalarIOList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\scalarList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\sphericalTensorList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\stringList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\stringListOps.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\symmTensor4thOrderList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\symmTensorList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\tensorList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\vectorList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\VectorNLists.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordIOList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordReList.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordReListMatcher.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordReListMatcherI.hxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\bools\Switch\Switch.hxx">
+      <Filter>TnbLib\Base\Primitives\bools\Switch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\Time\TimeState.hxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\Time\timeSelector.hxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\Time\TimePaths.hxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\Time\subCycleTime.hxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\Time\tnbTime.hxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\Time\instant\instant.hxx">
+      <Filter>TnbLib\Base\db\Time\instant</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\Time\instant\instantList.hxx">
+      <Filter>TnbLib\Base\db\Time\instant</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\scalarRange\scalarRanges.hxx">
+      <Filter>TnbLib\Base\db\scalarRange</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\Stack\Stack.hxx">
+      <Filter>TnbLib\Base\containers\Lists\Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\Stack\StackI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\clockTime\clockTime.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\clockTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\cpuTime\cpuTime.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\cpuTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashSet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashPtrTable</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\Map\Map.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\PtrMap\PtrMap.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\PtrMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTable.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableI.hxx">
+      <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\NamedEnum\NamedEnum.hxx">
+      <Filter>TnbLib\Base\containers\NamedEnum</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\SortableList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\ParSortableList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\PackedList\PackedList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\PackedList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\PackedList\PackedListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\PackedList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListOps\ListOps.hxx">
+      <Filter>TnbLib\Base\containers\Lists\ListOps</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.hxx">
+      <Filter>TnbLib\Base\containers\Lists\ListListOps</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\Histogram\Histogram.hxx">
+      <Filter>TnbLib\Base\containers\Lists\Histogram</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\FixedList\FixedList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\FixedList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\FixedList\FixedListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\FixedList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\CompactListList\CompactListList.hxx">
+      <Filter>TnbLib\Base\containers\Lists\CompactListList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\CompactListList\CompactListListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\CompactListList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\entry\entry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\entry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\functionEntry\functionEntry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\functionEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\memberFunctionSelection\memberFunctionSelectionTables.hxx">
+      <Filter>TnbLib\Base\db\memberFunctionSelection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\memberFunctionSelection\addToMemberFunctionSelectionTable.hxx">
+      <Filter>TnbLib\Base\db\memberFunctionSelection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\includeEntry\includeEntry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\includeEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry\includeIfPresentEntry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\inputModeEntry\inputModeEntry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\inputModeEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry\removeEntry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\removeEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\token\tokenList.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\token</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Tstreams\ITstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Tstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\Pstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamCombineReduceOps.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamGlobals.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamReduceOps.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\OPstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\IPstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -184,6 +1120,426 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\strings\string\tnbString.cxx">
       <Filter>TnbLib\Base\Primitives\strings\string</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\bools\bool\bool.cxx">
+      <Filter>TnbLib\Base\Primitives\bools\bool</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\bools\bool\boolIO.cxx">
+      <Filter>TnbLib\Base\Primitives\bools\bool</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\word\word.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\word</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\word\wordIO.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\word</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\keyType\keyTypeIO.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\keyType</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\int\intIO.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\int</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\long\longIO.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\long</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\longLong\longLong.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\longLong</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\uint\uintIO.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\uint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\ulong\ulongIO.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\ulong</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\label\label.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\label</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar\longDoubleScalar.cxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\longDoubleScalar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\floatScalar\floatScalar.cxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\floatScalar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\doubleScalar\doubleScalar.cxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\doubleScalar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\scalar\scalar.cxx">
+      <Filter>TnbLib\Base\Primitives\Scalar\scalar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\VectorSpace\VectorSpace.cxx">
+      <Filter>TnbLib\Base\Primitives\VectorSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\tnbDebug.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\clock\clock.cxx">
+      <Filter>TnbLib\Base\global\clock</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\controlSwitches.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\constantsSwitch.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\infoSwitch.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\debugSwitch.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\optimisationSwitch.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\tolerancesSwitch.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams\IOstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\fileName\fileName.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\fileName</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\fileName\fileNameIO.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\fileName</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\scalarRange\scalarRange.cxx">
+      <Filter>TnbLib\Base\db\scalarRange</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTable.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableIO.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableCore.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\error\messageStream.cxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\error\error.cxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\typeInfo\token.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\token</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\typeInfo\tokenIO.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\token</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams\Istream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams\Ostream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\OSstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\prefixOSstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\readHexLabel.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\ISstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\chkStream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\SstreamsPrint.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\state.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Sstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\StringStreams\StringStreamsPrint.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\StringStreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\UList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UListIO.cxx">
+      <Filter>TnbLib\Base\containers\Lists\UList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\List\List.cxx">
+      <Filter>TnbLib\Base\containers\Lists\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\List\ListIO.cxx">
+      <Filter>TnbLib\Base\containers\Lists\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\UPtrList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrListIO.cxx">
+      <Filter>TnbLib\Base\containers\Lists\UPtrList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectListIO.cxx">
+      <Filter>TnbLib\Base\containers\Lists\UIndirectList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\SubList\SubList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\SubList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\PriorityList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\PtrList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrListIO.cxx">
+      <Filter>TnbLib\Base\containers\Lists\PtrList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\DynamicList\DynamicList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\DynamicList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBase.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBase.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILList.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\UILList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILListIO.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\UILList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LList.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LListIO.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILList.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\ILList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILListIO.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\ILList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrList.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrListIO.cxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1Digest.cxx">
+      <Filter>TnbLib\Base\Primitives\hashes\SHA1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1.cxx">
+      <Filter>TnbLib\Base\Primitives\hashes\SHA1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\gzstream</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Fstreams\IFstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Fstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\boolList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\diagTensorList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\labelIOList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\scalarIOList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\scalarList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\sphericalTensorList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\stringListOpsTemplates.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\stringListTemplates.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\symmTensor4thOrderList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\symmTensorList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\tensorList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\vectorList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\VectorNLists.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\wordIOList.cxx">
+      <Filter>TnbLib\Base\Primitives\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\bools\Switch\Switch.cxx">
+      <Filter>TnbLib\Base\Primitives\bools\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\bools\Switch\SwitchIO.cxx">
+      <Filter>TnbLib\Base\Primitives\bools\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Fstreams\OFstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Fstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\TimeState.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\timeSelector.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\TimePaths.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\subCycleTime.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\tnbTime.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\tnbTimeIO.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\findTimes.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\findInstance.cxx">
+      <Filter>TnbLib\Base\db\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\Time\instant\instant.cxx">
+      <Filter>TnbLib\Base\db\Time\instant</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\scalarRange\scalarRanges.cxx">
+      <Filter>TnbLib\Base\db\scalarRange</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\clockTime\clockTime.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\clockTime</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\cpuTime\cpuTime.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\cpuTime</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashSet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashPtrTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTableIO.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\HashPtrTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTable.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableIO.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableCore.cxx">
+      <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\NamedEnum\NamedEnum.cxx">
+      <Filter>TnbLib\Base\containers\NamedEnum</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\SortableList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableListName.cxx">
+      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\PackedList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedListName.cxx">
+      <Filter>TnbLib\Base\containers\Lists\PackedList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOps.cxx">
+      <Filter>TnbLib\Base\containers\Lists\ListOps</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOpsTemplates.cxx">
+      <Filter>TnbLib\Base\containers\Lists\ListOps</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.cxx">
+      <Filter>TnbLib\Base\containers\Lists\ListListOps</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\Histogram\Histogram.cxx">
+      <Filter>TnbLib\Base\containers\Lists\Histogram</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\FixedList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedListIO.cxx">
+      <Filter>TnbLib\Base\containers\Lists\FixedList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\CompactListList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListListIO.cxx">
+      <Filter>TnbLib\Base\containers\Lists\CompactListList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\entry\entry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\entry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\entry\entryIO.cxx">
+      <Filter>TnbLib\Base\db\dictionary\entry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\functionEntry\functionEntry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\functionEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\includeEntry\includeEntry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\includeEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry\includeIfPresentEntry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\inputModeEntry\inputModeEntry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\inputModeEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry\removeEntry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\functionEntries\removeEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Tstreams\ITstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Tstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\Pstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamCommsStruct.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamGlobals.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamsPrint.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\OPwrite.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\OPstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\IPstream.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\IPreadToken.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\IPread.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\gatherScatterList.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\gatherScatter.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\combineGatherScatter.cxx">
+      <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

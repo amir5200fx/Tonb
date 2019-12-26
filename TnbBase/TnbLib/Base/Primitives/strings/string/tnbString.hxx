@@ -125,7 +125,7 @@ namespace tnbLib
 		//     - leading "~foam" : site/user FOAM configuration directory
 		//
 		//  @sa
-		//  Foam::findEtcFile
+		//  tnbLib::findEtcFile
 		string& expand();
 
 		//- Remove repeated characters returning true if string changed

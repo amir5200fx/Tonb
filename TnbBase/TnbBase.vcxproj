@@ -39,13 +39,13 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -69,7 +69,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -84,8 +89,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Base\Primitives\strings\wordRe;$(ProjectDir)TnbLib\Base\Primitives\strings\word;$(ProjectDir)TnbLib\Base\Primitives\strings\keyType;$(ProjectDir)TnbLib\Base\Primitives\strings\fileName;$(ProjectDir)TnbLib\Base\Primitives\strings\string;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hasher;$(ProjectDir)TnbLib\Base\Primitives\bools\bool;$(ProjectDir)TnbLib\Base\Primitives\pTraits;$(ProjectDir)TnbLib\Base\Primitives\char;$(ProjectDir)TnbLib\Base\Primitives\nil;$(ProjectDir)TnbLib\Base\Primitives\zero;$(ProjectDir)TnbLib\Base\Primitives\one;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Base\global\argList;$(ProjectDir)TnbLib\Base\global\clock;$(ProjectDir)TnbLib\Base\global\controlSwitches;$(ProjectDir)TnbLib\Base\global\debug;$(ProjectDir)TnbLib\Base\global\dimensionedConstants;$(ProjectDir)TnbLib\Base\global\JobInfo;$(ProjectDir)TnbLib\Base\global\profiling;$(ProjectDir)TnbLib\Base\global\unitConversion;$(ProjectDir)TnbLib\Base\global;$(ProjectDir)TnbLib\Base\db\IOstreams\Tstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\token\CompoundToken;$(ProjectDir)TnbLib\Base\db\IOstreams\token;$(ProjectDir)TnbLib\Base\db\IOstreams\StringStreams;$(ProjectDir)TnbLib\Base\db\IOstreams\Sstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\Pstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\IOstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\hashes;$(ProjectDir)TnbLib\Base\db\IOstreams\gzstream;$(ProjectDir)TnbLib\Base\db\IOstreams\Fstreams;$(ProjectDir)TnbLib\Base\db\IOstreams;$(ProjectDir)TnbLib\Base\db\typeInfo;$(ProjectDir)TnbLib\Base\db\Callback;$(ProjectDir)TnbLib\Base\db\CallbackRegistry;$(ProjectDir)TnbLib\Base\db\dictionary\dictionaryEntry;$(ProjectDir)TnbLib\Base\db\dictionary\entry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\functionEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\includeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\inputModeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\removeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\primitiveEntry;$(ProjectDir)TnbLib\Base\db\dictionary;$(ProjectDir)TnbLib\Base\db\memberFunctionSelection;$(ProjectDir)TnbLib\Base\db\dlLibraryTable;$(ProjectDir)TnbLib\Base\db\error;$(ProjectDir)TnbLib\Base\db\functionObjects;$(ProjectDir)TnbLib\Base\db\IOobject;$(ProjectDir)TnbLib\Base\db\IOobjectList;$(ProjectDir)TnbLib\Base\db\IOobjects;$(ProjectDir)TnbLib\Base\db\objectRegistry;$(ProjectDir)TnbLib\Base\db\postfixedSubRegistry;$(ProjectDir)TnbLib\Base\db\regIOobject;$(ProjectDir)TnbLib\Base\db\runTimeSelection;$(ProjectDir)TnbLib\Base\db\scalarRange;$(ProjectDir)TnbLib\Base\db\Time\instant;$(ProjectDir)TnbLib\Base\db\Time;$(ProjectDir)TnbLib\Base\containers\NamedEnum;$(ProjectDir)TnbLib\Base\containers\Lists\UPtrList;$(ProjectDir)TnbLib\Base\containers\Lists\UList;$(ProjectDir)TnbLib\Base\containers\Lists\UIndirectList;$(ProjectDir)TnbLib\Base\containers\Lists\SubList;$(ProjectDir)TnbLib\Base\containers\Lists\Stack;$(ProjectDir)TnbLib\Base\containers\Lists\SortableList;$(ProjectDir)TnbLib\Base\containers\Lists\PtrList;$(ProjectDir)TnbLib\Base\containers\Lists\PriorityList;$(ProjectDir)TnbLib\Base\containers\Lists\PackedList;$(ProjectDir)TnbLib\Base\containers\Lists\ListOps;$(ProjectDir)TnbLib\Base\containers\Lists\ListListOps;$(ProjectDir)TnbLib\Base\containers\Lists\List;$(ProjectDir)TnbLib\Base\containers\Lists\IndirectList;$(ProjectDir)TnbLib\Base\containers\Lists\Histogram;$(ProjectDir)TnbLib\Base\containers\Lists\FixedList;$(ProjectDir)TnbLib\Base\containers\Lists\DynamicList;$(ProjectDir)TnbLib\Base\containers\Lists\CompactListList;$(ProjectDir)TnbLib\Base\containers\Lists\BiIndirectList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\ILList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\LList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\UILList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase;$(ProjectDir)TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase;$(ProjectDir)TnbLib\Base\containers\LinkedLists\user;$(ProjectDir)TnbLib\Base\containers\Identifiers;$(ProjectDir)TnbLib\Base\containers\HashTables\HashPtrTable;$(ProjectDir)TnbLib\Base\containers\HashTables\HashSet;$(ProjectDir)TnbLib\Base\containers\HashTables\HashTable;$(ProjectDir)TnbLib\Base\containers\HashTables\Map;$(ProjectDir)TnbLib\Base\containers\HashTables\PtrMap;$(ProjectDir)TnbLib\Base\containers\HashTables\StaticHashTable;$(ProjectDir)TnbLib\Base\containers\Dictionaries\UPtrDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\UDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\PtrDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\DictionaryBase;$(ProjectDir)TnbLib\Base\containers\Dictionaries\Dictionary;$(ProjectDir)TnbLib\Base\Primitives\VectorSpace;$(ProjectDir)TnbLib\Base\Primitives\Scalar\scalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\longDoubleScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\floatScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\doubleScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar;$(ProjectDir)TnbLib\Base\Primitives\ints\uint;$(ProjectDir)TnbLib\Base\Primitives\ints\uLabel;$(ProjectDir)TnbLib\Base\Primitives\ints\uLong;$(ProjectDir)TnbLib\Base\Primitives\ints\longLong;$(ProjectDir)TnbLib\Base\Primitives\ints\long;$(ProjectDir)TnbLib\Base\Primitives\ints\label;$(ProjectDir)TnbLib\Base\Primitives\ints\int;$(ProjectDir)TnbLib\Base\Primitives\strings\wordRe;$(ProjectDir)TnbLib\Base\Primitives\strings\word;$(ProjectDir)TnbLib\Base\Primitives\strings\keyType;$(ProjectDir)TnbLib\Base\Primitives\strings\fileName;$(ProjectDir)TnbLib\Base\Primitives\strings\string;$(ProjectDir)TnbLib\Base\Primitives\hashes\SHA1;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hash;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hasher;$(ProjectDir)TnbLib\Base\Primitives\bools\bool;$(ProjectDir)TnbLib\Base\Primitives\pTraits;$(ProjectDir)TnbLib\Base\Primitives\char;$(ProjectDir)TnbLib\Base\Primitives\nil;$(ProjectDir)TnbLib\Base\Primitives\ops;$(ProjectDir)TnbLib\Base\Primitives\Pair;$(ProjectDir)TnbLib\Base\Primitives\Lists;$(ProjectDir)TnbLib\Base\Primitives\products;$(ProjectDir)TnbLib\Base\Primitives\contiguous;$(ProjectDir)TnbLib\Base\Primitives\direction;$(ProjectDir)TnbLib\Base\Primitives\Swap;$(ProjectDir)TnbLib\Base\Primitives\zero;$(ProjectDir)TnbLib\Base\Primitives\one;$(ProjectDir)TnbLib\Base\memory\tmp;$(ProjectDir)TnbLib\Base\memory\autoPtr;$(ProjectDir)TnbLib\Base\memory\Xfer;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\signals;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\multiThreader;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\cpuTime;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\clockTime;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows;$(ProjectDir)TnbLib\Base\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>WM_DP;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,8 +116,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Base\Primitives\strings\wordRe;$(ProjectDir)TnbLib\Base\Primitives\strings\word;$(ProjectDir)TnbLib\Base\Primitives\strings\keyType;$(ProjectDir)TnbLib\Base\Primitives\strings\fileName;$(ProjectDir)TnbLib\Base\Primitives\strings\string;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hasher;$(ProjectDir)TnbLib\Base\Primitives\bools\bool;$(ProjectDir)TnbLib\Base\Primitives\pTraits;$(ProjectDir)TnbLib\Base\Primitives\char;$(ProjectDir)TnbLib\Base\Primitives\nil;$(ProjectDir)TnbLib\Base\Primitives\zero;$(ProjectDir)TnbLib\Base\Primitives\one;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Base\global\argList;$(ProjectDir)TnbLib\Base\global\clock;$(ProjectDir)TnbLib\Base\global\controlSwitches;$(ProjectDir)TnbLib\Base\global\debug;$(ProjectDir)TnbLib\Base\global\dimensionedConstants;$(ProjectDir)TnbLib\Base\global\JobInfo;$(ProjectDir)TnbLib\Base\global\profiling;$(ProjectDir)TnbLib\Base\global\unitConversion;$(ProjectDir)TnbLib\Base\global;$(ProjectDir)TnbLib\Base\db\IOstreams\Tstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\token\CompoundToken;$(ProjectDir)TnbLib\Base\db\IOstreams\token;$(ProjectDir)TnbLib\Base\db\IOstreams\StringStreams;$(ProjectDir)TnbLib\Base\db\IOstreams\Sstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\Pstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\IOstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\hashes;$(ProjectDir)TnbLib\Base\db\IOstreams\gzstream;$(ProjectDir)TnbLib\Base\db\IOstreams\Fstreams;$(ProjectDir)TnbLib\Base\db\IOstreams;$(ProjectDir)TnbLib\Base\db\typeInfo;$(ProjectDir)TnbLib\Base\db\Callback;$(ProjectDir)TnbLib\Base\db\CallbackRegistry;$(ProjectDir)TnbLib\Base\db\dictionary\dictionaryEntry;$(ProjectDir)TnbLib\Base\db\dictionary\entry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\functionEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\includeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\inputModeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\removeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\primitiveEntry;$(ProjectDir)TnbLib\Base\db\dictionary;$(ProjectDir)TnbLib\Base\db\memberFunctionSelection;$(ProjectDir)TnbLib\Base\db\dlLibraryTable;$(ProjectDir)TnbLib\Base\db\error;$(ProjectDir)TnbLib\Base\db\functionObjects;$(ProjectDir)TnbLib\Base\db\IOobject;$(ProjectDir)TnbLib\Base\db\IOobjectList;$(ProjectDir)TnbLib\Base\db\IOobjects;$(ProjectDir)TnbLib\Base\db\objectRegistry;$(ProjectDir)TnbLib\Base\db\postfixedSubRegistry;$(ProjectDir)TnbLib\Base\db\regIOobject;$(ProjectDir)TnbLib\Base\db\runTimeSelection;$(ProjectDir)TnbLib\Base\db\scalarRange;$(ProjectDir)TnbLib\Base\db\Time\instant;$(ProjectDir)TnbLib\Base\db\Time;$(ProjectDir)TnbLib\Base\containers\NamedEnum;$(ProjectDir)TnbLib\Base\containers\Lists\UPtrList;$(ProjectDir)TnbLib\Base\containers\Lists\UList;$(ProjectDir)TnbLib\Base\containers\Lists\UIndirectList;$(ProjectDir)TnbLib\Base\containers\Lists\SubList;$(ProjectDir)TnbLib\Base\containers\Lists\Stack;$(ProjectDir)TnbLib\Base\containers\Lists\SortableList;$(ProjectDir)TnbLib\Base\containers\Lists\PtrList;$(ProjectDir)TnbLib\Base\containers\Lists\PriorityList;$(ProjectDir)TnbLib\Base\containers\Lists\PackedList;$(ProjectDir)TnbLib\Base\containers\Lists\ListOps;$(ProjectDir)TnbLib\Base\containers\Lists\ListListOps;$(ProjectDir)TnbLib\Base\containers\Lists\List;$(ProjectDir)TnbLib\Base\containers\Lists\IndirectList;$(ProjectDir)TnbLib\Base\containers\Lists\Histogram;$(ProjectDir)TnbLib\Base\containers\Lists\FixedList;$(ProjectDir)TnbLib\Base\containers\Lists\DynamicList;$(ProjectDir)TnbLib\Base\containers\Lists\CompactListList;$(ProjectDir)TnbLib\Base\containers\Lists\BiIndirectList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\ILList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\LList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\UILList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase;$(ProjectDir)TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase;$(ProjectDir)TnbLib\Base\containers\LinkedLists\user;$(ProjectDir)TnbLib\Base\containers\Identifiers;$(ProjectDir)TnbLib\Base\containers\HashTables\HashPtrTable;$(ProjectDir)TnbLib\Base\containers\HashTables\HashSet;$(ProjectDir)TnbLib\Base\containers\HashTables\HashTable;$(ProjectDir)TnbLib\Base\containers\HashTables\Map;$(ProjectDir)TnbLib\Base\containers\HashTables\PtrMap;$(ProjectDir)TnbLib\Base\containers\HashTables\StaticHashTable;$(ProjectDir)TnbLib\Base\containers\Dictionaries\UPtrDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\UDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\PtrDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\DictionaryBase;$(ProjectDir)TnbLib\Base\containers\Dictionaries\Dictionary;$(ProjectDir)TnbLib\Base\Primitives\VectorSpace;$(ProjectDir)TnbLib\Base\Primitives\Scalar\scalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\longDoubleScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\floatScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\doubleScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar;$(ProjectDir)TnbLib\Base\Primitives\ints\uint;$(ProjectDir)TnbLib\Base\Primitives\ints\uLabel;$(ProjectDir)TnbLib\Base\Primitives\ints\uLong;$(ProjectDir)TnbLib\Base\Primitives\ints\longLong;$(ProjectDir)TnbLib\Base\Primitives\ints\long;$(ProjectDir)TnbLib\Base\Primitives\ints\label;$(ProjectDir)TnbLib\Base\Primitives\ints\int;$(ProjectDir)TnbLib\Base\Primitives\strings\wordRe;$(ProjectDir)TnbLib\Base\Primitives\strings\word;$(ProjectDir)TnbLib\Base\Primitives\strings\keyType;$(ProjectDir)TnbLib\Base\Primitives\strings\fileName;$(ProjectDir)TnbLib\Base\Primitives\strings\string;$(ProjectDir)TnbLib\Base\Primitives\hashes\SHA1;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hash;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hasher;$(ProjectDir)TnbLib\Base\Primitives\bools\bool;$(ProjectDir)TnbLib\Base\Primitives\pTraits;$(ProjectDir)TnbLib\Base\Primitives\char;$(ProjectDir)TnbLib\Base\Primitives\nil;$(ProjectDir)TnbLib\Base\Primitives\ops;$(ProjectDir)TnbLib\Base\Primitives\Pair;$(ProjectDir)TnbLib\Base\Primitives\Lists;$(ProjectDir)TnbLib\Base\Primitives\products;$(ProjectDir)TnbLib\Base\Primitives\contiguous;$(ProjectDir)TnbLib\Base\Primitives\direction;$(ProjectDir)TnbLib\Base\Primitives\Swap;$(ProjectDir)TnbLib\Base\Primitives\zero;$(ProjectDir)TnbLib\Base\Primitives\one;$(ProjectDir)TnbLib\Base\memory\tmp;$(ProjectDir)TnbLib\Base\memory\autoPtr;$(ProjectDir)TnbLib\Base\memory\Xfer;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\signals;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\multiThreader;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\cpuTime;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\clockTime;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows;$(ProjectDir)TnbLib\Base\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>WM_DP;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -119,23 +126,352 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashTable\HashTable.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\HashTables\HashTable\HashTableI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\HashTables\Map\Map.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\HashTables\PtrMap\PtrMap.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTable.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBase.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBaseI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBase.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBaseI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\DLList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\DLPtrList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\FIFOStack.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\IDLList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\ISLList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\LIFOStack.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\SLList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\SLPtrList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\user\UIDLList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\BiIndirectList\BiIndirectList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\BiIndirectList\BiIndirectListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\CompactListList\CompactListList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\CompactListList\CompactListListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\DynamicList\DynamicList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\DynamicList\DynamicListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\FixedList\FixedList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\FixedList\FixedListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\Histogram\Histogram.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\IndirectList\IndirectList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\IndirectList\IndirectListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListOps\ListOps.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\List\List.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\List\ListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\List\ListLoopM.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\PackedList\PackedList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\PackedList\PackedListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\PtrList\PtrList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\PtrList\PtrListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\ParSortableList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\SortableList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\Stack\Stack.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\Stack\StackI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\SubList\SubList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\SubList\SubListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\UList\UList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\UList\UListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\UPtrList\UPtrList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\UPtrList\UPtrListI.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\NamedEnum\NamedEnum.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\entry\entry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\functionEntry\functionEntry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\includeEntry\includeEntry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry\includeIfPresentEntry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\inputModeEntry\inputModeEntry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry\removeEntry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\error\error.hxx" />
+    <ClInclude Include="TnbLib\Base\db\error\errorManip.hxx" />
+    <ClInclude Include="TnbLib\Base\db\error\messageStream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\error\StaticAssert.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\IFstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\OFstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.h" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\hashes\OSHA1stream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\INew.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\InfoProxy.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\IOmanip.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\IOstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\Istream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\Ostream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\IPstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\OPstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\Pstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamCombineReduceOps.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamGlobals.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamReduceOps.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\ISstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\ISstreamI.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\OSstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\OSstreamI.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\prefixOSstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Sstreams\readHexLabel.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\StringStreams\IStringStream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\StringStreams\OStringStream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\token\CompoundToken\CompoundToken.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\token\token.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\token\tokenList.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\Tstreams\ITstream.hxx" />
+    <ClInclude Include="TnbLib\Base\db\memberFunctionSelection\addToMemberFunctionSelectionTable.hxx" />
+    <ClInclude Include="TnbLib\Base\db\memberFunctionSelection\memberFunctionSelectionTables.hxx" />
+    <ClInclude Include="TnbLib\Base\db\runTimeSelection\addToRunTimeSelectionTable.hxx" />
+    <ClInclude Include="TnbLib\Base\db\runTimeSelection\runTimeSelectionTables.hxx" />
+    <ClInclude Include="TnbLib\Base\db\scalarRange\scalarRange.hxx" />
+    <ClInclude Include="TnbLib\Base\db\scalarRange\scalarRanges.hxx" />
+    <ClInclude Include="TnbLib\Base\db\Time\instant\instant.hxx" />
+    <ClInclude Include="TnbLib\Base\db\Time\instant\instantList.hxx" />
+    <ClInclude Include="TnbLib\Base\db\Time\subCycleTime.hxx" />
+    <ClInclude Include="TnbLib\Base\db\Time\TimePaths.hxx" />
+    <ClInclude Include="TnbLib\Base\db\Time\timeSelector.hxx" />
+    <ClInclude Include="TnbLib\Base\db\Time\TimeState.hxx" />
+    <ClInclude Include="TnbLib\Base\db\Time\tnbTime.hxx" />
+    <ClInclude Include="TnbLib\Base\db\typeInfo\className.hxx" />
+    <ClInclude Include="TnbLib\Base\db\typeInfo\tokenI.hxx" />
+    <ClInclude Include="TnbLib\Base\db\typeInfo\typeInfo.hxx" />
+    <ClInclude Include="TnbLib\Base\global\clock\clock.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\constantsSwitch.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\controlSwitches.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\controlSwitchesI.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\debugSwitch.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\infoSwitch.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\optimisationSwitch.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\safeBool.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\safeBoolI.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\tnbDebug.hxx" />
+    <ClInclude Include="TnbLib\Base\global\controlSwitches\tolerancesSwitch.hxx" />
+    <ClInclude Include="TnbLib\Base\include\OSspecific.hxx" />
+    <ClInclude Include="TnbLib\Base\memory\autoPtr\autoPtr.hxx" />
+    <ClInclude Include="TnbLib\Base\memory\autoPtr\autoPtrI.hxx" />
+    <ClInclude Include="TnbLib\Base\memory\tmp\refCount.hxx" />
+    <ClInclude Include="TnbLib\Base\memory\tmp\tmp.hxx" />
+    <ClInclude Include="TnbLib\Base\memory\tmp\tmpI.hxx" />
+    <ClInclude Include="TnbLib\Base\memory\Xfer\Xfer.hxx" />
+    <ClInclude Include="TnbLib\Base\memory\Xfer\XferI.hxx" />
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\clockTime\clockTime.hxx" />
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\cpuTime\cpuTime.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\bools\bool\bool.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\bools\Switch\Switch.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\char\char.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\contiguous\contiguous.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\direction\direction.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\hashes\Hasher\Hasher.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\hashes\Hasher\HasherInt.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\Hash\Hash.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1Digest.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1I.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ints\int\int.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ints\label\label.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ints\longLong\longLong.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ints\long\long.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ints\uint\uint.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ints\uLabel\uLabel.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ints\ulong\ulong.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\boolList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\diagTensorList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\dynamicLabelList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\fileNameList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\labelIOList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\labelList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\labelPairList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\PackedBoolList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\scalarIOList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\scalarList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\sphericalTensorList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\stringList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\stringListOps.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\symmTensor4thOrderList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\symmTensorList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\tensorList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\vectorList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\VectorNLists.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordIOList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordReList.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordReListMatcher.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Lists\wordReListMatcherI.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\nil\nil.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\one\oneI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\ops\ops.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\products\products.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\pTraits\pTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\doubleFloat.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\doubleScalar\doubleScalar.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\floatScalar\floatScalar.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar\longDoubleScalar.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\ScalarTemplate.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Scalar\scalar\scalar.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\strings\fileName\fileName.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\strings\fileName\fileNameI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\strings\keyType\keyType.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\strings\keyType\keyTypeI.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\strings\string\tnbString.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\strings\string\tnbStringI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\strings\word\word.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\strings\word\wordI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Swap\Swap.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpace.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpaceI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpaceM.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\zero\zero.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\zero\zeroI.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTableIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTable.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableCore.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTable.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableCore.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBase.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBase.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\DynamicList\DynamicList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\Histogram\Histogram.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOps.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOpsTemplates.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\List\List.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\List\ListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedListName.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableListName.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\SortableList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\SubList\SubList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrList.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrListIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\NamedEnum\NamedEnum.cxx" />
+    <ClCompile Include="TnbLib\Base\db\dictionary\entry\entry.cxx" />
+    <ClCompile Include="TnbLib\Base\db\dictionary\entry\entryIO.cxx" />
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\functionEntry\functionEntry.cxx" />
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\includeEntry\includeEntry.cxx" />
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry\includeIfPresentEntry.cxx" />
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\inputModeEntry\inputModeEntry.cxx" />
+    <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry\removeEntry.cxx" />
+    <ClCompile Include="TnbLib\Base\db\error\error.cxx" />
+    <ClCompile Include="TnbLib\Base\db\error\messageStream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Fstreams\IFstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Fstreams\OFstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams\IOstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams\Istream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams\Ostream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\combineGatherScatter.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\gatherScatter.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\gatherScatterList.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\IPread.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\IPreadToken.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\IPstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\OPstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\OPwrite.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\Pstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamCommsStruct.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamGlobals.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\PstreamsPrint.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\chkStream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\ISstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\OSstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\prefixOSstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\readHexLabel.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\SstreamsPrint.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Sstreams\state.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\StringStreams\StringStreamsPrint.cxx" />
+    <ClCompile Include="TnbLib\Base\db\IOstreams\Tstreams\ITstream.cxx" />
+    <ClCompile Include="TnbLib\Base\db\scalarRange\scalarRange.cxx" />
+    <ClCompile Include="TnbLib\Base\db\scalarRange\scalarRanges.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\findInstance.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\findTimes.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\instant\instant.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\subCycleTime.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\TimePaths.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\timeSelector.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\TimeState.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\tnbTime.cxx" />
+    <ClCompile Include="TnbLib\Base\db\Time\tnbTimeIO.cxx" />
+    <ClCompile Include="TnbLib\Base\db\typeInfo\token.cxx" />
+    <ClCompile Include="TnbLib\Base\db\typeInfo\tokenIO.cxx" />
+    <ClCompile Include="TnbLib\Base\global\clock\clock.cxx" />
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\constantsSwitch.cxx" />
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\controlSwitches.cxx" />
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\debugSwitch.cxx" />
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\infoSwitch.cxx" />
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\optimisationSwitch.cxx" />
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\tnbDebug.cxx" />
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\tolerancesSwitch.cxx" />
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\clockTime\clockTime.cxx" />
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\cpuTime\cpuTime.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\bools\bool\bool.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\bools\bool\boolIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\bools\Switch\Switch.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\bools\Switch\SwitchIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\hashes\Hasher\Hasher.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1Digest.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\int\intIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\label\label.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\longLong\longLong.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\long\longIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\uint\uintIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\ulong\ulongIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\boolList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\diagTensorList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\labelIOList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\scalarIOList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\scalarList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\sphericalTensorList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\stringListOpsTemplates.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\stringListTemplates.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\symmTensor4thOrderList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\symmTensorList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\tensorList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\vectorList.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\VectorNLists.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Lists\wordIOList.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\doubleScalar\doubleScalar.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\floatScalar\floatScalar.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar\longDoubleScalar.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Scalar\scalar\scalar.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\strings\fileName\fileName.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\strings\fileName\fileNameIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\strings\keyType\keyTypeIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\string\tnbString.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\strings\word\word.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\strings\word\wordIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\VectorSpace\VectorSpace.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

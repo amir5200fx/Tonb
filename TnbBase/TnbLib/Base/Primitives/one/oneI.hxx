@@ -1,4 +1,5 @@
 #pragma once
+#include <scalar.hxx>
 namespace tnbLib
 {
 
