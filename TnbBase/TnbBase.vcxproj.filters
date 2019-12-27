@@ -577,6 +577,21 @@
     <Filter Include="TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D">
       <UniqueIdentifier>{062ebf7c-3b7b-49a6-8e9e-e87a78f6abb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Tensor\tensor">
+      <UniqueIdentifier>{a8dca858-de32-44ea-a906-16948c9a8cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor\symmTensor">
+      <UniqueIdentifier>{0bfa88c9-08dc-45ab-88e3-91a9238c4f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor\labelSymmTensor">
+      <UniqueIdentifier>{c58496e8-5a34-4a9d-b10f-878f783f969a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Tensor2D\tensor2D">
+      <UniqueIdentifier>{c5415ac9-a686-40c2-9fd5-b5a87d0dadde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Tensor\labelTensor">
+      <UniqueIdentifier>{676415a6-75b7-4bed-b02d-d8795665829e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1380,6 +1395,48 @@
     <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D\sphericalTensor2D.hxx">
       <Filter>TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor\SymmTensorTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor\SymmTensorTemplateI.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor\TensorTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor\TensorTemplateI.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor\tensor\tensor.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor\tensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor\symmTensor\symmTensor.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor\symmTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor\labelSymmTensor\labelSymmTensor.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor\labelSymmTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor2D\SymmTensor2DTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor2D\SymmTensor2DTemplateI.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor2D\Tensor2DTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor2D\Tensor2DTemplateI.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor2D\tensor2D\tensor2D.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor2D\tensor2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\mathematicalConstants\mathematicalConstants.hxx">
+      <Filter>TnbLib\Base\Primitives\mathematicalConstants</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor\labelTensor\labelTensor.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor\labelTensor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2005,6 +2062,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D\sphericalTensor2D.cxx">
       <Filter>TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Tensor\tensor\tensor.cxx">
+      <Filter>TnbLib\Base\Primitives\Tensor\tensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\SymmTensor\symmTensor\symmTensor.cxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor\symmTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\SymmTensor\labelSymmTensor\labelSymmTensor.cxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor\labelSymmTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Tensor2D\tensor2D\tensor2D.cxx">
+      <Filter>TnbLib\Base\Primitives\Tensor2D\tensor2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Tensor\labelTensor\labelTensor.cxx">
+      <Filter>TnbLib\Base\Primitives\Tensor\labelTensor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
