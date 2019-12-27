@@ -592,6 +592,12 @@
     <Filter Include="TnbLib\Base\Primitives\Tensor\labelTensor">
       <UniqueIdentifier>{676415a6-75b7-4bed-b02d-d8795665829e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder">
+      <UniqueIdentifier>{3a15f9d3-84d8-4195-a396-0870daacac4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder">
+      <UniqueIdentifier>{695d4e48-39f5-4db3-b352-4cc1096cc47f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1437,6 +1443,18 @@
     <ClInclude Include="TnbLib\Base\Primitives\Tensor\labelTensor\labelTensor.hxx">
       <Filter>TnbLib\Base\Primitives\Tensor\labelTensor</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\SymmTensor4thOrderTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor4thOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\SymmTensor4thOrderTemplateI.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor4thOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder\symmTensor4thOrder.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder\labelSymmTensor4thOrder.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2077,6 +2095,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\Tensor\labelTensor\labelTensor.cxx">
       <Filter>TnbLib\Base\Primitives\Tensor\labelTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder\symmTensor4thOrder.cxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder\labelSymmTensor4thOrder.cxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

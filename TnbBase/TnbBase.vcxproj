@@ -382,6 +382,10 @@
     <ClInclude Include="TnbLib\Base\Primitives\Swap\Swap.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\SymmTensor2D\SymmTensor2DTemplate.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\SymmTensor2D\SymmTensor2DTemplateI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder\labelSymmTensor4thOrder.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\SymmTensor4thOrderTemplate.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\SymmTensor4thOrderTemplateI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder\symmTensor4thOrder.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\SymmTensor\labelSymmTensor\labelSymmTensor.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\SymmTensor\SymmTensorTemplate.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\SymmTensor\SymmTensorTemplateI.hxx" />
@@ -611,6 +615,8 @@
     <ClCompile Include="TnbLib\Base\Primitives\strings\wordRe\wordReIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\word\word.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\word\wordIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder\labelSymmTensor4thOrder.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder\symmTensor4thOrder.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\SymmTensor\labelSymmTensor\labelSymmTensor.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\SymmTensor\symmTensor\symmTensor.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Tensor2D\tensor2D\tensor2D.cxx" />
