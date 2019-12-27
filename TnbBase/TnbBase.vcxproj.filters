@@ -1602,6 +1602,12 @@
     <ClInclude Include="TnbLib\Base\Primitives\Pair\labelPair.hxx">
       <Filter>TnbLib\Base\Primitives\Pair</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\quaternion\quaternion.hxx">
+      <Filter>TnbLib\Base\Primitives\quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\quaternion\quaternionI.hxx">
+      <Filter>TnbLib\Base\Primitives\quaternion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2269,6 +2275,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\ints\uLabel\uLabel.cxx">
       <Filter>TnbLib\Base\Primitives\ints\uLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\quaternion\quaternion.cxx">
+      <Filter>TnbLib\Base\Primitives\quaternion</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -362,6 +362,8 @@
     <ClInclude Include="TnbLib\Base\Primitives\Pair\Pair.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\products\products.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\pTraits\pTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\quaternion\quaternion.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\quaternion\quaternionI.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\Scalar\doubleFloat.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\Scalar\doubleScalar\doubleScalar.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\Scalar\floatScalar\floatScalar.hxx" />
@@ -646,6 +648,7 @@
     <ClCompile Include="TnbLib\Base\Primitives\Lists\VectorNLists.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Lists\wordIOList.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\quaternion\quaternion.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Scalar\doubleScalar\doubleScalar.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Scalar\floatScalar\floatScalar.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar\longDoubleScalar.cxx" />
