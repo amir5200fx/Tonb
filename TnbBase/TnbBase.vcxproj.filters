@@ -622,6 +622,18 @@
     <Filter Include="TnbLib\Base\Primitives\VectorN\expandContract">
       <UniqueIdentifier>{b1afda72-2e6d-4124-b3db-5eb6777bc860}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\fields">
+      <UniqueIdentifier>{b9cd6b41-7d57-452d-83a3-44ecae750b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\Fields">
+      <UniqueIdentifier>{e5076d09-018b-458d-9aad-ddb9d14ef040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\Fields\Field">
+      <UniqueIdentifier>{7b57fbd6-854b-4077-8ce8-3c556098de51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\Fields\scalarField">
+      <UniqueIdentifier>{cd2fcd88-62d3-4653-85cf-5bd8b06acd0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1611,6 +1623,27 @@
     <ClInclude Include="TnbLib\Base\Primitives\Random\Random.hxx">
       <Filter>TnbLib\Base\Primitives\random</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\Field.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\FieldFunctions.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\FieldFunctionsM.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\FieldM.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\undefFieldFunctionsM.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\FieldReuseFunctions.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\scalarField\scalarField.hxx">
+      <Filter>TnbLib\Base\fields\Fields\scalarField</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2285,5 +2318,17 @@
     <ClCompile Include="TnbLib\Base\Primitives\Random\Random.cxx">
       <Filter>TnbLib\Base\Primitives\random</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\Fields\Field\FieldFunctionsM.cxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\Fields\Field\FieldFunctions.cxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\Fields\Field\Field.cxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

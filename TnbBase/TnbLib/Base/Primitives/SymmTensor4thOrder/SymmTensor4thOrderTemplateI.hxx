@@ -1,6 +1,7 @@
 #pragma once
 #include <SymmTensorTemplate.hxx>
 #include <TensorTemplate.hxx>
+#include <OSstream.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

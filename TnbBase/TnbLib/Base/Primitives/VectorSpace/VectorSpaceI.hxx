@@ -340,11 +340,11 @@ namespace tnbLib
 	inline VectorSpace<Form, Cmpt, nCmpt> stabilise
 	(
 		const VectorSpace<Form, Cmpt, nCmpt>& vs,
-		const Cmpt& small
+		const Cmpt& theSmall
 	)
 	{
 		Form v;
-		VectorSpaceOps<nCmpt, 0>::opVS(v, vs, small, stabiliseOp<Cmpt>());
+		VectorSpaceOps<nCmpt, 0>::opVS(v, vs, theSmall, stabiliseOp<Cmpt>());
 		return v;
 	}
 
@@ -423,14 +423,14 @@ namespace tnbLib
 	inline Form cmptStabilise
 	(
 		const VectorSpace<Form, Cmpt, nCmpt>& vs,
-		const scalar small,
+		const scalar theSmall,
 		const scalar value
 	)
 	{
 		Form v = vs;
 		for (int i = 0; i < nCmpt; i++)
 		{
-			if (mag(vs.v_[i]) < small)
+			if (mag(vs.v_[i]) < theSmall)
 			{
 				v.v_[i] = sign(vs.v_[i])*value;
 			}

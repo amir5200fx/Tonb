@@ -13,8 +13,8 @@ namespace tnbLib
 
 	namespace mathematicalConstant
 	{
-		const scalar e(M_E);
-		const scalar pi(M_PI);
+		const scalar e(2.71828182845904523536);
+		const scalar pi(3.14159265358979323846);
 		const scalar twoPi(2 * pi);
 		const scalar piByTwo(0.5*pi);
 	}

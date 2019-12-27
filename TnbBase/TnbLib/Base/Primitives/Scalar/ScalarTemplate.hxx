@@ -244,15 +244,15 @@
 //
 //
 //		// Stabilization around zero for division
-//		inline Scalar stabilise(const Scalar& s, const Scalar& small)
+//		inline Scalar stabilise(const Scalar& s, const Scalar& theSmall)
 //	{
 //		if (s >= 0)
 //		{
-//			return s + small;
+//			return s + theSmall;
 //		}
 //		else
 //		{
-//			return s - small;
+//			return s - theSmall;
 //		}
 //	}
 //
@@ -260,11 +260,11 @@
 //	inline Scalar cmptStabilise
 //	(
 //		const Scalar& s,
-//		const Scalar& small,
+//		const Scalar& theSmall,
 //		const Scalar& value
 //	)
 //	{
-//		if (mag(s) < small)
+//		if (mag(s) < theSmall)
 //		{
 //			return sign(s)*value;
 //		}

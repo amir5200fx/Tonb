@@ -286,15 +286,15 @@ namespace tnbLib
 
 
 		// Stabilization around zero for division
-		inline longDoubleScalar stabilise(const longDoubleScalar& s, const longDoubleScalar& small)
+		inline longDoubleScalar stabilise(const longDoubleScalar& s, const longDoubleScalar& theSmall)
 	{
 		if (s >= 0)
 		{
-			return s + small;
+			return s + theSmall;
 		}
 		else
 		{
-			return s - small;
+			return s - theSmall;
 		}
 	}
 
@@ -302,11 +302,11 @@ namespace tnbLib
 	inline longDoubleScalar cmptStabilise
 	(
 		const longDoubleScalar& s,
-		const longDoubleScalar& small,
+		const longDoubleScalar& theSmall,
 		const longDoubleScalar& value
 	)
 	{
-		if (mag(s) < small)
+		if (mag(s) < theSmall)
 		{
 			return sign(s)*value;
 		}

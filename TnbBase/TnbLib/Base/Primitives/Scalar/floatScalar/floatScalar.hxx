@@ -283,15 +283,15 @@ namespace tnbLib
 
 
 		// Stabilization around zero for division
-		inline floatScalar stabilise(const floatScalar& s, const floatScalar& small)
+		inline floatScalar stabilise(const floatScalar& s, const floatScalar& theSmall)
 	{
 		if (s >= 0)
 		{
-			return s + small;
+			return s + theSmall;
 		}
 		else
 		{
-			return s - small;
+			return s - theSmall;
 		}
 	}
 
@@ -299,11 +299,11 @@ namespace tnbLib
 	inline floatScalar cmptStabilise
 	(
 		const floatScalar& s,
-		const floatScalar& small,
+		const floatScalar& theSmall,
 		const floatScalar& value
 	)
 	{
-		if (mag(s) < small)
+		if (mag(s) < theSmall)
 		{
 			return sign(s)*value;
 		}
