@@ -358,6 +358,8 @@
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\one\oneI.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\ops\ops.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Pair\labelPair.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Pair\Pair.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\products\products.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\pTraits\pTraits.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\Scalar\doubleFloat.hxx" />

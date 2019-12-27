@@ -1596,6 +1596,12 @@
     <ClInclude Include="TnbLib\Base\Primitives\VectorN\vector8\sphericalTensor8.hxx">
       <Filter>TnbLib\Base\Primitives\VectorN\vector8</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Pair\Pair.hxx">
+      <Filter>TnbLib\Base\Primitives\Pair</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Pair\labelPair.hxx">
+      <Filter>TnbLib\Base\Primitives\Pair</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
