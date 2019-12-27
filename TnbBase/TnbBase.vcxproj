@@ -361,6 +361,13 @@
     <ClInclude Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar\longDoubleScalar.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\Scalar\ScalarTemplate.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\Scalar\scalar\scalar.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor2D\SphericalTensor2DTemplate.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor2D\SphericalTensor2DTemplateI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D\sphericalTensor2D.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor\labelSphericalTensor\labelSphericalTensor.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor\SphericalTensorTemplate.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor\SphericalTensorTemplateI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor\sphericalTensor\sphericalTensor.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\strings\fileName\fileName.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\strings\fileName\fileNameI.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\strings\keyType\keyType.hxx" />
@@ -580,6 +587,9 @@
     <ClCompile Include="TnbLib\Base\Primitives\Scalar\floatScalar\floatScalar.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Scalar\longDoubleScalar\longDoubleScalar.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Scalar\scalar\scalar.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D\sphericalTensor2D.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\SphericalTensor\labelSphericalTensor\labelSphericalTensor.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\SphericalTensor\sphericalTensor\sphericalTensor.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\fileName\fileName.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\fileName\fileNameIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\keyType\keyTypeIO.cxx" />
