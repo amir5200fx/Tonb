@@ -1628,9 +1628,6 @@
     <ClCompile Include="TnbLib\Base\Primitives\ints\long\longIO.cxx">
       <Filter>TnbLib\Base\Primitives\ints\long</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\Primitives\ints\longLong\longLong.cxx">
-      <Filter>TnbLib\Base\Primitives\ints\longLong</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\ints\uint\uintIO.cxx">
       <Filter>TnbLib\Base\Primitives\ints\uint</Filter>
     </ClCompile>
@@ -2257,6 +2254,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\VectorN\vector2\diagTensor2.cxx">
       <Filter>TnbLib\Base\Primitives\VectorN\vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\char\charIO.cxx">
+      <Filter>TnbLib\Base\Primitives\char</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\longLong\longLongIO.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\longLong</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\ints\uLabel\uLabel.cxx">
+      <Filter>TnbLib\Base\Primitives\ints\uLabel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

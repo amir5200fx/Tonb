@@ -615,6 +615,7 @@
     <ClCompile Include="TnbLib\Base\Primitives\bools\bool\boolIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\bools\Switch\Switch.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\bools\Switch\SwitchIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\char\charIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\complex\complex.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\DiagTensor\diagTensor\diagTensor.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\DiagTensor\labelDiagTensor\labelDiagTensor.cxx" />
@@ -623,9 +624,10 @@
     <ClCompile Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1Digest.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\ints\int\intIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\ints\label\label.cxx" />
-    <ClCompile Include="TnbLib\Base\Primitives\ints\longLong\longLong.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\longLong\longLongIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\ints\long\longIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\ints\uint\uintIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\ints\uLabel\uLabel.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\ints\ulong\ulongIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Lists\boolList.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Lists\diagTensorList.cxx" />
