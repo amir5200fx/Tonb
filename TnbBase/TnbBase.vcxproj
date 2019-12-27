@@ -372,6 +372,9 @@
     <ClInclude Include="TnbLib\Base\Primitives\strings\word\word.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\strings\word\wordI.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\Swap\Swap.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Vector2D\Vector2DTemplate.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Vector2D\Vector2DTemplateI.hxx" />
+    <ClInclude Include="TnbLib\Base\Primitives\Vector2D\vector2D\vector2D.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpace.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpaceI.hxx" />
     <ClInclude Include="TnbLib\Base\Primitives\VectorSpace\VectorSpaceM.hxx" />
@@ -584,6 +587,7 @@
     <ClCompile Include="TnbLib\Base\Primitives\strings\wordRe\wordReIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\word\word.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\word\wordIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\Vector2D\vector2D\vector2D.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\VectorSpace\VectorSpace.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Vector\complexVector\complexVector.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\Vector\labelVector\labelVector.cxx" />

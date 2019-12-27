@@ -565,6 +565,9 @@
     <Filter Include="TnbLib\Base\Primitives\Vector\complexVector">
       <UniqueIdentifier>{8d3bbb9a-3471-4a51-bee3-741ca688b1ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Vector2D\vector2D">
+      <UniqueIdentifier>{cdf57051-1002-4c7d-b347-cf6fff1cd5f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1338,6 +1341,15 @@
     <ClInclude Include="TnbLib\Base\Primitives\Vector\complexVector\complexVectorI.hxx">
       <Filter>TnbLib\Base\Primitives\Vector\complexVector</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector2D\Vector2DTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector2D\Vector2DTemplateI.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector2D\vector2D\vector2D.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector2D\vector2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -1951,6 +1963,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\Vector\complexVector\complexVector.cxx">
       <Filter>TnbLib\Base\Primitives\Vector\complexVector</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Vector2D\vector2D\vector2D.cxx">
+      <Filter>TnbLib\Base\Primitives\Vector2D\vector2D</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
