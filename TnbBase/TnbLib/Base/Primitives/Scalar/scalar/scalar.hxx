@@ -71,11 +71,4 @@ namespace tnbLib
 
 #endif // defined(WM_SP)
 
-
-namespace tnbLib
-{
-
-
-}
-
 #endif // !_scalar_Header

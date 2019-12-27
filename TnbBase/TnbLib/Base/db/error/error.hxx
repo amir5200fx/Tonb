@@ -9,6 +9,9 @@ namespace tnbLib
 
 	// Forward declaration of friend functions and operators
 	class error;
+	class dictionary;
+	class OSstream;
+
 	Ostream& operator<<(Ostream&, const error&);
 
 

@@ -505,6 +505,57 @@
     <Filter Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry">
       <UniqueIdentifier>{7b84d969-1d1a-4f27-aa1e-8caa08ea8b87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\db\functionObjects\outputFilterOutputControl">
+      <UniqueIdentifier>{d05a40ed-6047-4a5b-bc16-f860edf8015a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\functionObjects\OutputFilterFunctionObject">
+      <UniqueIdentifier>{46fecb04-f993-499e-9457-6239837c871b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\functionObjects\functionObject">
+      <UniqueIdentifier>{dd73beeb-7565-40e2-9947-9641fa32e853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\functionObjects\functionObjectList">
+      <UniqueIdentifier>{9c56ff14-cd14-42f8-84f1-8f8428524af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\db\functionObjects\IOOutputFilter">
+      <UniqueIdentifier>{27c5ea3c-01cd-4718-b3ee-791e58493fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes">
+      <UniqueIdentifier>{a51d5f8c-57fb-4cd1-a503-4d0d765f2214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedDiagTensor">
+      <UniqueIdentifier>{dfcff3c7-221e-47ca-b4d3-ccc554182ea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedScalar">
+      <UniqueIdentifier>{0f8fa351-5bc9-4801-8513-c4bfbad1d01e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedSphericalTensor">
+      <UniqueIdentifier>{ed2ce6d9-6583-49f7-a3d9-5a11f2d452cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedSymmTensor">
+      <UniqueIdentifier>{bf086f84-c7a5-45ca-a04b-20df13043ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedSymmTensor4thOrder">
+      <UniqueIdentifier>{189cbc24-4e38-4a43-a455-2c32156d87b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedTensor">
+      <UniqueIdentifier>{eb899215-3b47-4c54-ad8b-c048909e5654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedType">
+      <UniqueIdentifier>{760cf8e2-4db8-41d2-9afc-21007cd5993f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedVector">
+      <UniqueIdentifier>{3e66890f-bdd3-4a6d-9d12-4ad76c48634f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN">
+      <UniqueIdentifier>{d652c365-5e9e-474d-be7e-d4d8c85050e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\dimensionSet">
+      <UniqueIdentifier>{72e251ab-46b6-4d94-8524-d76faa1aeb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\strings\wordRe">
+      <UniqueIdentifier>{774b1035-85d8-4ec3-abb8-2d89c96417bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1110,6 +1161,150 @@
     <ClInclude Include="TnbLib\Base\db\IOstreams\Pstreams\IPstream.hxx">
       <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\dictionary.hxx">
+      <Filter>TnbLib\Base\db\dictionary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\regExp.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\timer.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\MSwindows.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\fileStat.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\deelx.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\signals\sigSegv.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\signals\sigQuit.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\signals\sigInt.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\signals\sigFpe.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobject\IOobject.hxx">
+      <Filter>TnbLib\Base\db\IOobject</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobject\IOobjectI.hxx">
+      <Filter>TnbLib\Base\db\IOobject</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\tnbVersion.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\dimensionedConstants\dimensionedConstants.hxx">
+      <Filter>TnbLib\Base\global\dimensionedConstants</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\JobInfo\JobInfo.hxx">
+      <Filter>TnbLib\Base\global\JobInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\profiling\profilingTrigger.hxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\profiling\profilingStack.hxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\profiling\profilingPool.hxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\profiling\profilingInfo.hxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\profiling\profiling.hxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\unitConversion\unitConversion.hxx">
+      <Filter>TnbLib\Base\global\unitConversion</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjectList\IOobjectList.hxx">
+      <Filter>TnbLib\Base\db\IOobjectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\regIOobject\regIOobject.hxx">
+      <Filter>TnbLib\Base\db\regIOobject</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\regIOobject\regIOobjectI.hxx">
+      <Filter>TnbLib\Base\db\regIOobject</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\objectRegistry\objectRegistry.hxx">
+      <Filter>TnbLib\Base\db\objectRegistry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOdictionary\IOdictionary.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOdictionary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOReferencer\IOReferencer.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOReferencer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOPtrList\IOPtrList.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOPtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOMap\IOMap.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOList\IOList.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTable.hxx">
+      <Filter>TnbLib\Base\db\dlLibraryTable</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\functionObjects\outputFilterOutputControl\outputFilterOutputControl.hxx">
+      <Filter>TnbLib\Base\db\functionObjects\outputFilterOutputControl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\functionObjects\OutputFilterFunctionObject\OutputFilterFunctionObject.hxx">
+      <Filter>TnbLib\Base\db\functionObjects\OutputFilterFunctionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\functionObjects\functionObject\functionObject.hxx">
+      <Filter>TnbLib\Base\db\functionObjects\functionObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\functionObjects\functionObjectList\functionObjectList.hxx">
+      <Filter>TnbLib\Base\db\functionObjects\functionObjectList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\functionObjects\IOOutputFilter\IOOutputFilter.hxx">
+      <Filter>TnbLib\Base\db\functionObjects\IOOutputFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedScalar\dimensionedScalarFwd.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionSet\dimensionSet.hxx">
+      <Filter>TnbLib\Base\dimensionSet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionSet\dimensionSets.hxx">
+      <Filter>TnbLib\Base\dimensionSet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedType\dimensionedType.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedType</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedScalar\dimensionedScalar.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\argList\parRun.hxx">
+      <Filter>TnbLib\Base\global\argList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams.hxx">
+      <Filter>TnbLib\Base\db\IOstreams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\argList\argList.hxx">
+      <Filter>TnbLib\Base\global\argList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\dictionaryEntry\dictionaryEntry.hxx">
+      <Filter>TnbLib\Base\db\dictionary\dictionaryEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\wordRe\wordRe.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\wordRe</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\wordRe\wordReI.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\wordRe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -1540,6 +1735,174 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\IOstreams\Pstreams\combineGatherScatter.cxx">
       <Filter>TnbLib\Base\db\IOstreams\Pstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryIO.cxx">
+      <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryTemplates.cxx">
+      <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\dictionary.cxx">
+      <Filter>TnbLib\Base\db\dictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryIO.cxx">
+      <Filter>TnbLib\Base\db\dictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryTemplates.cxx">
+      <Filter>TnbLib\Base\db\dictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\regExp.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\timer.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\printStack.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\MSwindows.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\fileStat.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\signals\sigSegv.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\signals\sigQuit.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\signals\sigInt.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\signals\sigFpe.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobject\IOobject.cxx">
+      <Filter>TnbLib\Base\db\IOobject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobject\IOobjectIO.cxx">
+      <Filter>TnbLib\Base\db\IOobject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobject\IOobjectWriteHeader.cxx">
+      <Filter>TnbLib\Base\db\IOobject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobject\IOobjectReadHeader.cxx">
+      <Filter>TnbLib\Base\db\IOobject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\new.cxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\dimensionedConstants\dimensionedConstants.cxx">
+      <Filter>TnbLib\Base\global\dimensionedConstants</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\JobInfo\JobInfo.cxx">
+      <Filter>TnbLib\Base\global\JobInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\profiling\profilingTrigger.cxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\profiling\profilingStack.cxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\profiling\profilingPool.cxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\profiling\profilingInfo.cxx">
+      <Filter>TnbLib\Base\global\profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjectList\IOobjectList.cxx">
+      <Filter>TnbLib\Base\db\IOobjectList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\regIOobject\regIOobject.cxx">
+      <Filter>TnbLib\Base\db\regIOobject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\regIOobject\regIOobjectWrite.cxx">
+      <Filter>TnbLib\Base\db\regIOobject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\regIOobject\regIOobjectRead.cxx">
+      <Filter>TnbLib\Base\db\regIOobject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\objectRegistry\objectRegistry.cxx">
+      <Filter>TnbLib\Base\db\objectRegistry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\objectRegistry\objectRegistryTemplates.cxx">
+      <Filter>TnbLib\Base\db\objectRegistry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjects\IOdictionary\IOdictionary.cxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOdictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjects\IOdictionary\IOdictionaryIO.cxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOdictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjects\IOReferencer\IOReferencer.cxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOReferencer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjects\IOPtrList\IOPtrList.cxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOPtrList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjects\IOMap\IOMap.cxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjects\IOMap\IOMapName.cxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOobjects\IOList\IOList.cxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTable.cxx">
+      <Filter>TnbLib\Base\db\dlLibraryTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTableTemplates.cxx">
+      <Filter>TnbLib\Base\db\dlLibraryTable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\functionObjects\outputFilterOutputControl\outputFilterOutputControl.cxx">
+      <Filter>TnbLib\Base\db\functionObjects\outputFilterOutputControl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\functionObjects\OutputFilterFunctionObject\OutputFilterFunctionObject.cxx">
+      <Filter>TnbLib\Base\db\functionObjects\OutputFilterFunctionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\functionObjects\functionObject\functionObject.cxx">
+      <Filter>TnbLib\Base\db\functionObjects\functionObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\functionObjects\functionObjectList\functionObjectList.cxx">
+      <Filter>TnbLib\Base\db\functionObjects\functionObjectList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\functionObjects\IOOutputFilter\IOOutputFilter.cxx">
+      <Filter>TnbLib\Base\db\functionObjects\IOOutputFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionSet\dimensionSet.cxx">
+      <Filter>TnbLib\Base\dimensionSet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionSet\dimensionSetIO.cxx">
+      <Filter>TnbLib\Base\dimensionSet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionSet\dimensionSets.cxx">
+      <Filter>TnbLib\Base\dimensionSet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedType\dimensionedType.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedType</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedScalar\dimensionedScalar.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedScalar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams.cxx">
+      <Filter>TnbLib\Base\db\IOstreams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\argList\argList.cxx">
+      <Filter>TnbLib\Base\global\argList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryEntry\dictionaryEntry.cxx">
+      <Filter>TnbLib\Base\db\dictionary\dictionaryEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryEntry\dictionaryEntryIO.cxx">
+      <Filter>TnbLib\Base\db\dictionary\dictionaryEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\wordRe\wordReIO.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\wordRe</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

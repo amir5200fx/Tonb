@@ -3,6 +3,7 @@
 #define _Map_Header
 
 #include <HashTable.hxx>
+#include <Hash.hxx>
 
 namespace tnbLib
 {
