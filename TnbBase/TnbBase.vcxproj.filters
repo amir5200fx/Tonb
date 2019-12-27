@@ -556,6 +556,15 @@
     <Filter Include="TnbLib\Base\Primitives\strings\wordRe">
       <UniqueIdentifier>{774b1035-85d8-4ec3-abb8-2d89c96417bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Vector\vector">
+      <UniqueIdentifier>{b8e603f0-3cfb-4e8d-a765-53c23faaa42f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Vector\labelVector">
+      <UniqueIdentifier>{b9119cd2-91b2-4c33-a892-4a3418bb577e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Vector\complexVector">
+      <UniqueIdentifier>{8d3bbb9a-3471-4a51-bee3-741ca688b1ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1305,6 +1314,30 @@
     <ClInclude Include="TnbLib\Base\Primitives\strings\wordRe\wordReI.hxx">
       <Filter>TnbLib\Base\Primitives\strings\wordRe</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector\VectorTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector\VectorTemplateI.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector\vector\vector.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector\labelVector\labelVector.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector\labelVector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\complex\complex.hxx">
+      <Filter>TnbLib\Base\Primitives\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\complex\complexI.hxx">
+      <Filter>TnbLib\Base\Primitives\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector\complexVector\complexVector.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector\complexVector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector\complexVector\complexVectorI.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector\complexVector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -1903,6 +1936,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\strings\wordRe\wordReIO.cxx">
       <Filter>TnbLib\Base\Primitives\strings\wordRe</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Vector\VectorTemplate.cxx">
+      <Filter>TnbLib\Base\Primitives\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Vector\vector\vector.cxx">
+      <Filter>TnbLib\Base\Primitives\Vector\vector</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Vector\labelVector\labelVector.cxx">
+      <Filter>TnbLib\Base\Primitives\Vector\labelVector</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\complex\complex.cxx">
+      <Filter>TnbLib\Base\Primitives\complex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Vector\complexVector\complexVector.cxx">
+      <Filter>TnbLib\Base\Primitives\Vector\complexVector</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -124,7 +124,7 @@ namespace tnbLib
 #include <VectorSpaceI.hxx>
 
 #ifdef NoRepository
-#   include "VectorSpace.cxx"
+#   include <VectorSpace.cxx>
 #endif
 
 #endif // !_VectorSpace_Header
