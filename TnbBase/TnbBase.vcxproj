@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\deelx;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
