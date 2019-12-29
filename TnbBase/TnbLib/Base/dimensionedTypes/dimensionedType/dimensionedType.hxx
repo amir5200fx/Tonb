@@ -22,7 +22,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::dimensioned
+	tnbLib::dimensioned
 
 Description
 	Generic dimensioned Type class
@@ -91,7 +91,7 @@ namespace tnbLib
 		//- Construct given a value (creates dimensionless value).
 		dimensioned(const Type& t)
 			:
-			name_(::Foam::name(t)),
+			name_(::tnbLib::name(t)),
 			dimensions_(dimless),
 			value_(t)
 		{}

@@ -59,7 +59,7 @@ tnbLib::IOList<T>::IOList(const IOobject& io, const List<T>& list)
 
 
 template<class T>
-tnbLib::IOList<T>::IOList(const IOobject& io, const Xfer<List<T> >& list)
+tnbLib::IOList<T>::IOList(const IOobject& io, const Xfer<List<T>>& list)
 	: regIOobject(io)
 {
 	List<T>::transfer(list());

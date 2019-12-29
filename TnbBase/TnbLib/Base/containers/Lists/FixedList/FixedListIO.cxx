@@ -30,7 +30,7 @@ tnbLib::Istream& tnbLib::operator>>(tnbLib::Istream& is, FixedList<T, Size>& L)
 
 		if (firstToken.isCompound())
 		{
-			L = dynamicCast<token::Compound<List<T> > >
+			L = dynamicCast<token::Compound<List<T>>>
 				(
 					firstToken.transferCompoundToken()
 					);

@@ -26,7 +26,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::IOobject
+	tnbLib::IOobject
 
 Description
 	IOobject defines the attributes of an object for which implicit

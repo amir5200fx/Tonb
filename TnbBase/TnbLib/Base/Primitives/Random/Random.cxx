@@ -1,5 +1,7 @@
 //#include <Random.hxx>
 //
+//#include <symmTensor.hxx>
+//
 //#ifdef mingw
 //#   include "rand48.h"
 //#endif

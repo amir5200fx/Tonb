@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Typedef
-	Foam::dimensionedScalar
+	tnbLib::dimensionedScalar
 
 Description
 	Dimensioned scalar obtained from generic dimensioned type.

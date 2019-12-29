@@ -101,7 +101,7 @@ namespace tnbLib
 	template <class Cmpt>
 	const Vector<Cmpt>& Vector<Cmpt>::centre
 	(
-		const tnbLib::List<Vector<Cmpt> >&
+		const tnbLib::List<Vector<Cmpt>>&
 	)const
 	{
 		return *this;
@@ -111,7 +111,7 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * Global Operators  * * * * * * * * * * * * * //
 
 	template <class Cmpt>
-	typename innerProduct<Vector<Cmpt>, Vector<Cmpt> >::type
+	typename innerProduct<Vector<Cmpt>, Vector<Cmpt>>::type
 		operator&(const Vector<Cmpt>& v1, const Vector<Cmpt>& v2)
 	{
 		return Cmpt(v1.x()*v2.x() + v1.y()*v2.y() + v1.z()*v2.z());

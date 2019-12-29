@@ -73,7 +73,7 @@ tnbLib::IOPtrList<T>::IOPtrList(const IOobject& io, const PtrList<T>& list)
 
 
 template<class T>
-tnbLib::IOPtrList<T>::IOPtrList(const IOobject& io, const Xfer<PtrList<T> >& list)
+tnbLib::IOPtrList<T>::IOPtrList(const IOobject& io, const Xfer<PtrList<T>>& list)
 	: regIOobject(io)
 {
 	PtrList<T>::transfer(list());

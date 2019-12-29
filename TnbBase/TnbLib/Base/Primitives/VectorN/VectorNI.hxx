@@ -105,7 +105,7 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * Global Operators  * * * * * * * * * * * * * //
 
 	template<class Cmpt, int length>
-	class outerProduct<Cmpt, VectorN<Cmpt, length> >
+	class outerProduct<Cmpt, VectorN<Cmpt, length>>
 	{
 	public:
 
@@ -123,7 +123,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class outerProduct<VectorN<Cmpt, length>, VectorN<Cmpt, length> >
+	class outerProduct<VectorN<Cmpt, length>, VectorN<Cmpt, length>>
 	{
 	public:
 

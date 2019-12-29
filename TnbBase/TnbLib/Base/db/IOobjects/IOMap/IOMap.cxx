@@ -58,7 +58,7 @@ tnbLib::IOMap<T>::IOMap(const IOobject& io, const Map<T>& map)
 
 
 template<class T>
-tnbLib::IOMap<T>::IOMap(const IOobject& io, const Xfer<Map<T> >& map)
+tnbLib::IOMap<T>::IOMap(const IOobject& io, const Xfer<Map<T>>& map)
 	: regIOobject(io)
 {
 	Map<T>::transfer(map());

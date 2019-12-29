@@ -43,7 +43,7 @@ namespace tnbLib
 
 	//- Construct from a triad
 	template<class Cmpt>
-	Tensor<Cmpt>::Tensor(const Vector<Vector<Cmpt> >& tr)
+	Tensor<Cmpt>::Tensor(const Vector<Vector<Cmpt>>& tr)
 	{
 		this->v_[XX] = tr.x().x();
 		this->v_[XY] = tr.x().y();
@@ -319,7 +319,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	void Tensor<Cmpt>::operator=(const Vector<Vector<Cmpt> >& tr)
+	void Tensor<Cmpt>::operator=(const Vector<Vector<Cmpt>>& tr)
 	{
 		this->v_[XX] = tr.x().x();
 		this->v_[XY] = tr.x().y();
@@ -360,7 +360,7 @@ namespace tnbLib
 
 	//- Inner-product between two tensors
 	template<class Cmpt>
-	typename innerProduct<Tensor<Cmpt>, Tensor<Cmpt> >::type
+	typename innerProduct<Tensor<Cmpt>, Tensor<Cmpt>>::type
 		operator&(const Tensor<Cmpt>& t1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -382,7 +382,7 @@ namespace tnbLib
 
 	//- Inner-product between a tensor and a vector
 	template<class Cmpt>
-	typename innerProduct<Tensor<Cmpt>, Vector<Cmpt> >::type
+	typename innerProduct<Tensor<Cmpt>, Vector<Cmpt>>::type
 		operator&(const Tensor<Cmpt>& t, const Vector<Cmpt>& v)
 	{
 		return Vector<Cmpt>
@@ -396,7 +396,7 @@ namespace tnbLib
 
 	//- Inner-product between a vector and a tensor
 	template<class Cmpt>
-	typename innerProduct<Vector<Cmpt>, Tensor<Cmpt> >::type
+	typename innerProduct<Vector<Cmpt>, Tensor<Cmpt>>::type
 		operator&(const Vector<Cmpt>& v, const Tensor<Cmpt>& t)
 	{
 		return Vector<Cmpt>
@@ -410,7 +410,7 @@ namespace tnbLib
 
 	//- Outer-product between two vectors
 	template<class Cmpt>
-	typename outerProduct<Vector<Cmpt>, Vector<Cmpt> >::type
+	typename outerProduct<Vector<Cmpt>, Vector<Cmpt>>::type
 		operator*(const Vector<Cmpt>& v1, const Vector<Cmpt>& v2)
 	{
 		return Tensor<Cmpt>
@@ -424,7 +424,7 @@ namespace tnbLib
 
 	//- Division of a vector by a tensor, i.e. dot-product with the tensor inverse
 	template<class Cmpt>
-	typename innerProduct<Vector<Cmpt>, Tensor<Cmpt> >::type
+	typename innerProduct<Vector<Cmpt>, Tensor<Cmpt>>::type
 		operator/(const Vector<Cmpt>& v, const Tensor<Cmpt>& t)
 	{
 		return inv(t) & v;
@@ -738,7 +738,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class typeOfSum<SphericalTensor<Cmpt>, Tensor<Cmpt> >
+	class typeOfSum<SphericalTensor<Cmpt>, Tensor<Cmpt>>
 	{
 	public:
 
@@ -747,7 +747,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class typeOfSum<Tensor<Cmpt>, SphericalTensor<Cmpt> >
+	class typeOfSum<Tensor<Cmpt>, SphericalTensor<Cmpt>>
 	{
 	public:
 
@@ -756,7 +756,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class innerProduct<SphericalTensor<Cmpt>, Tensor<Cmpt> >
+	class innerProduct<SphericalTensor<Cmpt>, Tensor<Cmpt>>
 	{
 	public:
 
@@ -765,7 +765,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class innerProduct<Tensor<Cmpt>, SphericalTensor<Cmpt> >
+	class innerProduct<Tensor<Cmpt>, SphericalTensor<Cmpt>>
 	{
 	public:
 
@@ -900,7 +900,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class typeOfSum<SymmTensor<Cmpt>, Tensor<Cmpt> >
+	class typeOfSum<SymmTensor<Cmpt>, Tensor<Cmpt>>
 	{
 	public:
 
@@ -909,7 +909,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class typeOfSum<Tensor<Cmpt>, SymmTensor<Cmpt> >
+	class typeOfSum<Tensor<Cmpt>, SymmTensor<Cmpt>>
 	{
 	public:
 
@@ -918,7 +918,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor<Cmpt>, Tensor<Cmpt> >
+	class innerProduct<SymmTensor<Cmpt>, Tensor<Cmpt>>
 	{
 	public:
 
@@ -927,7 +927,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class innerProduct<Tensor<Cmpt>, SymmTensor<Cmpt> >
+	class innerProduct<Tensor<Cmpt>, SymmTensor<Cmpt>>
 	{
 	public:
 

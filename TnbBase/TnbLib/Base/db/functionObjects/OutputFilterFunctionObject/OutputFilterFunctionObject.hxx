@@ -22,15 +22,15 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::OutputFilterFunctionObject
+	tnbLib::OutputFilterFunctionObject
 
 Description
 	A functionObject wrapper around OutputFilter to allow them to be
 	created via the functions list within controlDict.
 
 Note
-	Since the timeIndex is used directly from Foam::Time, it is unaffected
-	by user-time conversions. For example, Foam::engineTime might cause @a
+	Since the timeIndex is used directly from tnbLib::Time, it is unaffected
+	by user-time conversions. For example, tnbLib::engineTime might cause @a
 	writeInterval to be degrees crank angle, but the functionObject
 	execution @a interval would still be in timestep.
 

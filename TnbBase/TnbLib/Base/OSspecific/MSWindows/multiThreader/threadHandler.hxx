@@ -136,7 +136,7 @@ namespace tnbLib
 	void lockThreads
 	(
 		const List<label>& sequence,
-		const PtrList<threadHandler<T> >& handler
+		const PtrList<threadHandler<T>>& handler
 	);
 
 
@@ -145,7 +145,7 @@ namespace tnbLib
 	void synchronizeThreads
 	(
 		const List<label>& sequence,
-		const PtrList<threadHandler<T> >& handler
+		const PtrList<threadHandler<T>>& handler
 	);
 
 
@@ -154,7 +154,7 @@ namespace tnbLib
 	void executeThreads
 	(
 		const List<label>& sequence,
-		PtrList<threadHandler<T> >& handler,
+		PtrList<threadHandler<T>>& handler,
 		void(*tFunction)(void*)
 	);
 

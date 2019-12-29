@@ -89,7 +89,7 @@ namespace tnbLib
 		//- Return *this (used for point which is a typedef to Vector<scalar>.
 		const Vector<Cmpt>& centre
 		(
-			const tnbLib::List<Vector<Cmpt> >&
+			const tnbLib::List<Vector<Cmpt>>&
 		) const;
 	};
 

@@ -361,7 +361,7 @@ namespace tnbLib
 	void lockThreads
 	(
 		const List<label>& sequence,
-		const PtrList<threadHandler<T> >& handler
+		const PtrList<threadHandler<T>>& handler
 	)
 	{
 		forAll(sequence, i)
@@ -380,7 +380,7 @@ namespace tnbLib
 	void synchronizeThreads
 	(
 		const List<label>& sequence,
-		const PtrList<threadHandler<T> >& handler
+		const PtrList<threadHandler<T>>& handler
 	)
 	{
 		forAll(sequence, i)
@@ -396,7 +396,7 @@ namespace tnbLib
 	void executeThreads
 	(
 		const List<label>& sequence,
-		PtrList<threadHandler<T> >& handler,
+		PtrList<threadHandler<T>>& handler,
 		void(*tFunction)(void*)
 	)
 	{
@@ -409,7 +409,7 @@ namespace tnbLib
 				"void executeThreads\n"
 				"(\n"
 				"    const List<label>& sequence,\n"
-				"    PtrList<threadHandler<T> >& handler,\n"
+				"    PtrList<threadHandler<T>>& handler,\n"
 				"    void (*tFunction)(void*)\n"
 				")\n"
 			)

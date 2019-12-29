@@ -519,7 +519,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class outerProduct<Cmpt, SymmTensor<Cmpt> >
+	class outerProduct<Cmpt, SymmTensor<Cmpt>>
 	{
 	public:
 
@@ -527,7 +527,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor<Cmpt>, SymmTensor<Cmpt> >
+	class innerProduct<SymmTensor<Cmpt>, SymmTensor<Cmpt>>
 	{
 	public:
 
@@ -535,7 +535,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor<Cmpt>, Vector<Cmpt> >
+	class innerProduct<SymmTensor<Cmpt>, Vector<Cmpt>>
 	{
 	public:
 
@@ -543,7 +543,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<Vector<Cmpt>, SymmTensor<Cmpt> >
+	class innerProduct<Vector<Cmpt>, SymmTensor<Cmpt>>
 	{
 	public:
 
@@ -552,7 +552,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class typeOfSum<SphericalTensor<Cmpt>, SymmTensor<Cmpt> >
+	class typeOfSum<SphericalTensor<Cmpt>, SymmTensor<Cmpt>>
 	{
 	public:
 
@@ -560,7 +560,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class typeOfSum<SymmTensor<Cmpt>, SphericalTensor<Cmpt> >
+	class typeOfSum<SymmTensor<Cmpt>, SphericalTensor<Cmpt>>
 	{
 	public:
 
@@ -568,7 +568,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SphericalTensor<Cmpt>, SymmTensor<Cmpt> >
+	class innerProduct<SphericalTensor<Cmpt>, SymmTensor<Cmpt>>
 	{
 	public:
 
@@ -576,7 +576,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor<Cmpt>, SphericalTensor<Cmpt> >
+	class innerProduct<SymmTensor<Cmpt>, SphericalTensor<Cmpt>>
 	{
 	public:
 

@@ -19,7 +19,7 @@ bool tnbLib::dictionary::findInPatterns
 	const bool patternMatch,
 	const word& Keyword,
 	DLList<entry*>::const_iterator& wcLink,
-	DLList<autoPtr<regExp> >::const_iterator& reLink
+	DLList<autoPtr<regExp>>::const_iterator& reLink
 ) const
 {
 	if (patternEntries_.size())
@@ -50,7 +50,7 @@ bool tnbLib::dictionary::findInPatterns
 	const bool patternMatch,
 	const word& Keyword,
 	DLList<entry*>::iterator& wcLink,
-	DLList<autoPtr<regExp> >::iterator& reLink
+	DLList<autoPtr<regExp>>::iterator& reLink
 )
 {
 	if (patternEntries_.size())
@@ -248,7 +248,7 @@ bool tnbLib::dictionary::found(const word& keyword, bool recursive) const
 		{
 			DLList<entry*>::const_iterator wcLink =
 				patternEntries_.begin();
-			DLList<autoPtr<regExp> >::const_iterator reLink =
+			DLList<autoPtr<regExp>>::const_iterator reLink =
 				patternRegexps_.begin();
 
 			// Find in patterns using regular expressions only
@@ -285,7 +285,7 @@ const tnbLib::entry* tnbLib::dictionary::lookupEntryPtr
 		{
 			DLList<entry*>::const_iterator wcLink =
 				patternEntries_.begin();
-			DLList<autoPtr<regExp> >::const_iterator reLink =
+			DLList<autoPtr<regExp>>::const_iterator reLink =
 				patternRegexps_.begin();
 
 			// Find in patterns using regular expressions only
@@ -324,7 +324,7 @@ tnbLib::entry* tnbLib::dictionary::lookupEntryPtr
 		{
 			DLList<entry*>::iterator wcLink =
 				patternEntries_.begin();
-			DLList<autoPtr<regExp> >::iterator reLink =
+			DLList<autoPtr<regExp>>::iterator reLink =
 				patternRegexps_.begin();
 
 			// Find in patterns using regular expressions only
@@ -666,7 +666,7 @@ bool tnbLib::dictionary::remove(const word& Keyword)
 		// Delete from patterns first
 		DLList<entry*>::iterator wcLink =
 			patternEntries_.begin();
-		DLList<autoPtr<regExp> >::iterator reLink =
+		DLList<autoPtr<regExp>>::iterator reLink =
 			patternRegexps_.begin();
 
 		// Find in pattern using exact match only
@@ -734,7 +734,7 @@ bool tnbLib::dictionary::changeKeyword
 				// Delete from patterns first
 				DLList<entry*>::iterator wcLink =
 					patternEntries_.begin();
-				DLList<autoPtr<regExp> >::iterator reLink =
+				DLList<autoPtr<regExp>>::iterator reLink =
 					patternRegexps_.begin();
 
 				// Find in patterns using exact match only

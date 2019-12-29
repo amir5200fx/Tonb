@@ -22,7 +22,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::dimensionSet
+	tnbLib::dimensionSet
 
 Description
 	Dimension set for the base types.
