@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\deelx;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\deelx;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(MSMPI_INC);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
@@ -313,6 +313,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\deelx.hxx" />
     <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\fileStat.hxx" />
     <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\MSwindows.hxx" />
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\multiThreader.hxx" />
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\threadHandler.hxx" />
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\threadHandlerI.hxx" />
     <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\regExp.hxx" />
     <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\signals\sigFpe.hxx" />
     <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\signals\sigInt.hxx" />
@@ -625,6 +628,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\cpuTime\cpuTime.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\fileStat.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\MSwindows.cxx" />
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\multiThreader.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\printStack.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\regExp.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\signals\sigFpe.cxx" />

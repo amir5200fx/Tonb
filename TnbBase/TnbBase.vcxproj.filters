@@ -1644,6 +1644,15 @@
     <ClInclude Include="TnbLib\Base\fields\Fields\scalarField\scalarField.hxx">
       <Filter>TnbLib\Base\fields\Fields\scalarField</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\multiThreader.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\multiThreader</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\threadHandler.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\multiThreader</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\threadHandlerI.hxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\multiThreader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2326,6 +2335,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\fields\Fields\Field\Field.cxx">
       <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\multiThreader\multiThreader.cxx">
+      <Filter>TnbLib\Base\OSspecific\MSWindows\multiThreader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
