@@ -2,8 +2,6 @@
 #ifndef _FieldFunctions_Header
 #define _FieldFunctions_Header
 
-#include <scalar.hxx>
-
 #define TEMPLATE template<class Type>
 #include <FieldFunctionsM.hxx>
 
@@ -36,7 +34,7 @@ namespace tnbLib
 
 
 	template<class Type, int r>
-	tmp<Field<typename powProduct<Type, r>::type> >
+	tmp<Field<typename powProduct<Type, r>::type>>
 		pow
 		(
 			const UList<Type>& f,
@@ -45,10 +43,10 @@ namespace tnbLib
 		);
 
 	template<class Type, int r>
-	tmp<Field<typename powProduct<Type, r>::type> >
+	tmp<Field<typename powProduct<Type, r>::type>>
 		pow
 		(
-			const tmp<Field<Type> >& tf,
+			const tmp<Field<Type>>& tf,
 			typename powProduct<Type, r>::type
 			= pTraits<typename powProduct<Type, r>::type>::zero
 		);
@@ -62,104 +60,104 @@ namespace tnbLib
 	);
 
 	template<class Type>
-	tmp<Field<typename outerProduct<Type, Type>::type> >
+	tmp<Field<typename outerProduct<Type, Type>::type>>
 		sqr(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<typename outerProduct<Type, Type>::type> >
-		sqr(const tmp<Field<Type> >& tf);
+	tmp<Field<typename outerProduct<Type, Type>::type>>
+		sqr(const tmp<Field<Type>>& tf);
 
 
 	template<class Type>
 	void magSqr(Field<scalar>& res, const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<scalar> > magSqr(const UList<Type>& f);
+	tmp<Field<scalar>> magSqr(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<scalar> > magSqr(const tmp<Field<Type> >& tf);
+	tmp<Field<scalar>> magSqr(const tmp<Field<Type>>& tf);
 
 
 	template<class Type>
 	void mag(Field<scalar>& res, const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<scalar> > mag(const UList<Type>& f);
+	tmp<Field<scalar>> mag(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<scalar> > mag(const tmp<Field<Type> >& tf);
+	tmp<Field<scalar>> mag(const tmp<Field<Type>>& tf);
 
 
 	template<class Type>
 	void cmptMax(Field<typename Field<Type>::cmptType>& res, const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<typename Field<Type>::cmptType> > cmptMax(const UList<Type>& f);
+	tmp<Field<typename Field<Type>::cmptType>> cmptMax(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<typename Field<Type>::cmptType> >
-		cmptMax(const tmp<Field<Type> >& tf);
+	tmp<Field<typename Field<Type>::cmptType>>
+		cmptMax(const tmp<Field<Type>>& tf);
 
 
 	template<class Type>
 	void cmptMin(Field<typename Field<Type>::cmptType>& res, const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<typename Field<Type>::cmptType> > cmptMin(const UList<Type>& f);
+	tmp<Field<typename Field<Type>::cmptType>> cmptMin(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<typename Field<Type>::cmptType> >
-		cmptMin(const tmp<Field<Type> >& tf);
+	tmp<Field<typename Field<Type>::cmptType>>
+		cmptMin(const tmp<Field<Type>>& tf);
 
 
 	template<class Type>
 	void cmptAv(Field<typename Field<Type>::cmptType>& res, const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<typename Field<Type>::cmptType> > cmptAv(const UList<Type>& f);
+	tmp<Field<typename Field<Type>::cmptType>> cmptAv(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<typename Field<Type>::cmptType> > cmptAv(const tmp<Field<Type> >& tf);
+	tmp<Field<typename Field<Type>::cmptType>> cmptAv(const tmp<Field<Type>>& tf);
 
 
 	template<class Type>
 	void cmptMag(Field<Type>& res, const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<Type> > cmptMag(const UList<Type>& f);
+	tmp<Field<Type>> cmptMag(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<Type> > cmptMag(const tmp<Field<Type> >& tf);
+	tmp<Field<Type>> cmptMag(const tmp<Field<Type>>& tf);
 
 
 	template<class Type>
 	void cmptSign(Field<Type>& res, const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<Type> > cmptSign(const UList<Type>& f);
+	tmp<Field<Type>> cmptSign(const UList<Type>& f);
 
 	template<class Type>
-	tmp<Field<Type> > cmptSign(const tmp<Field<Type> >& tf);
+	tmp<Field<Type>> cmptSign(const tmp<Field<Type>>& tf);
 
 #define TMP_UNARY_FUNCTION(ReturnType, Func)                                  \
                                                                               \
 template<class Type>                                                          \
-ReturnType Func(const tmp<Field<Type> >& tf1);
+ReturnType Func(const tmp<Field<Type>>& tf1);
 
 	template<class Type>
 	Type max(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(Type, max)
+	template<class Type> Type max(const tmp<Field<Type>>& tf1);
 
 		template<class Type>
 	Type min(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(Type, min)
+	template<class Type> Type min(const tmp<Field<Type>>& tf1);
 
 		template<class Type>
 	Type sum(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(Type, sum)
+	template<class Type> Type sum(const tmp<Field<Type>>& tf1);
 
 
 		template<class Type>
@@ -171,22 +169,22 @@ ReturnType Func(const tmp<Field<Type> >& tf1);
 	template<class Type>
 	scalar sumSqr(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(scalar, sumSqr)
+	template<class Type> scalar sumSqr(const tmp<Field<Type>>& tf1);
 
 		template<class Type>
 	scalar sumMag(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(scalar, sumMag)
+	template<class Type> scalar sumMag(const tmp<Field<Type>>& tf1);
 
 		template<class Type>
 	Type sumCmptMag(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(Type, sumCmptMag)
+	template<class Type> Type sumCmptMag(const tmp<Field<Type>>& tf1);
 
 		template<class Type>
 	Type average(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(Type, average)
+	template<class Type> Type average(const tmp<Field<Type>>& tf1);
 
 
 #define G_UNARY_FUNCTION(ReturnType, gFunc, Func, rFunc)                      \
@@ -195,12 +193,18 @@ template<class Type>                                                          \
 ReturnType gFunc(const UList<Type>& f);                                       \
 TMP_UNARY_FUNCTION(ReturnType, gFunc)
 
-		G_UNARY_FUNCTION(Type, gMax, max, max)
-		G_UNARY_FUNCTION(Type, gMin, min, min)
-		G_UNARY_FUNCTION(Type, gSum, sum, sum)
-		G_UNARY_FUNCTION(scalar, gSumSqr, sumSqr, sum)
-		G_UNARY_FUNCTION(scalar, gSumMag, sumMag, sum)
-		G_UNARY_FUNCTION(Type, gSumCmptMag, sumCmptMag, sum)
+		template<class Type> Type gMax(const UList<Type>& f);
+	template<class Type> Type gMax(const tmp<Field<Type>>& tf1);
+		template<class Type> Type gMin(const UList<Type>& f);
+	template<class Type> Type gMin(const tmp<Field<Type>>& tf1);
+		template<class Type> Type gSum(const UList<Type>& f);
+	template<class Type> Type gSum(const tmp<Field<Type>>& tf1);
+		template<class Type> scalar gSumSqr(const UList<Type>& f);
+	template<class Type> scalar gSumSqr(const tmp<Field<Type>>& tf1);
+		template<class Type> scalar gSumMag(const UList<Type>& f); 
+	template<class Type> scalar gSumMag(const tmp<Field<Type>>& tf1);
+		template<class Type> Type gSumCmptMag(const UList<Type>& f); 
+	template<class Type> Type gSumCmptMag(const tmp<Field<Type>>& tf1);
 
 #undef G_UNARY_FUNCTION
 
@@ -213,34 +217,92 @@ TMP_UNARY_FUNCTION(ReturnType, gFunc)
 	template<class Type>
 	Type gAverage(const UList<Type>& f);
 
-	TMP_UNARY_FUNCTION(Type, gAverage)
+	template<class Type> Type gAverage(const tmp<Field<Type>>& tf1);
 
 #undef TMP_UNARY_FUNCTION
 
 
-		BINARY_FUNCTION(Type, Type, Type, max)
-		BINARY_FUNCTION(Type, Type, Type, min)
-		BINARY_FUNCTION(Type, Type, Type, cmptMultiply)
-		BINARY_FUNCTION(Type, Type, Type, cmptDivide)
+		template<class Type> void max ( Field<Type>& f, const UList<Type>& f1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> max ( const UList<Type>& f1, const UList<Type>& f2 ); 
+	template<class Type> tmp<Field<Type>> max ( const UList<Type>& f1, const tmp<Field<Type>>& tf2 );
+	template<class Type> tmp<Field<Type>> max ( const tmp<Field<Type>>& tf1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> max ( const tmp<Field<Type>>& tf1, const tmp<Field<Type>>& tf2 );
+		template<class Type> void min ( Field<Type>& f, const UList<Type>& f1, const UList<Type>& f2 ); 
+	template<class Type> tmp<Field<Type>> min ( const UList<Type>& f1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> min ( const UList<Type>& f1, const tmp<Field<Type>>& tf2 );
+	template<class Type> tmp<Field<Type>> min ( const tmp<Field<Type>>& tf1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> min ( const tmp<Field<Type>>& tf1, const tmp<Field<Type>>& tf2 );
+		template<class Type> void cmptMultiply ( Field<Type>& f, const UList<Type>& f1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const UList<Type>& f1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const UList<Type>& f1, const tmp<Field<Type>>& tf2 );
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const tmp<Field<Type>>& tf1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const tmp<Field<Type>>& tf1, const tmp<Field<Type>>& tf2 );
+		template<class Type> void cmptDivide ( Field<Type>& f, const UList<Type>& f1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptDivide ( const UList<Type>& f1, const UList<Type>& f2 ); 
+	template<class Type> tmp<Field<Type>> cmptDivide ( const UList<Type>& f1, const tmp<Field<Type>>& tf2 );
+	template<class Type> tmp<Field<Type>> cmptDivide ( const tmp<Field<Type>>& tf1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptDivide ( const tmp<Field<Type>>& tf1, const tmp<Field<Type>>& tf2 );
 
-		BINARY_TYPE_FUNCTION(Type, Type, Type, max)
-		BINARY_TYPE_FUNCTION(Type, Type, Type, min)
-		BINARY_TYPE_FUNCTION(Type, Type, Type, cmptMultiply)
-		BINARY_TYPE_FUNCTION(Type, Type, Type, cmptDivide)
+
+
+		template<class Type> void max ( Field<Type>& f, const Type& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> max ( const Type& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> max ( const Type& s1, const tmp<Field<Type>>& tf2 );
+	template<class Type> void max ( Field<Type>& f, const UList<Type>& f1, const Type& s2 ); 
+	template<class Type> tmp<Field<Type>> max ( const UList<Type>& f1, const Type& s2 );
+	template<class Type> tmp<Field<Type>> max ( const tmp<Field<Type>>& tf1, const Type& s2 );
+		template<class Type> void min ( Field<Type>& f, const Type& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> min ( const Type& s1, const UList<Type>& f2 ); 
+	template<class Type> tmp<Field<Type>> min ( const Type& s1, const tmp<Field<Type>>& tf2 );
+	template<class Type> void min ( Field<Type>& f, const UList<Type>& f1, const Type& s2 ); 
+	template<class Type> tmp<Field<Type>> min ( const UList<Type>& f1, const Type& s2 );
+	template<class Type> tmp<Field<Type>> min ( const tmp<Field<Type>>& tf1, const Type& s2 );
+		template<class Type> void cmptMultiply ( Field<Type>& f, const Type& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const Type& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const Type& s1, const tmp<Field<Type>>& tf2 ); 
+	template<class Type> void cmptMultiply ( Field<Type>& f, const UList<Type>& f1, const Type& s2 );
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const UList<Type>& f1, const Type& s2 ); 
+	template<class Type> tmp<Field<Type>> cmptMultiply ( const tmp<Field<Type>>& tf1, const Type& s2 );
+		template<class Type> void cmptDivide ( Field<Type>& f, const Type& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptDivide ( const Type& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> cmptDivide ( const Type& s1, const tmp<Field<Type>>& tf2 ); 
+	template<class Type> void cmptDivide ( Field<Type>& f, const UList<Type>& f1, const Type& s2 ); 
+	template<class Type> tmp<Field<Type>> cmptDivide ( const UList<Type>& f1, const Type& s2 );
+	template<class Type> tmp<Field<Type>> cmptDivide ( const tmp<Field<Type>>& tf1, const Type& s2 );
 
 
 		// * * * * * * * * * * * * * * * Global operators  * * * * * * * * * * * * * //
 
-		UNARY_OPERATOR(Type, Type, -, negate)
+		template<class Type> void negate(Field<Type>& res, const UList<Type>& f); 
+	template<class Type> tmp<Field<Type>> operator -(const UList<Type>& f);
+	template<class Type> tmp<Field<Type>> operator -(const tmp<Field<Type>>& tf);
 
-		BINARY_OPERATOR(Type, Type, scalar, *, multiply)
-		BINARY_OPERATOR(Type, scalar, Type, *, multiply)
-		BINARY_OPERATOR(Type, Type, scalar, / , divide)
+		template<class Type> void multiply ( Field<Type>& f, const UList<Type>& f1, const UList<scalar>& f2 ); 
+	template<class Type> tmp<Field<Type>> operator * ( const UList<Type>& f1, const UList<scalar>& f2 ); 
+	template<class Type> tmp<Field<Type>> operator * ( const UList<Type>& f1, const tmp<Field<scalar>>& tf2 );
+	template<class Type> tmp<Field<Type>> operator * ( const tmp<Field<Type>>& tf1, const UList<scalar>& f2 );
+	template<class Type> tmp<Field<Type>> operator * ( const tmp<Field<Type>>& tf1, const tmp<Field<scalar>>& tf2 );
+		template<class Type> void multiply ( Field<Type>& f, const UList<scalar>& f1, const UList<Type>& f2 ); 
+	template<class Type> tmp<Field<Type>> operator * ( const UList<scalar>& f1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> operator * ( const UList<scalar>& f1, const tmp<Field<Type>>& tf2 );
+	template<class Type> tmp<Field<Type>> operator * ( const tmp<Field<scalar>>& tf1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> operator * ( const tmp<Field<scalar>>& tf1, const tmp<Field<Type>>& tf2 );
+		template<class Type> void divide ( Field<Type>& f, const UList<Type>& f1, const UList<scalar>& f2 ); 
+	template<class Type> tmp<Field<Type>> operator / ( const UList<Type>& f1, const UList<scalar>& f2 );
+	template<class Type> tmp<Field<Type>> operator / ( const UList<Type>& f1, const tmp<Field<scalar>>& tf2 ); 
+	template<class Type> tmp<Field<Type>> operator / ( const tmp<Field<Type>>& tf1, const UList<scalar>& f2 );
+	template<class Type> tmp<Field<Type>> operator / ( const tmp<Field<Type>>& tf1, const tmp<Field<scalar>>& tf2 );
 
-		BINARY_TYPE_OPERATOR_SF(Type, scalar, Type, *, multiply)
-		BINARY_TYPE_OPERATOR_FS(Type, Type, scalar, *, multiply)
+		template<class Type> void multiply ( Field<Type>& f, const scalar& s1, const UList<Type>& f2 ); 
+	template<class Type> tmp<Field<Type>> operator * ( const scalar& s1, const UList<Type>& f2 );
+	template<class Type> tmp<Field<Type>> operator * ( const scalar& s1, const tmp<Field<Type>>& tf2 );
+		template<class Type> void multiply ( Field<Type>& f, const UList<Type>& f1, const scalar& s2 ); 
+	template<class Type> tmp<Field<Type>> operator * ( const UList<Type>& f1, const scalar& s2 ); 
+	template<class Type> tmp<Field<Type>> operator * ( const tmp<Field<Type>>& tf1, const scalar& s2 );
 
-		BINARY_TYPE_OPERATOR_FS(Type, Type, scalar, / , divide)
+		template<class Type> void divide ( Field<Type>& f, const UList<Type>& f1, const scalar& s2 );
+	template<class Type> tmp<Field<Type>> operator / ( const UList<Type>& f1, const scalar& s2 ); 
+	template<class Type> tmp<Field<Type>> operator / ( const tmp<Field<Type>>& tf1, const scalar& s2 );
 
 
 		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -256,20 +318,20 @@ void OpFunc                                                                   \
 );                                                                            \
                                                                               \
 template<class Type1, class Type2>                                            \
-tmp<Field<typename product<Type1, Type2>::type> >                             \
+tmp<Field<typename product<Type1, Type2>::type>>                             \
 operator Op(const UList<Type1>& f1, const UList<Type2>& f2);                  \
                                                                               \
 template<class Type1, class Type2>                                            \
-tmp<Field<typename product<Type1, Type2>::type> >                             \
-operator Op(const UList<Type1>& f1, const tmp<Field<Type2> >& tf2);           \
+tmp<Field<typename product<Type1, Type2>::type>>                             \
+operator Op(const UList<Type1>& f1, const tmp<Field<Type2>>& tf2);           \
                                                                               \
 template<class Type1, class Type2>                                            \
-tmp<Field<typename product<Type1, Type2>::type> >                             \
-operator Op(const tmp<Field<Type1> >& tf1, const UList<Type2>& f2);           \
+tmp<Field<typename product<Type1, Type2>::type>>                             \
+operator Op(const tmp<Field<Type1>>& tf1, const UList<Type2>& f2);           \
                                                                               \
 template<class Type1, class Type2>                                            \
-tmp<Field<typename product<Type1, Type2>::type> >                             \
-operator Op(const tmp<Field<Type1> >& tf1, const tmp<Field<Type2> >& tf2);    \
+tmp<Field<typename product<Type1, Type2>::type>>                             \
+operator Op(const tmp<Field<Type1>>& tf1, const tmp<Field<Type2>>& tf2);    \
                                                                               \
 template<class Type, class Form, class Cmpt, int nCmpt>                       \
 void OpFunc                                                                   \
@@ -280,12 +342,12 @@ void OpFunc                                                                   \
 );                                                                            \
                                                                               \
 template<class Type, class Form, class Cmpt, int nCmpt>                       \
-tmp<Field<typename product<Type, Form>::type> >                               \
+tmp<Field<typename product<Type, Form>::type>>                               \
 operator Op(const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs);   \
                                                                               \
 template<class Type, class Form, class Cmpt, int nCmpt>                       \
-tmp<Field<typename product<Type, Form>::type> >                               \
-operator Op(const tmp<Field<Type> >&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs);\
+tmp<Field<typename product<Type, Form>::type>>                               \
+operator Op(const tmp<Field<Type>>&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs);\
                                                                               \
 template<class Form, class Cmpt, int nCmpt, class Type>                       \
 void OpFunc                                                                   \
@@ -296,20 +358,86 @@ void OpFunc                                                                   \
 );                                                                            \
                                                                               \
 template<class Form, class Cmpt, int nCmpt, class Type>                       \
-tmp<Field<typename product<Form, Type>::type> >                               \
+tmp<Field<typename product<Form, Type>::type>>                               \
 operator Op(const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1);   \
                                                                               \
 template<class Form, class Cmpt, int nCmpt, class Type>                       \
-tmp<Field<typename product<Form, Type>::type> >                               \
-operator Op(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type> >&tf1);
+tmp<Field<typename product<Form, Type>::type>>                               \
+operator Op(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type>>&tf1);
 
-		PRODUCT_OPERATOR(typeOfSum, +, add)
-		PRODUCT_OPERATOR(typeOfSum, -, subtract)
+		
+	template<class Type1, class Type2> void add ( Field<typename typeOfSum<Type1, Type2>::type>& res, const UList<Type1>& f1, const UList<Type2>& f2 );
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator +(const UList<Type1>& f1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator +(const UList<Type1>& f1, const tmp<Field<Type2>>& tf2); 
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator +(const tmp<Field<Type1>>& tf1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator +(const tmp<Field<Type1>>& tf1, const tmp<Field<Type2>>& tf2); 
+	template<class Type, class Form, class Cmpt, int nCmpt> void add ( Field<typename typeOfSum<Type, Form>::type>& res, const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs ); 
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename typeOfSum<Type, Form>::type>> operator +(const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs); 
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename typeOfSum<Type, Form>::type>> operator +(const tmp<Field<Type>>&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs); 
+	template<class Form, class Cmpt, int nCmpt, class Type> void add ( Field<typename typeOfSum<Form, Type>::type>& res, const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1 ); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename typeOfSum<Form, Type>::type>> operator +(const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename typeOfSum<Form, Type>::type>> operator +(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type>>&tf1);
+		
+	template<class Type1, class Type2> void subtract ( Field<typename typeOfSum<Type1, Type2>::type>& res, const UList<Type1>& f1, const UList<Type2>& f2 );
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator -(const UList<Type1>& f1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator -(const UList<Type1>& f1, const tmp<Field<Type2>>& tf2);
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator -(const tmp<Field<Type1>>& tf1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename typeOfSum<Type1, Type2>::type>> operator -(const tmp<Field<Type1>>& tf1, const tmp<Field<Type2>>& tf2); 
+	template<class Type, class Form, class Cmpt, int nCmpt> void subtract ( Field<typename typeOfSum<Type, Form>::type>& res, const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs ); 
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename typeOfSum<Type, Form>::type>> operator -(const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs);
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename typeOfSum<Type, Form>::type>> operator -(const tmp<Field<Type>>&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs); 
+	template<class Form, class Cmpt, int nCmpt, class Type> void subtract ( Field<typename typeOfSum<Form, Type>::type>& res, const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1 ); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename typeOfSum<Form, Type>::type>> operator -(const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename typeOfSum<Form, Type>::type>> operator -(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type>>&tf1);
 
-		PRODUCT_OPERATOR(outerProduct, *, outer)
-		PRODUCT_OPERATOR(crossProduct, ^, cross)
-		PRODUCT_OPERATOR(innerProduct, &, dot)
-		PRODUCT_OPERATOR(scalarProduct, &&, dotdot)
+		
+	template<class Type1, class Type2> void outer ( Field<typename outerProduct<Type1, Type2>::type>& res, const UList<Type1>& f1, const UList<Type2>& f2 ); 
+	template<class Type1, class Type2> tmp<Field<typename outerProduct<Type1, Type2>::type>> operator *(const UList<Type1>& f1, const UList<Type2>& f2);
+	template<class Type1, class Type2> tmp<Field<typename outerProduct<Type1, Type2>::type>> operator *(const UList<Type1>& f1, const tmp<Field<Type2>>& tf2);
+	template<class Type1, class Type2> tmp<Field<typename outerProduct<Type1, Type2>::type>> operator *(const tmp<Field<Type1>>& tf1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename outerProduct<Type1, Type2>::type>> operator *(const tmp<Field<Type1>>& tf1, const tmp<Field<Type2>>& tf2); 
+	template<class Type, class Form, class Cmpt, int nCmpt> void outer ( Field<typename outerProduct<Type, Form>::type>& res, const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs ); 
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename outerProduct<Type, Form>::type>> operator *(const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs); 
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename outerProduct<Type, Form>::type>> operator *(const tmp<Field<Type>>&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs); 
+	template<class Form, class Cmpt, int nCmpt, class Type> void outer ( Field<typename outerProduct<Form, Type>::type>& res, const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1 );
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename outerProduct<Form, Type>::type>> operator *(const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename outerProduct<Form, Type>::type>> operator *(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type>>&tf1);
+		
+	template<class Type1, class Type2> void cross ( Field<typename crossProduct<Type1, Type2>::type>& res, const UList<Type1>& f1, const UList<Type2>& f2 );
+	template<class Type1, class Type2> tmp<Field<typename crossProduct<Type1, Type2>::type>> operator ^(const UList<Type1>& f1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename crossProduct<Type1, Type2>::type>> operator ^(const UList<Type1>& f1, const tmp<Field<Type2>>& tf2); 
+	template<class Type1, class Type2> tmp<Field<typename crossProduct<Type1, Type2>::type>> operator ^(const tmp<Field<Type1>>& tf1, const UList<Type2>& f2);
+	template<class Type1, class Type2> tmp<Field<typename crossProduct<Type1, Type2>::type>> operator ^(const tmp<Field<Type1>>& tf1, const tmp<Field<Type2>>& tf2);
+	template<class Type, class Form, class Cmpt, int nCmpt> void cross ( Field<typename crossProduct<Type, Form>::type>& res, const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs ); 
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename crossProduct<Type, Form>::type>> operator ^(const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs);
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename crossProduct<Type, Form>::type>> operator ^(const tmp<Field<Type>>&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs);
+	template<class Form, class Cmpt, int nCmpt, class Type> void cross ( Field<typename crossProduct<Form, Type>::type>& res, const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1 ); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename crossProduct<Form, Type>::type>> operator ^(const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1);
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename crossProduct<Form, Type>::type>> operator ^(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type>>&tf1);
+		
+	template<class Type1, class Type2> void dot ( Field<typename innerProduct<Type1, Type2>::type>& res, const UList<Type1>& f1, const UList<Type2>& f2 ); 
+	template<class Type1, class Type2> tmp<Field<typename innerProduct<Type1, Type2>::type>> operator &(const UList<Type1>& f1, const UList<Type2>& f2);
+	template<class Type1, class Type2> tmp<Field<typename innerProduct<Type1, Type2>::type>> operator &(const UList<Type1>& f1, const tmp<Field<Type2>>& tf2);
+	template<class Type1, class Type2> tmp<Field<typename innerProduct<Type1, Type2>::type>> operator &(const tmp<Field<Type1>>& tf1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename innerProduct<Type1, Type2>::type>> operator &(const tmp<Field<Type1>>& tf1, const tmp<Field<Type2>>& tf2); 
+	template<class Type, class Form, class Cmpt, int nCmpt> void dot ( Field<typename innerProduct<Type, Form>::type>& res, const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs );
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename innerProduct<Type, Form>::type>> operator &(const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs);
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename innerProduct<Type, Form>::type>> operator &(const tmp<Field<Type>>&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs);
+	template<class Form, class Cmpt, int nCmpt, class Type> void dot ( Field<typename innerProduct<Form, Type>::type>& res, const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1 );
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename innerProduct<Form, Type>::type>> operator &(const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename innerProduct<Form, Type>::type>> operator &(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type>>&tf1);
+		
+	template<class Type1, class Type2> void dotdot ( Field<typename scalarProduct<Type1, Type2>::type>& res, const UList<Type1>& f1, const UList<Type2>& f2 );
+	template<class Type1, class Type2> tmp<Field<typename scalarProduct<Type1, Type2>::type>> operator &&(const UList<Type1>& f1, const UList<Type2>& f2);
+	template<class Type1, class Type2> tmp<Field<typename scalarProduct<Type1, Type2>::type>> operator &&(const UList<Type1>& f1, const tmp<Field<Type2>>& tf2); 
+	template<class Type1, class Type2> tmp<Field<typename scalarProduct<Type1, Type2>::type>> operator &&(const tmp<Field<Type1>>& tf1, const UList<Type2>& f2); 
+	template<class Type1, class Type2> tmp<Field<typename scalarProduct<Type1, Type2>::type>> operator &&(const tmp<Field<Type1>>& tf1, const tmp<Field<Type2>>& tf2); 
+	template<class Type, class Form, class Cmpt, int nCmpt> void dotdot ( Field<typename scalarProduct<Type, Form>::type>& res, const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs );
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename scalarProduct<Type, Form>::type>> operator &&(const UList<Type>& f1, const VectorSpace<Form,Cmpt,nCmpt>& vs);
+	template<class Type, class Form, class Cmpt, int nCmpt> tmp<Field<typename scalarProduct<Type, Form>::type>> operator &&(const tmp<Field<Type>>&tf1,const VectorSpace<Form,Cmpt,nCmpt>&vs);
+	template<class Form, class Cmpt, int nCmpt, class Type> void dotdot ( Field<typename scalarProduct<Form, Type>::type>& res, const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1 ); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename scalarProduct<Form, Type>::type>> operator &&(const VectorSpace<Form,Cmpt,nCmpt>& vs, const UList<Type>& f1); 
+	template<class Form, class Cmpt, int nCmpt, class Type> tmp<Field<typename scalarProduct<Form, Type>::type>> operator &&(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type>>&tf1);
 
 #undef PRODUCT_OPERATOR
 
@@ -320,6 +448,6 @@ operator Op(const VectorSpace<Form,Cmpt,nCmpt>&vs,const tmp<Field<Type> >&tf1);
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include <undefFieldFunctionsM.hxx>
+
 
 #endif // !_FieldFunctions_Header
