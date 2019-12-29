@@ -688,6 +688,24 @@
     <Filter Include="TnbLib\Base\Primitives\functions\PolynomialTemplate">
       <UniqueIdentifier>{df473319-2ee9-4d77-9f73-f209e54d92ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\fields\FieldFields">
+      <UniqueIdentifier>{519ff66c-da50-497d-a995-ce3cb48d9382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\FieldFields\FieldField">
+      <UniqueIdentifier>{761a3f26-163f-4aa9-8186-0223fa2fa958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\FieldFields\scalarFieldField">
+      <UniqueIdentifier>{107c0e2c-4011-4395-8b9f-80ad3ab29afc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\FieldFields\oneFieldField">
+      <UniqueIdentifier>{b863ddd6-32f9-4219-a768-3b4896d1b9d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\FieldFields\sphericalTensorFieldField">
+      <UniqueIdentifier>{11239c73-4eeb-40a4-a7b4-2f057be6f7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\FieldFields\symmTensor4thOrderFieldField">
+      <UniqueIdentifier>{8bf3d3d2-5078-4553-b6ff-a0701910166d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1842,6 +1860,36 @@
     <ClInclude Include="TnbLib\Base\Primitives\VectorN\expandContract\ExpandTensorNI.hxx">
       <Filter>TnbLib\Base\Primitives\VectorN\expandContract</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\FieldField\FieldField.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\FieldField\FieldFieldFunctions.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\FieldField\FieldFieldFunctionsM.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\FieldField\FieldFieldReuseFunctions.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\FieldField\FieldFields.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\scalarFieldField\scalarFieldField.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\scalarFieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\oneFieldField\oneFieldField.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\oneFieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\oneFieldField\oneFieldFieldI.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\oneFieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\sphericalTensorFieldField\sphericalTensorFieldField.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\sphericalTensorFieldField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\FieldFields\symmTensor4thOrderFieldField\symmTensor4thOrderFieldField.hxx">
+      <Filter>TnbLib\Base\fields\FieldFields\symmTensor4thOrderFieldField</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2620,6 +2668,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\IOobjects\IOField\IOField.cxx">
       <Filter>TnbLib\Base\db\IOobjects\IOField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\FieldFields\FieldField\FieldField.cxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\FieldFields\FieldField\FieldFieldFunctions.cxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\FieldFields\FieldField\FieldFieldFunctionsM.cxx">
+      <Filter>TnbLib\Base\fields\FieldFields\FieldField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\FieldFields\scalarFieldField\scalarFieldField.cxx">
+      <Filter>TnbLib\Base\fields\FieldFields\scalarFieldField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\FieldFields\sphericalTensorFieldField\sphericalTensorFieldField.cxx">
+      <Filter>TnbLib\Base\fields\FieldFields\sphericalTensorFieldField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\FieldFields\symmTensor4thOrderFieldField\symmTensor4thOrderFieldField.cxx">
+      <Filter>TnbLib\Base\fields\FieldFields\symmTensor4thOrderFieldField</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
