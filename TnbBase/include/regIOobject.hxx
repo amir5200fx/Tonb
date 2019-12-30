@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::regIOobject
+	tnbLib::regIOobject
 
 Description
 	regIOobject is an abstract class derived from IOobject to handle
@@ -51,8 +51,7 @@ namespace tnbLib
 \*---------------------------------------------------------------------------*/
 
 	class regIOobject
-		:
-		public IOobject
+		: public IOobject
 	{
 
 	private:

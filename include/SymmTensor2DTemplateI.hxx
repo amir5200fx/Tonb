@@ -418,7 +418,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class outerProduct<Cmpt, SymmTensor2D<Cmpt> >
+	class outerProduct<Cmpt, SymmTensor2D<Cmpt>>
 	{
 	public:
 
@@ -426,7 +426,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor2D<Cmpt>, SymmTensor2D<Cmpt> >
+	class innerProduct<SymmTensor2D<Cmpt>, SymmTensor2D<Cmpt>>
 	{
 	public:
 
@@ -434,7 +434,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor2D<Cmpt>, Vector2D<Cmpt> >
+	class innerProduct<SymmTensor2D<Cmpt>, Vector2D<Cmpt>>
 	{
 	public:
 
@@ -442,7 +442,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<Vector2D<Cmpt>, SymmTensor2D<Cmpt> >
+	class innerProduct<Vector2D<Cmpt>, SymmTensor2D<Cmpt>>
 	{
 	public:
 
@@ -451,7 +451,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class typeOfSum<SphericalTensor2D<Cmpt>, SymmTensor2D<Cmpt> >
+	class typeOfSum<SphericalTensor2D<Cmpt>, SymmTensor2D<Cmpt>>
 	{
 	public:
 
@@ -459,7 +459,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class typeOfSum<SymmTensor2D<Cmpt>, SphericalTensor2D<Cmpt> >
+	class typeOfSum<SymmTensor2D<Cmpt>, SphericalTensor2D<Cmpt>>
 	{
 	public:
 
@@ -467,7 +467,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SphericalTensor2D<Cmpt>, SymmTensor2D<Cmpt> >
+	class innerProduct<SphericalTensor2D<Cmpt>, SymmTensor2D<Cmpt>>
 	{
 	public:
 
@@ -475,7 +475,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor2D<Cmpt>, SphericalTensor2D<Cmpt> >
+	class innerProduct<SymmTensor2D<Cmpt>, SphericalTensor2D<Cmpt>>
 	{
 	public:
 

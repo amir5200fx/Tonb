@@ -1,4 +1,7 @@
 #pragma once
+#include <error.hxx>
+#include <OSstream.hxx>
+#include <List.hxx>
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
@@ -252,7 +255,7 @@ namespace tnbLib
 	//- Inner-product between two tensors
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<TensorN<Cmpt, length>, TensorN<Cmpt, length> >::type
+		innerProduct<TensorN<Cmpt, length>, TensorN<Cmpt, length>>::type
 		operator&(const TensorN<Cmpt, length>& t1, const TensorN<Cmpt, length>& t2)
 	{
 		TensorN<Cmpt, length> result(TensorN<Cmpt, length>::zero);
@@ -292,7 +295,7 @@ namespace tnbLib
 	//- Inner-product between diagonal tensor and tensor
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<DiagTensorN<Cmpt, length>, TensorN<Cmpt, length> >::type
+		innerProduct<DiagTensorN<Cmpt, length>, TensorN<Cmpt, length>>::type
 		operator&
 		(
 			const DiagTensorN<Cmpt, length>& dt1,
@@ -319,7 +322,7 @@ namespace tnbLib
 	//- Inner-product between tensor and diagonal tensor
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<TensorN<Cmpt, length>, DiagTensorN<Cmpt, length> >::type
+		innerProduct<TensorN<Cmpt, length>, DiagTensorN<Cmpt, length>>::type
 		operator&
 		(
 			const TensorN<Cmpt, length>& t1,
@@ -345,7 +348,7 @@ namespace tnbLib
 	//- Inner-product between spherical tensor and tensor
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<SphericalTensorN<Cmpt, length>, TensorN<Cmpt, length> >::type
+		innerProduct<SphericalTensorN<Cmpt, length>, TensorN<Cmpt, length>>::type
 		operator&
 		(
 			const SphericalTensorN<Cmpt, length>& st1,
@@ -369,7 +372,7 @@ namespace tnbLib
 	//- Inner-product between tensor and spherical tensor
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<TensorN<Cmpt, length>, SphericalTensorN<Cmpt, length> >::type
+		innerProduct<TensorN<Cmpt, length>, SphericalTensorN<Cmpt, length>>::type
 		operator&
 		(
 			const TensorN<Cmpt, length>& t1,
@@ -393,7 +396,7 @@ namespace tnbLib
 	//- Inner-product between a tensor and a vector
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<TensorN<Cmpt, length>, VectorN<Cmpt, length> >::type
+		innerProduct<TensorN<Cmpt, length>, VectorN<Cmpt, length>>::type
 		operator&(const TensorN<Cmpt, length>& t, const VectorN<Cmpt, length>& v)
 	{
 		VectorN<Cmpt, length> result(VectorN<Cmpt, length>::zero);
@@ -417,7 +420,7 @@ namespace tnbLib
 	//- Inner-product between a vector and a tensor
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<VectorN<Cmpt, length>, TensorN<Cmpt, length> >::type
+		innerProduct<VectorN<Cmpt, length>, TensorN<Cmpt, length>>::type
 		operator&(const VectorN<Cmpt, length>& v, const TensorN<Cmpt, length>& t)
 	{
 		VectorN<Cmpt, length> result(VectorN<Cmpt, length>::zero);
@@ -441,7 +444,7 @@ namespace tnbLib
 	//- Outer-product between two vectors
 	template <class Cmpt, int length>
 	inline typename
-		outerProduct<VectorN<Cmpt, length>, VectorN<Cmpt, length> >::type
+		outerProduct<VectorN<Cmpt, length>, VectorN<Cmpt, length>>::type
 		operator*(const VectorN<Cmpt, length>& v1, const VectorN<Cmpt, length>& v2)
 	{
 		TensorN<Cmpt, length> result(TensorN<Cmpt, length>::zero);
@@ -831,8 +834,8 @@ namespace tnbLib
 
 		label iRow = 0, iCol = 0;
 		Cmpt largestCoeff, temp;
-		Cmpt* __restrict__ srcIter;
-		Cmpt* __restrict__ destIter;
+		Cmpt* __restrict srcIter;
+		Cmpt* __restrict destIter;
 
 		// Lists used for bookkeeping on the pivoting
 		List<label> indexCol(length), indexRow(length), iPivot(length);
@@ -1040,7 +1043,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt, int length>
-	class outerProduct<Cmpt, TensorN<Cmpt, length> >
+	class outerProduct<Cmpt, TensorN<Cmpt, length>>
 	{
 	public:
 
@@ -1048,16 +1051,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt, int length>
-	class innerProduct<DiagTensorN<Cmpt, length>, TensorN<Cmpt, length> >
-	{
-	public:
-
-		typedef TensorN<Cmpt, length> type;
-	};
-
-
-	template<class Cmpt, int length>
-	class innerProduct<TensorN<Cmpt, length>, DiagTensorN<Cmpt, length> >
+	class innerProduct<DiagTensorN<Cmpt, length>, TensorN<Cmpt, length>>
 	{
 	public:
 
@@ -1066,7 +1060,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<SphericalTensorN<Cmpt, length>, TensorN<Cmpt, length> >
+	class innerProduct<TensorN<Cmpt, length>, DiagTensorN<Cmpt, length>>
 	{
 	public:
 
@@ -1075,7 +1069,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<TensorN<Cmpt, length>, SphericalTensorN<Cmpt, length> >
+	class innerProduct<SphericalTensorN<Cmpt, length>, TensorN<Cmpt, length>>
 	{
 	public:
 
@@ -1084,7 +1078,16 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<VectorN<Cmpt, length>, TensorN<Cmpt, length> >
+	class innerProduct<TensorN<Cmpt, length>, SphericalTensorN<Cmpt, length>>
+	{
+	public:
+
+		typedef TensorN<Cmpt, length> type;
+	};
+
+
+	template<class Cmpt, int length>
+	class innerProduct<VectorN<Cmpt, length>, TensorN<Cmpt, length>>
 	{
 	public:
 
@@ -1093,7 +1096,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<TensorN<Cmpt, length>, VectorN<Cmpt, length> >
+	class innerProduct<TensorN<Cmpt, length>, VectorN<Cmpt, length>>
 	{
 	public:
 
@@ -1102,7 +1105,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<TensorN<Cmpt, length>, TensorN<Cmpt, length> >
+	class innerProduct<TensorN<Cmpt, length>, TensorN<Cmpt, length>>
 	{
 	public:
 

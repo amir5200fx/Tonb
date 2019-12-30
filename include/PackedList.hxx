@@ -86,13 +86,13 @@ namespace tnbLib
 		PackedList(const PackedList<nBits>&);
 
 		//- Construct by transferring the parameter contents
-		PackedList(const Xfer< PackedList<nBits> >&);
+		PackedList(const Xfer< PackedList<nBits>>&);
 
 		//- Construct from a list of labels
 		explicit PackedList(const UList<label>&);
 
 		//- Clone
-		autoPtr< PackedList<nBits> > clone() const;
+		autoPtr< PackedList<nBits>> clone() const;
 
 		// Member Functions
 
@@ -178,7 +178,7 @@ namespace tnbLib
 		void transfer(PackedList<nBits>&);
 
 		//- Transfer contents to the Xfer container
-		Xfer< PackedList<nBits> > xfer();
+		Xfer< PackedList<nBits>> xfer();
 
 
 		// Member operators

@@ -68,7 +68,7 @@ namespace tnbLib
 		Tensor(const SymmTensor<Cmpt>&);
 
 		//- Construct given triad
-		Tensor(const Vector<Vector<Cmpt> >&);
+		Tensor(const Vector<Vector<Cmpt>>&);
 
 		//- Construct given the three vector components
 		Tensor
@@ -150,7 +150,7 @@ namespace tnbLib
 		void operator=(const SymmTensor<Cmpt>&);
 
 		//- Assign to a triad
-		void operator=(const Vector<Vector<Cmpt> >&);
+		void operator=(const Vector<Vector<Cmpt>>&);
 	};
 
 

@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::quaternion
+	tnbLib::quaternion
 
 Description
 	Quaternion class used to perform rotations in 3D space.

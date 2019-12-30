@@ -26,7 +26,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::timer
+	tnbLib::timer
 
 Description
 	Implements a timeout mechanism via sigalarm.
@@ -72,7 +72,7 @@ SourceFiles
 //- check it a timeout has occured
 //  keep setjmp in same stack frame so no function calls
 #define timedOut(x) \
-    (((x).newTimeOut_ > 0) ? setjmp(Foam::timer::envAlarm) : false)
+    (((x).newTimeOut_ > 0) ? setjmp(tnbLib::timer::envAlarm) : false)
 
 typedef	void(*__p_sig_fn_t)(int);
 

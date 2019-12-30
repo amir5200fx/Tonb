@@ -31,7 +31,7 @@
 (baseType,thisType,Targ,argNames)                                             \
                                                                               \
     /* Add the thisType constructor function to the table */                  \
-    baseType::add##argNames##ConstructorToTable< thisType< Targ > >           \
+    baseType::add##argNames##ConstructorToTable< thisType< Targ >>           \
         add##thisType##Targ##argNames##ConstructorTo##baseType##Table_
 
 
@@ -41,7 +41,7 @@
 (baseType,thisType,Targ,argNames,lookup)                                      \
                                                                               \
     /* Add the thisType constructor function to the table, find by lookup */  \
-    baseType::add##argNames##ConstructorToTable< thisType< Targ > >           \
+    baseType::add##argNames##ConstructorToTable< thisType< Targ >>           \
         add_##lookup##_##thisType##Targ##argNames##ConstructorTo##baseType##Table_(#lookup)
 
 
@@ -54,7 +54,7 @@
 (baseType,thisType,Targ,argNames)                                             \
                                                                               \
     /* Add the thisType constructor function to the table */                  \
-    baseType< Targ >::add##argNames##ConstructorToTable< thisType< Targ > >   \
+    baseType< Targ >::add##argNames##ConstructorToTable< thisType< Targ >>   \
         add##thisType##Targ##argNames##ConstructorTo##baseType##Targ##Table_
 
 
@@ -64,7 +64,7 @@
 (baseType,thisType,Targ,argNames,lookup)                                      \
                                                                               \
     /* Add the thisType constructor function to the table, find by lookup */  \
-    baseType< Targ >::add##argNames##ConstructorToTable< thisType< Targ > >   \
+    baseType< Targ >::add##argNames##ConstructorToTable< thisType< Targ >>   \
         add_##lookup##_##thisType##Targ##argNames##ConstructorTo##baseType##Targ##Table_(#lookup)
 
 

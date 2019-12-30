@@ -348,7 +348,6 @@ namespace tnbLib
 		return ::_yn(n, s);
 	}
 
-#undef doubleScalar
 #undef ScalarVGREAT
 #undef ScalarVSMALL
 #undef readScalar

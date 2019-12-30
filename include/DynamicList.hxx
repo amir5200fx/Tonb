@@ -70,7 +70,7 @@ namespace tnbLib
 		explicit DynamicList(const UIndirectList<T>&);
 
 		//- Construct by transferring the parameter contents
-		explicit DynamicList(const Xfer< List<T> >&);
+		explicit DynamicList(const Xfer< List<T>>&);
 
 		//- Construct from Istream. Size set to size of read list.
 		explicit DynamicList(Istream&);
@@ -131,7 +131,7 @@ namespace tnbLib
 		void transfer(DynamicList<T, SizeInc, SizeMult, SizeDiv>&);
 
 		//- Transfer contents to the Xfer container as a plain List
-		Xfer< List<T> > xfer();
+		Xfer< List<T>> xfer();
 
 		// Member Operators
 

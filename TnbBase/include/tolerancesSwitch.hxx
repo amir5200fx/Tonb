@@ -13,7 +13,7 @@ namespace tnbLib
 		// Typedefs
 		// Hashtable to static class attributes addresses holding the
 		// runtime tolerances switch values
-		typedef std::map<std::string, std::list<controlSwitches<scalar> *> >
+		typedef std::map<std::string, std::list<controlSwitches<scalar> *>>
 			ListTolerancesControlSwitches;
 
 		extern ListTolerancesControlSwitches* tolerancesSwitchValues_;

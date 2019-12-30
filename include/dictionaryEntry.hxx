@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::dictionaryEntry
+	tnbLib::dictionaryEntry
 
 Description
 	A keyword and a list of tokens is a 'dictionaryEntry'.

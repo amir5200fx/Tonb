@@ -231,7 +231,7 @@ namespace tnbLib
 	//- Inner-product between a diagonal tensor and a diagonal tensor
 	template <class Cmpt, int length>
 	typename
-		innerProduct<DiagTensorN<Cmpt, length>, DiagTensorN<Cmpt, length> >::type
+		innerProduct<DiagTensorN<Cmpt, length>, DiagTensorN<Cmpt, length>>::type
 		operator&
 		(
 			const DiagTensorN<Cmpt, length>& dt1,
@@ -254,7 +254,7 @@ namespace tnbLib
 	//- Inner-product between spherical tensor and diagonal tensor
 	template <class Cmpt, int length>
 	typename
-		innerProduct<SphericalTensorN<Cmpt, length>, DiagTensorN<Cmpt, length> >::type
+		innerProduct<SphericalTensorN<Cmpt, length>, DiagTensorN<Cmpt, length>>::type
 		operator&
 		(
 			const SphericalTensorN<Cmpt, length>& st1,
@@ -278,7 +278,7 @@ namespace tnbLib
 	//- Inner-product between diagonal tensor and spherical tensor
 	template <class Cmpt, int length>
 	typename
-		innerProduct<DiagTensorN<Cmpt, length>, SphericalTensorN<Cmpt, length> >::type
+		innerProduct<DiagTensorN<Cmpt, length>, SphericalTensorN<Cmpt, length>>::type
 		operator&
 		(
 			const DiagTensorN<Cmpt, length>& dt1,
@@ -302,7 +302,7 @@ namespace tnbLib
 	//- Inner-product between a diagonal tensor and a vector
 	template <class Cmpt, int length>
 	typename
-		innerProduct<DiagTensorN<Cmpt, length>, VectorN<Cmpt, length> >::type
+		innerProduct<DiagTensorN<Cmpt, length>, VectorN<Cmpt, length>>::type
 		operator&
 		(
 			const DiagTensorN<Cmpt, length>& dt,
@@ -326,7 +326,7 @@ namespace tnbLib
 	//- Inner-product between a vector and a tensor
 	template <class Cmpt, int length>
 	typename
-		innerProduct<VectorN<Cmpt, length>, DiagTensorN<Cmpt, length> >::type
+		innerProduct<VectorN<Cmpt, length>, DiagTensorN<Cmpt, length>>::type
 		operator&
 		(
 			const VectorN<Cmpt, length>& v,
@@ -512,7 +512,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt, int length>
-	class outerProduct<Cmpt, DiagTensorN<Cmpt, length> >
+	class outerProduct<Cmpt, DiagTensorN<Cmpt, length>>
 	{
 	public:
 
@@ -521,7 +521,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<DiagTensorN<Cmpt, length>, DiagTensorN<Cmpt, length> >
+	class innerProduct<DiagTensorN<Cmpt, length>, DiagTensorN<Cmpt, length>>
 	{
 	public:
 
@@ -530,7 +530,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<SphericalTensorN<Cmpt, length>, DiagTensorN<Cmpt, length> >
+	class innerProduct<SphericalTensorN<Cmpt, length>, DiagTensorN<Cmpt, length>>
 	{
 	public:
 
@@ -539,7 +539,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<DiagTensorN<Cmpt, length>, SphericalTensorN<Cmpt, length> >
+	class innerProduct<DiagTensorN<Cmpt, length>, SphericalTensorN<Cmpt, length>>
 	{
 	public:
 
@@ -548,7 +548,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<VectorN<Cmpt, length>, DiagTensorN<Cmpt, length> >
+	class innerProduct<VectorN<Cmpt, length>, DiagTensorN<Cmpt, length>>
 	{
 	public:
 
@@ -557,7 +557,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<DiagTensorN<Cmpt, length>, VectorN<Cmpt, length> >
+	class innerProduct<DiagTensorN<Cmpt, length>, VectorN<Cmpt, length>>
 	{
 	public:
 

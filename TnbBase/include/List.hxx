@@ -73,7 +73,7 @@ namespace tnbLib
 		List(const List<T>&);
 
 		//- Construct by transferring the parameter contents
-		List(const Xfer< List<T> >&);
+		List(const Xfer< List<T>>&);
 
 		//- Construct as copy or re-use as specified.
 		List(List<T>&, bool reUse);
@@ -108,7 +108,7 @@ namespace tnbLib
 		List(Istream&);
 
 		//- Clone
-		autoPtr<List<T> > clone() const;
+		autoPtr<List<T>> clone() const;
 
 
 		// Destructor
@@ -165,7 +165,7 @@ namespace tnbLib
 		void transfer(SortableList<T>&);
 
 		//- Transfer contents to the Xfer container
-		Xfer< List<T> > xfer();
+		Xfer< List<T>> xfer();
 
 		//- Return subscript-checked element of UList.
 		T& newElmt(const label);

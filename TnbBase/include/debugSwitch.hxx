@@ -13,7 +13,7 @@ namespace tnbLib
 		// Typedefs
 		// Hashtable to static class attributes addresses holding the
 		// runtime debug switch values
-		typedef std::map<std::string, std::list<controlSwitches<int> *> >
+		typedef std::map<std::string, std::list<controlSwitches<int> *>>
 			ListDebugControlSwitches;
 
 		extern ListDebugControlSwitches* debugSwitchValues_;

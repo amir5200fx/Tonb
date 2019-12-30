@@ -262,7 +262,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class outerProduct<Cmpt, SymmTensor4thOrder<Cmpt> >
+	class outerProduct<Cmpt, SymmTensor4thOrder<Cmpt>>
 	{
 	public:
 
@@ -270,7 +270,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<SymmTensor4thOrder<Cmpt>, Vector<Cmpt> >
+	class innerProduct<SymmTensor4thOrder<Cmpt>, Vector<Cmpt>>
 	{
 	public:
 
@@ -278,7 +278,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<Vector<Cmpt>, SymmTensor4thOrder<Cmpt> >
+	class innerProduct<Vector<Cmpt>, SymmTensor4thOrder<Cmpt>>
 	{
 	public:
 
@@ -286,7 +286,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class scalarProduct<SymmTensor4thOrder<Cmpt>, SymmTensor<Cmpt> >
+	class scalarProduct<SymmTensor4thOrder<Cmpt>, SymmTensor<Cmpt>>
 	{
 	public:
 
@@ -294,7 +294,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class scalarProduct<SymmTensor<Cmpt>, SymmTensor4thOrder<Cmpt> >
+	class scalarProduct<SymmTensor<Cmpt>, SymmTensor4thOrder<Cmpt>>
 	{
 	public:
 

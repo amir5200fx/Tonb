@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::wordRe
+	tnbLib::wordRe
 
 Description
 	A wordRe is a word, but can also have a regular expression for matching
@@ -35,7 +35,7 @@ Description
 	and/or invalid word characters and react accordingly.
 
 	The exceptions are when constructing/assigning from another
-	Foam::wordRe (preserve the same type) or from a Foam::word (always
+	tnbLib::wordRe (preserve the same type) or from a tnbLib::word (always
 	literal).
 
 Note

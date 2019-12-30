@@ -43,8 +43,8 @@ namespace tnbLib
 			//- Null constructor.
 		CompactListList();
 
-		//- Construct by converting given List<List<T> >
-		CompactListList(const List<List<T> >&);
+		//- Construct by converting given List<List<T>>
+		CompactListList(const List<List<T>>&);
 
 		//- Construct given size of offset table (number of rows)
 		//  and number of data.
@@ -61,7 +61,7 @@ namespace tnbLib
 		CompactListList(const UList<label>& rowSizes, const T&);
 
 		//- Construct by transferring the parameter contents
-		CompactListList(const Xfer<CompactListList<T> >&);
+		CompactListList(const Xfer<CompactListList<T>>&);
 
 		//- Construct as copy or re-use as specified.
 		CompactListList(CompactListList<T>&, bool reUse);
@@ -70,7 +70,7 @@ namespace tnbLib
 		CompactListList(Istream&);
 
 		//- Clone
-		autoPtr<CompactListList<T> > clone() const;
+		autoPtr<CompactListList<T>> clone() const;
 
 
 		// Member Functions
@@ -135,7 +135,7 @@ namespace tnbLib
 		void transfer(CompactListList<T>&);
 
 		//- Transfer the contents to the Xfer container
-		Xfer<CompactListList<T> > xfer();
+		Xfer<CompactListList<T>> xfer();
 
 		// Other
 
@@ -163,8 +163,8 @@ namespace tnbLib
 		//- Return const subscript-checked element.
 		const T& operator()(const label i, const label j) const;
 
-		//- Return as List<List<T> >
-		List<List<T> > operator()() const;
+		//- Return as List<List<T>>
+		List<List<T>> operator()() const;
 
 		//- Assignment of all entries to the given value
 		void operator=(const T&);

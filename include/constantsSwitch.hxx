@@ -13,7 +13,7 @@ namespace tnbLib
 		// Typedefs
 		// Hashtables to static class attributes addresses holding the
 		// runtime dimensionedConstants values
-		typedef std::map<std::string, std::list<controlSwitches<scalar> *> >
+		typedef std::map<std::string, std::list<controlSwitches<scalar> *>>
 			ListConstantsControlSwitches;
 
 		extern ListConstantsControlSwitches* constantsSwitchValues_;

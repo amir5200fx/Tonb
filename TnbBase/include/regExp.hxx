@@ -26,7 +26,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::regExp
+	tnbLib::regExp
 
 Description
 	Wrapper around POSIX extended regular expressions.

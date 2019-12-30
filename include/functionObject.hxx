@@ -22,13 +22,13 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::functionObject
+	tnbLib::functionObject
 
 Description
 	Abstract base-class for Time/database function objects.
 
 See Also
-	Foam::OutputFilterFunctionObject
+	tnbLib::OutputFilterFunctionObject
 
 SourceFiles
 	functionObject.C

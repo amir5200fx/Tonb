@@ -161,7 +161,7 @@ namespace tnbLib
 		HashTable(const HashTable<T, Key, Hash>&);
 
 		//- Construct by transferring the parameter contents
-		HashTable(const Xfer<HashTable<T, Key, Hash> >&);
+		HashTable(const Xfer<HashTable<T, Key, Hash>>&);
 
 
 		//- Destructor
@@ -246,7 +246,7 @@ namespace tnbLib
 		void transfer(HashTable<T, Key, Hash>&);
 
 		//- Transfer contents to the Xfer container
-		Xfer<HashTable<T, Key, Hash> > xfer();
+		Xfer<HashTable<T, Key, Hash>> xfer();
 
 
 		// Member Operators
