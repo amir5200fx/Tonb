@@ -1932,6 +1932,33 @@
     <ClInclude Include="TnbLib\Base\fields\FieldFields\VectorNFieldFields\DiagTensorNFieldFields.hxx">
       <Filter>TnbLib\Base\fields\FieldFields\vectorNFieldFields</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedSphericalTensor\dimensionedSphericalTensor.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedSphericalTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedSymmTensor\dimensionedSymmTensor.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedSymmTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedVector\dimensionedVector.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedVector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedTensor\dimensionedTensor.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedSymmTensor4thOrder\dimensionedSymmTensor4thOrder.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedSymmTensor4thOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedDiagTensor\dimensionedDiagTensor.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedDiagTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN\dimensionedVectorTensorN.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN\dimensionedVectorTensorNI.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedTypes.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2752,6 +2779,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\fields\FieldFields\VectorNFieldFields\DiagTensorNFieldFields.cxx">
       <Filter>TnbLib\Base\fields\FieldFields\vectorNFieldFields</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedSphericalTensor\dimensionedSphericalTensor.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedSphericalTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedSymmTensor\dimensionedSymmTensor.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedSymmTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedTensor\dimensionedTensor.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedSymmTensor4thOrder\dimensionedSymmTensor4thOrder.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedSymmTensor4thOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedDiagTensor\dimensionedDiagTensor.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedDiagTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN\dimensionedVectorTensorN.cxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
