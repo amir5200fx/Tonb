@@ -146,7 +146,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class outerProduct<Cmpt, SphericalTensor2D<Cmpt> >
+	class outerProduct<Cmpt, SphericalTensor2D<Cmpt>>
 	{
 	public:
 
@@ -155,7 +155,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class innerProduct<SphericalTensor2D<Cmpt>, SphericalTensor2D<Cmpt> >
+	class innerProduct<SphericalTensor2D<Cmpt>, SphericalTensor2D<Cmpt>>
 	{
 	public:
 
@@ -164,7 +164,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class innerProduct<SphericalTensor2D<Cmpt>, Vector2D<Cmpt> >
+	class innerProduct<SphericalTensor2D<Cmpt>, Vector2D<Cmpt>>
 	{
 	public:
 
@@ -172,7 +172,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class innerProduct<Vector2D<Cmpt>, SphericalTensor2D<Cmpt> >
+	class innerProduct<Vector2D<Cmpt>, SphericalTensor2D<Cmpt>>
 	{
 	public:
 

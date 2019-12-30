@@ -285,7 +285,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	class innerProduct<DiagTensor<Cmpt>, DiagTensor<Cmpt> >
+	class innerProduct<DiagTensor<Cmpt>, DiagTensor<Cmpt>>
 	{
 	public:
 
@@ -301,7 +301,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt>
-	class outerProduct<Cmpt, DiagTensor<Cmpt> >
+	class outerProduct<Cmpt, DiagTensor<Cmpt>>
 	{
 	public:
 

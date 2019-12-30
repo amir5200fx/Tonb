@@ -17,11 +17,13 @@ namespace tnbLib
 	typedef long mode_t;
 
 //- Return the PID of this process
-#ifdef mingw
+//#ifdef mingw
+//	int pid();
+//#else
+//	PID_T pid();
+//#endif
+
 	int pid();
-#else
-	PID_T pid();
-#endif
 
 	//- Return the parent PID of this process
 	PID_T ppid();

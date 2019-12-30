@@ -14,7 +14,7 @@ namespace tnbLib
 \*---------------------------------------------------------------------------*/
 
 	class dlLibraryTable
-		: public HashTable<fileName, void*, Hash<void*> >
+		: public HashTable<fileName, void*, Hash<void*>>
 	{
 		// Private Member Functions
 

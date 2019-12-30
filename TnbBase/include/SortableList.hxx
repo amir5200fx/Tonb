@@ -35,7 +35,7 @@ namespace tnbLib
 		explicit SortableList(const UList<T>&);
 
 		//- Construct from transferred List, sorting immediately.
-		explicit SortableList(const Xfer<List<T> >&);
+		explicit SortableList(const Xfer<List<T>>&);
 
 		//- Construct given size. Sort later on.
 		//  The indices remain empty until the list is sorted
@@ -77,7 +77,7 @@ namespace tnbLib
 		void reverseSort();
 
 		//- Transfer contents to the Xfer container as a plain List
-		Xfer<List<T> > xfer();
+		Xfer<List<T>> xfer();
 
 
 		// Member Operators

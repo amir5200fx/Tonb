@@ -39,7 +39,7 @@ T* tnbLib::UPtrList<T>::set(const label i, T* ptr)
 }
 
 template<class T>
-tnbLib::Xfer<tnbLib::UPtrList<T> > tnbLib::UPtrList<T>::xfer()
+tnbLib::Xfer<tnbLib::UPtrList<T>> tnbLib::UPtrList<T>::xfer()
 {
 	return xferMove(*this);
 }

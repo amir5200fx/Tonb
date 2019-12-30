@@ -9,7 +9,7 @@ namespace tnbLib
 {
 
 	typedef List<bool> boolList;
-	typedef List<List<bool> > boolListList;
+	typedef List<List<bool>> boolListList;
 }
 
 #endif // !_boolList_Header

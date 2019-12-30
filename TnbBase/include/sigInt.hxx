@@ -26,7 +26,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::sigInt
+	tnbLib::sigInt
 
 Description
 	Signal handler for INT interupt.
@@ -35,7 +35,7 @@ Description
 	runningJob file is removed.
 
 See Also
-	Foam::JobInfo
+	tnbLib::JobInfo
 
 SourceFiles
 	sigInt.C

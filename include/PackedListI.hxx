@@ -71,17 +71,17 @@ tnbLib::PackedList<nBits>::PackedList(const PackedList<nBits>& lst)
 
 
 template<unsigned nBits>
-tnbLib::PackedList<nBits>::PackedList(const Xfer<PackedList<nBits> >& lst)
+tnbLib::PackedList<nBits>::PackedList(const Xfer<PackedList<nBits>>& lst)
 {
 	transfer(lst());
 }
 
 
 template<unsigned nBits>
-tnbLib::autoPtr<tnbLib::PackedList<nBits> >
+tnbLib::autoPtr<tnbLib::PackedList<nBits>>
 tnbLib::PackedList<nBits>::clone() const
 {
-	return autoPtr<PackedList<nBits> >(new PackedList<nBits>(*this));
+	return autoPtr<PackedList<nBits>>(new PackedList<nBits>(*this));
 }
 
 
@@ -714,7 +714,7 @@ void tnbLib::PackedList<nBits>::transfer(PackedList<nBits>& lst)
 
 
 template<unsigned nBits>
-tnbLib::Xfer< tnbLib::PackedList<nBits> >
+tnbLib::Xfer< tnbLib::PackedList<nBits>>
 tnbLib::PackedList<nBits>::xfer()
 {
 	return xferMove(*this);

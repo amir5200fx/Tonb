@@ -26,7 +26,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::sigFpe
+	tnbLib::sigFpe
 
 Description
 	Set up trapping for floating point exceptions (signal FPE).

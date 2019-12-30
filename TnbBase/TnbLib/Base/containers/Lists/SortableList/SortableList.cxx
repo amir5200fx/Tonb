@@ -38,7 +38,7 @@ tnbLib::SortableList<T>::SortableList(const UList<T>& values)
 
 
 template<class T>
-tnbLib::SortableList<T>::SortableList(const Xfer<List<T> >& values)
+tnbLib::SortableList<T>::SortableList(const Xfer<List<T>>& values)
 	: List<T>(values)
 {
 	sort();
@@ -115,9 +115,9 @@ void tnbLib::SortableList<T>::reverseSort()
 
 
 template<class T>
-tnbLib::Xfer<tnbLib::List<T> > tnbLib::SortableList<T>::xfer()
+tnbLib::Xfer<tnbLib::List<T>> tnbLib::SortableList<T>::xfer()
 {
-	return xferMoveTo<List<T> >(*this);
+	return xferMoveTo<List<T>>(*this);
 }
 
 

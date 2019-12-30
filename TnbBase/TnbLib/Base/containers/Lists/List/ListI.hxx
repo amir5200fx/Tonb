@@ -7,9 +7,9 @@ tnbLib::List<T>::List()
 
 
 template<class T>
-tnbLib::autoPtr<tnbLib::List<T> > tnbLib::List<T>::clone() const
+tnbLib::autoPtr<tnbLib::List<T>> tnbLib::List<T>::clone() const
 {
-	return autoPtr<List<T> >(new List<T>(*this));
+	return autoPtr<List<T>>(new List<T>(*this));
 }
 
 
@@ -63,7 +63,7 @@ tnbLib::label tnbLib::List<T>::size() const
 
 
 template<class T>
-tnbLib::Xfer< tnbLib::List<T> > tnbLib::List<T>::xfer()
+tnbLib::Xfer< tnbLib::List<T>> tnbLib::List<T>::xfer()
 {
 	return xferMove(*this);
 }

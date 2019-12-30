@@ -49,7 +49,7 @@ namespace tnbLib
 
 		//- Hashing function class.
 		//  Use Hasher directly for contiguous data. Otherwise hash incrementally.
-		template< class HashT = Hash<T> >
+		template< class HashT = Hash<T>>
 		class Hash
 		{
 		public:
@@ -100,7 +100,7 @@ namespace tnbLib
 		FixedList(Istream&);
 
 		//- Clone
-		autoPtr< FixedList<T, Size> > clone() const;
+		autoPtr< FixedList<T, Size>> clone() const;
 
 
 		// Member Functions

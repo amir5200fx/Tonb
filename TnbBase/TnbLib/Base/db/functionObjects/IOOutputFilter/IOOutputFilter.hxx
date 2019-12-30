@@ -22,7 +22,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::IOOutputFilter
+	tnbLib::IOOutputFilter
 
 Description
 	IOdictionary wrapper around OutputFilter to allow them to read from

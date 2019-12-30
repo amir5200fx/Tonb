@@ -134,7 +134,7 @@ namespace tnbLib
 	//- Inner-product between a spherical tensor and a vector
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<SphericalTensorN<Cmpt, length>, VectorN<Cmpt, length> >::type
+		innerProduct<SphericalTensorN<Cmpt, length>, VectorN<Cmpt, length>>::type
 		operator&
 		(
 			const SphericalTensorN<Cmpt, length>& st,
@@ -158,7 +158,7 @@ namespace tnbLib
 	//- Inner-product between a vector and a spherical tensor
 	template <class Cmpt, int length>
 	inline typename
-		innerProduct<VectorN<Cmpt, length>, SphericalTensorN<Cmpt, length> >::type
+		innerProduct<VectorN<Cmpt, length>, SphericalTensorN<Cmpt, length>>::type
 		operator&
 		(
 			const VectorN<Cmpt, length>& v,
@@ -255,7 +255,7 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * Global Operators  * * * * * * * * * * * * * //
 
 	template<class Cmpt, int length>
-	class outerProduct<Cmpt, SphericalTensorN<Cmpt, length> >
+	class outerProduct<Cmpt, SphericalTensorN<Cmpt, length>>
 	{
 	public:
 
@@ -272,7 +272,7 @@ namespace tnbLib
 
 
 	template<class Cmpt, int length>
-	class innerProduct<SphericalTensorN<Cmpt, length>, VectorN<Cmpt, length> >
+	class innerProduct<SphericalTensorN<Cmpt, length>, VectorN<Cmpt, length>>
 	{
 	public:
 
@@ -280,7 +280,7 @@ namespace tnbLib
 	};
 
 	template<class Cmpt, int length>
-	class innerProduct<VectorN<Cmpt, length>, SphericalTensorN<Cmpt, length> >
+	class innerProduct<VectorN<Cmpt, length>, SphericalTensorN<Cmpt, length>>
 	{
 	public:
 

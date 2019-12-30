@@ -8,11 +8,8 @@
 #define TEMPLATE
 #include <FieldFunctionsM.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 namespace tnbLib
 {
-
 	typedef Field<scalar> scalarField;
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -41,72 +38,85 @@ namespace tnbLib
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-	BINARY_TYPE_OPERATOR(scalar, scalar, scalar, +, add)
-		BINARY_TYPE_OPERATOR(scalar, scalar, scalar, -, subtract)
+	void add ( Field<scalar>& f, const scalar& s1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> operator + ( const scalar& s1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> operator + ( const scalar& s1, const tmp<Field<scalar>>& tf2 ); 
+	void add ( Field<scalar>& f, const UList<scalar>& f1, const scalar& s2 ); 
+	tmp<Field<scalar>> operator + ( const UList<scalar>& f1, const scalar& s2 ); 
+	tmp<Field<scalar>> operator + ( const tmp<Field<scalar>>& tf1, const scalar& s2 );
+		
+	void subtract ( Field<scalar>& f, const scalar& s1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> operator - ( const scalar& s1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> operator - ( const scalar& s1, const tmp<Field<scalar>>& tf2 );
+	void subtract ( Field<scalar>& f, const UList<scalar>& f1, const scalar& s2 );
+	tmp<Field<scalar>> operator - ( const UList<scalar>& f1, const scalar& s2 );
+	tmp<Field<scalar>> operator - ( const tmp<Field<scalar>>& tf1, const scalar& s2 );
 
-		BINARY_OPERATOR(scalar, scalar, scalar, *, multiply)
-		BINARY_OPERATOR(scalar, scalar, scalar, / , divide)
+		
+	void multiply ( Field<scalar>& f, const UList<scalar>& f1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> operator * ( const UList<scalar>& f1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> operator * ( const UList<scalar>& f1, const tmp<Field<scalar>>& tf2 );
+	tmp<Field<scalar>> operator * ( const tmp<Field<scalar>>& tf1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> operator * ( const tmp<Field<scalar>>& tf1, const tmp<Field<scalar>>& tf2 );
+		
+	 void divide ( Field<scalar>& f, const UList<scalar>& f1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> operator / ( const UList<scalar>& f1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> operator / ( const UList<scalar>& f1, const tmp<Field<scalar>>& tf2 ); 
+	tmp<Field<scalar>> operator / ( const tmp<Field<scalar>>& tf1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> operator / ( const tmp<Field<scalar>>& tf1, const tmp<Field<scalar>>& tf2 );
 
-		BINARY_TYPE_OPERATOR_SF(scalar, scalar, scalar, / , divide)
+		
+	 void divide ( Field<scalar>& f, const scalar& s1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> operator / ( const scalar& s1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> operator / ( const scalar& s1, const tmp<Field<scalar>>& tf2 );
 
-		BINARY_FUNCTION(scalar, scalar, scalar, pow)
-		BINARY_TYPE_FUNCTION(scalar, scalar, scalar, pow)
+		
+	 void pow ( Field<scalar>& f, const UList<scalar>& f1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> pow ( const UList<scalar>& f1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> pow ( const UList<scalar>& f1, const tmp<Field<scalar>>& tf2 ); 
+	tmp<Field<scalar>> pow ( const tmp<Field<scalar>>& tf1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> pow ( const tmp<Field<scalar>>& tf1, const tmp<Field<scalar>>& tf2 );
+		
+	void pow ( Field<scalar>& f, const scalar& s1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> pow ( const scalar& s1, const UList<scalar>& f2 );  
+	tmp<Field<scalar>> pow ( const scalar& s1, const tmp<Field<scalar>>& tf2 );
+	void pow ( Field<scalar>& f, const UList<scalar>& f1, const scalar& s2 ); 
+	tmp<Field<scalar>> pow ( const UList<scalar>& f1, const scalar& s2 ); 
+	tmp<Field<scalar>> pow ( const tmp<Field<scalar>>& tf1, const scalar& s2 );
 
-		BINARY_FUNCTION(scalar, scalar, scalar, atan2)
-		BINARY_TYPE_FUNCTION(scalar, scalar, scalar, atan2)
-
-
-		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-		UNARY_FUNCTION(scalar, scalar, pow3)
-		UNARY_FUNCTION(scalar, scalar, pow4)
-		UNARY_FUNCTION(scalar, scalar, pow5)
-		UNARY_FUNCTION(scalar, scalar, pow6)
-		UNARY_FUNCTION(scalar, scalar, sqrt)
-		UNARY_FUNCTION(scalar, scalar, sign)
-		UNARY_FUNCTION(scalar, scalar, pos)
-		UNARY_FUNCTION(scalar, scalar, neg)
-		UNARY_FUNCTION(scalar, scalar, exp)
-		UNARY_FUNCTION(scalar, scalar, log)
-		UNARY_FUNCTION(scalar, scalar, log10)
-		UNARY_FUNCTION(scalar, scalar, sin)
-		UNARY_FUNCTION(scalar, scalar, cos)
-		UNARY_FUNCTION(scalar, scalar, tan)
-		UNARY_FUNCTION(scalar, scalar, asin)
-		UNARY_FUNCTION(scalar, scalar, acos)
-		UNARY_FUNCTION(scalar, scalar, atan)
-		UNARY_FUNCTION(scalar, scalar, sinh)
-		UNARY_FUNCTION(scalar, scalar, cosh)
-		UNARY_FUNCTION(scalar, scalar, tanh)
-		UNARY_FUNCTION(scalar, scalar, asinh)
-		UNARY_FUNCTION(scalar, scalar, acosh)
-		UNARY_FUNCTION(scalar, scalar, atanh)
-		UNARY_FUNCTION(scalar, scalar, erf)
-		UNARY_FUNCTION(scalar, scalar, erfc)
-		UNARY_FUNCTION(scalar, scalar, lgamma)
-		UNARY_FUNCTION(scalar, scalar, j0)
-		UNARY_FUNCTION(scalar, scalar, j1)
-		UNARY_FUNCTION(scalar, scalar, y0)
-		UNARY_FUNCTION(scalar, scalar, y1)
-
+		
+	 
+	void atan2 ( Field<scalar>& f, const UList<scalar>& f1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> atan2 ( const UList<scalar>& f1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> atan2 ( const UList<scalar>& f1, const tmp<Field<scalar>>& tf2 );
+	tmp<Field<scalar>> atan2 ( const tmp<Field<scalar>>& tf1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> atan2 ( const tmp<Field<scalar>>& tf1, const tmp<Field<scalar>>& tf2 );
+		
+	 
+	void atan2 ( Field<scalar>& f, const scalar& s1, const UList<scalar>& f2 );
+	tmp<Field<scalar>> atan2 ( const scalar& s1, const UList<scalar>& f2 ); 
+	tmp<Field<scalar>> atan2 ( const scalar& s1, const tmp<Field<scalar>>& tf2 );
+	void atan2 ( Field<scalar>& f, const UList<scalar>& f1, const scalar& s2 ); 
+	tmp<Field<scalar>> atan2 ( const UList<scalar>& f1, const scalar& s2 );  
+	tmp<Field<scalar>> atan2 ( const tmp<Field<scalar>>& tf1, const scalar& s2 );
 
 #define BesselFunc(func)                                            \
 void func(scalarField& Res, const int n, const UList<scalar>& sf);  \
 tmp<scalarField> func(const int n, const UList<scalar>&);           \
 tmp<scalarField> func(const int n, const tmp<scalarField>&);
 
-		BesselFunc(jn)
-		BesselFunc(yn)
+	void jn(scalarField& Res, const int n, const UList<scalar>& sf);
+	tmp<scalarField> jn(const int n, const UList<scalar>&); 
+	tmp<scalarField> jn(const int n, const tmp<scalarField>&);
+		
+	void yn(scalarField& Res, const int n, const UList<scalar>& sf);
+	tmp<scalarField> yn(const int n, const UList<scalar>&); 
+	tmp<scalarField> yn(const int n, const tmp<scalarField>&);
 
 #undef BesselFunc
-
-
-		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+}
 
 #include <undefFieldFunctionsM.hxx>
 
-#endif // !_scalarField_Header
+#endif // !1
+

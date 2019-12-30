@@ -13,7 +13,7 @@ tnbLib::dlLibraryTable tnbLib::dlLibraryTable::loadedLibraries;
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 tnbLib::dlLibraryTable::dlLibraryTable()
-	: HashTable<fileName, void*, Hash<void*> >()
+	: HashTable<fileName, void*, Hash<void*>>()
 {}
 
 

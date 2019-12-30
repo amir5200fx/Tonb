@@ -19,7 +19,7 @@ namespace tnbLib
 			const T& switchValue,
 			const std::string& switchDescription,
 			globalControlDictSwitchSet switchSet,
-			std::map<std::string, std::list<controlSwitches<T> *> >** switchValuesTable
+			std::map<std::string, std::list<controlSwitches<T> *>>** switchValuesTable
 		)
 			:
 			switchSet_(switchSet),
@@ -31,11 +31,11 @@ namespace tnbLib
 			if (*switchValuesTable == NULL)
 			{
 				*switchValuesTable =
-					new std::map<std::string, std::list<controlSwitches<T> *> >();
+					new std::map<std::string, std::list<controlSwitches<T> *>>();
 			}
 
 			switchValuesTable_ = *switchValuesTable;
-			std::map<std::string, std::list<controlSwitches<T> *> >&
+			std::map<std::string, std::list<controlSwitches<T> *>>&
 				switchValues = *switchValuesTable_;
 
 			// Memorize this switch object address
@@ -50,7 +50,7 @@ namespace tnbLib
 
 				switchValues.insert
 				(
-					std::pair<std::string, std::list<controlSwitches<T>* > >
+					std::pair<std::string, std::list<controlSwitches<T>* >>
 					(
 						switchName,
 						pList
@@ -68,7 +68,7 @@ namespace tnbLib
 			// Unregister the switch from its list
 			if (switchValuesTable_)
 			{
-				std::map<std::string, std::list<controlSwitches<T> *> >&
+				std::map<std::string, std::list<controlSwitches<T> *>>&
 					switchValuesTable = *switchValuesTable_;
 
 				// Remove entry or key if pointers list is empty

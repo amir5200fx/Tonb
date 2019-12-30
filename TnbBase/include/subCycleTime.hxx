@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::subCycleTime
+	tnbLib::subCycleTime
 
 Description
 	A class for managing sub-cycling times

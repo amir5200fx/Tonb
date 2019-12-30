@@ -51,12 +51,12 @@ namespace tnbLib
 		{}
 
 		//- Construct by transferring the parameter contents
-		explicit HashSet(const Xfer<HashSet<Key, Hash> >& hs)
+		explicit HashSet(const Xfer<HashSet<Key, Hash>>& hs)
 			: HashTable<nil, Key, Hash>(hs)
 		{}
 
 		//- Construct by transferring the parameter contents
-		explicit HashSet(const Xfer<HashTable<nil, Key, Hash> >& hs)
+		explicit HashSet(const Xfer<HashTable<nil, Key, Hash>>& hs)
 			: HashTable<nil, Key, Hash>(hs)
 		{}
 
@@ -165,7 +165,7 @@ namespace tnbLib
 	typedef HashSet<> wordHashSet;
 
 	//- A HashSet with label keys.
-	typedef HashSet<label, Hash<label> > labelHashSet;
+	typedef HashSet<label, Hash<label>> labelHashSet;
 
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

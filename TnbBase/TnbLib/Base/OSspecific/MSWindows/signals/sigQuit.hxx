@@ -26,7 +26,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::sigQuit
+	tnbLib::sigQuit
 
 Description
 	Signal handler for QUIT interupt.
@@ -35,7 +35,7 @@ Description
 	runningJob file is removed.
 
 See Also
-	Foam::JobInfo
+	tnbLib::JobInfo
 
 SourceFiles
 	sigQuit.C

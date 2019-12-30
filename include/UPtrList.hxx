@@ -69,7 +69,7 @@ namespace tnbLib
 		explicit UPtrList(const label);
 
 		//- Construct by transferring the parameter contents
-		UPtrList(const Xfer<UPtrList<T> >&);
+		UPtrList(const Xfer<UPtrList<T>>&);
 
 		//- Construct as copy or re-use as specified.
 		UPtrList(UPtrList<T>&, bool reUse);
@@ -106,7 +106,7 @@ namespace tnbLib
 		void transfer(UPtrList<T>&);
 
 		//- Transfer contents to the Xfer container
-		Xfer<UPtrList<T> > xfer();
+		Xfer<UPtrList<T>> xfer();
 
 		//- Is element set
 		bool set(const label) const;

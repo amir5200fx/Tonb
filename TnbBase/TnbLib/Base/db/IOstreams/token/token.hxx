@@ -414,7 +414,7 @@ namespace tnbLib
     defineTemplateTypeNameAndDebugWithName(tokenCompound##Name##_, #Type, 0);
 
 #define addCompoundToRunTimeSelectionTable(Type, Name)                        \
-    token::compound::addIstreamConstructorToTable<token::Compound<Type > >    \
+    token::compound::addIstreamConstructorToTable<token::Compound<Type >>    \
         add##Name##IstreamConstructorToTable_;
 
 

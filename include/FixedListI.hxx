@@ -71,10 +71,10 @@ tnbLib::FixedList<T, Size>::FixedList(const FixedList<T, Size>& lst)
 
 
 template<class T, unsigned Size>
-tnbLib::autoPtr< tnbLib::FixedList<T, Size> >
+tnbLib::autoPtr< tnbLib::FixedList<T, Size>>
 tnbLib::FixedList<T, Size>::clone() const
 {
-	return autoPtr< FixedList<T, Size> >(new FixedList<T, Size>(*this));
+	return autoPtr< FixedList<T, Size>>(new FixedList<T, Size>(*this));
 }
 
 

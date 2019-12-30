@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::profilingPool
+	tnbLib::profilingPool
 
 Description
 	Collects all the data for profiling

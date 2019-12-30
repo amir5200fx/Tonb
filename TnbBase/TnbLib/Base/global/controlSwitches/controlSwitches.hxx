@@ -154,7 +154,7 @@ namespace tnbLib
 
 		template<class T>
 		class controlSwitches
-			: public safeBool<controlSwitches<T> > // using the CRTP idiom
+			: public safeBool<controlSwitches<T>> // using the CRTP idiom
 		{
 			// Private data
 
@@ -171,7 +171,7 @@ namespace tnbLib
 			std::string switchDescription_;
 
 			//- Handle to runTime switches list
-			std::map<std::string, std::list<controlSwitches<T> *> >*
+			std::map<std::string, std::list<controlSwitches<T> *>>*
 				switchValuesTable_;
 
 
@@ -194,7 +194,7 @@ namespace tnbLib
 				const T& switchValue,
 				const std::string& switchDescription,
 				globalControlDictSwitchSet switchSet,
-				std::map<std::string, std::list<controlSwitches<T> *> >**
+				std::map<std::string, std::list<controlSwitches<T> *>>**
 				switchesValues
 			);
 
@@ -254,7 +254,7 @@ namespace tnbLib
 		void printControlSwitches
 		(
 			const std::string&,
-			const std::map<std::string, std::list<debug::controlSwitches<T> *> >*,
+			const std::map<std::string, std::list<debug::controlSwitches<T> *>>*,
 			const char* commsTypesNames[] = NULL
 
 		);

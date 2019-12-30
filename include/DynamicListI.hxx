@@ -61,7 +61,7 @@ tnbLib::DynamicList<T, SizeInc, SizeMult, SizeDiv>::DynamicList
 template<class T, unsigned SizeInc, unsigned SizeMult, unsigned SizeDiv>
 tnbLib::DynamicList<T, SizeInc, SizeMult, SizeDiv>::DynamicList
 (
-	const Xfer<List<T> >& lst
+	const Xfer<List<T>>& lst
 )
 	:
 	List<T>(lst),
@@ -273,10 +273,10 @@ tnbLib::DynamicList<T, SizeInc, SizeMult, SizeDiv>::transfer
 
 
 template<class T, unsigned SizeInc, unsigned SizeMult, unsigned SizeDiv>
-tnbLib::Xfer< tnbLib::List<T> >
+tnbLib::Xfer< tnbLib::List<T>>
 tnbLib::DynamicList<T, SizeInc, SizeMult, SizeDiv>::xfer()
 {
-	return xferMoveTo< List<T> >(*this);
+	return xferMoveTo< List<T>>(*this);
 }
 
 

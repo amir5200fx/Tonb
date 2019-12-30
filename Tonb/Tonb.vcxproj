@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)TnbBase\Libraries\dlfcn\lib;$(SolutionDir)TnbBase\Libraries\zLib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(SolutionDir)TnbBase\Libraries\pcre\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)TnbBase\Libraries\dlfcn\lib;$(SolutionDir)TnbBase\Libraries\zLib\lib;$(SolutionDir)TnbBase\Libraries\pthreads\lib;$(SolutionDir)TnbBase\Libraries\pcre\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>

@@ -22,7 +22,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::JobInfo
+	tnbLib::JobInfo
 
 Description
 	Helper class for recording information about run/finished jobs.

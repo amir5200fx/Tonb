@@ -3,7 +3,7 @@
 // * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * * //
 
 template<class T>
-tnbLib::CompactListList<T>::CompactListList(const List<List<T> >& ll)
+tnbLib::CompactListList<T>::CompactListList(const List<List<T>>& ll)
 	:
 	offsets_(ll.size())
 {
@@ -71,7 +71,7 @@ tnbLib::CompactListList<T>::CompactListList
 template<class T>
 tnbLib::CompactListList<T>::CompactListList
 (
-	const Xfer<CompactListList<T> >& lst
+	const Xfer<CompactListList<T>>& lst
 )
 {
 	transfer(lst());
@@ -190,9 +190,9 @@ void tnbLib::CompactListList<T>::transfer(CompactListList<T>& a)
 // * * * * * * * * * * * * * * * Member Operators  * * * * * * * * * * * * * //
 
 template<class T>
-tnbLib::List<tnbLib::List<T> > tnbLib::CompactListList<T>::operator()() const
+tnbLib::List<tnbLib::List<T>> tnbLib::CompactListList<T>::operator()() const
 {
-	List<List<T> > ll(offsets_.size());
+	List<List<T>> ll(offsets_.size());
 
 	label offsetPrev = 0;
 	forAll(offsets_, i)

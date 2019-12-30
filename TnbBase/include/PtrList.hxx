@@ -89,7 +89,7 @@ namespace tnbLib
 		PtrList(const PtrList<T>&, const CloneArg&);
 
 		//- Construct by transferring the parameter contents
-		PtrList(const Xfer<PtrList<T> >&);
+		PtrList(const Xfer<PtrList<T>>&);
 
 		//- Construct as copy or re-use as specified.
 		PtrList(PtrList<T>&, bool reUse);
@@ -144,7 +144,7 @@ namespace tnbLib
 		void transfer(PtrList<T>&);
 
 		//- Transfer contents to the Xfer container
-		Xfer<PtrList<T> > xfer();
+		Xfer<PtrList<T>> xfer();
 
 		//- Is element set
 		bool set(const label) const;

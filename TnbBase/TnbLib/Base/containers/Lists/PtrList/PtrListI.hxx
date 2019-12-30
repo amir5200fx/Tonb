@@ -67,7 +67,7 @@ tnbLib::autoPtr<T> tnbLib::PtrList<T>::set
 
 
 template<class T>
-tnbLib::Xfer<tnbLib::PtrList<T> > tnbLib::PtrList<T>::xfer()
+tnbLib::Xfer<tnbLib::PtrList<T>> tnbLib::PtrList<T>::xfer()
 {
 	return xferMove(*this);
 }

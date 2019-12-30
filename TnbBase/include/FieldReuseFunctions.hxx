@@ -2,6 +2,7 @@
 #ifndef _FieldReuseFunctions_Header
 #define _FieldReuseFunctions_Header
 
+#include <tmp.hxx>
 #include <Field.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -16,12 +17,12 @@ namespace tnbLib
 	{
 	public:
 
-		static tmp<Field<TypeR> > New(const tmp<Field<Type1> >& tf1)
+		static tmp<Field<TypeR>> New(const tmp<Field<Type1>>& tf1)
 		{
-			return tmp<Field<TypeR> >(new Field<TypeR>(tf1().size()));
+			return tmp<Field<TypeR>>(new Field<TypeR>(tf1().size()));
 		}
 
-		static void clear(const tmp<Field<Type1> >& tf1)
+		static void clear(const tmp<Field<Type1>>& tf1)
 		{
 			tf1.clear();
 		}
@@ -33,7 +34,7 @@ namespace tnbLib
 	{
 	public:
 
-		static tmp<Field<TypeR> > New(const tmp<Field<TypeR> >& tf1)
+		static tmp<Field<TypeR>> New(const tmp<Field<TypeR>>& tf1)
 		{
 			if (tf1.isTmp())
 			{
@@ -41,11 +42,11 @@ namespace tnbLib
 			}
 			else
 			{
-				return tmp<Field<TypeR> >(new Field<TypeR>(tf1().size()));
+				return tmp<Field<TypeR>>(new Field<TypeR>(tf1().size()));
 			}
 		}
 
-		static void clear(const tmp<Field<TypeR> >& tf1)
+		static void clear(const tmp<Field<TypeR>>& tf1)
 		{
 			if (tf1.isTmp())
 			{
@@ -60,19 +61,19 @@ namespace tnbLib
 	{
 	public:
 
-		static tmp<Field<TypeR> > New
+		static tmp<Field<TypeR>> New
 		(
-			const tmp<Field<Type1> >& tf1,
-			const tmp<Field<Type2> >& tf2
+			const tmp<Field<Type1>>& tf1,
+			const tmp<Field<Type2>>& tf2
 		)
 		{
-			return tmp<Field<TypeR> >(new Field<TypeR>(tf1().size()));
+			return tmp<Field<TypeR>>(new Field<TypeR>(tf1().size()));
 		}
 
 		static void clear
 		(
-			const tmp<Field<Type1> >& tf1,
-			const tmp<Field<Type2> >& tf2
+			const tmp<Field<Type1>>& tf1,
+			const tmp<Field<Type2>>& tf2
 		)
 		{
 			tf1.clear();
@@ -86,10 +87,10 @@ namespace tnbLib
 	{
 	public:
 
-		static tmp<Field<TypeR> > New
+		static tmp<Field<TypeR>> New
 		(
-			const tmp<Field<Type1> >& tf1,
-			const tmp<Field<TypeR> >& tf2
+			const tmp<Field<Type1>>& tf1,
+			const tmp<Field<TypeR>>& tf2
 		)
 		{
 			if (tf2.isTmp())
@@ -98,14 +99,14 @@ namespace tnbLib
 			}
 			else
 			{
-				return tmp<Field<TypeR> >(new Field<TypeR>(tf1().size()));
+				return tmp<Field<TypeR>>(new Field<TypeR>(tf1().size()));
 			}
 		}
 
 		static void clear
 		(
-			const tmp<Field<Type1> >& tf1,
-			const tmp<Field<TypeR> >& tf2
+			const tmp<Field<Type1>>& tf1,
+			const tmp<Field<TypeR>>& tf2
 		)
 		{
 			tf1.clear();
@@ -122,10 +123,10 @@ namespace tnbLib
 	{
 	public:
 
-		static tmp<Field<TypeR> > New
+		static tmp<Field<TypeR>> New
 		(
-			const tmp<Field<TypeR> >& tf1,
-			const tmp<Field<Type2> >& tf2
+			const tmp<Field<TypeR>>& tf1,
+			const tmp<Field<Type2>>& tf2
 		)
 		{
 			if (tf1.isTmp())
@@ -134,14 +135,14 @@ namespace tnbLib
 			}
 			else
 			{
-				return tmp<Field<TypeR> >(new Field<TypeR>(tf1().size()));
+				return tmp<Field<TypeR>>(new Field<TypeR>(tf1().size()));
 			}
 		}
 
 		static void clear
 		(
-			const tmp<Field<TypeR> >& tf1,
-			const tmp<Field<Type2> >& tf2
+			const tmp<Field<TypeR>>& tf1,
+			const tmp<Field<Type2>>& tf2
 		)
 		{
 			if (tf1.isTmp())
@@ -158,10 +159,10 @@ namespace tnbLib
 	{
 	public:
 
-		static tmp<Field<TypeR> > New
+		static tmp<Field<TypeR>> New
 		(
-			const tmp<Field<TypeR> >& tf1,
-			const tmp<Field<TypeR> >& tf2
+			const tmp<Field<TypeR>>& tf1,
+			const tmp<Field<TypeR>>& tf2
 		)
 		{
 			if (tf1.isTmp())
@@ -174,14 +175,14 @@ namespace tnbLib
 			}
 			else
 			{
-				return tmp<Field<TypeR> >(new Field<TypeR>(tf1().size()));
+				return tmp<Field<TypeR>>(new Field<TypeR>(tf1().size()));
 			}
 		}
 
 		static void clear
 		(
-			const tmp<Field<TypeR> >& tf1,
-			const tmp<Field<TypeR> >& tf2
+			const tmp<Field<TypeR>>& tf1,
+			const tmp<Field<TypeR>>& tf2
 		)
 		{
 			if (tf1.isTmp())

@@ -14,41 +14,41 @@ namespace tnbLib
 
 	template<class T>
 	class Map
-		: public HashTable<T, label, Hash<label> >
+		: public HashTable<T, label, Hash<label>>
 	{
 
 	public:
 
-		typedef typename HashTable<T, label, Hash<label> >::iterator iterator;
+		typedef typename HashTable<T, label, Hash<label>>::iterator iterator;
 
-		typedef typename HashTable<T, label, Hash<label> >::const_iterator
+		typedef typename HashTable<T, label, Hash<label>>::const_iterator
 			const_iterator;
 
 		// Constructors
 
 			//- Construct given initial size
 		Map(const label size = 128)
-			: HashTable<T, label, Hash<label> >(size)
+			: HashTable<T, label, Hash<label>>(size)
 		{}
 
 		//- Construct from Istream
 		Map(Istream& is)
-			: HashTable<T, label, Hash<label> >(is)
+			: HashTable<T, label, Hash<label>>(is)
 		{}
 
 		//- Construct as copy
 		Map(const Map<T>& map)
-			: HashTable<T, label, Hash<label> >(map)
+			: HashTable<T, label, Hash<label>>(map)
 		{}
 
 		//- Construct by transferring the parameter contents
-		Map(const Xfer<Map<T> >& map)
-			: HashTable<T, label, Hash<label> >(map)
+		Map(const Xfer<Map<T>>& map)
+			: HashTable<T, label, Hash<label>>(map)
 		{}
 
 		//- Construct by transferring the parameter contents
-		Map(const Xfer<HashTable<T, label, Hash<label> > >& map)
-			: HashTable<T, label, Hash<label> >(map)
+		Map(const Xfer<HashTable<T, label, Hash<label>>>& map)
+			: HashTable<T, label, Hash<label>>(map)
 		{}
 
 	};

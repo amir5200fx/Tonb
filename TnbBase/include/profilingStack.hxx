@@ -23,7 +23,7 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	Foam::profilingStack
+	tnbLib::profilingStack
 
 Description
 	Stack of the profilingInfo-items that are currently used

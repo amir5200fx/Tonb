@@ -32,10 +32,10 @@ tnbLib::CompactListList<T>::CompactListList
 
 
 template<class T>
-tnbLib::autoPtr<tnbLib::CompactListList<T> >
+tnbLib::autoPtr<tnbLib::CompactListList<T>>
 tnbLib::CompactListList<T>::clone() const
 {
-	return autoPtr<CompactListList<T> >(new CompactListList<T>(*this));
+	return autoPtr<CompactListList<T>>(new CompactListList<T>(*this));
 }
 
 
@@ -144,7 +144,7 @@ tnbLib::label tnbLib::CompactListList<T>::whichColumn
 
 
 template<class T>
-tnbLib::Xfer<tnbLib::CompactListList<T> > tnbLib::CompactListList<T>::xfer()
+tnbLib::Xfer<tnbLib::CompactListList<T>> tnbLib::CompactListList<T>::xfer()
 {
 	return xferMove(*this);
 }
