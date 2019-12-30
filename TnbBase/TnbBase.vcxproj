@@ -132,6 +132,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBase.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\Dictionary\DictionaryTemplate.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\PtrDictionary\PtrDictionary.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\UDictionary\UDictionary.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.hxx" />
     <ClInclude Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.hxx" />
     <ClInclude Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.hxx" />
     <ClInclude Include="TnbLib\Base\containers\HashTables\HashTable\HashTable.hxx" />
@@ -546,6 +551,12 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\Primitives\zero\zeroI.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBase.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBaseIO.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\Dictionary\DictionaryTemplate.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\PtrDictionary\PtrDictionary.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UDictionary\UDictionary.cxx" />
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.cxx" />
     <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.cxx" />
     <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTableIO.cxx" />
     <ClCompile Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.cxx" />

@@ -277,10 +277,53 @@ operator op                                                                   \
     const dimensioned<Type>&                                                  \
 );
 
-	PRODUCT_OPERATOR(outerProduct, *, outer)
-		PRODUCT_OPERATOR(crossProduct, ^, cross)
-		PRODUCT_OPERATOR(innerProduct, &, dot)
-		PRODUCT_OPERATOR(scalarProduct, &&, dotdot)
+	template <class Type1, class Type2>
+	dimensioned<typename outerProduct<Type1, Type2>::type> operator
+	*(const dimensioned<Type1>&, const dimensioned<Type2>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename outerProduct<Type, Form>::type> operator *(const dimensioned<Type>&
+	                                                                , const VectorSpace<Form, Cmpt, nCmpt>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename outerProduct<Form, Type>::type> operator *(const VectorSpace<Form, Cmpt, nCmpt>&
+	                                                                , const dimensioned<Type>&);
+		
+	template <class Type1, class Type2>
+	dimensioned<typename crossProduct<Type1, Type2>::type> operator
+	^(const dimensioned<Type1>&, const dimensioned<Type2>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename crossProduct<Type, Form>::type> operator ^(const dimensioned<Type>&
+	                                                                , const VectorSpace<Form, Cmpt, nCmpt>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename crossProduct<Form, Type>::type> operator ^(const VectorSpace<Form, Cmpt, nCmpt>&
+	                                                                , const dimensioned<Type>&);
+		
+	template <class Type1, class Type2>
+	dimensioned<typename innerProduct<Type1, Type2>::type> operator
+	&(const dimensioned<Type1>&, const dimensioned<Type2>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename innerProduct<Type, Form>::type> operator &(const dimensioned<Type>&
+	                                                                , const VectorSpace<Form, Cmpt, nCmpt>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename innerProduct<Form, Type>::type> operator &(const VectorSpace<Form, Cmpt, nCmpt>&
+	                                                                , const dimensioned<Type>&);
+		
+	template <class Type1, class Type2>
+	dimensioned<typename scalarProduct<Type1, Type2>::type> operator &&(const dimensioned<Type1>&
+	                                                                    , const dimensioned<Type2>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename scalarProduct<Type, Form>::type> operator &&(const dimensioned<Type>&
+	                                                                  , const VectorSpace<Form, Cmpt, nCmpt>&);
+
+	template <class Type, class Form, class Cmpt, int nCmpt>
+	dimensioned<typename scalarProduct<Form, Type>::type> operator &&(const VectorSpace<Form, Cmpt, nCmpt>&
+	                                                                  , const dimensioned<Type>&);
 
 #undef PRODUCT_OPERATOR
 

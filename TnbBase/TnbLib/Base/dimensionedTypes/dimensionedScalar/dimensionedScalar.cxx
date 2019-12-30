@@ -346,7 +346,7 @@ dimensionedScalar func(const dimensionedScalar& ds)                        \
 		{
 			FatalErrorIn("j0" "(const dimensionedScalar& ds)") << "ds not dimensionless" << abort(FatalError);
 		}
-		return dimensionedScalar("j0" "(" + ds.name() + ')', dimless, ::j0(ds.value()));
+		return dimensionedScalar("j0" "(" + ds.name() + ')', dimless, ::_j0(ds.value()));
 	}
 		
 	dimensionedScalar j1(const dimensionedScalar& ds)
@@ -355,7 +355,7 @@ dimensionedScalar func(const dimensionedScalar& ds)                        \
 		{
 			FatalErrorIn("j1" "(const dimensionedScalar& ds)") << "ds not dimensionless" << abort(FatalError);
 		}
-		return dimensionedScalar("j1" "(" + ds.name() + ')', dimless, ::j1(ds.value()));
+		return dimensionedScalar("j1" "(" + ds.name() + ')', dimless, ::_j1(ds.value()));
 	}
 		
 	dimensionedScalar y0(const dimensionedScalar& ds)
@@ -364,7 +364,7 @@ dimensionedScalar func(const dimensionedScalar& ds)                        \
 		{
 			FatalErrorIn("y0" "(const dimensionedScalar& ds)") << "ds not dimensionless" << abort(FatalError);
 		}
-		return dimensionedScalar("y0" "(" + ds.name() + ')', dimless, ::y0(ds.value()));
+		return dimensionedScalar("y0" "(" + ds.name() + ')', dimless, ::_y0(ds.value()));
 	}
 		
 	dimensionedScalar y1(const dimensionedScalar& ds)
@@ -373,7 +373,7 @@ dimensionedScalar func(const dimensionedScalar& ds)                        \
 		{
 			FatalErrorIn("y1" "(const dimensionedScalar& ds)") << "ds not dimensionless" << abort(FatalError);
 		}
-		return dimensionedScalar("y1" "(" + ds.name() + ')', dimless, ::y1(ds.value()));
+		return dimensionedScalar("y1" "(" + ds.name() + ')', dimless, ::_y1(ds.value()));
 	}
 
 #undef transFunc
@@ -404,7 +404,7 @@ dimensionedScalar func(const int n, const dimensionedScalar& ds)           \
 		{
 			FatalErrorIn("jn" "(const int n, const dimensionedScalar& ds)") << "ds not dimensionless" << abort(FatalError);
 		}
-		return dimensionedScalar("jn" "(" + name(n) + ',' + ds.name() + ')', dimless, ::jn(n, ds.value()));
+		return dimensionedScalar("jn" "(" + name(n) + ',' + ds.name() + ')', dimless, ::_jn(n, ds.value()));
 	}
 		
 	dimensionedScalar yn(const int n, const dimensionedScalar& ds)
@@ -413,7 +413,7 @@ dimensionedScalar func(const int n, const dimensionedScalar& ds)           \
 		{
 			FatalErrorIn("yn" "(const int n, const dimensionedScalar& ds)") << "ds not dimensionless" << abort(FatalError);
 		}
-		return dimensionedScalar("yn" "(" + name(n) + ',' + ds.name() + ')', dimless, ::yn(n, ds.value()));
+		return dimensionedScalar("yn" "(" + name(n) + ',' + ds.name() + ')', dimless, ::_yn(n, ds.value()));
 	}
 
 #undef transFunc

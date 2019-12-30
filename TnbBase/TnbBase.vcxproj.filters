@@ -721,6 +721,21 @@
     <Filter Include="TnbLib\Base\fields\FieldFields\vectorNFieldFields">
       <UniqueIdentifier>{b130acb5-6fab-4eaf-ad0e-8d4468b9fe81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\containers\Dictionaries\Dictionary">
+      <UniqueIdentifier>{bf53145a-636f-4d42-96a6-fe1bf1ae3ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Dictionaries\DictionaryBase">
+      <UniqueIdentifier>{2565588d-813e-445a-a006-86410a439f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Dictionaries\PtrDictionary">
+      <UniqueIdentifier>{d947b124-873e-4573-8f0f-3474941b17d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Dictionaries\UDictionary">
+      <UniqueIdentifier>{d3f7d971-9a3c-418a-8bb7-ed6946a781f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary">
+      <UniqueIdentifier>{d11c2460-f0df-4bc0-9f5e-8d1824fc0d77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1959,6 +1974,21 @@
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedTypes.hxx">
       <Filter>TnbLib\Base\dimensionedTypes</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBase.hxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\DictionaryBase</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\Dictionary\DictionaryTemplate.hxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\Dictionary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\PtrDictionary\PtrDictionary.hxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\PtrDictionary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\UDictionary\UDictionary.hxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\UDictionary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.hxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\UPtrDictionary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2797,6 +2827,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN\dimensionedVectorTensorN.cxx">
       <Filter>TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBase.cxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\DictionaryBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBaseIO.cxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\DictionaryBase</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\Dictionary\DictionaryTemplate.cxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\Dictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\PtrDictionary\PtrDictionary.cxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\PtrDictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UDictionary\UDictionary.cxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\UDictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.cxx">
+      <Filter>TnbLib\Base\containers\Dictionaries\UPtrDictionary</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
