@@ -6,7 +6,6 @@ using namespace tnbLib;
 int main()
 {
 
-	Field<scalar> f;
 
 	return 0;
 }

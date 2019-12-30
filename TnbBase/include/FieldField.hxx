@@ -39,9 +39,8 @@ namespace tnbLib
 
 	template<template<class> class Field, class Type>
 	class FieldField
-		:
-		public refCount,
-		public PtrList<Field<Type> >
+		: public refCount
+		, public PtrList<Field<Type> >
 	{
 
 	public:
