@@ -2,6 +2,9 @@
 #ifndef _FieldFieldReuseFunctions_Header
 #define _FieldFieldReuseFunctions_Header
 
+#include <tmp.hxx>
+#include <FieldField.hxx>
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
