@@ -2,7 +2,9 @@
 #ifndef _HashSet_Header
 #define _HashSet_Header
 
+#include <Hash.hxx>
 #include <HashTable.hxx>
+#include <UList.hxx>
 #include <nil.hxx>
 
 namespace tnbLib

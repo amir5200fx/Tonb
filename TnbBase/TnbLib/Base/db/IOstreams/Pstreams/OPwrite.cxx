@@ -44,7 +44,7 @@ bool tnbLib::OPstream::write
 		transferFailed = MPI_Bsend
 		(
 			const_cast<char*>(buf),
-			bufSize,
+			(int)bufSize,
 			MPI_PACKED,
 			procID(toProcNo),
 			msgType(),
@@ -56,7 +56,7 @@ bool tnbLib::OPstream::write
 		transferFailed = MPI_Send
 		(
 			const_cast<char*>(buf),
-			bufSize,
+			(int)bufSize,
 			MPI_PACKED,
 			procID(toProcNo),
 			msgType(),
@@ -70,7 +70,7 @@ bool tnbLib::OPstream::write
 		transferFailed = MPI_Isend
 		(
 			const_cast<char*>(buf),
-			bufSize,
+			(int)bufSize,
 			MPI_PACKED,
 			procID(toProcNo),
 			msgType(),

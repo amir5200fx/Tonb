@@ -4,6 +4,7 @@
 
 #include <label.hxx>
 #include <uLabel.hxx>
+#include <List.hxx>
 #include <word.hxx>
 #include <Xfer.hxx>
 #include <className.hxx>

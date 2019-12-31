@@ -68,7 +68,7 @@ tnbLib::label tnbLib::IPstream::read
 				MPI_Recv
 				(
 					buf,
-					bufSize,
+					(int)bufSize,
 					MPI_PACKED,
 					procID(fromProcNo),
 					msgType(),
@@ -116,7 +116,7 @@ tnbLib::label tnbLib::IPstream::read
 				MPI_Irecv
 				(
 					buf,
-					bufSize,
+					(int)bufSize,
 					MPI_PACKED,
 					procID(fromProcNo),
 					msgType(),

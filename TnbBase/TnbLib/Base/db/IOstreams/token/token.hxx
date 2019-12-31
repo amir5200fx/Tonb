@@ -9,6 +9,7 @@
 #include <InfoProxy.hxx>
 #include <refCount.hxx>
 #include <typeInfo.hxx>
+#include <autoPtr.hxx>
 
 #define NoHashTableC
 #include <runTimeSelectionTables.hxx>
@@ -19,7 +20,7 @@ namespace tnbLib
 {
 
 	// Forward declaration of friend functions and operators
-
+	class Istream;
 	class token;
 	Istream& operator>>(Istream&, token&);
 	Ostream& operator<<(Ostream&, const token&);

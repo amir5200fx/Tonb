@@ -499,4 +499,12 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <HashTableI.hxx>
+
+#ifndef NoHashTableC
+#ifdef NoRepository
+#   include <HashTable.cxx>
+#endif
+#endif
+
 #endif // !_HashTable_Header

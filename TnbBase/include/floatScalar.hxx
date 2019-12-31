@@ -170,11 +170,11 @@ namespace tnbLib
 
 		if (maga > magb)
 		{
-			return maga * ::sqrt(1.0 + sqr(magb / maga));
+			return maga * ::sqrt((floatScalar)1.0 + sqr(magb / maga));
 		}
 		else
 		{
-			return magb < ScalarVSMALL ? (floatScalar)0 : magb * ::sqrt(1.0 + sqr(maga / magb));
+			return magb < ScalarVSMALL ? (floatScalar)0 : magb * ::sqrt((floatScalar)1.0 + sqr(maga / magb));
 		}
 	}
 
@@ -200,7 +200,7 @@ namespace tnbLib
 
 	inline floatScalar inv(const floatScalar s)
 	{
-		return 1.0 / s;
+		return (floatScalar)1.0 / s;
 	}
 
 	inline floatScalar dot(const floatScalar s1, const floatScalar s2)

@@ -736,6 +736,9 @@
     <Filter Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary">
       <UniqueIdentifier>{d11c2460-f0df-4bc0-9f5e-8d1824fc0d77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\containers\Identifiers\Keyed">
+      <UniqueIdentifier>{97f41a3d-0f10-44de-8a2d-e3f83bab6808}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1989,6 +1992,12 @@
     <ClInclude Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.hxx">
       <Filter>TnbLib\Base\containers\Dictionaries\UPtrDictionary</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Identifiers\Keyed\Keyed.hxx">
+      <Filter>TnbLib\Base\containers\Identifiers\Keyed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Identifiers\Keyed\KeyedI.hxx">
+      <Filter>TnbLib\Base\containers\Identifiers\Keyed</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -2845,6 +2854,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.cxx">
       <Filter>TnbLib\Base\containers\Dictionaries\UPtrDictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\Stack\Stack.cxx">
+      <Filter>TnbLib\Base\containers\Lists\Stack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
