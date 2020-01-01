@@ -2406,6 +2406,84 @@
     <ClInclude Include="TnbLib\Base\fields\ReadFields\ReadFields.hxx">
       <Filter>TnbLib\Base\fields\ReadFields</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\point2D\point2D.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\point2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\point2D\point2DField.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\point2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\point2D\point2DFieldFwd.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\point2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\point\point.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\point\pointFieldFwd.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\point\pointField.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\point\pointIOField.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\objectHit\objectHit.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\objectHit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\objectHit\point2DHit.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\objectHit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\objectHit\pointHit.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\objectHit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\objectHit\PointHitTemplate.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\objectHit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\line\line.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\line\lineI.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\line\linePoint2DRef.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\line\linePointRef.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\plane\plane.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\triangle\triangle.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\triangle\triangleI.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\triangle\intersection.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\triangle\triPointRef.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\triangle\triangleFuncs.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\tetrahedron\tetrahedron.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\tetrahedron</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\tetrahedron\tetrahedronI.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\tetrahedron</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\tetrahedron\tetPointRef.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\tetrahedron</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\pyramid\pyramid.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\pyramid</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\primitiveShapes\pyramid\pyramidI.hxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\pyramid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -3328,6 +3406,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\fields\ReadFields\ReadFields.cxx">
       <Filter>TnbLib\Base\fields\ReadFields</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\line\line.cxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\line</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\plane\plane.cxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\triangle\intersection.cxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\triangle\triangle.cxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\triangle\triangleFuncs.cxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\tetrahedron\tetrahedron.cxx">
+      <Filter>TnbLib\Base\meshes\primitiveShapes\tetrahedron</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
