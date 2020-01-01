@@ -5,3 +5,7 @@
 #define List_FOR_ALL(f, i) register label i = (f).size(); while (i--) {
 #define List_END_FOR_ALL  }
 #define TEMPLATE 
+#define forAll(list, i)
+#define forAllReverse(list, i)
+#define forAllIter(Container,container,iter) 
+#define forAllConstIter(Container,container,iter) 
