@@ -55,7 +55,7 @@ namespace tnbLib
 			const bool hit,
 			const Point& p,
 			const scalar dist,
-			const bool eligibleMiss
+			const bool eligibleMiss = false //- ?????????
 		)
 			:
 			hit_(hit),
