@@ -9,3 +9,8 @@
 #define forAllReverse(list, i)
 #define forAllIter(Container,container,iter) 
 #define forAllConstIter(Container,container,iter) 
+#define defineCompoundTypeName(Type, Name) 
+#define addCompoundToRunTimeSelectionTable(Type, Name)
+#define addToRunTimeSelectionTable(baseType,thisType,argNames) 
+#define declareRunTimeSelectionTable(autoPtr,baseType,argNames,argList,parList)
+#define defineRunTimeSelectionTable(baseType,argNames)

@@ -47,6 +47,8 @@ namespace tnbLib
 
 	public:
 
+		typedef UList<T> base;
+
 		// Static data members
 
 			//- Empty list
