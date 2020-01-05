@@ -3,6 +3,7 @@
 #include <polyMesh.hxx>
 #include <primitiveMesh.hxx>
 #include <treeNode.hxx>
+#include <octree.hxx>
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 

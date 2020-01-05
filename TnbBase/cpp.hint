@@ -14,3 +14,4 @@
 #define addToRunTimeSelectionTable(baseType,thisType,argNames) 
 #define declareRunTimeSelectionTable(autoPtr,baseType,argNames,argList,parList)
 #define defineRunTimeSelectionTable(baseType,argNames)
+#define TypeName(TypeNameString) 

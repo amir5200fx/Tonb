@@ -2,6 +2,7 @@
 
 #include <SortableList.hxx>
 #include <ListOps.hxx>
+#include <IOstreams.hxx>
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 

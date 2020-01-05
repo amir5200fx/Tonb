@@ -15,6 +15,7 @@
 #include <ListOps.hxx>
 #include <faceList.hxx>
 
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
@@ -260,7 +261,7 @@ void tnbLib::processorPolyPatch::initUpdateMesh()
 			label faceI = pointFaces()[patchPointI][0];
 
 			pointFace[patchPointI] = faceI;
-
+			
 			const face& f = localFaces()[faceI];
 
 			pointIndex[patchPointI] = findIndex(f, patchPointI);

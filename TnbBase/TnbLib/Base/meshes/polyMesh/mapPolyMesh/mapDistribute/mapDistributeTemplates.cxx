@@ -1,6 +1,8 @@
 #include <mapDistribute.hxx>
 
 #include <Pstream.hxx>
+#include <OPstream.hxx>
+#include <IPstream.hxx>
 
 // * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * //
 

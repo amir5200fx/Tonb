@@ -2,6 +2,8 @@
 
 #include <entry.hxx>
 #include <demandDrivenData.hxx>
+#include <labelList.hxx>
+#include <Map.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

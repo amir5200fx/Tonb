@@ -1,6 +1,6 @@
 #include <PrimitivePatchTemplate.hxx>
 
-#include <DynamicList.hxx>
+#include <dynamicLabelList.hxx>
 
 // * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * //
 

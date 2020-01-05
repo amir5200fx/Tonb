@@ -4,6 +4,9 @@
 
 #include <bool.hxx>
 #include <point.hxx>
+#include <error.hxx>
+#include <OSstream.hxx>
+#include <Istream.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

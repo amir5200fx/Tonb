@@ -5,6 +5,8 @@
 #include <DynamicList.hxx>
 #include <dimensionedConstants.hxx>
 #include <triPointRef.hxx>
+#include <SubField.hxx>
+#include <HashSet.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

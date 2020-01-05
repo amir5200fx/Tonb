@@ -1,6 +1,7 @@
 #include <interpolationTable.hxx>
 
 #include <IFstream.hxx>
+#include <dictionary.hxx>
 
 // * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
 

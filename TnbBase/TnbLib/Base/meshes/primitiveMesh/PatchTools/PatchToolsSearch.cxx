@@ -1,5 +1,6 @@
 #include <PatchTools.hxx>
 
+#include <dynamicLabelList.hxx>
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // Finds area, starting at faceI, delimited by borderEdge.

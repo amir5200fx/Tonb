@@ -3,6 +3,11 @@
 #include <linePointRef.hxx>
 #include <meshTools.hxx>
 #include <OFstream.hxx>
+#include <BiIndirectList.hxx>
+#include <UIndirectList.hxx>
+#include <dynamicLabelList.hxx>
+#include <IndirectList.hxx>
+#include <PtrList.hxx>
 
 // * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 

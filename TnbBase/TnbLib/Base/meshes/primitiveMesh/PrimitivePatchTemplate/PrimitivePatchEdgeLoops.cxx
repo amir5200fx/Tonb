@@ -1,5 +1,7 @@
 #include <PrimitivePatchTemplate.hxx>
 
+#include <dynamicLabelList.hxx>
+
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 template
