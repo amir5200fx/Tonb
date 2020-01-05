@@ -11,8 +11,7 @@
 // external use:
 // ~~~~~~~~~~~~~
 // declare a run-time selection:
-#define declareRunTimeSelectionTable\
-(autoPtr,baseType,argNames,argList,parList)                                   \
+#define declareRunTimeSelectionTable(autoPtr,baseType,argNames,argList,parList) \
                                                                               \
     /* Construct from argList function pointer type */                        \
     typedef autoPtr< baseType > (*argNames##ConstructorPtr)argList;           \
@@ -170,8 +169,7 @@
 // external use:
 // ~~~~~~~~~~~~~
 // define run-time selection table
-#define defineRunTimeSelectionTable\
-(baseType,argNames)                                                           \
+#define defineRunTimeSelectionTable(baseType,argNames)                        \
                                                                               \
     defineRunTimeSelectionTablePtr(baseType,argNames);                        \
     defineRunTimeSelectionTableConstructor(baseType,argNames);                \

@@ -43,6 +43,8 @@ namespace tnbLib
 
 	public:
 
+		typedef List<Type> base;
+
 		//- Component type
 		typedef typename pTraits<Type>::cmptType cmptType;
 
