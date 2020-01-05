@@ -1396,6 +1396,21 @@
     <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated">
       <UniqueIdentifier>{2849c90c-2cae-4d00-960b-85965ebfdb41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm">
+      <UniqueIdentifier>{2e7c5fde-2578-4191-9983-630ab7dd1e4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm">
+      <UniqueIdentifier>{b74becef-3d34-4531-87c3-6f4abc8b1a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm">
+      <UniqueIdentifier>{6cf22419-3d30-4b05-9524-f4004006156b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm">
+      <UniqueIdentifier>{fb002c8b-8143-4ef6-8352-51779630a11c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm">
+      <UniqueIdentifier>{b0362f43-5cc4-4aac-8742-4e2802adef94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -3567,6 +3582,90 @@
     <ClInclude Include="TnbLib\Base\db\IOstreams\hashes\OSHA1stream.hxx">
       <Filter>TnbLib\Base\db\IOstreams\hashes</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\blockLduMatrices.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\blockVectorNMatrices.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\scalarBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\sphericalTensorBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\symmTensorBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\tensorBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeff.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\blockCoeffBase.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\blockCoeffs.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\DecoupledBlockCoeff.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\scalarBlockCoeff.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\sphericalTensorBlockCoeff.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\symmTensor4thOrderBlockCoeff.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\symmTensorBlockCoeff.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\tensorBlockCoeff.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm\BlockCoeffNorm.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\CoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\CoeffFieldFunctions.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\coeffFields.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\DecoupledCoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\DecoupledCoeffFieldFunctions.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\diagTensorCoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\scalarCoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\sphericalTensorCoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\symmTensor4thOrderCoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\symmTensorCoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\CoeffField\tensorCoeffField.hxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -5263,6 +5362,102 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\meshes\meshShapes\cellShape\cellShapeIOList.cxx">
       <Filter>TnbLib\Base\meshes\meshShapes\cellShape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrixATmul.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrixDecouple.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrixDecoupledHOps.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrixHOps.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\blockLduMatrixName.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrixOperations.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduMatrixUpdateInterfaces.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\blockVectorNMatrices.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\scalarBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\sphericalTensorBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\symmTensorBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\tensorBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeff.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\blockCoeffBase.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\DecoupledBlockCoeff.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\scalarBlockCoeff.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\sphericalTensorBlockCoeff.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\symmTensor4thOrderBlockCoeff.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\symmTensorBlockCoeff.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\tensorBlockCoeff.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm\BlockCoeffNorm.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\CoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\CoeffFieldFunctions.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\DecoupledCoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\DecoupledCoeffFieldFunctions.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\diagTensorCoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\scalarCoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\sphericalTensorCoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\symmTensor4thOrderCoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\symmTensorCoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\CoeffField\tensorCoeffField.cxx">
+      <Filter>TnbLib\Base\fields\CoeffField</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
