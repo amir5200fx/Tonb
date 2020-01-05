@@ -39,7 +39,7 @@ namespace tnbLib
 		// Private data
 
 			//- Row pointers
-		Type** __restrict__ v_;
+		Type** __restrict v_;
 
 		//- Number of rows and columns in Matrix.
 		label n_, m_;
