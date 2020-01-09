@@ -14,8 +14,7 @@ namespace tnbLib
 	\*---------------------------------------------------------------------------*/
 
 	class symmetryPolyPatch
-		:
-		public polyPatch
+		: public polyPatch
 	{
 	public:
 
