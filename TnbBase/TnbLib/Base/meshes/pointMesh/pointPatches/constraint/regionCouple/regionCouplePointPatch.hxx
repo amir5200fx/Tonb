@@ -23,98 +23,105 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	tnbLib::pointMeshMapper
+	regionCouplePointPatch
 
 Description
-	Class holds all the necessary information for mapping fields associated
-	with pointMesh.
+	Dummy regionCouple patch for post-processing.  No functionality built in!
+
+Author
+	Hrvoje Jasak, Wikki Ltd.  All rights reserved
 
 SourceFiles
-	pointMeshMapper.C
+	regionCouplePointPatch.C
 
 \*---------------------------------------------------------------------------*/
-#ifndef _pointMeshMapper_Header
-#define _pointMeshMapper_Header
+#ifndef _regionCouplePointPatch_Header
+#define _regionCouplePointPatch_Header
 
-#include <pointMapper.hxx>
-#include <pointBoundaryMeshMapper.hxx>
+#include <coupledFacePointPatch.hxx>
+#include <regionCouplePolyPatch.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
 {
 
-	// Forward declaration of classes
-	class pointMesh;
-	class mapPolyMesh;
-
 	/*---------------------------------------------------------------------------*\
-							Class pointMeshMapper Declaration
+						  Class regionCouplePointPatch Declaration
 	\*---------------------------------------------------------------------------*/
 
-	class pointMeshMapper
+	class regionCouplePointPatch
+		:
+		public coupledFacePointPatch
 	{
 		// Private data
 
-			//- Reference to mesh
-		const pointMesh& mesh_;
-
-		//- Point mapper
-		pointMapper pointMap_;
-
-		//- Boundary mapper
-		pointBoundaryMeshMapper boundaryMap_;
+			//- Local reference cast into the cyclic patch
+		const regionCouplePolyPatch& regionCouplePolyPatch_;
 
 
 		// Private Member Functions
 
-			//- Disallow default bitwise copy construct
-		pointMeshMapper(const pointMeshMapper&);
+			//- Disallow default construct as copy
+		regionCouplePointPatch(const regionCouplePointPatch&);
 
-		//- Disallow default bitwise assignment
-		void operator=(const pointMeshMapper&);
+		//- Disallow default assignment
+		void operator=(const regionCouplePointPatch&);
+
+
+	protected:
+
+		// Protected Member Functions
+
+			//- Initialise the calculation of the patch geometry
+		virtual void initGeometry()
+		{}
+
+		//- Calculate mesh points
+		virtual void calcGeometry()
+		{}
+
+		//- Correct patches after moving points
+		virtual void movePoints()
+		{}
+
+		//- Initialise the update of the patch topology
+		virtual void initUpdateMesh();
+
+		//- Update of the patch topology
+		virtual void updateMesh();
 
 
 	public:
 
+		typedef pointBoundaryMesh BoundaryMesh;
+
+
+		//- Runtime type information
+		TypeName(regionCouplePolyPatch::typeName_());
+
+
 		// Constructors
 
-			//- Construct from pointMesh
-		pointMeshMapper(const pointMesh& mesh, const mapPolyMesh& mpm)
-			:
-			mesh_(mesh),
-			pointMap_(mpm),
-			boundaryMap_(mesh, pointMap_, mpm)
-		{}
+			//- Construct from components
+		regionCouplePointPatch
+		(
+			const polyPatch& patch,
+			const pointBoundaryMesh& bm
+		);
+
+
+		// Destructor
+
+		virtual ~regionCouplePointPatch();
 
 
 		// Member Functions
 
+			// Access
 
-			//- Return reference to mesh fields belong to
-		const pointMesh& mesh() const
-		{
-			return mesh_;
-		}
-
-		//- Return reference to objectRegistry storing fields. Can be
-		//  removed once fields stored on pointMesh.
-		const objectRegistry& thisDb() const
-		{
-			return mesh_();
-		}
-
-		//- Return point mapper
-		const morphFieldMapper& pointMap() const
-		{
-			return pointMap_;
-		}
-
-		//- Return boundary mapper
-		const pointBoundaryMeshMapper& boundaryMap() const
-		{
-			return boundaryMap_;
-		}
+				//- Return true if coupled
+		virtual bool coupled() const;
 	};
 
 
@@ -124,4 +131,4 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#endif // !_pointMeshMapper_Header
+#endif // !_regionCouplePointPatch_Header

@@ -1,4 +1,4 @@
-#include <ggiPointPatch.hxx>
+#include <mixingPlanePointPatch.hxx>
 
 #include <pointBoundaryMesh.hxx>
 #include <pointMesh.hxx>
@@ -8,12 +8,12 @@
 
 namespace tnbLib
 {
-	defineTypeNameAndDebug(ggiPointPatch, 0);
+	defineTypeNameAndDebug(mixingPlanePointPatch, 0);
 
 	addToRunTimeSelectionTable
 	(
 		facePointPatch,
-		ggiPointPatch,
+		mixingPlanePointPatch,
 		polyPatch
 	);
 }
@@ -21,13 +21,13 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * Protected Member Functions  * * * * * * * * * * //
 
-void tnbLib::ggiPointPatch::initUpdateMesh()
+void tnbLib::mixingPlanePointPatch::initUpdateMesh()
 {
 	facePointPatch::initUpdateMesh();
 }
 
 
-void tnbLib::ggiPointPatch::updateMesh()
+void tnbLib::mixingPlanePointPatch::updateMesh()
 {
 	facePointPatch::updateMesh();
 }
@@ -36,26 +36,26 @@ void tnbLib::ggiPointPatch::updateMesh()
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 //- Construct from components
-tnbLib::ggiPointPatch::ggiPointPatch
+tnbLib::mixingPlanePointPatch::mixingPlanePointPatch
 (
 	const polyPatch& patch,
 	const pointBoundaryMesh& bm
 )
 	:
 	coupledFacePointPatch(patch, bm),
-	ggiPolyPatch_(refCast<const ggiPolyPatch>(patch))
+	mixingPlanePolyPatch_(refCast<const mixingPlanePolyPatch>(patch))
 {}
 
 
 // * * * * * * * * * * * * * * * * Destructor  * * * * * * * * * * * * * * * //
 
-tnbLib::ggiPointPatch::~ggiPointPatch()
+tnbLib::mixingPlanePointPatch::~mixingPlanePointPatch()
 {}
 
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
-bool tnbLib::ggiPointPatch::coupled() const
+bool tnbLib::mixingPlanePointPatch::coupled() const
 {
 	return true;
 }

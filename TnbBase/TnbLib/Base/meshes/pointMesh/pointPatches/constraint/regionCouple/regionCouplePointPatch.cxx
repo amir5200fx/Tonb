@@ -1,12 +1,8 @@
-#include <cyclicPointPatch.hxx>
-
-#include <cyclicPointPatchFields.hxx>
+#include <regionCouplePointPatch.hxx>
 
 #include <pointBoundaryMesh.hxx>
-#include <addToRunTimeSelectionTable.hxx>
 #include <pointMesh.hxx>
-#include <globalPointPatch.hxx>
-#include <edgeList.hxx>
+#include <addToRunTimeSelectionTable.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -15,23 +11,25 @@ namespace tnbLib
 
 	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-	defineTypeNameAndDebug(cyclicPointPatch, 0);
+	defineTypeNameAndDebug(regionCouplePointPatch, 0);
 
 	addToRunTimeSelectionTable
 	(
 		facePointPatch,
-		cyclicPointPatch,
+		regionCouplePointPatch,
 		polyPatch
 	);
 
 
-	void cyclicPointPatch::initUpdateMesh()
+	// * * * * * * * * * * * * * Protected Member Functions  * * * * * * * * * * //
+
+	void tnbLib::regionCouplePointPatch::initUpdateMesh()
 	{
 		facePointPatch::initUpdateMesh();
 	}
 
 
-	void cyclicPointPatch::updateMesh()
+	void tnbLib::regionCouplePointPatch::updateMesh()
 	{
 		facePointPatch::updateMesh();
 	}
@@ -39,26 +37,34 @@ namespace tnbLib
 
 	// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
-	cyclicPointPatch::cyclicPointPatch
+	//- Construct from components
+	regionCouplePointPatch::regionCouplePointPatch
 	(
 		const polyPatch& patch,
 		const pointBoundaryMesh& bm
 	)
 		:
 		coupledFacePointPatch(patch, bm),
-		cyclicPolyPatch_(refCast<const cyclicPolyPatch>(patch))
+		regionCouplePolyPatch_(refCast<const regionCouplePolyPatch>(patch))
 	{}
 
 
 	// * * * * * * * * * * * * * * * * Destructor  * * * * * * * * * * * * * * * //
 
-	cyclicPointPatch::~cyclicPointPatch()
+	regionCouplePointPatch::~regionCouplePointPatch()
 	{}
 
 
 	// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
+	bool regionCouplePointPatch::coupled() const
+	{
+		// Consider options: coupled or uncoupled for post-processing?
+		// HJ, 26/Feb/2008
+	//     return false;
 
+		return patch().coupled();
+	}
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

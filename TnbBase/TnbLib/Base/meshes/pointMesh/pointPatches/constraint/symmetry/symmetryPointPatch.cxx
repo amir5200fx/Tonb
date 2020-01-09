@@ -1,5 +1,6 @@
-#include <genericPointPatch.hxx>
+#include <symmetryPointPatch.hxx>
 
+#include <pointConstraint.hxx>
 #include <addToRunTimeSelectionTable.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -9,15 +10,27 @@ namespace tnbLib
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-	defineTypeNameAndDebug(genericPointPatch, 0);
+	defineTypeNameAndDebug(symmetryPointPatch, 0);
 
 	// Add the patch constructor functions to the hash tables
 	addToRunTimeSelectionTable
 	(
 		facePointPatch,
-		genericPointPatch,
+		symmetryPointPatch,
 		polyPatch
 	);
+
+
+	// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+	void symmetryPointPatch::applyConstraint
+	(
+		const label pointi,
+		pointConstraint& pc
+	) const
+	{
+		pc.applyConstraint(pointNormals()[pointi]);
+	}
 
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

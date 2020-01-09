@@ -23,98 +23,108 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	tnbLib::pointMeshMapper
+	cyclicGgiPointPatch
 
 Description
-	Class holds all the necessary information for mapping fields associated
-	with pointMesh.
+	Dummy cyclicGgi patch for post-processing.  No functionality built in!
+
+Author:
+	Martin Beaudoin, Hydro-Quebec, (2008)
+
+Contributor:
+	Hrvoje Jasak, Wikki Ltd.
 
 SourceFiles
-	pointMeshMapper.C
+	cyclicGgiPointPatch.C
 
 \*---------------------------------------------------------------------------*/
-#ifndef _pointMeshMapper_Header
-#define _pointMeshMapper_Header
+#ifndef _cyclicGgiPointPatch_Header
+#define _cyclicGgiPointPatch_Header
 
-#include <pointMapper.hxx>
-#include <pointBoundaryMeshMapper.hxx>
+#include <coupledFacePointPatch.hxx>
+#include <cyclicGgiPolyPatch.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
 {
 
-	// Forward declaration of classes
-	class pointMesh;
-	class mapPolyMesh;
-
 	/*---------------------------------------------------------------------------*\
-							Class pointMeshMapper Declaration
+						  Class cyclicGgiPointPatch Declaration
 	\*---------------------------------------------------------------------------*/
 
-	class pointMeshMapper
+	class cyclicGgiPointPatch
+		:
+		public coupledFacePointPatch
 	{
 		// Private data
 
-			//- Reference to mesh
-		const pointMesh& mesh_;
-
-		//- Point mapper
-		pointMapper pointMap_;
-
-		//- Boundary mapper
-		pointBoundaryMeshMapper boundaryMap_;
+			//- Local reference cast into the cyclic patch
+		const cyclicGgiPolyPatch& cyclicGgiPolyPatch_;
 
 
 		// Private Member Functions
 
-			//- Disallow default bitwise copy construct
-		pointMeshMapper(const pointMeshMapper&);
+			//- Disallow default construct as copy
+		cyclicGgiPointPatch(const cyclicGgiPointPatch&);
 
-		//- Disallow default bitwise assignment
-		void operator=(const pointMeshMapper&);
+		//- Disallow default assignment
+		void operator=(const cyclicGgiPointPatch&);
+
+
+	protected:
+
+		// Protected Member Functions
+
+			//- Initialise the calculation of the patch geometry
+		virtual void initGeometry()
+		{}
+
+		//- Calculate mesh points
+		virtual void calcGeometry()
+		{}
+
+		//- Correct patches after moving points
+		virtual void movePoints()
+		{}
+
+		//- Initialise the update of the patch topology
+		virtual void initUpdateMesh();
+
+		//- Update of the patch topology
+		virtual void updateMesh();
 
 
 	public:
 
+		typedef pointBoundaryMesh BoundaryMesh;
+
+
+		//- Runtime type information
+		TypeName(cyclicGgiPolyPatch::typeName_());
+
+
 		// Constructors
 
-			//- Construct from pointMesh
-		pointMeshMapper(const pointMesh& mesh, const mapPolyMesh& mpm)
-			:
-			mesh_(mesh),
-			pointMap_(mpm),
-			boundaryMap_(mesh, pointMap_, mpm)
-		{}
+			//- Construct from components
+		cyclicGgiPointPatch
+		(
+			const polyPatch& patch,
+			const pointBoundaryMesh& bm
+		);
+
+
+		// Destructor
+
+		virtual ~cyclicGgiPointPatch();
 
 
 		// Member Functions
 
+			// Access
 
-			//- Return reference to mesh fields belong to
-		const pointMesh& mesh() const
-		{
-			return mesh_;
-		}
-
-		//- Return reference to objectRegistry storing fields. Can be
-		//  removed once fields stored on pointMesh.
-		const objectRegistry& thisDb() const
-		{
-			return mesh_();
-		}
-
-		//- Return point mapper
-		const morphFieldMapper& pointMap() const
-		{
-			return pointMap_;
-		}
-
-		//- Return boundary mapper
-		const pointBoundaryMeshMapper& boundaryMap() const
-		{
-			return boundaryMap_;
-		}
+				//- Return true because this patch is coupled
+		virtual bool coupled() const;
 	};
 
 
@@ -124,4 +134,4 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#endif // !_pointMeshMapper_Header
+#endif // !_cyclicGgiPointPatch_Header

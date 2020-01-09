@@ -23,98 +23,104 @@ License
 	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-	tnbLib::pointMeshMapper
+	mixingPlanePointPatch
 
 Description
-	Class holds all the necessary information for mapping fields associated
-	with pointMesh.
+	Dummy mixingPlane patch for post-processing.  No functionality built in!
+
+Author
+	Martin Beaudoin, Hydro-Quebec, 2009.  All rights reserved
+
+Contributor
+	Hrvoje Jasak, Wikki Ltd.
 
 SourceFiles
-	pointMeshMapper.C
+	mixingPlanePointPatch.C
 
 \*---------------------------------------------------------------------------*/
-#ifndef _pointMeshMapper_Header
-#define _pointMeshMapper_Header
+#ifndef _mixingPlanePointPatch_Header
+#define _mixingPlanePointPatch_Header
 
-#include <pointMapper.hxx>
-#include <pointBoundaryMeshMapper.hxx>
+#include <coupledFacePointPatch.hxx>
+#include <mixingPlanePolyPatch.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
 {
 
-	// Forward declaration of classes
-	class pointMesh;
-	class mapPolyMesh;
-
 	/*---------------------------------------------------------------------------*\
-							Class pointMeshMapper Declaration
+						  Class mixingPlanePointPatch Declaration
 	\*---------------------------------------------------------------------------*/
 
-	class pointMeshMapper
+	class mixingPlanePointPatch
+		:
+		public coupledFacePointPatch
 	{
 		// Private data
 
-			//- Reference to mesh
-		const pointMesh& mesh_;
-
-		//- Point mapper
-		pointMapper pointMap_;
-
-		//- Boundary mapper
-		pointBoundaryMeshMapper boundaryMap_;
+			//- Local reference cast into the cyclic patch
+		const mixingPlanePolyPatch& mixingPlanePolyPatch_;
 
 
 		// Private Member Functions
 
-			//- Disallow default bitwise copy construct
-		pointMeshMapper(const pointMeshMapper&);
+			//- Disallow default construct as copy
+		mixingPlanePointPatch(const mixingPlanePointPatch&);
 
-		//- Disallow default bitwise assignment
-		void operator=(const pointMeshMapper&);
+		//- Disallow default assignment
+		void operator=(const mixingPlanePointPatch&);
+
+
+		//- Initialise the calculation of the patch geometry
+		virtual void initGeometry()
+		{}
+
+		//- Calculate mesh points
+		virtual void calcGeometry()
+		{}
+
+		//- Correct patches after moving points
+		virtual void movePoints()
+		{}
+
+		//- Initialise the update of the patch topology
+		virtual void initUpdateMesh();
+
+		//- Update of the patch topology
+		virtual void updateMesh();
 
 
 	public:
 
+		typedef pointBoundaryMesh BoundaryMesh;
+
+
+		//- Runtime type information
+		TypeName(mixingPlanePolyPatch::typeName_());
+
+
 		// Constructors
 
-			//- Construct from pointMesh
-		pointMeshMapper(const pointMesh& mesh, const mapPolyMesh& mpm)
-			:
-			mesh_(mesh),
-			pointMap_(mpm),
-			boundaryMap_(mesh, pointMap_, mpm)
-		{}
+			//- Construct from components
+		mixingPlanePointPatch
+		(
+			const polyPatch& patch,
+			const pointBoundaryMesh& bm
+		);
+
+
+		// Destructor
+
+		virtual ~mixingPlanePointPatch();
 
 
 		// Member Functions
 
+			// Access
 
-			//- Return reference to mesh fields belong to
-		const pointMesh& mesh() const
-		{
-			return mesh_;
-		}
-
-		//- Return reference to objectRegistry storing fields. Can be
-		//  removed once fields stored on pointMesh.
-		const objectRegistry& thisDb() const
-		{
-			return mesh_();
-		}
-
-		//- Return point mapper
-		const morphFieldMapper& pointMap() const
-		{
-			return pointMap_;
-		}
-
-		//- Return boundary mapper
-		const pointBoundaryMeshMapper& boundaryMap() const
-		{
-			return boundaryMap_;
-		}
+				//- Return true because this patch is coupled
+		virtual bool coupled() const;
 	};
 
 
@@ -124,4 +130,4 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#endif // !_pointMeshMapper_Header
+#endif // !_mixingPlanePointPatch_Header

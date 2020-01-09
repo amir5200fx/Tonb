@@ -1,9 +1,9 @@
 #pragma once
-#ifndef _wedgePointPatch_Header
-#define _wedgePointPatch_Header
+#ifndef _symmetryPointPatch_Header
+#define _symmetryPointPatch_Header
 
 #include <facePointPatch.hxx>
-#include <wedgePolyPatch.hxx>
+#include <symmetryPolyPatch.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -11,10 +11,10 @@ namespace tnbLib
 {
 
 	/*---------------------------------------------------------------------------*\
-						   Class wedgePointPatch Declaration
+				   Class symmetryPointPatch Declaration
 	\*---------------------------------------------------------------------------*/
 
-	class wedgePointPatch
+	class symmetryPointPatch
 		:
 		public facePointPatch
 	{
@@ -22,13 +22,13 @@ namespace tnbLib
 	public:
 
 		//- Runtime type information
-		TypeName(wedgePolyPatch::typeName_());
+		TypeName(symmetryPolyPatch::typeName_());
 
 
 		// Constructors
 
 			//- Construct from polyPatch
-		wedgePointPatch
+		symmetryPointPatch
 		(
 			const polyPatch& patch,
 			const pointBoundaryMesh& bm
@@ -55,4 +55,4 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#endif // !_wedgePointPatch_Header
+#endif // !_symmetryPointPatch_Header

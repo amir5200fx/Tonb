@@ -1,4 +1,4 @@
-#include <ggiPointPatch.hxx>
+#include <overlapGgiPointPatch.hxx>
 
 #include <pointBoundaryMesh.hxx>
 #include <pointMesh.hxx>
@@ -8,12 +8,12 @@
 
 namespace tnbLib
 {
-	defineTypeNameAndDebug(ggiPointPatch, 0);
+	defineTypeNameAndDebug(overlapGgiPointPatch, 0);
 
 	addToRunTimeSelectionTable
 	(
 		facePointPatch,
-		ggiPointPatch,
+		overlapGgiPointPatch,
 		polyPatch
 	);
 }
@@ -21,13 +21,13 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * Protected Member Functions  * * * * * * * * * * //
 
-void tnbLib::ggiPointPatch::initUpdateMesh()
+void tnbLib::overlapGgiPointPatch::initUpdateMesh()
 {
 	facePointPatch::initUpdateMesh();
 }
 
 
-void tnbLib::ggiPointPatch::updateMesh()
+void tnbLib::overlapGgiPointPatch::updateMesh()
 {
 	facePointPatch::updateMesh();
 }
@@ -36,26 +36,26 @@ void tnbLib::ggiPointPatch::updateMesh()
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 //- Construct from components
-tnbLib::ggiPointPatch::ggiPointPatch
+tnbLib::overlapGgiPointPatch::overlapGgiPointPatch
 (
 	const polyPatch& patch,
 	const pointBoundaryMesh& bm
 )
 	:
 	coupledFacePointPatch(patch, bm),
-	ggiPolyPatch_(refCast<const ggiPolyPatch>(patch))
+	overlapGgiPolyPatch_(refCast<const overlapGgiPolyPatch>(patch))
 {}
 
 
 // * * * * * * * * * * * * * * * * Destructor  * * * * * * * * * * * * * * * //
 
-tnbLib::ggiPointPatch::~ggiPointPatch()
+tnbLib::overlapGgiPointPatch::~overlapGgiPointPatch()
 {}
 
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
-bool tnbLib::ggiPointPatch::coupled() const
+bool tnbLib::overlapGgiPointPatch::coupled() const
 {
 	return true;
 }
