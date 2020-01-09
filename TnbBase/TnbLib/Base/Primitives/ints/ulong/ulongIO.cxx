@@ -1,7 +1,7 @@
 #include <ulong.hxx>
 
-#include <error.hxx>
 #include <IOstreams.hxx>
+#include <error.hxx>
 
 #include <sstream>
 

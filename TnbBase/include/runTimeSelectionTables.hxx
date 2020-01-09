@@ -11,8 +11,7 @@
 // external use:
 // ~~~~~~~~~~~~~
 // declare a run-time selection:
-#define declareRunTimeSelectionTable\
-(autoPtr,baseType,argNames,argList,parList)                                   \
+#define declareRunTimeSelectionTable(autoPtr,baseType,argNames,argList,parList) \
                                                                               \
     /* Construct from argList function pointer type */                        \
     typedef autoPtr< baseType > (*argNames##ConstructorPtr)argList;           \
@@ -60,8 +59,7 @@
 // external use:
 // ~~~~~~~~~~~~~
 // declare a run-time selection for derived classes:
-#define declareRunTimeNewSelectionTable\
-(autoPtr,baseType,argNames,argList,parList)                                   \
+#define declareRunTimeNewSelectionTable(autoPtr,baseType,argNames,argList,parList)\
                                                                               \
     /* Construct from argList function pointer type */                        \
     typedef autoPtr< baseType > (*argNames##ConstructorPtr)argList;           \
@@ -112,8 +110,7 @@
 
 // internal use:
 // constructor aid
-#define defineRunTimeSelectionTableConstructor\
-(baseType,argNames)                                                           \
+#define defineRunTimeSelectionTableConstructor(baseType,argNames)             \
                                                                               \
     /* Table constructor called from the table add function */                \
     void baseType::construct##argNames##ConstructorTables()                   \
@@ -132,8 +129,7 @@
 
 // internal use:
 // destructor aid
-#define defineRunTimeSelectionTableDestructor\
-(baseType,argNames)                                                           \
+#define defineRunTimeSelectionTableDestructor(baseType,argNames)              \
                                                                               \
     /* Table destructor called from the table add function destructor */      \
     void baseType::destroy##argNames##ConstructorTables()                     \
@@ -148,8 +144,7 @@
 
 // internal use:
 // create pointer to hash-table of functions
-#define defineRunTimeSelectionTablePtr\
-(baseType,argNames)                                                           \
+#define defineRunTimeSelectionTablePtr(baseType,argNames)                     \
                                                                               \
     /* Define the constructor function table */                               \
     baseType::argNames##ConstructorTable*                                     \
@@ -170,8 +165,7 @@
 // external use:
 // ~~~~~~~~~~~~~
 // define run-time selection table
-#define defineRunTimeSelectionTable\
-(baseType,argNames)                                                           \
+#define defineRunTimeSelectionTable(baseType,argNames)                        \
                                                                               \
     defineRunTimeSelectionTablePtr(baseType,argNames);                        \
     defineRunTimeSelectionTableConstructor(baseType,argNames);                \
@@ -182,8 +176,7 @@
 // ~~~~~~~~~~~~~
 // define run-time selection table for template classes
 // use when baseType doesn't need a template argument (eg, is a typedef)
-#define defineTemplateRunTimeSelectionTable\
-(baseType,argNames)                                                           \
+#define defineTemplateRunTimeSelectionTable(baseType,argNames)                \
                                                                               \
     template<>                                                                \
     defineRunTimeSelectionTablePtr(baseType,argNames);                        \
@@ -199,8 +192,7 @@
 // internal use:
 // constructor aid
 // use when baseType requires the Targ template argument
-#define defineTemplatedRunTimeSelectionTableConstructor\
-(baseType,argNames,Targ)                                                      \
+#define defineTemplatedRunTimeSelectionTableConstructor(baseType,argNames,Targ)\
                                                                               \
     /* Table constructor called from the table add function */                \
     void baseType< Targ >::construct##argNames##ConstructorTables()           \
@@ -220,8 +212,7 @@
 // internal use:
 // destructor aid
 // use when baseType requires the Targ template argument
-#define defineTemplatedRunTimeSelectionTableDestructor\
-(baseType,argNames,Targ)                                                      \
+#define defineTemplatedRunTimeSelectionTableDestructor(baseType,argNames,Targ)\
                                                                               \
     /* Table destructor called from the table add function destructor */      \
     void baseType< Targ >::destroy##argNames##ConstructorTables()             \
@@ -237,8 +228,7 @@
 // internal use:
 // create pointer to hash-table of functions
 // use when baseType requires the Targ template argument
-#define defineTemplatedRunTimeSelectionTablePtr\
-(baseType,argNames,Targ)                                                      \
+#define defineTemplatedRunTimeSelectionTablePtr(baseType,argNames,Targ)       \
                                                                               \
     /* Define the constructor function table */                               \
     baseType< Targ >::argNames##ConstructorTable*                             \
@@ -249,8 +239,7 @@
 // ~~~~~~~~~~~~~
 // define run-time selection table for template classes
 // use when baseType requires the Targ template argument
-#define defineTemplatedRunTimeSelectionTable\
-(baseType,argNames,Targ)                                                      \
+#define defineTemplatedRunTimeSelectionTable(baseType,argNames,Targ)          \
                                                                               \
     template<>                                                                \
     defineTemplatedRunTimeSelectionTablePtr(baseType,argNames,Targ);          \

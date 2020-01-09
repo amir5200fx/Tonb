@@ -151,36 +151,606 @@ namespace tnbLib
 
 		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-		UNARY_FUNCTION(scalar, scalar, pow3)
-		UNARY_FUNCTION(scalar, scalar, pow4)
-		UNARY_FUNCTION(scalar, scalar, pow5)
-		UNARY_FUNCTION(scalar, scalar, pow6)
-		UNARY_FUNCTION(scalar, scalar, sqrt)
-		UNARY_FUNCTION(scalar, scalar, sign)
-		UNARY_FUNCTION(scalar, scalar, pos)
-		UNARY_FUNCTION(scalar, scalar, neg)
-		UNARY_FUNCTION(scalar, scalar, exp)
-		UNARY_FUNCTION(scalar, scalar, log)
-		UNARY_FUNCTION(scalar, scalar, log10)
-		UNARY_FUNCTION(scalar, scalar, sin)
-		UNARY_FUNCTION(scalar, scalar, cos)
-		UNARY_FUNCTION(scalar, scalar, tan)
-		UNARY_FUNCTION(scalar, scalar, asin)
-		UNARY_FUNCTION(scalar, scalar, acos)
-		UNARY_FUNCTION(scalar, scalar, atan)
-		UNARY_FUNCTION(scalar, scalar, sinh)
-		UNARY_FUNCTION(scalar, scalar, cosh)
-		UNARY_FUNCTION(scalar, scalar, tanh)
-		UNARY_FUNCTION(scalar, scalar, asinh)
-		UNARY_FUNCTION(scalar, scalar, acosh)
-		UNARY_FUNCTION(scalar, scalar, atanh)
-		UNARY_FUNCTION(scalar, scalar, erf)
-		UNARY_FUNCTION(scalar, scalar, erfc)
-		UNARY_FUNCTION(scalar, scalar, lgamma)
-		UNARY_FUNCTION(scalar, scalar, j0)
-		UNARY_FUNCTION(scalar, scalar, j1)
-		UNARY_FUNCTION(scalar, scalar, y0)
-		UNARY_FUNCTION(scalar, scalar, y1)
+		
+	TEMPLATE void pow3(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::pow3, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow3(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		pow3(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow3(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		pow3(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void pow4(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::pow4, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow4(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		pow4(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow4(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		pow4(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void pow5(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::pow5, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow5(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		pow5(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow5(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		pow5(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void pow6(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::pow6, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow6(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		pow6(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> pow6(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		pow6(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void sqrt(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::sqrt, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> sqrt(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		sqrt(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> sqrt(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		sqrt(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void sign(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::sign, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> sign(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		sign(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> sign(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		sign(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void pos(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::pos, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> pos(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		pos(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> pos(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		pos(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void neg(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::neg, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> neg(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		neg(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> neg(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		neg(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void exp(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::exp, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> exp(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		exp(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> exp(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		exp(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void log(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::log, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> log(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		log(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> log(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		log(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void log10(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::log10, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> log10(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		log10(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> log10(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		log10(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void sin(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::sin, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> sin(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		sin(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> sin(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		sin(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void cos(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::cos, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> cos(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		cos(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> cos(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		cos(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void tan(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::tan, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> tan(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		tan(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> tan(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		tan(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void asin(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::asin, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> asin(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		asin(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> asin(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		asin(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void acos(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::acos, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> acos(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		acos(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> acos(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		acos(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void atan(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::atan, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> atan(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		atan(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> atan(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		atan(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void sinh(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::sinh, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> sinh(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		sinh(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> sinh(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		sinh(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void cosh(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::cosh, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> cosh(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		cosh(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> cosh(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		cosh(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void tanh(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::tanh, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> tanh(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		tanh(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> tanh(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		tanh(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void asinh(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::asinh, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> asinh(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		asinh(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> asinh(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		asinh(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void acosh(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::acosh, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> acosh(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		acosh(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> acosh(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		acosh(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void atanh(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::atanh, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> atanh(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		atanh(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> atanh(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		atanh(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void erf(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::erf, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> erf(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		erf(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> erf(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		erf(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void erfc(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::erfc, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> erfc(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		erfc(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> erfc(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		erfc(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void lgamma(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::lgamma, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> lgamma(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		lgamma(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> lgamma(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		lgamma(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void j0(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::j0, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> j0(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		j0(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> j0(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		j0(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void j1(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::j1, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> j1(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		j1(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> j1(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		j1(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void y0(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::y0, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> y0(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		y0(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> y0(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		y0(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
+		
+	TEMPLATE void y1(Field<scalar>& res, const UList<scalar>& f)
+	{
+		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::y1, scalar, f)
+	}
+
+	TEMPLATE tmp<Field<scalar>> y1(const UList<scalar>& f)
+	{
+		tmp<Field<scalar>> tRes(new Field<scalar>(f.size()));
+		y1(tRes(), f);
+		return tRes;
+	}
+
+	TEMPLATE tmp<Field<scalar>> y1(const tmp<Field<scalar>>& tf)
+	{
+		tmp<Field<scalar>> tRes = reuseTmp<scalar, scalar>::New(tf);
+		y1(tRes(), tf());
+		reuseTmp<scalar, scalar>::clear(tf);
+		return tRes;
+	}
 
 
 #define BesselFunc(func)                                                      \
@@ -204,8 +774,46 @@ tmp<scalarField> func(const int n, const tmp<scalarField>& tsf)               \
     return tRes;                                                              \
 }
 
-		BesselFunc(jn)
-		BesselFunc(yn)
+		
+	void jn(scalarField& res, const int n, const UList<scalar>& sf)
+	{
+		TFOR_ALL_F_OP_FUNC_S_F(scalar, res, =, ::tnbLib::jn, int, n, scalar, sf)
+	}
+
+	tmp<scalarField> jn(const int n, const UList<scalar>& sf)
+	{
+		tmp<scalarField> tRes(new scalarField(sf.size()));
+		jn(tRes(), n, sf);
+		return tRes;
+	}
+
+	tmp<scalarField> jn(const int n, const tmp<scalarField>& tsf)
+	{
+		tmp<scalarField> tRes = reuseTmp<scalar, scalar>::New(tsf);
+		jn(tRes(), n, tsf());
+		reuseTmp<scalar, scalar>::clear(tsf);
+		return tRes;
+	}
+		
+	void yn(scalarField& res, const int n, const UList<scalar>& sf)
+	{
+		TFOR_ALL_F_OP_FUNC_S_F(scalar, res, =, ::tnbLib::yn, int, n, scalar, sf)
+	}
+
+	tmp<scalarField> yn(const int n, const UList<scalar>& sf)
+	{
+		tmp<scalarField> tRes(new scalarField(sf.size()));
+		yn(tRes(), n, sf);
+		return tRes;
+	}
+
+	tmp<scalarField> yn(const int n, const tmp<scalarField>& tsf)
+	{
+		tmp<scalarField> tRes = reuseTmp<scalar, scalar>::New(tsf);
+		yn(tRes(), n, tsf());
+		reuseTmp<scalar, scalar>::clear(tsf);
+		return tRes;
+	}
 
 #undef BesselFunc
 

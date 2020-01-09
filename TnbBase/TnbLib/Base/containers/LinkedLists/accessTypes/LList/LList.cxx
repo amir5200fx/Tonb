@@ -1,7 +1,6 @@
 #include <LList.hxx>
 
 #include <error.hxx>
-#include <OSstream.hxx>
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
@@ -64,3 +63,6 @@ void tnbLib::LList<LListBase, T>::operator=(const LList<LListBase, T>& lst)
 // * * * * * * * * * * * * * * * Friend Operators  * * * * * * * * * * * * * //
 
 #include <LListIO.cxx>
+
+
+// ************************************************************************* //

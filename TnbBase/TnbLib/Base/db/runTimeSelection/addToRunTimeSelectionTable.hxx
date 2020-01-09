@@ -6,8 +6,7 @@
 
 
 // add to hash-table of functions with typename as the key
-#define addToRunTimeSelectionTable\
-(baseType,thisType,argNames)                                                  \
+#define addToRunTimeSelectionTable(baseType,thisType,argNames)                \
                                                                               \
     /* Add the thisType constructor function to the table */                  \
     baseType::add##argNames##ConstructorToTable< thisType >                   \

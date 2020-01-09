@@ -17,7 +17,7 @@ tnbLib::LList<LListBase, T>::LList(Istream& is)
 template<class LListBase, class T>
 tnbLib::Istream& tnbLib::operator>>(Istream& is, LList<LListBase, T>& L)
 {
-	// A null list
+	// Anull list
 	L.clear();
 
 	is.fatalCheck(" operator>>(Istream&, LList<LListBase, T>&)");
