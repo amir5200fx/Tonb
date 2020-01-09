@@ -1,4 +1,49 @@
 #pragma once
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | foam-extend: Open Source CFD
+   \\    /   O peration     | Version:     4.0
+	\\  /    A nd           | Web:         http://www.foam-extend.org
+	 \\/     M anipulation  | For copyright notice see file Copyright
+-------------------------------------------------------------------------------
+License
+	This file is part of foam-extend.
+
+	foam-extend is free software: you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by the
+	Free Software Foundation, either version 3 of the License, or (at your
+	option) any later version.
+
+	foam-extend is distributed in the hope that it will be useful, but
+	WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with foam-extend.  If not, see <http://www.gnu.org/licenses/>.
+
+Class
+	tnbLib::Polynomial
+
+Description
+	Polynomial templated on size (order):
+
+		poly = logCoeff*log(x) + sum(coeff_[i]*x^i)
+
+	where 0 <= i <= n
+
+	- integer powers, starting at zero
+	- evaluate(x) to evaluate the poly for a given value
+	- integrate(x1, x2) between two scalar values
+	- integrate() to return a new, intergated coeff polynomial
+	  - increases the size (order)
+	- integrateMinus1() to return a new, integrated coeff polynomial where
+	  the base poly starts at order -1
+
+SourceFiles
+	PolynomialTemplate.C
+
+\*---------------------------------------------------------------------------*/
 #ifndef _PolynomialTemplate_Header
 #define _PolynomialTemplate_Header
 
@@ -33,9 +78,6 @@ namespace tnbLib
 	class Polynomial
 		: public VectorSpace<Polynomial<PolySize>, scalar, PolySize>
 	{
-
-		typedef VectorSpace<Polynomial<PolySize>, scalar, PolySize>
-			base;
 		// Private data
 
 			//- Include the log term? - only activated using integrateMinus1()
@@ -114,4 +156,4 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#endif // !1
+#endif // !_PolynomialTemplate_Header
