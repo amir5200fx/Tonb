@@ -1411,6 +1411,309 @@
     <Filter Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm">
       <UniqueIdentifier>{b0362f43-5cc4-4aac-8742-4e2802adef94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon">
+      <UniqueIdentifier>{b5526c33-459e-4a91-8719-374739122dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon">
+      <UniqueIdentifier>{d2878e49-23c5-43d5-8e73-a8d29b45ed5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon">
+      <UniqueIdentifier>{350ba3e4-d6de-49b4-9fcd-e22c22ecdbc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon">
+      <UniqueIdentifier>{04d549aa-1378-49fa-a71e-8439cbfeea3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon">
+      <UniqueIdentifier>{0c36d65a-b158-4336-9e4a-a39d3267685f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon">
+      <UniqueIdentifier>{4d8698e9-fc12-47c3-9178-10136c0b119b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon">
+      <UniqueIdentifier>{3173a898-012d-40a5-91b1-2e1e88b13040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother">
+      <UniqueIdentifier>{8ea0fac8-1f46-4739-a1bb-703040cc9b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother">
+      <UniqueIdentifier>{7ca7a301-183c-4b77-9147-429aab4572a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother">
+      <UniqueIdentifier>{c04b82b7-3656-48b7-8114-10a1d3766cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother">
+      <UniqueIdentifier>{550c0724-b488-441c-9f9c-807ef1e0bb7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening">
+      <UniqueIdentifier>{a77c9ceb-64a8-4cac-9406-b72dc7826dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields">
+      <UniqueIdentifier>{a1df4d92-110a-4762-a584-78105a8eb308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField">
+      <UniqueIdentifier>{022323a4-96b0-467b-b7e9-a0a1863bf2a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField">
+      <UniqueIdentifier>{1cbdaee9-f481-4a6a-ae2b-18c05a4dcdf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField">
+      <UniqueIdentifier>{8ea1ca48-da6a-45d0-83e5-c128c362b064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration">
+      <UniqueIdentifier>{0ae619e8-3ea5-457a-bb55-a174003d2767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening">
+      <UniqueIdentifier>{0fd44ef6-4c86-4997-ba2b-2b9f8fcb7a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces">
+      <UniqueIdentifier>{ae90412e-2e7c-4876-bd82-3d9c8799c7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields">
+      <UniqueIdentifier>{fd1b570d-2c4b-4f2e-b964-ee272e7fb0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations">
+      <UniqueIdentifier>{6a3dc7c6-5ae7-402d-9493-fb591ff29899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\regionCoupleAMGInterface">
+      <UniqueIdentifier>{f0c692d7-3aad-4cd5-b6a1-5146622acca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\processorAMGInterface">
+      <UniqueIdentifier>{6b171548-893e-41ea-a909-be729f66b4d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\mixingPlaneAMGInterface">
+      <UniqueIdentifier>{a767d6e2-5462-48b9-96ce-bc8f0bda53ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface">
+      <UniqueIdentifier>{97e70db7-622f-4252-abf0-467b5ed26032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicGGIAMGInterface">
+      <UniqueIdentifier>{73684694-cfba-4d81-b68a-084b82af127a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicAMGInterface">
+      <UniqueIdentifier>{6a2a0b88-a1a1-40b3-9f3b-e88705a8e19b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface">
+      <UniqueIdentifier>{e3d46058-996c-438c-bfce-0b4d73b1bcad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\regionCoupleAMGInterfaceField">
+      <UniqueIdentifier>{205673fe-fd15-41af-b145-a67675b9ae00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\processorAMGInterfaceField">
+      <UniqueIdentifier>{6ff884c5-5954-4317-bbae-37fd476123d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\mixingPlaneAMGInterfaceField">
+      <UniqueIdentifier>{a9c83580-d8df-4608-8982-410ac071519e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\ggiAMGInterfaceField">
+      <UniqueIdentifier>{f7711ba7-c079-4355-87f3-785b71d2f162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicGgiAMGInterfaceField">
+      <UniqueIdentifier>{8def4a48-ba2b-43d0-b01b-e007519e6c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicAMGInterfaceField">
+      <UniqueIdentifier>{7183dde9-252d-431d-8dc3-d31ef9074771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField">
+      <UniqueIdentifier>{165f1f26-54f6-40fb-a182-70bc9468017f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration">
+      <UniqueIdentifier>{75e1eb3e-6ebc-4cb5-9e89-d82b291401ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration">
+      <UniqueIdentifier>{e2afef20-d227-4b69-ab75-a5ef5bf360f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\algebraicPairGAMGAgglomeration">
+      <UniqueIdentifier>{9236baf8-4c3e-4e91-9b52-f262df15f462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\matrices\Matrix\tools\EigenSolver">
+      <UniqueIdentifier>{c46531dd-9811-428f-a1a3-cf7fcb1fc204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic">
+      <UniqueIdentifier>{94f92cff-ada9-402a-a9f0-b1a5b9357f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint">
+      <UniqueIdentifier>{b39d1809-596a-4fc6-8dc5-14084e64e490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived">
+      <UniqueIdentifier>{6d605514-3d85-4d6b-8c97-48bd5a072022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField">
+      <UniqueIdentifier>{5ce2293c-f780-4340-a342-fa439bbeb77e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\basicSymmetry">
+      <UniqueIdentifier>{d4bf6f9b-af4b-452c-bd23-2b2bbd30686d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\calculated">
+      <UniqueIdentifier>{48209c64-1d7a-4e6c-84f3-0b088c79bfc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\coupled">
+      <UniqueIdentifier>{dfcac51e-b796-4173-addf-ec6094e3965f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\fixedValue">
+      <UniqueIdentifier>{62e487b2-267b-444a-9385-3bb443549b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\generic">
+      <UniqueIdentifier>{81c285b9-7342-45e1-ab62-5cc9389cb660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\mixed">
+      <UniqueIdentifier>{aa6e8c6b-46d4-451a-8c75-c890f3a70d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\value">
+      <UniqueIdentifier>{056a790a-4dd7-4b30-99bf-4f0a457d93f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\zeroGradient">
+      <UniqueIdentifier>{c5072cf8-b7cc-4eab-b00d-e5eef18e0652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\cyclic">
+      <UniqueIdentifier>{2485e22a-d250-4c72-a4eb-ca42cbf9831e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\empty">
+      <UniqueIdentifier>{04dd44f3-ca94-4e70-8019-0e960cc16b9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\processor">
+      <UniqueIdentifier>{d6e39eb9-5ba4-4656-be91-94777121f456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\symmetry">
+      <UniqueIdentifier>{78014d97-1878-4cca-a7f6-f93abbd4f920}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\wedge">
+      <UniqueIdentifier>{80c2ae6e-5155-4b96-9fbb-c61a0f91c5b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\componentMixed">
+      <UniqueIdentifier>{f676ae20-a875-41e9-8e0b-2b1c29c1cfad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\global">
+      <UniqueIdentifier>{31d64841-af8d-4cda-bb6f-f0d7dc0089c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\oscillatingFixedValue">
+      <UniqueIdentifier>{255219cb-30a4-47cf-8351-1a4e71989200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\slip">
+      <UniqueIdentifier>{93a31367-ef0d-4dbf-8cc5-5b8ad362a26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\timeVaryingUniformFixedValue">
+      <UniqueIdentifier>{069f2fab-06d9-4e8d-aa2e-fb86416c508a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\uniformFixedValue">
+      <UniqueIdentifier>{63fc6646-9162-42b2-95f7-30188956a3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\pointPatchField">
+      <UniqueIdentifier>{c37b2cba-0673-466d-ba11-3e9420479880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\derived">
+      <UniqueIdentifier>{6725bc5f-9a30-4593-8208-c1364eac9b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\constraint">
+      <UniqueIdentifier>{b211ca24-f23b-4f7f-b14c-fb680007eb81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic">
+      <UniqueIdentifier>{60b67845-aa0e-4933-b6f9-e5d9d411c061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointConstraint">
+      <UniqueIdentifier>{3449d079-d5c7-4947-9b29-f9fa9e79a475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic\zeroGradient">
+      <UniqueIdentifier>{5c6ffe85-ca67-4ed5-9359-0a2805d2c5c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic\value">
+      <UniqueIdentifier>{477f03a2-aadb-4bf3-9915-aaba32e6151b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic\mixed">
+      <UniqueIdentifier>{97021523-ebb2-49e8-bb38-0adb2885f294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic\generic">
+      <UniqueIdentifier>{1e6731cb-878c-4141-a904-5fd8ae97560e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic\fixedValue">
+      <UniqueIdentifier>{e91ee340-c52e-4878-a0bd-119e62b068e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic\coupled">
+      <UniqueIdentifier>{bbe8cd1f-e18b-4f02-94c5-af7d9bc1bb57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\basic\calculated">
+      <UniqueIdentifier>{ac9cea76-378c-4e7e-9289-e9373c2457af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\constraint\wedge">
+      <UniqueIdentifier>{aea55473-3727-47a2-9397-97f727213a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\constraint\symmetry">
+      <UniqueIdentifier>{43b68eab-c2e0-4895-8fd7-80cdd1bccc7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\constraint\processor">
+      <UniqueIdentifier>{a5962871-4790-48a2-a6c9-acf68a9c5a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\constraint\empty">
+      <UniqueIdentifier>{a617765b-f19d-492d-b558-a4b1fe2a65c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\constraint\cyclic">
+      <UniqueIdentifier>{1b6dae35-d2f5-4ad6-9774-fb0da60cf268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\coordinateSystems">
+      <UniqueIdentifier>{e8d2de68-bcd9-42c9-8b7a-74b047a81e30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\coordinateSystems\coordinateRotation">
+      <UniqueIdentifier>{0d95b25c-d389-4a25-9537-e72053a2afaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\derived\uniformFixedValue">
+      <UniqueIdentifier>{fa0706f2-9a50-4b1b-b528-e60a725a4c21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\derived\timeVaryingUniformFixedValue">
+      <UniqueIdentifier>{89baa4b6-a10a-4150-946c-fd7788d96bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\derived\slip">
+      <UniqueIdentifier>{91fb4c61-57b6-468e-bbdf-da8ae60a2cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\derived\oscillatingFixedValue">
+      <UniqueIdentifier>{2d92df95-4c87-447c-b79e-cfe524e4abec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\pointPatchFields\derived\global">
+      <UniqueIdentifier>{d296859f-4033-4a5f-8392-e0fb274c13a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\transformGeometricField">
+      <UniqueIdentifier>{24626e1c-3201-46b0-8f96-cb2aeb4b9c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\SlicedGeometricField">
+      <UniqueIdentifier>{65362201-5480-4fa3-b6ca-792127d52a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\pointFields">
+      <UniqueIdentifier>{39b05eca-1905-4875-8be4-d3ac6f784f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricVectorNFields">
+      <UniqueIdentifier>{62a11976-f5fc-4bc4-9ab8-227561b31eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricTensorNFields">
+      <UniqueIdentifier>{a52dc33f-7357-4817-99bf-83ce59cdf980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricTensorField">
+      <UniqueIdentifier>{95b59a8f-fa7c-4f88-8454-aed17dcce15c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricSymmTensorField">
+      <UniqueIdentifier>{ba8c53d4-9c9f-46b3-8cd8-6087349036d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricSymmTensor4thOrderField">
+      <UniqueIdentifier>{e87184f6-be7b-43c4-9ba7-bd76c50c2c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorNFields">
+      <UniqueIdentifier>{986471b7-a365-4b71-82f8-4666c92e1cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorField">
+      <UniqueIdentifier>{fc70bab2-4b7e-47d3-a801-0ac3cb7fa19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricScalarField">
+      <UniqueIdentifier>{8042f89c-2f10-461d-a67b-1a331d9b0dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\geometricOneField">
+      <UniqueIdentifier>{6b0a0529-8709-46dd-b36c-1823feb6399b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricField">
+      <UniqueIdentifier>{f9a246db-2157-40f6-b704-f58c66a45fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricDiagTensorNFields">
+      <UniqueIdentifier>{44c3b9b2-5f9c-4af0-98fa-dbc547131872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricDiagTensorField">
+      <UniqueIdentifier>{15e6836a-5cb4-4cb0-8958-c6922ce1c423}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -2541,9 +2844,6 @@
     <ClInclude Include="TnbLib\Base\Primitives\septernion\septernionI.hxx">
       <Filter>TnbLib\Base\Primitives\septernion</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Base\Primitives\functions\PolynomialTemplate\PolynomialTemplate.hxx">
-      <Filter>TnbLib\Base\Primitives\functions\PolynomialTemplate</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Base\db\IOobjects\IOField\IOField.hxx">
       <Filter>TnbLib\Base\db\IOobjects\IOField</Filter>
     </ClInclude>
@@ -3665,6 +3965,675 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Base\fields\CoeffField\tensorCoeffField.hxx">
       <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm\blockCoeffNorms.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm\BlockCoeffTwoNorm.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm\blockCoeffTwoNorms.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm\tensorBlockCoeffTwoNorm.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm\BlockCoeffMaxNorm.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm\blockCoeffMaxNorms.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm\tensorBlockCoeffMaxNorm.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm\scalarBlockCoeffMaxNorm.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm\BlockCoeffComponentNorm.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm\blockCoeffComponentNorms.hxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\FadOne\FadOne.hxx">
+      <Filter>TnbLib\Base\Primitives\FadOne</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\FadOne\FadOneField.hxx">
+      <Filter>TnbLib\Base\Primitives\FadOne</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\FadOne\FadOneFunctions.hxx">
+      <Filter>TnbLib\Base\Primitives\FadOne</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\FadOne\FadOneFunctionsI.hxx">
+      <Filter>TnbLib\Base\Primitives\FadOne</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\FadOne\FadOneI.hxx">
+      <Filter>TnbLib\Base\Primitives\FadOne</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\functions\PolynomialTemplate\PolynomialTemplate.hxx">
+      <Filter>TnbLib\Base\Primitives\functions\PolynomialTemplate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint\BlockConstraint.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint\blockConstraints.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint\scalarBlockConstraint.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\extendedBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\tensorExtendedBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\symmTensorExtendedBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\sphericalTensorExtendedBlockLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\extendedBlockVectorNMatrices.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\extendedBlockLduMatrices.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon\BlockNoPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon\blockNoPrecons.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon\BlockLduPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon\blockLduPrecons.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\BlockDiagonalPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\blockDiagonalPrecons.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\scalarBlockDiagonalPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\tensorBlockDiagonalPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\BlockCholeskyPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\blockCholeskyPrecons.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\scalarBlockCholeskyPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\tensorBlockCholeskyPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon\BlockAMGPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon\blockAMGPrecons.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon\tensorBlockAMGPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\BlockGaussSeidelPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\blockGaussSeidelPrecons.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\scalarBlockGaussSeidelPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\tensorBlockGaussSeidelPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\BlockILUCpPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\blockILUCpPrecons.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\scalarBlockILUCpPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\tensorBlockILUCpPrecon.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother\BlockLduSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother\blockLduSmoothers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother\BlockILUSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother\blockILUSmoothers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother\BlockILUCpSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother\blockILUCpSmoothers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother\BlockGaussSeidelSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother\blockGaussSeidelSmoothers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\blockLduSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\BlockLduSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\BlockSolverPerformances.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\BlockSolverPerformanceVectorN.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal\BlockDiagonalSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal\blockDiagonalSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG\BlockCGSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockIterativeSolver\BlockIterativeSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockIterativeSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG\blockCGSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel\BlockGaussSeidelSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel\blockGaussSeidelSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab\BlockBiCGStabSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab\blockBiCGStabSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES\BlockGMRESSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES\blockGMRESSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver\BlockAMGSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver\blockAMGSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated\SegregatedSolver.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated\segregatedSolvers.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\constraint\constraint.hxx">
+      <Filter>TnbLib\Base\matrices\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\constraint\constraints.hxx">
+      <Filter>TnbLib\Base\matrices\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\constraint\scalarConstraint.hxx">
+      <Filter>TnbLib\Base\matrices\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGCycle.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\blockAMGCycles.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGLevel.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\blockAMGLevels.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\coarseBlockAMGLevel.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\fineBlockAMGLevel.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening\BlockMatrixCoarsening.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening\blockMatrixCoarsenings.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration\BlockMatrixAgglomeration.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration\blockMatrixAgglomerations.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration\tensorBlockMatrixAgglomeration.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration\scalarBlockMatrixAgglomeration.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField\BlockAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField\blockAMGInterfaceFields.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField\GGIBlockAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField\GGIBlockAMGInterfaceFields.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField\ProcessorBlockAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField\ProcessorBlockAMGInterfaceFields.hxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\preconditioners\noPreconditioner\noPreconditioner.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\noPreconditioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\preconditioners\diagonalPreconditioner\diagonalPreconditioner.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\diagonalPreconditioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\preconditioners\DICPreconditioner\DICPreconditioner.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\DICPreconditioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\preconditioners\DILUPreconditioner\DILUPreconditioner.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\DILUPreconditioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\preconditioners\FDICPreconditioner\FDICPreconditioner.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\FDICPreconditioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\preconditioners\GAMGPreconditioner\GAMGPreconditioner.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\GAMGPreconditioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\smoothers\DIC\DICSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DIC</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\smoothers\DICGaussSeidel\DICGaussSeidelSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DICGaussSeidel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\smoothers\GaussSeidel\GaussSeidelSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\GaussSeidel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\smoothers\DILUGaussSeidel\DILUGaussSeidelSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DILUGaussSeidel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\smoothers\DILU\DILUSmoother.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DILU</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\diagonalSolver\diagonalSolver.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\diagonalSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\PCG\PCG.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\PCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\BICCG\BICCG.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\BICCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\PBiCG\PBiCG.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\PBiCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\ICCG\ICCG.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\ICCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\smoothSolver\smoothSolver.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\smoothSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\GAMGSolver.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface\AMGInterface.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicAMGInterface\cyclicAMGInterface.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicAMGInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicGGIAMGInterface\cyclicGGIAMGInterface.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicGGIAMGInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface\ggiAMGInterface.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\mixingPlaneAMGInterface\mixingPlaneAMGInterface.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\mixingPlaneAMGInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\processorAMGInterface\processorAMGInterface.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\processorAMGInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\regionCoupleAMGInterface\regionCoupleAMGInterface.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\regionCoupleAMGInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField\AMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicAMGInterfaceField\cyclicAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\ggiAMGInterfaceField\ggiAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\ggiAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\mixingPlaneAMGInterfaceField\mixingPlaneAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\mixingPlaneAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\processorAMGInterfaceField\processorAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\processorAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\regionCoupleAMGInterfaceField\regionCoupleAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\regionCoupleAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicGgiAMGInterfaceField\cyclicGgiAMGInterfaceField.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicGgiAMGInterfaceField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration\GAMGAgglomeration.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\algebraicPairGAMGAgglomeration\algebraicPairGAMGAgglomeration.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\algebraicPairGAMGAgglomeration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration\pairGAMGAgglomeration.hxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\LUscalarMatrix\LUscalarMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\LUscalarMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\LUscalarMatrix\procLduMatrix.hxx">
+      <Filter>TnbLib\Base\matrices\LUscalarMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\LUscalarMatrix\procLduInterface.hxx">
+      <Filter>TnbLib\Base\matrices\LUscalarMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\Matrix\tools\DenseMatrixTools.hxx">
+      <Filter>TnbLib\Base\matrices\Matrix\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\Matrix\tools\EigenSolver\EigenSolver.hxx">
+      <Filter>TnbLib\Base\matrices\Matrix\tools\EigenSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\matrices\solution\solution.hxx">
+      <Filter>TnbLib\Base\matrices\solution</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField\PointPatchFieldTemplate.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField\PointPatchFieldFunctions.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField\PointPatchFieldMapperPatchRef.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField\PointPatchFieldMapper.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\zeroGradient\ZeroGradientPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\zeroGradient</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\value\ValuePointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\value</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\mixed\MixedPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\mixed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\calculated\CalculatedPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\calculated</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\basicSymmetry\BasicSymmetryPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\basicSymmetry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\coupled\CoupledPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\coupled</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\fixedValue\FixedValuePointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\fixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\generic\GenericPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\cyclic\CyclicPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\cyclic</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\empty\EmptyPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\empty</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\wedge\WedgePointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\wedge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\symmetry\SymmetryPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\symmetry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\processor\ProcessorPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\global\GlobalPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\slip\SlipPointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\slip</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\timeVaryingUniformFixedValue\TimeVaryingUniformFixedValuePointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\timeVaryingUniformFixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\uniformFixedValue\UniformFixedValuePointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\uniformFixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\oscillatingFixedValue\OscillatingFixedValuePointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\oscillatingFixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\componentMixed\ComponentMixedPointPatchVectorField.hxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\componentMixed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointPatchField.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\DummyMatrix.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointPatchFieldsFwd.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\basic\zeroGradient\zeroGradientPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\zeroGradient</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\basic\value\valuePointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\value</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\basic\generic\genericPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\basic\fixedValue\fixedValuePointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\fixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\basic\coupled\coupledPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\coupled</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\basic\calculated\calculatedPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\calculated</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\basic\mixed\mixedPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\mixed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\constraint\cyclic\cyclicPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\cyclic</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\cyclicGgi\cyclicGgiPointPatch.hxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\cyclicGgi</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\mixingPlane\mixingPlanePointPatch.hxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\mixingPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateRotation\coordinateRotation.hxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateRotation\axisCoordinateRotation.hxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateRotation\EulerCoordinateRotation.hxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateRotation\STARCDCoordinateRotation.hxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateSystem.hxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateSystems.hxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\cylindricalCS.hxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\ellipticCylindricalCS.hxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\parabolicCylindricalCS.hxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\sphericalCS.hxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\coordinateSystems\toroidalCS.hxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\overlapGgi\overlapGgiPointPatch.hxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\overlapGgi</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\processor\processorPointPatch.hxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\regionCouple\regionCouplePointPatch.hxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\regionCouple</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\symmetry\symmetryPointPatch.hxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\symmetry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointConstraint\pointConstraint.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField\pointConstraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointConstraint\pointConstraintI.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField\pointConstraint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\constraint\empty\emptyPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\empty</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\constraint\processor\processorPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\constraint\symmetry\symmetryPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\symmetry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\constraint\wedge\wedgePointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\wedge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\derived\uniformFixedValue\uniformFixedValuePointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\uniformFixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\derived\timeVaryingUniformFixedValue\timeVaryingUniformFixedValuePointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\timeVaryingUniformFixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\derived\slip\slipPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\slip</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\derived\oscillatingFixedValue\oscillatingFixedValuePointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\oscillatingFixedValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\pointPatchFields\derived\global\globalPointPatchFields.hxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricFieldFunctions.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricFieldFunctionsM.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricFieldI.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricFieldReuseFunctions.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricFields.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricField\MapGeometricFields.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricScalarField\GeometricScalarField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricScalarField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\geometricOneField\geometricOneField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\geometricOneField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\geometricOneField\geometricOneFieldI.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\geometricOneField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorField\GeometricSphericalTensorField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricSymmTensorField\GeometricSymmTensorField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSymmTensorField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricTensorField\GeometricTensorField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricTensorField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricDiagTensorField\GeometricDiagTensorField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricDiagTensorField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\transformGeometricField\transformGeometricField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\transformGeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\SlicedGeometricField\SlicedGeometricField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\SlicedGeometricField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricSymmTensor4thOrderField\GeometricSymmTensor4thOrderField.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSymmTensor4thOrderField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorNFields\GeometricSphericalTensorNFields.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorNFields</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricVectorNFields\GeometricVectorNFields.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricVectorNFields</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricDiagTensorNFields\GeometricDiagTensorNFields.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricDiagTensorNFields</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\GeometricTensorNFields\GeometricTensorNFields.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricTensorNFields</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\pointFields\pointFields.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\pointFields</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\GeometricFields\pointFields\pointFieldsFwd.hxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\pointFields</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -5458,6 +6427,663 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\fields\CoeffField\tensorCoeffField.cxx">
       <Filter>TnbLib\Base\fields\CoeffField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm\blockCoeffNorms.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm\BlockCoeffTwoNorm.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm\blockCoeffTwoNorms.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm\BlockCoeffMaxNorm.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm\blockCoeffMaxNorms.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm\BlockCoeffComponentNorm.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm\blockCoeffComponentNorms.cxx">
+      <Filter>TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\FadOne\FadOne.cxx">
+      <Filter>TnbLib\Base\Primitives\FadOne</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\FadOne\FadOneField.cxx">
+      <Filter>TnbLib\Base\Primitives\FadOne</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint\BlockConstraint.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint\scalarBlockConstraint.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint\BlockConstraintTools.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\extendedBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\tensorExtendedBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\symmTensorExtendedBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\sphericalTensorExtendedBlockLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\extendedBlockVectorNMatrices.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix\extendedBlockLduMatrices.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon\blockNoPrecons.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon\BlockLduPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon\blockLduPrecons.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\BlockDiagonalPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\blockDiagonalPrecons.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\scalarBlockDiagonalPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon\tensorBlockDiagonalPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\BlockCholeskyPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\BlockCholeskyPreconDecoupled.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\blockCholeskyPrecons.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\scalarBlockCholeskyPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon\tensorBlockCholeskyPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon\BlockAMGPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon\blockAMGPrecons.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon\tensorBlockAMGPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\BlockGaussSeidelPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\BlockGaussSeidelPreconDecoupled.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\blockGaussSeidelPrecons.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\scalarBlockGaussSeidelPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon\tensorBlockGaussSeidelPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\BlockILUCpPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\BlockILUCpPreconDecoupled.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\blockILUCpPrecons.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\scalarBlockILUCpPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon\tensorBlockILUCpPrecon.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother\BlockLduSmoother.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother\blockLduSmoothers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother\blockILUSmoothers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother\blockILUCpSmoothers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother\blockGaussSeidelSmoothers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\blockLduSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\BlockLduSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\BlockSolverPerformances.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver\BlockSolverPerformanceVectorN.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal\BlockDiagonalSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal\blockDiagonalSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG\BlockCGSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockIterativeSolver\BlockIterativeSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockIterativeSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG\blockCGSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel\BlockGaussSeidelSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel\blockGaussSeidelSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab\BlockBiCGStabSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab\blockBiCGStabSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES\BlockGMRESSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES\blockGMRESSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver\BlockAMGSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver\blockAMGSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated\SegregatedSolver.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated\segregatedSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\blockVectorNSolvers.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\constraint\constraint.cxx">
+      <Filter>TnbLib\Base\matrices\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\constraint\constraintTools.cxx">
+      <Filter>TnbLib\Base\matrices\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\constraint\scalarConstraint.cxx">
+      <Filter>TnbLib\Base\matrices\constraint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGCycle.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\blockAMGCycles.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\blockAMGLevels.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\coarseBlockAMGLevel.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\fineBlockAMGLevel.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening\BlockMatrixCoarsening.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening\blockMatrixCoarsenings.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration\BlockMatrixAgglomeration.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration\blockMatrixAgglomerations.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField\BlockAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField\blockAMGInterfaceFields.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField\blockVectorNAMGInterfaceFields.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField\newBlockAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField\GGIBlockAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField\GGIBlockAMGInterfaceFields.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField\ProcessorBlockAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField\ProcessorBlockAMGInterfaceFields.cxx">
+      <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\preconditioners\noPreconditioner\noPreconditioner.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\noPreconditioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\preconditioners\diagonalPreconditioner\diagonalPreconditioner.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\diagonalPreconditioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\preconditioners\DICPreconditioner\DICPreconditioner.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\DICPreconditioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\preconditioners\DILUPreconditioner\DILUPreconditioner.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\DILUPreconditioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\preconditioners\FDICPreconditioner\FDICPreconditioner.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\FDICPreconditioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\preconditioners\GAMGPreconditioner\GAMGPreconditioner.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\preconditioners\GAMGPreconditioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\smoothers\DIC\DICSmoother.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DIC</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\smoothers\DICGaussSeidel\DICGaussSeidelSmoother.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DICGaussSeidel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\smoothers\GaussSeidel\GaussSeidelSmoother.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\GaussSeidel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\smoothers\DILUGaussSeidel\DILUGaussSeidelSmoother.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DILUGaussSeidel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\smoothers\DILU\DILUSmoother.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\smoothers\DILU</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\diagonalSolver\diagonalSolver.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\diagonalSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\PCG\PCG.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\PCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\BICCG\BICCG.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\BICCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\PBiCG\PBiCG.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\PBiCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\ICCG\ICCG.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\ICCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\smoothSolver\smoothSolver.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\smoothSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\GAMGSolver.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\GAMGSolverAgglomerateMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\GAMGSolverScalingFactor.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\GAMGSolverSolve.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface\AMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface\AMGInterfaceTemplates.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface\newAMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicAMGInterface\cyclicAMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicAMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicGGIAMGInterface\cyclicGGIAMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicGGIAMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface\ggiAMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface\ggiAMGInterfaceTemplates.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\mixingPlaneAMGInterface\mixingPlaneAMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\mixingPlaneAMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\processorAMGInterface\processorAMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\processorAMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\regionCoupleAMGInterface\regionCoupleAMGInterface.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\regionCoupleAMGInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField\AMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField\newAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicAMGInterfaceField\cyclicAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\ggiAMGInterfaceField\ggiAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\ggiAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\mixingPlaneAMGInterfaceField\mixingPlaneAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\mixingPlaneAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\processorAMGInterfaceField\processorAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\processorAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\regionCoupleAMGInterfaceField\regionCoupleAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\regionCoupleAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicGgiAMGInterfaceField\cyclicGgiAMGInterfaceField.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicGgiAMGInterfaceField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration\GAMGAgglomeration.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration\GAMGAgglomerateLduAddressing.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration\GAMGAgglomerationTemplates.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\algebraicPairGAMGAgglomeration\algebraicPairGAMGAgglomeration.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\algebraicPairGAMGAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration\pairGAMGAgglomeration.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration\pairGAMGAgglomerate.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration\pairGAMGAgglomerationCombineLevels.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\LUscalarMatrix\LUscalarMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\LUscalarMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\LUscalarMatrix\procLduMatrix.cxx">
+      <Filter>TnbLib\Base\matrices\LUscalarMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\LUscalarMatrix\procLduInterface.cxx">
+      <Filter>TnbLib\Base\matrices\LUscalarMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\LUscalarMatrix\LUscalarMatrixTemplates.cxx">
+      <Filter>TnbLib\Base\matrices\LUscalarMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\Matrix\tools\DenseMatrixTools.cxx">
+      <Filter>TnbLib\Base\matrices\Matrix\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\Matrix\tools\EigenSolver\EigenSolver.cxx">
+      <Filter>TnbLib\Base\matrices\Matrix\tools\EigenSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\solution\solution.cxx">
+      <Filter>TnbLib\Base\matrices\solution</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\solution\solutionTemplates.cxx">
+      <Filter>TnbLib\Base\matrices\solution</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField\newPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField\PointPatchFieldTemplate.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\zeroGradient\ZeroGradientPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\zeroGradient</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\value\ValuePointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\value</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\mixed\MixedPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\mixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\calculated\CalculatedPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\calculated</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\basicSymmetry\BasicSymmetryPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\basicSymmetry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\coupled\CoupledPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\coupled</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\fixedValue\FixedValuePointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\fixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\basic\generic\GenericPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\basic\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\cyclic\CyclicPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\cyclic</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\empty\EmptyPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\empty</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\wedge\WedgePointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\wedge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\symmetry\SymmetryPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\symmetry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\constraint\processor\ProcessorPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\constraint\processor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\global\GlobalPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\slip\SlipPointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\slip</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\timeVaryingUniformFixedValue\TimeVaryingUniformFixedValuePointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\timeVaryingUniformFixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\uniformFixedValue\UniformFixedValuePointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\uniformFixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\oscillatingFixedValue\OscillatingFixedValuePointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\oscillatingFixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\PointPatchFieldTemplates\derived\componentMixed\ComponentMixedPointPatchVectorField.cxx">
+      <Filter>TnbLib\Base\fields\PointPatchFieldTemplates\derived\componentMixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointPatchField.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\pointPatchField\pointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\pointPatchField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\basic\zeroGradient\zeroGradientPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\zeroGradient</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\basic\value\valuePointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\value</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\basic\generic\genericPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\basic\fixedValue\fixedValuePointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\fixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\basic\coupled\coupledPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\coupled</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\basic\calculated\calculatedPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\calculated</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\basic\mixed\mixedPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\basic\mixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\constraint\cyclic\cyclicPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\cyclic</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\cyclicGgi\cyclicGgiPointPatch.cxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\cyclicGgi</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\mixingPlane\mixingPlanePointPatch.cxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\mixingPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateRotation\coordinateRotation.cxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateRotation\axisCoordinateRotation.cxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateRotation\EulerCoordinateRotation.cxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateRotation\STARCDCoordinateRotation.cxx">
+      <Filter>TnbLib\Base\coordinateSystems\coordinateRotation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateSystem.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateSystems.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\cylindricalCS.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\ellipticCylindricalCS.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\newCoordinateSystem.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\parabolicCylindricalCS.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\sphericalCS.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\coordinateSystems\toroidalCS.cxx">
+      <Filter>TnbLib\Base\coordinateSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\overlapGgi\overlapGgiPointPatch.cxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\overlapGgi</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\processor\processorPointPatch.cxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\processor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\regionCouple\regionCouplePointPatch.cxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\regionCouple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\pointMesh\pointPatches\constraint\symmetry\symmetryPointPatch.cxx">
+      <Filter>TnbLib\Base\meshes\pointMesh\pointPatches\constraint\symmetry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\constraint\empty\emptyPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\empty</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\constraint\processor\processorPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\processor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\constraint\symmetry\symmetryPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\symmetry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\constraint\wedge\wedgePointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\constraint\wedge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\derived\uniformFixedValue\uniformFixedValuePointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\uniformFixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\derived\timeVaryingUniformFixedValue\timeVaryingUniformFixedValuePointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\timeVaryingUniformFixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\derived\slip\slipPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\slip</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\derived\oscillatingFixedValue\oscillatingFixedValuePointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\oscillatingFixedValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\pointPatchFields\derived\global\globalPointPatchFields.cxx">
+      <Filter>TnbLib\Base\fields\pointPatchFields\derived\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricBoundaryField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricFieldFunctions.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricField\GeometricFieldFunctionsM.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricScalarField\GeometricScalarField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricScalarField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\geometricOneField\geometricOneField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\geometricOneField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorField\GeometricSphericalTensorField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricSymmTensorField\GeometricSymmTensorField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSymmTensorField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricTensorField\GeometricTensorField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricTensorField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricDiagTensorField\GeometricDiagTensorField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricDiagTensorField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\transformGeometricField\transformGeometricField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\transformGeometricField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\SlicedGeometricField\SlicedGeometricField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\SlicedGeometricField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricSymmTensor4thOrderField\GeometricSymmTensor4thOrderField.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSymmTensor4thOrderField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorNFields\GeometricSphericalTensorNFields.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorNFields</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricVectorNFields\GeometricVectorNFields.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricVectorNFields</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricDiagTensorNFields\GeometricDiagTensorNFields.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricDiagTensorNFields</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\GeometricTensorNFields\GeometricTensorNFields.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\GeometricTensorNFields</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\fields\GeometricFields\pointFields\pointFields.cxx">
+      <Filter>TnbLib\Base\fields\GeometricFields\pointFields</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\meshes\polyMesh\polyPatches\constraint\symmetry\symmetryPolyPatch.cxx">
+      <Filter>TnbLib\Base\meshes\polyMesh\polyPatches\constraint\symmetry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,8 @@
 #include <BlockCoeff.hxx>
 
+#include <Field.hxx>
+#include <CoeffField.hxx>
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib

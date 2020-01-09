@@ -2,6 +2,7 @@
 #ifndef _BlockCoeffNorm_Header
 #define _BlockCoeffNorm_Header
 
+#include <dictionary.hxx>
 #include <blockCoeffs.hxx>
 #include <coeffFields.hxx>
 #include <runTimeSelectionTables.hxx>
