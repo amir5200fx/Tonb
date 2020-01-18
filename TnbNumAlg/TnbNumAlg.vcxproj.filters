@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{d36db888-1548-4df1-b6ce-41651d53d444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg">
+      <UniqueIdentifier>{7a9e0606-0c5f-4c8f-8f80-bb6f31fe4cb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration">
+      <UniqueIdentifier>{3cf8b21b-d59d-45b3-b821-f51cd39e4c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\Adaptive">
+      <UniqueIdentifier>{9640bc44-2705-422f-958c-293572ea7ad2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\Function">
+      <UniqueIdentifier>{7d361d6b-5ab7-4609-a64b-4e16b98e1ddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\System">
+      <UniqueIdentifier>{b741e0dc-9cda-4d3d-b24e-cf93e0f56243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\Boundary">
+      <UniqueIdentifier>{e54ea98f-f655-4520-b3d9-c04e59f2851f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\Adaptive\Info">
+      <UniqueIdentifier>{aeaca0a9-3b20-49f1-8615-40863c40b5ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\Adaptive\Core">
+      <UniqueIdentifier>{447f3c5b-e7a6-4fca-a084-ce48585400b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver">
+      <UniqueIdentifier>{b2c84adb-e147-4db0-bfcd-8e2773fbd389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\Newton">
+      <UniqueIdentifier>{8dda8d4e-c260-4aa3-bf1a-c4712d714468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\Newton\Info">
+      <UniqueIdentifier>{4ad4a230-2b54-4213-84fa-8eb87260db3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Random">
+      <UniqueIdentifier>{d87e539b-2246-44eb-b829-1ea5ec9498e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Random\System">
+      <UniqueIdentifier>{1df3b351-c1cd-4782-8669-4a556dfd9c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\System">
+      <UniqueIdentifier>{a0b38760-7931-4325-9b99-32c14687cfad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
+      <Filter>TnbLib\NumAlg\Integration\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\Boundary\NumAlg_IntegBond.hxx">
+      <Filter>TnbLib\NumAlg\Integration\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\Adaptive\Info\NumAlg_AdaptiveInteg_Info.hxx">
+      <Filter>TnbLib\NumAlg\Integration\Adaptive\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\Adaptive\Core\NumAlg_AdaptiveInteg_Core.hxx">
+      <Filter>TnbLib\NumAlg\Integration\Adaptive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\Adaptive\Core\NumAlg_AdaptiveInteg_CoreI.hxx">
+      <Filter>TnbLib\NumAlg\Integration\Adaptive\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\Adaptive\NumAlg_AdaptiveInteg.hxx">
+      <Filter>TnbLib\NumAlg\Integration\Adaptive</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\Info\NumAlg_NewtonSolver_Info.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Newton\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\NumAlg_NewtonSolver.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Newton</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Random\NumAlg_Random.hxx">
+      <Filter>TnbLib\NumAlg\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Random\System\NumAlg_Random_System.hxx">
+      <Filter>TnbLib\NumAlg\Random\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\System\NumAlg_System.hxx">
+      <Filter>TnbLib\NumAlg\System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">
+      <Filter>TnbLib\NumAlg\Integration\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Integration\Adaptive\Info\NumAlg_AdaptiveInteg_Info.cxx">
+      <Filter>TnbLib\NumAlg\Integration\Adaptive\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Integration\Adaptive\Core\NumAlg_AdaptiveInteg_Core.cxx">
+      <Filter>TnbLib\NumAlg\Integration\Adaptive\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\Newton\Info\NumAlg_NewtonSolver_Info.cxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Newton\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\System\NumAlg_Random_System.cxx">
+      <Filter>TnbLib\NumAlg\Random\System</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
