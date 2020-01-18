@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{c9ed7ab3-2fe6-43f7-afef-d323892ffa7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase">
+      <UniqueIdentifier>{2dbff30b-b6f2-4746-a07a-c4d5669bbf4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Data">
+      <UniqueIdentifier>{8325b5bb-233d-4b84-a8d1-cb388384ab89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities">
+      <UniqueIdentifier>{94b6ff1a-3d98-4b56-bd16-57e36f770090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom">
+      <UniqueIdentifier>{ff9e6c3c-786d-46ba-9072-2b3bb062837e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\System">
+      <UniqueIdentifier>{6e5ae2a7-f7b3-4bb7-ab51-29bdbd55b929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd">
+      <UniqueIdentifier>{22ea4b4b-3d7e-4408-8815-59ad8e406092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Element">
+      <UniqueIdentifier>{85a336e5-a8d5-43d2-b2b8-8f2cdb6f4817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Entity">
+      <UniqueIdentifier>{177ed691-f54b-4738-a883-dd3dd70fa7d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Facet">
+      <UniqueIdentifier>{404cd197-bb75-4f00-afd6-0b5cd4480f3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Node">
+      <UniqueIdentifier>{2fde7354-e9a4-4507-8b24-60f810314172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Node\2d">
+      <UniqueIdentifier>{2bdfc472-5be8-44d3-b045-8c7cfc5cac97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Node\3d">
+      <UniqueIdentifier>{0ba6c34b-738e-4d63-b2cc-eaf4b8cf2f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Node\Adaptor">
+      <UniqueIdentifier>{7b6adcc5-5a1e-4224-9e85-10a63f769b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Node\Traits">
+      <UniqueIdentifier>{64750dc1-dca6-4dda-8151-90787364a6f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Facet\3d">
+      <UniqueIdentifier>{28976685-7a10-4b90-b3f4-19ea576f5c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Facet\Traits">
+      <UniqueIdentifier>{4fb430a3-10d9-4dcf-b149-fed20a30a580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Element\2d">
+      <UniqueIdentifier>{933341cc-42d6-4a43-b3d0-23c80b0b7cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Element\3d">
+      <UniqueIdentifier>{ef7cd4e2-6411-456d-8806-984a32adb61d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Element\Adaptor">
+      <UniqueIdentifier>{7766fb8d-30bc-421e-aa1c-500971ada667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Element\Traits">
+      <UniqueIdentifier>{b4af2936-a1ca-4ddd-8634-8f470828aa27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Edge">
+      <UniqueIdentifier>{05959a1e-7d33-4c43-8749-8d91898bf50d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Edge\2d">
+      <UniqueIdentifier>{131f6134-e1a4-48a8-aadb-43bc84ee93bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Edge\3d">
+      <UniqueIdentifier>{d31ae92e-e384-4947-8f49-c358f6c6a25e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Edge\Adaptor">
+      <UniqueIdentifier>{de5e276d-0fcc-4f4f-9d70-0d480aa930f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Edge\Traits">
+      <UniqueIdentifier>{540a4ae4-e4d7-4f25-83e4-2b37042dd6ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Element\Type">
+      <UniqueIdentifier>{a65ef7e1-8b22-4fd9-a24b-3cd05ec4e435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Traits">
+      <UniqueIdentifier>{199370b7-68e7-4efe-ae9e-f55aa0aaaf8c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_EntityAdaptorM.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_NamedEntity.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Adaptor\Mesh_NodeAdaptor.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\2d\Mesh2d_NodeFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\2d\Mesh2d_Node.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\3d\Mesh3d_NodeFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\3d\Mesh3d_Node.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Traits\Mesh2d_NodeTraits.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Traits\Mesh3d_NodeTraits.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Mesh_Node.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_EdgeAdaptor.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_EdgeFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_Edge.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\3d\Mesh3d_EdgeFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\3d\Mesh3d_Edge.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Mesh_Edge.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Mesh_EdgeI.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Traits\Mesh3d_EdgeTraits.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Traits\Mesh2d_EdgeTraits.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_ElementFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Type\Mesh_ElementType.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Adaptor\Mesh_ElementAdaptor.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_ElementFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_Element.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_Element.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Traits\Mesh2d_ElementTraits.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Traits\Mesh3d_ElementTraits.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_FacetFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Facet\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\Mesh_FacetFwd.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Facet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_Facet.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Facet\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\Traits\Mesh3d_FacetTraits.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Facet\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\Mesh_Facet.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Facet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Mesh_Element.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Mesh_ElementI.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Traits\Mesh_TypeTraits.hxx">
+      <Filter>TnbLib\MeshBase\Traits</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_Edge.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\Mesh_Edge.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_Element.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_Element.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_Facet.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Facet\3d</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>

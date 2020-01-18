@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{B0A6C309-B4D6-488D-9416-0901AE71ADCF}</ProjectGuid>
+    <RootNamespace>TnbMeshBase</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshBase\Entities\Element\Type;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Element\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Element\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Element;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Node\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Node\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Entity;$(ProjectDir)TnbLib\MeshBase\Traits;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshBase\Entities\Element\Type;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Element\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Element\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Element;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Node\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Node\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Entity;$(ProjectDir)TnbLib\MeshBase\Traits;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_Edge.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_EdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\3d\Mesh3d_Edge.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\3d\Mesh3d_EdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_EdgeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Mesh_Edge.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Mesh_EdgeI.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Traits\Mesh2d_EdgeTraits.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Traits\Mesh3d_EdgeTraits.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_Element.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_ElementFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_Element.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_ElementFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Adaptor\Mesh_ElementAdaptor.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Mesh_Element.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Mesh_ElementI.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Traits\Mesh2d_ElementTraits.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Traits\Mesh3d_ElementTraits.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Type\Mesh_ElementType.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_EntityAdaptorM.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_NamedEntity.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_Facet.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_FacetFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\Mesh_Facet.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\Mesh_FacetFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Facet\Traits\Mesh3d_FacetTraits.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\2d\Mesh2d_Node.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\2d\Mesh2d_NodeFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\3d\Mesh3d_Node.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\3d\Mesh3d_NodeFwd.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Adaptor\Mesh_NodeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Mesh_Node.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Traits\Mesh2d_NodeTraits.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Traits\Mesh3d_NodeTraits.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Traits\Mesh_TypeTraits.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_Edge.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\Mesh_Edge.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_Element.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_Element.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_Facet.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
