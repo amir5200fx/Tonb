@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{B6C72F52-D96C-4B03-B599-4F298D29F8F7}</ProjectGuid>
+    <RootNamespace>TnbGeo</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Geo\Approximation\Space;$(ProjectDir)TnbLib\Geo\Approximation\Curve\Traits;$(ProjectDir)TnbLib\Geo\Approximation\Curve\System;$(ProjectDir)TnbLib\Geo\Approximation\Curve\Info;$(ProjectDir)TnbLib\Geo\Approximation\Curve\3d;$(ProjectDir)TnbLib\Geo\Approximation\Curve\2d;$(ProjectDir)TnbLib\Geo\Approximation\Curve;$(ProjectDir)TnbLib\Geo\Tools;$(ProjectDir)TnbLib\Geo\Sort;$(ProjectDir)TnbLib\Geo\Traits;$(ProjectDir)TnbLib\Geo\Graph;$(ProjectDir)TnbLib\Geo\Graph\Edge\Adaptor;$(ProjectDir)TnbLib\Geo\Graph\Edge;$(ProjectDir)TnbLib\Geo\Graph\Node\Adaptor;$(ProjectDir)TnbLib\Geo\Graph\Node;$(ProjectDir)TnbLib\Geo\Knit\Chain\Node\Type;$(ProjectDir)TnbLib\Geo\Knit\Chain\Node;$(ProjectDir)TnbLib\Geo\Knit\Chain;$(ProjectDir)TnbLib\Geo\Knit;$(ProjectDir)TnbLib\Geo\Knit\Edge;$(ProjectDir)TnbLib\Geo\Knit\Node\Type;$(ProjectDir)TnbLib\Geo\Knit\Node;$(ProjectDir)TnbLib\Geo\Entities\Vector\3d;$(ProjectDir)TnbLib\Geo\Entities\Vector\2d;$(ProjectDir)TnbLib\Geo\Entities\Triangulation\3d;$(ProjectDir)TnbLib\Geo\Entities\Triangulation\2d;$(ProjectDir)TnbLib\Geo\Entities\Triangle;$(ProjectDir)TnbLib\Geo\Entities\Tetrahedralization;$(ProjectDir)TnbLib\Geo\Entities\StaticData;$(ProjectDir)TnbLib\Geo\Entities\Segment;$(ProjectDir)TnbLib\Geo\Entities\Polygon\3d;$(ProjectDir)TnbLib\Geo\Entities\Polygon\2d;$(ProjectDir)TnbLib\Geo\Entities\Polygon;$(ProjectDir)TnbLib\Geo\Entities\Metric2\3d;$(ProjectDir)TnbLib\Geo\Entities\Metric2\2d;$(ProjectDir)TnbLib\Geo\Entities\Metric1\3d;$(ProjectDir)TnbLib\Geo\Entities\Metric1\2d;$(ProjectDir)TnbLib\Geo\Entities\Line\3d;$(ProjectDir)TnbLib\Geo\Entities\Line\2d;$(ProjectDir)TnbLib\Geo\Entities\Line;$(ProjectDir)TnbLib\Geo\Entities\IndexedItem\Point;$(ProjectDir)TnbLib\Geo\Entities\IndexedItem;$(ProjectDir)TnbLib\Geo\Entities\Eigen\3d;$(ProjectDir)TnbLib\Geo\Entities\Eigen\2d;$(ProjectDir)TnbLib\Geo\Entities\Direct\3d;$(ProjectDir)TnbLib\Geo\Entities\Direct\2d;$(ProjectDir)TnbLib\Geo\Entities\Connectivity;$(ProjectDir)TnbLib\Geo\Entities\Chain\3d;$(ProjectDir)TnbLib\Geo\Entities\Chain\2d;$(ProjectDir)TnbLib\Geo\Entities\Chain;$(ProjectDir)TnbLib\Geo\Entities\Box\3d;$(ProjectDir)TnbLib\Geo\Entities\Box\2d;$(ProjectDir)TnbLib\Geo\Entities\Box;$(ProjectDir)TnbLib\Geo\Point\3d;$(ProjectDir)TnbLib\Geo\Point\2d;$(ProjectDir)TnbLib\Geo\System;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Geo\Approximation\Space;$(ProjectDir)TnbLib\Geo\Approximation\Curve\Traits;$(ProjectDir)TnbLib\Geo\Approximation\Curve\System;$(ProjectDir)TnbLib\Geo\Approximation\Curve\Info;$(ProjectDir)TnbLib\Geo\Approximation\Curve\3d;$(ProjectDir)TnbLib\Geo\Approximation\Curve\2d;$(ProjectDir)TnbLib\Geo\Approximation\Curve;$(ProjectDir)TnbLib\Geo\Tools;$(ProjectDir)TnbLib\Geo\Sort;$(ProjectDir)TnbLib\Geo\Traits;$(ProjectDir)TnbLib\Geo\Graph;$(ProjectDir)TnbLib\Geo\Graph\Edge\Adaptor;$(ProjectDir)TnbLib\Geo\Graph\Edge;$(ProjectDir)TnbLib\Geo\Graph\Node\Adaptor;$(ProjectDir)TnbLib\Geo\Graph\Node;$(ProjectDir)TnbLib\Geo\Knit\Chain\Node\Type;$(ProjectDir)TnbLib\Geo\Knit\Chain\Node;$(ProjectDir)TnbLib\Geo\Knit\Chain;$(ProjectDir)TnbLib\Geo\Knit;$(ProjectDir)TnbLib\Geo\Knit\Edge;$(ProjectDir)TnbLib\Geo\Knit\Node\Type;$(ProjectDir)TnbLib\Geo\Knit\Node;$(ProjectDir)TnbLib\Geo\Entities\Vector\3d;$(ProjectDir)TnbLib\Geo\Entities\Vector\2d;$(ProjectDir)TnbLib\Geo\Entities\Triangulation\3d;$(ProjectDir)TnbLib\Geo\Entities\Triangulation\2d;$(ProjectDir)TnbLib\Geo\Entities\Triangle;$(ProjectDir)TnbLib\Geo\Entities\Tetrahedralization;$(ProjectDir)TnbLib\Geo\Entities\StaticData;$(ProjectDir)TnbLib\Geo\Entities\Segment;$(ProjectDir)TnbLib\Geo\Entities\Polygon\3d;$(ProjectDir)TnbLib\Geo\Entities\Polygon\2d;$(ProjectDir)TnbLib\Geo\Entities\Polygon;$(ProjectDir)TnbLib\Geo\Entities\Metric2\3d;$(ProjectDir)TnbLib\Geo\Entities\Metric2\2d;$(ProjectDir)TnbLib\Geo\Entities\Metric1\3d;$(ProjectDir)TnbLib\Geo\Entities\Metric1\2d;$(ProjectDir)TnbLib\Geo\Entities\Line\3d;$(ProjectDir)TnbLib\Geo\Entities\Line\2d;$(ProjectDir)TnbLib\Geo\Entities\Line;$(ProjectDir)TnbLib\Geo\Entities\IndexedItem\Point;$(ProjectDir)TnbLib\Geo\Entities\IndexedItem;$(ProjectDir)TnbLib\Geo\Entities\Eigen\3d;$(ProjectDir)TnbLib\Geo\Entities\Eigen\2d;$(ProjectDir)TnbLib\Geo\Entities\Direct\3d;$(ProjectDir)TnbLib\Geo\Entities\Direct\2d;$(ProjectDir)TnbLib\Geo\Entities\Connectivity;$(ProjectDir)TnbLib\Geo\Entities\Chain\3d;$(ProjectDir)TnbLib\Geo\Entities\Chain\2d;$(ProjectDir)TnbLib\Geo\Entities\Chain;$(ProjectDir)TnbLib\Geo\Entities\Box\3d;$(ProjectDir)TnbLib\Geo\Entities\Box\2d;$(ProjectDir)TnbLib\Geo\Entities\Box;$(ProjectDir)TnbLib\Geo\Point\3d;$(ProjectDir)TnbLib\Geo\Point\2d;$(ProjectDir)TnbLib\Geo\System;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\2d\Geo2d_ApprxCurve.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\2d\Geo2d_ApprxCurveFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\3d\Geo3d_ApprxCurve.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\3d\Geo3d_ApprxCurveFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Geo_ApprxCurve.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Geo_ApprxCurveI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Info\Geo_ApprxCurve_Info.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\System\Geo_ApprxCurve_System.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Traits\Geo_ApprxCurve_Traits.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Box\2d\Entity2d_Box.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Box\2d\Entity2d_BoxFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Box\3d\Entity3d_Box.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Box\3d\Entity3d_BoxFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Box\Entity_Box.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Box\Entity_BoxI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_Chain.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_ChainFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Chain\3d\Entity3d_Chain.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Chain\3d\Entity3d_ChainFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Connectivity\Entity_Connectivity.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Connectivity\Entity_ConnectivityI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Direct\2d\Dir2d.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Eigen\2d\Entity2d_Eigen.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Eigen\2d\Entity2d_EigenI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\IndexedItem\IndexedItem.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\IndexedItem\Point\2d\IndexedPt2d.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\IndexedItem\Point\3d\IndexedPt3d.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Line\2d\Entity2d_LineRef.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Line\Entity_Line.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Line\Entity_LineI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Metric1\2d\Entity2d_Metric1.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Metric1\2d\Entity2d_Metric1I.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1I.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Metric2\2d\Entity2d_Metric2.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Metric2\2d\Entity2d_Metric2I.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_SIDE.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_Tools.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_Polygon.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_PolygonFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_Polygon.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_PolygonI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Segment\Entity_Segment.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\StaticData\Entity_StaticData.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\StaticData\Entity_StaticDataI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Triangle\Entity_Triangle.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Triangle\Entity_TriangleI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_Triangulation.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationN.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Vector\2d\Vec2d.hxx" />
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\Adaptor\Geo_GraphEdgeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\Geo_GraphEdge.hxx" />
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\Geo_GraphEdgeI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Graph\Geo_Graph.hxx" />
+    <ClInclude Include="TnbLib\Geo\Graph\Node\Adaptor\Geo_GraphNodeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Geo\Graph\Node\Geo_GraphNode.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Chain\Node\Knit_ChainNode.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Chain\Node\Knit_ChainNodeI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Chain\Node\Type\Knit_ChainNode_Type.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Edge\Geo_KnitEdge.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Geo_KnitGraph.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Geo_KnitGraphI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Node\Geo_KnitNode.hxx" />
+    <ClInclude Include="TnbLib\Geo\Knit\Node\Type\Geo_KnitNodeType.hxx" />
+    <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx" />
+    <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2dI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Point\3d\Pnt3d.hxx" />
+    <ClInclude Include="TnbLib\Geo\Point\3d\Pnt3dI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Sort\Geo_ItemSort.hxx" />
+    <ClInclude Include="TnbLib\Geo\System\TnbGeo_System.hxx" />
+    <ClInclude Include="TnbLib\Geo\Tools\Geo_Tools.hxx" />
+    <ClInclude Include="TnbLib\Geo\Tools\Geo_ToolsI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Traits\Geo_Traits.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Geo_ApprxCurve.cxx" />
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Info\Geo_ApprxCurve_Info.cxx" />
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\System\Geo_ApprxCurve_System.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Box\2d\Entity2d_Box.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Box\2d\Entity2d_BoxIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Box\3d\Entity3d_Box.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_Chain.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_ChainIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Chain\3d\Entity3d_ChainIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Connectivity\Entity_Connectivity.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Direct\2d\Dir2d.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Eigen\2d\Entity2d_Eigen.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Eigen\2d\Entity2d_EigenIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Line\2d\Entity2d_LineRef.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Metric1\2d\Entity2d_Metric1.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Metric1\2d\Entity2d_Metric1IO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1IO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Metric2\2d\Entity2d_Metric2.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_Tools.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_PolygonIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationN.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2d.cxx" />
+    <ClCompile Include="TnbLib\Geo\Knit\Chain\Node\Knit_ChainNode.cxx" />
+    <ClCompile Include="TnbLib\Geo\Knit\Geo_KnitGraph.cxx" />
+    <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx" />
+    <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2dIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Point\3d\Pnt3d.cxx" />
+    <ClCompile Include="TnbLib\Geo\Point\3d\Pnt3dIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\System\TnbGeo_System.cxx" />
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools_cgal.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
