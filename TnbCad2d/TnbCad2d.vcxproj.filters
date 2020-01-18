@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{f8af167a-c5ab-4e1f-9b2c-49983b116c1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d">
+      <UniqueIdentifier>{d2294e15-cf90-4062-ac83-e2bf450021e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities">
+      <UniqueIdentifier>{09879b78-0eff-4013-ba9c-934a72b51d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Wire">
+      <UniqueIdentifier>{5a29a829-e23b-4991-9f4e-3d04d4443eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Entity">
+      <UniqueIdentifier>{5c9559a3-3a20-40a2-b030-da950b1e390a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Orientation">
+      <UniqueIdentifier>{1e64524c-60e1-4f45-8e8e-15fe2cf258be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Ring">
+      <UniqueIdentifier>{bab5b4c9-6c0a-4682-9cb5-4a50877607c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Vertex">
+      <UniqueIdentifier>{7f523ef2-90e0-4e0c-9a05-c266a716677e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\CmpEdge">
+      <UniqueIdentifier>{27bee1da-fce7-4dc5-8e43-1ed6469c7a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Curve">
+      <UniqueIdentifier>{227831be-8837-4e1a-8c88-db9492f053ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Edge">
+      <UniqueIdentifier>{91225305-da62-417e-82f5-9d1341fd8063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Curve\Info">
+      <UniqueIdentifier>{72f48266-8d1d-4849-84d9-993b095044cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Tools">
+      <UniqueIdentifier>{3c3d876f-0b74-44e4-9da2-7334e2f3c252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Vertex\Adaptor">
+      <UniqueIdentifier>{c832069b-4520-4f84-95f1-e951eb1a4e5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Edge\Adaptor">
+      <UniqueIdentifier>{8fb50a4f-5496-42ea-99be-4a0badc91ae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Edge\Geom">
+      <UniqueIdentifier>{6a71e923-f543-48b4-872d-ca37807d7b06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_Curve_Info.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Tools\Pln_CurveTools.hxx">
+      <Filter>TnbLib\Cad2d\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecision.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptor.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_VertexI.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Pln_Edge.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Adaptor\Pln_EdgeAdaptor.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeom.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdge.hxx">
+      <Filter>TnbLib\Cad2d\Entities\CmpEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Orientation\Pln_Orientation.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Orientation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Ring\Pln_Ring.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Pln_Wire.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Pln_WireI.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Pln_EdgeI.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Tools\Pln_Tools.hxx">
+      <Filter>TnbLib\Cad2d\Tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_Curve_Info.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
+      <Filter>TnbLib\Cad2d\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecision.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeom.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Pln_Edge.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdge.cxx">
+      <Filter>TnbLib\Cad2d\Entities\CmpEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Orientation\Pln_Orientation.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Orientation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Pln_Wire.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools.cxx">
+      <Filter>TnbLib\Cad2d\Tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

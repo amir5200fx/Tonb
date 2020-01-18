@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdge.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_Curve_Info.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Adaptor\Pln_EdgeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeom.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Pln_Edge.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Pln_EdgeI.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecision.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Orientation\Pln_Orientation.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Ring\Pln_Ring.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_VertexI.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Pln_Wire.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Pln_WireI.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Tools\Pln_CurveTools.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Tools\Pln_Tools.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdge.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_Curve_Info.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeom.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Pln_Edge.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecision.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Orientation\Pln_Orientation.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Pln_Wire.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools.cxx" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{CD25D37B-6E90-452A-8CF4-8421FCB9D8AA}</ProjectGuid>
+    <RootNamespace>TnbCad2d</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Wire;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Ring;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Orientation;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\CmpEdge;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Edge\Adaptor;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Edge\Geom;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Edge;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Curve\Info;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Curve;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Vertex\Adaptor;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Vertex;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Entity;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Tools;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Wire;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Ring;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Orientation;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\CmpEdge;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Edge\Adaptor;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Edge\Geom;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Edge;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Curve\Info;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Curve;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Vertex\Adaptor;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Vertex;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Entities\Entity;$(SolutionDir)TnbCad2d\TnbLib\Cad2d\Tools;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
