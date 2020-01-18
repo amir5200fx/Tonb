@@ -20,7 +20,7 @@ tnbLib::error::error(const string& title)
 	functionName_("unknown"),
 	sourceFileName_("unknown"),
 	sourceFileLineNumber_(0),
-	abort_(env("FOAM_ABORT")),
+	abort_(env("TONB_ABORT")),
 	throwExceptions_(false),
 	messageStreamPtr_(new OStringStream())
 {
@@ -41,7 +41,7 @@ tnbLib::error::error(const dictionary& errDict)
 	functionName_(errDict.lookup("functionName")),
 	sourceFileName_(errDict.lookup("sourceFileName")),
 	sourceFileLineNumber_(readLabel(errDict.lookup("sourceFileLineNumber"))),
-	abort_(env("FOAM_ABORT")),
+	abort_(env("TONB_ABORT")),
 	throwExceptions_(false),
 	messageStreamPtr_(new OStringStream())
 {
@@ -157,7 +157,7 @@ void tnbLib::error::exit(const int errNo)
 	if (abort_)
 	{
 		Perr << endl << *this << endl
-			<< "\nFOAM aborting (FOAM_ABORT set)\n" << endl;
+			<< "\nTONB aborting (TONB_ABORT set)\n" << endl;
 
 		abort();
 	}
@@ -165,7 +165,7 @@ void tnbLib::error::exit(const int errNo)
 	if (Pstream::parRun())
 	{
 		Perr << endl << *this << endl
-			<< "\nFOAM parallel run exiting\n" << endl;
+			<< "\nTONB parallel run exiting\n" << endl;
 		Pstream::exit(errNo);
 	}
 	else
@@ -183,7 +183,7 @@ void tnbLib::error::exit(const int errNo)
 		else
 		{
 			Perr << endl << *this << endl
-				<< "\nFOAM exiting\n" << endl;
+				<< "\nTONB exiting\n" << endl;
 			::exit(1);
 		}
 	}
@@ -201,7 +201,7 @@ void tnbLib::error::abort()
 	if (abort_)
 	{
 		Perr << endl << *this << endl
-			<< "\nFOAM aborting (FOAM_ABORT set)\n" << endl;
+			<< "\nTONB aborting (TONB_ABORT set)\n" << endl;
 		printStack(Perr);
 		::abort();
 	}
@@ -209,7 +209,7 @@ void tnbLib::error::abort()
 	if (Pstream::parRun())
 	{
 		Perr << endl << *this << endl
-			<< "\nFOAM parallel run aborting\n" << endl;
+			<< "\nTONB parallel run aborting\n" << endl;
 		printStack(Perr);
 		Pstream::abort();
 	}
@@ -228,7 +228,7 @@ void tnbLib::error::abort()
 		else
 		{
 			Perr << endl << *this << endl
-				<< "\nFOAM aborting\n" << endl;
+				<< "\nTONB aborting\n" << endl;
 			printStack(Perr);
 			::abort();
 		}
@@ -257,6 +257,6 @@ tnbLib::Ostream& tnbLib::operator<<(Ostream& os, const error& fErr)
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 // Global error definitions
 
-tnbLib::error tnbLib::FatalError("--> FOAM FATAL ERROR: ");
+tnbLib::error tnbLib::FatalError("--> TONB FATAL ERROR: ");
 
 // ************************************************************************* //

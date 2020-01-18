@@ -4,6 +4,7 @@
 #include <ops.hxx>
 #include <pTraits.hxx>
 #include <error.hxx>
+#include <OSstream.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

@@ -1714,6 +1714,30 @@
     <Filter Include="TnbLib\Base\fields\GeometricFields\GeometricDiagTensorField">
       <UniqueIdentifier>{15e6836a-5cb4-4cb0-8958-c6922ce1c423}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\containers\Register">
+      <UniqueIdentifier>{5cce8d26-3abb-47d8-bfc0-94784307fccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\Register\Map">
+      <UniqueIdentifier>{ba68f56a-465a-4e78-a5c1-3dea0f02546d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Traits">
+      <UniqueIdentifier>{e5e76da5-ec9e-4031-9f44-15160c8a8ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\ADT">
+      <UniqueIdentifier>{90d4cb02-d236-43f0-a03e-16d282bd35d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\ADT\Ary1d">
+      <UniqueIdentifier>{41e46ad1-011a-4bc5-8574-6f89fc0278b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\ADT\Ary2d">
+      <UniqueIdentifier>{417126bc-03e6-43d1-9a5b-630aac205e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\ADT\Avl">
+      <UniqueIdentifier>{6cc74250-57e6-4bbd-8e46-2ae78193b66f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\containers\ADT\List">
+      <UniqueIdentifier>{4d208233-5556-41f0-8b13-2808741c9c47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -4635,6 +4659,63 @@
     <ClInclude Include="TnbLib\Base\fields\GeometricFields\pointFields\pointFieldsFwd.hxx">
       <Filter>TnbLib\Base\fields\GeometricFields\pointFields</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Done.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Indexed.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Message.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Named.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Timer.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Verbose.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Time.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_AccessMethod.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Bound.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\global\Global_Macros.hxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\error\errorM.hxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Register\Map\RegisterEntityM_Map.hxx">
+      <Filter>TnbLib\Base\containers\Register\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Traits\Traits.hxx">
+      <Filter>TnbLib\Base\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\ADT\Ary1d\Adt_Ary1d.hxx">
+      <Filter>TnbLib\Base\containers\ADT\Ary1d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\ADT\Ary1d\Adt_Ary1dI.hxx">
+      <Filter>TnbLib\Base\containers\ADT\Ary1d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\ADT\Ary2d\Adt_Ary2d.hxx">
+      <Filter>TnbLib\Base\containers\ADT\Ary2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\ADT\Avl\Adt_AvlTree.hxx">
+      <Filter>TnbLib\Base\containers\ADT\Avl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\ADT\List\Adt_List.hxx">
+      <Filter>TnbLib\Base\containers\ADT\List</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\ADT\List\Adt_SlList.hxx">
+      <Filter>TnbLib\Base\containers\ADT\List</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -7084,6 +7165,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\meshes\polyMesh\polyPatches\constraint\symmetry\symmetryPolyPatch.cxx">
       <Filter>TnbLib\Base\meshes\polyMesh\polyPatches\constraint\symmetry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\Global_Timer.cxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\error\ConvError.cxx">
+      <Filter>TnbLib\Base\db\error</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\db\error\IOerror.cxx">
+      <Filter>TnbLib\Base\db\error</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

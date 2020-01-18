@@ -1,6 +1,7 @@
 #include <label.hxx>
 
 #include <error.hxx>
+#include <OSstream.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

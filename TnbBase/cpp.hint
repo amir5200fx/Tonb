@@ -23,3 +23,5 @@
 #define makeTypePointPatchFieldTypedefs(type, Type, mesh, pointPatch, patchPatch, pointPatchType, matrixType, typePointPatch)
 #define makePointPatchFields(type, pointPatch, pointPatchType) 
 #define makePointPatchFieldsTypeName(typePatchField, pointPatchType)
+#define DisallowBitWiseCopy(TypeName) 
+#define RegisterEntityM_Map(EntityName, EntityType)
