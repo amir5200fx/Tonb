@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{e2bf5f7f-d016-468e-a350-f02ae664ffeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\IO">
+      <UniqueIdentifier>{47136349-600c-4dc0-8d2b-6ca1a519f1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\IO\TecPlot">
+      <UniqueIdentifier>{c9c3a325-401e-4479-b751-24dcc1e02d3c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\IO\TecPlot\TecPlot.hxx">
+      <Filter>TnbLib\IO\TecPlot</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\IO\TecPlot\TecPlotI.hxx">
+      <Filter>TnbLib\IO\TecPlot</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\IO\TecPlot\TecPlot.cxx">
+      <Filter>TnbLib\IO\TecPlot</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
