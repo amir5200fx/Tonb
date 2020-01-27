@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{ee692fc0-938e-499c-a3b2-7f7756bd822d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad">
+      <UniqueIdentifier>{48916b95-affd-4140-910d-3d735ac1bc25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Entities">
+      <UniqueIdentifier>{fda2963b-f4f9-47e0-a036-20555fc4fd0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Entities\Entity">
+      <UniqueIdentifier>{aac9984f-31de-41a1-9df5-72d7f9bfd0a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Entities\Block">
+      <UniqueIdentifier>{2b3cf54f-c418-46a5-8737-ea2ef4031509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Entities\Manager">
+      <UniqueIdentifier>{fe3d7f40-c915-434d-8de8-507603d4a0f3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Cad\Entities\Block\Cad_BlockEntity.hxx">
+      <Filter>TnbLib\Cad\Entities\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\Block\Cad_BlockEntityI.hxx">
+      <Filter>TnbLib\Cad\Entities\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\Manager\Cad_EntityManager.hxx">
+      <Filter>TnbLib\Cad\Entities\Manager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Cad\Entities\Block\Cad_BlockEntity.cxx">
+      <Filter>TnbLib\Cad\Entities\Block</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

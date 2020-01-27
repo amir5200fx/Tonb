@@ -11,7 +11,7 @@ namespace tnbLib
 		std::make_shared<Geo_ApprxCurve_Info>();
 }
 
-void tnbLib::sysLib::init_approx_curve_info()
+void tnbLib::sysLib::init_gl_approx_curve_info()
 {
 	auto& info2d = *gl_approx_curve2d_info;
 	info2d.SetNbSamples(3);

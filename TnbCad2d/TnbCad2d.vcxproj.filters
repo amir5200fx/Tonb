@@ -49,6 +49,105 @@
     <Filter Include="TnbLib\Cad2d\Entities\Edge\Geom">
       <UniqueIdentifier>{6a71e923-f543-48b4-872d-ca37807d7b06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators">
+      <UniqueIdentifier>{9b6ac019-2916-48d7-8b2e-cd250f22e817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection">
+      <UniqueIdentifier>{652c30f3-4533-43af-bd23-27bad7d51922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\Entities">
+      <UniqueIdentifier>{c4034b7c-bbf3-4bae-8248-d7415b2dd9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\Entities\Entity">
+      <UniqueIdentifier>{749124e0-9168-4fd5-9073-7d5797798133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\Entities\Entity\Adaptor">
+      <UniqueIdentifier>{d1ed8521-6588-4131-8eca-56d612c94380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\Entities\Point">
+      <UniqueIdentifier>{d7a17e86-7b41-4c6c-88eb-ff66c1e1013e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\Entities\Segment">
+      <UniqueIdentifier>{42a0aecd-f6aa-40b6-896c-bb2b83a55b46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\Entities\Pair">
+      <UniqueIdentifier>{fd60d57e-d7f7-473d-89e9-16ab4afef9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split">
+      <UniqueIdentifier>{4bbf3c02-a2e1-4b9a-99c8-2a5356466b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split\Entities">
+      <UniqueIdentifier>{ef435198-e598-4bd7-a197-9a9727763500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split\Entities\Entity">
+      <UniqueIdentifier>{dd07cc2c-faf5-446d-af95-ce85305703d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split\Entities\Edge">
+      <UniqueIdentifier>{5e4d6834-5d2c-4112-afe6-196f4e4eb43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split\Entities\Vertex">
+      <UniqueIdentifier>{6337df41-c7f0-486c-89f4-093c4a466c0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split\Entities\Vertex\Adaptor">
+      <UniqueIdentifier>{dbeaf54f-990d-4250-bbb3-c8a37d3a2d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split\Wire">
+      <UniqueIdentifier>{ceba5cf7-f663-492d-86ca-666360bb80e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Split\Wire\Info">
+      <UniqueIdentifier>{a60ec2bc-5c8b-48ec-a0a7-ed750c6ca5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve">
+      <UniqueIdentifier>{835cd4ed-f1eb-4457-9a90-95aaae14257c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\Info">
+      <UniqueIdentifier>{c77ae1fc-2481-4a73-8f9b-7b5e59ac321d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Cutter">
+      <UniqueIdentifier>{f7860f33-ad98-4a85-adbd-0abdbe3bec8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Cutter\Entities">
+      <UniqueIdentifier>{0380da26-c720-45d6-af6e-75157c2e005b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Cutter\Entities\Vertex">
+      <UniqueIdentifier>{de03a723-14c0-4999-8764-a02bc2bb73e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Cutter\Entities\Entity">
+      <UniqueIdentifier>{3aec2e71-5dab-4f07-9e7c-39ebbc48fad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Cutter\Entities\Edge">
+      <UniqueIdentifier>{823374c7-04a2-4f74-8816-f8409ffe98af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Cutter\Subdivide">
+      <UniqueIdentifier>{e87445cb-613f-4b31-a8f4-60b7d8745cf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Cutter\Intersection">
+      <UniqueIdentifier>{812bf1c3-2576-45b8-9269-f3f7ad408a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge">
+      <UniqueIdentifier>{d8d639a5-be0c-42c4-b76b-87418d7c1214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities">
+      <UniqueIdentifier>{2b23b020-68a0-41ae-a757-0f762a3bdc8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Info">
+      <UniqueIdentifier>{ba11b129-f6e8-4cdf-b6c5-ae710d422830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Entity">
+      <UniqueIdentifier>{6552931d-bc77-481b-a118-33f9cd669f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Pair">
+      <UniqueIdentifier>{1c34caaa-0052-41b4-b6f7-64b3dc66549a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Point">
+      <UniqueIdentifier>{f983b8b1-68a6-49d9-a64f-6bf33e4afc3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Segment">
+      <UniqueIdentifier>{a98624c9-9653-41e6-9aa3-74a798fe33ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Entity\Adaptor">
+      <UniqueIdentifier>{84a8afc4-0f4a-45a0-abeb-223bdcfcd5fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -108,6 +207,66 @@
     <ClInclude Include="TnbLib\Cad2d\Tools\Pln_Tools.hxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\Entities\Entity\Adaptor\PlnOpert_IntsctEntityAdaptor.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\Entities\Entity\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\Entities\Entity\PlnOpert_IntsctEntity.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\Entities\Point\PlnOpert_IntsctPoint.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\Entities\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\Entities\Segment\PlnOpert_IntsctSegment.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\Entities\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\Entities\Pair\PlnOpert_IntsctPair.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\Entities\Pair</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Split\Entities\Vertex\PlnOpert_SplitVertex.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Split\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Split\Entities\Edge\PlnOpert_SplitEdge.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Split\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Split\Wire\PlnOpert_SplitWire.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Split\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Split\Wire\Info\PlnOpert_SplitWire_Info.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Split\Wire\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\Info\PlnOpert_IntsctCurveCurve_Info.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\CurveCurve\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\PlnOpert_IntsctCurveCurve.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\CurveCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Entity\PlnOpert_CutterEntity.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Vertex\PlnOpert_CutterVertex.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Edge\PlnOpert_CutterEdge.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Subdivide.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Vertex\PlnOpert_IntsctVertex.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Edge\PlnOpert_IntsctEdge.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\Entities\Point\PlnOpert_IntsctPoint2.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\Entities\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\Entities\Segment\PlnOpert_IntsctSegment2.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\Entities\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Intersection\PlnOpert_Cutter_Intersection.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Intersection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -142,6 +301,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools.cxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Operators\Split\Wire\Info\PlnOpert_SplitWire.cxx">
+      <Filter>TnbLib\Cad2d\Operators\Split\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\Info\PlnOpert_IntsctCurveCurve_Info.cxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\CurveCurve\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\PlnOpert_IntsctCurveCurve.cxx">
+      <Filter>TnbLib\Cad2d\Operators\Intersection\CurveCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Subdivide.cxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Intersection\PlnOpert_Cutter_Intersection.cxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Intersection</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

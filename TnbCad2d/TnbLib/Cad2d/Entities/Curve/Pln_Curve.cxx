@@ -1,6 +1,7 @@
 #include <Pln_Curve.hxx>
 
 #include <Entity2d_Box.hxx>
+#include <Pln_Tools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -159,4 +160,190 @@ void tnbLib::Pln_Curve::Interpolation
 			<< "Failed to interpolation!"
 			<< abort(FatalError);
 	}
+}
+
+std::tuple<std::shared_ptr<tnbLib::Pln_Curve>, std::shared_ptr<tnbLib::Pln_Curve>>
+tnbLib::Pln_Curve::Split(const Standard_Real x) const
+{
+	if (NOT INSIDE(x, FirstParameter(), LastParameter()))
+	{
+		FatalErrorIn("void Split()")
+			<< "Invalid Parameter: " << x << endl
+			<< " - First parameter: " << FirstParameter() << endl
+			<< " - Last Parameter: " << LastParameter() << endl
+			<< abort(FatalError);
+	}
+
+	Handle(Geom2d_Curve) C0, C1;
+	Pln_Tools::SplitCurve(Geometry(), x, C0, C1);
+
+	return 
+	{ 
+		std::make_shared<Pln_Curve>(C0->FirstParameter(), C0->LastParameter(), C0, Info()) , 
+		std::make_shared<Pln_Curve>(C1->FirstParameter(), C1->LastParameter(), C1, Info()) 
+	};
+}
+
+void tnbLib::Pln_Curve::Split
+(
+	const Standard_Real x,
+	std::shared_ptr<Pln_Curve>& theLeft, 
+	std::shared_ptr<Pln_Curve>& theRight
+) const
+{
+	if (NOT INSIDE(x, FirstParameter(), LastParameter()))
+	{
+		FatalErrorIn("void Split()")
+			<< "Invalid Parameter: " << x << endl
+			<< " - First parameter: " << FirstParameter() << endl
+			<< " - Last Parameter: " << LastParameter() << endl
+			<< abort(FatalError);
+	}
+
+	Handle(Geom2d_Curve) C0, C1;
+	Pln_Tools::SplitCurve(Geometry(), x, C0, C1);
+
+	theLeft = std::make_shared<Pln_Curve>(C0->FirstParameter(), C0->LastParameter(), C0, Info());
+	theRight = std::make_shared<Pln_Curve>(C1->FirstParameter(), C1->LastParameter(), C1, Info());
+}
+
+void tnbLib::Pln_Curve::Split
+(
+	const Standard_Real x, 
+	Pnt2d & theCoord,
+	std::shared_ptr<Pln_Curve>& theLeft, 
+	std::shared_ptr<Pln_Curve>& theRight
+) const
+{
+	if (NOT INSIDE(x, FirstParameter(), LastParameter()))
+	{
+		FatalErrorIn("void Split()")
+			<< "Invalid Parameter: " << x << endl
+			<< " - First parameter: " << FirstParameter() << endl
+			<< " - Last Parameter: " << LastParameter() << endl
+			<< abort(FatalError);
+	}
+
+	Handle(Geom2d_Curve) C0, C1;
+	Pln_Tools::SplitCurve(Geometry(), x, C0, C1);
+
+	theCoord = Geometry()->Value(x);
+
+	theLeft = std::make_shared<Pln_Curve>(C0->FirstParameter(), C0->LastParameter(), C0, Info());
+	theRight = std::make_shared<Pln_Curve>(C1->FirstParameter(), C1->LastParameter(), C1, Info());
+}
+
+namespace tnbLib
+{
+
+	void CheckSort(const std::vector<Standard_Real>& theParameters, const char* theName)
+	{
+		auto x0 = RealFirst();
+		for (const auto x : theParameters)
+		{
+			if (x <= x0)
+			{
+				FatalErrorIn(theName)
+					<< "Invalid Parameters to subdivide the curve!" << endl
+					<< abort(FatalError);
+			}
+			x0 = x;
+		}
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Curve>>
+tnbLib::Pln_Curve::Split
+(
+	const std::vector<Standard_Real>& theParameters
+) const
+{
+	if (NOT theParameters.size())
+	{
+		return;
+	}
+
+	CheckSort(theParameters, "void Split(...)");
+
+	if (NOT INSIDE(theParameters[0], FirstParameter(), LastParameter()))
+	{
+		FatalErrorIn("void Split(...)")
+			<< "Invalid parameters to split the curve: the first parameter is outside the boundary!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT INSIDE(theParameters[theParameters.size() - 1], FirstParameter(), LastParameter()))
+	{
+		FatalErrorIn("void Split(...)")
+			<< "Invalid parameters to split the curve: the last parameter is outside the boundary!" << endl
+			<< abort(FatalError);
+	}
+
+	auto curve = std::dynamic_pointer_cast<Pln_Curve>(This());
+	
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(theParameters.size() + 1);
+
+	for (const auto x : theParameters)
+	{
+		Debug_Null_Pointer(curve);
+		auto[left, right] = curve->Split(x);
+
+		curves.push_back(std::move(left));
+
+		curve = std::move(right);
+	}
+	curves.push_back(std::move(curve));
+
+	return std::move(curves);
+}
+
+void tnbLib::Pln_Curve::Split
+(
+	const std::vector<Standard_Real>& theParameters, 
+	std::vector<Pnt2d>& theCoords,
+	std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+) const
+{
+	if (NOT theParameters.size())
+	{
+		return;
+	}
+
+	CheckSort(theParameters, "void Split(...)");
+
+	if (NOT INSIDE(theParameters[0], FirstParameter(), LastParameter()))
+	{
+		FatalErrorIn("void Split(...)")
+			<< "Invalid parameters to split the curve: the first parameter is outside the boundary!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT INSIDE(theParameters[theParameters.size() - 1], FirstParameter(), LastParameter()))
+	{
+		FatalErrorIn("void Split(...)")
+			<< "Invalid parameters to split the curve: the last parameter is outside the boundary!" << endl
+			<< abort(FatalError);
+	}
+
+	auto curve = std::dynamic_pointer_cast<Pln_Curve>(This());
+
+	theCoords.reserve(theParameters.size());
+	theCurves.reserve(theParameters.size() + 1);
+
+	for (const auto x : theParameters)
+	{
+		Debug_Null_Pointer(curve);
+
+		std::shared_ptr<Pln_Curve> left, right;
+		Pnt2d coord;
+
+		curve->Split(x, coord, left, right);
+
+		theCoords.push_back(std::move(coord));
+		theCurves.push_back(std::move(left));
+
+		curve = std::move(right);
+	}
+	theCurves.push_back(std::move(curve));
 }

@@ -76,11 +76,21 @@ namespace tnbLib
 
 		void Reverse();
 
+		std::vector<std::shared_ptr<Pln_Vertex>>
+			RetrieveVertices() const;
+
+		std::vector<std::shared_ptr<Pln_Curve>>
+			RetrieveCurves() const;
+
 		void RetrieveVerticesTo
 		(
 			std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
 		) const;
 
+		void RetrieveCurvesTo
+		(
+			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+		) const;
 
 		//- Static functions and operators
 

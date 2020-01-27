@@ -15,6 +15,7 @@ class gp_Ax22d;
 
 #include <memory>
 #include <vector>
+#include <tuple>
 
 namespace tnbLib
 {
@@ -44,6 +45,8 @@ namespace tnbLib
 		void CheckBoundary(const Standard_Real x, const char* theName) const;
 
 	public:
+
+		typedef Pnt2d ptType;
 
 		Pln_Curve(const std::shared_ptr<info>& theInfo)
 			: theInfo_(theInfo)
@@ -94,6 +97,9 @@ namespace tnbLib
 			const Standard_Real theTol = 1.0E-6
 		);
 
+		std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
+			Split(const Standard_Real x) const;
+
 		void Split
 		(
 			const Standard_Real x,
@@ -109,8 +115,27 @@ namespace tnbLib
 			std::shared_ptr<Pln_Curve>& theRight
 		) const;
 
+		std::vector<std::shared_ptr<Pln_Curve>> Split
+		(
+			const std::vector<Standard_Real>& theParameters
+		) const;
+
+		void Split
+		(
+			const std::vector<Standard_Real>& theParameters,
+			std::vector<Pnt2d>& theCoords,
+			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+		) const;
 
 		// Static functions and operators
+
+		static std::shared_ptr<Pln_Curve> 
+			Clip
+			(
+				const Pln_Curve& theCurve,
+				const Standard_Real theP0,
+				const Standard_Real theP1
+			);
 
 		static std::shared_ptr<Entity2d_Polygon>
 			Discretize

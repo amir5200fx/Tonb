@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshBase\Entities\Element\Type;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Element\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Element\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Element;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Node\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Node\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Entity;$(ProjectDir)TnbLib\MeshBase\Traits;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshBase\Geom\SizeFunction;$(ProjectDir)TnbLib\MeshBase\Geom\MetricPrcsr;$(ProjectDir)TnbLib\MeshBase\Geom\MetricFunction;$(ProjectDir)TnbLib\MeshBase\Geom\Mesh;$(ProjectDir)TnbLib\MeshBase\Geom\Knit;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Merge;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge\Position;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge\TEdge;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node\TNode;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node\Position;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Type;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Element\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Element\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Element;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Node\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Node\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Entity;$(ProjectDir)TnbLib\MeshBase\Traits;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -129,7 +129,7 @@ for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshBase\Entities\Element\Type;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Element\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Element\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Element;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Node\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Node\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Entity;$(ProjectDir)TnbLib\MeshBase\Traits;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshBase\Geom\SizeFunction;$(ProjectDir)TnbLib\MeshBase\Geom\MetricPrcsr;$(ProjectDir)TnbLib\MeshBase\Geom\MetricFunction;$(ProjectDir)TnbLib\MeshBase\Geom\Mesh;$(ProjectDir)TnbLib\MeshBase\Geom\Knit;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Merge;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge\Position;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge\TEdge;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node\TNode;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node\Position;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Bnd\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Type;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Element\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Element\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Element\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Element;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Facet\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Facet;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Edge;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Traits;$(ProjectDir)TnbLib\MeshBase\Entities\Node\Adaptor;$(ProjectDir)TnbLib\MeshBase\Entities\Node\3d;$(ProjectDir)TnbLib\MeshBase\Entities\Node\2d;$(ProjectDir)TnbLib\MeshBase\Entities\Node;$(ProjectDir)TnbLib\MeshBase\Entities\Entity;$(ProjectDir)TnbLib\MeshBase\Traits;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -140,6 +140,18 @@ for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor\Mesh_BndEdgeGeomAdaptor.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Mesh_BndEdge.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Mesh_BndEdgeI.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Position\Mesh_BndEdge_Position.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdge.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdgeI.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Merge\Mesh_BndMergeAlg.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\Adaptor\Mesh_BndNodeGeomAdaptor.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\Mesh_BndNode.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\Position\Mesh_BndNode_Position.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\TNode\Mesh_TBndNode.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\TNode\Mesh_TBndNodeI.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_Edge.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_EdgeFwd.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Edge\3d\Mesh3d_Edge.hxx" />
@@ -178,6 +190,9 @@ for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\MeshBase\Traits\Mesh_TypeTraits.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Bnd\Edge\Mesh_BndEdge.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdge.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Bnd\Node\TNode\Mesh_TBndNode.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_Edge.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Edge\Mesh_Edge.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_Element.cxx" />

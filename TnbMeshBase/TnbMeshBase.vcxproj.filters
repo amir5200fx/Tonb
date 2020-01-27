@@ -85,6 +85,84 @@
     <Filter Include="TnbLib\MeshBase\Traits">
       <UniqueIdentifier>{199370b7-68e7-4efe-ae9e-f55aa0aaaf8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Node">
+      <UniqueIdentifier>{edeaf43f-ff9b-4478-a78d-2a014e94dfa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Edge">
+      <UniqueIdentifier>{ead669f0-872a-4241-ad76-ee32dcb44de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Facet">
+      <UniqueIdentifier>{4fb12708-0f98-49d8-85b0-7548215b5569}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Node\Adaptor">
+      <UniqueIdentifier>{f91e1179-b1c8-4df9-933d-49acfcb1ce89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Node\Position">
+      <UniqueIdentifier>{ae2aa778-80b0-451d-b5f8-15b3414ea814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor">
+      <UniqueIdentifier>{508e0647-bc38-4241-80eb-d2c13c8d2a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Edge\Position">
+      <UniqueIdentifier>{b27cc23a-4708-424f-9656-30c15825f13f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Merge">
+      <UniqueIdentifier>{70876c39-2f80-41f6-83b5-093ed2fe8d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Node\TNode">
+      <UniqueIdentifier>{41dc2b11-c19f-419a-a3d6-de71614b4d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge">
+      <UniqueIdentifier>{ae7eaad1-cb51-4615-af4f-b0f8cabc599f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\SizeFunction">
+      <UniqueIdentifier>{e94c0333-b081-42e5-a147-0856618574c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Knit">
+      <UniqueIdentifier>{a02fcd02-9c72-436e-b5be-47a0764df06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh">
+      <UniqueIdentifier>{3fdeb1bf-52e3-45fc-b0f5-c2cc19b4566d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction">
+      <UniqueIdentifier>{5e41790c-40ea-44b0-a7f2-ac7d0910ccb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr">
+      <UniqueIdentifier>{15844983-42ea-4e54-a186-227aae511668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr\2d">
+      <UniqueIdentifier>{c647c34a-0dd4-445f-a920-42a7e6991988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr\3d">
+      <UniqueIdentifier>{45f8eb1c-d9cf-4d36-af0d-c9f281091ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction\2d">
+      <UniqueIdentifier>{6a96ad71-6ea4-4796-ab94-bc8cdf95f998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction\3d">
+      <UniqueIdentifier>{28047631-6cd9-4fc6-8da1-8a4bbfccf92a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround">
+      <UniqueIdentifier>{7b9715c4-5e36-4954-8757-df02df28807f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\Data">
+      <UniqueIdentifier>{bcb6c209-a898-4b32-a74e-07e1b8b94db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Info">
+      <UniqueIdentifier>{b0ff5d53-6873-4b94-b652-b7c9cefdc804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso">
+      <UniqueIdentifier>{5a1ec06a-288d-443a-a479-11bde7ea1e3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso">
+      <UniqueIdentifier>{bada81c5-087e-4bb0-9cee-ae3c353d6119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\Data\2d">
+      <UniqueIdentifier>{e53a69b6-d9b3-4015-81d3-8847c407647f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\Data\3d">
+      <UniqueIdentifier>{2479b18b-0f18-4a96-b838-ea4915515c69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.hxx">
@@ -195,6 +273,42 @@
     <ClInclude Include="TnbLib\MeshBase\Traits\Mesh_TypeTraits.hxx">
       <Filter>TnbLib\MeshBase\Traits</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\Position\Mesh_BndNode_Position.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Node\Position</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\Adaptor\Mesh_BndNodeGeomAdaptor.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Position\Mesh_BndEdge_Position.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\Position</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor\Mesh_BndEdgeGeomAdaptor.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Merge\Mesh_BndMergeAlg.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Merge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\Mesh_BndNode.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\TNode\Mesh_TBndNode.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Node\TNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Node\TNode\Mesh_TBndNodeI.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Node\TNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Mesh_BndEdge.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\Mesh_BndEdgeI.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdge.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\TEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdgeI.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\TEdge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.cxx">
@@ -214,6 +328,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_Facet.cxx">
       <Filter>TnbLib\MeshBase\Entities\Facet\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Bnd\Node\TNode\Mesh_TBndNode.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Node\TNode</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Bnd\Edge\Mesh_BndEdge.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdge.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\TEdge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

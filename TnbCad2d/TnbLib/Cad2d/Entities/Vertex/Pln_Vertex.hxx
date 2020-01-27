@@ -59,6 +59,21 @@ namespace tnbLib
 
 		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
 
+
+		//- virtual functions
+
+		virtual Standard_Boolean IsCutter() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsIntersect() const
+		{
+			return Standard_False;
+		}
+
+		//- static functions
+
 		static const Pnt2d& GetCoord(const std::shared_ptr<Pln_Vertex>& theVtx);
 
 		//- Macros

@@ -42,30 +42,7 @@ namespace tnbLib
 				const Standard_Boolean Sense = Standard_True
 			);
 
-		//- an exception will be thrown if the curve is not bounded
-		static std::shared_ptr<Geom2dAPI_InterCurveCurve>
-			Intersection
-			(
-				const Handle(Geom2d_Curve)& theCurve0,
-				const Handle(Geom2d_Curve)& theCurve1,
-				const Standard_Real theTol = 1.0E-6
-			);
-
-		static Handle(Geom2d_Curve)
-			ConvertToTrimmedCurve
-			(
-				const Handle(Geom2d_Curve)& theCurve,
-				const Standard_Real theU0,
-				const Standard_Real theU1);
-
-		static std::shared_ptr<Entity2d_Triangulation>
-			ParametricTriangulation
-			(
-				const Pnt2d& theP0,
-				const Pnt2d& theP1,
-				const Standard_Integer theNx,
-				const Standard_Integer theNy
-			);
+		
 	};
 }
 

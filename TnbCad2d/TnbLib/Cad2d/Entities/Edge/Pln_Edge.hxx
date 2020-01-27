@@ -6,6 +6,8 @@
 #include <Pln_EdgeAdaptor.hxx>
 #include <Pln_EdgeGeom.hxx>
 
+#include <vector>
+
 namespace tnbLib
 {
 
@@ -27,6 +29,8 @@ namespace tnbLib
 		std::shared_ptr<Pln_Vertex> theVtx1_;
 
 	public:
+
+		typedef Pnt2d ptType;
 
 		Pln_Edge
 		(
@@ -76,6 +80,12 @@ namespace tnbLib
 			, theVtx1_(theVtx1)
 		{}
 
+		Standard_Boolean IsDangle() const;
+
+		Standard_Integer GetIndex(const std::shared_ptr<Pln_Vertex>& theVertex) const;
+
+		Standard_Real Parameter(const Standard_Integer theIndex) const;
+
 		const std::shared_ptr<Pln_Vertex>& Vtx0() const
 		{
 			return theVtx0_;
@@ -96,6 +106,16 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual Standard_Boolean IsCutter() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsIntersect() const
+		{
+			return Standard_False;
+		}
+
 		//- static functions
 
 		static Standard_Boolean IsLess
@@ -103,6 +123,7 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge0, 
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
+
 	};
 }
 
