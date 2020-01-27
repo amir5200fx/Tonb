@@ -42,6 +42,7 @@
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Vertex\PlnOpert_CutterVertex.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Vertex\PlnOpert_IntsctVertex.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Intersection\PlnOpert_Cutter_Intersection.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Cutter_Subdivide.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Subdivide.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\Info\PlnOpert_IntsctCurveCurve_Info.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\PlnOpert_IntsctCurveCurve.hxx" />
@@ -70,6 +71,7 @@
     <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Pln_Wire.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Intersection\PlnOpert_Cutter_Intersection.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Cutter_Subdivide.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Subdivide.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\Info\PlnOpert_IntsctCurveCurve_Info.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\PlnOpert_IntsctCurveCurve.cxx" />

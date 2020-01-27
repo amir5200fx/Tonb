@@ -267,6 +267,9 @@
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Intersection\PlnOpert_Cutter_Intersection.hxx">
       <Filter>TnbLib\Cad2d\Operators\Cutter\Intersection</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Cutter_Subdivide.hxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -316,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Intersection\PlnOpert_Cutter_Intersection.cxx">
       <Filter>TnbLib\Cad2d\Operators\Cutter\Intersection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Cutter_Subdivide.cxx">
+      <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

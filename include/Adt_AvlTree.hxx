@@ -423,7 +423,7 @@ namespace tnbLib
 		void Remove(const Comparable & Element)
 		{
 			Debug_If_Condition_Message(IsLessPtr IS_EQUAL NULL, "No Set Comparable function");
-			Try_Exception_Handle_ReThrow(Remove(Element, theRoot_));
+			Remove(Element, theRoot_);
 		}
 
 		void Remove(const Adt_Ary1d<Comparable>& Elements)
