@@ -124,30 +124,6 @@
     <Filter Include="TnbLib\Cad2d\Operators\Cutter\Intersection">
       <UniqueIdentifier>{812bf1c3-2576-45b8-9269-f3f7ad408a1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge">
-      <UniqueIdentifier>{d8d639a5-be0c-42c4-b76b-87418d7c1214}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities">
-      <UniqueIdentifier>{2b23b020-68a0-41ae-a757-0f762a3bdc8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Info">
-      <UniqueIdentifier>{ba11b129-f6e8-4cdf-b6c5-ae710d422830}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Entity">
-      <UniqueIdentifier>{6552931d-bc77-481b-a118-33f9cd669f92}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Pair">
-      <UniqueIdentifier>{1c34caaa-0052-41b4-b6f7-64b3dc66549a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Point">
-      <UniqueIdentifier>{f983b8b1-68a6-49d9-a64f-6bf33e4afc3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Segment">
-      <UniqueIdentifier>{a98624c9-9653-41e6-9aa3-74a798fe33ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Operators\Intersection\EdgeEdge\Entities\Entity\Adaptor">
-      <UniqueIdentifier>{84a8afc4-0f4a-45a0-abeb-223bdcfcd5fd}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">

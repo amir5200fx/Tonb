@@ -20,6 +20,25 @@ namespace tnbLib
 
 	public:
 
+		PlnOpert_CutterVertex()
+		{}
+
+		PlnOpert_CutterVertex
+		(
+			const Pnt2d& theCoord
+		)
+			: Pln_Vertex(theCoord)
+		{}
+
+		PlnOpert_CutterVertex
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Pnt2d& theCoord
+		)
+			: Pln_Vertex(theIndex, theName, theCoord)
+		{}
+
 		PlnOpert_CutterVertex(const Pln_Vertex& theVertex)
 			: Pln_Vertex(theVertex)
 		{}

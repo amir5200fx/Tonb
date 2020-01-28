@@ -23,9 +23,6 @@ namespace tnbLib
 
 		const std::shared_ptr<PlnOpert_Cutter_Intersection>& theIntersection_;
 
-		const std::map<Standard_Integer, Standard_Integer>& theEdgeIndexMap_;
-		const std::map<Standard_Integer, Standard_Integer>& theCutterIndexMap_;
-
 		std::vector<std::shared_ptr<Pln_Edge>> theEdges_;
 	
 
@@ -39,13 +36,9 @@ namespace tnbLib
 
 		PlnOpert_Cutter_Subdivide
 		(
-			const std::shared_ptr<PlnOpert_Cutter_Intersection>& theIntersection,
-			const std::map<Standard_Integer, Standard_Integer>& theEdgeMap,
-			const std::map<Standard_Integer, Standard_Integer>& theCutterMap
+			const std::shared_ptr<PlnOpert_Cutter_Intersection>& theIntersection
 		)
 			: theIntersection_(theIntersection)
-			, theEdgeIndexMap_(theEdgeMap)
-			, theCutterIndexMap_(theCutterMap)
 		{}
 
 		const auto& Intersection() const

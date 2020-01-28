@@ -8,12 +8,16 @@
 #include <OSstream.hxx>
 
 #include <memory>
+#include <vector>
+#include <list>
 
 namespace tnbLib
 {
 
 	// Forward Declarations
 	class Pln_Curve;
+	class Pln_Edge;
+	class Pln_Vertex;
 
 	class PlnOpert_IntsctEntity
 		: public PlnOpert_IntsctEntityAdaptor
@@ -23,7 +27,10 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Pln_Curve> theCurve_;
+		std::shared_ptr<Pln_Curve> theParentCurve_;
+		std::shared_ptr<Pln_Edge> theParentEdge_;
+
+		std::list<std::shared_ptr<Pln_Vertex>> theVertices_;
 
 	protected:
 
@@ -37,7 +44,7 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Curve>& theCurve
 		)
 			: Global_Indexed(theIndex)
-			, theCurve_(theCurve)
+			, theParentCurve_(theCurve)
 		{}
 
 	public:
@@ -45,6 +52,24 @@ namespace tnbLib
 		auto This() const
 		{
 			return std::const_pointer_cast<PlnOpert_IntsctEntity>(shared_from_this());
+		}
+
+		const std::list<std::shared_ptr<Pln_Vertex>>& Vertices() const
+		{
+			return theVertices_;
+		}
+
+		std::list<std::shared_ptr<Pln_Vertex>>& Vertices()
+		{
+			return theVertices_;
+		}
+
+		void PushToVertices
+		(
+			const std::shared_ptr<Pln_Vertex>& theVertex
+		)
+		{
+			theVertices_.push_back(theVertex);
 		}
 
 		//- virtual functions
@@ -76,7 +101,9 @@ namespace tnbLib
 		}
 
 		//- Macros
-		GLOBAL_ACCESS_SINGLE(std::shared_ptr<Pln_Curve>, Curve)
+		GLOBAL_ACCESS_SINGLE(std::shared_ptr<Pln_Curve>, ParentCurve)
+			GLOBAL_ACCESS_SINGLE(std::shared_ptr<Pln_Edge>, ParentEdge)
+			
 	};
 }
 

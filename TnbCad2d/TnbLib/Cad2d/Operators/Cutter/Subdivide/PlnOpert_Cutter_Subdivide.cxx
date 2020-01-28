@@ -1,10 +1,18 @@
 #include <PlnOpert_Cutter_Subdivide.hxx>
 
+#include <Pln_Curve.hxx>
+#include <Pln_Vertex.hxx>
+#include <Pln_Edge.hxx>
 #include <PlnOpert_IntsctEntity.hxx>
 #include <PlnOpert_IntsctPoint.hxx>
 #include <PlnOpert_IntsctSegment2.hxx>
 #include <PlnOpert_IntsctPair.hxx>
 #include <PlnOpert_Cutter_Intersection.hxx>
+#include <PlnOpert_CutterVertex.hxx>
+#include <PlnOpert_CutterEdge.hxx>
+#include <PlnOpert_IntsctVertex.hxx>
+#include <PlnOpert_IntsctEdge.hxx>
+#include <PlnOpert_IntsctPoint2.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -198,6 +206,12 @@ namespace tnbLib
 			for (const auto& x : theVt->Paires())
 			{
 				v->PushToPairs(x);
+
+				auto pair = x.lock();
+				Debug_Null_Pointer(pair);
+
+				pair->Paires().clear();
+				pair->PushToPairs(v);
 			}
 		}
 		else if (ABS(seg->End()->CharParameter() - theVt->CharParameter()) <= theTol)
@@ -208,6 +222,12 @@ namespace tnbLib
 			for (const auto& x : theVt->Paires())
 			{
 				v->PushToPairs(x);
+
+				auto pair = x.lock();
+				Debug_Null_Pointer(pair);
+
+				pair->Paires().clear();
+				pair->PushToPairs(v);
 			}
 		}
 		else
@@ -246,6 +266,11 @@ namespace tnbLib
 			for (const auto& x : theVt->Paires())
 			{
 				pt->PushToPairs(x);
+
+				auto pair = x.lock();
+				Debug_Null_Pointer(pair);
+
+				pair->PushToPairs(pt);
 			}
 		}
 		else
@@ -323,6 +348,338 @@ namespace tnbLib
 		}
 		return std::move(entities);
 	}
+
+	std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>
+		MergedEntities
+		(
+			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theVertices,
+			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theSegments, 
+			const const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& thePoints
+		)
+	{
+		std::vector<std::shared_ptr<PlnOpert_IntsctEntity>> entities;
+		for (const auto& x : theVertices)
+		{
+			Debug_Null_Pointer(x);
+			entities.push_back(x);
+		}
+
+		for (const auto& x : theSegments)
+		{
+			Debug_Null_Pointer(x);
+			entities.push_back(x);
+		}
+
+		for (const auto& x : thePoints)
+		{
+			Debug_Null_Pointer(x);
+			entities.push_back(x);
+		}
+	}
+
+	typedef std::map
+		<
+		Standard_Integer,
+		std::shared_ptr<std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>>
+		>
+		intersectMap;
+
+	void PushToMap
+	(
+		const Standard_Integer theIndex,
+		const std::shared_ptr<PlnOpert_IntsctEntity>& theEntity,
+		intersectMap& theMap
+	)
+	{
+		auto iter = theMap.find(theIndex);
+		if (iter IS_EQUAL theMap.end())
+		{
+			auto insert = theMap.insert
+			(
+				std::make_pair
+				(
+					theIndex,
+					std::make_shared<std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>>()
+				));
+
+			if (NOT insert.second)
+			{
+				FatalErrorIn("void PushToMap(Args...)")
+					<< "Unable to insert the item to the map: duplicate data, index: " << endl
+					<< abort(FatalError);
+			}
+		}
+		else
+		{
+			iter->second->push_back(theEntity);
+		}
+	}
+
+	intersectMap
+		GetIndexMap
+		(
+			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theEntities
+		)
+	{
+		intersectMap edgeMap;
+		for (const auto& x : theEntities)
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& pairList = x->Paires();
+			if (pairList.empty() OR pairList.size() > 2)
+			{
+				FatalErrorIn("indexToEntityMap GetIndexMap(const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theEntities)")
+					<< "invalid data: Unrecognized pair of two entities!" << endl
+					<< abort(FatalError);
+			}
+
+			for (const auto& ent : pairList)
+			{
+				auto pair = ent.lock();
+				Debug_Null_Pointer(pair);
+
+				const auto& edge = pair->ParentEdge();
+
+				PushToMap(edge->Index(), pair, edgeMap);
+			}
+		}
+
+		for (const auto& x : edgeMap)
+		{
+			const auto& l = x.second;
+		}
+		return std::move(edgeMap);
+	}
+
+	struct ClipParam
+	{
+
+		std::shared_ptr<PlnOpert_IntsctEntity> entity;
+
+		Standard_Real param;
+
+		ClipParam(const Standard_Real p, const std::shared_ptr<PlnOpert_IntsctEntity>& e)
+			: param(p), entity(e)
+		{}
+	};
+
+	std::vector<std::shared_ptr<ClipParam>>
+		GetClips
+		(
+			const Pln_Curve& theCurve,
+			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theEntities
+		)
+	{
+		std::vector<std::shared_ptr<ClipParam>> clips;
+		clips.push_back(std::make_shared<ClipParam>(theCurve.FirstParameter(), nullptr));
+
+		for (const auto& x : theEntities)
+		{
+			Debug_Null_Pointer(x);
+
+			if (x->IsPoint())
+			{
+				clips.push_back(std::make_shared<ClipParam>(x->CharParameter(), x));
+			}
+			else if (x->IsSegment())
+			{
+				auto seg = std::dynamic_pointer_cast<PlnOpert_IntsctSegment2>(x);
+				Debug_Null_Pointer(seg);
+
+				const auto& x0 = seg->Start();
+				const auto& x1 = seg->End();
+
+				clips.push_back(std::make_shared<ClipParam>(x0->CharParameter(), x0));
+				clips.push_back(std::make_shared<ClipParam>(x1->CharParameter(), x1));
+			}
+			else
+			{
+				FatalErrorIn("td::vector<std::shared_ptr<ClipParam>> GetClips()")
+					<< "unable to identify the entity" << endl
+					<< abort(FatalError);
+			}
+		}
+		clips.push_back(std::make_shared<ClipParam>(theCurve.LastParameter(), nullptr));
+
+		return std::move(clips);
+	}
+
+	std::vector<std::shared_ptr<Pln_Edge>>
+		ClipCurve
+		(
+			const Pln_Curve& theCurve,
+			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theEntities
+		)
+	{
+		auto clips = GetClips(theCurve, theEntities);
+
+		std::vector<std::shared_ptr<Pln_Curve>> curves;
+		curves.reserve(clips.size() - 1);
+		forThose(Index, 0, clips.size() - 2)
+		{
+			const auto& x0 = clips[Index];
+			Debug_Null_Pointer(x0);
+
+			const auto& x1 = clips[Index + 1];
+			Debug_Null_Pointer(x1);
+
+			auto clip = Pln_Curve::Clip(theCurve, x0->param, x1->param);
+			Debug_Null_Pointer(clip);
+
+			curves.push_back(std::move(clip));
+		}
+
+		std::vector<std::shared_ptr<Pln_Edge>> edges;
+		edges.reserve(curves.size());
+		forThose(Index, 0, curves.size() - 1)
+		{
+			const auto& x0 = clips[Index];
+			Debug_Null_Pointer(x0);
+
+			const auto& x1 = clips[Index + 1];
+			Debug_Null_Pointer(x1);
+
+			std::shared_ptr<Pln_Vertex> v0, v1;
+			if (x0->entity)
+			{
+				auto iv = std::make_shared<PlnOpert_IntsctVertex>(theCurve.Value(x0->param));
+				iv->SetIntsctEntity(std::dynamic_pointer_cast<PlnOpert_IntsctPoint>(x0->entity));
+				Debug_Null_Pointer(iv);
+
+				x0->entity->PushToVertices(iv);
+
+				v0 = iv;
+			}
+			else
+			{
+				v0 = std::make_shared<Pln_Vertex>(theCurve.Value(x0->param));
+			}
+
+			if (x1->entity)
+			{
+				auto iv = std::make_shared<PlnOpert_IntsctVertex>(theCurve.Value(x1->param));
+				iv->SetIntsctEntity(std::dynamic_pointer_cast<PlnOpert_IntsctPoint>(x1->entity));
+				Debug_Null_Pointer(iv);
+
+				x1->entity->PushToVertices(iv);
+
+				v1 = iv;
+			}
+			else
+			{
+				v1 = std::make_shared<Pln_Vertex>(theCurve.Value(x1->param));
+			}
+
+			std::shared_ptr<Pln_Edge> edge;
+			if (v0->IsIntersect() AND v1->IsIntersect())
+			{
+				auto iv0 = std::dynamic_pointer_cast<PlnOpert_IntsctVertex>(v0);
+				Debug_Null_Pointer(iv0);
+
+				auto iv1 = std::dynamic_pointer_cast<PlnOpert_IntsctVertex>(v1);
+				Debug_Null_Pointer(iv1);
+
+				const auto& ent0 = iv0->IntsctEntity();
+				Debug_Null_Pointer(ent0);
+
+				const auto& ent1 = iv1->IntsctEntity();
+				Debug_Null_Pointer(ent1);
+
+				if (ent0->IsType2() AND ent1->IsType2())
+				{
+					auto ie = std::make_shared<PlnOpert_IntsctEdge>(v0, v1);
+					Debug_Null_Pointer(ie);
+
+					auto ent0_2 = std::dynamic_pointer_cast<PlnOpert_IntsctPoint2>(ent0);
+					Debug_Null_Pointer(ent0_2);
+
+					Debug_Null_Pointer(ent0_2->Segment().lock());
+					ie->SetIntsctEntity(ent0_2->Segment().lock());
+#ifdef FULLDEBUG
+					auto ent1_2 = std::dynamic_pointer_cast<PlnOpert_IntsctPoint2>(ent1);
+					Debug_Null_Pointer(ent1_2);
+
+					Debug_Null_Pointer(ent1_2->Segment().lock());
+
+					if (ent0_2->Segment().lock() NOT_EQUAL ent1_2->Segment().lock())
+					{
+						FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> ClipCurve()")
+							<< "Invalid data: the segment is not same between the two vertices" << endl
+							<< abort(FatalError);
+					}
+#endif // FULLDEBUG
+					edge = ie;
+				}
+				else
+				{
+					edge = std::make_shared<Pln_Edge>(v0, v1);
+				}
+			}
+			else
+			{
+				edge = std::make_shared<Pln_Edge>(v0, v1);
+			}
+
+			if (v0->IsIntersect())
+			{
+				auto iv = std::dynamic_pointer_cast<PlnOpert_IntsctVertex>(v0);
+				Debug_Null_Pointer(iv);
+
+				iv->IntsctEntity()->SetParentEdge(edge);
+			}
+
+			if (v1->IsIntersect())
+			{
+				auto iv = std::dynamic_pointer_cast<PlnOpert_IntsctVertex>(v1);
+				Debug_Null_Pointer(iv);
+
+				iv->IntsctEntity()->SetParentEdge(edge);
+			}
+
+			edges.push_back(std::move(edge));
+		}
+		return std::move(edges);
+	}
+
+	std::vector<std::shared_ptr<PlnOpert_CutterEntity>>
+		GetCutterEntities
+		(
+			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theEntities
+		)
+	{
+		std::vector<std::shared_ptr<PlnOpert_CutterEntity>> entities;
+		entities.reserve(theEntities.size());
+
+		for (const auto& x : theEntities)
+		{
+			Debug_Null_Pointer(x);
+			if (NOT x->IsPoint())
+			{
+				FatalErrorIn("std::vector<std::shared_ptr<PlnOpert_CutterEntity>> GetCutterEntities(Arg...)")
+					<< "the entity is not point type" << endl
+					<< abort(FatalError);
+			}
+
+			auto ent = std::make_shared<PlnOpert_CutterEntity>();
+			Debug_Null_Pointer(ent);
+
+			const auto& vertices = x->Vertices();
+			for (const auto& v : vertices)
+			{
+				Debug_Null_Pointer(v);
+
+				std::vector<std::weak_ptr<Pln_Edge>> wEdges;
+				v->RetrieveEdgesTo(wEdges);
+
+				if (wEdges.size() NOT_EQUAL 1)
+				{
+					FatalErrorIn("std::vector<std::shared_ptr<PlnOpert_CutterEntity>> GetCutterEntities(Arg...)")
+						<<""
+				}
+			}
+		}
+	}
 }
 
 void tnbLib::PlnOpert_Cutter_Subdivide::Perform(const Standard_Real theTol)
@@ -333,7 +690,7 @@ void tnbLib::PlnOpert_Cutter_Subdivide::Perform(const Standard_Real theTol)
 	auto cutterEntities = CollectCutter(intersection->Entities());
 	auto edgeEntities = CollectEdges(intersection->Entities());
 
-	sort(cutterEntities.begin(), cutterEntities.end(), &PlnOpert_IntsctEntity::IsLess);
+	//sort(cutterEntities.begin(), cutterEntities.end(), &PlnOpert_IntsctEntity::IsLess);
 
 	auto intsctVertices = IntsctOnVertices(cutterEntities);
 	auto intsctSegments = IntsctOnSegments(cutterEntities);
@@ -344,6 +701,12 @@ void tnbLib::PlnOpert_Cutter_Subdivide::Perform(const Standard_Real theTol)
 
 	auto mergedVertices = 
 		RemoveCollideVerticesWithPoints(removedCollideVerticesWithSegments, intsctPoints, theTol);
+
+	auto mergedCutterEntities = MergedEntities(mergedVertices, intsctSegments, intsctPoints);
+
+	sort(mergedCutterEntities.begin(), mergedCutterEntities.end(), &PlnOpert_IntsctEntity::IsLess);
+
+	auto edgeMap = GetIndexMap(mergedCutterEntities);
 
 
 }
