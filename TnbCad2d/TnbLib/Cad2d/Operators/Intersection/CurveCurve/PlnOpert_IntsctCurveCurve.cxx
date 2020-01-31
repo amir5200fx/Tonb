@@ -56,16 +56,15 @@ void tnbLib::PlnOpert_IntsctCurveCurve::Perform()
 	{
 		const auto& pt = alg.Point(Index);
 
-		auto pair = std::make_shared<PlnOpert_IntsctPair>();
-		Debug_Null_Pointer(pair);
+		
 
-		auto entity0 = std::make_shared<PlnOpert_IntsctPoint>();
-		auto entity1 = std::make_shared<PlnOpert_IntsctPoint>();
+		auto entity0 = std::make_shared<PlnOpert_IntsctPoint>(0);
+		auto entity1 = std::make_shared<PlnOpert_IntsctPoint>(0);
 		Debug_Null_Pointer(entity0);
 		Debug_Null_Pointer(entity1);
 
-		entity0->SetCurve(Curve0());
-		entity1->SetCurve(Curve1());
+		entity0->SetParentCurve(Curve0());
+		entity1->SetParentCurve(Curve1());
 
 		entity0->SetCoord(pt.Value());
 		entity1->SetCoord(pt.Value());
@@ -73,8 +72,8 @@ void tnbLib::PlnOpert_IntsctCurveCurve::Perform()
 		entity0->SetParameter(pt.ParamOnFirst());
 		entity1->SetParameter(pt.ParamOnSecond());
 
-		pair->SetEntity0(entity0);
-		pair->SetEntity1(entity1);
+		auto pair = std::make_shared<PlnOpert_IntsctPair>(0, entity0, entity1);
+		Debug_Null_Pointer(pair);
 
 		entities.push_back(pair);
 	}
@@ -97,16 +96,15 @@ void tnbLib::PlnOpert_IntsctCurveCurve::Perform()
 				<< abort(FatalError);
 		}
 
-		auto pair = std::make_shared<PlnOpert_IntsctPair>();
-		Debug_Null_Pointer(pair);
+		
 
-		auto entity0 = std::make_shared<PlnOpert_IntsctSegment>();
-		auto entity1 = std::make_shared<PlnOpert_IntsctSegment>();
+		auto entity0 = std::make_shared<PlnOpert_IntsctSegment>(0);
+		auto entity1 = std::make_shared<PlnOpert_IntsctSegment>(0);
 		Debug_Null_Pointer(entity0);
 		Debug_Null_Pointer(entity1);
 
-		entity0->SetCurve(Curve0());
-		entity1->SetCurve(Curve1());
+		entity0->SetParentCurve(Curve0());
+		entity1->SetParentCurve(Curve1());
 
 		const auto& pt0 = seg.FirstPoint();
 		const auto& pt1 = seg.LastPoint();
@@ -131,8 +129,8 @@ void tnbLib::PlnOpert_IntsctCurveCurve::Perform()
 			entity1->SetParameter1(pt1.ParamOnSecond());
 		}
 
-		pair->SetEntity0(entity0);
-		pair->SetEntity1(entity1);
+		auto pair = std::make_shared<PlnOpert_IntsctPair>(0, entity0, entity1);
+		Debug_Null_Pointer(pair);
 
 		entities.push_back(pair);
 	}

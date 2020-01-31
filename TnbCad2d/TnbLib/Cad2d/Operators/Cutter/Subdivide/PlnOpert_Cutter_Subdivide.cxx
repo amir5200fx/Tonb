@@ -13,6 +13,7 @@
 #include <PlnOpert_IntsctVertex.hxx>
 #include <PlnOpert_IntsctEdge.hxx>
 #include <PlnOpert_IntsctPoint2.hxx>
+#include <PlnOpert_CutterEntity.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -354,7 +355,7 @@ namespace tnbLib
 		(
 			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theVertices,
 			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& theSegments, 
-			const const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& thePoints
+			const std::vector<std::shared_ptr<PlnOpert_IntsctEntity>>& thePoints
 		)
 	{
 		std::vector<std::shared_ptr<PlnOpert_IntsctEntity>> entities;
@@ -375,6 +376,7 @@ namespace tnbLib
 			Debug_Null_Pointer(x);
 			entities.push_back(x);
 		}
+		return std::move(entities);
 	}
 
 	typedef std::map
@@ -675,11 +677,80 @@ namespace tnbLib
 				if (wEdges.size() NOT_EQUAL 1)
 				{
 					FatalErrorIn("std::vector<std::shared_ptr<PlnOpert_CutterEntity>> GetCutterEntities(Arg...)")
-						<<""
+						<< "contradictory data" << endl
+						<< abort(FatalError);
+				}
+
+				auto edge = wEdges[0].lock();
+				Debug_Null_Pointer(edge);
+
+				auto id = edge->GetIndex(v);
+				if (id IS_EQUAL 0)
+				{
+					ent->SetForwardCutter(v);
+				}
+				else
+				{
+					ent->SetBackwardCutter(v);
+				}
+			}
+
+			const auto& pairs = x->Paires();
+			if (pairs.empty())
+			{
+				FatalErrorIn("std::vector<std::shared_ptr<PlnOpert_CutterEntity>> GetCutterEntities(Arg...)")
+					<< "contradictory data: there is no pair for the intersection entity!" << endl
+					<< abort(FatalError);
+			}
+
+			if (pairs.size() > 2)
+			{
+				FatalErrorIn("std::vector<std::shared_ptr<PlnOpert_CutterEntity>> GetCutterEntities(Arg...)")
+					<< "contradictory data: there are more than two pairs for the intersection entity" << endl
+					<< abort(FatalError);
+			}
+
+			for (const auto& pair : pairs)
+			{
+				Debug_Null_Pointer(pair.lock());
+
+				auto pEnt = pair.lock();
+				Debug_Null_Pointer(pEnt);
+
+				const auto& pVertices = pEnt->Vertices();
+				for (const auto& v : pVertices)
+				{
+					Debug_Null_Pointer(v);
+
+					std::vector<std::weak_ptr<Pln_Edge>> wEdges;
+					v->RetrieveEdgesTo(wEdges);
+
+					if (wEdges.size() NOT_EQUAL 1)
+					{
+						FatalErrorIn("std::vector<std::shared_ptr<PlnOpert_CutterEntity>> GetCutterEntities(Arg...)")
+							<< "contradictory data" << endl
+							<< abort(FatalError);
+					}
+
+					auto edge = wEdges[0].lock();
+					Debug_Null_Pointer(edge);
+
+					auto id = edge->GetIndex(v);
+					if (id IS_EQUAL 0)
+					{
+						ent->SetForwardVtx(v);
+					}
+					else
+					{
+						ent->SetBackwardVtx(v);
+					}
 				}
 			}
 		}
+		return std::move(entities);
 	}
+
+
 }
 
 void tnbLib::PlnOpert_Cutter_Subdivide::Perform(const Standard_Real theTol)

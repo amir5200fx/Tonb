@@ -33,8 +33,20 @@ namespace tnbLib
 		Pln_Vertex()
 		{}
 
-		Pln_Vertex(const Pnt2d& theCoord)
+		Pln_Vertex
+		(
+			const Pnt2d& theCoord
+		)
 			: theCoord_(theCoord)
+		{}
+
+		Pln_Vertex
+		(
+			const Standard_Integer theIndex,
+			const Pnt2d& theCoord
+		)
+			: Pln_Entity(theIndex)
+			, theCoord_(theCoord)
 		{}
 
 		Pln_Vertex

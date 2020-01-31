@@ -42,17 +42,17 @@ namespace tnbLib
 				seg->Coord1(), seg->Parameter0(), seg->Parameter1());
 		Debug_Null_Pointer(nSeg);
 
-		nSeg->SetCurve(theEntity->Curve());
+		nSeg->SetParentCurve(theEntity->ParentCurve());
 
 		auto n0 = std::make_shared<PlnOpert_IntsctPoint2>(0, seg->Coord0(), seg->Parameter0());
 		Debug_Null_Pointer(n0);
 
-		n0->SetCurve(theEntity->Curve());
+		n0->SetParentCurve(theEntity->ParentCurve());
 
 		auto n1 = std::make_shared<PlnOpert_IntsctPoint2>(0, seg->Coord1(), seg->Parameter1());
 		Debug_Null_Pointer(n1);
 
-		n1->SetCurve(theEntity->Curve());
+		n1->SetParentCurve(theEntity->ParentCurve());
 
 		nSeg->SetStart(n0);
 		nSeg->SetEnd(n1);
@@ -294,7 +294,7 @@ namespace tnbLib
 			auto ent0 = std::make_shared<PlnOpert_IntsctPoint>(0, curve->Value(param), param);
 			Debug_Null_Pointer(ent0);
 
-			ent0->SetCurve(curve);
+			ent0->SetParentCurve(curve);
 
 			std::vector<std::weak_ptr<Pln_Edge>> edges;
 			vtx->RetrieveEdgesTo(edges);
@@ -325,7 +325,7 @@ namespace tnbLib
 				auto ent1 = std::make_shared<PlnOpert_IntsctPoint>(0, c->Value(edge_param), edge_param);
 				Debug_Null_Pointer(ent1);
 
-				ent1->SetCurve(c);
+				ent1->SetParentCurve(c);
 
 				ent1->PushToPairs(ent0);
 				ent0->PushToPairs(ent1);

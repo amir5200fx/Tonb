@@ -20,21 +20,15 @@ class gp_Ax22d;
 namespace tnbLib
 {
 
-	// Forward Declarations
-	class Pln_Curve_Info;
 
 	class Pln_Curve
 		: public Pln_Entity
 	{
 
-		typedef Pln_Curve_Info info;
-
 		/*Private Data*/
 
 		//- must be bounded
 		Handle(Geom2d_Curve) theGeometry_;
-
-		std::shared_ptr<info> theInfo_;
 
 
 		Handle(Geom2d_Curve)& ChangeGeometry()
@@ -48,32 +42,24 @@ namespace tnbLib
 
 		typedef Pnt2d ptType;
 
-		Pln_Curve(const std::shared_ptr<info>& theInfo)
-			: theInfo_(theInfo)
+		Pln_Curve()
 		{}
 
 		Pln_Curve
 		(
-			const Handle(Geom2d_Curve)& theGeom,
-			const std::shared_ptr<info>& theInfo
+			const Handle(Geom2d_Curve)& theGeom
 		);
 
 		Pln_Curve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Handle(Geom2d_Curve)& theGeom,
-			const std::shared_ptr<info>& theInfo
+			const Handle(Geom2d_Curve)& theGeom
 		);
 
 		const Handle(Geom2d_Curve)& Geometry() const
 		{
 			return theGeometry_;
-		}
-
-		const std::shared_ptr<info>& Info() const
-		{
-			return theInfo_;
 		}
 
 		Standard_Real FirstParameter() const;
@@ -148,8 +134,7 @@ namespace tnbLib
 			MakeLineSegment
 			(
 				const Pnt2d& theP0,
-				const Pnt2d& theP1,
-				const std::shared_ptr<info>& theInfo
+				const Pnt2d& theP1
 			);
 
 		static std::shared_ptr<Pln_Curve>
@@ -158,8 +143,7 @@ namespace tnbLib
 				const gp_Ax22d& A,
 				const Standard_Real Radius,
 				const Standard_Real theDeg0,
-				const Standard_Real theDeg1,
-				const std::shared_ptr<info>& theInfo
+				const Standard_Real theDeg1
 			);
 
 		static std::shared_ptr<Pln_Curve>
@@ -169,7 +153,6 @@ namespace tnbLib
 				const Standard_Real Radius,
 				const Standard_Real theDeg0,
 				const Standard_Real theDeg1,
-				const std::shared_ptr<info>& theInfo,
 				const Standard_Boolean Sense = Standard_True
 			);
 
@@ -179,7 +162,6 @@ namespace tnbLib
 				const gp_Ax2d& MajorAxis,
 				const Standard_Real MajorRadius,
 				const Standard_Real MinorRadius,
-				const std::shared_ptr<info>& theInfo, 
 				const Standard_Boolean Sense = Standard_True
 			);
 
@@ -188,8 +170,7 @@ namespace tnbLib
 			(
 				const gp_Ax22d& Axis,
 				const Standard_Real MajorRadius,
-				const Standard_Real MinorRadius,
-				const std::shared_ptr<info>& theInfo
+				const Standard_Real MinorRadius
 			);
 
 		//- Macros

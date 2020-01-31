@@ -137,14 +137,6 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="TnbLib\Cad\Entities\Block\Cad_BlockEntity.hxx" />
-    <ClInclude Include="TnbLib\Cad\Entities\Block\Cad_BlockEntityI.hxx" />
-    <ClInclude Include="TnbLib\Cad\Entities\Manager\Cad_EntityManager.hxx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TnbLib\Cad\Entities\Block\Cad_BlockEntity.cxx" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

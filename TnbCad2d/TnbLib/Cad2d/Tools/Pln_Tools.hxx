@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Pln_Orientation.hxx>
 
 #include <vector>
 #include <memory>
@@ -20,7 +21,11 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Pln_Edge;
+	class Pln_Ring;
 	class Pln_CmpEdge;
+	class Pln_Wire;
+	class Pln_Curve;
+	class Pln_Vertex;
 
 	class Pln_Tools
 	{
@@ -31,10 +36,39 @@ namespace tnbLib
 
 		static Standard_Real Distance(const Pnt2d& theCoord, const Handle(Geom2d_Curve)& theCurve, Standard_Real& theParameter);
 
-		static std::shared_ptr<Pln_CmpEdge> MakeCompoundEdge
+		static std::shared_ptr<Pln_CmpEdge> 
+			MakeCompoundEdge
 		(
 			const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 		);
+
+		static std::shared_ptr<Pln_Wire>
+			MakeWire(const std::shared_ptr<Pln_Ring>& theRing);
+
+		static std::shared_ptr<Pln_Wire>
+			MakeWire
+		(
+			const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+			const Standard_Real theMaxTol
+		);
+
+		static Pln_Orientation 
+			RetrieveOrientation
+			(
+				const Pln_Wire& theWire
+			);
+
+		static std::vector<std::shared_ptr<Pln_Wire>>
+			RetrieveWires
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+			);
+
+		static std::vector<std::shared_ptr<Pln_Vertex>>
+			RetrieveVertices(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
+
+		static std::vector<std::shared_ptr<Pln_Edge>>
+			RetrieveEdges(const std::vector<std::shared_ptr<Pln_Wire>>& theWires);
 
 		//- an exception will be thrown if the curve is not bounded
 		static std::shared_ptr<Geom2dAPI_InterCurveCurve>

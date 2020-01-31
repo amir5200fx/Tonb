@@ -124,6 +124,57 @@
     <Filter Include="TnbLib\Cad2d\Operators\Cutter\Intersection">
       <UniqueIdentifier>{812bf1c3-2576-45b8-9269-f3f7ad408a1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Global">
+      <UniqueIdentifier>{80dc0421-2cf8-48e0-8985-20982c256aa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Global\Block">
+      <UniqueIdentifier>{a1cde4b7-1712-44c6-81df-6825353e8163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Global\Manager">
+      <UniqueIdentifier>{236ff051-1ea0-4245-86a5-96849706ad56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Plane">
+      <UniqueIdentifier>{6e3b3519-ef11-46c6-b0e1-a62f2ca3b9d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Global\Entity">
+      <UniqueIdentifier>{f1aa3104-ac69-4327-9672-997c718b9603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Global\Curve">
+      <UniqueIdentifier>{323bbcb5-bbe9-47ca-bf84-e117f229cab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Global\Curve\Info">
+      <UniqueIdentifier>{669d177e-4bf6-4064-b048-3e2152d24ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Plane\Info">
+      <UniqueIdentifier>{384735b0-be4d-465a-90b1-04d1c6ffb811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch">
+      <UniqueIdentifier>{f1413216-5ded-441b-9938-33c46f63baa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo">
+      <UniqueIdentifier>{7284edf3-5bc9-447c-b516-cef951a29685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Approximation">
+      <UniqueIdentifier>{0f4616f7-9903-4cb2-b2cb-0ac2889b4929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Interpolation">
+      <UniqueIdentifier>{0157a04e-0c34-49d7-b7fa-d6c926e164ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\LineSegment">
+      <UniqueIdentifier>{5c209765-87bc-4119-893d-7ab7a9d47b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Ellipse">
+      <UniqueIdentifier>{e2d967ca-a54d-4418-a759-05f5f5c6f535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Circle">
+      <UniqueIdentifier>{5c9f198f-3d4d-498e-aeed-9c19db78f4d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Global">
+      <UniqueIdentifier>{87f709d0-6a4c-44c0-b4c2-2015c4ad6b4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Info">
+      <UniqueIdentifier>{cb013ab5-d655-44d6-a24b-ee4bad6f47d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -131,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.hxx">
       <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_Curve_Info.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Curve\Info</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
       <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
@@ -172,9 +220,6 @@
       <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Pln_Wire.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Pln_WireI.hxx">
       <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Pln_EdgeI.hxx">
@@ -225,9 +270,6 @@
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Edge\PlnOpert_CutterEdge.hxx">
       <Filter>TnbLib\Cad2d\Operators\Cutter\Entities\Edge</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Subdivide.hxx">
-      <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Entities\Vertex\PlnOpert_IntsctVertex.hxx">
       <Filter>TnbLib\Cad2d\Operators\Cutter\Entities\Vertex</Filter>
     </ClInclude>
@@ -246,13 +288,49 @@
     <ClInclude Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Cutter_Subdivide.hxx">
       <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Global\Block\Cad_BlockEntity.hxx">
+      <Filter>TnbLib\Cad2d\Global\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Global\Block\Cad_BlockEntityI.hxx">
+      <Filter>TnbLib\Cad2d\Global\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Global\Manager\Cad_EntityManager.hxx">
+      <Filter>TnbLib\Cad2d\Global\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Global\Manager\Cad_EntityManagerI.hxx">
+      <Filter>TnbLib\Cad2d\Global\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Plane\Cad2d_Plane.hxx">
+      <Filter>TnbLib\Cad2d\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Global\Entity\Cad_Entity.hxx">
+      <Filter>TnbLib\Cad2d\Global\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Plane\Info\Cad2d_Plane_Info.hxx">
+      <Filter>TnbLib\Cad2d\Plane\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Global\Cad_GeoSketch.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Cad2d_GeoSketch.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\LineSegment\Cad2d_GeoSketch_LineSegment.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\LineSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Cad2d_GeoSketch_Interpolation.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Ellipse\Cad2d_GeoSketch_Ellipse.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Ellipse</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Circle\Cad2d_GeoSketch_Circle.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Circle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
       <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_Curve_Info.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Curve\Info</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
@@ -290,14 +368,41 @@
     <ClCompile Include="TnbLib\Cad2d\Operators\Intersection\CurveCurve\PlnOpert_IntsctCurveCurve.cxx">
       <Filter>TnbLib\Cad2d\Operators\Intersection\CurveCurve</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Subdivide.cxx">
-      <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Intersection\PlnOpert_Cutter_Intersection.cxx">
       <Filter>TnbLib\Cad2d\Operators\Cutter\Intersection</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Operators\Cutter\Subdivide\PlnOpert_Cutter_Subdivide.cxx">
       <Filter>TnbLib\Cad2d\Operators\Cutter\Subdivide</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Global\Block\Cad_BlockEntity.cxx">
+      <Filter>TnbLib\Cad2d\Global\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Global\Manager\Cad_EntityManager.cxx">
+      <Filter>TnbLib\Cad2d\Global\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Cad2d_Plane.cxx">
+      <Filter>TnbLib\Cad2d\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Cad2d_PlaneIO.cxx">
+      <Filter>TnbLib\Cad2d\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Info\Cad2d_Plane_Info.cxx">
+      <Filter>TnbLib\Cad2d\Plane\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\LineSegment\Cad2d_GeoSketch_LineSegment.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\LineSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Cad2d_GeoSketch_Interpolation.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Ellipse\Cad2d_GeoSketch_Ellipse.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Ellipse</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Circle\Cad2d_GeoSketch_Circle.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools_RetrieveWires.cxx">
+      <Filter>TnbLib\Cad2d\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

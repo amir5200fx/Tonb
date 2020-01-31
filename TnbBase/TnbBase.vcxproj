@@ -516,6 +516,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\global\Time.hxx" />
     <ClInclude Include="TnbLib\Base\global\tnbVersion.hxx" />
     <ClInclude Include="TnbLib\Base\global\unitConversion\unitConversion.hxx" />
+    <ClInclude Include="TnbLib\Base\global\UnitSystem.hxx" />
     <ClInclude Include="TnbLib\Base\include\addRegionOption.hxx" />
     <ClInclude Include="TnbLib\Base\include\addTimeOptions.hxx" />
     <ClInclude Include="TnbLib\Base\include\checkConstantOption.hxx" />

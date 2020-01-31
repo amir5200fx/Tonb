@@ -30,17 +30,21 @@ namespace tnbLib
 
 	public:
 
-		Standard_Integer NbEdges() const
+		auto NbEdges() const
 		{
 			return (Standard_Integer)theEdges_.size();
 		}
 
-		const std::map<Standard_Integer, std::weak_ptr<Pln_Edge>>& Edges() const
+		const auto& Edges() const
 		{
 			return theEdges_;
 		}
 
-		void InsertToEdges(const Standard_Integer theIndex, const std::weak_ptr<Pln_Edge>& theEdge)
+		void InsertToEdges
+		(
+			const Standard_Integer theIndex, 
+			const std::weak_ptr<Pln_Edge>& theEdge
+		)
 		{
 #ifdef FULLDEBUG
 			auto iter = theEdges_.find(theIndex);
@@ -54,12 +58,15 @@ namespace tnbLib
 			theEdges_.insert(std::make_pair(theIndex, theEdge));
 		}
 
-		void RemoveFromEdges(const Standard_Integer theIndex)
+		void RemoveFromEdges
+		(
+			const Standard_Integer theIndex
+		)
 		{
 			auto iter = theEdges_.find(theIndex);
 			if (iter NOT_EQUAL theEdges_.end())
 			{
-				FatalErrorIn("void InsertToEdges(const Standard_Integer theIndex, const std::weak_ptr<Pln_Edge>& theEdge)")
+				FatalErrorIn("void RemoveFromEdges(const Standard_Integer theIndex)")
 					<< "the item is not in the tree: " << theIndex << endl
 					<< abort(FatalError);
 			}

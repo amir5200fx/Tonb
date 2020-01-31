@@ -33,8 +33,20 @@ namespace tnbLib
 		Pln_Vertex()
 		{}
 
-		Pln_Vertex(const Pnt2d& theCoord)
+		Pln_Vertex
+		(
+			const Pnt2d& theCoord
+		)
 			: theCoord_(theCoord)
+		{}
+
+		Pln_Vertex
+		(
+			const Standard_Integer theIndex,
+			const Pnt2d& theCoord
+		)
+			: Pln_Entity(theIndex)
+			, theCoord_(theCoord)
 		{}
 
 		Pln_Vertex
@@ -58,6 +70,21 @@ namespace tnbLib
 		Standard_Real Angle() const;
 
 		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
+
+
+		//- virtual functions
+
+		virtual Standard_Boolean IsCutter() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsIntersect() const
+		{
+			return Standard_False;
+		}
+
+		//- static functions
 
 		static const Pnt2d& GetCoord(const std::shared_ptr<Pln_Vertex>& theVtx);
 

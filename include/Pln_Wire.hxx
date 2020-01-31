@@ -40,7 +40,10 @@ namespace tnbLib
 
 	public:
 
-		Pln_Wire(const std::shared_ptr<Pln_CmpEdge>& theEdge);
+		Pln_Wire
+		(
+			const std::shared_ptr<Pln_CmpEdge>& theEdge
+		);
 
 		Pln_Wire
 		(
@@ -74,6 +77,12 @@ namespace tnbLib
 			return theOrientation_;
 		}
 
+		std::vector<std::shared_ptr<Pln_Vertex>>
+			RetrieveVertices() const;
+
+		std::vector<std::shared_ptr<Pln_Curve>>
+			RetrieveCurves() const;
+
 		void Reverse();
 
 		void RetrieveVerticesTo
@@ -81,20 +90,22 @@ namespace tnbLib
 			std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
 		) const;
 
+		void RetrieveCurvesTo
+		(
+			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+		) const;
 
 		//- Static functions and operators
 
 
-		static std::vector<std::shared_ptr<Pln_Wire>>
+		/*static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
 			(
 				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
-			);
+			);*/
 
-		static Pln_Orientation RetrieveOrientation(const Pln_Wire& theWire);
+		//static Pln_Orientation RetrieveOrientation(const Pln_Wire& theWire);
 	};
 }
-
-#include <Pln_WireI.hxx>
 
 #endif // !_Pln_Wire_Header

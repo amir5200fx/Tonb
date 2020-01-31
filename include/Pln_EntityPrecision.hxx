@@ -23,6 +23,8 @@ namespace tnbLib
 			: thePrecision_(DEFAULT_PRECISION)
 		{}
 
+	public:
+
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(Standard_Real, Precision)
 	};

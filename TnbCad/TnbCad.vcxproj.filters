@@ -20,20 +20,4 @@
       <UniqueIdentifier>{fe3d7f40-c915-434d-8de8-507603d4a0f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TnbLib\Cad\Entities\Block\Cad_BlockEntity.hxx">
-      <Filter>TnbLib\Cad\Entities\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\Entities\Block\Cad_BlockEntityI.hxx">
-      <Filter>TnbLib\Cad\Entities\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\Entities\Manager\Cad_EntityManager.hxx">
-      <Filter>TnbLib\Cad\Entities\Manager</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TnbLib\Cad\Entities\Block\Cad_BlockEntity.cxx">
-      <Filter>TnbLib\Cad\Entities\Block</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>

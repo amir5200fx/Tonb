@@ -45,11 +45,9 @@ namespace tnbLib
 
 tnbLib::Pln_Curve::Pln_Curve
 (
-	const Handle(Geom2d_Curve)& theGeom, 
-	const std::shared_ptr<info>& theInfo
+	const Handle(Geom2d_Curve)& theGeom
 )
-	: theInfo_(theInfo)
-	, theGeometry_(theGeom)
+	: theGeometry_(theGeom)
 {
 	plnCurveLib::CheckBounded(theGeom, "Pln_Curve()");
 }
@@ -58,11 +56,9 @@ tnbLib::Pln_Curve::Pln_Curve
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
-	const Handle(Geom2d_Curve)& theGeom, 
-	const std::shared_ptr<info>& theInfo
+	const Handle(Geom2d_Curve)& theGeom
 )
 	: Pln_Entity(theIndex, theName)
-	, theInfo_(theInfo)
 	, theGeometry_(theGeom)
 {
 	plnCurveLib::CheckBounded(theGeom, "Pln_Curve()");
@@ -179,8 +175,8 @@ tnbLib::Pln_Curve::Split(const Standard_Real x) const
 
 	return 
 	{ 
-		std::make_shared<Pln_Curve>(C0->FirstParameter(), C0->LastParameter(), C0, Info()) , 
-		std::make_shared<Pln_Curve>(C1->FirstParameter(), C1->LastParameter(), C1, Info()) 
+		std::make_shared<Pln_Curve>(C0) , 
+		std::make_shared<Pln_Curve>(C1) 
 	};
 }
 
@@ -203,8 +199,8 @@ void tnbLib::Pln_Curve::Split
 	Handle(Geom2d_Curve) C0, C1;
 	Pln_Tools::SplitCurve(Geometry(), x, C0, C1);
 
-	theLeft = std::make_shared<Pln_Curve>(C0->FirstParameter(), C0->LastParameter(), C0, Info());
-	theRight = std::make_shared<Pln_Curve>(C1->FirstParameter(), C1->LastParameter(), C1, Info());
+	theLeft = std::make_shared<Pln_Curve>(C0);
+	theRight = std::make_shared<Pln_Curve>(C1);
 }
 
 void tnbLib::Pln_Curve::Split
@@ -229,8 +225,8 @@ void tnbLib::Pln_Curve::Split
 
 	theCoord = Geometry()->Value(x);
 
-	theLeft = std::make_shared<Pln_Curve>(C0->FirstParameter(), C0->LastParameter(), C0, Info());
-	theRight = std::make_shared<Pln_Curve>(C1->FirstParameter(), C1->LastParameter(), C1, Info());
+	theLeft = std::make_shared<Pln_Curve>(C0);
+	theRight = std::make_shared<Pln_Curve>(C1);
 }
 
 namespace tnbLib
@@ -260,7 +256,9 @@ tnbLib::Pln_Curve::Split
 {
 	if (NOT theParameters.size())
 	{
-		return;
+		FatalErrorIn("void Split(...)")
+			<< "empty list: there is no parameter to split the curve" << endl
+			<< abort(FatalError);
 	}
 
 	CheckSort(theParameters, "void Split(...)");
@@ -347,3 +345,23 @@ void tnbLib::Pln_Curve::Split
 	}
 	theCurves.push_back(std::move(curve));
 }
+
+#include <Cad2d_GeoSketch_Circle.hxx>
+#include <Cad2d_GeoSketch_Ellipse.hxx>
+#include <Cad2d_GeoSketch_LineSegment.hxx>
+
+std::shared_ptr<tnbLib::Pln_Curve> 
+tnbLib::Pln_Curve::MakeLineSegment
+(
+	const Pnt2d & theP0, 
+	const Pnt2d & theP1
+)
+{
+	auto sketch = 
+		std::make_shared<Cad2d_GeoSketch_LineSegment>(theP0, theP1);
+	Debug_Null_Pointer(sketch);
+
+	auto curve = std::make_shared<Pln_Curve>(sketch->Geometry());
+	return std::move(curve);
+}
+

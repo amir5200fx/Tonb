@@ -1,7 +1,12 @@
 #include <Pln_Tools.hxx>
 
+#include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
+#include <Pln_Vertex.hxx>
+#include <Pln_Curve.hxx>
 #include <Pln_Edge.hxx>
+#include <Pln_Ring.hxx>
+#include <Pln_Wire.hxx>
 #include <Pln_CmpEdge.hxx>
 #include <Entity2d_Triangulation.hxx>
 
@@ -45,6 +50,163 @@ tnbLib::Pln_Tools::MakeCompoundEdge
 
 	return std::move(pln);
 }
+
+namespace tnbLib
+{
+
+	inline Standard_Real CalcMaxPrec
+	(
+		const Pnt2d& theM,
+		const Pnt2d& theP0, 
+		const Pnt2d& theP1
+	)
+	{
+		const auto dis0 = theM.Distance(theP0);
+		const auto dis1 = theM.Distance(theP1);
+		return 1.005*MAX(dis0, dis1);
+	}
+}
+
+std::shared_ptr<tnbLib::Pln_Wire>
+tnbLib::Pln_Tools::MakeWire
+(
+	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves, 
+	const Standard_Real theMaxTol
+)
+{
+	if (theCurves.empty())
+	{
+		FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
+			<< "the list of the curves is empty!" << endl
+			<< abort(FatalError);
+	}
+	
+	if (theCurves.size() IS_EQUAL 1)
+	{
+		const auto& c = theCurves[0];
+		if (c->FirstCoord().Distance(c->LastCoord()) > theMaxTol)
+		{
+			FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
+				<< "the curve is not formed a wire; max tolerance = " << theMaxTol << endl
+				<< abort(FatalError);
+		}
+
+		auto v = std::make_shared<Pln_Vertex>(1, c->FirstCoord());
+		Debug_Null_Pointer(v);
+
+		auto ring = std::make_shared<Pln_Ring>(v, c);
+		Debug_Null_Pointer(ring);
+
+		ring->SetIndex(1);
+
+		auto wire = MakeWire(ring);
+
+		return std::move(wire);
+	}
+
+	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
+	vertices.reserve(theCurves.size());
+
+	auto p0 = theCurves[theCurves.size() - 2]->LastCoord();
+	auto p1 = theCurves[0]->FirstCoord();
+
+	if (p0.Distance(p1) > theMaxTol)
+	{
+		FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
+			<< "the curves are not formed a wire; max tolerance = " << theMaxTol << endl
+			<< abort(FatalError);
+	}
+
+	auto m = MEAN(p0, p1);
+
+	Standard_Integer K = 0;
+	auto v = std::make_shared<Pln_Vertex>(++K, m);
+	Debug_Null_Pointer(v);
+
+	v->SetPrecision(CalcMaxPrec(m, p0, p1));
+	vertices.push_back(std::move(v));
+
+	auto iter = theCurves.begin();
+
+	Debug_Null_Pointer((*iter));
+	p0 = (*iter)->LastCoord();
+
+	iter++;
+
+	while (iter NOT_EQUAL theCurves.end())
+	{
+		Debug_Null_Pointer((*iter));
+		p1 = (*iter)->FirstCoord();
+
+		if (p0.Distance(p1) > theMaxTol)
+		{
+			FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
+				<< "the curves are not formed a wire; max tolerance = " << theMaxTol << endl
+				<< abort(FatalError);
+		}
+
+		m = MEAN(p0, p1);
+
+		auto v = std::make_shared<Pln_Vertex>(++K, m);
+		Debug_Null_Pointer(v);
+
+		v->SetPrecision(CalcMaxPrec(m, p0, p1));
+		vertices.push_back(std::move(v));
+
+		p0 = (*iter)->LastCoord();
+
+		iter++;
+	}
+
+	std::vector<std::shared_ptr<Pln_Edge>> edges;
+	edges.reserve(theCurves.size());
+
+	K = 0;
+	for (const auto& x : theCurves)
+	{
+		Debug_Null_Pointer(x);
+
+		auto i0 = K;
+		auto i1 = (K + 1) % theCurves.size();
+
+		const auto& v0 = vertices[i0];
+		const auto& v1 = vertices[i1];
+
+		auto edge = std::make_shared<Pln_Edge>(v0, v1, x);
+		Debug_Null_Pointer(edge);
+
+		K++;
+
+		edge->SetIndex(K);
+
+		edges.push_back(std::move(edge));
+	}
+
+	auto cmpEdge = MakeCompoundEdge(edges);
+	Debug_Null_Pointer(cmpEdge);
+
+	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
+	Debug_Null_Pointer(wire);
+
+	return std::move(wire);
+}
+
+//std::shared_ptr<tnbLib::Pln_Edge> 
+//tnbLib::Pln_Tools::MakeEdges
+//(
+//	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+//)
+//{
+//	if (theCurves.empty())
+//	{
+//		FatalErrorIn("std::shared_ptr<Pln_Edge> MakeEdges(const std::vector<std::shared_ptr<Pln_Curve>>& theCurves)")
+//			<< "the list is empty from the curves!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	std::vector<std::shared_ptr<Pln_Edge>> edgeList;
+//
+//}
 
 std::shared_ptr<Geom2dAPI_InterCurveCurve>
 tnbLib::Pln_Tools::Intersection

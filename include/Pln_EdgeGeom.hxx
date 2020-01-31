@@ -43,6 +43,11 @@ namespace tnbLib
 
 	public:
 
+		Standard_Boolean Sense() const
+		{
+			return Sense_;
+		}
+
 		std::shared_ptr<Entity2d_Polygon>& Mesh() const
 		{
 			return theMesh_;
