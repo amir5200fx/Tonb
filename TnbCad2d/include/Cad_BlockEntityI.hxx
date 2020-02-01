@@ -52,6 +52,21 @@ namespace tnbLib
 	}
 
 	template<class EntityType>
+	Cad_BlockEntity<EntityType>::Cad_BlockEntity
+	(
+		const word & theName,
+		const std::vector<std::shared_ptr<EntityType>>& theEntities
+	)
+		: Global_Named(theName)
+	{
+		for (const auto& x : theEntities)
+		{
+			Debug_Null_Pointer(x);
+			Add(x->Index(), x);
+		}
+	}
+
+	template<class EntityType>
 	typename Cad_BlockEntity<EntityType>::indexedMap::const_iterator 
 		Cad_BlockEntity<EntityType>::SelectEntity
 		(

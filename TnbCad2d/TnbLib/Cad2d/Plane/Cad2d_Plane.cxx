@@ -3,6 +3,7 @@
 #include <Cad_BlockEntity.hxx>
 #include <Cad_EntityManager.hxx>
 #include <Pln_Curve.hxx>
+#include <Pln_Vertex.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>

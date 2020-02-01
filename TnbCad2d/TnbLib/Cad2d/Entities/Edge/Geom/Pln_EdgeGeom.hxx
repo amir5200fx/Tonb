@@ -41,6 +41,11 @@ namespace tnbLib
 			, Sense_(theSense)
 		{}
 
+		Standard_Boolean& ChangeSense()
+		{
+			return Sense_;
+		}
+
 	public:
 
 		Standard_Boolean Sense() const

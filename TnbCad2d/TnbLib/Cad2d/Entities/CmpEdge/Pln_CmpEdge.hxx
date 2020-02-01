@@ -3,6 +3,7 @@
 #define _Pln_CmpEdge_Header
 
 #include <Pln_Entity.hxx>
+#include <OFstream.hxx>
 
 #include <memory>
 #include <vector>
@@ -62,6 +63,8 @@ namespace tnbLib
 		}
 
 		void Reverse();
+
+		void ExportToPlt(OFstream& File) const;
 	};
 }
 

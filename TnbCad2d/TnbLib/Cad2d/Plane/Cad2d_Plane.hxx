@@ -5,6 +5,7 @@
 #include <Global_AccessMethod.hxx>
 #include <Pln_Entity.hxx>
 #include <Entity2d_Box.hxx>
+#include <OFstream.hxx>
 
 #include <vector>
 
@@ -166,6 +167,7 @@ namespace tnbLib
 			theInfo_ = theInfo;
 		}
 
+		void ExportToPlt(OFstream& File) const;
 
 		//- Static functions
 

@@ -152,6 +152,11 @@ namespace tnbLib
 			std::vector<std::shared_ptr<EntityType>>& theEntities
 		) const;
 
+		void Print
+		(
+			const Standard_Boolean PrintEntities = Standard_False,
+			Standard_OStream& Ostream = cout
+		) const;
 	};
 }
 

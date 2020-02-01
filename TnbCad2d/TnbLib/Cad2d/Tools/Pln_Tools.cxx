@@ -1,5 +1,6 @@
 #include <Pln_Tools.hxx>
 
+#include <Adt_AvlTree.hxx>
 #include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
 #include <Pln_Vertex.hxx>
@@ -65,6 +66,26 @@ namespace tnbLib
 		const auto dis1 = theM.Distance(theP1);
 		return 1.005*MAX(dis0, dis1);
 	}
+}
+
+std::shared_ptr<tnbLib::Pln_Wire> 
+tnbLib::Pln_Tools::MakeWire
+(
+	const std::shared_ptr<Pln_Ring>& theRing
+)
+{
+	std::vector<std::shared_ptr<Pln_Edge>> edges;
+	edges.reserve(1);
+
+	edges.push_back(theRing);
+
+	auto cmpEdge = MakeCompoundEdge(edges);
+	Debug_Null_Pointer(cmpEdge);
+
+	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
+	Debug_Null_Pointer(wire);
+
+	return std::move(wire);
 }
 
 std::shared_ptr<tnbLib::Pln_Wire>
@@ -207,6 +228,28 @@ tnbLib::Pln_Tools::MakeWire
 //	std::vector<std::shared_ptr<Pln_Edge>> edgeList;
 //
 //}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
+tnbLib::Pln_Tools::RetrieveVertices
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	Adt_AvlTree<std::shared_ptr<Pln_Vertex>> compact;
+	compact.SetComparableFunction(&Pln_Vertex::IsLess);
+
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		compact.InsertIgnoreDup(x->Vtx0());
+		compact.InsertIgnoreDup(x->Vtx1());
+	}
+
+	std::vector<std::shared_ptr<Pln_Vertex>> list;
+	compact.RetrieveTo(list);
+
+	return std::move(list);
+}
 
 std::shared_ptr<Geom2dAPI_InterCurveCurve>
 tnbLib::Pln_Tools::Intersection

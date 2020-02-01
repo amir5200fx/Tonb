@@ -5,6 +5,7 @@
 #include <Pln_Entity.hxx>
 #include <Pln_Orientation.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <OFstream.hxx>
 
 #include <vector>
 
@@ -94,6 +95,8 @@ namespace tnbLib
 		(
 			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 		) const;
+
+		void ExportToPlt(OFstream& File) const;
 
 		//- Static functions and operators
 

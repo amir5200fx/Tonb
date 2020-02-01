@@ -5,6 +5,7 @@
 #include <Pln_Entity.hxx>
 #include <Pln_EdgeAdaptor.hxx>
 #include <Pln_EdgeGeom.hxx>
+#include <OFstream.hxx>
 
 #include <vector>
 
@@ -96,8 +97,12 @@ namespace tnbLib
 			return theVtx1_;
 		}
 
-		void Reverse(const Standard_Boolean ApplyToMesh = Standard_True);
+		void Reverse
+		(
+			const Standard_Boolean ApplyToMesh = Standard_True
+		);
 
+		void ExportToPlt(OFstream& File) const;
 
 		//- virtual functions
 

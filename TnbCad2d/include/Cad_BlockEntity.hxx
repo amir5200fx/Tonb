@@ -57,7 +57,11 @@ namespace tnbLib
 
 	public:
 
-		Cad_BlockEntity(const word& theName, const std::vector<std::shared_ptr<EntityType>>& theEntities);
+		Cad_BlockEntity
+		(
+			const word& theName, 
+			const std::vector<std::shared_ptr<EntityType>>& theEntities
+		);
 
 		auto NbEntities() const
 		{

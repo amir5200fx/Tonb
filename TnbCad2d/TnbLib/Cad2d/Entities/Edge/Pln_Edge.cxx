@@ -1,5 +1,6 @@
 #include <Pln_Edge.hxx>
 
+#include <Entity2d_Polygon.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Curve.hxx>
 
@@ -74,4 +75,18 @@ tnbLib::Pln_Edge::Parameter
 			return 0;
 		}
 	}
+}
+
+void tnbLib::Pln_Edge::Reverse
+(
+	const Standard_Boolean ApplyToMesh
+)
+{
+	std::swap(theVtx0_, theVtx1_);
+	if (ApplyToMesh)
+	{
+		Mesh()->Reverse();
+	}
+
+	ChangeSense() = NOT Sense();
 }

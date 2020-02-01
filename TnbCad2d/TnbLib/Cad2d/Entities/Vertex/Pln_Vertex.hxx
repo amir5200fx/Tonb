@@ -86,7 +86,18 @@ namespace tnbLib
 
 		//- static functions
 
-		static const Pnt2d& GetCoord(const std::shared_ptr<Pln_Vertex>& theVtx);
+		static const Pnt2d& 
+			GetCoord
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx
+			);
+
+		static Standard_Boolean
+			IsLess
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx0, 
+				const std::shared_ptr<Pln_Vertex>& theVtx1
+			);
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(Pnt2d, Coord)

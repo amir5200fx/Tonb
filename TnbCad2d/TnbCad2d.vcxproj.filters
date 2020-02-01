@@ -175,6 +175,12 @@
     <Filter Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Info">
       <UniqueIdentifier>{cb013ab5-d655-44d6-a24b-ee4bad6f47d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\System">
+      <UniqueIdentifier>{2e19bd1b-f141-4e28-9334-9900090d7267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Plane\System">
+      <UniqueIdentifier>{5ce47973-e047-4e68-bfce-7ba062cd5865}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -327,6 +333,12 @@
     <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Circle\Cad2d_GeoSketch_Circle.hxx">
       <Filter>TnbLib\Cad2d\Sketch\Geo\Circle</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\System\TnbCad2d_System.hxx">
+      <Filter>TnbLib\Cad2d\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Plane\System\Cad2d_Plane_System.hxx">
+      <Filter>TnbLib\Cad2d\Plane\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -403,6 +415,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools_RetrieveWires.cxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\System\TnbCad2d_System.cxx">
+      <Filter>TnbLib\Cad2d\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\System\Cad2d_Plane_System.cxx">
+      <Filter>TnbLib\Cad2d\Plane\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Pln_WireIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdgeIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\CmpEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Pln_EdgeIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
