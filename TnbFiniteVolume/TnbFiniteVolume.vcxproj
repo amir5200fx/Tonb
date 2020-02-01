@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{2AD526BD-A49D-46E4-B6E0-E0F4084347A5}</ProjectGuid>
+    <RootNamespace>TnbFiniteVolume</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\adjConvectionSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\convectionSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\d2dt2Schemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\ddtSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\divSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fv;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvc;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvm;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvSolution;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\gradientLimiters;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\gradSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\laplacianSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\snGradSchemes;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToCell\fullStencils;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToFace\fullStencils;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToFace\MeshObjects;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToFace;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\faceToCell\fullStencils;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\faceToCell\MeshObjects;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\faceToCell;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvBoundaryMesh;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvMeshMapper;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvMeshSubset;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\derived\cohesive;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\singleCellFvMesh;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\wallDist\wallPointYPlus;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\wallDist;$(ProjectDir)TnbLib\FiniteVolume\fvMesh;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\calculated;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\directionMixed;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\fixedGradient;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\fixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\generic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\mixed;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\sliced;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\transform;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\zeroGradient;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\cyclic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\cyclicGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\ggi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpCyclic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpMixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\mixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\overlapGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\processor;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\regionCoupling;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\symmetry;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\wedge;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\activeBaffleVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\advective;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\buoyantPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\directMappedFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\directMappedVelocityFluxFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fan;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedFluxPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedInternalValueFvPatchField;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedMeanValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedNormalSlip;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedPressureCompressibleDensity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\flowRateInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\flux;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fluxCorrectedVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\freestream;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\freestreamPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\inletOutlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\inletOutletTotalTemperature;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\movingRotatingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\movingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\oscillatingFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\outletInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\parabolicVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\partialSlip;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureDirectedInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureDirectedInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureInletUniformVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureNormalInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pulseFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\rotatingPressureInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\rotatingTotalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\rotatingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\slip;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\supersonicFreestream;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\surfaceNormalFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\syringePressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingFlowRateInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingMappedFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingMappedPressureDirectedInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingMappedTotalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingUniformFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingUniformInletOutlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingUniformTotalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\totalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\totalTemperature;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\translatingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\turbulentInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\turbulentIntensityKineticEnergyInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\uniformDensityHydrostaticPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\uniformFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\waveTransmissive;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\waveTransmissiveInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\calculated;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\coupled;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\fixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\sliced;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\cyclic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\cyclicGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\empty;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\ggi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\mixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\overlapGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\processor;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\regionCoupling;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\symmetry;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\wedge;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchVectorNFields;$(ProjectDir)TnbLib\FiniteVolume\fields\surfaceFields;$(ProjectDir)TnbLib\FiniteVolume\fields\volFields;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation\pointPatchInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation\leastSquaresVolPointInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation\edgeCorrectedVolPointInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\VectorNSurfaceInterpolationSchemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolationScheme;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\schemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\multivariateSchemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\limitedSchemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\pointVolInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\mapping\fvFieldMappers;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPointWallModified;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPointFace;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPoint;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCell;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolation;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\adjConvectionSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\convectionSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\d2dt2Schemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\ddtSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\divSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fv;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvc;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvm;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\fvSolution;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\gradientLimiters;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\gradSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\laplacianSchemes;$(ProjectDir)TnbLib\FiniteVolume\finiteVolume\snGradSchemes;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToCell\fullStencils;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToFace\fullStencils;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToFace\MeshObjects;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\cellToFace;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\faceToCell\fullStencils;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\faceToCell\MeshObjects;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\extendedStencil\faceToCell;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvBoundaryMesh;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvMeshMapper;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvMeshSubset;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\derived\cohesive;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\singleCellFvMesh;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\wallDist\wallPointYPlus;$(ProjectDir)TnbLib\FiniteVolume\fvMesh\wallDist;$(ProjectDir)TnbLib\FiniteVolume\fvMesh;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\calculated;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\directionMixed;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\fixedGradient;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\fixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\generic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\mixed;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\sliced;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\transform;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\basic\zeroGradient;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\cyclic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\cyclicGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\ggi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpCyclic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpMixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\mixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\overlapGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\processor;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\regionCoupling;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\symmetry;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\constraint\wedge;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\activeBaffleVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\advective;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\buoyantPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\directMappedFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\directMappedVelocityFluxFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fan;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedFluxPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedInternalValueFvPatchField;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedMeanValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedNormalSlip;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fixedPressureCompressibleDensity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\flowRateInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\flux;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\fluxCorrectedVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\freestream;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\freestreamPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\inletOutlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\inletOutletTotalTemperature;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\movingRotatingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\movingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\oscillatingFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\outletInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\parabolicVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\partialSlip;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureDirectedInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureDirectedInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureInletUniformVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pressureNormalInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\pulseFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\rotatingPressureInletOutletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\rotatingTotalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\rotatingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\slip;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\supersonicFreestream;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\surfaceNormalFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\syringePressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingFlowRateInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingMappedFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingMappedPressureDirectedInletVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingMappedTotalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingUniformFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingUniformInletOutlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\timeVaryingUniformTotalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\totalPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\totalTemperature;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\translatingWallVelocity;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\turbulentInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\turbulentIntensityKineticEnergyInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\uniformDensityHydrostaticPressure;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\uniformFixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\waveTransmissive;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\derived\waveTransmissiveInlet;$(ProjectDir)TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\calculated;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\coupled;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\fixedValue;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\basic\sliced;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\cyclic;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\cyclicGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\empty;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\ggi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\mixingPlane;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\overlapGgi;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\processor;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\regionCoupling;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\symmetry;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\constraint\wedge;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField;$(ProjectDir)TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchVectorNFields;$(ProjectDir)TnbLib\FiniteVolume\fields\surfaceFields;$(ProjectDir)TnbLib\FiniteVolume\fields\volFields;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation\pointPatchInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation\leastSquaresVolPointInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation\edgeCorrectedVolPointInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\volPointInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\VectorNSurfaceInterpolationSchemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolationScheme;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\schemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\multivariateSchemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\surfaceInterpolation\limitedSchemes;$(ProjectDir)TnbLib\FiniteVolume\interpolation\pointVolInterpolation;$(ProjectDir)TnbLib\FiniteVolume\interpolation\mapping\fvFieldMappers;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPointWallModified;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPointFace;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPoint;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolationCell;$(ProjectDir)TnbLib\FiniteVolume\interpolation\interpolation\interpolation;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchField.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchFieldMapper.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchVectorNFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchVectorNFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField\fvsPatchField.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField\fvsPatchFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField\fvsPatchFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\surfaceFields\slicedSurfaceFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\surfaceFields\slicedSurfaceFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\surfaceFields\surfaceFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\surfaceFields\surfaceFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\surfaceFields\surfaceVectorNFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\surfaceFields\surfaceVectorNFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\volFields\slicedVolFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\volFields\slicedVolFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\volFields\volFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\volFields\volFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\volFields\volVectorNFields.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fields\volFields\volVectorNFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\finiteVolume\fvSchemes\fvSchemes.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\finiteVolume\fvSolution\fvSolution.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvBoundaryMesh\fvBoundaryMesh.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvMesh.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvMeshLduAddressing.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchList.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolation\surfaceInterpolate.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolation\surfaceInterpolation.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchField.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchFields.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\fvPatchVectorNFields.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\fvPatchField\newFvPatchField.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField\fvsPatchField.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField\fvsPatchFields.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvsPatchFields\fvsPatchField\newFvsPatchField.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\surfaceFields\surfaceFields.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\surfaceFields\surfaceVectorNFields.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\volFields\volFields.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fields\volFields\volVectorNFields.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\finiteVolume\fvSchemes\fvSchemes.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvBoundaryMesh\fvBoundaryMesh.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvMesh.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvMeshGeometry.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchFvMeshTemplates.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchTemplates.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\newFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolation\surfaceInterpolate.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\interpolation\surfaceInterpolation\surfaceInterpolation\surfaceInterpolation.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
