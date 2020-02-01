@@ -64,6 +64,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <ListListOpsI.hxx>
+
 #ifdef NoRepository
 #   include <ListListOps.cxx>
 #endif

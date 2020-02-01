@@ -336,6 +336,8 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+#include <LListI.hxx>
+
 #ifdef NoRepository
 #   include <LList.cxx>
 #endif

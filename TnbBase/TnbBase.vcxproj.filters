@@ -4719,6 +4719,60 @@
     <ClInclude Include="TnbLib\Base\global\UnitSystem.hxx">
       <Filter>TnbLib\Base\global</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListOps\ListOpsI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\ListOps</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListListOps\ListListOpsI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\ListListOps</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\PriorityList\PriorityListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\PriorityList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\ParSortableListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\SortableListI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\Lists\Histogram\HistogramI.hxx">
+      <Filter>TnbLib\Base\containers\Lists\Histogram</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILListI.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\ILList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LListI.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrListI.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILListI.hxx">
+      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\UILList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOList\IOListI.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOMap\IOMapI.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOPtrList\IOPtrListI.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOPtrList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOReferencer\IOReferencerI.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOReferencer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOField\IOFieldI.hxx">
+      <Filter>TnbLib\Base\db\IOobjects\IOField</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\containers\NamedEnum\NamedEnumI.hxx">
+      <Filter>TnbLib\Base\containers\NamedEnum</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\dictionaryI.hxx">
+      <Filter>TnbLib\Base\db\dictionary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryI.hxx">
+      <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -4778,9 +4832,6 @@
     <ClCompile Include="TnbLib\Base\global\clock\clock.cxx">
       <Filter>TnbLib\Base\global\clock</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\global\controlSwitches\controlSwitches.cxx">
-      <Filter>TnbLib\Base\global\controlSwitches</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\global\controlSwitches\constantsSwitch.cxx">
       <Filter>TnbLib\Base\global\controlSwitches</Filter>
     </ClCompile>
@@ -4807,12 +4858,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\scalarRange\scalarRange.cxx">
       <Filter>TnbLib\Base\db\scalarRange</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTable.cxx">
-      <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableIO.cxx">
-      <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableCore.cxx">
       <Filter>TnbLib\Base\containers\HashTables\HashTable</Filter>
@@ -4856,65 +4901,14 @@
     <ClCompile Include="TnbLib\Base\db\IOstreams\StringStreams\StringStreamsPrint.cxx">
       <Filter>TnbLib\Base\db\IOstreams\StringStreams</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\UList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UListIO.cxx">
-      <Filter>TnbLib\Base\containers\Lists\UList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\List\List.cxx">
-      <Filter>TnbLib\Base\containers\Lists\List</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\List\ListIO.cxx">
-      <Filter>TnbLib\Base\containers\Lists\List</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\UPtrList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrListIO.cxx">
-      <Filter>TnbLib\Base\containers\Lists\UPtrList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectListIO.cxx">
-      <Filter>TnbLib\Base\containers\Lists\UIndirectList</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\Lists\SubList\SubList.cxx">
       <Filter>TnbLib\Base\containers\Lists\SubList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\PriorityList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\PtrList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrListIO.cxx">
-      <Filter>TnbLib\Base\containers\Lists\PtrList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\DynamicList\DynamicList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\DynamicList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBase.cxx">
       <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBase.cxx">
       <Filter>TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILList.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\UILList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILListIO.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\UILList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILList.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\ILList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILListIO.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\ILList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrList.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrListIO.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\hashes\SHA1\SHA1Digest.cxx">
       <Filter>TnbLib\Base\Primitives\hashes\SHA1</Filter>
@@ -5015,65 +5009,20 @@
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\cpuTime\cpuTime.cxx">
       <Filter>TnbLib\Base\OSspecific\MSWindows\cpuTime</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.cxx">
-      <Filter>TnbLib\Base\containers\HashTables\HashSet</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.cxx">
-      <Filter>TnbLib\Base\containers\HashTables\HashPtrTable</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTableIO.cxx">
-      <Filter>TnbLib\Base\containers\HashTables\HashPtrTable</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTable.cxx">
-      <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableIO.cxx">
-      <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableCore.cxx">
       <Filter>TnbLib\Base\containers\HashTables\StaticHashTable</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\NamedEnum\NamedEnum.cxx">
       <Filter>TnbLib\Base\containers\NamedEnum</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\SortableList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableListName.cxx">
       <Filter>TnbLib\Base\containers\Lists\SortableList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\PackedList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedListName.cxx">
       <Filter>TnbLib\Base\containers\Lists\PackedList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOps.cxx">
       <Filter>TnbLib\Base\containers\Lists\ListOps</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOpsTemplates.cxx">
-      <Filter>TnbLib\Base\containers\Lists\ListOps</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.cxx">
-      <Filter>TnbLib\Base\containers\Lists\ListListOps</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\Histogram\Histogram.cxx">
-      <Filter>TnbLib\Base\containers\Lists\Histogram</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\FixedList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedListIO.cxx">
-      <Filter>TnbLib\Base\containers\Lists\FixedList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListList.cxx">
-      <Filter>TnbLib\Base\containers\Lists\CompactListList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListListIO.cxx">
-      <Filter>TnbLib\Base\containers\Lists\CompactListList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\dictionary\entry\entry.cxx">
       <Filter>TnbLib\Base\db\dictionary\entry</Filter>
@@ -5141,16 +5090,10 @@
     <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryIO.cxx">
       <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryTemplates.cxx">
-      <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\db\dictionary\dictionary.cxx">
       <Filter>TnbLib\Base\db\dictionary</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryIO.cxx">
-      <Filter>TnbLib\Base\db\dictionary</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryTemplates.cxx">
       <Filter>TnbLib\Base\db\dictionary</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\regExp.cxx">
@@ -5253,9 +5196,6 @@
       <Filter>TnbLib\Base\db\IOobjects\IOList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTable.cxx">
-      <Filter>TnbLib\Base\db\dlLibraryTable</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTableTemplates.cxx">
       <Filter>TnbLib\Base\db\dlLibraryTable</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\functionObjects\outputFilterOutputControl\outputFilterOutputControl.cxx">
@@ -5546,24 +5486,6 @@
     <ClCompile Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN\dimensionedVectorTensorN.cxx">
       <Filter>TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBase.cxx">
-      <Filter>TnbLib\Base\containers\Dictionaries\DictionaryBase</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBaseIO.cxx">
-      <Filter>TnbLib\Base\containers\Dictionaries\DictionaryBase</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\Dictionary\DictionaryTemplate.cxx">
-      <Filter>TnbLib\Base\containers\Dictionaries\Dictionary</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\PtrDictionary\PtrDictionary.cxx">
-      <Filter>TnbLib\Base\containers\Dictionaries\PtrDictionary</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UDictionary\UDictionary.cxx">
-      <Filter>TnbLib\Base\containers\Dictionaries\UDictionary</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.cxx">
-      <Filter>TnbLib\Base\containers\Dictionaries\UPtrDictionary</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\containers\Lists\Stack\Stack.cxx">
       <Filter>TnbLib\Base\containers\Lists\Stack</Filter>
     </ClCompile>
@@ -5792,9 +5714,6 @@
     <ClCompile Include="TnbLib\Base\meshes\patchIdentifier\patchIdentifier.cxx">
       <Filter>TnbLib\Base\meshes\patchIdentifier</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\ProcessorTopology\ProcessorTopologyTemplate.cxx">
-      <Filter>TnbLib\Base\meshes\ProcessorTopology</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\meshes\ProcessorTopology\commSchedule.cxx">
       <Filter>TnbLib\Base\meshes\ProcessorTopology</Filter>
     </ClCompile>
@@ -5891,13 +5810,7 @@
     <ClCompile Include="TnbLib\Base\algorithms\polygon\pointInPolygon\HormannAgathos.cxx">
       <Filter>TnbLib\Base\algorithms\polygon\pointInPolygon</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\algorithms\MeshWave\FaceCellWave.cxx">
-      <Filter>TnbLib\Base\algorithms\MeshWave</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\MeshWave\FaceCellWaveName.cxx">
-      <Filter>TnbLib\Base\algorithms\MeshWave</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\algorithms\MeshWave\MeshWave.cxx">
       <Filter>TnbLib\Base\algorithms\MeshWave</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\MeshWave\MeshWaveName.cxx">
@@ -5906,13 +5819,7 @@
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeNodeName.cxx">
       <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeNode.cxx">
-      <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeLeafName.cxx">
-      <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeLeaf.cxx">
       <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeBoundBox.cxx">
@@ -5922,9 +5829,6 @@
       <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeName.cxx">
-      <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeLine.cxx">
       <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataPointTreeLeaf.cxx">
@@ -5945,9 +5849,6 @@
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataBoundBox.cxx">
       <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octree.cxx">
-      <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeBoundBox_points.cxx">
       <Filter>TnbLib\Base\algorithms\octree\octree</Filter>
     </ClCompile>
@@ -5961,9 +5862,6 @@
       <Filter>TnbLib\Base\algorithms\octree\indexedOctree</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\treeDataCell.cxx">
-      <Filter>TnbLib\Base\algorithms\octree\indexedOctree</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\indexedOctree.cxx">
       <Filter>TnbLib\Base\algorithms\octree\indexedOctree</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\indexedOctreeName.cxx">
@@ -6143,40 +6041,7 @@
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\primitivePatch\walkPatch.cxx">
       <Filter>TnbLib\Base\meshes\primitiveMesh\primitivePatch</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchTemplate.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchProjectPoints.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchPointAddressing.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchName.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchMeshEdges.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchMeshData.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchLocalPointOrder.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchEdgeLoops.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchClear.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchCheck.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchBdryPoints.cxx">
-      <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchAddressing.cxx">
       <Filter>TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\meshes\polyMesh\mapPolyMesh\mapPolyMesh.cxx">
@@ -6394,12 +6259,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduInterfaceFields\ProcessorBlockLduInterfaceField\ProcessorBlockLduInterfaceFields.cxx">
       <Filter>TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduInterfaceFields\ProcessorBlockLduInterfaceField</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LList.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LList</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LListIO.cxx">
-      <Filter>TnbLib\Base\containers\LinkedLists\accessTypes\LList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\IOstreams\IOstreams\Ostream.cxx">
       <Filter>TnbLib\Base\db\IOstreams\IOstreams</Filter>
@@ -7177,6 +7036,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\db\error\IOerror.cxx">
       <Filter>TnbLib\Base\db\error</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\string\tnbStringIO.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\string</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\controlSwitches\controlSwitches.cxx">
+      <Filter>TnbLib\Base\global\controlSwitches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.cxx">
+      <Filter>TnbLib\Base\containers\Lists\ListListOps</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\PackedList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.cxx">
+      <Filter>TnbLib\Base\containers\Lists\PriorityList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\global.cxx">
+      <Filter>TnbLib\Base\global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

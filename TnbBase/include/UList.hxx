@@ -333,7 +333,7 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
-#include <UListI.hxx>
+//#include <UListI.hxx>
 
 /**
  * @def forAll(list, i)
@@ -409,6 +409,8 @@ namespace tnbLib
 
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include <UListI.hxx>
 
 #ifdef NoRepository
 #   include "UList.cxx"

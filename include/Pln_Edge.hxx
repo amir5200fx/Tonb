@@ -96,7 +96,10 @@ namespace tnbLib
 			return theVtx1_;
 		}
 
-		void Reverse(const Standard_Boolean ApplyToMesh = Standard_True);
+		void Reverse
+		(
+			const Standard_Boolean ApplyToMesh = Standard_True
+		);
 
 
 		//- virtual functions

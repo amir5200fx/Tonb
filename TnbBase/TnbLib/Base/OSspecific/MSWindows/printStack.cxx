@@ -269,147 +269,152 @@ namespace tnbLib
 		os << "Uninterpreted: " << raw.c_str();
 	}
 
-	//void error::printStack(Ostream& os)
-	//{
-	//	// Do not print anything if FOAM_ABORT is not set
-	//	if (!env("FOAM_ABORT"))
-	//	{
-	//		return;
-	//	}
+	void error::printStack(Ostream& os)
+	{
+		// Do not print anything if FOAM_ABORT is not set
+		if (!env("FOAM_ABORT"))
+		{
+			return;
+		}
 
-	//	// Reads the starting addresses for the dynamically linked libraries
-	//	// from the /proc/pid/maps-file
-	//	// I'm afraid this works only for Linux 2.6-Kernels (may work on 2.4)
-	//	// Note2: the filenames in here will have softlinks resolved so will
-	//	// go wrong when having e.g. OpenFOAM installed under a softlink.
+		// Reads the starting addresses for the dynamically linked libraries
+		// from the /proc/pid/maps-file
+		// I'm afraid this works only for Linux 2.6-Kernels (may work on 2.4)
+		// Note2: the filenames in here will have softlinks resolved so will
+		// go wrong when having e.g. OpenFOAM installed under a softlink.
 
-	//	HashTable<label, fileName> addressMap;
-	//	{
-	//		IFstream is("/proc/" + name(pid()) + "/maps");
+		HashTable<label, fileName> addressMap;
+		{
+			IFstream is("/proc/" + name(pid()) + "/maps");
 
-	//		while (is.good())
-	//		{
-	//			string line;
-	//			is.getLine(line);
+			while (is.good())
+			{
+				string line;
+				is.getLine(line);
 
-	//			string::size_type space = line.rfind(' ') + 1;
-	//			fileName libPath = line.substr(space, line.size() - space);
+				string::size_type space = line.rfind(' ') + 1;
+				fileName libPath = line.substr(space, line.size() - space);
 
-	//			if (libPath.size() && libPath[0] == '/')
-	//			{
-	//				string offsetString(line.substr(0, line.find('-')));
-	//				IStringStream offsetStr(offsetString);
-	//				addressMap.insert(libPath, readHexLabel(offsetStr));
-	//			}
-	//		}
-	//	}
+				if (libPath.size() && libPath[0] == '/')
+				{
+					string offsetString(line.substr(0, line.find('-')));
+					IStringStream offsetStr(offsetString);
+					addressMap.insert(libPath, readHexLabel(offsetStr));
+				}
+			}
+		}
 
-	//	// Get raw stack symbols
-	//	void *array[100] = { 0 };
-	//	size_t size = 0; //backtrace(array, 100);
-	//	char **strings = 0; //backtrace_symbols(array, size);
+		// Get raw stack symbols
+		void *array[100] = { 0 };
+		size_t size = 0; //backtrace(array, 100);
+		char **strings = 0; //backtrace_symbols(array, size);
 
-	//	// See if they contain function between () e.g. "(__libc_start_main+0xd0)"
-	//	// and see if cplus_demangle can make sense of part before +
-	//	// HJ, formatting of stack backtrace.  17/Dec/2008
-	//	os << nl;
-	//	for (size_t i = 0; i < size; i++)
-	//	{
-	//		string msg(strings[i]);
-	//		fileName programFile;
-	//		word address;
+		// See if they contain function between () e.g. "(__libc_start_main+0xd0)"
+		// and see if cplus_demangle can make sense of part before +
+		// HJ, formatting of stack backtrace.  17/Dec/2008
+		os << nl;
+		for (size_t i = 0; i < size; i++)
+		{
+			string msg(strings[i]);
+			fileName programFile;
+			word address;
 
-	//		os << '#' << label(i) << "  ";
-	//		//os << "Raw   : " << msg << "\n\t";
-	//		{
-	//			string::size_type lPos = msg.find('[');
-	//			string::size_type rPos = msg.find(']');
+			os << '#' << label(i) << "  ";
+			//os << "Raw   : " << msg << "\n\t";
+			{
+				string::size_type lPos = msg.find('[');
+				string::size_type rPos = msg.find(']');
 
-	//			if (lPos != string::npos && rPos != string::npos && lPos < rPos)
-	//			{
-	//				address = msg.substr(lPos + 1, rPos - lPos - 1);
-	//				msg = msg.substr(0, lPos);
-	//			}
+				if (lPos != string::npos && rPos != string::npos && lPos < rPos)
+				{
+					address = msg.substr(lPos + 1, rPos - lPos - 1);
+					msg = msg.substr(0, lPos);
+				}
 
-	//			string::size_type bracketPos = msg.find('(');
-	//			string::size_type spacePos = msg.find(' ');
-	//			if (bracketPos != string::npos || spacePos != string::npos)
-	//			{
-	//				programFile = msg.substr(0, min(spacePos, bracketPos));
+				string::size_type bracketPos = msg.find('(');
+				string::size_type spacePos = msg.find(' ');
+				if (bracketPos != string::npos || spacePos != string::npos)
+				{
+					programFile = msg.substr(0, min(spacePos, bracketPos));
 
-	//				// not an absolute path
-	//				if (programFile[0] != '/')
-	//				{
-	//					string tmp = pOpen("which " + programFile);
-	//					if (tmp[0] == '/' || tmp[0] == '~')
-	//					{
-	//						programFile = tmp;
-	//					}
-	//				}
-	//			}
-	//		}
+					// not an absolute path
+					if (programFile[0] != '/')
+					{
+						string tmp = pOpen("which " + programFile);
+						if (tmp[0] == '/' || tmp[0] == '~')
+						{
+							programFile = tmp;
+						}
+					}
+				}
+			}
 
-	//		string::size_type bracketPos = msg.find('(');
+			string::size_type bracketPos = msg.find('(');
 
-	//		if (bracketPos != string::npos)
-	//		{
-	//			string::size_type start = bracketPos + 1;
+			if (bracketPos != string::npos)
+			{
+				string::size_type start = bracketPos + 1;
 
-	//			string::size_type plusPos = msg.find('+', start);
+				string::size_type plusPos = msg.find('+', start);
 
-	//			if (plusPos != string::npos)
-	//			{
-	//				string cName(msg.substr(start, plusPos - start));
+				if (plusPos != string::npos)
+				{
+					string cName(msg.substr(start, plusPos - start));
 
-	//				int status;
-	//				char* cplusNamePtr = abi::__cxa_demangle
-	//				(
-	//					cName.c_str(),
-	//					NULL,                   // have it malloc itself
-	//					0,
-	//					&status
-	//				);
+					int status;
 
-	//				if (status == 0 && cplusNamePtr)
-	//				{
-	//					os << cplusNamePtr;
-	//					free(cplusNamePtr);
-	//				}
-	//				else
-	//				{
-	//					os << cName.c_str();
-	//				}
-	//			}
-	//			else
-	//			{
-	//				string::size_type endBracketPos = msg.find(')', start);
+					//- added by amir
+					std::cout << "not supposed to be called: printStack()" << std::endl;
+					std::exit(1);
+					//- end added
+					//char* cplusNamePtr = abi::__cxa_demangle
+					//(
+					//	cName.c_str(),
+					//	NULL,                   // have it malloc itself
+					//	0,
+					//	&status
+					//);
 
-	//				if (endBracketPos != string::npos)
-	//				{
-	//					string fullName(msg.substr(start, endBracketPos - start));
+					//if (status == 0 && cplusNamePtr)
+					//{
+					//	os << cplusNamePtr;
+					//	free(cplusNamePtr);
+					//}
+					//else
+					//{
+					//	os << cName.c_str();
+					//}
+				}
+				else
+				{
+					string::size_type endBracketPos = msg.find(')', start);
 
-	//					os << fullName.c_str() << nl;
-	//				}
-	//				else
-	//				{
-	//					// Print raw message
-	//					getSymbolForRaw(os, msg, programFile, address);
-	//				}
-	//			}
-	//		}
-	//		else
-	//		{
-	//			// Print raw message
-	//			getSymbolForRaw(os, msg, programFile, address);
-	//		}
+					if (endBracketPos != string::npos)
+					{
+						string fullName(msg.substr(start, endBracketPos - start));
 
-	//		printSourceFileAndLine(os, addressMap, programFile, address);
+						os << fullName.c_str() << nl;
+					}
+					else
+					{
+						// Print raw message
+						getSymbolForRaw(os, msg, programFile, address);
+					}
+				}
+			}
+			else
+			{
+				// Print raw message
+				getSymbolForRaw(os, msg, programFile, address);
+			}
 
-	//		os << nl;
-	//	}
+			printSourceFileAndLine(os, addressMap, programFile, address);
 
-	//	free(strings);
-	//}
+			os << nl;
+		}
+
+		free(strings);
+	}
 
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

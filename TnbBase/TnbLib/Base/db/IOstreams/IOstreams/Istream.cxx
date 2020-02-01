@@ -3,6 +3,24 @@
 #include <bool.hxx>
 #include <token.hxx>
 
+tnbLib::Istream::Istream
+(
+	streamFormat format,
+	versionNumber version,
+	compressionType compression
+)
+	: IOstream(format, version, compression)
+	, putBack_(false)
+	, putBackToken_(NULL)
+{
+	putBackToken_ = new token;
+}
+
+tnbLib::Istream::~Istream()
+{
+	delete putBackToken_;
+}
+
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 // Set t to the put back token if there is one and return true,
@@ -19,7 +37,7 @@ bool tnbLib::Istream::getBack(token& t)
 	}
 	else if (putBack_)
 	{
-		t = putBackToken_;
+		t = *putBackToken_;
 		putBack_ = false;
 		return true;
 	}
@@ -45,7 +63,7 @@ void tnbLib::Istream::putBack(const token& t)
 	}
 	else
 	{
-		putBackToken_ = t;
+		*putBackToken_ = t;
 		putBack_ = true;
 	}
 }

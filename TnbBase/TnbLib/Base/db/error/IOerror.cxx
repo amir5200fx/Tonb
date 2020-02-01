@@ -228,6 +228,6 @@ tnbLib::Ostream& tnbLib::operator<<(Ostream& os, const IOerror& ioErr)
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 // Global error definitions
 
-tnbLib::IOerror tnbLib::FatalIOError("--> FOAM FATAL IO ERROR: ");
+tnbLib::IOerror tnbLib::FatalIOError("--> TONB FATAL IO ERROR: ");
 
 // ************************************************************************* //

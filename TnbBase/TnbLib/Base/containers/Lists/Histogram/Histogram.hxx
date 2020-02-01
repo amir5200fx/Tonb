@@ -81,6 +81,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <HistogramI.hxx>
+
 #ifdef NoRepository
 #   include <Histogram.cxx>
 #endif

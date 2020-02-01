@@ -327,3 +327,326 @@ inline void tnbLib::reverse(UList<T>& ul)
 
 
 // ************************************************************************* //
+
+//- Moved from cxx
+
+#include <ListLoopM.hxx>
+#include <error.hxx>
+#include <contiguous.hxx>
+
+#include <algorithm>
+
+// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+template<class T>
+void tnbLib::UList<T>::assign(const UList<T>& a)
+{
+	if (a.size_ != this->size_)
+	{
+		FatalErrorIn("UList<T>::assign(const UList<T>&)")
+			<< "ULists have different sizes: "
+			<< this->size_ << " " << a.size_
+			<< abort(FatalError);
+	}
+
+	if (this->size_)
+	{
+#       ifdef USEMEMCPY
+		if (contiguous<T>())
+		{
+			memcpy(this->v_, a.v_, this->byteSize());
+		}
+		else
+#       endif
+		{
+			List_ACCESS(T, (*this), vp);
+			List_CONST_ACCESS(T, a, ap);
+			List_FOR_ALL((*this), i)
+				List_ELEM((*this), vp, i) = List_ELEM(a, ap, i);
+			List_END_FOR_ALL
+		}
+	}
+}
+
+
+// * * * * * * * * * * * * * * * Member Operators  * * * * * * * * * * * * * //
+
+template<class T>
+void tnbLib::UList<T>::operator=(const T& t)
+{
+	List_ACCESS(T, (*this), vp);
+	List_FOR_ALL((*this), i)
+		List_ELEM((*this), vp, i) = t;
+	List_END_FOR_ALL
+}
+
+
+// * * * * * * * * * * * * * * STL Member Functions  * * * * * * * * * * * * //
+
+template<class T>
+void tnbLib::UList<T>::swap(UList<T>& a)
+{
+	if (a.size_ != this->size_)
+	{
+		FatalErrorIn("UList<T>::swap(const UList<T>&)")
+			<< "ULists have different sizes: "
+			<< this->size_ << " " << a.size_
+			<< abort(FatalError);
+	}
+
+	List_ACCESS(T, (*this), vp);
+	List_ACCESS(T, a, ap);
+	T tmp;
+	List_FOR_ALL((*this), i)
+		tmp = List_ELEM((*this), vp, i);
+	List_ELEM((*this), vp, i) = List_ELEM(a, ap, i);
+	List_ELEM(a, ap, i) = tmp;
+	List_END_FOR_ALL
+}
+
+
+// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+template<class T>
+tnbLib::label tnbLib::UList<T>::byteSize() const
+{
+	if (!contiguous<T>())
+	{
+		FatalErrorIn("UList<T>::byteSize()")
+			<< "Cannot return the binary size of a list of "
+			"non-primitive elements"
+			<< abort(FatalError);
+	}
+
+	return this->size_ * sizeof(T);
+}
+
+
+template<class T>
+void tnbLib::sort(UList<T>& a)
+{
+	std::sort(a.begin(), a.end());
+}
+
+
+template<class T, class Cmp>
+void tnbLib::sort(UList<T>& a, const Cmp& cmp)
+{
+	std::sort(a.begin(), a.end(), cmp);
+}
+
+
+template<class T>
+void tnbLib::stableSort(UList<T>& a)
+{
+	std::stable_sort(a.begin(), a.end());
+}
+
+
+template<class T, class Cmp>
+void tnbLib::stableSort(UList<T>& a, const Cmp& cmp)
+{
+	std::stable_sort(a.begin(), a.end(), cmp);
+}
+
+
+// * * * * * * * * * * * * * * * Member Operators  * * * * * * * * * * * * * //
+
+template<class T>
+bool tnbLib::UList<T>::operator==(const UList<T>& a) const
+{
+	if (this->size_ != a.size_)
+	{
+		return false;
+	}
+
+	bool equal = true;
+
+	List_CONST_ACCESS(T, (*this), vp);
+	List_CONST_ACCESS(T, (a), ap);
+
+	List_FOR_ALL((*this), i)
+		equal = equal && (List_ELEM((*this), vp, i) == List_ELEM((a), ap, i));
+	List_END_FOR_ALL
+
+		return equal;
+}
+
+
+template<class T>
+bool tnbLib::UList<T>::operator!=(const UList<T>& a) const
+{
+	return !operator==(a);
+}
+
+
+template<class T>
+bool tnbLib::UList<T>::operator<(const UList<T>& a) const
+{
+	for
+		(
+			const_iterator vi = begin(), ai = a.begin();
+			vi < end() && ai < a.end();
+			vi++, ai++
+			)
+	{
+		if (*vi < *ai)
+		{
+			return true;
+		}
+		else if (*vi > *ai)
+		{
+			return false;
+		}
+	}
+
+	if (this->size_ < a.size_)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+template<class T>
+bool tnbLib::UList<T>::operator>(const UList<T>& a) const
+{
+	return a.operator<(*this);
+}
+
+
+template<class T>
+bool tnbLib::UList<T>::operator<=(const UList<T>& a) const
+{
+	return !operator>(a);
+}
+
+
+template<class T>
+bool tnbLib::UList<T>::operator>=(const UList<T>& a) const
+{
+	return !operator<(a);
+}
+
+
+// * * * * * * * * * * * * * * * *  IOStream operators * * * * * * * * * * * //
+
+//- moved from io.cxx
+
+#include <Ostream.hxx>
+#include <token.hxx>
+#include <contiguous.hxx>
+
+// * * * * * * * * * * * * * * * Ostream Operator *  * * * * * * * * * * * * //
+
+template<class T>
+void tnbLib::UList<T>::writeEntry(Ostream& os) const
+{
+	if
+		(
+			size()
+			&& token::compound::isCompound
+			(
+				"List<" + word(pTraits<T>::typeName) + '>'
+			)
+			)
+	{
+		os << word("List<" + word(pTraits<T>::typeName) + '>') << " ";
+	}
+
+	os << *this;
+}
+
+
+template<class T>
+void tnbLib::UList<T>::writeEntry(const word& keyword, Ostream& os) const
+{
+	os.writeKeyword(keyword);
+	writeEntry(os);
+	os << token::END_STATEMENT << endl;
+}
+
+
+template<class T>
+tnbLib::Ostream& tnbLib::operator<<(tnbLib::Ostream& os, const tnbLib::UList<T>& L)
+{
+	// Write list contents depending on data format
+	if (os.format() == IOstream::ASCII || !contiguous<T>())
+	{
+		bool uniform = false;
+
+		if (L.size() > 1 && contiguous<T>())
+		{
+			uniform = true;
+
+			forAll(L, i)
+			{
+				if (L[i] != L[0])
+				{
+					uniform = false;
+					break;
+				}
+			}
+		}
+
+		if (uniform)
+		{
+			// Write size and start delimiter
+			os << L.size() << token::BEGIN_BLOCK;
+
+			// Write contents
+			os << L[0];
+
+			// Write end delimiter
+			os << token::END_BLOCK;
+		}
+		else if (L.size() < 11 && contiguous<T>())
+		{
+			// Write size and start delimiter
+			os << L.size() << token::BEGIN_LIST;
+
+			// Write contents
+			forAll(L, i)
+			{
+				if (i > 0) os << token::SPACE;
+				os << L[i];
+			}
+
+			// Write end delimiter
+			os << token::END_LIST;
+		}
+		else
+		{
+			// Write size and start delimiter
+			os << nl << L.size() << nl << token::BEGIN_LIST;
+
+			// Write contents
+			forAll(L, i)
+			{
+				os << nl << L[i];
+			}
+
+			// Write end delimiter
+			os << nl << token::END_LIST << nl;
+		}
+	}
+	else
+	{
+		os << nl << L.size() << nl;
+		if (L.size())
+		{
+			os.write(reinterpret_cast<const char*>(L.v_), L.byteSize());
+		}
+	}
+
+	// Check state of IOstream
+	os.check("Ostream& operator<<(Ostream&, const UList&)");
+
+	return os;
+}
+
+
+// ************************************************************************* //

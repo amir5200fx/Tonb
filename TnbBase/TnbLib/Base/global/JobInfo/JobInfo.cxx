@@ -15,6 +15,7 @@ tnbLib::JobInfo::writeJobInfo
 );
 
 tnbLib::JobInfo tnbLib::jobInfo;
+bool tnbLib::JobInfo::constructed = false; // added by amir
 
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //

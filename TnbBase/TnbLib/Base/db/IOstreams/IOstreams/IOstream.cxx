@@ -212,6 +212,7 @@ namespace tnbLib
 #  if defined (__GNUC__)
 	template<>
 #  endif
+	template<> // added by amir
 	Ostream& operator<<(Ostream& os, const InfoProxy<IOstream>& ip)
 	{
 		ip.t_.print(os);

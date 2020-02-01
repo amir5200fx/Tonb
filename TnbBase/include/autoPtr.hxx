@@ -92,4 +92,6 @@ namespace tnbLib
 
 }
 
+#include <autoPtrI.hxx>
+
 #endif // !_autoPtr_Header

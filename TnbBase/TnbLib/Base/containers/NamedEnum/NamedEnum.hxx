@@ -107,6 +107,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <NamedEnumI.hxx>
+
 #ifdef NoRepository
 #   include <NamedEnum.cxx>
 #endif

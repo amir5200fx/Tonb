@@ -117,6 +117,8 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+#include <PriorityListI.hxx>
+
 #ifdef NoRepository
 #   include <PriorityList.cxx>
 #endif

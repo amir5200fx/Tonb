@@ -63,6 +63,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <IOReferencerI.hxx>
+
 #ifdef NoRepository
 #   include <IOReferencer.cxx>
 #endif

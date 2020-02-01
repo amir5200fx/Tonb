@@ -15,6 +15,8 @@ namespace tnbLib
 
 		// Constructors
 
+	public:
+
 		pTraits(const PrimitiveType& p)
 			: PrimitiveType(p)
 		{}

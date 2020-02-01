@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -25,19 +17,6 @@
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -98,7 +77,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Base\interpolations\GGIInterpolation;$(ProjectDir)TnbLib\Base\interpolations\interpolatePointToCell;$(ProjectDir)TnbLib\Base\interpolations\interpolateXY;$(ProjectDir)TnbLib\Base\interpolations\interpolationTable;$(ProjectDir)TnbLib\Base\interpolations\MixingPlaneInterpolation;$(ProjectDir)TnbLib\Base\interpolations\patchToPatchInterpolation\IOpatchToPatchInterpolation;$(ProjectDir)TnbLib\Base\interpolations\patchToPatchInterpolation;$(ProjectDir)TnbLib\Base\interpolations\primitivePatchInterpolation;$(ProjectDir)TnbLib\Base\interpolations\RBFInterpolation\RBFFunctions\Gauss;$(ProjectDir)TnbLib\Base\interpolations\RBFInterpolation\RBFFunctions\IMQB;$(ProjectDir)TnbLib\Base\interpolations\RBFInterpolation\RBFFunctions\RBFFunction;$(ProjectDir)TnbLib\Base\interpolations\RBFInterpolation\RBFFunctions\TPS;$(ProjectDir)TnbLib\Base\interpolations\RBFInterpolation\RBFFunctions\W2;$(ProjectDir)TnbLib\Base\interpolations\RBFInterpolation;$(ProjectDir)TnbLib\Base\interpolations\splineInterpolateXY;$(ProjectDir)TnbLib\Base\algorithms\MeshWave;$(ProjectDir)TnbLib\Base\algorithms\octree\indexedOctree;$(ProjectDir)TnbLib\Base\algorithms\octree\octree;$(ProjectDir)TnbLib\Base\algorithms\polygon\clipping;$(ProjectDir)TnbLib\Base\algorithms\polygon\pointInPolygon;$(ProjectDir)TnbLib\Base\algorithms\rotation;$(ProjectDir)TnbLib\Base\algorithms\subCycle;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\BlockAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\GGIBlockAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockAMGInterfaceFields\ProcessorBlockAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixAgglomeration;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockAMG\BlockMatrixCoarsening\BlockMatrixCoarsening;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockAMG;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockConstraint;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduInterfaceFields\BlockLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduInterfaceFields\GGIBlockLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduInterfaceFields\MixingPlaneBlockLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduInterfaceFields\OverlapGGIBlockLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\BlockLduInterfaceFields\ProcessorBlockLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix\extendedBlockLduMatrix;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduMatrix;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockAMGPrecon;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockCholeskyPrecon;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockDiagonalPrecon;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockGaussSeidelPrecon;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockILUCpPrecon;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockLduPrecon;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduPrecons\BlockNoPrecon;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockGaussSeidelSmoother;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUCpSmoother;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockILUSmoother;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSmoothers\BlockLduSmoother;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockAMGSolver;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockBiCGStab;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockCG;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockDiagonal;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGaussSeidel;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockGMRES;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockIterativeSolver;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\BlockLduSolver;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers\Segregated;$(ProjectDir)TnbLib\Base\matrices\blockLduMatrix\BlockLduSolvers;$(ProjectDir)TnbLib\Base\matrices\constraint;$(ProjectDir)TnbLib\Base\matrices\DiagonalMatrix;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\extendedLduAddressing;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaceFields\cyclicLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaceFields\ggiLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaceFields\lduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaceFields\mixingPlaneLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaceFields\overlapGGILduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaceFields\processorLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaceFields\regionCoupleLduInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaces\cyclicLduInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaces\ggiLduInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaces\lduInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaces\mixingPlaneLduInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaces\overlapGGILduInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaces\processorLduInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduInterfaces\regionCoupleLduInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing\lduSchedule;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduAddressing;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduMatrix\extendedLduMatrix;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\lduMatrix;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\preconditioners\diagonalPreconditioner;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\preconditioners\DICPreconditioner;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\preconditioners\DILUPreconditioner;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\preconditioners\FDICPreconditioner;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\preconditioners\GAMGPreconditioner;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\preconditioners\noPreconditioner;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\smoothers\DIC;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\smoothers\DICGaussSeidel;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\smoothers\DILU;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\smoothers\DILUGaussSeidel;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\smoothers\GaussSeidel;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\algebraicPairGAMGAgglomeration;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\GAMGAgglomeration;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\AMGAgglomerations\pairGAMGAgglomeration;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\AMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\cyclicGgiAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\ggiAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\mixingPlaneAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\processorAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaceFields\regionCoupleAMGInterfaceField;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\AMGInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicAMGInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\cyclicGGIAMGInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\ggiAMGInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\mixingPlaneAMGInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\processorAMGInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG\interfaces\regionCoupleAMGInterface;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\AMG;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\BICCG;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\diagonalSolver;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\ICCG;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\PBiCG;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\PCG;$(ProjectDir)TnbLib\Base\matrices\lduMatrix\solvers\smoothSolver;$(ProjectDir)TnbLib\Base\matrices\LUscalarMatrix;$(ProjectDir)TnbLib\Base\matrices\Matrix\tools\EigenSolver;$(ProjectDir)TnbLib\Base\matrices\Matrix\tools;$(ProjectDir)TnbLib\Base\matrices\Matrix;$(ProjectDir)TnbLib\Base\matrices\RectangularMatrix;$(ProjectDir)TnbLib\Base\matrices\scalarMatrices\SVD;$(ProjectDir)TnbLib\Base\matrices\scalarMatrices;$(ProjectDir)TnbLib\Base\matrices\simpleMatrix;$(ProjectDir)TnbLib\Base\matrices\solution;$(ProjectDir)TnbLib\Base\matrices\SquareMatrix;$(ProjectDir)TnbLib\Base\matrices\tolerances;$(ProjectDir)TnbLib\Base\meshes\bandCompression;$(ProjectDir)TnbLib\Base\meshes\boundBox;$(ProjectDir)TnbLib\Base\meshes\GeoMesh;$(ProjectDir)TnbLib\Base\meshes\lduMesh;$(ProjectDir)TnbLib\Base\meshes\MeshObject;$(ProjectDir)TnbLib\Base\meshes\meshShapes\cell;$(ProjectDir)TnbLib\Base\meshes\meshShapes\cellMatcher;$(ProjectDir)TnbLib\Base\meshes\meshShapes\cellModel;$(ProjectDir)TnbLib\Base\meshes\meshShapes\cellModeller;$(ProjectDir)TnbLib\Base\meshes\meshShapes\cellShape;$(ProjectDir)TnbLib\Base\meshes\meshShapes\edge;$(ProjectDir)TnbLib\Base\meshes\meshShapes\face;$(ProjectDir)TnbLib\Base\meshes\meshShapes\tetCell;$(ProjectDir)TnbLib\Base\meshes\meshShapes\triFace;$(ProjectDir)TnbLib\Base\meshes\meshTools;$(ProjectDir)TnbLib\Base\meshes\patchIdentifier;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointBoundaryMesh;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointMeshMapper;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\basic\coupled;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\basic\generic;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\cyclic;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\cyclicGgi;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\empty;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\ggi;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\mixingPlane;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\overlapGgi;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\processor;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\regionCouple;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\symmetry;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\constraint\wedge;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\derived\cohesive;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\derived\coupled;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\derived\global;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\derived\wall;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\facePointPatch;$(ProjectDir)TnbLib\Base\meshes\pointMesh\pointPatches\pointPatch;$(ProjectDir)TnbLib\Base\meshes\pointMesh;$(ProjectDir)TnbLib\Base\meshes\polyMesh\globalMeshData;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh\cellMapper;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh\faceMapper;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh\mapDistribute;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh\mapPatchChange;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh\mapSubsetMesh;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh\objectMap;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh\pointMapper;$(ProjectDir)TnbLib\Base\meshes\polyMesh\mapPolyMesh;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyBoundaryMesh;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\basic\coupled;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\basic\generic;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\cyclic;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\cyclicGgi;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\empty;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\ggi;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\mixingPlane;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\overlapGgi;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\processor;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\regionCouple;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\symmetry;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\constraint\wedge;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\derived\cohesive;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\derived\wall;$(ProjectDir)TnbLib\Base\meshes\polyMesh\polyPatches\polyPatch;$(ProjectDir)TnbLib\Base\meshes\polyMesh\syncTools;$(ProjectDir)TnbLib\Base\meshes\polyMesh\zones\cellZone;$(ProjectDir)TnbLib\Base\meshes\polyMesh\zones\faceZone;$(ProjectDir)TnbLib\Base\meshes\polyMesh\zones\pointZone;$(ProjectDir)TnbLib\Base\meshes\polyMesh\zones\ZoneID;$(ProjectDir)TnbLib\Base\meshes\polyMesh\zones\ZoneMesh;$(ProjectDir)TnbLib\Base\meshes\polyMesh;$(ProjectDir)TnbLib\Base\meshes\preservePatchTypes;$(ProjectDir)TnbLib\Base\meshes\primitiveMesh\PatchTools;$(ProjectDir)TnbLib\Base\meshes\primitiveMesh\primitiveMeshCheck;$(ProjectDir)TnbLib\Base\meshes\primitiveMesh\primitivePatch;$(ProjectDir)TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate;$(ProjectDir)TnbLib\Base\meshes\primitiveMesh;$(ProjectDir)TnbLib\Base\meshes\ProcessorTopology;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\line;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\objectHit;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\plane;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\point;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\point2D;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\pyramid;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\tetrahedron;$(ProjectDir)TnbLib\Base\meshes\primitiveShapes\triangle;$(ProjectDir)TnbLib\Base\fields\cloud;$(ProjectDir)TnbLib\Base\fields\CoeffField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedDiagTensorField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedScalarField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedSphericalTensorField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedSymmTensor4thOrderField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedSymmTensorField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedTensorField;$(ProjectDir)TnbLib\Base\fields\DimensionedFields\DimensionedVectorNFields;$(ProjectDir)TnbLib\Base\fields\expandContract;$(ProjectDir)TnbLib\Base\fields\FieldFields\diagTensorFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\FieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\oneFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\scalarFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\sphericalTensorFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\symmTensor4thOrderFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\symmTensorFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\tensorFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\transformFieldField;$(ProjectDir)TnbLib\Base\fields\FieldFields\vectorNFieldFields;$(ProjectDir)TnbLib\Base\fields\Fields\complexFields;$(ProjectDir)TnbLib\Base\fields\Fields\diagTensorField;$(ProjectDir)TnbLib\Base\fields\Fields\DynamicField;$(ProjectDir)TnbLib\Base\fields\Fields\Field;$(ProjectDir)TnbLib\Base\fields\Fields\labelField;$(ProjectDir)TnbLib\Base\fields\Fields\oneField;$(ProjectDir)TnbLib\Base\fields\Fields\scalarField;$(ProjectDir)TnbLib\Base\fields\Fields\sphericalTensorField;$(ProjectDir)TnbLib\Base\fields\Fields\symmTensor4thOrderField;$(ProjectDir)TnbLib\Base\fields\Fields\symmTensorField;$(ProjectDir)TnbLib\Base\fields\Fields\symmTransformField;$(ProjectDir)TnbLib\Base\fields\Fields\tensorField;$(ProjectDir)TnbLib\Base\fields\Fields\transformField;$(ProjectDir)TnbLib\Base\fields\Fields\transformList;$(ProjectDir)TnbLib\Base\fields\Fields\vector2DField;$(ProjectDir)TnbLib\Base\fields\Fields\vectorField;$(ProjectDir)TnbLib\Base\fields\Fields\VectorNFields\expandContract;$(ProjectDir)TnbLib\Base\fields\Fields\VectorNFields;$(ProjectDir)TnbLib\Base\fields\Fields\zeroField;$(ProjectDir)TnbLib\Base\fields\Fields;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricDiagTensorField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricDiagTensorNFields;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\geometricOneField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricScalarField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricSphericalTensorNFields;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricSymmTensor4thOrderField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricSymmTensorField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricTensorField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricTensorNFields;$(ProjectDir)TnbLib\Base\fields\GeometricFields\GeometricVectorNFields;$(ProjectDir)TnbLib\Base\fields\GeometricFields\pointFields;$(ProjectDir)TnbLib\Base\fields\GeometricFields\SlicedGeometricField;$(ProjectDir)TnbLib\Base\fields\GeometricFields\transformGeometricField;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\basic\calculated;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\basic\coupled;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\basic\fixedValue;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\basic\generic;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\basic\mixed;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\basic\value;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\basic\zeroGradient;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\constraint\cyclic;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\constraint\empty;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\constraint\processor;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\constraint\symmetry;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\constraint\wedge;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\derived\global;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\derived\oscillatingFixedValue;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\derived\slip;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\derived\timeVaryingUniformFixedValue;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\derived\uniformFixedValue;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\pointPatchField\pointConstraint;$(ProjectDir)TnbLib\Base\fields\pointPatchFields\pointPatchField;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\basicSymmetry;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\calculated;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\coupled;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\fixedValue;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\generic;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\mixed;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\value;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\basic\zeroGradient;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\constraint\cyclic;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\constraint\empty;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\constraint\processor;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\constraint\symmetry;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\constraint\wedge;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\derived\componentMixed;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\derived\global;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\derived\oscillatingFixedValue;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\derived\slip;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\derived\timeVaryingUniformFixedValue;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\derived\uniformFixedValue;$(ProjectDir)TnbLib\Base\fields\PointPatchFieldTemplates\PointPatchField;$(ProjectDir)TnbLib\Base\fields\ReadFields;$(ProjectDir)TnbLib\Base\fields\UniformDimensionedFields;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedDiagTensor;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedScalar;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedSphericalTensor;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedSymmTensor;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedSymmTensor4thOrder;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedTensor;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedType;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedVector;$(ProjectDir)TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN;$(ProjectDir)TnbLib\Base\dimensionedTypes;$(ProjectDir)TnbLib\Base\dimensionSet;$(ProjectDir)TnbLib\Base\global\argList;$(ProjectDir)TnbLib\Base\global\clock;$(ProjectDir)TnbLib\Base\global\controlSwitches;$(ProjectDir)TnbLib\Base\global\debug;$(ProjectDir)TnbLib\Base\global\dimensionedConstants;$(ProjectDir)TnbLib\Base\global\JobInfo;$(ProjectDir)TnbLib\Base\global\profiling;$(ProjectDir)TnbLib\Base\global\unitConversion;$(ProjectDir)TnbLib\Base\global;$(ProjectDir)TnbLib\Base\db\IOstreams\Tstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\token\CompoundToken;$(ProjectDir)TnbLib\Base\db\IOstreams\token;$(ProjectDir)TnbLib\Base\db\IOstreams\StringStreams;$(ProjectDir)TnbLib\Base\db\IOstreams\Sstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\Pstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\IOstreams;$(ProjectDir)TnbLib\Base\db\IOstreams\hashes;$(ProjectDir)TnbLib\Base\db\IOstreams\gzstream;$(ProjectDir)TnbLib\Base\db\IOstreams\Fstreams;$(ProjectDir)TnbLib\Base\db\IOstreams;$(ProjectDir)TnbLib\Base\db\typeInfo;$(ProjectDir)TnbLib\Base\db\Callback;$(ProjectDir)TnbLib\Base\db\CallbackRegistry;$(ProjectDir)TnbLib\Base\db\dictionary\dictionaryEntry;$(ProjectDir)TnbLib\Base\db\dictionary\entry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\functionEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\includeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\includeIfPresentEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\inputModeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\functionEntries\removeEntry;$(ProjectDir)TnbLib\Base\db\dictionary\primitiveEntry;$(ProjectDir)TnbLib\Base\db\dictionary;$(ProjectDir)TnbLib\Base\db\memberFunctionSelection;$(ProjectDir)TnbLib\Base\db\dlLibraryTable;$(ProjectDir)TnbLib\Base\db\error;$(ProjectDir)TnbLib\Base\db\functionObjects\functionObject;$(ProjectDir)TnbLib\Base\db\functionObjects\functionObjectList;$(ProjectDir)TnbLib\Base\db\functionObjects\IOOutputFilter;$(ProjectDir)TnbLib\Base\db\functionObjects\OutputFilterFunctionObject;$(ProjectDir)TnbLib\Base\db\functionObjects\outputFilterOutputControl;$(ProjectDir)TnbLib\Base\db\IOobject;$(ProjectDir)TnbLib\Base\db\IOobjectList;$(ProjectDir)TnbLib\Base\db\IOobjects\IOdictionary;$(ProjectDir)TnbLib\Base\db\IOobjects\IOField;$(ProjectDir)TnbLib\Base\db\IOobjects\IOList;$(ProjectDir)TnbLib\Base\db\IOobjects\IOMap;$(ProjectDir)TnbLib\Base\db\IOobjects\IOPtrList;$(ProjectDir)TnbLib\Base\db\IOobjects\IOReferencer;$(ProjectDir)TnbLib\Base\db\objectRegistry;$(ProjectDir)TnbLib\Base\db\postfixedSubRegistry;$(ProjectDir)TnbLib\Base\db\regIOobject;$(ProjectDir)TnbLib\Base\db\runTimeSelection;$(ProjectDir)TnbLib\Base\db\scalarRange;$(ProjectDir)TnbLib\Base\db\Time\instant;$(ProjectDir)TnbLib\Base\db\Time;$(ProjectDir)TnbLib\Base\containers\ADT\List;$(ProjectDir)TnbLib\Base\containers\ADT\Avl;$(ProjectDir)TnbLib\Base\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Base\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Base\containers\Register\Avl;$(ProjectDir)TnbLib\Base\containers\Register\Map;$(ProjectDir)TnbLib\Base\containers\NamedEnum;$(ProjectDir)TnbLib\Base\containers\Lists\UPtrList;$(ProjectDir)TnbLib\Base\containers\Lists\UList;$(ProjectDir)TnbLib\Base\containers\Lists\UIndirectList;$(ProjectDir)TnbLib\Base\containers\Lists\SubList;$(ProjectDir)TnbLib\Base\containers\Lists\Stack;$(ProjectDir)TnbLib\Base\containers\Lists\SortableList;$(ProjectDir)TnbLib\Base\containers\Lists\PtrList;$(ProjectDir)TnbLib\Base\containers\Lists\PriorityList;$(ProjectDir)TnbLib\Base\containers\Lists\PackedList;$(ProjectDir)TnbLib\Base\containers\Lists\ListOps;$(ProjectDir)TnbLib\Base\containers\Lists\ListListOps;$(ProjectDir)TnbLib\Base\containers\Lists\List;$(ProjectDir)TnbLib\Base\containers\Lists\IndirectList;$(ProjectDir)TnbLib\Base\containers\Lists\Histogram;$(ProjectDir)TnbLib\Base\containers\Lists\FixedList;$(ProjectDir)TnbLib\Base\containers\Lists\DynamicList;$(ProjectDir)TnbLib\Base\containers\Lists\CompactListList;$(ProjectDir)TnbLib\Base\containers\Lists\BiIndirectList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\ILList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\LList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\accessTypes\UILList;$(ProjectDir)TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase;$(ProjectDir)TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase;$(ProjectDir)TnbLib\Base\containers\LinkedLists\user;$(ProjectDir)TnbLib\Base\containers\Identifiers\Keyed;$(ProjectDir)TnbLib\Base\containers\HashTables\HashPtrTable;$(ProjectDir)TnbLib\Base\containers\HashTables\HashSet;$(ProjectDir)TnbLib\Base\containers\HashTables\HashTable;$(ProjectDir)TnbLib\Base\containers\HashTables\Map;$(ProjectDir)TnbLib\Base\containers\HashTables\PtrMap;$(ProjectDir)TnbLib\Base\containers\HashTables\StaticHashTable;$(ProjectDir)TnbLib\Base\containers\Dictionaries\UPtrDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\UDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\PtrDictionary;$(ProjectDir)TnbLib\Base\containers\Dictionaries\DictionaryBase;$(ProjectDir)TnbLib\Base\containers\Dictionaries\Dictionary;$(ProjectDir)TnbLib\Base\Primitives\VectorSpace;$(ProjectDir)TnbLib\Base\Primitives\Scalar\scalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\longDoubleScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\floatScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar\doubleScalar;$(ProjectDir)TnbLib\Base\Primitives\Scalar;$(ProjectDir)TnbLib\Base\Primitives\ints\uint;$(ProjectDir)TnbLib\Base\Primitives\ints\uLabel;$(ProjectDir)TnbLib\Base\Primitives\ints\uLong;$(ProjectDir)TnbLib\Base\Primitives\ints\longLong;$(ProjectDir)TnbLib\Base\Primitives\ints\long;$(ProjectDir)TnbLib\Base\Primitives\ints\label;$(ProjectDir)TnbLib\Base\Primitives\ints\int;$(ProjectDir)TnbLib\Base\Primitives\strings\wordRe;$(ProjectDir)TnbLib\Base\Primitives\strings\word;$(ProjectDir)TnbLib\Base\Primitives\strings\keyType;$(ProjectDir)TnbLib\Base\Primitives\strings\fileName;$(ProjectDir)TnbLib\Base\Primitives\strings\string;$(ProjectDir)TnbLib\Base\Primitives\hashes\SHA1;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hash;$(ProjectDir)TnbLib\Base\Primitives\hashes\Hasher;$(ProjectDir)TnbLib\Base\Primitives\bools\bool;$(ProjectDir)TnbLib\Base\Primitives\bools\Switch;$(ProjectDir)TnbLib\Base\Primitives\pTraits;$(ProjectDir)TnbLib\Base\Primitives\char;$(ProjectDir)TnbLib\Base\Primitives\nil;$(ProjectDir)TnbLib\Base\Primitives\ops;$(ProjectDir)TnbLib\Base\Primitives\Pair;$(ProjectDir)TnbLib\Base\Primitives\Lists;$(ProjectDir)TnbLib\Base\Primitives\products;$(ProjectDir)TnbLib\Base\Primitives\contiguous;$(ProjectDir)TnbLib\Base\Primitives\direction;$(ProjectDir)TnbLib\Base\Primitives\Swap;$(ProjectDir)TnbLib\Base\Primitives\zero;$(ProjectDir)TnbLib\Base\Primitives\one;$(ProjectDir)TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffComponentNorm;$(ProjectDir)TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffMaxNorm;$(ProjectDir)TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffNorm;$(ProjectDir)TnbLib\Base\Primitives\BlockCoeff\BlockCoeffNorm\BlockCoeffTwoNorm;$(ProjectDir)TnbLib\Base\Primitives\BlockCoeff;$(ProjectDir)TnbLib\Base\Primitives\complex;$(ProjectDir)TnbLib\Base\Primitives\DiagTensor\diagTensor;$(ProjectDir)TnbLib\Base\Primitives\DiagTensor\labelDiagTensor;$(ProjectDir)TnbLib\Base\Primitives\DiagTensor;$(ProjectDir)TnbLib\Base\Primitives\expandContract;$(ProjectDir)TnbLib\Base\Primitives\FadOne;$(ProjectDir)TnbLib\Base\Primitives\functions\PolynomialTemplate;$(ProjectDir)TnbLib\Base\Primitives\mathematicalConstants;$(ProjectDir)TnbLib\Base\Primitives\quaternion;$(ProjectDir)TnbLib\Base\Primitives\random;$(ProjectDir)TnbLib\Base\Primitives\septernion;$(ProjectDir)TnbLib\Base\Primitives\SphericalTensor\labelSphericalTensor;$(ProjectDir)TnbLib\Base\Primitives\SphericalTensor\sphericalTensor;$(ProjectDir)TnbLib\Base\Primitives\SphericalTensor;$(ProjectDir)TnbLib\Base\Primitives\SphericalTensor2D\sphericalTensor2D;$(ProjectDir)TnbLib\Base\Primitives\SphericalTensor2D;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor\labelSymmTensor;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor\symmTensor;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor2D\symmTensor2D;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor2D;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor4thOrder\labelSymmTensor4thOrder;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor4thOrder\symmTensor4thOrder;$(ProjectDir)TnbLib\Base\Primitives\SymmTensor4thOrder;$(ProjectDir)TnbLib\Base\Primitives\Tensor\labelTensor;$(ProjectDir)TnbLib\Base\Primitives\Tensor\tensor;$(ProjectDir)TnbLib\Base\Primitives\Tensor;$(ProjectDir)TnbLib\Base\Primitives\Tensor2D\tensor2D;$(ProjectDir)TnbLib\Base\Primitives\Tensor2D;$(ProjectDir)TnbLib\Base\Primitives\transform;$(ProjectDir)TnbLib\Base\Primitives\Tuple2;$(ProjectDir)TnbLib\Base\Primitives\Vector\complexVector;$(ProjectDir)TnbLib\Base\Primitives\Vector\labelVector;$(ProjectDir)TnbLib\Base\Primitives\Vector\vector;$(ProjectDir)TnbLib\Base\Primitives\Vector;$(ProjectDir)TnbLib\Base\Primitives\Vector2D\vector2D;$(ProjectDir)TnbLib\Base\Primitives\Vector2D;$(ProjectDir)TnbLib\Base\Primitives\VectorN\expandContract;$(ProjectDir)TnbLib\Base\Primitives\VectorN\vector2;$(ProjectDir)TnbLib\Base\Primitives\VectorN\vector3;$(ProjectDir)TnbLib\Base\Primitives\VectorN\vector4;$(ProjectDir)TnbLib\Base\Primitives\VectorN\vector6;$(ProjectDir)TnbLib\Base\Primitives\VectorN\vector8;$(ProjectDir)TnbLib\Base\Primitives\VectorN;$(ProjectDir)TnbLib\Base\memory\tmp;$(ProjectDir)TnbLib\Base\memory\autoPtr;$(ProjectDir)TnbLib\Base\memory\Xfer;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\signals;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\multiThreader;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\cpuTime;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows\clockTime;$(ProjectDir)TnbLib\Base\OSspecific\MSWindows;$(ProjectDir)TnbLib\Base\coordinateSystems\coordinateRotation;$(ProjectDir)TnbLib\Base\coordinateSystems;$(ProjectDir)TnbLib\Base\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>WM_DP;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WM_DP;_CRT_SECURE_NO_WARNINGS;USE_RANDOM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -161,9 +140,13 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\containers\Identifiers\Keyed\Keyed.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Identifiers\Keyed\KeyedI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBase.hxx" />
     <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBaseI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBase.hxx" />
@@ -186,20 +169,26 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\containers\Lists\FixedList\FixedList.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\FixedList\FixedListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\Histogram\Histogram.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\Histogram\HistogramI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\IndirectList\IndirectList.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\IndirectList\IndirectListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListListOps\ListListOpsI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\ListOps\ListOps.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\ListOps\ListOpsI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\List\List.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\List\ListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\List\ListLoopM.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\PackedList\PackedList.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\PackedList\PackedListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\PriorityList\PriorityListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\PtrList\PtrList.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\PtrList\PtrListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\ParSortableList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\ParSortableListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\SortableList.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\Lists\SortableList\SortableListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\Stack\Stack.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\Stack\StackI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\SubList\SubList.hxx" />
@@ -211,6 +200,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\containers\Lists\UPtrList\UPtrList.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Lists\UPtrList\UPtrListI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\NamedEnum\NamedEnum.hxx" />
+    <ClInclude Include="TnbLib\Base\containers\NamedEnum\NamedEnumI.hxx" />
     <ClInclude Include="TnbLib\Base\containers\Register\Map\RegisterEntityM_Map.hxx" />
     <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateRotation\axisCoordinateRotation.hxx" />
     <ClInclude Include="TnbLib\Base\coordinateSystems\coordinateRotation\coordinateRotation.hxx" />
@@ -225,6 +215,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\coordinateSystems\toroidalCS.hxx" />
     <ClInclude Include="TnbLib\Base\db\dictionary\dictionary.hxx" />
     <ClInclude Include="TnbLib\Base\db\dictionary\dictionaryEntry\dictionaryEntry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\dictionaryI.hxx" />
     <ClInclude Include="TnbLib\Base\db\dictionary\entry\entry.hxx" />
     <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\functionEntry\functionEntry.hxx" />
     <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\includeEntry\includeEntry.hxx" />
@@ -232,6 +223,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\inputModeEntry\inputModeEntry.hxx" />
     <ClInclude Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry\removeEntry.hxx" />
     <ClInclude Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntry.hxx" />
+    <ClInclude Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryI.hxx" />
     <ClInclude Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTable.hxx" />
     <ClInclude Include="TnbLib\Base\db\error\error.hxx" />
     <ClInclude Include="TnbLib\Base\db\error\errorM.hxx" />
@@ -246,10 +238,15 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\db\IOobjectList\IOobjectList.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobjects\IOdictionary\IOdictionary.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobjects\IOField\IOField.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOField\IOFieldI.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobjects\IOList\IOList.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOList\IOListI.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobjects\IOMap\IOMap.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOMap\IOMapI.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobjects\IOPtrList\IOPtrList.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOPtrList\IOPtrListI.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobjects\IOReferencer\IOReferencer.hxx" />
+    <ClInclude Include="TnbLib\Base\db\IOobjects\IOReferencer\IOReferencerI.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobject\IOobject.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOobject\IOobjectI.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\IFstream.hxx" />
@@ -1101,86 +1098,40 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\Traits\Traits.hxx" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TnbLib\Base\algorithms\MeshWave\FaceCellWave.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\MeshWave\FaceCellWaveName.cxx" />
-    <ClCompile Include="TnbLib\Base\algorithms\MeshWave\MeshWave.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\MeshWave\MeshWaveName.cxx" />
-    <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\indexedOctree.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\indexedOctreeName.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\treeDataCell.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\treeDataEdge.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\treeDataFace.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\indexedOctree\treeDataPoint.cxx" />
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octree.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataBoundBox.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataCell.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataEdges.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataFace.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataPoint.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeDataPointTreeLeaf.cxx" />
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeLine.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\octreeName.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\pointIndexHitIOList.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeBoundBox.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeBoundBox_points.cxx" />
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeLeaf.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeLeafName.cxx" />
-    <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeNode.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\octree\octree\treeNodeName.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\polygon\clipping\SutherlandHodgman.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\polygon\pointInPolygon\HormannAgathos.cxx" />
     <ClCompile Include="TnbLib\Base\algorithms\rotation\RodriguesRotation.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBase.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\DictionaryBase\DictionaryBaseIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\Dictionary\DictionaryTemplate.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\PtrDictionary\PtrDictionary.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UDictionary\UDictionary.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Dictionaries\UPtrDictionary\UPtrDictionary.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTable.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashPtrTable\HashPtrTableIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashSet\HashSet.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTable.cxx" />
     <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableCore.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\HashTables\HashTable\HashTableIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTable.cxx" />
     <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableCore.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\HashTables\StaticHashTable\StaticHashTableIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\ILList\ILListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LList\LListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\LPtrList\LPtrListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\LinkedLists\accessTypes\UILList\UILListIO.cxx" />
     <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\DLListBase\DLListBase.cxx" />
     <ClCompile Include="TnbLib\Base\containers\LinkedLists\linkTypes\SLListBase\SLListBase.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\CompactListList\CompactListListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\DynamicList\DynamicList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\FixedList\FixedListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\Histogram\Histogram.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\ListListOps\ListListOps.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOps.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\ListOps\ListOpsTemplates.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\List\List.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\List\ListIO.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedList.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\PackedList\PackedListName.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\PriorityList\PriorityList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\PtrList\PtrListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableList.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\ParSortableListName.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\SortableList\SortableList.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\Stack\Stack.cxx" />
     <ClCompile Include="TnbLib\Base\containers\Lists\SubList\SubList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\UIndirectList\UIndirectListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\UList\UListIO.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrList.cxx" />
-    <ClCompile Include="TnbLib\Base\containers\Lists\UPtrList\UPtrListIO.cxx" />
     <ClCompile Include="TnbLib\Base\containers\NamedEnum\NamedEnum.cxx" />
     <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateRotation\axisCoordinateRotation.cxx" />
     <ClCompile Include="TnbLib\Base\coordinateSystems\coordinateRotation\coordinateRotation.cxx" />
@@ -1198,7 +1149,6 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryEntry\dictionaryEntry.cxx" />
     <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryEntry\dictionaryEntryIO.cxx" />
     <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryIO.cxx" />
-    <ClCompile Include="TnbLib\Base\db\dictionary\dictionaryTemplates.cxx" />
     <ClCompile Include="TnbLib\Base\db\dictionary\entry\entry.cxx" />
     <ClCompile Include="TnbLib\Base\db\dictionary\entry\entryIO.cxx" />
     <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\functionEntry\functionEntry.cxx" />
@@ -1208,9 +1158,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\db\dictionary\functionEntries\removeEntry\removeEntry.cxx" />
     <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntry.cxx" />
     <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryIO.cxx" />
-    <ClCompile Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryTemplates.cxx" />
     <ClCompile Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTable.cxx" />
-    <ClCompile Include="TnbLib\Base\db\dlLibraryTable\dlLibraryTableTemplates.cxx" />
     <ClCompile Include="TnbLib\Base\db\error\ConvError.cxx" />
     <ClCompile Include="TnbLib\Base\db\error\error.cxx" />
     <ClCompile Include="TnbLib\Base\db\error\IOerror.cxx" />
@@ -1433,6 +1381,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\global\controlSwitches\tnbDebug.cxx" />
     <ClCompile Include="TnbLib\Base\global\controlSwitches\tolerancesSwitch.cxx" />
     <ClCompile Include="TnbLib\Base\global\dimensionedConstants\dimensionedConstants.cxx" />
+    <ClCompile Include="TnbLib\Base\global\global.cxx" />
     <ClCompile Include="TnbLib\Base\global\Global_Timer.cxx" />
     <ClCompile Include="TnbLib\Base\global\JobInfo\JobInfo.cxx" />
     <ClCompile Include="TnbLib\Base\global\new.cxx" />
@@ -1800,18 +1749,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\primitiveMeshPointEdges.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\primitiveMeshPointFaces.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\primitiveMeshPointPoints.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchAddressing.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchBdryPoints.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchCheck.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchClear.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchEdgeLoops.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchLocalPointOrder.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchMeshData.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchMeshEdges.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchName.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchPointAddressing.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchProjectPoints.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\PrimitivePatchTemplate\PrimitivePatchTemplate.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\primitivePatch\patchZones.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\primitiveMesh\primitivePatch\walkPatch.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\line\line.cxx" />
@@ -1821,7 +1759,6 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\triangle\triangle.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\primitiveShapes\triangle\triangleFuncs.cxx" />
     <ClCompile Include="TnbLib\Base\meshes\ProcessorTopology\commSchedule.cxx" />
-    <ClCompile Include="TnbLib\Base\meshes\ProcessorTopology\ProcessorTopologyTemplate.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\clockTime\clockTime.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\cpuTime\cpuTime.cxx" />
     <ClCompile Include="TnbLib\Base\OSspecific\MSWindows\fileStat.cxx" />
@@ -1901,6 +1838,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\Primitives\strings\fileName\fileNameIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\keyType\keyTypeIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\string\tnbString.cxx" />
+    <ClCompile Include="TnbLib\Base\Primitives\strings\string\tnbStringIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\wordRe\wordReIO.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\word\word.cxx" />
     <ClCompile Include="TnbLib\Base\Primitives\strings\word\wordIO.cxx" />

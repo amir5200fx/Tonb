@@ -106,6 +106,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <ILListI.hxx>
+
 #ifdef NoRepository
 #   include <ILList.cxx>
 #endif

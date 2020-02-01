@@ -60,6 +60,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <IOListI.hxx>
+
 #ifdef NoRepository
 #   include <IOList.cxx>
 #endif

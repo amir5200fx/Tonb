@@ -11,6 +11,9 @@
 #include <typeInfo.hxx>
 #include <autoPtr.hxx>
 
+#include <HashTable.hxx> //- added by amir
+#include <Istream.hxx> //- added by amir
+
 #define NoHashTableC
 #include <runTimeSelectionTables.hxx>
 
@@ -107,14 +110,27 @@ namespace tnbLib
 
 
 			//- Declare run-time constructor selection table
-			declareRunTimeSelectionTable
-			(
-				autoPtr,
-				compound,
-				Istream,
-				(Istream& is),
-				(is)
-			);
+			typedef autoPtr<compound> (*IstreamConstructorPtr)(Istream& is);
+			typedef HashTable<IstreamConstructorPtr, word, string::hash> IstreamConstructorTable;
+			static IstreamConstructorTable* IstreamConstructorTablePtr_;
+
+			template <class compoundType>
+			class addIstreamConstructorToTable
+			{
+			public:
+				static autoPtr<compound> New(Istream& is) { return autoPtr<compound>(new compoundType(is)); }
+
+				addIstreamConstructorToTable(const word& lookup = compoundType::typeName)
+				{
+					constructIstreamConstructorTables();
+					IstreamConstructorTablePtr_->insert(lookup, New);
+				}
+
+				~addIstreamConstructorToTable() { destroyIstreamConstructorTables(); }
+			};
+
+			static void constructIstreamConstructorTables();
+			static void destroyIstreamConstructorTables();
 
 
 			// Constructors

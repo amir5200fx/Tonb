@@ -3,7 +3,8 @@
 #define _Istream_Header
 
 #include <IOstream.hxx>
-#include <token.hxx>
+//#include <token.hxx> deactivated by amir
+
 
 namespace tnbLib
 {
@@ -11,6 +12,8 @@ namespace tnbLib
 	/*---------------------------------------------------------------------------*\
 						   Class Istream Declaration
 \*---------------------------------------------------------------------------*/
+
+	class token;
 
 	class Istream
 		: public IOstream
@@ -21,7 +24,7 @@ namespace tnbLib
 		bool putBack_;
 
 		//- The last token put back on the stream
-		token putBackToken_;
+		token* putBackToken_;
 
 
 	public:
@@ -34,17 +37,17 @@ namespace tnbLib
 			streamFormat format = ASCII,
 			versionNumber version = currentVersion,
 			compressionType compression = UNCOMPRESSED
-		)
-			:
-			IOstream(format, version, compression),
-			putBack_(false)
-		{}
+		);
+		/*:
+		IOstream(format, version, compression),
+		putBack_(false)
+	{}*/
 
 
 		// Destructor
 
-		virtual ~Istream()
-		{}
+		virtual ~Istream();
+		//{}
 
 
 		// Member functions

@@ -225,6 +225,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <LPtrListI.hxx>
+
 #ifdef NoRepository
 #   include <LPtrList.cxx>
 #endif

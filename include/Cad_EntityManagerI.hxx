@@ -266,6 +266,33 @@ namespace tnbLib
 		}
 	}
 
+	template<class EntityType>
+	void Cad_EntityManager<EntityType>::Print
+	(
+		const Standard_Boolean PrintEntities,
+		Standard_OStream & Ostream
+	) const
+	{
+		Ostream << "-----------------{ Entities Blocks Informations }-----------------\n";
+		Ostream << " Nb. of Blocks: " << theBlocks_.size() << std::endl;
+		Ostream << " Block List: " << std::endl;
+
+		auto Iter = theBlocks_.begin();
+		while (Iter NOT_EQUAL theBlocks_.end())
+		{
+			Ostream << std::endl;
+			Ostream << "  - " << Iter->first;
+			if (PrintEntities)
+			{
+				Iter->second->Print(Ostream);
+			}
+			Iter++;
+		}
+
+		Ostream << std::endl;
+		Ostream << "-----------------{ End of Entities Blocks Informations }-----------------\n";
+	}
+
 	inline word add_copy_duplicator(const word& theName)
 	{
 		auto w = theName + "(copy)";

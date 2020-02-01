@@ -97,6 +97,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <SortableListI.hxx>
+
 #ifdef NoRepository
 #   include <SortableList.cxx>
 #endif

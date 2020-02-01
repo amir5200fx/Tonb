@@ -266,4 +266,8 @@ namespace tnbLib
 
 #include <controlSwitchesI.hxx>
 
+#ifdef NoRepository
+#   include <controlSwitches.cxx>
+#endif
+
 #endif // !_controlSwitches_Header

@@ -189,8 +189,10 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
-#ifdef NoRepository
-#   include <ListOpsTemplates.cxx>
-#endif
+#include <ListOpsI.hxx>
+
+//#ifdef NoRepository
+//#   include <ListOpsTemplates.cxx>
+//#endif
 
 #endif // !_ListOps_Header

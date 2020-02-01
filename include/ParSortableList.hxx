@@ -152,6 +152,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <ParSortableListI.hxx>
+
 #ifdef NoRepository
 #   include <ParSortableList.cxx>
 #endif

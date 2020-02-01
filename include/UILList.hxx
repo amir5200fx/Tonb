@@ -239,6 +239,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <UILListI.hxx>
+
 #ifdef NoRepository
 #   include "UILList.cxx"
 #endif

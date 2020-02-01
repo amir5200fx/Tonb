@@ -64,6 +64,8 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+#include <IOFieldI.hxx>
+
 #ifdef NoRepository
 #   include <IOField.cxx>
 #endif

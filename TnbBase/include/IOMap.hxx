@@ -62,6 +62,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <IOMapI.hxx>
+
 #ifdef NoRepository
 #   include <IOMap.cxx>
 #endif

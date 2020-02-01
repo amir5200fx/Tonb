@@ -43,7 +43,10 @@ namespace tnbLib
 		);
 
 		static std::shared_ptr<Pln_Wire>
-			MakeWire(const std::shared_ptr<Pln_Ring>& theRing);
+			MakeWire
+			(
+				const std::shared_ptr<Pln_Ring>& theRing
+			);
 
 		static std::shared_ptr<Pln_Wire>
 			MakeWire
@@ -65,7 +68,10 @@ namespace tnbLib
 			);
 
 		static std::vector<std::shared_ptr<Pln_Vertex>>
-			RetrieveVertices(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
+			RetrieveVertices
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+			);
 
 		static std::vector<std::shared_ptr<Pln_Edge>>
 			RetrieveEdges(const std::vector<std::shared_ptr<Pln_Wire>>& theWires);

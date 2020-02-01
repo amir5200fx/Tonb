@@ -62,6 +62,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <IOPtrListI.hxx>
+
 #ifdef NoRepository
 #   include <IOPtrList.cxx>
 #endif

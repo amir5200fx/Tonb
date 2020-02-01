@@ -444,6 +444,8 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
 
+#include <dictionaryI.hxx>
+
 #ifdef NoRepository
 #   include <dictionaryTemplates.cxx>
 #endif
