@@ -5,6 +5,7 @@
 #include <fvPatch.hxx>
 #include <DimensionedField.hxx>
 #include <debugSwitch.hxx>
+#include <Pstream.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

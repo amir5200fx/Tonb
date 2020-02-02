@@ -4,6 +4,7 @@
 
 #include <fvPatch.hxx>
 #include <DimensionedField.hxx>
+#include <Pstream.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
