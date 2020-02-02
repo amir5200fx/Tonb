@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{94512f8d-dbb8-4a42-8264-73457f44342b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic">
+      <UniqueIdentifier>{ab47665e-e392-4f66-8324-37d9a5d13b55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\WaterSurface">
+      <UniqueIdentifier>{dc3fd93c-c615-4c4e-a464-2cbdd9dbc183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Environment">
+      <UniqueIdentifier>{5c2a4154-8913-46f0-8dff-6d443e95c8f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel">
+      <UniqueIdentifier>{37dbb901-8be5-495e-b7c2-e4dd1ea00fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities">
+      <UniqueIdentifier>{73e66285-413f-492c-adf4-5c5d0f2a6fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Entity">
+      <UniqueIdentifier>{92d3c29b-ada5-4017-a424-bcb2943a9069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section">
+      <UniqueIdentifier>{d224f716-ced9-460a-8052-2fb4e43d83b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine">
+      <UniqueIdentifier>{05969a4f-eb9b-43ad-ae04-260e31323431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Station">
+      <UniqueIdentifier>{f6a49b4a-7dd5-4019-bd91-add22bf5efe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Buttock">
+      <UniqueIdentifier>{3b16617c-005b-4032-8a99-be12a2b60b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Arbitrary">
+      <UniqueIdentifier>{ee040868-8a3c-4f86-8fba-cad698421ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\StationHull">
+      <UniqueIdentifier>{8118c1d9-1f59-4e7d-ae26-f78443007402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Property">
+      <UniqueIdentifier>{132d6c34-0aca-4a6d-8e29-abd5b4729e33}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\Vessel_Entity.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Vessel_Section.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine\Vessel_WaterSection.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Station\Vessel_StationSection.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\Station</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Buttock\Vessel_ButtockSection.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\Buttock</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\StationHull\Vessel_StationHull.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\StationHull</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\Vessel_Entity.cxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Vessel_Section.cxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
