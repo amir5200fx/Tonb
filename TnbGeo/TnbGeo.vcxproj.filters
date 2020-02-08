@@ -295,6 +295,42 @@
     <Filter Include="TnbLib\Geo\ItemSearch\BinSearch">
       <UniqueIdentifier>{2edb601b-5110-46c7-b47c-2a8f271a2acd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Vector\3d">
+      <UniqueIdentifier>{22a699a5-1b5b-4e48-aae3-f24d5ba59e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge">
+      <UniqueIdentifier>{ec3c626e-cfe7-4fbc-a90d-11b9ce0b61ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Chain">
+      <UniqueIdentifier>{5a43d0fa-a529-408d-8069-b26c6968f9f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Point">
+      <UniqueIdentifier>{9e98505f-7385-4ce8-a1bc-0618a27a9653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\StaticData">
+      <UniqueIdentifier>{cf33e057-804b-4dc7-a308-5030e827f09b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Chain\2d">
+      <UniqueIdentifier>{7b40cfc5-2790-44de-8079-a1a15676e909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Chain\3d">
+      <UniqueIdentifier>{c2581d21-6559-410f-abbc-2d770eabb7ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Point\2d">
+      <UniqueIdentifier>{59b3b0be-c196-4d8b-977c-c541ca5f0701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Point\3d">
+      <UniqueIdentifier>{560e60dc-3c0e-480c-93e0-ec627da053b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Search">
+      <UniqueIdentifier>{af001ac7-0d58-415e-b307-a3d225277946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Search\AdTree">
+      <UniqueIdentifier>{7ddeef2e-62e3-43d8-aaad-0770e034158e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Search\PrTree">
+      <UniqueIdentifier>{ab43e5a6-cd24-4ebf-ad68-136c549b9d9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -642,6 +678,57 @@
     <ClInclude Include="TnbLib\Geo\ItemSearch\BinSearch\Geo_BinSearchI.hxx">
       <Filter>TnbLib\Geo\ItemSearch\BinSearch</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Vector\3d\Vec3d.hxx">
+      <Filter>TnbLib\Geo\Entities\Vector\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Direct\3d\Dir3d.hxx">
+      <Filter>TnbLib\Geo\Entities\Direct\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Point\Merge_Pnt.hxx">
+      <Filter>TnbLib\Geo\Merge\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Point\Merge_PntAlg.hxx">
+      <Filter>TnbLib\Geo\Merge\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Point\2d\Merge2d_Pnt.hxx">
+      <Filter>TnbLib\Geo\Merge\Point\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Point\2d\Merge2d_PntFwd.hxx">
+      <Filter>TnbLib\Geo\Merge\Point\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Point\3d\Merge3d_Pnt.hxx">
+      <Filter>TnbLib\Geo\Merge\Point\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Point\3d\Merge3d_PntFwd.hxx">
+      <Filter>TnbLib\Geo\Merge\Point\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\StaticData\Merge_StaticData.hxx">
+      <Filter>TnbLib\Geo\Merge\StaticData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Chain\2d\Merge2d_Chain.hxx">
+      <Filter>TnbLib\Geo\Merge\Chain\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Chain\3d\Merge3d_Chain.hxx">
+      <Filter>TnbLib\Geo\Merge\Chain\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\Geo_SearchTree.hxx">
+      <Filter>TnbLib\Geo\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Geo_PrTree.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Geo_PrTreeI.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\AdTree\Geo_AdTree.hxx">
+      <Filter>TnbLib\Geo\Search\AdTree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -772,6 +859,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\ItemSearch\BinSearch\Geo_BinSearch.cxx">
       <Filter>TnbLib\Geo\ItemSearch\BinSearch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Vector\3d\Vec3d.cxx">
+      <Filter>TnbLib\Geo\Entities\Vector\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Direct\3d\Dir3d.cxx">
+      <Filter>TnbLib\Geo\Entities\Direct\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Merge\Point\Merge_Pnt.cxx">
+      <Filter>TnbLib\Geo\Merge\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Search\PrTree\Geo_PrTree.cxx">
+      <Filter>TnbLib\Geo\Search\PrTree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

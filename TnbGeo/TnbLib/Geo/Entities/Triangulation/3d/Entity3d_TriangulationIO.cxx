@@ -2,7 +2,7 @@
 
 #include <TecPlot.hxx>
 
-namespace AutLib
+namespace tnbLib
 {
 
 	template<>

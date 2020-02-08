@@ -6,7 +6,7 @@
 #include <Entity_Connectivity.hxx>
 #include <Entity_StaticData.hxx>
 
-namespace AutLib
+namespace tnbLib
 {
 
 	typedef Entity_StaticData<Pnt3d, connectivity::triple>
