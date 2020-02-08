@@ -18,6 +18,81 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Cad\Discrete\Cad_FastDiscrete.hxx" />
+    <ClInclude Include="TnbLib\Cad\Discrete\Parameters\FastDiscrete_Params.hxx" />
+    <ClInclude Include="TnbLib\Cad\Discrete\System\FastDiscrete_System.hxx" />
+    <ClInclude Include="TnbLib\Cad\Entities\Precision\Cad_EntityPrecision.hxx" />
+    <ClInclude Include="TnbLib\Cad\IO\Format\IGES\CadIO_IGES.hxx" />
+    <ClInclude Include="TnbLib\Cad\IO\Format\Info\CadIO_Info.hxx" />
+    <ClInclude Include="TnbLib\Cad\IO\Format\Shape\CadIO_Shape.hxx" />
+    <ClInclude Include="TnbLib\Cad\IO\Format\STEP\CadIO_STEP.hxx" />
+    <ClInclude Include="TnbLib\Cad\System\TnbCad_System.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Cad3d_TModel.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\CmpEdge\TModel_CmpEdge.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpCurve.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Curve\TModel_Curve.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Curve\TModel_CurveI.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Adaptor\TModel_EdgeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Geometry\TModel_EdgeGeometry.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\TModel_Edge.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Orientation\TModel_FaceOrientation.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Paired\Geometry\TModel_PairedGeometry.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Paired\TModel_Paired.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaCurve\TModel_ParaCurve.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaCurve\TModel_ParaCurveI.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaWire\TModel_ParaWire.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Plane\TModel_Plane.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Ring\TModel_Ring.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Shell\TModel_Shell.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Singular\TModel_SingularEdge.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Surface\Geometry\TModel_SurfaceGeometry.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Surface\TModel_Surface.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Vertex\Adaptor\TModel_VertexAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Vertex\TModel_Vertex.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\WaterTight\TModel_WaterTight.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Wire\TModel_Wire.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Info\TModel_FixWire_Info.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManager.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_PairedManager.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_SurfaceManager.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_VertexManager.hxx" />
+    <ClInclude Include="TnbLib\Cad\TModel\System\TModel_System.hxx" />
+    <ClInclude Include="TnbLib\Cad\Tools\Cad_Tools.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Cad\Discrete\Cad_FastDiscrete.cxx" />
+    <ClCompile Include="TnbLib\Cad\Discrete\Parameters\FastDiscrete_Params.cxx" />
+    <ClCompile Include="TnbLib\Cad\Discrete\System\FastDiscrete_System.cxx" />
+    <ClCompile Include="TnbLib\Cad\IO\Format\IGES\CadIO_IGES.cxx" />
+    <ClCompile Include="TnbLib\Cad\IO\Format\STEP\CadIO_STEP.cxx" />
+    <ClCompile Include="TnbLib\Cad\System\TnbCad_System.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Cad3d_TModel.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Cad3d_TModelIO.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpEdge\TModel_CmpEdge.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpCurve.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Curve\TModel_Curve.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Geometry\TModel_EdgeGeometry.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\TModel_Edge.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\TModel_Paired.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\TModel_PairedIO.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaCurve\TModel_ParaCurve.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaWire\TModel_ParaWire.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Plane\TModel_Plane.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Ring\TModel_Ring.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Shell\TModel_Shell.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Singular\TModel_SingularEdge.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Surface\TModel_Surface.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Vertex\Adaptor\TModel_VertexAdaptor.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Vertex\TModel_Vertex.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Wire\TModel_Wire.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Info\TModel_FixWire_Info.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManager.cxx" />
+    <ClCompile Include="TnbLib\Cad\TModel\System\TModel_System.cxx" />
+    <ClCompile Include="TnbLib\Cad\Tools\Cad_Tools.cxx" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{F14396E4-5995-4CC2-8101-42854CE5C625}</ProjectGuid>
@@ -81,8 +156,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Cad\Entities\Manager;$(ProjectDir)TnbLib\Cad\Entities\Block;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Cad\Entities\Manager;$(ProjectDir)TnbLib\Cad\Entities\Block;$(ProjectDir)TnbLib\Cad\Entities\Precision;$(ProjectDir)TnbLib\Cad\TModel\Entities\CmpEdge;$(ProjectDir)TnbLib\Cad\TModel\Entities\ParaWire;$(ProjectDir)TnbLib\Cad\TModel\Entities\Wire;$(ProjectDir)TnbLib\Cad\TModel\Entities\Plane;$(ProjectDir)TnbLib\Cad\TModel\Entities\Shell;$(ProjectDir)TnbLib\Cad\TModel\Entities\Surface\Geometry;$(ProjectDir)TnbLib\Cad\TModel\Entities\Surface;$(ProjectDir)TnbLib\Cad\TModel\Entities\Vertex\Adaptor;$(ProjectDir)TnbLib\Cad\TModel\Entities\Vertex;$(ProjectDir)TnbLib\Cad\TModel\Entities\Paired\Geometry;$(ProjectDir)TnbLib\Cad\TModel\Entities\Paired;$(ProjectDir)TnbLib\Cad\TModel\Entities\Ring;$(ProjectDir)TnbLib\Cad\TModel\Entities\Singular;$(ProjectDir)TnbLib\Cad\TModel\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\Cad\TModel\Entities\Edge\Geometry;$(ProjectDir)TnbLib\Cad\TModel\Entities\Edge;$(ProjectDir)TnbLib\Cad\TModel\Entities\Orientation;$(ProjectDir)TnbLib\Cad\TModel\Entities\CmpParaCurve;$(ProjectDir)TnbLib\Cad\TModel\Entities\Curve;$(ProjectDir)TnbLib\Cad\TModel\Entities\ParaCurve;$(ProjectDir)TnbLib\Cad\TModel\Entities\WaterTight;$(ProjectDir)TnbLib\Cad\TModel\Entities\Entity;$(ProjectDir)TnbLib\Cad\TModel\Manager;$(ProjectDir)TnbLib\Cad\TModel\System;$(ProjectDir)TnbLib\Cad\TModel\Info;$(ProjectDir)TnbLib\Cad\TModel;$(ProjectDir)TnbLib\Cad\Discrete\System;$(ProjectDir)TnbLib\Cad\Discrete\Parameters;$(ProjectDir)TnbLib\Cad\Discrete;$(ProjectDir)TnbLib\Cad\IO\Format\STEP;$(ProjectDir)TnbLib\Cad\IO\Format\IGES;$(ProjectDir)TnbLib\Cad\IO\Format\Info;$(ProjectDir)TnbLib\Cad\IO\Format\Shape;$(ProjectDir)TnbLib\Cad\System;$(ProjectDir)TnbLib\Cad\Tools;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,8 +204,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Cad\Entities\Manager;$(ProjectDir)TnbLib\Cad\Entities\Block;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Cad\Entities\Manager;$(ProjectDir)TnbLib\Cad\Entities\Block;$(ProjectDir)TnbLib\Cad\Entities\Precision;$(ProjectDir)TnbLib\Cad\TModel\Entities\CmpEdge;$(ProjectDir)TnbLib\Cad\TModel\Entities\ParaWire;$(ProjectDir)TnbLib\Cad\TModel\Entities\Wire;$(ProjectDir)TnbLib\Cad\TModel\Entities\Plane;$(ProjectDir)TnbLib\Cad\TModel\Entities\Shell;$(ProjectDir)TnbLib\Cad\TModel\Entities\Surface\Geometry;$(ProjectDir)TnbLib\Cad\TModel\Entities\Surface;$(ProjectDir)TnbLib\Cad\TModel\Entities\Vertex\Adaptor;$(ProjectDir)TnbLib\Cad\TModel\Entities\Vertex;$(ProjectDir)TnbLib\Cad\TModel\Entities\Paired\Geometry;$(ProjectDir)TnbLib\Cad\TModel\Entities\Paired;$(ProjectDir)TnbLib\Cad\TModel\Entities\Ring;$(ProjectDir)TnbLib\Cad\TModel\Entities\Singular;$(ProjectDir)TnbLib\Cad\TModel\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\Cad\TModel\Entities\Edge\Geometry;$(ProjectDir)TnbLib\Cad\TModel\Entities\Edge;$(ProjectDir)TnbLib\Cad\TModel\Entities\Orientation;$(ProjectDir)TnbLib\Cad\TModel\Entities\CmpParaCurve;$(ProjectDir)TnbLib\Cad\TModel\Entities\Curve;$(ProjectDir)TnbLib\Cad\TModel\Entities\ParaCurve;$(ProjectDir)TnbLib\Cad\TModel\Entities\WaterTight;$(ProjectDir)TnbLib\Cad\TModel\Entities\Entity;$(ProjectDir)TnbLib\Cad\TModel\Manager;$(ProjectDir)TnbLib\Cad\TModel\System;$(ProjectDir)TnbLib\Cad\TModel\Info;$(ProjectDir)TnbLib\Cad\TModel;$(ProjectDir)TnbLib\Cad\Discrete\System;$(ProjectDir)TnbLib\Cad\Discrete\Parameters;$(ProjectDir)TnbLib\Cad\Discrete;$(ProjectDir)TnbLib\Cad\IO\Format\STEP;$(ProjectDir)TnbLib\Cad\IO\Format\IGES;$(ProjectDir)TnbLib\Cad\IO\Format\Info;$(ProjectDir)TnbLib\Cad\IO\Format\Shape;$(ProjectDir)TnbLib\Cad\System;$(ProjectDir)TnbLib\Cad\Tools;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

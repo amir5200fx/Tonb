@@ -1,0 +1,34 @@
+#include <TModel_CmpCurve.hxx>
+
+#include <Entity2d_Box.hxx>
+#include <TModel_ParaCurve.hxx>
+#include <error.hxx>
+#include <OSstream.hxx>
+
+tnbLib::Entity2d_Box 
+tnbLib::TModel_CmpCurve::CalcBoundingBox() const
+{
+	if (Curves().empty())
+	{
+		FatalErrorIn("Entity2d_Box CalcBoundingBox() const")
+			<< "the curve list is empty" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& curves = Curves();
+	auto iter = curves.begin();
+
+	Debug_Null_Pointer((*iter));
+	auto box = (*iter)->CalcBoundingBox();
+
+	iter++;
+
+	while (iter NOT_EQUAL curves.end())
+	{
+		Debug_Null_Pointer((*iter));
+		box = Entity2d_Box::Union(box, (*iter)->CalcBoundingBox());
+
+		iter++;
+	}
+	return std::move(box);
+}
