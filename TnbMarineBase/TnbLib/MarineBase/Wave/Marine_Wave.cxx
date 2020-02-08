@@ -38,22 +38,34 @@ tnbLib::Marine_Wave::BoundingBoxOfRotatedDomain
 	const Entity3d_Box & theDomain
 ) const
 {
-	const auto& p0 = theDomain.P0();
-	const auto& p1 = theDomain.P1();
+	//auto loc = Origin().Location();
+	
+	auto p0 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Aft_NE);
+	auto p1 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Aft_NW);
+	auto p2 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Aft_SE);
+	auto p3 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Aft_SW);
 
-	auto pp0 = p0.Transformed(originToCurrentTransform);
-	auto pp1 = p1.Transformed(originToCurrentTransform);
+	auto p4 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Fwd_NE);
+	auto p5 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Fwd_NW);
+	auto p6 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Fwd_SE);
+	auto p7 = theDomain.Corner(Box3d_PickAlgorithm::Box3d_PickAlgorithm_Fwd_SW);
 
-	auto x0 = MIN(pp0.X(), pp1.X());
-	auto x1 = MAX(pp0.X(), pp1.X());
+	std::vector<Pnt3d> pts;
+	pts.reserve(8);
 
-	auto y0 = MIN(pp0.Y(), pp1.Y());
-	auto y1 = MAX(pp0.Y(), pp1.Y());
+	auto t = originToCurrentTransform.Inverted();
 
-	auto z0 = MIN(pp0.Z(), pp1.Z());
-	auto z1 = MAX(pp0.Z(), pp1.Z());
+	pts.push_back(p0.Transformed(t));
+	pts.push_back(p1.Transformed(t));
+	pts.push_back(p2.Transformed(t));
+	pts.push_back(p3.Transformed(t));
+														  
+	pts.push_back(p4.Transformed(t));
+	pts.push_back(p5.Transformed(t));
+	pts.push_back(p6.Transformed(t));
+	pts.push_back(p7.Transformed(t));
 
-	Entity3d_Box box(Pnt3d(x0, y0, z0), Pnt3d(x1, y1, z1));
+	auto box = Entity3d_Box::BoundingBoxOf(pts);
 	return std::move(box);
 }
 
@@ -140,7 +152,7 @@ tnbLib::Marine_Wave::SurfaceCoordinateSystem() const
 
 void tnbLib::Marine_Wave::Perform()
 {
-	
+	//theOrigin_ = gp_Ax2(MEAN(Domain().P0(), Domain().P1()), Dir3d(0, 0, 1.0), Dir3d(1, 0, 0));
 	TransformOriginToCurrent();
 	
 	auto expanded = Entity3d_Box::Union(BoundingBoxOfRotatedDomain(Domain()), Domain());

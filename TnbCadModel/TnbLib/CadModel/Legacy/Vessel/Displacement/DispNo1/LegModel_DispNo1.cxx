@@ -88,7 +88,7 @@ void tnbLib::LegModel_DispNo1::MakeFace()
 		Hull->VDegree()
 	);
 
-	gp_Ax2 system;
+	auto system = gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 1, 0));
 	Pair->Mirror(system);
 
 	TopoDS_Shape PairShape = BRepBuilderAPI_MakeFace(Pair, 1.0E-6);

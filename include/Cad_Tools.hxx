@@ -6,6 +6,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 
 class Bnd_Box;
 class TopoDS_Shape;
@@ -13,6 +14,7 @@ class TopoDS_Face;
 class TopoDS_Edge;
 class TopoDS_Wire;
 class Geom_Curve;
+class Geom_Surface;
 class Geom2d_Curve;
 class Poly_Triangulation;
 
@@ -57,6 +59,31 @@ namespace tnbLib
 			BoundingBox
 			(
 				const TopoDS_Shape& theShape
+			);
+
+		static std::shared_ptr<Entity2d_Triangulation>
+			ParametricTriangulation
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1,
+				const Standard_Integer theNx,
+				const Standard_Integer theNy
+			);
+
+		static std::shared_ptr<Entity3d_Triangulation>
+			Triangulation
+			(
+				const Geom_Surface& theSurface,
+				const Entity2d_Triangulation& theParametric
+			);
+
+		static std::shared_ptr<Entity3d_Triangulation>
+			Triangulation
+			(
+				const Handle(Geom_Surface)& theSurface,
+				const Standard_Integer theNx,
+				const Standard_Integer theNy
+
 			);
 
 		static std::shared_ptr<Entity3d_Triangulation>

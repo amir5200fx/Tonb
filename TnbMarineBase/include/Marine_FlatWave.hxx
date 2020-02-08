@@ -13,6 +13,11 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		Vec3d SurfaceDirection() const override
+		{
+			return Current();
+		}
+
 		void MakeProfileCurve(const Pnt2d& x0, const Pnt2d& x1) override;
 
 	public:

@@ -11,8 +11,10 @@
 #include <LegModel_DispNo1.hxx>
 #include <Cad_FastDiscrete.hxx>
 #include <FastDiscrete_System.hxx>
+#include <FastDiscrete_Params.hxx>
 
 #include <Poly_Triangulation.hxx>
+#include <Bnd_Box.hxx>
 
 #include <armadillo.h>
 
@@ -42,7 +44,14 @@ Standard_Integer main()
 
 	const auto& myShape = ship->Entity();
 
-	Cad_FastDiscrete::Triangulation(myShape, *sysLib::gl_fast_discrete_parameters);
+	auto b0 = Cad_Tools::BoundingBox(myShape);
+	auto box = Cad_Tools::BoundingBox(b0);
+
+	FastDiscrete_Params params;
+	params.Deflection = 1.0e-4*box.Diameter();
+	params.Angle = 1.0;
+
+	Cad_FastDiscrete::Triangulation(myShape, params);
 
 	auto myTris = Cad_Tools::RetrieveTriangulation(myShape);
 
@@ -52,16 +61,19 @@ Standard_Integer main()
 		mesh->ExportToPlt(myFile);
 	}
 
-	Entity3d_Box domain(Pnt3d(0, 0, 0), Pnt3d(1, 1, 0.5));
+	auto domain = box.OffSet(box.Diameter()*0.2);
 	auto wave = std::make_shared<Marine_FlatWave>(domain);
 	Debug_Null_Pointer(wave);
 
-	wave->SetCurrent(Vec3d(-1.0, 0, 0));
-	wave->SetVerticalDirection(Dir3d(0, 0, 1));
+	wave->SetCurrent(Vec3d(-1.0, -0.0, 0));
+	wave->SetVerticalDirection(Dir3d(.1, 0, 0.99498743710662));
+	wave->SetPointOnWater(Pnt3d(75, 0, 5));
 	wave->Perform();
 
+	auto water = Cad_Tools::Triangulation(wave->SurfaceGeometry(), 20, 20);
+	Debug_Null_Pointer(water);
 
-	
+	water->ExportToPlt(myFile);
 
 	PAUSE;
 	return 0;

@@ -135,7 +135,7 @@ namespace tnbLib
 			: theDomain_(theDomain)
 		{}
 
-		
+		virtual Vec3d SurfaceDirection() const = 0;
 
 		virtual void MakeProfileCurve(const Pnt2d& x0, const Pnt2d& x1) = 0;
 

@@ -153,6 +153,12 @@
     <ClInclude Include="TnbLib\MarineBase\Tools\MarineBase_Tools.hxx">
       <Filter>TnbLib\MarineBase\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.hxx">
+      <Filter>TnbLib\MarineBase\Wave\FirstOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave_CharType.hxx">
+      <Filter>TnbLib\MarineBase\Wave\FirstOrder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -202,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Tools\MarineBase_Tools.cxx">
       <Filter>TnbLib\MarineBase\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.cxx">
+      <Filter>TnbLib\MarineBase\Wave\FirstOrder</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

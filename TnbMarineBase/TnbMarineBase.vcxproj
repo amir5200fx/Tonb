@@ -37,6 +37,8 @@
     <ClInclude Include="TnbLib\MarineBase\Origin\Marine_Origin.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Tools\MarineBase_Tools.hxx" />
     <ClInclude Include="TnbLib\MarineBase\UnitSystem\Marine_UnitSystem.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave_CharType.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Wave\Flat\Marine_FlatWave.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Wave\Marine_Wave.hxx" />
   </ItemGroup>
@@ -55,6 +57,7 @@
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Water\EnvPropt_WaterViscosity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Origin\Marine_Origin.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Tools\MarineBase_Tools.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Wave\Flat\Marine_FlatWave.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Wave\Marine_Wave.cxx" />
   </ItemGroup>
