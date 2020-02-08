@@ -33,6 +33,11 @@ namespace tnbLib
 	protected:
 
 
+		auto& ChangeEdges()
+		{
+			return theEdges_;
+		}
+
 		void Insert(const std::shared_ptr<Pln_Edge>& theEdge)
 		{
 			theEdges_.push_back(theEdge);

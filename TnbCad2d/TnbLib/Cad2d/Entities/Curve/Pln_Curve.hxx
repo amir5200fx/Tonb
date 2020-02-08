@@ -31,7 +31,7 @@ namespace tnbLib
 		Handle(Geom2d_Curve) theGeometry_;
 
 
-		Handle(Geom2d_Curve)& ChangeGeometry()
+		auto& ChangeGeometry()
 		{
 			return theGeometry_;
 		}
@@ -57,7 +57,7 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		const Handle(Geom2d_Curve)& Geometry() const
+		const auto& Geometry() const
 		{
 			return theGeometry_;
 		}

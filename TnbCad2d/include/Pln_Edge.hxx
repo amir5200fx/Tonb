@@ -5,6 +5,7 @@
 #include <Pln_Entity.hxx>
 #include <Pln_EdgeAdaptor.hxx>
 #include <Pln_EdgeGeom.hxx>
+#include <OFstream.hxx>
 
 #include <vector>
 
@@ -49,6 +50,17 @@ namespace tnbLib
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_EdgeGeom(theCurve, Sense)
+			, theVtx0_(theVtx0)
+			, theVtx1_(theVtx1)
+		{}
+
+		Pln_Edge
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Vertex>& theVtx0,
+			const std::shared_ptr<Pln_Vertex>& theVtx1
+		)
+			: Pln_Entity(theIndex)
 			, theVtx0_(theVtx0)
 			, theVtx1_(theVtx1)
 		{}
@@ -101,6 +113,7 @@ namespace tnbLib
 			const Standard_Boolean ApplyToMesh = Standard_True
 		);
 
+		void ExportToPlt(OFstream& File) const;
 
 		//- virtual functions
 

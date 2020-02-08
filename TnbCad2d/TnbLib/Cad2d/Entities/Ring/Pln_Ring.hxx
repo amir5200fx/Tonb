@@ -29,6 +29,14 @@ namespace tnbLib
 		Pln_Ring
 		(
 			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Vertex>& theVrtx
+		)
+			: Pln_Edge(theIndex, theVrtx, theVrtx)
+		{}
+
+		Pln_Ring
+		(
+			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<Pln_Vertex>& theVrtx
 		)

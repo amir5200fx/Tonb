@@ -57,6 +57,17 @@ namespace tnbLib
 		Pln_Edge
 		(
 			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Vertex>& theVtx0,
+			const std::shared_ptr<Pln_Vertex>& theVtx1
+		)
+			: Pln_Entity(theIndex)
+			, theVtx0_(theVtx0)
+			, theVtx1_(theVtx1)
+		{}
+
+		Pln_Edge
+		(
+			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
 			const std::shared_ptr<Pln_Vertex>& theVtx1
