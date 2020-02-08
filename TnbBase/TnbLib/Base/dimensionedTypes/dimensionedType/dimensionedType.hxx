@@ -145,6 +145,16 @@ namespace tnbLib
 		//- Return non-const reference to value.
 		Type& value();
 
+		const Type& operator()() const
+		{
+			return value();
+		}
+
+		Type& operator()()
+		{
+			return value();
+		}
+
 		//- Return a component as a dimensioned<cmptType>
 		dimensioned<cmptType> component(const direction) const;
 
@@ -330,6 +340,8 @@ operator op                                                                   \
 
 		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }
+
+#include <dimensionedTypeI.hxx>
 
 #ifdef NoRepository
 #   include <dimensionedType.cxx>

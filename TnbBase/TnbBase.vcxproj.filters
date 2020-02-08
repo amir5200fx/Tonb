@@ -4773,6 +4773,9 @@
     <ClInclude Include="TnbLib\Base\db\dictionary\primitiveEntry\primitiveEntryI.hxx">
       <Filter>TnbLib\Base\db\dictionary\primitiveEntry</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedType\dimensionedTypeI.hxx">
+      <Filter>TnbLib\Base\dimensionedTypes\dimensionedType</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -7053,6 +7056,9 @@
       <Filter>TnbLib\Base\containers\Lists\PriorityList</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\global\global.cxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\UnitSystem.cxx">
       <Filter>TnbLib\Base\global</Filter>
     </ClCompile>
   </ItemGroup>

@@ -306,6 +306,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedTensor\dimensionedTensor.hxx" />
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedTypes.hxx" />
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedType\dimensionedType.hxx" />
+    <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedType\dimensionedTypeI.hxx" />
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN\dimensionedVectorTensorN.hxx" />
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedVectorTensorN\dimensionedVectorTensorNI.hxx" />
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedVector\dimensionedVector.hxx" />
@@ -1389,6 +1390,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\global\profiling\profilingPool.cxx" />
     <ClCompile Include="TnbLib\Base\global\profiling\profilingStack.cxx" />
     <ClCompile Include="TnbLib\Base\global\profiling\profilingTrigger.cxx" />
+    <ClCompile Include="TnbLib\Base\global\UnitSystem.cxx" />
     <ClCompile Include="TnbLib\Base\interpolations\GGIInterpolation\GGIInterpolate.cxx" />
     <ClCompile Include="TnbLib\Base\interpolations\GGIInterpolation\GGIInterpolation.cxx" />
     <ClCompile Include="TnbLib\Base\interpolations\GGIInterpolation\GGIInterpolationName.cxx" />
