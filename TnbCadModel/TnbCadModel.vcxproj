@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{81DD0833-BF5F-4698-8B7D-6D82792BD220}</ProjectGuid>
+    <RootNamespace>TnbCadModel</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\CtrlNet\LegModel_CtrlNet.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_Dim.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_ManipParams.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_ParameterProfile.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_PointList.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_Surface.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_BoundedParameter.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_ConstParameter.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_Parameter.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Section\LegModel_SectionCtrlPts.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\LegModel_DispNo1.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters\LegModel_DispNo1_Parameters.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles\LegModel_DispNo1_Profiles.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System\LegModel_DispNo1_Defaults.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System\LegModel_DispNo1_System.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\LegModel_Displacement.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\LegModel_Entity.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\LegModel_Vessel.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_ApplyParamaters.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_CalcParamaters.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_Sections.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DispNo1_SetupHull.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\LegModel_DispNo1.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters\LegModel_DispNo1_Parameters.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles\LegModel_DispNo1_Profiles.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System\LegModel_DispNo1_Defaults.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

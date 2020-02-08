@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{4b0f4aff-0911-4d23-92b2-91a3c67fe02e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel">
+      <UniqueIdentifier>{604a46c3-3216-4389-9a19-2c8cb78fc15e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy">
+      <UniqueIdentifier>{1a5f99f1-0db1-45ac-abf2-9b5d7f4f37dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Entities">
+      <UniqueIdentifier>{b5ccacba-6a26-4efc-bd08-43c2483e3694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Entities\Entity">
+      <UniqueIdentifier>{0d51a664-7a1e-42fb-bbd7-a9e812e44c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Vessel">
+      <UniqueIdentifier>{cd26fad8-826d-4507-8e07-366e3aa48459}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Vessel\Displacement">
+      <UniqueIdentifier>{4e79995b-d840-4af2-8a98-5a3017cc1374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1">
+      <UniqueIdentifier>{6f6caf32-4f50-4b2a-8349-b04988bf80fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters">
+      <UniqueIdentifier>{34230453-cb37-49ec-b266-5c9608467dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles">
+      <UniqueIdentifier>{1428e490-7c36-4dce-9921-e42fe7f3388d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System">
+      <UniqueIdentifier>{da6a16cc-d069-45f4-a528-4f9a24d55da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\CtrlNet">
+      <UniqueIdentifier>{239734ff-ea22-4b8b-a3d9-c71b31c53974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Section">
+      <UniqueIdentifier>{eb0dc686-3401-494a-ab41-bf6ed7a3182b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Parameter">
+      <UniqueIdentifier>{c75fd449-5b96-47f9-942a-ac1f844d68b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Global">
+      <UniqueIdentifier>{dabd95c3-cd65-41e4-9eb7-e32da5711ad4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.hxx">
+      <Filter>TnbLib\CadModel\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\LegModel_Entity.hxx">
+      <Filter>TnbLib\CadModel\Legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\LegModel_Displacement.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\LegModel_DispNo1.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System\LegModel_DispNo1_System.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Section\LegModel_SectionCtrlPts.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\CtrlNet\LegModel_CtrlNet.hxx">
+      <Filter>TnbLib\CadModel\Legacy\CtrlNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_Parameter.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters\LegModel_DispNo1_Parameters.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles\LegModel_DispNo1_Profiles.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_ParameterProfile.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_ManipParams.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_PointList.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_Surface.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_Dim.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\LegModel_Vessel.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System\LegModel_DispNo1_Defaults.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_ConstParameter.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_BoundedParameter.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Parameter</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.cxx">
+      <Filter>TnbLib\CadModel\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters\LegModel_DispNo1_Parameters.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_ApplyParamaters.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_CalcParamaters.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_Sections.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DispNo1_SetupHull.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles\LegModel_DispNo1_Profiles.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\LegModel_DispNo1.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System\LegModel_DispNo1_Defaults.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
