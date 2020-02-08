@@ -11,7 +11,7 @@ class Geom_Curve;
 
 #include <memory>
 
-namespace AutLib
+namespace tnbLib
 {
 
 	typedef Geo_ApprxCurve<Handle(Geom_Curve), true>

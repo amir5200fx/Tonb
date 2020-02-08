@@ -43,6 +43,9 @@
     <Filter Include="TnbLib\Hydrostatic\Vessel\Property">
       <UniqueIdentifier>{132d6c34-0aca-4a6d-8e29-abd5b4729e33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Station">
+      <UniqueIdentifier>{8918a99f-5e63-4719-997a-e3940e757f16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\Vessel_Entity.hxx">

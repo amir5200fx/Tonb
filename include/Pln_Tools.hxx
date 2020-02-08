@@ -32,15 +32,32 @@ namespace tnbLib
 
 	public:
 
-		static Standard_Real Distance(const Pnt2d& theCoord, const Handle(Geom2d_Curve)& theCurve);
+		static Standard_Boolean
+			IsBounded
+			(
+				const Handle(Geom2d_Curve)& theCurve
+			);
 
-		static Standard_Real Distance(const Pnt2d& theCoord, const Handle(Geom2d_Curve)& theCurve, Standard_Real& theParameter);
+		static Standard_Real
+			Distance
+			(
+				const Pnt2d& theCoord,
+				const Handle(Geom2d_Curve)& theCurve
+			);
 
-		static std::shared_ptr<Pln_CmpEdge> 
+		static Standard_Real
+			Distance
+			(
+				const Pnt2d& theCoord,
+				const Handle(Geom2d_Curve)& theCurve,
+				Standard_Real& theParameter
+			);
+
+		static std::shared_ptr<Pln_CmpEdge>
 			MakeCompoundEdge
-		(
-			const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
-		);
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+			);
 
 		static std::shared_ptr<Pln_Wire>
 			MakeWire
@@ -50,12 +67,12 @@ namespace tnbLib
 
 		static std::shared_ptr<Pln_Wire>
 			MakeWire
-		(
-			const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
-			const Standard_Real theMaxTol
-		);
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const Standard_Real theMaxTol
+			);
 
-		static Pln_Orientation 
+		static Pln_Orientation
 			RetrieveOrientation
 			(
 				const Pln_Wire& theWire
@@ -74,7 +91,10 @@ namespace tnbLib
 			);
 
 		static std::vector<std::shared_ptr<Pln_Edge>>
-			RetrieveEdges(const std::vector<std::shared_ptr<Pln_Wire>>& theWires);
+			RetrieveEdges
+			(
+				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+			);
 
 		//- an exception will be thrown if the curve is not bounded
 		static std::shared_ptr<Geom2dAPI_InterCurveCurve>
@@ -92,6 +112,13 @@ namespace tnbLib
 				const Standard_Real theU0,
 				const Standard_Real theU1);
 
+		//- an exception will be thrown if the curve is not bounded
+		static Handle(Geom2d_Curve)
+			ConvertToBSpline
+			(
+				const Handle(Geom2d_Curve)& theCurve
+			);
+
 		static std::shared_ptr<Entity2d_Triangulation>
 			ParametricTriangulation
 			(
@@ -104,26 +131,45 @@ namespace tnbLib
 		static Entity2d_Box BoundingBox(const Bnd_Box2d& theBox);
 
 		//- an exception will be thrown if the curve is not bounded
-		static Bnd_Box2d BoundingBox
-		(
-			const Handle(Geom2d_Curve)& theCurve
-		);
+		static Bnd_Box2d
+			BoundingBox
+			(
+				const Handle(Geom2d_Curve)& theCurve
+			);
 
-		static Bnd_Box2d BoundingBox
-		(
-			const Handle(Geom2d_Curve)& theCurve,
-			const Standard_Real theU0,
-			const Standard_Real theU1
-		);
+		static Bnd_Box2d
+			BoundingBox
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const Standard_Real theU0,
+				const Standard_Real theU1
+			);
 
 		//- an exception will be thrown if the curve is not bounded and the x exceeds the boundary
-		static void SplitCurve
-		(
-			const Handle(Geom2d_Curve)& theCurve,
-			const Standard_Real theX,
-			Handle(Geom2d_Curve)& theC0,
-			Handle(Geom2d_Curve)& theC1
-		);
+		static void
+			SplitCurve
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const Standard_Real theX,
+				Handle(Geom2d_Curve)& theC0,
+				Handle(Geom2d_Curve)& theC1
+			);
+
+		static std::vector<Pln_Wire>
+			RetrieveWires
+			(
+				const std::vector<Handle(Geom2d_Curve)>& theEdges, 
+				const Standard_Real theMinTol, 
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<Pln_Wire>
+			RetrieveWire
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx
+			);
+
+		static void SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge);
 	};
 }
 

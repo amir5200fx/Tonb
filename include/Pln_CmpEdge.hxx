@@ -3,6 +3,7 @@
 #define _Pln_CmpEdge_Header
 
 #include <Pln_Entity.hxx>
+#include <OFstream.hxx>
 
 #include <memory>
 #include <vector>
@@ -31,6 +32,11 @@ namespace tnbLib
 
 	protected:
 
+
+		auto& ChangeEdges()
+		{
+			return theEdges_;
+		}
 
 		void Insert(const std::shared_ptr<Pln_Edge>& theEdge)
 		{
@@ -62,6 +68,8 @@ namespace tnbLib
 		}
 
 		void Reverse();
+
+		void ExportToPlt(OFstream& File) const;
 	};
 }
 

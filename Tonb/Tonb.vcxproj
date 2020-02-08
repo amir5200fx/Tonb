@@ -87,8 +87,14 @@
     <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">
       <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TnbCadModel\TnbCadModel.vcxproj">
+      <Project>{81dd0833-bf5f-4698-8b7d-6d82792bd220}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TnbCad\TnbCad.vcxproj">
       <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbFiniteVolume\TnbFiniteVolume.vcxproj">
+      <Project>{2ad526bd-a49d-46e4-b6e0-e0f4084347a5}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TnbGeoModel\TnbGeoModel.vcxproj">
       <Project>{99a50ec6-f371-4e8f-9644-a396863b4786}</Project>
@@ -96,8 +102,14 @@
     <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
       <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TnbHydrostatic\TnbHydrostatic.vcxproj">
+      <Project>{33976535-7c9d-4d56-ad80-699694bf4492}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TnbIO\TnbIO.vcxproj">
       <Project>{539a8b06-4566-489f-8a5e-84e11983a802}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbMarineBase\TnbMarineBase.vcxproj">
+      <Project>{e15d4b29-deef-4205-8790-f4ca3d77f53a}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TnbMeshBase\TnbMeshBase.vcxproj">
       <Project>{b0a6c309-b4d6-488d-9416-0901ae71adcf}</Project>

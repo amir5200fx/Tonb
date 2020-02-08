@@ -4,7 +4,7 @@
 
 #include <Entity_Connectivity.hxx>
 
-namespace AutLib
+namespace tnbLib
 {
 
 	// Forward Declarations
