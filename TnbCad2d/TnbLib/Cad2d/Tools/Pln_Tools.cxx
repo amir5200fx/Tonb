@@ -11,6 +11,7 @@
 #include <Pln_Wire.hxx>
 #include <Pln_CmpEdge.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Geo_ApprxCurve_Info.hxx>
 
 #include <Bnd_Box2d.hxx>
 #include <BndLib_Add2dCurve.hxx>
@@ -566,6 +567,12 @@ namespace tnbLib
 			Vertex(const Standard_Integer theIndex, const Pnt2d& theCoord)
 				: Index(theIndex), Coord(theCoord)
 			{}
+
+			static const Pnt2d& GetCoord(const std::shared_ptr<Vertex>& theVtx)
+			{
+				Debug_Null_Pointer(theVtx);
+				return theVtx->Coord;
+			}
 		};
 
 		struct Edge
@@ -575,6 +582,8 @@ namespace tnbLib
 
 			std::shared_ptr<Vertex> Vtx0;
 			std::shared_ptr<Vertex> Vtx1;
+
+			Handle(Geom2d_Curve) Curve;
 
 			Edge
 			(
@@ -618,6 +627,8 @@ namespace tnbLib
 				auto edge = std::make_shared<Edge>(++nbEdges, vtx0, vtx1);
 				Debug_Null_Pointer(edge);
 
+				edge->Curve = x;
+
 				edges.push_back(std::move(edge));
 			}
 			return std::move(edges);
@@ -648,17 +659,32 @@ namespace tnbLib
 			const Standard_Real theMaxTol
 		)
 		{
+
 			auto unMergedVertices = 
 				RetrieveUnMergedVerticesFromEdges(theEdges);
 
-			Geo_PrTree<std::shared_ptr<Vertex>> search;
+			std::vector<Pnt2d> pts;
+			pts.reserve(unMergedVertices.size());
+
 			for (const auto& x : unMergedVertices)
 			{
 				Debug_Null_Pointer(x);
-				
+				pts.push_back(x->Coord);
+			}
+
+			auto domain = Entity2d_Box::BoundingBoxOf(pts);
+
+			Geo_PrTree<std::shared_ptr<Vertex>> search;
+			search.SetGeometryCoordFunc(&Vertex::GetCoord);
+			search.SetGeometryRegion(domain.OffSet(1.0E-3*domain.Diameter()));
+
+			for (const auto& x : unMergedVertices)
+			{
+				Debug_Null_Pointer(x);
+
 				std::vector<std::shared_ptr<Vertex>> candidates;
 				search.GeometrySearch
-				(Entity2d_Box::BoundingBoxOf(x->Coord - theMaxTol, x->Coord + theMaxTol), 
+				(Entity2d_Box::BoundingBoxOf(x->Coord - theMaxTol, x->Coord + theMaxTol),
 					candidates);
 
 				if (candidates.empty())
@@ -746,7 +772,7 @@ namespace tnbLib
 			Standard_Integer nbVertices = 0;
 
 			auto iter = pairdVertices.begin();
-			while (NOT pairdVertices.empty())
+			while (iter NOT_EQUAL pairdVertices.end())
 			{
 				const auto& x = iter->second;
 
@@ -791,6 +817,13 @@ namespace tnbLib
 			std::vector<std::shared_ptr<Pln_Edge>> edges;
 			edges.reserve(theEdges.size());
 
+			auto apxInfo = std::make_shared<Geo_ApprxCurve_Info>();
+			Debug_Null_Pointer(apxInfo);
+
+			apxInfo->SetAngle(2.0);
+			apxInfo->SetMinSize(1.0E-3);
+			apxInfo->SetNbSamples(3);
+
 			Standard_Integer nbEdges = 0;
 			for (const auto& x : theEdges)
 			{
@@ -810,6 +843,8 @@ namespace tnbLib
 					auto edge = std::make_shared<Pln_Ring>(++nbEdges, vtx0);
 					Debug_Null_Pointer(edge);
 
+					edge->SetCurve(std::make_shared<Pln_Curve>(nbEdges, x->Curve));
+					edge->Approx(apxInfo);
 					vtx0->InsertToEdges(edge->Index(), edge);
 
 					edges.push_back(std::move(edge));
@@ -822,6 +857,8 @@ namespace tnbLib
 					vtx0->InsertToEdges(edge->Index(), edge);
 					vtx1->InsertToEdges(edge->Index(), edge);
 
+					edge->SetCurve(std::make_shared<Pln_Curve>(nbEdges, x->Curve));
+					edge->Approx(apxInfo);
 					edges.push_back(std::move(edge));
 				}	
 			}
@@ -831,7 +868,8 @@ namespace tnbLib
 		static std::pair<std::shared_ptr<Pln_Vertex>, std::shared_ptr<Pln_Edge>>
 			Next
 			(
-				const std::shared_ptr<Pln_Vertex>& theVtx
+				const std::shared_ptr<Pln_Vertex>& theVtx,
+				const std::shared_ptr<Pln_Edge>& thePrior
 			)
 		{
 			if (theVtx->IsRingPoint())
@@ -851,24 +889,43 @@ namespace tnbLib
 			std::vector<std::weak_ptr<Pln_Edge>> wEdges;
 			theVtx->RetrieveEdgesTo(wEdges);
 
-			auto e0 = wEdges[0].lock();
-			Debug_Null_Pointer(e0);
-
-			if (e0->Vtx0() NOT_EQUAL theVtx)
+			std::shared_ptr<Pln_Edge> edge;
+			if (thePrior)
 			{
-				auto pair = std::make_pair(e0->Vtx0(), e0);
+				auto e0 = wEdges[0].lock();
+				auto e1 = wEdges[1].lock();
+
+				if (e0 NOT_EQUAL thePrior)
+				{
+					edge = e0;
+				}
+				else
+				{
+					edge = e1;
+				}
+			}
+			else
+			{
+				edge = wEdges[0].lock();
+			}
+
+			Debug_Null_Pointer(edge);
+
+			if (edge->Vtx0() NOT_EQUAL theVtx)
+			{
+				auto pair = std::make_pair(edge->Vtx0(), edge);
 				return std::move(pair);
 			}
-			else if (e0->Vtx1() NOT_EQUAL theVtx)
+			else if (edge->Vtx1() NOT_EQUAL theVtx)
 			{
-				auto pair = std::make_pair(e0->Vtx1(), e0);
+				auto pair = std::make_pair(edge->Vtx1(), edge);
 				return std::move(pair);
 			}
 
 			FatalErrorIn(FunctionSIG)
 				<< "Invalid Data" << endl
 				<< abort(FatalError);
-			auto pair = std::make_pair(e0->Vtx0(), e0);
+			auto pair = std::make_pair(edge->Vtx0(), edge);
 			return pair;
 		}
 
@@ -879,13 +936,13 @@ namespace tnbLib
 			)
 		{
 			std::vector<std::shared_ptr<Pln_Edge>> edges;
-			
-			auto next = Next(theVtx);
+
+			auto next = Next(theVtx, nullptr);
 			edges.push_back(next.second);
 
 			while (next.first NOT_EQUAL theVtx)
 			{
-				next = Next(next.first);
+				next = Next(next.first, edges[edges.size() - 1]);
 				edges.push_back(next.second);
 			}
 			return std::move(edges);

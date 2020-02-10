@@ -63,6 +63,7 @@
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\EnvPropt_Viscosity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Water\EnvPropt_WaterViscosity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\ModelMaker\Shape\Marine_ModelMaker_Shape.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Model\Marine_Model.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Origin\Marine_Origin.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Tools\MarineBase_Tools.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.cxx" />

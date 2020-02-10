@@ -248,5 +248,8 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\CmpSection\Marine_CmpSection.cxx">
       <Filter>TnbLib\MarineBase\Entities\CmpSection</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Model\Marine_Model.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

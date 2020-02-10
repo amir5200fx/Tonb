@@ -17,16 +17,16 @@ tnbLib::Marine_ModelMaker::Marine_ModelMaker()
 {
 }
 
-tnbLib::Marine_ModelMaker::Marine_ModelMaker
-(
-	const Standard_Integer theIndex,
-	const word & theName
-)
-	: Marine_Entity(theIndex, theName)
-	, theMinTolerance_(1.0E-6)
-	, theMaxTolerance_(1.0E-3)
-{
-}
+//tnbLib::Marine_ModelMaker::Marine_ModelMaker
+//(
+//	const Standard_Integer theIndex,
+//	const word & theName
+//)
+//	: Marine_Entity(theIndex, theName)
+//	, theMinTolerance_(1.0E-6)
+//	, theMaxTolerance_(1.0E-3)
+//{
+//}
 
 void tnbLib::Marine_ModelMaker_Shape::Perform()
 {
@@ -37,7 +37,15 @@ void tnbLib::Marine_ModelMaker_Shape::Perform()
 			<< abort(FatalError);
 	}
 
-	gp_Ax2 system(System().Location(), System().XDirection(), System().Direction());
+	if (NOT Distributor())
+	{
+		FatalErrorIn("void tnbLib::Marine_ModelMaker_Shape::Perform()")
+			<< "the distributor is not loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& sys = Distributor()->CoordinateSystem();
+	gp_Ax2 system(sys.Location(), sys.XDirection(), sys.Direction());
 
 	BRepAlgoAPI_Section alg;
 	alg.Init2(Shape());
@@ -45,13 +53,17 @@ void tnbLib::Marine_ModelMaker_Shape::Perform()
 	alg.SetRunParallel(Standard_True);
 
 	std::vector<TopoDS_Shape> shapes;
+	std::vector<gp_Ax2> systems;
 
 	const auto& xSections = Distributor()->Sections();
+	systems.reserve(xSections.size());
+
 	for (auto x : xSections)
 	{
 		auto x0 = system.Location().X();
 
 		system.Translate(gp_Vec(0, 0, x - x0));
+		systems.push_back(system);
 
 		gp_Pln plane(system);
 
@@ -71,9 +83,11 @@ void tnbLib::Marine_ModelMaker_Shape::Perform()
 	std::vector<std::shared_ptr<Marine_CmpSection>>
 		sections;
 	sections.reserve(xSections.size());
+	
+	Standard_Integer i = 0;
 	for (const auto& x : shapes)
 	{
-		sections.push_back(Marine_CmpSection::CreateCmpSection(x, MinTolerance(), MaxTolerance()));
+		sections.push_back(Marine_CmpSection::CreateCmpSection(x, systems[i++], MinTolerance(), MaxTolerance()));
 	}
 
 	auto model = std::make_shared<Marine_VesselModel>();

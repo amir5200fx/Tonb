@@ -15,7 +15,7 @@ void tnbLib::Marine_SectionDistribution_Uniform::Perform()
 	const auto dx = (Upper() - Lower()) / (Standard_Real)(NbSections() + 1);
 	const auto x0 = Lower();
 
-	auto sections = ChangeSections();
+	auto& sections = ChangeSections();
 	sections.reserve(NbSections());
 
 	forThose(Index, 1, NbSections())

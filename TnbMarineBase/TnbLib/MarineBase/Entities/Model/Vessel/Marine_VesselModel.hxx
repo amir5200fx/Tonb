@@ -24,6 +24,8 @@ namespace tnbLib
 
 	public:
 
+		Marine_VesselModel()
+		{}
 
 		Standard_Integer NbSections() const;
 

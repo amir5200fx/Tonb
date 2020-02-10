@@ -47,11 +47,11 @@ namespace tnbLib
 	)
 	{
 		Point Pmin;
-		for (int i = 0; i < Point::dim; i++)
+		for (int i = 1; i <= Point::dim; i++)
 			Pmin.SetCoord(i, MIN(P0.Coord(i), P1.Coord(i)));
 
 		Point Pmax;
-		for (int i = 0; i < Point::dim; i++)
+		for (int i = 1; i <= Point::dim; i++)
 			Pmax.SetCoord(i, MAX(P0.Coord(i), P1.Coord(i)));
 
 		Entity_Box<Point> box(Pmin, Pmax);

@@ -7,6 +7,8 @@
 #include <TnbCad2d_System.hxx>
 #include <dimensionedScalar.hxx>
 
+#include <Marine_SectionDistribution_Uniform.hxx>
+#include <Marine_ModelMaker_Shape.hxx>
 #include <Marine_FlatWave.hxx>
 #include <LegModel_DispNo1.hxx>
 #include <Cad_FastDiscrete.hxx>
@@ -74,6 +76,21 @@ Standard_Integer main()
 	Debug_Null_Pointer(water);
 
 	water->ExportToPlt(myFile);
+
+	auto distb = std::make_shared<Marine_SectionDistribution_Uniform>();
+	Debug_Null_Pointer(distb);
+
+	distb->SetLower(box.P0().X());
+	distb->SetUpper(box.P1().X());
+	distb->SetNbSections(10);
+	distb->Perform();
+
+	auto maker = std::make_shared<Marine_ModelMaker_Shape>();
+	Debug_Null_Pointer(maker);
+
+	maker->LoadShape(myShape);
+	maker->LoadDistributor(distb);
+	maker->Perform();
 
 	PAUSE;
 	return 0;

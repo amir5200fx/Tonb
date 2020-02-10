@@ -4,11 +4,13 @@
 
 #include <Marine_Entity.hxx>
 
+#include <TopoDS_Shape.hxx>
+
 namespace tnbLib
 {
 
 	// Forward Declarations
-	class Cad3d_TModel;
+	class Marine_SectionDistribution;
 
 	class Marine_Model
 		: public Marine_Entity
@@ -16,7 +18,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Cad3d_TModel> theModel_;
+		TopoDS_Shape theModel_;
 
 	protected:
 
@@ -26,12 +28,18 @@ namespace tnbLib
 
 		Marine_Model(const Standard_Integer theIndex, const word& theName);
 
+		auto& ChangeModel()
+		{
+			return theModel_;
+		}
+
 	public:
 
 		const auto& Model() const
 		{
 			return theModel_;
 		}
+
 	};
 }
 

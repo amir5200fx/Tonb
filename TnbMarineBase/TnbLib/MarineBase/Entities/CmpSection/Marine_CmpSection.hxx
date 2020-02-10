@@ -32,19 +32,6 @@ namespace tnbLib
 
 	protected:
 
-		Marine_CmpSection();
-
-		Marine_CmpSection
-		(
-			const Standard_Integer theIndex
-		);
-
-		Marine_CmpSection
-		(
-			const Standard_Integer theIndex, 
-			const word& theName
-		);
-
 		auto& ChangeSections()
 		{
 			return theSections_;
@@ -59,6 +46,19 @@ namespace tnbLib
 		}
 
 	public:
+
+		Marine_CmpSection();
+
+		Marine_CmpSection
+		(
+			const Standard_Integer theIndex
+		);
+
+		Marine_CmpSection
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		);
 
 		auto NbSections() const
 		{

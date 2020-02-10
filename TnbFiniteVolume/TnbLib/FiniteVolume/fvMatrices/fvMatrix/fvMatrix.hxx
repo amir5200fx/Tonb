@@ -10,19 +10,11 @@
 #include <dimensionedTypes.hxx>
 #include <zeroField.hxx>
 #include <className.hxx>
-#include <volFieldsFwd.hxx>
-
-//#include <GeometricField.hxx>
-//#include <fvPatchField.hxx>
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
 {
 
 	// Forward declaration of friend functions and operators
-	template<class Type, class GeoMesh>
-	class DimensionedField;
 
 	template<class Type>
 	class fvMatrix;
@@ -1012,7 +1004,7 @@ namespace tnbLib
 #endif
 
 // Specialisation for scalars
-#include <fvScalarMatrix.hxx>
+//#include <fvScalarMatrix.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

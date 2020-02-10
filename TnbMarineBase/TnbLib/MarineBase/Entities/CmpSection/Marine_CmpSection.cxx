@@ -10,6 +10,27 @@
 
 #include <map>
 
+tnbLib::Marine_CmpSection::Marine_CmpSection()
+{
+}
+
+tnbLib::Marine_CmpSection::Marine_CmpSection
+(
+	const Standard_Integer theIndex
+)
+	: Marine_Entity(theIndex)
+{
+}
+
+tnbLib::Marine_CmpSection::Marine_CmpSection
+(
+	const Standard_Integer theIndex,
+	const word & theName
+)
+	: Marine_Entity(theIndex, theName)
+{
+}
+
 namespace tnbLib
 {
 
