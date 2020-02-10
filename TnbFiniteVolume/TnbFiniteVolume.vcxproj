@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchField.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchFields.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\calculated\calculatedFvPatchField.hxx" />
@@ -228,6 +229,8 @@
     <ClInclude Include="TnbLib\FiniteVolume\volMesh\volMesh.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystemOperations.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchField.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchFields.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchScalarField.cxx" />

@@ -681,6 +681,9 @@
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled\coupledFvPatchVectorNFieldsFwd.hxx">
       <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.hxx">
+      <Filter>TnbLib\FiniteVolume\blockLduSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.cxx">
@@ -913,6 +916,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled\coupledFvPatchVectorNFields.cxx">
       <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.cxx">
+      <Filter>TnbLib\FiniteVolume\blockLduSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystemOperations.cxx">
+      <Filter>TnbLib\FiniteVolume\blockLduSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
