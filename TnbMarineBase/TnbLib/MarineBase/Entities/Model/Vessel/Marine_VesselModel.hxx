@@ -5,12 +5,13 @@
 #include <Marine_Model.hxx>
 
 #include <vector>
+#include <map>
 
 namespace tnbLib
 {
 
 	// Forward Declarations
-
+	class Marine_CmpSection;
 
 	class Marine_VesselModel
 		: public Marine_Model
@@ -18,7 +19,25 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		std::map<Standard_Integer, std::shared_ptr<Marine_CmpSection>>
+			theSections_;
+
 	public:
+
+
+		Standard_Integer NbSections() const;
+
+		const auto& Sections() const
+		{
+			return theSections_;
+		}
+
+		std::vector<std::shared_ptr<Marine_CmpSection>>
+			SortedSections() const;
+
+		void ImportSection(const Standard_Integer theIndex, const std::shared_ptr<Marine_CmpSection>& theSection);
+
+		void RemoveSection(const Standard_Integer theIndex);
 
 
 	};

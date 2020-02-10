@@ -78,6 +78,24 @@ namespace tnbLib
 				const Pln_Wire& theWire
 			);
 
+		static Entity2d_Box
+			RetrieveBoundingBox
+			(
+				const Pln_Wire& theWire
+			);
+
+		static Entity2d_Box
+			RetrieveBoundingBox
+			(
+				const Pln_CmpEdge& theEdge
+			);
+
+		static Entity2d_Box
+			RetrieveBoundingBox
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+			);
+
 		static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
 			(
@@ -128,7 +146,11 @@ namespace tnbLib
 				const Standard_Integer theNy
 			);
 
-		static Entity2d_Box BoundingBox(const Bnd_Box2d& theBox);
+		static Entity2d_Box 
+			BoundingBox
+			(
+				const Bnd_Box2d& theBox
+			);
 
 		//- an exception will be thrown if the curve is not bounded
 		static Bnd_Box2d
@@ -155,10 +177,10 @@ namespace tnbLib
 				Handle(Geom2d_Curve)& theC1
 			);
 
-		static std::vector<Pln_Wire>
+		static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
 			(
-				const std::vector<Handle(Geom2d_Curve)>& theEdges, 
+				const std::vector<Handle(Geom2d_Curve)>& theCurves, 
 				const Standard_Real theMinTol, 
 				const Standard_Real theMaxTol
 			);
@@ -169,7 +191,17 @@ namespace tnbLib
 				const std::shared_ptr<Pln_Vertex>& theVtx
 			);
 
-		static void SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge);
+		static void 
+			SameSense
+			(
+				const std::shared_ptr<Pln_CmpEdge>& theEdge
+			);
+
+		static std::shared_ptr<Pln_Wire>
+			RetrieveOuterWire
+			(
+				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+			);
 	};
 }
 

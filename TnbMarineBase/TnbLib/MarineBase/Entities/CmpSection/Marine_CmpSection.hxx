@@ -6,12 +6,19 @@
 
 #include <vector>
 
+#include <Standard_Handle.hxx>
+
+class TopoDS_Edge;
+class TopoDS_Shape;
+class Geom2d_Curve;
+
 namespace tnbLib
 {
 
 	// Forward Declarations
 	class MarineBase_Tools;
 	class Marine_Section;
+	class Pln_Curve;
 
 	class Marine_CmpSection
 		: public Marine_Entity
@@ -38,6 +45,11 @@ namespace tnbLib
 			const word& theName
 		);
 
+		auto& ChangeSections()
+		{
+			return theSections_;
+		}
+
 		void Insert
 		(
 			const std::shared_ptr<Marine_Section>& theSection
@@ -58,7 +70,27 @@ namespace tnbLib
 			return theSections_;
 		}
 
+		static std::shared_ptr<Marine_CmpSection>
+			CreateCmpSection
+			(
+				const TopoDS_Shape& theEdges,
+				const gp_Ax2& theSystem,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
 
+		static std::vector<Handle(Geom2d_Curve)>
+			RetrieveParaCurves
+			(
+				const std::vector<TopoDS_Edge>& theEdges,
+				const gp_Ax2& theSystem
+			);
+
+		static std::vector<TopoDS_Edge>
+			RetrieveEdges
+			(
+				const TopoDS_Shape& theEdges
+			);
 	};
 }
 

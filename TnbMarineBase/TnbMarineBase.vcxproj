@@ -24,6 +24,8 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Entity\Marine_Entity.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Marine_Model.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Vessel\Marine_VesselModel.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\SectionDistribution\Marine_SectionDistribution.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform\Marine_SectionDistribution_Uniform.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Section\Marine_Section.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Environment\Density\Air\EnvPropt_AirDensity.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Environment\Density\EnvPropt_Density.hxx" />
@@ -34,6 +36,8 @@
     <ClInclude Include="TnbLib\MarineBase\Environment\Viscosity\Air\EnvPropt_AirViscosity.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Environment\Viscosity\EnvPropt_Viscosity.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Environment\Viscosity\Water\EnvPropt_WaterViscosity.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\ModelMaker\Marine_ModelMaker.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\ModelMaker\Shape\Marine_ModelMaker_Shape.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Origin\Marine_Origin.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Tools\MarineBase_Tools.hxx" />
     <ClInclude Include="TnbLib\MarineBase\UnitSystem\Marine_UnitSystem.hxx" />
@@ -44,7 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\CmpSection\Marine_CmpSection.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Vessel\Marine_VesselModel.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\SectionDistribution\Marine_SectionDistribution.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform\Marine_SectionDistribution_Uniform.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Section\Marine_Section.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Environment\Density\Air\EnvPropt_AirDensity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Environment\Density\EnvPropt_Density.cxx" />
@@ -55,6 +62,7 @@
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Air\EnvPropt_AirViscosity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\EnvPropt_Viscosity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Water\EnvPropt_WaterViscosity.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\ModelMaker\Shape\Marine_ModelMaker_Shape.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Origin\Marine_Origin.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Tools\MarineBase_Tools.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.cxx" />
@@ -124,7 +132,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MarineBase\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Model;$(ProjectDir)TnbLib\MarineBase\Tools;$(ProjectDir)TnbLib\MarineBase\Environment\Velocity;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity;$(ProjectDir)TnbLib\MarineBase\Environment\Gravity;$(ProjectDir)TnbLib\MarineBase\Environment\Froude;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Density;$(ProjectDir)TnbLib\MarineBase\Wave\Irregular;$(ProjectDir)TnbLib\MarineBase\Wave\FifthOrder;$(ProjectDir)TnbLib\MarineBase\Wave\FirstOrder;$(ProjectDir)TnbLib\MarineBase\Wave\Flat;$(ProjectDir)TnbLib\MarineBase\Wave;$(ProjectDir)TnbLib\MarineBase\Origin;$(ProjectDir)TnbLib\MarineBase\UnitSystem;$(ProjectDir)TnbLib\MarineBase\DimensionedParam;$(ProjectDir)TnbLib\MarineBase\Entities\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Entities\Model;$(ProjectDir)TnbLib\MarineBase\Entities\CmpSection;$(ProjectDir)TnbLib\MarineBase\Entities\Section;$(ProjectDir)TnbLib\MarineBase\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MarineBase\ModelMaker\Shape;$(ProjectDir)TnbLib\MarineBase\ModelMaker;$(ProjectDir)TnbLib\MarineBase\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Model;$(ProjectDir)TnbLib\MarineBase\Tools;$(ProjectDir)TnbLib\MarineBase\Environment\Velocity;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity;$(ProjectDir)TnbLib\MarineBase\Environment\Gravity;$(ProjectDir)TnbLib\MarineBase\Environment\Froude;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Density;$(ProjectDir)TnbLib\MarineBase\Wave\Irregular;$(ProjectDir)TnbLib\MarineBase\Wave\FifthOrder;$(ProjectDir)TnbLib\MarineBase\Wave\FirstOrder;$(ProjectDir)TnbLib\MarineBase\Wave\Flat;$(ProjectDir)TnbLib\MarineBase\Wave;$(ProjectDir)TnbLib\MarineBase\Origin;$(ProjectDir)TnbLib\MarineBase\UnitSystem;$(ProjectDir)TnbLib\MarineBase\DimensionedParam;$(ProjectDir)TnbLib\MarineBase\Entities\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Entities\Model;$(ProjectDir)TnbLib\MarineBase\Entities\CmpSection;$(ProjectDir)TnbLib\MarineBase\Entities\SectionDistribution\Uniform;$(ProjectDir)TnbLib\MarineBase\Entities\SectionDistribution;$(ProjectDir)TnbLib\MarineBase\Entities\Section;$(ProjectDir)TnbLib\MarineBase\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -172,7 +180,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MarineBase\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Model;$(ProjectDir)TnbLib\MarineBase\Tools;$(ProjectDir)TnbLib\MarineBase\Environment\Velocity;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity;$(ProjectDir)TnbLib\MarineBase\Environment\Gravity;$(ProjectDir)TnbLib\MarineBase\Environment\Froude;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Density;$(ProjectDir)TnbLib\MarineBase\Wave\Irregular;$(ProjectDir)TnbLib\MarineBase\Wave\FifthOrder;$(ProjectDir)TnbLib\MarineBase\Wave\FirstOrder;$(ProjectDir)TnbLib\MarineBase\Wave\Flat;$(ProjectDir)TnbLib\MarineBase\Wave;$(ProjectDir)TnbLib\MarineBase\Origin;$(ProjectDir)TnbLib\MarineBase\UnitSystem;$(ProjectDir)TnbLib\MarineBase\DimensionedParam;$(ProjectDir)TnbLib\MarineBase\Entities\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Entities\Model;$(ProjectDir)TnbLib\MarineBase\Entities\CmpSection;$(ProjectDir)TnbLib\MarineBase\Entities\Section;$(ProjectDir)TnbLib\MarineBase\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MarineBase\ModelMaker\Shape;$(ProjectDir)TnbLib\MarineBase\ModelMaker;$(ProjectDir)TnbLib\MarineBase\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Model;$(ProjectDir)TnbLib\MarineBase\Tools;$(ProjectDir)TnbLib\MarineBase\Environment\Velocity;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Viscosity;$(ProjectDir)TnbLib\MarineBase\Environment\Gravity;$(ProjectDir)TnbLib\MarineBase\Environment\Froude;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Air;$(ProjectDir)TnbLib\MarineBase\Environment\Density\Water;$(ProjectDir)TnbLib\MarineBase\Environment\Density;$(ProjectDir)TnbLib\MarineBase\Wave\Irregular;$(ProjectDir)TnbLib\MarineBase\Wave\FifthOrder;$(ProjectDir)TnbLib\MarineBase\Wave\FirstOrder;$(ProjectDir)TnbLib\MarineBase\Wave\Flat;$(ProjectDir)TnbLib\MarineBase\Wave;$(ProjectDir)TnbLib\MarineBase\Origin;$(ProjectDir)TnbLib\MarineBase\UnitSystem;$(ProjectDir)TnbLib\MarineBase\DimensionedParam;$(ProjectDir)TnbLib\MarineBase\Entities\Model\Vessel;$(ProjectDir)TnbLib\MarineBase\Entities\Model;$(ProjectDir)TnbLib\MarineBase\Entities\CmpSection;$(ProjectDir)TnbLib\MarineBase\Entities\SectionDistribution\Uniform;$(ProjectDir)TnbLib\MarineBase\Entities\SectionDistribution;$(ProjectDir)TnbLib\MarineBase\Entities\Section;$(ProjectDir)TnbLib\MarineBase\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
