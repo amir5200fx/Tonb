@@ -91,6 +91,18 @@
     <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel">
       <UniqueIdentifier>{9a570755-3a2b-4d1c-8edf-405817877cee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\SectionDistribution">
+      <UniqueIdentifier>{6bde198b-1703-441b-90ff-1fa116318894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform">
+      <UniqueIdentifier>{7ae89498-0d0b-4df1-94ab-eb3692d53ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\ModelMaker">
+      <UniqueIdentifier>{82464829-280b-4a7f-9943-8b3d9a311f12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\ModelMaker\Shape">
+      <UniqueIdentifier>{d77047bb-f1f1-4251-aa90-9030139dd302}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -159,6 +171,18 @@
     <ClInclude Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave_CharType.hxx">
       <Filter>TnbLib\MarineBase\Wave\FirstOrder</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\SectionDistribution\Marine_SectionDistribution.hxx">
+      <Filter>TnbLib\MarineBase\Entities\SectionDistribution</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform\Marine_SectionDistribution_Uniform.hxx">
+      <Filter>TnbLib\MarineBase\Entities\SectionDistribution\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\ModelMaker\Marine_ModelMaker.hxx">
+      <Filter>TnbLib\MarineBase\ModelMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\ModelMaker\Shape\Marine_ModelMaker_Shape.hxx">
+      <Filter>TnbLib\MarineBase\ModelMaker\Shape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -211,6 +235,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.cxx">
       <Filter>TnbLib\MarineBase\Wave\FirstOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\SectionDistribution\Marine_SectionDistribution.cxx">
+      <Filter>TnbLib\MarineBase\Entities\SectionDistribution</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform\Marine_SectionDistribution_Uniform.cxx">
+      <Filter>TnbLib\MarineBase\Entities\SectionDistribution\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\ModelMaker\Shape\Marine_ModelMaker_Shape.cxx">
+      <Filter>TnbLib\MarineBase\ModelMaker\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CmpSection\Marine_CmpSection.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CmpSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Model\Marine_Model.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

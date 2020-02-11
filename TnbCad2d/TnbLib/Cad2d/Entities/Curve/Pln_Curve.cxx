@@ -54,6 +54,17 @@ tnbLib::Pln_Curve::Pln_Curve
 
 tnbLib::Pln_Curve::Pln_Curve
 (
+	const Standard_Integer theIndex,
+	const Handle(Geom2d_Curve)& theGeom
+)
+	: Pln_Entity(theIndex)
+	, theGeometry_(theGeom)
+{
+	plnCurveLib::CheckBounded(theGeom, "Pln_Curve()");
+}
+
+tnbLib::Pln_Curve::Pln_Curve
+(
 	const Standard_Integer theIndex, 
 	const word & theName, 
 	const Handle(Geom2d_Curve)& theGeom

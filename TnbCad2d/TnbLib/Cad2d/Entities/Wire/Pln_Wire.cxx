@@ -162,6 +162,26 @@ tnbLib::Pln_Wire::RetrieveCurves() const
 	return std::move(curves);
 }
 
+void tnbLib::Pln_Wire::ApplyOrientation
+(
+	const Pln_Orientation theOrient
+)
+{
+	if (theOrient IS_EQUAL Pln_Orientation::Pln_Orientation_Unknown)
+	{
+		FatalErrorIn("void tnbLib::Pln_Wire::ApplyOrientation()")
+			<< "Invalid orientation set" << endl
+			<< abort(FatalError);
+	}
+
+	if (theOrient IS_EQUAL Orientation())
+	{
+		return;
+	}
+
+	Reverse();
+}
+
 void tnbLib::Pln_Wire::Reverse()
 {
 	if (Orientation() IS_EQUAL Pln_Orientation_Unknown)

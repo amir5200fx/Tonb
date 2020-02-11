@@ -134,11 +134,20 @@ namespace tnbLib
 
 		//- static functions
 
-		static Standard_Boolean IsLess
-		(
-			const std::shared_ptr<Pln_Edge>& theEdge0, 
-			const std::shared_ptr<Pln_Edge>& theEdge1
-		);
+		static Standard_Boolean
+			IsLess
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge0,
+				const std::shared_ptr<Pln_Edge>& theEdge1
+			);
+
+		static Standard_Boolean 
+			IsConnected
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge0, 
+				const std::shared_ptr<Pln_Edge>& theEdge1,
+				std::shared_ptr<Pln_Vertex>& theVtx
+			);
 
 	};
 }

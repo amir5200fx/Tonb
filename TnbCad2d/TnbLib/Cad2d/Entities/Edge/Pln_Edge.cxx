@@ -85,8 +85,50 @@ void tnbLib::Pln_Edge::Reverse
 	std::swap(theVtx0_, theVtx1_);
 	if (ApplyToMesh)
 	{
-		Mesh()->Reverse();
+		if (Mesh())
+		{
+			Mesh()->Reverse();
+		}
 	}
 
 	ChangeSense() = NOT Sense();
+}
+
+Standard_Boolean 
+tnbLib::Pln_Edge::IsConnected
+(
+	const std::shared_ptr<Pln_Edge>& theEdge0,
+	const std::shared_ptr<Pln_Edge>& theEdge1,
+	std::shared_ptr<Pln_Vertex>& theVtx
+)
+{
+	const auto& v0 = theEdge0->Vtx0();
+	const auto& v1 = theEdge0->Vtx1();
+
+	const auto& q0 = theEdge1->Vtx0();
+	const auto& q1 = theEdge1->Vtx1();
+
+	if (v0 IS_EQUAL q0)
+	{
+		theVtx = v0;
+		return Standard_True;
+	}
+	else if (v0 IS_EQUAL q1)
+	{
+		theVtx = v0;
+		return Standard_True;
+	}
+	else if (v1 IS_EQUAL q0)
+	{
+		theVtx = v1;
+		return Standard_True;
+	}
+	else if (v1 IS_EQUAL q1)
+	{
+		theVtx = v1;
+		return Standard_True;
+	}
+
+	theVtx = nullptr;
+	return Standard_False;
 }

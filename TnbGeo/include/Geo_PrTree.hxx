@@ -35,13 +35,13 @@ namespace tnbLib
 		Geo_Octant_Bwd_NE
 	};
 
-	inline Geo_Quadrant CalcQuadrant
+	Geo_Quadrant CalcQuadrant
 	(
 		const Pnt2d& theCoord,
 		const Pnt2d& theCentre
 	);
 
-	inline Geo_Octant CalcOctant
+	Geo_Octant CalcOctant
 	(
 		const Pnt3d& theCoord,
 		const Pnt3d& theCentre
@@ -1180,12 +1180,18 @@ namespace tnbLib
 
 		void RemoveFromGeometry(const T& theItem)
 		{
-			Remove(theItem, theRoot_);
+			if (Size())
+			{
+				Remove(theItem, theRoot_);
+			}
 		}
 
 		void RetrieveFromGeometryTo(std::list<T>& theItems) const
 		{
-			RetrieveTo(theRoot_, theItems);
+			if (Size())
+			{
+				RetrieveTo(theRoot_, theItems);
+			}
 		}
 
 		void RetrieveFromGeometryTo
@@ -1193,7 +1199,10 @@ namespace tnbLib
 			std::vector<T>& theItems
 		) const
 		{
-			RetrieveTo(theRoot_, theItems);
+			if (Size())
+			{
+				RetrieveTo(theRoot_, theItems);
+			}
 		}
 
 		void GeometrySearch
@@ -1203,12 +1212,15 @@ namespace tnbLib
 			std::list<T>& theList
 		) const
 		{
-			Search
-			(
-				Entity_Box<Point>::Box(theCentre, theRadius),
-				theRoot_,
-				theList
-			);
+			if (Size())
+			{
+				Search
+				(
+					Entity_Box<Point>::Box(theCentre, theRadius),
+					theRoot_,
+					theList
+				);
+			}
 		}
 
 		void GeometrySearch
@@ -1218,12 +1230,15 @@ namespace tnbLib
 			std::vector<T>& theList
 		) const
 		{
-			Search
-			(
-				Entity_Box<Point>::Box(theCentre, theRadius),
-				theRoot_,
-				theList
-			);
+			if (Size())
+			{
+				Search
+				(
+					Entity_Box<Point>::Box(theCentre, theRadius),
+					theRoot_,
+					theList
+				);
+			}
 		}
 
 		void GeometrySearch
@@ -1232,12 +1247,15 @@ namespace tnbLib
 			std::list<T>& theList
 		) const
 		{
-			Search
-			(
-				theRegion,
-				theRoot_,
-				theList
-			);
+			if (Size())
+			{
+				Search
+				(
+					theRegion,
+					theRoot_,
+					theList
+				);
+			}
 		}
 
 		void GeometrySearch
@@ -1246,17 +1264,23 @@ namespace tnbLib
 			std::vector<T>& theList
 		) const
 		{
-			Search
-			(
-				theRegion,
-				theRoot_,
-				theList
-			);
+			if (Size())
+			{
+				Search
+				(
+					theRegion,
+					theRoot_,
+					theList
+				);
+			}
 		}
 
 		void Clear()
 		{
-			Clear(theRoot_);
+			if (Size())
+			{
+				Clear(theRoot_);
+			}
 		}
 
 	};

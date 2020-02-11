@@ -62,6 +62,14 @@ namespace tnbLib
 			return theInner_;
 		}
 
+
+		//- static functions
+
+		static Standard_Real 
+			GetXcoord
+			(
+				const std::shared_ptr<Marine_Section>& theSection
+			);
 	};
 }
 

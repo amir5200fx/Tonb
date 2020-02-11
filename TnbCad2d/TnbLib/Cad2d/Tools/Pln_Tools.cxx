@@ -11,6 +11,7 @@
 #include <Pln_Wire.hxx>
 #include <Pln_CmpEdge.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Geo_ApprxCurve_Info.hxx>
 
 #include <Bnd_Box2d.hxx>
 #include <BndLib_Add2dCurve.hxx>
@@ -221,6 +222,61 @@ tnbLib::Pln_Tools::MakeWire
 	Debug_Null_Pointer(wire);
 
 	return std::move(wire);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Pln_Tools::RetrieveBoundingBox
+(
+	const Pln_Wire & theWire
+)
+{
+	if (NOT theWire.CmpEdge())
+	{
+		FatalErrorIn("Entity2d_Box Pln_Tools::RetrieveBoundingBox(const Pln_Wire & theWire)")
+			<< "Invalid Wire: not has any cmpEdge" << endl
+			<< abort(FatalError);
+	}
+	auto box = RetrieveBoundingBox(*theWire.CmpEdge());
+	return std::move(box);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Pln_Tools::RetrieveBoundingBox
+(
+	const Pln_CmpEdge & theEdge
+)
+{
+	auto box = RetrieveBoundingBox(theEdge.Edges());
+	return std::move(box);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Pln_Tools::RetrieveBoundingBox
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	if (theEdges.empty())
+	{
+		FatalErrorIn("Entity2d_Box Pln_Tools::RetrieveBoundingBox(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges)")
+			<< "empty list" << endl
+			<< abort(FatalError);
+	}
+	auto iter = theEdges.begin();
+
+	Debug_Null_Pointer((*iter)->Curve());
+	auto box = (*iter)->Curve()->CalcBoundingBox();
+
+	iter++;
+
+	while (iter NOT_EQUAL theEdges.end())
+	{
+		Debug_Null_Pointer((*iter)->Curve());
+		box = Entity2d_Box::Union(box, (*iter)->Curve()->CalcBoundingBox());
+
+		iter++;
+	}
+	return std::move(box);
 }
 
 //std::shared_ptr<tnbLib::Pln_Edge> 
@@ -511,6 +567,12 @@ namespace tnbLib
 			Vertex(const Standard_Integer theIndex, const Pnt2d& theCoord)
 				: Index(theIndex), Coord(theCoord)
 			{}
+
+			static const Pnt2d& GetCoord(const std::shared_ptr<Vertex>& theVtx)
+			{
+				Debug_Null_Pointer(theVtx);
+				return theVtx->Coord;
+			}
 		};
 
 		struct Edge
@@ -520,6 +582,8 @@ namespace tnbLib
 
 			std::shared_ptr<Vertex> Vtx0;
 			std::shared_ptr<Vertex> Vtx1;
+
+			Handle(Geom2d_Curve) Curve;
 
 			Edge
 			(
@@ -563,6 +627,8 @@ namespace tnbLib
 				auto edge = std::make_shared<Edge>(++nbEdges, vtx0, vtx1);
 				Debug_Null_Pointer(edge);
 
+				edge->Curve = x;
+
 				edges.push_back(std::move(edge));
 			}
 			return std::move(edges);
@@ -593,17 +659,32 @@ namespace tnbLib
 			const Standard_Real theMaxTol
 		)
 		{
+
 			auto unMergedVertices = 
 				RetrieveUnMergedVerticesFromEdges(theEdges);
 
-			Geo_PrTree<std::shared_ptr<Vertex>> search;
+			std::vector<Pnt2d> pts;
+			pts.reserve(unMergedVertices.size());
+
 			for (const auto& x : unMergedVertices)
 			{
 				Debug_Null_Pointer(x);
-				
+				pts.push_back(x->Coord);
+			}
+
+			auto domain = Entity2d_Box::BoundingBoxOf(pts);
+
+			Geo_PrTree<std::shared_ptr<Vertex>> search;
+			search.SetGeometryCoordFunc(&Vertex::GetCoord);
+			search.SetGeometryRegion(domain.OffSet(1.0E-3*domain.Diameter()));
+
+			for (const auto& x : unMergedVertices)
+			{
+				Debug_Null_Pointer(x);
+
 				std::vector<std::shared_ptr<Vertex>> candidates;
 				search.GeometrySearch
-				(Entity2d_Box::BoundingBoxOf(x->Coord - theMaxTol, x->Coord + theMaxTol), 
+				(Entity2d_Box::BoundingBoxOf(x->Coord - theMaxTol, x->Coord + theMaxTol),
 					candidates);
 
 				if (candidates.empty())
@@ -691,7 +772,7 @@ namespace tnbLib
 			Standard_Integer nbVertices = 0;
 
 			auto iter = pairdVertices.begin();
-			while (NOT pairdVertices.empty())
+			while (iter NOT_EQUAL pairdVertices.end())
 			{
 				const auto& x = iter->second;
 
@@ -736,6 +817,13 @@ namespace tnbLib
 			std::vector<std::shared_ptr<Pln_Edge>> edges;
 			edges.reserve(theEdges.size());
 
+			auto apxInfo = std::make_shared<Geo_ApprxCurve_Info>();
+			Debug_Null_Pointer(apxInfo);
+
+			apxInfo->SetAngle(2.0);
+			apxInfo->SetMinSize(1.0E-3);
+			apxInfo->SetNbSamples(3);
+
 			Standard_Integer nbEdges = 0;
 			for (const auto& x : theEdges)
 			{
@@ -755,6 +843,8 @@ namespace tnbLib
 					auto edge = std::make_shared<Pln_Ring>(++nbEdges, vtx0);
 					Debug_Null_Pointer(edge);
 
+					edge->SetCurve(std::make_shared<Pln_Curve>(nbEdges, x->Curve));
+					edge->Approx(apxInfo);
 					vtx0->InsertToEdges(edge->Index(), edge);
 
 					edges.push_back(std::move(edge));
@@ -767,6 +857,8 @@ namespace tnbLib
 					vtx0->InsertToEdges(edge->Index(), edge);
 					vtx1->InsertToEdges(edge->Index(), edge);
 
+					edge->SetCurve(std::make_shared<Pln_Curve>(nbEdges, x->Curve));
+					edge->Approx(apxInfo);
 					edges.push_back(std::move(edge));
 				}	
 			}
@@ -776,7 +868,8 @@ namespace tnbLib
 		static std::pair<std::shared_ptr<Pln_Vertex>, std::shared_ptr<Pln_Edge>>
 			Next
 			(
-				const std::shared_ptr<Pln_Vertex>& theVtx
+				const std::shared_ptr<Pln_Vertex>& theVtx,
+				const std::shared_ptr<Pln_Edge>& thePrior
 			)
 		{
 			if (theVtx->IsRingPoint())
@@ -796,24 +889,43 @@ namespace tnbLib
 			std::vector<std::weak_ptr<Pln_Edge>> wEdges;
 			theVtx->RetrieveEdgesTo(wEdges);
 
-			auto e0 = wEdges[0].lock();
-			Debug_Null_Pointer(e0);
-
-			if (e0->Vtx0() NOT_EQUAL theVtx)
+			std::shared_ptr<Pln_Edge> edge;
+			if (thePrior)
 			{
-				auto pair = std::make_pair(e0->Vtx0(), e0);
+				auto e0 = wEdges[0].lock();
+				auto e1 = wEdges[1].lock();
+
+				if (e0 NOT_EQUAL thePrior)
+				{
+					edge = e0;
+				}
+				else
+				{
+					edge = e1;
+				}
+			}
+			else
+			{
+				edge = wEdges[0].lock();
+			}
+
+			Debug_Null_Pointer(edge);
+
+			if (edge->Vtx0() NOT_EQUAL theVtx)
+			{
+				auto pair = std::make_pair(edge->Vtx0(), edge);
 				return std::move(pair);
 			}
-			else if (e0->Vtx1() NOT_EQUAL theVtx)
+			else if (edge->Vtx1() NOT_EQUAL theVtx)
 			{
-				auto pair = std::make_pair(e0->Vtx1(), e0);
+				auto pair = std::make_pair(edge->Vtx1(), edge);
 				return std::move(pair);
 			}
 
 			FatalErrorIn(FunctionSIG)
 				<< "Invalid Data" << endl
 				<< abort(FatalError);
-			auto pair = std::make_pair(e0->Vtx0(), e0);
+			auto pair = std::make_pair(edge->Vtx0(), edge);
 			return pair;
 		}
 
@@ -824,13 +936,13 @@ namespace tnbLib
 			)
 		{
 			std::vector<std::shared_ptr<Pln_Edge>> edges;
-			
-			auto next = Next(theVtx);
+
+			auto next = Next(theVtx, nullptr);
 			edges.push_back(next.second);
 
 			while (next.first NOT_EQUAL theVtx)
 			{
-				next = Next(next.first);
+				next = Next(next.first, edges[edges.size() - 1]);
 				edges.push_back(next.second);
 			}
 			return std::move(edges);
@@ -838,63 +950,202 @@ namespace tnbLib
 	}
 }
 
-//std::vector<tnbLib::Pln_Wire> 
-//tnbLib::Pln_Tools::RetrieveWires
-//(
-//	const std::vector<Handle(Geom2d_Curve)>& theCurves,
-//	const Standard_Real theMinTol, 
-//	const Standard_Real theMaxTol
-//)
-//{
-//	std::map<Standard_Integer, Handle(Geom2d_Curve)>
-//		curveMap;
-//
-//	Standard_Integer K = 0;
-//	for (const auto& x : theCurves)
-//	{
-//		Debug_Null_Pointer(x);
-//		curveMap.insert(std::make_pair(++K, x));
-//	}
-//
-//	
-//	for (const auto& x : theCurves)
-//	{
-//		Debug_Null_Pointer(x);
-//
-//	}
-//}
+std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
+tnbLib::Pln_Tools::RetrieveWires
+(
+	const std::vector<Handle(Geom2d_Curve)>& theCurves,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto segments = retrieveWires::RetrieveUnMergedEdges(theCurves);
+	auto unMergedVertices = retrieveWires::RetrieveUnMergedVerticesFromEdges(segments);
 
-//std::shared_ptr<tnbLib::Pln_Wire> 
-//tnbLib::Pln_Tools::RetrieveWire
-//(
-//	const std::shared_ptr<Pln_Vertex>& theVtx
-//)
-//{
-//	if (theVtx->IsRingPoint())
-//	{
-//		auto cmpEdge = std::make_shared<Pln_CmpEdge>();
-//		Debug_Null_Pointer(cmpEdge);
-//
-//		std::vector<std::weak_ptr<Pln_Edge>> wEdges;
-//		theVtx->RetrieveEdgesTo(wEdges);
-//
-//		cmpEdge->Insert(wEdges[0].lock());
-//
-//		auto wire = std::make_shared<Pln_Wire>(cmpEdge);
-//		Debug_Null_Pointer(wire);
-//
-//		return std::move(wire);
-//	}
-//
-//	auto cmpEdge = std::make_shared<Pln_CmpEdge>();
-//	Debug_Null_Pointer(cmpEdge);
-//
-//	cmpEdge->ChangeEdges() = retrieveWires::TrackWire(theVtx);
-//
-//	SameSense(cmpEdge);
-//
-//	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
-//	Debug_Null_Pointer(wire);
-//
-//	return std::move(wire);
-//}
+	retrieveWires::MergeVertices(segments, theMinTol, theMaxTol);
+
+	auto mergedVerticesMap = retrieveWires::RetrieveMergedVertices(segments);
+
+	auto edges = retrieveWires::RetrieveEdges(segments, mergedVerticesMap);
+
+	Adt_AvlTree<std::shared_ptr<Pln_Vertex>>
+		vertexMap;
+	vertexMap.SetComparableFunction(&Pln_Vertex::IsLess);
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		vertexMap.InsertIgnoreDup(x->Vtx0());
+		vertexMap.InsertIgnoreDup(x->Vtx1());
+	}
+
+	std::vector<std::shared_ptr<tnbLib::Pln_Wire>> wires;
+	while (NOT vertexMap.IsEmpty())
+	{
+		std::shared_ptr<Pln_Vertex> root;
+		vertexMap.Root(root);
+
+		auto wire = RetrieveWire(root);
+		Debug_Null_Pointer(wire);
+
+		for (const auto& x : wire->RetrieveVertices())
+		{
+			Debug_Null_Pointer(x);
+			vertexMap.Remove(x);
+		}
+
+		wires.push_back(wire);
+	}
+	return std::move(wires);
+}
+
+std::shared_ptr<tnbLib::Pln_Wire> 
+tnbLib::Pln_Tools::RetrieveWire
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx
+)
+{
+	if (theVtx->IsRingPoint())
+	{
+		auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+		Debug_Null_Pointer(cmpEdge);
+
+		std::vector<std::weak_ptr<Pln_Edge>> wEdges;
+		theVtx->RetrieveEdgesTo(wEdges);
+
+		cmpEdge->Insert(wEdges[0].lock());
+
+		auto wire = std::make_shared<Pln_Wire>(cmpEdge);
+		Debug_Null_Pointer(wire);
+
+		return std::move(wire);
+	}
+
+	auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+	Debug_Null_Pointer(cmpEdge);
+
+	cmpEdge->ChangeEdges() = retrieveWires::TrackWire(theVtx);
+
+	SameSense(cmpEdge);
+
+	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
+	Debug_Null_Pointer(wire);
+
+	for (const auto& x : cmpEdge->Edges())
+	{
+		Debug_Null_Pointer(x);
+		x->SetWire(wire);
+	}
+
+	return std::move(wire);
+}
+
+void tnbLib::Pln_Tools::SameSense
+(
+	const std::shared_ptr<Pln_CmpEdge>& theEdge
+)
+{
+	const auto& edges = theEdge->Edges();
+
+	if (edges.size() < 2)
+	{
+		return;
+	}
+
+	auto iter = edges.begin();
+	auto edge0 = (*iter);
+
+	iter++;
+
+	while (iter NOT_EQUAL edges.end())
+	{
+		auto edge1 = (*iter);
+
+		std::shared_ptr<Pln_Vertex> vtx;
+		if (NOT Pln_Edge::IsConnected(edge0, edge1, vtx))
+		{
+			FatalErrorIn("void tnbLib::Pln_Tools::SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge)")
+				<< "Invalid CmpEdge: the two edges are not connected!" << endl
+				<< abort(FatalError);
+		}
+
+		auto indx0 = edge0->GetIndex(vtx);
+		auto indx1 = edge1->GetIndex(vtx);
+
+		if (indx0 NOT_EQUAL 1)
+		{
+			edge0->Reverse(Standard_True);
+		}
+
+		if (indx1 NOT_EQUAL 0)
+		{
+			edge1->Reverse(Standard_True);
+		}
+
+		if (edge0->Vtx1() NOT_EQUAL edge1->Vtx0())
+		{
+			FatalErrorIn("void tnbLib::Pln_Tools::SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge)")
+				<< "Invalid CmpEdge: the two edges are not consecutive" << endl
+				<< abort(FatalError);
+		}
+
+		iter++;
+
+		edge0 = edge1;
+	}
+}
+
+std::shared_ptr<tnbLib::Pln_Wire> 
+tnbLib::Pln_Tools::RetrieveOuterWire
+(
+	const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+)
+{
+	if (theWires.empty())
+	{
+		return nullptr;
+	}
+
+	if (theWires.size() IS_EQUAL 1)
+	{
+		return theWires[0];
+	}
+
+	auto iter = theWires.begin();
+	auto outer = (*iter);
+	Debug_Null_Pointer(outer);
+
+	iter++;
+
+	Debug_Null_Pointer(outer->BoundingBox());
+	auto maxBox = *outer->BoundingBox();
+
+	while (iter NOT_EQUAL theWires.end())
+	{
+		auto wire = (*iter);
+		Debug_Null_Pointer(wire);
+
+		Debug_Null_Pointer(wire->BoundingBox());
+		auto box = *wire->BoundingBox();
+
+		if (Entity2d_Box::IsInside(maxBox, box))
+		{
+			maxBox = box;
+			outer = wire;
+		}
+
+		iter++;
+	}
+
+	for (const auto& x : theWires)
+	{
+		if(x IS_EQUAL outer)
+			continue;
+
+		Debug_Null_Pointer(x);
+		if (NOT Entity2d_Box::IsInside(*x->BoundingBox(), maxBox))
+		{
+			return nullptr;
+		}
+	}
+
+	return std::move(outer);
+}

@@ -47,6 +47,12 @@ namespace tnbLib
 
 		Pln_Curve
 		(
+			const Standard_Integer theIndex,
+			const Handle(Geom2d_Curve)& theGeom
+		);
+
+		Pln_Curve
+		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 

@@ -388,6 +388,45 @@
     <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\sliced">
       <UniqueIdentifier>{d5febd9a-51f0-49b4-a259-dd103e859620}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\cyclic">
+      <UniqueIdentifier>{3771d629-b3c9-4cfb-86d3-65e22347a683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\cyclicGgi">
+      <UniqueIdentifier>{d4a2af6c-5d89-422a-a424-f7f8ea8508e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty">
+      <UniqueIdentifier>{dd517d37-846b-4933-bdb9-1b433859f866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\ggi">
+      <UniqueIdentifier>{3c0b6a59-7ba2-44da-a53b-e3abe3d605c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpCyclic">
+      <UniqueIdentifier>{f5688d1f-c97f-4cde-87e9-679fbb3924f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpGgi">
+      <UniqueIdentifier>{7ccb11e2-7084-4870-9011-11204e753ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\jumpMixingPlane">
+      <UniqueIdentifier>{34dbbeab-0961-4596-8bfe-acb65c788a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\mixingPlane">
+      <UniqueIdentifier>{7fd90344-3805-42db-bfe6-7002f2409e0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\overlapGgi">
+      <UniqueIdentifier>{dcb1f12f-8ab0-4610-9cb2-4b38b4cfc833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\processor">
+      <UniqueIdentifier>{89fa6895-8aac-43c3-81ee-58fccc680f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\regionCoupling">
+      <UniqueIdentifier>{d6f138fb-f6c2-4297-ae57-1ec1c43bf58d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\symmetry">
+      <UniqueIdentifier>{459176da-70cd-4daf-ae5c-3e9e20eb0518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\wedge">
+      <UniqueIdentifier>{aff80afe-118a-40fa-9a1a-ea16743a2ac2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.hxx">
@@ -681,6 +720,27 @@
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled\coupledFvPatchVectorNFieldsFwd.hxx">
       <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.hxx">
+      <Filter>TnbLib\FiniteVolume\blockLduSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMatrices\fvBlockMatrix\fvBlockMatrix.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMatrices\fvBlockMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchField.hxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchFields.hxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchFieldsFwd.hxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchVectorNFields.hxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchVectorNFieldsFwd.hxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.cxx">
@@ -913,6 +973,33 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled\coupledFvPatchVectorNFields.cxx">
       <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\basic\coupled</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.cxx">
+      <Filter>TnbLib\FiniteVolume\blockLduSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystemOperations.cxx">
+      <Filter>TnbLib\FiniteVolume\blockLduSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolations.cxx">
+      <Filter>TnbLib\FiniteVolume\interpolation\interpolation\interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\newInterpolation.cxx">
+      <Filter>TnbLib\FiniteVolume\interpolation\interpolation\interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMatrices\fvBlockMatrix\fvBlockMatrix.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMatrices\fvBlockMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMatrices\fvBlockMatrix\fvBlockMatrixOperations.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMatrices\fvBlockMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchField.cxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchFields.cxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchVectorNFields.cxx">
+      <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

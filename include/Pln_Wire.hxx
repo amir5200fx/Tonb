@@ -84,6 +84,8 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Pln_Curve>>
 			RetrieveCurves() const;
 
+		void ApplyOrientation(const Pln_Orientation theOrient);
+
 		void Reverse();
 
 		void RetrieveVerticesTo
