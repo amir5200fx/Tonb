@@ -18,12 +18,19 @@
 #include <Poly_Triangulation.hxx>
 #include <Bnd_Box.hxx>
 
+#include <Tnb_Examples.hxx>
+
 #include <armadillo.h>
 
 using namespace tnbLib;
 
 Standard_Integer main()
 {
+
+	example_creating_plane_box();
+
+	PAUSE;
+	return 0;
 
 	fileName name("out.plt");
 	OFstream myFile(name);

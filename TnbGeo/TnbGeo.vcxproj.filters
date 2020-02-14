@@ -875,5 +875,8 @@
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationIO.cxx">
       <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools.cxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -57,6 +57,8 @@ namespace tnbLib
 			: Pln_Entity(theIndex, theName)
 		{}
 
+		Standard_Boolean IsValidForWire(const Standard_Real theTol) const;
+
 		Standard_Integer NbEdges() const
 		{
 			return (Standard_Integer)theEdges_.size();
@@ -70,6 +72,9 @@ namespace tnbLib
 		void Reverse();
 
 		void ExportToPlt(OFstream& File) const;
+
+		static std::shared_ptr<Pln_Wire>
+			MakeWire(const std::shared_ptr<Pln_CmpEdge>& theEdge, const Standard_Real theTol);
 	};
 }
 

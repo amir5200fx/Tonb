@@ -5,14 +5,23 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{86b69038-5688-4c4c-a556-fc9f8e28cf47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\example_creating_plane_box.cxx">
+      <Filter>Examples</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Examples\Tnb_Examples.hxx">
+      <Filter>Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Tonb.rc" />

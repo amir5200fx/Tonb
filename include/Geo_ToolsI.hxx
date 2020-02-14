@@ -154,6 +154,30 @@ tnbLib::Geo_Tools::IsPointInsideTriangle_cgal
 }
 
 inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPointInsideTriangleCW_cgal
+(
+	const Pnt2d & Point, 
+	const Pnt2d & P0,
+	const Pnt2d & P1, 
+	const Pnt2d & P2
+)
+{
+	if (IsPointLeftEdge_cgal(Point, P0, P1))
+	{
+		return Standard_False;
+	}
+	else if (IsPointLeftEdge_cgal(Point, P1, P2))
+	{
+		return Standard_False;
+	}
+	else if (IsPointLeftEdge_cgal(Point, P2, P0))
+	{
+		return Standard_False;
+	}
+	return Standard_True;
+}
+
+inline Standard_Boolean 
 tnbLib::Geo_Tools::IsPairedTwoSegments
 (
 	const Standard_Integer v1, 

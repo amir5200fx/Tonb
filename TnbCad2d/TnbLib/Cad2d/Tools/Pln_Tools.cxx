@@ -140,13 +140,14 @@ tnbLib::Pln_Tools::MakeWire
 	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
 	vertices.reserve(theCurves.size());
 
-	auto p0 = theCurves[theCurves.size() - 2]->LastCoord();
+	auto p0 = theCurves[theCurves.size() - 1]->LastCoord();
 	auto p1 = theCurves[0]->FirstCoord();
 
 	if (p0.Distance(p1) > theMaxTol)
 	{
 		FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
 			<< "the curves are not formed a wire; max tolerance = " << theMaxTol << endl
+			<< " Distane = " << p0.Distance(p1) << endl
 			<< abort(FatalError);
 	}
 
@@ -218,8 +219,28 @@ tnbLib::Pln_Tools::MakeWire
 	auto cmpEdge = MakeCompoundEdge(edges);
 	Debug_Null_Pointer(cmpEdge);
 
+	auto box = RetrieveBoundingBox(*cmpEdge);
+
+	auto info = std::make_shared<Geo_ApprxCurve_Info>();
+	Debug_Null_Pointer(info);
+
+	info->SetAngle(2.0);
+	info->SetApprox(1.0E-4*box.Diameter());
+
+	for (const auto& x : cmpEdge->Edges())
+	{
+		Debug_Null_Pointer(x);
+		x->Approx(info);
+	}
+
 	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
 	Debug_Null_Pointer(wire);
+
+	/*for (const auto& x : cmpEdge->Edges())
+	{
+		Debug_Null_Pointer(x);
+		x->ClearMesh();
+	}*/
 
 	return std::move(wire);
 }

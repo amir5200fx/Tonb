@@ -132,6 +132,11 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual Standard_Boolean IsTangential() const
+		{
+			return Standard_False;
+		}
+
 		//- static functions
 
 		static Standard_Boolean

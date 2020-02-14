@@ -38,6 +38,13 @@ namespace tnbLib
 				const Handle(Geom2d_Curve)& theCurve
 			);
 
+		static Standard_Real 
+			Length
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const Standard_Real theTol = 1.0E-8
+			);
+
 		static Standard_Real
 			Distance
 			(
@@ -202,6 +209,16 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
 			);
+
+		static std::shared_ptr<Pln_Edge>
+			ForwardEdge(const std::shared_ptr<Pln_Vertex>& theVtx);
+
+		static std::shared_ptr<Pln_Edge>
+			BackwardEdge(const std::shared_ptr<Pln_Vertex>& theVtx);
+
+		static std::shared_ptr<Pln_Vertex>
+			MergeTwoVertex(const std::shared_ptr<Pln_Vertex>& theVtx0, const std::shared_ptr<Pln_Vertex>& theVtx1, const Standard_Real theTol);
+
 	};
 }
 

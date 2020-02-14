@@ -1,5 +1,6 @@
 #include <Cad2d_Plane.hxx>
 
+#include <Geo_Tools.hxx>
 #include <Cad_BlockEntity.hxx>
 #include <Cad_EntityManager.hxx>
 #include <Pln_Curve.hxx>
@@ -107,7 +108,7 @@ void tnbLib::Cad2d_Plane::CheckOuter
 			<< abort(FatalError);
 	}
 
-	if (theOuter->Orientation() IS_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+	if (theOuter->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
 	{
 		FatalErrorIn(theName) << endl
 			<< "Wrong orientation of the outer wire!" << endl
@@ -128,7 +129,7 @@ void tnbLib::Cad2d_Plane::CheckInner
 			<< abort(FatalError);
 	}
 
-	if (theInner->Orientation() IS_EQUAL Pln_Orientation::Pln_Orientation_CW)
+	if (theInner->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CW)
 	{
 		FatalErrorIn(theName) << endl
 			<< "Wrong orientation of the outer wire!" << endl
@@ -152,22 +153,18 @@ void tnbLib::Cad2d_Plane::CheckInners
 
 tnbLib::Cad2d_Plane::Cad2d_Plane
 (
-	const std::shared_ptr<info>& theInfo, 
 	const gp_Ax2 & theSystem
 )
-	: theInfo_(theInfo)
-	, theSystem_(theSystem)
+	: theSystem_(theSystem)
 {
 }
 
 tnbLib::Cad2d_Plane::Cad2d_Plane
 (
 	const Standard_Integer theIndex, 
-	const std::shared_ptr<info>& theInfo, 
 	const gp_Ax2 & theSystem
 )
 	: Pln_Entity(theIndex)
-	, theInfo_(theInfo)
 	, theSystem_(theSystem)
 {
 }
@@ -176,11 +173,9 @@ tnbLib::Cad2d_Plane::Cad2d_Plane
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
-	const std::shared_ptr<info>& theInfo, 
 	const gp_Ax2 & theSystem
 )
 	: Pln_Entity(theIndex, theName)
-	, theInfo_(theInfo)
 	, theSystem_(theSystem)
 {
 }
@@ -194,6 +189,44 @@ tnbLib::Cad2d_Plane::NbHoles() const
 	return (Standard_Integer)theInner_->size();
 }
 
+void tnbLib::Cad2d_Plane::Approx
+(
+	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
+) const
+{
+	auto edges = Segments()->RetrieveEntities();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		x->Approx(theInfo);
+	}
+}
+
+std::shared_ptr<tnbLib::Entity2d_Chain> 
+tnbLib::Cad2d_Plane::Polygon() const
+{
+	std::vector<std::shared_ptr<Entity2d_Polygon>> poly;
+
+	auto edges = Segments()->RetrieveEntities();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		
+		if (x->Mesh())
+		{
+			poly.push_back(x->Mesh());
+		}
+	}
+
+	if (edges.empty())
+	{
+		return nullptr;
+	}
+
+	auto chain = Geo_Tools::RetrieveChain(poly);
+	return std::move(chain);
+}
+
 //- Static functions
 
 std::shared_ptr<tnbLib::Cad2d_Plane> 
@@ -201,11 +234,10 @@ tnbLib::Cad2d_Plane::MakePlane
 (
 	const std::shared_ptr<Pln_Wire>& theOuter, 
 	const std::shared_ptr<std::vector<std::shared_ptr<Pln_Wire>>>& theInners, 
-	const std::shared_ptr<Cad2d_Plane_Info>& thePlnInfo, 
 	const gp_Ax2 & theSystem
 )
 {
-	auto plane = std::make_shared<Cad2d_Plane>(thePlnInfo, theSystem);
+	auto plane = std::make_shared<Cad2d_Plane>(theSystem);
 	Debug_Null_Pointer(plane);
 
 	plane->Make(theOuter, theInners);
@@ -219,7 +251,6 @@ tnbLib::Cad2d_Plane::MakeBox
 	const Pnt2d & theCorner,
 	const Standard_Real theDx, 
 	const Standard_Real theDy,
-	const std::shared_ptr<Cad2d_Plane_Info>& thePlnInfo, 
 	const gp_Ax2 & theSystem
 )
 {
@@ -227,7 +258,7 @@ tnbLib::Cad2d_Plane::MakeBox
 		MakeBox
 		(
 			theCorner, theCorner + Pnt2d(theDx, theDy), 
-			thePlnInfo, theSystem
+			theSystem
 		);
 	Debug_Null_Pointer(plane);
 
@@ -239,7 +270,6 @@ tnbLib::Cad2d_Plane::MakeBox
 (
 	const Pnt2d & theP0, 
 	const Pnt2d & theP1, 
-	const std::shared_ptr<Cad2d_Plane_Info>& thePlnInfo,
 	const gp_Ax2& theSystem
 )
 {
@@ -280,10 +310,10 @@ tnbLib::Cad2d_Plane::MakeBox
 	curves.push_back(std::move(c3));
 	curves.push_back(std::move(c4));
 
-	auto wire = Pln_Tools::MakeWire(curves, thePlnInfo->Tolerance());
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
 	Debug_Null_Pointer(wire);
 
-	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, thePlnInfo, theSystem);
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
 	Debug_Null_Pointer(plane);
 
 	return std::move(plane);

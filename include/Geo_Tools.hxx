@@ -4,8 +4,11 @@
 
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
+#include <Entity2d_PolygonFwd.hxx>
+#include <Entity2d_ChainFwd.hxx>
 
 #include <vector>
+#include <memory>
 
 namespace tnbLib
 {
@@ -142,6 +145,14 @@ namespace tnbLib
 			const Pnt2d& P2
 		);
 
+		static Standard_Boolean IsPointInsideTriangleCW_cgal
+		(
+			const Pnt2d& Point,
+			const Pnt2d& P0,
+			const Pnt2d& P1,
+			const Pnt2d& P2
+		);
+
 		static Standard_Boolean HasIntersection_cgal
 		(
 			const Pnt2d& theQ0,
@@ -194,7 +205,17 @@ namespace tnbLib
 			const std::vector<Pnt2d>& thePts
 		);
 
+		static std::shared_ptr<Entity2d_Chain>
+			RetrieveChain
+			(
+				const Entity2d_Polygon& thePoly
+			);
 
+		static std::shared_ptr<Entity2d_Chain>
+			RetrieveChain
+			(
+				const std::vector<std::shared_ptr<Entity2d_Polygon>>& thePoly
+			);
 	};
 }
 

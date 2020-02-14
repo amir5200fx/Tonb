@@ -58,7 +58,15 @@ namespace tnbLib
 			return theMesh_;
 		}
 
-		void Approx(const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo) const;
+		void Approx
+		(
+			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
+		) const;
+
+		void ClearMesh()
+		{
+			Mesh().reset();
+		}
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(std::shared_ptr<Pln_Curve>, Curve)

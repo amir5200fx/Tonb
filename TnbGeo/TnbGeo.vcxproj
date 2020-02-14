@@ -268,6 +268,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Point\3d\Pnt3dIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Search\PrTree\Geo_PrTree.cxx" />
     <ClCompile Include="TnbLib\Geo\System\TnbGeo_System.cxx" />
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools_cgal.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

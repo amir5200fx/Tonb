@@ -5,6 +5,7 @@
 #include <Global_AccessMethod.hxx>
 #include <Pln_Entity.hxx>
 #include <Entity2d_Box.hxx>
+#include <Entity2d_ChainFwd.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -27,7 +28,7 @@ namespace tnbLib
 	class Pln_Curve;
 	class Pln_Vertex;
 
-	class Cad2d_Plane_Info;
+	class Geo_ApprxCurve_Info;
 
 	class Cad2d_Plane_Manager
 	{
@@ -79,17 +80,12 @@ namespace tnbLib
 		typedef std::shared_ptr<Pln_Wire> outer;
 		typedef std::shared_ptr<wireList> inner;
 
-		typedef Cad2d_Plane_Info info;
-
 		/*Private Data*/	
 
 		outer theOuter_;
 		inner theInner_;
 
 		Entity2d_Box theBoundingBox_;
-
-		std::shared_ptr<info> theInfo_;
-
 
 		gp_Ax2 theSystem_;
 
@@ -111,14 +107,12 @@ namespace tnbLib
 
 		Cad2d_Plane
 		(
-			const std::shared_ptr<info>& theInfo,
 			const gp_Ax2& theSystem = gp::XOY()
 		);
 
 		Cad2d_Plane
 		(
 			const Standard_Integer theIndex,
-			const std::shared_ptr<info>& theInfo,
 			const gp_Ax2& theSystem = gp::XOY()
 		);
 
@@ -126,7 +120,6 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const std::shared_ptr<info>& theInfo,
 			const gp_Ax2& theSystem = gp::XOY()
 		);
 
@@ -144,10 +137,8 @@ namespace tnbLib
 
 		Standard_Boolean HasFreeCorner() const;
 
-		const std::shared_ptr<info>& Info() const
-		{
-			return theInfo_;
-		}
+		std::shared_ptr<Entity2d_Chain>
+			Polygon() const;
 
 		const outer& OuterWire() const
 		{
@@ -159,13 +150,7 @@ namespace tnbLib
 			return theInner_;
 		}
 
-		void OverrideInfo
-		(
-			const std::shared_ptr<info>& theInfo
-		)
-		{
-			theInfo_ = theInfo;
-		}
+		void Approx(const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo) const;
 
 		void ExportToPlt(OFstream& File) const;
 
@@ -176,9 +161,12 @@ namespace tnbLib
 			(
 				const std::shared_ptr<Pln_Wire>& theOuter,
 				const std::shared_ptr<std::vector<std::shared_ptr<Pln_Wire>>>& theInners,
-				const std::shared_ptr<Cad2d_Plane_Info>& thePlnInfo,
 				const gp_Ax2& theSystem = gp::XOY()
 			);
+
+		static std::shared_ptr<Cad2d_Plane>
+			MakePlane
+			(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges, const gp_Ax2& theSystem = gp::XOY());
 
 		static void SplitByWires
 		(
@@ -208,7 +196,6 @@ namespace tnbLib
 				const Pnt2d& theCorner, 
 				const Standard_Real theDx, 
 				const Standard_Real theDy,
-				const std::shared_ptr<Cad2d_Plane_Info>& thePlnInfo,
 				const gp_Ax2& theSystem = gp::XOY()
 			);
 
@@ -217,7 +204,6 @@ namespace tnbLib
 			(
 				const Pnt2d& theP0, 
 				const Pnt2d& theP1,
-				const std::shared_ptr<Cad2d_Plane_Info>& thePlnInfo,
 				const gp_Ax2& theSystem = gp::XOY()
 			);
 
