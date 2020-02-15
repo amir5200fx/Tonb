@@ -46,6 +46,18 @@
     <Filter Include="TnbLib\NumAlg\System">
       <UniqueIdentifier>{a0b38760-7931-4325-9b99-32c14687cfad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\GaussQuadrature">
+      <UniqueIdentifier>{24ad6643-3c96-4f9b-a6a3-4be162c2347c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\GaussQuadrature\Core">
+      <UniqueIdentifier>{77663ebb-6a28-40c8-99e7-1eafcd529374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\GaussQuadrature\Nodes">
+      <UniqueIdentifier>{233dd335-0723-4777-89cd-7a6b0b1eff23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights">
+      <UniqueIdentifier>{35035ce9-94ad-44a3-b0f1-09457fcb075f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
@@ -81,6 +93,21 @@
     <ClInclude Include="TnbLib\NumAlg\System\NumAlg_System.hxx">
       <Filter>TnbLib\NumAlg\System</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights\NumAlg_GaussQuadrature_Weights.hxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature\Weights</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\Nodes\NumAlg_GaussQuadrature_Nodes.hxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\Core\NumAlg_GaussQuadrature_Core.hxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadrature.hxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadratureI.hxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">
@@ -97,6 +124,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\NumAlg\System\NumAlg_Random_System.cxx">
       <Filter>TnbLib\NumAlg\Random\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights\NumAlg_GaussQuadrature_Weights.cxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature\Weights</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\Nodes\NumAlg_GaussQuadrature_Nodes.cxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadrature.cxx">
+      <Filter>TnbLib\NumAlg\Integration\GaussQuadrature</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

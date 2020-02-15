@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton\Info;$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Core;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Info;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive;$(ProjectDir)\TnbLib\NumAlg\Integration\Boundary;$(ProjectDir)\TnbLib\NumAlg\Integration\Function;$(ProjectDir)\TnbLib\NumAlg\Random\System;$(ProjectDir)\TnbLib\NumAlg\Random;$(ProjectDir)\TnbLib\NumAlg\System;$(SolutionDir)\TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton\Info;$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Core;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Info;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature\Nodes;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature\Weights;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature\Core;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature;$(ProjectDir)\TnbLib\NumAlg\Integration\Boundary;$(ProjectDir)\TnbLib\NumAlg\Integration\Function;$(ProjectDir)\TnbLib\NumAlg\Random\System;$(ProjectDir)\TnbLib\NumAlg\Random;$(ProjectDir)\TnbLib\NumAlg\System;$(SolutionDir)\TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -129,7 +129,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton\Info;$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Core;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Info;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive;$(ProjectDir)\TnbLib\NumAlg\Integration\Boundary;$(ProjectDir)\TnbLib\NumAlg\Integration\Function;$(ProjectDir)\TnbLib\NumAlg\Random\System;$(ProjectDir)\TnbLib\NumAlg\Random;$(ProjectDir)\TnbLib\NumAlg\System;$(SolutionDir)\TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton\Info;$(ProjectDir)\TnbLib\NumAlg\NonLinearSolver\Newton;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Core;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive\Info;$(ProjectDir)\TnbLib\NumAlg\Integration\Adaptive;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature\Nodes;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature\Weights;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature\Core;$(ProjectDir)\TnbLib\NumAlg\Integration\GaussQuadrature;$(ProjectDir)\TnbLib\NumAlg\Integration\Boundary;$(ProjectDir)\TnbLib\NumAlg\Integration\Function;$(ProjectDir)\TnbLib\NumAlg\Random\System;$(ProjectDir)\TnbLib\NumAlg\Random;$(ProjectDir)\TnbLib\NumAlg\System;$(SolutionDir)\TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -146,6 +146,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\NumAlg\Integration\Adaptive\NumAlg_AdaptiveInteg.hxx" />
     <ClInclude Include="TnbLib\NumAlg\Integration\Boundary\NumAlg_IntegBond.hxx" />
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx" />
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\Core\NumAlg_GaussQuadrature_Core.hxx" />
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\Nodes\NumAlg_GaussQuadrature_Nodes.hxx" />
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadrature.hxx" />
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadratureI.hxx" />
+    <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights\NumAlg_GaussQuadrature_Weights.hxx" />
     <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\Info\NumAlg_NewtonSolver_Info.hxx" />
     <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\NumAlg_NewtonSolver.hxx" />
     <ClInclude Include="TnbLib\NumAlg\Random\NumAlg_Random.hxx" />
@@ -156,6 +161,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\NumAlg\Integration\Adaptive\Core\NumAlg_AdaptiveInteg_Core.cxx" />
     <ClCompile Include="TnbLib\NumAlg\Integration\Adaptive\Info\NumAlg_AdaptiveInteg_Info.cxx" />
     <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx" />
+    <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\Nodes\NumAlg_GaussQuadrature_Nodes.cxx" />
+    <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadrature.cxx" />
+    <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights\NumAlg_GaussQuadrature_Weights.cxx" />
     <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\Newton\Info\NumAlg_NewtonSolver_Info.cxx" />
     <ClCompile Include="TnbLib\NumAlg\System\NumAlg_Random_System.cxx" />
   </ItemGroup>

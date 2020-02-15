@@ -82,7 +82,7 @@ void tnbLib::Cad2d_Plane::Make
 	auto edges = RetrieveEdges(theOuter, theInners);
 
 	auto vertices = Pln_Tools::RetrieveVertices(edges);
-
+	
 	auto edgeBlock = 
 		std::make_shared<Cad_BlockEntity<Pln_Edge>>("Default Block Edge", edges);
 	Debug_Null_Pointer(edgeBlock);
@@ -116,7 +116,7 @@ void tnbLib::Cad2d_Plane::CheckOuter
 	if (theOuter->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
 	{
 		FatalErrorIn(theName) << endl
-			<< "Wrong orientation of the outer wire!" << endl
+			<< "Wrong orientation of the outer wire!" << " orientation code = " << theOuter->Orientation() << endl
 			<< abort(FatalError);
 	}
 }

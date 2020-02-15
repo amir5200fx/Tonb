@@ -1295,6 +1295,11 @@ tnbLib::Pln_Tools::RetrieveOuterWire
 
 	if (theWires.size() IS_EQUAL 1)
 	{
+		if (theWires[0]->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+		{
+			theWires[0]->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+		}
+
 		return theWires[0];
 	}
 
@@ -1336,6 +1341,10 @@ tnbLib::Pln_Tools::RetrieveOuterWire
 		}
 	}
 
+	if (outer->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+	{
+		outer->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+	}
 	return std::move(outer);
 }
 

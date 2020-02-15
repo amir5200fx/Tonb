@@ -250,6 +250,18 @@
     <Filter Include="TnbLib\Cad2d\Subdivide\Tangential">
       <UniqueIdentifier>{68ce7153-f377-44a3-bc2a-456ddca149f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Integration">
+      <UniqueIdentifier>{292eb0ff-931a-41a2-ac9d-781760fdd864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Integration\Area">
+      <UniqueIdentifier>{5913092a-3b6d-4f8a-b4d5-04837ae6ac6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Integration\Curve">
+      <UniqueIdentifier>{4e1db927-66e5-40f5-901a-14b5dfaab62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Computation">
+      <UniqueIdentifier>{dd7291d9-7909-4b52-af19-8779426ebf83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -474,6 +486,15 @@
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.hxx">
       <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Integration\Area\Cad2d_Area.hxx">
+      <Filter>TnbLib\Cad2d\Integration\Area</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Integration\Curve\Cad2d_AreaUnderCurve.hxx">
+      <Filter>TnbLib\Cad2d\Integration\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Computation\Cad2d_CmptLib.hxx">
+      <Filter>TnbLib\Cad2d\Computation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -604,6 +625,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.cxx">
       <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Integration\Area\Cad2d_Area.cxx">
+      <Filter>TnbLib\Cad2d\Integration\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Computation\Cad2d_CmptLib.cxx">
+      <Filter>TnbLib\Cad2d\Computation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

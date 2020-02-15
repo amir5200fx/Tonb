@@ -14,9 +14,15 @@
 #include <Cad_FastDiscrete.hxx>
 #include <FastDiscrete_System.hxx>
 #include <FastDiscrete_Params.hxx>
+#include <Cad2d_CmptLib.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <Pln_Tools.hxx>
 
 #include <Poly_Triangulation.hxx>
 #include <Bnd_Box.hxx>
+#include <Geom2d_Circle.hxx>
+#include <gp_Circ2d.hxx>
+#include <gp_Ax2d.hxx>
 
 #include <Tnb_Examples.hxx>
 
@@ -27,8 +33,15 @@ using namespace tnbLib;
 Standard_Integer main()
 {
 
-	example_union_plane_box();
+	//example_union_plane_box();
 
+	gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
+	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));
+
+	auto inf = std::make_shared<NumAlg_AdaptiveInteg_Info>();
+
+	std::cout << Cad2d_CmptLib::AreaUnderCurve(Pln_Tools::ConvertToTrimmedCurve(c, c->FirstParameter(), c->LastParameter()), 1, inf) << std::endl;
+	std::cout << Cad2d_CmptLib::Centre(Pln_Tools::ConvertToTrimmedCurve(c, c->FirstParameter(), c->LastParameter()), inf) << std::endl;
 	PAUSE;
 	return 0;
 
@@ -46,7 +59,7 @@ Standard_Integer main()
 
 	myFile << d << endl;*/
 
-	auto ship = std::make_shared<LegModel_DispNo1>();
+	/*auto ship = std::make_shared<LegModel_DispNo1>();
 	Debug_Null_Pointer(ship);
 
 	ship->Perform();
@@ -100,5 +113,5 @@ Standard_Integer main()
 	maker->Perform();
 
 	PAUSE;
-	return 0;
+	return 0;*/
 }
