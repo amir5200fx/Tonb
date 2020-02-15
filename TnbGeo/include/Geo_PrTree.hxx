@@ -853,6 +853,23 @@ namespace tnbLib
 		template<class U = void>
 		resolvedType
 			<
+			is_two_dimension<(int)Point::dim>::value, U
+			>
+			SwitchToRetrieveTo
+			(
+				internalNode* Internal,
+				std::vector<T>& theItems
+			) const
+		{
+			if (Internal->Sw()) RetrieveTo(Internal->Sw(), theItems);
+			if (Internal->Se()) RetrieveTo(Internal->Se(), theItems);
+			if (Internal->Ne()) RetrieveTo(Internal->Ne(), theItems);
+			if (Internal->Nw()) RetrieveTo(Internal->Nw(), theItems);
+		}
+
+		template<class U = void>
+		resolvedType
+			<
 			is_three_dimension<(int)Point::dim>::value, U
 			>
 			SwitchToRetrieveTo
@@ -872,7 +889,47 @@ namespace tnbLib
 			if (Internal->FwdNw()) RetrieveTo(Internal->FwdNw(), theItems);
 		}
 
+		template<class U = void>
+		resolvedType
+			<
+			is_three_dimension<(int)Point::dim>::value, U
+			>
+			SwitchToRetrieveTo
+			(
+				internalNode* Internal,
+				std::vector<T>& theItems
+			) const
+		{
+			if (Internal->BwdSw()) RetrieveTo(Internal->BwdSw(), theItems);
+			if (Internal->BwdSe()) RetrieveTo(Internal->BwdSe(), theItems);
+			if (Internal->BwdNe()) RetrieveTo(Internal->BwdNe(), theItems);
+			if (Internal->BwdNw()) RetrieveTo(Internal->BwdNw(), theItems);
+
+			if (Internal->FwdSw()) RetrieveTo(Internal->FwdSw(), theItems);
+			if (Internal->FwdSe()) RetrieveTo(Internal->FwdSe(), theItems);
+			if (Internal->FwdNe()) RetrieveTo(Internal->FwdNe(), theItems);
+			if (Internal->FwdNw()) RetrieveTo(Internal->FwdNw(), theItems);
+		}
+
 		void RetrieveTo(node* t, std::list<T>& theItems) const
+		{
+			leafNode* leaf = dynamic_cast<leafNode*>(t);
+
+			if (leaf)
+			{
+				for (const auto& item : *leaf)
+					theItems.push_back(item);
+			}
+			else
+			{
+				internalNode* Internal =
+					dynamic_cast<internalNode*>(t);
+
+				SwitchToRetrieveTo(Internal, theItems);
+			}
+		}
+
+		void RetrieveTo(node* t, std::vector<T>& theItems) const
 		{
 			leafNode* leaf = dynamic_cast<leafNode*>(t);
 

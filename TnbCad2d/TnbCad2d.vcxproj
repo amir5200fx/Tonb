@@ -88,6 +88,7 @@
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Entity\Cad2d_SubEntity.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Vertex\Adaptor\Cad2d_SubEntity_VertexAdaptor.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Vertex\Cad2d_SubEntity_Vertex.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.hxx" />
     <ClInclude Include="TnbLib\Cad2d\System\TnbCad2d_System.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Tools\Pln_CurveTools.hxx" />
@@ -131,6 +132,7 @@
     <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Cad2d_GeoSketch_Interpolation.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\LineSegment\Cad2d_GeoSketch_LineSegment.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Cad2d_Subdivide.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.cxx" />
     <ClCompile Include="TnbLib\Cad2d\System\TnbCad2d_System.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx" />

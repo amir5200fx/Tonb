@@ -26,6 +26,7 @@ namespace tnbLib
 	class Pln_Wire;
 	class Pln_Curve;
 	class Pln_Vertex;
+	class NumAlg_AdaptiveInteg_Info;
 
 	class Pln_Tools
 	{
@@ -38,11 +39,12 @@ namespace tnbLib
 				const Handle(Geom2d_Curve)& theCurve
 			);
 
+		//- WARNING! check the convergence by info parameter
 		static Standard_Real 
 			Length
 			(
 				const Handle(Geom2d_Curve)& theCurve,
-				const Standard_Real theTol = 1.0E-8
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
 		static Standard_Real
@@ -76,6 +78,14 @@ namespace tnbLib
 			MakeWire
 			(
 				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<Pln_Wire>
+			MakeWire
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const std::vector<Standard_Boolean>& theSense,
 				const Standard_Real theMaxTol
 			);
 
@@ -192,6 +202,14 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
+		/*static std::vector<std::shared_ptr<Pln_Wire>>
+			RetrieveWires
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);*/
+
 		static std::shared_ptr<Pln_Wire>
 			RetrieveWire
 			(
@@ -211,10 +229,16 @@ namespace tnbLib
 			);
 
 		static std::shared_ptr<Pln_Edge>
-			ForwardEdge(const std::shared_ptr<Pln_Vertex>& theVtx);
+			ForwardEdge
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx
+			);
 
 		static std::shared_ptr<Pln_Edge>
-			BackwardEdge(const std::shared_ptr<Pln_Vertex>& theVtx);
+			BackwardEdge
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx
+			);
 
 		static std::shared_ptr<Pln_Vertex>
 			MergeTwoVertex(const std::shared_ptr<Pln_Vertex>& theVtx0, const std::shared_ptr<Pln_Vertex>& theVtx1, const Standard_Real theTol);

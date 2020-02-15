@@ -4,6 +4,7 @@
 
 #include <Pln_Entity.hxx>
 #include <Pln_Orientation.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <OFstream.hxx>
 
@@ -17,6 +18,7 @@ namespace tnbLib
 	class Pln_Curve;
 	class Pln_Vertex;
 	class Pln_CmpEdge;
+	class Geo_ApprxCurve_Info;
 
 	class Pln_Wire
 		: public Pln_Entity
@@ -61,6 +63,12 @@ namespace tnbLib
 
 		Standard_Integer NbEdges() const;
 
+		std::tuple<Standard_Real, Standard_Real> 
+			BoundTolerance() const;
+
+		std::shared_ptr<Entity2d_Polygon>
+			Polygon() const;
+
 		const std::vector<std::shared_ptr<Pln_Edge>>& Edges() const;
 
 		const std::shared_ptr<Pln_CmpEdge>& CmpEdge() const
@@ -84,6 +92,9 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Pln_Curve>>
 			RetrieveCurves() const;
 
+		std::shared_ptr<Pln_Wire>
+			Copy() const;
+
 		void ApplyOrientation(const Pln_Orientation theOrient);
 
 		void Reverse();
@@ -98,10 +109,14 @@ namespace tnbLib
 			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 		) const;
 
+		void Approx
+		(
+			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
+		) const;
+
 		void ExportToPlt(OFstream& File) const;
 
 		//- Static functions and operators
-
 
 		/*static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires

@@ -128,6 +128,13 @@ tnbLib::Pln_Curve::CalcBoundingBox() const
 	return std::move(box);
 }
 
+std::shared_ptr<tnbLib::Pln_Curve> 
+tnbLib::Pln_Curve::Copy() const
+{
+	auto copy = std::make_shared<Pln_Curve>(Index(), Name(), Geometry());
+	return std::move(copy);
+}
+
 void tnbLib::Pln_Curve::Interpolation
 (
 	const std::vector<Pnt2d>& theQ, 

@@ -17,8 +17,6 @@ namespace tnbLib
 
 	public:
 
-		Pln_TangEdge();
-
 		Pln_TangEdge
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx0,

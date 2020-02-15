@@ -23,6 +23,13 @@ Standard_Boolean tnbLib::Pln_Vertex::IsManifold() const
 	return Standard_False;
 }
 
+std::shared_ptr<tnbLib::Pln_Vertex> 
+tnbLib::Pln_Vertex::Copy() const
+{
+	auto copy = std::make_shared<Pln_Vertex>(Index(), Name(), Coord());
+	return std::move(copy);
+}
+
 void tnbLib::Pln_Vertex::RetrieveEdgesTo
 (
 	std::vector<std::weak_ptr<Pln_Edge>>& theEdges

@@ -137,8 +137,14 @@ namespace tnbLib
 
 		Standard_Boolean HasFreeCorner() const;
 
+		std::tuple<Standard_Real, Standard_Real> 
+			BoundTolerance() const;
+
 		std::shared_ptr<Entity2d_Chain>
 			Polygon() const;
+
+		std::shared_ptr<Entity2d_Chain>
+			MergedPolygon() const;
 
 		const outer& OuterWire() const
 		{
@@ -150,9 +156,15 @@ namespace tnbLib
 			return theInner_;
 		}
 
-		void Approx(const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo) const;
+		void Approx
+		(
+			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
+		) const;
 
-		void ExportToPlt(OFstream& File) const;
+		void ExportToPlt
+		(
+			OFstream& File
+		) const;
 
 		//- Static functions
 
@@ -166,12 +178,16 @@ namespace tnbLib
 
 		static std::shared_ptr<Cad2d_Plane>
 			MakePlane
-			(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges, const gp_Ax2& theSystem = gp::XOY());
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+				const gp_Ax2& theSystem = gp::XOY()
+			);
 
-		static void SplitByWires
-		(
-			const std::shared_ptr<Cad2d_Plane>& thePlane
-		);
+		static void
+			SplitByWires
+			(
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
 
 		static const std::shared_ptr<Pln_Wire>& 
 			RetrieveOuterWire
@@ -179,16 +195,18 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
 			);
 
-		static void CheckOuterWire
-		(
-			const std::shared_ptr<Pln_Wire>& theOuter,
-			const std::vector<std::shared_ptr<Pln_Wire>>& theWires
-		);
+		static void
+			CheckOuterWire
+			(
+				const std::shared_ptr<Pln_Wire>& theOuter,
+				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+			);
 
-		static void CheckWires
-		(
-			const std::vector<std::shared_ptr<Pln_Wire>>& theWires
-		);
+		static void
+			CheckWires
+			(
+				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+			);
 
 		static std::shared_ptr<Cad2d_Plane> 
 			MakeBox
@@ -207,9 +225,20 @@ namespace tnbLib
 				const gp_Ax2& theSystem = gp::XOY()
 			);
 
-		static std::shared_ptr<Cad2d_Plane> MakeCircle(const gp_Ax22d& A, const Standard_Real Radius);
+		static std::shared_ptr<Cad2d_Plane> 
+			MakeCircle
+			(
+				const gp_Ax22d& A, 
+				const Standard_Real Radius
+			);
 
-		static std::shared_ptr<Cad2d_Plane> MakeCircle(const gp_Ax2d& A, const Standard_Real Radius, const Standard_Boolean Sense = Standard_True);
+		static std::shared_ptr<Cad2d_Plane> 
+			MakeCircle
+			(
+				const gp_Ax2d& A,
+				const Standard_Real Radius, 
+				const Standard_Boolean Sense = Standard_True
+			);
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(gp_Ax2, System)

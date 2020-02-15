@@ -27,7 +27,7 @@ using namespace tnbLib;
 Standard_Integer main()
 {
 
-	example_creating_plane_box();
+	example_union_plane_box();
 
 	PAUSE;
 	return 0;

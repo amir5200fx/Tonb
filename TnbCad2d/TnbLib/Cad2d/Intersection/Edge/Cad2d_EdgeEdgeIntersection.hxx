@@ -51,6 +51,11 @@ namespace tnbLib
 			return theEdge1_;
 		}
 
+		Standard_Boolean IsEdgeEdge() const override
+		{
+			return Standard_True;
+		}
+
 		void LoadEdge0
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge

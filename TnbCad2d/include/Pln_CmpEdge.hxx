@@ -12,6 +12,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class Pln_Vertex;
 	class Pln_Edge;
 	class Pln_Wire;
 	class Pln_Tools;
@@ -38,7 +39,10 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		void Insert(const std::shared_ptr<Pln_Edge>& theEdge)
+		void Insert
+		(
+			const std::shared_ptr<Pln_Edge>& theEdge
+		)
 		{
 			theEdges_.push_back(theEdge);
 		}
@@ -57,24 +61,42 @@ namespace tnbLib
 			: Pln_Entity(theIndex, theName)
 		{}
 
-		Standard_Boolean IsValidForWire(const Standard_Real theTol) const;
+		Standard_Boolean IsValidForWire
+		(
+			const Standard_Real theTol
+		) const;
 
-		Standard_Integer NbEdges() const
+		auto NbEdges() const
 		{
 			return (Standard_Integer)theEdges_.size();
 		}
 
-		const edgeList& Edges() const
+		const auto& Edges() const
 		{
 			return theEdges_;
 		}
 
+		std::shared_ptr<Pln_CmpEdge>
+			Copy() const;
+
+		std::vector<std::shared_ptr<Pln_Vertex>>
+			RetrieveVertices() const;
+
+		void RetrieveVerticesTo(std::vector<std::shared_ptr<Pln_Vertex>>& theVertices) const;
+
 		void Reverse();
 
-		void ExportToPlt(OFstream& File) const;
+		void ExportToPlt
+		(
+			OFstream& File
+		) const;
 
 		static std::shared_ptr<Pln_Wire>
-			MakeWire(const std::shared_ptr<Pln_CmpEdge>& theEdge, const Standard_Real theTol);
+			MakeWire
+			(
+				const std::shared_ptr<Pln_CmpEdge>& theEdge,
+				const Standard_Real theTol
+			);
 	};
 }
 

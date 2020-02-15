@@ -1,5 +1,6 @@
 #include <Pln_Wire.hxx>
 
+#include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
 #include <Pln_Curve.hxx>
 #include <Pln_Vertex.hxx>
@@ -138,6 +139,52 @@ tnbLib::Pln_Wire::NbEdges() const
 	return theEdges_->NbEdges();
 }
 
+std::tuple<Standard_Real, Standard_Real> 
+tnbLib::Pln_Wire::BoundTolerance() const
+{
+	auto vertices = RetrieveVertices();
+	auto minTol = RealLast();
+	auto maxTol = RealFirst();
+
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+
+		if (minTol > x->Precision())
+			minTol = x->Precision();
+
+		if (maxTol < x->Precision())
+			maxTol = x->Precision();
+	}
+	auto t = std::make_tuple(minTol, maxTol);
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon> 
+tnbLib::Pln_Wire::Polygon() const
+{
+	auto poly = std::make_shared<Entity2d_Polygon>();
+	Debug_Null_Pointer(poly);
+
+	auto& pts = poly->Points();
+	for (const auto& x : Edges())
+	{
+		if (NOT x->Mesh())
+		{
+			FatalErrorIn("std::shared_ptr<tnbLib::Entity2d_Polygon> Pln_Wire::Polygon() const")
+				<< "the edge doesn't has any mesh on itself!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& points = x->Mesh()->Points();
+		for (auto i = 0; i < points.size() - 1; i++)
+		{
+			pts.push_back(points[i]);
+		}
+	}
+	return std::move(poly);
+}
+
 const std::vector<std::shared_ptr<tnbLib::Pln_Edge>>& 
 tnbLib::Pln_Wire::Edges() const
 {
@@ -161,6 +208,25 @@ tnbLib::Pln_Wire::RetrieveCurves() const
 
 	return std::move(curves);
 }
+
+//std::shared_ptr<tnbLib::Pln_Wire>
+//tnbLib::Pln_Wire::Copy() const
+//{
+//	const auto& cmpEdge = CmpEdge();
+//	
+//	auto vertices = RetrieveVertices();
+//
+//	std::vector<std::shared_ptr<Pln_Vertex>> copy_vertices;
+//	copy_vertices.reserve(vertices.size());
+//
+//	for (const auto& x : vertices)
+//	{
+//		Debug_Null_Pointer(x);
+//		copy_vertices.push_back(x->Copy());
+//	}
+//
+//
+//}
 
 void tnbLib::Pln_Wire::ApplyOrientation
 (
@@ -222,5 +288,18 @@ void tnbLib::Pln_Wire::RetrieveCurvesTo
 		Debug_Null_Pointer(x->Curve());
 
 		theCurves.push_back(x->Curve());
+	}
+}
+
+void tnbLib::Pln_Wire::Approx
+(
+	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
+) const
+{
+	const auto& edges = Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		x->Approx(theInfo);
 	}
 }

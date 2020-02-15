@@ -69,6 +69,9 @@ namespace tnbLib
 
 		Standard_Real Angle() const;
 
+		std::shared_ptr<Pln_Vertex>
+			Copy() const;
+
 		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
 
 

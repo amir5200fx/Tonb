@@ -471,6 +471,9 @@
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.hxx">
       <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.hxx">
+      <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -597,6 +600,9 @@
       <Filter>TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.cxx">
+      <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.cxx">
       <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
     </ClCompile>
   </ItemGroup>

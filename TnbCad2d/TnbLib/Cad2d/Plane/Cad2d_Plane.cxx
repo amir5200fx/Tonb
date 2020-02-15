@@ -1,5 +1,7 @@
 #include <Cad2d_Plane.hxx>
 
+#include <Entity2d_Polygon.hxx>
+#include <Entity2d_Chain.hxx>
 #include <Geo_Tools.hxx>
 #include <Cad_BlockEntity.hxx>
 #include <Cad_EntityManager.hxx>
@@ -68,6 +70,9 @@ void tnbLib::Cad2d_Plane::Make
 	}
 
 	theOuter_ = theOuter;
+
+	Debug_Null_Pointer(theOuter_->BoundingBox());
+	theBoundingBox_ = *theOuter_->BoundingBox();
 
 	if (theInners)
 	{
@@ -189,6 +194,28 @@ tnbLib::Cad2d_Plane::NbHoles() const
 	return (Standard_Integer)theInner_->size();
 }
 
+std::tuple<Standard_Real, Standard_Real> 
+tnbLib::Cad2d_Plane::BoundTolerance() const
+{
+	Debug_Null_Pointer(OuterWire());
+	auto[minTol, maxTol] = OuterWire()->BoundTolerance();
+
+	if (InnerWires())
+	{
+		for (const auto& x : *InnerWires())
+		{
+			auto[t0, t1] = x->BoundTolerance();
+
+			if (minTol > t0)
+				minTol = t0;
+			if (maxTol < t1)
+				maxTol = t1;
+		}
+	}
+	auto t = std::make_tuple(minTol, maxTol);
+	return std::move(t);
+}
+
 void tnbLib::Cad2d_Plane::Approx
 (
 	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
@@ -202,28 +229,89 @@ void tnbLib::Cad2d_Plane::Approx
 	}
 }
 
-std::shared_ptr<tnbLib::Entity2d_Chain> 
-tnbLib::Cad2d_Plane::Polygon() const
-{
-	std::vector<std::shared_ptr<Entity2d_Polygon>> poly;
+//std::shared_ptr<tnbLib::Entity2d_Chain> 
+//tnbLib::Cad2d_Plane::Polygon() const
+//{
+//	std::vector<std::shared_ptr<Entity2d_Polygon>> poly;
+//
+//	auto edges = Segments()->RetrieveEntities();
+//	for (const auto& x : edges)
+//	{
+//		Debug_Null_Pointer(x);
+//		
+//		if (x->Mesh())
+//		{
+//			poly.push_back(x->Mesh());
+//		}
+//	}
+//
+//	if (edges.empty())
+//	{
+//		return nullptr;
+//	}
+//
+//	auto chain = Geo_Tools::RetrieveChain(poly);
+//	return std::move(chain);
+//}
 
-	auto edges = Segments()->RetrieveEntities();
-	for (const auto& x : edges)
+std::shared_ptr<tnbLib::Entity2d_Chain> 
+tnbLib::Cad2d_Plane::MergedPolygon() const
+{
+	auto chain = std::make_shared<Entity2d_Chain>();
+	Debug_Null_Pointer(chain);
+
+	Debug_Null_Pointer(OuterWire());
+	const auto& outer = *OuterWire();
+	const auto& poly = outer.Polygon();
+
+	auto& pts = chain->Points();
+	auto& indices = chain->Connectivity();
+
+	Standard_Integer nbPts = 0;
+	for (const auto& x : poly->Points())
 	{
-		Debug_Null_Pointer(x);
-		
-		if (x->Mesh())
+		auto v0 = nbPts;
+		auto v1 = (v0 + 1) % poly->NbPoints();
+
+		connectivity::dual id;
+		id.Value(0) = v0 + 1;
+		id.Value(1) = v1 + 1;
+
+		indices.push_back(std::move(id));
+
+		pts.push_back(x);
+
+		nbPts++;
+	}
+
+	if (InnerWires())
+	{
+		for (const auto& w : *InnerWires())
 		{
-			poly.push_back(x->Mesh());
+			Debug_Null_Pointer(w);
+
+			const auto& poly = w->Polygon();
+
+			Standard_Integer K = 0;
+			for (const auto& x : poly->Points())
+			{
+				auto v0 = K;
+				auto v1 = (v0 + 1) % poly->NbPoints();
+
+				connectivity::dual id;
+				id.Value(0) = v0 + nbPts + 1;
+				id.Value(1) = v1 + nbPts + 1;
+
+				indices.push_back(std::move(id));
+
+				pts.push_back(x);
+
+				K++;
+			}
+
+			nbPts += poly->NbPoints();
 		}
 	}
-
-	if (edges.empty())
-	{
-		return nullptr;
-	}
-
-	auto chain = Geo_Tools::RetrieveChain(poly);
 	return std::move(chain);
 }
 

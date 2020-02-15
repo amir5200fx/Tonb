@@ -39,6 +39,11 @@ namespace tnbLib
 			return theEdge_;
 		}
 
+		Standard_Boolean IsVertexEdge() const override
+		{
+			return Standard_True;
+		}
+
 		void LoadVertex(const std::shared_ptr<Pln_Vertex>& theVtx)
 		{
 			theVtx_ = theVtx;

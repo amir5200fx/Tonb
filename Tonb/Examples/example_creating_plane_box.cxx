@@ -12,8 +12,8 @@ void tnbLib::example_creating_plane_box()
 	auto shape = Cad2d_Plane::MakeBox(p0, p1);
 	Debug_Null_Pointer(shape);
 
-	auto info = std::make_shared<Geo_ApprxCurve_Info>();
-	shape->Approx(info);
+	/*auto info = std::make_shared<Geo_ApprxCurve_Info>();
+	shape->Approx(info);*/
 
 	fileName myFileName("example_creating_plane_box.plt");
 	OFstream myFile(myFileName);

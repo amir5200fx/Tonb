@@ -82,6 +82,9 @@ namespace tnbLib
 
 		Entity2d_Box CalcBoundingBox() const;
 
+		std::shared_ptr<Pln_Curve>
+			Copy() const;
+
 		void Interpolation
 		(
 			const std::vector<Pnt2d>& theQ,
@@ -118,6 +121,11 @@ namespace tnbLib
 			std::vector<Pnt2d>& theCoords,
 			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 		) const;
+
+		virtual Standard_Boolean IsTangential() const
+		{
+			return Standard_False;
+		}
 
 		// Static functions and operators
 
