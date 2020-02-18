@@ -74,7 +74,7 @@ void tnbLib::Marine_Wave::TransformOriginToCurrent() const
 	gp_Trsf t;
 	t.SetTransformation(Origin(), 
 		gp_Ax2(Origin().Location(), 
-			VerticalDirection(), Current()));
+			VerticalDirection(), SurfaceDirection()));
 	originToCurrentTransform = std::move(t);
 }
 

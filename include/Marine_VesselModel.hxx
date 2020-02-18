@@ -41,7 +41,10 @@ namespace tnbLib
 
 		void RemoveSection(const Standard_Integer theIndex);
 
-
+		Standard_Boolean IsVessel() const override
+		{
+			return Standard_True;
+		}
 	};
 }
 

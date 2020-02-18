@@ -16,50 +16,37 @@ namespace tnbLib
 		: public Marine_Entity
 	{
 
-		typedef std::shared_ptr<Pln_Wire> outer;
-		typedef std::shared_ptr<std::vector<std::shared_ptr<Pln_Wire>>> inner;
-
 		/*Private Data*/
 
-		outer theOuter_;
-		inner theInner_;
+		std::shared_ptr<Pln_Wire> theWire_;
+
+
+		static void CheckWire(const Pln_Wire& theWire, const char* theName);
 
 	public:
 
 		Marine_Section
 		(
-			const outer& theOuter,
-			const inner& theInner = nullptr
+			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
 		Marine_Section
 		(
 			const Standard_Integer theIndex,
-			const outer& theOuter,
-			const inner& theInner = nullptr
+			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
 		Marine_Section
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const outer& theOuter,
-			const inner& theInner = nullptr
+			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
 
-		Standard_Boolean HasHole() const;
-
-		Standard_Integer NbHoles() const;
-
-		const outer& Outer() const
+		const auto& Wire() const
 		{
-			return theOuter_;
-		}
-
-		const inner& Inner() const
-		{
-			return theInner_;
+			return theWire_;
 		}
 
 

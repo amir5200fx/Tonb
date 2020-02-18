@@ -1,12 +1,19 @@
 #include <Standard_TypeDef.hxx>
 
+#include <Entity3d_Polygon.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Cad_Tools.hxx>
+#include <Pln_Wire.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Plane_System.hxx>
 #include <TnbCad2d_System.hxx>
 #include <dimensionedScalar.hxx>
 
+#include <gp_Pln.hxx>
+#include <Geom_Plane.hxx>
+#include <Marine_Section.hxx>
+#include <Marine_CmpSection.hxx>
+#include <Marine_VesselModel.hxx>
 #include <Marine_SectionDistribution_Uniform.hxx>
 #include <Marine_ModelMaker_Shape.hxx>
 #include <Marine_FlatWave.hxx>
@@ -35,7 +42,7 @@ Standard_Integer main()
 
 	//example_union_plane_box();
 
-	gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
+	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));
 
 	auto inf = std::make_shared<NumAlg_AdaptiveInteg_Info>();
@@ -43,7 +50,7 @@ Standard_Integer main()
 	std::cout << Cad2d_CmptLib::AreaUnderCurve(Pln_Tools::ConvertToTrimmedCurve(c, c->FirstParameter(), c->LastParameter()), 1, inf) << std::endl;
 	std::cout << Cad2d_CmptLib::Centre(Pln_Tools::ConvertToTrimmedCurve(c, c->FirstParameter(), c->LastParameter()), inf) << std::endl;
 	PAUSE;
-	return 0;
+	return 0;*/
 
 	fileName name("out.plt");
 	OFstream myFile(name);
@@ -59,7 +66,7 @@ Standard_Integer main()
 
 	myFile << d << endl;*/
 
-	/*auto ship = std::make_shared<LegModel_DispNo1>();
+	auto ship = std::make_shared<LegModel_DispNo1>();
 	Debug_Null_Pointer(ship);
 
 	ship->Perform();
@@ -102,7 +109,7 @@ Standard_Integer main()
 
 	distb->SetLower(box.P0().X());
 	distb->SetUpper(box.P1().X());
-	distb->SetNbSections(10);
+	distb->SetNbSections(40);
 	distb->Perform();
 
 	auto maker = std::make_shared<Marine_ModelMaker_Shape>();
@@ -112,6 +119,38 @@ Standard_Integer main()
 	maker->LoadDistributor(distb);
 	maker->Perform();
 
+	auto vessel = std::dynamic_pointer_cast<Marine_VesselModel>(maker->Model());
+	Debug_Null_Pointer(vessel);
+
+	for (const auto& sec : vessel->Sections())
+	{
+		const auto& x = sec.second;
+		Debug_Null_Pointer(x);
+
+		const auto& sys = x->CoordinateSystem();
+		Handle(Geom_Plane) pl = new Geom_Plane(gp_Pln(sys));
+
+		for (const auto& w : x->Sections())
+		{
+			Debug_Null_Pointer(w);
+
+			Debug_Null_Pointer(w->Wire());
+			const auto& wire = *w->Wire();
+			
+			auto poly2d = wire.Polygon();
+			
+			Entity3d_Polygon poly3d;
+			auto& pts = poly3d.Points();
+
+			for (const auto& x : poly2d->Points())
+			{
+				gp_Pnt p3 = pl->Value(x.X(), x.Y());
+				pts.push_back(p3);
+			}
+			poly3d.ExportToPlt(myFile);
+		}
+	}
+
 	PAUSE;
-	return 0;*/
+	return 0;
 }

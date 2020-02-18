@@ -7,9 +7,6 @@
     <Filter Include="TnbLib\Hydrostatic">
       <UniqueIdentifier>{ab47665e-e392-4f66-8324-37d9a5d13b55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\WaterSurface">
-      <UniqueIdentifier>{dc3fd93c-c615-4c4e-a464-2cbdd9dbc183}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Hydrostatic\Environment">
       <UniqueIdentifier>{5c2a4154-8913-46f0-8dff-6d443e95c8f7}</UniqueIdentifier>
     </Filter>
@@ -22,57 +19,93 @@
     <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Entity">
       <UniqueIdentifier>{92d3c29b-ada5-4017-a424-bcb2943a9069}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\MonoHull">
+      <UniqueIdentifier>{e381e95d-72eb-4029-9849-b3e65be5afa3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section">
-      <UniqueIdentifier>{d224f716-ced9-460a-8052-2fb4e43d83b0}</UniqueIdentifier>
+      <UniqueIdentifier>{7163da8a-4ad6-4b65-a251-0bc7875255d6}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine">
-      <UniqueIdentifier>{05969a4f-eb9b-43ad-ae04-260e31323431}</UniqueIdentifier>
+      <UniqueIdentifier>{aa731b6f-0ecb-41d2-b108-c764f1ebea83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Station">
-      <UniqueIdentifier>{f6a49b4a-7dd5-4019-bd91-add22bf5efe6}</UniqueIdentifier>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\UnderWater">
+      <UniqueIdentifier>{88e96630-a078-470f-a737-7574d1b3721b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Buttock">
-      <UniqueIdentifier>{3b16617c-005b-4032-8a99-be12a2b60b5e}</UniqueIdentifier>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Dry">
+      <UniqueIdentifier>{4562a46f-2f0f-4940-b873-8baf5d9d5d85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Arbitrary">
-      <UniqueIdentifier>{ee040868-8a3c-4f86-8fba-cad698421ce6}</UniqueIdentifier>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\MonoHull\Section">
+      <UniqueIdentifier>{1ad202a6-cf87-4940-98b6-c77a3e8bb1cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\StationHull">
-      <UniqueIdentifier>{8118c1d9-1f59-4e7d-ae26-f78443007402}</UniqueIdentifier>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\FormDim">
+      <UniqueIdentifier>{5e42ddb1-8d4a-4bec-9892-aaf6f77f3e01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Property">
-      <UniqueIdentifier>{132d6c34-0aca-4a6d-8e29-abd5b4729e33}</UniqueIdentifier>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\FormCoeff">
+      <UniqueIdentifier>{3c570c40-d828-4792-bbf5-be9bfcad279b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Station">
-      <UniqueIdentifier>{8918a99f-5e63-4719-997a-e3940e757f16}</UniqueIdentifier>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff">
+      <UniqueIdentifier>{1c19cc5f-e22b-4a10-9621-f51301b67782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Vessel\MonoHull\FormDim">
+      <UniqueIdentifier>{40131eb9-d885-4803-8d6c-b2b54c201167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Tools">
+      <UniqueIdentifier>{8f53222d-669e-4d72-abaf-43354cf8770b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\Vessel_Entity.hxx">
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.hxx">
       <Filter>TnbLib\Hydrostatic\Vessel\Entities\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Vessel_Section.hxx">
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\HsEntity_Section.hxx">
       <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine\Vessel_WaterSection.hxx">
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine\HsSection_WaterLine.hxx">
       <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Station\Vessel_StationSection.hxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\Station</Filter>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\UnderWater\HsSection_UnderWater.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\UnderWater</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Buttock\Vessel_ButtockSection.hxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\Buttock</Filter>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Dry\HsSection_Dry.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section\Dry</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\StationHull\Vessel_StationHull.hxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\Entities\StationHull</Filter>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\MonoHull\HsEntity_MonoHull.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\MonoHull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\HsEntity_Vessel.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\MonoHull\Section\MonoHull_Section.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\MonoHull\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\FormDim\Vessel_FormDim.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\FormDim</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\FormCoeff\Vessel_FormCoeff.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\FormCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\MonoHull\FormDim\MonoHull_FormDim.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\MonoHull\FormDim</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff\MonoHull_FormCoeff.hxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.hxx">
+      <Filter>TnbLib\Hydrostatic\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\Vessel_Entity.cxx">
+    <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx">
       <Filter>TnbLib\Hydrostatic\Vessel\Entities\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Vessel_Section.cxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Section</Filter>
+    <ClCompile Include="TnbLib\Hydrostatic\Vessel\MonoHull\FormDim\MonoHull_FormDim.cxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\MonoHull\FormDim</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff\MonoHull_FormCoeff.cxx">
+      <Filter>TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.cxx">
+      <Filter>TnbLib\Hydrostatic\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

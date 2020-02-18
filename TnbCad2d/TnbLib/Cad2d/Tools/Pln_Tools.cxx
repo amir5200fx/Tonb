@@ -583,14 +583,14 @@ tnbLib::Pln_Tools::ParametricTriangulation
 {
 	if (theNx < 2)
 	{
-		FatalErrorIn("std::shared_ptr<AutLib::Entity2d_Triangulation> ParametricTriangulation()")
+		FatalErrorIn("std::shared_ptr<tnbLib::Entity2d_Triangulation> ParametricTriangulation()")
 			<< "Invalid Data" << endl
 			<< abort(FatalError);
 	}
 
 	if (theNy < 2)
 	{
-		FatalErrorIn("std::shared_ptr<AutLib::Entity2d_Triangulation> ParametricTriangulation()")
+		FatalErrorIn("std::shared_ptr<tnbLib::Entity2d_Triangulation> ParametricTriangulation()")
 			<< "Invalid Data" << endl
 			<< abort(FatalError);
 	}

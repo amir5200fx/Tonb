@@ -59,7 +59,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static Pnt2d
 			Centre
 			(
 				const Pln_Wire& theWire,

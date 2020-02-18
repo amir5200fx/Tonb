@@ -39,7 +39,7 @@ namespace tnbLib
 
 		static Standard_Boolean LessDiameterSize
 		(
-			const std::shared_ptr<Pln_Wire>& theWire0, 
+			const std::shared_ptr<Pln_Wire>& theWire0,
 			const std::shared_ptr<Pln_Wire>& theWire1
 		)
 		{
@@ -62,7 +62,7 @@ namespace tnbLib
 				return;
 			}
 
-			Geo_ItemSort<std::shared_ptr<Pln_Wire>> 
+			Geo_ItemSort<std::shared_ptr<Pln_Wire>>
 				sort(&LessDiameterSize);
 			sort.Perform(theWires);
 		}
@@ -106,7 +106,7 @@ namespace tnbLib
 	}
 }
 
-std::shared_ptr<tnbLib::Marine_CmpSection> 
+std::shared_ptr<tnbLib::Marine_CmpSection>
 tnbLib::Marine_CmpSection::CreateCmpSection
 (
 	const TopoDS_Shape & theEdges,
@@ -140,6 +140,8 @@ tnbLib::Marine_CmpSection::CreateCmpSection
 	auto cmpSection = std::make_shared<Marine_CmpSection>();
 	Debug_Null_Pointer(cmpSection);
 
+	cmpSection->SetCoordinateSystem(theSystem);
+
 	auto& sections = cmpSection->ChangeSections();
 	while (NOT wireList.empty())
 	{
@@ -170,7 +172,11 @@ tnbLib::Marine_CmpSection::CreateCmpSection
 		}
 		else
 		{
-			for (const auto& x : *inners)
+			FatalErrorIn("std::shared_ptr<tnbLib::Marine_CmpSection> Marine_CmpSection::CreateCmpSection(Args...)")
+				<< "the section shouldn't contain any inner wire" << endl
+				<< abort(FatalError);
+
+			/*for (const auto& x : *inners)
 			{
 				Debug_Null_Pointer(x);
 				if (x->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CW)
@@ -182,7 +188,7 @@ tnbLib::Marine_CmpSection::CreateCmpSection
 			auto section = std::make_shared<Marine_Section>(++K, outer, inners);
 			Debug_Null_Pointer(section);
 
-			sections.push_back(std::move(section));
+			sections.push_back(std::move(section));*/
 		}
 	}
 
@@ -199,17 +205,17 @@ tnbLib::Marine_CmpSection::CreateCmpSection
 
 #include <TopLoc_Datum3D.hxx>
 
-std::vector<TopoDS_Edge> 
+std::vector<TopoDS_Edge>
 tnbLib::Marine_CmpSection::RetrieveEdges
 (
 	const TopoDS_Shape & theEdges
 )
 {
 	std::vector<TopoDS_Edge> edges;
-	for 
+	for
 		(
-			TopExp_Explorer explorer(theEdges, TopAbs_EDGE); 
-			explorer.More(); 
+			TopExp_Explorer explorer(theEdges, TopAbs_EDGE);
+			explorer.More();
 			explorer.Next()
 			)
 	{
@@ -222,7 +228,7 @@ tnbLib::Marine_CmpSection::RetrieveEdges
 	return std::move(edges);
 }
 
-std::vector<Handle(Geom2d_Curve)> 
+std::vector<Handle(Geom2d_Curve)>
 tnbLib::Marine_CmpSection::RetrieveParaCurves
 (
 	const std::vector<TopoDS_Edge>& theEdges,
@@ -233,7 +239,7 @@ tnbLib::Marine_CmpSection::RetrieveParaCurves
 	Debug_Null_Pointer(plane);
 
 	TopLoc_Location loc;
-	
+
 	std::vector<Handle(Geom2d_Curve)> curves;
 	curves.reserve(theEdges.size());
 
@@ -241,7 +247,7 @@ tnbLib::Marine_CmpSection::RetrieveParaCurves
 	{
 		Standard_Real first, last;
 		auto curve = BRep_Tool::CurveOnPlane(x, plane, loc, first, last);
-		
+
 		if (curve.IsNull())
 		{
 			FatalErrorIn("std::vector<Handle(Geom2d_Curve)> Marine_CmpSection::RetrieveParaCurves(Args...)")

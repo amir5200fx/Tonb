@@ -45,12 +45,7 @@ void tnbLib::Marine_ModelMaker_Shape::Perform()
 	}
 
 	const auto& sys = Distributor()->CoordinateSystem();
-	gp_Ax2 system(sys.Location(), sys.XDirection(), sys.Direction());
-
-	BRepAlgoAPI_Section alg;
-	alg.Init2(Shape());
-	alg.ComputePCurveOn1(Standard_True);
-	alg.SetRunParallel(Standard_True);
+	gp_Ax2 syst0(sys.Location(), sys.XDirection(), sys.Direction());
 
 	std::vector<TopoDS_Shape> shapes;
 	std::vector<gp_Ax2> systems;
@@ -58,16 +53,19 @@ void tnbLib::Marine_ModelMaker_Shape::Perform()
 	const auto& xSections = Distributor()->Sections();
 	systems.reserve(xSections.size());
 
+	auto x0 = syst0.Location().Z();
 	for (auto x : xSections)
 	{
-		auto x0 = system.Location().X();
+		auto syst = syst0.Translated(gp_Vec(x - x0, 0, 0));
+		systems.push_back(syst);
 
-		system.Translate(gp_Vec(0, 0, x - x0));
-		systems.push_back(system);
+		gp_Pln plane(syst);
 
-		gp_Pln plane(system);
-
+		BRepAlgoAPI_Section alg;	
+		alg.ComputePCurveOn1(Standard_True);
+		alg.SetRunParallel(Standard_True);
 		alg.Init1(plane);
+		alg.Init2(Shape());
 		alg.Build();
 
 		if (alg.Shape().IsNull())
@@ -87,7 +85,10 @@ void tnbLib::Marine_ModelMaker_Shape::Perform()
 	Standard_Integer i = 0;
 	for (const auto& x : shapes)
 	{
-		sections.push_back(Marine_CmpSection::CreateCmpSection(x, systems[i++], MinTolerance(), MaxTolerance()));
+		sections.push_back
+		(
+			Marine_CmpSection::CreateCmpSection
+			(x, systems[i++], MinTolerance(), MaxTolerance()));
 	}
 
 	auto model = std::make_shared<Marine_VesselModel>();

@@ -40,6 +40,11 @@ namespace tnbLib
 			return theModel_;
 		}
 
+		virtual Standard_Boolean IsVessel() const
+		{
+			return Standard_False;
+		}
+
 	};
 }
 

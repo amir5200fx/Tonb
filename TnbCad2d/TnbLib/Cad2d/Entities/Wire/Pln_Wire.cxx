@@ -19,7 +19,7 @@ void tnbLib::Pln_Wire::CalcBoundingBox
 
 	if (edges.empty())
 	{
-		FatalErrorIn("void AutLib::Plane_Wire::CalcBoundingBox()")
+		FatalErrorIn("void tnbLib::Plane_Wire::CalcBoundingBox()")
 			<< "Empty List"
 			<< abort(FatalError);
 	}
@@ -182,6 +182,12 @@ tnbLib::Pln_Wire::Polygon() const
 			pts.push_back(points[i]);
 		}
 	}
+
+	if (pts.size())
+	{
+		pts.push_back(pts[0]);
+	}
+
 	return std::move(poly);
 }
 

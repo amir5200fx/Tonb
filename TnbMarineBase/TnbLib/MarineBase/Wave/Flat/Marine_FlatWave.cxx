@@ -3,6 +3,12 @@
 #include <Cad2d_GeoSketch_LineSegment.hxx>
 #include <Pln_Tools.hxx>
 
+tnbLib::Dir3d 
+tnbLib::Marine_FlatWave::SurfaceDirection() const
+{
+	return Dir3d(Origin().Axis().Direction().XYZ());
+}
+
 void tnbLib::Marine_FlatWave::MakeProfileCurve
 (
 	const Pnt2d& x0,
