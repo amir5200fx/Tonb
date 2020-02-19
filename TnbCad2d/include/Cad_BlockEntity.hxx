@@ -57,6 +57,8 @@ namespace tnbLib
 
 	public:
 
+		Cad_BlockEntity();
+
 		Cad_BlockEntity
 		(
 			const word& theName, 
@@ -88,6 +90,13 @@ namespace tnbLib
 		std::shared_ptr<Cad_BlockEntity<EntityType>>
 			Split
 			(
+				const word& theName,
+				const std::vector<Standard_Integer>& theIndices
+			);
+
+		std::shared_ptr<Cad_BlockEntity<EntityType>>
+			Split
+			(
 				const std::map
 				<
 				Standard_Integer,
@@ -97,6 +106,23 @@ namespace tnbLib
 		std::shared_ptr<Cad_BlockEntity<EntityType>>
 			Split
 			(
+				const word& theName,
+				const std::map
+				<
+				Standard_Integer,
+				std::shared_ptr<EntityType>>&theIndices
+			);
+
+		std::shared_ptr<Cad_BlockEntity<EntityType>>
+			Split
+			(
+				const std::vector<typename indexedMap::const_iterator>& theIters
+			);
+
+		std::shared_ptr<Cad_BlockEntity<EntityType>>
+			Split
+			(
+				const word& theName,
 				const std::vector<typename indexedMap::const_iterator>& theIters
 			);
 

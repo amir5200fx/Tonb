@@ -70,7 +70,9 @@ namespace tnbLib
 			const typename stringMapOfBlocks::const_iterator & theBlock
 		)
 	{
+		auto ent = theBlock->second;
 		theBlocks_.erase(theBlock);
+		return std::move(ent);
 	}
 
 	template<class EntityType>

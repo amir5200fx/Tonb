@@ -1,5 +1,6 @@
 #include <CadModel_Box.hxx>
 
+#include <Pnt3d.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
 
 tnbLib::CadModel_Box::CadModel_Box

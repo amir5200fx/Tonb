@@ -52,6 +52,12 @@ namespace tnbLib
 	}
 
 	template<class EntityType>
+	Cad_BlockEntity<EntityType>::Cad_BlockEntity()
+		: Global_Named("Default Block")
+	{
+	}
+
+	template<class EntityType>
 	Cad_BlockEntity<EntityType>::Cad_BlockEntity
 	(
 		const word & theName,
@@ -112,6 +118,21 @@ namespace tnbLib
 	std::shared_ptr<Cad_BlockEntity<EntityType>> 
 		Cad_BlockEntity<EntityType>::Split
 		(
+			const word & theName, 
+			const std::vector<Standard_Integer>& theIndices
+		)
+	{
+		auto block = Split(theIndices);
+		Debug_Null_Pointer(block);
+
+		block->SetName(theName);
+		return std::move(block);
+	}
+
+	template<class EntityType>
+	std::shared_ptr<Cad_BlockEntity<EntityType>> 
+		Cad_BlockEntity<EntityType>::Split
+		(
 			const std::map<Standard_Integer, 
 			std::shared_ptr<EntityType>>& theIndices
 		)
@@ -154,6 +175,21 @@ namespace tnbLib
 	std::shared_ptr<Cad_BlockEntity<EntityType>> 
 		Cad_BlockEntity<EntityType>::Split
 		(
+			const word & theName, 
+			const std::map<Standard_Integer, std::shared_ptr<EntityType>>& theIndices
+		)
+	{
+		auto block = Split(theIndices);
+		Debug_Null_Pointer(block);
+
+		block->SetName(theName);
+		return std::move(block);
+	}
+
+	template<class EntityType>
+	std::shared_ptr<Cad_BlockEntity<EntityType>> 
+		Cad_BlockEntity<EntityType>::Split
+		(
 			const std::vector<typename indexedMap::const_iterator>& theIters
 		)
 	{
@@ -170,6 +206,21 @@ namespace tnbLib
 			const auto& x = *iter;
 			block->Add(x.first, x.second);
 		}
+		return std::move(block);
+	}
+
+	template<class EntityType>
+	std::shared_ptr<Cad_BlockEntity<EntityType>>
+		Cad_BlockEntity<EntityType>::Split
+		(
+			const word& theName,
+			const std::vector<typename indexedMap::const_iterator>& theIters
+		)
+	{
+		auto block = Split(theIters);
+		Debug_Null_Pointer(block);
+
+		block->SetName(theName);
 		return std::move(block);
 	}
 
@@ -205,7 +256,7 @@ namespace tnbLib
 		Cad_BlockEntity & theBlock
 	)
 	{
-		auto keys = RetrieveKeys();
+		auto keys = theBlock.RetrieveKeys();
 		for (const auto x : keys)
 		{
 			auto entity = theBlock.Remove(x);

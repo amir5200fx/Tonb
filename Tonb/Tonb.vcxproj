@@ -123,6 +123,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Examples\example_creating_box.cxx" />
     <ClCompile Include="Examples\example_creating_plane_box.cxx" />
     <ClCompile Include="Examples\example_union_plane_box.cxx" />
     <ClCompile Include="main.cxx" />

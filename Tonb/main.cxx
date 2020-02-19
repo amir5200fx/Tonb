@@ -41,6 +41,7 @@ Standard_Integer main()
 {
 
 	//example_union_plane_box();
+	example_creating_box();
 
 	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));
@@ -66,7 +67,7 @@ Standard_Integer main()
 
 	myFile << d << endl;*/
 
-	auto ship = std::make_shared<LegModel_DispNo1>();
+	/*auto ship = std::make_shared<LegModel_DispNo1>();
 	Debug_Null_Pointer(ship);
 
 	ship->Perform();
@@ -149,7 +150,7 @@ Standard_Integer main()
 			}
 			poly3d.ExportToPlt(myFile);
 		}
-	}
+	}*/
 
 	PAUSE;
 	return 0;

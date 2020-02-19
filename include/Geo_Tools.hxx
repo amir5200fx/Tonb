@@ -221,13 +221,22 @@ namespace tnbLib
 			);
 
 		static std::shared_ptr<Entity3d_Chain>
-			RetrieveChain(const std::vector<std::shared_ptr<Entity3d_Polygon>>& thePoly);
+			RetrieveChain
+			(
+				const std::vector<std::shared_ptr<Entity3d_Polygon>>& thePoly
+			);
 
 		static std::shared_ptr<Entity3d_Chain>
-			RetrieveChain(const std::vector<std::shared_ptr<Entity3d_Chain>>& theChains);
+			RetrieveChain
+			(
+				const std::vector<std::shared_ptr<Entity3d_Chain>>& theChains
+			);
 
 		static std::shared_ptr<Entity3d_Triangulation>
-			Triangulation(const Entity3d_Chain& theChain);
+			Triangulation
+			(
+				const Entity3d_Chain& theChain
+			);
 
 
 	};
