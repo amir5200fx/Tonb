@@ -70,6 +70,7 @@
     <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_SurfaceManager.hxx" />
     <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_VertexManager.hxx" />
     <ClInclude Include="TnbLib\Cad\TModel\System\TModel_System.hxx" />
+    <ClInclude Include="TnbLib\Cad\Tools\Cad_PreviewTools.hxx" />
     <ClInclude Include="TnbLib\Cad\Tools\Cad_Tools.hxx" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +107,7 @@
     <ClCompile Include="TnbLib\Cad\TModel\Info\TModel_FixWire_Info.cxx" />
     <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManager.cxx" />
     <ClCompile Include="TnbLib\Cad\TModel\System\TModel_System.cxx" />
+    <ClCompile Include="TnbLib\Cad\Tools\Cad_PreviewTools.cxx" />
     <ClCompile Include="TnbLib\Cad\Tools\Cad_Tools.cxx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

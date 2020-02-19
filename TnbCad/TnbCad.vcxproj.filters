@@ -327,6 +327,9 @@
     <ClInclude Include="TnbLib\Cad\GModel\Entities\Plane\GModel_Plane.hxx">
       <Filter>TnbLib\Cad\GModel\Entities\Plane</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Tools\Cad_PreviewTools.hxx">
+      <Filter>TnbLib\Cad\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -430,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Surface\GModel_Surface.cxx">
       <Filter>TnbLib\Cad\GModel\Entities\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Tools\Cad_PreviewTools.cxx">
+      <Filter>TnbLib\Cad\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

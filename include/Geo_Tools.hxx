@@ -5,7 +5,10 @@
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
+#include <Entity3d_ChainFwd.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
 
 #include <vector>
 #include <memory>
@@ -216,6 +219,17 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<Entity2d_Polygon>>& thePoly
 			);
+
+		static std::shared_ptr<Entity3d_Chain>
+			RetrieveChain(const std::vector<std::shared_ptr<Entity3d_Polygon>>& thePoly);
+
+		static std::shared_ptr<Entity3d_Chain>
+			RetrieveChain(const std::vector<std::shared_ptr<Entity3d_Chain>>& theChains);
+
+		static std::shared_ptr<Entity3d_Triangulation>
+			Triangulation(const Entity3d_Chain& theChain);
+
+
 	};
 }
 

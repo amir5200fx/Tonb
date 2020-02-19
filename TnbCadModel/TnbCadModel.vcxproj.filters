@@ -46,6 +46,18 @@
     <Filter Include="TnbLib\CadModel\Legacy\Global">
       <UniqueIdentifier>{dabd95c3-cd65-41e4-9eb7-e32da5711ad4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\CadModel\Regular">
+      <UniqueIdentifier>{9f51dbbe-8c2b-45a5-b9e1-2e414bd80e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Regular\Box">
+      <UniqueIdentifier>{31ac288a-c9a0-4e99-9b6f-a8eafe271fbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Regular\Cylinder">
+      <UniqueIdentifier>{700772f8-7572-4bb6-9b3f-43200a7d391f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Regular\Sphere">
+      <UniqueIdentifier>{ce44d582-cb2a-4836-a20a-9c0968707971}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.hxx">
@@ -105,6 +117,18 @@
     <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_BoundedParameter.hxx">
       <Filter>TnbLib\CadModel\Legacy\Parameter</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Regular\CadModel_Regular.hxx">
+      <Filter>TnbLib\CadModel\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Regular\Box\CadModel_Box.hxx">
+      <Filter>TnbLib\CadModel\Regular\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Regular\Cylinder\CadModel_Cylinder.hxx">
+      <Filter>TnbLib\CadModel\Regular\Cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Regular\Sphere\CadModel_Sphere.hxx">
+      <Filter>TnbLib\CadModel\Regular\Sphere</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.cxx">
@@ -133,6 +157,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System\LegModel_DispNo1_Defaults.cxx">
       <Filter>TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Regular\Box\CadModel_Box.cxx">
+      <Filter>TnbLib\CadModel\Regular\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Regular\Cylinder\CadModel_Cylinder.cxx">
+      <Filter>TnbLib\CadModel\Regular\Cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Regular\Sphere\CadModel_Sphere.cxx">
+      <Filter>TnbLib\CadModel\Regular\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Regular\CadModel_Regular.cxx">
+      <Filter>TnbLib\CadModel\Regular</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
