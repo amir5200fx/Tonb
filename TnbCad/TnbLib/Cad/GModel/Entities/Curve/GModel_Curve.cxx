@@ -1,4 +1,4 @@
-#include <TModel_Curve.hxx>
+#include <GModel_Curve.hxx>
 
 #include <Entity3d_Box.hxx>
 #include <error.hxx>
@@ -7,7 +7,7 @@
 #include <Geom_Curve.hxx>
 #include <Geom_BoundedCurve.hxx>
 
-void tnbLib::TModel_Curve::CheckBoundary
+void tnbLib::GModel_Curve::CheckBoundary
 (
 	const Standard_Real x, 
 	const char * theName
@@ -22,9 +22,9 @@ void tnbLib::TModel_Curve::CheckBoundary
 	}
 }
 
-void tnbLib::TModel_Curve::CheckBounded
+void tnbLib::GModel_Curve::CheckBounded
 (
-	const Handle(Geom_Curve)& theCurve, 
+	const Handle(Geom_Curve)& theCurve,
 	const char * theName
 )
 {
@@ -36,31 +36,31 @@ void tnbLib::TModel_Curve::CheckBounded
 	}
 }
 
-tnbLib::TModel_Curve::TModel_Curve
+tnbLib::GModel_Curve::GModel_Curve
 (
 	const Handle(Geom_Curve) theGeometry
 )
 	: theGeometry_(theGeometry)
 {
-	CheckBounded(Geometry(), "TModel_Curve::TModel_Curve()");
+	CheckBounded(Geometry(), "GModel_Curve::GModel_Curve()");
 }
 
-Standard_Real 
-tnbLib::TModel_Curve::FirstParameter() const
+Standard_Real
+tnbLib::GModel_Curve::FirstParameter() const
 {
 	Debug_Null_Pointer(Geometry());
 	return Geometry()->FirstParameter();
 }
 
 Standard_Real 
-tnbLib::TModel_Curve::LastParameter() const
+tnbLib::GModel_Curve::LastParameter() const
 {
 	Debug_Null_Pointer(Geometry());
 	return Geometry()->LastParameter();
 }
 
-tnbLib::Pnt3d
-tnbLib::TModel_Curve::Value
+tnbLib::Pnt3d 
+tnbLib::GModel_Curve::Value
 (
 	const Standard_Real x
 ) const
@@ -74,7 +74,7 @@ tnbLib::TModel_Curve::Value
 }
 
 tnbLib::Pnt3d 
-tnbLib::TModel_Curve::Value_normParam
+tnbLib::GModel_Curve::Value_normParam
 (
 	const Standard_Real x
 ) const
@@ -89,7 +89,7 @@ tnbLib::TModel_Curve::Value_normParam
 #include <GeomAdaptor_Curve.hxx>
 
 tnbLib::Entity3d_Box 
-tnbLib::TModel_Curve::CalcBoundingBox() const
+tnbLib::GModel_Curve::CalcBoundingBox() const
 {
 	Debug_Null_Pointer(Geometry());
 	Bnd_Box BndBox;

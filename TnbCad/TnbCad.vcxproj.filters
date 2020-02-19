@@ -139,6 +139,36 @@
     <Filter Include="TnbLib\Cad\TModel\Info">
       <UniqueIdentifier>{c855f43d-060e-4e51-ac5a-f76bb791624e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities">
+      <UniqueIdentifier>{f89e7811-0848-458a-800d-2197309439fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\Curve">
+      <UniqueIdentifier>{2325296c-3489-4391-8718-9f06eb0e6d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\ParaCurve">
+      <UniqueIdentifier>{5f07a082-721e-43ba-8ca6-97a2b04651a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\Edge">
+      <UniqueIdentifier>{128bbbff-b342-4b1a-80ef-891fa96adc7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\Entity">
+      <UniqueIdentifier>{4d27eef4-f522-4420-923a-d0ea1f3debb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\Plane">
+      <UniqueIdentifier>{d0062fc0-4516-49a9-a7df-a9a615027825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\Wire">
+      <UniqueIdentifier>{02ded4a1-610f-4415-8062-f5b1977e585e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\ParaWire">
+      <UniqueIdentifier>{7d0421d5-8fbf-4e21-b4fc-38f7465ea748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\Surface">
+      <UniqueIdentifier>{d1f575d0-026a-4c0e-b622-a7ead6b3b9c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\Surface\Geometry">
+      <UniqueIdentifier>{2bd0f002-55e5-498e-889f-6a4221672ebc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -264,6 +294,39 @@
     <ClInclude Include="TnbLib\Cad\System\TnbCad_System.hxx">
       <Filter>TnbLib\Cad\System</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Entity\GModel_Entity.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurve.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurveI.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Curve\GModel_Curve.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Curve\GModel_CurveI.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Edge\GModel_Edge.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Surface\Geometry\GModel_SurfaceGeometry.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Surface\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Surface\GModel_Surface.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaWire\GModel_ParaWire.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaWire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Wire\GModel_Wire.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\Plane\GModel_Plane.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Plane</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -355,6 +418,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\System\TnbCad_System.cxx">
       <Filter>TnbLib\Cad\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurve.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Curve\GModel_Curve.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Edge\GModel_Edge.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Surface\GModel_Surface.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Surface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
