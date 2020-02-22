@@ -138,6 +138,14 @@ tnbLib::Pln_Curve::Copy() const
 	return std::move(copy);
 }
 
+void tnbLib::Pln_Curve::Transform
+(
+	const gp_Trsf2d & t
+)
+{
+	Geometry()->Transform(t);
+}
+
 void tnbLib::Pln_Curve::Interpolation
 (
 	const std::vector<Pnt2d>& theQ, 

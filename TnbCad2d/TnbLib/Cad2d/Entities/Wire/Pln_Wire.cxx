@@ -233,6 +233,17 @@ tnbLib::Pln_Wire::Copy() const
 	return std::move(wire);
 }
 
+void tnbLib::Pln_Wire::Transform
+(
+	const gp_Trsf2d & t
+)
+{
+	const auto& cmpEdge = CmpEdge();
+	Debug_Null_Pointer(cmpEdge);
+
+	cmpEdge->Transform(t);
+}
+
 void tnbLib::Pln_Wire::ApplyOrientation
 (
 	const Pln_Orientation theOrient

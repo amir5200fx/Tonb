@@ -4,6 +4,7 @@
 #include <Pln_Edge.hxx>
 #include <Pln_Ring.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_Curve.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -94,6 +95,27 @@ tnbLib::Pln_CmpEdge::Copy() const
 		}
 	}
 	return std::move(cmpEdge);
+}
+
+void tnbLib::Pln_CmpEdge::Transform
+(
+	const gp_Trsf2d & t
+)
+{
+	auto vertices = RetrieveVertices();
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		x->Transform(t);
+	}
+
+	for (const auto& x : Edges())
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		x->Curve()->Transform(t);
+	}
 }
 
 void tnbLib::Pln_CmpEdge::Reverse()

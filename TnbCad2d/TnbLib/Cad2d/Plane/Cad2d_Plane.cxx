@@ -266,6 +266,21 @@ void tnbLib::Cad2d_Plane::Approx
 	}
 }
 
+void tnbLib::Cad2d_Plane::Transform(const gp_Trsf2d & t)
+{
+	if (OuterWire())
+		OuterWire()->Transform(t);
+
+	if (InnerWires())
+	{
+		for (const auto& x : *InnerWires())
+		{
+			Debug_Null_Pointer(x);
+			x->Transform(t);
+		}
+	}
+}
+
 //std::shared_ptr<tnbLib::Entity2d_Chain> 
 //tnbLib::Cad2d_Plane::Polygon() const
 //{

@@ -41,3 +41,11 @@ void tnbLib::Pln_Vertex::RetrieveEdgesTo
 		theEdges.push_back(x.second);
 	}
 }
+
+void tnbLib::Pln_Vertex::Transform
+(
+	const gp_Trsf2d & t
+)
+{
+	Coord().Transform(t);
+}
