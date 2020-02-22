@@ -128,10 +128,13 @@ tnbLib::Pln_Curve::CalcBoundingBox() const
 	return std::move(box);
 }
 
-std::shared_ptr<tnbLib::Pln_Curve> 
+std::shared_ptr<tnbLib::Pln_Entity> 
 tnbLib::Pln_Curve::Copy() const
 {
-	auto copy = std::make_shared<Pln_Curve>(Index(), Name(), Geometry());
+	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());
+	Debug_Null_Pointer(c);
+
+	auto copy = std::make_shared<Pln_Curve>(Index(), Name(), c);
 	return std::move(copy);
 }
 

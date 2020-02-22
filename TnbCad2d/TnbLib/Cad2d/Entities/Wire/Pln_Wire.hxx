@@ -92,8 +92,8 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Pln_Curve>>
 			RetrieveCurves() const;
 
-		std::shared_ptr<Pln_Wire>
-			Copy() const;
+		std::shared_ptr<Pln_Entity>
+			Copy() const override;
 
 		void ApplyOrientation(const Pln_Orientation theOrient);
 

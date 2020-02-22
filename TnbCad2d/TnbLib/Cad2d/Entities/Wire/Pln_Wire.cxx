@@ -215,24 +215,23 @@ tnbLib::Pln_Wire::RetrieveCurves() const
 	return std::move(curves);
 }
 
-//std::shared_ptr<tnbLib::Pln_Wire>
-//tnbLib::Pln_Wire::Copy() const
-//{
-//	const auto& cmpEdge = CmpEdge();
-//	
-//	auto vertices = RetrieveVertices();
-//
-//	std::vector<std::shared_ptr<Pln_Vertex>> copy_vertices;
-//	copy_vertices.reserve(vertices.size());
-//
-//	for (const auto& x : vertices)
-//	{
-//		Debug_Null_Pointer(x);
-//		copy_vertices.push_back(x->Copy());
-//	}
-//
-//
-//}
+std::shared_ptr<tnbLib::Pln_Entity> 
+tnbLib::Pln_Wire::Copy() const
+{
+	auto wire = 
+		std::make_shared<Pln_Wire>
+		(
+			Index(), Name(), 
+			std::dynamic_pointer_cast<Pln_CmpEdge>(CmpEdge()->Copy()));
+	Debug_Null_Pointer(wire);
+
+	for (const auto& x : wire->Edges())
+	{
+		Debug_Null_Pointer(x);
+		x->SetWire(wire);
+	}
+	return std::move(wire);
+}
 
 void tnbLib::Pln_Wire::ApplyOrientation
 (

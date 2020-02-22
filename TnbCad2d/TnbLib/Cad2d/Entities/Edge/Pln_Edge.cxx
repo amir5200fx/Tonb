@@ -3,6 +3,7 @@
 #include <Entity2d_Polygon.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Curve.hxx>
+#include <Pln_Ring.hxx>
 
 #include <Geom2d_Curve.hxx>
 
@@ -74,6 +75,37 @@ tnbLib::Pln_Edge::Parameter
 				<< abort(FatalError);
 			return 0;
 		}
+	}
+}
+
+std::shared_ptr<tnbLib::Pln_Entity> 
+tnbLib::Pln_Edge::Copy() const
+{
+	auto v0 = std::dynamic_pointer_cast<Pln_Vertex>(Vtx0()->Copy());
+	auto v1 = std::dynamic_pointer_cast<Pln_Vertex>(Vtx1()->Copy());
+	auto c = std::dynamic_pointer_cast<Pln_Curve>(Curve()->Copy());
+
+	if (v0 IS_EQUAL v1)
+	{
+		auto copy = std::make_shared<Pln_Ring>(Index(), Name(), v0, c, Sense());
+		Debug_Null_Pointer(copy);
+
+		v0->InsertToEdges(copy->Index(), copy);
+
+		return std::move(copy);
+	}
+	else
+	{
+		Debug_Null_Pointer(v0);
+		Debug_Null_Pointer(v1);
+
+		auto copy = std::make_shared<Pln_Edge>(Index(), Name(), v0, v1, c, Sense());
+		Debug_Null_Pointer(copy);
+
+		v0->InsertToEdges(copy->Index(), copy);
+		v1->InsertToEdges(copy->Index(), copy);
+
+		return std::move(copy);
 	}
 }
 

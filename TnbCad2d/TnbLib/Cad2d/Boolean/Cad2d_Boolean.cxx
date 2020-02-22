@@ -140,6 +140,14 @@ tnbLib::Cad2d_Boolean::Union
 			<< abort(FatalError);
 	}
 
+	auto bb0 = thePlane0->BoundingBox();
+	auto bb1 = thePlane1->BoundingBox();
+
+	if (NOT bb0.IsIntersect(bb1))
+	{
+		return nullptr;
+	}
+
 	auto intersection = std::make_shared<Cad2d_PlanePlaneIntersection>();
 	Debug_Null_Pointer(intersection);
 
@@ -150,6 +158,11 @@ tnbLib::Cad2d_Boolean::Union
 
 	intersection->Perform();
 	Debug_If_Condition_Message(NOT intersection->IsDone(), "the algorithm is not performed!");
+
+	if (NOT intersection->NbEntities())
+	{
+		return nullptr;
+	}
 
 	auto subdivide = std::make_shared<Cad2d_Subdivide>();
 	Debug_Null_Pointer(subdivide);
@@ -179,6 +192,7 @@ tnbLib::Cad2d_Boolean::Union
 	auto edges1 = sub1->Segments()->RetrieveEntities();
 
 	std::vector<Handle(Geom2d_Curve)> curves;
+	Standard_Integer k0 = 0;
 	for (const auto& x : edges0)
 	{
 		Debug_Null_Pointer(x);
@@ -192,9 +206,16 @@ tnbLib::Cad2d_Boolean::Union
 		if (NOT boolean::IsCurveInsidePolygon(*x->Curve(), *chain1, domain1))
 		{
 			curves.push_back(x->Curve()->Geometry());
+			++k0;
 		}
 	}
 
+	if (NOT k0)
+	{
+		return thePlane1;
+	}
+
+	Standard_Integer k1 = 0;
 	for (const auto& x : edges1)
 	{
 		Debug_Null_Pointer(x);
@@ -208,13 +229,23 @@ tnbLib::Cad2d_Boolean::Union
 		if (NOT boolean::IsCurveInsidePolygon(*x->Curve(), *chain0, domain0))
 		{
 			curves.push_back(x->Curve()->Geometry());
+			k1++;
 		}
 	}
 
-	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
-	auto[minTol1, maxTol1] = thePlane0->BoundTolerance();
+	if (NOT k1)
+	{
+		return thePlane0;
+	}
 
-	auto wires = Pln_Tools::RetrieveWires(curves, MAX(MAX(minTol0, minTol1), Tolerance), 10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
+	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
+	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
+
+	auto wires =
+		Pln_Tools::RetrieveWires
+		(curves,
+			MAX(MAX(minTol0, minTol1), Tolerance),
+			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 
 	auto outer = Pln_Tools::RetrieveOuterWire(wires);
 	auto inners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
@@ -256,6 +287,14 @@ tnbLib::Cad2d_Boolean::Subtract
 			<< abort(FatalError);
 	}
 
+	auto bb0 = thePlane0->BoundingBox();
+	auto bb1 = thePlane1->BoundingBox();
+
+	if (NOT bb0.IsIntersect(bb1))
+	{
+		return nullptr;
+	}
+
 	auto intersection = std::make_shared<Cad2d_PlanePlaneIntersection>();
 	Debug_Null_Pointer(intersection);
 
@@ -276,6 +315,11 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	Debug_If_Condition_Message(NOT subdivide->IsDone(), "the algorithm is not performed!");
 
+	if (NOT intersection->NbEntities())
+	{
+		return nullptr;
+	}
+
 	const auto& sub0 = subdivide->ModifiedPlane0();
 	const auto& sub1 = subdivide->ModifiedPlane1();
 
@@ -295,6 +339,7 @@ tnbLib::Cad2d_Boolean::Subtract
 	auto edges1 = sub1->Segments()->RetrieveEntities();
 
 	std::vector<Handle(Geom2d_Curve)> curves;
+	Standard_Integer k0 = 0;
 	for (const auto& x : edges0)
 	{
 		Debug_Null_Pointer(x);
@@ -302,15 +347,23 @@ tnbLib::Cad2d_Boolean::Subtract
 
 		if (x->Curve()->IsTangential())
 		{
+			curves.push_back(x->Curve()->Geometry());
 			continue;
 		}
 
 		if (NOT boolean::IsCurveInsidePolygon(*x->Curve(), *chain1, domain1))
 		{
 			curves.push_back(x->Curve()->Geometry());
+			++k0;
 		}
 	}
 
+	if (NOT k0)
+	{
+		return nullptr;
+	}
+
+	Standard_Integer k1 = 0;
 	for (const auto& x : edges1)
 	{
 		Debug_Null_Pointer(x);
@@ -330,11 +383,18 @@ tnbLib::Cad2d_Boolean::Subtract
 			c->Reverse();
 
 			curves.push_back(c);
+
+			++k1;
 		}
 	}
 
+	if (NOT k1)
+	{
+		return thePlane0;
+	}
+
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
-	auto[minTol1, maxTol1] = thePlane0->BoundTolerance();
+	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
 	auto wires = Pln_Tools::RetrieveWires(curves, MAX(MAX(minTol0, minTol1), Tolerance), 10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 
@@ -378,6 +438,14 @@ tnbLib::Cad2d_Boolean::Intersection
 			<< abort(FatalError);
 	}
 
+	auto bb0 = thePlane0->BoundingBox();
+	auto bb1 = thePlane1->BoundingBox();
+
+	if (NOT bb0.IsIntersect(bb1))
+	{
+		return nullptr;
+	}
+
 	auto intersection = std::make_shared<Cad2d_PlanePlaneIntersection>();
 	Debug_Null_Pointer(intersection);
 
@@ -388,6 +456,11 @@ tnbLib::Cad2d_Boolean::Intersection
 
 	intersection->Perform();
 	Debug_If_Condition_Message(NOT intersection->IsDone(), "the algorithm is not performed!");
+
+	if (NOT intersection->NbEntities())
+	{
+		return nullptr;
+	}
 
 	auto subdivide = std::make_shared<Cad2d_Subdivide>();
 	Debug_Null_Pointer(subdivide);
@@ -417,6 +490,7 @@ tnbLib::Cad2d_Boolean::Intersection
 	auto edges1 = sub1->Segments()->RetrieveEntities();
 
 	std::vector<Handle(Geom2d_Curve)> curves;
+	Standard_Integer k0 = 0;
 	for (const auto& x : edges0)
 	{
 		Debug_Null_Pointer(x);
@@ -430,9 +504,11 @@ tnbLib::Cad2d_Boolean::Intersection
 		if (boolean::IsCurveInsidePolygon(*x->Curve(), *chain1, domain1))
 		{
 			curves.push_back(x->Curve()->Geometry());
+			++k0;
 		}
 	}
 
+	Standard_Integer k1 = 0;
 	for (const auto& x : edges1)
 	{
 		Debug_Null_Pointer(x);
@@ -446,11 +522,27 @@ tnbLib::Cad2d_Boolean::Intersection
 		if (boolean::IsCurveInsidePolygon(*x->Curve(), *chain0, domain0))
 		{
 			curves.push_back(x->Curve()->Geometry());
+			++k1;
 		}
 	}
 
+	if (NOT k0 AND NOT k1)
+	{
+		return nullptr;
+	}
+
+	if (k0 AND NOT k1)
+	{
+		return thePlane0;
+	}
+
+	if (k1 AND NOT k0)
+	{
+		return thePlane1;
+	}
+
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
-	auto[minTol1, maxTol1] = thePlane0->BoundTolerance();
+	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
 	auto wires = Pln_Tools::RetrieveWires(curves, MAX(MAX(minTol0, minTol1), Tolerance), 10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 

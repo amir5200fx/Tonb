@@ -82,8 +82,8 @@ namespace tnbLib
 
 		Entity2d_Box CalcBoundingBox() const;
 
-		std::shared_ptr<Pln_Curve>
-			Copy() const;
+		std::shared_ptr<Pln_Entity>
+			Copy() const override;
 
 		void Interpolation
 		(

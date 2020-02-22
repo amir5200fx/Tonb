@@ -216,6 +216,43 @@ tnbLib::Cad2d_Plane::BoundTolerance() const
 	return std::move(t);
 }
 
+std::shared_ptr<tnbLib::Pln_Entity> 
+tnbLib::Cad2d_Plane::Copy() const
+{
+	auto ow = std::dynamic_pointer_cast<Pln_Wire>(OuterWire()->Copy());
+	Debug_Null_Pointer(ow);
+
+	if (InnerWires())
+	{
+		auto iw = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
+		for (const auto& x : *InnerWires())
+		{
+			Debug_Null_Pointer(x);
+
+			auto w = std::dynamic_pointer_cast<Pln_Wire>(x->Copy());
+			Debug_Null_Pointer(w);
+
+			iw->push_back(std::move(w));
+		}
+
+		auto plane = Cad2d_Plane::MakePlane(ow, iw, System());
+		Debug_Null_Pointer(plane);
+
+		plane->SetIndex(Index());
+		plane->SetName(Name());
+
+		return std::move(plane);
+	}
+
+	auto plane = Cad2d_Plane::MakePlane(ow, nullptr, System());
+	Debug_Null_Pointer(plane);
+
+	plane->SetIndex(Index());
+	plane->SetName(Name());
+
+	return std::move(plane);
+}
+
 void tnbLib::Cad2d_Plane::Approx
 (
 	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo

@@ -23,7 +23,7 @@ Standard_Boolean tnbLib::Pln_Vertex::IsManifold() const
 	return Standard_False;
 }
 
-std::shared_ptr<tnbLib::Pln_Vertex> 
+std::shared_ptr<tnbLib::Pln_Entity> 
 tnbLib::Pln_Vertex::Copy() const
 {
 	auto copy = std::make_shared<Pln_Vertex>(Index(), Name(), Coord());

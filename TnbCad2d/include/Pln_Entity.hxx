@@ -32,6 +32,7 @@ namespace tnbLib
 
 	public:
 
+		virtual std::shared_ptr<Pln_Entity> Copy() const = 0;
 	};
 }
 

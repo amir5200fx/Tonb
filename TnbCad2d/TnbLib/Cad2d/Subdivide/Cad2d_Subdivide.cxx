@@ -385,7 +385,7 @@ namespace tnbLib
 				auto iter = theMap.find(x->Index());
 				if (iter IS_EQUAL theMap.end())
 				{
-					newCurves.push_back(x->Curve()->Copy());
+					newCurves.push_back(std::dynamic_pointer_cast<Pln_Curve>(x->Curve()->Copy()));
 					senses.push_back(x->Sense());
 				}
 				else

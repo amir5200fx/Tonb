@@ -122,14 +122,14 @@ void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()
 		if (NOT seg.HasFirstPoint())
 		{
 			FatalErrorIn("void Perform()") << endl
-				<< "the segment deos not have first point!" << endl
+				<< "the segment does not have first point!" << endl
 				<< abort(FatalError);
 		}
 
 		if (NOT seg.HasLastPoint())
 		{
 			FatalErrorIn("void Perform()") << endl
-				<< "the segment deos not have first point!" << endl
+				<< "the segment does not have first point!" << endl
 				<< abort(FatalError);
 		}
 

@@ -2,6 +2,7 @@
 
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
+#include <Pln_Ring.hxx>
 #include <Pln_Tools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
@@ -44,17 +45,56 @@ tnbLib::Pln_CmpEdge::IsValidForWire
 	return Standard_True;
 }
 
-//std::shared_ptr<tnbLib::Pln_CmpEdge> 
-//tnbLib::Pln_CmpEdge::Copy() const
-//{
-//	auto vertices = RetrieveVertices();
-//	std::vector<std::shared_ptr<Pln_Vertex>> copy_vertices;
-//	for (const auto& x : vertices)
-//	{
-//		Debug_Null_Pointer(x);
-//		copy_vertices.push_back(x->Copy());
-//	}
-//}
+std::shared_ptr<tnbLib::Pln_Entity>
+tnbLib::Pln_CmpEdge::Copy() const
+{
+	auto vertices = RetrieveVertices();
+
+	std::map<Standard_Integer, std::shared_ptr<Pln_Vertex>>
+		vtxMap;
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		auto insert = vtxMap.insert(std::make_pair(x->Index(), x));
+		if (NOT insert.second)
+		{
+			FatalErrorIn("std::shared_ptr<tnbLib::Pln_Entity> Pln_CmpEdge::Copy() const")
+				<< "Unable to copy the entity" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	auto cmpEdge = std::make_shared<Pln_CmpEdge>(Index(), Name());
+	Debug_Null_Pointer(cmpEdge);
+
+	for (const auto& x : Edges())
+	{
+		Debug_Null_Pointer(x);
+		const auto& v0 = vtxMap[x->Vtx0()->Index()];
+		const auto& v1 = vtxMap[x->Vtx1()->Index()];
+
+		if (v0 IS_EQUAL v1)
+		{
+			auto edge = std::make_shared<Pln_Ring>(x->Index(), x->Name(), v0, x->Curve(), x->Sense());
+			Debug_Null_Pointer(edge);
+
+			v0->InsertToEdges(edge->Index(), edge);
+
+			cmpEdge->Insert(edge);
+		}
+		else
+		{
+			auto edge = std::make_shared<Pln_Edge>(x->Index(), x->Name(), v0, v1, x->Curve(), x->Sense());
+			Debug_Null_Pointer(edge);
+
+			v0->InsertToEdges(edge->Index(), edge);
+			v1->InsertToEdges(edge->Index(), edge);
+
+			cmpEdge->Insert(edge);
+		}
+	}
+	return std::move(cmpEdge);
+}
 
 void tnbLib::Pln_CmpEdge::Reverse()
 {
