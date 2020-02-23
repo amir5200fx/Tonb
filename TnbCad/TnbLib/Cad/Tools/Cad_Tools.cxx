@@ -335,6 +335,7 @@ tnbLib::Cad_Tools::GetEdge
 
 	if (Curve)
 	{
+		Curve = Handle(Geom_Curve)::DownCast(Curve->Copy());
 		if (NOT IsBounded(Curve))
 		{
 			Curve = ConvertToTrimmed(Curve, U0, U1);
@@ -944,9 +945,9 @@ tnbLib::Cad_Tools::MakeSolid
 {
 	auto solid = std::make_shared<Cad3d_TModel>();
 
-	solid->theBoundingBox_ = BoundingBox(theSurfaces);
+	auto box = BoundingBox(theSurfaces);
 
-	const auto tol = theTolerance * solid->theBoundingBox_.Diameter();
+	const auto tol = theTolerance * box.Diameter();
 	auto EdgesOnSolid = RetrieveNonSingularEdges(theSurfaces);
 
 	Standard_Integer K = 0;

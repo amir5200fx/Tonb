@@ -37,8 +37,6 @@ namespace tnbLib
 
 		TopoDS_Shape theShape_;
 
-		Entity3d_Box theBoundingBox_;
-
 	public:
 
 		Cad3d_TModel();
@@ -65,11 +63,6 @@ namespace tnbLib
 		}
 
 	public:
-
-		const auto& BoundingBox() const
-		{
-			return theBoundingBox_;
-		}
 
 		const auto& Shape() const
 		{
