@@ -3,6 +3,7 @@
 #define _MonoHull_FormDim_Header
 
 #include <Vessel_FormDim.hxx>
+#include <HsPhysModel_MonoHull.hxx>
 
 namespace tnbLib
 {
@@ -12,6 +13,7 @@ namespace tnbLib
 
 	class MonoHull_FormDim
 		: public Vessel_FormDim_Parameters
+		, public HsPhysModel_MonoHull
 	{
 
 		/*Private Data*/

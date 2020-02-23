@@ -6,7 +6,7 @@
 tnbLib::Dir3d 
 tnbLib::Marine_FlatWave::SurfaceDirection() const
 {
-	return Dir3d(Origin().Axis().Direction().XYZ());
+	return Dir3d(Origin().XDirection().XYZ());
 }
 
 void tnbLib::Marine_FlatWave::MakeProfileCurve

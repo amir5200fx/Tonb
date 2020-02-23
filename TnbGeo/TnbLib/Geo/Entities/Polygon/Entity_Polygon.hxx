@@ -3,6 +3,7 @@
 #define _Entity_Polygon_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Geo_Traits.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -85,6 +86,17 @@ namespace tnbLib
 		Point& GetPoint(const Standard_Integer theIndex)
 		{
 			return thePoints_[theIndex];
+		}
+
+		void Transform
+		(
+			const typename transform_point_type<Point>::type& theTrasf
+		)
+		{
+			for (auto& x : thePoints_)
+			{
+				x.Transform(theTrasf);
+			}
 		}
 
 		void Reverse();

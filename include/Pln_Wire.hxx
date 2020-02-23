@@ -8,6 +8,8 @@
 #include <Entity2d_BoxFwd.hxx>
 #include <OFstream.hxx>
 
+class gp_Trsf2d;
+
 #include <vector>
 
 namespace tnbLib
@@ -92,8 +94,10 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Pln_Curve>>
 			RetrieveCurves() const;
 
-		std::shared_ptr<Pln_Wire>
-			Copy() const;
+		std::shared_ptr<Pln_Entity>
+			Copy() const override;
+
+		void Transform(const gp_Trsf2d& t);
 
 		void ApplyOrientation(const Pln_Orientation theOrient);
 

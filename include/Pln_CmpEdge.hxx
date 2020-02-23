@@ -5,6 +5,8 @@
 #include <Pln_Entity.hxx>
 #include <OFstream.hxx>
 
+class gp_Trsf2d;
+
 #include <memory>
 #include <vector>
 
@@ -76,11 +78,13 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		std::shared_ptr<Pln_CmpEdge>
-			Copy() const;
+		std::shared_ptr<Pln_Entity>
+			Copy() const override;
 
 		std::vector<std::shared_ptr<Pln_Vertex>>
 			RetrieveVertices() const;
+
+		void Transform(const gp_Trsf2d& t);
 
 		void RetrieveVerticesTo(std::vector<std::shared_ptr<Pln_Vertex>>& theVertices) const;
 

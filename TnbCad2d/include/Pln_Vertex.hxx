@@ -8,6 +8,8 @@
 #include <Pln_VertexAdaptor.hxx>
 #include <Pnt2d.hxx>
 
+class gp_Trsf2d;
+
 #include <memory>
 #include <map>
 #include <vector>
@@ -74,6 +76,7 @@ namespace tnbLib
 
 		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
 
+		void Transform(const gp_Trsf2d& t);
 
 		//- virtual functions
 

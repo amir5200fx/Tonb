@@ -52,6 +52,27 @@
     <Filter Include="TnbLib\Hydrostatic\Tools">
       <UniqueIdentifier>{8f53222d-669e-4d72-abaf-43354cf8770b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Region">
+      <UniqueIdentifier>{ea573805-6a5d-4317-8911-3c1e944bcdce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Boundary">
+      <UniqueIdentifier>{d90c3726-30ed-475e-9eb2-c65bdead2db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Boundary\Type">
+      <UniqueIdentifier>{49335afd-6139-4161-87f9-74f1d1b5d3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Physics">
+      <UniqueIdentifier>{a174dc37-8f48-4d26-8265-c530f837ea75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\PhysicsModel">
+      <UniqueIdentifier>{f05ad48a-155e-437a-ab9d-98ed929317f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull">
+      <UniqueIdentifier>{62f571e2-12a4-4d8f-a18f-c9a291ad8ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\CrossCurves">
+      <UniqueIdentifier>{34bb7556-e536-4243-bbf6-24bf69e71694}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.hxx">
@@ -93,6 +114,24 @@
     <ClInclude Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.hxx">
       <Filter>TnbLib\Hydrostatic\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Region\HydroStatic_Region.hxx">
+      <Filter>TnbLib\Hydrostatic\Region</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Boundary\HydroStatic_Boundary.hxx">
+      <Filter>TnbLib\Hydrostatic\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Boundary\Type\HsBnd_Type.hxx">
+      <Filter>TnbLib\Hydrostatic\Boundary\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\HydroStatic_PhysicsModel.hxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull\HsPhysModel_MonoHull.hxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\MonoHull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\CrossCurves\HydroStatic_CrossCurves.hxx">
+      <Filter>TnbLib\Hydrostatic\CrossCurves</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx">
@@ -106,6 +145,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.cxx">
       <Filter>TnbLib\Hydrostatic\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Region\HydroStatic_Region.cxx">
+      <Filter>TnbLib\Hydrostatic\Region</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull\HsPhysModel_MonoHull.cxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\MonoHull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\CrossCurves\HydroStatic_CrossCurves.cxx">
+      <Filter>TnbLib\Hydrostatic\CrossCurves</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

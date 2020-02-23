@@ -12,6 +12,7 @@
 class Geom2d_Curve;
 class gp_Ax2d;
 class gp_Ax22d;
+class gp_Trsf2d;
 
 #include <memory>
 #include <vector>
@@ -82,8 +83,10 @@ namespace tnbLib
 
 		Entity2d_Box CalcBoundingBox() const;
 
-		std::shared_ptr<Pln_Curve>
-			Copy() const;
+		std::shared_ptr<Pln_Entity>
+			Copy() const override;
+
+		void Transform(const gp_Trsf2d& t);
 
 		void Interpolation
 		(

@@ -242,6 +242,10 @@ void tnbLib::Pln_Wire::Transform
 	Debug_Null_Pointer(cmpEdge);
 
 	cmpEdge->Transform(t);
+	if (BoundingBox())
+	{
+		CalcBoundingBox(Edges());
+	}
 }
 
 void tnbLib::Pln_Wire::ApplyOrientation
