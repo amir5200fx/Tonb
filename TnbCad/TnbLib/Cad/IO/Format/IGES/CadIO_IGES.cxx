@@ -23,13 +23,15 @@ void tnbLib::CadIO_IGES::ReadFile
 		IGESControl_Reader Reader;
 
 		Reader.ReadFile(theName.c_str());
-
+		
 		Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
+		
 		SetNbFaces(myList->Length());
-
+		Reader.TransferList(myList);
+		
 		SetShape(Reader.OneShape());
 		SetFileName(theName);
-
+		
 		Bnd_Box box;
 		BRepBndLib::Add(Shape(), box);
 

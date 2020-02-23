@@ -92,7 +92,10 @@ void tnbLib::example_create_marine_vessel()
 
 	gp_Ax1 ax1(ax.Location(), ax.XDirection());
 
-	MarineBase_Tools::Heel(maker, ax1, 16);
+	MarineBase_Tools::Heel(maker, ax1, 20);
+
+	auto waters = MarineBase_Tools::WaterSections(*maker, *wave, domain, 1.0E-3, 1.0E-6);
+	auto wetted = MarineBase_Tools::WettedSections(maker, waters);
 
 	for (const auto& x : maker->Sections())
 	{
@@ -121,4 +124,60 @@ void tnbLib::example_create_marine_vessel()
 			poly3d.ExportToPlt(myFile);
 		}
 	}
+
+	for (const auto& x : wetted)
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& sys = x->CoordinateSystem();
+		Handle(Geom_Plane) pl = new Geom_Plane(gp_Pln(sys));
+
+		for (const auto& w : x->Sections())
+		{
+			Debug_Null_Pointer(w);
+
+			Debug_Null_Pointer(w->Wire());
+			const auto& wire = *w->Wire();
+
+			auto poly2d = wire.Polygon();
+
+			Entity3d_Polygon poly3d;
+			auto& pts = poly3d.Points();
+
+			for (const auto& x : poly2d->Points())
+			{
+				gp_Pnt p3 = pl->Value(x.X(), x.Y());
+				pts.push_back(p3);
+			}
+			poly3d.ExportToPlt(myFile);
+		}
+	}
+
+	/*{
+		
+
+		for (const auto& w : waters)
+		{
+			Debug_Null_Pointer(w);
+
+			const auto& sys = w->CoordinateSystem();
+			Handle(Geom_Plane) pl = new Geom_Plane(gp_Pln(sys));
+
+			Debug_Null_Pointer(w->Wire());
+			const auto& wire = *w->Wire();
+
+			auto poly2d = wire.Polygon();
+
+			Entity3d_Polygon poly3d;
+			auto& pts = poly3d.Points();
+
+			for (const auto& x : poly2d->Points())
+			{
+				gp_Pnt p3 = pl->Value(x.X(), x.Y());
+				pts.push_back(p3);
+			}
+			poly3d.ExportToPlt(myFile);
+		}
+	}*/
+	
 }

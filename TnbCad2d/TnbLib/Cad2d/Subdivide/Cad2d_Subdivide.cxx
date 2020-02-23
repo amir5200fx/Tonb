@@ -494,10 +494,16 @@ namespace tnbLib
 			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
 			
 			auto[minTol, maxTol] = outer->BoundTolerance();
-			
+			Standard_Integer kk = 0;
+			for (const auto& x : newOuter_curves)
+			{
+				cout << x->FirstCoord() << "----" << x->LastCoord() << std::endl;
+				cout << "sense = " << outerSense[kk++] << std::endl;
+			}
+			PAUSE;
 			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(maxTol, theTol));
 			Debug_Null_Pointer(newOuter);
-			
+
 			newOuter->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
 
 			if (thePlane->InnerWires())
@@ -599,7 +605,7 @@ void tnbLib::Cad2d_Subdivide::Perform()
 		(
 			IntersectionAlgorithm()->Plane0(), 
 			entities0, IntersectionAlgorithm()->Tolerance());
-
+	
 	ChangePlane1() = 
 		subdivide::SubdividePalne
 		(IntersectionAlgorithm()->Plane1(), 

@@ -1383,6 +1383,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\global\controlSwitches\tolerancesSwitch.cxx" />
     <ClCompile Include="TnbLib\Base\global\dimensionedConstants\dimensionedConstants.cxx" />
     <ClCompile Include="TnbLib\Base\global\global.cxx" />
+    <ClCompile Include="TnbLib\Base\global\Global_Message.cxx" />
     <ClCompile Include="TnbLib\Base\global\Global_Timer.cxx" />
     <ClCompile Include="TnbLib\Base\global\JobInfo\JobInfo.cxx" />
     <ClCompile Include="TnbLib\Base\global\new.cxx" />

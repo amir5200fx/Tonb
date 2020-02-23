@@ -43,7 +43,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(SolutionDir)TnbBase\Libraries\pcre\include;$(ARMADILLO_INCLUDEDIR);$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(SolutionDir)TnbBase\Libraries\pcre\include;$(SolutionDir)Common\Armadillo;$(ARMADILLO_INCLUDEDIR);$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)TnbBase\Libraries\dlfcn\lib;$(SolutionDir)TnbBase\Libraries\zLib\lib;$(SolutionDir)TnbBase\Libraries\pthreads\lib;$(SolutionDir)TnbBase\Libraries\pcre\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -126,6 +126,7 @@
     <ClCompile Include="Examples\example_create_marine_vessel.cxx" />
     <ClCompile Include="Examples\example_creating_box.cxx" />
     <ClCompile Include="Examples\example_creating_plane_box.cxx" />
+    <ClCompile Include="Examples\example_open_iges.cxx" />
     <ClCompile Include="Examples\example_union_plane_box.cxx" />
     <ClCompile Include="main.cxx" />
   </ItemGroup>

@@ -473,7 +473,7 @@ tnbLib::Cad2d_Boolean::Intersection
 
 	const auto& sub0 = subdivide->ModifiedPlane0();
 	const auto& sub1 = subdivide->ModifiedPlane1();
-
+	
 	Debug_Null_Pointer(sub0);
 	Debug_Null_Pointer(sub1);
 
@@ -543,7 +543,7 @@ tnbLib::Cad2d_Boolean::Intersection
 
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
-
+	
 	auto wires = Pln_Tools::RetrieveWires(curves, MAX(MAX(minTol0, minTol1), Tolerance), 10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 
 	auto outer = Pln_Tools::RetrieveOuterWire(wires);

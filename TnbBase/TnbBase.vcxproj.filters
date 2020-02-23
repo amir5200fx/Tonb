@@ -7061,6 +7061,9 @@
     <ClCompile Include="TnbLib\Base\global\UnitSystem.cxx">
       <Filter>TnbLib\Base\global</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Base\global\Global_Message.cxx">
+      <Filter>TnbLib\Base\global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

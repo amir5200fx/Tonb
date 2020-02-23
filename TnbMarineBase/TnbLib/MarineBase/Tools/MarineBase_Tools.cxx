@@ -465,6 +465,463 @@ void tnbLib::MarineBase_Tools::Heel
 	}
 }
 
+#include <Cad2d_Plane.hxx>
+#include <Cad2d_Boolean.hxx>
+#include <Cad_Tools.hxx>
+#include <Marine_WetSection.hxx>
+#include <Marine_Wave.hxx>
+#include <Marine_WetSection.hxx>
+#include <Marine_DrySection.hxx>
+
+#include <Standard_Handle.hxx>
+#include <gp_Pln.hxx>
+#include <Geom_Line.hxx>
+#include <Geom_Curve.hxx>
+#include <Geom_TrimmedCurve.hxx>
+#include <Geom_Plane.hxx>
+#include <GeomProjLib.hxx>
+#include <Geom_Surface.hxx>
+#include <GeomAPI_ProjectPointOnCurve.hxx>
+#include <BRepAlgoAPI_Section.hxx>
+#include <BRep_Tool.hxx>
+#include <TopoDS_Edge.hxx>
+
+namespace tnbLib
+{
+
+	namespace marineLib
+	{
+
+		static Handle(Geom_Curve)
+			CreateLine
+			(
+				const Pnt3d& theP0,
+				const Pnt3d& theP1
+			)
+		{
+			gp_Vec v(theP0, theP1);
+			Handle(Geom_Curve) c = new Geom_Line(theP0, gp_Dir(v));
+
+			GeomAPI_ProjectPointOnCurve proj;
+			proj.Init(theP0, c);
+
+			const auto u0 = proj.LowerDistanceParameter();
+
+			proj.Init(theP1, c);
+
+			const auto u1 = proj.LowerDistanceParameter();
+
+			auto trimmed = Cad_Tools::ConvertToTrimmed(c, u0, u1);
+			return std::move(trimmed);
+		}
+	}
+}
+
+std::shared_ptr<tnbLib::Pln_Wire> 
+tnbLib::MarineBase_Tools::WaterSection
+(
+	const Handle(Geom_Curve)& theCurve,
+	const gp_Ax2 & theSystem,
+	const Standard_Real theZmin, 
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	Pnt3d leftPt;
+	Pnt3d rightPt;
+
+	auto p0 = theCurve->Value(theCurve->FirstParameter());
+	auto p1 = theCurve->Value(theCurve->LastParameter());
+
+	if (p0.Y() < p1.Y())
+	{
+		leftPt = p0;
+		rightPt = p1;
+	}
+	else
+	{
+		leftPt = p1;
+		rightPt = p0;
+	}
+
+	auto p2 = leftPt + (theZmin - leftPt.Z()) * Pnt3d(theSystem.XDirection().XYZ());
+	auto p3 = rightPt + (theZmin - rightPt.Z()) * Pnt3d(theSystem.XDirection().XYZ());
+
+	auto c0 = marineLib::CreateLine(leftPt, p2);
+	auto c1 = marineLib::CreateLine(p2, p3);
+	auto c2 = marineLib::CreateLine(p3, rightPt);
+
+	gp_Pln plane(theSystem);
+	Handle(Geom_Plane) g = new Geom_Plane(plane);
+
+	auto cprj0 = GeomProjLib::ProjectOnPlane(c0, g, theSystem.Direction(), Standard_True);
+	auto cprj1 = GeomProjLib::ProjectOnPlane(c1, g, theSystem.Direction(), Standard_True);
+	auto cprj2 = GeomProjLib::ProjectOnPlane(c2, g, theSystem.Direction(), Standard_True);
+	auto cprj3 = GeomProjLib::ProjectOnPlane(theCurve, g, theSystem.Direction(), Standard_True);
+
+	auto c2d0 = GeomProjLib::Curve2d(cprj0, g);
+	if (NOT c2d0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to project the curve on the plane!" << endl
+			<< abort(FatalError);
+	}
+
+	auto c2d1 = GeomProjLib::Curve2d(cprj1, g);
+	if (NOT c2d1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to project the curve on the plane!" << endl
+			<< abort(FatalError);
+	}
+
+	auto c2d2 = GeomProjLib::Curve2d(cprj2, g);
+	if (NOT c2d2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to project the curve on the plane!" << endl
+			<< abort(FatalError);
+	}
+
+	auto c2d3 = GeomProjLib::Curve2d(cprj3, g);
+	if (NOT c2d3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to project the curve on the plane!" << endl
+			<< abort(FatalError);
+	}
+
+	std::vector<Handle(Geom2d_Curve)> curves;
+	curves.push_back(c2d0);
+	curves.push_back(c2d1);
+	curves.push_back(c2d2);
+	curves.push_back(c2d3);
+
+	auto cmpSection =
+		Marine_CmpSection::CreateCmpSection(curves, theSystem, theMinTol, theMaxTol);
+	Debug_Null_Pointer(cmpSection);
+
+	if (cmpSection->NbSections() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "contradictory data" << endl
+			<< abort(FatalError);
+	}
+
+	auto wire = cmpSection->Sections()[0]->Wire();
+	Debug_Null_Pointer(wire);
+
+	return std::move(wire);
+}
+
+namespace tnbLib
+{
+
+	namespace marineLib
+	{
+
+		static std::shared_ptr<Marine_Section>
+			CreateWaterSection
+			(
+				const std::shared_ptr<Pln_Wire>& theSection,
+				const std::shared_ptr<Pln_Wire>& theWater
+			)
+		{
+			auto section = Cad2d_Plane::MakePlane(theSection, nullptr);
+			Debug_Null_Pointer(section);
+
+			auto water = Cad2d_Plane::MakePlane(theWater, nullptr);
+			Debug_Null_Pointer(water);
+
+			auto intsct = Cad2d_Boolean::Intersection(section, water);
+
+			if (intsct)
+			{
+				if (intsct IS_EQUAL section)
+				{
+					Debug_Null_Pointer(intsct->OuterWire());
+
+					auto wet = std::make_shared<Marine_WetSection>(intsct->OuterWire());
+					Debug_Null_Pointer(wet);
+
+					wet->SetDeep(Standard_True);
+					return std::move(wet);
+				}
+				else
+				{
+					Debug_Null_Pointer(intsct->OuterWire());
+
+					auto wet = std::make_shared<Marine_WetSection>(intsct->OuterWire());
+					Debug_Null_Pointer(wet);
+
+					wet->SetDeep(Standard_False);
+					return std::move(wet);
+				}
+			}
+			return nullptr;
+		}
+
+		static Handle(Geom_Curve)
+			WaterLine
+			(
+				const Handle(Geom_Surface)& theSurface,
+				const gp_Ax2& theSystem
+			)
+		{
+			gp_Pln plane(theSystem);
+
+			BRepAlgoAPI_Section alg;
+			alg.SetRunParallel(Standard_True);
+			alg.Init1(plane);
+			alg.Init2(theSurface);
+
+			alg.Build();
+
+			if (alg.Shape().IsNull())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "Failed to calculate intersection" << endl
+					<< abort(FatalError);
+			}
+
+			auto edges = Marine_CmpSection::RetrieveEdges(alg.Shape());
+			if (edges.size() NOT_EQUAL 1)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "Contradictory data" << endl
+					<< abort(FatalError);
+			}
+
+			Standard_Real f, l;
+			auto curve = BRep_Tool::Curve(edges[0], f, l);
+			Debug_Null_Pointer(curve);
+
+			if (NOT Handle(Geom_TrimmedCurve)::DownCast(curve))
+			{
+				curve = new Geom_TrimmedCurve(curve, f, l);
+			}
+
+			return std::move(curve);
+		}
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
+tnbLib::MarineBase_Tools::WaterSections
+(
+	const Marine_CrossSection& theModel,
+	const Marine_Wave& theWave,
+	const Entity3d_Box& theDomain,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	const auto zmin = theDomain.P0().Z();
+	const auto& waterSurface = theWave.SurfaceGeometry();
+	if (NOT waterSurface)
+	{
+		FatalErrorIn("std::vector<std::shared_ptr<Marine_Section>> MarineBase_Tools::WaterSections(Args...)")
+			<< "no geometry is found for water surface" << endl
+			<< abort(FatalError);
+	}
+
+	std::vector<std::shared_ptr<Marine_Section>> waters;
+	Standard_Integer K = 0;
+	for (const auto& x : theModel.Sections())
+	{
+		Debug_Null_Pointer(x);
+
+		auto wl = marineLib::WaterLine(waterSurface, x->CoordinateSystem());
+		Debug_Null_Pointer(wl);
+
+		auto wa = WaterSection(wl, x->CoordinateSystem(), zmin, theMinTol, theMaxTol);
+		Debug_Null_Pointer(wa);
+
+		auto section = std::make_shared<Marine_Section>(++K, wa);
+		Debug_Null_Pointer(section);
+
+		section->SetCoordinateSystem(x->CoordinateSystem());
+		waters.push_back(std::move(section));
+	}
+	return std::move(waters);
+}
+
+std::shared_ptr<tnbLib::Marine_Section> 
+tnbLib::MarineBase_Tools::WettedSection
+(
+	const std::shared_ptr<Pln_Wire>& theSection,
+	const std::shared_ptr<Pln_Wire>& theWater
+)
+{
+	auto section = Cad2d_Plane::MakePlane(theSection, nullptr);
+	Debug_Null_Pointer(section);
+
+	auto water = Cad2d_Plane::MakePlane(theWater, nullptr);
+	Debug_Null_Pointer(water);
+	cout << "injaaaaaaaaa" << std::endl;
+	auto intsct = Cad2d_Boolean::Intersection(section, water);
+	PAUSE;
+	if (intsct)
+	{
+		if (intsct IS_EQUAL section)
+		{
+			Debug_Null_Pointer(intsct->OuterWire());
+
+			auto wet = std::make_shared<Marine_WetSection>(intsct->OuterWire());
+			Debug_Null_Pointer(wet);
+
+			wet->SetDeep(Standard_True);
+			return std::move(wet);
+		}
+		else
+		{
+			Debug_Null_Pointer(intsct->OuterWire());
+
+			auto wet = std::make_shared<Marine_WetSection>(intsct->OuterWire());
+			Debug_Null_Pointer(wet);
+
+			wet->SetDeep(Standard_False);
+			return std::move(wet);
+		}
+	}
+	return nullptr;
+}
+
+std::shared_ptr<tnbLib::Marine_CmpSection>
+tnbLib::MarineBase_Tools::WettedSection
+(
+	const std::shared_ptr<Marine_CmpSection>& theSection,
+	const std::shared_ptr<Marine_Section>& theWater
+)
+{
+	auto cmpSection = std::make_shared<Marine_CmpSection>(theSection->Index(), theSection->Name());
+	Debug_Null_Pointer(cmpSection);
+
+	auto& sections = cmpSection->ChangeSections();
+	for (const auto& x : theSection->Sections())
+	{
+		Debug_Null_Pointer(x);
+
+		auto wet = WettedSection(x->Wire(), theWater->Wire());
+		if (wet)
+		{
+			sections.push_back(std::move(wet));
+		}
+	}
+	if (sections.size())
+	{
+		return std::move(cmpSection);
+	}
+	return nullptr;
+}
+
+std::shared_ptr<tnbLib::Marine_Section> 
+tnbLib::MarineBase_Tools::DrySection
+(
+	const std::shared_ptr<Pln_Wire>& theSection,
+	const std::shared_ptr<Pln_Wire>& theWater
+)
+{
+	auto section = Cad2d_Plane::MakePlane(theSection, nullptr);
+	Debug_Null_Pointer(section);
+
+	auto water = Cad2d_Plane::MakePlane(theWater, nullptr);
+	Debug_Null_Pointer(water);
+
+	auto subt = Cad2d_Boolean::Subtract(section, water);
+	if (subt)
+	{
+		Debug_Null_Pointer(subt->OuterWire());
+
+		auto dry = std::make_shared<Marine_DrySection>(subt->OuterWire());
+		Debug_Null_Pointer(dry);
+		return std::move(dry);
+	}
+	return nullptr;
+}
+
+std::shared_ptr<tnbLib::Marine_CmpSection>
+tnbLib::MarineBase_Tools::DrySection
+(
+	const std::shared_ptr<Marine_CmpSection>& theSection,
+	const std::shared_ptr<Marine_Section>& theWater
+)
+{
+	auto cmpSection = std::make_shared<Marine_CmpSection>(theSection->Index(), theSection->Name());
+	Debug_Null_Pointer(cmpSection);
+
+	auto& sections = cmpSection->ChangeSections();
+	for (const auto& x : theSection->Sections())
+	{
+		Debug_Null_Pointer(x);
+
+		auto dry = DrySection(x->Wire(), theWater->Wire());
+		if (dry)
+		{
+			sections.push_back(std::move(dry));
+		}
+	}
+	if (sections.size())
+	{
+		return std::move(cmpSection);
+	}
+	return nullptr;
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_CmpSection>> 
+tnbLib::MarineBase_Tools::WettedSections
+(
+	const std::shared_ptr<Marine_CrossSection>& theModel,
+	const std::vector<std::shared_ptr<Marine_Section>>& theWaterSections
+)
+{
+	std::vector<std::shared_ptr<Marine_CmpSection>> wetted;
+
+	Standard_Integer K = 0;
+	const auto& sections = theModel->Sections();
+	for (const auto& x : sections)
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& wa = theWaterSections[K++];
+		Debug_Null_Pointer(wa);
+
+		auto wet = WettedSection(x, wa);
+		if (wet)
+		{
+			wetted.push_back(std::move(wet));
+		}
+	}
+	return std::move(wetted);
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_CmpSection>>
+tnbLib::MarineBase_Tools::DrySections
+(
+	const std::shared_ptr<Marine_CrossSection>& theModel,
+	const std::vector<std::shared_ptr<Marine_Section>>& theWaterSections
+)
+{
+	std::vector<std::shared_ptr<Marine_CmpSection>> drySections;
+
+	Standard_Integer K = 0;
+	const auto& sections = theModel->Sections();
+	for (const auto& x : sections)
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& wa = theWaterSections[K++];
+		Debug_Null_Pointer(wa);
+
+		auto dry = DrySection(x, wa);
+		if (dry)
+		{
+			drySections.push_back(std::move(dry));
+		}
+	}
+	return std::move(drySections);
+}
+
 //Standard_Real 
 //tnbLib::MarineBase_Tools::CalcWetVolume
 //(
