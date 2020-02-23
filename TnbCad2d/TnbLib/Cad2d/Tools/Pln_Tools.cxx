@@ -329,8 +329,11 @@ tnbLib::Pln_Tools::MakeWire
 	auto info = std::make_shared<Geo_ApprxCurve_Info>();
 	Debug_Null_Pointer(info);
 
-	info->SetAngle(2.0);
-	info->SetApprox(1.0E-4);
+	info->SetNbSamples(3);
+	info->SetAngle(5.0);
+	info->SetApprox(1.0E-2);
+	info->SetMinSize(1.0e-3);
+	info->SetInitNbSubdivision(2);
 
 	if (theCurves.size() IS_EQUAL 1)
 	{

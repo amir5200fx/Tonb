@@ -40,6 +40,7 @@ void tnbLib::CrossSection_xShapeStation::Perform()
 	alg.ComputePCurveOn1(Standard_True);
 	alg.SetRunParallel(Standard_True);
 	alg.Init2(Shape());
+	alg.Approximation(Standard_True);
 
 	auto x0 = syst0.Location().Z();
 	for (auto x : xSections)

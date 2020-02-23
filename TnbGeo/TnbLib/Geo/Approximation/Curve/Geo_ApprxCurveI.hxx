@@ -271,7 +271,7 @@ namespace tnbLib
 			(
 				*Curve(),
 				GeoLib::Segment(FirstParameter(), LastParameter()),
-				theInfo.MaxNbSubdivision(),
+				theInfo.NbSamples(),
 				theInfo.Approx()*theInfo.Approx(),
 				Geo_Tools::DegToRadian(theInfo.Angle()),
 				theInfo.MinSize()* theInfo.MinSize(),

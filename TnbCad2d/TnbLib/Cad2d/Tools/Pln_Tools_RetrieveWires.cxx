@@ -30,9 +30,21 @@ tnbLib::Pln_Tools::RetrieveOrientation
 		const auto& chain = x->Mesh();
 		const auto& appx_pts = chain->Points();
 
-		forThose(Index, 0, appx_pts.size() - 2)
+		if (NOT x->Sense())
 		{
-			Pts.push_back(appx_pts[Index]);
+			const auto c = appx_pts.size() - 1;
+
+			forThose(Index, 0, appx_pts.size() - 2)
+			{
+				Pts.push_back(appx_pts[c - Index]);
+			}
+		}
+		else
+		{
+			forThose(Index, 0, appx_pts.size() - 2)
+			{
+				Pts.push_back(appx_pts[Index]);
+			}
 		}
 
 		/*for (const auto& pt : appx_pts)

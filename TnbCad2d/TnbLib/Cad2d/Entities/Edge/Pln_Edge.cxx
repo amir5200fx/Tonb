@@ -117,10 +117,10 @@ void tnbLib::Pln_Edge::Reverse
 	std::swap(theVtx0_, theVtx1_);
 	if (ApplyToMesh)
 	{
-		if (Mesh())
+		/*if (Mesh())
 		{
 			Mesh()->Reverse();
-		}
+		}*/
 	}
 
 	ChangeSense() = NOT Sense();

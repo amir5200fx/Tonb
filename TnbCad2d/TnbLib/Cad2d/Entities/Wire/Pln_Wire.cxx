@@ -176,10 +176,21 @@ tnbLib::Pln_Wire::Polygon() const
 				<< abort(FatalError);
 		}
 
-		const auto& points = x->Mesh()->Points();
-		for (auto i = 0; i < points.size() - 1; i++)
+		if (x->Sense())
 		{
-			pts.push_back(points[i]);
+			const auto& points = x->Mesh()->Points();
+			for (auto i = 0; i < points.size() - 1; i++)
+			{
+				pts.push_back(points[i]);
+			}
+		}
+		else
+		{
+			const auto& points = x->Mesh()->Points();
+			for (auto i = points.size() - 1; i > 0; i--)
+			{
+				pts.push_back(points[i]);
+			}
 		}
 	}
 

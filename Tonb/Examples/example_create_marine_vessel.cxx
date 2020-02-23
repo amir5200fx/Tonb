@@ -75,7 +75,7 @@ void tnbLib::example_create_marine_vessel()
 
 	distb->SetLower(box.P0().X());
 	distb->SetUpper(box.P1().X());
-	distb->SetNbSections(40);
+	distb->SetNbSections(60);
 	distb->Perform();
 
 	const auto ym = MEAN(box.P0().Y(), box.P1().Y());
@@ -92,12 +92,13 @@ void tnbLib::example_create_marine_vessel()
 
 	gp_Ax1 ax1(ax.Location(), ax.XDirection());
 
-	MarineBase_Tools::Heel(maker, ax1, 20);
+	MarineBase_Tools::Heel(maker, ax1, 47);
 
 	auto waters = MarineBase_Tools::WaterSections(*maker, *wave, domain, 1.0E-3, 1.0E-6);
+
 	auto wetted = MarineBase_Tools::WettedSections(maker, waters);
 
-	for (const auto& x : maker->Sections())
+	/*for (const auto& x : maker->Sections())
 	{
 		Debug_Null_Pointer(x);
 
@@ -123,7 +124,7 @@ void tnbLib::example_create_marine_vessel()
 			}
 			poly3d.ExportToPlt(myFile);
 		}
-	}
+	}*/
 
 	for (const auto& x : wetted)
 	{

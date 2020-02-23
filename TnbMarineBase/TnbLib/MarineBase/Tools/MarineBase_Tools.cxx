@@ -19,6 +19,11 @@
 #include <TColgp_HArray1OfPnt2d.hxx>
 #include <StdFail_NotDone.hxx>
 
+#include <Pln_Vertex.hxx>
+#include <Pln_Wire.hxx>
+#include <Pln_Edge.hxx>
+#include <Pln_Curve.hxx>
+
 Handle(Geom2d_Curve)
 tnbLib::MarineBase_Tools::Curve
 (
@@ -758,9 +763,9 @@ tnbLib::MarineBase_Tools::WettedSection
 
 	auto water = Cad2d_Plane::MakePlane(theWater, nullptr);
 	Debug_Null_Pointer(water);
-	cout << "injaaaaaaaaa" << std::endl;
+
 	auto intsct = Cad2d_Boolean::Intersection(section, water);
-	PAUSE;
+
 	if (intsct)
 	{
 		if (intsct IS_EQUAL section)
@@ -889,6 +894,7 @@ tnbLib::MarineBase_Tools::WettedSections
 		auto wet = WettedSection(x, wa);
 		if (wet)
 		{
+			wet->SetCoordinateSystem(x->CoordinateSystem());
 			wetted.push_back(std::move(wet));
 		}
 	}

@@ -494,13 +494,7 @@ namespace tnbLib
 			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
 			
 			auto[minTol, maxTol] = outer->BoundTolerance();
-			Standard_Integer kk = 0;
-			for (const auto& x : newOuter_curves)
-			{
-				cout << x->FirstCoord() << "----" << x->LastCoord() << std::endl;
-				cout << "sense = " << outerSense[kk++] << std::endl;
-			}
-			PAUSE;
+
 			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(maxTol, theTol));
 			Debug_Null_Pointer(newOuter);
 
