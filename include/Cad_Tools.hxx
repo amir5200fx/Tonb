@@ -32,9 +32,6 @@ namespace tnbLib
 	class TModel_Shell;
 	class TModel_ParaWire;
 
-	template<class EntityType>
-	class Cad_BlockEntity;
-
 	class Cad_Tools
 	{
 
@@ -175,12 +172,6 @@ namespace tnbLib
 			RetrieveTriangulation
 			(
 				const TopoDS_Shape& theShape
-			);
-
-		static Standard_Boolean 
-			IsClosed
-			(
-				const Cad_BlockEntity<TModel_Surface>& theBlock
 			);
 	};
 }

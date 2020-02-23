@@ -102,9 +102,11 @@ void tnbLib::Marine_Wave::MakeGeometrySurface
 	const auto& poles2 = profile->Poles();
 	TColgp_Array1OfPnt poles(1, profile->Poles().Size());
 
-	forThose(Index, 1, poles.Size())
+	Standard_Integer K = 0;
+	for (auto& x : poles)
 	{
-		poles.SetValue(Index, Pnt3d(poles2.Value(Index).X(), poles2.Value(Index).Y(), 0));
+		++K;
+		x = Pnt3d(poles2.Value(K).X(), poles2.Value(K).Y(), 0);
 	}
 
 	Handle(Geom_Curve) base = 
@@ -152,9 +154,9 @@ void tnbLib::Marine_Wave::Perform()
 {
 	//theOrigin_ = gp_Ax2(MEAN(Domain().P0(), Domain().P1()), Dir3d(0, 0, 1.0), Dir3d(1, 0, 0));
 	TransformOriginToCurrent();
-
+	
 	auto expanded = Entity3d_Box::Union(BoundingBoxOfRotatedDomain(Domain()), Domain());
-
+	
 	const auto& ep0 = expanded.P0();
 	const auto& ep1 = expanded.P1();
 	

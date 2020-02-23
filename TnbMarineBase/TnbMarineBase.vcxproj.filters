@@ -61,6 +61,9 @@
     <Filter Include="TnbLib\MarineBase\Wave\Irregular">
       <UniqueIdentifier>{8d2da7fc-3cde-4d84-b0c3-8c644c89c433}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Domain">
+      <UniqueIdentifier>{79c256c4-9603-4de5-8e63-06192d9824f9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="TnbLib\MarineBase\Origin">
       <UniqueIdentifier>{b6e2349a-48f8-4a51-b8bc-08f75c438cf8}</UniqueIdentifier>
     </Filter>
@@ -210,57 +213,6 @@
     </Filter>
     <Filter Include="TnbLib\MarineBase\Parameter\WETA">
       <UniqueIdentifier>{925fc95f-562a-4678-b5f5-8bb659281017}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Region">
-      <UniqueIdentifier>{79c256c4-9603-4de5-8e63-06192d9824f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Boundary">
-      <UniqueIdentifier>{e842ca9d-849d-485a-b0b3-3f7dbced2b8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\CrossSection">
-      <UniqueIdentifier>{d027146f-34a0-4bdc-a88c-17f397cfa693}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\CrossSection\Station">
-      <UniqueIdentifier>{b3dd463e-ff02-4f3d-b2be-847b2328b857}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Physics">
-      <UniqueIdentifier>{c71cfd75-7e73-4b09-8c65-05d1a025f5bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\SpaceModel">
-      <UniqueIdentifier>{c7bf2e65-1ead-4009-a42f-c0082d6b5fc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\TimeModel">
-      <UniqueIdentifier>{1782933e-8c9a-4a03-b85c-3f67b0b08c0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\SpaceModel\TwoDimensional">
-      <UniqueIdentifier>{d39f3c58-2c8c-49cc-b214-28c06ee11cae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\SpaceModel\ThreeDimensional">
-      <UniqueIdentifier>{bc9fcd41-63cd-41a7-af46-8593f2001399}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\TimeModel\Steady">
-      <UniqueIdentifier>{842f7141-50b4-4192-b600-cd42d844d323}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\TimeModel\Unsteady">
-      <UniqueIdentifier>{4b0abe4e-5baf-4a7d-90be-85dc2eac7378}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\PhysicsModel">
-      <UniqueIdentifier>{d4ae2a18-1e50-4a87-8006-af3eace6e58e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch">
-      <UniqueIdentifier>{616e4d6c-4c86-467e-9476-dab3f9b97db4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Section">
-      <UniqueIdentifier>{02aba16b-d59d-4f16-b20f-1795a15f3b5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Section\Wet">
-      <UniqueIdentifier>{7328ad46-fb2b-4e7c-8492-13259aeda4f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Section\Dry">
-      <UniqueIdentifier>{48328d07-f092-472c-bddc-249a3eafee65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Info">
-      <UniqueIdentifier>{1b7e0bd2-c0b3-441b-b50b-b7fcac49cccd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -459,54 +411,6 @@
     <ClInclude Include="TnbLib\MarineBase\Parameter\Marine_VesselParams.hxx">
       <Filter>TnbLib\MarineBase\Parameter</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Region\Marine_Region.hxx">
-      <Filter>TnbLib\MarineBase\Region</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Boundary\Marine_Boundary.hxx">
-      <Filter>TnbLib\MarineBase\Boundary</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\CrossSection\Marine_CrossSection.hxx">
-      <Filter>TnbLib\MarineBase\CrossSection</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\CrossSection\Station\CrossSection_xShapeStation.hxx">
-      <Filter>TnbLib\MarineBase\CrossSection\Station</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Physics\Marine_Physics.hxx">
-      <Filter>TnbLib\MarineBase\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\SpaceModel\Marine_SpaceModel.hxx">
-      <Filter>TnbLib\MarineBase\SpaceModel</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\SpaceModel\TwoDimensional\Marine_TwoDimensional.hxx">
-      <Filter>TnbLib\MarineBase\SpaceModel\TwoDimensional</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\SpaceModel\ThreeDimensional\Marine_ThreeDimensional.hxx">
-      <Filter>TnbLib\MarineBase\SpaceModel\ThreeDimensional</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\TimeModel\Marine_TimeModel.hxx">
-      <Filter>TnbLib\MarineBase\TimeModel</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\TimeModel\Steady\Marine_Steady.hxx">
-      <Filter>TnbLib\MarineBase\TimeModel\Steady</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\TimeModel\Unsteady\Marine_Unsteady.hxx">
-      <Filter>TnbLib\MarineBase\TimeModel\Unsteady</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\PhysicsModel\Marine_PhysicsModel.hxx">
-      <Filter>TnbLib\MarineBase\PhysicsModel</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Launch\Marine_Launch.hxx">
-      <Filter>TnbLib\MarineBase\Launch</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Launch\Section\Wet\Marine_WetSection.hxx">
-      <Filter>TnbLib\MarineBase\Launch\Section\Wet</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Launch\Section\Dry\Marine_DrySection.hxx">
-      <Filter>TnbLib\MarineBase\Launch\Section\Dry</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Launch\Info\Marine_Launch_Info.hxx">
-      <Filter>TnbLib\MarineBase\Launch\Info</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -574,33 +478,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Model\Marine_Model.cxx">
       <Filter>TnbLib\MarineBase\Entities\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Region\Marine_Region.cxx">
-      <Filter>TnbLib\MarineBase\Region</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Boundary\Marine_Boundary.cxx">
-      <Filter>TnbLib\MarineBase\Boundary</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\CrossSection\Marine_CrossSection.cxx">
-      <Filter>TnbLib\MarineBase\CrossSection</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\CrossSection\Station\CrossSection_xShapeStation.cxx">
-      <Filter>TnbLib\MarineBase\CrossSection\Station</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Physics\Marine_Physics.cxx">
-      <Filter>TnbLib\MarineBase\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Launch\Marine_Launch.cxx">
-      <Filter>TnbLib\MarineBase\Launch</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Launch\Section\Wet\Marine_WetSection.cxx">
-      <Filter>TnbLib\MarineBase\Launch\Section\Wet</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Launch\Section\Dry\Marine_DrySection.cxx">
-      <Filter>TnbLib\MarineBase\Launch\Section\Dry</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Launch\Info\Marine_Launch_Info.cxx">
-      <Filter>TnbLib\MarineBase\Launch\Info</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

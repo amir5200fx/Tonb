@@ -108,9 +108,6 @@ namespace tnbLib
 			return theVtx1_;
 		}
 
-		std::shared_ptr<Pln_Entity>
-			Copy() const override;
-
 		void Reverse
 		(
 			const Standard_Boolean ApplyToMesh = Standard_True

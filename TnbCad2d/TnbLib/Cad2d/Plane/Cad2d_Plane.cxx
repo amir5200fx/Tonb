@@ -279,8 +279,6 @@ void tnbLib::Cad2d_Plane::Transform(const gp_Trsf2d & t)
 			x->Transform(t);
 		}
 	}
-
-	theBoundingBox_ = *OuterWire()->BoundingBox();
 }
 
 //std::shared_ptr<tnbLib::Entity2d_Chain> 

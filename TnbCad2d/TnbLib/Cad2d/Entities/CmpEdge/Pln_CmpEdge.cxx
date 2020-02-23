@@ -1,6 +1,5 @@
 #include <Pln_CmpEdge.hxx>
 
-#include <Entity2d_Polygon.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Ring.hxx>
@@ -8,8 +7,6 @@
 #include <Pln_Curve.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
-
-#include <Adt_AvlTree.hxx>
 
 Standard_Boolean 
 tnbLib::Pln_CmpEdge::IsValidForWire
@@ -100,26 +97,6 @@ tnbLib::Pln_CmpEdge::Copy() const
 	return std::move(cmpEdge);
 }
 
-std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
-tnbLib::Pln_CmpEdge::RetrieveVertices() const
-{
-	Adt_AvlTree<std::shared_ptr<Pln_Vertex>> tree;
-	tree.SetComparableFunction(&Pln_Vertex::IsLess);
-
-	for (const auto& x : Edges())
-	{
-		Debug_Null_Pointer(x);
-
-		tree.InsertIgnoreDup(x->Vtx0());
-		tree.InsertIgnoreDup(x->Vtx1());
-	}
-
-	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
-	tree.RetrieveTo(vertices);
-
-	return std::move(vertices);
-}
-
 void tnbLib::Pln_CmpEdge::Transform
 (
 	const gp_Trsf2d & t
@@ -138,11 +115,6 @@ void tnbLib::Pln_CmpEdge::Transform
 		Debug_Null_Pointer(x->Curve());
 
 		x->Curve()->Transform(t);
-
-		if (x->Mesh())
-		{
-			x->Mesh()->Transform(t);
-		}
 	}
 }
 

@@ -3,7 +3,6 @@
 #define _MonoHull_FormCoeff_Header
 
 #include <Vessel_FormCoeff.hxx>
-#include <HsPhysModel_MonoHull.hxx>
 
 namespace tnbLib
 {
@@ -14,7 +13,6 @@ namespace tnbLib
 
 	class MonoHull_FormCoeff
 		: public Vessel_FormCoeff_Parameters
-		, public HsPhysModel_MonoHull
 	{
 
 		/*Private Data*/

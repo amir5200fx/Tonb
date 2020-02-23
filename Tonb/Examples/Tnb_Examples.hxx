@@ -10,8 +10,6 @@ namespace tnbLib
 	void example_union_plane_box();
 
 	void example_creating_box();
-
-	void example_create_marine_vessel();
 }
 
 #endif // !_Tnb_Examples_Header

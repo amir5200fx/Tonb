@@ -88,10 +88,7 @@ namespace tnbLib
 
 		std::shared_ptr<Entity_StaticData> Merged(const Standard_Real theRes, const Standard_Real theRadius) const;
 
-		void Transform
-		(
-			const typename transform_point_type<Point>::type& theTrasf
-		)
+		void Transform(const typename transform_point_type<Point>::type& theTrasf)
 		{
 			for (auto& x : thePoints_)
 			{

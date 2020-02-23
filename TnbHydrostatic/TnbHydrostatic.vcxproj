@@ -19,12 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TnbLib\Hydrostatic\Boundary\HydroStatic_Boundary.hxx" />
-    <ClInclude Include="TnbLib\Hydrostatic\Boundary\Type\HsBnd_Type.hxx" />
-    <ClInclude Include="TnbLib\Hydrostatic\CrossCurves\HydroStatic_CrossCurves.hxx" />
-    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\HydroStatic_PhysicsModel.hxx" />
-    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull\HsPhysModel_MonoHull.hxx" />
-    <ClInclude Include="TnbLib\Hydrostatic\Region\HydroStatic_Region.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Section\Dry\HsSection_Dry.hxx" />
@@ -40,9 +34,6 @@
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\MonoHull\Section\MonoHull_Section.hxx" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TnbLib\Hydrostatic\CrossCurves\HydroStatic_CrossCurves.cxx" />
-    <ClCompile Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull\HsPhysModel_MonoHull.cxx" />
-    <ClCompile Include="TnbLib\Hydrostatic\Region\HydroStatic_Region.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff\MonoHull_FormCoeff.cxx" />
@@ -111,7 +102,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Hydrostatic\CrossCurves;$(ProjectDir)TnbLib\Hydrostatic\PhysicsModel\MonoHull;$(ProjectDir)TnbLib\Hydrostatic\PhysicsModel;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Type;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Sail;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Tank;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Hull;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Far;$(ProjectDir)TnbLib\Hydrostatic\Boundary;$(ProjectDir)TnbLib\Hydrostatic\Region;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\Dry;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\UnderWater;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Entity;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Surface;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\SubMarine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel;$(ProjectDir)TnbLib\Hydrostatic\Tools;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\Dry;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\UnderWater;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Entity;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Surface;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\SubMarine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel;$(ProjectDir)TnbLib\Hydrostatic\Tools;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -153,7 +144,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Hydrostatic\CrossCurves;$(ProjectDir)TnbLib\Hydrostatic\PhysicsModel\MonoHull;$(ProjectDir)TnbLib\Hydrostatic\PhysicsModel;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Type;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Sail;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Tank;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Hull;$(ProjectDir)TnbLib\Hydrostatic\Boundary\Far;$(ProjectDir)TnbLib\Hydrostatic\Boundary;$(ProjectDir)TnbLib\Hydrostatic\Region;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\Dry;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\UnderWater;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Entity;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Surface;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\SubMarine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel;$(ProjectDir)TnbLib\Hydrostatic\Tools;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\Dry;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\UnderWater;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section\WaterLine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\Entities\Entity;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Surface;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\SubMarine;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull\Section;$(ProjectDir)TnbLib\Hydrostatic\Vessel\MonoHull;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormCoeff;$(ProjectDir)TnbLib\Hydrostatic\Vessel\FormDim;$(ProjectDir)TnbLib\Hydrostatic\Vessel;$(ProjectDir)TnbLib\Hydrostatic\Tools;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
