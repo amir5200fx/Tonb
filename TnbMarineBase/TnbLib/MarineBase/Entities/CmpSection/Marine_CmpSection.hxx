@@ -11,6 +11,7 @@
 class TopoDS_Edge;
 class TopoDS_Shape;
 class Geom2d_Curve;
+class gp_Trsf2d;
 
 namespace tnbLib
 {
@@ -32,10 +33,7 @@ namespace tnbLib
 
 	protected:
 
-		auto& ChangeSections()
-		{
-			return theSections_;
-		}
+		
 
 		void Insert
 		(
@@ -60,6 +58,7 @@ namespace tnbLib
 			const word& theName
 		);
 
+
 		auto NbSections() const
 		{
 			return (Standard_Integer)theSections_.size();
@@ -69,6 +68,24 @@ namespace tnbLib
 		{
 			return theSections_;
 		}
+
+		auto& ChangeSections()
+		{
+			return theSections_;
+		}
+
+		Standard_Real X() const;
+
+		void Transform(const gp_Trsf2d& t);
+
+		static std::shared_ptr<Marine_CmpSection>
+			CreateCmpSection
+			(
+				const std::vector<Handle(Geom2d_Curve)>& theCurves,
+				const gp_Ax2& theSystem,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
 
 		static std::shared_ptr<Marine_CmpSection>
 			CreateCmpSection

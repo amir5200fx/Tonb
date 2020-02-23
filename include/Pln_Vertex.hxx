@@ -8,6 +8,8 @@
 #include <Pln_VertexAdaptor.hxx>
 #include <Pnt2d.hxx>
 
+class gp_Trsf2d;
+
 #include <memory>
 #include <map>
 #include <vector>
@@ -69,11 +71,12 @@ namespace tnbLib
 
 		Standard_Real Angle() const;
 
-		std::shared_ptr<Pln_Vertex>
-			Copy() const;
+		std::shared_ptr<Pln_Entity>
+			Copy() const override;
 
 		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
 
+		void Transform(const gp_Trsf2d& t);
 
 		//- virtual functions
 

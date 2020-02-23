@@ -4,6 +4,7 @@
 
 #include <Standard_Real.hxx>
 #include <Global_Macros.hxx>
+#include <Geo_Traits.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 #include <IOstream.hxx>
@@ -139,6 +140,15 @@ namespace tnbLib
 
 		template<class PickAlg>
 		Point Corner(const PickAlg theAlgorithm) const;
+
+		void Transform
+		(
+			const typename transform_point_type<Point>::type& theTrasf
+		)
+		{
+			P0().Transform(theTrasf);
+			P1().Transform(theTrasf);
+		}
 
 		void Get(Point& theP0, Point& theP1)
 		{

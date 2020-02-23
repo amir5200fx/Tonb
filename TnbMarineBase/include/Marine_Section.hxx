@@ -4,6 +4,8 @@
 
 #include <Marine_Entity.hxx>
 
+class gp_Trsf2d;
+
 #include <vector>
 
 namespace tnbLib
@@ -49,6 +51,19 @@ namespace tnbLib
 			return theWire_;
 		}
 
+		void Transform(const gp_Trsf2d& t);
+
+		virtual Standard_Boolean IsDry() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsWet() const
+		{
+			return Standard_False;
+		}
+
+		virtual std::shared_ptr<Marine_Section> Copy() const;
 
 		//- static functions
 

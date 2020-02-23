@@ -22,6 +22,9 @@
     <ClCompile Include="Examples\example_creating_box.cxx">
       <Filter>Examples</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\example_create_marine_vessel.cxx">
+      <Filter>Examples</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

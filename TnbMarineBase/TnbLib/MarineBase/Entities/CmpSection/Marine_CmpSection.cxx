@@ -31,6 +31,24 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 {
 }
 
+Standard_Real 
+tnbLib::Marine_CmpSection::X() const
+{
+	return CoordinateSystem().Location().Z();
+}
+
+void tnbLib::Marine_CmpSection::Transform
+(
+	const gp_Trsf2d & t
+)
+{
+	for (const auto& x : Sections())
+	{
+		Debug_Null_Pointer(x);
+		x->Transform(t);
+	}
+}
+
 namespace tnbLib
 {
 
@@ -106,19 +124,16 @@ namespace tnbLib
 	}
 }
 
-std::shared_ptr<tnbLib::Marine_CmpSection>
+std::shared_ptr<tnbLib::Marine_CmpSection> 
 tnbLib::Marine_CmpSection::CreateCmpSection
 (
-	const TopoDS_Shape & theEdges,
-	const gp_Ax2& theSystem,
-	const Standard_Real theMinTol,
+	const std::vector<Handle(Geom2d_Curve)>& theCurves, 
+	const gp_Ax2 & theSystem, 
+	const Standard_Real theMinTol, 
 	const Standard_Real theMaxTol
 )
 {
-	auto edges = RetrieveEdges(theEdges);
-	auto curves = RetrieveParaCurves(edges, theSystem);
-
-	auto wires = Pln_Tools::RetrieveWires(curves, theMinTol, theMaxTol);
+	auto wires = Pln_Tools::RetrieveWires(theCurves, theMinTol, theMaxTol);
 
 	createCmpSection::SortWires(wires);
 
@@ -191,6 +206,24 @@ tnbLib::Marine_CmpSection::CreateCmpSection
 			sections.push_back(std::move(section));*/
 		}
 	}
+
+	return std::move(cmpSection);
+}
+
+std::shared_ptr<tnbLib::Marine_CmpSection>
+tnbLib::Marine_CmpSection::CreateCmpSection
+(
+	const TopoDS_Shape & theEdges,
+	const gp_Ax2& theSystem,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto edges = RetrieveEdges(theEdges);
+	auto curves = RetrieveParaCurves(edges, theSystem);
+
+	auto cmpSection = 
+		CreateCmpSection(curves, theSystem, theMinTol, theMaxTol);
 
 	return std::move(cmpSection);
 }

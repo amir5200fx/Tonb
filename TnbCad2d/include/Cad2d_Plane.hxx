@@ -12,6 +12,7 @@
 
 class gp_Ax22d;
 class gp_Ax2d;
+class gp_Trsf2d;
 
 #include <gp.hxx>
 #include <gp_Ax2.hxx>
@@ -163,6 +164,8 @@ namespace tnbLib
 		(
 			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
 		) const;
+
+		void Transform(const gp_Trsf2d& t);
 
 		void ExportToPlt
 		(
