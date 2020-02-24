@@ -262,6 +262,9 @@
     <Filter Include="TnbLib\MarineBase\Launch\Info">
       <UniqueIdentifier>{1b7e0bd2-c0b3-441b-b50b-b7fcac49cccd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve">
+      <UniqueIdentifier>{41bef568-a3af-40b7-890f-14088b22275f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -507,6 +510,9 @@
     <ClInclude Include="TnbLib\MarineBase\Launch\Info\Marine_Launch_Info.hxx">
       <Filter>TnbLib\MarineBase\Launch\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_WaterCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -601,6 +607,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Launch\Info\Marine_Launch_Info.cxx">
       <Filter>TnbLib\MarineBase\Launch\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Marine_WaterCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

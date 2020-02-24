@@ -81,6 +81,15 @@ namespace tnbLib
 		static std::shared_ptr<Marine_CmpSection>
 			CreateCmpSection
 			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const gp_Ax2& theSystem,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<Marine_CmpSection>
+			CreateCmpSection
+			(
 				const std::vector<Handle(Geom2d_Curve)>& theCurves,
 				const gp_Ax2& theSystem,
 				const Standard_Real theMinTol,

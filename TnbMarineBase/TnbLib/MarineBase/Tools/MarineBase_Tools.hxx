@@ -108,6 +108,13 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
+		static Standard_Real
+			CalcWettedSurfaceArea
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
 		static Pnt3d
 			CalcCentreProductVolume
 			(

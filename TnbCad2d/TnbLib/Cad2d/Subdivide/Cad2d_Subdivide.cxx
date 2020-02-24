@@ -100,16 +100,7 @@ namespace tnbLib
 				const Cad2d_IntsctEntity_TangSegment& x
 			)
 		{
-			const auto x0 = x.Parameter0();
-			const auto x1 = x.Parameter1();
-
-			auto[c0, c1] = SubdivideCurve(theCurve, x0);
-			auto[c2, c3] = SubdivideCurve(*c1, x1);
-
-			auto c2t = std::make_shared<Pln_TangCurve>(c2->Geometry());
-
-			auto c = std::make_tuple(c0, c2t, c3);
-			return std::move(c);
+			return theCurve.Split(x);
 		}
 
 		static Standard_Boolean

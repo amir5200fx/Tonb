@@ -24,7 +24,7 @@ namespace tnbLib
 
 		Cad2d_IntsctEntity_TangSegment();
 
-		Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex);
+		explicit Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex);
 
 		Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex, const word& theName);
 

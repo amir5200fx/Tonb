@@ -21,6 +21,8 @@ class gp_Trsf2d;
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Cad2d_IntsctEntity_TangSegment;
 
 	class Pln_Curve
 		: public Pln_Entity
@@ -95,17 +97,17 @@ namespace tnbLib
 			const Standard_Real theTol = 1.0E-6
 		);
 
-		std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
+		virtual std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
 			Split(const Standard_Real x) const;
 
-		void Split
+		virtual void Split
 		(
 			const Standard_Real x,
 			std::shared_ptr<Pln_Curve>& theLeft,
 			std::shared_ptr<Pln_Curve>& theRight
 		) const;
 
-		void Split
+		virtual void Split
 		(
 			const Standard_Real x,
 			Pnt2d& theCoord,
@@ -125,7 +127,23 @@ namespace tnbLib
 			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 		) const;
 
+		virtual std::tuple
+			<
+			std::shared_ptr<Pln_Curve>,
+			std::shared_ptr<Pln_Curve>,
+			std::shared_ptr<Pln_Curve>
+			>
+			Split
+			(
+				const Cad2d_IntsctEntity_TangSegment& x
+			) const;
+
 		virtual Standard_Boolean IsTangential() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsOnWater() const
 		{
 			return Standard_False;
 		}

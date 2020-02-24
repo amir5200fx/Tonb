@@ -2,6 +2,7 @@
 
 #include <Geo_ItemSort.hxx>
 #include <Entity2d_Box.hxx>
+#include <Pln_Curve.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <Marine_Section.hxx>
@@ -34,7 +35,7 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 Standard_Real 
 tnbLib::Marine_CmpSection::X() const
 {
-	return CoordinateSystem().Location().Z();
+	return CoordinateSystem().Location().X();
 }
 
 void tnbLib::Marine_CmpSection::Transform
@@ -124,10 +125,41 @@ namespace tnbLib
 	}
 }
 
+std::shared_ptr<tnbLib::Marine_CmpSection>
+tnbLib::Marine_CmpSection::CreateCmpSection
+(
+	const std::vector<Handle(Geom2d_Curve)>& theCurves,
+	const gp_Ax2 & theSystem,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(theCurves.size());
+
+	Standard_Integer K = 0;
+	for (const auto& x : theCurves)
+	{
+		Debug_Null_Pointer(x);
+
+		if (NOT Pln_Tools::IsBounded(x))
+		{
+			FatalErrorIn("std::shared_ptr<Marine_CmpSection> Marine_CmpSection::CreateCmpSection(Args....)")
+				<< "the curve is not bounded" << endl
+				<< abort(FatalError);
+		}
+
+		curves.push_back(std::make_shared<Pln_Curve>(++K, x));
+	}
+
+	auto section = CreateCmpSection(curves, theSystem, theMinTol, theMaxTol);
+	return std::move(section);
+}
+
 std::shared_ptr<tnbLib::Marine_CmpSection> 
 tnbLib::Marine_CmpSection::CreateCmpSection
 (
-	const std::vector<Handle(Geom2d_Curve)>& theCurves, 
+	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves, 
 	const gp_Ax2 & theSystem, 
 	const Standard_Real theMinTol, 
 	const Standard_Real theMaxTol

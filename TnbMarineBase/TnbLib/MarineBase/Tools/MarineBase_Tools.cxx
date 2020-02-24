@@ -6,6 +6,7 @@
 #include <Marine_Section.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_CrossSection.hxx>
+#include <Marine_WaterCurve.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <UnitSystem.hxx>
 #include <error.hxx>
@@ -302,6 +303,7 @@ tnbLib::MarineBase_Tools::CalcVolume
 	return CalcArea(params, theInfo);
 }
 
+
 tnbLib::Pnt3d 
 tnbLib::MarineBase_Tools::CalcCentreProductVolume
 (
@@ -549,8 +551,8 @@ tnbLib::MarineBase_Tools::WaterSection
 		rightPt = p0;
 	}
 
-	auto p2 = leftPt + (theZmin - leftPt.Z()) * Pnt3d(theSystem.XDirection().XYZ());
-	auto p3 = rightPt + (theZmin - rightPt.Z()) * Pnt3d(theSystem.XDirection().XYZ());
+	auto p2 = leftPt + (theZmin - leftPt.Z()) * Pnt3d(theSystem.YDirection().XYZ());
+	auto p3 = rightPt + (theZmin - rightPt.Z()) * Pnt3d(theSystem.YDirection().XYZ());
 
 	auto c0 = marineLib::CreateLine(leftPt, p2);
 	auto c1 = marineLib::CreateLine(p2, p3);
@@ -596,11 +598,11 @@ tnbLib::MarineBase_Tools::WaterSection
 			<< abort(FatalError);
 	}
 
-	std::vector<Handle(Geom2d_Curve)> curves;
-	curves.push_back(c2d0);
-	curves.push_back(c2d1);
-	curves.push_back(c2d2);
-	curves.push_back(c2d3);
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.push_back(std::make_shared<Marine_WaterCurve>(1, c2d0));
+	curves.push_back(std::make_shared<Marine_WaterCurve>(2, c2d1));
+	curves.push_back(std::make_shared<Marine_WaterCurve>(3, c2d2));
+	curves.push_back(std::make_shared<Marine_WaterCurve>(4, c2d3));
 
 	auto cmpSection =
 		Marine_CmpSection::CreateCmpSection(curves, theSystem, theMinTol, theMaxTol);

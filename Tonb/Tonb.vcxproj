@@ -124,7 +124,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Examples\example_calculate_volume_ship.cxx" />
     <ClCompile Include="Examples\example_create_marine_vessel.cxx" />
+    <ClCompile Include="Examples\example_create_ship.cxx" />
     <ClCompile Include="Examples\example_creating_box.cxx" />
     <ClCompile Include="Examples\example_creating_plane_box.cxx" />
     <ClCompile Include="Examples\example_open_iges.cxx" />

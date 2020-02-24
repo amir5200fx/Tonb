@@ -40,6 +40,10 @@
 #include <TopoDS_Edge.hxx>
 #include <TopLoc_Location.hxx>
 #include <ShapeFix_Wire.hxx>
+#include <IGESControl_Controller.hxx>
+#include <IGESControl_Writer.hxx>
+#include <STEPControl_Controller.hxx>
+#include <STEPControl_Writer.hxx>
 
 Standard_Boolean 
 tnbLib::Cad_Tools::IsBounded
@@ -1053,4 +1057,48 @@ tnbLib::Cad_Tools::RetrieveTriangulation
 			tris.push_back(tri);
 	}
 	return std::move(tris);
+}
+
+void tnbLib::Cad_Tools::ExportToIGES
+(
+	const word & theUnit,
+	const TopoDS_Shape & theShape, 
+	const fileName & theName
+)
+{
+	IGESControl_Controller::Init();
+
+	IGESControl_Writer Writer(theUnit.c_str(), 0);
+	Writer.AddShape(theShape);
+	Writer.ComputeModel();
+
+	Standard_Boolean OK = Writer.Write(theName.c_str());
+
+	if (NOT OK)
+	{
+		FatalErrorIn("void ExportToIGES()")
+			<< "Unable to export the model" << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::Cad_Tools::ExportToSTEP
+(
+	const TopoDS_Shape & theShape, 
+	const fileName & name
+)
+{
+	STEPControl_Controller::Init();
+
+	STEPControl_Writer Writer;
+	Writer.Transfer(theShape, STEPControl_ManifoldSolidBrep);
+
+	Standard_Boolean OK = Writer.Write(name.c_str());
+
+	if (NOT OK)
+	{
+		FatalErrorIn("void ExportToSTEP()")
+			<< "Unable to export the model" << endl
+			<< abort(FatalError);
+	}
 }

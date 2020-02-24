@@ -14,6 +14,10 @@ namespace tnbLib
 	void example_create_marine_vessel();
 
 	void example_open_iges();
+
+	void example_create_ship();
+
+	void example_calculate_volume_ship();
 }
 
 #endif // !_Tnb_Examples_Header

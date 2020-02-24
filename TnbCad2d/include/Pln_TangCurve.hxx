@@ -7,8 +7,9 @@
 namespace tnbLib
 {
 
+	template<class CurveType>
 	class Pln_TangCurve
-		: public Pln_Curve
+		: public CurveType
 	{
 
 		/*Private Data*/
@@ -23,14 +24,14 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		)
-			: Pln_Curve(theIndex, theGeom)
+			: CurveType(theIndex, theGeom)
 		{}
 
 		Pln_TangCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		)
-			: Pln_Curve(theGeom)
+			: CurveType(theGeom)
 		{}
 
 		Pln_TangCurve
@@ -39,7 +40,7 @@ namespace tnbLib
 			const word& theName,
 			const Handle(Geom2d_Curve)& theGeom
 		)
-			: Pln_Curve(theIndex, theName, theGeom)
+			: CurveType(theIndex, theName, theGeom)
 		{}
 
 		Standard_Boolean IsTangential() const override

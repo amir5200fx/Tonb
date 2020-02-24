@@ -28,7 +28,7 @@ void tnbLib::CrossSection_xShapeStation::Perform()
 	}
 
 	const auto& sys = Distributor()->CoordinateSystem();
-	gp_Ax2 syst0(sys.Location(), sys.XDirection(), sys.Direction());
+	gp_Ax2 syst0(sys.Location(), sys.XDirection(), sys.YDirection());
 
 	std::vector<TopoDS_Shape> shapes;
 	std::vector<gp_Ax2> systems;

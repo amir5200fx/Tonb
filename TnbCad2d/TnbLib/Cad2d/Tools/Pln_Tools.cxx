@@ -330,7 +330,7 @@ tnbLib::Pln_Tools::MakeWire
 	Debug_Null_Pointer(info);
 
 	info->SetNbSamples(3);
-	info->SetAngle(5.0);
+	info->SetAngle(2.5);
 	info->SetApprox(1.0E-2);
 	info->SetMinSize(1.0e-3);
 	info->SetInitNbSubdivision(2);
@@ -776,7 +776,7 @@ namespace tnbLib
 			std::shared_ptr<Vertex> Vtx0;
 			std::shared_ptr<Vertex> Vtx1;
 
-			Handle(Geom2d_Curve) Curve;
+			std::shared_ptr<Pln_Curve> Curve;
 
 			Edge
 			(
@@ -791,7 +791,7 @@ namespace tnbLib
 		static std::vector<std::shared_ptr<Edge>> 
 			RetrieveUnMergedEdges
 			(
-				const std::vector<Handle(Geom2d_Curve)>& theCurves
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 			)
 		{
 			std::vector<std::shared_ptr<Edge>> edges;
@@ -800,16 +800,9 @@ namespace tnbLib
 			for (const auto& x : theCurves)
 			{
 				Debug_Null_Pointer(x);
-				
-				if (NOT Pln_Tools::IsBounded(x))
-				{
-					FatalErrorIn(FunctionSIG)
-						<< "the curve is not bounded" << endl
-						<< abort(FatalError);
-				}
 
-				auto P0 = x->Value(x->FirstParameter());
-				auto P1 = x->Value(x->LastParameter());
+				auto P0 = x->FirstCoord();
+				auto P1 = x->LastCoord();
 
 				auto vtx0 = std::make_shared<Vertex>(++nbVertices, P0);
 				auto vtx1 = std::make_shared<Vertex>(++nbVertices, P1);
@@ -1035,7 +1028,8 @@ namespace tnbLib
 					auto edge = std::make_shared<Pln_Ring>(++nbEdges, vtx0);
 					Debug_Null_Pointer(edge);
 
-					edge->SetCurve(std::make_shared<Pln_Curve>(nbEdges, x->Curve));
+					x->Curve->SetIndex(nbEdges);
+					edge->SetCurve(x->Curve);
 					edge->Approx(apxInfo);
 					vtx0->InsertToEdges(edge->Index(), edge);
 
@@ -1049,7 +1043,8 @@ namespace tnbLib
 					vtx0->InsertToEdges(edge->Index(), edge);
 					vtx1->InsertToEdges(edge->Index(), edge);
 
-					edge->SetCurve(std::make_shared<Pln_Curve>(nbEdges, x->Curve));
+					x->Curve->SetIndex(nbEdges);
+					edge->SetCurve(x->Curve);
 					edge->Approx(apxInfo);
 					edges.push_back(std::move(edge));
 				}	
@@ -1142,10 +1137,40 @@ namespace tnbLib
 	}
 }
 
-std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
+std::vector<std::shared_ptr<tnbLib::Pln_Wire>>
 tnbLib::Pln_Tools::RetrieveWires
 (
 	const std::vector<Handle(Geom2d_Curve)>& theCurves,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(theCurves.size());
+
+	Standard_Integer K = 0;
+	for (const auto& x : theCurves)
+	{
+		Debug_Null_Pointer(x);
+
+		if (NOT Pln_Tools::IsBounded(x))
+		{
+			FatalErrorIn("std::vector<std::shared_ptr<Pln_Wire>> Pln_Tools::RetrieveWires(Args....)")
+				<< "the curve is not bounded" << endl
+				<< abort(FatalError);
+		}
+
+		curves.push_back(std::make_shared<Pln_Curve>(++K, x));
+	}
+
+	auto wires = Pln_Tools::RetrieveWires(curves, theMinTol, theMaxTol);
+	return std::move(wires);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
+tnbLib::Pln_Tools::RetrieveWires
+(
+	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
 	const Standard_Real theMinTol,
 	const Standard_Real theMaxTol
 )

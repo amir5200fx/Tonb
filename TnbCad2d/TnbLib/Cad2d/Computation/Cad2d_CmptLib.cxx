@@ -108,7 +108,8 @@ tnbLib::cmptLib::AreaIntegrand::Value
 	
 	Entity().D1(x, pt, der);
 
-	return -(pt.Y() - Y0())*der.X();
+	return (pt.Y() - Y0())*der.X();
+	//return -pt.Y()*der.X();
 }
 
 Standard_Real 
@@ -122,7 +123,7 @@ tnbLib::cmptLib::xCentreIntegrand::Value
 
 	Entity().D1(x, pt, der);
 
-	return -pt.Y()*der.X()*pt.X();
+	return pt.Y()*der.X()*pt.X();
 }
 
 Standard_Real 
@@ -136,7 +137,7 @@ tnbLib::cmptLib::yCentreIntegrand::Value
 
 	Entity().D1(x, pt, der);
 
-	return -pt.Y()*der.X()*(0.5*pt.Y());
+	return pt.Y()*der.X()*(0.5*pt.Y());
 }
 
 Standard_Real 
@@ -187,8 +188,9 @@ tnbLib::Cad2d_CmptLib::Area
 		Debug_Null_Pointer(x);
 
 		const auto& geom = x->Curve()->Geometry();
+		auto area = AreaUnderCurve(geom, y0, theInfo);
 
-		sum += AreaUnderCurve(geom, y0, theInfo);
+		sum += (x->Sense() ? -area : area);
 	}
 	return sum;
 }

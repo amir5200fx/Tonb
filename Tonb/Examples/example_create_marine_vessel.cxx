@@ -61,7 +61,7 @@ void tnbLib::example_create_marine_vessel()
 	wave->SetCurrent(Vec3d(-1.0, -0.0, 0));
 	wave->SetVerticalDirection(Dir3d(.0, 0, 1));
 
-	wave->SetPointOnWater(Pnt3d(75, 0, 5));
+	wave->SetPointOnWater(Pnt3d(75, 0, 8));
 
 	wave->Perform();
 	
@@ -75,7 +75,7 @@ void tnbLib::example_create_marine_vessel()
 
 	distb->SetLower(box.P0().X());
 	distb->SetUpper(box.P1().X());
-	distb->SetNbSections(60);
+	distb->SetNbSections(40);
 	distb->Perform();
 
 	const auto ym = MEAN(box.P0().Y(), box.P1().Y());
@@ -155,7 +155,7 @@ void tnbLib::example_create_marine_vessel()
 	}
 
 	/*{
-		
+
 
 		for (const auto& w : waters)
 		{

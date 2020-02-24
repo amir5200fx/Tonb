@@ -182,6 +182,19 @@ namespace tnbLib
 			(
 				const Cad_BlockEntity<TModel_Surface>& theBlock
 			);
+
+		static void ExportToIGES
+		(
+			const word& theUnit,
+			const TopoDS_Shape& theShape,
+			const fileName& theName
+		);
+
+		static void ExportToSTEP
+		(
+			const TopoDS_Shape& theShape,
+			const fileName& name
+		);
 	};
 }
 

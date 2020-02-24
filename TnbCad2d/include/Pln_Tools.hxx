@@ -202,13 +202,13 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		/*static std::vector<std::shared_ptr<Pln_Wire>>
+		static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
 			(
 				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
-			);*/
+			);
 
 		static std::shared_ptr<Pln_Wire>
 			RetrieveWire

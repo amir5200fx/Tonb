@@ -2,6 +2,8 @@
 
 #include <Entity2d_Box.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_TangCurve.hxx>
+#include <Cad2d_IntsctEntity_TangSegment.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -187,7 +189,11 @@ void tnbLib::Pln_Curve::Interpolation
 	}
 }
 
-std::tuple<std::shared_ptr<tnbLib::Pln_Curve>, std::shared_ptr<tnbLib::Pln_Curve>>
+std::tuple
+<
+	std::shared_ptr<tnbLib::Pln_Curve>,
+	std::shared_ptr<tnbLib::Pln_Curve>
+>
 tnbLib::Pln_Curve::Split(const Standard_Real x) const
 {
 	if (NOT INSIDE(x, FirstParameter(), LastParameter()))
@@ -373,6 +379,29 @@ void tnbLib::Pln_Curve::Split
 		curve = std::move(right);
 	}
 	theCurves.push_back(std::move(curve));
+}
+
+std::tuple
+<
+	std::shared_ptr<tnbLib::Pln_Curve>,
+	std::shared_ptr<tnbLib::Pln_Curve>, 
+	std::shared_ptr<tnbLib::Pln_Curve>
+> 
+tnbLib::Pln_Curve::Split
+(
+	const Cad2d_IntsctEntity_TangSegment & x
+) const
+{
+	const auto x0 = x.Parameter0();
+	const auto x1 = x.Parameter1();
+
+	auto[c0, c1] = this->Split(x0);
+	auto[c2, c3] = c1->Split(x1);
+
+	auto c2t = std::make_shared<Pln_TangCurve<Pln_Curve>>(c2->Geometry());
+
+	auto c = std::make_tuple(c0, c2t, c3);
+	return std::move(c);
 }
 
 #include <Cad2d_GeoSketch_Circle.hxx>
