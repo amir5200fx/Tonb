@@ -18,6 +18,10 @@ namespace tnbLib
 	void example_create_ship();
 
 	void example_calculate_volume_ship();
+
+	void example_transform_shape2d();
+
+	void example_geo_compt_polygons();
 }
 
 #endif // !_Tnb_Examples_Header

@@ -2,11 +2,17 @@
 
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
+#include <Geo_xDistb.hxx>
+#include <Pln_Tools.hxx>
 #include <Cad2d_CmptLib.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_CrossSection.hxx>
 #include <Marine_WaterCurve.hxx>
+#include <Marine_WetSection.hxx>
+#include <Marine_WettedBody.hxx>
+#include <Marine_WaterDomain.hxx>
+#include <Marine_WaterDomain_Still.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <UnitSystem.hxx>
 #include <error.hxx>
@@ -148,6 +154,90 @@ tnbLib::MarineBase_Tools::CalcArea
 }
 
 Standard_Real 
+tnbLib::MarineBase_Tools::CalcIx
+(
+	const Marine_CmpSection & theSection,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& w = x->Wire();
+		Debug_Null_Pointer(w);
+
+		sum += Cad2d_CmptLib::Ix(*w, theInfo);
+	}
+	return sum;
+}
+
+Standard_Real
+tnbLib::MarineBase_Tools::CalcIy
+(
+	const Marine_CmpSection & theSection,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& w = x->Wire();
+		Debug_Null_Pointer(w);
+
+		sum += Cad2d_CmptLib::Iy(*w, theInfo);
+	}
+	return sum;
+}
+
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcIv
+(
+	const Marine_CmpSection & theSection,
+	const gp_Ax2d & theAx, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& w = x->Wire();
+		Debug_Null_Pointer(w);
+
+		sum += Cad2d_CmptLib::Iv(*w, theAx, theInfo);
+	}
+	return sum;
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcIv
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const gp_Ax2d & theAx,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	std::vector<marineLib::xSectionParam> sections;
+	sections.reserve(theSections.size());
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+
+		marineLib::xSectionParam ix;
+		ix.x = x->X();
+		ix.value = CalcIv(*x, theAx, theInfo);
+
+		sections.push_back(std::move(ix));
+	}
+	return std::move(sections);
+}
+
+Standard_Real 
 tnbLib::MarineBase_Tools::CalcWetArea
 (
 	const Marine_CmpSection & theSection, 
@@ -280,7 +370,7 @@ tnbLib::MarineBase_Tools::CalcWetCentre
 //	
 //}
 
-Standard_Real 
+std::vector<tnbLib::marineLib::xSectionParam>
 tnbLib::MarineBase_Tools::CalcVolume
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
@@ -300,9 +390,228 @@ tnbLib::MarineBase_Tools::CalcVolume
 		params.push_back(std::move(xParam));
 	}
 
-	return CalcArea(params, theInfo);
+	return std::move(params);
 }
 
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcWaterCurveLength
+(
+	const Marine_WetSection & theSection,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (theSection.DeepCondition())
+	{
+		return 0;
+	}
+
+	Debug_Null_Pointer(theSection.Wire());
+	const auto& wire = *theSection.Wire();
+
+	Standard_Real sum = 0;
+	for (const auto& x : wire.Edges())
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& curve = *x->Curve();
+		if (curve.IsOnWater())
+		{
+			Debug_Null_Pointer(curve.Geometry());
+			sum += Pln_Tools::Length(curve.Geometry(), theInfo);
+		}
+	}
+	return sum;
+}
+
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcWaterCurveBreadth
+(
+	const Marine_WetSection & theSection
+)
+{
+	if (theSection.DeepCondition())
+	{
+		return 0;
+	}
+
+	auto curves = theSection.RetrieveCurvesOnWater();
+
+	if (curves.empty())
+	{
+		FatalErrorIn("Standard_Real MarineBase_Tools::CalcWaterCurveBreadth(const Marine_WetSection & theSection)")
+			<< "Contradictory of data: the section has no curves on water" << endl
+			<< abort(FatalError);
+	}
+	
+	auto iter = curves.begin();
+
+	Debug_Null_Pointer((*iter));
+	const auto& x = (*iter);
+	auto p0 = x->FirstCoord();
+	auto p1 = x->LastCoord();
+
+	auto dMax = SquareDistance(p0, p1);
+
+	iter++;
+	while (iter NOT_EQUAL curves.end())
+	{
+		const auto& x = (*iter);
+		Debug_Null_Pointer(x);
+
+		auto x0 = x->FirstCoord();
+		auto x1 = x->LastCoord();
+
+		auto d = SquareDistance(x0, p1);
+		if (d > dMax)
+		{
+			dMax = d;
+			p0 = x0;
+		}
+
+		d = SquareDistance(x0, p0);
+		if (d > dMax)
+		{
+			dMax = d;
+			p1 = x0;
+		}
+
+		d = SquareDistance(x1, p1);
+		if (d > dMax)
+		{
+			dMax = d;
+			p0 = x1;
+		}
+
+		d = SquareDistance(x1, p0);
+		if (d > dMax)
+		{
+			dMax = d;
+			p1 = x1;
+		}
+
+		iter++;
+	}
+	return sqrt(dMax);
+}
+
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcWaterCurveBreadth
+(
+	const Marine_CmpSection & theSection
+)
+{
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+		if (x->IsWet())
+		{
+			auto wet = std::dynamic_pointer_cast<Marine_WetSection>(x);
+			Debug_Null_Pointer(wet);
+
+			if (NOT wet->DeepCondition())
+			{
+				return CalcWaterCurveBreadth(*wet);
+			}
+		}
+	}
+	return 0;
+}
+
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcWettedHullCurveLength
+(
+	const Marine_WetSection & theSection,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Debug_Null_Pointer(theSection.Wire());
+	const auto& wire = *theSection.Wire();
+
+	Standard_Real sum = 0;
+	for (const auto& x : wire.Edges())
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& curve = *x->Curve();
+		if (NOT curve.IsOnWater())
+		{
+			Debug_Null_Pointer(curve.Geometry());
+			sum += Pln_Tools::Length(curve.Geometry(), theInfo);
+		}
+	}
+	return sum;
+}
+
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcWettedHullCurveLength
+(
+	const Marine_CmpSection & theSection, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+		
+		if (x->IsWet())
+		{
+			auto wet = std::dynamic_pointer_cast<Marine_WetSection>(x);
+			Debug_Null_Pointer(wet);
+
+			sum += CalcWettedHullCurveLength(*wet, theInfo);
+		}
+	}
+	return sum;
+}
+
+std::vector<tnbLib::marineLib::xSectionParam>
+tnbLib::MarineBase_Tools::CalcWettedHullSurfaceArea
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	std::vector<marineLib::xSectionParam> values;
+	values.reserve(theSections.size());
+
+	for (const auto& sect : theSections)
+	{
+		Debug_Null_Pointer(sect);
+
+		marineLib::xSectionParam p;
+		p.x = sect->X();
+		p.value = CalcWettedHullCurveLength(*sect, theInfo);
+
+		values.push_back(std::move(p));
+	}
+	return std::move(values);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam>
+tnbLib::MarineBase_Tools::CalcWaterPlaneArea
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	std::vector<marineLib::xSectionParam> values;
+	values.reserve(theSections.size());
+
+	for (const auto& sect : theSections)
+	{
+		Debug_Null_Pointer(sect);
+
+		marineLib::xSectionParam p;
+		p.x = sect->X();
+		p.value = CalcWaterCurveBreadth(*sect);
+
+		values.push_back(std::move(p));
+	}
+	return std::move(values);
+}
 
 tnbLib::Pnt3d 
 tnbLib::MarineBase_Tools::CalcCentreProductVolume
@@ -421,9 +730,9 @@ void tnbLib::MarineBase_Tools::Heel
 	gp_Ax2d O(Pnt2d(loc.X(), loc.Y()), gp_Dir2d(1, 0));
 
 	gp_Trsf2d t;
-	t.SetTransformation(O, theAx);
+	t.SetTransformation(theAx, O);
 
-	theSection->Transform(t.Inverted());
+	theSection->Transform(t);
 
 	gp_Trsf2d t1;
 	t1.SetTranslation(theAx.Location(), O.Location());
@@ -458,10 +767,9 @@ void tnbLib::MarineBase_Tools::Heel
 )
 {
 	const auto& loc = theAx.Location();
-	const auto angle = ConvertUnit(UnitSystem_Angle_deg, UnitSystem_Angle_rad)*theAngle;
 
 	Pnt2d O(loc.Y(), loc.Z());
-	gp_Dir2d dir(cos(angle), sin(angle));
+	gp_Dir2d dir(cos(theAngle), sin(theAngle));
 
 	gp_Ax2d ax(O, dir);
 
@@ -713,7 +1021,7 @@ namespace tnbLib
 	}
 }
 
-std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
+std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::MarineBase_Tools::WaterSections
 (
 	const Marine_CrossSection& theModel,
@@ -744,6 +1052,39 @@ tnbLib::MarineBase_Tools::WaterSections
 		auto wa = WaterSection(wl, x->CoordinateSystem(), zmin, theMinTol, theMaxTol);
 		Debug_Null_Pointer(wa);
 
+		auto section = std::make_shared<Marine_Section>(++K, wa);
+		Debug_Null_Pointer(section);
+
+		section->SetCoordinateSystem(x->CoordinateSystem());
+		waters.push_back(std::move(section));
+	}
+	return std::move(waters);
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
+tnbLib::MarineBase_Tools::StillWaterSections
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
+	const Standard_Real theZ,
+	const Entity3d_Box & theDomain
+)
+{
+	const auto y0 = theDomain.P0().Z();
+	const auto y1 = theZ;
+
+	const auto x0 = theDomain.P0().Y();
+	const auto x1 = theDomain.P1().Y();
+
+	auto pln = Cad2d_Plane::MakeBox(Pnt2d(x0, y0), Pnt2d(x1, y1));
+	Debug_Null_Pointer(pln);
+
+	const auto& wa = pln->OuterWire();
+	Debug_Null_Pointer(wa);
+
+	std::vector<std::shared_ptr<Marine_Section>> waters;
+	Standard_Integer K = 0;
+	for (const auto& x : theModel)
+	{
 		auto section = std::make_shared<Marine_Section>(++K, wa);
 		Debug_Null_Pointer(section);
 
@@ -875,18 +1216,19 @@ tnbLib::MarineBase_Tools::DrySection
 	return nullptr;
 }
 
-std::vector<std::shared_ptr<tnbLib::Marine_CmpSection>> 
+std::shared_ptr<tnbLib::Marine_Body>
 tnbLib::MarineBase_Tools::WettedSections
 (
-	const std::shared_ptr<Marine_CrossSection>& theModel,
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
 	const std::vector<std::shared_ptr<Marine_Section>>& theWaterSections
 )
 {
-	std::vector<std::shared_ptr<Marine_CmpSection>> wetted;
+	auto body = std::make_shared<Marine_WettedBody>();
+	Debug_Null_Pointer(body);
 
+	auto& wetted = body->ChangeSections();
 	Standard_Integer K = 0;
-	const auto& sections = theModel->Sections();
-	for (const auto& x : sections)
+	for (const auto& x : theModel)
 	{
 		Debug_Null_Pointer(x);
 
@@ -900,21 +1242,20 @@ tnbLib::MarineBase_Tools::WettedSections
 			wetted.push_back(std::move(wet));
 		}
 	}
-	return std::move(wetted);
+	return std::move(body);
 }
 
 std::vector<std::shared_ptr<tnbLib::Marine_CmpSection>>
 tnbLib::MarineBase_Tools::DrySections
 (
-	const std::shared_ptr<Marine_CrossSection>& theModel,
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
 	const std::vector<std::shared_ptr<Marine_Section>>& theWaterSections
 )
 {
 	std::vector<std::shared_ptr<Marine_CmpSection>> drySections;
 
 	Standard_Integer K = 0;
-	const auto& sections = theModel->Sections();
-	for (const auto& x : sections)
+	for (const auto& x : theModel)
 	{
 		Debug_Null_Pointer(x);
 
@@ -928,6 +1269,172 @@ tnbLib::MarineBase_Tools::DrySections
 		}
 	}
 	return std::move(drySections);
+}
+
+tnbLib::marineLib::xSectionParam 
+tnbLib::MarineBase_Tools::LeverArm
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const std::vector<std::shared_ptr<Marine_Section>>& theWaters, 
+	const gp_Ax2d & theIx,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	const auto volQ = MarineBase_Tools::CalcVolume(theSections, theInfo);
+	const auto vol = MarineBase_Tools::CalcArea(volQ, theInfo);
+
+	const auto IvQ = MarineBase_Tools::CalcIv(theSections, theIx, theInfo);
+	const auto Iv = MarineBase_Tools::CalcArea(IvQ, theInfo);
+
+	if (ABS(vol) <= gp::Resolution())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "divided by zero encountered!" << endl
+			<< abort(FatalError);
+	}
+
+	marineLib::xSectionParam v;
+	v.value = Iv / vol;
+	v.x = vol;
+
+	return std::move(v);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CrossCurve
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const Entity3d_Box& theDomain,
+	const Standard_Real theZmin,
+	const Standard_Real theZmax,
+	const Standard_Integer nbZ, 
+	const gp_Ax1& theK,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (nbZ < 2)
+	{
+		FatalErrorIn("std::vector<marineLib::xSectionParam> MarineBase_Tools::CrossCurve(Args...)")
+			<< "not enough sections for waters" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& keel = theK.Location();
+
+	Pnt2d loc(keel.Y(), keel.Z());
+	gp_Ax2d Ix(loc, gp_Dir2d(0, 1));
+
+	std::vector<marineLib::xSectionParam> curves;
+	curves.reserve(nbZ);
+
+	const auto& p0 = theDomain.P0();
+	const auto& p1 = theDomain.P1();
+
+	const auto dz = (theZmax - theZmin) / (Standard_Real)nbZ;
+	for (auto i = 0; i <= nbZ; i++)
+	{
+		auto z = i * dz + theZmin;
+
+		auto waters = StillWaterSections(theSections, z, theDomain);
+
+		auto v = LeverArm(theSections, waters, Ix, theInfo);
+		curves.push_back(std::move(v));
+	}
+	return std::move(curves);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CrossCurve
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const std::vector<std::shared_ptr<Marine_WaterDomain>>& theWaters,
+	const gp_Ax1 & theK, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (theWaters.size() < 2)
+	{
+		FatalErrorIn("std::vector<marineLib::xSectionParam> MarineBase_Tools::CrossCurve(Args...)")
+			<< "not enough sections for waters" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& keel = theK.Location();
+
+	Pnt2d loc(keel.Y(), keel.Z());
+	gp_Ax2d Ix(loc, gp_Dir2d(0, 1));
+
+	std::vector<marineLib::xSectionParam> curves;
+	for (const auto& x : theWaters)
+	{
+		Debug_Null_Pointer(x);
+
+		auto v = LeverArm(theSections, x->Waters(), Ix, theInfo);
+		curves.push_back(std::move(v));
+	}
+	return std::move(curves);
+}
+
+std::shared_ptr<tnbLib::Marine_WaterDomain> 
+tnbLib::MarineBase_Tools::RetrieveStillWaterDomain
+(
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
+	const Standard_Real theZ
+)
+{
+	auto domain = std::make_shared<Marine_WaterDomain_Still>(theDomain);
+	Debug_Null_Pointer(domain);
+
+	domain->Perform(theModel, theZ);
+	Debug_If_Condition_Message(NOT domain->IsDone(), "the algorithm is not performed!");
+
+	return std::move(domain);
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_WaterDomain>> 
+tnbLib::MarineBase_Tools::RetrieveStillWaterDomains
+(
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
+	const Standard_Real theZmin, 
+	const Standard_Real theZmax, 
+	const Standard_Integer nbZ
+)
+{
+	std::vector<std::shared_ptr<Marine_WaterDomain>> waters;
+	waters.reserve(nbZ + 1);
+	const auto dz = (theZmax - theZmin) / (Standard_Real)nbZ;
+
+	for (auto i = 0; i <= nbZ; i++)
+	{
+		auto z = theZmin + i * dz;
+		auto domain = RetrieveStillWaterDomain(theDomain, theModel, z);
+		Debug_Null_Pointer(domain);
+
+		waters.push_back(std::move(domain));
+	}
+	return std::move(waters);
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_WaterDomain>> 
+tnbLib::MarineBase_Tools::RetrieveStillWaterDomains
+(
+	const std::shared_ptr<Marine_Domain>& theDomain, 
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel, 
+	const Geo_xDistb & theZ
+)
+{
+	std::vector<std::shared_ptr<Marine_WaterDomain>> waters;
+	waters.reserve(theZ.Size() + 1);
+	for (auto z : theZ.Values())
+	{
+		auto domain = RetrieveStillWaterDomain(theDomain, theModel, z);
+		Debug_Null_Pointer(domain);
+
+		waters.push_back(std::move(domain));
+	}
+	return std::move(waters);
 }
 
 //Standard_Real 

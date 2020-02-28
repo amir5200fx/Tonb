@@ -15,13 +15,13 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		const CurveType& theCurve_;
+		CurveType theCurve_;
 
-		const MetricPrcsrType& theProcessor_;
+		MetricPrcsrType theProcessor_;
 
 	public:
 
-		typedef typename cascadeLib::pt_type_from_curve<CurveType>::ptType Point;
+		typedef typename cascadeLib::pt_type_from_curve<typename remove_pointer<CurveType>::type>::ptType Point;
 		typedef typename cascadeLib::vec_type_from_point<Point>::vcType Vector;
 
 		Geo_CurveIntegrand
@@ -52,11 +52,11 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		const CurveType& theCurve_;
+		CurveType theCurve_;
 
 	public:
 
-		typedef typename cascadeLib::pt_type_from_curve<CurveType>::ptType Point;
+		typedef typename cascadeLib::pt_type_from_curve<typename remove_pointer<CurveType>::type>::ptType Point;
 		typedef typename cascadeLib::vec_type_from_point<Point>::vcType Vector;
 
 		Geo_CurveIntegrand

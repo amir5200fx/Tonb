@@ -331,6 +331,15 @@
     <Filter Include="TnbLib\Geo\Search\PrTree">
       <UniqueIdentifier>{ab43e5a6-cd24-4ebf-ad68-136c549b9d9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Computation">
+      <UniqueIdentifier>{9854ade4-314b-4ee1-b86f-1f26b303fcd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Distributor">
+      <UniqueIdentifier>{7b648617-3fbc-4c49-a00c-43fa9d4f216a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Distributor\Uniform">
+      <UniqueIdentifier>{766f99c3-f3a4-40c0-baa5-d587e11d4131}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -729,6 +738,15 @@
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationFwd.hxx">
       <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Computation\Geo_CmptLib.hxx">
+      <Filter>TnbLib\Geo\Computation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Distributor\Geo_xDistb.hxx">
+      <Filter>TnbLib\Geo\Distributor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Distributor\Uniform\Geo_UniDistb.hxx">
+      <Filter>TnbLib\Geo\Distributor\Uniform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -877,6 +895,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools.cxx">
       <Filter>TnbLib\Geo\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Computation\Geo_CmptLib.cxx">
+      <Filter>TnbLib\Geo\Computation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Distributor\Uniform\Geo_UniDistb.cxx">
+      <Filter>TnbLib\Geo\Distributor\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

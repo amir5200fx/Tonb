@@ -35,6 +35,15 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
+
+		Standard_Boolean IsOnWater() const override
+		{
+			return Standard_True;
+		}
+
+		std::shared_ptr<Pln_Entity>
+			Copy() const override;
+
 		std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
 			Split
 			(

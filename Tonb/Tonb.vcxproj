@@ -129,7 +129,9 @@
     <ClCompile Include="Examples\example_create_ship.cxx" />
     <ClCompile Include="Examples\example_creating_box.cxx" />
     <ClCompile Include="Examples\example_creating_plane_box.cxx" />
+    <ClCompile Include="Examples\example_geo_compt_polygons.cxx" />
     <ClCompile Include="Examples\example_open_iges.cxx" />
+    <ClCompile Include="Examples\example_transform_shape2d.cxx" />
     <ClCompile Include="Examples\example_union_plane_box.cxx" />
     <ClCompile Include="main.cxx" />
   </ItemGroup>

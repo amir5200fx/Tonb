@@ -5,6 +5,8 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Global_Done.hxx>
+#include <Global_Verbose.hxx>
+#include <Entity3d_Box.hxx>
 
 #include <memory>
 
@@ -15,28 +17,46 @@ namespace tnbLib
 
 	// Forward Declarations
 	class CrossSection_xShapeStation;
-	class Marine_SectionDistribution;
+	class Marine_Graph;
+	class Marine_Domain;
+	class Geo_xDistb;
 
 	class HydroStatic_CrossCurves
 		: public Global_Indexed
 		, public Global_Named
 		, public Global_Done
+		, public Global_Verbose
 	{
 
 		/*Private Data*/
 
 		gp_Ax1 theK_;
 
+		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<CrossSection_xShapeStation> theModel_;
-		std::shared_ptr<Marine_SectionDistribution> theHeel_;
+		std::shared_ptr<Geo_xDistb> theHeel_;
+
+		std::shared_ptr<Marine_Graph> theGraph_;
+
+		Standard_Integer theNbWaters_;
+
+		auto& ChangeGraph()
+		{
+			return theGraph_;
+		}
 
 	public:
 
-		HydroStatic_CrossCurves();
+		HydroStatic_CrossCurves(const std::shared_ptr<Marine_Domain>& theDomain);
 
-		HydroStatic_CrossCurves(const Standard_Integer theIndex);
+		HydroStatic_CrossCurves(const Standard_Integer theIndex, const std::shared_ptr<Marine_Domain>& theDomain);
 
-		HydroStatic_CrossCurves(const Standard_Integer theIndex, const word& theName);
+		HydroStatic_CrossCurves(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<Marine_Domain>& theDomain);
+
+		auto NbWaters() const
+		{
+			return theNbWaters_;
+		}
 
 		const auto& K() const
 		{
@@ -46,6 +66,21 @@ namespace tnbLib
 		const auto& Model() const
 		{
 			return theModel_;
+		}
+
+		const auto& Heel() const
+		{
+			return theHeel_;
+		}
+
+		const auto& Graph() const
+		{
+			return theGraph_;
+		}
+
+		const auto& Domain() const
+		{
+			return theDomain_;
 		}
 
 		void Perform();
@@ -60,7 +95,7 @@ namespace tnbLib
 
 		void LoadHeel
 		(
-			const std::shared_ptr<Marine_SectionDistribution>& theHeel
+			const std::shared_ptr<Geo_xDistb>& theHeel
 		)
 		{
 			theHeel_ = theHeel;

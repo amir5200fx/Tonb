@@ -39,6 +39,16 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 {
 }
 
+std::shared_ptr<tnbLib::Pln_Entity> 
+tnbLib::Marine_WaterCurve::Copy() const
+{
+	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());
+	Debug_Null_Pointer(c);
+
+	auto copy = std::make_shared<Marine_WaterCurve>(Index(), Name(), c);
+	return std::move(copy);
+}
+
 std::tuple
 <
 	std::shared_ptr<tnbLib::Pln_Curve>, 

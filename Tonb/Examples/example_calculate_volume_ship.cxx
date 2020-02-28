@@ -11,6 +11,7 @@
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 
 #include <Pln_Wire.hxx>
+#include <Marine_Body.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_FlatWave.hxx>
@@ -69,7 +70,7 @@ void tnbLib::example_calculate_volume_ship()
 
 	auto waters = MarineBase_Tools::WaterSections(*maker, *wave, domain, 1.0E-3, 1.0E-6);
 
-	auto wetted = MarineBase_Tools::WettedSections(maker, waters);
+	auto wetted = MarineBase_Tools::WettedSections(maker->Sections(), waters);
 
 	auto info = std::make_shared<NumAlg_AdaptiveInteg_Info>();
 	Debug_Null_Pointer(info);
@@ -77,7 +78,15 @@ void tnbLib::example_calculate_volume_ship()
 	info->SetTolerance(1.0e-4);
 	info->SetNbInitIterations(2);
 
-	const auto volume = MarineBase_Tools::CalcVolume(wetted, info);
+	const auto volumeQ = MarineBase_Tools::CalcVolume(wetted->Sections(), info);
 
-	cout << "Volume of the wetted areas = " << volume << std::endl;
+	cout << "Volume of the wetted areas = " << MarineBase_Tools::CalcArea(volumeQ, info) << std::endl;
+	
+	const auto bxQ = MarineBase_Tools::CalcWaterPlaneArea(wetted->Sections(), info);
+
+	cout << "WL section area = " << MarineBase_Tools::CalcArea(bxQ, info) << std::endl;
+
+	const auto wetSurfAreaQ = MarineBase_Tools::CalcWettedHullSurfaceArea(wetted->Sections(), info);
+
+	cout << "Wetted Area = " << MarineBase_Tools::CalcArea(wetSurfAreaQ, info) << std::endl;
 }

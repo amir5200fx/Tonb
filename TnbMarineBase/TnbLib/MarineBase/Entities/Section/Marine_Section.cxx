@@ -55,6 +55,7 @@ void tnbLib::Marine_Section::Transform
 )
 {
 	Wire()->Transform(t);
+	CoordinateSystem().Transform(t);
 }
 
 Standard_Real 

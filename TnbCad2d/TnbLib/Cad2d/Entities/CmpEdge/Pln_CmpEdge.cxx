@@ -83,6 +83,7 @@ tnbLib::Pln_CmpEdge::Copy() const
 			Debug_Null_Pointer(edge);
 
 			v0->InsertToEdges(edge->Index(), edge);
+			edge->Mesh() = x->Mesh();
 
 			cmpEdge->Insert(edge);
 		}
@@ -90,6 +91,8 @@ tnbLib::Pln_CmpEdge::Copy() const
 		{
 			auto edge = std::make_shared<Pln_Edge>(x->Index(), x->Name(), v0, v1, x->Curve(), x->Sense());
 			Debug_Null_Pointer(edge);
+
+			edge->Mesh() = x->Mesh();
 
 			v0->InsertToEdges(edge->Index(), edge);
 			v1->InsertToEdges(edge->Index(), edge);

@@ -20,7 +20,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		const entity& theEntity_;
+		entity theEntity_;
 
 	public:
 
@@ -46,7 +46,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		const entity& theEntity_;
+		entity theEntity_;
 
 	public:
 

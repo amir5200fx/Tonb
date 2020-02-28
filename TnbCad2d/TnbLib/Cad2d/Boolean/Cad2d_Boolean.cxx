@@ -466,7 +466,7 @@ tnbLib::Cad2d_Boolean::Intersection
 	Debug_Null_Pointer(subdivide);
 
 	subdivide->LoadIntersectionAlgorithm(intersection);
-
+	
 	subdivide->Perform();
 
 	Debug_If_Condition_Message(NOT subdivide->IsDone(), "the algorithm is not performed!");
@@ -489,8 +489,9 @@ tnbLib::Cad2d_Boolean::Intersection
 	auto edges0 = sub0->Segments()->RetrieveEntities();
 	auto edges1 = sub1->Segments()->RetrieveEntities();
 
-	std::vector<Handle(Geom2d_Curve)> curves;
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	Standard_Integer k0 = 0;
+	
 	for (const auto& x : edges0)
 	{
 		Debug_Null_Pointer(x);
@@ -503,7 +504,7 @@ tnbLib::Cad2d_Boolean::Intersection
 
 		if (boolean::IsCurveInsidePolygon(*x->Curve(), *chain1, domain1))
 		{
-			curves.push_back(x->Curve()->Geometry());
+			curves.push_back(x->Curve());
 			++k0;
 		}
 	}
@@ -521,7 +522,7 @@ tnbLib::Cad2d_Boolean::Intersection
 
 		if (boolean::IsCurveInsidePolygon(*x->Curve(), *chain0, domain0))
 		{
-			curves.push_back(x->Curve()->Geometry());
+			curves.push_back(x->Curve());
 			++k1;
 		}
 	}

@@ -2,6 +2,7 @@
 #ifndef _Marine_CmpSection_Header
 #define _Marine_CmpSection_Header
 
+#include <Entity2d_BoxFwd.hxx>
 #include <Marine_Entity.hxx>
 
 #include <vector>
@@ -58,6 +59,7 @@ namespace tnbLib
 			const word& theName
 		);
 
+		Entity2d_Box BoundingBox() const;
 
 		auto NbSections() const
 		{
@@ -75,6 +77,8 @@ namespace tnbLib
 		}
 
 		Standard_Real X() const;
+
+		std::shared_ptr<Marine_CmpSection> Copy() const;
 
 		void Transform(const gp_Trsf2d& t);
 

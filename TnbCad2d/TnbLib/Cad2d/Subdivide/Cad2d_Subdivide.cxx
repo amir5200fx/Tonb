@@ -23,10 +23,14 @@
 #include <error.hxx>
 #include <OSstream.hxx>
 
+#include <Geom2d_Curve.hxx>
 #include <map>
 #include <vector>
 #include <list>
 #include <algorithm>
+
+#include <Geo_CurveIntegrand_Function.hxx>
+#include <NumAlg_AdaptiveInteg.hxx>
 
 tnbLib::Cad2d_Subdivide::Cad2d_Subdivide()
 {
@@ -116,6 +120,7 @@ namespace tnbLib
 			info->SetTolerance(1.0E-6);
 			info->SetNbInitIterations(4);
 
+			Debug_Null_Pointer(theCurve->Geometry());
 			const auto l = Pln_Tools::Length(theCurve->Geometry(), info);
 
 			if (l <= theTol)
@@ -144,8 +149,11 @@ namespace tnbLib
 				{
 					auto orth = std::dynamic_pointer_cast<Cad2d_IntsctEntity_OrthSegment>(x);
 					Debug_Null_Pointer(orth);
-
+					
 					auto[c0, c1] = SubdivideCurve(*curve, orth->Parameter());
+					
+					Debug_Null_Pointer(c0);
+					Debug_Null_Pointer(c1);
 
 					if (IsValidCurve(c0, theTol))
 					{
@@ -158,8 +166,12 @@ namespace tnbLib
 				{
 					auto tang = std::dynamic_pointer_cast<Cad2d_IntsctEntity_TangSegment>(x);
 					Debug_Null_Pointer(tang);
-
+					
 					auto[c0, c1, c2] = SubdivideCurve(*curve, *tang);
+					
+					Debug_Null_Pointer(c0);
+					Debug_Null_Pointer(c1);
+					Debug_Null_Pointer(c2);
 
 					if (IsValidCurve(c0, theTol))
 					{
@@ -483,7 +495,7 @@ namespace tnbLib
 			Debug_Null_Pointer(outer);
 			
 			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
-			
+
 			auto[minTol, maxTol] = outer->BoundTolerance();
 
 			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(maxTol, theTol));

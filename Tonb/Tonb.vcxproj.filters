@@ -34,6 +34,12 @@
     <ClCompile Include="Examples\example_calculate_volume_ship.cxx">
       <Filter>Examples</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\example_transform_shape2d.cxx">
+      <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\example_geo_compt_polygons.cxx">
+      <Filter>Examples</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

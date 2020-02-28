@@ -41,10 +41,10 @@ tnbLib::Pln_Tools::Length
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
-	Geo_CurveIntegrand_Function<Geom2d_Curve, void, false>
-		function(*theCurve);
+	Geo_CurveIntegrand_Function<Handle(Geom2d_Curve), void, false>
+		function(theCurve);
 
-	NumAlg_AdaptiveInteg<Geo_CurveIntegrand_Function<Geom2d_Curve, void, false>>
+	NumAlg_AdaptiveInteg<Geo_CurveIntegrand_Function<Handle(Geom2d_Curve), void, false>>
 		alg(function, theCurve->FirstParameter(), theCurve->LastParameter(), *theInfo);
 
 	alg.Perform();

@@ -3,6 +3,7 @@
 #define _Marine_Section_Header
 
 #include <Marine_Entity.hxx>
+#include <Entity2d_BoxFwd.hxx>
 
 class gp_Trsf2d;
 
@@ -45,6 +46,7 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
+		const Entity2d_Box& BoundingBox() const;
 
 		const auto& Wire() const
 		{

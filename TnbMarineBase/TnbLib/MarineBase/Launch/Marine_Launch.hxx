@@ -18,6 +18,7 @@ namespace tnbLib
 	class Marine_Section;
 	class Marine_Wave;
 	class Marine_Launch_Info;
+	class Marine_Body;
 
 	class Marine_Launch
 		: public Global_Done

@@ -10,6 +10,7 @@
 #include <FastDiscrete_Params.hxx>
 
 #include <Pln_Wire.hxx>
+#include <Marine_Body.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_FlatWave.hxx>
@@ -96,7 +97,7 @@ void tnbLib::example_create_marine_vessel()
 
 	auto waters = MarineBase_Tools::WaterSections(*maker, *wave, domain, 1.0E-3, 1.0E-6);
 
-	auto wetted = MarineBase_Tools::WettedSections(maker, waters);
+	auto wetted = MarineBase_Tools::WettedSections(maker->Sections(), waters);
 
 	/*for (const auto& x : maker->Sections())
 	{
@@ -126,7 +127,7 @@ void tnbLib::example_create_marine_vessel()
 		}
 	}*/
 
-	for (const auto& x : wetted)
+	for (const auto& x : wetted->Sections())
 	{
 		Debug_Null_Pointer(x);
 

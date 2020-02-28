@@ -43,7 +43,9 @@ Standard_Integer main()
 	//example_union_plane_box();
 	//example_create_marine_vessel();
 	//example_create_ship();
-	example_calculate_volume_ship();
+	//example_calculate_volume_ship();
+	//example_transform_shape2d();
+	example_geo_compt_polygons();
 
 	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));

@@ -15,11 +15,23 @@ namespace tnbLib
 
 	public:
 
-		Marine_DrySection(const std::shared_ptr<Pln_Wire>& theWire);
+		Marine_DrySection
+		(
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
-		Marine_DrySection(const Standard_Integer theIndex, const std::shared_ptr<Pln_Wire>& theWire);
+		Marine_DrySection
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
-		Marine_DrySection(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<Pln_Wire>& theWire);
+		Marine_DrySection
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
 
 		Standard_Boolean IsDry() const override
@@ -27,6 +39,7 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		std::shared_ptr<Marine_Section> Copy() const override;
 	};
 }
 

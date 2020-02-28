@@ -7,6 +7,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Pln_Curve;
+
 	class Marine_WetSection
 		: public Marine_Section
 	{
@@ -17,11 +20,23 @@ namespace tnbLib
 
 	public:
 
-		Marine_WetSection(const std::shared_ptr<Pln_Wire>& theWire);
+		Marine_WetSection
+		(
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
-		Marine_WetSection(const Standard_Integer theIndex, const std::shared_ptr<Pln_Wire>& theWire);
+		Marine_WetSection
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
-		Marine_WetSection(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<Pln_Wire>& theWire);
+		Marine_WetSection
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
 
 		auto DeepCondition() const
@@ -38,6 +53,16 @@ namespace tnbLib
 		{
 			IsDeep_ = deep;
 		}
+
+		std::vector<std::shared_ptr<Pln_Curve>>
+			RetrieveCurvesOnWater() const;
+
+		void RetrieveCurvesOnWaterTo
+		(
+			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+		) const;
+
+		std::shared_ptr<Marine_Section> Copy() const override;
 	};
 }
 
