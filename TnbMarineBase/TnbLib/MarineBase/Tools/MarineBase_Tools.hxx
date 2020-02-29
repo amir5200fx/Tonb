@@ -52,7 +52,17 @@ namespace tnbLib
 
 	public:
 
-		static Entity3d_Box BoundingBox(const Marine_CrossSection& theModel);
+		static Entity3d_Box 
+			BoundingBox
+			(
+				const Marine_CrossSection& theModel
+			);
+
+		static Entity3d_Box
+			BoundingBox
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
 
 		static Handle(Geom2d_Curve)
 			Curve
@@ -92,6 +102,13 @@ namespace tnbLib
 			CalcIy
 			(
 				const Marine_CmpSection& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static std::vector<marineLib::xSectionParam>
+			CalcIy
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
@@ -222,6 +239,14 @@ namespace tnbLib
 				const Standard_Real theAngle
 			);
 
+		static std::shared_ptr<Geo_xDistb>
+			HeelDistb
+			(
+				const Standard_Real theDeg0,
+				const Standard_Real theDeg1, 
+				const Standard_Integer theNbHeels
+			);
+
 		static std::shared_ptr<Pln_Wire>
 			WaterSection
 			(
@@ -252,7 +277,7 @@ namespace tnbLib
 
 
 
-		static std::shared_ptr<Marine_Section>
+		static std::vector<std::shared_ptr<Marine_Section>>
 			WettedSection
 			(
 				const std::shared_ptr<Pln_Wire>& theSection,
@@ -298,8 +323,14 @@ namespace tnbLib
 			LeverArm
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
-				const std::vector<std::shared_ptr<Marine_Section>>& theWaters,
-				const gp_Ax2d& theIx,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			LeverArm
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real theVolume,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 

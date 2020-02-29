@@ -32,10 +32,40 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 {
 }
 
+tnbLib::Entity2d_Box 
+tnbLib::Marine_CmpSection::BoundingBox() const
+{
+	auto iter = Sections().begin();
+	auto b = (*iter)->BoundingBox();
+
+	iter++;
+	while (iter NOT_EQUAL Sections().end())
+	{
+		b = Entity2d_Box::Union(b, (*iter)->BoundingBox());
+		iter++;
+	}
+	return std::move(b);
+}
+
 Standard_Real 
 tnbLib::Marine_CmpSection::X() const
 {
 	return CoordinateSystem().Location().X();
+}
+
+std::shared_ptr<tnbLib::Marine_CmpSection> 
+tnbLib::Marine_CmpSection::Copy() const
+{
+	auto copy = std::make_shared<Marine_CmpSection>(Index(), Name());
+	Debug_Null_Pointer(copy);
+
+	for (const auto& x : Sections())
+	{
+		Debug_Null_Pointer(x);
+		copy->Insert(x->Copy());
+		copy->CoordinateSystem() = CoordinateSystem();
+	}
+	return std::move(copy);
 }
 
 void tnbLib::Marine_CmpSection::Transform
@@ -47,6 +77,18 @@ void tnbLib::Marine_CmpSection::Transform
 	{
 		Debug_Null_Pointer(x);
 		x->Transform(t);
+	}
+}
+
+void tnbLib::Marine_CmpSection::ExportToPlt
+(
+	OFstream & File
+) const
+{
+	for (const auto& x : Sections())
+	{
+		Debug_Null_Pointer(x);
+		x->ExportToPlt(File);
 	}
 }
 

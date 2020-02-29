@@ -17,9 +17,16 @@ namespace tnbLib
 
 		Marine_GraphAxis_Y();
 
-		Marine_GraphAxis_Y(const Standard_Integer theIndex);
+		Marine_GraphAxis_Y
+		(
+			const Standard_Integer theIndex
+		);
 
-		Marine_GraphAxis_Y(const Standard_Integer theIndex, const word& theName);
+		Marine_GraphAxis_Y
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		);
 
 
 		Standard_Boolean IsY() const override

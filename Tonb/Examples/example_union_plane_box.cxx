@@ -15,7 +15,7 @@ void tnbLib::example_union_plane_box()
 	auto shape1 = Cad2d_Plane::MakeBox(p0 + 0.5, p1 + 0.5);
 	Debug_Null_Pointer(shape1);
 
-	auto opt = Cad2d_Boolean::Intersection(shape0, shape1);
+	auto opt = Cad2d_Boolean::Union(shape0, shape1);
 	Debug_Null_Pointer(opt);
 
 	/*auto info = std::make_shared<Geo_ApprxCurve_Info>();

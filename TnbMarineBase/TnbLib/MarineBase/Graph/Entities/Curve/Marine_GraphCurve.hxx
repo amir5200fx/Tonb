@@ -23,15 +23,32 @@ namespace tnbLib
 		Handle(Geom2d_Curve) theCurve_;
 
 
-		static void CheckCurve(const Handle(Geom2d_Curve)& theCurve, const char* theName);
+		static void 
+			CheckCurve
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const char* theName
+			);
 
 	public:
 
-		Marine_GraphCurve(const Handle(Geom2d_Curve) theCurve);
+		Marine_GraphCurve
+		(
+			const Handle(Geom2d_Curve) theCurve
+		);
 
-		Marine_GraphCurve(const Standard_Integer theIndex, const Handle(Geom2d_Curve)& theCurve);
+		Marine_GraphCurve
+		(
+			const Standard_Integer theIndex,
+			const Handle(Geom2d_Curve)& theCurve
+		);
 
-		Marine_GraphCurve(const Standard_Integer theIndex, const word& theName, const Handle(Geom2d_Curve)& theCurve);
+		Marine_GraphCurve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Handle(Geom2d_Curve)& theCurve
+		);
 
 		const auto& Curve() const
 		{

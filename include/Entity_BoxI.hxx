@@ -1,4 +1,38 @@
 #pragma once
+template<class Point>
+tnbLib::Entity_Box<Point> 
+tnbLib::Entity_Box<Point>::Expanded
+(
+	const Standard_Real theOffset
+) const
+{
+	auto copy = *this;
+	copy.Expand(theOffset);
+	return std::move(copy);
+}
+
+template<class Point>
+void tnbLib::Entity_Box<Point>::Expand
+(
+	const Standard_Real theOffset
+)
+{
+	auto& p0 = P0();
+	auto& p1 = P1();
+
+	for (int i = 1; i <= Point::dim; i++)
+	{
+		auto x0 = p0.Coord(i);
+		auto x1 = p1.Coord(i);
+
+		x0 -= theOffset;
+		x1 += theOffset;
+
+		p0.SetCoord(i, x0);
+		p1.SetCoord(i, x1);
+	}
+}
+
 namespace tnbLib
 {
 

@@ -4,6 +4,7 @@
 
 #include <Marine_Entity.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <OFstream.hxx>
 
 class gp_Trsf2d;
 
@@ -54,6 +55,8 @@ namespace tnbLib
 		}
 
 		void Transform(const gp_Trsf2d& t);
+
+		void ExportToPlt(OFstream& File) const;
 
 		virtual Standard_Boolean IsDry() const
 		{

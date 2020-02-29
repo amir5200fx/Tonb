@@ -26,6 +26,7 @@ namespace tnbLib
 	class Pln_Wire;
 	class Pln_Curve;
 	class Pln_Vertex;
+	class Cad2d_Plane;
 	class NumAlg_AdaptiveInteg_Info;
 
 	class Pln_Tools
@@ -228,6 +229,12 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
 			);
 
+		static std::vector<std::shared_ptr<Cad2d_Plane>>
+			RetrievePlanes
+			(
+				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+			);
+
 		static std::shared_ptr<Pln_Edge>
 			ForwardEdge
 			(
@@ -242,6 +249,12 @@ namespace tnbLib
 
 		static std::shared_ptr<Pln_Vertex>
 			MergeTwoVertex(const std::shared_ptr<Pln_Vertex>& theVtx0, const std::shared_ptr<Pln_Vertex>& theVtx1, const Standard_Real theTol);
+
+		static void 
+			SortWires
+			(
+				std::vector<std::shared_ptr<Pln_Wire>>& theWires
+			);
 
 	};
 }

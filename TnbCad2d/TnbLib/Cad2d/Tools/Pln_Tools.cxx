@@ -3,6 +3,7 @@
 #include <Geo_PrTree.hxx>
 #include <Geo_CurveIntegrand_Function.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
+#include <Geo_ItemSort.hxx>
 #include <Adt_AvlTree.hxx>
 #include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
@@ -12,6 +13,7 @@
 #include <Pln_Ring.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_CmpEdge.hxx>
+#include <Cad2d_Plane.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
@@ -1376,6 +1378,141 @@ tnbLib::Pln_Tools::RetrieveOuterWire
 	return std::move(outer);
 }
 
+namespace tnbLib
+{
+
+	namespace plnLib
+	{
+
+		static Standard_Boolean 
+			CheckInner
+			(
+				const std::vector<std::shared_ptr<Pln_Wire>>& theInners, 
+				const std::shared_ptr<Pln_Wire>& theWire
+			)
+		{
+			for (const auto& x : theInners)
+			{
+				Debug_Null_Pointer(x);
+				if (Entity2d_Box::IsInside(*theWire->BoundingBox(), *x->BoundingBox()))
+				{
+					return Standard_True;
+				}
+			}
+			return Standard_False;
+		}
+
+		static void RetrieveInnerOuterWires
+		(
+			std::list<std::shared_ptr<Pln_Wire>>& theWires,
+			std::shared_ptr<Pln_Wire>& theOuter,
+			std::vector<std::shared_ptr<Pln_Wire>>& theInners
+		)
+		{
+			if (theWires.size() IS_EQUAL 1)
+			{
+				theOuter = theWires.front();
+				theWires.pop_front();
+				return;
+			}
+
+			theOuter = theWires.front();
+			theWires.pop_front();
+
+			std::vector<std::list<std::shared_ptr<Pln_Wire>>::iterator> removes;
+			auto iter = theWires.begin();
+			while (iter NOT_EQUAL theWires.end())
+			{
+				const auto& x = (*iter);
+				if (Entity2d_Box::IsInside(*x->BoundingBox(), *theOuter->BoundingBox()))
+				{
+					if (NOT CheckInner(theInners, x))
+					{
+						theInners.push_back(x);
+						removes.push_back(iter);
+					}
+				}
+
+				iter++;
+			}
+
+			for (const auto& x : removes)
+			{
+				theWires.erase(x);
+			}
+		}
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> 
+tnbLib::Pln_Tools::RetrievePlanes
+(
+	const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+)
+{
+	auto wires = theWires;
+	SortWires(wires);
+
+	std::list<std::shared_ptr<Pln_Wire>> wireList;
+	for (const auto& x : wires)
+	{
+		Debug_Null_Pointer(x);
+		wireList.push_back(x);
+	}
+
+	Standard_Integer K = 0;
+	std::vector<std::shared_ptr<Cad2d_Plane>> planes;
+	while (NOT wireList.empty())
+	{
+		std::shared_ptr<Pln_Wire> outer;
+		auto inners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
+		Debug_Null_Pointer(inners);
+
+		plnLib::RetrieveInnerOuterWires(wireList, outer, *inners);
+
+		if (NOT outer)
+		{
+			FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> Pln_Tools::RetrievePlanes(Args...)")
+				<< "Invalid section" << endl
+				<< abort(FatalError);
+		}
+
+		if (outer->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+		{
+			outer->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+		}
+
+		if (inners->empty())
+		{
+			auto pln = Cad2d_Plane::MakePlane(outer, nullptr);
+			Debug_Null_Pointer(pln);
+
+			pln->SetIndex(++K);
+
+			planes.push_back(std::move(pln));
+		}
+		else
+		{
+			for (const auto& x : *inners)
+			{
+				Debug_Null_Pointer(x);
+				if (x->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CW)
+				{
+					x->ApplyOrientation(Pln_Orientation::Pln_Orientation_CW);
+				}
+			}
+
+			auto pln = Cad2d_Plane::MakePlane(outer, inners);
+			Debug_Null_Pointer(pln);
+
+			pln->SetIndex(++K);
+
+			planes.push_back(std::move(pln));
+		}
+	}
+	return std::move(planes);
+}
+
 std::shared_ptr<tnbLib::Pln_Edge> 
 tnbLib::Pln_Tools::ForwardEdge
 (
@@ -1414,4 +1551,44 @@ tnbLib::Pln_Tools::BackwardEdge
 			return std::move(edge);
 	}
 	return nullptr;
+}
+
+namespace tnbLib
+{
+	namespace plnLib
+	{
+
+		static Standard_Boolean LessDiameterSize
+		(
+			const std::shared_ptr<Pln_Wire>& theWire0,
+			const std::shared_ptr<Pln_Wire>& theWire1
+		)
+		{
+			Debug_Null_Pointer(theWire0);
+			Debug_Null_Pointer(theWire1);
+
+			const auto& b0 = theWire0->BoundingBox();
+			const auto& b1 = theWire1->BoundingBox();
+
+			Debug_Null_Pointer(b0);
+			Debug_Null_Pointer(b1);
+
+			return -b0->SquareDiameter() < -b1->SquareDiameter();
+		}
+	}
+}
+
+void tnbLib::Pln_Tools::SortWires
+(
+	std::vector<std::shared_ptr<Pln_Wire>>& theWires
+)
+{
+	if (theWires.size() IS_EQUAL 1)
+	{
+		return;
+	}
+
+	Geo_ItemSort<std::shared_ptr<Pln_Wire>>
+		sort(&plnLib::LessDiameterSize);
+	sort.Perform(theWires);
 }

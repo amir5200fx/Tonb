@@ -13,15 +13,55 @@
 #include <Marine_FlatWave.hxx>
 #include <Marine_Graph.hxx>
 #include <Marine_GraphCurve.hxx>
+#include <Marine_WaterDomain.hxx>
 #include <Geo_UniDistb.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
+#include <OFstream.hxx>
 
 #include <gp_Ax2.hxx>
 #include <Bnd_Box2d.hxx>
 
 #include <map>
+
+namespace tnbLib
+{
+	const Standard_Integer HydroStatic_CrossCurves::DEFAULT_NB_WATERS(8);
+}
+
+tnbLib::HydroStatic_CrossCurves::HydroStatic_CrossCurves
+(
+	const std::shared_ptr<Marine_Domain>& theDomain
+)
+	: theDomain_(theDomain)
+	, theNbWaters_(DEFAULT_NB_WATERS)
+{
+}
+
+tnbLib::HydroStatic_CrossCurves::HydroStatic_CrossCurves
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<Marine_Domain>& theDomain
+)
+	: Global_Indexed(theIndex)
+	, theDomain_(theDomain)
+	, theNbWaters_(DEFAULT_NB_WATERS)
+{
+}
+
+tnbLib::HydroStatic_CrossCurves::HydroStatic_CrossCurves
+(
+	const Standard_Integer theIndex,
+	const word & theName,
+	const std::shared_ptr<Marine_Domain>& theDomain
+)
+	: Global_Indexed(theIndex)
+	, Global_Named(theName)
+	, theDomain_(theDomain)
+	, theNbWaters_(DEFAULT_NB_WATERS)
+{
+}
 
 namespace tnbLib
 {
@@ -275,9 +315,8 @@ void tnbLib::HydroStatic_CrossCurves::Perform()
 			<< abort(FatalError);
 	}
 
-	const auto b = MarineBase_Tools::BoundingBox(*Model());
-	const auto Z = hsLib::Z(b.P0().Z(), b.P1().Z(), NbWaters());
-	Debug_Null_Pointer(Z);
+	fileName myFileName("out.plt");
+	OFstream myFile(myFileName);
 
 	const auto& keel = K().Location();
 
@@ -289,21 +328,32 @@ void tnbLib::HydroStatic_CrossCurves::Perform()
 
 	auto sections = Copy(Model()->Sections());
 
-	auto domains = MarineBase_Tools::RetrieveStillWaterDomains(Domain(), model.Sections(), *Z);
-
 	std::vector<Handle(Geom2d_Curve)> curves;
 	curves.reserve(Heel()->Size());
+
 	for (const auto h : Heel()->Values())
 	{
-		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(-h), sin(-h)));
+
+		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(h), sin(h)));
 
 		hsLib::Heel(sections, ax);
+
+		const auto b = MarineBase_Tools::BoundingBox(sections);
+
+		const auto Z = hsLib::Z(b.P0().Z(), b.P1().Z(), NbWaters());
+		Debug_Null_Pointer(Z);
+
+		auto domains = MarineBase_Tools::RetrieveStillWaterDomains(Domain(), sections, *Z);
 
 		auto curveQ = MarineBase_Tools::CrossCurve(sections, domains, K(), info);
 		auto curve = MarineBase_Tools::Curve(curveQ);
 		Debug_Null_Pointer(curve);
 
 		curves.push_back(std::move(curve));
+
+		gp_Ax2d ax1(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(-h), sin(-h)));
+
+		hsLib::Heel(sections, ax1);
 	}
 
 	/*auto domain = Domain().OffSet(Domain().Diameter()*0.25);

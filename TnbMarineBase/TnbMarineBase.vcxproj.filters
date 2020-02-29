@@ -728,5 +728,26 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Body\Dry\Marine_DryBody.cxx">
       <Filter>TnbLib\MarineBase\Entities\Body\Dry</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Marine_Graph.cxx">
+      <Filter>TnbLib\MarineBase\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Entity\Marine_GraphEntity.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Curve\Marine_GraphCurve.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\Marine_GraphAxis.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Axis</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\y\Marine_GraphAxis_Y.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Axis\y</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\x\Marine_GraphAxis_X.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Axis\x</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Title\Marine_GraphTitle.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Title</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

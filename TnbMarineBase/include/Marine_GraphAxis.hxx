@@ -19,9 +19,16 @@ namespace tnbLib
 
 		Marine_GraphAxis();
 
-		Marine_GraphAxis(const Standard_Integer theIndex);
+		Marine_GraphAxis
+		(
+			const Standard_Integer theIndex
+		);
 
-		Marine_GraphAxis(const Standard_Integer theIndex, const word& theName);
+		Marine_GraphAxis
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		);
 
 
 		virtual Standard_Boolean IsX() const

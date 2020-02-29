@@ -40,6 +40,9 @@
     <ClCompile Include="Examples\example_geo_compt_polygons.cxx">
       <Filter>Examples</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\example_cross_curves_ship.cxx">
+      <Filter>Examples</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

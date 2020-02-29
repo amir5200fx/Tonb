@@ -5,6 +5,7 @@
 #include <Global_Done.hxx>
 #include <Marine_Entity.hxx>
 #include <Entity3d_Box.hxx>
+#include <OFstream.hxx>
 
 #include <vector>
 
@@ -63,7 +64,7 @@ namespace tnbLib
 			return theWaters_;
 		}
 
-
+		void ExportToPlt(OFstream& File) const;
 	};
 }
 

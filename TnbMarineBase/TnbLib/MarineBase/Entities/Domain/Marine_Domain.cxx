@@ -64,6 +64,7 @@ void tnbLib::Marine_Domain::Perform
 	const Entity3d_Box & domain
 )
 {
-	ChangeDim() = domain.OffSet(domain.Diameter()*ExpandCoeff());
+	auto[dx, dy, dz] = domain.Length();
+	ChangeDim() = domain.Expanded(dx*ExpandCoeff(), dy*ExpandCoeff(), dz*ExpandCoeff());
 	Change_IsDone() = Standard_True;
 }

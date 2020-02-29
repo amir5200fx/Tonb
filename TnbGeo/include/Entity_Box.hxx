@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include <tuple>
 
 namespace tnbLib
 {
@@ -21,6 +22,9 @@ namespace tnbLib
 	template<class Point>
 	class Entity_Box
 	{
+
+		template< bool cond, typename U >
+		using resolvedType = typename std::enable_if< cond, U >::type;
 
 		/*Private Data*/
 
@@ -108,6 +112,35 @@ namespace tnbLib
 			return Entity_Box(P0() - theTol, P1() + theTol);
 		}
 
+		Entity_Box Expanded(const Standard_Real theOffset) const;
+
+		template<class U = Entity_Box>
+		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+			Expanded
+			(
+				const Standard_Real dx, 
+				const Standard_Real dy
+			) const
+		{
+			auto c = *this;
+			c.Expand(dx, dy);
+			return std::move(c);
+		}
+
+		template<class U = Entity_Box>
+		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+			Expanded
+			(
+				const Standard_Real dx,
+				const Standard_Real dy,
+				const Standard_Real dz
+			) const
+		{
+			auto c = *this;
+			c.Expand(dx, dy, dz);
+			return std::move(c);
+		}
+
 		template<class SubAlg>
 		Entity_Box SubDivide(const SubAlg theAlgorithm) const;
 
@@ -141,6 +174,65 @@ namespace tnbLib
 		template<class PickAlg>
 		Point Corner(const PickAlg theAlgorithm) const;
 
+		template<class U = std::tuple<Standard_Real, Standard_Real>>
+		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+			Length() const
+		{
+			Standard_Real dx, dy;
+			Length(dx, dy);
+			return std::make_tuple(dx, dy);
+		}
+
+		template<class U = std::tuple<Standard_Real, Standard_Real, Standard_Real>>
+		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+			Length() const
+		{
+			Standard_Real dx, dy, dz;
+			Length(dx, dy, dz);
+			return std::make_tuple(dx, dy, dz);
+		}
+
+		void Expand(const Standard_Real theOffset);
+
+		template<class U = void>
+		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+			Expand
+			(
+				const Standard_Real dx,
+				const Standard_Real dy
+			)
+		{
+			auto& p0 = P0();
+			auto& p1 = P1();
+
+			p0.X() -= dx;
+			p0.Y() -= dy;
+
+			p1.X() += dx;
+			p1.Y() += dy;
+		}
+
+		template<class U = void>
+		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+			Expand
+			(
+				const Standard_Real dx,
+				const Standard_Real dy,
+				const Standard_Real dz
+			)
+		{
+			auto& p0 = P0();
+			auto& p1 = P1();
+
+			p0.X() -= dx;
+			p0.Y() -= dy;
+			p0.Z() -= dz;
+
+			p1.X() += dx;
+			p1.Y() += dy;
+			p1.Z() += dz;
+		}
+
 		void Transform
 		(
 			const typename transform_point_type<Point>::type& theTrasf
@@ -165,6 +257,32 @@ namespace tnbLib
 		{
 			theLower = P0().Coord(theIndex + 1);
 			theUpper = P1().Coord(theIndex + 1);
+		}
+
+		template<class U = void>
+		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
+			Length
+			(
+				Standard_Real& dx, 
+				Standard_Real& dy
+			) const
+		{
+			dx = P1().X() - P0().X();
+			dy = P1().Y() - P0().Y();
+		}
+
+		template<class U = void>
+		resolvedType<is_three_dimension<(int)Point::dim>::value, U>
+			Length
+			(
+				Standard_Real& dx,
+				Standard_Real& dy,
+				Standard_Real& dz
+			) const
+		{
+			dx = P1().X() - P0().X();
+			dy = P1().Y() - P0().Y();
+			dz = P1().Z() - P0().Z();
 		}
 
 		void SetP0(const Point& theP0)

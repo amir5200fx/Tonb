@@ -22,9 +22,16 @@ namespace tnbLib
 
 		Marine_GraphEntity();
 
-		Marine_GraphEntity(const Standard_Integer theIndex);
+		Marine_GraphEntity
+		(
+			const Standard_Integer theIndex
+		);
 
-		Marine_GraphEntity(const Standard_Integer theIndex, const word& theName);
+		Marine_GraphEntity
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		);
 
 	public:
 

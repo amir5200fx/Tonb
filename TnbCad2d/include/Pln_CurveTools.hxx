@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <OFstream.hxx>
 
 class gp_Ax2d;
 class gp_Ax22d;
@@ -42,7 +43,13 @@ namespace tnbLib
 				const Standard_Boolean Sense = Standard_True
 			);
 
-		
+		static void 
+			ExportToPlt
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				OFstream& File,
+				const Standard_Integer n = 40
+			);
 	};
 }
 

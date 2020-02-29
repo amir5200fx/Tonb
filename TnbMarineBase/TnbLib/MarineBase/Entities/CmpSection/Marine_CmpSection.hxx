@@ -4,6 +4,7 @@
 
 #include <Entity2d_BoxFwd.hxx>
 #include <Marine_Entity.hxx>
+#include <OFstream.hxx>
 
 #include <vector>
 
@@ -81,6 +82,8 @@ namespace tnbLib
 		std::shared_ptr<Marine_CmpSection> Copy() const;
 
 		void Transform(const gp_Trsf2d& t);
+
+		void ExportToPlt(OFstream& File) const;
 
 		static std::shared_ptr<Marine_CmpSection>
 			CreateCmpSection

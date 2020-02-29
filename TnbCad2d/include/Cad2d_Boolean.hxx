@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 
 #include <memory>
+#include <vector>
 
 namespace tnbLib
 {
@@ -34,7 +35,7 @@ namespace tnbLib
 				const std::shared_ptr<Cad2d_Plane>& thePlane1
 			);
 
-		static std::shared_ptr<Cad2d_Plane>
+		static std::vector<std::shared_ptr<Cad2d_Plane>>
 			Intersection
 			(
 				const std::shared_ptr<Cad2d_Plane>& thePlane0,

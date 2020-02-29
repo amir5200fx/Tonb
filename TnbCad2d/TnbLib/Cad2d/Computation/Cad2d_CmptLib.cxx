@@ -477,8 +477,6 @@ tnbLib::Cad2d_CmptLib::Iv
 	Debug_Null_Pointer(wire);
 
 	auto t = Transform(gp::OX2d(), theAx);
-	wire->Transform(t);
-
 	return Iy(*wire, theInfo);
 }
 

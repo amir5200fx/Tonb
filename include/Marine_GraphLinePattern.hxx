@@ -7,7 +7,7 @@ namespace tnbLib
 
 	enum class Marine_GraphLinePattern
 	{
-		Solid,
+		Solid = 0,
 		Dashed,
 		DashDot,
 		Dotted,

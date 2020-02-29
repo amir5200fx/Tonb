@@ -59,7 +59,7 @@ tnbLib::Pln_CmpEdge::Copy() const
 	for (const auto& x : vertices)
 	{
 		Debug_Null_Pointer(x);
-		auto insert = vtxMap.insert(std::make_pair(x->Index(), x));
+		auto insert = vtxMap.insert(std::make_pair(x->Index(), std::dynamic_pointer_cast<Pln_Vertex>(x->Copy())));
 		if (NOT insert.second)
 		{
 			FatalErrorIn("std::shared_ptr<tnbLib::Pln_Entity> Pln_CmpEdge::Copy() const")
@@ -79,20 +79,35 @@ tnbLib::Pln_CmpEdge::Copy() const
 
 		if (v0 IS_EQUAL v1)
 		{
-			auto edge = std::make_shared<Pln_Ring>(x->Index(), x->Name(), v0, x->Curve(), x->Sense());
+			auto curve = std::dynamic_pointer_cast<Pln_Curve>(x->Curve()->Copy());
+			Debug_Null_Pointer(curve);
+
+			auto edge = std::make_shared<Pln_Ring>(x->Index(), x->Name(), v0, curve, x->Sense());
 			Debug_Null_Pointer(edge);
 
 			v0->InsertToEdges(edge->Index(), edge);
-			edge->Mesh() = x->Mesh();
+
+			if (x->Mesh())
+			{
+				edge->Mesh() = std::make_shared<Entity2d_Polygon>();
+				*edge->Mesh() = *x->Mesh();
+			}
 
 			cmpEdge->Insert(edge);
 		}
 		else
 		{
-			auto edge = std::make_shared<Pln_Edge>(x->Index(), x->Name(), v0, v1, x->Curve(), x->Sense());
+			auto curve = std::dynamic_pointer_cast<Pln_Curve>(x->Curve()->Copy());
+			Debug_Null_Pointer(curve);
+
+			auto edge = std::make_shared<Pln_Edge>(x->Index(), x->Name(), v0, v1, curve, x->Sense());
 			Debug_Null_Pointer(edge);
 
-			edge->Mesh() = x->Mesh();
+			if (x->Mesh())
+			{
+				edge->Mesh() = std::make_shared<Entity2d_Polygon>();
+				*edge->Mesh() = *x->Mesh();
+			}
 
 			v0->InsertToEdges(edge->Index(), edge);
 			v1->InsertToEdges(edge->Index(), edge);

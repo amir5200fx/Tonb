@@ -143,6 +143,13 @@
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Air\EnvPropt_AirViscosity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\EnvPropt_Viscosity.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Water\EnvPropt_WaterViscosity.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\Marine_GraphAxis.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\x\Marine_GraphAxis_X.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\y\Marine_GraphAxis_Y.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Curve\Marine_GraphCurve.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Entity\Marine_GraphEntity.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Title\Marine_GraphTitle.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Graph\Marine_Graph.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Launch\Info\Marine_Launch_Info.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Launch\Marine_Launch.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Launch\Section\Dry\Marine_DrySection.cxx" />

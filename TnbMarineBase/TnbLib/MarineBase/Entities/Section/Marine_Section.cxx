@@ -49,6 +49,13 @@ tnbLib::Marine_Section::Marine_Section
 	CheckWire(*Wire(), "Marine_Section::Marine_Section(const std::shared_ptr<Pln_Wire>& theWire)");
 }
 
+const tnbLib::Entity2d_Box & 
+tnbLib::Marine_Section::BoundingBox() const
+{
+	Debug_Null_Pointer(Wire());
+	return *Wire()->BoundingBox();
+}
+
 void tnbLib::Marine_Section::Transform
 (
 	const gp_Trsf2d & t
@@ -56,6 +63,14 @@ void tnbLib::Marine_Section::Transform
 {
 	Wire()->Transform(t);
 	CoordinateSystem().Transform(t);
+}
+
+void tnbLib::Marine_Section::ExportToPlt
+(
+	OFstream & File
+) const
+{
+	Wire()->ExportToPlt(File);
 }
 
 Standard_Real 

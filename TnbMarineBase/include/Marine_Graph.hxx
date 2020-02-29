@@ -32,9 +32,16 @@ namespace tnbLib
 
 		Marine_Graph();
 
-		Marine_Graph(const Standard_Integer theIndex);
+		Marine_Graph
+		(
+			const Standard_Integer theIndex
+		);
 
-		Marine_Graph(const Standard_Integer theIndex, const word& theName);
+		Marine_Graph
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		);
 
 		Standard_Integer NbCurves() const;
 

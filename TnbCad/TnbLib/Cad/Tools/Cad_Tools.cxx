@@ -67,7 +67,7 @@ tnbLib::Cad_Tools::BoundingBox
 	theBox.Get(Xmin, Ymin, Zmin, Xmax, Ymax, Zmax);
 
 	Entity3d_Box 
-		box(Pnt3d(Xmin, Ymin, Zmin), Pnt3d(Xmax, Ymax, Zmin));
+		box(Pnt3d(Xmin, Ymin, Zmin), Pnt3d(Xmax, Ymax, Zmax));
 	return std::move(box);
 }
 

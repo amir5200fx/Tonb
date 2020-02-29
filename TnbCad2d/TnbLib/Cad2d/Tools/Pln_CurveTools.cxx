@@ -1,8 +1,10 @@
 #include <Pln_CurveTools.hxx>
 
 #include <Pln_Tools.hxx>
-
 #include <Entity2d_Triangulation.hxx>
+#include <TecPlot.hxx>
+#include <error.hxx>
+#include <OSstream.hxx>
 
 #include <Bnd_Box2d.hxx>
 #include <Geom2d_Line.hxx>
@@ -65,3 +67,29 @@ tnbLib::Pln_CurveTools::MakeCircle
 	return std::move(c);
 }
 
+void tnbLib::Pln_CurveTools::ExportToPlt
+(
+	const Handle(Geom2d_Curve)& theCurve,
+	OFstream& File,
+	const Standard_Integer n
+)
+{
+	if (NOT Pln_Tools::IsBounded(theCurve))
+	{
+		FatalErrorIn("void Pln_CurveTools::ExportToPlt(Args...)")
+			<< "the curve is not bounded!" << endl
+			<< abort(FatalError);
+	}
+	const auto du = (theCurve->LastParameter() - theCurve->FirstParameter()) / (Standard_Real)n;
+	const auto u0 = theCurve->FirstParameter();
+	std::vector<Pnt2d> pts;
+	pts.reserve(n + 1);
+
+	for (auto i = 0; i <= n; i++)
+	{
+		auto pt = theCurve->Value(u0 + i * du);
+		pts.push_back(std::move(pt));
+	}
+
+	Io::ExportCurve(pts, File);
+}

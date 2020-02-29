@@ -7,6 +7,7 @@
 #include <Pln_Curve.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_CurveTools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -238,6 +239,13 @@ tnbLib::Cad2d_Boolean::Union
 		return thePlane0;
 	}
 
+	if (curves.empty())
+	{
+		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Union(Args...)")
+			<< "Contradictory data: there is no curve be created from boolean operator" << endl
+			<< abort(FatalError);
+	}
+
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
@@ -248,6 +256,13 @@ tnbLib::Cad2d_Boolean::Union
 			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 
 	auto outer = Pln_Tools::RetrieveOuterWire(wires);
+	if (NOT outer)
+	{
+		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Union(Args...)")
+			<< "Failed to create outer wire!" << endl
+			<< abort(FatalError);
+	}
+
 	auto inners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
 	Debug_Null_Pointer(inners);
 
@@ -396,9 +411,28 @@ tnbLib::Cad2d_Boolean::Subtract
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
-	auto wires = Pln_Tools::RetrieveWires(curves, MAX(MAX(minTol0, minTol1), Tolerance), 10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
+	if (curves.empty())
+	{
+		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Subtract(Args...)")
+			<< "Contradictory data: there is no curve be created from boolean operator" << endl
+			<< abort(FatalError);
+	}
+
+	auto wires = 
+		Pln_Tools::RetrieveWires
+		(
+			curves, 
+			MAX(MAX(minTol0, minTol1), Tolerance),
+			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 
 	auto outer = Pln_Tools::RetrieveOuterWire(wires);
+	if (NOT outer)
+	{
+		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Subtract(Args...)")
+			<< "Failed to create outer wire!" << endl
+			<< abort(FatalError);
+	}
+
 	auto inners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
 	Debug_Null_Pointer(inners);
 
@@ -417,7 +451,7 @@ tnbLib::Cad2d_Boolean::Subtract
 	return std::move(plane);
 }
 
-std::shared_ptr<tnbLib::Cad2d_Plane>
+std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>
 tnbLib::Cad2d_Boolean::Intersection
 (
 	const std::shared_ptr<Cad2d_Plane>& thePlane0, 
@@ -443,7 +477,7 @@ tnbLib::Cad2d_Boolean::Intersection
 
 	if (NOT bb0.IsIntersect(bb1))
 	{
-		return nullptr;
+		return std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>();
 	}
 
 	auto intersection = std::make_shared<Cad2d_PlanePlaneIntersection>();
@@ -459,7 +493,24 @@ tnbLib::Cad2d_Boolean::Intersection
 
 	if (NOT intersection->NbEntities())
 	{
-		return nullptr;
+		auto c0 = thePlane0->OuterWire()->RetrieveCurves();
+		auto c1 = thePlane1->OuterWire()->RetrieveCurves();
+
+		if (Entity2d_Box::IsInside(bb0, bb1))
+		{
+			std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> l;
+			l.push_back(thePlane0);
+			return std::move(l);
+		}
+
+		if (Entity2d_Box::IsInside(bb1, bb0))
+		{
+			std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> l;
+			l.push_back(thePlane1);
+			return std::move(l);
+		}
+
+		return std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>();
 	}
 
 	auto subdivide = std::make_shared<Cad2d_Subdivide>();
@@ -529,25 +580,67 @@ tnbLib::Cad2d_Boolean::Intersection
 
 	if (NOT k0 AND NOT k1)
 	{
-		return nullptr;
+		return std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>();
 	}
 
 	if (k0 AND NOT k1)
 	{
-		return thePlane0;
+		std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> l;
+		l.push_back(thePlane0);
+		return std::move(l);
 	}
 
 	if (k1 AND NOT k0)
 	{
-		return thePlane1;
+		std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> l;
+		l.push_back(thePlane1);
+		return std::move(l);
 	}
 
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
-	auto wires = Pln_Tools::RetrieveWires(curves, MAX(MAX(minTol0, minTol1), Tolerance), 10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
+	if (curves.empty())
+	{
+		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Intersection(Args...)")
+			<< "Contradictory data: there is no curve be created from boolean operator" << endl
+			<< abort(FatalError);
+	}
 
-	auto outer = Pln_Tools::RetrieveOuterWire(wires);
+	auto wires =
+		Pln_Tools::RetrieveWires
+		(
+			curves, 
+			MAX(MAX(minTol0, minTol1), Tolerance),
+			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
+
+	auto planes = Pln_Tools::RetrievePlanes(wires);
+	for (const auto& x : planes)
+	{
+		Debug_Null_Pointer(x);
+		x->SetSystem(thePlane0->System());
+	}
+
+	return std::move(planes);
+
+	/*auto outer = Pln_Tools::RetrieveOuterWire(wires);
+	if (NOT outer)
+	{
+		fileName myName("out1.plt");
+		OFstream myFile(myName);
+
+		thePlane0->ExportToPlt(myFile);
+		thePlane1->ExportToPlt(myFile);
+
+		for (const auto& x : curves)
+		{
+			Pln_CurveTools::ExportToPlt(x->Geometry(), myFile);
+		}
+
+		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Intersection(Args...)")
+			<< "Failed to create outer wire!" << endl
+			<< abort(FatalError);
+	}
 
 	auto inners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
 	Debug_Null_Pointer(inners);
@@ -564,5 +657,5 @@ tnbLib::Cad2d_Boolean::Intersection
 	auto plane = Cad2d_Plane::MakePlane(outer, inners, thePlane0->System());
 	Debug_Null_Pointer(plane);
 
-	return std::move(plane);
+	return std::move(plane);*/
 }
