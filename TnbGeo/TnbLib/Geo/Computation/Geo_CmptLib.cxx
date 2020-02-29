@@ -74,14 +74,15 @@ namespace tnbLib
 		IxPoly
 		(
 			const Pnt2d& p0,
-			const Pnt2d& p1
+			const Pnt2d& p1,
+			const Standard_Real yc
 		)
 	{
 		const auto x0 = p0.X();
-		const auto y0 = p0.Y();
+		const auto y0 = p0.Y() - yc;
 
 		const auto x1 = p1.X();
-		const auto y1 = p1.Y();
+		const auto y1 = p1.Y() - yc;
 
 		return (y0*y0 + y0 * y1 + y1 * y1)*(x0 * y1 - x1 * y0);
 	}
@@ -90,13 +91,14 @@ namespace tnbLib
 		IyPoly
 		(
 			const Pnt2d& p0,
-			const Pnt2d& p1
+			const Pnt2d& p1,
+			const Standard_Real xc
 		)
 	{
-		const auto x0 = p0.X();
+		const auto x0 = p0.X() - xc;
 		const auto y0 = p0.Y();
 
-		const auto x1 = p1.X();
+		const auto x1 = p1.X() - xc;
 		const auto y1 = p1.Y();
 
 		return (x0*x0 + x0 * x1 + x1 * x1)*(x0 * y1 - x1 * y0);
@@ -106,14 +108,15 @@ namespace tnbLib
 		IxyPoly
 		(
 			const Pnt2d& p0,
-			const Pnt2d& p1
+			const Pnt2d& p1,
+			const Pnt2d& C
 		)
 	{
-		const auto x0 = p0.X();
-		const auto y0 = p0.Y();
+		const auto x0 = p0.X() - C.X();
+		const auto y0 = p0.Y() - C.Y();
 
-		const auto x1 = p1.X();
-		const auto y1 = p1.Y();
+		const auto x1 = p1.X() - C.X();
+		const auto y1 = p1.Y() - C.Y();
 
 		return (x0*y1 + 2.0*x0*y0 + 2.0*x1*y1 + x1 * y0)*(x0 * y1 - x1 * y0);
 	}
@@ -190,7 +193,8 @@ tnbLib::Geo_CmptLib::Centre
 Standard_Real 
 tnbLib::Geo_CmptLib::Ix
 (
-	const Entity2d_Polygon & thePoly
+	const Entity2d_Polygon & thePoly,
+	const Standard_Real y0
 )
 {
 	geoCmptLib::CheckPolygon(thePoly, "Standard_Real Geo_CmptLib::Ix(const Entity2d_Polygon & thePoly)");
@@ -200,7 +204,7 @@ tnbLib::Geo_CmptLib::Ix
 	const auto& pts = thePoly.Points();
 	for (auto i = 0; i < pts.size() - 1; i++)
 	{
-		sum += IxPoly(pts[i], pts[i + 1]);
+		sum += IxPoly(pts[i], pts[i + 1], y0);
 	}
 	return sum / 12.0;
 }
@@ -208,7 +212,8 @@ tnbLib::Geo_CmptLib::Ix
 Standard_Real
 tnbLib::Geo_CmptLib::Iy
 (
-	const Entity2d_Polygon & thePoly
+	const Entity2d_Polygon & thePoly,
+	const Standard_Real x0
 )
 {
 	geoCmptLib::CheckPolygon(thePoly, "Standard_Real Geo_CmptLib::Iy(const Entity2d_Polygon & thePoly)");
@@ -218,7 +223,7 @@ tnbLib::Geo_CmptLib::Iy
 	const auto& pts = thePoly.Points();
 	for (auto i = 0; i < pts.size() - 1; i++)
 	{
-		sum += IyPoly(pts[i], pts[i + 1]);
+		sum += IyPoly(pts[i], pts[i + 1], x0);
 	}
 	return sum / 12.0;
 }
@@ -226,7 +231,8 @@ tnbLib::Geo_CmptLib::Iy
 Standard_Real
 tnbLib::Geo_CmptLib::Ixy
 (
-	const Entity2d_Polygon & thePoly
+	const Entity2d_Polygon & thePoly,
+	const Pnt2d& theC
 )
 {
 	geoCmptLib::CheckPolygon(thePoly, "Standard_Real Geo_CmptLib::Ixy(const Entity2d_Polygon & thePoly)");
@@ -236,7 +242,7 @@ tnbLib::Geo_CmptLib::Ixy
 	const auto& pts = thePoly.Points();
 	for (auto i = 0; i < pts.size() - 1; i++)
 	{
-		sum += IxyPoly(pts[i], pts[i + 1]);
+		sum += IxyPoly(pts[i], pts[i + 1], theC);
 	}
 	return sum / 24.0;
 }

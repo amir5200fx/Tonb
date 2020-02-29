@@ -103,11 +103,19 @@ namespace tnbLib
 
 			const Geom2d_Curve& theEntity_;
 
+			Standard_Real theYc_;
+
 		public:
 
-			IxIntegrand(const Geom2d_Curve& theEntity)
+			IxIntegrand(const Geom2d_Curve& theEntity, const Standard_Real y0)
 				: theEntity_(theEntity)
+				, theYc_(y0)
 			{}
+
+			auto Yc() const
+			{
+				return theYc_;
+			}
 
 			const auto& Entity() const
 			{
@@ -125,11 +133,19 @@ namespace tnbLib
 
 			const Geom2d_Curve& theEntity_;
 
+			Standard_Real theXc_;
+
 		public:
 
-			IyIntegrand(const Geom2d_Curve& theEntity)
+			IyIntegrand(const Geom2d_Curve& theEntity, const Standard_Real x0)
 				: theEntity_(theEntity)
+				, theXc_(x0)
 			{}
+
+			auto Xc() const
+			{
+				return theXc_;
+			}
 
 			const auto& Entity() const
 			{
@@ -195,7 +211,8 @@ tnbLib::cmptLib::IxIntegrand::Value
 
 	Entity().D1(x, pt, der);
 
-	return (pt.Y()*pt.Y())*pt.Y()*der.X();
+	const auto y = pt.Y() - Yc();
+	return (y*y)*pt.Y()*der.X();
 }
 
 Standard_Real 
@@ -209,7 +226,8 @@ tnbLib::cmptLib::IyIntegrand::Value
 
 	Entity().D1(x, pt, der);
 
-	return (pt.X()*pt.X())*pt.Y()*der.X();
+	const auto dx = pt.X() - Xc();
+	return (dx*dx)*pt.Y()*der.X();
 }
 
 Standard_Real 
@@ -246,6 +264,7 @@ Standard_Real
 tnbLib::Cad2d_CmptLib::Ix
 (
 	const Handle(Geom2d_Curve)& theCurve, 
+	const Standard_Real y0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -256,7 +275,7 @@ tnbLib::Cad2d_CmptLib::Ix
 			<< abort(FatalError);
 	}
 
-	cmptLib::IxIntegrand fun(*theCurve);
+	cmptLib::IxIntegrand fun(*theCurve, y0);
 	NumAlg_AdaptiveInteg<cmptLib::IxIntegrand>
 		integration
 		(
@@ -275,6 +294,7 @@ Standard_Real
 tnbLib::Cad2d_CmptLib::Iy
 (
 	const Handle(Geom2d_Curve)& theCurve,
+	const Standard_Real x0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -285,7 +305,7 @@ tnbLib::Cad2d_CmptLib::Iy
 			<< abort(FatalError);
 	}
 
-	cmptLib::IyIntegrand fun(*theCurve);
+	cmptLib::IyIntegrand fun(*theCurve, x0);
 	NumAlg_AdaptiveInteg<cmptLib::IyIntegrand>
 		integration
 		(
@@ -423,6 +443,7 @@ Standard_Real
 tnbLib::Cad2d_CmptLib::Ix
 (
 	const Pln_Wire & theWire,
+	const Standard_Real y0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -435,7 +456,7 @@ tnbLib::Cad2d_CmptLib::Ix
 		Debug_Null_Pointer(x->Curve());
 
 		const auto& geom = x->Curve()->Geometry();
-		auto ix = Ix(geom, theInfo);
+		auto ix = Ix(geom, y0, theInfo);
 
 		sum += (x->Sense() ? -ix : ix);
 	}
@@ -446,6 +467,7 @@ Standard_Real
 tnbLib::Cad2d_CmptLib::Iy
 (
 	const Pln_Wire & theWire,
+	const Standard_Real x0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -458,27 +480,27 @@ tnbLib::Cad2d_CmptLib::Iy
 		Debug_Null_Pointer(x->Curve());
 
 		const auto& geom = x->Curve()->Geometry();
-		auto ix = Iy(geom, theInfo);
+		auto ix = Iy(geom, x0, theInfo);
 
 		sum += (x->Sense() ? -ix : ix);
 	}
 	return sum / 3.0;
 }
 
-Standard_Real 
-tnbLib::Cad2d_CmptLib::Iv
-(
-	const Pln_Wire & theWire, 
-	const gp_Ax2d & theAx,
-	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
-)
-{
-	auto wire = std::dynamic_pointer_cast<Pln_Wire>(theWire.Copy());
-	Debug_Null_Pointer(wire);
-
-	auto t = Transform(gp::OX2d(), theAx);
-	return Iy(*wire, theInfo);
-}
+//Standard_Real 
+//tnbLib::Cad2d_CmptLib::Iv
+//(
+//	const Pln_Wire & theWire, 
+//	const gp_Ax2d & theAx,
+//	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+//)
+//{
+//	auto wire = std::dynamic_pointer_cast<Pln_Wire>(theWire.Copy());
+//	Debug_Null_Pointer(wire);
+//
+//	auto t = Transform(gp::OX2d(), theAx);
+//	return Iy(*wire, 0, theInfo);
+//}
 
 gp_Trsf2d 
 tnbLib::Cad2d_CmptLib::Transform

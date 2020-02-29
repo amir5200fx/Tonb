@@ -15,7 +15,7 @@ void tnbLib::example_geo_compt_polygons()
 	auto poly = shape->OuterWire()->Polygon();
 	Debug_Null_Pointer(poly);
 
-	cout << "poly ix = " << Geo_CmptLib::Ix(*poly) << std::endl;
+	cout << "poly ix = " << Geo_CmptLib::Ix(*poly, 0) << std::endl;
 
 	auto info = std::make_shared<NumAlg_AdaptiveInteg_Info>();
 	Debug_Null_Pointer(info);
@@ -23,5 +23,5 @@ void tnbLib::example_geo_compt_polygons()
 	info->SetNbInitIterations(2);
 	info->SetTolerance(1.0e-4);
 
-	cout << "shape ix = " << Cad2d_CmptLib::Ix(*shape->OuterWire(), info) << std::endl;
+	cout << "shape ix = " << Cad2d_CmptLib::Ix(*shape->OuterWire(), 0, info) << std::endl;
 }

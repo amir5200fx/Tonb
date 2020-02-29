@@ -1,12 +1,16 @@
 #include <Tnb_Examples.hxx>
 
+#include <Pln_CurveTools.hxx>
 #include <Cad_Tools.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_Domain.hxx>
 #include <Marine_SectionDistribution_Uniform.hxx>
+#include <Marine_Graph.hxx>
+#include <Marine_GraphCurve.hxx>
 #include <CrossSection_xShapeStation.hxx>
 #include <HydroStatic_CrossCurves.hxx>
 #include <LegModel_DispNo1.hxx>
+#include <OFstream.hxx>
 
 #include <Bnd_Box.hxx>
 
@@ -57,4 +61,13 @@ void tnbLib::example_cross_curves_ship()
 
 	crossCurves->Perform();
 
+	fileName myFileName("example_cross_curves_ship.plt");
+	OFstream myFile(myFileName);
+
+	const auto& curves = crossCurves->Graph()->Curves();
+	for (const auto& x : curves)
+	{
+		Debug_Null_Pointer(x);
+		Pln_CurveTools::ExportToPlt(x->Curve(), myFile);
+	}
 }

@@ -218,6 +218,7 @@ Standard_Real
 tnbLib::MarineBase_Tools::CalcIx
 (
 	const Marine_CmpSection & theSection,
+	const Standard_Real y0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -229,7 +230,7 @@ tnbLib::MarineBase_Tools::CalcIx
 		const auto& w = x->Wire();
 		Debug_Null_Pointer(w);
 
-		sum += Cad2d_CmptLib::Ix(*w, theInfo);
+		sum += Cad2d_CmptLib::Ix(*w, y0, theInfo);
 	}
 	return sum;
 }
@@ -238,6 +239,7 @@ Standard_Real
 tnbLib::MarineBase_Tools::CalcIy
 (
 	const Marine_CmpSection & theSection,
+	const Standard_Real x0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -249,7 +251,7 @@ tnbLib::MarineBase_Tools::CalcIy
 		const auto& w = x->Wire();
 		Debug_Null_Pointer(w);
 
-		sum += Cad2d_CmptLib::Iy(*w, theInfo);
+		sum += Cad2d_CmptLib::Iy(*w, x0, theInfo);
 	}
 	return sum;
 }
@@ -258,6 +260,7 @@ std::vector<tnbLib::marineLib::xSectionParam>
 tnbLib::MarineBase_Tools::CalcIy
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const Standard_Real x0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -269,56 +272,56 @@ tnbLib::MarineBase_Tools::CalcIy
 
 		marineLib::xSectionParam ix;
 		ix.x = x->X();
-		ix.value = CalcIy(*x, theInfo);
+		ix.value = CalcIy(*x, x0, theInfo);
 
 		sections.push_back(std::move(ix));
 	}
 	return std::move(sections);
 }
 
-Standard_Real 
-tnbLib::MarineBase_Tools::CalcIv
-(
-	const Marine_CmpSection & theSection,
-	const gp_Ax2d & theAx, 
-	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
-)
-{
-	Standard_Real sum = 0;
-	for (const auto& x : theSection.Sections())
-	{
-		Debug_Null_Pointer(x);
+//Standard_Real 
+//tnbLib::MarineBase_Tools::CalcIv
+//(
+//	const Marine_CmpSection & theSection,
+//	const gp_Ax2d & theAx, 
+//	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+//)
+//{
+//	Standard_Real sum = 0;
+//	for (const auto& x : theSection.Sections())
+//	{
+//		Debug_Null_Pointer(x);
+//
+//		const auto& w = x->Wire();
+//		Debug_Null_Pointer(w);
+//
+//		sum += Cad2d_CmptLib::Iv(*w, theAx, theInfo);
+//	}
+//	return sum;
+//}
 
-		const auto& w = x->Wire();
-		Debug_Null_Pointer(w);
-
-		sum += Cad2d_CmptLib::Iv(*w, theAx, theInfo);
-	}
-	return sum;
-}
-
-std::vector<tnbLib::marineLib::xSectionParam> 
-tnbLib::MarineBase_Tools::CalcIv
-(
-	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
-	const gp_Ax2d & theAx,
-	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
-)
-{
-	std::vector<marineLib::xSectionParam> sections;
-	sections.reserve(theSections.size());
-	for (const auto& x : theSections)
-	{
-		Debug_Null_Pointer(x);
-
-		marineLib::xSectionParam ix;
-		ix.x = x->X();
-		ix.value = CalcIv(*x, theAx, theInfo);
-
-		sections.push_back(std::move(ix));
-	}
-	return std::move(sections);
-}
+//std::vector<tnbLib::marineLib::xSectionParam> 
+//tnbLib::MarineBase_Tools::CalcIv
+//(
+//	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+//	const gp_Ax2d & theAx,
+//	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+//)
+//{
+//	std::vector<marineLib::xSectionParam> sections;
+//	sections.reserve(theSections.size());
+//	for (const auto& x : theSections)
+//	{
+//		Debug_Null_Pointer(x);
+//
+//		marineLib::xSectionParam ix;
+//		ix.x = x->X();
+//		ix.value = CalcIv(*x, theAx, theInfo);
+//
+//		sections.push_back(std::move(ix));
+//	}
+//	return std::move(sections);
+//}
 
 Standard_Real 
 tnbLib::MarineBase_Tools::CalcWetArea
@@ -1407,13 +1410,14 @@ tnbLib::marineLib::xSectionParam
 tnbLib::MarineBase_Tools::LeverArm
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const Standard_Real x0,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
 	const auto volQ = MarineBase_Tools::CalcVolume(theSections, theInfo);
 	const auto vol = MarineBase_Tools::CalcArea(volQ, theInfo);
 
-	const auto IvQ = MarineBase_Tools::CalcIy(theSections, theInfo);
+	const auto IvQ = MarineBase_Tools::CalcIy(theSections, x0, theInfo);
 	const auto Iv = MarineBase_Tools::CalcArea(IvQ, theInfo);
 
 	if (ABS(vol) <= gp::Resolution())
@@ -1434,11 +1438,12 @@ Standard_Real
 tnbLib::MarineBase_Tools::LeverArm
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const Standard_Real x0,
 	const Standard_Real theVolume,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
-	const auto IyQ = MarineBase_Tools::CalcIy(theSections, theInfo);
+	const auto IyQ = MarineBase_Tools::CalcIy(theSections, x0, theInfo);
 	const auto Iy = MarineBase_Tools::CalcArea(IyQ, theInfo);
 
 	if (ABS(theVolume) <= gp::Resolution())
@@ -1499,6 +1504,7 @@ tnbLib::MarineBase_Tools::CrossCurve
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
 	const std::vector<std::shared_ptr<Marine_WaterDomain>>& theWaters,
+	const Standard_Real x0,
 	const gp_Ax1 & theK, 
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
@@ -1526,7 +1532,7 @@ tnbLib::MarineBase_Tools::CrossCurve
 
 			if (vol >= 1.0E-4)
 			{
-				auto la = LeverArm(theSections, vol, theInfo);
+				auto la = LeverArm(theSections, x0, vol, theInfo);
 
 				marineLib::xSectionParam v;
 				v.x = vol;

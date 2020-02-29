@@ -42,19 +42,22 @@ namespace tnbLib
 		static Standard_Real 
 			Ix
 			(
-				const Entity2d_Polygon& thePoly
+				const Entity2d_Polygon& thePoly,
+				const Standard_Real y0
 			);
 
 		static Standard_Real 
 			Iy
 			(
-				const Entity2d_Polygon& thePoly
+				const Entity2d_Polygon& thePoly,
+				const Standard_Real x0
 			);
 
 		static Standard_Real 
 			Ixy
 			(
-				const Entity2d_Polygon& thePoly
+				const Entity2d_Polygon& thePoly,
+				const Pnt2d& theC
 			);
 
 		static Standard_Real 

@@ -315,7 +315,7 @@ void tnbLib::HydroStatic_CrossCurves::Perform()
 			<< abort(FatalError);
 	}
 
-	fileName myFileName("out.plt");
+	fileName myFileName("out2.plt");
 	OFstream myFile(myFileName);
 
 	const auto& keel = K().Location();
@@ -337,7 +337,10 @@ void tnbLib::HydroStatic_CrossCurves::Perform()
 		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(h), sin(h)));
 
 		hsLib::Heel(sections, ax);
-
+		for (const auto& x : sections)
+		{
+			x->ExportToPlt(myFile);
+		}
 		const auto b = MarineBase_Tools::BoundingBox(sections);
 
 		const auto Z = hsLib::Z(b.P0().Z(), b.P1().Z(), NbWaters());
@@ -345,7 +348,7 @@ void tnbLib::HydroStatic_CrossCurves::Perform()
 
 		auto domains = MarineBase_Tools::RetrieveStillWaterDomains(Domain(), sections, *Z);
 
-		auto curveQ = MarineBase_Tools::CrossCurve(sections, domains, K(), info);
+		auto curveQ = MarineBase_Tools::CrossCurve(sections, domains, 0, K(), info);
 		auto curve = MarineBase_Tools::Curve(curveQ);
 		Debug_Null_Pointer(curve);
 

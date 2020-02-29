@@ -37,6 +37,7 @@ namespace tnbLib
 			Ix
 			(
 				const Handle(Geom2d_Curve)& theCurve, 
+				const Standard_Real y0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
@@ -44,6 +45,7 @@ namespace tnbLib
 			Iy
 			(
 				const Handle(Geom2d_Curve)& theCurve,
+				const Standard_Real x0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
@@ -92,6 +94,7 @@ namespace tnbLib
 			Ix
 			(
 				const Pln_Wire& theWire, 
+				const Standard_Real y0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
@@ -99,10 +102,11 @@ namespace tnbLib
 			Iy
 			(
 				const Pln_Wire& theWire, 
+				const Standard_Real x0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real Ixy(const Pln_Wire& theWire, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+		static Standard_Real Ixy(const Pln_Wire& theWire, const Pnt2d& theC, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 
 		static Standard_Real Iv(const Pln_Wire& theWire, const gp_Ax2d& theAx, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 
