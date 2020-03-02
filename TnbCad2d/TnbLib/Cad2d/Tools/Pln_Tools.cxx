@@ -1,6 +1,7 @@
 #include <Pln_Tools.hxx>
 
 #include <Geo_PrTree.hxx>
+#include <Geo_CurveIntegrand.hxx>
 #include <Geo_CurveIntegrand_Function.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Geo_ItemSort.hxx>
@@ -39,15 +40,16 @@ tnbLib::Pln_Tools::IsBounded
 Standard_Real 
 tnbLib::Pln_Tools::Length
 (
-	const Handle(Geom2d_Curve)& theCurve,
+	const Geom2d_Curve& theCurve,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
-	Geo_CurveIntegrand_Function<Handle(Geom2d_Curve), void, false>
-		function(theCurve);
+	Geo_CurveIntegrand<Geom2d_Curve> integrand(theCurve);
+	Geo_CurveIntegrand_Function<Geom2d_Curve, void, false>
+		function(integrand);
 
-	NumAlg_AdaptiveInteg<Geo_CurveIntegrand_Function<Handle(Geom2d_Curve), void, false>>
-		alg(function, theCurve->FirstParameter(), theCurve->LastParameter(), *theInfo);
+	NumAlg_AdaptiveInteg<Geo_CurveIntegrand_Function<Geom2d_Curve, void, false>>
+		alg(function, theCurve.FirstParameter(), theCurve.LastParameter(), *theInfo);
 
 	alg.Perform();
 

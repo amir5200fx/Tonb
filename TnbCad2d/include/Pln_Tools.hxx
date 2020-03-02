@@ -44,7 +44,7 @@ namespace tnbLib
 		static Standard_Real 
 			Length
 			(
-				const Handle(Geom2d_Curve)& theCurve,
+				const Geom2d_Curve& theCurve,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 

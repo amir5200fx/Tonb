@@ -121,7 +121,7 @@ namespace tnbLib
 			info->SetNbInitIterations(4);
 
 			Debug_Null_Pointer(theCurve->Geometry());
-			const auto l = Pln_Tools::Length(theCurve->Geometry(), info);
+			const auto l = Pln_Tools::Length(*theCurve->Geometry(), info);
 
 			if (l <= theTol)
 			{
