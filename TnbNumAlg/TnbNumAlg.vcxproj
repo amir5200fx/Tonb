@@ -153,6 +153,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights\NumAlg_GaussQuadrature_Weights.hxx" />
     <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\Info\NumAlg_NewtonSolver_Info.hxx" />
     <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\NumAlg_NewtonSolver.hxx" />
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\NumAlg_NewtonSolver_Condition.hxx" />
     <ClInclude Include="TnbLib\NumAlg\Random\NumAlg_Random.hxx" />
     <ClInclude Include="TnbLib\NumAlg\Random\System\NumAlg_Random_System.hxx" />
     <ClInclude Include="TnbLib\NumAlg\System\NumAlg_System.hxx" />

@@ -108,6 +108,9 @@
     <ClInclude Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadratureI.hxx">
       <Filter>TnbLib\NumAlg\Integration\GaussQuadrature</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\NumAlg_NewtonSolver_Condition.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Newton</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">

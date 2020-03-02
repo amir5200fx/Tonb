@@ -4,7 +4,8 @@
 
 #include <Global_Bound.hxx>
 #include <Global_Done.hxx>
-#include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <NumAlg_NewtonSolver_Info.hxx>
+#include <NumAlg_NewtonSolver_Condition.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -21,8 +22,8 @@ namespace tnbLib
 
 		NumAlg_NewtonSolver_Bound
 		(
-			const Standard_Real theLower,
-			const Standard_Real theUpper
+			const Standard_Real theLower = 0,
+			const Standard_Real theUpper = 0
 		)
 			: Global_Bound<Standard_Real>(theLower, theUpper)
 		{}
@@ -70,7 +71,7 @@ namespace tnbLib
 	};
 
 	template<bool BoundCheck = false>
-	struct Numeric_NewtonSolver_Function
+	struct NumAlg_NewtonSolver_Function
 		: public NumAlg_NewtonSolver_Value
 	{
 		void CheckBound(Standard_Real& x) const
@@ -80,7 +81,7 @@ namespace tnbLib
 	};
 
 	template<>
-	struct Numeric_NewtonSolver_Function<true>
+	struct NumAlg_NewtonSolver_Function<true>
 		: public NumAlg_NewtonSolver_Bound
 		, public NumAlg_NewtonSolver_Value
 	{
@@ -91,7 +92,7 @@ namespace tnbLib
 	};
 
 	template<bool BoundCheck = false>
-	struct Numeric_NewtonSolver_Derivation
+	struct NumAlg_NewtonSolver_Derivation
 		: public NumAlg_NewtonSolver_Value
 	{
 		void CheckBound(Standard_Real& x) const
@@ -101,7 +102,7 @@ namespace tnbLib
 	};
 
 	template<>
-	struct Numeric_NewtonSolver_Derivation<true>
+	struct NumAlg_NewtonSolver_Derivation<true>
 		: public NumAlg_NewtonSolver_Bound
 		, public NumAlg_NewtonSolver_Value
 	{
@@ -126,9 +127,9 @@ namespace tnbLib
 
 		virtual Standard_Integer& ChangeNbIter() = 0;
 
-		virtual NewtonIterCondition Condition() const = 0;
+		virtual NumAlg_NewtonSolver_Condition Condition() const = 0;
 
-		virtual NewtonIterCondition& ChangeCondition() = 0;
+		virtual NumAlg_NewtonSolver_Condition& ChangeCondition() = 0;
 
 		virtual Standard_Real& ChangeResidual() = 0;
 
@@ -159,8 +160,6 @@ namespace tnbLib
 
 		void Perform(const Standard_Real guess)
 		{
-			Change_IsDone() = Standard_True;
-
 			auto u = guess;
 
 			fun::CheckBound(u);
@@ -171,7 +170,7 @@ namespace tnbLib
 			ChangeNbIter() = 0;
 			ChangeResidual() = (Standard_Real)0.;
 			ChangeResult() = (Standard_Real)0.;
-			ChangeCondition() = NewtonIter_LEVEL_EXCEEDED;
+			ChangeCondition() = NumAlg_NewtonSolver_Condition::LEVEL_EXCEEDED;
 
 			forThose(Iter, 1, MaxNbIterations())
 			{
@@ -183,7 +182,7 @@ namespace tnbLib
 				if (ABS(df) <= Zero())
 				{
 					dp = (Standard_Real)0.;
-					ChangeCondition() = NewtonIter_ZERODIVIDE;
+					ChangeCondition() = NumAlg_NewtonSolver_Condition::ZERODIVIDE;
 				}
 				else
 					dp = y0 / df;
@@ -196,23 +195,24 @@ namespace tnbLib
 				rel_err = (Standard_Real)2.0 * ABS(dp) / (ABS(p1) + Small());
 
 				if (rel_err < Tolerance() OR ABS(y1) < Zero())
-					if (Condition() NOT_EQUAL NewtonIter_ZERODIVIDE)
-						ChangeCondition() = NewtonIter_CONVERGED;
+					if (Condition() NOT_EQUAL NumAlg_NewtonSolver_Condition::ZERODIVIDE)
+						ChangeCondition() = NumAlg_NewtonSolver_Condition::CONVERGED;
 
 				u = p1;
 				y0 = y1;
 
-				if (Condition())
+				if (Condition() NOT_EQUAL NumAlg_NewtonSolver_Condition::LEVEL_EXCEEDED)
 					break;
 			}
 
 			ChangeResult() = u;
 			ChangeResidual() = rel_err;
+			Change_IsDone() = Standard_True;
 		}
 	};
 
 	template<class Function, class Derivation, bool RefInfo = true>
-	class Numeric_NewtonSolver
+	class NumAlg_NewtonSolver
 		: public NumAlg_NewtonSolver_Alg<Function, Derivation>
 	{
 
@@ -223,22 +223,17 @@ namespace tnbLib
 
 		NumAlg_NewtonSolver_Info& theInfo_;
 
-		Standard_Boolean& Change_IsDone() override
-		{
-			return theInfo_.Change_IsDone();
-		}
-
 		Standard_Integer& ChangeNbIter() override
 		{
 			return theInfo_.ChangeNbIter();
 		}
 
-		NewtonIterCondition Condition() const override
+		NumAlg_NewtonSolver_Condition Condition() const override
 		{
 			return theInfo_.Condition();
 		}
 
-		NewtonIterCondition& ChangeCondition() override
+		NumAlg_NewtonSolver_Condition& ChangeCondition() override
 		{
 			return theInfo_.ChangeCondition();
 		}
@@ -255,7 +250,7 @@ namespace tnbLib
 
 		Standard_Integer MaxNbIterations() const override
 		{
-			return theInfo_.MaxNbIterations();
+			return theInfo_.MaxIterations();
 		}
 
 		Standard_Real UnderRelaxation() const override
@@ -280,7 +275,7 @@ namespace tnbLib
 
 	public:
 
-		Numeric_NewtonSolver
+		NumAlg_NewtonSolver
 		(
 			const Function& theFunction,
 			const Derivation& theDerivation,
@@ -292,19 +287,19 @@ namespace tnbLib
 			theInfo_.Reset();
 		}
 
-		const NumAlg_NewtonSolver_Info& Info() const
+		const auto& Info() const
 		{
 			return theInfo_;
 		}
 
-		NumAlg_NewtonSolver_Info& Info()
+		auto& Info()
 		{
 			return theInfo_;
 		}
 	};
 
 	template<class Function, class Derivation>
-	class Numeric_NewtonSolver<Function, Derivation, false>
+	class NumAlg_NewtonSolver<Function, Derivation, false>
 		: public NumAlg_NewtonSolver_Alg<Function, Derivation>
 		, public NumAlg_NewtonSolver_Info
 	{
@@ -315,22 +310,17 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Standard_Boolean& Change_IsDone() override
-		{
-			return info::Change_IsDone();
-		}
-
 		Standard_Integer& ChangeNbIter() override
 		{
 			return info::ChangeNbIter();
 		}
 
-		NewtonIterCondition Condition() const override
+		NumAlg_NewtonSolver_Condition Condition() const override
 		{
 			return info::Condition();
 		}
 
-		NewtonIterCondition& ChangeCondition() override
+		NumAlg_NewtonSolver_Condition& ChangeCondition() override
 		{
 			return info::ChangeCondition();
 		}
@@ -347,7 +337,7 @@ namespace tnbLib
 
 		Standard_Integer MaxNbIterations() const
 		{
-			return info::MaxNbIterations();
+			return info::MaxIterations();
 		}
 
 		Standard_Real UnderRelaxation() const override
@@ -372,7 +362,7 @@ namespace tnbLib
 
 	public:
 
-		Numeric_NewtonSolver
+		NumAlg_NewtonSolver
 		(
 			const Function& theFunction,
 			const Derivation& theDerivation
@@ -384,7 +374,7 @@ namespace tnbLib
 				)
 		{}
 
-		/*Numeric_NewtonSolver
+		/*NumAlg_NewtonSolver
 		(
 			const Function& theFunction,
 			const Derivation& theDerivation,
