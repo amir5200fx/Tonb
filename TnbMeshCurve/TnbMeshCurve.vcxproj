@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{E3404AAD-047B-4489-879D-3E8C58782153}</ProjectGuid>
+    <RootNamespace>TnbMeshCurve</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Derivation;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Function;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction\Info;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction;$(ProjectDir)TnbLib\MeshCurve\OptmPoint;$(ProjectDir)TnbLib\MeshCurve\Curve\Info;$(ProjectDir)TnbLib\MeshCurve\Curve\AnIso;$(ProjectDir)TnbLib\MeshCurve\Curve\Iso;$(ProjectDir)TnbLib\MeshCurve\Curve;$(ProjectDir)TnbLib\MeshCurve\Entity\AnIso;$(ProjectDir)TnbLib\MeshCurve\Entity\Iso;$(ProjectDir)TnbLib\MeshCurve\Entity;$(ProjectDir)TnbLib\MeshCurve\Length\Function;$(ProjectDir)TnbLib\MeshCurve\Length;$(SolutionDir)TnbMeshBase\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Derivation;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Function;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction\Info;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction;$(ProjectDir)TnbLib\MeshCurve\OptmPoint;$(ProjectDir)TnbLib\MeshCurve\Curve\Info;$(ProjectDir)TnbLib\MeshCurve\Curve\AnIso;$(ProjectDir)TnbLib\MeshCurve\Curve\Iso;$(ProjectDir)TnbLib\MeshCurve\Curve;$(ProjectDir)TnbLib\MeshCurve\Entity\AnIso;$(ProjectDir)TnbLib\MeshCurve\Entity\Iso;$(ProjectDir)TnbLib\MeshCurve\Entity;$(ProjectDir)TnbLib\MeshCurve\Length\Function;$(ProjectDir)TnbLib\MeshCurve\Length;$(SolutionDir)TnbMeshBase\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\MeshCurve\Curve\AnIso\Mesh2d_CurveAnIso.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Curve\Info\Mesh_Curve_Info.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Curve\Iso\Mesh2d_Curve.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Curve\Mesh_Curve.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Curve\Mesh_CurveI.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Entity\AnIso\Mesh2d_CurveEntityAnIso.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Entity\Iso\Mesh2d_CurveEntity.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Entity\Mesh_CurveEntity.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Entity\Mesh_CurveEntityI.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Length\Function\Mesh_CurveLength_Function.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Length\Function\Mesh_CurveLength_FunctionI.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Length\Mesh_CurveLength.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\Length\Mesh_CurveLengthI.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Correction\Info\Mesh_CurveOptmPoint_Correction_Info.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Correction\Mesh_CurveOptmPoint_Correction.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Correction\Mesh_CurveOptmPoint_CorrectionI.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Newton\Derivation\Mesh_CurveOptmPoint_Newton_Derivation.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Newton\Derivation\Mesh_CurveOptmPoint_Newton_DerivationI.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Newton\Function\Mesh_CurveOptmPoint_Newton_Function.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Newton\Function\Mesh_CurveOptmPoint_Newton_FunctionI.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Newton\Mesh_CurveOptmPoint_Newton.hxx" />
+    <ClInclude Include="TnbLib\MeshCurve\OptmPoint\Newton\Mesh_CurveOptmPoint_NewtonI.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\MeshCurve\Curve\Info\Mesh_Curve_Info.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\Curve\Mesh_Curve.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\Entity\Mesh_CurveEntity.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\Length\Function\Mesh_CurveLength_Function.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\Length\Mesh_CurveLength.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\OptmPoint\Correction\Info\Mesh_CurveOptmPoint_Correction_Info.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\OptmPoint\Correction\Mesh_CurveOptmPoint_Correction.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\OptmPoint\Newton\Derivation\Mesh_CurveOptmPoint_Newton_Derivation.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\OptmPoint\Newton\Function\Mesh_CurveOptmPoint_Newton_Function.cxx" />
+    <ClCompile Include="TnbLib\MeshCurve\OptmPoint\Newton\Mesh_CurveOptmPoint_Newton.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

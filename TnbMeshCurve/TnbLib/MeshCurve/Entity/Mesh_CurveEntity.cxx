@@ -1,0 +1,1 @@
+#include <Mesh_CurveEntity.hxx>
