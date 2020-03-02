@@ -130,18 +130,6 @@
     <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr">
       <UniqueIdentifier>{15844983-42ea-4e54-a186-227aae511668}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr\2d">
-      <UniqueIdentifier>{c647c34a-0dd4-445f-a920-42a7e6991988}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr\3d">
-      <UniqueIdentifier>{45f8eb1c-d9cf-4d36-af0d-c9f281091ab4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction\2d">
-      <UniqueIdentifier>{6a96ad71-6ea4-4796-ab94-bc8cdf95f998}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction\3d">
-      <UniqueIdentifier>{28047631-6cd9-4fc6-8da1-8a4bbfccf92a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround">
       <UniqueIdentifier>{7b9715c4-5e36-4954-8757-df02df28807f}</UniqueIdentifier>
     </Filter>
@@ -162,6 +150,66 @@
     </Filter>
     <Filter Include="TnbLib\MeshBase\Geom\Mesh\Data\3d">
       <UniqueIdentifier>{2479b18b-0f18-4a96-b838-ea4915515c69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Metric">
+      <UniqueIdentifier>{f3621cbc-4477-4cf7-b702-487ffe533ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d">
+      <UniqueIdentifier>{c200c92d-bccb-45a1-8773-b130f46f57a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d">
+      <UniqueIdentifier>{13983e6c-ec5f-4fa0-8854-66ac5e4679f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d">
+      <UniqueIdentifier>{c913eb43-2144-4062-9f83-d8c884675151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\3d">
+      <UniqueIdentifier>{8d857a44-93b6-45ec-af86-6ff130fb1254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround">
+      <UniqueIdentifier>{911fbcbf-c4ea-43a6-ae14-651aec198f83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround\2d">
+      <UniqueIdentifier>{6a96ad71-6ea4-4796-ab94-bc8cdf95f998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround\3d">
+      <UniqueIdentifier>{28047631-6cd9-4fc6-8da1-8a4bbfccf92a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr\BackGround">
+      <UniqueIdentifier>{626992c5-7207-4ef7-beda-2910625c4b49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr\BackGround\3d">
+      <UniqueIdentifier>{45f8eb1c-d9cf-4d36-af0d-c9f281091ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Geom\MetricPrcsr\BackGround\2d">
+      <UniqueIdentifier>{c647c34a-0dd4-445f-a920-42a7e6991988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad">
+      <UniqueIdentifier>{73b5e122-5590-4b95-b430-88c13a2a6ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\Curve">
+      <UniqueIdentifier>{da381dce-2171-4040-b205-5ff79cd1f1b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\Patch">
+      <UniqueIdentifier>{7389930c-8142-4545-b2b6-9e1d196dd3cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\PlnRegion">
+      <UniqueIdentifier>{47d83b4c-5c9a-4dda-ba03-1e39aa35c490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\Wire">
+      <UniqueIdentifier>{5282c4ca-9024-4b37-badc-42bab16533a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\Curve\Base">
+      <UniqueIdentifier>{fdcd03b3-1529-40aa-993b-60951f0fe07b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\PlnRegion\Traits">
+      <UniqueIdentifier>{5fdf51ba-9837-4227-9334-c802a55378ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\Curve\Traits">
+      <UniqueIdentifier>{dd0d3ecc-41e4-4fb0-be65-d1abe8e4af00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshBase\Cad\Patch\Traits">
+      <UniqueIdentifier>{5f49ec7e-3026-4668-84f6-c9d7a7331f84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +357,117 @@
     <ClInclude Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdgeI.hxx">
       <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\TEdge</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_BndEdgeAdaptor.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_BndEdgeAdaptorI.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Data\Mesh_GlobalData.hxx">
+      <Filter>TnbLib\MeshBase\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Data\Mesh_QualityMap.hxx">
+      <Filter>TnbLib\MeshBase\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Data\Mesh_RegisterEntityM.hxx">
+      <Filter>TnbLib\MeshBase\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Data\Mesh_EntityCounterM.hxx">
+      <Filter>TnbLib\MeshBase\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Data\Mesh_Counters.hxx">
+      <Filter>TnbLib\MeshBase\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\Data\GeoMesh_Data.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\Data\GeoMesh_DataI.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Info\GeoMesh_Background_Info.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\GeoMesh_Background.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\GeoMesh_BackgroundI.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\Data\2d\GeoMesh2d_DataFwd.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\Data\2d\GeoMesh2d_Data.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\Data\3d\GeoMesh3d_DataFwd.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\Data\3d\GeoMesh3d_Data.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d\GeoMesh2d_BackgroundFwd.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d\GeoMesh2d_Background.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d\GeoMesh3d_BackgroundFwd.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d\GeoMesh3d_Background.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d\GeoMesh2d_MetricBackgroundFwd.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d\GeoMesh2d_MetricBackground.hxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround\GeoMetricFun_Background.hxx">
+      <Filter>TnbLib\MeshBase\Geom\MetricFunction\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround\GeoMetricFun_BackgroundI.hxx">
+      <Filter>TnbLib\MeshBase\Geom\MetricFunction\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround\2d\GeoMetricFun2d_Background.hxx">
+      <Filter>TnbLib\MeshBase\Geom\MetricFunction\BackGround\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Geom\MetricPrcsr\BackGround\2d\GeoMetricPrcsr2d_Background.hxx">
+      <Filter>TnbLib\MeshBase\Geom\MetricPrcsr\BackGround\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Curve\Base\Mesh_PlnCurve_Base.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Curve\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Curve\Mesh_PlnCurve.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Curve\Mesh_PlnCurveI.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\PlnRegion\Traits\Mesh_PlnRegion_Traits.hxx">
+      <Filter>TnbLib\MeshBase\Cad\PlnRegion\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\PlnRegion\Mesh_PlnRegion.hxx">
+      <Filter>TnbLib\MeshBase\Cad\PlnRegion</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\PlnRegion\Mesh_PlnRegionI.hxx">
+      <Filter>TnbLib\MeshBase\Cad\PlnRegion</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Wire\Mesh_PlnWire.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Wire\Mesh_PlnWireI.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Patch\Mesh_PatchTemplate.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Curve\Traits\Mesh_PlnCurve_Traits.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Curve\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Cad\Patch\Traits\Mesh_PatchTemplate_Traits.hxx">
+      <Filter>TnbLib\MeshBase\Cad\Patch\Traits</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.cxx">
@@ -337,6 +496,48 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MeshBase\Entities\Bnd\Edge\TEdge\Mesh_TBndEdge.cxx">
       <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\TEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_BndEdgeAdaptor.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Bnd\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\GeoMesh_Data.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\GeoMesh_Background.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\2d\GeoMesh2d_Data.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\3d\GeoMesh3d_Data.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d\GeoMesh2d_Background.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d\GeoMesh2d_BackgroundIO.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d\GeoMesh3d_Background.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d\GeoMesh3d_BackgroundIO.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d\GeoMesh2d_MetricBackground.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d\GeoMesh2d_MetricBackgroundIO.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\BackGround\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround\GeoMetricFun_Background.cxx">
+      <Filter>TnbLib\MeshBase\Geom\MetricFunction\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Cad\Curve\Mesh_PlnCurve.cxx">
+      <Filter>TnbLib\MeshBase\Cad\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Cad\Wire\Mesh_PlnWire.cxx">
+      <Filter>TnbLib\MeshBase\Cad\Wire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
