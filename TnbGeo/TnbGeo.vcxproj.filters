@@ -340,6 +340,12 @@
     <Filter Include="TnbLib\Geo\Distributor\Uniform">
       <UniqueIdentifier>{766f99c3-f3a4-40c0-baa5-d587e11d4131}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Length">
+      <UniqueIdentifier>{2f1addc2-c8a4-4870-a278-1efbf58bcabe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Length\Curve">
+      <UniqueIdentifier>{63b9d64f-3de9-4836-b8be-a64cf9363d08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -747,6 +753,18 @@
     <ClInclude Include="TnbLib\Geo\Distributor\Uniform\Geo_UniDistb.hxx">
       <Filter>TnbLib\Geo\Distributor\Uniform</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_Tetrahedralization.hxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_TetrahedralizationTools.hxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Length\Curve\Geo_CurveLength.hxx">
+      <Filter>TnbLib\Geo\Length\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Length\Curve\Geo_CurveLengthI.hxx">
+      <Filter>TnbLib\Geo\Length\Curve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -901,6 +919,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Distributor\Uniform\Geo_UniDistb.cxx">
       <Filter>TnbLib\Geo\Distributor\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_Tetrahedralization.cxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_TetrahedralizationTools.cxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Length\Curve\Geo_CurveLength.cxx">
+      <Filter>TnbLib\Geo\Length\Curve</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

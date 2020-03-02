@@ -15,7 +15,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		CurveType theCurve_;
+		const CurveType& theCurve_;
 
 		MetricPrcsrType theProcessor_;
 
@@ -52,7 +52,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		CurveType theCurve_;
+		const CurveType& theCurve_;
 
 	public:
 

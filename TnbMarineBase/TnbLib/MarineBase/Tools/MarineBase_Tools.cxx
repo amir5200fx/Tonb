@@ -504,7 +504,7 @@ tnbLib::MarineBase_Tools::CalcWaterCurveLength
 		if (curve.IsOnWater())
 		{
 			Debug_Null_Pointer(curve.Geometry());
-			sum += Pln_Tools::Length(curve.Geometry(), theInfo);
+			sum += Pln_Tools::Length(*curve.Geometry(), theInfo);
 		}
 	}
 	return sum;
@@ -624,7 +624,7 @@ tnbLib::MarineBase_Tools::CalcWettedHullCurveLength
 		if (NOT curve.IsOnWater())
 		{
 			Debug_Null_Pointer(curve.Geometry());
-			sum += Pln_Tools::Length(curve.Geometry(), theInfo);
+			sum += Pln_Tools::Length(*curve.Geometry(), theInfo);
 		}
 	}
 	return sum;

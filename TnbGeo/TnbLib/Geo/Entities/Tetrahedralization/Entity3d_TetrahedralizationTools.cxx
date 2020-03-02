@@ -3,8 +3,8 @@
 #include <error.hxx>
 #include <OSstream.hxx>
 
-AutLib::Entity3d_TetrahedralizationTools::edgeConnectivity 
-AutLib::Entity3d_TetrahedralizationTools::EdgeIndices
+tnbLib::Entity3d_TetrahedralizationTools::edgeConnectivity 
+tnbLib::Entity3d_TetrahedralizationTools::EdgeIndices
 (
 	const Standard_Integer theIndex
 )
@@ -21,8 +21,8 @@ AutLib::Entity3d_TetrahedralizationTools::EdgeIndices
 	return std::move(edge);
 }
 
-AutLib::Entity3d_TetrahedralizationTools::facetConnectivity 
-AutLib::Entity3d_TetrahedralizationTools::FacetIndices
+tnbLib::Entity3d_TetrahedralizationTools::facetConnectivity 
+tnbLib::Entity3d_TetrahedralizationTools::FacetIndices
 (
 	const Standard_Integer theIndex
 )

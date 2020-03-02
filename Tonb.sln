@@ -29,10 +29,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbMarineBase", "TnbMarineB
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbCadModel", "TnbCadModel\TnbCadModel.vcxproj", "{81DD0833-BF5F-4698-8B7D-6D82792BD220}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbMeshAft", "TnbMeshAft\TnbMeshAft.vcxproj", "{7A98DF43-1C80-414F-8870-2D5401FE78A0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbMeshCurve", "TnbMeshCurve\TnbMeshCurve.vcxproj", "{E3404AAD-047B-4489-879D-3E8C58782153}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -138,11 +139,30 @@ Global
 		{81DD0833-BF5F-4698-8B7D-6D82792BD220}.Release|x64.Build.0 = Release|x64
 		{81DD0833-BF5F-4698-8B7D-6D82792BD220}.Release|x86.ActiveCfg = Release|Win32
 		{81DD0833-BF5F-4698-8B7D-6D82792BD220}.Release|x86.Build.0 = Release|Win32
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Debug|x64.ActiveCfg = Debug|x64
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Debug|x64.Build.0 = Debug|x64
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Debug|x86.Build.0 = Debug|Win32
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Release|x64.ActiveCfg = Release|x64
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Release|x64.Build.0 = Release|x64
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Release|x86.ActiveCfg = Release|Win32
+		{7A98DF43-1C80-414F-8870-2D5401FE78A0}.Release|x86.Build.0 = Release|Win32
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Debug|x64.ActiveCfg = Debug|x64
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Debug|x64.Build.0 = Debug|x64
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Debug|x86.ActiveCfg = Debug|Win32
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Debug|x86.Build.0 = Debug|Win32
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Release|x64.ActiveCfg = Release|x64
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Release|x64.Build.0 = Release|x64
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Release|x86.ActiveCfg = Release|Win32
+		{E3404AAD-047B-4489-879D-3E8C58782153}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

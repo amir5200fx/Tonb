@@ -4,16 +4,10 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <NumAlg_NewtonSolver_Condition.hxx>
 
 namespace tnbLib
 {
-
-	enum NewtonIterCondition
-	{
-		NewtonIter_LEVEL_EXCEEDED,
-		NewtonIter_ZERODIVIDE,
-		NewtonIter_CONVERGED
-	};
 
 	// Forward Declarations
 	template<class Function, class Derivation, bool RefInfo>
@@ -40,33 +34,42 @@ namespace tnbLib
 
 		Standard_Boolean IsConverged_;
 
-		NewtonIterCondition theCondition_;
+		NumAlg_NewtonSolver_Condition theCondition_;
 
 	protected:
 
-		Standard_Integer& ChangeNbIter()
+		auto& ChangeNbIter()
 		{
 			return theIter_;
 		}
 
-		Standard_Real& ChangeResidual()
+		auto& ChangeResidual()
 		{
 			return theResidual_;
 		}
 
-		Standard_Real& ChangeResult()
+		auto& ChangeResult()
 		{
 			return theResult_;
 		}
 
-		Standard_Boolean& Change_IsConverged()
+		auto& Change_IsConverged()
 		{
 			return IsConverged_;
 		}
 
-		NewtonIterCondition& ChangeCondition()
+		auto& ChangeCondition()
 		{
 			return theCondition_;
+		}
+
+		void Reset()
+		{
+			theIter_ = 0;
+			theResidual_ = 0;
+			theResult_ = 0;
+
+			IsConverged_ = Standard_False;
 		}
 
 	public:
@@ -80,37 +83,40 @@ namespace tnbLib
 
 		NumAlg_NewtonSolver_Info();
 
-		Standard_Integer NbIterations() const
+		auto NbIterations() const
 		{
 			return theIter_;
 		}
 
-		Standard_Real Residual() const
+		auto Residual() const
 		{
 			return theResidual_;
 		}
 
-		Standard_Real Result() const
+		auto Result() const
 		{
 			return theResult_;
 		}
 
-		Standard_Boolean IsConverged() const
+		auto IsConverged() const
 		{
 			return IsConverged_;
 		}
 
-		NewtonIterCondition Condition() const
+		auto Condition() const
 		{
 			return theCondition_;
 		}
 
 		//- Macros
 
-		GLOBAL_ACCESS_SINGLE(Standard_Real, Tolerance)
-			GLOBAL_ACCESS_SINGLE(Standard_Real, Small)
-			GLOBAL_ACCESS_SINGLE(Standard_Real, Zero)
-			GLOBAL_ACCESS_SINGLE(Standard_Real, UnderRelaxation)
+		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Tolerance)
+			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Small)
+			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Zero)
+			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, UnderRelaxation)
+
+			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Integer, MaxIterations)
+			
 
 	};
 }

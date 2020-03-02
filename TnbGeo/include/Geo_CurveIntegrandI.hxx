@@ -13,7 +13,7 @@ namespace tnbLib
 		const auto& curve = Curve();
 
 		Point pt;
-		curve->D1(x, pt, theVec);
+		curve.D1(x, pt, theVec);
 
 		return std::move(pt);
 	}
@@ -28,7 +28,7 @@ namespace tnbLib
 		const auto& curve = Curve();
 
 		Point pt;
-		curve->D1(x, pt, theVec);
+		curve.D1(x, pt, theVec);
 
 		return std::move(pt);
 	}

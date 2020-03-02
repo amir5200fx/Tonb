@@ -6,7 +6,7 @@
 
 #include <utility>
 
-namespace AutLib
+namespace tnbLib
 {
 
 	class Entity3d_TetrahedralizationTools
