@@ -346,6 +346,9 @@
     <Filter Include="TnbLib\Geo\Length\Curve">
       <UniqueIdentifier>{63b9d64f-3de9-4836-b8be-a64cf9363d08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\PriorityList">
+      <UniqueIdentifier>{52e0fb6b-a336-46a3-9990-a1d4b3a3b608}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -764,6 +767,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Length\Curve\Geo_CurveLengthI.hxx">
       <Filter>TnbLib\Geo\Length\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\PriorityList\Geo_PriorityList.hxx">
+      <Filter>TnbLib\Geo\PriorityList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Sort\Geo_Sort.hxx">
+      <Filter>TnbLib\Geo\Sort</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

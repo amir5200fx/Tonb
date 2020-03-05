@@ -5,7 +5,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Mesh_EntityCounterM.hxx>
 
-namespace AutLib
+namespace tnbLib
 {
 
 	Mesh_EntityCounter(NodeCounter);

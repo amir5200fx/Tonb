@@ -4,6 +4,7 @@
 
 #include <Geo_SearchTree.hxx>
 #include <Geo_Tools.hxx>
+#include <Entity2d_Box.hxx>
 
 #include <vector>
 #include <list>

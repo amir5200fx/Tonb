@@ -6,7 +6,7 @@
 
 #include <map>
 
-namespace AutLib
+namespace tnbLib
 {
 	typedef std::map<Standard_Integer, Standard_Real> Mesh_QualityMap;
 }

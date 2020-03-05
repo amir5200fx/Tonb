@@ -10,9 +10,6 @@
     <Filter Include="TnbLib\MeshAft\Cad">
       <UniqueIdentifier>{006eff62-f3e1-4b08-806e-14e1efffa2c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MeshAft\Data">
-      <UniqueIdentifier>{052974a5-d1a5-4392-b6c1-6528607bad3f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MeshAft\Entities">
       <UniqueIdentifier>{7826d04a-effc-43de-89ba-4499159ea873}</UniqueIdentifier>
     </Filter>
@@ -313,6 +310,180 @@
     <Filter Include="TnbLib\MeshAft\Cad\PlnRegion\Surface\T">
       <UniqueIdentifier>{47a168be-b35a-4a44-8d4a-266938185f0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MeshAft\MetricPrcsr\Info">
+      <UniqueIdentifier>{c115469a-4d20-4b14-86a5-579cd3d560c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\MetricPrcsr\System">
+      <UniqueIdentifier>{afd7e84a-01d2-475a-831e-a3c3e637db65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\MetricPrcsr\Iso\2d">
+      <UniqueIdentifier>{ccf7438c-06f9-4793-9c2a-faef403348a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\MetricPrcsr\Iso\3d">
+      <UniqueIdentifier>{e7a41c0e-4d12-40db-8c7d-3efa25730c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\MetricPrcsr\AnIso\2d">
+      <UniqueIdentifier>{f2921f1f-687b-4fe1-bbdd-fdd2c06d49cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\MetricPrcsr\AnIso\3d">
+      <UniqueIdentifier>{5fa59e8f-54e6-499b-9841-96b4a65329ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\MetricPrcsr\Surface">
+      <UniqueIdentifier>{34638a97-d688-474b-8937-472ad0203373}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core">
+      <UniqueIdentifier>{3989bb46-f7f7-426e-9bfc-72c257388e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front">
+      <UniqueIdentifier>{be0dac31-b1ce-46a8-8a75-09b802b5503b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Iso">
+      <UniqueIdentifier>{4f91b784-2783-44e3-9643-3f77e5f37a5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Iso\2d">
+      <UniqueIdentifier>{56d83208-b40c-443f-84c5-1e869ce5dc3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Iso\3d">
+      <UniqueIdentifier>{036ea9f6-f03c-4a8c-b488-5bf0185adae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\AnIso">
+      <UniqueIdentifier>{17cf336f-0337-4e5b-8c39-4708234096c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\AnIso\2d">
+      <UniqueIdentifier>{ef1cac96-eba4-47b2-be39-fa1fc23f9d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\AnIso\3d">
+      <UniqueIdentifier>{a4d8e9e3-81c2-4aa8-a7e9-da57021777df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Surface">
+      <UniqueIdentifier>{00a08af4-60b1-4c42-8ec6-1ab5d33ece35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Info">
+      <UniqueIdentifier>{129d0214-325e-45e6-a253-ab7719da01a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Cavity">
+      <UniqueIdentifier>{7251b583-25ed-4f9e-b95d-a4f633ca264d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Traits">
+      <UniqueIdentifier>{70a5cbb6-d8c4-428e-9532-fc0e381c0a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Data">
+      <UniqueIdentifier>{309625ee-4025-4aee-abd1-046f9e459ceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Info\2d">
+      <UniqueIdentifier>{5c4c56d7-3468-4702-916f-9c4d080036a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Info\3d">
+      <UniqueIdentifier>{d90ea04d-6ad7-47ab-bf78-cc133e6f82fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Info\2d\Adaptor">
+      <UniqueIdentifier>{84a0ebf5-d632-45e4-b8d9-bbbd12454b72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Iso\Info">
+      <UniqueIdentifier>{dd0a009d-2d75-44e6-b38b-9da4c480dbd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\AnIso\Info">
+      <UniqueIdentifier>{71f67ec6-4383-4558-9873-5d1796bd9855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Iso\Adaptor">
+      <UniqueIdentifier>{5c09a53c-325a-4eb1-85a6-3bc3e1f0c844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\AnIso\Adaptor">
+      <UniqueIdentifier>{34f13301-3f7c-4104-b97b-5111ccc15292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Surface\Info">
+      <UniqueIdentifier>{16a167db-037a-4d1b-bf9a-b874b97ee1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Front\Surface\Adaptor">
+      <UniqueIdentifier>{350221c4-f4dd-4af8-96cb-9d5196b8286d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core\Base">
+      <UniqueIdentifier>{5ea09d3c-4423-4384-8863-e4889523829f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core\Iso">
+      <UniqueIdentifier>{c026773f-3537-435c-a040-8c12f619631e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core\AnIso">
+      <UniqueIdentifier>{94c76320-4a2a-4e95-866e-8a4d66d66893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core\Surface">
+      <UniqueIdentifier>{a85c4f7c-f8bc-45cd-bef1-86b9b60bef67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode">
+      <UniqueIdentifier>{1f225dd6-8aab-4db0-9aa9-b57e309d727d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical">
+      <UniqueIdentifier>{6cf9e237-f5ab-4529-a082-76c6da0f72da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical\Iso">
+      <UniqueIdentifier>{2478e76e-3c3e-4fbb-bd8f-86e5f40b733b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical\AnIso">
+      <UniqueIdentifier>{3f2e70dd-1c35-4ea9-a38d-36c7871a4c9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical\Surface">
+      <UniqueIdentifier>{db5f576a-bfe1-49d7-9703-9badb82b6dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical\Iso\2d">
+      <UniqueIdentifier>{5056defa-6e10-4e16-a817-f94af88b08b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical\Iso\3d">
+      <UniqueIdentifier>{d032be32-3b8d-4123-aa7f-c36a0832d6f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical\AnIso\2d">
+      <UniqueIdentifier>{5f3f8e99-d282-4d0c-a21a-0a5bd05f5715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Analytical\AnIso\3d">
+      <UniqueIdentifier>{a4180690-16a9-4515-b8e6-ef46c0cb9dee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator">
+      <UniqueIdentifier>{34080171-ca2c-4fd9-82b1-470c4da2a71f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator\Iso">
+      <UniqueIdentifier>{1b5e20e0-9fea-49ad-be75-0482049d1e4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator\AnIso">
+      <UniqueIdentifier>{4958451a-a716-4923-b39e-d70507a9ee1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator\Surface">
+      <UniqueIdentifier>{7b6e5173-69a0-4281-8006-01bf974744e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator\Iso\2d">
+      <UniqueIdentifier>{2f36502c-772b-4173-b7d2-39ce15f5577c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator\Iso\3d">
+      <UniqueIdentifier>{7e57691e-2b7d-4d83-ab37-2c9ae871af7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator\AnIso\2d">
+      <UniqueIdentifier>{4824f3e9-ddb6-4ade-89fe-60763dc5e63f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Calculator\AnIso\3d">
+      <UniqueIdentifier>{833aea1d-9a70-44cb-b128-21804bcd0276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\OptNode\Corrector">
+      <UniqueIdentifier>{8d88d18f-334c-40d1-8bbd-922a131525e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core\Iso\2d">
+      <UniqueIdentifier>{614e3aef-464f-4dba-903d-39ef70cc570e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core\Iso\3d">
+      <UniqueIdentifier>{aabcaea5-7e31-45cb-b00f-ca7fcb4c0380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Core\AnIso\2d">
+      <UniqueIdentifier>{b63a7a42-e127-4907-a122-39716d4100d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Boundary">
+      <UniqueIdentifier>{94b78f78-1b3e-4802-bfcb-d1483558d56b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Boundary\Plane">
+      <UniqueIdentifier>{8a97628e-f9b8-4b1d-96e9-dd5cc9478970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Boundary\Plane\Check">
+      <UniqueIdentifier>{8a0f84d9-876f-4f17-b612-344c5a83b7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MeshAft\Boundary\Plane\Info">
+      <UniqueIdentifier>{f3441281-0a45-45f3-b55f-4c08c0a290a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Aft_MetricPrcsr.hxx">
@@ -320,9 +491,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Aft_MetricPrcsrI.hxx">
       <Filter>TnbLib\MeshAft\MetricPrcsr</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Traits\Aft_MetricPrcsr_Traits.hxx">
-      <Filter>TnbLib\MeshAft\MetricPrcsr\Traits</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\MeshAft\Entities\Node\Aft_Node.hxx">
       <Filter>TnbLib\MeshAft\Entities\Node</Filter>
@@ -789,6 +957,195 @@
     <ClInclude Include="TnbLib\MeshAft\Cad\Patch\T\Aft2d_tPatch.hxx">
       <Filter>TnbLib\MeshAft\Cad\Patch\T</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Traits\Aft_TypeTraits.hxx">
+      <Filter>TnbLib\MeshAft\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Info\Aft_MetricPrcsrAnIso_Info.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\System\Aft2d_MetricPrcsrAnIso_System.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Iso\2d\Aft2d_MetricPrcsr.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Iso\3d\Aft3d_MetricPrcsr.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\AnIso\2d\Aft2d_MetricPrcsrAnIso.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Surface\Aft2d_MetricPrcsrSurfaceFwd.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\Surface\Aft2d_MetricPrcsrSurface.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\MetricPrcsr\AnIso\2d\Aft2d_MetricPrcsrAnIsoFwd.hxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Info\Aft_FrontInfo.hxx">
+      <Filter>TnbLib\MeshAft\Front\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Traits\Aft_FrontTraits.hxx">
+      <Filter>TnbLib\MeshAft\Front\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Data\Aft_FrontGlobalData.hxx">
+      <Filter>TnbLib\MeshAft\Front\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Cavity\Aft_CavityData.hxx">
+      <Filter>TnbLib\MeshAft\Cavity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Info\2d\Adaptor\Aft2d_FrontInfoAdaptorTemplate.hxx">
+      <Filter>TnbLib\MeshAft\Front\Info\2d\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Info\2d\Aft2d_FrontInfoTemplate.hxx">
+      <Filter>TnbLib\MeshAft\Front\Info\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Info\2d\Aft2d_FrontInfoTemplateI.hxx">
+      <Filter>TnbLib\MeshAft\Front\Info\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Iso\Adaptor\Aft2d_FrontInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\Iso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Iso\Adaptor\Aft2d_FrontInfoAdaptor.hxx">
+      <Filter>TnbLib\MeshAft\Front\Iso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Iso\Info\Aft2d_FrontInfoFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\Iso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Iso\Info\Aft2d_FrontInfo.hxx">
+      <Filter>TnbLib\MeshAft\Front\Iso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Iso\2d\Aft2d_FrontGlobalDataFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Iso\2d\Aft2d_FrontGlobalData.hxx">
+      <Filter>TnbLib\MeshAft\Front\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\AnIso\Adaptor\Aft2d_FrontAnIsoInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\AnIso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\AnIso\Adaptor\Aft2d_FrontAnIsoInfoAdaptor.hxx">
+      <Filter>TnbLib\MeshAft\Front\AnIso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\AnIso\Info\Aft2d_FrontAnIsoInfoFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\AnIso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\AnIso\Info\Aft2d_FrontAnIsoInfo.hxx">
+      <Filter>TnbLib\MeshAft\Front\AnIso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\AnIso\2d\Aft2d_FrontAnIsoGlobalDataFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\AnIso\2d\Aft2d_FrontAnIsoGlobalData.hxx">
+      <Filter>TnbLib\MeshAft\Front\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Surface\Adaptor\Aft2d_FrontSurfaceInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\Surface\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Surface\Adaptor\Aft2d_FrontSurfaceInfoAdaptor.hxx">
+      <Filter>TnbLib\MeshAft\Front\Surface\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Surface\Info\Aft2d_FrontSurfaceInfoFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\Surface\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Surface\Info\Aft2d_FrontSurfaceInfo.hxx">
+      <Filter>TnbLib\MeshAft\Front\Surface\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Surface\Aft2d_FrontSurfaceGlobalDataFwd.hxx">
+      <Filter>TnbLib\MeshAft\Front\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Front\Surface\Aft2d_FrontSurfaceGlobalData.hxx">
+      <Filter>TnbLib\MeshAft\Front\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Base\Aft_Core_Base.hxx">
+      <Filter>TnbLib\MeshAft\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Base\Aft_Core_BaseI.hxx">
+      <Filter>TnbLib\MeshAft\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Analytical\Aft_OptNode_Analytical.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Analytical\Iso\2d\Aft2d_OptNode_Analytical.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Analytical\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Analytical\AnIso\2d\Aft2d_OptNodeAnIso_Analytical.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Analytical\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Analytical\Surface\Aft2d_OptNodeSurface_Analytical.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Analytical\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\Aft_OptNode_Calculator.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\Iso\2d\Aft2d_OptNode_CalculatorFwd.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\Iso\2d\Aft2d_OptNode_Calculator.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\Iso\3d\Aft3d_OptNode_CalculatorFwd.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\Iso\3d\Aft3d_OptNode_Calculator.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_Calculator.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_CalculatorFwd.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\AnIso\3d\Aft3d_OptNodeAnIso_CalculatorFwd.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\AnIso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\AnIso\3d\Aft3d_OptNodeAnIso_Calculator.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\AnIso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\Surface\Aft2d_OptNodeSurface_CalculatorFwd.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\OptNode\Calculator\Surface\Aft2d_OptNodeSurface_Calculator.hxx">
+      <Filter>TnbLib\MeshAft\OptNode\Calculator\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Aft_Core.hxx">
+      <Filter>TnbLib\MeshAft\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Aft_CoreI.hxx">
+      <Filter>TnbLib\MeshAft\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Iso\2d\Aft2d_CoreFwd.hxx">
+      <Filter>TnbLib\MeshAft\Core\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Iso\2d\Aft2d_Core.hxx">
+      <Filter>TnbLib\MeshAft\Core\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\AnIso\2d\Aft2d_CoreAnIsoFwd.hxx">
+      <Filter>TnbLib\MeshAft\Core\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\AnIso\2d\Aft2d_CoreAnIso.hxx">
+      <Filter>TnbLib\MeshAft\Core\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\AnIso\2d\Aft2d_CoreAnIsoTemplate.hxx">
+      <Filter>TnbLib\MeshAft\Core\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Iso\2d\Aft2d_CoreTemplate.hxx">
+      <Filter>TnbLib\MeshAft\Core\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Surface\Aft2d_CoreSurfaceTemplate.hxx">
+      <Filter>TnbLib\MeshAft\Core\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Surface\Aft2d_CoreSurfaceFwd.hxx">
+      <Filter>TnbLib\MeshAft\Core\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Core\Surface\Aft2d_CoreSurface.hxx">
+      <Filter>TnbLib\MeshAft\Core\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshAft\Boundary\Plane\Check\Aft_PlnBoundary_Check.hxx">
+      <Filter>TnbLib\MeshAft\Boundary\Plane\Check</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MeshAft\MetricPrcsr\Aft_MetricPrcsr.cxx">
@@ -838,6 +1195,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MeshAft\Cad\Patch\T\Aft2d_tPatch.cxx">
       <Filter>TnbLib\MeshAft\Cad\Patch\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\MetricPrcsr\System\Aft2d_MetricPrcsrAnIso_System.cxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\MetricPrcsr\AnIso\2d\Aft2d_MetricPrcsrAnIso.cxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\MetricPrcsr\Surface\Aft2d_MetricPrcsrSurface.cxx">
+      <Filter>TnbLib\MeshAft\MetricPrcsr\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\Front\Info\2d\Aft2d_FrontInfoTemplate.cxx">
+      <Filter>TnbLib\MeshAft\Front\Info\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\Core\Base\Aft_Core_Base.cxx">
+      <Filter>TnbLib\MeshAft\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\OptNode\Analytical\Iso\2d\Aft2d_OptNode_Analytical.cxx">
+      <Filter>TnbLib\MeshAft\OptNode\Analytical\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\OptNode\Analytical\AnIso\2d\Aft2d_OptNodeAnIso_Analytical.cxx">
+      <Filter>TnbLib\MeshAft\OptNode\Analytical\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\OptNode\Analytical\Surface\Aft2d_OptNodeSurface_Analytical.cxx">
+      <Filter>TnbLib\MeshAft\OptNode\Analytical\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\Core\Aft_Core.cxx">
+      <Filter>TnbLib\MeshAft\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\Core\Iso\2d\Aft2d_Core.cxx">
+      <Filter>TnbLib\MeshAft\Core\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\Core\AnIso\2d\Aft2d_CoreAnIso.cxx">
+      <Filter>TnbLib\MeshAft\Core\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\Core\Surface\Aft2d_CoreSurface.cxx">
+      <Filter>TnbLib\MeshAft\Core\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshAft\Boundary\Plane\Check\Aft_PlnBoundary_Check.cxx">
+      <Filter>TnbLib\MeshAft\Boundary\Plane\Check</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

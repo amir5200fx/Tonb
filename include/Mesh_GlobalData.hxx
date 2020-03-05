@@ -10,7 +10,7 @@
 
 #include <memory>
 
-namespace AutLib
+namespace tnbLib
 {
 
 	Mesh_RegisterEntity(Element, ElementType);

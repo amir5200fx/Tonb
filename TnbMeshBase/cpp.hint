@@ -1,1 +1,2 @@
 #define Mesh_EntityToEntityAdaptor(EntityName, toEntityName, EntityType)
+#define Mesh_RegisterEntity(EntityName, EntityType)
