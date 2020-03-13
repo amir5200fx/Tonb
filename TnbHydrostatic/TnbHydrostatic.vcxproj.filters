@@ -73,6 +73,18 @@
     <Filter Include="TnbLib\Hydrostatic\CrossCurves">
       <UniqueIdentifier>{34bb7556-e536-4243-bbf6-24bf69e71694}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\PhysicsModel\FormDim">
+      <UniqueIdentifier>{4cee6fda-1063-4cba-a53a-a171ee2c0a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\PhysicsModel\FormCoeff">
+      <UniqueIdentifier>{cf5382e5-40f7-424c-87d8-661857f71026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\PhysicsModel\SectionArea">
+      <UniqueIdentifier>{5dc1d143-c123-44d0-96ef-1fb7ac7ff3bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Modeler">
+      <UniqueIdentifier>{dbaa1aec-7695-42b9-929e-064cbd9dabcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.hxx">
@@ -132,6 +144,15 @@
     <ClInclude Include="TnbLib\Hydrostatic\CrossCurves\HydroStatic_CrossCurves.hxx">
       <Filter>TnbLib\Hydrostatic\CrossCurves</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\FormDim\HsModel_FormDim.hxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\FormDim</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\FormCoeff\HsModel_FormCoeff.hxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\FormCoeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\SectionArea\HsModel_SectionArea.hxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\SectionArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx">
@@ -154,6 +175,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\CrossCurves\HydroStatic_CrossCurves.cxx">
       <Filter>TnbLib\Hydrostatic\CrossCurves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\PhysicsModel\FormDim\HsModel_FormDim.cxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\FormDim</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\PhysicsModel\FormCoeff\HsModel_FormCoeff.cxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\FormCoeff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\PhysicsModel\SectionArea\HsModel_SectionArea.cxx">
+      <Filter>TnbLib\Hydrostatic\PhysicsModel\SectionArea</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

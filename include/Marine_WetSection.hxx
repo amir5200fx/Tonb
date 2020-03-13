@@ -44,7 +44,7 @@ namespace tnbLib
 			return IsDeep_;
 		}
 
-		Standard_Boolean IsWet() const override
+		Standard_Boolean IsWetted() const override
 		{
 			return Standard_True;
 		}

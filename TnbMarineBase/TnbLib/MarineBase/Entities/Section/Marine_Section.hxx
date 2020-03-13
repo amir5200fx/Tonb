@@ -63,7 +63,7 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		virtual Standard_Boolean IsWet() const
+		virtual Standard_Boolean IsWetted() const
 		{
 			return Standard_False;
 		}

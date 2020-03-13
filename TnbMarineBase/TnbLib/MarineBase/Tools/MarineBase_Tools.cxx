@@ -324,7 +324,7 @@ tnbLib::MarineBase_Tools::CalcIy
 //}
 
 Standard_Real 
-tnbLib::MarineBase_Tools::CalcWetArea
+tnbLib::MarineBase_Tools::CalcWettedArea
 (
 	const Marine_CmpSection & theSection, 
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
@@ -404,7 +404,7 @@ tnbLib::MarineBase_Tools::CalcCentre
 }
 
 tnbLib::Pnt2d 
-tnbLib::MarineBase_Tools::CalcWetCentre
+tnbLib::MarineBase_Tools::CalcWettedCentre
 (
 	const Marine_CmpSection & theSection, 
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
@@ -447,7 +447,7 @@ tnbLib::MarineBase_Tools::CalcWetCentre
 }
 
 //tnbLib::Pnt2d 
-//tnbLib::MarineBase_Tools::CalcWetCentre
+//tnbLib::MarineBase_Tools::CalcWettedCentre
 //(
 //	const Marine_CmpSection & theSection, 
 //	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
@@ -590,7 +590,7 @@ tnbLib::MarineBase_Tools::CalcWaterCurveBreadth
 	for (const auto& x : theSection.Sections())
 	{
 		Debug_Null_Pointer(x);
-		if (x->IsWet())
+		if (x->IsWetted())
 		{
 			auto wet = std::dynamic_pointer_cast<Marine_WetSection>(x);
 			Debug_Null_Pointer(wet);
@@ -642,7 +642,7 @@ tnbLib::MarineBase_Tools::CalcWettedHullCurveLength
 	{
 		Debug_Null_Pointer(x);
 		
-		if (x->IsWet())
+		if (x->IsWetted())
 		{
 			auto wet = std::dynamic_pointer_cast<Marine_WetSection>(x);
 			Debug_Null_Pointer(wet);
@@ -1622,7 +1622,7 @@ tnbLib::MarineBase_Tools::RetrieveStillWaterDomains
 //		marineLib::xSectionParam xParam;
 //
 //		xParam.x = x->X();
-//		xParam.value = CalcWetArea(*x, theInfo);
+//		xParam.value = CalcWettedArea(*x, theInfo);
 //
 //		params.push_back(std::move(xParam));
 //	}

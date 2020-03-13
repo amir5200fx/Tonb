@@ -70,6 +70,14 @@ namespace tnbLib
 				const std::vector<marineLib::xSectionParam>& theQ
 			);
 
+		static Standard_Real CalcB(const Marine_Section& theSection);
+
+		static Standard_Real CalcB(const Marine_CmpSection& theSection);
+
+		static Standard_Real CalcBWL(const Marine_CmpSection& theSection);
+
+
+
 		static Standard_Real
 			CalcArea
 			(
@@ -132,7 +140,7 @@ namespace tnbLib
 			);
 
 		static Standard_Real
-			CalcWetArea
+			CalcWettedArea
 			(
 				const Marine_CmpSection& theSection,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
@@ -153,7 +161,7 @@ namespace tnbLib
 			);
 
 		static Pnt2d
-			CalcWetCentre
+			CalcWettedCentre
 			(
 				const Marine_CmpSection& theSection, 
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
