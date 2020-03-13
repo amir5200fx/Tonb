@@ -427,6 +427,42 @@
     <Filter Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\wedge">
       <UniqueIdentifier>{aff80afe-118a-40fa-9a1a-ea16743a2ac2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic">
+      <UniqueIdentifier>{facd732c-881f-4e1c-9d31-af0d3d536c9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi">
+      <UniqueIdentifier>{53072372-8ec3-4d62-94c0-aa64e1366d64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty">
+      <UniqueIdentifier>{0d58a01a-dbd8-4fcb-ae95-8580a0088319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi">
+      <UniqueIdentifier>{f419e8c6-0882-46d2-b612-1135d2349c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane">
+      <UniqueIdentifier>{3a37cecb-ad5f-4e11-9da0-2078e1d172cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi">
+      <UniqueIdentifier>{2986c524-1d18-487b-9687-73f3a17d2dcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor">
+      <UniqueIdentifier>{dbc2d6fd-2d48-4aad-a41b-b92113897ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple">
+      <UniqueIdentifier>{5fa03db3-e28a-467b-bc7e-9b0f65cf301a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry">
+      <UniqueIdentifier>{b7fc3087-5f22-405e-9517-e68497817028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge">
+      <UniqueIdentifier>{e7c37cd7-ac06-4e92-ad43-a57f168fb0e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled">
+      <UniqueIdentifier>{46f480cc-7b1e-4fd0-84de-1c88edcbe05a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic">
+      <UniqueIdentifier>{f8b740ea-3f08-4355-b33c-ba14676f2283}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.hxx">
@@ -741,6 +777,45 @@
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchVectorNFieldsFwd.hxx">
       <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry\symmetryFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge\wedgeFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple\regionCoupleFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled\coupledFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic\genericFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic\cyclicFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi\cyclicGgiFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi\ggiFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty\emptyFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane\mixingPlaneFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane\traceMixingPlaneFlux.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor\processorFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi\overlapGgiFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.cxx">
@@ -1001,5 +1076,44 @@
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty\emptyFvPatchVectorNFields.cxx">
       <Filter>TnbLib\FiniteVolume\fields\fvPatchFields\constraint\empty</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry\symmetryFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge\wedgeFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple\regionCoupleFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled\coupledFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic\genericFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic\cyclicFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi\cyclicGgiFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi\ggiFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty\emptyFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane\mixingPlaneFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor\processorFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi\overlapGgiFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

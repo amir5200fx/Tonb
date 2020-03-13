@@ -210,6 +210,19 @@
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvBoundaryMesh\fvBoundaryMesh.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvMesh.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvMeshLduAddressing.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled\coupledFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic\genericFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi\cyclicGgiFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic\cyclicFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty\emptyFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi\ggiFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane\mixingPlaneFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane\traceMixingPlaneFlux.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi\overlapGgiFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor\processorFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple\regionCoupleFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry\symmetryFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge\wedgeFvPatch.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatch.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchList.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPointFace\findCellPointFaceTet.hxx" />
@@ -292,6 +305,18 @@
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvBoundaryMesh\fvBoundaryMesh.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvMesh.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvMeshGeometry.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\coupled\coupledFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic\genericFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclicGgi\cyclicGgiFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\cyclic\cyclicFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\empty\emptyFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\ggi\ggiFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\mixingPlane\mixingPlaneFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi\overlapGgiFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\processor\processorFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple\regionCoupleFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry\symmetryFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge\wedgeFvPatch.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatch.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchFvMeshTemplates.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchTemplates.cxx" />
@@ -321,6 +346,9 @@
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\volPointInterpolation\pointPatchInterpolation\pointPatchInterpolation.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\volPointInterpolation\volPointInterpolate.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\volPointInterpolation\volPointInterpolation.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
