@@ -1,0 +1,5 @@
+#define defineCompoundTypeName(Type, Name)
+#define addToRunTimeSelectionTable(baseType,thisType,argNames) 
+#define TypeName(TypeNameString) 
+#define defineRunTimeSelectionTable(baseType,argNames) 
+#define declareRunTimeSelectionTable(autoPtr,baseType,argNames,argList,parList)

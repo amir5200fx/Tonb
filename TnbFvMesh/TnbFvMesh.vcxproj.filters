@@ -1,0 +1,1434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{71285f6a-3109-4099-8faf-b522124c1971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh">
+      <UniqueIdentifier>{819e00a1-6051-48ee-aca8-049bae0ca504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh">
+      <UniqueIdentifier>{83b7d06a-9eb6-4c3d-b09b-5436fc64ea7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools">
+      <UniqueIdentifier>{5daaad25-a123-4ce8-9745-86cf2448155f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\twoDPointCorrector">
+      <UniqueIdentifier>{689cf240-c3ef-4ae1-9ec0-3d0546bfa938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface">
+      <UniqueIdentifier>{9cf0ae4d-8ed7-4457-8ce0-fd1b676c1852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\surfaceSets">
+      <UniqueIdentifier>{592b9deb-4186-4e54-8ecc-6ec3778e5d0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets">
+      <UniqueIdentifier>{0f6b5aa4-d147-4f7e-a2a7-bde9c2699789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\searchableSurface">
+      <UniqueIdentifier>{95334869-136b-4750-ae0e-38b970fcacdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\regionSplit">
+      <UniqueIdentifier>{056d39fb-3c05-4286-a9ca-2f07a8088675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\primitiveMeshGeometry">
+      <UniqueIdentifier>{8049d658-4e9b-494c-93e6-b7b5e8041ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\polyMeshZipUpCells">
+      <UniqueIdentifier>{06f05a17-9eda-4083-a527-4fc32564ced8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\PointEdgeWave">
+      <UniqueIdentifier>{2df746dd-638a-4c57-a391-98652041cf77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\meshSearch">
+      <UniqueIdentifier>{b0e432fe-e3ae-4d4b-9e86-e0e61b1e1f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\Make">
+      <UniqueIdentifier>{fd8d03de-c8f0-42b3-8599-4f1cf8c45558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\cellClassification">
+      <UniqueIdentifier>{532f5d54-4a53-41be-8b7c-122dc508c9b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\cellDist">
+      <UniqueIdentifier>{d9c960c0-a8e7-482f-9dc1-6b10cb37d5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\cellFeatures">
+      <UniqueIdentifier>{1ad5c03f-a3f2-44ed-857e-ba35b16c8020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\cellQuality">
+      <UniqueIdentifier>{a8c74fb2-74b7-4ba2-a4c3-8f59358597ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\directMapped">
+      <UniqueIdentifier>{83fd10d5-09c9-4b45-994d-afa7529b2fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\edgeFaceCirculator">
+      <UniqueIdentifier>{8681b5f2-5c91-4d33-9c4b-696fbaca8556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\cellDist\patchWave">
+      <UniqueIdentifier>{5c784c74-c3da-49d3-86da-275eb08dad41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\cellDist\wallPoint">
+      <UniqueIdentifier>{f4988cfc-6c1b-40e8-a719-7659c40c84e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\directMapped\directMappedPointPatch">
+      <UniqueIdentifier>{e7a603b6-e8eb-4130-a2e2-8fd91e462626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\directMapped\directMappedPolyPatch">
+      <UniqueIdentifier>{87ddbfb2-14ae-441d-92ae-b3a037fad259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\topoSetSource">
+      <UniqueIdentifier>{1d8ba658-b55e-431e-92fa-34ddb3807477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\topoSets">
+      <UniqueIdentifier>{e28f353b-5249-4611-8930-354fe0f7aa76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources">
+      <UniqueIdentifier>{738a7755-7abf-4176-b721-01e75ff3d230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources">
+      <UniqueIdentifier>{90b9d24e-af4a-4e2c-9c65-6d2f23b44d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources">
+      <UniqueIdentifier>{598d907e-f512-4631-a665-7b032ffed0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\zoneToCell">
+      <UniqueIdentifier>{0e42b58d-d74a-4d98-b1d6-3e2cb4887f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\surfaceToCell">
+      <UniqueIdentifier>{3d9a7b02-4712-4518-90a7-ef66b2af083d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\sphereToCell">
+      <UniqueIdentifier>{2354b7ff-546e-4e40-9a2c-f9bbd05b662e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\shapeToCell">
+      <UniqueIdentifier>{c9f1d305-c7b3-4025-93bc-44f7ed815637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\setToCell">
+      <UniqueIdentifier>{8d654107-108c-4893-8311-47e1d3dafdaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\rotatedBoxToCell">
+      <UniqueIdentifier>{ac3c127e-b620-46e8-98b1-8d3909d91da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\regionToCell">
+      <UniqueIdentifier>{a99e6b27-63b4-4357-a9eb-a6a0e413f77f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\pointToCell">
+      <UniqueIdentifier>{32dc7307-cf14-45bc-9bbb-966841831123}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\boxToCell">
+      <UniqueIdentifier>{aa0a2054-6c2e-4fcc-9aa2-04006366b204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\cellToCell">
+      <UniqueIdentifier>{18d9fb92-5020-4e1e-861b-03ec029396d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\cylinderToCell">
+      <UniqueIdentifier>{bfd474cb-222f-4959-afaa-944e7ecc579c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\faceToCell">
+      <UniqueIdentifier>{f4cf2b1a-8f75-4c8b-92f3-bfef8b79c0ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\faceZoneToCell">
+      <UniqueIdentifier>{23cef176-4e7c-4b14-a2c1-f691d95048ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\fieldToCell">
+      <UniqueIdentifier>{f6db365b-cc56-457e-9081-c7bcbf7641e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\labelToCell">
+      <UniqueIdentifier>{25992db8-211a-4140-997e-4a488ffcf918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\nbrToCell">
+      <UniqueIdentifier>{0bd3b69a-fa68-43c8-a8fe-5ac0f0576980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\cellSources\nearestToCell">
+      <UniqueIdentifier>{c3f9ac7e-a349-45b8-9e3f-cc1f1a3bbe4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\zoneToFace">
+      <UniqueIdentifier>{1b6d28b5-1021-45b8-a367-d8a442449ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\setToFace">
+      <UniqueIdentifier>{09c2c73a-e0b8-45aa-bdf8-03e18d56e2fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\rotatedBoxToFace">
+      <UniqueIdentifier>{a5f8aeaa-cc70-47cb-ac80-35a866c5abbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\pointToFace">
+      <UniqueIdentifier>{72fad2b5-7992-44b5-b764-6d6c88ae4329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\patchToFace">
+      <UniqueIdentifier>{3c07efb6-8b41-4297-8c57-50fa9538894c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\normalToFace">
+      <UniqueIdentifier>{a2f38364-d53d-4fb0-9916-9c01fd953503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\boundaryToFace">
+      <UniqueIdentifier>{4d4f1b72-c452-4509-b6d8-15515cc3bad2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\boxToFace">
+      <UniqueIdentifier>{aba99d48-b1cd-4884-87ab-c06e1e543433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\cellToFace">
+      <UniqueIdentifier>{1970626e-fad0-4729-abe4-ee1d863de303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\faceToFace">
+      <UniqueIdentifier>{92fdd15d-afb7-4bc4-a54e-07c034887dff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\faceSources\labelToFace">
+      <UniqueIdentifier>{3a9db376-c1b7-41f0-ba08-cec2344e2336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\zoneToPoint">
+      <UniqueIdentifier>{846adaa3-5614-42af-8985-0495589ad041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\surfaceToPoint">
+      <UniqueIdentifier>{df289e3c-ca51-45b4-b44a-b74323367619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\setToPoint">
+      <UniqueIdentifier>{44c3f656-ec45-46a4-99e9-cb21c7d5d415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\pointToPoint">
+      <UniqueIdentifier>{d9541ad0-eb3c-4fa4-a378-27c85656211f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\nearestToPoint">
+      <UniqueIdentifier>{ad336326-c912-4e34-8898-e8604f13ae69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\boxToPoint">
+      <UniqueIdentifier>{97fad903-561d-4638-9d24-90fec69e2987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\cellToPoint">
+      <UniqueIdentifier>{429a377f-9858-4dcb-ba06-3d9be3aca37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\faceToPoint">
+      <UniqueIdentifier>{7835be05-c3b2-4750-a599-f6d376687602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\sets\pointSources\labelToPoint">
+      <UniqueIdentifier>{b447de22-5d77-422f-b5db-1779626caef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurfaceTools">
+      <UniqueIdentifier>{be8169d4-4bfc-4041-9483-6b37ba03bff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurfaceSearch">
+      <UniqueIdentifier>{af1f3a6c-e1ad-487f-a81b-8b2458d8ceb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurfaceFields">
+      <UniqueIdentifier>{cddfdfa2-e906-4e29-bac9-bfecb0b4e695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface">
+      <UniqueIdentifier>{6ed66fa6-477d-4396-b44f-abc88deb4097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\tools">
+      <UniqueIdentifier>{d5217a98-9acc-4dbe-aaa9-ec52d44c8d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\surfaceLocation">
+      <UniqueIdentifier>{db664d93-9fa5-4696-bbe5-411740456685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\surfaceFeatures">
+      <UniqueIdentifier>{33fb94b3-95d2-4aed-b2d3-18fd206de498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\orientedSurface">
+      <UniqueIdentifier>{146d9063-d412-4598-92e7-a81b359c844e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\octreeData">
+      <UniqueIdentifier>{31cbbe43-3a31-4748-9bf8-950511ecd928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\booleanOps">
+      <UniqueIdentifier>{a949a124-2258-4fdf-b4ad-088ffe5401e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\faceTriangulation">
+      <UniqueIdentifier>{b9243b52-2600-4bb0-a73c-8fdecb4cb409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\meshTriangulation">
+      <UniqueIdentifier>{46fde03a-8660-46e8-b1f1-cf264ea5a10f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh">
+      <UniqueIdentifier>{b91c0f46-1370-4408-90ce-e9fd3c27c720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\blockMesh">
+      <UniqueIdentifier>{4f4f42d5-aca1-4b65-ac66-3c7c45d194d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh">
+      <UniqueIdentifier>{44edba8a-6eab-45cc-98d4-cb748f539a37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\extrudeModel">
+      <UniqueIdentifier>{b4fe3b58-d42c-4009-9ca8-624f35c04cfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh">
+      <UniqueIdentifier>{d07aef96-000e-4467-99cf-e108fe01e219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\autoHexMeshDriver">
+      <UniqueIdentifier>{bc92e38a-7622-4a1d-ac26-2911ca6bcb28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\meshRefinement">
+      <UniqueIdentifier>{b25ca8da-3d67-4850-9194-91f92fc9ae0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\trackedParticle">
+      <UniqueIdentifier>{b936fd42-2444-4d58-a0be-3464c64f88c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\shellSurfaces">
+      <UniqueIdentifier>{e92225b4-7f48-4e27-b722-fd7e5d5dea5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\refinementSurfaces">
+      <UniqueIdentifier>{6486bc92-4130-407e-805a-c46cbdbfd8d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\autoHexMeshDriver\snapParameters">
+      <UniqueIdentifier>{ab231090-e476-4a78-9fa4-bc940c3c2866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\autoHexMeshDriver\refinementParameters">
+      <UniqueIdentifier>{d609f0a4-f333-46d8-a0dd-88d5e27c6fb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\autoHexMeshDriver\pointData">
+      <UniqueIdentifier>{86dd1b6d-9e5b-40e3-a9dd-f3de344d427e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\autoMesh\autoHexMesh\autoHexMeshDriver\layerParameters">
+      <UniqueIdentifier>{d489b214-d07c-48c0-8788-1ba3203628d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\blockMesh\block">
+      <UniqueIdentifier>{c4c6c394-60d0-454c-8145-e75cae7bad67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\blockMesh\blockDescriptor">
+      <UniqueIdentifier>{cec21492-8939-4149-8532-512993868260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\blockMesh\blockMesh">
+      <UniqueIdentifier>{a48473c4-bd2c-483c-8b12-e42c107a6497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\blockMesh\curvedEdges">
+      <UniqueIdentifier>{54ee479a-fefe-4f14-be28-f1ec84af5ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh">
+      <UniqueIdentifier>{3aac7b19-9481-4735-ae55-3c0f3d296b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities">
+      <UniqueIdentifier>{285e6998-2661-4639-a37e-199c0ce2c46b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\tetMesh">
+      <UniqueIdentifier>{2ffa996c-c61b-495c-8fd7-e85703612f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\cartesian2DMesh">
+      <UniqueIdentifier>{b9b44a3c-a063-44c3-a66a-844404fb1289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh">
+      <UniqueIdentifier>{d2432293-8b22-4834-ac14-62dc79f80576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator">
+      <UniqueIdentifier>{f1a403b3-9388-4a72-a8bd-a18917aacfa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor">
+      <UniqueIdentifier>{8919803e-dde7-4992-ac6d-b381b1a00553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\workflowControls">
+      <UniqueIdentifier>{6b47c338-d90b-4e0d-a3a0-48032b3b572e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools">
+      <UniqueIdentifier>{57464724-1b78-4a5c-8db7-51e691bb37a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra">
+      <UniqueIdentifier>{f71fe508-c013-432f-93d1-1662ac880a62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools">
+      <UniqueIdentifier>{aebd663c-0132-43d8-b34d-0f3feb46b60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers">
+      <UniqueIdentifier>{4cba7d30-bc11-4fdc-8748-d023425b6249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees">
+      <UniqueIdentifier>{f62401f1-1f17-4f48-8b18-e7199ed9e2b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing">
+      <UniqueIdentifier>{c9135914-7364-4fed-beed-32c4427cd3f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers">
+      <UniqueIdentifier>{c8dc1018-de44-40e7-bea2-9a18f491351e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\checkMeshDict">
+      <UniqueIdentifier>{b031a0c8-80fa-4dcd-8470-4b7cdc1285a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers">
+      <UniqueIdentifier>{9a6dfcb0-1afd-4241-bcde-43344752af73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion">
+      <UniqueIdentifier>{3fd8f1f6-e85b-4735-a7d6-21e06f77b8af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells">
+      <UniqueIdentifier>{93493b60-dce7-4bf3-9ad6-3d4be11334df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition">
+      <UniqueIdentifier>{a011b37d-29d4-4a9f-87a1-5a8fd0d94249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses">
+      <UniqueIdentifier>{90708991-3f17-485e-93ae-d897f532c824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions">
+      <UniqueIdentifier>{a246080f-8782-4e78-a86e-7581d6606616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\intersectionTools">
+      <UniqueIdentifier>{34335a93-b665-4bb7-8e76-ac31b5ce49e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes">
+      <UniqueIdentifier>{c3105099-a5b5-4b94-8602-3e59038707cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification">
+      <UniqueIdentifier>{7d3ab9fe-c9eb-45c5-a801-f988eabec001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\edgeMeshGeometryModification">
+      <UniqueIdentifier>{1c684239-2697-4356-b9c4-a564267be71c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\surfaceMeshGeometryModification">
+      <UniqueIdentifier>{0beacd59-2d05-4c4a-b9c6-5c7285bcd84b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\polyMeshGenGeometryModification">
+      <UniqueIdentifier>{41eb25af-1da5-45a7-b592-43a5fcaef349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers">
+      <UniqueIdentifier>{062ce7c5-f5af-4551-a91d-f50cf9b972a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\detectBoundaryLayers">
+      <UniqueIdentifier>{8e7b8011-c1db-46ad-98e4-bf5fe005f6d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\extrudeLayer">
+      <UniqueIdentifier>{30123e73-e8bd-4962-95c7-af62d17ce4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\triangulateNonPlanarBaseFaces">
+      <UniqueIdentifier>{81ad2b80-3b23-4649-a944-17de37af832d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers">
+      <UniqueIdentifier>{be7ca980-5331-4d19-8eea-6fecd1cc687a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraphList">
+      <UniqueIdentifier>{e255d76d-6a65-4310-8bb2-a5d0c340c826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph">
+      <UniqueIdentifier>{c807455f-fb05-455a-959a-6c019d605cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\subGraph">
+      <UniqueIdentifier>{a8888b18-2c7f-4c04-abbc-903296a37c98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\DynList">
+      <UniqueIdentifier>{37c2a081-6ac4-4ef9-8586-447813adccaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\FRWGraph">
+      <UniqueIdentifier>{575225c5-48ed-4947-b1c9-e1b9002cb805}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\graphRow">
+      <UniqueIdentifier>{a6a3bd0f-a0c8-43f7-91a4-c9bc140c6f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs">
+      <UniqueIdentifier>{f57ce1f0-d6b7-4724-8741-a40ba3b8b171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IODynList">
+      <UniqueIdentifier>{5608d4f9-a7ec-4148-856b-c0fd754727f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList">
+      <UniqueIdentifier>{3ea2c195-af78-49bc-8002-a2744049c248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists">
+      <UniqueIdentifier>{350040fd-59d5-40c8-a3bb-d8e531a9b8b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\LongList">
+      <UniqueIdentifier>{f903d6bf-2ff5-494f-a47e-db8de4ae4692}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA">
+      <UniqueIdentifier>{9cf48b21-7031-43a4-8ffa-e79174d5c98b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry">
+      <UniqueIdentifier>{1839b8e2-61bf-4523-810f-621d0d80b38c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices">
+      <UniqueIdentifier>{72ac288c-ee40-4e91-840e-e5fe65303e5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\sortEdgesIntoChains">
+      <UniqueIdentifier>{c2d80f2b-c7b7-44a5-ac0e-a26fe7b617fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers">
+      <UniqueIdentifier>{692a101a-f761-4c47-b8a6-eb1e81f26c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry\quadricFitting">
+      <UniqueIdentifier>{325ab1f7-72b7-43a7-9c8c-1d1cfeb7a8c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\parTriFace">
+      <UniqueIdentifier>{9c593f8c-7c5e-4b11-a287-699b7cef8283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\parPartTet">
+      <UniqueIdentifier>{a73f7e64-0137-46c6-8869-58d834da7757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledMeshOctreeCubeCoordinates">
+      <UniqueIdentifier>{f2fc76be-f5a5-49a7-af08-de27e615a8d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPair">
+      <UniqueIdentifier>{04c6404c-29d3-4dd8-a4cb-73c36e4bc37d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPoint">
+      <UniqueIdentifier>{fe6c3c33-3415-4239-b6c2-b7669687a9b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPointScalar">
+      <UniqueIdentifier>{71c2a8e4-7542-4391-b3b8-8f8f59c38338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledScalar">
+      <UniqueIdentifier>{275ea230-bb4b-432a-a8b0-daac208bbd17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\meshOctreeCubeCoordinatesScalar">
+      <UniqueIdentifier>{54c08b1f-75ab-4573-b2db-0167190fda9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\intersectionTools\findCellsIntersectingSurface">
+      <UniqueIdentifier>{18dec2fc-e55a-41ee-93a2-1da9fdea446b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf">
+      <UniqueIdentifier>{2ff8f1d2-1a40-41e7-a449-96efe74e4cb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives">
+      <UniqueIdentifier>{a0db5ba6-f4db-4fa7-932f-3a6f36d81b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier">
+      <UniqueIdentifier>{e07a04d7-c820-4f15-94f1-c5351850b3c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks">
+      <UniqueIdentifier>{05dd636d-7a7c-4298-ba73-4610a0375d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing">
+      <UniqueIdentifier>{bc13eb8a-51c9-4104-98fe-3e4761ecef68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen2DEngine">
+      <UniqueIdentifier>{1b8a7633-de47-4828-89f0-2dae7cc9c970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen">
+      <UniqueIdentifier>{ef3be9f9-4336-486c-94bc-81c3ab448b2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh">
+      <UniqueIdentifier>{e414a9b6-6918-4ad9-8829-83cec6e3a4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh">
+      <UniqueIdentifier>{75cf2828-e824-4576-aa19-18baaa4950cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch">
+      <UniqueIdentifier>{dea4d5ce-cf13-4ba0-9749-5c359da00760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\partTet">
+      <UniqueIdentifier>{efe05154-fd70-4e72-929b-986e98ffbfa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\meshSubsets">
+      <UniqueIdentifier>{1196a8a1-ccd9-4cbe-a5c8-6c67d3b129f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree">
+      <UniqueIdentifier>{6e3895e5-7113-41f3-98e7-16e345efbddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology">
+      <UniqueIdentifier>{0d3c8ec8-5bcd-419f-b3a7-3000058b417b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry">
+      <UniqueIdentifier>{7e606dd8-d885-4b66-ad0c-343ff3736912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer">
+      <UniqueIdentifier>{3d8c8a42-736d-4862-8386-efa4f1b8b3a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer">
+      <UniqueIdentifier>{a5b84713-23c8-40ec-b80a-09867f861738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation">
+      <UniqueIdentifier>{c90a80e9-93fe-40f0-9e79-d8ddc2155f3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\symmetryPlaneOptimisation">
+      <UniqueIdentifier>{7b3fa7c6-8c4d-47d5-8dcf-d36ae63f7260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation">
+      <UniqueIdentifier>{069773c2-d601-4f3b-8d1a-7f3d7edd11a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\advancedSurfaceSmoothers">
+      <UniqueIdentifier>{d21036b8-8ac8-4a91-9703-459ed8584cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\advancedSurfaceSmoothers\surfaceOptimizer">
+      <UniqueIdentifier>{d92e0ac3-2308-4810-9da7-87baeadc7d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner">
+      <UniqueIdentifier>{d977a995-776e-44ac-8b98-194f0b79be97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkBoundaryFacesSharingTwoEdges">
+      <UniqueIdentifier>{46319014-64f9-4a0d-bab9-0d310dbab0e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkCellConnectionsOverFaces">
+      <UniqueIdentifier>{d674e271-9d91-4219-98a9-72d5fdc7bdb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkIrregularSurfaceConnections">
+      <UniqueIdentifier>{bac9e3ef-bae4-4993-8fd3-d4ffc4eba64a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkNonMappableCellConnections">
+      <UniqueIdentifier>{59b87172-7e81-4491-96ae-93d9bd22caf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells">
+      <UniqueIdentifier>{c1f8aabd-65c4-44c4-bae8-fc00c1b08618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\renameBoundaryPatches">
+      <UniqueIdentifier>{49376cd6-75a5-4754-85f7-76874a1a91fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\correctEdgesBetweenPatches">
+      <UniqueIdentifier>{95eb4760-643a-4826-82fa-8c508270ffae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets">
+      <UniqueIdentifier>{2ea174d6-a39c-4f0f-8f27-3345d4114399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction">
+      <UniqueIdentifier>{5cdd84ea-fd49-4b72-a0bc-4cc691769e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckEdgeTypes">
+      <UniqueIdentifier>{1889537a-40d1-4c5e-80c4-af503fbbadf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckInvertedVertices">
+      <UniqueIdentifier>{18f78648-c3b5-48d2-8812-cfdfc2006b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor">
+      <UniqueIdentifier>{592fb8ac-61b0-4c26-a906-6c3662c56284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor2D">
+      <UniqueIdentifier>{8b35e4e6-2c8c-4308-bcd1-4f38a7aa896c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorFUN">
+      <UniqueIdentifier>{a5dd423f-d23c-4f98-963f-9ec6ad1f02dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorNonTopo">
+      <UniqueIdentifier>{ba02bdea-2075-42d8-84c6-ddadaf5075fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine">
+      <UniqueIdentifier>{cb93eb24-a128-4c21-95f0-91d78f90827c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper">
+      <UniqueIdentifier>{d23bfc3c-b47c-486d-b8e9-433ba6bb51ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D">
+      <UniqueIdentifier>{60f4d083-0141-4ad2-b4cf-bcac669e8e25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner">
+      <UniqueIdentifier>{8d6ad10d-aa33-43e9-8f28-4dedfd12187c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree">
+      <UniqueIdentifier>{a318e130-887b-458c-879a-939869c96bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceRemoveFacets">
+      <UniqueIdentifier>{adb7819c-1457-4431-a5c4-4529cba1a22e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePatchManipulator">
+      <UniqueIdentifier>{017cd3d0-90f5-478a-973f-0f2a126b0cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePartitioner">
+      <UniqueIdentifier>{89b664a9-e3d3-47af-9dab-36763aad4b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceMetaData">
+      <UniqueIdentifier>{a9d45368-d284-4b10-91de-c138df3dd4e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceImportSurfaceAsSubset">
+      <UniqueIdentifier>{1a5b1895-05bb-4302-aa26-83bb49310215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceExtrude2DEdges">
+      <UniqueIdentifier>{d1e12e03-4f39-452e-a6be-b34c23a404f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceDetectFeatureEdges">
+      <UniqueIdentifier>{1765cf44-b005-48ed-a951-90cec8203f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCurvatureEstimator">
+      <UniqueIdentifier>{ecdd793b-3c75-4b73-ac4a-b9c267a392b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCopyParts">
+      <UniqueIdentifier>{1a536b2b-721b-4fb4-bfb4-a87cffd84bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicateTriangles">
+      <UniqueIdentifier>{f9a65ef8-846e-4e77-a677-5426f241663b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicates">
+      <UniqueIdentifier>{388249a5-3952-4943-8dd6-3a24765b0160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceClassifyEdges">
+      <UniqueIdentifier>{68d351fc-08a8-4c89-9697-7c1753b1f2d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceChecks">
+      <UniqueIdentifier>{9c8f73fd-84bd-46ed-8a10-b520f27efb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurface2DCheck">
+      <UniqueIdentifier>{c8383058-2792-4052-b11e-74145fcf8d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\dynamicMesh">
+      <UniqueIdentifier>{0a3fd83f-889b-4c45-a669-681716575ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\edgeMesh">
+      <UniqueIdentifier>{4daae57a-56ee-4241-8491-724c48899187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls">
+      <UniqueIdentifier>{2fc24548-ba80-4d0a-b7e5-081ab0a705d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing">
+      <UniqueIdentifier>{83f3675e-511c-452c-bfd4-fb795ad2e3af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAutomaticRefinement">
+      <UniqueIdentifier>{30d2f354-2f4c-445f-a39e-0af86e9e8176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator">
+      <UniqueIdentifier>{7b22b82f-ec57-41ef-8702-9412d07aef2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube">
+      <UniqueIdentifier>{0bdcb9af-d513-461d-a7aa-0123483b601b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeInsideOutside">
+      <UniqueIdentifier>{0e91a9ab-1ae6-4ba7-95d6-7f931aaa9821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier">
+      <UniqueIdentifier>{65970009-4919-4eec-80d8-9ac5f03956cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\patchRefinement">
+      <UniqueIdentifier>{0b622419-c7ba-4ac1-ab89-92a1a07a5c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement">
+      <UniqueIdentifier>{5761963c-7352-4590-9a1c-6ef2d93e5c0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\tools\labelPair">
+      <UniqueIdentifier>{e41697df-e7bd-4843-8f57-a92eb02344ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\tools\labelledTri">
+      <UniqueIdentifier>{b893451a-f3a3-400b-a6bb-10d1e4f385b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\tools\hashSignedLabel">
+      <UniqueIdentifier>{934ff1c4-3d33-4372-ad5d-b801738e3995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\treeDataTriSurface">
+      <UniqueIdentifier>{ae71c6aa-3bb1-4cbb-9d11-bf23f9d11789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch">
+      <UniqueIdentifier>{3f2f0678-af15-4add-9d97-53cdbe140768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\geometricSurfacePatch">
+      <UniqueIdentifier>{d209160e-6c64-4202-ab66-09fc9ea52b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces">
+      <UniqueIdentifier>{7f6ab5f1-2bc5-47f5-93f3-8e3fec96ddde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\VTK">
+      <UniqueIdentifier>{3f03171a-59c2-4ea2-922b-31744a62d8a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\TRI">
+      <UniqueIdentifier>{a16d5768-5f62-41f2-be6c-ed6b437d2793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL">
+      <UniqueIdentifier>{f1eba7d1-6c29-469d-8668-318cfbe1d83a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\SMESH">
+      <UniqueIdentifier>{afb2ae7e-e77b-437e-94eb-b49670386a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\OFF">
+      <UniqueIdentifier>{1f366908-c6bb-4d59-b01d-42bfff4cab28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\OBJ">
+      <UniqueIdentifier>{93864d09-1215-4350-85e0-490a041b6989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\AC3D">
+      <UniqueIdentifier>{334de904-08b2-49cc-b89d-15b80f131315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\DX">
+      <UniqueIdentifier>{4b978c80-a86f-43a8-afad-fa1783ecb0ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\GTS">
+      <UniqueIdentifier>{851b8c48-a93a-4d07-9fa0-e90653e788c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\NAS">
+      <UniqueIdentifier>{4cbfcee1-e767-4b1f-8f24-dbf452d29759}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenPoints.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenPointsI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenFaces.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenFacesI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenCells.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenCellsI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGen.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch\boundaryPatch.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch\boundaryPatchBase.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch\processorBoundaryPatch.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\graphRow\graphRow.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\graphRow</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\graphRow\graphRowI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\graphRow</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\DynList\DynList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\DynList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\DynList\DynListI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\DynList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\FRWGraph\FRWGraph.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\FRWGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\FRWGraph\FRWGraphI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\FRWGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\LongList\LongList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\LongList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\LongList\LongListI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\LongList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\pointFieldPMG.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\pointFieldPMGI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\labelLongList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\faceListPMG.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\faceListPMGI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\edgeLongList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\cellListPMG.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\cellListPMGI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs\cellIOGraph.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs\faceIOGraph.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph\VRWGraph.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph\VRWGraphI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph\VRWGraphSMPModifier.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraphList\VRWGraphList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraphList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraphList\VRWGraphListI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraphList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\subGraph\subGraph.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\subGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\subGraph\subGraphI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\subGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList\IOLongList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList\IOLongListInstances.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IODynList\IODynList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IODynList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctions.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsTopologyManipulation.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsTopologyManipulationI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsStringConversion.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsPar.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsGeometryQueries.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsGeometryQueriesI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsFrontalMarking.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurf.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfPoints.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfPointsI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfModifier.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfModifierI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfFeatureEdges.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfFeatureEdgesI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfFacets.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfFacetsI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfAddressing.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfAddressingI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\meshSubsets\meshSubset.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\meshSubsets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\meshSubsets\meshSubsetI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\meshSubsets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\partTet\partTet.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\partTet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\partTet\partTetI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\primitives\partTet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh\partTetMesh.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh\partTetMeshSimplex.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledMeshOctreeCubeCoordinates\labelledMeshOctreeCubeCoordinates.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledMeshOctreeCubeCoordinates</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeBasic.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeBasicI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeCoordinates.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeCoordinatesI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCube.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeSlot.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctree.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\patchRefinement\patchRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\patchRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\patchRefinement\patchRefinementList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\patchRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\boxRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\coneRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\hollowConeRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\lineRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\objectRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\objectRefinementList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\sphereRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifier.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\tools\labelPair\labelPairLookup.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\tools\labelPair</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\tools\HashSignedLabel\HashSignedLabel.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\tools\hashSignedLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\tools\labelledTri\labelledTri.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\tools\labelledTri</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\tools\labelledTri\labelledTriI.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\tools\labelledTri</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\geometricSurfacePatch\geometricSurfacePatch.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\geometricSurfacePatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\geometricSurfacePatch\geometricSurfacePatchList.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\geometricSurfacePatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch\surfacePatch.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch\surfacePatchIOList.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch\surfacePatchList.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\treeDataTriSurface\treeDataTriSurface.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\treeDataTriSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\triSurface.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\STLpoint.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\STLpointI.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\STLtriangle.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\STLtriangleI.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\surfaceLocation\surfaceLocation.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\surfaceLocation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\surfaceFeatures\surfaceFeatures.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\surfaceFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\orientedSurface\orientedSurface.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\orientedSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\octreeData\octreeDataTriSurface.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\octreeData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\triSurface\octreeData\octreeDataTriSurfaceTreeLeaf.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\octreeData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPair\labelledPair.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPair</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPoint\labelledPoint.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPoint\refLabelledPoint.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPointScalar\labelledPointScalar.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPointScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPointScalar\refLabelledPointScalar.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledPointScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledScalar\labelledScalar.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\labelledScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\meshOctreeCubeCoordinatesScalar\meshOctreeCubeCoordinatesScalar.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\meshOctreeCubeCoordinatesScalar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\parPartTet\parPartTet.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\parPartTet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\parTriFace\parTriFace.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\parallelHelpers\parTriFace</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\sortEdgesIntoChains\sortEdgesIntoChains.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\sortEdgesIntoChains</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices\matrix3D.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices\matrix3DI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices\matrix2D.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices\matrix2DI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry\quadricFitting\quadricFitting.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry\quadricFitting</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry\quadricFitting\quadricFittingI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry\quadricFitting</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\intersectionTools\findCellsIntersectingSurface\findCellsIntersectingSurface.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\intersectionTools\findCellsIntersectingSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing\meshOctreeAddressing.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing\meshOctreeAddressingI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh\partTriMesh.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh\partTriMeshSimplex.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\sets\topoSets\topoSet.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\sets\topoSets\pointSet.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\sets\topoSets\faceSet.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\sets\topoSets\cellSet.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\sets\topoSetSource\topoSetSource.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSetSource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenPoints.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGen.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch\boundaryPatch.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch\boundaryPatchBase.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch\processorBoundaryPatch.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\boundaryPatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\graphRow\graphRow.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\graphRow</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\DynList\DynList.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\DynList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\FRWGraph\FRWGraph.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\FRWGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\LongList\LongList.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\LongList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\pointFieldPMG.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\faceListPMG.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists\cellListPMG.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Lists</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs\cellIOGraph.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs\faceIOGraph.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\Graphs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph\VRWGraph.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph\VRWGraphSMPModifier.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph\VRWGraphSMPModifierTemplates.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraphList\VRWGraphList.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\VRWGraphList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\subGraph\subGraph.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\subGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList\IOLongList.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList\IOLongListInstances.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IOLongList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IODynList\IODynList.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\containers\IODynList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsStringConversion.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsPar.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions\helperFunctionsFrontalMarking.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurf.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfPoints.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfModifier.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfFeatureEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfFacets.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf\triSurfAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\triSurf</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh\partTetMesh.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh\partTetMeshSimplex.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh\partTetMeshParallelAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh\partTetMeshAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeCoordinates.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCube.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeRefine.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeRecursiveFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeIntersections.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeCoordinatesIntersections.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeParallelCommunication.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeNeighbourSearches.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeInsideCalculations.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeFindNearestSurfacePoint.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCubePatches.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctree.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\patchRefinement\patchRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\patchRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\boxRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\coneRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\hollowConeRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\lineRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\newObjectRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\objectRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement\sphereRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\refinementControls\objectRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifier.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierDistributeLeavesToProcessors.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierEnsureCorrectRegularity.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierLoadDistribution.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierParallelRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierReduceMemoryConsumption.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierRefineSelectedBoxes.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier\meshOctreeModifierUpdateCommunicationPattern.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\tools\labelledTri\labelledTri.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\tools\labelledTri</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\geometricSurfacePatch\geometricSurfacePatch.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\geometricSurfacePatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch\surfacePatch.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch\surfacePatchIOList.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\surfacePatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\treeDataTriSurface\treeDataTriSurface.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\treeDataTriSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\triSurface.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\triSurfaceAddressing.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\stitchTriangles.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\VTK\writeVTK.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\VTK</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\TRI\readTRI.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\TRI</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\TRI\writeTRI.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\TRI</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\STLpoint.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\STLtriangle.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\readSTLBINARY.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\readSTL.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL\writeSTL.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\STL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\SMESH\writeSMESH.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\SMESH</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\surfaceLocation\surfaceLocation.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\surfaceLocation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\surfaceFeatures\surfaceFeatures.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\surfaceFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\orientedSurface\orientedSurface.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\orientedSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\octreeData\octreeDataTriSurface.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\octreeData</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\triSurface\octreeData\octreeDataTriSurfaceTreeLeaf.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\triSurface\octreeData</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\sortEdgesIntoChains\sortEdgesIntoChains.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\sortEdgesIntoChains</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices\matrix3D.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices\matrix2D.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry\quadricFitting\quadricFitting.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\helperClasses\geometry\quadricFitting</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\intersectionTools\findCellsIntersectingSurface\findCellsIntersectingSurface.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\intersectionTools\findCellsIntersectingSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing\meshOctreeAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh\partTriMesh.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh\partTriMeshSimplex.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh\partTriMeshParallelAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh\partTriMeshAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTriMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\sets\topoSets\topoSet.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\sets\topoSets\pointSet.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\sets\topoSets\faceSet.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\sets\topoSets\cellSet.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSets</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\sets\topoSetSource\topoSetSource.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\sets\topoSetSource</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>

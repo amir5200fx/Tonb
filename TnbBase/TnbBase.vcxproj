@@ -251,7 +251,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\db\IOobject\IOobjectI.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\IFstream.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\OFstream.hxx" />
-    <ClInclude Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.h" />
+    <ClInclude Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOstreams\hashes\OSHA1stream.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams.hxx" />
     <ClInclude Include="TnbLib\Base\db\IOstreams\IOstreams\INew.hxx" />

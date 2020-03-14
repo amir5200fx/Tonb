@@ -223,6 +223,8 @@
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple\regionCoupleFvPatch.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry\symmetryFvPatch.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge\wedgeFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped\directMappedFvPatch.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall\wallFvPatch.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatch.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchList.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolationCellPointFace\findCellPointFaceTet.hxx" />
@@ -317,6 +319,8 @@
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\regionCouple\regionCoupleFvPatch.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\symmetry\symmetryFvPatch.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\wedge\wedgeFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped\directMappedFvPatch.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall\wallFvPatch.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatch.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchFvMeshTemplates.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\fvPatch\fvPatchTemplates.cxx" />

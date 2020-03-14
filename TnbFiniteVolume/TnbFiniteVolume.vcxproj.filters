@@ -463,6 +463,15 @@
     <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\basic\generic">
       <UniqueIdentifier>{f8b740ea-3f08-4355-b33c-ba14676f2283}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\cohesive">
+      <UniqueIdentifier>{80b8479a-4a72-47ca-a13c-e6bb1ab09249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped">
+      <UniqueIdentifier>{cd7ef93c-3dd4-44bf-a59a-c2186849748f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall">
+      <UniqueIdentifier>{2c8015b8-610c-408b-91fd-fde27ca1eaca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.hxx">
@@ -816,6 +825,12 @@
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi\overlapGgiFvPatch.hxx">
       <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall\wallFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped\directMappedFvPatch.hxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.cxx">
@@ -1111,6 +1126,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi\overlapGgiFvPatch.cxx">
       <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\constraint\overlapGgi</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall\wallFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\derived\wall</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped\directMappedFvPatch.cxx">
+      <Filter>TnbLib\FiniteVolume\fvMesh\fvPatches\derived\directMapped</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-#include <gzstream.h>
+#include <gzstream.hxx>
 
 #include <string.h>  // for memcpy
 
