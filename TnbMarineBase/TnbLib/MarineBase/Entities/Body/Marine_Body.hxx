@@ -23,6 +23,10 @@ namespace tnbLib
 
 	protected:
 
+		
+
+	public:
+	
 		Marine_Body();
 
 		Marine_Body
@@ -32,12 +36,9 @@ namespace tnbLib
 
 		Marine_Body
 		(
-			const Standard_Integer theIndex, 
+			const Standard_Integer theIndex,
 			const word& theName
 		);
-
-	public:
-	
 
 		Standard_Integer NbSections() const;
 

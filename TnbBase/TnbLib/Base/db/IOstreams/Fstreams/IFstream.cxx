@@ -1,7 +1,7 @@
 #include <IFstream.hxx>
 
 #include <OSspecific.hxx>
-#include <gzstream.h>
+#include <gzstream.hxx>
 
 // * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 

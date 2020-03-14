@@ -2115,9 +2115,6 @@
     <ClInclude Include="TnbLib\Base\Primitives\hashes\Hash\Hash.hxx">
       <Filter>TnbLib\Base\Primitives\hashes\Hash</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.h">
-      <Filter>TnbLib\Base\db\IOstreams\gzstream</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Base\db\IOstreams\Fstreams\IFstream.hxx">
       <Filter>TnbLib\Base\db\IOstreams\Fstreams</Filter>
     </ClInclude>
@@ -4775,6 +4772,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Base\dimensionedTypes\dimensionedType\dimensionedTypeI.hxx">
       <Filter>TnbLib\Base\dimensionedTypes\dimensionedType</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.hxx">
+      <Filter>TnbLib\Base\db\IOstreams\gzstream</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

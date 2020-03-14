@@ -2,13 +2,13 @@
 #ifndef _Marine_WettedBody_Header
 #define _Marine_WettedBody_Header
 
-#include <Marine_Body.hxx>
+#include <Marine_HullBody.hxx>
 
 namespace tnbLib
 {
 
 	class Marine_WettedBody
-		: public Marine_Body
+		: public Marine_HullBody
 	{
 
 		/*private Data*/
