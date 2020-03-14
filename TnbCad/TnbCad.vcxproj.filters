@@ -169,6 +169,9 @@
     <Filter Include="TnbLib\Cad\GModel\Entities\Surface\Geometry">
       <UniqueIdentifier>{2bd0f002-55e5-498e-889f-6a4221672ebc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Boolean">
+      <UniqueIdentifier>{68f7e125-c930-4d63-ae8e-fba8c8784d6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -330,6 +333,9 @@
     <ClInclude Include="TnbLib\Cad\Tools\Cad_PreviewTools.hxx">
       <Filter>TnbLib\Cad\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Boolean\Cad_Boolean.hxx">
+      <Filter>TnbLib\Cad\Boolean</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -436,6 +442,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Tools\Cad_PreviewTools.cxx">
       <Filter>TnbLib\Cad\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Boolean\Cad_Boolean.cxx">
+      <Filter>TnbLib\Cad\Boolean</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
