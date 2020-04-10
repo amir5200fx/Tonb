@@ -58,6 +58,18 @@
     <Filter Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights">
       <UniqueIdentifier>{35035ce9-94ad-44a3-b0f1-09457fcb075f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\FalsePosition">
+      <UniqueIdentifier>{84b73087-0f71-4347-8c26-080ad882be8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\Secant">
+      <UniqueIdentifier>{0969159e-7330-4fab-8b55-6ed5ace2995b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info">
+      <UniqueIdentifier>{a59ce3a4-e5c2-48d8-a270-28bbc56b9039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\Secant\Info">
+      <UniqueIdentifier>{4a44d065-2042-4ad8-9171-42d2af4e8741}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
@@ -110,6 +122,21 @@
     </ClInclude>
     <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Newton\NumAlg_NewtonSolver_Condition.hxx">
       <Filter>TnbLib\NumAlg\NonLinearSolver\Newton</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info\NumAlg_FalsePos_Info.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\FalsePosition\NumAlg_FalsePos.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\FalsePosition</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Secant\NumAlg_Secant.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Secant</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Secant\Info\NumAlg_Secant_Info.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Secant\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Secant\NumAlg_Secant_Condition.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Secant</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
