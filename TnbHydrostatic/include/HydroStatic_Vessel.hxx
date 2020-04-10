@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _HsEntity_Vessel_Header
-#define _HsEntity_Vessel_Header
+#ifndef _HydroStatic_Vessel_Header
+#define _HydroStatic_Vessel_Header
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
@@ -17,14 +17,15 @@ namespace tnbLib
 	// Forward Declarations
 	class HsVessel_CmpSection;
 	class HsVessel_Tank;
+	class HsVessel_Body;
 	class Marine_DryBody;
 	class Marine_WettedBody;
 	class Marine_SailBody;
 
-	class HsEntity_Vessel
+	class HydroStatic_Vessel
 		: public Global_Indexed
 		, public Global_Named
-		, public std::enable_shared_from_this<HsEntity_Vessel>
+		, public std::enable_shared_from_this<HydroStatic_Vessel>
 	{
 
 		/*Private Data*/
@@ -47,16 +48,20 @@ namespace tnbLib
 
 	protected:
 
-		HsEntity_Vessel();
+		HydroStatic_Vessel();
 
-		HsEntity_Vessel(const Standard_Integer theIndex);
+		HydroStatic_Vessel(const Standard_Integer theIndex);
 
-		HsEntity_Vessel(const Standard_Integer theIndex, const word& theName);
+		HydroStatic_Vessel(const Standard_Integer theIndex, const word& theName);
 
 	public:
 
-		virtual ~HsEntity_Vessel()
+		virtual ~HydroStatic_Vessel()
 		{}
+
+		Standard_Integer CalcNbBodies() const;
+
+		Standard_Boolean HasCompositeBody() const;
 
 		Standard_Real FirstWaterLineSectionX() const;
 
@@ -98,7 +103,14 @@ namespace tnbLib
 		const std::shared_ptr<HsVessel_CmpSection>& FirstUnderWaterSection() const;
 
 		const std::shared_ptr<HsVessel_CmpSection>& LastUnderWaterSection() const;
+
+		const std::shared_ptr<HsVessel_CmpSection>& FirstMonoSection() const;
+
+		const std::shared_ptr<HsVessel_CmpSection>& LastMonoSection() const;
+
+		std::vector<std::shared_ptr<HsVessel_Body>> RetrieveWettedBodies() const;
+
 	};
 }
 
-#endif // !_HsEntity_Vessel_Header
+#endif // !_HydroStatic_Vessel_Header

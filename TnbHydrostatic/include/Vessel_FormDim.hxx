@@ -12,6 +12,9 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		//- Draft at mid
+		marineLib::TM theTm_;
+
 		//- After perpendicular
 		marineLib::APP theApp_;
 
@@ -25,13 +28,13 @@ namespace tnbLib
 		marineLib::LPP theLpp_;
 
 		//- Breadth
-		marineLib::B theB_;
+		//marineLib::B theB_;
 
 		//- Breadth Waterline
 		marineLib::BWL theBwl_;
 
 		//- Depth
-		marineLib::D theD_;
+		//marineLib::D theD_;
 
 		//- Design waterline
 		marineLib::DWL theDwl_;
@@ -52,13 +55,13 @@ namespace tnbLib
 		marineLib::AUW theAuw_;
 
 		//- Heel Angle
-		marineLib::HEELANG theHeelang_;
+		//marineLib::HEELANG theHeelang_;
 
 		//- Freeboard
 		//marineLib::FREP theFrep_;
 
 		//- Length overall
-		marineLib::LOA theLoa_;
+		//marineLib::LOA theLoa_;
 
 		//- Length overall submerged
 		marineLib::LOS theLos_;
@@ -68,6 +71,11 @@ namespace tnbLib
 	protected:
 
 		Vessel_FormDim_Parameters();
+
+		marineLib::TM& ChangeTM()
+		{
+			return theTm_;
+		}
 
 		marineLib::APP& ChangeAPP()
 		{
@@ -89,20 +97,20 @@ namespace tnbLib
 			return theLpp_;
 		}
 
-		marineLib::B& ChangeB()
+		/*marineLib::B& ChangeB()
 		{
 			return theB_;
-		}
+		}*/
 
 		marineLib::BWL& ChangeBWL()
 		{
 			return theBwl_;
 		}
 
-		marineLib::D& ChangeD()
+		/*marineLib::D& ChangeD()
 		{
 			return theD_;
-		}
+		}*/
 
 		marineLib::DWL& ChangeDWL()
 		{
@@ -134,10 +142,10 @@ namespace tnbLib
 			return theAuw_;
 		}
 
-		marineLib::LOA& ChangeLOA()
+		/*marineLib::LOA& ChangeLOA()
 		{
 			return theLoa_;
-		}
+		}*/
 
 		marineLib::LOS& ChangeLOS()
 		{
@@ -146,7 +154,12 @@ namespace tnbLib
 
 	public:
 
-		const marineLib::APP APP() const
+		const marineLib::TM& TM() const
+		{
+			return theTm_;
+		}
+
+		const marineLib::APP& APP() const
 		{
 			return theApp_;
 		}
@@ -166,20 +179,20 @@ namespace tnbLib
 			return theLpp_;
 		}
 
-		const marineLib::B& B() const
+		/*const marineLib::B& B() const
 		{
 			return theB_;
-		}
+		}*/
 
 		const marineLib::BWL& BWL() const
 		{
 			return theBwl_;
 		}
 
-		const marineLib::D& D() const
+		/*const marineLib::D& D() const
 		{
 			return theD_;
-		}
+		}*/
 
 		const marineLib::DWL& DWL() const
 		{
@@ -211,7 +224,7 @@ namespace tnbLib
 			return theAuw_;
 		}
 
-		const marineLib::HEELANG& HEELANG() const
+		/*const marineLib::HEELANG& HEELANG() const
 		{
 			return theHeelang_;
 		}
@@ -219,7 +232,7 @@ namespace tnbLib
 		marineLib::HEELANG& HEELANG()
 		{
 			return theHeelang_;
-		}
+		}*/
 
 		/*const marineLib::FREP& FREP() const
 		{
@@ -231,10 +244,10 @@ namespace tnbLib
 			return theFrep_;
 		}*/
 
-		const marineLib::LOA& LOA() const
+		/*const marineLib::LOA& LOA() const
 		{
 			return theLoa_;
-		}
+		}*/
 
 		const marineLib::LOS& LOS() const
 		{
