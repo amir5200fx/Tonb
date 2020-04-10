@@ -17,7 +17,7 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 	const Standard_Integer theIndex,
 	const Handle(Geom2d_Curve)& theGeom
 )
-	: Pln_Curve(theIndex, theGeom)
+	: Marine_PlnCurve(theIndex, theGeom)
 {
 }
 
@@ -25,7 +25,7 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 (
 	const Handle(Geom2d_Curve)& theGeom
 )
-	: Pln_Curve(theGeom)
+	: Marine_PlnCurve(theGeom)
 {
 }
 
@@ -35,7 +35,7 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 	const word & theName, 
 	const Handle(Geom2d_Curve)& theGeom
 )
-	: Pln_Curve(theIndex, theName, theGeom)
+	: Marine_PlnCurve(theIndex, theName, theGeom)
 {
 }
 

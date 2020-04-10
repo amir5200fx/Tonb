@@ -7,18 +7,22 @@
 
 tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
 (
-	const std::shared_ptr<Marine_Domain>& theDomain
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const Standard_Real theZ
 )
 	: Marine_WaterDomain(theDomain)
+	, theZ_(theZ)
 {
 }
 
 tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
 (
 	const Standard_Integer theIndex, 
-	const std::shared_ptr<Marine_Domain>& theDomain
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const Standard_Real theZ
 )
 	: Marine_WaterDomain(theIndex, theDomain)
+	, theZ_(theZ)
 {
 }
 
@@ -26,29 +30,10 @@ tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
-	const std::shared_ptr<Marine_Domain>& theDomain
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const Standard_Real theZ
 )
 	: Marine_WaterDomain(theIndex, theName, theDomain)
+	, theZ_(theZ)
 {
-}
-
-void tnbLib::Marine_WaterDomain_Still::Perform
-(
-	const Marine_Body & theModel, 
-	const Standard_Real z
-)
-{
-	Perform(theModel.Sections(), z);
-}
-
-void tnbLib::Marine_WaterDomain_Still::Perform
-(
-	const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
-	const Standard_Real z
-)
-{
-	ChangeZ() = z;
-
-	ChangeWaters() = MarineBase_Tools::StillWaterSections(theModel, z, Domain()->Dim());
-	Change_IsDone() = Standard_True;
 }

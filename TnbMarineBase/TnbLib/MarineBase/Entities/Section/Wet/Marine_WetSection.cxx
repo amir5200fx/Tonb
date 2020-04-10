@@ -2,6 +2,7 @@
 
 #include <Pln_Wire.hxx>
 #include <Marine_WaterCurve.hxx>
+#include <Marine_PlnCurve.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -10,6 +11,7 @@ tnbLib::Marine_WetSection::Marine_WetSection
 	const std::shared_ptr<Pln_Wire>& theWire
 )
 	: Marine_Section(theWire)
+	, IsDeep_(Standard_False)
 {
 }
 
@@ -19,6 +21,7 @@ tnbLib::Marine_WetSection::Marine_WetSection
 	const std::shared_ptr<Pln_Wire>& theWire
 )
 	: Marine_Section(theIndex, theWire)
+	, IsDeep_(Standard_False)
 {
 }
 
@@ -29,6 +32,7 @@ tnbLib::Marine_WetSection::Marine_WetSection
 	const std::shared_ptr<Pln_Wire>& theWire
 )
 	: Marine_Section(theIndex, theName, theWire)
+	, IsDeep_(Standard_False)
 {
 }
 
@@ -56,9 +60,15 @@ void tnbLib::Marine_WetSection::RetrieveCurvesOnWaterTo
 	for (const auto& x : Wire()->RetrieveCurves())
 	{
 		Debug_Null_Pointer(x);
-		if (x->IsOnWater())
+		if (x->IsMarine())
 		{
-			theCurves.push_back(x);
+			auto mCurve = std::dynamic_pointer_cast<Marine_PlnCurve>(x);
+			Debug_Null_Pointer(mCurve);
+
+			if (mCurve->IsOnWater())
+			{
+				theCurves.push_back(x);
+			}			
 		}
 	}
 }

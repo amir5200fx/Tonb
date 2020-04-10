@@ -13,6 +13,9 @@ namespace tnbLib
 
 		/*private Data*/
 
+		std::shared_ptr<Marine_CmpSection> theWater_;
+		std::shared_ptr<Marine_CmpSection> theMid_;
+
 	public:
 
 		Marine_WettedBody();
@@ -31,6 +34,26 @@ namespace tnbLib
 		Standard_Boolean IsWetted() const override
 		{
 			return Standard_True;
+		}
+
+		auto& ChangeWater()
+		{
+			return theWater_;
+		}
+
+		auto& ChangeMid()
+		{
+			return theMid_;
+		}
+
+		const auto& WL() const
+		{
+			return theWater_;
+		}
+
+		const auto& Mid() const
+		{
+			return theMid_;
 		}
 	};
 }

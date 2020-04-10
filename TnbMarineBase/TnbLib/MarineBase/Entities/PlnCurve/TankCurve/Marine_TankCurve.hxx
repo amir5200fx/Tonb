@@ -1,34 +1,34 @@
 #pragma once
-#ifndef _Marine_WaterCurve_Header
-#define _Marine_WaterCurve_Header
+#ifndef _Marine_TankCurve_Header
+#define _Marine_TankCurve_Header
 
-#include <Pln_Curve.hxx>
+#include <Marine_PlnCurve.hxx>
 
 namespace tnbLib
 {
 
-	class Marine_WaterCurve
-		: public Pln_Curve
+	class Marine_TankCurve
+		: public Marine_PlnCurve
 	{
 
 		/*Private Data*/
 
 	public:
 
-		Marine_WaterCurve();
+		Marine_TankCurve();
 
-		Marine_WaterCurve
+		Marine_TankCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_WaterCurve
+		Marine_TankCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_WaterCurve
+		Marine_TankCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -36,7 +36,7 @@ namespace tnbLib
 		);
 
 
-		Standard_Boolean IsOnWater() const override
+		Standard_Boolean IsOnTank() const override
 		{
 			return Standard_True;
 		}
@@ -75,8 +75,7 @@ namespace tnbLib
 			(
 				const Cad2d_IntsctEntity_TangSegment& x
 			) const override;
-
 	};
 }
 
-#endif // !_Marine_WaterCurve_Header
+#endif // !_Marine_TankCurve_Header
