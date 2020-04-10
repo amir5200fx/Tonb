@@ -2,13 +2,13 @@
 #ifndef _Marine_DryBody_Header
 #define _Marine_DryBody_Header
 
-#include <Marine_Body.hxx>
+#include <Marine_HullBody.hxx>
 
 namespace tnbLib
 {
 
 	class Marine_DryBody
-		: public Marine_Body
+		: public Marine_HullBody
 	{
 
 		/*Private Data*/

@@ -1,6 +1,6 @@
 #include <Marine_FlatWave.hxx>
 
-#include <Cad2d_GeoSketch_LineSegment.hxx>
+#include <GeoSketch2d_Segment.hxx>
 #include <Pln_Tools.hxx>
 
 tnbLib::Dir3d 
@@ -16,7 +16,7 @@ void tnbLib::Marine_FlatWave::MakeProfileCurve
 )
 {
 	auto sketch =
-		std::make_shared<Cad2d_GeoSketch_LineSegment>(x0, x1);
+		std::make_shared<GeoSketch2d_Segment>(x0, x1);
 	Debug_Null_Pointer(sketch);
 
 	ChangeCurveGeometry() = Pln_Tools::ConvertToBSpline(sketch->Geometry());

@@ -5,13 +5,14 @@
 #include <Marine_Model.hxx>
 
 #include <vector>
-#include <map>
 
 namespace tnbLib
 {
 
 	// Forward Declarations
-	class Marine_CmpSection;
+	class Marine_VesselTank;
+	class Marine_VesselSail;
+	class Marine_VesselHull;
 
 	class Marine_VesselModel
 		: public Marine_Model
@@ -19,31 +20,70 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::map<Standard_Integer, std::shared_ptr<Marine_CmpSection>>
-			theSections_;
+		std::shared_ptr<Marine_VesselHull> theHull_;
+		std::shared_ptr<Marine_VesselSail> theSail_;
+
+		std::vector<std::shared_ptr<Marine_VesselTank>> theTanks_;
 
 	public:
 
-		Marine_VesselModel()
-		{}
+		Marine_VesselModel();
 
-		Standard_Integer NbSections() const;
+		Marine_VesselModel
+		(
+			const Standard_Integer theIndex
+		);
 
-		const auto& Sections() const
-		{
-			return theSections_;
-		}
-
-		std::vector<std::shared_ptr<Marine_CmpSection>>
-			SortedSections() const;
-
-		void ImportSection(const Standard_Integer theIndex, const std::shared_ptr<Marine_CmpSection>& theSection);
-
-		void RemoveSection(const Standard_Integer theIndex);
+		Marine_VesselModel
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		);
 
 		Standard_Boolean IsVessel() const override
 		{
 			return Standard_True;
+		}
+
+		auto NbTanks() const
+		{
+			return (Standard_Integer)theTanks_.size();
+		}
+
+		const auto& Hull() const
+		{
+			return theHull_;
+		}
+
+		const auto& Sail() const
+		{
+			return theSail_;
+		}
+
+		const auto& Tanks() const
+		{
+			return theTanks_;
+		}
+
+		auto& ChangeTanks()
+		{
+			return theTanks_;
+		}
+
+		void SetHull
+		(
+			const std::shared_ptr<Marine_VesselHull>& theHull
+		)
+		{
+			theHull_ = theHull;
+		}
+
+		void SetSail
+		(
+			const std::shared_ptr<Marine_VesselSail>& theSail
+		)
+		{
+			theSail_ = theSail;
 		}
 	};
 }

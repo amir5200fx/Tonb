@@ -3,6 +3,7 @@
 #define _Marine_Body_Header
 
 #include <Marine_Entity.hxx>
+#include <Marine_BaseLine.hxx>
 
 #include <vector>
 
@@ -21,8 +22,14 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Marine_CmpSection>> 
 			theSections_;
 
+		Marine_BaseLine theBase_;
+
 	protected:
 
+		
+
+	public:
+	
 		Marine_Body();
 
 		Marine_Body
@@ -32,12 +39,9 @@ namespace tnbLib
 
 		Marine_Body
 		(
-			const Standard_Integer theIndex, 
+			const Standard_Integer theIndex,
 			const word& theName
 		);
-
-	public:
-	
 
 		Standard_Integer NbSections() const;
 
@@ -51,6 +55,16 @@ namespace tnbLib
 			return theSections_;
 		}
 
+		const auto& BaseLine() const
+		{
+			return theBase_;
+		}
+
+		void SetBaseLine(const gp_Ax1& theAx)
+		{
+			theBase_.BaseLine() = theAx;
+		}
+
 		virtual Standard_Boolean IsWetted() const
 		{
 			return Standard_False;
@@ -60,6 +74,9 @@ namespace tnbLib
 		{
 			return Standard_False;
 		}
+
+		virtual std::shared_ptr<Marine_Body>
+			Copy() const;
 	};
 }
 

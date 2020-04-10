@@ -68,6 +68,16 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual Standard_Boolean IsWaterLine() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsWaterSection() const
+		{
+			return Standard_False;
+		}
+
 		virtual std::shared_ptr<Marine_Section> Copy() const;
 
 		//- static functions
@@ -77,6 +87,8 @@ namespace tnbLib
 			(
 				const std::shared_ptr<Marine_Section>& theSection
 			);
+
+
 	};
 }
 

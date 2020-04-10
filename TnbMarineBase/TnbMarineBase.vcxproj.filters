@@ -61,9 +61,6 @@
     <Filter Include="TnbLib\MarineBase\Wave\Irregular">
       <UniqueIdentifier>{8d2da7fc-3cde-4d84-b0c3-8c644c89c433}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Origin">
-      <UniqueIdentifier>{b6e2349a-48f8-4a51-b8bc-08f75c438cf8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Sections">
       <UniqueIdentifier>{e5412129-2fa3-435e-9cbd-af7b9cc5814c}</UniqueIdentifier>
     </Filter>
@@ -82,23 +79,11 @@
     <Filter Include="TnbLib\MarineBase\Tools">
       <UniqueIdentifier>{ba1146f2-9cd5-49a8-ab2e-735378083e3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Entities\Model">
-      <UniqueIdentifier>{5373a553-47d4-4604-954c-c2ddf21ac369}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel">
-      <UniqueIdentifier>{9a570755-3a2b-4d1c-8edf-405817877cee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\SectionDistribution">
       <UniqueIdentifier>{6bde198b-1703-441b-90ff-1fa116318894}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform">
       <UniqueIdentifier>{7ae89498-0d0b-4df1-94ab-eb3692d53ba0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\ModelMaker">
-      <UniqueIdentifier>{82464829-280b-4a7f-9943-8b3d9a311f12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\ModelMaker\Shape">
-      <UniqueIdentifier>{d77047bb-f1f1-4251-aa90-9030139dd302}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\MarineBase\Parameter">
       <UniqueIdentifier>{b4e53e97-8b94-41e5-ab0c-77f89661bce1}</UniqueIdentifier>
@@ -217,12 +202,6 @@
     <Filter Include="TnbLib\MarineBase\Boundary">
       <UniqueIdentifier>{e842ca9d-849d-485a-b0b3-3f7dbced2b8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\CrossSection">
-      <UniqueIdentifier>{d027146f-34a0-4bdc-a88c-17f397cfa693}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\CrossSection\Station">
-      <UniqueIdentifier>{b3dd463e-ff02-4f3d-b2be-847b2328b857}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Physics">
       <UniqueIdentifier>{c71cfd75-7e73-4b09-8c65-05d1a025f5bc}</UniqueIdentifier>
     </Filter>
@@ -249,18 +228,6 @@
     </Filter>
     <Filter Include="TnbLib\MarineBase\Launch">
       <UniqueIdentifier>{616e4d6c-4c86-467e-9476-dab3f9b97db4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Section">
-      <UniqueIdentifier>{02aba16b-d59d-4f16-b20f-1795a15f3b5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Section\Wet">
-      <UniqueIdentifier>{7328ad46-fb2b-4e7c-8492-13259aeda4f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Section\Dry">
-      <UniqueIdentifier>{48328d07-f092-472c-bddc-249a3eafee65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Launch\Info">
-      <UniqueIdentifier>{1b7e0bd2-c0b3-441b-b50b-b7fcac49cccd}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\Curve">
       <UniqueIdentifier>{41bef568-a3af-40b7-890f-14088b22275f}</UniqueIdentifier>
@@ -304,9 +271,6 @@
     <Filter Include="TnbLib\MarineBase\Graph\Entities\Axis\y">
       <UniqueIdentifier>{c0fd9740-c069-4dc4-96ff-aaf5b68aff9a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Distributor">
-      <UniqueIdentifier>{98196051-ad54-4fe9-b875-9e8aaf1a1fa4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\WaterDomain">
       <UniqueIdentifier>{16f554ba-1bd9-4e10-8e48-acd8412c35bc}</UniqueIdentifier>
     </Filter>
@@ -339,6 +303,186 @@
     </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\Body\Hull">
       <UniqueIdentifier>{088c36a2-be75-409e-84a6-5c12c213af02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\System">
+      <UniqueIdentifier>{f88de87e-d47d-412c-b1ec-486e6bbd9bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\PlnCurve">
+      <UniqueIdentifier>{c693b3a3-e77f-4b07-9014-309c491de67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\PlnCurve\SailCurve">
+      <UniqueIdentifier>{47691aae-cba6-4bef-9afb-7aed7c6ce197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\PlnCurve\TankCurve">
+      <UniqueIdentifier>{0f3b9ae5-00e0-4d6c-b0de-b0b17db2c0c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\PlnCurve\WaterCurve">
+      <UniqueIdentifier>{f9dd7c4f-f37d-4791-a182-d310e8ba14c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve">
+      <UniqueIdentifier>{cfb814f0-5afd-4681-9536-087178fd2817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Dry">
+      <UniqueIdentifier>{3b3168f7-f020-40f8-80dc-526c0378edd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Wetted">
+      <UniqueIdentifier>{70ce3702-1466-42e5-b37a-cb6f5ed73d6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\WaterPlane">
+      <UniqueIdentifier>{5c1d8398-449d-4a55-b5c1-622d46aeebd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\BaseLine">
+      <UniqueIdentifier>{99941d7c-f7be-4f41-b641-8fa83c9f7742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Origin">
+      <UniqueIdentifier>{215644da-59ed-4d51-b96d-68aecfd66ff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Distribution">
+      <UniqueIdentifier>{2d27677b-ed05-4824-a657-e09578302350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Distribution\Uniform">
+      <UniqueIdentifier>{7a0026be-146c-4aca-872c-4b638eafefa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\WLVolume">
+      <UniqueIdentifier>{b3f1d63b-caec-46dd-9abb-df93703459d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Launch\WLV">
+      <UniqueIdentifier>{e0967fcf-75b2-4d12-b338-6352390ce34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Launch\DCV">
+      <UniqueIdentifier>{9533edae-45fe-42e8-82ab-8b7efabe7053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Launch\FBWL">
+      <UniqueIdentifier>{60e4c50d-bb36-4d48-b137-81b4bfca82d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\FreeBoard">
+      <UniqueIdentifier>{f8ec2eb6-5280-4d4f-b379-92f47989ae52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Launch\THWL">
+      <UniqueIdentifier>{56bba41f-b28f-4f42-9907-6663d0dff5fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Rotate">
+      <UniqueIdentifier>{69883273-b802-4ff3-9fca-b9476a0a9503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs">
+      <UniqueIdentifier>{b1620c3f-7792-40ac-bf82-26087593587c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\LCF">
+      <UniqueIdentifier>{e5cb16ac-ac4f-46af-b821-e5727c8a263a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\Volume">
+      <UniqueIdentifier>{449f13a5-fb87-4cd6-96bf-80b851e32773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\LCB">
+      <UniqueIdentifier>{5cc13b0a-2d17-4413-86f1-361cadaf03f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\KM">
+      <UniqueIdentifier>{e65ff55b-c0bd-4b20-bb8a-2f1907d12d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\KML">
+      <UniqueIdentifier>{7a073c2d-8363-4c7e-bdb8-47f434c2df2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\KB">
+      <UniqueIdentifier>{0ada96a9-079f-41f2-9dea-12a67ac7c5a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\MCT">
+      <UniqueIdentifier>{ea096705-9175-4610-ae28-9f2125f8d96c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\AW">
+      <UniqueIdentifier>{84a6b965-46cd-4044-b40c-b100f82fcccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\DispSW">
+      <UniqueIdentifier>{0b6900a8-cb73-4030-8b2d-9b830f0dfc83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Graphs\DispFW">
+      <UniqueIdentifier>{44f62b36-14e7-401e-acb0-a2dbe069d551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Section\WL">
+      <UniqueIdentifier>{e5862f80-c9ac-4523-8bfd-cf05fcda1c12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\CmptLib">
+      <UniqueIdentifier>{c21cb673-eb1e-40d1-ba26-dfe33656c8ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\PortLib">
+      <UniqueIdentifier>{054a827f-de9a-4b49-8a41-9790a05f17d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Section\Water">
+      <UniqueIdentifier>{c2d28120-80c4-45a8-bbf0-494fff8c2c55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\CG">
+      <UniqueIdentifier>{0bcf3eb8-470b-420d-b505-a2d4afff7c86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\CG\LCG">
+      <UniqueIdentifier>{d9b4325b-6a0f-4968-8b99-576e6ecaf216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\CG\VCG">
+      <UniqueIdentifier>{66d0cb94-05c3-4749-b6e5-a097d88f8cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\CG\TCG">
+      <UniqueIdentifier>{fa2d195a-cd93-435b-949a-8052aeb623b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\CG\Component">
+      <UniqueIdentifier>{6f4367ac-032c-4e9d-b1ea-56131f4993b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\CmpSection\xSect">
+      <UniqueIdentifier>{77010d03-14cf-455c-a283-3cf5b50ce67e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\CmpSection\zSect">
+      <UniqueIdentifier>{e33ce6a4-234a-44e2-8c3c-f59879276dd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\WaterLib">
+      <UniqueIdentifier>{e8a86604-3e69-4f69-aaba-04a1d4c103a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\WireFrame">
+      <UniqueIdentifier>{5cbb4036-e19b-4ea4-9f33-7e90bc238c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\WaterDomains">
+      <UniqueIdentifier>{043539be-c0f5-4f53-a953-24f9f5eb5132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\DisctLib">
+      <UniqueIdentifier>{a0fce3d8-88e0-40ab-9f82-b01abc1105f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model">
+      <UniqueIdentifier>{ae999441-1a93-48e3-be26-f39043ceef93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel">
+      <UniqueIdentifier>{9c7abb2e-a669-4244-bc6e-910b44983d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities">
+      <UniqueIdentifier>{5f80175c-4e60-4443-bf11-774cc7257b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Hull">
+      <UniqueIdentifier>{99d70861-f75c-441b-bb1f-a9c519bd28a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Tank">
+      <UniqueIdentifier>{3b80427f-4b57-4ee9-affc-947613744d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Sail">
+      <UniqueIdentifier>{96bcb828-8634-4af7-b79b-fb98a85d5f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Entity">
+      <UniqueIdentifier>{142974f5-a6dd-426c-b0c2-b3c13eb8c3e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Dim">
+      <UniqueIdentifier>{97ca07b6-6e05-42cb-9cd6-26afdf84101c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\BM">
+      <UniqueIdentifier>{716d387a-13fc-464b-a24e-0b55073f0db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\BML">
+      <UniqueIdentifier>{3e52d30c-de56-4de8-91ea-018f116953b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\MCT">
+      <UniqueIdentifier>{b524f31d-781c-481a-a2bb-10f0af347a05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\BasicDim">
+      <UniqueIdentifier>{fd73c2dd-ba20-45a2-92da-510f6ad7ec06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\KG">
+      <UniqueIdentifier>{8015fdd8-b2c8-4dcf-9c5b-4dae0e0ddc54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\GM">
+      <UniqueIdentifier>{924b4bad-6208-4911-87c6-9ddb2d5151c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -381,9 +525,6 @@
     <ClInclude Include="TnbLib\MarineBase\Wave\Flat\Marine_FlatWave.hxx">
       <Filter>TnbLib\MarineBase\Wave\Flat</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Origin\Marine_Origin.hxx">
-      <Filter>TnbLib\MarineBase\Origin</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\Entity\Marine_Entity.hxx">
       <Filter>TnbLib\MarineBase\Entities\Entity</Filter>
     </ClInclude>
@@ -392,12 +533,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\CmpSection\Marine_CmpSection.hxx">
       <Filter>TnbLib\MarineBase\Entities\CmpSection</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Marine_Model.hxx">
-      <Filter>TnbLib\MarineBase\Entities\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Vessel\Marine_VesselModel.hxx">
-      <Filter>TnbLib\MarineBase\Entities\Model\Vessel</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Tools\MarineBase_Tools.hxx">
       <Filter>TnbLib\MarineBase\Tools</Filter>
@@ -413,12 +548,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform\Marine_SectionDistribution_Uniform.hxx">
       <Filter>TnbLib\MarineBase\Entities\SectionDistribution\Uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\ModelMaker\Marine_ModelMaker.hxx">
-      <Filter>TnbLib\MarineBase\ModelMaker</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\ModelMaker\Shape\Marine_ModelMaker_Shape.hxx">
-      <Filter>TnbLib\MarineBase\ModelMaker\Shape</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Parameter\Marine_VesselParam.hxx">
       <Filter>TnbLib\MarineBase\Parameter</Filter>
@@ -543,12 +672,6 @@
     <ClInclude Include="TnbLib\MarineBase\Boundary\Marine_Boundary.hxx">
       <Filter>TnbLib\MarineBase\Boundary</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\CrossSection\Marine_CrossSection.hxx">
-      <Filter>TnbLib\MarineBase\CrossSection</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\CrossSection\Station\CrossSection_xShapeStation.hxx">
-      <Filter>TnbLib\MarineBase\CrossSection\Station</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Physics\Marine_Physics.hxx">
       <Filter>TnbLib\MarineBase\Physics</Filter>
     </ClInclude>
@@ -572,15 +695,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\PhysicsModel\Marine_PhysicsModel.hxx">
       <Filter>TnbLib\MarineBase\PhysicsModel</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Launch\Marine_Launch.hxx">
-      <Filter>TnbLib\MarineBase\Launch</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Launch\Info\Marine_Launch_Info.hxx">
-      <Filter>TnbLib\MarineBase\Launch\Info</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_WaterCurve.hxx">
-      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\Body\Marine_Body.hxx">
       <Filter>TnbLib\MarineBase\Entities\Body</Filter>
@@ -615,9 +729,6 @@
     <ClInclude Include="TnbLib\MarineBase\Graph\Marine_Graph.hxx">
       <Filter>TnbLib\MarineBase\Graph</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Distributor\Marine_xDistributor.hxx">
-      <Filter>TnbLib\MarineBase\Distributor</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\WaterDomain\Marine_WaterDomain.hxx">
       <Filter>TnbLib\MarineBase\Entities\WaterDomain</Filter>
     </ClInclude>
@@ -626,12 +737,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\Domain\Marine_Domain.hxx">
       <Filter>TnbLib\MarineBase\Entities\Domain</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\WaterSurface\Marine_WaterSurface.hxx">
-      <Filter>TnbLib\MarineBase\Entities\WaterSurface</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\WaterSection\Marine_WaterSection.hxx">
-      <Filter>TnbLib\MarineBase\Entities\WaterSection</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\Section\Wet\Marine_WetSection.hxx">
       <Filter>TnbLib\MarineBase\Entities\Section\Wet</Filter>
@@ -647,6 +752,150 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\Body\Hull\Marine_HullBody.hxx">
       <Filter>TnbLib\MarineBase\Entities\Body\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\System\Marine_System.hxx">
+      <Filter>TnbLib\MarineBase\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\PlnCurve\Marine_PlnCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\PlnCurve\WaterCurve\Marine_WaterCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\WaterCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\PlnCurve\TankCurve\Marine_TankCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\TankCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\PlnCurve\SailCurve\Marine_SailCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\SailCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Marine_HullCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\HullCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Wetted\Marine_WettedCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Wetted</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Dry\Marine_DryCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Dry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\BaseLine\Marine_BaseLine.hxx">
+      <Filter>TnbLib\MarineBase\Entities\BaseLine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Origin\Marine_Origin.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Origin</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Distribution\Marine_Distrb.hxx">
+      <Filter>TnbLib\MarineBase\Distribution</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Distribution\Uniform\Marine_UniDistrb.hxx">
+      <Filter>TnbLib\MarineBase\Distribution\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\WLVolume\Marine_WLVolume.hxx">
+      <Filter>TnbLib\MarineBase\WLVolume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Launch\DCV\Marine_DcvLaunch.hxx">
+      <Filter>TnbLib\MarineBase\Launch\DCV</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Launch\WLV\Marine_WlvLaunch.hxx">
+      <Filter>TnbLib\MarineBase\Launch\WLV</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Launch\Marine_Launch.hxx">
+      <Filter>TnbLib\MarineBase\Launch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Launch\FBWL\Marine_FbWlLaunch.hxx">
+      <Filter>TnbLib\MarineBase\Launch\FBWL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\FreeBoard\Marine_FreeBoard.hxx">
+      <Filter>TnbLib\MarineBase\Entities\FreeBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Launch\THWL\Marine_THWlLaunch.hxx">
+      <Filter>TnbLib\MarineBase\Launch\THWL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Rotate\Marine_Rotate.hxx">
+      <Filter>TnbLib\MarineBase\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Graphs\Marine_HsGraph.hxx">
+      <Filter>TnbLib\MarineBase\Graphs</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Section\WL\Marine_WlSection.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Section\WL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\CmptLib\Marine_CmptLib.hxx">
+      <Filter>TnbLib\MarineBase\CmptLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\PortLib\Marine_PortLib.hxx">
+      <Filter>TnbLib\MarineBase\PortLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Section\Water\Marine_WaterSection.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Section\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\CG\Marine_CG.hxx">
+      <Filter>TnbLib\MarineBase\Entities\CG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\CG\LCG\Marine_LCG.hxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\LCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\CG\Component\Marine_CGCompt.hxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\CG\TCG\Marine_TCG.hxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\TCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\CG\VCG\Marine_VCG.hxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\VCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\CmpSection\xSect\Marine_xCmpSection.hxx">
+      <Filter>TnbLib\MarineBase\Entities\CmpSection\xSect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\CmpSection\zSect\Marine_zCmpSection.hxx">
+      <Filter>TnbLib\MarineBase\Entities\CmpSection\zSect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\WaterLib\Marine_WaterLib.hxx">
+      <Filter>TnbLib\MarineBase\WaterLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\WireFrame\Marine_WireFrameModel.hxx">
+      <Filter>TnbLib\MarineBase\Entities\WireFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\WaterDomains\Marine_WaterDomains.hxx">
+      <Filter>TnbLib\MarineBase\Entities\WaterDomains</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\DisctLib\Marine_DisctLib.hxx">
+      <Filter>TnbLib\MarineBase\DisctLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Marine_Model.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Vessel\Marine_VesselModel.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Entity\Marine_VesselEntity.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Hull\Marine_VesselHull.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Sail\Marine_VesselSail.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Tank\Marine_VesselTank.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\BM\Marine_VesselParam_BM.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\BM</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\BML\Marine_VesselParam_BML.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\BML</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\MCT\Marine_VesselParam_MCT.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\MCT</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\BasicDim\Marine_BasicDim.hxx">
+      <Filter>TnbLib\MarineBase\BasicDim</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\KG\Marine_VesselParam_KG.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\KG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\GM\Marine_VesselParam_GM.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\GM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -686,14 +935,8 @@
     <ClCompile Include="TnbLib\MarineBase\Wave\Flat\Marine_FlatWave.cxx">
       <Filter>TnbLib\MarineBase\Wave\Flat</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Origin\Marine_Origin.cxx">
-      <Filter>TnbLib\MarineBase\Origin</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Section\Marine_Section.cxx">
       <Filter>TnbLib\MarineBase\Entities\Section</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Vessel\Marine_VesselModel.cxx">
-      <Filter>TnbLib\MarineBase\Entities\Model\Vessel</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Tools\MarineBase_Tools.cxx">
       <Filter>TnbLib\MarineBase\Tools</Filter>
@@ -707,14 +950,8 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\SectionDistribution\Uniform\Marine_SectionDistribution_Uniform.cxx">
       <Filter>TnbLib\MarineBase\Entities\SectionDistribution\Uniform</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\ModelMaker\Shape\Marine_ModelMaker_Shape.cxx">
-      <Filter>TnbLib\MarineBase\ModelMaker\Shape</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\CmpSection\Marine_CmpSection.cxx">
       <Filter>TnbLib\MarineBase\Entities\CmpSection</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Model\Marine_Model.cxx">
-      <Filter>TnbLib\MarineBase\Entities\Model</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Region\Marine_Region.cxx">
       <Filter>TnbLib\MarineBase\Region</Filter>
@@ -722,23 +959,8 @@
     <ClCompile Include="TnbLib\MarineBase\Boundary\Marine_Boundary.cxx">
       <Filter>TnbLib\MarineBase\Boundary</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\CrossSection\Marine_CrossSection.cxx">
-      <Filter>TnbLib\MarineBase\CrossSection</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\CrossSection\Station\CrossSection_xShapeStation.cxx">
-      <Filter>TnbLib\MarineBase\CrossSection\Station</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Physics\Marine_Physics.cxx">
       <Filter>TnbLib\MarineBase\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Launch\Marine_Launch.cxx">
-      <Filter>TnbLib\MarineBase\Launch</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Launch\Info\Marine_Launch_Info.cxx">
-      <Filter>TnbLib\MarineBase\Launch\Info</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Marine_WaterCurve.cxx">
-      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Body\Marine_Body.cxx">
       <Filter>TnbLib\MarineBase\Entities\Body</Filter>
@@ -779,17 +1001,134 @@
     <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Title\Marine_GraphTitle.cxx">
       <Filter>TnbLib\MarineBase\Graph\Entities\Title</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Entities\WaterSurface\Marine_WaterSurface.cxx">
-      <Filter>TnbLib\MarineBase\Entities\WaterSurface</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Entities\WaterSection\Marine_WaterSection.cxx">
-      <Filter>TnbLib\MarineBase\Entities\WaterSection</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Section\Wet\Marine_WetSection.cxx">
       <Filter>TnbLib\MarineBase\Entities\Section\Wet</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Section\Dry\Marine_DrySection.cxx">
       <Filter>TnbLib\MarineBase\Entities\Section\Dry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\System\Marine_System.cxx">
+      <Filter>TnbLib\MarineBase\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\PlnCurve\WaterCurve\Marine_WaterCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\WaterCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\PlnCurve\TankCurve\Marine_TankCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\TankCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\PlnCurve\SailCurve\Marine_SailCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\SailCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\PlnCurve\Marine_PlnCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Marine_HullCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\HullCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Wetted\Marine_WettedCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\PlnCurve\HullCurve\Wetted</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Body\Hull\Marine_HullBody.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Body\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\BaseLine\Marine_BaseLine.cxx">
+      <Filter>TnbLib\MarineBase\Entities\BaseLine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Origin\Marine_Origin.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Origin</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\WLVolume\Marine_WLVolume.cxx">
+      <Filter>TnbLib\MarineBase\WLVolume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Launch\WLV\Marine_WlvLaunch.cxx">
+      <Filter>TnbLib\MarineBase\Launch\WLV</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Launch\DCV\Marine_DcvLaunch.cxx">
+      <Filter>TnbLib\MarineBase\Launch\DCV</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Launch\FBWL\Marine_FbWlLaunch.cxx">
+      <Filter>TnbLib\MarineBase\Launch\FBWL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Launch\THWL\Marine_THWlLaunch.cxx">
+      <Filter>TnbLib\MarineBase\Launch\THWL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Launch\Marine_Launch.cxx">
+      <Filter>TnbLib\MarineBase\Launch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Section\WL\Marine_WlSection.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Section\WL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\CmptLib\Marine_CmptLib.cxx">
+      <Filter>TnbLib\MarineBase\CmptLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\PortLib\Marine_PortLib.cxx">
+      <Filter>TnbLib\MarineBase\PortLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Section\Water\Marine_WaterSection.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Section\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CG\Component\Marine_CGCompt.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CG\LCG\Marine_LCG.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\LCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CG\TCG\Marine_TCG.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\TCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CG\VCG\Marine_VCG.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CG\VCG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CG\Marine_CG.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CG</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CmpSection\xSect\Marine_xCmpSection.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CmpSection\xSect</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\CmpSection\zSect\Marine_zCmpSection.cxx">
+      <Filter>TnbLib\MarineBase\Entities\CmpSection\zSect</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\WaterLib\Marine_WaterLib.cxx">
+      <Filter>TnbLib\MarineBase\WaterLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\WireFrame\Marine_WireFrameModel.cxx">
+      <Filter>TnbLib\MarineBase\Entities\WireFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\WaterDomains\Marine_WaterDomains.cxx">
+      <Filter>TnbLib\MarineBase\Entities\WaterDomains</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Distribution\Marine_Distrb.cxx">
+      <Filter>TnbLib\MarineBase\Distribution</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Distribution\Uniform\Marine_UniDistrb.cxx">
+      <Filter>TnbLib\MarineBase\Distribution\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\DisctLib\Marine_DisctLib.cxx">
+      <Filter>TnbLib\MarineBase\DisctLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Entity\Marine_VesselEntity.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Hull\Marine_VesselHull.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Sail\Marine_VesselSail.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Vessel\Entities\Tank\Marine_VesselTank.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel\Entities\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Vessel\Marine_VesselModel.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Vessel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Marine_Model.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\BasicDim\Marine_BasicDim.cxx">
+      <Filter>TnbLib\MarineBase\BasicDim</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Parameter\Marine_VesselParams.cxx">
+      <Filter>TnbLib\MarineBase\Parameter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

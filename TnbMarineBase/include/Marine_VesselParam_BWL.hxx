@@ -10,7 +10,7 @@ namespace tnbLib
 	namespace marineLib
 	{
 
-		MARINE_VESSELPARAM(BWL, "breadth waterline", dimLength)
+		MARINE_VESSELPARAM(BWL, "waterline breadth", dimLength)
 	}
 }
 
