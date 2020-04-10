@@ -143,7 +143,7 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		virtual Standard_Boolean IsOnWater() const
+		virtual Standard_Boolean IsMarine() const
 		{
 			return Standard_False;
 		}
@@ -207,6 +207,8 @@ namespace tnbLib
 				const Standard_Real MajorRadius,
 				const Standard_Real MinorRadius
 			);
+
+		static Standard_Boolean IsValid(const std::shared_ptr<Pln_Curve>& theCurve, const Standard_Real theTol);
 
 		//- Macros
 

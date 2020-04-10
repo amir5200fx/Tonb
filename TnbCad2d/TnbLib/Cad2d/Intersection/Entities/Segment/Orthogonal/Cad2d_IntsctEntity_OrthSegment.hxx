@@ -8,6 +8,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Pln_Curve;
+
 	class Cad2d_IntsctEntity_OrthSegment
 		: public Cad2d_IntsctEntity_Segment
 	{
@@ -36,6 +39,14 @@ namespace tnbLib
 		{
 			return theParameter_;
 		}
+
+		static std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
+			SubdivideCurve
+			(
+				const Pln_Curve& theCurve, 
+				const Cad2d_IntsctEntity_OrthSegment& theEntity
+			);
+
 
 		//- Macros
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Parameter)

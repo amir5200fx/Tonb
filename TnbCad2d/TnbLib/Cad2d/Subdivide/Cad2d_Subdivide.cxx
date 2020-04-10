@@ -49,147 +49,6 @@ namespace tnbLib
 	namespace subdivide
 	{
 
-		static Standard_Boolean 
-			CompareEntities
-			(
-				const std::shared_ptr<Cad2d_IntsctEntity_Segment>& theEntity0, 
-				const std::shared_ptr<Cad2d_IntsctEntity_Segment>& theEntity1
-			)
-		{
-			Debug_Null_Pointer(theEntity0);
-			Debug_Null_Pointer(theEntity1);
-
-			return theEntity0->CharParameter() < theEntity1->CharParameter();
-		}
-
-		static void 
-			SortEntities
-			(
-				std::vector<std::shared_ptr<Cad2d_IntsctEntity_Segment>>& theEntities
-			)
-		{
-			std::sort(theEntities.begin(), theEntities.end(), &CompareEntities);
-		}
-
-		static std::tuple
-			<
-			std::shared_ptr<Pln_Curve>,
-			std::shared_ptr<Pln_Curve>
-			>
-			SubdivideCurve
-			(
-				const Pln_Curve& theCurve,
-				const Standard_Real x
-			)
-		{
-			if (NOT INSIDE(x, theCurve.FirstParameter(), theCurve.LastParameter()))
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "invalid parameter to subdivide the curve" << endl
-					<< abort(FatalError);
-			}
-
-			return theCurve.Split(x);
-		}
-
-		static std::tuple
-			<
-			std::shared_ptr<Pln_Curve>, 
-			std::shared_ptr<Pln_Curve>, 
-			std::shared_ptr<Pln_Curve>
-			>
-			SubdivideCurve
-			(
-				const Pln_Curve& theCurve,
-				const Cad2d_IntsctEntity_TangSegment& x
-			)
-		{
-			return theCurve.Split(x);
-		}
-
-		static Standard_Boolean
-			IsValidCurve
-			(
-				const std::shared_ptr<Pln_Curve>& theCurve,
-				const Standard_Real theTol
-			)
-		{
-			auto info = std::make_shared<NumAlg_AdaptiveInteg_Info>();
-			Debug_Null_Pointer(info);
-
-			info->SetTolerance(1.0E-6);
-			info->SetNbInitIterations(4);
-
-			Debug_Null_Pointer(theCurve->Geometry());
-			const auto l = Pln_Tools::Length(*theCurve->Geometry(), info);
-
-			if (l <= theTol)
-			{
-				return Standard_False;
-			}
-			return Standard_True;
-		}
-
-		static std::vector<std::shared_ptr<Pln_Curve>>
-			SubdivideEdge
-			(
-				const std::shared_ptr<Pln_Edge>& theEdge,
-				const std::vector<std::shared_ptr<Cad2d_IntsctEntity_Segment>>& theEntities,
-				const Standard_Real theTol
-			)
-		{
-			auto curve = theEdge->Curve();
-
-			std::vector<std::shared_ptr<Pln_Curve>> curves;
-			for (const auto& x : theEntities)
-			{
-				Debug_Null_Pointer(x);
-
-				if (x->IsOrthogonal())
-				{
-					auto orth = std::dynamic_pointer_cast<Cad2d_IntsctEntity_OrthSegment>(x);
-					Debug_Null_Pointer(orth);
-					
-					auto[c0, c1] = SubdivideCurve(*curve, orth->Parameter());
-					
-					Debug_Null_Pointer(c0);
-					Debug_Null_Pointer(c1);
-
-					if (IsValidCurve(c0, theTol))
-					{
-						curves.push_back(c0);
-					}
-
-					curve = c1;
-				}
-				else
-				{
-					auto tang = std::dynamic_pointer_cast<Cad2d_IntsctEntity_TangSegment>(x);
-					Debug_Null_Pointer(tang);
-					
-					auto[c0, c1, c2] = SubdivideCurve(*curve, *tang);
-					
-					Debug_Null_Pointer(c0);
-					Debug_Null_Pointer(c1);
-					Debug_Null_Pointer(c2);
-
-					if (IsValidCurve(c0, theTol))
-					{
-						curves.push_back(c0);
-					}
-
-					if (IsValidCurve(c1, theTol))
-					{
-						curves.push_back(c1);
-					}
-
-					curve = c2;
-				}
-			}
-			curves.push_back(curve);
-			return std::move(curves);
-		}
-
 		/*static std::vector<std::shared_ptr<Pln_Edge>>
 			SubdivideEdge
 			(
@@ -396,9 +255,9 @@ namespace tnbLib
 					Debug_Null_Pointer(iter->second);
 					auto& l = *iter->second;
 
-					SortEntities(l);
+					Cad2d_IntsctEntity_Segment::SortEntities(l);
 
-					auto subEdges = SubdivideEdge(x, l, theTol);
+					auto subEdges = Cad2d_IntsctEntity_Segment::SubdivideEdge(x, l, theTol);
 
 					if (NOT x->Sense())
 					{

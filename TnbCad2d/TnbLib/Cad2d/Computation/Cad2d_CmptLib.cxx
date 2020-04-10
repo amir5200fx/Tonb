@@ -95,6 +95,73 @@ namespace tnbLib
 			Standard_Real Value(const Standard_Real x) const override;
 		};
 
+		class MxIntegrand
+			: public NumAlg_IntegFunc
+		{
+
+			/*Private Data*/
+
+			const Geom2d_Curve& theEntity_;
+
+			Standard_Real theY0_;
+
+		public:
+
+			MxIntegrand
+			(
+				const Geom2d_Curve& theEntity, 
+				const Standard_Real y0
+			)
+				: theEntity_(theEntity)
+				, theY0_(y0)
+			{}
+
+			const auto& Entity() const
+			{
+				return theEntity_;
+			}
+
+			auto Y0() const
+			{
+				return theY0_;
+			}
+
+			Standard_Real Value(const Standard_Real x) const override;
+		};
+
+		class MyIntegrand
+			: public NumAlg_IntegFunc
+		{
+
+			/*Private Data*/
+
+			const Geom2d_Curve& theEntity_;
+
+			Standard_Real theX0_;
+
+		public:
+
+			MyIntegrand
+			(
+				const Geom2d_Curve& theEntity,
+				const Standard_Real x0
+			)
+				: theEntity_(theEntity)
+			{}
+
+			const auto& Entity() const
+			{
+				return theEntity_;
+			}
+
+			auto X0() const
+			{
+				return theX0_;
+			}
+
+			Standard_Real Value(const Standard_Real x) const override;
+		};
+
 		class IxIntegrand
 			: public NumAlg_IntegFunc
 		{
@@ -201,6 +268,36 @@ tnbLib::cmptLib::yCentreIntegrand::Value
 }
 
 Standard_Real 
+tnbLib::cmptLib::MxIntegrand::Value
+(
+	const Standard_Real x
+) const
+{
+	gp_Vec2d der;
+	gp_Pnt2d pt;
+
+	Entity().D1(x, pt, der);
+
+	const auto y = pt.Y() - Y0();
+	return (y)*pt.Y()*der.X();
+}
+
+Standard_Real 
+tnbLib::cmptLib::MyIntegrand::Value
+(
+	const Standard_Real x
+) const
+{
+	gp_Vec2d der;
+	gp_Pnt2d pt;
+
+	Entity().D1(x, pt, der);
+
+	const auto dx = pt.X() - X0();
+	return (dx)*pt.Y()*der.X();
+}
+
+Standard_Real 
 tnbLib::cmptLib::IxIntegrand::Value
 (
 	const Standard_Real x
@@ -247,6 +344,66 @@ tnbLib::Cad2d_CmptLib::AreaUnderCurve
 
 	cmptLib::AreaIntegrand fun(*theCurve, y0);
 	NumAlg_AdaptiveInteg<cmptLib::AreaIntegrand> 
+		integration
+		(
+			fun, theCurve->FirstParameter(),
+			theCurve->LastParameter(),
+			*theInfo
+		);
+
+	integration.Perform();
+	Debug_If_Condition_Message(NOT integration.IsDone(), "the algorithm is not performed!");
+
+	return theInfo->Result();
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::Mx
+(
+	const Handle(Geom2d_Curve)& theCurve, 
+	const Standard_Real y0,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (NOT Pln_Tools::IsBounded(theCurve))
+	{
+		FatalErrorIn("Standard_Real Cad2d_CmptLib::Mx(Args...)")
+			<< "the curve must be bounded!" << endl
+			<< abort(FatalError);
+	}
+
+	cmptLib::MxIntegrand fun(*theCurve, y0);
+	NumAlg_AdaptiveInteg<cmptLib::MxIntegrand>
+		integration
+		(
+			fun, theCurve->FirstParameter(),
+			theCurve->LastParameter(),
+			*theInfo
+		);
+
+	integration.Perform();
+	Debug_If_Condition_Message(NOT integration.IsDone(), "the algorithm is not performed!");
+
+	return theInfo->Result();
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::My
+(
+	const Handle(Geom2d_Curve)& theCurve,
+	const Standard_Real x0,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (NOT Pln_Tools::IsBounded(theCurve))
+	{
+		FatalErrorIn("Standard_Real Cad2d_CmptLib::My(Args...)")
+			<< "the curve must be bounded!" << endl
+			<< abort(FatalError);
+	}
+
+	cmptLib::MyIntegrand fun(*theCurve, x0);
+	NumAlg_AdaptiveInteg<cmptLib::MyIntegrand>
 		integration
 		(
 			fun, theCurve->FirstParameter(),
@@ -440,6 +597,54 @@ tnbLib::Cad2d_CmptLib::Centre
 }
 
 Standard_Real 
+tnbLib::Cad2d_CmptLib::Mx
+(
+	const Pln_Wire & theWire,
+	const Standard_Real y0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+
+	const auto& edges = theWire.Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& geom = x->Curve()->Geometry();
+		auto ix = Mx(geom, y0, theInfo);
+
+		sum += (x->Sense() ? -ix : ix);
+	}
+	return sum / 3.0;
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::My
+(
+	const Pln_Wire & theWire,
+	const Standard_Real x0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+
+	const auto& edges = theWire.Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& geom = x->Curve()->Geometry();
+		auto ix = My(geom, x0, theInfo);
+
+		sum += (x->Sense() ? -ix : ix);
+	}
+	return sum / 3.0;
+}
+
+Standard_Real 
 tnbLib::Cad2d_CmptLib::Ix
 (
 	const Pln_Wire & theWire,
@@ -485,6 +690,102 @@ tnbLib::Cad2d_CmptLib::Iy
 		sum += (x->Sense() ? -ix : ix);
 	}
 	return sum / 3.0;
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::xCentre
+(
+	const Pln_Wire & theWire,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+
+	const auto& edges = theWire.Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& geom = x->Curve()->Geometry();
+
+		auto xb = xCentreProductArea(geom, theInfo);
+		sum += (x->Sense() ? -xb : xb);
+	}
+
+	return sum / Area(theWire, theInfo);
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::yCentre
+(
+	const Pln_Wire & theWire, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+
+	const auto& edges = theWire.Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& geom = x->Curve()->Geometry();
+
+		auto xb = yCentreProductArea(geom, theInfo);
+		sum += (x->Sense() ? -xb : xb);
+	}
+
+	return sum / Area(theWire, theInfo);
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::xCentreProductArea
+(
+	const Pln_Wire & theWire, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+
+	const auto& edges = theWire.Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& geom = x->Curve()->Geometry();
+
+		auto xb = xCentreProductArea(geom, theInfo);
+		sum += (x->Sense() ? -xb : xb);
+	}
+
+	return sum;
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::yCentreProductArea
+(
+	const Pln_Wire & theWire, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Standard_Real sum = 0;
+
+	const auto& edges = theWire.Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Curve());
+
+		const auto& geom = x->Curve()->Geometry();
+
+		auto xb = yCentreProductArea(geom, theInfo);
+		sum += (x->Sense() ? -xb : xb);
+	}
+
+	return sum;
 }
 
 //Standard_Real 

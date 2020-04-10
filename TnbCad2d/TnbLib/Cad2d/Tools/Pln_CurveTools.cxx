@@ -1,5 +1,6 @@
 #include <Pln_CurveTools.hxx>
 
+#include <Vec2d.hxx>
 #include <Pln_Tools.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <TecPlot.hxx>
@@ -11,8 +12,78 @@
 #include <Geom2d_Circle.hxx>
 #include <Geom2d_BoundedCurve.hxx>
 #include <Geom2d_TrimmedCurve.hxx>
+#include <Geom2d_BSplineCurve.hxx>
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
 #include <Geom2dAPI_InterCurveCurve.hxx>
+#include <Geom2dAPI_Interpolate.hxx>
+#include <TColgp_HArray1OfPnt2d.hxx>
+
+Handle(Geom2d_Curve) 
+tnbLib::Pln_CurveTools::Interpolation
+(
+	const std::vector<Pnt2d>& theQ, 
+	const Standard_Boolean thePeriodic,
+	const Standard_Real theTol
+)
+{
+	if (theQ.size() < 2)
+	{
+		FatalErrorIn("void Perform()")
+			<< "Not enough offset points to interpolate" << endl
+			<< abort(FatalError);
+	}
+
+	Handle(TColgp_HArray1OfPnt2d) Q = new TColgp_HArray1OfPnt2d(1, theQ.size());
+	Standard_Integer K = 0;
+	for (const auto& x : theQ)
+	{
+		Q->SetValue(K + 1, x);
+
+		++K;
+	}
+
+	Geom2dAPI_Interpolate interp(Q, thePeriodic, theTol);
+	interp.Perform();
+
+	return interp.Curve();
+}
+
+Handle(Geom2d_Curve) 
+tnbLib::Pln_CurveTools::Interpolation
+(
+	const std::vector<Pnt2d>& theQ,
+	const Vec2d & theFirst,
+	const Vec2d & theLast,
+	const Standard_Boolean thePeriodic,
+	const Standard_Real theTol, 
+	const Standard_Boolean theScale
+)
+{
+	if (theQ.size() < 2)
+	{
+		FatalErrorIn("void Perform()")
+			<< "Not enough offset points to interpolate" << endl
+			<< abort(FatalError);
+	}
+
+	Handle(TColgp_HArray1OfPnt2d) Q = new TColgp_HArray1OfPnt2d(1, theQ.size());
+	Standard_Integer K = 0;
+	for (const auto& x : theQ)
+	{
+		Q->SetValue(K + 1, x);
+
+		++K;
+	}
+
+	Geom2dAPI_Interpolate interp(Q, thePeriodic, theTol);
+
+	interp.Load(theFirst, theLast, theScale);
+	interp.Perform();
+
+	const auto& curve = interp.Curve();
+
+	return interp.Curve();
+}
 
 Handle(Geom2d_Curve)
 tnbLib::Pln_CurveTools::MakeSegment

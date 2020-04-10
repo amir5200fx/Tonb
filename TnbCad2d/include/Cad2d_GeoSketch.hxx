@@ -51,6 +51,11 @@ namespace tnbLib
 			return theGeom_;
 		}
 
+		operator const Handle(Geom2d_Curve)&() const
+		{
+			return Geometry();
+		}
+
 		void ExportToPlt(OFstream& File) const;
 	};
 }

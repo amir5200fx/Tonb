@@ -154,12 +154,6 @@
     <Filter Include="TnbLib\Cad2d\Sketch\Geo">
       <UniqueIdentifier>{7284edf3-5bc9-447c-b516-cef951a29685}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Approximation">
-      <UniqueIdentifier>{0f4616f7-9903-4cb2-b2cb-0ac2889b4929}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Interpolation">
-      <UniqueIdentifier>{0157a04e-0c34-49d7-b7fa-d6c926e164ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Cad2d\Sketch\Geo\LineSegment">
       <UniqueIdentifier>{5c209765-87bc-4119-893d-7ab7a9d47b90}</UniqueIdentifier>
     </Filter>
@@ -171,9 +165,6 @@
     </Filter>
     <Filter Include="TnbLib\Cad2d\Sketch\Global">
       <UniqueIdentifier>{87f709d0-6a4c-44c0-b4c2-2015c4ad6b4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Info">
-      <UniqueIdentifier>{cb013ab5-d655-44d6-a24b-ee4bad6f47d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Cad2d\System">
       <UniqueIdentifier>{2e19bd1b-f141-4e28-9334-9900090d7267}</UniqueIdentifier>
@@ -261,6 +252,27 @@
     </Filter>
     <Filter Include="TnbLib\Cad2d\Computation">
       <UniqueIdentifier>{dd7291d9-7909-4b52-af19-8779426ebf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\CircArc">
+      <UniqueIdentifier>{093379ff-13b2-4739-8497-a3cbe79a95f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\HypbcArc">
+      <UniqueIdentifier>{976c7cb5-ad3f-43f9-b884-3b8f5ccfde6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\ParbcArc">
+      <UniqueIdentifier>{5040c476-b02c-4311-ac07-954ba405277b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Sketch\Geo\EllipcArc">
+      <UniqueIdentifier>{2ba3b3d0-2152-477c-8e87-0991524a263e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Trim">
+      <UniqueIdentifier>{7444d369-6e89-43c0-b74d-4a51974d7d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Trim\EdgeEdge">
+      <UniqueIdentifier>{f09b0864-482f-4d10-ac7f-792aa0210c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Trim\Polygon">
+      <UniqueIdentifier>{8eedceca-662b-444a-8a98-c648f2a7a8d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -402,18 +414,6 @@
     <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Cad2d_GeoSketch.hxx">
       <Filter>TnbLib\Cad2d\Sketch\Geo</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\LineSegment\Cad2d_GeoSketch_LineSegment.hxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\LineSegment</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Cad2d_GeoSketch_Interpolation.hxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\Interpolation</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Ellipse\Cad2d_GeoSketch_Ellipse.hxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\Ellipse</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Circle\Cad2d_GeoSketch_Circle.hxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\Circle</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\System\TnbCad2d_System.hxx">
       <Filter>TnbLib\Cad2d\System</Filter>
     </ClInclude>
@@ -495,6 +495,36 @@
     <ClInclude Include="TnbLib\Cad2d\Computation\Cad2d_CmptLib.hxx">
       <Filter>TnbLib\Cad2d\Computation</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\LineSegment\GeoSketch2d_Segment.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\LineSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Ellipse\GeoSketch2d_Ellipse.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Ellipse</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Circle\GeoSketch2d_Circle.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\CircArc\GeoSketch2d_CircArc.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\CircArc</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\EllipcArc\GeoSketch2d_EllipcArc.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\EllipcArc</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\ParbcArc\GeoSketch2d_ParbcArc.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\ParbcArc</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\HypbcArc\GeoSketch2d_HypbcArc.hxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\HypbcArc</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Sketch\Cad2d_Sketch.hxx">
+      <Filter>TnbLib\Cad2d\Sketch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Trim\EdgeEdge\Cad2d_EdgeEdgeTrim.hxx">
+      <Filter>TnbLib\Cad2d\Trim\EdgeEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Trim\Polygon\Cad2d_PolygonTrim.hxx">
+      <Filter>TnbLib\Cad2d\Trim\Polygon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -556,18 +586,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Plane\Info\Cad2d_Plane_Info.cxx">
       <Filter>TnbLib\Cad2d\Plane\Info</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\LineSegment\Cad2d_GeoSketch_LineSegment.cxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\LineSegment</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Interpolation\Cad2d_GeoSketch_Interpolation.cxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\Interpolation</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Ellipse\Cad2d_GeoSketch_Ellipse.cxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\Ellipse</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Circle\Cad2d_GeoSketch_Circle.cxx">
-      <Filter>TnbLib\Cad2d\Sketch\Geo\Circle</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools_RetrieveWires.cxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
@@ -631,6 +649,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Computation\Cad2d_CmptLib.cxx">
       <Filter>TnbLib\Cad2d\Computation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\LineSegment\GeoSketch2d_Segment.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\LineSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Ellipse\GeoSketch2d_Ellipse.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Ellipse</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\Circle\GeoSketch2d_Circle.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\CircArc\GeoSketch2d_CircArc.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\CircArc</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\EllipcArc\GeoSketch2d_EllipcArc.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\EllipcArc</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\ParbcArc\GeoSketch2d_ParbcArc.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\ParbcArc</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\HypbcArc\GeoSketch2d_HypbcArc.cxx">
+      <Filter>TnbLib\Cad2d\Sketch\Geo\HypbcArc</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Sketch\Cad2d_Sketch.cxx">
+      <Filter>TnbLib\Cad2d\Sketch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Trim\EdgeEdge\Cad2d_EdgeEdgeTrim.cxx">
+      <Filter>TnbLib\Cad2d\Trim\EdgeEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Trim\Polygon\Cad2d_PolygonTrim.cxx">
+      <Filter>TnbLib\Cad2d\Trim\Polygon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

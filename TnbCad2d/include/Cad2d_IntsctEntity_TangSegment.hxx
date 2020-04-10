@@ -8,6 +8,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Pln_Curve;
+
 	class Cad2d_IntsctEntity_TangSegment
 		: public Cad2d_IntsctEntity_Segment
 	{

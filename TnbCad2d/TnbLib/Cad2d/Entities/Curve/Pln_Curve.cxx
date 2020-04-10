@@ -404,22 +404,46 @@ tnbLib::Pln_Curve::Split
 	return std::move(c);
 }
 
-#include <Cad2d_GeoSketch_Circle.hxx>
-#include <Cad2d_GeoSketch_Ellipse.hxx>
-#include <Cad2d_GeoSketch_LineSegment.hxx>
+//#include <Cad2d_GeoSketch_Circle.hxx>
+//#include <Cad2d_GeoSketch_Ellipse.hxx>
+//#include <Cad2d_GeoSketch_LineSegment.hxx>
+//
+//std::shared_ptr<tnbLib::Pln_Curve> 
+//tnbLib::Pln_Curve::MakeLineSegment
+//(
+//	const Pnt2d & theP0, 
+//	const Pnt2d & theP1
+//)
+//{
+//	auto sketch = 
+//		std::make_shared<Cad2d_GeoSketch_LineSegment>(theP0, theP1);
+//	Debug_Null_Pointer(sketch);
+//
+//	auto curve = std::make_shared<Pln_Curve>(sketch->Geometry());
+//	return std::move(curve);
+//}
 
-std::shared_ptr<tnbLib::Pln_Curve> 
-tnbLib::Pln_Curve::MakeLineSegment
+#include <NumAlg_AdaptiveInteg_Info.hxx>
+
+Standard_Boolean 
+tnbLib::Pln_Curve::IsValid
 (
-	const Pnt2d & theP0, 
-	const Pnt2d & theP1
+	const std::shared_ptr<Pln_Curve>& theCurve, 
+	const Standard_Real theTol
 )
 {
-	auto sketch = 
-		std::make_shared<Cad2d_GeoSketch_LineSegment>(theP0, theP1);
-	Debug_Null_Pointer(sketch);
+	auto info = std::make_shared<NumAlg_AdaptiveInteg_Info>();
+	Debug_Null_Pointer(info);
 
-	auto curve = std::make_shared<Pln_Curve>(sketch->Geometry());
-	return std::move(curve);
+	info->SetTolerance(1.0E-6);
+	info->SetNbInitIterations(4);
+
+	Debug_Null_Pointer(theCurve->Geometry());
+	const auto l = Pln_Tools::Length(*theCurve->Geometry(), info);
+
+	if (l <= theTol)
+	{
+		return Standard_False;
+	}
+	return Standard_True;
 }
-

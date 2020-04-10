@@ -13,13 +13,37 @@ class Bnd_Box2d;
 class Geom2d_Curve;
 class Geom2dAPI_InterCurveCurve;
 
+#include <vector>
+
 namespace tnbLib
 {
+
+	// Forward Declarations
+	class Vec2d;
 
 	class Pln_CurveTools
 	{
 
 	public:
+
+		static Handle(Geom2d_Curve)
+			Interpolation
+			(
+				const std::vector<Pnt2d>& theQ, 
+				const Standard_Boolean thePeriodic = Standard_False,
+				const Standard_Real theTol = 1.0E-6
+			);
+
+		static Handle(Geom2d_Curve) 
+			Interpolation
+			(
+				const std::vector<Pnt2d>& theQ, 
+				const Vec2d& theFirst, 
+				const Vec2d& theLast,
+				const Standard_Boolean thePeriodic = Standard_False,
+				const Standard_Real theTol = 1.0E-6,
+				const Standard_Boolean theScale = Standard_True
+			);
 
 		static Handle(Geom2d_Curve)
 			MakeSegment

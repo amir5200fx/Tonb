@@ -4,11 +4,14 @@
 
 #include <Cad2d_IntsctEntity.hxx>
 
+#include <vector>
+
 namespace tnbLib
 {
 
 	// Forward Declarations
 	class Pln_Edge;
+	class Pln_Curve;
 
 	class Cad2d_IntsctEntity_Segment
 		: public Cad2d_IntsctEntity
@@ -57,6 +60,27 @@ namespace tnbLib
 		{
 			theEdge_ = theEdge;
 		}
+
+		static Standard_Boolean
+			CompareEntities
+			(
+				const std::shared_ptr<Cad2d_IntsctEntity_Segment>& theEntity0,
+				const std::shared_ptr<Cad2d_IntsctEntity_Segment>& theEntity1
+			);
+
+		static void
+			SortEntities
+			(
+				std::vector<std::shared_ptr<Cad2d_IntsctEntity_Segment>>& theEntities
+			);
+
+		static std::vector<std::shared_ptr<Pln_Curve>>
+			SubdivideEdge
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge,
+				const std::vector<std::shared_ptr<Cad2d_IntsctEntity_Segment>>& theEntities,
+				const Standard_Real theTol
+			);
 	};
 }
 
