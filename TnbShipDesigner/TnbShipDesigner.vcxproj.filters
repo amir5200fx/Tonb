@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{00f99762-4494-48a1-9261-b498ffc97695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipDesigner">
+      <UniqueIdentifier>{a5a1f6cc-a665-44e5-96b4-749b0c99a654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipDesigner\Entities">
+      <UniqueIdentifier>{5f879c9d-5bfe-4368-88c9-69b5a7261174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipDesigner\Entities\Entity">
+      <UniqueIdentifier>{e37d4560-917a-4d0e-9bb0-0162518ab816}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

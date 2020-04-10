@@ -2,13 +2,13 @@
 #ifndef _HsSection_Dry_Header
 #define _HsSection_Dry_Header
 
-#include <HsEntity_Section.hxx>
+#include <HsEntity_HullSection.hxx>
 
 namespace tnbLib
 {
 
 	class HsSection_Dry
-		: public HsEntity_Section
+		: public HsEntity_HullSection
 	{
 
 		/*Private Data*/
@@ -17,9 +17,13 @@ namespace tnbLib
 
 		HsSection_Dry();
 
-		HsSection_Dry(const Standard_Integer theIndex);
 
-		HsSection_Dry(const Standard_Integer theIndex, const word& theName);
+		Standard_Real Beam() const;
+
+		Standard_Boolean IsDry() const override
+		{
+			return Standard_True;
+		}
 	};
 }
 

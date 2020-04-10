@@ -2,13 +2,16 @@
 #ifndef _HsSection_WaterLine_Header
 #define _HsSection_WaterLine_Header
 
-#include <HsEntity_Section.hxx>
+#include <HsSection_Wetted.hxx>
 
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Pln_Curve;
+
 	class HsSection_WaterLine
-		: public HsEntity_Section
+		: public HsSection_Wetted
 	{
 
 		/*Private Data*/
@@ -17,9 +20,13 @@ namespace tnbLib
 
 		HsSection_WaterLine();
 
-		HsSection_WaterLine(const Standard_Integer theIndex);
 
-		HsSection_WaterLine(const Standard_Integer theIndex, const word& theName);
+		Standard_Boolean IsWaterLine() const override
+		{
+			return Standard_True;
+		}
+
+		const std::shared_ptr<Pln_Curve>& WaterLine() const;
 	};
 }
 

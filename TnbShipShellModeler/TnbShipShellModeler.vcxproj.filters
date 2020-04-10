@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{0b477cde-ea82-43fb-a7db-0ab7fd33e90b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler">
+      <UniqueIdentifier>{c20fe271-d340-4915-a588-5cf549201956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities">
+      <UniqueIdentifier>{87ed2964-6389-4c5f-9d34-1a6ce37ffed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities\Entity">
+      <UniqueIdentifier>{9db05b9d-2697-4e68-8973-cf9666563ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\WorkingPlane">
+      <UniqueIdentifier>{edf17ac0-f8d8-4464-bc50-654b229b4b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities\Surface">
+      <UniqueIdentifier>{6630fd86-1161-483b-8a36-e788e0ff4d0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities\Curve">
+      <UniqueIdentifier>{5f7d0d9c-3a97-4d9c-bb54-e0785564eae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\TrimPlane">
+      <UniqueIdentifier>{597547f6-22a8-4747-86c8-3446e2d7154c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities\Model">
+      <UniqueIdentifier>{5c6973f3-017c-4ece-9d8c-894ea1df1365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities\Volume">
+      <UniqueIdentifier>{55110e5f-b4ad-43b6-8dc9-912ed8091890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities\VolumeType">
+      <UniqueIdentifier>{ea4ae5fa-32f0-443e-ac8b-b4b584710152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipShellModeler\Entities\WtShell">
+      <UniqueIdentifier>{1ed1e81a-0131-42d4-a26a-734212caffb6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Entity\ShipSMdr_Entity.cxx">
+      <Filter>TnbLib\ShipShellModeler\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipShellModeler\WorkingPlane\ShipSMdr_WPlane.cxx">
+      <Filter>TnbLib\ShipShellModeler\WorkingPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Volume\ShipSMdr_Volume.cxx">
+      <Filter>TnbLib\ShipShellModeler\Entities\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Model\ShipSMdr_Model.cxx">
+      <Filter>TnbLib\ShipShellModeler\Entities\Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Entity\ShipSMdr_Entity.hxx">
+      <Filter>TnbLib\ShipShellModeler\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipShellModeler\WorkingPlane\ShipSMdr_WPlane.hxx">
+      <Filter>TnbLib\ShipShellModeler\WorkingPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Volume\ShipSMdr_Volume.hxx">
+      <Filter>TnbLib\ShipShellModeler\Entities\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipShellModeler\Entities\VolumeType\ShipSMdr_VolumeType.hxx">
+      <Filter>TnbLib\ShipShellModeler\Entities\VolumeType</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Model\ShipSMdr_Model.hxx">
+      <Filter>TnbLib\ShipShellModeler\Entities\Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

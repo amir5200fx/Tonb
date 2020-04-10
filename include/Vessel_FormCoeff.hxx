@@ -37,16 +37,16 @@ namespace tnbLib
 		marineLib::AW theAw_;
 
 		//- Wetted Area
-		marineLib::WETA theWeta_;
+		//marineLib::WETA theWeta_;
 
 		//- Waterplane-area coefficient
 		marineLib::CWL theCwl_;
 
-		marineLib::LCB theLcb_;
+		//marineLib::LCB theLcb_;
 
-		marineLib::VCB theVcb_;
+		//marineLib::VCB theVcb_;
 
-		marineLib::KB theKb_;
+		//marineLib::KB theKb_;
 
 	protected:
 
@@ -92,22 +92,22 @@ namespace tnbLib
 			return theAw_;
 		}
 
-		marineLib::WETA& ChangeWETA()
+		/*marineLib::WETA& ChangeWETA()
 		{
 			return theWeta_;
-		}
+		}*/
 
 		marineLib::CWL& ChangeCWL()
 		{
 			return theCwl_;
 		}
 
-		marineLib::LCB& ChangeLCB()
+		/*marineLib::LCB& ChangeLCB()
 		{
 			return theLcb_;
-		}
+		}*/
 
-		marineLib::VCB& ChangeVCB()
+		/*marineLib::VCB& ChangeVCB()
 		{
 			return theVcb_;
 		}
@@ -115,7 +115,7 @@ namespace tnbLib
 		marineLib::KB& ChangeKB()
 		{
 			return theKb_;
-		}
+		}*/
 
 	public:
 
@@ -159,17 +159,17 @@ namespace tnbLib
 			return theAw_;
 		}
 
-		const marineLib::WETA& WETA() const
+		/*const marineLib::WETA& WETA() const
 		{
 			return theWeta_;
-		}
+		}*/
 
 		const marineLib::CWL& CWL() const
 		{
 			return theCwl_;
 		}
 
-		const marineLib::LCB& LCB() const
+		/*const marineLib::LCB& LCB() const
 		{
 			return theLcb_;
 		}
@@ -182,58 +182,7 @@ namespace tnbLib
 		const marineLib::KB& KB() const
 		{
 			return theKb_;
-		}
-	};
-
-
-	class Vessel_FormCoeff
-		: public Vessel_FormCoeff_Parameters
-	{
-
-		/*Private Data*/
-
-
-
-		// Calculate Auxiliaries
-
-		void CalcFUW();
-
-		void CalcAUW();
-
-		void CalcAWL();
-
-		void CalcFWL();
-
-
-		// Calculate Dimensions
-
-		void CalcB();
-
-		void CalcBWL();
-
-		void CalcD();
-
-		void CalcFPP();
-
-		void CalcAPP();
-
-		void CalcLPP();
-
-		void CalcMPP();
-
-		void CalcLWL();
-
-		void CalcLOS();
-
-		void CalcLOA();
-
-		// Calculate Area of stations
-
-		void CalcArea();
-
-	public:
-
-
+		}*/
 	};
 }
 

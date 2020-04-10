@@ -2,61 +2,43 @@
 #ifndef _Marine_WaterSection_Header
 #define _Marine_WaterSection_Header
 
-#include <Marine_Entity.hxx>
-#include <Global_Done.hxx>
-
-#include <TopoDS_Shape.hxx>
+#include <Marine_Section.hxx>
 
 namespace tnbLib
 {
 
-	// Forward Declarations
-	class Marine_Wave;
-
 	class Marine_WaterSection
-		: public Marine_Entity
-		, public Global_Done
+		: public Marine_Section
 	{
 
-		/*private Data*/
-
-		std::shared_ptr<Marine_Wave> theWave_;
-
-		TopoDS_Shape theVessel_;
-
-		TopoDS_Shape theSection_;
+		/*Private Data*/
 
 	public:
 
-		Marine_WaterSection();
+		Marine_WaterSection
+		(
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
-		Marine_WaterSection(const Standard_Integer theIndex);
+		Marine_WaterSection
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
-		Marine_WaterSection(const Standard_Integer theIndex, const word& theName);
+		Marine_WaterSection
+		(
+			const Standard_Integer theIndex,
+			const word& theName, 
+			const std::shared_ptr<Pln_Wire>& theWire
+		);
 
-		const auto& Vessel() const
+		Standard_Boolean IsWaterSection() const override
 		{
-			return theVessel_;
+			return Standard_True;
 		}
 
-		const auto& Wave() const
-		{
-			return theWave_;
-		}
-
-		void Perform();
-
-		void LoadWave(const std::shared_ptr<Marine_Wave>& theWave)
-		{
-			theWave_ = theWave;
-		}
-
-		void LoadVessel(const TopoDS_Shape& theShape)
-		{
-			theVessel_ = theShape;
-		}
-
-		
+		std::shared_ptr<Marine_Section> Copy() const override;
 	};
 }
 

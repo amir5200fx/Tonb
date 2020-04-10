@@ -24,12 +24,12 @@ namespace tnbLib
 	// Forward Declarations
 	class Marine_CmpSection;
 	class Marine_Section;
-	class Marine_CrossSection;
 	class Marine_Wave;
 	class Marine_WetSection;
 	class Marine_Body;
 	class Marine_WaterDomain;
 	class Marine_Domain;
+	class Marine_Graph;
 	class Cad3d_TModel;
 	class NumAlg_AdaptiveInteg_Info;
 	class Pnt2d;
@@ -55,13 +55,7 @@ namespace tnbLib
 		static Entity3d_Box 
 			BoundingBox
 			(
-				const Marine_CrossSection& theModel
-			);
-
-		static Entity3d_Box
-			BoundingBox
-			(
-				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel
 			);
 
 		static Handle(Geom2d_Curve)
@@ -69,6 +63,11 @@ namespace tnbLib
 			(
 				const std::vector<marineLib::xSectionParam>& theQ
 			);
+
+
+		static Standard_Real CalcBWL(const Marine_CmpSection& theSection);
+
+
 
 		static Standard_Real
 			CalcArea
@@ -115,7 +114,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		/*static Standard_Real
 			CalcIv
 			(
 				const Marine_CmpSection& theSection,
@@ -129,10 +128,10 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
 				const gp_Ax2d& theAx,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
-			);
+			);*/
 
 		static Standard_Real
-			CalcWetArea
+			CalcWettedArea
 			(
 				const Marine_CmpSection& theSection,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
@@ -153,11 +152,67 @@ namespace tnbLib
 			);
 
 		static Pnt2d
-			CalcWetCentre
+			CalcWettedCentre
 			(
 				const Marine_CmpSection& theSection, 
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
+
+		static Standard_Real
+			CalcXCentre
+			(
+				const Marine_Section& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			CalcYCentre
+			(
+				const Marine_Section& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			CalcXCentre
+			(
+				const Marine_CmpSection& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			CalcYCentre
+			(
+				const Marine_CmpSection& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			CalcXCentreProductArea
+			(
+				const Marine_Section& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			CalcYCentreProductArea
+			(
+				const Marine_Section& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		/*static Standard_Real
+			CalcXCentreProductArea
+			(
+				const Marine_CmpSection& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			CalcYCentreProductArea
+			(
+				const Marine_CmpSection& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);*/
 
 		static std::vector<marineLib::xSectionParam>
 			CalcVolume
@@ -170,6 +225,13 @@ namespace tnbLib
 			CalcWaterCurveLength
 			(
 				const Marine_WetSection& theSection,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			CalcWaterCurveLength
+			(
+				const Marine_CmpSection& theSection,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
@@ -237,7 +299,14 @@ namespace tnbLib
 		static void
 			Heel
 			(
-				const std::shared_ptr<Marine_CrossSection>& theModel, 
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
+				const gp_Ax2d& theAx
+			);
+
+		static void
+			Heel
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
 				const gp_Ax1& theAx, 
 				const Standard_Real theAngle
 			);
@@ -250,7 +319,7 @@ namespace tnbLib
 				const Standard_Integer theNbHeels
 			);
 
-		static std::shared_ptr<Pln_Wire>
+		/*static std::shared_ptr<Pln_Wire>
 			WaterSection
 			(
 				const Handle(Geom_Curve)& theWaterCurve,
@@ -258,9 +327,9 @@ namespace tnbLib
 				const Standard_Real theZmin,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
-			);
+			);*/
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		/*static std::vector<std::shared_ptr<Marine_Section>>
 			WaterSections
 			(
 				const Marine_CrossSection& theModel,
@@ -268,15 +337,15 @@ namespace tnbLib
 				const Entity3d_Box& theDomain,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
-			);
+			);*/
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		/*static std::vector<std::shared_ptr<Marine_Section>>
 			StillWaterSections
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel, 
 				const Standard_Real theZ,
 				const Entity3d_Box& theDomain
-			);
+			);*/
 
 
 
@@ -361,15 +430,15 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static std::shared_ptr<Marine_WaterDomain>
+		/*static std::shared_ptr<Marine_WaterDomain>
 			RetrieveStillWaterDomain
 			(
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
 				const Standard_Real theZ
-			);
+			);*/
 
-		static std::vector<std::shared_ptr<Marine_WaterDomain>>
+		/*static std::vector<std::shared_ptr<Marine_WaterDomain>>
 			RetrieveStillWaterDomains
 			(
 				const std::shared_ptr<Marine_Domain>& theDomain,
@@ -385,7 +454,7 @@ namespace tnbLib
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
 				const Geo_xDistb& theZ
-			);
+			);*/
 
 		/*static Standard_Real
 			CalcWetVolume
@@ -402,7 +471,11 @@ namespace tnbLib
 				const Standard_Boolean ParallelFalg = Standard_False
 			);
 
-
+		static std::shared_ptr<Marine_Graph>
+			CreateGraph
+			(
+				const Handle(Geom2d_Curve)& theCurve
+			);
 	};
 }
 

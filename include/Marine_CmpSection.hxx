@@ -22,6 +22,7 @@ namespace tnbLib
 	class MarineBase_Tools;
 	class Marine_Section;
 	class Pln_Curve;
+	class Pln_Wire;
 
 	class Marine_CmpSection
 		: public Marine_Entity
@@ -45,7 +46,7 @@ namespace tnbLib
 			theSections_.push_back(theSection);
 		}
 
-	public:
+	protected:
 
 		Marine_CmpSection();
 
@@ -59,6 +60,32 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const word& theName
 		);
+
+
+		static Standard_Boolean 
+			LessDiameterSize
+			(
+				const std::shared_ptr<Pln_Wire>& theW0, 
+				const std::shared_ptr<Pln_Wire>& theW1
+			);
+
+		static void 
+			SortWires
+			(
+				std::vector<std::shared_ptr<Pln_Wire>>& theWires
+			);
+
+		static void 
+			RetrieveInnerOuterWires
+			(
+				std::list<std::shared_ptr<Pln_Wire>>& theWires,
+				std::shared_ptr<Pln_Wire>& theOuter, 
+				std::vector<std::shared_ptr<Pln_Wire>>& theInners
+			);
+
+	public:
+
+		static const std::shared_ptr<Marine_CmpSection> null;
 
 		Entity2d_Box BoundingBox() const;
 
@@ -77,40 +104,23 @@ namespace tnbLib
 			return theSections_;
 		}
 
-		Standard_Real X() const;
+		virtual Standard_Boolean IsXsection() const
+		{
+			return Standard_False;
+		}
 
-		std::shared_ptr<Marine_CmpSection> Copy() const;
+		virtual Standard_Boolean IsZsection() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Real X() const;
+
+		virtual std::shared_ptr<Marine_CmpSection> Copy() const = 0;
 
 		void Transform(const gp_Trsf2d& t);
 
 		void ExportToPlt(OFstream& File) const;
-
-		static std::shared_ptr<Marine_CmpSection>
-			CreateCmpSection
-			(
-				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
-				const gp_Ax2& theSystem,
-				const Standard_Real theMinTol,
-				const Standard_Real theMaxTol
-			);
-
-		static std::shared_ptr<Marine_CmpSection>
-			CreateCmpSection
-			(
-				const std::vector<Handle(Geom2d_Curve)>& theCurves,
-				const gp_Ax2& theSystem,
-				const Standard_Real theMinTol,
-				const Standard_Real theMaxTol
-			);
-
-		static std::shared_ptr<Marine_CmpSection>
-			CreateCmpSection
-			(
-				const TopoDS_Shape& theEdges,
-				const gp_Ax2& theSystem,
-				const Standard_Real theMinTol,
-				const Standard_Real theMaxTol
-			);
 
 		static std::vector<Handle(Geom2d_Curve)>
 			RetrieveParaCurves

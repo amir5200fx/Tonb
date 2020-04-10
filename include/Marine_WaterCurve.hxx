@@ -2,13 +2,13 @@
 #ifndef _Marine_WaterCurve_Header
 #define _Marine_WaterCurve_Header
 
-#include <Pln_Curve.hxx>
+#include <Marine_PlnCurve.hxx>
 
 namespace tnbLib
 {
 
 	class Marine_WaterCurve
-		: public Pln_Curve
+		: public Marine_PlnCurve
 	{
 
 		/*Private Data*/

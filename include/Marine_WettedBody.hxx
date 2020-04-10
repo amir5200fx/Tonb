@@ -2,16 +2,19 @@
 #ifndef _Marine_WettedBody_Header
 #define _Marine_WettedBody_Header
 
-#include <Marine_Body.hxx>
+#include <Marine_HullBody.hxx>
 
 namespace tnbLib
 {
 
 	class Marine_WettedBody
-		: public Marine_Body
+		: public Marine_HullBody
 	{
 
 		/*private Data*/
+
+		std::shared_ptr<Marine_CmpSection> theWater_;
+		std::shared_ptr<Marine_CmpSection> theMid_;
 
 	public:
 
@@ -31,6 +34,26 @@ namespace tnbLib
 		Standard_Boolean IsWetted() const override
 		{
 			return Standard_True;
+		}
+
+		auto& ChangeWater()
+		{
+			return theWater_;
+		}
+
+		auto& ChangeMid()
+		{
+			return theMid_;
+		}
+
+		const auto& WL() const
+		{
+			return theWater_;
+		}
+
+		const auto& Mid() const
+		{
+			return theMid_;
 		}
 	};
 }

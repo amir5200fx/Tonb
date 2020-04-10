@@ -34,6 +34,22 @@ namespace tnbLib
 			);
 
 		static Standard_Real
+			Mx
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const Standard_Real y0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			My
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
 			Ix
 			(
 				const Handle(Geom2d_Curve)& theCurve, 
@@ -90,6 +106,22 @@ namespace tnbLib
 
 		static Standard_Real IyBar(const Pln_Wire& theWire, const Pnt2d& theCentre, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 
+		static Standard_Real
+			Mx
+			(
+				const Pln_Wire& theWire,
+				const Standard_Real y0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			My
+			(
+				const Pln_Wire& theWire,
+				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
 		static Standard_Real 
 			Ix
 			(
@@ -103,6 +135,34 @@ namespace tnbLib
 			(
 				const Pln_Wire& theWire, 
 				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			xCentre
+			(
+				const Pln_Wire& theWire,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			yCentre
+			(
+				const Pln_Wire& theWire, 
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			xCentreProductArea
+			(
+				const Pln_Wire& theWire,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real
+			yCentreProductArea
+			(
+				const Pln_Wire& theWire,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 

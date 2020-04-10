@@ -6,8 +6,7 @@
 #include <Global_Done.hxx>
 #include <NumAlg_NewtonSolver_Info.hxx>
 #include <NumAlg_NewtonSolver_Condition.hxx>
-#include <error.hxx>
-#include <OSstream.hxx>
+#include <NumAlg_System.hxx>
 
 namespace tnbLib
 {
@@ -29,37 +28,6 @@ namespace tnbLib
 		{}
 
 	};
-
-	namespace Iter
-	{
-		void inline ChackFun(const char* funcName)
-		{
-			FatalErrorIn(funcName)
-				<< " Found no function"
-				<< abort(FatalError);
-		}
-
-		template<bool Cond = true>
-		void inline CheckBound
-		(
-			Standard_Real& x,
-			const Standard_Real theLower,
-			const Standard_Real theUpper
-		)
-		{
-			if (x < theLower) x = theLower;
-			if (x > theUpper) x = theUpper;
-		}
-
-		template<>
-		void inline CheckBound<false>
-			(
-				Standard_Real& x,
-				const Standard_Real theLower,
-				const Standard_Real theUpper
-				)
-		{}
-	}
 
 	struct NumAlg_NewtonSolver_Value
 	{
