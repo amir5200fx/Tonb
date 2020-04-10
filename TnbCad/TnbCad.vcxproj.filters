@@ -172,6 +172,84 @@
     <Filter Include="TnbLib\Cad\Boolean">
       <UniqueIdentifier>{68f7e125-c930-4d63-ae8e-fba8c8784d6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\NModel">
+      <UniqueIdentifier>{670bae22-e2b1-42a3-bb54-bf493ebe08a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities">
+      <UniqueIdentifier>{761f8e01-d0cf-4137-9524-122e516ae27c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Vertex">
+      <UniqueIdentifier>{ca2186a4-453e-45a2-a4bb-75c4dc2af801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Entity">
+      <UniqueIdentifier>{027b4341-cb0c-401e-8173-362daa6e1f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Vertex\Adaptor">
+      <UniqueIdentifier>{ac997498-21f3-49c7-853a-2a96248acfec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Edge">
+      <UniqueIdentifier>{e1593905-a5c0-4f3e-846d-588a6db2df60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Edge\Adaptor">
+      <UniqueIdentifier>{fbcb022e-bb96-40c2-b24d-0f8f1fb590bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Edge\Geometry">
+      <UniqueIdentifier>{da1e2291-3a41-43a7-807c-eddc04e0a488}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Curve">
+      <UniqueIdentifier>{48d64c15-7565-4ed7-9fdf-472b350e9832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\ParaCurve">
+      <UniqueIdentifier>{57fea6cb-7302-48c5-9c94-bd622feb0e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\CmpParaCurve">
+      <UniqueIdentifier>{9374900c-aec4-4531-b427-f1a15aecf723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\CmpEdge">
+      <UniqueIdentifier>{89c5f7d9-4329-4a1c-8323-7448f896045f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Orientation">
+      <UniqueIdentifier>{1e78fe14-66ee-4afe-acb4-accd31eaf2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Segment">
+      <UniqueIdentifier>{36ceee44-4d69-4e0c-aeb1-4a541dbc3e83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Segment\Geometry">
+      <UniqueIdentifier>{5b69b52b-9bec-4559-8146-510703e9203d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Plane">
+      <UniqueIdentifier>{3796e6b2-8989-494b-a3e9-a253ed54ef93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\ParaWire">
+      <UniqueIdentifier>{54c6980e-f6fc-44e1-8745-e79dd0e4028f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Surface">
+      <UniqueIdentifier>{95633e9c-8654-4a1e-90b0-0acde64eff60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Surface\Geometry">
+      <UniqueIdentifier>{85a3bf49-28ae-4905-9b80-521f9f953df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Shell">
+      <UniqueIdentifier>{cf781754-add8-47c0-a099-6a76fe26053a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\WaterTight">
+      <UniqueIdentifier>{82348a90-2019-470f-83dc-f49dc7666914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Singular">
+      <UniqueIdentifier>{decaf08a-f7db-45c5-a3bb-67ac73fd8b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Ring">
+      <UniqueIdentifier>{79261c94-f179-4caf-8cea-7a3aff8f38b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Entities\Wire">
+      <UniqueIdentifier>{98ee6d13-88bc-487c-b5a3-4b482fce55f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Info">
+      <UniqueIdentifier>{90ae6c91-1e53-4fe1-b83f-81d622b4e68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\NModel\Manager">
+      <UniqueIdentifier>{cd83df20-7db7-4025-964d-ed43bdbeb5d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -336,6 +414,93 @@
     <ClInclude Include="TnbLib\Cad\Boolean\Cad_Boolean.hxx">
       <Filter>TnbLib\Cad\Boolean</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Entity\NModel_Entity.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\ParaCurve\NModel_ParaCurve.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\ParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\ParaCurve\NModel_ParaCurveI.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\ParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Curve\NModel_Curve.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Curve\NModel_CurveI.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\CmpParaCurve\NModel_CmpParaCurve.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\CmpParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Vertex\Adaptor\NModel_VertexAdaptor.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Vertex\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Vertex\NModel_Vertex.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Edge\Geometry\NModel_EdgeGeometry.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Edge\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Edge\Adaptor\NModel_EdgeAdaptor.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Edge\NModel_Edge.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Segment\NModel_Segment.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Segment\Geometry\NModel_SegmentGeometry.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Segment\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Segment\NModel_SegmentI.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Plane\NModel_Plane.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\ParaWire\NModel_ParaWire.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\ParaWire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\CmpEdge\NModel_CmpEdge.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\CmpEdge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Surface\Geometry\NModel_SurfaceGeometry.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Surface\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Surface\NModel_Surface.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Orientation\NModel_SurfaceOrientation.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Orientation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Shell\NModel_Shell.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Shell</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\WaterTight\NModel_WaterTight.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\WaterTight</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Singular\NModel_Singular.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Singular</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Ring\NModel_Ring.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Entities\Wire\NModel_Wire.hxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Manager\NModel_VertexManager.hxx">
+      <Filter>TnbLib\Cad\NModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Manager\NModel_SegmentManager.hxx">
+      <Filter>TnbLib\Cad\NModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Manager\NModel_SurfaceManager.hxx">
+      <Filter>TnbLib\Cad\NModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Manager\Cad3d_NModelManager.hxx">
+      <Filter>TnbLib\Cad\NModel\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -445,6 +610,60 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Boolean\Cad_Boolean.cxx">
       <Filter>TnbLib\Cad\Boolean</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\ParaCurve\NModel_ParaCurve.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\ParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Curve\NModel_Curve.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\CmpParaCurve\NModel_CmpParaCurve.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\CmpParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Vertex\Adaptor\NModel_VertexAdaptor.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Vertex\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Vertex\NModel_Vertex.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Edge\Geometry\NModel_EdgeGeometry.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Edge\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Edge\NModel_Edge.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Segment\NModel_Segment.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Segment\NModel_SegmentIO.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Plane\NModel_Plane.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\ParaWire\NModel_ParaWire.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\ParaWire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\CmpEdge\NModel_CmpEdge.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\CmpEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Surface\NModel_Surface.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Shell\NModel_Shell.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Shell</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Singular\NModel_Singular.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Singular</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Ring\NModel_Ring.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Wire\NModel_Wire.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Manager\Cad3d_NModelManager.cxx">
+      <Filter>TnbLib\Cad\NModel\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
