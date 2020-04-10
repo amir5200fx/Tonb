@@ -365,14 +365,14 @@ namespace tnbLib
 			Insert(theItem, Geo_SearchTree<T>::GeometryBoundingBox(), 0, theRoot_);
 		}
 
-		void InsertToGeometry(const Adt_Ary1d<T>& theItems)
+		/*void InsertToGeometry(const Adt_Ary1d<T>& theItems)
 		{
 
 			for (const auto& item : theItems)
 			{
 				InsertToGeometry(item);
 			}
-		}
+		}*/
 
 		void InsertToGeometry(const std::vector<T>& theItems)
 		{

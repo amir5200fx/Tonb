@@ -349,6 +349,30 @@
     <Filter Include="TnbLib\Geo\PriorityList">
       <UniqueIdentifier>{52e0fb6b-a336-46a3-9990-a1d4b3a3b608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF">
+      <UniqueIdentifier>{cd8303dc-a0db-467a-aebe-9e26b9c5b450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree">
+      <UniqueIdentifier>{1b1a5c05-fddd-4a17-9c3b-5dae0be61f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Octant">
+      <UniqueIdentifier>{0cfd0cda-b898-4022-a9f7-043658e5e465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node">
+      <UniqueIdentifier>{61cb2d29-23e6-45c0-9fb4-bcaf0e3d2a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Box">
+      <UniqueIdentifier>{a1106323-87b9-47b8-b723-805efa778e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree">
+      <UniqueIdentifier>{7f92a1f6-cfff-4023-8658-7ac9006f0c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node">
+      <UniqueIdentifier>{0a642591-ff88-4d2a-88b7-6d91d3058f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Quadrant">
+      <UniqueIdentifier>{34bea2d7-379a-4755-b938-115722eca56b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -774,6 +798,36 @@
     <ClInclude Include="TnbLib\Geo\Sort\Geo_Sort.hxx">
       <Filter>TnbLib\Geo\Sort</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Geo_MxCifOctree.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Octant\Geo_MxCifOctree_Octant.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Octant</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node\Geo_MxCifOctree_Node.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node\Geo_MxCifOctree_NodeI.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node\Geo_MxCifQuadtree_Node.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node\Geo_MxCifQuadtree_NodeI.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Quadrant\Geo_MxCifQuadtree_Quadrant.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Quadrant</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Geo_MxCifQuadtree.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Geo_MxCifQuadtreeI.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Geo_MxCifOctreeI.hxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -937,6 +991,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Length\Curve\Geo_CurveLength.cxx">
       <Filter>TnbLib\Geo\Length\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Geo_MxCifOctree.cxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node\Geo_MxCifOctree_Node.cxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node\Geo_MxCifQuadtree_Node.cxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Geo_MxCifQuadtree.cxx">
+      <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

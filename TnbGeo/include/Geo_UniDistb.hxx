@@ -15,13 +15,6 @@ namespace tnbLib
 
 		Standard_Integer theSize_;
 
-		std::vector<Standard_Real> theValues_;
-
-
-		auto& ChangeValues()
-		{
-			return theValues_;
-		}
 
 	public:
 
@@ -29,23 +22,7 @@ namespace tnbLib
 			: theSize_(theSize)
 		{}
 
-		Standard_Integer Size() const override
-		{
-			return theSize_;
-		}
-
-		Standard_Real Value
-		(
-			const Standard_Integer theIndex
-		) const override;
-
-		const std::vector<Standard_Real>&
-			Values() const override
-		{
-			return theValues_;
-		}
-
-		void Perform() override;
+		void Perform();
 
 
 	};
