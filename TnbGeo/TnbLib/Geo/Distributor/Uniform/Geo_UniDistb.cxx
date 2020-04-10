@@ -4,17 +4,6 @@
 #include <error.hxx>
 #include <OSstream.hxx>
 
-Standard_Real 
-tnbLib::Geo_UniDistb::Value
-(
-	const Standard_Integer theIndex
-) const
-{
-	Debug_If_Condition(NOT INSIDE(theIndex, 0, MAX(0, theValues_.size() - 1)));
-
-	return theValues_[theIndex];
-}
-
 void tnbLib::Geo_UniDistb::Perform()
 {
 	if (Size() < 2)

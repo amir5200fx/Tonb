@@ -18,25 +18,27 @@ namespace tnbLib
 
 		/*Private Data*/
 
-	protected:
+		std::vector<Standard_Real> theValues_;
+
+	public:
 
 		Geo_xDistb()
 		{}
 
-	public:
+		auto Size() const
+		{
+			return (Standard_Integer)theValues_.size();
+		}
 
-		virtual Standard_Integer Size() const = 0;
+		const auto& Values() const
+		{
+			return theValues_;
+		}
 
-		virtual Standard_Real
-			Value
-			(
-				const Standard_Integer theIndex
-			) const = 0;
-
-		virtual const std::vector<Standard_Real>&
-			Values() const = 0;
-
-		virtual void Perform() = 0;
+		auto& ChangeValues()
+		{
+			return theValues_;
+		}
 	};
 }
 
