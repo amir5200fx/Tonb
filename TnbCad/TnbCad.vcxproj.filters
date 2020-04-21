@@ -501,6 +501,9 @@
     <ClInclude Include="TnbLib\Cad\NModel\Manager\Cad3d_NModelManager.hxx">
       <Filter>TnbLib\Cad\NModel\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\NModel\Cad3d_NModel.hxx">
+      <Filter>TnbLib\Cad\NModel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">

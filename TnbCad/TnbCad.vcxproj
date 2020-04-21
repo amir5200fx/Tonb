@@ -39,6 +39,7 @@
     <ClInclude Include="TnbLib\Cad\IO\Format\Info\CadIO_Info.hxx" />
     <ClInclude Include="TnbLib\Cad\IO\Format\Shape\CadIO_Shape.hxx" />
     <ClInclude Include="TnbLib\Cad\IO\Format\STEP\CadIO_STEP.hxx" />
+    <ClInclude Include="TnbLib\Cad\NModel\Cad3d_NModel.hxx" />
     <ClInclude Include="TnbLib\Cad\NModel\Entities\CmpEdge\NModel_CmpEdge.hxx" />
     <ClInclude Include="TnbLib\Cad\NModel\Entities\CmpParaCurve\NModel_CmpParaCurve.hxx" />
     <ClInclude Include="TnbLib\Cad\NModel\Entities\Curve\NModel_Curve.hxx" />
