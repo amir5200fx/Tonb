@@ -286,10 +286,10 @@ namespace tnbLib
 			Standard_Real X0, X1;
 			theRegion.GetBound(Index, X0, X1);
 
-			if (Processor::IsIntersect(X0, X1, Lower, Xm))
+			if (Geo_Tools::IsIntersect(X0, X1, Lower, Xm))
 				Search(theRegion, t->LeftPtr(), theItems);
 
-			if (Processor::IsIntersect(X0, X1, Xm, Upper))
+			if (Geo_Tools::IsIntersect(X0, X1, Xm, Upper))
 				Search(theRegion, t->RightPtr(), theItems);
 		}
 
@@ -314,10 +314,10 @@ namespace tnbLib
 			Standard_Real X0, X1;
 			theRegion.GetBound(Index, X0, X1);
 
-			if (Processor::IsIntersect(X0, X1, Lower, Xm))
+			if (Geo_Tools::IsIntersect(X0, X1, Lower, Xm))
 				Search(theRegion, t->LeftPtr(), theItems);
 
-			if (Processor::IsIntersect(X0, X1, Xm, Upper))
+			if (Geo_Tools::IsIntersect(X0, X1, Xm, Upper))
 				Search(theRegion, t->RightPtr(), theItems);
 		}
 

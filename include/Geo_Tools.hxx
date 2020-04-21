@@ -290,7 +290,9 @@ namespace tnbLib
 				const Entity3d_Chain& theChain
 			);
 
+		static size_t FindSpan(const Standard_Real x, const std::vector<Standard_Real>& theSorted);
 
+		static void CheckSorted(const std::vector<Standard_Real>& theSorted, const word& theName);
 	};
 }
 

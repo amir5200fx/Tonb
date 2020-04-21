@@ -7,11 +7,25 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class HydStatic_hAuCurve;
+	class HydStatic_CmptLib;
+
 	class HydStatic_hArmCurve
 		: public HydStatic_ArmCurve
 	{
 
+		friend class HydStatic_CmptLib;
+
 		/*Private Data*/
+
+		std::shared_ptr<HydStatic_hAuCurve> theAuCurve_;
+
+
+		auto& ChangeAuCurve()
+		{
+			return theAuCurve_;
+		}
 
 	public:
 
@@ -32,6 +46,14 @@ namespace tnbLib
 			const word& theName,
 			const Handle(Geom2d_Curve)& theCurve
 		);
+
+		
+		const auto& AuCurve() const
+		{
+			return theAuCurve_;
+		}
+
+		
 	};
 }
 

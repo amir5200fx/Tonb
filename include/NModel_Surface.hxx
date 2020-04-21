@@ -15,6 +15,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class NModel_Vertex;
 	class NModel_Wire;
 	class NModel_Edge;
 	class Entity2d_Metric1;
@@ -105,6 +106,9 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<NModel_Edge>>
 			RetrieveEdges() const;
+
+		std::vector<std::shared_ptr<NModel_Vertex>>
+			RetrieveVertices();
 
 		Entity2d_Metric1 MetricAt
 		(

@@ -33,6 +33,9 @@ namespace tnbLib
 
 		typedef Pnt2d ptType;
 
+		Pln_Edge()
+		{}
+
 		Pln_Edge
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx0, 

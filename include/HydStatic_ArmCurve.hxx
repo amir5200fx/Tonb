@@ -3,6 +3,9 @@
 #define _HydStatic_ArmCurve_Header
 
 #include <HydStatic_HydCurve.hxx>
+#include <HydStatic_GzQ.hxx>
+
+#include <vector>
 
 namespace tnbLib
 {
@@ -12,6 +15,8 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		std::vector<HydStatic_GzQ> theQs_;
 
 	protected:
 
@@ -35,7 +40,39 @@ namespace tnbLib
 
 	public:
 
+		Standard_Boolean IsIntersect(const Standard_Real thePhi) const;
 
+		Standard_Real MinHeel() const;
+
+		Standard_Real MaxHeel() const;
+
+		Standard_Real Value(const Standard_Real thePhi) const;
+
+		auto& ChangeQs()
+		{
+			return theQs_;
+		}
+
+		const auto& Qs() const
+		{
+			return theQs_;
+		}
+
+		void SetQs
+		(
+			const std::vector<HydStatic_GzQ>&& theQs
+		)
+		{
+			theQs_ = std::move(theQs);
+		}
+
+		static std::shared_ptr<HydStatic_ArmCurve> 
+			Clip
+			(
+				const std::shared_ptr<HydStatic_ArmCurve>& theCurve, 
+				const Standard_Real theH0,
+				const Standard_Real theH1
+			);
 	};
 }
 
