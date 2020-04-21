@@ -13,46 +13,47 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_CmpSection;
+	class Marine_Body;
+	class Marine_DisctLib;
 
 	class Marine_WireFrameModel
 		: public Marine_Entity
 	{
 
+		friend class Marine_DisctLib;
+
 		/*Private Data*/
 
-		std::vector<std::shared_ptr<Marine_CmpSection>> theSections_;
+		std::shared_ptr<Marine_Body> theBody_;
 
 
 		TopoDS_Shape theShape_;
 
+
+		auto& ChangeBody()
+		{
+			return theBody_;
+		}
+
+		auto& ChangeShape()
+		{
+			return theShape_;
+		}
+
 	public:
 
-		Marine_WireFrameModel
-		(
-			const TopoDS_Shape& theShape
-		);
+		Marine_WireFrameModel();
 
 		Marine_WireFrameModel
 		(
 			const Standard_Integer theIndex, 
-			const word& theName, 
-			const TopoDS_Shape& theShape
+			const word& theName
 		);
 
 
-		auto NbSections() const
+		const auto& Body() const
 		{
-			return (Standard_Integer)theSections_.size();
-		}
-
-		const auto& Sections() const
-		{
-			return theSections_;
-		}
-
-		auto& ChangeSections()
-		{
-			return theSections_;
+			return theBody_;
 		}
 
 		const auto& Shape() const

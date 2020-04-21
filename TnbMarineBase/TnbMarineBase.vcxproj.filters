@@ -484,6 +484,45 @@
     <Filter Include="TnbLib\MarineBase\Parameter\GM">
       <UniqueIdentifier>{924b4bad-6208-4911-87c6-9ddb2d5151c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\MH">
+      <UniqueIdentifier>{4148291c-21bd-463a-a750-649d0525a041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\LCG">
+      <UniqueIdentifier>{5b6c14bf-038b-40a4-9482-3bcff1946a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\VCG">
+      <UniqueIdentifier>{2df026e5-42f8-48f3-a49f-c5877ad7c6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\TCG">
+      <UniqueIdentifier>{43e7d44c-caca-4b1b-8b21-f6fe283d9cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\MASS">
+      <UniqueIdentifier>{bdd91c11-57f2-4da4-b82a-1b068c3be34a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Type">
+      <UniqueIdentifier>{e9f77db4-b5f4-4201-b150-1f4877206ac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\DFLDANG">
+      <UniqueIdentifier>{bf1ae5d1-f7d5-40c4-9c85-7010fa3ec752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Criterion">
+      <UniqueIdentifier>{431846af-3a1e-4ec5-9b60-eca9c3a6b385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Criterion\Status">
+      <UniqueIdentifier>{a8e57bf1-2f93-4d9e-9fd3-37701c47415a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Criterion\Value">
+      <UniqueIdentifier>{97e38e51-3a2d-4e28-81bb-cc5243383a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Criterion\Standard">
+      <UniqueIdentifier>{511728ad-ce03-4dc8-ac2e-be40306c1587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Criterion\Expln">
+      <UniqueIdentifier>{e170e969-32cb-4b46-b429-b871b100ad1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\CriterionTable">
+      <UniqueIdentifier>{90d6ca36-e381-4527-8fd2-6fc694703491}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -897,6 +936,45 @@
     <ClInclude Include="TnbLib\MarineBase\Parameter\GM\Marine_VesselParam_GM.hxx">
       <Filter>TnbLib\MarineBase\Parameter\GM</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\MH\Marine_VesselParam_MH.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\MH</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\LCG\Marine_VesselParam_LCG.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\LCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\TCG\Marine_VesselParam_TCG.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\TCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\VCG\Marine_VesselParam_VCG.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\VCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\MASS\Marine_VesselParam_MASS.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\MASS</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Type\Marine_VesselType.hxx">
+      <Filter>TnbLib\MarineBase\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\DFLDANG\Marine_VesselParam_DFLDANG.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\DFLDANG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Criterion\Status\Marine_Criterion_Status.hxx">
+      <Filter>TnbLib\MarineBase\Criterion\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Criterion\Value\Marine_Criterion_Value.hxx">
+      <Filter>TnbLib\MarineBase\Criterion\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Criterion\Standard\Marine_Criterion_Standard.hxx">
+      <Filter>TnbLib\MarineBase\Criterion\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Criterion\Expln\Marine_Criterion_Epln.hxx">
+      <Filter>TnbLib\MarineBase\Criterion\Expln</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Criterion\Marine_Criterion.hxx">
+      <Filter>TnbLib\MarineBase\Criterion</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\CriterionTable\Marine_CriterionTable.hxx">
+      <Filter>TnbLib\MarineBase\CriterionTable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1129,6 +1207,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Parameter\Marine_VesselParams.cxx">
       <Filter>TnbLib\MarineBase\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Criterion\Marine_Criterion.cxx">
+      <Filter>TnbLib\MarineBase\Criterion</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Criterion\Expln\Marine_Criterion_Epln.cxx">
+      <Filter>TnbLib\MarineBase\Criterion\Expln</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Criterion\Standard\Marine_Criterion_Standard.cxx">
+      <Filter>TnbLib\MarineBase\Criterion\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Criterion\Value\Marine_Criterion_Value.cxx">
+      <Filter>TnbLib\MarineBase\Criterion\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\CriterionTable\Marine_CriterionTable.cxx">
+      <Filter>TnbLib\MarineBase\CriterionTable</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

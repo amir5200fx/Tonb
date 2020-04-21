@@ -62,10 +62,13 @@ tnbLib::Marine_DisctLib::WireFrameModel
 		shapes.push_back(alg.Shape());
 	}
 
-	auto model = std::make_shared<Marine_WireFrameModel>(theHull.Shape());
+	auto model = std::make_shared<Marine_WireFrameModel>();
 	Debug_Null_Pointer(model);
 
-	auto& sections = model->ChangeSections();
+	auto body = std::make_shared<Marine_Body>();
+	Debug_Null_Pointer(body);
+
+	auto& sections = body->ChangeSections();
 	sections.reserve(xSections.size());
 
 	Standard_Integer i = 0;
@@ -85,6 +88,10 @@ tnbLib::Marine_DisctLib::WireFrameModel
 		(
 			std::move(section));
 	}
+
+	model->ChangeBody() = std::move(body);
+	model->ChangeShape() = theHull.Shape();
+
 	return std::move(model);
 }
 
@@ -148,7 +155,7 @@ tnbLib::Marine_DisctLib::WettedBody
 	auto& wetted = body->ChangeSections();
 
 	Standard_Integer K = 0;
-	for (const auto& x : theModel.Sections())
+	for (const auto& x : theModel.Body()->Sections())
 	{
 		Debug_Null_Pointer(x);
 
