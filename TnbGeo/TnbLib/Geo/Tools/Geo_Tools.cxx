@@ -172,3 +172,54 @@ tnbLib::Geo_Tools::Triangulation
 	}
 	return std::move(tr);
 }
+
+size_t 
+tnbLib::Geo_Tools::FindSpan
+(
+	const Standard_Real x, 
+	const std::vector<Standard_Real>& theSorted
+)
+{
+#ifdef DEBUG
+	CheckSorted(theSorted, "size_t Geo_Tools::FindSpan(Args...)");
+#endif // DEBUG
+
+	auto high = theSorted.size() - 1;
+	if (x IS_EQUAL theSorted[high])
+	{
+		return high;
+	}
+
+	size_t low = 0;
+	auto mid = (low + high) / 2;
+	while (x < theSorted[mid] OR x >= theSorted[mid + 1])
+	{
+		if (x < theSorted[mid]) high = mid;
+		else low = mid;
+		mid = (low + high) / 2;
+	}
+	return mid;
+}
+
+void tnbLib::Geo_Tools::CheckSorted
+(
+	const std::vector<Standard_Real>& theSorted,
+	const word & theName
+)
+{
+	auto iter = theSorted.begin();
+	auto x0 = *iter;
+
+	iter++;
+	while (iter NOT_EQUAL theSorted.end())
+	{
+		if (*iter < x0)
+		{
+			FatalErrorIn(theName)
+				<< "the vector is not sorted!" << endl
+				<< abort(FatalError);
+		}
+		x0 = *iter;
+		iter++;
+	}
+}

@@ -3,6 +3,8 @@
 #define _Geom_PriorityList_Header
 
 #include <Standard_TypeDef.hxx>
+#include <error.hxx>
+#include <OSstream.hxx>
 
 #include <vector>
 
@@ -36,6 +38,22 @@ namespace tnbLib
 		{
 			return NbItems_;
 		}
+
+		Standard_Integer PrioritySize() const
+		{
+			return NbPriorities();
+		}
+
+		Standard_Boolean IsPriorityEmpty() const
+		{
+			return !NbPriorities();
+		}
+
+		static Standard_Integer LeftChild(const Standard_Integer Index) { return 2 * Index + 1; }
+
+		static Standard_Integer RightChild(const Standard_Integer Index) { return 2 * Index + 2; }
+
+		static Standard_Integer Parent(const Standard_Integer Index) { return (Index - 1) / 2; }
 	};
 
 	template<class T>
@@ -49,17 +67,6 @@ namespace tnbLib
 
 		Standard_Real(*LengthValue)(const T&);
 
-
-		Standard_Boolean overFlow() const
-		{
-			return NbPriorities() >= theData_.size();
-		}
-
-		Standard_Integer LeftChild(const Standard_Integer Index) { return 2 * Index + 1; }
-
-		Standard_Integer RightChild(const Standard_Integer Index) { return 2 * Index + 2; }
-
-		Standard_Integer Parent(const Standard_Integer Index) { return (Index - 1) / 2; }
 
 		void ShiftUp(const Standard_Integer Index)
 		{
@@ -135,16 +142,11 @@ namespace tnbLib
 		Geo_PriorityList(Standard_Real(*lengthValue)(const T&))
 		{
 			LengthValue = lengthValue;
-		}
+		}	
 
-		Standard_Integer PrioritySize() const
+		Standard_Boolean overFlow() const
 		{
-			return NbPriorities();
-		}
-
-		Standard_Boolean IsPriorityEmpty() const
-		{
-			return !NbPriorities();
+			return NbPriorities() >= theData_.size();
 		}
 
 		Standard_Boolean RetrieveFromPriority(T& theItem)
@@ -193,6 +195,132 @@ namespace tnbLib
 		void SetPriorityFunction(Standard_Real(*lengthValue)(const T&))
 		{
 			LengthValue = lengthValue;
+		}
+	};
+
+	template<>
+	class Geo_PriorityList<Standard_Integer>
+		: public Geo_PriorityListBase
+	{
+
+		/*Private Data*/
+
+
+		std::vector<Standard_Integer> theData_;
+
+
+		//- private functions
+
+		void ShiftUp(const Standard_Integer Index)
+		{
+			if (Index)
+			{
+				auto ParentIndex = Parent(Index);
+
+				if (theData_[ParentIndex] > theData_[Index])
+				{
+					std::swap(theData_[ParentIndex], theData_[Index]);
+
+					ShiftUp(ParentIndex);
+				}
+			}
+		}
+
+		void ShiftDown(const Standard_Integer Index)
+		{
+			Standard_Integer
+				LeftChildIndex,
+				RightChildIndex,
+				MinIndex;
+
+			LeftChildIndex = LeftChild(Index);
+			RightChildIndex = RightChild(Index);
+
+			if (RightChildIndex >= NbPriorities())
+			{
+				if (LeftChildIndex >= NbPriorities())
+					return;
+				else
+					MinIndex = LeftChildIndex;
+			}
+			else
+			{
+				if (theData_[LeftChildIndex] <= theData_[RightChildIndex])
+					MinIndex = LeftChildIndex;
+				else
+					MinIndex = RightChildIndex;
+			}
+
+			if (theData_[Index] > theData_[MinIndex])
+			{
+				std::swap(theData_[MinIndex], theData_[Index]);
+
+				ShiftDown(MinIndex);
+			}
+		}
+
+		Standard_Integer Remove()
+		{
+			if (theData_.empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " Heap is empty"
+					<< abort(FatalError);
+			}
+
+			auto Item = theData_[0];
+			theData_[0] = theData_[NbPriorities() - 1];
+			Decrement();
+
+			if (NbPriorities() > 0) ShiftDown(0);
+			return Item;
+		}
+
+	public:
+
+		Geo_PriorityList()
+		{}
+
+		Standard_Boolean overFlow() const
+		{
+			return NbPriorities() >= theData_.size();
+		}
+
+		Standard_Boolean RetrieveFromPriority(Standard_Integer& theItem)
+		{
+			if (IsPriorityEmpty()) return Standard_False;
+			else
+			{
+				theItem = Remove();
+				return Standard_True;
+			}
+		}
+
+		void SetSizeToPriority(const Standard_Integer theSize)
+		{
+			theData_.resize(theSize);
+		}
+
+		void InsertToPriority(const Standard_Integer theItem)
+		{
+			if (overFlow())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " Heap's underlying storage is overflow"
+					<< abort(FatalError);
+			}
+
+			Increment();
+			theData_[NbPriorities() - 1] = theItem;
+
+			ShiftUp(NbPriorities() - 1);
+		}
+
+		void InsertToPriority(const std::vector<Standard_Integer>& theItems)
+		{
+			theData_.resize(theItems.size());
+			for (const auto& item : theItems)
+				InsertToPriority(item);
 		}
 	};
 }

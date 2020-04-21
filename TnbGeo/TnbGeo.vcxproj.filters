@@ -373,6 +373,9 @@
     <Filter Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Quadrant">
       <UniqueIdentifier>{34bea2d7-379a-4755-b938-115722eca56b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Counter">
+      <UniqueIdentifier>{98d9ca45-8b18-440a-98b6-6e99c24a0a7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -828,6 +831,9 @@
     <ClInclude Include="TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Geo_MxCifOctreeI.hxx">
       <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Octree</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Counter\Geo_ItemCounter.hxx">
+      <Filter>TnbLib\Geo\Counter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1003,6 +1009,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Geo_MxCifQuadtree.cxx">
       <Filter>TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Counter\Geo_ItemCounter.cxx">
+      <Filter>TnbLib\Geo\Counter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
