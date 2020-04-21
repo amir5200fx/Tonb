@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{2d29742f-a20b-4c87-b3d9-b99257c398ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08">
+      <UniqueIdentifier>{3eb9713b-b4a0-43fc-8114-b31699e1f7ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General">
+      <UniqueIdentifier>{f36ab5a1-5467-4100-bb90-bdba9ff80b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Criteria">
+      <UniqueIdentifier>{99530414-3ca1-415b-a1d0-b3498fd36b06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Criteria\RightLever">
+      <UniqueIdentifier>{0884ca66-ce38-4044-beb0-0f715be6c0f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Criteria\GustWind">
+      <UniqueIdentifier>{54a02660-7eba-47bd-941f-b9bcd7bb3173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Constant">
+      <UniqueIdentifier>{8d0c09d7-9c9c-4d40-861d-d27662c5482a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Constant\RightLever">
+      <UniqueIdentifier>{17a70022-24ec-4bb7-99ce-386138abca52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Constant\RightLever\Heel30">
+      <UniqueIdentifier>{1b457541-b09f-4b29-9fa7-ee957f3208d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Constant\RightLever\Heel25">
+      <UniqueIdentifier>{f43574e9-90fd-4b0f-97d4-812a966f824e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\General\Constant\RightLever\Heel40">
+      <UniqueIdentifier>{660491a8-7a86-432f-aac7-8e6aa8ba0274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Tools">
+      <UniqueIdentifier>{2b614e21-f60e-4e80-8508-293ee5f8fa62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Table">
+      <UniqueIdentifier>{ee033cec-bc52-488d-96e4-4fb32835f5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Factor">
+      <UniqueIdentifier>{6d9c2e86-418c-4b74-89be-2cea904c904a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\CmptLib">
+      <UniqueIdentifier>{25121ae6-f265-46a1-ac19-60251bbe0633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter">
+      <UniqueIdentifier>{80a9b91d-b114-4a06-b859-b9e6c9913436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\P">
+      <UniqueIdentifier>{7e325781-c5e7-42b0-ac27-1756b171f20f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\A">
+      <UniqueIdentifier>{1e1bc610-6804-4008-9b7c-0ec53b7b3ab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\Z">
+      <UniqueIdentifier>{7ae746ad-88cd-4753-be79-bf9e3d87b494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\g">
+      <UniqueIdentifier>{1c99876f-3d0f-4d81-8121-b6b9f9c07883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\LW">
+      <UniqueIdentifier>{3afbca03-b7ae-43fe-bac0-33447cb1451f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\T">
+      <UniqueIdentifier>{a3e5b213-a4af-4da3-9e80-4f1a32fb6de8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\Ak">
+      <UniqueIdentifier>{7ab51f3d-1437-4fa8-90e1-1841eb301120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\Phi">
+      <UniqueIdentifier>{c000fb30-e52f-4e0d-945c-f25838ed26f4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.hxx">
+      <Filter>TnbLib\ISC08\General\Criteria\RightLever</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Tools\ISC08_Tools.hxx">
+      <Filter>TnbLib\ISC08\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.hxx">
+      <Filter>TnbLib\ISC08\General\Criteria\GustWind</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Table\ISC08_Table.hxx">
+      <Filter>TnbLib\ISC08\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Table\ISC08_Tables.hxx">
+      <Filter>TnbLib\ISC08\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Factor\ISC08_Factor.hxx">
+      <Filter>TnbLib\ISC08\Factor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\CmptLib\ISC08_CmptLib.hxx">
+      <Filter>TnbLib\ISC08\CmptLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_Parameter.hxx">
+      <Filter>TnbLib\ISC08\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_ParameterM.hxx">
+      <Filter>TnbLib\ISC08\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_Parameters.hxx">
+      <Filter>TnbLib\ISC08\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\A\ISC08_Parameter_A.hxx">
+      <Filter>TnbLib\ISC08\Parameter\A</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\P\ISC08_Parameter_P.hxx">
+      <Filter>TnbLib\ISC08\Parameter\P</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\Z\ISC08_Parameter_Z.hxx">
+      <Filter>TnbLib\ISC08\Parameter\Z</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\g\ISC08_Parameter_g.hxx">
+      <Filter>TnbLib\ISC08\Parameter\g</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\LW\ISC08_Parameter_Lw.hxx">
+      <Filter>TnbLib\ISC08\Parameter\LW</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\T\ISC08_Parameter_T.hxx">
+      <Filter>TnbLib\ISC08\Parameter\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\Phi\ISC08_Parameter_Phi.hxx">
+      <Filter>TnbLib\ISC08\Parameter\Phi</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\Ak\ISC08_Parameter_Ak.hxx">
+      <Filter>TnbLib\ISC08\Parameter\Ak</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.cxx">
+      <Filter>TnbLib\ISC08\General\Criteria\RightLever</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\Tools\ISC08_Tools.cxx">
+      <Filter>TnbLib\ISC08\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.cxx">
+      <Filter>TnbLib\ISC08\General\Criteria\GustWind</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\Table\ISC08_Table.cxx">
+      <Filter>TnbLib\ISC08\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\Factor\ISC08_Factor.cxx">
+      <Filter>TnbLib\ISC08\Factor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\Parameter\ISC08_Parameter.cxx">
+      <Filter>TnbLib\ISC08\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\CmptLib\ISC08_CmptLib.cxx">
+      <Filter>TnbLib\ISC08\CmptLib</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

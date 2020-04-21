@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{EB6B172D-7EAF-4816-A430-E793F9BB51BF}</ProjectGuid>
+    <RootNamespace>TnbISC08</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\ISC08\CmptLib\ISC08_CmptLib.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Factor\ISC08_Factor.hxx" />
+    <ClInclude Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.hxx" />
+    <ClInclude Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\Ak\ISC08_Parameter_Ak.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\A\ISC08_Parameter_A.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\g\ISC08_Parameter_g.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_Parameter.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_ParameterM.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_Parameters.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\LW\ISC08_Parameter_Lw.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\Phi\ISC08_Parameter_Phi.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\P\ISC08_Parameter_P.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\T\ISC08_Parameter_T.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\Z\ISC08_Parameter_Z.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Table\ISC08_Table.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Table\ISC08_Tables.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Tools\ISC08_Tools.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\ISC08\CmptLib\ISC08_CmptLib.cxx" />
+    <ClCompile Include="TnbLib\ISC08\Factor\ISC08_Factor.cxx" />
+    <ClCompile Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.cxx" />
+    <ClCompile Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.cxx" />
+    <ClCompile Include="TnbLib\ISC08\Parameter\ISC08_Parameter.cxx" />
+    <ClCompile Include="TnbLib\ISC08\Table\ISC08_Table.cxx" />
+    <ClCompile Include="TnbLib\ISC08\Tools\ISC08_Tools.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
