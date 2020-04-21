@@ -32,6 +32,8 @@ namespace tnbLib
 
 	public:
 
+		typedef Pnt2d ptType;
+
 		Pln_Vertex()
 		{}
 

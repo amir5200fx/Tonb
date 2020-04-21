@@ -274,6 +274,39 @@
     <Filter Include="TnbLib\Cad2d\Trim\Polygon">
       <UniqueIdentifier>{8eedceca-662b-444a-8a98-c648f2a7a8d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler">
+      <UniqueIdentifier>{6d8b4ea4-0d82-49a4-82b9-17de8596dcb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\SrchEng">
+      <UniqueIdentifier>{aae41671-5c84-48f2-bb60-0a09fff8682d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Entities">
+      <UniqueIdentifier>{74913898-7fab-4b6f-a00d-80c7f2c1a0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Entities\Entity">
+      <UniqueIdentifier>{237c3003-61bf-4f59-b7ec-5798d45671be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Entities\Corner">
+      <UniqueIdentifier>{687317a9-2fb2-46e5-afb8-e906b8612fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Counter">
+      <UniqueIdentifier>{d5ac19df-f1bb-4442-b462-59d056eb2217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Registry">
+      <UniqueIdentifier>{5421a674-1970-44f7-95aa-0f467c3b2c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Wire">
+      <UniqueIdentifier>{298ee5e7-583f-4b22-ba51-17e6afc421f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Plane">
+      <UniqueIdentifier>{7e5da241-1dfd-4d19-a5a8-5fff3d38ca58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Tools">
+      <UniqueIdentifier>{fda22bd6-6a11-40a7-9db0-01c317546cc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\Manager">
+      <UniqueIdentifier>{d8df0a85-a91e-4b0a-a8d1-902fe68b2705}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -525,6 +558,33 @@
     <ClInclude Include="TnbLib\Cad2d\Trim\Polygon\Cad2d_PolygonTrim.hxx">
       <Filter>TnbLib\Cad2d\Trim\Polygon</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Cad2d_Modeler.hxx">
+      <Filter>TnbLib\Cad2d\Modeler</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\SrchEng\Cad2d_Modeler_SrchEng.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\SrchEng</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Entities\Entity\Cad2d_Modeler_Entity.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Entities\Corner\Cad2d_Modeler_Corner.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\Entities\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Counter\Cad2d_Modeler_Counter.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\Counter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Registry\Cad2d_Modeler_Registry.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Wire\Cad2d_Modeler_Wire.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Plane\Cad2d_Modeler_Plane.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\Tools\Cad2d_Modeler_Tools.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -679,6 +739,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Trim\Polygon\Cad2d_PolygonTrim.cxx">
       <Filter>TnbLib\Cad2d\Trim\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Entities\Corner\Cad2d_Modeler_Corner.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Entities\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\SrchEng\Cad2d_Modeler_SrchEng.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\SrchEng</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Cad2d_Modeler.cxx">
+      <Filter>TnbLib\Cad2d\Modeler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Registry\Cad2d_Modeler_Registry.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Registry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Wire\Cad2d_Modeler_Wire.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Plane\Cad2d_Modeler_Plane.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Plane</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
