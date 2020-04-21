@@ -82,14 +82,14 @@ tnbLib::HydStatic_BnjCurve::Value
 		new Geom2d_Line(gp_Pnt2d(0, theT), gp_Dir2d(1, 0));
 	Debug_Null_Pointer(l);
 
-	auto Int = Pln_Tools::Intersection(l, Geometry());
-	if (Int->NbPoints() NOT_EQUAL 1)
+	Geom2dAPI_InterCurveCurve Int(l, Geometry());	
+	if (Int.NbPoints() NOT_EQUAL 1)
 	{
 		FatalErrorIn("Standard_Real Value(const Standard_Real theT) const")
 			<< "Invalid data" << endl
 			<< abort(FatalError);
 	}
 
-	auto value = Int->Point(0);
+	auto value = Int.Point(0);
 	return value.X();
 }

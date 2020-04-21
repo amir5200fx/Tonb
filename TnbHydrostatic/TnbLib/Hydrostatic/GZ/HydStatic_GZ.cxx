@@ -1,7 +1,7 @@
 #include <HydStatic_GZ.hxx>
 
 #include <MarineBase_Tools.hxx>
-#include <HydStatic_LeverArmPair.hxx>
+#include <HydStatic_GzQ.hxx>
 #include <HydStatic_rArmCurve.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_CmptLib.hxx>

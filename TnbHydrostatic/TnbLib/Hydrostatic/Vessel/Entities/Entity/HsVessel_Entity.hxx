@@ -22,9 +22,16 @@ namespace tnbLib
 
 		HsVessel_Entity();
 
-		HsVessel_Entity(const Standard_Integer theIndex);
+		HsVessel_Entity
+		(
+			const Standard_Integer theIndex
+		);
 
-		HsVessel_Entity(const Standard_Integer theIndex, const word& theName);
+		HsVessel_Entity
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		);
 
 	public:
 

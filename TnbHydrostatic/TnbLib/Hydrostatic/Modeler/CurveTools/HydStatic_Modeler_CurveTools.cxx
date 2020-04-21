@@ -1,0 +1,1 @@
+#include <HydStatic_Modeler_CurveTools.hxx>

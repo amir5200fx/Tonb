@@ -34,6 +34,12 @@ namespace tnbLib
 		);
 
 
+		Standard_Boolean IsIntersect(const Standard_Real theVolume) const;
+
+		Standard_Real LeverArm0() const;
+
+		Standard_Real LeverArm1() const;
+
 		Standard_Real Value(const Standard_Real theVolume) const;
 	};
 }

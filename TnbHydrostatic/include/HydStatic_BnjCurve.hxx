@@ -33,13 +33,19 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		Standard_Boolean IsIntersect(const Standard_Real theT) const;
+		Standard_Boolean IsIntersect
+		(
+			const Standard_Real theT
+		) const;
 
 		Standard_Real A0() const;
 
 		Standard_Real A1() const;
 
-		Standard_Real Value(const Standard_Real theT) const;
+		Standard_Real Value
+		(
+			const Standard_Real theT
+		) const;
 
 	};
 }
