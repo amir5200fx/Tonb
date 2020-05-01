@@ -18,6 +18,28 @@
 #include <Geom2dAPI_Interpolate.hxx>
 #include <TColgp_HArray1OfPnt2d.hxx>
 
+Handle(Geom2d_Curve)
+tnbLib::Pln_CurveTools::Trim
+(
+	const Handle(Geom2d_Curve) theCurve,
+	const Standard_Real theP0, 
+	const Standard_Real theP1
+)
+{
+	if (theP0 >= theP1)
+	{
+		FatalErrorIn("Handle(Geom2d_Curve) Trim(Args...)")
+			<< "invalid data: p0 >= p1" << endl
+			<< abort(FatalError);
+	}
+
+	const auto p0 = std::max(theP0, theCurve->FirstParameter());
+	const auto p1 = std::min(theP1, theCurve->LastParameter());
+
+	Handle(Geom2d_TrimmedCurve) t = new Geom2d_TrimmedCurve(theCurve, p0, p1);
+	return std::move(t);
+}
+
 Handle(Geom2d_Curve) 
 tnbLib::Pln_CurveTools::Interpolation
 (
@@ -33,7 +55,8 @@ tnbLib::Pln_CurveTools::Interpolation
 			<< abort(FatalError);
 	}
 
-	Handle(TColgp_HArray1OfPnt2d) Q = new TColgp_HArray1OfPnt2d(1, theQ.size());
+	Handle(TColgp_HArray1OfPnt2d) Q =
+		new TColgp_HArray1OfPnt2d(1, (Standard_Integer)theQ.size());
 	Standard_Integer K = 0;
 	for (const auto& x : theQ)
 	{
@@ -66,7 +89,8 @@ tnbLib::Pln_CurveTools::Interpolation
 			<< abort(FatalError);
 	}
 
-	Handle(TColgp_HArray1OfPnt2d) Q = new TColgp_HArray1OfPnt2d(1, theQ.size());
+	Handle(TColgp_HArray1OfPnt2d) Q = 
+		new TColgp_HArray1OfPnt2d(1, (Standard_Integer)theQ.size());
 	Standard_Integer K = 0;
 	for (const auto& x : theQ)
 	{

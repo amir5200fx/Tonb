@@ -1,5 +1,6 @@
 #include <Pln_Edge.hxx>
 
+#include <Entity2d_Box.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Curve.hxx>
@@ -11,6 +12,33 @@ Standard_Boolean
 tnbLib::Pln_Edge::IsDangle() const
 {
 	return Vtx0()->IsDangle() OR Vtx1()->IsDangle();
+}
+
+Standard_Boolean 
+tnbLib::Pln_Edge::IsOrphan() const
+{
+	if (Vtx0()->NbEdges() NOT_EQUAL 1)
+		return Standard_False;
+	if (Vtx1()->NbEdges() NOT_EQUAL 1)
+		return Standard_False;
+
+	if (Wire().lock())
+		return Standard_False;
+
+	return Standard_True;
+}
+
+Standard_Integer 
+tnbLib::Pln_Edge::NbEntities
+(
+	const Pln_EntityType t
+) const
+{
+	if (t IS_EQUAL Pln_EntityType::VERTEX)
+		return 2;
+	if (t IS_EQUAL Pln_EntityType::EDGE)
+		return 1;
+	return 0;
 }
 
 Standard_Integer 
@@ -78,6 +106,17 @@ tnbLib::Pln_Edge::Parameter
 	}
 }
 
+tnbLib::Entity2d_Box 
+tnbLib::Pln_Edge::BoundingBox
+(
+	const Standard_Real Tol
+) const
+{
+	Debug_Null_Pointer(Curve());
+	auto b = Curve()->BoundingBox(Tol);
+	return std::move(b);
+}
+
 std::shared_ptr<tnbLib::Pln_Entity> 
 tnbLib::Pln_Edge::Copy() const
 {
@@ -106,6 +145,52 @@ tnbLib::Pln_Edge::Copy() const
 		v1->InsertToEdges(copy->Index(), copy);
 
 		return std::move(copy);
+	}
+}
+
+tnbLib::Pln_EntityType 
+tnbLib::Pln_Edge::Type() const
+{
+	return Pln_EntityType::EDGE;
+}
+
+void tnbLib::Pln_Edge::Transform
+(
+	const gp_Trsf2d & t
+)
+{
+	if (NOT IsOrphan())
+	{
+		FatalErrorIn("void tnbLib::Pln_Edge::Transform(const gp_Trsf2d & t)")
+			<< "the edge must be orphan for transforming" << endl
+			<< abort(FatalError);
+	}
+
+	Curve()->Transform(t);
+	Vtx0()->Transform(t);
+	if (NOT IsRing())
+	{
+		Vtx1()->Transform(t);
+	}
+
+	if(Mesh())
+		Mesh()->Transform(t);
+}
+
+void tnbLib::Pln_Edge::RetrieveEntitiesTo
+(
+	std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
+	const Pln_EntityType t
+) const
+{
+	if (t IS_EQUAL Pln_EntityType::VERTEX)
+	{
+		theEntities.push_back(Vtx0());
+		theEntities.push_back(Vtx1());
+	}
+	if (t IS_EQUAL Pln_EntityType::EDGE)
+	{
+		theEntities.push_back(std::dynamic_pointer_cast<Pln_Entity>(This()));
 	}
 }
 

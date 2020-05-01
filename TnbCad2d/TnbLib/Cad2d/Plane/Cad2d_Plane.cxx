@@ -1,5 +1,6 @@
 #include <Cad2d_Plane.hxx>
 
+#include <Entity2d_Box.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Chain.hxx>
 #include <Geo_Tools.hxx>
@@ -14,18 +15,31 @@
 
 #include <gp_Ax2.hxx>
 
-Standard_Integer 
-tnbLib::Cad2d_Plane_Manager::NbCorners() const
+void tnbLib::Cad2d_Plane::SetOuter
+(
+	const outer && theOuter
+)
 {
-	Debug_Null_Pointer(theVertices_);
-	return (Standard_Integer)theVertices_->Size();
+	theOuter_ = std::move(theOuter);
 }
 
-Standard_Integer 
-tnbLib::Cad2d_Plane_Manager::NbSegments() const
+void tnbLib::Cad2d_Plane::SetInner
+(
+	const inner && theInner
+)
 {
-	Debug_Null_Pointer(theEdges_);
-	return (Standard_Integer)theEdges_->Size();
+	theInner_ = std::move(theInner);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Box> 
+tnbLib::Cad2d_Plane::CalcBoundingBox
+(
+	const Standard_Real theTol
+) const
+{
+	Debug_Null_Pointer(OuterWire());
+	auto b = std::make_shared<Entity2d_Box>(OuterWire()->BoundingBox());
+	return std::move(b);
 }
 
 namespace tnbLib
@@ -71,9 +85,6 @@ void tnbLib::Cad2d_Plane::Make
 
 	theOuter_ = theOuter;
 
-	Debug_Null_Pointer(theOuter_->BoundingBox());
-	theBoundingBox_ = *theOuter_->BoundingBox();
-
 	if (theInners)
 	{
 		theInner_ = theInners;
@@ -98,6 +109,77 @@ void tnbLib::Cad2d_Plane::Make
 	ChangeCorners() = 
 		std::make_shared<Cad_EntityManager<Pln_Vertex>>(vertexBlock->Name(), vertexBlock);
 	Debug_Null_Pointer(Corners());
+
+	const auto plane = std::dynamic_pointer_cast<Cad2d_Plane>(This());
+	theOuter->SetPlane(plane);
+	if (theInners)
+	{
+		for (const auto& x : *theInners)
+		{
+			x->SetPlane(plane);
+		}
+	}
+
+	auto b = CalcBoundingBox(0);
+	Debug_Null_Pointer(b);
+
+	SetBoundingBox(std::move(b));
+}
+
+void tnbLib::Cad2d_Plane::Make
+(
+	const outer && theOuter,
+	const inner && theInners
+)
+{
+	SetOuter(std::move(theOuter));
+
+	if (theInners)
+	{
+		SetInner(std::move(theInners));
+	}
+
+	CheckOuter(OuterWire(), "void tnbLib::Cad2d_Plane::Make(Args...)");
+
+	if (InnerWires())
+	{
+		CheckInners(InnerWires(), "void tnbLib::Cad2d_Plane::Make(Args...)");
+	}
+
+	auto edges = RetrieveEdges(OuterWire(), InnerWires());
+
+	auto vertices = Pln_Tools::RetrieveVertices(edges);
+
+	auto edgeBlock =
+		std::make_shared<Cad_BlockEntity<Pln_Edge>>("Default Block Edge", edges);
+	Debug_Null_Pointer(edgeBlock);
+
+	ChangeSegments() =
+		std::make_shared<Cad_EntityManager<Pln_Edge>>(edgeBlock->Name(), edgeBlock);
+	Debug_Null_Pointer(Segments());
+
+	auto vertexBlock =
+		std::make_shared<Cad_BlockEntity<Pln_Vertex>>("Default Block Vertex", vertices);
+	Debug_Null_Pointer(vertexBlock);
+
+	ChangeCorners() =
+		std::make_shared<Cad_EntityManager<Pln_Vertex>>(vertexBlock->Name(), vertexBlock);
+	Debug_Null_Pointer(Corners());
+
+	const auto plane = std::dynamic_pointer_cast<Cad2d_Plane>(This());
+	OuterWire()->SetPlane(plane);
+	if (InnerWires())
+	{
+		for (const auto& x : *InnerWires())
+		{
+			x->SetPlane(plane);
+		}
+	}
+
+	auto b = CalcBoundingBox(0);
+	Debug_Null_Pointer(b);
+
+	SetBoundingBox(std::move(b));
 }
 
 void tnbLib::Cad2d_Plane::CheckOuter
@@ -116,7 +198,8 @@ void tnbLib::Cad2d_Plane::CheckOuter
 	if (theOuter->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
 	{
 		FatalErrorIn(theName) << endl
-			<< "Wrong orientation of the outer wire!" << " orientation code = " << theOuter->Orientation() << endl
+			<< "Wrong orientation of the outer wire!" << " orientation code = " 
+			<< (int)theOuter->Orientation() << endl
 			<< abort(FatalError);
 	}
 }
@@ -160,7 +243,15 @@ tnbLib::Cad2d_Plane::Cad2d_Plane
 (
 	const gp_Ax2 & theSystem
 )
-	: theSystem_(theSystem)
+	: cad2dLib::Plane_Auxillary(theSystem)
+{
+}
+
+tnbLib::Cad2d_Plane::Cad2d_Plane
+(
+	const gp_Ax2 && theSystem
+)
+	: cad2dLib::Plane_Auxillary(std::move(theSystem))
 {
 }
 
@@ -170,7 +261,17 @@ tnbLib::Cad2d_Plane::Cad2d_Plane
 	const gp_Ax2 & theSystem
 )
 	: Pln_Entity(theIndex)
-	, theSystem_(theSystem)
+	, cad2dLib::Plane_Auxillary(theSystem)
+{
+}
+
+tnbLib::Cad2d_Plane::Cad2d_Plane
+(
+	const Standard_Integer theIndex,
+	const gp_Ax2 && theSystem
+)
+	: Pln_Entity(theIndex)
+	, cad2dLib::Plane_Auxillary(std::move(theSystem))
 {
 }
 
@@ -181,17 +282,58 @@ tnbLib::Cad2d_Plane::Cad2d_Plane
 	const gp_Ax2 & theSystem
 )
 	: Pln_Entity(theIndex, theName)
-	, theSystem_(theSystem)
+	, cad2dLib::Plane_Auxillary(theSystem)
+{
+}
+
+tnbLib::Cad2d_Plane::Cad2d_Plane
+(
+	const Standard_Integer theIndex,
+	const word & theName,
+	const gp_Ax2 && theSystem
+)
+	: Pln_Entity(theIndex, theName)
+	, cad2dLib::Plane_Auxillary(std::move(theSystem))
 {
 }
 
 //*******************************************
 
 Standard_Integer 
+tnbLib::Cad2d_Plane::NbWires() const
+{
+	Debug_Null_Pointer(OuterWire());
+	return NbHoles() + 1;
+}
+
+Standard_Integer 
 tnbLib::Cad2d_Plane::NbHoles() const
 {
 	if (NOT theInner_) return 0;
 	return (Standard_Integer)theInner_->size();
+}
+
+Standard_Integer 
+tnbLib::Cad2d_Plane::NbEntities
+(
+	const Pln_EntityType t
+) const
+{
+	if (t IS_EQUAL Pln_EntityType::VERTEX)
+		return NbCorners();
+	if (t IS_EQUAL Pln_EntityType::EDGE)
+		return NbSegments();
+	if (t IS_EQUAL Pln_EntityType::WIRE)
+		return NbWires();
+	if (t IS_EQUAL Pln_EntityType::PLANE)
+		return 1;
+	return 0;
+}
+
+Standard_Boolean 
+tnbLib::Cad2d_Plane::IsOrphan() const
+{
+	return Standard_True;
 }
 
 std::tuple<Standard_Real, Standard_Real> 
@@ -253,6 +395,12 @@ tnbLib::Cad2d_Plane::Copy() const
 	return std::move(plane);
 }
 
+tnbLib::Pln_EntityType 
+tnbLib::Cad2d_Plane::Type() const
+{
+	return Pln_EntityType::PLANE;
+}
+
 void tnbLib::Cad2d_Plane::Approx
 (
 	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
@@ -266,21 +414,73 @@ void tnbLib::Cad2d_Plane::Approx
 	}
 }
 
-void tnbLib::Cad2d_Plane::Transform(const gp_Trsf2d & t)
+void tnbLib::Cad2d_Plane::Transform
+(
+	const gp_Trsf2d & t
+)
 {
 	if (OuterWire())
-		OuterWire()->Transform(t);
+		OuterWire()->ForcedTransform(t);
 
 	if (InnerWires())
 	{
 		for (const auto& x : *InnerWires())
 		{
 			Debug_Null_Pointer(x);
-			x->Transform(t);
+			x->ForcedTransform(t);
 		}
 	}
 
-	theBoundingBox_ = *OuterWire()->BoundingBox();
+	auto b = CalcBoundingBox(0);
+	Debug_Null_Pointer(b);
+
+	SetBoundingBox(std::move(b));
+}
+
+void tnbLib::Cad2d_Plane::RetrieveWiresTo
+(
+	std::vector<std::shared_ptr<Pln_Entity>>& theWires
+) const
+{
+	Debug_Null_Pointer(OuterWire());
+	theWires.reserve(NbWires());
+
+	theWires.push_back(OuterWire());
+	if (InnerWires())
+	{
+		const auto& inners = *InnerWires();
+		for (const auto& x : inners)
+		{
+			theWires.push_back(x);
+		}
+	}
+}
+
+void tnbLib::Cad2d_Plane::RetrieveEntitiesTo
+(
+	std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
+	const Pln_EntityType t
+) const
+{
+	if (t IS_EQUAL Pln_EntityType::VERTEX)
+	{
+		RetrieveCornersTo(theEntities);
+	}
+
+	if (t IS_EQUAL Pln_EntityType::EDGE)
+	{
+		RetrieveSegmentsTo(theEntities);
+	}
+
+	if (t IS_EQUAL Pln_EntityType::WIRE)
+	{
+		RetrieveWiresTo(theEntities);
+	}
+
+	if (t IS_EQUAL Pln_EntityType::PLANE)
+	{
+		theEntities.push_back(std::dynamic_pointer_cast<Pln_Entity>(This()));
+	}
 }
 
 //std::shared_ptr<tnbLib::Entity2d_Chain> 
@@ -367,6 +567,33 @@ tnbLib::Cad2d_Plane::MergedPolygon() const
 		}
 	}
 	return std::move(chain);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Cad2d_Plane::BoundingBox
+(
+	const Standard_Real Tol
+) const
+{
+	Debug_Null_Pointer(BoundingBox());
+	auto b = *BoundingBox();
+	if (Tol > 0)
+	{
+		b.Expand(Tol);
+	}
+	return std::move(b);
+}
+
+const typename tnbLib::Cad2d_Plane::outer&
+tnbLib::Cad2d_Plane::OuterWire() const
+{
+	return theOuter_;
+}
+
+const typename tnbLib::Cad2d_Plane::inner& 
+tnbLib::Cad2d_Plane::InnerWires() const
+{
+	return theInner_;
 }
 
 //- Static functions

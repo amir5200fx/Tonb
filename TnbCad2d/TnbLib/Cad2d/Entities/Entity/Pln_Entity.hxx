@@ -3,9 +3,20 @@
 #define _Pln_Entity_Header
 
 #include <Cad_Entity.hxx>
+#include <Pln_EntityType.hxx>
+#include <Entity2d_BoxFwd.hxx>
+
+#include <vector>
+
+class gp_Trsf2d;
 
 namespace tnbLib
 {
+
+	// Forward Declarations
+	class Pln_Vertex;
+	class Pln_Edge;
+	class Pln_Wire;
 
 	class Pln_Entity
 		: public Cad_Entity
@@ -32,7 +43,31 @@ namespace tnbLib
 
 	public:
 
+		std::vector<std::shared_ptr<Pln_Entity>> 
+			RetrieveEntities
+			(
+				const Pln_EntityType t
+			) const;
+
+		virtual Standard_Integer NbEntities(const Pln_EntityType t) const = 0;	
+
+		virtual Standard_Boolean IsOrphan() const = 0;
+
+		virtual Entity2d_Box BoundingBox(const Standard_Real Tol) const = 0;
+
 		virtual std::shared_ptr<Pln_Entity> Copy() const = 0;
+
+		virtual Pln_EntityType Type() const = 0;
+
+		virtual void Transform(const gp_Trsf2d&) = 0;
+
+		virtual void RetrieveEntitiesTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theEntities, 
+			const Pln_EntityType t
+		) const = 0;
+
+		
 	};
 }
 

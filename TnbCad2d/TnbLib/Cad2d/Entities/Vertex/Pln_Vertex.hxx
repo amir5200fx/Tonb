@@ -65,20 +65,32 @@ namespace tnbLib
 
 		Standard_Boolean IsDangle() const;
 
-		Standard_Boolean IsOrphan() const;
-
 		Standard_Boolean IsRingPoint() const;
 
 		Standard_Boolean IsManifold() const;
 
 		Standard_Real Angle() const;
 
+		Standard_Integer NbEntities(const Pln_EntityType t) const override;
+
+		Standard_Boolean IsOrphan() const override;
+
+		Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
+
 		std::shared_ptr<Pln_Entity>
 			Copy() const override;
 
+		Pln_EntityType Type() const override;
+
 		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
 
-		void Transform(const gp_Trsf2d& t);
+		void Transform(const gp_Trsf2d& t) override;
+
+		void RetrieveEntitiesTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
+			const Pln_EntityType t
+		) const override;
 
 		//- virtual functions
 

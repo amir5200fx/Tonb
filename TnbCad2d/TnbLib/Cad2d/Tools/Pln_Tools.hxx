@@ -20,6 +20,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class Pln_Entity;
 	class Pln_Edge;
 	class Pln_Ring;
 	class Pln_CmpEdge;
@@ -232,7 +233,8 @@ namespace tnbLib
 		static std::vector<std::shared_ptr<Cad2d_Plane>>
 			RetrievePlanes
 			(
-				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+				const std::vector<std::shared_ptr<Pln_Wire>>& theWires,
+				const gp_Ax2& theAx
 			);
 
 		static std::shared_ptr<Pln_Edge>
@@ -256,6 +258,41 @@ namespace tnbLib
 				std::vector<std::shared_ptr<Pln_Wire>>& theWires
 			);
 
+		static std::shared_ptr<Pln_Vertex> 
+			Vertex
+			(
+				const std::shared_ptr<Pln_Entity>& theEnt
+			);
+
+		static std::shared_ptr<Pln_Edge> 
+			Edge
+			(
+				const std::shared_ptr<Pln_Entity>& theEnt
+			);
+
+		static std::shared_ptr<Pln_Curve> 
+			Curve
+			(
+				const std::shared_ptr<Pln_Entity>& theEnt
+			);
+
+		static std::shared_ptr<Pln_Ring> 
+			Ring
+			(
+				const std::shared_ptr<Pln_Entity>& theEnt
+			);
+
+		static std::shared_ptr<Cad2d_Plane> 
+			Plane
+			(
+				const std::shared_ptr<Pln_Entity>& theEnt
+			);
+
+		static std::vector<std::shared_ptr<Pln_Vertex>> RetrieveVertices(const std::shared_ptr<Pln_Entity>& theEnt);
+
+		static std::vector<std::shared_ptr<Pln_Curve>> RetrieveCurves(const std::shared_ptr<Pln_Entity>& theEnt);
+
+		static std::vector<std::shared_ptr<Pln_Edge>> RetrieveEdges(const std::shared_ptr<Pln_Entity>& theEnt);
 
 	};
 }

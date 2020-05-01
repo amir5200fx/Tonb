@@ -8,6 +8,17 @@ namespace tnbLib
 		return NbEdges() IS_EQUAL 1 AND NOT IsRingPoint();
 	}
 
+	inline Standard_Integer 
+		Pln_Vertex::NbEntities
+		(
+			const Pln_EntityType t
+		) const
+	{
+		if (t IS_EQUAL Pln_EntityType::VERTEX)
+			return 1;
+		return 0;
+	}
+
 	inline Standard_Boolean 
 		Pln_Vertex::IsOrphan() const
 	{

@@ -53,8 +53,8 @@ tnbLib::Pln_Tools::RetrieveOrientation
 		}*/
 	}
 
-	if (Geo_Tools::IsCcwOrder_cgal(Pts)) return Pln_Orientation_CCW;
-	else return Pln_Orientation_CW;
+	if (Geo_Tools::IsCcwOrder_cgal(Pts)) return Pln_Orientation::Pln_Orientation_CCW;
+	else return Pln_Orientation::Pln_Orientation_CW;
 }
 
 namespace tnbLib

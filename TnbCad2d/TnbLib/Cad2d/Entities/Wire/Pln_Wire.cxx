@@ -10,12 +10,13 @@
 #include <error.hxx>
 #include <OSstream.hxx>
 
-void tnbLib::Pln_Wire::CalcBoundingBox
+tnbLib::Entity2d_Box
+tnbLib::Pln_Wire::CalcBoundingBox
 (
-	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
-)
+	const Standard_Real theTol
+) const
 {
-	const auto& edges = theEdges;
+	const auto& edges = Edges();
 
 	if (edges.empty())
 	{
@@ -28,16 +29,30 @@ void tnbLib::Pln_Wire::CalcBoundingBox
 	Debug_Null_Pointer(*iter);
 	Debug_Null_Pointer((*iter)->Curve());
 
-	auto box = (*iter)->Curve()->CalcBoundingBox();
+	Entity2d_Box box = (*iter)->Curve()->BoundingBox(0);
 	while (iter NOT_EQUAL edges.end())
 	{
 		const auto& x = (*iter)->Curve();
 
 		Debug_Null_Pointer(x);
-		box = Entity2d_Box::Union(box, x->CalcBoundingBox());
+		box = Entity2d_Box::Union(box, x->BoundingBox(0));
 		iter++;
 	}
-	theBoundingBox_ = std::make_shared<Entity2d_Box>(box);
+
+	if (theTol > 0)
+	{
+		box.Expand(theTol);
+	}
+
+	return std::move(box);
+}
+
+void tnbLib::Pln_Wire::SetEdges
+(
+	const std::shared_ptr<Pln_CmpEdge>&& theEdges
+)
+{
+	theEdges_ = std::move(theEdges);
 }
 
 void tnbLib::Pln_Wire::CheckWire
@@ -96,11 +111,61 @@ void tnbLib::Pln_Wire::CreateWire
 
 	CheckWire(theEdge->Edges());
 
-	CalcBoundingBox(theEdge->Edges());
-
 	theEdges_ = theEdge;
 
-	theOrientation_ = Pln_Tools::RetrieveOrientation(*this);
+	SetOrientation(Pln_Tools::RetrieveOrientation(*this));
+
+	auto b = CalcBoundingBox(0);
+	SetBoundingBox(std::move(b));
+}
+
+void tnbLib::Pln_Wire::CreateWire
+(
+	const std::shared_ptr<Pln_CmpEdge>&& theEdge
+)
+{
+	if (NOT theEdge)
+	{
+		FatalErrorIn("void CreateWire(const std::shared_ptr<edgeList>& theEdges)")
+			<< "Null edge list!" << endl
+			<< abort(FatalError);
+	}
+
+	CheckWire(theEdge->Edges());
+
+	SetEdges(std::move(theEdge));
+
+	SetOrientation(Pln_Tools::RetrieveOrientation(*this));
+
+	auto b = CalcBoundingBox(0);
+	SetBoundingBox(std::move(b));
+}
+
+void tnbLib::Pln_Wire::CheckWireConsistency
+(
+	const char* theName
+) const
+{
+	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
+	RetrieveVerticesTo(vertices);
+
+	if (vertices.size() NOT_EQUAL NbEdges())
+	{
+		FatalErrorIn(theName)
+			<< "contradictory data: the wire is not close, apparently!" << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::Pln_Wire::ForcedTransform
+(
+	const gp_Trsf2d & t
+)
+{
+	const auto& cmpEdge = CmpEdge();
+	Debug_Null_Pointer(cmpEdge);
+
+	cmpEdge->Transform(t);
 }
 
 tnbLib::Pln_Wire::Pln_Wire
@@ -109,6 +174,14 @@ tnbLib::Pln_Wire::Pln_Wire
 )
 {
 	CreateWire(theEdge);
+}
+
+tnbLib::Pln_Wire::Pln_Wire
+(
+	const std::shared_ptr<Pln_CmpEdge>&& theEdge
+)
+{
+	CreateWire(std::move(theEdge));
 }
 
 tnbLib::Pln_Wire::Pln_Wire
@@ -123,6 +196,16 @@ tnbLib::Pln_Wire::Pln_Wire
 
 tnbLib::Pln_Wire::Pln_Wire
 (
+	const Standard_Integer theIndex, 
+	const std::shared_ptr<Pln_CmpEdge>&& theEdge
+)
+	: Pln_Entity(theIndex)
+{
+	CreateWire(std::move(theEdge));
+}
+
+tnbLib::Pln_Wire::Pln_Wire
+(
 	const Standard_Integer theIndex,
 	const word & theName, 
 	const std::shared_ptr<Pln_CmpEdge>& theEdge
@@ -132,11 +215,47 @@ tnbLib::Pln_Wire::Pln_Wire
 	CreateWire(theEdge);
 }
 
+tnbLib::Pln_Wire::Pln_Wire
+(
+	const Standard_Integer theIndex,
+	const word & theName, 
+	const std::shared_ptr<Pln_CmpEdge>&& theEdge
+)
+	: Pln_Entity(theIndex, theName)
+{
+	CreateWire(std::move(theEdge));
+}
+
 Standard_Integer 
 tnbLib::Pln_Wire::NbEdges() const
 {
 	Debug_Null_Pointer(theEdges_);
 	return theEdges_->NbEdges();
+}
+
+Standard_Integer
+tnbLib::Pln_Wire::NbEntities
+(
+	const Pln_EntityType t
+) const
+{
+#ifdef FULLDEBUG
+	CheckWireConsistency("Standard_Integer NbEntities(const Pln_EntityType t) const");
+#endif // FULLDEBUG
+
+	if (t IS_EQUAL Pln_EntityType::VERTEX)
+		return NbEdges();
+	if (t IS_EQUAL Pln_EntityType::EDGE)
+		return NbEdges();
+	if (t IS_EQUAL Pln_EntityType::WIRE)
+		return 1;
+	return 0;
+}
+
+Standard_Boolean 
+tnbLib::Pln_Wire::IsOrphan() const
+{
+	return NOT Plane().lock();
 }
 
 std::tuple<Standard_Real, Standard_Real> 
@@ -158,6 +277,20 @@ tnbLib::Pln_Wire::BoundTolerance() const
 	}
 	auto t = std::make_tuple(minTol, maxTol);
 	return std::move(t);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Pln_Wire::BoundingBox
+(
+	const Standard_Real Tol
+) const
+{
+	auto b = Pln_WireAux::BoundingBox();
+	if (Tol > 0)
+	{
+		b.Expand(Tol);
+	}
+	return std::move(b);
 }
 
 std::shared_ptr<tnbLib::Entity2d_Polygon> 
@@ -205,7 +338,14 @@ tnbLib::Pln_Wire::Polygon() const
 const std::vector<std::shared_ptr<tnbLib::Pln_Edge>>& 
 tnbLib::Pln_Wire::Edges() const
 {
+	Debug_Null_Pointer(theEdges_);
 	return theEdges_->Edges();
+}
+
+const std::shared_ptr<tnbLib::Pln_CmpEdge>& 
+tnbLib::Pln_Wire::CmpEdge() const
+{
+	return theEdges_;
 }
 
 std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
@@ -244,18 +384,53 @@ tnbLib::Pln_Wire::Copy() const
 	return std::move(wire);
 }
 
+tnbLib::Pln_EntityType 
+tnbLib::Pln_Wire::Type() const
+{
+	return Pln_EntityType::WIRE;
+}
+
 void tnbLib::Pln_Wire::Transform
 (
 	const gp_Trsf2d & t
 )
 {
+	if (NOT IsOrphan())
+	{
+		FatalErrorIn("void Transform(const gp_Trsf2d& t)")
+			<< " for transforming, the object must be orphan!" << endl
+			<< abort(FatalError);
+	}
+
 	const auto& cmpEdge = CmpEdge();
 	Debug_Null_Pointer(cmpEdge);
 
 	cmpEdge->Transform(t);
-	if (BoundingBox())
+
+	/*recalculating of the bounding box of the wire*/
+	auto b = CalcBoundingBox(0);
+	SetBoundingBox(std::move(b));
+}
+
+void tnbLib::Pln_Wire::RetrieveEntitiesTo
+(
+	std::vector<std::shared_ptr<Pln_Entity>>& theEntities, 
+	const Pln_EntityType t
+) const
+{
+	if (t IS_EQUAL Pln_EntityType::VERTEX)
 	{
-		CalcBoundingBox(Edges());
+		RetrieveVerticesTo(theEntities);
+	}
+
+	if (t IS_EQUAL Pln_EntityType::EDGE)
+	{
+		RetrieveEdgesTo(theEntities);
+	}
+
+	if (t IS_EQUAL Pln_EntityType::WIRE)
+	{
+		theEntities.push_back(std::dynamic_pointer_cast<Pln_Entity>(This()));
 	}
 }
 
@@ -281,7 +456,7 @@ void tnbLib::Pln_Wire::ApplyOrientation
 
 void tnbLib::Pln_Wire::Reverse()
 {
-	if (Orientation() IS_EQUAL Pln_Orientation_Unknown)
+	if (Orientation() IS_EQUAL Pln_Orientation::Pln_Orientation_Unknown)
 	{
 		FatalErrorIn("void tnbLib::Plane_Wire::Reverse()")
 			<< "Unknown orientation"
@@ -289,7 +464,7 @@ void tnbLib::Pln_Wire::Reverse()
 	}
 
 	theEdges_->Reverse();
-	theOrientation_ = tnbLib::Reverse(Orientation());
+	SetOrientation(tnbLib::Reverse(Orientation()));
 }
 
 void tnbLib::Pln_Wire::RetrieveVerticesTo
@@ -297,11 +472,45 @@ void tnbLib::Pln_Wire::RetrieveVerticesTo
 	std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
 ) const
 {
+#ifdef FULLDEBUG
+	CheckWireConsistency("void Pln_Wire::RetrieveVerticesTo(Args...) const");
+#endif // FULLDEBUG
+
 	theVertices.reserve(NbEdges());
 	for (const auto& x : Edges())
 	{
 		Debug_Null_Pointer(x);
 		theVertices.push_back(x->Vtx0());
+	}
+}
+
+void tnbLib::Pln_Wire::RetrieveVerticesTo
+(
+	std::vector<std::shared_ptr<Pln_Entity>>& theVertices
+) const
+{
+#ifdef FULLDEBUG
+	CheckWireConsistency("void Pln_Wire::RetrieveVerticesTo(Args...) const");
+#endif // FULLDEBUG
+
+	theVertices.reserve(NbEdges());
+	for (const auto& x : Edges())
+	{
+		Debug_Null_Pointer(x);
+		theVertices.push_back(x->Vtx0());
+	}
+}
+
+void tnbLib::Pln_Wire::RetrieveEdgesTo
+(
+	std::vector<std::shared_ptr<Pln_Entity>>& theEdges
+) const
+{
+	theEdges.reserve(NbEdges());
+	const auto& edges = Edges();
+	for (const auto& x : edges)
+	{
+		theEdges.push_back(x);
 	}
 }
 

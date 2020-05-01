@@ -69,7 +69,7 @@ tnbLib::cad2dLib::Modeler_Corner::Remove
 	return std::move(p);
 }
 
-std::shared_ptr<tnbLib::Pln_Entity> 
+std::shared_ptr<tnbLib::cad2dLib::Modeler_Entity>
 tnbLib::cad2dLib::Modeler_Corner::Copy() const
 {
 	auto crn = std::make_shared<Modeler_Corner>(Index(), Name());

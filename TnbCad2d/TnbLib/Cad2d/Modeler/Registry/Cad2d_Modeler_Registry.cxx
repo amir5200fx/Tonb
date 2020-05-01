@@ -7,33 +7,15 @@
 
 namespace tnbLib
 {
-
-	//const std::shared_ptr<Pln_Vertex> Cad2d_Modeler_Registry::null_vertex = std::make_shared<Pln_Vertex>();
-	const std::shared_ptr<Pln_Edge> Cad2d_Modeler_Registry::null_edge = std::make_shared<Pln_Edge>();
+	const std::shared_ptr<Pln_Edge> cad2dLib::Modeler_Registry::null_edge = std::make_shared<Pln_Edge>();
 }
 
-tnbLib::Cad2d_Modeler_Registry::Cad2d_Modeler_Registry()
+tnbLib::cad2dLib::Modeler_Registry::Modeler_Registry()
 {
 }
 
-//std::shared_ptr<tnbLib::Pln_Vertex> 
-//tnbLib::Cad2d_Modeler_Registry::RemoveVertexFromRegistry
-//(
-//	const Standard_Integer theIndex
-//)
-//{
-//	auto iter = theVertices_.find(theIndex);
-//	if (iter IS_EQUAL theVertices_.end())
-//	{
-//		FatalErrorIn("std::shared_ptr<Pln_Vertex> RemoveVertexFromRegistry(const Standard_Integer theIndex)")
-//			<< "the item is not in the tree: " << theIndex << endl
-//			<< abort(FatalError);
-//	}
-//	theVertices_.erase(iter);
-//}
-
 std::shared_ptr<tnbLib::Pln_Edge> 
-tnbLib::Cad2d_Modeler_Registry::RemoveEdgeFromRegistry
+tnbLib::cad2dLib::Modeler_Registry::RemoveEdgeFromRegistry
 (
 	const Standard_Integer theIndex
 )
@@ -50,22 +32,7 @@ tnbLib::Cad2d_Modeler_Registry::RemoveEdgeFromRegistry
 	return std::move(item);
 }
 
-//void tnbLib::Cad2d_Modeler_Registry::RegisterToVertices
-//(
-//	const Standard_Integer theIndex,
-//	const std::shared_ptr<Pln_Vertex>& theVtx
-//)
-//{
-//	auto insert = theVertices_.insert(std::make_pair(theIndex, theVtx));
-//	if (NOT insert.second)
-//	{
-//		FatalErrorIn("void RegisterToVertices(const Standard_Integer theIndex, const std::shared_ptr<Pln_Vertex>& theVtx)")
-//			<< "duplicate data: " << theIndex << endl
-//			<< abort(FatalError);
-//	}
-//}
-
-void tnbLib::Cad2d_Modeler_Registry::RegisterToEdges
+void tnbLib::cad2dLib::Modeler_Registry::RegisterToEdges
 (
 	const Standard_Integer theIndex,
 	const std::shared_ptr<Pln_Edge>& theEdge
@@ -80,22 +47,30 @@ void tnbLib::Cad2d_Modeler_Registry::RegisterToEdges
 	}
 }
 
-//const std::shared_ptr<tnbLib::Pln_Vertex>& 
-//tnbLib::Cad2d_Modeler_Registry::SelectVertex
-//(
-//	const Standard_Integer theIndex
-//) const
-//{
-//	auto iter = theVertices_.find(theIndex);
-//	if (iter IS_EQUAL theVertices_.end())
-//	{
-//		return null_vertex;
-//	}
-//	return iter->second;
-//}
+Standard_Boolean 
+tnbLib::cad2dLib::Modeler_Registry::IsContainEdge
+(
+	const Standard_Integer theIndex
+) const
+{
+	auto iter = theEdges_.find(theIndex);
+	if (iter IS_EQUAL theEdges_.end())
+		return Standard_False;
+	return Standard_True;
+}
+
+Standard_Boolean 
+tnbLib::cad2dLib::Modeler_Registry::IsContain
+(
+	const std::shared_ptr<Pln_Edge>& theEdge
+) const
+{
+	Debug_Null_Pointer(theEdge);
+	return IsContainEdge(theEdge->Index());
+}
 
 const std::shared_ptr<tnbLib::Pln_Edge>& 
-tnbLib::Cad2d_Modeler_Registry::SelectEdge
+tnbLib::cad2dLib::Modeler_Registry::SelectEdge
 (
 	const Standard_Integer theIndex
 ) const
@@ -108,17 +83,8 @@ tnbLib::Cad2d_Modeler_Registry::SelectEdge
 	return iter->second;
 }
 
-//Standard_Boolean 
-//tnbLib::Cad2d_Modeler_Registry::IsNull_Vertex
-//(
-//	const std::shared_ptr<Pln_Vertex>& theVtx
-//)
-//{
-//	return &theVtx IS_EQUAL &null_vertex;
-//}
-
 Standard_Boolean 
-tnbLib::Cad2d_Modeler_Registry::IsNull
+tnbLib::cad2dLib::Modeler_Registry::IsNull
 (
 	const std::shared_ptr<Pln_Edge>& theEdge
 )

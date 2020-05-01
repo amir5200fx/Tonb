@@ -21,35 +21,63 @@ namespace tnbLib
 	class Pln_Vertex;
 
 	class Cad2d_Modeler
-		: public Cad2d_Modeler_SrchEng
-		, public Cad2d_Modeler_Counter
-		, public Cad2d_Modeler_Wire
-		, public Cad2d_Modeler_Plane
-		, public Cad2d_Modeler_Registry
+		: public cad2dLib::Modeler_SrchEng
+		, public cad2dLib::Modeler_Counter
+		, public cad2dLib::Modeler_Wire
+		, public cad2dLib::Modeler_Plane
+		, public cad2dLib::Modeler_Registry
 	{
 
 		typedef cad2dLib::Modeler_Corner corner;
 
+		using cad2dLib::Modeler_Registry::IsContain;
+		using cad2dLib::Modeler_Plane::IsContain;
+		using cad2dLib::Modeler_Wire::IsContain;
+	
+
 		/*Private Data*/
 
-		void RemoveEdge(const std::shared_ptr<Pln_Edge>& theEdge);
+		void RemoveVertex
+		(
+			const std::shared_ptr<Pln_Vertex>& theVtx
+		);
 
-		void RemoveVertex(const std::shared_ptr<Pln_Vertex>& theVtx);
+		void RemoveVertex
+		(
+			const std::shared_ptr<Pln_Vertex>& theVtx,
+			const std::shared_ptr<corner>& theCorner
+		);
 
-		void RemoveVertex(const std::shared_ptr<Pln_Vertex>& theVtx, const std::shared_ptr<corner>& theCorner);
+		void AddVertex
+		(
+			const std::shared_ptr<Pln_Vertex>& theVtx,
+			const Standard_Integer theEdgeIndex
+		);
 
-		void AddVertex(const std::shared_ptr<Pln_Vertex>& theVtx, const Standard_Integer theEdgeIndex);
-
-		void AddEdge(const std::shared_ptr<Pln_Edge>& theEdge);
+		void AddEdge
+		(
+			const std::shared_ptr<Pln_Edge>& theEdge
+		);
 
 	public:
 
+		using cad2dLib::Modeler_Registry::IsNull;
+
 		Cad2d_Modeler();
 
+		void RemoveEdge
+		(
+			const std::shared_ptr<Pln_Edge>& theEdge
+		);
 
 		void Import
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
+		);
+
+		void Import
+		(
+			const std::vector<std::shared_ptr<Pln_Edge>>& theEdegs
 		);
 
 		void Trim
@@ -57,6 +85,8 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge0, 
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
+
+
 	};
 }
 

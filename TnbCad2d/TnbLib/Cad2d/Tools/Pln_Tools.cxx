@@ -462,14 +462,14 @@ tnbLib::Pln_Tools::RetrieveBoundingBox
 	auto iter = theEdges.begin();
 
 	Debug_Null_Pointer((*iter)->Curve());
-	auto box = (*iter)->Curve()->CalcBoundingBox();
+	auto box = (*iter)->Curve()->BoundingBox(0);
 
 	iter++;
 
 	while (iter NOT_EQUAL theEdges.end())
 	{
 		Debug_Null_Pointer((*iter)->Curve());
-		box = Entity2d_Box::Union(box, (*iter)->Curve()->CalcBoundingBox());
+		box = Entity2d_Box::Union(box, (*iter)->Curve()->BoundingBox(0));
 
 		iter++;
 	}
@@ -1341,16 +1341,14 @@ tnbLib::Pln_Tools::RetrieveOuterWire
 
 	iter++;
 
-	Debug_Null_Pointer(outer->BoundingBox());
-	auto maxBox = *outer->BoundingBox();
+	auto maxBox = outer->BoundingBox(0);
 
 	while (iter NOT_EQUAL theWires.end())
 	{
 		auto wire = (*iter);
 		Debug_Null_Pointer(wire);
 
-		Debug_Null_Pointer(wire->BoundingBox());
-		auto box = *wire->BoundingBox();
+		auto box = wire->BoundingBox(0);
 
 		if (Entity2d_Box::IsInside(maxBox, box))
 		{
@@ -1367,7 +1365,7 @@ tnbLib::Pln_Tools::RetrieveOuterWire
 			continue;
 
 		Debug_Null_Pointer(x);
-		if (NOT Entity2d_Box::IsInside(*x->BoundingBox(), maxBox))
+		if (NOT Entity2d_Box::IsInside(x->BoundingBox(0), maxBox))
 		{
 			return nullptr;
 		}
@@ -1393,10 +1391,11 @@ namespace tnbLib
 				const std::shared_ptr<Pln_Wire>& theWire
 			)
 		{
+			const auto b = theWire->BoundingBox(0);
 			for (const auto& x : theInners)
 			{
 				Debug_Null_Pointer(x);
-				if (Entity2d_Box::IsInside(*theWire->BoundingBox(), *x->BoundingBox()))
+				if (Entity2d_Box::IsInside(b, x->BoundingBox(0)))
 				{
 					return Standard_True;
 				}
@@ -1421,12 +1420,14 @@ namespace tnbLib
 			theOuter = theWires.front();
 			theWires.pop_front();
 
+			const auto outerBox = theOuter->BoundingBox(0);
+
 			std::vector<std::list<std::shared_ptr<Pln_Wire>>::iterator> removes;
 			auto iter = theWires.begin();
 			while (iter NOT_EQUAL theWires.end())
 			{
 				const auto& x = (*iter);
-				if (Entity2d_Box::IsInside(*x->BoundingBox(), *theOuter->BoundingBox()))
+				if (Entity2d_Box::IsInside(x->BoundingBox(0), outerBox))
 				{
 					if (NOT CheckInner(theInners, x))
 					{
@@ -1449,7 +1450,8 @@ namespace tnbLib
 std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> 
 tnbLib::Pln_Tools::RetrievePlanes
 (
-	const std::vector<std::shared_ptr<Pln_Wire>>& theWires
+	const std::vector<std::shared_ptr<Pln_Wire>>& theWires,
+	const gp_Ax2& theAx
 )
 {
 	auto wires = theWires;
@@ -1486,7 +1488,7 @@ tnbLib::Pln_Tools::RetrievePlanes
 
 		if (inners->empty())
 		{
-			auto pln = Cad2d_Plane::MakePlane(outer, nullptr);
+			auto pln = Cad2d_Plane::MakePlane(outer, nullptr, theAx);
 			Debug_Null_Pointer(pln);
 
 			pln->SetIndex(++K);
@@ -1569,13 +1571,10 @@ namespace tnbLib
 			Debug_Null_Pointer(theWire0);
 			Debug_Null_Pointer(theWire1);
 
-			const auto& b0 = theWire0->BoundingBox();
-			const auto& b1 = theWire1->BoundingBox();
+			const auto b0 = theWire0->BoundingBox(0);
+			const auto b1 = theWire1->BoundingBox(0);
 
-			Debug_Null_Pointer(b0);
-			Debug_Null_Pointer(b1);
-
-			return -b0->SquareDiameter() < -b1->SquareDiameter();
+			return -b0.SquareDiameter() < -b1.SquareDiameter();
 		}
 	}
 }
@@ -1593,4 +1592,63 @@ void tnbLib::Pln_Tools::SortWires
 	Geo_ItemSort<std::shared_ptr<Pln_Wire>>
 		sort(&plnLib::LessDiameterSize);
 	sort.Perform(theWires);
+}
+
+std::shared_ptr<tnbLib::Pln_Vertex> 
+tnbLib::Pln_Tools::Vertex
+(
+	const std::shared_ptr<Pln_Entity>& theEnt
+)
+{
+	auto ent = std::dynamic_pointer_cast<Pln_Vertex>(theEnt);
+	return std::move(ent);
+}
+
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::Pln_Tools::Edge
+(
+	const std::shared_ptr<Pln_Entity>& theEnt
+)
+{
+	auto ent = std::dynamic_pointer_cast<Pln_Edge>(theEnt);
+	return std::move(ent);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve> 
+tnbLib::Pln_Tools::Curve
+(
+	const std::shared_ptr<Pln_Entity>& theEnt
+)
+{
+	auto ent = std::dynamic_pointer_cast<Pln_Curve>(theEnt);
+	return std::move(ent);
+}
+
+std::shared_ptr<tnbLib::Pln_Ring>
+tnbLib::Pln_Tools::Ring
+(
+	const std::shared_ptr<Pln_Entity>& theEnt
+)
+{
+	auto ent = std::dynamic_pointer_cast<Pln_Ring>(theEnt);
+	return std::move(ent);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Pln_Tools::Plane
+(
+	const std::shared_ptr<Pln_Entity>& theEnt
+)
+{
+	auto ent = std::dynamic_pointer_cast<Cad2d_Plane>(theEnt);
+	return std::move(ent);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
+tnbLib::Pln_Tools::RetrieveVertices
+(
+	const std::shared_ptr<Pln_Entity>& theEnt
+)
+{
+	return std::vector<std::shared_ptr<Pln_Vertex>>();
 }

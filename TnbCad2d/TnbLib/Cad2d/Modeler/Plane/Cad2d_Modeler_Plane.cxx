@@ -1,14 +1,39 @@
 #include <Cad2d_Modeler_Plane.hxx>
 
+#include <Cad2d_Plane.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
-tnbLib::Cad2d_Modeler_Plane::Cad2d_Modeler_Plane()
+tnbLib::cad2dLib::Modeler_Plane::Modeler_Plane()
 {
 }
 
+Standard_Boolean 
+tnbLib::cad2dLib::Modeler_Plane::IsContainPlane
+(
+	const Standard_Integer theIndex
+) const
+{
+	auto iter = thePlanes_.find(theIndex);
+	if (iter IS_EQUAL thePlanes_.end())
+	{
+		return Standard_False;
+	}
+	return Standard_True;
+}
+
+Standard_Boolean 
+tnbLib::cad2dLib::Modeler_Plane::IsContain
+(
+	const std::shared_ptr<Cad2d_Plane>& thePlane
+) const
+{
+	Debug_Null_Pointer(thePlane);
+	return IsContainPlane(thePlane->Index());
+}
+
 std::shared_ptr<tnbLib::Cad2d_Plane> 
-tnbLib::Cad2d_Modeler_Plane::RemoveFromPlanes
+tnbLib::cad2dLib::Modeler_Plane::RemoveFromPlanes
 (
 	const Standard_Integer theIndex
 )
@@ -26,7 +51,7 @@ tnbLib::Cad2d_Modeler_Plane::RemoveFromPlanes
 	return std::move(item);
 }
 
-void tnbLib::Cad2d_Modeler_Plane::InsertToPlanes
+void tnbLib::cad2dLib::Modeler_Plane::InsertToPlanes
 (
 	const Standard_Integer theIndex,
 	const std::shared_ptr<Cad2d_Plane>& thePlane

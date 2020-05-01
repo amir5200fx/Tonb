@@ -49,7 +49,7 @@ tnbLib::Pln_CmpEdge::IsValidForWire
 	return Standard_True;
 }
 
-std::shared_ptr<tnbLib::Pln_Entity>
+std::shared_ptr<tnbLib::Pln_CmpEdge>
 tnbLib::Pln_CmpEdge::Copy() const
 {
 	auto vertices = RetrieveVertices();
@@ -68,7 +68,7 @@ tnbLib::Pln_CmpEdge::Copy() const
 		}
 	}
 
-	auto cmpEdge = std::make_shared<Pln_CmpEdge>(Index(), Name());
+	auto cmpEdge = std::make_shared<Pln_CmpEdge>();
 	Debug_Null_Pointer(cmpEdge);
 
 	for (const auto& x : Edges())
@@ -147,7 +147,8 @@ void tnbLib::Pln_CmpEdge::Transform
 	for (const auto& x : vertices)
 	{
 		Debug_Null_Pointer(x);
-		x->Transform(t);
+		auto& coord = x->Coord();
+		coord.Transform(t);
 	}
 
 	for (const auto& x : Edges())

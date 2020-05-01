@@ -56,13 +56,33 @@ tnbLib::Pln_Curve::Pln_Curve
 
 tnbLib::Pln_Curve::Pln_Curve
 (
+	const Handle(Geom2d_Curve) && theGeom
+)
+	: theGeometry_(std::move(theGeom))
+{
+	plnCurveLib::CheckBounded(Geometry(), "Pln_Curve()");
+}
+
+tnbLib::Pln_Curve::Pln_Curve
+(
 	const Standard_Integer theIndex,
 	const Handle(Geom2d_Curve)& theGeom
 )
-	: Pln_Entity(theIndex)
+	: Global_Indexed(theIndex)
 	, theGeometry_(theGeom)
 {
 	plnCurveLib::CheckBounded(theGeom, "Pln_Curve()");
+}
+
+tnbLib::Pln_Curve::Pln_Curve
+(
+	const Standard_Integer theIndex,
+	const Handle(Geom2d_Curve) && theGeom
+)
+	: Global_Indexed(theIndex)
+	, theGeometry_(std::move(theGeom))
+{
+	plnCurveLib::CheckBounded(Geometry(), "Pln_Curve()");
 }
 
 tnbLib::Pln_Curve::Pln_Curve
@@ -71,10 +91,24 @@ tnbLib::Pln_Curve::Pln_Curve
 	const word & theName, 
 	const Handle(Geom2d_Curve)& theGeom
 )
-	: Pln_Entity(theIndex, theName)
+	: Global_Indexed(theIndex)
+	, Global_Named(theName)
 	, theGeometry_(theGeom)
 {
 	plnCurveLib::CheckBounded(theGeom, "Pln_Curve()");
+}
+
+tnbLib::Pln_Curve::Pln_Curve
+(
+	const Standard_Integer theIndex,
+	const word & theName, 
+	const Handle(Geom2d_Curve) && theGeom
+)
+	: Global_Indexed(theIndex)
+	, Global_Named(theName)
+	, theGeometry_(std::move(theGeom))
+{
+	plnCurveLib::CheckBounded(Geometry(), "Pln_Curve()");
 }
 
 Standard_Real 
@@ -117,7 +151,7 @@ tnbLib::Pln_Curve::Value_normParam
 }
 
 tnbLib::Entity2d_Box 
-tnbLib::Pln_Curve::CalcBoundingBox() const
+tnbLib::Pln_Curve::BoundingBox(const Standard_Real Tol) const 
 {
 	Debug_Null_Pointer(Geometry());
 	Bnd_Box2d BndBox;
@@ -127,10 +161,20 @@ tnbLib::Pln_Curve::CalcBoundingBox() const
 	BndBox.Get(Xmin, Ymin, Xmax, Ymax);
 
 	Entity2d_Box box(Pnt2d(Xmin, Ymin), Pnt2d(Xmax, Ymax));
+	if (Tol > 0)
+	{
+		box.Expand(Tol);
+	}
 	return std::move(box);
 }
 
-std::shared_ptr<tnbLib::Pln_Entity> 
+//Standard_Boolean 
+//tnbLib::Pln_Curve::IsOrphan() const
+//{
+//	return Standard_True;
+//}
+
+std::shared_ptr<tnbLib::Pln_Curve> 
 tnbLib::Pln_Curve::Copy() const
 {
 	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());
@@ -139,6 +183,12 @@ tnbLib::Pln_Curve::Copy() const
 	auto copy = std::make_shared<Pln_Curve>(Index(), Name(), c);
 	return std::move(copy);
 }
+
+//tnbLib::Pln_EntityType 
+//tnbLib::Pln_Curve::Type() const
+//{
+//	return Pln_EntityType::CURVE;
+//}
 
 void tnbLib::Pln_Curve::Transform
 (

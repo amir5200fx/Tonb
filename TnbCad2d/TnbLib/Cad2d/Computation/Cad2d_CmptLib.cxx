@@ -486,8 +486,8 @@ tnbLib::Cad2d_CmptLib::Area
 {
 	Standard_Real sum = 0;
 
-	const auto& box = theWire.BoundingBox();
-	const auto y0 = box->P0().Y();
+	const auto box = theWire.BoundingBox(0);
+	const auto y0 = box.P0().Y();
 
 	const auto& edges = theWire.Edges();
 	for (const auto& x : edges)

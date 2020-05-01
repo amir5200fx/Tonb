@@ -5,7 +5,7 @@
 namespace tnbLib
 {
 
-	enum Pln_Orientation
+	enum class Pln_Orientation
 	{
 		Pln_Orientation_Unknown = 0,
 		Pln_Orientation_CCW,

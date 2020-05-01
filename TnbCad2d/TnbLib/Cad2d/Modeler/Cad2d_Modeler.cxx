@@ -9,11 +9,24 @@
 
 #include <algorithm>
 
+tnbLib::Cad2d_Modeler::Cad2d_Modeler()
+{
+}
+
 void tnbLib::Cad2d_Modeler::RemoveEdge
 (
 	const std::shared_ptr<Pln_Edge>& theEdge
 )
 {
+#ifdef _DEBUG
+	if (NOT IsContain(theEdge))
+	{
+		FatalErrorIn("void RemoveEdge(const std::shared_ptr<Pln_Edge>& theEdge)")
+			<< "the edge is not in the modeler!" << endl
+			<< abort(FatalError);
+	}
+#endif // DEBUG
+
 	const auto& v0 = theEdge->Vtx0();
 	const auto& v1 = theEdge->Vtx1();
 
@@ -31,8 +44,8 @@ void tnbLib::Cad2d_Modeler::RemoveEdge
 	}
 
 	const auto id = theEdge->Index();
-	auto edge = Cad2d_Modeler_Registry::RemoveEdgeFromRegistry(theEdge->Index());
-	if (Cad2d_Modeler_Registry::IsNull(edge))
+	auto edge = cad2dLib::Modeler_Registry::RemoveEdgeFromRegistry(theEdge->Index());
+	if (cad2dLib::Modeler_Registry::IsNull(edge))
 	{
 		FatalErrorIn("void RemoveEdge(const std::shared_ptr<Pln_Edge>& theEdge)")
 			<< "the edge is not in the registry: " << id << endl
@@ -47,14 +60,13 @@ void tnbLib::Cad2d_Modeler::RemoveVertex
 	const std::shared_ptr<Pln_Vertex>& theVtx
 )
 {
-	const auto selected = Cad2d_Modeler_SrchEng::FindCorner(theVtx);
-	if (Cad2d_Modeler_SrchEng::IsNull(selected))
+	const auto& selected = cad2dLib::Modeler_SrchEng::FindCorner(theVtx);
+	if (cad2dLib::Modeler_SrchEng::IsNull(selected))
 	{
 		FatalErrorIn("void RemoveVertex(const std::shared_ptr<Pln_Vertex>& theVtx)")
 			<< "contradictory data: found no corner!" << endl
 			<< abort(FatalError);
 	}
-
 	RemoveVertex(theVtx, selected);
 }
 
@@ -64,6 +76,9 @@ void tnbLib::Cad2d_Modeler::RemoveVertex
 	const std::shared_ptr<corner>& theCorner
 )
 {
+	Debug_Null_Pointer(theVtx);
+	Debug_Null_Pointer(theCorner);
+
 	if (NOT theVtx->IsOrphan())
 	{
 		FatalErrorIn("void RemoveVertex(const std::shared_ptr<Pln_Vertex>& theVtx)")
@@ -71,17 +86,11 @@ void tnbLib::Cad2d_Modeler::RemoveVertex
 			<< abort(FatalError);
 	}
 	const auto id = theVtx->Index();
-	//auto removed = Cad2d_Modeler_Registry::RemoveVertexFromRegistry(id);
-
-	/*if (&theVtx NOT_EQUAL &removed)
-	{
-		FatalErrorIn("void RemoveVertex(const std::shared_ptr<Pln_Vertex>& theVtx)")
-			<< "contradictory data: the vertex is not the same with the existing one" << endl
-			<< abort(FatalError);
-	}*/
+	const auto& vs = theCorner->Vertices();
 
 	auto removed = theCorner->Remove(id);
-	if (&theVtx NOT_EQUAL &removed)
+
+	if (theVtx NOT_EQUAL removed)
 	{
 		FatalErrorIn("void RemoveVertex(const std::shared_ptr<Pln_Vertex>& theVtx)")
 			<< "contradictory data: the vertex is not the same with the existing one" << endl
@@ -94,7 +103,7 @@ void tnbLib::Cad2d_Modeler::RemoveVertex
 	{
 		const auto cid = theCorner->Index();
 
-		Cad2d_Modeler_SrchEng::RemoveFromSrchEngine(theCorner);
+		cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine(theCorner);
 
 		CornerCounter().ReturnToCounter(cid);
 	}
@@ -117,7 +126,7 @@ void tnbLib::Cad2d_Modeler::AddVertex
 	theVtx->Name() = std::move(name);
 
 	const auto& crn = SelectCorner(theVtx->Coord());
-	if (NOT Cad2d_Modeler_SrchEng::IsNull(crn))
+	if (NOT cad2dLib::Modeler_SrchEng::IsNull(crn))
 	{
 		crn->InsertToCorners(theVtx->Index(), theVtx);
 		theVtx->SetPrecision(crn->Radius());
@@ -131,12 +140,12 @@ void tnbLib::Cad2d_Modeler::AddVertex
 		crn->Name() = "corner nb. " + std::to_string(crn->Index());
 
 		crn->InsertToCorners(theVtx->Index(), theVtx);
+		crn->SetCoord(theVtx->Coord());
+
 		theVtx->SetPrecision(crn->Radius());
 
 		InsertToSrchEngine(crn);
 	}
-
-	//Cad2d_Modeler_Registry::RegisterToVertices(theVtx->Index(), theVtx);
 }
 
 void tnbLib::Cad2d_Modeler::AddEdge
@@ -150,7 +159,14 @@ void tnbLib::Cad2d_Modeler::AddEdge
 	AddVertex(theEdge->Vtx0(), theEdge->Index());
 	AddVertex(theEdge->Vtx1(), theEdge->Index());
 
-	Cad2d_Modeler_Registry::RegisterToEdges(theEdge->Index(), theEdge);
+	const auto& v0 = theEdge->Vtx0();
+	const auto& v1 = theEdge->Vtx1();
+
+	/*WARNING! the index of the edge should not be altered!*/
+	v0->InsertToEdges(theEdge->Index(), theEdge);
+	v1->InsertToEdges(theEdge->Index(), theEdge);
+
+	cad2dLib::Modeler_Registry::RegisterToEdges(theEdge->Index(), theEdge);
 }
 
 void tnbLib::Cad2d_Modeler::Import
@@ -159,6 +175,17 @@ void tnbLib::Cad2d_Modeler::Import
 )
 {
 	AddEdge(theEdge);
+}
+
+void tnbLib::Cad2d_Modeler::Import
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdegs
+)
+{
+	for (const auto& x : theEdegs)
+	{
+		Import(x);
+	}
 }
 
 namespace tnbLib

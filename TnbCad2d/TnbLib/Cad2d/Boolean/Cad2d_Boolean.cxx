@@ -141,8 +141,8 @@ tnbLib::Cad2d_Boolean::Union
 			<< abort(FatalError);
 	}
 
-	auto bb0 = thePlane0->BoundingBox();
-	auto bb1 = thePlane1->BoundingBox();
+	auto bb0 = thePlane0->BoundingBox(0);
+	auto bb1 = thePlane1->BoundingBox(0);
 
 	if (NOT bb0.IsIntersect(bb1))
 	{
@@ -180,8 +180,8 @@ tnbLib::Cad2d_Boolean::Union
 	Debug_Null_Pointer(sub0);
 	Debug_Null_Pointer(sub1);
 
-	const auto& domain0 = sub0->BoundingBox();
-	const auto& domain1 = sub1->BoundingBox();
+	const auto domain0 = sub0->BoundingBox(0);
+	const auto domain1 = sub1->BoundingBox(0);
 
 	const auto chain0 = sub0->MergedPolygon();
 	const auto chain1 = sub1->MergedPolygon();
@@ -302,8 +302,8 @@ tnbLib::Cad2d_Boolean::Subtract
 			<< abort(FatalError);
 	}
 
-	auto bb0 = thePlane0->BoundingBox();
-	auto bb1 = thePlane1->BoundingBox();
+	auto bb0 = thePlane0->BoundingBox(0);
+	auto bb1 = thePlane1->BoundingBox(0);
 
 	if (NOT bb0.IsIntersect(bb1))
 	{
@@ -341,8 +341,8 @@ tnbLib::Cad2d_Boolean::Subtract
 	Debug_Null_Pointer(sub0);
 	Debug_Null_Pointer(sub1);
 
-	const auto& domain0 = sub0->BoundingBox();
-	const auto& domain1 = sub1->BoundingBox();
+	const auto domain0 = sub0->BoundingBox(0);
+	const auto domain1 = sub1->BoundingBox(0);
 
 	const auto chain0 = sub0->MergedPolygon();
 	const auto chain1 = sub1->MergedPolygon();
@@ -472,8 +472,8 @@ tnbLib::Cad2d_Boolean::Intersection
 			<< abort(FatalError);
 	}
 
-	auto bb0 = thePlane0->BoundingBox();
-	auto bb1 = thePlane1->BoundingBox();
+	auto bb0 = thePlane0->BoundingBox(0);
+	auto bb1 = thePlane1->BoundingBox(0);
 
 	if (NOT bb0.IsIntersect(bb1))
 	{
@@ -528,8 +528,8 @@ tnbLib::Cad2d_Boolean::Intersection
 	Debug_Null_Pointer(sub0);
 	Debug_Null_Pointer(sub1);
 
-	const auto& domain0 = sub0->BoundingBox();
-	const auto& domain1 = sub1->BoundingBox();
+	const auto domain0 = sub0->BoundingBox(0);
+	const auto domain1 = sub1->BoundingBox(0);
 
 	const auto chain0 = sub0->MergedPolygon();
 	const auto chain1 = sub1->MergedPolygon();
@@ -614,13 +614,7 @@ tnbLib::Cad2d_Boolean::Intersection
 			MAX(MAX(minTol0, minTol1), Tolerance),
 			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 
-	auto planes = Pln_Tools::RetrievePlanes(wires);
-	for (const auto& x : planes)
-	{
-		Debug_Null_Pointer(x);
-		x->SetSystem(thePlane0->System());
-	}
-
+	auto planes = Pln_Tools::RetrievePlanes(wires, thePlane0->System());
 	return std::move(planes);
 
 	/*auto outer = Pln_Tools::RetrieveOuterWire(wires);
