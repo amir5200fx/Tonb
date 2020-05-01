@@ -1,12 +1,13 @@
 #include <Marine_Section.hxx>
 
+#include <Entity2d_Box.hxx>
 #include <Pln_Wire.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::Marine_Section::CheckWire(const Pln_Wire& theWire, const char * theName)
 {
-	if (theWire.Orientation() NOT_EQUAL Pln_Orientation_CCW)
+	if (theWire.Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
 	{
 		FatalErrorIn(theName)
 			<< "the wire must be ccw" << endl
@@ -49,11 +50,11 @@ tnbLib::Marine_Section::Marine_Section
 	CheckWire(*Wire(), "Marine_Section::Marine_Section(const std::shared_ptr<Pln_Wire>& theWire)");
 }
 
-const tnbLib::Entity2d_Box & 
+tnbLib::Entity2d_Box 
 tnbLib::Marine_Section::BoundingBox() const
 {
 	Debug_Null_Pointer(Wire());
-	return *Wire()->BoundingBox();
+	return Wire()->BoundingBox(0);
 }
 
 void tnbLib::Marine_Section::Transform

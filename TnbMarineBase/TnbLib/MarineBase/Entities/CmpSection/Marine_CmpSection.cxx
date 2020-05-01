@@ -88,13 +88,10 @@ tnbLib::Marine_CmpSection::LessDiameterSize
 	Debug_Null_Pointer(theWire0);
 	Debug_Null_Pointer(theWire1);
 
-	const auto& b0 = theWire0->BoundingBox();
-	const auto& b1 = theWire1->BoundingBox();
+	const auto b0 = theWire0->BoundingBox(0);
+	const auto b1 = theWire1->BoundingBox(0);
 
-	Debug_Null_Pointer(b0);
-	Debug_Null_Pointer(b1);
-
-	return -b0->SquareDiameter() < -b1->SquareDiameter();
+	return -b0.SquareDiameter() < -b1.SquareDiameter();
 }
 
 void tnbLib::Marine_CmpSection::SortWires
@@ -129,12 +126,14 @@ void tnbLib::Marine_CmpSection::RetrieveInnerOuterWires
 	theOuter = theWires.front();
 	theWires.pop_front();
 
+	const auto outerBox = theOuter->BoundingBox(0);
+
 	std::vector<std::list<std::shared_ptr<Pln_Wire>>::iterator> removes;
 	auto iter = theWires.begin();
 	while (iter NOT_EQUAL theWires.end())
 	{
 		const auto& x = (*iter);
-		if (Entity2d_Box::IsInside(*x->BoundingBox(), *theOuter->BoundingBox()))
+		if (Entity2d_Box::IsInside(x->BoundingBox(0), outerBox))
 		{
 			theInners.push_back(x);
 			removes.push_back(iter);

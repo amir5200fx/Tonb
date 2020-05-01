@@ -41,7 +41,7 @@ namespace tnbLib
 			return Standard_True;
 		}
 
-		std::shared_ptr<Pln_Entity>
+		std::shared_ptr<Pln_Curve>
 			Copy() const override;
 
 		std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>

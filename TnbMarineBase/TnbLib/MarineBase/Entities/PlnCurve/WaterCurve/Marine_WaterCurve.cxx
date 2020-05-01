@@ -39,7 +39,7 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 {
 }
 
-std::shared_ptr<tnbLib::Pln_Entity> 
+std::shared_ptr<tnbLib::Pln_Curve> 
 tnbLib::Marine_WaterCurve::Copy() const
 {
 	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());

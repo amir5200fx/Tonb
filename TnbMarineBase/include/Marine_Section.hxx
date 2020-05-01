@@ -47,7 +47,7 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
-		const Entity2d_Box& BoundingBox() const;
+		Entity2d_Box BoundingBox() const;
 
 		const auto& Wire() const
 		{

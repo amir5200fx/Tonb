@@ -523,6 +523,9 @@
     <Filter Include="TnbLib\MarineBase\CriterionTable">
       <UniqueIdentifier>{90d6ca36-e381-4527-8fd2-6fc694703491}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\iB">
+      <UniqueIdentifier>{9530a5ae-0086-4a2c-bb35-dc13f3395c96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -974,6 +977,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\CriterionTable\Marine_CriterionTable.hxx">
       <Filter>TnbLib\MarineBase\CriterionTable</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\iB\Marine_VesselParam_iB.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\iB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
