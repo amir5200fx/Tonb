@@ -2,6 +2,7 @@
 
 #include <Entity2d_Box.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_CurveTools.hxx>
 #include <Cad2d_CmptLib.hxx>
 #include <Marine_Body.hxx>
 #include <Marine_CmpSection.hxx>
@@ -19,6 +20,11 @@
 #include <HydStatic_ArmCurve.hxx>
 #include <HydStatic_rArmCurve.hxx>
 #include <HydStatic_hArmCurve.hxx>
+#include <HydStatic_rAuCurve.hxx>
+#include <HydStatic_hAuCurve.hxx>
+#include <HydStatic_WDiffCurve.hxx>
+#include <HydStatic_rArmCurve_Eff.hxx>
+#include <HydStatic_Tools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -155,7 +161,7 @@ tnbLib::HydStatic_CmptLib::RetrieveAreas
 std::vector<tnbLib::HydStatic_GzQ> 
 tnbLib::HydStatic_CmptLib::LeverArms
 (
-	const std::vector<std::shared_ptr<HydStatic_CrossCurves_Entity>>& theCurves,
+	const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theCurves,
 	const Standard_Real theVol
 )
 {
@@ -163,10 +169,8 @@ tnbLib::HydStatic_CmptLib::LeverArms
 	for (const auto& x : theCurves)
 	{
 		Debug_Null_Pointer(x);
-
-		Debug_Null_Pointer(x->Curve);
-		const auto& curve = *x->Curve;
-
+		
+		const auto& curve = *x;
 		if (NOT curve.IsIntersect(theVol))
 		{
 			continue;
@@ -174,7 +178,7 @@ tnbLib::HydStatic_CmptLib::LeverArms
 
 		auto value = curve.Value(theVol);
 
-		HydStatic_GzQ p(x->Heel, value);
+		HydStatic_GzQ p(x->Heel(), value);
 		pairs.push_back(std::move(p));
 	}
 	return std::move(pairs);
@@ -537,4 +541,287 @@ tnbLib::HydStatic_CmptLib::GetUnStable
 		}
 		return eq1;
 	}
+}
+
+std::vector<tnbLib::HydStatic_GzQP2> 
+tnbLib::HydStatic_CmptLib::CalcDynamicalStabilityPoints
+(
+	const hydStcLib::rArmCurve_Eff & theRighting,
+	const HydStatic_hArmCurve & theHeeling
+)
+{
+	if (NOT theRighting.AuCurve())
+	{
+		FatalErrorIn("std::vector<HydStatic_GzQP2> CalcDynamicalStabilityPoints(Argms...)")
+			<< "the righting arm curve doesn't have any Au-Curve" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT theHeeling.AuCurve())
+	{
+		FatalErrorIn("std::vector<HydStatic_GzQP2> CalcDynamicalStabilityPoints(Argms...)")
+			<< "the heeling arm curve doesn't have any Au-Curve" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& rGeom = theRighting.AuCurve()->Geometry();
+	Debug_Null_Pointer(rGeom);
+
+	const auto& hGeom = theHeeling.AuCurve()->Geometry();
+	Debug_Null_Pointer(hGeom);
+
+	Geom2dAPI_InterCurveCurve inter(rGeom, hGeom);
+	auto& intersector = inter.Intersector();
+
+	std::vector<HydStatic_GzQP2> Qs;
+	for (auto i = 1; i <= intersector.NbPoints(); i++)
+	{
+		const auto& q = intersector.Point(i);
+		const auto& pt = q.Value();
+
+		HydStatic_GzQP2 gzp(pt.X(), pt.Y(), q.ParamOnFirst(), q.ParamOnSecond());
+		Qs.push_back(std::move(gzp));
+	}
+
+	for (auto i = 1; i <= intersector.NbSegments(); i++)
+	{
+		Handle(Geom2d_Curve) c1;
+		Handle(Geom2d_Curve) c2;
+
+		inter.Segment(i, c1, c2);
+
+		const auto p01 = c1->FirstParameter();
+		const auto p11 = c1->LastParameter();
+
+		const auto p02 = c2->FirstParameter();
+		const auto p12 = c2->LastParameter();
+
+		const auto pm1 = MEAN(p01, p11);
+		const auto pm2 = MEAN(p02, p12);
+
+		const auto pt1 = c1->Value(pm1);
+
+		HydStatic_GzQP2 q(pt1.X(), pt1.Y(), pm1, pm2);
+		Qs.push_back(std::move(q));
+	}
+
+	if (Qs.size() > 1)
+	{
+		std::sort(Qs.begin(), Qs.end(), &HydStatic_GzQ::IsLess);
+	}
+
+	Standard_Integer k = 0;
+	for (auto& x : Qs)
+	{
+		x.Index() = ++k;
+	}
+	return std::move(Qs);
+}
+
+std::vector<tnbLib::HydStatic_GzQP> 
+tnbLib::HydStatic_CmptLib::CalcDynamicalStabilityPoints
+(
+	const HydStatic_WDiffCurve & theWDiffCurve
+)
+{
+	Handle(Geom2d_Line) line = new Geom2d_Line(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
+	Debug_Null_Pointer(line);
+
+	const auto& geom = theWDiffCurve.Geometry();
+	Debug_Null_Pointer(geom);
+
+	Geom2dAPI_InterCurveCurve inter(geom, line);
+	auto& intersector = inter.Intersector();
+
+	std::vector<HydStatic_GzQP> Qs;
+	for (auto i = 1; i <= intersector.NbPoints(); i++)
+	{
+		const auto& q = intersector.Point(i);
+		const auto& pt = q.Value();
+
+		HydStatic_GzQP gzp(pt.X(), pt.Y(), q.ParamOnFirst());
+		Qs.push_back(std::move(gzp));
+	}
+
+	for (auto i = 1; i <= intersector.NbSegments(); i++)
+	{
+		Handle(Geom2d_Curve) c1;
+		Handle(Geom2d_Curve) c2;
+
+		inter.Segment(i, c1, c2);
+
+		const auto p01 = c1->FirstParameter();
+		const auto p11 = c1->LastParameter();
+
+		const auto pm1 = MEAN(p01, p11);
+
+		const auto pt1 = c1->Value(pm1);
+
+		HydStatic_GzQP q(pt1.X(), pt1.Y(), pm1);
+		Qs.push_back(std::move(q));
+	}
+
+	if (Qs.size() > 1)
+	{
+		std::sort(Qs.begin(), Qs.end(), &HydStatic_GzQ::IsLess);
+	}
+
+	Standard_Integer k = 0;
+	for (auto& x : Qs)
+	{
+		x.Index() = ++k;
+	}
+	return std::move(Qs);
+}
+
+std::shared_ptr<tnbLib::HydStatic_WDiffCurve> 
+tnbLib::HydStatic_CmptLib::CalcWorkDifference
+(
+	const std::shared_ptr<HydStatic_hArmCurve>& theHeeling,
+	const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theRighting
+)
+{
+	const auto& hAuC = theHeeling->AuCurve();
+	const auto& rAuC = theRighting->AuCurve();
+
+	Debug_Null_Pointer(hAuC);
+	Debug_Null_Pointer(rAuC);
+
+	const auto& hQs = hAuC->Qs();
+	const auto& rQs = rAuC->Qs();
+
+	if ((hQs.size() NOT_EQUAL rQs.size()) OR hQs.empty())
+	{
+		FatalErrorIn("std::shared_ptr<HydStatic_WDiffCurve> HydStatic_CmptLib::CalcWorkDifference(Args...)")
+			<< "invalid data: GzQ" << endl
+			<< abort(FatalError);
+	}
+
+	std::vector<HydStatic_GzQ> Qs;
+	Qs.reserve(hQs.size());
+	for (size_t i = 0; i < hQs.size(); i++)
+	{
+		auto hH = hQs[i].Heel();
+		auto rH = rQs[i].Heel();
+
+		if (rH NOT_EQUAL hH)
+		{
+			FatalErrorIn("std::shared_ptr<HydStatic_WDiffCurve> HydStatic_CmptLib::CalcWorkDifference(Args...)")
+				<< "inconsistency data!" << endl
+				<< abort(FatalError);
+		}
+
+		HydStatic_GzQ q(hH, hQs[i].LeverArm() - rQs[i].LeverArm());
+		Qs.push_back(std::move(q));
+	}
+
+	const auto offsets = HydStatic_Tools::OffsetsFrom(Qs);
+	const auto c = MarineBase_Tools::Curve(offsets);
+	Debug_Null_Pointer(c);
+
+	auto wd = std::make_shared<HydStatic_WDiffCurve>(0, "work difference", c);
+	Debug_Null_Pointer(wd);
+
+	wd->SetQs(std::move(Qs));
+	return std::move(wd);
+}
+
+std::vector<tnbLib::HydStatic_GzQ> 
+tnbLib::HydStatic_CmptLib::CalcAuCurve
+(
+	const HydStatic_ArmCurve & theCurve, 
+	const Standard_Real y0,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	const auto& armQs = theCurve.Qs();
+
+	std::vector<HydStatic_GzQ> Qs;
+	Qs.reserve(armQs.size());
+
+	auto iter = armQs.begin();	
+
+	HydStatic_GzQ q(iter->Heel(), 0);
+	Qs.push_back(std::move(q));
+
+	const auto p0 = iter->Parameter();
+	iter++;
+
+	const auto& curve = theCurve.Geometry();
+
+	while (iter NOT_EQUAL armQs.end())
+	{
+		const auto& x = *iter;
+		auto p1 = x.Parameter();
+
+		auto trimmed = Pln_CurveTools::Trim(curve, p0, p1);
+		Debug_Null_Pointer(trimmed);
+
+		auto area = Cad2d_CmptLib::AreaUnderCurve(trimmed, y0, theInfo);
+		
+		HydStatic_GzQ q(x.Heel(), area);
+		Qs.push_back(std::move(q));
+
+		iter++;
+	}
+	return std::move(Qs);
+}
+
+void tnbLib::HydStatic_CmptLib::CalcParameters
+(
+	const std::shared_ptr<HydStatic_ArmCurve>& theArm
+)
+{
+	Debug_Null_Pointer(theArm);
+
+	const auto& geom = theArm->Geometry();
+	Debug_Null_Pointer(geom);
+
+	if (NOT Pln_Tools::IsBounded(geom))
+	{
+		FatalErrorIn("void CalcParameters(const std::shared_ptr<HydStatic_ArmCurve>& theArm)")
+			<< "the arm curve is not bounded!" << endl
+			<< abort(FatalError);
+	}
+
+	auto& Qs = theArm->ChangeQs();
+	if (Qs.empty())
+	{
+		FatalErrorIn("void CalcParameters(const std::shared_ptr<HydStatic_ArmCurve>& theArm)")
+			<< "the arm curve has no offset point!" << endl
+			<< abort(FatalError);
+	}
+
+	auto iter = Qs.begin();
+	auto& x = *iter;
+	x.SetParameter(geom->FirstParameter());
+
+	iter++;
+
+	Geom2dAPI_InterCurveCurve alg;
+	while (iter NOT_EQUAL Qs.end() - 1)
+	{
+		auto& x = *iter;
+		auto h = x.Heel();
+
+		Handle(Geom2d_Line) l = new Geom2d_Line(gp_Pnt2d(h, 0), gp_Vec2d(0, 1));
+		Debug_Null_Pointer(l);
+
+		alg.Init(geom, l);
+
+		if (alg.NbPoints() NOT_EQUAL 1)
+		{
+			FatalErrorIn("void CalcParameters(const std::shared_ptr<HydStatic_ArmCurve>& theArm)")
+				<< "unable to calculate the parameter from the intersection algorithm" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& intsect = alg.Intersector();
+		x.SetParameter(intsect.Point(1).ParamOnFirst());
+
+		iter++;
+	}
+
+	x = *iter;
+	x.SetParameter(geom->LastParameter());
 }

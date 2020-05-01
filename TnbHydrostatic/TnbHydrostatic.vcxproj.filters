@@ -304,6 +304,75 @@
     <Filter Include="TnbLib\Hydrostatic\Entities\EqQ\UnStable">
       <UniqueIdentifier>{c280986f-7a46-4758-8f7e-485ca374aa86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Eff">
+      <UniqueIdentifier>{a55b02c6-bfe9-4680-a4b5-82dccc1684e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator">
+      <UniqueIdentifier>{3258f2db-0c14-4ddb-9834-9a3f7a97d4f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator\SB">
+      <UniqueIdentifier>{61bc8705-3467-4452-8877-4ec583269a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator\Symm">
+      <UniqueIdentifier>{4d3038f9-2832-4b8d-933d-50464668c94d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator\Arbt">
+      <UniqueIdentifier>{68101274-d49b-4972-a9ed-1a6e74eaf3d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives">
+      <UniqueIdentifier>{0f91f847-71a2-4e23-9311-514885d30b02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDV">
+      <UniqueIdentifier>{5ea7633c-bbb5-4d85-acc4-634be0f30bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\FSLq">
+      <UniqueIdentifier>{7339ae07-6ef5-477a-b7f1-51e1cd72e025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDT">
+      <UniqueIdentifier>{3ca5d411-61a5-430a-84e2-24ad1e0cf076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\Body">
+      <UniqueIdentifier>{767d76a4-bb95-4d4d-82fe-236827e07e57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Tanks">
+      <UniqueIdentifier>{aed46fe5-14c6-4e9d-b93c-7c30e58560be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Cmpt">
+      <UniqueIdentifier>{844bd968-3770-47e3-a5c7-c04717f53394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\TCG">
+      <UniqueIdentifier>{80f0de96-395a-45e4-8f79-fabcbf6cdd91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\GGv">
+      <UniqueIdentifier>{c1a17bde-1ac4-48b8-aeba-304549b6f058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\GGt">
+      <UniqueIdentifier>{103a1633-74ec-4ac2-806d-c7a1c94bbb58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\EntityM">
+      <UniqueIdentifier>{ce108fd6-927f-4352-b4b9-6ad0bb49c10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Functions">
+      <UniqueIdentifier>{7a65e552-cd1d-4cdc-9d5e-2fc8dd0364cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Functions\rArm">
+      <UniqueIdentifier>{0f45c745-b56e-4606-9feb-64ff99c80643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Functions\hArm">
+      <UniqueIdentifier>{9effbeb6-b0cf-42e2-abc4-e28b015e538f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\FunLib">
+      <UniqueIdentifier>{43f837e8-6880-4edb-88b4-0c62d32e19e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\hArmFormula">
+      <UniqueIdentifier>{c477b35f-983e-4a2c-b6f3-a836a7e0bdc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\hArmFormula\Const">
+      <UniqueIdentifier>{fc27eca1-36d6-4b27-9253-884a5a5505ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Functions\IntgFun">
+      <UniqueIdentifier>{52e34728-14c0-4178-981c-507866fcc26f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.hxx">
@@ -314,9 +383,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\FormCoeff\Vessel_FormCoeff.hxx">
       <Filter>TnbLib\Hydrostatic\Vessel\FormCoeff</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.hxx">
-      <Filter>TnbLib\Hydrostatic\Tools</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\Boundary\HydroStatic_Boundary.hxx">
       <Filter>TnbLib\Hydrostatic\Boundary</Filter>
@@ -543,13 +609,88 @@
     <ClInclude Include="TnbLib\Hydrostatic\Entities\EqQ\UnStable\HydStatic_UnEqQ.hxx">
       <Filter>TnbLib\Hydrostatic\Entities\EqQ\UnStable</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Tools\HydStatic_Tools.hxx">
+      <Filter>TnbLib\Hydrostatic\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Eff\HydStatic_rArmCurve_Eff.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Eff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\HydStatic_rArmCurves.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator\Arbt\HydStatic_ArmCurveCreator_ArbtHeel.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\Creator\Arbt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator\Symm\HydStatic_ArmCurveCreator_SymmHeel.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\Creator\Symm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator\SB\HydStatic_ArmCurveCreator_StbHeel.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\Creator\SB</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\Creator\HydStatic_ArmCurveCreator.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\HydStatic_rArmCurve_Prim.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\Body\HydStatic_rArmCurve_Body.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\FSLq\HydStatic_rArmCurve_FSLq.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\FSLq</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDT\HydStatic_rArmCurve_LDT.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDT</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDV\HydStatic_rArmCurve_LDV.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDV</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Cmpt\HydStatic_rArmCurve_Cmpt.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Cmpt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Tanks\HydStatic_rArmCurve_Tanks.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Tanks</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\TCG\HydStatic_rArmCurve_TCG.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\TCG</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\GGv\HydStatic_rArmCurve_GGv.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\GGv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\EntityM\HydStatic_rArmCurve_EntityM.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\EntityM</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\GGt\HydStatic_rArmCurve_GGt.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\GGt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Functions\HydStatic_StbFun.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Functions\rArm\HydStatic_StbFun_rArm.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions\rArm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Functions\hArm\HydStatic_StbFun_hArm.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions\hArm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\FunLib\HydStatic_FunLib.hxx">
+      <Filter>TnbLib\Hydrostatic\FunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\hArmFormula\HydStatic_hArmFormula.hxx">
+      <Filter>TnbLib\Hydrostatic\hArmFormula</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\hArmFormula\Const\HydStatic_hArmFormula_Const.hxx">
+      <Filter>TnbLib\Hydrostatic\hArmFormula\Const</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Functions\IntgFun\HydStatic_StbFun_IntgFun.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions\IntgFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Functions\IntgFun\HydStatic_StbFun_IntgFunI.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions\IntgFun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx">
       <Filter>TnbLib\Hydrostatic\Vessel\Entities\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Tools\HydroStatic_Tools.cxx">
-      <Filter>TnbLib\Hydrostatic\Tools</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull\HsPhysModel_MonoHull.cxx">
       <Filter>TnbLib\Hydrostatic\PhysicsModel\MonoHull</Filter>
@@ -685,6 +826,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\StbGraph\DynStb\HydStatic_DynStbGraph.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\StbGraph\DynStb</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Tools\HydStatic_Tools.cxx">
+      <Filter>TnbLib\Hydrostatic\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Eff\HydStatic_rArmCurve_Eff.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Eff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQ\HydStatic_GzQ.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\GzQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP\HydStatic_GzQP.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\GzQP</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP2\HydStatic_GzQP2.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\GzQP2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\Body\HydStatic_rArmCurve_Body.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\FSLq\HydStatic_rArmCurve_FSLq.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\FSLq</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDT\HydStatic_rArmCurve_LDT.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDT</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDV\HydStatic_rArmCurve_LDV.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Primitives\LDV</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Functions\hArm\HydStatic_StbFun_hArm.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions\hArm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Functions\rArm\HydStatic_StbFun_rArm.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions\rArm</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\FunLib\HydStatic_FunLib.cxx">
+      <Filter>TnbLib\Hydrostatic\FunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Functions\IntgFun\HydStatic_StbFun_IntgFun.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Functions\IntgFun</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

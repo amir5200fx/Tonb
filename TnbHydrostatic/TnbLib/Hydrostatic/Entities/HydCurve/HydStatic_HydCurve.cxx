@@ -2,6 +2,14 @@
 
 tnbLib::HydStatic_HydCurve::HydStatic_HydCurve
 (
+	const Handle(Geom2d_Curve) && theCurve
+)
+	: theGeom_(std::move(theCurve))
+{
+}
+
+tnbLib::HydStatic_HydCurve::HydStatic_HydCurve
+(
 	const Handle(Geom2d_Curve)& theCurve
 )
 	: theGeom_(theCurve)

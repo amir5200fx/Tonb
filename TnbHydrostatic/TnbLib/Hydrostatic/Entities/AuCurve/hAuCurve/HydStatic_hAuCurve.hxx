@@ -7,6 +7,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class HydStatic_GzQ;
+
 	class HydStatic_hAuCurve
 		: public HydStatic_AuCurve
 	{
@@ -33,6 +36,11 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
+		static std::shared_ptr<HydStatic_hAuCurve>
+			AuCurve
+			(
+				const std::vector<HydStatic_GzQ>& theQs
+			);
 	};
 }
 

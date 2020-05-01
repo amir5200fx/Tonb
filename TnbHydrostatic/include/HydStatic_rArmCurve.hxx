@@ -7,10 +7,6 @@
 namespace tnbLib
 {
 
-	// Forward Declarations
-	class HydStatic_rAuCurve;
-	class HydStatic_CmptLib;
-
 	class HydStatic_rArmCurve
 		: public HydStatic_ArmCurve
 	{
@@ -19,15 +15,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<HydStatic_rAuCurve> theAuCurve_;
-
-
-		auto& ChangeAuCurve()
-		{
-			return theAuCurve_;
-		}
-
-	public:
+	protected:
 
 		HydStatic_rArmCurve
 		(
@@ -47,11 +35,21 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
+	public:
 
-		const auto& AuCurve() const
+		
+		virtual Standard_Boolean IsEffective() const
 		{
-			return theAuCurve_;
+			return Standard_False;
 		}
+
+		virtual Standard_Boolean IsPrim() const
+		{
+			return Standard_False;
+		}
+
+		virtual std::shared_ptr<HydStatic_rArmCurve>
+			ExpandToPort() const = 0;
 
 	};
 }

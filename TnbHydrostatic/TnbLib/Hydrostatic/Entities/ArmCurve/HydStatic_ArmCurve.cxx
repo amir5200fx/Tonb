@@ -12,6 +12,14 @@
 
 tnbLib::HydStatic_ArmCurve::HydStatic_ArmCurve
 (
+	const Handle(Geom2d_Curve) && theCurve
+)
+	: HydStatic_HydCurve(std::move(theCurve))
+{
+}
+
+tnbLib::HydStatic_ArmCurve::HydStatic_ArmCurve
+(
 	const Handle(Geom2d_Curve)& theCurve
 )
 	: HydStatic_HydCurve(theCurve)
@@ -123,48 +131,48 @@ namespace tnbLib
 #include <HydStatic_hArmCurve.hxx>
 #include <HydStatic_rArmCurve.hxx>
 
-std::shared_ptr<tnbLib::HydStatic_ArmCurve> 
-tnbLib::HydStatic_ArmCurve::Clip
-(
-	const std::shared_ptr<HydStatic_ArmCurve>& theCurve,
-	const Standard_Real theH0,
-	const Standard_Real theH1
-)
-{
-	if (NOT theCurve->IsIntersect(theH0))
-	{
-		FatalErrorIn("std::shared_ptr<HydStatic_ArmCurve> Clip(const HydStatic_ArmCurve& theCurve, const Standard_Real theH0, const Standard_Real theH1)")
-			<< "Found no intersection" << endl
-			<< abort(FatalError);
-	}
-
-	if (NOT theCurve->IsIntersect(theH1))
-	{
-		FatalErrorIn("std::shared_ptr<HydStatic_ArmCurve> Clip(const HydStatic_ArmCurve& theCurve, const Standard_Real theH0, const Standard_Real theH1)")
-			<< "Found no intersection" << endl
-			<< abort(FatalError);
-	}
-
-	const auto p0 = Parameter(theH0, theCurve->Geometry());
-	const auto p1 = Parameter(theH1, theCurve->Geometry());
-
-	Handle(Geom2d_TrimmedCurve) trimmed = new Geom2d_TrimmedCurve(theCurve->Geometry(), p0, p1);
-	
-	if (std::dynamic_pointer_cast<HydStatic_hArmCurve>(theCurve))
-	{
-		auto clipped = std::make_shared<HydStatic_hArmCurve>(trimmed);
-		return std::move(clipped);
-	}
-	else if (std::dynamic_pointer_cast<HydStatic_rArmCurve>(theCurve))
-	{
-		auto clipped = std::make_shared<HydStatic_rArmCurve>(trimmed);
-		return std::move(clipped);
-	}
-	else
-	{
-		FatalErrorIn("std::shared_ptr<HydStatic_ArmCurve> Clip(Args...)")
-			<< "invalid arm curve!" << endl
-			<< abort(FatalError);
-		return nullptr;
-	}
-}
+//std::shared_ptr<tnbLib::HydStatic_ArmCurve> 
+//tnbLib::HydStatic_ArmCurve::Clip
+//(
+//	const std::shared_ptr<HydStatic_ArmCurve>& theCurve,
+//	const Standard_Real theH0,
+//	const Standard_Real theH1
+//)
+//{
+//	if (NOT theCurve->IsIntersect(theH0))
+//	{
+//		FatalErrorIn("std::shared_ptr<HydStatic_ArmCurve> Clip(const HydStatic_ArmCurve& theCurve, const Standard_Real theH0, const Standard_Real theH1)")
+//			<< "Found no intersection" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	if (NOT theCurve->IsIntersect(theH1))
+//	{
+//		FatalErrorIn("std::shared_ptr<HydStatic_ArmCurve> Clip(const HydStatic_ArmCurve& theCurve, const Standard_Real theH0, const Standard_Real theH1)")
+//			<< "Found no intersection" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	const auto p0 = Parameter(theH0, theCurve->Geometry());
+//	const auto p1 = Parameter(theH1, theCurve->Geometry());
+//
+//	Handle(Geom2d_TrimmedCurve) trimmed = new Geom2d_TrimmedCurve(theCurve->Geometry(), p0, p1);
+//	
+//	if (std::dynamic_pointer_cast<HydStatic_hArmCurve>(theCurve))
+//	{
+//		auto clipped = std::make_shared<HydStatic_hArmCurve>(trimmed);
+//		return std::move(clipped);
+//	}
+//	else if (std::dynamic_pointer_cast<HydStatic_rArmCurve>(theCurve))
+//	{
+//		auto clipped = std::make_shared<HydStatic_rArmCurve>(trimmed);
+//		return std::move(clipped);
+//	}
+//	else
+//	{
+//		FatalErrorIn("std::shared_ptr<HydStatic_ArmCurve> Clip(Args...)")
+//			<< "invalid arm curve!" << endl
+//			<< abort(FatalError);
+//		return nullptr;
+//	}
+//}

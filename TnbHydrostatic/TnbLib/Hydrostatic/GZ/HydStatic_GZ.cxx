@@ -2,7 +2,8 @@
 
 #include <MarineBase_Tools.hxx>
 #include <HydStatic_GzQ.hxx>
-#include <HydStatic_rArmCurve.hxx>
+#include <HydStatic_rArmCurve_Body.hxx>
+#include <HydStatic_ArmCurveCreator_StbHeel.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_CmptLib.hxx>
 #include <error.hxx>
@@ -56,7 +57,8 @@ void tnbLib::HydStatic_GZ::Perform()
 
 	const auto curve = MarineBase_Tools::Curve(gzQ);
 
-	const auto rArm = std::make_shared<HydStatic_rArmCurve>(std::move(curve));
+	const auto rArm = 
+		std::make_shared<hydStcLib::ArmCurveCreator_StbHeel<hydStcLib::rArmCurve_Body>>(curve);
 
 	ChangeRightingArm() = std::move(rArm);
 

@@ -4,10 +4,11 @@
 
 #include <Global_AccessMethod.hxx>
 #include <HydStatic_Entity.hxx>
+#include <Pnt2d.hxx>
 
 namespace tnbLib
 {
-
+	
 	class HydStatic_GzQ
 		: public HydStatic_Entity
 	{
@@ -33,6 +34,11 @@ namespace tnbLib
 			, theLeverArm_(theLever)
 		{}
 
+		Pnt2d GetPt() const;
+
+		virtual std::shared_ptr<HydStatic_GzQ> Mirrored(const Pnt2d& theO) const;
+
+		virtual std::shared_ptr<HydStatic_GzQ> Mirrored(const gp_Ax2d& theAx) const;
 
 		static Standard_Boolean 
 			IsLess

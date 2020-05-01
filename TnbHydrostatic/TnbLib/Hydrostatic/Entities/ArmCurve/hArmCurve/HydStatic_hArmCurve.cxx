@@ -2,6 +2,14 @@
 
 tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
 (
+	const Handle(Geom2d_Curve) && theCurve
+)
+	: HydStatic_ArmCurve(std::move(theCurve))
+{
+}
+
+tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
+(
 	const Handle(Geom2d_Curve)& theCurve
 )
 	: HydStatic_ArmCurve(0, "heeling arm curve", theCurve)

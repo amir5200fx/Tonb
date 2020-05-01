@@ -11,18 +11,22 @@
 
 tnbLib::HydStatic_CrsCurve::HydStatic_CrsCurve
 (
-	const Handle(Geom2d_Curve)& theCurve
+	const Handle(Geom2d_Curve)& theCurve,
+	const Standard_Real theHeel
 )
 	: HydStatic_HydCurve(0, "cross-curve", theCurve)
+	, theHeel_(theHeel)
 {
 }
 
 tnbLib::HydStatic_CrsCurve::HydStatic_CrsCurve
 (
 	const Standard_Integer theIndex, 
-	const Handle(Geom2d_Curve)& theCurve
+	const Handle(Geom2d_Curve)& theCurve,
+	const Standard_Real theHeel
 )
 	: HydStatic_HydCurve(theIndex, "cross-curve", theCurve)
+	, theHeel_(theHeel)
 {
 }
 
@@ -30,9 +34,11 @@ tnbLib::HydStatic_CrsCurve::HydStatic_CrsCurve
 (
 	const Standard_Integer theIndex, 
 	const word & theName,
-	const Handle(Geom2d_Curve)& theCurve
+	const Handle(Geom2d_Curve)& theCurve,
+	const Standard_Real theHeel
 )
 	: HydStatic_HydCurve(theIndex, theName, theCurve)
+	, theHeel_(theHeel)
 {
 }
 

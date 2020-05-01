@@ -10,6 +10,14 @@ tnbLib::HydStatic_AuCurve::HydStatic_AuCurve
 
 tnbLib::HydStatic_AuCurve::HydStatic_AuCurve
 (
+	const Handle(Geom2d_Curve) && theCurve
+)
+	: HydStatic_HydCurve(std::move(theCurve))
+{
+}
+
+tnbLib::HydStatic_AuCurve::HydStatic_AuCurve
+(
 	const Standard_Integer theIndex, 
 	const Handle(Geom2d_Curve)& theCurve
 )

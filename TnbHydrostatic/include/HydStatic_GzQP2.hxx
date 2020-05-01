@@ -33,6 +33,11 @@ namespace tnbLib
 			, theParameter1_(theParam1)
 		{}
 
+
+		std::shared_ptr<HydStatic_GzQ> Mirrored(const Pnt2d& theO) const override;
+
+		std::shared_ptr<HydStatic_GzQ> Mirrored(const gp_Ax2d& theAx) const override;
+
 		//- Macros
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Parameter0)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Parameter1)

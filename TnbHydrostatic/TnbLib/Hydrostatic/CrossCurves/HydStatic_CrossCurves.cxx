@@ -162,13 +162,12 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 		auto curve = MarineBase_Tools::Curve(curveQ);
 		Debug_Null_Pointer(curve);
 
-		auto cross = std::make_shared<HydStatic_CrsCurve>(++K, curve);
-		auto ent = std::make_shared<entity>(h, std::move(cross));
+		auto cross = std::make_shared<HydStatic_CrsCurve>(++K, curve, h);
 
 		/*auto gc = std::make_shared<Marine_GraphCurve>(++K, curve);
 		Debug_Null_Pointer(gc);*/
 
-		curves.push_back(std::move(ent));
+		curves.push_back(std::move(cross));
 
 		h0 = h;
 		/*gp_Ax2d ax1(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(-h), sin(-h)));

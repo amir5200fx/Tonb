@@ -22,6 +22,7 @@ namespace tnbLib
 	class HydStatic_GzQ;
 	class HydStatic_GzQP;
 	class HydStatic_GzQP2;
+	class HydStatic_AuCurve;
 	class HydStatic_ArmCurve;
 	class HydStatic_rArmCurve;
 	class HydStatic_hArmCurve;
@@ -30,16 +31,22 @@ namespace tnbLib
 	class NumAlg_AdaptiveInteg_Info;
 
 	struct HydStatic_Bonjean_Entity;
-	struct HydStatic_CrossCurves_Entity;
 
 	namespace marineLib { struct xSectionParam; }
+	namespace hydStcLib { class rArmCurve_Eff; }
 
 	class HydStatic_CmptLib
 	{
 
 	public:
 
-		static Standard_Real CalcArea(const HydStatic_ArmCurve& theCurve, const Standard_Real y0, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+		static Standard_Real 
+			CalcArea
+			(
+				const HydStatic_ArmCurve& theCurve,
+				const Standard_Real y0, 
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
 
 		static Standard_Real 
 			Draft
@@ -89,7 +96,7 @@ namespace tnbLib
 		static std::vector<HydStatic_GzQ>
 			LeverArms
 			(
-				const std::vector<std::shared_ptr<HydStatic_CrossCurves_Entity>>& theCurves, 
+				const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theCurves, 
 				const Standard_Real theVol
 			);
 
@@ -148,23 +155,36 @@ namespace tnbLib
 		static std::vector<HydStatic_GzQP2>
 			CalcDynamicalStabilityPoints
 			(
-				const HydStatic_rArmCurve& theCurve,
+				const hydStcLib::rArmCurve_Eff& theRighting,
 				const HydStatic_hArmCurve& theHeeling
 			);
 
-		static std::vector<HydStatic_GzQP2>
+		static std::vector<HydStatic_GzQP>
 			CalcDynamicalStabilityPoints
 			(
 				const HydStatic_WDiffCurve& theWDiffCurve
 			);
 
 		static std::shared_ptr<HydStatic_WDiffCurve>
-			CalcWorkDifference(const std::shared_ptr<HydStatic_hArmCurve>& theHeeling, const std::shared_ptr<HydStatic_rArmCurve>& theRighting);
+			CalcWorkDifference
+			(
+				const std::shared_ptr<HydStatic_hArmCurve>& theHeeling, 
+				const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theRighting
+			);
 
-		static void CalcAuCurve(const std::shared_ptr<HydStatic_rArmCurve>& theCurve);
+		static std::vector<HydStatic_GzQ> 
+			CalcAuCurve
+			(
+				const HydStatic_ArmCurve& theCurve, 
+				const Standard_Real y0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
 
-		static void CalcAuCurve(const std::shared_ptr<HydStatic_hArmCurve>& theCurve);
-
+		static void 
+			CalcParameters
+			(
+				const std::shared_ptr<HydStatic_ArmCurve>& theArm
+			);
 	
 	};
 }

@@ -31,7 +31,12 @@ namespace tnbLib
 
 		HydStatic_hArmCurve
 		(
-			const Handle(Geom2d_Curve)& theCurve
+			const Handle(Geom2d_Curve)&& theCurve
+		);
+
+		HydStatic_hArmCurve
+		(
+			const Handle(Geom2d_Curve) & theCurve
 		);
 
 		HydStatic_hArmCurve
@@ -47,12 +52,23 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
+		Standard_Boolean HasAuCurve() const
+		{
+			return (Standard_Boolean)theAuCurve_;
+		}
 		
 		const auto& AuCurve() const
 		{
 			return theAuCurve_;
 		}
 
+		void SetAuCurve
+		(
+			const std::shared_ptr<HydStatic_hAuCurve>&& theCurve
+		)
+		{
+			theAuCurve_ = std::move(theCurve);
+		}
 		
 	};
 }
