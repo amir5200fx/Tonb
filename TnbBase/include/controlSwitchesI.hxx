@@ -299,6 +299,9 @@ namespace tnbLib
 					switchValuesTable.erase(switchName_);
 				}
 			}
+
+			/*debug by amir: 1st may, 2020*/
+			if (switchValuesTable_->empty()) delete switchValuesTable_;
 		}
 
 

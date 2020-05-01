@@ -376,6 +376,11 @@ namespace tnbLib
 			: theRoot_(nullptr)
 		{}
 
+		~Adt_AvlTree()
+		{
+			Clear(theRoot_);
+		}
+
 		Standard_Boolean IsContains(const Comparable& Element) const
 		{
 			return IsContains(Element, theRoot_);
