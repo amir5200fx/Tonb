@@ -47,6 +47,15 @@ namespace tnbLib
 
 		Pln_Edge
 		(
+			const std::shared_ptr<Pln_Vertex>&& theVtx0,
+			const std::shared_ptr<Pln_Vertex>&& theVtx1
+		)
+			: theVtx0_(std::move(theVtx0))
+			, theVtx1_(std::move(theVtx1))
+		{}
+
+		Pln_Edge
+		(
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
 			const std::shared_ptr<Pln_Vertex>& theVtx1,
 			const std::shared_ptr<Pln_Curve>& theCurve,
@@ -55,6 +64,18 @@ namespace tnbLib
 			: Pln_EdgeGeom(theCurve, Sense)
 			, theVtx0_(theVtx0)
 			, theVtx1_(theVtx1)
+		{}
+
+		Pln_Edge
+		(
+			const std::shared_ptr<Pln_Vertex>&& theVtx0,
+			const std::shared_ptr<Pln_Vertex>&& theVtx1,
+			const std::shared_ptr<Pln_Curve>&& theCurve,
+			const Standard_Boolean Sense = Standard_True
+		)
+			: Pln_EdgeGeom(std::move(theCurve), Sense)
+			, theVtx0_(std::move(theVtx0))
+			, theVtx1_(std::move(theVtx1))
 		{}
 
 		Pln_Edge
@@ -71,6 +92,17 @@ namespace tnbLib
 		Pln_Edge
 		(
 			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Vertex>&& theVtx0,
+			const std::shared_ptr<Pln_Vertex>&& theVtx1
+		)
+			: Pln_Entity(theIndex)
+			, theVtx0_(std::move(theVtx0))
+			, theVtx1_(std::move(theVtx1))
+		{}
+
+		Pln_Edge
+		(
+			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
 			const std::shared_ptr<Pln_Vertex>& theVtx1
@@ -78,6 +110,18 @@ namespace tnbLib
 			: Pln_Entity(theIndex, theName)
 			, theVtx0_(theVtx0)
 			, theVtx1_(theVtx1)
+		{}
+
+		Pln_Edge
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Pln_Vertex>&& theVtx0,
+			const std::shared_ptr<Pln_Vertex>&& theVtx1
+		)
+			: Pln_Entity(theIndex, theName)
+			, theVtx0_(std::move(theVtx0))
+			, theVtx1_(std::move(theVtx1))
 		{}
 
 		Pln_Edge
@@ -95,11 +139,36 @@ namespace tnbLib
 			, theVtx1_(theVtx1)
 		{}
 
+		Pln_Edge
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Pln_Vertex>&& theVtx0,
+			const std::shared_ptr<Pln_Vertex>&& theVtx1,
+			const std::shared_ptr<Pln_Curve>&& theCurve,
+			const Standard_Boolean Sense = Standard_True
+		)
+			: Pln_Entity(theIndex, theName)
+			, Pln_EdgeGeom(std::move(theCurve), Sense)
+			, theVtx0_(std::move(theVtx0))
+			, theVtx1_(std::move(theVtx1))
+		{}
+
 		Standard_Boolean IsDangle() const;
 
-		Standard_Integer GetIndex(const std::shared_ptr<Pln_Vertex>& theVertex) const;
+		Standard_Boolean IsOrphan() const override;
 
-		Standard_Real Parameter(const Standard_Integer theIndex) const;
+		Standard_Integer NbEntities(const Pln_EntityType t) const override;
+
+		Standard_Integer GetIndex
+		(
+			const std::shared_ptr<Pln_Vertex>& theVertex
+		) const;
+
+		Standard_Real Parameter
+		(
+			const Standard_Integer theIndex
+		) const;
 
 		const std::shared_ptr<Pln_Vertex>& Vtx0() const
 		{
@@ -111,8 +180,21 @@ namespace tnbLib
 			return theVtx1_;
 		}
 
+		Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
+
 		std::shared_ptr<Pln_Entity>
 			Copy() const override;
+
+		Pln_EntityType Type() const override;
+
+		//- WARNING! the edge must be orphan for transforming
+		void Transform(const gp_Trsf2d& t) override;
+
+		void RetrieveEntitiesTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
+			const Pln_EntityType t
+		) const override;
 
 		void Reverse
 		(

@@ -307,6 +307,21 @@
     <Filter Include="TnbLib\Cad2d\Modeler\Manager">
       <UniqueIdentifier>{d8df0a85-a91e-4b0a-a8d1-902fe68b2705}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Type">
+      <UniqueIdentifier>{73b5e232-e1b4-4a0b-aa51-0f72f3bc8164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Wire\Adaptor">
+      <UniqueIdentifier>{d60cdfa1-be01-48ce-957a-4fe33aaeb0f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Plane\Manager">
+      <UniqueIdentifier>{c813bd42-7219-427a-adff-178f5c7a0417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Wire\Aux">
+      <UniqueIdentifier>{e25b4791-1b5b-4957-bd07-ad66b0fd9763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Plane\Aux">
+      <UniqueIdentifier>{23975cc2-419b-4915-9bfc-f6ae063965c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -585,6 +600,21 @@
     <ClInclude Include="TnbLib\Cad2d\Modeler\Tools\Cad2d_Modeler_Tools.hxx">
       <Filter>TnbLib\Cad2d\Modeler\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Type\Pln_EntityType.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Adaptor\Pln_WireAdaptor.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_Manager.hxx">
+      <Filter>TnbLib\Cad2d\Plane\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Auxillary\Pln_WireAux.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire\Aux</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Plane\Auxillary\Cad2d_Plane_Auxillary.hxx">
+      <Filter>TnbLib\Cad2d\Plane\Aux</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -757,6 +787,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Modeler\Plane\Cad2d_Modeler_Plane.cxx">
       <Filter>TnbLib\Cad2d\Modeler\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Tools\Cad2d_Modeler_Tools.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Ring\Pln_Ring.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_Manager.cxx">
+      <Filter>TnbLib\Cad2d\Plane\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Auxillary\Pln_WireAux.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire\Aux</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Auxillary\Cad2d_Plane_Auxillary.cxx">
+      <Filter>TnbLib\Cad2d\Plane\Aux</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptor.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

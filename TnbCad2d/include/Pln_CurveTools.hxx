@@ -27,6 +27,14 @@ namespace tnbLib
 	public:
 
 		static Handle(Geom2d_Curve)
+			Trim
+			(
+				const Handle(Geom2d_Curve), 
+				const Standard_Real theP0, 
+				const Standard_Real theP1
+			);
+
+		static Handle(Geom2d_Curve)
 			Interpolation
 			(
 				const std::vector<Pnt2d>& theQ, 

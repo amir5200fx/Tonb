@@ -14,94 +14,73 @@ namespace tnbLib
 	class Pln_Vertex;
 	class Pln_Edge;
 
-	class Cad2d_Modeler_Registry
+	namespace cad2dLib
 	{
 
-		/*Private Data*/
-
-		/*std::map<Standard_Integer, std::shared_ptr<Pln_Vertex>>
-			theVertices_;*/
-		std::map<Standard_Integer, std::shared_ptr<Pln_Edge>>
-			theEdges_;
-
-	protected:
-
-		Cad2d_Modeler_Registry();
-
-
-		/*auto NbVertices() const
+		class Modeler_Registry
 		{
-			return (Standard_Integer)theVertices_.size();
-		}*/
 
-		auto NbEdges() const
-		{
-			return (Standard_Integer)theEdges_.size();
-		}
+			/*Private Data*/
 
-		/*const auto& Vertices() const
-		{
-			return theVertices_;
-		}*/
+			std::map<Standard_Integer, std::shared_ptr<Pln_Edge>>
+				theEdges_;
 
-		const auto& Edges() const
-		{
-			return theEdges_;
-		}
+		protected:
 
-		/*std::shared_ptr<Pln_Vertex> 
-			RemoveVertexFromRegistry
+			Modeler_Registry();
+
+
+			std::shared_ptr<Pln_Edge>
+				RemoveEdgeFromRegistry
+				(
+					const Standard_Integer theIndex
+				);
+
+			void RegisterToEdges
 			(
-				const Standard_Integer theIndex
-			);*/
-
-		std::shared_ptr<Pln_Edge> 
-			RemoveEdgeFromRegistry
-			(
-				const Standard_Integer theIndex
-			);
-
-		/*void RegisterToVertices
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<Pln_Vertex>& theVtx
-		);*/
-
-		void RegisterToEdges
-		(
-			const Standard_Integer theIndex, 
-			const std::shared_ptr<Pln_Edge>& theEdge
-		);
-
-	public:
-
-		//static const std::shared_ptr<Pln_Vertex> null_vertex;
-		static const std::shared_ptr<Pln_Edge> null_edge;
-
-		/*const std::shared_ptr<Pln_Vertex>& 
-			SelectVertex
-			(
-				const Standard_Integer theIndex
-			) const;*/
-
-		const std::shared_ptr<Pln_Edge>& 
-			SelectEdge
-			(
-				const Standard_Integer theIndex
-			) const;
-
-		/*static Standard_Boolean
-			IsNull_Vertex
-			(
-				const std::shared_ptr<Pln_Vertex>& theVtx
-			);*/
-
-		static Standard_Boolean 
-			IsNull
-			(
+				const Standard_Integer theIndex,
 				const std::shared_ptr<Pln_Edge>& theEdge
 			);
-	};
+
+		public:
+
+			static const std::shared_ptr<Pln_Edge> null_edge;
+
+			Standard_Boolean 
+				IsContainEdge
+				(
+					const Standard_Integer theIndex
+				) const;
+
+			Standard_Boolean 
+				IsContain
+				(
+					const std::shared_ptr<Pln_Edge>& theEdge
+				) const;
+
+			auto NbEdges() const
+			{
+				return (Standard_Integer)theEdges_.size();
+			}
+
+			const auto& Edges() const
+			{
+				return theEdges_;
+			}
+
+			const std::shared_ptr<Pln_Edge>&
+				SelectEdge
+				(
+					const Standard_Integer theIndex
+				) const;
+
+			static Standard_Boolean
+				IsNull
+				(
+					const std::shared_ptr<Pln_Edge>& theEdge
+				);
+		};
+	}
 }
 
 #endif // !_Cad2d_Modeler_Registry_Header

@@ -7,37 +7,41 @@
 namespace tnbLib
 {
 
-	class Cad2d_Modeler_Counter
+	namespace cad2dLib
 	{
 
-		/*Private Data*/
-
-		mutable Geo_ItemCounter theVertexCounter_;
-		mutable Geo_ItemCounter theEdgeCounter_;
-		mutable Geo_ItemCounter theCornerCounter_;
-
-
-	protected:
-
-		Cad2d_Modeler_Counter()
-		{}
-
-		auto& VertexCounter() const
+		class Modeler_Counter
 		{
-			return theVertexCounter_;
-		}
-		
-		auto& EdgeCounter() const
-		{
-			return theEdgeCounter_;
-		}
 
-		auto& CornerCounter() const
-		{
-			return theCornerCounter_;
-		}
+			/*Private Data*/
 
-	};
+			mutable Geo_ItemCounter theVertexCounter_;
+			mutable Geo_ItemCounter theEdgeCounter_;
+			mutable Geo_ItemCounter theCornerCounter_;
+
+
+		protected:
+
+			Modeler_Counter()
+			{}
+
+			auto& VertexCounter() const
+			{
+				return theVertexCounter_;
+			}
+
+			auto& EdgeCounter() const
+			{
+				return theEdgeCounter_;
+			}
+
+			auto& CornerCounter() const
+			{
+				return theCornerCounter_;
+			}
+
+		};
+	}
 }
 
 #endif // !_Cad2d_Modeler_Counter_Header
