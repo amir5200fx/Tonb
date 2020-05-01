@@ -3,7 +3,8 @@
 #define _Pln_Wire_Header
 
 #include <Pln_Entity.hxx>
-#include <Pln_Orientation.hxx>
+#include <Pln_WireAdaptor.hxx>
+#include <Pln_WireAux.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <OFstream.hxx>
@@ -20,28 +21,39 @@ namespace tnbLib
 	class Pln_Curve;
 	class Pln_Vertex;
 	class Pln_CmpEdge;
+	class Cad2d_Plane;
 	class Geo_ApprxCurve_Info;
 
 	class Pln_Wire
 		: public Pln_Entity
+		, public Pln_WireAdaptor
+		, public Pln_WireAux
 	{
+
+		friend class Cad2d_Plane;
+
+		using Pln_WireAux::BoundingBox;
 
 		/*Private Data*/
 
-		Pln_Orientation theOrientation_;
 
 		std::shared_ptr<Pln_CmpEdge> theEdges_;
 
-		std::shared_ptr<Entity2d_Box> theBoundingBox_;
-
-
 		//- private functions
 
-		void CalcBoundingBox(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
+		Entity2d_Box CalcBoundingBox(const Standard_Real theTol) const;
+
+		void SetEdges(const std::shared_ptr<Pln_CmpEdge>&& theEdges);
 
 		void CheckWire(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
 
 		void CreateWire(const std::shared_ptr<Pln_CmpEdge>& theEdge);
+
+		void CreateWire(const std::shared_ptr<Pln_CmpEdge>&& theEdge);
+
+		void CheckWireConsistency(const char* theName) const;
+
+		void ForcedTransform(const gp_Trsf2d& t);
 
 	public:
 
@@ -52,8 +64,19 @@ namespace tnbLib
 
 		Pln_Wire
 		(
+			const std::shared_ptr<Pln_CmpEdge>&& theEdge
+		);
+
+		Pln_Wire
+		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<Pln_CmpEdge>& theEdge
+		);
+
+		Pln_Wire
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_CmpEdge>&& theEdge
 		);
 
 		Pln_Wire
@@ -63,30 +86,38 @@ namespace tnbLib
 			const std::shared_ptr<Pln_CmpEdge>& theEdge
 		);
 
+		Pln_Wire
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Pln_CmpEdge>&& theEdge
+		);
+
 		Standard_Integer NbEdges() const;
+
+		Standard_Integer NbEntities
+		(
+			const Pln_EntityType t
+		) const override;
+
+		Standard_Boolean IsOrphan() const override;
 
 		std::tuple<Standard_Real, Standard_Real> 
 			BoundTolerance() const;
 
+		Entity2d_Box BoundingBox
+		(
+			const Standard_Real Tol
+		) const override;
+
 		std::shared_ptr<Entity2d_Polygon>
 			Polygon() const;
 
-		const std::vector<std::shared_ptr<Pln_Edge>>& Edges() const;
+		const std::vector<std::shared_ptr<Pln_Edge>>& 
+			Edges() const;
 
-		const std::shared_ptr<Pln_CmpEdge>& CmpEdge() const
-		{
-			return theEdges_;
-		}
-
-		const std::shared_ptr<Entity2d_Box>& BoundingBox() const
-		{
-			return theBoundingBox_;
-		}
-
-		Pln_Orientation Orientation() const
-		{
-			return theOrientation_;
-		}
+		const std::shared_ptr<Pln_CmpEdge>& 
+			CmpEdge() const;
 
 		std::vector<std::shared_ptr<Pln_Vertex>>
 			RetrieveVertices() const;
@@ -97,15 +128,36 @@ namespace tnbLib
 		std::shared_ptr<Pln_Entity>
 			Copy() const override;
 
-		void Transform(const gp_Trsf2d& t);
+		Pln_EntityType Type() const override;
 
-		void ApplyOrientation(const Pln_Orientation theOrient);
+		void Transform(const gp_Trsf2d& t) override;
+
+		void RetrieveEntitiesTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
+			const Pln_EntityType t
+		) const override;
+
+		void ApplyOrientation
+		(
+			const Pln_Orientation theOrient
+		);
 
 		void Reverse();
 
 		void RetrieveVerticesTo
 		(
 			std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
+		) const;
+
+		void RetrieveVerticesTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theVertices
+		) const;
+
+		void RetrieveEdgesTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theEdges
 		) const;
 
 		void RetrieveCurvesTo

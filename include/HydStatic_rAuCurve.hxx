@@ -7,6 +7,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class HydStatic_GzQ;
+
 	class HydStatic_rAuCurve
 		: public HydStatic_AuCurve
 	{
@@ -15,9 +18,15 @@ namespace tnbLib
 
 	public:
 
+
 		HydStatic_rAuCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
+		);
+
+		HydStatic_rAuCurve
+		(
+			const Handle(Geom2d_Curve)&& theCurve
 		);
 
 		HydStatic_rAuCurve
@@ -32,6 +41,14 @@ namespace tnbLib
 			const word& theName,
 			const Handle(Geom2d_Curve)& theCurve
 		);
+
+
+
+		static std::shared_ptr<HydStatic_rAuCurve>
+			AuCurve
+			(
+				const std::vector<HydStatic_GzQ>& theQs
+			);
 
 	};
 }

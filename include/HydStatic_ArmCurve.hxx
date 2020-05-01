@@ -3,7 +3,7 @@
 #define _HydStatic_ArmCurve_Header
 
 #include <HydStatic_HydCurve.hxx>
-#include <HydStatic_GzQ.hxx>
+#include <HydStatic_GzQP.hxx>
 
 #include <vector>
 
@@ -16,9 +16,14 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::vector<HydStatic_GzQ> theQs_;
+		std::vector<HydStatic_GzQP> theQs_;
 
 	protected:
+
+		HydStatic_ArmCurve
+		(
+			const Handle(Geom2d_Curve)&& theCurve
+		);
 
 		HydStatic_ArmCurve
 		(
@@ -60,7 +65,7 @@ namespace tnbLib
 
 		void SetQs
 		(
-			const std::vector<HydStatic_GzQ>&& theQs
+			const std::vector<HydStatic_GzQP>&& theQs
 		)
 		{
 			theQs_ = std::move(theQs);

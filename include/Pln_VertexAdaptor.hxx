@@ -42,37 +42,14 @@ namespace tnbLib
 
 		void InsertToEdges
 		(
-			const Standard_Integer theIndex, 
+			const Standard_Integer theIndex,
 			const std::weak_ptr<Pln_Edge>& theEdge
-		)
-		{
-#ifdef FULLDEBUG
-			auto iter = theEdges_.find(theIndex);
-			if (iter NOT_EQUAL theEdges_.end())
-			{
-				FatalErrorIn("void InsertToEdges(const Standard_Integer theIndex, const std::weak_ptr<Pln_Edge>& theEdge)")
-					<< "Duplicate data!" << endl
-					<< abort(FatalError);
-			}
-#endif
-			theEdges_.insert(std::make_pair(theIndex, theEdge));
-		}
+		);
 
 		void RemoveFromEdges
 		(
 			const Standard_Integer theIndex
-		)
-		{
-			auto iter = theEdges_.find(theIndex);
-			if (iter NOT_EQUAL theEdges_.end())
-			{
-				FatalErrorIn("void RemoveFromEdges(const Standard_Integer theIndex)")
-					<< "the item is not in the tree: " << theIndex << endl
-					<< abort(FatalError);
-			}
-
-			theEdges_.erase(iter);
-		}
+		);
 	};
 }
 

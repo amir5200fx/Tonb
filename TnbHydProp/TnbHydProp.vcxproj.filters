@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{eade15e9-e1a4-41fb-9d0f-c42c79a60bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\HydProp">
+      <UniqueIdentifier>{5e8fb398-45cc-4089-8dff-ff02c8eb06b5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

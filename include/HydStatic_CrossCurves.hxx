@@ -18,26 +18,9 @@ namespace tnbLib
 	class Marine_Graph;
 	class HydStatic_CrsCurve;
 
-	struct HydStatic_CrossCurves_Entity
-	{
-		Standard_Real Heel;
-		std::shared_ptr<HydStatic_CrsCurve> Curve;
-
-		HydStatic_CrossCurves_Entity
-		(
-			const Standard_Real theHeel,
-			const std::shared_ptr<HydStatic_CrsCurve>& theCurve
-		)
-			: Heel(theHeel)
-			, Curve(theCurve)
-		{}
-	};
-
 	class HydStatic_CrossCurves
 		: public Global_Done
 	{
-
-		typedef HydStatic_CrossCurves_Entity entity;
 
 		/*Private Data*/
 
@@ -50,7 +33,7 @@ namespace tnbLib
 
 		std::shared_ptr<Geo_xDistb> theHeels_;
 
-		std::vector<std::shared_ptr<entity>> theCrossCurves_;
+		std::vector<std::shared_ptr<HydStatic_CrsCurve>> theCrossCurves_;
 
 		std::shared_ptr<Marine_Graph> theGraph_;
 

@@ -27,6 +27,11 @@ namespace tnbLib
 
 		HydStatic_AuCurve
 		(
+			const Handle(Geom2d_Curve)&& theCurve
+		);
+
+		HydStatic_AuCurve
+		(
 			const Standard_Integer theIndex, 
 			const Handle(Geom2d_Curve)& theCurve
 		);
@@ -49,6 +54,15 @@ namespace tnbLib
 		{
 			return theQs_;
 		}
+
+		void SteQs
+		(
+			const std::vector<HydStatic_GzQ>&& theQs
+		)
+		{
+			theQs_ = std::move(theQs);
+		}
+
 	};
 }
 

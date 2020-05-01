@@ -3,6 +3,8 @@
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Pnt2d.hxx>
 #include <Cad2d_Plane.hxx>
+#include <error.hxx>
+#include <OSstream.hxx>
 
 void tnbLib::example_creating_plane_box()
 {

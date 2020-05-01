@@ -15,7 +15,7 @@
 #include <Marine_CmpSection.hxx>
 #include <Marine_VesselModel.hxx>
 #include <Marine_SectionDistribution_Uniform.hxx>
-#include <Marine_ModelMaker_Shape.hxx>
+//#include <Marine_ModelMaker_Shape.hxx>
 #include <Marine_FlatWave.hxx>
 #include <LegModel_DispNo1.hxx>
 #include <Cad_FastDiscrete.hxx>
@@ -34,6 +34,7 @@
 #include <Tnb_Examples.hxx>
 
 #include <armadillo.h>
+#include <vld.h>
 
 using namespace tnbLib;
 
@@ -46,7 +47,8 @@ Standard_Integer main()
 	//example_calculate_volume_ship();
 	//example_transform_shape2d();
 	//example_geo_compt_polygons();
-	example_cross_curves_ship();
+	//example_cross_curves_ship();
+	example_cad2d_modeler();
 
 	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));
@@ -58,8 +60,8 @@ Standard_Integer main()
 	PAUSE;
 	return 0;*/
 
-	fileName name("out.plt");
-	OFstream myFile(name);
+	//fileName name("out.plt");
+	//OFstream myFile(name);
 	/*sysLib::init_TnbCad2d();
 
 	auto pln = Cad2d_Plane::MakeBox(Pnt2d(0, 0), Pnt2d(1.0, 0.38), sysLib::gl_cad2d_plane_info);

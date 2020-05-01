@@ -3,6 +3,7 @@
 #define _Cad2d_Modeler_SrchEng_Header
 
 #include <Geo_AdTree.hxx>
+#include <Entity2d_Box.hxx>
 #include <Cad2d_Modeler_Corner.hxx>
 
 namespace tnbLib
@@ -11,40 +12,99 @@ namespace tnbLib
 	// Forward Declarations
 	class Pln_Vertex;
 
-	class Cad2d_Modeler_SrchEng
+	namespace cad2dLib
 	{
 
-		/*Private Data*/
+		class Modeler_SrchEng
+		{
 
-		Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>>
-			theCorners_;
+			/*Private Data*/
 
-	protected:
+			Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>>
+				theCorners_;
 
-
-		static const std::shared_ptr<cad2dLib::Modeler_Corner> null;
-
-		Cad2d_Modeler_SrchEng()
-		{}
+			Standard_Real theMaxRadius_;
 
 
-		Standard_Real Radius() const;
+			//- private functions and operators
 
-		const std::shared_ptr<cad2dLib::Modeler_Corner>& SelectCorner(const Pnt2d& theCoord) const;
+			Standard_Boolean CheckDomain() const;
 
-		const std::shared_ptr<cad2dLib::Modeler_Corner>& FindCorner(const std::shared_ptr<Pln_Vertex>& theVtx) const;
+			void CheckDomain(const char* theName) const;
 
-		void ReArrangeSrchEngine();
-
-		void InsertToSrchEngine(const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner);
-
-		void RemoveFromSrchEngine(const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner);
+		protected:
 
 
-		static Standard_Boolean IsNull(const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner);
+			static const std::shared_ptr<cad2dLib::Modeler_Corner> null;
+			static const Entity2d_Box null_domain;
 
-		static const std::shared_ptr<cad2dLib::Modeler_Corner>& MinDist(const std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners, const Pnt2d& theCentre);
-	};
+			Modeler_SrchEng();
+
+			auto Radius() const
+			{
+				return theMaxRadius_;
+			}
+
+			auto& Radius()
+			{
+				return theMaxRadius_;
+			}
+
+			const std::shared_ptr<cad2dLib::Modeler_Corner>&
+				SelectCorner
+				(
+					const Pnt2d& theCoord
+				) const;
+
+			std::shared_ptr<cad2dLib::Modeler_Corner>
+				FindCorner
+				(
+					const std::shared_ptr<Pln_Vertex>& theVtx
+				) const;
+
+			void ReArrangeSrchEngine();
+
+			void InsertToSrchEngine
+			(
+				const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
+			);
+
+			void RemoveFromSrchEngine
+			(
+				const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
+			);
+
+			void SetMaxRadius
+			(
+				const Standard_Real theRadius
+			);
+
+		public:
+
+			void SetDomain
+			(
+				const Entity2d_Box& theDomain
+			);
+
+		protected:
+
+			//- static functions
+
+			static Standard_Boolean
+				IsNull
+				(
+					const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
+				);
+
+			static const std::shared_ptr<cad2dLib::Modeler_Corner>&
+				MinDist
+				(
+					const std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners,
+					const Pnt2d& theCentre
+				);
+
+		};
+	}
 
 	
 }

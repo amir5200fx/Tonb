@@ -23,6 +23,11 @@ namespace tnbLib
 
 		HydStatic_HydCurve
 		(
+			const Handle(Geom2d_Curve)&& theCurve
+		);
+
+		HydStatic_HydCurve
+		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 

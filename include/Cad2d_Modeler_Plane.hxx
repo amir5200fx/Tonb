@@ -13,42 +13,61 @@ namespace tnbLib
 	// Forward Declarations
 	class Cad2d_Plane;
 
-	class Cad2d_Modeler_Plane
+	namespace cad2dLib
 	{
 
-		/*Private Data*/
-
-		std::map<Standard_Integer, std::shared_ptr<Cad2d_Plane>>
-			thePlanes_;
-
-	protected:
-
-		Cad2d_Modeler_Plane();
-
-
-		auto NbPlanes() const
+		class Modeler_Plane
 		{
-			return (Standard_Integer)thePlanes_.size();
-		}
 
-		const auto& Planes() const
-		{
-			return thePlanes_;
-		}
+			/*Private Data*/
 
-		std::shared_ptr<Cad2d_Plane> 
-			RemoveFromPlanes
+			std::map<Standard_Integer, std::shared_ptr<Cad2d_Plane>>
+				thePlanes_;
+
+		protected:
+
+			Modeler_Plane();
+
+			void InsertToPlanes
 			(
-				const Standard_Integer theIndex
+				const Standard_Integer theIndex,
+				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
-		void InsertToPlanes
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<Cad2d_Plane>& thePlane
-		);
+		public:
 
-	};
+			Standard_Boolean 
+				IsContainPlane
+				(
+					const Standard_Integer theIndex
+				) const;
+
+			Standard_Boolean 
+				IsContain
+				(
+					const std::shared_ptr<Cad2d_Plane>& thePlane
+				) const;
+
+			auto NbPlanes() const
+			{
+				return (Standard_Integer)thePlanes_.size();
+			}
+
+			const auto& Planes() const
+			{
+				return thePlanes_;
+			}
+
+			std::shared_ptr<Cad2d_Plane>
+				RemoveFromPlanes
+				(
+					const Standard_Integer theIndex
+				);
+
+			
+
+		};
+	}
 }
 
 #endif // !_Cad2d_Modeler_Plane_Header

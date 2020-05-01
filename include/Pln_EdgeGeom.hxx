@@ -41,6 +41,15 @@ namespace tnbLib
 			, Sense_(theSense)
 		{}
 
+		Pln_EdgeGeom
+		(
+			const std::shared_ptr<Pln_Curve>&& theCurve,
+			const Standard_Boolean theSense
+		)
+			: theCurve_(std::move(theCurve))
+			, Sense_(theSense)
+		{}
+
 		Standard_Boolean& ChangeSense()
 		{
 			return Sense_;

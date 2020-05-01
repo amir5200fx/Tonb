@@ -4,6 +4,8 @@
 
 #include <Pnt2d.hxx>
 #include <Cad2d_Modeler_Entity.hxx>
+#include <error.hxx>
+#include <OSstream.hxx>
 
 #include <vector>
 #include <memory>
@@ -51,6 +53,10 @@ namespace tnbLib
 				const word& theName
 			);
 
+			~Modeler_Corner()
+			{
+				theVertices_.clear();
+			}
 
 			auto NbVertices() const
 			{
@@ -95,7 +101,17 @@ namespace tnbLib
 
 			std::shared_ptr<Pln_Vertex> Remove(const Standard_Integer theIndex);
 
-			std::shared_ptr<Pln_Entity> Copy() const override;
+			std::shared_ptr<Modeler_Entity> Copy() const;
+
+
+			static const Pnt2d& GetCoord
+			(
+				const std::shared_ptr<Modeler_Corner>& theEnt
+			)
+			{
+				Debug_Null_Pointer(theEnt);
+				return theEnt->Coord();
+			}
 		};
 	}
 

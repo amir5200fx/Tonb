@@ -25,7 +25,9 @@ namespace tnbLib
 	class Cad2d_IntsctEntity_TangSegment;
 
 	class Pln_Curve
-		: public Pln_Entity
+		: public Global_Indexed
+		, public Global_Named
+		, public std::enable_shared_from_this<Pln_Curve>
 	{
 
 		/*Private Data*/
@@ -56,7 +58,18 @@ namespace tnbLib
 
 		Pln_Curve
 		(
+			const Standard_Integer theIndex,
+			const Handle(Geom2d_Curve)&& theGeom
+		);
+
+		Pln_Curve
+		(
 			const Handle(Geom2d_Curve)& theGeom
+		);
+
+		Pln_Curve
+		(
+			const Handle(Geom2d_Curve)&& theGeom
 		);
 
 		Pln_Curve
@@ -64,6 +77,13 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const word& theName,
 			const Handle(Geom2d_Curve)& theGeom
+		);
+
+		Pln_Curve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Handle(Geom2d_Curve)&& theGeom
 		);
 
 		const auto& Geometry() const
@@ -83,10 +103,19 @@ namespace tnbLib
 
 		Pnt2d LastCoord() const;
 
-		Entity2d_Box CalcBoundingBox() const;
+		Entity2d_Box BoundingBox(const Standard_Real Tol) const;
 
-		std::shared_ptr<Pln_Entity>
-			Copy() const override;
+		//Standard_Boolean IsOrphan() const override;
+
+		virtual std::shared_ptr<Pln_Curve>
+			Copy() const;
+
+		auto This() const
+		{
+			return std::const_pointer_cast<Pln_Curve>(this->shared_from_this());
+		}
+
+		//Pln_EntityType Type() const override;
 
 		void Transform(const gp_Trsf2d& t);
 

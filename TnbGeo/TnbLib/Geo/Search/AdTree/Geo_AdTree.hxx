@@ -5,6 +5,8 @@
 #include <Geo_SearchTree.hxx>
 #include <Geo_Tools.hxx>
 #include <Entity2d_Box.hxx>
+#include <error.hxx>
+#include <OSstream.hxx>
 
 #include <vector>
 #include <list>
@@ -323,15 +325,15 @@ namespace tnbLib
 
 		void Clear(NodeType*& t)
 		{
-			if (!t)
+			if (t)
 			{
 				Clear(t->LeftPtr());
 				Clear(t->RightPtr());
 
 				Geo_SearchTree<T>::Decrement();
 				delete t;
-			}
-			t = 0;
+				t = 0;
+			}		
 		}
 
 	protected:
@@ -347,6 +349,12 @@ namespace tnbLib
 			: theRoot_(0)
 		{}
 
+		~Geo_AdTree()
+		{
+			if (theRoot_)
+				Clear(theRoot_);
+		}
+
 		Standard_Integer Size() const
 		{
 			return Geo_SearchTree<T>::NbItems();
@@ -359,7 +367,7 @@ namespace tnbLib
 
 		void InsertToGeometry(const T& theItem)
 		{
-#if MESH_DEBUG
+#if DEBUG
 			CheckFun();
 #endif			
 			Insert(theItem, Geo_SearchTree<T>::GeometryBoundingBox(), 0, theRoot_);
@@ -407,6 +415,9 @@ namespace tnbLib
 			std::list<T>& theList
 		) const
 		{
+#if DEBUG
+			CheckFun();
+#endif	
 			Search
 			(
 				Entity_Box<Point>::Box(theCentre, theRadius),
@@ -422,6 +433,9 @@ namespace tnbLib
 			std::vector<T>& theList
 		) const
 		{
+#if DEBUG
+			CheckFun();
+#endif	
 			std::list<T> List;
 			Search
 			(
@@ -437,6 +451,9 @@ namespace tnbLib
 			std::list<T>& theList
 		) const
 		{
+#if DEBUG
+			CheckFun();
+#endif	
 			Search
 			(
 				theRegion,
@@ -451,6 +468,9 @@ namespace tnbLib
 			std::vector<T>& theList
 		) const
 		{
+#if DEBUG
+			CheckFun();
+#endif	
 			Search
 			(
 				theRegion,

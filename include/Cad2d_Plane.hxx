@@ -3,9 +3,10 @@
 #define _Cad2d_Plane_Header
 
 #include <Global_AccessMethod.hxx>
-#include <Pln_Entity.hxx>
-#include <Entity2d_Box.hxx>
 #include <Entity2d_ChainFwd.hxx>
+#include <Pln_Entity.hxx>
+#include <Cad2d_Plane_Manager.hxx>
+#include <Cad2d_Plane_Auxillary.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -21,9 +22,6 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	template<class EntityType>
-	class Cad_EntityManager;
-
 	class Pln_Wire;
 	class Pln_Edge;
 	class Pln_Curve;
@@ -31,71 +29,46 @@ namespace tnbLib
 
 	class Geo_ApprxCurve_Info;
 
-	class Cad2d_Plane_Manager
-	{
-
-		/*private Data*/
-
-		std::shared_ptr<Cad_EntityManager<Pln_Vertex>> theVertices_;
-		std::shared_ptr<Cad_EntityManager<Pln_Edge>> theEdges_;
-
-	protected:
-
-		Cad2d_Plane_Manager()
-		{}
-
-
-		auto& ChangeCorners()
-		{
-			return theVertices_;
-		}
-
-		auto& ChangeSegments() 
-		{
-			return theEdges_;
-		}
-
-	public:
-
-		Standard_Integer NbCorners() const;
-
-		Standard_Integer NbSegments() const;
-
-		const auto& Corners() const
-		{
-			return theVertices_;
-		}
-
-		const auto& Segments() const
-		{
-			return theEdges_;
-		}
-	};
-
 	class Cad2d_Plane
 		: public Pln_Entity
-		, public Cad2d_Plane_Manager
+		, public cad2dLib::Plane_Auxillary
+		, public cad2dLib::Plane_Manager
 	{
 
 		typedef std::vector<std::shared_ptr<Pln_Wire>> wireList;
 		typedef std::shared_ptr<Pln_Wire> outer;
 		typedef std::shared_ptr<wireList> inner;
 
+		using cad2dLib::Plane_Auxillary::BoundingBox;
+
 		/*Private Data*/	
 
 		outer theOuter_;
 		inner theInner_;
 
-		Entity2d_Box theBoundingBox_;
 
-		gp_Ax2 theSystem_;
+		//- private functions and operators
 
+		void SetOuter(const outer&& theOuter);
 
+		void SetInner(const inner&& theInner);
+
+		std::shared_ptr<Entity2d_Box>
+			CalcBoundingBox
+			(
+				const Standard_Real theTol
+			) const;
 
 		void Make
 		(
 			const outer& theOuter,
 			const inner& theInners
+		);
+
+		void Make
+		(
+			const outer&& theOuter,
+			const inner&& theInners
 		);
 
 		static void CheckOuter(const outer& theOuter, const char* theName);
@@ -113,8 +86,19 @@ namespace tnbLib
 
 		Cad2d_Plane
 		(
+			const gp_Ax2&& theSystem
+		);
+
+		Cad2d_Plane
+		(
 			const Standard_Integer theIndex,
 			const gp_Ax2& theSystem = gp::XOY()
+		);
+
+		Cad2d_Plane
+		(
+			const Standard_Integer theIndex,
+			const gp_Ax2&& theSystem
 		);
 
 		Cad2d_Plane
@@ -124,19 +108,26 @@ namespace tnbLib
 			const gp_Ax2& theSystem = gp::XOY()
 		);
 
+		Cad2d_Plane
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const gp_Ax2&& theSystem
+		);
+
 	public:
 
-
-		const auto& BoundingBox() const
-		{
-			return theBoundingBox_;
-		}
+		Standard_Integer NbWires() const;
 
 		Standard_Integer NbFreeCorners() const;
 
 		Standard_Integer NbHoles() const;
 
+		Standard_Integer NbEntities(const Pln_EntityType t) const override;
+
 		Standard_Boolean HasFreeCorner() const;
+
+		Standard_Boolean IsOrphan() const override;
 
 		std::tuple<Standard_Real, Standard_Real> 
 			BoundTolerance() const;
@@ -147,25 +138,40 @@ namespace tnbLib
 		std::shared_ptr<Entity2d_Chain>
 			MergedPolygon() const;
 
-		const outer& OuterWire() const
-		{
-			return theOuter_;
-		}
+		Entity2d_Box BoundingBox
+		(
+			const Standard_Real Tol
+		) const override;
 
-		const inner& InnerWires() const
-		{
-			return theInner_;
-		}
+		const outer& OuterWire() const;
+
+		const inner& InnerWires() const;
 
 		std::shared_ptr<Pln_Entity>
 			Copy() const override;
+
+		Pln_EntityType Type() const override;
 
 		void Approx
 		(
 			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
 		) const;
 
-		void Transform(const gp_Trsf2d& t);
+		void Transform
+		(
+			const gp_Trsf2d& t
+		) override;
+
+		void RetrieveWiresTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theWires
+		) const;
+
+		void RetrieveEntitiesTo
+		(
+			std::vector<std::shared_ptr<Pln_Entity>>& theEntities, 
+			const Pln_EntityType t
+		) const override;
 
 		void ExportToPlt
 		(
@@ -246,8 +252,6 @@ namespace tnbLib
 				const Standard_Boolean Sense = Standard_True
 			);
 
-		//- Macros
-		GLOBAL_ACCESS_SINGLE(gp_Ax2, System)
 	};
 }
 

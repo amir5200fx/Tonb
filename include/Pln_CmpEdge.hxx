@@ -20,7 +20,6 @@ namespace tnbLib
 	class Pln_Tools;
 
 	class Pln_CmpEdge
-		: public Pln_Entity
 	{
 
 		typedef std::vector<std::shared_ptr<Pln_Edge>> edgeList;
@@ -55,14 +54,6 @@ namespace tnbLib
 		Pln_CmpEdge()
 		{}
 
-		Pln_CmpEdge
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		)
-			: Pln_Entity(theIndex, theName)
-		{}
-
 		Standard_Boolean IsValidForWire
 		(
 			const Standard_Real theTol
@@ -78,8 +69,8 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		std::shared_ptr<Pln_Entity>
-			Copy() const override;
+		std::shared_ptr<Pln_CmpEdge>
+			Copy() const;
 
 		std::vector<std::shared_ptr<Pln_Vertex>>
 			RetrieveVertices() const;

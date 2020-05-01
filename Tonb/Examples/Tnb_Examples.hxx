@@ -24,6 +24,8 @@ namespace tnbLib
 	void example_geo_compt_polygons();
 
 	void example_cross_curves_ship();
+
+	void example_cad2d_modeler();
 }
 
 #endif // !_Tnb_Examples_Header
