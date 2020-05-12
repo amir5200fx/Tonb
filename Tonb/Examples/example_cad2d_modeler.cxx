@@ -16,9 +16,28 @@ void tnbLib::example_cad2d_modeler()
 	auto seg2 = cad2dLib::Modeler_Tools::MakeSegment(Pnt2d(0.25, 0.336), Pnt2d(0.05, 0.98));
 	Debug_Null_Pointer(seg2);
 
+	auto b = cad2dLib::Modeler_Tools::MakeRectangular(Pnt2d(0.2, 0.3), Pnt2d(1.88, 3.2));
+
 	Cad2d_Modeler modeler;
-	modeler.SetDomain(Entity2d_Box(Pnt2d(-1, -1), Pnt2d(2, 2)));
-	modeler.Import(seg0);
+	modeler.SetDomain(Entity2d_Box(Pnt2d(-100, -100), Pnt2d(100, 100)));
+
+	
+	/*modeler.Import(seg0);
+	modeler.Import(seg1);
+	modeler.Import(seg2);*/
+	modeler.Import(b);
+
+	cout << "nb segments = " << modeler.NbEdges() << std::endl;
+
+	Cad2d_Modeler::selctList l;
+	modeler.Select(modeler.SelectEdge(1), l);
+	modeler.Select(modeler.SelectEdge(2), l);
+	modeler.Select(modeler.SelectEdge(3), l);
+	modeler.Select(modeler.SelectEdge(4), l);
+	PAUSE;
+	modeler.MakePlane(l);
+
+	/*modeler.Import(seg0);
 	modeler.Import(seg1);
 	modeler.Import(seg2);
 
@@ -53,5 +72,5 @@ void tnbLib::example_cad2d_modeler()
 	for (const auto& x : edges)
 	{
 		cout << " edge nb. " << x.second->Index() << std::endl;
-	}
+	}*/
 }
