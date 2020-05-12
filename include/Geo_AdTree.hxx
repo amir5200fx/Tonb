@@ -365,7 +365,7 @@ namespace tnbLib
 			return !theRoot_;
 		}
 
-		void InsertToGeometry(const T& theItem)
+		void InsertToGeometry(const T& theItem) override
 		{
 #if DEBUG
 			CheckFun();
@@ -382,7 +382,7 @@ namespace tnbLib
 			}
 		}*/
 
-		void InsertToGeometry(const std::vector<T>& theItems)
+		void InsertToGeometry(const std::vector<T>& theItems) override
 		{
 			for (const auto& item : theItems)
 			{
@@ -390,12 +390,12 @@ namespace tnbLib
 			}
 		}
 
-		void RemoveFromGeometry(const T& theItem)
+		void RemoveFromGeometry(const T& theItem) override
 		{
 			Remove(theItem, theRoot_);
 		}
 
-		void RetrieveFromGeometryTo(std::list<T>& theItems) const
+		void RetrieveFromGeometryTo(std::list<T>& theItems) const override
 		{
 			RetrieveTo(theRoot_, theItems);
 		}
@@ -403,7 +403,7 @@ namespace tnbLib
 		void RetrieveFromGeometryTo
 		(
 			std::vector<T>& theItems
-		) const
+		) const override
 		{
 			RetrieveTo(theRoot_, theItems);
 		}
@@ -413,7 +413,7 @@ namespace tnbLib
 			const Standard_Real theRadius,
 			const Point& theCentre,
 			std::list<T>& theList
-		) const
+		) const override
 		{
 #if DEBUG
 			CheckFun();
@@ -431,7 +431,7 @@ namespace tnbLib
 			const Standard_Real theRadius,
 			const Point& theCentre,
 			std::vector<T>& theList
-		) const
+		) const override
 		{
 #if DEBUG
 			CheckFun();
@@ -449,7 +449,7 @@ namespace tnbLib
 		(
 			const Entity_Box<Point>& theRegion,
 			std::list<T>& theList
-		) const
+		) const override
 		{
 #if DEBUG
 			CheckFun();
@@ -466,7 +466,7 @@ namespace tnbLib
 		(
 			const Entity_Box<Point>& theRegion,
 			std::vector<T>& theList
-		) const
+		) const override
 		{
 #if DEBUG
 			CheckFun();
@@ -477,6 +477,12 @@ namespace tnbLib
 				theRoot_,
 				theList
 			);
+		}
+
+		void Clear() override
+		{
+			if (theRoot_)
+				Clear(theRoot_);
 		}
 	};
 }

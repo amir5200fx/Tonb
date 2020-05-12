@@ -1220,7 +1220,7 @@ namespace tnbLib
 			return !theRoot_;
 		}
 
-		void InsertToGeometry(const T& theItem)
+		void InsertToGeometry(const T& theItem) override
 		{
 			Debug_If_Condition_Message
 			(
@@ -1229,13 +1229,13 @@ namespace tnbLib
 			Insert(theItem, geom::GeometryBoundingBox(), theRoot_);
 		}
 
-		void InsertToGeometry(const std::vector<T>& theItems)
+		void InsertToGeometry(const std::vector<T>& theItems) override
 		{
 			for (const auto& item : theItems)
 				InsertToGeometry(item);
 		}
 
-		void RemoveFromGeometry(const T& theItem)
+		void RemoveFromGeometry(const T& theItem) override
 		{
 			if (Size())
 			{
@@ -1243,7 +1243,7 @@ namespace tnbLib
 			}
 		}
 
-		void RetrieveFromGeometryTo(std::list<T>& theItems) const
+		void RetrieveFromGeometryTo(std::list<T>& theItems) const override
 		{
 			if (Size())
 			{
@@ -1254,7 +1254,7 @@ namespace tnbLib
 		void RetrieveFromGeometryTo
 		(
 			std::vector<T>& theItems
-		) const
+		) const override
 		{
 			if (Size())
 			{
@@ -1267,7 +1267,7 @@ namespace tnbLib
 			const Standard_Real theRadius,
 			const Point& theCentre,
 			std::list<T>& theList
-		) const
+		) const override
 		{
 			if (Size())
 			{
@@ -1285,7 +1285,7 @@ namespace tnbLib
 			const Standard_Real theRadius,
 			const Point& theCentre,
 			std::vector<T>& theList
-		) const
+		) const override
 		{
 			if (Size())
 			{
@@ -1302,7 +1302,7 @@ namespace tnbLib
 		(
 			const Entity_Box<Point>& theRegion,
 			std::list<T>& theList
-		) const
+		) const override
 		{
 			if (Size())
 			{
@@ -1319,7 +1319,7 @@ namespace tnbLib
 		(
 			const Entity_Box<Point>& theRegion,
 			std::vector<T>& theList
-		) const
+		) const override
 		{
 			if (Size())
 			{
@@ -1332,7 +1332,7 @@ namespace tnbLib
 			}
 		}
 
-		void Clear()
+		void Clear() override
 		{
 			if (Size())
 			{

@@ -27,6 +27,10 @@ namespace tnbLib
 	namespace cad2dLib
 	{
 
+		// Forward Declarations
+		class Modeler_Corner;
+		class Modeler_SrchEng;
+
 		class Modeler_Tools
 		{
 
@@ -190,10 +194,90 @@ namespace tnbLib
 				);
 
 			static std::vector<std::shared_ptr<Pln_Edge>>
-				MakeRectangular(const Pnt2d& theP0, const Pnt2d& theP1);
+				MakeRectangular
+				(
+					const Pnt2d& theP0,
+					const Pnt2d& theP1
+				);
 
 			static std::vector<std::shared_ptr<Pln_Edge>>
 				MakeRectangular(const gp_Ax2d& theAx, const Standard_Real dx, const Standard_Real dy);
+
+			static Standard_Real 
+				CalcMaxTolerance
+				(
+					const Pnt2d& theCentre,
+					const std::shared_ptr<Modeler_Corner>& theCorner
+				);
+
+			//- WARNING! the edges and the vertices will be removed from the corners
+			static std::vector<std::shared_ptr<Pln_Edge>> 
+				MakeConsecutive
+				(
+					const std::vector<std::shared_ptr<Modeler_Corner>>& theCorners
+				);
+
+			static std::vector<std::shared_ptr<Pln_Edge>>
+				MakeConsecutive
+				(
+					const std::vector<std::shared_ptr<Pln_Edge>>& theEdges, 
+					const Standard_Real theTol
+				);
+
+			static std::vector<std::shared_ptr<Modeler_Corner>> 
+				MakeCorners
+				(
+					const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+					const Standard_Real theTol
+				);
+
+			static void 
+				SmoothCorner
+				(
+					const std::shared_ptr<Modeler_Corner>& theCorner
+				);
+
+			static void 
+				CalcCornerTolerances
+				(
+					const std::shared_ptr<Modeler_Corner>& theCorner
+				);
+
+			static void 
+				CalcCornerTolerances
+				(
+					const std::vector<std::shared_ptr<Modeler_Corner>>& theCorners
+				);
+
+			static void 
+				SetCoordToCorner
+				(
+					const Pnt2d& theCoord, 
+					const std::shared_ptr<Modeler_Corner>& theCorner
+				);
+
+			static void 
+				ImportVtxToCorner
+				(
+					const std::shared_ptr<Pln_Vertex>& theVtx,
+					const std::shared_ptr<Modeler_Corner>& theCorner
+				);
+
+			//- WARNING! it should be no intersection of the vertex with the ones at the engine
+			//- For more robust version, use "RegisterVtxToSearchEngine()" function
+			static void 
+				ImportVtxToSrchEngine
+				(
+					const std::shared_ptr<Pln_Vertex>& theVtx, 
+					Modeler_SrchEng& theEngine
+				);
+
+			static void 
+				RegisterVtxToSearchEngine
+				(
+					const std::shared_ptr<Pln_Vertex>& theVtx,
+					Modeler_SrchEng& theEngine
+				);
 		};
 	}
 }

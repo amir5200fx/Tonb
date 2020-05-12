@@ -16,9 +16,16 @@ namespace tnbLib
 
 		Marine_TankBody();
 
-		Marine_TankBody(const Standard_Integer theIndex);
+		Marine_TankBody
+		(
+			const Standard_Integer theIndex
+		);
 
-		Marine_TankBody(const Standard_Integer theIndex, const word& theName);
+		Marine_TankBody
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		);
 	};
 }
 
