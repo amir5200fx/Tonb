@@ -4,6 +4,9 @@
 
 #include <Entity_Box.hxx>
 
+#include <vector>
+#include <list>
+
 namespace tnbLib
 {
 
@@ -76,6 +79,49 @@ namespace tnbLib
 
 	public:
 
+		virtual void Clear() = 0;
+
+		virtual void InsertToGeometry(const T& theItem) = 0;
+
+		virtual void InsertToGeometry(const std::vector<T>& theItems) = 0;
+
+		virtual void RemoveFromGeometry(const T& theItem) = 0;
+
+		virtual void RetrieveFromGeometryTo
+		(
+			std::vector<T>& theItems
+		) const = 0;
+
+		virtual void RetrieveFromGeometryTo
+		(
+			std::list<T>& theItems
+		) const = 0;
+
+		virtual void GeometrySearch
+		(
+			const Entity_Box<Point>& theRegion,
+			std::vector<T>& theList
+		) const = 0;
+
+		virtual void GeometrySearch
+		(
+			const Entity_Box<Point>& theRegion,
+			std::list<T>& theList
+		) const = 0;
+
+		virtual void GeometrySearch
+		(
+			const Standard_Real theRadius,
+			const Point& theCentre,
+			std::list<T>& theList
+		) const = 0;
+
+		virtual void GeometrySearch
+		(
+			const Standard_Real theRadius,
+			const Point& theCentre,
+			std::vector<T>& theList
+		) const = 0;
 
 		Standard_Boolean IsGeometryEmpty() const
 		{
@@ -90,6 +136,11 @@ namespace tnbLib
 		void SetGeometryRegion(const Entity_Box<Point>& theBound)
 		{
 			theRegion_ = theBound;
+		}
+
+		void SetGeometryRegion(const Entity_Box<Point>&& theBound)
+		{
+			theRegion_ = std::move(theBound);
 		}
 
 		void SetGeometryCoordFunc(const Point& (*theCoordinateOf)(const T&))
