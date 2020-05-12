@@ -26,6 +26,8 @@
 #include <error.hxx>
 #include <OSstream.hxx>
 
+#include <gp_Pln.hxx>
+#include <Geom_Plane.hxx>
 #include <Geom_BoundedSurface.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <Bnd_Box.hxx>
@@ -1036,6 +1038,61 @@ tnbLib::Cad_Tools::RetrieveTriangulation
 	TopLoc_Location Loc;
 	auto Triangulation = BRep_Tool::Triangulation(theFace, Loc);
 	return std::move(Triangulation);
+}
+
+std::vector<TopoDS_Edge> 
+tnbLib::Cad_Tools::RetrieveEdges
+(
+	const TopoDS_Shape & theShape
+)
+{
+	std::vector<TopoDS_Edge> edges;
+	for
+		(
+			TopExp_Explorer explorer(theShape, TopAbs_EDGE);
+			explorer.More();
+			explorer.Next()
+			)
+	{
+		auto edge = TopoDS::Edge(explorer.Current());
+		if (NOT edge.IsNull())
+		{
+			edges.push_back(edge);
+		}
+	}
+	return std::move(edges);
+}
+
+std::vector<Handle(Geom2d_Curve)> 
+tnbLib::Cad_Tools::RetrieveParaCurves
+(
+	const std::vector<TopoDS_Edge>& theEdges,
+	const gp_Ax2 & theSystem
+)
+{
+	Handle(Geom_Plane) plane = new Geom_Plane(gp_Pln(theSystem));
+	Debug_Null_Pointer(plane);
+
+	TopLoc_Location loc;
+
+	std::vector<Handle(Geom2d_Curve)> curves;
+	curves.reserve(theEdges.size());
+
+	for (const auto& x : theEdges)
+	{
+		Standard_Real first, last;
+		auto curve = BRep_Tool::CurveOnPlane(x, plane, loc, first, last);
+
+		if (curve.IsNull())
+		{
+			FatalErrorIn("std::vector<Handle(Geom2d_Curve)> Cad_Tools::RetrieveParaCurves(Args...)")
+				<< "Failed to Calculate the parametric curve" << endl
+				<< abort(FatalError);
+		}
+
+		curves.push_back(std::move(curve));
+	}
+	return std::move(curves);
 }
 
 std::vector<Handle(Poly_Triangulation)> 
