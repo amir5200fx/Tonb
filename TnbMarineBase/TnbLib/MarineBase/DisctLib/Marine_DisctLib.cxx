@@ -8,6 +8,7 @@
 #include <Marine_zCmpSection.hxx>
 #include <Marine_WaterDomain.hxx>
 #include <Marine_WettedBody.hxx>
+#include <Marine_HullBody.hxx>
 #include <Marine_FlatWave.hxx>
 #include <MarineBase_Tools.hxx>
 #include <error.hxx>
@@ -65,7 +66,7 @@ tnbLib::Marine_DisctLib::WireFrameModel
 	auto model = std::make_shared<Marine_WireFrameModel>();
 	Debug_Null_Pointer(model);
 
-	auto body = std::make_shared<Marine_Body>();
+	auto body = std::make_shared<Marine_HullBody>();
 	Debug_Null_Pointer(body);
 
 	auto& sections = body->ChangeSections();

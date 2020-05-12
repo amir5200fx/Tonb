@@ -1229,5 +1229,11 @@
     <ClCompile Include="TnbLib\MarineBase\CriterionTable\Marine_CriterionTable.cxx">
       <Filter>TnbLib\MarineBase\CriterionTable</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Body\Sail\Marine_SailBody.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Body\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Body\Tank\Marine_TankBody.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Body\Tank</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

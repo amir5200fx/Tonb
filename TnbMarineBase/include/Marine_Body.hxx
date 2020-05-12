@@ -25,10 +25,6 @@ namespace tnbLib
 		Marine_BaseLine theBase_;
 
 	protected:
-
-		
-
-	public:
 	
 		Marine_Body();
 
@@ -42,6 +38,8 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const word& theName
 		);
+
+	public:
 
 		Standard_Integer NbSections() const;
 
@@ -65,12 +63,17 @@ namespace tnbLib
 			theBase_.BaseLine() = theAx;
 		}
 
-		virtual Standard_Boolean IsWetted() const
+		virtual Standard_Boolean IsHull() const
 		{
 			return Standard_False;
 		}
 
-		virtual Standard_Boolean IsDry() const
+		virtual Standard_Boolean IsTank() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsSail() const
 		{
 			return Standard_False;
 		}

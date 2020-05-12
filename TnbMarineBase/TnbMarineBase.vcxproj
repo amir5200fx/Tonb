@@ -188,6 +188,8 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Body\Dry\Marine_DryBody.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Body\Hull\Marine_HullBody.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Body\Marine_Body.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Body\Sail\Marine_SailBody.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Body\Tank\Marine_TankBody.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Body\Wetted\Marine_WettedBody.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\CG\Component\Marine_CGCompt.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\CG\LCG\Marine_LCG.cxx" />

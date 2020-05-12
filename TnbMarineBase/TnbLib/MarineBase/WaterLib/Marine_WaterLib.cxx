@@ -380,7 +380,7 @@ tnbLib::Marine_WaterLib::FWL
 )
 {
 	const auto& sections = theBody.Sections();
-	for (int i = sections.size() - 1; i >= 0; i--)
+	for (size_t i = sections.size() - 1; i >= 0; i--)
 	{
 		const auto& x = sections[i];
 		Debug_Null_Pointer(x);
