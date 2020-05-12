@@ -89,5 +89,5 @@ tnbLib::cad2dLib::Modeler_Registry::IsNull
 	const std::shared_ptr<Pln_Edge>& theEdge
 )
 {
-	return &theEdge IS_EQUAL &null_edge;
+	return theEdge IS_EQUAL null_edge;
 }

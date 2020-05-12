@@ -64,7 +64,11 @@ namespace tnbLib
 					const Standard_Integer theIndex
 				);
 
-			
+			const std::shared_ptr<Cad2d_Plane> &
+				SelectPlane
+				(
+					const Standard_Integer theIndex
+				) const;
 
 		};
 	}

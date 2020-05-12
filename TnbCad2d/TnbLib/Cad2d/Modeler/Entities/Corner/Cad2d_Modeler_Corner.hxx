@@ -88,6 +88,11 @@ namespace tnbLib
 				theRadius_ = theR;
 			}
 
+			void SetTolerance(const Standard_Real theTol)
+			{
+				theTol_ = theTol;
+			}
+
 			void InsertToCorners
 			(
 				const Standard_Integer theIndex,

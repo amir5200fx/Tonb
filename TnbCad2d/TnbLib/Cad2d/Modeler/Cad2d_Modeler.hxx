@@ -8,6 +8,7 @@
 #include <Cad2d_Modeler_Plane.hxx>
 #include <Cad2d_Modeler_Wire.hxx>
 #include <Cad2d_Modeler_Registry.hxx>
+#include <Cad2d_Modeler_SelectList.hxx>
 #include <Cad_EntityManager.hxx>
 
 #include <memory>
@@ -23,17 +24,23 @@ namespace tnbLib
 	class Cad2d_Modeler
 		: public cad2dLib::Modeler_SrchEng
 		, public cad2dLib::Modeler_Counter
-		, public cad2dLib::Modeler_Wire
+		/*, public cad2dLib::Modeler_Wire*/
 		, public cad2dLib::Modeler_Plane
 		, public cad2dLib::Modeler_Registry
 	{
 
 		typedef cad2dLib::Modeler_Corner corner;
 
+		using cad2dLib::Modeler_SrchEng::IsNull;
 		using cad2dLib::Modeler_Registry::IsContain;
 		using cad2dLib::Modeler_Plane::IsContain;
-		using cad2dLib::Modeler_Wire::IsContain;
+		//using cad2dLib::Modeler_Wire::IsContain;
 	
+	public:
+
+		typedef cad2dLib::Modeler_SelectList selctList;
+
+	private:
 
 		/*Private Data*/
 
@@ -54,10 +61,17 @@ namespace tnbLib
 			const Standard_Integer theEdgeIndex
 		);
 
-		void AddEdge
+		Standard_Integer AddEdge
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
+
+		Standard_Integer AddPlane
+		(
+			const std::shared_ptr<Cad2d_Plane>& thePlane
+		);
+
+		std::vector<std::shared_ptr<Pln_Edge>> MakeChain(selctList& theList);
 
 	public:
 
@@ -65,12 +79,34 @@ namespace tnbLib
 
 		Cad2d_Modeler();
 
+		Standard_Boolean HasDuplication
+		(
+			const std::shared_ptr<Pln_Edge>& theEdge, 
+			cad2dLib::Modeler_SelectList& theList
+		) const;
+
+		//- throw an exception if found any duplication.
+		//- Check consistency with the "HasDuplication" method
+		void Select
+		(
+			const std::shared_ptr<Pln_Edge>& theEdge,
+			selctList& theList
+		) const;
+
+		//- throw an exception if the edge is not in the tree
+		//- Check consistency with the "HasDuplication" method
+		void deSelect
+		(
+			const std::shared_ptr<Pln_Edge>& theEdge, 
+			selctList& theList
+		) const;
+
 		void RemoveEdge
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
 
-		void Import
+		Standard_Integer Import
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
@@ -86,7 +122,8 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
 
-
+		//- the list will get empty after successfully creating plane
+		Standard_Integer MakePlane(selctList& theList);
 	};
 }
 

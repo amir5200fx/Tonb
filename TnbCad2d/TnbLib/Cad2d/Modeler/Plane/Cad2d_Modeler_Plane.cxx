@@ -51,6 +51,22 @@ tnbLib::cad2dLib::Modeler_Plane::RemoveFromPlanes
 	return std::move(item);
 }
 
+const std::shared_ptr<tnbLib::Cad2d_Plane> &
+tnbLib::cad2dLib::Modeler_Plane::SelectPlane
+(
+	const Standard_Integer theIndex
+) const
+{
+	auto iter = thePlanes_.find(theIndex);
+	if (iter IS_EQUAL thePlanes_.end())
+	{
+		FatalErrorIn("std::shared_ptr<Cad2d_Plane> SelectPlanes(const Standard_Integer) const")
+			<< "the item is not in the tree: " << theIndex << endl
+			<< abort(FatalError);
+	}
+	return iter->second;
+}
+
 void tnbLib::cad2dLib::Modeler_Plane::InsertToPlanes
 (
 	const Standard_Integer theIndex,

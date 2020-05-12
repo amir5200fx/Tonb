@@ -40,7 +40,19 @@ tnbLib::cad2dLib::Modeler_SrchEng::Modeler_SrchEng()
 	theCorners_.SetGeometryRegion(null_domain);
 }
 
-const std::shared_ptr<tnbLib::cad2dLib::Modeler_Corner>&
+Standard_Integer 
+tnbLib::cad2dLib::Modeler_SrchEng::Size() const
+{
+	return theCorners_.Size();
+}
+
+Standard_Boolean 
+tnbLib::cad2dLib::Modeler_SrchEng::IsEmpty() const
+{
+	return theCorners_.IsEmpty();
+}
+
+std::shared_ptr<tnbLib::cad2dLib::Modeler_Corner>
 tnbLib::cad2dLib::Modeler_SrchEng::SelectCorner
 (
 	const Pnt2d & theCoord
@@ -49,12 +61,20 @@ tnbLib::cad2dLib::Modeler_SrchEng::SelectCorner
 #ifdef _DEBUG
 	CheckDomain("const std::shared_ptr<cad2dLib::Modeler_Corner>& SelectCorner(const Pnt2d& theCoord) const");
 #endif // DEBUG
-
 	Debug_If_Condition_Message(Radius() <= gp::Resolution(), "Invalid radius");
 
 	Entity2d_Box b(theCoord - Radius(), theCoord + Radius());
 	std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>> items;
-	theCorners_.GeometrySearch(b, items);
+	std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>> items0;
+	theCorners_.GeometrySearch(b, items0);
+
+	for (const auto& x : items0)
+	{
+		if (theCoord.Distance(x->Coord()) <= Radius())
+		{
+			items.push_back(x);
+		}
+	}
 
 	if (items.empty())
 	{
@@ -139,6 +159,11 @@ void tnbLib::cad2dLib::Modeler_SrchEng::InsertToSrchEngine
 	}
 
 	theCorners_.InsertToGeometry(theCorner);
+
+	/*if (theCorner->Tolerance() > Radius())
+	{
+		SetMaxRadius(theCorner->Tolerance()*1.05);
+	}*/
 }
 
 void tnbLib::cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine
@@ -147,6 +172,14 @@ void tnbLib::cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine
 )
 {
 	theCorners_.RemoveFromGeometry(theCorner);
+}
+
+void tnbLib::cad2dLib::Modeler_SrchEng::RetrieveCornersTo
+(
+	std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners
+) const
+{
+	theCorners_.RetrieveFromGeometryTo(theCorners);
 }
 
 void tnbLib::cad2dLib::Modeler_SrchEng::SetMaxRadius
@@ -163,6 +196,11 @@ void tnbLib::cad2dLib::Modeler_SrchEng::SetDomain
 )
 {
 	theCorners_.SetGeometryRegion(theDomain);
+}
+
+void tnbLib::cad2dLib::Modeler_SrchEng::Clear()
+{
+	theCorners_.Clear();
 }
 
 Standard_Boolean

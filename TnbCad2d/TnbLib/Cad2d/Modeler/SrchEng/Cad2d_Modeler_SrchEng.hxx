@@ -2,6 +2,7 @@
 #ifndef _Cad2d_Modeler_SrchEng_Header
 #define _Cad2d_Modeler_SrchEng_Header
 
+#include <Geo_ItemCounter.hxx>
 #include <Geo_AdTree.hxx>
 #include <Entity2d_Box.hxx>
 #include <Cad2d_Modeler_Corner.hxx>
@@ -25,6 +26,8 @@ namespace tnbLib
 
 			Standard_Real theMaxRadius_;
 
+			mutable Geo_ItemCounter theCornerCounter_;
+
 
 			//- private functions and operators
 
@@ -32,13 +35,17 @@ namespace tnbLib
 
 			void CheckDomain(const char* theName) const;
 
-		protected:
+		public:
 
 
 			static const std::shared_ptr<cad2dLib::Modeler_Corner> null;
 			static const Entity2d_Box null_domain;
 
 			Modeler_SrchEng();
+
+			Standard_Integer Size() const;
+
+			Standard_Boolean IsEmpty() const;
 
 			auto Radius() const
 			{
@@ -50,7 +57,12 @@ namespace tnbLib
 				return theMaxRadius_;
 			}
 
-			const std::shared_ptr<cad2dLib::Modeler_Corner>&
+			auto& CornerCounter() const
+			{
+				return theCornerCounter_;
+			}
+
+			std::shared_ptr<cad2dLib::Modeler_Corner>
 				SelectCorner
 				(
 					const Pnt2d& theCoord
@@ -74,19 +86,22 @@ namespace tnbLib
 				const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
 			);
 
+			void RetrieveCornersTo
+			(
+				std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners
+			) const;
+
 			void SetMaxRadius
 			(
 				const Standard_Real theRadius
 			);
-
-		public:
 
 			void SetDomain
 			(
 				const Entity2d_Box& theDomain
 			);
 
-		protected:
+			void Clear();
 
 			//- static functions
 
