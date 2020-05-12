@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{DFB3305F-7CA4-40D8-8E0D-EFB33C99E947}</ProjectGuid>
+    <RootNamespace>TnbShipModeler</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Tank;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Sail;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Hull;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Auxillary;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker;$(ProjectDir)\TnbLib\ShipModeler\Basic\WPlane;$(ProjectDir)\TnbLib\ShipModeler\Basic\Tools;$(ProjectDir)\TnbLib\ShipModeler\Basic;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Vessel;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Sail;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Hull;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Tank;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Volume;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Tank;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Sail;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Hull;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker\Auxillary;$(ProjectDir)\TnbLib\ShipModeler\Basic\Maker;$(ProjectDir)\TnbLib\ShipModeler\Basic\WPlane;$(ProjectDir)\TnbLib\ShipModeler\Basic\Tools;$(ProjectDir)\TnbLib\ShipModeler\Basic;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Vessel;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Sail;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Hull;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Tank;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Volume;$(ProjectDir)\TnbLib\ShipModeler\Basic\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Entity\ShipModeler_Basic_Entity.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Hull\ShipModeler_Basic_Hull.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Sail\ShipModeler_Basic_Sail.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Tank\ShipModeler_Basic_Tank.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Vessel\ShipModeler_Basic_Vessel.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Volume\ShipModeler_Basic_Volume.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Auxillary\ShipModeler_Basic_MakerAux.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Hull\ShipModeler_Basic_HullMaker.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Sail\ShipModeler_Basic_SailMaker.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\ShipModeler_Basic_Maker.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Tank\ShipModeler_Basic_TankMaker.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\ShipModeler_Basic.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Tools\ShipModeler_Basic_Tools.hxx" />
+    <ClInclude Include="TnbLib\ShipModeler\Basic\WPlane\ShipModeler_Basic_WPlane.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Entities\Entity\ShipModeler_Basic_Entity.cxx" />
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Entities\Volume\ShipModeler_Basic_Volume.cxx" />
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\Hull\ShipModeler_Basic_HullMaker.cxx" />
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\Sail\ShipModeler_Basic_SailMaker.cxx" />
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\ShipModeler_Basic_Maker.cxx" />
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\Tank\ShipModeler_Basic_TankMaker.cxx" />
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Tools\ShipModeler_Basic_Tools.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{82ea8747-6de9-4152-9b48-c84b03b0e013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler">
+      <UniqueIdentifier>{c98bdbea-6d26-4045-922e-7a9db2924802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic">
+      <UniqueIdentifier>{7a1ab119-21b3-4e9b-b858-700eca963cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities">
+      <UniqueIdentifier>{caf503a9-9549-43c5-9368-9a18058d6964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities\Entity">
+      <UniqueIdentifier>{3e4182cb-458f-4cb0-bcdb-e80e22634e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities\Volume">
+      <UniqueIdentifier>{bfcc70f3-4149-403e-b096-e0715a522bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities\Tank">
+      <UniqueIdentifier>{f155fe49-3fb2-4c31-bb38-abb4397ffb9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities\Hull">
+      <UniqueIdentifier>{61db8c9c-bdfc-40a1-a8a6-12ccdc641c21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities\Sail">
+      <UniqueIdentifier>{55845b70-b755-40fd-80e9-a7217e3cdd81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities\Vessel">
+      <UniqueIdentifier>{7adca8df-791e-4b03-b277-d113462598a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\WPlane">
+      <UniqueIdentifier>{6e6c666f-a3c9-4a1e-a8fb-a69ebc4a2496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\WPlane\Aux">
+      <UniqueIdentifier>{7b43a4bd-54f8-4c70-a226-ca979b2b75ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Maker">
+      <UniqueIdentifier>{26f20039-0736-4bf7-96e4-1f36f618fbe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Maker\Hull">
+      <UniqueIdentifier>{c4e389a9-ba1c-4148-9c78-f582583d8999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Maker\Tank">
+      <UniqueIdentifier>{7b323277-5c48-4368-9eba-d9a1d239396b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Maker\Sail">
+      <UniqueIdentifier>{19b16a80-2810-45b8-815e-f7712340cc2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Maker\Aux">
+      <UniqueIdentifier>{ac7a24b1-f105-4c39-a146-a899f5cd6bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Tools">
+      <UniqueIdentifier>{1aa64b63-8701-43b5-9c1f-f880a0b62c34}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Entity\ShipModeler_Basic_Entity.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Volume\ShipModeler_Basic_Volume.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Sail\ShipModeler_Basic_Sail.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Hull\ShipModeler_Basic_Hull.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Tank\ShipModeler_Basic_Tank.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Vessel\ShipModeler_Basic_Vessel.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Vessel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\ShipModeler_Basic.hxx">
+      <Filter>TnbLib\ShipModeler\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\WPlane\ShipModeler_Basic_WPlane.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\WPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\ShipModeler_Basic_Maker.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Auxillary\ShipModeler_Basic_MakerAux.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker\Aux</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Tank\ShipModeler_Basic_TankMaker.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Sail\ShipModeler_Basic_SailMaker.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Maker\Hull\ShipModeler_Basic_HullMaker.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Tools\ShipModeler_Basic_Tools.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Entities\Entity\ShipModeler_Basic_Entity.cxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Entities\Volume\ShipModeler_Basic_Volume.cxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\ShipModeler_Basic_Maker.cxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\Hull\ShipModeler_Basic_HullMaker.cxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\Sail\ShipModeler_Basic_SailMaker.cxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Maker\Tank\ShipModeler_Basic_TankMaker.cxx">
+      <Filter>TnbLib\ShipModeler\Basic\Maker\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShipModeler\Basic\Tools\ShipModeler_Basic_Tools.cxx">
+      <Filter>TnbLib\ShipModeler\Basic\Tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
