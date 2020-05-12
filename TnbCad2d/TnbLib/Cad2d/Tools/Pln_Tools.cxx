@@ -1,5 +1,6 @@
 #include <Pln_Tools.hxx>
 
+#include <Geo_AdTree.hxx>
 #include <Geo_PrTree.hxx>
 #include <Geo_CurveIntegrand.hxx>
 #include <Geo_CurveIntegrand_Function.hxx>
@@ -15,6 +16,7 @@
 #include <Pln_Wire.hxx>
 #include <Pln_CmpEdge.hxx>
 #include <Cad2d_Plane.hxx>
+#include <Cad2d_Modeler_Corner.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
@@ -94,6 +96,42 @@ tnbLib::Pln_Tools::MakeCompoundEdge
 
 	return std::move(pln);
 }
+
+//std::vector<std::shared_ptr<tnbLib::Pln_Edge>>
+//tnbLib::Pln_Tools::MakeConsecutive
+//(
+//	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+//)
+//{
+//	std::vector<std::shared_ptr<Pln_Edge>> edges;
+//	edges.reserve(theEdges.size());
+//
+//	if (theEdges.size() IS_EQUAL 1)
+//	{
+//		edges.push_back(theEdges[0]);
+//		return std::move(edges);
+//	}
+//
+//	auto b = RetrieveBoundingBox(theEdges);
+//	const auto expB = b.Expanded(b.Diameter()*1.0E-4);
+//	const auto vertices = RetrieveVertices(theEdges);
+//
+//	Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>> engine;
+//	engine.SetGeometryCoordFunc(&cad2dLib::Modeler_Corner::GetCoord);
+//	engine.SetGeometryRegion(std::move(expB));
+//
+//	for (const auto& x : vertices)
+//	{
+//		Debug_Null_Pointer(x);
+//		ImportToCorner(x, engine);
+//	}
+//
+//	std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>> corners;
+//	engine.RetrieveFromGeometryTo(corners);
+//	engine.Clear();
+//
+//
+//}
 
 namespace tnbLib
 {
@@ -419,6 +457,19 @@ tnbLib::Pln_Tools::MakeWire
 	Debug_Null_Pointer(wire);
 
 	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Pln_Tools::MakePlane
+(
+	const std::shared_ptr<Pln_Wire>& theWire, 
+	const gp_Ax2 & theAx
+)
+{
+	auto plane = Cad2d_Plane::MakePlane(theWire, nullptr, theAx);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
 }
 
 tnbLib::Entity2d_Box 
@@ -1644,11 +1695,85 @@ tnbLib::Pln_Tools::Plane
 	return std::move(ent);
 }
 
-std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
-tnbLib::Pln_Tools::RetrieveVertices
-(
-	const std::shared_ptr<Pln_Entity>& theEnt
-)
-{
-	return std::vector<std::shared_ptr<Pln_Vertex>>();
-}
+//std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
+//tnbLib::Pln_Tools::RetrieveVertices
+//(
+//	const std::shared_ptr<Pln_Entity>& theEnt
+//)
+//{
+//	return std::vector<std::shared_ptr<Pln_Vertex>>();
+//}
+
+//void tnbLib::Pln_Tools::ImportToCorner
+//(
+//	const std::shared_ptr<Pln_Vertex>& theVtx, 
+//	Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>>& theEngine
+//)
+//{
+//#ifdef _DEBUG
+//	const auto& domain = theEngine.GeometryBoundingBox();
+//	if (NOT domain.IsInside(theVtx->Coord()))
+//	{
+//		FatalErrorIn("void ImportToCorner(const std::shared_ptr<Pln_Vertex>&, Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>>&)")
+//			<< "the vertex is out of domain!" << endl
+//			<< abort(FatalError);
+//	}
+//#endif // _DEBUG
+//
+//	const auto radius = theVtx->Precision();
+//	Debug_If_Condition_Message(radius <= RealFirst(), "the precision is not set!");
+//
+//	auto b = Entity2d_Box::Box(theVtx->Coord(), radius);
+//	if (theEngine.IsEmpty())
+//	{
+//		auto crn = std::make_shared<cad2dLib::Modeler_Corner>(1);
+//		Debug_Null_Pointer(crn);
+//
+//		crn->InsertToCorners(theVtx->Index(), theVtx);
+//		crn->SetCoord(theVtx->Coord());
+//		theEngine.InsertToGeometry(crn);
+//		return;
+//	}
+//
+//	std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>> corners;
+//	theEngine.GeometrySearch(b, corners);
+//
+//	if (NOT corners.size())
+//	{
+//		auto crn = std::make_shared<cad2dLib::Modeler_Corner>(theEngine.Size() + 1);
+//		Debug_Null_Pointer(crn);
+//
+//		crn->InsertToCorners(theVtx->Index(), theVtx);
+//		crn->SetCoord(theVtx->Coord());
+//		theEngine.InsertToGeometry(crn);
+//		return;
+//	}
+//
+//	auto minDis = RealLast();
+//	Standard_Integer k = -1;
+//	Standard_Integer i = 0;
+//	for (const auto& x : corners)
+//	{
+//		auto dis = x->Coord().SquareDistance(theVtx->Coord());
+//		if (dis <= minDis)
+//		{
+//			minDis = dis;
+//			k = i;
+//		}
+//		i++;
+//	}
+//	
+//	Debug_If_Condition(k < 0);
+//	const auto& crn = corners[k];
+//
+//	try
+//	{
+//		crn->InsertToCorners(theVtx->Index(), theVtx);
+//	}
+//	catch (const std::exception&)
+//	{
+//		FatalErrorIn("void ImportToCorner(const std::shared_ptr<Pln_Vertex>&, Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>>&)")
+//			<< "unable to insert the vertex into the tree!" << endl
+//			<< abort(FatalError);
+//	}
+//}

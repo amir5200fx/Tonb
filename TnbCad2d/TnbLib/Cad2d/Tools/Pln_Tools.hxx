@@ -30,6 +30,14 @@ namespace tnbLib
 	class Cad2d_Plane;
 	class NumAlg_AdaptiveInteg_Info;
 
+	template<class T>
+	class Geo_AdTree;
+
+	namespace cad2dLib
+	{
+		class Modeler_Corner;
+	}
+
 	class Pln_Tools
 	{
 
@@ -70,6 +78,17 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 			);
 
+		//- WARNING! the edges and the vertices will be removed from the corners
+		static std::vector<std::shared_ptr<Pln_Edge>> 
+			MakeConsecutive
+			(
+				const std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners
+			);
+
+		static std::vector<std::shared_ptr<Pln_Edge>> MakeConsecutive(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
+
+		static std::vector<std::shared_ptr<Pln_Edge>> Merged(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
+
 		static std::shared_ptr<Pln_Wire>
 			MakeWire
 			(
@@ -90,6 +109,9 @@ namespace tnbLib
 				const std::vector<Standard_Boolean>& theSense,
 				const Standard_Real theMaxTol
 			);
+
+		static std::shared_ptr<Cad2d_Plane>
+			MakePlane(const std::shared_ptr<Pln_Wire>& theWire, const gp_Ax2& theAx);
 
 		static Pln_Orientation
 			RetrieveOrientation
@@ -196,6 +218,12 @@ namespace tnbLib
 				Handle(Geom2d_Curve)& theC1
 			);
 
+		static std::vector<std::shared_ptr<Pln_Edge>>
+			RetrieveEdges
+			(
+				const std::vector<Handle(Geom2d_Curve)>& theCurves
+			);
+
 		static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
 			(
@@ -293,6 +321,13 @@ namespace tnbLib
 		static std::vector<std::shared_ptr<Pln_Curve>> RetrieveCurves(const std::shared_ptr<Pln_Entity>& theEnt);
 
 		static std::vector<std::shared_ptr<Pln_Edge>> RetrieveEdges(const std::shared_ptr<Pln_Entity>& theEnt);
+
+		static void 
+			ImportToCorner
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx,
+				Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners
+			);
 
 	};
 }

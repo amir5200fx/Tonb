@@ -322,6 +322,9 @@
     <Filter Include="TnbLib\Cad2d\Plane\Aux">
       <UniqueIdentifier>{23975cc2-419b-4915-9bfc-f6ae063965c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Modeler\SelectList">
+      <UniqueIdentifier>{7c4b90e5-61f6-4f20-91ba-bc1ca2deef3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -615,6 +618,9 @@
     <ClInclude Include="TnbLib\Cad2d\Plane\Auxillary\Cad2d_Plane_Auxillary.hxx">
       <Filter>TnbLib\Cad2d\Plane\Aux</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Modeler\SelectList\Cad2d_Modeler_SelectList.hxx">
+      <Filter>TnbLib\Cad2d\Modeler\SelectList</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -808,6 +814,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptor.cxx">
       <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\SelectList\Cad2d_Modeler_SelectList.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\SelectList</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

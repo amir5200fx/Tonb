@@ -17,8 +17,7 @@ namespace tnbLib
 
 			mutable Geo_ItemCounter theVertexCounter_;
 			mutable Geo_ItemCounter theEdgeCounter_;
-			mutable Geo_ItemCounter theCornerCounter_;
-
+			mutable Geo_ItemCounter thePlaneCounter_;
 
 		protected:
 
@@ -35,9 +34,9 @@ namespace tnbLib
 				return theEdgeCounter_;
 			}
 
-			auto& CornerCounter() const
+			auto& PlaneCounter() const
 			{
-				return theCornerCounter_;
+				return thePlaneCounter_;
 			}
 
 		};

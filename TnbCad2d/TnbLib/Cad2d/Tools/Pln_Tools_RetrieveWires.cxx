@@ -157,6 +157,8 @@ namespace tnbLib
 
 		auto compound = Pln_Tools::MakeCompoundEdge(*list);
 
+		Pln_Tools::SameSense(compound);
+
 		auto wire = std::make_shared<Pln_Wire>(0, compound);
 
 		return std::move(wire);
