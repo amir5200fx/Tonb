@@ -79,7 +79,7 @@ namespace tnbLib
 	template<class ListType>
 	inline void meshSubset::containedElements(ListType& l) const
 	{
-		l.setSize(data_.size());
+		l.setSize((label)data_.size());
 
 		label counter(0);
 		forAllConstIter(std::set<label>, data_, it)
@@ -166,7 +166,7 @@ namespace tnbLib
 
 		os << sel.name_ << nl << sel.type_;
 
-		labelList data(sel.data_.size());
+		labelList data((label)sel.data_.size());
 		label counter(0);
 		forAllConstIter(std::set<label>, sel.data_, it)
 			data[counter++] = *it;

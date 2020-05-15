@@ -724,6 +724,54 @@
     <Filter Include="TnbLib\FvMesh\meshTools\triSurface\triSurface\interfaces\NAS">
       <UniqueIdentifier>{4cbfcee1-e767-4b1f-8f24-dbf452d29759}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction\edgeExtractor">
+      <UniqueIdentifier>{bb4088c3-d91f-441f-bc4d-2f5f40605b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheets">
+      <UniqueIdentifier>{397af050-4d6b-4ced-80d0-f1ddc8fb5588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsFJ">
+      <UniqueIdentifier>{a96ce853-f78b-406d-9771-979b49019c00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsJFS">
+      <UniqueIdentifier>{75636bc8-cefe-42ea-aa7c-0f1e963c327b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers">
+      <UniqueIdentifier>{4e6676f9-8acf-444f-b308-371378f92633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\knuppMetric">
+      <UniqueIdentifier>{9da20041-227a-4d62-812e-f5bd83727fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler">
+      <UniqueIdentifier>{b7b64eff-51c9-4656-86c5-7cf31c884a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\quadricMetric">
+      <UniqueIdentifier>{6f57b28c-a9c4-4d41-8e12-17f098874073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\simplexSmoother">
+      <UniqueIdentifier>{1b221929-e4c1-415e-8d5b-734d5246ab78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\volumeOptimizer">
+      <UniqueIdentifier>{ae1d4912-e697-4c96-a216-84737149d4ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\boundaryFacesGenerator">
+      <UniqueIdentifier>{88d41622-1a5d-4b66-a7e6-74b530e30eb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\cartesian2DMesh\cartesian2DMeshGenerator">
+      <UniqueIdentifier>{a5fd324c-704c-4e67-9fd7-30aa8c7d5475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor">
+      <UniqueIdentifier>{ea2e3ff5-28f8-4c90-8b03-694208aa2dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshGenerator">
+      <UniqueIdentifier>{b21417f3-8aa9-40b1-aa41-cdccef03c932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshExtractorOctree">
+      <UniqueIdentifier>{0eb97093-82f7-489b-aec1-531352e7fec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshGenerator">
+      <UniqueIdentifier>{c050911b-ab91-4347-acf3-458e8ac218d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenPoints.hxx">
@@ -1119,6 +1167,291 @@
     <ClInclude Include="TnbLib\FvMesh\meshTools\sets\topoSetSource\topoSetSource.hxx">
       <Filter>TnbLib\FvMesh\meshTools\sets\topoSetSource</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\checkMeshDict\checkMeshDict.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\checkMeshDict</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA\writeMeshFPMA.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA\fpmaMesh.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen2DEngine\polyMeshGen2DEngine.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen2DEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen2DEngine\polyMeshGen2DEngineI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen2DEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressing.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks\polyMeshGenChecks.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifier.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierAddCellByCell.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine\meshSurfaceEngine.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine\meshSurfaceEngineI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine\meshSurfaceEngineModifier.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper\meshSurfaceMapper.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper\parMapperHelper.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner\meshSurfacePartitioner.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner\renameBoundaryPatches.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\renameBoundaryPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells\surfaceMorpherCells.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D\meshSurfaceMapper2D.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePartitioner\triSurfacePartitioner.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePartitioner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePatchManipulator\triSurfacePatchManipulator.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePatchManipulator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurface2DCheck\triSurface2DCheck.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurface2DCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceChecks\triSurfaceChecks.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceChecks</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAutomaticRefinement\meshOctreeAutomaticRefinement.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAutomaticRefinement</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCurvatureEstimator\triSurfaceCurvatureEstimator.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCurvatureEstimator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceMetaData\triSurfaceMetaData.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceMetaData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceImportSurfaceAsSubset\triSurfaceImportSurfaceAsSubset.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceImportSurfaceAsSubset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceExtrude2DEdges\triSurfaceExtrude2DEdges.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceExtrude2DEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceDetectFeatureEdges\triSurfaceDetectFeatureEdges.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceDetectFeatureEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCopyParts\triSurfaceCopyParts.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCopyParts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicateTriangles\triSurfaceCleanupDuplicateTriangles.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicateTriangles</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicates\triSurfaceCleanupDuplicates.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicates</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceClassifyEdges\triSurfaceClassifyEdges.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceClassifyEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceRemoveFacets\triSurfaceRemoveFacets.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceRemoveFacets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator\meshOctreeCreator.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\edgeMesh\edgeMesh.hxx">
+      <Filter>TnbLib\FvMesh\edgeMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\edgeMesh\edgeMeshI.hxx">
+      <Filter>TnbLib\FvMesh\edgeMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\edgeMesh\featureEdgeMesh.hxx">
+      <Filter>TnbLib\FvMesh\edgeMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\boxScaling.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\coordinateModification.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\coordinateModificationList.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\coordinateModifier.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\planeScaling.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\edgeMeshGeometryModification\edgeMeshGeometryModification.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\edgeMeshGeometryModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\polyMeshGenGeometryModification\polyMeshGenGeometryModification.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\polyMeshGenGeometryModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\surfaceMeshGeometryModification\surfaceMeshGeometryModification.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\surfaceMeshGeometryModification</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeInsideOutside\meshOctreeInsideOutside.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeInsideOutside</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\correctEdgesBetweenPatches\correctEdgesBetweenPatches.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\correctEdgesBetweenPatches</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells\decomposeCells.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition\faceDecomposition.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition\decomposeFaces.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction\edgeExtractor\edgeExtractor.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction\edgeExtractor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckEdgeTypes\meshSurfaceCheckEdgeTypes.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckEdgeTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckInvertedVertices\meshSurfaceCheckInvertedVertices.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckInvertedVertices</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor\meshSurfaceEdgeExtractor.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor2D\meshSurfaceEdgeExtractor2D.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorFUN\meshSurfaceEdgeExtractorFUN.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorFUN</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorNonTopo\meshSurfaceEdgeExtractorNonTopo.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorNonTopo</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayers.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayersI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\detectBoundaryLayers\detectBoundaryLayers.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\detectBoundaryLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\extrudeLayer\extrudeLayer.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\extrudeLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\extrudeLayer\extrudeLayerI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\extrudeLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers\refineBoundaryLayers.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\triangulateNonPlanarBaseFaces\triangulateNonPlanarBaseFaces.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\triangulateNonPlanarBaseFaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\meshOptimizer.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\meshOptimizerI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation\boundaryLayerOptimisation.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\symmetryPlaneOptimisation\symmetryPlaneOptimisation.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\symmetryPlaneOptimisation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\tetMeshOptimisation.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\knuppMetric\knuppMetric.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\knuppMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\simplexSmoother\simplexSmoother.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\simplexSmoother</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\quadricMetric\quadricMetric.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\quadricMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\volumeOptimizer\volumeOptimizer.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\volumeOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler\meshUntangler.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\advancedSurfaceSmoothers\surfaceOptimizer\surfaceOptimizer.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\advancedSurfaceSmoothers\surfaceOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\meshSurfaceOptimizer.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\meshSurfaceOptimizerI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkBoundaryFacesSharingTwoEdges\checkBoundaryFacesSharingTwoEdges.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkBoundaryFacesSharingTwoEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkCellConnectionsOverFaces\checkCellConnectionsOverFaces.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkCellConnectionsOverFaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkIrregularSurfaceConnections\checkIrregularSurfaceConnections.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkIrregularSurfaceConnections</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkNonMappableCellConnections\checkNonMappableCellConnections.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkNonMappableCellConnections</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner\topologicalCleaner.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheets\createFundamentalSheets.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsFJ\createFundamentalSheetsFJ.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsFJ</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsJFS\createFundamentalSheetsJFS.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsJFS</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\workflowControls\workflowControls.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\workflowControls</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\cartesian2DMesh\cartesian2DMeshGenerator\cartesian2DMeshGenerator.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesian2DMesh\cartesian2DMeshGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor\cartesianMeshExtractor.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshGenerator\cartesianMeshGenerator.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshExtractorOctree\tetMeshExtractorOctree.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshExtractorOctree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctreeI.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctree.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshGenerator\tetMeshGenerator.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor\voronoiMeshExtractor.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator\voronoiMeshGenerator.hxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenPoints.cxx">
@@ -1231,9 +1564,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh\partTetMeshAddressing.cxx">
       <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\partTetMesh</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCubeCoordinates.cxx">
-      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube\meshOctreeCube.cxx">
       <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCube</Filter>
@@ -1426,6 +1756,582 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FvMesh\meshTools\sets\topoSetSource\topoSetSource.cxx">
       <Filter>TnbLib\FvMesh\meshTools\sets\topoSetSource</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\checkMeshDict\checkMeshDict.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\checkMeshDict</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA\writeMeshFPMA.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA\fpmaMesh.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\dataConversion\foamToFPMA</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen2DEngine\polyMeshGen2DEngine.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen2DEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingCellCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingCellEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingCellPoints.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingCentresAndAreas.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingCentresAndVols.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingClear.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingEdgeCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingEdgeFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingFaceEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingParallelAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingPointCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingPointEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingPointFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingPointPoints.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing\polyMeshGenAddressingUpdateGeometry.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks\polyMeshGenChecks.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks\polyMeshGenChecksGeometry.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks\polyMeshGenChecksTopology.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierAddBufferCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierAddCellByCell.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierAddCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierAddProcessorFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierRemoveCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierRemoveFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierRemoveUnusedVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierRenumberMesh.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierReorderBoundaryFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierReplaceBoundary.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier\polyMeshGenModifierZipUpCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGenModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine\meshSurfaceEngine.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine\meshSurfaceEngineCalculateBoundaryNodesAndFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine\meshSurfaceEngineModifier.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine\meshSurfaceEngineParallelAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper\meshSurfaceMapper.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner\meshSurfacePartitioner.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner\meshSurfacePartitionerFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfacePartitioner\renameBoundaryPatches.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\renameBoundaryPatches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells\surfaceMorpherCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells\surfaceMorpherCellsCreateBoundaryFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells\surfaceMorpherCellsMorphInternalFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\surfaceMorpherCells</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D\meshSurfaceMapper2D.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D\meshSurfaceMapper2DMapVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D\meshSurfaceMapper2DPremapVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePartitioner\triSurfacePartitioner.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePartitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePartitioner\triSurfacePartitionerCreateAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePartitioner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePatchManipulator\triSurfacePatchManipulator.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePatchManipulator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurface2DCheck\triSurface2DCheck.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurface2DCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceChecks\triSurfaceChecks.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceChecks</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAutomaticRefinement\meshOctreeAutomaticRefinement.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAutomaticRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCurvatureEstimator\triSurfaceCurvatureEstimator.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCurvatureEstimator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCurvatureEstimator\triSurfaceCurvatureEstimatorCalculate.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCurvatureEstimator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceMetaData\triSurfaceMetaData.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceMetaData</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceImportSurfaceAsSubset\triSurfaceImportSurfaceAsSubset.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceImportSurfaceAsSubset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceExtrude2DEdges\triSurfaceExtrude2DEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceExtrude2DEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceDetectFeatureEdges\triSurfaceDetectFeatureEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceDetectFeatureEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceDetectFeatureEdges\triSurfaceDetectFeatureEdgesFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceDetectFeatureEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCopyParts\triSurfaceCopyParts.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCopyParts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicateTriangles\triSurfaceCleanupDuplicateTriangles.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicateTriangles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicateTriangles\triSurfaceCleanupDuplicateTrianglesFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicateTriangles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicates\triSurfaceCleanupDuplicates.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicates</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicates\triSurfaceCleanupDuplicatesFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceCleanupDuplicates</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceClassifyEdges\triSurfaceClassifyEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceClassifyEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceClassifyEdges\triSurfaceClassifyEdgesFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceClassifyEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceRemoveFacets\triSurfaceRemoveFacets.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceRemoveFacets</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceRemoveFacets\triSurfaceRemoveFacetsFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfaceRemoveFacets</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePatchManipulator\triSurfacePatchManipulatorFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\triSurfaceTools\triSurfacePatchManipulator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAutomaticRefinement\meshOctreeAutomaticRefinementRef.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAutomaticRefinement</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator\meshOctreeCreator.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator\meshOctreeCreatorAdjustOctreeToSurface.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator\meshOctreeCreatorCreateOctreeBoxes.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator\meshOctreeCreatorFrontalMarking.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator\meshOctreeCreatorLoadDistribution.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\edgeMesh\edgeMesh.cxx">
+      <Filter>TnbLib\FvMesh\edgeMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\edgeMesh\edgeMeshIO.cxx">
+      <Filter>TnbLib\FvMesh\edgeMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\edgeMesh\featureEdgeMesh.cxx">
+      <Filter>TnbLib\FvMesh\edgeMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\boxScaling.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\coordinateModification.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\coordinateModifier.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\planeScaling.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification\newCoordinateModification.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\coordinateModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\edgeMeshGeometryModification\edgeMeshGeometryModification.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\edgeMeshGeometryModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\polyMeshGenGeometryModification\polyMeshGenGeometryModification.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\polyMeshGenGeometryModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\surfaceMeshGeometryModification\surfaceMeshGeometryModification.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\anisotropicMeshing\surfaceMeshGeometryModification</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeInsideOutside\meshOctreeInsideOutside.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeInsideOutside</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing\meshOctreeAddressingCreation.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing\meshOctreeAddressingGluedMesh.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing\meshOctreeAddressingIrregularConnections.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing\meshOctreeAddressingParallelAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\octrees\meshOctree\meshOctreeAddressing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\correctEdgesBetweenPatches\correctEdgesBetweenPatches.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\correctEdgesBetweenPatches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells\decomposeCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells\decomposeCellsDecomposition.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition\faceDecomposition.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition\decomposeFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\faceDecomposition</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells\decomposeCellsPyramids.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\decomposeCells</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction\edgeExtractor\edgeExtractor.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction\edgeExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction\edgeExtractor\edgeExtractorCorners.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\edgeExtraction\edgeExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckEdgeTypes\meshSurfaceCheckEdgeTypes.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckEdgeTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckInvertedVertices\meshSurfaceCheckInvertedVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceCheckInvertedVertices</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor\meshSurfaceEdgeExtractor.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor\meshSurfaceEdgeCreateEdgeVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor\meshSurfaceEdgeCreateBoundaryFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor2D\meshSurfaceEdgeExtractor2D.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor2D\meshSurfaceEdgeExtractor2DDistributeFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractor2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorFUN\meshSurfaceEdgeExtractorFUN.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorFUN</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorFUN\meshSurfaceEdgeExtractorFUNDistributeFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorFUN</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorNonTopo\meshSurfaceEdgeExtractorNonTopo.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorNonTopo</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorNonTopo\meshSurfaceEdgeExtractorNonTopoDistributeFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceEdgeExtractorNonTopo</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayers.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayerCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayersCheckTopologyOfBndFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayersCreateVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayersFacesAndCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers\boundaryLayersWrapperLayer.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\boundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\detectBoundaryLayers\detectBoundaryLayers.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\detectBoundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\detectBoundaryLayers\detectBoundaryLayersFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\detectBoundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\extrudeLayer\extrudeLayer.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\extrudeLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers\refineBoundaryLayers.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers\refineBoundaryLayersCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers\refineBoundaryLayersFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers\refineBoundaryLayersFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\refineBoundaryLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\triangulateNonPlanarBaseFaces\triangulateNonPlanarBaseFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\triangulateNonPlanarBaseFaces</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\triangulateNonPlanarBaseFaces\triangulateNonPlanarBaseFacesFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\boundaryLayers\triangulateNonPlanarBaseFaces</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\meshOptimizer.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\meshOptimizerOptimizePoint.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\meshOptimizerOptimizePointParallel.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\meshOptimizerOptimizeSurface.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\optimizeMeshFV.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation\boundaryLayerOptimisation.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation\boundaryLayerOptimisationFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation\boundaryLayerOptimisationNormals.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation\boundaryLayerOptimisationThickness.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\boundaryLayerOptimisation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\symmetryPlaneOptimisation\symmetryPlaneOptimisation.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\symmetryPlaneOptimisation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\tetMeshOptimisation.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\tetMeshOptimisationParallel.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\simplexSmoother\simplexSmoother.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\simplexSmoother</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\quadricMetric\quadricMetric.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\quadricMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\volumeOptimizer\volumeOptimizer.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\volumeOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\volumeOptimizer\volumeOptimizerEvaluateGradients.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\volumeOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\knuppMetric\knuppMetric.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\knuppMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler\meshUntangler.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler\meshUntanglerCutRegion.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler\meshUntanglerCutRegionEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler\meshUntanglerCutRegionFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler\meshUntanglerCutRegionPoints.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler\meshUntanglerCutRegionTieBreak.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshOptimizer\tetMeshOptimisation\advancedSmoothers\meshUntangler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\advancedSurfaceSmoothers\surfaceOptimizer\surfaceOptimizer.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\advancedSurfaceSmoothers\surfaceOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\meshSurfaceOptimizer.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\meshSurfaceOptimizerCalculateTrianglesAndAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\meshSurfaceOptimizerOptimizePoint.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\meshSurfaceOptimizerOptimizePointParallel.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer\meshSurfaceOptimizerOptimizeSurface.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\geometry\meshSurfaceOptimizer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkBoundaryFacesSharingTwoEdges\checkBoundaryFacesSharingTwoEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkBoundaryFacesSharingTwoEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkCellConnectionsOverFaces\checkCellConnectionsOverFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkCellConnectionsOverFaces</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkIrregularSurfaceConnections\checkIrregularSurfaceConnections.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkIrregularSurfaceConnections</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkIrregularSurfaceConnections\checkIrregularSurfaceConnectionsFunctions.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkIrregularSurfaceConnections</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkNonMappableCellConnections\checkNonMappableCellConnections.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\checkNonMappableCellConnections</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner\topologicalCleaner.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner\topologicalCleanerInvalidVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner\topologyCleanerNonConsecutiveBoundaryVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner\topologyCleanerNonMappableCells.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\smoothers\topology\topologicalCleaner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\correctEdgesBetweenPatches\correctEdgesBetweenPatchesDistributeFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\correctEdgesBetweenPatches</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheets\createFundamentalSheets.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheets</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsFJ\createFundamentalSheetsFJ.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsFJ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsJFS\createFundamentalSheetsJFS.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\createFundamentalSheets\createFundamentalSheetsJFS</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper\meshSurfaceMapperCornersAndEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper\meshSurfaceMapperMapVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper\meshSurfaceMapperPremapVertices.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\surfaceTools\meshSurfaceMapper</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\workflowControls\workflowControls.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\workflowControls</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\cartesian2DMesh\cartesian2DMeshGenerator\cartesian2DMeshGenerator.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesian2DMesh\cartesian2DMeshGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor\cartesianMeshExtractor.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor\cartesianMeshExtractorDecomposeSplitHexes.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor\cartesianMeshExtractorPointsAndAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor\cartesianMeshExtractorPolyMesh.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshGenerator\cartesianMeshGenerator.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\cartesianMesh\cartesianMeshGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctree.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctreeFromFacesWithCentreNode.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctreePointsAndAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctreeTetsAroundEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctreeTetsAroundSplitEdges.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree\tetCreatorOctreeTetsFromSplitFaces.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\utilities\tetrahedra\tetCreatorOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshExtractorOctree\tetMeshExtractorOctree.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshExtractorOctree</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshGenerator\tetMeshGenerator.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\tetMesh\tetMeshGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor\voronoiMeshExtractor.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor\voronoiMeshExtractorAddressing.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor\voronoiMeshExtractorCreateMesh.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshExtractor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator\voronoiMeshGenerator.cxx">
+      <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
