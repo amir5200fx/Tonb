@@ -1,7 +1,9 @@
 #include <Tnb_Examples.hxx>
 
+#include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
+#include <OFstream.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -34,8 +36,16 @@ void tnbLib::example_cad2d_modeler()
 	modeler.Select(modeler.SelectEdge(2), l);
 	modeler.Select(modeler.SelectEdge(3), l);
 	modeler.Select(modeler.SelectEdge(4), l);
-	PAUSE;
+
 	modeler.MakePlane(l);
+
+	cout << "nb planes = " << modeler.NbPlanes() << std::endl;
+
+	fileName myFileName("example_cad2d_modeler.plt");
+	OFstream myFile(myFileName);
+
+	const auto& selected = modeler.SelectPlane(1);
+	selected->ExportToPlt(myFile);
 
 	/*modeler.Import(seg0);
 	modeler.Import(seg1);

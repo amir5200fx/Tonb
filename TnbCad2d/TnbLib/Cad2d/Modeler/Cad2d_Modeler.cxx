@@ -1,5 +1,6 @@
 #include <Cad2d_Modeler.hxx>
 
+#include <Geo_ApprxCurve_Info.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Tools.hxx>
@@ -505,6 +506,18 @@ tnbLib::Cad2d_Modeler::MakePlane
 	const auto tol = Radius();
 
 	const auto edges = cad2dLib::Modeler_Tools::MakeConsecutive(items, tol);
+
+	auto info = std::make_shared<Geo_ApprxCurve_Info>();
+	Debug_Null_Pointer(info);
+
+	info->SetAngle(1.0);
+	info->SetApprox(1.0E-4);
+	info->SetMinSize(1.0E-4);
+	for (const auto& x : edges)
+	{
+		if (NOT x->Mesh())
+			x->Approx(info);
+	}
 
 	const auto wires = Pln_Tools::RetrieveWires(edges);
 	if (wires.size() NOT_EQUAL 1)

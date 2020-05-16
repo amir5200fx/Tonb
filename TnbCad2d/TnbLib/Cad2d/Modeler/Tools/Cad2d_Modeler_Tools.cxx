@@ -831,12 +831,12 @@ namespace tnbLib
 				}
 				Debug_If_Condition(v0 IS_EQUAL v1);
 
+				auto insert = paired.insert(std::make_pair(v1->Index(), v1));
+				Debug_If_Condition(NOT insert.second);
+
 				auto c = std::make_shared<Corner>();
 				c->vtx0 = std::move(v0);
 				c->vtx1 = std::move(v1);
-
-				auto insert = paired.insert(std::make_pair(v1->Index(), v1));
-				Debug_If_Condition(NOT insert.second);
 
 				corners.push_back(std::move(c));
 			}
@@ -903,6 +903,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 	}
 
 	std::map<Standard_Integer, std::shared_ptr<Modeler_Corner>> vtxToCornerMap;
+	std::map<Standard_Integer, std::shared_ptr<Pln_Vertex>> indxToVerticesMap;
 	for (const auto& x : theCorners)
 	{
 		Debug_Null_Pointer(x);
@@ -919,6 +920,18 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 		{
 			Debug_Null_Pointer(v.second);
 			auto insert = vtxToCornerMap.insert(std::make_pair(v.second->Index(), x));
+			if (NOT insert.second)
+			{
+				FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeConsecutive(const std::vector<std::shared_ptr<Modeler_Corner>>&)")
+					<< "duplicate data in vertices" << endl
+					<< abort(FatalError);
+			}
+		}
+
+		for (const auto& v : vertices)
+		{
+			Debug_Null_Pointer(v.second);
+			auto insert = indxToVerticesMap.insert(std::make_pair(v.second->Index(), v.second));
 			if (NOT insert.second)
 			{
 				FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeConsecutive(const std::vector<std::shared_ptr<Modeler_Corner>>&)")
@@ -945,7 +958,16 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 			edges.push_back(edge);
 	}
 
-	for (const auto& x : theCorners)
+	//- return back the vertices into the corners
+	for (const auto& x : vtxToCornerMap)
+	{
+		Debug_Null_Pointer(x.second);
+
+		const auto& crn = x.second;
+		crn->InsertToCorners(x.first, indxToVerticesMap[x.first]);
+	}
+
+	/*for (const auto& x : theCorners)
 	{
 		if (x->NbVertices())
 		{
@@ -953,7 +975,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 				<< "the corners represent a non-manifold object or an object with multiply wires!" << endl
 				<< abort(FatalError);
 		}
-	}
+	}*/
 
 	const auto[segments, corners] = mergeFunLib::RetrieveSegments(edges, vtxToCornerMap);
 
