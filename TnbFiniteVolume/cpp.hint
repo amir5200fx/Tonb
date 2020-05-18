@@ -1,2 +1,3 @@
 #define addToRunTimeSelectionTable(baseType,thisType,argNames) 
 #define TypeName(TypeNameString) 
+#define defineTemplateRunTimeSelectionTable(baseType,argNames)
