@@ -1,5 +1,6 @@
 #include <BlockLduSystem.hxx>
 
+#include <fvMatrix.hxx>
 #include <IOstreams.hxx>
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //

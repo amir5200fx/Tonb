@@ -1,2 +1,2 @@
-#include <fvScalarMatrix.hxx>
+#include <fvMatrix.hxx>
 

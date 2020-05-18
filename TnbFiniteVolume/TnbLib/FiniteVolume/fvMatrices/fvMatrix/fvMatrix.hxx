@@ -2,7 +2,7 @@
 #ifndef _fvMatrix_Header
 #define _fvMatrix_Header
 
-#include <volFields.hxx>
+//#include <volFields.hxx> commentted out by amir
 #include <surfaceFields.hxx>
 #include <lduMatrix.hxx>
 #include <tmp.hxx>
@@ -1004,7 +1004,7 @@ namespace tnbLib
 #endif
 
 // Specialisation for scalars
-//#include <fvScalarMatrix.hxx>
+#include <fvScalarMatrix.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
