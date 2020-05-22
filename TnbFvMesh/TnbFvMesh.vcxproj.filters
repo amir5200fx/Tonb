@@ -1452,6 +1452,27 @@
     <ClInclude Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator\voronoiMeshGenerator.hxx">
       <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\cellDist\cellDistFuncs.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\cellDist\wallPoint\wallPoint.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\wallPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\cellDist\wallPoint\wallPointI.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\wallPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\cellDist\wallPoint\wallPointData.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\wallPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\cellDist\wallPoint\wallPointDataI.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\wallPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\cellDist\patchWave\patchWave.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\patchWave</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvMesh\meshTools\cellDist\patchWave\patchDataWave.hxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\patchWave</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\utilities\meshes\polyMeshGen\polyMeshGenPoints.cxx">
@@ -2332,6 +2353,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator\voronoiMeshGenerator.cxx">
       <Filter>TnbLib\FvMesh\mesh\cfMesh\voronoiMesh\voronoiMeshGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\cellDist\cellDistFuncs.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\cellDist\cellDistFuncsTemplates.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\cellDist\wallPoint\wallPoint.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\wallPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\cellDist\wallPoint\wallPointData.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\wallPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\cellDist\patchWave\patchWave.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\patchWave</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvMesh\meshTools\cellDist\patchWave\patchDataWave.cxx">
+      <Filter>TnbLib\FvMesh\meshTools\cellDist\patchWave</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
