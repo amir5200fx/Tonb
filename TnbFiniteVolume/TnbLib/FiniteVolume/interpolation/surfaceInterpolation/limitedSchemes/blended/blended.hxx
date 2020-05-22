@@ -38,6 +38,9 @@ SourceFiles
 
 #include <limitedSurfaceInterpolationScheme.hxx>
 #include <dimensionSet.hxx>
+#include <fvPatchFields.hxx>
+#include <volMesh.hxx>
+#include <tnbTime.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

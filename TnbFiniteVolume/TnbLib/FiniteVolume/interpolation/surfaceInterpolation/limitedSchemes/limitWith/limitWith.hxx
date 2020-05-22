@@ -39,6 +39,11 @@ SourceFiles
 
 #include <surfaceInterpolationScheme.hxx>
 #include <limitedSurfaceInterpolationScheme.hxx>
+#include <fvPatchField.hxx>
+#include <fvsPatchFields.hxx>
+#include <surfaceMesh.hxx>
+#include <volMesh.hxx>
+#include <surfaceFields.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

@@ -3,6 +3,8 @@
 #define _interpolationCellPointFace_Header
 
 #include <interpolation.hxx>
+#include <surfaceMesh.hxx>
+#include <fvsPatchField.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

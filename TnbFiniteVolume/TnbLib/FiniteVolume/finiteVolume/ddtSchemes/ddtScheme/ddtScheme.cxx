@@ -2,6 +2,7 @@
 
 #include <fv.hxx>
 #include <surfaceInterpolate.hxx>
+#include <surfaceMesh.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
