@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{6BC654FE-183F-4723-96B0-E006BAFFB13A}</ProjectGuid>
+    <RootNamespace>TnbFvTurbulence</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)TnbBase\Libraries\zLib\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\DeardorffDiffStress;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\alphaSgsWallFunctions\alphaSgsJayatillekeWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\alphaSgsWallFunctions\alphaSgsWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\muSgsWallFunctions\muSgsWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\dynOneEqEddy;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\GenEddyVisc;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\GenSGSStress;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\LESModel;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\lowReOneEqEddy;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\oneEqEddy;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\Smagorinsky;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\SpalartAllmaras;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\vanDriestDelta;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\kEpsilon;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\kOmegaSST;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\laminar;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\LRR;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\RASModel;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\realizableKE;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras;$(ProjectDir)TnbLib\FvTurbulence\compressible\turbulenceModel\laminar;$(ProjectDir)TnbLib\FvTurbulence\compressible\turbulenceModel;$(SolutionDir)TnbFvThermoPhysicalModels\include;$(SolutionDir)TnbFiniteVolume\include;$(SolutionDir)TnbFvMesh\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\DeardorffDiffStress;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\alphaSgsWallFunctions\alphaSgsJayatillekeWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\alphaSgsWallFunctions\alphaSgsWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\muSgsWallFunctions\muSgsWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\dynOneEqEddy;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\GenEddyVisc;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\GenSGSStress;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\LESModel;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\lowReOneEqEddy;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\oneEqEddy;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\Smagorinsky;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\SpalartAllmaras;$(ProjectDir)TnbLib\FvTurbulence\compressible\LES\vanDriestDelta;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\kEpsilon;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\kOmegaSST;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\laminar;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\LRR;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\RASModel;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\realizableKE;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon;$(ProjectDir)TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras;$(ProjectDir)TnbLib\FvTurbulence\compressible\turbulenceModel\laminar;$(ProjectDir)TnbLib\FvTurbulence\compressible\turbulenceModel;$(SolutionDir)TnbFvThermoPhysicalModels\include;$(SolutionDir)TnbFiniteVolume\include;$(SolutionDir)TnbFvMesh\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions\backwardsCompatibilityWallFunctions.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature\turbulentHeatFluxTemperatureFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet\turbulentMixingLengthDissipationRateInletFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet\turbulentMixingLengthFrequencyInletFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed\turbulentTemperatureCoupledBaffleMixedFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\regionProperties.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\turbulentTemperatureCoupledBaffleFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction\alphatWallFunctionFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction\epsilonWallFunctionFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchFields.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction\mutkWallFunctionFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction\mutLowReWallFunctionFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction\mutRoughWallFunctionFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction\mutSpalartAllmsStdRoughWallFuncFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction\mutSptAlmStdWFunFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction\mutSpalartAllmarasWallFuncFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction\mutWallFunctionFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction\omegaWallFunctionFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\kEpsilon\compkEpsilon.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\kOmegaSST\compkOmegaSST.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\laminar\compLaminar.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM\compLaunderGibsonRSTM.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE\compLaunderSharmaKE.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\LRR\compLRR.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\RASModel\compRASModel.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\realizableKE\compRealizableKE.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon\compRNGkEpsilon.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions\backwardsCompatibilityWallFunctions.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions\backwardsCompatibilityWallFunctionsTemplates.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature\turbulentHeatFluxTemperatureFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet\turbulentMixingLengthDissipationRateInletFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet\turbulentMixingLengthFrequencyInletFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed\turbulentTemperatureCoupledBaffleMixedFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\regionProperties.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\turbulentTemperatureCoupledBaffleFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction\alphatWallFunctionFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction\epsilonWallFunctionFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchFields.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction\mutkWallFunctionFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction\mutLowReWallFunctionFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction\mutRoughWallFunctionFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction\mutSpalartAllmsStdRoughWallFuncFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction\mutSptAlmStdWFunFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction\mutSpalartAllmarasWallFuncFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction\mutWallFunctionFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction\omegaWallFunctionFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\kEpsilon\compkEpsilon.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\kOmegaSST\compkOmegaSST.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\laminar\compLaminar.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM\compLaunderGibsonRSTM.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE\compLaunderSharmaKE.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\LRR\compLRR.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\RASModel\compRASModel.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\realizableKE\compRealizableKE.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon\compRNGkEpsilon.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{1025fb49-ab30-486b-9b80-53348e00d249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence">
+      <UniqueIdentifier>{e7da9f81-3da9-4b65-82c4-cde6a3c3f046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible">
+      <UniqueIdentifier>{fd810fdc-eb9a-4327-b60c-7094f60cdafb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\incompressible">
+      <UniqueIdentifier>{109ebe33-d553-47d5-ad97-cec8c744c1d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\LES">
+      <UniqueIdentifier>{c54648d7-24ff-47e9-90bb-4ab084610524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES">
+      <UniqueIdentifier>{3ba5ed48-d2af-493f-845f-15677a1d6cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS">
+      <UniqueIdentifier>{cf0889bc-4c3c-4422-ad1f-8a01b289d156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\turbulenceModel">
+      <UniqueIdentifier>{290aae4a-bc4c-416e-a376-3611cad961d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\DeardorffDiffStress">
+      <UniqueIdentifier>{ccb35556-4370-4764-94d4-fd26ef3896cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields">
+      <UniqueIdentifier>{eef7269a-f0bf-42a1-961f-687f6716f479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\dynOneEqEddy">
+      <UniqueIdentifier>{d205c652-0f9b-49b8-84b8-0fa5bbcf396f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\GenEddyVisc">
+      <UniqueIdentifier>{01cb8cab-6fd9-47fa-a623-51bea01bad17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\GenSGSStress">
+      <UniqueIdentifier>{4bcee0db-9556-4bf2-b0f6-453fe51beaca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\LESModel">
+      <UniqueIdentifier>{d24760bb-cc8e-43e7-adf1-33e2d3994103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\lowReOneEqEddy">
+      <UniqueIdentifier>{c6ffe026-d85d-4078-a14b-dc55544aad52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\vanDriestDelta">
+      <UniqueIdentifier>{a21d9863-20aa-466f-8277-27e1d309b1a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\SpalartAllmaras">
+      <UniqueIdentifier>{556dddab-64cb-455d-bb4c-21b6aed89ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\Smagorinsky">
+      <UniqueIdentifier>{7f4f1a81-afaa-4720-ae72-93d887bb4e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\oneEqEddy">
+      <UniqueIdentifier>{09f090f0-5da4-48ec-b177-9fd5e1cd28d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions">
+      <UniqueIdentifier>{55469910-181b-49f8-8246-a25ac32ea354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\alphaSgsWallFunctions">
+      <UniqueIdentifier>{ec71d1c0-5f64-43c8-9457-23b7f1f95141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\muSgsWallFunctions">
+      <UniqueIdentifier>{44b209cc-1605-4853-9486-4d33b80cefa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\alphaSgsWallFunctions\alphaSgsJayatillekeWallFunction">
+      <UniqueIdentifier>{82b8456d-1df9-4c12-beb0-4eb8f51c1193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\alphaSgsWallFunctions\alphaSgsWallFunction">
+      <UniqueIdentifier>{c22baa07-a369-4542-931a-c2d2dc2b64ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\LES\derivedFvPatchFields\wallFunctions\muSgsWallFunctions\muSgsWallFunction">
+      <UniqueIdentifier>{9dc8e0da-dab4-41aa-8442-32e8107b6c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility">
+      <UniqueIdentifier>{280cb80a-dff5-444c-a834-f3610b3eb3fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields">
+      <UniqueIdentifier>{6d729a51-f9a8-42d1-a82f-8a777a033979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions">
+      <UniqueIdentifier>{6e34b815-c847-42eb-b59e-58755f5360cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed">
+      <UniqueIdentifier>{577aa58a-89dc-4053-8143-6569c3b6518a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle">
+      <UniqueIdentifier>{faf4221d-ab30-46ea-96db-efb51c7895ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet">
+      <UniqueIdentifier>{3b540d2e-7b18-4167-8d99-b2e0e683d35e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet">
+      <UniqueIdentifier>{931ae52f-2490-4f6c-bba7-c623370528b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature">
+      <UniqueIdentifier>{3186081b-4d60-4803-aa1f-815a79727ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions">
+      <UniqueIdentifier>{8c9cef09-861d-4722-becd-8587fd49f0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions">
+      <UniqueIdentifier>{33c94297-3b87-4b3a-87e0-207953149a62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions">
+      <UniqueIdentifier>{57c30b2a-24ca-459b-8920-2b55737c3b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions">
+      <UniqueIdentifier>{1fe78840-2641-4e9e-86c6-6146a31ab59b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions">
+      <UniqueIdentifier>{0695ec92-74dc-4e56-a186-40292bb64216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\kEpsilon">
+      <UniqueIdentifier>{911fee03-c812-4488-9025-fbfc7ec8ba0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\kOmegaSST">
+      <UniqueIdentifier>{c7e49a0a-76f6-4463-8edd-37feeb605794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\laminar">
+      <UniqueIdentifier>{63d4a446-9e45-40ab-94db-02a83a2e0d17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM">
+      <UniqueIdentifier>{82dce57d-d7f1-46ed-8894-1ea4cb5d60a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE">
+      <UniqueIdentifier>{d5d07a3c-ce82-4e30-b01f-94f2795e669d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\LRR">
+      <UniqueIdentifier>{78bd62fa-a069-47eb-a58e-2d846203e6b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras">
+      <UniqueIdentifier>{eed8571b-f0f6-4d7a-bb55-12079b6dc48d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon">
+      <UniqueIdentifier>{2add5ed0-fada-4392-b3f7-870c8bcac1ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\realizableKE">
+      <UniqueIdentifier>{e2e99517-88f4-4a46-a114-bd9ad48b71cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\RASModel">
+      <UniqueIdentifier>{1aba1847-472b-40ad-a7c9-f8e14f70bd32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar">
+      <UniqueIdentifier>{f7cc6473-7a45-44f4-8682-8aa767b50860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\incompressible\LES">
+      <UniqueIdentifier>{e4f0daf6-36bd-42f7-b618-dff533f2a59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\incompressible\turbulenceModel">
+      <UniqueIdentifier>{c16d44f0-ba3a-43a6-b114-0bf3a0be17d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\incompressible\RAS">
+      <UniqueIdentifier>{1c7a92bd-d10d-4cd8-b600-de763c261096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions">
+      <UniqueIdentifier>{9910bf50-f762-4604-9ef2-7b9d1745a36d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction">
+      <UniqueIdentifier>{784ce5ba-e326-4911-94fb-2ac10f9d5281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction">
+      <UniqueIdentifier>{3bedd0c2-acc7-4535-a4e6-3c3c9d6967bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction">
+      <UniqueIdentifier>{faa3bf56-70e4-46de-84a9-545a28cc715a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction">
+      <UniqueIdentifier>{ca010a98-dd21-4879-b89d-04e70b7e7a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction">
+      <UniqueIdentifier>{08b83128-1a5b-41bf-bab6-e78ecb867782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction">
+      <UniqueIdentifier>{afe2e229-8298-4114-b8fb-1625731bc032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction">
+      <UniqueIdentifier>{ed18cf17-3c1d-435b-b8c3-5b412a35a9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction">
+      <UniqueIdentifier>{43d36765-fd8b-4009-b325-7b2d1ada2c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction">
+      <UniqueIdentifier>{16de4b97-7646-4e36-877c-8f02a3e727a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction">
+      <UniqueIdentifier>{4de0633d-b8b5-4c2b-9c7b-a13bc39b8b00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction">
+      <UniqueIdentifier>{fd761d8f-b064-4632-b72c-b731808b7d7d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions\backwardsCompatibilityWallFunctions.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature\turbulentHeatFluxTemperatureFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet\turbulentMixingLengthDissipationRateInletFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet\turbulentMixingLengthFrequencyInletFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\turbulentTemperatureCoupledBaffleFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\regionProperties.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed\turbulentTemperatureCoupledBaffleMixedFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction\alphatWallFunctionFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction\epsilonWallFunctionFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchFields.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction\omegaWallFunctionFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel\laminar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction\mutkWallFunctionFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction\mutLowReWallFunctionFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction\mutWallFunctionFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction\mutRoughWallFunctionFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction\mutSpalartAllmsStdRoughWallFuncFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction\mutSptAlmStdWFunFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction\mutSpalartAllmarasWallFuncFvPatchScalarField.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\kEpsilon\compkEpsilon.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\kEpsilon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\RASModel\compRASModel.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\RASModel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\kOmegaSST\compkOmegaSST.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\kOmegaSST</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\laminar\compLaminar.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\laminar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM\compLaunderGibsonRSTM.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE\compLaunderSharmaKE.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\LRR\compLRR.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\LRR</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\realizableKE\compRealizableKE.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\realizableKE</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon\compRNGkEpsilon.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions\backwardsCompatibilityWallFunctions.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions\backwardsCompatibilityWallFunctionsTemplates.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature\turbulentHeatFluxTemperatureFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentHeatFluxTemperature</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet\turbulentMixingLengthDissipationRateInletFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthDissipationRateInlet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet\turbulentMixingLengthFrequencyInletFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentMixingLengthFrequencyInlet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\turbulentTemperatureCoupledBaffleFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle\regionProperties.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed\turbulentTemperatureCoupledBaffleMixedFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\turbulentTemperatureCoupledBaffleMixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction\alphatWallFunctionFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\alphatWallFunctions\alphatWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction\epsilonWallFunctionFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\epsilonWallFunctions\epsilonWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction\kqRWallFunctionFvPatchFields.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\kqRWallFunctions\kqRWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction\omegaWallFunctionFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\omegaWallFunctions\omegaWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel\laminar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction\mutkWallFunctionFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction\mutLowReWallFunctionFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutLowReWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction\mutWallFunctionFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction\mutRoughWallFunctionFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutRoughWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction\mutSpalartAllmsStdRoughWallFuncFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardRoughWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction\mutSptAlmStdWFunFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasStandardWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction\mutSpalartAllmarasWallFuncFvPatchScalarField.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutSpalartAllmarasWallFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\kEpsilon\compkEpsilon.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\kEpsilon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\RASModel\compRASModel.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\RASModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\kOmegaSST\compkOmegaSST.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\kOmegaSST</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\laminar\compLaminar.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\laminar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM\compLaunderGibsonRSTM.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\LaunderGibsonRSTM</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE\compLaunderSharmaKE.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\LaunderSharmaKE</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\LRR\compLRR.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\LRR</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\realizableKE\compRealizableKE.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\realizableKE</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon\compRNGkEpsilon.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
