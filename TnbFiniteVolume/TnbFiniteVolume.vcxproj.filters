@@ -919,6 +919,9 @@
     <Filter Include="TnbLib\FiniteVolume\fvMesh\wallDist\wallPointYPlus">
       <UniqueIdentifier>{d22a3e83-dcca-418e-972f-e9bafe637195}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\FiniteVolume\cfdTools\general\bound">
+      <UniqueIdentifier>{7985afa9-b70c-49a5-a470-18c15ea3648b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.hxx">
@@ -2439,6 +2442,9 @@
     <ClInclude Include="TnbLib\FiniteVolume\fvMesh\wallDist\wallPointYPlus\wallPointYPlusI.hxx">
       <Filter>TnbLib\FiniteVolume\fvMesh\wallDist\wallPointYPlus</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FiniteVolume\cfdTools\general\bound\bound.hxx">
+      <Filter>TnbLib\FiniteVolume\cfdTools\general\bound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\interpolation\interpolation\interpolation.cxx">
@@ -3847,6 +3853,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FiniteVolume\interpolation\surfaceInterpolation\VectorNSurfaceInterpolationSchemes\VectorNSurfaceInterpolationSchemes.cxx">
       <Filter>TnbLib\FiniteVolume\interpolation\surfaceInterpolation\VectorNSurfaceInterpolationSchemes</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FiniteVolume\cfdTools\general\bound\bound.cxx">
+      <Filter>TnbLib\FiniteVolume\cfdTools\general\bound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

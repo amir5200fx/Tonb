@@ -83,6 +83,12 @@
     <Link>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -130,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.hxx" />
+    <ClInclude Include="TnbLib\FiniteVolume\cfdTools\general\bound\bound.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchField.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchFields.hxx" />
     <ClInclude Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\calculated\calculatedFvPatchField.hxx" />
@@ -639,6 +646,7 @@
   <ItemGroup>
     <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystem.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\blockLduSystem\BlockLduSystemOperations.cxx" />
+    <ClCompile Include="TnbLib\FiniteVolume\cfdTools\general\bound\bound.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchField.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchFields.cxx" />
     <ClCompile Include="TnbLib\FiniteVolume\fields\fvPatchFields\basic\basicSymmetry\basicSymmetryFvPatchScalarField.cxx" />
