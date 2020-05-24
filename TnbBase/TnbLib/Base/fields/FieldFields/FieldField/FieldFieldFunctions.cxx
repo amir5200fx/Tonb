@@ -867,13 +867,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 	}
 
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void max(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s)
 	{
 		forAll(f, i) { max(f[i], f1[i], s); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> max(const FieldField<Field, Type>& f1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -881,7 +881,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> max(const tmp<FieldField<Field, Type>>& tf1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));
@@ -890,13 +890,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	} 
 	
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void max(FieldField<Field, Type>& f, const Type& s, const FieldField<Field, Type>& f2)
 	{
 		forAll(f, i) { max(f[i], s, f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> max(const Type& s, const FieldField<Field, Type>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f2));
@@ -904,7 +904,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> max(const Type& s, const tmp<FieldField<Field, Type>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf2));
@@ -913,13 +913,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void min(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s)
 	{
 		forAll(f, i) { min(f[i], f1[i], s); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> min(const FieldField<Field, Type>& f1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -927,7 +927,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> min(const tmp<FieldField<Field, Type>>& tf1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));
@@ -936,13 +936,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	} 
 	
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void min(FieldField<Field, Type>& f, const Type& s, const FieldField<Field, Type>& f2)
 	{
 		forAll(f, i) { min(f[i], s, f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> min(const Type& s, const FieldField<Field, Type>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f2));
@@ -950,7 +950,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> min(const Type& s, const tmp<FieldField<Field, Type>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf2));
@@ -959,13 +959,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void cmptMultiply(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s)
 	{
 		forAll(f, i) { cmptMultiply(f[i], f1[i], s); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptMultiply(const FieldField<Field, Type>& f1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -973,7 +973,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptMultiply(const tmp<FieldField<Field, Type>>& tf1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));
@@ -982,13 +982,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 	
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void cmptMultiply(FieldField<Field, Type>& f, const Type& s, const FieldField<Field, Type>& f2)
 	{
 		forAll(f, i) { cmptMultiply(f[i], s, f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptMultiply(const Type& s, const FieldField<Field, Type>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f2));
@@ -996,7 +996,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptMultiply(const Type& s, const tmp<FieldField<Field, Type>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf2));
@@ -1005,13 +1005,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void cmptDivide(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s)
 	{
 		forAll(f, i) { cmptDivide(f[i], f1[i], s); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptDivide(const FieldField<Field, Type>& f1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -1019,7 +1019,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptDivide(const tmp<FieldField<Field, Type>>& tf1, const Type& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));
@@ -1028,13 +1028,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	} 
 	
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void cmptDivide(FieldField<Field, Type>& f, const Type& s, const FieldField<Field, Type>& f2)
 	{
 		forAll(f, i) { cmptDivide(f[i], s, f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptDivide(const Type& s, const FieldField<Field, Type>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f2));
@@ -1042,7 +1042,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> cmptDivide(const Type& s, const tmp<FieldField<Field, Type>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf2));
@@ -1055,13 +1055,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		/* * * * * * * * * * * * * * * * Global operators  * * * * * * * * * * * * * */
 
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void negate(FieldField<Field, Type>& res, const FieldField<Field, Type>& f)
 	{
 		forAll(res, i) { negate(res[i], f[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator -(const FieldField<Field, Type>& f)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f));
@@ -1069,7 +1069,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator -(const tmp<FieldField<Field, Type>>& tf)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf));
@@ -1080,13 +1080,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 
 #ifndef __INTEL_COMPILER
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void multiply(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, scalar>& f2)
 	{
 		forAll(f, i) { multiply(f[i], f1[i], f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const FieldField<Field, Type>& f1, const FieldField<Field, scalar>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -1094,7 +1094,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, scalar>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, scalar>::New(tf2));
@@ -1103,7 +1103,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, scalar>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));
@@ -1112,7 +1112,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const tmp<FieldField<Field, Type>>& tf1
 	                                        , const tmp<FieldField<Field, scalar>>& tf2)
 	{
@@ -1122,13 +1122,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void multiply(FieldField<Field, Type>& f, const FieldField<Field, scalar>& f1, const FieldField<Field, Type>& f2)
 	{
 		forAll(f, i) { multiply(f[i], f1[i], f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const FieldField<Field, scalar>& f1, const FieldField<Field, Type>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -1136,7 +1136,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const FieldField<Field, scalar>& f1, const tmp<FieldField<Field, Type>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf2));
@@ -1145,7 +1145,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const tmp<FieldField<Field, scalar>>& tf1, const FieldField<Field, Type>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, scalar>::New(tf1));
@@ -1154,7 +1154,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const tmp<FieldField<Field, scalar>>& tf1
 	                                        , const tmp<FieldField<Field, Type>>& tf2)
 	{
@@ -1165,13 +1165,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 	}
 #endif
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void divide(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, scalar>& f2)
 	{
 		forAll(f, i) { divide(f[i], f1[i], f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator /(const FieldField<Field, Type>& f1, const FieldField<Field, scalar>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -1179,7 +1179,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator /(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, scalar>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, scalar>::New(tf2));
@@ -1188,7 +1188,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator /(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, scalar>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));
@@ -1197,7 +1197,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator /(const tmp<FieldField<Field, Type>>& tf1
 	                                        , const tmp<FieldField<Field, scalar>>& tf2)
 	{
@@ -1208,13 +1208,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 	}
 
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void multiply(FieldField<Field, Type>& f, const scalar& s, const FieldField<Field, Type>& f2)
 	{
 		forAll(f, i) { multiply(f[i], s, f2[i]); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const scalar& s, const FieldField<Field, Type>& f2)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f2));
@@ -1222,7 +1222,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const scalar& s, const tmp<FieldField<Field, Type>>& tf2)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf2));
@@ -1231,13 +1231,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void multiply(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const scalar& s)
 	{
 		forAll(f, i) { multiply(f[i], f1[i], s); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const FieldField<Field, Type>& f1, const scalar& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -1245,7 +1245,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator *(const tmp<FieldField<Field, Type>>& tf1, const scalar& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));
@@ -1255,13 +1255,13 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 	}
 
 		
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	void divide(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const scalar& s)
 	{
 		forAll(f, i) { divide(f[i], f1[i], s); }
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator /(const FieldField<Field, Type>& f1, const scalar& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(FieldField<Field, Type>::NewCalculatedType(f1));
@@ -1269,7 +1269,7 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 		return tRes;
 	}
 
-	TEMPLATE
+	template<template<class> class Field, class Type>
 	tmp<FieldField<Field, Type>> operator /(const tmp<FieldField<Field, Type>>& tf1, const scalar& s)
 	{
 		tmp<FieldField<Field, Type>> tRes(reuseTmpFieldField<Field, Type, Type>::New(tf1));

@@ -237,137 +237,137 @@ TMP_UNARY_FUNCTION(returnType, gFunc)
 
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	void max(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> max(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> max(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> max(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> max(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	void min(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> min(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> min(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> min(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> min(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	void cmptMultiply(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> cmptMultiply(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> cmptMultiply(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> cmptMultiply(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> cmptMultiply(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	void cmptDivide(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> cmptDivide(const FieldField<Field, Type>& f1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> cmptDivide(const FieldField<Field, Type>& f1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> cmptDivide(const tmp<FieldField<Field, Type>>& tf1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> cmptDivide(const tmp<FieldField<Field, Type>>& tf1, const tmp<FieldField<Field, Type>>& tf2);
 
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
+	void max(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> max(const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> max(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
+	void max(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const Type& s);
+	tmp<FieldField<Field, Type>> max(const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
+	tmp<FieldField<Field, Type>> max(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
+	void min(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> min(const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> min(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
+	void min(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const Type& s);
+	tmp<FieldField<Field, Type>> min(const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
+	tmp<FieldField<Field, Type>> min(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
+	void cmptMultiply(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> cmptMultiply(const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> cmptMultiply(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
+	void cmptMultiply(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const Type& s);
+	tmp<FieldField<Field, Type>> cmptMultiply(const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
+	tmp<FieldField<Field, Type>> cmptMultiply(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
 		
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
+	void cmptDivide(FieldField<Field, Type>& f, const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const FieldField<Field, Type>& f2);
+	tmp<FieldField<Field, Type>> cmptDivide(const Type& s1, const FieldField<Field, Type>& f2);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
+	tmp<FieldField<Field, Type>> cmptDivide(const Type& s1, const tmp<FieldField<Field, Type>>& tf2);
 
 	template <template<class> class Field, class Type>
-	void func(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
+	void cmptDivide(FieldField<Field, Type>& f, const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const FieldField<Field, Type>& f1, const Type& s);
+	tmp<FieldField<Field, Type>> cmptDivide(const FieldField<Field, Type>& f1, const Type& s);
 
 	template <template<class> class Field, class Type>
-	tmp<FieldField<Field, Type>> func(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
+	tmp<FieldField<Field, Type>> cmptDivide(const tmp<FieldField<Field, Type>>& tf1, const Type& s);
 
 
 		/* * * * * * * * * * * * * * * * Global operators  * * * * * * * * * * * * * */
