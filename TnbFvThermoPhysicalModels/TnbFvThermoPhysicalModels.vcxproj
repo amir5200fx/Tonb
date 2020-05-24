@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{211AC06E-8EFC-48F5-B857-208692819FCB}</ProjectGuid>
+    <RootNamespace>TnbFvThermoPhysicalModels</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\FvThermoPhysicalModels\barotropicCompressibilityModel;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\rhoThermo\basicRhoThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\rhoThermo\hRhoThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\rhoThermo\hsRhoThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\basicPsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\ePsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\hPsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\hsPsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasEThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasHThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\physicalConstants;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\mixtures\basicMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\mixtures\pureMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedEnthalpy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedInternalEnergy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\ggiEnthalpyJump;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientEnthalpy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientInternalEnergy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalPressure;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalTemperature;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedEnthalpy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedInternalEnergy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixingPlaneEnthalpyJump;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\temperatureDirectedInletOutletVelocity;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\wallHeatTransfer;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\basicThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\chemistryModel;$(ProjectDir)TnbLib\FvThermoPhysicalModels\laminarFlameSpeed;$(ProjectDir)TnbLib\FvThermoPhysicalModels\liquidMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\liquids;$(ProjectDir)TnbLib\FvThermoPhysicalModels\pdfs;$(ProjectDir)TnbLib\FvThermoPhysicalModels\radiation;$(ProjectDir)TnbLib\FvThermoPhysicalModels\reactionThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\solidMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\solids;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\atomicWeights;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\aungierRedlichKwong;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\pengRobinson;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\redlichKwong;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\soaveRedlichKwong;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\icoPolynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\perfectGas;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\include;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\ArrheniusReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\ChemicallyActivatedReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\fallOffFunctions\LindemannFallOffFunction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\fallOffFunctions\SRIFallOffFunction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\fallOffFunctions\TroeFallOffFunction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\FallOffReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\JanevReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\LandauTellerReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\LangmuirHinshelwood;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\powerSeries;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\thirdBodyArrheniusReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\thirdBodyEfficiencies;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactions;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\IrreversibleReaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\NonEquilibriumReversibleReaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\Reaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\ReversibleReaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\specie;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\speciesTable;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\eConst;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\hConst;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\hPolynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\janaf;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\constantHeatCapacity;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\nasaHeatCapacityPolynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\realGasSpecieThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\specieThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\const;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\polynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\speciesTransport;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\sutherland;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\APIfunctions;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\NSRDSfunctions;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\thermophysicalFunction;$(SolutionDir)TnbFIniteVolume\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\FvThermoPhysicalModels\barotropicCompressibilityModel;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\rhoThermo\basicRhoThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\rhoThermo\hRhoThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\rhoThermo\hsRhoThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\basicPsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\ePsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\hPsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\hsPsiThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasEThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasHThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\physicalConstants;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\mixtures\basicMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\mixtures\pureMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedEnthalpy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedInternalEnergy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\ggiEnthalpyJump;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientEnthalpy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientInternalEnergy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalPressure;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalTemperature;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedEnthalpy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedInternalEnergy;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixingPlaneEnthalpyJump;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\temperatureDirectedInletOutletVelocity;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\wallHeatTransfer;$(ProjectDir)TnbLib\FvThermoPhysicalModels\basic\basicThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\chemistryModel;$(ProjectDir)TnbLib\FvThermoPhysicalModels\laminarFlameSpeed;$(ProjectDir)TnbLib\FvThermoPhysicalModels\liquidMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\liquids;$(ProjectDir)TnbLib\FvThermoPhysicalModels\pdfs;$(ProjectDir)TnbLib\FvThermoPhysicalModels\radiation;$(ProjectDir)TnbLib\FvThermoPhysicalModels\reactionThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\solidMixture;$(ProjectDir)TnbLib\FvThermoPhysicalModels\solids;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\atomicWeights;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\aungierRedlichKwong;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\pengRobinson;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\redlichKwong;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\soaveRedlichKwong;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\icoPolynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\equationOfState\perfectGas;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\include;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\ArrheniusReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\ChemicallyActivatedReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\fallOffFunctions\LindemannFallOffFunction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\fallOffFunctions\SRIFallOffFunction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\fallOffFunctions\TroeFallOffFunction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\FallOffReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\JanevReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\LandauTellerReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\LangmuirHinshelwood;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\powerSeries;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\thirdBodyArrheniusReactionRate;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionRate\thirdBodyEfficiencies;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactions;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\IrreversibleReaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\NonEquilibriumReversibleReaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\Reaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\reaction\reactionsTemplates\ReversibleReaction;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\specie;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\speciesTable;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\eConst;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\hConst;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\hPolynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\janaf;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\constantHeatCapacity;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\nasaHeatCapacityPolynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\realGasSpecieThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\thermo\specieThermo;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\const;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\polynomial;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\speciesTransport;$(ProjectDir)TnbLib\FvThermoPhysicalModels\specie\transport\sutherland;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\APIfunctions;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\NSRDSfunctions;$(ProjectDir)TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\thermophysicalFunction;$(SolutionDir)TnbFIniteVolume\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\basicThermo\basicThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedEnthalpy\fixedEnthalpyFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedInternalEnergy\fixedInternalEnergyFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\ggiEnthalpyJump\ggiEnthalpyJumpFvPatchField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\ggiEnthalpyJump\ggiEnthalpyJumpFvPatchFields.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\ggiEnthalpyJump\ggiEnthalpyJumpFvPatchFieldsFwd.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientEnthalpy\gradientEnthalpyFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientInternalEnergy\gradientInternalEnergyFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalPressure\isentropicTotalPressureFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalTemperature\isentropicTotalTemperatureFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedEnthalpy\mixedEnthalpyFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedInternalEnergy\mixedInternalEnergyFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixingPlaneEnthalpyJump\mixingPlaneEnthalpyJumpFvPatchField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\temperatureDirectedInletOutletVelocity\temperatureDirectedInletOutletVelocityFvPatchVectorField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\wallHeatTransfer\wallHeatTransferFvPatchScalarField.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo\IAPWS-IF97.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo\IAPWSThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo\steam.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\mixtures\basicMixture\basicMixture.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\mixtures\basicMixture\makeBasicMixture.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\mixtures\pureMixture\pureMixture.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\physicalConstants\physicalConstants.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\basicPsiThermo\basicPsiThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\basicPsiThermo\makeBasicPsiThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\ePsiThermo\ePsiThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\hPsiThermo\hPsiThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\hsPsiThermo\hsPsiThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasEThermo\realGasEThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasHThermo\realGasHThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\atomicWeights\atomicWeights.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\aungierRedlichKwong\aungierRedlichKwong.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\aungierRedlichKwong\aungierRedlichKwongI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\pengRobinson\pengRobinson.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\pengRobinson\pengRobinsonI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\redlichKwong\redlichKwong.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\redlichKwong\redlichKwongI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\soaveRedlichKwong\soaveRedlichKwong.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\soaveRedlichKwong\soaveRedlichKwongI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\icoPolynomial\icoPolynomial.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\icoPolynomial\icoPolynomialI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\perfectGas\perfectGas.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\perfectGas\perfectGasI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\speciesTable\speciesTable.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\speciesTable\speciesTableI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\specie\specie.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\specie\specieI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\eConst\eConstThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\eConst\eConstThermoI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\hConst\hConstThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\hConst\hConstThermoI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\hPolynomial\hPolynomialThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\hPolynomial\hPolynomialThermoI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\janaf\janafThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\janaf\janafThermoI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\constantHeatCapacity\constantHeatCapacity.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\constantHeatCapacity\constantHeatCapacityI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\nasaHeatCapacityPolynomial\nasaHeatCapacityPolynomial.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\nasaHeatCapacityPolynomial\nasaHeatCapacityPolynomialI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\realGasSpecieThermo\realGasSpecieThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\realGasSpecieThermo\realGasSpecieThermoI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\specieThermo\specieThermo.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\thermo\specieThermo\specieThermoI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\transport\const\constTransport.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\transport\const\constTransportI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\transport\polynomial\polynomialTransport.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\transport\polynomial\polynomialTransportI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\transport\sutherland\sutherlandTransport.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\specie\transport\sutherland\sutherlandTransportI.hxx" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\b23.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\backwards.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\backwards_impl.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\common.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\compat.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\config.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region1.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region2.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region3.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region4.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\solver2.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam_ph.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam_pT.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam_pv.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\surftens.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\thcond.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\viscosity.h" />
+    <ClInclude Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\zeroin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\basicThermo\basicThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedEnthalpy\fixedEnthalpyFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\fixedInternalEnergy\fixedInternalEnergyFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\ggiEnthalpyJump\ggiEnthalpyJumpFvPatchField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\ggiEnthalpyJump\ggiEnthalpyJumpFvPatchFields.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientEnthalpy\gradientEnthalpyFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\gradientInternalEnergy\gradientInternalEnergyFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalPressure\isentropicTotalPressureFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\isentropicTotalTemperature\isentropicTotalTemperatureFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedEnthalpy\mixedEnthalpyFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixedInternalEnergy\mixedInternalEnergyFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\mixingPlaneEnthalpyJump\mixingPlaneEnthalpyJumpFvPatchField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\temperatureDirectedInletOutletVelocity\temperatureDirectedInletOutletVelocityFvPatchVectorField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\derivedFvPatchFields\wallHeatTransfer\wallHeatTransferFvPatchScalarField.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo\IAPWS-IF97.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo\IAPWSThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\IAPWS_Waterproperties\IAPWSThermo\IAPWSThermos.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\mixtures\basicMixture\basicMixture.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\mixtures\basicMixture\basicMixtures.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\mixtures\pureMixture\pureMixture.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\physicalConstants\ePsiThermos.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\physicalConstants\physicalConstants.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\basicPsiThermo\basicPsiThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\basicPsiThermo\newBasicPsiThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\ePsiThermo\ePsiThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\hPsiThermo\hPsiThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\hPsiThermo\hPsiThermos.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\hsPsiThermo\hsPsiThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\hsPsiThermo\hsPsiThermos.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasEThermo\realGasEThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasEThermo\realGasEThermos.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasHThermo\realGasHThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\basic\psiThermo\realGasHThermo\realGasHThermos.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\atomicWeights\atomicWeights.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\aungierRedlichKwong\aungierRedlichKwong.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\pengRobinson\pengRobinson.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\redlichKwong\redlichKwong.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\cubicEquationOfState\soaveRedlichKwong\soaveRedlichKwong.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\icoPolynomial\icoPolynomial.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\equationOfState\perfectGas\perfectGas.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\speciesTable\speciesTable.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\specie\specie.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\eConst\eConstThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\hConst\hConstThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\hPolynomial\hPolynomialThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\janaf\janafThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\constantHeatCapacity\constantHeatCapacity.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\nasaHeatCapacityPolynomial\nasaHeatCapacityPolynomial.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\realGasThermo\realGasSpecieThermo\realGasSpecieThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\thermo\specieThermo\specieThermo.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\transport\const\constTransport.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\transport\polynomial\polynomialTransport.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\specie\transport\sutherland\sutherlandTransport.cxx" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\b23.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\backwards.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\common.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region1.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region2.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region3.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\region4.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\solver2.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam_ph.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam_pT.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\steam_pv.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\surftens.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\thcond.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\viscosity.c" />
+    <ClCompile Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\zeroin.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\LICENSE.txt" />
+    <Text Include="TnbLib\FvThermoPhysicalModels\thermophysicalFunctions\freesteam-2.1\README.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
