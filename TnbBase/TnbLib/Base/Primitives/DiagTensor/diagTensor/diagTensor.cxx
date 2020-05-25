@@ -1,33 +1,51 @@
 #include <diagTensor.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-namespace tnbLib
+template<>
+const char* const tnbLib::diagTensor::vsType::typeName = "diagTensor";
+
+template<>
+const char* const tnbLib::diagTensor::vsType::componentNames[] =
 {
+	"xx", "yy", "zz"
+};
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const tnbLib::diagTensor tnbLib::diagTensor::vsType::vsType::zero
+(
+	diagTensor::uniform(0)
+);
 
-	template<>
-	const char* const diagTensor::typeName = "diagTensor";
+template<>
+const tnbLib::diagTensor tnbLib::diagTensor::vsType::one
+(
+	diagTensor::uniform(1)
+);
 
-	template<>
-	const char* diagTensor::componentNames[] = { "xx", "yy", "zz" };
+template<>
+const tnbLib::diagTensor tnbLib::diagTensor::vsType::max
+(
+	diagTensor::uniform(VGREAT)
+);
 
-	template<>
-	const diagTensor diagTensor::zero(0, 0, 0);
+template<>
+const tnbLib::diagTensor tnbLib::diagTensor::vsType::min
+(
+	diagTensor::uniform(-VGREAT)
+);
 
-	template<>
-	const diagTensor diagTensor::one(1, 1, 1);
+template<>
+const tnbLib::diagTensor tnbLib::diagTensor::vsType::rootMax
+(
+	diagTensor::uniform(ROOTVGREAT)
+);
 
-	template<>
-	const diagTensor diagTensor::max(VGREAT, VGREAT, VGREAT);
+template<>
+const tnbLib::diagTensor tnbLib::diagTensor::vsType::rootMin
+(
+	diagTensor::uniform(-ROOTVGREAT)
+);
 
-	template<>
-	const diagTensor diagTensor::min(-VGREAT, -VGREAT, -VGREAT);
-
-
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
 
 // ************************************************************************* //

@@ -1,31 +1,30 @@
 #include <vector.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-namespace tnbLib
-{
+template<>
+const char* const tnbLib::vector::vsType::typeName = "vector";
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const char* const tnbLib::vector::vsType::componentNames[] = { "x", "y", "z" };
 
-	template<>
-	const char* const vector::typeName = "vector";
+template<>
+const tnbLib::vector tnbLib::vector::vsType::vsType::zero(vector::uniform(0));
 
-	template<>
-	const char* vector::componentNames[] = { "x", "y", "z" };
+template<>
+const tnbLib::vector tnbLib::vector::vsType::one(vector::uniform(1));
 
-	template<>
-	const vector vector::zero(0, 0, 0);
+template<>
+const tnbLib::vector tnbLib::vector::vsType::max(vector::uniform(VGREAT));
 
-	template<>
-	const vector vector::one(1, 1, 1);
+template<>
+const tnbLib::vector tnbLib::vector::vsType::min(vector::uniform(-VGREAT));
 
-	template<>
-	const vector vector::max(VGREAT, VGREAT, VGREAT);
+template<>
+const tnbLib::vector tnbLib::vector::vsType::rootMax(vector::uniform(ROOTVGREAT));
 
-	template<>
-	const vector vector::min(-VGREAT, -VGREAT, -VGREAT);
+template<>
+const tnbLib::vector tnbLib::vector::vsType::rootMin(vector::uniform(-ROOTVGREAT));
 
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
+// ************************************************************************* //

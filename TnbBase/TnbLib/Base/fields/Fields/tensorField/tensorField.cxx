@@ -13,133 +13,136 @@ namespace tnbLib
 
 	// * * * * * * * * * * * * * * * Global Functions  * * * * * * * * * * * * * //
 
-	TEMPLATE void tr(Field<scalar>& res, const UList<tensor>& f)
+	void tr(Field<scalar>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::tr, tensor, f)
 	} 
-	TEMPLATE tmp<Field<scalar>> tr(const UList<tensor>& f)
+	tmp<Field<scalar>> tr(const UList<tensor>& f)
 	{
 		tmp<Field<scalar>> tRes(new Field<scalar>(f.size())); tr(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<scalar>> tr(const tmp<Field<tensor>>& tf)
+	tmp<Field<scalar>> tr(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<scalar>> tRes = reuseTmp<scalar, tensor>::New(tf); tr(tRes(), tf()); reuseTmp<scalar, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void sph(Field<sphericalTensor>& res, const UList<tensor>& f)
+	void sph(Field<sphericalTensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(sphericalTensor, res, =, ::tnbLib::sph, tensor, f)
 	} 
-	TEMPLATE tmp<Field<sphericalTensor>> sph(const UList<tensor>& f)
+	tmp<Field<sphericalTensor>> sph(const UList<tensor>& f)
 	{
 		tmp<Field<sphericalTensor>> tRes(new Field<sphericalTensor>(f.size())); sph(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<sphericalTensor>> sph(const tmp<Field<tensor>>& tf)
+	tmp<Field<sphericalTensor>> sph(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<sphericalTensor>> tRes = reuseTmp<sphericalTensor, tensor>::New(tf); sph(tRes(), tf()); reuseTmp<sphericalTensor, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void symm(Field<symmTensor>& res, const UList<tensor>& f)
+	void symm(Field<symmTensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(symmTensor, res, =, ::tnbLib::symm, tensor, f)
 	} 
-	TEMPLATE tmp<Field<symmTensor>> symm(const UList<tensor>& f)
+	tmp<Field<symmTensor>> symm(const UList<tensor>& f)
 	{
 		tmp<Field<symmTensor>> tRes(new Field<symmTensor>(f.size())); symm(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<symmTensor>> symm(const tmp<Field<tensor>>& tf)
+	tmp<Field<symmTensor>> symm(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<symmTensor>> tRes = reuseTmp<symmTensor, tensor>::New(tf); symm(tRes(), tf()); reuseTmp<symmTensor, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void twoSymm(Field<symmTensor>& res, const UList<tensor>& f)
+	void twoSymm(Field<symmTensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(symmTensor, res, =, ::tnbLib::twoSymm, tensor, f)
 	} 
-	TEMPLATE tmp<Field<symmTensor>> twoSymm(const UList<tensor>& f)
+	tmp<Field<symmTensor>> twoSymm(const UList<tensor>& f)
 	{
 		tmp<Field<symmTensor>> tRes(new Field<symmTensor>(f.size())); twoSymm(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<symmTensor>> twoSymm(const tmp<Field<tensor>>& tf)
+	tmp<Field<symmTensor>> twoSymm(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<symmTensor>> tRes = reuseTmp<symmTensor, tensor>::New(tf); twoSymm(tRes(), tf()); reuseTmp<symmTensor, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void skew(Field<tensor>& res, const UList<tensor>& f)
+	void skew(Field<tensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(tensor, res, =, ::tnbLib::skew, tensor, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> skew(const UList<tensor>& f)
+	tmp<Field<tensor>> skew(const UList<tensor>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); skew(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> skew(const tmp<Field<tensor>>& tf)
+	tmp<Field<tensor>> skew(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf); skew(tRes(), tf()); reuseTmp<tensor, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void dev(Field<tensor>& res, const UList<tensor>& f)
+	void dev(Field<tensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(tensor, res, =, ::tnbLib::dev, tensor, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> dev(const UList<tensor>& f)
+	tmp<Field<tensor>> dev(const UList<tensor>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); dev(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> dev(const tmp<Field<tensor>>& tf)
+	tmp<Field<tensor>> dev(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf); dev(tRes(), tf()); reuseTmp<tensor, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void dev2(Field<tensor>& res, const UList<tensor>& f)
+	void dev2(Field<tensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(tensor, res, =, ::tnbLib::dev2, tensor, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> dev2(const UList<tensor>& f)
+	tmp<Field<tensor>> dev2(const UList<tensor>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); dev2(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> dev2(const tmp<Field<tensor>>& tf)
+	tmp<Field<tensor>> dev2(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf); dev2(tRes(), tf()); reuseTmp<tensor, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void det(Field<scalar>& res, const UList<tensor>& f)
+	void det(Field<scalar>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(scalar, res, =, ::tnbLib::det, tensor, f)
 	} 
-	TEMPLATE tmp<Field<scalar>> det(const UList<tensor>& f)
+	tmp<Field<scalar>> det(const UList<tensor>& f)
 	{
 		tmp<Field<scalar>> tRes(new Field<scalar>(f.size())); det(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<scalar>> det(const tmp<Field<tensor>>& tf)
+	tmp<Field<scalar>> det(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<scalar>> tRes = reuseTmp<scalar, tensor>::New(tf); det(tRes(), tf()); reuseTmp<scalar, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void cof(Field<tensor>& res, const UList<tensor>& f)
+	void cof(Field<tensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(tensor, res, =, ::tnbLib::cof, tensor, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> cof(const UList<tensor>& f)
+
+	tmp<Field<tensor>> cof(const UList<tensor>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); cof(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> cof(const tmp<Field<tensor>>& tf)
+
+	tmp<Field<tensor>> cof(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf); cof(tRes(), tf()); reuseTmp<tensor, tensor>::clear(tf); return tRes;
 	}
 
-		
-	TEMPLATE void hinv(Field<tensor>& res, const UList<tensor>& f)
+	void hinv(Field<tensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(tensor, res, =, ::tnbLib::hinv, tensor, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> hinv(const UList<tensor>& f)
+
+	tmp<Field<tensor>> hinv(const UList<tensor>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); hinv(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> hinv(const tmp<Field<tensor>>& tf)
+
+	tmp<Field<tensor>> hinv(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf); hinv(tRes(), tf()); reuseTmp<tensor, tensor>::clear(tf); return tRes;
 	}
@@ -224,55 +227,55 @@ namespace tnbLib
 	}
 
 
-	TEMPLATE void eigenValues(Field<vector>& res, const UList<tensor>& f)
+	void eigenValues(Field<vector>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(vector, res, =, ::tnbLib::eigenValues, tensor, f)
 	} 
-	TEMPLATE tmp<Field<vector>> eigenValues(const UList<tensor>& f)
+	tmp<Field<vector>> eigenValues(const UList<tensor>& f)
 	{
 		tmp<Field<vector>> tRes(new Field<vector>(f.size())); eigenValues(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<vector>> eigenValues(const tmp<Field<tensor>>& tf)
+	tmp<Field<vector>> eigenValues(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<vector>> tRes = reuseTmp<vector, tensor>::New(tf); eigenValues(tRes(), tf()); reuseTmp<vector, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void eigenVectors(Field<tensor>& res, const UList<tensor>& f)
+	void eigenVectors(Field<tensor>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(tensor, res, =, ::tnbLib::eigenVectors, tensor, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> eigenVectors(const UList<tensor>& f)
+	tmp<Field<tensor>> eigenVectors(const UList<tensor>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); eigenVectors(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> eigenVectors(const tmp<Field<tensor>>& tf)
+	tmp<Field<tensor>> eigenVectors(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf); eigenVectors(tRes(), tf()); reuseTmp<tensor, tensor>::clear(tf); return tRes;
 	}
 
 		
-	TEMPLATE void eigenValues(Field<vector>& res, const UList<symmTensor>& f)
+	void eigenValues(Field<vector>& res, const UList<symmTensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(vector, res, =, ::tnbLib::eigenValues, symmTensor, f)
 	} 
-	TEMPLATE tmp<Field<vector>> eigenValues(const UList<symmTensor>& f)
+	tmp<Field<vector>> eigenValues(const UList<symmTensor>& f)
 	{
 		tmp<Field<vector>> tRes(new Field<vector>(f.size())); eigenValues(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<vector>> eigenValues(const tmp<Field<symmTensor>>& tf)
+	tmp<Field<vector>> eigenValues(const tmp<Field<symmTensor>>& tf)
 	{
 		tmp<Field<vector>> tRes = reuseTmp<vector, symmTensor>::New(tf); eigenValues(tRes(), tf()); reuseTmp<vector, symmTensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void eigenVectors(Field<tensor>& res, const UList<symmTensor>& f)
+	void eigenVectors(Field<tensor>& res, const UList<symmTensor>& f)
 	{
 		TFOR_ALL_F_OP_FUNC_F(tensor, res, =, ::tnbLib::eigenVectors, symmTensor, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> eigenVectors(const UList<symmTensor>& f)
+	tmp<Field<tensor>> eigenVectors(const UList<symmTensor>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); eigenVectors(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> eigenVectors(const tmp<Field<symmTensor>>& tf)
+	tmp<Field<tensor>> eigenVectors(const tmp<Field<symmTensor>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, symmTensor>::New(tf); eigenVectors(tRes(), tf()); reuseTmp<tensor, symmTensor>::clear(tf); return tRes;
 	}
@@ -302,48 +305,48 @@ namespace tnbLib
 	}
 
 
-	TEMPLATE void scaleRow ( Field<tensor>& res, const UList<tensor>& f1, const UList<vector>& f2 )
+	void scaleRow ( Field<tensor>& res, const UList<tensor>& f1, const UList<vector>& f2 )
 	{
 		TFOR_ALL_F_OP_FUNC_F_F ( tensor, res, =, ::tnbLib::scaleRow, tensor, f1, vector, f2 )
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const UList<tensor>& f1, const UList<vector>& f2 )
+	tmp<Field<tensor>> scaleRow ( const UList<tensor>& f1, const UList<vector>& f2 )
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f1.size())); scaleRow(tRes(), f1, f2); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const UList<tensor>& f1, const tmp<Field<vector>>& tf2 )
+	tmp<Field<tensor>> scaleRow ( const UList<tensor>& f1, const tmp<Field<vector>>& tf2 )
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, vector>::New(tf2); scaleRow(tRes(), f1, tf2()); reuseTmp<tensor, vector>::clear(tf2); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const tmp<Field<tensor>>& tf1, const UList<vector>& f2 )
+	tmp<Field<tensor>> scaleRow ( const tmp<Field<tensor>>& tf1, const UList<vector>& f2 )
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf1); scaleRow(tRes(), tf1(), f2); reuseTmp<tensor, tensor>::clear(tf1); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const tmp<Field<tensor>>& tf1, const tmp<Field<vector>>& tf2 )
+	tmp<Field<tensor>> scaleRow ( const tmp<Field<tensor>>& tf1, const tmp<Field<vector>>& tf2 )
 	{
 		tmp<Field<tensor>> tRes = reuseTmpTmp<tensor, tensor, tensor, vector>::New(tf1, tf2); scaleRow(tRes(), tf1(), tf2()); reuseTmpTmp<tensor, tensor, tensor, vector>::clear(tf1, tf2); return tRes;
 	}
 		
-	TEMPLATE void scaleRow ( Field<tensor>& res, const tensor& s1, const UList<vector>& f2 )
+	void scaleRow ( Field<tensor>& res, const tensor& s1, const UList<vector>& f2 )
 	{
 		TFOR_ALL_F_OP_FUNC_S_F ( tensor, res, =, ::tnbLib::scaleRow, tensor, s1, vector, f2 )
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const tensor& s1, const UList<vector>& f2 )
+	tmp<Field<tensor>> scaleRow ( const tensor& s1, const UList<vector>& f2 )
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f2.size())); scaleRow(tRes(), s1, f2); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const tensor& s1, const tmp<Field<vector>>& tf2 )
+	tmp<Field<tensor>> scaleRow ( const tensor& s1, const tmp<Field<vector>>& tf2 )
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, vector>::New(tf2); scaleRow(tRes(), s1, tf2()); reuseTmp<tensor, vector>::clear(tf2); return tRes;
 	} 
-	TEMPLATE void scaleRow ( Field<tensor>& res, const UList<tensor>& f1, const vector& s2 )
+	void scaleRow ( Field<tensor>& res, const UList<tensor>& f1, const vector& s2 )
 	{
 		TFOR_ALL_F_OP_FUNC_F_S ( tensor, res, =, ::tnbLib::scaleRow, tensor, f1, vector, s2 )
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const UList<tensor>& f1, const vector& s2 )
+	tmp<Field<tensor>> scaleRow ( const UList<tensor>& f1, const vector& s2 )
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f1.size())); scaleRow(tRes(), f1, s2); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> scaleRow ( const tmp<Field<tensor>>& tf1, const vector& s2 )
+	tmp<Field<tensor>> scaleRow ( const tmp<Field<tensor>>& tf1, const vector& s2 )
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, tensor>::New(tf1); scaleRow(tRes(), tf1(), s2); reuseTmp<tensor, tensor>::clear(tf1); return tRes;
 	}
@@ -352,55 +355,55 @@ namespace tnbLib
 		// * * * * * * * * * * * * * * * Global Operators  * * * * * * * * * * * * * //
 
 		
-	TEMPLATE void hdual(Field<vector>& res, const UList<tensor>& f)
+	void hdual(Field<vector>& res, const UList<tensor>& f)
 	{
 		TFOR_ALL_F_OP_OP_F(vector, res, =, *, tensor, f)
 	} 
-	TEMPLATE tmp<Field<vector>> operator *(const UList<tensor>& f)
+	tmp<Field<vector>> operator *(const UList<tensor>& f)
 	{
 		tmp<Field<vector>> tRes(new Field<vector>(f.size())); hdual(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<vector>> operator *(const tmp<Field<tensor>>& tf)
+	tmp<Field<vector>> operator *(const tmp<Field<tensor>>& tf)
 	{
 		tmp<Field<vector>> tRes = reuseTmp<vector, tensor>::New(tf); hdual(tRes(), tf()); reuseTmp<vector, tensor>::clear(tf); return tRes;
 	}
 		
-	TEMPLATE void hdual(Field<tensor>& res, const UList<vector>& f)
+	void hdual(Field<tensor>& res, const UList<vector>& f)
 	{
 		TFOR_ALL_F_OP_OP_F(tensor, res, =, *, vector, f)
 	} 
-	TEMPLATE tmp<Field<tensor>> operator *(const UList<vector>& f)
+	tmp<Field<tensor>> operator *(const UList<vector>& f)
 	{
 		tmp<Field<tensor>> tRes(new Field<tensor>(f.size())); hdual(tRes(), f); return tRes;
 	} 
-	TEMPLATE tmp<Field<tensor>> operator *(const tmp<Field<vector>>& tf)
+	tmp<Field<tensor>> operator *(const tmp<Field<vector>>& tf)
 	{
 		tmp<Field<tensor>> tRes = reuseTmp<tensor, vector>::New(tf); hdual(tRes(), tf()); reuseTmp<tensor, vector>::clear(tf); return tRes;
 	}
 
 		
-	TEMPLATE void divide ( Field<vector>& res, const UList<vector>& f1, const UList<tensor>& f2 )
+	void divide ( Field<vector>& res, const UList<vector>& f1, const UList<tensor>& f2 )
 	{
 		TFOR_ALL_F_OP_F_OP_F(vector, res, =, vector, f1, /, tensor, f2)
 	} 
-	TEMPLATE tmp<Field<vector>> operator / ( const UList<vector>& f1, const UList<tensor>& f2 )
+	tmp<Field<vector>> operator / ( const UList<vector>& f1, const UList<tensor>& f2 )
 	{
 		tmp<Field<vector>> tRes(new Field<vector>(f1.size())); divide(tRes(), f1, f2); return tRes;
 	} 
-	TEMPLATE tmp<Field<vector>> operator / ( const UList<vector>& f1, const tmp<Field<tensor>>& tf2 )
+	tmp<Field<vector>> operator / ( const UList<vector>& f1, const tmp<Field<tensor>>& tf2 )
 	{
 		tmp<Field<vector>> tRes = reuseTmp<vector, tensor>::New(tf2); divide(tRes(), f1, tf2()); reuseTmp<vector, tensor>::clear(tf2); return tRes;
 	} 
-	TEMPLATE tmp<Field<vector>> operator / ( const tmp<Field<vector>>& tf1, const UList<tensor>& f2 )
+	tmp<Field<vector>> operator / ( const tmp<Field<vector>>& tf1, const UList<tensor>& f2 )
 	{
 		tmp<Field<vector>> tRes = reuseTmp<vector, vector>::New(tf1); divide(tRes(), tf1(), f2); reuseTmp<vector, vector>::clear(tf1); return tRes;
 	} 
-	TEMPLATE tmp<Field<vector>> operator / ( const tmp<Field<vector>>& tf1, const tmp<Field<tensor>>& tf2 )
+	tmp<Field<vector>> operator / ( const tmp<Field<vector>>& tf1, const tmp<Field<tensor>>& tf2 )
 	{
 		tmp<Field<vector>> tRes = reuseTmpTmp<vector, vector, vector, tensor>::New(tf1, tf2); divide(tRes(), tf1(), tf2()); reuseTmpTmp<vector, vector, vector, tensor>::clear(tf1, tf2); return tRes;
 	}
 		
-	TEMPLATE void divide ( Field<vector>& res, const vector& s1, const UList<tensor>& f2 )
+	void divide ( Field<vector>& res, const vector& s1, const UList<tensor>& f2 )
 	{
 		TFOR_ALL_F_OP_S_OP_F(vector, res, =, vector, s1, /, tensor, f2)
 	} 
@@ -408,20 +411,20 @@ namespace tnbLib
 	{
 		tmp<Field<vector>> tRes(new Field<vector>(f2.size())); divide(tRes(), s1, f2); return tRes;
 	} 
-	TEMPLATE 
+	
 	tmp<Field<vector>> operator / ( const vector& s1, const tmp<Field<tensor>>& tf2 )
 	{
 		tmp<Field<vector>> tRes = reuseTmp<vector, tensor>::New(tf2); divide(tRes(), s1, tf2()); reuseTmp<vector, tensor>::clear(tf2); return tRes;
 	}
-	TEMPLATE void divide ( Field<vector>& res, const UList<vector>& f1, const tensor& s2 )
+	void divide ( Field<vector>& res, const UList<vector>& f1, const tensor& s2 )
 	{
 		TFOR_ALL_F_OP_F_OP_S(vector, res, =, vector, f1, /, tensor, s2)
 	} 
-	TEMPLATE tmp<Field<vector>> operator / ( const UList<vector>& f1, const tensor& s2 )
+	tmp<Field<vector>> operator / ( const UList<vector>& f1, const tensor& s2 )
 	{
 		tmp<Field<vector>> tRes(new Field<vector>(f1.size())); divide(tRes(), f1, s2); return tRes;
 	} 
-	TEMPLATE tmp<Field<vector>> operator / ( const tmp<Field<vector>>& tf1, const tensor& s2 )
+	tmp<Field<vector>> operator / ( const tmp<Field<vector>>& tf1, const tensor& s2 )
 	{
 		tmp<Field<vector>> tRes = reuseTmp<vector, vector>::New(tf1); divide(tRes(), tf1(), s2); reuseTmp<vector, vector>::clear(tf1); return tRes;
 	}

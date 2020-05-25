@@ -1,95 +1,101 @@
 #pragma once
 #include <SphericalTensorTemplate.hxx>
 
+// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+template<class Cmpt>
+inline tnbLib::DiagTensor<Cmpt>::DiagTensor()
+{}
+
+
+template<class Cmpt>
+inline tnbLib::DiagTensor<Cmpt>::DiagTensor(const tnbLib::zero)
+	:
+	VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>(Zero)
+{}
+
+
+template<class Cmpt>
+template<class Cmpt2>
+inline tnbLib::DiagTensor<Cmpt>::DiagTensor
+(
+	const VectorSpace<DiagTensor<Cmpt2>, Cmpt2, 3>& vs
+)
+	:
+	VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>(vs)
+{}
+
+
+template<class Cmpt>
+inline tnbLib::DiagTensor<Cmpt>::DiagTensor
+(
+	const Cmpt& vxx,
+	const Cmpt& vyy,
+	const Cmpt& vzz
+)
+{
+	this->v_[XX] = vxx;
+	this->v_[YY] = vyy;
+	this->v_[ZZ] = vzz;
+}
+
+
+template<class Cmpt>
+inline tnbLib::DiagTensor<Cmpt>::DiagTensor(Istream& is)
+	:
+	VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>(is)
+{}
+
+
+// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::DiagTensor<Cmpt>::xx() const
+{
+	return this->v_[XX];
+}
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::DiagTensor<Cmpt>::yy() const
+{
+	return this->v_[YY];
+}
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::DiagTensor<Cmpt>::zz() const
+{
+	return this->v_[ZZ];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::DiagTensor<Cmpt>::xx()
+{
+	return this->v_[XX];
+}
+
+template<class Cmpt>
+inline Cmpt& tnbLib::DiagTensor<Cmpt>::yy()
+{
+	return this->v_[YY];
+}
+
+template<class Cmpt>
+inline Cmpt& tnbLib::DiagTensor<Cmpt>::zz()
+{
+	return this->v_[ZZ];
+}
+
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
 {
 
-	// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
-
-	// Construct null
-	template <class Cmpt>
-	DiagTensor<Cmpt>::DiagTensor()
-	{}
-
-
-	// Construct given VectorSpace
-	template <class Cmpt>
-	DiagTensor<Cmpt>::DiagTensor
-	(
-		const VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>& vs
-	)
-		: VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>(vs)
-	{}
-
-
-	// Construct given three Cmpts
-	template <class Cmpt>
-	DiagTensor<Cmpt>::DiagTensor
-	(
-		const Cmpt& vxx,
-		const Cmpt& vyy,
-		const Cmpt& vzz
-	)
-	{
-		this->v_[XX] = vxx;
-		this->v_[YY] = vyy;
-		this->v_[ZZ] = vzz;
-	}
-
-
-	// Construct from Istream
-	template <class Cmpt>
-	DiagTensor<Cmpt>::DiagTensor(Istream& is)
-		: VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>(is)
-	{}
-
-
-	// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
-
-	template <class Cmpt>
-	const Cmpt&  DiagTensor<Cmpt>::xx() const
-	{
-		return this->v_[XX];
-	}
-
-	template <class Cmpt>
-	const Cmpt&  DiagTensor<Cmpt>::yy() const
-	{
-		return this->v_[YY];
-	}
-
-	template <class Cmpt>
-	const Cmpt&  DiagTensor<Cmpt>::zz() const
-	{
-		return this->v_[ZZ];
-	}
-
-
-	template <class Cmpt>
-	Cmpt& DiagTensor<Cmpt>::xx()
-	{
-		return this->v_[XX];
-	}
-
-	template <class Cmpt>
-	Cmpt& DiagTensor<Cmpt>::yy()
-	{
-		return this->v_[YY];
-	}
-
-	template <class Cmpt>
-	Cmpt& DiagTensor<Cmpt>::zz()
-	{
-		return this->v_[ZZ];
-	}
-
-
 	// * * * * * * * * * * * * * * * Global Operators  * * * * * * * * * * * * * //
 
-	template <class Cmpt>
-	Tensor<Cmpt>
+	template<class Cmpt>
+	inline Tensor<Cmpt>
 		operator+(const DiagTensor<Cmpt>& dt1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -101,8 +107,8 @@ namespace tnbLib
 	}
 
 
-	template <class Cmpt>
-	Tensor<Cmpt>
+	template<class Cmpt>
+	inline Tensor<Cmpt>
 		operator+(const Tensor<Cmpt>& t1, const DiagTensor<Cmpt>& dt2)
 	{
 		return Tensor<Cmpt>
@@ -114,8 +120,8 @@ namespace tnbLib
 	}
 
 
-	template <class Cmpt>
-	Tensor<Cmpt>
+	template<class Cmpt>
+	inline Tensor<Cmpt>
 		operator-(const DiagTensor<Cmpt>& dt1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -127,8 +133,8 @@ namespace tnbLib
 	}
 
 
-	template <class Cmpt>
-	Tensor<Cmpt>
+	template<class Cmpt>
+	inline Tensor<Cmpt>
 		operator-(const Tensor<Cmpt>& t1, const DiagTensor<Cmpt>& dt2)
 	{
 		return Tensor<Cmpt>
@@ -141,8 +147,8 @@ namespace tnbLib
 
 
 	//- Inner-product between two diagonal tensors
-	template <class Cmpt>
-	DiagTensor<Cmpt>
+	template<class Cmpt>
+	inline DiagTensor<Cmpt>
 		operator&(const DiagTensor<Cmpt>& dt1, const DiagTensor<Cmpt>& dt2)
 	{
 		return DiagTensor<Cmpt>
@@ -155,8 +161,8 @@ namespace tnbLib
 
 
 	//- Inner-product between a diagonal tensor and a tensor
-	template <class Cmpt>
-	Tensor<Cmpt>
+	template<class Cmpt>
+	inline Tensor<Cmpt>
 		operator&(const DiagTensor<Cmpt>& dt1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -177,8 +183,8 @@ namespace tnbLib
 
 
 	//- Inner-product between a tensor and a diagonal tensor
-	template <class Cmpt>
-	Tensor<Cmpt>
+	template<class Cmpt>
+	inline Tensor<Cmpt>
 		operator&(const Tensor<Cmpt>& t1, const DiagTensor<Cmpt>& dt2)
 	{
 		return Tensor<Cmpt>
@@ -199,8 +205,8 @@ namespace tnbLib
 
 
 	//- Inner-product between a diagonal tensor and a vector
-	template <class Cmpt>
-	Vector<Cmpt>
+	template<class Cmpt>
+	inline Vector<Cmpt>
 		operator&(const DiagTensor<Cmpt>& dt, const Vector<Cmpt>& v)
 	{
 		return Vector<Cmpt>
@@ -213,8 +219,8 @@ namespace tnbLib
 
 
 	//- Inner-product between a vector and a diagonal tensor
-	template <class Cmpt>
-	Vector<Cmpt>
+	template<class Cmpt>
+	inline Vector<Cmpt>
 		operator&(const Vector<Cmpt>& v, const DiagTensor<Cmpt>& dt)
 	{
 		return Vector<Cmpt>
@@ -227,8 +233,8 @@ namespace tnbLib
 
 
 	//- Division of a scalar by a diagonalTensor
-	template <class Cmpt>
-	DiagTensor<Cmpt>
+	template<class Cmpt>
+	inline DiagTensor<Cmpt>
 		operator/(const scalar s, const DiagTensor<Cmpt>& dt)
 	{
 		return DiagTensor<Cmpt>(s / dt.xx(), s / dt.yy(), s / dt.zz());
@@ -236,8 +242,8 @@ namespace tnbLib
 
 
 	//- Division of a vector by a diagonalTensor
-	template <class Cmpt>
-	Vector<Cmpt>
+	template<class Cmpt>
+	inline Vector<Cmpt>
 		operator/(const Vector<Cmpt> v, const DiagTensor<Cmpt>& dt)
 	{
 		return Vector<Cmpt>(v.x() / dt.xx(), v.y() / dt.yy(), v.z() / dt.zz());
@@ -245,68 +251,51 @@ namespace tnbLib
 
 
 	//- Return the trace of a diagonal tensor
-	template <class Cmpt>
-	Cmpt tr(const DiagTensor<Cmpt>& dt)
+	template<class Cmpt>
+	inline Cmpt tr(const DiagTensor<Cmpt>& dt)
 	{
 		return dt.xx() + dt.yy() + dt.zz();
 	}
 
 
 	//- Return the spherical part of a diagonal tensor
-	template <class Cmpt>
-	SphericalTensor<Cmpt> sph(const DiagTensor<Cmpt>& dt)
+	template<class Cmpt>
+	inline SphericalTensor<Cmpt> sph(const DiagTensor<Cmpt>& dt)
 	{
 		return 0.5*tr(dt);
 	}
 
 
 	//- Return the determinant of a diagonal tensor
-	template <class Cmpt>
-	Cmpt det(const DiagTensor<Cmpt>& t)
+	template<class Cmpt>
+	inline Cmpt det(const DiagTensor<Cmpt>& t)
 	{
 		return t.xx()*t.yy()*t.zz();
 	}
 
 
-	//- Return the inverse of a symmetric tensor
-	template <class Cmpt>
-	DiagTensor<Cmpt> inv(const DiagTensor<Cmpt>& dt)
+	//- Return the inverse of a diagonal tensor
+	template<class Cmpt>
+	inline DiagTensor<Cmpt> inv(const DiagTensor<Cmpt>& dt)
 	{
 		return DiagTensor<Cmpt>(1.0 / dt.xx(), 1.0 / dt.yy(), 1.0 / dt.zz());
 	}
 
 
-	//- Return the diagonal of a tensor as a diagonal tensor
-	template <class Cmpt>
-	DiagTensor<Cmpt> diag(const Tensor<Cmpt>& t)
+	//- Return the diagonal of a symmetric tensor as a diagonal tensor
+	template<class Cmpt>
+	inline DiagTensor<Cmpt> diag(const SymmTensor<Cmpt>& t)
 	{
 		return DiagTensor<Cmpt>(t.xx(), t.yy(), t.zz());
 	}
 
 
+	//- Return the diagonal of a tensor as a diagonal tensor
 	template<class Cmpt>
-	class innerProduct<DiagTensor<Cmpt>, DiagTensor<Cmpt>>
+	inline DiagTensor<Cmpt> diag(const Tensor<Cmpt>& t)
 	{
-	public:
-
-		typedef DiagTensor<Cmpt> type;
-	};
-
-	template<class Cmpt>
-	class outerProduct<DiagTensor<Cmpt>, Cmpt>
-	{
-	public:
-
-		typedef DiagTensor<Cmpt> type;
-	};
-
-	template<class Cmpt>
-	class outerProduct<Cmpt, DiagTensor<Cmpt>>
-	{
-	public:
-
-		typedef DiagTensor<Cmpt> type;
-	};
+		return DiagTensor<Cmpt>(t.xx(), t.yy(), t.zz());
+	}
 
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

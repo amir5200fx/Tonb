@@ -89,6 +89,43 @@ tnbLib::OSstream& tnbLib::IOerror::operator()
 			);
 }
 
+void tnbLib::IOerror::SafeFatalIOError
+(
+	const char* functionName,
+	const char* sourceFileName,
+	const int sourceFileLineNumber,
+	const IOstream& ioStream,
+	const string& msg
+)
+{
+	if (JobInfo::constructed)
+	{
+		FatalIOError
+		(
+			functionName,
+			sourceFileName,
+			sourceFileLineNumber,
+			ioStream
+		) << msg << tnbLib::exit(FatalIOError);
+	}
+	else
+	{
+		std::cerr
+			<< std::endl
+			<< "--> Tnb FATAL IO ERROR:" << std::endl
+			<< msg
+			<< std::endl
+			<< "file: " << ioStream.name()
+			<< " at line " << ioStream.lineNumber() << '.'
+			<< std::endl << std::endl
+			<< "    From function " << functionName
+			<< std::endl
+			<< "    in file " << sourceFileName
+			<< " at line " << sourceFileLineNumber << '.'
+			<< std::endl;
+		::exit(1);
+	}
+}
 
 tnbLib::IOerror::operator tnbLib::dictionary() const
 {

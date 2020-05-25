@@ -221,5 +221,7 @@ tnbLib::messageStream tnbLib::Warning
 
 tnbLib::messageStream tnbLib::Info("", messageStream::INFO);
 
+bool tnbLib::writeInfoHeader = true;
+
 
 // ************************************************************************* //

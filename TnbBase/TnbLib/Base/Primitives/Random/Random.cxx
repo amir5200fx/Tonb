@@ -1,250 +1,84 @@
-//#include <Random.hxx>
-//
-//#include <symmTensor.hxx>
-//
-//#ifdef mingw
-//#   include "rand48.h"
-//#endif
-//
-//// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-//
-//namespace tnbLib
-//{
-//
-//	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-//
-//#if INT_MAX    != 2147483647
-//#    error "INT_MAX    != 2147483647"
-//#    error "The random number generator may not work!"
-//#endif
-//
-//#ifdef USE_RANDOM
-//#   include <climits>
-//#else
-//#   include <cstdlib>
-//#endif
-//
-//
-//// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
-//
-//// construct given seed
-//	Random::Random(const label& seed)
-//	{
-//		if (seed > 1)
-//		{
-//			Seed = seed;
-//		}
-//		else
-//		{
-//			Seed = 1;
-//		}
-//
-//#   ifdef USE_RANDOM
-//		srandom((unsigned int)Seed);
-//#   else
-//		srand48(Seed);
-//#   endif
-//
-//	}
-//
-//
-//	int Random::bit()
-//	{
-//#   ifdef USE_RANDOM
-//		if (random() > INT_MAX / 2)
-//#   else
-//		if (lrand48() > INT_MAX / 2)
-//#   endif
-//		{
-//			return 1;
-//		}
-//		else
-//		{
-//			return 0;
-//		}
-//	}
-//
-//
-//	scalar Random::scalar01()
-//	{
-//#   ifdef USE_RANDOM
-//		return (scalar)random() / INT_MAX;
-//#   else
-//		return drand48();
-//#   endif
-//	}
-//
-//
-//	vector Random::vector01()
-//	{
-//		vector rndVec;
-//		for (direction cmpt = 0; cmpt < vector::nComponents; cmpt++)
-//		{
-//			rndVec.component(cmpt) = scalar01();
-//		}
-//
-//		return rndVec;
-//	}
-//
-//
-//	sphericalTensor Random::sphericalTensor01()
-//	{
-//		sphericalTensor rndTen;
-//		rndTen.ii() = scalar01();
-//
-//		return rndTen;
-//	}
-//
-//
-//	symmTensor Random::symmTensor01()
-//	{
-//		symmTensor rndTen;
-//		for (direction cmpt = 0; cmpt < symmTensor::nComponents; cmpt++)
-//		{
-//			rndTen.component(cmpt) = scalar01();
-//		}
-//
-//		return rndTen;
-//	}
-//
-//
-//	symmTensor4thOrder Random::symmTensor4thOrder01()
-//	{
-//		symmTensor4thOrder rndTen;
-//		for (direction cmpt = 0; cmpt < symmTensor4thOrder::nComponents; cmpt++)
-//		{
-//			rndTen.component(cmpt) = scalar01();
-//		}
-//
-//		return rndTen;
-//	}
-//
-//
-//	diagTensor Random::diagTensor01()
-//	{
-//		diagTensor rndTen;
-//		for (direction cmpt = 0; cmpt < diagTensor::nComponents; cmpt++)
-//		{
-//			rndTen.component(cmpt) = scalar01();
-//		}
-//
-//		return rndTen;
-//	}
-//
-//
-//	tensor Random::tensor01()
-//	{
-//		tensor rndTen;
-//		for (direction cmpt = 0; cmpt < tensor::nComponents; cmpt++)
-//		{
-//			rndTen.component(cmpt) = scalar01();
-//		}
-//
-//		return rndTen;
-//	}
-//
-//
-//	label Random::integer(const label lower, const label upper)
-//	{
-//#   ifdef USE_RANDOM
-//		return lower + (random() % (upper + 1 - lower));
-//#   else
-//		return lower + (lrand48() % (upper + 1 - lower));
-//#   endif
-//	}
-//
-//
-//	vector Random::position(const vector& start, const vector& end)
-//	{
-//		vector rndVec(start);
-//
-//		for (direction cmpt = 0; cmpt < vector::nComponents; cmpt++)
-//		{
-//			rndVec.component(cmpt) +=
-//				scalar01()*(end.component(cmpt) - start.component(cmpt));
-//		}
-//
-//		return rndVec;
-//	}
-//
-//
-//	void Random::randomise(scalar& s)
-//	{
-//		s = scalar01();
-//	}
-//
-//
-//	void Random::randomise(vector& v)
-//	{
-//		v = vector01();
-//	}
-//
-//
-//	void Random::randomise(sphericalTensor& st)
-//	{
-//		st = sphericalTensor01();
-//	}
-//
-//
-//	void Random::randomise(symmTensor& st)
-//	{
-//		st = symmTensor01();
-//	}
-//
-//
-//	void Random::randomise(symmTensor4thOrder& st)
-//	{
-//		st = symmTensor4thOrder01();
-//	}
-//
-//
-//	void Random::randomise(diagTensor& dt)
-//	{
-//		dt = diagTensor01();
-//	}
-//
-//
-//	void Random::randomise(tensor& t)
-//	{
-//		t = tensor01();
-//	}
-//
-//
-//	// return a normal Gaussian randon number
-//	// with zero mean and unity variance N(0, 1)
-//
-//	scalar Random::GaussNormal()
-//	{
-//		static int iset = 0;
-//		static scalar gset;
-//		scalar fac, rsq, v1, v2;
-//
-//		if (iset == 0)
-//		{
-//			do
-//			{
-//				v1 = 2.0*scalar01() - 1.0;
-//				v2 = 2.0*scalar01() - 1.0;
-//				rsq = v1 * v1 + v2 * v2;
-//			} while (rsq >= 1.0 || rsq == 0.0);
-//
-//			fac = sqrt(-2.0 * log(rsq) / rsq);
-//			gset = v1 * fac;
-//			iset = 1;
-//
-//			return v2 * fac;
-//		}
-//		else
-//		{
-//			iset = 0;
-//
-//			return gset;
-//		}
-//	}
-//
-//
-//	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-//
-//} // End namespace tnbLib
-//
-//// ************************************************************************* //
+#include <Random.hxx>
+
+#include <PstreamReduceOps.hxx>
+
+// * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+tnbLib::scalar tnbLib::Random::scalarNormal()
+{
+	// Proper inversion of the distribution. Slow. Exactly maintains
+	// the random behaviour of the generator.
+
+	/*
+	using namespace constant::mathematical;
+
+	static const scalar sqrtTwo = sqrt(scalar(2));
+	static const scalar sqrtPiByTwo = sqrt(pi)/2;
+	static const scalar a = 8*(pi - 3)/(3*pi*(4 - pi));
+
+	const scalar x = 2*scalar01() - 1;
+	const scalar xPos = mag(x);
+
+	// Initial approximation
+	const scalar l = log(1 - sqr(xPos));
+	const scalar ll = 2/(pi*a) + l/2;
+	scalar y = sqrt(sqrt(sqr(ll) - l/a) - ll);
+
+	// Newton improvement
+	label n = 0;
+	while (n < 2)
+	{
+		const scalar dt = (erf(y) - xPos)/exp(- y*y)*sqrtPiByTwo;
+		y -= dt;
+		n += mag(dt) < rootSmall;
+	}
+
+	return sign(x)*sqrtTwo*y;
+	*/
+
+	// Box-Muller transform. Fast. Uses rejection and caching so the
+	// random sequence is not guaranteed.
+
+	if (scalarNormalStored_)
+	{
+		scalarNormalStored_ = false;
+
+		return scalarNormalValue_;
+	}
+	else
+	{
+		scalar x1, x2, rr;
+
+		do
+		{
+			x1 = 2 * scalar01() - 1;
+			x2 = 2 * scalar01() - 1;
+			rr = sqr(x1) + sqr(x2);
+		} while (rr >= 1 || rr == 0);
+
+		const scalar f = sqrt(-2 * log(rr) / rr);
+
+		scalarNormalValue_ = x1 * f;
+		scalarNormalStored_ = true;
+
+		return x2 * f;
+	}
+}
+
+
+tnbLib::scalar tnbLib::Random::globalScalar01()
+{
+	scalar value = -VGREAT;
+
+	if (Pstream::master())
+	{
+		value = scalar01();
+	}
+
+	Pstream::scatter(value);
+
+	return value;
+}
+
+
+// ************************************************************************* //

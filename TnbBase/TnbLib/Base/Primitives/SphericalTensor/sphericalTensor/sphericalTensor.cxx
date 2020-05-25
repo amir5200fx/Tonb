@@ -2,40 +2,57 @@
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-namespace tnbLib
-{
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const char* const tnbLib::sphericalTensor::vsType::typeName = "sphericalTensor";
 
-	template<>
-	const char* const sphericalTensor::typeName = "sphericalTensor";
+template<>
+const char* const tnbLib::sphericalTensor::vsType::componentNames[] = { "ii" };
 
-	template<>
-	const char* sphericalTensor::componentNames[] = { "ii" };
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::vsType::zero
+(
+	sphericalTensor::uniform(0)
+);
 
-	template<>
-	const sphericalTensor sphericalTensor::zero(0);
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::vsType::one
+(
+	sphericalTensor::uniform(1)
+);
 
-	template<>
-	const sphericalTensor sphericalTensor::one(1);
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::vsType::max
+(
+	sphericalTensor::uniform(VGREAT)
+);
 
-	template<>
-	const sphericalTensor sphericalTensor::max(VGREAT);
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::vsType::min
+(
+	sphericalTensor::uniform(-VGREAT)
+);
 
-	template<>
-	const sphericalTensor sphericalTensor::min(-VGREAT);
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::vsType::rootMax
+(
+	sphericalTensor::uniform(ROOTVGREAT)
+);
 
-	template<>
-	const sphericalTensor sphericalTensor::I(1);
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::vsType::rootMin
+(
+	sphericalTensor::uniform(-ROOTVGREAT)
+);
 
-	template<>
-	const sphericalTensor sphericalTensor::oneThirdI(1.0 / 3.0);
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::I(1);
 
-	template<>
-	const sphericalTensor sphericalTensor::twoThirdsI(2.0 / 3.0);
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::oneThirdI(1.0 / 3.0);
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
+template<>
+const tnbLib::sphericalTensor tnbLib::sphericalTensor::twoThirdsI(2.0 / 3.0);
 
 // ************************************************************************* //

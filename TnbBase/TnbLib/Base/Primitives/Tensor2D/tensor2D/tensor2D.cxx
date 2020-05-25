@@ -1,161 +1,161 @@
 #include <tensor2D.hxx>
 
+#include <quadraticEqn.hxx>
 #include <Swap.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+
+template<>
+const char* const tnbLib::tensor2D::vsType::typeName = "tensor2D";
+
+template<>
+const char* const tnbLib::tensor2D::vsType::componentNames[] =
+{
+	"xx", "xy",
+	"yx", "yy"
+};
+
+template<>
+const tnbLib::tensor2D tnbLib::tensor2D::vsType::vsType::zero
+(
+	tensor2D::uniform(0)
+);
+
+template<>
+const tnbLib::tensor2D tnbLib::tensor2D::vsType::one
+(
+	tensor2D::uniform(1)
+);
+
+template<>
+const tnbLib::tensor2D tnbLib::tensor2D::vsType::max
+(
+	tensor2D::uniform(VGREAT)
+);
+
+template<>
+const tnbLib::tensor2D tnbLib::tensor2D::vsType::min
+(
+	tensor2D::uniform(-VGREAT)
+);
+
+template<>
+const tnbLib::tensor2D tnbLib::tensor2D::vsType::rootMax
+(
+	tensor2D::uniform(ROOTVGREAT)
+);
+
+template<>
+const tnbLib::tensor2D tnbLib::tensor2D::vsType::rootMin
+(
+	tensor2D::uniform(-ROOTVGREAT)
+);
+
+template<>
+const tnbLib::tensor2D tnbLib::tensor2D::I
+(
+	1, 0,
+	0, 1
+);
+
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-namespace tnbLib
+tnbLib::vector2D tnbLib::eigenValues(const tensor2D& t)
 {
+	// Coefficients of the characteristic quadratic polynomial (a = 1)
+	const scalar b = -t.xx() - t.yy();
+	const scalar c = t.xx()*t.yy() - t.xy()*t.yx();
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+	// Solve
+	Roots<2> roots = quadraticEqn(1, b, c).roots();
 
-	template<>
-	const char* const tensor2D::typeName = "tensor2D";
-
-	template<>
-	const char* tensor2D::componentNames[] =
+	// Check the root types
+	vector2D lambda = vector2D::zero;
+	for(label i = 0; i < roots.size(); i++)
 	{
-		"xx", "xy",
-		"yx", "yy"
-	};
-
-	template<>
-	const tensor2D tensor2D::zero
-	(
-		0, 0,
-		0, 0
-	);
-
-	template<>
-	const tensor2D tensor2D::one
-	(
-		1, 1,
-		1, 1
-	);
-
-	template<>
-	const tensor2D tensor2D::max
-	(
-		VGREAT, VGREAT,
-		VGREAT, VGREAT
-	);
-
-	template<>
-	const tensor2D tensor2D::min
-	(
-		-VGREAT, -VGREAT,
-		-VGREAT, -VGREAT
-	);
-
-	template<>
-	const tensor2D tensor2D::I
-	(
-		1, 0,
-		0, 1
-	);
-
-
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-	// Return eigenvalues in ascending order of absolute values
-	vector2D eigenValues(const tensor2D& t)
-	{
-		scalar i = 0;
-		scalar ii = 0;
-
-		if (mag(t.xy()) < SMALL && mag(t.yx()) < SMALL)
+		switch (roots.type(i))
 		{
-			i = t.xx();
-			ii = t.yy();
-		}
-		else
-		{
-			scalar mb = t.xx() + t.yy();
-			scalar c = t.xx()*t.yy() - t.xy()*t.yx();
-
-			// If there is a zero root
-			if (mag(c) < SMALL)
-			{
-				i = 0;
-				ii = mb;
-			}
-			else
-			{
-				scalar disc = sqr(mb) - 4 * c;
-
-				if (disc > 0)
-				{
-					scalar q = sqrt(disc);
-
-					i = 0.5*(mb - q);
-					ii = 0.5*(mb + q);
-				}
-				else
-				{
-					FatalErrorIn("eigenValues(const tensor2D&)")
-						<< "zero and complex eigenvalues in tensor2D: " << t
-						<< abort(FatalError);
-				}
-			}
-		}
-
-		// Sort the eigenvalues into ascending order
-		if (mag(i) > mag(ii))
-		{
-			Swap(i, ii);
-		}
-
-		return vector2D(i, ii);
-	}
-
-
-	vector2D eigenVector(const tensor2D& t, const scalar lambda)
-	{
-		if (lambda < SMALL)
-		{
-			return vector2D::zero;
-		}
-
-		if (mag(t.xy()) < SMALL && mag(t.yx()) < SMALL)
-		{
-			if (lambda > min(t.xx(), t.yy()))
-			{
-				return vector2D(1, 0);
-			}
-			else
-			{
-				return vector2D(0, 1);
-			}
-		}
-		else if (mag(t.xy()) < SMALL)
-		{
-			return vector2D(lambda - t.yy(), t.yx());
-		}
-		else
-		{
-			return vector2D(t.xy(), lambda - t.yy());
+		case rootType::real:
+			lambda[i] = roots[i];
+			break;
+		case rootType::complex:
+			WarningInFunction
+				<< "Complex eigenvalues detected for tensor: " << t
+				<< endl;
+			lambda[i] = 0;
+			break;
+		case rootType::posInf:
+			lambda[i] = VGREAT;
+			break;
+		case rootType::negInf:
+			lambda[i] = -VGREAT;
+			break;
+		case rootType::nan:
+			FatalErrorInFunction
+				<< "Eigenvalue calculation failed for tensor: " << t
+				<< exit(FatalError);
 		}
 	}
 
-
-	tensor2D eigenVectors(const tensor2D& t)
+	// Sort the eigenvalues into ascending order
+	if (lambda.x() > lambda.y())
 	{
-		vector2D evals(eigenValues(t));
-
-		tensor2D evs
-		(
-			eigenVector(t, evals.x()),
-			eigenVector(t, evals.y())
-		);
-
-		return evs;
+		Swap(lambda.x(), lambda.y());
 	}
 
+	return lambda;
+}
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-} // End namespace tnbLib
+tnbLib::vector2D tnbLib::eigenVector
+(
+	const tensor2D& T,
+	const scalar lambda,
+	const vector2D& direction1
+)
+{
+	// Construct the linear system for this eigenvalue
+	tensor2D A(T - lambda * tensor2D::I);
+
+	// Evaluate the eigenvector using the largest divisor
+	if (mag(A.yy()) > mag(A.xx()) && mag(A.yy()) > SMALL)
+	{
+		vector2D ev(1, -A.yx() / A.yy());
+
+		return ev / mag(ev);
+	}
+	else if (mag(A.xx()) > SMALL)
+	{
+		vector2D ev(-A.xy() / A.xx(), 1);
+
+		return ev / mag(ev);
+	}
+
+	// Repeated eigenvalue
+	return vector2D(-direction1.y(), direction1.x());
+}
+
+
+tnbLib::tensor2D tnbLib::eigenVectors(const tensor2D& T, const vector2D& lambdas)
+{
+	vector2D Ux(1, 0), Uy(0, 1);
+
+	Ux = eigenVector(T, lambdas.x(), Uy);
+	Uy = eigenVector(T, lambdas.y(), Ux);
+
+	return tensor2D(Ux, Uy);
+}
+
+
+tnbLib::tensor2D tnbLib::eigenVectors(const tensor2D& T)
+{
+	const vector2D lambdas(eigenValues(T));
+
+	return eigenVectors(T, lambdas);
+}
+
 
 // ************************************************************************* //

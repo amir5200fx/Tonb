@@ -1,4 +1,5 @@
 #pragma once
+#include <Identity.hxx>
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 inline tnbLib::pointConstraint::pointConstraint()

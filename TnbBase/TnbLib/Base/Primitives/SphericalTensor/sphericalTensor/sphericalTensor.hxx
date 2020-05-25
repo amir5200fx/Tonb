@@ -16,7 +16,6 @@ namespace tnbLib
 
 	// Global spherical tensor definitions
 
-	static const sphericalTensor I(1);
 	static const sphericalTensor oneThirdI(1.0 / 3.0);
 	static const sphericalTensor twoThirdsI(2.0 / 3.0);
 

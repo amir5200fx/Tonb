@@ -2,6 +2,49 @@
 #ifndef _Random_Header
 #define _Random_Header
 
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+	\\  /    A nd           | Copyright (C) 2018-2019 OpenFOAM Foundation
+	 \\/     M anipulation  |
+-------------------------------------------------------------------------------
+License
+	This file is part of OpenFOAM.
+
+	OpenFOAM is free software: you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenFOAM is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+	for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
+
+Class
+	tnbLib::Random
+
+Description
+	Random number generator
+
+	This is a clone of the drand48 algorithm. This is significantly quicker
+	than drand48, presumably due to the compiler inlining the sampling methods.
+	It is also significantly quicker than the standard library linear
+	congruential engine, as it does not use Schrage's algorithm to prevent
+	overflow.
+
+	See <http://pubs.opengroup.org/onlinepubs/007908775/xsh/drand48.html> for
+	details of the seeding and iteration sequence.
+
+SourceFiles
+	RandomI.H
+
+\*---------------------------------------------------------------------------*/
+
 #include <vector.hxx>
 #include <tensor.hxx>
 #include <symmTensor4thOrder.hxx>
@@ -13,68 +56,112 @@ namespace tnbLib
 {
 
 	/*---------------------------------------------------------------------------*\
-							   Class Random Declaration
+							 Class Random Declaration
 	\*---------------------------------------------------------------------------*/
 
 	class Random
 	{
-		// Private data
+		// Private Typedefs
 
-			//- Seed for random numbers
-		label Seed;
+			//- Working type
+		typedef uint64_t type;
+
+
+		// Private static data
+
+			//- The parameters of the linear congruential iteration
+		static const type A = 0x5DEECE66D, C = 0xB, M = type(1) << 48;
+
+
+		// Private Data
+
+			//- The stored integer
+		type x_;
+
+		//- Is a normal scalar sample stored?
+		bool scalarNormalStored_;
+
+		//- A stored normal scalar sample
+		scalar scalarNormalValue_;
+
+
+		// Private Member Functions
+
+			//- Advance the state and return an integer sample
+		inline type sample();
 
 
 	public:
 
 		// Constructors
 
-			//- Construct given seed
-		Random(const label&);
+			//- Construct from a seed
+		inline Random(const label s);
 
 
-		// Member functions
+		//- Destructor
+		inline ~Random();
 
-			//- Return random bit
-		int bit();
 
-		//- scalar [0..1] (so including 0,1)
-		scalar scalar01();
+		// Member Functions
 
-		//- vector with every component scalar01
-		vector vector01();
+			// Scalars
 
-		//- sphericalTensor with every component scalar01
-		sphericalTensor sphericalTensor01();
+				//- Advance the state and return a scalar sample from a uniform
+				//  distribution between zero and one
+		inline scalar scalar01();
 
-		//- symmTensor with every component scalar01
-		symmTensor symmTensor01();
+		//- Advance the state and return a scalar sample from a uniform
+		//  distribution between two limits
+		inline scalar scalarAB(const scalar a, const scalar b);
 
-		//- symmTensor4thOrder with every component scalar01
-		symmTensor4thOrder symmTensor4thOrder01();
+		//- Advance the state and return a scalar sample from a normal
+		//  distribution with mean zero and standard deviation one
+		scalar scalarNormal();
 
-		//- diagTensor with every component scalar01
-		diagTensor diagTensor01();
 
-		//- tensor with every component scalar01
-		tensor tensor01();
+		// Other types
 
-		//- label [lower..upper]
-		label integer(const label lower, const label upper);
+			//- Advance the state and return a sample of a given type from a
+			//  uniform distribution between zero and one
+		template<class Type>
+		inline Type sample01();
 
-		vector position(const vector&, const vector&);
+		//- Advance the state and return a sample of a given type from a
+		//  uniform distribution between two limits
+		template<class Type>
+		inline Type sampleAB(const Type& a, const Type& b);
 
-		void randomise(scalar&);
-		void randomise(vector&);
-		void randomise(sphericalTensor&);
-		void randomise(symmTensor&);
-		void randomise(symmTensor4thOrder&);
-		void randomise(diagTensor&);
-		void randomise(tensor&);
+		//- Advance the state and return a sample of a given type from a
+		//  normal distribution with mean zero and standard deviation one
+		template<class Type>
+		inline Type sampleNormal();
 
-		//- Return a normal Gaussian random number
-		//  with zero mean and unit variance N(0, 1)
-		scalar GaussNormal();
+
+		// Global scalars
+
+			//- Advance the state and return a scalar sample from a uniform
+			//  distribution between zero and one. Synchronises across all
+			//  cores. Use of this is discouraged. It is expensive and
+			//  introduces non-randomness in all cores other then the master.
+		scalar globalScalar01();
 	};
+
+
+	template<>
+	inline scalar Random::sample01();
+
+	template<>
+	inline label Random::sample01();
+
+	template<>
+	inline scalar Random::sampleAB(const scalar& a, const scalar& b);
+
+	template<>
+	inline label Random::sampleAB(const label& a, const label& b);
+
+	template<>
+	inline scalar Random::sampleNormal();
 
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -82,5 +169,7 @@ namespace tnbLib
 } // End namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include <RandomI.hxx>
 
 #endif // !_Random_Header

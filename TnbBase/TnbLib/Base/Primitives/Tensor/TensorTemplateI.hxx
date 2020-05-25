@@ -3,351 +3,395 @@
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor()
+{}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor(const tnbLib::zero)
+	:
+	Tensor::msType(Zero)
+{}
+
+
+template<class Cmpt>
+template<class Cmpt2>
+inline tnbLib::Tensor<Cmpt>::Tensor
+(
+	const MatrixSpace<Tensor<Cmpt2>, Cmpt2, 3, 3>& vs
+)
+	:
+	Tensor::msType(vs)
+{}
+
+
+template<class Cmpt>
+template<class Cmpt2>
+inline tnbLib::Tensor<Cmpt>::Tensor
+(
+	const VectorSpace<Tensor<Cmpt2>, Cmpt2, 9>& vs
+)
+	:
+	Tensor::msType(vs)
+{}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor(const SphericalTensor<Cmpt>& st)
+{
+	this->v_[XX] = st.ii(); this->v_[XY] = 0; this->v_[XZ] = 0;
+	this->v_[YX] = 0; this->v_[YY] = st.ii(); this->v_[YZ] = 0;
+	this->v_[ZX] = 0; this->v_[ZY] = 0; this->v_[ZZ] = st.ii();
+}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor(const SymmTensor<Cmpt>& st)
+{
+	this->v_[XX] = st.xx(); this->v_[XY] = st.xy(); this->v_[XZ] = st.xz();
+	this->v_[YX] = st.xy(); this->v_[YY] = st.yy(); this->v_[YZ] = st.yz();
+	this->v_[ZX] = st.xz(); this->v_[ZY] = st.yz(); this->v_[ZZ] = st.zz();
+}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor(const Vector<Vector<Cmpt>>& tr)
+{
+	this->v_[XX] = tr.x().x();
+	this->v_[XY] = tr.x().y();
+	this->v_[XZ] = tr.x().z();
+
+	this->v_[YX] = tr.y().x();
+	this->v_[YY] = tr.y().y();
+	this->v_[YZ] = tr.y().z();
+
+	this->v_[ZX] = tr.z().x();
+	this->v_[ZY] = tr.z().y();
+	this->v_[ZZ] = tr.z().z();
+}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor
+(
+	const Vector<Cmpt>& x,
+	const Vector<Cmpt>& y,
+	const Vector<Cmpt>& z
+)
+{
+	this->v_[XX] = x.x(); this->v_[XY] = x.y(); this->v_[XZ] = x.z();
+	this->v_[YX] = y.x(); this->v_[YY] = y.y(); this->v_[YZ] = y.z();
+	this->v_[ZX] = z.x(); this->v_[ZY] = z.y(); this->v_[ZZ] = z.z();
+}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor
+(
+	const Cmpt txx, const Cmpt txy, const Cmpt txz,
+	const Cmpt tyx, const Cmpt tyy, const Cmpt tyz,
+	const Cmpt tzx, const Cmpt tzy, const Cmpt tzz
+)
+{
+	this->v_[XX] = txx; this->v_[XY] = txy; this->v_[XZ] = txz;
+	this->v_[YX] = tyx; this->v_[YY] = tyy; this->v_[YZ] = tyz;
+	this->v_[ZX] = tzx; this->v_[ZY] = tzy; this->v_[ZZ] = tzz;
+}
+
+
+template<class Cmpt>
+template
+<
+	template<class, tnbLib::direction, tnbLib::direction> class Block2,
+	tnbLib::direction BRowStart,
+	tnbLib::direction BColStart
+>
+inline tnbLib::Tensor<Cmpt>::Tensor
+(
+	const Block2<Tensor<Cmpt>, BRowStart, BColStart>& block
+)
+	:
+	Tensor::msType(block)
+{}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt>::Tensor(Istream& is)
+	:
+	Tensor::msType(is)
+{}
+
+
+// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::xx() const
+{
+	return this->v_[XX];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::xy() const
+{
+	return this->v_[XY];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::xz() const
+{
+	return this->v_[XZ];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::yx() const
+{
+	return this->v_[YX];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::yy() const
+{
+	return this->v_[YY];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::yz() const
+{
+	return this->v_[YZ];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::zx() const
+{
+	return this->v_[ZX];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::zy() const
+{
+	return this->v_[ZY];
+}
+
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::Tensor<Cmpt>::zz() const
+{
+	return this->v_[ZZ];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::xx()
+{
+	return this->v_[XX];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::xy()
+{
+	return this->v_[XY];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::xz()
+{
+	return this->v_[XZ];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::yx()
+{
+	return this->v_[YX];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::yy()
+{
+	return this->v_[YY];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::yz()
+{
+	return this->v_[YZ];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::zx()
+{
+	return this->v_[ZX];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::zy()
+{
+	return this->v_[ZY];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::Tensor<Cmpt>::zz()
+{
+	return this->v_[ZZ];
+}
+
+
+template<class Cmpt>
+inline tnbLib::Vector<Cmpt> tnbLib::Tensor<Cmpt>::x() const
+{
+	return Vector<Cmpt>(this->v_[XX], this->v_[XY], this->v_[XZ]);
+}
+
+
+template<class Cmpt>
+inline tnbLib::Vector<Cmpt> tnbLib::Tensor<Cmpt>::y() const
+{
+	return Vector<Cmpt>(this->v_[YX], this->v_[YY], this->v_[YZ]);
+}
+
+
+template<class Cmpt>
+inline tnbLib::Vector<Cmpt> tnbLib::Tensor<Cmpt>::z() const
+{
+	return Vector<Cmpt>(this->v_[ZX], this->v_[ZY], this->v_[ZZ]);
+}
+
+
+template<class Cmpt>
+inline tnbLib::Vector<Cmpt> tnbLib::Tensor<Cmpt>::vectorComponent
+(
+	const direction cmpt
+) const
+{
+	switch (cmpt)
+	{
+	case 0:
+		return x();
+		break;
+	case 1:
+		return y();
+		break;
+	case 2:
+		return z();
+		break;
+	}
+}
+
+
+template<class Cmpt>
+inline tnbLib::Tensor<Cmpt> tnbLib::Tensor<Cmpt>::T() const
+{
+	return Tensor<Cmpt>
+		(
+			xx(), yx(), zx(),
+			xy(), yy(), zy(),
+			xz(), yz(), zz()
+			);
+}
+
+
+// * * * * * * * * * * * * * * * Member Operators  * * * * * * * * * * * * * //
+
+template<class Cmpt>
+inline void tnbLib::Tensor<Cmpt>::operator&=(const Tensor<Cmpt>& t)
+{
+	*this =
+		(
+			Tensor<Cmpt>
+			(
+				this->xx()*t.xx() + this->xy()*t.yx() + this->xz()*t.zx(),
+				this->xx()*t.xy() + this->xy()*t.yy() + this->xz()*t.zy(),
+				this->xx()*t.xz() + this->xy()*t.yz() + this->xz()*t.zz(),
+
+				this->yx()*t.xx() + this->yy()*t.yx() + this->yz()*t.zx(),
+				this->yx()*t.xy() + this->yy()*t.yy() + this->yz()*t.zy(),
+				this->yx()*t.xz() + this->yy()*t.yz() + this->yz()*t.zz(),
+
+				this->zx()*t.xx() + this->zy()*t.yx() + this->zz()*t.zx(),
+				this->zx()*t.xy() + this->zy()*t.yy() + this->zz()*t.zy(),
+				this->zx()*t.xz() + this->zy()*t.yz() + this->zz()*t.zz()
+				)
+			);
+}
+
+
+template<class Cmpt>
+template<class Cmpt2>
+inline void tnbLib::Tensor<Cmpt>::operator=
+(
+	const VectorSpace<Tensor<Cmpt2>, Cmpt2, 9>& vs
+	)
+{
+	VectorSpace<Tensor<Cmpt>, Cmpt, 9>::operator=(vs);
+}
+
+
+template<class Cmpt>
+inline void tnbLib::Tensor<Cmpt>::operator=(const SphericalTensor<Cmpt>& st)
+{
+	this->v_[XX] = st.ii(); this->v_[XY] = 0; this->v_[XZ] = 0;
+	this->v_[YX] = 0; this->v_[YY] = st.ii(); this->v_[YZ] = 0;
+	this->v_[ZX] = 0; this->v_[ZY] = 0; this->v_[ZZ] = st.ii();
+}
+
+
+template<class Cmpt>
+inline void tnbLib::Tensor<Cmpt>::operator=(const SymmTensor<Cmpt>& st)
+{
+	this->v_[XX] = st.xx(); this->v_[XY] = st.xy(); this->v_[XZ] = st.xz();
+	this->v_[YX] = st.xy(); this->v_[YY] = st.yy(); this->v_[YZ] = st.yz();
+	this->v_[ZX] = st.xz(); this->v_[ZY] = st.yz(); this->v_[ZZ] = st.zz();
+}
+
+
+template<class Cmpt>
+inline void tnbLib::Tensor<Cmpt>::operator=(const Vector<Vector<Cmpt>>& tr)
+{
+	this->v_[XX] = tr.x().x();
+	this->v_[XY] = tr.x().y();
+	this->v_[XZ] = tr.x().z();
+
+	this->v_[YX] = tr.y().x();
+	this->v_[YY] = tr.y().y();
+	this->v_[YZ] = tr.y().z();
+
+	this->v_[ZX] = tr.z().x();
+	this->v_[ZY] = tr.z().y();
+	this->v_[ZZ] = tr.z().z();
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
 namespace tnbLib
 {
 
-	// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
-
-	//- Construct null
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor()
-	{}
-
-
-	//- Construct given VectorSpace
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor(const VectorSpace<Tensor<Cmpt>, Cmpt, 9>& vs)
-		: VectorSpace<Tensor<Cmpt>, Cmpt, 9>(vs)
-	{}
-
-
-	//- Construct given SphericalTensor
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor(const SphericalTensor<Cmpt>& st)
-	{
-		this->v_[XX] = st.ii(); this->v_[XY] = 0; this->v_[XZ] = 0;
-		this->v_[YX] = 0; this->v_[YY] = st.ii(); this->v_[YZ] = 0;
-		this->v_[ZX] = 0; this->v_[ZY] = 0; this->v_[ZZ] = st.ii();
-	}
-
-
-	//- Construct given SymmTensor
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor(const SymmTensor<Cmpt>& st)
-	{
-		this->v_[XX] = st.xx(); this->v_[XY] = st.xy(); this->v_[XZ] = st.xz();
-		this->v_[YX] = st.xy(); this->v_[YY] = st.yy(); this->v_[YZ] = st.yz();
-		this->v_[ZX] = st.xz(); this->v_[ZY] = st.yz(); this->v_[ZZ] = st.zz();
-	}
-
-
-	//- Construct from a triad
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor(const Vector<Vector<Cmpt>>& tr)
-	{
-		this->v_[XX] = tr.x().x();
-		this->v_[XY] = tr.x().y();
-		this->v_[XZ] = tr.x().z();
-
-		this->v_[YX] = tr.y().x();
-		this->v_[YY] = tr.y().y();
-		this->v_[YZ] = tr.y().z();
-
-		this->v_[ZX] = tr.z().x();
-		this->v_[ZY] = tr.z().y();
-		this->v_[ZZ] = tr.z().z();
-	}
-
-
-	//- Construct given the three vector components
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor
-	(
-		const Vector<Cmpt>& x,
-		const Vector<Cmpt>& y,
-		const Vector<Cmpt>& z
-	)
-	{
-		this->v_[XX] = x.x(); this->v_[XY] = x.y(); this->v_[XZ] = x.z();
-		this->v_[YX] = y.x(); this->v_[YY] = y.y(); this->v_[YZ] = y.z();
-		this->v_[ZX] = z.x(); this->v_[ZY] = z.y(); this->v_[ZZ] = z.z();
-	}
-
-
-	//- Construct from components
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor
-	(
-		const Cmpt txx, const Cmpt txy, const Cmpt txz,
-		const Cmpt tyx, const Cmpt tyy, const Cmpt tyz,
-		const Cmpt tzx, const Cmpt tzy, const Cmpt tzz
-	)
-	{
-		this->v_[XX] = txx; this->v_[XY] = txy; this->v_[XZ] = txz;
-		this->v_[YX] = tyx; this->v_[YY] = tyy; this->v_[YZ] = tyz;
-		this->v_[ZX] = tzx; this->v_[ZY] = tzy; this->v_[ZZ] = tzz;
-	}
-
-
-	//- Construct from Istream
-	template<class Cmpt>
-	Tensor<Cmpt>::Tensor(Istream& is)
-		: VectorSpace<Tensor<Cmpt>, Cmpt, 9>(is)
-	{}
-
-
-	// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
-
-	template<class Cmpt>
-	Vector<Cmpt> Tensor<Cmpt>::x() const
-	{
-		return Vector<Cmpt>(this->v_[XX], this->v_[XY], this->v_[XZ]);
-	}
-
-
-	template<class Cmpt>
-	Vector<Cmpt> Tensor<Cmpt>::y() const
-	{
-		return Vector<Cmpt>(this->v_[YX], this->v_[YY], this->v_[YZ]);
-	}
-
-
-	template<class Cmpt>
-	Vector<Cmpt>  Tensor<Cmpt>::z() const
-	{
-		return Vector<Cmpt>(this->v_[ZX], this->v_[ZY], this->v_[ZZ]);
-	}
-
-
-	template<class Cmpt>
-	Vector<Cmpt>  Tensor<Cmpt>::vectorComponent(const direction cmpt) const
-	{
-		switch (cmpt)
-		{
-		case 0:
-			return x();
-			break;
-		case 1:
-			return y();
-			break;
-		case 2:
-			return z();
-			break;
-		}
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::xx() const
-	{
-		return this->v_[XX];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::xy() const
-	{
-		return this->v_[XY];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::xz() const
-	{
-		return this->v_[XZ];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::yx() const
-	{
-		return this->v_[YX];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::yy() const
-	{
-		return this->v_[YY];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::yz() const
-	{
-		return this->v_[YZ];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::zx() const
-	{
-		return this->v_[ZX];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::zy() const
-	{
-		return this->v_[ZY];
-	}
-
-
-	template<class Cmpt>
-	const Cmpt&  Tensor<Cmpt>::zz() const
-	{
-		return this->v_[ZZ];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::xx()
-	{
-		return this->v_[XX];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::xy()
-	{
-		return this->v_[XY];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::xz()
-	{
-		return this->v_[XZ];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::yx()
-	{
-		return this->v_[YX];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::yy()
-	{
-		return this->v_[YY];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::yz()
-	{
-		return this->v_[YZ];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::zx()
-	{
-		return this->v_[ZX];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::zy()
-	{
-		return this->v_[ZY];
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::zz()
-	{
-		return this->v_[ZZ];
-	}
-
-
-	//- Return tensor transpose
-	template<class Cmpt>
-	Tensor<Cmpt> Tensor<Cmpt>::T() const
-	{
-		return Tensor<Cmpt>
-			(
-				xx(), yx(), zx(),
-				xy(), yy(), zy(),
-				xz(), yz(), zz()
-				);
-	}
-
-
-	template<class Cmpt>
-	const Cmpt& Tensor<Cmpt>::operator()
-		(
-			const direction i,
-			const direction j
-			) const
-	{
-		return this->operator[](i*Tensor<Cmpt>::dim + j);
-	}
-
-
-	template<class Cmpt>
-	Cmpt& Tensor<Cmpt>::operator()
-		(
-			const direction i,
-			const direction j
-			)
-	{
-		return this->operator[](i*Tensor<Cmpt>::dim + j);
-	}
-
-
-	// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
-
-	template<class Cmpt>
-	void Tensor<Cmpt>::operator=(const SphericalTensor<Cmpt>& st)
-	{
-		this->v_[XX] = st.ii(); this->v_[XY] = 0; this->v_[XZ] = 0;
-		this->v_[YX] = 0; this->v_[YY] = st.ii(); this->v_[YZ] = 0;
-		this->v_[ZX] = 0; this->v_[ZY] = 0; this->v_[ZZ] = st.ii();
-	}
-
-
-	template<class Cmpt>
-	void Tensor<Cmpt>::operator=(const SymmTensor<Cmpt>& st)
-	{
-		this->v_[XX] = st.xx(); this->v_[XY] = st.xy(); this->v_[XZ] = st.xz();
-		this->v_[YX] = st.xy(); this->v_[YY] = st.yy(); this->v_[YZ] = st.yz();
-		this->v_[ZX] = st.xz(); this->v_[ZY] = st.yz(); this->v_[ZZ] = st.zz();
-	}
-
-
-	template<class Cmpt>
-	void Tensor<Cmpt>::operator=(const Vector<Vector<Cmpt>>& tr)
-	{
-		this->v_[XX] = tr.x().x();
-		this->v_[XY] = tr.x().y();
-		this->v_[XZ] = tr.x().z();
-
-		this->v_[YX] = tr.y().x();
-		this->v_[YY] = tr.y().y();
-		this->v_[YZ] = tr.y().z();
-
-		this->v_[ZX] = tr.z().x();
-		this->v_[ZY] = tr.z().y();
-		this->v_[ZZ] = tr.z().z();
-	}
-
-
 	// * * * * * * * * * * * * * * * Global Operators  * * * * * * * * * * * * * //
 
-	//- Hodge Dual operator (tensor -> vector)
 	template<class Cmpt>
-	Vector<Cmpt> operator*(const Tensor<Cmpt>& t)
+	inline Vector<Cmpt> operator*(const Tensor<Cmpt>& t)
 	{
 		return Vector<Cmpt>(t.yz(), -t.xz(), t.xy());
 	}
 
 
-	//- Hodge Dual operator (vector -> tensor)
 	template<class Cmpt>
-	Tensor<Cmpt> operator*(const Vector<Cmpt>& v)
+	inline Tensor<Cmpt> operator*(const Vector<Cmpt>& v)
 	{
 		return Tensor<Cmpt>
 			(
@@ -358,9 +402,8 @@ namespace tnbLib
 	}
 
 
-	//- Inner-product between two tensors
 	template<class Cmpt>
-	typename innerProduct<Tensor<Cmpt>, Tensor<Cmpt>>::type
+	inline typename innerProduct<Tensor<Cmpt>, Tensor<Cmpt>>::type
 		operator&(const Tensor<Cmpt>& t1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -380,9 +423,8 @@ namespace tnbLib
 	}
 
 
-	//- Inner-product between a tensor and a vector
 	template<class Cmpt>
-	typename innerProduct<Tensor<Cmpt>, Vector<Cmpt>>::type
+	inline typename innerProduct<Tensor<Cmpt>, Vector<Cmpt>>::type
 		operator&(const Tensor<Cmpt>& t, const Vector<Cmpt>& v)
 	{
 		return Vector<Cmpt>
@@ -394,9 +436,8 @@ namespace tnbLib
 	}
 
 
-	//- Inner-product between a vector and a tensor
 	template<class Cmpt>
-	typename innerProduct<Vector<Cmpt>, Tensor<Cmpt>>::type
+	inline typename innerProduct<Vector<Cmpt>, Tensor<Cmpt>>::type
 		operator&(const Vector<Cmpt>& v, const Tensor<Cmpt>& t)
 	{
 		return Vector<Cmpt>
@@ -408,9 +449,8 @@ namespace tnbLib
 	}
 
 
-	//- Outer-product between two vectors
 	template<class Cmpt>
-	typename outerProduct<Vector<Cmpt>, Vector<Cmpt>>::type
+	inline typename outerProduct<Vector<Cmpt>, Vector<Cmpt>>::type
 		operator*(const Vector<Cmpt>& v1, const Vector<Cmpt>& v2)
 	{
 		return Tensor<Cmpt>
@@ -422,9 +462,8 @@ namespace tnbLib
 	}
 
 
-	//- Division of a vector by a tensor, i.e. dot-product with the tensor inverse
 	template<class Cmpt>
-	typename innerProduct<Vector<Cmpt>, Tensor<Cmpt>>::type
+	inline typename innerProduct<Vector<Cmpt>, Tensor<Cmpt>>::type
 		operator/(const Vector<Cmpt>& v, const Tensor<Cmpt>& t)
 	{
 		return inv(t) & v;
@@ -435,7 +474,7 @@ namespace tnbLib
 
 	//- Return the trace of a tensor
 	template<class Cmpt>
-	Cmpt tr(const Tensor<Cmpt>& t)
+	inline Cmpt tr(const Tensor<Cmpt>& t)
 	{
 		return t.xx() + t.yy() + t.zz();
 	}
@@ -443,7 +482,7 @@ namespace tnbLib
 
 	//- Return the spherical part of a tensor
 	template<class Cmpt>
-	SphericalTensor<Cmpt> sph(const Tensor<Cmpt>& t)
+	inline SphericalTensor<Cmpt> sph(const Tensor<Cmpt>& t)
 	{
 		return (1.0 / 3.0)*tr(t);
 	}
@@ -451,7 +490,7 @@ namespace tnbLib
 
 	//- Return the symmetric part of a tensor
 	template<class Cmpt>
-	SymmTensor<Cmpt> symm(const Tensor<Cmpt>& t)
+	inline SymmTensor<Cmpt> symm(const Tensor<Cmpt>& t)
 	{
 		return SymmTensor<Cmpt>
 			(
@@ -464,7 +503,7 @@ namespace tnbLib
 
 	//- Return twice the symmetric part of a tensor
 	template<class Cmpt>
-	SymmTensor<Cmpt> twoSymm(const Tensor<Cmpt>& t)
+	inline SymmTensor<Cmpt> twoSymm(const Tensor<Cmpt>& t)
 	{
 		return SymmTensor<Cmpt>
 			(
@@ -477,7 +516,7 @@ namespace tnbLib
 
 	//- Return the skew-symmetric part of a tensor
 	template<class Cmpt>
-	Tensor<Cmpt> skew(const Tensor<Cmpt>& t)
+	inline Tensor<Cmpt> skew(const Tensor<Cmpt>& t)
 	{
 		return Tensor<Cmpt>
 			(
@@ -490,7 +529,7 @@ namespace tnbLib
 
 	//- Return the skew-symmetric part of a symmetric tensor
 	template<class Cmpt>
-	const Tensor<Cmpt>& skew(const SymmTensor<Cmpt>& st)
+	inline const Tensor<Cmpt>& skew(const SymmTensor<Cmpt>& st)
 	{
 		return Tensor<Cmpt>::zero;
 	}
@@ -498,7 +537,7 @@ namespace tnbLib
 
 	//- Return the deviatoric part of a tensor
 	template<class Cmpt>
-	Tensor<Cmpt> dev(const Tensor<Cmpt>& t)
+	inline Tensor<Cmpt> dev(const Tensor<Cmpt>& t)
 	{
 		return t - SphericalTensor<Cmpt>::oneThirdI*tr(t);
 	}
@@ -506,7 +545,7 @@ namespace tnbLib
 
 	//- Return the deviatoric part of a tensor
 	template<class Cmpt>
-	Tensor<Cmpt> dev2(const Tensor<Cmpt>& t)
+	inline Tensor<Cmpt> dev2(const Tensor<Cmpt>& t)
 	{
 		return t - SphericalTensor<Cmpt>::twoThirdsI*tr(t);
 	}
@@ -514,7 +553,7 @@ namespace tnbLib
 
 	//- Return the determinant of a tensor
 	template<class Cmpt>
-	Cmpt det(const Tensor<Cmpt>& t)
+	inline Cmpt det(const Tensor<Cmpt>& t)
 	{
 		return
 			(
@@ -527,7 +566,7 @@ namespace tnbLib
 
 	//- Return the cofactor tensor of a tensor
 	template<class Cmpt>
-	Tensor<Cmpt> cof(const Tensor<Cmpt>& t)
+	inline Tensor<Cmpt> cof(const Tensor<Cmpt>& t)
 	{
 		return Tensor<Cmpt>
 			(
@@ -548,7 +587,7 @@ namespace tnbLib
 
 	//- Return the inverse of a tensor given the determinant
 	template<class Cmpt>
-	Tensor<Cmpt> inv(const Tensor<Cmpt>& t, const Cmpt dett)
+	inline Tensor<Cmpt> inv(const Tensor<Cmpt>& t, const Cmpt dett)
 	{
 		return Tensor<Cmpt>
 			(
@@ -569,15 +608,22 @@ namespace tnbLib
 
 	//- Return the inverse of a tensor
 	template<class Cmpt>
-	Tensor<Cmpt> inv(const Tensor<Cmpt>& t)
+	inline Tensor<Cmpt> inv(const Tensor<Cmpt>& t)
 	{
 		return inv(t, det(t));
 	}
 
 
+	template<class Cmpt>
+	inline Tensor<Cmpt> Tensor<Cmpt>::inv() const
+	{
+		return tnbLib::inv(*this);
+	}
+
+
 	//- Return the 1st invariant of a tensor
 	template<class Cmpt>
-	Cmpt invariantI(const Tensor<Cmpt>& t)
+	inline Cmpt invariantI(const Tensor<Cmpt>& t)
 	{
 		return tr(t);
 	}
@@ -585,32 +631,26 @@ namespace tnbLib
 
 	//- Return the 2nd invariant of a tensor
 	template<class Cmpt>
-	Cmpt invariantII(const Tensor<Cmpt>& t)
+	inline Cmpt invariantII(const Tensor<Cmpt>& t)
 	{
 		return
 			(
-				0.5*sqr(tr(t))
-				- 0.5*
-				(
-					t.xx()*t.xx() + t.xy()*t.xy() + t.xz()*t.xz()
-					+ t.yx()*t.yx() + t.yy()*t.yy() + t.yz()*t.yz()
-					+ t.zx()*t.zx() + t.zy()*t.zy() + t.zz()*t.zz()
-					)
+				t.xx()*t.yy() + t.yy()*t.zz() + t.xx()*t.zz()
+				- t.xy()*t.yx() - t.yz()*t.zy() - t.xz()*t.zx()
 				);
 	}
 
 
 	//- Return the 3rd invariant of a tensor
 	template<class Cmpt>
-	Cmpt invariantIII(const Tensor<Cmpt>& t)
+	inline Cmpt invariantIII(const Tensor<Cmpt>& t)
 	{
 		return det(t);
 	}
 
-
 	// Scale row
 	template <class Cmpt>
-	Tensor<Cmpt> scaleRow(const Tensor<Cmpt>& t, const Vector<Cmpt>& v)
+	inline Tensor<Cmpt> scaleRow(const Tensor<Cmpt>& t, const Vector<Cmpt>& v)
 	{
 		return Tensor<Cmpt>
 			(
@@ -624,7 +664,7 @@ namespace tnbLib
 	// * * * * * * * * * Mixed Tensor SphericalTensor Operators  * * * * * * * * //
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator+(const SphericalTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -637,7 +677,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator+(const Tensor<Cmpt>& t1, const SphericalTensor<Cmpt>& st2)
 	{
 		return Tensor<Cmpt>
@@ -650,7 +690,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator-(const SphericalTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -663,7 +703,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator-(const Tensor<Cmpt>& t1, const SphericalTensor<Cmpt>& st2)
 	{
 		return Tensor<Cmpt>
@@ -677,51 +717,35 @@ namespace tnbLib
 
 	//- Inner-product between a spherical tensor and a tensor
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator&(const SphericalTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
 			(
-				st1.ii()*t2.xx(),
-				st1.ii()*t2.xy(),
-				st1.ii()*t2.xz(),
-
-				st1.ii()*t2.yx(),
-				st1.ii()*t2.yy(),
-				st1.ii()*t2.yz(),
-
-				st1.ii()*t2.zx(),
-				st1.ii()*t2.zy(),
-				st1.ii()*t2.zz()
+				st1.ii()*t2.xx(), st1.ii()*t2.xy(), st1.ii()*t2.xz(),
+				st1.ii()*t2.yx(), st1.ii()*t2.yy(), st1.ii()*t2.yz(),
+				st1.ii()*t2.zx(), st1.ii()*t2.zy(), st1.ii()*t2.zz()
 				);
 	}
 
 
 	//- Inner-product between a tensor and a spherical tensor
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator&(const Tensor<Cmpt>& t1, const SphericalTensor<Cmpt>& st2)
 	{
 		return Tensor<Cmpt>
 			(
-				t1.xx()*st2.ii(),
-				t1.xy()*st2.ii(),
-				t1.xz()*st2.ii(),
-
-				t1.yx()*st2.ii(),
-				t1.yy()*st2.ii(),
-				t1.yz()*st2.ii(),
-
-				t1.zx()*st2.ii(),
-				t1.zy()*st2.ii(),
-				t1.zz()*st2.ii()
+				t1.xx()*st2.ii(), t1.xy()*st2.ii(), t1.xz()*st2.ii(),
+				t1.yx()*st2.ii(), t1.yy()*st2.ii(), t1.yz()*st2.ii(),
+				t1.zx()*st2.ii(), t1.zy()*st2.ii(), t1.zz()*st2.ii()
 				);
 	}
 
 
 	//- Double-dot-product between a spherical tensor and a tensor
 	template<class Cmpt>
-	Cmpt
+	inline Cmpt
 		operator&&(const SphericalTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return(st1.ii()*t2.xx() + st1.ii()*t2.yy() + st1.ii()*t2.zz());
@@ -730,7 +754,7 @@ namespace tnbLib
 
 	//- Double-dot-product between a tensor and a spherical tensor
 	template<class Cmpt>
-	Cmpt
+	inline Cmpt
 		operator&&(const Tensor<Cmpt>& t1, const SphericalTensor<Cmpt>& st2)
 	{
 		return(t1.xx()*st2.ii() + t1.yy()*st2.ii() + t1.zz()*st2.ii());
@@ -776,7 +800,7 @@ namespace tnbLib
 	// * * * * * * * * * * Mixed Tensor SymmTensor Operators * * * * * * * * * * //
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator+(const SymmTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -789,7 +813,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator+(const Tensor<Cmpt>& t1, const SymmTensor<Cmpt>& st2)
 	{
 		return Tensor<Cmpt>
@@ -802,7 +826,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator-(const SymmTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -815,7 +839,7 @@ namespace tnbLib
 
 
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator-(const Tensor<Cmpt>& t1, const SymmTensor<Cmpt>& st2)
 	{
 		return Tensor<Cmpt>
@@ -829,7 +853,7 @@ namespace tnbLib
 
 	//- Inner-product between a symmetric tensor and a tensor
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator&(const SymmTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return Tensor<Cmpt>
@@ -851,7 +875,7 @@ namespace tnbLib
 
 	//- Inner-product between a tensor and a symmetric tensor
 	template<class Cmpt>
-	Tensor<Cmpt>
+	inline Tensor<Cmpt>
 		operator&(const Tensor<Cmpt>& t1, const SymmTensor<Cmpt>& st2)
 	{
 		return Tensor<Cmpt>
@@ -873,7 +897,7 @@ namespace tnbLib
 
 	//- Double-dot-product between a symmetric tensor and a tensor
 	template<class Cmpt>
-	Cmpt
+	inline Cmpt
 		operator&&(const SymmTensor<Cmpt>& st1, const Tensor<Cmpt>& t2)
 	{
 		return
@@ -887,7 +911,7 @@ namespace tnbLib
 
 	//- Double-dot-product between a tensor and a symmetric tensor
 	template<class Cmpt>
-	Cmpt
+	inline Cmpt
 		operator&&(const Tensor<Cmpt>& t1, const SymmTensor<Cmpt>& st2)
 	{
 		return

@@ -1,66 +1,61 @@
 #include <symmTensor.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-namespace tnbLib
+template<>
+const char* const tnbLib::symmTensor::vsType::typeName = "symmTensor";
+
+template<>
+const char* const tnbLib::symmTensor::vsType::componentNames[] =
 {
+	"xx", "xy", "xz",
+		  "yy", "yz",
+				"zz"
+};
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const tnbLib::symmTensor tnbLib::symmTensor::vsType::vsType::zero
+(
+	symmTensor::uniform(0)
+);
 
-	template<>
-	const char* const symmTensor::typeName = "symmTensor";
+template<>
+const tnbLib::symmTensor tnbLib::symmTensor::vsType::one
+(
+	symmTensor::uniform(1)
+);
 
-	template<>
-	const char* symmTensor::componentNames[] =
-	{
-		"xx", "xy", "xz",
-			  "yy", "yz",
-					"zz"
-	};
+template<>
+const tnbLib::symmTensor tnbLib::symmTensor::vsType::max
+(
+	symmTensor::uniform(VGREAT)
+);
 
-	template<>
-	const symmTensor symmTensor::zero
-	(
-		0, 0, 0,
-		0, 0,
-		0
-	);
+template<>
+const tnbLib::symmTensor tnbLib::symmTensor::vsType::min
+(
+	symmTensor::uniform(-VGREAT)
+);
 
-	template<>
-	const symmTensor symmTensor::one
-	(
-		1, 1, 1,
-		1, 1,
-		1
-	);
+template<>
+const tnbLib::symmTensor tnbLib::symmTensor::vsType::rootMax
+(
+	symmTensor::uniform(ROOTVGREAT)
+);
 
-	template<>
-	const symmTensor symmTensor::max
-	(
-		VGREAT, VGREAT, VGREAT,
-		VGREAT, VGREAT,
-		VGREAT
-	);
+template<>
+const tnbLib::symmTensor tnbLib::symmTensor::vsType::rootMin
+(
+	symmTensor::uniform(-ROOTVGREAT)
+);
 
-	template<>
-	const symmTensor symmTensor::min
-	(
-		-VGREAT, -VGREAT, -VGREAT,
-		-VGREAT, -VGREAT,
-		-VGREAT
-	);
+template<>
+const tnbLib::symmTensor tnbLib::symmTensor::I
+(
+	1, 0, 0,
+	1, 0,
+	1
+);
 
-	template<>
-	const symmTensor symmTensor::I
-	(
-		1, 0, 0,
-		1, 0,
-		1
-	);
-
-
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
 
 // ************************************************************************* //

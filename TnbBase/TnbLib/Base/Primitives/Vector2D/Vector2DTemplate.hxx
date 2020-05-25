@@ -13,7 +13,7 @@ namespace tnbLib
 							   Class Vector2D Declaration
 	\*---------------------------------------------------------------------------*/
 
-	template <class Cmpt>
+	template<class Cmpt>
 	class Vector2D
 		:
 		public VectorSpace<Vector2D<Cmpt>, Cmpt, 2>
@@ -21,22 +21,14 @@ namespace tnbLib
 
 	public:
 
+		//- Equivalent type of labels used for valid component indexing
+		typedef Vector2D<label> labelType;
+
+
 		// Member constants
 
-		enum
-		{
-			rank = 1 // Rank of Vector2D is 1
-		};
-
-
-		// Static data members
-
-		static const char* const typeName;
-		static const char* componentNames[];
-		static const Vector2D zero;
-		static const Vector2D one;
-		static const Vector2D max;
-		static const Vector2D min;
+			//- Rank of Vector2D is 1
+		static const direction rank = 1;
 
 
 		//- Component labeling enumeration
@@ -46,45 +38,36 @@ namespace tnbLib
 		// Constructors
 
 			//- Construct null
-		Vector2D();
+		inline Vector2D();
+
+		//- Construct initialized to zero
+		inline Vector2D(const tnbLib::zero);
 
 		//- Construct given VectorSpace
-		Vector2D(const VectorSpace<Vector2D<Cmpt>, Cmpt, 2>&);
+		inline Vector2D(const VectorSpace<Vector2D<Cmpt>, Cmpt, 2>&);
 
 		//- Construct given two components
-		Vector2D(const Cmpt& vx, const Cmpt& vy);
+		inline Vector2D(const Cmpt& vx, const Cmpt& vy);
 
 		//- Construct from Istream
-		Vector2D(Istream&);
+		inline Vector2D(Istream&);
 
 
 		// Member Functions
 
 			// Access
 
-		const Cmpt& x() const;
-		const Cmpt& y() const;
+		inline const Cmpt& x() const;
+		inline const Cmpt& y() const;
 
-		Cmpt& x();
-		Cmpt& y();
-
-		//- Return i-th component.  Consistency with VectorN
-		const Cmpt& operator()
-			(
-				const direction i
-				) const;
-
-		//- Return i-th component.  Consistency with VectorN
-		 Cmpt& operator()
-			(
-				const direction i
-				);
+		inline Cmpt& x();
+		inline Cmpt& y();
 
 
 		// Operators
 
-			//- perp dot product (dot product with perpendicular vector)
-		scalar perp(const Vector2D<Cmpt>& b) const;
+			//- Perp dot product (dot product with perpendicular vector)
+		inline scalar perp(const Vector2D<Cmpt>& b) const;
 	};
 
 

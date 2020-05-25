@@ -1,65 +1,70 @@
 #pragma once
 #include <Vector2DTemplate.hxx>
 
+// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+template<class Cmpt>
+inline tnbLib::SphericalTensor2D<Cmpt>::SphericalTensor2D()
+{}
+
+
+template<class Cmpt>
+inline tnbLib::SphericalTensor2D<Cmpt>::SphericalTensor2D(const tnbLib::zero)
+	:
+	SphericalTensor2D::vsType(Zero)
+{}
+
+
+template<class Cmpt>
+inline tnbLib::SphericalTensor2D<Cmpt>::SphericalTensor2D
+(
+	const VectorSpace<SphericalTensor2D<Cmpt>, Cmpt, 1>& vs
+)
+	:
+	SphericalTensor2D::vsType(vs)
+{}
+
+
+template<class Cmpt>
+inline tnbLib::SphericalTensor2D<Cmpt>::SphericalTensor2D(const Cmpt& stii)
+{
+	this->v_[II] = stii;
+}
+
+
+template<class Cmpt>
+inline tnbLib::SphericalTensor2D<Cmpt>::SphericalTensor2D(Istream& is)
+	:
+	SphericalTensor2D::vsType(is)
+{}
+
+
+// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
+
+template<class Cmpt>
+inline const Cmpt& tnbLib::SphericalTensor2D<Cmpt>::ii() const
+{
+	return this->v_[II];
+}
+
+
+template<class Cmpt>
+inline Cmpt& tnbLib::SphericalTensor2D<Cmpt>::ii()
+{
+	return this->v_[II];
+}
+
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace tnbLib
 {
 
-	// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
-
-	// Construct null
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt>::SphericalTensor2D()
-	{}
-
-
-	// Construct given VectorSpace
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt>::SphericalTensor2D
-	(
-		const VectorSpace<SphericalTensor2D<Cmpt>, Cmpt, 1>& vs
-	)
-		: VectorSpace<SphericalTensor2D<Cmpt>, Cmpt, 1>(vs)
-	{}
-
-
-	// Construct given three Cmpts
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt>::SphericalTensor2D(const Cmpt& stii)
-	{
-		this->v_[II] = stii;
-	}
-
-
-	// Construct from Istream
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt>::SphericalTensor2D(Istream& is)
-		: VectorSpace<SphericalTensor2D<Cmpt>, Cmpt, 1>(is)
-	{}
-
-
-	// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
-
-	template <class Cmpt>
-	const Cmpt&  SphericalTensor2D<Cmpt>::ii() const
-	{
-		return this->v_[II];
-	}
-
-
-	template <class Cmpt>
-	Cmpt& SphericalTensor2D<Cmpt>::ii()
-	{
-		return this->v_[II];
-	}
-
-
 	// * * * * * * * * * * * * * * * Global Operators  * * * * * * * * * * * * * //
 
 	//- Inner-product between two spherical tensors
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt>
+	template<class Cmpt>
+	inline SphericalTensor2D<Cmpt>
 		operator&
 		(
 			const SphericalTensor2D<Cmpt>& st1,
@@ -71,8 +76,8 @@ namespace tnbLib
 
 
 	//- Inner-product between a spherical tensor and a vector
-	template <class Cmpt>
-	Vector2D<Cmpt>
+	template<class Cmpt>
+	inline Vector2D<Cmpt>
 		operator&(const SphericalTensor2D<Cmpt>& st, const Vector2D<Cmpt>& v)
 	{
 		return Vector2D<Cmpt>
@@ -84,8 +89,8 @@ namespace tnbLib
 
 
 	//- Inner-product between a vector and a spherical tensor
-	template <class Cmpt>
-	Vector2D<Cmpt>
+	template<class Cmpt>
+	inline Vector2D<Cmpt>
 		operator&(const Vector2D<Cmpt>& v, const SphericalTensor2D<Cmpt>& st)
 	{
 		return Vector2D<Cmpt>
@@ -97,8 +102,8 @@ namespace tnbLib
 
 
 	//- Division of a scalar by a sphericalTensor2D
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt>
+	template<class Cmpt>
+	inline SphericalTensor2D<Cmpt>
 		operator/(const scalar s, const SphericalTensor2D<Cmpt>& st)
 	{
 		return SphericalTensor2D<Cmpt>(s / st.ii());
@@ -106,32 +111,32 @@ namespace tnbLib
 
 
 	//- Return the trace of a spherical tensor
-	template <class Cmpt>
-	Cmpt tr(const SphericalTensor2D<Cmpt>& st)
+	template<class Cmpt>
+	inline Cmpt tr(const SphericalTensor2D<Cmpt>& st)
 	{
 		return 2 * st.ii();
 	}
 
 
 	//- Return the spherical part of a spherical tensor, i.e. itself
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt> sph(const SphericalTensor2D<Cmpt>& st)
+	template<class Cmpt>
+	inline SphericalTensor2D<Cmpt> sph(const SphericalTensor2D<Cmpt>& st)
 	{
 		return st;
 	}
 
 
 	//- Return the determinant of a spherical tensor
-	template <class Cmpt>
-	Cmpt det(const SphericalTensor2D<Cmpt>& st)
+	template<class Cmpt>
+	inline Cmpt det(const SphericalTensor2D<Cmpt>& st)
 	{
 		return st.ii()*st.ii();
 	}
 
 
 	//- Return the inverse of a symmetric tensor
-	template <class Cmpt>
-	SphericalTensor2D<Cmpt> inv(const SphericalTensor2D<Cmpt>& st)
+	template<class Cmpt>
+	inline SphericalTensor2D<Cmpt> inv(const SphericalTensor2D<Cmpt>& st)
 	{
 		return SphericalTensor2D<Cmpt>(1.0 / st.ii());
 	}

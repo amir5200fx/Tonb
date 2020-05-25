@@ -2,6 +2,43 @@
 #ifndef _Tensor2DTemplate_Header
 #define _Tensor2DTemplate_Header
 
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+	\\  /    A nd           | Copyright (C) 2011-2019 OpenFOAM Foundation
+	 \\/     M anipulation  |
+-------------------------------------------------------------------------------
+License
+	This file is part of OpenFOAM.
+
+	OpenFOAM is free software: you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenFOAM is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+	for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
+
+Class
+	tnbLib::Tensor2D
+
+Description
+	Templated 2D tensor derived from VectorSpace adding construction from
+	4 components, element access using xx(), xy(), yx() and yy() member
+	functions and the iner-product (dot-product) and outer-product of two
+	Vector2Ds (tensor-product) operators.
+
+SourceFiles
+	Tensor2DI.H
+
+\*---------------------------------------------------------------------------*/
+
 #include <Vector2DTemplate.hxx>
 #include <SphericalTensor2DTemplate.hxx>
 
@@ -25,23 +62,18 @@ namespace tnbLib
 
 	public:
 
+		//- Equivalent type of labels used for valid component indexing
+		typedef Tensor2D<label> labelType;
+
+
 		// Member constants
 
-		enum
-		{
-			rank = 2 // Rank of Tensor2D is 2
-		};
+			//- Rank of Tensor2D is 2
+		static const direction rank = 2;
 
 
-		// Static data members
+		// Static Data Members
 
-		static const char* const typeName;
-		static const char* componentNames[];
-
-		static const Tensor2D zero;
-		static const Tensor2D one;
-		static const Tensor2D max;
-		static const Tensor2D min;
 		static const Tensor2D I;
 
 
@@ -52,26 +84,29 @@ namespace tnbLib
 		// Constructors
 
 			//- Construct null
-		Tensor2D();
+		inline Tensor2D();
+
+		//- Construct initialized to zero
+		inline Tensor2D(const tnbLib::zero);
 
 		//- Construct given VectorSpace
-		Tensor2D(const VectorSpace<Tensor2D<Cmpt>, Cmpt, 4>&);
+		inline Tensor2D(const VectorSpace<Tensor2D<Cmpt>, Cmpt, 4>&);
 
 		//- Construct given SymmTensor2D
-		Tensor2D(const SymmTensor2D<Cmpt>&);
+		inline Tensor2D(const SymmTensor2D<Cmpt>&);
 
 		//- Construct given SphericalTensor2D
-		Tensor2D(const SphericalTensor2D<Cmpt>&);
+		inline Tensor2D(const SphericalTensor2D<Cmpt>&);
 
 		//- Construct given the two vectors
-		Tensor2D
+		inline Tensor2D
 		(
 			const Vector2D<Cmpt>& x,
 			const Vector2D<Cmpt>& y
 		);
 
 		//- Construct given the four components
-		Tensor2D
+		inline Tensor2D
 		(
 			const Cmpt txx, const Cmpt txy,
 			const Cmpt tyx, const Cmpt tyy
@@ -85,47 +120,32 @@ namespace tnbLib
 
 			// Access
 
-		const Cmpt& xx() const;
-		const Cmpt& xy() const;
-		const Cmpt& yx() const;
-		const Cmpt& yy() const;
+		inline const Cmpt& xx() const;
+		inline const Cmpt& xy() const;
+		inline const Cmpt& yx() const;
+		inline const Cmpt& yy() const;
 
-		Cmpt& xx();
-		Cmpt& xy();
-		Cmpt& yx();
-		Cmpt& yy();
+		inline Cmpt& xx();
+		inline Cmpt& xy();
+		inline Cmpt& yx();
+		inline Cmpt& yy();
 
 		// Access vector components.
 
-		Vector2D<Cmpt> x() const;
-		Vector2D<Cmpt> y() const;
-
-		//- Return (i, j) component.  Consistency with VectorN
-		const Cmpt& operator()
-			(
-				const direction i,
-				const direction j
-				) const;
-
-		//- Return access to (i, j) component.  Consistency with VectorN
-		Cmpt& operator()
-			(
-				const direction i,
-				const direction j
-				);
-
+		inline Vector2D<Cmpt> x() const;
+		inline Vector2D<Cmpt> y() const;
 
 		//- Transpose
-		Tensor2D<Cmpt> T() const;
+		inline Tensor2D<Cmpt> T() const;
 
 
 		// Member Operators
 
 			//- Copy SymmTensor2D
-		void operator=(const SymmTensor2D<Cmpt>&);
+		inline void operator=(const SymmTensor2D<Cmpt>&);
 
 		//- Copy SphericalTensor2D
-		void operator=(const SphericalTensor2D<Cmpt>&);
+		inline void operator=(const SphericalTensor2D<Cmpt>&);
 	};
 
 

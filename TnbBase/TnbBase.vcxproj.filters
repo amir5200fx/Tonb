@@ -16,9 +16,6 @@
     <Filter Include="TnbLib\Base\Primitives\bools">
       <UniqueIdentifier>{36dd218f-33f0-4d45-b121-460626d34329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Base\Primitives\char">
-      <UniqueIdentifier>{8650dbbb-00a1-430f-8d0b-ea4cfa9f82e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Base\Primitives\complex">
       <UniqueIdentifier>{47ff6d0d-213a-44a6-bc25-a7f3d0c47cff}</UniqueIdentifier>
     </Filter>
@@ -1750,6 +1747,54 @@
     <Filter Include="TnbLib\Base\meshes\Identifiers\patch">
       <UniqueIdentifier>{d9525ca5-2eba-4faa-a45c-e485e7a95c76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Primitives\chars">
+      <UniqueIdentifier>{e4a4897f-e735-435f-a825-6f91532cc4ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\chars\char">
+      <UniqueIdentifier>{d890543f-fac4-4668-82ea-0715a967c9f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\chars\wchar">
+      <UniqueIdentifier>{7357e7c1-b8d3-4e16-a0d0-5154081b4985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Barycentric">
+      <UniqueIdentifier>{3a2965ba-e2c5-4d6e-9243-093437e9f2fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Barycentric2D">
+      <UniqueIdentifier>{da30c996-fa34-44a8-afdf-7840d1b601e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Barycentric\barycentric">
+      <UniqueIdentifier>{4aa14b68-3fd7-47f6-88f9-a38ae90566d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Barycentric\barycentricTensor">
+      <UniqueIdentifier>{02b01e68-c177-4c18-af63-88f249eb6f4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\MatrixSpace">
+      <UniqueIdentifier>{5c5106b3-c05a-4715-bde7-cead6b606204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\polynomialEqns">
+      <UniqueIdentifier>{ef83e311-39cf-487c-aefd-2ac81364938a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\polynomialEqns\linearEqn">
+      <UniqueIdentifier>{fb5a3f09-b058-48ec-a475-b0d7893e0f33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\polynomialEqns\cubicEqn">
+      <UniqueIdentifier>{d87c0c49-070f-486a-9c5b-73fd89196823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\polynomialEqns\quadraticEqn">
+      <UniqueIdentifier>{0457fb89-b9c9-47b5-988a-3de361bbfb96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Tensor\floatTensor">
+      <UniqueIdentifier>{e28dbfbe-5e45-4ca0-b632-ddac28736874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\SymmTensor2D\symmTensor2D">
+      <UniqueIdentifier>{a5903164-8fd9-44bd-9cd9-0a385a9e2265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\strings\stringOps">
+      <UniqueIdentifier>{c1c6f6a4-6f71-4106-a269-e99bb94b9ffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Primitives\Vector\floatVector">
+      <UniqueIdentifier>{e3184b2e-9434-419d-944a-07d185c603b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -1772,9 +1817,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Base\Primitives\bools\bool\bool.hxx">
       <Filter>TnbLib\Base\Primitives\bools\bool</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Base\Primitives\char\char.hxx">
-      <Filter>TnbLib\Base\Primitives\char</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Base\Primitives\hashes\Hasher\Hasher.hxx">
       <Filter>TnbLib\Base\Primitives\hashes\Hasher</Filter>
@@ -4794,6 +4836,72 @@
     <ClInclude Include="TnbLib\Base\fields\Fields\Field\FieldI.hxx">
       <Filter>TnbLib\Base\fields\Fields\Field</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\chars\char\char.hxx">
+      <Filter>TnbLib\Base\Primitives\chars\char</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\chars\wchar\wchar.hxx">
+      <Filter>TnbLib\Base\Primitives\chars\wchar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Barycentric\Barycentric.hxx">
+      <Filter>TnbLib\Base\Primitives\Barycentric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Barycentric\BarycentricI.hxx">
+      <Filter>TnbLib\Base\Primitives\Barycentric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Barycentric\BarycentricTensor.hxx">
+      <Filter>TnbLib\Base\Primitives\Barycentric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Barycentric\BarycentricTensorI.hxx">
+      <Filter>TnbLib\Base\Primitives\Barycentric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\MatrixSpace\MatrixSpace.hxx">
+      <Filter>TnbLib\Base\Primitives\MatrixSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\MatrixSpace\MatrixSpaceI.hxx">
+      <Filter>TnbLib\Base\Primitives\MatrixSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\Roots.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\RootsI.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\linearEqn\linearEqn.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\linearEqn</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\linearEqn\linearEqnI.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\linearEqn</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\quadraticEqn\quadraticEqn.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\quadraticEqn</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\quadraticEqn\quadraticEqnI.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\quadraticEqn</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\cubicEqn\cubicEqn.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\cubicEqn</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\polynomialEqns\cubicEqn\cubicEqnI.hxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\cubicEqn</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Tensor\floatTensor\floatTensor.hxx">
+      <Filter>TnbLib\Base\Primitives\Tensor\floatTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SymmTensor2D\symmTensor2D\symmTensor2D.hxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor2D\symmTensor2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\strings\stringOps\stringOps.hxx">
+      <Filter>TnbLib\Base\Primitives\strings\stringOps</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\SphericalTensor\Identity.hxx">
+      <Filter>TnbLib\Base\Primitives\SphericalTensor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Vector\floatVector\floatVector.hxx">
+      <Filter>TnbLib\Base\Primitives\Vector\floatVector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Primitives\Random\RandomI.hxx">
+      <Filter>TnbLib\Base\Primitives\random</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -5326,9 +5434,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\VectorN\vector2\diagTensor2.cxx">
       <Filter>TnbLib\Base\Primitives\VectorN\vector2</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\Primitives\char\charIO.cxx">
-      <Filter>TnbLib\Base\Primitives\char</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Primitives\ints\longLong\longLongIO.cxx">
       <Filter>TnbLib\Base\Primitives\ints\longLong</Filter>
@@ -7081,6 +7186,42 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\global\Global_Message.cxx">
       <Filter>TnbLib\Base\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\chars\char\charIO.cxx">
+      <Filter>TnbLib\Base\Primitives\chars\char</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\chars\wchar\wcharIO.cxx">
+      <Filter>TnbLib\Base\Primitives\chars\wchar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Barycentric\Barycentric.cxx">
+      <Filter>TnbLib\Base\Primitives\Barycentric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Barycentric\BarycentricTensor.cxx">
+      <Filter>TnbLib\Base\Primitives\Barycentric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\MatrixSpace\MatrixSpace.cxx">
+      <Filter>TnbLib\Base\Primitives\MatrixSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\direction\directionIO.cxx">
+      <Filter>TnbLib\Base\Primitives\direction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\polynomialEqns\quadraticEqn\quadraticEqn.cxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\quadraticEqn</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\polynomialEqns\cubicEqn\cubicEqn.cxx">
+      <Filter>TnbLib\Base\Primitives\polynomialEqns\cubicEqn</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Tensor\floatTensor\floatTensor.cxx">
+      <Filter>TnbLib\Base\Primitives\Tensor\floatTensor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\SymmTensor2D\symmTensor2D\symmTensor2D.cxx">
+      <Filter>TnbLib\Base\Primitives\SymmTensor2D\symmTensor2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\strings\stringOps\stringOps.cxx">
+      <Filter>TnbLib\Base\Primitives\strings\stringOps</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Primitives\Vector\floatVector\floatVector.cxx">
+      <Filter>TnbLib\Base\Primitives\Vector\floatVector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

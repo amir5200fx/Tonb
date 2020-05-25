@@ -10,7 +10,7 @@ namespace tnbLib
 {
 
 	/*---------------------------------------------------------------------------*\
-						   Class SphericalTensor Declaration
+							   Class SphericalTensor Declaration
 	\*---------------------------------------------------------------------------*/
 
 	template<class Cmpt>
@@ -27,20 +27,12 @@ namespace tnbLib
 
 		// Member constants
 
-		enum
-		{
-			rank = 2 // Rank of SphericalTensor is 2
-		};
+			//- Rank of SphericalTensor is 2
+		static const direction rank = 2;
 
 
-		// Static data members
+		// Static Data Members
 
-		static const char* const typeName;
-		static const char* componentNames[];
-		static const SphericalTensor zero;
-		static const SphericalTensor one;
-		static const SphericalTensor max;
-		static const SphericalTensor min;
 		static const SphericalTensor I;
 		static const SphericalTensor oneThirdI;
 		static const SphericalTensor twoThirdsI;
@@ -53,31 +45,35 @@ namespace tnbLib
 		// Constructors
 
 			//- Construct null
-		SphericalTensor();
+		inline SphericalTensor();
+
+		//- Construct initialized to zero
+		inline SphericalTensor(const tnbLib::zero);
 
 		//- Construct given VectorSpace
-		SphericalTensor
+		template<class Cmpt2>
+		inline SphericalTensor
 		(
-			const VectorSpace<SphericalTensor<Cmpt>, Cmpt, 1>&
+			const VectorSpace<SphericalTensor<Cmpt2>, Cmpt2, 1>&
 		);
 
 		//- Construct given the component
-		SphericalTensor(const Cmpt& tii);
+		inline SphericalTensor(const Cmpt& tii);
 
 		//- Construct from Istream
-		SphericalTensor(Istream&);
+		inline SphericalTensor(Istream&);
 
 
 		// Member Functions
 
 			// Access
 
-		const Cmpt& ii() const;
-		Cmpt& ii();
+		inline const Cmpt& ii() const;
+		inline Cmpt& ii();
 
 
 		//- Transpose
-		const SphericalTensor<Cmpt>& T() const;
+		inline const SphericalTensor<Cmpt>& T() const;
 	};
 
 

@@ -2,6 +2,48 @@
 #ifndef _TensorTemplate_Header
 #define _TensorTemplate_Header
 
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+	\\  /    A nd           | Copyright (C) 2011-2019 OpenFOAM Foundation
+	 \\/     M anipulation  |
+-------------------------------------------------------------------------------
+License
+	This file is part of OpenFOAM.
+
+	OpenFOAM is free software: you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenFOAM is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+	for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
+
+Class
+	tnbLib::Tensor
+
+Description
+	Templated 3D tensor derived from MatrixSpace adding construction from
+	9 components, element access using xx(), xy() etc. member functions and
+	the inner-product (dot-product) and outer-product of two Vectors
+	(tensor-product) operators.
+
+SourceFiles
+	TensorI.H
+
+See also
+	tnbLib::MatrixSpace
+	tnbLib::Vector
+
+\*---------------------------------------------------------------------------*/
+
+#include <MatrixSpace.hxx>
 #include <VectorTemplate.hxx>
 #include <SphericalTensorTemplate.hxx>
 
@@ -20,7 +62,7 @@ namespace tnbLib
 	template<class Cmpt>
 	class Tensor
 		:
-		public VectorSpace<Tensor<Cmpt>, Cmpt, 9>
+		public MatrixSpace<Tensor<Cmpt>, Cmpt, 3, 3>
 	{
 
 	public:
@@ -31,21 +73,12 @@ namespace tnbLib
 
 		// Member constants
 
-		enum
-		{
-			rank = 2 // Rank of Tensor is 2
-		};
+			//- Rank of Tensor is 2
+		static const direction rank = 2;
 
 
-		// Static data members
+		// Static Data Members
 
-		static const char* const typeName;
-		static const char* componentNames[];
-
-		static const Tensor zero;
-		static const Tensor one;
-		static const Tensor max;
-		static const Tensor min;
 		static const Tensor I;
 
 
@@ -56,22 +89,30 @@ namespace tnbLib
 		// Constructors
 
 			//- Construct null
-		Tensor();
+		inline Tensor();
+
+		//- Construct initialized to zero
+		inline Tensor(const tnbLib::zero);
+
+		//- Construct given MatrixSpace of the same rank
+		template<class Cmpt2>
+		inline Tensor(const MatrixSpace<Tensor<Cmpt2>, Cmpt2, 3, 3>&);
 
 		//- Construct given VectorSpace of the same rank
-		Tensor(const VectorSpace<Tensor<Cmpt>, Cmpt, 9>&);
+		template<class Cmpt2>
+		inline Tensor(const VectorSpace<Tensor<Cmpt2>, Cmpt2, 9>&);
 
 		//- Construct given SphericalTensor
-		Tensor(const SphericalTensor<Cmpt>&);
+		inline Tensor(const SphericalTensor<Cmpt>&);
 
 		//- Construct given SymmTensor
-		Tensor(const SymmTensor<Cmpt>&);
+		inline Tensor(const SymmTensor<Cmpt>&);
 
 		//- Construct given triad
-		Tensor(const Vector<Vector<Cmpt>>&);
+		inline Tensor(const Vector<Vector<Cmpt>>&);
 
 		//- Construct given the three vector components
-		Tensor
+		inline Tensor
 		(
 			const Vector<Cmpt>& x,
 			const Vector<Cmpt>& y,
@@ -79,83 +120,101 @@ namespace tnbLib
 		);
 
 		//- Construct given the nine components
-		Tensor
+		inline Tensor
 		(
 			const Cmpt txx, const Cmpt txy, const Cmpt txz,
 			const Cmpt tyx, const Cmpt tyy, const Cmpt tyz,
 			const Cmpt tzx, const Cmpt tzy, const Cmpt tzz
 		);
 
+		//- Construct from a block of another matrix space
+		template
+			<
+			template<class, direction, direction> class Block2,
+			direction BRowStart,
+			direction BColStart
+			>
+			Tensor
+			(
+				const Block2<Tensor<Cmpt>, BRowStart, BColStart>& block
+			);
+
 		//- Construct from Istream
-		Tensor(Istream&);
+		inline Tensor(Istream&);
 
 
 		// Member Functions
 
-			// Access
+			// Component access
 
-		const Cmpt& xx() const;
-		const Cmpt& xy() const;
-		const Cmpt& xz() const;
-		const Cmpt& yx() const;
-		const Cmpt& yy() const;
-		const Cmpt& yz() const;
-		const Cmpt& zx() const;
-		const Cmpt& zy() const;
-		const Cmpt& zz() const;
+		inline const Cmpt& xx() const;
+		inline const Cmpt& xy() const;
+		inline const Cmpt& xz() const;
+		inline const Cmpt& yx() const;
+		inline const Cmpt& yy() const;
+		inline const Cmpt& yz() const;
+		inline const Cmpt& zx() const;
+		inline const Cmpt& zy() const;
+		inline const Cmpt& zz() const;
 
-		Cmpt& xx();
-		Cmpt& xy();
-		Cmpt& xz();
-		Cmpt& yx();
-		Cmpt& yy();
-		Cmpt& yz();
-		Cmpt& zx();
-		Cmpt& zy();
-		Cmpt& zz();
+		inline Cmpt& xx();
+		inline Cmpt& xy();
+		inline Cmpt& xz();
+		inline Cmpt& yx();
+		inline Cmpt& yy();
+		inline Cmpt& yz();
+		inline Cmpt& zx();
+		inline Cmpt& zy();
+		inline Cmpt& zz();
 
-		// Access vector components.
-		// Note: returning const only to find out lhs usage
+		// Row-vector access.
 
-		Vector<Cmpt> x() const;
-		Vector<Cmpt> y() const;
-		Vector<Cmpt> z() const;
-		Vector<Cmpt> vectorComponent(const direction) const;
+		inline Vector<Cmpt> x() const;
+		inline Vector<Cmpt> y() const;
+		inline Vector<Cmpt> z() const;
+		inline Vector<Cmpt> vectorComponent(const direction) const;
 
-		//- Return (i, j) component.  Consistency with VectorN
-		const Cmpt& operator()
-			(
-				const direction i,
-				const direction j
-				) const;
+		//- Return transpose
+		inline Tensor<Cmpt> T() const;
 
-		//- Return access to (i, j) component.  Consistency with VectorN
-		Cmpt& operator()
-			(
-				const direction i,
-				const direction j
-				);
-
-
-		//- Transpose
-		Tensor<Cmpt> T() const;
+		//- Return inverse
+		inline Tensor<Cmpt> inv() const;
 
 
 		// Member Operators
 
-			//- Assign to a SphericalTensor
-		void operator=(const SphericalTensor<Cmpt>&);
+			//- Inner-product with a Tensor
+		inline void operator&=(const Tensor<Cmpt>&);
+
+		//- Inherit MatrixSpace assignment operators
+		using Tensor::msType::operator=;
+
+		//- Assign to an equivalent vector space
+		template<class Cmpt2>
+		inline void operator=(const VectorSpace<Tensor<Cmpt2>, Cmpt2, 9>&);
+
+		//- Assign to a SphericalTensor
+		inline void operator=(const SphericalTensor<Cmpt>&);
 
 		//- Assign to a SymmTensor
-		void operator=(const SymmTensor<Cmpt>&);
+		inline void operator=(const SymmTensor<Cmpt>&);
 
 		//- Assign to a triad
-		void operator=(const Vector<Vector<Cmpt>>&);
+		inline void operator=(const Vector<Vector<Cmpt>>&);
 	};
 
 
 	template<class Cmpt>
 	class typeOfRank<Cmpt, 2>
+	{
+	public:
+
+		typedef Tensor<Cmpt> type;
+	};
+
+
+	template<class Cmpt>
+	class typeOfTranspose<Cmpt, Tensor<Cmpt>>
 	{
 	public:
 

@@ -296,29 +296,29 @@ inline bool tnbLib::treeBoundBox::contains(const point& pt) const
 
 
 //- Return slightly wider bounding box
-inline tnbLib::treeBoundBox tnbLib::treeBoundBox::extend
-(
-	Random& rndGen,
-	const scalar s
-) const
-{
-	treeBoundBox bb(*this);
-
-	vector newSpan = bb.span();
-
-	// Make 3D
-	scalar minSpan = s * tnbLib::mag(newSpan);
-
-	for (direction dir = 0; dir < vector::nComponents; dir++)
-	{
-		newSpan[dir] = tnbLib::max(newSpan[dir], minSpan);
-	}
-
-	bb.min() -= cmptMultiply(s * rndGen.vector01(), newSpan);
-	bb.max() += cmptMultiply(s * rndGen.vector01(), newSpan);
-
-	return bb;
-}
+//inline tnbLib::treeBoundBox tnbLib::treeBoundBox::extend
+//(
+//	Random& rndGen,
+//	const scalar s
+//) const
+//{
+//	treeBoundBox bb(*this);
+//
+//	vector newSpan = bb.span();
+//
+//	// Make 3D
+//	scalar minSpan = s * tnbLib::mag(newSpan);
+//
+//	for (direction dir = 0; dir < vector::nComponents; dir++)
+//	{
+//		newSpan[dir] = tnbLib::max(newSpan[dir], minSpan);
+//	}
+//
+//	bb.min() -= cmptMultiply(s * rndGen.vector01(), newSpan);
+//	bb.max() += cmptMultiply(s * rndGen.vector01(), newSpan);
+//
+//	return bb;
+//}
 
 
 //- Return slightly wider bounding box, without a random gen param

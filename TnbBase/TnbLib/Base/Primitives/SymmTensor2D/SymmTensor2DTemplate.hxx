@@ -2,6 +2,43 @@
 #ifndef _SymmTensor2DTemplate_Header
 #define _SymmTensor2DTemplate_Header
 
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+	\\  /    A nd           | Copyright (C) 2011-2019 OpenFOAM Foundation
+	 \\/     M anipulation  |
+-------------------------------------------------------------------------------
+License
+	This file is part of OpenFOAM.
+
+	OpenFOAM is free software: you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	OpenFOAM is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+	for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
+
+Class
+	tnbLib::SymmTensor2D
+
+Description
+	Templated 2D symmetric tensor derived from VectorSpace adding construction
+	from 4 components, element access using xx(), xy() etc. member functions
+	and the inner-product (dot-product) and outer-product of two Vectors
+	(tensor-product) operators.
+
+SourceFiles
+	SymmTensor2DI.H
+
+\*---------------------------------------------------------------------------*/
+
 #include <VectorTemplate.hxx>
 #include <SphericalTensor2DTemplate.hxx>
 
@@ -28,21 +65,12 @@ namespace tnbLib
 
 		// Member constants
 
-		enum
-		{
-			rank = 2 // Rank of SymmTensor2D is 2
-		};
+			//- Rank of SymmTensor2D is 2
+		static const direction rank = 2;
 
 
-		// Static data members
+		// Static Data Members
 
-		static const char* const typeName;
-		static const char* componentNames[];
-
-		static const SymmTensor2D zero;
-		static const SymmTensor2D one;
-		static const SymmTensor2D max;
-		static const SymmTensor2D min;
 		static const SymmTensor2D I;
 
 
@@ -53,16 +81,19 @@ namespace tnbLib
 		// Constructors
 
 			//- Construct null
-		SymmTensor2D();
+		inline SymmTensor2D();
+
+		//- Construct initialized to zero
+		inline SymmTensor2D(const tnbLib::zero);
 
 		//- Construct given VectorSpace
-		SymmTensor2D(const VectorSpace<SymmTensor2D<Cmpt>, Cmpt, 3>&);
+		inline SymmTensor2D(const VectorSpace<SymmTensor2D<Cmpt>, Cmpt, 3>&);
 
 		//- Construct given SphericalTensor
-		SymmTensor2D(const SphericalTensor2D<Cmpt>&);
+		inline SymmTensor2D(const SphericalTensor2D<Cmpt>&);
 
 		//- Construct given the three components
-		SymmTensor2D
+		inline SymmTensor2D
 		(
 			const Cmpt txx, const Cmpt txy,
 			const Cmpt tyy
@@ -76,22 +107,25 @@ namespace tnbLib
 
 			// Access
 
-		const Cmpt& xx() const;
-		const Cmpt& xy() const;
-		const Cmpt& yy() const;
+		inline const Cmpt& xx() const;
+		inline const Cmpt& xy() const;
+		inline const Cmpt& yy() const;
 
-		Cmpt& xx();
-		Cmpt& xy();
-		Cmpt& yy();
+		inline Cmpt& xx();
+		inline Cmpt& xy();
+		inline Cmpt& yy();
 
 		//- Transpose
-		const SymmTensor2D<Cmpt>& T() const;
+		inline const SymmTensor2D<Cmpt>& T() const;
 
 
 		// Member Operators
 
-			//- Construct given SphericalTensor2D
-		void operator=(const SphericalTensor2D<Cmpt>&);
+			//- Inherit VectorSpace assignment operators
+		using SymmTensor2D::vsType::operator=;
+
+		//- Construct given SphericalTensor2D
+		inline void operator=(const SphericalTensor2D<Cmpt>&);
 	};
 
 

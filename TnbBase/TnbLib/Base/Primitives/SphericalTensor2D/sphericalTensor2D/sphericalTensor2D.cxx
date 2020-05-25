@@ -1,41 +1,63 @@
 #include <sphericalTensor2D.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-namespace tnbLib
+template<>
+const char* const tnbLib::sphericalTensor2D::vsType::typeName
+(
+	"sphericalTensor2D"
+);
+
+template<>
+const char* const tnbLib::sphericalTensor2D::vsType::componentNames[] =
 {
+	"ii"
+};
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::vsType::vsType::zero
+(
+	sphericalTensor2D::uniform(0)
+);
 
-	template<>
-	const char* const sphericalTensor2D::typeName = "sphericalTensor2D";
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::vsType::one
+(
+	sphericalTensor2D::uniform(1)
+);
 
-	template<>
-	const char* sphericalTensor2D::componentNames[] = { "ii" };
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::vsType::max
+(
+	sphericalTensor2D::uniform(VGREAT)
+);
 
-	template<>
-	const sphericalTensor2D sphericalTensor2D::zero(0);
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::vsType::min
+(
+	sphericalTensor2D::uniform(-VGREAT)
+);
 
-	template<>
-	const sphericalTensor2D sphericalTensor2D::one(1);
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::vsType::rootMax
+(
+	sphericalTensor2D::uniform(ROOTVGREAT)
+);
 
-	template<>
-	const sphericalTensor2D sphericalTensor2D::max(VGREAT);
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::vsType::rootMin
+(
+	sphericalTensor2D::uniform(-ROOTVGREAT)
+);
 
-	template<>
-	const sphericalTensor2D sphericalTensor2D::min(-VGREAT);
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::I(1);
 
-	template<>
-	const sphericalTensor2D sphericalTensor2D::I(1);
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::oneThirdI(1.0 / 3.0);
 
-	template<>
-	const sphericalTensor2D sphericalTensor2D::oneThirdI(1.0 / 3.0);
+template<>
+const tnbLib::sphericalTensor2D tnbLib::sphericalTensor2D::twoThirdsI(2.0 / 3.0);
 
-	template<>
-	const sphericalTensor2D sphericalTensor2D::twoThirdsI(2.0 / 3.0);
-
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
 
 // ************************************************************************* //

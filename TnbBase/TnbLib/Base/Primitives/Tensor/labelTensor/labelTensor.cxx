@@ -3,10 +3,10 @@
 // * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
 template<>
-const char* const tnbLib::labelTensor::typeName = "labelTensor";
+const char* const tnbLib::labelTensor::vsType::typeName = "labelTensor";
 
 template<>
-const char* tnbLib::labelTensor::componentNames[] =
+const char* const tnbLib::labelTensor::vsType::componentNames[] =
 {
 	"xx", "xy", "xz",
 	"yx", "yy", "yz",
@@ -14,19 +14,39 @@ const char* tnbLib::labelTensor::componentNames[] =
 };
 
 template<>
-const tnbLib::labelTensor tnbLib::labelTensor::zero
+const tnbLib::labelTensor tnbLib::labelTensor::vsType::zero
 (
-	0, 0, 0,
-	0, 0, 0,
-	0, 0, 0
+	labelTensor::uniform(0)
 );
 
 template<>
-const tnbLib::labelTensor tnbLib::labelTensor::one
+const tnbLib::labelTensor tnbLib::labelTensor::vsType::one
 (
-	1, 1, 1,
-	1, 1, 1,
-	1, 1, 1
+	labelTensor::uniform(1)
+);
+
+template<>
+const tnbLib::labelTensor tnbLib::labelTensor::vsType::max
+(
+	labelTensor::uniform(labelMax)
+);
+
+template<>
+const tnbLib::labelTensor tnbLib::labelTensor::vsType::min
+(
+	labelTensor::uniform(-labelMax)
+);
+
+template<>
+const tnbLib::labelTensor tnbLib::labelTensor::vsType::rootMax
+(
+	labelTensor::uniform(sqrt(scalar(labelMax)))
+);
+
+template<>
+const tnbLib::labelTensor tnbLib::labelTensor::vsType::rootMin
+(
+	labelTensor::uniform(-sqrt(scalar(labelMax)))
 );
 
 

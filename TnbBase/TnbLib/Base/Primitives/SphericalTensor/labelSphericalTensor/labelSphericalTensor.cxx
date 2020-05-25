@@ -1,30 +1,58 @@
 #include <labelSphericalTensor.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-namespace tnbLib
+template<>
+const char* const tnbLib::labelSphericalTensor::vsType::typeName
+(
+	"labelSphericalTensor"
+);
+
+template<>
+const char* const tnbLib::labelSphericalTensor::vsType::componentNames[] =
 {
+	"ii"
+};
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const tnbLib::labelSphericalTensor
+tnbLib::labelSphericalTensor::vsType::vsType::zero
+(
+	labelSphericalTensor::uniform(0)
+);
 
-	template<>
-	const char* const labelSphericalTensor::typeName = "labelSphericalTensor";
+template<>
+const tnbLib::labelSphericalTensor tnbLib::labelSphericalTensor::vsType::one
+(
+	labelSphericalTensor::uniform(1)
+);
 
-	template<>
-	const char* labelSphericalTensor::componentNames[] = { "ii" };
+template<>
+const tnbLib::labelSphericalTensor tnbLib::labelSphericalTensor::vsType::max
+(
+	labelSphericalTensor::uniform(labelMax)
+);
 
-	template<>
-	const labelSphericalTensor labelSphericalTensor::zero(0);
+template<>
+const tnbLib::labelSphericalTensor tnbLib::labelSphericalTensor::vsType::min
+(
+	labelSphericalTensor::uniform(-labelMax)
+);
 
-	template<>
-	const labelSphericalTensor labelSphericalTensor::one(1);
+template<>
+const tnbLib::labelSphericalTensor tnbLib::labelSphericalTensor::vsType::rootMax
+(
+	labelSphericalTensor::uniform(sqrt(scalar(labelMax)))
+);
 
-	template<>
-	const labelSphericalTensor labelSphericalTensor::I(1);
+template<>
+const tnbLib::labelSphericalTensor tnbLib::labelSphericalTensor::vsType::rootMin
+(
+	labelSphericalTensor::uniform(-sqrt(scalar(labelMax)))
+);
 
+template<>
+const tnbLib::labelSphericalTensor tnbLib::labelSphericalTensor::I(1);
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
 
 // ************************************************************************* //

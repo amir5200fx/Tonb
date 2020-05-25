@@ -2,6 +2,7 @@
 #ifndef _transform_Header
 #define _transform_Header
 
+#include <Identity.hxx>
 #include <tensorField.hxx>
 #include <symmTensor4thOrder.hxx>
 #include <diagTensor.hxx>
@@ -14,16 +15,38 @@ namespace tnbLib
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+	//- Rotational transformation tensor from vector n1 to n2
 	inline tensor rotationTensor
 	(
 		const vector& n1,
 		const vector& n2
 	)
 	{
-		return
-			(n1 & n2)*I
-			+ (1 - (n1 & n2))*sqr(n1 ^ n2) / (magSqr(n1 ^ n2) + VSMALL)
-			+ (n2*n1 - n1 * n2);
+		const scalar s = n1 & n2;
+		const vector n3 = n1 ^ n2;
+		const scalar magSqrN3 = magSqr(n3);
+
+		// n1 and n2 define a plane n3
+		if (magSqrN3 > SMALL)
+		{
+			// Return rotational transformation tensor in the n3-plane
+			return
+				s * I
+				+ (1 - s)*sqr(n3) / magSqrN3
+				+ (n2*n1 - n1 * n2);
+		}
+		// n1 and n2 are contradirectional
+		else if (s < 0)
+		{
+			// Return mirror transformation tensor
+			return I + 2 * n1*n2;
+		}
+		// n1 and n2 are codirectional
+		else
+		{
+			// Return null transformation tensor
+			return I;
+		}
 	}
 
 
@@ -39,6 +62,74 @@ namespace tnbLib
 			+ (n2*n1 - n1 * n2);
 	}
 
+	//- Rotational transformation tensor about the x-axis by omega radians
+	inline tensor Rx(const scalar& omega)
+	{
+		const scalar s = sin(omega);
+		const scalar c = cos(omega);
+		return tensor
+		(
+			1, 0, 0,
+			0, c, s,
+			0, -s, c
+		);
+	}
+
+
+	//- Rotational transformation tensor about the y-axis by omega radians
+	inline tensor Ry(const scalar& omega)
+	{
+		const scalar s = sin(omega);
+		const scalar c = cos(omega);
+		return tensor
+		(
+			c, 0, -s,
+			0, 1, 0,
+			s, 0, c
+		);
+	}
+
+
+	//- Rotational transformation tensor about the z-axis by omega radians
+	inline tensor Rz(const scalar& omega)
+	{
+		const scalar s = sin(omega);
+		const scalar c = cos(omega);
+		return tensor
+		(
+			c, s, 0,
+			-s, c, 0,
+			0, 0, 1
+		);
+	}
+
+
+	//- Rotational transformation tensor about axis a by omega radians
+	inline tensor Ra(const vector& a, const scalar omega)
+	{
+		const scalar s = sin(omega);
+		const scalar c = cos(omega);
+
+		return tensor
+		(
+			sqr(a.x())*(1 - c) + c,
+			a.y()*a.x()*(1 - c) + a.z()*s,
+			a.x()*a.z()*(1 - c) - a.y()*s,
+
+			a.x()*a.y()*(1 - c) - a.z()*s,
+			sqr(a.y())*(1 - c) + c,
+			a.y()*a.z()*(1 - c) + a.x()*s,
+
+			a.x()*a.z()*(1 - c) + a.y()*s,
+			a.y()*a.z()*(1 - c) - a.x()*s,
+			sqr(a.z())*(1 - c) + c
+		);
+	}
+
+	inline label transform(const tensor&, const bool i)
+	{
+		return i;
+	}
 
 	inline label transform(const tensor&, const label i)
 	{

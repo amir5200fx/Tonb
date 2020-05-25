@@ -1,32 +1,48 @@
 #include <vector2D.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-namespace tnbLib
-{
+template<>
+const char* const tnbLib::vector2D::vsType::typeName = "vector2D";
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const char* const tnbLib::vector2D::vsType::componentNames[] = { "x", "y" };
 
-	template<>
-	const char* const vector2D::typeName = "vector2D";
+template<>
+const tnbLib::vector2D tnbLib::vector2D::vsType::vsType::zero
+(
+	vector2D::uniform(0)
+);
 
-	template<>
-	const char* vector2D::componentNames[] = { "x", "y" };
+template<>
+const tnbLib::vector2D tnbLib::vector2D::vsType::one
+(
+	vector2D::uniform(1)
+);
 
-	template<>
-	const vector2D vector2D::zero(0, 0);
+template<>
+const tnbLib::vector2D tnbLib::vector2D::vsType::max
+(
+	vector2D::uniform(VGREAT)
+);
 
-	template<>
-	const vector2D vector2D::one(1, 1);
+template<>
+const tnbLib::vector2D tnbLib::vector2D::vsType::min
+(
+	vector2D::uniform(-VGREAT)
+);
 
-	template<>
-	const vector2D vector2D::max(VGREAT, VGREAT);
+template<>
+const tnbLib::vector2D tnbLib::vector2D::vsType::rootMax
+(
+	vector2D::uniform(ROOTVGREAT)
+);
 
-	template<>
-	const vector2D vector2D::min(-VGREAT, -VGREAT);
+template<>
+const tnbLib::vector2D tnbLib::vector2D::vsType::rootMin
+(
+	vector2D::uniform(-ROOTVGREAT)
+);
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
 
 // ************************************************************************* //

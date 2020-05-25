@@ -222,6 +222,17 @@ namespace tnbLib
 				const dictionary&
 				);
 
+		//- Print basic message and exit. Uses cerr if streams not constructed
+		//  yet (at startup). Use in startup parsing instead of FatalError.
+		static void SafeFatalIOError
+		(
+			const char* functionName,
+			const char* sourceFileName,
+			const int sourceFileLineNumber,
+			const IOstream&,
+			const string& msg
+		);
+
 		//- Create and return a dictionary
 		operator dictionary() const;
 
@@ -308,16 +319,75 @@ namespace tnbLib
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 	// Convenient macros to add the file name and line number to the function name
 
-#define FatalErrorIn(fn) FatalError(fn, __FILE__, __LINE__)
-#define FatalIOErrorIn(fn, ios) FatalIOError(fn, __FILE__, __LINE__, ios)
-#define FatalConvErrorIn(fn, nbIters, tol) FatalConvError(fn, __FILE__, __LINE__, nbIters, tol)
+//#define FatalErrorIn(fn) FatalError(fn, __FILE__, __LINE__)
+//#define FatalIOErrorIn(fn, ios) FatalIOError(fn, __FILE__, __LINE__, ios)
+//#define FatalConvErrorIn(fn, nbIters, tol) FatalConvError(fn, __FILE__, __LINE__, nbIters, tol)
+
+	//- Report an error message using tnbLib::FatalError
+//  for functionName in file __FILE__ at line __LINE__
+#define FatalErrorIn(functionName)                                             \
+    ::tnbLib::FatalError((functionName), __FILE__, __LINE__)
+
+//- Report an error message using tnbLib::FatalError
+//  for FUNCTION_NAME in file __FILE__ at line __LINE__
+#define FatalErrorInFunction FatalErrorIn(FUNCTION_NAME)
+
+
+//- Report an error message using tnbLib::FatalIOError
+//  for functionName in file __FILE__ at line __LINE__
+//  for a particular IOstream
+#define FatalIOErrorIn(functionName, ios)                                      \
+    ::tnbLib::FatalIOError((functionName), __FILE__, __LINE__, (ios))
+
+//- Report an error message using tnbLib::FatalIOError
+//  for FUNCTION_NAME in file __FILE__ at line __LINE__
+//  for a particular IOstream
+#define FatalIOErrorInFunction(ios) FatalIOErrorIn(FUNCTION_NAME, ios)
+
+
+//- Report an error message using tnbLib::FatalIOError
+//  (or cerr if FatalIOError not yet constructed)
+//  for functionName in file __FILE__ at line __LINE__
+//  for a particular IOstream
+#define SafeFatalIOErrorIn(functionName, ios, msg)                             \
+    ::tnbLib::IOerror::SafeFatalIOError                                          \
+    ((functionName), __FILE__, __LINE__, (ios), (msg))
+
+//- Report an error message using tnbLib::FatalIOError
+//  (or cerr if FatalIOError not yet constructed)
+//  for functionName in file __FILE__ at line __LINE__
+//  for a particular IOstream
+#define SafeFatalIOErrorInFunction(ios, msg)                                   \
+    SafeFatalIOErrorIn(FUNCTION_NAME, ios, msg)
+
+
+//- Issue a FatalErrorIn for a function not currently implemented.
+//  The functionName is printed and then abort is called.
+//
+//  This macro can be particularly useful when methods must be defined to
+//  complete the interface of a derived class even if they should never be
+//  called for this derived class.
+#define notImplemented(functionName)                                           \
+    FatalErrorIn(functionName)                                                 \
+        << "Not implemented" << ::tnbLib::abort(FatalError);
+
+//- Issue a FatalErrorIn for a function not currently implemented.
+//  The FUNCTION_NAME is printed and then abort is called.
+//
+//  This macro can be particularly useful when methods must be defined to
+//  complete the interface of a derived class even if they should never be
+//  called for this derived class.
+#define NotImplemented notImplemented(FUNCTION_NAME)
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #include <errorM.hxx>
 
 // Call for functions which are not currently implemented.
 // The functionName is printed and then abort is called.
-#define notImplemented(fn) \
-    FatalErrorIn(fn) << "Not implemented" << tnbLib::abort(FatalError);
+//#define notImplemented(fn) \
+//    FatalErrorIn(fn) << "Not implemented" << tnbLib::abort(FatalError);
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 }

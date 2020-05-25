@@ -13,7 +13,7 @@ namespace tnbLib
 							   Class DiagTensor Declaration
 	\*---------------------------------------------------------------------------*/
 
-	template <class Cmpt>
+	template<class Cmpt>
 	class DiagTensor
 		:
 		public VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>
@@ -21,22 +21,14 @@ namespace tnbLib
 
 	public:
 
+		//- Equivalent type of labels used for valid component indexing
+		typedef DiagTensor<label> labelType;
+
+
 		// Member constants
 
-		enum
-		{
-			rank = 2 // Rank of DiagTensor is 2
-		};
-
-
-		// Static data members
-
-		static const char* const typeName;
-		static const char* componentNames[];
-		static const DiagTensor zero;
-		static const DiagTensor one;
-		static const DiagTensor max;
-		static const DiagTensor min;
+			//- Rank of DiagTensor is 2
+		static const direction rank = 2;
 
 
 		//- Component labeling enumeration
@@ -46,29 +38,33 @@ namespace tnbLib
 		// Constructors
 
 			//- Construct null
-		DiagTensor();
+		inline DiagTensor();
+
+		//- Construct initialized to zero
+		inline DiagTensor(const tnbLib::zero);
 
 		//- Construct given VectorSpace
-		DiagTensor(const VectorSpace<DiagTensor<Cmpt>, Cmpt, 3>&);
+		template<class Cmpt2>
+		inline DiagTensor(const VectorSpace<DiagTensor<Cmpt2>, Cmpt2, 3>&);
 
 		//- Construct given three components
-		DiagTensor(const Cmpt& txx, const Cmpt& tyy, const Cmpt& tzz);
+		inline DiagTensor(const Cmpt& txx, const Cmpt& tyy, const Cmpt& tzz);
 
 		//- Construct from Istream
-		DiagTensor(Istream&);
+		inline DiagTensor(Istream&);
 
 
 		// Member Functions
 
 			// Access
 
-		const Cmpt& xx() const;
-		const Cmpt& yy() const;
-		const Cmpt& zz() const;
+		inline const Cmpt& xx() const;
+		inline const Cmpt& yy() const;
+		inline const Cmpt& zz() const;
 
-		Cmpt& xx();
-		Cmpt& yy();
-		Cmpt& zz();
+		inline Cmpt& xx();
+		inline Cmpt& yy();
+		inline Cmpt& zz();
 	};
 
 

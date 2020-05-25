@@ -1,27 +1,53 @@
 #include <labelDiagTensor.hxx>
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-namespace tnbLib
+template<>
+const char* const tnbLib::labelDiagTensor::vsType::typeName
+(
+	"labelDiagTensor"
+);
+
+template<>
+const char* const tnbLib::labelDiagTensor::vsType::componentNames[] =
 {
+	"ii"
+};
 
-	// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+template<>
+const tnbLib::labelDiagTensor
+tnbLib::labelDiagTensor::vsType::vsType::zero
+(
+	labelDiagTensor::uniform(0)
+);
 
-	template<>
-	const char* const labelDiagTensor::typeName = "labelDiagTensor";
+template<>
+const tnbLib::labelDiagTensor tnbLib::labelDiagTensor::vsType::one
+(
+	labelDiagTensor::uniform(1)
+);
 
-	template<>
-	const char* labelDiagTensor::componentNames[] = { "xx", "yy", "zz" };
+template<>
+const tnbLib::labelDiagTensor tnbLib::labelDiagTensor::vsType::max
+(
+	labelDiagTensor::uniform(labelMax)
+);
 
-	template<>
-	const labelDiagTensor labelDiagTensor::zero(0, 0, 0);
+template<>
+const tnbLib::labelDiagTensor tnbLib::labelDiagTensor::vsType::min
+(
+	labelDiagTensor::uniform(-labelMax)
+);
 
-	template<>
-	const labelDiagTensor labelDiagTensor::one(1, 1, 1);
+template<>
+const tnbLib::labelDiagTensor tnbLib::labelDiagTensor::vsType::rootMax
+(
+	labelDiagTensor::uniform(sqrt(scalar(labelMax)))
+);
 
+template<>
+const tnbLib::labelDiagTensor tnbLib::labelDiagTensor::vsType::rootMin
+(
+	labelDiagTensor::uniform(-sqrt(scalar(labelMax)))
+);
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace tnbLib
-
-// ************************************************************************* //
