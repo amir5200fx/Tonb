@@ -13,7 +13,9 @@ namespace tnbLib
 {
 
 	class NModel_Curve
-		: public NModel_Entity
+		: public Global_Indexed
+		, public Global_Named
+		, public std::enable_shared_from_this<NModel_Curve>
 	{
 
 		/*Private Data*/
@@ -42,7 +44,20 @@ namespace tnbLib
 
 		NModel_Curve
 		(
-			const Handle(Geom_Curve) theGeometry
+			const Handle(Geom_Curve)& theGeometry
+		);
+
+		NModel_Curve
+		(
+			const Standard_Integer theIndex,
+			const Handle(Geom_Curve)& theGeometry
+		);
+
+		NModel_Curve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Handle(Geom_Curve)& theGeometry
 		);
 
 		Standard_Real FirstParameter() const;

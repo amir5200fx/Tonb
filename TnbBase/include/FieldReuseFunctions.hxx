@@ -3,7 +3,7 @@
 #define _FieldReuseFunctions_Header
 
 #include <tmp.hxx>
-#include <Field.hxx>
+//#include <Field.hxx>
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -11,6 +11,10 @@ namespace tnbLib
 {
 
 	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+	// Forward Declarations
+	template<class Type>
+	class Field;
 
 	template<class TypeR, class Type1>
 	class reuseTmp

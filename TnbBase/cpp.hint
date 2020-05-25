@@ -25,3 +25,4 @@
 #define makePointPatchFieldsTypeName(typePatchField, pointPatchType)
 #define DisallowBitWiseCopy(TypeName) 
 #define RegisterEntityM_Map(EntityName, EntityType)
+#define TFOR_ALL_F_OP_FUNC_F_F(typeF1, f1, OP, FUNC, typeF2, f2, typeF3, f3)

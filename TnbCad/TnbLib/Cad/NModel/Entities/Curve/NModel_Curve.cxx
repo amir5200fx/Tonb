@@ -38,9 +38,33 @@ void tnbLib::NModel_Curve::CheckBounded
 
 tnbLib::NModel_Curve::NModel_Curve
 (
-	const Handle(Geom_Curve) theGeometry
+	const Handle(Geom_Curve)& theGeometry
 )
 	: theGeometry_(theGeometry)
+{
+	CheckBounded(Geometry(), "NModel_Curve::NModel_Curve()");
+}
+
+tnbLib::NModel_Curve::NModel_Curve
+(
+	const Standard_Integer theIndex, 
+	const Handle(Geom_Curve)& theGeometry
+)
+	: Global_Indexed(theIndex)
+	, theGeometry_(theGeometry)
+{
+	CheckBounded(Geometry(), "NModel_Curve::NModel_Curve()");
+}
+
+tnbLib::NModel_Curve::NModel_Curve
+(
+	const Standard_Integer theIndex,
+	const word & theName, 
+	const Handle(Geom_Curve)& theGeometry
+)
+	: Global_Indexed(theIndex)
+	, Global_Named(theName)
+	, theGeometry_(theGeometry)
 {
 	CheckBounded(Geometry(), "NModel_Curve::NModel_Curve()");
 }

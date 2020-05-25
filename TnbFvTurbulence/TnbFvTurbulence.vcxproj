@@ -163,7 +163,7 @@
     <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\realizableKE\compRealizableKE.hxx" />
     <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon\compRNGkEpsilon.hxx" />
     <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.hxx" />
-    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.hxx" />
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\compLaminarModel.hxx" />
     <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.hxx" />
   </ItemGroup>
   <ItemGroup>
@@ -197,7 +197,7 @@
     <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\realizableKE\compRealizableKE.cxx" />
     <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\RNGkEpsilon\compRNGkEpsilon.cxx" />
     <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.cxx" />
-    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.cxx" />
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\compLaminarModel.cxx" />
     <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -55,6 +55,9 @@
     <Filter Include="TnbLib\ShipModeler\Basic\Tools">
       <UniqueIdentifier>{1aa64b63-8701-43b5-9c1f-f880a0b62c34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShipModeler\Basic\Entities\Edge">
+      <UniqueIdentifier>{f668cf49-f400-4b2f-9353-ed16542b118f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Entity\ShipModeler_Basic_Entity.hxx">
@@ -98,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\ShipModeler\Basic\Tools\ShipModeler_Basic_Tools.hxx">
       <Filter>TnbLib\ShipModeler\Basic\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShipModeler\Basic\Entities\Edge\ShipModeler_Basic_Edge.hxx">
+      <Filter>TnbLib\ShipModeler\Basic\Entities\Edge</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

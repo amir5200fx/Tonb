@@ -234,9 +234,6 @@
     <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.hxx">
       <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.hxx">
-      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel\laminar</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction\mutkWallFunctionFvPatchScalarField.hxx">
       <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction</Filter>
     </ClInclude>
@@ -288,6 +285,9 @@
     <ClInclude Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.hxx">
       <Filter>TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\compLaminarModel.hxx">
+      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel\laminar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\backwardsCompatibility\wallFunctions\backwardsCompatibilityWallFunctions.cxx">
@@ -331,9 +331,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\CompTurbulenceModel.cxx">
       <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\CompLaminar.cxx">
-      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel\laminar</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction\mutkWallFunctionFvPatchScalarField.cxx">
       <Filter>TnbLib\FvTurbulence\compressible\RAS\derivedFvPatchFields\wallFunctions\mutWallFunctions\mutkWallFunction</Filter>
@@ -385,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras\compSpalartAllmaras.cxx">
       <Filter>TnbLib\FvTurbulence\compressible\RAS\SpalartAllmaras</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\FvTurbulence\compressible\turbulenceModel\laminar\compLaminarModel.cxx">
+      <Filter>TnbLib\FvTurbulence\compressible\turbulenceModel\laminar</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

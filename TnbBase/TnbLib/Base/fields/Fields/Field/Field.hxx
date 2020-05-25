@@ -326,5 +326,6 @@ namespace tnbLib
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #include <FieldFunctions.hxx>
+#include <FieldI.hxx>
 
 #endif // !_Field_Header

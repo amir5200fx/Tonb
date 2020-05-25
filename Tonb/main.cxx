@@ -36,11 +36,29 @@
 #include <armadillo.h>
 #include <vld.h>
 
+#include <Field.hxx>
+#include <Ostream.hxx>
+
 using namespace tnbLib;
 
 Standard_Integer main()
 {
 
+	fileName myFileName("openFoamTest.txt");
+	OFstream myFile(myFileName);
+
+	Field<scalar> f(5, 0.25);
+	Field<scalar> g(5, 0.01);
+	f[2] = 0.1;
+	f[0] = -0.23;
+	myFile << "f = " << f << endl;
+	myFile << "g = " << g << endl;
+
+	auto m = tnbLib::max(f, g);
+	myFile << "max(f, g) = " << m << endl;
+
+	auto p = f + g;
+	myFile << "+(f, g) = " << p << endl;
 	//example_union_plane_box();
 	//example_create_marine_vessel();
 	//example_create_ship();
@@ -48,7 +66,7 @@ Standard_Integer main()
 	//example_transform_shape2d();
 	//example_geo_compt_polygons();
 	//example_cross_curves_ship();
-	example_cad2d_modeler();
+	//example_cad2d_modeler();
 
 	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));

@@ -1738,6 +1738,18 @@
     <Filter Include="TnbLib\Base\containers\ADT\List">
       <UniqueIdentifier>{4d208233-5556-41f0-8b13-2808741c9c47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\meshes\Identifiers">
+      <UniqueIdentifier>{da343b80-27a6-467b-8eee-e4c76c926aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\meshes\Identifiers\DynamicID">
+      <UniqueIdentifier>{122f80b6-77ae-4841-9210-41ae1b8c9693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\meshes\Identifiers\zones">
+      <UniqueIdentifier>{f3c92c50-1bf1-45b2-b2fa-416d67d05ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\meshes\Identifiers\patch">
+      <UniqueIdentifier>{d9525ca5-2eba-4faa-a45c-e485e7a95c76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Primitives\one\one.hxx">
@@ -4776,6 +4788,12 @@
     <ClInclude Include="TnbLib\Base\db\IOstreams\gzstream\gzstream.hxx">
       <Filter>TnbLib\Base\db\IOstreams\gzstream</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\FieldFunctionsI.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\fields\Fields\Field\FieldI.hxx">
+      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Primitives\one\one.cxx">
@@ -7069,9 +7087,6 @@
     <None Include="cpp.hint" />
     <None Include="TnbLib\Base\containers\Lists\List\cpp.hint">
       <Filter>TnbLib\Base\containers\Lists\List</Filter>
-    </None>
-    <None Include="TnbLib\Base\fields\Fields\Field\cpp.hint">
-      <Filter>TnbLib\Base\fields\Fields\Field</Filter>
     </None>
   </ItemGroup>
 </Project>
