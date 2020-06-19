@@ -281,7 +281,7 @@ tnbLib::Cad2d_Boolean::Union
 	return std::move(plane);
 }
 
-std::shared_ptr<tnbLib::Cad2d_Plane> 
+std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>
 tnbLib::Cad2d_Boolean::Subtract
 (
 	const std::shared_ptr<Cad2d_Plane>& thePlane0, 
@@ -290,14 +290,20 @@ tnbLib::Cad2d_Boolean::Subtract
 {
 	if (NOT thePlane0)
 	{
-		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Union(Args...)")
+		FatalErrorIn
+		(
+			"std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Union(Args...)"
+		)
 			<< "the plane 0 is not loaded!" << endl
 			<< abort(FatalError);
 	}
 
 	if (NOT thePlane1)
 	{
-		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Union(Args...)")
+		FatalErrorIn
+		(
+			"std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Union(Args...)"
+		)
 			<< "the plane 1 is not loaded!" << endl
 			<< abort(FatalError);
 	}
@@ -307,14 +313,18 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	if (NOT bb0.IsIntersect(bb1))
 	{
-		return nullptr;
+		return std::vector<std::shared_ptr<Cad2d_Plane>>();
 	}
 
 	auto intersection = std::make_shared<Cad2d_PlanePlaneIntersection>();
 	Debug_Null_Pointer(intersection);
 
+	auto plane1 = 
+		Cad2d_Plane::MakePlane(thePlane1->OuterWire(), nullptr, thePlane1->System());
+	Debug_Null_Pointer(plane1);
+
 	intersection->LoadPlane0(thePlane0);
-	intersection->LoadPlane1(thePlane1);
+	intersection->LoadPlane1(plane1);
 
 	intersection->SetTolerance(Tolerance);
 
@@ -332,7 +342,7 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	if (NOT intersection->NbEntities())
 	{
-		return nullptr;
+		return std::vector<std::shared_ptr<Cad2d_Plane>>();
 	}
 
 	const auto& sub0 = subdivide->ModifiedPlane0();
@@ -375,7 +385,7 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	if (NOT k0)
 	{
-		return nullptr;
+		return std::vector<std::shared_ptr<Cad2d_Plane>>();
 	}
 
 	Standard_Integer k1 = 0;
@@ -405,7 +415,10 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	if (NOT k1)
 	{
-		return thePlane0;
+		std::vector<std::shared_ptr<Cad2d_Plane>> planes;
+		planes.push_back(thePlane0);
+
+		return std::move(planes);
 	}
 
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
@@ -425,7 +438,10 @@ tnbLib::Cad2d_Boolean::Subtract
 			MAX(MAX(minTol0, minTol1), Tolerance),
 			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
 
-	auto outer = Pln_Tools::RetrieveOuterWire(wires);
+	auto planes = Pln_Tools::RetrievePlanes(wires, thePlane0->System());
+	return std::move(planes);
+
+	/*auto outer = Pln_Tools::RetrieveOuterWire(wires);
 	if (NOT outer)
 	{
 		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Subtract(Args...)")
@@ -448,7 +464,7 @@ tnbLib::Cad2d_Boolean::Subtract
 	auto plane = Cad2d_Plane::MakePlane(outer, inners, thePlane0->System());
 	Debug_Null_Pointer(plane);
 
-	return std::move(plane);
+	return std::move(plane);*/
 }
 
 std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>
