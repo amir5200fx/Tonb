@@ -3,7 +3,7 @@
 #include <Geo_xDistb.hxx>
 #include <Marine_WireFrameModel.hxx>
 #include <Marine_Domain.hxx>
-#include <Marine_WettedBody.hxx>
+#include <Marine_Bodies.hxx>
 #include <Marine_CmptLib.hxx>
 #include <Marine_DisctLib.hxx>
 #include <Marine_WaterLib.hxx>
@@ -51,7 +51,7 @@ void tnbLib::HydStatic_CurveLib::SetMaxTol
 std::vector<tnbLib::hydStcGphLib::xDraft>
 tnbLib::HydStatic_CurveLib::CalcLCB
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies, 
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies, 
 	const std::vector<Standard_Real>& theTs,
 	const std::shared_ptr<info>& theInfo
 )
@@ -82,12 +82,12 @@ tnbLib::HydStatic_CurveLib::CalcLCB
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());
@@ -104,7 +104,7 @@ tnbLib::HydStatic_CurveLib::CalcLCB
 std::vector<tnbLib::hydStcGphLib::xDraft> 
 tnbLib::HydStatic_CurveLib::CalcLCF
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies, 
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies, 
 	const std::vector<Standard_Real>& theTs,
 	const std::shared_ptr<info>& theInfo
 )
@@ -135,12 +135,12 @@ tnbLib::HydStatic_CurveLib::CalcLCF
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());
@@ -157,7 +157,7 @@ tnbLib::HydStatic_CurveLib::CalcLCF
 std::vector<tnbLib::hydStcGphLib::xDraft> 
 tnbLib::HydStatic_CurveLib::CalcAW
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 	const std::vector<Standard_Real>& theTs,
 	const std::shared_ptr<info>& theInfo
 )
@@ -189,12 +189,12 @@ tnbLib::HydStatic_CurveLib::CalcAW
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());
@@ -211,7 +211,7 @@ tnbLib::HydStatic_CurveLib::CalcAW
 std::vector<tnbLib::hydStcGphLib::xDraft> 
 tnbLib::HydStatic_CurveLib::CalcDISPV
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 	const std::vector<Standard_Real>& theTs,
 	const std::shared_ptr<info>& theInfo
 )
@@ -242,12 +242,12 @@ tnbLib::HydStatic_CurveLib::CalcDISPV
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());
@@ -264,7 +264,7 @@ tnbLib::HydStatic_CurveLib::CalcDISPV
 std::vector<tnbLib::hydStcGphLib::xDraft> 
 tnbLib::HydStatic_CurveLib::CalcMCT
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 	const std::vector<hydStcGphLib::xDraft>& theVolume,
 	const std::shared_ptr<info>& theInfo
 )
@@ -304,12 +304,12 @@ tnbLib::HydStatic_CurveLib::CalcMCT
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());
@@ -332,7 +332,7 @@ tnbLib::HydStatic_CurveLib::CalcMCT
 std::vector<tnbLib::hydStcGphLib::xDraft> 
 tnbLib::HydStatic_CurveLib::CalcKB
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 	const Marine_BaseLine & theBase, 
 	const std::vector<Standard_Real>& theTs,
 	const std::shared_ptr<info>& theInfo
@@ -365,12 +365,12 @@ tnbLib::HydStatic_CurveLib::CalcKB
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());
@@ -387,7 +387,7 @@ tnbLib::HydStatic_CurveLib::CalcKB
 std::vector<tnbLib::hydStcGphLib::xDraft> 
 tnbLib::HydStatic_CurveLib::CalcBM
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 	const std::vector<hydStcGphLib::xDraft>& theVolume,
 	const std::shared_ptr<info>& theInfo
 )
@@ -420,12 +420,12 @@ tnbLib::HydStatic_CurveLib::CalcBM
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());
@@ -444,7 +444,7 @@ tnbLib::HydStatic_CurveLib::CalcBM
 std::vector<tnbLib::hydStcGphLib::xDraft> 
 tnbLib::HydStatic_CurveLib::CalcBML
 (
-	const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies, 
+	const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies, 
 	const std::vector<hydStcGphLib::xDraft>& theVolume, 
 	const std::shared_ptr<info>& theInfo
 )
@@ -477,12 +477,12 @@ tnbLib::HydStatic_CurveLib::CalcBML
 )
 {
 	Debug_Null_Pointer(theModel.Body());
-	const auto& body = *theModel.Body();
+	const auto& body = theModel.Body();
 
 	std::vector<hydStcGphLib::xDraft> Q;
 	for (const auto h : theDistb.Values())
 	{
-		auto water = Marine_WaterLib::RetrieveStillWaterDomain(theDomain, body.Sections(), h);
+		auto water = Marine_WaterLib::StillWaterDomain(body, theDomain, h);
 		Debug_Null_Pointer(water);
 
 		auto wbody = Marine_DisctLib::WettedBody(theModel, *water, MinTol(), MaxTol());

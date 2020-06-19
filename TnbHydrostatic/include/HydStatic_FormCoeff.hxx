@@ -2,6 +2,7 @@
 #ifndef _HydStatic_FormCoeff_Header
 #define _HydStatic_FormCoeff_Header
 
+#include <Marine_BodiesFwd.hxx>
 #include <Vessel_FormCoeff.hxx>
 #include <Global_Done.hxx>
 
@@ -12,7 +13,6 @@ namespace tnbLib
 
 	// Forward Declarations
 	class HydStatic_FormDim;
-	class Marine_WettedBody;
 
 	class HydStatic_FormCoeff
 		: public Global_Done
@@ -27,17 +27,17 @@ namespace tnbLib
 
 		void CalcDISPV
 		(
-			const Marine_WettedBody& theBody
+			const marineLib::Body_Wetted& theBody
 		);
 
 		void CalcCB
 		(
-			const Marine_WettedBody& theBody
+			const marineLib::Body_Wetted& theBody
 		);
 
 		void CalcAM
 		(
-			const Marine_WettedBody& theBody
+			const marineLib::Body_Wetted& theBody
 		);
 
 		void CalcCP();
@@ -46,7 +46,7 @@ namespace tnbLib
 
 		void CalcAW
 		(
-			const Marine_WettedBody& theBody
+			const marineLib::Body_Wetted& theBody
 		);
 
 		void CalcCWL();

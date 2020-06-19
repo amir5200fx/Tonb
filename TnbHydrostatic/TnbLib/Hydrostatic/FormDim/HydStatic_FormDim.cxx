@@ -1,5 +1,6 @@
 #include <HydStatic_FormDim.hxx>
 
+#include <Marine_Bodies.hxx>
 #include <Marine_CmptLib.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
@@ -82,7 +83,7 @@ tnbLib::HydStatic_FormDim::HydStatic_FormDim()
 
 tnbLib::HydStatic_FormDim::HydStatic_FormDim
 (
-	const std::shared_ptr<Marine_WettedBody>& theBody
+	const std::shared_ptr<marineLib::Body_Wetted>& theBody
 )
 	: theBody_(theBody)
 {

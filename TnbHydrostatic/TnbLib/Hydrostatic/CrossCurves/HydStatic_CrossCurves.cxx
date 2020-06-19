@@ -6,11 +6,15 @@
 #include <Pln_Tools.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Marine_Body.hxx>
+#include <Marine_BodyTools.hxx>
+#include <Marine_BodyCmptLib.hxx>
 #include <Marine_Graph.hxx>
 #include <Marine_GraphCurve.hxx>
 #include <Marine_WaterLib.hxx>
-#include <Marine_WaterDomains.hxx>
+#include <Marine_SectTools.hxx>
+#include <Marine_MultLevWaterDomain.hxx>
 #include <MarineBase_Tools.hxx>
+#include <Marine_CmptLib2.hxx>
 #include <Marine_System.hxx>
 #include <HydStatic_CrsCurve.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
@@ -138,7 +142,6 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 	const auto& keel = Ax().Location();
 
 	auto body = Body()->Copy();
-	const auto& sections = body->Sections();
 
 	Standard_Integer K = 0;
 	Standard_Real h0 = 0;
@@ -150,15 +153,21 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 	{
 		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(h - h0), sin(h - h0)));
 
-		MarineBase_Tools::Heel(sections, ax);
+		Marine_BodyTools::Heel(body, ax);
 
-		const auto b = MarineBase_Tools::BoundingBox(sections);
+		const auto b = Marine_BodyTools::BoundingBox(*body);
 		const auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), NbWaters());
 
-		auto domains = Marine_WaterLib::RetrieveStillWaterDomains(Domain(), sections, *Z);
+		auto domains = Marine_WaterLib::MultiLevelsStillWaterDomain(Body(), Domain(), *Z);
 		Debug_Null_Pointer(domains);
 
-		auto curveQ = MarineBase_Tools::CrossCurve(sections, domains->Domains(), 0, Ax(), sysLib::gl_marine_integration_info);
+		auto curveQ = 
+			Marine_BodyCmptLib::CrossCurve
+			(
+				body, *domains, 0, Ax(),
+				sysLib::gl_marine_integration_info
+			);
+
 		auto curve = MarineBase_Tools::Curve(curveQ);
 		Debug_Null_Pointer(curve);
 

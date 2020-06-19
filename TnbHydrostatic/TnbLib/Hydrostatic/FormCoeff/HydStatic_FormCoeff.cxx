@@ -2,16 +2,16 @@
 
 #include <HydStatic_FormDim.hxx>
 #include <MarineBase_Tools.hxx>
-#include <Marine_WettedBody.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_CmptLib.hxx>
 #include <Marine_System.hxx>
+#include <Marine_Bodies.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::HydStatic_FormCoeff::CalcDISPV
 (
-	const Marine_WettedBody& theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	auto param = Marine_CmptLib::CalcDISPV(theBody, sysLib::gl_marine_integration_info);
@@ -20,7 +20,7 @@ void tnbLib::HydStatic_FormCoeff::CalcDISPV
 
 void tnbLib::HydStatic_FormCoeff::CalcCB
 (
-	const Marine_WettedBody& theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& dim = *FormDim();
@@ -30,7 +30,7 @@ void tnbLib::HydStatic_FormCoeff::CalcCB
 
 void tnbLib::HydStatic_FormCoeff::CalcAM
 (
-	const Marine_WettedBody& theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	Debug_Null_Pointer(theBody.Mid());
@@ -54,7 +54,7 @@ void tnbLib::HydStatic_FormCoeff::CalcCM()
 
 void tnbLib::HydStatic_FormCoeff::CalcAW
 (
-	const Marine_WettedBody& theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	Debug_Null_Pointer(theBody.WL());

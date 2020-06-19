@@ -6,10 +6,12 @@
 #include <Marine_Body.hxx>
 #include <Marine_WaterLib.hxx>
 #include <Marine_WaterDomain.hxx>
+#include <Marine_BooleanOps.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_GraphCurve.hxx>
 #include <Marine_Graph.hxx>
 #include <Marine_System.hxx>
+#include <Marine_xSectionParam.hxx>
 #include <HydStatic_BnjCurve.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <error.hxx>
@@ -143,7 +145,7 @@ void tnbLib::HydStatic_Bonjean::Perform()
 	Standard_Integer i = 0;
 	for (const auto z : Waters()->Values())
 	{
-		auto domain = Marine_WaterLib::RetrieveStillWaterDomain(Domain(), sections, z);
+		auto domain = Marine_WaterLib::StillWaterDomain(Body(), Domain(), z);
 		Debug_Null_Pointer(domain);
 
 		const auto& wSections = domain->Waters();
@@ -156,7 +158,7 @@ void tnbLib::HydStatic_Bonjean::Perform()
 			const auto& x = sections[k++];
 			Debug_Null_Pointer(x);
 
-			auto wet = MarineBase_Tools::WettedSection(x, w);
+			auto wet = Marine_BooleanOps::WettedSection(x, w);
 
 			if (wet)
 			{

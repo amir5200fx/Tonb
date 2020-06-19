@@ -2,6 +2,7 @@
 #ifndef _HydStatic_CurveLib_Header
 #define _HydStatic_CurveLib_Header
 
+#include <Marine_BodiesFwd.hxx>
 #include <Marine_VesselParams.hxx>
 #include <HydStatic_HydGphCurvesFwd.hxx>
 #include <HydStatic_xDraft.hxx>
@@ -18,8 +19,6 @@ namespace tnbLib
 	class Marine_Domain;
 	class Marine_WaterDomain;
 	class Marine_WaterDomains;
-	class Marine_Body;
-	class Marine_WettedBody;
 	class Marine_WireFrameModel;
 	class NumAlg_AdaptiveInteg_Info;
 
@@ -49,7 +48,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft> 
 			CalcLCB
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const std::vector<Standard_Real>& theTs,
 				const std::shared_ptr<info>& theInfo
 			);
@@ -66,7 +65,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcLCF
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const std::vector<Standard_Real>& theTs,
 				const std::shared_ptr<info>& theInfo
 			);
@@ -83,7 +82,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcAW
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const std::vector<Standard_Real>& theTs,
 				const std::shared_ptr<info>& theInfo
 			);
@@ -100,7 +99,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcDISPV
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const std::vector<Standard_Real>& theTs,
 				const std::shared_ptr<info>& theInfo
 			);
@@ -117,7 +116,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcMCT
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const std::vector<hydStcGphLib::xDraft>& theVolume,
 				const std::shared_ptr<info>& theInfo
 			);
@@ -134,7 +133,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcKB
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const Marine_BaseLine& theBase,
 				const std::vector<Standard_Real>& theTs,
 				const std::shared_ptr<info>& theInfo
@@ -153,7 +152,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcBM
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const std::vector<hydStcGphLib::xDraft>& theVolume,
 				const std::shared_ptr<info>& theInfo
 			);
@@ -170,7 +169,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcBML
 			(
-				const std::vector<std::shared_ptr<Marine_WettedBody>>& theBodies,
+				const std::vector<std::shared_ptr<marineLib::Body_Wetted>>& theBodies,
 				const std::vector<hydStcGphLib::xDraft>& theVolume,
 				const std::shared_ptr<info>& theInfo
 			);
