@@ -97,9 +97,23 @@ namespace tnbLib
 		return Standard_False;
 	}
 
+	template<int Dim>
+	Standard_Integer MaxID(const std::vector<Entity_Connectivity<Dim>>&);
+
+	template<int Dim>
+	std::vector<Entity_Connectivity<Dim>>
+		CombineConnectivities
+		(
+			const std::vector<Entity_Connectivity<Dim>>& theC0,
+			const std::vector<Entity_Connectivity<Dim>>& theC1
+		);
+
 	std::vector<connectivity::dual> dualConnectivityList(const Standard_Integer theNbEdges);
 
 	std::vector<connectivity::dual> dualConnectivityList_Chain(const Standard_Integer theNbEdges, const Standard_Boolean IsClosed = Standard_False);
+
 }
+
+#include <Entity_ConnectivityI.hxx>
 
 #endif // !_Entity_Connectivity_Header

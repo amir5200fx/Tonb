@@ -314,3 +314,36 @@ tnbLib::Geo_Tools::ProjectPtAtSegment
 	}
 	return std::move(Pn);
 }
+
+namespace tnbLib
+{
+
+	template<class Type>
+	size_t Geo_Tools::FindSpan
+	(
+		const Standard_Real x, 
+		const std::vector<std::shared_ptr<Type>>& theSorted,
+		Standard_Real(*xValue)(const std::shared_ptr<Type>&)
+	)
+	{
+#ifdef _DEBUG
+		CheckSorted(theSorted, "size_t Geo_Tools::FindSpan(Args...)");
+#endif // _DEBUG
+
+		auto high = theSorted.size() - 1;
+		if (x IS_EQUAL xValue(theSorted[high]))
+		{
+			return high;
+		}
+
+		size_t low = 0;
+		auto mid = (low + high) / 2;
+		while (x < xValue(theSorted[mid]) OR x >= xValue(theSorted[mid + 1]))
+		{
+			if (x < xValue(theSorted[mid])) high = mid;
+			else low = mid;
+			mid = (low + high) / 2;
+		}
+		return mid;
+	}
+}

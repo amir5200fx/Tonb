@@ -290,6 +290,15 @@ namespace tnbLib
 				const Entity3d_Chain& theChain
 			);
 
+		template<class Type>
+		static size_t
+			FindSpan
+			(
+				const Standard_Real x,
+				const std::vector<std::shared_ptr<Type>>& theSorted,
+				Standard_Real(*xValue)(const std::shared_ptr<Type>&)
+			);
+
 		static size_t FindSpan(const Standard_Real x, const std::vector<Standard_Real>& theSorted);
 
 		static void CheckSorted(const std::vector<Standard_Real>& theSorted, const word& theName);

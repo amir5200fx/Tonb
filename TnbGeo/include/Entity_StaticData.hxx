@@ -86,7 +86,18 @@ namespace tnbLib
 			return theBoundingBox_;
 		}
 
-		std::shared_ptr<Entity_StaticData> Merged(const Standard_Real theRes, const Standard_Real theRadius) const;
+		std::shared_ptr<Entity_StaticData> 
+			Merged
+			(
+				const Standard_Real theRes, 
+				const Standard_Real theRadius
+			) const;
+
+		std::shared_ptr<Entity_StaticData> 
+			Added
+			(
+				const Entity_StaticData& theChain
+			) const;
 
 		void Transform
 		(
@@ -100,6 +111,8 @@ namespace tnbLib
 		}
 
 		void Merging(const Standard_Boolean HandleDegeneracy, const Standard_Real Resolution, const Standard_Real Radius);
+
+		void Add(const Entity_StaticData& theChain);
 
 		void ExportToPlt(std::fstream& File) const;
 

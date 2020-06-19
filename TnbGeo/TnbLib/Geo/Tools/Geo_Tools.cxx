@@ -180,9 +180,9 @@ tnbLib::Geo_Tools::FindSpan
 	const std::vector<Standard_Real>& theSorted
 )
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	CheckSorted(theSorted, "size_t Geo_Tools::FindSpan(Args...)");
-#endif // DEBUG
+#endif // _DEBUG
 
 	auto high = theSorted.size() - 1;
 	if (x IS_EQUAL theSorted[high])
