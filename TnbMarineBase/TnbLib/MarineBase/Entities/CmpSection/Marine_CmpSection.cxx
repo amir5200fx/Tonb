@@ -6,11 +6,25 @@
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <Marine_Section.hxx>
-#include <Marine_WlSection.hxx>
+#include <Marine_SectTools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
 #include <map>
+
+void tnbLib::Marine_CmpSection::Insert(const std::shared_ptr<Marine_Section>& theSection)
+{
+	if (NOT Marine_SectTools::IsOuter(theSection))
+	{
+		FatalErrorIn
+		(
+			"void Marine_CmpSection::Insert(const std::shared_ptr<Marine_Section>& theSection)"
+		)
+			<< "the section is not outer!" << endl
+			<< abort(FatalError);
+	}
+	theSections_.push_back(theSection);
+}
 
 tnbLib::Marine_CmpSection::Marine_CmpSection()
 {
@@ -33,6 +47,35 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 {
 }
 
+tnbLib::Marine_CmpSection::Marine_CmpSection
+(
+	const std::shared_ptr<Marine_Section>& theSection
+)
+{
+	Insert(theSection);
+}
+
+tnbLib::Marine_CmpSection::Marine_CmpSection
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_Entity(theIndex)
+{
+	Insert(theSection);
+}
+
+tnbLib::Marine_CmpSection::Marine_CmpSection
+(
+	const Standard_Integer theIndex,
+	const word & theName, 
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_Entity(theIndex, theName)
+{
+	Insert(theSection);
+}
+
 tnbLib::Entity2d_Box 
 tnbLib::Marine_CmpSection::BoundingBox() const
 {
@@ -46,6 +89,16 @@ tnbLib::Marine_CmpSection::BoundingBox() const
 		iter++;
 	}
 	return std::move(b);
+}
+
+tnbLib::Marine_SectionType 
+tnbLib::Marine_CmpSection::Type() const
+{
+	const auto& sections = Sections();
+	Debug_If_Condition(sections.empty());
+
+	auto iter = sections.cbegin();
+	return (*iter)->Type();
 }
 
 Standard_Real 
