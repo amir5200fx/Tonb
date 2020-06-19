@@ -2,6 +2,9 @@
 #ifndef _Marine_DisctLib_Header
 #define _Marine_DisctLib_Header
 
+#include <Marine_ModelsFwd.hxx>
+#include <Marine_BodiesFwd.hxx>
+#include <Marine_BodyType.hxx>
 
 #include <memory>
 #include <tuple>
@@ -13,10 +16,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_Distrb;
-	class Marine_WettedBody;
-	class Marine_DryBody;
 	class Marine_WireFrameModel;
-	class Marine_VesselHull;
 	class Marine_WaterDomain;
 
 	class Marine_DisctLib
@@ -24,17 +24,19 @@ namespace tnbLib
 
 	public:
 
+		static TopoDS_Shape Section(const TopoDS_Shape& theShape, const gp_Ax2& theSys);
+
 		static std::shared_ptr<Marine_WireFrameModel> 
-			WireFrameModel
+			xWireFrameModel
 			(
-				const Marine_VesselHull& theHull,
+				const Marine_Model& theModel,
 				const Marine_Distrb& theX,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
 			);
 
 
-		static std::shared_ptr<Marine_WettedBody>
+		static std::shared_ptr<marineLib::Body_Wetted>
 			WettedBody
 			(
 				const Marine_WireFrameModel& theModel,
@@ -43,7 +45,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::tuple<std::shared_ptr<Marine_WettedBody>, std::shared_ptr<Marine_DryBody>>
+		static std::tuple<std::shared_ptr<marineLib::Body_Wetted>, std::shared_ptr<marineLib::Body_Dry>>
 			WettedAndDryBody
 			(
 				const Marine_WireFrameModel& theModel,

@@ -2,15 +2,16 @@
 
 #include <Geo_xDistb.hxx>
 #include <Marine_WireFrameModel.hxx>
-#include <Marine_VesselHull.hxx>
+#include <Marine_Models.hxx>
 #include <Marine_Distrb.hxx>
 #include <Marine_xCmpSection.hxx>
 #include <Marine_zCmpSection.hxx>
 #include <Marine_WaterDomain.hxx>
-#include <Marine_WettedBody.hxx>
-#include <Marine_HullBody.hxx>
+#include <Marine_Bodies.hxx>
+#include <Marine_SectTools.hxx>
 #include <Marine_FlatWave.hxx>
 #include <MarineBase_Tools.hxx>
+#include <Marine_BooleanOps.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -18,10 +19,37 @@
 #include <GeomAPI_IntSS.hxx>
 #include <BRepAlgoAPI_Section.hxx>
 
-std::shared_ptr<tnbLib::Marine_WireFrameModel> 
-tnbLib::Marine_DisctLib::WireFrameModel
+TopoDS_Shape 
+tnbLib::Marine_DisctLib::Section
 (
-	const Marine_VesselHull & theHull, 
+	const TopoDS_Shape & theShape,
+	const gp_Ax2 & theSys
+)
+{
+	BRepAlgoAPI_Section alg;
+	alg.ComputePCurveOn1(Standard_True);
+	alg.SetRunParallel(Standard_True);
+	alg.Init2(theShape);
+	alg.Approximation(Standard_True);
+
+	gp_Pln plane(theSys);
+
+	alg.Init1(plane);
+	alg.Build();
+
+	if (alg.Shape().IsNull())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Failed to calculate intersection" << endl
+			<< abort(FatalError);
+	}
+	return alg.Shape();
+}
+
+std::shared_ptr<tnbLib::Marine_WireFrameModel> 
+tnbLib::Marine_DisctLib::xWireFrameModel
+(
+	const Marine_Model & theModel,
 	const Marine_Distrb & theX,
 	const Standard_Real theMinTol, 
 	const Standard_Real theMaxTol
@@ -36,37 +64,42 @@ tnbLib::Marine_DisctLib::WireFrameModel
 	const auto& xSections = theX.X()->Values();
 	systems.reserve(xSections.size());
 
-	BRepAlgoAPI_Section alg;
-	alg.ComputePCurveOn1(Standard_True);
-	alg.SetRunParallel(Standard_True);
-	alg.Init2(theHull.Shape());
-	alg.Approximation(Standard_True);
-
 	auto x0 = syst0.Location().Z();
 	for (auto x : xSections)
 	{
 		auto syst = syst0.Translated(gp_Vec(x - x0, 0, 0));
 		systems.push_back(syst);
 
-		gp_Pln plane(syst);
-
-		alg.Init1(plane);
-		alg.Build();
-
-		if (alg.Shape().IsNull())
-		{
-			FatalErrorIn("std::shared_ptr<Marine_WireFrameModel> WireFrameModel(const Marine_VesselHull& theHull, const Marine_Distrb& theX)")
-				<< "Failed to calculate intersection" << endl
-				<< abort(FatalError);
-		}
-
-		shapes.push_back(alg.Shape());
+		auto sect = Section(theModel.Shape(), syst);
+		shapes.push_back(std::move(sect));
 	}
 
 	auto model = std::make_shared<Marine_WireFrameModel>();
 	Debug_Null_Pointer(model);
 
-	auto body = std::make_shared<Marine_HullBody>();
+	std::shared_ptr<Marine_Body> body;
+
+	switch (theModel.Type())
+	{
+	case Marine_ModelType::hull:
+	{
+		body = std::make_shared<marineLib::Body_Displacer>();
+	}
+	case Marine_ModelType::sail:
+	{
+		body = std::make_shared<marineLib::Body_Sail>();
+	}
+	case Marine_ModelType::tank:
+	{
+		body = std::make_shared<marineLib::Body_Tank>();
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid type of the model!" << endl
+			<< abort(FatalError);
+		break;
+	}
+
 	Debug_Null_Pointer(body);
 
 	auto& sections = body->ChangeSections();
@@ -76,27 +109,76 @@ tnbLib::Marine_DisctLib::WireFrameModel
 	Standard_Integer K = 0;
 	for (const auto& x : shapes)
 	{
-		auto section =
-			Marine_xCmpSection::CreateCmpSection
+		switch (theModel.Type())
+		{
+		case Marine_ModelType::hull:
+		{
+			auto section =
+				Marine_SectTools::CmpSectionCreator
+				(
+					Marine_SectTools::SectionCreator
+					(
+						x, systems[i++],
+						Marine_SectionType::displacer,
+						theMinTol, theMaxTol
+					));
+			Debug_Null_Pointer(section);
+			section->SetIndex(++K);
+			sections.push_back
 			(
-				x, systems[i++], theMinTol,
-				theMaxTol);
-		Debug_Null_Pointer(section);
-
-		section->SetIndex(++K);
-
-		sections.push_back
-		(
-			std::move(section));
+				std::move(section));
+			
+		}
+		case Marine_ModelType::sail:
+		{
+			auto section =
+				Marine_SectTools::CmpSectionCreator
+				(
+					Marine_SectTools::SectionCreator
+					(
+						x, systems[i++],
+						Marine_SectionType::sail,
+						theMinTol, theMaxTol
+					));
+			Debug_Null_Pointer(section);
+			section->SetIndex(++K);
+			sections.push_back
+			(
+				std::move(section));
+		}
+		case Marine_ModelType::tank:
+		{
+			auto section =
+				Marine_SectTools::CmpSectionCreator
+				(
+					Marine_SectTools::SectionCreator
+					(
+						x, systems[i++],
+						Marine_SectionType::tank,
+						theMinTol, theMaxTol
+					));
+			Debug_Null_Pointer(section);
+			section->SetIndex(++K);
+			sections.push_back
+			(
+				std::move(section));
+		}
+		default:
+			FatalErrorIn(FunctionSIG)
+				<< "Invalid type of the model!" << endl
+				<< abort(FatalError);
+			break;
+		}
+		
 	}
 
 	model->ChangeBody() = std::move(body);
-	model->ChangeShape() = theHull.Shape();
+	model->ChangeShape() = theModel.Shape();
 
 	return std::move(model);
 }
 
-std::shared_ptr<tnbLib::Marine_WettedBody> 
+std::shared_ptr<tnbLib::marineLib::Body_Wetted>
 tnbLib::Marine_DisctLib::WettedBody
 (
 	const Marine_WireFrameModel & theModel,
@@ -105,7 +187,7 @@ tnbLib::Marine_DisctLib::WettedBody
 	const Standard_Real theMaxTol
 )
 {
-	auto body = std::make_shared<Marine_WettedBody>();
+	auto body = std::make_shared<marineLib::Body_Wetted>();
 	Debug_Null_Pointer(body);
 
 	const auto& wave = theWaterDomain.Wave();
@@ -144,13 +226,17 @@ tnbLib::Marine_DisctLib::WettedBody
 	}
 
 	auto section =
-		Marine_zCmpSection::CreateCmpSection
+		Marine_SectTools::CmpSectionCreator
 		(
-			alg.Shape(), theWaterDomain.CoordinateSystem(), theMinTol,
-			theMaxTol);
+			Marine_SectTools::SectionCreator
+			(
+				alg.Shape(), theWaterDomain.CoordinateSystem(),
+				Marine_SectionType::waterLine,
+				theMinTol, theMaxTol
+			));
 	Debug_Null_Pointer(section);
 
-	body->ChangeWater() = std::move(section);
+	body->SetWater(std::move(section));
 
 	const auto& waterSections = theWaterDomain.Waters();
 	auto& wetted = body->ChangeSections();
@@ -163,7 +249,7 @@ tnbLib::Marine_DisctLib::WettedBody
 		const auto& wa = waterSections[K++];
 		Debug_Null_Pointer(wa);
 
-		auto wet = MarineBase_Tools::WettedSection(x, wa);
+		auto wet = Marine_BooleanOps::WettedSection(x, wa);
 		if (wet)
 		{
 			wet->SetCoordinateSystem(x->CoordinateSystem());

@@ -3,6 +3,7 @@
 #define _Marine_Section_Header
 
 #include <Marine_Entity.hxx>
+#include <Marine_SectionType.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <OFstream.hxx>
 
@@ -27,7 +28,7 @@ namespace tnbLib
 
 		static void CheckWire(const Pln_Wire& theWire, const char* theName);
 
-	public:
+	protected:
 
 		Marine_Section
 		(
@@ -36,8 +37,19 @@ namespace tnbLib
 
 		Marine_Section
 		(
+			const std::shared_ptr<Pln_Wire>&& theWire
+		);
+
+		Marine_Section
+		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<Pln_Wire>& theWire
+		);
+
+		Marine_Section
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Wire>&& theWire
 		);
 
 		Marine_Section
@@ -46,6 +58,15 @@ namespace tnbLib
 			const word& theName,
 			const std::shared_ptr<Pln_Wire>& theWire
 		);
+
+		Marine_Section
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Pln_Wire>&& theWire
+		);
+
+	public:
 
 		Entity2d_Box BoundingBox() const;
 
@@ -58,27 +79,29 @@ namespace tnbLib
 
 		void ExportToPlt(OFstream& File) const;
 
-		virtual Standard_Boolean IsDry() const
-		{
-			return Standard_False;
-		}
-
-		virtual Standard_Boolean IsWetted() const
-		{
-			return Standard_False;
-		}
-
-		virtual Standard_Boolean IsWaterLine() const
-		{
-			return Standard_False;
-		}
-
 		virtual Standard_Boolean IsWaterSection() const
 		{
 			return Standard_False;
 		}
 
-		virtual std::shared_ptr<Marine_Section> Copy() const;
+		virtual Standard_Boolean IsHull() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsTank() const
+		{
+			return Standard_True;
+		}
+
+		virtual Standard_Boolean IsSail() const
+		{
+			return Standard_True;
+		}
+
+		virtual std::shared_ptr<Marine_Section> Copy() const = 0;
+
+		virtual Marine_SectionType Type() const = 0;
 
 		//- static functions
 

@@ -13,21 +13,14 @@ namespace tnbLib
 
 		/*Private Data*/
 
+	protected:
+
+		template<class... _Types>
+		Marine_HullBody(_Types&&... _Args)
+			: Marine_Body(_Args...)
+		{}
+
 	public:
-
-		Marine_HullBody();
-
-		Marine_HullBody
-		(
-			const Standard_Integer theIndex
-		);
-
-		Marine_HullBody
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
-
 
 		Standard_Boolean IsHull() const override
 		{
@@ -46,6 +39,10 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual Standard_Boolean IsDisplacer() const
+		{
+			return Standard_False;
+		}
 	};
 }
 

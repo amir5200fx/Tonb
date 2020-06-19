@@ -4,6 +4,7 @@
 
 #include <Entity2d_BoxFwd.hxx>
 #include <Marine_Entity.hxx>
+#include <Marine_SectionType.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -21,6 +22,7 @@ namespace tnbLib
 	// Forward Declarations
 	class MarineBase_Tools;
 	class Marine_Section;
+	class Marine_SectTools;
 	class Pln_Curve;
 	class Pln_Wire;
 
@@ -29,22 +31,18 @@ namespace tnbLib
 	{
 
 		friend class MarineBase_Tools;
+		friend class Marine_SectTools;
 
 		/*Private Data*/
 
 		std::vector<std::shared_ptr<Marine_Section>> theSections_;
 
-	protected:
-
-		
+	protected:	
 
 		void Insert
 		(
 			const std::shared_ptr<Marine_Section>& theSection
-		)
-		{
-			theSections_.push_back(theSection);
-		}
+		);
 
 	protected:
 
@@ -61,6 +59,23 @@ namespace tnbLib
 			const word& theName
 		);
 
+		Marine_CmpSection
+		(
+			const std::shared_ptr<Marine_Section>& theSection
+		);
+
+		Marine_CmpSection
+		(
+			const Standard_Integer theIndex, 
+			const std::shared_ptr<Marine_Section>& theSection
+		);
+
+		Marine_CmpSection
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			const std::shared_ptr<Marine_Section>& theSection
+		);
 
 		static Standard_Boolean 
 			LessDiameterSize
@@ -104,6 +119,8 @@ namespace tnbLib
 			return theSections_;
 		}
 
+		Marine_SectionType Type() const;
+
 		virtual Standard_Boolean IsXsection() const
 		{
 			return Standard_False;
@@ -134,6 +151,7 @@ namespace tnbLib
 			(
 				const TopoDS_Shape& theEdges
 			);
+
 	};
 }
 

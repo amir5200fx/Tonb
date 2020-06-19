@@ -5,7 +5,7 @@
 #include <Marine_Domain.hxx>
 #include <MarineBase_Tools.hxx>
 
-tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
+tnbLib::marineLib::WaterDomain_Still::WaterDomain_Still
 (
 	const std::shared_ptr<Marine_Domain>& theDomain,
 	const Standard_Real theZ
@@ -15,7 +15,7 @@ tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
 {
 }
 
-tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
+tnbLib::marineLib::WaterDomain_Still::WaterDomain_Still
 (
 	const Standard_Integer theIndex, 
 	const std::shared_ptr<Marine_Domain>& theDomain,
@@ -26,7 +26,7 @@ tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
 {
 }
 
-tnbLib::Marine_WaterDomain_Still::Marine_WaterDomain_Still
+tnbLib::marineLib::WaterDomain_Still::WaterDomain_Still
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 

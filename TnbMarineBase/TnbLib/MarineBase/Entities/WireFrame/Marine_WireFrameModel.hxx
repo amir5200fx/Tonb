@@ -42,13 +42,10 @@ namespace tnbLib
 
 	public:
 
-		Marine_WireFrameModel();
-
-		Marine_WireFrameModel
-		(
-			const Standard_Integer theIndex, 
-			const word& theName
-		);
+		template<class... _Types>
+		Marine_WireFrameModel(_Types&&... _Args)
+			: Marine_Entity(_Args...)
+		{}
 
 
 		const auto& Body() const
