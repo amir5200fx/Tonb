@@ -3,11 +3,12 @@
 #include <Pnt3d.hxx>
 #include <Entity2d_Box.hxx>
 #include <Cad2d_CmptLib.hxx>
-#include <Marine_WettedBody.hxx>
+#include <Marine_Bodies.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_BaseLine.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_WaterLib.hxx>
+#include <Marine_SectTools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -20,7 +21,7 @@ tnbLib::Marine_CmptLib::CalcBasicDim
 )
 {
 	const auto& sections = theBody.Sections();
-	auto b = MarineBase_Tools::BoundingBox(sections);
+	auto b = Marine_SectTools::BoundingBox(sections);
 
 	const auto zmin = b.P0().Z();
 	const auto& mid = sections[sections.size() / 2];
@@ -53,7 +54,7 @@ tnbLib::Marine_CmptLib::SpecifyD
 tnbLib::marineLib::APP 
 tnbLib::Marine_CmptLib::CalcAPP
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& awl = Marine_WaterLib::AWL(theBody);
@@ -70,7 +71,7 @@ tnbLib::Marine_CmptLib::CalcAPP
 tnbLib::marineLib::FPP 
 tnbLib::Marine_CmptLib::CalcFPP
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& fwl = Marine_WaterLib::FWL(theBody);
@@ -98,7 +99,7 @@ tnbLib::Marine_CmptLib::CalcMPP
 tnbLib::marineLib::LWL 
 tnbLib::Marine_CmptLib::CalcLWL
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& wlSect = theBody.WL();
@@ -118,7 +119,7 @@ tnbLib::Marine_CmptLib::CalcLWL
 tnbLib::marineLib::BWL 
 tnbLib::Marine_CmptLib::CalcBWL
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& sections = theBody.Sections();
@@ -156,7 +157,7 @@ tnbLib::Marine_CmptLib::CalcAPP
 tnbLib::marineLib::FWL 
 tnbLib::Marine_CmptLib::CalcFWL
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& fwl = Marine_WaterLib::FWL(theBody);
@@ -173,7 +174,7 @@ tnbLib::Marine_CmptLib::CalcFWL
 tnbLib::marineLib::AWL 
 tnbLib::Marine_CmptLib::CalcAWL
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& awl = Marine_WaterLib::AWL(theBody);
@@ -190,7 +191,7 @@ tnbLib::Marine_CmptLib::CalcAWL
 tnbLib::marineLib::FUW 
 tnbLib::Marine_CmptLib::CalcFUW
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& fuw = Marine_WaterLib::FUW(theBody);
@@ -207,7 +208,7 @@ tnbLib::Marine_CmptLib::CalcFUW
 tnbLib::marineLib::AUW 
 tnbLib::Marine_CmptLib::CalcAUW
 (
-	const Marine_WettedBody & theBody
+	const marineLib::Body_Wetted& theBody
 )
 {
 	const auto& auw = Marine_WaterLib::AUW(theBody);
@@ -262,7 +263,7 @@ tnbLib::Marine_CmptLib::CalcLPP
 tnbLib::marineLib::LCF
 tnbLib::Marine_CmptLib::CalcLCF
 (
-	const Marine_WettedBody & theBody, 
+	const marineLib::Body_Wetted& theBody,
 	const Standard_Real x0,
 	const std::shared_ptr<info>& theInfo
 )
@@ -281,7 +282,7 @@ tnbLib::Marine_CmptLib::CalcLCF
 tnbLib::marineLib::LCB
 tnbLib::Marine_CmptLib::CalcLCB
 (
-	const Marine_WettedBody & theBody,
+	const marineLib::Body_Wetted& theBody,
 	const Standard_Real x0,
 	const std::shared_ptr<info>& theInfo
 )
@@ -300,7 +301,7 @@ tnbLib::Marine_CmptLib::CalcLCB
 tnbLib::marineLib::DISPV
 tnbLib::Marine_CmptLib::CalcDISPV
 (
-	const Marine_WettedBody & theBody,
+	const marineLib::Body_Wetted& theBody,
 	const std::shared_ptr<info>& theInfo
 )
 {
@@ -369,7 +370,7 @@ tnbLib::Marine_CmptLib::CalcBML
 tnbLib::marineLib::AM 
 tnbLib::Marine_CmptLib::CalcAM
 (
-	const Marine_WettedBody & theBody,
+	const marineLib::Body_Wetted& theBody,
 	const std::shared_ptr<info>& theInfo
 )
 {
@@ -384,7 +385,7 @@ tnbLib::Marine_CmptLib::CalcAM
 tnbLib::marineLib::KB
 tnbLib::Marine_CmptLib::CalcKB
 (
-	const Marine_WettedBody & theBody,
+	const marineLib::Body_Wetted& theBody,
 	const Marine_BaseLine & theBase,
 	const std::shared_ptr<info>& theInfo
 )
@@ -445,7 +446,7 @@ tnbLib::Marine_CmptLib::CalcMCT
 tnbLib::marineLib::AW
 tnbLib::Marine_CmptLib::CalcAW
 (
-	const Marine_WettedBody & theBody,
+	const marineLib::Body_Wetted& theBody,
 	const std::shared_ptr<info>& theInfo
 )
 {
