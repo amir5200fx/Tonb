@@ -4,6 +4,7 @@
 
 #include <Standard_Handle.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Marine_BodiesFwd.hxx>
 
 class Geom_Curve;
 class gp_Ax2;
@@ -19,11 +20,9 @@ namespace tnbLib
 	class Pln_Wire;
 	class Marine_Section;
 	class Marine_CmpSection;
-	class Marine_wCmpSection;
-	class Marine_WettedBody;
 	
 	class Marine_WaterDomain;
-	class Marine_WaterDomains;
+	class Marine_MultLevWaterDomain;
 	class Marine_Domain;
 	class Marine_Wave;
 
@@ -32,78 +31,107 @@ namespace tnbLib
 
 	public:
 
-		static std::shared_ptr<Pln_Wire>
-			WaterSection
+		//- Throw an exception if the body is not a displacer or a tank
+		static std::shared_ptr<Marine_WaterDomain>
+			StillWaterDomain
 			(
-				const Handle(Geom_Curve)& theWaterCurve,
-				const gp_Ax2& theSystem,
-				const Standard_Real theZmin,
+				const std::shared_ptr<Marine_Body>& theBody,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Standard_Real theZ
+			);
+
+		static std::shared_ptr<Marine_WaterDomain>
+			StillWaterDomain
+			(
+				const marineLib::Body_Displacer& theBody,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Standard_Real theZ			
+			);
+
+		static std::shared_ptr<Marine_WaterDomain>
+			StillWaterDomain
+			(
+				const marineLib::Body_Tank& theBody,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Standard_Real theZ
+			);
+
+		static std::shared_ptr<Marine_MultLevWaterDomain>
+			MultiLevelsStillWaterDomain
+			(
+				const std::shared_ptr<Marine_Body>& theBody,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Geo_xDistb& theZ
+			);
+
+		static std::shared_ptr<Marine_MultLevWaterDomain>
+			MultiLevelsStillWaterDomain
+			(
+				const marineLib::Body_Displacer& theBody,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Geo_xDistb& theZ
+			);
+
+		static std::shared_ptr<Marine_MultLevWaterDomain>
+			MultiLevelsStillWaterDomain
+			(
+				const marineLib::Body_Tank& theBody,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Geo_xDistb& theZ
+			);
+
+		static std::shared_ptr<Marine_WaterDomain>
+			WaterDomain
+			(
+				const std::shared_ptr<Marine_Body>& theBody,
+				const Marine_Wave& theWave,
+				const std::shared_ptr<Marine_Domain>& theDomain,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
-			WaterSections
+		static std::shared_ptr<Marine_WaterDomain>
+			WaterDomain
 			(
-				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel, 
-				const Marine_Wave& theWave, 
-				const Entity3d_Box& theDomain, 
-				const Standard_Real theMinTol, 
+				const marineLib::Body_Displacer& theBody,
+				const Marine_Wave& theWave,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
-			StillWaterSections
-			(
-				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
-				const Standard_Real theZ,
-				const Entity3d_Box& theDomain
-			);
-
 		static std::shared_ptr<Marine_WaterDomain>
-			RetrieveStillWaterDomain
+			WaterDomain
 			(
-				const std::shared_ptr<Marine_Domain>& theDomain, 
-				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
-				const Standard_Real theZ
-			);
-
-		static std::shared_ptr<Marine_WaterDomains>
-			RetrieveStillWaterDomains
-			(
+				const marineLib::Body_Tank& theBody,
+				const Marine_Wave& theWave,
 				const std::shared_ptr<Marine_Domain>& theDomain,
-				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
-				const Geo_xDistb& theZ
-			);
-
-		static std::vector<std::shared_ptr<Marine_Section>>
-			RetrieveWLs
-			(
-				const Marine_CmpSection& theSection
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
 			);
 
 		static const std::shared_ptr<Marine_CmpSection> &
 			FUW
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static const std::shared_ptr<Marine_CmpSection> &
 			AUW
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static const std::shared_ptr<Marine_CmpSection> & 
 			FWL
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static const std::shared_ptr<Marine_CmpSection> & 
 			AWL
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 	};
