@@ -27,8 +27,30 @@ tnbLib::Marine_Section::Marine_Section
 
 tnbLib::Marine_Section::Marine_Section
 (
+	const std::shared_ptr<Pln_Wire>&& theWire
+)
+	: theWire_(std::move(theWire))
+{
+	Debug_Null_Pointer(Wire());
+	CheckWire(*Wire(), "Marine_Section::Marine_Section(const std::shared_ptr<Pln_Wire>& theWire)");
+}
+
+tnbLib::Marine_Section::Marine_Section
+(
 	const Standard_Integer theIndex,
 	const std::shared_ptr<Pln_Wire>& theWire
+)
+	: Marine_Entity(theIndex)
+	, theWire_(theWire)
+{
+	Debug_Null_Pointer(Wire());
+	CheckWire(*Wire(), "Marine_Section::Marine_Section(const std::shared_ptr<Pln_Wire>& theWire)");
+}
+
+tnbLib::Marine_Section::Marine_Section
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<Pln_Wire>&& theWire
 )
 	: Marine_Entity(theIndex)
 	, theWire_(theWire)
@@ -42,6 +64,19 @@ tnbLib::Marine_Section::Marine_Section
 	const Standard_Integer theIndex, 
 	const word & theName,
 	const std::shared_ptr<Pln_Wire>& theWire
+)
+	: Marine_Entity(theIndex, theName)
+	, theWire_(theWire)
+{
+	Debug_Null_Pointer(Wire());
+	CheckWire(*Wire(), "Marine_Section::Marine_Section(const std::shared_ptr<Pln_Wire>& theWire)");
+}
+
+tnbLib::Marine_Section::Marine_Section
+(
+	const Standard_Integer theIndex,
+	const word & theName,
+	const std::shared_ptr<Pln_Wire>&& theWire
 )
 	: Marine_Entity(theIndex, theName)
 	, theWire_(theWire)
@@ -84,14 +119,14 @@ tnbLib::Marine_Section::GetXcoord
 	return theSection->CoordinateSystem().Location().X();
 }
 
-std::shared_ptr<tnbLib::Marine_Section> 
-tnbLib::Marine_Section::Copy() const
-{
-	auto wire = std::dynamic_pointer_cast<Pln_Wire>(Wire()->Copy());
-	Debug_Null_Pointer(wire);
-
-	auto copy = std::make_shared<Marine_Section>(Index(), Name(), wire);
-	Debug_Null_Pointer(copy);
-
-	return std::move(copy);
-}
+//std::shared_ptr<tnbLib::Marine_Section> 
+//tnbLib::Marine_Section::Copy() const
+//{
+//	auto wire = std::dynamic_pointer_cast<Pln_Wire>(Wire()->Copy());
+//	Debug_Null_Pointer(wire);
+//
+//	auto copy = std::make_shared<Marine_Section>(Index(), Name(), wire);
+//	Debug_Null_Pointer(copy);
+//
+//	return std::move(copy);
+//}
