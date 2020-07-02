@@ -803,6 +803,51 @@ void tnbLib::Pln_Tools::SplitCurve
 	theC1 = Pln_Tools::ConvertToTrimmedCurve(theCurve, theX, last);
 }
 
+std::vector<std::shared_ptr<tnbLib::Pln_Edge>>
+tnbLib::Pln_Tools::RetrieveEdges
+(
+	const std::vector<Handle(Geom2d_Curve)>& theCurves
+)
+{
+	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
+	vertices.reserve(2 * theCurves.size());
+
+	Standard_Integer k = 0;
+	for (const auto& x : theCurves)
+	{
+		Debug_Null_Pointer(x);
+
+		auto v0 = std::make_shared<Pln_Vertex>(++k, x->Value(x->FirstParameter()));
+		Debug_Null_Pointer(v0);
+
+		vertices.push_back(std::move(v0));
+
+		auto v1 = std::make_shared<Pln_Vertex>(++k, x->Value(x->LastParameter()));
+		Debug_Null_Pointer(v1);
+
+		vertices.push_back(std::move(v1));
+	}
+
+	std::vector<std::shared_ptr<Pln_Edge>> edges;
+	edges.reserve(theCurves.size());
+
+	k = 0;
+	for (const auto& x : theCurves)
+	{
+		Debug_Null_Pointer(x);
+		Debug_If_Condition_Message(NOT Pln_Tools::IsBounded(x), "the curve is not bounded!");
+		auto curve = std::make_shared<Pln_Curve>(k, theCurves[k]);
+		Debug_Null_Pointer(curve);
+
+		auto edge = std::make_shared<Pln_Edge>(std::move(vertices[2 * k]), std::move(vertices[2 * k + 1]), std::move(curve));
+		Debug_Null_Pointer(edge);
+
+		edge->SetIndex(++k);
+		edges.push_back(std::move(edge));
+	}
+	return std::move(edges);
+}
+
 namespace tnbLib
 {
 
