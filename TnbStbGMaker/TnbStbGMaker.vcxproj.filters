@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{26ee5624-e309-4b5c-b550-f82c6eeeca10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker">
+      <UniqueIdentifier>{8185cd08-fff9-4dd2-b6f5-fa7b5a75db2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities">
+      <UniqueIdentifier>{6d5ff876-98f0-4db0-9a24-fc7b328e91d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\Entity">
+      <UniqueIdentifier>{78fa4677-f3e9-42d4-ba8b-fffbdafb8798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\Edge">
+      <UniqueIdentifier>{535fddf6-0883-4569-86aa-782109860cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\Volume">
+      <UniqueIdentifier>{d929d232-238c-409b-8c47-a060a812147a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\Hull">
+      <UniqueIdentifier>{6749164c-7937-4a4d-87c5-53e2cd4ca175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\Sail">
+      <UniqueIdentifier>{4e920366-019b-4faf-9fb4-48bab87ded7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\Tank">
+      <UniqueIdentifier>{71bd91c0-3638-48db-98a0-52f36c25278b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker">
+      <UniqueIdentifier>{759f6b12-7cc6-4eaa-a5f4-0b3fb630f548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker\Aux">
+      <UniqueIdentifier>{bb769734-f950-4980-b8d4-09ce269bcffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker\Hull">
+      <UniqueIdentifier>{589b962a-128d-4588-8c5d-5661ba622b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker\Sail">
+      <UniqueIdentifier>{22ae99e1-4819-4fee-9151-2f1fde67f78d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker\Tank">
+      <UniqueIdentifier>{acb6ccb4-0d2c-4b93-a912-78fccbca96af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\WP">
+      <UniqueIdentifier>{71e41981-1310-4e8d-8668-5aabe4b3c7a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\Model">
+      <UniqueIdentifier>{4b219385-edca-42aa-9d72-f4e99384dd56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\IntplSect">
+      <UniqueIdentifier>{1bf695ce-4715-4876-8ad2-eb5120f351a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\IntplSect\Closer">
+      <UniqueIdentifier>{682e5530-73df-4dcb-9064-3267c663b691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Tools">
+      <UniqueIdentifier>{61b6fa94-efa3-4fb6-b542-6ad019291cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\ShapeTools">
+      <UniqueIdentifier>{1eea3458-003c-46c3-9e9e-591bb1fcd932}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Edge\StbGMaker_Edge.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Volume\StbGMaker_Volume.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Hull\StbGMaker_Hull.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Sail\StbGMaker_Sail.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Tank\StbGMaker_Tank.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\StbGMaker_Alg.hxx">
+      <Filter>TnbLib\StbGMaker\Maker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Auxillary\StbGMaker_AlgAux.hxx">
+      <Filter>TnbLib\StbGMaker\Maker\Aux</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WP.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Hull\StbGMaker_HullCreator.hxx">
+      <Filter>TnbLib\StbGMaker\Maker\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreator.hxx">
+      <Filter>TnbLib\StbGMaker\Maker\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\StbGMaker_SailCreator.hxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\StbGMaker_Creator.hxx">
+      <Filter>TnbLib\StbGMaker\Maker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\IntplSect\StbGMaker_IntplSect.hxx">
+      <Filter>TnbLib\StbGMaker\IntplSect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\IntplSect\Closer\StbGMaker_IntplSect_Closer.hxx">
+      <Filter>TnbLib\StbGMaker\IntplSect\Closer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Tools\StbGMaker_Tools.hxx">
+      <Filter>TnbLib\StbGMaker\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\ShapeTools\StbGMaker_ShapeTools.hxx">
+      <Filter>TnbLib\StbGMaker\ShapeTools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Volume\StbGMaker_Volume.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_Alg.cxx">
+      <Filter>TnbLib\StbGMaker\Maker</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Hull\StbGMaker_HullCreator.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreator.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\StbGMaker_SailCreator.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_Creator.cxx">
+      <Filter>TnbLib\StbGMaker\Maker</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WP.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\IntplSect\StbGMaker_IntplSect.cxx">
+      <Filter>TnbLib\StbGMaker\IntplSect</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\IntplSect\Closer\StbGMaker_IntplSect_Closer.cxx">
+      <Filter>TnbLib\StbGMaker\IntplSect\Closer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Tools\StbGMaker_Tools.cxx">
+      <Filter>TnbLib\StbGMaker\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\ShapeTools\StbGMaker_ShapeTools.cxx">
+      <Filter>TnbLib\StbGMaker\ShapeTools</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

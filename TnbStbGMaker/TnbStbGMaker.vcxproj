@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{CEB10E49-A65F-43A7-BFB4-CB99C6D2F3F8}</ProjectGuid>
+    <RootNamespace>TnbStbGMaker</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\StbGMaker\ShapeTools;$(ProjectDir)TnbLib\StbGMaker\Tools;$(ProjectDir)TnbLib\StbGMaker\IntplSect\Closer;$(ProjectDir)TnbLib\StbGMaker\IntplSect;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull;$(ProjectDir)TnbLib\StbGMaker\Maker\Auxillary;$(ProjectDir)TnbLib\StbGMaker\Maker;$(ProjectDir)TnbLib\StbGMaker\Entities\Model;$(ProjectDir)TnbLib\StbGMaker\Entities\WP;$(ProjectDir)TnbLib\StbGMaker\Entities\Sail;$(ProjectDir)TnbLib\StbGMaker\Entities\Tank;$(ProjectDir)TnbLib\StbGMaker\Entities\Hull;$(ProjectDir)TnbLib\StbGMaker\Entities\Volume;$(ProjectDir)TnbLib\StbGMaker\Entities\Edge;$(ProjectDir)TnbLib\StbGMaker\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\StbGMaker\ShapeTools;$(ProjectDir)TnbLib\StbGMaker\Tools;$(ProjectDir)TnbLib\StbGMaker\IntplSect\Closer;$(ProjectDir)TnbLib\StbGMaker\IntplSect;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull;$(ProjectDir)TnbLib\StbGMaker\Maker\Auxillary;$(ProjectDir)TnbLib\StbGMaker\Maker;$(ProjectDir)TnbLib\StbGMaker\Entities\Model;$(ProjectDir)TnbLib\StbGMaker\Entities\WP;$(ProjectDir)TnbLib\StbGMaker\Entities\Sail;$(ProjectDir)TnbLib\StbGMaker\Entities\Tank;$(ProjectDir)TnbLib\StbGMaker\Entities\Hull;$(ProjectDir)TnbLib\StbGMaker\Entities\Volume;$(ProjectDir)TnbLib\StbGMaker\Entities\Edge;$(ProjectDir)TnbLib\StbGMaker\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Edge\StbGMaker_Edge.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Hull\StbGMaker_Hull.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Sail\StbGMaker_Sail.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Tank\StbGMaker_Tank.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Volume\StbGMaker_Volume.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WP.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\IntplSect\Closer\StbGMaker_IntplSect_Closer.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\IntplSect\StbGMaker_IntplSect.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Auxillary\StbGMaker_AlgAux.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Hull\StbGMaker_HullCreator.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\StbGMaker_SailCreator.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Maker\StbGMaker_Alg.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Maker\StbGMaker_Creator.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreator.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\ShapeTools\StbGMaker_ShapeTools.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Tools\StbGMaker_Tools.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Volume\StbGMaker_Volume.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WP.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\IntplSect\Closer\StbGMaker_IntplSect_Closer.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\IntplSect\StbGMaker_IntplSect.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Hull\StbGMaker_HullCreator.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\StbGMaker_SailCreator.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_Alg.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_Creator.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreator.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\ShapeTools\StbGMaker_ShapeTools.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Tools\StbGMaker_Tools.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
