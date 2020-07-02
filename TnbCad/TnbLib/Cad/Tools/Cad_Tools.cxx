@@ -1063,6 +1063,8 @@ tnbLib::Cad_Tools::RetrieveEdges
 	return std::move(edges);
 }
 
+#include <Pln_Tools.hxx>
+
 std::vector<Handle(Geom2d_Curve)> 
 tnbLib::Cad_Tools::RetrieveParaCurves
 (
@@ -1090,7 +1092,10 @@ tnbLib::Cad_Tools::RetrieveParaCurves
 				<< abort(FatalError);
 		}
 
-		curves.push_back(std::move(curve));
+		auto bounded = Pln_Tools::ConvertToTrimmedCurve(curve, first, last);
+		Debug_Null_Pointer(bounded);
+
+		curves.push_back(std::move(bounded));
 	}
 	return std::move(curves);
 }
