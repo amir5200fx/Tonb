@@ -2,6 +2,10 @@
 #ifndef _Marine_DisctLib_Header
 #define _Marine_DisctLib_Header
 
+#include <Marine_ShapesFwd.hxx>
+#include <Marine_BodiesFwd.hxx>
+#include <Marine_BodyType.hxx>
+#include <Marine_WireFrameShapesFwd.hxx>
 
 #include <memory>
 #include <tuple>
@@ -13,10 +17,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_Distrb;
-	class Marine_WettedBody;
-	class Marine_DryBody;
-	class Marine_WireFrameModel;
-	class Marine_VesselHull;
+	class Marine_WireFrameShape;
 	class Marine_WaterDomain;
 
 	class Marine_DisctLib
@@ -24,29 +25,65 @@ namespace tnbLib
 
 	public:
 
-		static std::shared_ptr<Marine_WireFrameModel> 
-			WireFrameModel
+
+		static std::shared_ptr<Marine_WireFrameShape> 
+			xWireFrameModel
 			(
-				const Marine_VesselHull& theHull,
+				const std::shared_ptr<Marine_Shape>& theModel,
 				const Marine_Distrb& theX,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
 			);
 
-
-		static std::shared_ptr<Marine_WettedBody>
+		static std::shared_ptr<marineLib::Body_Wetted>
 			WettedBody
 			(
-				const Marine_WireFrameModel& theModel,
+				const marineLib::Body_Tank& theModel,
 				const Marine_WaterDomain& theWaterDomain,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
 			);
 
-		static std::tuple<std::shared_ptr<Marine_WettedBody>, std::shared_ptr<Marine_DryBody>>
+		static std::shared_ptr<marineLib::Body_Wetted>
+			WettedBody
+			(
+				const marineLib::Body_Displacer& theModel,
+				const Marine_WaterDomain& theWaterDomain,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<marineLib::Body_Wetted>
+			WettedBody
+			(
+				const std::shared_ptr<Marine_WireFrameShape>& theModel,
+				const Marine_WaterDomain& theWaterDomain,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<marineLib::Body_Wetted>
+			WettedBody
+			(
+				const marineLib::WireFrameShape_Shape& theModel,
+				const Marine_WaterDomain& theWaterDomain,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<marineLib::Body_Wetted>
+			WettedBody
+			(
+				const marineLib::WireFrameShape_Offset& theModel,
+				const Marine_WaterDomain& theWaterDomain,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		static std::tuple<std::shared_ptr<marineLib::Body_Wetted>, std::shared_ptr<marineLib::Body_Dry>>
 			WettedAndDryBody
 			(
-				const Marine_WireFrameModel& theModel,
+				const Marine_WireFrameShape& theModel,
 				const Marine_WaterDomain& theWaterDomain,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol

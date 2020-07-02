@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Marine_VesselParams.hxx>
+#include <Marine_BodiesFwd.hxx>
 
 #include <memory>
 #include <tuple>
@@ -15,7 +16,6 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_Body;
-	class Marine_WettedBody;
 	class Marine_CmpSection;
 	class Marine_xCmpSection;
 	class Marine_zCmpSection;
@@ -44,7 +44,7 @@ namespace tnbLib
 		static marineLib::APP
 			CalcAPP
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::APP
@@ -56,7 +56,7 @@ namespace tnbLib
 		static marineLib::FPP
 			CalcFPP
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::MPP
@@ -69,37 +69,49 @@ namespace tnbLib
 		static marineLib::LWL
 			CalcLWL
 			(
-				const Marine_WettedBody& theBody
+				const std::shared_ptr<marineLib::Body_Wetted>& theBody
+			);
+
+		static marineLib::LWL
+			CalcLWL
+			(
+				const marineLib::Body_Wetted& theBody
+			);
+
+		static marineLib::LWL
+			CalcLWL
+			(
+				const marineLib::Body_WettedS& theBody
 			);
 
 		static marineLib::BWL
 			CalcBWL
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::FWL
 			CalcFWL
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::AWL
 			CalcAWL
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::FUW
 			CalcFUW
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::AUW
 			CalcAUW
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::LOS
@@ -119,7 +131,7 @@ namespace tnbLib
 		static marineLib::LCF 
 			CalcLCF
 			(
-				const Marine_WettedBody& theBody, 
+				const marineLib::Body_Wetted& theBody,
 				const Standard_Real x0, 
 				const std::shared_ptr<info>& theInfo
 			);
@@ -127,7 +139,7 @@ namespace tnbLib
 		static marineLib::LCB 
 			CalcLCB
 			(
-				const Marine_WettedBody& theBody,
+				const marineLib::Body_Wetted& theBody,
 				const Standard_Real x0, 
 				const std::shared_ptr<info>& theInfo
 			);
@@ -135,7 +147,7 @@ namespace tnbLib
 		static marineLib::DISPV 
 			CalcDISPV
 			(
-				const Marine_WettedBody& theBody, 
+				const marineLib::Body_Wetted& theBody,
 				const std::shared_ptr<info>& theInfo
 			);
 
@@ -160,13 +172,13 @@ namespace tnbLib
 		static marineLib::TM
 			CalcTM
 			(
-				const Marine_WettedBody& theBody
+				const marineLib::Body_Wetted& theBody
 			);
 
 		static marineLib::AM
 			CalcAM
 			(
-				const Marine_WettedBody& theBody,
+				const marineLib::Body_Wetted& theBody,
 				const std::shared_ptr<info>& theInfo
 			);
 
@@ -177,7 +189,7 @@ namespace tnbLib
 		static marineLib::KB 
 			CalcKB
 			(
-				const Marine_WettedBody& theBody,
+				const marineLib::Body_Wetted& theBody,
 				const Marine_BaseLine& theBase,
 				const std::shared_ptr<info>& theInfo
 			);
@@ -193,7 +205,7 @@ namespace tnbLib
 		static marineLib::AW 
 			CalcAW
 			(
-				const Marine_WettedBody& theBody,
+				const marineLib::Body_Wetted& theBody,
 				const std::shared_ptr<info>& theInfo
 			);
 

@@ -13,7 +13,7 @@
 #include <Geom_Plane.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_CmpSection.hxx>
-#include <Marine_VesselModel.hxx>
+//#include <Marine_VesselModel.hxx>
 #include <Marine_SectionDistribution_Uniform.hxx>
 //#include <Marine_ModelMaker_Shape.hxx>
 #include <Marine_FlatWave.hxx>
@@ -44,7 +44,7 @@ using namespace tnbLib;
 Standard_Integer main()
 {
 
-	fileName myFileName("openFoamTest.txt");
+	/*fileName myFileName("openFoamTest.txt");
 	OFstream myFile(myFileName);
 
 	Field<scalar> f(5, 0.25);
@@ -58,7 +58,7 @@ Standard_Integer main()
 	myFile << "max(f, g) = " << m << endl;
 
 	auto p = f + g;
-	myFile << "+(f, g) = " << p << endl;
+	myFile << "+(f, g) = " << p << endl;*/
 	//example_union_plane_box();
 	//example_create_marine_vessel();
 	//example_create_ship();
@@ -67,6 +67,7 @@ Standard_Integer main()
 	//example_geo_compt_polygons();
 	//example_cross_curves_ship();
 	//example_cad2d_modeler();
+	example_stb_gmaker_creator();
 
 	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));

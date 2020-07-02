@@ -26,6 +26,8 @@ namespace tnbLib
 	void example_cross_curves_ship();
 
 	void example_cad2d_modeler();
+
+	void example_stb_gmaker_creator();
 }
 
 #endif // !_Tnb_Examples_Header

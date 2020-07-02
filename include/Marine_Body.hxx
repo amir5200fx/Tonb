@@ -4,6 +4,7 @@
 
 #include <Marine_Entity.hxx>
 #include <Marine_BaseLine.hxx>
+#include <Marine_BodyType.hxx>
 
 #include <vector>
 
@@ -12,10 +13,15 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_CmpSection;
+	class Marine_DisctLib;
+	class Marine_BodyTools;
 
 	class Marine_Body
 		: public Marine_Entity
 	{
+
+		friend class Marine_DisctLib;
+		friend class Marine_BodyTools;
 
 		/*Private Data*/
 
@@ -26,27 +32,19 @@ namespace tnbLib
 
 	protected:
 	
-		Marine_Body();
-
-		Marine_Body
-		(
-			const Standard_Integer theIndex
-		);
-
-		Marine_Body
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
-
-	public:
-
-		Standard_Integer NbSections() const;
+		template<class... _Types>
+		Marine_Body(_Types&&... _Args)
+			: Marine_Entity(_Args...)
+		{}
 
 		auto& ChangeSections()
 		{
 			return theSections_;
 		}
+
+	public:
+
+		Standard_Integer NbSections() const;
 
 		const auto& Sections() const
 		{
@@ -78,8 +76,10 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual Marine_BodyType Type() const = 0;
+
 		virtual std::shared_ptr<Marine_Body>
-			Copy() const;
+			Copy() const = 0;
 	};
 }
 

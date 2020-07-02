@@ -2,6 +2,7 @@
 #ifndef _HydStatic_FormDim_Header
 #define _HydStatic_FormDim_Header
 
+#include <Marine_BodiesFwd.hxx>
 #include <Vessel_FormDim.hxx>
 #include <Global_Done.hxx>
 
@@ -11,7 +12,6 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class Marine_WettedBody;
 
 	class HydStatic_FormDim
 		: public Global_Done
@@ -20,7 +20,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Marine_WettedBody> theBody_;
+		std::shared_ptr<marineLib::Body_Wetted> theBody_;
 
 
 		//- private functions
@@ -59,7 +59,7 @@ namespace tnbLib
 
 		HydStatic_FormDim();
 
-		HydStatic_FormDim(const std::shared_ptr<Marine_WettedBody>& theBody);
+		HydStatic_FormDim(const std::shared_ptr<marineLib::Body_Wetted>& theBody);
 
 
 		const auto& Body() const
@@ -71,7 +71,7 @@ namespace tnbLib
 
 		void LoadBody
 		(
-			const std::shared_ptr<Marine_WettedBody>& theBody
+			const std::shared_ptr<marineLib::Body_Wetted>& theBody
 		)
 		{
 			theBody_ = theBody;

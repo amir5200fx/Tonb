@@ -13,43 +13,47 @@ namespace tnbLib
 	class Marine_Body;
 	class Marine_CmpSection;
 
-	class Marine_WaterDomain_Still
-		: public Marine_WaterDomain
+	namespace marineLib
 	{
 
-		/*Private Data*/
-
-		Standard_Real theZ_;
-
-	public:
-
-		Marine_WaterDomain_Still
-		(
-			const std::shared_ptr<Marine_Domain>& theDomain,
-			const Standard_Real theZ
-		);
-
-		Marine_WaterDomain_Still
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<Marine_Domain>& theDomain,
-			const Standard_Real theZ
-		);
-
-		Marine_WaterDomain_Still
-		(
-			const Standard_Integer theIndex,
-			const word& theName, 
-			const std::shared_ptr<Marine_Domain>& theDomain,
-			const Standard_Real theZ
-		);
-
-		auto Z() const
+		class WaterDomain_Still
+			: public Marine_WaterDomain
 		{
-			return theZ_;
-		}
 
-	};
+			/*Private Data*/
+
+			Standard_Real theZ_;
+
+		public:
+
+			WaterDomain_Still
+			(
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Standard_Real theZ
+			);
+
+			WaterDomain_Still
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Standard_Real theZ
+			);
+
+			WaterDomain_Still
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const std::shared_ptr<Marine_Domain>& theDomain,
+				const Standard_Real theZ
+			);
+
+			auto Z() const
+			{
+				return theZ_;
+			}
+		};
+	}
+
 }
 
 #endif // !_Marine_WaterDomain_Still_Header

@@ -125,6 +125,9 @@
     <ProjectReference Include="..\TnbNumAlg\TnbNumAlg.vcxproj">
       <Project>{9d2ace52-928f-4b06-aecd-3a7cef4f63bb}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TnbStbGMaker\TnbStbGMaker.vcxproj">
+      <Project>{ceb10e49-a65f-43a7-bfb4-cb99c6d2f3f8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Examples\example_cad2d_modeler.cxx" />
@@ -136,6 +139,7 @@
     <ClCompile Include="Examples\example_cross_curves_ship.cxx" />
     <ClCompile Include="Examples\example_geo_compt_polygons.cxx" />
     <ClCompile Include="Examples\example_open_iges.cxx" />
+    <ClCompile Include="Examples\example_stb_gmaker_creator.cxx" />
     <ClCompile Include="Examples\example_transform_shape2d.cxx" />
     <ClCompile Include="Examples\example_union_plane_box.cxx" />
     <ClCompile Include="main.cxx" />

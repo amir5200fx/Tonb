@@ -28,7 +28,7 @@ namespace tnbLib
 				const std::shared_ptr<Cad2d_Plane>& thePlane1
 			);
 
-		static std::shared_ptr<Cad2d_Plane>
+		static std::vector<std::shared_ptr<Cad2d_Plane>>
 			Subtract
 			(
 				const std::shared_ptr<Cad2d_Plane>& thePlane0,

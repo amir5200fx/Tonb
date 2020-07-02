@@ -7,6 +7,7 @@
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Pln_Orientation.hxx>
 
+#include <list>
 #include <vector>
 #include <memory>
 
@@ -15,6 +16,8 @@ class gp_Ax22d;
 class Bnd_Box2d;
 class Geom2d_Curve;
 class Geom2dAPI_InterCurveCurve;
+class TopoDS_Edge;
+class TopoDS_Shape;
 
 namespace tnbLib
 {
@@ -322,6 +325,19 @@ namespace tnbLib
 
 		static std::vector<std::shared_ptr<Pln_Edge>> RetrieveEdges(const std::shared_ptr<Pln_Entity>& theEnt);
 
+		static std::vector<TopoDS_Edge> 
+			RetrieveEdges
+			(
+				const TopoDS_Shape& theEdges
+			);
+
+		static std::vector<Handle(Geom2d_Curve)>
+			RetrieveParaCurves
+			(
+				const std::vector<TopoDS_Edge>& theEdges,
+				const gp_Ax2& theSystem
+			);
+
 		static void 
 			ImportToCorner
 			(
@@ -329,6 +345,12 @@ namespace tnbLib
 				Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners
 			);
 
+		static void RetrieveInnerOuterWires
+		(
+			std::list<std::shared_ptr<Pln_Wire>>& theWires,
+			std::shared_ptr<Pln_Wire>& theOuter, 
+			std::vector<std::shared_ptr<Pln_Wire>>& theInners
+		);
 	};
 }
 
