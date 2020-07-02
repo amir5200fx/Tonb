@@ -6197,9 +6197,6 @@
     <ClCompile Include="TnbLib\Base\matrices\lduMatrix\lduMatrix\lduMatrixTemplates.cxx">
       <Filter>TnbLib\Base\matrices\lduMatrix\lduMatrix</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\lduMatrix\lduMatrixUpdateMatrixInterfaces.cxx">
-      <Filter>TnbLib\Base\matrices\lduMatrix\lduMatrix</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\matrices\lduMatrix\lduMatrix\extendedLduMatrix\extendedLduMatrix.cxx">
       <Filter>TnbLib\Base\matrices\lduMatrix\lduMatrix\extendedLduMatrix</Filter>
     </ClCompile>
@@ -7081,6 +7078,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\global\Global_Message.cxx">
       <Filter>TnbLib\Base\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\matrices\lduMatrix\lduMatrix\lduMatrixUpdateMatrixInterfaces.cxx">
+      <Filter>TnbLib\Base\matrices\lduMatrix\lduMatrix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
