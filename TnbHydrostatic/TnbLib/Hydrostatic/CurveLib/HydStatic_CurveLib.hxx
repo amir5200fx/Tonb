@@ -19,7 +19,7 @@ namespace tnbLib
 	class Marine_Domain;
 	class Marine_WaterDomain;
 	class Marine_WaterDomains;
-	class Marine_WireFrameModel;
+	class Marine_WireFrameShape;
 	class NumAlg_AdaptiveInteg_Info;
 
 	namespace marineLib { struct xSectionParam; }
@@ -56,7 +56,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft> 
 			CalcLCB
 			(
-				const Marine_WireFrameModel& theBody,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::shared_ptr<info>& theInfo
@@ -73,7 +73,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcLCF
 			(
-				const Marine_WireFrameModel& theBody,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::shared_ptr<info>& theInfo
@@ -90,7 +90,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcAW
 			(
-				const Marine_WireFrameModel& theBody,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::shared_ptr<info>& theInfo
@@ -107,7 +107,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcDISPV
 			(
-				const Marine_WireFrameModel& theBody,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::shared_ptr<info>& theInfo
@@ -124,7 +124,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcMCT
 			(
-				const Marine_WireFrameModel& theBody,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::shared_ptr<info>& theInfo
@@ -142,7 +142,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcKB
 			(
-				const Marine_WireFrameModel& theBody,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Marine_BaseLine& theBase,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
@@ -160,7 +160,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcBM
 			(
-				const Marine_WireFrameModel& theModel,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::shared_ptr<info>& theInfo
@@ -177,7 +177,7 @@ namespace tnbLib
 		static std::vector<hydStcGphLib::xDraft>
 			CalcBML
 			(
-				const Marine_WireFrameModel& theModel,
+				const std::shared_ptr<Marine_WireFrameShape>& theBody,
 				const Geo_xDistb& theDistb,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const std::shared_ptr<info>& theInfo

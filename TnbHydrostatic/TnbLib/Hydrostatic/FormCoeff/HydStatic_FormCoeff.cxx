@@ -52,16 +52,16 @@ void tnbLib::HydStatic_FormCoeff::CalcCM()
 	ChangeCM()() = AM()() / (dim.BWL()()*dim.TM()());
 }
 
-void tnbLib::HydStatic_FormCoeff::CalcAW
-(
-	const marineLib::Body_Wetted& theBody
-)
-{
-	Debug_Null_Pointer(theBody.WL());
-
-	auto param = Marine_CmptLib::CalcAW(*theBody.WL(), sysLib::gl_marine_integration_info);
-	ChangeAW() = std::move(param);
-}
+//void tnbLib::HydStatic_FormCoeff::CalcAW
+//(
+//	const marineLib::Body_Wetted& theBody
+//)
+//{
+//	Debug_Null_Pointer(theBody.WL());
+//
+//	auto param = Marine_CmptLib::CalcAW(*theBody.WL(), sysLib::gl_marine_integration_info);
+//	ChangeAW() = std::move(param);
+//}
 
 void tnbLib::HydStatic_FormCoeff::CalcCWL()
 {
