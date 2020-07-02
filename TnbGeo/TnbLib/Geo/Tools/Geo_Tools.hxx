@@ -266,6 +266,12 @@ namespace tnbLib
 				const Entity2d_Polygon& thePoly
 			);
 
+		static std::shared_ptr<Entity3d_Chain>
+			RetrieveChain
+			(
+				const Entity3d_Polygon& thePoly
+			);
+
 		static std::shared_ptr<Entity2d_Chain>
 			RetrieveChain
 			(
@@ -301,7 +307,7 @@ namespace tnbLib
 
 		static size_t FindSpan(const Standard_Real x, const std::vector<Standard_Real>& theSorted);
 
-		static void CheckSorted(const std::vector<Standard_Real>& theSorted, const word& theName);
+		static void CheckSorted(const std::vector<Standard_Real>& theSorted, const char* theName);
 	};
 }
 

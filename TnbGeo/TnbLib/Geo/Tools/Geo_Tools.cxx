@@ -21,6 +21,21 @@ tnbLib::Geo_Tools::RetrieveChain
 	return std::move(chain);
 }
 
+std::shared_ptr<tnbLib::Entity3d_Chain>
+tnbLib::Geo_Tools::RetrieveChain
+(
+	const Entity3d_Polygon & thePoly
+)
+{
+	auto chain = std::make_shared<Entity3d_Chain>();
+	Debug_Null_Pointer(chain);
+
+	chain->Points() = thePoly.Points();
+	chain->Connectivity() = dualConnectivityList_Chain(thePoly.NbPoints() - 1);
+
+	return std::move(chain);
+}
+
 std::shared_ptr<tnbLib::Entity2d_Chain> 
 tnbLib::Geo_Tools::RetrieveChain
 (
@@ -204,7 +219,7 @@ tnbLib::Geo_Tools::FindSpan
 void tnbLib::Geo_Tools::CheckSorted
 (
 	const std::vector<Standard_Real>& theSorted,
-	const word & theName
+	const char* theName
 )
 {
 	auto iter = theSorted.begin();

@@ -327,7 +327,7 @@ namespace tnbLib
 	)
 	{
 #ifdef _DEBUG
-		CheckSorted(theSorted, "size_t Geo_Tools::FindSpan(Args...)");
+		//CheckSorted(theSorted, "size_t Geo_Tools::FindSpan(Args...)");
 #endif // _DEBUG
 
 		auto high = theSorted.size() - 1;

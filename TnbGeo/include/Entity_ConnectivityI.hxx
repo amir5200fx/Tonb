@@ -1,5 +1,6 @@
 #pragma once
 #include <Standard_Integer.hxx>
+#include <algorithm>
 namespace tnbLib
 {
 
@@ -19,6 +20,7 @@ namespace tnbLib
 				if (id > maxIndex0) maxIndex0 = id;
 			}
 		}
+		maxIndex0 = std::max(maxIndex0, 0);
 		return maxIndex0;
 	}
 
