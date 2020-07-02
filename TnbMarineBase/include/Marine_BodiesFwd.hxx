@@ -5,17 +5,18 @@
 namespace tnbLib
 {
 
-	class Marine_HullBody;
+	// Forward Declarations
 	class Marine_Body;
 
 	namespace marineLib
 	{
 
 		class Body_Displacer;
+		class Body_Dry;
+		class Body_Sail;
 		class Body_Tank;
 		class Body_Wetted;
-		class Body_Sail;
-		class Body_Dry;
+		class Body_WettedS;
 	}
 }
 

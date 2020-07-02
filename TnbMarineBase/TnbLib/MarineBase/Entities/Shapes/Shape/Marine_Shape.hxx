@@ -1,16 +1,16 @@
 #pragma once
-#ifndef _Marine_Model_Header
-#define _Marine_Model_Header
+#ifndef _Marine_Shape_Header
+#define _Marine_Shape_Header
 
 #include <Marine_Entity.hxx>
-#include <Marine_ModelType.hxx>
+#include <Marine_ShapeType.hxx>
 
 #include <TopoDS_Shape.hxx>
 
 namespace tnbLib
 {
 
-	class Marine_Model
+	class Marine_Shape
 		: public Marine_Entity
 	{
 
@@ -20,15 +20,15 @@ namespace tnbLib
 
 	protected:
 
-		Marine_Model(const TopoDS_Shape& theShape);
+		Marine_Shape(const TopoDS_Shape& theShape);
 
-		Marine_Model
+		Marine_Shape
 		(
 			const Standard_Integer theIndex,
 			const TopoDS_Shape& theShape
 		);
 
-		Marine_Model
+		Marine_Shape
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -42,7 +42,7 @@ namespace tnbLib
 			return theShape_;
 		}
 
-		virtual Marine_ModelType Type() const = 0;
+		virtual Marine_ShapeType Type() const = 0;
 
 		virtual Standard_Boolean IsHull() const
 		{
@@ -61,4 +61,4 @@ namespace tnbLib
 	};
 }
 
-#endif // !_Marine_Model_Header
+#endif // !_Marine_Shape_Header

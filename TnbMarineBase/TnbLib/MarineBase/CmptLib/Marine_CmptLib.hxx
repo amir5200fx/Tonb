@@ -69,7 +69,19 @@ namespace tnbLib
 		static marineLib::LWL
 			CalcLWL
 			(
+				const std::shared_ptr<marineLib::Body_Wetted>& theBody
+			);
+
+		static marineLib::LWL
+			CalcLWL
+			(
 				const marineLib::Body_Wetted& theBody
+			);
+
+		static marineLib::LWL
+			CalcLWL
+			(
+				const marineLib::Body_WettedS& theBody
 			);
 
 		static marineLib::BWL

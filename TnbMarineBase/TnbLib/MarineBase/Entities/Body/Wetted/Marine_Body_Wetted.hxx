@@ -18,21 +18,11 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			std::shared_ptr<Marine_CmpSection> theWater_;
+			
 			std::shared_ptr<Marine_CmpSection> theMid_;
 
 
 			//- private functions and operators
-
-			void SetWater(const std::shared_ptr<Marine_CmpSection>& theWater)
-			{
-				theWater_ = theWater;
-			}
-
-			void SetWater(const std::shared_ptr<Marine_CmpSection>&& theWater)
-			{
-				theWater_ = std::move(theWater);
-			}
 
 			void SetMid(const std::shared_ptr<Marine_CmpSection>& theMid)
 			{
@@ -51,6 +41,11 @@ namespace tnbLib
 				: Marine_HullBody(_Args...)
 			{}
 
+			virtual Standard_Boolean HasWaterSection() const
+			{
+				return Standard_False;
+			}
+
 			Standard_Boolean IsWetted() const override
 			{
 				return Standard_True;
@@ -59,12 +54,7 @@ namespace tnbLib
 			Marine_BodyType Type() const override
 			{
 				return Marine_BodyType::wetted;
-			}
-
-			const auto& WL() const
-			{
-				return theWater_;
-			}
+			}	
 
 			const auto& Mid() const
 			{

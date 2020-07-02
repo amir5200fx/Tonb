@@ -1,8 +1,8 @@
 #include <Marine_DisctLib.hxx>
 
 #include <Geo_xDistb.hxx>
-#include <Marine_WireFrameModel.hxx>
-#include <Marine_Models.hxx>
+#include <Marine_WireFrameShapes.hxx>
+#include <Marine_Shapes.hxx>
 #include <Marine_Distrb.hxx>
 #include <Marine_xCmpSection.hxx>
 #include <Marine_zCmpSection.hxx>
@@ -12,6 +12,8 @@
 #include <Marine_FlatWave.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_BooleanOps.hxx>
+#include <Marine_BodyTools.hxx>
+#include <Marine_DisctTools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -19,42 +21,18 @@
 #include <GeomAPI_IntSS.hxx>
 #include <BRepAlgoAPI_Section.hxx>
 
-TopoDS_Shape 
-tnbLib::Marine_DisctLib::Section
-(
-	const TopoDS_Shape & theShape,
-	const gp_Ax2 & theSys
-)
-{
-	BRepAlgoAPI_Section alg;
-	alg.ComputePCurveOn1(Standard_True);
-	alg.SetRunParallel(Standard_True);
-	alg.Init2(theShape);
-	alg.Approximation(Standard_True);
 
-	gp_Pln plane(theSys);
-
-	alg.Init1(plane);
-	alg.Build();
-
-	if (alg.Shape().IsNull())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "Failed to calculate intersection" << endl
-			<< abort(FatalError);
-	}
-	return alg.Shape();
-}
-
-std::shared_ptr<tnbLib::Marine_WireFrameModel> 
+std::shared_ptr<tnbLib::Marine_WireFrameShape> 
 tnbLib::Marine_DisctLib::xWireFrameModel
 (
-	const Marine_Model & theModel,
+	const std::shared_ptr<Marine_Shape> & theModel,
 	const Marine_Distrb & theX,
 	const Standard_Real theMinTol, 
 	const Standard_Real theMaxTol
 )
 {
+	Debug_Null_Pointer(theModel);
+
 	const auto& sys = theX.CoordinateSystem();
 	gp_Ax2 syst0(sys.Location(), sys.XDirection(), sys.YDirection());
 
@@ -70,26 +48,26 @@ tnbLib::Marine_DisctLib::xWireFrameModel
 		auto syst = syst0.Translated(gp_Vec(x - x0, 0, 0));
 		systems.push_back(syst);
 
-		auto sect = Section(theModel.Shape(), syst);
+		auto sect = Marine_DisctTools::Section(theModel->Shape(), syst);
 		shapes.push_back(std::move(sect));
 	}
 
-	auto model = std::make_shared<Marine_WireFrameModel>();
+	auto model = std::make_shared<marineLib::WireFrameShape_Shape>();
 	Debug_Null_Pointer(model);
 
 	std::shared_ptr<Marine_Body> body;
 
-	switch (theModel.Type())
+	switch (theModel->Type())
 	{
-	case Marine_ModelType::hull:
+	case Marine_ShapeType::hull:
 	{
 		body = std::make_shared<marineLib::Body_Displacer>();
 	}
-	case Marine_ModelType::sail:
+	case Marine_ShapeType::sail:
 	{
 		body = std::make_shared<marineLib::Body_Sail>();
 	}
-	case Marine_ModelType::tank:
+	case Marine_ShapeType::tank:
 	{
 		body = std::make_shared<marineLib::Body_Tank>();
 	}
@@ -109,9 +87,9 @@ tnbLib::Marine_DisctLib::xWireFrameModel
 	Standard_Integer K = 0;
 	for (const auto& x : shapes)
 	{
-		switch (theModel.Type())
+		switch (theModel->Type())
 		{
-		case Marine_ModelType::hull:
+		case Marine_ShapeType::hull:
 		{
 			auto section =
 				Marine_SectTools::CmpSectionCreator
@@ -129,7 +107,7 @@ tnbLib::Marine_DisctLib::xWireFrameModel
 				std::move(section));
 			
 		}
-		case Marine_ModelType::sail:
+		case Marine_ShapeType::sail:
 		{
 			auto section =
 				Marine_SectTools::CmpSectionCreator
@@ -146,7 +124,7 @@ tnbLib::Marine_DisctLib::xWireFrameModel
 			(
 				std::move(section));
 		}
-		case Marine_ModelType::tank:
+		case Marine_ShapeType::tank:
 		{
 			auto section =
 				Marine_SectTools::CmpSectionCreator
@@ -173,15 +151,15 @@ tnbLib::Marine_DisctLib::xWireFrameModel
 	}
 
 	model->ChangeBody() = std::move(body);
-	model->ChangeShape() = theModel.Shape();
+	model->ChangeShape() = theModel;
 
 	return std::move(model);
 }
 
-std::shared_ptr<tnbLib::marineLib::Body_Wetted>
+std::shared_ptr<tnbLib::marineLib::Body_Wetted> 
 tnbLib::Marine_DisctLib::WettedBody
 (
-	const Marine_WireFrameModel & theModel,
+	const marineLib::Body_Tank & theModel,
 	const Marine_WaterDomain & theWaterDomain,
 	const Standard_Real theMinTol,
 	const Standard_Real theMaxTol
@@ -198,8 +176,101 @@ tnbLib::Marine_DisctLib::WettedBody
 			<< abort(FatalError);
 	}
 
+	const auto& waterSections = theWaterDomain.Waters();
+	auto wetted = Marine_DisctTools::WettedSections(theModel.Sections(), waterSections);
+
+	body->ChangeSections() = std::move(wetted);
+	return std::move(body);
+}
+
+std::shared_ptr<tnbLib::marineLib::Body_Wetted> 
+tnbLib::Marine_DisctLib::WettedBody
+(
+	const marineLib::Body_Displacer & theModel, 
+	const Marine_WaterDomain & theWaterDomain,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto body = std::make_shared<marineLib::Body_Wetted>();
+	Debug_Null_Pointer(body);
+
+	const auto& wave = theWaterDomain.Wave();
+	if (NOT wave)
+	{
+		FatalErrorIn("std::shared_ptr<Marine_WettedBody> WettedBody(Args...)")
+			<< " no wave has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& waterSections = theWaterDomain.Waters();
+	auto wetted = Marine_DisctTools::WettedSections(theModel.Sections(), waterSections);
+
+	body->ChangeSections() = std::move(wetted);
+	return std::move(body);
+}
+
+std::shared_ptr<tnbLib::marineLib::Body_Wetted> 
+tnbLib::Marine_DisctLib::WettedBody
+(
+	const std::shared_ptr<Marine_WireFrameShape>& theModel, 
+	const Marine_WaterDomain & theWaterDomain, 
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	Debug_Null_Pointer(theModel);
+
+	if (theModel->HasShape())
+	{
+		auto model = std::dynamic_pointer_cast<marineLib::WireFrameShape_Shape>(theModel);
+		Debug_Null_Pointer(model);
+
+		auto body = WettedBody(*model, theWaterDomain, theMinTol, theMaxTol);
+		return std::move(body);
+	}
+	else
+	{
+		auto model = std::dynamic_pointer_cast<marineLib::WireFrameShape_Offset>(theModel);
+		Debug_Null_Pointer(model);
+
+		auto body = WettedBody(*model, theWaterDomain, theMinTol, theMaxTol);
+		return std::move(body);
+	}
+}
+
+std::shared_ptr<tnbLib::marineLib::Body_Wetted>
+tnbLib::Marine_DisctLib::WettedBody
+(
+	const marineLib::WireFrameShape_Shape& theModel,
+	const Marine_WaterDomain & theWaterDomain,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	Debug_Null_Pointer(theModel.Body());
+	const auto& mBody = *theModel.Body();
+
+	if (NOT Marine_BodyTools::IsDisplacer(mBody) OR NOT Marine_BodyTools::IsTank(mBody))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid type of the body to retrieve the wetted sections!" << endl
+			<< abort(FatalError);
+	}
+
+	auto body = std::make_shared<marineLib::Body_WettedS>();
+	Debug_Null_Pointer(body);
+
+	const auto& wave = theWaterDomain.Wave();
+	if (NOT wave)
+	{
+		FatalErrorIn("std::shared_ptr<Marine_WettedBody> WettedBody(Args...)")
+			<< " no wave has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
 	const auto& shape = theModel.Shape();
-	if (shape.IsNull())
+	if (NOT shape)
 	{
 		FatalErrorIn("std::shared_ptr<Marine_WettedBody> WettedBody(Args...)")
 			<< " no shape has been loaded!" << endl
@@ -213,14 +284,14 @@ tnbLib::Marine_DisctLib::WettedBody
 	alg.ComputePCurveOn1(Standard_True);
 	alg.SetRunParallel(Standard_True);
 	alg.Init1(gWave);
-	alg.Init2(theModel.Shape());
+	alg.Init2(shape->Shape());
 	alg.Approximation(Standard_True);
 
 	alg.Build();
 
 	if (alg.Shape().IsNull())
 	{
-		FatalErrorIn("std::shared_ptr<Marine_WireFrameModel> Marine_DisctLib::WettedBody(Args...)")
+		FatalErrorIn("std::shared_ptr<Marine_WireFrameShape> Marine_DisctLib::WettedBody(Args...)")
 			<< "Failed to calculate intersection" << endl
 			<< abort(FatalError);
 	}
@@ -237,6 +308,57 @@ tnbLib::Marine_DisctLib::WettedBody
 	Debug_Null_Pointer(section);
 
 	body->SetWater(std::move(section));
+
+	const auto& waterSections = theWaterDomain.Waters();
+	auto& wetted = body->ChangeSections();
+
+	Standard_Integer K = 0;
+	for (const auto& x : theModel.Body()->Sections())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& wa = waterSections[K++];
+		Debug_Null_Pointer(wa);
+
+		auto wet = Marine_BooleanOps::WettedSection(x, wa);
+		if (wet)
+		{
+			wet->SetCoordinateSystem(x->CoordinateSystem());
+			wetted.push_back(std::move(wet));
+		}
+	}
+	return std::move(body);
+}
+
+std::shared_ptr<tnbLib::marineLib::Body_Wetted> 
+tnbLib::Marine_DisctLib::WettedBody
+(
+	const marineLib::WireFrameShape_Offset & theModel, 
+	const Marine_WaterDomain & theWaterDomain,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	Debug_Null_Pointer(theModel.Body());
+	const auto& mBody = *theModel.Body();
+
+	if (NOT Marine_BodyTools::IsDisplacer(mBody) OR NOT Marine_BodyTools::IsTank(mBody))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid type of the body to retrieve the wetted sections!" << endl
+			<< abort(FatalError);
+	}
+
+	auto body = std::make_shared<marineLib::Body_Wetted>();
+	Debug_Null_Pointer(body);
+
+	const auto& wave = theWaterDomain.Wave();
+	if (NOT wave)
+	{
+		FatalErrorIn("std::shared_ptr<Marine_WettedBody> WettedBody(Args...)")
+			<< " no wave has been loaded!" << endl
+			<< abort(FatalError);
+	}
 
 	const auto& waterSections = theWaterDomain.Waters();
 	auto& wetted = body->ChangeSections();

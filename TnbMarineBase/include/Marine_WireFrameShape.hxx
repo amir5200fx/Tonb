@@ -1,10 +1,9 @@
 #pragma once
-#ifndef _Marine_WireFrameModel_Header
-#define _Marine_WireFrameModel_Header
+#ifndef _Marine_WireFrameShape_Header
+#define _Marine_WireFrameShape_Header
 
 #include <Marine_Entity.hxx>
-
-#include <TopoDS_Shape.hxx>
+#include <Marine_BodyType.hxx>
 
 #include <vector>
 
@@ -16,7 +15,7 @@ namespace tnbLib
 	class Marine_Body;
 	class Marine_DisctLib;
 
-	class Marine_WireFrameModel
+	class Marine_WireFrameShape
 		: public Marine_Entity
 	{
 
@@ -26,39 +25,32 @@ namespace tnbLib
 
 		std::shared_ptr<Marine_Body> theBody_;
 
-
-		TopoDS_Shape theShape_;
-
-
 		auto& ChangeBody()
 		{
 			return theBody_;
 		}
 
-		auto& ChangeShape()
-		{
-			return theShape_;
-		}
-
-	public:
+	protected:
 
 		template<class... _Types>
-		Marine_WireFrameModel(_Types&&... _Args)
+		Marine_WireFrameShape(_Types&&... _Args)
 			: Marine_Entity(_Args...)
 		{}
 
+	public:
 
 		const auto& Body() const
 		{
 			return theBody_;
 		}
 
-		const auto& Shape() const
+		virtual Standard_Boolean HasShape() const
 		{
-			return theShape_;
+			return Standard_False;
 		}
 
+		Marine_BodyType Type() const;
 	};
 }
 
-#endif // !_Marine_WireFrameModel_Header
+#endif // !_Marine_WireFrameShape_Header

@@ -2,7 +2,7 @@
 #ifndef _Marine_Model_Sail_Header
 #define _Marine_Model_Sail_Header
 
-#include <Marine_Model.hxx>
+#include <Marine_Shape.hxx>
 
 namespace tnbLib
 {
@@ -10,8 +10,8 @@ namespace tnbLib
 	namespace marineLib
 	{
 
-		class Model_Sail
-			: public Marine_Model
+		class Shape_Sail
+			: public Marine_Shape
 		{
 
 			/*Private Data*/
@@ -19,13 +19,13 @@ namespace tnbLib
 		public:
 
 			template<class... _Types>
-			Model_Sail(_Types&&... _Args)
-				: Marine_Model(_Args...)
+			Shape_Sail(_Types&&... _Args)
+				: Marine_Shape(_Args...)
 			{}
 
-			Marine_ModelType Type() const override
+			Marine_ShapeType Type() const override
 			{
-				return Marine_ModelType::sail;
+				return Marine_ShapeType::sail;
 			}
 
 			Standard_Boolean IsSail() const override

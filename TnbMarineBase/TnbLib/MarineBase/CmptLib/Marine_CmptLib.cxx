@@ -9,6 +9,8 @@
 #include <MarineBase_Tools.hxx>
 #include <Marine_WaterLib.hxx>
 #include <Marine_SectTools.hxx>
+#include <Marine_BodyTools.hxx>
+#include <Marine_WaterTools.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -99,7 +101,29 @@ tnbLib::Marine_CmptLib::CalcMPP
 tnbLib::marineLib::LWL 
 tnbLib::Marine_CmptLib::CalcLWL
 (
-	const marineLib::Body_Wetted& theBody
+	const std::shared_ptr<marineLib::Body_Wetted>& theBody
+)
+{
+	Debug_Null_Pointer(theBody);
+	if (theBody->HasWaterSection())
+	{
+		auto wetted = std::dynamic_pointer_cast<marineLib::Body_WettedS>(theBody);
+		Debug_Null_Pointer(wetted);
+
+		auto lwl = CalcLWL(*wetted);
+		return std::move(lwl);
+	}
+	else
+	{
+		auto lwl = CalcLWL(*theBody);
+		return std::move(lwl);
+	}
+}
+
+tnbLib::marineLib::LWL 
+tnbLib::Marine_CmptLib::CalcLWL
+(
+	const marineLib::Body_WettedS & theBody
 )
 {
 	const auto& wlSect = theBody.WL();
@@ -112,6 +136,30 @@ tnbLib::Marine_CmptLib::CalcLWL
 
 	const auto b = wlSect->BoundingBox();
 	const auto[dx, dy] = b.Length();
+	marineLib::LWL param(dx);
+	return std::move(param);
+}
+
+tnbLib::marineLib::LWL 
+tnbLib::Marine_CmptLib::CalcLWL
+(
+	const marineLib::Body_Wetted& theBody
+)
+{
+	std::vector<std::shared_ptr<Marine_CmpSection>> sections;
+	for (const auto& x : theBody.Sections())
+	{
+		Debug_Null_Pointer(x);
+		auto onWaters = Marine_WaterTools::RetrieveNonDeepWLs(*x);
+
+		if (onWaters.size())
+		{
+			sections.push_back(x);
+		}
+	}
+
+	const auto b = Marine_SectTools::BoundingBox(sections);
+	const auto[dx, dy, dz] = b.Length();
 	marineLib::LWL param(dx);
 	return std::move(param);
 }

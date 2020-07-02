@@ -1,13 +1,13 @@
-#include <Marine_Model.hxx>
+#include <Marine_Shape.hxx>
 
-tnbLib::Marine_Model::Marine_Model
+tnbLib::Marine_Shape::Marine_Shape
 (
 	const TopoDS_Shape& theShape
 )
 	: theShape_(theShape)
 {}
 
-tnbLib::Marine_Model::Marine_Model
+tnbLib::Marine_Shape::Marine_Shape
 (
 	const Standard_Integer theIndex,
 	const TopoDS_Shape& theShape
@@ -16,7 +16,7 @@ tnbLib::Marine_Model::Marine_Model
 	, theShape_(theShape)
 {}
 
-tnbLib::Marine_Model::Marine_Model
+tnbLib::Marine_Shape::Marine_Shape
 (
 	const Standard_Integer theIndex,
 	const word& theName,
