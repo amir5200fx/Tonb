@@ -6,8 +6,12 @@
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Geo_Tools.hxx>
 #include <Geo_UniDistb.hxx>
+#include <Geo_CosineDistb.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_ShapeTools.hxx>
+#include <Cad_FastDiscrete.hxx>
+#include <FastDiscrete_System.hxx>
+#include <FastDiscrete_Params.hxx>
 #include <StbGMaker_ShapeTools.hxx>
 #include <StbGMaker_Creator.hxx>
 #include <StbGMaker_HullCreator.hxx>
@@ -21,10 +25,20 @@
 
 #include <Bnd_Box.hxx>
 
+#include <Poly_Triangulation.hxx>
+
 namespace tnbLib
 {
 
-	void Plot(const std::map<Standard_Integer, std::shared_ptr<StbGMaker_WP>>& WpMap, OFstream& myFile)
+	void Plot
+	(
+		const std::map
+		<
+		Standard_Integer,
+		std::shared_ptr<StbGMaker_WP>
+		>& WpMap,
+		OFstream& myFile
+	)
 	{
 		auto info = std::make_shared<Geo_ApprxCurve_Info>();
 		Debug_Null_Pointer(info);
@@ -66,6 +80,9 @@ namespace tnbLib
 
 void tnbLib::example_stb_gmaker_creator()
 {
+	fileName myFileName("example_stb_gmaker_creator.plt");
+	OFstream myFile(myFileName);
+
 	auto ship = std::make_shared<LegModel_DispNo1>();
 	Debug_Null_Pointer(ship);
 
@@ -73,6 +90,20 @@ void tnbLib::example_stb_gmaker_creator()
 
 	const auto& hullShape = ship->Entity();
 
+	auto bBox = Cad_Tools::BoundingBox(Cad_Tools::BoundingBox(hullShape));
+
+	FastDiscrete_Params params;
+	params.Deflection = 1.0e-4*bBox.Diameter();
+	params.Angle = 1.0;
+
+	Cad_FastDiscrete::Triangulation(hullShape, params);
+
+	auto hullTris = Cad_Tools::RetrieveTriangulation(hullShape);
+	for (const auto& x : hullTris)
+	{
+		auto mesh = Cad_Tools::Triangulation(*x);
+		mesh->ExportToPlt(myFile);
+	}
 
 	gp_Ax2 cyl_ax1(Pnt3d(50, 5, 10), Dir3d(1, 0, 0));
 	gp_Ax2 cyl_ax2(Pnt3d(50, -5, 10), Dir3d(1, 0, 0));
@@ -116,6 +147,16 @@ void tnbLib::example_stb_gmaker_creator()
 
 	Debug_If_Condition(NOT sup_xDis->IsDone());
 
+	auto xDis = std::make_shared<Geo_CosineDistb>(20);
+	Debug_Null_Pointer(xDis);
+
+	const auto tol = bBox.Diameter()*1.0E-4;
+	xDis->SetLower(bBox.P0().X() + tol);
+	xDis->SetUpper(bBox.P1().X() - tol);
+	xDis->Perform();
+
+	Debug_If_Condition(NOT xDis->IsDone());
+
 	auto creator = std::make_shared<StbGMaker_Creator>();
 	Debug_Null_Pointer(creator);
 
@@ -142,20 +183,7 @@ void tnbLib::example_stb_gmaker_creator()
 	
 	const auto& hullCreator = creator->HullMaker();
 	
-	auto bBox = Cad_Tools::BoundingBox(Cad_Tools::BoundingBox(hullShape));
-	auto xDis = std::make_shared<Geo_UniDistb>(20);
-	Debug_Null_Pointer(xDis);
-
-	const auto tol = bBox.Diameter()*1.0E-4;
-	xDis->SetLower(bBox.P0().X() + tol);
-	xDis->SetUpper(bBox.P1().X() - tol);
-	xDis->Perform();
-
-	Debug_If_Condition(NOT xDis->IsDone());
 	hullCreator->CreateWorkingPlanes(*xDis);
-
-	fileName myFileName("example_stb_gmaker_creator.plt");
-	OFstream myFile(myFileName);
 
 	Plot(hullCreator->WorkingPlanes(), myFile);
 	Plot(tank1_creator->WorkingPlanes(), myFile);
