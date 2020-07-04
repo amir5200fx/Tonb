@@ -376,6 +376,9 @@
     <Filter Include="TnbLib\Geo\Counter">
       <UniqueIdentifier>{98d9ca45-8b18-440a-98b6-6e99c24a0a7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Distributor\Cosine">
+      <UniqueIdentifier>{7a24d093-e69c-46bf-aa62-8b1ead21f306}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -834,6 +837,9 @@
     <ClInclude Include="TnbLib\Geo\Counter\Geo_ItemCounter.hxx">
       <Filter>TnbLib\Geo\Counter</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Distributor\Cosine\Geo_CosineDistb.hxx">
+      <Filter>TnbLib\Geo\Distributor\Cosine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1012,6 +1018,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Counter\Geo_ItemCounter.cxx">
       <Filter>TnbLib\Geo\Counter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Distributor\Cosine\Geo_CosineDistb.cxx">
+      <Filter>TnbLib\Geo\Distributor\Cosine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
