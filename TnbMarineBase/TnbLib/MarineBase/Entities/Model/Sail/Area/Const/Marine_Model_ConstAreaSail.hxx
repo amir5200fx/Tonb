@@ -62,6 +62,10 @@ namespace tnbLib
 				Pnt2d&& theCentre
 			);
 
+			Marine_SailModelType SailType() const override
+			{
+				return Marine_SailModelType::constant_area;
+			}
 
 			auto Area() const
 			{

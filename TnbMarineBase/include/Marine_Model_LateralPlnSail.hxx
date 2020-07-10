@@ -23,17 +23,41 @@ namespace tnbLib
 
 		public:
 
-			Model_LateralPlnSail(const std::shared_ptr<Cad2d_Plane>& thePlane);
+			Model_LateralPlnSail
+			(
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
 
-			Model_LateralPlnSail(std::shared_ptr<Cad2d_Plane>&& thePlane);
+			Model_LateralPlnSail
+			(
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, const std::shared_ptr<Cad2d_Plane>& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, std::shared_ptr<Cad2d_Plane>&& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<Cad2d_Plane>& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName,
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, const word& theName, std::shared_ptr<Cad2d_Plane>&& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName, 
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
 
 
 			const auto& Plane() const
@@ -41,7 +65,15 @@ namespace tnbLib
 				return thePlane_;
 			}
 
+			Marine_SailModelType SailType() const override
+			{
+				return Marine_SailModelType::lateral_plane;
+			}
 
+			Standard_Boolean IsTwoDimApprox() const
+			{
+				return Standard_True;
+			}
 		};
 	}
 }

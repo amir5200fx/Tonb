@@ -59,7 +59,10 @@ namespace tnbLib
 				std::shared_ptr<Body_Sail>&& theSail
 			);
 
-			Marine
+			Marine_SailModelType SailType() const override
+			{
+				return Marine_SailModelType::shape;
+			}
 
 			const auto& Body() const
 			{

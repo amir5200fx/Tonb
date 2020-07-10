@@ -22,7 +22,15 @@ namespace tnbLib
 
 	public:
 
+		Standard_Boolean HasGeometry() const override
+		{
+			return Standard_True;
+		}
 
+		virtual Standard_Boolean IsPlanar() const
+		{
+			return Standard_False;
+		}
 	};
 }
 

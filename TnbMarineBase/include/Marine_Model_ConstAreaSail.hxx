@@ -20,18 +20,52 @@ namespace tnbLib
 
 		public:
 
-			Model_ConstAreaSail(const Standard_Real theArea, const Pnt2d& theCentre);
+			Model_ConstAreaSail
+			(
+				const Standard_Real theArea,
+				const Pnt2d& theCentre
+			);
 
-			Model_ConstAreaSail(const Standard_Real theArea, Pnt2d&& theCentre);
+			Model_ConstAreaSail
+			(
+				const Standard_Real theArea,
+				Pnt2d&& theCentre
+			);
 
-			Model_ConstAreaSail(const Standard_Integer theIndex, const Standard_Real theArea, const Pnt2d& theCentre);
+			Model_ConstAreaSail
+			(
+				const Standard_Integer theIndex, 
+				const Standard_Real theArea, 
+				const Pnt2d& theCentre
+			);
 
-			Model_ConstAreaSail(const Standard_Integer theIndex, const Standard_Real theArea, Pnt2d&& theCentre);
+			Model_ConstAreaSail
+			(
+				const Standard_Integer theIndex,
+				const Standard_Real theArea,
+				Pnt2d&& theCentre
+			);
 
-			Model_ConstAreaSail(const Standard_Integer theIndex, const word& theName, const Standard_Real theArea, const Pnt2d& theCentre);
+			Model_ConstAreaSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName,
+				const Standard_Real theArea,
+				const Pnt2d& theCentre
+			);
 
-			Model_ConstAreaSail(const Standard_Integer theIndex, const word& theName, const Standard_Real theArea, Pnt2d&& theCentre);
+			Model_ConstAreaSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName, 
+				const Standard_Real theArea, 
+				Pnt2d&& theCentre
+			);
 
+			Marine_SailModelType SailType() const override
+			{
+				return Marine_SailModelType::constant_area;
+			}
 
 			auto Area() const
 			{
