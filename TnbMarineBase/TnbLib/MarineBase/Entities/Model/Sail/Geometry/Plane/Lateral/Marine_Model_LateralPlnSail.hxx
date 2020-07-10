@@ -23,17 +23,41 @@ namespace tnbLib
 
 		public:
 
-			Model_LateralPlnSail(const std::shared_ptr<Cad2d_Plane>& thePlane);
+			Model_LateralPlnSail
+			(
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
 
-			Model_LateralPlnSail(std::shared_ptr<Cad2d_Plane>&& thePlane);
+			Model_LateralPlnSail
+			(
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, const std::shared_ptr<Cad2d_Plane>& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, std::shared_ptr<Cad2d_Plane>&& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<Cad2d_Plane>& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName,
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
 
-			Model_LateralPlnSail(const Standard_Integer theIndex, const word& theName, std::shared_ptr<Cad2d_Plane>&& thePlane);
+			Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName, 
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
 
 
 			const auto& Plane() const

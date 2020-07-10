@@ -26,13 +26,31 @@ namespace tnbLib
 			: theCentre_(std::move(theCentre))
 		{}
 
-		Marine_AreaSailModel(const Standard_Integer theIndex, const Pnt2d& theCentre);
+		Marine_AreaSailModel
+		(
+			const Standard_Integer theIndex, 
+			const Pnt2d& theCentre
+		);
 
-		Marine_AreaSailModel(const Standard_Integer theIndex, Pnt2d&& theCentre);
+		Marine_AreaSailModel
+		(
+			const Standard_Integer theIndex,
+			Pnt2d&& theCentre
+		);
 
-		Marine_AreaSailModel(const Standard_Integer theIndex, const word& theName, const Pnt2d& theCentre);
+		Marine_AreaSailModel
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			const Pnt2d& theCentre
+		);
 
-		Marine_AreaSailModel(const Standard_Integer theIndex, const word& theName, Pnt2d&& theCentre);
+		Marine_AreaSailModel
+		(
+			const Standard_Integer theIndex, 
+			const word& theName,
+			Pnt2d&& theCentre
+		);
 
 	public:
 

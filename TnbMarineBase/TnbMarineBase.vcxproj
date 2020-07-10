@@ -73,6 +73,9 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Marine_PlnSailModel.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSail.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModel.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModels.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModelsFwd.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModelType.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Tank\Marine_Model_Tank.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\MultLevWaterDomain\Marine_MultLevWaterDomain.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Origin\Marine_Origin.hxx" />
@@ -253,6 +256,12 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\CmpSection\zSect\Marine_zCmpSection.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Domain\Marine_Domain.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Hull\Marine_Model_Hull.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Const\Marine_Model_ConstAreaSail.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_AreaSailModel.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Profile\Marine_Model_ProfileAreaSail.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\3D\Marine_Model_SurfaceSail.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Lateral\Marine_Model_LateralPlnSail.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSail.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModel.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Tank\Marine_Model_Tank.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\MultLevWaterDomain\Marine_MultLevWaterDomain.cxx" />

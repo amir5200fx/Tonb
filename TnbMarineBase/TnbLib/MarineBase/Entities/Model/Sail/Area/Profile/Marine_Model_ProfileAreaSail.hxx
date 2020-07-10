@@ -24,13 +24,33 @@ namespace tnbLib
 
 		public:
 
-			Model_ProfileAreaSail(const std::shared_ptr<Geo_ProfileFun>& theFun, const Pnt2d& theCentre);
+			Model_ProfileAreaSail
+			(
+				const std::shared_ptr<Geo_ProfileFun>& theFun, 
+				const Pnt2d& theCentre
+			);
 
-			Model_ProfileAreaSail(std::shared_ptr<Geo_ProfileFun>&& theFun, Pnt2d&& theCentre);
+			Model_ProfileAreaSail
+			(
+				std::shared_ptr<Geo_ProfileFun>&& theFun,
+				Pnt2d&& theCentre
+			);
 
-			Model_ProfileAreaSail(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<Geo_ProfileFun>& theFun, const Pnt2d& theCentre);
+			Model_ProfileAreaSail
+			(
+				const Standard_Integer theIndex,
+				const word& theName, 
+				const std::shared_ptr<Geo_ProfileFun>& theFun, 
+				const Pnt2d& theCentre
+			);
 
-			Model_ProfileAreaSail(const Standard_Integer theIndex, const word& theName, std::shared_ptr<Geo_ProfileFun>&& theFun, Pnt2d&& theCentre);
+			Model_ProfileAreaSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName, 
+				std::shared_ptr<Geo_ProfileFun>&& theFun, 
+				Pnt2d&& theCentre
+			);
 
 
 			const auto& Profile() const

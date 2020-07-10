@@ -1206,6 +1206,15 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Body\Constructor\Marine_BodyConstructor.hxx">
       <Filter>TnbLib\MarineBase\Entities\Body\Constructor</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModelType.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModels.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModelsFwd.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1495,6 +1504,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Body\Marine_BodyM.cxx">
       <Filter>TnbLib\MarineBase\Entities\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Const\Marine_Model_ConstAreaSail.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Area\Const</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Profile\Marine_Model_ProfileAreaSail.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Area\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_AreaSailModel.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSail.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Lateral\Marine_Model_LateralPlnSail.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Plane\Lateral</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\3D\Marine_Model_SurfaceSail.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Plane\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

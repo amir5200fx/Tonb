@@ -21,17 +21,41 @@ namespace tnbLib
 
 		public:
 
-			Model_SurfaceSail(const TopoDS_Face& theFace);
+			Model_SurfaceSail
+			(
+				const TopoDS_Face& theFace
+			);
 
-			Model_SurfaceSail(TopoDS_Face&& theFace);
+			Model_SurfaceSail
+			(
+				TopoDS_Face&& theFace
+			);
 
-			Model_SurfaceSail(const Standard_Integer theIndex, const TopoDS_Face& theFace);
+			Model_SurfaceSail
+			(
+				const Standard_Integer theIndex,
+				const TopoDS_Face& theFace
+			);
 
-			Model_SurfaceSail(const Standard_Integer theIndex, TopoDS_Face&& theFace);
+			Model_SurfaceSail
+			(
+				const Standard_Integer theIndex,
+				TopoDS_Face&& theFace
+			);
 
-			Model_SurfaceSail(const Standard_Integer theIndex, const word& theName, const TopoDS_Face& theFace);
+			Model_SurfaceSail
+			(
+				const Standard_Integer theIndex, 
+				const word& theName,
+				const TopoDS_Face& theFace
+			);
 
-			Model_SurfaceSail(const Standard_Integer theIndex, const word& theName, TopoDS_Face&& theFace);
+			Model_SurfaceSail
+			(
+				const Standard_Integer theIndex,
+				const word& theName, 
+				TopoDS_Face&& theFace
+			);
 
 
 			const auto& Face() const
