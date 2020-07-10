@@ -57,6 +57,10 @@ namespace tnbLib
 				TopoDS_Face&& theFace
 			);
 
+			Marine_SailModelType SailType() const override
+			{
+				return Marine_SailModelType::surface;
+			}
 
 			const auto& Face() const
 			{

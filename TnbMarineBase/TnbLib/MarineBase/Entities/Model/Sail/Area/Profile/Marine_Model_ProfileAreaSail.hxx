@@ -52,6 +52,10 @@ namespace tnbLib
 				Pnt2d&& theCentre
 			);
 
+			Marine_SailModelType SailType() const override
+			{
+				return Marine_SailModelType::profile_area;
+			}
 
 			const auto& Profile() const
 			{

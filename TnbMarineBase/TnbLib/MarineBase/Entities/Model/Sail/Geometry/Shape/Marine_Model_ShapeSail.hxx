@@ -59,6 +59,7 @@ namespace tnbLib
 				std::shared_ptr<Body_Sail>&& theSail
 			);
 
+			Marine
 
 			const auto& Body() const
 			{

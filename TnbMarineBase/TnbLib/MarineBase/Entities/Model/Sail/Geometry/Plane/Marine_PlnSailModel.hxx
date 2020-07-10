@@ -22,7 +22,15 @@ namespace tnbLib
 
 	public:
 
+		Standard_Boolean IsPlanar() const override
+		{
+			return Standard_True;
+		}
 
+		virtual Standard_Boolean IsTwoDimApprox() const
+		{
+			return Standard_False;
+		}
 	};
 }
 

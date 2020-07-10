@@ -3,6 +3,7 @@
 #define _Marine_SailModel_Header
 
 #include <Marine_Model.hxx>
+#include <Marine_SailModelType.hxx>
 
 namespace tnbLib
 {
@@ -22,7 +23,12 @@ namespace tnbLib
 
 	public:
 
+		virtual Marine_SailModelType SailType() const = 0;
 
+		virtual Standard_Boolean HasGeometry() const
+		{
+			return Standard_False;
+		}
 	};
 }
 

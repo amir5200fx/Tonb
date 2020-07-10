@@ -65,7 +65,15 @@ namespace tnbLib
 				return thePlane_;
 			}
 
+			Marine_SailModelType SailType() const override
+			{
+				return Marine_SailModelType::lateral_plane;
+			}
 
+			Standard_Boolean IsTwoDimApprox() const
+			{
+				return Standard_True;
+			}
 		};
 	}
 }
