@@ -379,6 +379,18 @@
     <Filter Include="TnbLib\Geo\Distributor\Cosine">
       <UniqueIdentifier>{7a24d093-e69c-46bf-aa62-8b1ead21f306}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\ProfileFun">
+      <UniqueIdentifier>{f10f9fdc-3ba4-4579-a5ed-2899ed8090f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ProfileFun\Const">
+      <UniqueIdentifier>{aa97dc4d-0c6d-4201-89a4-7eb618b07771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ProfileFun\Linear">
+      <UniqueIdentifier>{2281b4eb-5f82-418d-ba83-1489d74cf4c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ProfileFun\Geom">
+      <UniqueIdentifier>{173a0cf2-ae8f-4292-a7ed-14db3b2e0f1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -840,6 +852,18 @@
     <ClInclude Include="TnbLib\Geo\Distributor\Cosine\Geo_CosineDistb.hxx">
       <Filter>TnbLib\Geo\Distributor\Cosine</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ProfileFun\Geo_ProfileFun.hxx">
+      <Filter>TnbLib\Geo\ProfileFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ProfileFun\Const\Geo_ProfileFun_Const.hxx">
+      <Filter>TnbLib\Geo\ProfileFun\Const</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ProfileFun\Linear\Geo_ProfileFun_Linear.hxx">
+      <Filter>TnbLib\Geo\ProfileFun\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_Geom.hxx">
+      <Filter>TnbLib\Geo\ProfileFun\Geom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1021,6 +1045,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Distributor\Cosine\Geo_CosineDistb.cxx">
       <Filter>TnbLib\Geo\Distributor\Cosine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ProfileFun\Linear\Geo_ProfileFun_Linear.cxx">
+      <Filter>TnbLib\Geo\ProfileFun\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_Geom.cxx">
+      <Filter>TnbLib\Geo\ProfileFun\Geom</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
