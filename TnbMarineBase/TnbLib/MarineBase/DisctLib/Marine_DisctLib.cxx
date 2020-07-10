@@ -61,15 +61,42 @@ tnbLib::Marine_DisctLib::xWireFrameModel
 	{
 	case Marine_ShapeType::hull:
 	{
-		body = std::make_shared<marineLib::Body_Displacer>();
+		body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>>();
+		Debug_Null_Pointer(body);
+
+		std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>
+			>
+			(
+				body
+				)->SetShape(theModel);
 	}
 	case Marine_ShapeType::sail:
 	{
-		body = std::make_shared<marineLib::Body_Sail>();
+		body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Sail>>();
+		Debug_Null_Pointer(body);
+
+		std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Sail>
+			>
+			(
+				body
+				)->SetShape(theModel);
 	}
 	case Marine_ShapeType::tank:
 	{
-		body = std::make_shared<marineLib::Body_Tank>();
+		body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Tank>>();
+		Debug_Null_Pointer(body);
+
+		std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Tank>
+			>
+			(
+				body
+				)->SetShape(theModel);
 	}
 	default:
 		FatalErrorIn(FunctionSIG)
@@ -165,8 +192,29 @@ tnbLib::Marine_DisctLib::WettedBody
 	const Standard_Real theMaxTol
 )
 {
-	auto body = std::make_shared<marineLib::Body_Wetted>();
-	Debug_Null_Pointer(body);
+	std::shared_ptr<marineLib::Body_Wetted> body;
+	if (theModel.ShapeType())
+	{
+		body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>();
+		Debug_Null_Pointer(body);
+
+		auto t = 
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Tank>
+			>(theModel.This());
+		Debug_Null_Pointer(t);
+
+		std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>
+			>(body)->SetShape(t->Shape());
+	}
+	else
+	{
+		body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>>();
+		Debug_Null_Pointer(body);
+	}
 
 	const auto& wave = theWaterDomain.Wave();
 	if (NOT wave)
@@ -192,8 +240,29 @@ tnbLib::Marine_DisctLib::WettedBody
 	const Standard_Real theMaxTol
 )
 {
-	auto body = std::make_shared<marineLib::Body_Wetted>();
-	Debug_Null_Pointer(body);
+	std::shared_ptr<marineLib::Body_Wetted> body;
+	if (theModel.ShapeType())
+	{
+		body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>();
+		Debug_Null_Pointer(body);
+
+		auto t =
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>
+			>(theModel.This());
+		Debug_Null_Pointer(t);
+
+		std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>
+			>(body)->SetShape(t->Shape());
+	}
+	else
+	{
+		body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>>();
+		Debug_Null_Pointer(body);
+	}
 
 	const auto& wave = theWaterDomain.Wave();
 	if (NOT wave)
@@ -258,8 +327,11 @@ tnbLib::Marine_DisctLib::WettedBody
 			<< abort(FatalError);
 	}
 
-	auto body = std::make_shared<marineLib::Body_WettedS>();
+	auto body = 
+		std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>();
 	Debug_Null_Pointer(body);
+
+	body->SetShape(theModel.Shape());
 
 	const auto& wave = theWaterDomain.Wave();
 	if (NOT wave)
@@ -307,7 +379,7 @@ tnbLib::Marine_DisctLib::WettedBody
 			));
 	Debug_Null_Pointer(section);
 
-	body->SetWater(std::move(section));
+	body->SetWL(std::move(section));
 
 	const auto& waterSections = theWaterDomain.Waters();
 	auto& wetted = body->ChangeSections();
@@ -349,7 +421,8 @@ tnbLib::Marine_DisctLib::WettedBody
 			<< abort(FatalError);
 	}
 
-	auto body = std::make_shared<marineLib::Body_Wetted>();
+	auto body = 
+		std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>>();
 	Debug_Null_Pointer(body);
 
 	const auto& wave = theWaterDomain.Wave();

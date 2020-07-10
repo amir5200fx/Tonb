@@ -20,6 +20,7 @@ namespace tnbLib
 	// Forward Declarations
 	class Marine_WaterDomain;
 	class Marine_CmpSection;
+	class Marine_Shape;
 
 	class Marine_BodyTools
 	{
@@ -72,6 +73,14 @@ namespace tnbLib
 			BodyCreator
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Marine_BodyType t
+			);
+
+		static std::shared_ptr<Marine_Body>
+			BodyCreator
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const std::shared_ptr<Marine_Shape>& theShape,
 				const Marine_BodyType t
 			);
 

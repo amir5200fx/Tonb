@@ -16,12 +16,14 @@ namespace tnbLib
 
 			/*Private Data*/
 
-		public:
+		protected:
 
 			template<class... _Types>
 			Body_Displacer(_Types&&... _Args)
 				: Marine_HullBody(_Args...)
 			{}
+
+		public:
 
 			Standard_Boolean IsDisplacer() const override
 			{
@@ -33,9 +35,16 @@ namespace tnbLib
 				return Marine_BodyType::displacer;
 			}
 
+			virtual Standard_Boolean ShapeType() const
+			{
+				return Standard_False;
+			}
+
 			std::shared_ptr<Marine_Body> Copy() const override;
 		};
 	}
 }
+
+#include <Marine_BodyConstructor.hxx>
 
 #endif // !_Marine_Body_Displacer_Header

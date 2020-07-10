@@ -75,13 +75,13 @@ namespace tnbLib
 		static marineLib::LWL
 			CalcLWL
 			(
-				const marineLib::Body_Wetted& theBody
+				const marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>& theBody
 			);
 
 		static marineLib::LWL
 			CalcLWL
 			(
-				const marineLib::Body_WettedS& theBody
+				const marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>& theBody
 			);
 
 		static marineLib::BWL

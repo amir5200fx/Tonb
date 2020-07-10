@@ -16,12 +16,14 @@ namespace tnbLib
 
 			/*Private Data*/
 
-		public:
+		protected:
 
 			template<class... _Types>
 			Body_Dry(_Types&&... _Args)
 				: Marine_HullBody(_Args...)
 			{}
+
+		public:
 
 			Standard_Boolean IsDry() const override
 			{
@@ -33,9 +35,16 @@ namespace tnbLib
 				return Marine_BodyType::dry;
 			}
 
+			virtual Standard_Boolean ShapeType() const
+			{
+				return Standard_False;
+			}
+
 			std::shared_ptr<Marine_Body> Copy() const override;
 		};
 	}
 }
+
+#include <Marine_BodyConstructor.hxx>
 
 #endif // !_Marine_Body_Dry_Header

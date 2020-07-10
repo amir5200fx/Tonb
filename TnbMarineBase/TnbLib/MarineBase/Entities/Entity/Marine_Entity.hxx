@@ -49,6 +49,11 @@ namespace tnbLib
 		virtual ~Marine_Entity()
 		{}
 
+		std::shared_ptr<Marine_Entity> This() const
+		{
+			return std::const_pointer_cast<Marine_Entity>(this->shared_from_this());
+		}
+
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(gp_Ax2, CoordinateSystem)
 	};

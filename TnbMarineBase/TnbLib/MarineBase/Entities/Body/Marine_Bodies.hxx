@@ -7,6 +7,5 @@
 #include <Marine_Body_Sail.hxx>
 #include <Marine_Body_Tank.hxx>
 #include <Marine_Body_Wetted.hxx>
-#include <Marine_Body_WettedS.hxx>
 
 #endif // !_Marine_Bodies_Header

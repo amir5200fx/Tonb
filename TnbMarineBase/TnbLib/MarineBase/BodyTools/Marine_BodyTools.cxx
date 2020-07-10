@@ -141,7 +141,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 	{
 	case Marine_BodyType::displacer:
 	{
-		auto body = std::make_shared<marineLib::Body_Displacer>();
+		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Displacer>>();
 		Debug_Null_Pointer(body);
 
 		auto sections = body->ChangeSections();
@@ -155,7 +155,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 	}
 	case Marine_BodyType::dry:
 	{
-		auto body = std::make_shared<marineLib::Body_Dry>();
+		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Dry>>();
 		Debug_Null_Pointer(body);
 
 		auto sections = body->ChangeSections();
@@ -169,7 +169,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 	}
 	case Marine_BodyType::wetted:
 	{
-		auto body = std::make_shared<marineLib::Body_Wetted>();
+		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>>();
 		Debug_Null_Pointer(body);
 
 		auto sections = body->ChangeSections();
@@ -183,7 +183,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 	}
 	case Marine_BodyType::sail:
 	{
-		auto body = std::make_shared<marineLib::Body_Sail>();
+		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Sail>>();
 		Debug_Null_Pointer(body);
 
 		auto sections = body->ChangeSections();
@@ -197,8 +197,108 @@ tnbLib::Marine_BodyTools::BodyCreator
 	}
 	case Marine_BodyType::tank:
 	{
-		auto body = std::make_shared<marineLib::Body_Tank>();
+		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Tank>>();
 		Debug_Null_Pointer(body);
+
+		auto sections = body->ChangeSections();
+		sections.reserve(theSections.size());
+		for (const auto& x : theSections)
+		{
+			Debug_Null_Pointer(x);
+			sections.push_back(x);
+		}
+		return std::move(body);
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "Wrong body type!" << endl
+			<< abort(FatalError);
+		return nullptr;
+	}
+}
+
+std::shared_ptr<tnbLib::Marine_Body> 
+tnbLib::Marine_BodyTools::BodyCreator
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const std::shared_ptr<Marine_Shape>& theShape, 
+	const Marine_BodyType t
+)
+{
+	CheckTypeConsistency(theSections);
+
+	switch (t)
+	{
+	case Marine_BodyType::displacer:
+	{
+		auto body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>>();
+		Debug_Null_Pointer(body);
+
+		body->SetShape(theShape);
+
+		auto sections = body->ChangeSections();
+		sections.reserve(theSections.size());
+		for (const auto& x : theSections)
+		{
+			Debug_Null_Pointer(x);
+			sections.push_back(x);
+		}
+		return std::move(body);
+	}
+	case Marine_BodyType::dry:
+	{
+		auto body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Dry>>();
+		Debug_Null_Pointer(body);
+
+		body->SetShape(theShape);
+
+		auto sections = body->ChangeSections();
+		sections.reserve(theSections.size());
+		for (const auto& x : theSections)
+		{
+			Debug_Null_Pointer(x);
+			sections.push_back(x);
+		}
+		return std::move(body);
+	}
+	case Marine_BodyType::wetted:
+	{
+		auto body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>();
+		Debug_Null_Pointer(body);
+
+		body->SetShape(theShape);
+
+		auto sections = body->ChangeSections();
+		sections.reserve(theSections.size());
+		for (const auto& x : theSections)
+		{
+			Debug_Null_Pointer(x);
+			sections.push_back(x);
+		}
+		return std::move(body);
+	}
+	case Marine_BodyType::sail:
+	{
+		auto body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Sail>>();
+		Debug_Null_Pointer(body);
+
+		body->SetShape(theShape);
+
+		auto sections = body->ChangeSections();
+		sections.reserve(theSections.size());
+		for (const auto& x : theSections)
+		{
+			Debug_Null_Pointer(x);
+			sections.push_back(x);
+		}
+		return std::move(body);
+	}
+	case Marine_BodyType::tank:
+	{
+		auto body = std::make_shared<marineLib::BodyConstructor_Shape<marineLib::Body_Tank>>();
+		Debug_Null_Pointer(body);
+
+		body->SetShape(theShape);
 
 		auto sections = body->ChangeSections();
 		sections.reserve(theSections.size());
@@ -233,8 +333,24 @@ tnbLib::Marine_BodyTools::WettedBody
 			theBody->Sections(), 
 			theDomain->Waters()
 		);
-	auto wetted = BodyCreator(sections, Marine_BodyType::wetted);
-	return std::move(wetted);
+
+	if (theBody->ShapeType())
+	{
+		auto t = 
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>
+			>(theBody);
+		Debug_Null_Pointer(t);
+
+		auto wetted = BodyCreator(sections, t->Shape(), Marine_BodyType::wetted);
+		return std::move(wetted);
+	}
+	else
+	{
+		auto wetted = BodyCreator(sections, Marine_BodyType::wetted);
+		return std::move(wetted);
+	}	
 }
 
 std::shared_ptr<tnbLib::Marine_Body> 
@@ -253,6 +369,22 @@ tnbLib::Marine_BodyTools::DryBody
 			theBody->Sections(),
 			theDomain->Waters()
 		);
-	auto dry = BodyCreator(sections, Marine_BodyType::dry);
-	return std::move(dry);
+
+	if (theBody->ShapeType())
+	{
+		auto t =
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>
+			>(theBody);
+		Debug_Null_Pointer(t);
+
+		auto wetted = BodyCreator(sections, t->Shape(), Marine_BodyType::dry);
+		return std::move(wetted);
+	}
+	else
+	{
+		auto dry = BodyCreator(sections, Marine_BodyType::dry);
+		return std::move(dry);
+	}	
 }

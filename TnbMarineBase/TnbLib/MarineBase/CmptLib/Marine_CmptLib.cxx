@@ -105,9 +105,13 @@ tnbLib::Marine_CmptLib::CalcLWL
 )
 {
 	Debug_Null_Pointer(theBody);
-	if (theBody->HasWaterSection())
+	if (theBody->ShapeType())
 	{
-		auto wetted = std::dynamic_pointer_cast<marineLib::Body_WettedS>(theBody);
+		auto wetted = 
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>
+			>(theBody);
 		Debug_Null_Pointer(wetted);
 
 		auto lwl = CalcLWL(*wetted);
@@ -115,7 +119,14 @@ tnbLib::Marine_CmptLib::CalcLWL
 	}
 	else
 	{
-		auto lwl = CalcLWL(*theBody);
+		auto wetted =
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>
+			>(theBody);
+		Debug_Null_Pointer(wetted);
+
+		auto lwl = CalcLWL(*wetted);
 		return std::move(lwl);
 	}
 }
@@ -123,7 +134,7 @@ tnbLib::Marine_CmptLib::CalcLWL
 tnbLib::marineLib::LWL 
 tnbLib::Marine_CmptLib::CalcLWL
 (
-	const marineLib::Body_WettedS & theBody
+	const marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>& theBody
 )
 {
 	const auto& wlSect = theBody.WL();
@@ -143,7 +154,7 @@ tnbLib::Marine_CmptLib::CalcLWL
 tnbLib::marineLib::LWL 
 tnbLib::Marine_CmptLib::CalcLWL
 (
-	const marineLib::Body_Wetted& theBody
+	const marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>& theBody
 )
 {
 	std::vector<std::shared_ptr<Marine_CmpSection>> sections;

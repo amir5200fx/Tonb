@@ -34,14 +34,16 @@ namespace tnbLib
 				theMid_ = std::move(theMid);
 			}
 
-		public:
+		protected:
 
 			template<class... _Types>
 			Body_Wetted(_Types&&... _Args)
 				: Marine_HullBody(_Args...)
 			{}
 
-			virtual Standard_Boolean HasWaterSection() const
+		public:
+
+			virtual Standard_Boolean ShapeType() const
 			{
 				return Standard_False;
 			}
@@ -62,6 +64,71 @@ namespace tnbLib
 			}
 
 			std::shared_ptr<Marine_Body> Copy() const override;
+		};
+	}
+}
+
+#include <Marine_BodyConstructor.hxx>
+
+namespace tnbLib
+{
+	namespace marineLib
+	{
+
+		template<>
+		class BodyConstructor_Shape<Body_Wetted>
+			: public Body_Wetted
+		{
+
+			/*Private Data*/
+
+			std::shared_ptr<Marine_Shape> theShape_;
+
+			std::shared_ptr<Marine_CmpSection> theWater_;
+
+			//- private functions and operators
+
+		public:
+
+			template<class... _Types>
+			BodyConstructor_Shape(_Types&&... _Args)
+				: Body_Wetted(_Args...)
+			{}
+
+			Standard_Boolean ShapeType() const override
+			{
+				return Standard_True;
+			}
+
+			const auto& Shape() const
+			{
+				return theShape_;
+			}
+
+			void SetWL(const std::shared_ptr<Marine_CmpSection>& theWater)
+			{
+				theWater_ = theWater;
+			}
+
+			void SetWL(std::shared_ptr<Marine_CmpSection>&& theWater)
+			{
+				theWater_ = std::move(theWater);
+			}
+
+			void SetShape(const std::shared_ptr<Marine_Shape>& theShape)
+			{
+				theShape_ = theShape;
+			}
+
+			void SetShape(std::shared_ptr<Marine_Shape>&& theShape)
+			{
+				theShape_ = theShape;
+			}
+
+			const auto& WL() const
+			{
+				return theWater_;
+			}
 		};
 	}
 }

@@ -16,12 +16,14 @@ namespace tnbLib
 
 			/*Private Data*/
 
-		public:
+		protected:
 
 			template<class... _Types>
 			Body_Tank(_Types&&... _Args)
 				: Marine_Body(_Args...)
 			{}
+
+		public:
 
 			Standard_Boolean IsTank() const override
 			{
@@ -33,9 +35,16 @@ namespace tnbLib
 				return Marine_BodyType::tank;
 			}
 
+			virtual Standard_Boolean ShapeType() const
+			{
+				return Standard_False;
+			}
+
 			std::shared_ptr<Marine_Body> Copy() const override;
 		};
 	}
 }
+
+#include <Marine_BodyConstructor.hxx>
 
 #endif // !_Marine_Body_Tank_Header

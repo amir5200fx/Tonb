@@ -16,7 +16,12 @@ namespace tnbLib
 		class Body_Sail;
 		class Body_Tank;
 		class Body_Wetted;
-		class Body_WettedS;
+
+		template<class BodyType>
+		class BodyConstructor_Shape;
+
+		template<class BodyType>
+		class BodyConstructor_noShape;
 	}
 }
 
