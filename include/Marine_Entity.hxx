@@ -4,11 +4,8 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
-#include <Global_AccessMethod.hxx>
 
 #include <memory>
-
-#include <gp_Ax2.hxx>
 
 namespace tnbLib
 {
@@ -21,7 +18,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		gp_Ax2 theCoordinateSystem_;
+		
 
 	protected:
 
@@ -54,8 +51,7 @@ namespace tnbLib
 			return std::const_pointer_cast<Marine_Entity>(this->shared_from_this());
 		}
 
-		//- Macros
-		GLOBAL_ACCESS_SINGLE(gp_Ax2, CoordinateSystem)
+		
 	};
 }
 

@@ -3,12 +3,14 @@
 #define _Marine_FreeBoard_Header
 
 #include <Marine_Entity.hxx>
+#include <Global_AccessMethod.hxx>
 #include <Pnt3d.hxx>
 
 namespace tnbLib
 {
 
 	class Marine_FreeBoard
+		: public Marine_Entity
 	{
 
 		/*Private Data*/

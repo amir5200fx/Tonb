@@ -3,7 +3,7 @@
 #define _Marine_CmpSection_Header
 
 #include <Entity2d_BoxFwd.hxx>
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Marine_SectionType.hxx>
 #include <OFstream.hxx>
 
@@ -27,7 +27,7 @@ namespace tnbLib
 	class Pln_Wire;
 
 	class Marine_CmpSection
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 	{
 
 		friend class MarineBase_Tools;

@@ -2,7 +2,7 @@
 #ifndef _Marine_Section_Header
 #define _Marine_Section_Header
 
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Marine_SectionType.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <OFstream.hxx>
@@ -18,7 +18,7 @@ namespace tnbLib
 	class Pln_Wire;
 
 	class Marine_Section
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 	{
 
 		/*Private Data*/
@@ -37,7 +37,7 @@ namespace tnbLib
 
 		Marine_Section
 		(
-			const std::shared_ptr<Pln_Wire>&& theWire
+			std::shared_ptr<Pln_Wire>&& theWire
 		);
 
 		Marine_Section
@@ -49,7 +49,7 @@ namespace tnbLib
 		Marine_Section
 		(
 			const Standard_Integer theIndex,
-			const std::shared_ptr<Pln_Wire>&& theWire
+			std::shared_ptr<Pln_Wire>&& theWire
 		);
 
 		Marine_Section
@@ -63,7 +63,7 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const std::shared_ptr<Pln_Wire>&& theWire
+			std::shared_ptr<Pln_Wire>&& theWire
 		);
 
 	public:

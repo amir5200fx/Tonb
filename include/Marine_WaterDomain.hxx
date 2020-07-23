@@ -3,7 +3,7 @@
 #define _Marine_WaterDomain_Header
 
 #include <Global_Done.hxx>
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Entity3d_Box.hxx>
 #include <OFstream.hxx>
 
@@ -18,7 +18,7 @@ namespace tnbLib
 	class Marine_Wave;
 
 	class Marine_WaterDomain
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 		, public Global_Done
 	{
 

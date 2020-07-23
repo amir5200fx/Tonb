@@ -5,11 +5,13 @@
 #include <Marine_Entity.hxx>
 
 #include <gp_Ax1.hxx>
+#include <gp_Ax2.hxx>
 
 namespace tnbLib
 {
 
 	class Marine_BaseLine
+		: public Marine_Entity
 	{
 
 		/*Private Data*/
@@ -23,7 +25,8 @@ namespace tnbLib
 		Marine_BaseLine();
 
 		Marine_BaseLine(const gp_Ax1& theAx)
-			: theBaseLib_(theAx)
+			: Marine_Entity(0, "base line")
+			, theBaseLib_(theAx)
 		{}
 
 		Marine_BaseLine(const gp_Ax2& theSystem);
