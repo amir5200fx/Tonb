@@ -2,7 +2,7 @@
 #ifndef _Marine_WireFrameShape_Header
 #define _Marine_WireFrameShape_Header
 
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Marine_BodyType.hxx>
 
 #include <vector>
@@ -16,7 +16,7 @@ namespace tnbLib
 	class Marine_DisctLib;
 
 	class Marine_WireFrameShape
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 	{
 
 		friend class Marine_DisctLib;
@@ -34,7 +34,7 @@ namespace tnbLib
 
 		template<class... _Types>
 		Marine_WireFrameShape(_Types&&... _Args)
-			: Marine_Entity(_Args...)
+			: Marine_CoordinatedEntity(_Args...)
 		{}
 
 	public:

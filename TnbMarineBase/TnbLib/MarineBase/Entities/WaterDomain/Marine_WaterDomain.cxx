@@ -6,7 +6,8 @@ tnbLib::Marine_WaterDomain::Marine_WaterDomain
 (
 	const std::shared_ptr<Marine_Domain>& theDomain
 )
-	: theDomain_(theDomain)
+	: Marine_CoordinatedEntity(0, "water domain")
+	, theDomain_(theDomain)
 {
 }
 
@@ -15,7 +16,7 @@ tnbLib::Marine_WaterDomain::Marine_WaterDomain
 	const Standard_Integer theIndex,
 	const std::shared_ptr<Marine_Domain>& theDomain
 )
-	: Marine_Entity(theIndex)
+	: Marine_CoordinatedEntity(theIndex, "water domain")
 	, theDomain_(theDomain)
 {
 }
@@ -26,7 +27,7 @@ tnbLib::Marine_WaterDomain::Marine_WaterDomain
 	const word & theName, 
 	const std::shared_ptr<Marine_Domain>& theDomain
 )
-	: Marine_Entity(theIndex, theName)
+	: Marine_CoordinatedEntity(theIndex, theName)
 	, theDomain_(theDomain)
 {
 }

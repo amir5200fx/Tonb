@@ -2,7 +2,7 @@
 #ifndef _Marine_Body_Header
 #define _Marine_Body_Header
 
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Marine_BaseLine.hxx>
 #include <Marine_BodyType.hxx>
 
@@ -17,7 +17,7 @@ namespace tnbLib
 	class Marine_BodyTools;
 
 	class Marine_Body
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 	{
 
 		friend class Marine_DisctLib;
@@ -34,7 +34,7 @@ namespace tnbLib
 	
 		template<class... _Types>
 		Marine_Body(_Types&&... _Args)
-			: Marine_Entity(_Args...)
+			: Marine_CoordinatedEntity(_Args...)
 		{}
 
 		auto& ChangeSections()

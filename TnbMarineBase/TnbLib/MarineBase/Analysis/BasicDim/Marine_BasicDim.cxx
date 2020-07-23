@@ -1,20 +1,14 @@
 #include <Marine_BasicDim.hxx>
 
-#include <Marine_Body.hxx>
+#include <Marine_Bodies.hxx>
 #include <Marine_CmptLib.hxx>
-
-tnbLib::Marine_BasicDim::Marine_BasicDim()
-	: theLoa_(0)
-	, theB_(0)
-	, theD_(0)
-{
-}
 
 tnbLib::Marine_BasicDim::Marine_BasicDim
 (
-	const std::shared_ptr<Marine_Body>& theBody
+	const std::shared_ptr<marineLib::Body_Dry>& theBody
 )
-	: theLoa_(0)
+	: Marine_Analysis(0, "basic dimensional analysis")
+	, theLoa_(0)
 	, theB_(0)
 	, theD_(0)
 	, theBody_(theBody)

@@ -6,6 +6,7 @@ namespace tnbLib
 }
 
 tnbLib::Marine_Domain::Marine_Domain()
+	: Marine_CoordinatedEntity(0, "domain")
 {
 }
 
@@ -13,7 +14,7 @@ tnbLib::Marine_Domain::Marine_Domain
 (
 	const Standard_Integer theIndex
 )
-	: Marine_Entity(theIndex)
+	: Marine_CoordinatedEntity(theIndex, "domain")
 {
 }
 
@@ -22,7 +23,7 @@ tnbLib::Marine_Domain::Marine_Domain
 	const Standard_Integer theIndex, 
 	const word & theName
 )
-	: Marine_Entity(theIndex, theName)
+	: Marine_CoordinatedEntity(theIndex, theName)
 {
 }
 

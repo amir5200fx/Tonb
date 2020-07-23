@@ -2,7 +2,7 @@
 #ifndef _Marine_Shape_Header
 #define _Marine_Shape_Header
 
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Marine_ShapeType.hxx>
 
 #include <TopoDS_Shape.hxx>
@@ -11,7 +11,7 @@ namespace tnbLib
 {
 
 	class Marine_Shape
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 	{
 
 		/*Private Data*/

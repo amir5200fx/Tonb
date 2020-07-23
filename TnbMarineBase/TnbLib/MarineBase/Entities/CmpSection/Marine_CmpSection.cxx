@@ -34,7 +34,7 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 (
 	const Standard_Integer theIndex
 )
-	: Marine_Entity(theIndex)
+	: Marine_CoordinatedEntity(theIndex)
 {
 }
 
@@ -43,7 +43,7 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 	const Standard_Integer theIndex,
 	const word & theName
 )
-	: Marine_Entity(theIndex, theName)
+	: Marine_CoordinatedEntity(theIndex, theName)
 {
 }
 
@@ -60,7 +60,7 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 	const Standard_Integer theIndex,
 	const std::shared_ptr<Marine_Section>& theSection
 )
-	: Marine_Entity(theIndex)
+	: Marine_CoordinatedEntity(theIndex)
 {
 	Insert(theSection);
 }
@@ -71,7 +71,7 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 	const word & theName, 
 	const std::shared_ptr<Marine_Section>& theSection
 )
-	: Marine_Entity(theIndex, theName)
+	: Marine_CoordinatedEntity(theIndex, theName)
 {
 	Insert(theSection);
 }

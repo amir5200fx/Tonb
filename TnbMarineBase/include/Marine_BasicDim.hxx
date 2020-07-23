@@ -2,8 +2,9 @@
 #ifndef _Marine_BasicDim_Header
 #define _Marine_BasicDim_Header
 
-#include <Global_Done.hxx>
 #include <Marine_VesselParams.hxx>
+#include <Marine_Analysis.hxx>
+#include <Marine_BodiesFwd.hxx>
 
 #include <memory>
 
@@ -11,10 +12,9 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class Marine_Body;
 
 	class Marine_BasicDim
-		: public Global_Done
+		: public Marine_Analysis
 	{
 
 		/*Private Data*/
@@ -29,7 +29,7 @@ namespace tnbLib
 		marineLib::D theD_;
 
 
-		std::shared_ptr<Marine_Body> theBody_;
+		const std::shared_ptr<marineLib::Body_Dry>& theBody_;
 
 
 		auto& ChangeLOA()
@@ -49,11 +49,10 @@ namespace tnbLib
 
 	public:
 
-		Marine_BasicDim();
 
 		Marine_BasicDim
 		(
-			const std::shared_ptr<Marine_Body>& theBody
+			const std::shared_ptr<marineLib::Body_Dry>& theBody
 		);
 
 
@@ -78,11 +77,6 @@ namespace tnbLib
 		}
 
 		void Perform();
-
-		void LoadBody(const std::shared_ptr<Marine_Body>& theBody)
-		{
-			theBody_ = theBody;
-		}
 
 
 	};

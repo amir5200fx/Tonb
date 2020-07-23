@@ -27,9 +27,10 @@ tnbLib::Marine_Section::Marine_Section
 
 tnbLib::Marine_Section::Marine_Section
 (
-	const std::shared_ptr<Pln_Wire>&& theWire
+	std::shared_ptr<Pln_Wire>&& theWire
 )
-	: theWire_(std::move(theWire))
+	: Marine_CoordinatedEntity(0, "section")
+	, theWire_(std::move(theWire))
 {
 	Debug_Null_Pointer(Wire());
 	CheckWire(*Wire(), "Marine_Section::Marine_Section(const std::shared_ptr<Pln_Wire>& theWire)");
@@ -40,7 +41,7 @@ tnbLib::Marine_Section::Marine_Section
 	const Standard_Integer theIndex,
 	const std::shared_ptr<Pln_Wire>& theWire
 )
-	: Marine_Entity(theIndex)
+	: Marine_CoordinatedEntity(theIndex, "section")
 	, theWire_(theWire)
 {
 	Debug_Null_Pointer(Wire());
@@ -50,9 +51,9 @@ tnbLib::Marine_Section::Marine_Section
 tnbLib::Marine_Section::Marine_Section
 (
 	const Standard_Integer theIndex,
-	const std::shared_ptr<Pln_Wire>&& theWire
+	std::shared_ptr<Pln_Wire>&& theWire
 )
-	: Marine_Entity(theIndex)
+	: Marine_CoordinatedEntity(theIndex, "section")
 	, theWire_(theWire)
 {
 	Debug_Null_Pointer(Wire());
@@ -65,7 +66,7 @@ tnbLib::Marine_Section::Marine_Section
 	const word & theName,
 	const std::shared_ptr<Pln_Wire>& theWire
 )
-	: Marine_Entity(theIndex, theName)
+	: Marine_CoordinatedEntity(theIndex, theName)
 	, theWire_(theWire)
 {
 	Debug_Null_Pointer(Wire());
@@ -76,9 +77,9 @@ tnbLib::Marine_Section::Marine_Section
 (
 	const Standard_Integer theIndex,
 	const word & theName,
-	const std::shared_ptr<Pln_Wire>&& theWire
+	std::shared_ptr<Pln_Wire>&& theWire
 )
-	: Marine_Entity(theIndex, theName)
+	: Marine_CoordinatedEntity(theIndex, theName)
 	, theWire_(theWire)
 {
 	Debug_Null_Pointer(Wire());

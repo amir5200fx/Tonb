@@ -4,7 +4,8 @@ tnbLib::Marine_Shape::Marine_Shape
 (
 	const TopoDS_Shape& theShape
 )
-	: theShape_(theShape)
+	: Marine_CoordinatedEntity(0, "shape")
+	, theShape_(theShape)
 {}
 
 tnbLib::Marine_Shape::Marine_Shape
@@ -12,7 +13,7 @@ tnbLib::Marine_Shape::Marine_Shape
 	const Standard_Integer theIndex,
 	const TopoDS_Shape& theShape
 )
-	: Marine_Entity(theIndex)
+	: Marine_CoordinatedEntity(theIndex, "shape")
 	, theShape_(theShape)
 {}
 
@@ -22,6 +23,6 @@ tnbLib::Marine_Shape::Marine_Shape
 	const word& theName,
 	const TopoDS_Shape& theShape
 )
-	: Marine_Entity(theIndex, theName)
+	: Marine_CoordinatedEntity(theIndex, theName)
 	, theShape_(theShape)
 {}

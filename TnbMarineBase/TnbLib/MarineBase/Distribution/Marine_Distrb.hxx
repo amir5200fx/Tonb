@@ -4,7 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_Done.hxx>
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 
 #include <vector>
 #include <memory>
@@ -17,7 +17,7 @@ namespace tnbLib
 
 	class Marine_Distrb
 		: public Global_Done
-		, public Marine_Entity
+		, public Marine_CoordinatedEntity
 	{
 
 		/*Private Data*/
@@ -27,8 +27,7 @@ namespace tnbLib
 
 	protected:
 
-		Marine_Distrb()
-		{}
+		Marine_Distrb();
 
 		auto& ChangeX()
 		{

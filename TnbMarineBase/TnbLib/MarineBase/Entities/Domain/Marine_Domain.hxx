@@ -3,7 +3,7 @@
 #define _Marine_Domain_Header
 
 #include <Global_Done.hxx>
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Entity3d_Box.hxx>
 
 #include <vector>
@@ -15,7 +15,7 @@ namespace tnbLib
 	class Marine_CmpSection;
 
 	class Marine_Domain
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 		, public Global_Done
 	{
 

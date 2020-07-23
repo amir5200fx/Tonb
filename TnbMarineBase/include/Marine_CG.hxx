@@ -3,6 +3,7 @@
 #define _Marine_CG_Header
 
 #include <Marine_Entity.hxx>
+#include <Global_AccessMethod.hxx>
 
 namespace tnbLib
 {
@@ -33,11 +34,27 @@ namespace tnbLib
 
 		Marine_CG
 		(
+			std::shared_ptr<Marine_LCG>&& theLcg,
+			std::shared_ptr<Marine_VCG>&& theVcg,
+			std::shared_ptr<Marine_TCG>&& theTcg
+		);
+
+		Marine_CG
+		(
 			const Standard_Integer theIndex,
 			const word& theName, 
 			const std::shared_ptr<Marine_LCG>& theLcg, 
 			const std::shared_ptr<Marine_VCG>& theVcg, 
 			const std::shared_ptr<Marine_TCG>& theTcg
+		);
+
+		Marine_CG
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			std::shared_ptr<Marine_LCG>&& theLcg,
+			std::shared_ptr<Marine_VCG>&& theVcg,
+			std::shared_ptr<Marine_TCG>&& theTcg
 		);
 
 

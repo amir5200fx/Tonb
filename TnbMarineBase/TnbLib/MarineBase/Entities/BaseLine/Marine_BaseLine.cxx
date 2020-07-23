@@ -8,7 +8,8 @@ namespace tnbLib
 }
 
 tnbLib::Marine_BaseLine::Marine_BaseLine()
-	: theBaseLib_(null)
+	: Marine_Entity(0, "base line")
+	, theBaseLib_(null)
 {
 }
 
@@ -16,7 +17,8 @@ tnbLib::Marine_BaseLine::Marine_BaseLine
 (
 	const gp_Ax2 & theSystem
 )
-	: theBaseLib_(theSystem.Location(), theSystem.XDirection())
+	: Marine_Entity(0, "base line")
+	, theBaseLib_(theSystem.Location(), theSystem.XDirection())
 {
 }
 
