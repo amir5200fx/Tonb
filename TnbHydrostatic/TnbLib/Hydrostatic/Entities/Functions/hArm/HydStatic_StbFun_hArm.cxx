@@ -1,7 +1,7 @@
 #include <HydStatic_StbFun_hArm.hxx>
 
 #include <HydStatic_hArmCurve.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 Standard_Real 

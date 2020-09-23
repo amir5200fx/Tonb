@@ -1,7 +1,7 @@
 #include <HydStatic_GM0Curve.hxx>
 
 #include <Pnt2d.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>

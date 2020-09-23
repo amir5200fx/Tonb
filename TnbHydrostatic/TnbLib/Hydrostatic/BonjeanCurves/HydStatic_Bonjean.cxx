@@ -14,7 +14,7 @@
 #include <Marine_xSectionParam.hxx>
 #include <HydStatic_BnjCurve.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Bnd_Box2d.hxx>

@@ -8,7 +8,7 @@
 #include <HydStatic_StbFun_IntgFun.hxx>
 #include <HydStatic_Tools.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 std::shared_ptr<tnbLib::Geo_xDistb> 
