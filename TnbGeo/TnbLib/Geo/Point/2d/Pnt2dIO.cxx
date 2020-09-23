@@ -1,7 +1,7 @@
 #include <Pnt2d.hxx>
 
 #include <token.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <errorManip.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>

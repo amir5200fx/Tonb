@@ -6,7 +6,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Merge_PntAlg.hxx>
 #include <Traits.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <memory>

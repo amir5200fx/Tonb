@@ -5,7 +5,7 @@
 #include <Global_Macros.hxx>
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <map>

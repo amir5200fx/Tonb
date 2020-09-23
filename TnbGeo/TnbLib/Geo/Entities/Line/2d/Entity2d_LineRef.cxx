@@ -4,7 +4,7 @@
 #include <Dir2d.hxx>
 #include <Vec2d.hxx>
 #include <Entity_Line.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <CGAL\Exact_predicates_inexact_constructions_kernel.h>

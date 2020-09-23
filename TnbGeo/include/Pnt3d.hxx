@@ -3,7 +3,7 @@
 #define _Pnt3d_Header
 
 #include <gp_Pnt.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

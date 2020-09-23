@@ -1,6 +1,6 @@
 #include <Geo_ProfileFun_Geom.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
