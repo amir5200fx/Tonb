@@ -41,6 +41,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbStbGMaker", "TnbStbGMake
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbGlobal", "TnbGlobal\TnbGlobal.vcxproj", "{B919C408-474A-458B-9B08-459DF6598B56}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbSectPx", "TnbSectPx\TnbSectPx.vcxproj", "{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -193,6 +195,14 @@ Global
 		{B919C408-474A-458B-9B08-459DF6598B56}.Release|x64.ActiveCfg = Release|x64
 		{B919C408-474A-458B-9B08-459DF6598B56}.Release|x64.Build.0 = Release|x64
 		{B919C408-474A-458B-9B08-459DF6598B56}.Release|x86.ActiveCfg = Release|x64
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Debug|x64.ActiveCfg = Debug|x64
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Debug|x64.Build.0 = Debug|x64
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Debug|x86.ActiveCfg = Debug|Win32
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Debug|x86.Build.0 = Debug|Win32
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Release|x64.ActiveCfg = Release|x64
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Release|x64.Build.0 = Release|x64
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Release|x86.ActiveCfg = Release|Win32
+		{B4850AF1-6BEC-4F8D-9224-72C079D08DE9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

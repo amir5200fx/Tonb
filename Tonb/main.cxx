@@ -66,7 +66,8 @@ Standard_Integer main()
 	//example_geo_compt_polygons();
 	//example_cross_curves_ship();
 	//example_cad2d_modeler();
-	example_stb_gmaker_creator();
+	//example_stb_gmaker_creator();
+	example_sect_px_field_function();
 
 	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));

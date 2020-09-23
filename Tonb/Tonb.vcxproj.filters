@@ -49,6 +49,9 @@
     <ClCompile Include="Examples\example_stb_gmaker_creator.cxx">
       <Filter>Examples</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\example_sect_px_field_function.cxx">
+      <Filter>Examples</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
