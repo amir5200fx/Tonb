@@ -70,10 +70,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -81,11 +81,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Derivation;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Function;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction\Info;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction;$(ProjectDir)TnbLib\MeshCurve\OptmPoint;$(ProjectDir)TnbLib\MeshCurve\Curve\Info;$(ProjectDir)TnbLib\MeshCurve\Curve\AnIso;$(ProjectDir)TnbLib\MeshCurve\Curve\Iso;$(ProjectDir)TnbLib\MeshCurve\Curve;$(ProjectDir)TnbLib\MeshCurve\Entity\AnIso;$(ProjectDir)TnbLib\MeshCurve\Entity\Iso;$(ProjectDir)TnbLib\MeshCurve\Entity;$(ProjectDir)TnbLib\MeshCurve\Length\Function;$(ProjectDir)TnbLib\MeshCurve\Length;$(SolutionDir)TnbMeshBase\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Derivation;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Function;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction\Info;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction;$(ProjectDir)TnbLib\MeshCurve\OptmPoint;$(ProjectDir)TnbLib\MeshCurve\Curve\Info;$(ProjectDir)TnbLib\MeshCurve\Curve\AnIso;$(ProjectDir)TnbLib\MeshCurve\Curve\Iso;$(ProjectDir)TnbLib\MeshCurve\Curve;$(ProjectDir)TnbLib\MeshCurve\Entity\AnIso;$(ProjectDir)TnbLib\MeshCurve\Entity\Iso;$(ProjectDir)TnbLib\MeshCurve\Entity;$(ProjectDir)TnbLib\MeshCurve\Length\Function;$(ProjectDir)TnbLib\MeshCurve\Length;$(SolutionDir)TnbMeshBase\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,11 +131,11 @@ for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Derivation;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Function;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction\Info;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction;$(ProjectDir)TnbLib\MeshCurve\OptmPoint;$(ProjectDir)TnbLib\MeshCurve\Curve\Info;$(ProjectDir)TnbLib\MeshCurve\Curve\AnIso;$(ProjectDir)TnbLib\MeshCurve\Curve\Iso;$(ProjectDir)TnbLib\MeshCurve\Curve;$(ProjectDir)TnbLib\MeshCurve\Entity\AnIso;$(ProjectDir)TnbLib\MeshCurve\Entity\Iso;$(ProjectDir)TnbLib\MeshCurve\Entity;$(ProjectDir)TnbLib\MeshCurve\Length\Function;$(ProjectDir)TnbLib\MeshCurve\Length;$(SolutionDir)TnbMeshBase\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Derivation;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton\Function;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Newton;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction\Info;$(ProjectDir)TnbLib\MeshCurve\OptmPoint\Correction;$(ProjectDir)TnbLib\MeshCurve\OptmPoint;$(ProjectDir)TnbLib\MeshCurve\Curve\Info;$(ProjectDir)TnbLib\MeshCurve\Curve\AnIso;$(ProjectDir)TnbLib\MeshCurve\Curve\Iso;$(ProjectDir)TnbLib\MeshCurve\Curve;$(ProjectDir)TnbLib\MeshCurve\Entity\AnIso;$(ProjectDir)TnbLib\MeshCurve\Entity\Iso;$(ProjectDir)TnbLib\MeshCurve\Entity;$(ProjectDir)TnbLib\MeshCurve\Length\Function;$(ProjectDir)TnbLib\MeshCurve\Length;$(SolutionDir)TnbMeshBase\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
