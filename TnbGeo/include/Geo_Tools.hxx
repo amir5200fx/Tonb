@@ -2,6 +2,7 @@
 #ifndef _Geo_Tools_Header
 #define _Geo_Tools_Header
 
+#include <Dir2d.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 #include <Entity2d_PolygonFwd.hxx>
@@ -247,9 +248,10 @@ namespace tnbLib
 			IntersectionTwoLines
 			(
 				const Pnt2d& P0,
-				const Pnt2d& t0,
+				const Dir2d& t0,
 				const Pnt2d& P1,
-				const Pnt2d& t1
+				const Dir2d& t1,
+				const Standard_Real theAngTol
 			);
 
 		static Pnt2d 

@@ -6,6 +6,33 @@
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
 
+tnbLib::Pnt2d 
+tnbLib::Geo_Tools::IntersectionTwoLines
+(
+	const Pnt2d & P0,
+	const Dir2d & t0, 
+	const Pnt2d & P1, 
+	const Dir2d & t1,
+	const Standard_Real theTol
+)
+{
+	if (t0.IsParallel(t1, theTol))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the two lines are parallel" << endl
+			<< abort(FatalError);
+	}
+
+	const auto dp = P1 - P0;
+	const auto denom = t0.Crossed(t1);
+	const auto nume = Dir2d(dp.XY()).Crossed(t1);
+
+	const auto alf = nume / denom;
+
+	const auto pt = P0 + alf * Pnt2d(t0.XY());
+	return std::move(pt);
+}
+
 std::shared_ptr<tnbLib::Entity2d_Chain> 
 tnbLib::Geo_Tools::RetrieveChain
 (
