@@ -17,17 +17,4 @@
       <UniqueIdentifier>{cf3d316f-6147-469b-91d2-531003cfe199}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TnbLib\HullDesigner\Entities\Entity\HullDesign_Entity.hxx">
-      <Filter>TnbLib\HullDesigner\Entities\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\HullDesigner\Entities\Hull\HullDesign_Hull.hxx">
-      <Filter>TnbLib\HullDesigner\Entities\Hull</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TnbLib\HullDesigner\Entities\Entity\HullDesign_Entity.cxx">
-      <Filter>TnbLib\HullDesigner\Entities\Entity</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>
