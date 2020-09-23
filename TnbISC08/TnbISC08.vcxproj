@@ -70,10 +70,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -82,7 +82,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
     </ClCompile>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
     </ClCompile>
