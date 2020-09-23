@@ -1,7 +1,7 @@
 #include <Mesh3d_Facet.hxx>
 
 #include <Geo_Tools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
