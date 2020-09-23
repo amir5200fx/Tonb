@@ -4,7 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_Macros.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <map>

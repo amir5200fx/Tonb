@@ -2,8 +2,9 @@
 #ifndef _StbGMaker_SailCreator_Header
 #define _StbGMaker_SailCreator_Header
 
-#include <StbGMaker_Alg.hxx>
-#include <Marine_ShapesFwd.hxx>
+//#include <StbGMaker_Alg.hxx>
+#include <StbGMaker_EntityCreator.hxx>
+#include <StbGMaker_SailCreatorType.hxx>
 
 namespace tnbLib
 {
@@ -12,55 +13,25 @@ namespace tnbLib
 	class Geo_xDistb;
 
 	class StbGMaker_SailCreator
-		: public StbGMaker_Alg
+		: public StbGMaker_EntityCreator
 	{
 
 		/*Private Data*/
 
-		std::shared_ptr<marineLib::Shape_Sail> 
-			theSail_;
+	protected:
+
+		template<class... _Types>
+		StbGMaker_SailCreator(_Types&&... _Args)
+			: StbGMaker_EntityCreator(_Args...)
+		{}
 
 	public:
 
-		StbGMaker_SailCreator()
-		{}
+		virtual Standard_Boolean IsArea() const;
 
-		StbGMaker_SailCreator
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
+		virtual Standard_Boolean IsGeometric() const;
 
-		StbGMaker_SailCreator
-		(
-			const std::shared_ptr<marineLib::Shape_Sail>& theSail
-		)
-			: theSail_(theSail)
-		{}
-
-		StbGMaker_SailCreator
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<marineLib::Shape_Sail>& theSail
-		);
-
-		StbGMaker_SailCreator
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const std::shared_ptr<marineLib::Shape_Sail>& theSail
-		);
-
-		const auto& Shape() const
-		{
-			return theSail_;
-		}
-
-		Standard_Integer
-			CreateWorkingPlane
-			(
-				const Standard_Real x
-			) override;
+		virtual stbGmakerLib::sailCreatotType Type() const = 0;
 	};
 }
 

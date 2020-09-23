@@ -1,6 +1,6 @@
 #include <Entity2d_TriangulationN.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

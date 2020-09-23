@@ -4,7 +4,7 @@
 #include <Entity3d_Polygon.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Geo_Tools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom_BoundedCurve.hxx>

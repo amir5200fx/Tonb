@@ -13,6 +13,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		void SetSystem();
+
 	public:
 
 		/*Marine_zCmpSection();

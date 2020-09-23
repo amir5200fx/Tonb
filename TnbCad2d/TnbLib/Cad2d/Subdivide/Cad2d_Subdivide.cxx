@@ -20,7 +20,7 @@
 #include <Cad2d_EntityEntityIntersection.hxx>
 #include <Cad2d_PlanePlaneIntersection.hxx>
 #include <Cad2d_EdgeEdgeIntersection.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>

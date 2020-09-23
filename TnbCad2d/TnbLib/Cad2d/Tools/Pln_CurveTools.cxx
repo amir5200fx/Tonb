@@ -4,7 +4,7 @@
 #include <Pln_Tools.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <TecPlot.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Bnd_Box2d.hxx>

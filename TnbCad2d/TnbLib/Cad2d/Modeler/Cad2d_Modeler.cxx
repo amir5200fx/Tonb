@@ -3,9 +3,11 @@
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
+#include <Pln_Ring.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Subdivide.hxx>
+#include <Cad2d_Modeler_Segment.hxx>
 #include <Cad2d_EdgeEdgeIntersection.hxx>
 #include <Cad2d_IntsctEntity_Segment.hxx>
 #include <Cad2d_IntsctEntity_Pair.hxx>
@@ -15,6 +17,7 @@
 
 tnbLib::Cad2d_Modeler::Cad2d_Modeler()
 {
+	// empty body
 }
 
 Standard_Boolean 
@@ -45,6 +48,18 @@ void tnbLib::Cad2d_Modeler::Select
 	theList.Import(theEdge->Index(), theEdge);
 }
 
+void tnbLib::Cad2d_Modeler::SelectAll
+(
+	selctList & theList
+) const
+{
+	for (const auto& x : Edges())
+	{
+		Debug_Null_Pointer(x.second);
+		theList.Import(x.second->Index(), x.second);
+	}
+}
+
 void tnbLib::Cad2d_Modeler::deSelect
 (
 	const std::shared_ptr<Pln_Edge>& theEdge,
@@ -67,11 +82,118 @@ void tnbLib::Cad2d_Modeler::deSelect
 	}
 }
 
+void tnbLib::Cad2d_Modeler::deSelectAll
+(
+	selctList & theList
+) const
+{
+	theList.Clear();
+}
+
+void tnbLib::Cad2d_Modeler::RemoveRing
+(
+	const std::shared_ptr<Pln_Ring>& theRing
+)
+{
+#ifdef _DEBUG
+	if (NOT IsContain(theRing))
+	{
+		FatalErrorIn("void RemoveRing(const std::shared_ptr<Pln_Ring>& theRing)")
+			<< "the edge is not in the modeler!" << endl
+			<< abort(FatalError);
+	}
+#endif // DEBUG
+
+	const auto& v = theRing->Vtx0();
+
+	v->RemoveFromEdges(theRing->Index());
+
+	if (v->IsOrphan())
+	{
+		RemoveVertex(v);
+	}
+
+	const auto crn = FindCorner(v);
+	if (NOT crn)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to find the corner0" << endl
+			<< " - radius = " << Radius() << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT crn->IsContains(v))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "contradictory data: the corner doesn't contain the vertex!" << endl
+			<< " - corner's index = " << crn->Index() << endl
+			<< " - corner's name = " << crn->Name() << endl
+			<< endl
+			<< " - vertex's index = " << v->Index() << endl
+			<< " - vertex's name = " << v->Name() << endl
+			<< abort(FatalError);
+	}
+
+	const auto segmnt = cad2dLib::Modeler_Tools::HasRing(crn);
+	if (NOT segmnt)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there is not segment between two corners" << endl
+			<< " - corner0 = " << crn->Index() << endl
+			<< " - corner1 = " << crn->Index() << endl
+			<< abort(FatalError);
+	}
+
+	const auto id = theRing->Index();
+	if (segmnt->RemoveFromEdges(id) NOT_EQUAL theRing)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "contradictory data" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT segmnt->NbEdges())
+	{
+		if (crn->RemoveFromSegments(segmnt->Index()).lock() NOT_EQUAL segmnt)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT crn->NbSegments())
+		{
+			cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine(crn);
+		}
+
+		RemoveSegment(segmnt);
+	}
+
+	auto edge = cad2dLib::Modeler_Registry::RemoveEdgeFromRegistry(theRing->Index());
+	if (cad2dLib::Modeler_Registry::IsNull(edge))
+	{
+		FatalErrorIn("void RemoveRing(const std::shared_ptr<Pln_Ring>&)")
+			<< "the edge is not in the registry: " << id << endl
+			<< abort(FatalError);
+	}
+
+	EdgeCounter().ReturnToCounter(id);
+}
+
 void tnbLib::Cad2d_Modeler::RemoveEdge
 (
 	const std::shared_ptr<Pln_Edge>& theEdge
 )
 {
+	if (theEdge->IsRing())
+	{
+		auto ring = std::dynamic_pointer_cast<Pln_Ring>(theEdge);
+		Debug_Null_Pointer(ring);
+
+		RemoveRing(ring);
+		return;
+	}
+
 #ifdef _DEBUG
 	if (NOT IsContain(theEdge))
 	{
@@ -97,7 +219,113 @@ void tnbLib::Cad2d_Modeler::RemoveEdge
 		RemoveVertex(v1);
 	}
 
+	const auto crn0 = FindCorner(v0);
+	if (NOT crn0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to find the corner0" << endl
+			<< " - radius = " << Radius() << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT crn0->IsContains(v0))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "contradictory data: the corner doesn't contain the vertex!" << endl
+			<< " - corner's index = " << crn0->Index() << endl
+			<< " - corner's name = " << crn0->Name() << endl
+			<< endl
+			<< " - vertex's index = " << v0->Index() << endl
+			<< " - vertex's name = " << v0->Name() << endl
+			<< abort(FatalError);
+	}
+
+	const auto crn1 = FindCorner(v1);
+	if (NOT crn1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to find the corner1" << endl
+			<< " - radius = " << Radius() << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT crn1->IsContains(v1))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "contradictory data: the corner doesn't contain the vertex!" << endl
+			<< " - corner's index = " << crn1->Index() << endl
+			<< " - corner's name = " << crn1->Name() << endl
+			<< endl
+			<< " - vertex's index = " << v1->Index() << endl
+			<< " - vertex's name = " << v1->Name() << endl
+			<< abort(FatalError);
+	}
+
+	const auto segmnt = cad2dLib::Modeler_Tools::IsSegment(crn0, crn1);
+	if (NOT segmnt)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there is not segment between two corners" << endl
+			<< " - corner0 = " << crn0->Index() << endl
+			<< " - corner1 = " << crn1->Index() << endl
+			<< abort(FatalError);
+	}
+
 	const auto id = theEdge->Index();
+	if (segmnt->RemoveFromEdges(id) NOT_EQUAL theEdge)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "contradictory data" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT segmnt->NbEdges())
+	{
+		if (crn0 IS_EQUAL crn1)
+		{
+			if (crn0->RemoveFromSegments(segmnt->Index()).lock() NOT_EQUAL segmnt)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data" << endl
+					<< abort(FatalError);
+			}
+
+			if (NOT crn0->NbSegments())
+			{
+				cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine(crn0);
+			}
+		}
+		else
+		{
+			if (crn0->RemoveFromSegments(segmnt->Index()).lock() NOT_EQUAL segmnt)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data" << endl
+					<< abort(FatalError);
+			}
+
+			if (crn1->RemoveFromSegments(segmnt->Index()).lock() NOT_EQUAL segmnt)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data" << endl
+					<< abort(FatalError);
+			}
+
+			if (NOT crn0->NbSegments())
+			{
+				cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine(crn0);
+			}
+
+			if (NOT crn1->NbSegments())
+			{
+				cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine(crn1);
+			}
+		}
+		
+
+		RemoveSegment(segmnt);
+	}
+
 	auto edge = cad2dLib::Modeler_Registry::RemoveEdgeFromRegistry(theEdge->Index());
 	if (cad2dLib::Modeler_Registry::IsNull(edge))
 	{
@@ -163,7 +391,42 @@ void tnbLib::Cad2d_Modeler::RemoveVertex
 	}
 }
 
-void tnbLib::Cad2d_Modeler::AddVertex
+void tnbLib::Cad2d_Modeler::RemoveSegment
+(
+	const std::shared_ptr<cad2dLib::Modeler_Segment>& theSegmnt
+)
+{
+	if (theSegmnt->NbEdges())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to remove the segment!" << endl
+			<< abort(FatalError);
+	}
+	const auto& crn0 = theSegmnt->Crn0();
+	const auto& crn1 = theSegmnt->Crn1();
+
+	if (crn0->IsContains(theSegmnt) OR crn1->IsContains(theSegmnt))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to remove the segment!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto id = theSegmnt->Index();
+	if (cad2dLib::Modeler_Segments::RemoveFromSegments(id) NOT_EQUAL theSegmnt)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something goes wrong in removing the segment from the registry!" << endl
+			<< " - index = " << theSegmnt->Index() << endl
+			<< " - name = " << theSegmnt->Name() << endl
+			<< abort(FatalError);
+	}
+
+	SegmntCounter().ReturnToCounter(id);
+}
+
+std::shared_ptr<tnbLib::cad2dLib::Modeler_Corner> 
+tnbLib::Cad2d_Modeler::AddVertex
 (
 	const std::shared_ptr<Pln_Vertex>& theVtx, 
 	const Standard_Integer theEdgeIndex
@@ -179,11 +442,12 @@ void tnbLib::Cad2d_Modeler::AddVertex
 	auto name = word(stream.str());
 	theVtx->Name() = std::move(name);
 
-	const auto& crn = SelectCorner(theVtx->Coord());
+	auto crn = SelectCorner(theVtx->Coord());
 	if (NOT cad2dLib::Modeler_SrchEng::IsNull(crn))
 	{
 		crn->InsertToCorners(theVtx->Index(), theVtx);
 		//theVtx->SetPrecision(crn->Radius());
+		return std::move(crn);
 	}
 	else
 	{
@@ -199,6 +463,7 @@ void tnbLib::Cad2d_Modeler::AddVertex
 		//theVtx->SetPrecision(crn->Radius());
 
 		InsertToSrchEngine(c);
+		return std::move(c);
 	}
 }
 
@@ -211,8 +476,8 @@ tnbLib::Cad2d_Modeler::AddEdge
 	theEdge->Index() = EdgeCounter().RetrieveIndex();
 	theEdge->Name() = "edge nb. " + theEdge->Index();
 
-	AddVertex(theEdge->Vtx0(), theEdge->Index());
-	AddVertex(theEdge->Vtx1(), theEdge->Index());
+	const auto crn0 = AddVertex(theEdge->Vtx0(), theEdge->Index());
+	const auto crn1 = AddVertex(theEdge->Vtx1(), theEdge->Index());
 
 	const auto& v0 = theEdge->Vtx0();
 	const auto& v1 = theEdge->Vtx1();
@@ -223,7 +488,65 @@ tnbLib::Cad2d_Modeler::AddEdge
 
 	cad2dLib::Modeler_Registry::RegisterToEdges(theEdge->Index(), theEdge);
 
+	if (crn0 IS_EQUAL crn1)
+	{
+		auto segmnt = cad2dLib::Modeler_Tools::HasRing(crn0);
+		if (NOT segmnt)
+		{
+			segmnt = std::make_shared<cad2dLib::Modeler_Ring>(crn0);
+
+			const auto segId = AddSegment(segmnt);
+			crn0->ImportToSegments(segId, segmnt);
+		}
+
+		segmnt->ImportToEdges(theEdge->Index(), theEdge);
+	}
+	else
+	{
+		auto segmnt = cad2dLib::Modeler_Tools::IsSegment(crn0, crn1);
+		if (NOT segmnt)
+		{
+			segmnt = std::make_shared<cad2dLib::Modeler_Segment>(crn0, crn1);
+
+			const auto segId = AddSegment(segmnt);
+			crn0->ImportToSegments(segId, segmnt);
+			crn1->ImportToSegments(segId, segmnt);
+		}
+
+		segmnt->ImportToEdges(theEdge->Index(), theEdge);
+	}
+
 	return theEdge->Index();
+}
+
+Standard_Integer 
+tnbLib::Cad2d_Modeler::AddRing
+(
+	const std::shared_ptr<Pln_Ring>& theRing
+)
+{
+	theRing->Index() = EdgeCounter().RetrieveIndex();
+	theRing->Name() = "ring nb. " + theRing->Index();
+
+	const auto crn = AddVertex(theRing->Vtx0(), theRing->Index());
+
+	const auto& v = theRing->Vtx0();
+
+	v->InsertToEdges(theRing->Index(), theRing);
+
+	cad2dLib::Modeler_Registry::RegisterToEdges(theRing->Index(), theRing);
+
+	auto segmnt = cad2dLib::Modeler_Tools::HasRing(crn);
+	if (NOT segmnt)
+	{
+		segmnt = std::make_shared<cad2dLib::Modeler_Ring>(crn);
+
+		const auto segId = AddSegment(segmnt);
+		crn->ImportToSegments(segId, segmnt);
+	}
+
+	segmnt->ImportToEdges(theRing->Index(), theRing);
+	return theRing->Index();
 }
 
 Standard_Integer
@@ -238,6 +561,20 @@ tnbLib::Cad2d_Modeler::AddPlane
 	InsertToPlanes(thePlane->Index(), thePlane);
 
 	return thePlane->Index();
+}
+
+Standard_Integer 
+tnbLib::Cad2d_Modeler::AddSegment
+(
+	const std::shared_ptr<cad2dLib::Modeler_Segment>& theSegmnt
+)
+{
+	Debug_Null_Pointer(theSegmnt);
+	theSegmnt->Index() = SegmntCounter().RetrieveIndex();
+	theSegmnt->Name() = "segment nb. " + theSegmnt->Index();
+
+	InsertToSegments(theSegmnt->Index(), theSegmnt);
+	return theSegmnt->Index();
 }
 
 std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
@@ -376,7 +713,17 @@ tnbLib::Cad2d_Modeler::Import
 	const std::shared_ptr<Pln_Edge>& theEdge
 )
 {
-	return AddEdge(theEdge);
+	if (theEdge->IsRing())
+	{
+		auto ring = std::dynamic_pointer_cast<Pln_Ring>(theEdge);
+		Debug_Null_Pointer(ring);
+
+		return AddRing(ring);
+	}
+	else
+	{
+		return AddEdge(theEdge);
+	}
 }
 
 void tnbLib::Cad2d_Modeler::Import
@@ -496,6 +843,11 @@ void tnbLib::Cad2d_Modeler::Trim
 	}
 }
 
+//void tnbLib::Cad2d_Modeler::MakePlanes()
+//{
+//
+//}
+
 Standard_Integer 
 tnbLib::Cad2d_Modeler::MakePlane
 (
@@ -511,8 +863,8 @@ tnbLib::Cad2d_Modeler::MakePlane
 	Debug_Null_Pointer(info);
 
 	info->SetAngle(1.0);
-	info->SetApprox(1.0E-4);
-	info->SetMinSize(1.0E-4);
+	info->SetApprox(1.0E-3);
+	info->SetMinSize(1.0E-3);
 	for (const auto& x : edges)
 	{
 		if (NOT x->Mesh())

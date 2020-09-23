@@ -17,7 +17,7 @@
 #include <HydStatic_rArmCurve_Eff.hxx>
 #include <HydStatic_ArmCurveCreator.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geo_Tools.hxx>

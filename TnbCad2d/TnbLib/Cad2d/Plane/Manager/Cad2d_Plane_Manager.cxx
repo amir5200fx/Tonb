@@ -3,7 +3,7 @@
 #include <Cad_EntityManager.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 Standard_Integer

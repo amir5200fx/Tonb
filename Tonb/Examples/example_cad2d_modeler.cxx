@@ -4,7 +4,7 @@
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
 #include <OFstream.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::example_cad2d_modeler()

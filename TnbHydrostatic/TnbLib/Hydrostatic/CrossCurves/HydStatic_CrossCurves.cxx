@@ -18,7 +18,7 @@
 #include <Marine_System.hxx>
 #include <HydStatic_CrsCurve.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <vector>

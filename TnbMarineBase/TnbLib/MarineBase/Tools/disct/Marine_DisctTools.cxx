@@ -1,10 +1,16 @@
 #include <Marine_DisctTools.hxx>
 
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
+
 #include <Marine_CmpSection.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_BooleanOps.hxx>
-#include <error.hxx>
-#include <OSstream.hxx>
+
 
 #include <gp_Ax2.hxx>
 #include <gp_Pln.hxx>

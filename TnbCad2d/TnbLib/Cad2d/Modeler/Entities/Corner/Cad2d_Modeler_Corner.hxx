@@ -4,7 +4,8 @@
 
 #include <Pnt2d.hxx>
 #include <Cad2d_Modeler_Entity.hxx>
-#include <error.hxx>
+#include <Cad2d_Modeler_CornerAdaptor.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <vector>
@@ -22,6 +23,7 @@ namespace tnbLib
 
 		class Modeler_Corner
 			: public Modeler_Entity
+			, public Modeler_CornerAdaptor
 		{
 
 			/*Private Data*/
@@ -35,6 +37,8 @@ namespace tnbLib
 			Pnt2d theCoord_;
 
 		public:
+
+			using Modeler_CornerAdaptor::IsContains;
 
 			static const Standard_Real DEFAULT_RADIUS;
 
@@ -83,6 +87,12 @@ namespace tnbLib
 				return theVertices_;
 			}
 
+			Standard_Boolean 
+				IsContains
+				(
+					const std::shared_ptr<Pln_Vertex>& theVtx
+				) const;
+
 			void SetRadius(const Standard_Real theR)
 			{
 				theRadius_ = theR;
@@ -116,6 +126,18 @@ namespace tnbLib
 			{
 				Debug_Null_Pointer(theEnt);
 				return theEnt->Coord();
+			}
+
+			static Standard_Boolean 
+				IsLess
+				(
+					const std::shared_ptr<Modeler_Corner>& theC0, 
+					const std::shared_ptr<Modeler_Corner>& theC1
+				)
+			{
+				Debug_Null_Pointer(theC0);
+				Debug_Null_Pointer(theC1);
+				return theC0->Index() < theC1->Index();
 			}
 		};
 	}

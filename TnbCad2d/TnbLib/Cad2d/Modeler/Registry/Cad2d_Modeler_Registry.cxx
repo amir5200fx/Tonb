@@ -2,7 +2,7 @@
 
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
@@ -69,7 +69,7 @@ tnbLib::cad2dLib::Modeler_Registry::IsContain
 	return IsContainEdge(theEdge->Index());
 }
 
-const std::shared_ptr<tnbLib::Pln_Edge>& 
+std::shared_ptr<tnbLib::Pln_Edge> 
 tnbLib::cad2dLib::Modeler_Registry::SelectEdge
 (
 	const Standard_Integer theIndex

@@ -5,7 +5,7 @@
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <NumAlg_AdaptiveInteg_Core.hxx>
 #include <NumAlg_IntegBond.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <vector>

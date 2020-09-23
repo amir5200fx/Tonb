@@ -27,6 +27,11 @@ namespace tnbLib
 
 	public:
 
+		void SetLocation(const gp_Pnt& thePnt)
+		{
+			theCoordinateSystem_.SetLocation(thePnt);
+		}
+
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(gp_Ax2, CoordinateSystem)
 	};

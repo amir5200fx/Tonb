@@ -2,7 +2,6 @@
 #ifndef _StbGMaker_Edge_Header
 #define _StbGMaker_Edge_Header
 
-#include <Pln_Edge.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 
 namespace tnbLib
@@ -10,8 +9,9 @@ namespace tnbLib
 
 	// Forward Declarations
 
+	template<class PlnEdge>
 	class StbGMaker_Edge
-		: public Pln_Edge
+		: public PlnEdge
 	{
 
 		/*Private Data*/
@@ -22,7 +22,7 @@ namespace tnbLib
 
 		template<class... _Types>
 		StbGMaker_Edge(_Types&&... Args)
-			: Pln_Edge(Args...)
+			: PlnEdge(Args...)
 		{}
 
 		const auto& Mesh3d() const

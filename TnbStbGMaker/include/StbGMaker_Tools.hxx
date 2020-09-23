@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 
 #include <memory>
+#include <vector>
 
 class gp_Pln;
 
@@ -15,8 +16,10 @@ namespace tnbLib
 	class StbGMaker_Tank;
 	class StbGMaker_Hull;
 	class StbGMaker_IntplSect;
+	class StbGMaker_WP;
 	class Marine_CmpSection;
 	class Marine_Body;
+	class Pln_Wire;
 
 	class StbGMaker_Tools
 	{
@@ -66,6 +69,14 @@ namespace tnbLib
 				const StbGMaker_Hull& theHull
 			);
 
+		static std::vector<std::shared_ptr<Pln_Wire>> OuterWires(const std::shared_ptr<StbGMaker_WP>& theWp);
+
+		template<class SectionType>
+		static std::shared_ptr<Marine_CmpSection> Section(const std::shared_ptr<StbGMaker_WP>& theWp);
+
+		template<class SectionType>
+		static std::vector<std::shared_ptr<Marine_CmpSection>> RetrieveSections(const std::vector<std::shared_ptr<StbGMaker_WP>>& theWps);
+
 		static std::shared_ptr<Marine_CmpSection> FitTankSectionToHull(const std::shared_ptr<Marine_CmpSection>& theSection, const std::shared_ptr<Marine_CmpSection>& theSHull0, const std::shared_ptr<Marine_CmpSection>& theSHull1, const std::shared_ptr<StbGMaker_IntplSect>& theIntrpl);
 
 		static std::shared_ptr<StbGMaker_Tank> FitTankToHull(const StbGMaker_Tank& theTank, const StbGMaker_Hull& theHull, const std::shared_ptr<StbGMaker_IntplSect>& theIntrpl);
@@ -75,5 +86,7 @@ namespace tnbLib
 		static void CheckSameDirection(const std::shared_ptr<Marine_CmpSection>& theS0, const std::shared_ptr<Marine_CmpSection>& theS1, const char* theNameFun);
 	};
 }
+
+#include <StbGMaker_ToolsI.hxx>
 
 #endif // !_StbGMaker_Tools_Header

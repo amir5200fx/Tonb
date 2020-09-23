@@ -1,7 +1,7 @@
 #include <Geo_UniDistb.hxx>
 
 #include <Global_Macros.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::Geo_UniDistb::Perform()

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{25c883f9-f6d9-499c-a906-8e8612854b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global">
+      <UniqueIdentifier>{20aba5d7-4396-4131-b234-7df21142a174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\containers">
+      <UniqueIdentifier>{2aef51f3-e0fa-4d0d-a62c-e7a902ecbbec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\containers\ADT">
+      <UniqueIdentifier>{d2db9f48-0f3d-4c3f-9e54-a7c24dd487d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\global">
+      <UniqueIdentifier>{d2ee370c-e05b-42f6-94b9-f6536304d2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\containers\ADT\Ary1d">
+      <UniqueIdentifier>{46c4794b-a99b-4036-96c7-cf2ab0ca0d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\containers\ADT\Ary2d">
+      <UniqueIdentifier>{4683e754-5e46-4b35-a5bc-4c5f571fdad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\containers\ADT\Avl">
+      <UniqueIdentifier>{da4c0c6f-d36d-4ed2-aba2-38f54f4834f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\containers\ADT\List">
+      <UniqueIdentifier>{e1c14d15-6834-4b2c-b261-2cefe8ca6761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\error">
+      <UniqueIdentifier>{ed1bdbcc-f14d-4e4d-a392-5aa7abba4ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\Traits">
+      <UniqueIdentifier>{5d36b3bf-8c0e-49f2-b779-18cdec5b35dd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1d.hxx">
+      <Filter>TnbLib\Global\containers\ADT\Ary1d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1dI.hxx">
+      <Filter>TnbLib\Global\containers\ADT\Ary1d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\containers\ADT\Ary2d\Adt_Ary2d.hxx">
+      <Filter>TnbLib\Global\containers\ADT\Ary2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\containers\ADT\Avl\Adt_AvlTree.hxx">
+      <Filter>TnbLib\Global\containers\ADT\Avl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\containers\ADT\List\Adt_List.hxx">
+      <Filter>TnbLib\Global\containers\ADT\List</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\containers\ADT\List\Adt_SlList.hxx">
+      <Filter>TnbLib\Global\containers\ADT\List</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_AccessMethod.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Bound.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Done.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Indexed.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Macros.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Message.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Named.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Timer.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Verbose.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\error\TnbError.hxx">
+      <Filter>TnbLib\Global\error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\error\TnbErrorM.hxx">
+      <Filter>TnbLib\Global\error</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\UnitSystem.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\Traits\Traits.hxx">
+      <Filter>TnbLib\Global\Traits</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Global\global\Global_Message.cxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\global\Global_Timer.cxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\error\TnbError.cxx">
+      <Filter>TnbLib\Global\error</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\global\UnitSystem.cxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

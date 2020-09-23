@@ -7,7 +7,7 @@
 #include <Mesh_ElementAdaptor.hxx>
 #include <Mesh_ElementType.hxx>
 #include <Mesh_TypeTraits.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <memory>

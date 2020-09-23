@@ -8,6 +8,8 @@
 #include <Pln_Ring.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad2d_Modeler_SrchEng.hxx>
+#include <Cad2d_Modeler_Corner.hxx>
+#include <Cad2d_Modeler_Segment.hxx>
 
 #include <Standard_Handle.hxx>
 #include <Geom2d_Curve.hxx>
@@ -20,6 +22,65 @@
 #include <GCE2d_MakeEllipse.hxx>
 
 #include <algorithm>
+
+std::shared_ptr<tnbLib::cad2dLib::Modeler_Segment>
+tnbLib::cad2dLib::Modeler_Tools::HasRing
+(
+	const std::shared_ptr<Modeler_Corner>& theCrn
+)
+{
+	if (NOT theCrn->NbSegments())
+	{
+		return nullptr;
+	}
+	for (const auto& x : theCrn->Segments())
+	{
+		Debug_Null_Pointer(x.second.lock());
+		auto seg = x.second.lock();
+		if (seg->IsRing())
+		{
+			return std::move(seg);
+		}
+	}
+	return nullptr;
+}
+
+std::shared_ptr<tnbLib::cad2dLib::Modeler_Segment>
+tnbLib::cad2dLib::Modeler_Tools::IsSegment
+(
+	const std::shared_ptr<Modeler_Corner>& theCrn0,
+	const std::shared_ptr<Modeler_Corner>& theCrn1
+)
+{
+	Debug_Null_Pointer(theCrn0);
+	Debug_Null_Pointer(theCrn1);
+
+	if (theCrn0->NbSegments() <= theCrn1->NbSegments())
+	{
+		if (NOT theCrn0->NbSegments())
+		{
+			return nullptr;
+		}
+
+		const auto& segments = theCrn0->Segments();
+		for (const auto& x : segments)
+		{
+			auto segmnt = x.second.lock();
+
+			Debug_Null_Pointer(segmnt);
+			if (theCrn1->IsContains(segmnt))
+			{
+				return std::move(segmnt);
+			}
+		}
+		return nullptr;
+	}
+	else
+	{
+		const auto segmnt = IsSegment(theCrn1, theCrn0);
+		return std::move(segmnt);
+	}
+}
 
 namespace tnbLib
 {
@@ -658,6 +719,121 @@ tnbLib::cad2dLib::Modeler_Tools::CalcMaxTolerance
 
 namespace tnbLib
 {
+	namespace cad2dLib
+	{
+		std::shared_ptr<Modeler_Corner> 
+			NextCorner
+			(
+				const std::shared_ptr<Modeler_Corner>& theCrn, 
+				const char* funName
+			)
+		{
+			if (theCrn->NbSegments() NOT_EQUAL 1)
+			{
+				FatalErrorIn(funName)
+					<< "the shape is no manifold!" << endl
+					<< abort(FatalError);
+			}
+
+			auto segmnt = theCrn->Segments().begin()->second.lock();
+			Debug_Null_Pointer(segmnt);
+
+			return segmnt->Other(theCrn);
+		}
+
+		std::shared_ptr<Modeler_Segment>
+			NextSegment
+			(
+				const std::shared_ptr<Modeler_Corner>& theCrn,
+				const char* funName
+			)
+		{
+			const auto& segments = theCrn->Segments();
+			if (segments.size() NOT_EQUAL 1)
+			{
+				FatalErrorIn(funName)
+					<< " the shape is not manifold" << endl
+					<< " nb. of segments = " << (label)segments.size() << endl
+					<< abort(FatalError);
+			}
+
+			auto segmnt = segments.begin()->second.lock();
+			return std::move(segmnt);
+		}
+
+		/*std::vector<std::shared_ptr<Modeler_Segment>> RetrieveRing(const std::shared_ptr<Modeler_Corner>& theCrn)
+		{
+
+		}*/
+
+		void RegisterToMap
+		(
+			std::shared_ptr<Modeler_Segment>&& theSeg, 
+			std::map<Standard_Integer, std::shared_ptr<Modeler_Segment>>& theMap
+		)
+		{
+			auto paired = std::make_pair(theSeg->Index(), std::move(theSeg));
+			auto insert = theMap.insert(std::move(paired));
+			if (NOT insert.second)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "duplicate data!" << endl
+					<< " index = " << theSeg->Index() << endl
+					<< abort(FatalError);
+			}
+		}
+	}
+}
+
+//std::vector<std::shared_ptr<tnbLib::cad2dLib::Modeler_Segment>> 
+//tnbLib::cad2dLib::Modeler_Tools::TrackRing
+//(
+//	const std::shared_ptr<Modeler_Corner>& theCrn
+//)
+//{
+//	const auto& segments = theCrn->Segments();
+//	if (segments.size() IS_EQUAL 1)
+//	{
+//		auto ring = ::tnbLib::cad2dLib::RetrieveRing(theCrn);
+//		return std::move(ring);
+//	}
+//
+//	if (segments.size() NOT_EQUAL 1)
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< " the shape is not manifold" << endl
+//			<< " nb. of segments = " << (label)segments.size() << endl
+//			<< abort(FatalError);
+//	}
+//
+//	std::map<Standard_Integer, std::shared_ptr<Modeler_Segment>> regSegments;
+//	auto segmnt = segments.begin()->second.lock();
+//
+//	if (theCrn->RemoveFromSegments(segmnt->Index()).lock() NOT_EQUAL segmnt)
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "contradictory data!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	auto next =
+//		::tnbLib::cad2dLib::NextCorner
+//		(
+//			theCrn,
+//			"std::vector<std::shared_ptr<Modeler_Segment>> TrackRing(const std::shared_ptr<Modeler_Corner>&)"
+//		);
+//
+//	while (next)
+//	{
+//		::tnbLib::cad2dLib::RegisterToMap(std::move(segmnt), regSegments);
+//
+//
+//	}
+//	
+//}
+
+namespace tnbLib
+{
 
 	const std::shared_ptr<cad2dLib::Modeler_Corner>&
 		FindCorner
@@ -770,6 +946,18 @@ namespace tnbLib
 		{
 			std::shared_ptr<Pln_Vertex> vtx0;
 			std::shared_ptr<Pln_Vertex> vtx1;
+
+
+			Standard_Boolean 
+				IsInside
+				(
+					const std::shared_ptr<Pln_Vertex>& theVtx
+				) const
+			{
+				if (vtx0 IS_EQUAL theVtx) return Standard_True;
+				if (vtx1 IS_EQUAL theVtx) return Standard_True;
+				return Standard_False;
+			}
 		};
 
 		struct Segment
@@ -851,8 +1039,9 @@ namespace tnbLib
 				auto seg = std::make_shared<Segment>();
 
 				seg->edge = x;
-				auto k0 = (k - 1) % theEdges.size();
-				
+				auto k0 = k - 1;
+				if (k0 < 0) k0 = theEdges.size() - 1;
+
 				seg->corner0 = k0;
 				seg->corner1 = k;
 
@@ -866,6 +1055,24 @@ namespace tnbLib
 
 	}
 }
+
+#include <Adt_AvlTree.hxx>
+
+
+
+//std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
+//tnbLib::cad2dLib::Modeler_Tools::RetrieveWires
+//(
+//	const std::vector<std::shared_ptr<Modeler_Corner>>& theCorners
+//)
+//{
+//	Adt_AvlTree<std::shared_ptr<Modeler_Corner>> crnReg;
+//	crnReg.SetComparableFunction(&Modeler_Corner::IsLess);
+//
+//	crnReg.Insert(theCorners);
+//
+//
+//}
 
 std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
 tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
@@ -957,7 +1164,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 		if (edge)
 			edges.push_back(edge);
 	}
-
+	
 	//- return back the vertices into the corners
 	for (const auto& x : vtxToCornerMap)
 	{
@@ -982,6 +1189,12 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 	std::vector<std::shared_ptr<Pln_Vertex>> mVertices;
 	mVertices.reserve(corners.size());
 
+	std::map
+		<
+		Standard_Integer,
+		std::shared_ptr<mergeFunLib::Corner>
+		> indexToCornerMap;
+
 	Standard_Integer nbVrtices = 0;
 	for (const auto& x : corners)
 	{
@@ -995,6 +1208,15 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 		auto vtx = std::make_shared<Pln_Vertex>(++nbVrtices, mPt);
 		Debug_Null_Pointer(vtx);
 
+		auto paired = std::make_pair(vtx->Index(), x);
+		auto insert = indexToCornerMap.insert(std::move(paired));
+		if (NOT insert.second)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "duplicate data!" << endl
+				<< abort(FatalError);
+		}
+
 		mVertices.push_back(std::move(vtx));
 	}
 
@@ -1006,11 +1228,19 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 	{
 		Debug_Null_Pointer(x);
 
+		const auto& crn0 = indexToCornerMap[mVertices[x->corner0]->Index()];
+
+		Standard_Boolean reversed = Standard_False;
+		if (NOT crn0->IsInside(x->edge->Vtx0()))
+		{
+			reversed = Standard_True;
+		}
+
 		auto edge = std::make_shared<Pln_Edge>
 			(
 				mVertices[x->corner0], mVertices[x->corner1],
 				x->edge->Curve(),
-				x->edge->Sense());
+				(reversed ? !x->edge->Sense() : x->edge->Sense()));
 		Debug_Null_Pointer(edge);
 
 		edge->SetIndex(++nbEdges);
@@ -1072,6 +1302,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCorners
 	const auto eB = b.Expanded(b.Diameter()*1.0E-4);
 
 	const auto vertices = Pln_Tools::RetrieveVertices(theEdges);
+	
 	Modeler_SrchEng engine;
 	engine.SetDomain(eB);
 	engine.SetMaxRadius(theTol);
@@ -1082,7 +1313,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCorners
 	}
 
 	engine.RetrieveCornersTo(corners);
-
+	
 	CalcCornerTolerances(corners);
 
 	return std::move(corners);

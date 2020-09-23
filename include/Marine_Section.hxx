@@ -91,12 +91,12 @@ namespace tnbLib
 
 		virtual Standard_Boolean IsTank() const
 		{
-			return Standard_True;
+			return Standard_False;
 		}
 
 		virtual Standard_Boolean IsSail() const
 		{
-			return Standard_True;
+			return Standard_False;
 		}
 
 		virtual std::shared_ptr<Marine_Section> Copy() const = 0;

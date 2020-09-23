@@ -17,50 +17,31 @@ namespace tnbLib
 			/*Private Data*/
 
 			Standard_Real theArea_;
+			Standard_Real theZbar_;
 
 		public:
 
 			Model_ConstAreaSail
 			(
-				const Standard_Real theArea,
-				const Pnt2d& theCentre
-			);
-
-			Model_ConstAreaSail
-			(
-				const Standard_Real theArea,
-				Pnt2d&& theCentre
-			);
-
-			Model_ConstAreaSail
-			(
-				const Standard_Integer theIndex, 
 				const Standard_Real theArea, 
-				const Pnt2d& theCentre
+				const Standard_Real theZbar
 			);
 
 			Model_ConstAreaSail
 			(
 				const Standard_Integer theIndex,
-				const Standard_Real theArea,
-				Pnt2d&& theCentre
-			);
-
-			Model_ConstAreaSail
-			(
-				const Standard_Integer theIndex, 
-				const word& theName,
-				const Standard_Real theArea,
-				const Pnt2d& theCentre
-			);
-
-			Model_ConstAreaSail
-			(
-				const Standard_Integer theIndex, 
-				const word& theName, 
 				const Standard_Real theArea, 
-				Pnt2d&& theCentre
+				const Standard_Real theZbar
 			);
+
+			Model_ConstAreaSail
+			(
+				const Standard_Integer theIndex,
+				const word& theName, 
+				const Standard_Real theArea,
+				const Standard_Real theZbar
+			);
+
 
 			Marine_SailModelType SailType() const override
 			{
@@ -70,6 +51,11 @@ namespace tnbLib
 			auto Area() const
 			{
 				return theArea_;
+			}
+
+			auto zBar() const
+			{
+				return theZbar_;
 			}
 		};
 	}

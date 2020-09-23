@@ -3,7 +3,7 @@
 #include <Pnt2d.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Boolean.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::example_union_plane_box()

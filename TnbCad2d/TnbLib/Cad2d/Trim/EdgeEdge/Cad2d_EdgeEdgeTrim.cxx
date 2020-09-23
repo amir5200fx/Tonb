@@ -8,7 +8,7 @@
 #include <Cad2d_IntsctEntity_TangSegment.hxx>
 #include <Cad2d_IntsctEntity_OrthSegment.hxx>
 #include <Cad2d_IntsctEntity.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Cad2d_EdgeEdgeTrim::Cad2d_EdgeEdgeTrim()

@@ -1,7 +1,7 @@
 #include <HydStatic_HydGphCurves.hxx>
 
 #include <HydStatic_xDraft.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_BSplineCurve.hxx>

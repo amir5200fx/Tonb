@@ -13,6 +13,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		void SetSystem();
+
 	public:
 
 		/*Marine_xCmpSection();
@@ -31,12 +33,16 @@ namespace tnbLib
 		template<class... _Types>
 		Marine_xCmpSection(_Types&&... _Args)
 			: Marine_CmpSection(_Args...)
-		{}
+		{
+			SetSystem();
+		}
 
 		Standard_Boolean IsXsection() const override
 		{
 			return Standard_True;
 		}
+
+		Standard_Real X() const override;
 
 		std::shared_ptr<Marine_CmpSection> Copy() const override;
 
@@ -66,6 +72,8 @@ namespace tnbLib
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
 			);*/
+
+		
 	};
 }
 

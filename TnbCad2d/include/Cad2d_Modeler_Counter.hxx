@@ -18,6 +18,7 @@ namespace tnbLib
 			mutable Geo_ItemCounter theVertexCounter_;
 			mutable Geo_ItemCounter theEdgeCounter_;
 			mutable Geo_ItemCounter thePlaneCounter_;
+			mutable Geo_ItemCounter theSegmntCounter_;
 
 		protected:
 
@@ -39,6 +40,10 @@ namespace tnbLib
 				return thePlaneCounter_;
 			}
 
+			auto& SegmntCounter() const
+			{
+				return theSegmntCounter_;
+			}
 		};
 	}
 }

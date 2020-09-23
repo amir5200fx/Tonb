@@ -15,6 +15,16 @@ namespace tnbLib
 
 	public:
 
+		Pln_Ring()
+		{}
+
+		Pln_Ring
+		(
+			const std::shared_ptr<Pln_Vertex>& theVtx
+		)
+			: Pln_Edge(theVtx, theVtx)
+		{}
+
 		Pln_Ring
 		(
 			const Standard_Integer theIndex,

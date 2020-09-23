@@ -3,7 +3,7 @@
 #include <Entity2d_Polygon.hxx>
 #include <Geo2d_ApprxCurve.hxx>
 #include <Pln_Curve.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>

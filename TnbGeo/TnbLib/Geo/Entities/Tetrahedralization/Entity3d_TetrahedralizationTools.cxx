@@ -1,6 +1,6 @@
 #include <Entity3d_TetrahedralizationTools.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Entity3d_TetrahedralizationTools::edgeConnectivity 

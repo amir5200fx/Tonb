@@ -2,7 +2,7 @@
 
 #include <gp.hxx>
 #include <Entity2d_Polygon.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

@@ -14,50 +14,17 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Pnt2d theCentre_;
 
 	protected:
 
-		Marine_AreaSailModel(const Pnt2d& theCentre)
-			: theCentre_(theCentre)
+		template<class... _Types>
+		Marine_AreaSailModel(_Types&&... _Args)
+			: Marine_SailModel(_Args...)
 		{}
-
-		Marine_AreaSailModel(Pnt2d&& theCentre)
-			: theCentre_(std::move(theCentre))
-		{}
-
-		Marine_AreaSailModel
-		(
-			const Standard_Integer theIndex, 
-			const Pnt2d& theCentre
-		);
-
-		Marine_AreaSailModel
-		(
-			const Standard_Integer theIndex,
-			Pnt2d&& theCentre
-		);
-
-		Marine_AreaSailModel
-		(
-			const Standard_Integer theIndex, 
-			const word& theName, 
-			const Pnt2d& theCentre
-		);
-
-		Marine_AreaSailModel
-		(
-			const Standard_Integer theIndex, 
-			const word& theName,
-			Pnt2d&& theCentre
-		);
 
 	public:
 
-		const auto& Centre() const
-		{
-			return theCentre_;
-		}
+		
 	};
 }
 

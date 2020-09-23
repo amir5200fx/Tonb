@@ -1,7 +1,7 @@
 #pragma once
 #include <NumAlg_AdaptiveInteg.hxx>
 #include <Geo_CurveIntegrand_Function.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

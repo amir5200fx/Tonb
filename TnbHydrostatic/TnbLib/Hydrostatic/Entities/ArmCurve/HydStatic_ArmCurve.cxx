@@ -2,7 +2,7 @@
 
 #include <Pnt2d.hxx>
 #include <Pln_Tools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <gp_Lin2d.hxx>

@@ -7,7 +7,7 @@
 #include <LegModel_DispNo1_System.hxx>
 #include <LegModel_PointList.hxx>
 #include <LegModel_SectionCtrlPts.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

@@ -1,7 +1,7 @@
 #pragma once
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 namespace tnbLib
 {

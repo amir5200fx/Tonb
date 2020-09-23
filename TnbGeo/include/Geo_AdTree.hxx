@@ -5,7 +5,7 @@
 #include <Geo_SearchTree.hxx>
 #include <Geo_Tools.hxx>
 #include <Entity2d_Box.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <vector>

@@ -18,19 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Entity\ShipSMdr_Entity.cxx" />
-    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Model\ShipSMdr_Model.cxx" />
-    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Volume\ShipSMdr_Volume.cxx" />
-    <ClCompile Include="TnbLib\ShipShellModeler\WorkingPlane\ShipSMdr_WPlane.cxx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Entity\ShipSMdr_Entity.hxx" />
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Model\ShipSMdr_Model.hxx" />
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\VolumeType\ShipSMdr_VolumeType.hxx" />
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Volume\ShipSMdr_Volume.hxx" />
-    <ClInclude Include="TnbLib\ShipShellModeler\WorkingPlane\ShipSMdr_WPlane.hxx" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{5669A6FA-3B32-4EC9-9CB9-52BBA6AF63F9}</ProjectGuid>
@@ -83,10 +70,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -95,7 +82,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ShipShellModeler\Entities\Model;$(ProjectDir)TnbLib\ShipShellModeler\Entities\Surface;$(ProjectDir)TnbLib\ShipShellModeler\Entities\VolumeType;$(ProjectDir)TnbLib\ShipShellModeler\Entities\Volume;$(ProjectDir)TnbLib\ShipShellModeler\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +123,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ShipShellModeler\Entities\Model;$(ProjectDir)TnbLib\ShipShellModeler\Entities\Surface;$(ProjectDir)TnbLib\ShipShellModeler\Entities\VolumeType;$(ProjectDir)TnbLib\ShipShellModeler\Entities\Volume;$(ProjectDir)TnbLib\ShipShellModeler\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WM_DP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -4,7 +4,7 @@
 #include <Pln_Tools.hxx>
 #include <Pln_Wire.hxx>
 #include <Marine_Section.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <TopoDS_Edge.hxx>
@@ -30,6 +30,18 @@
 //	: Marine_CmpSection(theIndex, theName)
 //{
 //}
+
+void tnbLib::Marine_xCmpSection::SetSystem()
+{
+	gp_Ax2 sys(gp::Origin(), gp::DX(), gp::DY());
+	SetCoordinateSystem(sys);
+}
+
+Standard_Real 
+tnbLib::Marine_xCmpSection::X() const
+{
+	return CoordinateSystem().Location().X();
+}
 
 std::shared_ptr<tnbLib::Marine_CmpSection>
 tnbLib::Marine_xCmpSection::Copy() const

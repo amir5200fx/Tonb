@@ -3,6 +3,7 @@
 #define _StbGMaker_Model_Header
 
 #include <StbGMaker_Entity.hxx>
+#include <Marine_ModelsFwd.hxx>
 
 #include <vector>
 
@@ -10,10 +11,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class StbGMaker_Hull;
-	class StbGMaker_Sail;
-	class StbGMaker_Tank;
-	class StbGMaker_Creator;
+	class Marine_SailModel;
 
 	class StbGMaker_Model
 		: public StbGMaker_Entity
@@ -22,10 +20,10 @@ namespace tnbLib
 		friend class StbGMaker_Creator;
 		/*Private Data*/
 
-		std::shared_ptr<StbGMaker_Hull> theHull_;
+		std::shared_ptr<marineLib::Model_Hull> theHull_;
 
-		std::vector<std::shared_ptr<StbGMaker_Tank>> theTanks_;
-		std::vector<std::shared_ptr<StbGMaker_Sail>> theSails_;
+		std::vector<std::shared_ptr<marineLib::Model_Tank>> theTanks_;
+		std::vector<std::shared_ptr<Marine_SailModel>> theSails_;
 
 
 		auto& ChangeHull()
@@ -47,7 +45,7 @@ namespace tnbLib
 
 		template<class... _Types>
 		StbGMaker_Model(_Types&&... _Args)
-			: StbGMaker_Entity(_Args)
+			: StbGMaker_Entity(_Args...)
 		{}
 
 

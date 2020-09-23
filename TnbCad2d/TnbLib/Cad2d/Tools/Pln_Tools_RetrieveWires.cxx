@@ -7,6 +7,9 @@
 #include <Pln_Wire.hxx>
 #include <Adt_AvlTree.hxx>
 
+#include <OFstream.hxx>
+#include <TecPlot.hxx>
+
 tnbLib::Pln_Orientation 
 tnbLib::Pln_Tools::RetrieveOrientation
 (

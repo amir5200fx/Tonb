@@ -3,7 +3,7 @@
 #define _Cad_EntityPrecision_Header
 
 #include <Precision.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

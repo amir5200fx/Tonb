@@ -20,8 +20,12 @@
 #include <Marine_SectTools.hxx>
 #include <Marine_Sections.hxx>
 #include <Marine_Bodies.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
 
 #include <gp_Ax2.hxx>
 #include <gp_Pln.hxx>
@@ -150,6 +154,12 @@ tnbLib::Marine_WaterLib::FWL
 )
 {
 	const auto& sections = theBody.Sections();
+	if (sections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there must be more than 2 section for a valid body" << endl
+			<< abort(FatalError);
+	}
 	for (size_t i = sections.size() - 1; i >= 0; i--)
 	{
 		const auto& x = sections[i];
@@ -171,6 +181,12 @@ tnbLib::Marine_WaterLib::AWL
 )
 {
 	const auto& sections = theBody.Sections();
+	if (sections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there must be more than 2 section for a valid body" << endl
+			<< abort(FatalError);
+	}
 	for (const auto& x : sections)
 	{
 		Debug_Null_Pointer(x);

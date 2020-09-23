@@ -2,7 +2,7 @@
 
 #include <Entity3d_Box.hxx>
 #include <TModel_Surface.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Entity3d_Box 

@@ -1,7 +1,7 @@
 #include <Marine_Region.hxx>
 
 #include <Global_Macros.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Marine_Region::Marine_Region()

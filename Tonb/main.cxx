@@ -14,7 +14,6 @@
 #include <Marine_Section.hxx>
 #include <Marine_CmpSection.hxx>
 //#include <Marine_VesselModel.hxx>
-#include <Marine_SectionDistribution_Uniform.hxx>
 //#include <Marine_ModelMaker_Shape.hxx>
 #include <Marine_FlatWave.hxx>
 #include <LegModel_DispNo1.hxx>
@@ -34,7 +33,7 @@
 #include <Tnb_Examples.hxx>
 
 #include <armadillo.h>
-#include <vld.h>
+//#include <vld.h>
 
 #include <Field.hxx>
 #include <Ostream.hxx>

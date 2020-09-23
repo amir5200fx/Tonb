@@ -8,7 +8,7 @@
 #include <Marine_xCmpSection.hxx>
 #include <Marine_zCmpSection.hxx>
 #include <Marine_Sections.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <gp_Pln.hxx>
@@ -431,6 +431,30 @@ tnbLib::Marine_SectTools::NbInners
 	}
 }
 
+Standard_Boolean 
+tnbLib::Marine_SectTools::HasInnerSection
+(
+	const std::shared_ptr<Marine_Section>& theSection
+)
+{
+	return (Standard_Boolean)NbInners(theSection);
+}
+
+Standard_Boolean 
+tnbLib::Marine_SectTools::HasInnerSection
+(
+	const Marine_CmpSection & theSection
+)
+{
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+		if (HasInnerSection(x))
+			return Standard_True;
+	}
+	return Standard_False;
+}
+
 std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
 tnbLib::Marine_SectTools::RetrieveInners
 (
@@ -439,13 +463,13 @@ tnbLib::Marine_SectTools::RetrieveInners
 {
 	if (theSection->IsWaterSection())
 	{
-		FatalErrorIn
+		/*FatalErrorIn
 		(
 			"std::vector<std::shared_ptr<Marine_Section>> "
 			"RetriveInners(const std::shared_ptr<Marine_Section>& theSection)"
 		)
 			<< "the section is a water type!" << endl
-			<< abort(FatalError);
+			<< abort(FatalError);*/
 		return std::vector<std::shared_ptr<Marine_Section>>();
 	}
 	else
@@ -1130,6 +1154,19 @@ tnbLib::Marine_SectTools::SectionCreator
 	}
 }
 
+std::shared_ptr<tnbLib::Marine_Section> 
+tnbLib::Marine_SectTools::SectionCreator
+(
+	const std::shared_ptr<Pln_Wire>& theOuter, 
+	const Marine_SectionType & t
+)
+{
+	auto sect = SectionCreator(theOuter, gp::XOY(), t);
+	Debug_Null_Pointer(sect);
+
+	return std::move(sect);
+}
+
 std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::Marine_SectTools::SectionCreator
 (
@@ -1334,7 +1371,7 @@ tnbLib::Marine_SectTools::CmpSectionCreator
 	{
 		Debug_Null_Pointer(x);
 		CheckTypeConsistency(x);
-		CheckInnerSection(x);
+		//CheckInnerSection(x);
 	}
 
 	auto iter = theSections.cbegin();
@@ -1449,6 +1486,61 @@ namespace tnbLib
 		Debug_Null_Pointer(sect);
 
 		return std::move(sect);
+	}
+}
+
+void tnbLib::Marine_SectTools::SetLocation
+(
+	const std::shared_ptr<Marine_CmpSection>& theSection,
+	const Standard_Real x
+)
+{
+	Debug_Null_Pointer(theSection);
+	if (theSection->IsXsection())
+	{
+		auto loc = theSection->CoordinateSystem().Location();
+		loc.ChangeCoord().SetX(x);
+
+		theSection->CoordinateSystem().SetLocation(loc);
+
+	}
+	else if (theSection->IsZsection())
+	{
+		auto loc = theSection->CoordinateSystem().Location();
+		loc.ChangeCoord().SetZ(x);
+
+		theSection->CoordinateSystem().SetLocation(loc);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unspecified section direction" << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::Marine_SectTools::CheckTypeConsistency
+(
+	const std::shared_ptr<Marine_Section>& theSect
+)
+{
+	if (HasInnerSection(theSect))
+	{
+		auto inners = RetrieveInners(theSect);
+
+		const auto t = theSect->Type();
+
+		for (const auto& x : inners)
+		{
+			Debug_Null_Pointer(x);
+			if (t NOT_EQUAL x->Type())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data!" << endl
+					<< " type of the inners are not the same with the outer" << endl
+					<< abort(FatalError);
+			}
+		}
 	}
 }
 

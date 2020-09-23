@@ -1,7 +1,7 @@
 #include <Aft2d_PlnCurveAnIso_Base.hxx>
 
 #include <Mesh2d_CurveAnIso.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>

@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 
 #include <map>
+#include <vector>
 #include <memory>
 
 namespace tnbLib
@@ -64,11 +65,19 @@ namespace tnbLib
 					const Standard_Integer theIndex
 				);
 
-			const std::shared_ptr<Cad2d_Plane> &
+			std::shared_ptr<Cad2d_Plane>
 				SelectPlane
 				(
 					const Standard_Integer theIndex
 				) const;
+
+			std::vector<std::shared_ptr<Cad2d_Plane>> 
+				RetrievePlanes() const;
+
+			void RetrievePlanesTo
+			(
+				std::vector<std::shared_ptr<Cad2d_Plane>>& thePlanes
+			) const;
 
 		};
 	}

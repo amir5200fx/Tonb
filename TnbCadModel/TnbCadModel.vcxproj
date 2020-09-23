@@ -70,10 +70,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -81,8 +81,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -129,8 +129,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>WM_DP;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>

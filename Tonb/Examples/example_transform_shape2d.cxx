@@ -5,7 +5,7 @@
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_CmptLib.hxx>
 #include <UnitSystem.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 using namespace tnbLib;

@@ -25,7 +25,7 @@
 #include <HydStatic_WDiffCurve.hxx>
 #include <HydStatic_rArmCurve_Eff.hxx>
 #include <HydStatic_Tools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Bnd_Box2d.hxx>

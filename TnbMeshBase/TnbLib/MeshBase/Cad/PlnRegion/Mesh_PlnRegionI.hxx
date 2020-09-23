@@ -1,5 +1,5 @@
 #pragma once
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 namespace tnbLib
 {

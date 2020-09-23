@@ -7,7 +7,7 @@
 #include <Pln_Edge.hxx>
 #include <Pln_CmpEdge.hxx>
 #include <Pln_Tools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Entity2d_Box

@@ -4,6 +4,7 @@
 
 #include <Geo_ItemCounter.hxx>
 #include <Marine_ShapesFwd.hxx>
+#include <Pnt3d.hxx>
 
 #include <memory>
 #include <map>
@@ -15,6 +16,8 @@ namespace tnbLib
 	class StbGMaker_HullCreator;
 	class StbGMaker_SailCreator;
 	class StbGMaker_TankCreator;
+	class Cad2d_Plane;
+	class StbGMaker_Model;
 
 	class StbGMaker_Creator
 	{
@@ -80,12 +83,33 @@ namespace tnbLib
 			);
 
 		Standard_Integer 
-			CreateSailMaker();
+			CreateShapeGeomSailMaker();
 
 		Standard_Integer 
-			CreateSailMaker
+			CreateShapeGeomSailMaker
 			(
 				const std::shared_ptr<marineLib::Shape_Sail>& theSail
+			);
+
+		Standard_Integer 
+			CreateConstAreaSailMaker
+			(
+				const Standard_Real theArea,
+				const Standard_Real theZbar
+			);
+
+		Standard_Integer 
+			CreatePlaneGeomSailMaker
+			(
+				const std::shared_ptr<Cad2d_Plane>& thePlane,
+				const Standard_Real theZbar
+			);
+
+		Standard_Integer 
+			CreatePlaneGeomSailMaker
+			(
+				std::shared_ptr<Cad2d_Plane>&& thePlane,
+				const Standard_Real theZbar
 			);
 
 		std::shared_ptr<StbGMaker_TankCreator> 
@@ -112,10 +136,25 @@ namespace tnbLib
 				const Standard_Integer theIndex
 			);
 
+		std::shared_ptr<StbGMaker_HullCreator>
+			RemoveHullMaker();
+
 		const auto& HullMaker() const
 		{
 			return theHullCreator_;
 		}
+
+		const auto& TankMakers() const
+		{
+			return theTankCreators_;
+		}
+
+		const auto& SailMakers() const
+		{
+			return theSailCreators_;
+		}
+
+		std::shared_ptr<StbGMaker_Model> ExportModel() const;
 
 		void CreateHullMaker();
 
@@ -123,6 +162,9 @@ namespace tnbLib
 		(
 			const std::shared_ptr<marineLib::Shape_Hull>& theHull
 		);
+
+		void ExportAs(std::shared_ptr<StbGMaker_Model>& theModel) const;
+
 	};
 }
 

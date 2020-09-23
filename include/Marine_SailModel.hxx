@@ -29,6 +29,11 @@ namespace tnbLib
 		{
 			return Standard_False;
 		}
+
+		Marine_ModelType Type() const override
+		{
+			return Marine_ModelType::sail;
+		}
 	};
 }
 

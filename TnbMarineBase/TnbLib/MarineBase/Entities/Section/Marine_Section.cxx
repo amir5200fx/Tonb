@@ -2,7 +2,7 @@
 
 #include <Entity2d_Box.hxx>
 #include <Pln_Wire.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::Marine_Section::CheckWire(const Pln_Wire& theWire, const char * theName)

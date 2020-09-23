@@ -5,7 +5,7 @@
 #include <Mesh_RegisterEntityM.hxx>
 #include <Mesh_NamedEntity.hxx>
 #include <Mesh_QualityMap.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <memory>

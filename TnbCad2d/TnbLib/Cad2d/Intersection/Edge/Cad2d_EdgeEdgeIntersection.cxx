@@ -7,7 +7,7 @@
 #include <Cad2d_IntsctEntity_OrthSegment.hxx>
 #include <Cad2d_IntsctEntity_TangSegment.hxx>
 #include <Cad2d_IntsctEntity_Pair.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2dAPI_InterCurveCurve.hxx>

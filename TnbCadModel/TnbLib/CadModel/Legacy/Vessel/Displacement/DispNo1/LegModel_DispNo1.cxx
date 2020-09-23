@@ -1,5 +1,9 @@
 #include <LegModel_DispNo1.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
+
 #include <gp_Pln.hxx>
 #include <Geom_BSplineSurface.hxx>
 #include <GeomFill_BSplineCurves.hxx>

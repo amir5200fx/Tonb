@@ -4,7 +4,7 @@
 
 #include <GeoMesh_Background_Info.hxx>
 #include <Entity_Box.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <IFstream.hxx>
 

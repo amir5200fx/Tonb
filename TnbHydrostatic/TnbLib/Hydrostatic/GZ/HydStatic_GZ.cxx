@@ -6,7 +6,7 @@
 #include <HydStatic_ArmCurveCreator_StbHeel.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_CmptLib.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::HydStatic_GZ::HydStatic_GZ()

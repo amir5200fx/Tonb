@@ -6,7 +6,7 @@
 #include <Pln_Ring.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_Curve.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Adt_AvlTree.hxx>

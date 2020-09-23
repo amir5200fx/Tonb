@@ -6,7 +6,7 @@
 #include <Entity3d_Box.hxx>
 #include <Geo_Traits.hxx>
 #include <Geo_SearchTree.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <list>

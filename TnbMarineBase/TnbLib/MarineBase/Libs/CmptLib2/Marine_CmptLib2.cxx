@@ -5,7 +5,7 @@
 #include <Marine_BooleanOps.hxx>
 #include <Marine_WaterDomain.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::marineLib::xSectionParam 

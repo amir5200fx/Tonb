@@ -1,6 +1,6 @@
 #include <Cad2d_Modeler_SelectList.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 Standard_Boolean 

@@ -9,7 +9,7 @@
 #include <NumAlg_IntegFunc.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>

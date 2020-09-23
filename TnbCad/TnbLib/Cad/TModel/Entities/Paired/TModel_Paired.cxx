@@ -1,7 +1,7 @@
 #include <TModel_Paired.hxx>
 
 #include <Global_Macros.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::TModel_Paired::TModel_Paired

@@ -1,7 +1,7 @@
 #include <Marine_Section_Water.hxx>
 
 #include <Pln_Wire.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 std::shared_ptr<tnbLib::Marine_Section>

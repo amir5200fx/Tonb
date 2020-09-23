@@ -2,7 +2,7 @@
 
 #include <Geo_Tools.hxx>
 #include <Entity3d_TetrahedralizationTools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

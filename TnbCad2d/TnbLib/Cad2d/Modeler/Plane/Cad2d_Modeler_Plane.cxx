@@ -1,7 +1,7 @@
 #include <Cad2d_Modeler_Plane.hxx>
 
 #include <Cad2d_Plane.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::cad2dLib::Modeler_Plane::Modeler_Plane()
@@ -51,7 +51,7 @@ tnbLib::cad2dLib::Modeler_Plane::RemoveFromPlanes
 	return std::move(item);
 }
 
-const std::shared_ptr<tnbLib::Cad2d_Plane> &
+std::shared_ptr<tnbLib::Cad2d_Plane>
 tnbLib::cad2dLib::Modeler_Plane::SelectPlane
 (
 	const Standard_Integer theIndex
@@ -79,5 +79,26 @@ void tnbLib::cad2dLib::Modeler_Plane::InsertToPlanes
 		FatalErrorIn("void InsertToPlanes(const Standard_Integer theIndex, const std::shared_ptr<Cad2d_Plane>& thePlane)")
 			<< "duplicate data: " << theIndex << endl
 			<< abort(FatalError);
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>> 
+tnbLib::cad2dLib::Modeler_Plane::RetrievePlanes() const
+{
+	std::vector<std::shared_ptr<Cad2d_Plane>> planes;
+	RetrievePlanesTo(planes);
+	return std::move(planes);
+}
+
+void tnbLib::cad2dLib::Modeler_Plane::RetrievePlanesTo
+(
+	std::vector<std::shared_ptr<Cad2d_Plane>>& thePlanes
+) const
+{
+	thePlanes.reserve(thePlanes_.size());
+	for (const auto& x : thePlanes_)
+	{
+		Debug_Null_Pointer(x.second);
+		thePlanes.push_back(x.second);
 	}
 }

@@ -1,7 +1,7 @@
 #include <GModel_Curve.hxx>
 
 #include <Entity3d_Box.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom_Curve.hxx>

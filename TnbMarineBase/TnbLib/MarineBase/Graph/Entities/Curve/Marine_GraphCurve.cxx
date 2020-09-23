@@ -1,7 +1,7 @@
 #include <Marine_GraphCurve.hxx>
 
 #include <Pln_Tools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::Marine_GraphCurve::CheckCurve

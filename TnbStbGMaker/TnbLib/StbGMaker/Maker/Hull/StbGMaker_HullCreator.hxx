@@ -3,6 +3,7 @@
 #define _StbGMaker_HullCreator_Header
 
 #include <StbGMaker_Alg.hxx>
+#include <StbGMaker_EntityCreator.hxx>
 #include <Marine_ShapesFwd.hxx>
 
 namespace tnbLib
@@ -13,54 +14,22 @@ namespace tnbLib
 
 	class StbGMaker_HullCreator
 		: public StbGMaker_Alg
+		, public StbGMaker_EntityCreator
 	{
 
 		/*Private Data*/
 
-		std::shared_ptr<marineLib::Shape_Hull>
-			theHull_;
+	protected:
+
+		template<class... _Types>
+		StbGMaker_HullCreator(_Types&&... _Args)
+			: StbGMaker_EntityCreator(_Args...)
+		{}
 
 	public:
 
-		StbGMaker_HullCreator()
-		{}
+		virtual Standard_Boolean HasShape() const = 0;
 
-		StbGMaker_HullCreator
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
-
-		StbGMaker_HullCreator
-		(
-			const std::shared_ptr<marineLib::Shape_Hull>& theHull
-		)
-			: theHull_(theHull)
-		{}
-
-		StbGMaker_HullCreator
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<marineLib::Shape_Hull>& theHull
-		);
-
-		StbGMaker_HullCreator
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const std::shared_ptr<marineLib::Shape_Hull>& theHull
-		);
-
-		const auto& Shape() const
-		{
-			return theHull_;
-		}
-
-		Standard_Integer
-			CreateWorkingPlane
-			(
-				const Standard_Real x
-			) override;
 	};
 }
 

@@ -36,6 +36,7 @@
 #include <TopoDS.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Shape.hxx>
+#include <Precision.hxx>
 
 Standard_Boolean 
 tnbLib::Pln_Tools::IsBounded
@@ -810,12 +811,40 @@ tnbLib::Pln_Tools::RetrieveEdges
 )
 {
 	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
-	vertices.reserve(2 * theCurves.size());
+	std::vector<std::shared_ptr<Pln_Vertex>> ringVertices;
 
+	std::vector<Handle(Geom2d_Curve)> closed;
+	std::vector<Handle(Geom2d_Curve)> curves;
 	Standard_Integer k = 0;
 	for (const auto& x : theCurves)
 	{
 		Debug_Null_Pointer(x);
+
+		if (x->IsClosed())
+		{
+			auto v0 = std::make_shared<Pln_Vertex>(++k, x->Value(x->FirstParameter()));
+			Debug_Null_Pointer(v0);
+
+			ringVertices.push_back(std::move(v0));
+			closed.push_back(x);
+
+			continue;
+		}
+
+		if (
+			x->Value(x->FirstParameter()).Distance(x->Value(x->LastParameter())) 
+			<= Precision::Confusion()
+			)
+
+		{
+			auto v0 = std::make_shared<Pln_Vertex>(++k, x->Value(x->FirstParameter()));
+			Debug_Null_Pointer(v0);
+
+			ringVertices.push_back(std::move(v0));
+			closed.push_back(x);
+
+			continue;
+		}
 
 		auto v0 = std::make_shared<Pln_Vertex>(++k, x->Value(x->FirstParameter()));
 		Debug_Null_Pointer(v0);
@@ -826,25 +855,46 @@ tnbLib::Pln_Tools::RetrieveEdges
 		Debug_Null_Pointer(v1);
 
 		vertices.push_back(std::move(v1));
+		curves.push_back(x);
 	}
 
 	std::vector<std::shared_ptr<Pln_Edge>> edges;
 	edges.reserve(theCurves.size());
 
 	k = 0;
-	for (const auto& x : theCurves)
+	size_t i = 0;
+	for (const auto& x : closed)
 	{
 		Debug_Null_Pointer(x);
 		Debug_If_Condition_Message(NOT Pln_Tools::IsBounded(x), "the curve is not bounded!");
-		auto curve = std::make_shared<Pln_Curve>(k, theCurves[k]);
+
+		auto curve = std::make_shared<Pln_Curve>(k + 1, std::move(x));
 		Debug_Null_Pointer(curve);
 
-		auto edge = std::make_shared<Pln_Edge>(std::move(vertices[2 * k]), std::move(vertices[2 * k + 1]), std::move(curve));
+		auto edge = std::make_shared<Pln_Ring>(std::move(ringVertices[i++]), std::move(curve));
 		Debug_Null_Pointer(edge);
 
 		edge->SetIndex(++k);
 		edges.push_back(std::move(edge));
 	}
+
+	i = 0;
+	for (const auto& x : curves)
+	{
+		Debug_Null_Pointer(x);
+		Debug_If_Condition_Message(NOT Pln_Tools::IsBounded(x), "the curve is not bounded!");
+		auto curve = std::make_shared<Pln_Curve>(k + 1, std::move(x));
+		Debug_Null_Pointer(curve);
+
+		auto edge = std::make_shared<Pln_Edge>(std::move(vertices[2 * i]), std::move(vertices[2 * i + 1]), std::move(curve));
+		Debug_Null_Pointer(edge);
+
+		edge->SetIndex(++k);
+		edges.push_back(std::move(edge));
+
+		++i;
+	}
+
 	return std::move(edges);
 }
 

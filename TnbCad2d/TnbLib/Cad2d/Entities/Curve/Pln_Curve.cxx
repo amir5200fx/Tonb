@@ -4,7 +4,7 @@
 #include <Pln_Tools.hxx>
 #include <Pln_TangCurve.hxx>
 #include <Cad2d_IntsctEntity_TangSegment.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>

@@ -1,7 +1,7 @@
 #include <Cad2d_Modeler_Wire.hxx>
 
 #include <Pln_Wire.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::cad2dLib::Modeler_Wire::Modeler_Wire()

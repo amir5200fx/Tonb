@@ -2,14 +2,14 @@
 #ifndef _Marine_Model_Header
 #define _Marine_Model_Header
 
-#include <Marine_Entity.hxx>
+#include <Marine_CoordinatedEntity.hxx>
 #include <Marine_ModelType.hxx>
 
 namespace tnbLib
 {
 
 	class Marine_Model
-		: public Marine_Entity
+		: public Marine_CoordinatedEntity
 	{
 
 		/*Private Data*/
@@ -18,7 +18,7 @@ namespace tnbLib
 
 		template<class... _Types>
 		Marine_Model(_Types&&... _Args)
-			: Marine_Entity(_Args...)
+			: Marine_CoordinatedEntity(_Args...)
 		{}
 
 	public:
