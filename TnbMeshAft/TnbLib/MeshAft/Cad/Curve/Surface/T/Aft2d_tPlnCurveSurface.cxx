@@ -1,7 +1,7 @@
 #include <Aft2d_tPlnCurveSurface.hxx>
 
 #include <Aft2d_tSegmentEdge.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 template<>

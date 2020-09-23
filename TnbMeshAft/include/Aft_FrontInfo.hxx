@@ -4,7 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Entity_Box.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

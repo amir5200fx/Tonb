@@ -6,7 +6,7 @@
 #include <Aft_FrontInfo.hxx>
 #include <Mesh_Counters.hxx>
 #include <Aft_TypeTraits.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 //#include "Aft_FrontTraits.hxx"

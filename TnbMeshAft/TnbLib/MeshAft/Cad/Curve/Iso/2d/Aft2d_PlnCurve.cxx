@@ -2,7 +2,7 @@
 
 #include <Mesh2d_Curve.hxx>
 #include <Aft2d_SegmentEdge.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
