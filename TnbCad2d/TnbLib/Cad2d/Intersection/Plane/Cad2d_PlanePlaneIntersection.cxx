@@ -8,7 +8,7 @@
 #include <Cad2d_EdgeEdgeIntersection.hxx>
 #include <Cad2d_VertexEdgeIntersection.hxx>
 #include <Cad_EntityManager.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

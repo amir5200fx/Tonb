@@ -7,7 +7,7 @@
 #include <PlnOpert_IntsctPair.hxx>
 #include <Pln_Tools.hxx>
 #include <PlnOpert_IntsctCurveCurve_Info.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Standard_Handle.hxx>

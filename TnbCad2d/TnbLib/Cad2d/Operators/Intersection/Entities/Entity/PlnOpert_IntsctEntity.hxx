@@ -4,7 +4,7 @@
 
 #include <Global_Indexed.hxx>
 #include <PlnOpert_IntsctEntityAdaptor.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <memory>

@@ -1,6 +1,6 @@
 #include <GeoSketch2d_EllipcArc.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <GCE2d_MakeArcOfEllipse.hxx>

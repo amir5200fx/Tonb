@@ -14,7 +14,7 @@
 #include <PlnOpert_IntsctEdge.hxx>
 #include <PlnOpert_IntsctPoint2.hxx>
 #include <PlnOpert_CutterEntity.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

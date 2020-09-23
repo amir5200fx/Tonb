@@ -1,6 +1,6 @@
 #include <Pln_VertexAdaptor.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::Pln_VertexAdaptor::InsertToEdges

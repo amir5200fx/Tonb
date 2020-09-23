@@ -5,6 +5,7 @@
 #include <Cad2d_Modeler_Corner.hxx>
 #include <Cad2d_Modeler_Counter.hxx>
 #include <Cad2d_Modeler_SrchEng.hxx>
+#include <Cad2d_Modeler_Segments.hxx>
 #include <Cad2d_Modeler_Plane.hxx>
 #include <Cad2d_Modeler_Wire.hxx>
 #include <Cad2d_Modeler_Registry.hxx>
@@ -20,6 +21,7 @@ namespace tnbLib
 	// Forward Declarations
 	class Pln_Edge;
 	class Pln_Vertex;
+	class Pln_Ring;
 
 	class Cad2d_Modeler
 		: public cad2dLib::Modeler_SrchEng
@@ -27,6 +29,7 @@ namespace tnbLib
 		/*, public cad2dLib::Modeler_Wire*/
 		, public cad2dLib::Modeler_Plane
 		, public cad2dLib::Modeler_Registry
+		, public cad2dLib::Modeler_Segments
 	{
 
 		typedef cad2dLib::Modeler_Corner corner;
@@ -55,21 +58,43 @@ namespace tnbLib
 			const std::shared_ptr<corner>& theCorner
 		);
 
-		void AddVertex
+		void RemoveSegment
 		(
-			const std::shared_ptr<Pln_Vertex>& theVtx,
-			const Standard_Integer theEdgeIndex
+			const std::shared_ptr<cad2dLib::Modeler_Segment>& theSegmnt
 		);
 
-		Standard_Integer AddEdge
-		(
-			const std::shared_ptr<Pln_Edge>& theEdge
-		);
+		void RemoveRing(const std::shared_ptr<Pln_Ring>& theRing);
 
-		Standard_Integer AddPlane
-		(
-			const std::shared_ptr<Cad2d_Plane>& thePlane
-		);
+		std::shared_ptr<cad2dLib::Modeler_Corner>
+			AddVertex
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx,
+				const Standard_Integer theEdgeIndex
+			);
+
+		Standard_Integer
+			AddEdge
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge
+			);
+
+		Standard_Integer 
+			AddRing
+			(
+				const std::shared_ptr<Pln_Ring>& theRing
+			);
+
+		Standard_Integer
+			AddPlane
+			(
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
+
+		Standard_Integer 
+			AddSegment
+			(
+				const std::shared_ptr<cad2dLib::Modeler_Segment>& theSegmnt
+			);
 
 		std::vector<std::shared_ptr<Pln_Edge>> MakeChain(selctList& theList);
 
@@ -93,6 +118,8 @@ namespace tnbLib
 			selctList& theList
 		) const;
 
+		void SelectAll(selctList& theList) const;
+
 		//- throw an exception if the edge is not in the tree
 		//- Check consistency with the "HasDuplication" method
 		void deSelect
@@ -100,6 +127,8 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge, 
 			selctList& theList
 		) const;
+
+		void deSelectAll(selctList& theList) const;
 
 		void RemoveEdge
 		(
@@ -121,6 +150,8 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge0, 
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
+
+		void MakePlanes();
 
 		//- the list will get empty after successfully creating plane
 		Standard_Integer MakePlane(selctList& theList);

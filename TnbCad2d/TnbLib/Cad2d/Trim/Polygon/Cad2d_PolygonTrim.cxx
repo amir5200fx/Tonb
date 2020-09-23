@@ -1,7 +1,7 @@
 #include <Cad2d_PolygonTrim.hxx>
 
 //#include <Geo_MxCifQuadtree.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Cad2d_PolygonTrim::Cad2d_PolygonTrim()

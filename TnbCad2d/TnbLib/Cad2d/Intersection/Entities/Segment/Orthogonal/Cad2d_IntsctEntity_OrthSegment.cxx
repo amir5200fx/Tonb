@@ -1,7 +1,7 @@
 #include <Cad2d_IntsctEntity_OrthSegment.hxx>
 
 #include <Pln_Curve.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Cad2d_IntsctEntity_OrthSegment::Cad2d_IntsctEntity_OrthSegment()

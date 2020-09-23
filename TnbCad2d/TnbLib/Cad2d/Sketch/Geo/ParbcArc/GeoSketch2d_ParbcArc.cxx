@@ -1,7 +1,7 @@
 #include <GeoSketch2d_ParbcArc.hxx>
 
 #include <Pnt2d.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <GCE2d_MakeArcOfParabola.hxx>

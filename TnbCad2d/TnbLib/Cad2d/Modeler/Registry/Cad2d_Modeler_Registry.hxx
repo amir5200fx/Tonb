@@ -68,7 +68,7 @@ namespace tnbLib
 				return theEdges_;
 			}
 
-			const std::shared_ptr<Pln_Edge>&
+			std::shared_ptr<Pln_Edge>
 				SelectEdge
 				(
 					const Standard_Integer theIndex

@@ -1,7 +1,7 @@
 #include <GeoSketch2d_CircArc.hxx>
 
 #include <Pnt2d.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <gp_Circ2d.hxx>

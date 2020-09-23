@@ -2,7 +2,7 @@
 
 #include <Entity2d_Box.hxx>
 #include <Pln_Vertex.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 Standard_Boolean 
@@ -82,7 +82,8 @@ tnbLib::cad2dLib::Modeler_SrchEng::SelectCorner
 	}
 
 	if (items.size() IS_EQUAL 1) return items[0];
-	return Modeler_SrchEng::MinDist(items, theCoord);
+	const auto minDist = Modeler_SrchEng::MinDist(items, theCoord);
+	return std::move(minDist);
 }
 
 std::shared_ptr<tnbLib::cad2dLib::Modeler_Corner>

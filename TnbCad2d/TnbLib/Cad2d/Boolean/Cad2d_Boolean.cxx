@@ -8,7 +8,7 @@
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Precision.hxx>

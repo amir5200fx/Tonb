@@ -3,7 +3,7 @@
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
 #include <Vec2d.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Precision.hxx>

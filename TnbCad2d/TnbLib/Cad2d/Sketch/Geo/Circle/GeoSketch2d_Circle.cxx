@@ -1,6 +1,6 @@
 #include <GeoSketch2d_Circle.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Precision.hxx>

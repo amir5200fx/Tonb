@@ -1,6 +1,7 @@
 #include <Cad2d_Modeler_Corner.hxx>
 
-#include <error.hxx>
+#include <Pln_Vertex.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
@@ -33,6 +34,24 @@ tnbLib::cad2dLib::Modeler_Corner::Modeler_Corner
 	, theTol_(0)
 	, theRadius_(DEFAULT_RADIUS)
 {
+}
+
+Standard_Boolean 
+tnbLib::cad2dLib::Modeler_Corner::IsContains
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx
+) const
+{
+	auto iter = theVertices_.find(theVtx->Index());
+	if (iter IS_EQUAL theVertices_.end())
+	{
+		return Standard_False;
+	}
+	if (iter->second NOT_EQUAL theVtx)
+	{
+		return Standard_False;
+	}
+	return Standard_True;
 }
 
 void tnbLib::cad2dLib::Modeler_Corner::InsertToCorners
