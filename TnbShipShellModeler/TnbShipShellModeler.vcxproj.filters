@@ -38,35 +38,4 @@
       <UniqueIdentifier>{1ed1e81a-0131-42d4-a26a-734212caffb6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Entity\ShipSMdr_Entity.cxx">
-      <Filter>TnbLib\ShipShellModeler\Entities\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\ShipShellModeler\WorkingPlane\ShipSMdr_WPlane.cxx">
-      <Filter>TnbLib\ShipShellModeler\WorkingPlane</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Volume\ShipSMdr_Volume.cxx">
-      <Filter>TnbLib\ShipShellModeler\Entities\Volume</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\ShipShellModeler\Entities\Model\ShipSMdr_Model.cxx">
-      <Filter>TnbLib\ShipShellModeler\Entities\Model</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Entity\ShipSMdr_Entity.hxx">
-      <Filter>TnbLib\ShipShellModeler\Entities\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\ShipShellModeler\WorkingPlane\ShipSMdr_WPlane.hxx">
-      <Filter>TnbLib\ShipShellModeler\WorkingPlane</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Volume\ShipSMdr_Volume.hxx">
-      <Filter>TnbLib\ShipShellModeler\Entities\Volume</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\VolumeType\ShipSMdr_VolumeType.hxx">
-      <Filter>TnbLib\ShipShellModeler\Entities\VolumeType</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\ShipShellModeler\Entities\Model\ShipSMdr_Model.hxx">
-      <Filter>TnbLib\ShipShellModeler\Entities\Model</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>
