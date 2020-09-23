@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{B919C408-474A-458B-9B08-459DF6598B56}</ProjectGuid>
+    <RootNamespace>TnbGlobal</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1d.hxx" />
+    <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1dI.hxx" />
+    <ClInclude Include="TnbLib\Global\containers\ADT\Ary2d\Adt_Ary2d.hxx" />
+    <ClInclude Include="TnbLib\Global\containers\ADT\Avl\Adt_AvlTree.hxx" />
+    <ClInclude Include="TnbLib\Global\containers\ADT\List\Adt_List.hxx" />
+    <ClInclude Include="TnbLib\Global\containers\ADT\List\Adt_SlList.hxx" />
+    <ClInclude Include="TnbLib\Global\error\TnbError.hxx" />
+    <ClInclude Include="TnbLib\Global\error\TnbErrorM.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_AccessMethod.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Bound.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Done.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Indexed.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Macros.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Message.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Named.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Timer.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_Verbose.hxx" />
+    <ClInclude Include="TnbLib\Global\global\UnitSystem.hxx" />
+    <ClInclude Include="TnbLib\Global\Traits\Traits.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Global\error\TnbError.cxx" />
+    <ClCompile Include="TnbLib\Global\global\Global_Message.cxx" />
+    <ClCompile Include="TnbLib\Global\global\Global_Timer.cxx" />
+    <ClCompile Include="TnbLib\Global\global\UnitSystem.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
