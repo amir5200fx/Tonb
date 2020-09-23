@@ -50,9 +50,17 @@ namespace tnbLib
 				const std::shared_ptr<Marine_Section>& theSection
 			);
 
-		static Standard_Boolean HasInnerSection(const std::shared_ptr<Marine_Section>& theSection);
+		static Standard_Boolean 
+			HasInnerSection
+			(
+				const std::shared_ptr<Marine_Section>& theSection
+			);
 
-		static Standard_Boolean HasInnerSection(const Marine_CmpSection& theSection);
+		static Standard_Boolean 
+			HasInnerSection
+			(
+				const Marine_CmpSection& theSection
+			);
 
 		//- throw an exception if the section is inner
 		static std::vector<std::shared_ptr<Marine_Section>> 
@@ -248,7 +256,10 @@ namespace tnbLib
 			);
 
 		static std::shared_ptr<Marine_CmpSection>
-			CmpSectionCreator(const std::vector<std::shared_ptr<Marine_Section>>& theSections);
+			CmpSectionCreator
+			(
+				const std::vector<std::shared_ptr<Marine_Section>>& theSections
+			);
 
 		static std::shared_ptr<Marine_Section> 
 			FitTankToHull
@@ -278,8 +289,6 @@ namespace tnbLib
 				const marineLib::OuterSection<marineLib::Section_Water>& theSection
 				);
 
-		
-
 		template<class SectionType>
 		struct CreateSection
 		{
@@ -296,7 +305,12 @@ namespace tnbLib
 			static std::shared_ptr<Marine_Section> _(const std::shared_ptr<Pln_Wire>& theOuter);
 		};
 
-		static void CheckTypeConsistency(const std::shared_ptr<Marine_Section>& theSect);
+		static void SetLocation(const std::shared_ptr<Marine_CmpSection>& theSection, const Standard_Real x);
+
+		static void CheckTypeConsistency
+		(
+			const std::shared_ptr<Marine_Section>& theSect
+		);
 
 		static void CheckTypeConsistency
 		(

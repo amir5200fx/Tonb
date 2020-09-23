@@ -8,6 +8,7 @@
 #include <Entity3d_ChainFwd.hxx>
 
 #include <map>
+#include <vector>
 
 class TopoDS_Shape;
 
@@ -20,8 +21,7 @@ namespace tnbLib
 	class Geo_xDistb;
 
 	class StbGMaker_Alg
-		: public StbGMaker_Entity
-		, public StbGMaker_AlgAux
+		: public StbGMaker_AlgAux
 	{
 
 		/*Private Data*/
@@ -41,9 +41,7 @@ namespace tnbLib
 
 	protected:
 
-		template<class... _Types>
-		StbGMaker_Alg(_Types&&... _Args)
-			: StbGMaker_Entity(_Args...)
+		StbGMaker_Alg()
 		{}
 
 		std::shared_ptr<StbGMaker_WP> 
@@ -98,6 +96,9 @@ namespace tnbLib
 				const Standard_Integer theIndex
 			) const;
 
+		std::vector<std::shared_ptr<StbGMaker_WP>> 
+			RetrieveWPs() const;
+
 		virtual Standard_Integer
 			CreateWorkingPlane
 			(
@@ -110,6 +111,11 @@ namespace tnbLib
 		(
 			const Geo_xDistb& theX
 		);
+
+		void RetrieveWPsTo
+		(
+			std::vector<std::shared_ptr<StbGMaker_WP>>& theWPs
+		) const;
 
 		//virtual void MakeBody() = 0;
 

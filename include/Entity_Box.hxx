@@ -5,7 +5,7 @@
 #include <Standard_Real.hxx>
 #include <Global_Macros.hxx>
 #include <Geo_Traits.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <IOstream.hxx>
 

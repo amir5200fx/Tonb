@@ -22,6 +22,7 @@ namespace tnbLib
 	class Pln_Vertex;
 	class Pln_Edge;
 	class Pln_Ring;
+	class Pln_Wire;
 	class Cad2d_Plane;
 
 	namespace cad2dLib
@@ -29,14 +30,26 @@ namespace tnbLib
 
 		// Forward Declarations
 		class Modeler_Corner;
+		class Modeler_Segment;
 		class Modeler_SrchEng;
 
 		class Modeler_Tools
 		{
 
-
-
 		public:
+
+			static std::shared_ptr<Modeler_Segment> 
+				HasRing
+				(
+					const std::shared_ptr<Modeler_Corner>& theCrn
+				);
+
+			static std::shared_ptr<Modeler_Segment> 
+				IsSegment
+				(
+					const std::shared_ptr<Modeler_Corner>& theCrn0, 
+					const std::shared_ptr<Modeler_Corner>& theCrn1
+				);
 
 			static std::shared_ptr<Pln_Edge>
 				MakeSegment
@@ -209,6 +222,10 @@ namespace tnbLib
 					const Pnt2d& theCentre,
 					const std::shared_ptr<Modeler_Corner>& theCorner
 				);
+
+			static std::vector<std::shared_ptr<Modeler_Segment>> TrackRing(const std::shared_ptr<Modeler_Corner>& theCrn);
+
+			static std::vector<std::shared_ptr<Pln_Wire>> RetrieveWires(const std::vector<std::shared_ptr<Modeler_Corner>>& theCorners);
 
 			//- WARNING! the edges and the vertices will be removed from the corners
 			static std::vector<std::shared_ptr<Pln_Edge>> 

@@ -6,7 +6,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Geo_GraphNodeAdaptor.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <memory>

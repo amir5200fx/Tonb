@@ -23,17 +23,41 @@ namespace tnbLib
 
 		public:
 
-			Model_Tank(const std::shared_ptr<Body_Tank>& theBody);
+			Model_Tank
+			(
+				const std::shared_ptr<Body_Tank>& theBody
+			);
 
-			Model_Tank(std::shared_ptr<Body_Tank>&& theBody);
+			Model_Tank
+			(
+				std::shared_ptr<Body_Tank>&& theBody
+			);
 
-			Model_Tank(const Standard_Integer theIndex, const std::shared_ptr<Body_Tank>& theBody);
+			Model_Tank
+			(
+				const Standard_Integer theIndex, 
+				const std::shared_ptr<Body_Tank>& theBody
+			);
 
-			Model_Tank(const Standard_Integer theIndex, std::shared_ptr<Body_Tank>&& theBody);
+			Model_Tank
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Body_Tank>&& theBody
+			);
 
-			Model_Tank(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<Body_Tank>& theBody);
+			Model_Tank
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const std::shared_ptr<Body_Tank>& theBody
+			);
 
-			Model_Tank(const Standard_Integer theIndex, const word& theName, std::shared_ptr<Body_Tank>&& theBody);
+			Model_Tank
+			(
+				const Standard_Integer theIndex,
+				const word& theName, 
+				std::shared_ptr<Body_Tank>&& theBody
+			);
 
 
 			const auto& Body() const

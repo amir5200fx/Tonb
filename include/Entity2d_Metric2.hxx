@@ -3,7 +3,7 @@
 #define _Entity2d_Metric2_Header
 
 #include <Dir2d.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

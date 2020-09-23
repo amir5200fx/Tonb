@@ -4,7 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Standard_OStream.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

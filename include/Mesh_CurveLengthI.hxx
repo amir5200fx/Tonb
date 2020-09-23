@@ -1,7 +1,7 @@
 #pragma once
 #include <NumAlg_AdaptiveInteg.hxx>
 #include <Mesh_CurveLength_Function.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 namespace tnbLib
 {
 
