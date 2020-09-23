@@ -11,7 +11,7 @@
 #include <Marine_SectTools.hxx>
 #include <Marine_BodyTools.hxx>
 #include <Marine_WaterTools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <gp_Ax1.hxx>
@@ -23,6 +23,12 @@ tnbLib::Marine_CmptLib::CalcBasicDim
 )
 {
 	const auto& sections = theBody.Sections();
+	if (sections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there must be more than 2 section for a valid body" << endl
+			<< abort(FatalError);
+	}
 	auto b = Marine_SectTools::BoundingBox(sections);
 
 	const auto zmin = b.P0().Z();

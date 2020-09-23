@@ -20,36 +20,37 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			std::shared_ptr<Geo_ProfileFun> theProfile_;
+			std::shared_ptr<Geo_ProfileFun> theArea_;
+			std::shared_ptr<Geo_ProfileFun> theZbar_;
 
 		public:
 
 			Model_ProfileAreaSail
 			(
-				const std::shared_ptr<Geo_ProfileFun>& theFun, 
-				const Pnt2d& theCentre
+				const std::shared_ptr<Geo_ProfileFun>& theArea, 
+				const std::shared_ptr<Geo_ProfileFun>& theZbar
 			);
 
 			Model_ProfileAreaSail
 			(
-				std::shared_ptr<Geo_ProfileFun>&& theFun,
-				Pnt2d&& theCentre
+				std::shared_ptr<Geo_ProfileFun>&& theArea,
+				std::shared_ptr<Geo_ProfileFun>&& theZbar
 			);
 
 			Model_ProfileAreaSail
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
-				const std::shared_ptr<Geo_ProfileFun>& theFun, 
-				const Pnt2d& theCentre
+				const std::shared_ptr<Geo_ProfileFun>& theArea,
+				const std::shared_ptr<Geo_ProfileFun>& theZbar
 			);
 
 			Model_ProfileAreaSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
-				std::shared_ptr<Geo_ProfileFun>&& theFun, 
-				Pnt2d&& theCentre
+				std::shared_ptr<Geo_ProfileFun>&& theArea,
+				std::shared_ptr<Geo_ProfileFun>&& theZbar
 			);
 
 			Marine_SailModelType SailType() const override
@@ -57,9 +58,14 @@ namespace tnbLib
 				return Marine_SailModelType::profile_area;
 			}
 
-			const auto& Profile() const
+			const auto& Area() const
 			{
-				return theProfile_;
+				return theArea_;
+			}
+
+			const auto& zBar() const
+			{
+				return theZbar_;
 			}
 		};
 	}

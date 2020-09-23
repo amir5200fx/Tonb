@@ -2,7 +2,7 @@
 
 #include <Entity3d_Box.hxx>
 #include <Geo_xDistb.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Marine_UniDistrb::Marine_UniDistrb

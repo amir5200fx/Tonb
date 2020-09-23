@@ -1,6 +1,6 @@
 #pragma once
 //#include <Marine_SectionTypes.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 namespace tnbLib
 {

@@ -2,56 +2,26 @@
 
 tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
 (
-	const Standard_Real theArea,
-	const Pnt2d & theCentre
+	const Standard_Real theArea, 
+	const Standard_Real theZbar
 )
-	: Marine_AreaSailModel(theCentre)
-	, theArea_(theArea)
+	: theArea_(theArea)
+	, theZbar_(theZbar)
 {
-}
-
-tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
-(
-	const Standard_Real theArea,
-	Pnt2d && theCentre
-)
-	: Marine_AreaSailModel(std::move(theCentre))
-	, theArea_(theArea)
-{
+	// empty body
 }
 
 tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
 (
 	const Standard_Integer theIndex,
 	const Standard_Real theArea,
-	const Pnt2d & theCentre
+	const Standard_Real theZbar
 )
-	: Marine_AreaSailModel(theIndex, theCentre)
-	, theArea_(theArea)
+	: theArea_(theArea)
+	, theZbar_(theZbar)
+	, Marine_AreaSailModel(theIndex)
 {
-}
-
-tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
-(
-	const Standard_Integer theIndex, 
-	const Standard_Real theArea,
-	Pnt2d && theCentre
-)
-	: Marine_AreaSailModel(theIndex, std::move(theCentre))
-	, theArea_(theArea)
-{
-}
-
-tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
-(
-	const Standard_Integer theIndex, 
-	const word & theName,
-	const Standard_Real theArea, 
-	const Pnt2d & theCentre
-)
-	: Marine_AreaSailModel(theIndex, theName, theCentre)
-	, theArea_(theArea)
-{
+	// empty body
 }
 
 tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
@@ -59,9 +29,11 @@ tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
 	const Standard_Integer theIndex, 
 	const word & theName, 
 	const Standard_Real theArea,
-	Pnt2d && theCentre
+	const Standard_Real theZbar
 )
-	: Marine_AreaSailModel(theIndex, theName, std::move(theCentre))
-	, theArea_(theArea)
+	: theArea_(theArea)
+	, theZbar_(theZbar)
+	, Marine_AreaSailModel(theIndex, theName)
 {
+	// empty body
 }

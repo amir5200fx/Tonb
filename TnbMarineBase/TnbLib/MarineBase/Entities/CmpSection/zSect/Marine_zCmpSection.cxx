@@ -4,11 +4,17 @@
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <Marine_Section.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <TopoDS_Shape.hxx>
 #include <TopoDS_Edge.hxx>
+
+void tnbLib::Marine_zCmpSection::SetSystem()
+{
+	gp_Ax2 sys(gp::Origin(), gp::DZ(), gp::DX());
+	SetCoordinateSystem(sys);
+}
 
 //tnbLib::Marine_zCmpSection::Marine_zCmpSection()
 //{
@@ -30,6 +36,12 @@
 //	: Marine_CmpSection(theIndex, theName)
 //{
 //}
+
+Standard_Real 
+tnbLib::Marine_zCmpSection::X() const
+{
+	return CoordinateSystem().Location().Z();
+}
 
 std::shared_ptr<tnbLib::Marine_CmpSection> 
 tnbLib::Marine_zCmpSection::Copy() const

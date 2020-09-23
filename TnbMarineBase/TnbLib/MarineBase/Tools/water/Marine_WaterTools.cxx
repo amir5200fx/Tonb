@@ -11,6 +11,10 @@
 #include <Marine_CmpSection.hxx>
 #include <Marine_SectTools.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
+
 #include <gp_Ax2.hxx>
 #include <gp_Pln.hxx>
 #include <GeomProjLib.hxx>

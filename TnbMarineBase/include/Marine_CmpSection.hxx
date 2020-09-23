@@ -8,6 +8,7 @@
 #include <OFstream.hxx>
 
 #include <vector>
+#include <list>
 
 #include <Standard_Handle.hxx>
 
@@ -131,7 +132,7 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		virtual Standard_Real X() const;
+		virtual Standard_Real X() const = 0; 
 
 		virtual std::shared_ptr<Marine_CmpSection> Copy() const = 0;
 

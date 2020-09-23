@@ -5,7 +5,7 @@
 #include <Marine_CmpSection.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_Sections.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 std::shared_ptr<tnbLib::Marine_Section>
@@ -438,14 +438,14 @@ tnbLib::Marine_BooleanOps::DrySection
 	if (Marine_SectTools::HasInnerSection(*theSection))
 	{
 		FatalErrorIn(FunctionSIG)
-			<< "the compSection is allow to have no inner section!" << endl
+			<< "the compSection is allowed to have no inner section!" << endl
 			<< abort(FatalError);
 	}
 
 	if (Marine_SectTools::HasInnerSection(theWater))
 	{
 		FatalErrorIn(FunctionSIG)
-			<< "the water section is allow to have no inner section!" << endl
+			<< "the water section is allowed to have no inner section!" << endl
 			<< abort(FatalError);
 	}
 

@@ -7,10 +7,14 @@
 #include <Pln_Tools.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_SectTools.hxx>
-#include <error.hxx>
+#include <Marine_xCmpSection.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <map>
+
+const std::shared_ptr<tnbLib::Marine_CmpSection> tnbLib::Marine_CmpSection::null = 
+std::make_shared<tnbLib::Marine_xCmpSection>(0, "null cmpSection");
 
 void tnbLib::Marine_CmpSection::Insert(const std::shared_ptr<Marine_Section>& theSection)
 {
@@ -99,12 +103,6 @@ tnbLib::Marine_CmpSection::Type() const
 
 	auto iter = sections.cbegin();
 	return (*iter)->Type();
-}
-
-Standard_Real 
-tnbLib::Marine_CmpSection::X() const
-{
-	return CoordinateSystem().Location().X();
 }
 
 void tnbLib::Marine_CmpSection::Transform

@@ -28,6 +28,7 @@
 #include <Marine_VesselParam_FWL.hxx>
 #include <Marine_VesselParam_GM.hxx>
 #include <Marine_VesselParam_HEELANG.hxx>
+#include <Marine_VesselParam_TRIMANG.hxx>
 #include <Marine_VesselParam_iB.hxx>
 #include <Marine_VesselParam_KB.hxx>
 #include <Marine_VesselParam_KG.hxx>

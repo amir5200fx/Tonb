@@ -1,5 +1,10 @@
 #include <MarineBase_Tools.hxx>
 
+#include <Pln_Vertex.hxx>
+#include <Pln_Wire.hxx>
+#include <Pln_Edge.hxx>
+#include <Pln_Curve.hxx>
+
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 #include <Entity2d_Box.hxx>
@@ -22,8 +27,12 @@
 #include <Marine_SectTools.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <UnitSystem.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
 
 #include <gp_Pln.hxx>
 #include <gp_Trsf2d.hxx>
@@ -36,11 +45,6 @@
 #include <Geom2dAPI_Interpolate.hxx>
 #include <TColgp_HArray1OfPnt2d.hxx>
 #include <StdFail_NotDone.hxx>
-
-#include <Pln_Vertex.hxx>
-#include <Pln_Wire.hxx>
-#include <Pln_Edge.hxx>
-#include <Pln_Curve.hxx>
 
 Handle(Geom2d_Curve)
 tnbLib::MarineBase_Tools::Curve

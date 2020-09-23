@@ -604,6 +604,9 @@
     <Filter Include="TnbLib\MarineBase\Tools\water">
       <UniqueIdentifier>{a3c3da94-b801-4866-bbb9-143cb5473c9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\TRIMANG">
+      <UniqueIdentifier>{2791a6ef-8b54-4aef-ae38-a9a72721fb6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1211,6 +1214,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Tools\water\Marine_WaterTools.hxx">
       <Filter>TnbLib\MarineBase\Tools\water</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\TRIMANG\Marine_VesselParam_TRIMANG.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\TRIMANG</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

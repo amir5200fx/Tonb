@@ -2,7 +2,7 @@
 #include <Marine_BodyConstructor.hxx>
 #include <Marine_Body_Wetted.hxx>
 #include <Marine_BodyTools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #define BodyCopy(BodyType)																		\

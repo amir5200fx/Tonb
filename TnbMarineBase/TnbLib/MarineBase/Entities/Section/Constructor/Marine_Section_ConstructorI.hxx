@@ -1,6 +1,6 @@
 #pragma once
 #include <Pln_Wire.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib

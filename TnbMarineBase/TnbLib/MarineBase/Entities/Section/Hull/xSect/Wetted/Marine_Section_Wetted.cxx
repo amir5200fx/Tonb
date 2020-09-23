@@ -2,7 +2,7 @@
 
 #include <Pln_Wire.hxx>
 #include <Marine_PlnCurve.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 std::vector<std::shared_ptr<tnbLib::Pln_Curve>> 

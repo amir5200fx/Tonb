@@ -3,7 +3,8 @@
 #include <Marine_BooleanOps.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_WaterDomain.hxx>
-#include <error.hxx>
+#include <Marine_SectTools.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 Standard_Boolean 
@@ -144,7 +145,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Displacer>>();
 		Debug_Null_Pointer(body);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -158,7 +159,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Dry>>();
 		Debug_Null_Pointer(body);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -172,7 +173,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>>();
 		Debug_Null_Pointer(body);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -186,7 +187,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Sail>>();
 		Debug_Null_Pointer(body);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -200,7 +201,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 		auto body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Tank>>();
 		Debug_Null_Pointer(body);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -236,7 +237,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 
 		body->SetShape(theShape);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -252,7 +253,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 
 		body->SetShape(theShape);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -268,7 +269,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 
 		body->SetShape(theShape);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -284,7 +285,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 
 		body->SetShape(theShape);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -300,7 +301,7 @@ tnbLib::Marine_BodyTools::BodyCreator
 
 		body->SetShape(theShape);
 
-		auto sections = body->ChangeSections();
+		auto& sections = body->ChangeSections();
 		sections.reserve(theSections.size());
 		for (const auto& x : theSections)
 		{
@@ -387,4 +388,24 @@ tnbLib::Marine_BodyTools::DryBody
 		auto dry = BodyCreator(sections, Marine_BodyType::dry);
 		return std::move(dry);
 	}	
+}
+
+void tnbLib::Marine_BodyTools::CheckTypeConsistency
+(
+	const Marine_Body & theBody
+)
+{
+	CheckTypeConsistency(theBody.Sections());
+}
+
+void tnbLib::Marine_BodyTools::CheckTypeConsistency
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		Marine_SectTools::CheckTypeConsistency(*x);
+	}
 }

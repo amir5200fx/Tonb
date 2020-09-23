@@ -14,8 +14,12 @@
 #include <Marine_BooleanOps.hxx>
 #include <Marine_BodyTools.hxx>
 #include <Marine_DisctTools.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
 
 #include <gp_Pln.hxx>
 #include <GeomAPI_IntSS.hxx>
