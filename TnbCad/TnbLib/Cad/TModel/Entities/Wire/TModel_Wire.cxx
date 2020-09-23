@@ -4,7 +4,7 @@
 #include <TModel_CmpEdge.hxx>
 #include <TModel_Edge.hxx>
 #include <TModel_ParaCurve.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::TModel_Wire::TModel_Wire

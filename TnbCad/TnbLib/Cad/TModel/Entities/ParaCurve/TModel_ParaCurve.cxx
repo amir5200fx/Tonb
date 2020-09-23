@@ -2,7 +2,7 @@
 
 #include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>

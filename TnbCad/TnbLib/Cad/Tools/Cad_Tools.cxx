@@ -23,7 +23,7 @@
 #include <Adt_AvlTree.hxx>
 #include <Geo_Tools.hxx>
 #include <Merge3d_Chain.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <gp_Pln.hxx>

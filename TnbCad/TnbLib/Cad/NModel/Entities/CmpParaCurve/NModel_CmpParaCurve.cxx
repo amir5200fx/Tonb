@@ -2,7 +2,7 @@
 
 #include <Entity2d_Box.hxx>
 #include <NModel_ParaCurve.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 tnbLib::Entity2d_Box
