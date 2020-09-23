@@ -28,6 +28,8 @@ namespace tnbLib
 	void example_cad2d_modeler();
 
 	void example_stb_gmaker_creator();
+
+	void example_sect_px_field_function();
 }
 
 #endif // !_Tnb_Examples_Header
