@@ -2,7 +2,7 @@
 
 #include <gp_Pln.hxx>
 #include <Marine_CmpSection.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 void tnbLib::stbGmakerLib::IntplSect_Closer::Perform(const gp_Pln & thePln)

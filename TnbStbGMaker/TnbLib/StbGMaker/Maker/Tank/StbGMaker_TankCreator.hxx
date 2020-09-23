@@ -3,6 +3,7 @@
 #define _StbGMaker_TankCreator_Header
 
 #include <StbGMaker_Alg.hxx>
+#include <StbGMaker_EntityCreator.hxx>
 #include <Marine_ShapesFwd.hxx>
 
 namespace tnbLib
@@ -13,54 +14,23 @@ namespace tnbLib
 
 	class StbGMaker_TankCreator
 		: public StbGMaker_Alg
+		, public StbGMaker_EntityCreator
 	{
 
 		/*Private Data*/
 
-		std::shared_ptr<marineLib::Shape_Tank> 
-			theTank_;
+	protected:
+
+		template<class... _Types>
+		StbGMaker_TankCreator(_Types&&... _Args)
+			: StbGMaker_EntityCreator(_Args...)
+		{}
 
 	public:
 
-		StbGMaker_TankCreator()
-		{}
 
-		StbGMaker_TankCreator
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
+		virtual Standard_Boolean HasShape() const = 0;
 
-		StbGMaker_TankCreator
-		(
-			const std::shared_ptr<marineLib::Shape_Tank>& theTank
-		)
-			: theTank_(theTank)
-		{}
-
-		StbGMaker_TankCreator
-		(
-			const Standard_Integer theIndex, 
-			const std::shared_ptr<marineLib::Shape_Tank>& theTank
-		);
-
-		StbGMaker_TankCreator
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const std::shared_ptr<marineLib::Shape_Tank>& theTank
-		);
-
-		const auto& Shape() const
-		{
-			return theTank_;
-		}
-
-		Standard_Integer 
-			CreateWorkingPlane
-			(
-				const Standard_Real x
-			) override;
 	};
 }
 

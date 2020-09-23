@@ -8,12 +8,15 @@
 class gp_Ax2;
 class gp_Pln;
 
+#include <vector>
+
 namespace tnbLib
 {
 
 	// Forward Declarations
 	class Cad2d_Modeler;
 	class Pln_Edge;
+	class Cad2d_Plane;
 
 	class StbGMaker_WP
 		: public StbGMaker_Entity
@@ -49,6 +52,8 @@ namespace tnbLib
 		);
 
 
+		Standard_Integer NbPlanes() const;
+
 		std::shared_ptr<Entity3d_Chain> MakeMesh() const;
 
 		auto X() const
@@ -68,12 +73,22 @@ namespace tnbLib
 
 		gp_Pln gpPln(const gp_Ax2& theAx) const;
 
+		std::vector<std::shared_ptr<Cad2d_Plane>> 
+			RetrievePlanes() const;
+
 		void SetX(const Standard_Real theX)
 		{
 			theX_ = theX;
 		}
 
 		void Approx(const std::shared_ptr<Pln_Edge>& theEdge);
+
+		void RetrievePlanesTo
+		(
+			std::vector<std::shared_ptr<Cad2d_Plane>>& thePlanes
+		) const;
+
+
 	};
 }
 

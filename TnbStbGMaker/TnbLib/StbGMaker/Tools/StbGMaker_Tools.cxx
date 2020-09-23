@@ -1,14 +1,14 @@
 #include <StbGMaker_Tools.hxx>
 
 #include <Geo_Tools.hxx>
+#include <Cad2d_Modeler.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_SectTools.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_Body.hxx>
-#include <StbGMaker_Hull.hxx>
-#include <StbGMaker_Tank.hxx>
+#include <StbGMaker_WP.hxx>
 #include <StbGMaker_IntplSect.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <gp_Pln.hxx>
@@ -149,20 +149,40 @@ tnbLib::StbGMaker_Tools::FindSpan
 	return std::move(t);
 }
 
-std::tuple
-<
-	std::shared_ptr<tnbLib::Marine_CmpSection>,
-	std::shared_ptr<tnbLib::Marine_CmpSection>
-> 
-tnbLib::StbGMaker_Tools::FindSpan
-(
-	const Standard_Real x, 
-	const StbGMaker_Hull & theHull
-)
-{
-	auto t = FindSpan(x, *theHull.Body());
-	return std::move(t);
-}
+//std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
+//tnbLib::StbGMaker_Tools::OuterWires
+//(
+//	const std::shared_ptr<StbGMaker_WP>& theWp
+//)
+//{
+//	Debug_Null_Pointer(theWp);
+//	const auto& modeler = theWp->Modeler();
+//	if (NOT modeler)
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the WP has no modeler!" << endl
+//			<< " - wp's index = " << theWp->Index() << endl
+//			<< " - wp's name = " << theWp->Name() << endl
+//			<< abort(FatalError);
+//	}
+//
+//	
+//}
+
+//std::tuple
+//<
+//	std::shared_ptr<tnbLib::Marine_CmpSection>,
+//	std::shared_ptr<tnbLib::Marine_CmpSection>
+//> 
+//tnbLib::StbGMaker_Tools::FindSpan
+//(
+//	const Standard_Real x, 
+//	const StbGMaker_Hull & theHull
+//)
+//{
+//	auto t = FindSpan(x, *theHull.Body());
+//	return std::move(t);
+//}
 
 //std::shared_ptr<tnbLib::StbGMaker_Tank> 
 //tnbLib::StbGMaker_Tools::FitTankToHull

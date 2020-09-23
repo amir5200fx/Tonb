@@ -6,10 +6,15 @@
 #include <Cad2d_Modeler.hxx>
 #include <Cad_Tools.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_Ring.hxx>
 #include <StbGMaker_WP.hxx>
 #include <StbGMaker_Edge.hxx>
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
 
 #include <Geom_Plane.hxx>
 
@@ -106,10 +111,24 @@ tnbLib::StbGMaker_Alg::CreateWpFromShape
 	edges3d.reserve(edges.size());
 	for (auto& x : edges)
 	{
-		auto edge = std::make_shared<StbGMaker_Edge>(std::move(*x));
-		Debug_Null_Pointer(edge);
+		if (x->IsRing())
+		{
+			auto ring = std::dynamic_pointer_cast<Pln_Ring>(x);
+			Debug_Null_Pointer(ring);
 
-		edges3d.push_back(std::move(edge));
+			auto edge = std::make_shared<StbGMaker_Edge<Pln_Ring>>(std::move(*ring));
+			Debug_Null_Pointer(edge);
+
+			edges3d.push_back(std::move(edge));
+		}
+		else
+		{
+			auto edge = std::make_shared<StbGMaker_Edge<Pln_Edge>>(std::move(*x));
+			Debug_Null_Pointer(edge);
+
+			edges3d.push_back(std::move(edge));
+		}
+		
 	}
 
 	/*auto geoInfo = std::make_shared<Geo_ApprxCurve_Info>();
@@ -183,6 +202,14 @@ tnbLib::StbGMaker_Alg::SelectWP
 	return iter->second;
 }
 
+std::vector<std::shared_ptr<tnbLib::StbGMaker_WP>> 
+tnbLib::StbGMaker_Alg::RetrieveWPs() const
+{
+	std::vector<std::shared_ptr<StbGMaker_WP>> WPs;
+	RetrieveWPsTo(WPs);
+	return std::move(WPs);
+}
+
 Standard_Integer 
 tnbLib::StbGMaker_Alg::CreateWorkingPlane
 (
@@ -220,6 +247,19 @@ void tnbLib::StbGMaker_Alg::CreateWorkingPlanes
 	for (const auto x : theX.Values())
 	{
 		CreateWorkingPlane(x);
+	}
+}
+
+void tnbLib::StbGMaker_Alg::RetrieveWPsTo
+(
+	std::vector<std::shared_ptr<StbGMaker_WP>>& theWPs
+) const
+{
+	theWPs.reserve(theWorkingPlanes_.size());
+	for (const auto& x : theWorkingPlanes_)
+	{
+		Debug_Null_Pointer(x.second);
+		theWPs.push_back(x.second);
 	}
 }
 
