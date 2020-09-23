@@ -39,13 +39,13 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -69,17 +69,30 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SectPx\GeoMap\intersection;$(ProjectDir)TnbLib\SectPx\GeoMap\linearInterpl;$(ProjectDir)TnbLib\SectPx\GeoMap;$(ProjectDir)TnbLib\SectPx\Registry;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\divide;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\subtract;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\sum;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\readX;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\readY;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\expr;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\coeff;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\func;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\linearForm;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\minus;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\unaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\uni;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\minus;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\plus;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun;$(ProjectDir)TnbLib\SectPx\Tools\Par;$(ProjectDir)TnbLib\SectPx\Macros;$(ProjectDir)TnbLib\SectPx\Entities\Value;$(ProjectDir)TnbLib\SectPx\Entities\Segment\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Segment;$(ProjectDir)TnbLib\SectPx\Entities\RegObj;$(ProjectDir)TnbLib\SectPx\Entities\ProfileQ;$(ProjectDir)TnbLib\SectPx\Entities\Profile;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Dangle;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior\Corner;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior\Slider;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior;$(ProjectDir)TnbLib\SectPx\Entities\Pole;$(ProjectDir)TnbLib\SectPx\Entities\Parent\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Parent;$(ProjectDir)TnbLib\SectPx\Entities\Par\Const;$(ProjectDir)TnbLib\SectPx\Entities\Par\Fixed;$(ProjectDir)TnbLib\SectPx\Entities\Par\Free;$(ProjectDir)TnbLib\SectPx\Entities\Par;$(ProjectDir)TnbLib\SectPx\Entities\Overrider\Coord;$(ProjectDir)TnbLib\SectPx\Entities\Overrider\GeoMap;$(ProjectDir)TnbLib\SectPx\Entities\Overrider;$(ProjectDir)TnbLib\SectPx\Entities\Node\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Node;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Empty;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired\Joint;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired;$(ProjectDir)TnbLib\SectPx\Entities\Interface;$(ProjectDir)TnbLib\SectPx\Entities\Frame;$(ProjectDir)TnbLib\SectPx\Entities\Edge;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum\component;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum\geoField;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Constructor;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master\component;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Slave\empty;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Slave;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\TPnt\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\TPnt;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt;$(ProjectDir)TnbLib\SectPx\Entities\Coord;$(ProjectDir)TnbLib\SectPx\Entities\CmptProfile;$(ProjectDir)TnbLib\SectPx\Entities\Child;$(ProjectDir)TnbLib\SectPx\Entities\Entity;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbIO\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,6 +128,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SectPx\GeoMap\intersection;$(ProjectDir)TnbLib\SectPx\GeoMap\linearInterpl;$(ProjectDir)TnbLib\SectPx\GeoMap;$(ProjectDir)TnbLib\SectPx\Registry;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\divide;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\subtract;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\sum;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\readX;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\readY;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\expr;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\coeff;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\func;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\linearForm;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\minus;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\unaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\uni;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\minus;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\plus;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun;$(ProjectDir)TnbLib\SectPx\Tools\Par;$(ProjectDir)TnbLib\SectPx\Macros;$(ProjectDir)TnbLib\SectPx\Entities\Value;$(ProjectDir)TnbLib\SectPx\Entities\Segment\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Segment;$(ProjectDir)TnbLib\SectPx\Entities\RegObj;$(ProjectDir)TnbLib\SectPx\Entities\ProfileQ;$(ProjectDir)TnbLib\SectPx\Entities\Profile;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Dangle;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior\Corner;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior\Slider;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior;$(ProjectDir)TnbLib\SectPx\Entities\Pole;$(ProjectDir)TnbLib\SectPx\Entities\Parent\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Parent;$(ProjectDir)TnbLib\SectPx\Entities\Par\Const;$(ProjectDir)TnbLib\SectPx\Entities\Par\Fixed;$(ProjectDir)TnbLib\SectPx\Entities\Par\Free;$(ProjectDir)TnbLib\SectPx\Entities\Par;$(ProjectDir)TnbLib\SectPx\Entities\Overrider\Coord;$(ProjectDir)TnbLib\SectPx\Entities\Overrider\GeoMap;$(ProjectDir)TnbLib\SectPx\Entities\Overrider;$(ProjectDir)TnbLib\SectPx\Entities\Node\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Node;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Empty;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired\Joint;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired;$(ProjectDir)TnbLib\SectPx\Entities\Interface;$(ProjectDir)TnbLib\SectPx\Entities\Frame;$(ProjectDir)TnbLib\SectPx\Entities\Edge;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum\component;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum\geoField;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Constructor;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master\component;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Slave\empty;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Slave;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\TPnt\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\TPnt;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt;$(ProjectDir)TnbLib\SectPx\Entities\Coord;$(ProjectDir)TnbLib\SectPx\Entities\CmptProfile;$(ProjectDir)TnbLib\SectPx\Entities\Child;$(ProjectDir)TnbLib\SectPx\Entities\Entity;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbIO\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,6 +138,178 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\SectPx\Entities\Child\SectPx_Child.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\CmptProfile\SectPx_CmptProfile.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\component\SectPx_Datum_Compnt.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\component\SectPx_Datum_CompntI.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\geoField\SectPx_Datum_GeoField.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\geoField\SectPx_Datum_GeoFieldI.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\SectPx_Datum.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Constructor\SectPx_PntConstructor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\component\SectPx_Pnt_Compnt.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\component\SectPx_Pnt_CompntI.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField\SectPx_Pnt_GeoField.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\SectPx_MasterPnt.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\SectPx_Pnt.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\SectPx_Pnts.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\SectPx_PntsFwd.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\SectPx_PntType.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Slave\empty\SectPx_Pnt_Empty.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Slave\SectPx_SlavePnt.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\TPnt\Adaptor\SectPx_TPntAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\TPnt\SectPx_TPnt.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\SectPx_Coord.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\SectPx_CoordType.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\SectPx_TCoord.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Edge\SectPx_Edge.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\Empty\SectPx_EmptyInterface.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\Paired\Adaptor\SectPx_PairedInterfaceAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\Paired\Joint\SectPx_PairedInterface_Joint.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\Paired\SectPx_PairedInterface.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\SectPx_Interface.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\SectPx_Interfaces.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\SectPx_InterfacesFwd.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Interface\SectPx_InterfaceType.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Node\Adaptor\SectPx_NodeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Node\SectPx_Node.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Overrider\Coord\SectPx_CoordOverrider.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Overrider\GeoMap\SectPx_GeoMapOverrider.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Overrider\SectPx_Overrider.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Parent\Adaptor\SectPx_ParentAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Parent\SectPx_Parent.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\Const\SectPx_ConstPar.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\Fixed\SectPx_FixedPar.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\Free\SectPx_FreePar.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\SectPx_Par.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\SectPx_ParI.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\SectPx_Pars.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\SectPx_ParsFwd.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Par\SectPx_ParType.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_BndPoleAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_InterPoleAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\Dangle\SectPx_Pole_Dangle.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master\SectPx_Pole_Master.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\SectPx_PairedPole.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave\SectPx_Pole_Slave.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\SectPx_BndPole.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_Corner.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Interior\SectPx_InterPole.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Interior\Slider\SectPx_Pole_Slider.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\SectPx_Pole.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\SectPx_Poles.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\SectPx_PolesFwd.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\SectPx_PoleType.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\ProfileQ\SectPx_ProfileQ.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Profile\SectPx_TopoProfile.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\RegObj\SectPx_RegObj.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\RegObj\SectPx_RegObjType.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Segment\Adaptor\SectPx_SegmentAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Segment\SectPx_Segment.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Value\SectPx_Value.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\cross\SectPx_BinaryOpFieldFun_Cross.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\divide\SectPx_BinaryOpFieldFun_Divide.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\SectPx_BinaryOpFieldFun.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\SectPx_BinaryOpFieldFuns.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\subtract\SectPx_BinaryOpFieldFun_Subtract.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\binaryOps\sum\SectPx_BinaryOpFieldFun_Sum.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_Expr.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\nonParameter\readX\SectPx_FieldFun_readX.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\nonParameter\readY\SectPx_FieldFun_readY.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\nonParameter\SectPx_nonParFieldFun.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\func\SectPx_FieldFun_Func.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\linearForm\SectPx_FieldFun_LinearForm.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\minus\SectPx_FieldFun_Minus.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_oneParFieldFun.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_oneParFieldFunI.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\uni\SectPx_FieldFun_Uni.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\SectPx_FieldFun.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\minus\SectPx_UnaryOpFieldFun_Minus.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\plus\SectPx_UnaryOpFieldFun_Plus.hxx" />
+    <ClInclude Include="TnbLib\SectPx\FieldFun\unaryOps\SectPx_UnaryOpFieldFun.hxx" />
+    <ClInclude Include="TnbLib\SectPx\GeoMap\intersection\SectPx_GeoMap_Intersection.hxx" />
+    <ClInclude Include="TnbLib\SectPx\GeoMap\linearInterpl\SectPx_GeoMap_LinearInterpl.hxx" />
+    <ClInclude Include="TnbLib\SectPx\GeoMap\SectPx_GeoMap.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Macros\SectPx_Macros.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Registry\SectPx_Registry.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Registry\SectPx_RegistryI.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Registry\SectPx_RegistryM.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Tools\Par\SectPx_ParTools.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\SectPx\Entities\Child\SectPx_Child.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\CmptProfile\SectPx_CmptProfile.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Datum\component\SectPx_Datum_Compnt.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Datum\geoField\SectPx_Datum_GeoField.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Datum\SectPx_Datum.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\component\SectPx_Pnt_Compnt.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField\SectPx_Pnt_GeoField.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\SectPx_MasterPnt.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\SectPx_Pnt.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Slave\empty\SectPx_Pnt_Empty.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Slave\SectPx_SlavePnt.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\TPnt\Adaptor\SectPx_TPntAdaptor.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\TPnt\SectPx_TPnt.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\SectPx_Coord.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Edge\SectPx_Edge.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Empty\SectPx_EmptyInterface.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\Joint\SectPx_PairedInterface_Joint.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\SectPx_PairedInterface.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\SectPx_Interface.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Node\SectPx_Node.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Overrider\Coord\SectPx_CoordOverrider.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Overrider\GeoMap\SectPx_GeoMapOverrider.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Overrider\SectPx_Overrider.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Parent\Adaptor\SectPx_ParentAdaptor.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Parent\SectPx_Parent.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\Const\SectPx_ConstPar.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\Const\SectPx_ConstParIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\Fixed\SectPx_FixedPar.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\Fixed\SectPx_FixedParIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\Free\SectPx_FreePar.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\Free\SectPx_FreeParIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_Par.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Dangle\SectPx_Pole_Dangle.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master\SectPx_Pole_Master.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave\SectPx_Pole_Slave.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_Corner.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\SectPx_InterPole.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Slider\SectPx_Pole_Slider.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\SectPx_Pole.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\ProfileQ\SectPx_ProfileQ.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\SectPx_TopoProfile.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\RegObj\SectPx_RegObj.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\RegObj\SectPx_RegObjType.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Segment\Adaptor\SectPx_SegmentAdaptor.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Segment\SectPx_Segment.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\cross\SectPx_BinaryOpFieldFun_Cross.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\divide\SectPx_BinaryOpFieldFun_Divide.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\SectPx_BinaryOpFieldFun.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\subtract\SectPx_BinaryOpFieldFun_Subtract.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\sum\SectPx_BinaryOpFieldFun_Sum.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_Expr.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readX\SectPx_FieldFun_readX.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readY\SectPx_FieldFun_readY.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\SectPx_nonParFieldFun.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\func\SectPx_FieldFun_Func.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\linearForm\SectPx_FieldFun_LinearForm.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\minus\SectPx_FieldFun_Minus.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_oneParFieldFun.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\uni\SectPx_FieldFun_Uni.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\SectPx_FieldFun.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\minus\SectPx_UnaryOpFieldFun_Minus.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\plus\SectPx_UnaryOpFieldFun_Plus.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\SectPx_UnaryOpFieldFun.cxx" />
+    <ClCompile Include="TnbLib\SectPx\GeoMap\intersection\SectPx_GeoMap_Intersection.cxx" />
+    <ClCompile Include="TnbLib\SectPx\GeoMap\linearInterpl\SectPx_GeoMap_LinearInterpl.cxx" />
+    <ClCompile Include="TnbLib\SectPx\GeoMap\SectPx_GeoMap.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Registry\SectPx_Registry.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Tools\Par\SectPx_ParTools.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
