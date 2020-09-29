@@ -177,19 +177,8 @@ tnbLib::Pln_CmpEdge::Copy() const
 std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
 tnbLib::Pln_CmpEdge::RetrieveVertices() const
 {
-	Adt_AvlTree<std::shared_ptr<Pln_Vertex>> tree;
-	tree.SetComparableFunction(&Pln_Vertex::IsLess);
-
-	for (const auto& x : Edges())
-	{
-		Debug_Null_Pointer(x);
-
-		tree.InsertIgnoreDup(x->Vtx0());
-		tree.InsertIgnoreDup(x->Vtx1());
-	}
-
 	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
-	tree.RetrieveTo(vertices);
+	RetrieveVerticesTo(vertices);
 
 	return std::move(vertices);
 }
@@ -221,6 +210,14 @@ void tnbLib::Pln_CmpEdge::Transform
 	}
 }
 
+void tnbLib::Pln_CmpEdge::RetrieveVerticesTo
+(
+	std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
+) const
+{
+	theVertices = Pln_Tools::RetrieveVertices(theEdges_);
+}
+
 void tnbLib::Pln_CmpEdge::Reverse()
 {
 	auto& edges = theEdges_;
@@ -232,21 +229,3 @@ void tnbLib::Pln_CmpEdge::Reverse()
 	}
 	std::reverse(edges.begin(), edges.end());
 }
-
-//std::shared_ptr<tnbLib::Pln_Wire> 
-//tnbLib::Pln_CmpEdge::MakeWire
-//(
-//	const std::shared_ptr<Pln_CmpEdge>& theEdge, 
-//	const Standard_Real theTol
-//)
-//{
-//	const auto& edges = theEdge->Edges();
-//
-//	const auto& v0 = edges[0]->Vtx0();
-//	const auto& v1 = edges[edges.size() - 1]->Vtx1();
-//
-//	if (v0 NOT_EQUAL v1)
-//	{
-//		
-//	}
-//}
