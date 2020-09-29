@@ -43,10 +43,12 @@ namespace tnbLib
 		void Insert
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
-		)
-		{
-			theEdges_.push_back(theEdge);
-		}
+		);
+
+		void Insert
+		(
+			std::shared_ptr<Pln_Edge>&& theEdge
+		);
 
 	public:
 
