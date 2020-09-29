@@ -47,6 +47,33 @@ tnbLib::Pln_Tools::IsBounded
 	return (Standard_Boolean)Handle(Geom2d_BoundedCurve)::DownCast(theCurve);
 }
 
+Standard_Boolean 
+tnbLib::Pln_Tools::IsManifold
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	auto nodes = RetrieveVertices(theEdges);
+	for (const auto& x : nodes)
+	{
+		Debug_Null_Pointer(x);
+		if (NOT x->IsManifold())
+		{
+			return Standard_False;
+		}
+	}
+	return Standard_True;
+}
+
+Standard_Boolean 
+tnbLib::Pln_Tools::IsValidToRetrieveWires
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	return IsManifold(theEdges);
+}
+
 Standard_Real 
 tnbLib::Pln_Tools::Length
 (
@@ -568,6 +595,13 @@ tnbLib::Pln_Tools::RetrieveVertices
 		compact.InsertIgnoreDup(x->Vtx1());
 	}
 
+	if (compact.Size() < theEdges.size())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "duplicate data has been detected!" << endl
+			<< abort(FatalError);
+	}
+
 	std::vector<std::shared_ptr<Pln_Vertex>> list;
 	compact.RetrieveTo(list);
 
@@ -606,6 +640,30 @@ tnbLib::Pln_Tools::Intersection
 	return std::move(Inter);
 }
 
+std::shared_ptr<tnbLib::Pln_Vertex> 
+tnbLib::Pln_Tools::Intersection
+(
+	const std::shared_ptr<Pln_Edge>& theEdge0,
+	const std::shared_ptr<Pln_Edge>& theEdge1
+)
+{
+	const auto& v0 = theEdge0->Vtx0();
+	const auto& v1 = theEdge0->Vtx1();
+
+	const auto& q0 = theEdge1->Vtx0();
+	const auto& q1 = theEdge1->Vtx1();
+
+	if (v0 IS_EQUAL q0)
+		return v0;
+	if (v0 IS_EQUAL q1)
+		return v0;
+	if (v1 IS_EQUAL q0)
+		return v1;
+	if (v1 IS_EQUAL q1)
+		return v1;
+	return nullptr;
+}
+
 Handle(Geom2d_Curve)
 tnbLib::Pln_Tools::ConvertToTrimmedCurve
 (
@@ -614,6 +672,15 @@ tnbLib::Pln_Tools::ConvertToTrimmedCurve
 	const Standard_Real theU1
 )
 {
+	Debug_Null_Pointer(theCurve);
+	if (theU0 IS_EQUAL theU1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the two parameters are equal" << endl
+			<< " - U0 = " << theU0 << endl
+			<< " - U1 = " << theU1 << endl
+			<< abort(FatalError);
+	}
 	Handle(Geom2d_Curve) trimmed =
 		new Geom2d_TrimmedCurve(theCurve, theU0, theU1);
 	return std::move(trimmed);
@@ -802,6 +869,32 @@ void tnbLib::Pln_Tools::SplitCurve
 
 	theC0 = Pln_Tools::ConvertToTrimmedCurve(theCurve, first, theX);
 	theC1 = Pln_Tools::ConvertToTrimmedCurve(theCurve, theX, last);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Curve>>
+tnbLib::Pln_Tools::RetrieveCurves
+(
+	const std::vector<Handle(Geom2d_Curve)>& theCurves
+)
+{
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(theCurves.size());
+
+	Standard_Integer K = 0;
+	for (const auto& x : theCurves)
+	{
+		Debug_Null_Pointer(x);
+
+		if (NOT Pln_Tools::IsBounded(x))
+		{
+			FatalErrorIn("std::vector<std::shared_ptr<Pln_Wire>> Pln_Tools::RetrieveWires(Args....)")
+				<< "the curve is not bounded" << endl
+				<< abort(FatalError);
+		}
+
+		curves.push_back(std::make_shared<Pln_Curve>(++K, x));
+	}
+	return std::move(curves);
 }
 
 std::vector<std::shared_ptr<tnbLib::Pln_Edge>>
@@ -1294,38 +1387,8 @@ namespace tnbLib
 	}
 }
 
-std::vector<std::shared_ptr<tnbLib::Pln_Wire>>
-tnbLib::Pln_Tools::RetrieveWires
-(
-	const std::vector<Handle(Geom2d_Curve)>& theCurves,
-	const Standard_Real theMinTol,
-	const Standard_Real theMaxTol
-)
-{
-	std::vector<std::shared_ptr<Pln_Curve>> curves;
-	curves.reserve(theCurves.size());
-
-	Standard_Integer K = 0;
-	for (const auto& x : theCurves)
-	{
-		Debug_Null_Pointer(x);
-
-		if (NOT Pln_Tools::IsBounded(x))
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Wire>> Pln_Tools::RetrieveWires(Args....)")
-				<< "the curve is not bounded" << endl
-				<< abort(FatalError);
-		}
-
-		curves.push_back(std::make_shared<Pln_Curve>(++K, x));
-	}
-
-	auto wires = Pln_Tools::RetrieveWires(curves, theMinTol, theMaxTol);
-	return std::move(wires);
-}
-
-std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
-tnbLib::Pln_Tools::RetrieveWires
+std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
+tnbLib::Pln_Tools::RetrieveMergedEdges
 (
 	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
 	const Standard_Real theMinTol,
@@ -1340,6 +1403,31 @@ tnbLib::Pln_Tools::RetrieveWires
 	auto mergedVerticesMap = retrieveWires::RetrieveMergedVertices(segments);
 
 	auto edges = retrieveWires::RetrieveEdges(segments, mergedVerticesMap);
+	return std::move(edges);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Wire>>
+tnbLib::Pln_Tools::RetrieveWires
+(
+	const std::vector<Handle(Geom2d_Curve)>& theCurves,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto curves = RetrieveCurves(theCurves);
+	auto wires = Pln_Tools::RetrieveWires(curves, theMinTol, theMaxTol);
+	return std::move(wires);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
+tnbLib::Pln_Tools::RetrieveWires
+(
+	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto edges = RetrieveMergedEdges(theCurves, theMinTol, theMaxTol);
 
 	Adt_AvlTree<std::shared_ptr<Pln_Vertex>>
 		vertexMap;

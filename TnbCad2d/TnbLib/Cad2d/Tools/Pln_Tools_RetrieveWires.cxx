@@ -5,6 +5,7 @@
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Wire.hxx>
+#include <Cad2d_RemoveNonManifold.hxx>
 #include <Adt_AvlTree.hxx>
 
 #include <OFstream.hxx>
@@ -207,4 +208,52 @@ tnbLib::Pln_Tools::RetrieveWires
 		x->SetIndex(++K);
 	}
 	return std::move(list);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Wire>> 
+tnbLib::Pln_Tools::RetrieveWiresNonManifold
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+	const Standard_Boolean checkManifold
+)
+{
+	if (checkManifold)
+	{
+		if (IsManifold(theEdges))
+		{
+			auto wires = RetrieveWires(theEdges);
+			return std::move(wires);
+		}
+		else
+		{
+			auto wires = RetrieveWiresNonManifold(theEdges, Standard_False);
+			return std::move(wires);
+		}
+	}
+
+	auto alg = std::make_shared<Cad2d_RemoveNonManifold>(theEdges);
+	Debug_Null_Pointer(alg);
+
+	alg->Perform();
+	Debug_If_Condition_Message(NOT alg->IsDone(), "the algorithm is not perfomed!");
+
+	auto rings = alg->RetrieveRings();
+	if (rings.empty())
+	{
+		return std::vector<std::shared_ptr<Pln_Wire>>();
+	}
+
+	std::vector<std::shared_ptr<Pln_Wire>> l;
+	for (const auto& x : rings)
+	{
+		Debug_Null_Pointer(x);
+		auto edges = x->RetrieveEdges();
+
+		auto wires = RetrieveWires(theEdges);
+		Debug_If_Condition(wires.size() NOT_EQUAL 1);
+
+		auto& wire = wires[0];
+		l.push_back(std::move(wire));
+	}
+	return std::move(l);
 }
