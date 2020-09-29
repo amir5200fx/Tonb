@@ -9,6 +9,7 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 
 namespace tnbLib
 {
@@ -40,6 +41,8 @@ namespace tnbLib
 			return theEdges_;
 		}
 
+		std::vector<std::weak_ptr<Pln_Edge>> RetrieveEdges() const;
+
 		void InsertToEdges
 		(
 			const Standard_Integer theIndex,
@@ -50,6 +53,8 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex
 		);
+
+		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
 	};
 }
 

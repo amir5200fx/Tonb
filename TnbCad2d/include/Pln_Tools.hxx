@@ -52,6 +52,18 @@ namespace tnbLib
 				const Handle(Geom2d_Curve)& theCurve
 			);
 
+		static Standard_Boolean 
+			IsManifold
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+			);
+
+		static Standard_Boolean 
+			IsValidToRetrieveWires
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+			);
+
 		//- WARNING! check the convergence by info parameter
 		static Standard_Real 
 			Length
@@ -114,7 +126,11 @@ namespace tnbLib
 			);
 
 		static std::shared_ptr<Cad2d_Plane>
-			MakePlane(const std::shared_ptr<Pln_Wire>& theWire, const gp_Ax2& theAx);
+			MakePlane
+			(
+				const std::shared_ptr<Pln_Wire>& theWire, 
+				const gp_Ax2& theAx
+			);
 
 		static Pln_Orientation
 			RetrieveOrientation
@@ -146,6 +162,13 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 			);
 
+		static std::vector<std::shared_ptr<Pln_Wire>>
+			RetrieveWiresNonManifold
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+				const Standard_Boolean checkManifold = Standard_True
+			);
+
 		static std::vector<std::shared_ptr<Pln_Vertex>>
 			RetrieveVertices
 			(
@@ -165,6 +188,13 @@ namespace tnbLib
 				const Handle(Geom2d_Curve)& theCurve0,
 				const Handle(Geom2d_Curve)& theCurve1,
 				const Standard_Real theTol = 1.0E-6
+			);
+
+		static std::shared_ptr<Pln_Vertex> 
+			Intersection
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge0,
+				const std::shared_ptr<Pln_Edge>& theEdge1
 			);
 
 		static Handle(Geom2d_Curve)
@@ -221,12 +251,27 @@ namespace tnbLib
 				Handle(Geom2d_Curve)& theC1
 			);
 
+		static std::vector<std::shared_ptr<Pln_Curve>>
+			RetrieveCurves
+			(
+				const std::vector<Handle(Geom2d_Curve)>& theCurves
+			);
+
 		static std::vector<std::shared_ptr<Pln_Edge>>
 			RetrieveEdges
 			(
 				const std::vector<Handle(Geom2d_Curve)>& theCurves
 			);
 
+		static std::vector<std::shared_ptr<Pln_Edge>>
+			RetrieveMergedEdges
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		//- WARNING! make sure the object is manifold then call this method
 		static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
 			(
@@ -235,6 +280,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
+		//- WARNING! make sure the object is manifold then call this method
 		static std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
 			(

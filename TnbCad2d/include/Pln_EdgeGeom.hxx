@@ -34,6 +34,13 @@ namespace tnbLib
 
 		Pln_EdgeGeom
 		(
+			const Standard_Boolean theSense
+		)
+			: Sense_(theSense)
+		{}
+
+		Pln_EdgeGeom
+		(
 			const std::shared_ptr<Pln_Curve>& theCurve, 
 			const Standard_Boolean theSense
 		)

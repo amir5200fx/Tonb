@@ -82,8 +82,6 @@ namespace tnbLib
 
 		Pln_EntityType Type() const override;
 
-		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
-
 		void Transform(const gp_Trsf2d& t) override;
 
 		void RetrieveEntitiesTo

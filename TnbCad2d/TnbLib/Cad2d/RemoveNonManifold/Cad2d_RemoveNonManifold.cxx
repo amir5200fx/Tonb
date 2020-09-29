@@ -441,7 +441,7 @@ tnbLib::Cad2d_RemoveNonManifold::RetrieveString
 	if (node0 IS_EQUAL node1)
 	{
 		auto segment =
-			std::make_shared<Ring>
+			std::make_shared<Cad2d_RemoveNonManifold::Ring>
 			(
 				SegmentCounter().RetrieveIndex(),
 				std::move(node0),
@@ -642,7 +642,7 @@ void tnbLib::Cad2d_RemoveNonManifold::Perform()
 
 		if (Segments().size() > nbRings)
 		{
-			nbRings = Segments().size();
+			nbRings = (Standard_Integer)Segments().size();
 
 			for (const auto& x : segments)
 			{
