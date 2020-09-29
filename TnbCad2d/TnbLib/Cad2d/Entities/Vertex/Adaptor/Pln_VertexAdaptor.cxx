@@ -3,6 +3,14 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+std::vector<std::weak_ptr<tnbLib::Pln_Edge>> 
+tnbLib::Pln_VertexAdaptor::RetrieveEdges() const
+{
+	std::vector<std::weak_ptr<Pln_Edge>> edges;
+	RetrieveEdgesTo(edges);
+	return std::move(edges);
+}
+
 void tnbLib::Pln_VertexAdaptor::InsertToEdges
 (
 	const Standard_Integer theIndex, 
@@ -35,4 +43,16 @@ void tnbLib::Pln_VertexAdaptor::RemoveFromEdges
 	}
 
 	theEdges_.erase(iter);
+}
+
+void tnbLib::Pln_VertexAdaptor::RetrieveEdgesTo
+(
+	std::vector<std::weak_ptr<Pln_Edge>>& theEdges
+) const
+{
+	theEdges.reserve(theEdges_.size());
+	for (const auto& x : theEdges_)
+	{
+		theEdges.push_back(x.second);
+	}
 }

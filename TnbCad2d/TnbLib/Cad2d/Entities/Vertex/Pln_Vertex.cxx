@@ -47,18 +47,6 @@ tnbLib::Pln_Vertex::Type() const
 	return Pln_EntityType::VERTEX;
 }
 
-void tnbLib::Pln_Vertex::RetrieveEdgesTo
-(
-	std::vector<std::weak_ptr<Pln_Edge>>& theEdges
-) const
-{
-	theEdges.reserve(Edges().size());
-	for (const auto& x : Edges())
-	{
-		theEdges.push_back(x.second);
-	}
-}
-
 void tnbLib::Pln_Vertex::Transform
 (
 	const gp_Trsf2d & t
