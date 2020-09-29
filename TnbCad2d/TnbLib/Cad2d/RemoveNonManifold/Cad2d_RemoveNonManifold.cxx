@@ -492,7 +492,7 @@ tnbLib::Cad2d_RemoveNonManifold::InsertEdges()
 	auto& nodes = NodesRef();
 	if (nodes.empty())
 	{
-		return;
+		return std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>();
 	}
 
 	std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> nonRings;
