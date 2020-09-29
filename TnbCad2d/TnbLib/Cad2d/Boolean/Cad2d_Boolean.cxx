@@ -533,7 +533,7 @@ tnbLib::Cad2d_Boolean::Intersection
 	Debug_Null_Pointer(subdivide);
 
 	subdivide->LoadIntersectionAlgorithm(intersection);
-	
+
 	subdivide->Perform();
 
 	Debug_If_Condition_Message(NOT subdivide->IsDone(), "the algorithm is not performed!");

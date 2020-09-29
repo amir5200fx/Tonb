@@ -146,13 +146,13 @@ void tnbLib::Pln_Wire::CheckWireConsistency
 	const char* theName
 ) const
 {
-	std::vector<std::shared_ptr<Pln_Vertex>> vertices;
-	RetrieveVerticesTo(vertices);
+	const auto& cmpEdge = CmpEdge();
+	Debug_Null_Pointer(cmpEdge);
 
-	if (vertices.size() NOT_EQUAL NbEdges())
+	if (NOT cmpEdge->IsValidForWire(gp::Resolution()))
 	{
 		FatalErrorIn(theName)
-			<< "contradictory data: the wire is not close, apparently!" << endl
+			<< "the wire is not valid" << endl
 			<< abort(FatalError);
 	}
 }
@@ -239,9 +239,12 @@ tnbLib::Pln_Wire::NbEntities
 	const Pln_EntityType t
 ) const
 {
-#ifdef FULLDEBUG
-	CheckWireConsistency("Standard_Integer NbEntities(const Pln_EntityType t) const");
-#endif // FULLDEBUG
+#ifdef _DEBUG
+	CheckWireConsistency
+	(
+		"Standard_Integer Pln_Wire::NbEntities(const Pln_EntityType t)"
+	);
+#endif // _DEBUG
 
 	if (t IS_EQUAL Pln_EntityType::VERTEX)
 		return NbEdges();
@@ -472,9 +475,12 @@ void tnbLib::Pln_Wire::RetrieveVerticesTo
 	std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
 ) const
 {
-#ifdef FULLDEBUG
-	CheckWireConsistency("void Pln_Wire::RetrieveVerticesTo(Args...) const");
-#endif // FULLDEBUG
+#ifdef _DEBUG
+	CheckWireConsistency
+	(
+		"void Pln_Wire::RetrieveVerticesTo(std::vector<std::shared_ptr<Pln_Vertex>>&)"
+	);
+#endif // _DEBUG
 
 	theVertices.reserve(NbEdges());
 	for (const auto& x : Edges())
@@ -489,10 +495,12 @@ void tnbLib::Pln_Wire::RetrieveVerticesTo
 	std::vector<std::shared_ptr<Pln_Entity>>& theVertices
 ) const
 {
-#ifdef FULLDEBUG
-	CheckWireConsistency("void Pln_Wire::RetrieveVerticesTo(Args...) const");
-#endif // FULLDEBUG
-
+#ifdef _DEBUG
+	CheckWireConsistency
+	(
+		"void Pln_Wire::RetrieveVerticesTo(std::vector<std::shared_ptr<Pln_Entity>>&)"
+	);
+#endif // _DEBUG
 	theVertices.reserve(NbEdges());
 	for (const auto& x : Edges())
 	{

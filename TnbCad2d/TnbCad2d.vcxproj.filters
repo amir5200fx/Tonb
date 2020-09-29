@@ -334,6 +334,9 @@
     <Filter Include="TnbLib\Cad2d\Modeler\Segments">
       <UniqueIdentifier>{52905f5d-88b5-4dc2-a7b7-ed4fb2b8cc49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\RemoveNonManifold">
+      <UniqueIdentifier>{1ccb4f7f-0e88-4ca7-bde4-5efd67a671a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -639,6 +642,9 @@
     <ClInclude Include="TnbLib\Cad2d\Modeler\Segments\Cad2d_Modeler_Segments.hxx">
       <Filter>TnbLib\Cad2d\Modeler\Segments</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifold.hxx">
+      <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -844,6 +850,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Modeler\Segments\Cad2d_Modeler_Segments.cxx">
       <Filter>TnbLib\Cad2d\Modeler\Segments</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifold.cxx">
+      <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -65,6 +65,17 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 			auto orth = std::dynamic_pointer_cast<Cad2d_IntsctEntity_OrthSegment>(x);
 			Debug_Null_Pointer(orth);
 
+			if (
+				std::abs(orth->CharParameter() - curve->FirstParameter()) 
+				<= gp::Resolution() 
+				OR 
+				std::abs(orth->CharParameter() - curve->LastParameter()) 
+				<= gp::Resolution()
+				)
+			{
+				continue;
+			}
+			
 			auto[c0, c1] = curve->Split(orth->CharParameter());
 
 			Debug_Null_Pointer(c0);
@@ -82,13 +93,20 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 			auto tang = std::dynamic_pointer_cast<Cad2d_IntsctEntity_TangSegment>(x);
 			Debug_Null_Pointer(tang);
 
+			if (std::abs(tang->Parameter0() - tang->Parameter1()) <= gp::Resolution())
+			{
+				continue;
+			}
+
 			auto[c0, c1, c2] = curve->Split(*tang);
 
-			Debug_Null_Pointer(c0);
+			/*Debug_Null_Pointer(c0);
 			Debug_Null_Pointer(c1);
-			Debug_Null_Pointer(c2);
+			Debug_Null_Pointer(c2);*/
 
-			if (Pln_Curve::IsValid(c0, theTol))
+			Debug_Null_Pointer(c1);
+
+			if (c0 AND Pln_Curve::IsValid(c0, theTol))
 			{
 				curves.push_back(c0);
 			}
@@ -98,9 +116,15 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 				curves.push_back(c1);
 			}
 
+			if (NOT c2)
+			{
+				break;
+			}
+
 			curve = c2;
 		}
 	}
+
 	curves.push_back(curve);
 	return std::move(curves);
 }

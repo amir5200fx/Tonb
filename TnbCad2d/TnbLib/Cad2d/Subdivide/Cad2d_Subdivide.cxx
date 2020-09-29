@@ -352,9 +352,8 @@ namespace tnbLib
 
 			auto outer = thePlane->OuterWire();
 			Debug_Null_Pointer(outer);
-			
-			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
 
+			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
 			auto[minTol, maxTol] = outer->BoundTolerance();
 
 			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(maxTol, theTol));
@@ -455,7 +454,7 @@ void tnbLib::Cad2d_Subdivide::Perform()
 			subdivide::InsertToMap(edge1.Index(), ent1, entities1);
 		}
 	}
-	
+
 	ChangePlane0() = 
 		subdivide::SubdividePalne
 		(
