@@ -39,19 +39,23 @@ namespace tnbLib
 		Pln_Edge
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx0, 
-			const std::shared_ptr<Pln_Vertex>& theVtx1
+			const std::shared_ptr<Pln_Vertex>& theVtx1,
+			const Standard_Boolean Sense = Standard_True
 		)
 			: theVtx0_(theVtx0)
 			, theVtx1_(theVtx1)
+			, Pln_EdgeGeom(Sense)
 		{}
 
 		Pln_Edge
 		(
 			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1
+			const std::shared_ptr<Pln_Vertex>&& theVtx1,
+			const Standard_Boolean Sense = Standard_True
 		)
 			: theVtx0_(std::move(theVtx0))
 			, theVtx1_(std::move(theVtx1))
+			, Pln_EdgeGeom(Sense)
 		{}
 
 		Pln_Edge
@@ -82,9 +86,11 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
-			const std::shared_ptr<Pln_Vertex>& theVtx1
+			const std::shared_ptr<Pln_Vertex>& theVtx1,
+			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex)
+			, Pln_EdgeGeom(Sense)
 			, theVtx0_(theVtx0)
 			, theVtx1_(theVtx1)
 		{}
@@ -93,9 +99,11 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1
+			const std::shared_ptr<Pln_Vertex>&& theVtx1,
+			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex)
+			, Pln_EdgeGeom(Sense)
 			, theVtx0_(std::move(theVtx0))
 			, theVtx1_(std::move(theVtx1))
 		{}
@@ -105,9 +113,11 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
-			const std::shared_ptr<Pln_Vertex>& theVtx1
+			const std::shared_ptr<Pln_Vertex>& theVtx1,
+			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex, theName)
+			, Pln_EdgeGeom(Sense)
 			, theVtx0_(theVtx0)
 			, theVtx1_(theVtx1)
 		{}
@@ -117,9 +127,11 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1
+			const std::shared_ptr<Pln_Vertex>&& theVtx1,
+			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex, theName)
+			, Pln_EdgeGeom(Sense)
 			, theVtx0_(std::move(theVtx0))
 			, theVtx1_(std::move(theVtx1))
 		{}
