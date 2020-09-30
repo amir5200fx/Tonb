@@ -23,6 +23,10 @@
 #include <Cad2d_Modeler.hxx>
 #include <LegModel_DispNo1.hxx>
 #include <Marine_Models.hxx>
+#include <Marine_WaterLib.hxx>
+#include <Marine_WaterDomain.hxx>
+#include <Marine_Bodies.hxx>
+#include <Marine_BodyTools.hxx>
 #include <HydStatic_FormDim_Displacer.hxx>
 #include <HydStatic_FormDim_Wetted.hxx>
 #include <TnbError.hxx>
@@ -100,6 +104,11 @@ namespace tnbLib
 			Debug_Null_Pointer(x);
 			CreatePlane(x);
 		}
+	}
+
+	void PrintParameter(const Marine_VesselParam& p)
+	{
+		Info << " - " << p.Name() << " = " << p() << endl;
 	}
 }
 
@@ -251,5 +260,45 @@ void tnbLib::example_stb_gmaker_creator()
 	Info << " - Overall Length = " << dimAnalysis->Parameters()->Loa() << endl;
 	Info << " - B = " << dimAnalysis->Parameters()->B() << endl;
 	Info << " - D = " << dimAnalysis->Parameters()->D() << endl;
+	Info << endl;
 	
+	auto domain = Marine_WaterLib::Domain(*hullModel->Body());
+	Debug_Null_Pointer(domain);
+
+	auto waterDomain = Marine_WaterLib::StillWaterDomain(*hullModel->Body(), domain, 8.0);
+	Debug_Null_Pointer(waterDomain);
+
+	//waterDomain->ExportToPlt(myFile);
+
+	auto wettedBody = 
+		std::dynamic_pointer_cast<marineLib::Body_Wetted>
+		(
+			Marine_BodyTools::WettedBody
+			(
+				hullModel->Body(),
+				waterDomain
+			)
+			);
+	Debug_Null_Pointer(wettedBody);
+	
+
+	auto formAnalysis = std::make_shared<formDim::Wetted>(wettedBody);
+	Debug_Null_Pointer(formAnalysis);
+
+	formAnalysis->Perform();
+	Debug_If_Condition_Message(NOT formAnalysis->IsDone(), "form analysis has not been perfomed!");
+
+	const auto& parameters = *formAnalysis->Parameters();
+	PrintParameter(parameters.App);
+	PrintParameter(parameters.Auw);
+	PrintParameter(parameters.Awl);
+	PrintParameter(parameters.Bwl);
+	PrintParameter(parameters.Fpp);
+	PrintParameter(parameters.Fuw);
+	PrintParameter(parameters.Fwl);
+	PrintParameter(parameters.Los);
+	PrintParameter(parameters.Lpp);
+	PrintParameter(parameters.Lwl);
+	PrintParameter(parameters.Mpp);
+	PrintParameter(parameters.Tm);
 }
