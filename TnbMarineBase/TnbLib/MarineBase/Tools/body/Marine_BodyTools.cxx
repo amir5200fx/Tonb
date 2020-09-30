@@ -1,11 +1,45 @@
 #include <Marine_BodyTools.hxx>
 
+#include <Cad2d_Modeler.hxx>
+#include <Cad_Tools.hxx>
+#include <Pln_Vertex.hxx>
+#include <Pln_Edge.hxx>
+#include <Pln_Tools.hxx>
+#include <Marine_Water.hxx>
 #include <Marine_BooleanOps.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_WaterDomain.hxx>
+#include <Marine_Wave.hxx>
+#include <Marine_FlatWave.hxx>
+#include <Marine_CmpSection.hxx>
 #include <Marine_SectTools.hxx>
+#include <MarineBase_Tools.hxx>
+#include <Marine_Shape.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif
+
+#include <Geom_Plane.hxx>
+#include <gp_Pln.hxx>
+#include <GeomAPI_IntSS.hxx>
+#include <BRepAlgoAPI_Section.hxx>
+#include <TopoDS.hxx>
+#include <TopoDS_Edge.hxx>
+#include <TopExp_Explorer.hxx>
+
+tnbLib::Entity3d_Box 
+tnbLib::Marine_BodyTools::BoundingBox
+(
+	const Marine_Body & theBody
+)
+{
+	const auto& sections = theBody.Sections();
+	auto b3 = MarineBase_Tools::CalcBoundingBox(sections);
+	return std::move(b3);
+}
 
 Standard_Boolean 
 tnbLib::Marine_BodyTools::IsWetted
@@ -327,13 +361,18 @@ tnbLib::Marine_BodyTools::WettedBody
 {
 	Debug_Null_Pointer(theBody);
 	Debug_Null_Pointer(theDomain);
-
+	Debug_Null_Pointer(theDomain->Water());
 	auto sections = 
 		Marine_BooleanOps::WettedSections
 		(
 			theBody->Sections(), 
-			theDomain->Waters()
+			theDomain->Water()->Sections()
 		);
+
+	if (sections.empty())
+	{
+		return nullptr;
+	}
 
 	if (theBody->ShapeType())
 	{
@@ -345,6 +384,18 @@ tnbLib::Marine_BodyTools::WettedBody
 		Debug_Null_Pointer(t);
 
 		auto wetted = BodyCreator(sections, t->Shape(), Marine_BodyType::wetted);
+
+		Marine_BodyTools::WaterSectionOnBody
+		(
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape
+			<
+			marineLib::Body_Wetted
+			>
+			>(wetted),
+			theDomain
+		);
 		return std::move(wetted);
 	}
 	else
@@ -363,12 +414,13 @@ tnbLib::Marine_BodyTools::DryBody
 {
 	Debug_Null_Pointer(theBody);
 	Debug_Null_Pointer(theDomain);
+	Debug_Null_Pointer(theDomain->Water());
 
 	auto sections =
 		Marine_BooleanOps::DrySections
 		(
 			theBody->Sections(),
-			theDomain->Waters()
+			theDomain->Water()->Sections()
 		);
 
 	if (theBody->ShapeType())
@@ -388,6 +440,144 @@ tnbLib::Marine_BodyTools::DryBody
 		auto dry = BodyCreator(sections, Marine_BodyType::dry);
 		return std::move(dry);
 	}	
+}
+
+namespace tnbLib
+{
+	Entity2d_Box CalcBoundingBox
+	(
+		const std::vector<std::shared_ptr<Pln_Curve>>& curves
+	)
+	{
+		auto iter = curves.begin();
+		auto b = (*iter)->BoundingBox(0);
+
+		iter++;
+		while (iter NOT_EQUAL curves.end())
+		{
+			b = Entity2d_Box::Union(b, (*iter)->BoundingBox(0));
+			iter++;
+		}
+		return std::move(b);
+	}
+}
+
+void tnbLib::Marine_BodyTools::WaterSectionOnBody
+(
+	const std::shared_ptr<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>& theBody,
+	const std::shared_ptr<Marine_WaterDomain>& theDomain
+)
+{
+	Debug_Null_Pointer(theBody);
+	Debug_Null_Pointer(theDomain);
+	Debug_Null_Pointer(theDomain->Wave());
+
+	const auto& shape = theBody->Shape();
+	Debug_Null_Pointer(shape);
+
+	const auto& wave = theDomain->Wave();
+	const auto& surfaceG = wave->SurfaceGeometry();
+	Debug_Null_Pointer(surfaceG);
+
+	BRepAlgoAPI_Section alg;
+	alg.ComputePCurveOn1(Standard_True);
+	alg.SetRunParallel(Standard_True);
+	
+	alg.Init2(shape->Shape());
+	alg.Approximation(Standard_True);
+
+	auto flat = std::dynamic_pointer_cast<Marine_FlatWave>(wave);
+	if (flat)
+	{
+		alg.Init1(gp_Pln(wave->PointOnWater(), wave->VerticalDirection()));
+	}
+	else
+	{
+		alg.Init1(wave->SurfaceGeometry());
+	}
+
+	alg.Build();
+
+	if (alg.Shape().IsNull())
+	{
+		return;
+	}
+
+	auto tedges = Cad_Tools::RetrieveEdges(alg.Shape());
+	
+	std::vector<Handle(Geom2d_Curve)> paraCurves;
+	if (flat)
+	{
+		paraCurves = Cad_Tools::RetrieveParaCurves
+		(
+			tedges,
+			gp_Ax2(wave->PointOnWater(), wave->VerticalDirection())
+		);
+	}
+	else
+	{
+		paraCurves = Cad_Tools::RetrieveParaCurves
+		(
+			tedges,
+			wave->SurfaceGeometry()
+		);
+	}
+	/*auto curves =
+		Pln_Tools::RetrieveCurves
+		(
+			paraCurves
+		);
+	cout << "curve size = " << curves.size() << std::endl;
+	for (const auto& x : curves)
+	{
+		cout << x->FirstCoord() << std::endl;
+		cout << x->LastCoord() << std::endl;
+		cout << std::endl;
+
+	}
+
+	const auto b = CalcBoundingBox(curves);*/
+
+	auto curves = Pln_Tools::RetrieveCurves(paraCurves);
+	auto edges = Pln_Tools::RetrieveMergedEdges(curves, 1.0e-3, 1.0e-6);
+
+	/*auto modeler = std::make_shared<Cad2d_Modeler>();
+	modeler->Import(edges);
+
+	Cad2d_Modeler::selctList l;
+	modeler->SelectAll(l);
+	modeler->MakePlane(l);*/
+	//PAUSE;
+	//auto cedges = Pln_Tools::MakeConsecutive(edges, 1.0e-3);
+
+	auto wires = Pln_Tools::RetrieveWiresNonManifold(edges);
+	auto planes = 
+		Pln_Tools::RetrievePlanes
+		(
+			wires,
+			gp_Ax2(wave->PointOnWater(), wave->VerticalDirection())
+		);
+
+	std::vector<std::shared_ptr<Marine_Section>> sections;
+	sections.reserve(planes.size());
+	for (const auto& x : planes)
+	{
+		Debug_Null_Pointer(x);
+		auto sect = 
+			Marine_SectTools::ConvertToSection
+			(
+				x,
+				Marine_SectionType::waterLine
+			);
+		Debug_Null_Pointer(sect);
+		sections.push_back(sect);
+	}
+	auto cmpSect = Marine_SectTools::CmpSectionCreator(sections);
+	Debug_Null_Pointer(cmpSect);
+	
+	cmpSect->SetLocation(wave->PointOnWater());
+
+	theBody->SetWL(std::move(cmpSect));
 }
 
 void tnbLib::Marine_BodyTools::CheckTypeConsistency

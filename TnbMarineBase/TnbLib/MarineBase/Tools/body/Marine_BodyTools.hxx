@@ -98,6 +98,8 @@ namespace tnbLib
 				const std::shared_ptr<Marine_WaterDomain>& theDomain
 			);
 
+		static void WaterSectionOnBody(const std::shared_ptr<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>& theBody, const std::shared_ptr<Marine_WaterDomain>& theDomain);
+
 		static void Heel(const std::shared_ptr<Marine_Body>& theBody, const gp_Ax1& theAx, const Standard_Real theAngle);
 
 		static void Heel(const std::shared_ptr<Marine_Body>& theBody, const gp_Ax2d& theAx);
