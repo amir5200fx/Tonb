@@ -1,5 +1,6 @@
 #include <Marine_CmptLib2.hxx>
 
+#include <Marine_Water.hxx>
 #include <Marine_CmpSection.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_BooleanOps.hxx>
@@ -81,8 +82,8 @@ tnbLib::Marine_CmptLib2::CrossCurve
 	for (const auto& x : theWaters)
 	{
 		Debug_Null_Pointer(x);
-
-		auto wetted = Marine_BooleanOps::WettedSections(theSections, x->Waters());
+		Debug_Null_Pointer(x->Water());
+		auto wetted = Marine_BooleanOps::WettedSections(theSections, x->Water()->Sections());
 
 		if (wetted.size())
 		{

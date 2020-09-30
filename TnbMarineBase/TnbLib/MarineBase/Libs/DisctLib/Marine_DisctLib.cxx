@@ -1,6 +1,7 @@
 #include <Marine_DisctLib.hxx>
 
 #include <Geo_xDistb.hxx>
+#include <Marine_Water.hxx>
 #include <Marine_WireFrameShapes.hxx>
 #include <Marine_Shapes.hxx>
 #include <Marine_Distrb.hxx>
@@ -228,7 +229,8 @@ tnbLib::Marine_DisctLib::WettedBody
 			<< abort(FatalError);
 	}
 
-	const auto& waterSections = theWaterDomain.Waters();
+	Debug_Null_Pointer(theWaterDomain.Water());
+	const auto& waterSections = theWaterDomain.Water()->Sections();
 	auto wetted = Marine_DisctTools::WettedSections(theModel.Sections(), waterSections);
 
 	body->ChangeSections() = std::move(wetted);
@@ -276,7 +278,8 @@ tnbLib::Marine_DisctLib::WettedBody
 			<< abort(FatalError);
 	}
 
-	const auto& waterSections = theWaterDomain.Waters();
+	Debug_Null_Pointer(theWaterDomain.Water());
+	const auto& waterSections = theWaterDomain.Water()->Sections();
 	auto wetted = Marine_DisctTools::WettedSections(theModel.Sections(), waterSections);
 
 	body->ChangeSections() = std::move(wetted);
@@ -385,7 +388,8 @@ tnbLib::Marine_DisctLib::WettedBody
 
 	body->SetWL(std::move(section));
 
-	const auto& waterSections = theWaterDomain.Waters();
+	Debug_Null_Pointer(theWaterDomain.Water());
+	const auto& waterSections = theWaterDomain.Water()->Sections();
 	auto& wetted = body->ChangeSections();
 
 	Standard_Integer K = 0;
@@ -437,7 +441,8 @@ tnbLib::Marine_DisctLib::WettedBody
 			<< abort(FatalError);
 	}
 
-	const auto& waterSections = theWaterDomain.Waters();
+	Debug_Null_Pointer(theWaterDomain.Water());
+	const auto& waterSections = theWaterDomain.Water()->Sections();
 	auto& wetted = body->ChangeSections();
 
 	Standard_Integer K = 0;
