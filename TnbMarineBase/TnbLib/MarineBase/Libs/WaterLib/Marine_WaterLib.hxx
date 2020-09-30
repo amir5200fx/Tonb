@@ -24,12 +24,34 @@ namespace tnbLib
 	class Marine_WaterDomain;
 	class Marine_MultLevWaterDomain;
 	class Marine_Domain;
+	class Marine_Water;
 	class Marine_Wave;
 
 	class Marine_WaterLib
 	{
 
 	public:
+
+		static std::shared_ptr<Marine_Domain> 
+			Domain
+			(
+				const marineLib::Body_Displacer& theBody
+			);
+
+		static std::shared_ptr<Marine_Domain> 
+			Domain
+			(
+				const marineLib::Body_Tank& theBody
+			);
+
+		//- Throw an exception if the body is not a hull or a tank
+		/*static std::shared_ptr<Marine_Water> 
+			StillWater
+			(
+				const Marine_Body& theBody,
+				const Marine_Domain& theDomain,
+				const Standard_Real theZ
+			);*/
 
 		//- Throw an exception if the body is not a displacer or a tank
 		static std::shared_ptr<Marine_WaterDomain>

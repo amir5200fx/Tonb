@@ -12,7 +12,8 @@
 #include <Marine_xCmpSection.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_Section.hxx>
-#include <Marine_WaterDomain_Still.hxx>
+#include <Marine_Water.hxx>
+#include <Marine_WaterDomain.hxx>
 #include <Marine_Domain.hxx>
 #include <Marine_MultLevWaterDomain.hxx>
 #include <Marine_WaterTools.hxx>
@@ -42,6 +43,62 @@
 
 #include <vector>
 
+std::shared_ptr<tnbLib::Marine_Domain>
+tnbLib::Marine_WaterLib::Domain
+(
+	const marineLib::Body_Displacer & theBody
+)
+{
+	auto domain = std::make_shared<Marine_Domain>();
+	Debug_Null_Pointer(domain);
+
+	domain->Perform(theBody.Sections());
+	return std::move(domain);
+}
+
+std::shared_ptr<tnbLib::Marine_Domain> 
+tnbLib::Marine_WaterLib::Domain
+(
+	const marineLib::Body_Tank & theBody
+)
+{
+	auto domain = std::make_shared<Marine_Domain>();
+	Debug_Null_Pointer(domain);
+
+	domain->Perform(theBody.Sections());
+	return std::move(domain);
+}
+
+//std::shared_ptr<tnbLib::Marine_Water> 
+//tnbLib::Marine_WaterLib::StillWater
+//(
+//	const Marine_Body& theBody, 
+//	const Marine_Domain& theDomain, 
+//	const Standard_Real theZ
+//)
+//{
+//	if (theBody.IsSail())
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the body must be hull or tank" << endl
+//			<< abort(FatalError);
+//	}
+//
+//#ifdef _DEBUG
+//	Marine_BodyTools::CheckTypeConsistency(theBody);
+//#endif // _DEBUG
+//
+//	Debug_Null_Pointer(theDomain.Dim());
+//	auto water = 
+//		Marine_WaterTools::StillWater
+//		(
+//			theBody.Sections(),
+//			theZ, *theDomain.Dim()
+//		);
+//	Debug_Null_Pointer(water);
+//	return std::move(water);
+//}
+
 std::shared_ptr<tnbLib::Marine_WaterDomain> 
 tnbLib::Marine_WaterLib::StillWaterDomain
 (
@@ -54,12 +111,23 @@ tnbLib::Marine_WaterLib::StillWaterDomain
 	Marine_BodyTools::CheckTypeConsistency(theBody);
 #endif // _DEBUG
 
-	auto wd = std::make_shared<marineLib::WaterDomain_Still>(theDomain, theZ);
-	Debug_Null_Pointer(wd);
 
-	auto sections = 
-		Marine_WaterTools::StillWaterSections(theBody.Sections(), theZ, theDomain->Dim());
-	wd->ChangeWaters() = std::move(sections);
+	auto wave = Marine_WaterTools::FlatWave(theDomain->Dim(), theZ);
+	Debug_Null_Pointer(wave);
+
+	wave->Perform();
+	Debug_If_Condition_Message(NOT wave->IsDone(), "the wave is not created!");
+
+	auto water = 
+		Marine_WaterTools::StillWater(theBody.Sections(), theZ, *theDomain->Dim());
+
+	auto domain = theDomain;
+	auto wd = std::make_shared<Marine_WaterDomain>
+		(
+			std::move(domain), 
+			std::move(water),
+			std::move(wave)
+			);
 	return std::move(wd);
 }
 
@@ -75,12 +143,20 @@ tnbLib::Marine_WaterLib::StillWaterDomain
 	Marine_BodyTools::CheckTypeConsistency(theBody);
 #endif // _DEBUG
 
-	auto wd = std::make_shared<marineLib::WaterDomain_Still>(theDomain, theZ);
-	Debug_Null_Pointer(wd);
+	auto wave = Marine_WaterTools::FlatWave(theDomain->Dim(), theZ);
+	Debug_Null_Pointer(wave);
 
-	auto sections =
-		Marine_WaterTools::StillWaterSections(theBody.Sections(), theZ, theDomain->Dim());
-	wd->ChangeWaters() = std::move(sections);
+	auto water =
+		Marine_WaterTools::StillWater(theBody.Sections(), theZ, *theDomain->Dim());
+
+	auto domain = theDomain;
+	auto wd = 
+		std::make_shared<Marine_WaterDomain>
+		(
+			std::move(domain),
+			std::move(water), 
+			std::move(wave)
+			);
 	return std::move(wd);
 }
 
