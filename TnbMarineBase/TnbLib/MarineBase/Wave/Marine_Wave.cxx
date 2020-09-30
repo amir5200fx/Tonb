@@ -153,7 +153,7 @@ void tnbLib::Marine_Wave::Perform()
 	//theOrigin_ = gp_Ax2(MEAN(Domain().P0(), Domain().P1()), Dir3d(0, 0, 1.0), Dir3d(1, 0, 0));
 	TransformOriginToCurrent();
 
-	auto expanded = Entity3d_Box::Union(BoundingBoxOfRotatedDomain(Domain()), Domain());
+	auto expanded = Entity3d_Box::Union(BoundingBoxOfRotatedDomain(*Domain()), *Domain());
 
 	const auto& ep0 = expanded.P0();
 	const auto& ep1 = expanded.P1();
@@ -166,4 +166,6 @@ void tnbLib::Marine_Wave::Perform()
 	TransportGeometrySurface();
 
 	TranslateSurfaceToPointOnWater(ProjectedCoordOnSurface());
+
+	Change_IsDone() = Standard_True;
 }

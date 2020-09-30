@@ -21,7 +21,7 @@ namespace tnbLib
 
 	public:
 
-		Marine_FlatWave(const Entity3d_Box& theDomain)
+		Marine_FlatWave(const std::shared_ptr<Entity3d_Box>& theDomain)
 			: Marine_Wave(theDomain)
 		{}
 
