@@ -1,12 +1,15 @@
 #include <Marine_WaterTools.hxx>
 
+#include <Dir3d.hxx>
 #include <Pnt3d.hxx>
 #include <Entity3d_Box.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad_Tools.hxx>
+#include <Marine_Water.hxx>
 #include <Marine_Wave.hxx>
 #include <Marine_WaterCurve.hxx>
+#include <Marine_FlatWave.hxx>
 #include <Marine_Sections.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_SectTools.hxx>
@@ -15,6 +18,7 @@
 #undef DebugInfo
 #endif
 
+#include <gp.hxx>
 #include <gp_Ax2.hxx>
 #include <gp_Pln.hxx>
 #include <GeomProjLib.hxx>
@@ -264,6 +268,101 @@ tnbLib::Marine_WaterTools::StillWaterSections
 		waters.push_back(std::move(section));
 	}
 	return std::move(waters);
+}
+
+std::shared_ptr<tnbLib::Marine_Water> 
+tnbLib::Marine_WaterTools::StillWater
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
+	const Standard_Real theZ, 
+	const Entity3d_Box & theDomain
+)
+{
+	auto sections = StillWaterSections(theBody, theZ, theDomain);
+
+	auto water = Water(sections);
+	Debug_Null_Pointer(water);
+
+	return std::move(water);
+}
+
+std::shared_ptr<tnbLib::Marine_Water> 
+tnbLib::Marine_WaterTools::Water
+(
+	const std::vector<std::shared_ptr<Marine_Section>>& theSections
+)
+{
+	std::vector<std::shared_ptr<marineLib::Section_Water>> wSections;
+	wSections.reserve(theSections.size());
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		if (NOT x->IsWaterSection())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the section is not water!" << endl
+				<< abort(FatalError);
+		}
+
+		auto w = std::dynamic_pointer_cast<marineLib::Section_Water>(x);
+		Debug_Null_Pointer(w);
+		wSections.push_back(std::move(w));
+	}
+	auto water = std::make_shared<Marine_Water>(std::move(wSections));
+	return std::move(water);
+}
+
+std::shared_ptr<tnbLib::Marine_Water> 
+tnbLib::Marine_WaterTools::Water
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
+	const std::shared_ptr<Marine_Wave>& theWave,
+	const Entity3d_Box & theDomain, 
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	if (std::dynamic_pointer_cast<Marine_FlatWave>(theWave))
+	{
+		const auto z = theWave->PointOnWater().Z();
+		auto water = StillWater(theBody, z, theDomain);
+		Debug_Null_Pointer(water);
+		return std::move(water);
+	}
+	else
+	{
+		auto sections = WaterSections
+		(
+			theBody, *theWave,
+			theDomain, theMinTol,
+			theMaxTol
+		);
+
+		auto water = Water(sections);
+		Debug_Null_Pointer(water);
+		return std::move(water);
+	}
+}
+
+std::shared_ptr<tnbLib::Marine_Wave> 
+tnbLib::Marine_WaterTools::FlatWave
+(
+	const std::shared_ptr<Entity3d_Box>& theDomain, 
+	const Standard_Real theZ
+)
+{
+	auto wave = std::make_shared<Marine_FlatWave>(theDomain);
+	Debug_Null_Pointer(wave);
+
+	auto pointOnWater = theDomain->CalcCentre();
+	pointOnWater.SetZ(theZ);
+
+	wave->SetVerticalDirection(Dir3d(gp::DZ().XYZ()));
+	wave->SetPointOnWater(pointOnWater);
+	wave->SetCurrent(Vec3d(-1, 0, 0));
+	wave->SetWind(Vec3d(-1, 0, 0));
+
+	return std::move(wave);
 }
 
 std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
