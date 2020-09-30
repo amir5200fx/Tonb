@@ -8,6 +8,7 @@
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 #include <Entity2d_Box.hxx>
+#include <Entity3d_Box.hxx>
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Pln_Tools.hxx>
@@ -23,7 +24,6 @@
 #include <Marine_Sections.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_WaterDomain.hxx>
-#include <Marine_WaterDomain_Still.hxx>
 #include <Marine_SectTools.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <UnitSystem.hxx>
@@ -45,6 +45,52 @@
 #include <Geom2dAPI_Interpolate.hxx>
 #include <TColgp_HArray1OfPnt2d.hxx>
 #include <StdFail_NotDone.hxx>
+
+tnbLib::Entity2d_Box
+tnbLib::MarineBase_Tools::CalcBoundingBox2D
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+#ifdef _DEBUG
+	Check_xCmptSections(theSections);
+#endif // _DEBUG
+
+	Debug_If_Condition(theSections.empty());
+	auto iter = theSections.begin();
+	auto b = (*iter)->BoundingBox();
+	iter++;
+	while (iter NOT_EQUAL theSections.end())
+	{
+		b = Entity2d_Box::Union(b, (*iter)->BoundingBox());
+		iter++;
+	}
+	return std::move(b);
+}
+
+tnbLib::Entity3d_Box 
+tnbLib::MarineBase_Tools::CalcBoundingBox
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	Debug_If_Condition(theSections.empty());
+	auto box2 = CalcBoundingBox2D(theSections);
+
+	const auto y0 = box2.P0().X();
+	const auto y1 = box2.P1().X();
+	const auto z0 = box2.P0().Y();
+	const auto z1 = box2.P1().Y();
+
+	Debug_Null_Pointer(theSections[0]);
+	const auto x0 = theSections[0]->X();
+
+	Debug_Null_Pointer(theSections[theSections.size() - 1]);
+	const auto x1 = theSections[theSections.size() - 1]->X();
+
+	Entity3d_Box b3(Pnt3d(x0, y0, z0), Pnt3d(x1, y1, z1));
+	return std::move(b3);
+}
 
 Handle(Geom2d_Curve)
 tnbLib::MarineBase_Tools::Curve
@@ -1513,4 +1559,21 @@ tnbLib::MarineBase_Tools::CreateGraph(const Handle(Geom2d_Curve)& theCurve)
 	curves.push_back(std::move(c));
 
 	return std::move(g);
+}
+
+void tnbLib::MarineBase_Tools::Check_xCmptSections
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		if (NOT std::dynamic_pointer_cast<Marine_xCmpSection>(x))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the section is no xSection" << endl
+				<< abort(FatalError);
+		}
+	}
 }

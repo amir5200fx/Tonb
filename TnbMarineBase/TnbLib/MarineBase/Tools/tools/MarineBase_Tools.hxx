@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Standard_Handle.hxx>
+#include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <dimensionedScalar.hxx>
 #include <Marine_SectionsFwd.hxx>
@@ -42,6 +43,15 @@ namespace tnbLib
 	{
 
 	public:
+
+		static Entity2d_Box 
+			CalcBoundingBox2D
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
+
+		static Entity3d_Box CalcBoundingBox(const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections);
+
 
 		/*template<class SectionType>
 		static std::shared_ptr<Cad2d_Plane> 
@@ -380,6 +390,11 @@ namespace tnbLib
 			(
 				const Handle(Geom2d_Curve)& theCurve
 			);
+
+		static void Check_xCmptSections
+		(
+			const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+		);
 	};
 }
 
