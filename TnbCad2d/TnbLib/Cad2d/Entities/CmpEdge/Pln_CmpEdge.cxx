@@ -11,61 +11,61 @@
 
 #include <Adt_AvlTree.hxx>
 
-void tnbLib::Pln_CmpEdge::Insert
-(
-	const std::shared_ptr<Pln_Edge>& theEdge
-)
-{
-	if (theEdges_.empty())
-	{
-		theEdges_.push_back(theEdge);
-		return;
-	}
-
-	const auto& edge0 = theEdges_[theEdges_.size() - 1];
-	const auto v = Pln_Tools::Intersection(edge0, theEdge);
-	if (NOT v)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the edges are not consecutive!" << endl
-			<< abort(FatalError);
-	}
-
-	if (theEdge->Vtx1() IS_EQUAL v)
-	{
-		theEdge->Reverse();
-	}
-
-	theEdges_.push_back(theEdge);
-}
-
-void tnbLib::Pln_CmpEdge::Insert
-(
-	std::shared_ptr<Pln_Edge>&& theEdge
-)
-{
-	if (theEdges_.empty())
-	{
-		theEdges_.push_back(std::move(theEdge));
-		return;
-	}
-
-	const auto& edge0 = theEdges_[theEdges_.size() - 1];
-	const auto v = Pln_Tools::Intersection(edge0, theEdge);
-	if (NOT v)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the edges are not consecutive!" << endl
-			<< abort(FatalError);
-	}
-
-	if (theEdge->Vtx1() IS_EQUAL v)
-	{
-		theEdge->Reverse();
-	}
-
-	theEdges_.push_back(std::move(theEdge));
-}
+//void tnbLib::Pln_CmpEdge::Insert
+//(
+//	const std::shared_ptr<Pln_Edge>& theEdge
+//)
+//{
+//	if (theEdges_.empty())
+//	{
+//		theEdges_.push_back(theEdge);
+//		return;
+//	}
+//
+//	const auto& edge0 = theEdges_[theEdges_.size() - 1];
+//	const auto v = Pln_Tools::Intersection(edge0, theEdge);
+//	if (NOT v)
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the edges are not consecutive!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	if (theEdge->Vtx1() IS_EQUAL v)
+//	{
+//		theEdge->Reverse();
+//	}
+//
+//	theEdges_.push_back(theEdge);
+//}
+//
+//void tnbLib::Pln_CmpEdge::Insert
+//(
+//	std::shared_ptr<Pln_Edge>&& theEdge
+//)
+//{
+//	if (theEdges_.empty())
+//	{
+//		theEdges_.push_back(std::move(theEdge));
+//		return;
+//	}
+//
+//	const auto& edge0 = theEdges_[theEdges_.size() - 1];
+//	const auto v = Pln_Tools::Intersection(edge0, theEdge);
+//	if (NOT v)
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the edges are not consecutive!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	if (theEdge->Vtx1() IS_EQUAL v)
+//	{
+//		theEdge->Reverse();
+//	}
+//
+//	theEdges_.push_back(std::move(theEdge));
+//}
 
 Standard_Boolean 
 tnbLib::Pln_CmpEdge::IsValidForWire
