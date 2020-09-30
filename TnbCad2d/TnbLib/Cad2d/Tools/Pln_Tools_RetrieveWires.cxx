@@ -5,6 +5,7 @@
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Wire.hxx>
+#include <Pln_CmpEdge.hxx>
 #include <Cad2d_RemoveNonManifold.hxx>
 #include <Adt_AvlTree.hxx>
 
@@ -63,47 +64,80 @@ tnbLib::Pln_Tools::RetrieveOrientation
 
 namespace tnbLib
 {
-	std::shared_ptr<Pln_Edge>
-		Next
-		(
-			const std::shared_ptr<Pln_Edge>& theEdge
-		)
+	namespace retrieveWires
 	{
-		if (theEdge->IsRing())
+		std::shared_ptr<Pln_Edge>
+			NextEdge
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge,
+				const std::shared_ptr<Pln_Vertex>& vtx
+			)
 		{
-			FatalErrorIn("std::shared_ptr<Pln_Edge> Next(const std::shared_ptr<Pln_Edge>& theEdge)")
-				<< "Invalid wire: contains at least one ring!" << endl
+			if (theEdge->IsRing())
+			{
+				FatalErrorIn("std::shared_ptr<Pln_Edge> Next(const std::shared_ptr<Pln_Edge>& theEdge)")
+					<< "Invalid wire: contains at least one ring!" << endl
+					<< abort(FatalError);
+			}
+
+			if (NOT vtx)
+			{
+				FatalErrorIn("std::shared_ptr<Plane_Edge> Next(const std::shared_ptr<Plane_Edge>& theEdge)")
+					<< "Null vertex" << endl
+					<< abort(FatalError);
+			}
+
+			if (NOT vtx->IsManifold())
+			{
+				FatalErrorIn("std::shared_ptr<Plane_Edge> Next(const std::shared_ptr<Plane_Edge>& theEdge)")
+					<< "The vertex is non-manifold" << endl
+					<< abort(FatalError);
+			}
+
+			const auto& edges = vtx->RetrieveEdges();
+
+			Debug_If_Condition(edges.size() NOT_EQUAL 2);
+
+			Debug_Null_Pointer(edges[0].lock());
+			Debug_Null_Pointer(edges[1].lock());
+
+			if (edges[0].lock() IS_EQUAL theEdge)
+			{
+				return edges[1].lock();
+			}
+			if (edges[1].lock() IS_EQUAL theEdge)
+			{
+				return edges[0].lock();
+			}
+			FatalErrorIn(FunctionSIG)
+				<< "Unable to find the next edge" << endl
 				<< abort(FatalError);
+			return nullptr;
 		}
 
-		const auto& vtx = theEdge->Vtx1();
-		if (NOT vtx)
+		std::shared_ptr<Pln_Vertex>
+			NextNode
+			(
+				const std::shared_ptr<Pln_Vertex>& theNode,
+				const std::shared_ptr<Pln_Edge>& theEdge
+			)
 		{
-			FatalErrorIn("std::shared_ptr<Plane_Edge> Next(const std::shared_ptr<Plane_Edge>& theEdge)")
-				<< "Null vertex" << endl
-				<< abort(FatalError);
+			Debug_Null_Pointer(theNode);
+			Debug_Null_Pointer(theEdge);
+
+			const auto& v0 = theEdge->Vtx0();
+			const auto& v1 = theEdge->Vtx1();
+
+			if (v0 IS_EQUAL theNode)
+			{
+				return v1;
+			}
+			if (v1 IS_EQUAL theNode)
+			{
+				return v0;
+			}
+			return nullptr;
 		}
-
-		if (NOT vtx->IsManifold())
-		{
-			FatalErrorIn("std::shared_ptr<Plane_Edge> Next(const std::shared_ptr<Plane_Edge>& theEdge)")
-				<< "The vertex is non-manifold" << endl
-				<< abort(FatalError);
-		}
-
-		std::vector<std::weak_ptr<Pln_Edge>> list;
-		vtx->RetrieveEdgesTo(list);
-
-		Debug_If_Condition(list.size() NOT_EQUAL 2);
-
-		Debug_Null_Pointer(list[0].lock());
-		Debug_Null_Pointer(list[1].lock());
-
-		auto edge0 = list[0].lock();
-		auto edge1 = list[1].lock();
-
-		if (edge0 IS_EQUAL theEdge) return edge1;
-		else return edge0;
 	}
 
 	std::shared_ptr<Pln_Wire>
@@ -119,52 +153,43 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto list = std::make_shared<std::vector<std::shared_ptr<Pln_Edge>>>();
+		std::vector<std::shared_ptr<Pln_Edge>> list;
 
 		std::shared_ptr<Pln_Edge> edge;
 		theRegister.Root(edge);
+		theRegister.Remove(edge);
 
 		if (edge->IsRing())
 		{
-			list->push_back(edge);
-			theRegister.Remove(edge);
+			list.push_back(edge);
+			//theRegister.Remove(edge);
 
-			auto compound = Pln_Tools::MakeCompoundEdge(*list);
+			auto compound = Pln_Tools::MakeCompoundEdge(list);
 
 			auto wire = std::make_shared<Pln_Wire>(0, compound);
 			return std::move(wire);
 		}
 
-		auto root = edge;
-		list->push_back(edge);
+		const auto& vtx = edge->Vtx0();
+		auto nextEdge = edge;
+		list.push_back(nextEdge);
 
-		Standard_Boolean cycle = Standard_False;
-		while (NOT theRegister.IsEmpty())
+		auto nextVtx = retrieveWires::NextNode(vtx, nextEdge);
+		while (nextVtx NOT_EQUAL vtx)
 		{
-			theRegister.Remove(edge);
-			edge = Next(edge);
+			nextEdge = retrieveWires::NextEdge(nextEdge, nextVtx);
 
-			if (edge IS_EQUAL root)
-			{
-				cycle = Standard_True;
-				break;
-			}
-			list->push_back(edge);
+			theRegister.Remove(nextEdge);
+			list.push_back(nextEdge);
+
+			nextVtx = retrieveWires::NextNode(nextVtx, nextEdge);
 		}
 
-		if (NOT cycle)
-		{
-			FatalErrorIn("wire_ptr TrackWire(Adt_AvlTree<std::shared_ptr<Plane_Edge>>& theRegister)")
-				<< "found no wire" << endl
-				<< abort(FatalError);
-		}
-
-		auto compound = Pln_Tools::MakeCompoundEdge(*list);
+		auto compound = Pln_Tools::MakeCompoundEdge(list);
 
 		Pln_Tools::SameSense(compound);
 
 		auto wire = std::make_shared<Pln_Wire>(0, compound);
-
 		return std::move(wire);
 	}
 }
@@ -195,7 +220,10 @@ tnbLib::Pln_Tools::RetrieveWires
 
 	while (true)
 	{
-		list.push_back(TrackWire(Register));
+		auto wire = TrackWire(Register);
+		Debug_Null_Pointer(wire);
+
+		list.push_back(std::move(wire));
 		if (Register.IsEmpty())
 		{
 			break;
@@ -221,6 +249,23 @@ tnbLib::Pln_Tools::RetrieveWiresNonManifold
 	{
 		if (IsManifold(theEdges))
 		{
+			/*auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+			Debug_Null_Pointer(cmpEdge);
+
+			for (const auto& e : theEdges)
+			{
+				cmpEdge->Insert(e);
+			}
+
+			SameSense(cmpEdge);
+
+			auto wire = std::make_shared<Pln_Wire>(std::move(cmpEdge));
+			Debug_Null_Pointer(wire);
+
+			std::vector<std::shared_ptr<Pln_Wire>> l;
+			l.push_back(std::move(wire));
+
+			return std::move(l);*/
 			auto wires = RetrieveWires(theEdges);
 			return std::move(wires);
 		}
@@ -249,10 +294,22 @@ tnbLib::Pln_Tools::RetrieveWiresNonManifold
 		Debug_Null_Pointer(x);
 		auto edges = x->RetrieveEdges();
 
-		auto wires = RetrieveWires(theEdges);
-		Debug_If_Condition(wires.size() NOT_EQUAL 1);
+		auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+		Debug_Null_Pointer(cmpEdge);
 
-		auto& wire = wires[0];
+		for (auto& e : edges)
+		{
+			cmpEdge->Insert(std::move(e));
+		}
+
+		/*auto wires = RetrieveWires(theEdges);*/
+		SameSense(cmpEdge);
+		
+		auto wire = std::make_shared<Pln_Wire>(std::move(cmpEdge));
+		Debug_Null_Pointer(wire);
+
+		wire->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+
 		l.push_back(std::move(wire));
 	}
 	return std::move(l);

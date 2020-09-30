@@ -93,15 +93,6 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 			);
 
-		//- WARNING! the edges and the vertices will be removed from the corners
-		static std::vector<std::shared_ptr<Pln_Edge>> 
-			MakeConsecutive
-			(
-				const std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners
-			);
-
-		static std::vector<std::shared_ptr<Pln_Edge>> MakeConsecutive(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
-
 		static std::vector<std::shared_ptr<Pln_Edge>> Merged(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
 
 		static std::shared_ptr<Pln_Wire>
@@ -324,6 +315,13 @@ namespace tnbLib
 			BackwardEdge
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx
+			);
+
+		static std::vector<std::shared_ptr<Pln_Edge>>
+			MakeConsecutive
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+				const Standard_Real theTol
 			);
 
 		static std::shared_ptr<Pln_Vertex>

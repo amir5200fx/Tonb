@@ -17,6 +17,7 @@
 #include <Pln_CmpEdge.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler_Corner.hxx>
+#include <Cad2d_Modeler_Tools.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
@@ -108,14 +109,20 @@ tnbLib::Pln_Tools::MakeCompoundEdge
 {
 	auto pln = std::make_shared<Pln_CmpEdge>();
 
-	if (theEdges.size() IS_EQUAL 1)
+	/*if (theEdges.size() IS_EQUAL 1)
 	{
 		pln->Insert(theEdges[0]);
 
 		return std::move(pln);
+	}*/
+
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		pln->Insert(x);
 	}
 
-	pln->Insert(theEdges[0]);
+	/*pln->Insert(theEdges[0]);
 
 	forThose(Index, 1, theEdges.size() - 1)
 	{
@@ -127,46 +134,10 @@ tnbLib::Pln_Tools::MakeCompoundEdge
 		}
 
 		pln->Insert(theEdges[Index]);
-	}
+	}*/
 
 	return std::move(pln);
 }
-
-//std::vector<std::shared_ptr<tnbLib::Pln_Edge>>
-//tnbLib::Pln_Tools::MakeConsecutive
-//(
-//	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
-//)
-//{
-//	std::vector<std::shared_ptr<Pln_Edge>> edges;
-//	edges.reserve(theEdges.size());
-//
-//	if (theEdges.size() IS_EQUAL 1)
-//	{
-//		edges.push_back(theEdges[0]);
-//		return std::move(edges);
-//	}
-//
-//	auto b = RetrieveBoundingBox(theEdges);
-//	const auto expB = b.Expanded(b.Diameter()*1.0E-4);
-//	const auto vertices = RetrieveVertices(theEdges);
-//
-//	Geo_AdTree<std::shared_ptr<cad2dLib::Modeler_Corner>> engine;
-//	engine.SetGeometryCoordFunc(&cad2dLib::Modeler_Corner::GetCoord);
-//	engine.SetGeometryRegion(std::move(expB));
-//
-//	for (const auto& x : vertices)
-//	{
-//		Debug_Null_Pointer(x);
-//		ImportToCorner(x, engine);
-//	}
-//
-//	std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>> corners;
-//	engine.RetrieveFromGeometryTo(corners);
-//	engine.Clear();
-//
-//
-//}
 
 namespace tnbLib
 {
@@ -1796,6 +1767,18 @@ tnbLib::Pln_Tools::BackwardEdge
 			return std::move(edge);
 	}
 	return nullptr;
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
+tnbLib::Pln_Tools::MakeConsecutive
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+	const Standard_Real theTol
+)
+{
+	auto edges = 
+		cad2dLib::Modeler_Tools::MakeConsecutive(theEdges, theTol);
+	return std::move(edges);
 }
 
 namespace tnbLib
