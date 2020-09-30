@@ -184,7 +184,18 @@ namespace tnbLib
 			);
 
 		static std::vector<Handle(Geom2d_Curve)>
-			RetrieveParaCurves(const std::vector<TopoDS_Edge>& theEdges, const gp_Ax2& theSystem);
+			RetrieveParaCurves
+			(
+				const std::vector<TopoDS_Edge>& theEdges, 
+				const gp_Ax2& theSystem
+			);
+
+		static std::vector<Handle(Geom2d_Curve)>
+			RetrieveParaCurves
+			(
+				const std::vector<TopoDS_Edge>& theEdges,
+				const Handle(Geom_Surface) theSurface
+			);
 
 		static Standard_Boolean 
 			IsClosed

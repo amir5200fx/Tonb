@@ -1100,6 +1100,38 @@ tnbLib::Cad_Tools::RetrieveParaCurves
 	return std::move(curves);
 }
 
+std::vector<Handle(Geom2d_Curve)> 
+tnbLib::Cad_Tools::RetrieveParaCurves
+(
+	const std::vector<TopoDS_Edge>& theEdges, 
+	const Handle(Geom_Surface) theSurface
+)
+{
+	TopLoc_Location loc;
+
+	std::vector<Handle(Geom2d_Curve)> curves;
+	curves.reserve(theEdges.size());
+
+	for (const auto& x : theEdges)
+	{
+		Standard_Real first, last;
+		auto curve = BRep_Tool::CurveOnSurface(x, theSurface, loc, first, last);
+
+		if (curve.IsNull())
+		{
+			FatalErrorIn("std::vector<Handle(Geom2d_Curve)> Cad_Tools::RetrieveParaCurves(Args...)")
+				<< "Failed to Calculate the parametric curve" << endl
+				<< abort(FatalError);
+		}
+
+		auto bounded = Pln_Tools::ConvertToTrimmedCurve(curve, first, last);
+		Debug_Null_Pointer(bounded);
+
+		curves.push_back(std::move(bounded));
+	}
+	return std::move(curves);
+}
+
 std::vector<Handle(Poly_Triangulation)> 
 tnbLib::Cad_Tools::RetrieveTriangulation
 (
