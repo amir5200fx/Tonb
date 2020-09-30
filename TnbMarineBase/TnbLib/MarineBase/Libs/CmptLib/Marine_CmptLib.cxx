@@ -416,21 +416,21 @@ tnbLib::Marine_CmptLib::CalcBML
 	return std::move(param);
 }
 
-//tnbLib::marineLib::TM 
-//tnbLib::Marine_CmptLib::CalcTM
-//(
-//	const Marine_WettedBody & theBody
-//)
-//{
-//	Debug_Null_Pointer(theBody.Mid());
-//	const auto& mid = *theBody.Mid();
-//
-//	const auto b = mid.BoundingBox();
-//	const auto[dx, dy] = b.Length();
-//
-//	marineLib::TM param(dy);
-//	return std::move(param);
-//}
+tnbLib::marineLib::TM
+tnbLib::Marine_CmptLib::CalcTM
+(
+	const marineLib::Body_Wetted& theBody
+)
+{
+	Debug_Null_Pointer(theBody.Mid());
+	const auto& mid = *theBody.Mid();
+
+	const auto b = mid.BoundingBox();
+	const auto[dx, dy] = b.Length();
+
+	marineLib::TM param(dy);
+	return std::move(param);
+}
 
 tnbLib::marineLib::AM 
 tnbLib::Marine_CmptLib::CalcAM
