@@ -421,6 +421,9 @@ tnbLib::Marine_BooleanOps::WettedSection
 	auto cmpSect = Marine_SectTools::CmpSectionCreator(sectList);
 	Debug_Null_Pointer(cmpSect);
 
+	auto loc = theSection->CoordinateSystem().Location();
+	cmpSect->SetLocation(loc);
+
 	return std::move(cmpSect);
 }
 
@@ -488,6 +491,9 @@ tnbLib::Marine_BooleanOps::DrySection
 
 	auto cmpSect = Marine_SectTools::CmpSectionCreator(sectList);
 	Debug_Null_Pointer(cmpSect);
+
+	auto loc = theSection->CoordinateSystem().Location();
+	cmpSect->SetLocation(loc);
 
 	return std::move(cmpSect);
 }
