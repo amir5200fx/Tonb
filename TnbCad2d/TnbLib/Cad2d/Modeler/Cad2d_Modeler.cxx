@@ -5,6 +5,7 @@
 #include <Pln_Edge.hxx>
 #include <Pln_Ring.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_Wire.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Subdivide.hxx>
 #include <Cad2d_Modeler_Segment.hxx>
@@ -843,9 +844,12 @@ void tnbLib::Cad2d_Modeler::Trim
 	}
 }
 
-//void tnbLib::Cad2d_Modeler::MakePlanes()
+//void tnbLib::Cad2d_Modeler::MakePlanes(selctList & theList)
 //{
+//	const auto items = theList.RetrieveItems();
+//	const auto tol = Radius();
 //
+//	
 //}
 
 Standard_Integer 
@@ -880,6 +884,8 @@ tnbLib::Cad2d_Modeler::MakePlane
 	}
 
 	const auto& wire = wires[0];
+
+	wire->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
 
 	const auto plane = Pln_Tools::MakePlane(wire, gp::XOY());
 	Debug_Null_Pointer(plane);
