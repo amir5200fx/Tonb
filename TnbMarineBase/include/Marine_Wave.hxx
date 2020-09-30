@@ -120,7 +120,7 @@ namespace tnbLib
 		Vec3d theCurrent_;
 		Vec3d theWind_;
 
-		const Entity3d_Box& theDomain_;
+		std::shared_ptr<Entity3d_Box> theDomain_;
 		gp_Ax2 theOrigin_;
 
 		Pnt3d ProjectedCoordOnSurface() const;
@@ -131,7 +131,7 @@ namespace tnbLib
 
 	protected:
 
-		Marine_Wave(const Entity3d_Box& theDomain)
+		Marine_Wave(const std::shared_ptr<Entity3d_Box>& theDomain)
 			: theDomain_(theDomain)
 		{}
 

@@ -256,12 +256,6 @@
     <Filter Include="TnbLib\MarineBase\Entities\WaterDomain">
       <UniqueIdentifier>{16f554ba-1bd9-4e10-8e48-acd8412c35bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Entities\WaterDomain\Still">
-      <UniqueIdentifier>{d8eb8a26-40d8-4971-a1a9-62fb6d13cfe9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Entities\WaterDomain\Wave">
-      <UniqueIdentifier>{9d374584-b2d7-4094-a0ab-b878a49dcb53}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\Domain">
       <UniqueIdentifier>{ff176b65-da7e-4174-b41e-fc4e194e8a87}</UniqueIdentifier>
     </Filter>
@@ -607,6 +601,9 @@
     <Filter Include="TnbLib\MarineBase\Parameter\TRIMANG">
       <UniqueIdentifier>{2791a6ef-8b54-4aef-ae38-a9a72721fb6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Water">
+      <UniqueIdentifier>{f8f995eb-5bf2-4c82-a8ae-96dffb4f404b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -839,9 +836,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\WaterDomain\Marine_WaterDomain.hxx">
       <Filter>TnbLib\MarineBase\Entities\WaterDomain</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\WaterDomain\Still\Marine_WaterDomain_Still.hxx">
-      <Filter>TnbLib\MarineBase\Entities\WaterDomain\Still</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\Domain\Marine_Domain.hxx">
       <Filter>TnbLib\MarineBase\Entities\Domain</Filter>
@@ -1218,6 +1212,9 @@
     <ClInclude Include="TnbLib\MarineBase\Parameter\TRIMANG\Marine_VesselParam_TRIMANG.hxx">
       <Filter>TnbLib\MarineBase\Parameter\TRIMANG</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Water\Marine_Water.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Water</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1279,9 +1276,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\WaterDomain\Marine_WaterDomain.cxx">
       <Filter>TnbLib\MarineBase\Entities\WaterDomain</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Entities\WaterDomain\Still\Marine_WaterDomain_Still.cxx">
-      <Filter>TnbLib\MarineBase\Entities\WaterDomain\Still</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Domain\Marine_Domain.cxx">
       <Filter>TnbLib\MarineBase\Entities\Domain</Filter>
@@ -1525,6 +1519,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Tools\water\Marine_WaterTools.cxx">
       <Filter>TnbLib\MarineBase\Tools\water</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Water\Marine_Water.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Water</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

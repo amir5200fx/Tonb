@@ -17,6 +17,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Pln_Wire;
+	class Marine_Water;
 	class Marine_Wave;
 	class Marine_Section;
 	class Marine_CmpSection;
@@ -52,6 +53,37 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
 				const Standard_Real theZ,
 				const Entity3d_Box& theDomain
+			);
+
+		static std::shared_ptr<Marine_Water>
+			StillWater
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody, 
+				const Standard_Real theZ,
+				const Entity3d_Box& theDomain
+			);
+
+		static std::shared_ptr<Marine_Water>
+			Water
+			(
+				const std::vector<std::shared_ptr<Marine_Section>>& theSections
+			);
+
+		static std::shared_ptr<Marine_Water>
+			Water
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody, 
+				const std::shared_ptr<Marine_Wave>& theWave, 
+				const Entity3d_Box& theDomain,
+				const Standard_Real theMinTol, 
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<Marine_Wave> 
+			FlatWave
+			(
+				const std::shared_ptr<Entity3d_Box>& theDomain,
+				const Standard_Real theZ
 			);
 
 		static std::vector<std::shared_ptr<Marine_Section>>
