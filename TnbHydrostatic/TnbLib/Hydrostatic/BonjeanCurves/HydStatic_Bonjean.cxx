@@ -4,6 +4,7 @@
 #include <Pln_Tools.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_Body.hxx>
+#include <Marine_Water.hxx>
 #include <Marine_WaterLib.hxx>
 #include <Marine_WaterDomain.hxx>
 #include <Marine_BooleanOps.hxx>
@@ -148,7 +149,8 @@ void tnbLib::HydStatic_Bonjean::Perform()
 		auto domain = Marine_WaterLib::StillWaterDomain(Body(), Domain(), z);
 		Debug_Null_Pointer(domain);
 
-		const auto& wSections = domain->Waters();
+		Debug_Null_Pointer(domain->Water());
+		const auto& wSections = domain->Water()->Sections();
 
 		Standard_Integer k = 0;
 		for (const auto& w : wSections)

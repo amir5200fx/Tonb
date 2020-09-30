@@ -597,6 +597,9 @@
     <ClInclude Include="TnbLib\Hydrostatic\FormDim\Wetted\HydStatic_FormDim_Wetted.hxx">
       <Filter>TnbLib\Hydrostatic\FormDim\Wetted</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\FormDim\HydStatic_FormDims.hxx">
+      <Filter>TnbLib\Hydrostatic\FormDim</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx">

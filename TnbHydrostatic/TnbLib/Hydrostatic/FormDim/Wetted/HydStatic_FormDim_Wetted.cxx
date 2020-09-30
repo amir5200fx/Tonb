@@ -185,6 +185,8 @@ void tnbLib::formDim::Wetted::AllocateMemory()
 	Debug_Null_Pointer(p);
 
 	ChangeParameters() = std::move(p);
+
+	theAppMode_ = appMode::Auto;
 }
 
 tnbLib::formDim::Wetted::Wetted()
@@ -212,6 +214,8 @@ void tnbLib::formDim::Wetted::Perform
 			<< "the body has not been loaded!" << endl
 			<< abort(FatalError);
 	}
+
+	AllocateMemory();
 
 	CalcFUW();
 	CalcAUW();
@@ -251,4 +255,12 @@ void tnbLib::formDim::Wetted::LoadBody
 )
 {
 	theBody_ = theBody;
+}
+
+void tnbLib::formDim::Wetted::SetAppMode
+(
+	const appMode mode
+)
+{
+	theAppMode_ = mode;
 }
