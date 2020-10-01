@@ -90,6 +90,7 @@
     <ClInclude Include="TnbLib\Hydrostatic\FormCoeff\HydStatic_FormCoeff.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\FormDim\Displacer\HydStatic_FormDim_Displacer.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\FormDim\HydStatic_FormDims.hxx" />
+    <ClInclude Include="TnbLib\Hydrostatic\FormDim\HydStatic_FormDimsFwd.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\FormDim\Wetted\HydStatic_FormDim_Wetted.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\FunLib\HydStatic_FunLib.hxx" />
     <ClInclude Include="TnbLib\Hydrostatic\GZ\HydStatic_GZ.hxx" />
