@@ -22,9 +22,6 @@
     <Filter Include="TnbLib\SectPx\Entities\Edge">
       <UniqueIdentifier>{f1dcf55d-ad60-4216-9a2d-97a147efa39a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\SectPx\Entities\Frame">
-      <UniqueIdentifier>{a49d66b5-9b8b-4fca-be6d-490a38a62d37}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\SectPx\Entities\Interface">
       <UniqueIdentifier>{fda1f906-a577-4cd7-a3f9-5207359ec956}</UniqueIdentifier>
     </Filter>
@@ -234,6 +231,48 @@
     </Filter>
     <Filter Include="TnbLib\SectPx\FieldFun\nonParameter\expr">
       <UniqueIdentifier>{0f905f0c-e14f-4819-96c5-8679b8e4a900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers">
+      <UniqueIdentifier>{f4defc64-5cb2-4934-a4dc-2d8d304bc03d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Parameter">
+      <UniqueIdentifier>{16929814-ed7e-48f2-8f2b-94ba8eb0396d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Point">
+      <UniqueIdentifier>{3c8d6b04-490c-4fec-867f-7dafeb150b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Tools\Pnt">
+      <UniqueIdentifier>{8dc3be19-a9bf-4142-8952-6fe1d36b18f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Node">
+      <UniqueIdentifier>{ea8fbab8-260c-4fdf-9f32-7ed2e8622070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\GeometricMap">
+      <UniqueIdentifier>{17437ea8-7d2d-4cc5-bb26-adc8ada23867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\TopoProfile">
+      <UniqueIdentifier>{80730d1e-c87f-44ed-bc37-c91dc60573fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Profile">
+      <UniqueIdentifier>{593102c2-1bf5-4f14-8757-4f33bb59f3b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Tools\tools">
+      <UniqueIdentifier>{79da3e98-deee-4a0e-80e8-a8b8ca40d007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Interface">
+      <UniqueIdentifier>{d0106773-6ff0-48f4-9352-2b318e066e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\CmptProfile">
+      <UniqueIdentifier>{064a0722-f4a8-4fb9-a4cf-a7554f5c724c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Frame">
+      <UniqueIdentifier>{6f4ed457-97cb-41a0-a5da-e8193213f651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FrameAPI">
+      <UniqueIdentifier>{ef9bd7d1-7ad8-49a6-abb3-aa09217bbcb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Script">
+      <UniqueIdentifier>{d19d2abb-0648-4575-b0d5-c1cc4ceb91ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -531,6 +570,57 @@
     <ClInclude Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_Expr.hxx">
       <Filter>TnbLib\SectPx\FieldFun\nonParameter\expr</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\SectPx_Maker.hxx">
+      <Filter>TnbLib\SectPx\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\SectPx_Makers.hxx">
+      <Filter>TnbLib\SectPx\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\SectPx_MakersFwd.hxx">
+      <Filter>TnbLib\SectPx\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Parameter\SectPx_ParameterMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Point\SectPx_PointMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Point\SectPx_PointMakerM.hxx">
+      <Filter>TnbLib\SectPx\Makers\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Tools\Pnt\SectPx_PntTools.hxx">
+      <Filter>TnbLib\SectPx\Tools\Pnt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Node\SectPx_NodeMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\GeometricMap\SectPx_GeometricMapMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\GeometricMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\TopoProfile\SectPx_TopoProfileMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\TopoProfile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Profile\SectPx_ProfileMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Tools\tools\SectPx_Tools.hxx">
+      <Filter>TnbLib\SectPx\Tools\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Interface\SectPx_InterfaceMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\CmptProfile\SectPx_CmptProfileMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\CmptProfile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Frame\SectPx_Frame.hxx">
+      <Filter>TnbLib\SectPx\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FrameAPI\SectPx_FrameAPI.hxx">
+      <Filter>TnbLib\SectPx\FrameAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Script\SectPx_Script.hxx">
+      <Filter>TnbLib\SectPx\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">
@@ -739,6 +829,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_Expr.cxx">
       <Filter>TnbLib\SectPx\FieldFun\nonParameter\expr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Parameter\SectPx_ParameterMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Point\SectPx_PointMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Tools\Pnt\SectPx_PntTools.cxx">
+      <Filter>TnbLib\SectPx\Tools\Pnt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Node\SectPx_NodeMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\GeometricMap\SectPx_GeometricMapMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\GeometricMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\TopoProfile\SectPx_TopoProfileMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\TopoProfile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_ProfileMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Tools\tools\SectPx_Tools.cxx">
+      <Filter>TnbLib\SectPx\Tools\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Interface\SectPx_InterfaceMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\CmptProfile\SectPx_CmptProfileMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\CmptProfile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Frame\SectPx_Frame.cxx">
+      <Filter>TnbLib\SectPx\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FrameAPI\SectPx_FrameAPI.cxx">
+      <Filter>TnbLib\SectPx\FrameAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Script\SectPx_Script.cxx">
+      <Filter>TnbLib\SectPx\Script</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

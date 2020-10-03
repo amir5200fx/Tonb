@@ -39,6 +39,10 @@ namespace tnbLib
 			const Standard_Real theValue
 		);
 
+		const auto& X() const
+		{
+			return theValue_();
+		}
 
 		word RegObjTypeName() const override;
 

@@ -12,13 +12,14 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_TopoProfile;
 	class SectPx_Interface;
-	class SectPx_InterfaceMaker;
+
+	namespace maker { class Interface; }
 
 	class SectPx_NodeAdaptor
 	{
 
 		friend class SectPx_TopoProfile;
-		friend class SectPx_InterfaceMaker;
+		friend class maker::Interface;
 
 		/*Private Data*/
 

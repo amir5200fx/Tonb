@@ -7,8 +7,28 @@
 namespace tnbLib
 {
 
+	class SectPx_FieldFun_Temp
+	{
+
+		/*Private Data*/
+
+		mutable Standard_Real theTemp_;
+
+	protected:
+
+		SectPx_FieldFun_Temp()
+		{}
+
+		auto& Temp() const
+		{
+			return theTemp_;
+		}
+
+	};
+
 	class SectPx_FieldFun
 		: public SectPx_Parent
+		, public SectPx_FieldFun_Temp
 	{
 
 		/*Private Data*/
@@ -21,6 +41,18 @@ namespace tnbLib
 		{}
 
 	public:
+
+		auto& xRef()
+		{
+			Temp() = Value();
+			return Temp();
+		}
+
+		const auto& xRef() const
+		{
+			Temp() = Value();
+			return Temp();
+		}
 
 		Standard_Boolean IsFieldFun() const override;
 

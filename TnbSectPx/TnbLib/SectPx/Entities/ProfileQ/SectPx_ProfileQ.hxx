@@ -11,14 +11,15 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Pnt;
-	class SectPx_ProfileMaker;
 	class Pnt2d;
+
+	namespace maker { class Profile; }
 
 	class SectPx_ProfileQ
 		: public SectPx_Entity
 	{
 
-		friend class SectPx_ProfileMaker;
+		friend class maker::Profile;
 
 		/*Private Data*/
 

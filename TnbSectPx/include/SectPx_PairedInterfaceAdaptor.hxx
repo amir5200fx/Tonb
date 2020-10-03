@@ -11,12 +11,13 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_PairedInterface;
-	class SectPx_InterfaceMaker;
+	
+	namespace maker { class Interface; }
 
 	class SectPx_PairedInterfaceAdaptor
 	{
 
-		friend class SectPx_InterfaceMaker;
+		friend class maker::Interface;
 
 		/*Private Data*/
 

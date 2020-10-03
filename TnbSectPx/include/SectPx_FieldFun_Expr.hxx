@@ -3,6 +3,7 @@
 #define _SectPx_FieldFun_Expr_Header
 
 #include <SectPx_nonParFieldFun.hxx>
+#include <SectPx_ParsFwd.hxx>
 
 #include <map>
 
@@ -17,6 +18,9 @@ namespace exprtk
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SectPx_FieldFun;
+
 	namespace sectPxLib
 	{
 
@@ -28,10 +32,10 @@ namespace tnbLib
 
 			string theExpr_;
 
-			std::map<word, double&> theVariables_;
-			std::map<word, const double&> theConstants_;
+			std::map<word, Standard_Real&> theVariables_;
+			std::map<word, const Standard_Real&> theConstants_;
 
-			std::shared_ptr<exprtk::symbol_table<double>> symbol_table_ptr;
+			std::shared_ptr<exprtk::symbol_table<Standard_Real>> symbol_table_ptr;
 
 			Standard_Boolean addConstants_;
 
@@ -70,9 +74,53 @@ namespace tnbLib
 
 			Standard_Real Value() const override;
 
-			Standard_Boolean AddVariable(const word& name, double& x);
+			Standard_Boolean 
+				AddVariable
+				(
+					const word& name,
+					Standard_Real& x
+				);
 
-			Standard_Boolean AddConstant(const word& name, const double& x);
+			Standard_Boolean 
+				AddVariable
+				(
+					const word& name, SectPx_FieldFun& x
+				);
+
+			Standard_Boolean 
+				AddVariable
+				(
+					const word& name,
+					SectPx_FixedPar& par
+				);
+
+			Standard_Boolean 
+				AddConstant
+				(
+					const word& name, 
+					const Standard_Real& x
+				);
+
+			Standard_Boolean 
+				AddConstant
+				(
+					const word& name,
+					const SectPx_FieldFun& x
+				);
+
+			Standard_Boolean 
+				AddConstant
+				(
+					const word& name,
+					const SectPx_ConstPar& par
+				);
+
+			Standard_Boolean 
+				RemoveVariable
+				(
+					const word& name,
+					const Standard_Boolean delete_node = Standard_True
+				);
 
 			void SetAddConstants
 			(
