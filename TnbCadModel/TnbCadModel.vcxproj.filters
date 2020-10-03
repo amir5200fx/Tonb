@@ -58,6 +58,9 @@
     <Filter Include="TnbLib\CadModel\Regular\Sphere">
       <UniqueIdentifier>{ce44d582-cb2a-4836-a20a-9c0968707971}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\CadModel\Scripts">
+      <UniqueIdentifier>{c974b998-45bf-4457-914a-394b7843176b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.hxx">
@@ -129,6 +132,9 @@
     <ClInclude Include="TnbLib\CadModel\Regular\Sphere\CadModel_Sphere.hxx">
       <Filter>TnbLib\CadModel\Regular\Sphere</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Scripts\CadModel_Scripts.hxx">
+      <Filter>TnbLib\CadModel\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.cxx">
@@ -169,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\CadModel\Regular\CadModel_Regular.cxx">
       <Filter>TnbLib\CadModel\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Scripts\CadModel_Scripts.cxx">
+      <Filter>TnbLib\CadModel\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
