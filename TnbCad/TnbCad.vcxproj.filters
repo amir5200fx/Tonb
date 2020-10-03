@@ -253,6 +253,9 @@
     <Filter Include="TnbLib\Cad\ShapeTools">
       <UniqueIdentifier>{8d57293e-7090-48bf-8738-179f023e4115}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Scripts">
+      <UniqueIdentifier>{7c7284fa-669a-41ba-87fd-9ba0337aafc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -510,6 +513,9 @@
     <ClInclude Include="TnbLib\Cad\ShapeTools\Cad_ShapeTools.hxx">
       <Filter>TnbLib\Cad\ShapeTools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Scripts\Cad_Scripts.hxx">
+      <Filter>TnbLib\Cad\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -676,6 +682,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\ShapeTools\Cad_ShapeTools.cxx">
       <Filter>TnbLib\Cad\ShapeTools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Scripts\Cad_Scripts.cxx">
+      <Filter>TnbLib\Cad\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
