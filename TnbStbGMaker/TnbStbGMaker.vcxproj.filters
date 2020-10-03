@@ -88,6 +88,9 @@
     <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape">
       <UniqueIdentifier>{c0cd8b5b-6868-4318-a651-4c4be8ce5801}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\StbGMaker\Scripts">
+      <UniqueIdentifier>{188fe6b7-5048-4567-8864-855558739f0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.hxx">
@@ -183,6 +186,9 @@
     <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape\StbGMaker_GeometricSailCreator_noShape.hxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\noShape</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.hxx">
+      <Filter>TnbLib\StbGMaker\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.cxx">
@@ -253,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Maker\Entity\StbGMaker_EntityCreator.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.cxx">
+      <Filter>TnbLib\StbGMaker\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
