@@ -43,11 +43,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(SolutionDir)TnbBase\Libraries\pcre\include;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\Armadillo;$(ARMADILLO_INCLUDEDIR);$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(SolutionDir)TnbBase\Libraries\pcre\include;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(SolutionDir)Common\Armadillo;$(ARMADILLO_INCLUDEDIR);$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)TnbBase\Libraries\dlfcn\lib;$(SolutionDir)TnbBase\Libraries\zLib\lib;$(SolutionDir)TnbBase\Libraries\pthreads\lib;$(SolutionDir)TnbBase\Libraries\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(SolutionDir)TnbBase\Libraries\pcre\include;$(SolutionDir)Common\Foam\include\base;$(ARMADILLO_INCLUDEDIR);$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(SolutionDir)TnbBase\Libraries\dlfcn\include;$(SolutionDir)TnbBase\Libraries\zLib\include;$(SolutionDir)TnbBase\Libraries\pthreads\include;$(SolutionDir)TnbBase\Libraries\pcre\include;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(ARMADILLO_INCLUDEDIR);$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)TnbBase\Libraries\dlfcn\lib;$(SolutionDir)TnbBase\Libraries\zLib\lib;$(SolutionDir)TnbBase\Libraries\pthreads\lib;$(SolutionDir)TnbBase\Libraries\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,10 +143,15 @@
     <ClCompile Include="Examples\example_stb_gmaker_creator.cxx" />
     <ClCompile Include="Examples\example_transform_shape2d.cxx" />
     <ClCompile Include="Examples\example_union_plane_box.cxx" />
-    <ClCompile Include="main.cxx" />
+    <ClCompile Include="global_scripts.cxx" />
+    <ClCompile Include="main.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\Tnb_Examples.hxx" />
+    <ClInclude Include="global_scripts.hxx" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

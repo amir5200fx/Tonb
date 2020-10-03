@@ -1,0 +1,27 @@
+
+var myShip = model_disp_no1();
+//model_set_print_info(true);
+
+//var shipName = word("aria", true);
+//myShip.set_name(shipName);
+//myShip.set_index(2);
+myShip.perform();
+
+var hull_shape = myShip.get_shape();
+
+var dia = cad_get_diameter(hull_shape);
+
+var cyl_ax1 = gp_ax2(geo_pnt3d(50, 5, 10), geo_dir3d(1.0, 0.0, 0.0));
+var cyl_ax2 = gp_ax2(geo_pnt3d(50, -5.0, 10.0), geo_dir3d(1.0, 0.0,0.0));
+
+//- making two cylinder shapes as a geometric representation of the tanks
+var tank1_shape = cad_create_cylinder(cyl_ax1, 2.0, 12.5);
+var tank2_shape = cad_create_cylinder(cyl_ax2, 2.0, 12.5);
+
+//- defining a shape hull
+var hull = stb_model_create_hull(hull_shape);
+
+//- defining the shape of the tanks
+var tank1 = stb_model_create_tank(tank1_shape);
+var tank2 = stb_model_create_tank(tank2_shape);
+

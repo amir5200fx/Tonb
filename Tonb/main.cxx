@@ -37,11 +37,55 @@
 
 #include <Field.hxx>
 #include <Ostream.hxx>
+#include <IFstream.hxx>
+
+#include <SectPx_FrameAPI.hxx>
+#include <SectPx_Script.hxx>
+#include <CadModel_Scripts.hxx>
+#include <Cad_Scripts.hxx>
+#include <Geo_Scripts.hxx>
+#include <StbGMaker_Scripts.hxx>
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+#include "global_scripts.hxx"
+#include <chaiscript/chaiscript.hpp>
 
 using namespace tnbLib;
 
+
 Standard_Integer main()
 {
+
+	//auto frame = SectPx_FrameAPI::CreateFrame();
+	chaiscript::ChaiScript chai;
+
+	//chai.add(chaiscript::fun(&yy::myFun), "my_fun");
+	//chai.add(chaiscript::fun(&yy::print), "my_print");
+	global_scripts(chai);
+	script::sectPx(chai);
+	script::load_geo(chai);
+	script::load_cad_model(chai);
+	script::load_cad(chai);
+	script::load_stb_gmaker(chai);
+	/*PAUSE;
+	chai.eval
+	(
+		R"(puts(var x = create_fixed_par(0.1) );)"
+	);*/
+	fileName myFileName("tnbscript.txt");
+	//IFstream myFile(myFileName);
+	try
+	{
+		chai.eval_file(myFileName);
+	}
+	catch (const chaiscript::exception::eval_error& x)
+	{
+		std::cout << x.pretty_print();
+		std::cout << '\n';
+	}
 
 	/*fileName myFileName("openFoamTest.txt");
 	OFstream myFile(myFileName);
@@ -67,7 +111,7 @@ Standard_Integer main()
 	//example_cross_curves_ship();
 	//example_cad2d_modeler();
 	//example_stb_gmaker_creator();
-	example_sect_px_field_function();
+	//example_sect_px_field_function();
 
 	/*gp_Ax2d ax(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
 	Handle(Geom2d_Curve) c = new Geom2d_Circle(gp_Circ2d(ax, 1.0));

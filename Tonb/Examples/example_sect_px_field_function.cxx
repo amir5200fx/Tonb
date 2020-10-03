@@ -25,9 +25,16 @@ void tnbLib::example_sect_px_field_function()
 	auto f2 = std::make_shared<sectPxLib::FieldFun_Expr>("2 * pi * x");
 	f2->SetName("field 3");
 
-	double x = 0.1;
-	f2->AddVariable("x", x);
+	f2->AddVariable("x", *p1);
 
 	auto sum = (f0*(f0 + f1) - f2 * (f0 - f1));
-	cout << sum->Name() << " , value = " << sum->Value() << std::endl;
+
+	auto f3 = std::make_shared<sectPxLib::FieldFun_Expr>("2 * x ^ 2");
+	f3->SetName("field 4");
+
+	f3->AddVariable("x", *sum);
+
+	auto sum1 = sum + f3;
+
+	cout << sum1->Name() << " , value = " << sum1->Value() << std::endl;
 }

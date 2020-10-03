@@ -52,11 +52,17 @@
     <ClCompile Include="Examples\example_sect_px_field_function.cxx">
       <Filter>Examples</Filter>
     </ClCompile>
+    <ClCompile Include="global_scripts.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Examples\Tnb_Examples.hxx">
       <Filter>Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="global_scripts.hxx">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
