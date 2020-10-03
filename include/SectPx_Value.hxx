@@ -34,7 +34,7 @@ namespace tnbLib
 			return IsChanged_;
 		}
 
-		T Value() const
+		const T& Value() const
 		{
 			IsChanged_ = Standard_False;
 			return theValue_;
@@ -46,7 +46,7 @@ namespace tnbLib
 			return theValue_;
 		}
 
-		auto operator()() const
+		const auto& operator()() const
 		{
 			return Value();
 		}

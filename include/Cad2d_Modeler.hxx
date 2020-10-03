@@ -151,7 +151,7 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
 
-		void MakePlanes();
+		void MakePlanes(selctList& theList);
 
 		//- the list will get empty after successfully creating plane
 		Standard_Integer MakePlane(selctList& theList);

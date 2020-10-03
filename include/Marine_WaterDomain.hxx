@@ -16,6 +16,7 @@ namespace tnbLib
 	class Marine_Section;
 	class Marine_Domain;
 	class Marine_Wave;
+	class Marine_Water;
 
 	class Marine_WaterDomain
 		: public Marine_CoordinatedEntity
@@ -24,66 +25,62 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::vector<std::shared_ptr<Marine_Section>> theWaters_;
-
 		std::shared_ptr<Marine_Domain> theDomain_;
+
+		std::shared_ptr<Marine_Water> theWater_;
 		std::shared_ptr<Marine_Wave> theWave_;
 
-	protected:
+	public:
 
 		Marine_WaterDomain
 		(
-			const std::shared_ptr<Marine_Domain>& theDomain
+			const std::shared_ptr<Marine_Domain>& theDomain,
+			const std::shared_ptr<Marine_Water>& theWater,
+			const std::shared_ptr<Marine_Wave>& theWave
 		);
 
 		Marine_WaterDomain
 		(
-			const Standard_Integer theIndex, 
-			const std::shared_ptr<Marine_Domain>& theDomain
+			std::shared_ptr<Marine_Domain>&& theDomain,
+			std::shared_ptr<Marine_Water>&& theWater,
+			std::shared_ptr<Marine_Wave>&& theWave
 		);
 
 		Marine_WaterDomain
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
-			const std::shared_ptr<Marine_Domain>& theDomain
+			const std::shared_ptr<Marine_Domain>& theDomain,
+			const std::shared_ptr<Marine_Water>& theWater,
+			const std::shared_ptr<Marine_Wave>& theWave
+		);
+
+		Marine_WaterDomain
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			std::shared_ptr<Marine_Domain>&& theDomain,
+			std::shared_ptr<Marine_Water>&& theWater,
+			std::shared_ptr<Marine_Wave>&& theWave
 		);
 
 	public:
 
-		virtual Standard_Real Z() const = 0;
-
-		auto& ChangeWaters()
-		{
-			return theWaters_;
-		}
-
-		auto& ChangeWave()
-		{
-			return theWave_;
-		}
+		//Standard_Real Z() const;
 
 		const auto& Domain() const
 		{
 			return theDomain_;
 		}
 
-		const auto& Waters() const
+		const auto& Water() const
 		{
-			return theWaters_;
+			return theWater_;
 		}
 
 		const auto& Wave() const
 		{
 			return theWave_;
-		}
-
-		void SetWave
-		(
-			const std::shared_ptr<Marine_Wave>& theWave
-		)
-		{
-			theWave_ = theWave;
 		}
 
 		void ExportToPlt(OFstream& File) const;

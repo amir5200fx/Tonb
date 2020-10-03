@@ -3,7 +3,8 @@
 #define _HydStatic_FormCoeff_Header
 
 #include <Marine_BodiesFwd.hxx>
-#include <Vessel_FormCoeff.hxx>
+#include <Marine_VesselParams.hxx>
+#include <HydStatic_FormDimsFwd.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
@@ -11,72 +12,112 @@
 namespace tnbLib
 {
 
-	// Forward Declarations
-	class HydStatic_FormDim;
-
-	class HydStatic_FormCoeff
-		: public Global_Done
-		, public Vessel_FormCoeff_Parameters
+	namespace formCoeff
 	{
 
-		/*Private Data*/
-
-		std::shared_ptr<HydStatic_FormDim> theFormDim_;
-
-		//- private functions
-
-		void CalcDISPV
-		(
-			const marineLib::Body_Wetted& theBody
-		);
-
-		void CalcCB
-		(
-			const marineLib::Body_Wetted& theBody
-		);
-
-		void CalcAM
-		(
-			const marineLib::Body_Wetted& theBody
-		);
-
-		void CalcCP();
-
-		void CalcCM();
-
-		void CalcAW
-		(
-			const marineLib::Body_Wetted& theBody
-		);
-
-		void CalcCWL();
-
-		void CalcCVP();
-
-	public:
-
-		HydStatic_FormCoeff();
-
-		HydStatic_FormCoeff
-		(
-			const std::shared_ptr<HydStatic_FormDim>& theFormDim
-		);
-
-		const auto& FormDim() const
+		class Wetted
+			: public Global_Done
 		{
-			return theFormDim_;
-		}
 
-		void Perform();
+		public:
 
-		void LoadFormDim
-		(
-			const std::shared_ptr<HydStatic_FormDim>& theFormDim
-		)
-		{
-			theFormDim_ = theFormDim;
-		}
-	};
+			struct Parameter
+			{
+
+				//- Block coefficient
+				marineLib::CB Cb;
+
+				//- Displacement
+				marineLib::DISPV Dispv;
+
+				//- Displacement mass
+				//marineLib::DISPM Dispm;
+
+				//- Midship coefficient
+				marineLib::CM Cm;
+
+				//- Midship-section area
+				marineLib::AM Am;
+
+				//- Prismatic coefficient
+				marineLib::CP Cp;
+
+				//- Vertical Prismatic coefficient
+				marineLib::CVP Cvp;
+
+				//- Waterplane area
+				marineLib::AW Aw;
+
+				//- Waterplane-area coefficient
+				marineLib::CWL Cwl;
+			};
+
+		private:
+
+			/*Private Data*/
+
+			const std::shared_ptr<formDim::Wetted> theWeted_;
+
+			std::shared_ptr<Parameter> theParameters_;
+
+			//- private functions
+
+			void CalcDISPV
+			(
+				const marineLib::Body_Wetted& theBody
+			);
+
+			void CalcCB
+			(
+				const marineLib::Body_Wetted& theBody
+			);
+
+			void CalcAM
+			(
+				const marineLib::Body_Wetted& theBody
+			);
+
+			void CalcCP();
+
+			void CalcCM();
+
+			void CalcAW
+			(
+				const marineLib::Body_Wetted& theBody
+			);
+
+			void CalcCWL();
+
+			void CalcCVP();
+
+
+			auto& ParametersRef()
+			{
+				return theParameters_;
+			}
+
+		public:
+
+			Wetted
+			(
+				const std::shared_ptr<formDim::Wetted>& theForm
+			)
+				: theWeted_(theForm)
+			{}
+
+			const auto& WettedFormDim() const
+			{
+				return theWeted_;
+			}
+
+			const auto& Parameters() const
+			{
+				return theParameters_;
+			}
+
+			void Perform();
+		};
+	}
 }
 
 #endif // !_HydStatic_FormCoeff_Header

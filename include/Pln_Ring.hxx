@@ -20,9 +20,10 @@ namespace tnbLib
 
 		Pln_Ring
 		(
-			const std::shared_ptr<Pln_Vertex>& theVtx
+			const std::shared_ptr<Pln_Vertex>& theVtx,
+			const Standard_Boolean Sense = Standard_True
 		)
-			: Pln_Edge(theVtx, theVtx)
+			: Pln_Edge(theVtx, theVtx, Sense)
 		{}
 
 		Pln_Ring
@@ -50,18 +51,20 @@ namespace tnbLib
 		Pln_Ring
 		(
 			const Standard_Integer theIndex,
-			const std::shared_ptr<Pln_Vertex>& theVrtx
+			const std::shared_ptr<Pln_Vertex>& theVrtx,
+			const Standard_Boolean Sense = Standard_True
 		)
-			: Pln_Edge(theIndex, theVrtx, theVrtx)
+			: Pln_Edge(theIndex, theVrtx, theVrtx, Sense)
 		{}
 
 		Pln_Ring
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const std::shared_ptr<Pln_Vertex>& theVrtx
+			const std::shared_ptr<Pln_Vertex>& theVrtx,
+			const Standard_Boolean Sense = Standard_True
 		)
-			: Pln_Edge(theIndex, theName, theVrtx, theVrtx)
+			: Pln_Edge(theIndex, theName, theVrtx, theVrtx, Sense)
 		{}
 
 		Pln_Ring

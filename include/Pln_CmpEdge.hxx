@@ -48,6 +48,14 @@ namespace tnbLib
 			theEdges_.push_back(theEdge);
 		}
 
+		void Insert
+		(
+			std::shared_ptr<Pln_Edge>&& theEdge
+		)
+		{
+			theEdges_.push_back(std::move(theEdge));
+		}
+
 	public:
 
 
@@ -77,7 +85,10 @@ namespace tnbLib
 
 		void Transform(const gp_Trsf2d& t);
 
-		void RetrieveVerticesTo(std::vector<std::shared_ptr<Pln_Vertex>>& theVertices) const;
+		void RetrieveVerticesTo
+		(
+			std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
+		) const;
 
 		void Reverse();
 
@@ -86,12 +97,6 @@ namespace tnbLib
 			OFstream& File
 		) const;
 
-		static std::shared_ptr<Pln_Wire>
-			MakeWire
-			(
-				const std::shared_ptr<Pln_CmpEdge>& theEdge,
-				const Standard_Real theTol
-			);
 	};
 }
 

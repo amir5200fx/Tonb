@@ -44,6 +44,16 @@ namespace tnbLib
 			const Standard_Real theValue
 		);
 
+		auto X() const
+		{
+			return theValue_();
+		}
+
+		auto& X()
+		{
+			return theValue_();
+		}
+
 		word RegObjTypeName() const override;
 
 		sectPxLib::parType ParType() const override;

@@ -21,7 +21,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Entity3d_Box theDomain_; 
+		std::shared_ptr<Entity3d_Box> theDomain_;
 
 		auto& ChangeDim()
 		{
