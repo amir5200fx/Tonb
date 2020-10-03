@@ -391,6 +391,9 @@
     <Filter Include="TnbLib\Geo\ProfileFun\Geom">
       <UniqueIdentifier>{173a0cf2-ae8f-4292-a7ed-14db3b2e0f1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Scripts">
+      <UniqueIdentifier>{a853852e-b83c-4e59-be5f-b7708c9d7ee0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -864,6 +867,9 @@
     <ClInclude Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_Geom.hxx">
       <Filter>TnbLib\Geo\ProfileFun\Geom</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Scripts\Geo_Scripts.hxx">
+      <Filter>TnbLib\Geo\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1051,6 +1057,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_Geom.cxx">
       <Filter>TnbLib\Geo\ProfileFun\Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Scripts\Geo_Scripts.cxx">
+      <Filter>TnbLib\Geo\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
