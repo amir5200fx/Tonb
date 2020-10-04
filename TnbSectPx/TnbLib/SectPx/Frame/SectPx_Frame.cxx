@@ -21,6 +21,9 @@ tnbLib::SectPx_Frame::EntityMaker::EntityMaker
 
 	CmptProfile = std::make_shared<maker::CmptProfile>(theReg);
 	Debug_Null_Pointer(CmptProfile);
+
+	FieldFun = std::make_shared<maker::FieldFun>(theReg);
+	Debug_Null_Pointer(FieldFun);
 }
 
 void tnbLib::SectPx_Frame::AllocateMemory()
