@@ -173,7 +173,7 @@ void tnbLib::SectPx_Tools::RemoveParentFromChildren
 {
 	if (theParent->HasChildren())
 	{
-		theParent->RemoveThisFromChilds();
+		theParent->RemoveThisFromChildren();
 	}
 	else if (theParent->HasChildMap())
 	{
