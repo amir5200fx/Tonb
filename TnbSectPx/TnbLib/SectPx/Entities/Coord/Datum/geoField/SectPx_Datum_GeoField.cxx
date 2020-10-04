@@ -84,12 +84,12 @@ tnbLib::sectPxLib::Datum_GeoField::ChildMap
 	return GeoMap();
 }
 
-void tnbLib::sectPxLib::Datum_GeoField::RemoveThisFromChilds() const
+void tnbLib::sectPxLib::Datum_GeoField::RemoveThisFromChildren() const
 {
 	//- empty body
 }
 
-void tnbLib::sectPxLib::Datum_GeoField::AddThisToChilds() const
+void tnbLib::sectPxLib::Datum_GeoField::AddThisToChildren() const
 {
 	//- empty body
 }

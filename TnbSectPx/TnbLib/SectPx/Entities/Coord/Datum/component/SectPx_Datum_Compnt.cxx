@@ -104,7 +104,7 @@ void tnbLib::sectPxLib::Datum_Compnt::SetY
 	);
 }
 
-void tnbLib::sectPxLib::Datum_Compnt::RemoveThisFromChilds() const
+void tnbLib::sectPxLib::Datum_Compnt::RemoveThisFromChildren() const
 {
 	auto xPar = X().lock();
 	if (xPar)
@@ -119,7 +119,7 @@ void tnbLib::sectPxLib::Datum_Compnt::RemoveThisFromChilds() const
 	}
 }
 
-void tnbLib::sectPxLib::Datum_Compnt::AddThisToChilds() const
+void tnbLib::sectPxLib::Datum_Compnt::AddThisToChildren() const
 {
 	auto parent = std::dynamic_pointer_cast<SectPx_Parent>(This());
 	Debug_Null_Pointer(parent);
