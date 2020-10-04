@@ -42,7 +42,7 @@ tnbLib::SectPx_oneParFieldFun::RetrieveChildren() const
 	return std::move(childs);
 }
 
-void tnbLib::SectPx_oneParFieldFun::RemoveThisFromChilds() const
+void tnbLib::SectPx_oneParFieldFun::RemoveThisFromChildren() const
 {
 	auto par = Par().lock();
 	if (par)
@@ -51,7 +51,7 @@ void tnbLib::SectPx_oneParFieldFun::RemoveThisFromChilds() const
 	}
 }
 
-void tnbLib::SectPx_oneParFieldFun::AddThisToChilds() const
+void tnbLib::SectPx_oneParFieldFun::AddThisToChildren() const
 {
 	AddThisParentToAllChilds(Par());
 }

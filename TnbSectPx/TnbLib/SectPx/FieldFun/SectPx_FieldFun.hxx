@@ -26,19 +26,32 @@ namespace tnbLib
 
 	};
 
+	// Forward Declarations
+	namespace maker { class FieldFun; }
+
 	class SectPx_FieldFun
 		: public SectPx_Parent
 		, public SectPx_FieldFun_Temp
 	{
 
+		friend class maker::FieldFun;
+
 		/*Private Data*/
+
+		mutable Standard_Boolean IsRegistered_;
 
 	protected:
 
 		template<class... _Types>
 		SectPx_FieldFun(_Types&&... _Args)
 			: SectPx_Parent(_Args...)
+			, IsRegistered_(Standard_False)
 		{}
+
+		auto& IsRegistered() const
+		{
+			return IsRegistered_;
+		}
 
 	public:
 
@@ -62,10 +75,30 @@ namespace tnbLib
 
 		virtual Standard_Real Value() const = 0;
 
-		friend std::shared_ptr<SectPx_FieldFun> operator+(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
-		friend std::shared_ptr<SectPx_FieldFun> operator-(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
-		friend std::shared_ptr<SectPx_FieldFun> operator*(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
-		friend std::shared_ptr<SectPx_FieldFun> operator/(const std::shared_ptr<SectPx_FieldFun>& f0, const std::shared_ptr<SectPx_FieldFun>& f1);
+		friend std::shared_ptr<SectPx_FieldFun> 
+			operator+
+			(
+				const std::shared_ptr<SectPx_FieldFun>& f0,
+				const std::shared_ptr<SectPx_FieldFun>& f1
+				);
+		friend std::shared_ptr<SectPx_FieldFun> 
+			operator-
+			(
+				const std::shared_ptr<SectPx_FieldFun>& f0, 
+				const std::shared_ptr<SectPx_FieldFun>& f1
+				);
+		friend std::shared_ptr<SectPx_FieldFun> 
+			operator*
+			(
+				const std::shared_ptr<SectPx_FieldFun>& f0,
+				const std::shared_ptr<SectPx_FieldFun>& f1
+				);
+		friend std::shared_ptr<SectPx_FieldFun> 
+			operator/
+			(
+				const std::shared_ptr<SectPx_FieldFun>& f0,
+				const std::shared_ptr<SectPx_FieldFun>& f1
+				);
 	};
 }
 

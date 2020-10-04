@@ -15,12 +15,12 @@ tnbLib::SectPx_nonParFieldFun::HasChild
 	return Standard_False;
 }
 
-void tnbLib::SectPx_nonParFieldFun::RemoveThisFromChilds() const
+void tnbLib::SectPx_nonParFieldFun::RemoveThisFromChildren() const
 {
 	//- Empty body
 }
 
-void tnbLib::SectPx_nonParFieldFun::AddThisToChilds() const
+void tnbLib::SectPx_nonParFieldFun::AddThisToChildren() const
 {
 	//- Empty body
 }

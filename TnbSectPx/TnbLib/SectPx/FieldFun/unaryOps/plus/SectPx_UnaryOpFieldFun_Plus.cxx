@@ -3,22 +3,29 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-const char* tnbLib::unaryOpFieldFun::Plus::typeName_ = "plus unary op fieldFun";
-
-tnbLib::word 
-tnbLib::unaryOpFieldFun::Plus::RegObjTypeName() const
-{
-	return typeName_;
-}
+const char* tnbLib::unaryOpFieldFun::Plus<std::shared_ptr<tnbLib::SectPx_FieldFun>>::typeName_ = "plus unary op fieldFun";
+const char* tnbLib::unaryOpFieldFun::Plus<std::weak_ptr<tnbLib::SectPx_FieldFun>>::typeName_ = "plus unary op fieldFun";
 
 Standard_Real
-tnbLib::unaryOpFieldFun::Plus::Value() const
+tnbLib::unaryOpFieldFun::Plus<std::shared_ptr<tnbLib::SectPx_FieldFun>>::Value() const
 {
-	if (NOT FieldFun())
+	if (NOT this->FieldFun())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "there is no field" << endl
 			<< abort(FatalError);
 	}
-	return FieldFun()->Value();
+	return this->FieldFun()->Value();
+}
+
+Standard_Real
+tnbLib::unaryOpFieldFun::Plus<std::weak_ptr<tnbLib::SectPx_FieldFun>>::Value() const
+{
+	if (NOT this->FieldFun().lock())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there is no field" << endl
+			<< abort(FatalError);
+	}
+	return this->FieldFun().lock()->Value();
 }
