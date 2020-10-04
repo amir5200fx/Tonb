@@ -39,6 +39,7 @@ tnbLib::maker::Point::CreateOuterComponent
 		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Compnt>>();
 	Debug_Null_Pointer(pnt);
 
+	Debug_Null_Pointer(Registry());
 	const auto id = Registry()->Import(pnt);
 
 	pnt->SetX(xPar);
@@ -58,6 +59,7 @@ tnbLib::maker::Point::CreateInnerComponent
 		std::make_shared<sectPxLib::InnerPnt<sectPxLib::Pnt_Compnt>>();
 	Debug_Null_Pointer(pnt);
 
+	Debug_Null_Pointer(Registry());
 	const auto id = Registry()->Import(pnt);
 
 	pnt->SetX(xPar);
@@ -101,7 +103,9 @@ tnbLib::maker::Point::CreateField
 	}
 
 	pnt->SetGeoMap(theMap);
-	return Registry()->Import(pnt);
+
+	Debug_Null_Pointer(Registry());
+	return Registry()->Import(std::move(pnt));
 }
 
 Standard_Integer 
@@ -114,7 +118,8 @@ tnbLib::maker::Point::CreateEmpty
 		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Empty>>(theMaster);
 	Debug_Null_Pointer(pnt);
 
-	return Registry()->Import(pnt);
+	Debug_Null_Pointer(Registry());
+	return Registry()->Import(std::move(pnt));
 }
 
 std::shared_ptr<tnbLib::SectPx_Pnt> 
@@ -135,6 +140,8 @@ tnbLib::maker::Point::RemovePnt
 			<< "the pnt is not removable!" << endl
 			<< abort(FatalError);
 	}
+
+	Debug_Null_Pointer(Registry());
 	Registry()->Remove(pnt);
 	return std::move(pnt);
 }
