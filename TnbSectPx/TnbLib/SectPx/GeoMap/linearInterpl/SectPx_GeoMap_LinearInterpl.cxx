@@ -101,7 +101,7 @@ tnbLib::sectPxLib::GeoMap_LinearInterpl::HasChild
 }
 
 
-void tnbLib::sectPxLib::GeoMap_LinearInterpl::RemoveThisFromChilds() const
+void tnbLib::sectPxLib::GeoMap_LinearInterpl::RemoveThisFromChildren() const
 {
 	auto par = Par().lock();
 	if (par)
@@ -110,7 +110,7 @@ void tnbLib::sectPxLib::GeoMap_LinearInterpl::RemoveThisFromChilds() const
 	}
 }
 
-void tnbLib::sectPxLib::GeoMap_LinearInterpl::AddThisToChilds() const
+void tnbLib::sectPxLib::GeoMap_LinearInterpl::AddThisToChildren() const
 {
 	AddThisParentToAllChilds(Par());
 }

@@ -148,7 +148,7 @@ tnbLib::sectPxLib::GeoMap_Intersection::RetrieveChildren() const
 	return std::move(childs);
 }
 
-void tnbLib::sectPxLib::GeoMap_Intersection::RemoveThisFromChilds() const
+void tnbLib::sectPxLib::GeoMap_Intersection::RemoveThisFromChildren() const
 {
 	auto angle0 = Angle0().lock();
 	if (angle0)
@@ -163,7 +163,7 @@ void tnbLib::sectPxLib::GeoMap_Intersection::RemoveThisFromChilds() const
 	}
 }
 
-void tnbLib::sectPxLib::GeoMap_Intersection::AddThisToChilds() const
+void tnbLib::sectPxLib::GeoMap_Intersection::AddThisToChildren() const
 {
 	AddThisParentToAllChilds(Angle0());
 	AddThisParentToAllChilds(Angle1());
