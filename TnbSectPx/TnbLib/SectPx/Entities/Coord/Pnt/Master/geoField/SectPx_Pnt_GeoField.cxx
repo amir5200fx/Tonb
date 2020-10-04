@@ -95,12 +95,12 @@ tnbLib::sectPxLib::Pnt_GeoField::ChildMap
 	return GeoMap();
 }
 
-void tnbLib::sectPxLib::Pnt_GeoField::RemoveThisFromChilds() const
+void tnbLib::sectPxLib::Pnt_GeoField::RemoveThisFromChildren() const
 {
 	//- empty body
 }
 
-void tnbLib::sectPxLib::Pnt_GeoField::AddThisToChilds() const
+void tnbLib::sectPxLib::Pnt_GeoField::AddThisToChildren() const
 {
 	//- empty body
 }

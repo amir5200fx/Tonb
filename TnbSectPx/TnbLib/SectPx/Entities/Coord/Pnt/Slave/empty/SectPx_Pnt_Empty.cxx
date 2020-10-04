@@ -136,12 +136,12 @@ tnbLib::sectPxLib::Pnt_Empty::ChildMap
 	return Master();
 }
 
-void tnbLib::sectPxLib::Pnt_Empty::RemoveThisFromChilds() const
+void tnbLib::sectPxLib::Pnt_Empty::RemoveThisFromChildren() const
 {
 	//- empty body
 }
 
-void tnbLib::sectPxLib::Pnt_Empty::AddThisToChilds() const
+void tnbLib::sectPxLib::Pnt_Empty::AddThisToChildren() const
 {
 	//- empty body
 }

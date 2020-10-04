@@ -116,7 +116,7 @@ tnbLib::sectPxLib::Pnt_Compnt::RetrieveChildren() const
 	return std::move(children);
 }
 
-void tnbLib::sectPxLib::Pnt_Compnt::RemoveThisFromChilds() const
+void tnbLib::sectPxLib::Pnt_Compnt::RemoveThisFromChildren() const
 {
 	auto xPar = X().lock();
 	if (xPar)
@@ -131,7 +131,7 @@ void tnbLib::sectPxLib::Pnt_Compnt::RemoveThisFromChilds() const
 	}
 }
 
-void tnbLib::sectPxLib::Pnt_Compnt::AddThisToChilds() const
+void tnbLib::sectPxLib::Pnt_Compnt::AddThisToChildren() const
 {
 	AddThisParentToAllChilds(X());
 	AddThisParentToAllChilds(Y());
