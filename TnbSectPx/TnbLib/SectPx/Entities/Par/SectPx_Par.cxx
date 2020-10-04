@@ -1,7 +1,6 @@
 #include <SectPx_Par.hxx>
 
 #include <SectPx_FreePar.hxx>
-#include <SectPx_FieldFun_LinearForm.hxx>
 #include <SectPx_BinaryOpFieldFuns.hxx>
 #include <SectPx_FieldFun_Uni.hxx>
 
