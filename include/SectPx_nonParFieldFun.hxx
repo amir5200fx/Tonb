@@ -29,9 +29,9 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Par>& thePar
 		) const override;
 
-		void RemoveThisFromChilds() const override;
+		void RemoveThisFromChildren() const override;
 
-		void AddThisToChilds() const override;
+		void AddThisToChildren() const override;
 
 		void AddThisToChild
 		(

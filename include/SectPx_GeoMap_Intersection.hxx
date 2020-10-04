@@ -126,9 +126,9 @@ namespace tnbLib
 			std::vector<std::shared_ptr<SectPx_Child>> 
 				RetrieveChildren() const override;
 
-			void RemoveThisFromChilds() const override;
+			void RemoveThisFromChildren() const override;
 
-			void AddThisToChilds() const override;
+			void AddThisToChildren() const override;
 
 			void AddThisToChild
 			(

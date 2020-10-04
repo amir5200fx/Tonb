@@ -72,9 +72,9 @@ namespace tnbLib
 
 			std::shared_ptr<SectPx_Parent> ChildMap(const Standard_Integer theIndex) const override;
 
-			void RemoveThisFromChilds() const override;
+			void RemoveThisFromChildren() const override;
 
-			void AddThisToChilds() const override;
+			void AddThisToChildren() const override;
 
 			void RemoveThisFromChild
 			(

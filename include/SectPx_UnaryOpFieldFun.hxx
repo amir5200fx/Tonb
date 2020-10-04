@@ -13,8 +13,6 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<SectPx_FieldFun> theField_;
-
 	protected:
 
 		template<class... _Types>
@@ -22,57 +20,38 @@ namespace tnbLib
 			: SectPx_nonParFieldFun(_Args...)
 		{}
 
-		/*SectPx_UnaryOpFieldFun()
+	public:
+
+		virtual Standard_Boolean HandleMemory() const = 0;
+	};
+
+
+	template<class T>
+	class SectPx_UnaryOpFieldFun_Memory
+	{};
+	
+	template<>
+	class SectPx_UnaryOpFieldFun_Memory<std::shared_ptr<SectPx_FieldFun>>
+		: public SectPx_UnaryOpFieldFun
+	{
+
+		/*Private Data*/
+
+		std::shared_ptr<SectPx_FieldFun> theField_;
+
+	protected:
+
+		template<class... _Types>
+		SectPx_UnaryOpFieldFun_Memory(_Types&&... _Args)
+			: SectPx_UnaryOpFieldFun(_Args...)
 		{}
 
-		explicit SectPx_UnaryOpFieldFun
-		(
-			const Standard_Integer theIndex
-		);
-
-		SectPx_UnaryOpFieldFun
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
-
-		explicit SectPx_UnaryOpFieldFun
-		(
-			const std::shared_ptr<SectPx_FieldFun>& theField
-		);
-
-		explicit SectPx_UnaryOpFieldFun
-		(
-			std::shared_ptr<SectPx_FieldFun>&& theField
-		);
-
-		SectPx_UnaryOpFieldFun
-		(
-			const Standard_Integer theIndex, 
-			const std::shared_ptr<SectPx_FieldFun>& theField
-		);
-
-		SectPx_UnaryOpFieldFun
-		(
-			const Standard_Integer theIndex,
-			std::shared_ptr<SectPx_FieldFun>&& theField
-		);
-
-		SectPx_UnaryOpFieldFun
-		(
-			const Standard_Integer theIndex, 
-			const word& theName, 
-			const std::shared_ptr<SectPx_FieldFun>& theField
-		);
-
-		SectPx_UnaryOpFieldFun
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			std::shared_ptr<SectPx_FieldFun>&& theField
-		);*/
-
 	public:
+
+		Standard_Boolean HandleMemory() const override
+		{
+			return Standard_True;
+		}
 
 		const auto& FieldFun() const
 		{
@@ -93,6 +72,44 @@ namespace tnbLib
 		)
 		{
 			theField_ = std::move(theField);
+		}
+	};
+
+
+	template<>
+	class SectPx_UnaryOpFieldFun_Memory<std::weak_ptr<SectPx_FieldFun>>
+		: public SectPx_UnaryOpFieldFun
+	{
+
+		/*Private Data*/
+
+		std::weak_ptr<SectPx_FieldFun> theField_;
+
+	protected:
+
+		template<class... _Types>
+		SectPx_UnaryOpFieldFun_Memory(_Types&&... _Args)
+			: SectPx_UnaryOpFieldFun(_Args...)
+		{}
+
+	public:
+
+		Standard_Boolean HandleMemory() const override
+		{
+			return Standard_False;
+		}
+
+		const auto& FieldFun() const
+		{
+			return theField_;
+		}
+
+		void SetField
+		(
+			const std::shared_ptr<SectPx_FieldFun>& theField
+		)
+		{
+			theField_ = theField;
 		}
 	};
 }
