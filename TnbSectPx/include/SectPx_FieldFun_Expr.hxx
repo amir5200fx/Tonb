@@ -32,8 +32,8 @@ namespace tnbLib
 
 			string theExpr_;
 
-			std::map<word, Standard_Real&> theVariables_;
-			std::map<word, const Standard_Real&> theConstants_;
+			/*std::map<word, Standard_Real&> theVariables_;
+			std::map<word, const Standard_Real&> theConstants_;*/
 
 			std::shared_ptr<exprtk::symbol_table<Standard_Real>> symbol_table_ptr;
 

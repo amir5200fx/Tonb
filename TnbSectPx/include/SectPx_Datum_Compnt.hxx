@@ -75,9 +75,9 @@ namespace tnbLib
 
 			Pnt2d Coord() const override;
 
-			void RemoveThisFromChilds() const override;
+			void RemoveThisFromChildren() const override;
 
-			void AddThisToChilds() const override;
+			void AddThisToChildren() const override;
 
 			void AddThisToChild
 			(

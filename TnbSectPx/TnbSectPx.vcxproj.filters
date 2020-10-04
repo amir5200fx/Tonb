@@ -205,9 +205,6 @@
     <Filter Include="TnbLib\SectPx\FieldFun\oneParameter\func">
       <UniqueIdentifier>{88506b12-7a3c-4f8e-ac36-8cc45397aac2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\SectPx\FieldFun\oneParameter\linearForm">
-      <UniqueIdentifier>{f4764c81-4689-431a-9cf1-2beb5d5c456b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\SectPx\FieldFun\oneParameter\minus">
       <UniqueIdentifier>{9e372f6d-7386-44b1-9a82-4b055a92f81c}</UniqueIdentifier>
     </Filter>
@@ -273,6 +270,12 @@
     </Filter>
     <Filter Include="TnbLib\SectPx\Script">
       <UniqueIdentifier>{d19d2abb-0648-4575-b0d5-c1cc4ceb91ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\FieldFun">
+      <UniqueIdentifier>{d04eed76-23f2-43d0-bb5f-39762c121bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Tools\FieldFun">
+      <UniqueIdentifier>{3b108089-5181-42f9-9c09-540f31358364}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -540,9 +543,6 @@
     <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\func\SectPx_FieldFun_Func.hxx">
       <Filter>TnbLib\SectPx\FieldFun\oneParameter\func</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\linearForm\SectPx_FieldFun_LinearForm.hxx">
-      <Filter>TnbLib\SectPx\FieldFun\oneParameter\linearForm</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\minus\SectPx_FieldFun_Minus.hxx">
       <Filter>TnbLib\SectPx\FieldFun\oneParameter\minus</Filter>
     </ClInclude>
@@ -620,6 +620,24 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Script\SectPx_Script.hxx">
       <Filter>TnbLib\SectPx\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\FieldFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\nonParameter\SectPx_nonParFieldFuns.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\nonParameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_oneParFieldFuns.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\oneParameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_UnaryOpFieldFuns.hxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FieldFun\SectPx_FieldFuns.hxx">
+      <Filter>TnbLib\SectPx\FieldFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.hxx">
+      <Filter>TnbLib\SectPx\Tools\FieldFun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -806,9 +824,6 @@
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\func\SectPx_FieldFun_Func.cxx">
       <Filter>TnbLib\SectPx\FieldFun\oneParameter\func</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\linearForm\SectPx_FieldFun_LinearForm.cxx">
-      <Filter>TnbLib\SectPx\FieldFun\oneParameter\linearForm</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\minus\SectPx_FieldFun_Minus.cxx">
       <Filter>TnbLib\SectPx\FieldFun\oneParameter\minus</Filter>
     </ClCompile>
@@ -868,6 +883,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Script\SectPx_Script.cxx">
       <Filter>TnbLib\SectPx\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\FieldFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.cxx">
+      <Filter>TnbLib\SectPx\Tools\FieldFun</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

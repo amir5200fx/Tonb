@@ -10,8 +10,13 @@ namespace tnbLib
 	namespace unaryOpFieldFun
 	{
 
+		template<class Memory>
 		class Minus
-			: public SectPx_UnaryOpFieldFun
+		{};
+
+		template<>
+		class Minus<std::shared_ptr<SectPx_FieldFun>>
+			: public SectPx_UnaryOpFieldFun_Memory<std::shared_ptr<SectPx_FieldFun>>
 		{
 
 			/*Private Data*/
@@ -22,10 +27,37 @@ namespace tnbLib
 
 			template<class... _Types>
 			Minus(_Types&&... _Args)
-				: SectPx_UnaryOpFieldFun(_Args...)
+				: SectPx_UnaryOpFieldFun_Memory(_Args...)
 			{}
 
-			word RegObjTypeName() const override;
+			word RegObjTypeName() const override
+			{
+				return typeName_;
+			}
+
+			Standard_Real Value() const override;
+		};
+
+		template<>
+		class Minus<std::weak_ptr<SectPx_FieldFun>>
+			: public SectPx_UnaryOpFieldFun_Memory<std::weak_ptr<SectPx_FieldFun>>
+		{
+
+			/*Private Data*/
+
+		public:
+
+			static const char* typeName_;
+
+			template<class... _Types>
+			Minus(_Types&&... _Args)
+				: SectPx_UnaryOpFieldFun_Memory(_Args...)
+			{}
+
+			word RegObjTypeName() const override
+			{
+				return typeName_;
+			}
 
 			Standard_Real Value() const override;
 		};

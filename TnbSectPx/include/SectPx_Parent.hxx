@@ -54,9 +54,9 @@ namespace tnbLib
 
 		virtual Standard_Boolean HasChild(const std::shared_ptr<SectPx_Par>& thePar) const = 0;
 
-		virtual void RemoveThisFromChilds() const = 0;
+		virtual void RemoveThisFromChildren() const = 0;
 
-		virtual void AddThisToChilds() const = 0;
+		virtual void AddThisToChildren() const = 0;
 
 		virtual void AddThisToChild(const std::shared_ptr<SectPx_Par>& thePar) const = 0;
 

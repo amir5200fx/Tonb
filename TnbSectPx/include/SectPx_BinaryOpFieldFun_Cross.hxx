@@ -10,8 +10,17 @@ namespace tnbLib
 	namespace binaryOpsFieldFun
 	{
 
+		template<class Memory1, class Memory2>
 		class Cross
-			: public SectPx_BinaryOpFieldFun
+		{};
+
+		template<>
+		class Cross<std::shared_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>>
+			: public SectPx_BinaryOpFieldFun_Memory
+			<
+			std::shared_ptr<SectPx_FieldFun>,
+			std::shared_ptr<SectPx_FieldFun>
+			>
 		{
 
 			/*Private Data*/
@@ -22,10 +31,97 @@ namespace tnbLib
 
 			template<class... _Types>
 			Cross(_Types&&... _Args)
-				: SectPx_BinaryOpFieldFun(_Args...)
+				: SectPx_BinaryOpFieldFun_Memory(_Args...)
 			{}
 
-			word RegObjTypeName() const override;
+			word RegObjTypeName() const override
+			{
+				return typeName_;
+			}
+
+			Standard_Real Value() const override;
+		};
+
+		template<>
+		class Cross<std::shared_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>>
+			: public SectPx_BinaryOpFieldFun_Memory
+			<
+			std::shared_ptr<SectPx_FieldFun>,
+			std::weak_ptr<SectPx_FieldFun>
+			>
+		{
+
+			/*Private Data*/
+
+		public:
+
+			static const char* typeName_;
+
+			template<class... _Types>
+			Cross(_Types&&... _Args)
+				: SectPx_BinaryOpFieldFun_Memory(_Args...)
+			{}
+
+			word RegObjTypeName() const override
+			{
+				return typeName_;
+			}
+
+			Standard_Real Value() const override;
+		};
+
+		template<>
+		class Cross<std::weak_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>>
+			: public SectPx_BinaryOpFieldFun_Memory
+			<
+			std::weak_ptr<SectPx_FieldFun>,
+			std::shared_ptr<SectPx_FieldFun>
+			>
+		{
+
+			/*Private Data*/
+
+		public:
+
+			static const char* typeName_;
+
+			template<class... _Types>
+			Cross(_Types&&... _Args)
+				: SectPx_BinaryOpFieldFun_Memory(_Args...)
+			{}
+
+			word RegObjTypeName() const override
+			{
+				return typeName_;
+			}
+
+			Standard_Real Value() const override;
+		};
+
+		template<>
+		class Cross<std::weak_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>>
+			: public SectPx_BinaryOpFieldFun_Memory
+			<
+			std::weak_ptr<SectPx_FieldFun>,
+			std::weak_ptr<SectPx_FieldFun>
+			>
+		{
+
+			/*Private Data*/
+
+		public:
+
+			static const char* typeName_;
+
+			template<class... _Types>
+			Cross(_Types&&... _Args)
+				: SectPx_BinaryOpFieldFun_Memory(_Args...)
+			{}
+
+			word RegObjTypeName() const override
+			{
+				return typeName_;
+			}
 
 			Standard_Real Value() const override;
 		};
