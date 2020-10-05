@@ -277,6 +277,12 @@
     <Filter Include="TnbLib\SectPx\Tools\FieldFun">
       <UniqueIdentifier>{3b108089-5181-42f9-9c09-540f31358364}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Controller">
+      <UniqueIdentifier>{78f85f73-7a68-4b91-9605-82b7a5fdfcac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\CptsMap">
+      <UniqueIdentifier>{e429b6fa-14f1-408e-a47e-f318b3ca4189}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">

@@ -137,34 +137,34 @@ tnbLib::SectPx_Tools::MakeJoint
 	return std::move(t);
 }
 
-std::vector<tnbLib::Pnt2d>
-tnbLib::SectPx_Tools::RetrieveControlPoints
-(
-	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
-)
-{
-	Debug_Null_Pointer(theSegments[0]->Pole0());
-	const auto first = theSegments[0]->Pole0()->Coord();
-
-	std::vector<Pnt2d> Q;
-	Q.push_back(first);
-
-	for (const auto& x : theSegments)
-	{
-		Debug_Null_Pointer(x);
-		if (x->HasController())
-		{
-			auto pts = x->RetrieveControlPoints();
-			for (const auto& p : pts)
-			{
-				Q.push_back(p);
-			}
-		}
-
-		Q.push_back(x->Pole1()->Coord());
-	}
-	return std::move(Q);
-}
+//std::vector<tnbLib::Pnt2d>
+//tnbLib::SectPx_Tools::RetrieveControlPoints
+//(
+//	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+//)
+//{
+//	Debug_Null_Pointer(theSegments[0]->Pole0());
+//	const auto first = theSegments[0]->Pole0()->Coord();
+//
+//	std::vector<Pnt2d> Q;
+//	Q.push_back(first);
+//
+//	for (const auto& x : theSegments)
+//	{
+//		Debug_Null_Pointer(x);
+//		if (x->HasController())
+//		{
+//			auto pts = x->RetrieveControlPoints();
+//			for (const auto& p : pts)
+//			{
+//				Q.push_back(p);
+//			}
+//		}
+//
+//		Q.push_back(x->Pole1()->Coord());
+//	}
+//	return std::move(Q);
+//}
 
 void tnbLib::SectPx_Tools::RemoveParentFromChildren
 (

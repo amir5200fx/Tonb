@@ -13,7 +13,7 @@ namespace tnbLib
 	namespace script
 	{
 
-		void sectPx(chaiscript::ChaiScript&);
+		void load_sectpx(chaiscript::ChaiScript&);
 	}
 }
 

@@ -47,7 +47,7 @@ namespace tnbLib
 			theController_ = theController;
 		}
 
-		std::vector<Pnt2d> RetrieveControlPoints() const;
+		//std::vector<Pnt2d> RetrieveControlPoints() const;
 	};
 }
 
