@@ -10,6 +10,9 @@
     <Filter Include="TnbLib\IO\TecPlot">
       <UniqueIdentifier>{c9c3a325-401e-4479-b751-24dcc1e02d3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\IO\Scripts">
+      <UniqueIdentifier>{27204739-6f81-4fa2-8c6f-491c01a3d589}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\IO\TecPlot\TecPlot.hxx">
@@ -18,10 +21,16 @@
     <ClInclude Include="TnbLib\IO\TecPlot\TecPlotI.hxx">
       <Filter>TnbLib\IO\TecPlot</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\IO\Scripts\IO_Scripts.hxx">
+      <Filter>TnbLib\IO\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\IO\TecPlot\TecPlot.cxx">
       <Filter>TnbLib\IO\TecPlot</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\Scripts\IO_Scripts.cxx">
+      <Filter>TnbLib\IO\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
