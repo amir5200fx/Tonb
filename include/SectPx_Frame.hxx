@@ -31,6 +31,7 @@ namespace tnbLib
 			std::shared_ptr<maker::Point> Pnt;
 			std::shared_ptr<maker::GeometricMap> GeoMap;
 			std::shared_ptr<maker::CmptProfile> CmptProfile;
+			std::shared_ptr<maker::FieldFun> FieldFun;
 		};
 
 	private:
@@ -76,6 +77,11 @@ namespace tnbLib
 		const auto& CmptProfileMaker() const
 		{
 			return Makers()->CmptProfile;
+		}
+
+		const auto& FieldFunMaker() const
+		{
+			return Makers()->FieldFun;
 		}
 	};
 }

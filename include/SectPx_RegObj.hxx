@@ -48,7 +48,6 @@ namespace tnbLib
 		virtual Standard_Boolean IsFrame() const;
 
 		virtual Standard_Boolean IsOverrider() const;
-
 	};
 }
 

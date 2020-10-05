@@ -44,6 +44,7 @@
 #include <CadModel_Scripts.hxx>
 #include <Cad_Scripts.hxx>
 #include <Geo_Scripts.hxx>
+#include <IO_Scripts.hxx>
 #include <StbGMaker_Scripts.hxx>
 
 #ifdef DebugInfo
@@ -65,17 +66,18 @@ Standard_Integer main()
 	//chai.add(chaiscript::fun(&yy::myFun), "my_fun");
 	//chai.add(chaiscript::fun(&yy::print), "my_print");
 	global_scripts(chai);
-	script::sectPx(chai);
+	script::load_sectpx(chai);
 	script::load_geo(chai);
 	script::load_cad_model(chai);
 	script::load_cad(chai);
 	script::load_stb_gmaker(chai);
+	script::load_io_tecplot(chai);
 	/*PAUSE;
 	chai.eval
 	(
 		R"(puts(var x = create_fixed_par(0.1) );)"
 	);*/
-	fileName myFileName("tnbscript.txt");
+	fileName myFileName("secpx_script.txt");
 	//IFstream myFile(myFileName);
 	try
 	{

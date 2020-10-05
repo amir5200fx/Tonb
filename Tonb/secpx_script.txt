@@ -1,0 +1,32 @@
+
+//- make a new frame
+var frame = px_newFrame();
+
+var x0_id = frame.getParameterMaker().makeConstant(0);
+var y0_id = frame.getParameterMaker().makeConstant(0);
+
+var x1_id = frame.getParameterMaker().makeFixed(0.8);
+var y1_id = frame.getParameterMaker().makeFixed(0.3);
+
+//- get the parameter maker
+var par_maker = frame.getParameterMaker();
+
+var p0_id = frame.getPointMaker().makeOuterComponent(par_maker.select(x0_id), par_maker.select(y0_id));
+var p1_id = frame.getPointMaker().makeOuterComponent(par_maker.select(x1_id), par_maker.select(y1_id));
+
+//- get the point maker
+var point_maker = frame.getPointMaker();
+var profile_maker_id = frame.getCmptProfileMaker().makeProfile(point_maker.select(p0_id), point_maker.select(p1_id));
+
+//- get the cmpt. profile maker
+var cmptProfile_maker = frame.getCmptProfileMaker();
+var profile_maker = cmptProfile_maker.select(profile_maker_id);
+
+profile_maker.init();
+
+var profile_Q = profile_maker.retrieveProfileQ();
+var points = profile_Q.retrievePoints();
+
+var myFileName = fileName("sectpx_script_out.plt");
+var myFile = ofstream(myFileName);
+tecPlot_exportCurve(points, myFile);

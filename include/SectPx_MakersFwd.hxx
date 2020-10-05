@@ -13,6 +13,7 @@ namespace tnbLib
 		class Point;
 		class GeometricMap;
 		class CmptProfile;
+		class FieldFun;
 	}
 }
 
