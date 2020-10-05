@@ -1,5 +1,0 @@
-#define List_FOR_ALL(f, i)  register label i = (f).size(); while (i--) {
-#define List_END_FOR_ALL  }
-#define List_ELEM(f, fp, i)  (*fp++)
-#define List_ACCESS(type, f, fp) register type* __restrict fp = (f).begin()
-#define List_CONST_ACCESS(type, f, fp) register const type* __restrict fp = (f).begin()

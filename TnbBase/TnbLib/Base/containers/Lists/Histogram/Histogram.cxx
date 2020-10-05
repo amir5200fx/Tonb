@@ -1,2 +1,0 @@
-#include <Histogram.hxx>
-
