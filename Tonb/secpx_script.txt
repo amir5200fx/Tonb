@@ -16,9 +16,17 @@ for(var i = 0; i < profiles.size(); ++i)
 
 var parameters = frame.retrieveFixedParameters();
 
+//- List of the parameters are:
+//	...1) length
+//  ...2) width
+//  ...3) mid
+//  ...4) left corner
+//  ...5) right corner 
+
 parameters.at("length").setValue(2.0);
 parameters.at("width").setValue(3.0);
 parameters.at("mid").setValue(0.2);
+parameters.at("right corner").setValue(0.35);
 
 for(var i = 0; i < profiles.size(); ++i)
 {

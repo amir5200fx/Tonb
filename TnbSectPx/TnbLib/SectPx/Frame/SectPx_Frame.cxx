@@ -250,7 +250,7 @@ void tnbLib::SectPx_Frame::MakeUShape
 
 	const auto t2_id = ParameterMaker()->CreateFixed("mid", 0.5);
 	const auto t3_id = ParameterMaker()->CreateFixed("left corner", 0);
-	const auto t4_id = ParameterMaker()->CreateConstant("right corner", 1);
+	const auto t4_id = ParameterMaker()->CreateFixed("right corner", 1);
 
 
 
