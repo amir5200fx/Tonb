@@ -6,6 +6,13 @@
 #include <SectPx_ParsFwd.hxx>
 #include <SectPx_PntsFwd.hxx>
 #include <SectPx_MakersFwd.hxx>
+#include <Pnt2d.hxx>
+#include <Dir2d.hxx>
+
+#include <vector>
+#include <map>
+
+#include <string>
 
 namespace tnbLib
 {
@@ -15,6 +22,7 @@ namespace tnbLib
 	class SectPx_FieldFun;
 	class SectPx_GeoMap;
 	class SectPx_Coord;
+	class SectPx_ProfileQ;
 
 	class SectPx_Frame
 		: public SectPx_Entity
@@ -54,6 +62,11 @@ namespace tnbLib
 			AllocateMemory();
 		}
 
+		const auto& Registry() const
+		{
+			return theRegistry_;
+		}
+
 		const auto& Makers() const
 		{
 			return theMakers_;
@@ -83,6 +96,51 @@ namespace tnbLib
 		{
 			return Makers()->FieldFun;
 		}
+
+		Standard_Integer NbProfiles() const;
+
+		std::vector<std::shared_ptr<SectPx_ProfileQ>> 
+			RetrieveProfilesQ() const;
+
+		std::map<std::string, std::shared_ptr<SectPx_FixedPar>> 
+			RetrieveFixedParameters() const;
+
+		void MakeLineSegment();
+
+		Standard_Integer MakeLineSegment
+		(
+			const Pnt2d& theP0,
+			const Pnt2d& theP1
+		);
+
+		void MakeCorner();
+
+		void MakeCorner
+		(
+			const Pnt2d& theP0, 
+			const Pnt2d& theP1
+		);
+
+		void MakeCorner
+		(
+			const Pnt2d& theP0,
+			const Dir2d& theDir0, 
+			const Standard_Real theAngl0,
+			const Pnt2d& theP1, 
+			const Dir2d& theDir1,
+			const Standard_Real theAngl1
+		);
+
+		void MakeUShape();
+
+		void MakeUShape
+		(
+			const Pnt2d& theP0,
+			const Pnt2d& theP1, 
+			const Standard_Real w
+		);
+
+
 	};
 }
 
