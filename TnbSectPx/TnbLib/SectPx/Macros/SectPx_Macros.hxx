@@ -11,7 +11,6 @@
 	}																		\
 																			\
 	PAR=INPPAR;																\
-	AddThisToChild(INPPAR);													\
 																			\
 	if(INPPAR AND INPPAR->InCycle())										\
 	{																		\
@@ -19,6 +18,7 @@
 			<< "the parameter is just taken into a cycle!" << endl			\
 			<< abort(FatalError);											\
 	}																		\
+	AddThisToChild(INPPAR);													\
 }
 
 #define AddThisParentToChild(PAR)									\
