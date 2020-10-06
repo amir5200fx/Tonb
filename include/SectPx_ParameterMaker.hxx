@@ -46,7 +46,27 @@ namespace tnbLib
 				) const;
 
 			Standard_Integer
+				CreateFree
+				(
+					const word& theName,
+					const std::shared_ptr<SectPx_FieldFun>& theField
+				) const;
+
+			Standard_Integer
 				CreateFixed
+				(
+					const Standard_Real x
+				) const;
+
+			Standard_Integer
+				CreateFixed
+				(
+					const word& theName,
+					const Standard_Real x
+				) const;
+
+			Standard_Integer
+				CreateConstant
 				(
 					const Standard_Real x
 				) const;
@@ -54,6 +74,7 @@ namespace tnbLib
 			Standard_Integer
 				CreateConstant
 				(
+					const word& theName,
 					const Standard_Real x
 				) const;
 
