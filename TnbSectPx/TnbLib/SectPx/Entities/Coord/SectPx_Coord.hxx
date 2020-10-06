@@ -11,7 +11,7 @@ namespace tnbLib
 {
 
 	class SectPx_Coord
-		: public SectPx_ParentAdaptor
+		/*: public SectPx_ParentAdaptor*/
 	{
 
 		/*Private Data*/
