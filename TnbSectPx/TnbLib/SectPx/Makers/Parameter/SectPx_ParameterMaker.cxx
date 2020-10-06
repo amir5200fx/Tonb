@@ -43,6 +43,20 @@ tnbLib::maker::Parameter::CreateFree
 }
 
 Standard_Integer 
+tnbLib::maker::Parameter::CreateFree
+(
+	const word & theName, 
+	const std::shared_ptr<SectPx_FieldFun>& theField
+) const
+{
+	auto freeParam = std::make_shared<SectPx_FreePar>(theField);
+	Debug_Null_Pointer(freeParam);
+
+	Debug_Null_Pointer(Registry());
+	return Registry()->Import(theName, std::move(freeParam));
+}
+
+Standard_Integer 
 tnbLib::maker::Parameter::CreateFixed
 (
 	const Standard_Real x
@@ -56,6 +70,20 @@ tnbLib::maker::Parameter::CreateFixed
 }
 
 Standard_Integer 
+tnbLib::maker::Parameter::CreateFixed
+(
+	const word & theName,
+	const Standard_Real x
+) const
+{
+	auto fixedParam = std::make_shared<SectPx_FixedPar>(x);
+	Debug_Null_Pointer(fixedParam);
+
+	Debug_Null_Pointer(Registry());
+	return Registry()->Import(theName, std::move(fixedParam));
+}
+
+Standard_Integer 
 tnbLib::maker::Parameter::CreateConstant
 (
 	const Standard_Real x
@@ -66,6 +94,20 @@ tnbLib::maker::Parameter::CreateConstant
 
 	Debug_Null_Pointer(Registry());
 	return Registry()->Import(std::move(constParam));
+}
+
+Standard_Integer 
+tnbLib::maker::Parameter::CreateConstant
+(
+	const word & theName,
+	const Standard_Real x
+) const
+{
+	auto constParam = std::make_shared<SectPx_ConstPar>(x);
+	Debug_Null_Pointer(constParam);
+
+	Debug_Null_Pointer(Registry());
+	return Registry()->Import(theName, std::move(constParam));
 }
 
 std::shared_ptr<tnbLib::SectPx_Par> 
