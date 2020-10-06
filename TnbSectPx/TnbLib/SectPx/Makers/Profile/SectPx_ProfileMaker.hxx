@@ -88,6 +88,8 @@ namespace tnbLib
 					const Standard_Integer theIndex
 				) const;
 
+			//- Returns index of the left and right edge that are created due to the
+			//- inserting new point, respectively
 			std::tuple<Standard_Integer, Standard_Integer>
 				ImportPnt
 				(
@@ -95,6 +97,8 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Edge>& theEdge
 				);
 
+			//- returns index of the new edge that is created after removing the point
+			//- WARNING! throws an exception if the point is in the boundary
 			Standard_Integer
 				RemovePnt
 				(

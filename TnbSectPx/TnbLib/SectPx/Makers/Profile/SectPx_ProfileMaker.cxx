@@ -5,7 +5,7 @@
 #include <SectPx_Registry.hxx>
 #include <SectPx_ProfileQ.hxx>
 #include <SectPx_PntTools.hxx>
-//#include <SectPx_Tools.hxx>
+#include <SectPx_Tools.hxx>
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_Node.hxx>
 #include <TnbError.hxx>
@@ -233,6 +233,90 @@ tnbLib::maker::Profile::ImportPnt
 
 	auto t = std::make_tuple(snb0, snb1);
 	return std::move(t);
+}
+
+Standard_Integer 
+tnbLib::maker::Profile::RemovePnt
+(
+	const std::shared_ptr<SectPx_Pnt>& thePnt
+)
+{
+	Debug_If_Condition(NOT IsDone());
+
+	Debug_Null_Pointer(thePnt);
+	if (IsOnBoundary(thePnt))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "it's forbidden to remove a boundary pnt" << endl
+			<< abort(FatalError);
+	}
+
+	auto tPnt = std::dynamic_pointer_cast<SectPx_TPnt>(thePnt);
+	Debug_Null_Pointer(tPnt);
+
+	Debug_If_Condition(tPnt->NbEdges() NOT_EQUAL 2);
+
+	std::shared_ptr<SectPx_Pnt> pnt[2];
+	std::shared_ptr<SectPx_Edge> removing[2];
+
+	Standard_Integer k = 0;
+	for (const auto& x : tPnt->Edges())
+	{
+		auto seg = x.second.lock();
+		Debug_Null_Pointer(seg);
+
+		removing[k++] = std::move(seg);
+	}
+
+	pnt[0] = removing[0]->Other(thePnt);
+	pnt[1] = removing[1]->Other(thePnt);
+
+	RemoveEdge(removing[0]);
+	RemoveEdge(removing[1]);
+
+	Debug_If_Condition(tPnt->NbEdges());
+#ifdef _DEBUG
+	if (pnt[0]->IsBoundary())
+	{
+		Debug_If_Condition(std::dynamic_pointer_cast<SectPx_TPnt>(pnt[0])->NbEdges());
+	}
+	else
+	{
+		Debug_If_Condition(std::dynamic_pointer_cast<SectPx_TPnt>(pnt[0])->NbEdges() NOT_EQUAL 1);
+	}
+
+	if (pnt[1]->IsBoundary())
+	{
+		Debug_If_Condition(std::dynamic_pointer_cast<SectPx_TPnt>(pnt[1])->NbEdges());
+	}
+	else
+	{
+		Debug_If_Condition(std::dynamic_pointer_cast<SectPx_TPnt>(pnt[1])->NbEdges() NOT_EQUAL 1);
+	}
+#endif // _DEBUG
+
+	//thePnt->RemoveThisFromChilds();
+	SectPx_Tools::RemoveParentFromChildren(thePnt);
+
+	if (thePnt->HasChildMap())
+	{
+		for (Standard_Integer i = 0; i < thePnt->NbChildMaps(); i++)
+		{
+			auto parent = thePnt->ChildMap(i);
+			if (parent)
+			{
+				Registry()->Remove(parent);
+			}
+		}
+	}
+
+	Registry()->Remove(thePnt);
+
+	auto snb = MakeEdge(pnt[0], pnt[1]);
+	auto segment = SelectEdge(snb);
+	Debug_Null_Pointer(segment);
+
+	return snb;
 }
 
 namespace tnbLib
