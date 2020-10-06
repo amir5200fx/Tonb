@@ -84,12 +84,44 @@ tnbLib::SectPx_Registry::Import
 Standard_Integer 
 tnbLib::SectPx_Registry::Import
 (
+	const word & theName, 
+	const std::shared_ptr<SectPx_RegObj>& theObj
+)
+{
+	const auto id = Counter().RetrieveIndex();
+
+	theObj->SetName(theName);
+	theObj->SetIndex(id);
+
+	Add(id, theObj);
+	return id;
+}
+
+Standard_Integer 
+tnbLib::SectPx_Registry::Import
+(
 	std::shared_ptr<SectPx_RegObj>&& theObj
 )
 {
 	const auto id = Counter().RetrieveIndex();
 
 	theObj->SetName(theObj->RegObjTypeName() + " nb. " + std::to_string(id));
+	theObj->SetIndex(id);
+
+	Add(id, std::move(theObj));
+	return id;
+}
+
+Standard_Integer 
+tnbLib::SectPx_Registry::Import
+(
+	const word & theName, 
+	std::shared_ptr<SectPx_RegObj>&& theObj
+)
+{
+	const auto id = Counter().RetrieveIndex();
+
+	theObj->SetName(theName);
 	theObj->SetIndex(id);
 
 	Add(id, std::move(theObj));

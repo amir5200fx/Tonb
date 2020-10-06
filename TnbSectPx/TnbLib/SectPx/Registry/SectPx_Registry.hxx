@@ -91,6 +91,20 @@ namespace tnbLib
 		Standard_Integer
 			Import
 			(
+				const word& theName,
+				const std::shared_ptr<SectPx_RegObj>& theObj
+			);
+
+		Standard_Integer
+			Import
+			(
+				std::shared_ptr<SectPx_RegObj>&& theObj
+			);
+
+		Standard_Integer
+			Import
+			(
+				const word& theName,
 				std::shared_ptr<SectPx_RegObj>&& theObj
 			);
 
