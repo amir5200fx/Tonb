@@ -24,7 +24,7 @@ namespace tnbLib
 
 	public:
 
-		static Standard_Integer
+		/*static Standard_Integer
 			NbParents
 			(
 				const std::shared_ptr<SectPx_Coord>& thePnt
@@ -34,12 +34,12 @@ namespace tnbLib
 			HasParent
 			(
 				const std::shared_ptr<SectPx_Coord>& thePnt
-			);
+			);*/
 
 		static Standard_Boolean
 			IsRemovable
 			(
-				const std::shared_ptr<SectPx_Coord>& thePnt
+				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
 		static Standard_Boolean
