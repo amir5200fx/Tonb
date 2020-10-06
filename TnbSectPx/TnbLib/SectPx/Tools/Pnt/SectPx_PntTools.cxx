@@ -5,32 +5,35 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-Standard_Integer
-tnbLib::SectPx_PntTools::NbParents
-(
-	const std::shared_ptr<SectPx_Coord>& thePnt
-)
-{
-	Debug_Null_Pointer(thePnt);
-	return thePnt->NbParents();
-}
-
-Standard_Boolean
-tnbLib::SectPx_PntTools::HasParent
-(
-	const std::shared_ptr<SectPx_Coord>& thePnt
-)
-{
-	return (Standard_Boolean)NbParents(thePnt);
-}
+//Standard_Integer
+//tnbLib::SectPx_PntTools::NbParents
+//(
+//	const std::shared_ptr<SectPx_Coord>& thePnt
+//)
+//{
+//	Debug_Null_Pointer(thePnt);
+//	return thePnt->NbParents();
+//}
+//
+//Standard_Boolean
+//tnbLib::SectPx_PntTools::HasParent
+//(
+//	const std::shared_ptr<SectPx_Coord>& thePnt
+//)
+//{
+//	return (Standard_Boolean)NbParents(thePnt);
+//}
 
 Standard_Boolean
 tnbLib::SectPx_PntTools::IsRemovable
 (
-	const std::shared_ptr<SectPx_Coord>& thePnt
+	const std::shared_ptr<SectPx_Pnt>& thePnt
 )
 {
-	return NOT HasParent(thePnt);
+	Debug_Null_Pointer(thePnt);
+	auto tpt = std::dynamic_pointer_cast<SectPx_TPnt>(thePnt);
+	Debug_Null_Pointer(tpt);
+	return NOT tpt->NbEdges();
 }
 
 Standard_Boolean
