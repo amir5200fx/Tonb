@@ -64,6 +64,7 @@ void tnbLib::script::load_sectpx(chaiscript::ChaiScript& chai)
 	typedef std::shared_ptr<SectPx_Node> node_t;
 	typedef std::shared_ptr<SectPx_Edge> edge_t;
 	typedef std::shared_ptr<SectPx_ProfileQ> prfQ_t;
+	typedef std::shared_ptr<SectPx_FixedPar> fxPar_t;
 
 	auto mod = std::make_shared<chaiscript::Module>();
 
@@ -76,7 +77,7 @@ void tnbLib::script::load_sectpx(chaiscript::ChaiScript& chai)
 	mod->add(chaiscript::user_type<tProf_t>(), "px_topoProfile");
 	mod->add(chaiscript::user_type<node_t>(), "px_node");
 	mod->add(chaiscript::user_type<edge_t>(), "px_edge");
-	mod->add(chaiscript::user_type<prfQ_t>(), "px_prileQ");
+	mod->add(chaiscript::user_type<prfQ_t>(), "px_prfQ");
 
 	/*mod->add(chaiscript::constructor<SectPx_Frame()>(), "px_frame");
 	mod->add(chaiscript::constructor<SectPx_Frame(const Standard_Integer)>(), "px_frame");
@@ -88,7 +89,13 @@ void tnbLib::script::load_sectpx(chaiscript::ChaiScript& chai)
 	/*mod->add(chaiscript::user_type<SectPx_Par>(), "px_par");*/
 	mod->add(chaiscript::user_type<std::shared_ptr<SectPx_Par>>(), "px_par");
 	mod->add(chaiscript::user_type<std::vector<std::shared_ptr<SectPx_Par>>>(), "px_parVector");
+	mod->add(chaiscript::user_type<fxPar_t>(), "px_fxPar");
+	mod->add(chaiscript::fun([](const fxPar_t& f, const Standard_Real x)->void {Debug_Null_Pointer(f); f->SetValue(x); }), "setValue");
+	mod->add(chaiscript::user_type<std::map<std::string, fxPar_t>>(), "px_stringToFxParMap");
 	mod->add(chaiscript::fun([](const std::vector<std::shared_ptr<SectPx_Par>>& v) {return (Standard_Integer)v.size(); }), "getSize");
+	mod->add(chaiscript::fun([](const std::map<std::string, fxPar_t>& m) {return m.size(); }), "size");
+	mod->add(chaiscript::user_type<std::vector<prfQ_t>>(), "px_prfQVector");
+	mod->add(chaiscript::fun([](const std::vector<prfQ_t>& v) {return (Standard_Integer)v.size(); }), "size");
 	//mod->add(chaiscript::fun(&std::vector<std::shared_ptr<SectPx_Par>>::size), "size");
 
 	mod->add
@@ -123,6 +130,11 @@ void tnbLib::script::load_sectpx(chaiscript::ChaiScript& chai)
 		"[]"
 	);
 
+	mod->add(chaiscript::fun(static_cast<const prfQ_t&(std::vector<prfQ_t>::*)(const size_t)const>(&std::vector<prfQ_t>::at)), "at");
+	mod->add(chaiscript::fun(static_cast<const prfQ_t&(std::vector<prfQ_t>::*)(const size_t)const>(&std::vector<prfQ_t>::operator[])), "[]");
+	mod->add(chaiscript::fun(static_cast<const fxPar_t&(std::map<std::string, fxPar_t>::*)(const std::string&)const>(&std::map<std::string, fxPar_t>::at)), "at");
+	mod->add(chaiscript::fun(static_cast<const fxPar_t&(std::map<std::string, fxPar_t>::*)(const std::string&)const>(&std::map<std::string, fxPar_t>::at)), "at");
+	mod->add(chaiscript::fun(static_cast<fxPar_t&(std::map<std::string, fxPar_t>::*)(const std::string&)>(&std::map<std::string, fxPar_t>::operator[])), "[]");
 	//mod->add(chaiscript::fun(&SectPx_FrameAPI::CreateFrame), "px_newFrame");
 
 	mod->add(chaiscript::fun([](const frame_t& f)-> const std::shared_ptr<SectPx_Frame::EntityMaker>& {Debug_Null_Pointer(f); return f->Makers(); }), "getMakers");
@@ -131,6 +143,17 @@ void tnbLib::script::load_sectpx(chaiscript::ChaiScript& chai)
 	mod->add(chaiscript::fun([](const frame_t& f)-> const std::shared_ptr<maker::GeometricMap>& {Debug_Null_Pointer(f); return f->GeometricMapMaker(); }), "getGeometricMap");
 	mod->add(chaiscript::fun([](const frame_t& f)-> const std::shared_ptr<maker::FieldFun>& {Debug_Null_Pointer(f); return f->FieldFunMaker(); }), "getFieldMaker");
 	mod->add(chaiscript::fun([](const frame_t& f)-> const std::shared_ptr<maker::CmptProfile>& {Debug_Null_Pointer(f); return f->CmptProfileMaker(); }), "getCmptProfileMaker");
+
+	mod->add(chaiscript::fun([](const frame_t& f)-> void {Debug_Null_Pointer(f); f->MakeLineSegment(); }), "makeSegment");
+	mod->add(chaiscript::fun([](const frame_t& f, const Pnt2d& p0, const Pnt2d& p1)-> void {Debug_Null_Pointer(f); f->MakeLineSegment(p0, p1); }), "makeSegment");
+	mod->add(chaiscript::fun([](const frame_t& f)-> void {Debug_Null_Pointer(f); f->MakeCorner(); }), "makeCorner");
+	mod->add(chaiscript::fun([](const frame_t& f, const Pnt2d& p0, const Pnt2d& p1)-> void {Debug_Null_Pointer(f); f->MakeCorner(p0, p1); }), "makeCorner");
+	mod->add(chaiscript::fun([](const frame_t& f, const Pnt2d& p0, const Dir2d& d0, const Standard_Real a0, const Pnt2d& p1, const Dir2d& d1, const Standard_Real a1)-> void {Debug_Null_Pointer(f); f->MakeCorner(p0, d0, a0, p1, d1, a1); }), "makeCorner");
+	mod->add(chaiscript::fun([](const frame_t& f)-> void {Debug_Null_Pointer(f); f->MakeUShape(); }), "makeUShape");
+	mod->add(chaiscript::fun([](const frame_t& f, const Pnt2d& p0, const Pnt2d& p1, const Standard_Real w)-> void {Debug_Null_Pointer(f); f->MakeUShape(p0, p1, w); }), "makeUShape");
+	mod->add(chaiscript::fun([](const frame_t& f)-> Standard_Integer {Debug_Null_Pointer(f); return f->NbProfiles(); }), "nbProfiles");
+	mod->add(chaiscript::fun([](const frame_t& f)-> std::vector<prfQ_t> {Debug_Null_Pointer(f); auto v = f->RetrieveProfilesQ(); return std::move(v); }), "retrieveProfilesQ");
+	mod->add(chaiscript::fun([](const frame_t& f)-> std::map<std::string, fxPar_t> {Debug_Null_Pointer(f); auto v = f->RetrieveFixedParameters(); return std::move(v); }), "retrieveFixedParameters");
 
 	typedef std::shared_ptr<maker::Parameter> parMaker_t;
 	mod->add(chaiscript::user_type<parMaker_t>(), "px_parameterMaker");
