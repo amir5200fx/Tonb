@@ -16,7 +16,7 @@ for(var i = 0; i < profiles.size(); ++i)
 
 var parameters = frame.retrieveFixedParameters();
 
-//- List of the parameters are:
+//- List of the parameters is:
 //	...1) length
 //  ...2) width
 //  ...3) mid
