@@ -2,10 +2,10 @@
 
 #include <SectPx_Node.hxx>
 #include <SectPx_InterfaceMaker.hxx>
+#include <SectPx_PntTools.hxx>
+#include <SectPx_Pnt.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
-const char* tnbLib::SectPx_TopoProfile::typeName_("profile");
 
 tnbLib::SectPx_TopoProfile::SectPx_TopoProfile
 (
@@ -46,10 +46,32 @@ tnbLib::SectPx_TopoProfile::SectPx_TopoProfile
 	//- empty body
 }
 
-tnbLib::word
-tnbLib::SectPx_TopoProfile::RegObjTypeName() const
+void tnbLib::SectPx_TopoProfile::SetProfile
+(
+	const std::shared_ptr<SectPx_Node>& theNode,
+	const std::shared_ptr<SectPx_TopoProfile>& theProfile
+)
 {
-	return typeName_;
+	Debug_Null_Pointer(theNode);
+	Debug_Null_Pointer(theProfile);
+	theNode->SetProfile(theProfile);
+}
+
+std::vector<tnbLib::Pnt2d> 
+tnbLib::SectPx_TopoProfile::RetrieveCoords() const
+{
+	Update();
+
+	auto pnts = SectPx_PntTools::TrackPnts(Node0(), Node1());
+
+	std::vector<Pnt2d> coords;
+	coords.reserve(pnts.size());
+	for (const auto& x : pnts)
+	{
+		auto coord = x->Coord();
+		coords.push_back(std::move(coord));
+	}
+	return std::move(coords);
 }
 
 tnbLib::sectPxLib::regObjType
@@ -62,36 +84,4 @@ Standard_Boolean
 tnbLib::SectPx_TopoProfile::IsProfile() const
 {
 	return Standard_True;
-}
-
-std::shared_ptr<tnbLib::SectPx_TopoProfile> 
-tnbLib::SectPx_TopoProfile::MakeProfile
-(
-	const std::shared_ptr<SectPx_Node>& theNode0,
-	const std::shared_ptr<SectPx_Node>& theNode1,
-	const std::shared_ptr<SectPx_Registry>& theReg
-)
-{
-	auto profile = std::make_shared<SectPx_TopoProfile>(theNode0, theNode1);
-	Debug_Null_Pointer(profile);
-
-	theNode0->SetProfile(std::dynamic_pointer_cast<SectPx_TopoProfile>(profile->This()));
-	theNode1->SetProfile(std::dynamic_pointer_cast<SectPx_TopoProfile>(profile->This()));
-
-	const auto interfaceMaker = std::make_shared<maker::Interface>(theReg);
-	Debug_Null_Pointer(interfaceMaker);
-
-	/*const auto intf0_id = */interfaceMaker->CreateEmpty(theNode0);
-	/*const auto intf1_id = */interfaceMaker->CreateEmpty(theNode1);
-
-	/*const auto intf0 = interfaceMaker->SelectInterface(intf0_id);
-	Debug_Null_Pointer(intf0);
-
-	const auto intf1 = interfaceMaker->SelectInterface(intf1_id);
-	Debug_Null_Pointer(intf1);*/
-
-	/*theNode0->SetInterface(intf0);
-	theNode1->SetInterface(intf1);*/
-
-	return std::move(profile);
 }

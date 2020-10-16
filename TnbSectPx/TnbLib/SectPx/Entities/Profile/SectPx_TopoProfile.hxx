@@ -2,7 +2,10 @@
 #ifndef _SectPx_Profile_Header
 #define _SectPx_Profile_Header
 
+#include <Pnt2d.hxx>
 #include <SectPx_RegObj.hxx>
+
+#include <vector>
 
 namespace tnbLib
 {
@@ -10,6 +13,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Node;
 	class SectPx_Registry;
+	class SectPx_KnotVector;
 
 	class SectPx_TopoProfile
 		: public SectPx_RegObj
@@ -20,13 +24,9 @@ namespace tnbLib
 		std::shared_ptr<SectPx_Node> theNode0_;
 		std::shared_ptr<SectPx_Node> theNode1_;
 
+		std::shared_ptr<SectPx_KnotVector> theKnotAlg_;
+
 	protected:
-
-		
-
-	public:
-
-		static const char* typeName_;
 
 		SectPx_TopoProfile
 		(
@@ -49,6 +49,18 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
+		virtual void Update() const
+		{}
+
+
+		static void SetProfile
+		(
+			const std::shared_ptr<SectPx_Node>& theNode, 
+			const std::shared_ptr<SectPx_TopoProfile>& theProfile
+		);
+
+	public:
+
 		const auto& Node0() const
 		{
 			return theNode0_;
@@ -59,20 +71,28 @@ namespace tnbLib
 			return theNode1_;
 		}
 
-		word RegObjTypeName() const override;
+		const auto& Knots() const
+		{
+			return theKnotAlg_;
+		}
+
+		std::vector<Pnt2d> 
+			RetrieveCoords() const;
+
+		void SetKnot(const std::shared_ptr<SectPx_KnotVector>& theKnot)
+		{
+			theKnotAlg_ = theKnot;
+		}
+
+		void SetKnot(std::shared_ptr<SectPx_KnotVector>&& theKnot)
+		{
+			theKnotAlg_ = std::move(theKnot);
+		}
 
 		sectPxLib::regObjType RegObjType() const override;
 
 		Standard_Boolean IsProfile() const override;
 
-
-		static std::shared_ptr<SectPx_TopoProfile> 
-			MakeProfile
-			(
-				const std::shared_ptr<SectPx_Node>& theNode0, 
-				const std::shared_ptr<SectPx_Node>& theNode1,
-				const std::shared_ptr<SectPx_Registry>& theReg
-			);
 	};
 }
 
