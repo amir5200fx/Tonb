@@ -5,6 +5,9 @@
 #include <Dir2d.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
+
+#include <Entity_Segment.hxx>
+#include <Entity_Line.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
@@ -21,6 +24,119 @@ namespace tnbLib
 	{
 
 	public:
+
+		class IntersectEntity2d
+		{
+
+		public:
+
+			bool Result = false;
+
+			IntersectEntity2d()
+			{}
+
+			virtual bool IsPoint() const
+			{
+				return false;
+			}
+
+			virtual bool IsSegment() const
+			{
+				return false;
+			}
+
+			virtual bool IsLine() const
+			{
+				return false;
+			}
+		};
+
+		class PointIntersectEntity2d
+			: public IntersectEntity2d
+		{
+
+		public:
+
+			Pnt2d IntPnt;
+
+			PointIntersectEntity2d()
+			{
+				Result = true;
+			}
+
+			PointIntersectEntity2d(Pnt2d&& pt)
+				: IntPnt(std::move(pt))
+			{
+				Result = true;
+			}
+
+			bool IsPoint() const override
+			{
+				return true;
+			}
+		};
+
+		class SegmentIntersectEntity2d
+			: public IntersectEntity2d
+		{
+
+		public:
+
+			Entity2d_Segment Segment;
+
+			SegmentIntersectEntity2d()
+			{
+				Result = true;
+			}
+
+			SegmentIntersectEntity2d(Entity2d_Segment&& seg)
+				: Segment(std::move(seg))
+			{
+				Result = true;
+			}
+
+			bool IsSegment() const override
+			{
+				return true;
+			}
+		};
+
+		class LineIntersectEntity2d
+			: public IntersectEntity2d
+		{
+
+		public:
+
+			Entity2d_Line Line;
+
+			LineIntersectEntity2d()
+			{
+				Result = true;
+			}
+
+			LineIntersectEntity2d(Entity2d_Line&& line)
+				: Line(std::move(line))
+			{
+				Result = true;
+			}
+
+			bool IsLine() const override
+			{
+				return true;
+			}
+		};
+
+		static Pnt2d 
+			GetIntersectionPoint
+			(
+				const std::shared_ptr<IntersectEntity2d>&
+			);
+
+		static Entity2d_Segment
+			GetIntersectionSegment
+			(
+				const std::shared_ptr<IntersectEntity2d>&
+			);
 
 		static Standard_Integer
 			Round
@@ -252,6 +368,20 @@ namespace tnbLib
 				const Pnt2d& P1,
 				const Dir2d& t1,
 				const Standard_Real theAngTol
+			);
+
+		static std::shared_ptr<IntersectEntity2d> 
+			Intersection_cgal
+			(
+				const Entity2d_Segment&, 
+				const Entity2d_Segment&
+			);
+
+		static std::shared_ptr<IntersectEntity2d>
+			Intersection_cgal
+			(
+				const Entity2d_Line&,
+				const Entity2d_Line&
 			);
 
 		static Pnt2d 
