@@ -79,7 +79,7 @@ tnbLib::sectPxLib::Pnt_GeoField::HasChildMap() const
 Standard_Boolean 
 tnbLib::sectPxLib::Pnt_GeoField::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	return Standard_False;
@@ -107,7 +107,7 @@ void tnbLib::sectPxLib::Pnt_GeoField::AddThisToChildren() const
 
 void tnbLib::sectPxLib::Pnt_GeoField::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	//- empty body
@@ -115,7 +115,7 @@ void tnbLib::sectPxLib::Pnt_GeoField::RemoveThisFromChild
 
 void tnbLib::sectPxLib::Pnt_GeoField::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	//- empty body

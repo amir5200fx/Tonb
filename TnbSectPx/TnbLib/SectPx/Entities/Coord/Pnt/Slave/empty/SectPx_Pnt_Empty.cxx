@@ -120,7 +120,7 @@ tnbLib::sectPxLib::Pnt_Empty::HasChildMap() const
 Standard_Boolean
 tnbLib::sectPxLib::Pnt_Empty::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	return Standard_False;
@@ -148,7 +148,7 @@ void tnbLib::sectPxLib::Pnt_Empty::AddThisToChildren() const
 
 void tnbLib::sectPxLib::Pnt_Empty::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	//- empty body
@@ -156,7 +156,7 @@ void tnbLib::sectPxLib::Pnt_Empty::RemoveThisFromChild
 
 void tnbLib::sectPxLib::Pnt_Empty::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	//- empty body

@@ -15,6 +15,12 @@ tnbLib::SectPx_MasterPnt::IsGeoField() const
 }
 
 Standard_Boolean 
+tnbLib::SectPx_MasterPnt::IsOffset() const
+{
+	return Standard_False;
+}
+
+Standard_Boolean 
 tnbLib::SectPx_MasterPnt::IsMaster() const
 {
 	return Standard_True;

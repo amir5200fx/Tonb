@@ -5,5 +5,6 @@
 #include <SectPx_Pnt_Compnt.hxx>
 #include <SectPx_Pnt_GeoField.hxx>
 #include <SectPx_Pnt_Empty.hxx>
+#include <SectPx_Pnt_Offset.hxx>
 
 #endif // !_SectPx_Pnts_Header

@@ -99,7 +99,7 @@ tnbLib::sectPxLib::Pnt_Compnt::HasChildren() const
 Standard_Boolean
 tnbLib::sectPxLib::Pnt_Compnt::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	ReturnTrueIfParBelongsToThisParent(X(), thePar);
@@ -133,13 +133,13 @@ void tnbLib::sectPxLib::Pnt_Compnt::RemoveThisFromChildren() const
 
 void tnbLib::sectPxLib::Pnt_Compnt::AddThisToChildren() const
 {
-	AddThisParentToAllChilds(X());
-	AddThisParentToAllChilds(Y());
+	AddThisParentToChildren(X());
+	AddThisParentToChildren(Y());
 }
 
 void tnbLib::sectPxLib::Pnt_Compnt::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	RemoveThisParentFromChild(thePar);
@@ -147,7 +147,7 @@ void tnbLib::sectPxLib::Pnt_Compnt::RemoveThisFromChild
 
 void tnbLib::sectPxLib::Pnt_Compnt::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	AddThisParentToChild(thePar);
