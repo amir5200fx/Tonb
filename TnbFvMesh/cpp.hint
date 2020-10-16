@@ -1,8 +1,0 @@
-#define defineCompoundTypeName(Type, Name)
-#define addToRunTimeSelectionTable(baseType,thisType,argNames) 
-#define TypeName(TypeNameString) 
-#define defineRunTimeSelectionTable(baseType,argNames) 
-#define declareRunTimeSelectionTable(autoPtr,baseType,argNames,argList,parList)
-#define forAll(list, i)
-#define forAllRow(graph, rowI, index)
-#define forAllConstIter(Container,container,iter) 
