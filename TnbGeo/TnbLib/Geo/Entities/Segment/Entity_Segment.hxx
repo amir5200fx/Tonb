@@ -7,16 +7,16 @@
 namespace tnbLib
 {
 
-	template<class PointRef>
+	template<class Point>
 	class Entity_Segment
 	{
 
-		typedef typename remove_reference<PointRef>::type Point;
+		//typedef typename remove_reference<Point>::type Point;
 
 		/*Private Data*/
 
-		PointRef theP0_;
-		PointRef theP1_;
+		Point theP0_;
+		Point theP1_;
 
 	public:
 
@@ -34,26 +34,104 @@ namespace tnbLib
 			, theP1_(theP1)
 		{}
 
-		const Point& P0() const
+		Entity_Segment
+		(
+			Point&& theP0,
+			Point&& theP1
+		)
+			: theP0_(std::move(theP0))
+			, theP1_(std::move(theP1))
+		{}
+
+		const auto& P0() const
 		{
 			return theP0_;
 		}
 
-		/*Point& P0()
+		auto& P0Ref()
 		{
-			return const_cast<Point&>(theP0_);
-		}*/
+			return theP0_;
+		}
 
-		const Point& P1() const
+		const auto& P1() const
 		{
 			return theP1_;
 		}
 
-		/*Point& P1()
+		auto& P1Ref()
 		{
-			return const_cast<Point&>(theP1_);
-		}*/
+			return theP1_;
+		}
 	};
+
+	// Forward Declarations
+	class Pnt2d;
+	class Pnt3d;
+
+	template<>
+	class Entity_Segment<const Pnt2d&>
+	{
+
+		/*Private Data*/
+
+		const Pnt2d& theP0_;
+		const Pnt2d& theP1_;
+
+	public:
+
+		Entity_Segment
+		(
+			const Pnt2d& theP0,
+			const Pnt2d& theP1
+		)
+			: theP0_(theP0)
+			, theP1_(theP1)
+		{}
+
+		const auto& P0() const
+		{
+			return theP0_;
+		}
+
+		const auto& P1() const
+		{
+			return theP1_;
+		}
+	};
+
+	template<>
+	class Entity_Segment<const Pnt3d&>
+	{
+
+		/*Private Data*/
+
+		const Pnt3d& theP0_;
+		const Pnt3d& theP1_;
+
+	public:
+
+		Entity_Segment
+		(
+			const Pnt3d& theP0,
+			const Pnt3d& theP1
+		)
+			: theP0_(theP0)
+			, theP1_(theP1)
+		{}
+
+		const auto& P0() const
+		{
+			return theP0_;
+		}
+
+		const auto& P1() const
+		{
+			return theP1_;
+		}
+	};
+
+	typedef Entity_Segment<Pnt2d> Entity2d_Segment;
+	typedef Entity_Segment<Pnt3d> Entity3d_Segment;
 }
 
 #endif // !_Entity_Segment_Header
