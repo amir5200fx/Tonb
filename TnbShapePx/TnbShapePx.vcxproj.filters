@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{8c9ee915-78ac-4561-9579-c91b75b6d1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx">
+      <UniqueIdentifier>{1391b98b-565f-424a-8385-352de3c47db7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities">
+      <UniqueIdentifier>{c84abeac-0d35-433a-9658-2f7f64e624a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile">
+      <UniqueIdentifier>{bf3283c1-38b8-486a-89e7-2a509461f49b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Entity">
+      <UniqueIdentifier>{fd1916be-91f0-45d1-985f-294623acf47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Section">
+      <UniqueIdentifier>{4699d284-f456-4a2f-bf06-bf0b1f865a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Patch">
+      <UniqueIdentifier>{339ff1e3-9928-4c1a-9ac4-cb33ac897cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Patch\Extruded">
+      <UniqueIdentifier>{7b0f6170-6df0-4be1-acfe-232c35f26be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Patch\Revolved">
+      <UniqueIdentifier>{01fe9db8-ab27-42c4-b59f-7a7d12f8b7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Shape">
+      <UniqueIdentifier>{a4062e97-cc58-4cf0-917e-236870f8badd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm">
+      <UniqueIdentifier>{217b41ff-ef0c-427a-a8df-88f03dad5fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Discrete">
+      <UniqueIdentifier>{18258aea-3b6a-43b4-8204-8c9eca655959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Linear">
+      <UniqueIdentifier>{7bad0ff7-f090-4b5b-b194-9f2c45574bbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Func">
+      <UniqueIdentifier>{d174f68e-b457-4e71-8ccf-aab02cf407e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Interpl">
+      <UniqueIdentifier>{83770291-b0e6-4a45-9e63-84c3d240556e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Approx">
+      <UniqueIdentifier>{eefcc6dc-ca13-4a66-b466-52d964b53c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\ParmX">
+      <UniqueIdentifier>{23af15df-bb7f-4a1d-bb8f-a9ff7b588d64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Uniform">
+      <UniqueIdentifier>{e2e90a44-a9c5-4b9c-b9b2-71940a198dd2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\ShapePx_Profile.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Entity</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
