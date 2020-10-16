@@ -131,7 +131,7 @@ tnbLib::sectPxLib::GeoMap_Intersection::HasChildren() const
 Standard_Boolean 
 tnbLib::sectPxLib::GeoMap_Intersection::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	ReturnTrueIfParBelongsToThisParent(Angle0(), thePar);
@@ -165,13 +165,13 @@ void tnbLib::sectPxLib::GeoMap_Intersection::RemoveThisFromChildren() const
 
 void tnbLib::sectPxLib::GeoMap_Intersection::AddThisToChildren() const
 {
-	AddThisParentToAllChilds(Angle0());
-	AddThisParentToAllChilds(Angle1());
+	AddThisParentToChildren(Angle0());
+	AddThisParentToChildren(Angle1());
 }
 
 void tnbLib::sectPxLib::GeoMap_Intersection::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	AddThisParentToChild(thePar);
@@ -179,7 +179,7 @@ void tnbLib::sectPxLib::GeoMap_Intersection::AddThisToChild
 
 void tnbLib::sectPxLib::GeoMap_Intersection::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	RemoveThisParentFromChild(thePar);

@@ -52,6 +52,12 @@ tnbLib::SectPx_Parent::IsCPtsMap() const
 }
 
 Standard_Boolean 
+tnbLib::SectPx_Parent::IsCloud() const
+{
+	return Standard_False;
+}
+
+Standard_Boolean 
 tnbLib::SectPx_Parent::IsParent() const
 {
 	return Standard_True;

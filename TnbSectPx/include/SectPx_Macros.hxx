@@ -43,7 +43,7 @@
 	}																\
 }
 
-#define AddThisParentToAllChilds(PAR)									\
+#define AddThisParentToChildren(PAR)									\
 {																		\
 	auto par = PAR.lock();												\
 	if(par)																\

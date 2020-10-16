@@ -44,6 +44,8 @@ namespace tnbLib
 
 		virtual Standard_Boolean IsCPtsMap() const;
 
+		virtual Standard_Boolean IsCloud() const;
+
 		Standard_Boolean IsParent() const override;
 
 		virtual Standard_Boolean HasChildren() const;
@@ -52,15 +54,15 @@ namespace tnbLib
 
 		virtual std::shared_ptr<SectPx_Parent> ChildMap(const Standard_Integer theIndex) const;
 
-		virtual Standard_Boolean HasChild(const std::shared_ptr<SectPx_Par>& thePar) const = 0;
+		virtual Standard_Boolean HasChild(const std::shared_ptr<SectPx_Child>& thePar) const = 0;
 
 		virtual void RemoveThisFromChildren() const = 0;
 
 		virtual void AddThisToChildren() const = 0;
 
-		virtual void AddThisToChild(const std::shared_ptr<SectPx_Par>& thePar) const = 0;
+		virtual void AddThisToChild(const std::shared_ptr<SectPx_Child>& thePar) const = 0;
 
-		virtual void RemoveThisFromChild(const std::shared_ptr<SectPx_Par>& thePar) const = 0;
+		virtual void RemoveThisFromChild(const std::shared_ptr<SectPx_Child>& thePar) const = 0;
 
 		virtual std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const;
 

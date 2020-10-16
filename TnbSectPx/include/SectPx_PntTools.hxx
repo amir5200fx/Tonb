@@ -18,6 +18,9 @@ namespace tnbLib
 	class SectPx_Coord;
 	class SectPx_MasterPnt;
 	class SectPx_Edge;
+	class SectPx_Registry;
+	class SectPx_Node;
+	class Pnt2d;
 
 	class SectPx_PntTools
 	{
@@ -58,6 +61,20 @@ namespace tnbLib
 			IsGeoField
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
+			);
+
+		static std::vector<std::shared_ptr<SectPx_Pnt>> 
+			MakeOffsetPnts
+			(
+				const std::vector<Pnt2d>& theCoords,
+				const std::shared_ptr<SectPx_Registry>& theRegistry
+			);
+
+		static std::vector<std::shared_ptr<SectPx_Pnt>>
+			TrackPnts
+			(
+				const std::shared_ptr<SectPx_Node>& theNode0, 
+				const std::shared_ptr<SectPx_Node>& theNode1
 			);
 
 		static void deAttach

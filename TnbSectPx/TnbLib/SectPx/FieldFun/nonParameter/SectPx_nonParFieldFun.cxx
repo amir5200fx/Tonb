@@ -9,7 +9,7 @@ tnbLib::SectPx_nonParFieldFun::IsComplete() const
 Standard_Boolean 
 tnbLib::SectPx_nonParFieldFun::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	return Standard_False;
@@ -27,7 +27,7 @@ void tnbLib::SectPx_nonParFieldFun::AddThisToChildren() const
 
 void tnbLib::SectPx_nonParFieldFun::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	//- Empty body
@@ -35,7 +35,7 @@ void tnbLib::SectPx_nonParFieldFun::AddThisToChild
 
 void tnbLib::SectPx_nonParFieldFun::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	//- Empty body

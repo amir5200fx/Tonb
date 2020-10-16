@@ -93,7 +93,7 @@ tnbLib::sectPxLib::GeoMap_LinearInterpl::HasChildren() const
 Standard_Boolean 
 tnbLib::sectPxLib::GeoMap_LinearInterpl::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	ReturnTrueIfParBelongsToThisParent(Par(), thePar);
@@ -112,12 +112,12 @@ void tnbLib::sectPxLib::GeoMap_LinearInterpl::RemoveThisFromChildren() const
 
 void tnbLib::sectPxLib::GeoMap_LinearInterpl::AddThisToChildren() const
 {
-	AddThisParentToAllChilds(Par());
+	AddThisParentToChildren(Par());
 }
 
 void tnbLib::sectPxLib::GeoMap_LinearInterpl::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	AddThisParentToChild(thePar);
@@ -125,7 +125,7 @@ void tnbLib::sectPxLib::GeoMap_LinearInterpl::AddThisToChild
 
 void tnbLib::sectPxLib::GeoMap_LinearInterpl::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	RemoveThisParentFromChild(thePar);

@@ -63,7 +63,7 @@ tnbLib::sectPxLib::Datum_Compnt::HasChildren() const
 Standard_Boolean 
 tnbLib::sectPxLib::Datum_Compnt::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	ReturnTrueIfParBelongsToThisParent(X(), thePar);
@@ -139,7 +139,7 @@ void tnbLib::sectPxLib::Datum_Compnt::AddThisToChildren() const
 
 void tnbLib::sectPxLib::Datum_Compnt::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	AddThisParentToChild(thePar);
@@ -147,7 +147,7 @@ void tnbLib::sectPxLib::Datum_Compnt::AddThisToChild
 
 void tnbLib::sectPxLib::Datum_Compnt::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	RemoveThisParentFromChild(thePar);

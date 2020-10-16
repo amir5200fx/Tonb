@@ -5,8 +5,6 @@
 #include <SectPx_nonParFieldFun.hxx>
 #include <SectPx_ParsFwd.hxx>
 
-#include <map>
-
 namespace exprtk
 {
 	// Forward Declarations
@@ -31,9 +29,6 @@ namespace tnbLib
 			/*Private Data*/
 
 			string theExpr_;
-
-			/*std::map<word, Standard_Real&> theVariables_;
-			std::map<word, const Standard_Real&> theConstants_;*/
 
 			std::shared_ptr<exprtk::symbol_table<Standard_Real>> symbol_table_ptr;
 
@@ -66,6 +61,11 @@ namespace tnbLib
 		
 
 			const auto& Expression() const
+			{
+				return theExpr_;
+			}
+
+			auto& ExpressionRef()
 			{
 				return theExpr_;
 			}

@@ -65,3 +65,9 @@ tnbLib::SectPx_RegObj::IsOverrider() const
 {
 	return Standard_False;
 }
+
+Standard_Boolean 
+tnbLib::SectPx_RegObj::IsOffsetProfile() const
+{
+	return Standard_False;
+}

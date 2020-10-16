@@ -283,6 +283,69 @@
     <Filter Include="TnbLib\SectPx\Entities\CptsMap">
       <UniqueIdentifier>{e429b6fa-14f1-408e-a47e-f318b3ca4189}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Extruder">
+      <UniqueIdentifier>{56f8519d-840d-4009-84fb-afc634274ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\KnotVector">
+      <UniqueIdentifier>{bf827147-9a37-4336-9921-8ed04d003fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\KnotVector\Uniform">
+      <UniqueIdentifier>{5605c85d-391c-4dd5-b889-ee657b29e102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Profile\Custom">
+      <UniqueIdentifier>{d4abd30f-ad77-4cd8-a80a-393fd960a866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Profile\Approx">
+      <UniqueIdentifier>{0f3feadf-8de2-48f2-9d57-b59ea3f80350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Profile\Interpl">
+      <UniqueIdentifier>{8e05212d-060f-46e1-b90c-ff62f0faea60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Coord\XY">
+      <UniqueIdentifier>{e78d3d7c-8455-47b9-bd7b-99dcf4b7bb89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\offset">
+      <UniqueIdentifier>{53b28d28-f730-45b6-8f94-efe3c811f66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\KnotVector\Fixed">
+      <UniqueIdentifier>{1d2661f9-c3cc-494c-8d04-9ec1cf3147c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Offset">
+      <UniqueIdentifier>{ac0bedda-e0d9-4ad3-a4bc-1507b2866c73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Offset\Component">
+      <UniqueIdentifier>{0fa983df-3ec6-405a-91a7-c8816f691eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Offset\GeoField">
+      <UniqueIdentifier>{faf404be-233b-4c89-b5e4-519cf266d732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Offset\GeoField\Projection">
+      <UniqueIdentifier>{0abba124-70f0-4d1b-8c43-b208b6bcbaa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Offset\GeoField\Intersection">
+      <UniqueIdentifier>{addca590-8614-4fb0-ba32-e8ecb6de84b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\OffsetProfile">
+      <UniqueIdentifier>{67e35d43-935f-4082-abc3-ad91e859ee06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Cloud">
+      <UniqueIdentifier>{a3c5a9e8-97a7-48fa-94a0-84a00d1cfbbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Cloud\Offset">
+      <UniqueIdentifier>{6da4cea5-8bd7-4b33-969b-aad36817fe83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Cloud\Field">
+      <UniqueIdentifier>{60c227d7-e575-4a0a-a829-bfec89ef68d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Values">
+      <UniqueIdentifier>{36b9b876-542c-40e7-b2bd-0b4dfef296ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Cloud\Field\expr">
+      <UniqueIdentifier>{1943eee3-6122-4653-9956-d4a81308a590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit">
+      <UniqueIdentifier>{9d42df6a-2fe4-4971-bed1-5d1a66373ab4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -645,6 +708,54 @@
     <ClInclude Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.hxx">
       <Filter>TnbLib\SectPx\Tools\FieldFun</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\KnotVector\SectPx_KnotVector.hxx">
+      <Filter>TnbLib\SectPx\KnotVector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\KnotVector\Uniform\SectPx_UniKnots.hxx">
+      <Filter>TnbLib\SectPx\KnotVector\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfile.hxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Profile\Approx\SectPx_ApproxProfile.hxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Approx</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfile.hxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Interpl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\offset\SectPx_Pnt_Offset.hxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Master\offset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\offset\SectPx_Pnt_OffsetI.hxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Master\offset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\KnotVector\Fixed\SectPx_FixedKnots.hxx">
+      <Filter>TnbLib\SectPx\KnotVector\Fixed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Offset\SectPx_Offset.hxx">
+      <Filter>TnbLib\SectPx\Offset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Offset\Component\SectPx_CompOffset.hxx">
+      <Filter>TnbLib\SectPx\Offset\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\OffsetProfile\SectPx_OffsetProfile.hxx">
+      <Filter>TnbLib\SectPx\Entities\OffsetProfile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Cloud\SectPx_Cloud.hxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Cloud\Offset\SectPx_OffsetCloud.hxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Offset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Cloud\Field\SectPx_FieldCloud.hxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Values\SectPx_Values.hxx">
+      <Filter>TnbLib\SectPx\Entities\Values</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit\SectPx_FieldCloud_Naca4Digit.hxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Field\naca4Digit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">
@@ -895,6 +1006,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.cxx">
       <Filter>TnbLib\SectPx\Tools\FieldFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\KnotVector\SectPx_KnotVector.cxx">
+      <Filter>TnbLib\SectPx\KnotVector</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\KnotVector\Uniform\SectPx_UniKnots.cxx">
+      <Filter>TnbLib\SectPx\KnotVector\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfile.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Approx\SectPx_ApproxProfile.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Approx</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfile.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Interpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\offset\SectPx_Pnt_Offset.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Master\offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\KnotVector\Fixed\SectPx_FixedKnots.cxx">
+      <Filter>TnbLib\SectPx\KnotVector\Fixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Offset\Component\SectPx_CompOffset.cxx">
+      <Filter>TnbLib\SectPx\Offset\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\OffsetProfile\SectPx_OffsetProfile.cxx">
+      <Filter>TnbLib\SectPx\Entities\OffsetProfile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Cloud\Offset\SectPx_OffsetCloud.cxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Cloud\Field\SectPx_FieldCloud.cxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Cloud\SectPx_Cloud.cxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit\SectPx_FieldCloud_Naca4Digit.cxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Field\naca4Digit</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

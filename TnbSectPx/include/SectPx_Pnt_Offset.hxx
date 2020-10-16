@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _SectPx_Pnt_Compnt_Header
-#define _SectPx_Pnt_Compnt_Header
+#ifndef _SectPx_Pnt_Offset_Header
+#define _SectPx_Pnt_Offset_Header
 
 #include <SectPx_MasterPnt.hxx>
 
@@ -10,64 +10,94 @@ namespace tnbLib
 	namespace sectPxLib
 	{
 
-		class Pnt_Compnt
+		class Pnt_Offset
 			: public SectPx_MasterPnt
 		{
 
 			/*Private Data*/
 
-			std::weak_ptr<SectPx_Par> theX_;
-			std::weak_ptr<SectPx_Par> theY_;
+			Standard_Real theX_;
+			Standard_Real theY_;
 
 		protected:
 
-			template<class... _Types>
-			Pnt_Compnt(_Types&&... _Args)
-				: SectPx_MasterPnt(_Args...)
+			Pnt_Offset()
+				: theX_(0)
+				, theY_(0)
 			{}
+
+			Pnt_Offset
+			(
+				const Standard_Real x, 
+				const Standard_Real y
+			)
+				: theX_(x)
+				, theY_(y)
+			{}
+
+			Pnt_Offset
+			(
+				const Standard_Integer theIndex, 
+				const Standard_Real x, 
+				const Standard_Real y
+			);
+
+			Pnt_Offset
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const Standard_Real x,
+				const Standard_Real y
+			);
 
 		public:
 
 			static const char* typeName_;
 
-			const auto& X() const
+			auto X() const
 			{
 				return theX_;
 			}
 
-			const auto& Y() const
+			auto Y() const
 			{
 				return theY_;
 			}
 
-			void SetX
-			(
-				const std::shared_ptr<SectPx_Par>& theX
-			);
+			void SetX(const Standard_Real theX)
+			{
+				theX_ = theX;
+			}
 
-			void SetY
-			(
-				const std::shared_ptr<SectPx_Par>& theY
-			);
+			void SetY(const Standard_Real theY)
+			{
+				theY_ = theY;
+			}
 
 			word RegObjTypeName() const override;
 
 			//- override virtual functions from coord abstract class
-			Standard_Real xCoord() const override;
+			Standard_Real xCoord() const override
+			{
+				return X();
+			}
 
-			Standard_Real yCoord() const override;
+			Standard_Real yCoord() const override
+			{
+				return Y();
+			}
 
 			Pnt2d Coord() const override;
 
-			Standard_Boolean IsComplete() const override;			
+			Standard_Boolean IsComplete() const override;
 
 			//- override virtual functions from pnt abstract class 
 			sectPxLib::pntType PntType() const override;
 
-			Standard_Boolean IsComponent() const override;
+			Standard_Boolean IsOffset() const override;
 
 			//- override virtual functions from parent abstract class 
-			
+
 			Standard_Integer NbChildren() const override;
 
 			Standard_Boolean HasChildren() const override;
@@ -77,7 +107,7 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			std::vector<std::shared_ptr<SectPx_Child>> 
+			std::vector<std::shared_ptr<SectPx_Child>>
 				RetrieveChildren() const override;
 
 			void RemoveThisFromChildren() const override;
@@ -93,13 +123,11 @@ namespace tnbLib
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
-
-			
 		};
 	}
 }
 
-#include <SectPx_Pnt_CompntI.hxx>
+#include <SectPx_Pnt_OffsetI.hxx>
 #include <SectPx_PntConstructor.hxx>
 
-#endif // !_SectPx_Pnt_Compnt_Header
+#endif // !_SectPx_Pnt_Offset_Header

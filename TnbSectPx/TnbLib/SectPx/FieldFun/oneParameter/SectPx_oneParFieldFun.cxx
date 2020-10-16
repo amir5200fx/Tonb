@@ -27,7 +27,7 @@ tnbLib::SectPx_oneParFieldFun::HasChildren() const
 Standard_Boolean
 tnbLib::SectPx_oneParFieldFun::HasChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	ReturnTrueIfParBelongsToThisParent(Par(), thePar);
@@ -53,12 +53,12 @@ void tnbLib::SectPx_oneParFieldFun::RemoveThisFromChildren() const
 
 void tnbLib::SectPx_oneParFieldFun::AddThisToChildren() const
 {
-	AddThisParentToAllChilds(Par());
+	AddThisParentToChildren(Par());
 }
 
 void tnbLib::SectPx_oneParFieldFun::AddThisToChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	AddThisParentToChild(thePar);
@@ -66,7 +66,7 @@ void tnbLib::SectPx_oneParFieldFun::AddThisToChild
 
 void tnbLib::SectPx_oneParFieldFun::RemoveThisFromChild
 (
-	const std::shared_ptr<SectPx_Par>& thePar
+	const std::shared_ptr<SectPx_Child>& thePar
 ) const
 {
 	RemoveThisParentFromChild(thePar);
