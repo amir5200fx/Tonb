@@ -6,6 +6,39 @@
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
 
+tnbLib::Pnt2d
+tnbLib::Geo_Tools::GetIntersectionPoint
+(
+	const std::shared_ptr<IntersectEntity2d>& entity
+)
+{
+	auto ent = std::dynamic_pointer_cast<PointIntersectEntity2d>(entity);
+	if (NOT ent)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the intersection type is not point" << endl
+			<< abort(FatalError);
+	}
+	return ent->IntPnt;
+}
+
+tnbLib::Entity2d_Segment
+tnbLib::Geo_Tools::GetIntersectionSegment
+(
+	const std::shared_ptr<IntersectEntity2d>& entity
+)
+{
+	auto ent = std::dynamic_pointer_cast<SegmentIntersectEntity2d>(entity);
+	if (NOT ent)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the intersection type is not segment" << endl
+			<< abort(FatalError);
+	}
+	Entity2d_Segment seg(ent->Segment.P0(), ent->Segment.P1());
+	return std::move(seg);
+}
+
 tnbLib::Pnt2d 
 tnbLib::Geo_Tools::IntersectionTwoLines
 (
