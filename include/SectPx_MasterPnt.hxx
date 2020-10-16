@@ -34,6 +34,8 @@ namespace tnbLib
 
 		virtual Standard_Boolean IsGeoField() const;
 
+		virtual Standard_Boolean IsOffset() const;
+
 		Standard_Boolean IsMaster() const override;
 
 		Standard_Boolean HasOverrider() const

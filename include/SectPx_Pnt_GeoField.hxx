@@ -67,7 +67,7 @@ namespace tnbLib
 
 			Standard_Boolean HasChild
 			(
-				const std::shared_ptr<SectPx_Par>& thePar
+				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
 			std::shared_ptr<SectPx_Parent> ChildMap(const Standard_Integer theIndex) const override;
@@ -78,12 +78,12 @@ namespace tnbLib
 
 			void RemoveThisFromChild
 			(
-				const std::shared_ptr<SectPx_Par>& thePar
+				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
 			void AddThisToChild
 			(
-				const std::shared_ptr<SectPx_Par>& thePar
+				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
 		};

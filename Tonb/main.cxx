@@ -54,12 +54,45 @@
 #include "global_scripts.hxx"
 #include <chaiscript/chaiscript.hpp>
 
+#include <exprtk.hpp>
+
 using namespace tnbLib;
 
+template <typename T>
+void stddev_example()
+{
+	typedef exprtk::symbol_table<T> symbol_table_t;
+	typedef exprtk::expression<T>     expression_t;
+	typedef exprtk::parser<T>             parser_t;
+
+	const std::string expression_string =
+		"2*x";
+
+	std::vector<T> x;
+	T y;
+
+	symbol_table_t symbol_table;
+	symbol_table.add_vector("x", x);
+	//symbol_table.add_variable("x", y);
+	symbol_table.add_constants();
+
+	expression_t expression;
+	expression.register_symbol_table(symbol_table);
+
+	parser_t parser;
+	parser.compile(expression_string, expression);
+
+	x = { 2.0, 3.0, 4.0 };
+	y = 2.0;
+	auto v = expression.value();
+	std::cout << "value = " << v << std::endl;
+}
 
 Standard_Integer main()
 {
-
+	stddev_example<double>();
+	PAUSE;
+	return 0;
 	//auto frame = SectPx_FrameAPI::CreateFrame();
 	chaiscript::ChaiScript chai;
 

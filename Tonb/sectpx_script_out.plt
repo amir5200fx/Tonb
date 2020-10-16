@@ -12,9 +12,9 @@
  VARIABLES = X Y
  ZONE N = 5, E = 4, DATAPACKING= POINT, ZONETYPE= FETRIANGLE
 0  0
-0  3
-0.4  3
-0.96  3
+0.42  3
+1.2  3
+2  3
 2  0
 1  2  1
 2  3  2

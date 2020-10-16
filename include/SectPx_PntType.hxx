@@ -9,7 +9,8 @@ namespace tnbLib
 	{
 		fieldFun,
 		component,
-		empty
+		empty,
+		offset
 	};
 
 	namespace sectPxLib

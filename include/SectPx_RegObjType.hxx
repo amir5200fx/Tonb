@@ -24,7 +24,9 @@ namespace tnbLib
 		profile,
 		cmptProfile,
 		frame,
-		overrider
+		overrider,
+		offsetProfile,
+		cloud
 	};
 
 	word getRegObjTypeName(const SectPx_RegObjType t);

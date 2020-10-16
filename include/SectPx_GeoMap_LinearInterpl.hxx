@@ -82,7 +82,7 @@ namespace tnbLib
 
 			Standard_Boolean HasChild
 			(
-				const std::shared_ptr<SectPx_Par>& thePar
+				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
 			void RemoveThisFromChildren() const override;
@@ -91,12 +91,12 @@ namespace tnbLib
 
 			void AddThisToChild
 			(
-				const std::shared_ptr<SectPx_Par>& thePar
+				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
 			void RemoveThisFromChild
 			(
-				const std::shared_ptr<SectPx_Par>& thePar
+				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
 			std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const override;

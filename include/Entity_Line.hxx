@@ -9,21 +9,21 @@
 namespace tnbLib
 {
 
-	template<class PointRef, class DirectRef>
+	template<class Point, class Direct>
 	class Entity_Line
 	{
 
 	public:
 
-		typedef typename remove_reference<PointRef>::type Point;
-		typedef typename remove_reference<DirectRef>::type Direct;
+		//typedef typename remove_reference<PointRef>::type Point;
+		//typedef typename remove_reference<DirectRef>::type Direct;
 
 	private:
 
 		/*Private Data*/
 
-		PointRef theP_;
-		DirectRef theDir_;
+		Point theP_;
+		Direct theDir_;
 		
 	public:
 
@@ -41,6 +41,24 @@ namespace tnbLib
 			, theDir_(theV)
 		{}
 
+		Entity_Line
+		(
+			const Point& theP0,
+			const Point& theP1
+		)
+			: theP_(theP0)
+			, theDir_(theP0, theP1)
+		{}
+
+		Entity_Line
+		(
+			Point&& theP,
+			Direct&& theV
+		)
+			: theP_(std::move(theP))
+			, theDir_(std::move(theV))
+		{}
+
 		const Point& P() const
 		{
 			return theP_;
@@ -48,7 +66,7 @@ namespace tnbLib
 
 		Point& P()
 		{
-			return const_cast<Point&>(theP_);
+			return theP_;
 		}
 
 		const Direct& Dir() const
@@ -58,9 +76,42 @@ namespace tnbLib
 
 		Direct& Dir()
 		{
-			return const_cast<Direct&>(theDir_);
+			return theDir_;
 		}
 	};
+
+	template<>
+	class Entity_Line<const Pnt2d&, const Dir2d&>
+	{
+
+		/*Private Data*/
+
+		const Pnt2d& theP_;
+		const Dir2d& theDir_;
+
+	public:
+
+		Entity_Line
+		(
+			const Pnt2d& theP,
+			const Dir2d& theV
+		)
+			: theP_(theP)
+			, theDir_(theV)
+		{}
+
+		const auto& P() const
+		{
+			return theP_;
+		}
+
+		const auto& Dir() const
+		{
+			return theDir_;
+		}
+	};
+
+	typedef Entity_Line<Pnt2d, Dir2d> Entity2d_Line;
 }
 
 #include <Entity_LineI.hxx>

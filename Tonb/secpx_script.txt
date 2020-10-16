@@ -25,8 +25,8 @@ var parameters = frame.retrieveFixedParameters();
 
 parameters.at("length").setValue(2.0);
 parameters.at("width").setValue(3.0);
-parameters.at("mid").setValue(0.2);
-parameters.at("right corner").setValue(0.35);
+parameters.at("mid").setValue(0.6);
+parameters.at("left corner").setValue(0.35);
 
 for(var i = 0; i < profiles.size(); ++i)
 {
