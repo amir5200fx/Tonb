@@ -1,0 +1,62 @@
+#pragma once
+#ifndef _SectPx_Cloud_Header
+#define _SectPx_Cloud_Header
+
+#include <SectPx_Parent.hxx>
+#include <Pnt2d.hxx>
+
+#include <vector>
+
+namespace tnbLib
+{
+
+	class SectPx_Cloud
+		: public SectPx_Parent
+	{
+
+	public:
+
+		struct Profile
+		{
+			std::vector<Pnt2d> Coords;
+		};
+
+	protected:
+
+		/*Protected Data*/
+
+		std::shared_ptr<Profile> theProfile_;
+
+
+		void AllocateMemory();
+
+	protected:
+
+		template<class... _Types>
+		SectPx_Cloud(_Types&&... _Args)
+			: SectPx_Parent(_Args...)
+		{
+			AllocateMemory();
+		}
+
+		virtual void Update() const
+		{}
+
+	public:
+
+		Standard_Boolean IsCloud() const override;
+
+		sectPxLib::regObjType RegObjType() const override;
+
+		virtual Standard_Boolean IsComplete() const = 0;
+
+		const auto& GetProfile() const
+		{
+			Update();
+			return theProfile_;
+		}
+
+	};
+}
+
+#endif // !_SectPx_Cloud_Header
