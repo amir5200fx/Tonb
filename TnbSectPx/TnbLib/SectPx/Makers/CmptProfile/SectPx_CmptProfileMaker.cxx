@@ -51,7 +51,7 @@ tnbLib::maker::CmptProfile::CreateProfile
 	auto tProfileMaker = std::make_shared<TopoProfile>(Registry());
 	Debug_Null_Pointer(tProfileMaker);
 
-	const auto tProfile_id = tProfileMaker->CreateProfile(theP0, theP1);
+	const auto tProfile_id = tProfileMaker->CreateCustomProfile(theP0, theP1);
 	const auto tProfile = tProfileMaker->SelectProfile(tProfile_id);
 	Debug_Null_Pointer(tProfile);
 

@@ -33,7 +33,7 @@ tnbLib::maker::Point::CreateOuterComponent
 (
 	const std::shared_ptr<SectPx_Par>& xPar,
 	const std::shared_ptr<SectPx_Par>& yPar
-)
+) const
 {
 	auto pnt = 
 		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Compnt>>();
@@ -53,7 +53,7 @@ tnbLib::maker::Point::CreateInnerComponent
 (
 	const std::shared_ptr<SectPx_Par>& xPar, 
 	const std::shared_ptr<SectPx_Par>& yPar
-)
+) const
 {
 	auto pnt = 
 		std::make_shared<sectPxLib::InnerPnt<sectPxLib::Pnt_Compnt>>();
@@ -69,10 +69,72 @@ tnbLib::maker::Point::CreateInnerComponent
 }
 
 Standard_Integer 
+tnbLib::maker::Point::CreateOuterOffset
+(
+	const Standard_Real x, 
+	const Standard_Real y
+) const
+{
+	auto pnt = 
+		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Offset>>(x, y);
+	Debug_Null_Pointer(pnt);
+
+	Debug_Null_Pointer(Registry());
+	const auto id = Registry()->Import(pnt);
+	return id;
+}
+
+Standard_Integer
+tnbLib::maker::Point::CreateOuterOffset
+(
+	const Pnt2d& theCoord
+) const
+{
+	auto pnt =
+		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Offset>>(theCoord.X(), theCoord.Y());
+	Debug_Null_Pointer(pnt);
+
+	Debug_Null_Pointer(Registry());
+	const auto id = Registry()->Import(pnt);
+	return id;
+}
+
+Standard_Integer
+tnbLib::maker::Point::CreateInnerOffset
+(
+	const Standard_Real x,
+	const Standard_Real y
+) const
+{
+	auto pnt =
+		std::make_shared<sectPxLib::InnerPnt<sectPxLib::Pnt_Offset>>(x, y);
+	Debug_Null_Pointer(pnt);
+
+	Debug_Null_Pointer(Registry());
+	const auto id = Registry()->Import(pnt);
+	return id;
+}
+
+Standard_Integer
+tnbLib::maker::Point::CreateInnerOffset
+(
+	const Pnt2d& theCoord
+) const
+{
+	auto pnt =
+		std::make_shared<sectPxLib::InnerPnt<sectPxLib::Pnt_Offset>>(theCoord.X(), theCoord.Y());
+	Debug_Null_Pointer(pnt);
+
+	Debug_Null_Pointer(Registry());
+	const auto id = Registry()->Import(pnt);
+	return id;
+}
+
+Standard_Integer 
 tnbLib::maker::Point::CreateField
 (
 	const std::shared_ptr<SectPx_GeoMap>& theMap
-)
+) const
 {
 	if (NOT theMap)
 	{
@@ -112,7 +174,7 @@ Standard_Integer
 tnbLib::maker::Point::CreateEmpty
 (
 	const std::shared_ptr<SectPx_MasterPnt>& theMaster
-)
+) const
 {
 	auto pnt = 
 		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Empty>>(theMaster);
@@ -126,7 +188,7 @@ std::shared_ptr<tnbLib::SectPx_Pnt>
 tnbLib::maker::Point::RemovePnt
 (
 	const Standard_Integer theIndex
-)
+) const
 {
 	auto pnt = SelectPnt(theIndex);
 	Debug_Null_Pointer(pnt);

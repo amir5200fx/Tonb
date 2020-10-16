@@ -4,6 +4,7 @@
 #include <SectPx_Node.hxx>
 #include <SectPx_NodeMaker.hxx>
 #include <SectPx_TopoProfile.hxx>
+#include <SectPx_CustomProfile.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -31,7 +32,7 @@ tnbLib::maker::TopoProfile::SelectProfile
 }
 
 Standard_Integer 
-tnbLib::maker::TopoProfile::CreateProfile
+tnbLib::maker::TopoProfile::CreateCustomProfile
 (
 	const std::shared_ptr<SectPx_Pnt>& theP0, 
 	const std::shared_ptr<SectPx_Pnt>& theP1
@@ -49,18 +50,18 @@ tnbLib::maker::TopoProfile::CreateProfile
 	const auto n1 = nodeMaker->SelectNode(n1_id);
 	Debug_Null_Pointer(n1);
 
-	return CreateProfile(n0, n1);
+	return CreateCustomProfile(n0, n1);
 }
 
 Standard_Integer 
-tnbLib::maker::TopoProfile::CreateProfile
+tnbLib::maker::TopoProfile::CreateCustomProfile
 (
 	const std::shared_ptr<SectPx_Node>& theNode0,
 	const std::shared_ptr<SectPx_Node>& theNode1
 )
 {
 	auto profile = 
-		SectPx_TopoProfile::MakeProfile
+		SectPx_CustomProfile::MakeProfile
 		(
 			theNode0, 
 			theNode1,
@@ -71,6 +72,15 @@ tnbLib::maker::TopoProfile::CreateProfile
 	Debug_Null_Pointer(Registry());
 	return Registry()->Import(std::move(profile));
 }
+
+//Standard_Integer 
+//tnbLib::maker::TopoProfile::CreateInterplProfile
+//(
+//	const std::shared_ptr<SectPx_Cloud>& theCloud
+//)
+//{
+//	return Standard_Integer();
+//}
 
 std::shared_ptr<tnbLib::SectPx_TopoProfile> 
 tnbLib::maker::TopoProfile::RemoveProfile
