@@ -1,7 +1,10 @@
 #include <SectPx_PntTools.hxx>
 
+#include <SectPx_Node.hxx>
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Edge.hxx>
+#include <SectPx_Makers.hxx>
+#include <SectPx_Registry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -64,6 +67,131 @@ tnbLib::SectPx_PntTools::IsGeoField
 {
 	return (Standard_Boolean)
 		std::dynamic_pointer_cast<sectPxLib::Pnt_GeoField>(thePnt);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Pnt>>
+tnbLib::SectPx_PntTools::MakeOffsetPnts
+(
+	const std::vector<Pnt2d>& theCoords, 
+	const std::shared_ptr<SectPx_Registry>& theRegistry
+)
+{
+	Debug_Null_Pointer(theRegistry);
+
+	if (theCoords.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there are no enough points to create a profile" << endl
+			<< abort(FatalError);
+	}
+
+	std::vector<std::shared_ptr<SectPx_Pnt>> pnts;
+	pnts.reserve(theCoords.size());
+
+	auto p0 = 
+		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Offset>>
+		(
+			theCoords[0].X(),
+			theCoords[0].Y()
+			);
+	auto pn = 
+		std::make_shared<sectPxLib::OuterPnt<sectPxLib::Pnt_Offset>>
+		(
+			theCoords[theCoords.size() - 1].X(),
+			theCoords[theCoords.size() - 1].Y()
+			);
+
+	pnts.push_back(std::move(p0));
+
+	for (size_t i = 1; i < theCoords.size() - 1; i++)
+	{
+		auto pt = 
+			std::make_shared<sectPxLib::InnerPnt<sectPxLib::Pnt_Offset>>
+			(
+				theCoords[i].X(),
+				theCoords[i].Y()
+				);
+		pnts.push_back(std::move(pt));
+	}
+
+	pnts.push_back(std::move(pn));
+
+	for (const auto& x : pnts)
+	{
+		Debug_Null_Pointer(x);
+		theRegistry->Import(x);
+	}
+
+	for (size_t i = 0; i < pnts.size() - 1; i++)
+	{
+		const auto& p0 = pnts[i];
+		const auto& p1 = pnts[i + 1];
+
+		auto seg = std::make_shared<SectPx_Edge>(p0, p1);
+		Debug_Null_Pointer(seg);
+
+		auto id = theRegistry->Import(seg);
+
+		auto tp0 = std::dynamic_pointer_cast<SectPx_TPnt>(p0);
+		Debug_Null_Pointer(tp0);
+
+		auto tp1 = std::dynamic_pointer_cast<SectPx_TPnt>(p1);
+		Debug_Null_Pointer(tp1);
+
+		tp0->Import(id, seg);
+		tp1->Import(id, seg);
+	}
+	return std::move(pnts);
+}
+
+namespace tnbLib
+{
+	std::shared_ptr<SectPx_Pnt> 
+		TrackNextPnt(const std::shared_ptr<SectPx_Pnt>& thePnt)
+	{
+		auto p0 = std::dynamic_pointer_cast<SectPx_TPnt>(thePnt);
+		Debug_Null_Pointer(p0);
+
+		for (const auto& x : p0->Edges())
+		{
+			auto segmt = x.second.lock();
+			Debug_Null_Pointer(segmt);
+
+			if (segmt->P0() IS_EQUAL thePnt)
+			{
+				return segmt->P1();
+			}
+		}
+		FatalErrorIn(FunctionSIG)
+			<< "something goes wrong!" << endl
+			<< abort(FatalError);
+		return nullptr;
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Pnt>> 
+tnbLib::SectPx_PntTools::TrackPnts
+(
+	const std::shared_ptr<SectPx_Node>& theNode0, 
+	const std::shared_ptr<SectPx_Node>& theNode1
+)
+{
+	Debug_Null_Pointer(theNode0);
+	Debug_Null_Pointer(theNode1);
+
+	Debug_Null_Pointer(theNode0->Pnt());
+	Debug_Null_Pointer(theNode1->Pnt());
+
+	std::vector<std::shared_ptr<SectPx_Pnt>> pnts;
+
+	auto pt = TrackNextPnt(theNode0->Pnt());
+	while (pt NOT_EQUAL theNode1->Pnt())
+	{
+		pnts.push_back(pt);
+		pt = TrackNextPnt(pt);
+	}
+	pnts.push_back(theNode1->Pnt());
+	return std::move(pnts);
 }
 
 void tnbLib::SectPx_PntTools::deAttach
