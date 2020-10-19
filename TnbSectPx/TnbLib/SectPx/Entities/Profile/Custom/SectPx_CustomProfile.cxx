@@ -2,6 +2,7 @@
 
 #include <SectPx_Node.hxx>
 #include <SectPx_InterfaceMaker.hxx>
+#include <SectPx_UniKnots.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -74,6 +75,11 @@ tnbLib::SectPx_CustomProfile::MakeProfile
 
 	/*theNode0->SetInterface(intf0);
 	theNode1->SetInterface(intf1);*/
+
+	auto knotAlg = std::make_shared<SectPx_UniKnots>();
+	Debug_Null_Pointer(knotAlg);
+
+	profile->SetKnot(std::move(knotAlg));
 
 	return std::move(profile);
 }
