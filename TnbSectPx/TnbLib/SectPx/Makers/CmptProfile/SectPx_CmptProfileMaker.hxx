@@ -14,6 +14,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_CmptProfile;
 	class SectPx_Pnt;
+	class SectPx_Cloud;
 
 	namespace maker
 	{
@@ -76,13 +77,17 @@ namespace tnbLib
 				) const;
 
 			Standard_Integer
-				CreateProfile
+				CreateCustomProfile
 				(
 					const std::shared_ptr<SectPx_Pnt>& theP0,
 					const std::shared_ptr<SectPx_Pnt>& theP1
 				);
 
-
+			Standard_Integer 
+				CreateInterplProfile
+				(
+					const std::shared_ptr<SectPx_Cloud>& theCloud
+				);
 		};
 	}
 }
