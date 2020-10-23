@@ -38,7 +38,7 @@ namespace tnbLib
 		std::vector<Standard_Real> 
 			CreateKnots
 			(
-				const std::vector<std::shared_ptr<SectPx_Coord>>& theCoords,
+				const std::vector<Pnt2d>& theCoords,
 				const Standard_Integer degree
 			) const override;
 	};

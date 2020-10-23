@@ -4,6 +4,7 @@
 
 #include <SectPx_Entity.hxx>
 
+#include <Pnt2d.hxx>
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array1OfInteger.hxx>
 
@@ -67,10 +68,17 @@ namespace tnbLib
 			return theU1_;
 		}
 
-		virtual std::vector<Standard_Real>
+		/*virtual std::vector<Standard_Real>
 			CreateKnots
 			(
 				const std::vector<std::shared_ptr<SectPx_Coord>>& theCoords,
+				const Standard_Integer degree
+			) const = 0;*/
+
+		virtual std::vector<Standard_Real>
+			CreateKnots
+			(
+				const std::vector<Pnt2d>& theCoords,
 				const Standard_Integer degree
 			) const = 0;
 
