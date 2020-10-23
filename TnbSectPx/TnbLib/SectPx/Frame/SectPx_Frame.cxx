@@ -116,7 +116,7 @@ tnbLib::SectPx_Frame::MakeLineSegment
 		);
 
 	const auto profMaker_id =
-		CmptProfileMaker()->CreateProfile
+		CmptProfileMaker()->CreateCustomProfile
 		(
 			PointMaker()->SelectPnt(p0_id),
 			PointMaker()->SelectPnt(p1_id)
@@ -173,7 +173,7 @@ void tnbLib::SectPx_Frame::MakeCorner
 		);
 
 	const auto profMaker_id =
-		CmptProfileMaker()->CreateProfile
+		CmptProfileMaker()->CreateCustomProfile
 		(
 			PointMaker()->SelectPnt(p0_id),
 			PointMaker()->SelectPnt(p1_id)
@@ -210,6 +210,12 @@ void tnbLib::SectPx_Frame::MakeUShape()
 	MakeUShape(Pnt2d(0, 0), Pnt2d(1, 0), 0.5);
 }
 
+void tnbLib::SectPx_Frame::PrintRegistry() const
+{
+	Debug_Null_Pointer(Registry());
+	Registry()->Print(Info);
+}
+
 void tnbLib::SectPx_Frame::MakeUShape
 (
 	const Pnt2d & theP0, 
@@ -239,7 +245,7 @@ void tnbLib::SectPx_Frame::MakeUShape
 		);
 
 	const auto profMaker_id =
-		CmptProfileMaker()->CreateProfile
+		CmptProfileMaker()->CreateCustomProfile
 		(
 			PointMaker()->SelectPnt(p0_id),
 			PointMaker()->SelectPnt(p1_id)
