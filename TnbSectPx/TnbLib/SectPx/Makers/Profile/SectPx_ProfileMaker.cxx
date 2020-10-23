@@ -376,3 +376,14 @@ tnbLib::maker::Profile::RetrieveProfileQ() const
 	Q.push_back(Node1()->Pnt());
 	return std::move(profile);
 }
+
+Handle(Geom2d_Curve) 
+tnbLib::maker::Profile::RetrieveGeomCurve
+(
+	const Standard_Integer deg
+) const
+{
+	Debug_Null_Pointer(TopoProfile());
+	auto curve = TopoProfile()->RetrieveGeomCurve(deg);
+	return std::move(curve);
+}
