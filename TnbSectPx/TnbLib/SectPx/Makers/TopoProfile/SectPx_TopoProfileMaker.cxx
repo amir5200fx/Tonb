@@ -5,6 +5,7 @@
 #include <SectPx_NodeMaker.hxx>
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_CustomProfile.hxx>
+#include <SectPx_InterplProfile.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -73,14 +74,19 @@ tnbLib::maker::TopoProfile::CreateCustomProfile
 	return Registry()->Import(std::move(profile));
 }
 
-//Standard_Integer 
-//tnbLib::maker::TopoProfile::CreateInterplProfile
-//(
-//	const std::shared_ptr<SectPx_Cloud>& theCloud
-//)
-//{
-//	return Standard_Integer();
-//}
+Standard_Integer 
+tnbLib::maker::TopoProfile::CreateInterplProfile
+(
+	const std::shared_ptr<SectPx_Cloud>& theCloud
+)
+{
+	auto profile = 
+		SectPx_InterplProfile::MakeProfile(theCloud, Registry());
+	Debug_Null_Pointer(profile);
+
+	Debug_Null_Pointer(Registry());
+	return Registry()->Import(std::move(profile));
+}
 
 std::shared_ptr<tnbLib::SectPx_TopoProfile> 
 tnbLib::maker::TopoProfile::RemoveProfile
