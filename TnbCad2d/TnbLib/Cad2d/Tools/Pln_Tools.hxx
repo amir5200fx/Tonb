@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Pln_Orientation.hxx>
 
 #include <list>
@@ -86,6 +87,8 @@ namespace tnbLib
 				const Handle(Geom2d_Curve)& theCurve,
 				Standard_Real& theParameter
 			);
+
+		static std::shared_ptr<Entity2d_Polygon> UniformDiscrete(const Handle(Geom2d_Curve), const Standard_Integer nbSeg);
 
 		static std::shared_ptr<Pln_CmpEdge>
 			MakeCompoundEdge

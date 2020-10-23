@@ -9,6 +9,7 @@
 #include <Adt_AvlTree.hxx>
 #include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
+#include <Entity2d_Polygon.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Curve.hxx>
 #include <Pln_Edge.hxx>
@@ -99,6 +100,36 @@ tnbLib::Pln_Tools::Length
 	}
 
 	return theInfo->Result();
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon> 
+tnbLib::Pln_Tools::UniformDiscrete
+(
+	const Handle(Geom2d_Curve) theCurve,
+	const Standard_Integer nbSeg
+)
+{
+	if (NOT Pln_Tools::IsBounded(theCurve))
+	{
+		FatalErrorIn("void Pln_CurveTools::ExportToPlt(Args...)")
+			<< "the curve is not bounded!" << endl
+			<< abort(FatalError);
+	}
+	const auto du = (theCurve->LastParameter() - theCurve->FirstParameter()) 
+		/ (Standard_Real)nbSeg;
+	const auto u0 = theCurve->FirstParameter();
+
+	std::vector<Pnt2d> pts;
+	pts.reserve(nbSeg + 1);
+
+	for (auto i = 0; i <= nbSeg; i++)
+	{
+		auto pt = theCurve->Value(u0 + i * du);
+		pts.push_back(std::move(pt));
+	}
+
+	auto poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
+	return std::move(poly);
 }
 
 std::shared_ptr<tnbLib::Pln_CmpEdge> 
