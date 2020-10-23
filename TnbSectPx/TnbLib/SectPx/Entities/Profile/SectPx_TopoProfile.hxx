@@ -2,10 +2,13 @@
 #ifndef _SectPx_Profile_Header
 #define _SectPx_Profile_Header
 
+#include <Standard_Handle.hxx>
 #include <Pnt2d.hxx>
 #include <SectPx_RegObj.hxx>
 
 #include <vector>
+
+class Geom2d_Curve;
 
 namespace tnbLib
 {
@@ -93,6 +96,11 @@ namespace tnbLib
 
 		Standard_Boolean IsProfile() const override;
 
+		Handle(Geom2d_Curve) 
+			RetrieveGeomCurve
+			(
+				const Standard_Integer deg
+			) const;
 	};
 }
 
