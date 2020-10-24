@@ -46,7 +46,10 @@ void tnbLib::Cad2d_Modeler::Select
 			<< abort(FatalError);
 	}
 
-	theList.Import(theEdge->Index(), theEdge);
+	if (NOT HasDuplication(theEdge, theList))
+	{
+		theList.Import(theEdge->Index(), theEdge);
+	}	
 }
 
 void tnbLib::Cad2d_Modeler::SelectAll
@@ -57,7 +60,10 @@ void tnbLib::Cad2d_Modeler::SelectAll
 	for (const auto& x : Edges())
 	{
 		Debug_Null_Pointer(x.second);
-		theList.Import(x.second->Index(), x.second);
+		if (NOT HasDuplication(x.second, theList))
+		{
+			theList.Import(x.second->Index(), x.second);
+		}
 	}
 }
 
@@ -75,7 +81,11 @@ void tnbLib::Cad2d_Modeler::deSelect
 	}
 
 	auto item = theList.Remove(theEdge->Index());
-	if (item NOT_EQUAL theEdge)
+	if (NOT item.lock())
+	{
+		return;
+	}
+	if (item.lock() NOT_EQUAL theEdge)
 	{
 		FatalErrorIn("void deSelect(const std::shared_ptr<Pln_Edge>& theEdge, cad2dLib::Modeler_SelectList& theList) const")
 			<< "contradictory data!" << endl
@@ -584,8 +594,18 @@ tnbLib::Cad2d_Modeler::MakeChain
 	selctList & theList
 )
 {
-	std::map<Standard_Integer, std::shared_ptr<corner>> vertexToCornerMap;
+	std::map<Standard_Integer, std::shared_ptr<Pln_Edge>> edgeList;
 	for (const auto& x : theList.Items())
+	{
+		const auto edge = x.second.lock();
+		if (NOT edge) continue;
+
+		auto paired = std::make_pair(x.first, std::move(edge));
+		edgeList.insert(std::move(paired));
+	}
+
+	std::map<Standard_Integer, std::shared_ptr<corner>> vertexToCornerMap;
+	for (const auto& x : edgeList)
 	{
 		const auto& edge = x.second;
 
@@ -629,7 +649,7 @@ tnbLib::Cad2d_Modeler::MakeChain
 		}
 	}
 
-	auto& edges = theList.ChangeItems();
+	auto& edges = edgeList;
 	auto iter = edges.begin();
 
 	auto item = iter->second;
@@ -727,6 +747,26 @@ tnbLib::Cad2d_Modeler::Import
 	}
 }
 
+Standard_Integer 
+tnbLib::Cad2d_Modeler::Import
+(
+	std::shared_ptr<Pln_Edge>&& theEdge
+)
+{
+	auto edge = std::move(theEdge);
+	if (edge->IsRing())
+	{
+		auto ring = std::dynamic_pointer_cast<Pln_Ring>(edge);
+		Debug_Null_Pointer(ring);
+
+		return AddRing(ring);
+	}
+	else
+	{
+		return AddEdge(edge);
+	}
+}
+
 void tnbLib::Cad2d_Modeler::Import
 (
 	const std::vector<std::shared_ptr<Pln_Edge>>& theEdegs
@@ -735,6 +775,17 @@ void tnbLib::Cad2d_Modeler::Import
 	for (const auto& x : theEdegs)
 	{
 		Import(x);
+	}
+}
+
+void tnbLib::Cad2d_Modeler::Import
+(
+	std::vector<std::shared_ptr<Pln_Edge>>&& theEdegs
+)
+{
+	for (const auto& x : theEdegs)
+	{
+		Import(std::move(x));
 	}
 }
 
@@ -844,21 +895,69 @@ void tnbLib::Cad2d_Modeler::Trim
 	}
 }
 
-//void tnbLib::Cad2d_Modeler::MakePlanes(selctList & theList)
-//{
-//	const auto items = theList.RetrieveItems();
-//	const auto tol = Radius();
-//
-//	
-//}
+std::vector<Standard_Integer>
+tnbLib::Cad2d_Modeler::MakePlanes
+(
+	selctList & theList, 
+	const gp_Ax2& ax
+)
+{
+	const auto witems = theList.RetrieveItems();
+	std::vector<std::shared_ptr<Pln_Edge>> items;
+	items.reserve(witems.size());
+	for (const auto& x : witems)
+	{
+		auto edge = x.lock();
+		if (edge)
+		{
+			items.push_back(std::move(edge));
+		}
+	}
+	
+	auto wires = Pln_Tools::RetrieveWiresNonManifold(items);
+	if (wires.size() IS_EQUAL 1)
+	{
+		const auto& wire = wires[0];
+
+		wire->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+
+		const auto plane = Pln_Tools::MakePlane(wire, ax);
+		Debug_Null_Pointer(plane);
+
+		AddPlane(plane);
+	}
+	else
+	{
+		const auto planes = Pln_Tools::RetrievePlanes(wires, ax);
+		std::vector<Standard_Integer> ids;
+		ids.reserve(planes.size());
+		for (const auto& x : planes)
+		{
+			Debug_Null_Pointer(x);
+			ids.push_back(AddPlane(x));
+		}
+		return std::move(ids);
+	}
+}
 
 Standard_Integer 
 tnbLib::Cad2d_Modeler::MakePlane
 (
-	selctList & theList
+	selctList & theList,
+	const gp_Ax2& ax
 )
 {
-	const auto items = theList.RetrieveItems();
+	const auto witems = theList.RetrieveItems();
+	std::vector<std::shared_ptr<Pln_Edge>> items;
+	items.reserve(witems.size());
+	for (const auto& x : witems)
+	{
+		auto edge = x.lock();
+		if (edge)
+		{
+			items.push_back(std::move(edge));
+		}
+	}
 	const auto tol = Radius();
 
 	const auto edges = cad2dLib::Modeler_Tools::MakeConsecutive(items, tol);
@@ -887,7 +986,7 @@ tnbLib::Cad2d_Modeler::MakePlane
 
 	wire->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
 
-	const auto plane = Pln_Tools::MakePlane(wire, gp::XOY());
+	const auto plane = Pln_Tools::MakePlane(wire, ax);
 	Debug_Null_Pointer(plane);
 
 	return AddPlane(plane);

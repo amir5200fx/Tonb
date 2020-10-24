@@ -17,7 +17,7 @@ tnbLib::cad2dLib::Modeler_SelectList::IsContain
 	return Standard_False;
 }
 
-std::shared_ptr <tnbLib::Pln_Edge> 
+std::weak_ptr<tnbLib::Pln_Edge> 
 tnbLib::cad2dLib::Modeler_SelectList::Remove
 (
 	const Standard_Integer theIndex
@@ -56,10 +56,10 @@ void tnbLib::cad2dLib::Modeler_SelectList::Clear()
 	theItems_.clear();
 }
 
-std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
+std::vector<std::weak_ptr<tnbLib::Pln_Edge>> 
 tnbLib::cad2dLib::Modeler_SelectList::RetrieveItems() const
 {
-	std::vector<std::shared_ptr<Pln_Edge>> edges;
+	std::vector<std::weak_ptr<Pln_Edge>> edges;
 	RetrieveItemsTo(edges);
 
 	return std::move(edges);
@@ -67,7 +67,7 @@ tnbLib::cad2dLib::Modeler_SelectList::RetrieveItems() const
 
 void tnbLib::cad2dLib::Modeler_SelectList::RetrieveItemsTo
 (
-	std::vector<std::shared_ptr<Pln_Edge>>& theItems
+	std::vector<std::weak_ptr<Pln_Edge>>& theItems
 ) const
 {
 	theItems.reserve(NbItems());

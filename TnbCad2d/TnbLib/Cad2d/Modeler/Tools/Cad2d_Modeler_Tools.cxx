@@ -405,7 +405,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeHyprArc
 }
 
 std::shared_ptr<tnbLib::Pln_Edge> 
-tnbLib::cad2dLib::Modeler_Tools::MakeParbCurve
+tnbLib::cad2dLib::Modeler_Tools::MakeParbArc
 (
 	const gp_Parab2d & theParab, 
 	const Standard_Real theAlpha0, 
@@ -435,7 +435,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeParbCurve
 }
 
 std::shared_ptr<tnbLib::Pln_Edge> 
-tnbLib::cad2dLib::Modeler_Tools::MakeParabCurve
+tnbLib::cad2dLib::Modeler_Tools::MakeParabArc
 (
 	const gp_Parab2d & theParab,
 	const Pnt2d & theP0,

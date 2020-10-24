@@ -12,6 +12,8 @@
 #include <Cad2d_Modeler_SelectList.hxx>
 #include <Cad_EntityManager.hxx>
 
+#include <gp.hxx>
+
 #include <memory>
 #include <map>
 
@@ -140,9 +142,19 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
 
+		Standard_Integer Import
+		(
+			std::shared_ptr<Pln_Edge>&& theEdge
+		);
+
 		void Import
 		(
 			const std::vector<std::shared_ptr<Pln_Edge>>& theEdegs
+		);
+
+		void Import
+		(
+			std::vector<std::shared_ptr<Pln_Edge>>&& theEdegs
 		);
 
 		void Trim
@@ -151,10 +163,10 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
 
-		void MakePlanes(selctList& theList);
+		std::vector<Standard_Integer> MakePlanes(selctList& theList, const gp_Ax2& ax = gp::XOY());
 
 		//- the list will get empty after successfully creating plane
-		Standard_Integer MakePlane(selctList& theList);
+		Standard_Integer MakePlane(selctList& theList, const gp_Ax2& ax = gp::XOY());
 	};
 }
 
