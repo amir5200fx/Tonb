@@ -13,6 +13,43 @@
 
 #include <TopoDS_Shape.hxx>
 
+std::shared_ptr<tnbLib::StbGMaker_Creator> 
+tnbLib::script::StbModelMaker::newModelMaker() const
+{
+	auto t = std::make_shared<StbGMaker_Creator>();
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::marineLib::Shape_Sail> 
+tnbLib::script::StbModelMaker::newSailShape
+(
+	const TopoDS_Shape & s
+)
+{
+	auto t = StbGMaker_ShapeTools::Sail(s);
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::marineLib::Shape_Hull> 
+tnbLib::script::StbModelMaker::newHullShape
+(
+	const TopoDS_Shape & s
+)
+{
+	auto t = StbGMaker_ShapeTools::Hull(s);
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::marineLib::Shape_Tank> 
+tnbLib::script::StbModelMaker::newTankShape
+(
+	const TopoDS_Shape & s
+)
+{
+	auto t = StbGMaker_ShapeTools::Tank(s);
+	return std::move(t);
+}
+
 namespace tnbLib
 {
 
@@ -47,36 +84,37 @@ void tnbLib::script::load_stb_gmaker(chaiscript::ChaiScript& chai)
 {
 	auto mod = std::make_shared<chaiscript::Module>();
 
-	mod->add(chaiscript::user_type<marineLib::Shape_Sail>(), "marine_shape_sail");
-	mod->add(chaiscript::user_type<marineLib::Shape_Hull>(), "marine_shape_hull");
-	mod->add(chaiscript::user_type<marineLib::Shape_Tank>(), "marine_shape_tank");
-	mod->add(chaiscript::user_type<Marine_Shape>(), "marine_shape");
+	typedef std::shared_ptr<StbGMaker_Creator> creator_t;
+	typedef std::shared_ptr<StbModelMaker> stbModelMaker_t;
 
-	mod->add(chaiscript::fun(&StbGMaker_ShapeTools::Hull), "stb_model_create_hull");
-	mod->add(chaiscript::fun(&StbGMaker_ShapeTools::Sail), "stb_model_create_sail");
-	mod->add(chaiscript::fun(&StbGMaker_ShapeTools::Tank), "stb_model_create_tank");
+	mod->add(chaiscript::user_type<std::shared_ptr<StbModelMaker>>(), "StbModelMaker");
+	mod->add(chaiscript::fun([]() {auto t = std::make_shared<StbModelMaker>(); return std::move(t); }), "newStbModelMaker");
+	
+	mod->add(chaiscript::user_type<creator_t>(), "ModelMaker");
+	mod->add(chaiscript::fun([](const stbModelMaker_t& t)->creator_t {return t->newModelMaker(); }), "newModelMaker");
 
-	mod->add(chaiscript::user_type<StbGMaker_Creator>(), "stb_model_creator");
-	mod->add(chaiscript::fun([]() {auto s = std::make_shared<StbGMaker_Creator>(); return std::move(s); }), "stb_model_creator");
+	mod->add(chaiscript::fun([](const stbModelMaker_t& t, const TopoDS_Shape& s)->std::shared_ptr<marineLib::Shape_Sail> {auto tt = t->newSailShape(s); return std::move(tt); }), "newSailShape");
+	mod->add(chaiscript::fun([](const stbModelMaker_t& t, const TopoDS_Shape& s)->std::shared_ptr<marineLib::Shape_Hull> {auto tt = t->newHullShape(s); return std::move(tt); }), "newHullShape");
+	mod->add(chaiscript::fun([](const stbModelMaker_t& t, const TopoDS_Shape& s)->std::shared_ptr<marineLib::Shape_Tank> {auto tt = t->newTankShape(s); return std::move(tt); }), "newTankShape");
 
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_HullCreator>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "create_wps");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_TankCreator>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "create_wps");
-	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::GeometricSailCreator_noShape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "create_wps");
-	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::GeometricSailCreator_Shape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "create_wps");
+	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_HullCreator>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
+	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_TankCreator>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
+	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::GeometricSailCreator_noShape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
+	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::GeometricSailCreator_Shape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
 
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const std::shared_ptr<marineLib::Shape_Tank>& t)-> Standard_Integer {return c->CreateTankMaker(t); }), "create_tank_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const std::shared_ptr<marineLib::Shape_Hull>& t)-> void {c->CreateHullMaker(t); }), "create_hull_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const Standard_Real a, const Standard_Real z)-> Standard_Integer {return c->CreateConstAreaSailMaker(a, z); }), "create_const_area_sail_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const std::shared_ptr<Cad2d_Plane>& a, const Standard_Real z)-> Standard_Integer {return c->CreatePlaneGeomSailMaker(a, z); }), "create_plane_sail_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const std::shared_ptr<marineLib::Shape_Sail>& t)-> Standard_Integer {return c->CreateShapeGeomSailMaker(t); }), "create_shape_sail_maker");
+	mod->add(chaiscript::fun([](const creator_t& c, const std::shared_ptr<marineLib::Shape_Tank>& t)-> Standard_Integer {return c->CreateTankMaker(t); }), "createTankMaker");
+	mod->add(chaiscript::fun([](const creator_t& c, const std::shared_ptr<marineLib::Shape_Hull>& t)-> void {c->CreateHullMaker(t); }), "createHullMaker");
+	mod->add(chaiscript::fun([](const creator_t& c, const Standard_Real a, const Standard_Real z)-> Standard_Integer {return c->CreateConstAreaSailMaker(a, z); }), "createConstAreaSailMaker");
+	mod->add(chaiscript::fun([](const creator_t& c, const std::shared_ptr<Cad2d_Plane>& a, const Standard_Real z)-> Standard_Integer {return c->CreatePlaneGeomSailMaker(a, z); }), "createPlaneSailMaker");
+	mod->add(chaiscript::fun([](const creator_t& c, const std::shared_ptr<marineLib::Shape_Sail>& t)-> Standard_Integer {return c->CreateShapeGeomSailMaker(t); }), "createShapeSailMaker");
 
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_TankCreator> {auto s = c->SelectTankMaker(i); return std::move(s); }), "select_tank_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_SailCreator> {auto s = c->SelectSailMaker(i); return std::move(s); }), "select_sail_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c)-> const std::shared_ptr<StbGMaker_HullCreator>& {return c->HullMaker(); }), "hull_maker");
+	mod->add(chaiscript::fun([](const creator_t& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_TankCreator> {auto s = c->SelectTankMaker(i); return std::move(s); }), "getTankMaker");
+	mod->add(chaiscript::fun([](const creator_t& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_SailCreator> {auto s = c->SelectSailMaker(i); return std::move(s); }), "getSailMaker");
+	mod->add(chaiscript::fun([](const creator_t& c)-> const std::shared_ptr<StbGMaker_HullCreator>& {return c->HullMaker(); }), "getHullMaker");
 
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_TankCreator> {auto s = c->RemoveTankMaker(i); return std::move(s); }), "remove_tank_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_SailCreator> {auto s = c->RemoveSailMaker(i); return std::move(s); }), "remove_sail_maker");
-	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_Creator>& c)-> std::shared_ptr<StbGMaker_HullCreator> {return c->RemoveHullMaker(); }), "remove_hull_maker");
+	mod->add(chaiscript::fun([](const creator_t& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_TankCreator> {auto s = c->RemoveTankMaker(i); return std::move(s); }), "removeTankMaker");
+	mod->add(chaiscript::fun([](const creator_t& c, const Standard_Integer i)-> std::shared_ptr<StbGMaker_SailCreator> {auto s = c->RemoveSailMaker(i); return std::move(s); }), "removeSailMaker");
+	mod->add(chaiscript::fun([](const creator_t& c)-> std::shared_ptr<StbGMaker_HullCreator> {return c->RemoveHullMaker(); }), "removeHullMaker");
 
 	mod->add(chaiscript::fun(&stb_gmaker_create_plane), "stb_gmaker_create_plane");
 
