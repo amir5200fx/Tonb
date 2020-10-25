@@ -82,7 +82,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Scripts;$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Scripts;$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -130,7 +130,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Scripts;$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\CadModel\Scripts;$(ProjectDir)TnbLib\CadModel\Regular\Sphere;$(ProjectDir)TnbLib\CadModel\Regular\Cylinder;$(ProjectDir)TnbLib\CadModel\Regular\Box;$(ProjectDir)TnbLib\CadModel\Regular;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle\Type1;$(ProjectDir)TnbLib\CadModel\Legacy\Nozzle;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Parameters;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\Profiles;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\System;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel\Displacement;$(ProjectDir)TnbLib\CadModel\Legacy\Vessel;$(ProjectDir)TnbLib\CadModel\Legacy\CtrlNet;$(ProjectDir)TnbLib\CadModel\Legacy\Section;$(ProjectDir)TnbLib\CadModel\Legacy\Parameter;$(ProjectDir)TnbLib\CadModel\Legacy\Global;$(ProjectDir)TnbLib\CadModel\Legacy;$(ProjectDir)TnbLib\CadModel\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -147,6 +147,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_ParameterProfile.hxx" />
     <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_PointList.hxx" />
     <ClInclude Include="TnbLib\CadModel\Legacy\Global\LegModel_Surface.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Nozzle\Type1\LegModel_NozzleType1.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters\LegModel_NozzleType1_Parameters.hxx" />
+    <ClInclude Include="TnbLib\CadModel\Legacy\Nozzle\Type1\System\LegModel_NozzleType1_Defaults.hxx" />
     <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_BoundedParameter.hxx" />
     <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_ConstParameter.hxx" />
     <ClInclude Include="TnbLib\CadModel\Legacy\Parameter\LegModel_Parameter.hxx" />
@@ -167,6 +170,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Nozzle\Type1\LegModel_NozzleType1.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters\LegModel_NozzleType1_Parameters.cxx" />
+    <ClCompile Include="TnbLib\CadModel\Legacy\Nozzle\Type1\System\LegModel_NozzleType1_Defaults.cxx" />
     <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_ApplyParamaters.cxx" />
     <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_CalcParamaters.cxx" />
     <ClCompile Include="TnbLib\CadModel\Legacy\Vessel\Displacement\DispNo1\DipsNo1_Sections.cxx" />

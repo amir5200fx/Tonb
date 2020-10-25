@@ -61,6 +61,21 @@
     <Filter Include="TnbLib\CadModel\Scripts">
       <UniqueIdentifier>{c974b998-45bf-4457-914a-394b7843176b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Nozzle">
+      <UniqueIdentifier>{8c9338c0-2504-40e5-8700-0a7d20883aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Nozzle\Type1">
+      <UniqueIdentifier>{12bdf23c-8edf-43a7-b895-f07a0a21d31d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Nozzle\Type1\System">
+      <UniqueIdentifier>{54303683-f1bf-495a-b67d-9c3cb2b9ea8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Nozzle\Type1\Profiles">
+      <UniqueIdentifier>{f0879765-d7fb-479a-8f00-36c55360dbf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters">
+      <UniqueIdentifier>{853760db-3eaf-40cc-99e2-2c885f63f040}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.hxx">
@@ -135,6 +150,15 @@
     <ClInclude Include="TnbLib\CadModel\Scripts\CadModel_Scripts.hxx">
       <Filter>TnbLib\CadModel\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters\LegModel_NozzleType1_Parameters.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Nozzle\Type1\System\LegModel_NozzleType1_Defaults.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Nozzle\Type1\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\Legacy\Nozzle\Type1\LegModel_NozzleType1.hxx">
+      <Filter>TnbLib\CadModel\Legacy\Nozzle\Type1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.cxx">
@@ -178,6 +202,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\CadModel\Scripts\CadModel_Scripts.cxx">
       <Filter>TnbLib\CadModel\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters\LegModel_NozzleType1_Parameters.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Nozzle\Type1\System\LegModel_NozzleType1_Defaults.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Nozzle\Type1\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\CadModel\Legacy\Nozzle\Type1\LegModel_NozzleType1.cxx">
+      <Filter>TnbLib\CadModel\Legacy\Nozzle\Type1</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

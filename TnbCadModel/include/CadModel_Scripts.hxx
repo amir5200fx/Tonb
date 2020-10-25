@@ -12,8 +12,20 @@ namespace chaiscript
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class LegModel_DispNo1;
+	class LegModel_NozzleType1;
+
 	namespace script
 	{
+
+		struct CadModel
+		{
+
+			std::shared_ptr<LegModel_DispNo1> newLegModelDispNo1() const;
+			std::shared_ptr<LegModel_NozzleType1> newLegModelNozzelType1() const;
+
+		};
 
 		void load_cad_model(chaiscript::ChaiScript&);
 	}
