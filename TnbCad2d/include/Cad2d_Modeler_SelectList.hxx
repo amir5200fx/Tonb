@@ -25,7 +25,7 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			std::map<Standard_Integer, std::shared_ptr<Pln_Edge>> theItems_;
+			std::map<Standard_Integer, std::weak_ptr<Pln_Edge>> theItems_;
 
 
 			//- private functions and operators
@@ -37,7 +37,7 @@ namespace tnbLib
 
 			Standard_Boolean IsContain(const Standard_Integer theIndex) const;
 
-			std::shared_ptr<Pln_Edge> Remove(const Standard_Integer theIndex);
+			std::weak_ptr<Pln_Edge> Remove(const Standard_Integer theIndex);
 
 			void Import(const Standard_Integer theIndex, const std::shared_ptr<Pln_Edge>& theEdge);
 
@@ -58,9 +58,9 @@ namespace tnbLib
 				return theItems_;
 			}
 
-			std::vector<std::shared_ptr<Pln_Edge>> RetrieveItems() const;
+			std::vector<std::weak_ptr<Pln_Edge>> RetrieveItems() const;
 
-			void RetrieveItemsTo(std::vector<std::shared_ptr<Pln_Edge>>& theItems) const;
+			void RetrieveItemsTo(std::vector<std::weak_ptr<Pln_Edge>>& theItems) const;
 		};
 	}
 }

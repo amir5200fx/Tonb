@@ -337,6 +337,9 @@
     <Filter Include="TnbLib\Cad2d\RemoveNonManifold">
       <UniqueIdentifier>{1ccb4f7f-0e88-4ca7-bde4-5efd67a671a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Scripts">
+      <UniqueIdentifier>{90d3f6f7-4d12-4816-ab0e-ccbdd882d683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
@@ -645,6 +648,9 @@
     <ClInclude Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifold.hxx">
       <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Scripts\Cad2d_Scripts.hxx">
+      <Filter>TnbLib\Cad2d\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -853,6 +859,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifold.cxx">
       <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Scripts\Cad2d_Scripts.cxx">
+      <Filter>TnbLib\Cad2d\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

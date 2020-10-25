@@ -131,7 +131,7 @@ namespace tnbLib
 				);
 
 			static std::shared_ptr<Pln_Edge> 
-				MakeParbCurve
+				MakeParbArc
 				(
 					const gp_Parab2d& theParab,
 					const Standard_Real theAlpha0, 
@@ -139,7 +139,7 @@ namespace tnbLib
 				);
 
 			static std::shared_ptr<Pln_Edge> 
-				MakeParabCurve
+				MakeParabArc
 				(
 					const gp_Parab2d& theParab,
 					const Pnt2d& theP0, 

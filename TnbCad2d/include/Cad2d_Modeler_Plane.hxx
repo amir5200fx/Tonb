@@ -35,6 +35,12 @@ namespace tnbLib
 				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
+			void InsertToPlanes
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
+
 		public:
 
 			Standard_Boolean 
