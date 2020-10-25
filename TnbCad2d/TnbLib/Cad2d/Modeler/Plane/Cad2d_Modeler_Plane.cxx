@@ -76,7 +76,22 @@ void tnbLib::cad2dLib::Modeler_Plane::InsertToPlanes
 	auto insert = thePlanes_.insert(std::make_pair(theIndex, thePlane));
 	if (NOT insert.second)
 	{
-		FatalErrorIn("void InsertToPlanes(const Standard_Integer theIndex, const std::shared_ptr<Cad2d_Plane>& thePlane)")
+		FatalErrorIn("void InsertToPlanes(const Standard_Integer, const std::shared_ptr<Cad2d_Plane>&)")
+			<< "duplicate data: " << theIndex << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::cad2dLib::Modeler_Plane::InsertToPlanes
+(
+	const Standard_Integer theIndex, 
+	std::shared_ptr<Cad2d_Plane>&& thePlane
+)
+{
+	auto insert = thePlanes_.insert(std::make_pair(theIndex, std::move(thePlane)));
+	if (NOT insert.second)
+	{
+		FatalErrorIn("void InsertToPlanes(const Standard_Integer, std::shared_ptr<Cad2d_Plane>&&)")
 			<< "duplicate data: " << theIndex << endl
 			<< abort(FatalError);
 	}

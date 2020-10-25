@@ -13,6 +13,7 @@
 #include <Cad2d_IntsctEntity_Segment.hxx>
 #include <Cad2d_IntsctEntity_Pair.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
+#include <Cad2d_Boolean.hxx>
 
 #include <algorithm>
 
@@ -575,6 +576,20 @@ tnbLib::Cad2d_Modeler::AddPlane
 }
 
 Standard_Integer 
+tnbLib::Cad2d_Modeler::AddPlane
+(
+	std::shared_ptr<Cad2d_Plane>&& thePlane
+)
+{
+	thePlane->Index() = PlaneCounter().RetrieveIndex();
+	thePlane->Name() = "plane nb. " + thePlane->Index();
+
+	const auto id = thePlane->Index();
+	InsertToPlanes(id, std::move(thePlane));
+	return id;
+}
+
+Standard_Integer 
 tnbLib::Cad2d_Modeler::AddSegment
 (
 	const std::shared_ptr<cad2dLib::Modeler_Segment>& theSegmnt
@@ -895,6 +910,98 @@ void tnbLib::Cad2d_Modeler::Trim
 	}
 }
 
+std::pair<Standard_Boolean, Standard_Integer>
+tnbLib::Cad2d_Modeler::Union
+(
+	const Standard_Integer plnId0, 
+	const Standard_Integer plnId1
+)
+{
+	const auto pln0 = SelectPlane(plnId0);
+	Debug_Null_Pointer(pln0);
+
+	const auto pln1 = SelectPlane(plnId1);
+	Debug_Null_Pointer(plnId1);
+
+	auto sum = Cad2d_Boolean::Union(pln0, pln1);
+	if (sum)
+	{
+		auto paired = std::make_pair(Standard_True, AddPlane(std::move(sum)));
+		return std::move(paired);
+	}
+	else
+	{
+		auto paired = std::make_pair(Standard_False, -1);
+		return std::move(paired);
+	}
+}
+
+std::pair<Standard_Boolean, std::vector<Standard_Integer>>
+tnbLib::Cad2d_Modeler::Subtract
+(
+	const Standard_Integer plnId0, 
+	const Standard_Integer plnId1
+)
+{
+	const auto pln0 = SelectPlane(plnId0);
+	Debug_Null_Pointer(pln0);
+
+	const auto pln1 = SelectPlane(plnId1);
+	Debug_Null_Pointer(plnId1);
+
+	auto sum = Cad2d_Boolean::Subtract(pln0, pln1);
+	std::vector<Standard_Integer> ids;
+	if (sum.size())
+	{
+		ids.reserve(sum.size());
+		for (const auto& x : sum)
+		{
+			Debug_Null_Pointer(x);
+			ids.push_back(AddPlane(std::move(x)));
+		}
+		auto paired = std::make_pair(Standard_True, std::move(ids));
+		return std::move(paired);
+	}
+	else
+	{
+		auto paired = std::make_pair(Standard_False, std::move(ids));
+		return std::move(paired);
+	}
+}
+
+std::pair<Standard_Boolean, std::vector<Standard_Integer>>
+tnbLib::Cad2d_Modeler::Intersection
+(
+	const Standard_Integer plnId0,
+	const Standard_Integer plnId1
+)
+{
+	const auto pln0 = SelectPlane(plnId0);
+	Debug_Null_Pointer(pln0);
+
+	const auto pln1 = SelectPlane(plnId1);
+	Debug_Null_Pointer(plnId1);
+
+	auto sum = Cad2d_Boolean::Intersection(pln0, pln1);
+	std::vector<Standard_Integer> ids;
+	if (sum.size())
+	{
+		ids.reserve(sum.size());
+		for (const auto& x : sum)
+		{
+			Debug_Null_Pointer(x);
+			ids.push_back(AddPlane(std::move(x)));
+		}
+		auto paired = std::make_pair(Standard_True, std::move(ids));
+		return std::move(paired);
+	}
+	else
+	{
+		auto paired = std::make_pair(Standard_False, std::move(ids));
+		return std::move(paired);
+	}
+}
+
 std::vector<Standard_Integer>
 tnbLib::Cad2d_Modeler::MakePlanes
 (
@@ -903,6 +1010,8 @@ tnbLib::Cad2d_Modeler::MakePlanes
 )
 {
 	const auto witems = theList.RetrieveItems();
+	theList.Clear();
+
 	std::vector<std::shared_ptr<Pln_Edge>> items;
 	items.reserve(witems.size());
 	for (const auto& x : witems)
@@ -914,6 +1023,8 @@ tnbLib::Cad2d_Modeler::MakePlanes
 		}
 	}
 	
+	std::vector<Standard_Integer> ids;
+
 	auto wires = Pln_Tools::RetrieveWiresNonManifold(items);
 	if (wires.size() IS_EQUAL 1)
 	{
@@ -924,12 +1035,13 @@ tnbLib::Cad2d_Modeler::MakePlanes
 		const auto plane = Pln_Tools::MakePlane(wire, ax);
 		Debug_Null_Pointer(plane);
 
-		AddPlane(plane);
+		ids.push_back(AddPlane(plane));
+		return std::move(ids);
 	}
 	else
 	{
 		const auto planes = Pln_Tools::RetrievePlanes(wires, ax);
-		std::vector<Standard_Integer> ids;
+		
 		ids.reserve(planes.size());
 		for (const auto& x : planes)
 		{
@@ -948,6 +1060,8 @@ tnbLib::Cad2d_Modeler::MakePlane
 )
 {
 	const auto witems = theList.RetrieveItems();
+	theList.Clear();
+
 	std::vector<std::shared_ptr<Pln_Edge>> items;
 	items.reserve(witems.size());
 	for (const auto& x : witems)
