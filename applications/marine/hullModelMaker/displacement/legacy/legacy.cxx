@@ -59,7 +59,7 @@ namespace tnbLib
 
 	typedef std::shared_ptr<LegModel_DispNo1> shipModel_t;
 	typedef std::shared_ptr<LegModel_Parameter> param_t;
-	typedef std::shared_ptr<chaiscript::Module> module_t;	
+	typedef std::shared_ptr<chaiscript::Module> module_t;
 
 	void modelType(module_t& mod)
 	{
@@ -68,7 +68,7 @@ namespace tnbLib
 
 	void newModel(module_t& mod)
 	{
-		mod->add(chaiscript::fun([](){ auto t = std::make_shared<LegModel_DispNo1>(); return std::move(t); }), "newShip");
+		mod->add(chaiscript::fun([]() { auto t = std::make_shared<LegModel_DispNo1>(); return std::move(t); }), "newShip");
 	}
 
 	void setVerbose(const Standard_Boolean x)
@@ -195,7 +195,7 @@ namespace tnbLib
 		printParameter(" 29. ", t->TransomSlope(), os);
 	}
 
-	
+
 }
 
 #define MODEL_t const shipModel_t& t
@@ -279,7 +279,7 @@ namespace tnbLib
 	void exportToIGES(const shipModel_t& t, const word& name)
 	{
 		checkPerform(t, "void exportToIGES(const shipModel_t& t, const word& name)");
-		
+
 		fileName myFileName(name);
 
 		const auto& shape = t->Entity();
@@ -327,7 +327,7 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 	FatalError.throwExceptions();
-	
+
 	if (argc <= 1)
 	{
 		Info << " - No command is entered" << endl
