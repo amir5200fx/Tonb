@@ -38,6 +38,15 @@ namespace tnbLib
 			, theDeflection_(theDeflection)
 		{}
 
+		Entity_Polygon
+		(
+			pointList&& thePoints,
+			const Standard_Real theDeflection
+		)
+			: thePoints_(std::move(thePoints))
+			, theDeflection_(theDeflection)
+		{}
+
 		Entity_Polygon Reversed() const
 		{
 			Entity_Polygon copy = *this;
