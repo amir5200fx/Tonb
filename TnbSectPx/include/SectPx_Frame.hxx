@@ -8,6 +8,8 @@
 #include <SectPx_MakersFwd.hxx>
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
+#include <SectPx_FieldCloud_Naca4DigitFwd.hxx>
+#include <Ostream.hxx>
 
 #include <vector>
 #include <map>
@@ -140,7 +142,7 @@ namespace tnbLib
 			const Standard_Real w
 		);
 
-
+		void PrintRegistry() const;
 	};
 }
 

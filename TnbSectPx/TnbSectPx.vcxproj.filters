@@ -756,6 +756,9 @@
     <ClInclude Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit\SectPx_FieldCloud_Naca4Digit.hxx">
       <Filter>TnbLib\SectPx\Entities\Cloud\Field\naca4Digit</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit\SectPx_FieldCloud_Naca4DigitFwd.hxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Field\naca4Digit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">

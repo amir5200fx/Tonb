@@ -30,10 +30,17 @@ namespace tnbLib
 			SectPx_KnotVector::SetU1(u);
 		}
 
-		std::vector<Standard_Real> 
+		/*std::vector<Standard_Real> 
 			CreateKnots
 			(
 				const std::vector<std::shared_ptr<SectPx_Coord>>& theCoords,
+				const Standard_Integer degree
+			) const override;*/
+
+		std::vector<Standard_Real>
+			CreateKnots
+			(
+				const std::vector<Pnt2d>& theCoords,
 				const Standard_Integer degree
 			) const override;
 	};

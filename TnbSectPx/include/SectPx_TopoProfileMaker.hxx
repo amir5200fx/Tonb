@@ -55,7 +55,11 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Node>& theNode1
 				);
 
-			Standard_Integer CreateInterplProfile(const std::shared_ptr<SectPx_Cloud>& theCloud);
+			Standard_Integer 
+				CreateInterplProfile
+				(
+					const std::shared_ptr<SectPx_Cloud>& theCloud
+				);
 
 			std::shared_ptr<SectPx_TopoProfile>
 				RemoveProfile

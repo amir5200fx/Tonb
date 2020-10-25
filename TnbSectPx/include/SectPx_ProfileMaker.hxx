@@ -2,8 +2,11 @@
 #ifndef _SectPx_ProfileMaker_Header
 #define _SectPx_ProfileMaker_Header
 
+#include <Standard_Handle.hxx>
 #include <SectPx_Maker.hxx>
 #include <Global_Done.hxx>
+
+class Geom2d_Curve;
 
 namespace tnbLib
 {
@@ -107,6 +110,8 @@ namespace tnbLib
 
 			std::shared_ptr<SectPx_ProfileQ>
 				RetrieveProfileQ() const;
+
+			Handle(Geom2d_Curve) RetrieveGeomCurve(const Standard_Integer deg) const;
 		};
 	}
 }
