@@ -3,6 +3,8 @@
 #define _Entity_Segment_Header
 
 #include <Traits.hxx>
+#include <Global_Serialization.hxx>
+#include <OFstream.hxx>
 
 namespace tnbLib
 {
@@ -17,6 +19,23 @@ namespace tnbLib
 
 		Point theP0_;
 		Point theP1_;
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+		void save(TNB_oARCH_TYPE& ar, const unsigned int version) const;
+		void load(TNB_iARCH_TYPE& ar, const unsigned int version);
+
+		void serialize(TNB_oARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		}
+
+		void serialize(TNB_iARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		};
 
 	public:
 
@@ -132,6 +151,11 @@ namespace tnbLib
 
 	typedef Entity_Segment<Pnt2d> Entity2d_Segment;
 	typedef Entity_Segment<Pnt3d> Entity3d_Segment;
+
+	typedef Entity_Segment<const Pnt2d&> Entity2d_SegmentRef;
+	typedef Entity_Segment<const Pnt3d&> Entity3d_SegmentRef;
 }
+
+#include <Entity_SegmentIO.hxx>
 
 #endif // !_Entity_Segment_Header

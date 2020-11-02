@@ -4,7 +4,8 @@
 
 #include <Traits.hxx>
 #include <Entity2d_LineRef.hxx>
-
+#include <Geo_Module.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -24,6 +25,21 @@ namespace tnbLib
 
 		Point theP_;
 		Direct theDir_;
+
+
+		friend class boost::serialization::access;
+		void save(TNB_oARCH_TYPE& ar, const unsigned int version) const;
+		void load(TNB_iARCH_TYPE& ar, const unsigned int version);
+
+		void serialize(TNB_oARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		}
+
+		void serialize(TNB_iARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		};
 		
 	public:
 
@@ -89,6 +105,9 @@ namespace tnbLib
 		const Pnt2d& theP_;
 		const Dir2d& theDir_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+
 	public:
 
 		Entity_Line
@@ -98,6 +117,15 @@ namespace tnbLib
 		)
 			: theP_(theP)
 			, theDir_(theV)
+		{}
+
+		Entity_Line
+		(
+			Pnt2d&& theP,
+			Dir2d&& theV
+		)
+			: theP_(std::move(theP))
+			, theDir_(std::move(theV))
 		{}
 
 		const auto& P() const

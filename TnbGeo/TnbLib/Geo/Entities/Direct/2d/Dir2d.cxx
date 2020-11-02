@@ -14,3 +14,18 @@ tnbLib::Dir2d::Dir2d
 
 	*this = Dir2d(v.X(), v.Y());
 }
+
+DECLARE_SAVE_IMP(tnbLib::Dir2d)
+{
+	ar << X();
+	ar << Y();
+}
+
+DECLARE_LOAD_IMP(tnbLib::Dir2d)
+{
+	Standard_Real x, y;
+	ar >> x;
+	ar >> y;
+	SetX(x);
+	SetY(y);
+}

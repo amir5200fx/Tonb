@@ -4,6 +4,8 @@
 
 #include <gp_Pnt2d.hxx>
 #include <IOstream.hxx>
+#include <Geo_Module.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -26,6 +28,8 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 	public:
 
@@ -73,64 +77,64 @@ namespace tnbLib
 
 		Pnt2d& operator+=(const Pnt2d& theOther)
 		{
-			coord.X() += theOther.coord.X();
-			coord.Y() += theOther.coord.Y();
+			X() += theOther.X();
+			Y() += theOther.Y();
 
 			return *this;
 		}
 
 		Pnt2d& operator-=(const Pnt2d& theOther)
 		{
-			coord.X() -= theOther.coord.X();
-			coord.Y() -= theOther.coord.Y();
+			X() -= theOther.X();
+			Y() -= theOther.Y();
 
 			return *this;
 		}
 
 		Pnt2d& operator*=(const Pnt2d& theOther)
 		{
-			coord.X() *= theOther.coord.X();
-			coord.Y() *= theOther.coord.Y();
+			X() *= theOther.X();
+			Y() *= theOther.Y();
 
 			return *this;
 		}
 
 		Pnt2d& operator=(const Standard_Real Scalar)
 		{
-			coord.X() = Scalar;
-			coord.Y() = Scalar;
+			X() = Scalar;
+			Y() = Scalar;
 
 			return *this;
 		}
 
 		Pnt2d& operator+=(const Standard_Real Scalar)
 		{
-			coord.X() += Scalar;
-			coord.Y() += Scalar;
+			X() += Scalar;
+			Y() += Scalar;
 
 			return *this;
 		}
 
 		Pnt2d& operator-=(const Standard_Real Scalar)
 		{
-			coord.X() -= Scalar;
-			coord.Y() -= Scalar;
+			X() -= Scalar;
+			Y() -= Scalar;
 
 			return *this;
 		}
 
 		Pnt2d& operator*=(const Standard_Real Scalar)
 		{
-			coord.X() *= Scalar;
-			coord.Y() *= Scalar;
+			X() *= Scalar;
+			Y() *= Scalar;
 
 			return *this;
 		}
 
 		Pnt2d& operator/=(const Standard_Real Scalar)
 		{
-			coord.X() /= Scalar;
-			coord.Y() /= Scalar;
+			X() /= Scalar;
+			Y() /= Scalar;
 
 			return *this;
 		}
@@ -154,22 +158,22 @@ namespace tnbLib
 
 		Standard_Real X() const
 		{
-			return coord.X();
+			return gp_Pnt2d::Coord().X();
 		}
 
 		Standard_Real& X()
 		{
-			return coord.X();
+			return gp_Pnt2d::ChangeCoord().ChangeCoord(1);
 		}
 
 		Standard_Real Y() const
 		{
-			return coord.Y();
+			return gp_Pnt2d::Coord().Y();
 		}
 
 		Standard_Real& Y()
 		{
-			return coord.Y();
+			return gp_Pnt2d::ChangeCoord().ChangeCoord(2);
 		}
 
 		Pnt2d UnitLength() const
@@ -200,8 +204,8 @@ namespace tnbLib
 			Standard_Real& theY
 		) const
 		{
-			theX = coord.X();
-			theY = coord.Y();
+			theX = X();
+			theY = Y();
 		}
 
 		//- IO functions and operators

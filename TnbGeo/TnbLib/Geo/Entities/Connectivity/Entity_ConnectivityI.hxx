@@ -53,5 +53,22 @@ namespace tnbLib
 		return std::move(connectivities);
 	}
 
-	
+	template<int Dim>
+	void Entity_Connectivity<Dim>::save(TNB_oARCH_TYPE & ar, const unsigned int version) const
+	{
+		for (size_t i = 0; i < (size_t)Dim; i++)
+		{
+			ar << theV_[i];
+		}
+	}
+
+	template<int Dim>
+	void Entity_Connectivity<Dim>::load(TNB_iARCH_TYPE & ar, const unsigned int version)
+	{
+		for (size_t i = 0; i < (size_t)Dim; i++)
+		{
+			ar >> theV_[i];
+		}
+	}
+
 }

@@ -63,3 +63,4 @@ tnbLib::Pnt2d tnbLib::gProcessor::Intersect
 	Pnt2d IntPoint = P0.Translated(alf * Vec0);
 	return std::move(IntPoint);
 }
+

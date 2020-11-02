@@ -5,6 +5,8 @@
 #include <gp_Pnt.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#include <Geo_Module.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -26,6 +28,8 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 	public:
 
@@ -74,32 +78,32 @@ namespace tnbLib
 
 		Standard_Real X() const
 		{
-			return coord.X();
+			return gp_Pnt::Coord().X();
 		}
 
 		Standard_Real& X()
 		{
-			return coord.X();
+			return gp_Pnt::ChangeCoord().ChangeCoord(1);
 		}
 
 		Standard_Real Y() const
 		{
-			return coord.Y();
+			return gp_Pnt::Coord().Y();
 		}
 
 		Standard_Real& Y()
 		{
-			return coord.Y();
+			return gp_Pnt::ChangeCoord().ChangeCoord(2);
 		}
 
 		Standard_Real Z() const
 		{
-			return coord.Z();
+			return gp_Pnt::Coord().Z();
 		}
 
 		Standard_Real& Z()
 		{
-			return coord.Z();
+			return gp_Pnt::ChangeCoord().ChangeCoord(3);
 		}
 
 		Standard_Real TwoNorm() const
@@ -114,72 +118,72 @@ namespace tnbLib
 
 		Pnt3d& operator+=(const Pnt3d& theOther)
 		{
-			coord.X() += theOther.X();
-			coord.Y() += theOther.Y();
-			coord.Z() += theOther.Z();
+			X() += theOther.X();
+			Y() += theOther.Y();
+			Z() += theOther.Z();
 
 			return *this;
 		}
 
 		Pnt3d& operator-=(const Pnt3d& theOther)
 		{
-			coord.X() -= theOther.X();
-			coord.Y() -= theOther.Y();
-			coord.Z() -= theOther.Z();
+			X() -= theOther.X();
+			Y() -= theOther.Y();
+			Z() -= theOther.Z();
 
 			return *this;
 		}
 
 		Pnt3d& operator*=(const Pnt3d& theOther)
 		{
-			coord.X() *= theOther.X();
-			coord.Y() *= theOther.Y();
-			coord.Z() *= theOther.Z();
+			X() *= theOther.X();
+			Y() *= theOther.Y();
+			Z() *= theOther.Z();
 
 			return *this;
 		}
 
 		Pnt3d& operator=(const Standard_Real Scalar)
 		{
-			coord.X() = Scalar;
-			coord.Y() = Scalar;
-			coord.Z() = Scalar;
+			X() = Scalar;
+			Y() = Scalar;
+			Z() = Scalar;
 
 			return *this;
 		}
 
 		Pnt3d& operator+=(const Standard_Real Scalar)
 		{
-			coord.X() += Scalar;
-			coord.Y() += Scalar;
-			coord.Z() += Scalar;
+			X() += Scalar;
+			Y() += Scalar;
+			Z() += Scalar;
 
 			return *this;
 		}
 
 		Pnt3d& operator-=(const Standard_Real Scalar)
 		{
-			coord.X() -= Scalar;
-			coord.Y() -= Scalar;
-			coord.Z() -= Scalar;
+			X() -= Scalar;
+			Y() -= Scalar;
+			Z() -= Scalar;
 
 			return *this;
 		}
 
 		Pnt3d& operator*=(const Standard_Real Scalar)
 		{
-			coord.X() *= Scalar;
-			coord.Y() *= Scalar;
-			coord.Z() *= Scalar;
+			X() *= Scalar;
+			Y() *= Scalar;
+			Z() *= Scalar;
 
 			return *this;
 		}
 
 		Pnt3d& operator/=(const Standard_Real Scalar)
 		{
-			coord.X() /= Scalar;
-			coord.Y() /= Scalar;
-			coord.Z() /= Scalar;
+			X() /= Scalar;
+			Y() /= Scalar;
+			Z() /= Scalar;
 
 			return *this;
 		}
@@ -210,9 +214,9 @@ namespace tnbLib
 					<< " Length of the vector is too small : " << d
 					<< abort(FatalError);
 			}
-			coord.X() /= d;
-			coord.Y() /= d;
-			coord.Z() /= d;
+			X() /= d;
+			Y() /= d;
+			Z() /= d;
 		}
 
 		void Get
@@ -222,9 +226,9 @@ namespace tnbLib
 			Standard_Real& theZ
 		) const
 		{
-			theX = coord.X();
-			theY = coord.Y();
-			theZ = coord.Z();
+			theX = X();
+			theY = Y();
+			theZ = Z();
 		}
 
 		//- IO functions and operators

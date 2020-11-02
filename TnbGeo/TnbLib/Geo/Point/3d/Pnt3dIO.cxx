@@ -104,3 +104,18 @@ namespace tnbLib
 		return is;
 	}
 }
+
+DECLARE_SAVE_IMP(tnbLib::Pnt3d)
+{
+	ar << X();
+	ar << Y();
+	ar << Z();
+}
+
+DECLARE_LOAD_IMP(tnbLib::Pnt3d)
+{
+	ar >> X();
+	ar >> Y();
+	ar >> Z();
+}
+

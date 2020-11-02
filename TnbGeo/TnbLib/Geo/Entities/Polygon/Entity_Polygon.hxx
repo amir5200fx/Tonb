@@ -4,6 +4,8 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Geo_Traits.hxx>
+#include <Geo_Module.hxx>
+#include <Global_Serialization.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -23,6 +25,23 @@ namespace tnbLib
 		pointList thePoints_;
 
 		Standard_Real theDeflection_;
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+		void save(TNB_oARCH_TYPE& ar, const unsigned int version) const;
+		void load(TNB_iARCH_TYPE& ar, const unsigned int version);
+
+		void serialize(TNB_oARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		}
+
+		void serialize(TNB_iARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		};
 
 	public:
 

@@ -90,3 +90,15 @@ namespace tnbLib
 		return is;
 	}
 }
+
+DECLARE_SAVE_IMP(tnbLib::Pnt2d)
+{
+	ar << X();
+	ar << Y();
+}
+
+DECLARE_LOAD_IMP(tnbLib::Pnt2d)
+{
+	ar >> X();
+	ar >> Y();
+}

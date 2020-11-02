@@ -397,6 +397,12 @@
     <Filter Include="TnbLib\Geo\Naca4Digit">
       <UniqueIdentifier>{87403ae5-6c62-4bcd-98c4-5bd8863af50e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\module">
+      <UniqueIdentifier>{e340c5f0-49e0-45b8-98c7-83b8b22f022b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Serialization">
+      <UniqueIdentifier>{6bf72750-4ab4-404c-a1fd-98200f3a8fa0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -876,6 +882,18 @@
     <ClInclude Include="TnbLib\Geo\Naca4Digit\Geo_Naca4Digit.hxx">
       <Filter>TnbLib\Geo\Naca4Digit</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\module\Geo_Module.hxx">
+      <Filter>TnbLib\Geo\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\IndexedItem\IndexedItemIO.hxx">
+      <Filter>TnbLib\Geo\Entities\IndexedItem</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Segment\Entity_SegmentIO.hxx">
+      <Filter>TnbLib\Geo\Entities\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Serialization\Geo_Serialization.hxx">
+      <Filter>TnbLib\Geo\Serialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1069,6 +1087,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Naca4Digit\Geo_Naca4Digit.cxx">
       <Filter>TnbLib\Geo\Naca4Digit</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\StaticData\Entity_StaticData.cxx">
+      <Filter>TnbLib\Geo\Entities\StaticData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

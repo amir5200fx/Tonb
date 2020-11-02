@@ -3,6 +3,8 @@
 #define _IndexedItem_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Geo_Module.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -16,6 +18,23 @@ namespace tnbLib
 
 		T theItem_;
 
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+		void save(TNB_oARCH_TYPE& ar, const unsigned int version) const;
+		void load(TNB_iARCH_TYPE& ar, const unsigned int version);
+
+		void serialize(TNB_oARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		}
+
+		void serialize(TNB_iARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		};
+
 	public:
 
 		typedef typename T::ptType ptType;
@@ -26,6 +45,11 @@ namespace tnbLib
 		IndexedItem(const Standard_Integer theIndex, const T& theItem)
 			: theIndex_(theIndex)
 			, theItem_(theItem)
+		{}
+
+		IndexedItem(const Standard_Integer theIndex, T&& theItem)
+			: theIndex_(theIndex)
+			, theItem_(std::move(theItem))
 		{}
 
 		Standard_Integer Index() const
@@ -47,7 +71,14 @@ namespace tnbLib
 		{
 			theItem_ = theItem;
 		}
+
+		void SetItem(T&& theItem)
+		{
+			theItem_ = std::move(theItem);
+		}
 	};
 }
+
+#include <IndexedItemIO.hxx>
 
 #endif // !_IndexedItem_Header
