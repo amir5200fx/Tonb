@@ -93,6 +93,9 @@
     <ClInclude Include="TnbLib\Global\Traits\Traits.hxx">
       <Filter>TnbLib\Global\Traits</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx">
