@@ -5,6 +5,31 @@ namespace tnbLib
 {
 
 	template<class EntityType>
+	void Cad_BlockEntity<EntityType>::save
+	(
+		TNB_oARCH_TYPE & ar,
+		const unsigned int version
+	) const
+	{
+		std::string st = Name();
+		ar & st;
+		ar & Entities();
+	}
+
+	template<class EntityType>
+	void Cad_BlockEntity<EntityType>::load
+	(
+		TNB_iARCH_TYPE & ar,
+		const unsigned int version
+	)
+	{
+		std::string st;
+		ar & st;
+		Name() = st;
+		ar & EntitiesRef();
+	}
+
+	template<class EntityType>
 	void Cad_BlockEntity<EntityType>::Add
 	(
 		const Standard_Integer theIndex, 

@@ -34,9 +34,6 @@
     <Filter Include="TnbLib\Cad2d\Entities\Edge">
       <UniqueIdentifier>{91225305-da62-417e-82f5-9d1341fd8063}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad2d\Entities\Curve\Info">
-      <UniqueIdentifier>{72f48266-8d1d-4849-84d9-993b095044cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Cad2d\Tools">
       <UniqueIdentifier>{3c3d876f-0b74-44e4-9da2-7334e2f3c252}</UniqueIdentifier>
     </Filter>
@@ -339,6 +336,9 @@
     </Filter>
     <Filter Include="TnbLib\Cad2d\Scripts">
       <UniqueIdentifier>{90d3f6f7-4d12-4816-ab0e-ccbdd882d683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\module">
+      <UniqueIdentifier>{c913fbf0-2c42-4944-835b-3fb0070a1a85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -651,6 +651,9 @@
     <ClInclude Include="TnbLib\Cad2d\Scripts\Cad2d_Scripts.hxx">
       <Filter>TnbLib\Cad2d\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\module\Cad2d_Module.hxx">
+      <Filter>TnbLib\module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
@@ -862,6 +865,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Scripts\Cad2d_Scripts.cxx">
       <Filter>TnbLib\Cad2d\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_CurveIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Global\Entity\Cad_EntityIO.cxx">
+      <Filter>TnbLib\Cad2d\Global\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Adaptor\Pln_EdgeAdaptorIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeomIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Ring\Pln_RingIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptorIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Pln_VertexIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecisionIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Auxillary\Pln_WireAuxIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire\Aux</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Adaptor\Pln_WireAdaptorIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Auxillary\Cad2d_Plane_AuxillaryIO.cxx">
+      <Filter>TnbLib\Cad2d\Plane\Aux</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_ManagerIO.cxx">
+      <Filter>TnbLib\Cad2d\Plane\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

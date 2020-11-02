@@ -13,6 +13,11 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
 	public:
 
 		Pln_Ring()

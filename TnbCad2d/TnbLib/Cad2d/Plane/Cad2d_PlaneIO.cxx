@@ -75,3 +75,23 @@ void tnbLib::Cad2d_Plane::ExportToPlt
 		}
 	}
 }
+
+DECLARE_SAVE_IMP(tnbLib::Cad2d_Plane)
+{
+	ar & boost::serialization::base_object<Pln_Entity>(*this);
+	ar & boost::serialization::base_object<cad2dLib::Plane_Auxillary>(*this);
+	ar & boost::serialization::base_object<cad2dLib::Plane_Manager>(*this);
+
+	ar & OuterWire();
+	ar & InnerWires();
+}
+
+DECLARE_LOAD_IMP(tnbLib::Cad2d_Plane)
+{
+	ar & boost::serialization::base_object<Pln_Entity>(*this);
+	ar & boost::serialization::base_object<cad2dLib::Plane_Auxillary>(*this);
+	ar & boost::serialization::base_object<cad2dLib::Plane_Manager>(*this);
+
+	ar & OuterWireRef();
+	ar & InnerWiresRef();
+}

@@ -4,6 +4,8 @@
 
 #include <Pln_Entity.hxx>
 #include <OFstream.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 class gp_Trsf2d;
 
@@ -31,6 +33,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		edgeList theEdges_;
+
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

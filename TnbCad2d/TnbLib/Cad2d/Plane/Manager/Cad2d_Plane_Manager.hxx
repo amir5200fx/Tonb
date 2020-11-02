@@ -3,6 +3,8 @@
 #define _Cad2d_Plane_Manager_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -28,6 +30,9 @@ namespace tnbLib
 
 			std::shared_ptr<Cad_EntityManager<Pln_Vertex>> theVertices_;
 			std::shared_ptr<Cad_EntityManager<Pln_Edge>> theEdges_;
+
+			/*private functions and operators*/
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 		protected:
 

@@ -6,6 +6,32 @@ namespace tnbLib
 {
 
 	template<class EntityType>
+	void Cad_EntityManager<EntityType>::save
+	(
+		TNB_oARCH_TYPE & ar, 
+		const unsigned int version
+	) const
+	{
+		std::string st = Name();
+		ar & st;
+		ar & Blocks();
+	}
+
+	template<class EntityType>
+	void tnbLib::Cad_EntityManager<EntityType>::load
+	(
+		TNB_iARCH_TYPE & ar, 
+		const unsigned int version
+	)
+	{
+		std::string st;
+		ar & st;
+
+		Name() = st;
+		ar & BlocksRef();
+	}
+
+	template<class EntityType>
 	Cad_EntityManager<EntityType>::Cad_EntityManager
 	(
 		const word & theName, 

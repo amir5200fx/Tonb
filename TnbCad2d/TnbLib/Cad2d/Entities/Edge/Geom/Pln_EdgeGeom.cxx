@@ -38,3 +38,4 @@ void tnbLib::Pln_EdgeGeom::Approx
 	auto& pts = Mesh()->Points();
 	pts = std::move(chain->Points());
 }
+

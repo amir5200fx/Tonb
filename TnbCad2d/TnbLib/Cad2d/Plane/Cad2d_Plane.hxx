@@ -3,10 +3,12 @@
 #define _Cad2d_Plane_Header
 
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <Entity2d_ChainFwd.hxx>
 #include <Pln_Entity.hxx>
 #include <Cad2d_Plane_Manager.hxx>
 #include <Cad2d_Plane_Auxillary.hxx>
+#include <Cad2d_Module.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -48,6 +50,19 @@ namespace tnbLib
 
 
 		//- private functions and operators
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+
+		auto& OuterWireRef()
+		{
+			return theOuter_;
+		}
+
+		auto& InnerWiresRef()
+		{
+			return theInner_;
+		}
 
 		void SetOuter(const outer&& theOuter);
 

@@ -4,6 +4,8 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 namespace tnbLib
 {
@@ -14,6 +16,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Real thePrecision_;
+
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

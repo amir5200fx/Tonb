@@ -29,6 +29,22 @@ namespace tnbLib
 		std::shared_ptr<Pln_Vertex> theVtx0_;
 		std::shared_ptr<Pln_Vertex> theVtx1_;
 
+
+		/*private functions and operators*/
+
+
+		auto& ChangeVtx0()
+		{
+			return theVtx0_;
+		}
+
+		auto& ChangeVtx1()
+		{
+			return theVtx1_;
+		}
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
 	public:
 
 		typedef Pnt2d ptType;

@@ -5,6 +5,8 @@
 #include <Standard_TypeDef.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 
@@ -25,6 +27,11 @@ namespace tnbLib
 		Standard_Boolean Sense_;
 
 		mutable std::shared_ptr<Entity2d_Polygon> theMesh_;
+
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

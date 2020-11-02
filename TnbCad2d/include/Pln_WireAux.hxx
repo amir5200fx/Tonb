@@ -4,6 +4,8 @@
 
 #include <Entity2d_Box.hxx>
 #include <Pln_Orientation.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 namespace tnbLib
 {
@@ -16,6 +18,11 @@ namespace tnbLib
 		Entity2d_Box theBoundingBox_;
 
 		Pln_Orientation theOrientation_;
+
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

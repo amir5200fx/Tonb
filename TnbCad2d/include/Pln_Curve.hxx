@@ -8,6 +8,8 @@
 #include <Pnt2d.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 class Geom2d_Curve;
 class gp_Ax2d;
@@ -35,6 +37,10 @@ namespace tnbLib
 		//- must be bounded
 		Handle(Geom2d_Curve) theGeometry_;
 
+
+		/*private functions and operators*/
+		
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 		auto& ChangeGeometry()
 		{
