@@ -19,6 +19,17 @@ namespace tnbLib
 
 		Standard_Real theF_;
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Marine_Entity>(*this);
+			ar & theDP_;
+			ar & theF_;
+		}
+
 	public:
 
 		Marine_FreeBoard();

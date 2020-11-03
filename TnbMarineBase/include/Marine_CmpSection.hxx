@@ -5,6 +5,7 @@
 #include <Entity2d_BoxFwd.hxx>
 #include <Marine_CoordinatedEntity.hxx>
 #include <Marine_SectionType.hxx>
+#include <Marine_Module.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -37,6 +38,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::vector<std::shared_ptr<Marine_Section>> theSections_;
+
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
 
 	protected:	
 

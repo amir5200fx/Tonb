@@ -3,6 +3,7 @@
 #define _Marine_MultLevWaterDomain_Header
 
 #include <Marine_Entity.hxx>
+#include <Marine_Module.hxx>
 
 #include <vector>
 
@@ -23,6 +24,8 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<Marine_WaterDomain>> theDomains_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
 
 		auto& ChangeDomains()
 		{

@@ -4,6 +4,7 @@
 
 #include <Global_Done.hxx>
 #include <Marine_CoordinatedEntity.hxx>
+#include <Marine_Module.hxx>
 #include <Entity3d_Box.hxx>
 #include <OFstream.hxx>
 
@@ -29,6 +30,13 @@ namespace tnbLib
 
 		std::shared_ptr<Marine_Water> theWater_;
 		std::shared_ptr<Marine_Wave> theWave_;
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+		
+	protected:
+
+		Marine_WaterDomain()
+		{}
 
 	public:
 

@@ -3,6 +3,7 @@
 #define _Marine_Domain_Header
 
 #include <Global_Done.hxx>
+#include <Global_Serialization.hxx>
 #include <Marine_CoordinatedEntity.hxx>
 #include <Entity3d_Box.hxx>
 
@@ -26,6 +27,18 @@ namespace tnbLib
 		auto& ChangeDim()
 		{
 			return theDomain_;
+		}
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Marine_CoordinatedEntity>(*this);
+			ar & boost::serialization::base_object<Global_Done>(*this);
+
+			ar & theDomain_;
 		}
 
 	public:

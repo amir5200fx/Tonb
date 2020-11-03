@@ -16,11 +16,20 @@ namespace tnbLib
 
 		Standard_Real theValue_;
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theValue_;
+		}
+
 	protected:
 
 		Marine_CGCompt
 		(
-			const Standard_Real theValue
+			const Standard_Real theValue = 0
 		);
 
 		Marine_CGCompt

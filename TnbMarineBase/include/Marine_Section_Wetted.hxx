@@ -21,6 +21,17 @@ namespace tnbLib
 
 			Standard_Boolean IsDeep_;
 
+
+			/*private functions and operators*/
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+
+			auto& Change_IsDeep()
+			{
+				return IsDeep_;
+			}
+
 		protected:
 
 			template<class... _Types>

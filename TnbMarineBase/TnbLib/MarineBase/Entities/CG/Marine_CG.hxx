@@ -23,6 +23,19 @@ namespace tnbLib
 		std::shared_ptr<Marine_VCG> theVCG_;
 		std::shared_ptr<Marine_TCG> theTCG_;
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Marine_Entity>(*this);
+
+			ar & theLCG_;
+			ar & theVCG_;
+			ar & theTCG_;
+		}
+
 	public:
 
 		Marine_CG

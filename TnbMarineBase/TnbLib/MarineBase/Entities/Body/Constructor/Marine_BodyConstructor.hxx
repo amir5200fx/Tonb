@@ -3,6 +3,7 @@
 #define _Marine_BodyConstructor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 
@@ -23,6 +24,14 @@ namespace tnbLib
 			/*Private Data*/
 
 			std::shared_ptr<Marine_Shape> theShape_;
+
+
+			/*private functions and operators*/
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version);
 
 		public:
 
@@ -60,6 +69,17 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			/*private functions and operators*/
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<BodyType>(*this);
+			}
+
 		public:
 
 			template<class... _Types>
@@ -72,5 +92,7 @@ namespace tnbLib
 
 
 }
+
+#include <Marine_BodyConstructorI.hxx>
 
 #endif // !_Marine_BodyConstructor_Header

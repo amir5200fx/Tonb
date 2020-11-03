@@ -16,11 +16,21 @@ namespace tnbLib
 
 		Pnt3d theCoord_;
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Marine_Entity>(*this);
+			ar & theCoord_;
+		}
+
 	public:
 
 		Marine_Coord
 		(
-			const Pnt3d& theCoord
+			const Pnt3d& theCoord = gp::Origin()
 		);
 
 		Marine_Coord

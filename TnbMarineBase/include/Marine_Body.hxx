@@ -5,6 +5,7 @@
 #include <Marine_CoordinatedEntity.hxx>
 #include <Marine_BaseLine.hxx>
 #include <Marine_BodyType.hxx>
+#include <Marine_Module.hxx>
 
 #include <vector>
 
@@ -30,6 +31,11 @@ namespace tnbLib
 
 		Marine_BaseLine theBase_;
 
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
 	protected:
 	
 		template<class... _Types>
@@ -40,6 +46,11 @@ namespace tnbLib
 		auto& ChangeSections()
 		{
 			return theSections_;
+		}
+
+		auto & ChangeBaseLine()
+		{
+			return theBase_;
 		}
 
 	public:

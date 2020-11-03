@@ -24,6 +24,14 @@ namespace tnbLib
 
 			//- private functions and operators
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+			auto & ChangeMid()
+			{
+				return theMid_;
+			}
+
 			void SetMid(const std::shared_ptr<Marine_CmpSection>& theMid)
 			{
 				theMid_ = theMid;
@@ -87,6 +95,18 @@ namespace tnbLib
 			std::shared_ptr<Marine_CmpSection> theWater_;
 
 			//- private functions and operators
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+			auto& ChangeShape()
+			{
+				return theShape_;
+			}
+
+			auto& ChangeWL()
+			{
+				return theWater_;
+			}
 
 		public:
 

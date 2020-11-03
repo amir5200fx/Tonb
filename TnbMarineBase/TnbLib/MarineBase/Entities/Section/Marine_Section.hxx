@@ -2,8 +2,10 @@
 #ifndef _Marine_Section_Header
 #define _Marine_Section_Header
 
+#include <Marine_Module.hxx>
 #include <Marine_CoordinatedEntity.hxx>
 #include <Marine_SectionType.hxx>
+#include <Global_Serialization.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <OFstream.hxx>
 
@@ -25,6 +27,19 @@ namespace tnbLib
 
 		std::shared_ptr<Pln_Wire> theWire_;
 
+
+		/*private functions and operators*/
+
+		Marine_Section()
+		{}
+
+		auto& ChangeWire()
+		{
+			return theWire_;
+		}
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+		
 
 		static void CheckWire(const Pln_Wire& theWire, const char* theName);
 
