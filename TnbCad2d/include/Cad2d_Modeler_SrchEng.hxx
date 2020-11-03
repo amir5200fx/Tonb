@@ -31,6 +31,24 @@ namespace tnbLib
 
 			//- private functions and operators
 
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+
+			const auto& Corners() const
+			{
+				return theCorners_;
+			}
+
+			auto& ChangeCorners()
+			{
+				return theCorners_;
+			}
+
+			auto& ChangeMaxRadius()
+			{
+				return theMaxRadius_;
+			}
+
 			Standard_Boolean CheckDomain() const;
 
 			void CheckDomain(const char* theName) const;

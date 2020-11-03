@@ -36,6 +36,30 @@ namespace tnbLib
 
 			Pnt2d theCoord_;
 
+
+			/*private functions and operators*/
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+			auto& ChangeVertices()
+			{
+				return theVertices_;
+			}
+
+			auto& ChangeRadius()
+			{
+				return theRadius_;
+			}
+
+			auto& ChangeTolerance()
+			{
+				return theTol_;
+			}
+
+			auto& ChangeCoord()
+			{
+				return theCoord_;
+			}
+
 		public:
 
 			using Modeler_CornerAdaptor::IsContains;

@@ -2,6 +2,8 @@
 #ifndef _Cad2d_Modeler_Segment_Header
 #define _Cad2d_Modeler_Segment_Header
 
+#include <Cad2d_Module.hxx>
+#include <Global_Serialization.hxx>
 #include <Cad2d_Modeler_Entity.hxx>
 
 #include <map>
@@ -28,6 +30,30 @@ namespace tnbLib
 
 			std::map<Standard_Integer, std::shared_ptr<Pln_Edge>>
 				theEdges_;
+
+			/*private functions and operators*/
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+			
+
+		protected:
+
+			Modeler_Segment()
+			{}
+
+			auto& ChangeCrn0()
+			{
+				return theCrn0_;
+			}
+
+			auto& ChangeCrn1()
+			{
+				return theCrn1_;
+			}
+
+			auto& ChangeEdges()
+			{
+				return theEdges_;
+			}
 
 		public:
 
@@ -104,6 +130,15 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			/*private functions and operators*/
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+		protected:
+
+			Modeler_Ring()
+			{}
 
 		public:
 

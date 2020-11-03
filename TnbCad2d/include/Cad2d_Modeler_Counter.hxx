@@ -3,6 +3,7 @@
 #define _Cad2d_Modeler_Counter_Header
 
 #include <Geo_ItemCounter.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -19,6 +20,19 @@ namespace tnbLib
 			mutable Geo_ItemCounter theEdgeCounter_;
 			mutable Geo_ItemCounter thePlaneCounter_;
 			mutable Geo_ItemCounter theSegmntCounter_;
+
+			/*private functions and operators*/
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & VertexCounter();
+				ar & EdgeCounter();
+				ar & PlaneCounter();
+				ar & SegmntCounter();
+			}
 
 		protected:
 

@@ -11,8 +11,7 @@ namespace tnbLib
 		const unsigned int version
 	) const
 	{
-		std::string st = Name();
-		ar & st;
+		ar & Name();
 		ar & Entities();
 	}
 
@@ -23,9 +22,7 @@ namespace tnbLib
 		const unsigned int version
 	)
 	{
-		std::string st;
-		ar & st;
-		Name() = st;
+		ar & Name();
 		ar & EntitiesRef();
 	}
 

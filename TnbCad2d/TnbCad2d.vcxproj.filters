@@ -301,9 +301,6 @@
     <Filter Include="TnbLib\Cad2d\Modeler\Tools">
       <UniqueIdentifier>{fda22bd6-6a11-40a7-9db0-01c317546cc5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad2d\Modeler\Manager">
-      <UniqueIdentifier>{d8df0a85-a91e-4b0a-a8d1-902fe68b2705}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Cad2d\Entities\Type">
       <UniqueIdentifier>{73b5e232-e1b4-4a0b-aa51-0f72f3bc8164}</UniqueIdentifier>
     </Filter>
@@ -904,6 +901,33 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityIO.cxx">
       <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Entities\Corner\Adaptor\Cad2d_Modeler_CornerAdaptorIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Entities\Corner\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Entities\Corner\Cad2d_Modeler_CornerIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Entities\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Entities\Segment\Cad2d_Modeler_SegmentIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Entities\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Plane\Cad2d_Modeler_PlaneIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Registry\Cad2d_Modeler_RegistryIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Registry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Segments\Cad2d_Modeler_SegmentsIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\Segments</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\SelectList\Cad2d_Modeler_SelectListIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\SelectList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\SrchEng\Cad2d_Modeler_SrchEngIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler\SrchEng</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Modeler\Cad2d_ModelerIO.cxx">
+      <Filter>TnbLib\Cad2d\Modeler</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

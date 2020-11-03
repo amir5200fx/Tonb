@@ -4,6 +4,7 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Geo_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -17,6 +18,18 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			/*private functions and operators*/
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & Index();
+				ar & Name();
+			}
 
 		protected:
 

@@ -3,6 +3,8 @@
 #define _Cad2d_Modeler_SelectList_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Cad2d_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <vector>
 #include <memory>
@@ -29,6 +31,8 @@ namespace tnbLib
 
 
 			//- private functions and operators
+
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 			auto& ChangeItems()
 			{

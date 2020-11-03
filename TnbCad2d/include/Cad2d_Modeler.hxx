@@ -40,6 +40,11 @@ namespace tnbLib
 		using cad2dLib::Modeler_Registry::IsContain;
 		using cad2dLib::Modeler_Plane::IsContain;
 		//using cad2dLib::Modeler_Wire::IsContain;
+
+
+		//- private functions and operators
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 	
 	public:
 
