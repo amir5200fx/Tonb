@@ -4,6 +4,7 @@
 
 #include <Standard_Real.hxx>
 #include <Standard_Integer.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -16,6 +17,16 @@ namespace tnbLib
 
 		T theLower_;
 		T theUpper_;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theLower_;
+			ar & theUpper_;
+		}
 
 	protected:
 

@@ -3,6 +3,7 @@
 #define _Global_Done_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -13,6 +14,15 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Boolean IsDone_;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & IsDone_;
+		}
 
 	protected:
 

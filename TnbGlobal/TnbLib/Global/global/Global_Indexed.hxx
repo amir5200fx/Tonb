@@ -3,6 +3,7 @@
 #define _Global_Indexed_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -13,6 +14,15 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Integer theIndex_;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theIndex_;
+		}
 
 	protected:
 

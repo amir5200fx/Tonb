@@ -35,10 +35,7 @@
 	friend class boost::serialization::access;														\
 	void Export save(TNB_oARCH_TYPE & ar, const unsigned int version) const;						\
 	void Export load(TNB_iARCH_TYPE & ar, const unsigned int version);								\
-	void serialize(TNB_oARCH_TYPE &ar, const unsigned int file_version)								\
-	{boost::serialization::split_member(ar, *this, file_version);}									\
-	void serialize(TNB_iARCH_TYPE &ar, const unsigned int file_version)								\
-	{boost::serialization::split_member(ar, *this, file_version);}
+	BOOST_SERIALIZATION_SPLIT_MEMBER()
 
 #define DECLARE_SAVE_IMP(C)															\
 void C::save(TNB_oARCH_TYPE & ar, const unsigned int version) const
