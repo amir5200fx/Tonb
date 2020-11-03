@@ -109,6 +109,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Entities\Box\3d\Entity3d_BoxFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Box\Entity_Box.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Box\Entity_BoxI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Box\Entity_BoxIO.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_Chain.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_ChainFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Chain\3d\Entity3d_Chain.hxx" />
@@ -236,6 +237,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Point\3d\Pnt3d.hxx" />
     <ClInclude Include="TnbLib\Geo\Point\3d\Pnt3dI.hxx" />
     <ClInclude Include="TnbLib\Geo\PriorityList\Geo_PriorityList.hxx" />
+    <ClInclude Include="TnbLib\Geo\PriorityList\Geo_PriorityListI.hxx" />
     <ClInclude Include="TnbLib\Geo\ProfileFun\Const\Geo_ProfileFun_Const.hxx" />
     <ClInclude Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_Geom.hxx" />
     <ClInclude Include="TnbLib\Geo\ProfileFun\Geo_ProfileFun.hxx" />
@@ -259,6 +261,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Approximation\Curve\System\Geo_ApprxCurve_System.cxx" />
     <ClCompile Include="TnbLib\Geo\Computation\Geo_CmptLib.cxx" />
     <ClCompile Include="TnbLib\Geo\Counter\Geo_ItemCounter.cxx" />
+    <ClCompile Include="TnbLib\Geo\Counter\Geo_ItemCounterIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Distributor\Cosine\Geo_CosineDistb.cxx" />
     <ClCompile Include="TnbLib\Geo\Distributor\Uniform\Geo_UniDistb.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Box\2d\Entity2d_Box.cxx" />
@@ -312,6 +315,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2dIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Point\3d\Pnt3d.cxx" />
     <ClCompile Include="TnbLib\Geo\Point\3d\Pnt3dIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\PriorityList\Geo_PriorityListIO.cxx" />
     <ClCompile Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_Geom.cxx" />
     <ClCompile Include="TnbLib\Geo\ProfileFun\Linear\Geo_ProfileFun_Linear.cxx" />
     <ClCompile Include="TnbLib\Geo\Scripts\Geo_Scripts.cxx" />

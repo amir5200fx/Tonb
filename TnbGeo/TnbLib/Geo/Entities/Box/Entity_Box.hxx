@@ -36,7 +36,10 @@ namespace tnbLib
 
 		/*Private functions and operators*/
 
-		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version);
 
 	public:
 
@@ -362,5 +365,6 @@ namespace tnbLib
 }
 
 #include <Entity_BoxI.hxx>
+#include <Entity_BoxIO.hxx>
 
 #endif // !_Entity_Box_Header

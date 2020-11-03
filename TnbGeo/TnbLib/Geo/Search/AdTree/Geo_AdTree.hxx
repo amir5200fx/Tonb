@@ -31,6 +31,24 @@ namespace tnbLib
 
 		Standard_Integer theLevel_;
 
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theLeft_;
+			ar & theRight_;
+
+			ar & theRegion_;
+
+			ar & theData_;
+
+			ar & theLevel_;
+		}
+
 	public:
 
 		Geo_AdTreeNode()
@@ -112,6 +130,39 @@ namespace tnbLib
 		typedef Geo_AdTreeNode<T, Point> NodeType;
 
 		NodeType* theRoot_;
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void Serialize(Archive& ar, NodeType* t)
+		{
+			ar & t;
+			if (t->LeftPtr())
+			{
+				Serialize(ar, t->LeftPtr());
+			}
+			if (t->RightPtr())
+			{
+				Serialize(ar, t->RightPtr());
+			}
+		}
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theRoot_;
+			if (theRoot_)
+			{
+				if (theRoot_->LeftPtr())
+				{
+					Serialize(ar, theRoot_->LeftPtr());
+				}
+				if (theRoot_->RightPtr())
+				{
+					Serialize(ar, theRoot_->RightPtr());
+				}
+			}
+		}
 
 		void CheckFun() const
 		{

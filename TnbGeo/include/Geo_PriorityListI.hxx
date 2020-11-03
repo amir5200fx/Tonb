@@ -2,15 +2,15 @@
 namespace tnbLib
 {
 
-	template<class Point, class Direct>
+	template<class T>
 	template<class Archive>
-	void tnbLib::Entity_Line<Point, Direct>::serialize
+	void Geo_PriorityList<T>::serialize
 	(
 		Archive & ar, 
 		const unsigned int version
 	)
 	{
-		ar & P();
-		ar & Dir();
+		ar & theData_;
+		ar & LengthValue;
 	}
 }

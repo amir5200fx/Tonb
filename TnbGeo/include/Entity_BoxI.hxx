@@ -113,37 +113,5 @@ namespace tnbLib
 		return Standard_True;
 	}
 
-	template<class Point>
-	std::ostream& operator<<(std::ostream& os, const Entity_Box<Point>& b)
-	{
-		os
-			<< " P0 = ("
-			<< b.P0()
-			<< "),  P1 = ("
-			<< b.P1()
-			<< ")";
-		return os;
-	}
-
-	template<class Point>
-	Ostream & operator<<(Ostream & os, const Entity_Box<Point>& b)
-	{
-		os << " P0 = " << b.P0() << ", P1 = " << b.P1();
-		os.check("Ostream & operator<<(Ostream & os, const Entity_Box<Point>& b)");
-		return os;
-	}
-
-	template<class Point>
-	DECLARE_SAVE_IMP(Entity_Box<Point>)
-	{
-		ar << P0();
-		ar << P1();
-	}
-
-	template<class Point>
-	DECLARE_LOAD_IMP(Entity_Box<Point>)
-	{
-		ar >> P0();
-		ar >> P1();
-	}
+	
 }

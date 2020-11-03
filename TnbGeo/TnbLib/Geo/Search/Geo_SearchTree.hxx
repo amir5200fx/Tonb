@@ -2,6 +2,7 @@
 #ifndef _Geo_SearchTree_Header
 #define _Geo_SearchTree_Header
 
+#include <Global_Serialization.hxx>
 #include <Entity_Box.hxx>
 
 #include <vector>
@@ -16,6 +17,17 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Integer theNbItems_;
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar& theNbItems_;
+		}
 
 	protected:
 
@@ -61,6 +73,17 @@ namespace tnbLib
 		/*Private Data*/
 
 		Entity_Box<Point> theRegion_;
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar& theRegion_;
+		}
 
 	protected:
 

@@ -47,30 +47,25 @@ namespace tnbLib
 	}
 
 	template<class Point, class ConnectType, bool NeighbData>
-	void Entity_StaticData<Point, ConnectType, NeighbData>::save(TNB_oARCH_TYPE & ar, const unsigned int version) const
+	template<class Archive>
+	void Entity_StaticData<Point, ConnectType, NeighbData>::serialize
+	(
+		Archive & ar, 
+		const unsigned int version
+	)
 	{
-		ar << Points();
-		ar << Connectivity();
-		ar << BoundingBox();
-	}
-
-	template<class Point, class ConnectType, bool NeighbData>
-	void Entity_StaticData<Point, ConnectType, NeighbData>::load(TNB_iARCH_TYPE& ar, const unsigned int version)
-	{
-		ar >> Points();
-		ar >> Connectivity();
-		ar >> BoundingBox();
+		ar & Points();
+		ar & Connectivity();
+		ar & BoundingBox();
 	}
 
 	template<class Point, class ConnectType>
-	void Entity_StaticData<Point, ConnectType, true>::save(TNB_oARCH_TYPE & ar, const unsigned int version) const
-	{
-		ar& boost::serialization::base_object<base>(*this);
-		ar& Neighbors();
-	}
-
-	template<class Point, class ConnectType>
-	void Entity_StaticData<Point, ConnectType, true>::load(TNB_iARCH_TYPE & ar, const unsigned int version)
+	template<class Archive>
+	void Entity_StaticData<Point, ConnectType, true>::serialize
+	(
+		Archive & ar, 
+		const unsigned int version
+	)
 	{
 		ar& boost::serialization::base_object<base>(*this);
 		ar& Neighbors();

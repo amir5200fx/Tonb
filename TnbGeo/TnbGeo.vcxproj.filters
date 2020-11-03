@@ -894,6 +894,12 @@
     <ClInclude Include="TnbLib\Geo\Serialization\Geo_Serialization.hxx">
       <Filter>TnbLib\Geo\Serialization</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Box\Entity_BoxIO.hxx">
+      <Filter>TnbLib\Geo\Entities\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\PriorityList\Geo_PriorityListI.hxx">
+      <Filter>TnbLib\Geo\PriorityList</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1090,6 +1096,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\StaticData\Entity_StaticData.cxx">
       <Filter>TnbLib\Geo\Entities\StaticData</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\PriorityList\Geo_PriorityListIO.cxx">
+      <Filter>TnbLib\Geo\PriorityList</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Counter\Geo_ItemCounterIO.cxx">
+      <Filter>TnbLib\Geo\Counter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
