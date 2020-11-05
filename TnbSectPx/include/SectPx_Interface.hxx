@@ -20,6 +20,9 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_Node> theNode_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 	protected:
 
 		SectPx_Interface

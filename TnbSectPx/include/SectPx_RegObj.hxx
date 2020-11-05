@@ -14,6 +14,17 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_Entity>(*this);
+		}
+
 	protected:
 
 		template<class... _Types>

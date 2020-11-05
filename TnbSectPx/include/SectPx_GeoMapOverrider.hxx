@@ -18,6 +18,9 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_GeoMap> theGeoMap_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 	public:
 
 		static const char* typeName_;

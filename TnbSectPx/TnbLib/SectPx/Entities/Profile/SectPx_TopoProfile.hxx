@@ -29,6 +29,9 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_KnotVector> theKnotAlg_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 	protected:
 
 		SectPx_TopoProfile

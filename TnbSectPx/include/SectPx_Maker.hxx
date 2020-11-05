@@ -3,6 +3,7 @@
 #define _SectPx_Maker_Header
 
 #include <SectPx_Entity.hxx>
+#include <SectPx_Module.hxx>
 
 namespace tnbLib
 {
@@ -16,9 +17,16 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		const std::shared_ptr<SectPx_Registry>& theRegistry_;
+		std::shared_ptr<SectPx_Registry> theRegistry_;
+
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 
 	protected:
+
+		SectPx_Maker()
+		{}
 
 		SectPx_Maker
 		(

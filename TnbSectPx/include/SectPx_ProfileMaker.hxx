@@ -32,6 +32,11 @@ namespace tnbLib
 			std::shared_ptr<SectPx_TopoProfile> theProfile_;
 
 
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
+			Profile()
+			{}
+
 			Standard_Integer
 				MakeEdge
 				(

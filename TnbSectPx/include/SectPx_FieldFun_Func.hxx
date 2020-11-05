@@ -24,6 +24,16 @@ namespace tnbLib
 				return (Standard_Real)theFun_((double)x);
 			}
 
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<SectPx_oneParFieldFun>(*this);
+				ar & theFun_;
+			}
+
 		public:
 
 			static const char* typeName_;

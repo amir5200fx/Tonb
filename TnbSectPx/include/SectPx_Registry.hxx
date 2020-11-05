@@ -5,6 +5,7 @@
 #include <SectPx_Entity.hxx>
 #include <Geo_ItemCounter.hxx>
 #include <SectPx_RegObjType.hxx>
+#include <SectPx_Module.hxx>
 #include <Ostream.hxx>
 
 #include <map>
@@ -36,6 +37,9 @@ namespace tnbLib
 
 
 		//- private functions and operators
+
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 		auto& Counter() const
 		{

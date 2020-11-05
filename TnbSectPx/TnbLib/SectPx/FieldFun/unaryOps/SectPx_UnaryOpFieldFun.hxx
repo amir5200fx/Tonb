@@ -13,6 +13,15 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<SectPx_nonParFieldFun>(*this);
+		}
+
 	protected:
 
 		template<class... _Types>
@@ -38,6 +47,16 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<SectPx_FieldFun> theField_;
+
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<SectPx_UnaryOpFieldFun>(*this);
+			ar & theField_;
+		}
 
 	protected:
 
@@ -84,6 +103,16 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::weak_ptr<SectPx_FieldFun> theField_;
+
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<SectPx_UnaryOpFieldFun>(*this);
+			ar & theField_;
+		}
 
 	protected:
 

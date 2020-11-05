@@ -24,6 +24,8 @@ namespace tnbLib
 		std::shared_ptr<SectPx_Pnt> thePnt_;
 
 
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		void SetPnt
 		(
 			const std::shared_ptr<SectPx_Pnt>& thePnt
@@ -31,6 +33,11 @@ namespace tnbLib
 		{
 			thePnt_ = thePnt;
 		}
+
+	protected:
+
+		SectPx_Node()
+		{}
 
 	public:
 

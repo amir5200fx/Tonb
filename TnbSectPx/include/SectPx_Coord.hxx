@@ -4,6 +4,7 @@
 
 #include <Pnt2d.hxx>
 #include <SectPx_ParentAdaptor.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 
@@ -15,6 +16,12 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{}
 
 	protected:
 

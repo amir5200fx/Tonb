@@ -18,9 +18,34 @@ typedef exprtk::expression<Standard_Real>          expression_t;
 typedef exprtk::parser<Standard_Real>                  parser_t;
 typedef exprtk::parser_error::type            err_t;
 
-void tnbLib::sectPxLib::FieldFun_Expr::AllocateMemory()
+void tnbLib::sectPxLib::FieldFun_Expr::AddParameter
+(
+	const word & name, 
+	std::shared_ptr<Parameter>&& p
+)
 {
-	symbol_table_ptr = std::make_shared<exprtk::symbol_table<Standard_Real>>();
+	auto paired = std::make_pair(name, std::move(p));
+	auto insert = theParameters_.insert(std::move(paired));
+	if (NOT insert.second)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " duplicate data! " << endl
+			<< " - name: " << name << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::sectPxLib::FieldFun_Expr::RemoveParameter(const word & name)
+{
+	auto iter = theParameters_.find(name);
+	if (iter IS_EQUAL theParameters_.end())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the item is not in the tree! " << endl
+			<< " - name: " << name << endl
+			<< abort(FatalError);
+	}
+	theParameters_.erase(iter);
 }
 
 tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
@@ -29,7 +54,6 @@ tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
 )
 	: theExpr_(theExpr)
 {
-	AllocateMemory();
 }
 
 tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
@@ -40,7 +64,6 @@ tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
 	: SectPx_nonParFieldFun(theIndex)
 	, theExpr_(theExpr)
 {
-	AllocateMemory();
 }
 
 tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
@@ -52,7 +75,6 @@ tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
 	: SectPx_nonParFieldFun(theIndex, theName)
 	, theExpr_(theExpr)
 {
-	AllocateMemory();
 }
 
 tnbLib::word 
@@ -64,13 +86,33 @@ tnbLib::sectPxLib::FieldFun_Expr::RegObjTypeName() const
 Standard_Real 
 tnbLib::sectPxLib::FieldFun_Expr::Value() const
 {
-	Debug_Null_Pointer(symbol_table_ptr);
+	exprtk::symbol_table<Standard_Real> symbol_table;
+	for (const auto& x : theParameters_)
+	{
+		Debug_Null_Pointer(x.second);
+		const auto& ref = x.second;
+
+		if (ref->IsConst())
+		{
+			auto cx = std::dynamic_pointer_cast<Constant>(ref);
+			Debug_Null_Pointer(cx);
+
+			symbol_table.add_constant(x.first, cx->X());
+		}
+		else
+		{
+			auto cx = std::dynamic_pointer_cast<Variable>(ref);
+			Debug_Null_Pointer(cx);
+
+			symbol_table.add_variable(x.first, cx->X());
+		}
+	}
 
 	if (addConstants_)
-		symbol_table_ptr->add_constants();
+		symbol_table.add_constants();
 
 	expression_t expression;
-	expression.register_symbol_table(*symbol_table_ptr);
+	expression.register_symbol_table(symbol_table);
 
 	parser_t parser;
 	if (NOT parser.compile(theExpr_, expression))
@@ -83,81 +125,73 @@ tnbLib::sectPxLib::FieldFun_Expr::Value() const
 	return expression.value();
 }
 
-Standard_Boolean 
-tnbLib::sectPxLib::FieldFun_Expr::AddVariable
+void tnbLib::sectPxLib::FieldFun_Expr::AddVariable
 (
 	const word & name,
 	Standard_Real & x
 )
 {
-	Debug_Null_Pointer(symbol_table_ptr);
-	return symbol_table_ptr->add_variable(name, x);
+	auto p = std::make_shared<Variable>(x);
+	AddParameter(name, std::move(p));
 }
 
-Standard_Boolean 
-tnbLib::sectPxLib::FieldFun_Expr::AddVariable
+void tnbLib::sectPxLib::FieldFun_Expr::AddVariable
 (
 	const word & name, 
 	SectPx_FieldFun & x
 )
 {
-	Debug_Null_Pointer(symbol_table_ptr);
-	return symbol_table_ptr->add_variable(name, x.xRef());
+	auto p = std::make_shared<Variable>(x.xRef());
+	AddParameter(name, std::move(p));
 }
 
-Standard_Boolean 
-tnbLib::sectPxLib::FieldFun_Expr::AddVariable
+void tnbLib::sectPxLib::FieldFun_Expr::AddVariable
 (
 	const word & name, 
 	SectPx_FixedPar & par
 )
 {
-	Debug_Null_Pointer(symbol_table_ptr);
-	return symbol_table_ptr->add_variable(name, par.X());
+	auto p = std::make_shared<Variable>(par.X());
+	AddParameter(name, std::move(p));
 }
 
-Standard_Boolean 
-tnbLib::sectPxLib::FieldFun_Expr::AddConstant
+void tnbLib::sectPxLib::FieldFun_Expr::AddConstant
 (
 	const word & name,
 	const Standard_Real & x
 )
 {
-	Debug_Null_Pointer(symbol_table_ptr);
-	return symbol_table_ptr->add_constant(name, x);
+	auto p = std::make_shared<Constant>(x);
+	AddParameter(name, std::move(p));
 }
 
-Standard_Boolean 
-tnbLib::sectPxLib::FieldFun_Expr::AddConstant
+void tnbLib::sectPxLib::FieldFun_Expr::AddConstant
 (
 	const word & name,
 	const SectPx_FieldFun & x
 )
 {
-	Debug_Null_Pointer(symbol_table_ptr);
-	return symbol_table_ptr->add_constant(name, x.xRef());
+	auto p = std::make_shared<Constant>(x.xRef());
+	AddParameter(name, std::move(p));
 }
 
-Standard_Boolean 
-tnbLib::sectPxLib::FieldFun_Expr::AddConstant
+void tnbLib::sectPxLib::FieldFun_Expr::AddConstant
 (
 	const word & name, 
 	const SectPx_ConstPar & par
 )
 {
-	Debug_Null_Pointer(symbol_table_ptr);
-	return symbol_table_ptr->add_constant(name, par.X());
+	auto p = std::make_shared<Constant>(par.X());
+	AddParameter(name, std::move(p));
 }
 
-Standard_Boolean 
-tnbLib::sectPxLib::FieldFun_Expr::RemoveVariable
+void tnbLib::sectPxLib::FieldFun_Expr::RemoveVariable
 (
 	const word & name,
 	const Standard_Boolean remove_node
 )
 {
-	Debug_Null_Pointer(symbol_table_ptr);
-	return symbol_table_ptr->remove_variable(name, remove_node);
+	RemoveParameter(name);
 }
 
 void tnbLib::sectPxLib::FieldFun_Expr::SetAddConstants

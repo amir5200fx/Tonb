@@ -3,6 +3,7 @@
 #define _SectPx_PntConstructor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -16,6 +17,15 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & boost::serialization::base_object<PntType>(*this);
+			}
 
 		public:
 
@@ -37,6 +47,15 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & boost::serialization::base_object<PntType>(*this);
+			}
 
 		public:
 

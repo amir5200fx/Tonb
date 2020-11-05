@@ -26,6 +26,9 @@ namespace tnbLib
 
 			Standard_Integer theNbSegments_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		protected:
 
 			Standard_Boolean CloseTail_ = Standard_False;
@@ -147,6 +150,15 @@ namespace tnbLib
 
 				/*Private Data*/
 
+
+				friend class boost::serialization::access;
+
+				template<class Archive>
+				void serialize(Archive &ar, const unsigned int file_version)
+				{
+					ar & boost::serialization::base_object<FieldCloud_Naca4DigitBase>(*this);
+				}
+
 				void Update() const override;
 
 			public:
@@ -167,6 +179,14 @@ namespace tnbLib
 			{
 
 				/*Private Data*/
+
+				friend class boost::serialization::access;
+
+				template<class Archive>
+				void serialize(Archive &ar, const unsigned int file_version)
+				{
+					ar & boost::serialization::base_object<FieldCloud_Naca4DigitBase>(*this);
+				}
 
 				void Update() const override;
 

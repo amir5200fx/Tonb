@@ -19,6 +19,14 @@ namespace tnbLib
 		struct Profile
 		{
 			std::vector<Pnt2d> Coords;
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & Coords;
+			}
 		};
 
 	protected:
@@ -27,6 +35,15 @@ namespace tnbLib
 
 		std::shared_ptr<Profile> theProfile_;
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<SectPx_Parent>(*this);
+			ar & theProfile_;
+		}
 
 		void AllocateMemory();
 

@@ -22,6 +22,8 @@ namespace tnbLib
 		std::weak_ptr<SectPx_MasterPnt> thePnt_;
 
 
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		void SetPnt
 		(
 			const std::weak_ptr<SectPx_MasterPnt>& thePnt

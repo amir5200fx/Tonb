@@ -15,6 +15,16 @@ namespace tnbLib
 
 		std::vector<Standard_Real> theKnots_;
 
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_KnotVector>(*this);
+			ar & theKnots_;
+		}
+
 	public:
 
 		SectPx_FixedKnots(const std::vector<Standard_Real>& theKnots)

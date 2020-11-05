@@ -26,6 +26,9 @@ namespace tnbLib
 
 			std::weak_ptr<SectPx_Par> thePar_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 			static const char* typeName_;

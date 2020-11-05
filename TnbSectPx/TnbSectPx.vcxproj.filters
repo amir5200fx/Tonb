@@ -346,6 +346,9 @@
     <Filter Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit">
       <UniqueIdentifier>{9d42df6a-2fe4-4971-bed1-5d1a66373ab4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\module">
+      <UniqueIdentifier>{eaef6a80-051f-4acd-8ab1-c370cee02468}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -759,6 +762,9 @@
     <ClInclude Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit\SectPx_FieldCloud_Naca4DigitFwd.hxx">
       <Filter>TnbLib\SectPx\Entities\Cloud\Field\naca4Digit</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\module\SectPx_Module.hxx">
+      <Filter>TnbLib\SectPx\module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">
@@ -1048,6 +1054,108 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit\SectPx_FieldCloud_Naca4Digit.cxx">
       <Filter>TnbLib\SectPx\Entities\Cloud\Field\naca4Digit</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Parent\Adaptor\SectPx_ParentAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Parent\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_oneParFieldFunIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\oneParameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\SectPx_MasterPntIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\TPnt\Adaptor\SectPx_TPntAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\TPnt\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\component\SectPx_Pnt_CompntIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Master\component</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField\SectPx_Pnt_GeoFieldIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Slave\empty\SectPx_Pnt_EmptyIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Slave\empty</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Edge\SectPx_EdgeIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Node\SectPx_NodeIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Node\Adaptor\SectPx_NodeAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Node\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\SectPx_InterfaceIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\Adaptor\SectPx_PairedInterfaceAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Interface\Paired\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Overrider\SectPx_OverriderIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Overrider</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Overrider\Coord\SectPx_CoordOverriderIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Overrider\Coord</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Overrider\GeoMap\SectPx_GeoMapOverriderIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Overrider\GeoMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\SectPx_TopoProfileIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfileIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Interpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Cloud\Field\naca4Digit\SectPx_FieldCloud_Naca4DigitIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Cloud\Field\naca4Digit</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\CmptProfile\SectPx_CmptProfileIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\CmptProfile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\ProfileQ\SectPx_ProfileQIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\ProfileQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_InterPoleAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Slider\SectPx_Pole_SliderIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Interior\Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Interior\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_BndPoleAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave\SectPx_Pole_SlaveIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master\SectPx_Pole_MasterIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Dangle\SectPx_Pole_DangleIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Bnd\Dangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\GeoMap\linearInterpl\SectPx_GeoMap_LinearInterplIO.cxx">
+      <Filter>TnbLib\SectPx\GeoMap\linearInterpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\GeoMap\intersection\SectPx_GeoMap_IntersectionIO.cxx">
+      <Filter>TnbLib\SectPx\GeoMap\intersection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Datum\geoField\SectPx_Datum_GeoFieldIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Datum\geoField</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Datum\component\SectPx_Datum_CompntIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Datum\component</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\SectPx_RegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\SectPx_MakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_ProfileMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Profile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -22,6 +22,16 @@ namespace tnbLib
 
 			std::shared_ptr<SectPx_Coord> theCoord_;
 
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<SectPx_nonParFieldFun>(*this);
+				ar & theCoord_;
+			}
+
 		public:
 
 			static const char* typeName_;

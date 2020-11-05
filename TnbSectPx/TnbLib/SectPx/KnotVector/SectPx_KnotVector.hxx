@@ -25,6 +25,17 @@ namespace tnbLib
 		Standard_Real theU0_;
 		Standard_Real theU1_;
 
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_Entity>(*this);
+			ar & theU0_;
+			ar & theU1_;
+		}
+
 		void SetDefaults();
 
 	protected:

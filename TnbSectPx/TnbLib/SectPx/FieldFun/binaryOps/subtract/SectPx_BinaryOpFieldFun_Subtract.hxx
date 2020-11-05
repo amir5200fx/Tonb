@@ -25,6 +25,21 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::shared_ptr<SectPx_FieldFun>,
+				std::shared_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
+
 		public:
 
 			static const char* typeName_;
@@ -52,6 +67,21 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::shared_ptr<SectPx_FieldFun>,
+				std::weak_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
 
 		public:
 
@@ -81,6 +111,21 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::weak_ptr<SectPx_FieldFun>,
+				std::shared_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
+
 		public:
 
 			static const char* typeName_;
@@ -108,6 +153,21 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::weak_ptr<SectPx_FieldFun>,
+				std::weak_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
 
 		public:
 

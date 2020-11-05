@@ -21,6 +21,9 @@ namespace tnbLib
 
 			std::shared_ptr<Pole_Master> theMaster_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 

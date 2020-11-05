@@ -30,6 +30,9 @@ namespace tnbLib
 
 		//- private functions and operators
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		const auto& Pnts() const
 		{
 			return thePnts_;

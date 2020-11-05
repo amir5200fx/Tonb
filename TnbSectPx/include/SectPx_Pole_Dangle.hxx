@@ -19,6 +19,9 @@ namespace tnbLib
 
 			std::shared_ptr<Pnt_Compnt> thePnt_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 

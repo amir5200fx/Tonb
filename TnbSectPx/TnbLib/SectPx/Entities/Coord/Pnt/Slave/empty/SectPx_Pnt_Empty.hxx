@@ -21,6 +21,8 @@ namespace tnbLib
 
 			std::shared_ptr<SectPx_MasterPnt> theMaster_;
 
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		protected:
 
 			Pnt_Empty

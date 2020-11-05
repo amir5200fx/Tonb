@@ -2,6 +2,9 @@
 #ifndef _SectPx_InterPoleAdaptor_Header
 #define _SectPx_InterPoleAdaptor_Header
 
+#include <Global_Serialization.hxx>
+#include <SectPx_Module.hxx>
+
 #include <memory>
 
 namespace tnbLib
@@ -17,6 +20,9 @@ namespace tnbLib
 
 		std::weak_ptr<SectPx_Segment> theBackward_;
 		std::weak_ptr<SectPx_Segment> theForward_;
+
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 	protected:
 
