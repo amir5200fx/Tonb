@@ -19,6 +19,20 @@ namespace tnbLib
 			Standard_Real theArea_;
 			Standard_Real theZbar_;
 
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & boost::serialization::base_object<StbGMaker_AreaSailCreator>(*this);
+				ar & theArea_;
+				ar & theZbar_;
+			}
+
+			AreaSailCreator_Const()
+			{}
+
 		public:
 
 			AreaSailCreator_Const

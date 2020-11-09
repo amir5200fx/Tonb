@@ -4,6 +4,8 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Global_Serialization.hxx>
+#include <StbGMaker_Module.hxx>
 
 #include <gp_Ax2.hxx>
 
@@ -20,6 +22,9 @@ namespace tnbLib
 		gp_Ax2 theAx2_;
 
 		std::shared_ptr<Entity2d_Box> theBoundingBox_;
+
+
+		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
 
 	protected:
 

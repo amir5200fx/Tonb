@@ -2,8 +2,10 @@
 #ifndef _StbGMaker_Creator_Header
 #define _StbGMaker_Creator_Header
 
+#include <Global_Serialization.hxx>
 #include <Geo_ItemCounter.hxx>
 #include <Marine_ShapesFwd.hxx>
+#include <StbGMaker_Module.hxx>
 #include <Pnt3d.hxx>
 
 #include <memory>
@@ -35,6 +37,8 @@ namespace tnbLib
 		mutable Geo_ItemCounter theTankCounter_;
 		mutable Geo_ItemCounter theSailCounter_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
 
 		auto& TankCounter() const
 		{

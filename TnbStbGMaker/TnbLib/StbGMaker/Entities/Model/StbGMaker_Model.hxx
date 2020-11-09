@@ -26,6 +26,8 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Marine_SailModel>> theSails_;
 
 
+		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+
 		auto& ChangeHull()
 		{
 			return theHull_;

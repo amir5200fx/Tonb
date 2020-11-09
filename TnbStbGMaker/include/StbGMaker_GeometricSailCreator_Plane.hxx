@@ -23,6 +23,12 @@ namespace tnbLib
 
 			Standard_Real theZbar_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+
+			GeometricSailCreator_Plane()
+			{}
+
 		public:
 
 			GeometricSailCreator_Plane

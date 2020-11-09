@@ -91,6 +91,9 @@
     <Filter Include="TnbLib\StbGMaker\Scripts">
       <UniqueIdentifier>{188fe6b7-5048-4567-8864-855558739f0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\StbGMaker\module">
+      <UniqueIdentifier>{4441f478-e7c3-4926-bf15-63081bbaef7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.hxx">
@@ -189,6 +192,12 @@
     <ClInclude Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.hxx">
       <Filter>TnbLib\StbGMaker\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\module\StbGMaker_Module.hxx">
+      <Filter>TnbLib\StbGMaker\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Edge\StbGMaker_EdgeI.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\Edge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.cxx">
@@ -211,9 +220,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WP.cxx">
       <Filter>TnbLib\StbGMaker\Entities\WP</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.cxx">
-      <Filter>TnbLib\StbGMaker\Entities\Model</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\IntplSect\StbGMaker_IntplSect.cxx">
       <Filter>TnbLib\StbGMaker\IntplSect</Filter>
@@ -262,6 +268,33 @@
     </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.cxx">
       <Filter>TnbLib\StbGMaker\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_ModelIO.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WPIO.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Auxillary\StbGMaker_AlgAuxIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Aux</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Hull\Shape\StbGMaker_HullCreator_ShapeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Hull\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\Shape\StbGMaker_TankCreator_ShapeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Tank\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Plane\StbGMaker_GeometricSailCreator_PlaneIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Shape\StbGMaker_GeometricSailCreator_ShapeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_AlgIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_CreatorIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

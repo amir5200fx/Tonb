@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\StbGMaker\Scripts;$(ProjectDir)TnbLib\StbGMaker\ShapeTools;$(ProjectDir)TnbLib\StbGMaker\Tools;$(ProjectDir)TnbLib\StbGMaker\IntplSect\Closer;$(ProjectDir)TnbLib\StbGMaker\IntplSect;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Plane;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Profile;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Const;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull;$(ProjectDir)TnbLib\StbGMaker\Maker\Auxillary;$(ProjectDir)TnbLib\StbGMaker\Maker\Entity;$(ProjectDir)TnbLib\StbGMaker\Maker;$(ProjectDir)TnbLib\StbGMaker\Entities\Model;$(ProjectDir)TnbLib\StbGMaker\Entities\WP;$(ProjectDir)TnbLib\StbGMaker\Entities\Sail;$(ProjectDir)TnbLib\StbGMaker\Entities\Tank;$(ProjectDir)TnbLib\StbGMaker\Entities\Hull;$(ProjectDir)TnbLib\StbGMaker\Entities\Volume;$(ProjectDir)TnbLib\StbGMaker\Entities\Edge;$(ProjectDir)TnbLib\StbGMaker\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\StbGMaker\Scripts;$(ProjectDir)TnbLib\StbGMaker\ShapeTools;$(ProjectDir)TnbLib\StbGMaker\Tools;$(ProjectDir)TnbLib\StbGMaker\IntplSect\Closer;$(ProjectDir)TnbLib\StbGMaker\IntplSect;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Plane;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Profile;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Const;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull;$(ProjectDir)TnbLib\StbGMaker\Maker\Auxillary;$(ProjectDir)TnbLib\StbGMaker\Maker\Entity;$(ProjectDir)TnbLib\StbGMaker\Maker;$(ProjectDir)TnbLib\StbGMaker\Entities\Model;$(ProjectDir)TnbLib\StbGMaker\Entities\WP;$(ProjectDir)TnbLib\StbGMaker\Entities\Sail;$(ProjectDir)TnbLib\StbGMaker\Entities\Tank;$(ProjectDir)TnbLib\StbGMaker\Entities\Hull;$(ProjectDir)TnbLib\StbGMaker\Entities\Volume;$(ProjectDir)TnbLib\StbGMaker\Entities\Edge;$(ProjectDir)TnbLib\StbGMaker\Entities\Entity;$(ProjectDir)TnbLib\StbGMaker\module;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -130,7 +130,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\StbGMaker\Scripts;$(ProjectDir)TnbLib\StbGMaker\ShapeTools;$(ProjectDir)TnbLib\StbGMaker\Tools;$(ProjectDir)TnbLib\StbGMaker\IntplSect\Closer;$(ProjectDir)TnbLib\StbGMaker\IntplSect;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Plane;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Profile;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Const;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull;$(ProjectDir)TnbLib\StbGMaker\Maker\Auxillary;$(ProjectDir)TnbLib\StbGMaker\Maker\Entity;$(ProjectDir)TnbLib\StbGMaker\Maker;$(ProjectDir)TnbLib\StbGMaker\Entities\Model;$(ProjectDir)TnbLib\StbGMaker\Entities\WP;$(ProjectDir)TnbLib\StbGMaker\Entities\Sail;$(ProjectDir)TnbLib\StbGMaker\Entities\Tank;$(ProjectDir)TnbLib\StbGMaker\Entities\Hull;$(ProjectDir)TnbLib\StbGMaker\Entities\Volume;$(ProjectDir)TnbLib\StbGMaker\Entities\Edge;$(ProjectDir)TnbLib\StbGMaker\Entities\Entity;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\StbGMaker\Scripts;$(ProjectDir)TnbLib\StbGMaker\ShapeTools;$(ProjectDir)TnbLib\StbGMaker\Tools;$(ProjectDir)TnbLib\StbGMaker\IntplSect\Closer;$(ProjectDir)TnbLib\StbGMaker\IntplSect;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric\Plane;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Geometric;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Profile;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area\Const;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail\Area;$(ProjectDir)TnbLib\StbGMaker\Maker\Sail;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Tank;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\noShape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull\Shape;$(ProjectDir)TnbLib\StbGMaker\Maker\Hull;$(ProjectDir)TnbLib\StbGMaker\Maker\Auxillary;$(ProjectDir)TnbLib\StbGMaker\Maker\Entity;$(ProjectDir)TnbLib\StbGMaker\Maker;$(ProjectDir)TnbLib\StbGMaker\Entities\Model;$(ProjectDir)TnbLib\StbGMaker\Entities\WP;$(ProjectDir)TnbLib\StbGMaker\Entities\Sail;$(ProjectDir)TnbLib\StbGMaker\Entities\Tank;$(ProjectDir)TnbLib\StbGMaker\Entities\Hull;$(ProjectDir)TnbLib\StbGMaker\Entities\Volume;$(ProjectDir)TnbLib\StbGMaker\Entities\Edge;$(ProjectDir)TnbLib\StbGMaker\Entities\Entity;$(ProjectDir)TnbLib\StbGMaker\module;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -143,6 +143,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\StbGMaker\Entities\Edge\StbGMaker_Edge.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\Entities\Edge\StbGMaker_EdgeI.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WP.hxx" />
@@ -170,6 +171,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\StbGMaker\Maker\Tank\Shape\StbGMaker_TankCreator_Shape.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreator.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreators.hxx" />
+    <ClInclude Include="TnbLib\StbGMaker\module\StbGMaker_Module.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\ShapeTools\StbGMaker_ShapeTools.hxx" />
     <ClInclude Include="TnbLib\StbGMaker\Tools\StbGMaker_Tools.hxx" />
@@ -177,25 +179,33 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.cxx" />
-    <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_ModelIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WP.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WPIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\IntplSect\Closer\StbGMaker_IntplSect_Closer.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\IntplSect\StbGMaker_IntplSect.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Auxillary\StbGMaker_AlgAuxIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Entity\StbGMaker_EntityCreator.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Hull\noShape\StbGMaker_HullCreator_noShape.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Hull\Shape\StbGMaker_HullCreator_Shape.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Hull\Shape\StbGMaker_HullCreator_ShapeIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Hull\StbGMaker_HullCreator.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Area\Const\StbGMaker_AreaSailCreator_Const.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Area\StbGMaker_AreaSailCreator.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape\StbGMaker_GeometricSailCreator_noShape.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Plane\StbGMaker_GeometricSailCreator_Plane.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Plane\StbGMaker_GeometricSailCreator_PlaneIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Shape\StbGMaker_GeometricSailCreator_Shape.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Shape\StbGMaker_GeometricSailCreator_ShapeIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\StbGMaker_GeometricSailCreator.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\StbGMaker_SailCreator.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_Alg.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_AlgIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_Creator.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_CreatorIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\noShape\StbGMaker_TankCreator_noShape.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\Shape\StbGMaker_TankCreator_Shape.cxx" />
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\Shape\StbGMaker_TankCreator_ShapeIO.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreator.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.cxx" />
     <ClCompile Include="TnbLib\StbGMaker\ShapeTools\StbGMaker_ShapeTools.cxx" />

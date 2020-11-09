@@ -19,6 +19,8 @@ namespace tnbLib
 			std::shared_ptr<marineLib::Shape_Tank>
 				theTank_;
 
+			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+
 		public:
 
 			TankCreator_Shape

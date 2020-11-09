@@ -3,6 +3,8 @@
 #define _StbGMaker_Edge_Header
 
 #include <Entity3d_PolygonFwd.hxx>
+#include <Global_Serialization.hxx>
+#include <StbGMaker_Module.hxx>
 
 namespace tnbLib
 {
@@ -17,6 +19,12 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<Entity3d_Polygon> theMesh3d_;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version);
 
 	public:
 
@@ -47,5 +55,8 @@ namespace tnbLib
 		}
 	};
 }
+
+
+#include <StbGMaker_EdgeI.hxx>
 
 #endif // !_StbGMaker_Edge_Header
