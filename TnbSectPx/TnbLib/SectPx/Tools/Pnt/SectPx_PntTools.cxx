@@ -183,6 +183,7 @@ tnbLib::SectPx_PntTools::TrackPnts
 	Debug_Null_Pointer(theNode1->Pnt());
 
 	std::vector<std::shared_ptr<SectPx_Pnt>> pnts;
+	pnts.push_back(theNode0->Pnt());
 
 	auto pt = TrackNextPnt(theNode0->Pnt());
 	while (pt NOT_EQUAL theNode1->Pnt())
