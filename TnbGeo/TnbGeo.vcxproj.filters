@@ -1103,5 +1103,8 @@
     <ClCompile Include="TnbLib\Geo\Counter\Geo_ItemCounterIO.cxx">
       <Filter>TnbLib\Geo\Counter</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_GeomIO.cxx">
+      <Filter>TnbLib\Geo\ProfileFun\Geom</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

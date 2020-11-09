@@ -19,6 +19,17 @@ namespace tnbLib
 			Standard_Real theValue0_;
 			Standard_Real theValue1_;
 
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & boost::serialization::base_object<Geo_ProfileFun>(*this);
+				ar & theValue0_;
+				ar & theValue1_;
+			}
+
 		public:
 
 			ProfileFun_Linear
