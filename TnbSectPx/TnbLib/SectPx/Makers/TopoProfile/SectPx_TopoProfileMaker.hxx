@@ -59,13 +59,6 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Pnt>& theP1
 				);
 
-			Standard_Integer
-				CreateCustomProfile
-				(
-					const std::shared_ptr<SectPx_Node>& theNode0,
-					const std::shared_ptr<SectPx_Node>& theNode1
-				);
-
 			Standard_Integer 
 				CreateInterplProfile
 				(

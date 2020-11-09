@@ -39,33 +39,11 @@ tnbLib::maker::TopoProfile::CreateCustomProfile
 	const std::shared_ptr<SectPx_Pnt>& theP1
 )
 {
-	auto nodeMaker = std::make_shared<Node>(Registry());
-	Debug_Null_Pointer(nodeMaker);
-
-	const auto n0_id = nodeMaker->CreateNode(theP0);
-	const auto n1_id = nodeMaker->CreateNode(theP1);
-
-	const auto n0 = nodeMaker->SelectNode(n0_id);
-	Debug_Null_Pointer(n0);
-
-	const auto n1 = nodeMaker->SelectNode(n1_id);
-	Debug_Null_Pointer(n1);
-
-	return CreateCustomProfile(n0, n1);
-}
-
-Standard_Integer 
-tnbLib::maker::TopoProfile::CreateCustomProfile
-(
-	const std::shared_ptr<SectPx_Node>& theNode0,
-	const std::shared_ptr<SectPx_Node>& theNode1
-)
-{
-	auto profile = 
+	auto profile =
 		SectPx_CustomProfile::MakeProfile
 		(
-			theNode0, 
-			theNode1,
+			theP0,
+			theP1,
 			Registry()
 		);
 	Debug_Null_Pointer(profile);
