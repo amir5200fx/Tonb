@@ -349,6 +349,12 @@
     <Filter Include="TnbLib\SectPx\module">
       <UniqueIdentifier>{eaef6a80-051f-4acd-8ab1-c370cee02468}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Curve">
+      <UniqueIdentifier>{df32f72d-eb4c-48a5-bb99-13262f67a1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Scatter">
+      <UniqueIdentifier>{1e6430ed-da41-4e9d-9f6a-850673440d40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -765,6 +771,12 @@
     <ClInclude Include="TnbLib\SectPx\module\SectPx_Module.hxx">
       <Filter>TnbLib\SectPx\module</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Curve\SectPx_Curve.hxx">
+      <Filter>TnbLib\SectPx\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Scatter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">
@@ -1156,6 +1168,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_ProfileMakerIO.cxx">
       <Filter>TnbLib\SectPx\Makers\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Curve\SectPx_Curve.cxx">
+      <Filter>TnbLib\SectPx\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Frame\SectPx_FrameIO.cxx">
+      <Filter>TnbLib\SectPx\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\CmptProfile\SectPx_CmptProfileMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\CmptProfile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Scatter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Scatter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

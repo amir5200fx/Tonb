@@ -16,6 +16,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Edge;
 	class SectPx_PntTools;
+	class SectPx_Tools;
 
 	namespace maker { class Profile; }
 
@@ -24,6 +25,7 @@ namespace tnbLib
 
 		friend class maker::Profile;
 		friend class SectPx_PntTools;
+		friend class SectPx_Tools;
 
 		/*Private Data*/
 

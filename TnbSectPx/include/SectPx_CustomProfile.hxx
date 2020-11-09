@@ -7,6 +7,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SectPx_Pnt;
+
 	class SectPx_CustomProfile
 		: public SectPx_TopoProfile
 	{
@@ -52,8 +55,8 @@ namespace tnbLib
 		static std::shared_ptr<SectPx_CustomProfile>
 			MakeProfile
 			(
-				const std::shared_ptr<SectPx_Node>& theNode0,
-				const std::shared_ptr<SectPx_Node>& theNode1,
+				const std::shared_ptr<SectPx_Pnt>& theP0,
+				const std::shared_ptr<SectPx_Pnt>& theP1,
 				const std::shared_ptr<SectPx_Registry>& theReg
 			);
 	};
