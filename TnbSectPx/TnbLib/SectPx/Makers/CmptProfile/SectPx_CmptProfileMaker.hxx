@@ -39,6 +39,8 @@ namespace tnbLib
 			mutable Geo_ItemCounter theCounter_;
 
 
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 			auto& Counter() const
 			{
 				return theCounter_;
@@ -49,6 +51,11 @@ namespace tnbLib
 				const Standard_Integer theIndex,
 				std::shared_ptr<Profile>&& theProfile
 			);
+
+		protected:
+
+			CmptProfile()
+			{}
 
 		public:
 
