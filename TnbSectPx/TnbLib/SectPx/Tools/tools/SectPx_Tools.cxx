@@ -3,6 +3,8 @@
 #include <SectPx_Pole.hxx>
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Node.hxx>
+#include <SectPx_Registry.hxx>
+#include <SectPx_Edge.hxx>
 #include <SectPx_Segment.hxx>
 #include <SectPx_PointMaker.hxx>
 #include <SectPx_PntTools.hxx>
@@ -135,6 +137,31 @@ tnbLib::SectPx_Tools::MakeJoint
 
 	auto t = maker->CreateJoint(leftNode, rightNode);
 	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::SectPx_Edge> 
+tnbLib::SectPx_Tools::MakeEdge
+(
+	const std::shared_ptr<SectPx_Pnt>& theP0,
+	const std::shared_ptr<SectPx_Pnt>& theP1,
+	const std::shared_ptr<SectPx_Registry>& theReg
+)
+{
+	auto seg = std::make_shared<SectPx_Edge>(theP0, theP1);
+	Debug_Null_Pointer(seg);
+
+	auto seg_id = theReg->Import(seg);
+
+	auto tp0 = std::dynamic_pointer_cast<SectPx_TPnt>(theP0);
+	Debug_Null_Pointer(tp0);
+
+	auto tp1 = std::dynamic_pointer_cast<SectPx_TPnt>(theP1);
+	Debug_Null_Pointer(tp1);
+
+	tp0->Import(seg_id, seg);
+	tp1->Import(seg_id, seg);
+
+	return std::move(seg);
 }
 
 //std::vector<tnbLib::Pnt2d>

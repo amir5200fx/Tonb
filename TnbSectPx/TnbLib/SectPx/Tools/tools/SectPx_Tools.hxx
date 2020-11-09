@@ -16,6 +16,7 @@ namespace tnbLib
 	class SectPx_Pnt;
 	class SectPx_Registry;
 	class SectPx_Node;
+	class SectPx_Edge;
 
 	class SectPx_Tools
 	{
@@ -52,6 +53,14 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_TopoProfile>& theRight,
 				const std::shared_ptr<SectPx_Registry>& theReg,
 				const jointPriority priority = jointPriority::left
+			);
+
+		static std::shared_ptr<SectPx_Edge> 
+			MakeEdge
+			(
+				const std::shared_ptr<SectPx_Pnt>& theP0,
+				const std::shared_ptr<SectPx_Pnt>& theP1,
+				const std::shared_ptr<SectPx_Registry>& theReg
 			);
 
 		static std::vector<Pnt2d>
