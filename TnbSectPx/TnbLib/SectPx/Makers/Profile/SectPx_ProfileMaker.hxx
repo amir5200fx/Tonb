@@ -24,7 +24,6 @@ namespace tnbLib
 
 		class Profile
 			: public SectPx_Maker
-			, public Global_Done
 		{
 
 			/*Private Data*/
@@ -82,7 +81,7 @@ namespace tnbLib
 
 			const std::shared_ptr<SectPx_Node>& Node1() const;
 
-			Standard_Integer Init();
+			//Standard_Integer Init();
 
 			Standard_Boolean
 				IsOnBoundary

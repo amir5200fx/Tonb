@@ -100,60 +100,60 @@ tnbLib::maker::Profile::Node1() const
 	return TopoProfile()->Node1();
 }
 
-Standard_Integer 
-tnbLib::maker::Profile::Init()
-{
-	Debug_Null_Pointer(Registry());
-	Debug_Null_Pointer(TopoProfile());
-
-	Debug_Null_Pointer(TopoProfile()->Node0());
-	Debug_Null_Pointer(TopoProfile()->Node1());
-
-	const auto& node0 = TopoProfile()->Node0();
-	const auto& node1 = TopoProfile()->Node1();
-
-	Debug_Null_Pointer(node0->Pnt());
-	Debug_Null_Pointer(node1->Pnt());
-
-	if (SectPx_PntTools::IsGeoField(node0->Pnt()))
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the geo_field_fun is forbidden for a boundary pnt!" << endl
-			<< abort(FatalError);
-	}
-
-	if (SectPx_PntTools::IsGeoField(node1->Pnt()))
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the geo_field_fun is forbidden for a boundary pnt!" << endl
-			<< abort(FatalError);
-	}
-
-	auto p0 = std::dynamic_pointer_cast<SectPx_TPnt>(node0->Pnt());
-	Debug_Null_Pointer(p0);
-
-	if (p0->NbEdges())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the p0 must be an orphan to be used as boundary profile!" << endl
-			<< abort(FatalError);
-	}
-
-	auto p1 = std::dynamic_pointer_cast<SectPx_TPnt>(node1->Pnt());
-	Debug_Null_Pointer(p1);
-
-	if (p1->NbEdges())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the p1 must be an orphan to be used as boundary profile!" << endl
-			<< abort(FatalError);
-	}
-
-	const auto id = MakeEdge(node0->Pnt(), node1->Pnt());
-
-	Change_IsDone() = Standard_True;
-	return id;
-}
+//Standard_Integer 
+//tnbLib::maker::Profile::Init()
+//{
+//	Debug_Null_Pointer(Registry());
+//	Debug_Null_Pointer(TopoProfile());
+//
+//	Debug_Null_Pointer(TopoProfile()->Node0());
+//	Debug_Null_Pointer(TopoProfile()->Node1());
+//
+//	const auto& node0 = TopoProfile()->Node0();
+//	const auto& node1 = TopoProfile()->Node1();
+//
+//	Debug_Null_Pointer(node0->Pnt());
+//	Debug_Null_Pointer(node1->Pnt());
+//
+//	if (SectPx_PntTools::IsGeoField(node0->Pnt()))
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the geo_field_fun is forbidden for a boundary pnt!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	if (SectPx_PntTools::IsGeoField(node1->Pnt()))
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the geo_field_fun is forbidden for a boundary pnt!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	auto p0 = std::dynamic_pointer_cast<SectPx_TPnt>(node0->Pnt());
+//	Debug_Null_Pointer(p0);
+//
+//	if (p0->NbEdges())
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the p0 must be an orphan to be used as boundary profile!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	auto p1 = std::dynamic_pointer_cast<SectPx_TPnt>(node1->Pnt());
+//	Debug_Null_Pointer(p1);
+//
+//	if (p1->NbEdges())
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the p1 must be an orphan to be used as boundary profile!" << endl
+//			<< abort(FatalError);
+//	}
+//
+//	const auto id = MakeEdge(node0->Pnt(), node1->Pnt());
+//
+//	Change_IsDone() = Standard_True;
+//	return id;
+//}
 
 Standard_Boolean 
 tnbLib::maker::Profile::IsOnBoundary
@@ -199,8 +199,6 @@ tnbLib::maker::Profile::ImportPnt
 	const std::shared_ptr<SectPx_Edge>& theEdge
 )
 {
-	Debug_If_Condition(NOT IsDone());
-
 	Debug_Null_Pointer(theEdge);
 
 	auto removed = RemoveEdge(theEdge->Index());
@@ -241,8 +239,6 @@ tnbLib::maker::Profile::RemovePnt
 	const std::shared_ptr<SectPx_Pnt>& thePnt
 )
 {
-	Debug_If_Condition(NOT IsDone());
-
 	Debug_Null_Pointer(thePnt);
 	if (IsOnBoundary(thePnt))
 	{
@@ -377,13 +373,13 @@ tnbLib::maker::Profile::RetrieveProfileQ() const
 	return std::move(profile);
 }
 
-Handle(Geom2d_Curve) 
-tnbLib::maker::Profile::RetrieveGeomCurve
-(
-	const Standard_Integer deg
-) const
-{
-	Debug_Null_Pointer(TopoProfile());
-	auto curve = TopoProfile()->RetrieveGeomCurve(deg);
-	return std::move(curve);
-}
+//Handle(Geom2d_Curve) 
+//tnbLib::maker::Profile::RetrieveGeomCurve
+//(
+//	const Standard_Integer deg
+//) const
+//{
+//	Debug_Null_Pointer(TopoProfile());
+//	auto curve = TopoProfile()->RetrieveGeomCurve(deg);
+//	return std::move(curve);
+//}
