@@ -121,9 +121,7 @@ tnbLib::SectPx_Frame::MakeLineSegment
 			PointMaker()->SelectPnt(p0_id),
 			PointMaker()->SelectPnt(p1_id)
 		);
-
-	const auto profMaker = CmptProfileMaker()->SelectProfile(profMaker_id);
-	return profMaker->Init();
+	return Registry()->LastId(SectPx_RegObjType::edge);
 }
 
 void tnbLib::SectPx_Frame::MakeCorner()
@@ -180,7 +178,7 @@ void tnbLib::SectPx_Frame::MakeCorner
 		);
 
 	const auto profMaker = CmptProfileMaker()->SelectProfile(profMaker_id);
-	const auto edge_id = profMaker->Init();
+	const auto edge_id = Registry()->LastId(SectPx_RegObjType::edge);
 
 	const auto geoMap_id = GeometricMapMaker()->CreateIntersection
 	(
@@ -252,7 +250,7 @@ void tnbLib::SectPx_Frame::MakeUShape
 		);
 
 	const auto profMaker = CmptProfileMaker()->SelectProfile(profMaker_id);
-	const auto edge_id = profMaker->Init();
+	const auto edge_id = Registry()->LastId(SectPx_RegObjType::edge);
 
 	const auto t2_id = ParameterMaker()->CreateFixed("mid", 0.5);
 	const auto t3_id = ParameterMaker()->CreateFixed("left corner", 0);

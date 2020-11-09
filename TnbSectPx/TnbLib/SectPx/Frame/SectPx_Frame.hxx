@@ -34,6 +34,8 @@ namespace tnbLib
 
 		struct EntityMaker
 		{
+			EntityMaker()
+			{}
 
 			EntityMaker(const std::shared_ptr<SectPx_Registry>&);
 
@@ -42,6 +44,8 @@ namespace tnbLib
 			std::shared_ptr<maker::GeometricMap> GeoMap;
 			std::shared_ptr<maker::CmptProfile> CmptProfile;
 			std::shared_ptr<maker::FieldFun> FieldFun;
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 		};
 
 	private:
@@ -52,6 +56,8 @@ namespace tnbLib
 
 		std::shared_ptr<EntityMaker> theMakers_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 		void AllocateMemory();
 
