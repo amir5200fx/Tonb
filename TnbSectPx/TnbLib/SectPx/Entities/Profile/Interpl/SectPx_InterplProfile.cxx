@@ -151,10 +151,11 @@ tnbLib::SectPx_InterplProfile::MakeProfile
 	interfaceMaker->CreateEmpty(n0);
 	interfaceMaker->CreateEmpty(n1);
 
-	auto knotAlg = std::make_shared<SectPx_FixedKnots>(std::move(knots));
+	// remove this stupid knotAlg from profile structure
+	/*auto knotAlg = std::make_shared<SectPx_FixedKnots>(std::move(knots));
 	Debug_Null_Pointer(knotAlg);
 
-	profile->SetKnot(std::move(knotAlg));
+	profile->SetKnot(std::move(knotAlg));*/
 
 	std::vector<std::weak_ptr<SectPx_Pnt>> wPnts;
 	wPnts.reserve(pnts.size());
