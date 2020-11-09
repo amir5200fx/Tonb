@@ -5,6 +5,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Global_Serialization.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 
@@ -24,8 +25,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version)
 		{
-			ar & Index();
-			ar & Name();
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
 		}
 
 	protected:

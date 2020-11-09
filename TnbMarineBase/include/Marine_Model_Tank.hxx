@@ -21,6 +21,12 @@ namespace tnbLib
 
 			std::shared_ptr<Body_Tank> theTank_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+			Model_Tank()
+			{}
+
 		public:
 
 			Model_Tank

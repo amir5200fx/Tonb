@@ -19,6 +19,22 @@ namespace tnbLib
 			Standard_Real theArea_;
 			Standard_Real theZbar_;
 
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & boost::serialization::base_object<Marine_AreaSailModel>(*this);
+				ar & theArea_;
+				ar & theZbar_;
+			}
+
+		protected:
+
+			Model_ConstAreaSail()
+			{}
+
 		public:
 
 			Model_ConstAreaSail
