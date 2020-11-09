@@ -22,6 +22,9 @@ tnbLib::SectPx_Registry::RemoveFromMap
 			<< abort(FatalError);
 	}
 	auto item = std::move(iter->second);
+
+	RemoveFromScatterMap(item);
+
 	theObjects_.erase(iter);
 	return std::move(item);
 }
@@ -44,6 +47,8 @@ void tnbLib::SectPx_Registry::Add
 			<< " index = " << theIndex << endl
 			<< abort(FatalError);
 	}
+
+	ImportToScatterMap(theObj);
 }
 
 void tnbLib::SectPx_Registry::Add
@@ -52,7 +57,8 @@ void tnbLib::SectPx_Registry::Add
 	std::shared_ptr<SectPx_RegObj>&& theObj
 )
 {
-	auto paired = std::make_pair(theIndex, std::move(theObj));
+	auto obj = std::move(theObj);
+	auto paired = std::make_pair(theIndex, obj);
 	auto insert = theObjects_.insert(std::move(paired));
 	if (NOT insert.second)
 	{
@@ -64,6 +70,8 @@ void tnbLib::SectPx_Registry::Add
 			<< " index = " << theIndex << endl
 			<< abort(FatalError);
 	}
+
+	ImportToScatterMap(obj);
 }
 
 Standard_Integer 

@@ -6,6 +6,7 @@
 #include <Geo_ItemCounter.hxx>
 #include <SectPx_RegObjType.hxx>
 #include <SectPx_Module.hxx>
+#include <SectPx_ScatterRegistry.hxx>
 #include <Ostream.hxx>
 
 #include <map>
@@ -22,6 +23,7 @@ namespace tnbLib
 
 	class SectPx_Registry
 		: public SectPx_Entity
+		, public SectPx_ScatterRegistry
 	{
 
 		friend class SectPx_ParMaker;
