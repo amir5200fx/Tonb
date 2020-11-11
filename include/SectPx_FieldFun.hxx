@@ -14,6 +14,17 @@ namespace tnbLib
 
 		mutable Standard_Real theTemp_;
 
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theTemp_;
+		}
+
 	protected:
 
 		SectPx_FieldFun_Temp()
@@ -39,6 +50,19 @@ namespace tnbLib
 		/*Private Data*/
 
 		mutable Standard_Boolean IsRegistered_;
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_Parent>(*this);
+			ar & boost::serialization::base_object<SectPx_FieldFun_Temp>(*this);
+			ar & IsRegistered_;
+		}
 
 	protected:
 
@@ -101,5 +125,7 @@ namespace tnbLib
 				);
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_FieldFun);
 
 #endif // !_SectPx_FieldFun_Header

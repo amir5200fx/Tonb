@@ -22,6 +22,11 @@ namespace tnbLib
 			std::shared_ptr<marineLib::Shape_Sail>
 				theShape_;
 
+			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+
+			GeometricSailCreator_Shape()
+			{}
+
 		public:
 
 

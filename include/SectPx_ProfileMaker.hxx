@@ -2,8 +2,11 @@
 #ifndef _SectPx_ProfileMaker_Header
 #define _SectPx_ProfileMaker_Header
 
+#include <Standard_Handle.hxx>
 #include <SectPx_Maker.hxx>
 #include <Global_Done.hxx>
+
+class Geom2d_Curve;
 
 namespace tnbLib
 {
@@ -21,13 +24,17 @@ namespace tnbLib
 
 		class Profile
 			: public SectPx_Maker
-			, public Global_Done
 		{
 
 			/*Private Data*/
 
 			std::shared_ptr<SectPx_TopoProfile> theProfile_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
+			Profile()
+			{}
 
 			Standard_Integer
 				MakeEdge
@@ -74,7 +81,7 @@ namespace tnbLib
 
 			const std::shared_ptr<SectPx_Node>& Node1() const;
 
-			Standard_Integer Init();
+			//Standard_Integer Init();
 
 			Standard_Boolean
 				IsOnBoundary
@@ -107,8 +114,12 @@ namespace tnbLib
 
 			std::shared_ptr<SectPx_ProfileQ>
 				RetrieveProfileQ() const;
+
+			Handle(Geom2d_Curve) RetrieveGeomCurve(const Standard_Integer deg) const;
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::Profile);
 
 #endif // !_SectPx_ProfileMaker_Header

@@ -22,6 +22,9 @@ namespace tnbLib
 		std::vector<std::shared_ptr<SectPx_TopoProfile>> theProfiles_;
 
 
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
+
 		auto& ChangeProfiles()
 		{
 			return theProfiles_;
@@ -52,5 +55,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_CmptProfile);
 
 #endif // !_SectPx_CmptProfile_Header

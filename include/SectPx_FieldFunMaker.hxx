@@ -2,6 +2,7 @@
 #ifndef _SectPx_FieldFunMaker_Header
 #define _SectPx_FieldFunMaker_Header
 
+#include <SectPx_Coord.hxx>
 #include <SectPx_Maker.hxx>
 #include <OSstream.hxx>
 
@@ -23,6 +24,18 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<SectPx_Maker>(*this);
+			}
+
+			FieldFun()
+			{}
 
 		public:
 
@@ -99,5 +112,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::FieldFun);
 
 #endif // !_SectPx_FieldFunMaker_Header

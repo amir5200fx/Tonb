@@ -4,6 +4,7 @@
 
 #include <SectPx_Entity.hxx>
 
+#include <Pnt2d.hxx>
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array1OfInteger.hxx>
 
@@ -23,6 +24,17 @@ namespace tnbLib
 
 		Standard_Real theU0_;
 		Standard_Real theU1_;
+
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_Entity>(*this);
+			ar & theU0_;
+			ar & theU1_;
+		}
 
 		void SetDefaults();
 
@@ -67,10 +79,17 @@ namespace tnbLib
 			return theU1_;
 		}
 
-		virtual std::vector<Standard_Real>
+		/*virtual std::vector<Standard_Real>
 			CreateKnots
 			(
 				const std::vector<std::shared_ptr<SectPx_Coord>>& theCoords,
+				const Standard_Integer degree
+			) const = 0;*/
+
+		virtual std::vector<Standard_Real>
+			CreateKnots
+			(
+				const std::vector<Pnt2d>& theCoords,
 				const Standard_Integer degree
 			) const = 0;
 
@@ -81,5 +100,7 @@ namespace tnbLib
 			);
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_KnotVector);
 
 #endif // !_SectPx_KnotVector_Header

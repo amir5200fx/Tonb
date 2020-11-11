@@ -29,6 +29,19 @@ namespace tnbLib
 
 			std::weak_ptr<outerSection> theOuter_;
 
+
+			/*private functions and operators*/
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & boost::serialization::base_object<SectionType>(*this);
+				ar & theOuter_;
+			}
+
+
 		public:
 
 			template<class... _Types>
@@ -65,9 +78,22 @@ namespace tnbLib
 		{
 
 			typedef InnerSection<SectionType> innerSection;
+
 			/*Private Data*/
 
 			std::map<Standard_Integer, std::shared_ptr<innerSection>> theInners_;
+
+
+			/*private functions and operators*/
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				ar & boost::serialization::base_object<SectionType>(*this);
+				ar & theInners_;
+			}
 
 		public:
 

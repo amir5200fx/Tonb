@@ -13,6 +13,15 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<SectPx_Interface>(*this);
+		}
+
 	public:
 
 		static const char* typeName_;
@@ -31,5 +40,7 @@ namespace tnbLib
 		void disJoint() override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_EmptyInterface);
 
 #endif // !_SectPx_EmptyInterface_Header

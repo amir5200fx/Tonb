@@ -39,7 +39,16 @@ namespace tnbLib
 
 		std::shared_ptr<Pln_CmpEdge> theEdges_;
 
-		//- private functions
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+
+		auto& ChangeCmpEdge()
+		{
+			return theEdges_;
+		}
 
 		Entity2d_Box CalcBoundingBox(const Standard_Real theTol) const;
 
@@ -56,6 +65,9 @@ namespace tnbLib
 		void ForcedTransform(const gp_Trsf2d& t);
 
 	public:
+
+		Pln_Wire()
+		{}
 
 		Pln_Wire
 		(

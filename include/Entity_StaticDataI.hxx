@@ -45,4 +45,29 @@ namespace tnbLib
 		auto p = std::make_shared<Entity_StaticData>(std::move(copy));
 		return std::move(p);
 	}
+
+	template<class Point, class ConnectType, bool NeighbData>
+	template<class Archive>
+	void Entity_StaticData<Point, ConnectType, NeighbData>::serialize
+	(
+		Archive & ar, 
+		const unsigned int version
+	)
+	{
+		ar & Points();
+		ar & Connectivity();
+		ar & BoundingBox();
+	}
+
+	template<class Point, class ConnectType>
+	template<class Archive>
+	void Entity_StaticData<Point, ConnectType, true>::serialize
+	(
+		Archive & ar, 
+		const unsigned int version
+	)
+	{
+		ar& boost::serialization::base_object<base>(*this);
+		ar& Neighbors();
+	}
 }

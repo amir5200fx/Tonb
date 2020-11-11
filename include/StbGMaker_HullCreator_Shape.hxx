@@ -19,6 +19,9 @@ namespace tnbLib
 			std::shared_ptr<marineLib::Shape_Hull>
 				theHull_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+
 		public:
 
 			HullCreator_Shape

@@ -21,6 +21,9 @@ namespace tnbLib
 
 			std::shared_ptr<Pole_Master> theMaster_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 
@@ -75,5 +78,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Pole_Slave);
 
 #endif // !_SectPx_Pole_Slave_Header

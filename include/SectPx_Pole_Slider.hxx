@@ -21,6 +21,9 @@ namespace tnbLib
 
 			std::shared_ptr<Pnt_GeoField> thePnt_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 			static const char* typeName_;
@@ -73,5 +76,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Pole_Slider);
 
 #endif // !_SectPx_Pole_Slider_Header

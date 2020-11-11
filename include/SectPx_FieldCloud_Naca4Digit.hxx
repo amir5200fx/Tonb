@@ -26,6 +26,9 @@ namespace tnbLib
 
 			Standard_Integer theNbSegments_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		protected:
 
 			Standard_Boolean CloseTail_ = Standard_False;
@@ -33,7 +36,7 @@ namespace tnbLib
 
 			FieldCloud_Naca4DigitBase
 			(
-				const Standard_Integer nbSegments
+				const Standard_Integer nbSegments = DEFAULT_NB_SEGMENTS
 			)
 				: theNbSegments_(nbSegments)
 			{}
@@ -58,6 +61,8 @@ namespace tnbLib
 			{}
 
 		public:
+
+			static const Standard_Integer DEFAULT_NB_SEGMENTS = 25;
 
 			const auto& Chord() const
 			{
@@ -137,7 +142,6 @@ namespace tnbLib
 			) const override;
 		};
 
-
 		namespace naca
 		{
 
@@ -146,6 +150,15 @@ namespace tnbLib
 			{
 
 				/*Private Data*/
+
+
+				friend class boost::serialization::access;
+
+				template<class Archive>
+				void serialize(Archive &ar, const unsigned int file_version)
+				{
+					ar & boost::serialization::base_object<FieldCloud_Naca4DigitBase>(*this);
+				}
 
 				void Update() const override;
 
@@ -168,6 +181,14 @@ namespace tnbLib
 
 				/*Private Data*/
 
+				friend class boost::serialization::access;
+
+				template<class Archive>
+				void serialize(Archive &ar, const unsigned int file_version)
+				{
+					ar & boost::serialization::base_object<FieldCloud_Naca4DigitBase>(*this);
+				}
+
 				void Update() const override;
 
 			public:
@@ -181,8 +202,14 @@ namespace tnbLib
 
 				word RegObjTypeName() const override;
 			};
+
+			
 		}
 	}
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase);
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::naca::UpperEdge);
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::naca::LowerEdge);
 
 #endif // !_SectPx_FieldCloud_Naca4Digit_Header

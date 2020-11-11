@@ -4,6 +4,8 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 
@@ -17,6 +19,8 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

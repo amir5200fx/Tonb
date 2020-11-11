@@ -4,6 +4,7 @@
 
 #include <Marine_CoordinatedEntity.hxx>
 #include <Marine_ShapeType.hxx>
+#include <Marine_Module.hxx>
 
 #include <TopoDS_Shape.hxx>
 
@@ -18,7 +19,21 @@ namespace tnbLib
 
 		TopoDS_Shape theShape_;
 
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+
+		auto& ChangeShape()
+		{
+			return theShape_;
+		}
+
 	protected:
+
+		Marine_Shape()
+		{}
 
 		Marine_Shape(const TopoDS_Shape& theShape);
 

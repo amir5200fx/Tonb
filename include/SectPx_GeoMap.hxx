@@ -16,6 +16,14 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_Parent>(*this);
+		}
+
 	protected:
 
 		template<class... _Types>
@@ -34,5 +42,7 @@ namespace tnbLib
 		virtual Pnt2d CalcCoord() const = 0;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_GeoMap);
 
 #endif // !_SectPx_GeoMap_Header

@@ -18,6 +18,8 @@ namespace tnbLib
 
 		std::weak_ptr<SectPx_Par> thePar_;
 
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 	protected:
 
 		template<class... _Types>
@@ -75,6 +77,8 @@ namespace tnbLib
 			);
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_oneParFieldFun);
 
 #include <SectPx_oneParFieldFunI.hxx>
 

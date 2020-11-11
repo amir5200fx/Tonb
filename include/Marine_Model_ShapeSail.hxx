@@ -21,6 +21,14 @@ namespace tnbLib
 
 			std::shared_ptr<Body_Sail> theBody_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+		protected:
+
+			Model_ShapeSail()
+			{}
+
 		public:
 
 			Model_ShapeSail

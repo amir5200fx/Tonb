@@ -8,6 +8,8 @@
 #include <SectPx_MakersFwd.hxx>
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
+#include <SectPx_FieldCloud_Naca4DigitFwd.hxx>
+#include <Ostream.hxx>
 
 #include <vector>
 #include <map>
@@ -32,6 +34,8 @@ namespace tnbLib
 
 		struct EntityMaker
 		{
+			EntityMaker()
+			{}
 
 			EntityMaker(const std::shared_ptr<SectPx_Registry>&);
 
@@ -40,6 +44,8 @@ namespace tnbLib
 			std::shared_ptr<maker::GeometricMap> GeoMap;
 			std::shared_ptr<maker::CmptProfile> CmptProfile;
 			std::shared_ptr<maker::FieldFun> FieldFun;
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 		};
 
 	private:
@@ -50,6 +56,8 @@ namespace tnbLib
 
 		std::shared_ptr<EntityMaker> theMakers_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 		void AllocateMemory();
 
@@ -140,8 +148,10 @@ namespace tnbLib
 			const Standard_Real w
 		);
 
-
+		void PrintRegistry() const;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Frame);
 
 #endif // !_SectPx_Frame_Header

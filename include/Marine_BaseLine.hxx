@@ -3,6 +3,7 @@
 #define _Marine_BaseLine_Header
 
 #include <Marine_Entity.hxx>
+#include <Geo_Serialization.hxx>
 
 #include <gp_Ax1.hxx>
 #include <gp_Ax2.hxx>
@@ -17,6 +18,16 @@ namespace tnbLib
 		/*Private Data*/
 
 		gp_Ax1 theBaseLib_;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Marine_Entity>(*this);
+			ar & theBaseLib_;
+		}
 
 	public:
 

@@ -4,7 +4,9 @@
 
 #include <Standard_Real.hxx>
 #include <Global_Macros.hxx>
+#include <Global_Serialization.hxx>
 #include <Geo_Traits.hxx>
+#include <Geo_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <IOstream.hxx>
@@ -31,6 +33,14 @@ namespace tnbLib
 		Point theP0_;
 		Point theP1_;
 
+
+		/*Private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version);
+
 	public:
 
 		typedef Point ptType;
@@ -45,6 +55,15 @@ namespace tnbLib
 		)
 			: theP0_(theP0)
 			, theP1_(theP1)
+		{}
+
+		Entity_Box
+		(
+			Point&& theP0,
+			Point&& theP1
+		)
+			: theP0_(std::move(theP0))
+			, theP1_(std::move(theP1))
 		{}
 
 		Standard_Real Diameter() const
@@ -290,9 +309,19 @@ namespace tnbLib
 			P0() = theP0;
 		}
 
+		void SetP0(Point&& theP)
+		{
+			P0() = std::move(theP);
+		}
+
 		void SetP1(const Point& theP1)
 		{
 			P1() = theP1;
+		}
+
+		void SetP1(Point&& theP)
+		{
+			P1() = std::move(theP);
 		}
 
 		void Init
@@ -336,5 +365,6 @@ namespace tnbLib
 }
 
 #include <Entity_BoxI.hxx>
+#include <Entity_BoxIO.hxx>
 
 #endif // !_Entity_Box_Header

@@ -25,6 +25,10 @@ namespace tnbLib
 			std::shared_ptr<Marine_Shape> theShape_;
 
 
+			/*private functions and operators*/
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
 			auto& ChangeShape()
 			{
 				return theShape_;

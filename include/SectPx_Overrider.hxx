@@ -22,6 +22,8 @@ namespace tnbLib
 		std::weak_ptr<SectPx_MasterPnt> thePnt_;
 
 
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		void SetPnt
 		(
 			const std::weak_ptr<SectPx_MasterPnt>& thePnt
@@ -51,5 +53,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Overrider);
 
 #endif // !_SectPx_Overrider_Header

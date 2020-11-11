@@ -5,6 +5,8 @@
 #include <SectPx_nonParFieldFun.hxx>
 #include <SectPx_ParsFwd.hxx>
 
+#include <map>
+
 namespace exprtk
 {
 	// Forward Declarations
@@ -26,16 +28,152 @@ namespace tnbLib
 			: public SectPx_nonParFieldFun
 		{
 
+		public:
+
+			class Parameter
+			{
+
+				friend class boost::serialization::access;
+				template<class Archive>
+				void serialize(Archive& ar, const unsigned int version)
+				{}
+
+			protected:
+
+				Parameter()
+				{}
+
+			public:
+
+				virtual Standard_Boolean IsConst() const
+				{
+					return Standard_False;
+				}
+
+				virtual Standard_Boolean IsVariable() const
+				{
+					return Standard_False;
+				}
+
+			};
+
+			class Constant
+				: public Parameter
+			{
+
+				friend boost::serialization::access;
+				template<class Archive>
+				void serialize(Archive &ar, const unsigned int file_version)
+				{
+					ar & boost::serialization::base_object<Parameter>(*this);
+					ar & static_cast<Standard_Real&>(theX_);
+				}
+
+				/*Private Data*/
+
+				const Standard_Real & theX_;
+
+				static const Standard_Real null;
+
+				Constant()
+					: theX_(null)
+				{}
+
+				void SetX(const Standard_Real& x)
+				{
+					const_cast<Standard_Real&>(theX_) = x;
+				}
+
+			public:
+
+				Constant(const Standard_Real & x)
+					: theX_(x)
+				{}
+
+				Standard_Boolean IsConst() const override
+				{
+					return Standard_True;
+				}
+
+				const Standard_Real & X() const
+				{
+					return theX_;
+				}
+			};
+
+			class Variable
+				: public Parameter
+			{
+
+				friend boost::serialization::access;
+				template<class Archive>
+				void serialize(Archive &ar, const unsigned int file_version)
+				{
+					ar & boost::serialization::base_object<Parameter>(*this);
+					ar & theX_;
+				}
+
+				/*Private Data*/
+
+				Standard_Real & theX_;
+
+				static Standard_Real null;
+
+				Variable()
+					: theX_(null)
+				{}
+
+				void SetX(Standard_Real & x)
+				{
+					theX_ = x;
+				}
+
+			public:
+
+				Variable(Standard_Real& x)
+					: theX_(x)
+				{}
+
+				Standard_Boolean IsVariable() const override
+				{
+					return Standard_True;
+				}
+
+				Standard_Real & X()
+				{
+					return theX_;
+				}
+			};
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<SectPx_nonParFieldFun>(*this);
+				ar & theParameters_;
+				ar & theExpr_;
+				ar & addConstants_;
+			}
+
 			/*Private Data*/
 
-			string theExpr_;
+			std::map<word, std::shared_ptr<Parameter>> theParameters_;
 
-			std::shared_ptr<exprtk::symbol_table<Standard_Real>> symbol_table_ptr;
+
+			void AddParameter(const word&, std::shared_ptr<Parameter>&& p);
+
+			void RemoveParameter(const word&);
+
+			std::string theExpr_;
 
 			Standard_Boolean addConstants_;
 
 
-			void AllocateMemory();
+		protected:
+
+			FieldFun_Expr()
+			{}
 
 		public:
 
@@ -74,53 +212,46 @@ namespace tnbLib
 
 			Standard_Real Value() const override;
 
-			Standard_Boolean 
-				AddVariable
-				(
-					const word& name,
-					Standard_Real& x
-				);
+			void AddVariable
+			(
+				const word& name,
+				Standard_Real& x
+			);
 
-			Standard_Boolean 
-				AddVariable
-				(
-					const word& name, SectPx_FieldFun& x
-				);
+			void AddVariable
+			(
+				const word& name, SectPx_FieldFun& x
+			);
 
-			Standard_Boolean 
-				AddVariable
-				(
-					const word& name,
-					SectPx_FixedPar& par
-				);
+			void AddVariable
+			(
+				const word& name,
+				SectPx_FixedPar& par
+			);
 
-			Standard_Boolean 
-				AddConstant
-				(
-					const word& name, 
-					const Standard_Real& x
-				);
+			void AddConstant
+			(
+				const word& name,
+				const Standard_Real& x
+			);
 
-			Standard_Boolean 
-				AddConstant
-				(
-					const word& name,
-					const SectPx_FieldFun& x
-				);
+			void AddConstant
+			(
+				const word& name,
+				const SectPx_FieldFun& x
+			);
 
-			Standard_Boolean 
-				AddConstant
-				(
-					const word& name,
-					const SectPx_ConstPar& par
-				);
+			void AddConstant
+			(
+				const word& name,
+				const SectPx_ConstPar& par
+			);
 
-			Standard_Boolean 
-				RemoveVariable
-				(
-					const word& name,
-					const Standard_Boolean delete_node = Standard_True
-				);
+			void RemoveVariable
+			(
+				const word& name,
+				const Standard_Boolean delete_node = Standard_True
+			);
 
 			void SetAddConstants
 			(
@@ -129,5 +260,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::FieldFun_Expr);
 
 #endif // !_SectPx_FieldFun_Expr_Header

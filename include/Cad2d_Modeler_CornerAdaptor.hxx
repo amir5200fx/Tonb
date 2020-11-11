@@ -3,6 +3,8 @@
 #define _Cad2d_Modeler_CornerAdaptor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <map>
@@ -23,6 +25,15 @@ namespace tnbLib
 
 			std::map<Standard_Integer, std::weak_ptr<Modeler_Segment>>
 				theSegments_;
+
+
+			/*private functions and operators*/
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+			auto& ChangeSegments()
+			{
+				return theSegments_;
+			}
 
 		protected:
 

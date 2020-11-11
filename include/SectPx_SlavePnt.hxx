@@ -13,6 +13,15 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<SectPx_TPnt>(*this);
+		}
+
 	protected:
 
 		template<class... _Types>
@@ -28,5 +37,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_SlavePnt);
 
 #endif // !_SectPx_SlavePnt_Header

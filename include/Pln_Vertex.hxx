@@ -30,6 +30,11 @@ namespace tnbLib
 
 		Pnt2d theCoord_;
 
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
 	public:
 
 		typedef Pnt2d ptType;

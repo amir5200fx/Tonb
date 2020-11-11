@@ -17,10 +17,26 @@ namespace tnbLib
 		sectPxLib::real theValue_;
 
 
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_Par>(*this);
+			ar & theValue_;
+		}
+
 		auto& ChangeValue()
 		{
 			return theValue_;
 		}
+
+	protected:
+
+		SectPx_FixedPar()
+		{}
 
 	public:
 
@@ -77,5 +93,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_FixedPar);
 
 #endif // !_SectPx_FixedPar_Header

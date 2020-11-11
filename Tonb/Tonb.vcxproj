@@ -104,9 +104,6 @@
     <ProjectReference Include="..\TnbCad\TnbCad.vcxproj">
       <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TnbGeoModel\TnbGeoModel.vcxproj">
-      <Project>{99a50ec6-f371-4e8f-9644-a396863b4786}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
       <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
     </ProjectReference>

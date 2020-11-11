@@ -7,6 +7,31 @@
 
 namespace tnbLib
 {
+	class SectPx_Node;
+}
+
+namespace boost
+{
+	namespace serialization
+	{
+
+		template<class Archive, class T>
+		inline void my_split_member(
+			Archive & ar, T & t, const unsigned int file_version
+		) {
+			typedef typename mpl::eval_if<
+				typename Archive::is_saving,
+				mpl::identity<detail::member_saver<Archive, T> >,
+				mpl::identity<detail::member_loader<Archive, T> >
+			>::type typex;
+			typex::invoke(ar, t, file_version);
+		}
+
+	}
+}
+
+namespace tnbLib
+{
 
 	// Forward Declarations
 	class SectPx_Pnt;
@@ -24,6 +49,9 @@ namespace tnbLib
 		std::shared_ptr<SectPx_Pnt> thePnt_;
 
 
+		DECLARE_SAVE_LOAD_HEADER(TnbGlobal_EXPORT);
+
+
 		void SetPnt
 		(
 			const std::shared_ptr<SectPx_Pnt>& thePnt
@@ -31,6 +59,11 @@ namespace tnbLib
 		{
 			thePnt_ = thePnt;
 		}
+
+	protected:
+
+		SectPx_Node()
+		{}
 
 	public:
 
@@ -66,5 +99,7 @@ namespace tnbLib
 		sectPxLib::regObjType RegObjType() const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Node);
 
 #endif // !_SectPx_Node_Header

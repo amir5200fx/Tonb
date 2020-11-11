@@ -2,6 +2,7 @@
 #ifndef _Global_Named_Header
 #define _Global_Named_Header
 
+#include <Global_Serialization.hxx>
 #include <word.hxx>
 
 namespace tnbLib
@@ -13,6 +14,15 @@ namespace tnbLib
 		/*Private Data*/
 
 		word theName_;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theName_;
+		}
 
 	protected:
 

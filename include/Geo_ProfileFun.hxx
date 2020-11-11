@@ -5,6 +5,7 @@
 #include <Global_Named.hxx>
 #include <Global_Indexed.hxx>
 #include <Global_Bound.hxx>
+#include <Geo_Module.hxx>
 
 #include <memory>
 
@@ -20,6 +21,15 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+			ar & boost::serialization::base_object<Global_Bound<Standard_Real>>(*this);
+		}
 
 	protected:
 

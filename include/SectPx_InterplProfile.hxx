@@ -30,6 +30,9 @@ namespace tnbLib
 
 		//- private functions and operators
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		const auto& Pnts() const
 		{
 			return thePnts_;
@@ -91,5 +94,7 @@ namespace tnbLib
 			);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_InterplProfile);
 
 #endif // !_SectPx_InterplProfile_Header

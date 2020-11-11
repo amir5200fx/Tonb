@@ -43,9 +43,11 @@
 #include <SectPx_Script.hxx>
 #include <CadModel_Scripts.hxx>
 #include <Cad_Scripts.hxx>
+#include <Cad2d_Scripts.hxx>
 #include <Geo_Scripts.hxx>
 #include <IO_Scripts.hxx>
 #include <StbGMaker_Scripts.hxx>
+
 
 #ifdef DebugInfo
 #undef DebugInfo
@@ -57,6 +59,7 @@
 #include <exprtk.hpp>
 
 using namespace tnbLib;
+
 
 template <typename T>
 void stddev_example()
@@ -90,9 +93,11 @@ void stddev_example()
 
 Standard_Integer main()
 {
-	stddev_example<double>();
-	PAUSE;
-	return 0;
+	tnbLib::FatalError.throwExceptions();
+
+	//return Wt::WRun("test.html", std::vector<std::string>());
+
+
 	//auto frame = SectPx_FrameAPI::CreateFrame();
 	chaiscript::ChaiScript chai;
 
@@ -105,12 +110,13 @@ Standard_Integer main()
 	script::load_cad(chai);
 	script::load_stb_gmaker(chai);
 	script::load_io_tecplot(chai);
+	script::load_cad2d(chai);
 	/*PAUSE;
 	chai.eval
 	(
 		R"(puts(var x = create_fixed_par(0.1) );)"
 	);*/
-	fileName myFileName("secpx_script.txt");
+	fileName myFileName("nozzle.txt");
 	//IFstream myFile(myFileName);
 	try
 	{

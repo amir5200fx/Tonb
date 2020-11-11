@@ -3,6 +3,8 @@
 #define _Cad2d_Plane_Auxillary_Header
 
 #include <Entity2d_BoxFwd.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <gp_Ax2.hxx>
 
@@ -22,6 +24,21 @@ namespace tnbLib
 			std::shared_ptr<Entity2d_Box> theBoundingBox_;
 
 			gp_Ax2 theSystem_;
+
+
+			/*private functions and operators*/
+
+			auto& ChangeBoundingBox()
+			{
+				return theBoundingBox_;
+			}
+
+			auto& ChangeSystem()
+			{
+				return theSystem_;
+			}
+
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 		protected:
 

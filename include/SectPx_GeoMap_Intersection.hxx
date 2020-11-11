@@ -30,6 +30,9 @@ namespace tnbLib
 			std::weak_ptr<SectPx_Par> theAngle0_;
 			std::weak_ptr<SectPx_Par> theAngle1_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 			static const char* typeName_;
@@ -142,5 +145,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::GeoMap_Intersection);
 
 #endif // !_SectPx_GeoMap_Intersection_Header

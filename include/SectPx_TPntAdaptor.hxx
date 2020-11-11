@@ -3,6 +3,8 @@
 #define _SectPx_TPntAdaptor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <SectPx_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <vector>
 #include <memory>
@@ -14,6 +16,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Edge;
 	class SectPx_PntTools;
+	class SectPx_Tools;
 
 	namespace maker { class Profile; }
 
@@ -22,11 +25,14 @@ namespace tnbLib
 
 		friend class maker::Profile;
 		friend class SectPx_PntTools;
+		friend class SectPx_Tools;
 
 		/*Private Data*/
 
 		std::map<Standard_Integer, std::weak_ptr<SectPx_Edge>>
 			theEdges_;
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 	protected:
 

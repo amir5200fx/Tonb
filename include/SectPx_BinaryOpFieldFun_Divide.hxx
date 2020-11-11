@@ -25,6 +25,20 @@ namespace tnbLib
 
 			/*Private Data*/
 
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::shared_ptr<SectPx_FieldFun>,
+				std::shared_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
+
 		public:
 
 			static const char* typeName_;
@@ -52,6 +66,21 @@ namespace tnbLib
 		{
 
 			/*Private Data*/
+
+
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::shared_ptr<SectPx_FieldFun>,
+				std::weak_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
 
 		public:
 
@@ -81,6 +110,21 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::weak_ptr<SectPx_FieldFun>,
+				std::shared_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
+
 		public:
 
 			static const char* typeName_;
@@ -109,6 +153,21 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			typedef SectPx_BinaryOpFieldFun_Memory
+				<
+				std::weak_ptr<SectPx_FieldFun>,
+				std::weak_ptr<SectPx_FieldFun>
+				> base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
+
 		public:
 
 			static const char* typeName_;
@@ -125,7 +184,17 @@ namespace tnbLib
 
 			Standard_Real Value() const override;
 		};
+
+		typedef Divide<std::shared_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>> Divide_SF_SF;
+		typedef Divide<std::shared_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>> Divide_SF_WF;
+		typedef Divide<std::weak_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>> Divide_WF_SF;
+		typedef Divide<std::weak_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>> Divide_WF_WF;
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Divide_SF_SF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Divide_WF_SF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Divide_SF_WF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Divide_WF_WF);
 
 #endif // !_SectPx_BinaryOpFieldFun_Divide_Header

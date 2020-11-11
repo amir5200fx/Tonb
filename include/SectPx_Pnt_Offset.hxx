@@ -19,6 +19,17 @@ namespace tnbLib
 			Standard_Real theX_;
 			Standard_Real theY_;
 
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<SectPx_MasterPnt>(*this);
+				ar & theX_;
+				ar & theY_;
+			}
+
 		protected:
 
 			Pnt_Offset()
@@ -127,7 +138,12 @@ namespace tnbLib
 	}
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::sectPxLib::Pnt_Offset);
+
 #include <SectPx_Pnt_OffsetI.hxx>
 #include <SectPx_PntConstructor.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::InnerPnt<tnbLib::sectPxLib::Pnt_Offset>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::OuterPnt<tnbLib::sectPxLib::Pnt_Offset>);
 
 #endif // !_SectPx_Pnt_Offset_Header

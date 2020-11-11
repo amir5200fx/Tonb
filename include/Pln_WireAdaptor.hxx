@@ -3,6 +3,8 @@
 #define _Pln_WireAdaptor_Header
 
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 
@@ -18,6 +20,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::weak_ptr<Cad2d_Plane> thePlane_;
+
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

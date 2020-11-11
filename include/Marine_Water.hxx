@@ -3,6 +3,7 @@
 #define _Marine_Water_Header
 
 #include <Marine_Entity.hxx>
+#include <Marine_Module.hxx>
 
 #include <vector>
 
@@ -21,6 +22,14 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::vector<std::shared_ptr<Marine_Section>> theSections_;
+
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+	protected:
+
+		Marine_Water()
+		{}
 
 	public:
 

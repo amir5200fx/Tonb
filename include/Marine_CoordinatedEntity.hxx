@@ -4,6 +4,7 @@
 
 #include <Marine_Entity.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Geo_Serialization.hxx>
 
 #include <gp_Ax2.hxx>
 
@@ -17,6 +18,16 @@ namespace tnbLib
 		/*Private Data*/
 
 		gp_Ax2 theCoordinateSystem_;
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Marine_Entity>(*this);
+			ar & theCoordinateSystem_;
+		}
 
 	protected:
 

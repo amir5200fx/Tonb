@@ -12,6 +12,8 @@
 #include <Cad2d_Modeler_SelectList.hxx>
 #include <Cad_EntityManager.hxx>
 
+#include <gp.hxx>
+
 #include <memory>
 #include <map>
 
@@ -38,6 +40,11 @@ namespace tnbLib
 		using cad2dLib::Modeler_Registry::IsContain;
 		using cad2dLib::Modeler_Plane::IsContain;
 		//using cad2dLib::Modeler_Wire::IsContain;
+
+
+		//- private functions and operators
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 	
 	public:
 
@@ -90,6 +97,12 @@ namespace tnbLib
 				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
+		Standard_Integer
+			AddPlane
+			(
+				std::shared_ptr<Cad2d_Plane>&& thePlane
+			);
+
 		Standard_Integer 
 			AddSegment
 			(
@@ -140,9 +153,19 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
 
+		Standard_Integer Import
+		(
+			std::shared_ptr<Pln_Edge>&& theEdge
+		);
+
 		void Import
 		(
 			const std::vector<std::shared_ptr<Pln_Edge>>& theEdegs
+		);
+
+		void Import
+		(
+			std::vector<std::shared_ptr<Pln_Edge>>&& theEdegs
 		);
 
 		void Trim
@@ -151,10 +174,42 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
 
-		void MakePlanes(selctList& theList);
+		std::pair<Standard_Boolean, Standard_Integer>
+			Union
+			(
+				const Standard_Integer plnId0, 
+				const Standard_Integer plnId1
+			);
+
+		std::pair<Standard_Boolean, std::vector<Standard_Integer>>
+			Subtract
+			(
+				const Standard_Integer plnId0, 
+				const Standard_Integer plnId1
+			);
+
+		std::pair<Standard_Boolean, std::vector<Standard_Integer>>
+			Intersection
+			(
+				const Standard_Integer plnId0,
+				const Standard_Integer plnId1
+			);
 
 		//- the list will get empty after successfully creating plane
-		Standard_Integer MakePlane(selctList& theList);
+		std::vector<Standard_Integer> 
+			MakePlanes
+			(
+				selctList& theList, 
+				const gp_Ax2& ax = gp::XOY()
+			);
+
+		//- the list will get empty after successfully creating plane
+		Standard_Integer 
+			MakePlane
+			(
+				selctList& theList,
+				const gp_Ax2& ax = gp::XOY()
+			);
 	};
 }
 

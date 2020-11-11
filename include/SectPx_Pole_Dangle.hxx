@@ -19,6 +19,9 @@ namespace tnbLib
 
 			std::shared_ptr<Pnt_Compnt> thePnt_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 
@@ -66,5 +69,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Pole_Dangle);
 
 #endif // !_SectPx_Pnt_Dangle_Header

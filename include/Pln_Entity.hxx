@@ -3,6 +3,7 @@
 #define _Pln_Entity_Header
 
 #include <Cad_Entity.hxx>
+#include <Cad2d_Module.hxx>
 #include <Pln_EntityType.hxx>
 #include <Entity2d_BoxFwd.hxx>
 
@@ -23,6 +24,10 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+
+		/*private functions and operators*/
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

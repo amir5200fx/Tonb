@@ -4,6 +4,7 @@
 
 #include <Marine_CoordinatedEntity.hxx>
 #include <Marine_BodyType.hxx>
+#include <Marine_Module.hxx>
 
 #include <vector>
 
@@ -24,6 +25,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<Marine_Body> theBody_;
+
+
+		/*private functions and operators*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
 
 		auto& ChangeBody()
 		{

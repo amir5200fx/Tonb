@@ -21,6 +21,17 @@ namespace tnbLib
 
 			/*Private Data*/
 
+			typedef SectPx_UnaryOpFieldFun_Memory<std::shared_ptr<SectPx_FieldFun>>
+				base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
+
 		public:
 
 			static const char* typeName_;
@@ -45,6 +56,17 @@ namespace tnbLib
 
 			/*Private Data*/
 
+			typedef SectPx_UnaryOpFieldFun_Memory<std::weak_ptr<SectPx_FieldFun>>
+				base;
+
+			friend boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<base>(*this);
+			}
+
 		public:
 
 			static const char* typeName_;
@@ -63,5 +85,8 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::unaryOpFieldFun::Plus<std::shared_ptr<tnbLib::SectPx_FieldFun>>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::unaryOpFieldFun::Plus<std::weak_ptr<tnbLib::SectPx_FieldFun>>);
 
 #endif // !_SectPx_UnaryOpFieldFun_Plus_Header

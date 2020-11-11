@@ -44,11 +44,11 @@
 
 #define DECLARE_SAVE_IMP(C)															\
 template<>																			\
-void C::save(TNB_oARCH_TYPE & ar, const unsigned int version) const
+void C::save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE & ar, const unsigned int version) const
 
 #define DECLARE_LOAD_IMP(C) 									\
 template<>														\
-void C::load(TNB_iARCH_TYPE & ar, const unsigned int version)	
+void C::load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE & ar, const unsigned int version)	
 
 #include <word.hxx>
 

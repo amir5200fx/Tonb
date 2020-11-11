@@ -2,7 +2,9 @@
 #ifndef _Geo_ItemCounter_Header
 #define _Geo_ItemCounter_Header
 
+#include <Global_Serialization.hxx>
 #include <Geo_PriorityList.hxx>
+#include <Geo_Module.hxx>
 
 namespace tnbLib
 {
@@ -18,6 +20,39 @@ namespace tnbLib
 
 		counterList theItems_;
 
+
+		/*private functions and operators*/
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & theNbItems_;
+			ar & theItems_;
+		}
+
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+
+		auto NbItems() const
+		{
+			return theNbItems_;
+		}
+
+		auto& ChangeNbItems()
+		{
+			return theNbItems_;
+		}
+
+		const auto& Items() const
+		{
+			return theItems_;
+		}
+
+		auto& ChangeItems()
+		{
+			return theItems_;
+		}
 
 		void ReSize();
 

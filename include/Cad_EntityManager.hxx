@@ -5,6 +5,8 @@
 #include <Standard_TypeDef.hxx>
 #include <Standard_OStream.hxx>
 #include <Global_Named.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -41,9 +43,40 @@ namespace tnbLib
 		/*Private Data*/
 
 		stringMapOfBlocks theBlocks_;
+
+
+		/*private functions and operators*/
+
+		auto& BlocksRef()
+		{
+			return theBlocks_;
+		}
+
+		friend class boost::serialization::access;
+		void save(TNB_oARCH_TYPE& ar, const unsigned int version) const;
+		void load(TNB_iARCH_TYPE& ar, const unsigned int version);
+
+		void serialize(TNB_oARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		}
+
+		void serialize(TNB_iARCH_TYPE& ar, const unsigned int file_version)
+		{
+			boost::serialization::split_member(ar, *this, file_version);
+		};
+
+		void Add
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<EntityType>& theEntity
+		);
 	
 
 	public:
+
+		Cad_EntityManager()
+		{}
 
 		Cad_EntityManager
 		(

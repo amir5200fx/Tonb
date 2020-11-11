@@ -19,6 +19,14 @@ namespace tnbLib
 
 			TopoDS_Face theFace_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+		protected:
+
+			Model_SurfaceSail()
+			{}
+
 		public:
 
 			Model_SurfaceSail

@@ -3,6 +3,8 @@
 #define _Geom_PriorityList_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <Geo_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -17,6 +19,24 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Integer NbItems_;
+
+
+		/*Private functions and operators*/
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & NbItems_;
+		}
+
+		/*auto& ChangeNbItems()
+		{
+			return NbItems_;
+		}*/
+
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 	public:
 
@@ -66,6 +86,15 @@ namespace tnbLib
 		std::vector<T> theData_;
 
 		Standard_Real(*LengthValue)(const T&);
+
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version);
 
 
 		void ShiftUp(const Standard_Integer Index)
@@ -211,6 +240,17 @@ namespace tnbLib
 
 		//- private functions
 
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Geo_PriorityListBase>(*this);
+			ar & theData_;
+		}
+
 		void ShiftUp(const Standard_Integer Index)
 		{
 			if (Index)
@@ -324,5 +364,7 @@ namespace tnbLib
 		}
 	};
 }
+
+#include <Geo_PriorityListI.hxx>
 
 #endif // !_Geom_PriorityList_Header

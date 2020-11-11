@@ -23,6 +23,15 @@ namespace tnbLib
 
 			Standard_Real theZbar_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+
+		protected:
+
+			Model_LateralPlnSail()
+			{}
+
 		public:
 
 			Model_LateralPlnSail

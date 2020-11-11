@@ -3,6 +3,8 @@
 #define _SectPx_NodeAdaptor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <SectPx_Module.hxx>
 
 #include <memory>
 
@@ -25,6 +27,9 @@ namespace tnbLib
 
 		std::weak_ptr<SectPx_TopoProfile> theProfile_;
 		std::weak_ptr<SectPx_Interface> theInterface_;
+
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 	protected:
 

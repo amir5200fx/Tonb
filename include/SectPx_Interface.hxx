@@ -20,7 +20,13 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_Node> theNode_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 	protected:
+
+		SectPx_Interface()
+		{}
 
 		SectPx_Interface
 		(
@@ -58,5 +64,7 @@ namespace tnbLib
 		
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Interface);
 
 #endif // !_SectPx_Interface_Header

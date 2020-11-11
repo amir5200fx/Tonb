@@ -25,6 +25,9 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<SectPx_Pnt>> theQ_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		auto& ChangeQ()
 		{
 			return theQ_;
@@ -55,5 +58,7 @@ namespace tnbLib
 		typedef std::vector<std::shared_ptr<SectPx_ProfileQ>> profileList;
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_ProfileQ);
 
 #endif // !_SectPx_ProfileQ_Header

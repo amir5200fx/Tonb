@@ -4,6 +4,8 @@
 
 #include <gp_Dir.hxx>
 #include <Vec3d.hxx>
+#include <Geo_Module.hxx>
+#include <Global_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -15,6 +17,8 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 	public:
 

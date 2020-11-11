@@ -14,6 +14,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_CmptProfile;
 	class SectPx_Pnt;
+	class SectPx_Cloud;
 
 	namespace maker
 	{
@@ -38,6 +39,8 @@ namespace tnbLib
 			mutable Geo_ItemCounter theCounter_;
 
 
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 			auto& Counter() const
 			{
 				return theCounter_;
@@ -48,6 +51,11 @@ namespace tnbLib
 				const Standard_Integer theIndex,
 				std::shared_ptr<Profile>&& theProfile
 			);
+
+		protected:
+
+			CmptProfile()
+			{}
 
 		public:
 
@@ -76,15 +84,21 @@ namespace tnbLib
 				) const;
 
 			Standard_Integer
-				CreateProfile
+				CreateCustomProfile
 				(
 					const std::shared_ptr<SectPx_Pnt>& theP0,
 					const std::shared_ptr<SectPx_Pnt>& theP1
 				);
 
-
+			Standard_Integer 
+				CreateInterplProfile
+				(
+					const std::shared_ptr<SectPx_Cloud>& theCloud
+				);
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::CmptProfile);
 
 #endif // !_SectPx_CmptProfileMaker_Header

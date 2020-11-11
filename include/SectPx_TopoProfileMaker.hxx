@@ -25,6 +25,17 @@ namespace tnbLib
 
 			/*Private Data*/
 
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<SectPx_Maker>(*this);
+			}
+
+			TopoProfile()
+			{}
+
 		public:
 
 			TopoProfile
@@ -48,14 +59,11 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Pnt>& theP1
 				);
 
-			Standard_Integer
-				CreateCustomProfile
+			Standard_Integer 
+				CreateInterplProfile
 				(
-					const std::shared_ptr<SectPx_Node>& theNode0,
-					const std::shared_ptr<SectPx_Node>& theNode1
+					const std::shared_ptr<SectPx_Cloud>& theCloud
 				);
-
-			Standard_Integer CreateInterplProfile(const std::shared_ptr<SectPx_Cloud>& theCloud);
 
 			std::shared_ptr<SectPx_TopoProfile>
 				RemoveProfile
@@ -75,5 +83,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::TopoProfile);
 
 #endif // !_SectPx_TopoProfileMaker_Header

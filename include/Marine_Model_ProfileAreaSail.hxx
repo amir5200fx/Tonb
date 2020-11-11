@@ -23,6 +23,15 @@ namespace tnbLib
 			std::shared_ptr<Geo_ProfileFun> theArea_;
 			std::shared_ptr<Geo_ProfileFun> theZbar_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+
+
+		protected:
+
+			Model_ProfileAreaSail()
+			{}
+
 		public:
 
 			Model_ProfileAreaSail

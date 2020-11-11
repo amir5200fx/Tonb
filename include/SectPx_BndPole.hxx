@@ -15,6 +15,16 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_Pole>(*this);
+			ar & boost::serialization::base_object<SectPx_BndPoleAdaptor>(*this);
+		}
+
 	protected:
 
 		template<class... _Types>
@@ -40,5 +50,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_BndPole);
 
 #endif // !_SectPx_BndPole_Header

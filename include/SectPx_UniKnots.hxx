@@ -13,6 +13,14 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<SectPx_KnotVector>(*this);
+		}
+
 	public:
 
 		template<class... _Types>
@@ -30,13 +38,22 @@ namespace tnbLib
 			SectPx_KnotVector::SetU1(u);
 		}
 
-		std::vector<Standard_Real> 
+		/*std::vector<Standard_Real> 
 			CreateKnots
 			(
 				const std::vector<std::shared_ptr<SectPx_Coord>>& theCoords,
 				const Standard_Integer degree
+			) const override;*/
+
+		std::vector<Standard_Real>
+			CreateKnots
+			(
+				const std::vector<Pnt2d>& theCoords,
+				const Standard_Integer degree
 			) const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_UniKnots);
 
 #endif // !_SectPx_UniKnots_Header

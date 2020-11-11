@@ -2,10 +2,13 @@
 #ifndef _SectPx_Profile_Header
 #define _SectPx_Profile_Header
 
+#include <Standard_Handle.hxx>
 #include <Pnt2d.hxx>
 #include <SectPx_RegObj.hxx>
 
 #include <vector>
+
+class Geom2d_Curve;
 
 namespace tnbLib
 {
@@ -26,7 +29,13 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_KnotVector> theKnotAlg_;
 
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 	protected:
+
+		SectPx_TopoProfile()
+		{}
 
 		SectPx_TopoProfile
 		(
@@ -93,7 +102,14 @@ namespace tnbLib
 
 		Standard_Boolean IsProfile() const override;
 
+		Handle(Geom2d_Curve) 
+			RetrieveGeomCurve
+			(
+				const Standard_Integer deg
+			) const;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_TopoProfile);
 
 #endif // !_SectPx_Profile_Header

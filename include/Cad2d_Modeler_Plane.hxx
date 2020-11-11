@@ -3,6 +3,8 @@
 #define _Cad2d_Modeler_Plane_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Cad2d_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <map>
 #include <vector>
@@ -25,6 +27,16 @@ namespace tnbLib
 			std::map<Standard_Integer, std::shared_ptr<Cad2d_Plane>>
 				thePlanes_;
 
+
+			/*private functions and operators*/
+			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+
+			auto& ChangePlanes()
+			{
+				return thePlanes_;
+			}
+
 		protected:
 
 			Modeler_Plane();
@@ -33,6 +45,12 @@ namespace tnbLib
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
+
+			void InsertToPlanes
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
 		public:

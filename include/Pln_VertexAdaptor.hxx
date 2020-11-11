@@ -4,6 +4,8 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_Macros.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -23,6 +25,16 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::map<Standard_Integer, std::weak_ptr<Pln_Edge>> theEdges_;
+
+
+		/*private functions and operators*/
+
+		auto& ChangeEdges()
+		{
+			return theEdges_;
+		}
+
+		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
 
 	protected:
 

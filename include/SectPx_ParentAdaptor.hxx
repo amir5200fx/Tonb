@@ -3,6 +3,8 @@
 #define _SectPx_ParentAdaptor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <SectPx_Module.hxx>
 
 #include <map>
 #include <memory>
@@ -28,14 +30,38 @@ namespace tnbLib
 			std::weak_ptr<SectPx_Parent> Parent;
 			Standard_Integer K;
 
+
+			Pair()
+			{}
+
 			Pair(const std::weak_ptr<SectPx_Parent>& theParent)
 				: Parent(theParent)
 				, K(1)
 			{}
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				
+			}
+			//DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 		};
 
 		std::map<Standard_Integer, Pair>
 			theParents_;
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theParents_;
+		}
 
 		void Add
 		(

@@ -13,6 +13,15 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<StbGMaker_SailCreator>(*this);
+		}
+
 	protected:
 
 		template<class... _Types>

@@ -5,6 +5,8 @@
 #include <SectPx_Entity.hxx>
 #include <Geo_ItemCounter.hxx>
 #include <SectPx_RegObjType.hxx>
+#include <SectPx_Module.hxx>
+#include <SectPx_ScatterRegistry.hxx>
 #include <Ostream.hxx>
 
 #include <map>
@@ -21,6 +23,7 @@ namespace tnbLib
 
 	class SectPx_Registry
 		: public SectPx_Entity
+		, public SectPx_ScatterRegistry
 	{
 
 		friend class SectPx_ParMaker;
@@ -36,6 +39,9 @@ namespace tnbLib
 
 
 		//- private functions and operators
+
+
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 		auto& Counter() const
 		{
@@ -152,6 +158,8 @@ namespace tnbLib
 		extern std::shared_ptr<SectPx_Registry> objRegistry;
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Registry);
 
 #include <SectPx_RegistryI.hxx>
 #include <SectPx_RegistryM.hxx>

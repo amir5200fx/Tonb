@@ -23,6 +23,9 @@ namespace tnbLib
 
 			std::shared_ptr<SectPx_Pnt> thePnt_;
 
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		public:
 
 
@@ -78,5 +81,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Pole_Corner);
 
 #endif // !_SectPx_Pnt_Corner_Header

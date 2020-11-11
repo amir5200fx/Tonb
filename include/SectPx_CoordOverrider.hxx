@@ -19,6 +19,8 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_Coord> theCoord_;
 
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 	public:
 
 		static const char* typeName_;
@@ -33,5 +35,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_CoordOverrider);
 
 #endif // !_SectPx_CoordOverrider_Header

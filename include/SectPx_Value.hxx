@@ -3,6 +3,8 @@
 #define _SectPx_Value_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <SectPx_Module.hxx>
 
 namespace tnbLib
 {
@@ -16,6 +18,18 @@ namespace tnbLib
 		T theValue_;
 
 		mutable Standard_Boolean IsChanged_;
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & theValue_;
+			ar & IsChanged_;
+		}
 
 	public:
 
