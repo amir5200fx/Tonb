@@ -9,6 +9,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/export.hpp>
 
+#include <boost/serialization/utility.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/map.hpp>
@@ -22,25 +23,31 @@
 
 #include <boost/archive/polymorphic_binary_iarchive.hpp>
 #include <boost/archive/polymorphic_binary_oarchive.hpp>
-#include <boost/archive/polymorphic_text_iarchive.hpp>
-#include <boost/archive/polymorphic_text_oarchive.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
+//#include <boost/archive/polymorphic_text_iarchive.hpp>
+//#include <boost/archive/polymorphic_text_oarchive.hpp>
+//#include <boost/archive/polymorphic_iarchive.hpp>
+//#include <boost/archive/polymorphic_oarchive.hpp>
 
-#define TNB_iARCH_TYPE boost::archive::binary_iarchive
-#define TNB_oARCH_TYPE boost::archive::binary_oarchive
+#define TNB_iARCH_TYPE boost::archive::polymorphic_iarchive
+#define TNB_oARCH_TYPE boost::archive::polymorphic_oarchive
 #define TnbGlobal_EXPORT
 
 #define DECLARE_SAVE_LOAD_HEADER(Export)	 														\
+	template<class Archive> void save(Archive&, const unsigned int) const {}						\
+	template<class Archive> void load(Archive&, const unsigned int) {}								\
 	friend class boost::serialization::access;														\
-	void Export save(TNB_oARCH_TYPE & ar, const unsigned int version) const;						\
-	void Export load(TNB_iARCH_TYPE & ar, const unsigned int version);								\
+	template<>																						\
+	void Export save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE & ar, const unsigned int version) const;		\
+	template<>																						\
+	void Export load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE & ar, const unsigned int version);				\
 	BOOST_SERIALIZATION_SPLIT_MEMBER()
 
 #define DECLARE_SAVE_IMP(C)															\
+template<>																			\
 void C::save(TNB_oARCH_TYPE & ar, const unsigned int version) const
 
 #define DECLARE_LOAD_IMP(C) 									\
+template<>														\
 void C::load(TNB_iARCH_TYPE & ar, const unsigned int version)	
 
 #include <word.hxx>
