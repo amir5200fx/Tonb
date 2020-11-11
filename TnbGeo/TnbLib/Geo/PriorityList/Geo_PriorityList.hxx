@@ -23,12 +23,20 @@ namespace tnbLib
 
 		/*Private functions and operators*/
 
-		auto& ChangeNbItems()
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
 		{
-			return NbItems_;
+			ar & NbItems_;
 		}
 
-		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		/*auto& ChangeNbItems()
+		{
+			return NbItems_;
+		}*/
+
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 	public:
 
@@ -232,7 +240,16 @@ namespace tnbLib
 
 		//- private functions
 
-		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Geo_PriorityListBase>(*this);
+			ar & theData_;
+		}
 
 		void ShiftUp(const Standard_Integer Index)
 		{

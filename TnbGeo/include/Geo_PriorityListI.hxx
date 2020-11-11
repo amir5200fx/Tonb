@@ -10,6 +10,8 @@ namespace tnbLib
 		const unsigned int version
 	)
 	{
+		ar & boost::serialization::base_object<Geo_PriorityListBase>(*this);
+
 		ar & theData_;
 		ar & LengthValue;
 	}

@@ -22,7 +22,17 @@ namespace tnbLib
 
 
 		/*private functions and operators*/
-		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & theNbItems_;
+			ar & theItems_;
+		}
+
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 		auto NbItems() const
 		{
