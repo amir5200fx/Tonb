@@ -114,4 +114,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::GeoMap_LinearInterpl);
+
 #endif // !_SectPx_GeoMap_LinearInterpl_Header

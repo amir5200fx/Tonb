@@ -101,4 +101,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_KnotVector);
+
 #endif // !_SectPx_KnotVector_Header

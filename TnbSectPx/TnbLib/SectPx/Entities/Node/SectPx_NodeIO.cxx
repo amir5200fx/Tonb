@@ -17,3 +17,5 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_Node)
 
 	ar & thePnt_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::SectPx_Node);

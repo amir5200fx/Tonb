@@ -40,4 +40,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::FieldFun_Minus);
+
 #endif // !_SectPx_FieldFun_Minus_Header

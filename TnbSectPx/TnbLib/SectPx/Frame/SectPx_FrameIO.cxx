@@ -32,3 +32,5 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_Frame)
 	ar & theRegistry_;
 	ar & theMakers_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::SectPx_Frame);

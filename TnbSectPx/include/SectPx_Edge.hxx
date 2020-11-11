@@ -108,4 +108,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Edge);
+
 #endif // !_SectPx_Edge_Header

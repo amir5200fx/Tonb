@@ -152,4 +152,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Frame);
+
 #endif // !_SectPx_Frame_Header

@@ -34,6 +34,7 @@ namespace tnbLib
 		virtual Standard_Boolean HandleMemory() const = 0;
 	};
 
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(SectPx_UnaryOpFieldFun);
 
 	template<class T>
 	class SectPx_UnaryOpFieldFun_Memory
@@ -94,6 +95,7 @@ namespace tnbLib
 		}
 	};
 
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(SectPx_UnaryOpFieldFun_Memory<std::shared_ptr<SectPx_FieldFun>>);
 
 	template<>
 	class SectPx_UnaryOpFieldFun_Memory<std::weak_ptr<SectPx_FieldFun>>
@@ -141,6 +143,8 @@ namespace tnbLib
 			theField_ = theField;
 		}
 	};
+
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(SectPx_UnaryOpFieldFun_Memory<std::weak_ptr<SectPx_FieldFun>>);
 }
 
 #endif // !_SectPx_UnaryOpFieldFun_Header

@@ -181,7 +181,18 @@ namespace tnbLib
 
 			Standard_Real Value() const override;
 		};
+
+		typedef Cross<std::shared_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>> Cross_SF_SF;
+		typedef Cross<std::shared_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>> Cross_SF_WF;
+		typedef Cross<std::weak_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>> Cross_WF_SF;
+		typedef Cross<std::weak_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>> Cross_WF_WF;
+
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Cross_SF_SF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Cross_WF_SF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Cross_SF_WF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Cross_WF_WF);
 
 #endif // !_SectPx_BinaryOpFieldFun_Cross_Header

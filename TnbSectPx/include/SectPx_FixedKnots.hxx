@@ -25,6 +25,11 @@ namespace tnbLib
 			ar & theKnots_;
 		}
 
+	protected:
+
+		SectPx_FixedKnots()
+		{}
+
 	public:
 
 		SectPx_FixedKnots(const std::vector<Standard_Real>& theKnots)
@@ -53,5 +58,7 @@ namespace tnbLib
 			) const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_FixedKnots);
 
 #endif // !_SectPx_FixedKnots_Header

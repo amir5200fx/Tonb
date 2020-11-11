@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::sectPxLib::Pole_Slave)
 	ar & boost::serialization::base_object<SectPx_PairedPole>(*this);
 	ar & theMaster_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::Pole_Slave);

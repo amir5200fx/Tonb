@@ -3,6 +3,7 @@
 #define _SectPx_FieldFun_readY_Header
 
 #include <SectPx_nonParFieldFun.hxx>
+#include <SectPx_Coord.hxx>
 
 namespace tnbLib
 {
@@ -30,6 +31,11 @@ namespace tnbLib
 				ar & boost::serialization::base_object<SectPx_nonParFieldFun>(*this);
 				ar & theCoord_;
 			}
+
+		protected:
+
+			FieldFun_readY()
+			{}
 
 		public:
 
@@ -65,5 +71,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::FieldFun_readY);
 
 #endif // !_SectPx_FieldFun_readY_Header

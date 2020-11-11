@@ -36,4 +36,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_GeoMapOverrider);
+
 #endif // !_SectPx_GeoMapOverrider_Header

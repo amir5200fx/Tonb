@@ -70,4 +70,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Pole_Dangle);
+
 #endif // !_SectPx_Pnt_Dangle_Header

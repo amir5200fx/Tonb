@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_ProfileQ)
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
 	ar & theQ_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::SectPx_ProfileQ);

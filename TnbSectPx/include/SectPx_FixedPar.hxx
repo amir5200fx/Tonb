@@ -33,6 +33,11 @@ namespace tnbLib
 			return theValue_;
 		}
 
+	protected:
+
+		SectPx_FixedPar()
+		{}
+
 	public:
 
 		static const char* typeName_;
@@ -88,5 +93,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_FixedPar);
 
 #endif // !_SectPx_FixedPar_Header

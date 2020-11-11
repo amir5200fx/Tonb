@@ -115,4 +115,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::Parameter);
+
 #endif // !_SectPx_ParameterMaker_Header

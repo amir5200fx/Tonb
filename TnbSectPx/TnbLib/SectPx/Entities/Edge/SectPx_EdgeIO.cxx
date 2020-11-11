@@ -15,3 +15,5 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_Edge)
 	ar & theP0_;
 	ar & theP1_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::SectPx_Edge);

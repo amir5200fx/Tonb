@@ -84,4 +84,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::GeometricMap);
+
 #endif // !_SectPx_GeometricMapMaker_Header

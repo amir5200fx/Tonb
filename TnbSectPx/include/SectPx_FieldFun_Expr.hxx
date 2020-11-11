@@ -165,9 +165,15 @@ namespace tnbLib
 
 			void RemoveParameter(const word&);
 
-			string theExpr_;
+			std::string theExpr_;
 
 			Standard_Boolean addConstants_;
+
+
+		protected:
+
+			FieldFun_Expr()
+			{}
 
 		public:
 
@@ -254,5 +260,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::FieldFun_Expr);
 
 #endif // !_SectPx_FieldFun_Expr_Header

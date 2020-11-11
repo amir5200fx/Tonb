@@ -99,4 +99,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::CmptProfile);
+
 #endif // !_SectPx_CmptProfileMaker_Header

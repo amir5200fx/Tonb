@@ -19,10 +19,17 @@ namespace tnbLib
 		std::shared_ptr<SectPx_FieldFun> theFun_;
 
 
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
 		auto& ChangeFun()
 		{
 			return theFun_;
 		}
+
+	protected:
+
+		SectPx_FreePar()
+		{}
 
 	public:
 
@@ -71,8 +78,15 @@ namespace tnbLib
 
 		Standard_Real Value() const override;
 
+		void SetFieldFun(const std::shared_ptr<SectPx_FieldFun>& fun)
+		{
+			theFun_ = fun;
+		}
+
 		void Print(Ostream& out) const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_FreePar);
 
 #endif // !_SectPx_FreePar_Header

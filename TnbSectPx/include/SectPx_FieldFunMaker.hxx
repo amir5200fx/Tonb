@@ -2,6 +2,7 @@
 #ifndef _SectPx_FieldFunMaker_Header
 #define _SectPx_FieldFunMaker_Header
 
+#include <SectPx_Coord.hxx>
 #include <SectPx_Maker.hxx>
 #include <OSstream.hxx>
 
@@ -111,5 +112,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::FieldFun);
 
 #endif // !_SectPx_FieldFunMaker_Header

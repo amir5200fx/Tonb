@@ -43,4 +43,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_GeoMap);
+
 #endif // !_SectPx_GeoMap_Header

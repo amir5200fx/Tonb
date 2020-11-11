@@ -93,6 +93,8 @@ namespace tnbLib
 	}
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::sectPxLib::Pnt_GeoField);
+
 #include <SectPx_PntConstructor.hxx>
 
 namespace tnbLib
@@ -106,5 +108,7 @@ namespace tnbLib
 		{};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::InnerPnt<tnbLib::sectPxLib::Pnt_GeoField>);
 
 #endif // !_SectPx_Pnt_GeoField_Header

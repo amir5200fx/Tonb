@@ -17,3 +17,5 @@ DECLARE_LOAD_IMP(tnbLib::maker::Profile)
 
 	ar & theProfile_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::maker::Profile);

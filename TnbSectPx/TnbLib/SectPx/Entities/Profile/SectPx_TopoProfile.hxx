@@ -34,6 +34,9 @@ namespace tnbLib
 
 	protected:
 
+		SectPx_TopoProfile()
+		{}
+
 		SectPx_TopoProfile
 		(
 			const std::shared_ptr<SectPx_Node>& theNode0,
@@ -106,5 +109,7 @@ namespace tnbLib
 			) const;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_TopoProfile);
 
 #endif // !_SectPx_Profile_Header

@@ -36,4 +36,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_CoordOverrider);
+
 #endif // !_SectPx_CoordOverrider_Header

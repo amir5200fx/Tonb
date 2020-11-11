@@ -71,4 +71,6 @@ namespace tnbLib
 
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::Node);
+
 #endif // !_SectPx_NodeMaker_Header

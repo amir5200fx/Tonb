@@ -25,6 +25,9 @@ namespace tnbLib
 
 	protected:
 
+		SectPx_Interface()
+		{}
+
 		SectPx_Interface
 		(
 			const std::shared_ptr<SectPx_Node>& theNode
@@ -61,5 +64,7 @@ namespace tnbLib
 		
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Interface);
 
 #endif // !_SectPx_Interface_Header

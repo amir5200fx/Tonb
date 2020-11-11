@@ -102,7 +102,12 @@ namespace tnbLib
 	}
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::sectPxLib::Pnt_Compnt);
+
 #include <SectPx_Pnt_CompntI.hxx>
 #include <SectPx_PntConstructor.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::InnerPnt<tnbLib::sectPxLib::Pnt_Compnt>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::OuterPnt<tnbLib::sectPxLib::Pnt_Compnt>);
 
 #endif // !_SectPx_Pnt_Compnt_Header

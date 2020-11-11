@@ -36,7 +36,7 @@ namespace tnbLib
 
 			FieldCloud_Naca4DigitBase
 			(
-				const Standard_Integer nbSegments
+				const Standard_Integer nbSegments = DEFAULT_NB_SEGMENTS
 			)
 				: theNbSegments_(nbSegments)
 			{}
@@ -61,6 +61,8 @@ namespace tnbLib
 			{}
 
 		public:
+
+			static const Standard_Integer DEFAULT_NB_SEGMENTS = 25;
 
 			const auto& Chord() const
 			{
@@ -140,7 +142,6 @@ namespace tnbLib
 			) const override;
 		};
 
-
 		namespace naca
 		{
 
@@ -201,8 +202,14 @@ namespace tnbLib
 
 				word RegObjTypeName() const override;
 			};
+
+			
 		}
 	}
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase);
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::naca::UpperEdge);
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::naca::LowerEdge);
 
 #endif // !_SectPx_FieldCloud_Naca4Digit_Header

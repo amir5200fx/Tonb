@@ -82,4 +82,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Parent);
+
 #endif // !_SectPx_Parent_Header

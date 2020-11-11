@@ -28,6 +28,11 @@ namespace tnbLib
 			ar & theValue_;
 		}
 
+	protected:
+
+		SectPx_ConstPar()
+		{}
+
 	public:
 
 
@@ -73,5 +78,7 @@ namespace tnbLib
 		void Print(Ostream& out) const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_ConstPar);
 
 #endif // !_SectPx_ConstPar_Header

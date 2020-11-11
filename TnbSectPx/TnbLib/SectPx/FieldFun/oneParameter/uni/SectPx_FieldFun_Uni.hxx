@@ -42,4 +42,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::FieldFun_Uni);
+
 #endif // !_SectPx_FieldFun_Uni_Header

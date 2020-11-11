@@ -146,4 +146,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::GeoMap_Intersection);
+
 #endif // !_SectPx_GeoMap_Intersection_Header

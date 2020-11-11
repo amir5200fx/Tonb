@@ -95,4 +95,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_InterplProfile);
+
 #endif // !_SectPx_InterplProfile_Header

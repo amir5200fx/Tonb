@@ -84,4 +84,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::TopoProfile);
+
 #endif // !_SectPx_TopoProfileMaker_Header

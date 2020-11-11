@@ -86,4 +86,7 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::unaryOpFieldFun::Plus<std::shared_ptr<tnbLib::SectPx_FieldFun>>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::unaryOpFieldFun::Plus<std::weak_ptr<tnbLib::SectPx_FieldFun>>);
+
 #endif // !_SectPx_UnaryOpFieldFun_Plus_Header

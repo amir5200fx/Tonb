@@ -59,4 +59,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_ProfileQ);
+
 #endif // !_SectPx_ProfileQ_Header

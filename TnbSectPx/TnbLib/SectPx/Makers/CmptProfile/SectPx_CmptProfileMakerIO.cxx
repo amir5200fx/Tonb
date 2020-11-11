@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::maker::CmptProfile)
 	ar & theProfiles_;
 	ar & theCounter_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::maker::CmptProfile);

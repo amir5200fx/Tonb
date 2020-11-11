@@ -301,6 +301,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField\SectPx_Pnt_GeoField.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField\SectPx_Pnt_GeoFieldIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\offset\SectPx_Pnt_Offset.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\offset\SectPx_Pnt_OffsetIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\SectPx_MasterPnt.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\SectPx_MasterPntIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\SectPx_Pnt.cxx" />
@@ -315,8 +316,10 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Edge\SectPx_EdgeIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Interface\Empty\SectPx_EmptyInterface.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Empty\SectPx_EmptyInterfaceIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\Adaptor\SectPx_PairedInterfaceAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\Joint\SectPx_PairedInterface_Joint.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\Joint\SectPx_PairedInterface_JointIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\SectPx_PairedInterface.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Interface\SectPx_Interface.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Interface\SectPx_InterfaceIO.cxx" />
@@ -339,7 +342,10 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Par\Fixed\SectPx_FixedParIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Par\Free\SectPx_FreePar.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Par\Free\SectPx_FreeParIO.cxx" />
-    <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_Par.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_Par.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_BndPoleAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_InterPoleAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Dangle\SectPx_Pole_Dangle.cxx" />
@@ -358,7 +364,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\ProfileQ\SectPx_ProfileQIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Approx\SectPx_ApproxProfile.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfile.cxx" />
-    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfile.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfileIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfile.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfileIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\SectPx_TopoProfile.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\SectPx_TopoProfileIO.cxx" />
@@ -366,29 +376,47 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\RegObj\SectPx_RegObjType.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Segment\Adaptor\SectPx_SegmentAdaptor.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Segment\SectPx_Segment.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Segment\SectPx_SegmentIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\cross\SectPx_BinaryOpFieldFun_Cross.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\cross\SectPx_BinaryOpFieldFun_CrossIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\divide\SectPx_BinaryOpFieldFun_Divide.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\divide\SectPx_BinaryOpFieldFun_DivideIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\SectPx_BinaryOpFieldFun.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\subtract\SectPx_BinaryOpFieldFun_Subtract.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\subtract\SectPx_BinaryOpFieldFun_SubtractIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\sum\SectPx_BinaryOpFieldFun_Sum.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\sum\SectPx_BinaryOpFieldFun_SumIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_Expr.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_ExprIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readX\SectPx_FieldFun_readX.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readX\SectPx_FieldFun_readXIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readY\SectPx_FieldFun_readY.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readY\SectPx_FieldFun_readYIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\SectPx_nonParFieldFun.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\func\SectPx_FieldFun_Func.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\minus\SectPx_FieldFun_Minus.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\minus\SectPx_FieldFun_MinusIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_oneParFieldFun.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\SectPx_oneParFieldFunIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\uni\SectPx_FieldFun_Uni.cxx" />
-    <ClCompile Include="TnbLib\SectPx\FieldFun\SectPx_FieldFun.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\uni\SectPx_FieldFun_UniIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\SectPx_FieldFun.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\minus\SectPx_UnaryOpFieldFun_Minus.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\minus\SectPx_UnaryOpFieldFun_MinusIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\plus\SectPx_UnaryOpFieldFun_Plus.cxx" />
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\plus\SectPx_UnaryOpFieldFun_PlusIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\SectPx_UnaryOpFieldFun.cxx" />
     <ClCompile Include="TnbLib\SectPx\FrameAPI\SectPx_FrameAPI.cxx" />
-    <ClCompile Include="TnbLib\SectPx\Frame\SectPx_Frame.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Frame\SectPx_Frame.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Frame\SectPx_FrameIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\GeoMap\intersection\SectPx_GeoMap_Intersection.cxx" />
     <ClCompile Include="TnbLib\SectPx\GeoMap\intersection\SectPx_GeoMap_IntersectionIO.cxx" />
@@ -396,30 +424,51 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\GeoMap\linearInterpl\SectPx_GeoMap_LinearInterplIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\GeoMap\SectPx_GeoMap.cxx" />
     <ClCompile Include="TnbLib\SectPx\KnotVector\Fixed\SectPx_FixedKnots.cxx" />
+    <ClCompile Include="TnbLib\SectPx\KnotVector\Fixed\SectPx_FixedKnotsIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\KnotVector\SectPx_KnotVector.cxx" />
     <ClCompile Include="TnbLib\SectPx\KnotVector\Uniform\SectPx_UniKnots.cxx" />
+    <ClCompile Include="TnbLib\SectPx\KnotVector\Uniform\SectPx_UniKnotsIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\CmptProfile\SectPx_CmptProfileMaker.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\CmptProfile\SectPx_CmptProfileMakerIO.cxx" />
-    <ClCompile Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMaker.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMaker.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\GeometricMap\SectPx_GeometricMapMaker.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Makers\GeometricMap\SectPx_GeometricMapMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\Interface\SectPx_InterfaceMaker.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Makers\Interface\SectPx_InterfaceMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\Node\SectPx_NodeMaker.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Makers\Node\SectPx_NodeMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\Parameter\SectPx_ParameterMaker.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Makers\Parameter\SectPx_ParameterMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\Point\SectPx_PointMaker.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Makers\Point\SectPx_PointMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_ProfileMaker.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_ProfileMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\SectPx_MakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\TopoProfile\SectPx_TopoProfileMaker.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Makers\TopoProfile\SectPx_TopoProfileMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Offset\Component\SectPx_CompOffset.cxx" />
     <ClCompile Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistry.cxx" />
     <ClCompile Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistryIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Registry\SectPx_Registry.cxx" />
     <ClCompile Include="TnbLib\SectPx\Registry\SectPx_RegistryIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Script\SectPx_Script.cxx" />
-    <ClCompile Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Tools\Par\SectPx_ParTools.cxx" />
-    <ClCompile Include="TnbLib\SectPx\Tools\Pnt\SectPx_PntTools.cxx" />
-    <ClCompile Include="TnbLib\SectPx\Tools\tools\SectPx_Tools.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Tools\Pnt\SectPx_PntTools.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Tools\tools\SectPx_Tools.cxx">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -82,4 +82,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Pole_Corner);
+
 #endif // !_SectPx_Pnt_Corner_Header

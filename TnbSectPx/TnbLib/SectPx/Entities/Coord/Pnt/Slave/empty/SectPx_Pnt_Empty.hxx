@@ -25,6 +25,9 @@ namespace tnbLib
 
 		protected:
 
+			Pnt_Empty()
+			{}
+
 			Pnt_Empty
 			(
 				const std::shared_ptr<SectPx_MasterPnt>& theMaster
@@ -105,6 +108,22 @@ namespace tnbLib
 	}
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::sectPxLib::Pnt_Empty);
+
 #include <SectPx_PntConstructor.hxx>
+
+namespace tnbLib
+{
+	namespace sectPxLib
+	{
+
+		template<>
+		class InnerPnt<Pnt_Empty>
+			: public Pnt_Empty
+		{};
+	}
+}
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::OuterPnt<tnbLib::sectPxLib::Pnt_Empty>);
 
 #endif // !_SectPx_Pnt_Empty_Header

@@ -159,6 +159,8 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Registry);
+
 #include <SectPx_RegistryI.hxx>
 #include <SectPx_RegistryM.hxx>
 

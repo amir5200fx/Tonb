@@ -30,13 +30,23 @@ namespace tnbLib
 			std::weak_ptr<SectPx_Parent> Parent;
 			Standard_Integer K;
 
+
+			Pair()
+			{}
+
 			Pair(const std::weak_ptr<SectPx_Parent>& theParent)
 				: Parent(theParent)
 				, K(1)
 			{}
 
+			friend class boost::serialization::access;
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version)
+			{
+				
+			}
+			//DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 		};
 
 		std::map<Standard_Integer, Pair>

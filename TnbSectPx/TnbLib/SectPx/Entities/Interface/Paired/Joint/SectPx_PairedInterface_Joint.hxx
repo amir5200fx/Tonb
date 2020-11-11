@@ -41,5 +41,7 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::PairedInterface_Joint);
+
 #endif // !_SectPx_PairedInterface_Joint_Header
 

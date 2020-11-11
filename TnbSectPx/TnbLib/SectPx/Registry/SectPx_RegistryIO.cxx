@@ -15,3 +15,5 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_Registry)
 	ar & theObjects_;
 	ar & theCounter_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::SectPx_Registry);

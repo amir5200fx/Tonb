@@ -42,4 +42,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_PairedInterface);
+
 #endif // !_SectPx_PairedInterface_Header

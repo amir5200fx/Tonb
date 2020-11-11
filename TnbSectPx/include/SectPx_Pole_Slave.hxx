@@ -79,4 +79,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Pole_Slave);
+
 #endif // !_SectPx_Pole_Slave_Header

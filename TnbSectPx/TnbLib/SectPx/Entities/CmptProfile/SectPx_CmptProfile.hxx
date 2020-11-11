@@ -56,4 +56,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_CmptProfile);
+
 #endif // !_SectPx_CmptProfile_Header

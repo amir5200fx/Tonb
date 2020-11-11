@@ -41,4 +41,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_EmptyInterface);
+
 #endif // !_SectPx_EmptyInterface_Header

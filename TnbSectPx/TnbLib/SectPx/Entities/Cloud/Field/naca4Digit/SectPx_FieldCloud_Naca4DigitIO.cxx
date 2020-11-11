@@ -11,3 +11,6 @@ DECLARE_SAVE_IMP(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase)
 	ar & theMaxThickness_;
 	ar & theNbSegments_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::naca::UpperEdge);
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::naca::LowerEdge);

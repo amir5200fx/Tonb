@@ -185,7 +185,20 @@ namespace tnbLib
 
 			Standard_Real Value() const override;
 		};
+
+
+		typedef Sum<std::shared_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>> Sum_SF_SF;
+		typedef Sum<std::shared_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>> Sum_SF_WF;
+		typedef Sum<std::weak_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>> Sum_WF_SF;
+		typedef Sum<std::weak_ptr<SectPx_FieldFun>, std::weak_ptr<SectPx_FieldFun>> Sum_WF_WF;
+
 	}
 }
+
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Sum_SF_SF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Sum_WF_SF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Sum_SF_WF);
+BOOST_CLASS_EXPORT_KEY(tnbLib::binaryOpsFieldFun::Sum_WF_WF);
 
 #endif // !_SectPx_BinaryOpFieldFun_Sum_Header

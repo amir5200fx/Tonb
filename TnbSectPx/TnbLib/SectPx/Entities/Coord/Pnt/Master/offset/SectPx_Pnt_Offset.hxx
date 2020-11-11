@@ -138,7 +138,12 @@ namespace tnbLib
 	}
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::sectPxLib::Pnt_Offset);
+
 #include <SectPx_Pnt_OffsetI.hxx>
 #include <SectPx_PntConstructor.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::InnerPnt<tnbLib::sectPxLib::Pnt_Offset>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::OuterPnt<tnbLib::sectPxLib::Pnt_Offset>);
 
 #endif // !_SectPx_Pnt_Offset_Header

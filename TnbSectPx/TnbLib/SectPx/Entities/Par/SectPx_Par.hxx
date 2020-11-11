@@ -64,6 +64,8 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Par);
+
 #include <SectPx_ParI.hxx>
 
 #endif // !_SectPx_Par_Header

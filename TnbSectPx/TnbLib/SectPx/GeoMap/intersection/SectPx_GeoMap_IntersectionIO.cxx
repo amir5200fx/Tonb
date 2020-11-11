@@ -27,3 +27,5 @@ DECLARE_LOAD_IMP(tnbLib::sectPxLib::GeoMap_Intersection)
 	ar & theAngle0_;
 	ar & theAngle1_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::GeoMap_Intersection);

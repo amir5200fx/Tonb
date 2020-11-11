@@ -46,6 +46,8 @@ namespace tnbLib
 
 	};
 
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(SectPx_BinaryOpFieldFun);
+
 
 	template<class T1, class T2>
 	class SectPx_BinaryOpFieldFun_Memory
@@ -139,6 +141,14 @@ namespace tnbLib
 
 	};
 
+	typedef SectPx_BinaryOpFieldFun_Memory
+		<
+		std::shared_ptr<SectPx_FieldFun>,
+		std::shared_ptr<SectPx_FieldFun>
+		> binOpFieldFun_Memory_SF_SF;
+
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(binOpFieldFun_Memory_SF_SF);
+
 	template<>
 	class SectPx_BinaryOpFieldFun_Memory
 		<
@@ -213,6 +223,14 @@ namespace tnbLib
 		}
 
 	};
+
+	typedef SectPx_BinaryOpFieldFun_Memory
+		<
+		std::weak_ptr<SectPx_FieldFun>,
+		std::shared_ptr<SectPx_FieldFun>
+		> binOpFieldFun_Memory_WF_SF;
+
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(binOpFieldFun_Memory_WF_SF);
 
 	template<>
 	class SectPx_BinaryOpFieldFun_Memory
@@ -289,6 +307,14 @@ namespace tnbLib
 
 	};
 
+	typedef SectPx_BinaryOpFieldFun_Memory
+		<
+		std::shared_ptr<SectPx_FieldFun>,
+		std::weak_ptr<SectPx_FieldFun>
+		> binOpFieldFun_Memory_SF_WF;
+
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(binOpFieldFun_Memory_SF_WF);
+
 	template<>
 	class SectPx_BinaryOpFieldFun_Memory
 		<
@@ -350,6 +376,14 @@ namespace tnbLib
 		}
 
 	};
+
+	typedef SectPx_BinaryOpFieldFun_Memory
+		<
+		std::weak_ptr<SectPx_FieldFun>,
+		std::weak_ptr<SectPx_FieldFun>
+		> binOpFieldFun_Memory_WF_WF;
+
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(binOpFieldFun_Memory_WF_WF);
 }
 
 #endif // !_SectPx_BinaryOpFieldFun_Header

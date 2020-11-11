@@ -25,6 +25,11 @@ namespace tnbLib
 			ar & boost::serialization::base_object<SectPx_TopoProfile>(*this);
 		}
 
+	protected:
+
+		SectPx_CustomProfile()
+		{}
+
 	public:
 
 		static const char* typeName_;
@@ -61,5 +66,7 @@ namespace tnbLib
 			);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_CustomProfile);
 
 #endif // !_SectPx_CustomProfile_Header

@@ -20,3 +20,5 @@ DECLARE_LOAD_IMP(tnbLib::sectPxLib::GeoMap_LinearInterpl)
 
 	ar & thePar_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::GeoMap_LinearInterpl);

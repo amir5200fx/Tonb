@@ -18,3 +18,5 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_InterplProfile)
 	ar & theCloud_;
 	ar & theTol_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::SectPx_InterplProfile);

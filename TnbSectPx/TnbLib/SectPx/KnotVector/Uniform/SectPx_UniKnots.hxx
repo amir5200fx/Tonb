@@ -54,4 +54,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_UniKnots);
+
 #endif // !_SectPx_UniKnots_Header

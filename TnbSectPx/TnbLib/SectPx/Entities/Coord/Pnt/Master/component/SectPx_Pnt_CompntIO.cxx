@@ -15,3 +15,6 @@ DECLARE_LOAD_IMP(tnbLib::sectPxLib::Pnt_Compnt)
 	ar & theX_;
 	ar & theY_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::InnerPnt<tnbLib::sectPxLib::Pnt_Compnt>);
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::OuterPnt<tnbLib::sectPxLib::Pnt_Compnt>);

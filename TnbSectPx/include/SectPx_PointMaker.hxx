@@ -111,4 +111,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::Point);
+
 #endif // !_SectPx_PointMaker_Header

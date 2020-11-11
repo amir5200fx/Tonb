@@ -1184,5 +1184,80 @@
     <ClCompile Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistryIO.cxx">
       <Filter>TnbLib\SectPx\Registry\Scatter</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Master\offset\SectPx_Pnt_OffsetIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Master\offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Empty\SectPx_EmptyInterfaceIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Interface\Empty</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Interface\Paired\Joint\SectPx_PairedInterface_JointIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Interface\Paired\Joint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfileIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Segment\SectPx_SegmentIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\cross\SectPx_BinaryOpFieldFun_CrossIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\cross</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\divide\SectPx_BinaryOpFieldFun_DivideIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\divide</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\subtract\SectPx_BinaryOpFieldFun_SubtractIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\subtract</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\sum\SectPx_BinaryOpFieldFun_SumIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\binaryOps\sum</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_ExprIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\nonParameter\expr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readX\SectPx_FieldFun_readXIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\nonParameter\readX</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\readY\SectPx_FieldFun_readYIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\nonParameter\readY</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\minus\SectPx_FieldFun_MinusIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\oneParameter\minus</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\uni\SectPx_FieldFun_UniIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\oneParameter\uni</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\minus\SectPx_UnaryOpFieldFun_MinusIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\minus</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\plus\SectPx_UnaryOpFieldFun_PlusIO.cxx">
+      <Filter>TnbLib\SectPx\FieldFun\unaryOps\plus</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\KnotVector\Fixed\SectPx_FixedKnotsIO.cxx">
+      <Filter>TnbLib\SectPx\KnotVector\Fixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\KnotVector\Uniform\SectPx_UniKnotsIO.cxx">
+      <Filter>TnbLib\SectPx\KnotVector\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\FieldFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\GeometricMap\SectPx_GeometricMapMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\GeometricMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Interface\SectPx_InterfaceMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Node\SectPx_NodeMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Parameter\SectPx_ParameterMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Point\SectPx_PointMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\TopoProfile\SectPx_TopoProfileMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\TopoProfile</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

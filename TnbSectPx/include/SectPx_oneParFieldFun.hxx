@@ -78,6 +78,8 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_oneParFieldFun);
+
 #include <SectPx_oneParFieldFunI.hxx>
 
 #endif // !_SectPx_oneParFieldFun_Header

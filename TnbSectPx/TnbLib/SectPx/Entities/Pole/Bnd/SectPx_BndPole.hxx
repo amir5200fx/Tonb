@@ -51,4 +51,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_BndPole);
+
 #endif // !_SectPx_BndPole_Header

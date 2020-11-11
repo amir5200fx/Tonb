@@ -120,4 +120,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::Profile);
+
 #endif // !_SectPx_ProfileMaker_Header
