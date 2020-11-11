@@ -234,6 +234,22 @@ namespace tnbLib
 		}
 	}
 
+	void saveTo(const word& name)
+	{
+		std::cout << "injaaaaaaaaa" << std::endl;
+		std::ofstream myFile(name);
+		boost::archive::polymorphic_binary_oarchive ar(myFile);
+		ar & *getFrame();
+		PAUSE;
+	}
+
+	void loadFrom(const word& name)
+	{
+		std::ifstream myFile(name);
+		boost::archive::polymorphic_binary_iarchive ar(myFile);
+		ar & *getFrame();
+	}
+
 	// - default shapes
 
 	void makeSegment(const Pnt2d& p0, const Pnt2d& p1)
@@ -594,6 +610,10 @@ namespace tnbLib
 
 		//- create geometric point
 		mod->add(chaiscript::fun([](const double x, const double y)-> auto {return Pnt2d(x, y); }), "createGeoPoint");
+
+		//- serialization
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFrom(name); }), "loadFrom");
 	}
 
 	/*void setFrame(const module_t& mod)
@@ -621,6 +641,16 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
+	makeSegment(Pnt2d(0, 0), Pnt2d(1, 1));
+	try
+	{
+		saveTo("myFrame.tnb");
+	}
+	catch (const std::exception& x)
+	{
+		std::cout << x.what() << std::endl;
+	}
+	return 0;
 	FatalError.throwExceptions();
 
 	if (argc <= 1)
