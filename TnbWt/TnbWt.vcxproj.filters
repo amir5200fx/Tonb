@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{8eb68f29-aeb6-4083-a6d1-78769002d2d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Wt">
+      <UniqueIdentifier>{65697985-46c5-435c-900f-57e6158d7a5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Wt\Marine">
+      <UniqueIdentifier>{d1d12fa2-dd8b-42e1-9d07-de066ae857e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Wt\Marine\Hydrostatic">
+      <UniqueIdentifier>{6f8c4697-198d-4241-b1ca-6b7d7962f734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Wt\Marine\Hydrostatic\dimAnalysis">
+      <UniqueIdentifier>{7fd7f267-41bc-4a81-9652-8c2ec2206180}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Wt\Marine\Hydrostatic\dimAnalysis\Wt_DimAnalysis.hxx">
+      <Filter>TnbLib\Wt\Marine\Hydrostatic\dimAnalysis</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Wt\Marine\Hydrostatic\dimAnalysis\Wt_DimAnalysis.cxx">
+      <Filter>TnbLib\Wt\Marine\Hydrostatic\dimAnalysis</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
