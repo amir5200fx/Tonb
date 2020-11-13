@@ -19,13 +19,249 @@ namespace tnbLib
 	typedef std::shared_ptr<Cad2d_Modeler> modeler_t;
 	typedef cad2dLib::Modeler_SelectList selList;
 
+	static const auto modeler = std::make_shared<Cad2d_Modeler>();
 	static selList selt;
 
-	auto makePoint(const Standard_Real x, const Standard_Real y)
+	
+
+	const auto& getModeler()
+	{
+		return modeler;
+	}
+
+	auto makePoint(const double x, const double y)
 	{
 		Pnt2d pt(x, y);
 		return std::move(pt);
 	}
+
+	auto makeGeoAx2d(const Pnt2d& p, const Dir2d& v)
+	{
+		gp_Ax2d Ax2d(p, v);
+		return std::move(Ax2d);
+	}
+
+	auto makeGeoAx22d(const Pnt2d& p, const Dir2d& vx, const Dir2d& vy)
+	{
+		gp_Ax22d Ax22d(p, vx, vy);
+		return std::move(Ax22d);
+	}
+
+	auto makeGeoAx22d(const Pnt2d& p, const Dir2d& v, const bool s)
+	{
+		gp_Ax22d Ax22d(p, v, s);
+		return std::move(Ax22d);
+	}
+
+	auto makeGeoAx22d(const gp_Ax2d& ax, const bool s)
+	{
+		gp_Ax22d Ax22d(ax, s);
+		return std::move(Ax22d);
+	}
+
+	auto makeGeoCirc(const gp_Ax2d& ax, const double r, const bool s)
+	{
+		gp_Circ2d c(ax, r, s);
+		return std::move(c);
+	}
+
+	auto makeGeoCirc(const gp_Ax2d& ax, const double r)
+	{
+		gp_Circ2d c(ax, r);
+		return std::move(c);
+	}
+
+	auto makeGeoElips(const gp_Ax2d& ax, const double mjrR, const double mnrR, const bool s)
+	{
+		gp_Elips2d e(ax, mjrR, mnrR, s);
+		return std::move(e);
+	}
+
+	auto makeGeoElips(const gp_Ax2d& ax, const double mjrR, const double mnrR)
+	{
+		gp_Elips2d e(ax, mjrR, mnrR);
+		return std::move(e);
+	}
+
+	auto makeGeoHypr(const gp_Ax2d& ax, const double mjrR, const double mnrR, const bool s)
+	{
+		gp_Hypr2d hyp(ax, mjrR, mnrR, s);
+		return std::move(hyp);
+	}
+
+	auto makeGeoHypr(const gp_Ax22d& axay, const double mjrR, const double mnrR)
+	{
+		gp_Hypr2d hyp(axay, mjrR, mnrR);
+		return std::move(hyp);
+	}
+
+	auto makeGeoParab(const gp_Ax2d& ax, const double focal, const bool s)
+	{
+		gp_Parab2d parab(ax, focal, s);
+		return std::move(parab);
+	}
+
+	auto makeGeoParab(const gp_Ax22d& axay, const double focalL)
+	{
+		gp_Parab2d parab(axay, focalL);
+		return std::move(parab);
+	}
+
+	auto makeGeoParab(const gp_Ax2d& directrix, const gp_Pnt2d& focus, const bool s)
+	{
+		gp_Parab2d parab(directrix, focus, s);
+		return std::move(parab);
+	}
+
+	
+	//****************************************************************//
+
+	auto makeSegment(const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeSegment(p0, p1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(std::move(item))));
+		return std::move(t);
+	}
+
+	auto makeSegment(const Pnt2d& p0, const double angl, const double L)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeSegment(p0, angl, L);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircArc(const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircArc(p0, p1, p2);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircArc(const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircArc(p0, v0, p1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircArc(const gp_Circ2d& circ, const double angl0, const double angl1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircArc(circ, angl0, angl1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircArc(const gp_Circ2d& circ, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircArc(circ, p0, p1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeElipsArc(const gp_Elips2d& elips, const double angl0, const double angl1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeElipsArc(elips, angl0, angl1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeElipsArc(const gp_Elips2d& elips, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeElipsArc(elips, p0, p1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeHyperArc(const gp_Hypr2d& hyper, const double angl0, const double angl1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeHyprArc(hyper, angl0, angl1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeHyperArc(const gp_Hypr2d& hyper, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeHyprArc(hyper, p0, p1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeParabArc(const gp_Parab2d& parab, const double angl0, const double angl1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeParbArc(parab, angl0, angl1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeParabArc(const gp_Parab2d& parab, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeParabArc(parab, p0, p1);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircle(const gp_Circ2d& circ)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircle(circ);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircle(const gp_Circ2d& circle, const Pnt2d& pt)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircle(circle, pt);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircle(const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircle(p0, p1, p2);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircle(const Pnt2d& c, const double r)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircle(c, r);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeCircle(const Pnt2d& c, const Pnt2d& pt)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeCircle(c, pt);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeEllipse(const gp_Elips2d& elips)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeEllipse(elips);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	auto makeEllipse(const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeEllipse(s0, s1, c);
+		auto t = getModeler()->SelectEdge(getModeler()->Import(std::move(item)));
+		return std::move(t);
+	}
+
+	/*void makeRectangular(const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeRectangular(p0, p1);
+		getModeler()->Import(std::move(item));
+	}
+
+	void makeRectangular(const gp_Ax2d& ax, const double dx, const double dy)
+	{
+		auto item = cad2dLib::Modeler_Tools::MakeRectangular(ax, dx, dy);
+		getModeler()->Import(std::move(item));
+	}*/
+
+	//****************************************************************//
 
 	auto makeTransform()
 	{
@@ -79,144 +315,7 @@ namespace tnbLib
 		return std::move(dir);
 	}
 
-	auto makeAxis(const Pnt2d& p, const Dir2d& d)
-	{
-		gp_Ax2d ax(p, d);
-		return std::move(ax);
-	}
-
-	auto makeGeoCirc(const gp_Ax2d& ax, const Standard_Real r)
-	{
-		gp_Circ2d c(ax, r);
-		return std::move(c);
-	}
-
-	auto makeGeoElips(const gp_Ax2d& ax, const Standard_Real majR, const Standard_Real minR)
-	{
-		gp_Elips2d e(ax, majR, minR);
-		return std::move(e);
-	}
-
-	auto makeGeoHypr(const gp_Ax2d& ax, const Standard_Real majR, const Standard_Real minR)
-	{
-		gp_Hypr2d h(ax, majR, minR);
-		return std::move(h);
-	}
-
-	auto makeGeoParab(const gp_Ax2d& ax, const Standard_Real focal)
-	{
-		gp_Parab2d p(ax, focal);
-		return std::move(p);
-	}
-
-	auto makeSegment(const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1)
-	{
-		auto t = tools::MakeSegment(p0, p1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeSegment(const modeler_t& m, const Pnt2d& pt, const Standard_Real ang, const Standard_Real len)
-	{
-		auto t = tools::MakeSegment(pt, ang, len);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircArc(const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
-	{
-		auto t = tools::MakeCircArc(p0, p1, p2);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircArc(const modeler_t& m, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
-	{
-		auto t = tools::MakeCircArc(p0, v0, p1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircArc(const modeler_t& m, const gp_Circ2d& c, const Standard_Real ang0, const Standard_Real ang1)
-	{
-		auto t = tools::MakeCircArc(c, ang0, ang1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircArc(const modeler_t& m, const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)
-	{
-		auto t = tools::MakeCircArc(c, p0, p1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeElipsArc(const modeler_t& m, const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)
-	{
-		auto t = tools::MakeElipsArc(e, p0, p1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeElipsArc(const modeler_t& m, const gp_Elips2d& e, const Standard_Real ang0, const Standard_Real ang1)
-	{
-		auto t = tools::MakeElipsArc(e, ang0, ang1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeHyprArc(const modeler_t& m, const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)
-	{
-		auto t = tools::MakeHyprArc(h, p0, p1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeHyprArc(const modeler_t& m, const gp_Hypr2d& h, const Standard_Real ang0, const Standard_Real ang1)
-	{
-		auto t = tools::MakeHyprArc(h, ang0, ang1);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircle(const modeler_t& m, const gp_Circ2d& c)
-	{
-		auto t = tools::MakeCircle(c);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircle(const modeler_t& m, const gp_Circ2d& c, const Pnt2d& pt)
-	{
-		auto t = tools::MakeCircle(c, pt);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircle(const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
-	{
-		auto t = tools::MakeCircle(p0, p1, p2);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircle(const modeler_t& m, const Pnt2d& pt, const Standard_Real r)
-	{
-		auto t = tools::MakeCircle(pt, r);
-		return m->Import(std::move(t));
-	}
-
-	auto makeCircle(const modeler_t& m, const Pnt2d& c, const Pnt2d& pt)
-	{
-		auto t = tools::MakeCircle(c, pt);
-		return m->Import(std::move(t));
-	}
-
-	auto makeEllipse(const modeler_t& m, const gp_Elips2d& e)
-	{
-		auto t = tools::MakeEllipse(e);
-		return m->Import(std::move(t));
-	}
-
-	auto makeEllipse(const modeler_t& m, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
-	{
-		auto t = tools::MakeEllipse(s0, s1, c);
-		return m->Import(std::move(t));
-	}
-
-	void makeRectangular(const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1)
-	{
-		auto t = tools::MakeRectangular(p0, p1);
-		m->Import(std::move(t));
-	}
-
+	
 	auto selectEdge(const modeler_t& m, const Standard_Integer id)
 	{
 		auto t = m->SelectEdge(id);
@@ -310,6 +409,51 @@ namespace tnbLib
 namespace tnbLib
 {
 
+
+	//static const auto chai = std::make_shared<chaiscript::ChaiScript>();
+
+	/*static const auto& getChai()
+	{
+		return chai;
+	}*/
+
+	class InputGeometricFunctions
+	{
+	public:
+
+		InputGeometricFunctions()
+		{
+			/*auto mod = std::make_shared<chaiscript::Module>();
+
+			mod->add(chaiscript::fun([](const double x, const double y)-> auto {return makePoint(x, y); }), "MakePnt");
+			mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& v)-> auto {return makeGeoAx2d(p, v); }), "MakeAxis");
+			mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& vx, const Dir2d& vy)-> auto {return makeGeoAx22d(p, vx, vy); }), "MakeCoordSys");
+			mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& v, const bool s)-> auto {return makeGeoAx22d(p, v, s); }), "MakeCoordSys");
+			mod->add(chaiscript::fun([](const gp_Ax2d& ax, const bool s)-> auto {return makeGeoAx22d(ax, s); }), "MakeCoordSys");
+			mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double r, const bool s)-> auto {return makeGeoCirc(ax, r, s); }), "MakeGeoCirc");
+			mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double r)-> auto {return makeGeoCirc(ax, r); }), "MakeGeoCirc");
+			mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double mjrR, const double mnrR, const bool s)-> auto {return makeGeoElips(ax, mjrR, mnrR, s); }), "MakeGeoElips");
+			mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double mjrR, const double mnrR)-> auto {return makeGeoElips(ax, mjrR, mnrR); }), "MakeGeoElips");
+			mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double mjrR, const double mnrR, const bool s)-> auto {return makeGeoHypr(ax, mjrR, mnrR, s); }), "makeGeoHypr");
+			mod->add(chaiscript::fun([](const gp_Ax22d& axay, const double mjrR, const double mnrR)-> auto {return makeGeoHypr(axay, mjrR, mnrR); }), "makeGeoHypr");
+			mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double focal, const bool s)-> auto {return makeGeoParab(ax, focal, s); }), "makeGeoParab");
+			mod->add(chaiscript::fun([](const gp_Ax22d& axay, const double focalL)-> auto {return makeGeoParab(axay, focalL); }), "makeGeoParab");
+			mod->add(chaiscript::fun([](const gp_Ax2d& directrix, const gp_Pnt2d& focus, const bool s)-> auto {return makeGeoParab(directrix, focus, s); }), "makeGeoParab");
+
+			getChai()->add(mod);*/
+
+		}
+
+	};
+
+	//static const InputGeometricFunctions inputGeometricFunctions;
+
+
+}
+
+namespace tnbLib
+{
+
 	typedef std::shared_ptr<chaiscript::Module> module_t;
 
 	void addTypes(const module_t& t)
@@ -339,40 +483,30 @@ namespace tnbLib
 
 	void addNewTypes(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([]() {auto t = makeTransform(); return std::move(t); }), "createTransform");
-		mod->add(chaiscript::fun([](const Standard_Real x, const Standard_Real y) {auto t = makePoint(x, y); return std::move(t); }), "createPoint");
-		mod->add(chaiscript::fun([](const Standard_Real x, const Standard_Real y) {auto t = makeDirection(x, y); return std::move(t); }), "createDirection");
-		mod->add(chaiscript::fun([](const Pnt2d& pt, const Dir2d& d) {auto t = makeAxis(pt, d); return std::move(t); }), "createAxis");
+		mod->add(chaiscript::fun([](const Pnt2d& p0, const Pnt2d& p1)-> auto {return makeSegment(p0, p1); }), "createSegment");
+		mod->add(chaiscript::fun([](const Pnt2d& p0, const double ang, const double len)-> auto {return makeSegment(p0, ang, len); }), "createSegment");
 
-		mod->add(chaiscript::fun([](const gp_Ax2d& ax, const Standard_Real r) {auto t = makeGeoCirc(ax, r); return std::move(t); }), "createGeoCirc");
-		mod->add(chaiscript::fun([](const gp_Ax2d& ax, const Standard_Real majR, const Standard_Real minR) {auto t = makeGeoElips(ax, majR, minR); return std::move(t); }), "createGeoElips");
-		mod->add(chaiscript::fun([](const gp_Ax2d& ax, const Standard_Real majR, const Standard_Real minR) {auto t = makeGeoHypr(ax, majR, minR); return std::move(t); }), "createGeoHypr");
-		mod->add(chaiscript::fun([](const gp_Ax2d& ax, const Standard_Real focal) {auto t = makeGeoParab(ax, focal); return std::move(t); }), "createGeoParab");
+		mod->add(chaiscript::fun([](const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)-> auto {return makeCircArc(p0, p1, p2); }), "createCircArc");
+		mod->add(chaiscript::fun([](const Pnt2d& p0, const Vec2d& v, const Pnt2d& p2)-> auto {return makeCircArc(p0, v, p2); }), "createCircArc");
+		mod->add(chaiscript::fun([](const gp_Circ2d& c, const double ang0, const double ang1)-> auto {return makeCircArc(c, ang0, ang1); }), "createCircArc");
+		mod->add(chaiscript::fun([](const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)-> auto {return makeCircArc(c, p0, p1); }), "createCircArc");
 
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1)-> Standard_Integer {return makeSegment(m, p0, p1); }), "createSegment");
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& p0, const Standard_Real ang, const Standard_Real len)-> Standard_Integer {return makeSegment(m, p0, ang, len); }), "createSegment");
+		mod->add(chaiscript::fun([](const gp_Elips2d& el, const Pnt2d& p0, const Pnt2d& p1)-> auto {return makeElipsArc(el, p0, p1); }), "creatElipsArc");
+		mod->add(chaiscript::fun([](const gp_Elips2d& el, const double ang0, const Standard_Real ang1)-> auto {return makeElipsArc(el, ang0, ang1); }), "creatElipsArc");
 
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)-> Standard_Integer {return makeCircArc(m, p0, p1, p2); }), "createCircArc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& p0, const Vec2d& v, const Pnt2d& p2)-> Standard_Integer {return makeCircArc(m, p0, v, p2); }), "createCircArc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Circ2d& c, const Standard_Real ang0, const Standard_Real ang1)-> Standard_Integer {return makeCircArc(m, c, ang0, ang1); }), "createCircArc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)-> Standard_Integer {return makeCircArc(m, c, p0, p1); }), "createCircArc");
+		mod->add(chaiscript::fun([](const gp_Hypr2d& hr, const Pnt2d& p0, const Pnt2d& p1)-> auto {return makeHyperArc(hr, p0, p1);}), "createHyprArc");
+		mod->add(chaiscript::fun([](const gp_Hypr2d& hr, const double ang0, const double ang1)-> auto {return makeHyperArc(hr, ang0, ang1);}), "createHyprArc");
 
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Elips2d& el, const Pnt2d& p0, const Pnt2d& p1)-> Standard_Integer {return makeElipsArc(m, el, p0, p1); }), "creatElipsArc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Elips2d& el, const Standard_Real ang0, const Standard_Real ang1)-> Standard_Integer {return makeElipsArc(m, el, ang0, ang1); }), "creatElipsArc");
+		mod->add(chaiscript::fun([](const gp_Circ2d& c)-> auto {return makeCircle(c); }), "createCirc");
+		mod->add(chaiscript::fun([](const gp_Circ2d& c, const Pnt2d& p)-> auto {return makeCircle(c, p); }), "createCirc");
+		mod->add(chaiscript::fun([](const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)-> auto {return makeCircle(p0, p1, p2); }), "createCirc");
+		mod->add(chaiscript::fun([](const Pnt2d& p0, const double r)-> auto {return makeCircle(p0, r); }), "createCirc");
+		mod->add(chaiscript::fun([](const Pnt2d& c, const Pnt2d& p)-> auto {return makeCircle(c, p); }), "createCirc");
 
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Hypr2d& hr, const Pnt2d& p0, const Pnt2d& p1)-> Standard_Integer {return makeHyprArc(m, hr, p0, p1);}), "createHyprArc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Hypr2d& hr, const Standard_Real ang0, const Standard_Real ang1)-> Standard_Integer {return makeHyprArc(m, hr, ang0, ang1);}), "createHyprArc");
+		mod->add(chaiscript::fun([](const gp_Elips2d& el)-> auto {return makeEllipse(el); }), "createElips");
+		mod->add(chaiscript::fun([](const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)-> auto {return makeEllipse(s0, s1, c);}), "createElips");
 
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Circ2d& c)-> Standard_Integer {return makeCircle(m, c); }), "createCirc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Circ2d& c, const Pnt2d& p)-> Standard_Integer {return makeCircle(m, c, p); }), "createCirc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)-> Standard_Integer {return makeCircle(m, p0, p1, p2); }), "createCirc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& p0, const Standard_Real r)-> Standard_Integer {return makeCircle(m, p0, r); }), "createCirc");
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& c, const Pnt2d& p)-> Standard_Integer {return makeCircle(m, c, p); }), "createCirc");
-
-		mod->add(chaiscript::fun([](const modeler_t& m, const gp_Elips2d& el)-> Standard_Integer {return makeEllipse(m, el); }), "createElips");
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)-> Standard_Integer {return makeEllipse(m, s0, s1, c);}), "createElips");
-
-		mod->add(chaiscript::fun([](const modeler_t& m, const Pnt2d& p0, const Pnt2d& p1)-> void {makeRectangular(m, p0, p1); }), "createRectangular");
+		//mod->add(chaiscript::fun([](const Pnt2d& p0, const Pnt2d& p1)-> void {makeRectangular(p0, p1); }), "createRectangular");
 	}
 
 	void setOps(const module_t& mod)
@@ -394,7 +528,47 @@ namespace tnbLib
 	}
 }
 
+using namespace tnbLib;
+
 int main()
 {
+
+	chaiscript::ChaiScript chai;
+
+	auto mod = std::make_shared<chaiscript::Module>();
+
+	mod->add(chaiscript::fun([](const double x, const double y)-> auto {return makePoint(x, y); }), "MakePnt");
+	/*mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& v)-> auto {return makeGeoAx2d(p, v); }), "MakeAxis");
+	mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& vx, const Dir2d& vy)-> auto {return makeGeoAx22d(p, vx, vy); }), "MakeCoordSys");
+	mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& v, const bool s)-> auto {return makeGeoAx22d(p, v, s); }), "MakeCoordSys");
+	mod->add(chaiscript::fun([](const gp_Ax2d& ax, const bool s)-> auto {return makeGeoAx22d(ax, s); }), "MakeCoordSys");
+	mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double r, const bool s)-> auto {return makeGeoCirc(ax, r, s); }), "MakeGeoCirc");
+	mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double r)-> auto {return makeGeoCirc(ax, r); }), "MakeGeoCirc");
+	mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double mjrR, const double mnrR, const bool s)-> auto {return makeGeoElips(ax, mjrR, mnrR, s); }), "MakeGeoElips");
+	mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double mjrR, const double mnrR)-> auto {return makeGeoElips(ax, mjrR, mnrR); }), "MakeGeoElips");
+	mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double mjrR, const double mnrR, const bool s)-> auto {return makeGeoHypr(ax, mjrR, mnrR, s); }), "makeGeoHypr");
+	mod->add(chaiscript::fun([](const gp_Ax22d& axay, const double mjrR, const double mnrR)-> auto {return makeGeoHypr(axay, mjrR, mnrR); }), "makeGeoHypr");
+	mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double focal, const bool s)-> auto {return makeGeoParab(ax, focal, s); }), "makeGeoParab");
+	mod->add(chaiscript::fun([](const gp_Ax22d& axay, const double focalL)-> auto {return makeGeoParab(axay, focalL); }), "makeGeoParab");
+	mod->add(chaiscript::fun([](const gp_Ax2d& directrix, const gp_Pnt2d& focus, const bool s)-> auto {return makeGeoParab(directrix, focus, s); }), "makeGeoParab");*/
+
+	chai.add(mod);
+
+	fileName myFileName("modeler");
+
+	try
+	{
+		chai.eval_file(myFileName);
+	}
+	catch (const chaiscript::exception::eval_error& x)
+	{
+		Info << x.pretty_print() << endl;
+	}
+	catch (const error& x)
+	{
+		Info << x.message() << endl;
+	}
+
+	
 	return 0;
 }
