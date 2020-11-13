@@ -1,10 +1,10 @@
-
 #include <Dir3d.hxx>
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CosineDistb.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler.hxx>
+#include <Cad2d_Modeler_Tools.hxx>
 #include <Cad_ShapeTools.hxx>
 #include <Cad_Tools.hxx>
 #include <Marine_Shapes.hxx>
@@ -23,6 +23,140 @@ namespace tnbLib
 {
 
 	static const Standard_Real tol = 1.0E-4;
+	static const auto gMaker = std::make_shared<StbGMaker_Creator>();
+
+
+	typedef std::shared_ptr<StbGMaker_Creator> creator_t;
+	typedef std::shared_ptr<marineLib::Shape_Tank> tank_t;
+	typedef std::shared_ptr<marineLib::Shape_Sail> sail_t;
+	typedef std::shared_ptr<marineLib::Shape_Hull> hull_t;
+
+	typedef std::shared_ptr<StbGMaker_HullCreator> hullCreator_t;
+	typedef std::shared_ptr<StbGMaker_SailCreator> sailCreator_t;
+	typedef std::shared_ptr<StbGMaker_TankCreator> tankCreator_t;
+
+	typedef std::shared_ptr<StbGMaker_WP> wp_t;
+
+	typedef std::shared_ptr<Geo_xDistb> xDisbt_t;
+
+	//- global functions
+
+	const auto& getMaker()
+	{
+		return gMaker;
+	}
+
+	const auto& getHull()
+	{
+		return getMaker()->HullMaker();
+	}
+
+	const auto& createHull()
+	{
+		if (getHull())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the hullMaker is already created!" << endl
+				<< abort(FatalError);
+		}
+		getMaker()->CreateHullMaker();
+		return getHull();
+	}
+
+	const auto& createHull(const hull_t& t)
+	{
+		if (getHull())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the hullMaker is already created!" << endl
+				<< abort(FatalError);
+		}
+		getMaker()->CreateHullMaker(t);
+		return getHull();
+	}
+
+	auto createTank()
+	{
+		auto t = getMaker()->SelectTankMaker(getMaker()->CreateTankMaker());
+		return std::move(t);
+	}
+
+	auto createTank(const tank_t& t)
+	{
+		auto t = getMaker()->SelectTankMaker(getMaker()->CreateTankMaker(t));
+		return std::move(t);
+	}
+
+	auto createSail()
+	{
+		auto t = getMaker()->SelectSailMaker(getMaker()->CreateShapeGeomSailMaker());
+		return std::move(t);
+	}
+
+	auto createSail(const sail_t& s)
+	{
+		auto t = getMaker()->SelectSailMaker(getMaker()->CreateShapeGeomSailMaker(s));
+		return std::move(t);
+	}
+
+	auto getNbTanks()
+	{
+		return getMaker()->NbTanks();
+	}
+
+	auto getNbSails()
+	{
+		return getMaker()->NbSails();
+	}
+
+	void exportTo(const word& name)
+	{
+		auto model = getMaker()->ExportModel();
+		fileName myFileName(name);
+		std::ofstream myFile(myFileName);
+
+		boost::archive::polymorphic_binary_oarchive ar(myFile);
+
+		ar << model;
+	}
+
+	// HullMaker functions 
+
+	auto creatHullSection(const double x)
+	{
+		auto t = getHull()->SelectWP(getHull()->CreateWorkingPlane(x));
+		return std::move(t);
+	}
+	
+	// Working Plane
+
+	void createSegment(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto geom = cad2dLib::Modeler_Tools::MakeSegment(p0, p1);
+		wp->Modeler()->Import(std::move(geom));
+	}
+	
+	void createCirArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	{
+		auto geom = cad2dLib::Modeler_Tools::MakeCircArc(p0, p1, p2);
+		wp->Modeler()->Import(std::move(geom));
+	}
+	
+	void createCirArc(const wp_t& wp, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
+	{
+		auto geom = cad2dLib::Modeler_Tools::MakeCircArc(p0, v0, p1);
+		wp->Modeler()->Import(std::move(geom));
+	}
+
+
+	void createCirArc(const wp_t& wp, const gp_Circ2d& circ, const double alpha0, const double alpha1)
+	{
+		auto geom = cad2dLib::Modeler_Tools::MakeCircArc(circ, alpha0, alpha1);
+		wp->Modeler()->Import(std::move(geom));
+	}
+
+		//   
+
 
 	Pnt3d createPoint(const Standard_Real x, const Standard_Real y, const Standard_Real z)
 	{
@@ -232,16 +366,7 @@ namespace tnbLib
 		return std::move(d);
 	}
 
-	typedef std::shared_ptr<StbGMaker_Creator> creator_t;
-	typedef std::shared_ptr<marineLib::Shape_Tank> tank_t;
-	typedef std::shared_ptr<marineLib::Shape_Sail> sail_t;
-	typedef std::shared_ptr<marineLib::Shape_Hull> hull_t;
-
-	typedef std::shared_ptr<StbGMaker_HullCreator> hullCreator_t;
-	typedef std::shared_ptr<StbGMaker_SailCreator> sailCreator_t;
-	typedef std::shared_ptr<StbGMaker_TankCreator> tankCreator_t;
-
-	typedef std::shared_ptr<Geo_xDistb> xDisbt_t;
+	
 
 	auto makeCreator()
 	{
@@ -310,9 +435,11 @@ namespace tnbLib
 
 #include <chaiscript/chaiscript.hpp>
 
+using namespace tnbLib;
+
 int main(int argc, char *argv[])
 {
-	
+	gMaker->CreateHullMaker();
 
 }
 

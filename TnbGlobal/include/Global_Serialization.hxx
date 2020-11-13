@@ -28,6 +28,8 @@
 //#include <boost/archive/polymorphic_iarchive.hpp>
 //#include <boost/archive/polymorphic_oarchive.hpp>
 
+#include <boost/archive/impl/archive_serializer_map.ipp>
+
 #define TNB_iARCH_TYPE boost::archive::polymorphic_iarchive
 #define TNB_oARCH_TYPE boost::archive::polymorphic_oarchive
 #define TnbGlobal_EXPORT
@@ -67,8 +69,8 @@ namespace boost
 		void load(Archive & ar, tnbLib::word & g, const unsigned int version)
 		{
 			std::string st;
-			ar >> g;
-			g = std::move(g);
+			ar >> st;
+			g = std::move(st);
 		}
 	}
 }

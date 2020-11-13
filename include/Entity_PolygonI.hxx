@@ -12,17 +12,4 @@ namespace tnbLib
 		}
 	}
 
-	template<class Point>
-	void Entity_Polygon<Point>::save(TNB_oARCH_TYPE & ar, const unsigned int version) const
-	{
-		ar << Points();
-		ar << Deflection();
-	}
-
-	template<class Point>
-	void Entity_Polygon<Point>::load(TNB_iARCH_TYPE & ar, const unsigned int version)
-	{
-		ar >> Points();
-		ar >> Deflection();
-	}
 }

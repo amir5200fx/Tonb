@@ -1,14 +1,16 @@
 #include <SectPx_ParentAdaptor.hxx>
 
 #include <SectPx_Parent.hxx>
-//
-//DECLARE_SAVE_IMP(tnbLib::SectPx_ParentAdaptor::Pair)
+
+//template <>
+//void tnbLib::SectPx_ParentAdaptor::Pair::save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE& ar, const unsigned int version) const
 //{
 //	ar & Parent;
 //	ar & K;
 //}
 //
-//DECLARE_LOAD_IMP(tnbLib::SectPx_ParentAdaptor::Pair)
+//template <>
+//void tnbLib::SectPx_ParentAdaptor::Pair::load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE& ar, const unsigned int version)
 //{
 //	ar & Parent;
 //	ar & K;

@@ -23,7 +23,9 @@ namespace tnbLib
 		friend class SectPx_ParTools;
 		friend class SectPx_PntTools;
 
-		/*Private Data*/
+		friend class boost::serialization::access;
+
+	public:
 
 		struct Pair
 		{
@@ -39,15 +41,36 @@ namespace tnbLib
 				, K(1)
 			{}
 
-			friend class boost::serialization::access;
-
-			template<class Archive>
-			void serialize(Archive& ar, const unsigned int version)
+			/*template <class Archive>
+			void save(Archive&, const unsigned int) const
 			{
-				
 			}
-			//DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
+			template <class Archive>
+			void load(Archive&, const unsigned int)
+			{
+			}*/
+
+			friend class boost::serialization::access;
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int version);
+
+			/*template <>
+			void save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE& ar, const unsigned int version) const;
+			template <>
+			void load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE& ar, const unsigned int version);
+			template <class Archive>
+			void serialize(Archive& ar, const unsigned int file_version)
+			{
+				boost::serialization::split_member(ar, *this, file_version);
+			};*/
 		};
+
+	private:
+
+		/*Private Data*/
+
+		
 
 		std::map<Standard_Integer, Pair>
 			theParents_;
@@ -55,7 +78,7 @@ namespace tnbLib
 
 		/*private functions and operators*/
 
-		friend class boost::serialization::access;
+		
 
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version)
@@ -104,5 +127,7 @@ namespace tnbLib
 		}
 	};
 }
+
+#include <SectPx_ParentAdaptorI.hxx>
 
 #endif // !_SectPx_ParentAdaptor_Header

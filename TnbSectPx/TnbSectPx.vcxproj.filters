@@ -777,6 +777,9 @@
     <ClInclude Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistry.hxx">
       <Filter>TnbLib\SectPx\Registry\Scatter</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Parent\Adaptor\SectPx_ParentAdaptorI.hxx">
+      <Filter>TnbLib\SectPx\Entities\Parent\Adaptor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">
@@ -1258,6 +1261,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Makers\TopoProfile\SectPx_TopoProfileMakerIO.cxx">
       <Filter>TnbLib\SectPx\Makers\TopoProfile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_ParIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Par</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

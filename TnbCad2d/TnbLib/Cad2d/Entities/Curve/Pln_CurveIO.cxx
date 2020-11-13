@@ -8,6 +8,9 @@
 
 DECLARE_SAVE_IMP(tnbLib::Pln_Curve)
 {
+	ar & boost::serialization::base_object<Global_Indexed>(*this);
+	ar & boost::serialization::base_object<Global_Named>(*this);
+
 	std::stringstream st;
 	GeomTools::Write(Geometry(), st);
 
@@ -26,6 +29,9 @@ namespace tnbLib
 
 DECLARE_LOAD_IMP(tnbLib::Pln_Curve)
 {
+	ar & boost::serialization::base_object<Global_Indexed>(*this);
+	ar & boost::serialization::base_object<Global_Named>(*this);
+
 	std::string s;
 	ar >> s;
 
