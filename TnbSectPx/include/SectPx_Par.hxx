@@ -65,6 +65,7 @@ namespace tnbLib
 }
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Par);
+//BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Par);
 
 #include <SectPx_ParI.hxx>
 

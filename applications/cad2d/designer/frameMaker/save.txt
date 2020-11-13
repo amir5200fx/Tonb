@@ -1,0 +1,2 @@
+22 serialization::archive 17 0 1 1 23 tnbLib::SectPx_FixedPar 1 0
+0 0 0 0 0 0 0 0 0 0 0 12 0 0 0 0 12 my parameter 0 0 0 0 0 0 0 0 1.00000000000000006e-01 0

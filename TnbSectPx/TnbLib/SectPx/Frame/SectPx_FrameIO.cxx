@@ -23,12 +23,14 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_Frame::EntityMaker)
 
 DECLARE_SAVE_IMP(tnbLib::SectPx_Frame)
 {
+	ar & boost::serialization::base_object<SectPx_Entity>(*this);
 	ar & theRegistry_;
 	ar & theMakers_;
 }
 
 DECLARE_LOAD_IMP(tnbLib::SectPx_Frame)
 {
+	ar & boost::serialization::base_object<SectPx_Entity>(*this);
 	ar & theRegistry_;
 	ar & theMakers_;
 }

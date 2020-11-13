@@ -4,6 +4,7 @@
 
 #include <SectPx_Entity.hxx>
 #include <SectPx_Module.hxx>
+#include <SectPx_Registry.hxx>
 
 namespace tnbLib
 {
@@ -20,7 +21,16 @@ namespace tnbLib
 		std::shared_ptr<SectPx_Registry> theRegistry_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		//DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<SectPx_Entity>(*this);
+			ar & theRegistry_;
+		}
 
 
 	protected:
