@@ -13,7 +13,7 @@ namespace tnbLib
 		Entity2d_Triangulation;
 
 	template<>
-	void Entity2d_Triangulation::ExportToPlt(OFstream& File) const;
+	TnbGeo_EXPORT void Entity2d_Triangulation::ExportToPlt(OFstream& File) const;
 }
 
 #endif // !_Entity2d_Triangulation_Header

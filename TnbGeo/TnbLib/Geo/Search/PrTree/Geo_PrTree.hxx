@@ -35,13 +35,13 @@ namespace tnbLib
 		Geo_Octant_Bwd_NE
 	};
 
-	Geo_Quadrant CalcQuadrant
+	TnbGeo_EXPORT Geo_Quadrant CalcQuadrant
 	(
 		const Pnt2d& theCoord,
 		const Pnt2d& theCentre
 	);
 
-	Geo_Octant CalcOctant
+	TnbGeo_EXPORT Geo_Octant CalcOctant
 	(
 		const Pnt3d& theCoord,
 		const Pnt3d& theCentre

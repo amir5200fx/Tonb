@@ -86,7 +86,7 @@ namespace tnbLib
 				return theValue1_;
 			}
 
-			Standard_Real Value(const Standard_Real x) const override;
+			TnbGeo_EXPORT Standard_Real Value(const Standard_Real x) const override;
 		};
 	}
 }

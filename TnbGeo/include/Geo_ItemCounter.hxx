@@ -54,17 +54,17 @@ namespace tnbLib
 			return theItems_;
 		}
 
-		void ReSize();
+		TnbGeo_EXPORT void ReSize();
 
 	public:
 
-		static const Standard_Integer DEFAULT_SIZE;
+		static TnbGeo_EXPORT const Standard_Integer DEFAULT_SIZE;
 
-		Geo_ItemCounter();
+		TnbGeo_EXPORT Geo_ItemCounter();
 
-		Standard_Integer RetrieveIndex();
+		TnbGeo_EXPORT Standard_Integer RetrieveIndex();
 
-		void ReturnToCounter(const Standard_Integer theIndex);
+		TnbGeo_EXPORT void ReturnToCounter(const Standard_Integer theIndex);
 
 	};
 }

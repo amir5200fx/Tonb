@@ -38,7 +38,7 @@ namespace tnbLib
 
 		Standard_Boolean CloseTail = Standard_False;
 
-		void SetDefaults();
+		TnbGeo_EXPORT void SetDefaults();
 
 		auto& UpperRef()
 		{
@@ -50,27 +50,27 @@ namespace tnbLib
 			return theLower_;
 		}
 
-		static std::vector<Standard_Real> 
+		static TnbGeo_EXPORT std::vector<Standard_Real>
 			CosDistb
 			(
 				const Standard_Integer n
 			);
 
-		static std::vector<Standard_Real>
+		static TnbGeo_EXPORT std::vector<Standard_Real>
 			CalcCamberOffsets
 			(
 				const std::vector<Standard_Real>& x, 
 				const Parameter& pars
 			);
 
-		static std::vector<Standard_Real> 
+		static TnbGeo_EXPORT std::vector<Standard_Real>
 			CalcThicknessDistb
 			(
 				const std::vector<Standard_Real>& x, 
 				const Parameter& pars
 			);
 
-		static std::vector<Standard_Real> 
+		static TnbGeo_EXPORT std::vector<Standard_Real>
 			CalcCamberTangentDistb
 			(
 				const std::vector<Standard_Real>& x,
@@ -112,7 +112,7 @@ namespace tnbLib
 			return theParameters_;
 		}
 
-		void Perform();
+		TnbGeo_EXPORT void Perform();
 
 		void SetCloseTail(const Standard_Boolean close)
 		{

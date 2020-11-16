@@ -3,6 +3,7 @@
 #define _Entity3d_TetrahedralizationTools_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Geo_Module.hxx>
 
 #include <utility>
 
@@ -22,9 +23,9 @@ namespace tnbLib
 
 		//- Static functions and operators
 
-		static edgeConnectivity EdgeIndices(const Standard_Integer theIndex);
+		static TnbGeo_EXPORT edgeConnectivity EdgeIndices(const Standard_Integer theIndex);
 
-		static facetConnectivity FacetIndices(const Standard_Integer theIndex);
+		static TnbGeo_EXPORT facetConnectivity FacetIndices(const Standard_Integer theIndex);
 
 		
 	};

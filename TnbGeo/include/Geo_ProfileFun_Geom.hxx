@@ -26,21 +26,21 @@ namespace tnbLib
 
 		public:
 
-			ProfileFun_Geom
+			TnbGeo_EXPORT ProfileFun_Geom
 			(
 				const Handle(Geom2d_Curve)& theCurve,
 				const Standard_Real theLower,
 				const Standard_Real theUpper
 			);
 
-			ProfileFun_Geom
+			TnbGeo_EXPORT ProfileFun_Geom
 			(
 				Handle(Geom2d_Curve)&& theCurve, 
 				const Standard_Real theLower, 
 				const Standard_Real theUpper
 			);
 
-			ProfileFun_Geom
+			TnbGeo_EXPORT ProfileFun_Geom
 			(
 				const Standard_Integer theIndex, 
 				const Handle(Geom2d_Curve)& theCurve, 
@@ -48,7 +48,7 @@ namespace tnbLib
 				const Standard_Real theUpper
 			);
 
-			ProfileFun_Geom
+			TnbGeo_EXPORT ProfileFun_Geom
 			(
 				const Standard_Integer theIndex,
 				Handle(Geom2d_Curve)&& theCurve,
@@ -56,7 +56,7 @@ namespace tnbLib
 				const Standard_Real theUpper
 			);
 
-			ProfileFun_Geom
+			TnbGeo_EXPORT ProfileFun_Geom
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
@@ -65,7 +65,7 @@ namespace tnbLib
 				const Standard_Real theUpper
 			);
 
-			ProfileFun_Geom
+			TnbGeo_EXPORT ProfileFun_Geom
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
@@ -80,7 +80,7 @@ namespace tnbLib
 				return theCurve_;
 			}
 
-			Standard_Real Value(const Standard_Real x) const override;
+			TnbGeo_EXPORT Standard_Real Value(const Standard_Real x) const override;
 
 
 		};

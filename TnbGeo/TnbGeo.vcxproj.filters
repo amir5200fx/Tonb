@@ -403,6 +403,12 @@
     <Filter Include="TnbLib\Geo\Serialization">
       <UniqueIdentifier>{6bf72750-4ab4-404c-a1fd-98200f3a8fa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\IO">
+      <UniqueIdentifier>{9f29bbd2-178b-4a11-8441-64d185cbc8a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\IO\Tecplot">
+      <UniqueIdentifier>{dcd33330-1976-4c9e-abd7-ec29157257a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -900,6 +906,12 @@
     <ClInclude Include="TnbLib\Geo\PriorityList\Geo_PriorityListI.hxx">
       <Filter>TnbLib\Geo\PriorityList</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\IO\TecPlot\TecPlot.hxx">
+      <Filter>TnbLib\IO\Tecplot</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\IO\TecPlot\TecPlotI.hxx">
+      <Filter>TnbLib\IO\Tecplot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1105,6 +1117,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_GeomIO.cxx">
       <Filter>TnbLib\Geo\ProfileFun\Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\TecPlot\TecPlot.cxx">
+      <Filter>TnbLib\IO\Tecplot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

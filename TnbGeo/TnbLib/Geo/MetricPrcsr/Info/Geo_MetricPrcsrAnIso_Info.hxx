@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Geo_Module.hxx>
 
 #include <memory>
 
@@ -24,7 +25,7 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer DEFAULT_NB_SAMPLES;
+		static TnbGeo_EXPORT const Standard_Integer DEFAULT_NB_SAMPLES;
 
 		Geo_MetricPrcsrAnIso_Info()
 			: theNbSamples_(DEFAULT_NB_SAMPLES)

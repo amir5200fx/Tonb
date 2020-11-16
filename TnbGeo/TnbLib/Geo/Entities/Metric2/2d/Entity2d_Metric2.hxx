@@ -138,7 +138,7 @@ namespace tnbLib
 
 		// static functions and operators
 
-		static Entity2d_Metric1 ConvertTo1
+		static TnbGeo_EXPORT Entity2d_Metric1 ConvertTo1
 		(
 			const Entity2d_Metric2& theMetric
 		);

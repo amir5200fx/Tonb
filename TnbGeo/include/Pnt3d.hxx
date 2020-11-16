@@ -6,7 +6,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <Geo_Module.hxx>
-#include <Global_Serialization.hxx>
+#include <Geo_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -15,13 +15,13 @@ namespace tnbLib
 	class Pnt3d;
 	class OFstream;
 
-	std::ostream& operator<<(std::ostream& os, const Pnt3d&);
-	std::istream& operator>>(std::istream& is, Pnt3d&);
+	TnbGeo_EXPORT std::ostream& operator<<(std::ostream& os, const Pnt3d&);
+	TnbGeo_EXPORT std::istream& operator>>(std::istream& is, Pnt3d&);
 
-	Ostream& operator<<(Ostream& os, const Pnt3d&);
-	Istream& operator>>(Istream& is, Pnt3d&);
+	TnbGeo_EXPORT Ostream& operator<<(Ostream& os, const Pnt3d&);
+	TnbGeo_EXPORT Istream& operator>>(Istream& is, Pnt3d&);
 
-	Pnt3d operator-(const Pnt3d& P1, const Pnt3d& P2);
+	TnbGeo_EXPORT Pnt3d operator-(const Pnt3d& P1, const Pnt3d& P2);
 
 	class Pnt3d
 		: public gp_Pnt
@@ -29,15 +29,24 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<gp_Pnt>(*this);
+		}
+
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 	public:
 
 		typedef Pnt3d ptType;
 
 		//- Static members
-		static const int nbCmpts;
-		static const Pnt3d null;
+		static TnbGeo_EXPORT const int nbCmpts;
+		static TnbGeo_EXPORT const Pnt3d null;
 
 		enum
 		{
@@ -233,9 +242,9 @@ namespace tnbLib
 
 		//- IO functions and operators
 
-		void Print(std::ostream& os = std::cout) const;
+		TnbGeo_EXPORT void Print(std::ostream& os = std::cout) const;
 
-		void AddToPlt(OFstream& theFile) const;
+		TnbGeo_EXPORT void AddToPlt(OFstream& theFile) const;
 	};
 }
 

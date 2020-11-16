@@ -124,11 +124,11 @@ namespace tnbLib
 
 		void Reverse();
 
-		void Smoothing(const Standard_Real Omega, const Standard_Integer NbIterations);
+		TnbGeo_EXPORT void Smoothing(const Standard_Real Omega, const Standard_Integer NbIterations);
 
-		void ExportToPlt(std::fstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(std::fstream& File) const;
 
-		void ExportToPlt(OFstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(OFstream& File) const;
 	};
 }
 

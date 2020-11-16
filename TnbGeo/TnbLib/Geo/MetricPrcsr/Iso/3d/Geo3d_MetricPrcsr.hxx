@@ -11,7 +11,7 @@ namespace tnbLib
 		Geo3d_MetricPrcsr;
 
 	template<>
-	Standard_Real Geo3d_MetricPrcsr::CalcUnitDistance(const Pnt3d& theP0, const Pnt3d& theP1) const;
+	TnbGeo_EXPORT Standard_Real Geo3d_MetricPrcsr::CalcUnitDistance(const Pnt3d& theP0, const Pnt3d& theP1) const;
 }
 
 #endif // !_Geo3d_MetricPrcsr_Header

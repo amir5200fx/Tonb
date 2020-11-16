@@ -23,13 +23,13 @@ void tnbLib::Pnt2d::AddToPlt(OFstream & theFile) const
 namespace tnbLib
 {
 
-	std::ostream & operator<<(std::ostream & os, const Pnt2d & P)
+	TnbGeo_EXPORT std::ostream & operator<<(std::ostream & os, const Pnt2d & P)
 	{
 		os << P.X() << ",  " << P.Y();
 		return os;
 	}
 
-	std::istream & operator>>(std::istream & is, Pnt2d & P)
+	TnbGeo_EXPORT std::istream & operator>>(std::istream & is, Pnt2d & P)
 	{
 		Standard_Real x, y;
 		std::string comma;
@@ -62,7 +62,7 @@ namespace tnbLib
 		return is;
 	}
 
-	Ostream & operator<<(Ostream & os, const Pnt2d & P)
+	TnbGeo_EXPORT Ostream & operator<<(Ostream & os, const Pnt2d & P)
 	{
 		os << token::BEGIN_LIST;
 		os << P.X() << token::COMMA << token::SPACE << P.Y();
@@ -73,7 +73,7 @@ namespace tnbLib
 		return os;
 	}
 
-	Istream & operator>>(Istream & is, Pnt2d & P)
+	TnbGeo_EXPORT Istream & operator>>(Istream & is, Pnt2d & P)
 	{
 		Standard_Real x, y;
 		string comma;
@@ -91,14 +91,14 @@ namespace tnbLib
 	}
 }
 
-DECLARE_SAVE_IMP(tnbLib::Pnt2d)
-{
-	ar << X();
-	ar << Y();
-}
-
-DECLARE_LOAD_IMP(tnbLib::Pnt2d)
-{
-	ar >> X();
-	ar >> Y();
-}
+//DECLARE_SAVE_IMP(tnbLib::Pnt2d)
+//{
+//	ar << X();
+//	ar << Y();
+//}
+//
+//DECLARE_LOAD_IMP(tnbLib::Pnt2d)
+//{
+//	ar >> X();
+//	ar >> Y();
+//}

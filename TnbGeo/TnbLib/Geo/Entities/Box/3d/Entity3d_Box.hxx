@@ -43,7 +43,7 @@ namespace tnbLib
 
 	template<>
 	template<>
-	Entity3d_Box Entity3d_Box::SubDivide<Box3d_SubDivideAlgorithm>
+	TnbGeo_EXPORT Entity3d_Box Entity3d_Box::SubDivide<Box3d_SubDivideAlgorithm>
 		(
 			const Box3d_SubDivideAlgorithm theAlg
 			) const;

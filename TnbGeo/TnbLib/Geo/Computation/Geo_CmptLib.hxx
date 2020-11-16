@@ -4,6 +4,7 @@
 
 #include <Pnt2d.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Geo_Module.hxx>
 
 #include <vector>
 
@@ -15,52 +16,52 @@ namespace tnbLib
 
 	public:
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			Area
 			(
 				const Entity2d_Polygon& thePoly
 			);
 
-		static Standard_Real
+		static TnbGeo_EXPORT Standard_Real
 			CxProductArea
 			(
 				const Entity2d_Polygon& thePoly
 			);
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			CyProductArea
 			(
 				const Entity2d_Polygon& thePoly
 			);
 
-		static Pnt2d 
+		static TnbGeo_EXPORT Pnt2d
 			Centre
 			(
 				const Entity2d_Polygon& thePoly
 			);
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			Ix
 			(
 				const Entity2d_Polygon& thePoly,
 				const Standard_Real y0
 			);
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			Iy
 			(
 				const Entity2d_Polygon& thePoly,
 				const Standard_Real x0
 			);
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			Ixy
 			(
 				const Entity2d_Polygon& thePoly,
 				const Pnt2d& theC
 			);
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			Ixi
 			(
 				const Standard_Real IxiBar, 
@@ -68,14 +69,14 @@ namespace tnbLib
 				const Standard_Real dxi
 			);
 
-		static Standard_Real
+		static TnbGeo_EXPORT Standard_Real
 			Gyradius
 			(
 				const Standard_Real Ix,
 				const Standard_Real theArea
 			);
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			Ixi
 			(
 				const std::vector<Standard_Real>& ix,
@@ -83,7 +84,7 @@ namespace tnbLib
 				const std::vector<Standard_Real>& dx
 			);
 
-		static Standard_Real 
+		static TnbGeo_EXPORT Standard_Real
 			Ixy
 			(
 				const Standard_Real IxyBar,

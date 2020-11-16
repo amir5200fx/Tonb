@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Geo_Module.hxx>
 
 namespace tnbLib
 {
@@ -23,13 +24,13 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_APPROX;
-		static const Standard_Real DEFAULT_ANGLE;
-		static const Standard_Real DEFAULT_MIN_SIZE;
+		static TnbGeo_EXPORT const Standard_Real DEFAULT_APPROX;
+		static TnbGeo_EXPORT const Standard_Real DEFAULT_ANGLE;
+		static TnbGeo_EXPORT const Standard_Real DEFAULT_MIN_SIZE;
 
-		static const Standard_Integer DEFAULT_MAX_NB_SUBDIVIDE;
-		static const Standard_Integer DEFAULT_INIT_NB_SUBDIVIDE;
-		static const Standard_Integer DEFAULT_NB_SAMPLES;
+		static TnbGeo_EXPORT const Standard_Integer DEFAULT_MAX_NB_SUBDIVIDE;
+		static TnbGeo_EXPORT const Standard_Integer DEFAULT_INIT_NB_SUBDIVIDE;
+		static TnbGeo_EXPORT const Standard_Integer DEFAULT_NB_SAMPLES;
 
 		Geo_ApprxCurve_Info()
 			: theApprox_(DEFAULT_APPROX)

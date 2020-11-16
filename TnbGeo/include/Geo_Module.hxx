@@ -2,8 +2,6 @@
 #ifndef _Geo_Module_Header
 #define _Geo_Module_Header
 
-#define TnbGeo_STATIC_DEFINE
-
 #ifdef TnbGeo_STATIC_DEFINE
 #define TnbGeo_EXPORT
 #else

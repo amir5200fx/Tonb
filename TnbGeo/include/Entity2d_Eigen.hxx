@@ -3,6 +3,7 @@
 #define _Entity2d_Eigen_Header
 
 #include <Global_Done.hxx>
+#include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
 #include <armadillo.h>
 
@@ -91,17 +92,17 @@ namespace tnbLib
 			return theLamda2_;
 		}
 
-		void CalcEigen(const Entity2d_Metric1& M);
+		TnbGeo_EXPORT void CalcEigen(const Entity2d_Metric1& M);
 
-		void CalcEigen(const arma::mat22& M);
+		TnbGeo_EXPORT void CalcEigen(const arma::mat22& M);
 
-		void CalcGenEigen(const Entity2d_Metric1& A, const Entity2d_Metric1& B);
+		TnbGeo_EXPORT void CalcGenEigen(const Entity2d_Metric1& A, const Entity2d_Metric1& B);
 
-		void ExportToPlt(fstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(fstream& File) const;
 
-		void ExportToPlt(const Pnt2d& Centre, OFstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(const Pnt2d& Centre, OFstream& File) const;
 
-		void Print(Standard_OStream& ostream = cout) const;
+		TnbGeo_EXPORT void Print(Standard_OStream& ostream = cout) const;
 
 		//- Static functions and operators
 

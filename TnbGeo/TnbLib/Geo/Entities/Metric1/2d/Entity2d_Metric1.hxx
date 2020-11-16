@@ -3,6 +3,7 @@
 #define _Entity2d_Metric1_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
 #include <armadillo.h>
 
@@ -39,7 +40,7 @@ namespace tnbLib
 			, theC_(C)
 		{}
 
-		Entity2d_Metric1
+		TnbGeo_EXPORT Entity2d_Metric1
 		(
 			const Standard_Real Lamda1,
 			const Standard_Real Lamda2,
@@ -47,9 +48,9 @@ namespace tnbLib
 			const Pnt2d& E2
 		);
 
-		metric& operator*=(const Standard_Real Scalar);
+		TnbGeo_EXPORT metric& operator*=(const Standard_Real Scalar);
 
-		arma::mat22 Arma() const;
+		TnbGeo_EXPORT arma::mat22 Arma() const;
 
 		Standard_Real Determinant() const
 		{
@@ -110,15 +111,15 @@ namespace tnbLib
 			return std::move(copy);
 		}
 
-		metric SQRT() const;
+		TnbGeo_EXPORT metric SQRT() const;
 
-		void Inverse();
+		TnbGeo_EXPORT void Inverse();
 
-		void Print(Standard_OStream& Ostream = cout) const;
+		TnbGeo_EXPORT void Print(Standard_OStream& Ostream = cout) const;
 
-		void ExportToPlt(const Pnt2d& Centre, fstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(const Pnt2d& Centre, fstream& File) const;
 
-		void ExportToPlt(fstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(fstream& File) const;
 
 		friend Entity2d_Metric1 operator*(const Entity2d_Metric1& Metric, const Standard_Real Scalar);
 		friend Entity2d_Metric1 operator*(const Standard_Real Scalar, const Entity2d_Metric1& Metric);
@@ -126,19 +127,19 @@ namespace tnbLib
 
 		//- Static functions 
 
-		static metric Avg(const metric& M1, const metric& M2);
+		static TnbGeo_EXPORT metric Avg(const metric& M1, const metric& M2);
 
-		static metric IntersectionSR(const metric& M1, const metric& M2);
+		static TnbGeo_EXPORT metric IntersectionSR(const metric& M1, const metric& M2);
 
-		static metric IntersectionPD(const metric& M1, const metric& M2);
+		static TnbGeo_EXPORT metric IntersectionPD(const metric& M1, const metric& M2);
 
-		static metric UnionSR(const metric& M1, const metric& M2);
+		static TnbGeo_EXPORT metric UnionSR(const metric& M1, const metric& M2);
 
-		static metric IntersectionPD_Inverse(const metric& M1, const metric& M2);
+		static TnbGeo_EXPORT metric IntersectionPD_Inverse(const metric& M1, const metric& M2);
 
-		static metric InterpolationIM(const Standard_Real t, const metric& M1, const metric& M2);
+		static TnbGeo_EXPORT metric InterpolationIM(const Standard_Real t, const metric& M1, const metric& M2);
 
-		static metric InterpolationIM
+		static TnbGeo_EXPORT metric InterpolationIM
 		(
 			const Standard_Real c1,
 			const Standard_Real c2, 
@@ -148,7 +149,7 @@ namespace tnbLib
 			const metric& M3
 		);
 
-		static metric Interpolation
+		static TnbGeo_EXPORT metric Interpolation
 		(
 			const Standard_Real c1,
 			const Standard_Real c2,

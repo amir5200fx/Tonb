@@ -17,13 +17,13 @@ void tnbLib::Pnt3d::AddToPlt(OFstream & theFile) const
 namespace tnbLib
 {
 
-	std::ostream & operator<<(std::ostream & os, const Pnt3d & P)
+	TnbGeo_EXPORT std::ostream & operator<<(std::ostream & os, const Pnt3d & P)
 	{
 		os << P.X() << ",  " << P.Y() << ",  " << P.Z();
 		return os;
 	}
 
-	std::istream & tnbLib::operator>>(std::istream & is, Pnt3d & P)
+	TnbGeo_EXPORT std::istream & tnbLib::operator>>(std::istream & is, Pnt3d & P)
 	{
 		Standard_Real x, y, z;
 		std::string comma;
@@ -72,7 +72,7 @@ namespace tnbLib
 		return is;
 	}
 
-	Ostream & operator<<(Ostream & os, const Pnt3d & P)
+	TnbGeo_EXPORT Ostream & operator<<(Ostream & os, const Pnt3d & P)
 	{
 		os << token::BEGIN_LIST;
 		os
@@ -90,7 +90,7 @@ namespace tnbLib
 		return os;
 	}
 
-	Istream & tnbLib::operator>>(Istream & is, Pnt3d & P)
+	TnbGeo_EXPORT Istream & tnbLib::operator>>(Istream & is, Pnt3d & P)
 	{
 		Standard_Real x, y, z;
 		string comma;
@@ -105,17 +105,17 @@ namespace tnbLib
 	}
 }
 
-DECLARE_SAVE_IMP(tnbLib::Pnt3d)
-{
-	ar << X();
-	ar << Y();
-	ar << Z();
-}
-
-DECLARE_LOAD_IMP(tnbLib::Pnt3d)
-{
-	ar >> X();
-	ar >> Y();
-	ar >> Z();
-}
+//DECLARE_SAVE_IMP(tnbLib::Pnt3d)
+//{
+//	ar << X();
+//	ar << Y();
+//	ar << Z();
+//}
+//
+//DECLARE_LOAD_IMP(tnbLib::Pnt3d)
+//{
+//	ar >> X();
+//	ar >> Y();
+//	ar >> Z();
+//}
 

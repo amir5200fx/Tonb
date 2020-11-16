@@ -11,7 +11,7 @@ namespace tnbLib
 	typedef Entity_Polygon<Pnt2d> Entity2d_Polygon;
 
 	template<>
-	void Entity2d_Polygon::ExportToPlt(std::fstream& File) const;
+	TnbGeo_EXPORT void Entity2d_Polygon::ExportToPlt(std::fstream& File) const;
 
 }
 

@@ -11,7 +11,7 @@ namespace tnbLib
 		Entity2d_TriangulationN;
 
 	template<>
-	void Entity2d_TriangulationN::Swap
+	TnbGeo_EXPORT void Entity2d_TriangulationN::Swap
 	(
 		const Standard_Integer theElement,
 		const Standard_Integer theEdge
@@ -42,7 +42,7 @@ namespace tnbLib
 			return std::move(t);
 		}
 
-		static SwapBox GetSwapBox
+		static TnbGeo_EXPORT SwapBox GetSwapBox
 		(
 			const std::vector<connectivity::triple>& Vtx,
 			const std::vector<connectivity::triple>& Neighb,
