@@ -9,6 +9,7 @@
 #include <SectPx_UniKnots.hxx>
 #include <SectPx_ProfileMaker.hxx>
 #include <SectPx_TopoProfile.hxx>
+#include <SectPx_Cloud.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -545,14 +546,21 @@ namespace tnbLib
 	{
 		mod->add(chaiscript::fun([](const parMaker_t& m, const fieldFun_t& f)-> auto {auto t = createFree(m, f); return std::move(t); }), "createFree");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, const fieldFun_t& f)-> auto {auto t = createFree(m, name, f); return std::move(t); }), "createFree");
-		mod->add(chaiscript::fun([](const parMaker_t& m, const double x)-> auto {auto t = createFixed(m, x); }), "createFixed");
+		mod->add(chaiscript::fun([](const parMaker_t& m, const double x)-> auto {auto t = createFixed(m, x); return std::move(t); }), "createFixed");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, const double x)-> auto {auto t = createFixed(m, name, x); return std::move(t); }), "createFixed");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const double x)-> auto {auto t = createConstant(m, x); return std::move(t); }), "createConstant");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, const double x)-> auto {auto t = createConstant(m, name, x); return std::move(t); }), "createConstant");
-		//mod->add(chaiscript::fun([](const parMaker_t& m, const par_t& p)-> void {removePar(m, p); }), "remove");
+		mod->add(chaiscript::fun([](const parMaker_t& m, const par_t& p)-> void {removePar(m, p); }), "remove");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const fixed_t& p)-> void {removePar(m, p); }), "remove");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const free_t& p)-> void {removePar(m, p); }), "remove");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const const_t& p)-> void {removePar(m, p); }), "remove");
+
+		mod->add(chaiscript::fun([](const par_t& p, const std::string& name)-> void {p->SetName(name); }), "setName");
+		
+		mod->add(chaiscript::fun([](const par_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
+		mod->add(chaiscript::fun([](const fixed_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
+		mod->add(chaiscript::fun([](const free_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
+		mod->add(chaiscript::fun([](const const_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
 	}
 
 	void setField(const module_t& mod)
@@ -563,6 +571,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const fieldMaker_t& m, const coord_t& pt)-> auto {auto t = createRead_y(m, pt); return std::move(t); }), "createReadY");
 		mod->add(chaiscript::fun([](const fieldMaker_t& m, const fieldFun_t& f0, const fieldFun_t& f1, const par_t& t)-> auto {auto tt = createLinearForm(m, f0, f1, t); return std::move(tt); }), "createLinearForm");
 		mod->add(chaiscript::fun([](const fieldMaker_t& m, const std::string& ex)-> auto {auto t = createExpr(m, ex); return std::move(t); }), "createExpr");
+
+		mod->add(chaiscript::fun([](const fieldFun_t& f, const std::string& name)-> void {f->SetName(name); }), "setName");
 	}
 
 	void setPoints(const module_t& mod)
@@ -576,6 +586,8 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const pntMaker_t& m, const geoMap_t& t)-> auto {auto tt = createField(m, t); return std::move(tt); }), "createField");
 		mod->add(chaiscript::fun([](const pntMaker_t& m, const mastPnt_t& p)-> auto {auto t = createEmpty(m, p); return std::move(t); }), "createEmpty");
+
+		mod->add(chaiscript::fun([](const pnt_t& p, const std::string& name)-> void {p->SetName(name); }), "setName");
 	}
 
 	void setGeometricMaps(const module_t& mod)
@@ -590,6 +602,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> const auto& {return getParameterMaker(); }), "getParameterMaker");
 		mod->add(chaiscript::fun([]()-> const auto& {return getFieldFunMaker(); }), "getFieldFunMaker");
 		mod->add(chaiscript::fun([]()-> const auto& {return getRegistry(); }), "getRegistry");
+		mod->add(chaiscript::fun([]()-> const auto& {return getPointMaker(); }), "getPointMaker");
+		mod->add(chaiscript::fun([]()-> const auto& {return getCmpProfileMaker(); }), "getCmpProfileMaker");
 
 		mod->add(chaiscript::fun([](const fixed_t& p)-> auto {return getPar(p); }), "getParameter");
 		mod->add(chaiscript::fun([](const pnt_t& p)-> auto {auto t = getMaster(p); return std::move(t); }), "getMaster");
@@ -601,6 +615,11 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> void {printFrame(); }), "printFrame");
 
 		mod->add(chaiscript::fun([]()-> auto {return nbProfiles(); }), "nbProfiles");
+
+		//- profile makers 
+
+		mod->add(chaiscript::fun([](const cmpPrfMaker_t& m, const pnt_t& p0, const pnt_t& p1)-> auto {auto t = createCustomProfile(m, p0, p1); return std::move(t); }), "createCustom");
+		mod->add(chaiscript::fun([](const cmpPrfMaker_t& m, const cloud_t& c)-> auto {auto t = createInterplProfile(m, c); return std::move(t); }), "createInterpl");
 
 		//- drawing
 		mod->add(chaiscript::fun([](const std::string& s)->void {drawPlt(s); }), "exportToPlt");
@@ -673,6 +692,7 @@ int main(int argc, char *argv[])
 			setTypes(mod);
 			setGlobals(mod);
 			setParameters(mod);
+			setPoints(mod);
 			setField(mod);
 
 			chai.add(mod);
