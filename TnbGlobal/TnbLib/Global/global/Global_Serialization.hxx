@@ -2,6 +2,8 @@
 #ifndef _Global_Serialization_Header
 #define _Global_Serialization_Header
 
+#include <Standard_TypeDef.hxx>
+
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/split_member.hpp>
@@ -21,22 +23,24 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 
-#include <boost/archive/polymorphic_binary_iarchive.hpp>
-#include <boost/archive/polymorphic_binary_oarchive.hpp>
-//#include <boost/archive/polymorphic_text_iarchive.hpp>
-//#include <boost/archive/polymorphic_text_oarchive.hpp>
+#include <boost/archive/polymorphic_iarchive.hpp>
+#include <boost/archive/polymorphic_oarchive.hpp>
 //#include <boost/archive/polymorphic_iarchive.hpp>
 //#include <boost/archive/polymorphic_oarchive.hpp>
 
 #include <boost/archive/impl/archive_serializer_map.ipp>
 
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
 #define TNB_iARCH_TYPE boost::archive::polymorphic_iarchive
 #define TNB_oARCH_TYPE boost::archive::polymorphic_oarchive
-#define TnbGlobal_EXPORT
 
 #define DECLARE_SAVE_LOAD_HEADER(Export)	 														\
-	template<class Archive> void save(Archive&, const unsigned int) const {}						\
-	template<class Archive> void load(Archive&, const unsigned int) {}								\
+	template<class Archive> void save(Archive&, const unsigned int) const 							\
+	{ FatalErrorIn(FunctionSIG) <<"not supposed to be called!"<< abort(FatalError); }				\
+	template<class Archive> void load(Archive&, const unsigned int) 								\
+	{ FatalErrorIn(FunctionSIG) <<"not supposed to be called!"<< abort(FatalError); }				\
 	friend class boost::serialization::access;														\
 	template<>																						\
 	void Export save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE & ar, const unsigned int version) const;		\
@@ -72,9 +76,22 @@ namespace boost
 			ar >> st;
 			g = std::move(st);
 		}
+
+		template<class Archive>
+		void save(Archive& ar, const Standard_Real& x, const unsigned int file_version)
+		{
+			ar << x;
+		}
+
+		template<class Archive>
+		void load(Archive& ar, Standard_Real& x, const unsigned int file_version)
+		{
+			ar >> x;
+		}
 	}
 }
 
 BOOST_SERIALIZATION_SPLIT_FREE(tnbLib::word)
+BOOST_SERIALIZATION_SPLIT_FREE(Standard_Real)
 
 #endif // !_Global_Serialization_Header

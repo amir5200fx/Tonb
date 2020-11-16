@@ -119,7 +119,7 @@ void tnbLib::ConvError::abort()
 namespace tnbLib
 {
 
-	Ostream & operator<<(Ostream & os, const ConvError & fErr)
+	TnbGlobal_EXPORT Ostream & operator<<(Ostream & os, const ConvError & fErr)
 	{
 		os << endl
 			<< fErr.title().c_str() << endl

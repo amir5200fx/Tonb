@@ -5,6 +5,8 @@
 #include <thread>
 #include <chrono>
 
+#include <Global_Module.hxx>
+
 namespace tnbLib
 {
 
@@ -29,13 +31,13 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		void EstimateDuration();
+		TnbGlobal_EXPORT void EstimateDuration();
 
 	public:
 
-		Global_Timer();
+		TnbGlobal_EXPORT Global_Timer();
 
-		~Global_Timer();
+		TnbGlobal_EXPORT ~Global_Timer();
 
 		void SetInfo(const Global_TimerInfo theInfo)
 		{

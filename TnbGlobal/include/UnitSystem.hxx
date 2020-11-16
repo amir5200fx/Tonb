@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <scalar.hxx>
+#include <Global_Module.hxx>
 
 /* A macro to define a function which convert a unit*/
 #define CONVERT_UNIT(Unit)																			\
@@ -48,7 +49,7 @@ namespace tnbLib
 		UnitSystem_Length_yd
 	};
 
-	string toString(const UnitSystem_Length);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Length);
 
 	enum UnitSystem_Mass
 	{
@@ -62,7 +63,7 @@ namespace tnbLib
 		UnitSystem_Mass_oz
 	};
 
-	string toString(const UnitSystem_Mass);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Mass);
 
 	enum UnitSystem_Pressure
 	{
@@ -74,7 +75,7 @@ namespace tnbLib
 		UnitSystem_Pressure_psi
 	};
 
-	string toString(const UnitSystem_Pressure);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Pressure);
 
 	enum UnitSystem_Velocity
 	{
@@ -86,7 +87,7 @@ namespace tnbLib
 		UnitSystem_Velocity_kn   // Knots
 	};
 
-	string toString(const UnitSystem_Velocity);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Velocity);
 
 	enum UnitSystem_Acceleration
 	{
@@ -94,7 +95,7 @@ namespace tnbLib
 		UnitSystem_Acceleration_ftPerSecPerSec
 	};
 
-	string toString(const UnitSystem_Acceleration);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Acceleration);
 
 	enum UnitSystem_Density
 	{
@@ -104,7 +105,7 @@ namespace tnbLib
 		UnitSystem_Density_SlugPerFtQubic
 	};
 
-	string toString(const UnitSystem_Density);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Density);
 
 	enum UnitSystem_Power
 	{
@@ -116,7 +117,7 @@ namespace tnbLib
 		UnitSystem_Power_hp
 	};
 
-	string toString(const UnitSystem_Power);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Power);
 
 	enum UnitSystem_Temperature
 	{
@@ -126,7 +127,7 @@ namespace tnbLib
 		UnitSystem_Temperature_R
 	};
 
-	string toString(const UnitSystem_Temperature);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Temperature);
 
 	enum UnitSystem_Force
 	{
@@ -140,7 +141,7 @@ namespace tnbLib
 		UnitSystem_Force_lbftPerSecPerSec
 	};
 
-	string toString(const UnitSystem_Force);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Force);
 
 	enum UnitSystem_Angle
 	{
@@ -149,7 +150,7 @@ namespace tnbLib
 		UnitSystem_Angle_grad
 	};
 
-	string toString(const UnitSystem_Angle);
+	TnbGlobal_EXPORT string toString(const UnitSystem_Angle);
 
 	enum UnitSystem_DynViscosity
 	{
@@ -160,7 +161,7 @@ namespace tnbLib
 		UnitSystem_DynViscosity_lbPerFtPerSec
 	};
 
-	string toString(const UnitSystem_DynViscosity);
+	TnbGlobal_EXPORT string toString(const UnitSystem_DynViscosity);
 
 	enum UnitSystem_KinViscosity
 	{
@@ -168,7 +169,7 @@ namespace tnbLib
 		UnitSystem_KinViscosity_squareFtPerSec
 	};
 
-	string toString(const UnitSystem_KinViscosity);
+	TnbGlobal_EXPORT string toString(const UnitSystem_KinViscosity);
 
 	enum UnitSystem_DimenLess
 	{
@@ -217,480 +218,480 @@ namespace tnbLib
 		struct Length {};
 
 
-		template<> struct Length<0, 0> { static const scalar value; };
-		template<> struct Length<0, 1> { static const scalar value; };
-		template<> struct Length<0, 2> { static const scalar value; };
-		template<> struct Length<0, 3> { static const scalar value; };
-		template<> struct Length<0, 4> { static const scalar value; };
-		template<> struct Length<0, 5> { static const scalar value; };
-		template<> struct Length<0, 6> { static const scalar value; };
-		template<> struct Length<0, 7> { static const scalar value; };
-		template<> struct Length<0, 8> { static const scalar value; };
+		template<> struct Length<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<0, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<1, 0> { static const scalar value; };
-		template<> struct Length<1, 1> { static const scalar value; };
-		template<> struct Length<1, 2> { static const scalar value; };
-		template<> struct Length<1, 3> { static const scalar value; };
-		template<> struct Length<1, 4> { static const scalar value; };
-		template<> struct Length<1, 5> { static const scalar value; };
-		template<> struct Length<1, 6> { static const scalar value; };
-		template<> struct Length<1, 7> { static const scalar value; };
-		template<> struct Length<1, 8> { static const scalar value; };
+		template<> struct Length<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<1, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<2, 0> { static const scalar value; };
-		template<> struct Length<2, 1> { static const scalar value; };
-		template<> struct Length<2, 2> { static const scalar value; };
-		template<> struct Length<2, 3> { static const scalar value; };
-		template<> struct Length<2, 4> { static const scalar value; };
-		template<> struct Length<2, 5> { static const scalar value; };
-		template<> struct Length<2, 6> { static const scalar value; };
-		template<> struct Length<2, 7> { static const scalar value; };
-		template<> struct Length<2, 8> { static const scalar value; };
+		template<> struct Length<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<2, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<3, 0> { static const scalar value; };
-		template<> struct Length<3, 1> { static const scalar value; };
-		template<> struct Length<3, 2> { static const scalar value; };
-		template<> struct Length<3, 3> { static const scalar value; };
-		template<> struct Length<3, 4> { static const scalar value; };
-		template<> struct Length<3, 5> { static const scalar value; };
-		template<> struct Length<3, 6> { static const scalar value; };
-		template<> struct Length<3, 7> { static const scalar value; };
-		template<> struct Length<3, 8> { static const scalar value; };
+		template<> struct Length<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<3, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<4, 0> { static const scalar value; };
-		template<> struct Length<4, 1> { static const scalar value; };
-		template<> struct Length<4, 2> { static const scalar value; };
-		template<> struct Length<4, 3> { static const scalar value; };
-		template<> struct Length<4, 4> { static const scalar value; };
-		template<> struct Length<4, 5> { static const scalar value; };
-		template<> struct Length<4, 6> { static const scalar value; };
-		template<> struct Length<4, 7> { static const scalar value; };
-		template<> struct Length<4, 8> { static const scalar value; };
+		template<> struct Length<4, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<4, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<5, 0> { static const scalar value; };
-		template<> struct Length<5, 1> { static const scalar value; };
-		template<> struct Length<5, 2> { static const scalar value; };
-		template<> struct Length<5, 3> { static const scalar value; };
-		template<> struct Length<5, 4> { static const scalar value; };
-		template<> struct Length<5, 5> { static const scalar value; };
-		template<> struct Length<5, 6> { static const scalar value; };
-		template<> struct Length<5, 7> { static const scalar value; };
-		template<> struct Length<5, 8> { static const scalar value; };
+		template<> struct Length<5, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<5, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<6, 0> { static const scalar value; };
-		template<> struct Length<6, 1> { static const scalar value; };
-		template<> struct Length<6, 2> { static const scalar value; };
-		template<> struct Length<6, 3> { static const scalar value; };
-		template<> struct Length<6, 4> { static const scalar value; };
-		template<> struct Length<6, 5> { static const scalar value; };
-		template<> struct Length<6, 6> { static const scalar value; };
-		template<> struct Length<6, 7> { static const scalar value; };
-		template<> struct Length<6, 8> { static const scalar value; };
+		template<> struct Length<6, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<6, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<7, 0> { static const scalar value; };
-		template<> struct Length<7, 1> { static const scalar value; };
-		template<> struct Length<7, 2> { static const scalar value; };
-		template<> struct Length<7, 3> { static const scalar value; };
-		template<> struct Length<7, 4> { static const scalar value; };
-		template<> struct Length<7, 5> { static const scalar value; };
-		template<> struct Length<7, 6> { static const scalar value; };
-		template<> struct Length<7, 7> { static const scalar value; };
-		template<> struct Length<7, 8> { static const scalar value; };
+		template<> struct Length<7, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<7, 8> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Length<8, 0> { static const scalar value; };
-		template<> struct Length<8, 1> { static const scalar value; };
-		template<> struct Length<8, 2> { static const scalar value; };
-		template<> struct Length<8, 3> { static const scalar value; };
-		template<> struct Length<8, 4> { static const scalar value; };
-		template<> struct Length<8, 5> { static const scalar value; };
-		template<> struct Length<8, 6> { static const scalar value; };
-		template<> struct Length<8, 7> { static const scalar value; };
-		template<> struct Length<8, 8> { static const scalar value; };
+		template<> struct Length<8, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 7> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Length<8, 8> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Mass {};
 
-		template<> struct Mass<0, 0> { static const scalar value; };
-		template<> struct Mass<0, 1> { static const scalar value; };
-		template<> struct Mass<0, 2> { static const scalar value; };
-		template<> struct Mass<0, 3> { static const scalar value; };
-		template<> struct Mass<0, 4> { static const scalar value; };
-		template<> struct Mass<0, 5> { static const scalar value; };
-		template<> struct Mass<0, 6> { static const scalar value; };
-		template<> struct Mass<0, 7> { static const scalar value; };
+		template<> struct Mass<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<0, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<0, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<0, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<0, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<0, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Mass<1, 0> { static const scalar value; };
-		template<> struct Mass<1, 1> { static const scalar value; };
-		template<> struct Mass<1, 2> { static const scalar value; };
-		template<> struct Mass<1, 3> { static const scalar value; };
-		template<> struct Mass<1, 4> { static const scalar value; };
-		template<> struct Mass<1, 5> { static const scalar value; };
-		template<> struct Mass<1, 6> { static const scalar value; };
-		template<> struct Mass<1, 7> { static const scalar value; };
+		template<> struct Mass<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<1, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<1, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<1, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<1, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<1, 7> { static TnbGlobal_EXPORT const scalar value; };
+											  
+		template<> struct Mass<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<2, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<2, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<2, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<2, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<2, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Mass<2, 0> { static const scalar value; };
-		template<> struct Mass<2, 1> { static const scalar value; };
-		template<> struct Mass<2, 2> { static const scalar value; };
-		template<> struct Mass<2, 3> { static const scalar value; };
-		template<> struct Mass<2, 4> { static const scalar value; };
-		template<> struct Mass<2, 5> { static const scalar value; };
-		template<> struct Mass<2, 6> { static const scalar value; };
-		template<> struct Mass<2, 7> { static const scalar value; };
+		template<> struct Mass<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<3, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<3, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<3, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<3, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<3, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Mass<3, 0> { static const scalar value; };
-		template<> struct Mass<3, 1> { static const scalar value; };
-		template<> struct Mass<3, 2> { static const scalar value; };
-		template<> struct Mass<3, 3> { static const scalar value; };
-		template<> struct Mass<3, 4> { static const scalar value; };
-		template<> struct Mass<3, 5> { static const scalar value; };
-		template<> struct Mass<3, 6> { static const scalar value; };
-		template<> struct Mass<3, 7> { static const scalar value; };
+		template<> struct Mass<4, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<4, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<4, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<4, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<4, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<4, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<4, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<4, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Mass<4, 0> { static const scalar value; };
-		template<> struct Mass<4, 1> { static const scalar value; };
-		template<> struct Mass<4, 2> { static const scalar value; };
-		template<> struct Mass<4, 3> { static const scalar value; };
-		template<> struct Mass<4, 4> { static const scalar value; };
-		template<> struct Mass<4, 5> { static const scalar value; };
-		template<> struct Mass<4, 6> { static const scalar value; };
-		template<> struct Mass<4, 7> { static const scalar value; };
+		template<> struct Mass<5, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<5, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<5, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<5, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<5, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<5, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<5, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<5, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Mass<5, 0> { static const scalar value; };
-		template<> struct Mass<5, 1> { static const scalar value; };
-		template<> struct Mass<5, 2> { static const scalar value; };
-		template<> struct Mass<5, 3> { static const scalar value; };
-		template<> struct Mass<5, 4> { static const scalar value; };
-		template<> struct Mass<5, 5> { static const scalar value; };
-		template<> struct Mass<5, 6> { static const scalar value; };
-		template<> struct Mass<5, 7> { static const scalar value; };
+		template<> struct Mass<6, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<6, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<6, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<6, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<6, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<6, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<6, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<6, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Mass<6, 0> { static const scalar value; };
-		template<> struct Mass<6, 1> { static const scalar value; };
-		template<> struct Mass<6, 2> { static const scalar value; };
-		template<> struct Mass<6, 3> { static const scalar value; };
-		template<> struct Mass<6, 4> { static const scalar value; };
-		template<> struct Mass<6, 5> { static const scalar value; };
-		template<> struct Mass<6, 6> { static const scalar value; };
-		template<> struct Mass<6, 7> { static const scalar value; };
-
-		template<> struct Mass<7, 0> { static const scalar value; };
-		template<> struct Mass<7, 1> { static const scalar value; };
-		template<> struct Mass<7, 2> { static const scalar value; };
-		template<> struct Mass<7, 3> { static const scalar value; };
-		template<> struct Mass<7, 4> { static const scalar value; };
-		template<> struct Mass<7, 5> { static const scalar value; };
-		template<> struct Mass<7, 6> { static const scalar value; };
-		template<> struct Mass<7, 7> { static const scalar value; };
+		template<> struct Mass<7, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<7, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<7, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<7, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<7, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<7, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<7, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Mass<7, 7> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Pressure {};
 
-		template<> struct Pressure<0, 0> { static const scalar value; };
-		template<> struct Pressure<0, 1> { static const scalar value; };
-		template<> struct Pressure<0, 2> { static const scalar value; };
-		template<> struct Pressure<0, 3> { static const scalar value; };
-		template<> struct Pressure<0, 4> { static const scalar value; };
-		template<> struct Pressure<0, 5> { static const scalar value; };
+		template<> struct Pressure<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<0, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<0, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<0, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Pressure<1, 0> { static const scalar value; };
-		template<> struct Pressure<1, 1> { static const scalar value; };
-		template<> struct Pressure<1, 2> { static const scalar value; };
-		template<> struct Pressure<1, 3> { static const scalar value; };
-		template<> struct Pressure<1, 4> { static const scalar value; };
-		template<> struct Pressure<1, 5> { static const scalar value; };
+		template<> struct Pressure<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<1, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<1, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<1, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Pressure<2, 0> { static const scalar value; };
-		template<> struct Pressure<2, 1> { static const scalar value; };
-		template<> struct Pressure<2, 2> { static const scalar value; };
-		template<> struct Pressure<2, 3> { static const scalar value; };
-		template<> struct Pressure<2, 4> { static const scalar value; };
-		template<> struct Pressure<2, 5> { static const scalar value; };
+		template<> struct Pressure<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<2, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<2, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<2, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Pressure<3, 0> { static const scalar value; };
-		template<> struct Pressure<3, 1> { static const scalar value; };
-		template<> struct Pressure<3, 2> { static const scalar value; };
-		template<> struct Pressure<3, 3> { static const scalar value; };
-		template<> struct Pressure<3, 4> { static const scalar value; };
-		template<> struct Pressure<3, 5> { static const scalar value; };
+		template<> struct Pressure<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<3, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<3, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<3, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Pressure<4, 0> { static const scalar value; };
-		template<> struct Pressure<4, 1> { static const scalar value; };
-		template<> struct Pressure<4, 2> { static const scalar value; };
-		template<> struct Pressure<4, 3> { static const scalar value; };
-		template<> struct Pressure<4, 4> { static const scalar value; };
-		template<> struct Pressure<4, 5> { static const scalar value; };
+		template<> struct Pressure<4, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<4, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<4, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<4, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<4, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<4, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Pressure<5, 0> { static const scalar value; };
-		template<> struct Pressure<5, 1> { static const scalar value; };
-		template<> struct Pressure<5, 2> { static const scalar value; };
-		template<> struct Pressure<5, 3> { static const scalar value; };
-		template<> struct Pressure<5, 4> { static const scalar value; };
-		template<> struct Pressure<5, 5> { static const scalar value; };
+		template<> struct Pressure<5, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<5, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<5, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<5, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<5, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Pressure<5, 5> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Velocity {};
 
-		template<> struct Velocity<0, 0> { static const scalar value; };
-		template<> struct Velocity<0, 1> { static const scalar value; };
-		template<> struct Velocity<0, 2> { static const scalar value; };
-		template<> struct Velocity<0, 3> { static const scalar value; };
-		template<> struct Velocity<0, 4> { static const scalar value; };
-		template<> struct Velocity<0, 5> { static const scalar value; };
+		template<> struct Velocity<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<0, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<0, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<0, 5> { static TnbGlobal_EXPORT const scalar value; };
 
 
-		template<> struct Velocity<1, 0> { static const scalar value; };
-		template<> struct Velocity<1, 1> { static const scalar value; };
-		template<> struct Velocity<1, 2> { static const scalar value; };
-		template<> struct Velocity<1, 3> { static const scalar value; };
-		template<> struct Velocity<1, 4> { static const scalar value; };
-		template<> struct Velocity<1, 5> { static const scalar value; };
+		template<> struct Velocity<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<1, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<1, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<1, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Velocity<2, 0> { static const scalar value; };
-		template<> struct Velocity<2, 1> { static const scalar value; };
-		template<> struct Velocity<2, 2> { static const scalar value; };
-		template<> struct Velocity<2, 3> { static const scalar value; };
-		template<> struct Velocity<2, 4> { static const scalar value; };
-		template<> struct Velocity<2, 5> { static const scalar value; };
+		template<> struct Velocity<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<2, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<2, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<2, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Velocity<3, 0> { static const scalar value; };
-		template<> struct Velocity<3, 1> { static const scalar value; };
-		template<> struct Velocity<3, 2> { static const scalar value; };
-		template<> struct Velocity<3, 3> { static const scalar value; };
-		template<> struct Velocity<3, 4> { static const scalar value; };
-		template<> struct Velocity<3, 5> { static const scalar value; };
+		template<> struct Velocity<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<3, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<3, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<3, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Velocity<4, 0> { static const scalar value; };
-		template<> struct Velocity<4, 1> { static const scalar value; };
-		template<> struct Velocity<4, 2> { static const scalar value; };
-		template<> struct Velocity<4, 3> { static const scalar value; };
-		template<> struct Velocity<4, 4> { static const scalar value; };
-		template<> struct Velocity<4, 5> { static const scalar value; };
+		template<> struct Velocity<4, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<4, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<4, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<4, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<4, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<4, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Velocity<5, 0> { static const scalar value; };
-		template<> struct Velocity<5, 1> { static const scalar value; };
-		template<> struct Velocity<5, 2> { static const scalar value; };
-		template<> struct Velocity<5, 3> { static const scalar value; };
-		template<> struct Velocity<5, 4> { static const scalar value; };
-		template<> struct Velocity<5, 5> { static const scalar value; };
+		template<> struct Velocity<5, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<5, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<5, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<5, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<5, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Velocity<5, 5> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Acceleration {};
 
-		template<> struct Acceleration<0, 0> { static const scalar value; };
-		template<> struct Acceleration<0, 1> { static const scalar value; };
+		template<> struct Acceleration<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Acceleration<0, 1> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Acceleration<1, 0> { static const scalar value; };
-		template<> struct Acceleration<1, 1> { static const scalar value; };
+		template<> struct Acceleration<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Acceleration<1, 1> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Density {};
 
-		template<> struct Density<0, 0> { static const scalar value; };
-		template<> struct Density<0, 1> { static const scalar value; };
-		template<> struct Density<0, 2> { static const scalar value; };
-		template<> struct Density<0, 3> { static const scalar value; };
+		template<> struct Density<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<0, 3> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Density<1, 0> { static const scalar value; };
-		template<> struct Density<1, 1> { static const scalar value; };
-		template<> struct Density<1, 2> { static const scalar value; };
-		template<> struct Density<1, 3> { static const scalar value; };
+		template<> struct Density<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<1, 3> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Density<2, 0> { static const scalar value; };
-		template<> struct Density<2, 1> { static const scalar value; };
-		template<> struct Density<2, 2> { static const scalar value; };
-		template<> struct Density<2, 3> { static const scalar value; };
+		template<> struct Density<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<2, 3> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Density<3, 0> { static const scalar value; };
-		template<> struct Density<3, 1> { static const scalar value; };
-		template<> struct Density<3, 2> { static const scalar value; };
-		template<> struct Density<3, 3> { static const scalar value; };
+		template<> struct Density<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Density<3, 3> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Power {};
 
-		template<> struct Power<0, 0> { static const scalar value; };
-		template<> struct Power<0, 1> { static const scalar value; };
-		template<> struct Power<0, 2> { static const scalar value; };
-		template<> struct Power<0, 3> { static const scalar value; };
-		template<> struct Power<0, 4> { static const scalar value; };
-		template<> struct Power<0, 5> { static const scalar value; };
+		template<> struct Power<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<0, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<0, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<0, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Power<1, 0> { static const scalar value; };
-		template<> struct Power<1, 1> { static const scalar value; };
-		template<> struct Power<1, 2> { static const scalar value; };
-		template<> struct Power<1, 3> { static const scalar value; };
-		template<> struct Power<1, 4> { static const scalar value; };
-		template<> struct Power<1, 5> { static const scalar value; };
+		template<> struct Power<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<1, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<1, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<1, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Power<2, 0> { static const scalar value; };
-		template<> struct Power<2, 1> { static const scalar value; };
-		template<> struct Power<2, 2> { static const scalar value; };
-		template<> struct Power<2, 3> { static const scalar value; };
-		template<> struct Power<2, 4> { static const scalar value; };
-		template<> struct Power<2, 5> { static const scalar value; };
+		template<> struct Power<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<2, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<2, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<2, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Power<3, 0> { static const scalar value; };
-		template<> struct Power<3, 1> { static const scalar value; };
-		template<> struct Power<3, 2> { static const scalar value; };
-		template<> struct Power<3, 3> { static const scalar value; };
-		template<> struct Power<3, 4> { static const scalar value; };
-		template<> struct Power<3, 5> { static const scalar value; };
+		template<> struct Power<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<3, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<3, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<3, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Power<4, 0> { static const scalar value; };
-		template<> struct Power<4, 1> { static const scalar value; };
-		template<> struct Power<4, 2> { static const scalar value; };
-		template<> struct Power<4, 3> { static const scalar value; };
-		template<> struct Power<4, 4> { static const scalar value; };
-		template<> struct Power<4, 5> { static const scalar value; };
+		template<> struct Power<4, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<4, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<4, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<4, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<4, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<4, 5> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Power<5, 0> { static const scalar value; };
-		template<> struct Power<5, 1> { static const scalar value; };
-		template<> struct Power<5, 2> { static const scalar value; };
-		template<> struct Power<5, 3> { static const scalar value; };
-		template<> struct Power<5, 4> { static const scalar value; };
-		template<> struct Power<5, 5> { static const scalar value; };
+		template<> struct Power<5, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<5, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<5, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<5, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<5, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Power<5, 5> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Force {};
 
-		template<> struct Force<0, 0> { static const scalar value; };
-		template<> struct Force<0, 1> { static const scalar value; };
-		template<> struct Force<0, 2> { static const scalar value; };
-		template<> struct Force<0, 3> { static const scalar value; };
-		template<> struct Force<0, 4> { static const scalar value; };
-		template<> struct Force<0, 5> { static const scalar value; };
-		template<> struct Force<0, 6> { static const scalar value; };
-		template<> struct Force<0, 7> { static const scalar value; };
+		template<> struct Force<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<0, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<0, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<0, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<0, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<0, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Force<1, 0> { static const scalar value; };
-		template<> struct Force<1, 1> { static const scalar value; };
-		template<> struct Force<1, 2> { static const scalar value; };
-		template<> struct Force<1, 3> { static const scalar value; };
-		template<> struct Force<1, 4> { static const scalar value; };
-		template<> struct Force<1, 5> { static const scalar value; };
-		template<> struct Force<1, 6> { static const scalar value; };
-		template<> struct Force<1, 7> { static const scalar value; };
+		template<> struct Force<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<1, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<1, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<1, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<1, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<1, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Force<2, 0> { static const scalar value; };
-		template<> struct Force<2, 1> { static const scalar value; };
-		template<> struct Force<2, 2> { static const scalar value; };
-		template<> struct Force<2, 3> { static const scalar value; };
-		template<> struct Force<2, 4> { static const scalar value; };
-		template<> struct Force<2, 5> { static const scalar value; };
-		template<> struct Force<2, 6> { static const scalar value; };
-		template<> struct Force<2, 7> { static const scalar value; };
+		template<> struct Force<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<2, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<2, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<2, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<2, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<2, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Force<3, 0> { static const scalar value; };
-		template<> struct Force<3, 1> { static const scalar value; };
-		template<> struct Force<3, 2> { static const scalar value; };
-		template<> struct Force<3, 3> { static const scalar value; };
-		template<> struct Force<3, 4> { static const scalar value; };
-		template<> struct Force<3, 5> { static const scalar value; };
-		template<> struct Force<3, 6> { static const scalar value; };
-		template<> struct Force<3, 7> { static const scalar value; };
+		template<> struct Force<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<3, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<3, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<3, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<3, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<3, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Force<4, 0> { static const scalar value; };
-		template<> struct Force<4, 1> { static const scalar value; };
-		template<> struct Force<4, 2> { static const scalar value; };
-		template<> struct Force<4, 3> { static const scalar value; };
-		template<> struct Force<4, 4> { static const scalar value; };
-		template<> struct Force<4, 5> { static const scalar value; };
-		template<> struct Force<4, 6> { static const scalar value; };
-		template<> struct Force<4, 7> { static const scalar value; };
+		template<> struct Force<4, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<4, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<4, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<4, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<4, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<4, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<4, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<4, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Force<5, 0> { static const scalar value; };
-		template<> struct Force<5, 1> { static const scalar value; };
-		template<> struct Force<5, 2> { static const scalar value; };
-		template<> struct Force<5, 3> { static const scalar value; };
-		template<> struct Force<5, 4> { static const scalar value; };
-		template<> struct Force<5, 5> { static const scalar value; };
-		template<> struct Force<5, 6> { static const scalar value; };
-		template<> struct Force<5, 7> { static const scalar value; };
+		template<> struct Force<5, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<5, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<5, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<5, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<5, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<5, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<5, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<5, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Force<6, 0> { static const scalar value; };
-		template<> struct Force<6, 1> { static const scalar value; };
-		template<> struct Force<6, 2> { static const scalar value; };
-		template<> struct Force<6, 3> { static const scalar value; };
-		template<> struct Force<6, 4> { static const scalar value; };
-		template<> struct Force<6, 5> { static const scalar value; };
-		template<> struct Force<6, 6> { static const scalar value; };
-		template<> struct Force<6, 7> { static const scalar value; };
+		template<> struct Force<6, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<6, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<6, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<6, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<6, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<6, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<6, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<6, 7> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Force<7, 0> { static const scalar value; };
-		template<> struct Force<7, 1> { static const scalar value; };
-		template<> struct Force<7, 2> { static const scalar value; };
-		template<> struct Force<7, 3> { static const scalar value; };
-		template<> struct Force<7, 4> { static const scalar value; };
-		template<> struct Force<7, 5> { static const scalar value; };
-		template<> struct Force<7, 6> { static const scalar value; };
-		template<> struct Force<7, 7> { static const scalar value; };
+		template<> struct Force<7, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<7, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<7, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<7, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<7, 4> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<7, 5> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<7, 6> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Force<7, 7> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct Angle {};
 
-		template<> struct Angle<0, 0> { static const scalar value; };
-		template<> struct Angle<0, 1> { static const scalar value; };
-		template<> struct Angle<0, 2> { static const scalar value; };
+		template<> struct Angle<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Angle<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Angle<0, 2> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Angle<1, 0> { static const scalar value; };
-		template<> struct Angle<1, 1> { static const scalar value; };
-		template<> struct Angle<1, 2> { static const scalar value; };
+		template<> struct Angle<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Angle<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Angle<1, 2> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct Angle<2, 0> { static const scalar value; };
-		template<> struct Angle<2, 1> { static const scalar value; };
-		template<> struct Angle<2, 2> { static const scalar value; };
+		template<> struct Angle<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Angle<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct Angle<2, 2> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct DynViscosity {};
 
-		template<> struct DynViscosity<0, 0> { static const scalar value; };
-		template<> struct DynViscosity<0, 1> { static const scalar value; };
-		template<> struct DynViscosity<0, 2> { static const scalar value; };
-		template<> struct DynViscosity<0, 3> { static const scalar value; };
-		template<> struct DynViscosity<0, 4> { static const scalar value; };
+		template<> struct DynViscosity<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<0, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<0, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<0, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<0, 4> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct DynViscosity<1, 0> { static const scalar value; };
-		template<> struct DynViscosity<1, 1> { static const scalar value; };
-		template<> struct DynViscosity<1, 2> { static const scalar value; };
-		template<> struct DynViscosity<1, 3> { static const scalar value; };
-		template<> struct DynViscosity<1, 4> { static const scalar value; };
+		template<> struct DynViscosity<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<1, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<1, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<1, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<1, 4> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct DynViscosity<2, 0> { static const scalar value; };
-		template<> struct DynViscosity<2, 1> { static const scalar value; };
-		template<> struct DynViscosity<2, 2> { static const scalar value; };
-		template<> struct DynViscosity<2, 3> { static const scalar value; };
-		template<> struct DynViscosity<2, 4> { static const scalar value; };
+		template<> struct DynViscosity<2, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<2, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<2, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<2, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<2, 4> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct DynViscosity<3, 0> { static const scalar value; };
-		template<> struct DynViscosity<3, 1> { static const scalar value; };
-		template<> struct DynViscosity<3, 2> { static const scalar value; };
-		template<> struct DynViscosity<3, 3> { static const scalar value; };
-		template<> struct DynViscosity<3, 4> { static const scalar value; };
+		template<> struct DynViscosity<3, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<3, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<3, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<3, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<3, 4> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct DynViscosity<4, 0> { static const scalar value; };
-		template<> struct DynViscosity<4, 1> { static const scalar value; };
-		template<> struct DynViscosity<4, 2> { static const scalar value; };
-		template<> struct DynViscosity<4, 3> { static const scalar value; };
-		template<> struct DynViscosity<4, 4> { static const scalar value; };
+		template<> struct DynViscosity<4, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<4, 1> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<4, 2> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<4, 3> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct DynViscosity<4, 4> { static TnbGlobal_EXPORT const scalar value; };
 
 
 		template<int From, int To>
 		struct KinViscosity {};
 
-		template<> struct KinViscosity<0, 0> { static const scalar value; };
-		template<> struct KinViscosity<0, 1> { static const scalar value; };
+		template<> struct KinViscosity<0, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct KinViscosity<0, 1> { static TnbGlobal_EXPORT const scalar value; };
 
-		template<> struct KinViscosity<1, 0> { static const scalar value; };
-		template<> struct KinViscosity<1, 1> { static const scalar value; };
+		template<> struct KinViscosity<1, 0> { static TnbGlobal_EXPORT const scalar value; };
+		template<> struct KinViscosity<1, 1> { static TnbGlobal_EXPORT const scalar value; };
 	}
 
 	CONVERT_UNIT(Length)

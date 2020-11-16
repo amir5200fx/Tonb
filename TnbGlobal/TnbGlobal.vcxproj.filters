@@ -34,6 +34,9 @@
     <Filter Include="TnbLib\Global\Traits">
       <UniqueIdentifier>{5d36b3bf-8c0e-49f2-b779-18cdec5b35dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Global\module">
+      <UniqueIdentifier>{aa114fb0-f831-409f-9682-c8d641ee2e8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1d.hxx">
@@ -95,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx">
       <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\module\Global_Module.hxx">
+      <Filter>TnbLib\Global\module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #define _TnbError_Header
 
 #include <error.hxx>
+#include <Global_Module.hxx>
 
 namespace tnbLib
 {
@@ -45,7 +46,7 @@ namespace tnbLib
 			theTolerance_ = value;
 		}
 
-		OSstream& operator()
+		TnbGlobal_EXPORT OSstream& operator()
 			(
 				const char* functionName,
 				const char* sourceFileName,
@@ -55,18 +56,18 @@ namespace tnbLib
 				);
 
 		//- Exit : can be called for any error to exit program
-		void exit(const int errNo = 1);
+		TnbGlobal_EXPORT void exit(const int errNo = 1);
 
 		//- Abort : used to stop code for fatal errors
-		void abort();
+		TnbGlobal_EXPORT void abort();
 
 
 		// Ostream operator
 
-		friend Ostream& operator<<(Ostream&, const ConvError&);
+		friend TnbGlobal_EXPORT Ostream& operator<<(Ostream&, const ConvError&);
 	};
 
-	extern ConvError FatalConvError;
+	extern TnbGlobal_EXPORT ConvError FatalConvError;
 
 #define FatalConvErrorIn(fn, nbIters, tol) FatalConvError(fn, __FILE__, __LINE__, nbIters, tol)
 }
