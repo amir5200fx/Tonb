@@ -33,9 +33,9 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsGeoMap() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsGeoMap() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		virtual Standard_Boolean IsComplete() const = 0;
 

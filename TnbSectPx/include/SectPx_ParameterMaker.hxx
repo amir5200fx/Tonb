@@ -44,70 +44,70 @@ namespace tnbLib
 			{}
 
 
-			std::shared_ptr<SectPx_Par>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Par>
 				SelectParameter
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateFree
 				(
 					const std::shared_ptr<SectPx_FieldFun>& theField
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateFree
 				(
 					const word& theName,
 					const std::shared_ptr<SectPx_FieldFun>& theField
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateFixed
 				(
 					const Standard_Real x
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateFixed
 				(
 					const word& theName,
 					const Standard_Real x
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateConstant
 				(
 					const Standard_Real x
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateConstant
 				(
 					const word& theName,
 					const Standard_Real x
 				) const;
 
-			std::shared_ptr<SectPx_Par>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Par>
 				RemoveParameter
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			std::vector<std::shared_ptr<SectPx_Par>> 
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Par>>
 				RetrieveFixedParameters() const;
 
-			std::vector<std::shared_ptr<SectPx_Par>> 
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Par>>
 				RetrieveFreeParameters() const;
 
-			std::vector<std::shared_ptr<SectPx_Par>> 
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Par>>
 				RetrieveConstParameters() const;
 
-			std::vector<std::shared_ptr<SectPx_Par>> 
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Par>>
 				RetrieveParameters() const;
 
-			void Print
+			TnbSectPx_EXPORT void Print
 			(
 				OSstream& out
 			) const;

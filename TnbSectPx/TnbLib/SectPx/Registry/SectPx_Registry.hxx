@@ -48,19 +48,19 @@ namespace tnbLib
 			return theCounter_;
 		}
 
-		std::shared_ptr<SectPx_RegObj> 
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_RegObj>
 			RemoveFromMap
 			(
 				const Standard_Integer theIndex
 			);
 
-		void Add
+		TnbSectPx_EXPORT void Add
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_RegObj>& theObj
 		);
 
-		void Add
+		TnbSectPx_EXPORT void Add
 		(
 			const Standard_Integer theIndex, 
 			std::shared_ptr<SectPx_RegObj>&& theObj
@@ -82,52 +82,52 @@ namespace tnbLib
 			return (Standard_Integer)theObjects_.size();
 		}
 
-		Standard_Boolean 
+		inline Standard_Boolean
 			IsContains
 			(
 				const std::shared_ptr<SectPx_RegObj>& theItem
 			) const;
 
-		Standard_Integer
+		TnbSectPx_EXPORT Standard_Integer
 			Import
 			(
 				const std::shared_ptr<SectPx_RegObj>& theObj
 			);
 
-		Standard_Integer
+		TnbSectPx_EXPORT Standard_Integer
 			Import
 			(
 				const word& theName,
 				const std::shared_ptr<SectPx_RegObj>& theObj
 			);
 
-		Standard_Integer
+		TnbSectPx_EXPORT Standard_Integer
 			Import
 			(
 				std::shared_ptr<SectPx_RegObj>&& theObj
 			);
 
-		Standard_Integer
+		TnbSectPx_EXPORT Standard_Integer
 			Import
 			(
 				const word& theName,
 				std::shared_ptr<SectPx_RegObj>&& theObj
 			);
 
-		std::shared_ptr<SectPx_RegObj>
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_RegObj>
 			Remove
 			(
 				const Standard_Integer theIndex
 			);
 
 		//- Throw an exception if not found the item
-		std::shared_ptr<SectPx_RegObj>
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_RegObj>
 			SelectObj
 			(
 				const Standard_Integer theIndex
 			) const;
 
-		std::shared_ptr<SectPx_RegObj>
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_RegObj>
 			Find
 			(
 				const Standard_Integer theIndex
@@ -138,14 +138,14 @@ namespace tnbLib
 			return theObjects_;
 		}
 
-		void Remove
+		TnbSectPx_EXPORT void Remove
 		(
 			const std::shared_ptr<SectPx_RegObj>& theObj
 		);
 
-		void Print(Ostream& out) const;
+		TnbSectPx_EXPORT void Print(Ostream& out) const;
 
-		Standard_Boolean 
+		inline Standard_Boolean
 			Next
 			(
 				typename std::map<Standard_Integer, std::shared_ptr<SectPx_RegObj>>::iterator& it, 
@@ -155,7 +155,7 @@ namespace tnbLib
 
 	namespace sectPxLib
 	{
-		extern std::shared_ptr<SectPx_Registry> objRegistry;
+		TnbSectPx_EXPORT extern std::shared_ptr<SectPx_Registry> objRegistry;
 	}
 }
 

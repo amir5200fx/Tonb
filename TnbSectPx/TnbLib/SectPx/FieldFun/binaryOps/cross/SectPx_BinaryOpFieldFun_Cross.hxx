@@ -41,7 +41,7 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			template<class... _Types>
 			Cross(_Types&&... _Args)
@@ -53,7 +53,7 @@ namespace tnbLib
 				return typeName_;
 			}
 
-			Standard_Real Value() const override;
+			TnbSectPx_EXPORT Standard_Real Value() const override;
 		};
 
 		template<>
@@ -83,7 +83,7 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			template<class... _Types>
 			Cross(_Types&&... _Args)
@@ -95,7 +95,7 @@ namespace tnbLib
 				return typeName_;
 			}
 
-			Standard_Real Value() const override;
+			TnbSectPx_EXPORT Standard_Real Value() const override;
 		};
 
 		template<>
@@ -125,7 +125,7 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			template<class... _Types>
 			Cross(_Types&&... _Args)
@@ -137,7 +137,7 @@ namespace tnbLib
 				return typeName_;
 			}
 
-			Standard_Real Value() const override;
+			TnbSectPx_EXPORT Standard_Real Value() const override;
 		};
 
 		template<>
@@ -167,7 +167,7 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			template<class... _Types>
 			Cross(_Types&&... _Args)
@@ -179,7 +179,7 @@ namespace tnbLib
 				return typeName_;
 			}
 
-			Standard_Real Value() const override;
+			TnbSectPx_EXPORT Standard_Real Value() const override;
 		};
 
 		typedef Cross<std::shared_ptr<SectPx_FieldFun>, std::shared_ptr<SectPx_FieldFun>> Cross_SF_SF;

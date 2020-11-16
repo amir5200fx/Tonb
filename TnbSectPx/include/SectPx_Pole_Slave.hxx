@@ -27,7 +27,7 @@ namespace tnbLib
 		public:
 
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			Pole_Slave()
 			{}
@@ -36,13 +36,13 @@ namespace tnbLib
 				: theMaster_(theMaster)
 			{}
 
-			Pole_Slave
+			TnbSectPx_EXPORT Pole_Slave
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Pole_Master>& theMaster
 			);
 
-			Pole_Slave
+			TnbSectPx_EXPORT Pole_Slave
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
@@ -54,16 +54,16 @@ namespace tnbLib
 				return Standard_True;
 			}
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			Pnt2d Coord() const override;
+			TnbSectPx_EXPORT Pnt2d Coord() const override;
 
 			SectPx_PoleType Type() const override
 			{
 				return SectPx_PoleType::slave;
 			}
 
-			std::shared_ptr<SectPx_Pnt>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Pnt>
 				Pnt() const override;
 
 			const auto& Master() const

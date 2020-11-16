@@ -23,17 +23,17 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
 		SectPx_OffsetProfile()
 		{}
 
-		SectPx_OffsetProfile
+		TnbSectPx_EXPORT SectPx_OffsetProfile
 		(
 			const Standard_Integer theIndex
 		);
 
-		SectPx_OffsetProfile
+		TnbSectPx_EXPORT SectPx_OffsetProfile
 		(
 			const Standard_Integer theIndex,
 			const word& theName
@@ -50,15 +50,15 @@ namespace tnbLib
 			return theOffsets_;
 		}
 
-		Standard_Boolean IsOffsetProfile() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsOffsetProfile() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		std::vector<Pnt2d> RetrievePoints() const;
+		TnbSectPx_EXPORT std::vector<Pnt2d> RetrievePoints() const;
 
-		void Import(const std::shared_ptr<SectPx_Offset>& theQ);
+		TnbSectPx_EXPORT void Import(const std::shared_ptr<SectPx_Offset>& theQ);
 
 	};
 }

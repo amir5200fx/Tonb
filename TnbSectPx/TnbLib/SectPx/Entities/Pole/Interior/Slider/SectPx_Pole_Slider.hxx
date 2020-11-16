@@ -26,7 +26,7 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			Pole_Slider()
 			{}
@@ -35,13 +35,13 @@ namespace tnbLib
 				: thePnt_(thePnt)
 			{}
 
-			Pole_Slider
+			TnbSectPx_EXPORT Pole_Slider
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Pnt_GeoField>& thePnt
 			);
 
-			Pole_Slider
+			TnbSectPx_EXPORT Pole_Slider
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
@@ -49,9 +49,9 @@ namespace tnbLib
 			);
 
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			Pnt2d Coord() const override;
+			TnbSectPx_EXPORT Pnt2d Coord() const override;
 
 			Standard_Boolean IsSlider() const override
 			{
@@ -63,7 +63,7 @@ namespace tnbLib
 				return SectPx_PoleType::slider;
 			}
 
-			std::shared_ptr<SectPx_Pnt>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Pnt>
 				Pnt() const override;
 
 			void SetPnt

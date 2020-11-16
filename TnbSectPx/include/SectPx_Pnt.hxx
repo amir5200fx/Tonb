@@ -21,6 +21,7 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive &ar, const unsigned int file_version)
 		{
+			ar & boost::serialization::base_object<SectPx_Coord>(*this);
 			ar & boost::serialization::base_object<SectPx_Parent>(*this);
 		}
 
@@ -33,13 +34,13 @@ namespace tnbLib
 
 	public:
 
-		virtual Standard_Boolean IsInner() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsInner() const;
 
-		virtual Standard_Boolean IsOuter() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsOuter() const;
 
-		virtual Standard_Boolean IsMaster() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsMaster() const;
 
-		virtual Standard_Boolean IsSlave() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsSlave() const;
 
 		virtual Standard_Boolean IsBoundary() const
 		{
@@ -48,9 +49,9 @@ namespace tnbLib
 
 		virtual sectPxLib::pntType PntType() const = 0;
 
-		Standard_Boolean IsPnt() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsPnt() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 	};
 }

@@ -4,6 +4,7 @@
 
 #include <SectPx_RegObj.hxx>
 #include <SectPx_ParentAdaptor.hxx>
+#include <SectPx_Module.hxx>
 
 namespace tnbLib
 {
@@ -36,7 +37,7 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsChild() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsChild() const override;
 
 	};
 }

@@ -40,20 +40,20 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
-		explicit SectPx_FixedPar
+		TnbSectPx_EXPORT explicit SectPx_FixedPar
 		(
 			const Standard_Real theValue
 		);
 
-		SectPx_FixedPar
+		TnbSectPx_EXPORT SectPx_FixedPar
 		(
 			const Standard_Integer theIndex,
 			const Standard_Real theValue
 		);
 
-		SectPx_FixedPar
+		TnbSectPx_EXPORT SectPx_FixedPar
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -70,26 +70,26 @@ namespace tnbLib
 			return theValue_();
 		}
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		sectPxLib::parType ParType() const override;
+		TnbSectPx_EXPORT sectPxLib::parType ParType() const override;
 
-		Standard_Boolean IsFixed() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsFixed() const override;
 
-		Standard_Boolean IsComplete() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
-		Standard_Boolean InCycle() const override;
+		TnbSectPx_EXPORT Standard_Boolean InCycle() const override;
 
-		Standard_Real Value() const override;
+		TnbSectPx_EXPORT Standard_Real Value() const override;
 
-		void Print(Ostream& out) const override;
+		TnbSectPx_EXPORT void Print(Ostream& out) const override;
 
 		Standard_Boolean IsChanged() const
 		{
 			return theValue_.IsChanged();
 		}
 
-		void SetValue(const Standard_Real x);
+		TnbSectPx_EXPORT void SetValue(const Standard_Real x);
 
 	};
 }

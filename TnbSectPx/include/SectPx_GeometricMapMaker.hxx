@@ -44,13 +44,13 @@ namespace tnbLib
 				: SectPx_Maker(theReg)
 			{}
 
-			std::shared_ptr<SectPx_GeoMap>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_GeoMap>
 				SelectGeoMap
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateLinearInterpolation
 				(
 					const std::shared_ptr<SectPx_Coord>& theQ0,
@@ -58,10 +58,10 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Par>& thePar
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateLinearInterpolation() const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateIntersection
 				(
 					const std::shared_ptr<SectPx_Coord>& theQ0,
@@ -72,10 +72,10 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Par>& theAng1
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateIntersection() const;
 
-			std::shared_ptr<SectPx_GeoMap>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_GeoMap>
 				RemoveGeoMap
 				(
 					const Standard_Integer theIndex

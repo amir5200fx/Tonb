@@ -2,8 +2,6 @@
 #ifndef _SectPx_Module_Header
 #define _SectPx_Module_Header
 
-#define TnbSectPx_STATIC_DEFINE
-
 #ifdef TnbSectPx_STATIC_DEFINE
 #define TnbSectPx_EXPORT
 #else

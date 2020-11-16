@@ -44,65 +44,65 @@ namespace tnbLib
 				: SectPx_Maker(theRegistry)
 			{}
 
-			std::shared_ptr<SectPx_Pnt>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Pnt>
 				SelectPnt
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateOuterComponent
 				(
 					const std::shared_ptr<SectPx_Par>& xPar,
 					const std::shared_ptr<SectPx_Par>& yPar
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInnerComponent
 				(
 					const std::shared_ptr<SectPx_Par>& xPar,
 					const std::shared_ptr<SectPx_Par>& yPar
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateOuterOffset
 				(
 					const Standard_Real x, 
 					const Standard_Real y
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateOuterOffset
 				(
 					const Pnt2d& pt
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInnerOffset
 				(
 					const Standard_Real x, 
 					const Standard_Real y
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInnerOffset
 				(
 					const Pnt2d& pt
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateField
 				(
 					const std::shared_ptr<SectPx_GeoMap>& theMap
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateEmpty
 				(
 					const std::shared_ptr<SectPx_MasterPnt>& theMaster
 				) const;
 
-			std::shared_ptr<SectPx_Pnt> 
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Pnt>
 				RemovePnt
 				(
 					const Standard_Integer theIndex

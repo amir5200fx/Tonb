@@ -37,23 +37,23 @@ namespace tnbLib
 
 		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
-		static void Import(const std::shared_ptr<SectPx_RegObj>& ent, scatterMap& theMap);
-		static void Remove(const Standard_Integer id, scatterMap& theMap);
+		static TnbSectPx_EXPORT void Import(const std::shared_ptr<SectPx_RegObj>& ent, scatterMap& theMap);
+		static TnbSectPx_EXPORT void Remove(const Standard_Integer id, scatterMap& theMap);
 
 	protected:
 
-		void ImportToScatterMap(const std::shared_ptr<SectPx_RegObj>& ent);
+		TnbSectPx_EXPORT void ImportToScatterMap(const std::shared_ptr<SectPx_RegObj>& ent);
 
-		void RemoveFromScatterMap(const std::shared_ptr<SectPx_RegObj>& ent);
+		TnbSectPx_EXPORT void RemoveFromScatterMap(const std::shared_ptr<SectPx_RegObj>& ent);
 
 	public:
 
 		SectPx_ScatterRegistry()
 		{}
 
-		Standard_Integer LastId(SectPx_RegObjType t) const;
+		TnbSectPx_EXPORT Standard_Integer LastId(SectPx_RegObjType t) const;
 
-		const scatterMap& ScatterMap(SectPx_RegObjType t) const;
+		TnbSectPx_EXPORT const scatterMap& ScatterMap(SectPx_RegObjType t) const;
 	};
 }
 

@@ -32,22 +32,22 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
-		SectPx_CustomProfile
+		TnbSectPx_EXPORT SectPx_CustomProfile
 		(
 			const std::shared_ptr<SectPx_Node>& theNode0,
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
-		SectPx_CustomProfile
+		TnbSectPx_EXPORT SectPx_CustomProfile
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Node>& theNode0,
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
-		SectPx_CustomProfile
+		TnbSectPx_EXPORT SectPx_CustomProfile
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -55,9 +55,9 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		static std::shared_ptr<SectPx_CustomProfile>
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_CustomProfile>
 			MakeProfile
 			(
 				const std::shared_ptr<SectPx_Pnt>& theP0,

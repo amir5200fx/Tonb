@@ -4,6 +4,7 @@
 
 #include <Standard_Handle.hxx>
 #include <Global_Done.hxx>
+#include <SectPx_Module.hxx>
 
 class Geom2d_Curve;
 
@@ -62,7 +63,7 @@ namespace tnbLib
 			return theKnotAlg_;
 		}
 
-		void Perform(const Standard_Integer deg);
+		TnbSectPx_EXPORT void Perform(const Standard_Integer deg);
 
 		void LoadProfile(const std::shared_ptr<SectPx_TopoProfile>& theProfile)
 		{

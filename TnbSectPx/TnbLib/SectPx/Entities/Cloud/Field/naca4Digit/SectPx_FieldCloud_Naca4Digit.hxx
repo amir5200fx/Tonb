@@ -89,13 +89,13 @@ namespace tnbLib
 				return theNbSegments_;
 			}
 
-			void SetChord(const std::shared_ptr<SectPx_Par>& thePar);
+			TnbSectPx_EXPORT void SetChord(const std::shared_ptr<SectPx_Par>& thePar);
 
-			void SetMaxCamber(const std::shared_ptr<SectPx_Par>& thePar);
+			TnbSectPx_EXPORT void SetMaxCamber(const std::shared_ptr<SectPx_Par>& thePar);
 
-			void SetMaxCamberLoc(const std::shared_ptr<SectPx_Par>& thePar);
+			TnbSectPx_EXPORT void SetMaxCamberLoc(const std::shared_ptr<SectPx_Par>& thePar);
 
-			void SetMaxThickness(const std::shared_ptr<SectPx_Par>& thePar);
+			TnbSectPx_EXPORT void SetMaxThickness(const std::shared_ptr<SectPx_Par>& thePar);
 
 			void SetNbSegments(const Standard_Integer nb)
 			{
@@ -113,30 +113,30 @@ namespace tnbLib
 
 			//- override virtual functions from parent abstract class 
 
-			Standard_Integer NbChildren() const override;
+			TnbSectPx_EXPORT Standard_Integer NbChildren() const override;
 
-			Standard_Boolean IsComplete() const override;
+			TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
-			Standard_Boolean HasChildren() const override;
+			TnbSectPx_EXPORT Standard_Boolean HasChildren() const override;
 
-			Standard_Boolean HasChild
+			TnbSectPx_EXPORT Standard_Boolean HasChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			std::vector<std::shared_ptr<SectPx_Child>>
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Child>>
 				RetrieveChildren() const override;
 
-			void RemoveThisFromChildren() const override;
+			TnbSectPx_EXPORT void RemoveThisFromChildren() const override;
 
-			void AddThisToChildren() const override;
+			TnbSectPx_EXPORT void AddThisToChildren() const override;
 
-			void AddThisToChild
+			TnbSectPx_EXPORT void AddThisToChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			void RemoveThisFromChild
+			TnbSectPx_EXPORT void RemoveThisFromChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
@@ -160,7 +160,7 @@ namespace tnbLib
 					ar & boost::serialization::base_object<FieldCloud_Naca4DigitBase>(*this);
 				}
 
-				void Update() const override;
+				TnbSectPx_EXPORT void Update() const override;
 
 			public:
 
@@ -171,7 +171,7 @@ namespace tnbLib
 					: FieldCloud_Naca4DigitBase(_Args...)
 				{}
 
-				word RegObjTypeName() const override;
+				TnbSectPx_EXPORT word RegObjTypeName() const override;
 			};
 
 
@@ -189,7 +189,7 @@ namespace tnbLib
 					ar & boost::serialization::base_object<FieldCloud_Naca4DigitBase>(*this);
 				}
 
-				void Update() const override;
+				TnbSectPx_EXPORT void Update() const override;
 
 			public:
 
@@ -200,7 +200,7 @@ namespace tnbLib
 					: FieldCloud_Naca4DigitBase(_Args...)
 				{}
 
-				word RegObjTypeName() const override;
+				TnbSectPx_EXPORT word RegObjTypeName() const override;
 			};
 
 			

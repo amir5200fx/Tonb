@@ -237,5 +237,5 @@ void tnbLib::SectPx_Registry::Print
 	}
 }
 
-std::shared_ptr<tnbLib::SectPx_Registry> 
+TnbSectPx_EXPORT std::shared_ptr<tnbLib::SectPx_Registry>
 tnbLib::sectPxLib::objRegistry = std::make_shared<tnbLib::SectPx_Registry>(0, "registry");

@@ -18,7 +18,12 @@ namespace tnbLib
 
 		std::weak_ptr<SectPx_Par> thePar_;
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive &ar, const unsigned int file_version);
+
+		//DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 	protected:
 
@@ -34,35 +39,35 @@ namespace tnbLib
 			return thePar_;
 		}
 
-		Standard_Integer NbChildren() const override;
+		TnbSectPx_EXPORT Standard_Integer NbChildren() const override;
 
-		Standard_Boolean IsComplete() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
-		Standard_Boolean HasChildren() const override;
+		TnbSectPx_EXPORT Standard_Boolean HasChildren() const override;
 
-		Standard_Boolean 
+		TnbSectPx_EXPORT Standard_Boolean
 			HasChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-		std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const override;
+		TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const override;
 
-		void RemoveThisFromChildren() const override;
+		TnbSectPx_EXPORT void RemoveThisFromChildren() const override;
 
-		void AddThisToChildren() const override;
+		TnbSectPx_EXPORT void AddThisToChildren() const override;
 
-		void AddThisToChild
+		TnbSectPx_EXPORT void AddThisToChild
 		(
 			const std::shared_ptr<SectPx_Child>& thePar
 		) const override;
 
-		void RemoveThisFromChild
+		TnbSectPx_EXPORT void RemoveThisFromChild
 		(
 			const std::shared_ptr<SectPx_Child>& thePar
 		) const override;
 
-		void SetPar
+		TnbSectPx_EXPORT void SetPar
 		(
 			const std::shared_ptr<SectPx_Par>& thePar
 		);

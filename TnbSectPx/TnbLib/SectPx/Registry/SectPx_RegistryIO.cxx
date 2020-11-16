@@ -5,6 +5,7 @@
 DECLARE_SAVE_IMP(tnbLib::SectPx_Registry)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
+	ar & boost::serialization::base_object<SectPx_ScatterRegistry>(*this);
 	ar & theObjects_;
 	ar & theCounter_;
 }
@@ -12,6 +13,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_Registry)
 DECLARE_LOAD_IMP(tnbLib::SectPx_Registry)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
+	ar & boost::serialization::base_object<SectPx_ScatterRegistry>(*this);
 	ar & theObjects_;
 	ar & theCounter_;
 }

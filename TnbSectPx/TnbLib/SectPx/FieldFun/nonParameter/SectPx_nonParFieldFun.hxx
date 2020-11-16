@@ -33,23 +33,23 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsComplete() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
-		Standard_Boolean HasChild
+		TnbSectPx_EXPORT Standard_Boolean HasChild
 		(
 			const std::shared_ptr<SectPx_Child>& thePar
 		) const override;
 
-		void RemoveThisFromChildren() const override;
+		TnbSectPx_EXPORT void RemoveThisFromChildren() const override;
 
-		void AddThisToChildren() const override;
+		TnbSectPx_EXPORT void AddThisToChildren() const override;
 
-		void AddThisToChild
+		TnbSectPx_EXPORT void AddThisToChild
 		(
 			const std::shared_ptr<SectPx_Child>& thePar
 		) const override;
 
-		void RemoveThisFromChild
+		TnbSectPx_EXPORT void RemoveThisFromChild
 		(
 			const std::shared_ptr<SectPx_Child>& thePar
 		) const override;

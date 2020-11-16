@@ -4,6 +4,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+const char* tnbLib::SectPx_CoordOverrider::typeName_ = "coordOverrider";
+
 tnbLib::word 
 tnbLib::SectPx_CoordOverrider::RegObjTypeName() const
 {

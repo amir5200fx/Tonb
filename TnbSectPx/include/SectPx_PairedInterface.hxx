@@ -31,13 +31,13 @@ namespace tnbLib
 			: SectPx_Interface(_Args...)
 		{}
 
-		void disJoint() override;
+		TnbSectPx_EXPORT void disJoint() override;
 
 	public:
 
-		static const std::shared_ptr<SectPx_PairedInterface> null;
+		static TnbSectPx_EXPORT const std::shared_ptr<SectPx_PairedInterface> null;
 
-		Standard_Boolean IsPaired() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsPaired() const override;
 		
 	};
 }

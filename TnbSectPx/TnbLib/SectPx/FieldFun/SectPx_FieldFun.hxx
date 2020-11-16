@@ -28,6 +28,7 @@ namespace tnbLib
 	protected:
 
 		SectPx_FieldFun_Temp()
+			: theTemp_(0)
 		{}
 
 		auto& Temp() const
@@ -91,33 +92,33 @@ namespace tnbLib
 			return Temp();
 		}
 
-		Standard_Boolean IsFieldFun() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsFieldFun() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		virtual Standard_Boolean IsComplete() const = 0;
 
 		virtual Standard_Real Value() const = 0;
 
-		friend std::shared_ptr<SectPx_FieldFun> 
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun>
 			operator+
 			(
 				const std::shared_ptr<SectPx_FieldFun>& f0,
 				const std::shared_ptr<SectPx_FieldFun>& f1
 				);
-		friend std::shared_ptr<SectPx_FieldFun> 
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun>
 			operator-
 			(
 				const std::shared_ptr<SectPx_FieldFun>& f0, 
 				const std::shared_ptr<SectPx_FieldFun>& f1
 				);
-		friend std::shared_ptr<SectPx_FieldFun> 
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun>
 			operator*
 			(
 				const std::shared_ptr<SectPx_FieldFun>& f0,
 				const std::shared_ptr<SectPx_FieldFun>& f1
 				);
-		friend std::shared_ptr<SectPx_FieldFun> 
+		friend TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun>
 			operator/
 			(
 				const std::shared_ptr<SectPx_FieldFun>& f0,

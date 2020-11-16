@@ -45,7 +45,7 @@ namespace tnbLib
 				const Standard_Integer degree
 			) const override;*/
 
-		std::vector<Standard_Real>
+		TnbSectPx_EXPORT std::vector<Standard_Real>
 			CreateKnots
 			(
 				const std::vector<Pnt2d>& theCoords,

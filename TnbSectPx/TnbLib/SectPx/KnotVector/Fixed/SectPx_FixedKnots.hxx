@@ -50,7 +50,7 @@ namespace tnbLib
 			return theKnots_;
 		}
 
-		std::vector<Standard_Real> 
+		TnbSectPx_EXPORT std::vector<Standard_Real>
 			CreateKnots
 			(
 				const std::vector<Pnt2d>& theCoords,

@@ -31,7 +31,7 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			template<class... _Types>
 			GeoMap_LinearInterpl(_Types&&... _Args)
@@ -53,59 +53,59 @@ namespace tnbLib
 				return thePar_;
 			}
 
-			void SetQ0
+			TnbSectPx_EXPORT void SetQ0
 			(
 				const std::shared_ptr<SectPx_Coord>& theQ0
 			);
 
-			void SetQ1
+			TnbSectPx_EXPORT void SetQ1
 			(
 				const std::shared_ptr<SectPx_Coord>& theQ1
 			);
 
-			void SetPar
+			TnbSectPx_EXPORT void SetPar
 			(
 				const std::shared_ptr<SectPx_Par>& thePar
 			);
 
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
 			//- override virtual functions from geoMap abstract class 
 
-			Pnt2d CalcCoord() const override;
+			TnbSectPx_EXPORT Pnt2d CalcCoord() const override;
 
 			//- override virtual functions from parent abstract class 
 
-			Standard_Integer NbChildren() const override;
+			TnbSectPx_EXPORT Standard_Integer NbChildren() const override;
 
-			Standard_Boolean IsComplete() const override;
+			TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
-			Standard_Boolean HasChildren() const override;
+			TnbSectPx_EXPORT Standard_Boolean HasChildren() const override;
 
-			Standard_Boolean HasChild
+			TnbSectPx_EXPORT Standard_Boolean HasChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			void RemoveThisFromChildren() const override;
+			TnbSectPx_EXPORT void RemoveThisFromChildren() const override;
 
-			void AddThisToChildren() const override;
+			TnbSectPx_EXPORT void AddThisToChildren() const override;
 
-			void AddThisToChild
+			TnbSectPx_EXPORT void AddThisToChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			void RemoveThisFromChild
+			TnbSectPx_EXPORT void RemoveThisFromChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const override;
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const override;
 
 
-			static std::shared_ptr<GeoMap_LinearInterpl> 
+			static TnbSectPx_EXPORT std::shared_ptr<GeoMap_LinearInterpl>
 				MakeLinearInterpl
 				(
 					const std::shared_ptr<SectPx_Registry>& theReg

@@ -36,7 +36,7 @@ namespace tnbLib
 			ar & theU1_;
 		}
 
-		void SetDefaults();
+		TnbSectPx_EXPORT void SetDefaults();
 
 	protected:
 
@@ -57,7 +57,7 @@ namespace tnbLib
 			theU1_ = u;
 		}
 
-		static std::vector<Standard_Real> 
+		static TnbSectPx_EXPORT std::vector<Standard_Real>
 			toKnots
 			(
 				const std::vector<Standard_Real>& Ubar, 
@@ -93,7 +93,7 @@ namespace tnbLib
 				const Standard_Integer degree
 			) const = 0;
 
-		static std::tuple<knotList, multList> 
+		static TnbSectPx_EXPORT std::tuple<knotList, multList>
 			Convert
 			(
 				const std::vector<Standard_Real>& seqKnots

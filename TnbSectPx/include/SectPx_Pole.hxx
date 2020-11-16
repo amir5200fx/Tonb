@@ -36,9 +36,9 @@ namespace tnbLib
 
 	public:
 
-		virtual Standard_Boolean IsInterior() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsInterior() const;
 
-		virtual Standard_Boolean IsBoundary() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsBoundary() const;
 
 		virtual Pnt2d Coord() const = 0;
 
@@ -46,9 +46,9 @@ namespace tnbLib
 
 		virtual std::shared_ptr<SectPx_Pnt> Pnt() const = 0;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
-		Standard_Boolean IsPole() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsPole() const override;
 
 		static Standard_Boolean
 			IsLess

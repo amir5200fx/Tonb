@@ -25,20 +25,20 @@ namespace tnbLib
 		public:
 
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			Pole_Dangle()
 			{}
 
-			Pole_Dangle(const std::shared_ptr<Pnt_Compnt>& thePnt);
+			TnbSectPx_EXPORT Pole_Dangle(const std::shared_ptr<Pnt_Compnt>& thePnt);
 
-			Pole_Dangle
+			TnbSectPx_EXPORT Pole_Dangle
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Pnt_Compnt>& thePnt
 			);
 
-			Pole_Dangle
+			TnbSectPx_EXPORT Pole_Dangle
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
@@ -50,16 +50,16 @@ namespace tnbLib
 				return Standard_True;
 			}
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			Pnt2d Coord() const override;
+			TnbSectPx_EXPORT Pnt2d Coord() const override;
 
 			SectPx_PoleType Type() const override
 			{
 				return SectPx_PoleType::dangle;
 			}
 
-			std::shared_ptr<SectPx_Pnt>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Pnt>
 				Pnt() const override;
 
 			void SetPnt(const std::shared_ptr<sectPxLib::Pnt_Compnt>& thePnt)

@@ -24,20 +24,20 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
 		template<class... _Types>
 		SectPx_EmptyInterface(_Types&&... _Args)
 			: SectPx_Interface(_Args...)
 		{}
 
-		Standard_Boolean IsEmpty() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsEmpty() const override;
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		sectPxLib::interfaceType InterfaceType() const override;
+		TnbSectPx_EXPORT sectPxLib::interfaceType InterfaceType() const override;
 
-		void disJoint() override;
+		TnbSectPx_EXPORT void disJoint() override;
 	};
 }
 

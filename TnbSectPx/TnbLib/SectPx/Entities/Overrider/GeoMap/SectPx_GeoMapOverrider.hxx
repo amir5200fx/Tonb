@@ -23,11 +23,11 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		Pnt2d CalcCoord() const override;
+		TnbSectPx_EXPORT Pnt2d CalcCoord() const override;
 
 		const auto& GeoMap() const
 		{

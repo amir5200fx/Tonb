@@ -43,9 +43,9 @@ namespace tnbLib
 
 		virtual Pnt2d CalcCoord() const = 0;
 
-		Standard_Boolean IsOverrider() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsOverrider() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		const auto& Pnt() const
 		{

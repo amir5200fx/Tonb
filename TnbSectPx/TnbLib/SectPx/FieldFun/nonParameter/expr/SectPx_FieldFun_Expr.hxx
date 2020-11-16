@@ -73,7 +73,7 @@ namespace tnbLib
 
 				const Standard_Real & theX_;
 
-				static const Standard_Real null;
+				static TnbSectPx_EXPORT const Standard_Real null;
 
 				Constant()
 					: theX_(null)
@@ -117,7 +117,7 @@ namespace tnbLib
 
 				Standard_Real & theX_;
 
-				static Standard_Real null;
+				static TnbSectPx_EXPORT Standard_Real null;
 
 				Variable()
 					: theX_(null)
@@ -161,9 +161,9 @@ namespace tnbLib
 			std::map<word, std::shared_ptr<Parameter>> theParameters_;
 
 
-			void AddParameter(const word&, std::shared_ptr<Parameter>&& p);
+			TnbSectPx_EXPORT void AddParameter(const word&, std::shared_ptr<Parameter>&& p);
 
-			void RemoveParameter(const word&);
+			TnbSectPx_EXPORT void RemoveParameter(const word&);
 
 			std::string theExpr_;
 
@@ -177,20 +177,20 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
-			FieldFun_Expr
+			TnbSectPx_EXPORT FieldFun_Expr
 			(
 				const word& theExpr
 			);
 
-			FieldFun_Expr
+			TnbSectPx_EXPORT FieldFun_Expr
 			(
 				const Standard_Integer theIndex,
 				const word& theExpr
 			);
 
-			FieldFun_Expr
+			TnbSectPx_EXPORT FieldFun_Expr
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -208,52 +208,52 @@ namespace tnbLib
 				return theExpr_;
 			}
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			Standard_Real Value() const override;
+			TnbSectPx_EXPORT Standard_Real Value() const override;
 
-			void AddVariable
+			TnbSectPx_EXPORT void AddVariable
 			(
 				const word& name,
 				Standard_Real& x
 			);
 
-			void AddVariable
+			TnbSectPx_EXPORT void AddVariable
 			(
 				const word& name, SectPx_FieldFun& x
 			);
 
-			void AddVariable
+			TnbSectPx_EXPORT void AddVariable
 			(
 				const word& name,
 				SectPx_FixedPar& par
 			);
 
-			void AddConstant
+			TnbSectPx_EXPORT void AddConstant
 			(
 				const word& name,
 				const Standard_Real& x
 			);
 
-			void AddConstant
+			TnbSectPx_EXPORT void AddConstant
 			(
 				const word& name,
 				const SectPx_FieldFun& x
 			);
 
-			void AddConstant
+			TnbSectPx_EXPORT void AddConstant
 			(
 				const word& name,
 				const SectPx_ConstPar& par
 			);
 
-			void RemoveVariable
+			TnbSectPx_EXPORT void RemoveVariable
 			(
 				const word& name,
 				const Standard_Boolean delete_node = Standard_True
 			);
 
-			void SetAddConstants
+			TnbSectPx_EXPORT void SetAddConstants
 			(
 				const Standard_Boolean addConstants
 			);

@@ -59,15 +59,15 @@ namespace tnbLib
 			theCloud_ = theCloud;
 		}
 
-		void Update() const override;
+		TnbSectPx_EXPORT void Update() const override;
 
-		static std::vector<Standard_Real> 
+		static TnbSectPx_EXPORT std::vector<Standard_Real>
 			RetrieveKnots
 			(
 				const Geom2d_BSplineCurve&
 			);
 
-		static std::vector<Pnt2d> 
+		static TnbSectPx_EXPORT std::vector<Pnt2d>
 			RetrievePoles
 			(
 				const Geom2d_BSplineCurve&
@@ -75,7 +75,7 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
 		template<class... _Types>
 		SectPx_InterplProfile(_Types&&... _Args)
@@ -83,9 +83,9 @@ namespace tnbLib
 		{}
 
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		static std::shared_ptr<SectPx_InterplProfile> 
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_InterplProfile>
 			MakeProfile
 			(
 				const std::shared_ptr<SectPx_Cloud>& theProfile,

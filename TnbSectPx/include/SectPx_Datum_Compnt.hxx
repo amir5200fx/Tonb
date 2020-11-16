@@ -42,52 +42,52 @@ namespace tnbLib
 				return theY_;
 			}
 
-			void SetX
+			TnbSectPx_EXPORT void SetX
 			(
 				const std::shared_ptr<SectPx_Par>& theX
 			);
 
-			void SetY
+			TnbSectPx_EXPORT void SetY
 			(
 				const std::shared_ptr<SectPx_Par>& theY
 			);
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
 			//- override virtual functions from coord abstract class
 
-			Standard_Real xCoord() const override;
+			TnbSectPx_EXPORT Standard_Real xCoord() const override;
 
-			Standard_Real yCoord() const override;
+			TnbSectPx_EXPORT Standard_Real yCoord() const override;
 
-			Standard_Boolean IsComplete() const override;
+			TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
 			//- override virtual functions from parent abstract class 
 
-			Standard_Integer NbChildren() const override;
+			TnbSectPx_EXPORT Standard_Integer NbChildren() const override;
 
-			Standard_Boolean HasChildren() const override;
+			TnbSectPx_EXPORT Standard_Boolean HasChildren() const override;
 
-			Standard_Boolean
+			TnbSectPx_EXPORT Standard_Boolean
 				HasChild
 				(
 					const std::shared_ptr<SectPx_Child>& thePar
 				) const override;
 
-			std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const override;
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const override;
 
-			Pnt2d Coord() const override;
+			inline Pnt2d Coord() const override;
 
-			void RemoveThisFromChildren() const override;
+			TnbSectPx_EXPORT void RemoveThisFromChildren() const override;
 
-			void AddThisToChildren() const override;
+			TnbSectPx_EXPORT void AddThisToChildren() const override;
 
-			void AddThisToChild
+			TnbSectPx_EXPORT void AddThisToChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			void RemoveThisFromChild
+			TnbSectPx_EXPORT void RemoveThisFromChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;

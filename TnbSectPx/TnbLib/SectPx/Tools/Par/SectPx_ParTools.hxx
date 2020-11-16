@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <SectPx_ParsFwd.hxx>
+#include <SectPx_Module.hxx>
 
 #include <memory>
 #include <map>
@@ -22,25 +23,25 @@ namespace tnbLib
 
 	public:
 
-		static Standard_Boolean
+		static TnbSectPx_EXPORT Standard_Boolean
 			HasParent
 			(
 				const std::shared_ptr<SectPx_Child>& theChild
 			);
 
-		static Standard_Boolean
+		static TnbSectPx_EXPORT Standard_Boolean
 			IsRemovable
 			(
 				const std::shared_ptr<SectPx_Child>& theChild
 			);
 
-		static Standard_Integer
+		static TnbSectPx_EXPORT Standard_Integer
 			NbParents
 			(
 				const std::shared_ptr<SectPx_Child>& theChild
 			);
 
-		static std::map
+		static TnbSectPx_EXPORT std::map
 			<
 			Standard_Integer,
 			std::weak_ptr<SectPx_Parent>
@@ -50,43 +51,43 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Child>& theChild
 			);
 
-		static std::vector<std::shared_ptr<SectPx_Parent>>
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Parent>>
 			RetrieveParents
 			(
 				const std::shared_ptr<SectPx_Child>& theChild
 			);
 
-		static std::vector<std::shared_ptr<SectPx_Parent>> RetrievePntParents(const std::shared_ptr<SectPx_Child>& theChild);
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Parent>> RetrievePntParents(const std::shared_ptr<SectPx_Child>& theChild);
 
-		static std::vector<std::shared_ptr<SectPx_Parent>> RetrieveGeoMapParents(const std::shared_ptr<SectPx_Child>& theChild);
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Parent>> RetrieveGeoMapParents(const std::shared_ptr<SectPx_Child>& theChild);
 
-		static std::shared_ptr<SectPx_FreePar>
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_FreePar>
 			FreeParameter
 			(
 				const std::shared_ptr<SectPx_RegObj>& theEntity
 			);
 
-		static std::shared_ptr<SectPx_FixedPar>
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_FixedPar>
 			FixedParameter
 			(
 				const std::shared_ptr<SectPx_RegObj>& theEntity
 			);
 
-		static std::shared_ptr<SectPx_ConstPar>
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_ConstPar>
 			ConstParameter
 			(
 				const std::shared_ptr<SectPx_RegObj>& theEntity
 			);
 
-		static Standard_Boolean IsParameter(const std::shared_ptr<SectPx_RegObj>& theObj);
+		static TnbSectPx_EXPORT Standard_Boolean IsParameter(const std::shared_ptr<SectPx_RegObj>& theObj);
 
-		static void RemoveParentFromChild
+		static TnbSectPx_EXPORT void RemoveParentFromChild
 		(
 			const std::shared_ptr<SectPx_Parent>& theParent,
 			const std::shared_ptr<SectPx_Child>& theChild
 		);
 
-		static void AddParentToChild
+		static TnbSectPx_EXPORT void AddParentToChild
 		(
 			const std::shared_ptr<SectPx_Parent>& theParent,
 			const std::shared_ptr<SectPx_Child>& theChild

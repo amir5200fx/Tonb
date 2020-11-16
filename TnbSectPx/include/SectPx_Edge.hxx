@@ -48,22 +48,22 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
-		SectPx_Edge
+		TnbSectPx_EXPORT SectPx_Edge
 		(
 			const std::shared_ptr<SectPx_Pnt>& theP0,
 			const std::shared_ptr<SectPx_Pnt>& theP1
 		);
 
-		SectPx_Edge
+		TnbSectPx_EXPORT SectPx_Edge
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Pnt>& theP0,
 			const std::shared_ptr<SectPx_Pnt>& theP1
 		);
 
-		SectPx_Edge
+		TnbSectPx_EXPORT SectPx_Edge
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
@@ -81,29 +81,29 @@ namespace tnbLib
 			return theP1_;
 		}
 
-		Standard_Integer 
+		TnbSectPx_EXPORT Standard_Integer
 			IndexOf
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			) const;
 
-		std::shared_ptr<SectPx_Pnt> 
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_Pnt>
 			Point
 			(
 				const Standard_Integer theIndex
 			) const;
 
-		std::shared_ptr<SectPx_Pnt> 
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_Pnt>
 			Other
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			) const;
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
-		Standard_Boolean IsEdge() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsEdge() const override;
 
 	};
 }
