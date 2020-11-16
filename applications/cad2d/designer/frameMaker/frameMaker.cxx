@@ -13,6 +13,11 @@
 #include <OSstream.hxx>
 #include <OFstream.hxx>
 
+#include <boost/graph/minimum_degree_ordering.hpp>
+
+#include <boost/archive/polymorphic_text_iarchive.hpp>
+#include <boost/archive/polymorphic_text_oarchive.hpp>
+
 namespace tnbLib
 {
 	typedef std::shared_ptr<SectPx_Frame> frame_t;
@@ -237,14 +242,14 @@ namespace tnbLib
 	void saveTo(const word& name)
 	{
 		std::ofstream myFile(name);
-		boost::archive::polymorphic_binary_oarchive ar(myFile);
+		boost::archive::polymorphic_text_oarchive ar(myFile);
 		ar & *getFrame();
 	}
 
 	void loadFrom(const word& name)
 	{
 		std::ifstream myFile(name);
-		boost::archive::polymorphic_binary_iarchive ar(myFile);
+		boost::archive::polymorphic_text_iarchive ar(myFile);
 		ar & *getFrame();
 	}
 
@@ -642,192 +647,8 @@ namespace tnbLib
 
 using namespace tnbLib;
 
-namespace tt
-{
-
-	class Global_Named
-	{
-
-		/*Private Data*/
-
-		std::string theName_;
-
-
-		friend class boost::serialization::access;
-
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version)
-		{
-			ar & theName_;
-		}
-
-	protected:
-
-		Global_Named()
-		{}
-
-		Global_Named
-		(
-			const word& theName
-		)
-			: theName_(theName)
-		{}
-
-	public:
-
-		const word& Name() const
-		{
-			return theName_;
-		}
-
-		std::string& Name()
-		{
-			return theName_;
-		}
-
-		void SetName(const word& theName)
-		{
-			theName_ = theName;
-		}
-	};
-
-	class Global_Indexed
-	{
-
-		/*Private Data*/
-
-		Standard_Integer theIndex_;
-
-
-		friend class boost::serialization::access;
-
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version)
-		{
-			ar & theIndex_;
-		}
-
-	protected:
-
-		Global_Indexed()
-			: theIndex_(0)
-		{}
-
-		Global_Indexed
-		(
-			const Standard_Integer theIndex
-		)
-			: theIndex_(theIndex)
-		{}
-
-	public:
-
-		Standard_Integer Index() const
-		{
-			return theIndex_;
-		}
-
-		Standard_Integer& Index()
-		{
-			return theIndex_;
-		}
-
-		void SetIndex(const Standard_Integer theIndex)
-		{
-			theIndex_ = theIndex;
-		}
-	};
-}
-
-class myBase
-{
-
-public:
-
-	int id = 0;
-
-	myBase()
-	{}
-
-	friend class boost::serialization::access;
-
-	template<class Archive>
-	void serialize(Archive& ar, const unsigned int ver)
-	{
-		ar & id;
-	}
-};
-
-class myClass
-	: public tt::Global_Indexed
-	, public tt::Global_Named
-	//, public std::enable_shared_from_this<myClass>
-{
-
-public:
-
-	myClass()
-	{}
-
-	double x = 0.1;
-
-	friend class boost::serialization::access;
-
-	template<class Archive>
-	void serialize(Archive& ar, const unsigned int ver)
-	{
-		ar & boost::serialization::base_object<tt::Global_Indexed>(*this);
-		ar & boost::serialization::base_object<tt::Global_Named>(*this);
-		ar & x;
-	}
-};
-
-//BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Global_Named);
-BOOST_CLASS_EXPORT(myClass);
-
 int main(int argc, char *argv[])
 {
-	{
-		std::ofstream myFile("save.txt");
-		boost::archive::text_oarchive ar(myFile);
-
-		auto fixed = std::make_shared<SectPx_FixedPar>(0.1);
-		std::shared_ptr<SectPx_Par> par = fixed;
-		par->SetIndex(12);
-		par->SetName("my parameter");
-		ar << par;
-
-		myFile.close();
-		//return 0;
-	}
-
-	{
-		try
-		{
-			std::ifstream myFile("save.txt");
-			boost::archive::text_iarchive ar(myFile);
-
-			std::shared_ptr<SectPx_Par> par;
-			ar >> par;
-
-			return 0;
-		}
-		catch (const std::exception& x)
-		{
-			cout << x.what() << std::endl;
-		}
-	}
-
-	makeSegment(Pnt2d(0, 0), Pnt2d(1, 1));
-	try
-	{
-		saveTo("myFrame.tnb");
-	}
-	catch (const std::exception& x)
-	{
-		std::cout << x.what() << std::endl;
-	}
-	return 0;
 	FatalError.throwExceptions();
 
 	if (argc <= 1)
