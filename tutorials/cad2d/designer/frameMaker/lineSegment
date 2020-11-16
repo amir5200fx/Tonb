@@ -1,0 +1,38 @@
+//- create the parameters of the first point
+//- In this example, first point is constant, P0(0, 0)
+var parMaker = getParameterMaker();
+
+var x0 = parMaker.createConstant(0);
+var y0 = parMaker.createConstant(0);
+
+//- rename the parameters
+getPar(x0).setName("x0");
+getPar(y0).setName("y0");
+
+//- for the other point, we define a parameter 'lx' as the x-coordinate
+//- and a parameter 'ly' as the y-coordinate
+var x1 = parMaker.createFixed(0.35);
+var y1 = parMaker.createFixed(1.5);
+
+//- rename the parameters
+getPar(x1).setName("x1");
+getPar(y1).setName("y1");
+
+//- Now, we can create the first point with parameters x0 and y0
+var pntMaker = getPointMaker();
+
+//- for a profile, we need two outer component point at its ends:
+var p0 = pntMaker.createOuterComponent(getPar(x0), getPar(y0));
+var p1 = pntMaker.createOuterComponent(getPar(x1), getPar(y1));
+
+p0.setName("p0");
+p1.setName("p1");
+
+//- get the profile maker
+var profileMaker = getCmpProfileMaker();
+
+//- create custom profile
+var myProfile = profileMaker.createCustom(p0, p1);
+
+printFrame();
+
