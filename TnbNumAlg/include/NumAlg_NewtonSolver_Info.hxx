@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <NumAlg_Module.hxx>
 #include <NumAlg_NewtonSolver_Condition.hxx>
 
 namespace tnbLib
@@ -74,12 +75,12 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer MAX_NB_ITERATIONS;
+		static TnbNumAlg_EXPORT const Standard_Integer MAX_NB_ITERATIONS;
 
-		static const Standard_Real DEFAULT_TOLERANCE;
-		static const Standard_Real DEFAULT_UNDER_RELAXATION;
-		static const Standard_Real DEFAULT_SMALL;
-		static const Standard_Real DEFAULT_ZERO;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_SMALL;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_ZERO;
 
 		NumAlg_NewtonSolver_Info();
 

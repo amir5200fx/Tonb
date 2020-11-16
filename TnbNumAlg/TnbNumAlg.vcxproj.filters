@@ -70,6 +70,9 @@
     <Filter Include="TnbLib\NumAlg\NonLinearSolver\Secant\Info">
       <UniqueIdentifier>{4a44d065-2042-4ad8-9171-42d2af4e8741}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\NumAlg\module">
+      <UniqueIdentifier>{e4578b94-b487-4fe8-837a-19ec5b1d9f62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
@@ -137,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Secant\NumAlg_Secant_Condition.hxx">
       <Filter>TnbLib\NumAlg\NonLinearSolver\Secant</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\module\NumAlg_Module.hxx">
+      <Filter>TnbLib\NumAlg\module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
