@@ -20,7 +20,7 @@ namespace tnbLib
 	typedef cad2dLib::Modeler_SelectList selList;
 
 	static const auto modeler = std::make_shared<Cad2d_Modeler>();
-	static selList selt;
+	//static selList selt;
 
 	
 
@@ -118,7 +118,7 @@ namespace tnbLib
 
 	void print(const Pnt2d& p)
 	{
-		Info << p << endl;
+		Info << p.X() << "  " << p.Y() << endl;
 	}
 
 	auto makeSegment(const Pnt2d& p0, const Pnt2d& p1)
@@ -332,7 +332,7 @@ namespace tnbLib
 		m->RemoveEdge(e);
 	}
 
-	void selectList(const modeler_t& m, const Standard_Integer id, selList& l)
+	/*void selectList(const modeler_t& m, const Standard_Integer id, selList& l)
 	{
 		auto item = selectEdge(m, id);
 		if (NOT m->HasDuplication(item, l)) m->Select(item, l);
@@ -387,7 +387,7 @@ namespace tnbLib
 	void makePlanes(const modeler_t& m)
 	{
 		m->MakePlanes(selt);
-	}
+	}*/
 
 	void unionOp(const modeler_t& m, const int pl0, const int pl1)
 	{
@@ -415,12 +415,12 @@ namespace tnbLib
 {
 
 
-	static const auto chai = std::make_shared<chaiscript::ChaiScript>();
+	//static const auto chai = std::make_shared<chaiscript::ChaiScript>();
 
-	static const auto& getChai()
+	/*static const auto& getChai()
 	{
 		return chai;
-	}
+	}*/
 
 	class InputGeometricFunctions
 	{
@@ -445,13 +445,13 @@ namespace tnbLib
 			mod->add(chaiscript::fun([](const gp_Ax22d& axay, const double focalL)-> auto {return makeGeoParab(axay, focalL); }), "makeGeoParab");
 			mod->add(chaiscript::fun([](const gp_Ax2d& directrix, const gp_Pnt2d& focus, const bool s)-> auto {return makeGeoParab(directrix, focus, s); }), "makeGeoParab");*/
 
-			getChai()->add(mod);
+			//getChai()->add(mod);
 
 		}
 
 	};
 
-	static const InputGeometricFunctions inputGeometricFunctions;
+	//static const InputGeometricFunctions inputGeometricFunctions;
 
 
 }
@@ -514,7 +514,7 @@ namespace tnbLib
 		//mod->add(chaiscript::fun([](const Pnt2d& p0, const Pnt2d& p1)-> void {makeRectangular(p0, p1); }), "createRectangular");
 	}
 
-	void setOps(const module_t& mod)
+	/*void setOps(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const modeler_t& m, const int id)-> edge_t {auto t = selectEdge(m, id); return std::move(t); }), "selectEdge");
 		mod->add(chaiscript::fun([](const modeler_t& m, const edge_t& e)-> void {removeEdge(m, e); }), "removeEdge");
@@ -523,7 +523,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const modeler_t& m)-> void {selectAllList(m); }), "selectAll");
 		mod->add(chaiscript::fun([](const modeler_t& m)-> void {deSelectAllList(m); }), "deSelectAll");
 		mod->add(chaiscript::fun([](const modeler_t& m)-> int {return makePlane(m); }), "createPlane");
-	}
+	}*/
 
 	void setBooleans(const module_t& mod)
 	{
@@ -535,7 +535,7 @@ namespace tnbLib
 	void setGeoFuncs(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const double x, const double y)-> auto {return makePoint(x, y); }), "MakePnt");
-		/*mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& v)-> auto {return makeGeoAx2d(p, v); }), "MakeAxis");
+		mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& v)-> auto {return makeGeoAx2d(p, v); }), "MakeAxis");
 		mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& vx, const Dir2d& vy)-> auto {return makeGeoAx22d(p, vx, vy); }), "MakeCoordSys");
 		mod->add(chaiscript::fun([](const Pnt2d& p, const Dir2d& v, const bool s)-> auto {return makeGeoAx22d(p, v, s); }), "MakeCoordSys");
 		mod->add(chaiscript::fun([](const gp_Ax2d& ax, const bool s)-> auto {return makeGeoAx22d(ax, s); }), "MakeCoordSys");
@@ -547,7 +547,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const gp_Ax22d& axay, const double mjrR, const double mnrR)-> auto {return makeGeoHypr(axay, mjrR, mnrR); }), "makeGeoHypr");
 		mod->add(chaiscript::fun([](const gp_Ax2d& ax, const double focal, const bool s)-> auto {return makeGeoParab(ax, focal, s); }), "makeGeoParab");
 		mod->add(chaiscript::fun([](const gp_Ax22d& axay, const double focalL)-> auto {return makeGeoParab(axay, focalL); }), "makeGeoParab");
-		mod->add(chaiscript::fun([](const gp_Ax2d& directrix, const gp_Pnt2d& focus, const bool s)-> auto {return makeGeoParab(directrix, focus, s); }), "makeGeoParab");*/
+		mod->add(chaiscript::fun([](const gp_Ax2d& directrix, const gp_Pnt2d& focus, const bool s)-> auto {return makeGeoParab(directrix, focus, s); }), "makeGeoParab");
 	}
 
 
