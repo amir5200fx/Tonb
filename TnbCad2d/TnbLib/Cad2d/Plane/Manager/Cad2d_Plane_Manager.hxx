@@ -52,9 +52,9 @@ namespace tnbLib
 
 		public:
 
-			Standard_Integer NbCorners() const;
+			TnbCad2d_EXPORT Standard_Integer NbCorners() const;
 
-			Standard_Integer NbSegments() const;
+			TnbCad2d_EXPORT Standard_Integer NbSegments() const;
 
 			const auto& Corners() const
 			{
@@ -66,12 +66,12 @@ namespace tnbLib
 				return theEdges_;
 			}
 
-			void RetrieveCornersTo
+			TnbCad2d_EXPORT void RetrieveCornersTo
 			(
 				std::vector<std::shared_ptr<Pln_Entity>>& theEntities
 			) const;
 
-			void RetrieveSegmentsTo
+			TnbCad2d_EXPORT void RetrieveSegmentsTo
 			(
 				std::vector<std::shared_ptr<Pln_Entity>>& theEntities
 			) const;

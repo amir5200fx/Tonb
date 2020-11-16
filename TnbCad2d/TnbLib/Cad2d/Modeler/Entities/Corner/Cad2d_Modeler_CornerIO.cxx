@@ -7,9 +7,11 @@ DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Corner)
 	ar & boost::serialization::base_object<Modeler_Entity>(*this);
 	ar & boost::serialization::base_object<Modeler_CornerAdaptor>(*this);
 
+	double radius = Radius();
+	double tol = Tolerance();
 	ar & Vertices();
-	ar & Radius();
-	ar & Tolerance();
+	ar & radius;
+	ar & tol;
 	ar & Coord();
 }
 

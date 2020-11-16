@@ -5,6 +5,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Cad2d_IntsctEntity_Adaptor.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 
@@ -25,12 +26,12 @@ namespace tnbLib
 		Cad2d_IntsctEntity()
 		{}
 
-		Cad2d_IntsctEntity
+		TnbCad2d_EXPORT Cad2d_IntsctEntity
 		(
 			const Standard_Integer theIndex
 		);
 
-		Cad2d_IntsctEntity
+		TnbCad2d_EXPORT Cad2d_IntsctEntity
 		(
 			const Standard_Integer theIndex,
 			const word& theName

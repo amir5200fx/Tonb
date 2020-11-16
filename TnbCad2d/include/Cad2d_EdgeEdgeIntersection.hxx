@@ -4,6 +4,7 @@
 
 #include <Cad2d_EntityEntityIntersection.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <tuple>
@@ -28,14 +29,14 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_EdgeEdgeIntersection();
+		TnbCad2d_EXPORT Cad2d_EdgeEdgeIntersection();
 
-		Cad2d_EdgeEdgeIntersection
+		TnbCad2d_EXPORT Cad2d_EdgeEdgeIntersection
 		(
 			const Standard_Integer theIndex
 		);
 
-		Cad2d_EdgeEdgeIntersection
+		TnbCad2d_EXPORT Cad2d_EdgeEdgeIntersection
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
@@ -72,9 +73,9 @@ namespace tnbLib
 			theEdge1_ = theEdge;
 		}
 
-		void Perform();
+		TnbCad2d_EXPORT void Perform();
 
-		static std::tuple
+		static TnbCad2d_EXPORT std::tuple
 			<
 			std::shared_ptr<Cad2d_EdgeEdgeIntersection>,
 			std::shared_ptr<Cad2d_EdgeEdgeIntersection>

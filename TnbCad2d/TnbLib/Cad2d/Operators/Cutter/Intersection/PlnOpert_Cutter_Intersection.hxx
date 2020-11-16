@@ -2,6 +2,7 @@
 #define _PlnOpert_Cutter_Intersection_Header
 
 #include <Global_Done.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -75,7 +76,7 @@ namespace tnbLib
 			return theEntities_;
 		}
 
-		void Perform(const Standard_Real theTol);
+		TnbCad2d_EXPORT void Perform(const Standard_Real theTol);
 
 		void LoadCutter(const std::shared_ptr<Pln_CmpEdge>& theCutter)
 		{

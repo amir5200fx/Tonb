@@ -4,6 +4,7 @@
 
 #include <Global_Done.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -37,9 +38,9 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_TOLERANCE;
+		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 
-		Cad2d_PlanePlaneIntersection();
+		TnbCad2d_EXPORT Cad2d_PlanePlaneIntersection();
 
 		auto NbEntities() const
 		{
@@ -77,7 +78,7 @@ namespace tnbLib
 			thePlane1_ = thePlane;
 		}
 
-		void Perform();
+		TnbCad2d_EXPORT void Perform();
 
 
 		//- Macros

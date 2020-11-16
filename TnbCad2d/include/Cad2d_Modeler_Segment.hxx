@@ -57,20 +57,20 @@ namespace tnbLib
 
 		public:
 
-			Modeler_Segment
+			TnbCad2d_EXPORT Modeler_Segment
 			(
 				const std::shared_ptr<Modeler_Corner>& theC0, 
 				const std::shared_ptr<Modeler_Corner>& theC1
 			);
 
-			Modeler_Segment
+			TnbCad2d_EXPORT Modeler_Segment
 			(
 				const Standard_Integer theIndex, 
 				const std::shared_ptr<Modeler_Corner>& theC0,
 				const std::shared_ptr<Modeler_Corner>& theC1
 			);
 
-			Modeler_Segment
+			TnbCad2d_EXPORT Modeler_Segment
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
@@ -104,19 +104,19 @@ namespace tnbLib
 				return Standard_False;
 			}
 
-			virtual std::shared_ptr<Modeler_Corner> 
+			TnbCad2d_EXPORT virtual std::shared_ptr<Modeler_Corner>
 				Other
 				(
 					const std::shared_ptr<Modeler_Corner>& theCrn
 				) const;
 
-			std::shared_ptr<Pln_Edge> 
+			TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
 				RemoveFromEdges
 				(
 					const Standard_Integer theIndex
 				);
 
-			void ImportToEdges
+			TnbCad2d_EXPORT void ImportToEdges
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Pln_Edge>& theEdge
@@ -142,18 +142,18 @@ namespace tnbLib
 
 		public:
 
-			Modeler_Ring
+			TnbCad2d_EXPORT Modeler_Ring
 			(
 				const std::shared_ptr<Modeler_Corner>& theCrn
 			);
 
-			Modeler_Ring
+			TnbCad2d_EXPORT Modeler_Ring
 			(
 				const Standard_Integer theIndex, 
 				const std::shared_ptr<Modeler_Corner>& theCrn
 			);
 
-			Modeler_Ring
+			TnbCad2d_EXPORT Modeler_Ring
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
@@ -166,7 +166,7 @@ namespace tnbLib
 				return Standard_True;
 			}
 
-			std::shared_ptr<Modeler_Corner>
+			TnbCad2d_EXPORT std::shared_ptr<Modeler_Corner>
 				Other
 				(
 					const std::shared_ptr<Modeler_Corner>& theCrn

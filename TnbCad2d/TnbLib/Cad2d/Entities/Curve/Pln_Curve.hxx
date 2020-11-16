@@ -47,7 +47,7 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
-		void CheckBoundary(const Standard_Real x, const char* theName) const;
+		TnbCad2d_EXPORT void CheckBoundary(const Standard_Real x, const char* theName) const;
 
 	public:
 
@@ -56,36 +56,36 @@ namespace tnbLib
 		Pln_Curve()
 		{}
 
-		Pln_Curve
+		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Pln_Curve
+		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)&& theGeom
 		);
 
-		Pln_Curve
+		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Pln_Curve
+		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Handle(Geom2d_Curve)&& theGeom
 		);
 
-		Pln_Curve
+		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Pln_Curve
+		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -97,23 +97,23 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
-		Standard_Real FirstParameter() const;
+		TnbCad2d_EXPORT Standard_Real FirstParameter() const;
 
-		Standard_Real LastParameter() const;
+		TnbCad2d_EXPORT Standard_Real LastParameter() const;
 
-		Pnt2d Value(const Standard_Real x) const;
+		TnbCad2d_EXPORT Pnt2d Value(const Standard_Real x) const;
 
-		Pnt2d Value_normParam(const Standard_Real x) const;
+		TnbCad2d_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
 
-		Pnt2d FirstCoord() const;
+		inline Pnt2d FirstCoord() const;
 
-		Pnt2d LastCoord() const;
+		inline Pnt2d LastCoord() const;
 
-		Entity2d_Box BoundingBox(const Standard_Real Tol) const;
+		TnbCad2d_EXPORT Entity2d_Box BoundingBox(const Standard_Real Tol) const;
 
 		//Standard_Boolean IsOrphan() const override;
 
-		virtual std::shared_ptr<Pln_Curve>
+		TnbCad2d_EXPORT virtual std::shared_ptr<Pln_Curve>
 			Copy() const;
 
 		auto This() const
@@ -123,26 +123,26 @@ namespace tnbLib
 
 		//Pln_EntityType Type() const override;
 
-		void Transform(const gp_Trsf2d& t);
+		TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t);
 
-		void Interpolation
+		TnbCad2d_EXPORT void Interpolation
 		(
 			const std::vector<Pnt2d>& theQ,
 			const Standard_Integer theDeg = 2, 
 			const Standard_Real theTol = 1.0E-6
 		);
 
-		virtual std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
+		TnbCad2d_EXPORT virtual std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
 			Split(const Standard_Real x) const;
 
-		virtual void Split
+		TnbCad2d_EXPORT virtual void Split
 		(
 			const Standard_Real x,
 			std::shared_ptr<Pln_Curve>& theLeft,
 			std::shared_ptr<Pln_Curve>& theRight
 		) const;
 
-		virtual void Split
+		TnbCad2d_EXPORT virtual void Split
 		(
 			const Standard_Real x,
 			Pnt2d& theCoord,
@@ -150,19 +150,19 @@ namespace tnbLib
 			std::shared_ptr<Pln_Curve>& theRight
 		) const;
 
-		std::vector<std::shared_ptr<Pln_Curve>> Split
+		TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Curve>> Split
 		(
 			const std::vector<Standard_Real>& theParameters
 		) const;
 
-		void Split
+		TnbCad2d_EXPORT void Split
 		(
 			const std::vector<Standard_Real>& theParameters,
 			std::vector<Pnt2d>& theCoords,
 			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 		) const;
 
-		virtual std::tuple
+		TnbCad2d_EXPORT virtual std::tuple
 			<
 			std::shared_ptr<Pln_Curve>,
 			std::shared_ptr<Pln_Curve>,
@@ -185,29 +185,33 @@ namespace tnbLib
 
 		// Static functions and operators
 
-		static std::shared_ptr<Pln_Curve> 
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			Clip
 			(
 				const Pln_Curve& theCurve,
 				const Standard_Real theP0,
 				const Standard_Real theP1
-			);
+			)
+		{
+			NotImplemented;
+			return nullptr;
+		}
 
-		static std::shared_ptr<Entity2d_Polygon>
+		static TnbCad2d_EXPORT std::shared_ptr<Entity2d_Polygon>
 			Discretize
 			(
 				const Pln_Curve& theCurve,
 				const Standard_Integer theNbSegments
 			);
 
-		static std::shared_ptr<Pln_Curve>
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			MakeLineSegment
 			(
 				const Pnt2d& theP0,
 				const Pnt2d& theP1
 			);
 
-		static std::shared_ptr<Pln_Curve>
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			MakeCircularArc
 			(
 				const gp_Ax22d& A,
@@ -216,7 +220,7 @@ namespace tnbLib
 				const Standard_Real theDeg1
 			);
 
-		static std::shared_ptr<Pln_Curve>
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			MakeCircularArc
 			(
 				const gp_Ax2d& A,
@@ -226,7 +230,7 @@ namespace tnbLib
 				const Standard_Boolean Sense = Standard_True
 			);
 
-		static std::shared_ptr<Pln_Curve> 
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			MakeEllipse
 			(
 				const gp_Ax2d& MajorAxis,
@@ -235,7 +239,7 @@ namespace tnbLib
 				const Standard_Boolean Sense = Standard_True
 			);
 
-		static std::shared_ptr<Pln_Curve> 
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			MakeEllipse
 			(
 				const gp_Ax22d& Axis,
@@ -243,7 +247,7 @@ namespace tnbLib
 				const Standard_Real MinorRadius
 			);
 
-		static Standard_Boolean IsValid(const std::shared_ptr<Pln_Curve>& theCurve, const Standard_Real theTol);
+		static TnbCad2d_EXPORT Standard_Boolean IsValid(const std::shared_ptr<Pln_Curve>& theCurve, const Standard_Real theTol);
 
 		//- Macros
 

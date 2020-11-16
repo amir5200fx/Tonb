@@ -3,6 +3,7 @@
 #define _PlnOpert_Cutter_Subdivide_Header
 
 #include <Global_Done.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -51,7 +52,7 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		void Perform(const Standard_Real theTol);
+		TnbCad2d_EXPORT void Perform(const Standard_Real theTol);
 
 	};
 }

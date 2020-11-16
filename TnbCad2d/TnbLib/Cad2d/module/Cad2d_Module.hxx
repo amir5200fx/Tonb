@@ -2,8 +2,6 @@
 #ifndef _Cad2d_Module_Header
 #define _Cad2d_Module_Header
 
-#define TnbCad2d_STATIC_DEFINE
-
 #ifdef TnbCad2d_STATIC_DEFINE
 #define TnbCad2d_EXPORT
 #else

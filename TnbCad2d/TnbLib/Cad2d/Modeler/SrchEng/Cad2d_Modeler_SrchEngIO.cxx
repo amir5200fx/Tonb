@@ -4,8 +4,9 @@
 
 DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_SrchEng)
 {
+	double radius = Radius();
 	ar & Corners();
-	ar & Radius();
+	ar & radius;
 	ar & CornerCounter();
 }
 

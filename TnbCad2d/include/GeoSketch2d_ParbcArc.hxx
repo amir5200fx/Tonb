@@ -20,7 +20,7 @@ namespace tnbLib
 
 	public:
 
-		GeoSketch2d_ParbcArc
+		TnbCad2d_EXPORT GeoSketch2d_ParbcArc
 		(
 			const gp_Parab2d& theParab,
 			const Standard_Real theAlpha0,
@@ -28,7 +28,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		GeoSketch2d_ParbcArc
+		TnbCad2d_EXPORT GeoSketch2d_ParbcArc
 		(
 			const gp_Parab2d& theParab, 
 			const Pnt2d& theP, 
@@ -36,7 +36,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		GeoSketch2d_ParbcArc
+		TnbCad2d_EXPORT GeoSketch2d_ParbcArc
 		(
 			const gp_Parab2d& theParab,
 			const Pnt2d& theP0,

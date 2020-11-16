@@ -2,6 +2,8 @@
 #ifndef _Pln_Orientation_Header
 #define _Pln_Orientation_Header
 
+#include <Global_Serialization.hxx>
+
 namespace tnbLib
 {
 
@@ -13,6 +15,12 @@ namespace tnbLib
 	};
 
 	Pln_Orientation Reverse(const Pln_Orientation theOrient);
+
+	template<class Archive>
+	void serialize(Archive& ar, Pln_Orientation& x, const unsigned int file_version)
+	{
+		ar & x;
+	}
 }
 
 #endif // !_Pln_Orientation_Header

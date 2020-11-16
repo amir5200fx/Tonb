@@ -2,6 +2,7 @@
 #ifndef _Pln_Entity_Header
 #define _Pln_Entity_Header
 
+#include <Cad2d_Module.hxx>
 #include <Cad_Entity.hxx>
 #include <Cad2d_Module.hxx>
 #include <Pln_EntityType.hxx>

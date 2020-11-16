@@ -19,20 +19,20 @@ namespace tnbLib
 
 	public:
 
-		GeoSketch2d_Segment
+		TnbCad2d_EXPORT GeoSketch2d_Segment
 		(
 			const Pnt2d& theP0, 
 			const Pnt2d& theP1
 		);
 
-		GeoSketch2d_Segment
+		TnbCad2d_EXPORT GeoSketch2d_Segment
 		(
 			const Pnt2d& theP0,
 			const Dir2d& theDir, 
 			const Standard_Real theLength
 		);
 
-		GeoSketch2d_Segment
+		TnbCad2d_EXPORT GeoSketch2d_Segment
 		(
 			const Pnt2d& theP0, 
 			const Standard_Real theAngle, 

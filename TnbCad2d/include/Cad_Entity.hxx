@@ -20,7 +20,16 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+		//DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+		}
 
 	protected:
 

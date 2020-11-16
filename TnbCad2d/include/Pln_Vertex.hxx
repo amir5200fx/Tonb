@@ -68,28 +68,28 @@ namespace tnbLib
 			, theCoord_(theCoord)
 		{}
 
-		Standard_Boolean IsDangle() const;
+		inline Standard_Boolean IsDangle() const;
 
-		Standard_Boolean IsRingPoint() const;
+		TnbCad2d_EXPORT Standard_Boolean IsRingPoint() const;
 
-		Standard_Boolean IsManifold() const;
+		TnbCad2d_EXPORT Standard_Boolean IsManifold() const;
 
-		Standard_Real Angle() const;
+		TnbCad2d_EXPORT Standard_Real Angle() const;
 
-		Standard_Integer NbEntities(const Pln_EntityType t) const override;
+		inline Standard_Integer NbEntities(const Pln_EntityType t) const override;
 
-		Standard_Boolean IsOrphan() const override;
+		TnbCad2d_EXPORT Standard_Boolean IsOrphan() const override;
 
-		Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
+		TnbCad2d_EXPORT Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
 
-		std::shared_ptr<Pln_Entity>
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Entity>
 			Copy() const override;
 
-		Pln_EntityType Type() const override;
+		TnbCad2d_EXPORT Pln_EntityType Type() const override;
 
-		void Transform(const gp_Trsf2d& t) override;
+		TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t) override;
 
-		void RetrieveEntitiesTo
+		TnbCad2d_EXPORT void RetrieveEntitiesTo
 		(
 			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
 			const Pln_EntityType t
@@ -109,13 +109,13 @@ namespace tnbLib
 
 		//- static functions
 
-		static const Pnt2d& 
+		static inline const Pnt2d&
 			GetCoord
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx
 			);
 
-		static Standard_Boolean
+		static inline Standard_Boolean
 			IsLess
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx0, 

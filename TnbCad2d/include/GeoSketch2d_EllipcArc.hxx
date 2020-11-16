@@ -17,7 +17,7 @@ namespace tnbLib
 
 	public:
 
-		GeoSketch2d_EllipcArc
+		TnbCad2d_EXPORT GeoSketch2d_EllipcArc
 		(
 			const gp_Elips2d& theElips, 
 			const Standard_Real theAlpha0,

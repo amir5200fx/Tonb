@@ -334,7 +334,7 @@
     <Filter Include="TnbLib\Cad2d\Scripts">
       <UniqueIdentifier>{90d3f6f7-4d12-4816-ab0e-ccbdd882d683}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\module">
+    <Filter Include="TnbLib\Cad2d\module">
       <UniqueIdentifier>{c913fbf0-2c42-4944-835b-3fb0070a1a85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -649,7 +649,7 @@
       <Filter>TnbLib\Cad2d\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\module\Cad2d_Module.hxx">
-      <Filter>TnbLib\module</Filter>
+      <Filter>TnbLib\Cad2d\module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

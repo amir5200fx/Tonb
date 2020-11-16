@@ -49,21 +49,21 @@ namespace tnbLib
 				return theMaxRadius_;
 			}
 
-			Standard_Boolean CheckDomain() const;
+			TnbCad2d_EXPORT Standard_Boolean CheckDomain() const;
 
-			void CheckDomain(const char* theName) const;
+			TnbCad2d_EXPORT void CheckDomain(const char* theName) const;
 
 		public:
 
 
-			static const std::shared_ptr<cad2dLib::Modeler_Corner> null;
-			static const Entity2d_Box null_domain;
+			static TnbCad2d_EXPORT const std::shared_ptr<cad2dLib::Modeler_Corner> null;
+			static TnbCad2d_EXPORT const Entity2d_Box null_domain;
 
-			Modeler_SrchEng();
+			TnbCad2d_EXPORT Modeler_SrchEng();
 
-			Standard_Integer Size() const;
+			TnbCad2d_EXPORT Standard_Integer Size() const;
 
-			Standard_Boolean IsEmpty() const;
+			TnbCad2d_EXPORT Standard_Boolean IsEmpty() const;
 
 			auto Radius() const
 			{
@@ -80,56 +80,56 @@ namespace tnbLib
 				return theCornerCounter_;
 			}
 
-			std::shared_ptr<cad2dLib::Modeler_Corner>
+			TnbCad2d_EXPORT std::shared_ptr<cad2dLib::Modeler_Corner>
 				SelectCorner
 				(
 					const Pnt2d& theCoord
 				) const;
 
-			std::shared_ptr<cad2dLib::Modeler_Corner>
+			TnbCad2d_EXPORT std::shared_ptr<cad2dLib::Modeler_Corner>
 				FindCorner
 				(
 					const std::shared_ptr<Pln_Vertex>& theVtx
 				) const;
 
-			void ReArrangeSrchEngine();
+			TnbCad2d_EXPORT void ReArrangeSrchEngine();
 
-			void InsertToSrchEngine
+			TnbCad2d_EXPORT void InsertToSrchEngine
 			(
 				const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
 			);
 
-			void RemoveFromSrchEngine
+			TnbCad2d_EXPORT void RemoveFromSrchEngine
 			(
 				const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
 			);
 
-			void RetrieveCornersTo
+			TnbCad2d_EXPORT void RetrieveCornersTo
 			(
 				std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners
 			) const;
 
-			void SetMaxRadius
+			TnbCad2d_EXPORT void SetMaxRadius
 			(
 				const Standard_Real theRadius
 			);
 
-			void SetDomain
+			TnbCad2d_EXPORT void SetDomain
 			(
 				const Entity2d_Box& theDomain
 			);
 
-			void Clear();
+			TnbCad2d_EXPORT void Clear();
 
 			//- static functions
 
-			static Standard_Boolean
+			static TnbCad2d_EXPORT Standard_Boolean
 				IsNull
 				(
 					const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
 				);
 
-			static const std::shared_ptr<cad2dLib::Modeler_Corner>&
+			static TnbCad2d_EXPORT const std::shared_ptr<cad2dLib::Modeler_Corner>&
 				MinDist
 				(
 					const std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>>& theCorners,

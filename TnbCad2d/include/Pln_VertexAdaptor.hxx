@@ -53,20 +53,20 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		std::vector<std::weak_ptr<Pln_Edge>> RetrieveEdges() const;
+		TnbCad2d_EXPORT std::vector<std::weak_ptr<Pln_Edge>> RetrieveEdges() const;
 
-		void InsertToEdges
+		TnbCad2d_EXPORT void InsertToEdges
 		(
 			const Standard_Integer theIndex,
 			const std::weak_ptr<Pln_Edge>& theEdge
 		);
 
-		void RemoveFromEdges
+		TnbCad2d_EXPORT void RemoveFromEdges
 		(
 			const Standard_Integer theIndex
 		);
 
-		void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
+		TnbCad2d_EXPORT void RetrieveEdgesTo(std::vector<std::weak_ptr<Pln_Edge>>& theEdges) const;
 	};
 }
 

@@ -84,22 +84,22 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		std::shared_ptr<Pln_CmpEdge>
+		TnbCad2d_EXPORT std::shared_ptr<Pln_CmpEdge>
 			Copy() const;
 
-		std::vector<std::shared_ptr<Pln_Vertex>>
+		TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Vertex>>
 			RetrieveVertices() const;
 
-		void Transform(const gp_Trsf2d& t);
+		TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t);
 
-		void RetrieveVerticesTo
+		TnbCad2d_EXPORT void RetrieveVerticesTo
 		(
 			std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
 		) const;
 
-		void Reverse();
+		TnbCad2d_EXPORT void Reverse();
 
-		void ExportToPlt
+		TnbCad2d_EXPORT void ExportToPlt
 		(
 			OFstream& File
 		) const;

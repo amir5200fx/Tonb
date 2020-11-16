@@ -42,12 +42,12 @@ namespace tnbLib
 
 		protected:
 
-			Plane_Auxillary(const gp_Ax2& theSystem);
+			TnbCad2d_EXPORT Plane_Auxillary(const gp_Ax2& theSystem);
 
-			Plane_Auxillary(const gp_Ax2&& theSystem);
+			TnbCad2d_EXPORT Plane_Auxillary(const gp_Ax2&& theSystem);
 
 
-			void SetBoundingBox(const std::shared_ptr<Entity2d_Box>&& theB);
+			TnbCad2d_EXPORT void SetBoundingBox(const std::shared_ptr<Entity2d_Box>&& theB);
 
 		public:
 

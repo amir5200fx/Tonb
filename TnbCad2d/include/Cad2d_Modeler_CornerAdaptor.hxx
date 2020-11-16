@@ -52,19 +52,19 @@ namespace tnbLib
 				return theSegments_;
 			}
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContains
 				(
 					const std::shared_ptr<Modeler_Segment>& theSegmnt
 				) const;
 
-			std::weak_ptr<Modeler_Segment> 
+			TnbCad2d_EXPORT std::weak_ptr<Modeler_Segment>
 				RemoveFromSegments
 				(
 					const Standard_Integer theIndex
 				);
 
-			void ImportToSegments
+			TnbCad2d_EXPORT void ImportToSegments
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Modeler_Segment>& theSegmnt

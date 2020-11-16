@@ -39,15 +39,15 @@ namespace tnbLib
 
 		protected:
 
-			Modeler_Plane();
+			TnbCad2d_EXPORT Modeler_Plane();
 
-			void InsertToPlanes
+			TnbCad2d_EXPORT void InsertToPlanes
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
-			void InsertToPlanes
+			TnbCad2d_EXPORT void InsertToPlanes
 			(
 				const Standard_Integer theIndex,
 				std::shared_ptr<Cad2d_Plane>&& thePlane
@@ -55,13 +55,13 @@ namespace tnbLib
 
 		public:
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContainPlane
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContain
 				(
 					const std::shared_ptr<Cad2d_Plane>& thePlane
@@ -77,22 +77,22 @@ namespace tnbLib
 				return thePlanes_;
 			}
 
-			std::shared_ptr<Cad2d_Plane>
+			TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
 				RemoveFromPlanes
 				(
 					const Standard_Integer theIndex
 				);
 
-			std::shared_ptr<Cad2d_Plane>
+			TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
 				SelectPlane
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			std::vector<std::shared_ptr<Cad2d_Plane>> 
+			TnbCad2d_EXPORT std::vector<std::shared_ptr<Cad2d_Plane>>
 				RetrievePlanes() const;
 
-			void RetrievePlanesTo
+			TnbCad2d_EXPORT void RetrievePlanesTo
 			(
 				std::vector<std::shared_ptr<Cad2d_Plane>>& thePlanes
 			) const;

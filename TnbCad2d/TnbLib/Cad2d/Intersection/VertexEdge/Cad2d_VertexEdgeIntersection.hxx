@@ -27,7 +27,7 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_VertexEdgeIntersection();
+		TnbCad2d_EXPORT Cad2d_VertexEdgeIntersection();
 
 		const auto& Vtx() const
 		{
@@ -54,7 +54,7 @@ namespace tnbLib
 			theEdge_ = theEdge;
 		}
 
-		void Perform();
+		TnbCad2d_EXPORT void Perform();
 
 		//- Macros
 	};

@@ -38,16 +38,16 @@ namespace tnbLib
 
 		protected:
 
-			Modeler_Registry();
+			TnbCad2d_EXPORT Modeler_Registry();
 
 
-			std::shared_ptr<Pln_Edge>
+			TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
 				RemoveEdgeFromRegistry
 				(
 					const Standard_Integer theIndex
 				);
 
-			void RegisterToEdges
+			TnbCad2d_EXPORT void RegisterToEdges
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Pln_Edge>& theEdge
@@ -55,15 +55,15 @@ namespace tnbLib
 
 		public:
 
-			static const std::shared_ptr<Pln_Edge> null_edge;
+			static TnbCad2d_EXPORT const std::shared_ptr<Pln_Edge> null_edge;
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContainEdge
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContain
 				(
 					const std::shared_ptr<Pln_Edge>& theEdge
@@ -79,13 +79,13 @@ namespace tnbLib
 				return theEdges_;
 			}
 
-			std::shared_ptr<Pln_Edge>
+			TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
 				SelectEdge
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			static Standard_Boolean
+			static TnbCad2d_EXPORT Standard_Boolean
 				IsNull
 				(
 					const std::shared_ptr<Pln_Edge>& theEdge

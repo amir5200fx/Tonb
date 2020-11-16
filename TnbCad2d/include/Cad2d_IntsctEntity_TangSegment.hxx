@@ -3,6 +3,7 @@
 #define _Cad2d_IntsctEntity_TangSegment_Header
 
 #include <Cad2d_IntsctEntity_Segment.hxx>
+#include <Cad2d_Module.hxx>
 #include <Pnt2d.hxx>
 
 namespace tnbLib
@@ -25,13 +26,13 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_IntsctEntity_TangSegment();
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_TangSegment();
 
-		explicit Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex);
+		TnbCad2d_EXPORT explicit Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex);
 
-		Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex, const word& theName);
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex, const word& theName);
 
-		Standard_Real CharParameter() const override;
+		TnbCad2d_EXPORT Standard_Real CharParameter() const override;
 
 		//- Macros
 

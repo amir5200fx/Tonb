@@ -5,6 +5,7 @@
 #include <Global_AccessMethod.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Global_Done.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -86,7 +87,7 @@ namespace tnbLib
 			return theEntities_;
 		}
 
-		void Perform();
+		TnbCad2d_EXPORT void Perform();
 
 		void LoadCurve0(const std::shared_ptr<Pln_Curve>& theCurve)
 		{

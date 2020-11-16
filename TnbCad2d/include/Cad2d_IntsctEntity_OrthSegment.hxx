@@ -4,6 +4,7 @@
 
 #include <Cad2d_IntsctEntity_Segment.hxx>
 #include <Pnt2d.hxx>
+#include <Cad2d_Module.hxx>
 
 namespace tnbLib
 {
@@ -23,11 +24,11 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_IntsctEntity_OrthSegment();
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_OrthSegment();
 
-		Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex);
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex);
 
-		Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex, const word& theName);
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex, const word& theName);
 
 
 		Standard_Boolean IsOrthogonal() const override
@@ -40,7 +41,7 @@ namespace tnbLib
 			return theParameter_;
 		}
 
-		static std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
+		static TnbCad2d_EXPORT std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
 			SubdivideCurve
 			(
 				const Pln_Curve& theCurve, 

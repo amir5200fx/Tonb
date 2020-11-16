@@ -3,6 +3,7 @@
 #define _Cad2d_Modeler_Wire_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <map>
@@ -26,9 +27,9 @@ namespace tnbLib
 
 		protected:
 
-			Modeler_Wire();
+			TnbCad2d_EXPORT Modeler_Wire();
 
-			void InsertToWires
+			TnbCad2d_EXPORT void InsertToWires
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Pln_Wire>& theWire
@@ -36,13 +37,13 @@ namespace tnbLib
 
 		public:
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContainWire
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContain
 				(
 					const std::shared_ptr<Pln_Wire>& theWire
@@ -58,7 +59,7 @@ namespace tnbLib
 				return theWires_;
 			}
 
-			std::shared_ptr<Pln_Wire>
+			TnbCad2d_EXPORT std::shared_ptr<Pln_Wire>
 				RemoveFromWires
 				(
 					const Standard_Integer theIndex

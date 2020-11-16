@@ -24,7 +24,7 @@ namespace tnbLib
 
 	protected:
 
-		static const Standard_Real DEFAULT_PRECISION;
+		static TnbCad2d_EXPORT const Standard_Real DEFAULT_PRECISION;
 
 		Pln_EntityPrecision()
 			: thePrecision_(DEFAULT_PRECISION)

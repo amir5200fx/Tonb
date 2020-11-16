@@ -64,18 +64,18 @@ namespace tnbLib
 
 			using Modeler_CornerAdaptor::IsContains;
 
-			static const Standard_Real DEFAULT_RADIUS;
+			static TnbCad2d_EXPORT const Standard_Real DEFAULT_RADIUS;
 
 			typedef Pnt2d ptType;
 
-			Modeler_Corner();
+			TnbCad2d_EXPORT Modeler_Corner();
 
-			Modeler_Corner
+			TnbCad2d_EXPORT Modeler_Corner
 			(
 				const Standard_Integer theIndex
 			);
 
-			Modeler_Corner
+			TnbCad2d_EXPORT Modeler_Corner
 			(
 				const Standard_Integer theIndex,
 				const word& theName
@@ -111,7 +111,7 @@ namespace tnbLib
 				return theVertices_;
 			}
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContains
 				(
 					const std::shared_ptr<Pln_Vertex>& theVtx
@@ -127,7 +127,7 @@ namespace tnbLib
 				theTol_ = theTol;
 			}
 
-			void InsertToCorners
+			TnbCad2d_EXPORT void InsertToCorners
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Pln_Vertex>& theVtx
@@ -138,9 +138,9 @@ namespace tnbLib
 				theCoord_ = theCoord;
 			}
 
-			std::shared_ptr<Pln_Vertex> Remove(const Standard_Integer theIndex);
+			TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> Remove(const Standard_Integer theIndex);
 
-			std::shared_ptr<Modeler_Entity> Copy() const;
+			TnbCad2d_EXPORT std::shared_ptr<Modeler_Entity> Copy() const;
 
 
 			static const Pnt2d& GetCoord

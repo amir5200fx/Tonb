@@ -3,6 +3,7 @@
 #define _Cad2d_Subdivide_Header
 
 #include <Global_Done.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -43,7 +44,7 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_Subdivide();
+		TnbCad2d_EXPORT Cad2d_Subdivide();
 
 		const auto& IntersectionAlgorithm() const
 		{
@@ -60,7 +61,7 @@ namespace tnbLib
 			return thePlane1_;
 		}
 
-		void Perform();
+		TnbCad2d_EXPORT void Perform();
 
 		void LoadIntersectionAlgorithm
 		(
@@ -71,7 +72,7 @@ namespace tnbLib
 		}
 
 
-		static std::tuple<std::shared_ptr<Pln_CmpEdge>, std::shared_ptr<Pln_CmpEdge>>
+		static TnbCad2d_EXPORT std::tuple<std::shared_ptr<Pln_CmpEdge>, std::shared_ptr<Pln_CmpEdge>>
 			RetrieveSubEdges
 			(
 				const std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>>& theEntities

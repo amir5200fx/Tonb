@@ -3,6 +3,7 @@
 #define _Cad2d_PolygonTrim_Header
 
 #include <Global_Done.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <vector>
 #include <memory>
@@ -43,9 +44,9 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_PolygonTrim();
+		TnbCad2d_EXPORT Cad2d_PolygonTrim();
 
-		Cad2d_PolygonTrim
+		TnbCad2d_EXPORT Cad2d_PolygonTrim
 		(
 			const std::shared_ptr<edgeList>& theEdges
 		);
@@ -65,7 +66,7 @@ namespace tnbLib
 			return theCurves_;
 		}
 
-		void Perform(const Standard_Integer theTol = 1.0E-6);
+		TnbCad2d_EXPORT void Perform(const Standard_Integer theTol = 1.0E-6);
 
 		void LoadEdges
 		(

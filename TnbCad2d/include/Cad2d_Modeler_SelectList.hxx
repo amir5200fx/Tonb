@@ -39,13 +39,13 @@ namespace tnbLib
 				return theItems_;
 			}
 
-			Standard_Boolean IsContain(const Standard_Integer theIndex) const;
+			TnbCad2d_EXPORT Standard_Boolean IsContain(const Standard_Integer theIndex) const;
 
-			std::weak_ptr<Pln_Edge> Remove(const Standard_Integer theIndex);
+			TnbCad2d_EXPORT std::weak_ptr<Pln_Edge> Remove(const Standard_Integer theIndex);
 
-			void Import(const Standard_Integer theIndex, const std::shared_ptr<Pln_Edge>& theEdge);
+			TnbCad2d_EXPORT void Import(const Standard_Integer theIndex, const std::shared_ptr<Pln_Edge>& theEdge);
 
-			void Clear();
+			TnbCad2d_EXPORT void Clear();
 
 		public:
 
@@ -62,9 +62,9 @@ namespace tnbLib
 				return theItems_;
 			}
 
-			std::vector<std::weak_ptr<Pln_Edge>> RetrieveItems() const;
+			TnbCad2d_EXPORT std::vector<std::weak_ptr<Pln_Edge>> RetrieveItems() const;
 
-			void RetrieveItemsTo(std::vector<std::weak_ptr<Pln_Edge>>& theItems) const;
+			TnbCad2d_EXPORT void RetrieveItemsTo(std::vector<std::weak_ptr<Pln_Edge>>& theItems) const;
 		};
 	}
 }

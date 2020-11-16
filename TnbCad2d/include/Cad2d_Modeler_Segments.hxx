@@ -39,13 +39,13 @@ namespace tnbLib
 			Modeler_Segments()
 			{}
 
-			void InsertToSegments
+			TnbCad2d_EXPORT void InsertToSegments
 			(
 				const Standard_Integer theIndex, 
 				const std::shared_ptr<Modeler_Segment>& theSeg
 			);
 
-			std::shared_ptr<Modeler_Segment> 
+			TnbCad2d_EXPORT std::shared_ptr<Modeler_Segment>
 				RemoveFromSegments
 				(
 					const Standard_Integer theIndex
@@ -53,13 +53,13 @@ namespace tnbLib
 
 		public:
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContainsSegment
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Boolean 
+			TnbCad2d_EXPORT Standard_Boolean
 				IsContainsSegment
 				(
 					const std::shared_ptr<Modeler_Segment>& theSegmnt

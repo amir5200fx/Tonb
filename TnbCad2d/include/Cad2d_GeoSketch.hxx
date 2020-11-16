@@ -3,6 +3,7 @@
 #define _Cad2d_GeoSketch_Header
 
 #include <Cad_GeoSketch.hxx>
+#include <Cad2d_Module.hxx>
 #include <OFstream.hxx>
 
 #include <Standard_Handle.hxx>
@@ -56,7 +57,7 @@ namespace tnbLib
 			return Geometry();
 		}
 
-		void ExportToPlt(OFstream& File) const;
+		TnbCad2d_EXPORT void ExportToPlt(OFstream& File) const;
 	};
 }
 

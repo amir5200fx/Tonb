@@ -6,6 +6,7 @@
 #include <Global_Named.hxx>
 #include <Global_Done.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -33,11 +34,11 @@ namespace tnbLib
 
 	protected:
 
-		Cad2d_EntityEntityIntersection();
+		TnbCad2d_EXPORT Cad2d_EntityEntityIntersection();
 
-		Cad2d_EntityEntityIntersection(const Standard_Integer theIndex);
+		TnbCad2d_EXPORT Cad2d_EntityEntityIntersection(const Standard_Integer theIndex);
 
-		Cad2d_EntityEntityIntersection(const Standard_Integer theIndex, const word& theName);
+		TnbCad2d_EXPORT Cad2d_EntityEntityIntersection(const Standard_Integer theIndex, const word& theName);
 
 
 		auto& ChangeEntities()
@@ -47,7 +48,7 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_TOLERANCE;
+		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 
 		virtual ~Cad2d_EntityEntityIntersection()
 		{}

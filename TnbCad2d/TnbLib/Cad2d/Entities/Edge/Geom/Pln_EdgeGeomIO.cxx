@@ -5,8 +5,9 @@
 
 DECLARE_SAVE_IMP(tnbLib::Pln_EdgeGeom)
 {
+	bool sense = Sense();
 	ar << Curve();
-	ar << Sense();
+	ar << sense;
 	ar << Mesh();
 }
 

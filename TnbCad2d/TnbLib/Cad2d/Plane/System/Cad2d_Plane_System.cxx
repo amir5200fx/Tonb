@@ -6,7 +6,7 @@
 namespace tnbLib
 {
 
-	std::shared_ptr<Cad2d_Plane_Info> sysLib::gl_cad2d_plane_info =
+	TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane_Info> sysLib::gl_cad2d_plane_info =
 		std::make_shared<Cad2d_Plane_Info>();
 }
 
