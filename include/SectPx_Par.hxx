@@ -35,15 +35,15 @@ namespace tnbLib
 
 	public:
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		virtual sectPxLib::parType ParType() const = 0;
 
-		virtual Standard_Boolean IsFixed() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsFixed() const;
 
-		virtual Standard_Boolean IsFree() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsFree() const;
 
-		virtual Standard_Boolean IsConstant() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsConstant() const;
 
 		virtual Standard_Boolean IsComplete() const = 0;
 
@@ -51,7 +51,7 @@ namespace tnbLib
 
 		virtual Standard_Real Value() const = 0;
 
-		Standard_Real operator()() const;
+		TnbSectPx_EXPORT Standard_Real operator()() const;
 
 		virtual void Print(Ostream& out) const = 0;
 

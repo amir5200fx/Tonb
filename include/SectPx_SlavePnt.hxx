@@ -31,9 +31,9 @@ namespace tnbLib
 
 	public:
 
-		virtual Standard_Boolean IsEmpty() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsEmpty() const;
 
-		Standard_Boolean IsSlave() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsSlave() const override;
 
 	};
 }

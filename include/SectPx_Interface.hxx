@@ -28,18 +28,18 @@ namespace tnbLib
 		SectPx_Interface()
 		{}
 
-		SectPx_Interface
+		TnbSectPx_EXPORT SectPx_Interface
 		(
 			const std::shared_ptr<SectPx_Node>& theNode
 		);
 
-		SectPx_Interface
+		TnbSectPx_EXPORT SectPx_Interface
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Node>& theNode
 		);
 
-		SectPx_Interface
+		TnbSectPx_EXPORT SectPx_Interface
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -53,13 +53,13 @@ namespace tnbLib
 
 		virtual sectPxLib::interfaceType InterfaceType() const = 0;
 
-		virtual Standard_Boolean IsEmpty() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsEmpty() const;
 
-		virtual Standard_Boolean IsPaired() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsPaired() const;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
-		Standard_Boolean IsInterface() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsInterface() const override;
 
 		
 	};

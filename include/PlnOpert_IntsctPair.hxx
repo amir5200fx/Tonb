@@ -5,6 +5,9 @@
 #include <Global_Indexed.hxx>
 #include <Global_AccessMethod.hxx>
 
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
 #include <memory>
 
 namespace tnbLib
@@ -28,14 +31,25 @@ namespace tnbLib
 
 		PlnOpert_IntsctPair
 		(
-			const Standard_Integer theIndex, 
-			const std::shared_ptr<PlnOpert_IntsctEntity>& theE0, 
+			const Standard_Integer theIndex,
+			const std::shared_ptr<PlnOpert_IntsctEntity>& theE0,
 			const std::shared_ptr<PlnOpert_IntsctEntity>& theE1
-		);
+		)
+		{
+			NotImplemented;
+		}
 
-		Standard_Boolean IsPoint() const;
+		Standard_Boolean IsPoint() const
+		{
+			NotImplemented;
+			return Standard_True;
+		}
 
-		Standard_Boolean IsSegment() const;
+		Standard_Boolean IsSegment() const
+		{
+			NotImplemented;
+			return Standard_True;
+		}
 
 		const std::shared_ptr<PlnOpert_IntsctEntity>& Entity0() const
 		{

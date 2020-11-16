@@ -17,13 +17,13 @@ namespace tnbLib
 
 	public:
 
-		Pln_TangEdge
+		TnbCad2d_EXPORT Pln_TangEdge
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
 			const std::shared_ptr<Pln_Vertex>& theVtx1
 		);
 
-		Pln_TangEdge
+		TnbCad2d_EXPORT Pln_TangEdge
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
 			const std::shared_ptr<Pln_Vertex>& theVtx1,
@@ -31,14 +31,14 @@ namespace tnbLib
 			const Standard_Boolean Sense = Standard_True
 		);
 
-		Pln_TangEdge
+		TnbCad2d_EXPORT Pln_TangEdge
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<Pln_Vertex>& theVtx0,
 			const std::shared_ptr<Pln_Vertex>& theVtx1
 		);
 
-		Pln_TangEdge
+		TnbCad2d_EXPORT Pln_TangEdge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -46,7 +46,7 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Vertex>& theVtx1
 		);
 
-		Pln_TangEdge
+		TnbCad2d_EXPORT Pln_TangEdge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Cad2d_Module.hxx>
 
 namespace tnbLib
 {
@@ -17,7 +18,7 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_TOLERANCE;
+		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 
 		PlnOpert_IntsctCurveCurve_Info()
 			: theTolerance_(DEFAULT_TOLERANCE)

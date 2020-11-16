@@ -3,6 +3,7 @@
 #define _Geo_ApprxCurve_System_Header
 
 #include <memory>
+#include <Geo_Module.hxx>
 
 namespace tnbLib
 {
@@ -13,10 +14,10 @@ namespace tnbLib
 	namespace sysLib
 	{
 
-		extern std::shared_ptr<Geo_ApprxCurve_Info> gl_approx_curve2d_info;
-		extern std::shared_ptr<Geo_ApprxCurve_Info> gl_approx_curve3d_info;
+		extern TnbGeo_EXPORT std::shared_ptr<Geo_ApprxCurve_Info> gl_approx_curve2d_info;
+		extern TnbGeo_EXPORT std::shared_ptr<Geo_ApprxCurve_Info> gl_approx_curve3d_info;
 
-		void init_gl_approx_curve_info();
+		TnbGeo_EXPORT void init_gl_approx_curve_info();
 	}
 }
 

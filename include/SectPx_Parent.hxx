@@ -39,31 +39,31 @@ namespace tnbLib
 
 	public:
 
-		virtual Standard_Integer NbChildren() const;
+		TnbSectPx_EXPORT virtual Standard_Integer NbChildren() const;
 
-		virtual Standard_Integer NbChildMaps() const;
+		TnbSectPx_EXPORT virtual Standard_Integer NbChildMaps() const;
 
-		virtual Standard_Boolean IsPnt() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsPnt() const;
 
-		virtual Standard_Boolean IsDatum() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsDatum() const;
 
-		virtual Standard_Boolean IsGeoMap() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsGeoMap() const;
 
-		virtual Standard_Boolean IsFieldFun() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsFieldFun() const;
 
-		virtual Standard_Boolean IsController() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsController() const;
 
-		virtual Standard_Boolean IsCPtsMap() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsCPtsMap() const;
 
-		virtual Standard_Boolean IsCloud() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsCloud() const;
 
-		Standard_Boolean IsParent() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsParent() const override;
 
-		virtual Standard_Boolean HasChildren() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean HasChildren() const;
 
-		virtual Standard_Boolean HasChildMap() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean HasChildMap() const;
 
-		virtual std::shared_ptr<SectPx_Parent> ChildMap(const Standard_Integer theIndex) const;
+		TnbSectPx_EXPORT virtual std::shared_ptr<SectPx_Parent> ChildMap(const Standard_Integer theIndex) const;
 
 		virtual Standard_Boolean HasChild(const std::shared_ptr<SectPx_Child>& thePar) const = 0;
 
@@ -75,9 +75,9 @@ namespace tnbLib
 
 		virtual void RemoveThisFromChild(const std::shared_ptr<SectPx_Child>& thePar) const = 0;
 
-		virtual std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const;
+		TnbSectPx_EXPORT virtual std::vector<std::shared_ptr<SectPx_Child>> RetrieveChildren() const;
 
-		void Print(Ostream& out) const;
+		TnbSectPx_EXPORT void Print(Ostream& out) const;
 
 	};
 }

@@ -4,6 +4,7 @@
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <Entity2d_Polygon_SIDE.hxx>
+#include <Geo_Module.hxx>
 
 namespace tnbLib
 {
@@ -16,7 +17,7 @@ namespace tnbLib
 		typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 		typedef K::Point_2 Point;
 
-		static Entity2d_Polygon_SIDE CheckSide(const Point& pt, Point* pt_begin, Point* pt_end, K traits = K());
+		static TnbGeo_EXPORT Entity2d_Polygon_SIDE CheckSide(const Point& pt, Point* pt_begin, Point* pt_end, K traits = K());
 	
 
 

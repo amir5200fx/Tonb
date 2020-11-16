@@ -182,18 +182,18 @@ namespace tnbLib
 			, theVtx1_(std::move(theVtx1))
 		{}
 
-		Standard_Boolean IsDangle() const;
+		TnbCad2d_EXPORT Standard_Boolean IsDangle() const;
 
-		Standard_Boolean IsOrphan() const override;
+		TnbCad2d_EXPORT Standard_Boolean IsOrphan() const override;
 
-		Standard_Integer NbEntities(const Pln_EntityType t) const override;
+		TnbCad2d_EXPORT Standard_Integer NbEntities(const Pln_EntityType t) const override;
 
-		Standard_Integer GetIndex
+		TnbCad2d_EXPORT Standard_Integer GetIndex
 		(
 			const std::shared_ptr<Pln_Vertex>& theVertex
 		) const;
 
-		Standard_Real Parameter
+		TnbCad2d_EXPORT Standard_Real Parameter
 		(
 			const Standard_Integer theIndex
 		) const;
@@ -208,28 +208,28 @@ namespace tnbLib
 			return theVtx1_;
 		}
 
-		Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
+		TnbCad2d_EXPORT Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
 
-		std::shared_ptr<Pln_Entity>
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Entity>
 			Copy() const override;
 
-		Pln_EntityType Type() const override;
+		TnbCad2d_EXPORT Pln_EntityType Type() const override;
 
 		//- WARNING! the edge must be orphan for transforming
-		void Transform(const gp_Trsf2d& t) override;
+		TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t) override;
 
-		void RetrieveEntitiesTo
+		TnbCad2d_EXPORT void RetrieveEntitiesTo
 		(
 			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
 			const Pln_EntityType t
 		) const override;
 
-		void Reverse
+		TnbCad2d_EXPORT void Reverse
 		(
 			const Standard_Boolean ApplyToMesh = Standard_True
 		);
 
-		void ExportToPlt(OFstream& File) const;
+		TnbCad2d_EXPORT void ExportToPlt(OFstream& File) const;
 
 		//- virtual functions
 
@@ -255,14 +255,14 @@ namespace tnbLib
 
 		//- static functions
 
-		static Standard_Boolean
+		static inline Standard_Boolean
 			IsLess
 			(
 				const std::shared_ptr<Pln_Edge>& theEdge0,
 				const std::shared_ptr<Pln_Edge>& theEdge1
 			);
 
-		static Standard_Boolean 
+		static TnbCad2d_EXPORT Standard_Boolean
 			IsConnected
 			(
 				const std::shared_ptr<Pln_Edge>& theEdge0, 

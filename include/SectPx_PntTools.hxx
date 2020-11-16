@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <SectPx_PntsFwd.hxx>
+#include <SectPx_Module.hxx>
 
 #include <vector>
 #include <memory>
@@ -39,64 +40,64 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Coord>& thePnt
 			);*/
 
-		static Standard_Boolean
+		static TnbSectPx_EXPORT Standard_Boolean
 			IsRemovable
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
-		static Standard_Boolean
+		static TnbSectPx_EXPORT Standard_Boolean
 			IsEmpty
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
-		static Standard_Boolean
+		static TnbSectPx_EXPORT Standard_Boolean
 			IsComponent
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
-		static Standard_Boolean
+		static TnbSectPx_EXPORT Standard_Boolean
 			IsGeoField
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
-		static std::vector<std::shared_ptr<SectPx_Pnt>> 
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pnt>>
 			MakeOffsetPnts
 			(
 				const std::vector<Pnt2d>& theCoords,
 				const std::shared_ptr<SectPx_Registry>& theRegistry
 			);
 
-		static std::vector<std::shared_ptr<SectPx_Pnt>>
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pnt>>
 			TrackPnts
 			(
 				const std::shared_ptr<SectPx_Node>& theNode0, 
 				const std::shared_ptr<SectPx_Node>& theNode1
 			);
 
-		static void deAttach
+		static TnbSectPx_EXPORT void deAttach
 		(
 			const std::shared_ptr<SectPx_TPnt>& thePnt,
 			const std::shared_ptr<SectPx_Edge>& theEdge
 		);
 
-		static std::vector<std::shared_ptr<SectPx_Edge>>
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Edge>>
 			deAttach
 			(
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
-		static void Replace
+		static TnbSectPx_EXPORT void Replace
 		(
 			const std::shared_ptr<SectPx_Pnt>& thePrior,
 			const std::shared_ptr<SectPx_Edge>& theEdge,
 			const std::shared_ptr<SectPx_Pnt>& theNew
 		);
 
-		static void Replace
+		static TnbSectPx_EXPORT void Replace
 		(
 			const std::shared_ptr<SectPx_Pnt>& thePrior,
 			const std::shared_ptr<SectPx_Pnt>& theNew

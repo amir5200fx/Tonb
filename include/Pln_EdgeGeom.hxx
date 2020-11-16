@@ -81,7 +81,7 @@ namespace tnbLib
 			return theMesh_;
 		}
 
-		void Approx
+		TnbCad2d_EXPORT void Approx
 		(
 			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
 		) const;

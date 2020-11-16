@@ -4,6 +4,7 @@
 
 #include <Pnt2d.hxx>
 #include <SectPx_Segment.hxx>
+#include <SectPx_Module.hxx>
 
 #include <vector>
 
@@ -29,7 +30,7 @@ namespace tnbLib
 			right
 		};
 
-		static Standard_Boolean
+		static TnbSectPx_EXPORT Standard_Boolean
 			IsValidToJoint
 			(
 				const std::shared_ptr<SectPx_Node>& theNode0,
@@ -37,7 +38,7 @@ namespace tnbLib
 				const jointPriority priority = jointPriority::left
 			);
 
-		static Standard_Integer
+		static TnbSectPx_EXPORT Standard_Integer
 			MakePair
 			(
 				const std::shared_ptr<SectPx_Pnt>& theP0,
@@ -46,7 +47,7 @@ namespace tnbLib
 				const jointPriority priority = jointPriority::left
 			);
 
-		static std::tuple<Standard_Integer, Standard_Integer>
+		static TnbSectPx_EXPORT std::tuple<Standard_Integer, Standard_Integer>
 			MakeJoint
 			(
 				const std::shared_ptr<SectPx_TopoProfile>& theLeft,
@@ -55,7 +56,7 @@ namespace tnbLib
 				const jointPriority priority = jointPriority::left
 			);
 
-		static std::shared_ptr<SectPx_Edge> 
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_Edge>
 			MakeEdge
 			(
 				const std::shared_ptr<SectPx_Pnt>& theP0,
@@ -63,13 +64,13 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Registry>& theReg
 			);
 
-		static std::vector<Pnt2d>
+		static TnbSectPx_EXPORT std::vector<Pnt2d>
 			RetrieveControlPoints
 			(
 				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
 			);
 
-		static void RemoveParentFromChildren
+		static TnbSectPx_EXPORT void RemoveParentFromChildren
 		(
 			const std::shared_ptr<SectPx_Parent>& theParent
 		);

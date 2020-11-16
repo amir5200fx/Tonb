@@ -40,20 +40,20 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
-			FieldFun_readX
+			TnbSectPx_EXPORT FieldFun_readX
 			(
 				const std::shared_ptr<SectPx_Coord>& theCoord
 			);
 
-			FieldFun_readX
+			TnbSectPx_EXPORT FieldFun_readX
 			(
 				const Standard_Integer theIndex, 
 				const std::shared_ptr<SectPx_Coord>& theCoord
 			);
 
-			FieldFun_readX
+			TnbSectPx_EXPORT FieldFun_readX
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
@@ -66,9 +66,9 @@ namespace tnbLib
 				return theCoord_;
 			}
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			Standard_Real Value() const override;
+			TnbSectPx_EXPORT Standard_Real Value() const override;
 		};
 	}
 }

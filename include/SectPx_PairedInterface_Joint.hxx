@@ -33,9 +33,9 @@ namespace tnbLib
 				: SectPx_PairedInterface(_Args...)
 			{}
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			sectPxLib::interfaceType InterfaceType() const override;
+			TnbSectPx_EXPORT sectPxLib::interfaceType InterfaceType() const override;
 
 		};
 	}

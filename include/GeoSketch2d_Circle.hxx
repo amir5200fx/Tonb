@@ -3,6 +3,7 @@
 #define _GeoSketch2d_Circle_Header
 
 #include <Cad2d_GeoSketch.hxx>
+#include <Cad2d_Module.hxx>
 
 class gp_Ax2d;
 class gp_Ax22d;
@@ -18,14 +19,14 @@ namespace tnbLib
 
 	public:
 
-		GeoSketch2d_Circle
+		TnbCad2d_EXPORT GeoSketch2d_Circle
 		(
 			const gp_Ax2d& theAxis,
 			const Standard_Real theRadius,
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		GeoSketch2d_Circle
+		TnbCad2d_EXPORT GeoSketch2d_Circle
 		(
 			const gp_Ax22d& theAxis,
 			const Standard_Real theRadius

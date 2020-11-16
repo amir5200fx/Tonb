@@ -9,7 +9,7 @@ namespace tnbLib
 {
 
 	class SectPx_Datum
-		: public SectPx_TCoord
+		: public SectPx_Coord
 		, public SectPx_Parent
 	{
 
@@ -20,7 +20,7 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version)
 		{
-			ar & boost::serialization::base_object<SectPx_TCoord>(*this);
+			ar & boost::serialization::base_object<SectPx_Coord>(*this);
 			ar & boost::serialization::base_object<SectPx_Parent>(*this);
 		}
 
@@ -33,9 +33,9 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsDatum() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsDatum() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 	};
 }
 

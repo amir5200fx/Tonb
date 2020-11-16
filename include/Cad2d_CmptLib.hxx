@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Standard_Handle.hxx>
+#include <Cad2d_Module.hxx>
 
 class Geom2d_Curve;
 class gp_Trsf2d;
@@ -25,7 +26,7 @@ namespace tnbLib
 	public:
 
 		//- Check the convergence of the algorithm with the info parameter
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			AreaUnderCurve
 			(
 				const Handle(Geom2d_Curve)& theCurve,
@@ -33,7 +34,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			Mx
 			(
 				const Handle(Geom2d_Curve)& theCurve,
@@ -41,7 +42,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			My
 			(
 				const Handle(Geom2d_Curve)& theCurve,
@@ -49,7 +50,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			Ix
 			(
 				const Handle(Geom2d_Curve)& theCurve, 
@@ -57,7 +58,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			Iy
 			(
 				const Handle(Geom2d_Curve)& theCurve,
@@ -65,35 +66,35 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real 
+		static TnbCad2d_EXPORT Standard_Real
 			Area
 			(
 				const Pln_Wire& theWire,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			xCentreProductArea
 			(
 				const Handle(Geom2d_Curve)& theCurve,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			yCentreProductArea
 			(
 				const Handle(Geom2d_Curve)& theCurve,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Pnt2d
+		static TnbCad2d_EXPORT Pnt2d
 			Centre
 			(
 				const Handle(Geom2d_Curve)& theCurve,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Pnt2d
+		static TnbCad2d_EXPORT Pnt2d
 			Centre
 			(
 				const Pln_Wire& theWire,
@@ -102,11 +103,11 @@ namespace tnbLib
 
 		
 
-		static Standard_Real IxBar(const Pln_Wire& theWire, const Pnt2d& theCentre, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+		static TnbCad2d_EXPORT Standard_Real IxBar(const Pln_Wire& theWire, const Pnt2d& theCentre, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 
-		static Standard_Real IyBar(const Pln_Wire& theWire, const Pnt2d& theCentre, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+		static TnbCad2d_EXPORT Standard_Real IyBar(const Pln_Wire& theWire, const Pnt2d& theCentre, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			Mx
 			(
 				const Pln_Wire& theWire,
@@ -114,7 +115,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			My
 			(
 				const Pln_Wire& theWire,
@@ -122,7 +123,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real 
+		static TnbCad2d_EXPORT Standard_Real
 			Ix
 			(
 				const Pln_Wire& theWire, 
@@ -130,7 +131,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real 
+		static TnbCad2d_EXPORT Standard_Real
 			Iy
 			(
 				const Pln_Wire& theWire, 
@@ -138,39 +139,39 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			xCentre
 			(
 				const Pln_Wire& theWire,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			yCentre
 			(
 				const Pln_Wire& theWire, 
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			xCentreProductArea
 			(
 				const Pln_Wire& theWire,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbCad2d_EXPORT Standard_Real
 			yCentreProductArea
 			(
 				const Pln_Wire& theWire,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real Ixy(const Pln_Wire& theWire, const Pnt2d& theC, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+		static TnbCad2d_EXPORT Standard_Real Ixy(const Pln_Wire& theWire, const Pnt2d& theC, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 
-		static Standard_Real Iv(const Pln_Wire& theWire, const gp_Ax2d& theAx, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+		static TnbCad2d_EXPORT Standard_Real Iv(const Pln_Wire& theWire, const gp_Ax2d& theAx, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 
-		static gp_Trsf2d Transform(const gp_Ax2d& theCurrent, const gp_Ax2d& theTarget);
+		static TnbCad2d_EXPORT gp_Trsf2d Transform(const gp_Ax2d& theCurrent, const gp_Ax2d& theTarget);
 	};
 }
 

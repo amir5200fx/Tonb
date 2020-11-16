@@ -46,40 +46,40 @@ namespace tnbLib
 			{}
 
 
-			std::shared_ptr<SectPx_TopoProfile>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_TopoProfile>
 				SelectProfile
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateCustomProfile
 				(
 					const std::shared_ptr<SectPx_Pnt>& theP0,
 					const std::shared_ptr<SectPx_Pnt>& theP1
 				);
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInterplProfile
 				(
 					const std::shared_ptr<SectPx_Cloud>& theCloud
 				);
 
-			std::shared_ptr<SectPx_TopoProfile>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_TopoProfile>
 				RemoveProfile
 				(
 					const Standard_Integer theIndex
 				);
 
-			std::vector<std::shared_ptr<SectPx_TopoProfile>>
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_TopoProfile>>
 				RetrieveProfiles() const;
 
-			void RetrieveProfilesTo
+			TnbSectPx_EXPORT void RetrieveProfilesTo
 			(
 				std::vector<std::shared_ptr<SectPx_TopoProfile>>& theProfiles
 			) const;
 
-			void Print(OSstream& out) const;
+			TnbSectPx_EXPORT void Print(OSstream& out) const;
 		};
 	}
 }

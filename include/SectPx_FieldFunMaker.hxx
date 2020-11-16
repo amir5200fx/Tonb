@@ -46,61 +46,61 @@ namespace tnbLib
 				: SectPx_Maker(theRegistry)
 			{}
 
-			std::shared_ptr<SectPx_FieldFun> 
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun>
 				SelectFieldFun
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			std::shared_ptr<SectPx_FieldFun> 
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun>
 				RemoveFieldFun
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateUniform
 				(
 					const std::shared_ptr<SectPx_Par>& thePar
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInverse
 				(
 					const std::shared_ptr<SectPx_Par>& thePar
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateUniform
 				(
 					const std::shared_ptr<SectPx_FieldFun>& theField
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInverse
 				(
 					const std::shared_ptr<SectPx_FieldFun>& theField
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateReadingX
 				(
 					const std::shared_ptr<SectPx_Coord>& theCoord
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateReadingY
 				(
 					const std::shared_ptr<SectPx_Coord>& theCoord
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateExpression
 				(
 					const word& expr
 				) const;
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateLinearForm
 				(
 					const std::shared_ptr<SectPx_FieldFun>& theF0,
@@ -108,7 +108,7 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Par>& thePar
 				) const;
 
-			std::vector<std::shared_ptr<SectPx_FieldFun>> RetrieveFieldFuns() const;
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_FieldFun>> RetrieveFieldFuns() const;
 		};
 	}
 }

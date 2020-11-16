@@ -3,6 +3,7 @@
 #define _GeoSketch2d_CircArc_Header
 
 #include <Cad2d_GeoSketch.hxx>
+#include <Cad2d_Module.hxx>
 
 class gp_Circ2d;
 
@@ -20,7 +21,7 @@ namespace tnbLib
 
 	public:
 
-		GeoSketch2d_CircArc
+		TnbCad2d_EXPORT GeoSketch2d_CircArc
 		(
 			const gp_Circ2d& theCirc,
 			const Standard_Real theAlpha0,
@@ -28,7 +29,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		GeoSketch2d_CircArc
+		TnbCad2d_EXPORT GeoSketch2d_CircArc
 		(
 			const gp_Circ2d& theCirc,
 			const Pnt2d& theP,
@@ -36,7 +37,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		GeoSketch2d_CircArc
+		TnbCad2d_EXPORT GeoSketch2d_CircArc
 		(
 			const gp_Circ2d& theCirc,
 			const Pnt2d& theP0,
@@ -44,7 +45,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		GeoSketch2d_CircArc
+		TnbCad2d_EXPORT GeoSketch2d_CircArc
 		(
 			const Pnt2d& theP0,
 			const Pnt2d& theP1,

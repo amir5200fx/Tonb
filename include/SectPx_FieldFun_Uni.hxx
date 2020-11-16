@@ -27,17 +27,30 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
-			template<class... _Types>
-			FieldFun_Uni(_Types&&... _Args)
-				: SectPx_oneParFieldFun(_Args...)
+			FieldFun_Uni()
+			{}
+
+			FieldFun_Uni
+			(
+				const Standard_Integer theIndex
+			)
+				: SectPx_oneParFieldFun(theIndex)
+			{}
+
+			FieldFun_Uni
+			(
+				const Standard_Integer theIndex,
+				const word& theName
+			)
+				: SectPx_oneParFieldFun(theIndex, theName)
 			{}
 
 
-			Standard_Real Value() const override;
+			TnbSectPx_EXPORT Standard_Real Value() const override;
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 		};
 	}
 }

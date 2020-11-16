@@ -5,7 +5,7 @@
 #include <gp_Dir.hxx>
 #include <Vec3d.hxx>
 #include <Geo_Module.hxx>
-#include <Global_Serialization.hxx>
+#include <Geo_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -17,12 +17,19 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+		friend class boost::serialization::access;
 
-		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<gp_Dir>(*this);
+		}
+
+		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
 
 	public:
 
-		static const Dir3d null;
+		static TnbGeo_EXPORT const Dir3d null;
 
 		Dir3d()
 		{}
@@ -44,7 +51,7 @@ namespace tnbLib
 			: gp_Dir(x, y, z)
 		{}
 
-		Dir3d(const Pnt3d& theP0, const Pnt3d& theP1);
+		TnbGeo_EXPORT Dir3d(const Pnt3d& theP0, const Pnt3d& theP1);
 
 	};
 }

@@ -91,7 +91,7 @@ namespace tnbLib
 			: theX_(0)
 		{}
 
-		SectPx_CompOffset
+		TnbSectPx_EXPORT SectPx_CompOffset
 		(
 			const Standard_Real x, 
 			const std::shared_ptr<SectPx_FieldFun>& y
@@ -102,7 +102,7 @@ namespace tnbLib
 			return theX_;
 		}
 
-		Standard_Real yCoord() const override;
+		TnbSectPx_EXPORT Standard_Real yCoord() const override;
 
 		void SetX(const Standard_Real x)
 		{
@@ -136,13 +136,13 @@ namespace tnbLib
 			: theY_(0)
 		{}
 
-		SectPx_CompOffset
+		TnbSectPx_EXPORT SectPx_CompOffset
 		(
 			const std::shared_ptr<SectPx_FieldFun>& x,
 			const Standard_Real y
 		);
 
-		Standard_Real xCoord() const override;
+		TnbSectPx_EXPORT Standard_Real xCoord() const override;
 
 		Standard_Real yCoord() const override
 		{
@@ -179,15 +179,15 @@ namespace tnbLib
 		SectPx_CompOffset()
 		{}
 
-		SectPx_CompOffset
+		TnbSectPx_EXPORT SectPx_CompOffset
 		(
 			const std::shared_ptr<SectPx_FieldFun>& x,
 			const std::shared_ptr<SectPx_FieldFun>& y
 		);
 
-		Standard_Real xCoord() const override;
+		TnbSectPx_EXPORT Standard_Real xCoord() const override;
 
-		Standard_Real yCoord() const override;
+		TnbSectPx_EXPORT Standard_Real yCoord() const override;
 
 		void SetX(const std::shared_ptr<SectPx_FieldFun>& x)
 		{

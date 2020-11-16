@@ -25,31 +25,31 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
 		SectPx_Segment()
 		{}
 
-		SectPx_Segment
+		TnbSectPx_EXPORT SectPx_Segment
 		(
 			const std::shared_ptr<SectPx_Pole>& theP0,
 			const std::shared_ptr<SectPx_Pole>& theP1
 		);
 
-		SectPx_Segment
+		TnbSectPx_EXPORT SectPx_Segment
 		(
 			std::shared_ptr<SectPx_Pole>&& theP0,
 			std::shared_ptr<SectPx_Pole>&& theP1
 		);
 
-		SectPx_Segment
+		TnbSectPx_EXPORT SectPx_Segment
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Pole>& theP0,
 			const std::shared_ptr<SectPx_Pole>& theP1
 		);
 
-		SectPx_Segment
+		TnbSectPx_EXPORT SectPx_Segment
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -57,14 +57,14 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Pole>& theP1
 		);
 
-		Standard_Integer
+		TnbSectPx_EXPORT Standard_Integer
 			GetIndex(const std::shared_ptr<SectPx_Pole>& theP) const;
 
-		Pnt2d CalcMidCoord() const;
+		TnbSectPx_EXPORT Pnt2d CalcMidCoord() const;
 
-		const std::shared_ptr<SectPx_Pole>& Pole(const Standard_Integer theIndex) const;
+		TnbSectPx_EXPORT const std::shared_ptr<SectPx_Pole>& Pole(const Standard_Integer theIndex) const;
 
-		std::shared_ptr<SectPx_Pole> Other(const std::shared_ptr<SectPx_Pole>& theP) const;
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_Pole> Other(const std::shared_ptr<SectPx_Pole>& theP) const;
 
 		const auto& Pole0() const
 		{
@@ -86,11 +86,11 @@ namespace tnbLib
 			theP1_ = theP1;
 		}
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
-		Standard_Boolean IsSegment() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsSegment() const override;
 	};
 }
 

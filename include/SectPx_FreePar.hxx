@@ -33,25 +33,25 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
-		explicit SectPx_FreePar
+		TnbSectPx_EXPORT explicit SectPx_FreePar
 		(
 			const std::shared_ptr<SectPx_FieldFun>& theFun
 		);
 
-		explicit SectPx_FreePar
+		TnbSectPx_EXPORT explicit SectPx_FreePar
 		(
 			std::shared_ptr<SectPx_FieldFun>&& theFun
 		);
 
-		SectPx_FreePar
+		TnbSectPx_EXPORT SectPx_FreePar
 		(
 			const Standard_Integer theIndex, 
 			const std::shared_ptr<SectPx_FieldFun>& theFun
 		);
 
-		SectPx_FreePar
+		TnbSectPx_EXPORT SectPx_FreePar
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
@@ -64,26 +64,26 @@ namespace tnbLib
 			return theFun_;
 		}
 
-		Standard_Boolean HasFieldFun() const;
+		TnbSectPx_EXPORT Standard_Boolean HasFieldFun() const;
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		sectPxLib::parType ParType() const override;
+		TnbSectPx_EXPORT sectPxLib::parType ParType() const override;
 
-		Standard_Boolean IsFree() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsFree() const override;
 
-		Standard_Boolean IsComplete() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
-		Standard_Boolean InCycle() const override;
+		TnbSectPx_EXPORT Standard_Boolean InCycle() const override;
 
-		Standard_Real Value() const override;
+		TnbSectPx_EXPORT Standard_Real Value() const override;
 
 		void SetFieldFun(const std::shared_ptr<SectPx_FieldFun>& fun)
 		{
 			theFun_ = fun;
 		}
 
-		void Print(Ostream& out) const override;
+		TnbSectPx_EXPORT void Print(Ostream& out) const override;
 	};
 }
 

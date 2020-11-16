@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 #include <armadillo.h>
@@ -33,7 +34,7 @@ namespace tnbLib
 		Entity3d_Metric1()
 		{}
 
-		Entity3d_Metric1
+		TnbGeo_EXPORT Entity3d_Metric1
 		(
 			const Standard_Real A,
 			const Standard_Real B,
@@ -51,9 +52,17 @@ namespace tnbLib
 
 		Standard_Boolean IsSingular(const Standard_Real theEps) const;
 
-		Pnt3d Multiplied(const Pnt3d& theU) const;
+		Pnt3d Multiplied(const Pnt3d& theU) const
+		{
+			NotImplemented;
+			return Pnt3d(0, 0, 0);
+		}
 
-		gp_Vec Multiplied(const gp_Vec& theU) const;
+		gp_Vec Multiplied(const gp_Vec& theU) const
+		{
+			NotImplemented;
+			return gp_Vec(0, 0, 0);
+		}
 
 		metric Inversed() const;
 

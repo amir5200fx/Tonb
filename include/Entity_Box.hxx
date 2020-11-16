@@ -161,7 +161,7 @@ namespace tnbLib
 		}
 
 		template<class SubAlg>
-		Entity_Box SubDivide(const SubAlg theAlgorithm) const;
+		TnbGeo_EXPORT Entity_Box SubDivide(const SubAlg theAlgorithm) const;
 
 		template<class SubAlg>
 		Entity_Box Half
@@ -191,7 +191,7 @@ namespace tnbLib
 		}
 
 		template<class PickAlg>
-		Point Corner(const PickAlg theAlgorithm) const;
+		TnbGeo_EXPORT Point Corner(const PickAlg theAlgorithm) const;
 
 		template<class U = std::tuple<Standard_Real, Standard_Real>>
 		resolvedType<is_two_dimension<(int)Point::dim>::value, U>
@@ -360,7 +360,7 @@ namespace tnbLib
 
 		// IO functions and operators
 
-		void ExportToPlt(OFstream& theFile) const;
+		TnbGeo_EXPORT void ExportToPlt(OFstream& theFile) const;
 	};
 }
 

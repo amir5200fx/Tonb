@@ -18,12 +18,12 @@ namespace tnbLib
 
 	public:
 
-		static const Vec2d null;
+		static TnbGeo_EXPORT const Vec2d null;
 
 		Vec2d()
 		{}
 
-		Vec2d
+		TnbGeo_EXPORT Vec2d
 		(
 			const Dir2d& V
 		);

@@ -12,10 +12,10 @@ namespace tnbLib
 		Geo3d_MetricPrcsrAnIso;
 
 	template<>
-	Standard_Real Geo3d_MetricPrcsrAnIso::CalcDistance(const Pnt3d& theP0, const Pnt3d& theP1) const;
+	TnbGeo_EXPORT Standard_Real Geo3d_MetricPrcsrAnIso::CalcDistance(const Pnt3d& theP0, const Pnt3d& theP1) const;
 
 	template<>
-	Standard_Real Geo3d_MetricPrcsrAnIso::CalcUnitDistance(const Pnt3d& theP0, const Pnt3d& theP1) const;
+	TnbGeo_EXPORT Standard_Real Geo3d_MetricPrcsrAnIso::CalcUnitDistance(const Pnt3d& theP0, const Pnt3d& theP1) const;
 }
 
 #endif // !_Geo3d_MetricPrcsrAnIso_Header

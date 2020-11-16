@@ -77,20 +77,20 @@ namespace tnbLib
 			}
 
 
-			std::shared_ptr<Profile>
+			TnbSectPx_EXPORT std::shared_ptr<Profile>
 				SelectProfile
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateCustomProfile
 				(
 					const std::shared_ptr<SectPx_Pnt>& theP0,
 					const std::shared_ptr<SectPx_Pnt>& theP1
 				);
 
-			Standard_Integer 
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInterplProfile
 				(
 					const std::shared_ptr<SectPx_Cloud>& theCloud

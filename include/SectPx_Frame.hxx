@@ -59,7 +59,7 @@ namespace tnbLib
 
 		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
-		void AllocateMemory();
+		TnbSectPx_EXPORT void AllocateMemory();
 
 	public:
 
@@ -105,31 +105,31 @@ namespace tnbLib
 			return Makers()->FieldFun;
 		}
 
-		Standard_Integer NbProfiles() const;
+		TnbSectPx_EXPORT Standard_Integer NbProfiles() const;
 
-		std::vector<std::shared_ptr<SectPx_ProfileQ>> 
+		TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_ProfileQ>>
 			RetrieveProfilesQ() const;
 
-		std::map<std::string, std::shared_ptr<SectPx_FixedPar>> 
+		TnbSectPx_EXPORT std::map<std::string, std::shared_ptr<SectPx_FixedPar>>
 			RetrieveFixedParameters() const;
 
-		void MakeLineSegment();
+		TnbSectPx_EXPORT void MakeLineSegment();
 
-		Standard_Integer MakeLineSegment
+		TnbSectPx_EXPORT Standard_Integer MakeLineSegment
 		(
 			const Pnt2d& theP0,
 			const Pnt2d& theP1
 		);
 
-		void MakeCorner();
+		TnbSectPx_EXPORT void MakeCorner();
 
-		void MakeCorner
+		TnbSectPx_EXPORT void MakeCorner
 		(
 			const Pnt2d& theP0, 
 			const Pnt2d& theP1
 		);
 
-		void MakeCorner
+		TnbSectPx_EXPORT void MakeCorner
 		(
 			const Pnt2d& theP0,
 			const Dir2d& theDir0, 
@@ -139,16 +139,16 @@ namespace tnbLib
 			const Standard_Real theAngl1
 		);
 
-		void MakeUShape();
+		TnbSectPx_EXPORT void MakeUShape();
 
-		void MakeUShape
+		TnbSectPx_EXPORT void MakeUShape
 		(
 			const Pnt2d& theP0,
 			const Pnt2d& theP1, 
 			const Standard_Real w
 		);
 
-		void PrintRegistry() const;
+		TnbSectPx_EXPORT void PrintRegistry() const;
 	};
 }
 

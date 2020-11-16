@@ -3,6 +3,7 @@
 #define _NumAlg_GaussQuadrature_Nodes_Header
 
 #include <Standard_TypeDef.hxx>
+#include <NumAlg_Module.hxx>
 
 namespace tnbLib
 {
@@ -16,135 +17,135 @@ namespace tnbLib
 			template<int Node, int NbNodes>
 			struct IntgNode {};
 
-			template<> struct IntgNode<0, 2> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 2> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 2> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 2> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
-			template<> struct IntgNode<0, 3> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 3> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 3> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 3> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 3> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 3> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
-			template<> struct IntgNode<0, 4> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 4> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 4> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 4> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 4> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 4> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 4> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 4> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
-			template<> struct IntgNode<0, 6> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 6> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 6> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 6> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 6> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 6> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 6> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 6> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 6> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 6> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 6> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 6> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
-			template<> struct IntgNode<0, 8> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 8> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 8> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 8> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 8> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 8> { static const Standard_Real value; };
-			template<> struct IntgNode<6, 8> { static const Standard_Real value; };
-			template<> struct IntgNode<7, 8> { static const Standard_Real value; };
-
-
-			template<> struct IntgNode<0, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<6, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<7, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<8, 10> { static const Standard_Real value; };
-			template<> struct IntgNode<9, 10> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<6, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<7, 8> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
 
-			template<> struct IntgNode<0, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<6, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<7, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<8, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<9, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<10, 12> { static const Standard_Real value; };
-			template<> struct IntgNode<11, 12> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<6, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<7, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<8, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<9, 10> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
 
-			template<> struct IntgNode<0, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<6, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<7, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<8, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<9, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<10, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<11, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<12, 14> { static const Standard_Real value; };
-			template<> struct IntgNode<13, 14> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<6, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<7, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<8, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<9, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<10, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<11, 12> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
 
-			template<> struct IntgNode<0, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<6, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<7, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<8, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<9, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<10, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<11, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<12, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<13, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<14, 16> { static const Standard_Real value; };
-			template<> struct IntgNode<15, 16> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<6, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<7, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<8, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<9, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<10, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<11, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<12, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<13, 14> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
 
-			template<> struct IntgNode<0, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<6, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<7, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<8, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<9, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<10, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<11, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<12, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<13, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<14, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<15, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<16, 18> { static const Standard_Real value; };
-			template<> struct IntgNode<17, 18> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<6, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<7, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<8, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<9, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<10, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<11, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<12, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<13, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<14, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<15, 16> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
 
-			template<> struct IntgNode<0, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<1, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<2, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<3, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<4, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<5, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<6, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<7, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<8, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<9, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<10, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<11, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<12, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<13, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<14, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<15, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<16, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<17, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<18, 20> { static const Standard_Real value; };
-			template<> struct IntgNode<19, 20> { static const Standard_Real value; };
+			template<> struct IntgNode<0, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<6, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<7, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<8, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<9, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<10, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<11, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<12, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<13, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<14, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<15, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<16, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<17, 18> { static TnbNumAlg_EXPORT const Standard_Real value; };
+
+
+			template<> struct IntgNode<0, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<1, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<2, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<3, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<4, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<5, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<6, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<7, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<8, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<9, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<10, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<11, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<12, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<13, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<14, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<15, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<16, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<17, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<18, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
+			template<> struct IntgNode<19, 20> { static TnbNumAlg_EXPORT const Standard_Real value; };
 
 		}
 	}

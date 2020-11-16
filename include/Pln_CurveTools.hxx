@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Cad2d_Module.hxx>
 #include <OFstream.hxx>
 
 class gp_Ax2d;
@@ -26,7 +27,7 @@ namespace tnbLib
 
 	public:
 
-		static Handle(Geom2d_Curve)
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			Trim
 			(
 				const Handle(Geom2d_Curve), 
@@ -34,7 +35,7 @@ namespace tnbLib
 				const Standard_Real theP1
 			);
 
-		static Handle(Geom2d_Curve)
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			Interpolation
 			(
 				const std::vector<Pnt2d>& theQ, 
@@ -42,7 +43,7 @@ namespace tnbLib
 				const Standard_Real theTol = 1.0E-6
 			);
 
-		static Handle(Geom2d_Curve) 
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			Interpolation
 			(
 				const std::vector<Pnt2d>& theQ, 
@@ -53,21 +54,21 @@ namespace tnbLib
 				const Standard_Boolean theScale = Standard_True
 			);
 
-		static Handle(Geom2d_Curve)
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			MakeSegment
 			(
 				const Pnt2d& theP0,
 				const Pnt2d& theP1
 			);
 
-		static Handle(Geom2d_Curve)
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			MakeCircle
 			(
 				const gp_Ax22d& A,
 				const Standard_Real Radius
 			);
 
-		static Handle(Geom2d_Curve)
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			MakeCircle
 			(
 				const gp_Ax2d& A,
@@ -75,7 +76,7 @@ namespace tnbLib
 				const Standard_Boolean Sense = Standard_True
 			);
 
-		static void 
+		static TnbCad2d_EXPORT void
 			ExportToPlt
 			(
 				const Handle(Geom2d_Curve)& theCurve,

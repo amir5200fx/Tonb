@@ -3,6 +3,7 @@
 #define _Entity2d_LineRef_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Geo_Module.hxx>
 
 namespace tnbLib
 {
@@ -18,13 +19,13 @@ namespace tnbLib
 	namespace gProcessor
 	{
 
-		Standard_Boolean IsIntersect
+		TnbGeo_EXPORT Standard_Boolean IsIntersect
 		(
 			const Entity2d_LineRef& theLine1,
 			const Entity2d_LineRef& theLine2
 		);
 
-		Pnt2d Intersect
+		TnbGeo_EXPORT Pnt2d Intersect
 		(
 			const Entity2d_LineRef& theLine1,
 			const Entity2d_LineRef& theLine2,

@@ -46,14 +46,14 @@ namespace tnbLib
 				, theY_(y)
 			{}
 
-			Pnt_Offset
+			TnbSectPx_EXPORT Pnt_Offset
 			(
 				const Standard_Integer theIndex, 
 				const Standard_Real x, 
 				const Standard_Real y
 			);
 
-			Pnt_Offset
+			TnbSectPx_EXPORT Pnt_Offset
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
@@ -63,7 +63,7 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			auto X() const
 			{
@@ -85,7 +85,7 @@ namespace tnbLib
 				theY_ = theY;
 			}
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
 			//- override virtual functions from coord abstract class
 			Standard_Real xCoord() const override
@@ -98,39 +98,39 @@ namespace tnbLib
 				return Y();
 			}
 
-			Pnt2d Coord() const override;
+			inline Pnt2d Coord() const override;
 
-			Standard_Boolean IsComplete() const override;
+			TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
 			//- override virtual functions from pnt abstract class 
-			sectPxLib::pntType PntType() const override;
+			TnbSectPx_EXPORT sectPxLib::pntType PntType() const override;
 
-			Standard_Boolean IsOffset() const override;
+			TnbSectPx_EXPORT Standard_Boolean IsOffset() const override;
 
 			//- override virtual functions from parent abstract class 
 
-			Standard_Integer NbChildren() const override;
+			TnbSectPx_EXPORT Standard_Integer NbChildren() const override;
 
-			Standard_Boolean HasChildren() const override;
+			TnbSectPx_EXPORT Standard_Boolean HasChildren() const override;
 
-			Standard_Boolean HasChild
+			TnbSectPx_EXPORT Standard_Boolean HasChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			std::vector<std::shared_ptr<SectPx_Child>>
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Child>>
 				RetrieveChildren() const override;
 
-			void RemoveThisFromChildren() const override;
+			TnbSectPx_EXPORT void RemoveThisFromChildren() const override;
 
-			void AddThisToChildren() const override;
+			TnbSectPx_EXPORT void AddThisToChildren() const override;
 
-			void RemoveThisFromChild
+			TnbSectPx_EXPORT void RemoveThisFromChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;
 
-			void AddThisToChild
+			TnbSectPx_EXPORT void AddThisToChild
 			(
 				const std::shared_ptr<SectPx_Child>& thePar
 			) const override;

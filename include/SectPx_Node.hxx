@@ -10,26 +10,6 @@ namespace tnbLib
 	class SectPx_Node;
 }
 
-namespace boost
-{
-	namespace serialization
-	{
-
-		template<class Archive, class T>
-		inline void my_split_member(
-			Archive & ar, T & t, const unsigned int file_version
-		) {
-			typedef typename mpl::eval_if<
-				typename Archive::is_saving,
-				mpl::identity<detail::member_saver<Archive, T> >,
-				mpl::identity<detail::member_loader<Archive, T> >
-			>::type typex;
-			typex::invoke(ar, t, file_version);
-		}
-
-	}
-}
-
 namespace tnbLib
 {
 
@@ -49,7 +29,7 @@ namespace tnbLib
 		std::shared_ptr<SectPx_Pnt> thePnt_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbGlobal_EXPORT);
+		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
 
 
 		void SetPnt
@@ -69,18 +49,18 @@ namespace tnbLib
 
 		static const char* typeName_;
 
-		SectPx_Node
+		TnbSectPx_EXPORT SectPx_Node
 		(
 			const std::shared_ptr<SectPx_Pnt>& thePnt
 		);
 
-		SectPx_Node
+		TnbSectPx_EXPORT SectPx_Node
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Pnt>& thePnt
 		);
 
-		SectPx_Node
+		TnbSectPx_EXPORT SectPx_Node
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
@@ -92,11 +72,11 @@ namespace tnbLib
 			return thePnt_;
 		}
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		Standard_Boolean IsNode() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsNode() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 	};
 }
 

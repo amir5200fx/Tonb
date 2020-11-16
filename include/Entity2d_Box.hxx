@@ -33,7 +33,7 @@ namespace tnbLib
 
 	template<>
 	template<>
-	Entity2d_Box Entity2d_Box::SubDivide<Box2d_SubDivideAlgorithm>
+	TnbGeo_EXPORT Entity2d_Box Entity2d_Box::SubDivide<Box2d_SubDivideAlgorithm>
 		(
 			const Box2d_SubDivideAlgorithm theAlg
 			) const;
@@ -60,7 +60,7 @@ namespace tnbLib
 	}
 
 	template<>
-	void Entity2d_Box::ExportToPlt(OFstream&) const;
+	TnbGeo_EXPORT void Entity2d_Box::ExportToPlt(OFstream&) const;
 
 	namespace Box
 	{

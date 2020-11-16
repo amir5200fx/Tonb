@@ -1,10 +1,18 @@
 #pragma once
+#include <SectPx_Par.hxx>
 #include <SectPx_Registry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
 {
+
+	template<class Archive>
+	void SectPx_oneParFieldFun::serialize(Archive & ar, const unsigned int file_version)
+	{
+		ar & boost::serialization::base_object<SectPx_FieldFun>(*this);
+		ar & thePar_;
+	}
 
 	template<class FieldFun>
 	std::shared_ptr<FieldFun> 

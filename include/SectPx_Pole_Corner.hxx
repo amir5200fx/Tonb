@@ -29,7 +29,7 @@ namespace tnbLib
 		public:
 
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			Pole_Corner()
 			{}
@@ -41,22 +41,22 @@ namespace tnbLib
 				: thePnt_(thePnt)
 			{}
 
-			Pole_Corner
+			TnbSectPx_EXPORT Pole_Corner
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
-			Pole_Corner
+			TnbSectPx_EXPORT Pole_Corner
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			Pnt2d Coord() const override;
+			TnbSectPx_EXPORT Pnt2d Coord() const override;
 
 			Standard_Boolean IsCorner() const override
 			{

@@ -39,13 +39,13 @@ namespace tnbLib
 		SectPx_TPntAdaptor()
 		{}
 
-		std::weak_ptr<SectPx_Edge> 
+		TnbSectPx_EXPORT std::weak_ptr<SectPx_Edge>
 			RemoveFromEdges
 			(
 				const Standard_Integer theIndex
 			);
 
-		void Import
+		TnbSectPx_EXPORT void Import
 		(
 			const Standard_Integer theIndex, 
 			const std::shared_ptr<SectPx_Edge>& theEdge

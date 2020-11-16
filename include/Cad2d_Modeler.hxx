@@ -54,70 +54,70 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		void RemoveVertex
+		TnbCad2d_EXPORT void RemoveVertex
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx
 		);
 
-		void RemoveVertex
+		TnbCad2d_EXPORT void RemoveVertex
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx,
 			const std::shared_ptr<corner>& theCorner
 		);
 
-		void RemoveSegment
+		TnbCad2d_EXPORT void RemoveSegment
 		(
 			const std::shared_ptr<cad2dLib::Modeler_Segment>& theSegmnt
 		);
 
-		void RemoveRing(const std::shared_ptr<Pln_Ring>& theRing);
+		TnbCad2d_EXPORT void RemoveRing(const std::shared_ptr<Pln_Ring>& theRing);
 
-		std::shared_ptr<cad2dLib::Modeler_Corner>
+		TnbCad2d_EXPORT std::shared_ptr<cad2dLib::Modeler_Corner>
 			AddVertex
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx,
 				const Standard_Integer theEdgeIndex
 			);
 
-		Standard_Integer
+		TnbCad2d_EXPORT Standard_Integer
 			AddEdge
 			(
 				const std::shared_ptr<Pln_Edge>& theEdge
 			);
 
-		Standard_Integer 
+		TnbCad2d_EXPORT Standard_Integer
 			AddRing
 			(
 				const std::shared_ptr<Pln_Ring>& theRing
 			);
 
-		Standard_Integer
+		TnbCad2d_EXPORT Standard_Integer
 			AddPlane
 			(
 				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
-		Standard_Integer
+		TnbCad2d_EXPORT Standard_Integer
 			AddPlane
 			(
 				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
-		Standard_Integer 
+		TnbCad2d_EXPORT Standard_Integer
 			AddSegment
 			(
 				const std::shared_ptr<cad2dLib::Modeler_Segment>& theSegmnt
 			);
 
-		std::vector<std::shared_ptr<Pln_Edge>> MakeChain(selctList& theList);
+		TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>> MakeChain(selctList& theList);
 
 	public:
 
 		using cad2dLib::Modeler_Registry::IsNull;
 
-		Cad2d_Modeler();
+		TnbCad2d_EXPORT Cad2d_Modeler();
 
-		Standard_Boolean HasDuplication
+		TnbCad2d_EXPORT Standard_Boolean HasDuplication
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge, 
 			cad2dLib::Modeler_SelectList& theList
@@ -125,70 +125,70 @@ namespace tnbLib
 
 		//- throw an exception if found any duplication.
 		//- Check consistency with the "HasDuplication" method
-		void Select
+		TnbCad2d_EXPORT void Select
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge,
 			selctList& theList
 		) const;
 
-		void SelectAll(selctList& theList) const;
+		TnbCad2d_EXPORT void SelectAll(selctList& theList) const;
 
 		//- throw an exception if the edge is not in the tree
 		//- Check consistency with the "HasDuplication" method
-		void deSelect
+		TnbCad2d_EXPORT void deSelect
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge, 
 			selctList& theList
 		) const;
 
-		void deSelectAll(selctList& theList) const;
+		TnbCad2d_EXPORT void deSelectAll(selctList& theList) const;
 
-		void RemoveEdge
+		TnbCad2d_EXPORT void RemoveEdge
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
 
-		Standard_Integer Import
+		TnbCad2d_EXPORT Standard_Integer Import
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
 
-		Standard_Integer Import
+		TnbCad2d_EXPORT Standard_Integer Import
 		(
 			std::shared_ptr<Pln_Edge>&& theEdge
 		);
 
-		void Import
+		TnbCad2d_EXPORT void Import
 		(
 			const std::vector<std::shared_ptr<Pln_Edge>>& theEdegs
 		);
 
-		void Import
+		TnbCad2d_EXPORT void Import
 		(
 			std::vector<std::shared_ptr<Pln_Edge>>&& theEdegs
 		);
 
-		void Trim
+		TnbCad2d_EXPORT void Trim
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge0, 
 			const std::shared_ptr<Pln_Edge>& theEdge1
 		);
 
-		std::pair<Standard_Boolean, Standard_Integer>
+		TnbCad2d_EXPORT std::pair<Standard_Boolean, Standard_Integer>
 			Union
 			(
 				const Standard_Integer plnId0, 
 				const Standard_Integer plnId1
 			);
 
-		std::pair<Standard_Boolean, std::vector<Standard_Integer>>
+		TnbCad2d_EXPORT std::pair<Standard_Boolean, std::vector<Standard_Integer>>
 			Subtract
 			(
 				const Standard_Integer plnId0, 
 				const Standard_Integer plnId1
 			);
 
-		std::pair<Standard_Boolean, std::vector<Standard_Integer>>
+		TnbCad2d_EXPORT std::pair<Standard_Boolean, std::vector<Standard_Integer>>
 			Intersection
 			(
 				const Standard_Integer plnId0,
@@ -196,7 +196,7 @@ namespace tnbLib
 			);
 
 		//- the list will get empty after successfully creating plane
-		std::vector<Standard_Integer> 
+		TnbCad2d_EXPORT std::vector<Standard_Integer>
 			MakePlanes
 			(
 				selctList& theList, 
@@ -204,7 +204,7 @@ namespace tnbLib
 			);
 
 		//- the list will get empty after successfully creating plane
-		Standard_Integer 
+		TnbCad2d_EXPORT Standard_Integer
 			MakePlane
 			(
 				selctList& theList,

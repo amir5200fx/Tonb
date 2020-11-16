@@ -3,6 +3,7 @@
 #define _Geo_UniDistb_Header
 
 #include <Geo_xDistb.hxx>
+#include <Geo_Module.hxx>
 
 namespace tnbLib
 {
@@ -22,7 +23,7 @@ namespace tnbLib
 			: theSize_(theSize)
 		{}
 
-		void Perform();
+		TnbGeo_EXPORT void Perform();
 
 
 	};

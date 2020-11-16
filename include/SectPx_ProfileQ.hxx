@@ -50,7 +50,7 @@ namespace tnbLib
 			return theQ_;
 		}
 
-		std::vector<Pnt2d> RetrievePnts() const;
+		TnbSectPx_EXPORT std::vector<Pnt2d> RetrievePnts() const;
 	};
 
 	namespace sectPxLib

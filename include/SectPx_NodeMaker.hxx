@@ -46,25 +46,25 @@ namespace tnbLib
 				: SectPx_Maker(theRegistry)
 			{}
 
-			std::shared_ptr<SectPx_Node>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Node>
 				SelectNode
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateNode
 				(
 					const std::shared_ptr<SectPx_Pnt>& thePnt
 				);
 
-			std::shared_ptr<SectPx_Node>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Node>
 				RemoveNode
 				(
 					const Standard_Integer theIndex
 				);
 
-			void Print(OSstream& out) const;
+			TnbSectPx_EXPORT void Print(OSstream& out) const;
 
 		};
 	}

@@ -43,21 +43,21 @@ namespace tnbLib
 			{}
 
 
-			std::shared_ptr<SectPx_Interface>
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Interface>
 				SelectInterface
 				(
 					const Standard_Integer theIndex
 				) const;
 
-			std::shared_ptr<SectPx_Interface> RemoveInterface(const Standard_Integer theIndex) const;
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Interface> RemoveInterface(const Standard_Integer theIndex) const;
 
-			Standard_Integer
+			TnbSectPx_EXPORT Standard_Integer
 				CreateEmpty
 				(
 					const std::shared_ptr<SectPx_Node>& theNode
 				) const;
 
-			std::tuple<Standard_Integer, Standard_Integer>
+			TnbSectPx_EXPORT std::tuple<Standard_Integer, Standard_Integer>
 				CreateJoint
 				(
 					const std::shared_ptr<SectPx_Node>& theNode0,

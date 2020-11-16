@@ -3,6 +3,7 @@
 #define _Cad2d_EdgeEdgeTrim_Header
 
 #include <Global_Done.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 #include <map>
@@ -35,9 +36,9 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_EdgeEdgeTrim();
+		TnbCad2d_EXPORT Cad2d_EdgeEdgeTrim();
 
-		Cad2d_EdgeEdgeTrim
+		TnbCad2d_EXPORT Cad2d_EdgeEdgeTrim
 		(
 			const std::shared_ptr<Cad2d_EdgeEdgeIntersection>& theAlg
 		);
@@ -47,9 +48,9 @@ namespace tnbLib
 			return theIntersection_;
 		}
 
-		const std::shared_ptr<Pln_Edge>& Edge0() const;
+		TnbCad2d_EXPORT const std::shared_ptr<Pln_Edge>& Edge0() const;
 
-		const std::shared_ptr<Pln_Edge>& Edge1() const;
+		TnbCad2d_EXPORT const std::shared_ptr<Pln_Edge>& Edge1() const;
 
 		Standard_Integer NbCurves() const
 		{
@@ -61,15 +62,15 @@ namespace tnbLib
 			return theCurves_;
 		}
 
-		std::vector<std::shared_ptr<Pln_Curve>> RetrieveCurves() const;
+		TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Curve>> RetrieveCurves() const;
 
-		std::shared_ptr<Pln_Curve>
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			SelectToTrim
 			(
 				const Standard_Integer theIndex
 			);
 
-		void Perform(const Standard_Real theTol = 1.0E-6);
+		TnbCad2d_EXPORT void Perform(const Standard_Real theTol = 1.0E-6);
 
 		void LoadIntersection
 		(
@@ -79,7 +80,7 @@ namespace tnbLib
 			theIntersection_ = theAlg;
 		}
 
-		void RetrieveCurvesTo
+		TnbCad2d_EXPORT void RetrieveCurvesTo
 		(
 			std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 		) const;

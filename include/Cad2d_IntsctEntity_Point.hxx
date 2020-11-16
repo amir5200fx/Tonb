@@ -3,6 +3,7 @@
 #define _Cad2d_IntsctEntity_Point_Header
 
 #include <Cad2d_IntsctEntity.hxx>
+#include <Cad2d_Module.hxx>
 
 namespace tnbLib
 {
@@ -20,11 +21,11 @@ namespace tnbLib
 
 	public:
 
-		Cad2d_IntsctEntity_Point();
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_Point();
 
-		Cad2d_IntsctEntity_Point(const Standard_Integer theIndex);
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_Point(const Standard_Integer theIndex);
 
-		Cad2d_IntsctEntity_Point(const Standard_Integer theIndex, const word& theName);
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_Point(const Standard_Integer theIndex, const word& theName);
 
 		const auto& ParentVertex() const
 		{

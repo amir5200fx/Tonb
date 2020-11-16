@@ -21,7 +21,7 @@ namespace tnbLib
 
 	public:
 
-		GeoSketch2d_Ellipse
+		TnbCad2d_EXPORT GeoSketch2d_Ellipse
 		(
 			const gp_Ax2d& theAxis,
 			const Standard_Real theMajorRadius,
@@ -29,7 +29,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		GeoSketch2d_Ellipse
+		TnbCad2d_EXPORT GeoSketch2d_Ellipse
 		(
 			const gp_Ax22d& theAxis,
 			const Standard_Real theMajorRadius,

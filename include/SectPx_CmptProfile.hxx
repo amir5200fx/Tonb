@@ -32,7 +32,7 @@ namespace tnbLib
 
 	public:
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
 		SectPx_CmptProfile()
 		{}
@@ -47,11 +47,11 @@ namespace tnbLib
 			return theProfiles_;
 		}
 
-		Standard_Boolean IsCmptProfile() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsCmptProfile() const override;
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 	};
 }

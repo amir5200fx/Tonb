@@ -18,12 +18,12 @@ namespace tnbLib
 
 	public:
 
-		static const Vec3d null;
+		static TnbGeo_EXPORT const Vec3d null;
 
 		Vec3d()
 		{}
 
-		Vec3d(const Dir3d& V);
+		TnbGeo_EXPORT Vec3d(const Dir3d& V);
 
 		Vec3d(const gp_XYZ& xyz)
 			: gp_Vec(xyz)

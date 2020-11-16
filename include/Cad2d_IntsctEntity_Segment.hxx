@@ -26,9 +26,9 @@ namespace tnbLib
 		Cad2d_IntsctEntity_Segment()
 		{}
 
-		Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex);
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex);
 
-		Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex, const word& theName);
+		TnbCad2d_EXPORT Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex, const word& theName);
 
 
 		const auto& ParentEdge() const
@@ -61,20 +61,20 @@ namespace tnbLib
 			theEdge_ = theEdge;
 		}
 
-		static Standard_Boolean
+		static TnbCad2d_EXPORT Standard_Boolean
 			CompareEntities
 			(
 				const std::shared_ptr<Cad2d_IntsctEntity_Segment>& theEntity0,
 				const std::shared_ptr<Cad2d_IntsctEntity_Segment>& theEntity1
 			);
 
-		static void
+		static TnbCad2d_EXPORT void
 			SortEntities
 			(
 				std::vector<std::shared_ptr<Cad2d_IntsctEntity_Segment>>& theEntities
 			);
 
-		static std::vector<std::shared_ptr<Pln_Curve>>
+		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Curve>>
 			SubdivideEdge
 			(
 				const std::shared_ptr<Pln_Edge>& theEdge,

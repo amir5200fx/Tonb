@@ -37,20 +37,20 @@ namespace tnbLib
 		SectPx_TopoProfile()
 		{}
 
-		SectPx_TopoProfile
+		TnbSectPx_EXPORT SectPx_TopoProfile
 		(
 			const std::shared_ptr<SectPx_Node>& theNode0,
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
-		SectPx_TopoProfile
+		TnbSectPx_EXPORT SectPx_TopoProfile
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Node>& theNode0,
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
-		SectPx_TopoProfile
+		TnbSectPx_EXPORT SectPx_TopoProfile
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -62,7 +62,7 @@ namespace tnbLib
 		{}
 
 
-		static void SetProfile
+		static TnbSectPx_EXPORT void SetProfile
 		(
 			const std::shared_ptr<SectPx_Node>& theNode, 
 			const std::shared_ptr<SectPx_TopoProfile>& theProfile
@@ -85,7 +85,7 @@ namespace tnbLib
 			return theKnotAlg_;
 		}
 
-		std::vector<Pnt2d> 
+		TnbSectPx_EXPORT std::vector<Pnt2d>
 			RetrieveCoords() const;
 
 		void SetKnot(const std::shared_ptr<SectPx_KnotVector>& theKnot)
@@ -98,11 +98,11 @@ namespace tnbLib
 			theKnotAlg_ = std::move(theKnot);
 		}
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
-		Standard_Boolean IsProfile() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsProfile() const override;
 
-		Handle(Geom2d_Curve) 
+		TnbSectPx_EXPORT Handle(Geom2d_Curve)
 			RetrieveGeomCurve
 			(
 				const Standard_Integer deg

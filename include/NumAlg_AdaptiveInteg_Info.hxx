@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <NumAlg_Module.hxx>
 
 namespace tnbLib
 {
@@ -48,11 +49,11 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_TOLERANCE;
-		static const Standard_Integer DEFAULT_MAX_ITERATIONS;
-		static const Standard_Integer DEFAULT_INIT_ITERATIONS;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbNumAlg_EXPORT const Standard_Integer DEFAULT_MAX_ITERATIONS;
+		static TnbNumAlg_EXPORT const Standard_Integer DEFAULT_INIT_ITERATIONS;
 
-		NumAlg_AdaptiveInteg_Info();
+		TnbNumAlg_EXPORT NumAlg_AdaptiveInteg_Info();
 
 		Standard_Boolean IsConverged() const
 		{

@@ -3,6 +3,7 @@
 #define _NumAlg_System_Header
 
 #include <Standard_TypeDef.hxx>
+#include <NumAlg_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -12,7 +13,7 @@ namespace tnbLib
 	namespace sysLib
 	{
 
-		void init_TnbNumAlg();
+		TnbNumAlg_EXPORT void init_TnbNumAlg();
 	}
 
 	namespace Iter

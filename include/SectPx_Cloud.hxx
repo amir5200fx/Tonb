@@ -45,7 +45,7 @@ namespace tnbLib
 			ar & theProfile_;
 		}
 
-		void AllocateMemory();
+		TnbSectPx_EXPORT void AllocateMemory();
 
 	protected:
 
@@ -61,9 +61,9 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsCloud() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsCloud() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		virtual Standard_Boolean IsComplete() const = 0;
 

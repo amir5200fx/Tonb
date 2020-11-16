@@ -38,7 +38,7 @@ namespace tnbLib
 
 		virtual Standard_Boolean IsComplete() const = 0;
 
-		virtual Standard_Boolean IsDatum() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsDatum() const;
 	};
 }
 

@@ -93,14 +93,14 @@ namespace tnbLib
 
 		//- override virtual functions
 
-		Standard_Integer NbEntities(const Pln_EntityType t) const override;
+		TnbCad2d_EXPORT Standard_Integer NbEntities(const Pln_EntityType t) const override;
 
 		Standard_Boolean IsRing() const override
 		{
 			return Standard_True;
 		}
 
-		void RetrieveEntitiesTo
+		TnbCad2d_EXPORT void RetrieveEntitiesTo
 		(
 			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
 			const Pln_EntityType t

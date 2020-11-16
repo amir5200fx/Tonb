@@ -38,29 +38,29 @@ namespace tnbLib
 
 		virtual sectPxLib::regObjType RegObjType() const = 0;
 
-		virtual Standard_Boolean IsParent() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsParent() const;
 
-		virtual Standard_Boolean IsChild() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsChild() const;
 
-		virtual Standard_Boolean IsEdge() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsEdge() const;
 
-		virtual Standard_Boolean IsSegment() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsSegment() const;
 
-		virtual Standard_Boolean IsPole() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsPole() const;
 
-		virtual Standard_Boolean IsInterface() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsInterface() const;
 
-		virtual Standard_Boolean IsNode() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsNode() const;
 
-		virtual Standard_Boolean IsProfile() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsProfile() const;
 
-		virtual Standard_Boolean IsCmptProfile() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsCmptProfile() const;
 
-		virtual Standard_Boolean IsFrame() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsFrame() const;
 
-		virtual Standard_Boolean IsOverrider() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsOverrider() const;
 
-		virtual Standard_Boolean IsOffsetProfile() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsOffsetProfile() const;
 	};
 }
 

@@ -86,7 +86,7 @@ namespace tnbLib
 			ar & theParents_;
 		}
 
-		void Add
+		TnbSectPx_EXPORT void Add
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Parent>& theParent
@@ -97,19 +97,19 @@ namespace tnbLib
 		SectPx_ParentAdaptor()
 		{}
 
-		std::weak_ptr<SectPx_Parent>
+		TnbSectPx_EXPORT std::weak_ptr<SectPx_Parent>
 			SelectParent
 			(
 				const Standard_Integer theIndex
 			);
 
-		std::weak_ptr<SectPx_Parent>
+		TnbSectPx_EXPORT std::weak_ptr<SectPx_Parent>
 			RemoveFromParents
 			(
 				const Standard_Integer theIndex
 			);
 
-		void ImportToParents
+		TnbSectPx_EXPORT void ImportToParents
 		(
 			const std::shared_ptr<SectPx_Parent>& theParent
 		);

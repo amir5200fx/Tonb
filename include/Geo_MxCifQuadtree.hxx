@@ -26,7 +26,7 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer DEFAULT_MAX_DIVIDE;
+		static const Standard_Integer DEFAULT_MAX_DIVIDE = 6;
 
 		auto Dmin() const
 		{

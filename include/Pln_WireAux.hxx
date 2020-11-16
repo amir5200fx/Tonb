@@ -29,9 +29,9 @@ namespace tnbLib
 		Pln_WireAux()
 		{}
 
-		void SetBoundingBox(const Entity2d_Box&& theB);
+		TnbCad2d_EXPORT void SetBoundingBox(const Entity2d_Box&& theB);
 
-		void SetOrientation(const Pln_Orientation theOrient);
+		TnbCad2d_EXPORT void SetOrientation(const Pln_Orientation theOrient);
 
 	public:
 

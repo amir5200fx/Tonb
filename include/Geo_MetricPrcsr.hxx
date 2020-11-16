@@ -6,6 +6,7 @@
 #include <Global_Named.hxx>
 #include <Entity_Box.hxx>
 #include <Geo_Traits.hxx>
+#include <Geo_Module.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <Geo_MetricPrcsrAnIso_Info.hxx>
 #include <Geo_MetricPrcsr_Traits.hxx>

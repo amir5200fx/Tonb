@@ -36,4 +36,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_TCoord);
+
 #endif // !_SectPx_TCoord_Header

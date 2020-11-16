@@ -33,13 +33,13 @@ namespace tnbLib
 
 	public:
 
-		virtual Standard_Boolean IsComponent() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsComponent() const;
 
-		virtual Standard_Boolean IsGeoField() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsGeoField() const;
 
-		virtual Standard_Boolean IsOffset() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsOffset() const;
 
-		Standard_Boolean IsMaster() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsMaster() const override;
 
 		Standard_Boolean HasOverrider() const
 		{
@@ -56,7 +56,7 @@ namespace tnbLib
 			return theOverrider_;
 		}
 
-		void SetOverrider
+		TnbSectPx_EXPORT void SetOverrider
 		(
 			const std::shared_ptr<SectPx_Overrider>& theOverrider
 		);
