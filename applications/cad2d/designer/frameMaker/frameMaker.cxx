@@ -10,6 +10,7 @@
 #include <SectPx_ProfileMaker.hxx>
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_Cloud.hxx>
+#include <SectPx_Edge.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -85,6 +86,68 @@ namespace tnbLib
 	coord_t getCoord(const coord_t& p)
 	{
 		return p;
+	}
+
+	fieldFun_t getFieldFun(const exprField_t& f)
+	{
+		return f;
+	}
+
+	fieldFun_t getFieldFun(const fieldFun_t& f)
+	{
+		return f;
+	}
+
+	exprField_t getExprField(const fieldFun_t& f)
+	{
+		auto expr = std::dynamic_pointer_cast<sectPxLib::FieldFun_Expr>(f);
+		if (NOT expr)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the field's type is not 'expression'" << endl
+				<< " - type: " << f->RegObjTypeName() << endl
+				<< abort(FatalError);
+		}
+		return std::move(expr);
+	}
+
+	fixed_t getFixedPar(const par_t& p)
+	{
+		auto fixed = std::dynamic_pointer_cast<SectPx_FixedPar>(p);
+		if (NOT fixed)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the parameter's type is not 'fixed'" << endl
+				<< "- type: " << p->RegObjTypeName() << endl
+				<< abort(FatalError);
+		}
+		return std::move(fixed);
+	}
+
+	free_t getFreePar(const par_t& p)
+	{
+		auto free = std::dynamic_pointer_cast<SectPx_FreePar>(p);
+		if (NOT free)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the parameter's type is not 'free'" << endl
+				<< "- type: " << p->RegObjTypeName() << endl
+				<< abort(FatalError);
+		}
+		return std::move(free);
+	}
+
+	const_t getConstPar(const par_t& p)
+	{
+		auto item = std::dynamic_pointer_cast<SectPx_ConstPar>(p);
+		if (NOT item)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the parameter's type is not 'constant'" << endl
+				<< "- type: " << p->RegObjTypeName() << endl
+				<< abort(FatalError);
+		}
+		return std::move(item);
 	}
 
 	void printObj(const regObj_t& t)
@@ -189,6 +252,11 @@ namespace tnbLib
 		return getCmpProfileMaker()->NbProfiles();
 	}
 
+	auto nbEdges()
+	{
+		return getRegistry()->ScatterMap(SectPx_RegObjType::edge).size();
+	}
+
 	auto getProfile(const int i)
 	{
 		if (i < 0 OR i >= nbProfiles())
@@ -217,6 +285,37 @@ namespace tnbLib
 		auto profile = std::dynamic_pointer_cast<SectPx_TopoProfile>(iter->second.lock());
 		Debug_Null_Pointer(profile);
 		return std::move(profile);
+	}
+
+	auto getEdge(const int i)
+	{
+		if (i < 0 OR i >= nbEdges())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "index has been exceeded the map" << endl
+				<< abort(FatalError);
+		}
+		const auto& reg = getRegistry();
+		const auto& m = reg->ScatterMap(SectPx_RegObjType::edge);
+
+		if (m.empty())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "there is no edge in the frame!" << endl
+				<< abort(FatalError);
+		}
+
+		auto iter = m.begin();
+		int k = 0;
+		while ((k NOT_EQUAL i) AND(iter NOT_EQUAL m.end()))
+		{
+			++k;
+			iter++;
+		}
+
+		auto edge = std::dynamic_pointer_cast<SectPx_Edge>(iter->second.lock());
+		Debug_Null_Pointer(edge);
+		return std::move(edge);
 	}
 
 	const auto& getProfiles()
@@ -309,7 +408,22 @@ namespace tnbLib
 
 	auto importPnt(const profile_t& m, const pnt_t& p, const edge_t& ed)
 	{
-		auto t = m->ImportPnt(p, ed);
+		const auto[i0, i1] = m->ImportPnt(p, ed);
+		auto e0 = selectEdge(m, i0);
+		auto e1 = selectEdge(m, i1);
+		auto t = std::make_pair(std::move(e0), std::move(e1));
+		return std::move(t);
+	}
+
+	auto retrieveLeftEdge(const std::pair<edge_t, edge_t>& p)
+	{
+		auto t = p.first;
+		return std::move(t);
+	}
+
+	auto retrieveRightEdge(const std::pair<edge_t, edge_t>& p)
+	{
+		auto t = p.second;
 		return std::move(t);
 	}
 
@@ -323,37 +437,37 @@ namespace tnbLib
 
 	auto createFree(const parMaker_t& m, const fieldFun_t& f)
 	{
-		auto t = std::dynamic_pointer_cast<SectPx_FreePar>(m->SelectParameter(m->CreateFree(f)));
+		auto t = m->SelectParameter(m->CreateFree(f));
 		return std::move(t);
 	}
 
 	auto createFree(const parMaker_t& m, const word& name, const fieldFun_t& f)
 	{
-		auto t = std::dynamic_pointer_cast<SectPx_FreePar>(m->SelectParameter(m->CreateFree(name, f)));
+		auto t = m->SelectParameter(m->CreateFree(name, f));
 		return std::move(t);
 	}
 
 	auto createFixed(const parMaker_t& m, const double x)
 	{
-		auto t = std::dynamic_pointer_cast<SectPx_FixedPar>(m->SelectParameter(m->CreateFixed(x)));
+		auto t = m->SelectParameter(m->CreateFixed(x));
 		return std::move(t);
 	}
 
 	auto createFixed(const parMaker_t& m, const word& name, const double x)
 	{
-		auto t = std::dynamic_pointer_cast<SectPx_FixedPar>(m->SelectParameter(m->CreateFixed(name, x)));
+		auto t = m->SelectParameter(m->CreateFixed(name, x));
 		return std::move(t);
 	}
 
 	auto createConstant(const parMaker_t& m, const double x)
 	{
-		auto t = std::dynamic_pointer_cast<SectPx_ConstPar>(m->SelectParameter(m->CreateConstant(x)));
+		auto t = m->SelectParameter(m->CreateConstant(x));
 		return std::move(t);
 	}
 
 	auto createConstant(const parMaker_t& m, const word& name, const double x)
 	{
-		auto t = std::dynamic_pointer_cast<SectPx_ConstPar>(m->SelectParameter(m->CreateConstant(name, x)));
+		auto t = m->SelectParameter(m->CreateConstant(name, x));
 		return std::move(t);
 	}
 
@@ -401,7 +515,7 @@ namespace tnbLib
 
 	auto createExpr(const fieldMaker_t& m, const word& ex)
 	{
-		auto t = std::dynamic_pointer_cast<sectPxLib::FieldFun_Expr>(m->SelectFieldFun(m->CreateExpression(ex)));
+		auto t = m->SelectFieldFun(m->CreateExpression(ex));
 		return std::move(t);
 	}
 
@@ -482,29 +596,11 @@ namespace tnbLib
 		Debug_If_Condition(item NOT_EQUAL f);
 	}
 
-	void addVariable(const exprField_t& f, const word& name, double& x)
-	{
-		f->AddVariable(name, x);
-	}
+	/* expr field-function methods*/
 
 	void addVariable(const exprField_t& f, const word& name, const fieldFun_t& x)
 	{
-		f->AddVariable(name, *x);
-	}
-
-	void addVariable(const exprField_t& f, const word& name, const fixed_t& x)
-	{
-		f->AddVariable(name, *x);
-	}
-
-	void addConstant(const exprField_t& f, const word& name, const double& x)
-	{
-		f->AddConstant(name, x);
-	}
-
-	void addConstant(const exprField_t& f, const word& name, const const_t& x)
-	{
-		f->AddConstant(name, *x);
+		f->AddVariable(name, x);
 	}
 
 	void removeVariable(const exprField_t& f, const word& name)
@@ -516,6 +612,8 @@ namespace tnbLib
 	{
 		f->PrintRegistry();
 	}
+
+	
 }
 
 #ifdef DebugInfo
@@ -551,16 +649,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const parMaker_t& m, const double x)-> auto {auto t = createConstant(m, x); return std::move(t); }), "createConstant");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, const double x)-> auto {auto t = createConstant(m, name, x); return std::move(t); }), "createConstant");
 		mod->add(chaiscript::fun([](const parMaker_t& m, const par_t& p)-> void {removePar(m, p); }), "remove");
-		mod->add(chaiscript::fun([](const parMaker_t& m, const fixed_t& p)-> void {removePar(m, p); }), "remove");
-		mod->add(chaiscript::fun([](const parMaker_t& m, const free_t& p)-> void {removePar(m, p); }), "remove");
-		mod->add(chaiscript::fun([](const parMaker_t& m, const const_t& p)-> void {removePar(m, p); }), "remove");
 
 		mod->add(chaiscript::fun([](const par_t& p, const std::string& name)-> void {p->SetName(name); }), "setName");
 		
-		mod->add(chaiscript::fun([](const par_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
-		mod->add(chaiscript::fun([](const fixed_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
-		mod->add(chaiscript::fun([](const free_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
-		mod->add(chaiscript::fun([](const const_t& p)-> auto {auto t = getPar(p); return std::move(t); }), "getPar");
+		mod->add(chaiscript::fun([](const double x, const double y)-> auto{auto t = Dir2d(x, y); return std::move(t); }), "makeDir");
 	}
 
 	void setField(const module_t& mod)
@@ -573,6 +665,11 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const fieldMaker_t& m, const std::string& ex)-> auto {auto t = createExpr(m, ex); return std::move(t); }), "createExpr");
 
 		mod->add(chaiscript::fun([](const fieldFun_t& f, const std::string& name)-> void {f->SetName(name); }), "setName");
+
+		//mod->add(chaiscript::fun([](const exprField_t& f)-> auto {auto t = getFieldFun(f); return std::move(t); }), "getFieldFun");
+		//mod->add(chaiscript::fun([](const fieldFun_t& f)-> auto {auto t = getFieldFun(f); return std::move(t); }), "getFieldFun");
+
+		mod->add(chaiscript::fun([](const fieldFun_t& f, const fieldFun_t& x)-> void {addVariable(getExprField(f), x->Name(), x); }), "addVariable");
 	}
 
 	void setPoints(const module_t& mod)
@@ -597,6 +694,13 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const geoMaker_t& m, const geoMap_t& g)-> void {m->RemoveGeoMap(g->Index()); }), "remove");
 	}
 
+	void setProfileMakers(const module_t& mod)
+	{
+		mod->add(chaiscript::fun([](const profile_t& m, const pnt_t& p, const edge_t& e)-> auto {auto t = importPnt(m, p, e); return std::move(t); }), "importPoint");
+		mod->add(chaiscript::fun([](const std::pair<edge_t, edge_t>& p)-> auto {auto t = retrieveLeftEdge(p); return std::move(t); }), "retrieveLeftEdge");
+		mod->add(chaiscript::fun([](const std::pair<edge_t, edge_t>& p)-> auto {auto t = retrieveRightEdge(p); return std::move(t); }), "retrieveRightEdge");
+	}
+
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([]()-> const auto& {return getParameterMaker(); }), "getParameterMaker");
@@ -604,9 +708,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> const auto& {return getRegistry(); }), "getRegistry");
 		mod->add(chaiscript::fun([]()-> const auto& {return getPointMaker(); }), "getPointMaker");
 		mod->add(chaiscript::fun([]()-> const auto& {return getCmpProfileMaker(); }), "getCmpProfileMaker");
-
-		mod->add(chaiscript::fun([](const fixed_t& p)-> auto {return getPar(p); }), "getParameter");
-		mod->add(chaiscript::fun([](const pnt_t& p)-> auto {auto t = getMaster(p); return std::move(t); }), "getMaster");
+		mod->add(chaiscript::fun([]()-> const auto& {return getGeometricMapMaker(); }), "getGeoMapMaker");
 
 		mod->add(chaiscript::fun([](const par_t& t)-> void {print(t); }), "print");
 		mod->add(chaiscript::fun([](const fieldFun_t& t)-> void {print(t); }), "print");
@@ -615,6 +717,11 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> void {printFrame(); }), "printFrame");
 
 		mod->add(chaiscript::fun([]()-> auto {return nbProfiles(); }), "nbProfiles");
+
+		mod->add(chaiscript::fun([](const int i)-> auto {auto t = getEdge(i); return std::move(t); }), "getSeqEdge");
+
+		mod->add(chaiscript::fun([](const pnt_t& p)-> auto {auto t = getCoord(p); return std::move(t); }), "getCoord");
+		mod->add(chaiscript::fun([](const coord_t& p)-> auto {auto t = getCoord(p); return std::move(t); }), "getCoord");
 
 		//- profile makers 
 
@@ -694,6 +801,8 @@ int main(int argc, char *argv[])
 			setParameters(mod);
 			setPoints(mod);
 			setField(mod);
+			setGeometricMaps(mod);
+			setProfileMakers(mod);
 
 			chai.add(mod);
 

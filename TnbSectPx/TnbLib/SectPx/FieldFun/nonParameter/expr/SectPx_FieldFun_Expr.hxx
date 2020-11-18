@@ -30,144 +30,21 @@ namespace tnbLib
 
 		public:
 
-			class Parameter
-			{
-
-				friend class boost::serialization::access;
-				template<class Archive>
-				void serialize(Archive& ar, const unsigned int version)
-				{}
-
-			protected:
-
-				Parameter()
-				{}
-
-			public:
-
-				virtual Standard_Boolean IsConst() const
-				{
-					return Standard_False;
-				}
-
-				virtual Standard_Boolean IsVariable() const
-				{
-					return Standard_False;
-				}
-
-			};
-
-			class Constant
-				: public Parameter
-			{
-
-				friend boost::serialization::access;
-				template<class Archive>
-				void serialize(Archive &ar, const unsigned int file_version)
-				{
-					ar & boost::serialization::base_object<Parameter>(*this);
-					ar & static_cast<Standard_Real&>(theX_);
-				}
-
-				/*Private Data*/
-
-				const Standard_Real & theX_;
-
-				static TnbSectPx_EXPORT const Standard_Real null;
-
-				Constant()
-					: theX_(null)
-				{}
-
-				void SetX(const Standard_Real& x)
-				{
-					const_cast<Standard_Real&>(theX_) = x;
-				}
-
-			public:
-
-				Constant(const Standard_Real & x)
-					: theX_(x)
-				{}
-
-				Standard_Boolean IsConst() const override
-				{
-					return Standard_True;
-				}
-
-				const Standard_Real & X() const
-				{
-					return theX_;
-				}
-			};
-
-			class Variable
-				: public Parameter
-			{
-
-				friend boost::serialization::access;
-				template<class Archive>
-				void serialize(Archive &ar, const unsigned int file_version)
-				{
-					ar & boost::serialization::base_object<Parameter>(*this);
-					ar & theX_;
-				}
-
-				/*Private Data*/
-
-				Standard_Real & theX_;
-
-				static TnbSectPx_EXPORT Standard_Real null;
-
-				Variable()
-					: theX_(null)
-				{}
-
-				void SetX(Standard_Real & x)
-				{
-					theX_ = x;
-				}
-
-			public:
-
-				Variable(Standard_Real& x)
-					: theX_(x)
-				{}
-
-				Standard_Boolean IsVariable() const override
-				{
-					return Standard_True;
-				}
-
-				Standard_Real & X()
-				{
-					return theX_;
-				}
-			};
-
-			friend boost::serialization::access;
-
-			template<class Archive>
-			void serialize(Archive &ar, const unsigned int file_version)
-			{
-				ar & boost::serialization::base_object<SectPx_nonParFieldFun>(*this);
-				ar & theParameters_;
-				ar & theExpr_;
-				ar & addConstants_;
-			}
 
 			/*Private Data*/
 
-			std::map<word, std::shared_ptr<Parameter>> theParameters_;
-
-
-			TnbSectPx_EXPORT void AddParameter(const word&, std::shared_ptr<Parameter>&& p);
-
-			TnbSectPx_EXPORT void RemoveParameter(const word&);
+			std::map<word, std::weak_ptr<SectPx_FieldFun>> theParameters_;
 
 			std::string theExpr_;
 
 			Standard_Boolean addConstants_;
+
+
+			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+
+			TnbSectPx_EXPORT void AddParameter(const word&, const std::weak_ptr<SectPx_FieldFun>& p);
+
+			TnbSectPx_EXPORT void RemoveParameter(const word&);
 
 
 		protected:
@@ -214,37 +91,7 @@ namespace tnbLib
 
 			TnbSectPx_EXPORT void AddVariable
 			(
-				const word& name,
-				Standard_Real& x
-			);
-
-			TnbSectPx_EXPORT void AddVariable
-			(
-				const word& name, SectPx_FieldFun& x
-			);
-
-			TnbSectPx_EXPORT void AddVariable
-			(
-				const word& name,
-				SectPx_FixedPar& par
-			);
-
-			TnbSectPx_EXPORT void AddConstant
-			(
-				const word& name,
-				const Standard_Real& x
-			);
-
-			TnbSectPx_EXPORT void AddConstant
-			(
-				const word& name,
-				const SectPx_FieldFun& x
-			);
-
-			TnbSectPx_EXPORT void AddConstant
-			(
-				const word& name,
-				const SectPx_ConstPar& par
+				const word& name, const std::shared_ptr<SectPx_FieldFun>& x
 			);
 
 			TnbSectPx_EXPORT void RemoveVariable
