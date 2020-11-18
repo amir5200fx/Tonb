@@ -355,6 +355,30 @@
     <Filter Include="TnbLib\SectPx\Registry\Scatter">
       <UniqueIdentifier>{1e6430ed-da41-4e9d-9f6a-850673440d40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Controller\Pole">
+      <UniqueIdentifier>{c0f4c743-a74a-43eb-a0ec-bdcc45d7bed8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Controller\Segment">
+      <UniqueIdentifier>{22371246-9b2c-4c5d-9103-194a6b894e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\CptsMap">
+      <UniqueIdentifier>{b10f7a45-72f3-417d-b756-ba64d06287aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\CptsMap\OnePar">
+      <UniqueIdentifier>{a2a364af-b0da-489b-95df-ad338df77913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\CptsMap\OnePar\Single">
+      <UniqueIdentifier>{0cea69d5-9fab-4f01-9a3d-231bfba035c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness">
+      <UniqueIdentifier>{741ff2b1-757c-4126-82c1-23c1d1585260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2">
+      <UniqueIdentifier>{6be83823-d6f9-4ef7-a219-b660db3060df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg3">
+      <UniqueIdentifier>{cb97f916-6088-4565-b3ab-3e3af6dd1226}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -779,6 +803,33 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Parent\Adaptor\SectPx_ParentAdaptorI.hxx">
       <Filter>TnbLib\SectPx\Entities\Parent\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Controller\SectPx_Controller.hxx">
+      <Filter>TnbLib\SectPx\Entities\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Controller\Pole\SectPx_PoleController.hxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Controller\Pole\SectPx_PoleControllerType.hxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Controller\Segment\SectPx_SegmentController.hxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\CptsMap\SectPx_CPtsMap.hxx">
+      <Filter>TnbLib\SectPx\CptsMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\SectPx_TightController.hxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Tightness</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2\SectPx_TightController_Deg2.hxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\CptsMap\OnePar\SectPx_OneParCPtsMap.hxx">
+      <Filter>TnbLib\SectPx\CptsMap\OnePar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\CptsMap\OnePar\Single\SectPx_OneParCPtsMap_Single.hxx">
+      <Filter>TnbLib\SectPx\CptsMap\OnePar\Single</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1264,6 +1315,51 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_ParIO.cxx">
       <Filter>TnbLib\SectPx\Entities\Par</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\SectPx_Controller.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\SectPx_PoleController.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\SectPx_PoleControllerIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Segment\SectPx_SegmentController.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\CptsMap\SectPx_CPtsMap.cxx">
+      <Filter>TnbLib\SectPx\CptsMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\CptsMap\SectPx_CPtsMapIO.cxx">
+      <Filter>TnbLib\SectPx\CptsMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Segment\SectPx_SegmentControllerIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\SectPx_TightController.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Tightness</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\SectPx_TightControllerIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Tightness</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2\SectPx_TightController_Deg2.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2\SectPx_TightController_Deg2IO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\CptsMap\OnePar\SectPx_OneParCPtsMap.cxx">
+      <Filter>TnbLib\SectPx\CptsMap\OnePar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\CptsMap\OnePar\SectPx_OneParCPtsMapIO.cxx">
+      <Filter>TnbLib\SectPx\CptsMap\OnePar</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\CptsMap\OnePar\Single\SectPx_OneParCPtsMap_Single.cxx">
+      <Filter>TnbLib\SectPx\CptsMap\OnePar\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\CptsMap\OnePar\Single\SectPx_OneParCPtsMap_SingleIO.cxx">
+      <Filter>TnbLib\SectPx\CptsMap\OnePar\Single</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
