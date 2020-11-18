@@ -34,13 +34,24 @@ namespace tnbLib
 
 		public:
 
-			template<class... _Types>
-			WireFrameShape_Offset(_Types&&... _Args)
-				: Marine_WireFrameShape(_Args...)
+			
+			//- constructors
+
+			WireFrameShape_Offset()
 			{}
+
+			TnbMarine_EXPORT explicit WireFrameShape_Offset(const Standard_Integer theIndex);
+
+			TnbMarine_EXPORT WireFrameShape_Offset
+			(
+				const Standard_Integer theIndex,
+				const word& theName
+			);
 
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::WireFrameShape_Offset);
 
 #endif // !_Marine_WireFrameShape_Offset_Header

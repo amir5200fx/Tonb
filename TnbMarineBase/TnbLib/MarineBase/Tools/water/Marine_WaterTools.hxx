@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Marine_Module.hxx>
 
 class Geom_Curve;
 class gp_Ax2;
@@ -27,7 +28,7 @@ namespace tnbLib
 
 	public:
 
-		static std::shared_ptr<Pln_Wire>
+		static TnbMarine_EXPORT std::shared_ptr<Pln_Wire>
 			WaterSection
 			(
 				const Handle(Geom_Curve)& theWaterCurve,
@@ -37,7 +38,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			WaterSections
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
@@ -47,7 +48,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			StillWaterSections
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
@@ -55,7 +56,7 @@ namespace tnbLib
 				const Entity3d_Box& theDomain
 			);
 
-		static std::shared_ptr<Marine_Water>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Water>
 			StillWater
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody, 
@@ -63,13 +64,13 @@ namespace tnbLib
 				const Entity3d_Box& theDomain
 			);
 
-		static std::shared_ptr<Marine_Water>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Water>
 			Water
 			(
 				const std::vector<std::shared_ptr<Marine_Section>>& theSections
 			);
 
-		static std::shared_ptr<Marine_Water>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Water>
 			Water
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody, 
@@ -79,14 +80,14 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<Marine_Wave> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Wave> 
 			FlatWave
 			(
 				const std::shared_ptr<Entity3d_Box>& theDomain,
 				const Standard_Real theZ
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			RetrieveNonDeepWLs
 			(
 				const Marine_CmpSection & theSection

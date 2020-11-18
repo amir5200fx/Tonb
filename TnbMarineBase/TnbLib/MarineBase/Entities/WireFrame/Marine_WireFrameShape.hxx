@@ -55,8 +55,10 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		Marine_BodyType Type() const;
+		TnbMarine_EXPORT Marine_BodyType Type() const;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_WireFrameShape);
 
 #endif // !_Marine_WireFrameShape_Header

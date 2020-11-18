@@ -46,58 +46,58 @@ namespace tnbLib
 
 	protected:	
 
-		void Insert
+		TnbMarine_EXPORT void Insert
 		(
 			const std::shared_ptr<Marine_Section>& theSection
 		);
 
 	protected:
 
-		Marine_CmpSection();
+		TnbMarine_EXPORT Marine_CmpSection();
 
-		Marine_CmpSection
+		TnbMarine_EXPORT Marine_CmpSection
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_CmpSection
+		TnbMarine_EXPORT Marine_CmpSection
 		(
 			const Standard_Integer theIndex,
 			const word& theName
 		);
 
-		Marine_CmpSection
+		TnbMarine_EXPORT Marine_CmpSection
 		(
 			const std::shared_ptr<Marine_Section>& theSection
 		);
 
-		Marine_CmpSection
+		TnbMarine_EXPORT Marine_CmpSection
 		(
 			const Standard_Integer theIndex, 
 			const std::shared_ptr<Marine_Section>& theSection
 		);
 
-		Marine_CmpSection
+		TnbMarine_EXPORT Marine_CmpSection
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
 			const std::shared_ptr<Marine_Section>& theSection
 		);
 
-		static Standard_Boolean 
+		static TnbMarine_EXPORT Standard_Boolean
 			LessDiameterSize
 			(
 				const std::shared_ptr<Pln_Wire>& theW0, 
 				const std::shared_ptr<Pln_Wire>& theW1
 			);
 
-		static void 
+		static TnbMarine_EXPORT void
 			SortWires
 			(
 				std::vector<std::shared_ptr<Pln_Wire>>& theWires
 			);
 
-		static void 
+		static TnbMarine_EXPORT void
 			RetrieveInnerOuterWires
 			(
 				std::list<std::shared_ptr<Pln_Wire>>& theWires,
@@ -107,9 +107,9 @@ namespace tnbLib
 
 	public:
 
-		static const std::shared_ptr<Marine_CmpSection> null;
+		static TnbMarine_EXPORT const std::shared_ptr<Marine_CmpSection> null;
 
-		Entity2d_Box BoundingBox() const;
+		TnbMarine_EXPORT Entity2d_Box BoundingBox() const;
 
 		auto NbSections() const
 		{
@@ -126,7 +126,7 @@ namespace tnbLib
 			return theSections_;
 		}
 
-		Marine_SectionType Type() const;
+		TnbMarine_EXPORT Marine_SectionType Type() const;
 
 		virtual Standard_Boolean IsXsection() const
 		{
@@ -142,18 +142,18 @@ namespace tnbLib
 
 		virtual std::shared_ptr<Marine_CmpSection> Copy() const = 0;
 
-		void Transform(const gp_Trsf2d& t);
+		TnbMarine_EXPORT void Transform(const gp_Trsf2d& t);
 
-		void ExportToPlt(OFstream& File) const;
+		TnbMarine_EXPORT void ExportToPlt(OFstream& File) const;
 
-		static std::vector<Handle(Geom2d_Curve)>
+		static TnbMarine_EXPORT std::vector<Handle(Geom2d_Curve)>
 			RetrieveParaCurves
 			(
 				const std::vector<TopoDS_Edge>& theEdges,
 				const gp_Ax2& theSystem
 			);
 
-		static std::vector<TopoDS_Edge>
+		static TnbMarine_EXPORT std::vector<TopoDS_Edge>
 			RetrieveEdges
 			(
 				const TopoDS_Shape& theEdges
@@ -161,5 +161,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_CmpSection);
 
 #endif // !_Marine_CmpSection_Header

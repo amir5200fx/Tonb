@@ -40,21 +40,21 @@ namespace tnbLib
 
 	public:
 
-		Marine_WaterDomain
+		TnbMarine_EXPORT Marine_WaterDomain
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain,
 			const std::shared_ptr<Marine_Water>& theWater,
 			const std::shared_ptr<Marine_Wave>& theWave
 		);
 
-		Marine_WaterDomain
+		TnbMarine_EXPORT Marine_WaterDomain
 		(
 			std::shared_ptr<Marine_Domain>&& theDomain,
 			std::shared_ptr<Marine_Water>&& theWater,
 			std::shared_ptr<Marine_Wave>&& theWave
 		);
 
-		Marine_WaterDomain
+		TnbMarine_EXPORT Marine_WaterDomain
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
@@ -63,7 +63,7 @@ namespace tnbLib
 			const std::shared_ptr<Marine_Wave>& theWave
 		);
 
-		Marine_WaterDomain
+		TnbMarine_EXPORT Marine_WaterDomain
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -91,8 +91,10 @@ namespace tnbLib
 			return theWave_;
 		}
 
-		void ExportToPlt(OFstream& File) const;
+		TnbMarine_EXPORT void ExportToPlt(OFstream& File) const;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_WaterDomain);
 
 #endif // !_Marine_WaterDomain_Header

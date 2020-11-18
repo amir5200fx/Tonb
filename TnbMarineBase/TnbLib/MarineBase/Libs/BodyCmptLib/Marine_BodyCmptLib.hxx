@@ -4,6 +4,7 @@
 
 #include <Marine_BodiesFwd.hxx>
 #include <Marine_xSectionParam.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -22,7 +23,7 @@ namespace tnbLib
 
 	public:
 
-		static marineLib::xSectionParam
+		static TnbMarine_EXPORT marineLib::xSectionParam
 			LeverArm
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
@@ -30,7 +31,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static marineLib::xSectionParam
+		static TnbMarine_EXPORT marineLib::xSectionParam
 			LeverArm
 			(
 				const marineLib::Body_Displacer& theBody,
@@ -38,7 +39,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static marineLib::xSectionParam
+		static TnbMarine_EXPORT marineLib::xSectionParam
 			LeverArm
 			(
 				const marineLib::Body_Tank& theBody,
@@ -46,7 +47,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbMarine_EXPORT Standard_Real
 			LeverArm
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
@@ -55,7 +56,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbMarine_EXPORT Standard_Real
 			LeverArm
 			(
 				const marineLib::Body_Displacer& theBody,
@@ -64,7 +65,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbMarine_EXPORT Standard_Real
 			LeverArm
 			(
 				const marineLib::Body_Tank& theBody,
@@ -73,7 +74,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static xSectParList
+		static TnbMarine_EXPORT xSectParList
 			CrossCurve
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
@@ -83,7 +84,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static xSectParList 
+		static TnbMarine_EXPORT xSectParList
 			CrossCurve
 			(
 				const marineLib::Body_Displacer& theBody, 
@@ -93,7 +94,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static xSectParList 
+		static TnbMarine_EXPORT xSectParList
 			CrossCurve
 			(
 				const marineLib::Body_Tank& theBody, 

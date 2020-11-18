@@ -43,16 +43,16 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_EXPAND_COEFF;
+		static TnbMarine_EXPORT const Standard_Real DEFAULT_EXPAND_COEFF;
 
-		Marine_Domain();
+		TnbMarine_EXPORT Marine_Domain();
 
-		Marine_Domain
+		TnbMarine_EXPORT Marine_Domain
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_Domain
+		TnbMarine_EXPORT Marine_Domain
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
@@ -68,13 +68,15 @@ namespace tnbLib
 			return theDomain_;
 		}
 
-		void Perform
+		TnbMarine_EXPORT void Perform
 		(
 			const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel
 		);
 
-		void Perform(const Entity3d_Box& theModel);
+		TnbMarine_EXPORT void Perform(const Entity3d_Box& theModel);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_Domain);
 
 #endif // !_Marine_Domain_Header

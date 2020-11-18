@@ -3,6 +3,7 @@
 #define _Marine_PlnCurve_Header
 
 #include <Pln_Curve.hxx>
+#include <Marine_Module.hxx>
 
 namespace tnbLib
 {
@@ -26,20 +27,20 @@ namespace tnbLib
 
 	protected:
 
-		Marine_PlnCurve();
+		TnbMarine_EXPORT Marine_PlnCurve();
 
-		Marine_PlnCurve
+		TnbMarine_EXPORT Marine_PlnCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_PlnCurve
+		TnbMarine_EXPORT Marine_PlnCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_PlnCurve
+		TnbMarine_EXPORT Marine_PlnCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -74,5 +75,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_PlnCurve);
 
 #endif // !_Marine_PlnCurve_Header

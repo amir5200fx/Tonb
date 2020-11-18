@@ -4,6 +4,7 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -26,7 +27,7 @@ namespace tnbLib
 
 	public:
 
-		Marine_CriterionTable();
+		TnbMarine_EXPORT Marine_CriterionTable();
 
 
 		auto NbRows() const

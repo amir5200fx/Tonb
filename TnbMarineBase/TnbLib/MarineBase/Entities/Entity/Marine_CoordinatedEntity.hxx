@@ -48,4 +48,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_CoordinatedEntity);
+
 #endif // !_Marine_CoordinatedEntity_Header

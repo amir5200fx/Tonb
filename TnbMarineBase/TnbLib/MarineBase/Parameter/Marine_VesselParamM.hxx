@@ -4,6 +4,7 @@
 
 #include <Marine_VesselParam.hxx>
 #include <dimensionSet.hxx>
+#include <Marine_Module.hxx>
 
 #define MARINE_VESSELPARAM(CLASS_NAME, PARAM_NAME, PARAM_DIM)					\
 	class CLASS_NAME															\
@@ -11,7 +12,7 @@
 	{																			\
 																				\
 	public:																		\
-		static const CLASS_NAME null;											\
+		static TnbMarine_EXPORT const CLASS_NAME null;							\
 		explicit CLASS_NAME(const Standard_Real theValue)						\
 			: Marine_VesselParam(PARAM_NAME, PARAM_DIM, theValue) {}			\
 																				\

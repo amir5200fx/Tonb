@@ -5,7 +5,6 @@
 #include <Marine_CoordinatedEntity.hxx>
 #include <Marine_BaseLine.hxx>
 #include <Marine_BodyType.hxx>
-#include <Marine_Module.hxx>
 
 #include <vector>
 
@@ -55,7 +54,7 @@ namespace tnbLib
 
 	public:
 
-		Standard_Integer NbSections() const;
+		TnbMarine_EXPORT Standard_Integer NbSections() const;
 
 		const auto& Sections() const
 		{
@@ -93,5 +92,7 @@ namespace tnbLib
 			Copy() const = 0;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_Body);
 
 #endif // !_Marine_Body_Header

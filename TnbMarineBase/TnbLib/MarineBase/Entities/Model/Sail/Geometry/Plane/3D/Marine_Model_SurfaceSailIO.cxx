@@ -30,3 +30,5 @@ DECLARE_LOAD_IMP(tnbLib::marineLib::Model_SurfaceSail)
 
 	BRepTools::Read(theFace_, st, builder);
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::Model_SurfaceSail);

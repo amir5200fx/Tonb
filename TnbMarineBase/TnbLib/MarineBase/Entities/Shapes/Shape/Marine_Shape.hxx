@@ -35,15 +35,15 @@ namespace tnbLib
 		Marine_Shape()
 		{}
 
-		Marine_Shape(const TopoDS_Shape& theShape);
+		TnbMarine_EXPORT Marine_Shape(const TopoDS_Shape& theShape);
 
-		Marine_Shape
+		TnbMarine_EXPORT Marine_Shape
 		(
 			const Standard_Integer theIndex,
 			const TopoDS_Shape& theShape
 		);
 
-		Marine_Shape
+		TnbMarine_EXPORT Marine_Shape
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -75,5 +75,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_Shape);
 
 #endif // !_Marine_Shape_Header

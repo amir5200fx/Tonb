@@ -6,6 +6,7 @@
 #include <Marine_BodiesFwd.hxx>
 #include <Marine_BodyType.hxx>
 #include <Marine_WireFrameShapesFwd.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 #include <tuple>
@@ -26,7 +27,7 @@ namespace tnbLib
 	public:
 
 
-		static std::shared_ptr<Marine_WireFrameShape> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_WireFrameShape> 
 			xWireFrameModel
 			(
 				const std::shared_ptr<Marine_Shape>& theModel,
@@ -35,7 +36,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<marineLib::Body_Wetted>
+		static TnbMarine_EXPORT std::shared_ptr<marineLib::Body_Wetted>
 			WettedBody
 			(
 				const marineLib::Body_Tank& theModel,
@@ -44,7 +45,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<marineLib::Body_Wetted>
+		static TnbMarine_EXPORT std::shared_ptr<marineLib::Body_Wetted>
 			WettedBody
 			(
 				const marineLib::Body_Displacer& theModel,
@@ -53,7 +54,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<marineLib::Body_Wetted>
+		static TnbMarine_EXPORT std::shared_ptr<marineLib::Body_Wetted>
 			WettedBody
 			(
 				const std::shared_ptr<Marine_WireFrameShape>& theModel,
@@ -62,7 +63,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<marineLib::Body_Wetted>
+		static TnbMarine_EXPORT std::shared_ptr<marineLib::Body_Wetted>
 			WettedBody
 			(
 				const marineLib::WireFrameShape_Shape& theModel,
@@ -71,7 +72,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<marineLib::Body_Wetted>
+		static TnbMarine_EXPORT std::shared_ptr<marineLib::Body_Wetted>
 			WettedBody
 			(
 				const marineLib::WireFrameShape_Offset& theModel,
@@ -80,7 +81,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::tuple<std::shared_ptr<marineLib::Body_Wetted>, std::shared_ptr<marineLib::Body_Dry>>
+		static TnbMarine_EXPORT std::tuple<std::shared_ptr<marineLib::Body_Wetted>, std::shared_ptr<marineLib::Body_Dry>>
 			WettedAndDryBody
 			(
 				const Marine_WireFrameShape& theModel,

@@ -31,3 +31,7 @@ DECLARE_LOAD_IMP(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Bod
 	ar & ChangeShape();
 	ar & ChangeWL();
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::BodyConstructor_noShape<tnbLib::marineLib::Body_Wetted>);
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::shapedWettedBody);

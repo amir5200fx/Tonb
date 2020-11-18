@@ -24,41 +24,47 @@ namespace tnbLib
 
 			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
 
+		protected:
+
+			//- default constructor
+
 			Model_Tank()
 			{}
 
 		public:
 
-			Model_Tank
+			//- constructors
+
+			TnbMarine_EXPORT Model_Tank
 			(
 				const std::shared_ptr<Body_Tank>& theBody
 			);
 
-			Model_Tank
+			TnbMarine_EXPORT Model_Tank
 			(
 				std::shared_ptr<Body_Tank>&& theBody
 			);
 
-			Model_Tank
+			TnbMarine_EXPORT Model_Tank
 			(
 				const Standard_Integer theIndex, 
 				const std::shared_ptr<Body_Tank>& theBody
 			);
 
-			Model_Tank
+			TnbMarine_EXPORT Model_Tank
 			(
 				const Standard_Integer theIndex,
 				std::shared_ptr<Body_Tank>&& theBody
 			);
 
-			Model_Tank
+			TnbMarine_EXPORT Model_Tank
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
 				const std::shared_ptr<Body_Tank>& theBody
 			);
 
-			Model_Tank
+			TnbMarine_EXPORT Model_Tank
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
@@ -84,5 +90,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_Tank);
 
 #endif // !_Marine_Model_Tank_Header

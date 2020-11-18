@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::marineLib::Model_Tank)
 	ar & boost::serialization::base_object<Marine_Model>(*this);
 	ar & theTank_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::Model_Tank);

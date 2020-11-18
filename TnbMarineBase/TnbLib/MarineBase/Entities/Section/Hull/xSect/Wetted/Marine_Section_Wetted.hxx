@@ -56,10 +56,10 @@ namespace tnbLib
 				IsDeep_ = deep;
 			}
 
-			std::vector<std::shared_ptr<Pln_Curve>>
+			TnbMarine_EXPORT std::vector<std::shared_ptr<Pln_Curve>>
 				RetrieveCurvesOnWater() const;
 
-			void RetrieveCurvesOnWaterTo
+			TnbMarine_EXPORT void RetrieveCurvesOnWaterTo
 			(
 				std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 			) const;
@@ -83,5 +83,12 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::marineLib::Section_Wetted);
+
+#include <Marine_Section_Constructor.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::InnerSection<tnbLib::marineLib::Section_Wetted>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Wetted>);
 
 #endif // !_Marine_Section_Wetted_Header

@@ -18,9 +18,9 @@ namespace tnbLib
 
 		public:
 
-			AirDensity();
+			TnbMarine_EXPORT AirDensity();
 
-			explicit AirDensity(const Standard_Real theValue);
+			TnbMarine_EXPORT explicit AirDensity(const Standard_Real theValue);
 		};
 	}
 }

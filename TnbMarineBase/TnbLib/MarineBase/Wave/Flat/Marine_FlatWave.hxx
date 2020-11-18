@@ -13,11 +13,11 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		void MakeProfileCurve(const Pnt2d& x0, const Pnt2d& x1) override;
+		TnbMarine_EXPORT void MakeProfileCurve(const Pnt2d& x0, const Pnt2d& x1) override;
 
 	protected:
 
-		Dir3d SurfaceDirection() const override;
+		TnbMarine_EXPORT Dir3d SurfaceDirection() const override;
 
 	public:
 

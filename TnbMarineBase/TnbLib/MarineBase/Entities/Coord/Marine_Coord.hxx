@@ -28,24 +28,24 @@ namespace tnbLib
 
 	public:
 
-		Marine_Coord
+		TnbMarine_EXPORT Marine_Coord
 		(
 			const Pnt3d& theCoord = gp::Origin()
 		);
 
-		Marine_Coord
+		TnbMarine_EXPORT Marine_Coord
 		(
 			Pnt3d&& theCoord
 		);
 
-		Marine_Coord
+		TnbMarine_EXPORT Marine_Coord
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
 			const Pnt3d& theCoord
 		);
 
-		Marine_Coord
+		TnbMarine_EXPORT Marine_Coord
 		(
 			const Standard_Integer theIndex, 
 			const word& theName,
@@ -73,5 +73,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_Coord);
 
 #endif // !_Marine_Coord_Header

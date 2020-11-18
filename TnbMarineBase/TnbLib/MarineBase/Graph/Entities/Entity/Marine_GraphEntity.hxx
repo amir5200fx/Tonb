@@ -4,6 +4,7 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 
@@ -20,14 +21,14 @@ namespace tnbLib
 
 	protected:
 
-		Marine_GraphEntity();
+		TnbMarine_EXPORT Marine_GraphEntity();
 
-		Marine_GraphEntity
+		TnbMarine_EXPORT Marine_GraphEntity
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_GraphEntity
+		TnbMarine_EXPORT Marine_GraphEntity
 		(
 			const Standard_Integer theIndex, 
 			const word& theName

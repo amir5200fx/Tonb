@@ -60,4 +60,11 @@ namespace tnbLib
 	}
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::marineLib::Section_Dry);
+
+#include <Marine_Section_Constructor.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::InnerSection<tnbLib::marineLib::Section_Dry>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Dry>);
+
 #endif // !_Marine_Section_Dry_Header

@@ -18,9 +18,9 @@ namespace tnbLib
 
 		public:
 
-			WaterViscosity();
+			TnbMarine_EXPORT WaterViscosity();
 
-			explicit WaterViscosity(const Standard_Real theValue);
+			TnbMarine_EXPORT explicit WaterViscosity(const Standard_Real theValue);
 		};
 	}
 }

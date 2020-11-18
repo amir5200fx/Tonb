@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::Marine_WireFrameShape)
 	ar & boost::serialization::base_object<Marine_CoordinatedEntity>(*this);
 	ar & ChangeBody();
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Marine_WireFrameShape);

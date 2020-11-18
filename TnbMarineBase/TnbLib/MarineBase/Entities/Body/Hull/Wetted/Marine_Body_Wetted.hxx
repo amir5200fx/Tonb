@@ -71,12 +71,16 @@ namespace tnbLib
 				return theMid_;
 			}
 
-			std::shared_ptr<Marine_Body> Copy() const override;
+			TnbMarine_EXPORT std::shared_ptr<Marine_Body> Copy() const override;
 		};
 	}
 }
 
 #include <Marine_BodyConstructor.hxx>
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::marineLib::Body_Wetted);
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::BodyConstructor_noShape<tnbLib::marineLib::Body_Wetted>);
 
 namespace tnbLib
 {
@@ -150,7 +154,11 @@ namespace tnbLib
 				return theWater_;
 			}
 		};
+
+		typedef BodyConstructor_Shape<Body_Wetted> shapedWettedBody;
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::shapedWettedBody);
 
 #endif // !_Marine_Body_Wetted_Header

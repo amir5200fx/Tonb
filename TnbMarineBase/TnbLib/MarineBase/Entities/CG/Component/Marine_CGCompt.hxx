@@ -22,17 +22,18 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version)
 		{
+			ar & boost::serialization::base_object<Marine_Entity>(*this);
 			ar & theValue_;
 		}
 
 	protected:
 
-		Marine_CGCompt
+		TnbMarine_EXPORT Marine_CGCompt
 		(
 			const Standard_Real theValue = 0
 		);
 
-		Marine_CGCompt
+		TnbMarine_EXPORT Marine_CGCompt
 		(
 			const Standard_Integer theIndex, 
 			const word& theName,
@@ -45,5 +46,7 @@ namespace tnbLib
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Value)
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_CGCompt);
 
 #endif // !_Marine_CGCompt_Header

@@ -39,4 +39,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_zSection);
+
 #endif // !_Marine_zSection_Header

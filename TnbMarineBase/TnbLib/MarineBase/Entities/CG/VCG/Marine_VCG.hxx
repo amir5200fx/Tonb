@@ -23,10 +23,12 @@ namespace tnbLib
 
 	public:
 
-		Marine_VCG(const Standard_Real theValue = 0);
+		TnbMarine_EXPORT Marine_VCG(const Standard_Real theValue = 0);
 
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_VCG);
 
 #endif // !_Marine_VCG_Header

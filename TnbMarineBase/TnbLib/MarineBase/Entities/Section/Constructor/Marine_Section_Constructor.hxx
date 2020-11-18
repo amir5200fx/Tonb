@@ -41,13 +41,66 @@ namespace tnbLib
 				ar & theOuter_;
 			}
 
+		protected:
+
+			InnerSection()
+			{}
 
 		public:
 
-			template<class... _Types>
-			InnerSection(_Types&&... _Args)
-				: SectionType(_Args...)
+
+			//- constructors
+
+			explicit InnerSection
+			(
+				const std::shared_ptr<Pln_Wire>& theWire
+			)
+				: SectionType(theWire)
 			{}
+
+			InnerSection
+			(
+				std::shared_ptr<Pln_Wire>&& theWire
+			)
+				: SectionType(std::move(theWire))
+			{}
+
+			InnerSection
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<Pln_Wire>& theWire
+			)
+				: SectionType(theIndex, theWire)
+			{}
+
+			InnerSection
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Pln_Wire>&& theWire
+			)
+				: SectionType(theIndex, std::move(theWire))
+			{}
+
+			InnerSection
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const std::shared_ptr<Pln_Wire>& theWire
+			)
+				: SectionType(theIndex, theName, theWire)
+			{}
+
+			InnerSection
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				std::shared_ptr<Pln_Wire>&& theWire
+			)
+				: SectionType(theIndex, theName, std::move(theWire))
+			{}
+
+
+			//- public functions and operators
 
 			const auto& Outer() const
 			{
@@ -95,12 +148,65 @@ namespace tnbLib
 				ar & theInners_;
 			}
 
+		protected:
+
+			OuterSection()
+			{}
+
 		public:
 
-			template<class... _Types>
-			OuterSection(_Types&&... _Args)
-				: SectionType(_Args...)
+			//- constructors
+
+			explicit OuterSection
+			(
+				const std::shared_ptr<Pln_Wire>& theWire
+			)
+				: SectionType(theWire)
 			{}
+
+			OuterSection
+			(
+				std::shared_ptr<Pln_Wire>&& theWire
+			)
+				: SectionType(std::move(theWire))
+			{}
+
+			OuterSection
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<Pln_Wire>& theWire
+			)
+				: SectionType(theIndex, theWire)
+			{}
+
+			OuterSection
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Pln_Wire>&& theWire
+			)
+				: SectionType(theIndex, std::move(theWire))
+			{}
+
+			OuterSection
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const std::shared_ptr<Pln_Wire>& theWire
+			)
+				: SectionType(theIndex, theName, theWire)
+			{}
+
+			OuterSection
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				std::shared_ptr<Pln_Wire>&& theWire
+			)
+				: SectionType(theIndex, theName, std::move(theWire))
+			{}
+
+
+			//- public functions and operators
 
 			auto NbInners() const
 			{

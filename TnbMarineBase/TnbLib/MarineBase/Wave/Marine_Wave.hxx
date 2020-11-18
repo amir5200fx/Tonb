@@ -11,6 +11,7 @@
 #include <Dir3d.hxx>
 #include <EnvPropt_Density.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Marine_Module.hxx>
 
 #include <Standard_Handle.hxx>
 #include <gp_Ax2.hxx>
@@ -86,7 +87,7 @@ namespace tnbLib
 
 	protected:
 
-		Marine_WaveDensity();
+		TnbMarine_EXPORT Marine_WaveDensity();
 
 	public:
 
@@ -123,11 +124,11 @@ namespace tnbLib
 		std::shared_ptr<Entity3d_Box> theDomain_;
 		gp_Ax2 theOrigin_;
 
-		Pnt3d ProjectedCoordOnSurface() const;
+		TnbMarine_EXPORT Pnt3d ProjectedCoordOnSurface() const;
 
-		Entity3d_Box BoundingBoxOfRotatedDomain(const Entity3d_Box& theDomain) const;
+		TnbMarine_EXPORT Entity3d_Box BoundingBoxOfRotatedDomain(const Entity3d_Box& theDomain) const;
 
-		void TransformOriginToCurrent() const;
+		TnbMarine_EXPORT void TransformOriginToCurrent() const;
 
 	protected:
 
@@ -139,11 +140,11 @@ namespace tnbLib
 
 		virtual void MakeProfileCurve(const Pnt2d& x0, const Pnt2d& x1) = 0;
 
-		void MakeGeometrySurface(const Standard_Real y0, const Standard_Real y1);
+		TnbMarine_EXPORT void MakeGeometrySurface(const Standard_Real y0, const Standard_Real y1);
 
-		void TransportGeometrySurface();
+		TnbMarine_EXPORT void TransportGeometrySurface();
 
-		void TranslateSurfaceToPointOnWater(const Pnt3d& theProj);
+		TnbMarine_EXPORT void TranslateSurfaceToPointOnWater(const Pnt3d& theProj);
 
 	public:
 
@@ -157,9 +158,9 @@ namespace tnbLib
 			return theDomain_;
 		}
 
-		gp_Ax2 SurfaceCoordinateSystem() const;
+		TnbMarine_EXPORT gp_Ax2 SurfaceCoordinateSystem() const;
 
-		void Perform();
+		TnbMarine_EXPORT void Perform();
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(Pnt3d, PointOnWater)

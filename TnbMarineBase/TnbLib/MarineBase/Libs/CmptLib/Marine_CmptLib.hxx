@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Marine_VesselParams.hxx>
 #include <Marine_BodiesFwd.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 #include <tuple>
@@ -29,106 +30,106 @@ namespace tnbLib
 
 		typedef NumAlg_AdaptiveInteg_Info info;
 
-		static std::tuple<marineLib::LOA, marineLib::B, marineLib::D>
+		static TnbMarine_EXPORT std::tuple<marineLib::LOA, marineLib::B, marineLib::D>
 			CalcBasicDim
 			(
 				const Marine_Body& theBody
 			);
 
-		static marineLib::D
+		static TnbMarine_EXPORT marineLib::D
 			SpecifyD
 			(
 				const Standard_Real theD
 			);
 
-		static marineLib::APP
+		static TnbMarine_EXPORT marineLib::APP
 			CalcAPP
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::APP
+		static TnbMarine_EXPORT marineLib::APP
 			CalcAPP
 			(
 				const gp_Ax1& theAx
 			);
 
-		static marineLib::FPP
+		static TnbMarine_EXPORT marineLib::FPP
 			CalcFPP
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::MPP
+		static TnbMarine_EXPORT marineLib::MPP
 			CalcMPP
 			(
 				const marineLib::APP& theApp,
 				const marineLib::FPP& theFpp
 			);
 
-		static marineLib::LWL
+		static TnbMarine_EXPORT marineLib::LWL
 			CalcLWL
 			(
 				const std::shared_ptr<marineLib::Body_Wetted>& theBody
 			);
 
-		static marineLib::LWL
+		static TnbMarine_EXPORT marineLib::LWL
 			CalcLWL
 			(
 				const marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>& theBody
 			);
 
-		static marineLib::LWL
+		static TnbMarine_EXPORT marineLib::LWL
 			CalcLWL
 			(
 				const marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>& theBody
 			);
 
-		static marineLib::BWL
+		static TnbMarine_EXPORT marineLib::BWL
 			CalcBWL
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::FWL
+		static TnbMarine_EXPORT marineLib::FWL
 			CalcFWL
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::AWL
+		static TnbMarine_EXPORT marineLib::AWL
 			CalcAWL
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::FUW
+		static TnbMarine_EXPORT marineLib::FUW
 			CalcFUW
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::AUW
+		static TnbMarine_EXPORT marineLib::AUW
 			CalcAUW
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::LOS
+		static TnbMarine_EXPORT marineLib::LOS
 			CalcLOS
 			(
 				const marineLib::AUW& theAuw, 
 				const marineLib::FUW& theFuw
 			);
 
-		static marineLib::LPP
+		static TnbMarine_EXPORT marineLib::LPP
 			CalcLPP
 			(
 				const marineLib::APP& theAft, 
 				const marineLib::FPP& theFp
 			);
 
-		static marineLib::LCF 
+		static TnbMarine_EXPORT marineLib::LCF 
 			CalcLCF
 			(
 				const marineLib::Body_Wetted& theBody,
@@ -136,7 +137,7 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::LCB 
+		static TnbMarine_EXPORT marineLib::LCB 
 			CalcLCB
 			(
 				const marineLib::Body_Wetted& theBody,
@@ -144,14 +145,14 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::DISPV 
+		static TnbMarine_EXPORT marineLib::DISPV 
 			CalcDISPV
 			(
 				const marineLib::Body_Wetted& theBody,
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::BM 
+		static TnbMarine_EXPORT marineLib::BM 
 			CalcBM
 			(
 				const Marine_CmpSection& theWPlane,
@@ -160,7 +161,7 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::BML
+		static TnbMarine_EXPORT marineLib::BML
 			CalcBML
 			(
 				const Marine_CmpSection& theWPlane, 
@@ -169,24 +170,24 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::TM
+		static TnbMarine_EXPORT marineLib::TM
 			CalcTM
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static marineLib::AM
+		static TnbMarine_EXPORT marineLib::AM
 			CalcAM
 			(
 				const marineLib::Body_Wetted& theBody,
 				const std::shared_ptr<info>& theInfo
 			);
 
-		/*static Standard_Real CalcKM(const Marine_WettedBody& theBody, const std::shared_ptr<info>& theInfo);
+		/*static TnbMarine_EXPORT Standard_Real CalcKM(const Marine_WettedBody& theBody, const std::shared_ptr<info>& theInfo);
 
-		static Standard_Real CalcKML(const Marine_WettedBody& theBody, const std::shared_ptr<info>& theInfo);*/
+		static TnbMarine_EXPORT Standard_Real CalcKML(const Marine_WettedBody& theBody, const std::shared_ptr<info>& theInfo);*/
 
-		static marineLib::KB 
+		static TnbMarine_EXPORT marineLib::KB 
 			CalcKB
 			(
 				const marineLib::Body_Wetted& theBody,
@@ -194,7 +195,7 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::MCT 
+		static TnbMarine_EXPORT marineLib::MCT 
 			CalcMCT
 			(
 				const marineLib::BML& theBML,
@@ -202,21 +203,21 @@ namespace tnbLib
 				const marineLib::LPP& theLpp
 			);
 
-		static marineLib::AW 
+		static TnbMarine_EXPORT marineLib::AW 
 			CalcAW
 			(
 				const marineLib::Body_Wetted& theBody,
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::AW
+		static TnbMarine_EXPORT marineLib::AW
 			CalcAW
 			(
 				const Marine_CmpSection& theWPlane,
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static marineLib::CB
+		static TnbMarine_EXPORT marineLib::CB
 			CalcCB
 			(
 				const marineLib::DISPV& theVolume, 
@@ -225,7 +226,7 @@ namespace tnbLib
 				const marineLib::TM& theTm
 			);
 
-		static marineLib::CWL
+		static TnbMarine_EXPORT marineLib::CWL
 			CalcCWL
 			(
 				const marineLib::AW& theAw, 
@@ -233,7 +234,7 @@ namespace tnbLib
 				const marineLib::BWL& theB
 			);
 
-		static marineLib::CM
+		static TnbMarine_EXPORT marineLib::CM
 			CalcCM
 			(
 				const marineLib::AM& theAm, 
@@ -241,7 +242,7 @@ namespace tnbLib
 				const marineLib::TM& theTm
 			);
 
-		static marineLib::CP
+		static TnbMarine_EXPORT marineLib::CP
 			CalcCP
 			(
 				const marineLib::DISPV& theVolume, 
@@ -249,7 +250,7 @@ namespace tnbLib
 				const marineLib::LWL& theLwl
 			);
 
-		static marineLib::CVP
+		static TnbMarine_EXPORT marineLib::CVP
 			CalcCVP
 			(
 				const marineLib::DISPV& theVolume, 

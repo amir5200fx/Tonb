@@ -10,26 +10,59 @@
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Shape.hxx>
 
-//tnbLib::Marine_xCmpSection::Marine_xCmpSection()
-//{
-//}
-//
-//tnbLib::Marine_xCmpSection::Marine_xCmpSection
-//(
-//	const Standard_Integer theIndex
-//)
-//	: Marine_CmpSection(theIndex)
-//{
-//}
-//
-//tnbLib::Marine_xCmpSection::Marine_xCmpSection
-//(
-//	const Standard_Integer theIndex,
-//	const word & theName
-//)
-//	: Marine_CmpSection(theIndex, theName)
-//{
-//}
+tnbLib::Marine_xCmpSection::Marine_xCmpSection()
+{
+	SetSystem();
+}
+
+tnbLib::Marine_xCmpSection::Marine_xCmpSection
+(
+	const Standard_Integer theIndex
+)
+	: Marine_CmpSection(theIndex)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_xCmpSection::Marine_xCmpSection
+(
+	const Standard_Integer theIndex,
+	const word & theName
+)
+	: Marine_CmpSection(theIndex, theName)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_xCmpSection::Marine_xCmpSection
+(
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_CmpSection(theSection)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_xCmpSection::Marine_xCmpSection
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_CmpSection(theIndex, theSection)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_xCmpSection::Marine_xCmpSection
+(
+	const Standard_Integer theIndex,
+	const word& theName,
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_CmpSection(theIndex, theName, theSection)
+{
+	SetSystem();
+}
 
 void tnbLib::Marine_xCmpSection::SetSystem()
 {

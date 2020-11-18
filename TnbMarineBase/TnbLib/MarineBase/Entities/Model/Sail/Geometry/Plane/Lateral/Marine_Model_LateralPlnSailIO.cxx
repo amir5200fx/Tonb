@@ -15,3 +15,5 @@ DECLARE_LOAD_IMP(tnbLib::marineLib::Model_LateralPlnSail)
 	ar & thePlane_;
 	ar & theZbar_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::Model_LateralPlnSail);

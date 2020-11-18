@@ -5,7 +5,7 @@
 namespace tnbLib
 {
 
-	std::shared_ptr<NumAlg_AdaptiveInteg_Info> sysLib::gl_marine_integration_info =
+	TnbMarine_EXPORT std::shared_ptr<NumAlg_AdaptiveInteg_Info> sysLib::gl_marine_integration_info =
 		std::make_shared<NumAlg_AdaptiveInteg_Info>();
 }
 

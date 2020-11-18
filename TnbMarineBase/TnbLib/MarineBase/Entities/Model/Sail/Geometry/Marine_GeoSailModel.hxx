@@ -43,4 +43,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_GeoSailModel);
+
 #endif // !_Marine_GeoSailModel_Header

@@ -21,3 +21,5 @@ DECLARE_LOAD_IMP(tnbLib::Marine_WaterDomain)
 	ar & theWater_;
 	ar & theWave_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Marine_WaterDomain);

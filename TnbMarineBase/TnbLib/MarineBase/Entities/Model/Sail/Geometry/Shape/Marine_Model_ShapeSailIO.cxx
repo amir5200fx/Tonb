@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::marineLib::Model_ShapeSail)
 	ar & boost::serialization::base_object<Marine_GeoSailModel>(*this);
 	ar & theBody_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::Model_ShapeSail);

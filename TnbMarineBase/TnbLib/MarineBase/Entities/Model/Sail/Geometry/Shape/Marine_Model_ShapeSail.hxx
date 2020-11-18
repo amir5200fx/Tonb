@@ -31,36 +31,36 @@ namespace tnbLib
 
 		public:
 
-			Model_ShapeSail
+			TnbMarine_EXPORT Model_ShapeSail
 			(
 				const std::shared_ptr<Body_Sail>& theSail
 			);
 
-			Model_ShapeSail
+			TnbMarine_EXPORT Model_ShapeSail
 			(
 				std::shared_ptr<Body_Sail>&& theSail
 			);
 
-			Model_ShapeSail
+			TnbMarine_EXPORT Model_ShapeSail
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Body_Sail>& theSail
 			);
 
-			Model_ShapeSail
+			TnbMarine_EXPORT Model_ShapeSail
 			(
 				const Standard_Integer theIndex, 
 				std::shared_ptr<Body_Sail>&& theSail
 			);
 
-			Model_ShapeSail
+			TnbMarine_EXPORT Model_ShapeSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
 				const std::shared_ptr<Body_Sail>& theSail
 			);
 
-			Model_ShapeSail
+			TnbMarine_EXPORT Model_ShapeSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -79,5 +79,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_ShapeSail);
 
 #endif // !_Marine_Model_ShapeSail_Header

@@ -16,26 +16,59 @@ void tnbLib::Marine_zCmpSection::SetSystem()
 	SetCoordinateSystem(sys);
 }
 
-//tnbLib::Marine_zCmpSection::Marine_zCmpSection()
-//{
-//}
-//
-//tnbLib::Marine_zCmpSection::Marine_zCmpSection
-//(
-//	const Standard_Integer theIndex
-//)
-//	: Marine_CmpSection(theIndex)
-//{
-//}
-//
-//tnbLib::Marine_zCmpSection::Marine_zCmpSection
-//(
-//	const Standard_Integer theIndex,
-//	const word & theName
-//)
-//	: Marine_CmpSection(theIndex, theName)
-//{
-//}
+tnbLib::Marine_zCmpSection::Marine_zCmpSection()
+{
+	SetSystem();
+}
+
+tnbLib::Marine_zCmpSection::Marine_zCmpSection
+(
+	const Standard_Integer theIndex
+)
+	: Marine_CmpSection(theIndex)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_zCmpSection::Marine_zCmpSection
+(
+	const Standard_Integer theIndex,
+	const word & theName
+)
+	: Marine_CmpSection(theIndex, theName)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_zCmpSection::Marine_zCmpSection
+(
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_CmpSection(theSection)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_zCmpSection::Marine_zCmpSection
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_CmpSection(theIndex, theSection)
+{
+	SetSystem();
+}
+
+tnbLib::Marine_zCmpSection::Marine_zCmpSection
+(
+	const Standard_Integer theIndex,
+	const word& theName,
+	const std::shared_ptr<Marine_Section>& theSection
+)
+	: Marine_CmpSection(theIndex, theName, theSection)
+{
+	SetSystem();
+}
 
 Standard_Real 
 tnbLib::Marine_zCmpSection::X() const

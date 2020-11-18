@@ -26,41 +26,41 @@ namespace tnbLib
 
 		protected:
 
-			Model_Hull()
+			TnbMarine_EXPORT Model_Hull()
 			{}
 
 		public:
 
-			Model_Hull
+			TnbMarine_EXPORT Model_Hull
 			(
 				const std::shared_ptr<Body_Displacer>& theBody
 			);
 
-			Model_Hull
+			TnbMarine_EXPORT Model_Hull
 			(
 				std::shared_ptr<Body_Displacer>&& theBody
 			);
 
-			Model_Hull
+			TnbMarine_EXPORT Model_Hull
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Body_Displacer>& theBody
 			);
 
-			Model_Hull
+			TnbMarine_EXPORT Model_Hull
 			(
 				const Standard_Integer theIndex,
 				std::shared_ptr<Body_Displacer>&& theBody
 			);
 
-			Model_Hull
+			TnbMarine_EXPORT Model_Hull
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
 				const std::shared_ptr<Body_Displacer>& theBody
 			);
 
-			Model_Hull
+			TnbMarine_EXPORT Model_Hull
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
@@ -85,5 +85,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_Hull);
 
 #endif // !_Marine_Model_Hull_Header

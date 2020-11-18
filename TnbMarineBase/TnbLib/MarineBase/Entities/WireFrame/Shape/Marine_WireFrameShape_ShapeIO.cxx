@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::marineLib::WireFrameShape_Shape)
 	ar & boost::serialization::base_object<Marine_WireFrameShape>(*this);
 	ar & ChangeShape();
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::WireFrameShape_Shape);

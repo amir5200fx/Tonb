@@ -15,3 +15,5 @@ DECLARE_LOAD_IMP(tnbLib::Marine_Water)
 
 	ar & theSections_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Marine_Water);

@@ -18,9 +18,9 @@ namespace tnbLib
 
 		public:
 
-			WaterDensity();
+			TnbMarine_EXPORT WaterDensity();
 
-			explicit WaterDensity(const Standard_Real theValue);
+			TnbMarine_EXPORT explicit WaterDensity(const Standard_Real theValue);
 
 		};
 	}

@@ -46,4 +46,7 @@ namespace tnbLib
 	};
 }
 
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_SailModel);
+
 #endif // !_Marine_SailModel_Header

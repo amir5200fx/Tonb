@@ -26,20 +26,20 @@ namespace tnbLib
 
 	public:
 
-		Marine_WettedCurve();
+		TnbMarine_EXPORT Marine_WettedCurve();
 
-		Marine_WettedCurve
+		TnbMarine_EXPORT Marine_WettedCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_WettedCurve
+		TnbMarine_EXPORT explicit Marine_WettedCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_WettedCurve
+		TnbMarine_EXPORT Marine_WettedCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -87,5 +87,7 @@ namespace tnbLib
 			) const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_WettedCurve);
 
 #endif // !_Marine_WettedCurve_Header

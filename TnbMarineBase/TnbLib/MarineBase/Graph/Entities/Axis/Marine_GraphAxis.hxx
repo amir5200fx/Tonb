@@ -17,19 +17,20 @@ namespace tnbLib
 
 	protected:
 
-		Marine_GraphAxis();
+		TnbMarine_EXPORT Marine_GraphAxis();
 
-		Marine_GraphAxis
+		TnbMarine_EXPORT Marine_GraphAxis
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_GraphAxis
+		TnbMarine_EXPORT Marine_GraphAxis
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
 		);
 
+	public:
 
 		virtual Standard_Boolean IsX() const
 		{

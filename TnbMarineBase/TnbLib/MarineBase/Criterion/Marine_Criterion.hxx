@@ -8,6 +8,7 @@
 #include <Marine_Criterion_Standard.hxx>
 #include <Marine_Criterion_Status.hxx>
 #include <Marine_Criterion_Value.hxx>
+#include <Marine_Module.hxx>
 
 namespace tnbLib
 {
@@ -27,9 +28,9 @@ namespace tnbLib
 
 	public:
 
-		Marine_Criterion();
+		TnbMarine_EXPORT Marine_Criterion();
 
-		Marine_Criterion(const Standard_Integer theIndex, const word& theName);
+		TnbMarine_EXPORT Marine_Criterion(const Standard_Integer theIndex, const word& theName);
 
 		const auto& Value() const
 		{

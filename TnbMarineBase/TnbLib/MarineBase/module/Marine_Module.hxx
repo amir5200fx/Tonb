@@ -2,8 +2,6 @@
 #ifndef _Marine_Module_Header
 #define _Marine_Module_Header
 
-#define TnbMarine_STATIC_DEFINE
-
 #ifdef TnbMarine_STATIC_DEFINE
 #define TnbMarine_EXPORT
 #else

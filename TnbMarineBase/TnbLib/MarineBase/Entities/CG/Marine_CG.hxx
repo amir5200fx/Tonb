@@ -24,35 +24,36 @@ namespace tnbLib
 		std::shared_ptr<Marine_TCG> theTCG_;
 
 
-		friend class boost::serialization::access;
+		//- private functions and operators
 
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version)
-		{
-			ar & boost::serialization::base_object<Marine_Entity>(*this);
+		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
 
-			ar & theLCG_;
-			ar & theVCG_;
-			ar & theTCG_;
-		}
+	protected:
+
+
+		Marine_CG()
+		{}
 
 	public:
 
-		Marine_CG
+
+		//- constructors
+
+		TnbMarine_EXPORT Marine_CG
 		(
 			const std::shared_ptr<Marine_LCG>& theLcg, 
 			const std::shared_ptr<Marine_VCG>& theVcg, 
 			const std::shared_ptr<Marine_TCG>& theTcg
 		);
 
-		Marine_CG
+		TnbMarine_EXPORT Marine_CG
 		(
 			std::shared_ptr<Marine_LCG>&& theLcg,
 			std::shared_ptr<Marine_VCG>&& theVcg,
 			std::shared_ptr<Marine_TCG>&& theTcg
 		);
 
-		Marine_CG
+		TnbMarine_EXPORT Marine_CG
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
@@ -61,7 +62,7 @@ namespace tnbLib
 			const std::shared_ptr<Marine_TCG>& theTcg
 		);
 
-		Marine_CG
+		TnbMarine_EXPORT Marine_CG
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -77,5 +78,7 @@ namespace tnbLib
 			GLOBAL_ACCESS_SINGLE(std::shared_ptr<Marine_TCG>, TCG)
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_CG);
 
 #endif // !_Marine_CG_Header

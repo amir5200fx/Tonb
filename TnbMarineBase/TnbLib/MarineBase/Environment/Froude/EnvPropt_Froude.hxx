@@ -18,7 +18,7 @@ namespace tnbLib
 
 		public:
 
-			explicit Froude(const Standard_Real theValue);
+			TnbMarine_EXPORT explicit Froude(const Standard_Real theValue);
 		};
 	}
 }

@@ -4,6 +4,67 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+
+tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::OuterSection
+(
+	const std::shared_ptr<Pln_Wire>& theWire
+)
+	: Section_Water(theWire)
+{
+	// empty body
+}
+
+tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::OuterSection
+(
+	std::shared_ptr<Pln_Wire>&& theWire
+)
+	: Section_Water(std::move(theWire))
+{
+	// empty body
+}
+
+tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::OuterSection
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<Pln_Wire>& theWire
+)
+	: Section_Water(theIndex, theWire)
+{
+	// empty body
+}
+
+tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::OuterSection
+(
+	const Standard_Integer theIndex, 
+	std::shared_ptr<Pln_Wire>&& theWire
+)
+	: Section_Water(theIndex, std::move(theWire))
+{
+	// empty body
+}
+
+tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::OuterSection
+(
+	const Standard_Integer theIndex,
+	const word & theName, 
+	const std::shared_ptr<Pln_Wire>& theWire
+)
+	: Section_Water(theIndex, theName, theWire)
+{
+	// empty body
+}
+
+tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::OuterSection
+(
+	const Standard_Integer theIndex,
+	const word & theName, 
+	std::shared_ptr<Pln_Wire>&& theWire
+)
+	: Section_Water(theIndex, theName, std::move(theWire))
+{
+	// empty body
+}
+
 std::shared_ptr<tnbLib::Marine_Section>
 tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::Copy() const
 {
