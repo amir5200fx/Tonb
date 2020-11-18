@@ -11,11 +11,31 @@ y0.setName("y0");
 
 //- for the other point, we define a parameter 'lx' as the x-coordinate
 //- and a parameter 'ly' as the y-coordinate
-var x1 = parMaker.createFixed(0.35);
-var y1 = parMaker.createFixed(1.5);
+//- as a constraint, ly = 0.07 *sqrt(0.3) * lx
 
-//- rename the parameters
+var x1 = parMaker.createFixed(1.0);
+
+//- rename the parameter, x1:
 x1.setName("x1");
+
+//- retrieve the field-fun maker
+var fieldFunMaker = getFieldFunMaker();
+
+var x1_field = fieldFunMaker.createUniform(x1);
+
+//- rename the field-fun
+x1_field.setName("x1f");
+
+//- create an expression field based on the relationship between 'lx' and 'ly'
+var y1_field = fieldFunMaker.createExpr("0.07 *sqrt(0.3) * x1f");
+
+//- registring the field into the expression
+y1_field.addVariable(x1_field);
+
+//- introduce the y1 parameter based on the y1_field
+var y1 = parMaker.createFree(y1_field);
+
+//- rename the parameter, y1:
 y1.setName("y1");
 
 //- Now, we can create the first point with parameters x0 and y0
@@ -36,3 +56,4 @@ var myProfile = profileMaker.createCustom(p0, p1);
 
 printFrame();
 
+exportToPlt("frameMaker.plt");

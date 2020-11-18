@@ -1,0 +1,68 @@
+//- create the parameters of the first point
+//- In this example, first point is constant, P0(0, 0)
+var parMaker = getParameterMaker();
+
+var x0 = parMaker.createConstant(0);
+var y0 = parMaker.createConstant(0);
+
+//- rename the parameters
+x0.setName("x0");
+y0.setName("y0");
+
+//- for the other point, we define a parameter 'lx' as the x-coordinate
+//- and a parameter 'ly' as the y-coordinate
+var x2 = parMaker.createFixed(0.35);
+var y2 = parMaker.createFixed(1.5);
+
+//- rename the parameters
+x2.setName("x2");
+y2.setName("y2");
+
+//- Now, we can create the first point with parameters x0 and y0
+var pntMaker = getPointMaker();
+
+//- for a profile, we need two outer component point at its ends:
+var p0 = pntMaker.createOuterComponent(x0, y0);
+var p2 = pntMaker.createOuterComponent(x2, y2);
+
+p0.setName("p0");
+p2.setName("p2");
+
+//- create the parameters that control the directions of the lines that
+//- pass through the points p0 and p1
+//- make dir0(1, 0):
+var dir0 = makeDir(1, 0);
+
+//- make dir2(0, -1):
+var dir2 = makeDir(0, -1);
+
+//- define a parameter based on the angle between the line passing through p0
+//- and the dir0:
+var angle0 = parMaker.createFixed(0.436);
+
+//- define a parameter based on the angle between the line passing through p2
+//- and the dir2:
+var angle2 = parMaker.createFixed(-0.262);
+
+//- create the intersection geometric map to retrieve p1:
+var geoMapMaker = getGeoMapMaker();
+
+var intersctMap = geoMapMaker.createIntersection(getCoord(p0), dir0, angle0, getCoord(p2), dir2, angle2);
+
+//- create the intersection point, p1, according to the intersectMap
+var p1 = pntMaker.createField(intersctMap);
+
+//- get the profile maker
+var profileMaker = getCmpProfileMaker();
+
+//- create custom profile
+var myProfile = profileMaker.createCustom(p0, p2);
+
+//- get the edge:
+var edge0 = getSeqEdge(0);
+
+var edge_pair = myProfile.importPoint(p1, edge0);
+
+printFrame();
+
+exportToPlt("frameMaker.plt");
