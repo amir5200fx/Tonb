@@ -57,7 +57,7 @@ namespace tnbLib
 		return getMaker()->HullMaker();
 	}
 
-	const auto& createHull()
+	const auto& createHullMaker()
 	{
 		if (getHull())
 		{
@@ -69,7 +69,7 @@ namespace tnbLib
 		return getHull();
 	}
 
-	const auto& createHull(const hull_t& t)
+	const auto& createHullMaker(const hull_t& t)
 	{
 		if (getHull())
 		{
@@ -81,25 +81,25 @@ namespace tnbLib
 		return getHull();
 	}
 
-	auto createTank()
+	auto createTankMaker()
 	{
 		auto t = getMaker()->SelectTankMaker(getMaker()->CreateTankMaker());
 		return std::move(t);
 	}
 
-	auto createTank(const tank_t& t)
+	auto createTankMaker(const tank_t& t)
 	{
 		auto t = getMaker()->SelectTankMaker(getMaker()->CreateTankMaker(t));
 		return std::move(t);
 	}
 
-	auto createSail()
+	auto createSailMaker()
 	{
 		auto t = getMaker()->SelectSailMaker(getMaker()->CreateShapeGeomSailMaker());
 		return std::move(t);
 	}
 
-	auto createSail(const sail_t& s)
+	auto createSailMaker(const sail_t& s)
 	{
 		auto t = getMaker()->SelectSailMaker(getMaker()->CreateShapeGeomSailMaker(s));
 		return std::move(t);
@@ -114,6 +114,29 @@ namespace tnbLib
 	{
 		return getMaker()->NbSails();
 	}
+
+	// Create Working Planes
+
+	auto createWP(const hullCreator_t& m, const double x)
+	{
+
+		auto t = m->SelectWP(m->CreateWorkingPlane(x));
+		return std::move(t);
+
+	}
+
+	auto createWP(const tankCreator_t& m, const double x)
+	{
+		auto t = m->SelectWP(m->CreateWorkingPlane(x));
+		return std::move(t);
+	}
+
+	/*auto createWP(const sailCreator_t& m, const double x)
+	{
+		auto t=m->se
+	}*/
+
+
 
 	//- spacing functions
 
@@ -471,63 +494,9 @@ namespace tnbLib
 		return std::move(t);
 	}
 
-	auto makeCreator()
-	{
-		auto t = std::make_shared<StbGMaker_Creator>();
-		return std::move(t);
-	}
+	
 
-	auto createTankMaker(const creator_t& t, const tank_t& k)
-	{
-		return t->CreateTankMaker(k);
-	}
-
-	auto createCustomTankMaker(const creator_t& t)
-	{
-		return t->CreateTankMaker();
-	}
-
-	void createHullMaker(const creator_t& t, const hull_t& h)
-	{
-		t->CreateHullMaker(h);
-	}
-
-	auto createCustomHullMaker(const creator_t& t)
-	{
-		return t->CreateHullMaker();
-	}
-
-	auto createShapeSailMaker(const creator_t& t, const sail_t& s)
-	{
-		return t->CreateShapeGeomSailMaker(s);
-	}
-
-	auto selectTankMaker(const creator_t& t, const int id)
-	{
-		auto item = t->SelectTankMaker(id);
-		return std::move(item);
-	}
-
-	auto selectSailMaker(const creator_t& t, const int id)
-	{
-		auto item = t->SelectSailMaker(id);
-		return std::move(item);
-	}
-
-	const auto& hullMaker(const creator_t& t)
-	{
-		return t->HullMaker();
-	}
-
-	void createWPs(const hullCreator_t& t, const xDisbt_t& d)
-	{
-		t->CreateWorkingPlanes(*d);
-	}
-
-	void createWPs(const tankCreator_t& t, const xDisbt_t& d)
-	{
-		t->CreateWorkingPlanes(*d);
-	}
+	
 
 	
 }
@@ -554,6 +523,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> auto {auto t = importTankMakerFromSTEP(name); return std::move(t); }), "createTankFromSTEP");
 		mod->add(chaiscript::fun([](const std::string& name)-> auto {auto t = importSailMakerFromIGES(name); return std::move(t); }), "createSailFromIGES");
 		mod->add(chaiscript::fun([](const std::string& name)-> auto {auto t = importSailMakerFromSTEP(name); return std::move(t); }), "createSailFromSTEP");
+
+		mod->add(chaiscript::fun([]()-> auto {auto t = getMaker()->ExportModel(); return std::move(t); }), "createModel");
 
 		//- spacing
 
@@ -584,7 +555,26 @@ namespace tnbLib
 		
 	}
 
+	void setCreators(const module_t& mod)
+	{
+		mod->add(chaiscript::fun([]()->const auto& {return createHullMaker(); }), "createHullMaker");
+		mod->add(chaiscript::fun([](const hull_t& s)-> const auto& {return createHullMaker(s); }), "createHullMaker");
 
+		mod->add(chaiscript::fun([]()-> auto {auto t = createTankMaker(); return std::move(t); }), "createTankMaker");
+		mod->add(chaiscript::fun([](const tank_t& s)-> auto {auto t = createTankMaker(s); return std::move(t); }), "createTankMaker");
+
+		mod->add(chaiscript::fun([]()->auto {auto t = createSailMaker(); return std::move(t); }), "createSailMaker");
+		mod->add(chaiscript::fun([](const sail_t& s)-> auto {auto t = createSailMaker(s); return std::move(t); }), "createSailMaker");
+	}
+
+	void setWotkingPlanes(const module_t& mod)
+	{
+
+		mod->add(chaiscript::fun([](const hullCreator_t& m, const double x)-> auto{auto t = createWP(m, x); return std::move(t); }), "createHullWP");
+
+		mod->add(chaiscript::fun([](const tankCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createTankWP");
+
+	}
 }
 
 using namespace tnbLib;
