@@ -198,18 +198,18 @@ namespace tnbLib
 
 	struct ConvertorTables
 	{
-		static const scalar Length[9][9];
-		static const scalar Mass[8][8];
-		static const scalar Pressure[6][6];
-		static const scalar Velocity[6][6];
-		static const scalar Acceleration[2][2];
-		static const scalar Density[4][4];
-		static const scalar Power[5][5];
-		//static const scalar Temperature[4][4];
-		static const scalar Force[8][8];
-		static const scalar Angle[3][3];
-		static const scalar DynViscosity[5][5];
-		static const scalar KinViscosity[2][2];
+		static TnbGlobal_EXPORT const scalar Length[9][9];
+		static TnbGlobal_EXPORT const scalar Mass[8][8];
+		static TnbGlobal_EXPORT const scalar Pressure[6][6];
+		static TnbGlobal_EXPORT const scalar Velocity[6][6];
+		static TnbGlobal_EXPORT const scalar Acceleration[2][2];
+		static TnbGlobal_EXPORT const scalar Density[4][4];
+		static TnbGlobal_EXPORT const scalar Power[5][5];
+		//static TnbGlobal_EXPORT const scalar Temperature[4][4];
+		static TnbGlobal_EXPORT const scalar Force[8][8];
+		static TnbGlobal_EXPORT const scalar Angle[3][3];
+		static TnbGlobal_EXPORT const scalar DynViscosity[5][5];
+		static TnbGlobal_EXPORT const scalar KinViscosity[2][2];
 	};
 
 	namespace Convertor

@@ -5,6 +5,7 @@
 #include <Global_Macros.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Merge_PntAlg.hxx>
+#include <Geo_Module.hxx>
 #include <Traits.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -26,7 +27,7 @@ namespace tnbLib
 
 	protected:
 
-		Merge_Info();
+		TnbGeo_EXPORT Merge_Info();
 
 		Merge_Info
 		(
@@ -41,8 +42,8 @@ namespace tnbLib
 
 		// Static data members
 
-		static const Standard_Real DEFAULT_RESOLUTION;
-		static const Standard_Real DEFAULT_RADIUS;
+		static TnbGeo_EXPORT const Standard_Real DEFAULT_RESOLUTION;
+		static TnbGeo_EXPORT const Standard_Real DEFAULT_RADIUS;
 
 		Standard_Real Resolution() const
 		{
