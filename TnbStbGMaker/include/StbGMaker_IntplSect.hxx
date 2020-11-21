@@ -3,6 +3,7 @@
 #define _StbGMaker_IntplSect_Header
 
 #include <Global_Done.hxx>
+#include <StbGMaker_Module.hxx>
 
 #include <memory>
 

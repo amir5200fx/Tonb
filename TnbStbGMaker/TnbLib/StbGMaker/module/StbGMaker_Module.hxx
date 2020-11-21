@@ -2,8 +2,6 @@
 #ifndef _StbGMaker_Module_Header
 #define _StbGMaker_Module_Header
 
-#define TnbStbGMaker_STATIC_DEFINE
-
 #ifdef TnbStbGMaker_STATIC_DEFINE
 #define TnbStbGMaker_EXPORT
 #else

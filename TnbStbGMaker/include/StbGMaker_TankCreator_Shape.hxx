@@ -21,19 +21,31 @@ namespace tnbLib
 
 			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
 
+		protected:
+
+			//- default constructor is provided for loading purposes only!
+
+			TankCreator_Shape()
+			{}
+
 		public:
 
-			TankCreator_Shape
+			// constructors
+
+			TnbStbGMaker_EXPORT explicit TankCreator_Shape
 			(
 				const std::shared_ptr<marineLib::Shape_Tank>& theTank
 			);
 
-			TankCreator_Shape
+			TnbStbGMaker_EXPORT TankCreator_Shape
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
 				const std::shared_ptr<marineLib::Shape_Tank>& theTank
 			);
+
+
+			//- public functions and operators
 
 			const auto& Shape() const
 			{
@@ -45,18 +57,20 @@ namespace tnbLib
 				return Standard_True;
 			}
 
-			Standard_Integer
+			TnbStbGMaker_EXPORT Standard_Integer
 				CreateWorkingPlane
 				(
 					const Standard_Real x
 				) override;
 
-			void ExportAs
+			TnbStbGMaker_EXPORT void ExportAs
 			(
 				std::shared_ptr<Marine_Model>& theModel
 			) const override;
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::TankCreator_Shape);
 
 #endif // !_StbGMaker_TankCreator_Shape_Header

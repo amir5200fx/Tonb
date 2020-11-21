@@ -44,4 +44,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::StbGMaker_TankCreator);
+
 #endif // !_StbGMaker_TankCreator_Header

@@ -3,6 +3,9 @@
 #define _StbGMaker_Tools_Header
 
 #include <Standard_TypeDef.hxx>
+#include <StbGMaker_Module.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 #include <memory>
 #include <vector>
@@ -26,11 +29,11 @@ namespace tnbLib
 
 	public:
 
-		static Standard_Real MinX(const Marine_Body& theBody);
+		static TnbStbGMaker_EXPORT Standard_Real MinX(const Marine_Body& theBody);
 
-		static Standard_Real MaxX(const Marine_Body& theBody);
+		static TnbStbGMaker_EXPORT Standard_Real MaxX(const Marine_Body& theBody);
 
-		static gp_Pln 
+		static TnbStbGMaker_EXPORT gp_Pln
 			IntplPln
 			(
 				const Standard_Real x,
@@ -38,7 +41,7 @@ namespace tnbLib
 				const std::shared_ptr<Marine_CmpSection>& theS1
 			);
 
-		static std::shared_ptr<Marine_CmpSection> 
+		static TnbStbGMaker_EXPORT std::shared_ptr<Marine_CmpSection>
 			IntplHullSection
 			(
 				const gp_Pln& thePlane, 
@@ -47,7 +50,7 @@ namespace tnbLib
 				const std::shared_ptr<StbGMaker_IntplSect>& theIntrpl
 			);
 
-		static std::tuple
+		static TnbStbGMaker_EXPORT std::tuple
 			<
 			std::shared_ptr<Marine_CmpSection>,
 			std::shared_ptr<Marine_CmpSection>
@@ -58,7 +61,7 @@ namespace tnbLib
 				const Marine_Body& theBody
 			);
 
-		static std::tuple
+		static TnbStbGMaker_EXPORT std::tuple
 			<
 			std::shared_ptr<Marine_CmpSection>,
 			std::shared_ptr<Marine_CmpSection>
@@ -69,7 +72,7 @@ namespace tnbLib
 				const StbGMaker_Hull& theHull
 			);
 
-		static std::vector<std::shared_ptr<Pln_Wire>> OuterWires(const std::shared_ptr<StbGMaker_WP>& theWp);
+		static TnbStbGMaker_EXPORT std::vector<std::shared_ptr<Pln_Wire>> OuterWires(const std::shared_ptr<StbGMaker_WP>& theWp);
 
 		template<class SectionType>
 		static std::shared_ptr<Marine_CmpSection> Section(const std::shared_ptr<StbGMaker_WP>& theWp);
@@ -77,13 +80,16 @@ namespace tnbLib
 		template<class SectionType>
 		static std::vector<std::shared_ptr<Marine_CmpSection>> RetrieveSections(const std::vector<std::shared_ptr<StbGMaker_WP>>& theWps);
 
-		static std::shared_ptr<Marine_CmpSection> FitTankSectionToHull(const std::shared_ptr<Marine_CmpSection>& theSection, const std::shared_ptr<Marine_CmpSection>& theSHull0, const std::shared_ptr<Marine_CmpSection>& theSHull1, const std::shared_ptr<StbGMaker_IntplSect>& theIntrpl);
+		static TnbStbGMaker_EXPORT std::shared_ptr<Marine_CmpSection> FitTankSectionToHull(const std::shared_ptr<Marine_CmpSection>& theSection, const std::shared_ptr<Marine_CmpSection>& theSHull0, const std::shared_ptr<Marine_CmpSection>& theSHull1, const std::shared_ptr<StbGMaker_IntplSect>& theIntrpl);
 
-		static std::shared_ptr<StbGMaker_Tank> FitTankToHull(const StbGMaker_Tank& theTank, const StbGMaker_Hull& theHull, const std::shared_ptr<StbGMaker_IntplSect>& theIntrpl);
+		static TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_Tank> FitTankToHull(const StbGMaker_Tank& theTank, const StbGMaker_Hull& theHull, const std::shared_ptr<StbGMaker_IntplSect>& theIntrpl);
 
-		static void CheckOutsideBoundaries(const Standard_Real x, const Marine_Body& theBody, const char* theFunName);
+		static TnbStbGMaker_EXPORT void CheckOutsideBoundaries(const Standard_Real x, const Marine_Body& theBody, const char* theFunName);
 
-		static void CheckSameDirection(const std::shared_ptr<Marine_CmpSection>& theS0, const std::shared_ptr<Marine_CmpSection>& theS1, const char* theNameFun);
+		static void CheckSameDirection(const std::shared_ptr<Marine_CmpSection>& theS0, const std::shared_ptr<Marine_CmpSection>& theS1, const char* theNameFun)
+		{
+			NotImplemented;
+		}
 	};
 }
 

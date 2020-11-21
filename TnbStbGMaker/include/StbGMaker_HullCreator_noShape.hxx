@@ -26,9 +26,9 @@ namespace tnbLib
 
 		public:
 
-			HullCreator_noShape();
+			TnbStbGMaker_EXPORT HullCreator_noShape();
 
-			HullCreator_noShape
+			TnbStbGMaker_EXPORT HullCreator_noShape
 			(
 				const Standard_Integer theIndex,
 				const word& theName
@@ -39,13 +39,13 @@ namespace tnbLib
 				return Standard_False;
 			}
 
-			Standard_Integer 
+			TnbStbGMaker_EXPORT Standard_Integer
 				CreateWorkingPlane
 				(
 					const Standard_Real x
 				) override;
 
-			void ExportAs
+			TnbStbGMaker_EXPORT void ExportAs
 			(
 				std::shared_ptr<Marine_Model>& theModel
 			) const override;

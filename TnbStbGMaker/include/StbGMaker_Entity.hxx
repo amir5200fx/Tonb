@@ -53,4 +53,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::StbGMaker_Entity);
+
 #endif // !_StbGMaker_Entity_Header

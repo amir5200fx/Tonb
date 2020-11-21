@@ -29,7 +29,7 @@ namespace tnbLib
 				: StbGMaker_IntplSect(theS0, theS1)
 			{}
 
-			void Perform(const gp_Pln& thePln);
+			TnbStbGMaker_EXPORT void Perform(const gp_Pln& thePln);
 		};
 	}
 }

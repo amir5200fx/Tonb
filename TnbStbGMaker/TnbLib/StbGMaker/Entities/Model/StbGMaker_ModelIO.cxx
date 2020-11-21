@@ -17,3 +17,5 @@ DECLARE_LOAD_IMP(tnbLib::StbGMaker_Model)
 	ar & theTanks_;
 	ar & theSails_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::StbGMaker_Model);

@@ -15,3 +15,5 @@ DECLARE_LOAD_IMP(tnbLib::StbGMaker_WP)
 	ar & theModeler_;
 	ar & theX_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::StbGMaker_WP);

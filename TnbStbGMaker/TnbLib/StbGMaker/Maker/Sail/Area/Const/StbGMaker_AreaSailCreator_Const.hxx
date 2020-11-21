@@ -35,20 +35,20 @@ namespace tnbLib
 
 		public:
 
-			AreaSailCreator_Const
+			TnbStbGMaker_EXPORT AreaSailCreator_Const
 			(
 				const Standard_Real theArea, 
 				const Standard_Real theZbar
 			);
 
-			AreaSailCreator_Const
+			TnbStbGMaker_EXPORT AreaSailCreator_Const
 			(
 				const Standard_Integer theIndex, 
 				const Standard_Real theArea,
 				const Standard_Real theZbar
 			);
 
-			AreaSailCreator_Const
+			TnbStbGMaker_EXPORT AreaSailCreator_Const
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -66,14 +66,16 @@ namespace tnbLib
 				return theZbar_;
 			}
 
-			stbGmakerLib::sailCreatotType Type() const override;
+			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatotType Type() const override;
 
-			void ExportAs
+			TnbStbGMaker_EXPORT void ExportAs
 			(
 				std::shared_ptr<Marine_Model>& theModel
 			) const override;
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::AreaSailCreator_Const);
 
 #endif // !_StbGMaker_AreaSailCreator_Const_Header

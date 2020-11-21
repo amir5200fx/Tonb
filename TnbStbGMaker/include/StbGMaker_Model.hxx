@@ -18,6 +18,7 @@ namespace tnbLib
 	{
 
 		friend class StbGMaker_Creator;
+
 		/*Private Data*/
 
 		std::shared_ptr<marineLib::Model_Hull> theHull_;
@@ -25,6 +26,8 @@ namespace tnbLib
 		std::vector<std::shared_ptr<marineLib::Model_Tank>> theTanks_;
 		std::vector<std::shared_ptr<Marine_SailModel>> theSails_;
 
+
+		//- private functions and operators
 
 		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
 
@@ -45,11 +48,24 @@ namespace tnbLib
 
 	public:
 
-		template<class... _Types>
-		StbGMaker_Model(_Types&&... _Args)
-			: StbGMaker_Entity(_Args...)
+		//- default constructor
+
+		StbGMaker_Model()
 		{}
 
+
+		//- constructors
+
+		TnbStbGMaker_EXPORT explicit StbGMaker_Model(const Standard_Integer theIndex);
+
+		TnbStbGMaker_EXPORT StbGMaker_Model
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		);
+
+
+		//- public functions and operators
 
 		auto NbTanks() const
 		{
@@ -77,5 +93,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::StbGMaker_Model);
 
 #endif // !_StbGMaker_Model_Header

@@ -24,12 +24,12 @@ namespace tnbLib
 
 		public:
 
-			HullCreator_Shape
+			TnbStbGMaker_EXPORT HullCreator_Shape
 			(
 				const std::shared_ptr<marineLib::Shape_Hull>& theHull
 			);
 
-			HullCreator_Shape
+			TnbStbGMaker_EXPORT HullCreator_Shape
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -46,14 +46,14 @@ namespace tnbLib
 				return theHull_;
 			}
 
-			Standard_Integer
+			TnbStbGMaker_EXPORT Standard_Integer
 				CreateWorkingPlane
 				(
 					const Standard_Real x
 				) override;
 
 
-			void ExportAs
+			TnbStbGMaker_EXPORT void ExportAs
 			(
 				std::shared_ptr<Marine_Model>& theModel
 			) const override;

@@ -30,36 +30,36 @@ namespace tnbLib
 		public:
 
 
-			GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
 			(
 				const std::shared_ptr<marineLib::Shape_Sail>& theShape
 			);
 
-			GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
 			(
 				std::shared_ptr<marineLib::Shape_Sail>&& theShape
 			);
 
-			GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
 			(
 				const Standard_Integer theIndex, 
 				const std::shared_ptr<marineLib::Shape_Sail>& theShape
 			);
 
-			GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
 			(
 				const Standard_Integer theIndex, 
 				std::shared_ptr<marineLib::Shape_Sail>&& theShape
 			);
 
-			GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
 				const std::shared_ptr<marineLib::Shape_Sail>& theShape
 			);
 
-			GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -72,20 +72,22 @@ namespace tnbLib
 				return theShape_;
 			}
 
-			Standard_Integer
+			TnbStbGMaker_EXPORT Standard_Integer
 				CreateWorkingPlane
 				(
 					const Standard_Real x
 				) override;
 
-			stbGmakerLib::sailCreatotType Type() const override;
+			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatotType Type() const override;
 
-			void ExportAs
+			TnbStbGMaker_EXPORT void ExportAs
 			(
 				std::shared_ptr<Marine_Model>& theModel
 			) const override;
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::GeometricSailCreator_Shape);
 
 #endif // !_StbGMaker_GeometricSailCreator_Shape_Header

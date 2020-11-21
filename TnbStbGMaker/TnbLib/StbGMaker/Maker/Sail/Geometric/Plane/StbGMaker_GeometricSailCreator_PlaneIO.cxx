@@ -15,3 +15,5 @@ DECLARE_LOAD_IMP(tnbLib::stbGmakerLib::GeometricSailCreator_Plane)
 	ar & thePlane_;
 	ar & theZbar_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::stbGmakerLib::GeometricSailCreator_Plane);

@@ -32,9 +32,11 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsArea() const override;
+		TnbStbGMaker_EXPORT Standard_Boolean IsArea() const override;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::StbGMaker_AreaSailCreator);
 
 #endif // !_StbGMaker_AreaSailCreator_Header
 

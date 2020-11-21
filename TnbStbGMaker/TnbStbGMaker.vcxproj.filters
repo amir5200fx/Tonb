@@ -296,5 +296,20 @@
     <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_CreatorIO.cxx">
       <Filter>TnbLib\StbGMaker\Maker</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Edge\StbGMaker_EdgeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_Model.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Area\Const\StbGMaker_AreaSailCreator_ConstIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Area\Const</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape\StbGMaker_GeometricSailCreator_noShapeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\noShape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\noShape\StbGMaker_TankCreator_noShapeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Tank\noShape</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

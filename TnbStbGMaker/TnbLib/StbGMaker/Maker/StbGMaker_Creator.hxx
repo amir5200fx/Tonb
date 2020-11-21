@@ -50,13 +50,13 @@ namespace tnbLib
 			return theSailCounter_;
 		}
 
-		void ImportToTanks
+		TnbStbGMaker_EXPORT void ImportToTanks
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<StbGMaker_TankCreator>&& theTank
 		);
 
-		void ImportToSails
+		TnbStbGMaker_EXPORT void ImportToSails
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<StbGMaker_SailCreator>&& theSail
@@ -77,70 +77,70 @@ namespace tnbLib
 			return (Standard_Integer)theSailCreators_.size();
 		}
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreateTankMaker();
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreateTankMaker
 			(
 				const std::shared_ptr<marineLib::Shape_Tank>& theTank
 			);
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreateShapeGeomSailMaker();
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreateShapeGeomSailMaker
 			(
 				const std::shared_ptr<marineLib::Shape_Sail>& theSail
 			);
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreateConstAreaSailMaker
 			(
 				const Standard_Real theArea,
 				const Standard_Real theZbar
 			);
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreatePlaneGeomSailMaker
 			(
 				const std::shared_ptr<Cad2d_Plane>& thePlane,
 				const Standard_Real theZbar
 			);
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreatePlaneGeomSailMaker
 			(
 				std::shared_ptr<Cad2d_Plane>&& thePlane,
 				const Standard_Real theZbar
 			);
 
-		std::shared_ptr<StbGMaker_TankCreator> 
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_TankCreator>
 			SelectTankMaker
 			(
 				const Standard_Integer theIndex
 			) const;
 
-		std::shared_ptr<StbGMaker_SailCreator> 
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_SailCreator>
 			SelectSailMaker
 			(
 				const Standard_Integer theIndex
 			) const;
 
-		std::shared_ptr<StbGMaker_TankCreator> 
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_TankCreator>
 			RemoveTankMaker
 			(
 				const Standard_Integer theIndex
 			);
 
-		std::shared_ptr<StbGMaker_SailCreator> 
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_SailCreator>
 			RemoveSailMaker
 			(
 				const Standard_Integer theIndex
 			);
 
-		std::shared_ptr<StbGMaker_HullCreator>
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_HullCreator>
 			RemoveHullMaker();
 
 		const auto& HullMaker() const
@@ -158,16 +158,16 @@ namespace tnbLib
 			return theSailCreators_;
 		}
 
-		std::shared_ptr<StbGMaker_Model> ExportModel() const;
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_Model> ExportModel() const;
 
-		void CreateHullMaker();
+		TnbStbGMaker_EXPORT void CreateHullMaker();
 
-		void CreateHullMaker
+		TnbStbGMaker_EXPORT void CreateHullMaker
 		(
 			const std::shared_ptr<marineLib::Shape_Hull>& theHull
 		);
 
-		void ExportAs(std::shared_ptr<StbGMaker_Model>& theModel) const;
+		TnbStbGMaker_EXPORT void ExportAs(std::shared_ptr<StbGMaker_Model>& theModel) const;
 
 	};
 }

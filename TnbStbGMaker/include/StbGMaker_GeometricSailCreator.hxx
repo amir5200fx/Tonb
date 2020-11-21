@@ -31,8 +31,10 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsGeometric() const override;
+		TnbStbGMaker_EXPORT Standard_Boolean IsGeometric() const override;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::StbGMaker_GeometricSailCreator);
 
 #endif // !_StbGMaker_GeometricSailCreator_Header

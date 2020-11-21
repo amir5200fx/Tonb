@@ -28,25 +28,31 @@ namespace tnbLib
 
 		Standard_Real theX_;
 
+
 		//- private functions and operators
 
 		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
 
-		void MakeModeler();
+		TnbStbGMaker_EXPORT void MakeModeler();
 
 	public:
 
-		StbGMaker_WP();
+		//- default constructor
 
-		StbGMaker_WP(const Standard_Real theX);
+		TnbStbGMaker_EXPORT StbGMaker_WP();
 
-		StbGMaker_WP
+
+		//- constructors
+
+		TnbStbGMaker_EXPORT explicit StbGMaker_WP(const Standard_Real theX);
+
+		TnbStbGMaker_EXPORT StbGMaker_WP
 		(
 			const Standard_Integer theIndex,
 			const Standard_Real theX
 		);
 
-		StbGMaker_WP
+		TnbStbGMaker_EXPORT StbGMaker_WP
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
@@ -54,9 +60,9 @@ namespace tnbLib
 		);
 
 
-		Standard_Integer NbPlanes() const;
+		TnbStbGMaker_EXPORT Standard_Integer NbPlanes() const;
 
-		std::shared_ptr<Entity3d_Chain> MakeMesh() const;
+		TnbStbGMaker_EXPORT std::shared_ptr<Entity3d_Chain> MakeMesh() const;
 
 		auto X() const
 		{
@@ -73,9 +79,9 @@ namespace tnbLib
 			return theModeler_;
 		}
 
-		gp_Pln gpPln(const gp_Ax2& theAx) const;
+		TnbStbGMaker_EXPORT gp_Pln gpPln(const gp_Ax2& theAx) const;
 
-		std::vector<std::shared_ptr<Cad2d_Plane>> 
+		TnbStbGMaker_EXPORT std::vector<std::shared_ptr<Cad2d_Plane>>
 			RetrievePlanes() const;
 
 		void SetX(const Standard_Real theX)
@@ -83,9 +89,9 @@ namespace tnbLib
 			theX_ = theX;
 		}
 
-		void Approx(const std::shared_ptr<Pln_Edge>& theEdge);
+		TnbStbGMaker_EXPORT void Approx(const std::shared_ptr<Pln_Edge>& theEdge);
 
-		void RetrievePlanesTo
+		TnbStbGMaker_EXPORT void RetrievePlanesTo
 		(
 			std::vector<std::shared_ptr<Cad2d_Plane>>& thePlanes
 		) const;
@@ -93,5 +99,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::StbGMaker_WP);
 
 #endif // !_StbGMaker_WP_Header

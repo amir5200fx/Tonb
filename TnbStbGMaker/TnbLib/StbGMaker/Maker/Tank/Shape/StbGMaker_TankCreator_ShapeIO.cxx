@@ -13,3 +13,5 @@ DECLARE_LOAD_IMP(tnbLib::stbGmakerLib::TankCreator_Shape)
 	ar & boost::serialization::base_object<StbGMaker_TankCreator>(*this);
 	ar & theTank_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::stbGmakerLib::TankCreator_Shape);

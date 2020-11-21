@@ -2,6 +2,15 @@
 
 tnbLib::stbGmakerLib::TankCreator_noShape::TankCreator_noShape
 (
+	const Standard_Integer theIndex
+)
+	: StbGMaker_TankCreator(theIndex)
+{
+	// empty body
+}
+
+tnbLib::stbGmakerLib::TankCreator_noShape::TankCreator_noShape
+(
 	const Standard_Integer theIndex,
 	const word & theName
 )

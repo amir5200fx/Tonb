@@ -33,26 +33,28 @@ namespace tnbLib
 			GeometricSailCreator_noShape()
 			{}
 
-			GeometricSailCreator_noShape
+			TnbStbGMaker_EXPORT GeometricSailCreator_noShape
 			(
 				const Standard_Integer theIndex, 
 				const word& theName
 			);
 
-			Standard_Integer
+			TnbStbGMaker_EXPORT Standard_Integer
 				CreateWorkingPlane
 				(
 					const Standard_Real x
 				) override;
 
-			stbGmakerLib::sailCreatotType Type() const override;
+			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatotType Type() const override;
 
-			void ExportAs
+			TnbStbGMaker_EXPORT void ExportAs
 			(
 				std::shared_ptr<Marine_Model>& theModel
 			) const override;
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::GeometricSailCreator_noShape);
 
 #endif // !_StbGMaker_GeometricSailCreator_noShape_Header

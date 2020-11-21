@@ -35,9 +35,9 @@ namespace tnbLib
 
 	public:
 
-		virtual Standard_Boolean IsArea() const;
+		TnbStbGMaker_EXPORT virtual Standard_Boolean IsArea() const;
 
-		virtual Standard_Boolean IsGeometric() const;
+		TnbStbGMaker_EXPORT virtual Standard_Boolean IsGeometric() const;
 
 		virtual stbGmakerLib::sailCreatotType Type() const = 0;
 	};

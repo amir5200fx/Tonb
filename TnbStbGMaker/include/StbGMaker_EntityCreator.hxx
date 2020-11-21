@@ -34,10 +34,12 @@ namespace tnbLib
 
 	public:
 
-		std::shared_ptr<Marine_Model> ExportModel() const;
+		TnbStbGMaker_EXPORT std::shared_ptr<Marine_Model> ExportModel() const;
 
 		virtual void ExportAs(std::shared_ptr<Marine_Model>& theModel) const = 0;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::StbGMaker_EntityCreator);
 
 #endif // !_StbGMaker_EntityCreator_Header

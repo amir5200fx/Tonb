@@ -5,8 +5,8 @@
 namespace tnbLib
 {
 
-	template<class SectionType>
-	std::vector<std::shared_ptr<Marine_CmpSection>> 
+	/*template<class SectionType>
+	std::vector<std::shared_ptr<Marine_CmpSection>>
 		StbGMaker_Tools::RetrieveSections
 		(
 			const std::vector<std::shared_ptr<StbGMaker_WP>>& theWps
@@ -15,7 +15,7 @@ namespace tnbLib
 		for (const auto& wp : theWps)
 		{
 			Debug_Null_Pointer(wp);
-			
+
 		}
-	}
+	}*/
 }

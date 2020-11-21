@@ -36,7 +36,7 @@ namespace tnbLib
 
 		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
 
-		void ImportWP
+		TnbStbGMaker_EXPORT void ImportWP
 		(
 			const Standard_Integer theIndex, 
 			const std::shared_ptr<StbGMaker_WP>&& theWP
@@ -47,13 +47,13 @@ namespace tnbLib
 		StbGMaker_Alg()
 		{}
 
-		std::shared_ptr<StbGMaker_WP> 
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_WP>
 			RemoveWP
 			(
 				const Standard_Integer theIndex
 			);
 
-		Standard_Integer 
+		TnbStbGMaker_EXPORT Standard_Integer
 			AddWP
 			(
 				const std::shared_ptr<StbGMaker_WP>&& theWp
@@ -65,7 +65,7 @@ namespace tnbLib
 			return theCounter_;
 		}
 
-		Standard_Integer
+		TnbStbGMaker_EXPORT Standard_Integer
 			CreateWpFromShape
 			(
 				const TopoDS_Shape& theShape,
@@ -84,25 +84,25 @@ namespace tnbLib
 			return theWorkingPlanes_;
 		}
 
-		std::shared_ptr<Entity3d_Chain>
+		TnbStbGMaker_EXPORT std::shared_ptr<Entity3d_Chain>
 			Mesh
 			(
 				const Standard_Integer theIndex
 			) const;
 
-		std::vector<std::shared_ptr<Entity3d_Chain>>
+		TnbStbGMaker_EXPORT std::vector<std::shared_ptr<Entity3d_Chain>>
 			Mesh() const;
 
-		std::shared_ptr<StbGMaker_WP> 
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_WP>
 			SelectWP
 			(
 				const Standard_Integer theIndex
 			) const;
 
-		std::vector<std::shared_ptr<StbGMaker_WP>> 
+		TnbStbGMaker_EXPORT std::vector<std::shared_ptr<StbGMaker_WP>>
 			RetrieveWPs() const;
 
-		virtual Standard_Integer
+		TnbStbGMaker_EXPORT virtual Standard_Integer
 			CreateWorkingPlane
 			(
 				const Standard_Real x
@@ -110,24 +110,24 @@ namespace tnbLib
 
 		//virtual const std::shared_ptr<StbGMaker_Volume>& Volume() const = 0;
 
-		void CreateWorkingPlanes
+		TnbStbGMaker_EXPORT void CreateWorkingPlanes
 		(
 			const Geo_xDistb& theX
 		);
 
-		void RetrieveWPsTo
+		TnbStbGMaker_EXPORT void RetrieveWPsTo
 		(
 			std::vector<std::shared_ptr<StbGMaker_WP>>& theWPs
 		) const;
 
 		//virtual void MakeBody() = 0;
 
-		static void SortWPs
+		static TnbStbGMaker_EXPORT void SortWPs
 		(
 			std::vector<std::shared_ptr<StbGMaker_WP>>& theWPs
 		);
 
-		static void CheckSort
+		static TnbStbGMaker_EXPORT void CheckSort
 		(
 			const std::vector<std::shared_ptr<StbGMaker_WP>>& theWPs,
 			const char* theFunName
