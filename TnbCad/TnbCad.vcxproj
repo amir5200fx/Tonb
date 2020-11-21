@@ -164,6 +164,11 @@
     <ClCompile Include="TnbLib\Cad\Tools\Cad_PreviewTools.cxx" />
     <ClCompile Include="TnbLib\Cad\Tools\Cad_Tools.cxx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{F14396E4-5995-4CC2-8101-42854CE5C625}</ProjectGuid>
@@ -204,9 +209,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
