@@ -18,7 +18,7 @@ namespace tnbLib
 
 		public:
 
-			explicit Velocity(const Standard_Real theValue);
+			TnbMarine_EXPORT explicit Velocity(const Standard_Real theValue);
 		};
 	}
 }

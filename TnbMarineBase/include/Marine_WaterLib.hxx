@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Marine_BodiesFwd.hxx>
+#include <Marine_Module.hxx>
 
 class Geom_Curve;
 class gp_Ax2;
@@ -32,20 +33,20 @@ namespace tnbLib
 
 	public:
 
-		static std::shared_ptr<Marine_Domain> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Domain> 
 			Domain
 			(
 				const marineLib::Body_Displacer& theBody
 			);
 
-		static std::shared_ptr<Marine_Domain> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Domain> 
 			Domain
 			(
 				const marineLib::Body_Tank& theBody
 			);
 
 		//- Throw an exception if the body is not a hull or a tank
-		/*static std::shared_ptr<Marine_Water> 
+		/*static TnbMarine_EXPORT std::shared_ptr<Marine_Water> 
 			StillWater
 			(
 				const Marine_Body& theBody,
@@ -54,7 +55,7 @@ namespace tnbLib
 			);*/
 
 		//- Throw an exception if the body is not a displacer or a tank
-		static std::shared_ptr<Marine_WaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_WaterDomain>
 			StillWaterDomain
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
@@ -62,7 +63,7 @@ namespace tnbLib
 				const Standard_Real theZ
 			);
 
-		static std::shared_ptr<Marine_WaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_WaterDomain>
 			StillWaterDomain
 			(
 				const marineLib::Body_Displacer& theBody,
@@ -70,7 +71,7 @@ namespace tnbLib
 				const Standard_Real theZ			
 			);
 
-		static std::shared_ptr<Marine_WaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_WaterDomain>
 			StillWaterDomain
 			(
 				const marineLib::Body_Tank& theBody,
@@ -78,7 +79,7 @@ namespace tnbLib
 				const Standard_Real theZ
 			);
 
-		static std::shared_ptr<Marine_MultLevWaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_MultLevWaterDomain>
 			MultiLevelsStillWaterDomain
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
@@ -86,7 +87,7 @@ namespace tnbLib
 				const Geo_xDistb& theZ
 			);
 
-		static std::shared_ptr<Marine_MultLevWaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_MultLevWaterDomain>
 			MultiLevelsStillWaterDomain
 			(
 				const marineLib::Body_Displacer& theBody,
@@ -94,7 +95,7 @@ namespace tnbLib
 				const Geo_xDistb& theZ
 			);
 
-		static std::shared_ptr<Marine_MultLevWaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_MultLevWaterDomain>
 			MultiLevelsStillWaterDomain
 			(
 				const marineLib::Body_Tank& theBody,
@@ -102,7 +103,7 @@ namespace tnbLib
 				const Geo_xDistb& theZ
 			);
 
-		static std::shared_ptr<Marine_WaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_WaterDomain>
 			WaterDomain
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
@@ -112,7 +113,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<Marine_WaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_WaterDomain>
 			WaterDomain
 			(
 				const marineLib::Body_Displacer& theBody,
@@ -122,7 +123,7 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<Marine_WaterDomain>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_WaterDomain>
 			WaterDomain
 			(
 				const marineLib::Body_Tank& theBody,
@@ -132,25 +133,25 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static const std::shared_ptr<Marine_CmpSection> &
+		static TnbMarine_EXPORT const std::shared_ptr<Marine_CmpSection> &
 			FUW
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static const std::shared_ptr<Marine_CmpSection> &
+		static TnbMarine_EXPORT const std::shared_ptr<Marine_CmpSection> &
 			AUW
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static const std::shared_ptr<Marine_CmpSection> & 
+		static TnbMarine_EXPORT const std::shared_ptr<Marine_CmpSection> & 
 			FWL
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-		static const std::shared_ptr<Marine_CmpSection> & 
+		static TnbMarine_EXPORT const std::shared_ptr<Marine_CmpSection> & 
 			AWL
 			(
 				const marineLib::Body_Wetted& theBody

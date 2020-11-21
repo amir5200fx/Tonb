@@ -15,14 +15,14 @@ namespace tnbLib
 
 	public:
 
-		Marine_GraphAxis_Y();
+		TnbMarine_EXPORT Marine_GraphAxis_Y();
 
-		Marine_GraphAxis_Y
+		TnbMarine_EXPORT explicit Marine_GraphAxis_Y
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_GraphAxis_Y
+		TnbMarine_EXPORT Marine_GraphAxis_Y
 		(
 			const Standard_Integer theIndex, 
 			const word& theName

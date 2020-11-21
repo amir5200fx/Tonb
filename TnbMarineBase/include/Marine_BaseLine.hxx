@@ -31,18 +31,18 @@ namespace tnbLib
 
 	public:
 
-		static const gp_Ax1 null;
+		static TnbMarine_EXPORT const gp_Ax1 null;
 
-		Marine_BaseLine();
+		TnbMarine_EXPORT Marine_BaseLine();
 
 		Marine_BaseLine(const gp_Ax1& theAx)
 			: Marine_Entity(0, "base line")
 			, theBaseLib_(theAx)
 		{}
 
-		Marine_BaseLine(const gp_Ax2& theSystem);
+		TnbMarine_EXPORT Marine_BaseLine(const gp_Ax2& theSystem);
 
-		Standard_Boolean IsNull() const;
+		TnbMarine_EXPORT Standard_Boolean IsNull() const;
 
 		const auto& BaseLine() const
 		{
@@ -55,5 +55,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_BaseLine);
 
 #endif // !_Marine_BaseLine_Header

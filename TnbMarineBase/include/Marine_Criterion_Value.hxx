@@ -3,6 +3,7 @@
 #define _Marine_Criterion_Value_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Marine_Module.hxx>
 
 namespace tnbLib
 {
@@ -19,7 +20,7 @@ namespace tnbLib
 
 		public:
 
-			Criterion_Value();
+			TnbMarine_EXPORT Criterion_Value();
 
 			Criterion_Value(const Standard_Real theValue)
 				: theValue_(theValue)

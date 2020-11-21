@@ -30,9 +30,6 @@ namespace tnbLib
 
 		/*private functions and operators*/
 
-		Marine_Section()
-		{}
-
 		auto& ChangeWire()
 		{
 			return theWire_;
@@ -41,40 +38,43 @@ namespace tnbLib
 		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
 		
 
-		static void CheckWire(const Pln_Wire& theWire, const char* theName);
+		static TnbMarine_EXPORT void CheckWire(const Pln_Wire& theWire, const char* theName);
 
 	protected:
 
-		Marine_Section
+		Marine_Section()
+		{}
+
+		TnbMarine_EXPORT explicit Marine_Section
 		(
 			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
-		Marine_Section
+		TnbMarine_EXPORT Marine_Section
 		(
 			std::shared_ptr<Pln_Wire>&& theWire
 		);
 
-		Marine_Section
+		TnbMarine_EXPORT Marine_Section
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
-		Marine_Section
+		TnbMarine_EXPORT Marine_Section
 		(
 			const Standard_Integer theIndex,
 			std::shared_ptr<Pln_Wire>&& theWire
 		);
 
-		Marine_Section
+		TnbMarine_EXPORT Marine_Section
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<Pln_Wire>& theWire
 		);
 
-		Marine_Section
+		TnbMarine_EXPORT Marine_Section
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -83,16 +83,16 @@ namespace tnbLib
 
 	public:
 
-		Entity2d_Box BoundingBox() const;
+		TnbMarine_EXPORT Entity2d_Box BoundingBox() const;
 
 		const auto& Wire() const
 		{
 			return theWire_;
 		}
 
-		void Transform(const gp_Trsf2d& t);
+		TnbMarine_EXPORT void Transform(const gp_Trsf2d& t);
 
-		void ExportToPlt(OFstream& File) const;
+		TnbMarine_EXPORT void ExportToPlt(OFstream& File) const;
 
 		virtual Standard_Boolean IsWaterSection() const
 		{
@@ -120,7 +120,7 @@ namespace tnbLib
 
 		//- static functions
 
-		static Standard_Real 
+		static TnbMarine_EXPORT Standard_Real
 			GetXcoord
 			(
 				const std::shared_ptr<Marine_Section>& theSection
@@ -129,5 +129,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_Section);
 
 #endif // !_Marine_Section_Header

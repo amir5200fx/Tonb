@@ -36,4 +36,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_AreaSailModel);
+
 #endif // !_Marine_AreaSailModel_Header

@@ -18,7 +18,7 @@ namespace tnbLib
 
 		public:
 
-			Density(const word& theName, const Standard_Real theValue);
+			TnbMarine_EXPORT Density(const word& theName, const Standard_Real theValue);
 
 		public:
 

@@ -3,6 +3,7 @@
 #define _Marine_Criterion_Epln_Header
 
 #include <word.hxx>
+#include <Marine_Module.hxx>
 
 namespace tnbLib
 {
@@ -19,7 +20,7 @@ namespace tnbLib
 
 		public:
 
-			Criterion_Epln();
+			TnbMarine_EXPORT Criterion_Epln();
 
 			Criterion_Epln(const word& theValue)
 				: theValue_(theValue)

@@ -37,20 +37,20 @@ namespace tnbLib
 
 		public:
 
-			Model_ConstAreaSail
+			TnbMarine_EXPORT Model_ConstAreaSail
 			(
 				const Standard_Real theArea, 
 				const Standard_Real theZbar
 			);
 
-			Model_ConstAreaSail
+			TnbMarine_EXPORT Model_ConstAreaSail
 			(
 				const Standard_Integer theIndex,
 				const Standard_Real theArea, 
 				const Standard_Real theZbar
 			);
 
-			Model_ConstAreaSail
+			TnbMarine_EXPORT Model_ConstAreaSail
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
@@ -76,5 +76,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_ConstAreaSail);
 
 #endif // !_Marine_Model_ConstAreaSail_Header

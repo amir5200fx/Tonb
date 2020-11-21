@@ -24,38 +24,54 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Marine_CmpSection>(*this);
 		}
 
-		void SetSystem();
+		TnbMarine_EXPORT void SetSystem();
 
 	public:
 
-		/*Marine_xCmpSection();
+		// - default constructor
 
-		Marine_xCmpSection
+		TnbMarine_EXPORT Marine_xCmpSection();
+
+
+		//- constructors
+
+		TnbMarine_EXPORT explicit Marine_xCmpSection
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_xCmpSection
+		TnbMarine_EXPORT Marine_xCmpSection
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
-		);*/
+		);
 
-		template<class... _Types>
-		Marine_xCmpSection(_Types&&... _Args)
-			: Marine_CmpSection(_Args...)
-		{
-			SetSystem();
-		}
+		TnbMarine_EXPORT explicit Marine_xCmpSection
+		(
+			const std::shared_ptr<Marine_Section>& theSection
+		);
+
+		TnbMarine_EXPORT Marine_xCmpSection
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Marine_Section>& theSection
+		);
+
+		TnbMarine_EXPORT Marine_xCmpSection
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Marine_Section>& theSection
+		);
 
 		Standard_Boolean IsXsection() const override
 		{
 			return Standard_True;
 		}
 
-		Standard_Real X() const override;
+		TnbMarine_EXPORT Standard_Real X() const override;
 
-		std::shared_ptr<Marine_CmpSection> Copy() const override;
+		TnbMarine_EXPORT std::shared_ptr<Marine_CmpSection> Copy() const override;
 
 		/*static std::shared_ptr<Marine_CmpSection>
 			CreateCmpSection
@@ -87,5 +103,7 @@ namespace tnbLib
 		
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_xCmpSection);
 
 #endif // !_Marine_xCmpSection_Header

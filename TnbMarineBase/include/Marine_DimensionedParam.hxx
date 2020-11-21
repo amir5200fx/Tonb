@@ -6,6 +6,7 @@
 #include <Global_Named.hxx>
 #include <dimensionSet.hxx>
 #include <Vec3d.hxx>
+#include <Marine_Module.hxx>
 
 namespace tnbLib
 {

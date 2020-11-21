@@ -23,7 +23,7 @@ namespace tnbLib
 		Handle(Geom2d_Curve) theCurve_;
 
 
-		static void 
+		static TnbMarine_EXPORT void
 			CheckCurve
 			(
 				const Handle(Geom2d_Curve)& theCurve,
@@ -32,18 +32,18 @@ namespace tnbLib
 
 	public:
 
-		Marine_GraphCurve
+		TnbMarine_EXPORT explicit Marine_GraphCurve
 		(
 			const Handle(Geom2d_Curve) theCurve
 		);
 
-		Marine_GraphCurve
+		TnbMarine_EXPORT Marine_GraphCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		Marine_GraphCurve
+		TnbMarine_EXPORT Marine_GraphCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

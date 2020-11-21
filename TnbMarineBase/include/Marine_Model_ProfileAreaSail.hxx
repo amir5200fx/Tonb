@@ -34,19 +34,19 @@ namespace tnbLib
 
 		public:
 
-			Model_ProfileAreaSail
+			TnbMarine_EXPORT Model_ProfileAreaSail
 			(
 				const std::shared_ptr<Geo_ProfileFun>& theArea, 
 				const std::shared_ptr<Geo_ProfileFun>& theZbar
 			);
 
-			Model_ProfileAreaSail
+			TnbMarine_EXPORT Model_ProfileAreaSail
 			(
 				std::shared_ptr<Geo_ProfileFun>&& theArea,
 				std::shared_ptr<Geo_ProfileFun>&& theZbar
 			);
 
-			Model_ProfileAreaSail
+			TnbMarine_EXPORT Model_ProfileAreaSail
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
@@ -54,7 +54,7 @@ namespace tnbLib
 				const std::shared_ptr<Geo_ProfileFun>& theZbar
 			);
 
-			Model_ProfileAreaSail
+			TnbMarine_EXPORT Model_ProfileAreaSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
@@ -79,5 +79,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_ProfileAreaSail);
 
 #endif // !_Marine_Model_ProfileAreaSail_Header

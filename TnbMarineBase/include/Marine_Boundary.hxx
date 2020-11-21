@@ -5,6 +5,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 #include <map>
@@ -34,14 +35,14 @@ namespace tnbLib
 
 	protected:
 
-		Marine_Boundary();
+		TnbMarine_EXPORT Marine_Boundary();
 
-		Marine_Boundary
+		TnbMarine_EXPORT Marine_Boundary
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_Boundary
+		TnbMarine_EXPORT Marine_Boundary
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
@@ -52,25 +53,25 @@ namespace tnbLib
 		virtual ~Marine_Boundary()
 		{}
 
-		Standard_Integer NbBlocks() const;
+		TnbMarine_EXPORT Standard_Integer NbBlocks() const;
 
 		const auto& SurfaceBlocks() const
 		{
 			return theSurfaces_;
 		}
 
-		std::vector<std::shared_ptr<surfBlock>>
+		TnbMarine_EXPORT std::vector<std::shared_ptr<surfBlock>>
 			RetrieveBlocks() const;
 
-		void ImportBlock
+		TnbMarine_EXPORT void ImportBlock
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<surfBlock>& theBlock
 		);
 
-		void RemoveBlock(const Standard_Integer theIndex);
+		TnbMarine_EXPORT void RemoveBlock(const Standard_Integer theIndex);
 
-		void RetrieveBlocksTo
+		TnbMarine_EXPORT void RetrieveBlocksTo
 		(
 			std::vector<std::shared_ptr<surfBlock>>& theBlocks
 		) const;

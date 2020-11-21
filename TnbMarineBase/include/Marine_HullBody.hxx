@@ -38,7 +38,7 @@ namespace tnbLib
 			return Standard_True;
 		}
 
-		Standard_Boolean IsLaunched() const;
+		TnbMarine_EXPORT Standard_Boolean IsLaunched() const;
 
 		virtual Standard_Boolean IsWetted() const
 		{
@@ -56,5 +56,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_HullBody);
 
 #endif // !_Marine_HullBody_Header

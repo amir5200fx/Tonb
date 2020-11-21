@@ -2,6 +2,8 @@
 #ifndef _Marine_DisctTools_Header
 #define _Marine_DisctTools_Header
 
+#include <Marine_Module.hxx>
+
 #include <memory>
 #include <vector>
 
@@ -21,14 +23,14 @@ namespace tnbLib
 
 	public:
 
-		static TopoDS_Shape
+		static TnbMarine_EXPORT TopoDS_Shape
 			Section
 			(
 				const TopoDS_Shape& theShape,
 				const gp_Ax2& theSys
 			);
 
-		static std::vector<std::shared_ptr<Marine_CmpSection>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_CmpSection>>
 			WettedSections
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,

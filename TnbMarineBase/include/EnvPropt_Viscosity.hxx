@@ -18,7 +18,7 @@ namespace tnbLib
 
 		protected:
 
-			Viscosity
+			TnbMarine_EXPORT Viscosity
 			(
 				const word& theName,
 				const Standard_Real theValue

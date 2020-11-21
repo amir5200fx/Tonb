@@ -26,20 +26,25 @@ namespace tnbLib
 
 	protected:
 
-		Marine_HullCurve();
+		//- default constructor
 
-		Marine_HullCurve
+		TnbMarine_EXPORT Marine_HullCurve();
+
+
+		//- constructors
+
+		TnbMarine_EXPORT Marine_HullCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_HullCurve
+		TnbMarine_EXPORT explicit Marine_HullCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_HullCurve
+		TnbMarine_EXPORT Marine_HullCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -64,5 +69,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_HullCurve);
 
 #endif // !_Marine_HullCurve_Header

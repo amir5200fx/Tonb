@@ -32,12 +32,18 @@ namespace tnbLib
 			return theDomains_;
 		}
 
-		void SetDomains(const std::vector<std::shared_ptr<Marine_WaterDomain>>&& theDomains)
+		void SetDomains
+		(
+			const std::vector<std::shared_ptr<Marine_WaterDomain>>&& theDomains
+		)
 		{
 			theDomains_ = std::move(theDomains);
 		}
 
-		void SetDomains(const std::vector<std::shared_ptr<Marine_WaterDomain>>& theDomains)
+		void SetDomains
+		(
+			const std::vector<std::shared_ptr<Marine_WaterDomain>>& theDomains
+		)
 		{
 			theDomains_ = theDomains;
 		}
@@ -55,5 +61,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_MultLevWaterDomain);
 
 #endif // !_Marine_MultLevWaterDomain_Header

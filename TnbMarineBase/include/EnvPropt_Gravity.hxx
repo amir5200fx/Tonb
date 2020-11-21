@@ -18,9 +18,9 @@ namespace tnbLib
 
 		public:
 
-			Gravity();
+			TnbMarine_EXPORT Gravity();
 
-			explicit Gravity(const Vec3d& theValue);
+			TnbMarine_EXPORT explicit Gravity(const Vec3d& theValue);
 		};
 	}
 }

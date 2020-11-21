@@ -51,4 +51,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_Model);
+
 #endif // !_Marine_Model_Header

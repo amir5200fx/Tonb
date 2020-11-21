@@ -34,33 +34,33 @@ namespace tnbLib
 
 		public:
 
-			Model_LateralPlnSail
+			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const std::shared_ptr<Cad2d_Plane>& thePlane,
 				Standard_Real theZbar
 			);
 
-			Model_LateralPlnSail
+			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				std::shared_ptr<Cad2d_Plane>&& thePlane,
 				Standard_Real theZbar
 			);
 
-			Model_LateralPlnSail
+			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Cad2d_Plane>& thePlane,
 				Standard_Real theZbar
 			);
 
-			Model_LateralPlnSail
+			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const Standard_Integer theIndex,
 				std::shared_ptr<Cad2d_Plane>&& thePlane,
 				Standard_Real theZbar
 			);
 
-			Model_LateralPlnSail
+			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -68,7 +68,7 @@ namespace tnbLib
 				Standard_Real theZbar
 			);
 
-			Model_LateralPlnSail
+			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
@@ -99,5 +99,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_LateralPlnSail);
 
 #endif // !_Marine_Model_LateralPlnSail_Header

@@ -220,9 +220,6 @@
     <Filter Include="TnbLib\MarineBase\Launch">
       <UniqueIdentifier>{616e4d6c-4c86-467e-9476-dab3f9b97db4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Entities\Curve">
-      <UniqueIdentifier>{41bef568-a3af-40b7-890f-14088b22275f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\Body">
       <UniqueIdentifier>{4db732a8-e70e-4f72-8421-cfc9dbab700e}</UniqueIdentifier>
     </Filter>
@@ -387,9 +384,6 @@
     </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\WireFrame">
       <UniqueIdentifier>{5cbb4036-e19b-4ea4-9f33-7e90bc238c1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Entities\Dim">
-      <UniqueIdentifier>{97ca07b6-6e05-42cb-9cd6-26afdf84101c}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\MarineBase\Parameter\BM">
       <UniqueIdentifier>{716d387a-13fc-464b-a24e-0b55073f0db0}</UniqueIdentifier>

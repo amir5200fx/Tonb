@@ -3,6 +3,7 @@
 #define _Marine_Launch_Header
 
 #include <Global_Done.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 
@@ -22,10 +23,10 @@ namespace tnbLib
 
 	protected:
 
-		Marine_Launch();
+		TnbMarine_EXPORT Marine_Launch();
 
 
-		void CreateWater(const Standard_Real z);
+		TnbMarine_EXPORT void CreateWater(const Standard_Real z);
 
 	public:
 

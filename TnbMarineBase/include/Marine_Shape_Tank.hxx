@@ -27,12 +27,34 @@ namespace tnbLib
 				ar & boost::serialization::base_object<Marine_Shape>(*this);
 			}
 
+		protected:
+
+
+			Shape_Tank()
+			{}
+
 		public:
 
-			template<class... _Types>
-			Shape_Tank(_Types&&... _Args)
-				: Marine_Shape(_Args...)
-			{}
+			//- constructors
+
+
+			TnbMarine_EXPORT explicit Shape_Tank(const TopoDS_Shape& theShape);
+
+			TnbMarine_EXPORT Shape_Tank
+			(
+				const Standard_Integer theIndex,
+				const TopoDS_Shape& theShape
+			);
+
+			TnbMarine_EXPORT Shape_Tank
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const TopoDS_Shape& theShape
+			);
+
+
+			//- public functions and operators
 
 			Marine_ShapeType Type() const override
 			{
@@ -46,5 +68,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Shape_Tank);
 
 #endif // !_Marine_Shape_Tank_Header

@@ -27,7 +27,7 @@ namespace tnbLib
 
 	protected:
 
-		Marine_Distrb();
+		TnbMarine_EXPORT Marine_Distrb();
 
 		auto& ChangeX()
 		{

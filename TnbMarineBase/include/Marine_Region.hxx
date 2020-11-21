@@ -4,6 +4,7 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 #include <map>
@@ -33,14 +34,14 @@ namespace tnbLib
 
 	protected:
 
-		Marine_Region();
+		TnbMarine_EXPORT Marine_Region();
 
-		Marine_Region
+		TnbMarine_EXPORT Marine_Region
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_Region
+		TnbMarine_EXPORT Marine_Region
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
@@ -51,7 +52,7 @@ namespace tnbLib
 		virtual ~Marine_Region()
 		{}
 
-		Standard_Integer NbBoundaries() const;
+		TnbMarine_EXPORT Standard_Integer NbBoundaries() const;
 
 		const auto& Boundaries() const
 		{
@@ -68,21 +69,21 @@ namespace tnbLib
 			return thePhysics_;
 		}
 
-		std::vector<std::shared_ptr<Marine_Boundary>>
+		TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Boundary>>
 			RetrieveBoundaries() const;
 
-		void ImportToBoundaries
+		TnbMarine_EXPORT void ImportToBoundaries
 		(
 			const Standard_Integer theIndex, 
 			const std::shared_ptr<Marine_Boundary>& theBoundary
 		);
 
-		void RemoveFromBoundaries
+		TnbMarine_EXPORT void RemoveFromBoundaries
 		(
 			const Standard_Integer theIndex
 		);
 
-		void RetrieveBoundariesTo
+		TnbMarine_EXPORT void RetrieveBoundariesTo
 		(
 			std::vector<std::shared_ptr<Marine_Boundary>>& theBoudaries
 		) const;

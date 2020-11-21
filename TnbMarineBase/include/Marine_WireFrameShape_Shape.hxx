@@ -36,11 +36,22 @@ namespace tnbLib
 
 		public:
 
-			template<class... _Types>
-			WireFrameShape_Shape(_Types&&... _Args)
-				: Marine_WireFrameShape(_Args...)
+
+			//- constructors
+
+			WireFrameShape_Shape()
 			{}
 
+			TnbMarine_EXPORT explicit WireFrameShape_Shape(const Standard_Integer theIndex);
+
+			TnbMarine_EXPORT WireFrameShape_Shape
+			(
+				const Standard_Integer theIndex,
+				const word& theName
+			);
+
+
+			//- public functions and operators
 
 			const auto& Shape() const
 			{
@@ -54,5 +65,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::WireFrameShape_Shape);
 
 #endif // !_Marine_WireFrameShape_Shape_Header

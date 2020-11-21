@@ -29,36 +29,36 @@ namespace tnbLib
 
 		public:
 
-			Model_SurfaceSail
+			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const TopoDS_Face& theFace
 			);
 
-			Model_SurfaceSail
+			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				TopoDS_Face&& theFace
 			);
 
-			Model_SurfaceSail
+			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const Standard_Integer theIndex,
 				const TopoDS_Face& theFace
 			);
 
-			Model_SurfaceSail
+			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const Standard_Integer theIndex,
 				TopoDS_Face&& theFace
 			);
 
-			Model_SurfaceSail
+			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
 				const TopoDS_Face& theFace
 			);
 
-			Model_SurfaceSail
+			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
@@ -77,5 +77,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_SurfaceSail);
 
 #endif // !_Marine_Model_SurfaceSail_Header

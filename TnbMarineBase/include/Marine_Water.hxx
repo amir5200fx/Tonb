@@ -33,24 +33,24 @@ namespace tnbLib
 
 	public:
 
-		Marine_Water
+		TnbMarine_EXPORT Marine_Water
 		(
 			const std::vector<std::shared_ptr<marineLib::Section_Water>>& theSections
 		);
 
-		Marine_Water
+		TnbMarine_EXPORT Marine_Water
 		(
 			std::vector<std::shared_ptr<marineLib::Section_Water>>&& theSections
 		);
 
-		Marine_Water
+		TnbMarine_EXPORT Marine_Water
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
 			const std::vector<std::shared_ptr<marineLib::Section_Water>>& theSections
 		);
 
-		Marine_Water
+		TnbMarine_EXPORT Marine_Water
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
@@ -69,5 +69,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_Water);
 
 #endif // !_Marine_Water_Header

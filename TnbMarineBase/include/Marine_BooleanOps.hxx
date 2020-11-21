@@ -4,6 +4,7 @@
 
 #include <Marine_CmpSectionType.hxx>
 #include <Marine_SectionsFwd.hxx>
+#include <Marine_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -23,91 +24,91 @@ namespace tnbLib
 
 	public:
 
-		static std::shared_ptr<Marine_Section> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Section> 
 			Union
 			(
 				const std::shared_ptr<Marine_Section>& theSect0, 
 				const std::shared_ptr<Marine_Section>& theSect1
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>> 
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>> 
 			Subtract
 			(
 				const std::shared_ptr<Marine_Section>& theSect0, 
 				const std::shared_ptr<Marine_Section>& theSect1
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>> 
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>> 
 			Intersection
 			(
 				const std::shared_ptr<Marine_Section>& theSect0,
 				const std::shared_ptr<Marine_Section>& theSect1
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			WettedSection
 			(
 				const std::shared_ptr<Pln_Wire>& theSection,
 				const std::shared_ptr<Pln_Wire>& theWater
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			WettedSection
 			(
 				const std::shared_ptr<marineLib::Section_Displacer>& theSection,
 				const std::shared_ptr<Marine_Section>& theWater
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			WettedSection
 			(
 				const std::shared_ptr<marineLib::Section_Tank>& theSection,
 				const std::shared_ptr<Marine_Section>& theWater
 			);
 
-		static std::shared_ptr<Marine_CmpSection>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_CmpSection>
 			WettedSection
 			(
 				const std::shared_ptr<Marine_CmpSection>& theSection,
 				const std::shared_ptr<Marine_Section>& theWater
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			DrySection
 			(
 				const std::shared_ptr<Pln_Wire>& theSection,
 				const std::shared_ptr<Pln_Wire>& theWater
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			DrySection
 			(
 				const std::shared_ptr<marineLib::Section_Displacer>& theSection,
 				const std::shared_ptr<Marine_Section>& theWater
 			);
 
-		static std::vector<std::shared_ptr<Marine_Section>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			DrySection
 			(
 				const std::shared_ptr<marineLib::Section_Tank>& theSection,
 				const std::shared_ptr<Marine_Section>& theWater
 			);
 
-		static std::shared_ptr<Marine_CmpSection>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_CmpSection>
 			DrySection
 			(
 				const std::shared_ptr<Marine_CmpSection>& theSection,
 				const std::shared_ptr<Marine_Section>& theWater
 			);
 
-		static std::vector<std::shared_ptr<Marine_CmpSection>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_CmpSection>>
 			WettedSections
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,
 				const std::vector<std::shared_ptr<Marine_Section>>& theWaterSections
 			);
 
-		static std::vector<std::shared_ptr<Marine_CmpSection>>
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_CmpSection>>
 			DrySections
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theModel,

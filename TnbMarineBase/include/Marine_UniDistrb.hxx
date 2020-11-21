@@ -23,7 +23,7 @@ namespace tnbLib
 		Marine_UniDistrb()
 		{}
 
-		Marine_UniDistrb
+		TnbMarine_EXPORT Marine_UniDistrb
 		(
 			const Standard_Real x0,
 			const Standard_Real x1, 
@@ -35,7 +35,7 @@ namespace tnbLib
 			return theSize_;
 		}
 
-		void Perform();
+		TnbMarine_EXPORT void Perform();
 
 		void SetSize
 		(
@@ -46,28 +46,28 @@ namespace tnbLib
 		}
 
 
-		static std::shared_ptr<Marine_Distrb> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Distrb> 
 			xDistb
 			(
 				const Entity3d_Box& theDomain,
 				const Standard_Integer theSize
 			);
 
-		static std::shared_ptr<Marine_Distrb> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Distrb> 
 			zDistb
 			(
 				const Entity3d_Box& theDomain,
 				const Standard_Integer theSize
 			);
 
-		static std::shared_ptr<Marine_Distrb> 
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Distrb> 
 			xOneStepForwardDistb
 			(
 				const Entity3d_Box& theDomain,
 				const Standard_Integer theSize
 			);
 
-		static std::shared_ptr<Marine_Distrb>
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Distrb>
 			zOneStepForwardDistb
 			(
 				const Entity3d_Box& theDomain,

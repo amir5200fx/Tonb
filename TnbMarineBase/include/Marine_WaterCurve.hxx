@@ -26,20 +26,20 @@ namespace tnbLib
 
 	public:
 
-		Marine_WaterCurve();
+		TnbMarine_EXPORT Marine_WaterCurve();
 
-		Marine_WaterCurve
+		TnbMarine_EXPORT Marine_WaterCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_WaterCurve
+		TnbMarine_EXPORT explicit Marine_WaterCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		Marine_WaterCurve
+		TnbMarine_EXPORT Marine_WaterCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -52,23 +52,23 @@ namespace tnbLib
 			return Standard_True;
 		}
 
-		std::shared_ptr<Pln_Curve>
+		TnbMarine_EXPORT std::shared_ptr<Pln_Curve>
 			Copy() const override;
 
-		std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
+		TnbMarine_EXPORT std::tuple<std::shared_ptr<Pln_Curve>, std::shared_ptr<Pln_Curve>>
 			Split
 			(
 				const Standard_Real x
 			) const override;
 
-		void Split
+		TnbMarine_EXPORT void Split
 		(
 			const Standard_Real x,
 			std::shared_ptr<Pln_Curve>& theLeft,
 			std::shared_ptr<Pln_Curve>& theRight
 		) const override;
 
-		void Split
+		TnbMarine_EXPORT void Split
 		(
 			const Standard_Real x,
 			Pnt2d& theCoord,
@@ -76,7 +76,7 @@ namespace tnbLib
 			std::shared_ptr<Pln_Curve>& theRight
 		) const override;
 
-		std::tuple
+		TnbMarine_EXPORT std::tuple
 			<
 			std::shared_ptr<Pln_Curve>,
 			std::shared_ptr<Pln_Curve>,
@@ -89,5 +89,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_WaterCurve);
 
 #endif // !_Marine_WaterCurve_Header

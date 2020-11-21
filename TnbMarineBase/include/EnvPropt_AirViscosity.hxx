@@ -18,9 +18,9 @@ namespace tnbLib
 
 		public:
 
-			AirViscosity();
+			TnbMarine_EXPORT AirViscosity();
 
-			explicit AirViscosity(const Standard_Real theValue);
+			TnbMarine_EXPORT explicit AirViscosity(const Standard_Real theValue);
 		};
 	}
 }

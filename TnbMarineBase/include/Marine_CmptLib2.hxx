@@ -4,6 +4,7 @@
 
 #include <Marine_SectionsFwd.hxx>
 #include <Marine_xSectionParam.hxx>
+#include <Marine_Module.hxx>
 
 #include <vector>
 #include <memory>
@@ -23,7 +24,7 @@ namespace tnbLib
 
 	public:
 
-		static marineLib::xSectionParam
+		static TnbMarine_EXPORT marineLib::xSectionParam
 			LeverArm
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
@@ -31,7 +32,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static Standard_Real
+		static TnbMarine_EXPORT Standard_Real
 			LeverArm
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
@@ -40,7 +41,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
-		static std::vector<marineLib::xSectionParam>
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam>
 			CrossCurve
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,

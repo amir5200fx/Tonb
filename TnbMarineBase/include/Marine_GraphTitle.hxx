@@ -15,9 +15,9 @@ namespace tnbLib
 
 	public:
 
-		Marine_GraphTitle();
+		TnbMarine_EXPORT Marine_GraphTitle();
 
-		Marine_GraphTitle(const word& theName);
+		TnbMarine_EXPORT explicit Marine_GraphTitle(const word& theName);
 	};
 }
 
