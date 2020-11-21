@@ -252,6 +252,12 @@ namespace tnbLib
 			p1.Z() += dz;
 		}
 
+		std::pair<Standard_Real, Standard_Real>
+			Bound(const Standard_Integer theIndex) const
+		{
+			return std::make_pair(P0().Coord(theIndex + 1), P1().Coord(theIndex + 1));
+		}
+
 		void Transform
 		(
 			const typename transform_point_type<Point>::type& theTrasf
