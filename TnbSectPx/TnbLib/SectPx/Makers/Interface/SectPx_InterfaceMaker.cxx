@@ -30,6 +30,19 @@ tnbLib::maker::Interface::SelectInterface
 	return std::move(ptr);
 }
 
+std::shared_ptr<tnbLib::SectPx_Interface> 
+tnbLib::maker::Interface::RemoveInterface
+(
+	const Standard_Integer theIndex
+) const
+{
+	Debug_Null_Pointer(Registry());
+
+	auto item = SelectInterface(theIndex);
+	Registry()->Remove(item);
+	return std::move(item);
+}
+
 Standard_Integer 
 tnbLib::maker::Interface::CreateEmpty
 (
