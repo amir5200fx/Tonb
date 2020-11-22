@@ -280,9 +280,6 @@
     <Filter Include="TnbLib\SectPx\Entities\Controller">
       <UniqueIdentifier>{78f85f73-7a68-4b91-9605-82b7a5fdfcac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\SectPx\Entities\CptsMap">
-      <UniqueIdentifier>{e429b6fa-14f1-408e-a47e-f318b3ca4189}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\SectPx\Entities\Extruder">
       <UniqueIdentifier>{56f8519d-840d-4009-84fb-afc634274ef5}</UniqueIdentifier>
     </Filter>
@@ -378,6 +375,18 @@
     </Filter>
     <Filter Include="TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg3">
       <UniqueIdentifier>{cb97f916-6088-4565-b3ab-3e3af6dd1226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Shape">
+      <UniqueIdentifier>{0483c70d-f3ba-4217-b073-62d3f4b9814a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Join">
+      <UniqueIdentifier>{d570b1e7-4c63-4067-a457-05128d792b63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Join\Priority">
+      <UniqueIdentifier>{afccf84b-035f-4d80-bfc9-67fa5cb3afac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FrameTunner">
+      <UniqueIdentifier>{bf1ec381-c7bf-4a56-bcd4-141a019bca77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -830,6 +839,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\CptsMap\OnePar\Single\SectPx_OneParCPtsMap_Single.hxx">
       <Filter>TnbLib\SectPx\CptsMap\OnePar\Single</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Shape\SectPx_ShapeMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Join\SectPx_Join.hxx">
+      <Filter>TnbLib\SectPx\Join</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Join\Priority\SectPx_JoinPriority.hxx">
+      <Filter>TnbLib\SectPx\Join\Priority</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FrameTunner\SectPx_FrameTunner.hxx">
+      <Filter>TnbLib\SectPx\FrameTunner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1360,6 +1381,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\CptsMap\OnePar\Single\SectPx_OneParCPtsMap_SingleIO.cxx">
       <Filter>TnbLib\SectPx\CptsMap\OnePar\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Shape\SectPx_ShapeMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Join\SectPx_Join.cxx">
+      <Filter>TnbLib\SectPx\Join</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FrameTunner\SectPx_FrameTunner.cxx">
+      <Filter>TnbLib\SectPx\FrameTunner</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
