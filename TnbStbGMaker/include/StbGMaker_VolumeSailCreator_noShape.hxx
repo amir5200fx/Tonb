@@ -2,7 +2,7 @@
 #ifndef _StbGMaker_GeometricSailCreator_noShape_Header
 #define _StbGMaker_GeometricSailCreator_noShape_Header
 
-#include <StbGMaker_GeometricSailCreator.hxx>
+#include <StbGMaker_VolumeSailCreator.hxx>
 #include <StbGMaker_Alg.hxx>
 #include <Marine_ShapesFwd.hxx>
 
@@ -12,9 +12,8 @@ namespace tnbLib
 	namespace stbGmakerLib
 	{
 
-		class GeometricSailCreator_noShape
-			: public StbGMaker_GeometricSailCreator
-			, public StbGMaker_Alg
+		class VolumeSailCreator_noShape
+			: public StbGMaker_VolumeSailCreator
 		{
 
 			/*Private Data*/
@@ -24,16 +23,16 @@ namespace tnbLib
 			template<class Archive>
 			void serialize(Archive& ar, const unsigned int version)
 			{
-				ar & boost::serialization::base_object<StbGMaker_GeometricSailCreator>(*this);
+				ar & boost::serialization::base_object<StbGMaker_VolumeSailCreator>(*this);
 				ar & boost::serialization::base_object<StbGMaker_Alg>(*this);
 			}
 
 		public:
 
-			GeometricSailCreator_noShape()
+			VolumeSailCreator_noShape()
 			{}
 
-			TnbStbGMaker_EXPORT GeometricSailCreator_noShape
+			TnbStbGMaker_EXPORT VolumeSailCreator_noShape
 			(
 				const Standard_Integer theIndex, 
 				const word& theName
@@ -45,7 +44,7 @@ namespace tnbLib
 					const Standard_Real x
 				) override;
 
-			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatotType Type() const override;
+			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatorType Type() const override;
 
 			TnbStbGMaker_EXPORT void ExportAs
 			(
@@ -55,6 +54,6 @@ namespace tnbLib
 	}
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::GeometricSailCreator_noShape);
+BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::VolumeSailCreator_noShape);
 
 #endif // !_StbGMaker_GeometricSailCreator_noShape_Header

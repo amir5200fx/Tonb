@@ -1,8 +1,8 @@
 #pragma once
-#ifndef _StbGMaker_GeometricSailCreator_Shape_Header
-#define _StbGMaker_GeometricSailCreator_Shape_Header
+#ifndef _StbGMaker_VolumeSailCreator_Shape_Header
+#define _StbGMaker_VolumeSailCreator_Shape_Header
 
-#include <StbGMaker_GeometricSailCreator.hxx>
+#include <StbGMaker_VolumeSailCreator.hxx>
 #include <StbGMaker_Alg.hxx>
 #include <Marine_ShapesFwd.hxx>
 
@@ -12,9 +12,8 @@ namespace tnbLib
 	namespace stbGmakerLib
 	{
 
-		class GeometricSailCreator_Shape
-			: public StbGMaker_GeometricSailCreator
-			, public StbGMaker_Alg
+		class VolumeSailCreator_Shape
+			: public StbGMaker_VolumeSailCreator
 		{
 
 			/*Private Data*/
@@ -24,42 +23,42 @@ namespace tnbLib
 
 			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
 
-			GeometricSailCreator_Shape()
+			VolumeSailCreator_Shape()
 			{}
 
 		public:
 
 
-			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT VolumeSailCreator_Shape
 			(
 				const std::shared_ptr<marineLib::Shape_Sail>& theShape
 			);
 
-			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT VolumeSailCreator_Shape
 			(
 				std::shared_ptr<marineLib::Shape_Sail>&& theShape
 			);
 
-			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT VolumeSailCreator_Shape
 			(
 				const Standard_Integer theIndex, 
 				const std::shared_ptr<marineLib::Shape_Sail>& theShape
 			);
 
-			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT VolumeSailCreator_Shape
 			(
 				const Standard_Integer theIndex, 
 				std::shared_ptr<marineLib::Shape_Sail>&& theShape
 			);
 
-			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT VolumeSailCreator_Shape
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
 				const std::shared_ptr<marineLib::Shape_Sail>& theShape
 			);
 
-			TnbStbGMaker_EXPORT GeometricSailCreator_Shape
+			TnbStbGMaker_EXPORT VolumeSailCreator_Shape
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -78,7 +77,7 @@ namespace tnbLib
 					const Standard_Real x
 				) override;
 
-			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatotType Type() const override;
+			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatorType Type() const override;
 
 			TnbStbGMaker_EXPORT void ExportAs
 			(
@@ -88,6 +87,6 @@ namespace tnbLib
 	}
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::GeometricSailCreator_Shape);
+BOOST_CLASS_EXPORT_KEY(tnbLib::stbGmakerLib::VolumeSailCreator_Shape);
 
-#endif // !_StbGMaker_GeometricSailCreator_Shape_Header
+#endif // !_StbGMaker_VolumeSailCreator_Shape_Header

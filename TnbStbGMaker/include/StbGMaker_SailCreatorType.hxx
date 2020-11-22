@@ -16,7 +16,7 @@ namespace tnbLib
 
 	namespace stbGmakerLib
 	{
-		typedef StbGMaker_SailCreatorType sailCreatotType;
+		typedef StbGMaker_SailCreatorType sailCreatorType;
 	}
 }
 

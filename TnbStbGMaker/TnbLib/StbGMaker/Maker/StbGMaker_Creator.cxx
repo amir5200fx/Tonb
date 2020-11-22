@@ -160,7 +160,7 @@ tnbLib::StbGMaker_Creator::CreateTankMaker
 Standard_Integer
 tnbLib::StbGMaker_Creator::CreateShapeGeomSailMaker()
 {
-	auto sail = std::make_shared<stbGmakerLib::GeometricSailCreator_noShape>();
+	auto sail = std::make_shared<stbGmakerLib::VolumeSailCreator_noShape>();
 	Debug_Null_Pointer(sail);
 
 	sail->Index() = SailCounter().RetrieveIndex();
@@ -179,7 +179,7 @@ tnbLib::StbGMaker_Creator::CreateShapeGeomSailMaker
 	const std::shared_ptr<marineLib::Shape_Sail>& theSail
 )
 {
-	auto sail = std::make_shared<stbGmakerLib::GeometricSailCreator_Shape>(theSail);
+	auto sail = std::make_shared<stbGmakerLib::VolumeSailCreator_Shape>(theSail);
 	Debug_Null_Pointer(sail);
 
 	sail->Index() = SailCounter().RetrieveIndex();

@@ -76,10 +76,10 @@ tnbLib::stbGmakerLib::GeometricSailCreator_Plane::GeometricSailCreator_Plane
 	// empty body
 }
 
-typename tnbLib::stbGmakerLib::sailCreatotType 
+typename tnbLib::stbGmakerLib::sailCreatorType 
 tnbLib::stbGmakerLib::GeometricSailCreator_Plane::Type() const
 {
-	return stbGmakerLib::sailCreatotType::plane;
+	return stbGmakerLib::sailCreatorType::plane;
 }
 
 #include <Marine_Models.hxx>

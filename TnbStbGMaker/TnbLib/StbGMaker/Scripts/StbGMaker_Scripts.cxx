@@ -99,8 +99,8 @@
 //
 //	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_HullCreator>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
 //	mod->add(chaiscript::fun([](const std::shared_ptr<StbGMaker_TankCreator>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
-//	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::GeometricSailCreator_noShape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
-//	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::GeometricSailCreator_Shape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
+//	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::VolumeSailCreator_noShape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
+//	mod->add(chaiscript::fun([](const std::shared_ptr<stbGmakerLib::VolumeSailCreator_Shape>& c, const std::shared_ptr<Geo_xDistb>& d)-> void {c->CreateWorkingPlanes(*d); }), "createWorkingPlanes");
 //
 //	mod->add(chaiscript::fun([](const creator_t& c, const std::shared_ptr<marineLib::Shape_Tank>& t)-> Standard_Integer {return c->CreateTankMaker(t); }), "createTankMaker");
 //	mod->add(chaiscript::fun([](const creator_t& c, const std::shared_ptr<marineLib::Shape_Hull>& t)-> void {c->CreateHullMaker(t); }), "createHullMaker");

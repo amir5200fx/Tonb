@@ -38,10 +38,10 @@ tnbLib::stbGmakerLib::AreaSailCreator_Const::AreaSailCreator_Const
 	// empty body
 }
 
-typename tnbLib::stbGmakerLib::sailCreatotType 
+typename tnbLib::stbGmakerLib::sailCreatorType 
 tnbLib::stbGmakerLib::AreaSailCreator_Const::Type() const
 {
-	return stbGmakerLib::sailCreatotType::constArea;
+	return stbGmakerLib::sailCreatorType::constArea;
 }
 
 #include <Marine_Models.hxx>

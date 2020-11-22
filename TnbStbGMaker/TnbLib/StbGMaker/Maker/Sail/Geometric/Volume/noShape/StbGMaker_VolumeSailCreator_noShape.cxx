@@ -1,17 +1,17 @@
-#include <StbGMaker_GeometricSailCreator_noShape.hxx>
+#include <StbGMaker_VolumeSailCreator_noShape.hxx>
 
-tnbLib::stbGmakerLib::GeometricSailCreator_noShape::GeometricSailCreator_noShape
+tnbLib::stbGmakerLib::VolumeSailCreator_noShape::VolumeSailCreator_noShape
 (
 	const Standard_Integer theIndex,
 	const word & theName
 )
-	: StbGMaker_GeometricSailCreator(theIndex, theName)
+	: StbGMaker_VolumeSailCreator(theIndex, theName)
 {
 	// empty body
 }
 
 Standard_Integer 
-tnbLib::stbGmakerLib::GeometricSailCreator_noShape::CreateWorkingPlane
+tnbLib::stbGmakerLib::VolumeSailCreator_noShape::CreateWorkingPlane
 (
 	const Standard_Real x
 )
@@ -19,10 +19,10 @@ tnbLib::stbGmakerLib::GeometricSailCreator_noShape::CreateWorkingPlane
 	return StbGMaker_Alg::CreateWorkingPlane(x);
 }
 
-tnbLib::stbGmakerLib::sailCreatotType 
-tnbLib::stbGmakerLib::GeometricSailCreator_noShape::Type() const
+tnbLib::stbGmakerLib::sailCreatorType 
+tnbLib::stbGmakerLib::VolumeSailCreator_noShape::Type() const
 {
-	return stbGmakerLib::sailCreatotType::noShape;
+	return stbGmakerLib::sailCreatorType::noShape;
 }
 
 #include <StbGMaker_WP.hxx>
@@ -31,7 +31,7 @@ tnbLib::stbGmakerLib::GeometricSailCreator_noShape::Type() const
 #include <Marine_Bodies.hxx>
 #include <Marine_BodyTools.hxx>
 
-void tnbLib::stbGmakerLib::GeometricSailCreator_noShape::ExportAs
+void tnbLib::stbGmakerLib::VolumeSailCreator_noShape::ExportAs
 (
 	std::shared_ptr<Marine_Model>& theModel
 ) const

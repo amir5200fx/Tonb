@@ -58,9 +58,6 @@
     <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Plane">
       <UniqueIdentifier>{ea9af69f-cd2d-45b8-accc-7b27653c6b11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Shape">
-      <UniqueIdentifier>{e22e2407-5a06-43ea-a5fc-1ba3a96bceee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\StbGMaker\Maker\Sail\Area\Const">
       <UniqueIdentifier>{5ee2dd9e-a531-4d00-8e60-ed8a5ebe3f5b}</UniqueIdentifier>
     </Filter>
@@ -85,14 +82,20 @@
     <Filter Include="TnbLib\StbGMaker\Maker\Tank\noShape">
       <UniqueIdentifier>{f4af3618-7498-4138-8198-aa911d7f3480}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape">
-      <UniqueIdentifier>{c0cd8b5b-6868-4318-a651-4c4be8ce5801}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\StbGMaker\Scripts">
       <UniqueIdentifier>{188fe6b7-5048-4567-8864-855558739f0a}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\StbGMaker\module">
       <UniqueIdentifier>{4441f478-e7c3-4926-bf15-63081bbaef7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume">
+      <UniqueIdentifier>{afe7a13b-a4e9-4fd5-b1dc-cfd6fa1e9405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape">
+      <UniqueIdentifier>{c0cd8b5b-6868-4318-a651-4c4be8ce5801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape">
+      <UniqueIdentifier>{e22e2407-5a06-43ea-a5fc-1ba3a96bceee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +156,6 @@
     <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Plane\StbGMaker_GeometricSailCreator_Plane.hxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Plane</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Shape\StbGMaker_GeometricSailCreator_Shape.hxx">
-      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Shape</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\StbGMaker\Maker\Entity\StbGMaker_EntityCreator.hxx">
       <Filter>TnbLib\StbGMaker\Maker\Entity</Filter>
     </ClInclude>
@@ -186,9 +186,6 @@
     <ClInclude Include="TnbLib\StbGMaker\Maker\Tank\StbGMaker_TankCreators.hxx">
       <Filter>TnbLib\StbGMaker\Maker\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape\StbGMaker_GeometricSailCreator_noShape.hxx">
-      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\noShape</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.hxx">
       <Filter>TnbLib\StbGMaker\Scripts</Filter>
     </ClInclude>
@@ -197,6 +194,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\StbGMaker\Entities\Edge\StbGMaker_EdgeI.hxx">
       <Filter>TnbLib\StbGMaker\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\StbGMaker_VolumeSailCreator.hxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape\StbGMaker_VolumeSailCreator_Shape.hxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape\StbGMaker_VolumeSailCreator_noShape.hxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +242,6 @@
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Plane\StbGMaker_GeometricSailCreator_Plane.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Plane</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Shape\StbGMaker_GeometricSailCreator_Shape.cxx">
-      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Shape</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Area\Const\StbGMaker_AreaSailCreator_Const.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Area\Const</Filter>
     </ClCompile>
@@ -259,9 +262,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\noShape\StbGMaker_TankCreator_noShape.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Tank\noShape</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape\StbGMaker_GeometricSailCreator_noShape.cxx">
-      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\noShape</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Maker\Entity\StbGMaker_EntityCreator.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Entity</Filter>
@@ -287,9 +287,6 @@
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Plane\StbGMaker_GeometricSailCreator_PlaneIO.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Plane</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Shape\StbGMaker_GeometricSailCreator_ShapeIO.cxx">
-      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Shape</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Maker\StbGMaker_AlgIO.cxx">
       <Filter>TnbLib\StbGMaker\Maker</Filter>
     </ClCompile>
@@ -305,11 +302,20 @@
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Area\Const\StbGMaker_AreaSailCreator_ConstIO.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Area\Const</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\noShape\StbGMaker_GeometricSailCreator_noShapeIO.cxx">
-      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\noShape</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Maker\Tank\noShape\StbGMaker_TankCreator_noShapeIO.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Tank\noShape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape\StbGMaker_VolumeSailCreator_ShapeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape\StbGMaker_VolumeSailCreator_Shape.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape\StbGMaker_VolumeSailCreator_noShapeIO.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape\StbGMaker_VolumeSailCreator_noShape.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
