@@ -45,7 +45,7 @@ namespace tnbLib
 			return thePar_;
 		}
 
-		void SetPar
+		TnbSectPx_EXPORT void SetPar
 		(
 			const std::shared_ptr<SectPx_Par>& thePar
 		);
@@ -78,5 +78,7 @@ namespace tnbLib
 		) const override;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_OneParCPtsMap);
 
 #endif // !_SectPx_OneParCPtsMap_Header

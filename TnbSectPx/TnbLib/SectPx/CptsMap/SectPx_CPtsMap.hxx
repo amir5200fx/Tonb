@@ -62,21 +62,21 @@ namespace tnbLib
 			return theSense_;
 		}
 
-		void SetSegment
+		TnbSectPx_EXPORT void SetSegment
 		(
 			const std::shared_ptr<SectPx_Segment>& theSegment,
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		void Reverse();
+		TnbSectPx_EXPORT void Reverse();
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
-		Standard_Boolean IsCPtsMap() const override;
+		TnbSectPx_EXPORT Standard_Boolean IsCPtsMap() const override;
 
-		virtual Standard_Boolean IsOnePar() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsOnePar() const;
 
-		virtual Standard_Boolean IsMultiPar() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsMultiPar() const;
 
 		virtual Standard_Boolean IsComplete() const = 0;
 
@@ -85,5 +85,7 @@ namespace tnbLib
 		virtual std::vector<Pnt2d> Pts() const = 0;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_CPtsMap);
 
 #endif // !_SectPx_CPtsMap_Header

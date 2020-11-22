@@ -16,9 +16,18 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int file_version)
+			{
+				ar & boost::serialization::base_object<SectPx_OneParCPtsMap>(*this);
+			}
+
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 			
 			//- default constructor
@@ -29,12 +38,12 @@ namespace tnbLib
 
 			//- constructors
 
-			OneParCPtsMap_Single
+			TnbSectPx_EXPORT OneParCPtsMap_Single
 			(
 				const Standard_Integer theIndex
 			);
 
-			OneParCPtsMap_Single
+			TnbSectPx_EXPORT OneParCPtsMap_Single
 			(
 				const Standard_Integer theIndex,
 				const word& theName
@@ -43,16 +52,18 @@ namespace tnbLib
 
 			//- public functions and operators
 
-			word RegObjTypeName() const override;
+			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-			Standard_Integer NbPts() const override;
+			TnbSectPx_EXPORT Standard_Integer NbPts() const override;
 
-			std::vector<Pnt2d> Pts() const override;
+			TnbSectPx_EXPORT std::vector<Pnt2d> Pts() const override;
 
-			Pnt2d CalcCoord() const;
+			TnbSectPx_EXPORT Pnt2d CalcCoord() const;
 
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::OneParCPtsMap_Single);
 
 #endif // !_SectPx_OneParCPtsMap_Single_Header
