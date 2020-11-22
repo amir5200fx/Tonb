@@ -2,6 +2,7 @@
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CosineDistb.hxx>
+#include <Pln_Ring.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
@@ -131,10 +132,18 @@ namespace tnbLib
 		return std::move(t);
 	}
 
-	/*auto createWP(const sailCreator_t& m, const double x)
+	auto createWP(const sailCreator_t& m, const double x)
 	{
-		auto t=m->se
-	}*/
+		auto volumetric = std::dynamic_pointer_cast<StbGMaker_VolumeSailCreator>(m);
+		if (!volumetric)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the sail creator is not volumetric." << endl
+				<< abort(FatalError);
+		}
+		auto t = volumetric->SelectWP(volumetric->CreateWorkingPlane(x));
+		return std::move(t);
+	}
 
 
 
@@ -494,10 +503,149 @@ namespace tnbLib
 		return std::move(t);
 	}
 
-	
+	//***** Working Planes' Functions:
+
+	//Curves and edges:
+
+	void createSegment(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto edge = cad2dLib::Modeler_Tools::MakeSegment(p0, p1);
+		wp->Modeler()->Import(std::move(edge));
+	}
+
+	 void createSegment(const wp_t& wp, const Pnt2d& p0, const double ang, const double l)
+	 {
+		 auto edge = cad2dLib::Modeler_Tools::MakeSegment(p0, ang, l);
+		 wp->Modeler()->Import(std::move(edge));
+	 }
+
+	 void createCircArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	 {
+		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(p0, p1, p2);
+		 wp->Modeler()->Import(std::move(circArc));
+	 }
+
+	 void createCircArc(const wp_t& wp, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
+	 {
+		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(p0, v0, p1);
+		 wp->Modeler()->Import(std::move(circArc));
+	 }
 
 	
+	 void createcircArc(const wp_t& wp, const gp_Circ2d& c, const double ang0, const double ang1)
+	 {
+		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(c, ang0, ang1);
+		 wp->Modeler()->Import(std::move(circArc));
+	 }
 
+	 void createCircArc(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)
+	 {
+		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(c, p0, p1);
+		 wp->Modeler()->Import(std::move(circArc));
+	 }
+
+	 void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const double ang0, const double ang1)
+	 {
+		 auto elipArc = cad2dLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1);
+		 wp->Modeler()->Import(std::move(elipArc));
+	 }
+
+	 void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)
+	 {
+		 auto elipArc = cad2dLib::Modeler_Tools::MakeElipsArc(e, p0, p1);
+		 wp->Modeler()->Import(std::move(elipArc));
+	 }
+
+	 void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const double ang0, const double ang1)
+	 {
+		 auto hyprArc = cad2dLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1);
+		 wp->Modeler()->Import(std::move(hyprArc));
+	 }
+
+	 void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)
+	 {
+		 auto hyprArc = cad2dLib::Modeler_Tools::MakeHyprArc(h, p0, p1);
+		 wp->Modeler()->Import(std::move(hyprArc));
+	 }
+
+	 void createParabArc(const wp_t& wp, const gp_Parab2d& par, const double ang0, const double ang1)
+	 {
+		 auto parArc = cad2dLib::Modeler_Tools::MakeParbArc(par, ang0, ang1);
+		 wp->Modeler()->Import(std::move(parArc));
+	 }
+
+	 void createParabArc(const wp_t& wp, const gp_Parab2d& par, const Pnt2d& p0, const Pnt2d& p1)
+	 {
+		 auto parArc = cad2dLib::Modeler_Tools::MakeParabArc(par, p0, p1);
+		 wp->Modeler()->Import(std::move(parArc));
+	 }
+	
+	 // Shapes:
+
+	 void createCircle(const wp_t& wp, const gp_Circ2d& c)
+	 {
+		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c);
+		 wp->Modeler()->Import(std::move(circ));
+	 }
+
+	 // a circle parallel to another circle and passing through a point:
+	 void createCircle(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0)
+	 {
+		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
+		 wp->Modeler()->Import(std::move(circ));
+	 }
+
+	 void createCircle(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	 {
+		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(p0, p1, p2);
+		 wp->Modeler()->Import(std::move(circ));
+	 }
+
+	 void createCircle(const wp_t& wp, const Pnt2d& c, const Pnt2d r)
+	 {
+		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c, r);
+		 wp->Modeler()->Import(std::move(circ));
+	 }
+
+	 void createCircle(const wp_t& wp, const Pnt2d& c, const Pnt2d& p0)
+	 {
+		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
+		 wp->Modeler()->Import(std::move(circ));
+	 }
+
+	 void createEllipse(const wp_t& wp, const gp_Elips2d& e)
+	 {
+		 auto elip = cad2dLib::Modeler_Tools::MakeEllipse(e);
+		 wp->Modeler()->Import(std::move(elip));
+	 }
+
+	 //! Make an Ellipse centered on the point Center, where
+			//! -   the major axis of the ellipse is defined by Center and S1,
+			//! -   its major radius is the distance between Center and S1, and
+			//! -   its minor radius is the distance between S2 and the major axis.
+			//! The implicit orientation of the ellipse is:
+			//! -   the sense defined by Axis or E,
+			//! -   the sense defined by points Center, S1 and S2,
+			//! -   the trigonometric sense if Sense is not given or is true, or
+			//! -   the opposite sense if Sense is false.
+
+	 void createEllipse(const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
+	 {
+		 auto elip = cad2dLib::Modeler_Tools::MakeEllipse(s0, s1, c);
+		 wp->Modeler()->Import(std::move(elip));
+	 }
+
+	 void createRectangular(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
+	 {
+		 auto rec = cad2dLib::Modeler_Tools::MakeRectangular(p0, p1);
+		 wp->Modeler()->Import(std::move(rec));
+	 }
+
+	 void createRectangular(const wp_t& wp, const gp_Ax2d& ax, const double dx, const double dy)
+	 {
+		 auto rec = cad2dLib::Modeler_Tools::MakeRectangular(ax, dx, dy);
+		 wp->Modeler()->Import(std::move(rec));
+	 }
 	
 }
 
@@ -573,6 +721,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const hullCreator_t& m, const double x)-> auto{auto t = createWP(m, x); return std::move(t); }), "createHullWP");
 
 		mod->add(chaiscript::fun([](const tankCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createTankWP");
+
+		mod->add(chaiscript::fun([](const sailCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createSailWP");
 
 	}
 }
