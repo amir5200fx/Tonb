@@ -22,5 +22,11 @@ tnbLib::SectPx_EmptyInterface::InterfaceType() const
 
 void tnbLib::SectPx_EmptyInterface::disJoint()
 {
-	//- empty body
+	SetNode(nullptr);
+}
+
+Standard_Boolean 
+tnbLib::SectPx_EmptyInterface::IsRemovable() const
+{
+	return NOT Node();
 }

@@ -22,6 +22,14 @@ namespace tnbLib
 			ar & boost::serialization::base_object<SectPx_Interface>(*this);
 		}
 
+
+	protected:
+
+
+		TnbSectPx_EXPORT void disJoint() override;
+
+		TnbSectPx_EXPORT Standard_Boolean IsRemovable() const override;
+
 	public:
 
 		static TnbSectPx_EXPORT const char* typeName_;
@@ -37,7 +45,7 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT sectPxLib::interfaceType InterfaceType() const override;
 
-		TnbSectPx_EXPORT void disJoint() override;
+		
 	};
 }
 

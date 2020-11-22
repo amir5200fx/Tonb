@@ -11,10 +11,13 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Node;
+	class SectPx_Tools;
 
 	class SectPx_Interface
 		: public SectPx_RegObj
 	{
+
+		friend class SectPx_Tools;
 
 		/*Private Data*/
 
@@ -46,10 +49,21 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Node>& theNode
 		);
 
+		void SetNode(const std::shared_ptr<SectPx_Node>& node)
+		{
+			theNode_ = node;
+		}
 
 		virtual void disJoint() = 0;
 
+		virtual Standard_Boolean IsRemovable() const = 0;
+
 	public:
+
+		const auto& Node() const
+		{
+			return theNode_;
+		}
 
 		virtual sectPxLib::interfaceType InterfaceType() const = 0;
 

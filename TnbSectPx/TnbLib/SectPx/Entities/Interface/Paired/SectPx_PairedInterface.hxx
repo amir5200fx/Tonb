@@ -33,6 +33,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT void disJoint() override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsRemovable() const override;
+
 	public:
 
 		static TnbSectPx_EXPORT const std::shared_ptr<SectPx_PairedInterface> null;
