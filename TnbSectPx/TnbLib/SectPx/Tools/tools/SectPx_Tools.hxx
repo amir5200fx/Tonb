@@ -5,6 +5,7 @@
 #include <Pnt2d.hxx>
 #include <SectPx_Segment.hxx>
 #include <SectPx_Module.hxx>
+#include <SectPx_JoinPriority.hxx>
 
 #include <vector>
 
@@ -18,24 +19,19 @@ namespace tnbLib
 	class SectPx_Registry;
 	class SectPx_Node;
 	class SectPx_Edge;
+	class SectPx_Interface;
 
 	class SectPx_Tools
 	{
 
 	public:
 
-		enum class jointPriority
-		{
-			left,
-			right
-		};
-
 		static TnbSectPx_EXPORT Standard_Boolean
 			IsValidToJoint
 			(
 				const std::shared_ptr<SectPx_Node>& theNode0,
 				const std::shared_ptr<SectPx_Node>& theNode1,
-				const jointPriority priority = jointPriority::left
+				const SectPx_JoinPriority priority = SectPx_JoinPriority::left
 			);
 
 		static TnbSectPx_EXPORT Standard_Integer
@@ -44,7 +40,7 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Pnt>& theP0,
 				const std::shared_ptr<SectPx_Pnt>& theP1,
 				const std::shared_ptr<SectPx_Registry>& theReg,
-				const jointPriority priority = jointPriority::left
+				const SectPx_JoinPriority priority = SectPx_JoinPriority::left
 			);
 
 		static TnbSectPx_EXPORT std::tuple<Standard_Integer, Standard_Integer>
@@ -53,7 +49,7 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_TopoProfile>& theLeft,
 				const std::shared_ptr<SectPx_TopoProfile>& theRight,
 				const std::shared_ptr<SectPx_Registry>& theReg,
-				const jointPriority priority = jointPriority::left
+				const SectPx_JoinPriority priority = SectPx_JoinPriority::left
 			);
 
 		static TnbSectPx_EXPORT std::shared_ptr<SectPx_Edge>
@@ -74,6 +70,8 @@ namespace tnbLib
 		(
 			const std::shared_ptr<SectPx_Parent>& theParent
 		);
+
+		static void disJiont(const std::shared_ptr<SectPx_Interface>& theInterface);
 
 	};
 }

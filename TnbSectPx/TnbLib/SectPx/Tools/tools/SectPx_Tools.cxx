@@ -10,6 +10,7 @@
 #include <SectPx_PntTools.hxx>
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_InterfaceMaker.hxx>
+#include <SectPx_Interface.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -18,12 +19,12 @@ tnbLib::SectPx_Tools::IsValidToJoint
 (
 	const std::shared_ptr<SectPx_Node>& theNode0,
 	const std::shared_ptr<SectPx_Node>& theNode1,
-	const jointPriority priority
+	const SectPx_JoinPriority priority
 )
 {
-	if (priority IS_EQUAL jointPriority::right)
+	if (priority IS_EQUAL SectPx_JoinPriority::right)
 	{
-		return IsValidToJoint(theNode1, theNode0, jointPriority::left);
+		return IsValidToJoint(theNode1, theNode0, SectPx_JoinPriority::left);
 	}
 
 	const auto& p0 = theNode0->Pnt();
@@ -52,7 +53,7 @@ tnbLib::SectPx_Tools::MakePair
 	const std::shared_ptr<SectPx_Pnt>& theP0,
 	const std::shared_ptr<SectPx_Pnt>& theP1,
 	const std::shared_ptr<SectPx_Registry>& theReg,
-	const jointPriority priority
+	const SectPx_JoinPriority priority
 )
 {
 	if (theP0->IsInner() OR theP1->IsInner())
@@ -62,9 +63,9 @@ tnbLib::SectPx_Tools::MakePair
 			<< abort(FatalError);
 	}
 
-	if (priority IS_EQUAL jointPriority::right)
+	if (priority IS_EQUAL SectPx_JoinPriority::right)
 	{
-		return MakePair(theP1, theP0, theReg, jointPriority::left);
+		return MakePair(theP1, theP0, theReg, SectPx_JoinPriority::left);
 	}
 
 	if (NOT theP1->IsMaster())
@@ -115,7 +116,7 @@ tnbLib::SectPx_Tools::MakeJoint
 	const std::shared_ptr<SectPx_TopoProfile>& theLeft,
 	const std::shared_ptr<SectPx_TopoProfile>& theRight,
 	const std::shared_ptr<SectPx_Registry>& theReg,
-	const jointPriority priority
+	const SectPx_JoinPriority priority
 )
 {
 	Debug_Null_Pointer(theLeft);
@@ -220,4 +221,13 @@ void tnbLib::SectPx_Tools::RemoveParentFromChildren
 			<< " typename: " << theParent->RegObjTypeName() << endl
 			<< abort(FatalError);
 	}
+}
+
+void tnbLib::SectPx_Tools::disJiont
+(
+	const std::shared_ptr<SectPx_Interface>& theInterface
+)
+{
+	Debug_Null_Pointer(theInterface);
+	theInterface->disJoint();
 }
