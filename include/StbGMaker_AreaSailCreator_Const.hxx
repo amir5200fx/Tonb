@@ -66,7 +66,7 @@ namespace tnbLib
 				return theZbar_;
 			}
 
-			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatotType Type() const override;
+			TnbStbGMaker_EXPORT stbGmakerLib::sailCreatorType Type() const override;
 
 			TnbStbGMaker_EXPORT void ExportAs
 			(

@@ -13,7 +13,7 @@ namespace tnbLib
 
 		// Forward Declarations
 		class AreaSailCreator_Const;
-		class GeometricSailCreator_Shape;
+		class VolumeSailCreator_Shape;
 		class GeometricSailCreator_Plane;
 	}
 }

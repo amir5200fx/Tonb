@@ -39,7 +39,7 @@ namespace tnbLib
 
 		TnbStbGMaker_EXPORT virtual Standard_Boolean IsGeometric() const;
 
-		virtual stbGmakerLib::sailCreatotType Type() const = 0;
+		virtual stbGmakerLib::sailCreatorType Type() const = 0;
 	};
 }
 
