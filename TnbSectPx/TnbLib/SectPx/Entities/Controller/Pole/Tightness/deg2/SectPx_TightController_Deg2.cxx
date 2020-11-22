@@ -13,9 +13,10 @@ const char* tnbLib::sectPxLib::TightController_Deg2::typeName_("degree2 tightnes
 
 tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
 (
-	const Standard_Integer theIndex
+	const Standard_Integer theIndex,
+	const std::shared_ptr<sectPxLib::Pole_Corner>& theCorner
 )
-	: SectPx_TightController(theIndex)
+	: SectPx_TightController(theIndex, theCorner)
 {
 	// empty body
 }
@@ -23,9 +24,10 @@ tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
 tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
 (
 	const Standard_Integer theIndex,
-	const word & theName
+	const word & theName,
+	const std::shared_ptr<sectPxLib::Pole_Corner>& theCorner
 )
-	: SectPx_TightController(theIndex, theName)
+	: SectPx_TightController(theIndex, theName, theCorner)
 {
 	// empty body
 }

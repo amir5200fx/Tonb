@@ -1,5 +1,7 @@
 #include <SectPx_TightController.hxx>
 
+#include <SectPx_SegmentController.hxx>
+
 DECLARE_SAVE_IMP(tnbLib::SectPx_TightController)
 {
 	ar & boost::serialization::base_object<SectPx_PoleController>(*this);
