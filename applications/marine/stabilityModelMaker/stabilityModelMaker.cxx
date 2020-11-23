@@ -532,7 +532,7 @@ namespace tnbLib
 	 }
 
 	
-	 void createcircArc(const wp_t& wp, const gp_Circ2d& c, const double ang0, const double ang1)
+	 void createCircArc(const wp_t& wp, const gp_Circ2d& c, const double ang0, const double ang1)
 	 {
 		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(c, ang0, ang1);
 		 wp->Modeler()->Import(std::move(circArc));
@@ -601,7 +601,7 @@ namespace tnbLib
 		 wp->Modeler()->Import(std::move(circ));
 	 }
 
-	 void createCircle(const wp_t& wp, const Pnt2d& c, const Pnt2d r)
+	 void createCircle(const wp_t& wp, const Pnt2d& c, const double r)
 	 {
 		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c, r);
 		 wp->Modeler()->Import(std::move(circ));
@@ -719,10 +719,39 @@ namespace tnbLib
 	{
 
 		mod->add(chaiscript::fun([](const hullCreator_t& m, const double x)-> auto{auto t = createWP(m, x); return std::move(t); }), "createHullWP");
-
 		mod->add(chaiscript::fun([](const tankCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createTankWP");
-
 		mod->add(chaiscript::fun([](const sailCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createSailWP");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void { createSegment(wp, p0, p1); }), "createSegment");
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const double ang, const double l)-> void {createSegment(wp, p0, ang, l); }), "createSegment");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)->void {createCircArc(wp, p0, p1, p2); }), "createCircArc");
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)-> void {createCircArc(wp, p0, v0, p1); }), "createCircArc");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Circ2d& c, const double ang0, const double ang1)->void {createCircArc(wp, c, ang0, ang1); }), "createCircArc");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)->void {createCircArc(wp, c, p0, p1); }), "createCircArc");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Elips2d& e, const double ang0, const double ang1)-> void {createElipsArc(wp, e, ang0, ang1); }), "createElipArc");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)-> void {createElipsArc(wp, e, p0, p1); }), "createElipArc");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Hypr2d& h, const double ang0, const double ang1)-> void {createHyprArc(wp, h, ang0, ang1); }), "createHyprArc");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)-> void {createHyprArc(wp, h, p0, p1); }), "createHyprArc");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Parab2d& p, const double ang0, const double ang1)-> void {createParabArc(wp, p, ang0, ang1); }), "createParabArc");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Parab2d& p, const Pnt2d& p0, const Pnt2d& p1)-> void {createParabArc(wp, p, p0, p1); }), "createParabArc");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Circ2d& c)-> void {createCircle(wp, c); }), "createCircle");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0)-> void {createCircle(wp, c, p0); }), "createCircle");
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)-> void {createCircle(wp, p0, p1, p2); }), "createCircle");
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& c, const double r)-> void {createCircle(wp, c, r); }), "createCircle");
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& c, const Pnt2d& p0)-> void {createCircle(wp, c, p0); }), "createCircle");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Elips2d& e)->void {createEllipse(wp, e); }), "createEllipse");
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)->void {createEllipse(wp, s0, s1, c); }), "createEllipse");
+
+		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void {createRectangular(wp, p0, p1); }), "createRectangular");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Ax2& ax, const double dx, const double dy)-> void {createRectangular(wp, ax, dx, dy); }), "createRectangular");
+
+
 
 	}
 }
