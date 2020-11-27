@@ -749,18 +749,80 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)->void {createEllipse(wp, s0, s1, c); }), "createEllipse");
 
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void {createRectangular(wp, p0, p1); }), "createRectangular");
-		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Ax2& ax, const double dx, const double dy)-> void {createRectangular(wp, ax, dx, dy); }), "createRectangular");
+		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Ax2d& ax, const double dx, const double dy)-> void {createRectangular(wp, ax, dx, dy); }), "createRectangular");
 
 
 
 	}
+
+	std::string getString(char* argv)
+	{
+		std::string argument(argv);
+		return std::move(argument);
+	}
+
+	Standard_Boolean IsEqualCommand(char* argv, const std::string& command)
+	{
+		auto argument = getString(argv);
+		return argument IS_EQUAL command;
+	}
 }
+
 
 using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	gMaker->CreateHullMaker();
+	FatalError.throwExceptions();
+
+	if (argc <= 1)
+	{
+		Info << " - No command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
+
+	if (argc IS_EQUAL 2)
+	{
+		if (IsEqualCommand(argv[1], "--help"))
+		{
+			Info << "this is help" << endl;
+		}
+		else if (IsEqualCommand(argv[1], "--run"))
+		{
+			chaiscript::ChaiScript chai;
+
+			auto mod = std::make_shared<chaiscript::Module>();
+
+			setGlobals(mod);
+			setDefaultShapes(mod);
+			setCreators(mod);
+			setWotkingPlanes(mod);
+
+			chai.add(mod);
+
+			fileName myFileName("frameMaker");
+
+			try
+			{
+				chai.eval_file(myFileName);
+			}
+			catch (const chaiscript::exception::eval_error& x)
+			{
+				Info << x.pretty_print() << endl;
+			}
+			catch (const error& x)
+			{
+				Info << x.message() << endl;
+			}
+		}
+	}
+	else
+	{
+		Info << " - No valid command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
 
 }
 
