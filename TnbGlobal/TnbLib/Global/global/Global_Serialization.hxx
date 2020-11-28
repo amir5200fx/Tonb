@@ -36,7 +36,7 @@
 #define TNB_iARCH_TYPE boost::archive::polymorphic_iarchive
 #define TNB_oARCH_TYPE boost::archive::polymorphic_oarchive
 
-#define DECLARE_SAVE_LOAD_HEADER(Export)	 														\
+#define TNB_SERIALIZATION(Export)	 														\
 	template<class Archive> void save(Archive&, const unsigned int) const 							\
 	{ FatalErrorIn(FunctionSIG) <<"not supposed to be called!"<< abort(FatalError); }				\
 	template<class Archive> void load(Archive&, const unsigned int) 								\
@@ -48,11 +48,11 @@
 	void Export load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE & ar, const unsigned int version);				\
 	BOOST_SERIALIZATION_SPLIT_MEMBER()
 
-#define DECLARE_SAVE_IMP(C)															\
+#define TNB_SAVE_IMPLEMENTATION(C)															\
 template<>																			\
 void C::save<TNB_oARCH_TYPE>(TNB_oARCH_TYPE & ar, const unsigned int version) const
 
-#define DECLARE_LOAD_IMP(C) 									\
+#define TNB_LOAD_IMPLEMENTATION(C) 									\
 template<>														\
 void C::load<TNB_iARCH_TYPE>(TNB_iARCH_TYPE & ar, const unsigned int version)	
 
