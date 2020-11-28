@@ -2,14 +2,14 @@
 
 #include <Marine_Section.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::Marine_Water)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Marine_Water)
 {
 	ar & boost::serialization::base_object<Marine_Entity>(*this);
 
 	ar & theSections_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::Marine_Water)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Marine_Water)
 {
 	ar & boost::serialization::base_object<Marine_Entity>(*this);
 

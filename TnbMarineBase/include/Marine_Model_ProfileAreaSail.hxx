@@ -24,7 +24,7 @@ namespace tnbLib
 			std::shared_ptr<Geo_ProfileFun> theZbar_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+			TNB_SERIALIZATION(TnbMarine_EXPORT);
 
 
 		protected:

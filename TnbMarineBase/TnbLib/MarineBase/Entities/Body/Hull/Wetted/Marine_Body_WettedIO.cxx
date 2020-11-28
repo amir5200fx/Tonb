@@ -2,13 +2,13 @@
 
 #include <Marine_CmpSection.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::marineLib::Body_Wetted)
+TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Body_Wetted)
 {
 	ar & boost::serialization::base_object<Marine_HullBody>(*this);
 	ar & Mid();
 }
 
-DECLARE_LOAD_IMP(tnbLib::marineLib::Body_Wetted)
+TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Body_Wetted)
 {
 	ar & boost::serialization::base_object<Marine_HullBody>(*this);
 	ar & ChangeMid();
@@ -16,7 +16,7 @@ DECLARE_LOAD_IMP(tnbLib::marineLib::Body_Wetted)
 
 #include <Marine_Shape.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Body_Wetted>)
+TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Body_Wetted>)
 {
 	ar & boost::serialization::base_object<Body_Wetted>(*this);
 
@@ -24,7 +24,7 @@ DECLARE_SAVE_IMP(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Bod
 	ar & WL();
 }
 
-DECLARE_LOAD_IMP(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Body_Wetted>)
+TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Body_Wetted>)
 {
 	ar & boost::serialization::base_object<Body_Wetted>(*this);
 

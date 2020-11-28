@@ -29,7 +29,7 @@ namespace tnbLib
 
 		/*private functions and operators*/
 
-		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
 
 		auto& ChangeBody()
 		{

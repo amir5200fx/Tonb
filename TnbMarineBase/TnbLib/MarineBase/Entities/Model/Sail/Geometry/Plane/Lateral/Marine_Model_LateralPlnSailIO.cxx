@@ -2,14 +2,14 @@
 
 #include <Cad2d_Plane.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::marineLib::Model_LateralPlnSail)
+TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_LateralPlnSail)
 {
 	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
 	ar & thePlane_;
 	ar & theZbar_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::marineLib::Model_LateralPlnSail)
+TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_LateralPlnSail)
 {
 	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
 	ar & thePlane_;

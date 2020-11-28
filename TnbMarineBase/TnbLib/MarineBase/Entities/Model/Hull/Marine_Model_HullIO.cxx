@@ -2,13 +2,13 @@
 
 #include <Marine_Body_Displacer.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::marineLib::Model_Hull)
+TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_Hull)
 {
 	ar & boost::serialization::base_object<Marine_Model>(*this);
 	ar & theDisplacer_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::marineLib::Model_Hull)
+TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_Hull)
 {
 	ar & boost::serialization::base_object<Marine_Model>(*this);
 	ar & theDisplacer_;

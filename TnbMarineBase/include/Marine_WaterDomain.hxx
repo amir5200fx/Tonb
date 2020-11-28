@@ -31,7 +31,7 @@ namespace tnbLib
 		std::shared_ptr<Marine_Water> theWater_;
 		std::shared_ptr<Marine_Wave> theWave_;
 
-		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
 		
 	protected:
 

@@ -3,7 +3,7 @@
 #include <BRepTools.hxx>
 #include <BRep_Builder.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::Marine_Shape)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Marine_Shape)
 {
 	ar & boost::serialization::base_object<Marine_CoordinatedEntity>(*this);
 
@@ -14,7 +14,7 @@ DECLARE_SAVE_IMP(tnbLib::Marine_Shape)
 	ar & s;
 }
 
-DECLARE_LOAD_IMP(tnbLib::Marine_Shape)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Marine_Shape)
 {
 	ar & boost::serialization::base_object<Marine_CoordinatedEntity>(*this);
 

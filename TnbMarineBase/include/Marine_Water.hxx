@@ -24,7 +24,7 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Marine_Section>> theSections_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
 
 	protected:
 

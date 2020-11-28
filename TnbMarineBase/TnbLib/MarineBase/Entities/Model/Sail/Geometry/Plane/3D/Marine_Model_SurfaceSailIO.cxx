@@ -3,7 +3,7 @@
 #include <BRepTools.hxx>
 #include <BRep_Builder.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::marineLib::Model_SurfaceSail)
+TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_SurfaceSail)
 {
 	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
 
@@ -14,7 +14,7 @@ DECLARE_SAVE_IMP(tnbLib::marineLib::Model_SurfaceSail)
 	ar & s;
 }
 
-DECLARE_LOAD_IMP(tnbLib::marineLib::Model_SurfaceSail)
+TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_SurfaceSail)
 {
 	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
 

@@ -4,7 +4,7 @@
 #include <Marine_VCG.hxx>
 #include <Marine_TCG.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::Marine_CG)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Marine_CG)
 {
 	ar & boost::serialization::base_object<Marine_Entity>(*this);
 
@@ -13,7 +13,7 @@ DECLARE_SAVE_IMP(tnbLib::Marine_CG)
 	ar & theTCG_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::Marine_CG)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Marine_CG)
 {
 	ar & boost::serialization::base_object<Marine_Entity>(*this);
 

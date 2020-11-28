@@ -2,14 +2,14 @@
 
 #include <Geo_ProfileFun.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::marineLib::Model_ProfileAreaSail)
+TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_ProfileAreaSail)
 {
 	ar & boost::serialization::base_object<Marine_AreaSailModel>(*this);
 	ar & theArea_;
 	ar & theZbar_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::marineLib::Model_ProfileAreaSail)
+TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_ProfileAreaSail)
 {
 	ar & boost::serialization::base_object<Marine_AreaSailModel>(*this);
 	ar & theArea_;
