@@ -2,14 +2,14 @@
 
 #include <StbGMaker_WP.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::StbGMaker_Alg)
+TNB_SAVE_IMPLEMENTATION(tnbLib::StbGMaker_Alg)
 {
 	ar & boost::serialization::base_object<StbGMaker_AlgAux>(*this);
 	ar & theWorkingPlanes_;
 	ar & theCounter_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::StbGMaker_Alg)
+TNB_LOAD_IMPLEMENTATION(tnbLib::StbGMaker_Alg)
 {
 	ar & boost::serialization::base_object<StbGMaker_AlgAux>(*this);
 	ar & theWorkingPlanes_;

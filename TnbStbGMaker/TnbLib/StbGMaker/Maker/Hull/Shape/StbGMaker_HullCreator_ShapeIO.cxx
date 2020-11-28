@@ -2,13 +2,13 @@
 
 #include <Marine_Shapes.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::stbGmakerLib::HullCreator_Shape)
+TNB_SAVE_IMPLEMENTATION(tnbLib::stbGmakerLib::HullCreator_Shape)
 {
 	ar & boost::serialization::base_object<StbGMaker_HullCreator>(*this);
 	ar & theHull_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::stbGmakerLib::HullCreator_Shape)
+TNB_LOAD_IMPLEMENTATION(tnbLib::stbGmakerLib::HullCreator_Shape)
 {
 	ar & boost::serialization::base_object<StbGMaker_HullCreator>(*this);
 	ar & theHull_;

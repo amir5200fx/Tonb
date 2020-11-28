@@ -2,7 +2,7 @@
 
 #include <Marine_Models.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::StbGMaker_Model)
+TNB_SAVE_IMPLEMENTATION(tnbLib::StbGMaker_Model)
 {
 	ar & boost::serialization::base_object<StbGMaker_Entity>(*this);
 	ar & theHull_;
@@ -10,7 +10,7 @@ DECLARE_SAVE_IMP(tnbLib::StbGMaker_Model)
 	ar & theSails_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::StbGMaker_Model)
+TNB_LOAD_IMPLEMENTATION(tnbLib::StbGMaker_Model)
 {
 	ar & boost::serialization::base_object<StbGMaker_Entity>(*this);
 	ar & theHull_;

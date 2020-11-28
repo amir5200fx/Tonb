@@ -38,7 +38,7 @@ namespace tnbLib
 		mutable Geo_ItemCounter theSailCounter_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+		TNB_SERIALIZATION(TnbStbGMaker_EXPORT);
 
 		auto& TankCounter() const
 		{

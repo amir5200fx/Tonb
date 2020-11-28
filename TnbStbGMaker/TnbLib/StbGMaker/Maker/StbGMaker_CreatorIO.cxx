@@ -4,7 +4,7 @@
 #include <StbGMaker_TankCreator.hxx>
 #include <StbGMaker_SailCreator.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::StbGMaker_Creator)
+TNB_SAVE_IMPLEMENTATION(tnbLib::StbGMaker_Creator)
 {
 	ar & theHullCreator_;
 	ar & theTankCreators_;
@@ -14,7 +14,7 @@ DECLARE_SAVE_IMP(tnbLib::StbGMaker_Creator)
 	ar & theSailCounter_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::StbGMaker_Creator)
+TNB_LOAD_IMPLEMENTATION(tnbLib::StbGMaker_Creator)
 {
 	ar & theHullCreator_;
 	ar & theTankCreators_;

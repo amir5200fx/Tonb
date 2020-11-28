@@ -2,13 +2,13 @@
 
 #include <Marine_Shape_Tank.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::stbGmakerLib::TankCreator_Shape)
+TNB_SAVE_IMPLEMENTATION(tnbLib::stbGmakerLib::TankCreator_Shape)
 {
 	ar & boost::serialization::base_object<StbGMaker_TankCreator>(*this);
 	ar & theTank_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::stbGmakerLib::TankCreator_Shape)
+TNB_LOAD_IMPLEMENTATION(tnbLib::stbGmakerLib::TankCreator_Shape)
 {
 	ar & boost::serialization::base_object<StbGMaker_TankCreator>(*this);
 	ar & theTank_;

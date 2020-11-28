@@ -20,7 +20,7 @@ namespace tnbLib
 				theHull_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+			TNB_SERIALIZATION(TnbStbGMaker_EXPORT);
 
 		public:
 

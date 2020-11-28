@@ -34,7 +34,7 @@ namespace tnbLib
 		//- private functions and operators
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+		TNB_SERIALIZATION(TnbStbGMaker_EXPORT);
 
 		TnbStbGMaker_EXPORT void ImportWP
 		(

@@ -2,14 +2,14 @@
 
 #include <Marine_Shape_Sail.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::stbGmakerLib::VolumeSailCreator_Shape)
+TNB_SAVE_IMPLEMENTATION(tnbLib::stbGmakerLib::VolumeSailCreator_Shape)
 {
 	ar & boost::serialization::base_object<StbGMaker_VolumeSailCreator>(*this);
 	ar & boost::serialization::base_object<StbGMaker_Alg>(*this);
 	ar & theShape_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::stbGmakerLib::VolumeSailCreator_Shape)
+TNB_LOAD_IMPLEMENTATION(tnbLib::stbGmakerLib::VolumeSailCreator_Shape)
 {
 	ar & boost::serialization::base_object<StbGMaker_VolumeSailCreator>(*this);
 	ar & boost::serialization::base_object<StbGMaker_Alg>(*this);

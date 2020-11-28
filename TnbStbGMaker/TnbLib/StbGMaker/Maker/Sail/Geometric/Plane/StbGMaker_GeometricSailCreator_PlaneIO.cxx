@@ -2,14 +2,14 @@
 
 #include <Cad2d_Plane.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::stbGmakerLib::GeometricSailCreator_Plane)
+TNB_SAVE_IMPLEMENTATION(tnbLib::stbGmakerLib::GeometricSailCreator_Plane)
 {
 	ar & boost::serialization::base_object<StbGMaker_GeometricSailCreator>(*this);
 	ar & thePlane_;
 	ar & theZbar_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::stbGmakerLib::GeometricSailCreator_Plane)
+TNB_LOAD_IMPLEMENTATION(tnbLib::stbGmakerLib::GeometricSailCreator_Plane)
 {
 	ar & boost::serialization::base_object<StbGMaker_GeometricSailCreator>(*this);
 	ar & thePlane_;
