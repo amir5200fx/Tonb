@@ -17,18 +17,11 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_RegObj;
 	class SectPx_Par;
-	class SectPx_ParMaker;
-	class SectPx_PntMaker;
-	class SectPx_ProfileMaker;
 
 	class SectPx_Registry
 		: public SectPx_Entity
 		, public SectPx_ScatterRegistry
 	{
-
-		friend class SectPx_ParMaker;
-		friend class SectPx_PntMaker;
-		friend class SectPx_ProfileMaker;
 
 		/*Private Data*/
 
@@ -41,7 +34,7 @@ namespace tnbLib
 		//- private functions and operators
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		auto& Counter() const
 		{
@@ -81,6 +74,8 @@ namespace tnbLib
 		{
 			return (Standard_Integer)theObjects_.size();
 		}
+
+		TnbSectPx_EXPORT Standard_Integer MaxIndex() const;
 
 		inline Standard_Boolean
 			IsContains

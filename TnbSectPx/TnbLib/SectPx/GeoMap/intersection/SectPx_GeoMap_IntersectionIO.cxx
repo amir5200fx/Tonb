@@ -4,7 +4,7 @@
 #include <SectPx_Par.hxx>
 #include <Geo_Serialization.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::sectPxLib::GeoMap_Intersection)
+TNB_SAVE_IMPLEMENTATION(tnbLib::sectPxLib::GeoMap_Intersection)
 {
 	ar & boost::serialization::base_object<SectPx_GeoMap>(*this);
 
@@ -16,7 +16,7 @@ DECLARE_SAVE_IMP(tnbLib::sectPxLib::GeoMap_Intersection)
 	ar & theAngle1_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::sectPxLib::GeoMap_Intersection)
+TNB_LOAD_IMPLEMENTATION(tnbLib::sectPxLib::GeoMap_Intersection)
 {
 	ar & boost::serialization::base_object<SectPx_GeoMap>(*this);
 

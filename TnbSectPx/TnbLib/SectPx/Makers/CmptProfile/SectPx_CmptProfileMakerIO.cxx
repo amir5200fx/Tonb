@@ -2,13 +2,13 @@
 
 #include <SectPx_ProfileMaker.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::maker::CmptProfile)
+TNB_SAVE_IMPLEMENTATION(tnbLib::maker::CmptProfile)
 {
 	ar & theProfiles_;
 	ar & theCounter_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::maker::CmptProfile)
+TNB_LOAD_IMPLEMENTATION(tnbLib::maker::CmptProfile)
 {
 	ar & theProfiles_;
 	ar & theCounter_;

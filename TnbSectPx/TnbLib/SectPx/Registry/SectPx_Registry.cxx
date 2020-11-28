@@ -75,6 +75,16 @@ void tnbLib::SectPx_Registry::Add
 }
 
 Standard_Integer 
+tnbLib::SectPx_Registry::MaxIndex() const
+{
+	if (theObjects_.empty())
+	{
+		return 0;
+	}
+	return (--theObjects_.end())->first;
+}
+
+Standard_Integer 
 tnbLib::SectPx_Registry::Import
 (
 	const std::shared_ptr<SectPx_RegObj>& theObj

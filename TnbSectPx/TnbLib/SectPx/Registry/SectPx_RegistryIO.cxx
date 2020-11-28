@@ -2,7 +2,7 @@
 
 #include <SectPx_RegObj.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_Registry)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Registry)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
 	ar & boost::serialization::base_object<SectPx_ScatterRegistry>(*this);
@@ -10,7 +10,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_Registry)
 	ar & theCounter_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_Registry)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Registry)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
 	ar & boost::serialization::base_object<SectPx_ScatterRegistry>(*this);

@@ -2,7 +2,7 @@
 
 #include <SectPx_TopoProfile.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::maker::Profile)
+TNB_SAVE_IMPLEMENTATION(tnbLib::maker::Profile)
 {
 	ar & boost::serialization::base_object<SectPx_Maker>(*this);
 	//ar & boost::serialization::base_object<Global_Done>(*this);
@@ -10,7 +10,7 @@ DECLARE_SAVE_IMP(tnbLib::maker::Profile)
 	ar & theProfile_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::maker::Profile)
+TNB_LOAD_IMPLEMENTATION(tnbLib::maker::Profile)
 {
 	ar & boost::serialization::base_object<SectPx_Maker>(*this);
 	//ar & boost::serialization::base_object<Global_Done>(*this);

@@ -3,7 +3,7 @@
 #include <SectPx_Coord.hxx>
 #include <SectPx_Par.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::sectPxLib::GeoMap_LinearInterpl)
+TNB_SAVE_IMPLEMENTATION(tnbLib::sectPxLib::GeoMap_LinearInterpl)
 {
 	ar & boost::serialization::base_object<SectPx_GeoMap>(*this);
 	ar & theQ0_;
@@ -12,7 +12,7 @@ DECLARE_SAVE_IMP(tnbLib::sectPxLib::GeoMap_LinearInterpl)
 	ar & thePar_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::sectPxLib::GeoMap_LinearInterpl)
+TNB_LOAD_IMPLEMENTATION(tnbLib::sectPxLib::GeoMap_LinearInterpl)
 {
 	ar & boost::serialization::base_object<SectPx_GeoMap>(*this);
 	ar & theQ0_;

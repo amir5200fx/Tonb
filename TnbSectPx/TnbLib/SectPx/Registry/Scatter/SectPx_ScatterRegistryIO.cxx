@@ -2,7 +2,7 @@
 
 #include <SectPx_RegObj.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_ScatterRegistry)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_ScatterRegistry)
 {
 	for (size_t i = 0; i < (size_t)SectPx_RegObjType::other; i++)
 	{
@@ -10,7 +10,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_ScatterRegistry)
 	}
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_ScatterRegistry)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_ScatterRegistry)
 {
 	for (size_t i = 0; i < (size_t)SectPx_RegObjType::other; i++)
 	{
