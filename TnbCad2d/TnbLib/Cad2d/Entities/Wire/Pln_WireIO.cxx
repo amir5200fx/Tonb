@@ -10,7 +10,7 @@ void tnbLib::Pln_Wire::ExportToPlt(OFstream & File) const
 	}
 }
 
-DECLARE_SAVE_IMP(tnbLib::Pln_Wire)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Wire)
 {
 	ar & boost::serialization::base_object<Pln_Entity>(*this);
 	ar & boost::serialization::base_object<Pln_WireAdaptor>(*this);
@@ -19,7 +19,7 @@ DECLARE_SAVE_IMP(tnbLib::Pln_Wire)
 	ar & CmpEdge();
 }
 
-DECLARE_LOAD_IMP(tnbLib::Pln_Wire)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Wire)
 {
 	ar & boost::serialization::base_object<Pln_Entity>(*this);
 	ar & boost::serialization::base_object<Pln_WireAdaptor>(*this);

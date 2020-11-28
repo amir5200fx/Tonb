@@ -20,7 +20,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		//DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+		//TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
 		friend class boost::serialization::access;
 

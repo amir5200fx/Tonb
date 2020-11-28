@@ -1,6 +1,6 @@
 #include <Pln_Vertex.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::Pln_Vertex)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Vertex)
 {
 	ar & boost::serialization::base_object<Pln_Entity>(*this);
 	ar & boost::serialization::base_object<Pln_EntityPrecision>(*this);
@@ -9,7 +9,7 @@ DECLARE_SAVE_IMP(tnbLib::Pln_Vertex)
 	ar & Coord();
 }
 
-DECLARE_LOAD_IMP(tnbLib::Pln_Vertex)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Vertex)
 {
 	ar & boost::serialization::base_object<Pln_Entity>(*this);
 	ar & boost::serialization::base_object<Pln_EntityPrecision>(*this);

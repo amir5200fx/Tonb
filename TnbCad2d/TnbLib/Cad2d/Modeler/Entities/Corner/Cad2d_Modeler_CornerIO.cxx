@@ -2,7 +2,7 @@
 
 #include <Pln_Vertex.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Corner)
+TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Corner)
 {
 	ar & boost::serialization::base_object<Modeler_Entity>(*this);
 	ar & boost::serialization::base_object<Modeler_CornerAdaptor>(*this);
@@ -15,7 +15,7 @@ DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Corner)
 	ar & Coord();
 }
 
-DECLARE_LOAD_IMP(tnbLib::cad2dLib::Modeler_Corner)
+TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Corner)
 {
 	ar & boost::serialization::base_object<Modeler_Entity>(*this);
 	ar & boost::serialization::base_object<Modeler_CornerAdaptor>(*this);

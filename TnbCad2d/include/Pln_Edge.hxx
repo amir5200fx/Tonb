@@ -43,7 +43,7 @@ namespace tnbLib
 			return theVtx1_;
 		}
 
-		DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+		TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
 	public:
 

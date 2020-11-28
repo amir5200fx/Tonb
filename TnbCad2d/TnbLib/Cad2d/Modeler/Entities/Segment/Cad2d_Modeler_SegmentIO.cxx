@@ -3,7 +3,7 @@
 #include <Cad2d_Modeler_Corner.hxx>
 #include <Pln_Edge.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Segment)
+TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Segment)
 {
 	ar & boost::serialization::base_object<Modeler_Entity>(*this);
 
@@ -12,7 +12,7 @@ DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Segment)
 	ar & Edges();
 }
 
-DECLARE_LOAD_IMP(tnbLib::cad2dLib::Modeler_Segment)
+TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Segment)
 {
 	ar & boost::serialization::base_object<Modeler_Entity>(*this);
 
@@ -21,12 +21,12 @@ DECLARE_LOAD_IMP(tnbLib::cad2dLib::Modeler_Segment)
 	ar & ChangeEdges();
 }
 
-DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Ring)
+TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Ring)
 {
 	ar & boost::serialization::base_object<Modeler_Segment>(*this);
 }
 
-DECLARE_LOAD_IMP(tnbLib::cad2dLib::Modeler_Ring)
+TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Ring)
 {
 	ar & boost::serialization::base_object<Modeler_Segment>(*this);
 }

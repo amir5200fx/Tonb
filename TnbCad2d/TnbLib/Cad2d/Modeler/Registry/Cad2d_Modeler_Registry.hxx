@@ -29,7 +29,7 @@ namespace tnbLib
 
 
 			/*private functions and operators*/
-			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+			TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
 			auto& ChangeEdges()
 			{

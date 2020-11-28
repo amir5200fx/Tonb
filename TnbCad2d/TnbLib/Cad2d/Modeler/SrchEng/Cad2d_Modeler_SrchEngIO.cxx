@@ -2,7 +2,7 @@
 
 #include <Cad2d_Modeler_Corner.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_SrchEng)
+TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_SrchEng)
 {
 	double radius = Radius();
 	ar & Corners();
@@ -10,7 +10,7 @@ DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_SrchEng)
 	ar & CornerCounter();
 }
 
-DECLARE_LOAD_IMP(tnbLib::cad2dLib::Modeler_SrchEng)
+TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_SrchEng)
 {
 	ar & ChangeCorners();
 	ar & ChangeMaxRadius();

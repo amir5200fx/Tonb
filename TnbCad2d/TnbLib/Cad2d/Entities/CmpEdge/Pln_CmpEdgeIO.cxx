@@ -13,12 +13,12 @@ void tnbLib::Pln_CmpEdge::ExportToPlt(OFstream & File) const
 	}
 }
 
-DECLARE_SAVE_IMP(tnbLib::Pln_CmpEdge)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_CmpEdge)
 {
 	ar & Edges();
 }
 
-DECLARE_LOAD_IMP(tnbLib::Pln_CmpEdge)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_CmpEdge)
 {
 	ar & ChangeEdges();
 }

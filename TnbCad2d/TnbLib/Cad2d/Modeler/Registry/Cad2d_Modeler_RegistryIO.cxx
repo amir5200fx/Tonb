@@ -2,12 +2,12 @@
 
 #include <Pln_Edge.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Registry)
+TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Registry)
 {
 	ar & Edges();
 }
 
-DECLARE_LOAD_IMP(tnbLib::cad2dLib::Modeler_Registry)
+TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Registry)
 {
 	ar & ChangeEdges();
 }

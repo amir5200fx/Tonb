@@ -6,7 +6,7 @@
 
 #include <Geom2d_Curve.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::Pln_Curve)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Curve)
 {
 	ar & boost::serialization::base_object<Global_Indexed>(*this);
 	ar & boost::serialization::base_object<Global_Named>(*this);
@@ -27,7 +27,7 @@ namespace tnbLib
 	}
 }
 
-DECLARE_LOAD_IMP(tnbLib::Pln_Curve)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Curve)
 {
 	ar & boost::serialization::base_object<Global_Indexed>(*this);
 	ar & boost::serialization::base_object<Global_Named>(*this);

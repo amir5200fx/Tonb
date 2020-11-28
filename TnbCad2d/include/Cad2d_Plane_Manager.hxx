@@ -32,7 +32,7 @@ namespace tnbLib
 			std::shared_ptr<Cad_EntityManager<Pln_Edge>> theEdges_;
 
 			/*private functions and operators*/
-			DECLARE_SAVE_LOAD_HEADER(TnbCad2d_EXPORT);
+			TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
 		protected:
 

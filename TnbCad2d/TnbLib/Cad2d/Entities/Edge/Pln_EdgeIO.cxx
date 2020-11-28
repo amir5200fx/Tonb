@@ -14,7 +14,7 @@ void tnbLib::Pln_Edge::ExportToPlt
 	}
 }
 
-DECLARE_SAVE_IMP(tnbLib::Pln_Edge)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Edge)
 {
 	ar& boost::serialization::base_object<Pln_Entity>(*this);
 	ar& boost::serialization::base_object<Pln_EdgeAdaptor>(*this);
@@ -24,7 +24,7 @@ DECLARE_SAVE_IMP(tnbLib::Pln_Edge)
 	ar << Vtx1();
 }
 
-DECLARE_LOAD_IMP(tnbLib::Pln_Edge)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Edge)
 {
 	ar& boost::serialization::base_object<Pln_Entity>(*this);
 	ar& boost::serialization::base_object<Pln_EdgeAdaptor>(*this);

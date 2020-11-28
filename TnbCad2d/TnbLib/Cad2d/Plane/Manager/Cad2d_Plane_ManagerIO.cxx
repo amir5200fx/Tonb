@@ -4,13 +4,13 @@
 #include <Pln_Vertex.hxx>
 #include <Pln_Edge.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::cad2dLib::Plane_Manager)
+TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Plane_Manager)
 {
 	ar << Corners();
 	ar << Segments();
 }
 
-DECLARE_LOAD_IMP(tnbLib::cad2dLib::Plane_Manager)
+TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Plane_Manager)
 {
 	ar >> ChangeCorners();
 	ar >> ChangeSegments();

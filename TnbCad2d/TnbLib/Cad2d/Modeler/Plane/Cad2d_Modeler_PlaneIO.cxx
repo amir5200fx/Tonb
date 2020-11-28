@@ -2,12 +2,12 @@
 
 #include <Cad2d_Plane.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::cad2dLib::Modeler_Plane)
+TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Plane)
 {
 	ar & Planes();
 }
 
-DECLARE_LOAD_IMP(tnbLib::cad2dLib::Modeler_Plane)
+TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Modeler_Plane)
 {
 	ar & ChangePlanes();
 }

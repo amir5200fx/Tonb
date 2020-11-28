@@ -1,11 +1,11 @@
 #include <Pln_EntityPrecision.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::Pln_EntityPrecision)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_EntityPrecision)
 {
 	ar & Precision();
 }
 
-DECLARE_LOAD_IMP(tnbLib::Pln_EntityPrecision)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_EntityPrecision)
 {
 	ar& Precision();
 }

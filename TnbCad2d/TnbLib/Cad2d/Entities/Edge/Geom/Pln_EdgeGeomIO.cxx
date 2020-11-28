@@ -3,7 +3,7 @@
 #include <Entity2d_Polygon.hxx>
 #include <Pln_Curve.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::Pln_EdgeGeom)
+TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_EdgeGeom)
 {
 	bool sense = Sense();
 	ar << Curve();
@@ -11,7 +11,7 @@ DECLARE_SAVE_IMP(tnbLib::Pln_EdgeGeom)
 	ar << Mesh();
 }
 
-DECLARE_LOAD_IMP(tnbLib::Pln_EdgeGeom)
+TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_EdgeGeom)
 {
 	ar >> Curve();
 	ar >> ChangeSense();

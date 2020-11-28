@@ -1,12 +1,12 @@
 #include <Cad_Entity.hxx>
 
-//DECLARE_SAVE_IMP(tnbLib::Cad_Entity)
+//TNB_SAVE_IMPLEMENTATION(tnbLib::Cad_Entity)
 //{
 //	ar & Index();
 //	ar & Name();
 //}
 //
-//DECLARE_LOAD_IMP(tnbLib::Cad_Entity)
+//TNB_LOAD_IMPLEMENTATION(tnbLib::Cad_Entity)
 //{
 //	ar & Index();
 //	ar & Name();
