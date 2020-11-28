@@ -32,7 +32,7 @@ namespace tnbLib
 			ar & theItems_;
 		}
 
-		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		//TNB_SERIALIZATION(TnbGeo_EXPORT);
 
 		auto NbItems() const
 		{

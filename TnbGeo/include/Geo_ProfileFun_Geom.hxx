@@ -22,7 +22,7 @@ namespace tnbLib
 			Handle(Geom2d_Curve) theCurve_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+			TNB_SERIALIZATION(TnbGeo_EXPORT);
 
 		public:
 

@@ -91,13 +91,13 @@ namespace tnbLib
 	}
 }
 
-//DECLARE_SAVE_IMP(tnbLib::Pnt2d)
+//TNB_SAVE_IMPLEMENTATION(tnbLib::Pnt2d)
 //{
 //	ar << X();
 //	ar << Y();
 //}
 //
-//DECLARE_LOAD_IMP(tnbLib::Pnt2d)
+//TNB_LOAD_IMPLEMENTATION(tnbLib::Pnt2d)
 //{
 //	ar >> X();
 //	ar >> Y();

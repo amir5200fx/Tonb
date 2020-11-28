@@ -38,7 +38,7 @@ namespace tnbLib
 			ar & boost::serialization::base_object<gp_Pnt2d>(*this);
 		}
 
-		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		//TNB_SERIALIZATION(TnbGeo_EXPORT);
 
 	public:
 

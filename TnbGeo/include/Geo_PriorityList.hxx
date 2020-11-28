@@ -36,7 +36,7 @@ namespace tnbLib
 			return NbItems_;
 		}*/
 
-		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		//TNB_SERIALIZATION(TnbGeo_EXPORT);
 
 	public:
 
@@ -240,7 +240,7 @@ namespace tnbLib
 
 		//- private functions
 
-		//DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		//TNB_SERIALIZATION(TnbGeo_EXPORT);
 
 		friend boost::serialization::access;
 

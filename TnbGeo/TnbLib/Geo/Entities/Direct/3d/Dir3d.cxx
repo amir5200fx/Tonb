@@ -14,14 +14,14 @@ tnbLib::Dir3d::Dir3d
 	*this = Dir3d(v.XYZ());
 }
 
-//DECLARE_SAVE_IMP(tnbLib::Dir3d)
+//TNB_SAVE_IMPLEMENTATION(tnbLib::Dir3d)
 //{
 //	ar << X();
 //	ar << Y();
 //	ar << Z();
 //}
 //
-//DECLARE_LOAD_IMP(tnbLib::Dir3d)
+//TNB_LOAD_IMPLEMENTATION(tnbLib::Dir3d)
 //{
 //	Standard_Real x, y, z;
 //	ar >> x;

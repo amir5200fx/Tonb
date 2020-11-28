@@ -105,14 +105,14 @@ namespace tnbLib
 	}
 }
 
-//DECLARE_SAVE_IMP(tnbLib::Pnt3d)
+//TNB_SAVE_IMPLEMENTATION(tnbLib::Pnt3d)
 //{
 //	ar << X();
 //	ar << Y();
 //	ar << Z();
 //}
 //
-//DECLARE_LOAD_IMP(tnbLib::Pnt3d)
+//TNB_LOAD_IMPLEMENTATION(tnbLib::Pnt3d)
 //{
 //	ar >> X();
 //	ar >> Y();
