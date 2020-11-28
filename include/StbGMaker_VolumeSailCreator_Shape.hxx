@@ -21,7 +21,7 @@ namespace tnbLib
 			std::shared_ptr<marineLib::Shape_Sail>
 				theShape_;
 
-			DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+			TNB_SERIALIZATION(TnbStbGMaker_EXPORT);
 
 			VolumeSailCreator_Shape()
 			{}

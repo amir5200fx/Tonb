@@ -2,13 +2,13 @@
 
 #include <SectPx_Par.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_OneParCPtsMap)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_OneParCPtsMap)
 {
 	ar & boost::serialization::base_object<SectPx_CPtsMap>(*this);
 	ar & thePar_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_OneParCPtsMap)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_OneParCPtsMap)
 {
 	ar & boost::serialization::base_object<SectPx_CPtsMap>(*this);
 	ar & thePar_;

@@ -35,7 +35,7 @@ namespace tnbLib
 			return theWire_;
 		}
 
-		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
 		
 
 		static TnbMarine_EXPORT void CheckWire(const Pln_Wire& theWire, const char* theName);

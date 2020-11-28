@@ -25,7 +25,7 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Marine_WaterDomain>> theDomains_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
 
 		auto& ChangeDomains()
 		{

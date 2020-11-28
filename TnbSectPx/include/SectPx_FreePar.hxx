@@ -19,7 +19,7 @@ namespace tnbLib
 		std::shared_ptr<SectPx_FieldFun> theFun_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		auto& ChangeFun()
 		{

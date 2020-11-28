@@ -35,7 +35,7 @@ namespace tnbLib
 
 		//- private functions and operators
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		static TnbSectPx_EXPORT void Import(const std::shared_ptr<SectPx_RegObj>& ent, scatterMap& theMap);
 		static TnbSectPx_EXPORT void Remove(const Standard_Integer id, scatterMap& theMap);

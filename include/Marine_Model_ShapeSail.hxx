@@ -22,7 +22,7 @@ namespace tnbLib
 			std::shared_ptr<Body_Sail> theBody_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbMarine_EXPORT);
+			TNB_SERIALIZATION(TnbMarine_EXPORT);
 
 		protected:
 

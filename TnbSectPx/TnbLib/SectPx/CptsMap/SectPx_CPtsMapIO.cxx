@@ -3,7 +3,7 @@
 #include <SectPx_Pole.hxx>
 #include <SectPx_Segment.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_CPtsMap)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_CPtsMap)
 {
 	ar & boost::serialization::base_object<SectPx_Parent>(*this);
 	ar & theSegment_;
@@ -12,7 +12,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_CPtsMap)
 	ar & theP1_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_CPtsMap)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_CPtsMap)
 {
 	ar & boost::serialization::base_object<SectPx_Parent>(*this);
 	ar & theSegment_;

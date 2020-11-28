@@ -41,7 +41,7 @@ namespace tnbLib
 		//- private functions and operators
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		auto& Counter() const
 		{

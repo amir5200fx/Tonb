@@ -24,7 +24,7 @@ namespace tnbLib
 		std::shared_ptr<Entity2d_Box> theBoundingBox_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbStbGMaker_EXPORT);
+		TNB_SERIALIZATION(TnbStbGMaker_EXPORT);
 
 	protected:
 

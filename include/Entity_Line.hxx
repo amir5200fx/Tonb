@@ -97,7 +97,7 @@ namespace tnbLib
 		const Dir2d& theDir_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbGeo_EXPORT);
+		TNB_SERIALIZATION(TnbGeo_EXPORT);
 
 	public:
 
