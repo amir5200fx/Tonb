@@ -2,13 +2,13 @@
 
 #include <SectPx_GeoMap.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::sectPxLib::Datum_GeoField)
+TNB_SAVE_IMPLEMENTATION(tnbLib::sectPxLib::Datum_GeoField)
 {
 	ar & boost::serialization::base_object<SectPx_Datum>(*this);
 	ar & theMap_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::sectPxLib::Datum_GeoField)
+TNB_LOAD_IMPLEMENTATION(tnbLib::sectPxLib::Datum_GeoField)
 {
 	ar & boost::serialization::base_object<SectPx_Datum>(*this);
 	ar & theMap_;

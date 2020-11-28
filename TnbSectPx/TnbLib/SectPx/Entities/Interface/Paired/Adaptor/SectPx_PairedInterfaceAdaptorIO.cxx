@@ -2,12 +2,12 @@
 
 #include <SectPx_PairedInterface.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_PairedInterfaceAdaptor)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_PairedInterfaceAdaptor)
 {
 	ar & thePair_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_PairedInterfaceAdaptor)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_PairedInterfaceAdaptor)
 {
 	ar & thePair_;
 }

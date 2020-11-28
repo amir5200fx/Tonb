@@ -45,7 +45,7 @@ namespace tnbLib
 			std::shared_ptr<maker::CmptProfile> CmptProfile;
 			std::shared_ptr<maker::FieldFun> FieldFun;
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 		};
 
 	private:
@@ -57,7 +57,7 @@ namespace tnbLib
 		std::shared_ptr<EntityMaker> theMakers_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		TnbSectPx_EXPORT void AllocateMemory();
 

@@ -22,7 +22,7 @@ namespace tnbLib
 			std::shared_ptr<Pnt_GeoField> thePnt_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		public:
 

@@ -40,7 +40,7 @@ namespace tnbLib
 			Standard_Boolean addConstants_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 			TnbSectPx_EXPORT void AddParameter(const word&, const std::weak_ptr<SectPx_FieldFun>& p);
 

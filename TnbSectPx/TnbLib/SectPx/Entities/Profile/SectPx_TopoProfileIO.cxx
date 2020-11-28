@@ -3,7 +3,7 @@
 #include <SectPx_Node.hxx>
 #include <SectPx_KnotVector.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_TopoProfile)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_TopoProfile)
 {
 	ar & boost::serialization::base_object<SectPx_RegObj>(*this);
 	ar & theNode0_;
@@ -11,7 +11,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_TopoProfile)
 	ar & theKnotAlg_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_TopoProfile)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_TopoProfile)
 {
 	ar & boost::serialization::base_object<SectPx_RegObj>(*this);
 	ar & theNode0_;

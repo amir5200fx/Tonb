@@ -2,7 +2,7 @@
 
 #include <SectPx_FieldFun.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::sectPxLib::FieldFun_Expr)
+TNB_SAVE_IMPLEMENTATION(tnbLib::sectPxLib::FieldFun_Expr)
 {
 	ar & boost::serialization::base_object<SectPx_nonParFieldFun>(*this);
 	ar & theParameters_;
@@ -10,7 +10,7 @@ DECLARE_SAVE_IMP(tnbLib::sectPxLib::FieldFun_Expr)
 	ar & addConstants_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::sectPxLib::FieldFun_Expr)
+TNB_LOAD_IMPLEMENTATION(tnbLib::sectPxLib::FieldFun_Expr)
 {
 	ar & boost::serialization::base_object<SectPx_nonParFieldFun>(*this);
 	ar & theParameters_;

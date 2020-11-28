@@ -2,13 +2,13 @@
 
 #include <SectPx_Pnt.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::sectPxLib::Pole_Corner)
+TNB_SAVE_IMPLEMENTATION(tnbLib::sectPxLib::Pole_Corner)
 {
 	ar & boost::serialization::base_object<SectPx_InterPole>(*this);
 	ar & thePnt_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::sectPxLib::Pole_Corner)
+TNB_LOAD_IMPLEMENTATION(tnbLib::sectPxLib::Pole_Corner)
 {
 	ar & boost::serialization::base_object<SectPx_InterPole>(*this);
 	ar & thePnt_;

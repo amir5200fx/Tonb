@@ -2,7 +2,7 @@
 
 #include <SectPx_Pnt.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_Node)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Node)
 {
 	ar & boost::serialization::base_object<SectPx_RegObj>(*this);
 	ar & boost::serialization::base_object<SectPx_NodeAdaptor>(*this);
@@ -10,7 +10,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_Node)
 	ar & thePnt_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_Node)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Node)
 {
 	ar & boost::serialization::base_object<SectPx_RegObj>(*this);
 	ar & boost::serialization::base_object<SectPx_NodeAdaptor>(*this);

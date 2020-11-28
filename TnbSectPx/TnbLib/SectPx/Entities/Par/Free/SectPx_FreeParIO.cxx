@@ -21,13 +21,13 @@ void tnbLib::SectPx_FreePar::Print(Ostream & out) const
 	}
 }
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_FreePar)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_FreePar)
 {
 	ar & boost::serialization::base_object<SectPx_Par>(*this);
 	ar & theFun_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_FreePar)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_FreePar)
 {
 	ar & boost::serialization::base_object<SectPx_Par>(*this);
 	ar & theFun_;

@@ -2,12 +2,12 @@
 
 #include <SectPx_Edge.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_TPntAdaptor)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_TPntAdaptor)
 {
 	ar & theEdges_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_TPntAdaptor)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_TPntAdaptor)
 {
 	ar & theEdges_;
 }

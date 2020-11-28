@@ -3,7 +3,7 @@
 #include <SectPx_Registry.hxx>
 #include <SectPx_Makers.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_Frame::EntityMaker)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Frame::EntityMaker)
 {
 	ar & Par;
 	ar & Pnt;
@@ -12,7 +12,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_Frame::EntityMaker)
 	ar & FieldFun;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_Frame::EntityMaker)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Frame::EntityMaker)
 {
 	ar & Par;
 	ar & Pnt;
@@ -21,14 +21,14 @@ DECLARE_LOAD_IMP(tnbLib::SectPx_Frame::EntityMaker)
 	ar & FieldFun;
 }
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_Frame)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Frame)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
 	ar & theRegistry_;
 	ar & theMakers_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_Frame)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Frame)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
 	ar & theRegistry_;

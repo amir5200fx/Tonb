@@ -3,7 +3,7 @@
 #include <SectPx_Pnt.hxx>
 #include <SectPx_Cloud.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_InterplProfile)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_InterplProfile)
 {
 	ar & boost::serialization::base_object<SectPx_TopoProfile>(*this);
 	ar & thePnts_;
@@ -11,7 +11,7 @@ DECLARE_SAVE_IMP(tnbLib::SectPx_InterplProfile)
 	ar & theTol_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_InterplProfile)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_InterplProfile)
 {
 	ar & boost::serialization::base_object<SectPx_TopoProfile>(*this);
 	ar & thePnts_;
