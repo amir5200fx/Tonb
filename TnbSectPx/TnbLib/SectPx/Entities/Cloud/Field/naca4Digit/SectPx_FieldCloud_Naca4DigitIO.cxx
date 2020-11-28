@@ -2,7 +2,7 @@
 
 #include <SectPx_Par.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase)
+TNB_SAVE_IMPLEMENTATION(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase)
 {
 	ar & boost::serialization::base_object<SectPx_FieldCloud>(*this);
 	ar & theChord_;
@@ -12,7 +12,7 @@ DECLARE_SAVE_IMP(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase)
 	ar & theNbSegments_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase)
+TNB_LOAD_IMPLEMENTATION(tnbLib::sectPxLib::FieldCloud_Naca4DigitBase)
 {
 	ar & boost::serialization::base_object<SectPx_FieldCloud>(*this);
 	ar & theChord_;

@@ -22,7 +22,7 @@ namespace tnbLib
 		std::vector<std::shared_ptr<SectPx_TopoProfile>> theProfiles_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 
 		auto& ChangeProfiles()
