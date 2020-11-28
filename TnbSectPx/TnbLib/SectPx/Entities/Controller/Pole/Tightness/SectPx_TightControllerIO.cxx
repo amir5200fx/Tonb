@@ -2,14 +2,14 @@
 
 #include <SectPx_SegmentController.hxx>
 
-DECLARE_SAVE_IMP(tnbLib::SectPx_TightController)
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_TightController)
 {
 	ar & boost::serialization::base_object<SectPx_PoleController>(*this);
 	ar & theLeft_;
 	ar & theRight_;
 }
 
-DECLARE_LOAD_IMP(tnbLib::SectPx_TightController)
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_TightController)
 {
 	ar & boost::serialization::base_object<SectPx_PoleController>(*this);
 	ar & theLeft_;
