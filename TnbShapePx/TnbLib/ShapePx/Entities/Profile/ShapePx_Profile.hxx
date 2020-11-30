@@ -5,6 +5,9 @@
 #include <ShapePx_Entity.hxx>
 #include <Global_Bound.hxx>
 
+#include <memory>
+#include <vector>
+
 namespace tnbLib
 {
 
@@ -13,18 +16,49 @@ namespace tnbLib
 
 	class ShapePx_Profile
 		: public ShapePx_Entity
-		, public Global_Bound<Standard_Real>
 	{
 
 		/*Private Data*/
 
+
 	protected:
 
+		
+		template<class... _Types>
+		ShapePx_Profile(_Types&... _Args)
+			: ShapePx_Entity(_Args...)
+		{}
 
+		
 
 	public:
 
-		virtual Standard_Real Value(const Standard_Real x) const = 0;
+
+		struct offsetPoint
+		{
+			offsetPoint()
+				: x(0), y(0)
+			{}
+
+			offsetPoint(Standard_Real _x, Standard_Real _y)
+				: x(_x), y(_y)
+			{}
+
+			Standard_Real x;
+			Standard_Real y;
+		};
+
+
+		virtual Standard_Real Lower() const = 0;
+
+		virtual Standard_Real Upper() const = 0;
+
+		virtual Standard_Real LowerValue() const = 0;
+
+		virtual Standard_Real UpperValue() const = 0;
+
+		virtual std::vector<offsetPoint> RetrieveOffsets() const = 0;
+
 	};
 }
 

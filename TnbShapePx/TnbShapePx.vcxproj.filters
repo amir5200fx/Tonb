@@ -31,29 +31,32 @@
     <Filter Include="TnbLib\ShapePx\Entities\Shape">
       <UniqueIdentifier>{a4062e97-cc58-4cf0-917e-236870f8badd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm">
-      <UniqueIdentifier>{217b41ff-ef0c-427a-a8df-88f03dad5fe3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\ShapePx\Entities\Profile\Discrete">
       <UniqueIdentifier>{18258aea-3b6a-43b4-8204-8c9eca655959}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Linear">
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous">
+      <UniqueIdentifier>{217b41ff-ef0c-427a-a8df-88f03dad5fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Linear">
       <UniqueIdentifier>{7bad0ff7-f090-4b5b-b194-9f2c45574bbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Func">
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Func">
       <UniqueIdentifier>{d174f68e-b457-4e71-8ccf-aab02cf407e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Interpl">
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Interpl">
       <UniqueIdentifier>{83770291-b0e6-4a45-9e63-84c3d240556e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Approx">
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Approx">
       <UniqueIdentifier>{eefcc6dc-ca13-4a66-b466-52d964b53c5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\ParmX">
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Uniform">
+      <UniqueIdentifier>{e2e90a44-a9c5-4b9c-b9b2-71940a198dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom">
       <UniqueIdentifier>{23af15df-bb7f-4a1d-bb8f-a9ff7b588d64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\ShapePx\Entities\Profile\Firm\Uniform">
-      <UniqueIdentifier>{e2e90a44-a9c5-4b9c-b9b2-71940a198dd2}</UniqueIdentifier>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints">
+      <UniqueIdentifier>{4ea6fb9f-b39c-4262-87bf-391bf8f6ef0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,10 +66,43 @@
     <ClInclude Include="TnbLib\ShapePx\Entities\Profile\ShapePx_Profile.hxx">
       <Filter>TnbLib\ShapePx\Entities\Profile</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\ShapePx_ContinProfile.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Uniform\ShapePx_ContinProfile_Uniform.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Linear\ShapePx_ContinProfile_Linear.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints\ShapePx_ContinProfile_ThreePoints.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Interpl\ShapePx_ContinProfile_Interpl.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Interpl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Patch\ShapePx_Patch.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Patch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
       <Filter>TnbLib\ShapePx\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Uniform\ShapePx_ContinProfile_Uniform.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Linear\ShapePx_ContinProfile_Linear.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\ShapePx_ContinProfile.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints\ShapePx_ContinProfile_ThreePoints.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Interpl\ShapePx_ContinProfile_Interpl.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Interpl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
