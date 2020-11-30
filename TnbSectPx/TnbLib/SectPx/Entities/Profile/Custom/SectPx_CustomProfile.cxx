@@ -1,6 +1,6 @@
 #include <SectPx_CustomProfile.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_Edge.hxx>
 #include <SectPx_TPnt.hxx>
 #include <SectPx_Node.hxx>
@@ -58,7 +58,7 @@ tnbLib::SectPx_CustomProfile::MakeProfile
 (
 	const std::shared_ptr<SectPx_Pnt>& theP0,
 	const std::shared_ptr<SectPx_Pnt>& theP1,
-	const std::shared_ptr<SectPx_Registry>& theReg
+	const std::shared_ptr<SectPx_FrameRegistry>& theReg
 )
 {
 	std::vector<std::shared_ptr<SectPx_Pnt>> pnts;

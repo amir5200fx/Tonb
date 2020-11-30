@@ -1,6 +1,6 @@
 #include <SectPx_InterfaceMaker.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_Interfaces.hxx>
 #include <SectPx_Node.hxx>
 #include <SectPx_Tools.hxx>

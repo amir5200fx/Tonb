@@ -46,6 +46,12 @@ tnbLib::SectPx_Node::IsNode() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_Node::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_Node::RegObjType() const
 {

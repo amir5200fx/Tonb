@@ -127,3 +127,9 @@ tnbLib::SectPx_Edge::IsEdge() const
 {
 	return Standard_True;
 }
+
+Standard_Boolean 
+tnbLib::SectPx_Edge::IsFrameRegObj() const
+{
+	return Standard_True;
+}

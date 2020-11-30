@@ -397,6 +397,24 @@
     <Filter Include="TnbLib\SectPx\Entities\Shape\Profile">
       <UniqueIdentifier>{ffe6fda9-cf3f-4cf5-a332-4ab5ad6dd10c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Parameter">
+      <UniqueIdentifier>{c36b024d-4dc2-4dfb-b9e9-741458cb58bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Counter">
+      <UniqueIdentifier>{d9a59ae4-d139-49a9-bfeb-a97c24b7086c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\RegObj\ParReg">
+      <UniqueIdentifier>{0de95d63-8b8a-42af-a7c2-acf1263e6371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\RegObj\FrameReg">
+      <UniqueIdentifier>{68e74f73-b639-416b-8d4c-d1498400ca64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Frame">
+      <UniqueIdentifier>{ca88fb10-138c-4a9f-85e7-db8adc549792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Obj">
+      <UniqueIdentifier>{f06b19dc-1dc8-4917-b4a5-ea10c2df84f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -869,6 +887,27 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Shape\Section\SectPx_SectionShape.hxx">
       <Filter>TnbLib\SectPx\Entities\Shape\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Parameter\SectPx_ParRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Counter\SectPx_CountRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Counter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\RegObj\ParReg\SectPx_ParRegObj.hxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\ParReg</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\RegObj\FrameReg\SectPx_FrameRegObj.hxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\FrameReg</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Frame\SectPx_FrameRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistryI.hxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1417,6 +1456,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Shape\Section\SectPx_SectionShape.cxx">
       <Filter>TnbLib\SectPx\Entities\Shape\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Parameter\SectPx_ParRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\RegObj\ParReg\SectPx_ParRegObj.cxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\ParReg</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\RegObj\FrameReg\SectPx_FrameRegObj.cxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\FrameReg</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Parameter\SectPx_ParRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Frame\SectPx_FrameRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Frame\SectPx_FrameRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

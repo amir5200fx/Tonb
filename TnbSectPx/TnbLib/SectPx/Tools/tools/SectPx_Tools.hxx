@@ -16,7 +16,7 @@ namespace tnbLib
 	class SectPx_Parent;
 	class SectPx_TopoProfile;
 	class SectPx_Pnt;
-	class SectPx_Registry;
+	class SectPx_FrameRegistry;
 	class SectPx_Node;
 	class SectPx_Edge;
 	class SectPx_Interface;
@@ -39,7 +39,7 @@ namespace tnbLib
 			(
 				const std::shared_ptr<SectPx_Pnt>& theP0,
 				const std::shared_ptr<SectPx_Pnt>& theP1,
-				const std::shared_ptr<SectPx_Registry>& theReg,
+				const std::shared_ptr<SectPx_FrameRegistry>& theReg,
 				const SectPx_JoinPriority priority = SectPx_JoinPriority::left
 			);
 
@@ -48,7 +48,7 @@ namespace tnbLib
 			(
 				const std::shared_ptr<SectPx_TopoProfile>& theLeft,
 				const std::shared_ptr<SectPx_TopoProfile>& theRight,
-				const std::shared_ptr<SectPx_Registry>& theReg,
+				const std::shared_ptr<SectPx_FrameRegistry>& theReg,
 				const SectPx_JoinPriority priority = SectPx_JoinPriority::left
 			);
 
@@ -57,7 +57,7 @@ namespace tnbLib
 			(
 				const std::shared_ptr<SectPx_Pnt>& theP0,
 				const std::shared_ptr<SectPx_Pnt>& theP1,
-				const std::shared_ptr<SectPx_Registry>& theReg
+				const std::shared_ptr<SectPx_FrameRegistry>& theReg
 			);
 
 		static TnbSectPx_EXPORT std::vector<Pnt2d>

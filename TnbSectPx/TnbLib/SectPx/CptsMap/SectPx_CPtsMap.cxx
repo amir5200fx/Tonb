@@ -41,6 +41,12 @@ tnbLib::SectPx_CPtsMap::IsCPtsMap() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_CPtsMap::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 Standard_Boolean
 tnbLib::SectPx_CPtsMap::IsOnePar() const
 {

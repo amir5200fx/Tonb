@@ -75,6 +75,7 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsInterface() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
 		
 	};
 }

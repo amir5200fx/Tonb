@@ -23,3 +23,9 @@ tnbLib::SectPx_Pole::IsPole() const
 {
 	return Standard_True;
 }
+
+Standard_Boolean 
+tnbLib::SectPx_Pole::IsFrameRegObj() const
+{
+	return Standard_True;
+}

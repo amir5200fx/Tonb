@@ -18,6 +18,12 @@ tnbLib::SectPx_Controller::IsController() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_Controller::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 typename tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_Controller::RegObjType() const
 {

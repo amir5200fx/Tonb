@@ -2,7 +2,7 @@
 
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Edge.hxx>
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_ProfileQ.hxx>
 #include <SectPx_PntTools.hxx>
 #include <SectPx_Tools.hxx>

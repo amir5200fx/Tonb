@@ -15,12 +15,13 @@ namespace tnbLib
 	class SectPx_Par;
 	class SectPx_FieldFun;
 	class SectPx_Coord;
+	class SectPx_ParRegistry;
 
 	namespace maker
 	{
 
 		class FieldFun
-			: public SectPx_Maker
+			: public SectPx_Maker<SectPx_ParRegistry>
 		{
 
 			/*Private Data*/
@@ -31,7 +32,7 @@ namespace tnbLib
 			template<class Archive>
 			void serialize(Archive &ar, const unsigned int file_version)
 			{
-				ar & boost::serialization::base_object<SectPx_Maker>(*this);
+				ar & boost::serialization::base_object<SectPx_Maker<SectPx_ParRegistry>>(*this);
 			}
 
 			FieldFun()
@@ -41,9 +42,9 @@ namespace tnbLib
 
 			explicit FieldFun
 			(
-				const std::shared_ptr<SectPx_Registry>& theRegistry
+				const std::shared_ptr<SectPx_ParRegistry>& theRegistry
 			)
-				: SectPx_Maker(theRegistry)
+				: SectPx_Maker<SectPx_ParRegistry>(theRegistry)
 			{}
 
 			TnbSectPx_EXPORT std::shared_ptr<SectPx_FieldFun>

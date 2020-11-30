@@ -15,7 +15,6 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Node;
-	class SectPx_Registry;
 	class SectPx_KnotVector;
 
 	class SectPx_TopoProfile
@@ -101,6 +100,8 @@ namespace tnbLib
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		TnbSectPx_EXPORT Standard_Boolean IsProfile() const override;
+
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
 
 		TnbSectPx_EXPORT Handle(Geom2d_Curve)
 			RetrieveGeomCurve

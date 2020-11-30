@@ -14,16 +14,16 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Pnt;
 	class SectPx_Edge;
-	class SectPx_Registry;
 	class SectPx_ProfileQ;
 	class SectPx_TopoProfile;
 	class SectPx_Node;
+	class SectPx_FrameRegistry;
 
 	namespace maker
 	{
 
 		class Profile
-			: public SectPx_Maker
+			: public SectPx_Maker<SectPx_FrameRegistry>
 		{
 
 			/*Private Data*/
@@ -65,9 +65,9 @@ namespace tnbLib
 			Profile
 			(
 				const std::shared_ptr<SectPx_TopoProfile>& theProfile,
-				const std::shared_ptr<SectPx_Registry>& theRegistry
+				const std::shared_ptr<SectPx_FrameRegistry>& theRegistry
 			)
-				: SectPx_Maker(theRegistry)
+				: SectPx_Maker<SectPx_FrameRegistry>(theRegistry)
 				, theProfile_(theProfile)
 			{}
 

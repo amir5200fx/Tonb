@@ -29,6 +29,12 @@ tnbLib::SectPx_OffsetProfile::IsOffsetProfile() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_OffsetProfile::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_OffsetProfile::RegObjType() const
 {

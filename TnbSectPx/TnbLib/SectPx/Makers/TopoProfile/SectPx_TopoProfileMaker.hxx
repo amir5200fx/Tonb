@@ -15,12 +15,13 @@ namespace tnbLib
 	class SectPx_Pnt;
 	class SectPx_Node;
 	class SectPx_Cloud;
+	class SectPx_FrameRegistry;
 
 	namespace maker
 	{
 
 		class TopoProfile
-			: public SectPx_Maker
+			: public SectPx_Maker<SectPx_FrameRegistry>
 		{
 
 			/*Private Data*/
@@ -30,7 +31,7 @@ namespace tnbLib
 			template<class Archive>
 			void serialize(Archive &ar, const unsigned int file_version)
 			{
-				ar & boost::serialization::base_object<SectPx_Maker>(*this);
+				ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
 			}
 
 			TopoProfile()
@@ -40,9 +41,9 @@ namespace tnbLib
 
 			TopoProfile
 			(
-				const std::shared_ptr<SectPx_Registry>& theReg
+				const std::shared_ptr<SectPx_FrameRegistry>& theReg
 			)
-				: SectPx_Maker(theReg)
+				: SectPx_Maker<SectPx_FrameRegistry>(theReg)
 			{}
 
 

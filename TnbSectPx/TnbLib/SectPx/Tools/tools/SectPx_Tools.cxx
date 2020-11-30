@@ -3,7 +3,7 @@
 #include <SectPx_Pole.hxx>
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Node.hxx>
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_Edge.hxx>
 #include <SectPx_Segment.hxx>
 #include <SectPx_PointMaker.hxx>
@@ -52,7 +52,7 @@ tnbLib::SectPx_Tools::MakePair
 (
 	const std::shared_ptr<SectPx_Pnt>& theP0,
 	const std::shared_ptr<SectPx_Pnt>& theP1,
-	const std::shared_ptr<SectPx_Registry>& theReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theReg,
 	const SectPx_JoinPriority priority
 )
 {
@@ -115,7 +115,7 @@ tnbLib::SectPx_Tools::MakeJoint
 (
 	const std::shared_ptr<SectPx_TopoProfile>& theLeft,
 	const std::shared_ptr<SectPx_TopoProfile>& theRight,
-	const std::shared_ptr<SectPx_Registry>& theReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theReg,
 	const SectPx_JoinPriority priority
 )
 {
@@ -145,7 +145,7 @@ tnbLib::SectPx_Tools::MakeEdge
 (
 	const std::shared_ptr<SectPx_Pnt>& theP0,
 	const std::shared_ptr<SectPx_Pnt>& theP1,
-	const std::shared_ptr<SectPx_Registry>& theReg
+	const std::shared_ptr<SectPx_FrameRegistry>& theReg
 )
 {
 	auto seg = std::make_shared<SectPx_Edge>(theP0, theP1);

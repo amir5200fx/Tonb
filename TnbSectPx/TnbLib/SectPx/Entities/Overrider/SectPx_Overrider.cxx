@@ -6,6 +6,12 @@ tnbLib::SectPx_Overrider::IsOverrider() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_Overrider::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_Overrider::RegObjType() const
 {

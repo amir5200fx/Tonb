@@ -16,9 +16,16 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_RegObj;
+	class SectPx_ParRegistry;
+	class SectPx_FrameRegistry;
+	class SectPx_ObjectRegistry;
 
 	class SectPx_ScatterRegistry
 	{
+
+		friend class SectPx_ParRegistry;
+		friend class SectPx_FrameRegistry;
+		friend class SectPx_ObjectRegistry;
 
 	public:
 

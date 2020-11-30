@@ -60,3 +60,9 @@ tnbLib::SectPx_Interface::IsInterface() const
 {
 	return Standard_True;
 }
+
+Standard_Boolean 
+tnbLib::SectPx_Interface::IsFrameRegObj() const
+{
+	return Standard_True;
+}

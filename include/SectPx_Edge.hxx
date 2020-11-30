@@ -23,7 +23,7 @@ namespace tnbLib
 		std::shared_ptr<SectPx_Pnt> theP1_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		void SetP0
 		(
@@ -104,6 +104,8 @@ namespace tnbLib
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		TnbSectPx_EXPORT Standard_Boolean IsEdge() const override;
+
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
 
 	};
 }

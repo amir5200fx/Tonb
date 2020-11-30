@@ -13,12 +13,13 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Par;
 	class SectPx_FieldFun;
+	class SectPx_ParRegistry;
 
 	namespace maker
 	{
 
 		class Parameter
-			: public SectPx_Maker
+			: public SectPx_Maker<SectPx_ParRegistry>
 		{
 
 			/*Private Data*/
@@ -28,7 +29,7 @@ namespace tnbLib
 			template<class Archive>
 			void serialize(Archive &ar, const unsigned int file_version)
 			{
-				ar & boost::serialization::base_object<SectPx_Maker>(*this);
+				ar & boost::serialization::base_object<SectPx_Maker<SectPx_ParRegistry>>(*this);
 			}
 
 			Parameter()
@@ -38,9 +39,9 @@ namespace tnbLib
 
 			explicit Parameter
 			(
-				const std::shared_ptr<SectPx_Registry>& theRegistry
+				const std::shared_ptr<SectPx_ParRegistry>& theRegistry
 			)
-				: SectPx_Maker(theRegistry)
+				: SectPx_Maker<SectPx_ParRegistry>(theRegistry)
 			{}
 
 

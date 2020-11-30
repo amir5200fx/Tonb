@@ -39,6 +39,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsChild() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsParRegObj() const override;
+
 	};
 }
 

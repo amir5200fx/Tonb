@@ -74,6 +74,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsCPtsMap() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
+
 		TnbSectPx_EXPORT virtual Standard_Boolean IsOnePar() const;
 
 		TnbSectPx_EXPORT virtual Standard_Boolean IsMultiPar() const;

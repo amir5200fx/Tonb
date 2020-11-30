@@ -6,6 +6,7 @@
 #include <SectPx_Pnts.hxx>
 #include <SectPx_FixedKnots.hxx>
 #include <SectPx_Makers.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -101,7 +102,7 @@ std::shared_ptr<tnbLib::SectPx_InterplProfile>
 tnbLib::SectPx_InterplProfile::MakeProfile
 (
 	const std::shared_ptr<SectPx_Cloud>& theCloud,
-	const std::shared_ptr<SectPx_Registry>& theReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theReg,
 	const Standard_Real tol
 )
 {

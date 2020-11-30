@@ -63,6 +63,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsCloud() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
+
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		virtual Standard_Boolean IsComplete() const = 0;

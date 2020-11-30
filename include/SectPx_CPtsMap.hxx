@@ -31,7 +31,7 @@ namespace tnbLib
 
 		//- private functions and operators
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 	protected:
 
@@ -73,6 +73,8 @@ namespace tnbLib
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		TnbSectPx_EXPORT Standard_Boolean IsCPtsMap() const override;
+
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
 
 		TnbSectPx_EXPORT virtual Standard_Boolean IsOnePar() const;
 

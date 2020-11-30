@@ -8,7 +8,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class SectPx_Registry;
+	class SectPx_ParRegistry;
 
 	class SectPx_oneParFieldFun
 		: public SectPx_FieldFun
@@ -23,7 +23,7 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive &ar, const unsigned int file_version);
 
-		//DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		//TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 	protected:
 
@@ -77,7 +77,7 @@ namespace tnbLib
 		static std::shared_ptr<FieldFun>
 			Maker
 			(
-				const std::shared_ptr<SectPx_Registry>& theReg, 
+				const std::shared_ptr<SectPx_ParRegistry>& theReg, 
 				const Standard_Integer theParId
 			);
 	};

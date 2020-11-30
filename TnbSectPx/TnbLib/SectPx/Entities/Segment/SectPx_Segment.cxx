@@ -128,3 +128,9 @@ tnbLib::SectPx_Segment::IsSegment() const
 {
 	return Standard_True;
 }
+
+Standard_Boolean 
+tnbLib::SectPx_Segment::IsFrameRegObj() const
+{
+	return Standard_True;
+}

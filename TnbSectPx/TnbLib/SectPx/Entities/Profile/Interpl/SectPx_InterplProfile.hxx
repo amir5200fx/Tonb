@@ -15,6 +15,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Cloud;
 	class SectPx_Pnt;
+	class SectPx_FrameRegistry;
 
 	class SectPx_InterplProfile
 		: public SectPx_TopoProfile
@@ -89,7 +90,7 @@ namespace tnbLib
 			MakeProfile
 			(
 				const std::shared_ptr<SectPx_Cloud>& theProfile,
-				const std::shared_ptr<SectPx_Registry>& theReg,
+				const std::shared_ptr<SectPx_FrameRegistry>& theReg,
 				const Standard_Real tol = 1.0E-6
 			);
 	};

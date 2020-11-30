@@ -1,6 +1,6 @@
 #include <SectPx_NodeMaker.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_Node.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>

@@ -1,6 +1,6 @@
 #include <SectPx_GeometricMapMaker.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_GeoMap_LinearInterpl.hxx>
 #include <SectPx_GeoMap_Intersection.hxx>
 #include <TnbError.hxx>

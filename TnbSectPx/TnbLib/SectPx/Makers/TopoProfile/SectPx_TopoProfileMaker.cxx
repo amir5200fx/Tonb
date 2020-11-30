@@ -1,6 +1,6 @@
 #include <SectPx_TopoProfileMaker.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_Node.hxx>
 #include <SectPx_NodeMaker.hxx>
 #include <SectPx_TopoProfile.hxx>

@@ -50,6 +50,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsPole() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
+
 		static Standard_Boolean
 			IsLess
 			(

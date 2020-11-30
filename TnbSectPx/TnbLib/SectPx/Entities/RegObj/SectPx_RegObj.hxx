@@ -63,6 +63,11 @@ namespace tnbLib
 		TnbSectPx_EXPORT virtual Standard_Boolean IsOffsetProfile() const;
 
 		TnbSectPx_EXPORT virtual Standard_Boolean IsShape() const;
+
+		TnbSectPx_EXPORT virtual Standard_Boolean IsParRegObj() const;
+
+		TnbSectPx_EXPORT virtual Standard_Boolean IsFrameRegObj() const;
+
 	};
 }
 
