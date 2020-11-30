@@ -16,8 +16,8 @@ void tnbLib::LegModel_NozzleType1::CreateProfile()
 	TColgp_Array1OfPnt2d pnts(1, nbPoles);
 
 	Pnt2d P0(0, Parameters().RadiusAtInlet()->Value());
-	Pnt2d P8(Parameters().Throat()->Value(), Parameters().RadiusAtThroat()->Value());
 	Pnt2d P16(Parameters().OverallLength()->Value(), Parameters().RadiusAtOutlet()->Value());
+	Pnt2d P8(Linear_Intrpl(P0.X(), P16.X(), Parameters().Throat()->Value()), Linear_Intrpl(0, P0.Y(), Parameters().RadiusAtThroat()->Value()));
 
 	const auto& inlet = *Parameters().InletProfile();
 	const auto& outlet = *Parameters().OutletProfile();
@@ -34,8 +34,8 @@ void tnbLib::LegModel_NozzleType1::CreateProfile()
 	const auto theta = atan((P16.Y() - P8.Y()) / (P16.X() - P8.X()));
 	const auto y = (P16.X() - P8.X())*tan(Linear_Intrpl(0, theta, outlet.TangentAtOutlet()->Value()));
 	auto P14 = Linear_Intrpl(P16, Pnt2d(P8.X(), P16.Y() - y), outlet.OffsetAtOutlet()->Value());
-	Pnt2d P10(Linear_Intrpl(P8.X(), P14.X(), outlet.Inflection()->Value()), P8.Y());
-	auto P12 = Linear_Intrpl(P10, P14, outlet.OffsetAtThroat()->Value());
+	Pnt2d P10(Linear_Intrpl(P8.X(), P14.X(), outlet.OffsetAtThroat()->Value()), P8.Y());
+	auto P12 = Linear_Intrpl(P10, P14, outlet.Inflection()->Value());
 
 	auto P9 = Linear_Intrpl(P10, P8, outlet.Rounding1()->Value());
 	auto P11 = Linear_Intrpl(P10, P12, outlet.Rounding1()->Value());
@@ -75,7 +75,7 @@ void tnbLib::LegModel_NozzleType1::CreateProfile()
 	static const auto du = (Standard_Real)0.0833333;
 	TColStd_Array1OfReal knots(1, 13);
 	knots.SetValue(1, 0);
-	
+
 	knots.SetValue(2, du);
 	knots.SetValue(3, 2 * du);
 
@@ -110,7 +110,7 @@ void tnbLib::LegModel_NozzleType1::CreateProfile()
 	mults.SetValue(11, 1);
 	mults.SetValue(12, 1);
 	mults.SetValue(13, 3);
-	
+
 	try
 	{
 		theProfile_ = new Geom2d_BSplineCurve(pnts, weights, knots, mults, 2);
