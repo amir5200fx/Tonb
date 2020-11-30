@@ -388,6 +388,15 @@
     <Filter Include="TnbLib\SectPx\FrameTunner">
       <UniqueIdentifier>{bf1ec381-c7bf-4a56-bcd4-141a019bca77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Shape">
+      <UniqueIdentifier>{d3e68e23-38d5-4f32-b756-98c6f31f2568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Shape\Section">
+      <UniqueIdentifier>{f2a9be63-ae24-4b0c-b96d-9233858aea7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Shape\Profile">
+      <UniqueIdentifier>{ffe6fda9-cf3f-4cf5-a332-4ab5ad6dd10c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -851,6 +860,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\FrameTunner\SectPx_FrameTunner.hxx">
       <Filter>TnbLib\SectPx\FrameTunner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Shape\SectPx_Shape.hxx">
+      <Filter>TnbLib\SectPx\Entities\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Shape\Profile\SectPx_ProfileShape.hxx">
+      <Filter>TnbLib\SectPx\Entities\Shape\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Shape\Section\SectPx_SectionShape.hxx">
+      <Filter>TnbLib\SectPx\Entities\Shape\Section</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1390,6 +1408,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\FrameTunner\SectPx_FrameTunner.cxx">
       <Filter>TnbLib\SectPx\FrameTunner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Shape\SectPx_Shape.cxx">
+      <Filter>TnbLib\SectPx\Entities\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Shape\Profile\SectPx_ProfileShape.cxx">
+      <Filter>TnbLib\SectPx\Entities\Shape\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Shape\Section\SectPx_SectionShape.cxx">
+      <Filter>TnbLib\SectPx\Entities\Shape\Section</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

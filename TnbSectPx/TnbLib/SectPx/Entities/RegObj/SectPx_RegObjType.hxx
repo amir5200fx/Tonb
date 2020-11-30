@@ -27,6 +27,7 @@ namespace tnbLib
 		overrider,
 		offsetProfile,
 		cloud,
+		shape,
 		other
 	};
 
