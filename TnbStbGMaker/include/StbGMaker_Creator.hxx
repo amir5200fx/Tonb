@@ -65,7 +65,7 @@ namespace tnbLib
 
 	public:
 
-		StbGMaker_Creator();
+		TnbStbGMaker_EXPORT StbGMaker_Creator();
 
 		auto NbTanks() const
 		{

@@ -17,7 +17,7 @@ namespace tnbLib
 		Global_TimerInfo_hour
 	};
 
-	extern float global_time_duration;
+	extern TnbGlobal_EXPORT float global_time_duration;
 
 	class Global_Timer
 	{

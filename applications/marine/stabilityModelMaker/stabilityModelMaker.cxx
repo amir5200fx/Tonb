@@ -17,6 +17,7 @@
 #include <StbGMaker_HullCreators.hxx>
 #include <StbGMaker_TankCreators.hxx>
 #include <StbGMaker_SailCreators.hxx>
+#include <StbGMaker_Model.hxx>
 
 #include <Bnd_Box.hxx>
 #include <Standard_Failure.hxx>
@@ -24,6 +25,11 @@
 
 #include <boost/archive/polymorphic_binary_iarchive.hpp>
 #include <boost/archive/polymorphic_binary_oarchive.hpp>
+
+#include <gp_Elips2d.hxx>
+#include <gp_Circ2d.hxx>
+#include <gp_Parab2d.hxx>
+#include <gp_Hypr2d.hxx>
 
 
 namespace tnbLib
@@ -90,8 +96,8 @@ namespace tnbLib
 
 	auto createTankMaker(const tank_t& t)
 	{
-		auto t = getMaker()->SelectTankMaker(getMaker()->CreateTankMaker(t));
-		return std::move(t);
+		auto item = getMaker()->SelectTankMaker(getMaker()->CreateTankMaker(t));
+		return std::move(item);
 	}
 
 	auto createSailMaker()
@@ -258,11 +264,11 @@ namespace tnbLib
 	
 	// Working Plane
 
-	void createSegment(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
+	/*void createSegment(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
 	{
 		auto geom = cad2dLib::Modeler_Tools::MakeSegment(p0, p1);
 		wp->Modeler()->Import(std::move(geom));
-	}
+	}*/
 	
 	void createCirArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
 	{
@@ -304,7 +310,8 @@ namespace tnbLib
 			FatalErrorIn("Dir3d createDirection(const double x, const double y, const double z)")
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
-		}	
+		}
+		return Dir3d(0, 0, 0);
 	}
 
 	gp_Ax2 createAxis(const Pnt3d& pt, const Dir3d& dir)
@@ -320,6 +327,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return gp_Ax2(pt, dir);
 	}
 
 	TopoDS_Shape createCylinder(const gp_Ax2& ax, const double r, const double h)
@@ -335,6 +343,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createBox(const Pnt3d& p0, const Pnt3d& p1)
@@ -350,6 +359,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createBox(const Pnt3d& p0, const double dx, const double dy, const double dz)
@@ -365,6 +375,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createBox(const gp_Ax2& ax, const double dx, const double dy, const double dz)
@@ -380,6 +391,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createSphere(const Pnt3d& pt, const double r)
@@ -387,6 +399,7 @@ namespace tnbLib
 		try
 		{
 			auto sphere = Cad_ShapeTools::Sphere(pt, r);
+			return std::move(sphere);
 		}
 		catch (const Standard_Failure& x)
 		{
@@ -394,6 +407,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createSphere(const gp_Ax2& ax, const double r)
@@ -401,6 +415,7 @@ namespace tnbLib
 		try
 		{
 			auto sphere = Cad_ShapeTools::Sphere(ax, r);
+			return std::move(sphere);
 		}
 		catch (const Standard_Failure& x)
 		{
@@ -408,6 +423,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createSphere(const gp_Ax2& ax, const double r, const double ang1)
@@ -415,6 +431,7 @@ namespace tnbLib
 		try
 		{
 			auto sphere = Cad_ShapeTools::Sphere(ax, r, ang1);
+			return std::move(sphere);
 		}
 		catch (const Standard_Failure& x)
 		{
@@ -422,6 +439,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createSphere(const gp_Ax2& ax, const double r, const double ang1, const double ang2)
@@ -429,6 +447,7 @@ namespace tnbLib
 		try
 		{
 			auto sphere = Cad_ShapeTools::Sphere(ax, r, ang1, ang2);
+			return std::move(sphere);
 		}
 		catch (const Standard_Failure& x)
 		{
@@ -436,6 +455,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	TopoDS_Shape createSphere(const gp_Ax2& ax, const double r, const double ang1, const double ang2, const double ang3)
@@ -443,6 +463,7 @@ namespace tnbLib
 		try
 		{
 			auto sphere = Cad_ShapeTools::Sphere(ax, r, ang1, ang2, ang3);
+			return std::move(sphere);
 		}
 		catch (const Standard_Failure& x)
 		{
@@ -450,6 +471,7 @@ namespace tnbLib
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
 		}
+		return TopoDS_Shape();
 	}
 
 	auto createHull(const TopoDS_Shape& s)
@@ -635,7 +657,7 @@ namespace tnbLib
 		 wp->Modeler()->Import(std::move(elip));
 	 }
 
-	 void createRectangular(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
+	 /*void createRectangular(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
 	 {
 		 auto rec = cad2dLib::Modeler_Tools::MakeRectangular(p0, p1);
 		 wp->Modeler()->Import(std::move(rec));
@@ -645,7 +667,7 @@ namespace tnbLib
 	 {
 		 auto rec = cad2dLib::Modeler_Tools::MakeRectangular(ax, dx, dy);
 		 wp->Modeler()->Import(std::move(rec));
-	 }
+	 }*/
 	
 }
 
@@ -748,8 +770,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Elips2d& e)->void {createEllipse(wp, e); }), "createEllipse");
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)->void {createEllipse(wp, s0, s1, c); }), "createEllipse");
 
-		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void {createRectangular(wp, p0, p1); }), "createRectangular");
-		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Ax2d& ax, const double dx, const double dy)-> void {createRectangular(wp, ax, dx, dy); }), "createRectangular");
+		//mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void {createRectangular(wp, p0, p1); }), "createRectangular");
+		//mod->add(chaiscript::fun([](const wp_t& wp, const gp_Ax2d& ax, const double dx, const double dy)-> void {createRectangular(wp, ax, dx, dy); }), "createRectangular");
 
 
 
@@ -801,7 +823,7 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("frameMaker");
+			fileName myFileName("stbModelMaker");
 
 			try
 			{

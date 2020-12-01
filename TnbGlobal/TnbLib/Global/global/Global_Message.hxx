@@ -2,6 +2,8 @@
 #ifndef _Global_Message_Header
 #define _Global_Message_Header
 
+#include <Global_Module.hxx>
+
 #include <iostream>
 #include <sstream>
 #include <memory>
@@ -69,7 +71,7 @@ namespace tnbLib
 		}
 	};
 
-	extern std::shared_ptr<Global_Message> gl_messenger;
+	extern TnbGlobal_EXPORT std::shared_ptr<Global_Message> gl_messenger;
 }
 
 #define GET_MESSAGE tnbLib::gl_messenger->GetMessage()
