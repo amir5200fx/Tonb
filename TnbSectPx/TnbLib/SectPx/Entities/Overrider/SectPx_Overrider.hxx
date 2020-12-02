@@ -45,6 +45,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsOverrider() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
+
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		const auto& Pnt() const

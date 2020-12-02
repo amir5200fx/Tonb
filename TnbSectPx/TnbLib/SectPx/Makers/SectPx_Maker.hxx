@@ -4,21 +4,24 @@
 
 #include <SectPx_Entity.hxx>
 #include <SectPx_Module.hxx>
-#include <SectPx_Registry.hxx>
+#include <SectPx_ParRegistry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 
 namespace tnbLib
 {
 
 	// Forward Declarations
-	class SectPx_Registry;
+	class SectPx_ParRegistry;
+	class SectPx_FrameRegistry;
 
+	template<class RegType>
 	class SectPx_Maker
 		: public SectPx_Entity
 	{
 
 		/*Private Data*/
 
-		std::shared_ptr<SectPx_Registry> theRegistry_;
+		std::shared_ptr<RegType> theRegistry_;
 
 
 		//TNB_SERIALIZATION(TnbSectPx_EXPORT);
@@ -40,7 +43,7 @@ namespace tnbLib
 
 		SectPx_Maker
 		(
-			const std::shared_ptr<SectPx_Registry>& theReg
+			const std::shared_ptr<RegType>& theReg
 		)
 			: theRegistry_(theReg)
 		{}
@@ -56,6 +59,7 @@ namespace tnbLib
 	};
 }
 
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Maker);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Maker<SectPx_ParRegistry>);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Maker<SectPx_FrameRegistry>);
 
 #endif // !_SectPx_Maker_Header

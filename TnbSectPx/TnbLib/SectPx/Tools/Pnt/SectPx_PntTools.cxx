@@ -4,7 +4,7 @@
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Edge.hxx>
 #include <SectPx_Makers.hxx>
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -73,7 +73,7 @@ std::vector<std::shared_ptr<tnbLib::SectPx_Pnt>>
 tnbLib::SectPx_PntTools::MakeOffsetPnts
 (
 	const std::vector<Pnt2d>& theCoords, 
-	const std::shared_ptr<SectPx_Registry>& theRegistry
+	const std::shared_ptr<SectPx_FrameRegistry>& theRegistry
 )
 {
 	Debug_Null_Pointer(theRegistry);

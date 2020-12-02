@@ -22,7 +22,7 @@ namespace tnbLib
 		std::weak_ptr<SectPx_MasterPnt> thePnt_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		void SetPnt
 		(
@@ -44,6 +44,8 @@ namespace tnbLib
 		virtual Pnt2d CalcCoord() const = 0;
 
 		TnbSectPx_EXPORT Standard_Boolean IsOverrider() const override;
+
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
 
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 

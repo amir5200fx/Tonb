@@ -11,6 +11,12 @@ tnbLib::SectPx_Cloud::IsCloud() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_Cloud::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_Cloud::RegObjType() const
 {

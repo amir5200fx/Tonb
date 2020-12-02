@@ -2,7 +2,9 @@
 
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Pars.hxx>
-#include <SectPx_Registry.hxx>
+#include <SectPx_ParRegistry.hxx>
+#include <SectPx_FrameRegistry.hxx>
+#include <SectPx_ScatterRegistry.hxx>
 #include <SectPx_Makers.hxx>
 #include <SectPx_GeoMap_Intersection.hxx>
 #include <TnbError.hxx>
@@ -10,32 +12,82 @@
 
 tnbLib::SectPx_Frame::EntityMaker::EntityMaker
 (
-	const std::shared_ptr<SectPx_Registry>& theReg
+	const std::shared_ptr<SectPx_ParRegistry>& theParReg, 
+	const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 )
 {
-	Par = std::make_shared<maker::Parameter>(theReg);
+	Par = std::make_shared<maker::Parameter>(theParReg);
 	Debug_Null_Pointer(Par);
 
-	Pnt = std::make_shared<maker::Point>(theReg);
+	Pnt = std::make_shared<maker::Point>(theFrameReg);
 	Debug_Null_Pointer(Pnt);
 
-	GeoMap = std::make_shared<maker::GeometricMap>(theReg);
+	GeoMap = std::make_shared<maker::GeometricMap>(theFrameReg);
 	Debug_Null_Pointer(GeoMap);
 
-	CmptProfile = std::make_shared<maker::CmptProfile>(theReg);
+	CmptProfile = std::make_shared<maker::CmptProfile>(theFrameReg);
 	Debug_Null_Pointer(CmptProfile);
 
-	FieldFun = std::make_shared<maker::FieldFun>(theReg);
+	FieldFun = std::make_shared<maker::FieldFun>(theParReg);
 	Debug_Null_Pointer(FieldFun);
 }
 
 void tnbLib::SectPx_Frame::AllocateMemory()
 {
-	theRegistry_ = std::make_shared<SectPx_Registry>();
-	Debug_Null_Pointer(theRegistry_);
+	/*theFrameRegistry_ = std::make_shared<SectPx_FrameRegistry>
+		(
+			ParRegistry()->Counter(),
+			ParRegistry()->Scatter()
+			);
+	Debug_Null_Pointer(theFrameRegistry_);*/
 
-	theMakers_ = std::make_shared<EntityMaker>(theRegistry_);
+	Debug_Null_Pointer(theParRegistry_);
+	Debug_Null_Pointer(theFrameRegistry_);
+
+	theMakers_ = std::make_shared<EntityMaker>
+		(
+			theParRegistry_,
+			theFrameRegistry_
+			);
 	Debug_Null_Pointer(theMakers_);
+}
+
+tnbLib::SectPx_Frame::SectPx_Frame
+(
+	const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
+)
+	: theParRegistry_(theParReg)
+	, theFrameRegistry_(theFrameReg)
+{
+	AllocateMemory();
+}
+
+tnbLib::SectPx_Frame::SectPx_Frame
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
+)
+	: SectPx_Entity(theIndex)
+	, theParRegistry_(theParReg)
+	, theFrameRegistry_(theFrameReg)
+{
+	AllocateMemory();
+}
+
+tnbLib::SectPx_Frame::SectPx_Frame
+(
+	const Standard_Integer theIndex,
+	const word& theName,
+	const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
+)
+	: SectPx_Entity(theIndex, theName)
+	, theParRegistry_(theParReg)
+	, theFrameRegistry_(theFrameReg)
+{
+	AllocateMemory();
 }
 
 Standard_Integer 
@@ -121,7 +173,7 @@ tnbLib::SectPx_Frame::MakeLineSegment
 			PointMaker()->SelectPnt(p0_id),
 			PointMaker()->SelectPnt(p1_id)
 		);
-	return Registry()->LastId(SectPx_RegObjType::edge);
+	return ParRegistry()->Scatter()->LastId(SectPx_RegObjType::edge);
 }
 
 void tnbLib::SectPx_Frame::MakeCorner()
@@ -178,7 +230,7 @@ void tnbLib::SectPx_Frame::MakeCorner
 		);
 
 	const auto profMaker = CmptProfileMaker()->SelectProfile(profMaker_id);
-	const auto edge_id = Registry()->LastId(SectPx_RegObjType::edge);
+	const auto edge_id = ParRegistry()->Scatter()->LastId(SectPx_RegObjType::edge);
 
 	const auto geoMap_id = GeometricMapMaker()->CreateIntersection
 	(
@@ -210,8 +262,11 @@ void tnbLib::SectPx_Frame::MakeUShape()
 
 void tnbLib::SectPx_Frame::PrintRegistry() const
 {
-	Debug_Null_Pointer(Registry());
-	Registry()->Print(Info);
+	Debug_Null_Pointer(ParRegistry());
+	ParRegistry()->Print(Info);
+
+	Debug_Null_Pointer(FrameRegistry());
+	FrameRegistry()->Print(Info);
 }
 
 void tnbLib::SectPx_Frame::MakeUShape
@@ -250,7 +305,7 @@ void tnbLib::SectPx_Frame::MakeUShape
 		);
 
 	const auto profMaker = CmptProfileMaker()->SelectProfile(profMaker_id);
-	const auto edge_id = Registry()->LastId(SectPx_RegObjType::edge);
+	const auto edge_id = ParRegistry()->Scatter()->LastId(SectPx_RegObjType::edge);
 
 	const auto t2_id = ParameterMaker()->CreateFixed("mid", 0.5);
 	const auto t3_id = ParameterMaker()->CreateFixed("left corner", 0);

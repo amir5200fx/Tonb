@@ -24,7 +24,7 @@ namespace tnbLib
 		std::shared_ptr<SectPx_Node> theNode_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 	protected:
 
@@ -75,6 +75,7 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsInterface() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
 		
 	};
 }

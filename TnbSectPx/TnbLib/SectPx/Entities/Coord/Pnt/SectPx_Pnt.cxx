@@ -30,6 +30,12 @@ tnbLib::SectPx_Pnt::IsPnt() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_Pnt::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 typename tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_Pnt::RegObjType() const
 {

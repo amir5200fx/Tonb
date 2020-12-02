@@ -20,7 +20,8 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class SectPx_Registry;
+	class SectPx_FrameRegistry;
+	class SectPx_ParRegistry;
 	class SectPx_FieldFun;
 	class SectPx_GeoMap;
 	class SectPx_Coord;
@@ -37,7 +38,11 @@ namespace tnbLib
 			EntityMaker()
 			{}
 
-			EntityMaker(const std::shared_ptr<SectPx_Registry>&);
+			EntityMaker
+			(
+				const std::shared_ptr<SectPx_ParRegistry>&, 
+				const std::shared_ptr<SectPx_FrameRegistry>&
+			);
 
 			std::shared_ptr<maker::Parameter> Par;
 			std::shared_ptr<maker::Point> Pnt;
@@ -52,7 +57,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<SectPx_Registry> theRegistry_;
+		std::shared_ptr<SectPx_ParRegistry> theParRegistry_;
+		std::shared_ptr<SectPx_FrameRegistry> theFrameRegistry_;
 
 		std::shared_ptr<EntityMaker> theMakers_;
 
@@ -61,18 +67,43 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT void AllocateMemory();
 
+
+	protected:
+
+		SectPx_Frame()
+		{}
+
 	public:
 
-		template<class... _Types>
-		SectPx_Frame(_Types&&... _Args)
-			: SectPx_Entity(_Args...)
+		SectPx_Frame
+		(
+			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
+		);
+
+		SectPx_Frame
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
+		);
+
+		SectPx_Frame
+		(
+			const Standard_Integer theIndex,
+			const word& theName, 
+			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
+		);
+
+		const auto& ParRegistry() const
 		{
-			AllocateMemory();
+			return theParRegistry_;
 		}
 
-		const auto& Registry() const
+		const auto& FrameRegistry() const
 		{
-			return theRegistry_;
+			return theFrameRegistry_;
 		}
 
 		const auto& Makers() const

@@ -1,6 +1,7 @@
 #include <SectPx_Frame.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_ParRegistry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_Makers.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Frame::EntityMaker)
@@ -24,14 +25,16 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Frame::EntityMaker)
 TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Frame)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
-	ar & theRegistry_;
+	ar & theParRegistry_;
+	ar & theFrameRegistry_;
 	ar & theMakers_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Frame)
 {
 	ar & boost::serialization::base_object<SectPx_Entity>(*this);
-	ar & theRegistry_;
+	ar & theParRegistry_;
+	ar & theFrameRegistry_;
 	ar & theMakers_;
 }
 

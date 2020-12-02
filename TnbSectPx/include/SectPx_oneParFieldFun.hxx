@@ -8,7 +8,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class SectPx_Registry;
+	class SectPx_ParRegistry;
 
 	class SectPx_oneParFieldFun
 		: public SectPx_FieldFun
@@ -77,7 +77,7 @@ namespace tnbLib
 		static std::shared_ptr<FieldFun>
 			Maker
 			(
-				const std::shared_ptr<SectPx_Registry>& theReg, 
+				const std::shared_ptr<SectPx_ParRegistry>& theReg, 
 				const Standard_Integer theParId
 			);
 	};

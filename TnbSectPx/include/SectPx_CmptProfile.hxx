@@ -22,7 +22,7 @@ namespace tnbLib
 		std::vector<std::shared_ptr<SectPx_TopoProfile>> theProfiles_;
 
 
-		DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 
 		auto& ChangeProfiles()
@@ -48,6 +48,8 @@ namespace tnbLib
 		}
 
 		TnbSectPx_EXPORT Standard_Boolean IsCmptProfile() const override;
+
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
 
 		TnbSectPx_EXPORT word RegObjTypeName() const override;
 

@@ -280,9 +280,6 @@
     <Filter Include="TnbLib\SectPx\Entities\Controller">
       <UniqueIdentifier>{78f85f73-7a68-4b91-9605-82b7a5fdfcac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\SectPx\Entities\Extruder">
-      <UniqueIdentifier>{56f8519d-840d-4009-84fb-afc634274ef5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\SectPx\KnotVector">
       <UniqueIdentifier>{bf827147-9a37-4336-9921-8ed04d003fdc}</UniqueIdentifier>
     </Filter>
@@ -396,6 +393,45 @@
     </Filter>
     <Filter Include="TnbLib\SectPx\Entities\Shape\Profile">
       <UniqueIdentifier>{ffe6fda9-cf3f-4cf5-a332-4ab5ad6dd10c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Parameter">
+      <UniqueIdentifier>{c36b024d-4dc2-4dfb-b9e9-741458cb58bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Counter">
+      <UniqueIdentifier>{d9a59ae4-d139-49a9-bfeb-a97c24b7086c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\RegObj\ParReg">
+      <UniqueIdentifier>{0de95d63-8b8a-42af-a7c2-acf1263e6371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\RegObj\FrameReg">
+      <UniqueIdentifier>{68e74f73-b639-416b-8d4c-d1498400ca64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Frame">
+      <UniqueIdentifier>{ca88fb10-138c-4a9f-85e7-db8adc549792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Obj">
+      <UniqueIdentifier>{f06b19dc-1dc8-4917-b4a5-ea10c2df84f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Extrude">
+      <UniqueIdentifier>{56f8519d-840d-4009-84fb-afc634274ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\TopoSegment">
+      <UniqueIdentifier>{d5ffc62a-3141-475a-b733-0d17ad8b9c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\TopoSegment\Adaptor">
+      <UniqueIdentifier>{94e8765f-4fd9-4095-98d1-0b1d0f246edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Extrude\Linear">
+      <UniqueIdentifier>{7f840764-c5b9-491d-beee-e8f59822033a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Extrude\Uniform">
+      <UniqueIdentifier>{b3fc4b7a-e182-48b1-b111-540613df18b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Extrude\ThreePoint">
+      <UniqueIdentifier>{c1bc5e4b-e974-48af-85ee-312c5fe040d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Extrude\FivePoint">
+      <UniqueIdentifier>{e17a0089-e003-4288-99ef-172725a5377a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -869,6 +905,45 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Shape\Section\SectPx_SectionShape.hxx">
       <Filter>TnbLib\SectPx\Entities\Shape\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Parameter\SectPx_ParRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Counter\SectPx_CountRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Counter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\RegObj\ParReg\SectPx_ParRegObj.hxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\ParReg</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\RegObj\FrameReg\SectPx_FrameRegObj.hxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\FrameReg</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Frame\SectPx_FrameRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistryI.hxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfile.hxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_TopoSegment.hxx">
+      <Filter>TnbLib\SectPx\Entities\TopoSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\Uniform\SectPx_ExtrProfile_Uniform.hxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\Linear\SectPx_ExtrProfile_Linear.hxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\ThreePoint\SectPx_ExtrProfile_ThreePoint.hxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\ThreePoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\FivePoint\SectPx_ExtrProfile_FivePoint.hxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\FivePoint</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1417,6 +1492,69 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Shape\Section\SectPx_SectionShape.cxx">
       <Filter>TnbLib\SectPx\Entities\Shape\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Parameter\SectPx_ParRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\RegObj\ParReg\SectPx_ParRegObj.cxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\ParReg</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\RegObj\FrameReg\SectPx_FrameRegObj.cxx">
+      <Filter>TnbLib\SectPx\Entities\RegObj\FrameReg</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Parameter\SectPx_ParRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Frame\SectPx_FrameRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Frame\SectPx_FrameRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Object\SectPx_ObjectRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfile.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_TopoSegment.cxx">
+      <Filter>TnbLib\SectPx\Entities\TopoSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_TopoSegmentIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\TopoSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\Uniform\SectPx_ExtrProfile_Uniform.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\Uniform\SectPx_ExtrProfile_UniformIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\Linear\SectPx_ExtrProfile_Linear.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\Linear\SectPx_ExtrProfile_LinearIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\ThreePoint\SectPx_ExtrProfile_ThreePoint.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\ThreePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\ThreePoint\SectPx_ExtrProfile_ThreePointIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\ThreePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\FivePoint\SectPx_ExtrProfile_FivePoint.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\FivePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\FivePoint\SectPx_ExtrProfile_FivePointIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude\FivePoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Interior\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptor.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Interior\Corner</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

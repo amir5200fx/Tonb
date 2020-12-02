@@ -58,6 +58,9 @@
     <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints">
       <UniqueIdentifier>{4ea6fb9f-b39c-4262-87bf-391bf8f6ef0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\Memory">
+      <UniqueIdentifier>{0cc72443-c8a2-4e94-b119-916c90687783}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -84,6 +87,12 @@
     <ClInclude Include="TnbLib\ShapePx\Entities\Patch\ShapePx_Patch.hxx">
       <Filter>TnbLib\ShapePx\Entities\Patch</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Memory\ShapePx_Memory.hxx">
+      <Filter>TnbLib\ShapePx\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Section</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
@@ -103,6 +112,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Interpl\ShapePx_ContinProfile_Interpl.cxx">
       <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Interpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Memory\ShapePx_Memory.cxx">
+      <Filter>TnbLib\ShapePx\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Section</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

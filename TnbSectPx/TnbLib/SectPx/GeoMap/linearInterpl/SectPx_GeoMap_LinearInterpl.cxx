@@ -4,7 +4,7 @@
 #include <SectPx_Coord.hxx>
 #include <SectPx_Par.hxx>
 #include <SectPx_ParTools.hxx>
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -142,7 +142,7 @@ tnbLib::sectPxLib::GeoMap_LinearInterpl::RetrieveChildren() const
 std::shared_ptr<tnbLib::sectPxLib::GeoMap_LinearInterpl>
 tnbLib::sectPxLib::GeoMap_LinearInterpl::MakeLinearInterpl
 (
-	const std::shared_ptr<SectPx_Registry>& theReg
+	const std::shared_ptr<SectPx_FrameRegistry>& theReg
 )
 {
 	const auto geoMap = 

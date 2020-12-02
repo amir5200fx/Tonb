@@ -12,12 +12,13 @@ namespace tnbLib
 	class SectPx_GeoMap;
 	class SectPx_Coord;
 	class SectPx_Par;
+	class SectPx_FrameRegistry;
 
 	namespace maker
 	{
 
 		class GeometricMap
-			: public SectPx_Maker
+			: public SectPx_Maker<SectPx_FrameRegistry>
 		{
 
 			/*Private Data*/
@@ -28,7 +29,7 @@ namespace tnbLib
 			template<class Archive>
 			void serialize(Archive &ar, const unsigned int file_version)
 			{
-				ar & boost::serialization::base_object<SectPx_Maker>(*this);
+				ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
 			}
 
 
@@ -39,9 +40,9 @@ namespace tnbLib
 
 			GeometricMap
 			(
-				const std::shared_ptr<SectPx_Registry>& theReg
+				const std::shared_ptr<SectPx_FrameRegistry>& theReg
 			)
-				: SectPx_Maker(theReg)
+				: SectPx_Maker<SectPx_FrameRegistry>(theReg)
 			{}
 
 			TnbSectPx_EXPORT std::shared_ptr<SectPx_GeoMap>

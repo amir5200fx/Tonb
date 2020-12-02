@@ -10,7 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Frame;
-	class SectPx_Registry;
+	class SectPx_FrameRegistry;
 	class SectPx_Pole;
 	class SectPx_Segment;
 	class SectPx_Par;
@@ -21,13 +21,13 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<SectPx_Registry> theRegistry_;
+		std::shared_ptr<SectPx_FrameRegistry> theFrameReg_;
 
 		//- private functions and operators
 
-		const auto& Registry() const
+		const auto& FrameRegistry() const
 		{
-			return theRegistry_;
+			return theFrameReg_;
 		}
 
 		static void disJoinSegment

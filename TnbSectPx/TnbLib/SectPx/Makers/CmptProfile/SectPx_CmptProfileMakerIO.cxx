@@ -4,12 +4,14 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::maker::CmptProfile)
 {
+	ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
 	ar & theProfiles_;
 	ar & theCounter_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::maker::CmptProfile)
 {
+	ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
 	ar & theProfiles_;
 	ar & theCounter_;
 }

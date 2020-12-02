@@ -10,7 +10,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Coord;
 	class SectPx_Par;
-	class SectPx_Registry;
+	class SectPx_FrameRegistry;
 
 	namespace sectPxLib
 	{
@@ -27,7 +27,7 @@ namespace tnbLib
 			std::weak_ptr<SectPx_Par> thePar_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		public:
 
@@ -108,7 +108,7 @@ namespace tnbLib
 			static TnbSectPx_EXPORT std::shared_ptr<GeoMap_LinearInterpl>
 				MakeLinearInterpl
 				(
-					const std::shared_ptr<SectPx_Registry>& theReg
+					const std::shared_ptr<SectPx_FrameRegistry>& theReg
 				);
 		};
 	}

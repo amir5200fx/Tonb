@@ -16,7 +16,7 @@ namespace tnbLib
 
 		class Pole_Corner
 			: public SectPx_InterPole
-			/*, public SectPx_Pole_CornerAdaptor*/
+			, public SectPx_Pole_CornerAdaptor
 		{
 
 			/*Private Data*/
@@ -24,7 +24,7 @@ namespace tnbLib
 			std::shared_ptr<SectPx_Pnt> thePnt_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		public:
 

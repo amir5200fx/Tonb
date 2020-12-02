@@ -19,7 +19,7 @@ namespace tnbLib
 	class SectPx_Coord;
 	class SectPx_MasterPnt;
 	class SectPx_Edge;
-	class SectPx_Registry;
+	class SectPx_FrameRegistry;
 	class SectPx_Node;
 	class Pnt2d;
 
@@ -68,7 +68,7 @@ namespace tnbLib
 			MakeOffsetPnts
 			(
 				const std::vector<Pnt2d>& theCoords,
-				const std::shared_ptr<SectPx_Registry>& theRegistry
+				const std::shared_ptr<SectPx_FrameRegistry>& theRegistry
 			);
 
 		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pnt>>

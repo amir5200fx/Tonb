@@ -91,6 +91,12 @@ tnbLib::SectPx_TopoProfile::IsProfile() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_TopoProfile::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 //Handle(Geom2d_Curve) 
 //tnbLib::SectPx_TopoProfile::RetrieveGeomCurve
 //(

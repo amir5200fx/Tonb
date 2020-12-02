@@ -36,6 +36,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsController() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
+
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 	};
 }

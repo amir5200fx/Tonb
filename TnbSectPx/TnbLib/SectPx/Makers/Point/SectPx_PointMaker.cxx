@@ -1,6 +1,6 @@
 #include <SectPx_PointMaker.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_FrameRegistry.hxx>
 #include <SectPx_Pnts.hxx>
 #include <SectPx_PntTools.hxx>
 #include <SectPx_GeoMap.hxx>

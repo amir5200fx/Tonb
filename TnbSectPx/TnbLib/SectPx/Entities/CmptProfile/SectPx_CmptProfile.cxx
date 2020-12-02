@@ -11,6 +11,12 @@ tnbLib::SectPx_CmptProfile::IsCmptProfile() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_CmptProfile::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 tnbLib::word 
 tnbLib::SectPx_CmptProfile::RegObjTypeName() const
 {

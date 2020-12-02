@@ -1,6 +1,6 @@
 #include <SectPx_FieldFunMaker.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_ParRegistry.hxx>
 #include <SectPx_FieldFuns.hxx>
 #include <SectPx_FieldFunTools.hxx>
 #include <TnbError.hxx>

@@ -7,6 +7,7 @@
 #include <Pln_Edge.hxx>
 #include <Pln_Ring.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_CurveTools.hxx>
 #include <Cad2d_Modeler_SrchEng.hxx>
 #include <Cad2d_Modeler_Corner.hxx>
 #include <Cad2d_Modeler_Segment.hxx>
@@ -658,6 +659,52 @@ tnbLib::cad2dLib::Modeler_Tools::MakeEllipse
 	{
 		return nullptr;
 	}
+}
+
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::cad2dLib::Modeler_Tools::Interpolation
+(
+	const std::vector<Pnt2d>& theQ,
+	const Standard_Boolean thePeriodic,
+	const Standard_Real theTol
+)
+{
+	auto geom = Pln_CurveTools::Interpolation(theQ, thePeriodic, theTol);
+	auto edge = 
+		Make_Edge
+		(
+			geom, 
+			geom->Value(geom->FirstParameter()),
+			geom->Value(geom->LastParameter())
+		);
+	return std::move(edge);
+}
+
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::cad2dLib::Modeler_Tools::Interpolation
+(
+	const std::vector<Pnt2d>& theQ, 
+	const Vec2d & theFirst, 
+	const Vec2d & theLast, 
+	const Standard_Boolean thePeriodic, 
+	const Standard_Real theTol, 
+	const Standard_Boolean theScale
+)
+{
+	auto geom = 
+		Pln_CurveTools::Interpolation
+		(
+			theQ, theFirst, theLast,
+			thePeriodic, theTol, theScale
+		);
+	auto edge =
+		Make_Edge
+		(
+			geom,
+			geom->Value(geom->FirstParameter()),
+			geom->Value(geom->LastParameter())
+		);
+	return std::move(edge);
 }
 
 std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 

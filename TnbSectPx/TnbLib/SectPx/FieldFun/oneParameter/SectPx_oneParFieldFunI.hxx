@@ -1,6 +1,6 @@
 #pragma once
 #include <SectPx_Par.hxx>
-#include <SectPx_Registry.hxx>
+#include <SectPx_ParRegistry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -18,7 +18,7 @@ namespace tnbLib
 	std::shared_ptr<FieldFun> 
 		SectPx_oneParFieldFun::Maker
 		(
-			const std::shared_ptr<SectPx_Registry>& theReg,
+			const std::shared_ptr<SectPx_ParRegistry>& theReg,
 			const Standard_Integer theParId
 		)
 	{

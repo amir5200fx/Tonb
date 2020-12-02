@@ -15,6 +15,7 @@ namespace tnbLib
 	class SectPx_CmptProfile;
 	class SectPx_Pnt;
 	class SectPx_Cloud;
+	class SectPx_FrameRegistry;
 
 	namespace maker
 	{
@@ -23,7 +24,7 @@ namespace tnbLib
 		class Profile;
 
 		class CmptProfile
-			: public SectPx_Maker
+			: public SectPx_Maker<SectPx_FrameRegistry>
 		{
 
 		public:
@@ -39,7 +40,7 @@ namespace tnbLib
 			mutable Geo_ItemCounter theCounter_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 			auto& Counter() const
 			{
@@ -61,9 +62,9 @@ namespace tnbLib
 
 			CmptProfile
 			(
-				const std::shared_ptr<SectPx_Registry>& theRegistry
+				const std::shared_ptr<SectPx_FrameRegistry>& theRegistry
 			)
-				: SectPx_Maker(theRegistry)
+				: SectPx_Maker<SectPx_FrameRegistry>(theRegistry)
 			{}
 
 			auto NbProfiles() const

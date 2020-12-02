@@ -31,7 +31,7 @@ namespace tnbLib
 			std::weak_ptr<SectPx_Par> theAngle1_;
 
 
-			DECLARE_SAVE_LOAD_HEADER(TnbSectPx_EXPORT);
+			TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		public:
 

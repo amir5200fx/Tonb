@@ -26,8 +26,8 @@ namespace tnbLib
 
 		public:
 
-			static const short degree_;
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const short degree_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
 
 			//- default constructor
@@ -35,6 +35,16 @@ namespace tnbLib
 			{}
 
 			//- constructors
+
+			TnbSectPx_EXPORT TightController_Deg2
+			(
+				const std::shared_ptr<sectPxLib::Pole_Corner>& theCorner
+			);
+
+			TnbSectPx_EXPORT TightController_Deg2
+			(
+				std::shared_ptr<sectPxLib::Pole_Corner>&& theCorner
+			);
 
 		 	TnbSectPx_EXPORT TightController_Deg2
 			(
@@ -44,9 +54,22 @@ namespace tnbLib
 
 			TnbSectPx_EXPORT TightController_Deg2
 			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<sectPxLib::Pole_Corner>&& theCorner
+			);
+
+			TnbSectPx_EXPORT TightController_Deg2
+			(
 				const Standard_Integer theIndex, 
 				const word& theName,
 				const std::shared_ptr<sectPxLib::Pole_Corner>& theCorner
+			);
+
+			TnbSectPx_EXPORT TightController_Deg2
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				std::shared_ptr<sectPxLib::Pole_Corner>&& theCorner
 			);
 
 

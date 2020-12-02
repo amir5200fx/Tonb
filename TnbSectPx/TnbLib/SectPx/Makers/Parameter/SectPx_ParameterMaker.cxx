@@ -1,6 +1,6 @@
 #include <SectPx_ParameterMaker.hxx>
 
-#include <SectPx_Registry.hxx>
+#include <SectPx_ParRegistry.hxx>
 #include <SectPx_Pars.hxx>
 #include <SectPx_ParTools.hxx>
 #include <TnbError.hxx>

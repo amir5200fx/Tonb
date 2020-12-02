@@ -27,6 +27,8 @@ namespace tnbLib
 		overrider,
 		offsetProfile,
 		cloud,
+		shape,
+		topoSegment,
 		other
 	};
 

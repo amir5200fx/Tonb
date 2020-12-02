@@ -40,7 +40,7 @@ namespace tnbLib
 				: x(0), y(0)
 			{}
 
-			offsetPoint(Standard_Real _x, Standard_Real _y)
+			offsetPoint(const Standard_Real _x, const Standard_Real _y)
 				: x(_x), y(_y)
 			{}
 

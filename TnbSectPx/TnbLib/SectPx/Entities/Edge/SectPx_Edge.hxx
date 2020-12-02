@@ -105,6 +105,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsEdge() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
+
 	};
 }
 

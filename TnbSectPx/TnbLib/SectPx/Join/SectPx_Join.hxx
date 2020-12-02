@@ -13,7 +13,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_TopoProfile;
-	class SectPx_Registry;
+	class SectPx_FrameRegistry;
 
 	class SectPx_Join
 		: public Global_Done
@@ -24,7 +24,7 @@ namespace tnbLib
 		std::shared_ptr<SectPx_TopoProfile> theLeft_;
 		std::shared_ptr<SectPx_TopoProfile> theRight_;
 
-		const std::shared_ptr<SectPx_Registry>& theRegistry_;
+		const std::shared_ptr<SectPx_FrameRegistry>& theRegistry_;
 
 		Standard_Integer theNewLeftId_;
 		Standard_Integer theNewRightId_;
@@ -53,14 +53,14 @@ namespace tnbLib
 
 		SectPx_Join
 		(
-			const std::shared_ptr<SectPx_Registry>& theRegistry
+			const std::shared_ptr<SectPx_FrameRegistry>& theRegistry
 		)
 			: theRegistry_(theRegistry)
 		{}
 
 		SectPx_Join
 		(
-			const std::shared_ptr<SectPx_Registry>& theRegistry,
+			const std::shared_ptr<SectPx_FrameRegistry>& theRegistry,
 			const std::shared_ptr<SectPx_TopoProfile>& theLeft,
 			const std::shared_ptr<SectPx_TopoProfile>& theRight
 		)
