@@ -58,7 +58,6 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<SectPx_ParRegistry> theParRegistry_;
-
 		std::shared_ptr<SectPx_FrameRegistry> theFrameRegistry_;
 
 		std::shared_ptr<EntityMaker> theMakers_;
@@ -78,20 +77,23 @@ namespace tnbLib
 
 		SectPx_Frame
 		(
-			const std::shared_ptr<SectPx_ParRegistry>& theParReg
+			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 		);
 
 		SectPx_Frame
 		(
 			const Standard_Integer theIndex,
-			const std::shared_ptr<SectPx_ParRegistry>& theParReg
+			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 		);
 
 		SectPx_Frame
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
-			const std::shared_ptr<SectPx_ParRegistry>& theParReg
+			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 		);
 
 		const auto& ParRegistry() const
