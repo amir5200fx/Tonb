@@ -11,6 +11,7 @@
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_InterfaceMaker.hxx>
 #include <SectPx_Interface.hxx>
+#include <SectPx_Poles.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -163,6 +164,68 @@ tnbLib::SectPx_Tools::MakeEdge
 	tp1->Import(seg_id, seg);
 
 	return std::move(seg);
+}
+
+namespace tnbLib
+{
+
+	std::shared_ptr<SectPx_Pole>
+		TrackNextPole(const std::shared_ptr<SectPx_Pole>& thePole)
+	{
+		if (thePole->IsBoundary())
+		{
+			auto bnd = std::dynamic_pointer_cast<SectPx_BndPole>(thePole);
+			Debug_Null_Pointer(bnd);
+
+			auto seg = bnd->Segment().lock();
+			Debug_Null_Pointer(seg);
+
+			Debug_If_Condition_Message(thePole IS_EQUAL seg->Pole1(), "appearently, the semnet is inverted!");
+			return seg->Pole1();
+		}
+		else
+		{//- the pole is internal
+			auto inter = std::dynamic_pointer_cast<SectPx_InterPole>(thePole);
+			Debug_Null_Pointer(inter);
+
+			auto seg = inter->Forward().lock();
+			Debug_Null_Pointer(seg);
+
+			Debug_If_Condition_Message(thePole IS_EQUAL seg->Pole1(), "appearently, the semnet is inverted!");
+			return seg->Pole1();
+		}
+		
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Pole>> 
+tnbLib::SectPx_Tools::TrackPoles
+(
+	const std::shared_ptr<SectPx_BndPole>& thePole0,
+	const std::shared_ptr<SectPx_BndPole>& thePole1
+)
+{
+	Debug_Null_Pointer(thePole0);
+	Debug_Null_Pointer(thePole1);
+
+	if (thePole0 IS_EQUAL thePole1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the two poles are the same!" << endl
+			<< abort(FatalError);
+	}
+
+	std::vector<std::shared_ptr<SectPx_Pole>> poles;
+	poles.push_back(thePole0);
+
+	auto pole = TrackNextPole(thePole0);
+	while (pole NOT_EQUAL thePole1)
+	{
+		poles.push_back(pole);
+		pole = TrackNextPole(pole);
+	}
+	poles.push_back(thePole1);
+	return std::move(poles);
 }
 
 //std::vector<tnbLib::Pnt2d>

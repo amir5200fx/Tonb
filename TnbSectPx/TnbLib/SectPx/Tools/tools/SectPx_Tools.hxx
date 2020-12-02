@@ -20,6 +20,8 @@ namespace tnbLib
 	class SectPx_Node;
 	class SectPx_Edge;
 	class SectPx_Interface;
+	class SectPx_Pole;
+	class SectPx_BndPole;
 
 	class SectPx_Tools
 	{
@@ -58,6 +60,13 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Pnt>& theP0,
 				const std::shared_ptr<SectPx_Pnt>& theP1,
 				const std::shared_ptr<SectPx_FrameRegistry>& theReg
+			);
+
+		static std::vector<std::shared_ptr<SectPx_Pole>> 
+			TrackPoles
+			(
+				const std::shared_ptr<SectPx_BndPole>& thePole0, 
+				const std::shared_ptr<SectPx_BndPole>& thePole1
 			);
 
 		static TnbSectPx_EXPORT std::vector<Pnt2d>
