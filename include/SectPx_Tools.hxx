@@ -20,6 +20,11 @@ namespace tnbLib
 	class SectPx_Node;
 	class SectPx_Edge;
 	class SectPx_Interface;
+	class SectPx_Pole;
+	class SectPx_BndPole;
+	class SectPx_TopoSegment;
+	class SectPx_Segment;
+	class SectPx_Child;
 
 	class SectPx_Tools
 	{
@@ -58,6 +63,38 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Pnt>& theP0,
 				const std::shared_ptr<SectPx_Pnt>& theP1,
 				const std::shared_ptr<SectPx_FrameRegistry>& theReg
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pole>>
+			TrackPoles
+			(
+				const std::shared_ptr<SectPx_BndPole>& thePole0, 
+				const std::shared_ptr<SectPx_BndPole>& thePole1
+			);
+
+		//- if the pole is boundary, the second segment is null
+		static TnbSectPx_EXPORT std::pair<std::shared_ptr<SectPx_Segment>, std::shared_ptr<SectPx_Segment>>
+			RetrieveSegments
+			(
+				const std::shared_ptr<SectPx_Pole>& thePole
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Segment>> 
+			RetrieveSegments
+			(
+				const std::vector<std::shared_ptr<SectPx_Pole>>& thePoles
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Child>> 
+			RetrieveChildren
+			(
+				const std::shared_ptr<SectPx_TopoSegment>& theSeg
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Child>> 
+			RetrieveChildren
+			(
+				const std::shared_ptr<SectPx_Parent>& theParent
 			);
 
 		static TnbSectPx_EXPORT std::vector<Pnt2d>

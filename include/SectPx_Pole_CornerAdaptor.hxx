@@ -3,6 +3,8 @@
 #define _SectPx_Pole_CornerAdaptor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <SectPx_Module.hxx>
 
 #include <map>
 #include <memory>
@@ -24,6 +26,8 @@ namespace tnbLib
 		std::map<Standard_Integer, std::weak_ptr<SectPx_PoleController>>
 			theControllers_;
 
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
+
 	protected:
 
 		SectPx_Pole_CornerAdaptor()
@@ -41,9 +45,22 @@ namespace tnbLib
 			return theControllers_;
 		}
 
-		std::weak_ptr<SectPx_PoleController> RemoveController(const Standard_Integer theIndex);
+		Standard_Boolean HasController() const
+		{
+			return (Standard_Boolean)NbControllers();
+		}
 
-		void InsertToControllers(const Standard_Integer theIndex, const std::shared_ptr<SectPx_PoleController>& theController);
+		TnbSectPx_EXPORT std::weak_ptr<SectPx_PoleController> 
+			RemoveController
+			(
+				const Standard_Integer theIndex
+			);
+
+		TnbSectPx_EXPORT void InsertToControllers
+		(
+			const Standard_Integer theIndex, 
+			const std::shared_ptr<SectPx_PoleController>& theController
+		);
 
 
 	};

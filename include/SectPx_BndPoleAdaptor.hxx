@@ -13,6 +13,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Segment;
+	class SectPx_TopoSegment;
 
 	class SectPx_BndPoleAdaptor
 	{
@@ -20,6 +21,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::weak_ptr<SectPx_Segment> theSegment_;
+		std::weak_ptr<SectPx_TopoSegment> theTopoSegment_;
 
 		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
@@ -35,9 +37,25 @@ namespace tnbLib
 			return theSegment_;
 		}
 
-		void SetSegment(const std::shared_ptr<SectPx_Segment>& theSegment)
+		const auto& TopoSegment() const
+		{
+			return theTopoSegment_;
+		}
+
+		void SetSegment
+		(
+			const std::shared_ptr<SectPx_Segment>& theSegment
+		)
 		{
 			theSegment_ = theSegment;
+		}
+
+		void SetTopoSegment
+		(
+			const std::shared_ptr<SectPx_TopoSegment>& theSegment
+		)
+		{
+			theTopoSegment_ = theSegment;
 		}
 	};
 }

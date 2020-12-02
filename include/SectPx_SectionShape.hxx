@@ -10,7 +10,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class SectPx_ProfileShape;
+	class SectPx_TopoSegment;
 
 	class SectPx_SectionShape
 		: public SectPx_Shape
@@ -18,7 +18,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::vector<std::shared_ptr<SectPx_ProfileShape>> theProfiles_;
+		std::vector<std::shared_ptr<SectPx_TopoSegment>> theSegments_;
 
 	public:
 
@@ -27,33 +27,33 @@ namespace tnbLib
 
 		SectPx_SectionShape
 		(
-			const std::vector<std::shared_ptr<SectPx_ProfileShape>>& theProfiles
+			const std::vector<std::shared_ptr<SectPx_TopoSegment>>& theSegments
 		)
-			: theProfiles_(theProfiles)
+			: theSegments_(theSegments)
 		{}
 
 		SectPx_SectionShape
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
-			const std::vector<std::shared_ptr<SectPx_ProfileShape>>& theProfiles
+			const std::vector<std::shared_ptr<SectPx_TopoSegment>>& theSegments
 		)
 			: SectPx_Shape(theIndex, theName)
-			, theProfiles_(theProfiles)
+			, theSegments_(theSegments)
 		{}
 
 
-		const auto& Profiles() const
+		const auto& Segments() const
 		{
-			return theProfiles_;
+			return theSegments_;
 		}
 
 		void SetProfiles
 		(
-			const std::vector<std::shared_ptr<SectPx_ProfileShape>>& theProfiles
+			const std::vector<std::shared_ptr<SectPx_TopoSegment>>& theSegments
 		)
 		{
-			theProfiles_ = theProfiles;
+			theSegments_ = theSegments;
 		}
 
 

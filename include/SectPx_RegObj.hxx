@@ -68,6 +68,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT virtual Standard_Boolean IsFrameRegObj() const;
 
+		TnbSectPx_EXPORT virtual Standard_Boolean IsTopoSegment() const;
+
 	};
 }
 
