@@ -364,6 +364,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave\SectPx_Pole_Slave.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave\SectPx_Pole_SlaveIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_Corner.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptor.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\SectPx_InterPole.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Slider\SectPx_Pole_Slider.cxx" />

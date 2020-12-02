@@ -16,7 +16,7 @@ namespace tnbLib
 
 		class Pole_Corner
 			: public SectPx_InterPole
-			/*, public SectPx_Pole_CornerAdaptor*/
+			, public SectPx_Pole_CornerAdaptor
 		{
 
 			/*Private Data*/

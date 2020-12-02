@@ -1550,5 +1550,11 @@
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\FivePoint\SectPx_ExtrProfile_FivePointIO.cxx">
       <Filter>TnbLib\SectPx\Entities\Extrude\FivePoint</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Interior\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptor.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Interior\Corner</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
