@@ -340,17 +340,21 @@ tnbLib::SectPx_FrameTunner::CreateSymmTightnessDeg2
 		Debug_Null_Pointer(seg_bwd_ctrl);
 
 		seg_bwd_ctrl->SetCPts(bwd_ctrl);
+		seg_bwd_ctrl->SetSegment(bwd);
+		bwd->SetController(seg_bwd_ctrl);
 
 		auto seg_fwd_ctrl = std::make_shared<SectPx_SegmentController>();
 		Debug_Null_Pointer(seg_fwd_ctrl);
 
 		seg_fwd_ctrl->SetCPts(fwd_ctrl);
+		seg_fwd_ctrl->SetSegment(fwd);
+		fwd->SetController(seg_fwd_ctrl);
 
 		FrameRegistry()->Import(seg_bwd_ctrl);
 		FrameRegistry()->Import(seg_fwd_ctrl);
 
 		auto pole_controller =
-			std::make_shared<sectPxLib::TightController_Deg2>(std::move(corner));
+			std::make_shared<sectPxLib::TightController_Deg2>(corner);
 		Debug_Null_Pointer(pole_controller);
 
 		pole_controller->SetLeft(seg_bwd_ctrl);
@@ -359,7 +363,9 @@ tnbLib::SectPx_FrameTunner::CreateSymmTightnessDeg2
 		bwd->SetController(seg_bwd_ctrl);
 		fwd->SetController(seg_fwd_ctrl);
 
-		return FrameRegistry()->Import(std::move(pole_controller));
+		auto id = FrameRegistry()->Import(std::move(pole_controller));
+		corner->InsertToControllers(id, pole_controller);
+		return id;
 	}
 	else
 	{
