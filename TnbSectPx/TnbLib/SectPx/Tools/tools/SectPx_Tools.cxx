@@ -1,5 +1,6 @@
 #include <SectPx_Tools.hxx>
 
+#include <SectPx_Pars.hxx>
 #include <SectPx_Pole.hxx>
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Node.hxx>
@@ -12,6 +13,9 @@
 #include <SectPx_InterfaceMaker.hxx>
 #include <SectPx_Interface.hxx>
 #include <SectPx_Poles.hxx>
+#include <SectPx_TopoSegment.hxx>
+#include <SectPx_SegmentController.hxx>
+#include <SectPx_PoleController.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -226,6 +230,220 @@ tnbLib::SectPx_Tools::TrackPoles
 	}
 	poles.push_back(thePole1);
 	return std::move(poles);
+}
+
+std::pair
+<
+	std::shared_ptr<tnbLib::SectPx_Segment>,
+	std::shared_ptr<tnbLib::SectPx_Segment>
+> 
+tnbLib::SectPx_Tools::RetrieveSegments
+(
+	const std::shared_ptr<SectPx_Pole>& thePole
+)
+{
+	Debug_Null_Pointer(thePole);
+	if (thePole->IsBoundary())
+	{
+		auto bnd = std::dynamic_pointer_cast<SectPx_BndPole>(thePole);
+		Debug_Null_Pointer(bnd);
+
+		auto seg = bnd->Segment().lock();
+		Debug_Null_Pointer(seg);
+		
+		auto t = std::make_pair(std::move(seg), nullptr);
+		return std::move(t);
+	}
+	else
+	{//- the pole is internal
+		auto inter = std::dynamic_pointer_cast<SectPx_InterPole>(thePole);
+		Debug_Null_Pointer(inter);
+
+		auto seg0 = inter->Backward().lock();
+		Debug_Null_Pointer(seg0);
+
+		auto seg1 = inter->Forward().lock();
+		Debug_Null_Pointer(seg1);
+
+		auto t = std::make_pair(std::move(seg0), std::move(seg1));
+		return std::move(t);
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Segment>> 
+tnbLib::SectPx_Tools::RetrieveSegments
+(
+	const std::vector<std::shared_ptr<SectPx_Pole>>& thePoles
+)
+{
+	std::vector<std::shared_ptr<SectPx_Segment>> segments;
+	for (const auto& x : thePoles)
+	{
+		Debug_Null_Pointer(x);
+		auto[seg0, seg1] = RetrieveSegments(x);
+		
+		if (x->IsBoundary())
+		{
+			Debug_If_Condition(seg1);
+			segments.push_back(std::move(seg0));
+		}
+		else
+		{
+			segments.push_back(std::move(seg0));
+			segments.push_back(std::move(seg1));
+		}
+	}
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Child>> 
+tnbLib::SectPx_Tools::RetrieveChildren
+(
+	const std::shared_ptr<SectPx_TopoSegment>& theSeg
+)
+{
+	Debug_Null_Pointer(theSeg);
+	Debug_Null_Pointer(theSeg->Pole0());
+	Debug_Null_Pointer(theSeg->Pole1());
+
+	auto poles = TrackPoles(theSeg->Pole0(), theSeg->Pole1());
+	auto segments = RetrieveSegments(poles);
+
+	std::map<Standard_Integer, std::shared_ptr<SectPx_Child>> childMap;
+	for (const auto& x : poles)
+	{
+		Debug_Null_Pointer(x);
+		const auto& pnt = x->Pnt();
+
+		auto childList = RetrieveChildren(pnt);
+		for (const auto& c : childList)
+		{
+			Debug_Null_Pointer(c);
+			auto paired = std::make_pair(c->Index(), std::move(c));
+			auto insert = childMap.insert(std::move(paired));
+			if (NOT insert.second)
+			{
+				//- the parameter already been registered!
+				//- do nothing
+			}
+		}
+	}
+
+	for (const auto& x : segments)
+	{
+		Debug_Null_Pointer(x);
+		const auto& controller = x->Controller().lock();
+		if (controller)
+		{
+			auto childList = RetrieveChildren(controller);
+			for (const auto& c : childList)
+			{
+				Debug_Null_Pointer(c);
+				auto paired = std::make_pair(c->Index(), std::move(c));
+				auto insert = childMap.insert(std::move(paired));
+				if (NOT insert.second)
+				{
+					//- the parameter already been registered!
+					//- do nothing
+				}
+			}
+		}
+	}
+
+	for (const auto& x : poles)
+	{
+		Debug_Null_Pointer(x);
+		auto corner = std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(x);
+		if (corner)
+		{
+			if (corner->HasController())
+			{
+				const auto& controllers = corner->Controllers();
+				for (const auto& ctrl : controllers)
+				{
+					Debug_Null_Pointer(ctrl.second.lock());
+					auto plc = ctrl.second.lock();
+					if (NOT plc->IsOnPole()) // controllers that not on the pole are registered before!
+						continue;
+					auto childList = RetrieveChildren(plc);
+					for (const auto& c : childList)
+					{
+						Debug_Null_Pointer(c);
+						auto paired = std::make_pair(c->Index(), std::move(c));
+						auto insert = childMap.insert(std::move(paired));
+						if (NOT insert.second)
+						{
+							//- the parameter already been registered!
+							//- do nothing
+						}
+					}
+				}
+			}
+		}
+	}
+
+	std::vector<std::shared_ptr<SectPx_Child>> children;
+	children.reserve(childMap.size());
+	for (const auto& x : childMap)
+	{
+		Debug_Null_Pointer(x.second);
+		const auto& child = x.second;
+		children.push_back(std::move(child));
+	}
+	return std::move(children);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Child>>
+tnbLib::SectPx_Tools::RetrieveChildren
+(
+	const std::shared_ptr<SectPx_Parent>& theParent
+)
+{
+	Debug_Null_Pointer(theParent);
+	if (theParent->HasChildren())
+	{
+		auto childList = theParent->RetrieveChildren();
+		return std::move(childList);
+	}
+	else if (theParent->HasChildMap())
+	{ //- the parent has no children
+		const auto nbChildMap = theParent->NbChildMaps();
+		Debug_If_Condition_Message(NOT nbChildMap, "the parent has no childMap");
+
+		std::map<Standard_Integer, std::shared_ptr<SectPx_Child>> childMap;
+		for (Standard_Integer i = 0; i < nbChildMap; i++)
+		{
+			const auto& map = theParent->ChildMap(i);
+			auto childList = RetrieveChildren(map);
+			for (const auto& x : childList)
+			{
+				Debug_Null_Pointer(x);
+				auto paired = std::make_pair(x->Index(), x);
+				auto insert = childMap.insert(std::move(paired));
+				if (NOT insert.second)
+				{
+					//- the parameter already been registered!
+					//- do nothing
+				}
+			}
+		}
+
+		std::vector<std::shared_ptr<SectPx_Child>> childList;
+		for (const auto& x : childMap)
+		{
+			Debug_Null_Pointer(x.second);
+			childList.push_back(std::move(x.second));
+		}
+		return std::move(childList);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the parent has no children nor any childMaps" << endl
+			<< " typename = " << theParent->RegObjTypeName() << endl
+			<< abort(FatalError);
+	}
+	return std::vector<std::shared_ptr<SectPx_Child>>();
 }
 
 //std::vector<tnbLib::Pnt2d>
