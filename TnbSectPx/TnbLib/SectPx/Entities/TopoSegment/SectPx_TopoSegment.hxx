@@ -46,10 +46,24 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT SectPx_TopoSegment
 		(
+			std::shared_ptr<SectPx_BndPole>&& thePole0,
+			std::shared_ptr<SectPx_BndPole>&& thePole1
+		);
+
+		TnbSectPx_EXPORT SectPx_TopoSegment
+		(
 			const Standard_Integer theIndex,
 			const word& theName, 
 			const std::shared_ptr<SectPx_BndPole>& thePole0,
 			const std::shared_ptr<SectPx_BndPole>& thePole1
+		);
+
+		TnbSectPx_EXPORT SectPx_TopoSegment
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			std::shared_ptr<SectPx_BndPole>&& thePole0,
+			std::shared_ptr<SectPx_BndPole>&& thePole1
 		);
 
 
@@ -76,6 +90,8 @@ namespace tnbLib
 		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
+
+		TnbSectPx_EXPORT Standard_Boolean IsTopoSegment() const override;
 	};
 }
 
