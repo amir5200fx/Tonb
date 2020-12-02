@@ -90,6 +90,9 @@
     <ClInclude Include="TnbLib\ShapePx\Memory\ShapePx_Memory.hxx">
       <Filter>TnbLib\ShapePx\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Section</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Memory\ShapePx_Memory.cxx">
       <Filter>TnbLib\ShapePx\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Section</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
