@@ -13,6 +13,24 @@ const char* tnbLib::sectPxLib::TightController_Deg2::typeName_("degree2 tightnes
 
 tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
 (
+	const std::shared_ptr<sectPxLib::Pole_Corner>& theCorner
+)
+	: SectPx_TightController(theCorner)
+{
+	// empty body
+}
+
+tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
+(
+	std::shared_ptr<sectPxLib::Pole_Corner>&& theCorner
+)
+	: SectPx_TightController(std::move(theCorner))
+{
+	// empty body
+}
+
+tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
+(
 	const Standard_Integer theIndex,
 	const std::shared_ptr<sectPxLib::Pole_Corner>& theCorner
 )
@@ -24,10 +42,31 @@ tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
 tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
 (
 	const Standard_Integer theIndex,
+	std::shared_ptr<sectPxLib::Pole_Corner>&& theCorner
+)
+	: SectPx_TightController(theIndex, std::move(theCorner))
+{
+	// empty body
+}
+
+tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
+(
+	const Standard_Integer theIndex,
 	const word & theName,
 	const std::shared_ptr<sectPxLib::Pole_Corner>& theCorner
 )
 	: SectPx_TightController(theIndex, theName, theCorner)
+{
+	// empty body
+}
+
+tnbLib::sectPxLib::TightController_Deg2::TightController_Deg2
+(
+	const Standard_Integer theIndex,
+	const word& theName,
+	std::shared_ptr<sectPxLib::Pole_Corner>&& theCorner
+)
+	: SectPx_TightController(theIndex, theName, std::move(theCorner))
 {
 	// empty body
 }

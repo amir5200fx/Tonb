@@ -58,6 +58,12 @@ tnbLib::SectPx_Parent::IsCloud() const
 }
 
 Standard_Boolean 
+tnbLib::SectPx_Parent::IsExtrProfile() const
+{
+	return Standard_False;
+}
+
+Standard_Boolean 
 tnbLib::SectPx_Parent::IsParent() const
 {
 	return Standard_True;

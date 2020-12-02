@@ -34,11 +34,14 @@ tnbLib::SectPx_Frame::EntityMaker::EntityMaker
 
 void tnbLib::SectPx_Frame::AllocateMemory()
 {
-	theFrameRegistry_ = std::make_shared<SectPx_FrameRegistry>
+	/*theFrameRegistry_ = std::make_shared<SectPx_FrameRegistry>
 		(
 			ParRegistry()->Counter(),
 			ParRegistry()->Scatter()
 			);
+	Debug_Null_Pointer(theFrameRegistry_);*/
+
+	Debug_Null_Pointer(theParRegistry_);
 	Debug_Null_Pointer(theFrameRegistry_);
 
 	theMakers_ = std::make_shared<EntityMaker>
@@ -51,9 +54,11 @@ void tnbLib::SectPx_Frame::AllocateMemory()
 
 tnbLib::SectPx_Frame::SectPx_Frame
 (
-	const std::shared_ptr<SectPx_ParRegistry>& theParReg
+	const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 )
 	: theParRegistry_(theParReg)
+	, theFrameRegistry_(theFrameReg)
 {
 	AllocateMemory();
 }
@@ -61,10 +66,12 @@ tnbLib::SectPx_Frame::SectPx_Frame
 tnbLib::SectPx_Frame::SectPx_Frame
 (
 	const Standard_Integer theIndex,
-	const std::shared_ptr<SectPx_ParRegistry>& theParReg
+	const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 )
 	: SectPx_Entity(theIndex)
 	, theParRegistry_(theParReg)
+	, theFrameRegistry_(theFrameReg)
 {
 	AllocateMemory();
 }
@@ -73,10 +80,12 @@ tnbLib::SectPx_Frame::SectPx_Frame
 (
 	const Standard_Integer theIndex,
 	const word& theName,
-	const std::shared_ptr<SectPx_ParRegistry>& theParReg
+	const std::shared_ptr<SectPx_ParRegistry>& theParReg,
+	const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 )
 	: SectPx_Entity(theIndex, theName)
 	, theParRegistry_(theParReg)
+	, theFrameRegistry_(theFrameReg)
 {
 	AllocateMemory();
 }

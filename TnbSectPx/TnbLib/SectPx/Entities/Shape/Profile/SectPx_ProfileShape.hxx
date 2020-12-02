@@ -8,7 +8,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class SectPx_BndPole;
+	class SectPx_TopoSegment;
 
 	class SectPx_ProfileShape
 		: public SectPx_Shape
@@ -16,8 +16,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<SectPx_BndPole> thePole0_;
-		std::shared_ptr<SectPx_BndPole> thePole1_;
+		std::shared_ptr<SectPx_TopoSegment> theSegment_;
 
 	public:
 
@@ -26,30 +25,21 @@ namespace tnbLib
 
 		SectPx_ProfileShape(const Standard_Integer theIndex, const word& theName);
 
-		SectPx_ProfileShape(const std::shared_ptr<SectPx_BndPole>& theP0, const std::shared_ptr<SectPx_BndPole>& theP1);
+		SectPx_ProfileShape(const std::shared_ptr<SectPx_TopoSegment>& theSegment);
 
-		SectPx_ProfileShape(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<SectPx_BndPole>& theP0, const std::shared_ptr<SectPx_BndPole>& theP1);
+		SectPx_ProfileShape(const Standard_Integer theIndex, const word& theName, const std::shared_ptr<SectPx_TopoSegment>& theSegment);
 
 
-		const auto& Pole0() const
+		const auto& Segment() const
 		{
-			return thePole0_;
+			return theSegment_;
 		}
 
-		const auto& Pole1() const
+		void SetSegment(const std::shared_ptr<SectPx_TopoSegment>& theSegment)
 		{
-			return thePole1_;
+			theSegment_ = theSegment;
 		}
 
-		void SetPole0(const std::shared_ptr<SectPx_BndPole>& thePole)
-		{
-			thePole0_ = thePole;
-		}
-
-		void SetPole1(const std::shared_ptr<SectPx_BndPole>& thePole)
-		{
-			thePole1_ = thePole;
-		}
 
 
 		Standard_Boolean IsProfile() const override;
