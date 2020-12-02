@@ -12,6 +12,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_CPtsMap;
+	class SectPx_Segment;
 
 	class SectPx_SegmentController
 		: public SectPx_Controller
@@ -20,6 +21,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<SectPx_CPtsMap> theCPts_;
+		std::shared_ptr<SectPx_Segment> theSegment_;
 
 
 		//- private functions and operators
@@ -52,6 +54,19 @@ namespace tnbLib
 			return theCPts_;
 		}
 
+		const auto& Segment() const
+		{
+			return theSegment_;
+		}
+
+		void SetSegment
+		(
+			const std::shared_ptr<SectPx_Segment>& theSegment
+		)
+		{
+			theSegment_ = theSegment;
+		}
+
 		TnbSectPx_EXPORT void SetCPts
 		(
 			const std::shared_ptr<SectPx_CPtsMap>& theCPts
@@ -75,12 +90,12 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Child>& thePar
 		) const override;
 
-		std::vector<std::shared_ptr<SectPx_Child>>
+		/*std::vector<std::shared_ptr<SectPx_Child>>
 			RetrieveChildren() const override
 		{
 			NotImplemented;
 			return std::vector<std::shared_ptr<SectPx_Child>>();
-		}
+		}*/
 
 		TnbSectPx_EXPORT std::shared_ptr<SectPx_Parent> 
 			ChildMap
