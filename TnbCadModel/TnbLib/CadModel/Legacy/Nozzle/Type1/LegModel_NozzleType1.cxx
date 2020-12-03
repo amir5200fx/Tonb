@@ -72,48 +72,40 @@ void tnbLib::LegModel_NozzleType1::CreateProfile()
 	weights.SetValue(11, outlet.RoundingWeight1()->Value());
 	weights.SetValue(15, outlet.RoundingWeight1()->Value());
 
-	static const auto du = (Standard_Real)0.0833333;
-	TColStd_Array1OfReal knots(1, 13);
+	static const auto du = (Standard_Real)0.125;
+	TColStd_Array1OfReal knots(1, 9);
 	knots.SetValue(1, 0);
 
 	knots.SetValue(2, du);
-	knots.SetValue(3, 2 * du);
 
-	knots.SetValue(4, 0.25);
+	knots.SetValue(3, 0.25);
 
-	knots.SetValue(5, 0.25 + du);
-	knots.SetValue(6, 0.25 + 2 * du);
+	knots.SetValue(4, 0.25 + du);
 
-	knots.SetValue(7, 0.5);
+	knots.SetValue(5, 0.5);
 
-	knots.SetValue(8, 0.5 + du);
-	knots.SetValue(9, 0.5 + 2 * du);
+	knots.SetValue(6, 0.5 + du);
 
-	knots.SetValue(10, 0.75);
+	knots.SetValue(7, 0.75);
 
-	knots.SetValue(11, 0.75 + du);
-	knots.SetValue(12, 0.75 + 2 * du);
+	knots.SetValue(8, 0.75 + du);
 
-	knots.SetValue(13, 1.0);
+	knots.SetValue(9, 1.0);
 
-	TColStd_Array1OfInteger mults(1, 13);
-	mults.SetValue(1, 3);
+	TColStd_Array1OfInteger mults(1, 9);
+	mults.SetValue(1, 4);
 	mults.SetValue(2, 1);
-	mults.SetValue(3, 1);
-	mults.SetValue(4, 2);
-	mults.SetValue(5, 1);
+	mults.SetValue(3, 3);
+	mults.SetValue(4, 1);
+	mults.SetValue(5, 3);
 	mults.SetValue(6, 1);
-	mults.SetValue(7, 2);
+	mults.SetValue(7, 3);
 	mults.SetValue(8, 1);
-	mults.SetValue(9, 1);
-	mults.SetValue(10, 2);
-	mults.SetValue(11, 1);
-	mults.SetValue(12, 1);
-	mults.SetValue(13, 3);
+	mults.SetValue(9, 4);
 
 	try
 	{
-		theProfile_ = new Geom2d_BSplineCurve(pnts, weights, knots, mults, 2);
+		theProfile_ = new Geom2d_BSplineCurve(pnts, weights, knots, mults, 3);
 	}
 	catch (const StdFail_NotDone& x)
 	{
@@ -128,4 +120,5 @@ void tnbLib::LegModel_NozzleType1::Perform()
 	CreateProfile();
 
 	Change_IsDone() = Standard_True;
+	
 }

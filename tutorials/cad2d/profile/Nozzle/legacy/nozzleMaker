@@ -1,0 +1,30 @@
+setOverallLength(12.3683);
+setRadiusAtInlet(0.0508);
+setRadiusAtOutlet(0.762);
+setRadiusAtThroat(0.262797);
+setThroat(0.0146)
+
+var inlet = getInlet();
+inlet.setInflection(0.5);
+inlet.setRadiusAtInflection(0.5);
+inlet.setOffsetAtThroat(0.02);
+inlet.setOffsetAtInlet(0.5);
+inlet.setRounding1(0.9);
+inlet.setRounding2(0.5);
+inlet.SetRoundingWeight1(1);
+inlet.setRoundingWeight2(1);
+
+var outlet = getOutlet();
+outlet.setInflection(0.5);
+outlet.setRadiusAtInflection(0.5);
+outlet.setOffsetAtThroat(0.001);
+outlet.setOffsetAtOutlet(0.72);
+outlet.setTangentAtOutlet(0.12);
+outlet.setRounding1(0.3);
+outlet.setRounding2(0.5);
+outlet.SetRoundingWeight1(1);
+outlet.setRoundingWeight2(1);
+
+perform();
+
+exportToPlt("nozzle.plt", 200);
