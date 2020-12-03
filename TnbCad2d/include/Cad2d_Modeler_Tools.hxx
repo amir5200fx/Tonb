@@ -207,6 +207,25 @@ namespace tnbLib
 					const Pnt2d& theCenter
 				);
 
+			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> 
+				Interpolation
+				(
+					const std::vector<Pnt2d>& theQ, 
+					const Standard_Boolean thePeriodic = Standard_False, 
+					const Standard_Real theTol = 1.0E-6
+				);
+
+			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> 
+				Interpolation
+				(
+					const std::vector<Pnt2d>& theQ,
+					const Vec2d& theFirst, 
+					const Vec2d& theLast, 
+					const Standard_Boolean thePeriodic = Standard_False, 
+					const Standard_Real theTol = 1.0E-6,
+					const Standard_Boolean theScale = Standard_True
+				);
+
 			static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>>
 				MakeRectangular
 				(

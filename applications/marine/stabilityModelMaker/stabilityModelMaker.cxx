@@ -2,12 +2,15 @@
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CosineDistb.hxx>
+#include <Geo_Tools.hxx>
+#include <Entity3d_Triangulation.hxx>
 #include <Pln_Ring.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
 #include <Cad_ShapeTools.hxx>
 #include <Cad_Tools.hxx>
+#include <Cad_FastDiscrete.hxx>
 #include <CadIO_IGES.hxx>
 #include <CadIO_STEP.hxx>
 #include <Marine_Shapes.hxx>
@@ -18,6 +21,7 @@
 #include <StbGMaker_TankCreators.hxx>
 #include <StbGMaker_SailCreators.hxx>
 #include <StbGMaker_Model.hxx>
+#include <FastDiscrete_Params.hxx>
 
 #include <Bnd_Box.hxx>
 #include <Standard_Failure.hxx>
@@ -30,6 +34,7 @@
 #include <gp_Circ2d.hxx>
 #include <gp_Parab2d.hxx>
 #include <gp_Hypr2d.hxx>
+#include <Poly_Triangulation.hxx>
 
 
 namespace tnbLib
@@ -37,6 +42,7 @@ namespace tnbLib
 
 	static const double tol = 1.0E-4;
 	static const auto gMaker = std::make_shared<StbGMaker_Creator>();
+	static const auto disctInfo = std::make_shared<FastDiscrete_Params>();
 
 
 	typedef std::shared_ptr<StbGMaker_Creator> creator_t;
@@ -53,6 +59,82 @@ namespace tnbLib
 	typedef std::shared_ptr<Geo_xDistb> xDisbt_t;
 
 	//- global functions
+
+	const auto& getDiscrtInfo()
+	{
+		return disctInfo;
+	}
+
+	//
+	//- set the triangulation parameters
+	//
+	void setAngle(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Real angl)
+	{
+		par->Angle = angl;
+	}
+
+	void setDeflection(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Real def)
+	{
+		par->Deflection = def;
+	}
+
+	void setMinSize(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Real x)
+	{
+		par->MinSize = x;
+	}
+
+	void setParallel(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Boolean p)
+	{
+		par->InParallel = p;
+	}
+
+	void setDefault(const std::shared_ptr<FastDiscrete_Params>& par)
+	{
+		par->Angle = 0.15;
+		par->Deflection = 0.01;
+		par->MinSize = Precision::Confusion();
+		par->InParallel = Standard_True;
+	}
+
+	//- end of the triangulation parameters
+
+	auto boundingBox(const TopoDS_Shape& s)
+	{
+		auto b = Cad_Tools::BoundingBox(Cad_Tools::BoundingBox(s));
+		return std::move(b);
+	}
+
+	auto diaSize(const TopoDS_Shape& s)
+	{
+		auto b = boundingBox(s);
+		return b.Diameter();
+	}
+
+	void triangulationShape(const TopoDS_Shape& s)
+	{
+		Cad_FastDiscrete::Triangulation(s, *disctInfo);
+	}
+
+	void autoTriangulation(const TopoDS_Shape& s, const double w)
+	{
+		auto r = diaSize(s);
+		setDeflection(getDiscrtInfo(), w*r);
+		triangulationShape(s);
+	}
+
+	auto getTriangulation(const TopoDS_Shape& s)
+	{
+		auto poly = Cad_Tools::RetrieveTriangulation(s);
+		std::vector<std::shared_ptr<Entity3d_Triangulation>> tris;
+		for (const auto& x : poly)
+		{
+			if (x)
+			{
+				tris.push_back(Cad_Tools::Triangulation(x));
+			}
+		}
+		return std::move(tris);
+	}
 
 	const auto& getMaker()
 	{
@@ -158,6 +240,23 @@ namespace tnbLib
 
 
 	//- io functions
+
+	void exportToPlt(const std::shared_ptr<Entity3d_Triangulation>& t, const fileName& name)
+	{
+		OFstream f(name);
+		t->ExportToPlt(f);
+	}
+
+	void exportToPlt(const TopoDS_Shape& sh, const fileName& name)
+	{
+		OFstream f(name);
+		auto tris = getTriangulation(sh);
+		for (const auto&x : tris)
+		{
+			Debug_Null_Pointer(x);
+			x->ExportToPlt(f);
+		}
+	}
 
 	TopoDS_Shape importIges(const fileName& name)
 	{
@@ -492,12 +591,6 @@ namespace tnbLib
 		return std::move(shape);
 	}
 
-	auto boundingBox(const TopoDS_Shape& s)
-	{
-		auto b = Cad_Tools::BoundingBox(Cad_Tools::BoundingBox(s));
-		return std::move(b);
-	}
-
 	auto createUniformDistb(const double x0, const double x1, const int n)
 	{
 		auto d = std::make_shared<Geo_UniDistb>(n);
@@ -685,7 +778,13 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 
+		//- default values
+		setDefault(getDiscrtInfo());
+
 		//- io functions
+
+		mod->add(chaiscript::fun([](const std::string& name)->auto{auto t = importIges(name); return std::move(t); }), "importIGES");
+		mod->add(chaiscript::fun([](const std::string& name)->auto{auto t = importStep(name); return std::move(t); }), "importSTEP");
 
 		mod->add(chaiscript::fun([](const std::string& name)->const auto& {return importHullMakerFromIGES(name); }), "createHullFromIGES");
 		mod->add(chaiscript::fun([](const std::string& name)-> const auto& {return importHullMakerFromSTEP(name); }), "createHullFromSTEP");
@@ -696,6 +795,21 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([]()-> auto {auto t = getMaker()->ExportModel(); return std::move(t); }), "createModel");
 
+		mod->add(chaiscript::fun([](const TopoDS_Shape& sh, const std::string& name)->void {exportToPlt(sh, name); }), "exportToPlt");
+
+		//- triangulation
+
+		mod->add(chaiscript::fun([]()-> const auto& {return getDiscrtInfo(); }), "getDiscrtInfo");
+
+		mod->add(chaiscript::fun([](const std::shared_ptr<FastDiscrete_Params>& par, const double v) ->void {setAngle(par, Geo_Tools::DegToRadian(v)); }), "setAngle");
+		mod->add(chaiscript::fun([](const std::shared_ptr<FastDiscrete_Params>& par, const double v) ->void {setDeflection(par, v); }), "setDeflection");
+		mod->add(chaiscript::fun([](const std::shared_ptr<FastDiscrete_Params>& par, const double v) ->void {setMinSize(par, v); }), "setMinSize");
+		mod->add(chaiscript::fun([](const std::shared_ptr<FastDiscrete_Params>& par, const bool v) ->void {setParallel(par, v); }), "setParallel");
+		mod->add(chaiscript::fun([](const std::shared_ptr<FastDiscrete_Params>& par)->void {setDefault(par); }), "setDefaults");
+
+		mod->add(chaiscript::fun([](const TopoDS_Shape& sh)->void {triangulationShape(sh); }), "triangulation");
+		mod->add(chaiscript::fun([](const TopoDS_Shape& sh, const double tol)->void {autoTriangulation(sh, tol); }), "triangulation");
+
 		//- spacing
 
 		//- shapes
@@ -703,6 +817,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createHull(s); }), "createHullShape");
 		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createTank(s); }), "createTankShape");
 		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createSail(s); }), "createSailShape");
+
+		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{return diaSize(s); }), "diaSize");
 	}
 
 	void setDefaultShapes(const module_t& mod)
