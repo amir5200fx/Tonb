@@ -1,10 +1,16 @@
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
 #include <Pln_Ring.hxx>
+#include <Pln_Curve.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#include <Geo_ApprxCurve_Info.hxx>
+#include <Pln_Tools.hxx>
+#include <Bnd_Box2d.hxx>
+#include <Entity2d_Box.hxx>
+#include <Entity2d_Polygon.hxx>
 
 #include <gp_Circ2d.hxx>
 #include <gp_Elips2d.hxx>
@@ -18,11 +24,88 @@ namespace tnbLib
 	typedef cad2dLib::Modeler_Tools tools;
 	typedef std::shared_ptr<Cad2d_Modeler> modeler_t;
 	typedef cad2dLib::Modeler_SelectList selList;
+	typedef std::shared_ptr<Geo_ApprxCurve_Info> GeoApxCurveInfo_t;
 
 	static const auto modeler = std::make_shared<Cad2d_Modeler>();
+	static const auto disctInfo = std::make_shared<Geo_ApprxCurve_Info>();
 	static selList selt;
 
+	//
+	//- set the discretization parameters
+	//
+	void setApprox(const GeoApxCurveInfo_t& par, const double apx)
+	{
+		par->SetApprox(apx);
+	}
+
+	void setAngle(const GeoApxCurveInfo_t& par, const double angl)
+	{
+		par->SetAngle(angl);
+	}
+
+	void setMinSize(const GeoApxCurveInfo_t& par, const double minSize)
+	{
+		par->SetMinSize(minSize);
+	}
+
+	void setMaxNbSubdivision(const GeoApxCurveInfo_t& par, const int n)
+	{
+		par->SetMaxNbSubdivision(n);
+	}
+
+	void setInitNbSubdivision(const GeoApxCurveInfo_t& par, const int n)
+	{
+		par->SetInitNbSubdivision(n);
+	}
+
+	void setNbSamples(const GeoApxCurveInfo_t& par, const int n)
+	{
+		par->SetNbSamples(n);
+	}
+
+	void setDefault(const GeoApxCurveInfo_t& par)
+	{
+		par->SetApprox(Geo_ApprxCurve_Info::DEFAULT_APPROX);
+		par->SetAngle(Geo_ApprxCurve_Info::DEFAULT_ANGLE);
+		par->SetMinSize(Geo_ApprxCurve_Info::DEFAULT_MIN_SIZE);
+
+		par->SetMaxNbSubdivision(Geo_ApprxCurve_Info::DEFAULT_MAX_NB_SUBDIVIDE);
+		par->SetInitNbSubdivision(Geo_ApprxCurve_Info::DEFAULT_INIT_NB_SUBDIVIDE);
+		par->SetNbSamples(Geo_ApprxCurve_Info::DEFAULT_NB_SAMPLES);
+	}
 	
+	//- end of the discretization parameters
+
+	auto boundingBox(const edge_t& e)
+	{
+		auto b = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(e->Curve()->Geometry()));
+		return std::move(b);
+	}
+
+	auto diaSize(const edge_t& e)
+	{
+		auto b = boundingBox(e);
+		return b.Diameter();
+	}
+
+	void discretizationCurve(const edge_t& e)
+	{
+		e->Approx(disctInfo);
+	}
+
+	void autoDiscretization(const edge_t& e, const double tol)
+	{
+		auto d = diaSize(e);
+		setMinSize(disctInfo, d*tol);
+		discretizationCurve(e);
+	}
+
+	const auto& getDiscretization(const edge_t& e)
+	{
+		return e->Mesh();
+	}
+	
+	//*******************************
 
 	const auto& getModeler()
 	{
@@ -405,6 +488,16 @@ namespace tnbLib
 	{
 		m->Intersection(pln0, pln1);
 	}
+
+	void exportToPlt(const edge_t& e, const fileName& name)
+	{
+		OFstream f(name);
+		if (e->Mesh())
+		{
+			e->Mesh()->ExportToPlt(f);
+		}
+	}
+
 }
 
 #ifdef DebugInfo
@@ -522,38 +615,76 @@ namespace tnbLib
 	{
 		mod->add(chaiscript::fun([](const Pnt2d& p)-> void {print(p); }), "print");
 	}
+
+	std::string getString(char* argv)
+	{
+		std::string argument(argv);
+		return std::move(argument);
+	}
+
+	Standard_Boolean IsEqualCommand(char* argv, const std::string& command)
+	{
+		auto argument = getString(argv);
+		return argument IS_EQUAL command;
+	}
 }
 
 using namespace tnbLib;
 
-int main()
+int main(int  argc, char *argv[])
 {
+	FatalError.throwExceptions();
 
-	chaiscript::ChaiScript chai;
-
-	auto mod = std::make_shared<chaiscript::Module>();
-
-	setGeoFuncs(mod);
-	setFuncs(mod);
-
-	setGlobals(mod);
-
-	chai.add(mod);
-
-	fileName myFileName("modeler");
-
-	try
+	if (argc <= 1)
 	{
-		chai.eval_file(myFileName);
-	}
-	catch (const chaiscript::exception::eval_error& x)
-	{
-		Info << x.pretty_print() << endl;
-	}
-	catch (const error& x)
-	{
-		Info << x.message() << endl;
+		Info << " - No command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
 	}
 
-	return 0;
+	if (argc IS_EQUAL 2)
+	{
+		if (IsEqualCommand(argv[1], "--help"))
+		{
+			Info << "this is help" << endl;
+		}
+		else if (IsEqualCommand(argv[1], "--run"))
+		{
+			chaiscript::ChaiScript chai;
+
+			auto mod = std::make_shared<chaiscript::Module>();
+
+			setGeoFuncs(mod);
+			setFuncs(mod);
+
+			setGlobals(mod);
+			setTransforms(mod);
+			setOps(mod);
+			setBooleans(mod);
+
+			chai.add(mod);
+
+			fileName myFileName("modeler");
+
+			try
+			{
+				chai.eval_file(myFileName);
+			}
+			catch (const chaiscript::exception::eval_error& x)
+			{
+				Info << x.pretty_print() << endl;
+			}
+			catch (const error& x)
+			{
+				Info << x.message() << endl;
+			}
+		}
+	}
+	else
+	{
+		Info << " - No valid command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
+
 }
