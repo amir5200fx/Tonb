@@ -3,8 +3,12 @@
 #include <Geo_UniDistb.hxx>
 #include <Geo_CosineDistb.hxx>
 #include <Geo_Tools.hxx>
+#include <Geo_ApprxCurve_Info.hxx>
 #include <Entity3d_Triangulation.hxx>
+#include <Pln_Curve.hxx>
+#include <Pln_Edge.hxx>
 #include <Pln_Ring.hxx>
+#include <Pln_Tools.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
@@ -14,6 +18,7 @@
 #include <CadIO_IGES.hxx>
 #include <CadIO_STEP.hxx>
 #include <Marine_Shapes.hxx>
+#include <StbGMaker_Edge.hxx>
 #include <StbGMaker_WP.hxx>
 #include <StbGMaker_ShapeTools.hxx>
 #include <StbGMaker_Creator.hxx>
@@ -43,6 +48,7 @@ namespace tnbLib
 	static const double tol = 1.0E-4;
 	static const auto gMaker = std::make_shared<StbGMaker_Creator>();
 	static const auto disctInfo = std::make_shared<FastDiscrete_Params>();
+	static const auto curveDisctInfo = std::make_shared<Geo_ApprxCurve_Info>();
 
 
 	typedef std::shared_ptr<StbGMaker_Creator> creator_t;
@@ -57,8 +63,17 @@ namespace tnbLib
 	typedef std::shared_ptr<StbGMaker_WP> wp_t;
 
 	typedef std::shared_ptr<Geo_xDistb> xDisbt_t;
+	typedef std::shared_ptr<Geo_ApprxCurve_Info> apprxCurveInfo_t;
+
+	typedef std::shared_ptr<Pln_Edge> edge_t;
+	typedef std::shared_ptr<Pln_Ring> ring_t;
 
 	//- global functions
+
+	const auto& getCurveDiscrtInfo()
+	{
+		return curveDisctInfo;
+	}
 
 	const auto& getDiscrtInfo()
 	{
@@ -68,22 +83,22 @@ namespace tnbLib
 	//
 	//- set the triangulation parameters
 	//
-	void setAngle(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Real angl)
+	void setAngle(const std::shared_ptr<FastDiscrete_Params>& par, const double angl)
 	{
 		par->Angle = angl;
 	}
 
-	void setDeflection(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Real def)
+	void setDeflection(const std::shared_ptr<FastDiscrete_Params>& par, const double def)
 	{
 		par->Deflection = def;
 	}
 
-	void setMinSize(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Real x)
+	void setMinSize(const std::shared_ptr<FastDiscrete_Params>& par, const double x)
 	{
 		par->MinSize = x;
 	}
 
-	void setParallel(const std::shared_ptr<FastDiscrete_Params>& par, const Standard_Boolean p)
+	void setParallel(const std::shared_ptr<FastDiscrete_Params>& par, const double p)
 	{
 		par->InParallel = p;
 	}
@@ -94,6 +109,49 @@ namespace tnbLib
 		par->Deflection = 0.01;
 		par->MinSize = Precision::Confusion();
 		par->InParallel = Standard_True;
+	}
+
+	void setAngle(const apprxCurveInfo_t& t, const double ang)
+	{
+		t->SetAngle(ang);
+	}
+
+	void setApprox(const apprxCurveInfo_t& t, const double x)
+	{
+		t->SetApprox(x);
+	}
+
+	void setMinSize(const apprxCurveInfo_t& t, const double x)
+	{
+		t->SetMinSize(x);
+	}
+
+	void setMaxNbDivisions(const apprxCurveInfo_t& t, int n)
+	{
+		n = std::max(n, 5);
+		t->SetMaxNbSubdivision(n);
+	}
+
+	void setInitNbDivisions(const apprxCurveInfo_t& t, int n)
+	{
+		n = std::max(n, 2);
+		t->SetInitNbSubdivision(n);
+	}
+
+	void setNbSamples(const apprxCurveInfo_t& t, int n)
+	{
+		n = std::max(n, 3);
+		t->SetNbSamples(n);
+	}
+
+	void setDefaults(const apprxCurveInfo_t& t)
+	{
+		t->SetAngle(Geo_ApprxCurve_Info::DEFAULT_ANGLE);
+		t->SetApprox(Geo_ApprxCurve_Info::DEFAULT_APPROX);
+		t->SetInitNbSubdivision(Geo_ApprxCurve_Info::DEFAULT_INIT_NB_SUBDIVIDE);
+		t->SetMaxNbSubdivision(Geo_ApprxCurve_Info::DEFAULT_MAX_NB_SUBDIVIDE);
+		t->SetMinSize(Geo_ApprxCurve_Info::DEFAULT_MIN_SIZE);
+		t->SetNbSamples(Geo_ApprxCurve_Info::DEFAULT_NB_SAMPLES);
 	}
 
 	//- end of the triangulation parameters
@@ -208,7 +266,6 @@ namespace tnbLib
 
 	auto createWP(const hullCreator_t& m, const double x)
 	{
-
 		auto t = m->SelectWP(m->CreateWorkingPlane(x));
 		return std::move(t);
 
@@ -233,13 +290,70 @@ namespace tnbLib
 		return std::move(t);
 	}
 
+	void createWPs(const hullCreator_t& m, const std::shared_ptr<Geo_xDistb>& dist)
+	{
+		m->CreateWorkingPlanes(*dist);
+	}
 
+	void createWPs(const tankCreator_t& m, const std::shared_ptr<Geo_xDistb>& dist)
+	{
+		m->CreateWorkingPlanes(*dist);
+	}
+
+	void createWPs(const sailCreator_t& m, const std::shared_ptr<Geo_xDistb>& dist)
+	{
+		auto volumetric = std::dynamic_pointer_cast<StbGMaker_VolumeSailCreator>(m);
+		if (!volumetric)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the sail creator is not volumetric." << endl
+				<< abort(FatalError);
+		}
+		volumetric->CreateWorkingPlanes(*dist);
+	}
+
+
+	//- discretization of the curves
+
+	void uniformDiscretize(const edge_t& e, int n)
+	{
+		const auto& geom = e->Curve()->Geometry();
+		auto mesh = Pln_Tools::UniformDiscrete(geom, std::max(n, 5));
+		e->Mesh() = std::move(mesh);
+	}
+
+	void discretize(const edge_t& e)
+	{
+		e->Approx(getCurveDiscrtInfo());
+	}
+
+	void discretize(const wp_t& wp, int n)
+	{
+		const auto& modeler = wp->Modeler();
+		const auto& edges = modeler->Edges();
+		for (const auto& x : edges)
+		{
+			discretize(x.second);
+			wp->Approx(x.second);
+		}
+	}
+
+	auto getMesh(const wp_t& wp)
+	{
+		auto t = wp->MakeMesh();
+		return std::move(t);
+	}
 
 	//- spacing functions
 
 
 
 	//- io functions
+
+	/*void exportToPlt(const wp_t& wp, const fileName& name)
+	{
+		
+	}*/
 
 	void exportToPlt(const std::shared_ptr<Entity3d_Triangulation>& t, const fileName& name)
 	{
@@ -611,10 +725,50 @@ namespace tnbLib
 
 	// - spacing
 
-	auto xBound(const TopoDS_Shape& s)
+	/*auto xBound(const TopoDS_Shape& s)
 	{
 		auto b = Cad_Tools::BoundingBox(Cad_Tools::BoundingBox(s));
 		auto t = b.Bound(0);
+		return std::move(t);
+	}*/
+
+	auto createUniformDistb(const TopoDS_Shape& sh, int n, const double tol)
+	{
+		n = std::max(n, 3);
+		auto b = boundingBox(sh);
+		auto x0 = b.P0().X();
+		auto x1 = b.P1().X();
+		auto dx = x1 - x0;
+		auto clip = tol * dx;
+		x0 += clip;
+		x1 -= clip;
+		if (x1 <= x0)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid boundary values for a distribution profile" << endl
+				<< abort(FatalError);
+		}
+		auto t = createUniformDistb(x0, x1, n);
+		return std::move(t);
+	}
+
+	auto createCosineDistb(const TopoDS_Shape& sh, int n, const double tol)
+	{
+		n = std::max(n, 3);
+		auto b = boundingBox(sh);
+		auto x0 = b.P0().X();
+		auto x1 = b.P1().X();
+		auto dx = x1 - x0;
+		auto clip = tol * dx;
+		x0 += clip;
+		x1 -= clip;
+		if (x1 <= x0)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid boundary values for a distribution profile" << endl
+				<< abort(FatalError);
+		}
+		auto t = createCosineDistb(x0, x1, n);
 		return std::move(t);
 	}
 
@@ -622,116 +776,146 @@ namespace tnbLib
 
 	//Curves and edges:
 
+	auto wpEdge(std::shared_ptr<Pln_Edge>&& edge)
+	{
+		auto e = std::make_shared<StbGMaker_Edge<Pln_Edge>>(std::move(*edge));
+		return std::move(e);
+	}
+
+	auto wpEdge(std::shared_ptr<Pln_Ring>&& edge)
+	{
+		auto e = std::make_shared<StbGMaker_Edge<Pln_Ring>>(std::move(*edge));
+		return std::move(e);
+	}
+
 	void createSegment(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
 	{
 		auto edge = cad2dLib::Modeler_Tools::MakeSegment(p0, p1);
-		wp->Modeler()->Import(std::move(edge));
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
 	}
 
 	 void createSegment(const wp_t& wp, const Pnt2d& p0, const double ang, const double l)
 	 {
 		 auto edge = cad2dLib::Modeler_Tools::MakeSegment(p0, ang, l);
-		 wp->Modeler()->Import(std::move(edge));
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createCircArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
 	 {
-		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(p0, p1, p2);
-		 wp->Modeler()->Import(std::move(circArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(p0, p1, p2);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createCircArc(const wp_t& wp, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
 	 {
-		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(p0, v0, p1);
-		 wp->Modeler()->Import(std::move(circArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(p0, v0, p1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	
 	 void createCircArc(const wp_t& wp, const gp_Circ2d& c, const double ang0, const double ang1)
 	 {
-		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(c, ang0, ang1);
-		 wp->Modeler()->Import(std::move(circArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(c, ang0, ang1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createCircArc(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)
 	 {
-		 auto circArc = cad2dLib::Modeler_Tools::MakeCircArc(c, p0, p1);
-		 wp->Modeler()->Import(std::move(circArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(c, p0, p1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const double ang0, const double ang1)
 	 {
-		 auto elipArc = cad2dLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1);
-		 wp->Modeler()->Import(std::move(elipArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)
 	 {
-		 auto elipArc = cad2dLib::Modeler_Tools::MakeElipsArc(e, p0, p1);
-		 wp->Modeler()->Import(std::move(elipArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeElipsArc(e, p0, p1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const double ang0, const double ang1)
 	 {
-		 auto hyprArc = cad2dLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1);
-		 wp->Modeler()->Import(std::move(hyprArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)
 	 {
-		 auto hyprArc = cad2dLib::Modeler_Tools::MakeHyprArc(h, p0, p1);
-		 wp->Modeler()->Import(std::move(hyprArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeHyprArc(h, p0, p1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createParabArc(const wp_t& wp, const gp_Parab2d& par, const double ang0, const double ang1)
 	 {
-		 auto parArc = cad2dLib::Modeler_Tools::MakeParbArc(par, ang0, ang1);
-		 wp->Modeler()->Import(std::move(parArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeParbArc(par, ang0, ang1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createParabArc(const wp_t& wp, const gp_Parab2d& par, const Pnt2d& p0, const Pnt2d& p1)
 	 {
-		 auto parArc = cad2dLib::Modeler_Tools::MakeParabArc(par, p0, p1);
-		 wp->Modeler()->Import(std::move(parArc));
+		 auto edge = cad2dLib::Modeler_Tools::MakeParabArc(par, p0, p1);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 	
 	 // Shapes:
 
 	 void createCircle(const wp_t& wp, const gp_Circ2d& c)
 	 {
-		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c);
-		 wp->Modeler()->Import(std::move(circ));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 // a circle parallel to another circle and passing through a point:
 	 void createCircle(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0)
 	 {
-		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
-		 wp->Modeler()->Import(std::move(circ));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createCircle(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
 	 {
-		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(p0, p1, p2);
-		 wp->Modeler()->Import(std::move(circ));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(p0, p1, p2);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createCircle(const wp_t& wp, const Pnt2d& c, const double r)
 	 {
-		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c, r);
-		 wp->Modeler()->Import(std::move(circ));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c, r);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createCircle(const wp_t& wp, const Pnt2d& c, const Pnt2d& p0)
 	 {
-		 auto circ = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
-		 wp->Modeler()->Import(std::move(circ));
+		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 void createEllipse(const wp_t& wp, const gp_Elips2d& e)
 	 {
-		 auto elip = cad2dLib::Modeler_Tools::MakeEllipse(e);
-		 wp->Modeler()->Import(std::move(elip));
+		 auto edge = cad2dLib::Modeler_Tools::MakeEllipse(e);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 //! Make an Ellipse centered on the point Center, where
@@ -746,8 +930,9 @@ namespace tnbLib
 
 	 void createEllipse(const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
 	 {
-		 auto elip = cad2dLib::Modeler_Tools::MakeEllipse(s0, s1, c);
-		 wp->Modeler()->Import(std::move(elip));
+		 auto edge = cad2dLib::Modeler_Tools::MakeEllipse(s0, s1, c);
+		 auto edge3 = wpEdge(std::move(edge));
+		 wp->Modeler()->Import(std::move(edge3));
 	 }
 
 	 /*void createRectangular(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
