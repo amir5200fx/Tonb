@@ -61,6 +61,12 @@
     <Filter Include="TnbLib\ShapePx\Memory">
       <UniqueIdentifier>{0cc72443-c8a2-4e94-b119-916c90687783}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset">
+      <UniqueIdentifier>{66608030-acb1-4357-8b38-59bffce140eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated">
+      <UniqueIdentifier>{42dea667-16ee-434a-8460-ba46adebf2fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -93,6 +99,15 @@
     <ClInclude Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.hxx">
       <Filter>TnbLib\ShapePx\Entities\Section</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Patch\Extruded\ShapePx_ExtrudedPatch.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Patch\Extruded</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\ShapePx_ContinProfile_Custom.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset\ShapePx_ContinProfile_OffsetCustom.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
@@ -118,6 +133,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.cxx">
       <Filter>TnbLib\ShapePx\Entities\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\ShapePx_ContinProfile_Custom.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset\ShapePx_ContinProfile_OffsetCustom.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset\ShapePx_ContinProfile_OffsetCustomIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

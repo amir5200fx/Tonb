@@ -59,6 +59,8 @@ namespace tnbLib
 
 		virtual std::vector<offsetPoint> RetrieveOffsets() const = 0;
 
+		virtual void Update();
+
 	};
 }
 
