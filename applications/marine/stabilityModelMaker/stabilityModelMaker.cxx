@@ -327,14 +327,18 @@ namespace tnbLib
 		e->Approx(getCurveDiscrtInfo());
 	}
 
-	void discretize(const wp_t& wp, int n)
+	void uniformDiscretize(const wp_t& wp, int n)
 	{
 		const auto& modeler = wp->Modeler();
 		const auto& edges = modeler->Edges();
+		
 		for (const auto& x : edges)
 		{
-			discretize(x.second);
-			wp->Approx(x.second);
+			if (!x.second->Mesh())
+			{
+				uniformDiscretize(x.second, n);
+				wp->Approx(x.second);
+			}	
 		}
 	}
 
@@ -350,10 +354,60 @@ namespace tnbLib
 
 	//- io functions
 
-	/*void exportToPlt(const wp_t& wp, const fileName& name)
+	void exportToPlt(const wp_t& wp, const fileName& name)
 	{
+		OFstream f(name);
+		const auto& edges = wp->Modeler()->Edges();
 		
-	}*/
+		for (const auto& x : edges)
+		{
+			const auto& edge = x.second;
+			if (edge->IsRing())
+			{
+				auto edge3 = std::dynamic_pointer_cast<StbGMaker_Edge<Pln_Ring>>(edge);
+				if (edge3->Mesh3d())
+				{
+					edge3->Mesh3d()->ExportToPlt(f);
+				}
+			}
+			else
+			{
+				auto edge3 = std::dynamic_pointer_cast<StbGMaker_Edge<Pln_Edge>>(edge);
+				if (edge3->Mesh3d())
+				{
+					edge3->Mesh3d()->ExportToPlt(f);
+				}
+			}
+			
+		}
+	}
+
+	void exportToPlt(const wp_t& wp, OFstream& f)
+	{
+		const auto& edges = wp->Modeler()->Edges();
+
+		for (const auto& x : edges)
+		{
+			const auto& edge = x.second;
+			if (edge->IsRing())
+			{
+				auto edge3 = std::dynamic_pointer_cast<StbGMaker_Edge<Pln_Ring>>(edge);
+				if (edge3->Mesh3d())
+				{
+					edge3->Mesh3d()->ExportToPlt(f);
+				}
+			}
+			else
+			{
+				auto edge3 = std::dynamic_pointer_cast<StbGMaker_Edge<Pln_Edge>>(edge);
+				if (edge3->Mesh3d())
+				{
+					edge3->Mesh3d()->ExportToPlt(f);
+				}
+			}
+
+		}
+	}
 
 	void exportToPlt(const std::shared_ptr<Entity3d_Triangulation>& t, const fileName& name)
 	{
