@@ -945,6 +945,12 @@
     <ClInclude Include="TnbLib\SectPx\Entities\Extrude\FivePoint\SectPx_ExtrProfile_FivePoint.hxx">
       <Filter>TnbLib\SectPx\Entities\Extrude\FivePoint</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfileType.hxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfiles.hxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">

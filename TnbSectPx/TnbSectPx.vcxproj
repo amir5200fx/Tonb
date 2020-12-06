@@ -139,6 +139,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\SectPx\Entities\Extrude\FivePoint\SectPx_ExtrProfile_FivePoint.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Extrude\Linear\SectPx_ExtrProfile_Linear.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfile.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfiles.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfileType.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Extrude\ThreePoint\SectPx_ExtrProfile_ThreePoint.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Extrude\Uniform\SectPx_ExtrProfile_Uniform.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Interface\Empty\SectPx_EmptyInterface.hxx" />
