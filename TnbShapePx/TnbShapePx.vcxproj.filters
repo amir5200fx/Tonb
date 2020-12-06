@@ -67,6 +67,30 @@
     <Filter Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated">
       <UniqueIdentifier>{42dea667-16ee-434a-8460-ba46adebf2fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\Operator">
+      <UniqueIdentifier>{0ab64e26-e281-4d9b-a619-96ee429fb17a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Operator\Extrude">
+      <UniqueIdentifier>{9ef4e275-3a3e-4b5a-9fbf-bbbdc79f9e89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\CtrlRow">
+      <UniqueIdentifier>{0e1b72db-17be-43fa-8588-c2df6a55be14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\CtrlNet">
+      <UniqueIdentifier>{1d2b82c8-5b9f-43bb-a7e8-7c2773d9dac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\GeoPatch">
+      <UniqueIdentifier>{ec246f27-8929-4a62-8617-85fe98c5ade6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Tip">
+      <UniqueIdentifier>{f48bcde0-d295-4829-a17a-53135572d93e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Tip\Spherical">
+      <UniqueIdentifier>{83256224-ad5e-4345-8c08-a01c249f57e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Tip\Cylindrical">
+      <UniqueIdentifier>{a9ca7df6-5ea1-452e-856e-845355a75817}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -108,6 +132,27 @@
     <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset\ShapePx_ContinProfile_OffsetCustom.hxx">
       <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Operator\ShapePx_Operator.hxx">
+      <Filter>TnbLib\ShapePx\Operator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Operator\Extrude\ShapePx_ExtrudeOp.hxx">
+      <Filter>TnbLib\ShapePx\Operator\Extrude</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\CtrlRow\ShapePx_CtrlRow.hxx">
+      <Filter>TnbLib\ShapePx\Entities\CtrlRow</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\CtrlNet\ShapePx_CtrlNet.hxx">
+      <Filter>TnbLib\ShapePx\Entities\CtrlNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\GeoPatch\ShapePx_GeoPatch.hxx">
+      <Filter>TnbLib\ShapePx\Entities\GeoPatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Tip\ShapePx_Tip.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Tip</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Tip\Spherical\ShapePx_SphericalTip.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Tip\Spherical</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
@@ -142,6 +187,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset\ShapePx_ContinProfile_OffsetCustomIO.cxx">
       <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Patch\ShapePx_Patch.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Patch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Patch\Extruded\ShapePx_ExtrudedPatch.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Patch\Extruded</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Operator\ShapePx_Operator.cxx">
+      <Filter>TnbLib\ShapePx\Operator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Operator\Extrude\ShapePx_ExtrudeOp.cxx">
+      <Filter>TnbLib\ShapePx\Operator\Extrude</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Tip\Spherical\ShapePx_SphericalTip.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Tip\Spherical</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

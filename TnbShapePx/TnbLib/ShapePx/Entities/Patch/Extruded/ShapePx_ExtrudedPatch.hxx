@@ -18,12 +18,43 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::map<Standard_Integer, std::shared_ptr<ShapePx_Profile>> theParToProfile_;
+		std::map
+			<
+			Standard_Integer, 
+			std::shared_ptr<ShapePx_Profile>
+			> theParToProfile_;
 
 	public:
 
+
+		//- default constructor
+
 		ShapePx_ExtrudedPatch()
 		{}
+
+
+		//- constructors
+
+		ShapePx_ExtrudedPatch
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		);
+
+		ShapePx_ExtrudedPatch
+		(
+			const std::shared_ptr<ShapePx_Section>& theSect
+		);
+
+		ShapePx_ExtrudedPatch
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			const std::shared_ptr<ShapePx_Section>& theSect
+		);
+
+
+		//- public functions and operators
 
 		auto NbSectionParameters() const
 		{
@@ -35,9 +66,17 @@ namespace tnbLib
 			return theParToProfile_;
 		}
 
-		std::shared_ptr<ShapePx_Profile> RemoveProfile(const Standard_Integer theParIndex);
+		std::shared_ptr<ShapePx_Profile> 
+			RemoveProfile
+			(
+				const Standard_Integer theParIndex
+			);
 
-		void ImportProfileForParameter(const Standard_Integer theParIndex, const std::shared_ptr<ShapePx_Profile>& theProfile);
+		void ImportProfileForParameter
+		(
+			const Standard_Integer theParIndex, 
+			const std::shared_ptr<ShapePx_Profile>& theProfile
+		);
 
 		
 	};
