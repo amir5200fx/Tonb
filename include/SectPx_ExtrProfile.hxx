@@ -4,6 +4,7 @@
 
 #include <Pnt2d.hxx>
 #include <SectPx_Parent.hxx>
+#include <SectPx_ExtrProfileType.hxx>
 
 namespace tnbLib
 {
@@ -37,6 +38,8 @@ namespace tnbLib
 	public:
 
 		TnbSectPx_EXPORT Standard_Boolean IsExtrProfile() const override;
+
+		virtual SectPx_ExtrProfileType ExtrProfileType() const = 0;
 
 		virtual Standard_Real Lower() const = 0;
 

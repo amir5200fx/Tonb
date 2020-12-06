@@ -81,6 +81,11 @@ namespace tnbLib
 
 			//- override virtual functions from extrProfile base class
 
+			SectPx_ExtrProfileType ExtrProfileType() const override
+			{
+				return SectPx_ExtrProfileType::uniform;
+			}
+
 			TnbSectPx_EXPORT Standard_Real Lower() const override;
 
 			TnbSectPx_EXPORT Standard_Real Upper() const override;
