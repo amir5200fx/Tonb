@@ -4,6 +4,7 @@
 
 #include <Global_AccessMethod.hxx>
 #include <LegModel_Parameter.hxx>
+#include <CadModel_Module.hxx>
 
 namespace tnbLib
 {
@@ -32,7 +33,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_Dimensions();
+		TnbCadModel_EXPORT LegModel_DispNo1_Dimensions();
 
 	public:
 
@@ -83,7 +84,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_AftSectionParams();
+		TnbCadModel_EXPORT LegModel_DispNo1_AftSectionParams();
 
 	public:
 
@@ -99,7 +100,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_MidSectionParams();
+		TnbCadModel_EXPORT LegModel_DispNo1_MidSectionParams();
 
 	public:
 
@@ -116,7 +117,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_FwdSectionParams();
+		TnbCadModel_EXPORT LegModel_DispNo1_FwdSectionParams();
 
 	public:
 
@@ -137,7 +138,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_KeelParams();
+		TnbCadModel_EXPORT LegModel_DispNo1_KeelParams();
 
 	public:
 
@@ -161,7 +162,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_StemParams();
+		TnbCadModel_EXPORT LegModel_DispNo1_StemParams();
 
 	public:
 
@@ -182,7 +183,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_TransomParams();
+		TnbCadModel_EXPORT LegModel_DispNo1_TransomParams();
 
 	public:
 
@@ -207,7 +208,7 @@ namespace tnbLib
 
 	protected:
 
-		LegModel_DispNo1_HullParams();
+		TnbCadModel_EXPORT LegModel_DispNo1_HullParams();
 
 	public:
 

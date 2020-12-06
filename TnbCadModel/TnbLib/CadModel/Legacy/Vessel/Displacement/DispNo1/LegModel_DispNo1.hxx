@@ -48,72 +48,72 @@ namespace tnbLib
 
 	protected:
 
-		void AllocateMemory();
+		TnbCadModel_EXPORT void AllocateMemory();
 
 
 		//- Create profiles
 
-		void CreateDeckProfile();
+		TnbCadModel_EXPORT void CreateDeckProfile();
 
-		void CreateFlareProfile
+		TnbCadModel_EXPORT void CreateFlareProfile
 		(
 			const Standard_Integer theSection
 		);
 
-		void CreateFlareProfile();
+		TnbCadModel_EXPORT void CreateFlareProfile();
 
 
 		//- Calculate parameters
 
-		void CalcxXSections();
+		TnbCadModel_EXPORT void CalcxXSections();
 
-		void CalcxYSections();
+		TnbCadModel_EXPORT void CalcxYSections();
 
-		void CalcxZSections();
+		TnbCadModel_EXPORT void CalcxZSections();
 
-		void CalcxDepthSections();
+		TnbCadModel_EXPORT void CalcxDepthSections();
 
-		void CalcxDeadRise();
+		TnbCadModel_EXPORT void CalcxDeadRise();
 
-		void CalcxFlare();
+		TnbCadModel_EXPORT void CalcxFlare();
 
-		void CalcxSideSlope();
+		TnbCadModel_EXPORT void CalcxSideSlope();
 
-		void CalcxTightness();
+		TnbCadModel_EXPORT void CalcxTightness();
 
-		void CalcxRake();
+		TnbCadModel_EXPORT void CalcxRake();
 
-		void CalcXSheer();
+		TnbCadModel_EXPORT void CalcXSheer();
 
-		void CalcxParameters();
+		TnbCadModel_EXPORT void CalcxParameters();
 
 
 		//- Apply parameters
 
-		void ApplyTightness();
+		TnbCadModel_EXPORT void ApplyTightness();
 
-		void ApplyFlare();
+		TnbCadModel_EXPORT void ApplyFlare();
 
-		void ApplyRake();
+		TnbCadModel_EXPORT void ApplyRake();
 
-		void ApplyForeFootShape();
+		TnbCadModel_EXPORT void ApplyForeFootShape();
 
-		void ApplyBowSmoothness();
+		TnbCadModel_EXPORT void ApplyBowSmoothness();
 
-		void ApplyParameters();
+		TnbCadModel_EXPORT void ApplyParameters();
 
-		void ApplyTightness
+		TnbCadModel_EXPORT void ApplyTightness
 		(
 			LegModel_CorneredSectionCtrlPts& theSection,
 			const Standard_Real theTightness
 		);
 
-		void ApplyFlare
+		TnbCadModel_EXPORT void ApplyFlare
 		(
 			Standard_Integer theSection
 		);
 
-		void ApplyRake
+		TnbCadModel_EXPORT void ApplyRake
 		(
 			LegModel_CorneredSectionCtrlPts& theSection,
 			const Standard_Real theRake
@@ -122,25 +122,25 @@ namespace tnbLib
 
 		//- Section constructors
 
-		std::shared_ptr<LegModel_SectionCtrlPts> CreateRawSection
+		TnbCadModel_EXPORT std::shared_ptr<LegModel_SectionCtrlPts> CreateRawSection
 		(
 			const Standard_Integer Section,
 			const Standard_Integer nbWidth,
 			const Standard_Integer nbHeight
 		);
 
-		std::shared_ptr<LegModel_SectionCtrlPts> CreateRawStem() const;
+		TnbCadModel_EXPORT std::shared_ptr<LegModel_SectionCtrlPts> CreateRawStem() const;
 
-		std::shared_ptr<LegModel_SectionCtrlPts> CreateRawStemPaired();
+		TnbCadModel_EXPORT std::shared_ptr<LegModel_SectionCtrlPts> CreateRawStemPaired();
 
-		void CreateRawSections();
+		TnbCadModel_EXPORT void CreateRawSections();
 
 
 		//- Setup hull
 
-		void SetupControlNet();
+		TnbCadModel_EXPORT void SetupControlNet();
 
-		void SetupPatch();
+		TnbCadModel_EXPORT void SetupPatch();
 
 		void SetSection
 		(
@@ -163,13 +163,13 @@ namespace tnbLib
 
 	protected:
 
-		virtual void MakeFace();
+		TnbCadModel_EXPORT virtual void MakeFace();
 
 	public:
 
-		void Perform();
+		TnbCadModel_EXPORT void Perform();
 
-		void PerformToPreview() override;
+		TnbCadModel_EXPORT void PerformToPreview() override;
 
 		const legModel::geomSurface& Patch() const
 		{
@@ -210,14 +210,14 @@ namespace tnbLib
 
 	protected:
 
-		void MakeFace() override;
+		TnbCadModel_EXPORT void MakeFace() override;
 
 	public:
 
 		LegModel_DispNo1()
 		{}
 
-		void PerformToPreview() override;
+		TnbCadModel_EXPORT void PerformToPreview() override;
 	};
 }
 

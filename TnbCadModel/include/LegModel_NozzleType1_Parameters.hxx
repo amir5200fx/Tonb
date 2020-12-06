@@ -4,6 +4,7 @@
 
 #include <Global_AccessMethod.hxx>
 #include <LegModel_Parameter.hxx>
+#include <CadModel_Module.hxx>
 
 namespace tnbLib
 {
@@ -28,7 +29,7 @@ namespace tnbLib
 
 		protected:
 
-			NozzleType1_Dimensions();
+			TnbCadModel_EXPORT NozzleType1_Dimensions();
 
 		public:
 
@@ -94,7 +95,7 @@ namespace tnbLib
 
 		public:
 
-			NozzleType1_InletProfileParams();
+			TnbCadModel_EXPORT NozzleType1_InletProfileParams();
 
 			GLOBAL_ACCESS_SINGLE(param_t, OffsetAtInlet)
 		};
@@ -117,7 +118,7 @@ namespace tnbLib
 
 		public:
 
-			NozzleType1_OutletProfileParams();
+			TnbCadModel_EXPORT NozzleType1_OutletProfileParams();
 
 			GLOBAL_ACCESS_SINGLE(param_t, TangentAtOutlet)
 				GLOBAL_ACCESS_SINGLE(param_t, OffsetAtOutlet)
@@ -134,7 +135,7 @@ namespace tnbLib
 
 		public:
 
-			NozzleType1_Params();
+			TnbCadModel_EXPORT NozzleType1_Params();
 
 			const auto& InletProfile() const
 			{

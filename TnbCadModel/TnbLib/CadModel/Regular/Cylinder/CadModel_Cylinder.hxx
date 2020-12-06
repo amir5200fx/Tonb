@@ -26,14 +26,14 @@ namespace tnbLib
 
 	public:
 
-		CadModel_Cylinder
+		TnbCadModel_EXPORT CadModel_Cylinder
 		(
 			const gp_Ax2& Axes,
 			const Standard_Real R,
 			const Standard_Real H
 		);
 
-		CadModel_Cylinder
+		TnbCadModel_EXPORT CadModel_Cylinder
 		(
 			const gp_Ax2& Axes,
 			const Standard_Real R,

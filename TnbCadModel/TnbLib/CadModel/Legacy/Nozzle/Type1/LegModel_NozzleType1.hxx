@@ -25,7 +25,7 @@ namespace tnbLib
 
 		legModel::geomSurface theHull_;
 
-		void CreateProfile();
+		TnbCadModel_EXPORT void CreateProfile();
 
 	public:
 
@@ -42,7 +42,7 @@ namespace tnbLib
 			return theProfile_;
 		}
 
-		void Perform();
+		TnbCadModel_EXPORT void Perform();
 	};
 }
 

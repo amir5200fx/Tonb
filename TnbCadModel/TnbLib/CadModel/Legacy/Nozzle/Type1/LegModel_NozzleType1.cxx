@@ -15,9 +15,9 @@ void tnbLib::LegModel_NozzleType1::CreateProfile()
 
 	TColgp_Array1OfPnt2d pnts(1, nbPoles);
 
-	Pnt2d P0(0, Parameters().RadiusAtInlet()->Value());
-	Pnt2d P16(Parameters().OverallLength()->Value(), Parameters().RadiusAtOutlet()->Value());
-	Pnt2d P8(Linear_Intrpl(P0.X(), P16.X(), Parameters().Throat()->Value()), Linear_Intrpl(0, P0.Y(), Parameters().RadiusAtThroat()->Value()));
+	const Pnt2d P0(0, Parameters().RadiusAtInlet()->Value());
+	const Pnt2d P16(Parameters().OverallLength()->Value(), Parameters().RadiusAtOutlet()->Value());
+	const Pnt2d P8(Linear_Intrpl(P0.X(), P16.X(), Parameters().Throat()->Value()), Parameters().RadiusAtThroat()->Value());
 
 	const auto& inlet = *Parameters().InletProfile();
 	const auto& outlet = *Parameters().OutletProfile();

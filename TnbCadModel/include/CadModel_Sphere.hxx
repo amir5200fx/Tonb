@@ -30,26 +30,26 @@ namespace tnbLib
 
 	public:
 
-		CadModel_Sphere
+		TnbCadModel_EXPORT CadModel_Sphere
 		(
 			const Pnt3d& theCentre,
 			const Standard_Real theRadius
 		);
 
-		CadModel_Sphere
+		TnbCadModel_EXPORT CadModel_Sphere
 		(
 			const gp_Ax2& Axis,
 			const Standard_Real theRadius
 		);
 
-		CadModel_Sphere
+		TnbCadModel_EXPORT CadModel_Sphere
 		(
 			const gp_Ax2& Axis,
 			const Standard_Real theRadius,
 			const Standard_Real angle1
 		);
 
-		CadModel_Sphere
+		TnbCadModel_EXPORT CadModel_Sphere
 		(
 			const gp_Ax2& Axis,
 			const Standard_Real theRadius,
@@ -57,7 +57,7 @@ namespace tnbLib
 			const Standard_Real angle2
 		);
 
-		CadModel_Sphere
+		TnbCadModel_EXPORT CadModel_Sphere
 		(
 			const gp_Ax2& Axis,
 			const Standard_Real theRadius,

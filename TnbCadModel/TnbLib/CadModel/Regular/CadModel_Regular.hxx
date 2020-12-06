@@ -18,16 +18,16 @@ namespace tnbLib
 		CadModel_Regular()
 		{}
 
-		CadModel_Regular(const Standard_Integer theIndex);
+		TnbCadModel_EXPORT CadModel_Regular(const Standard_Integer theIndex);
 
-		CadModel_Regular(const Standard_Integer theIndex, const word& theName);
+		TnbCadModel_EXPORT CadModel_Regular(const Standard_Integer theIndex, const word& theName);
 
 	public:
 
 		virtual ~CadModel_Regular()
 		{}
 
-		void PerformToPreview() override;
+		TnbCadModel_EXPORT void PerformToPreview() override;
 	};
 }
 

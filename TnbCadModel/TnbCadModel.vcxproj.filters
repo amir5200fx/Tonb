@@ -76,6 +76,9 @@
     <Filter Include="TnbLib\CadModel\Legacy\Nozzle\Type1\Parameters">
       <UniqueIdentifier>{853760db-3eaf-40cc-99e2-2c885f63f040}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\CadModel\module">
+      <UniqueIdentifier>{1b024732-198e-4c8f-91c8-e9b87dd8ff08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.hxx">
@@ -158,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\CadModel\Legacy\Nozzle\Type1\LegModel_NozzleType1.hxx">
       <Filter>TnbLib\CadModel\Legacy\Nozzle\Type1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\CadModel\module\CadModel_Module.hxx">
+      <Filter>TnbLib\CadModel\module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
