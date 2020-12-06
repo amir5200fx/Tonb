@@ -347,6 +347,7 @@ namespace tnbLib
 	//- spacing functions
 
 
+	
 
 	//- io functions
 
@@ -705,7 +706,7 @@ namespace tnbLib
 		return std::move(shape);
 	}
 
-	auto createUniformDistb(const double x0, const double x1, const int n)
+	std::shared_ptr<Geo_xDistb> createUniformDistb(const double x0, const double x1, const int n)
 	{
 		auto d = std::make_shared<Geo_UniDistb>(n);
 		d->SetLower(x0);
@@ -714,7 +715,7 @@ namespace tnbLib
 		return std::move(d);
 	}
 
-	auto createCosineDistb(const double x0, const double x1, const int n)
+	std::shared_ptr<Geo_xDistb> createCosineDistb(const double x0, const double x1, const int n)
 	{
 		auto d = std::make_shared<Geo_CosineDistb>(n);
 		d->SetLower(x0);
@@ -732,7 +733,7 @@ namespace tnbLib
 		return std::move(t);
 	}*/
 
-	auto createUniformDistb(const TopoDS_Shape& sh, int n, const double tol)
+	std::shared_ptr<Geo_xDistb> createUniformDistb(const TopoDS_Shape& sh, int n, const double tol)
 	{
 		n = std::max(n, 3);
 		auto b = boundingBox(sh);
@@ -752,7 +753,7 @@ namespace tnbLib
 		return std::move(t);
 	}
 
-	auto createCosineDistb(const TopoDS_Shape& sh, int n, const double tol)
+	std::shared_ptr<Geo_xDistb> createCosineDistb(const TopoDS_Shape& sh, int n, const double tol)
 	{
 		n = std::max(n, 3);
 		auto b = boundingBox(sh);
@@ -982,6 +983,8 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const TopoDS_Shape& sh, const std::string& name)->void {exportToPlt(sh, name); }), "exportToPlt");
 
+		mod->add(chaiscript::fun([](const wp_t& wp, const std::string& name)->void {exportToPlt(wp, name); }))
+
 		//- triangulation
 
 		mod->add(chaiscript::fun([]()-> const auto& {return getDiscrtInfo(); }), "getDiscrtInfo");
@@ -995,7 +998,25 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const TopoDS_Shape& sh)->void {triangulationShape(sh); }), "triangulation");
 		mod->add(chaiscript::fun([](const TopoDS_Shape& sh, const double tol)->void {autoTriangulation(sh, tol); }), "triangulation");
 
+		mod->add(chaiscript::fun([]()-> const auto& {return getCurveDiscrtInfo(); }), "getCurveDiscrtInfo");
+
+		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p, const double x)->void {setAngle(p, x); }), "setAngle");
+		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p, const double x)->void {setApprox(p, x); }), "setApprox");
+		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p, const double x)->void {setMinSize(p, x); }), "setMinSize");
+		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p, const int n)->void {setMaxNbDivisions(p, n); }), "setMaxNbDivisions");
+		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p, const int n)->void {setInitNbDivisions(p, n); }), "setInitNbDivisions");
+		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p, const int n)->void {setNbSamples(p, n); }), "setNbSamples");
+		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p)->void {setDefaults(p); }), "setDefaults");
+
+		mod->add(chaiscript::fun([](const wp_t& wp)->void {discretize(wp, 20); }), "discretize");
+		mod->add(chaiscript::fun([](const wp_t& wp, int n)->void {discretize(wp, n); }), "discretize");
+
 		//- spacing
+
+		mod->add(chaiscript::fun([](double x0, double x1, int n)->auto{auto t = createUniformDistb(x0, x1, n); return std::move(t); }), "createUniformSpacing");
+		mod->add(chaiscript::fun([](double x0, double x1, int n)->auto{auto t = createCosineDistb(x0, x1, n); return std::move(t); }), "createCosineSpacing");
+		mod->add(chaiscript::fun([](const TopoDS_Shape& sh, int n)-> auto {auto t = createUniformDistb(sh, n, tol); return std::move(t); }), "createUniformSpacing");
+		mod->add(chaiscript::fun([](const TopoDS_Shape& sh, int n)-> auto {auto t = createCosineDistb(sh, n, tol); return std::move(t); }), "createCosineSpacing");
 
 		//- shapes
 
@@ -1044,6 +1065,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const hullCreator_t& m, const double x)-> auto{auto t = createWP(m, x); return std::move(t); }), "createHullWP");
 		mod->add(chaiscript::fun([](const tankCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createTankWP");
 		mod->add(chaiscript::fun([](const sailCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createSailWP");
+
+		mod->add(chaiscript::fun([](const hullCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createHullWPs");
+		mod->add(chaiscript::fun([](const tankCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createHullWPs");
+		mod->add(chaiscript::fun([](const sailCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createHullWPs");
 
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void { createSegment(wp, p0, p1); }), "createSegment");
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const double ang, const double l)-> void {createSegment(wp, p0, ang, l); }), "createSegment");
