@@ -69,7 +69,7 @@ namespace tnbLib
 		// Private Member Functions
 
 			//- Read line as string token
-		static token readLine(const word& key, Istream& is);
+		static FoamBase_EXPORT token readLine(const word& key, Istream& is);
 
 
 	public:
@@ -77,15 +77,15 @@ namespace tnbLib
 		// Constructors
 
 			//- Construct from keyword, parent dictionary and Istream
-		functionEntry(const word&, const dictionary&, Istream&);
+		FoamBase_EXPORT functionEntry(const word&, const dictionary&, Istream&);
 
 		//- Disallow default bitwise copy construction
-		functionEntry(const functionEntry&) = delete;
+		FoamBase_EXPORT functionEntry(const functionEntry&) = delete;
 
 
 		// Member Function Selectors
 
-		declareMemberFunctionSelectionTable
+		/*declareMemberFunctionSelectionTable
 		(
 			bool,
 			functionEntry,
@@ -96,17 +96,38 @@ namespace tnbLib
 				Istream& is
 				),
 				(parentDict, is)
-		);
+		);*/
+
+		typedef bool (*executedictionaryIstreamMemberFunctionPtr)(dictionary& parentDict, Istream& is);
+		typedef HashTable<executedictionaryIstreamMemberFunctionPtr, word, string::hash>
+		executedictionaryIstreamMemberFunctionTable;
+		static FoamBase_EXPORT executedictionaryIstreamMemberFunctionTable* executedictionaryIstreamMemberFunctionTablePtr_;
+
+		template <class functionEntryType>
+		class addexecutedictionaryIstreamMemberFunctionToTable
+		{
+		public:
+			addexecutedictionaryIstreamMemberFunctionToTable(const word& lookup = functionEntryType::typeName)
+			{
+				constructexecutedictionaryIstreamMemberFunctionTables();
+				executedictionaryIstreamMemberFunctionTablePtr_->insert(lookup, functionEntryType::execute);
+			}
+
+			~addexecutedictionaryIstreamMemberFunctionToTable() { destroyexecutedictionaryIstreamMemberFunctionTables(); }
+		};
+
+		static FoamBase_EXPORT void constructexecutedictionaryIstreamMemberFunctionTables();
+		static FoamBase_EXPORT void destroyexecutedictionaryIstreamMemberFunctionTables();
 
 		//- Execute the functionEntry in a sub-dict context
-		static bool execute
+		static FoamBase_EXPORT bool execute
 		(
 			const word& functionName,
 			dictionary& parentDict,
 			Istream&
 		);
 
-		declareMemberFunctionSelectionTable
+		/*declareMemberFunctionSelectionTable
 		(
 			bool,
 			functionEntry,
@@ -118,10 +139,35 @@ namespace tnbLib
 				Istream& is
 				),
 				(parentDict, entry, is)
-		);
+		);*/
+
+		typedef bool (*executeprimitiveEntryIstreamMemberFunctionPtr)(const dictionary& parentDict, primitiveEntry& entry,
+		                                                              Istream& is);
+		typedef HashTable<executeprimitiveEntryIstreamMemberFunctionPtr, word, string::hash>
+		executeprimitiveEntryIstreamMemberFunctionTable;
+		static FoamBase_EXPORT executeprimitiveEntryIstreamMemberFunctionTable* executeprimitiveEntryIstreamMemberFunctionTablePtr_;
+
+		template <class functionEntryType>
+		class addexecuteprimitiveEntryIstreamMemberFunctionToTable
+		{
+		public:
+			addexecuteprimitiveEntryIstreamMemberFunctionToTable(const word& lookup = functionEntryType::typeName)
+			{
+				constructexecuteprimitiveEntryIstreamMemberFunctionTables();
+				executeprimitiveEntryIstreamMemberFunctionTablePtr_->insert(lookup, functionEntryType::execute);
+			}
+
+			~addexecuteprimitiveEntryIstreamMemberFunctionToTable()
+			{
+				destroyexecuteprimitiveEntryIstreamMemberFunctionTables();
+			}
+		};
+
+		static FoamBase_EXPORT void constructexecuteprimitiveEntryIstreamMemberFunctionTables();
+		static FoamBase_EXPORT void destroyexecuteprimitiveEntryIstreamMemberFunctionTables();
 
 		//- Execute the functionEntry in a primitiveEntry context
-		static bool execute
+		static FoamBase_EXPORT bool execute
 		(
 			const word& functionName,
 			const dictionary& parentDict,
@@ -130,13 +176,13 @@ namespace tnbLib
 		);
 
 		//- Write
-		virtual void write(Ostream&) const;
+		FoamBase_EXPORT virtual void write(Ostream&) const;
 
 
 		// Member Operators
 
 			//- Disallow default bitwise assignment
-		void operator=(const functionEntry&) = delete;
+		FoamBase_EXPORT void operator=(const functionEntry&) = delete;
 	};
 
 

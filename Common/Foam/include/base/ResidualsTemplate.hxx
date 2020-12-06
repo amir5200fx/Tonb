@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _Residuals_Header
-#define _Residuals_Header
+#ifndef _ResidualsTemplate_Header
+#define _ResidualsTemplate_Header
 
 /*---------------------------------------------------------------------------*\
   =========                 |
@@ -65,7 +65,11 @@ namespace tnbLib
 	public:
 
 		//- Runtime type information
-		TypeName("residuals");
+		//TypeName("residuals");
+		static const char* typeName_() { return "residuals"; }
+		static FoamBase_EXPORT const ::tnbLib::word typeName;
+		static FoamBase_EXPORT int debug;
+		virtual const word& type() const { return typeName; };
 
 
 		// Constructors
@@ -115,7 +119,7 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include <ResidualsI.hxx>
+#include <ResidualsTemplateI.hxx>
 
 //#ifdef NoRepository
 //#include <ResidualsTemplates.cxx>
@@ -124,4 +128,4 @@ namespace tnbLib
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#endif // !_Residuals_Header
+#endif // !_ResidualsTemplate_Header

@@ -2,6 +2,8 @@
 #ifndef _Global_Module_Header
 #define _Global_Module_Header
 
+#include <Base_Module.hxx>
+
 #ifdef TnbGlobal_STATIC_DEFINE
 #define TnbGlobal_EXPORT
 #else

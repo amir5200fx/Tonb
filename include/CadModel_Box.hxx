@@ -28,13 +28,13 @@ namespace tnbLib
 
 	public:
 
-		CadModel_Box
+		TnbCadModel_EXPORT CadModel_Box
 		(
 			const Pnt3d& theP0,
 			const Pnt3d& theP1
 		);
 
-		CadModel_Box
+		TnbCadModel_EXPORT CadModel_Box
 		(
 			const Pnt3d& theP0,
 			const Standard_Real dx,
@@ -42,7 +42,7 @@ namespace tnbLib
 			const Standard_Real dz
 		);
 
-		CadModel_Box
+		TnbCadModel_EXPORT CadModel_Box
 		(
 			const gp_Ax2& Axes,
 			const Standard_Real dx,

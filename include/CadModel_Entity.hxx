@@ -5,6 +5,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Global_Done.hxx>
+#include <CadModel_Module.hxx>
 
 #include <memory>
 
