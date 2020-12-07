@@ -48,7 +48,7 @@ namespace tnbLib
 
 	public:
 
-		const auto& Sections() const
+		const auto& Section() const
 		{
 			return theSection_;
 		}

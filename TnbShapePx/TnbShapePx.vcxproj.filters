@@ -91,6 +91,21 @@
     <Filter Include="TnbLib\ShapePx\Entities\Tip\Cylindrical">
       <UniqueIdentifier>{a9ca7df6-5ea1-452e-856e-845355a75817}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\Spacing">
+      <UniqueIdentifier>{ca8c235d-1fb5-4d5b-b05a-d13bc5bcaace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Spacing\Uniform">
+      <UniqueIdentifier>{661545e5-3931-4781-8f92-9bb9fb8e21b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Spacing\Cosine">
+      <UniqueIdentifier>{bc4d1b51-fd1f-4cde-9fcb-81a3a143b31c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Spacing\Custom">
+      <UniqueIdentifier>{ad6e84ba-7ae1-4178-ac6c-f039a0e17512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\ParValue">
+      <UniqueIdentifier>{fbe400fb-1704-49e4-8ecf-551399b04cef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -153,6 +168,15 @@
     <ClInclude Include="TnbLib\ShapePx\Entities\Tip\Spherical\ShapePx_SphericalTip.hxx">
       <Filter>TnbLib\ShapePx\Entities\Tip\Spherical</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Spacing\ShapePx_Spacing.hxx">
+      <Filter>TnbLib\ShapePx\Spacing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Spacing\Uniform\ShapePx_UniformSpacing.hxx">
+      <Filter>TnbLib\ShapePx\Spacing\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValue.hxx">
+      <Filter>TnbLib\ShapePx\Entities\ParValue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
@@ -202,6 +226,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Entities\Tip\Spherical\ShapePx_SphericalTip.cxx">
       <Filter>TnbLib\ShapePx\Entities\Tip\Spherical</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Spacing\Uniform\ShapePx_UniformSpacing.cxx">
+      <Filter>TnbLib\ShapePx\Spacing\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValue.cxx">
+      <Filter>TnbLib\ShapePx\Entities\ParValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValueIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\ParValue</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

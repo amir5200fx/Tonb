@@ -53,6 +53,10 @@ namespace tnbLib
 
 		virtual Standard_Real Upper() const = 0;
 
+		virtual Standard_Real MinLower() const = 0;
+
+		virtual Standard_Real MaxUpper() const = 0;
+
 		virtual Standard_Real LowerValue() const = 0;
 
 		virtual Standard_Real UpperValue() const = 0;

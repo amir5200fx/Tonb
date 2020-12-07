@@ -3,6 +3,7 @@
 #define _ShapePx_Section_Header
 
 #include <ShapePx_Entity.hxx>
+#include <Pnt2d.hxx>
 
 #include <vector>
 
@@ -11,7 +12,9 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_FrameRegistry;
+	class SectPx_TopoSegment;
 	class SectPx_Par;
+	class ShapePx_ParValue;
 
 	class ShapePx_Section
 		: public ShapePx_Entity
@@ -48,10 +51,14 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<SectPx_Par>> RetrieveParameters() const;
 
+		std::vector<std::shared_ptr<SectPx_TopoSegment>> RetrieveProfiles() const;
+
 		void SetRegistry(const std::shared_ptr<SectPx_FrameRegistry>& theReg)
 		{
 			theRegistry_ = theReg;
 		}
+
+		void SetValues(const std::shared_ptr<ShapePx_ParValue>& theValues);
 
 	};
 }

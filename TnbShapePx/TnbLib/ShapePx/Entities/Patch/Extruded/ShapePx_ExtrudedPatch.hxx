@@ -11,6 +11,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class ShapePx_Profile;
+	class ShapePx_ParValue;
 
 	class ShapePx_ExtrudedPatch
 		: public ShapePx_Patch
@@ -66,11 +67,21 @@ namespace tnbLib
 			return theParToProfile_;
 		}
 
+		Standard_Real Lower() const;
+
+		Standard_Real Upper() const;
+
+		Standard_Real MinLower() const;
+
+		Standard_Real MaxUpper() const;
+
 		std::shared_ptr<ShapePx_Profile> 
 			RemoveProfile
 			(
 				const Standard_Integer theParIndex
 			);
+
+		std::shared_ptr<ShapePx_ParValue> RetrieveParValues(const Standard_Real x) const;
 
 		void ImportProfileForParameter
 		(
@@ -78,7 +89,7 @@ namespace tnbLib
 			const std::shared_ptr<ShapePx_Profile>& theProfile
 		);
 
-		
+		void UpdateProfiles();
 	};
 }
 
