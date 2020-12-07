@@ -9,22 +9,21 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SectPx_Par;
+
 	class SectPx_ExtrProfile
 		: public SectPx_Parent
 	{
 
 		/*Private Data*/
 
+		std::weak_ptr<SectPx_Par> theStart_;
+		std::weak_ptr<SectPx_Par> theEnd_;
 
 		/*private functions and operators*/
 
-		friend class boost::serialization::access;
-
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version)
-		{
-			ar & boost::serialization::base_object<SectPx_Parent>(*this);
-		}
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 
 	protected:
@@ -37,13 +36,37 @@ namespace tnbLib
 
 	public:
 
+		const auto& Start() const
+		{
+			return theStart_;
+		}
+
+		const auto& End() const
+		{
+			return theEnd_;
+		}
+
+		TnbSectPx_EXPORT void SetStart
+		(
+			const std::shared_ptr<SectPx_Par>& thePar
+		);
+
+		TnbSectPx_EXPORT void SetEnd
+		(
+			const std::shared_ptr<SectPx_Par>& thePar
+		);
+
+		Standard_Real Lower() const;
+
+		Standard_Real Upper() const;
+
 		TnbSectPx_EXPORT Standard_Boolean IsExtrProfile() const override;
 
 		virtual SectPx_ExtrProfileType ExtrProfileType() const = 0;
 
-		virtual Standard_Real Lower() const = 0;
+		virtual Standard_Real MinLower() const = 0;
 
-		virtual Standard_Real Upper() const = 0;
+		virtual Standard_Real MaxUpper() const = 0;
 
 		virtual Standard_Integer NbPoints() const = 0;
 
