@@ -13,6 +13,7 @@
 #include <SectPx_InterfaceMaker.hxx>
 #include <SectPx_Interface.hxx>
 #include <SectPx_Poles.hxx>
+#include <SectPx_CPtsMap.hxx>
 #include <SectPx_TopoSegment.hxx>
 #include <SectPx_SegmentController.hxx>
 #include <SectPx_PoleController.hxx>
@@ -446,34 +447,41 @@ tnbLib::SectPx_Tools::RetrieveChildren
 	return std::vector<std::shared_ptr<SectPx_Child>>();
 }
 
-//std::vector<tnbLib::Pnt2d>
-//tnbLib::SectPx_Tools::RetrieveControlPoints
-//(
-//	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
-//)
-//{
-//	Debug_Null_Pointer(theSegments[0]->Pole0());
-//	const auto first = theSegments[0]->Pole0()->Coord();
-//
-//	std::vector<Pnt2d> Q;
-//	Q.push_back(first);
-//
-//	for (const auto& x : theSegments)
-//	{
-//		Debug_Null_Pointer(x);
-//		if (x->HasController())
-//		{
-//			auto pts = x->RetrieveControlPoints();
-//			for (const auto& p : pts)
-//			{
-//				Q.push_back(p);
-//			}
-//		}
-//
-//		Q.push_back(x->Pole1()->Coord());
-//	}
-//	return std::move(Q);
-//}
+std::vector<tnbLib::Pnt2d> 
+tnbLib::SectPx_Tools::RetrieveControlPoints
+(
+	const std::shared_ptr<SectPx_TopoSegment>& theSeg
+)
+{
+	auto poles = TrackPoles(theSeg->Pole0(), theSeg->Pole1());
+	auto segments = RetrieveSegments(poles);
+
+	const auto first = segments[0]->Pole0()->Coord();
+	std::vector<Pnt2d> Q;
+	Q.push_back(std::move(first));
+
+	for (const auto& x : segments)
+	{
+		Debug_Null_Pointer(x);
+		if (x->HasController())
+		{
+			auto controller = x->Controller().lock();
+			Debug_Null_Pointer(controller);
+
+			const auto& cpts = controller->CPts();
+			Debug_Null_Pointer(cpts);
+
+			auto pts = cpts->Pts();
+
+			for (const auto& p : pts)
+			{
+				Q.push_back(std::move(p));
+			}
+		}
+		Q.push_back(x->Pole1()->Coord());
+	}
+	return std::move(Q);
+}
 
 void tnbLib::SectPx_Tools::RemoveParentFromChildren
 (

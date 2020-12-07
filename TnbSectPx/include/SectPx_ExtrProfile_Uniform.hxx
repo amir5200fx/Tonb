@@ -86,9 +86,9 @@ namespace tnbLib
 				return SectPx_ExtrProfileType::uniform;
 			}
 
-			TnbSectPx_EXPORT Standard_Real Lower() const override;
+			TnbSectPx_EXPORT Standard_Real MinLower() const override;
 
-			TnbSectPx_EXPORT Standard_Real Upper() const override;
+			TnbSectPx_EXPORT Standard_Real MaxUpper() const override;
 
 			TnbSectPx_EXPORT Standard_Integer NbPoints() const override;
 

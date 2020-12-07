@@ -100,7 +100,7 @@ namespace tnbLib
 		static TnbSectPx_EXPORT std::vector<Pnt2d>
 			RetrieveControlPoints
 			(
-				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+				const std::shared_ptr<SectPx_TopoSegment>& theSeg
 			);
 
 		static TnbSectPx_EXPORT void RemoveParentFromChildren

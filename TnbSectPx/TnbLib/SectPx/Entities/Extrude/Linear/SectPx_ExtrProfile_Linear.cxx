@@ -61,14 +61,14 @@ void tnbLib::sectPxLib::ExtrProfile_Linear::SetValue1
 }
 
 Standard_Real
-tnbLib::sectPxLib::ExtrProfile_Linear::Lower() const
+tnbLib::sectPxLib::ExtrProfile_Linear::MinLower() const
 {
 	Debug_Null_Pointer(X0().lock());
 	return X0().lock()->Value();
 }
 
 Standard_Real
-tnbLib::sectPxLib::ExtrProfile_Linear::Upper() const
+tnbLib::sectPxLib::ExtrProfile_Linear::MaxUpper() const
 {
 	Debug_Null_Pointer(X1().lock());
 	return X1().lock()->Value();
@@ -97,7 +97,7 @@ tnbLib::sectPxLib::ExtrProfile_Linear::Point
 Standard_Integer
 tnbLib::sectPxLib::ExtrProfile_Linear::NbChildren() const
 {
-	return Standard_Integer(3);
+	return Standard_Integer(6);
 }
 
 Standard_Boolean
@@ -116,6 +116,9 @@ tnbLib::sectPxLib::ExtrProfile_Linear::HasChild
 	ReturnTrueIfParBelongsToThisParent(X1(), thePar);
 	ReturnTrueIfParBelongsToThisParent(Value0(), thePar);
 	ReturnTrueIfParBelongsToThisParent(Value1(), thePar);
+
+	ReturnTrueIfParBelongsToThisParent(Start(), thePar);
+	ReturnTrueIfParBelongsToThisParent(End(), thePar);
 	return Standard_False;
 }
 
@@ -127,6 +130,9 @@ tnbLib::sectPxLib::ExtrProfile_Linear::RetrieveChildren() const
 	AddParToChildList(X1(), children);
 	AddParToChildList(Value0(), children);
 	AddParToChildList(Value1(), children);
+
+	AddParToChildList(Start(), children);
+	AddParToChildList(End(), children);
 	return std::move(children);
 }
 
@@ -155,6 +161,18 @@ void tnbLib::sectPxLib::ExtrProfile_Linear::RemoveThisFromChildren() const
 	{
 		RemoveThisFromChild(v1Par);
 	}
+
+	auto sPar = Start().lock();
+	if (sPar)
+	{
+		RemoveThisFromChild(sPar);
+	}
+
+	auto ePar = End().lock();
+	if (ePar)
+	{
+		RemoveThisFromChild(ePar);
+	}
 }
 
 void tnbLib::sectPxLib::ExtrProfile_Linear::AddThisToChildren() const
@@ -163,6 +181,9 @@ void tnbLib::sectPxLib::ExtrProfile_Linear::AddThisToChildren() const
 	AddThisParentToChildren(X1());
 	AddThisParentToChildren(Value0());
 	AddThisParentToChildren(Value1());
+
+	AddThisParentToChildren(Start());
+	AddThisParentToChildren(End());
 }
 
 void tnbLib::sectPxLib::ExtrProfile_Linear::RemoveThisFromChild

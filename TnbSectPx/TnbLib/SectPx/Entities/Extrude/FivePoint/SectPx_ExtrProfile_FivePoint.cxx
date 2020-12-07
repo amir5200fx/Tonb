@@ -110,14 +110,14 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::SetValue4
 
 
 Standard_Real
-tnbLib::sectPxLib::ExtrProfile_FivePoint::Lower() const
+tnbLib::sectPxLib::ExtrProfile_FivePoint::MinLower() const
 {
 	Debug_Null_Pointer(X0().lock());
 	return X0().lock()->Value();
 }
 
 Standard_Real
-tnbLib::sectPxLib::ExtrProfile_FivePoint::Upper() const
+tnbLib::sectPxLib::ExtrProfile_FivePoint::MaxUpper() const
 {
 	Debug_Null_Pointer((&theX0_)[NbPoints() - 1].lock());
 	return (&theX0_)[NbPoints() - 1].lock()->Value();
@@ -146,7 +146,7 @@ tnbLib::sectPxLib::ExtrProfile_FivePoint::Point
 Standard_Integer
 tnbLib::sectPxLib::ExtrProfile_FivePoint::NbChildren() const
 {
-	return Standard_Integer(3);
+	return Standard_Integer(12);
 }
 
 Standard_Boolean
@@ -166,6 +166,9 @@ tnbLib::sectPxLib::ExtrProfile_FivePoint::HasChild
 		ReturnTrueIfParBelongsToThisParent((&theX0_)[i], thePar);
 		ReturnTrueIfParBelongsToThisParent((&theValue0_)[i], thePar);
 	}
+
+	ReturnTrueIfParBelongsToThisParent(Start(), thePar);
+	ReturnTrueIfParBelongsToThisParent(End(), thePar);
 	return Standard_False;
 }
 
@@ -178,6 +181,9 @@ tnbLib::sectPxLib::ExtrProfile_FivePoint::RetrieveChildren() const
 		AddParToChildList((&theX0_)[i], children);
 		AddParToChildList((&theValue0_)[i], children);
 	}
+
+	AddParToChildList(Start(), children);
+	AddParToChildList(End(), children);
 	return std::move(children);
 }
 
@@ -197,6 +203,18 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::RemoveThisFromChildren() const
 			RemoveThisFromChild(xValue);
 		}
 	}
+
+	auto sPar = Start().lock();
+	if (sPar)
+	{
+		RemoveThisFromChild(sPar);
+	}
+
+	auto ePar = End().lock();
+	if (ePar)
+	{
+		RemoveThisFromChild(ePar);
+	}
 }
 
 void tnbLib::sectPxLib::ExtrProfile_FivePoint::AddThisToChildren() const
@@ -206,6 +224,9 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::AddThisToChildren() const
 		AddThisParentToChildren((&theX0_)[i]);
 		AddThisParentToChildren((&theValue0_)[i]);
 	}
+
+	AddThisParentToChildren(Start());
+	AddThisParentToChildren(End());
 }
 
 void tnbLib::sectPxLib::ExtrProfile_FivePoint::RemoveThisFromChild

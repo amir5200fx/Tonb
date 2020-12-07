@@ -53,14 +53,14 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::SetValue
 }
 
 Standard_Real 
-tnbLib::sectPxLib::ExtrProfile_Uniform::Lower() const
+tnbLib::sectPxLib::ExtrProfile_Uniform::MinLower() const
 {
 	Debug_Null_Pointer(X0().lock());
 	return X0().lock()->Value();
 }
 
 Standard_Real 
-tnbLib::sectPxLib::ExtrProfile_Uniform::Upper() const
+tnbLib::sectPxLib::ExtrProfile_Uniform::MaxUpper() const
 {
 	Debug_Null_Pointer(X1().lock());
 	return X1().lock()->Value();
@@ -87,7 +87,7 @@ tnbLib::sectPxLib::ExtrProfile_Uniform::Point
 Standard_Integer 
 tnbLib::sectPxLib::ExtrProfile_Uniform::NbChildren() const
 {
-	return Standard_Integer(3);
+	return Standard_Integer(5);
 }
 
 Standard_Boolean 
@@ -105,6 +105,9 @@ tnbLib::sectPxLib::ExtrProfile_Uniform::HasChild
 	ReturnTrueIfParBelongsToThisParent(X0(), thePar);
 	ReturnTrueIfParBelongsToThisParent(X1(), thePar);
 	ReturnTrueIfParBelongsToThisParent(Value(), thePar);
+
+	ReturnTrueIfParBelongsToThisParent(Start(), thePar);
+	ReturnTrueIfParBelongsToThisParent(End(), thePar);
 	return Standard_False;
 }
 
@@ -115,6 +118,9 @@ tnbLib::sectPxLib::ExtrProfile_Uniform::RetrieveChildren() const
 	AddParToChildList(X0(), children);
 	AddParToChildList(X1(), children);
 	AddParToChildList(Value(), children);
+
+	AddParToChildList(Start(), children);
+	AddParToChildList(End(), children);
 	return std::move(children);
 }
 
@@ -137,6 +143,18 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::RemoveThisFromChildren() const
 	{
 		RemoveThisFromChild(vPar);
 	}
+
+	auto sPar = Start().lock();
+	if (sPar)
+	{
+		RemoveThisFromChild(sPar);
+	}
+
+	auto ePar = End().lock();
+	if (ePar)
+	{
+		RemoveThisFromChild(ePar);
+	}
 }
 
 void tnbLib::sectPxLib::ExtrProfile_Uniform::AddThisToChildren() const
@@ -144,6 +162,9 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::AddThisToChildren() const
 	AddThisParentToChildren(X0());
 	AddThisParentToChildren(X1());
 	AddThisParentToChildren(Value());
+
+	AddThisParentToChildren(Start());
+	AddThisParentToChildren(End());
 }
 
 void tnbLib::sectPxLib::ExtrProfile_Uniform::RemoveThisFromChild

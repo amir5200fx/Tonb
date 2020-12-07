@@ -321,6 +321,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\Linear\SectPx_ExtrProfile_Linear.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\Linear\SectPx_ExtrProfile_LinearIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfile.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfileIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\ThreePoint\SectPx_ExtrProfile_ThreePoint.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\ThreePoint\SectPx_ExtrProfile_ThreePointIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\Uniform\SectPx_ExtrProfile_Uniform.cxx" />
