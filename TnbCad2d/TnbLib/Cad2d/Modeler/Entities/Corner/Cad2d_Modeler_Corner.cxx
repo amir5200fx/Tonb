@@ -54,6 +54,29 @@ tnbLib::cad2dLib::Modeler_Corner::IsContains
 	return Standard_True;
 }
 
+tnbLib::Pnt2d 
+tnbLib::cad2dLib::Modeler_Corner::CalcMeanCoord() const
+{
+	const auto& vertices = Vertices();
+	if (vertices.empty())
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " the corner is orphan!" << endl
+			<< abort(FatalError);
+	}
+	auto iter = vertices.begin();
+
+	auto coord = iter->second->Coord();
+	iter++;
+	while (iter NOT_EQUAL vertices.end())
+	{
+		coord += iter->second->Coord();
+		iter++;
+	}
+	coord /= (vertices.size());
+	return std::move(coord);
+}
+
 void tnbLib::cad2dLib::Modeler_Corner::InsertToCorners
 (
 	const Standard_Integer theIndex,

@@ -117,6 +117,8 @@ namespace tnbLib
 					const std::shared_ptr<Pln_Vertex>& theVtx
 				) const;
 
+			Pnt2d CalcMeanCoord() const;
+
 			void SetRadius(const Standard_Real theR)
 			{
 				theRadius_ = theR;
