@@ -12,6 +12,7 @@
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
+#include <Cad2d_RemoveNonManifold.hxx>
 #include <Cad_ShapeTools.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_FastDiscrete.hxx>
@@ -342,6 +343,51 @@ namespace tnbLib
 		}
 	}
 
+	void uniformDiscretize(const hullCreator_t& m, int n)
+	{
+		const auto& wps = m->WorkingPlanes();
+		for (const auto& x : wps)
+		{
+			uniformDiscretize(x.second, n);
+		}
+	}
+
+	void uniformDiscretize(const tankCreator_t& m, int n)
+	{
+		const auto& wps = m->WorkingPlanes();
+		for (const auto& x : wps)
+		{
+			uniformDiscretize(x.second, n);
+		}
+	}
+
+	void uniformDiscretize(const std::shared_ptr<StbGMaker_VolumeSailCreator>& m, int n)
+	{
+		const auto& wps = m->WorkingPlanes();
+		for (const auto& x : wps)
+		{
+			uniformDiscretize(x.second, n);
+		}
+	}
+
+	void uniformDiscretize(const creator_t& m, int n)
+	{
+		if (m->HullMaker())
+			uniformDiscretize(m->HullMaker(), n);
+		for (const auto& x : m->TankMakers())
+		{
+			uniformDiscretize(x.second, n);
+		}
+		for (const auto& x : m->SailMakers())
+		{
+			auto maker = std::dynamic_pointer_cast<StbGMaker_VolumeSailCreator>(x.second);
+			if (maker)
+			{
+				uniformDiscretize(maker, n);
+			}
+		}
+	}
+
 	auto getMesh(const wp_t& wp)
 	{
 		auto t = wp->MakeMesh();
@@ -425,6 +471,59 @@ namespace tnbLib
 			Debug_Null_Pointer(x);
 			x->ExportToPlt(f);
 		}
+	}
+
+	void exportToPlt(const hullCreator_t& m, OFstream& f)
+	{
+		const auto& wps = m->WorkingPlanes();
+		for (const auto& x : wps)
+		{
+			exportToPlt(x.second, f);
+		}
+	}
+
+	void exportToPlt(const tankCreator_t& m, OFstream& f)
+	{
+		const auto& wps = m->WorkingPlanes();
+		for (const auto& x : wps)
+		{
+			exportToPlt(x.second, f);
+		}
+	}
+
+	void exportToPlt(const std::shared_ptr<StbGMaker_VolumeSailCreator>& m, OFstream& f)
+	{
+		const auto& wps = m->WorkingPlanes();
+		for (const auto& x : wps)
+		{
+			exportToPlt(x.second, f);
+		}
+	}
+
+	void exportToPlt(const creator_t& m, const std::string& name)
+	{
+		OFstream f(name);
+		if(m->HullMaker()) exportToPlt(m->HullMaker(), f);
+		for (const auto& x : m->TankMakers())
+		{
+			exportToPlt(x.second, f);
+		}
+		for (const auto& x : m->SailMakers())
+		{
+			auto maker = std::dynamic_pointer_cast<StbGMaker_VolumeSailCreator>(x.second);
+			if (maker)
+			{
+				exportToPlt(maker, f);
+			}
+		}
+	}
+
+	void exportModel(const std::string& name)
+	{
+		auto model = getMaker()->ExportModel();
+		std::ofstream ofs(name);
+		boost::archive::polymorphic_binary_oarchive oa(ofs);
+		oa << model;
 	}
 
 	TopoDS_Shape importIges(const fileName& name)
@@ -1002,6 +1101,63 @@ namespace tnbLib
 		 wp->Modeler()->Import(std::move(rec));
 	 }*/
 	
+	 //- create planes
+
+	 void createPlanes(const wp_t& wp)
+	 {
+		 const auto& m = wp->Modeler();
+		 if (m->NbPlanes())
+		 {
+			 m->ClearPlanes();
+		 }
+		 
+		 Cad2d_Modeler::selctList l;
+		 m->SelectAll(l);
+
+		 m->MakePlanes(l, gp::YOZ());
+	 }
+
+	 void createPlanes(const hullCreator_t& m)
+	 {
+		 for (const auto& x : m->WorkingPlanes())
+		 {
+			 createPlanes(x.second);
+		 }
+	 }
+
+	 void createPlanes(const tankCreator_t& m)
+	 {
+		 for (const auto& x : m->WorkingPlanes())
+		 {
+			 createPlanes(x.second);
+		 }
+	 }
+
+	 void createPlanes(const std::shared_ptr<StbGMaker_VolumeSailCreator>& m)
+	 {
+		 for (const auto& x : m->WorkingPlanes())
+		 {
+			 createPlanes(x.second);
+		 }
+	 }
+
+	 void createPlanes(const creator_t& m)
+	 {
+		 if (m->HullMaker())
+			 createPlanes(m->HullMaker());
+		 for (const auto& x : m->TankMakers())
+		 {
+			 createPlanes(x.second);
+		 }
+		 for (const auto& x : m->SailMakers())
+		 {
+			 auto sail = std::dynamic_pointer_cast<StbGMaker_VolumeSailCreator>(x.second);
+			 if (sail)
+			 {
+				 createPlanes(sail);
+			 }
+		 }
+	 }
 }
 
 #ifdef DebugInfo
@@ -1037,7 +1193,10 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const TopoDS_Shape& sh, const std::string& name)->void {exportToPlt(sh, name); }), "exportToPlt");
 
-		mod->add(chaiscript::fun([](const wp_t& wp, const std::string& name)->void {exportToPlt(wp, name); }))
+		mod->add(chaiscript::fun([](const wp_t& wp, const std::string& name)->void {exportToPlt(wp, name); }), "exportToPlt");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {exportToPlt(getMaker(), name); }), "exportMakerToPlt");
+
+		mod->add(chaiscript::fun([](const std::string& name)-> void {exportModel(name); }), "exportModelTo");
 
 		//- triangulation
 
@@ -1062,8 +1221,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p, const int n)->void {setNbSamples(p, n); }), "setNbSamples");
 		mod->add(chaiscript::fun([](const apprxCurveInfo_t& p)->void {setDefaults(p); }), "setDefaults");
 
-		mod->add(chaiscript::fun([](const wp_t& wp)->void {discretize(wp, 20); }), "discretize");
-		mod->add(chaiscript::fun([](const wp_t& wp, int n)->void {discretize(wp, n); }), "discretize");
+		mod->add(chaiscript::fun([](const wp_t& wp)->void {uniformDiscretize(wp, 20); }), "discretize");
+		mod->add(chaiscript::fun([](const wp_t& wp, int n)->void {uniformDiscretize(wp, n); }), "discretize");
+		mod->add(chaiscript::fun([]()-> void {uniformDiscretize(getMaker(), 20); }), "discretizeModel");
+		mod->add(chaiscript::fun([](int n)-> void {uniformDiscretize(getMaker(), n); }), "discretizeModel");
 
 		//- spacing
 
@@ -1074,9 +1235,9 @@ namespace tnbLib
 
 		//- shapes
 
-		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createHull(s); }), "createHullShape");
-		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createTank(s); }), "createTankShape");
-		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createSail(s); }), "createSailShape");
+		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createHull(s); return std::move(t); }), "createHullShape");
+		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createTank(s); return std::move(t); }), "createTankShape");
+		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{auto t = createSail(s); return std::move(t); }), "createSailShape");
 
 		mod->add(chaiscript::fun([](const TopoDS_Shape& s)->auto{return diaSize(s); }), "diaSize");
 	}
@@ -1111,6 +1272,10 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([]()->auto {auto t = createSailMaker(); return std::move(t); }), "createSailMaker");
 		mod->add(chaiscript::fun([](const sail_t& s)-> auto {auto t = createSailMaker(s); return std::move(t); }), "createSailMaker");
+
+		mod->add(chaiscript::fun([]()->const auto& {return getMaker()->HullMaker(); }), "getHullMaker");
+		mod->add(chaiscript::fun([](int i)-> auto{auto t = getMaker()->SelectTankMaker(i); return std::move(t); }), "getTankMaker");
+		mod->add(chaiscript::fun([](int i)-> auto{auto t = getMaker()->SelectSailMaker(i); return std::move(t); }), "getSailMaker");
 	}
 
 	void setWotkingPlanes(const module_t& mod)
@@ -1121,8 +1286,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const sailCreator_t& m, const double x)->auto {auto t = createWP(m, x); return std::move(t); }), "createSailWP");
 
 		mod->add(chaiscript::fun([](const hullCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createHullWPs");
-		mod->add(chaiscript::fun([](const tankCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createHullWPs");
-		mod->add(chaiscript::fun([](const sailCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createHullWPs");
+		mod->add(chaiscript::fun([](const tankCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createTankWPs");
+		mod->add(chaiscript::fun([](const sailCreator_t& m, const std::shared_ptr<Geo_xDistb>& d)->void {createWPs(m, d); }), "createSailWPs");
 
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void { createSegment(wp, p0, p1); }), "createSegment");
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const double ang, const double l)-> void {createSegment(wp, p0, ang, l); }), "createSegment");
@@ -1150,6 +1315,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const wp_t& wp, const gp_Elips2d& e)->void {createEllipse(wp, e); }), "createEllipse");
 		mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)->void {createEllipse(wp, s0, s1, c); }), "createEllipse");
 
+		mod->add(chaiscript::fun([]()->void {createPlanes(getMaker()); }), "createPlanes");
+
 		//mod->add(chaiscript::fun([](const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)->void {createRectangular(wp, p0, p1); }), "createRectangular");
 		//mod->add(chaiscript::fun([](const wp_t& wp, const gp_Ax2d& ax, const double dx, const double dy)-> void {createRectangular(wp, ax, dx, dy); }), "createRectangular");
 
@@ -1176,6 +1343,9 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 	FatalError.throwExceptions();
+
+	//Cad2d_RemoveNonManifold::verbose = 1;
+	Cad2d_Modeler::verbose = 1;
 
 	if (argc <= 1)
 	{
