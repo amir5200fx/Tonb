@@ -18,7 +18,7 @@ namespace tnbLib
 				const unsigned int file_vertion
 				)
 		{
-			ar & boost::serialization::base_object<Marine_HullBody>(*this);
+			ar & boost::serialization::base_object<Body_Displacer>(*this);
 			ar & theShape_;
 		}
 
@@ -30,7 +30,7 @@ namespace tnbLib
 				const unsigned int file_vertion
 				)
 		{
-			ar & boost::serialization::base_object<Marine_HullBody>(*this);
+			ar & boost::serialization::base_object<Body_Displacer>(*this);
 			ar & theShape_;
 		}
 	}
