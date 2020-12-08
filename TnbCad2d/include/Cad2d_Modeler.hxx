@@ -50,6 +50,8 @@ namespace tnbLib
 
 		typedef cad2dLib::Modeler_SelectList selctList;
 
+		static TnbCad2d_EXPORT unsigned short verbose;
+
 	private:
 
 		/*Private Data*/

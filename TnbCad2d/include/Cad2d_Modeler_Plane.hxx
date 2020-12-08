@@ -97,6 +97,7 @@ namespace tnbLib
 				std::vector<std::shared_ptr<Cad2d_Plane>>& thePlanes
 			) const;
 
+			TnbCad2d_EXPORT void ClearPlanes();
 		};
 	}
 }

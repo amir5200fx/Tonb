@@ -169,7 +169,8 @@ namespace tnbLib
 			RetrieveWiresNonManifold
 			(
 				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
-				const Standard_Boolean checkManifold = Standard_True
+				const Standard_Boolean checkManifold = Standard_True,
+				const Standard_Integer verbose = 0
 			);
 
 		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Vertex>>

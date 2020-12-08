@@ -24,6 +24,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad2d_EXPORT unsigned short verbose;
+
 		class Segment;
 
 		class Node

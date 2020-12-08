@@ -268,6 +268,12 @@ namespace tnbLib
 					const Standard_Real theTol
 				);
 
+			static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>>
+				ConstructMergedEdges
+				(
+					const std::vector<std::shared_ptr<Modeler_Corner>>& theCorners
+				);
+
 			static TnbCad2d_EXPORT void
 				SmoothCorner
 				(
