@@ -242,9 +242,20 @@ std::vector<std::shared_ptr<tnbLib::Pln_Wire>>
 tnbLib::Pln_Tools::RetrieveWiresNonManifold
 (
 	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
-	const Standard_Boolean checkManifold
+	const Standard_Boolean checkManifold,
+	const Standard_Integer verbose
 )
 {
+	if (verbose > 1)
+	{
+		Info << " - calling the function: " << FunctionSIG << endl;
+	}
+
+	if (verbose)
+	{
+		Info << " - checking manifold: " << checkManifold << endl;
+	}
+
 	if (checkManifold)
 	{
 		if (IsManifold(theEdges))
@@ -266,16 +277,31 @@ tnbLib::Pln_Tools::RetrieveWiresNonManifold
 			l.push_back(std::move(wire));
 
 			return std::move(l);*/
+
+			if (verbose)
+			{
+				Info << " - the edges are manifold: retrieving the wires..." << endl;
+			}
+
 			auto wires = RetrieveWires(theEdges);
 			return std::move(wires);
 		}
 		else
 		{
+			if (verbose)
+			{
+				Info << " - the edges are not manifold: recalling the function..." << endl;
+			}
+
 			auto wires = RetrieveWiresNonManifold(theEdges, Standard_False);
 			return std::move(wires);
 		}
 	}
 
+	if (verbose)
+	{
+		Info << " - removing the non-manifold edges..." << endl;
+	}
 	auto alg = std::make_shared<Cad2d_RemoveNonManifold>(theEdges);
 	Debug_Null_Pointer(alg);
 
@@ -312,5 +338,11 @@ tnbLib::Pln_Tools::RetrieveWiresNonManifold
 
 		l.push_back(std::move(wire));
 	}
+
+	if (verbose > 1)
+	{
+		Info << "leaving the function: " << FunctionSIG << endl;
+	}
+
 	return std::move(l);
 }
