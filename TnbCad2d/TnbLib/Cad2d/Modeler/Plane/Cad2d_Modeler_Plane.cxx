@@ -117,3 +117,8 @@ void tnbLib::cad2dLib::Modeler_Plane::RetrievePlanesTo
 		thePlanes.push_back(x.second);
 	}
 }
+
+void tnbLib::cad2dLib::Modeler_Plane::ClearPlanes()
+{
+	thePlanes_.clear();
+}
