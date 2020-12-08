@@ -9,6 +9,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+short unsigned tnbLib::Cad2d_RemoveNonManifold::verbose(0);
+
 Standard_Boolean 
 tnbLib::Cad2d_RemoveNonManifold::Node::IsOrphan() const
 {
@@ -291,8 +293,6 @@ void tnbLib::Cad2d_RemoveNonManifold::InsertVertices
 	const std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
 )
 {
-	auto& nodes = NodesRef();
-
 	for (const auto& x : theVertices)
 	{
 		Debug_Null_Pointer(x);
@@ -375,6 +375,11 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge
 		)
 	{
+		if (Cad2d_RemoveNonManifold::verbose > 1)
+		{
+			Info << " - marching on the edges..." << endl;
+		}
+
 		theVtx->RemoveFromEdges(theEdge->Index());
 
 		auto v0 = theVtx;
@@ -384,7 +389,7 @@ namespace tnbLib
 		edges.push_back(nextEdge);
 
 		auto nextVtx = NextNode(theVtx, nextEdge);
-		while (NOT nextVtx->IsManifold())
+		while (nextVtx->IsManifold())
 		{
 			nextEdge = NextEdge(nextVtx, nextEdge);
 			edges.push_back(nextEdge);
@@ -395,6 +400,12 @@ namespace tnbLib
 		if (theVtx NOT_EQUAL nextVtx) nextVtx->RemoveFromEdges(nextEdge->Index());
 		auto v1 = nextVtx;
 		auto t = std::make_tuple(std::move(edges), std::move(v0), std::move(v1));
+
+		if (Cad2d_RemoveNonManifold::verbose > 1)
+		{
+			Info << " - " << edges.size() << " edges are detected" << endl;
+			Info << " ***** Leaving the MarchOnEdges function ******" << endl;
+		}
 		return std::move(t);
 	}
 
@@ -440,6 +451,11 @@ tnbLib::Cad2d_RemoveNonManifold::RetrieveString
 	auto node1 = SelectNode(v1->Index());
 	if (node0 IS_EQUAL node1)
 	{
+		if (verbose > 1)
+		{
+			Info << " a ring is detected" << endl;
+		}
+
 		auto segment =
 			std::make_shared<Cad2d_RemoveNonManifold::Ring>
 			(
@@ -452,6 +468,11 @@ tnbLib::Cad2d_RemoveNonManifold::RetrieveString
 	}
 	else
 	{
+		if (verbose > 1)
+		{
+			Info << " a segment is detected" << endl;
+		}
+
 		auto segment =
 			std::make_shared<Segment>
 			(
@@ -489,7 +510,7 @@ tnbLib::Cad2d_RemoveNonManifold::RetrieveSegments
 std::vector<std::shared_ptr<tnbLib::Cad2d_RemoveNonManifold::Segment>> 
 tnbLib::Cad2d_RemoveNonManifold::InsertEdges()
 {
-	auto& nodes = NodesRef();
+	const auto& nodes = Nodes();
 	if (nodes.empty())
 	{
 		return std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>();
@@ -631,18 +652,68 @@ tnbLib::Cad2d_RemoveNonManifold::RetrieveRings() const
 
 void tnbLib::Cad2d_RemoveNonManifold::Perform()
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Detecting non-manifold features in a plane structure ********" << endl;
+		Info << endl;
+	}
+
+	if (verbose)
+	{
+		Info << " - retrieving the nodes from the edges..." << endl;
+		Info << " - nb. of edges = " << (int)Edges().size() << endl;
+	}
+
+	//- retrieving the nodes from the edges
 	auto nodes = Pln_Tools::RetrieveVertices(Edges());
+
+	if (verbose)
+	{
+		Info << " - the nodes are retrieved, successfully!" << endl;
+		Info << " - nb. of the nodes = " << (int)nodes.size() << endl;
+	}
+
+	if (verbose)
+	{
+		Info << " - registering the non-manifold nodes into a map" << endl;
+	}
+
+	//- registering the non-manifold nodes
 	InsertVertices(nodes);
 
+	if (verbose)
+	{
+		Info << " - calculating nb. of the rings..." << endl;
+	}
+
+	auto k = 0;
 	auto nbRings = (Standard_Integer)0;
 	Standard_Boolean Do = Standard_True;
 	do 
-	{
+	{ //- iterator continues while there is a ring
+
+		if (verbose)
+		{
+			++k;
+			Info << " - cycle nb. " << k << ": " << endl;
+		}
+
+		//- the detected rings will be registered and non-ring segments will be retrieved
+		//- no non-ring segment is registered at the moment.
 		auto segments = InsertEdges();
 
 		if (Segments().size() > nbRings)
-		{
-			nbRings = (Standard_Integer)Segments().size();
+		{  // this means still some rings have been detected and the algorithm must be continued
+			nbRings = (Standard_Integer)Segments().size();  //- save the nb. of the rings
+
+			if (verbose)
+			{
+				Info << endl;
+				Info << " - " << nbRings << " nb. of rings have been detected." << endl;
+				Info << " - " << segments.size() << " nb. of segments have been detected." << endl;
+				Info << endl;
+			}
 
 			for (const auto& x : segments)
 			{
@@ -650,9 +721,17 @@ void tnbLib::Cad2d_RemoveNonManifold::Perform()
 			}
 		}
 		else
-		{
+		{ //- no more ring has been detected and the algorithm will be stopped
 			Do = Standard_False;
 
+			if (verbose)
+			{
+				Info << endl;
+				Info << " - no more ring has been detected." << endl;
+				Info << endl;
+			}
+
+			//- registering the non-ring segments at the end
 			for (auto& x : segments)
 			{
 				Import(std::move(x));
@@ -664,6 +743,16 @@ void tnbLib::Cad2d_RemoveNonManifold::Perform()
 	{
 		Debug_Null_Pointer(x.second);
 		AttachEdgesToNodes(x.second);
+	}
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << " - there are " << nbRings << " nb. of rings have been detected." << endl;
+		Info << " - total nb. of segments: " << Segments().size();
+		Info << endl;
+		Info << "******* End of the Detecting non-manifold features in a plane structure ********" << endl;
+		Info << endl;
 	}
 
 	Change_IsDone() = Standard_True;
