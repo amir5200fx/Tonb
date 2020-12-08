@@ -5,6 +5,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+unsigned short tnbLib::cad2dLib::Modeler_SrchEng::verbose(0);
+
 Standard_Boolean 
 tnbLib::cad2dLib::Modeler_SrchEng::CheckDomain() const
 {
@@ -92,21 +94,43 @@ tnbLib::cad2dLib::Modeler_SrchEng::FindCorner
 	const std::shared_ptr<Pln_Vertex>& theVtx
 ) const
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Finding a Corner ********" << endl;
+		Info << endl;
+	}
+
 #ifdef _DEBUG
 	CheckDomain("const std::shared_ptr<cad2dLib::Modeler_Corner>& FindCorner(const std::shared_ptr<Pln_Vertex>& theVtx) const");
 #endif // DEBUG
 
+	if (verbose)
+	{
+		Info << " - the searching radius: " << Radius() << endl;
+	}
 	Debug_If_Condition_Message(Radius() <= gp::Resolution(), "Invalid radius");
 
 	Debug_Null_Pointer(theVtx);
 	const auto& centre = theVtx->Coord();
 
+	if (verbose)
+	{
+		Info << " - centre: " << centre << endl;
+	}
 	Entity2d_Box b(centre - Radius(), centre + Radius());
 	std::vector<std::shared_ptr<cad2dLib::Modeler_Corner>> items;
 	theCorners_.GeometrySearch(b, items);
 
 	if (items.empty())
 	{
+		if (verbose)
+		{
+			Info << " - no corner has been detected." << endl;
+			Info << endl;
+			Info << "******* End of the Finding a Corner ********" << endl;
+			Info << endl;
+		}
 		return null;
 	}
 
@@ -118,13 +142,27 @@ tnbLib::cad2dLib::Modeler_SrchEng::FindCorner
 		auto iter = verties.find(theVtx->Index());
 		if (iter NOT_EQUAL verties.end())
 		{
+			if (verbose)
+			{
+				Info << " - a corner has been detected." << endl;
+				Info << endl;
+				Info << "******* End of the Finding a Corner ********" << endl;
+				Info << endl;
+			}
 			return x;
 		}
+	}
+	if (verbose)
+	{
+		Info << " - no corner has been detected." << endl;
+		Info << endl;
+		Info << "******* End of the Finding a Corner ********" << endl;
+		Info << endl;
 	}
 	return null;
 }
 
-void tnbLib::cad2dLib::Modeler_SrchEng::ReArrangeSrchEngine()
+void tnbLib::cad2dLib::Modeler_SrchEng::ReArrangeSrchEngine(const Pnt2d& theCoord)
 {
 #ifdef _DEBUG
 	CheckDomain("void ReArrangeSrchEngine()");
@@ -138,9 +176,9 @@ void tnbLib::cad2dLib::Modeler_SrchEng::ReArrangeSrchEngine()
 		theCorners_.RemoveFromGeometry(x);
 
 	const auto& b0 = theCorners_.GeometryBoundingBox();
-	const auto[dx, dy] = b0.Length();
+	auto b = Entity2d_Box::Union(Entity2d_Box(theCoord - 2 * Radius(), theCoord + 2 * Radius()), b0);
 
-	theCorners_.SetGeometryRegion(b0.Expanded(0.5*dx, 0.5*dy));
+	theCorners_.SetGeometryRegion(std::move(b));
 	theCorners_.InsertToGeometry(items);
 }
 
@@ -149,6 +187,12 @@ void tnbLib::cad2dLib::Modeler_SrchEng::InsertToSrchEngine
 	const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner
 )
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Inserting a Corner into the Engine ********" << endl;
+		Info << endl;
+	}
 #ifdef _DEBUG
 	CheckDomain("void InsertToSrchEngine(const std::shared_ptr<cad2dLib::Modeler_Corner>& theCorner)");
 #endif // DEBUG
@@ -156,15 +200,27 @@ void tnbLib::cad2dLib::Modeler_SrchEng::InsertToSrchEngine
 	const auto& domain = theCorners_.GeometryBoundingBox();
 	if (NOT domain.IsInside(theCorner->Coord()))
 	{
-		ReArrangeSrchEngine();
+		if (verbose)
+		{
+			Info << " - the corner is not inside the boundaries of the engine." << endl;
+			Info << " - rearranging the engine..." << endl;
+		}
+		ReArrangeSrchEngine(theCorner->Coord());
 	}
 
+	if (verbose) Info << " - inserting the corner into the engine..." << endl;
 	theCorners_.InsertToGeometry(theCorner);
 
 	/*if (theCorner->Tolerance() > Radius())
 	{
 		SetMaxRadius(theCorner->Tolerance()*1.05);
 	}*/
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of the Inserting a Corner into the Engine ********" << endl;
+		Info << endl;
+	}
 }
 
 void tnbLib::cad2dLib::Modeler_SrchEng::RemoveFromSrchEngine

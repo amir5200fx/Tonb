@@ -58,6 +58,7 @@ namespace tnbLib
 
 			static TnbCad2d_EXPORT const std::shared_ptr<cad2dLib::Modeler_Corner> null;
 			static TnbCad2d_EXPORT const Entity2d_Box null_domain;
+			static TnbCad2d_EXPORT unsigned short verbose;
 
 			TnbCad2d_EXPORT Modeler_SrchEng();
 
@@ -92,7 +93,7 @@ namespace tnbLib
 					const std::shared_ptr<Pln_Vertex>& theVtx
 				) const;
 
-			TnbCad2d_EXPORT void ReArrangeSrchEngine();
+			TnbCad2d_EXPORT void ReArrangeSrchEngine(const Pnt2d& theCoord);
 
 			TnbCad2d_EXPORT void InsertToSrchEngine
 			(
