@@ -17,6 +17,8 @@
 
 #include <algorithm>
 
+unsigned short tnbLib::Cad2d_Modeler::verbose(0);
+
 tnbLib::Cad2d_Modeler::Cad2d_Modeler()
 {
 	// empty body
@@ -444,6 +446,13 @@ tnbLib::Cad2d_Modeler::AddVertex
 	const Standard_Integer theEdgeIndex
 )
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Adding A Vertex ********" << endl;
+		Info << endl;
+	}
+
 	theVtx->Index() = VertexCounter().RetrieveIndex();
 
 	std::ostringstream stream;
@@ -453,28 +462,54 @@ tnbLib::Cad2d_Modeler::AddVertex
 
 	auto name = word(stream.str());
 	theVtx->Name() = std::move(name);
+	if (verbose) Info << " - vertex's name: " << theVtx->Name() << endl;
 
+	if (verbose) Info << " - finding the corner..." << endl;
 	auto crn = SelectCorner(theVtx->Coord());
+
 	if (NOT cad2dLib::Modeler_SrchEng::IsNull(crn))
 	{
+		if (verbose)
+		{
+			Info << " - " << crn->Name() << " has been detected." << endl;
+			Info << " - coordinate: " << crn->Coord() << endl;
+			Info << " - inserting the vertex into the corner..." << endl;
+		}
 		crn->InsertToCorners(theVtx->Index(), theVtx);
 		//theVtx->SetPrecision(crn->Radius());
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << "******* End of Adding A Vertex ********" << endl;
+			Info << endl;
+		}
 		return std::move(crn);
 	}
 	else
 	{
+		if (verbose) Info << " - no corner has been detected." << endl;
 		auto c = std::make_shared<corner>();
 		Debug_Null_Pointer(c);
 
 		c->Index() = CornerCounter().RetrieveIndex();
 		c->Name() = "corner nb. " + std::to_string(c->Index());
+		if (verbose) Info << " - corner's name: " << theVtx->Name() << endl;
 
 		c->InsertToCorners(theVtx->Index(), theVtx);
 		c->SetCoord(theVtx->Coord());
+		if (verbose) Info << " - corner's coordinate: " << c->Coord() << endl;
 
 		//theVtx->SetPrecision(crn->Radius());
-
+		if (verbose) Info << " - importing the corner into the engine..." << endl;
 		InsertToSrchEngine(c);
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << "******* End of the Adding A Vertex ********" << endl;
+			Info << endl;
+		}
 		return std::move(c);
 	}
 }
@@ -485,8 +520,20 @@ tnbLib::Cad2d_Modeler::AddEdge
 	const std::shared_ptr<Pln_Edge>& theEdge
 )
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Adding An Edge ********" << endl;
+		Info << endl;
+	}
+
 	theEdge->Index() = EdgeCounter().RetrieveIndex();
 	theEdge->Name() = "edge nb. " + theEdge->Index();
+
+	if (verbose)
+	{
+		Info << " - edge's name: " << theEdge->Name() << endl;
+	}
 
 	const auto crn0 = AddVertex(theEdge->Vtx0(), theEdge->Index());
 	const auto crn1 = AddVertex(theEdge->Vtx1(), theEdge->Index());
@@ -498,6 +545,7 @@ tnbLib::Cad2d_Modeler::AddEdge
 	v0->InsertToEdges(theEdge->Index(), theEdge);
 	v1->InsertToEdges(theEdge->Index(), theEdge);
 
+	if (verbose) Info << " - registering the edge" << endl;
 	cad2dLib::Modeler_Registry::RegisterToEdges(theEdge->Index(), theEdge);
 
 	if (crn0 IS_EQUAL crn1)
@@ -528,6 +576,12 @@ tnbLib::Cad2d_Modeler::AddEdge
 		segmnt->ImportToEdges(theEdge->Index(), theEdge);
 	}
 
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of the Adding An Edge ********" << endl;
+		Info << endl;
+	}
 	return theEdge->Index();
 }
 
@@ -1009,8 +1063,25 @@ tnbLib::Cad2d_Modeler::MakePlanes
 	const gp_Ax2& ax
 )
 {
+	if (NOT theList.NbItems())
+	{
+		return std::vector<Standard_Integer>();
+	}
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Making Planes ********" << endl;
+		Info << endl;
+	}
+
 	const auto witems = theList.RetrieveItems();
 	theList.Clear();
+
+	if (verbose)
+	{
+		Info << " - nb. of items: " << witems.size() << endl;
+	}
 
 	std::vector<std::shared_ptr<Pln_Edge>> items;
 	items.reserve(witems.size());
@@ -1022,10 +1093,42 @@ tnbLib::Cad2d_Modeler::MakePlanes
 			items.push_back(std::move(edge));
 		}
 	}
-	
-	std::vector<Standard_Integer> ids;
 
-	auto wires = Pln_Tools::RetrieveWiresNonManifold(items);
+	const auto tol = Radius();
+
+	if (verbose) Info << " - making the corners..." << endl;
+	//- retrieve the corners
+	auto corners = cad2dLib::Modeler_Tools::MakeCorners(items, tol);
+
+	if (verbose) Info << " - constructing the merged edges..." << endl;
+	auto mergedEdges = cad2dLib::Modeler_Tools::ConstructMergedEdges(corners);
+
+	if (verbose)
+	{
+		Info << " - retrieving wires from the items..." << endl;
+	}
+
+	auto wires = Pln_Tools::RetrieveWiresNonManifold(mergedEdges);
+
+	if (verbose)
+	{
+		Info << " - " << wires.size() << " nb. of wires have been detected." << endl;
+		Info << " - retrieving the planes..." << endl;
+	}
+
+	if (NOT wires.size())
+	{
+		if (verbose)
+		{
+			Info << " - no plane has been constructed." << endl;
+			Info << endl;
+			Info << "******* End of Making Planes ********" << endl;
+			Info << endl;
+		}
+		return std::vector<Standard_Integer>();
+	}
+
+	std::vector<Standard_Integer> ids;
 	if (wires.size() IS_EQUAL 1)
 	{
 		const auto& wire = wires[0];
@@ -1035,6 +1138,13 @@ tnbLib::Cad2d_Modeler::MakePlanes
 		const auto plane = Pln_Tools::MakePlane(wire, ax);
 		Debug_Null_Pointer(plane);
 
+		if (verbose)
+		{
+			Info << " - 1 plane has been constructed." << endl;
+			Info << endl;
+			Info << "******* End of Making Planes ********" << endl;
+			Info << endl;
+		}
 		ids.push_back(AddPlane(plane));
 		return std::move(ids);
 	}
@@ -1047,6 +1157,14 @@ tnbLib::Cad2d_Modeler::MakePlanes
 		{
 			Debug_Null_Pointer(x);
 			ids.push_back(AddPlane(x));
+		}
+
+		if (verbose)
+		{
+			Info << " - "<< (int)ids.size() <<" planes have been constructed." << endl;
+			Info << endl;
+			Info << "******* End of Making Planes ********" << endl;
+			Info << endl;
 		}
 		return std::move(ids);
 	}
