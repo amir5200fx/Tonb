@@ -1087,7 +1087,7 @@ namespace tnbLib
 
 				seg->edge = x;
 				auto k0 = k - 1;
-				if (k0 < 0) k0 = theEdges.size() - 1;
+				if (k0 < 0) k0 = (int)theEdges.size() - 1;
 
 				seg->corner0 = k0;
 				seg->corner1 = k;
@@ -1364,6 +1364,95 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCorners
 	CalcCornerTolerances(corners);
 
 	return std::move(corners);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
+tnbLib::cad2dLib::Modeler_Tools::ConstructMergedEdges
+(
+	const std::vector<std::shared_ptr<Modeler_Corner>>& theCorners
+)
+{
+	std::map<Standard_Integer, std::pair<Standard_Integer, Standard_Integer>>
+		edgesMap;
+	std::map<Standard_Integer, std::shared_ptr<Pln_Edge>>
+		idToEdgeMap;
+	for (const auto& x : theCorners)
+	{
+		for (const auto& v : x->Vertices())
+		{
+			Debug_Null_Pointer(v.second);
+			const auto& vertex = v.second;
+
+			for (const auto& e : vertex->Edges())
+			{
+				Debug_Null_Pointer(e.second.lock());
+				auto edge = e.second.lock();
+
+				auto iter = edgesMap.find(edge->Index());
+				if (iter IS_EQUAL edgesMap.end())
+				{
+					edgesMap[edge->Index()] = std::make_pair(-1, -1);
+					idToEdgeMap[edge->Index()] = edge;
+					iter = edgesMap.find(edge->Index());
+				}
+
+				if (edge->Vtx0() IS_EQUAL vertex)
+				{
+					iter->second.first = x->Index();
+				}
+				if (edge->Vtx1() IS_EQUAL vertex)
+				{
+					iter->second.second = x->Index();
+				}
+			}
+		}
+	}
+
+	std::map<Standard_Integer, std::shared_ptr<Pln_Vertex>> verticesMap;
+	for (const auto& x : theCorners)
+	{
+		if (NOT x->NbVertices()) continue;
+		auto vtx = std::make_shared<Pln_Vertex>(x->Index(), x->Name(), x->CalcMeanCoord());
+		Debug_Null_Pointer(vtx);
+
+		auto paired = std::make_pair(x->Index(), std::move(vtx));
+		auto insert = verticesMap.insert(std::move(paired));
+		if (NOT insert.second)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "duplicate data!" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	std::vector<std::shared_ptr<Pln_Edge>> edges;
+	edges.reserve(edgesMap.size());
+	for (const auto& x : edgesMap)
+	{
+		const auto& ids = x.second;
+		auto v0 = ids.first;
+		auto v1 = ids.second;
+
+		const auto& vtx0 = verticesMap[v0];
+		const auto& vtx1 = verticesMap[v1];
+
+		const auto& pEdge = idToEdgeMap[x.first];
+
+		auto edge = std::make_shared<Pln_Edge>
+			(
+				pEdge->Index(), pEdge->Name(),
+				vtx0, vtx1, pEdge->Curve(),
+				pEdge->Sense()
+				);
+
+		edge->Mesh() = pEdge->Mesh();
+
+		vtx0->InsertToEdges(edge->Index(), edge);
+		vtx1->InsertToEdges(edge->Index(), edge);
+		Debug_Null_Pointer(edge);
+		edges.push_back(std::move(edge));
+	}
+	return std::move(edges);
 }
 
 void tnbLib::cad2dLib::Modeler_Tools::CalcCornerTolerances
