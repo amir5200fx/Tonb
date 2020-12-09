@@ -102,6 +102,43 @@ tnbLib::Marine_WaterLib::Domain
 std::shared_ptr<tnbLib::Marine_WaterDomain> 
 tnbLib::Marine_WaterLib::StillWaterDomain
 (
+	const std::shared_ptr<Marine_Body>& theBody, 
+	const std::shared_ptr<Marine_Domain>& theDomain, 
+	const Standard_Real theZ
+)
+{
+	if (theBody->IsHull())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Displacer>(theBody);
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "the body type is not displacer" << endl
+				<< abort(FatalError);
+		}
+
+		auto water = StillWaterDomain(*body, theDomain, theZ);
+		return std::move(water);
+	}
+	else if (theBody->IsTank())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Tank>(theBody);
+		Debug_Null_Pointer(body);
+
+		auto water = StillWaterDomain(*body, theDomain, theZ);
+		return std::move(water);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body type has been detected: Sail" << endl
+			<< abort(FatalError);
+	}
+}
+
+std::shared_ptr<tnbLib::Marine_WaterDomain> 
+tnbLib::Marine_WaterLib::StillWaterDomain
+(
 	const marineLib::Body_Displacer& theBody,
 	const std::shared_ptr<Marine_Domain>& theDomain,
 	const Standard_Real theZ	
@@ -163,6 +200,43 @@ tnbLib::Marine_WaterLib::StillWaterDomain
 std::shared_ptr<tnbLib::Marine_MultLevWaterDomain> 
 tnbLib::Marine_WaterLib::MultiLevelsStillWaterDomain
 (
+	const std::shared_ptr<Marine_Body>& theBody,
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const Geo_xDistb & theZ
+)
+{
+	if (theBody->IsHull())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Displacer>(theBody);
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "the body type is not displacer" << endl
+				<< abort(FatalError);
+		}
+
+		auto domain = MultiLevelsStillWaterDomain(*body, theDomain, theZ);
+		return std::move(domain);
+	}
+	else if (theBody->IsTank())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Tank>(theBody);
+		Debug_Null_Pointer(body);
+
+		auto domain = MultiLevelsStillWaterDomain(*body, theDomain, theZ);
+		return std::move(domain);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body type has been detected: Sail" << endl
+			<< abort(FatalError);
+	}
+}
+
+std::shared_ptr<tnbLib::Marine_MultLevWaterDomain> 
+tnbLib::Marine_WaterLib::MultiLevelsStillWaterDomain
+(
 	const marineLib::Body_Displacer & theBody,
 	const std::shared_ptr<Marine_Domain>& theDomain,
 	const Geo_xDistb & theZ
@@ -183,6 +257,140 @@ tnbLib::Marine_WaterLib::MultiLevelsStillWaterDomain
 
 	domain->SetDomains(std::move(domains));
 	return std::move(domain);
+}
+
+std::shared_ptr<tnbLib::Marine_MultLevWaterDomain> 
+tnbLib::Marine_WaterLib::MultiLevelsStillWaterDomain
+(
+	const marineLib::Body_Tank & theBody,
+	const std::shared_ptr<Marine_Domain>& theDomain, 
+	const Geo_xDistb & theZ
+)
+{
+	auto domain = std::make_shared<Marine_MultLevWaterDomain>();
+	Debug_Null_Pointer(domain);
+
+	std::vector<std::shared_ptr<Marine_WaterDomain>> domains;
+	domains.reserve(theZ.Size());
+	for (auto z : theZ.Values())
+	{
+		auto water = StillWaterDomain(theBody, theDomain, z);
+		Debug_Null_Pointer(water);
+
+		domains.push_back(std::move(water));
+	}
+
+	domain->SetDomains(std::move(domains));
+	return std::move(domain);
+}
+
+std::shared_ptr<tnbLib::Marine_WaterDomain> 
+tnbLib::Marine_WaterLib::WaterDomain
+(
+	const std::shared_ptr<Marine_Body>& theBody, 
+	const std::shared_ptr<Marine_Wave> & theWave,
+	const std::shared_ptr<Marine_Domain>& theDomain, 
+	const Standard_Real theMinTol, 
+	const Standard_Real theMaxTol
+)
+{
+	if (theBody->IsHull())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Displacer>(theBody);
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "the body type is not displacer" << endl
+				<< abort(FatalError);
+		}
+
+		auto domain = WaterDomain(*body, theWave, theDomain, theMinTol, theMaxTol);
+		return std::move(domain);
+	}
+	else if (theBody->IsTank())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Tank>(theBody);
+		Debug_Null_Pointer(body);
+
+		auto domain = WaterDomain(*body, theWave, theDomain, theMinTol, theMaxTol);
+		return std::move(domain);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body type has been detected: Sail" << endl
+			<< abort(FatalError);
+	}
+}
+
+std::shared_ptr<tnbLib::Marine_WaterDomain> 
+tnbLib::Marine_WaterLib::WaterDomain
+(
+	const marineLib::Body_Displacer & theBody,
+	const std::shared_ptr<Marine_Wave> & theWave,
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const Standard_Real theMinTol, 
+	const Standard_Real theMaxTol
+)
+{
+#ifdef _DEBUG
+	Marine_BodyTools::CheckTypeConsistency(theBody);
+#endif // _DEBUG
+
+	auto water = 
+		Marine_WaterTools::Water
+		(
+			theBody.Sections(), 
+			theWave, *theDomain->Dim(), 
+			theMinTol, theMaxTol
+		);
+	Debug_Null_Pointer(water);
+
+	auto domain = theDomain;
+	auto wave = theWave;
+	auto wd =
+		std::make_shared<Marine_WaterDomain>
+		(
+			std::move(domain),
+			std::move(water),
+			std::move(wave)
+			);
+	return std::move(wd);
+}
+
+std::shared_ptr<tnbLib::Marine_WaterDomain> 
+tnbLib::Marine_WaterLib::WaterDomain
+(
+	const marineLib::Body_Tank & theBody, 
+	const std::shared_ptr<Marine_Wave>& theWave, 
+	const std::shared_ptr<Marine_Domain>& theDomain, 
+	const Standard_Real theMinTol, 
+	const Standard_Real theMaxTol
+)
+{
+#ifdef _DEBUG
+	Marine_BodyTools::CheckTypeConsistency(theBody);
+#endif // _DEBUG
+
+	auto water =
+		Marine_WaterTools::Water
+		(
+			theBody.Sections(),
+			theWave, *theDomain->Dim(),
+			theMinTol, theMaxTol
+		);
+	Debug_Null_Pointer(water);
+
+	auto domain = theDomain;
+	auto wave = theWave;
+	auto wd =
+		std::make_shared<Marine_WaterDomain>
+		(
+			std::move(domain),
+			std::move(water),
+			std::move(wave)
+			);
+	return std::move(wd);
 }
 
 const std::shared_ptr<tnbLib::Marine_CmpSection> &

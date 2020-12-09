@@ -79,6 +79,7 @@ namespace tnbLib
 				const Standard_Real theZ
 			);
 
+		//- Throw an exception if the body is not a displacer or a tank
 		static TnbMarine_EXPORT std::shared_ptr<Marine_MultLevWaterDomain>
 			MultiLevelsStillWaterDomain
 			(
@@ -103,11 +104,12 @@ namespace tnbLib
 				const Geo_xDistb& theZ
 			);
 
+		//- Throw an exception if the body is not a displacer or a tank
 		static TnbMarine_EXPORT std::shared_ptr<Marine_WaterDomain>
 			WaterDomain
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
-				const Marine_Wave& theWave,
+				const std::shared_ptr<Marine_Wave>& theWave,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
@@ -117,7 +119,7 @@ namespace tnbLib
 			WaterDomain
 			(
 				const marineLib::Body_Displacer& theBody,
-				const Marine_Wave& theWave,
+				const std::shared_ptr<Marine_Wave>& theWave,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
@@ -127,7 +129,7 @@ namespace tnbLib
 			WaterDomain
 			(
 				const marineLib::Body_Tank& theBody,
-				const Marine_Wave& theWave,
+				const std::shared_ptr<Marine_Wave>& theWave,
 				const std::shared_ptr<Marine_Domain>& theDomain,
 				const Standard_Real theMinTol,
 				const Standard_Real theMaxTol
