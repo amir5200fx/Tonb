@@ -5,6 +5,7 @@
 #include <Marine_BodiesFwd.hxx>
 #include <Marine_VesselParams.hxx>
 #include <HydStatic_FormDimsFwd.hxx>
+#include <HydStatic_Module.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
@@ -62,33 +63,33 @@ namespace tnbLib
 
 			//- private functions
 
-			void CalcDISPV
+			TnbHydStatic_EXPORT void CalcDISPV
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-			void CalcCB
+			TnbHydStatic_EXPORT void CalcCB
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-			void CalcAM
+			TnbHydStatic_EXPORT void CalcAM
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-			void CalcCP();
+			TnbHydStatic_EXPORT void CalcCP();
 
-			void CalcCM();
+			TnbHydStatic_EXPORT void CalcCM();
 
-			void CalcAW
+			TnbHydStatic_EXPORT void CalcAW
 			(
 				const marineLib::Body_Wetted& theBody
 			);
 
-			void CalcCWL();
+			TnbHydStatic_EXPORT void CalcCWL();
 
-			void CalcCVP();
+			TnbHydStatic_EXPORT void CalcCVP();
 
 
 			auto& ParametersRef()
@@ -115,7 +116,7 @@ namespace tnbLib
 				return theParameters_;
 			}
 
-			void Perform();
+			TnbHydStatic_EXPORT void Perform();
 		};
 	}
 }

@@ -55,11 +55,11 @@ namespace tnbLib
 				return Standard_True;
 			}
 
-			Standard_Real MinHeel() const override;
+			TnbHydStatic_EXPORT Standard_Real MinHeel() const override;
 
-			Standard_Real MaxHeel() const override;
+			TnbHydStatic_EXPORT Standard_Real MaxHeel() const override;
 
-			Standard_Real Value(const Standard_Real thePhi) const override;
+			TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real thePhi) const override;
 
 			const auto& Arm() const
 			{

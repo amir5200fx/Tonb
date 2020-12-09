@@ -15,18 +15,18 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_DynStbCurve
+		TnbHydStatic_EXPORT HydStatic_DynStbCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_DynStbCurve
+		TnbHydStatic_EXPORT HydStatic_DynStbCurve
 		(
 			const Standard_Integer theIndex, 
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_DynStbCurve
+		TnbHydStatic_EXPORT HydStatic_DynStbCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 

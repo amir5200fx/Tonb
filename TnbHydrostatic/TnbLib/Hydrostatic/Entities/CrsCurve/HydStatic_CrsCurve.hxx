@@ -36,20 +36,20 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_CrsCurve
+		TnbHydStatic_EXPORT HydStatic_CrsCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve,
 			const Standard_Real theHeel
 		);
 
-		HydStatic_CrsCurve
+		TnbHydStatic_EXPORT HydStatic_CrsCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve,
 			const Standard_Real theHeel
 		);
 
-		HydStatic_CrsCurve
+		TnbHydStatic_EXPORT HydStatic_CrsCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -62,13 +62,13 @@ namespace tnbLib
 			return theHeel_;
 		}	
 
-		Standard_Boolean IsIntersect(const Standard_Real theVolume) const;
+		TnbHydStatic_EXPORT Standard_Boolean IsIntersect(const Standard_Real theVolume) const;
 
-		Standard_Real LeverArm0() const;
+		TnbHydStatic_EXPORT Standard_Real LeverArm0() const;
 
-		Standard_Real LeverArm1() const;
+		TnbHydStatic_EXPORT Standard_Real LeverArm1() const;
 
-		Standard_Real Value(const Standard_Real theVolume) const;
+		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real theVolume) const;
 
 		
 	};

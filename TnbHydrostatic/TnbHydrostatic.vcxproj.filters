@@ -28,12 +28,6 @@
     <Filter Include="TnbLib\Hydrostatic\Tools">
       <UniqueIdentifier>{8f53222d-669e-4d72-abaf-43354cf8770b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Boundary">
-      <UniqueIdentifier>{d90c3726-30ed-475e-9eb2-c65bdead2db4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Boundary\Type">
-      <UniqueIdentifier>{49335afd-6139-4161-87f9-74f1d1b5d3c8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Hydrostatic\Physics">
       <UniqueIdentifier>{a174dc37-8f48-4d26-8265-c530f837ea75}</UniqueIdentifier>
     </Filter>
@@ -313,6 +307,12 @@
     <Filter Include="TnbLib\Hydrostatic\FormDim\Wetted">
       <UniqueIdentifier>{b88927eb-7e31-484e-a18b-cddeb2162a47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\FloatBody">
+      <UniqueIdentifier>{54d2ac4d-6906-4a82-8ede-1d96ac1a77e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\module">
+      <UniqueIdentifier>{ad35baed-06dd-44b0-8e2f-aefab7d7e375}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.hxx">
@@ -323,12 +323,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\Vessel\FormCoeff\Vessel_FormCoeff.hxx">
       <Filter>TnbLib\Hydrostatic\Vessel\FormCoeff</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Boundary\HydroStatic_Boundary.hxx">
-      <Filter>TnbLib\Hydrostatic\Boundary</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Boundary\Type\HsBnd_Type.hxx">
-      <Filter>TnbLib\Hydrostatic\Boundary\Type</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\HydroStatic_PhysicsModel.hxx">
       <Filter>TnbLib\Hydrostatic\PhysicsModel</Filter>
@@ -428,33 +422,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\Entities\xDraft\HydStatic_xDraft.hxx">
       <Filter>TnbLib\Hydrostatic\Entities\xDraft</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Entity\HydStatic_Model_Entity.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Hull\HydStatic_Model_Hull.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Hull</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Moment\HydStatic_Model_Moment.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Moment</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Volume\HydStatic_Model_Volume.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Volume</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Tank\HydStatic_Model_Tank.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Tank</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\CG\HydStatic_Model_CG.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\CG</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Mass\HydStatic_Model_Mass.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Mass</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Light\HydStatic_Model_Light.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Model\Entities\Sail\HydStatic_Model_Sail.hxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Sail</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\Model\HydStatic_Model.hxx">
       <Filter>TnbLib\Hydrostatic\Model</Filter>
@@ -603,6 +570,12 @@
     <ClInclude Include="TnbLib\Hydrostatic\FormDim\HydStatic_FormDimsFwd.hxx">
       <Filter>TnbLib\Hydrostatic\FormDim</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\FloatBody\HydStatic_FloatBody.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FloatBody</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\module\HydStatic_Module.hxx">
+      <Filter>TnbLib\Hydrostatic\module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx">
@@ -658,27 +631,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\HydStatic_HydGphCurves.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Model\Entities\Entity\HydStatic_Model_Entity.cxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Model\Entities\Moment\HydStatic_Model_Moment.cxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Moment</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Model\Entities\Volume\HydStatic_Model_Volume.cxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Volume</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Model\Entities\Tank\HydStatic_Model_Tank.cxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Tank</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Model\Entities\CG\HydStatic_Model_CG.cxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\CG</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Model\Entities\Mass\HydStatic_Model_Mass.cxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Mass</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Model\Entities\Light\HydStatic_Model_Light.cxx">
-      <Filter>TnbLib\Hydrostatic\Model\Entities\Light</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\AuCurve\hAuCurve\HydStatic_hAuCurve.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\AuCurve\hAuCurve</Filter>
@@ -760,6 +712,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\FormDim\Wetted\HydStatic_FormDim_Wetted.cxx">
       <Filter>TnbLib\Hydrostatic\FormDim\Wetted</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Model\HydStatic_Model.cxx">
+      <Filter>TnbLib\Hydrostatic\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\FloatBody\HydStatic_FloatBody.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FloatBody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

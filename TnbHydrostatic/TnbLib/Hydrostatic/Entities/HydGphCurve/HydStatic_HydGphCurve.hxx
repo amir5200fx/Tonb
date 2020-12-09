@@ -15,31 +15,19 @@ namespace tnbLib
 
 	protected:
 
-		HydStatic_HydGphCurve
-		(
-			const Handle(Geom2d_Curve)& theCurve
-		);
-
-		HydStatic_HydGphCurve
-		(
-			const Standard_Integer theIndex,
-			const Handle(Geom2d_Curve)& theCurve
-		);
-
-		HydStatic_HydGphCurve
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const Handle(Geom2d_Curve)& theCurve
-		);
+		
+		template<class... _Types>
+		HydStatic_HydGphCurve(_Types&&... _Args)
+			: HydStatic_HydCurve(_Args...)
+		{}
 
 	public:
 
-		Standard_Real MinValue() const;
+		TnbHydStatic_EXPORT Standard_Real MinValue() const;
 
-		Standard_Real MaxValue() const;
+		TnbHydStatic_EXPORT Standard_Real MaxValue() const;
 
-		Standard_Real Value(const Standard_Real theT) const;
+		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real theT) const;
 	};
 }
 

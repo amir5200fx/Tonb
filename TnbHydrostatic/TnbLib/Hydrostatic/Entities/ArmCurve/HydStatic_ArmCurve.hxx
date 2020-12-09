@@ -20,23 +20,23 @@ namespace tnbLib
 
 	protected:
 
-		HydStatic_ArmCurve
+		TnbHydStatic_EXPORT HydStatic_ArmCurve
 		(
 			const Handle(Geom2d_Curve)&& theCurve
 		);
 
-		HydStatic_ArmCurve
+		TnbHydStatic_EXPORT HydStatic_ArmCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_ArmCurve
+		TnbHydStatic_EXPORT HydStatic_ArmCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_ArmCurve
+		TnbHydStatic_EXPORT HydStatic_ArmCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -45,13 +45,13 @@ namespace tnbLib
 
 	public:
 
-		Standard_Boolean IsIntersect(const Standard_Real thePhi) const;
+		TnbHydStatic_EXPORT Standard_Boolean IsIntersect(const Standard_Real thePhi) const;
 
-		Standard_Real MinHeel() const;
+		TnbHydStatic_EXPORT Standard_Real MinHeel() const;
 
-		Standard_Real MaxHeel() const;
+		TnbHydStatic_EXPORT Standard_Real MaxHeel() const;
 
-		Standard_Real Value(const Standard_Real thePhi) const;
+		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real thePhi) const;
 
 		auto& ChangeQs()
 		{
@@ -71,13 +71,17 @@ namespace tnbLib
 			theQs_ = std::move(theQs);
 		}
 
-		static std::shared_ptr<HydStatic_ArmCurve> 
+		static std::shared_ptr<HydStatic_ArmCurve>
 			Clip
 			(
-				const std::shared_ptr<HydStatic_ArmCurve>& theCurve, 
+				const std::shared_ptr<HydStatic_ArmCurve>& theCurve,
 				const Standard_Real theH0,
 				const Standard_Real theH1
-			);
+			)
+		{
+			NotImplemented;
+			return nullptr;
+		}
 	};
 }
 

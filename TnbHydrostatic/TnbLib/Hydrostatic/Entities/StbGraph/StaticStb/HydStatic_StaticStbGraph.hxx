@@ -19,7 +19,7 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_StaticStbGraph();
+		TnbHydStatic_EXPORT HydStatic_StaticStbGraph();
 
 
 	};

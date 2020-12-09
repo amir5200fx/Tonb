@@ -15,34 +15,34 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_BnjCurve
+		TnbHydStatic_EXPORT HydStatic_BnjCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_BnjCurve
+		TnbHydStatic_EXPORT HydStatic_BnjCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_BnjCurve
+		TnbHydStatic_EXPORT HydStatic_BnjCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		Standard_Boolean IsIntersect
+		TnbHydStatic_EXPORT Standard_Boolean IsIntersect
 		(
 			const Standard_Real theT
 		) const;
 
-		Standard_Real A0() const;
+		TnbHydStatic_EXPORT Standard_Real A0() const;
 
-		Standard_Real A1() const;
+		TnbHydStatic_EXPORT Standard_Real A1() const;
 
-		Standard_Real Value
+		TnbHydStatic_EXPORT Standard_Real Value
 		(
 			const Standard_Real theT
 		) const;

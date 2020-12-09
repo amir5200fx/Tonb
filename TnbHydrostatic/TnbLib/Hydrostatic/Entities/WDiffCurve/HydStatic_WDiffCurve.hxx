@@ -20,18 +20,18 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_WDiffCurve
+		TnbHydStatic_EXPORT HydStatic_WDiffCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_WDiffCurve
+		TnbHydStatic_EXPORT HydStatic_WDiffCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_WDiffCurve
+		TnbHydStatic_EXPORT HydStatic_WDiffCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

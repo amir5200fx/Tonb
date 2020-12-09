@@ -3,6 +3,9 @@
 #define _HydStatic_EqQ_Header
 
 #include <HydStatic_GzQP2.hxx>
+#include <HydStatic_Module.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 namespace tnbLib
 {
@@ -30,7 +33,7 @@ namespace tnbLib
 
 	public:
 
-		static const HydStatic_EqQ null;
+		static TnbHydStatic_EXPORT const HydStatic_EqQ null;
 
 		virtual Standard_Boolean IsStable() const
 		{
@@ -42,7 +45,11 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		static Standard_Boolean IsNull(const HydStatic_EqQ& theQ);
+		static Standard_Boolean IsNull(const HydStatic_EqQ& theQ)
+		{
+			NotImplemented;
+			return true;
+		}
 	};
 }
 

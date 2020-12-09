@@ -4,6 +4,7 @@
 
 #include <Global_Done.hxx>
 #include <gp_Ax1.hxx>
+#include <HydStatic_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -50,12 +51,12 @@ namespace tnbLib
 
 	public:
 
-		static const gp_Ax1 null;
-		static const Standard_Integer DEFAULT_NB_WATERS;
+		static TnbHydStatic_EXPORT const gp_Ax1 null;
+		static TnbHydStatic_EXPORT const Standard_Integer DEFAULT_NB_WATERS;
 
-		HydStatic_CrossCurves();
+		TnbHydStatic_EXPORT HydStatic_CrossCurves();
 
-		HydStatic_CrossCurves
+		TnbHydStatic_EXPORT HydStatic_CrossCurves
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain, 
 			const std::shared_ptr<Marine_Body>& theBody, 
@@ -100,7 +101,7 @@ namespace tnbLib
 			return theCrossCurves_;
 		}
 
-		void Perform();
+		TnbHydStatic_EXPORT void Perform();
 
 		void LoadDomain(const std::shared_ptr<Marine_Domain>& theDomain)
 		{
@@ -128,7 +129,7 @@ namespace tnbLib
 		}
 
 
-		static std::shared_ptr<Geo_xDistb> 
+		static TnbHydStatic_EXPORT std::shared_ptr<Geo_xDistb>
 			Z
 			(
 				const Standard_Real theZ0,

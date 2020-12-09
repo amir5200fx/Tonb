@@ -58,7 +58,11 @@ namespace tnbLib
 
 
 			std::shared_ptr<HydStatic_rArmCurve>
-				ExpandToPort() const override;
+				ExpandToPort() const override
+			{
+				NotImplemented;
+				return nullptr;
+			}
 		};
 	}
 }

@@ -17,18 +17,18 @@ namespace tnbLib
 
 	protected:
 
-		HydStatic_rArmCurve
+		TnbHydStatic_EXPORT HydStatic_rArmCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_rArmCurve
+		TnbHydStatic_EXPORT HydStatic_rArmCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_rArmCurve
+		TnbHydStatic_EXPORT HydStatic_rArmCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

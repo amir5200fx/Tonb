@@ -3,6 +3,7 @@
 #define _HydStatic_Bonjean_Header
 
 #include <Global_Done.hxx>
+#include <HydStatic_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -67,9 +68,9 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_Bonjean();
+		TnbHydStatic_EXPORT HydStatic_Bonjean();
 
-		HydStatic_Bonjean
+		TnbHydStatic_EXPORT HydStatic_Bonjean
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain, 
 			const std::shared_ptr<Marine_Body>& theBody,
@@ -101,7 +102,7 @@ namespace tnbLib
 			return theGraph_;
 		}
 
-		void Perform();
+		TnbHydStatic_EXPORT void Perform();
 
 		void LoadDomain
 		(

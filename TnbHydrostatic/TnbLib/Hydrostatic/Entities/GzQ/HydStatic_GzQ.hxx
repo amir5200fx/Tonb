@@ -34,13 +34,13 @@ namespace tnbLib
 			, theLeverArm_(theLever)
 		{}
 
-		Pnt2d GetPt() const;
+		TnbHydStatic_EXPORT Pnt2d GetPt() const;
 
-		virtual std::shared_ptr<HydStatic_GzQ> Mirrored(const Pnt2d& theO) const;
+		TnbHydStatic_EXPORT virtual std::shared_ptr<HydStatic_GzQ> Mirrored(const Pnt2d& theO) const;
 
-		virtual std::shared_ptr<HydStatic_GzQ> Mirrored(const gp_Ax2d& theAx) const;
+		TnbHydStatic_EXPORT virtual std::shared_ptr<HydStatic_GzQ> Mirrored(const gp_Ax2d& theAx) const;
 
-		static Standard_Boolean 
+		static TnbHydStatic_EXPORT Standard_Boolean
 			IsLess
 			(
 				const HydStatic_GzQ& q0, 

@@ -39,18 +39,18 @@ namespace tnbLib
 
 	protected:
 
-		HydStatic_HeelCurve
+		TnbHydStatic_EXPORT HydStatic_HeelCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_HeelCurve
+		TnbHydStatic_EXPORT HydStatic_HeelCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_HeelCurve
+		TnbHydStatic_EXPORT HydStatic_HeelCurve
 		(
 			const Standard_Integer theIndex, 
 			const word& theName,

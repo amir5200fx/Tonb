@@ -20,7 +20,7 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_DynStbGraph();
+		TnbHydStatic_EXPORT HydStatic_DynStbGraph();
 
 
 		const auto& HeelArm() const

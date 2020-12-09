@@ -20,23 +20,23 @@ namespace tnbLib
 
 	protected:
 
-		HydStatic_AuCurve
+		TnbHydStatic_EXPORT HydStatic_AuCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_AuCurve
+		TnbHydStatic_EXPORT HydStatic_AuCurve
 		(
 			const Handle(Geom2d_Curve)&& theCurve
 		);
 
-		HydStatic_AuCurve
+		TnbHydStatic_EXPORT HydStatic_AuCurve
 		(
 			const Standard_Integer theIndex, 
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_AuCurve
+		TnbHydStatic_EXPORT HydStatic_AuCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

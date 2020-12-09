@@ -18,25 +18,25 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_hAuCurve
+		TnbHydStatic_EXPORT HydStatic_hAuCurve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_hAuCurve
+		TnbHydStatic_EXPORT HydStatic_hAuCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_hAuCurve
+		TnbHydStatic_EXPORT HydStatic_hAuCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		static std::shared_ptr<HydStatic_hAuCurve>
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_hAuCurve>
 			AuCurve
 			(
 				const std::vector<HydStatic_GzQ>& theQs

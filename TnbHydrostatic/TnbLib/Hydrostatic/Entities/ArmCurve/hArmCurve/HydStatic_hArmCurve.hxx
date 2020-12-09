@@ -29,23 +29,23 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_hArmCurve
+		TnbHydStatic_EXPORT HydStatic_hArmCurve
 		(
 			const Handle(Geom2d_Curve)&& theCurve
 		);
 
-		HydStatic_hArmCurve
+		TnbHydStatic_EXPORT HydStatic_hArmCurve
 		(
 			const Handle(Geom2d_Curve) & theCurve
 		);
 
-		HydStatic_hArmCurve
+		TnbHydStatic_EXPORT HydStatic_hArmCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_hArmCurve
+		TnbHydStatic_EXPORT HydStatic_hArmCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

@@ -15,18 +15,18 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_GM0Curve
+		TnbHydStatic_EXPORT HydStatic_GM0Curve
 		(
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_GM0Curve
+		TnbHydStatic_EXPORT HydStatic_GM0Curve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		HydStatic_GM0Curve
+		TnbHydStatic_EXPORT HydStatic_GM0Curve
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
@@ -34,9 +34,9 @@ namespace tnbLib
 		);
 
 
-		Standard_Real GM0() const;
+		TnbHydStatic_EXPORT Standard_Real GM0() const;
 
-		Standard_Real Heel() const;
+		TnbHydStatic_EXPORT Standard_Real Heel() const;
 	};
 }
 

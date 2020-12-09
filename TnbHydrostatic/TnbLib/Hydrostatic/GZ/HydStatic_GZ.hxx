@@ -5,6 +5,7 @@
 #include <Global_Done.hxx>
 #include <Marine_VesselParam_KG.hxx>
 #include <Marine_VesselParam_DISPV.hxx>
+#include <HydStatic_Module.hxx>
 
 #include <memory>
 
@@ -42,9 +43,9 @@ namespace tnbLib
 
 	public:
 
-		HydStatic_GZ();
+		TnbHydStatic_EXPORT HydStatic_GZ();
 
-		HydStatic_GZ
+		TnbHydStatic_EXPORT HydStatic_GZ
 		(
 			const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves,
 			const Standard_Real theKG,
@@ -71,7 +72,7 @@ namespace tnbLib
 			return theRightingArm_;
 		}
 
-		void Perform();
+		TnbHydStatic_EXPORT void Perform();
 
 		void LoadCrossCurves
 		(
@@ -81,7 +82,7 @@ namespace tnbLib
 			theCrossCurves_ = theCrossCurves;
 		}
 
-		void SetKG(const Standard_Real theKG);
+		TnbHydStatic_EXPORT void SetKG(const Standard_Real theKG);
 	};
 }
 

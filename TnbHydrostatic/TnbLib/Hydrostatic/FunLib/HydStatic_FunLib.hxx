@@ -3,6 +3,7 @@
 #define _HydStatic_FunLib_Header
 
 #include <Standard_TypeDef.hxx>
+#include <HydStatic_Module.hxx>
 
 #include <memory>
 
@@ -24,27 +25,27 @@ namespace tnbLib
 
 	public:
 
-		static std::shared_ptr<Geo_xDistb> 
+		static TnbHydStatic_EXPORT std::shared_ptr<Geo_xDistb>
 			RetrieveHeelDistb
 			(
 				const hydStcLib::StbFun_rArm& theRighting
 			);
 
-		static std::shared_ptr<HydStatic_StbFun> 
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_StbFun>
 			HeelingArm
 			(
 				const std::shared_ptr<HydStatic_hArmFormula>& theHeeling,
 				const std::shared_ptr<HydStatic_StbFun>& theRighting
 			);
 
-		static std::shared_ptr<HydStatic_StbFun>
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_StbFun>
 			HeelingArm
 			(
 				const std::shared_ptr<HydStatic_hArmFormula>& theHeeling,
 				const Geo_xDistb& theDist
 			);
 
-		static Standard_Real 
+		static TnbHydStatic_EXPORT Standard_Real
 			Area
 			(
 				const std::shared_ptr<HydStatic_StbFun>& theFun,
@@ -54,11 +55,11 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
-		static Standard_Real MaxRightingArmHeel(const std::shared_ptr<HydStatic_StbFun>& theRighting);
+		static TnbHydStatic_EXPORT Standard_Real MaxRightingArmHeel(const std::shared_ptr<HydStatic_StbFun>& theRighting);
 
-		static Standard_Real MaxRightingArmHeel_Port(const std::shared_ptr<HydStatic_StbFun>& theRighting);
+		static TnbHydStatic_EXPORT Standard_Real MaxRightingArmHeel_Port(const std::shared_ptr<HydStatic_StbFun>& theRighting);
 
-		static std::tuple<Standard_Real, Standard_Boolean> StaticalStability(const std::shared_ptr<HydStatic_StbFun>& theRighting, const std::shared_ptr<HydStatic_StbFun>& theHeeling);
+		static TnbHydStatic_EXPORT std::tuple<Standard_Real, Standard_Boolean> StaticalStability(const std::shared_ptr<HydStatic_StbFun>& theRighting, const std::shared_ptr<HydStatic_StbFun>& theHeeling);
 
 
 	};

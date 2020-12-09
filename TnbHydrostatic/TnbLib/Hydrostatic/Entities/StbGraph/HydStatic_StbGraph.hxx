@@ -29,7 +29,7 @@ namespace tnbLib
 
 	protected:
 
-		HydStatic_StbGraph();
+		TnbHydStatic_EXPORT HydStatic_StbGraph();
 
 		
 	public:

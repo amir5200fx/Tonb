@@ -5,6 +5,7 @@
 #include <Marine_VesselParams.hxx>
 #include <Marine_BodiesFwd.hxx>
 #include <Global_Done.hxx>
+#include <HydStatic_Module.hxx>
 
 #include <memory>
 
@@ -84,37 +85,37 @@ namespace tnbLib
 
 			// Calculate Auxiliaries
 
-			void CalcTM();
+			TnbHydStatic_EXPORT void CalcTM();
 
-			void CalcFUW();
+			TnbHydStatic_EXPORT void CalcFUW();
 
-			void CalcAUW();
+			TnbHydStatic_EXPORT void CalcAUW();
 
-			void CalcAWL();
+			TnbHydStatic_EXPORT void CalcAWL();
 
-			void CalcFWL();
+			TnbHydStatic_EXPORT void CalcFWL();
 
 
 			// Calculate Dimensions
 
-			void CalcBWL();
+			TnbHydStatic_EXPORT void CalcBWL();
 
-			void CalcFPP();
+			TnbHydStatic_EXPORT void CalcFPP();
 
-			void CalcAPP(const Standard_Real theAxis);
+			TnbHydStatic_EXPORT void CalcAPP(const Standard_Real theAxis);
 
-			void CalcAPP();
+			TnbHydStatic_EXPORT void CalcAPP();
 
-			void CalcLPP();
+			TnbHydStatic_EXPORT void CalcLPP();
 
-			void CalcMPP();
+			TnbHydStatic_EXPORT void CalcMPP();
 
-			void CalcLWL();
+			TnbHydStatic_EXPORT void CalcLWL();
 
-			void CalcLOS();
+			TnbHydStatic_EXPORT void CalcLOS();
 
 
-			void AllocateMemory();
+			TnbHydStatic_EXPORT void AllocateMemory();
 
 			auto& ChangeParameters()
 			{
@@ -123,9 +124,9 @@ namespace tnbLib
 
 		public:
 
-			Wetted();
+			TnbHydStatic_EXPORT Wetted();
 
-			Wetted
+			TnbHydStatic_EXPORT Wetted
 			(
 				const std::shared_ptr<marineLib::Body_Wetted>& theBody
 			);
@@ -146,14 +147,14 @@ namespace tnbLib
 				return theAppMode_;
 			}
 
-			void Perform(const Standard_Real theRudderAxis = 0);
+			TnbHydStatic_EXPORT void Perform(const Standard_Real theRudderAxis = 0);
 
-			void LoadBody
+			TnbHydStatic_EXPORT void LoadBody
 			(
 				const std::shared_ptr<marineLib::Body_Wetted>& theBody
 			);
 
-			void SetAppMode(const appMode mode = appMode::Auto);
+			TnbHydStatic_EXPORT void SetAppMode(const appMode mode = appMode::Auto);
 		};
 	}
 }

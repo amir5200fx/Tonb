@@ -5,6 +5,7 @@
 #include <Marine_VesselParams.hxx>
 #include <Marine_BodiesFwd.hxx>
 #include <Global_Done.hxx>
+#include <HydStatic_Module.hxx>
 
 #include <memory>
 
@@ -51,16 +52,16 @@ namespace tnbLib
 				return theParameters_;
 			}
 
-			void AllocateMemory();
+			TnbHydStatic_EXPORT void AllocateMemory();
 
-			void CalcDims();
+			TnbHydStatic_EXPORT void CalcDims();
 
 		public:
 
 			Displacer()
 			{}
 
-			Displacer
+			TnbHydStatic_EXPORT Displacer
 			(
 				const std::shared_ptr<marineLib::Body_Displacer>& theBody
 			);
@@ -76,9 +77,9 @@ namespace tnbLib
 				return theParameters_;
 			}
 
-			void Perform();
+			TnbHydStatic_EXPORT void Perform();
 
-			void LoadBody
+			TnbHydStatic_EXPORT void LoadBody
 			(
 				const std::shared_ptr<marineLib::Body_Displacer>& theBody
 			);

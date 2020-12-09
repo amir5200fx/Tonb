@@ -4,6 +4,7 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <HydStatic_Module.hxx>
 
 #include <memory>
 
@@ -20,14 +21,14 @@ namespace tnbLib
 
 	protected:
 
-		HydStatic_Entity();
+		TnbHydStatic_EXPORT HydStatic_Entity();
 
-		HydStatic_Entity
+		TnbHydStatic_EXPORT HydStatic_Entity
 		(
 			const Standard_Integer theIndex
 		);
 
-		HydStatic_Entity
+		TnbHydStatic_EXPORT HydStatic_Entity
 		(
 			const Standard_Integer theIndex,
 			const word& theName
