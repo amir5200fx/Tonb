@@ -401,7 +401,7 @@ void tnbLib::StbGMaker_Creator::ExportAs
 			const auto& maker = x.second;
 
 			auto sail = 
-				std::dynamic_pointer_cast<Marine_SailModel>
+				std::dynamic_pointer_cast<marineLib::Model_Sail>
 				(
 					maker->ExportModel()
 					);

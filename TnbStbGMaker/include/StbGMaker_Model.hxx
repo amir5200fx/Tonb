@@ -11,7 +11,6 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class Marine_SailModel;
 
 	class StbGMaker_Model
 		: public StbGMaker_Entity
@@ -24,7 +23,7 @@ namespace tnbLib
 		std::shared_ptr<marineLib::Model_Hull> theHull_;
 
 		std::vector<std::shared_ptr<marineLib::Model_Tank>> theTanks_;
-		std::vector<std::shared_ptr<Marine_SailModel>> theSails_;
+		std::vector<std::shared_ptr<marineLib::Model_Sail>> theSails_;
 
 
 		//- private functions and operators

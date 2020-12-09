@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <StbGMaker_Module.hxx>
+#include <Entity3d_BoxFwd.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -20,6 +21,7 @@ namespace tnbLib
 	class StbGMaker_Hull;
 	class StbGMaker_IntplSect;
 	class StbGMaker_WP;
+	class StbGMaker_Model;
 	class Marine_CmpSection;
 	class Marine_Body;
 	class Pln_Wire;
@@ -32,6 +34,8 @@ namespace tnbLib
 		static TnbStbGMaker_EXPORT Standard_Real MinX(const Marine_Body& theBody);
 
 		static TnbStbGMaker_EXPORT Standard_Real MaxX(const Marine_Body& theBody);
+
+		static TnbStbGMaker_EXPORT Entity3d_Box BoundingBox(const std::shared_ptr<StbGMaker_Model>& theModel);
 
 		static TnbStbGMaker_EXPORT gp_Pln
 			IntplPln
