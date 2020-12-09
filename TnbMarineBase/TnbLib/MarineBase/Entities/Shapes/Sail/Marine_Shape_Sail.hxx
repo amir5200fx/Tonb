@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _Marine_Model_Sail_Header
-#define _Marine_Model_Sail_Header
+#ifndef _Marine_Shape_Sail_Header
+#define _Marine_Shape_Sail_Header
 
 #include <Marine_Shape.hxx>
 
@@ -70,4 +70,4 @@ namespace tnbLib
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Shape_Sail);
 
-#endif // !_Marine_Model_Sail_Header
+#endif // !_Marine_Shape_Sail_Header
