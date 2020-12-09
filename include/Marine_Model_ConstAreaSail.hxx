@@ -2,7 +2,7 @@
 #ifndef _Marine_Model_ConstAreaSail_Header
 #define _Marine_Model_ConstAreaSail_Header
 
-#include <Marine_AreaSailModel.hxx>
+#include <Marine_Model_AreaSail.hxx>
 
 namespace tnbLib
 {
@@ -11,7 +11,7 @@ namespace tnbLib
 	{
 
 		class Model_ConstAreaSail
-			: public Marine_AreaSailModel
+			: public Model_AreaSail
 		{
 
 			/*Private Data*/
@@ -25,7 +25,7 @@ namespace tnbLib
 			template<class Archive>
 			void serialize(Archive& ar, const unsigned int version)
 			{
-				ar & boost::serialization::base_object<Marine_AreaSailModel>(*this);
+				ar & boost::serialization::base_object<Model_AreaSail>(*this);
 				ar & theArea_;
 				ar & theZbar_;
 			}
