@@ -28,7 +28,7 @@ tnbLib::marineLib::Model_LateralPlnSail::Model_LateralPlnSail
 	const std::shared_ptr<Cad2d_Plane>& thePlane,
 	Standard_Real theZbar
 )
-	: Marine_PlnSailModel(theIndex)
+	: Model_PlnSail(theIndex)
 	, thePlane_(thePlane)
 	, theZbar_(theZbar)
 {
@@ -41,7 +41,7 @@ tnbLib::marineLib::Model_LateralPlnSail::Model_LateralPlnSail
 	std::shared_ptr<Cad2d_Plane>&& thePlane,
 	Standard_Real theZbar
 )
-	: Marine_PlnSailModel(theIndex)
+	: Model_PlnSail(theIndex)
 	, thePlane_(std::move(thePlane))
 	, theZbar_(theZbar)
 {
@@ -55,7 +55,7 @@ tnbLib::marineLib::Model_LateralPlnSail::Model_LateralPlnSail
 	const std::shared_ptr<Cad2d_Plane>& thePlane,
 	Standard_Real theZbar
 )
-	: Marine_PlnSailModel(theIndex, theName)
+	: Model_PlnSail(theIndex, theName)
 	, thePlane_(thePlane)
 	, theZbar_(theZbar)
 {
@@ -69,7 +69,7 @@ tnbLib::marineLib::Model_LateralPlnSail::Model_LateralPlnSail
 	std::shared_ptr<Cad2d_Plane>&& thePlane,
 	Standard_Real theZbar
 )
-	: Marine_PlnSailModel(theIndex, theName)
+	: Model_PlnSail(theIndex, theName)
 	, thePlane_(std::move(thePlane))
 	, theZbar_(theZbar)
 {

@@ -19,7 +19,7 @@ tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
 )
 	: theArea_(theArea)
 	, theZbar_(theZbar)
-	, Marine_AreaSailModel(theIndex)
+	, Model_AreaSail(theIndex)
 {
 	// empty body
 }
@@ -33,7 +33,7 @@ tnbLib::marineLib::Model_ConstAreaSail::Model_ConstAreaSail
 )
 	: theArea_(theArea)
 	, theZbar_(theZbar)
-	, Marine_AreaSailModel(theIndex, theName)
+	, Model_AreaSail(theIndex, theName)
 {
 	// empty body
 }

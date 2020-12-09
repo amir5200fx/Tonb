@@ -21,7 +21,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 	const Standard_Integer theIndex, 
 	const std::shared_ptr<Body_Sail>& theSail
 )
-	: Marine_GeoSailModel(theIndex)
+	: Model_GeoSail(theIndex)
 	, theBody_(theSail)
 {
 }
@@ -31,7 +31,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 	const Standard_Integer theIndex,
 	std::shared_ptr<Body_Sail>&& theSail
 )
-	: Marine_GeoSailModel(theIndex)
+	: Model_GeoSail(theIndex)
 	, theBody_(std::move(theSail))
 {
 }
@@ -42,7 +42,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 	const word & theName, 
 	const std::shared_ptr<Body_Sail>& theSail
 )
-	: Marine_GeoSailModel(theIndex, theName)
+	: Model_GeoSail(theIndex, theName)
 	, theBody_(theSail)
 {
 }
@@ -53,7 +53,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 	const word & theName, 
 	std::shared_ptr<Body_Sail>&& theSail
 )
-	: Marine_GeoSailModel(theIndex, theName)
+	: Model_GeoSail(theIndex, theName)
 	, theBody_(std::move(theSail))
 {
 }

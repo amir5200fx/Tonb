@@ -4,14 +4,14 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_LateralPlnSail)
 {
-	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
+	ar & boost::serialization::base_object<Model_PlnSail>(*this);
 	ar & thePlane_;
 	ar & theZbar_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_LateralPlnSail)
 {
-	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
+	ar & boost::serialization::base_object<Model_PlnSail>(*this);
 	ar & thePlane_;
 	ar & theZbar_;
 }

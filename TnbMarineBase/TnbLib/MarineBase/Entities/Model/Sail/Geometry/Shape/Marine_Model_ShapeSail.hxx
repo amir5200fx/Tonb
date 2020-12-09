@@ -2,7 +2,7 @@
 #ifndef _Marine_Model_ShapeSail_Header
 #define _Marine_Model_ShapeSail_Header
 
-#include <Marine_GeoSailModel.hxx>
+#include <Marine_Model_GeoSail.hxx>
 
 namespace tnbLib
 {
@@ -14,7 +14,7 @@ namespace tnbLib
 		class Body_Sail;
 
 		class Model_ShapeSail
-			: public Marine_GeoSailModel
+			: public Model_GeoSail
 		{
 
 			/*Private Data*/

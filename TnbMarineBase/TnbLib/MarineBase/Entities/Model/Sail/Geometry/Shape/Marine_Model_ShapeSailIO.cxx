@@ -4,13 +4,13 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_ShapeSail)
 {
-	ar & boost::serialization::base_object<Marine_GeoSailModel>(*this);
+	ar & boost::serialization::base_object<Model_GeoSail>(*this);
 	ar & theBody_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_ShapeSail)
 {
-	ar & boost::serialization::base_object<Marine_GeoSailModel>(*this);
+	ar & boost::serialization::base_object<Model_GeoSail>(*this);
 	ar & theBody_;
 }
 

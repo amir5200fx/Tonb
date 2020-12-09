@@ -1,4 +1,4 @@
-#include <Marine_Model_SurfaceSail.hxx>
+#include <Marine_Model_SurfaceSail.hxx> 
 
 tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 (
@@ -21,7 +21,7 @@ tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 	const Standard_Integer theIndex,
 	const TopoDS_Face & theFace
 )
-	: Marine_PlnSailModel(theIndex)
+	: Model_PlnSail(theIndex)
 	, theFace_(theFace)
 {
 }
@@ -31,7 +31,7 @@ tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 	const Standard_Integer theIndex, 
 	TopoDS_Face && theFace
 )
-	: Marine_PlnSailModel(theIndex)
+	: Model_PlnSail(theIndex)
 	, theFace_(std::move(theFace))
 {
 }
@@ -42,7 +42,7 @@ tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 	const word & theName,
 	const TopoDS_Face & theFace
 )
-	: Marine_PlnSailModel(theIndex, theName)
+	: Model_PlnSail(theIndex, theName)
 	, theFace_(theFace)
 {
 }
@@ -53,7 +53,7 @@ tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 	const word & theName,
 	TopoDS_Face && theFace
 )
-	: Marine_PlnSailModel(theIndex, theName)
+	: Model_PlnSail(theIndex, theName)
 	, theFace_(std::move(theFace))
 {
 }

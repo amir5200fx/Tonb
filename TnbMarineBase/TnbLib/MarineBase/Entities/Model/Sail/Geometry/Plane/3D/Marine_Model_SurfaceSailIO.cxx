@@ -5,7 +5,7 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_SurfaceSail)
 {
-	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
+	ar & boost::serialization::base_object<Model_PlnSail>(*this);
 
 	std::stringstream st;
 	BRepTools::Write(theFace_, st);
@@ -16,7 +16,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_SurfaceSail)
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_SurfaceSail)
 {
-	ar & boost::serialization::base_object<Marine_PlnSailModel>(*this);
+	ar & boost::serialization::base_object<Model_PlnSail>(*this);
 
 	std::string s;
 	ar & s;

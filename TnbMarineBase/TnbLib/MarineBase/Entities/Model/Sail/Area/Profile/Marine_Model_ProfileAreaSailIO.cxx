@@ -4,14 +4,14 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Model_ProfileAreaSail)
 {
-	ar & boost::serialization::base_object<Marine_AreaSailModel>(*this);
+	ar & boost::serialization::base_object<Model_AreaSail>(*this);
 	ar & theArea_;
 	ar & theZbar_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Model_ProfileAreaSail)
 {
-	ar & boost::serialization::base_object<Marine_AreaSailModel>(*this);
+	ar & boost::serialization::base_object<Model_AreaSail>(*this);
 	ar & theArea_;
 	ar & theZbar_;
 }

@@ -3,7 +3,7 @@
 #define _Marine_Model_ProfileAreaSail_Header
 
 #include <Standard_Handle.hxx>
-#include <Marine_AreaSailModel.hxx>
+#include <Marine_Model_AreaSail.hxx>
 
 namespace tnbLib
 {
@@ -15,7 +15,7 @@ namespace tnbLib
 	{
 
 		class Model_ProfileAreaSail
-			: public Marine_AreaSailModel
+			: public Model_AreaSail
 		{
 
 			/*Private Data*/

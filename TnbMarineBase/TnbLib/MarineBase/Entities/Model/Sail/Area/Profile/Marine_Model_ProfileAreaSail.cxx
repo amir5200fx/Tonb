@@ -31,7 +31,7 @@ tnbLib::marineLib::Model_ProfileAreaSail::Model_ProfileAreaSail
 )
 	: theArea_(theArea)
 	, theZbar_(theZbar)
-	, Marine_AreaSailModel(theIndex, theName)
+	, Model_AreaSail(theIndex, theName)
 {
 	// empty body
 }
@@ -45,7 +45,7 @@ tnbLib::marineLib::Model_ProfileAreaSail::Model_ProfileAreaSail
 )
 	: theArea_(std::move(theArea))
 	, theZbar_(std::move(theZbar))
-	, Marine_AreaSailModel(theIndex, theName)
+	, Model_AreaSail(theIndex, theName)
 {
 	// empty body
 }
