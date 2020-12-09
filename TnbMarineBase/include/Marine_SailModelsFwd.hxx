@@ -5,10 +5,13 @@
 namespace tnbLib
 {
 
-	class Marine_SailModel;
-
 	namespace marineLib
 	{
+		class Model_Sail;
+		class Model_GeoSail;
+		class Model_PlnSail;
+		class Model_AreaSail;
+
 
 		class Model_ConstAreaSail;
 		class Model_ProfileAreaSail;

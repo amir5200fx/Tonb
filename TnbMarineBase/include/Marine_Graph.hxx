@@ -30,20 +30,20 @@ namespace tnbLib
 
 	public:
 
-		Marine_Graph();
+		TnbMarine_EXPORT Marine_Graph();
 
-		Marine_Graph
+		TnbMarine_EXPORT Marine_Graph
 		(
 			const Standard_Integer theIndex
 		);
 
-		Marine_Graph
+		TnbMarine_EXPORT Marine_Graph
 		(
 			const Standard_Integer theIndex,
 			const word& theName
 		);
 
-		Standard_Integer NbCurves() const;
+		TnbMarine_EXPORT Standard_Integer NbCurves() const;
 
 		const auto& X() const
 		{

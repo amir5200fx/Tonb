@@ -8,6 +8,8 @@
 #include <Marine_BodyType.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Marine_Module.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 #include <memory>
 #include <vector>
@@ -101,9 +103,15 @@ namespace tnbLib
 
 		static TnbMarine_EXPORT void WaterSectionOnBody(const std::shared_ptr<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>& theBody, const std::shared_ptr<Marine_WaterDomain>& theDomain);
 
-		static TnbMarine_EXPORT void Heel(const std::shared_ptr<Marine_Body>& theBody, const gp_Ax1& theAx, const Standard_Real theAngle);
+		static void Heel(const std::shared_ptr<Marine_Body>& theBody, const gp_Ax1& theAx, const Standard_Real theAngle)
+		{
+			NotImplemented;
+		}
 
-		static TnbMarine_EXPORT void Heel(const std::shared_ptr<Marine_Body>& theBody, const gp_Ax2d& theAx);
+		static void Heel(const std::shared_ptr<Marine_Body>& theBody, const gp_Ax2d& theAx)
+		{
+			NotImplemented;
+		}
 
 		static TnbMarine_EXPORT void CheckTypeConsistency(const Marine_Body& theBody);
 

@@ -2,7 +2,7 @@
 #ifndef _Marine_Model_SurfaceSail_Header
 #define _Marine_Model_SurfaceSail_Header
 
-#include <Marine_PlnSailModel.hxx>
+#include <Marine_Model_PlnSail.hxx>
 #include <TopoDS_Face.hxx>
 
 namespace tnbLib
@@ -12,7 +12,7 @@ namespace tnbLib
 	{
 
 		class Model_SurfaceSail
-			: public Marine_PlnSailModel
+			: public Model_PlnSail
 		{
 
 			/*Private Data*/

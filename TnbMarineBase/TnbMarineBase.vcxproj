@@ -65,14 +65,14 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Marine_ModelsFwd.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Marine_ModelType.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Const\Marine_Model_ConstAreaSail.hxx" />
-    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_AreaSailModel.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_Model_AreaSail.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Profile\Marine_Model_ProfileAreaSail.hxx" />
-    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Marine_GeoSailModel.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Marine_Model_GeoSail.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\3D\Marine_Model_SurfaceSail.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Lateral\Marine_Model_LateralPlnSail.hxx" />
-    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Marine_PlnSailModel.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Marine_Model_PlnSail.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSail.hxx" />
-    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModel.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_Model_Sail.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModels.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModelsFwd.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModelType.hxx" />
@@ -277,7 +277,7 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Hull\Marine_Model_HullIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Const\Marine_Model_ConstAreaSail.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Const\Marine_Model_ConstAreaSailIO.cxx" />
-    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_AreaSailModel.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_Model_AreaSail.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Profile\Marine_Model_ProfileAreaSail.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Profile\Marine_Model_ProfileAreaSailIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\3D\Marine_Model_SurfaceSail.cxx" />
@@ -286,7 +286,7 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Lateral\Marine_Model_LateralPlnSailIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSail.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSailIO.cxx" />
-    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_SailModel.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Marine_Model_Sail.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Tank\Marine_Model_Tank.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Tank\Marine_Model_TankIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\MultLevWaterDomain\Marine_MultLevWaterDomainIO.cxx" />

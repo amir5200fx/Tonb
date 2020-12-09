@@ -2,7 +2,7 @@
 #ifndef _Marine_Model_LateralPlnSail_Header
 #define _Marine_Model_LateralPlnSail_Header
 
-#include <Marine_PlnSailModel.hxx>
+#include <Marine_Model_PlnSail.hxx>
 
 namespace tnbLib
 {
@@ -14,7 +14,7 @@ namespace tnbLib
 	{
 
 		class Model_LateralPlnSail
-			: public Marine_PlnSailModel
+			: public Model_PlnSail
 		{
 
 			/*Private Data*/
