@@ -3,21 +3,20 @@
 #define _HydStatic_Model_Header
 
 #include <HydStatic_Entity.hxx>
+#include <Marine_BodiesFwd.hxx>
 
 #include <map>
 
 namespace tnbLib
 {
 
-	namespace hydStcLib
-	{
-		class Model_Hull;
-		class Model_Sail;
-		class Model_Tank;
-		class Model_Mass;
-		class Model_Light;
-		class Model_Moment;
-	}
+	// Forward Declarations
+	class StbGMaker_Model;
+	class Marine_Domain;
+	class Marine_BaseLine;
+	class Marine_Wave;
+	class Marine_Water;
+	class HydStatic_FloatBody;
 
 	class HydStatic_Model
 		: public HydStatic_Entity
@@ -25,48 +24,81 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<hydStcLib::Model_Hull> theHull_;
-		
+		std::shared_ptr<StbGMaker_Model> theStbModel_;
+		std::shared_ptr<Marine_Wave> theWave_;
 
-		std::map<Standard_Integer, std::shared_ptr<hydStcLib::Model_Tank>> theTanks_;
-		std::map<Standard_Integer, std::shared_ptr<hydStcLib::Model_Mass>> theMasses_;
-		std::map<Standard_Integer, std::shared_ptr<hydStcLib::Model_Moment>> theMoments_;
 
-		std::shared_ptr<hydStcLib::Model_Light> theLight_;
+		std::shared_ptr<Marine_Domain> theDomain_;
+		std::shared_ptr<Marine_Water> theWater_;
+
+		std::shared_ptr<HydStatic_FloatBody> theFloatBody_;
+
+
+		TnbHydStatic_EXPORT void CalcDomain();
+
+		TnbHydStatic_EXPORT void CalcWater();
+
+		TnbHydStatic_EXPORT void CalcFloatBody();
+
+
+		static TnbHydStatic_EXPORT std::shared_ptr<marineLib::Body_Displacer> RetrieveDisplacer(const std::shared_ptr<StbGMaker_Model>& theModel, const char* name);
 
 	public:
 
-		HydStatic_Model();
+		static TnbHydStatic_EXPORT unsigned short verbose;
 
-		HydStatic_Model(const Standard_Integer theIndex);
+		HydStatic_Model()
+		{}
 
-		HydStatic_Model(const Standard_Integer theIndex, const word& theName);
+		TnbHydStatic_EXPORT HydStatic_Model
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		);
 
 
-		const auto& Hull() const
+		//- public functions and operators
+
+		const auto& StbModel() const
 		{
-			return theHull_;
+			return theStbModel_;
 		}
 
-		const auto& Light() const
+		const auto& Wave() const
 		{
-			return theLight_;
+			return theWave_;
 		}
 
-		const auto& Tanks() const
+		const auto& Domain() const
 		{
-			return theTanks_;
+			return theDomain_;
 		}
 
-		const auto& Masses() const
+		const auto& Water() const
 		{
-			return theMasses_;
+			return theWater_;
 		}
 
-		const auto& Moments() const
+		const auto& FloatBody() const
 		{
-			return theMoments_;
+			return theFloatBody_;
 		}
+
+		TnbHydStatic_EXPORT const Marine_BaseLine& BaseLine() const;
+
+		TnbHydStatic_EXPORT void Perform();
+
+		void LoadModel(const std::shared_ptr<StbGMaker_Model>& theModel)
+		{
+			theStbModel_ = theModel;
+		}
+
+		void LoadWave(const std::shared_ptr<Marine_Wave>& theWave)
+		{
+			theWave_ = theWave;
+		}
+
+
 	};
 }
 
