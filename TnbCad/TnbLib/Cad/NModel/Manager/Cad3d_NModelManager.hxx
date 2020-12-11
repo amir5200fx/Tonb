@@ -5,6 +5,7 @@
 #include <NModel_VertexManager.hxx>
 #include <NModel_SegmentManager.hxx>
 #include <NModel_SurfaceManager.hxx>
+#include <Cad_Module.hxx>
 
 namespace tnbLib
 {
@@ -41,11 +42,11 @@ namespace tnbLib
 
 	public:
 
-		Standard_Integer NbCorners() const;
+		TnbCad_EXPORT Standard_Integer NbCorners() const;
 
-		Standard_Integer NbSegments() const;
+		TnbCad_EXPORT Standard_Integer NbSegments() const;
 
-		Standard_Integer NbFaces() const;
+		TnbCad_EXPORT Standard_Integer NbFaces() const;
 
 		const auto& Corners() const
 		{
@@ -62,26 +63,26 @@ namespace tnbLib
 			return theSurfaces_;
 		}
 
-		std::vector<std::shared_ptr<NModel_Vertex>>
+		TnbCad_EXPORT std::vector<std::shared_ptr<NModel_Vertex>>
 			RetrieveCorners() const;
 
-		std::vector<std::shared_ptr<NModel_Segment>>
+		TnbCad_EXPORT std::vector<std::shared_ptr<NModel_Segment>>
 			RetrieveSegments() const;
 
-		std::vector<std::shared_ptr<NModel_Surface>>
+		TnbCad_EXPORT std::vector<std::shared_ptr<NModel_Surface>>
 			RetrieveFaces() const;
 
-		void RetrieveCornersTo
+		TnbCad_EXPORT void RetrieveCornersTo
 		(
 			std::vector<std::shared_ptr<NModel_Vertex>>& theVertices
 		) const;
 
-		void RetrieveSegmentsTo
+		TnbCad_EXPORT void RetrieveSegmentsTo
 		(
 			std::vector<std::shared_ptr<NModel_Segment>>& theEdges
 		) const;
 
-		void RetrieveFacesTo
+		TnbCad_EXPORT void RetrieveFacesTo
 		(
 			std::vector<std::shared_ptr<NModel_Surface>>& theSurfaces
 		) const;

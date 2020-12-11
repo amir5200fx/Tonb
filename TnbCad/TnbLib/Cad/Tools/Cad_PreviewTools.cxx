@@ -1,12 +1,18 @@
 #include <Cad_PreviewTools.hxx>
 
 #include <Global_Macros.hxx>
+#include <Entity3d_Box.hxx>
 #include <Entity3d_Polygon.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Geo_Tools.hxx>
+#include <Cad_Tools.hxx>
+#include <Cad_ShapeTools.hxx>
+#include <Cad_FastDiscrete.hxx>
+#include <FastDiscrete_Params.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <Poly_Triangulation.hxx>
 #include <Geom_BoundedCurve.hxx>
 #include <Geom_Surface.hxx>
 #include <Geom_BSplineSurface.hxx>
@@ -243,4 +249,26 @@ tnbLib::Cad_PreviewTools::PreviewCurve
 		pts.push_back(std::move(pt));
 	}
 	return std::move(ply);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Triangulation> 
+tnbLib::Cad_PreviewTools::Box
+(
+	const Entity3d_Box & b
+)
+{
+	auto shape = Cad_ShapeTools::Box(b.P0(), b.P1());
+
+	FastDiscrete_Params inf;
+	inf.Deflection = b.Diameter()*1.0E-2;
+
+	Cad_FastDiscrete::Triangulation(shape, inf);
+
+	auto polyList = Cad_Tools::RetrieveTriangulation(shape);
+	auto merged = std::make_shared<Entity3d_Triangulation>();
+	for (const auto& x : polyList)
+	{
+		merged->Add(*Cad_Tools::Triangulation(*x));
+	}
+	return std::move(merged);
 }

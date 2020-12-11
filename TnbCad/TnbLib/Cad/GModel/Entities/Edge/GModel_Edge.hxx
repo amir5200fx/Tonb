@@ -22,14 +22,14 @@ namespace tnbLib
 
 	public:
 
-		GModel_Edge
+		TnbCad_EXPORT GModel_Edge
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<GModel_ParaCurve>& thePar,
 			const std::shared_ptr<GModel_Curve>& theCurve
 		);
 
-		GModel_Edge
+		TnbCad_EXPORT GModel_Edge
 		(
 			const Standard_Integer theIndex, 
 			const word& theName,

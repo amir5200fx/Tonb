@@ -5,6 +5,6 @@
 namespace tnbLib
 {
 
-	std::shared_ptr<FastDiscrete_Params> sysLib::gl_fast_discrete_parameters =
+	TnbCad_EXPORT std::shared_ptr<FastDiscrete_Params> sysLib::gl_fast_discrete_parameters =
 		std::make_shared<FastDiscrete_Params>();
 }

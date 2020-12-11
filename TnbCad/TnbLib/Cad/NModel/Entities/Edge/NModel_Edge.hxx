@@ -32,7 +32,7 @@ namespace tnbLib
 
 	public:
 
-		NModel_Edge
+		TnbCad_EXPORT NModel_Edge
 		(
 			const std::shared_ptr<NModel_Vertex>& theVtx0,
 			const std::shared_ptr<NModel_Vertex>& theVtx1,
@@ -41,14 +41,14 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Edge
+		TnbCad_EXPORT NModel_Edge
 		(
 			const std::shared_ptr<NModel_Curve>& theCurve,
 			const std::shared_ptr<NModel_ParaCurve>& theParaCurve,
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Edge
+		TnbCad_EXPORT NModel_Edge
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<NModel_Vertex>& theVtx0,
@@ -58,7 +58,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Edge
+		TnbCad_EXPORT NModel_Edge
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<NModel_Curve>& theCurve,
@@ -66,7 +66,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Edge
+		TnbCad_EXPORT NModel_Edge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -77,7 +77,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Edge
+		TnbCad_EXPORT NModel_Edge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

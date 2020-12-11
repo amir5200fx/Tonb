@@ -40,21 +40,21 @@ namespace tnbLib
 
 		//- Private functions and operators
 
-		Entity2d_Box CalcParametricBoundingBox() const;
+		TnbCad_EXPORT Entity2d_Box CalcParametricBoundingBox() const;
 
-		Entity3d_Box CalcBoundingBox() const;
+		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;
 
 
 	public:
 
-		TModel_Surface
+		TnbCad_EXPORT TModel_Surface
 		(
 			const Handle(Geom_Surface)& theGeometry, 
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
 
-		TModel_Surface
+		TnbCad_EXPORT TModel_Surface
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom_Surface)& theGeometry,
@@ -62,7 +62,7 @@ namespace tnbLib
 			const inner& theInner = nullptr
 		);
 
-		TModel_Surface
+		TnbCad_EXPORT TModel_Surface
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -71,11 +71,11 @@ namespace tnbLib
 			const inner& theInner = nullptr
 		);
 
-		Standard_Integer NbHoles() const;
+		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
-		Standard_Boolean HasHole() const;
+		TnbCad_EXPORT Standard_Boolean HasHole() const;
 
-		Standard_Boolean IsClamped() const;
+		TnbCad_EXPORT Standard_Boolean IsClamped() const;
 
 		const auto& Outer() const
 		{
@@ -97,15 +97,15 @@ namespace tnbLib
 			return theParaBoundingBox_;
 		}
 
-		std::vector<std::shared_ptr<TModel_Edge>> 
+		TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>>
 			RetrieveEdges() const;
 
-		Entity2d_Metric1 MetricAt
+		TnbCad_EXPORT Entity2d_Metric1 MetricAt
 			(
 				const Pnt2d& theCoord
 			) const;
 
-		Pnt3d Value
+		TnbCad_EXPORT Pnt3d Value
 		(
 			const Pnt2d& theCoord
 		) const;

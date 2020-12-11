@@ -256,6 +256,9 @@
     <Filter Include="TnbLib\Cad\Scripts">
       <UniqueIdentifier>{7c7284fa-669a-41ba-87fd-9ba0337aafc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\module">
+      <UniqueIdentifier>{2b4d09d8-86bf-40d3-98a5-09330c4aad4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -516,6 +519,9 @@
     <ClInclude Include="TnbLib\Cad\Scripts\Cad_Scripts.hxx">
       <Filter>TnbLib\Cad\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\module\Cad_Module.hxx">
+      <Filter>TnbLib\Cad\module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -685,6 +691,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Scripts\Cad_Scripts.cxx">
       <Filter>TnbLib\Cad\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Entity\GModel_Entity.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\NModel\Entities\Entity\NModel_Entity.cxx">
+      <Filter>TnbLib\Cad\NModel\Entities\Entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #define _Cad_ShapeTools_Header
 
 #include <Pnt3d.hxx>
+#include <Cad_Module.hxx>
 
 class TopoDS_Shape;
 class gp_Ax2;
@@ -15,14 +16,14 @@ namespace tnbLib
 
 	public:
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Box
 			(
 				const Pnt3d& theP0, 
 				const Pnt3d& theP1
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Box
 			(
 				const Pnt3d& theP0,
@@ -31,7 +32,7 @@ namespace tnbLib
 				const Standard_Real dz
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Box
 			(
 				const gp_Ax2& theAx, 
@@ -40,7 +41,7 @@ namespace tnbLib
 				const Standard_Real dz
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Cylinder
 			(
 				const gp_Ax2& theAx,
@@ -48,7 +49,7 @@ namespace tnbLib
 				const Standard_Real theH
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Cylinder
 			(
 				const gp_Ax2& theAx,
@@ -57,21 +58,21 @@ namespace tnbLib
 				const Standard_Real theAngle
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Sphere
 			(
 				const Pnt3d& theC, 
 				const Standard_Real theR
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Sphere
 			(
 				const gp_Ax2& theAx,
 				const Standard_Real theR
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Sphere
 			(
 				const gp_Ax2& theAx,
@@ -79,7 +80,7 @@ namespace tnbLib
 				const Standard_Real theAngle1
 			);
 
-		static TopoDS_Shape 
+		static TnbCad_EXPORT TopoDS_Shape
 			Sphere
 			(
 				const gp_Ax2& theAx,
@@ -88,7 +89,7 @@ namespace tnbLib
 				const Standard_Real theAngle2
 			);
 
-		static TopoDS_Shape
+		static TnbCad_EXPORT TopoDS_Shape
 			Sphere
 			(
 				const gp_Ax2& theAx, 

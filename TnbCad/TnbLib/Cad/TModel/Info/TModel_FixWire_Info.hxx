@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Cad_Module.hxx>
 
 namespace tnbLib
 {
@@ -21,10 +22,10 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_PRECISION;
-		static const Standard_Real DEFAULT_MAX_TOLERANCE;
-		static const Standard_Real DEFAULT_MIN_TOLERANCE;
-		static const Standard_Real DEFAULT_TOLERANCE;
+		static TnbCad_EXPORT const Standard_Real DEFAULT_PRECISION;
+		static TnbCad_EXPORT const Standard_Real DEFAULT_MAX_TOLERANCE;
+		static TnbCad_EXPORT const Standard_Real DEFAULT_MIN_TOLERANCE;
+		static TnbCad_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 
 		TModel_FixWire_Info()
 			: thePrecision_(DEFAULT_PRECISION)

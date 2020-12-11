@@ -26,13 +26,13 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
-		void CheckBoundary
+		TnbCad_EXPORT void CheckBoundary
 		(
 			const Standard_Real x,
 			const char* theName
 		) const;
 
-		static void CheckBounded
+		static TnbCad_EXPORT void CheckBounded
 		(
 			const Handle(Geom_Curve)& theCurve, 
 			const char* theName
@@ -40,24 +40,24 @@ namespace tnbLib
 
 	public:
 
-		TModel_Curve
+		TnbCad_EXPORT TModel_Curve
 		(
 			const Handle(Geom_Curve) theGeometry
 		);
 
-		Standard_Real FirstParameter() const;
+		TnbCad_EXPORT Standard_Real FirstParameter() const;
 
-		Standard_Real LastParameter() const;
+		TnbCad_EXPORT Standard_Real LastParameter() const;
 
-		Pnt3d Value(const Standard_Real x) const;
+		TnbCad_EXPORT Pnt3d Value(const Standard_Real x) const;
 
-		Pnt3d Value_normParam(const Standard_Real x) const;
+		TnbCad_EXPORT Pnt3d Value_normParam(const Standard_Real x) const;
 
 		Pnt3d FirstCoord() const;
 
 		Pnt3d LastCoord() const;
 
-		Entity3d_Box CalcBoundingBox() const;
+		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;
 
 		const auto& Geometry() const
 		{

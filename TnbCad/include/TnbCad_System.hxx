@@ -2,13 +2,15 @@
 #ifndef _TnbCad_System_Header
 #define _TnbCad_System_Header
 
+#include <Cad_Module.hxx>
+
 namespace tnbLib
 {
 
 	namespace sysLib
 	{
 
-		void init_TnbCad();
+		TnbCad_EXPORT void init_TnbCad();
 	}
 }
 
