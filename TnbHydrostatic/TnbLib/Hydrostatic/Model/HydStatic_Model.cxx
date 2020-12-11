@@ -6,6 +6,7 @@
 #include <Marine_BodyTools.hxx>
 #include <Marine_WaterDomain.hxx>
 #include <Marine_WaterLib.hxx>
+#include <Marine_FlatWave.hxx>
 #include <StbGMaker_Model.hxx>
 #include <StbGMaker_Tools.hxx>
 #include <HydStatic_FloatBody.hxx>
@@ -22,22 +23,6 @@ tnbLib::HydStatic_Model::HydStatic_Model
 	: HydStatic_Entity(theIndex, theName)
 {
 	// empty body
-}
-
-void tnbLib::HydStatic_Model::CalcDomain()
-{
-	theDomain_ = std::make_shared<Marine_Domain>(0, "domain");
-	Debug_Null_Pointer(theDomain_);
-
-	const auto& model = StbModel();
-	if (NOT model->Hull())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the model has no hull!" << endl
-			<< abort(FatalError);
-	}
-	auto b = StbGMaker_Tools::BoundingBox(model);
-	theDomain_->Perform(b);
 }
 
 void tnbLib::HydStatic_Model::CalcWater()
@@ -123,6 +108,34 @@ void tnbLib::HydStatic_Model::CalcFloatBody()
 	theFloatBody_ = std::move(floatBody);
 }
 
+std::shared_ptr<tnbLib::marineLib::Body_Displacer> 
+tnbLib::HydStatic_Model::RetrieveDisplacer
+(
+	const std::shared_ptr<StbGMaker_Model>& theModel, 
+	const char * name
+)
+{
+	const auto& hull = theModel->Hull();
+	if (NOT hull)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the model has no hull!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& body = hull->Body();
+	if (NOT body)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there is no body in the hull!" << endl
+			<< abort(FatalError);
+	}
+
+	auto displacer = 
+		std::dynamic_pointer_cast<marineLib::Body_Displacer>(body);
+	return std::move(displacer);
+}
+
 const tnbLib::Marine_BaseLine & 
 tnbLib::HydStatic_Model::BaseLine() const
 {
@@ -168,9 +181,6 @@ void tnbLib::HydStatic_Model::Perform()
 			<< abort(FatalError);
 	}
 
-	if (verbose) Info << " - calculating the domain..." << endl;
-	CalcDomain();
-
 	if (verbose) Info << " - calculating the water..." << endl;
 	CalcWater();
 
@@ -183,4 +193,6 @@ void tnbLib::HydStatic_Model::Perform()
 		Info << "******* End of the Constructing Hydrostatic Model ********" << endl;
 		Info << endl;
 	}
+
+	Change_IsDone() = Standard_True;
 }

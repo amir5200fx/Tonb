@@ -23,6 +23,7 @@
 
 tnbLib::HydStatic_Bonjean::HydStatic_Bonjean()
 {
+	//- empty body
 }
 
 tnbLib::HydStatic_Bonjean::HydStatic_Bonjean
@@ -35,6 +36,7 @@ tnbLib::HydStatic_Bonjean::HydStatic_Bonjean
 	, theBody_(theBody)
 	, theWaters_(theWaters)
 {
+	//- empty body
 }
 
 namespace tnbLib

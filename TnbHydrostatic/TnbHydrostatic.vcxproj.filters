@@ -10,41 +10,14 @@
     <Filter Include="TnbLib\Hydrostatic\Environment">
       <UniqueIdentifier>{5c2a4154-8913-46f0-8dff-6d443e95c8f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel">
-      <UniqueIdentifier>{37dbb901-8be5-495e-b7c2-e4dd1ea00fa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities">
-      <UniqueIdentifier>{73e66285-413f-492c-adf4-5c5d0f2a6fcd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Entity">
-      <UniqueIdentifier>{92d3c29b-ada5-4017-a424-bcb2943a9069}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\FormDim">
-      <UniqueIdentifier>{5e42ddb1-8d4a-4bec-9892-aaf6f77f3e01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\FormCoeff">
-      <UniqueIdentifier>{3c570c40-d828-4792-bbf5-be9bfcad279b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Hydrostatic\Tools">
       <UniqueIdentifier>{8f53222d-669e-4d72-abaf-43354cf8770b}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Hydrostatic\Physics">
       <UniqueIdentifier>{a174dc37-8f48-4d26-8265-c530f837ea75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Hydrostatic\PhysicsModel">
-      <UniqueIdentifier>{f05ad48a-155e-437a-ab9d-98ed929317f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull">
-      <UniqueIdentifier>{62f571e2-12a4-4d8f-a18f-c9a291ad8ac7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Hydrostatic\CrossCurves">
       <UniqueIdentifier>{34bb7556-e536-4243-bbf6-24bf69e71694}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\PhysicsModel\FormDim">
-      <UniqueIdentifier>{4cee6fda-1063-4cba-a53a-a171ee2c0a7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\PhysicsModel\FormCoeff">
-      <UniqueIdentifier>{cf5382e5-40f7-424c-87d8-661857f71026}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Hydrostatic\BonjeanCurves">
       <UniqueIdentifier>{1ca49678-181f-48fc-a06a-3ab6ac0be17d}</UniqueIdentifier>
@@ -60,9 +33,6 @@
     </Filter>
     <Filter Include="TnbLib\Hydrostatic\FormCoeff">
       <UniqueIdentifier>{7227de4d-e767-4483-8904-d359b0e08d46}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Vessel\Entities\Tank">
-      <UniqueIdentifier>{65ed9781-6021-455f-a4a4-c14b3b0fc4d6}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Hydrostatic\WaterPlane">
       <UniqueIdentifier>{3d2dbd24-3a2a-4cb0-b344-842446873e77}</UniqueIdentifier>
@@ -147,36 +117,6 @@
     </Filter>
     <Filter Include="TnbLib\Hydrostatic\Model">
       <UniqueIdentifier>{e0452df6-058f-4615-8e3a-b7b50577e06c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities">
-      <UniqueIdentifier>{09e06911-3ab6-4615-b335-358ca71f6ef5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Entity">
-      <UniqueIdentifier>{153315cf-94e9-44bf-9797-0799b52819ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Tank">
-      <UniqueIdentifier>{ef620fd8-f3ea-4155-bf69-945291797dfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Hull">
-      <UniqueIdentifier>{98bf9a8c-cf99-49c7-8dd2-1189676590dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Moment">
-      <UniqueIdentifier>{b28a6d35-7908-489c-989c-094e30124c72}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Light">
-      <UniqueIdentifier>{55aada35-7722-4558-b477-58fe13d4487a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\CG">
-      <UniqueIdentifier>{4cc82d25-ad29-4bb0-ae95-f8fb479f2cec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Sail">
-      <UniqueIdentifier>{6a0cfaef-ed4d-44b6-8308-90cea1a9cdfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Volume">
-      <UniqueIdentifier>{527467c6-e839-437a-b7e2-7541e962fc7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Hydrostatic\Model\Entities\Mass">
-      <UniqueIdentifier>{c31dc0b4-a917-4012-b230-e69791810e06}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Hydrostatic\Entities\GzQ">
       <UniqueIdentifier>{df8fb90c-f3e1-452f-937c-d7b3cff93b85}</UniqueIdentifier>
@@ -315,24 +255,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.hxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\FormDim\Vessel_FormDim.hxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\FormDim</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\FormCoeff\Vessel_FormCoeff.hxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\FormCoeff</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\HydroStatic_PhysicsModel.hxx">
-      <Filter>TnbLib\Hydrostatic\PhysicsModel</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull\HsPhysModel_MonoHull.hxx">
-      <Filter>TnbLib\Hydrostatic\PhysicsModel\MonoHull</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Hydrostatic\Vessel\HydroStatic_Vessel.hxx">
-      <Filter>TnbLib\Hydrostatic\Vessel</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
       <Filter>TnbLib\Hydrostatic\BonjeanCurves</Filter>
     </ClInclude>
@@ -578,15 +500,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TnbLib\Hydrostatic\Vessel\Entities\Entity\HsVessel_Entity.cxx">
-      <Filter>TnbLib\Hydrostatic\Vessel\Entities\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\PhysicsModel\MonoHull\HsPhysModel_MonoHull.cxx">
-      <Filter>TnbLib\Hydrostatic\PhysicsModel\MonoHull</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Vessel\HydroStatic_Vessel.cxx">
-      <Filter>TnbLib\Hydrostatic\Vessel</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
       <Filter>TnbLib\Hydrostatic\BonjeanCurves</Filter>
     </ClCompile>
@@ -717,6 +630,18 @@
       <Filter>TnbLib\Hydrostatic\Model</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\FloatBody\HydStatic_FloatBody.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FloatBody</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\EqQ\UnStable\HydStatic_UnEqQ.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\EqQ\UnStable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\EqQ\Stable\HydStatic_StEqQ.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\EqQ\Stable</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Model\HydStatic_ModelIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\FloatBody\HydStatic_FloatBodyIO.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\FloatBody</Filter>
     </ClCompile>
   </ItemGroup>
