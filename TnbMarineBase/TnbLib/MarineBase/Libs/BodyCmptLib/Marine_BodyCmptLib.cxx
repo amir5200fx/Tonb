@@ -72,6 +72,46 @@ tnbLib::Marine_BodyCmptLib::LeverArm
 tnbLib::xSectParList 
 tnbLib::Marine_BodyCmptLib::CrossCurve
 (
+	const std::shared_ptr<Marine_Body>& theBody,
+	const Marine_MultLevWaterDomain & theWaters,
+	const Standard_Real x0, 
+	const gp_Ax1 & theK, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (theBody->IsHull())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Displacer>(theBody);
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "the body type is not displacer" << endl
+				<< abort(FatalError);
+		}
+
+		auto curves = CrossCurve(*body, theWaters, x0, theK, theInfo);
+		return std::move(curves);
+	}
+	else if (theBody->IsTank())
+	{
+		auto body = std::dynamic_pointer_cast<marineLib::Body_Tank>(theBody);
+		Debug_Null_Pointer(body);
+
+		auto curves = CrossCurve(*body, theWaters, x0, theK, theInfo);
+		return std::move(curves);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body type has been detected: Sail" << endl
+			<< abort(FatalError);
+		return xSectParList();
+	}
+}
+
+tnbLib::xSectParList 
+tnbLib::Marine_BodyCmptLib::CrossCurve
+(
 	const marineLib::Body_Displacer & theBody,
 	const Marine_MultLevWaterDomain & theWaters,
 	const Standard_Real x0,

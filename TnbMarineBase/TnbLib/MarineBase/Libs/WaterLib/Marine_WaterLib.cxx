@@ -133,6 +133,7 @@ tnbLib::Marine_WaterLib::StillWaterDomain
 		FatalErrorIn(FunctionSIG)
 			<< "invalid body type has been detected: Sail" << endl
 			<< abort(FatalError);
+		return nullptr;
 	}
 }
 
@@ -231,6 +232,7 @@ tnbLib::Marine_WaterLib::MultiLevelsStillWaterDomain
 		FatalErrorIn(FunctionSIG)
 			<< "invalid body type has been detected: Sail" << endl
 			<< abort(FatalError);
+		return nullptr;
 	}
 }
 
@@ -320,6 +322,7 @@ tnbLib::Marine_WaterLib::WaterDomain
 		FatalErrorIn(FunctionSIG)
 			<< "invalid body type has been detected: Sail" << endl
 			<< abort(FatalError);
+		return nullptr;
 	}
 }
 

@@ -1,0 +1,7 @@
+#include <Marine_EnvtParams.hxx>
+
+MARINE_ENVTPARAM_IMP(Density)
+MARINE_ENVTPARAM_IMP(Froude)
+MARINE_ENVTPARAM_IMP(Gravity)
+MARINE_ENVTPARAM_IMP(Velocity)
+MARINE_ENVTPARAM_IMP(Viscosity)

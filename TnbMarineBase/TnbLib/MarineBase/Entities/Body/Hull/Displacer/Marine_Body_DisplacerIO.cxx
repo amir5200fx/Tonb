@@ -29,9 +29,9 @@ namespace tnbLib
 				TNB_oARCH_TYPE& ar, 
 				const unsigned int file_vertion
 				)
-		{
-			ar & boost::serialization::base_object<Body_Displacer>(*this);
-			ar & theShape_;
+		{			
+			ar & boost::serialization::base_object<Body_Displacer>(*this);		
+			ar & theShape_;			
 		}
 	}
 }

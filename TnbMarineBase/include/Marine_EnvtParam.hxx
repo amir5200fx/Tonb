@@ -1,13 +1,13 @@
 #pragma once
-#ifndef _Marine_VesselParam_Header
-#define _Marine_VesselParam_Header
+#ifndef _Marine_EnvtParam_Header
+#define _Marine_EnvtParam_Header
 
 #include <Marine_DimensionedParam.hxx>
 
 namespace tnbLib
 {
 
-	class Marine_VesselParam
+	class Marine_EnvtParam
 		: public Marine_DimensionedParam<Standard_Real>
 	{
 
@@ -28,13 +28,13 @@ namespace tnbLib
 
 		//- default constructor
 
-		Marine_VesselParam()
+		Marine_EnvtParam()
 		{}
 
 
 		//- constructor
 
-		Marine_VesselParam
+		Marine_EnvtParam
 		(
 			const word& theName,
 			const dimensionSet& theDim,
@@ -46,9 +46,7 @@ namespace tnbLib
 	public:
 
 		//- public functions and operators
-
-
 	};
 }
 
-#endif // !_Marine_VesselParam_Header
+#endif // !_Marine_EnvtParam_Header
