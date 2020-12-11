@@ -9,9 +9,12 @@
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 #include <Dir3d.hxx>
-#include <EnvPropt_Density.hxx>
-#include <Entity3d_BoxFwd.hxx>
+#include <Vec3d.hxx>
+#include <EnvtPropt_Density.hxx>
+#include <Entity3d_Box.hxx>
 #include <Marine_Module.hxx>
+#include <Geo_Serialization.hxx>
+#include <OpenCascade_Serialization.hxx>
 
 #include <Standard_Handle.hxx>
 #include <gp_Ax2.hxx>
@@ -37,6 +40,11 @@ namespace tnbLib
 
 		Handle(Geom_Surface) theSurfaceGeometry_;
 		Handle(Geom2d_Curve) theCurveGeometry_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
 
 	protected:
 
@@ -85,6 +93,18 @@ namespace tnbLib
 		marineLib::Density theLightFluidDensity_;
 		marineLib::Density theHeavyFluidDensity_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theLightFluidDensity_;
+			ar & theHeavyFluidDensity_;
+		}
+
 	protected:
 
 		TnbMarine_EXPORT Marine_WaveDensity();
@@ -124,6 +144,28 @@ namespace tnbLib
 		std::shared_ptr<Entity3d_Box> theDomain_;
 		gp_Ax2 theOrigin_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+			ar & boost::serialization::base_object<Global_Done>(*this);
+			ar & boost::serialization::base_object<Marine_WaveDensity>(*this);
+			ar & boost::serialization::base_object<Marine_WaveGeometry>(*this);
+			
+			ar & thePointOnWater_;
+			ar & theVerticalDirection_;
+			ar & theCurrent_;
+			ar & theWind_;
+			ar & theDomain_;
+			ar & theOrigin_;
+		}
+
 		TnbMarine_EXPORT Pnt3d ProjectedCoordOnSurface() const;
 
 		TnbMarine_EXPORT Entity3d_Box BoundingBoxOfRotatedDomain(const Entity3d_Box& theDomain) const;
@@ -131,6 +173,14 @@ namespace tnbLib
 		TnbMarine_EXPORT void TransformOriginToCurrent() const;
 
 	protected:
+
+		//- default constructor
+
+		Marine_Wave()
+		{}
+
+
+		//- constructor
 
 		Marine_Wave(const std::shared_ptr<Entity3d_Box>& theDomain)
 			: theDomain_(theDomain)
@@ -148,6 +198,9 @@ namespace tnbLib
 
 	public:
 
+
+		//- public functions and operators
+
 		const auto& Origin() const
 		{
 			return theOrigin_;
@@ -162,6 +215,10 @@ namespace tnbLib
 
 		TnbMarine_EXPORT void Perform();
 
+
+		static TnbMarine_EXPORT void Save(TNB_oARCH_TYPE& ar, const std::shared_ptr<Marine_Wave>& wave);
+		static TnbMarine_EXPORT void Load(TNB_iARCH_TYPE& ar, std::shared_ptr<Marine_Wave>& wave);
+
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(Pnt3d, PointOnWater)
 
@@ -172,5 +229,7 @@ namespace tnbLib
 			
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_Wave);
 
 #endif // !_Marine_Wave_Header

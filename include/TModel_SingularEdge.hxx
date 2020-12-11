@@ -15,31 +15,31 @@ namespace tnbLib
 
 	public:
 
-		TModel_SingularEdge
+		TnbCad_EXPORT TModel_SingularEdge
 		(
 			const std::shared_ptr<TModel_Vertex>& theVtx,
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
 		);
 
-		TModel_SingularEdge
+		TnbCad_EXPORT TModel_SingularEdge
 		(
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
 		);
 
-		TModel_SingularEdge
+		TnbCad_EXPORT TModel_SingularEdge
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<TModel_Vertex>& theVtx,
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
 		);
 
-		TModel_SingularEdge
+		TnbCad_EXPORT TModel_SingularEdge
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
 		);
 
-		TModel_SingularEdge
+		TnbCad_EXPORT TModel_SingularEdge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -47,7 +47,7 @@ namespace tnbLib
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
 		);
 
-		TModel_SingularEdge
+		TnbCad_EXPORT TModel_SingularEdge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

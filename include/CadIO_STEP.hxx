@@ -5,6 +5,7 @@
 #include <Global_Verbose.hxx>
 #include <CadIO_Info.hxx>
 #include <CadIO_Shape.hxx>
+#include <Cad_Module.hxx>
 
 namespace tnbLib
 {
@@ -22,7 +23,7 @@ namespace tnbLib
 		CadIO_STEP()
 		{}
 
-		void ReadFile
+		TnbCad_EXPORT void ReadFile
 		(
 			const fileName& theName
 		);

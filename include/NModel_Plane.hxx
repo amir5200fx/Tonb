@@ -36,14 +36,14 @@ namespace tnbLib
 
 	protected:
 
-		NModel_Plane
+		TnbCad_EXPORT NModel_Plane
 		(
 			const outer& theOuter,
 			const inner& theInner = nullptr,
 			const std::shared_ptr<curveList>& theCurves = nullptr
 		);
 
-		NModel_Plane
+		TnbCad_EXPORT NModel_Plane
 		(
 			const Standard_Integer theIndex,
 			const outer& theOuter,
@@ -51,7 +51,7 @@ namespace tnbLib
 			const std::shared_ptr<curveList>& theCurves = nullptr
 		);
 
-		NModel_Plane
+		TnbCad_EXPORT NModel_Plane
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -77,7 +77,7 @@ namespace tnbLib
 			return (Standard_Integer)theCurves_->size();
 		}
 
-		Standard_Integer NbHoles() const;
+		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
 		const auto& Outer() const
 		{
@@ -89,17 +89,17 @@ namespace tnbLib
 			return theInner_;
 		}
 
-		wireList RetrieveWires() const;
+		TnbCad_EXPORT wireList RetrieveWires() const;
 
-		void RetrieveWiresTo(wireList& theWires) const;
+		TnbCad_EXPORT void RetrieveWiresTo(wireList& theWires) const;
 
 		//- IO functions and operators
 
-		void ExportToPlt(OFstream& File) const;
+		TnbCad_EXPORT void ExportToPlt(OFstream& File) const;
 
 		//- Static functions and operators
 
-		static std::shared_ptr<NModel_Plane>
+		static TnbCad_EXPORT std::shared_ptr<NModel_Plane>
 			MakePlane(const NModel_Surface& theSurface);
 	};
 }

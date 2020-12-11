@@ -15,7 +15,7 @@ namespace tnbLib
 
 	public:
 
-		NModel_Ring
+		TnbCad_EXPORT NModel_Ring
 		(
 			const std::shared_ptr<NModel_Vertex>& theVtx,
 			const std::shared_ptr<NModel_Curve>& theCurve,
@@ -23,7 +23,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Ring
+		TnbCad_EXPORT NModel_Ring
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<NModel_Vertex>& theVtx,
@@ -32,7 +32,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Ring
+		TnbCad_EXPORT NModel_Ring
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -42,14 +42,14 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Ring
+		TnbCad_EXPORT NModel_Ring
 		(
 			const std::shared_ptr<NModel_Curve>& theCurve,
 			const std::shared_ptr<NModel_ParaCurve>& theParaCurve,
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Ring
+		TnbCad_EXPORT NModel_Ring
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<NModel_Curve>& theCurve,
@@ -57,7 +57,7 @@ namespace tnbLib
 			const Standard_Boolean theSense = Standard_True
 		);
 
-		NModel_Ring
+		TnbCad_EXPORT NModel_Ring
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

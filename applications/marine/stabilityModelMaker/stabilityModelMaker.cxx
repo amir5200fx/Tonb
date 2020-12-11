@@ -36,6 +36,9 @@
 #include <boost/archive/polymorphic_binary_iarchive.hpp>
 #include <boost/archive/polymorphic_binary_oarchive.hpp>
 
+#include <boost/archive/polymorphic_text_iarchive.hpp>
+#include <boost/archive/polymorphic_text_oarchive.hpp>
+
 #include <gp_Elips2d.hxx>
 #include <gp_Circ2d.hxx>
 #include <gp_Parab2d.hxx>
@@ -522,7 +525,7 @@ namespace tnbLib
 	{
 		auto model = getMaker()->ExportModel();
 		std::ofstream ofs(name);
-		boost::archive::polymorphic_binary_oarchive oa(ofs);
+		boost::archive::polymorphic_text_oarchive oa(ofs);
 		oa << model;
 	}
 

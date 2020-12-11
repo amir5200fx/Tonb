@@ -70,7 +70,7 @@ namespace tnbLib
 
 		template<>
 		template<>
-		void BodyConstructor_Shape<Body_Tank>::serialize<TNB_iARCH_TYPE>
+		TnbMarine_EXPORT void BodyConstructor_Shape<Body_Tank>::serialize<TNB_iARCH_TYPE>
 			(
 				TNB_iARCH_TYPE& ar,
 				const unsigned int file_vertion
@@ -78,7 +78,7 @@ namespace tnbLib
 
 		template<>
 		template<>
-		void BodyConstructor_Shape<Body_Tank>::serialize<TNB_oARCH_TYPE>
+		TnbMarine_EXPORT void BodyConstructor_Shape<Body_Tank>::serialize<TNB_oARCH_TYPE>
 			(
 				TNB_oARCH_TYPE& ar,
 				const unsigned int file_vertion
