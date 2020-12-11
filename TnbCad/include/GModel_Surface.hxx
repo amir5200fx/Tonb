@@ -38,18 +38,18 @@ namespace tnbLib
 
 		//- Private functions and operators
 
-		Entity2d_Box CalcParametricBoundingBox() const;
+		TnbCad_EXPORT Entity2d_Box CalcParametricBoundingBox() const;
 
 	public:
 
-		GModel_Surface
+		TnbCad_EXPORT GModel_Surface
 		(
 			const Handle(Geom_Surface)& theGeometry,
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
 
-		GModel_Surface
+		TnbCad_EXPORT GModel_Surface
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom_Surface)& theGeometry,
@@ -57,7 +57,7 @@ namespace tnbLib
 			const inner& theInner = nullptr
 		);
 
-		GModel_Surface
+		TnbCad_EXPORT GModel_Surface
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -66,9 +66,9 @@ namespace tnbLib
 			const inner& theInner = nullptr
 		);
 
-		Standard_Integer NbHoles() const;
+		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
-		Standard_Boolean HasHole() const;
+		TnbCad_EXPORT Standard_Boolean HasHole() const;
 
 		const auto& Outer() const
 		{
@@ -80,22 +80,22 @@ namespace tnbLib
 			return theInner_;
 		}
 
-		Entity3d_Box CalcBoundingBox() const;
+		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;
 
 		const auto& ParaBoundingBox() const
 		{
 			return theParaBoundingBox_;
 		}
 
-		std::vector<std::shared_ptr<GModel_Edge>>
+		TnbCad_EXPORT std::vector<std::shared_ptr<GModel_Edge>>
 			RetrieveEdges() const;
 
-		Entity2d_Metric1 MetricAt
+		TnbCad_EXPORT Entity2d_Metric1 MetricAt
 		(
 			const Pnt2d& theCoord
 		) const;
 
-		Pnt3d Value
+		TnbCad_EXPORT Pnt3d Value
 		(
 			const Pnt2d& theCoord
 		) const;

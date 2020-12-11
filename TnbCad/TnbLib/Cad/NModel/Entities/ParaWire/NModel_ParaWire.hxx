@@ -21,18 +21,18 @@ namespace tnbLib
 
 	public:
 
-		NModel_ParaWire
+		TnbCad_EXPORT NModel_ParaWire
 		(
 			const std::shared_ptr<NModel_CmpParaCurve>& theCurve
 		);
 
-		NModel_ParaWire
+		TnbCad_EXPORT NModel_ParaWire
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<NModel_CmpParaCurve>& theCurve
 		);
 
-		NModel_ParaWire
+		TnbCad_EXPORT NModel_ParaWire
 		(
 			const Standard_Integer theIndex,
 			const word& theName,

@@ -2,6 +2,8 @@
 #ifndef _FastDiscrete_System_Header
 #define _FastDiscrete_System_Header
 
+#include <Cad_Module.hxx>
+
 #include <memory>
 
 namespace tnbLib
@@ -13,7 +15,7 @@ namespace tnbLib
 	namespace sysLib
 	{
 
-		extern std::shared_ptr<FastDiscrete_Params> gl_fast_discrete_parameters;
+		extern TnbCad_EXPORT std::shared_ptr<FastDiscrete_Params> gl_fast_discrete_parameters;
 	}
 }
 

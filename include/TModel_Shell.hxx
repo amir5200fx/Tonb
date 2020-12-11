@@ -80,7 +80,7 @@ namespace tnbLib
 			return theWaterTight_;
 		}
 
-		Entity3d_Box CalcBoundingBox() const;
+		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;
 
 
 	};

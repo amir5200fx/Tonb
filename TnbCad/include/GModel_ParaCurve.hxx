@@ -32,7 +32,7 @@ namespace tnbLib
 			const char* theName
 		) const;
 
-		static void CheckBounded
+		static TnbCad_EXPORT void CheckBounded
 		(
 			const Handle(Geom2d_Curve)& theCurve,
 			const char* theName
@@ -40,24 +40,24 @@ namespace tnbLib
 
 	public:
 
-		GModel_ParaCurve
+		TnbCad_EXPORT GModel_ParaCurve
 		(
 			const Handle(Geom2d_Curve)& theGeometry
 		);
 
-		Standard_Real FirstParameter() const;
+		TnbCad_EXPORT Standard_Real FirstParameter() const;
 
-		Standard_Real LastParameter() const;
+		TnbCad_EXPORT Standard_Real LastParameter() const;
 
-		Pnt2d Value(const Standard_Real x) const;
+		TnbCad_EXPORT Pnt2d Value(const Standard_Real x) const;
 
-		Pnt2d Value_normParam(const Standard_Real x) const;
+		TnbCad_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
 
-		Pnt2d FirstCoord() const;
+		TnbCad_EXPORT Pnt2d FirstCoord() const;
 
-		Pnt2d LastCoord() const;
+		TnbCad_EXPORT Pnt2d LastCoord() const;
 
-		Entity2d_Box CalcBoundingBox() const;
+		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
 
 		const auto& Geometry() const
 		{

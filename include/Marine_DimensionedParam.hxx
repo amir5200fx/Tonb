@@ -7,6 +7,7 @@
 #include <dimensionSet.hxx>
 #include <Vec3d.hxx>
 #include <Marine_Module.hxx>
+#include <dimensionSet_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -17,6 +18,14 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Boolean IsSpecified_;
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & IsSpecified_;
+		}
 
 	protected:
 
@@ -61,7 +70,27 @@ namespace tnbLib
 		T theValue_;
 
 
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Global_Named>(*this);
+			ar & boost::serialization::base_object<Marine_SpecifiedParam>(*this);
+			ar & theDimension_;
+			ar & theValue_;
+		}
+
 	protected:
+
+		//- defualt constructor
+
+		Marine_DimensionedParam()
+			: theDimension_(0,1,0,0,0)
+		{}
+
+
+		//- constructors
 
 		Marine_DimensionedParam
 		(

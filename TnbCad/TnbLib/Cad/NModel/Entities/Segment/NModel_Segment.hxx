@@ -28,20 +28,20 @@ namespace tnbLib
 
 	public:
 
-		NModel_Paired
+		TnbCad_EXPORT NModel_Paired
 		(
 			const std::shared_ptr<NModel_Edge>& theEdge0,
 			const std::shared_ptr<NModel_Edge>& theEdge1
 		);
 
-		NModel_Paired
+		TnbCad_EXPORT NModel_Paired
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<NModel_Edge>& theEdge0,
 			const std::shared_ptr<NModel_Edge>& theEdge1
 		);
 
-		NModel_Paired
+		TnbCad_EXPORT NModel_Paired
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -59,13 +59,13 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		std::shared_ptr<NModel_Edge> RemoveFromEdges(const Standard_Integer theIndex) const;
+		TnbCad_EXPORT std::shared_ptr<NModel_Edge> RemoveFromEdges(const Standard_Integer theIndex) const;
 
-		std::vector<std::shared_ptr<NModel_Edge>> RetrieveEdges() const;
+		TnbCad_EXPORT std::vector<std::shared_ptr<NModel_Edge>> RetrieveEdges() const;
 
-		void InsertToEdges(const Standard_Integer theIndex, const std::shared_ptr<NModel_Edge>& theEdge);
+		TnbCad_EXPORT void InsertToEdges(const Standard_Integer theIndex, const std::shared_ptr<NModel_Edge>& theEdge);
 
-		void RetrieveEdgesTo(std::vector<std::shared_ptr<NModel_Edge>>& theEdges) const;
+		TnbCad_EXPORT void RetrieveEdgesTo(std::vector<std::shared_ptr<NModel_Edge>>& theEdges) const;
 	};
 }
 

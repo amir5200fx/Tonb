@@ -37,6 +37,9 @@
     <Filter Include="TnbLib\Global\module">
       <UniqueIdentifier>{aa114fb0-f831-409f-9682-c8d641ee2e8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Global\serialization">
+      <UniqueIdentifier>{1d8a773e-0a66-42e0-a31f-85a7950da812}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1d.hxx">
@@ -102,6 +105,12 @@
     <ClInclude Include="TnbLib\Global\module\Global_Module.hxx">
       <Filter>TnbLib\Global\module</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Global\serialization\dimensionSet_Serialization.hxx">
+      <Filter>TnbLib\Global\serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\serialization\OpenCascade_Serialization.hxx">
+      <Filter>TnbLib\Global\serialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx">
@@ -115,6 +124,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Global\global\UnitSystem.cxx">
       <Filter>TnbLib\Global\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\serialization\dimensionSet_Serialization.cxx">
+      <Filter>TnbLib\Global\serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\serialization\OpenCascade_Serialization.cxx">
+      <Filter>TnbLib\Global\serialization</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

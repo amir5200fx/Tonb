@@ -28,20 +28,8 @@
     <Filter Include="TnbLib\MarineBase\DimensionedParam">
       <UniqueIdentifier>{d26638b3-e989-407d-aa65-8bd3889ff47a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Environment\Density\Water">
-      <UniqueIdentifier>{5a7b932b-58f1-4579-a4f7-3d155cbe172a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Environment\Density\Air">
-      <UniqueIdentifier>{a6381127-e076-4171-86a8-1f32a502ced2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Environment\Temperature">
       <UniqueIdentifier>{dc4c4cf7-3015-4f3f-be82-b1df036bff7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Environment\Viscosity\Water">
-      <UniqueIdentifier>{ecf3f09f-8eef-4170-a474-d9fbe79392df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Environment\Viscosity\Air">
-      <UniqueIdentifier>{bb876279-694c-48fb-9988-44d336931890}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\MarineBase\UnitSystem">
       <UniqueIdentifier>{e477faf3-e6e6-47b3-8621-d77d5893a0a2}</UniqueIdentifier>
@@ -606,33 +594,6 @@
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
       <Filter>TnbLib\MarineBase\DimensionedParam</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Froude\EnvPropt_Froude.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Froude</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Gravity\EnvPropt_Gravity.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Gravity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Density\EnvPropt_Density.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Density</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Density\Water\EnvPropt_WaterDensity.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Density\Water</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Density\Air\EnvPropt_AirDensity.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Density\Air</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Viscosity\EnvPropt_Viscosity.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Viscosity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Viscosity\Water\EnvPropt_WaterViscosity.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Viscosity\Water</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Viscosity\Air\EnvPropt_AirViscosity.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Viscosity\Air</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Environment\Velocity\EnvPropt_Velocity.hxx">
-      <Filter>TnbLib\MarineBase\Environment\Velocity</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\UnitSystem\Marine_UnitSystem.hxx">
       <Filter>TnbLib\MarineBase\UnitSystem</Filter>
     </ClInclude>
@@ -1044,9 +1005,6 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Body\Marine_Bodies.hxx">
       <Filter>TnbLib\MarineBase\Entities\Body</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\Body\Marine_BodyType.hxx">
-      <Filter>TnbLib\MarineBase\Entities\Body</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\xParam\Marine_xSectionParam.hxx">
       <Filter>TnbLib\MarineBase\Entities\xParam</Filter>
     </ClInclude>
@@ -1218,37 +1176,37 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_Model_AreaSail.hxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Area</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Marine_EnvtParam.hxx">
+      <Filter>TnbLib\MarineBase\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Marine_EnvtParamM.hxx">
+      <Filter>TnbLib\MarineBase\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Marine_EnvtParams.hxx">
+      <Filter>TnbLib\MarineBase\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Density\EnvtPropt_Density.hxx">
+      <Filter>TnbLib\MarineBase\Environment\Density</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Froude\EnvtPropt_Froude.hxx">
+      <Filter>TnbLib\MarineBase\Environment\Froude</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Gravity\EnvtPropt_Gravity.hxx">
+      <Filter>TnbLib\MarineBase\Environment\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Velocity\EnvtPropt_Velocity.hxx">
+      <Filter>TnbLib\MarineBase\Environment\Velocity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Viscosity\EnvtPropt_Viscosity.hxx">
+      <Filter>TnbLib\MarineBase\Environment\Viscosity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Body\Marine_BodyType.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Body</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
       <Filter>TnbLib\MarineBase\DimensionedParam</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Froude\EnvPropt_Froude.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Froude</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Gravity\EnvPropt_Gravity.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Gravity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Density\EnvPropt_Density.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Density</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Density\Water\EnvPropt_WaterDensity.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Density\Water</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Density\Air\EnvPropt_AirDensity.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Density\Air</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\EnvPropt_Viscosity.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Viscosity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Water\EnvPropt_WaterViscosity.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Viscosity\Water</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Viscosity\Air\EnvPropt_AirViscosity.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Viscosity\Air</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Environment\Velocity\EnvPropt_Velocity.cxx">
-      <Filter>TnbLib\MarineBase\Environment\Velocity</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Wave\Marine_Wave.cxx">
       <Filter>TnbLib\MarineBase\Wave</Filter>
@@ -1657,6 +1615,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_Model_AreaSail.cxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Area</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Environment\Marine_EnvtParams.cxx">
+      <Filter>TnbLib\MarineBase\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Wave\Flat\Marine_FlatWaveIO.cxx">
+      <Filter>TnbLib\MarineBase\Wave\Flat</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Wave\Marine_WaveIO.cxx">
+      <Filter>TnbLib\MarineBase\Wave</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

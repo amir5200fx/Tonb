@@ -21,18 +21,18 @@ namespace tnbLib
 
 	public:
 
-		TModel_Wire
+		TnbCad_EXPORT TModel_Wire
 		(
 			const std::shared_ptr<TModel_CmpEdge>& theEdge
 		);
 
-		TModel_Wire
+		TnbCad_EXPORT TModel_Wire
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<TModel_CmpEdge>& theEdge
 		);
 
-		TModel_Wire
+		TnbCad_EXPORT TModel_Wire
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -45,7 +45,7 @@ namespace tnbLib
 			return theEdge_;
 		}
 
-		Entity2d_Box CalcParametricBoundingBox() const;
+		TnbCad_EXPORT Entity2d_Box CalcParametricBoundingBox() const;
 	};
 }
 

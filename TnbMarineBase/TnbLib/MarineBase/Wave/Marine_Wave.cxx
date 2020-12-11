@@ -80,9 +80,11 @@ void tnbLib::Marine_Wave::TransformOriginToCurrent() const
 
 
 tnbLib::Marine_WaveDensity::Marine_WaveDensity()
-	: theLightFluidDensity_("light fluid density", 1.225)
-	, theHeavyFluidDensity_("heavy fluid density", 998.0)
+	: theLightFluidDensity_(1.225)
+	, theHeavyFluidDensity_(998.0)
 {
+	theLightFluidDensity_.SetName("light fluid density");
+	theHeavyFluidDensity_.SetName("heavy fluid density");
 }
 
 
@@ -168,4 +170,14 @@ void tnbLib::Marine_Wave::Perform()
 	TranslateSurfaceToPointOnWater(ProjectedCoordOnSurface());
 
 	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::Marine_Wave::Save(TNB_oARCH_TYPE & ar, const std::shared_ptr<Marine_Wave>& wave)
+{
+	ar & wave;
+}
+
+void tnbLib::Marine_Wave::Load(TNB_iARCH_TYPE & ar, std::shared_ptr<Marine_Wave>& wave)
+{
+	ar & wave;
 }

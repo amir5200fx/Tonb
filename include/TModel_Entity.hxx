@@ -4,6 +4,7 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Cad_Module.hxx>
 
 #include <memory>
 

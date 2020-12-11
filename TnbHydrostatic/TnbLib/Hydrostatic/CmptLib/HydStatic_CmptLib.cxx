@@ -454,13 +454,13 @@ tnbLib::HydStatic_CmptLib::CalcStaticalStabilityPoints_Starboard
 		if (u0.Crossed(u1) >= 0)
 		{
 			const auto unQ = HydStatic_UnEqQ(q.Heel(), q.LeverArm(), q.Parameter0(), q.Parameter1());
-			auto t = std::make_tuple(std::move(unQ), HydStatic_EqQ::null);
+			auto t = std::make_tuple(std::move(unQ), HydStatic_UnEqQ::null);
 			return std::move(t);
 		}
 		else
 		{
 			const auto StQ = HydStatic_StEqQ(q.Heel(), q.LeverArm(), q.Parameter0(), q.Parameter1());
-			auto t = std::make_tuple(std::move(StQ), HydStatic_EqQ::null);
+			auto t = std::make_tuple(std::move(StQ), HydStatic_StEqQ::null);
 			return std::move(t);
 		}
 	}
@@ -469,7 +469,7 @@ tnbLib::HydStatic_CmptLib::CalcStaticalStabilityPoints_Starboard
 		<< "invalid data" << endl
 		<< abort(FatalError);*/
 
-	auto t = std::make_tuple(HydStatic_EqQ::null, HydStatic_EqQ::null);
+	auto t = std::make_tuple(HydStatic_StEqQ::null, HydStatic_StEqQ::null);
 	return std::move(t);
 }
 
@@ -494,7 +494,7 @@ tnbLib::HydStatic_CmptLib::GetStable
 		{
 			return eq0;
 		}
-		else return HydStatic_EqQ::null;
+		else return HydStatic_StEqQ::null;
 	}
 	else
 	{
@@ -529,7 +529,7 @@ tnbLib::HydStatic_CmptLib::GetUnStable
 		{
 			return eq0;
 		}
-		else return HydStatic_EqQ::null;
+		else return HydStatic_UnEqQ::null;
 	}
 	else
 	{

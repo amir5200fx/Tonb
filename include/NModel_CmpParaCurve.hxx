@@ -66,7 +66,7 @@ namespace tnbLib
 			return theCurves_;
 		}
 
-		Entity2d_Box CalcBoundingBox() const;
+		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
 	};
 }
 

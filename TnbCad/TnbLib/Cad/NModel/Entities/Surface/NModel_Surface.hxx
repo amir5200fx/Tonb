@@ -51,7 +51,7 @@ namespace tnbLib
 
 	public:
 
-		NModel_Surface
+		TnbCad_EXPORT NModel_Surface
 		(
 			const Handle(Geom_Surface)& theGeometry,
 			const outer& theOuter,
@@ -59,7 +59,7 @@ namespace tnbLib
 			const std::shared_ptr<edgeList>& theEdges = nullptr
 		);
 
-		NModel_Surface
+		TnbCad_EXPORT NModel_Surface
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom_Surface)& theGeometry,
@@ -68,7 +68,7 @@ namespace tnbLib
 			const std::shared_ptr<edgeList>& theEdges = nullptr
 		);
 
-		NModel_Surface
+		TnbCad_EXPORT NModel_Surface
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -78,11 +78,11 @@ namespace tnbLib
 			const std::shared_ptr<edgeList>& theEdges = nullptr
 		);
 
-		Standard_Integer NbHoles() const;
+		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
-		Standard_Boolean HasHole() const;
+		TnbCad_EXPORT Standard_Boolean HasHole() const;
 
-		Standard_Boolean IsClamped() const;
+		TnbCad_EXPORT Standard_Boolean IsClamped() const;
 
 		const auto& Outer() const
 		{
@@ -104,18 +104,18 @@ namespace tnbLib
 			return theParaBoundingBox_;
 		}
 
-		std::vector<std::shared_ptr<NModel_Edge>>
+		TnbCad_EXPORT std::vector<std::shared_ptr<NModel_Edge>>
 			RetrieveEdges() const;
 
-		std::vector<std::shared_ptr<NModel_Vertex>>
+		TnbCad_EXPORT std::vector<std::shared_ptr<NModel_Vertex>>
 			RetrieveVertices();
 
-		Entity2d_Metric1 MetricAt
+		TnbCad_EXPORT Entity2d_Metric1 MetricAt
 		(
 			const Pnt2d& theCoord
 		) const;
 
-		Pnt3d Value
+		TnbCad_EXPORT Pnt3d Value
 		(
 			const Pnt2d& theCoord
 		) const;

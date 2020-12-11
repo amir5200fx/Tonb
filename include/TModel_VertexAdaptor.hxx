@@ -3,6 +3,7 @@
 #define _TModel_VertexAdaptor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Cad_Module.hxx>
 
 #include <memory>
 #include <map>
@@ -72,15 +73,15 @@ namespace tnbLib
 			theFaces_.insert(std::make_pair(theIndex, theFace));
 		}
 
-		void ImportToSurfaces_dup
+		TnbCad_EXPORT void ImportToSurfaces_dup
 		(
 			const Standard_Integer theIndex,
 			const std::weak_ptr<TModel_Surface>& theFace
 		);
 
-		void RemoveFromEdges(const Standard_Integer theIndex);
+		TnbCad_EXPORT void RemoveFromEdges(const Standard_Integer theIndex);
 
-		void RemoveFromFaces(const Standard_Integer theIndex);
+		TnbCad_EXPORT void RemoveFromFaces(const Standard_Integer theIndex);
 	};
 }
 

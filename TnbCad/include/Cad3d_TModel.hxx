@@ -39,14 +39,14 @@ namespace tnbLib
 
 	public:
 
-		Cad3d_TModel();
+		TnbCad_EXPORT Cad3d_TModel();
 
-		Cad3d_TModel
+		TnbCad_EXPORT Cad3d_TModel
 		(
 			const Standard_Integer theIndex
 		);
 
-		Cad3d_TModel
+		TnbCad_EXPORT Cad3d_TModel
 		(
 			const Standard_Integer theIndex,
 			const word& theName
@@ -79,7 +79,7 @@ namespace tnbLib
 			return theInner_;
 		}
 
-		Standard_Integer NbHoles() const;
+		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
 		auto HasHole() const
 		{
@@ -88,13 +88,13 @@ namespace tnbLib
 
 		//- IO functions and operators
 
-		void ExportCornersToPlt(OFstream& File) const;
+		TnbCad_EXPORT void ExportCornersToPlt(OFstream& File) const;
 
-		void ExportSegmentsToPlt(OFstream& File) const;
+		TnbCad_EXPORT void ExportSegmentsToPlt(OFstream& File) const;
 
-		void ExportFacesToPlt(OFstream& File) const;
+		TnbCad_EXPORT void ExportFacesToPlt(OFstream& File) const;
 
-		void ExportFreeSegmentsToPlt(OFstream& File) const;
+		TnbCad_EXPORT void ExportFreeSegmentsToPlt(OFstream& File) const;
 
 
 	};

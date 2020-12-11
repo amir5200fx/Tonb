@@ -2,6 +2,8 @@
 #ifndef _TModel_System_Header
 #define _TModel_System_Header
 
+#include <Cad_Module.hxx>
+
 #include <memory>
 
 namespace tnbLib
@@ -13,9 +15,9 @@ namespace tnbLib
 	namespace sysLib
 	{
 
-		extern std::shared_ptr<TModel_FixWire_Info> tmodel_fix_wire_info;
+		extern TnbCad_EXPORT std::shared_ptr<TModel_FixWire_Info> tmodel_fix_wire_info;
 
-		void init_tmodel_fix_wire_info();
+		TnbCad_EXPORT void init_tmodel_fix_wire_info();
 	}
 }
 

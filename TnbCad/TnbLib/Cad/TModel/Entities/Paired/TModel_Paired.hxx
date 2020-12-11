@@ -26,20 +26,20 @@ namespace tnbLib
 
 	public:
 
-		TModel_Paired
+		TnbCad_EXPORT TModel_Paired
 		(
 			const std::shared_ptr<TModel_Edge>& theEdge0,
 			const std::shared_ptr<TModel_Edge>& theEdge1
 		);
 
-		TModel_Paired
+		TnbCad_EXPORT TModel_Paired
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<TModel_Edge>& theEdge0,
 			const std::shared_ptr<TModel_Edge>& theEdge1
 		);
 
-		TModel_Paired
+		TnbCad_EXPORT TModel_Paired
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -47,7 +47,7 @@ namespace tnbLib
 			const std::shared_ptr<TModel_Edge>& theEdge1
 		);
 
-		Standard_Boolean IsFree() const;
+		TnbCad_EXPORT Standard_Boolean IsFree() const;
 
 		const auto& Edge0() const
 		{
@@ -59,7 +59,7 @@ namespace tnbLib
 			return theEdge1_;
 		}
 
-		const std::shared_ptr<TModel_Edge>& Other
+		TnbCad_EXPORT const std::shared_ptr<TModel_Edge>& Other
 		(
 			const std::shared_ptr<TModel_Edge>& theEdge
 		);

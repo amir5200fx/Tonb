@@ -90,6 +90,10 @@ namespace tnbLib
 
 		virtual std::shared_ptr<Marine_Body>
 			Copy() const = 0;
+
+		static TnbMarine_EXPORT void Save(TNB_oARCH_TYPE& ar, const std::shared_ptr<Marine_Body>& theBody);
+		static TnbMarine_EXPORT void Load(TNB_iARCH_TYPE& ar, std::shared_ptr<Marine_Body>& theBody);
+
 	};
 }
 

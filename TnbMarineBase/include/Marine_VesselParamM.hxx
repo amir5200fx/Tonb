@@ -11,6 +11,15 @@
 		: public Marine_VesselParam												\
 	{																			\
 																				\
+		friend class boost::serialization::access;								\
+		template<class Archive>													\
+		void serialize(Archive& ar, const unsigned int file_version)			\
+		{																		\
+			ar & boost::serialization::base_object<Marine_VesselParam>(*this);	\
+		}																		\
+																				\
+		CLASS_NAME() {}															\
+																				\
 	public:																		\
 		static TnbMarine_EXPORT const CLASS_NAME null;							\
 		explicit CLASS_NAME(const Standard_Real theValue)						\

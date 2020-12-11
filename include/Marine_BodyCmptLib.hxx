@@ -74,6 +74,7 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
+		//- Throw an exception if body is not displacer or tank
 		static TnbMarine_EXPORT xSectParList
 			CrossCurve
 			(

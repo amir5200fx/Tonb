@@ -4,6 +4,8 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Cad_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 
@@ -18,13 +20,37 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+		}
+
 	protected:
 
-		GModel_Entity();
+		//- default constructor
 
-		GModel_Entity(const Standard_Integer theIndex);
+		GModel_Entity()
+		{}
 
-		GModel_Entity(const Standard_Integer theIndex, const word& theName);
+		//- constructors
+
+		TnbCad_EXPORT GModel_Entity
+		(
+			const Standard_Integer theIndex
+		);
+
+		TnbCad_EXPORT GModel_Entity
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		);
 
 	public:
 
@@ -37,5 +63,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::GModel_Entity);
 
 #endif // !_GModel_Entity_Header

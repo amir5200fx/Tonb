@@ -4,6 +4,7 @@
 
 #include <Global_AccessMethod.hxx>
 #include <Entity3d_ChainFwd.hxx>
+#include <Cad_Module.hxx>
 
 #include <memory>
 
@@ -67,7 +68,7 @@ namespace tnbLib
 			return theMesh_;
 		}
 
-		void Discrete
+		TnbCad_EXPORT void Discrete
 		(
 			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
 		) const;

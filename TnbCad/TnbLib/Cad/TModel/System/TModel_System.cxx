@@ -2,7 +2,7 @@
 
 #include <TModel_FixWire_Info.hxx>
 
-std::shared_ptr<tnbLib::TModel_FixWire_Info>
+TnbCad_EXPORT std::shared_ptr<tnbLib::TModel_FixWire_Info>
 tnbLib::sysLib::tmodel_fix_wire_info = std::make_shared<tnbLib::TModel_FixWire_Info>();
 
 void tnbLib::sysLib::init_tmodel_fix_wire_info()

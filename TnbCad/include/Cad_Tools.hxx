@@ -7,6 +7,7 @@
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Cad_Module.hxx>
 
 class Bnd_Box;
 class TopoDS_Shape;
@@ -40,31 +41,31 @@ namespace tnbLib
 
 	public:
 
-		static Standard_Boolean 
+		static TnbCad_EXPORT Standard_Boolean
 			IsBounded
 			(
 				const Handle(Geom_Curve)& theCurve
 			);
 
-		static Entity3d_Box 
+		static TnbCad_EXPORT Entity3d_Box
 			BoundingBox
 			(
 				const Bnd_Box& theBox
 			);
 
-		static Entity3d_Box
+		static TnbCad_EXPORT Entity3d_Box
 			BoundingBox
 			(
 				const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
 			);
 
-		static Bnd_Box 
+		static TnbCad_EXPORT Bnd_Box
 			BoundingBox
 			(
 				const TopoDS_Shape& theShape
 			);
 
-		static std::shared_ptr<Entity2d_Triangulation>
+		static TnbCad_EXPORT std::shared_ptr<Entity2d_Triangulation>
 			ParametricTriangulation
 			(
 				const Pnt2d& theP0,
@@ -73,14 +74,14 @@ namespace tnbLib
 				const Standard_Integer theNy
 			);
 
-		static std::shared_ptr<Entity3d_Triangulation>
+		static TnbCad_EXPORT std::shared_ptr<Entity3d_Triangulation>
 			Triangulation
 			(
 				const Geom_Surface& theSurface,
 				const Entity2d_Triangulation& theParametric
 			);
 
-		static std::shared_ptr<Entity3d_Triangulation>
+		static TnbCad_EXPORT std::shared_ptr<Entity3d_Triangulation>
 			Triangulation
 			(
 				const Handle(Geom_Surface)& theSurface,
@@ -89,13 +90,13 @@ namespace tnbLib
 
 			);
 
-		static std::shared_ptr<Entity3d_Triangulation>
+		static TnbCad_EXPORT std::shared_ptr<Entity3d_Triangulation>
 			Triangulation
 			(
 				const Poly_Triangulation& theTriangulation
 			);
 
-		static Handle(Geom_Curve)
+		static TnbCad_EXPORT Handle(Geom_Curve)
 			ConvertToTrimmed
 			(
 				const Handle(Geom_Curve)& theCurve,
@@ -103,14 +104,14 @@ namespace tnbLib
 				const Standard_Real u1
 			);
 
-		static std::shared_ptr<TModel_Edge>
+		static TnbCad_EXPORT std::shared_ptr<TModel_Edge>
 			GetEdge
 			(
 				const TopoDS_Edge& theEdge,
 				const TopoDS_Face& theFace
 			);
 
-		static std::shared_ptr<TModel_Edge>
+		static TnbCad_EXPORT std::shared_ptr<TModel_Edge>
 			GetEdge
 			(
 				const Standard_Integer theIndex,
@@ -118,40 +119,40 @@ namespace tnbLib
 				const TopoDS_Face& theFace
 			);
 
-		static std::shared_ptr<TModel_Surface>
+		static TnbCad_EXPORT std::shared_ptr<TModel_Surface>
 			GetSurface
 			(
 				const TopoDS_Face& theFace
 			);
 
-		static std::vector<std::shared_ptr<TModel_Surface>>
+		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Surface>>
 			GetSurfaces
 			(
 				const TopoDS_Shape& theShape
 			);
 
-		static std::shared_ptr<Cad3d_TModel>
+		static TnbCad_EXPORT std::shared_ptr<Cad3d_TModel>
 			MakeSolid
 			(
 				const TopoDS_Shape& theShape,
 				const Standard_Real theTolerance
 			);
 
-		static std::shared_ptr<Cad3d_TModel>
+		static TnbCad_EXPORT std::shared_ptr<Cad3d_TModel>
 			MakeSolid
 			(
 				const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces,
 				const Standard_Real theTolerance
 			);
 
-		static std::shared_ptr<std::vector<std::shared_ptr<TModel_Shell>>>
+		static TnbCad_EXPORT std::shared_ptr<std::vector<std::shared_ptr<TModel_Shell>>>
 			TrackShells
 			(
 				const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
 			);
 
 		//- Warning: This function is on the early stage!
-		static Standard_Boolean
+		static TnbCad_EXPORT Standard_Boolean
 			InnerHoles
 			(
 				const std::vector<std::shared_ptr<TModel_Shell>>& theShells,
@@ -159,58 +160,58 @@ namespace tnbLib
 				std::shared_ptr<TModel_Shell>& theOuters
 			);
 
-		static std::vector<std::shared_ptr<TModel_Edge>>
+		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>>
 			RetrieveNonSingularEdges
 			(
 				const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
 			);
 
-		static Handle(Poly_Triangulation)
+		static TnbCad_EXPORT Handle(Poly_Triangulation)
 			RetrieveTriangulation
 			(
 				const TopoDS_Face& theFace
 			);
 
-		static std::vector<Handle(Poly_Triangulation)>
+		static TnbCad_EXPORT std::vector<Handle(Poly_Triangulation)>
 			RetrieveTriangulation
 			(
 				const TopoDS_Shape& theShape
 			);
 
-		static std::vector<TopoDS_Edge>
+		static TnbCad_EXPORT std::vector<TopoDS_Edge>
 			RetrieveEdges
 			(
 				const TopoDS_Shape& theShape
 			);
 
-		static std::vector<Handle(Geom2d_Curve)>
+		static TnbCad_EXPORT std::vector<Handle(Geom2d_Curve)>
 			RetrieveParaCurves
 			(
 				const std::vector<TopoDS_Edge>& theEdges, 
 				const gp_Ax2& theSystem
 			);
 
-		static std::vector<Handle(Geom2d_Curve)>
+		static TnbCad_EXPORT std::vector<Handle(Geom2d_Curve)>
 			RetrieveParaCurves
 			(
 				const std::vector<TopoDS_Edge>& theEdges,
 				const Handle(Geom_Surface) theSurface
 			);
 
-		static Standard_Boolean 
+		static TnbCad_EXPORT Standard_Boolean
 			IsClosed
 			(
 				const Cad_BlockEntity<TModel_Surface>& theBlock
 			);
 
-		static void ExportToIGES
+		static TnbCad_EXPORT void ExportToIGES
 		(
 			const word& theUnit,
 			const TopoDS_Shape& theShape,
 			const fileName& theName
 		);
 
-		static void ExportToSTEP
+		static TnbCad_EXPORT void ExportToSTEP
 		(
 			const TopoDS_Shape& theShape,
 			const fileName& name
