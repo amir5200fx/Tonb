@@ -10,4 +10,5 @@ tnbLib::Vec3d::Vec3d
 )
 	: gp_Vec(V.XYZ())
 {
+	// empty body
 }

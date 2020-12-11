@@ -4,6 +4,7 @@
 
 #include <gp_Vec.hxx>
 #include <Pnt3d.hxx>
+#include <Geo_Serialization.hxx>
 
 namespace tnbLib
 {
@@ -15,6 +16,16 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<gp_Vec>(*this);
+		}
 
 	public:
 
