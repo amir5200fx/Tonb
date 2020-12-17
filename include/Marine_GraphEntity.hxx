@@ -19,9 +19,27 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+		}
+
 	protected:
 
-		TnbMarine_EXPORT Marine_GraphEntity();
+		//- default constructor
+
+		Marine_GraphEntity()
+		{}
+
+
+		//- constructors
 
 		TnbMarine_EXPORT Marine_GraphEntity
 		(
@@ -36,9 +54,15 @@ namespace tnbLib
 
 	public:
 
+
+		//- public functions and operators
+
 		virtual ~Marine_GraphEntity()
 		{}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Marine_GraphEntity);
+
 
 #endif // !_Marine_GraphEntity_Header

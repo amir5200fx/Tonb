@@ -48,8 +48,15 @@ namespace tnbLib
 		TnbHydStatic_EXPORT HydStatic_GZ
 		(
 			const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves,
-			const Standard_Real theKG,
-			const Standard_Real theDispv
+			const marineLib::KG& theKG,
+			const marineLib::DISPV& theDispv
+		);
+
+		TnbHydStatic_EXPORT HydStatic_GZ
+		(
+			std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves,
+			marineLib::KG&& theKG,
+			marineLib::DISPV&& theDispv
 		);
 
 		const auto& KG() const
@@ -74,15 +81,23 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT void Perform();
 
-		void LoadCrossCurves
+		TnbHydStatic_EXPORT void LoadCrossCurves
 		(
 			const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves
-		)
-		{
-			theCrossCurves_ = theCrossCurves;
-		}
+		);
 
-		TnbHydStatic_EXPORT void SetKG(const Standard_Real theKG);
+		TnbHydStatic_EXPORT void LoadCrossCurves
+		(
+			std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves
+		);
+
+		TnbHydStatic_EXPORT void SetKG(const marineLib::KG& theKG);
+
+		TnbHydStatic_EXPORT void SetKG(marineLib::KG&& theKG);
+
+		TnbHydStatic_EXPORT void SetDispv(const marineLib::DISPV& theV);
+
+		TnbHydStatic_EXPORT void SetDispv(marineLib::DISPV&& theV);
 	};
 }
 

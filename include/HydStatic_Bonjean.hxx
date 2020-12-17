@@ -4,6 +4,7 @@
 
 #include <Global_Done.hxx>
 #include <HydStatic_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 #include <vector>
@@ -12,13 +13,13 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class HydStatic_Spacing;
 	class HydStatic_BnjCurve;
 	class Marine_CmpSection;
 	class Marine_GraphCurve;
 	class Marine_Graph;
 	class Marine_Body;
 	class Marine_Domain;
-	class Geo_xDistb;
 
 	struct HydStatic_Bonjean_Entity
 	{
@@ -28,6 +29,14 @@ namespace tnbLib
 		std::shared_ptr<Marine_CmpSection> Section;
 		std::shared_ptr<HydStatic_BnjCurve> Curve;
 
+
+		//- default constructor for serializing
+
+		HydStatic_Bonjean_Entity()
+		{}
+
+		//- constructor
+
 		HydStatic_Bonjean_Entity
 		(
 			const std::shared_ptr<Marine_CmpSection>& theSection,
@@ -36,6 +45,9 @@ namespace tnbLib
 			: Section(theSection)
 			, Curve(theCurve)
 		{}
+
+
+		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 	};
 
 	class HydStatic_Bonjean
@@ -50,11 +62,17 @@ namespace tnbLib
 
 		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<Marine_Body> theBody_;
-		std::shared_ptr<Geo_xDistb> theWaters_;
+		std::shared_ptr<HydStatic_Spacing> theWaters_;
 
 		std::vector<std::shared_ptr<entity>> theBonjean_;
 
 		std::shared_ptr<Marine_Graph> theGraph_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
+
 
 		auto& ChangeBonjean()
 		{
@@ -68,14 +86,27 @@ namespace tnbLib
 
 	public:
 
-		TnbHydStatic_EXPORT HydStatic_Bonjean();
+
+		static unsigned short verbose;
+
+
+		//- default constructor
+
+		HydStatic_Bonjean()
+		{}
+
+
+		//- constructor
 
 		TnbHydStatic_EXPORT HydStatic_Bonjean
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain, 
 			const std::shared_ptr<Marine_Body>& theBody,
-			const std::shared_ptr<Geo_xDistb>& theWaters
+			const std::shared_ptr<HydStatic_Spacing>& theWaters
 		);
+
+
+		//- public functions and operators
 
 		const auto& Domain() const
 		{
@@ -122,7 +153,7 @@ namespace tnbLib
 
 		void LoadWaters
 		(
-			const std::shared_ptr<Geo_xDistb>& theWaters
+			const std::shared_ptr<HydStatic_Spacing>& theWaters
 		)
 		{
 			theWaters_ = theWaters;

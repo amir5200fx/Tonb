@@ -5,6 +5,7 @@
 #include <Global_Done.hxx>
 #include <gp_Ax1.hxx>
 #include <HydStatic_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 #include <vector>
@@ -18,6 +19,7 @@ namespace tnbLib
 	class Marine_Domain;
 	class Marine_Graph;
 	class HydStatic_CrsCurve;
+	class HydStatic_Spacing;
 
 	class HydStatic_CrossCurves
 		: public Global_Done
@@ -32,11 +34,16 @@ namespace tnbLib
 		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<Marine_Body> theBody_;
 
-		std::shared_ptr<Geo_xDistb> theHeels_;
+		std::shared_ptr<HydStatic_Spacing> theHeels_;
 
 		std::vector<std::shared_ptr<HydStatic_CrsCurve>> theCrossCurves_;
 
 		std::shared_ptr<Marine_Graph> theGraph_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 
 		auto& ChangeGraph()
@@ -60,7 +67,7 @@ namespace tnbLib
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain, 
 			const std::shared_ptr<Marine_Body>& theBody, 
-			const std::shared_ptr<Geo_xDistb>& theHeels, 
+			const std::shared_ptr<HydStatic_Spacing>& theHeels,
 			const Standard_Integer theNbWaters,
 			const gp_Ax1& theAx
 		);
@@ -113,7 +120,7 @@ namespace tnbLib
 			theBody_ = theBody;
 		}
 
-		void LoadHeels(const std::shared_ptr<Geo_xDistb>& theHeels)
+		void LoadHeels(const std::shared_ptr<HydStatic_Spacing>& theHeels)
 		{
 			theHeels_ = theHeels;
 		}

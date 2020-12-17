@@ -23,6 +23,11 @@ namespace tnbLib
 		Handle(Geom2d_Curve) theCurve_;
 
 
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
+
+
 		static TnbMarine_EXPORT void
 			CheckCurve
 			(
@@ -30,7 +35,17 @@ namespace tnbLib
 				const char* theName
 			);
 
+	protected:
+
+		//- default constructor for serializing
+
+		Marine_GraphCurve()
+		{}
+
 	public:
+
+
+		//- constructors
 
 		TnbMarine_EXPORT explicit Marine_GraphCurve
 		(
@@ -50,6 +65,9 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
+
+		//- public functions and operators
+
 		const auto& Curve() const
 		{
 			return theCurve_;
@@ -66,5 +84,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_GraphCurve)
 
 #endif // !_Marine_GraphCurve_Header

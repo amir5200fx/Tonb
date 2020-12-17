@@ -11,17 +11,18 @@
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_Cloud.hxx>
 #include <SectPx_Edge.hxx>
+#include <SectPx_Registry.hxx>
+#include <SectPx_ScatterRegistry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
-
-#include <boost/graph/minimum_degree_ordering.hpp>
 
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
 
 namespace tnbLib
 {
+
 	typedef std::shared_ptr<SectPx_Frame> frame_t;
 
 	typedef std::shared_ptr<maker::Parameter> parMaker_t;
@@ -48,9 +49,20 @@ namespace tnbLib
 	typedef std::shared_ptr<SectPx_Edge> edge_t;
 	typedef std::shared_ptr<SectPx_RegObj> regObj_t;
 
-	static auto uniKnotAlg_t = std::make_shared<SectPx_UniKnots>();
-	static auto myFrame = std::make_shared<SectPx_Frame>();
+	const auto myRegistry = std::make_shared<SectPx_Registry>();
+	const frame_t myFrame;
 
+	//- global functions
+
+	const auto& getFrame()
+	{
+		return myFrame;
+	}
+
+	const auto& getRegistry()
+	{
+		return myRegistry;
+	}
 
 	Pnt2d createGeoPoint(const double x, const double y)
 	{
@@ -150,6 +162,22 @@ namespace tnbLib
 		return std::move(item);
 	}
 
+	auto getMaster(const pnt_t& p)
+	{
+		if (NOT p->IsMaster())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the point is not master!" << endl
+				<< abort(FatalError);
+		}
+		auto master = std::dynamic_pointer_cast<SectPx_MasterPnt>(p);
+		Debug_Null_Pointer(master);
+		return std::move(master);
+	}
+
+
+	//- print functions
+
 	void printObj(const regObj_t& t)
 	{
 		Info << "object type: " << t->RegObjTypeName() << endl;
@@ -189,34 +217,10 @@ namespace tnbLib
 		printValue(pt);
 	}
 
-	auto getMaster(const pnt_t& p)
-	{
-		if (NOT p->IsMaster())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the point is not master!" << endl
-				<< abort(FatalError);
-		}
-		auto master = std::dynamic_pointer_cast<SectPx_MasterPnt>(p);
-		Debug_Null_Pointer(master);
-		return std::move(master);
-	}
-
-	const auto& getFrame()
-	{
-		return myFrame;
-	}
-
-	const auto & getRegistry()
-	{
-		return getFrame()->Registry();
-	}
-
 	void printFrame()
 	{
 		getFrame()->PrintRegistry();
 	}
-
 
 	// - makers in the frame:
 
@@ -254,7 +258,7 @@ namespace tnbLib
 
 	auto nbEdges()
 	{
-		return getRegistry()->ScatterMap(SectPx_RegObjType::edge).size();
+		return getRegistry()->Scatter()->ScatterMap(SectPx_RegObjType::edge).size();
 	}
 
 	auto getProfile(const int i)
@@ -266,8 +270,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		const auto& reg = getRegistry();
-		const auto& m = reg->ScatterMap(SectPx_RegObjType::profile);
-		
+		const auto& m = reg->Scatter()->ScatterMap(SectPx_RegObjType::profile);
+
 		if (m.empty())
 		{
 			FatalErrorIn(FunctionSIG)
@@ -277,7 +281,7 @@ namespace tnbLib
 
 		auto iter = m.begin();
 		int k = 0;
-		while ((k NOT_EQUAL i) AND (iter NOT_EQUAL m.end()))
+		while ((k NOT_EQUAL i) AND(iter NOT_EQUAL m.end()))
 		{
 			++k;
 			iter++;
@@ -296,7 +300,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		const auto& reg = getRegistry();
-		const auto& m = reg->ScatterMap(SectPx_RegObjType::edge);
+		const auto& m = reg->Scatter()->ScatterMap(SectPx_RegObjType::edge);
 
 		if (m.empty())
 		{
@@ -320,7 +324,7 @@ namespace tnbLib
 
 	const auto& getProfiles()
 	{
-		return getRegistry()->ScatterMap(SectPx_RegObjType::profile);
+		return getRegistry()->Scatter()->ScatterMap(SectPx_RegObjType::profile);
 	}
 
 	auto drawPlt(const word& name)
@@ -367,11 +371,11 @@ namespace tnbLib
 
 	void makeCorner
 	(
-		const Pnt2d& p0, 
-		const Dir2d& d0, 
-		const Standard_Real ang0, 
-		const Pnt2d& p1, 
-		const Dir2d& d1, 
+		const Pnt2d& p0,
+		const Dir2d& d0,
+		const Standard_Real ang0,
+		const Pnt2d& p1,
+		const Dir2d& d1,
 		const Standard_Real ang1
 	)
 	{
@@ -612,8 +616,6 @@ namespace tnbLib
 	{
 		f->PrintRegistry();
 	}
-
-	
 }
 
 #ifdef DebugInfo
@@ -651,7 +653,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const parMaker_t& m, const par_t& p)-> void {removePar(m, p); }), "remove");
 
 		mod->add(chaiscript::fun([](const par_t& p, const std::string& name)-> void {p->SetName(name); }), "setName");
-		
+
 		mod->add(chaiscript::fun([](const double x, const double y)-> auto{auto t = Dir2d(x, y); return std::move(t); }), "makeDir");
 	}
 
