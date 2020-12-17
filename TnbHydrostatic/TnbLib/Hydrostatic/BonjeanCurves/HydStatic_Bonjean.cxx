@@ -1,6 +1,5 @@
 #include <HydStatic_Bonjean.hxx>
 
-#include <Geo_xDistb.hxx>
 #include <Pln_Tools.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_Body.hxx>
@@ -14,6 +13,7 @@
 #include <Marine_System.hxx>
 #include <Marine_xSectionParam.hxx>
 #include <HydStatic_BnjCurve.hxx>
+#include <HydStatic_Spacing.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -21,16 +21,13 @@
 #include <Bnd_Box2d.hxx>
 #include <Geom2d_Curve.hxx>
 
-tnbLib::HydStatic_Bonjean::HydStatic_Bonjean()
-{
-	//- empty body
-}
+unsigned short tnbLib::HydStatic_Bonjean::verbose(0);
 
 tnbLib::HydStatic_Bonjean::HydStatic_Bonjean
 (
 	const std::shared_ptr<Marine_Domain>& theDomain, 
 	const std::shared_ptr<Marine_Body>& theBody,
-	const std::shared_ptr<Geo_xDistb>& theWaters
+	const std::shared_ptr<HydStatic_Spacing>& theWaters
 )
 	: theDomain_(theDomain)
 	, theBody_(theBody)
@@ -135,6 +132,13 @@ namespace tnbLib
 
 void tnbLib::HydStatic_Bonjean::Perform()
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Calculating Bonjean Curves ********" << endl;
+		Info << endl;
+	}
+
 	if (NOT Body())
 	{
 		FatalErrorIn("void HydStatic_Bonjean::Perform()")
@@ -142,12 +146,38 @@ void tnbLib::HydStatic_Bonjean::Perform()
 			<< abort(FatalError);
 	}
 
+	if (NOT Waters())
+	{
+		FatalErrorIn("void HydStatic_Bonjean::Perform()")
+			<< "no water distribution has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Domain())
+	{
+		FatalErrorIn("void HydStatic_Bonjean::Perform()")
+			<< "no domain has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	auto spacing = Waters()->Sections();
+
 	const auto& sections = Body()->Sections();
 	tableOffset qArea;
 
-	Standard_Integer i = 0;
-	for (const auto z : Waters()->Values())
+	if (verbose)
 	{
+		Info << " - nb. of waters: " << (int)spacing.size() << endl;
+	}
+
+	Standard_Integer i = 0;
+	Standard_Integer iter = 0;
+	for (const auto z : spacing)
+	{
+		if (verbose)
+		{
+			Info << " - Iteration nb. " << ++iter << ", z = " << z << endl;
+		}
 		auto domain = Marine_WaterLib::StillWaterDomain(Body(), Domain(), z);
 		Debug_Null_Pointer(domain);
 
@@ -187,7 +217,7 @@ void tnbLib::HydStatic_Bonjean::Perform()
 	std::vector<std::shared_ptr<Marine_GraphCurve>> curves;
 	for (const auto& sect : qArea)
 	{
-		auto Q = bonjean::GetOffsets(sect, Waters()->Values());
+		auto Q = bonjean::GetOffsets(sect, spacing);
 
 		auto c = MarineBase_Tools::Curve(Q);
 		Debug_Null_Pointer(c);
@@ -216,4 +246,11 @@ void tnbLib::HydStatic_Bonjean::Perform()
 	ChangeGraph() = std::move(graph);
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of Calculating Bonjean Curves ********" << endl;
+		Info << endl;
+	}
 }

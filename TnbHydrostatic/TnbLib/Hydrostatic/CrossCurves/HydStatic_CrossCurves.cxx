@@ -17,6 +17,7 @@
 #include <Marine_CmptLib2.hxx>
 #include <Marine_System.hxx>
 #include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_Spacing.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -43,7 +44,7 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 (
 	const std::shared_ptr<Marine_Domain>& theDomain, 
 	const std::shared_ptr<Marine_Body>& theBody,
-	const std::shared_ptr<Geo_xDistb>& theHeels,
+	const std::shared_ptr<HydStatic_Spacing>& theHeels,
 	const Standard_Integer theNbWaters,
 	const gp_Ax1 & theAx
 )
@@ -147,9 +148,9 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 	Standard_Real h0 = 0;
 	//std::vector<std::shared_ptr<Marine_GraphCurve>> curves;
 	auto& curves = ChangeCrossCurves();
-	curves.reserve(Heels()->Size());
+	curves.reserve(Heels()->NbSections());
 
-	for (const auto h : Heels()->Values())
+	for (const auto h : Heels()->Sections())
 	{
 		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(h - h0), sin(h - h0)));
 

@@ -253,6 +253,18 @@
     <Filter Include="TnbLib\Hydrostatic\module">
       <UniqueIdentifier>{ad35baed-06dd-44b0-8e2f-aefab7d7e375}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Spacing">
+      <UniqueIdentifier>{4462c344-aed0-41e4-be3e-dfcda9779872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Spacing\Uniform">
+      <UniqueIdentifier>{d857d76e-36b9-4b08-8c59-739088fc55a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Spacing\Cosine">
+      <UniqueIdentifier>{826b4f66-f49d-44f6-ae3a-9a8326492e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Spacing\Custom">
+      <UniqueIdentifier>{c94d8619-9749-4e35-8ec4-8f919d610cfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -498,6 +510,15 @@
     <ClInclude Include="TnbLib\Hydrostatic\module\HydStatic_Module.hxx">
       <Filter>TnbLib\Hydrostatic\module</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Spacing\HydStatic_Spacing.hxx">
+      <Filter>TnbLib\Hydrostatic\Spacing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Spacing\Uniform\HydStatic_UniformSpacing.hxx">
+      <Filter>TnbLib\Hydrostatic\Spacing\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Spacing\Custom\HydStatic_CustomSpacing.hxx">
+      <Filter>TnbLib\Hydrostatic\Spacing\Custom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
@@ -643,6 +664,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\FloatBody\HydStatic_FloatBodyIO.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\FloatBody</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydCurve\HydStatic_HydCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\BnjCurve\HydStatic_BnjCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\BnjCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_BonjeanIO.cxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanCurves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurve\HydStatic_CrsCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\CrossCurves\HydStatic_CrossCurvesIO.cxx">
+      <Filter>TnbLib\Hydrostatic\CrossCurves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Spacing\HydStatic_Spacing.cxx">
+      <Filter>TnbLib\Hydrostatic\Spacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Spacing\Uniform\HydStatic_UniformSpacing.cxx">
+      <Filter>TnbLib\Hydrostatic\Spacing\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Spacing\Uniform\HydStatic_UniformSpacingIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Spacing\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Spacing\Custom\HydStatic_CustomSpacing.cxx">
+      <Filter>TnbLib\Hydrostatic\Spacing\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Spacing\Custom\HydStatic_CustomSpacingIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Spacing\Custom</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

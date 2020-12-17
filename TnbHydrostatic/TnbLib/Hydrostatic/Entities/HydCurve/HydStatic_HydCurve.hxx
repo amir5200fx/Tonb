@@ -19,7 +19,20 @@ namespace tnbLib
 
 		Handle(Geom2d_Curve) theGeom_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
+
 	protected:
+
+		//- default constructor
+
+		HydStatic_HydCurve()
+		{}
+
+
+		//- constructors
 
 		TnbHydStatic_EXPORT HydStatic_HydCurve
 		(
@@ -47,11 +60,16 @@ namespace tnbLib
 	public:
 
 
+		//- public functions and operators
+
+
 		const auto& Geometry() const
 		{
 			return theGeom_;
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::HydStatic_HydCurve);
 
 #endif // !_HydStatic_HydCurve_Header

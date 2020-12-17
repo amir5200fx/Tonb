@@ -21,6 +21,17 @@ namespace tnbLib
 		Standard_Real theHeel_;
 
 
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<HydStatic_HydCurve>(*this);
+			ar & theHeel_;
+		}
+
 		auto& ChangeHeel()
 		{
 			return theHeel_;
@@ -34,7 +45,17 @@ namespace tnbLib
 			theHeel_ = theHeel;
 		}
 
+	protected:
+
+
+		//- default constructor for serializing
+		HydStatic_CrsCurve()
+		{}
+
 	public:
+
+
+		//- constructors
 
 		TnbHydStatic_EXPORT HydStatic_CrsCurve
 		(
@@ -57,6 +78,9 @@ namespace tnbLib
 			const Standard_Real theHeel
 		);
 
+
+		//- public functions and operators
+
 		auto Heel() const
 		{
 			return theHeel_;
@@ -73,5 +97,8 @@ namespace tnbLib
 		
 	};
 }
+
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_CrsCurve);
 
 #endif // !_HydStatic_CrsCurve_Header

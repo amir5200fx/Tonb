@@ -13,18 +13,33 @@ tnbLib::HydStatic_GZ::HydStatic_GZ()
 	: theKg_(marineLib::KG::null)
 	, theDispv_(marineLib::DISPV::null)
 {
+	//- empty body
 }
 
 tnbLib::HydStatic_GZ::HydStatic_GZ
 (
 	const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves,
-	const Standard_Real theKG,
-	const Standard_Real theDispv
+	const marineLib::KG& theKG,
+	const marineLib::DISPV& theDispv
 )
 	: theCrossCurves_(theCrossCurves)
 	, theKg_(theKG)
 	, theDispv_(theDispv)
 {
+	//- empty body
+}
+
+tnbLib::HydStatic_GZ::HydStatic_GZ
+(
+	std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves,
+	marineLib::KG&& theKG,
+	marineLib::DISPV&& theDispv
+)
+	: theCrossCurves_(std::move(theCrossCurves))
+	, theKg_(std::move(theKG))
+	, theDispv_(std::move(theDispv))
+{
+	//- empty body
 }
 
 void tnbLib::HydStatic_GZ::Perform()
@@ -65,10 +80,50 @@ void tnbLib::HydStatic_GZ::Perform()
 	Change_IsDone() = Standard_True;
 }
 
-void tnbLib::HydStatic_GZ::SetKG
+void tnbLib::HydStatic_GZ::LoadCrossCurves
 (
-	const Standard_Real theKG
+	const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves
 )
 {
-	ChangeKG()() = theKG;
+	theCrossCurves_ = theCrossCurves;
+}
+
+void tnbLib::HydStatic_GZ::LoadCrossCurves
+(
+	std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves
+)
+{
+	theCrossCurves_ = std::move(theCrossCurves);
+}
+
+void tnbLib::HydStatic_GZ::SetKG
+(
+	const tnbLib::marineLib::KG& theKG
+)
+{
+	theKg_ = theKG;
+}
+
+void tnbLib::HydStatic_GZ::SetKG
+(
+	marineLib::KG && theKG
+)
+{
+	theKg_ = std::move(theKG);
+}
+
+void tnbLib::HydStatic_GZ::SetDispv
+(
+	const marineLib::DISPV & theV
+)
+{
+	theDispv_ = theV;
+}
+
+void tnbLib::HydStatic_GZ::SetDispv
+(
+	marineLib::DISPV && theV
+)
+{
+	theDispv_ = std::move(theV);
 }

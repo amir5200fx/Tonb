@@ -13,7 +13,29 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<HydStatic_HydCurve>(*this);
+		}
+
+	protected:
+
+
+		//- default constructor for serializing 
+
+		HydStatic_BnjCurve()
+		{}
+
 	public:
+
+
+		//- constructors
 
 		TnbHydStatic_EXPORT HydStatic_BnjCurve
 		(
@@ -33,6 +55,9 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
+
+		//- private functions and operators
+
 		TnbHydStatic_EXPORT Standard_Boolean IsIntersect
 		(
 			const Standard_Real theT
@@ -49,5 +74,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_BnjCurve);
 
 #endif // !_HydStatic_BnjCurve_Header
