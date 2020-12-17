@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{3341584b-fffc-42f4-8fe4-5c9110143d7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="frameMaker.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="frameMaker_Module.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="frameMakerFwd.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="frameMaker.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
