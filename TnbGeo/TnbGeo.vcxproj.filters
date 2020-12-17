@@ -912,6 +912,12 @@
     <ClInclude Include="TnbLib\IO\TecPlot\TecPlotI.hxx">
       <Filter>TnbLib\IO\Tecplot</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\PriorityList\Geo_IntPriorityList.hxx">
+      <Filter>TnbLib\Geo\PriorityList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\PriorityList\Geo_RealPriorityList.hxx">
+      <Filter>TnbLib\Geo\PriorityList</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">

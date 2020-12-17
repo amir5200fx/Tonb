@@ -241,8 +241,10 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2dI.hxx" />
     <ClInclude Include="TnbLib\Geo\Point\3d\Pnt3d.hxx" />
     <ClInclude Include="TnbLib\Geo\Point\3d\Pnt3dI.hxx" />
+    <ClInclude Include="TnbLib\Geo\PriorityList\Geo_IntPriorityList.hxx" />
     <ClInclude Include="TnbLib\Geo\PriorityList\Geo_PriorityList.hxx" />
     <ClInclude Include="TnbLib\Geo\PriorityList\Geo_PriorityListI.hxx" />
+    <ClInclude Include="TnbLib\Geo\PriorityList\Geo_RealPriorityList.hxx" />
     <ClInclude Include="TnbLib\Geo\ProfileFun\Const\Geo_ProfileFun_Const.hxx" />
     <ClInclude Include="TnbLib\Geo\ProfileFun\Geom\Geo_ProfileFun_Geom.hxx" />
     <ClInclude Include="TnbLib\Geo\ProfileFun\Geo_ProfileFun.hxx" />
