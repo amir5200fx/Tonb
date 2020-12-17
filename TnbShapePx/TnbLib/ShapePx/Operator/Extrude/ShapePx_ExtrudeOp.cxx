@@ -5,6 +5,7 @@
 #include <ShapePx_Spacing.hxx>
 #include <ShapePx_Section.hxx>
 #include <ShapePx_ExtrudedPatch.hxx>
+#include <ShapePx_CtrlNet.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -37,6 +38,18 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 	//- update profiles before retrieving the values
 	Patch()->UpdateProfiles();
 
+	const auto& section = Patch()->Section();
+	Debug_Null_Pointer(section);
+	const auto nbProfiles = section->NbProfiles();
+
+	std::vector<std::shared_ptr<ShapePx_CtrlNet>> nets;
+	nets.reserve(nbProfiles);
+	for (auto& x : nets)
+	{
+		x = std::make_shared<ShapePx_CtrlNet>();
+		x->RowsRef().reserve(Xs.size());
+	}
+
 	for (auto x : Xs)
 	{
 		auto xs = x0 + Spacing()->NormalizedParameter(x)*(x1 - x0);
@@ -48,11 +61,16 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 		section->SetValues(paraList);
 
 		auto profiles = section->RetrieveProfiles();
+
+		Standard_Integer k = 0;
 		for (const auto& p : profiles)
 		{
 			Debug_Null_Pointer(p);
 			auto pnts = SectPx_Tools::RetrieveControlPoints(p);
-		}
 
+			auto& row = nets[k++]->RowsRef();
+			row.push_back(std::move(pnts));
+		}
 	}
+	Change_IsDone() = Standard_True;
 }

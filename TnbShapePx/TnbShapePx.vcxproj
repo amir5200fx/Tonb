@@ -39,13 +39,13 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -72,9 +72,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)d</TargetName>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -82,12 +84,20 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Linear;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ParamX;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Approx;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Interpl;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Func;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Uniform;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Discrete;$(ProjectDir)TnbLib\ShapePx\Entities\Profile;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Revolved;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Extruded;$(ProjectDir)TnbLib\ShapePx\Entities\Patch;$(ProjectDir)TnbLib\ShapePx\Entities\Shape;$(ProjectDir)TnbLib\ShapePx\Entities\Section;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlNet;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlRow;$(ProjectDir)TnbLib\ShapePx\Entities\GeoPatch;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Cylindrical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Spherical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip;$(ProjectDir)TnbLib\ShapePx\Entities\ParValue;$(ProjectDir)TnbLib\ShapePx\Entities\Entity;$(ProjectDir)TnbLib\ShapePx\Operator\Revolve;$(ProjectDir)TnbLib\ShapePx\Operator\Extrude;$(ProjectDir)TnbLib\ShapePx\Operator;$(ProjectDir)TnbLib\ShapePx\Spacing\Custom;$(ProjectDir)TnbLib\ShapePx\Spacing\Cosine;$(ProjectDir)TnbLib\ShapePx\Spacing\Uniform;$(ProjectDir)TnbLib\ShapePx\Spacing;$(ProjectDir)TnbLib\ShapePx\Memory;$(SolutionDir)TnbSectPx\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbIO\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Linear;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ParamX;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Approx;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Interpl;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Func;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Uniform;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Discrete;$(ProjectDir)TnbLib\ShapePx\Entities\Profile;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Revolved;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Extruded;$(ProjectDir)TnbLib\ShapePx\Entities\Patch;$(ProjectDir)TnbLib\ShapePx\Entities\Shape;$(ProjectDir)TnbLib\ShapePx\Entities\Section;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlNet;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlRow;$(ProjectDir)TnbLib\ShapePx\Entities\GeoPatch;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Cylindrical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Spherical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip;$(ProjectDir)TnbLib\ShapePx\Entities\ParValue;$(ProjectDir)TnbLib\ShapePx\Entities\Entity;$(ProjectDir)TnbLib\ShapePx\Operator\Revolve;$(ProjectDir)TnbLib\ShapePx\Operator\Extrude;$(ProjectDir)TnbLib\ShapePx\Operator;$(ProjectDir)TnbLib\ShapePx\Spacing\Custom;$(ProjectDir)TnbLib\ShapePx\Spacing\Cosine;$(ProjectDir)TnbLib\ShapePx\Spacing\Uniform;$(ProjectDir)TnbLib\ShapePx\Spacing;$(ProjectDir)TnbLib\ShapePx\ExtrudeSpacing;$(ProjectDir)TnbLib\ShapePx\CustomizeSpacing;$(ProjectDir)TnbLib\ShapePx\module;$(ProjectDir)TnbLib\ShapePx\Tools;$(ProjectDir)TnbLib\ShapePx\Memory;$(SolutionDir)TnbSectPx\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbIO\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>TnbShapePx_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>boost_serialization-vc141-mt-gd-x64-1_69.lib;zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -123,16 +133,19 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Linear;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ParamX;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Approx;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Interpl;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Func;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Uniform;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Discrete;$(ProjectDir)TnbLib\ShapePx\Entities\Profile;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Revolved;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Extruded;$(ProjectDir)TnbLib\ShapePx\Entities\Patch;$(ProjectDir)TnbLib\ShapePx\Entities\Shape;$(ProjectDir)TnbLib\ShapePx\Entities\Section;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlNet;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlRow;$(ProjectDir)TnbLib\ShapePx\Entities\GeoPatch;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Cylindrical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Spherical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip;$(ProjectDir)TnbLib\ShapePx\Entities\ParValue;$(ProjectDir)TnbLib\ShapePx\Entities\Entity;$(ProjectDir)TnbLib\ShapePx\Operator\Revolve;$(ProjectDir)TnbLib\ShapePx\Operator\Extrude;$(ProjectDir)TnbLib\ShapePx\Operator;$(ProjectDir)TnbLib\ShapePx\Spacing\Custom;$(ProjectDir)TnbLib\ShapePx\Spacing\Cosine;$(ProjectDir)TnbLib\ShapePx\Spacing\Uniform;$(ProjectDir)TnbLib\ShapePx\Spacing;$(ProjectDir)TnbLib\ShapePx\Memory;$(SolutionDir)TnbSectPx\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbIO\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Linear;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\ParamX;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Approx;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Interpl;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Func;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Uniform;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous\Custom;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Continuous;$(ProjectDir)TnbLib\ShapePx\Entities\Profile\Discrete;$(ProjectDir)TnbLib\ShapePx\Entities\Profile;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Revolved;$(ProjectDir)TnbLib\ShapePx\Entities\Patch\Extruded;$(ProjectDir)TnbLib\ShapePx\Entities\Patch;$(ProjectDir)TnbLib\ShapePx\Entities\Shape;$(ProjectDir)TnbLib\ShapePx\Entities\Section;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlNet;$(ProjectDir)TnbLib\ShapePx\Entities\CtrlRow;$(ProjectDir)TnbLib\ShapePx\Entities\GeoPatch;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Cylindrical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip\Spherical;$(ProjectDir)TnbLib\ShapePx\Entities\Tip;$(ProjectDir)TnbLib\ShapePx\Entities\ParValue;$(ProjectDir)TnbLib\ShapePx\Entities\Entity;$(ProjectDir)TnbLib\ShapePx\Operator\Revolve;$(ProjectDir)TnbLib\ShapePx\Operator\Extrude;$(ProjectDir)TnbLib\ShapePx\Operator;$(ProjectDir)TnbLib\ShapePx\Spacing\Custom;$(ProjectDir)TnbLib\ShapePx\Spacing\Cosine;$(ProjectDir)TnbLib\ShapePx\Spacing\Uniform;$(ProjectDir)TnbLib\ShapePx\Spacing;$(ProjectDir)TnbLib\ShapePx\ExtrudeSpacing;$(ProjectDir)TnbLib\ShapePx\CustomizeSpacing;$(ProjectDir)TnbLib\ShapePx\module;$(ProjectDir)TnbLib\ShapePx\Tools;$(ProjectDir)TnbLib\ShapePx\Memory;$(SolutionDir)TnbSectPx\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbIO\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>TnbShapePx_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>boost_serialization-vc141-mt-gd-x64-1_69.lib;zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\ShapePx\CustomizeSpacing\ShapePx_CustomizeSpacing.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Entities\CtrlNet\ShapePx_CtrlNet.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Entities\CtrlRow\ShapePx_CtrlRow.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx" />
@@ -149,20 +162,31 @@
     <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Uniform\ShapePx_ContinProfile_Uniform.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Entities\Profile\ShapePx_Profile.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.hxx" />
+    <ClInclude Include="TnbLib\ShapePx\Entities\Shape\ShapePx_Shape.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Entities\Tip\ShapePx_Tip.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Entities\Tip\Spherical\ShapePx_SphericalTip.hxx" />
+    <ClInclude Include="TnbLib\ShapePx\ExtrudeSpacing\ShapePx_ExtrudeSpacing.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Memory\ShapePx_Memory.hxx" />
+    <ClInclude Include="TnbLib\ShapePx\module\ShapePx_Module.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Operator\Extrude\ShapePx_ExtrudeOp.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Operator\ShapePx_Operator.hxx" />
+    <ClInclude Include="TnbLib\ShapePx\Spacing\Custom\ShapePx_CustomSpacing.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Spacing\ShapePx_Spacing.hxx" />
     <ClInclude Include="TnbLib\ShapePx\Spacing\Uniform\ShapePx_UniformSpacing.hxx" />
+    <ClInclude Include="TnbLib\ShapePx\Tools\ShapePx_Tools.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TnbLib\ShapePx\CustomizeSpacing\ShapePx_CustomizeSpacing.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\CtrlNet\ShapePx_CtrlNetIO.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\CtrlRow\ShapePx_CtrlRowIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\GeoPatch\ShapePx_GeoPatch.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\GeoPatch\ShapePx_GeoPatchIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValue.cxx" />
-    <ClCompile Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValueIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Patch\Extruded\ShapePx_ExtrudedPatch.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\Patch\Extruded\ShapePx_ExtrudedPatchIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Patch\ShapePx_Patch.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\Patch\ShapePx_PatchIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset\ShapePx_ContinProfile_OffsetCustom.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Offset\ShapePx_ContinProfile_OffsetCustomIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\ShapePx_ContinProfile_Custom.cxx" />
@@ -172,11 +196,32 @@
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints\ShapePx_ContinProfile_ThreePoints.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Uniform\ShapePx_ContinProfile_Uniform.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Section\ShapePx_Section.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\Section\ShapePx_SectionIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Tip\Spherical\ShapePx_SphericalTip.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\ExtrudeSpacing\ShapePx_ExtrudeSpacing.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Memory\ShapePx_Memory.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Operator\Extrude\ShapePx_ExtrudeOp.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Operator\ShapePx_Operator.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Spacing\Custom\ShapePx_CustomSpacingIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Spacing\Uniform\ShapePx_UniformSpacing.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Tools\ShapePx_Tools.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">
+      <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbNumAlg\TnbNumAlg.vcxproj">
+      <Project>{9d2ace52-928f-4b06-aecd-3a7cef4f63bb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbSectPx\TnbSectPx.vcxproj">
+      <Project>{b4850af1-6bec-4f8d-9224-72c079d08de9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

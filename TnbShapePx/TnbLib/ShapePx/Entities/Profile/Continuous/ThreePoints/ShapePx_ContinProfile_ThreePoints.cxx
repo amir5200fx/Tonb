@@ -25,6 +25,29 @@ tnbLib::shapePxLib::ContinProfile_ThreePoints::Value
 	return gsl_spline_eval(theSpline_, x, theAcc_);
 }
 
+std::vector<typename tnbLib::ShapePx_Profile::offsetPoint>
+tnbLib::shapePxLib::ContinProfile_ThreePoints::RetrieveOffsets() const
+{
+	std::vector<offsetPoint> Q;
+	Q.reserve(3);
+
+	Q.push_back(Q0());
+	Q.push_back(Q1());
+	Q.push_back(Q2());
+	return std::move(Q);
+}
+
+std::vector<Standard_Real> 
+tnbLib::shapePxLib::ContinProfile_ThreePoints::X() const
+{
+	std::vector<Standard_Real> xs;
+	xs.reserve(3);
+	xs.push_back(X0());
+	xs.push_back(X1());
+	xs.push_back(X2());
+	return std::move(xs);
+}
+
 void tnbLib::shapePxLib::ContinProfile_ThreePoints::Perform()
 {
 	if (NOT theAcc_)
@@ -80,4 +103,9 @@ void tnbLib::shapePxLib::ContinProfile_ThreePoints::Perform()
 	gsl_spline_init(theSpline_, x, y, 5);
 
 	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::shapePxLib::ContinProfile_ThreePoints::Update()
+{
+	Perform();
 }

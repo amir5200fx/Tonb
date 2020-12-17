@@ -25,12 +25,33 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
 
 tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
 (
+	std::shared_ptr<SectPx_ExtrProfile>&& theProfile
+)
+	: theQ_(std::move(theProfile))
+{
+	// empty body
+}
+
+tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
+(
 	const Standard_Integer theIndex,
 	const word & theName,
 	const std::shared_ptr<SectPx_ExtrProfile>& theProfile
 )
 	: ContinProfile_Custom(theIndex, theName)
 	, theQ_(theProfile)
+{
+	// empty body
+}
+
+tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
+(
+	const Standard_Integer theIndex,
+	const word & theName,
+	std::shared_ptr<SectPx_ExtrProfile>&& theProfile
+)
+	: ContinProfile_Custom(theIndex, theName)
+	, theQ_(std::move(theProfile))
 {
 	// empty body
 }
@@ -93,11 +114,17 @@ namespace tnbLib
 				FatalErrorIn(FunctionSIG)
 					<< "unspecified type of the profile" << endl
 					<< abort(FatalError);
+				return std::vector<Pnt2d>();
 			}
-				break;
 			}
 		}
 	}
+}
+
+Standard_Integer 
+tnbLib::shapePxLib::ContinProfile_OffsetCustom::NbQs() const
+{
+	return theQ_->NbPoints();
 }
 
 void tnbLib::shapePxLib::ContinProfile_OffsetCustom::Perform()
@@ -231,6 +258,27 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::Value
 	{
 		return gsl_spline_eval(theSpline_, x, theAcc_);
 	}
+}
+
+std::vector<typename tnbLib::ShapePx_Profile::offsetPoint>
+tnbLib::shapePxLib::ContinProfile_OffsetCustom::RetrieveOffsets() const
+{
+	std::vector<offsetPoint> Q;
+	Q.reserve(theQ_->NbPoints());
+	for (Standard_Integer i = 0; i < theQ_->NbPoints(); i++)
+	{
+		const auto& pt = theQ_->Point(i);
+		offsetPoint q = { pt.X(),pt.Y() };
+		Q.push_back(std::move(q));
+	}
+	return std::move(Q);
+}
+
+std::vector<Standard_Real> 
+tnbLib::shapePxLib::ContinProfile_OffsetCustom::X() const
+{
+	auto xs = theQ_->X();
+	return std::move(xs);
 }
 
 void tnbLib::shapePxLib::ContinProfile_OffsetCustom::Update()

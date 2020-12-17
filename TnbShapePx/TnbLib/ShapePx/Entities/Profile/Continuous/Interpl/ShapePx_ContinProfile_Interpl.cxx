@@ -69,6 +69,31 @@ tnbLib::shapePxLib::ContinProfile_Interpl::Value
 	return gsl_spline_eval(theSpline_, x, theAcc_);
 }
 
+std::vector<typename tnbLib::ShapePx_Profile::offsetPoint>
+tnbLib::shapePxLib::ContinProfile_Interpl::RetrieveOffsets() const
+{
+	std::vector<offsetPoint> Q;
+	Q.reserve(NbQ());
+
+	for (const auto& x : Qs())
+	{
+		Q.push_back(x);
+	}
+	return std::move(Q);
+}
+
+std::vector<Standard_Real> 
+tnbLib::shapePxLib::ContinProfile_Interpl::X() const
+{
+	std::vector<Standard_Real> xs;
+	xs.reserve(NbQ());
+	for (const auto& x : Qs())
+	{
+		xs.push_back(x.x);
+	}
+	return std::move(xs);
+}
+
 void tnbLib::shapePxLib::ContinProfile_Interpl::Perform()
 {
 	if (NOT theAcc_)
@@ -122,5 +147,10 @@ void tnbLib::shapePxLib::ContinProfile_Interpl::Perform()
 	delete[] ys;
 
 	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::shapePxLib::ContinProfile_Interpl::Update()
+{
+	Perform();
 }
 

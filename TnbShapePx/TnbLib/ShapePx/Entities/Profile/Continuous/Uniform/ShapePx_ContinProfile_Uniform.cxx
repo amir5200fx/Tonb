@@ -26,3 +26,18 @@ tnbLib::shapePxLib::ContinProfile_Uniform::RetrieveOffsets() const
 	Q.push_back(std::move(q1));
 	return std::move(Q);
 }
+
+std::vector<Standard_Real> 
+tnbLib::shapePxLib::ContinProfile_Uniform::X() const
+{
+	std::vector<Standard_Real> xs;
+	xs.reserve(2);
+	xs.push_back(theX0_);
+	xs.push_back(theX1_);
+	return std::move(xs);
+}
+
+void tnbLib::shapePxLib::ContinProfile_Uniform::Update()
+{
+	// do nothing
+}

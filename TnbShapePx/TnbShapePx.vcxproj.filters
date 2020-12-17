@@ -106,6 +106,18 @@
     <Filter Include="TnbLib\ShapePx\Entities\ParValue">
       <UniqueIdentifier>{fbe400fb-1704-49e4-8ecf-551399b04cef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\module">
+      <UniqueIdentifier>{5f801c98-79e2-4c0d-b411-99093d7d16ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Tools">
+      <UniqueIdentifier>{8f1a92a4-3c8b-4c47-8699-43ea43c7ad44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\CustomizeSpacing">
+      <UniqueIdentifier>{788e0358-e1a4-46d9-960d-6405efc7fd24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\ExtrudeSpacing">
+      <UniqueIdentifier>{a798a564-5a8c-4ecb-aae7-eb170a18f52d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -177,6 +189,24 @@
     <ClInclude Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValue.hxx">
       <Filter>TnbLib\ShapePx\Entities\ParValue</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\module\ShapePx_Module.hxx">
+      <Filter>TnbLib\ShapePx\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Spacing\Custom\ShapePx_CustomSpacing.hxx">
+      <Filter>TnbLib\ShapePx\Spacing\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Tools\ShapePx_Tools.hxx">
+      <Filter>TnbLib\ShapePx\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\CustomizeSpacing\ShapePx_CustomizeSpacing.hxx">
+      <Filter>TnbLib\ShapePx\CustomizeSpacing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Shape\ShapePx_Shape.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\ExtrudeSpacing\ShapePx_ExtrudeSpacing.hxx">
+      <Filter>TnbLib\ShapePx\ExtrudeSpacing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
@@ -233,8 +263,38 @@
     <ClCompile Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValue.cxx">
       <Filter>TnbLib\ShapePx\Entities\ParValue</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\ShapePx\Entities\ParValue\ShapePx_ParValueIO.cxx">
-      <Filter>TnbLib\ShapePx\Entities\ParValue</Filter>
+    <ClCompile Include="TnbLib\ShapePx\Entities\CtrlNet\ShapePx_CtrlNetIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\CtrlNet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\CtrlRow\ShapePx_CtrlRowIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\CtrlRow</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\GeoPatch\ShapePx_GeoPatch.cxx">
+      <Filter>TnbLib\ShapePx\Entities\GeoPatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\GeoPatch\ShapePx_GeoPatchIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\GeoPatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Section\ShapePx_SectionIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Patch\ShapePx_PatchIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Patch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Patch\Extruded\ShapePx_ExtrudedPatchIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Patch\Extruded</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Spacing\Custom\ShapePx_CustomSpacingIO.cxx">
+      <Filter>TnbLib\ShapePx\Spacing\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Tools\ShapePx_Tools.cxx">
+      <Filter>TnbLib\ShapePx\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\CustomizeSpacing\ShapePx_CustomizeSpacing.cxx">
+      <Filter>TnbLib\ShapePx\CustomizeSpacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\ExtrudeSpacing\ShapePx_ExtrudeSpacing.cxx">
+      <Filter>TnbLib\ShapePx\ExtrudeSpacing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

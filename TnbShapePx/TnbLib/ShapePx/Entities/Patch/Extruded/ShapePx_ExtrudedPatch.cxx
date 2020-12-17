@@ -1,5 +1,8 @@
 #include <ShapePx_ExtrudedPatch.hxx>
 
+#include <ShapePx_ContinProfile.hxx>
+#include <ShapePx_Profile.hxx>
+#include <ShapePx_ParValue.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -33,6 +36,44 @@ tnbLib::ShapePx_ExtrudedPatch::ShapePx_ExtrudedPatch
 	// empty body
 }
 
+Standard_Boolean 
+tnbLib::ShapePx_ExtrudedPatch::IsExtruded() const
+{
+	return Standard_True;
+}
+
+Standard_Real
+tnbLib::ShapePx_ExtrudedPatch::Lower() const
+{
+	Debug_If_Condition(NOT theParToProfile_.size());
+	const auto iter = theParToProfile_.cbegin();
+	return iter->second->Lower();
+}
+
+Standard_Real
+tnbLib::ShapePx_ExtrudedPatch::Upper() const
+{
+	Debug_If_Condition(NOT theParToProfile_.size());
+	const auto iter = theParToProfile_.cbegin();
+	return iter->second->Upper();
+}
+
+Standard_Real
+tnbLib::ShapePx_ExtrudedPatch::MinLower() const
+{
+	Debug_If_Condition(NOT theParToProfile_.size());
+	const auto iter = theParToProfile_.cbegin();
+	return iter->second->MinLower();
+}
+
+Standard_Real
+tnbLib::ShapePx_ExtrudedPatch::MaxUpper() const
+{
+	Debug_If_Condition(NOT theParToProfile_.size());
+	const auto iter = theParToProfile_.cbegin();
+	return iter->second->MaxUpper();
+}
+
 std::shared_ptr<tnbLib::ShapePx_Profile> 
 tnbLib::ShapePx_ExtrudedPatch::RemoveProfile
 (
@@ -52,6 +93,26 @@ tnbLib::ShapePx_ExtrudedPatch::RemoveProfile
 	return std::move(item);
 }
 
+std::shared_ptr<tnbLib::ShapePx_ParValue>
+tnbLib::ShapePx_ExtrudedPatch::RetrieveParValues
+(
+	const Standard_Real xi
+) const
+{
+	auto values = std::make_shared<ShapePx_ParValue>();
+	for (const auto& x : theParToProfile_)
+	{
+		auto cont = std::dynamic_pointer_cast<ShapePx_ContinProfile>(x.second);
+		Debug_Null_Pointer(cont);
+
+		auto id = x.first;
+		auto val = cont->Value(xi);
+
+		values->SetValue(id, val);
+	}
+	return std::move(values);
+}
+
 void tnbLib::ShapePx_ExtrudedPatch::ImportProfileForParameter
 (
 	const Standard_Integer theParIndex, 
@@ -69,3 +130,27 @@ void tnbLib::ShapePx_ExtrudedPatch::ImportProfileForParameter
 	}
 }
 
+void tnbLib::ShapePx_ExtrudedPatch::ImportProfileForParameter
+(
+	const Standard_Integer theParIndex, 
+	std::shared_ptr<ShapePx_Profile>&& theProfile
+)
+{
+	auto paired = std::make_pair(theParIndex, std::move(theProfile));
+	auto insert = theParToProfile_.insert(std::move(paired));
+	if (NOT insert.second)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to insert the profile into the map: duplicate data!" << endl
+			<< "- index= " << theParIndex << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::ShapePx_ExtrudedPatch::UpdateProfiles()
+{
+	for (const auto& x : theParToProfile_)
+	{
+		x.second->Update();
+	}
+}

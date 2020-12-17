@@ -39,3 +39,15 @@ tnbLib::ShapePx_Patch::ShapePx_Patch
 {
 	// empty body
 }
+
+Standard_Boolean 
+tnbLib::ShapePx_Patch::IsExtruded() const
+{
+	return Standard_False;
+}
+
+Standard_Boolean 
+tnbLib::ShapePx_Patch::IsRevolved() const
+{
+	return Standard_False;
+}
