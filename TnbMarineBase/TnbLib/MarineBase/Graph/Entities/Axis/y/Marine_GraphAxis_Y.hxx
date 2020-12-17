@@ -13,9 +13,26 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Marine_GraphAxis>(*this);
+		}
+
 	public:
 
-		TnbMarine_EXPORT Marine_GraphAxis_Y();
+		//- default constructor
+
+		Marine_GraphAxis_Y()
+		{}
+
+
+		//- constructors
 
 		TnbMarine_EXPORT explicit Marine_GraphAxis_Y
 		(
@@ -35,5 +52,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_GraphAxis_Y);
 
 #endif // !_Marine_GraphAxis_Y_Header

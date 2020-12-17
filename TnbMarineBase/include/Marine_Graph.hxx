@@ -28,9 +28,21 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<Marine_GraphCurve>> theCurves_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMarine_EXPORT);
+
 	public:
 
-		TnbMarine_EXPORT Marine_Graph();
+
+		//- default constructor
+
+		Marine_Graph()
+		{}
+
+
+		//- constructors
 
 		TnbMarine_EXPORT Marine_Graph
 		(
@@ -42,6 +54,9 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const word& theName
 		);
+
+
+		//- public functions and operators
 
 		TnbMarine_EXPORT Standard_Integer NbCurves() const;
 
@@ -88,5 +103,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_Graph);
 
 #endif // !_Marine_Graph_Header

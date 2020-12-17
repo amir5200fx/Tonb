@@ -1,15 +1,12 @@
 #include <Marine_Graph.hxx>
 
-tnbLib::Marine_Graph::Marine_Graph()
-{
-}
-
 tnbLib::Marine_Graph::Marine_Graph
 (
 	const Standard_Integer theIndex
 )
 	: Marine_GraphEntity(theIndex)
 {
+	//- empty body
 }
 
 tnbLib::Marine_Graph::Marine_Graph
@@ -19,6 +16,7 @@ tnbLib::Marine_Graph::Marine_Graph
 )
 	: Marine_GraphEntity(theIndex, theName)
 {
+	//- empty body
 }
 
 Standard_Integer 

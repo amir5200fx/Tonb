@@ -13,12 +13,32 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Marine_GraphEntity>(*this);
+		}
+
 	public:
 
-		TnbMarine_EXPORT Marine_GraphTitle();
+
+		//- default constructor
+
+		Marine_GraphTitle()
+		{}
+
+
+		//- constructor
 
 		TnbMarine_EXPORT explicit Marine_GraphTitle(const word& theName);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_GraphTitle);
 
 #endif // !_Marine_GraphTitle_Header

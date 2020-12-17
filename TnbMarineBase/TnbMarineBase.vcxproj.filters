@@ -1250,9 +1250,6 @@
     <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Curve\Marine_GraphCurve.cxx">
       <Filter>TnbLib\MarineBase\Graph\Entities\Curve</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\Marine_GraphAxis.cxx">
-      <Filter>TnbLib\MarineBase\Graph\Entities\Axis</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\y\Marine_GraphAxis_Y.cxx">
       <Filter>TnbLib\MarineBase\Graph\Entities\Axis\y</Filter>
     </ClCompile>
@@ -1624,6 +1621,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Wave\Marine_WaveIO.cxx">
       <Filter>TnbLib\MarineBase\Wave</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\x\Marine_GraphAxis_XIO.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Axis\x</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Axis\y\Marine_GraphAxis_YIO.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Axis\y</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Curve\Marine_GraphCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Entities\Title\Marine_GraphTitleIO.cxx">
+      <Filter>TnbLib\MarineBase\Graph\Entities\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Graph\Marine_GraphIO.cxx">
+      <Filter>TnbLib\MarineBase\Graph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
