@@ -30,25 +30,25 @@ namespace tnbLib
 			return theFrameReg_;
 		}
 
-		static void disJoinSegment
+		static TnbSectPx_EXPORT void disJoinSegment
 		(
 			const std::shared_ptr<SectPx_Pole>& thePole,
 			const std::shared_ptr<SectPx_Segment>& theSegment
 		);
 
-		static void disJoinSegment
+		static TnbSectPx_EXPORT void disJoinSegment
 		(
 			const std::shared_ptr<SectPx_Segment>& theSegment
 		);
 
-		static void JoinSegment
+		static TnbSectPx_EXPORT void JoinSegment
 		(
 			const std::shared_ptr<SectPx_Pole>& thePole,
 			const std::shared_ptr<SectPx_Segment>& theSegment,
 			const short id
 		);
 
-		static void JoinSegment
+		static TnbSectPx_EXPORT void JoinSegment
 		(
 			const std::shared_ptr<SectPx_Segment>& theSegment
 		);
@@ -62,25 +62,25 @@ namespace tnbLib
 		SectPx_FrameTunner()
 		{}
 
-		Standard_Boolean IsContainPole(const std::shared_ptr<SectPx_Pole>& thePole) const;
+		TnbSectPx_EXPORT Standard_Boolean IsContainPole(const std::shared_ptr<SectPx_Pole>& thePole) const;
 
-		Standard_Boolean IsContainSegment(const std::shared_ptr<SectPx_Segment>& theSeg) const;
+		TnbSectPx_EXPORT Standard_Boolean IsContainSegment(const std::shared_ptr<SectPx_Segment>& theSeg) const;
 
 		//- select a pole from the registry
-		std::shared_ptr<SectPx_Pole> 
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_Pole>
 			SelectPole
 			(
 				const Standard_Integer theIndex
 			) const;
 
-		std::shared_ptr<SectPx_Segment> 
+		TnbSectPx_EXPORT std::shared_ptr<SectPx_Segment>
 			SelectSegment
 			(
 				const Standard_Integer theIndex
 			) const;
 
 		//- Throw an exception if the segment has a controller!
-		std::tuple
+		TnbSectPx_EXPORT std::tuple
 			<
 			std::pair<segmentId, segmentId>,
 			sliderId
@@ -91,14 +91,14 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Par>& thePar
 			);
 
-		tightnessId
+		TnbSectPx_EXPORT tightnessId
 			CreateSymmTightnessDeg2
 			(
 				const std::shared_ptr<SectPx_Pole>& thePole,
 				const std::shared_ptr<SectPx_Par>& thePar
 			);
 
-		void ImportFrame
+		TnbSectPx_EXPORT void ImportFrame
 		(
 			const std::shared_ptr<SectPx_Frame>& theFrame
 		);

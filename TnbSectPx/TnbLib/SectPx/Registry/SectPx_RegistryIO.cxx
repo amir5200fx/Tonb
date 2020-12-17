@@ -1,21 +1,24 @@
-//#include <SectPx_Registry.hxx>
-//
-//#include <SectPx_RegObj.hxx>
-//
-//TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Registry)
-//{
-//	ar & boost::serialization::base_object<SectPx_Entity>(*this);
-//	ar & boost::serialization::base_object<SectPx_ScatterRegistry>(*this);
-//	ar & theObjects_;
-//	ar & theCounter_;
-//}
-//
-//TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Registry)
-//{
-//	ar & boost::serialization::base_object<SectPx_Entity>(*this);
-//	ar & boost::serialization::base_object<SectPx_ScatterRegistry>(*this);
-//	ar & theObjects_;
-//	ar & theCounter_;
-//}
-//
-//BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::SectPx_Registry);
+#include <SectPx_Registry.hxx>
+
+#include <SectPx_CountRegistry.hxx>
+#include <SectPx_ScatterRegistry.hxx>
+#include <SectPx_ParRegistry.hxx>
+#include <SectPx_FrameRegistry.hxx>
+
+TNB_SAVE_IMPLEMENTATION(tnbLib::SectPx_Registry)
+{
+	ar & theCounter_;
+	ar & theFrames_;
+	ar & theParameter_;
+	ar & theScatter_;
+	ar & theFrameCounter_;
+}
+
+TNB_LOAD_IMPLEMENTATION(tnbLib::SectPx_Registry)
+{
+	ar & theCounter_;
+	ar & theFrames_;
+	ar & theParameter_;
+	ar & theScatter_;
+	ar & theFrameCounter_;
+}

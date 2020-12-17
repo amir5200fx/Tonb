@@ -8,6 +8,7 @@
 #include <SectPx_GeometricMapMaker.hxx>
 #include <SectPx_CmptProfileMaker.hxx>
 #include <SectPx_ProfileMaker.hxx>
+#include <SectPx_TopoProfileMaker.hxx>
 #include <SectPx_FieldFunMaker.hxx>
 #include <SectPx_TopoProfileMaker.hxx>
 #include <SectPx_InterfaceMaker.hxx>

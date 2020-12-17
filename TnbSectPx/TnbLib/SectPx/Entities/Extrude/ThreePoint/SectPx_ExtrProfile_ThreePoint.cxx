@@ -76,6 +76,17 @@ void tnbLib::sectPxLib::ExtrProfile_ThreePoint::SetValue2
 	AddParameterToParent(theValue2_, thePar, FunctionSIG);
 }
 
+std::vector<Standard_Real> 
+tnbLib::sectPxLib::ExtrProfile_ThreePoint::X() const
+{
+	std::vector<Standard_Real> xs;
+	xs.reserve(3);
+	xs.push_back(X0().lock()->Value());
+	xs.push_back(X1().lock()->Value());
+	xs.push_back(X2().lock()->Value());
+	return std::move(xs);
+}
+
 Standard_Real
 tnbLib::sectPxLib::ExtrProfile_ThreePoint::MinLower() const
 {

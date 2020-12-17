@@ -708,9 +708,6 @@
     <ClInclude Include="TnbLib\SectPx\Registry\SectPx_Registry.hxx">
       <Filter>TnbLib\SectPx\Registry</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\SectPx\Registry\SectPx_RegistryI.hxx">
-      <Filter>TnbLib\SectPx\Registry</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Registry\SectPx_RegistryM.hxx">
       <Filter>TnbLib\SectPx\Registry</Filter>
     </ClInclude>

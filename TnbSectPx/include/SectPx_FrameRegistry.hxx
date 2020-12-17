@@ -9,6 +9,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SectPx_TopoSegment;
+
 	class SectPx_FrameRegistry
 		: public SectPx_ObjectRegistry
 	{
@@ -55,7 +58,10 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_ScatterRegistry>& theScatter
 		);
 
-		
+		TnbSectPx_EXPORT Standard_Integer NbTopoSegments() const;
+
+		TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_TopoSegment>> 
+			RetrieveTopoSegments() const;
 	};
 }
 

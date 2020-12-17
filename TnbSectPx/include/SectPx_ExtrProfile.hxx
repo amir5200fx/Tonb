@@ -6,6 +6,8 @@
 #include <SectPx_Parent.hxx>
 #include <SectPx_ExtrProfileType.hxx>
 
+#include <vector>
+
 namespace tnbLib
 {
 
@@ -56,9 +58,9 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Par>& thePar
 		);
 
-		Standard_Real Lower() const;
+		TnbSectPx_EXPORT Standard_Real Lower() const;
 
-		Standard_Real Upper() const;
+		TnbSectPx_EXPORT Standard_Real Upper() const;
 
 		TnbSectPx_EXPORT Standard_Boolean IsExtrProfile() const override;
 
@@ -71,6 +73,8 @@ namespace tnbLib
 		virtual Standard_Integer NbPoints() const = 0;
 
 		virtual Pnt2d Point(const Standard_Integer theIndex) const = 0;
+
+		virtual std::vector<Standard_Real> X() const = 0;
 	};
 }
 

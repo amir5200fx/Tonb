@@ -259,7 +259,6 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\SectPx\Registry\Parameter\SectPx_ParRegistry.hxx" />
     <ClInclude Include="TnbLib\SectPx\Registry\Scatter\SectPx_ScatterRegistry.hxx" />
     <ClInclude Include="TnbLib\SectPx\Registry\SectPx_Registry.hxx" />
-    <ClInclude Include="TnbLib\SectPx\Registry\SectPx_RegistryI.hxx" />
     <ClInclude Include="TnbLib\SectPx\Registry\SectPx_RegistryM.hxx" />
     <ClInclude Include="TnbLib\SectPx\Script\SectPx_Script.hxx" />
     <ClInclude Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.hxx" />

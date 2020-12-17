@@ -108,6 +108,18 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::SetValue4
 	AddParameterToParent(theValue4_, thePar, FunctionSIG);
 }
 
+std::vector<Standard_Real> 
+tnbLib::sectPxLib::ExtrProfile_FivePoint::X() const
+{
+	std::vector<Standard_Real> xs;
+	xs.reserve(5);
+	xs.push_back(X0().lock()->Value());
+	xs.push_back(X1().lock()->Value());
+	xs.push_back(X2().lock()->Value());
+	xs.push_back(X3().lock()->Value());
+	xs.push_back(X4().lock()->Value());
+	return std::move(xs);
+}
 
 Standard_Real
 tnbLib::sectPxLib::ExtrProfile_FivePoint::MinLower() const

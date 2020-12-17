@@ -14,6 +14,7 @@ namespace tnbLib
 		class GeometricMap;
 		class CmptProfile;
 		class FieldFun;
+		class Profile;
 	}
 }
 

@@ -52,6 +52,16 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::SetValue
 	AddParameterToParent(theValue_, thePar, FunctionSIG);
 }
 
+std::vector<Standard_Real> 
+tnbLib::sectPxLib::ExtrProfile_Uniform::X() const
+{
+	std::vector<Standard_Real> xs;
+	xs.reserve(2);
+	xs.push_back(Lower());
+	xs.push_back(Upper());
+	return std::move(xs);
+}
+
 Standard_Real 
 tnbLib::sectPxLib::ExtrProfile_Uniform::MinLower() const
 {
