@@ -52,6 +52,12 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::SetValue
 	AddParameterToParent(theValue_, thePar, FunctionSIG);
 }
 
+tnbLib::word 
+tnbLib::sectPxLib::ExtrProfile_Uniform::RegObjTypeName() const
+{
+	return typeName_;
+}
+
 std::vector<Standard_Real> 
 tnbLib::sectPxLib::ExtrProfile_Uniform::X() const
 {

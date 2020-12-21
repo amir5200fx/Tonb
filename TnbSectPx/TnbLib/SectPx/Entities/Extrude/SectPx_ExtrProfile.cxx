@@ -36,6 +36,12 @@ tnbLib::SectPx_ExtrProfile::Upper() const
 	return End().lock()->Value();
 }
 
+typename tnbLib::sectPxLib::regObjType 
+tnbLib::SectPx_ExtrProfile::RegObjType() const
+{
+	return sectPxLib::regObjType::extrProfile;
+}
+
 Standard_Boolean 
 tnbLib::SectPx_ExtrProfile::IsExtrProfile() const
 {

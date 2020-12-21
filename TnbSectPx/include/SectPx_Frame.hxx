@@ -75,20 +75,20 @@ namespace tnbLib
 
 	public:
 
-		SectPx_Frame
+		TnbSectPx_EXPORT SectPx_Frame
 		(
 			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
 			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 		);
 
-		SectPx_Frame
+		TnbSectPx_EXPORT SectPx_Frame
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
 			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 		);
 
-		SectPx_Frame
+		TnbSectPx_EXPORT SectPx_Frame
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 

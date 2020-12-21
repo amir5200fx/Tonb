@@ -76,6 +76,12 @@ void tnbLib::sectPxLib::ExtrProfile_ThreePoint::SetValue2
 	AddParameterToParent(theValue2_, thePar, FunctionSIG);
 }
 
+tnbLib::word 
+tnbLib::sectPxLib::ExtrProfile_ThreePoint::RegObjTypeName() const
+{
+	return typeName_;
+}
+
 std::vector<Standard_Real> 
 tnbLib::sectPxLib::ExtrProfile_ThreePoint::X() const
 {

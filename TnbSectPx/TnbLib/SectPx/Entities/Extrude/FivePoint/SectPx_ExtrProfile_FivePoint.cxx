@@ -108,6 +108,12 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::SetValue4
 	AddParameterToParent(theValue4_, thePar, FunctionSIG);
 }
 
+tnbLib::word 
+tnbLib::sectPxLib::ExtrProfile_FivePoint::RegObjTypeName() const
+{
+	return typeName_;
+}
+
 std::vector<Standard_Real> 
 tnbLib::sectPxLib::ExtrProfile_FivePoint::X() const
 {

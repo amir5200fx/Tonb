@@ -60,6 +60,12 @@ void tnbLib::sectPxLib::ExtrProfile_Linear::SetValue1
 	AddParameterToParent(theValue1_, thePar, FunctionSIG);
 }
 
+tnbLib::word 
+tnbLib::sectPxLib::ExtrProfile_Linear::RegObjTypeName() const
+{
+	return typeName_;
+}
+
 std::vector<Standard_Real> 
 tnbLib::sectPxLib::ExtrProfile_Linear::X() const
 {
