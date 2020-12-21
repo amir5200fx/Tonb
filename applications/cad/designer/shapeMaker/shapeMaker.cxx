@@ -8,6 +8,7 @@
 #include <ShapePx_Section.hxx>
 #include <ShapePx_ContinProfile_OffsetCustom.hxx>
 #include <ShapePx_ExtrudeSpacing.hxx>
+#include <ShapePx_CustomSpacing.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
