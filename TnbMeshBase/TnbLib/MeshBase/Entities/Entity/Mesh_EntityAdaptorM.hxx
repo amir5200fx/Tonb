@@ -3,6 +3,7 @@
 #define _Mesh_EntityAdaptorM_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
 
 #include <map>
 #include <memory>
@@ -15,6 +16,11 @@
 		/*Private Data*/																													\
 																																			\
 		std::map<unsigned, std::weak_ptr<EntityType>> the##toEntityName##s_;																\
+																																			\
+																																			\
+		TNB_SERIALIZATION(MESH_MODULE)																										\
+																																			\
+																																			\
 																																			\
 	public:																																	\
 																																			\

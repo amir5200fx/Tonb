@@ -18,6 +18,18 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh_EdgeToFacetAdaptor<FacetType>>(*this);
+			ar & boost::serialization::base_object<Mesh_EdgeToElementAdaptor<ElementType>>(*this);
+		}
+
 	public:
 
 		Mesh_EdgeAdaptor()
@@ -49,6 +61,9 @@ namespace tnbLib
 
 		std::weak_ptr<ElementType> theRight_;
 		std::weak_ptr<ElementType> theLeft_;
+
+
+		TNB_SERIALIZATION(TnbMeshBase_EXPORT);
 
 	public:
 

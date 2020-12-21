@@ -12,7 +12,26 @@ namespace tnbLib
 	typedef Mesh_Element<Mesh2d_ElementTraits, Mesh_ElementType_Triangle2D> Mesh2d_Element;
 
 	template<>
-	Mesh2d_Element::array3 Mesh2d_Element::InterpWeights(const Pnt2d& theCoord) const;
+	TnbMeshBase_EXPORT Mesh2d_Element::array3 Mesh2d_Element::InterpWeights(const Pnt2d& theCoord) const;
+
+
+	template<>
+	template<>
+	TnbMeshBase_EXPORT void Mesh2d_Element::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar,
+			const unsigned int /*file_vertion*/
+			);
+
+	template<>
+	template<>
+	TnbMeshBase_EXPORT void Mesh2d_Element::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar,
+			const unsigned int /*file_vertion*/
+			);
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh2d_Element);
 
 #endif // !_Mesh2d_Element_Header

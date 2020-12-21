@@ -211,6 +211,9 @@
     <Filter Include="TnbLib\MeshBase\Cad\Patch\Traits">
       <UniqueIdentifier>{5f49ec7e-3026-4668-84f6-c9d7a7331f84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MeshBase\module">
+      <UniqueIdentifier>{12de9429-6590-4ab3-a984-638417d7f358}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.hxx">
@@ -468,6 +471,15 @@
     <ClInclude Include="TnbLib\MeshBase\Cad\Patch\Traits\Mesh_PatchTemplate_Traits.hxx">
       <Filter>TnbLib\MeshBase\Cad\Patch\Traits</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\module\MeshBase_Module.hxx">
+      <Filter>TnbLib\MeshBase\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Node\Adaptor\Mesh_NodeAdaptorTypes.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_EdgeAdaptorTypes.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.cxx">
@@ -538,6 +550,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MeshBase\Cad\Wire\Mesh_PlnWire.cxx">
       <Filter>TnbLib\MeshBase\Cad\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Node\Adaptor\Mesh_NodeAdaptorIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Node\2d\Mesh2d_NodeIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Node\3d\Mesh3d_NodeIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Node\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_EdgeAdaptorIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\2d\Mesh2d_EdgeIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Edge\3d\Mesh3d_EdgeIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Edge\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_FacetIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Facet\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_ElementIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

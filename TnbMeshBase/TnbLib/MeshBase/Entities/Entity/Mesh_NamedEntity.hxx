@@ -16,6 +16,17 @@ namespace tnbLib
 
 		word theName_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+		}
+
 	protected:
 
 		Mesh_NamedEntity()

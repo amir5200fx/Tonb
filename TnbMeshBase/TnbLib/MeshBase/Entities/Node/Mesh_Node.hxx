@@ -22,10 +22,29 @@ namespace tnbLib
 	{
 
 		typedef typename NodeTraits::ptType Point;
+		typedef Mesh_NodeAdaptor
+			<
+			typename NodeTraits::edgeType,
+			typename NodeTraits::elementType,
+			typename NodeTraits::facetType
+			> nodeAdaptor;
 
 		/*Private Data*/
 
 		Point theCoord_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh_Entity>(*this);
+			ar & boost::serialization::base_object<nodeAdaptor>(*this);
+			ar & theCoord_;
+		}
 
 	public:
 

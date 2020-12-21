@@ -5,6 +5,8 @@
 #include <Mesh_Entity.hxx>
 #include <Mesh_EdgeAdaptor.hxx>
 #include <Traits.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 #include <memory>
 
@@ -35,9 +37,27 @@ namespace tnbLib
 
 	private:
 
+		typedef Mesh_EdgeAdaptor
+			<
+			typename EdgeTraits::elementType,
+			typename EdgeTraits::facetType
+			> edgeAdaptor;
+
 		/*Private Data*/
 
 		std::shared_ptr<nodeType> theNodes_[2];
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			//- this function should never be called
+			NotImplemented;
+		}
 
 	public:
 

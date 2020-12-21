@@ -3,6 +3,9 @@
 #define _Mesh_NodeAdaptor_Header
 
 #include <Mesh_EntityAdaptorM.hxx>
+#include <MeshBase_Module.hxx>
+
+#define MESH_MODULE TnbMeshBase_EXPORT
 
 namespace tnbLib
 {
@@ -23,6 +26,19 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh_NodeToEdgeAdaptor<EdgeType>>(*this);
+			ar & boost::serialization::base_object<Mesh_NodeToFacetAdaptor<FacetType>>(*this);
+			ar & boost::serialization::base_object<Mesh_NodeToElementAdaptor<ElementType>>(*this);
+		}
+
 	public:
 
 		typedef Mesh_NodeToEdgeAdaptor<EdgeType> edgeAdaptor;
@@ -41,6 +57,19 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh_NodeToBoundaryEdgeAdaptor<EdgeType>>(*this);
+			ar & boost::serialization::base_object<Mesh_NodeToBoundaryFacetAdaptor<FacetType>>(*this);
+		}
+
 	public:
 
 		typedef Mesh_NodeToBoundaryEdgeAdaptor<EdgeType> edgeAdaptor;
@@ -58,6 +87,18 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh_NodeToEdgeAdaptor<EdgeType>>(*this);
+			ar & boost::serialization::base_object<Mesh_NodeToElementAdaptor<ElementType>>(*this);
+		}
+
 	public:
 
 		typedef Mesh_NodeToEdgeAdaptor<EdgeType> edgeAdaptor;
@@ -74,6 +115,17 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh_NodeToBoundaryEdgeAdaptor<EdgeType>>(*this);
+		}
+
 	public:
 
 		typedef Mesh_NodeToBoundaryEdgeAdaptor<EdgeType> edgeAdaptor;
@@ -82,5 +134,7 @@ namespace tnbLib
 		{}
 	};
 }
+
+#undef MESH_MODULE
 
 #endif // !_Mesh_NodeAdaptor_Header

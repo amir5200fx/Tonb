@@ -11,4 +11,6 @@ namespace tnbLib
 	typedef Mesh_Node<Mesh3d_NodeTraits> Mesh3d_Node;
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh3d_Node);
+
 #endif // !_Mesh3d_Node_Header

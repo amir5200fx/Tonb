@@ -48,6 +48,19 @@ namespace tnbLib
 		std::shared_ptr<edgeType> theEdges_[6];
 		std::shared_ptr<facetType> theFacets_[4];
 
+
+		//- private functions and operators
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			//- this function should never be called
+			NotImplemented;
+		}
+
 	public:
 
 		enum
@@ -257,13 +270,27 @@ namespace tnbLib
 
 		typedef typename nodeType::ptType Point;
 
+		typedef Mesh_ElementAdaptor<typename ElementTraits::elementType, Mesh_ElementType_Triangle3D> adaptor;
+
 	private:
 
 		/*Private Data*/
 
 		std::shared_ptr<nodeType> theNodes_[3];
-
 		std::shared_ptr<edgeType> theEdges_[3];
+
+
+		//- private functions and operators
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			//- this function should never be called
+			NotImplemented;
+		}
 
 	public:
 
@@ -398,15 +425,27 @@ namespace tnbLib
 			<
 			typename ElementTraits::elementType,
 			Mesh_ElementType_Triangle2D
-			> base;
+			> adaptor;
 
 	private:
 
 		/*Private Data*/
 
 		std::shared_ptr<nodeType> theNodes_[3];
-
 		std::shared_ptr<edgeType> theEdges_[3];
+
+
+		//- private functions and operators
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			//- this function should never be called
+			NotImplemented;
+		}
 
 	public:
 
@@ -473,7 +512,7 @@ namespace tnbLib
 			Debug_Null_Pointer(theNeighbor);
 			for (int i = 0; i < 3; i++)
 			{
-				if (base::Neighbor(i).lock() == theNeighbor)
+				if (adaptor::Neighbor(i).lock() == theNeighbor)
 				{
 					return i;
 				}
@@ -508,7 +547,7 @@ namespace tnbLib
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				if (base::Neighbor(i).lock() == theElement)
+				if (adaptor::Neighbor(i).lock() == theElement)
 				{
 					return this->Node(i);
 				}
