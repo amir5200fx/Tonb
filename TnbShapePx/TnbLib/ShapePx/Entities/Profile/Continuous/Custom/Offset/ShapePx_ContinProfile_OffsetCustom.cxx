@@ -215,6 +215,20 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::Upper() const
 }
 
 Standard_Real 
+tnbLib::shapePxLib::ContinProfile_OffsetCustom::MinLower() const
+{
+	Debug_Null_Pointer(ExtrudeProfile());
+	return ExtrudeProfile()->MinLower();
+}
+
+Standard_Real 
+tnbLib::shapePxLib::ContinProfile_OffsetCustom::MaxUpper() const
+{
+	Debug_Null_Pointer(ExtrudeProfile());
+	return ExtrudeProfile()->MaxUpper();
+}
+
+Standard_Real 
 tnbLib::shapePxLib::ContinProfile_OffsetCustom::Value
 (
 	const Standard_Real x

@@ -120,6 +120,10 @@ namespace tnbLib
 
 			TnbShapePx_EXPORT Standard_Real Upper() const override;
 
+			TnbShapePx_EXPORT Standard_Real MinLower() const override;
+
+			TnbShapePx_EXPORT Standard_Real MaxUpper() const override;
+
 			TnbShapePx_EXPORT Standard_Real Value(const Standard_Real x) const override;
 
 			TnbShapePx_EXPORT std::vector<offsetPoint> RetrieveOffsets() const override;

@@ -70,13 +70,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)d</TargetName>
-    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(GSL_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(GSL_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
