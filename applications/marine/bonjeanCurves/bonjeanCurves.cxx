@@ -217,7 +217,7 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-
+		mod->add(chaiscript::fun([](const spacing_t& t)->void {loadSpacing(t); }), "loadSpacing");
 		mod->add(chaiscript::fun([](int n)->void {createUniformSpacing(n); }), "createUniformSpacing");
 		mod->add(chaiscript::fun([]()->void {perform(); }), "execute");
 
