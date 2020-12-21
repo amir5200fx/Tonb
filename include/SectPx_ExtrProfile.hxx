@@ -62,6 +62,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Real Upper() const;
 
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
+
 		TnbSectPx_EXPORT Standard_Boolean IsExtrProfile() const override;
 
 		virtual SectPx_ExtrProfileType ExtrProfileType() const = 0;

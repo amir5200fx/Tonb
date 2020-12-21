@@ -29,6 +29,7 @@ namespace tnbLib
 		cloud,
 		shape,
 		topoSegment,
+		extrProfile,
 		other
 	};
 

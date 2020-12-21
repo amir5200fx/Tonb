@@ -15,10 +15,10 @@ namespace tnbLib
 	namespace appl
 	{
 
-		std::tuple<std::pair<int, int>, int> createSlider(const tunner_t& t, int seg, const par_t& p);
-		int createSymmTightness(const tunner_t& t, int pole, const par_t& p);
+		TnbFrameTunner_EXPORT std::tuple<std::pair<int, int>, int> createSlider(const tunner_t& t, int seg, const par_t& p);
+		TnbFrameTunner_EXPORT int createSymmTightness(const tunner_t& t, int pole, const par_t& p);
 
-		void importFrame(const tunner_t& t, const frame_t& f);
+		TnbFrameTunner_EXPORT void importFrame(const tunner_t& t, const frame_t& f);
 	}
 
 }
