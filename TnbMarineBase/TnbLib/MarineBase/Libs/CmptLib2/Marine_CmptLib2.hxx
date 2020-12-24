@@ -24,6 +24,10 @@ namespace tnbLib
 
 	public:
 
+		static TnbMarine_EXPORT unsigned short LeverArm_Verbose1;
+		static TnbMarine_EXPORT unsigned short LeverArm_Verbose2;
+		static TnbMarine_EXPORT unsigned short CrossCurve_Verbose;
+
 		static TnbMarine_EXPORT marineLib::xSectionParam
 			LeverArm
 			(
