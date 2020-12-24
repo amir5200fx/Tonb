@@ -12,6 +12,7 @@
 #include <Marine_Graph.hxx>
 #include <Marine_System.hxx>
 #include <Marine_xSectionParam.hxx>
+#include <Marine_Section.hxx>
 #include <HydStatic_BnjCurve.hxx>
 #include <HydStatic_Spacing.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
@@ -146,6 +147,12 @@ void tnbLib::HydStatic_Bonjean::Perform()
 			<< abort(FatalError);
 	}
 
+	if (verbose)
+	{
+		Info << " Body's name: " << Body()->Name() << endl;
+		Info << " nb. of sections: " << Body()->NbSections() << endl;
+	}
+
 	if (NOT Waters())
 	{
 		FatalErrorIn("void HydStatic_Bonjean::Perform()")
@@ -163,7 +170,17 @@ void tnbLib::HydStatic_Bonjean::Perform()
 	auto spacing = Waters()->Sections();
 
 	const auto& sections = Body()->Sections();
-	tableOffset qArea;
+	if (sections.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "there is no section in the body!" << endl
+			<< abort(FatalError);
+	}
+	tableOffset qArea(Body()->NbSections());
+	for (auto& x : qArea)
+	{
+		x.resize(spacing.size(), 0);
+	}
 
 	if (verbose)
 	{
@@ -176,49 +193,99 @@ void tnbLib::HydStatic_Bonjean::Perform()
 	{
 		if (verbose)
 		{
+			Info << endl;
 			Info << " - Iteration nb. " << ++iter << ", z = " << z << endl;
+			Info << endl;
+			Info << " z = " << z << endl;
+			Info << " Still waters calculations..." << endl;
 		}
 		auto domain = Marine_WaterLib::StillWaterDomain(Body(), Domain(), z);
 		Debug_Null_Pointer(domain);
 
+		if (verbose)
+		{
+			Info << " Still waters are calculated successfully" << endl;
+			Info << " nb. of water sections: " << domain->Water()->NbSections() << endl;
+		}
+
 		Debug_Null_Pointer(domain->Water());
 		const auto& wSections = domain->Water()->Sections();
 
+		if (verbose > 1)
+		{
+			Info << " Wetted section's area calculations..." << endl;
+		}
 		Standard_Integer k = 0;
 		for (const auto& w : wSections)
 		{
 			Debug_Null_Pointer(w);
 
-			const auto& x = sections[k++];
+			const auto& x = sections[k];
 			Debug_Null_Pointer(x);
 
+			if (verbose > 1)
+			{
+				Info << " water section's id: " << w->Index() << endl;
+				Info << " retrieving wetted section via applying boolean operator between water section and" << endl
+					<< " section id, " << x->Index() << endl;
+			}
 			auto wet = Marine_BooleanOps::WettedSection(x, w);
 
 			if (wet)
 			{
+				if (verbose > 1)
+				{
+					Info << " the wetted section are retrieved, successfully" << endl;
+				}
 				wet->SetCoordinateSystem(x->CoordinateSystem());
 
-				qArea[i][k] = MarineBase_Tools::CalcArea(*wet, sysLib::gl_marine_integration_info);
+				if (verbose > 1)
+				{
+					Info << " calculating the area of the wetted section..." << endl;
+				}
+				qArea[k][i] = MarineBase_Tools::CalcArea(*wet, sysLib::gl_marine_integration_info);
+				if (verbose > 1)
+				{
+					Info << " Area= " << qArea[k][i] << endl;
+				}
 			}
 			else
 			{
-				qArea[i][k] = 0;
+				if (verbose > 1)
+				{
+					Info << " there is no intersection between water and body's section" << endl;
+				}
+				//qArea[k][i] = 0;
 			}
-
-			i++;
+			
 			k++;
 		}
+		i++;
 	}
 
 	auto& bj = ChangeBonjean();
 
 	Standard_Integer k = 0;
 
+	if (verbose)
+	{
+		Info << endl << endl;
+		Info << " creating the curves..." << endl;
+	}
 	std::vector<std::shared_ptr<Marine_GraphCurve>> curves;
 	for (const auto& sect : qArea)
 	{
+		if (verbose > 1)
+		{
+			Info << " k = " << k + 1 << endl;
+			Info << " getting offsets..." << endl;
+		}
 		auto Q = bonjean::GetOffsets(sect, spacing);
 
+		if (verbose > 1)
+		{
+			Info << " creating the curve..." << endl;
+		}
 		auto c = MarineBase_Tools::Curve(Q);
 		Debug_Null_Pointer(c);
 
@@ -234,12 +301,21 @@ void tnbLib::HydStatic_Bonjean::Perform()
 
 		curves.push_back(gc);
 
-		auto ent = std::make_shared<entity>(x, std::make_shared<HydStatic_BnjCurve>(k, c));
+		auto ent = 
+			std::make_shared<entity>
+			(
+				x, 
+				std::make_shared<HydStatic_BnjCurve>(k, c)
+				);
 		Debug_Null_Pointer(ent);
 
 		bj.push_back(std::move(ent));
 	}
 
+	if (verbose)
+	{
+		Info << " creating the graph..." << endl;
+	}
 	auto graph = bonjean::Graph(curves);
 	Debug_Null_Pointer(graph);
 

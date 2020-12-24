@@ -87,7 +87,7 @@ namespace tnbLib
 	public:
 
 
-		static unsigned short verbose;
+		static TnbHydStatic_EXPORT unsigned short verbose;
 
 
 		//- default constructor
