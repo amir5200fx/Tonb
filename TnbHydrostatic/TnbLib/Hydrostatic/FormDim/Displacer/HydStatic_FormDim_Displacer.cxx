@@ -59,9 +59,9 @@ void tnbLib::formDim::Displacer::Perform()
 			<< "no body has been loaded!" << endl
 			<< abort(FatalError);
 	}
-
+	Info << "0" << endl;
 	AllocateMemory();
-
+	Info << "1" << endl;
 	CalcDims();
 
 	Change_IsDone() = Standard_True;
