@@ -19,7 +19,7 @@ namespace tnbLib
 		std::shared_ptr<ShapePx_Section> theSection_;
 
 
-		//- Forward Declarations
+		//- private functions and operators
 
 		TNB_SERIALIZATION(TnbShapePx_EXPORT);
 

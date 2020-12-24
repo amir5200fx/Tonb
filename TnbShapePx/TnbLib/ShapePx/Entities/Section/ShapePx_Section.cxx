@@ -55,6 +55,13 @@ tnbLib::ShapePx_Section::NbProfiles() const
 	return Registry()->NbTopoSegments();
 }
 
+Standard_Integer 
+tnbLib::ShapePx_Section::NbCurveQs() const
+{
+	Debug_Null_Pointer(Registry());
+	return Registry()->NbCurveQs();
+}
+
 std::vector<std::shared_ptr<tnbLib::SectPx_Par>> 
 tnbLib::ShapePx_Section::RetrieveParameters() const
 {
@@ -99,6 +106,14 @@ tnbLib::ShapePx_Section::RetrieveProfiles() const
 {
 	Debug_Null_Pointer(Registry());
 	auto segments = Registry()->RetrieveTopoSegments();
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_CurveQ>> 
+tnbLib::ShapePx_Section::RetrieveCurveQs() const
+{
+	Debug_Null_Pointer(Registry());
+	auto segments = Registry()->RetrieveCurveQs();
 	return std::move(segments);
 }
 

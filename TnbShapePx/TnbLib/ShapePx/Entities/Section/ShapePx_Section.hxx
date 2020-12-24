@@ -13,6 +13,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_FrameRegistry;
 	class SectPx_TopoSegment;
+	class SectPx_CurveQ;
 	class SectPx_Par;
 	class ShapePx_ParValue;
 
@@ -72,11 +73,17 @@ namespace tnbLib
 		TnbShapePx_EXPORT Standard_Integer 
 			NbProfiles() const;
 
+		TnbShapePx_EXPORT Standard_Integer 
+			NbCurveQs() const;
+
 		TnbShapePx_EXPORT std::vector<std::shared_ptr<SectPx_Par>> 
 			RetrieveParameters() const;
 
 		TnbShapePx_EXPORT std::vector<std::shared_ptr<SectPx_TopoSegment>> 
 			RetrieveProfiles() const;
+
+		TnbShapePx_EXPORT std::vector<std::shared_ptr<SectPx_CurveQ>>
+			RetrieveCurveQs() const;
 
 		void SetRegistry(const std::shared_ptr<SectPx_FrameRegistry>& theReg)
 		{

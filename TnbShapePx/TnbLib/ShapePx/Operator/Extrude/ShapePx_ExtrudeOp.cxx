@@ -60,7 +60,7 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 
 		section->SetValues(paraList);
 
-		auto profiles = section->RetrieveProfiles();
+		auto profiles = section->RetrieveCurveQs();
 
 		Standard_Integer k = 0;
 		for (const auto& p : profiles)

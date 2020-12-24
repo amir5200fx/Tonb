@@ -118,6 +118,9 @@
     <Filter Include="TnbLib\ShapePx\ExtrudeSpacing">
       <UniqueIdentifier>{a798a564-5a8c-4ecb-aae7-eb170a18f52d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Surface">
+      <UniqueIdentifier>{890293ca-e672-4f76-879d-ec2428cd5460}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -207,6 +210,9 @@
     <ClInclude Include="TnbLib\ShapePx\ExtrudeSpacing\ShapePx_ExtrudeSpacing.hxx">
       <Filter>TnbLib\ShapePx\ExtrudeSpacing</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Surface\ShapePx_Surface.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Surface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.cxx">
@@ -295,6 +301,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\ExtrudeSpacing\ShapePx_ExtrudeSpacing.cxx">
       <Filter>TnbLib\ShapePx\ExtrudeSpacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Surface\ShapePx_Surface.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Surface\ShapePx_SurfaceIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Surface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
