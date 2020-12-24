@@ -12,6 +12,13 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Pnt2d;
+	class Dir2d;
+
+	TnbGeo_EXPORT std::ostream& operator<<(std::ostream& os, const Dir2d&);
+	TnbGeo_EXPORT std::istream& operator>>(std::istream& is, Dir2d&);
+
+	TnbGeo_EXPORT Ostream& operator<<(Ostream& os, const Dir2d&);
+	TnbGeo_EXPORT Istream& operator>>(Istream& is, Dir2d&);
 
 	class Dir2d
 		: public gp_Dir2d
@@ -33,6 +40,10 @@ namespace tnbLib
 		static TnbGeo_EXPORT const Dir2d null;
 
 		Dir2d()
+		{}
+
+		Dir2d(const gp_Dir2d& d)
+			: gp_Dir2d(d)
 		{}
 
 		Dir2d

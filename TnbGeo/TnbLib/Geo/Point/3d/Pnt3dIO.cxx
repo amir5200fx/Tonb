@@ -99,6 +99,7 @@ namespace tnbLib
 		is >> x >> comma >> y >> comma >> z;
 		is.readEnd("Istream & tnbLib::operator>>(Istream & is, Pnt3d & P)");
 
+		P = Pnt3d(x, y, z);
 		// Check state of Istream
 		is.check("Istream & tnbLib::operator>>(Istream & is, Pnt3d & P)");
 		return is;

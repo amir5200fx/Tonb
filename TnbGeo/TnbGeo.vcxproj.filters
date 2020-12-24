@@ -1127,5 +1127,11 @@
     <ClCompile Include="TnbLib\IO\TecPlot\TecPlot.cxx">
       <Filter>TnbLib\IO\Tecplot</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Direct\2d\Dir2dIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Direct\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Direct\3d\Dir3dIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Direct\3d</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
