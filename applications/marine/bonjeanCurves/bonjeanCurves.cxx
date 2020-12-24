@@ -1,6 +1,7 @@
 #include <Pnt2d.hxx>
 #include <TecPlot.hxx>
 #include <Entity3d_Box.hxx>
+#include <MarineBase_Tools.hxx>
 #include <Marine_WaterLib.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_Domain.hxx>
@@ -123,7 +124,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto spacing = calcUniformSpacing(getBnjMaker()->Body(), *domain->Dim(), n);
+		auto b = MarineBase_Tools::CalcBoundingBox(getBnjMaker()->Body()->Sections());
+		auto spacing = calcUniformSpacing(getBnjMaker()->Body(), b, n);
 		getBnjMaker()->LoadWaters(spacing);
 	}
 
@@ -163,7 +165,7 @@ namespace tnbLib
 		boost::archive::polymorphic_text_iarchive ar(myFile);
 
 		body_t body;
-		ar >> body;
+		Marine_Body::Load(ar, body);
 
 		if (body->IsHull())
 		{
@@ -178,6 +180,13 @@ namespace tnbLib
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "invalid body type!" << endl
+				<< abort(FatalError);
+		}
+
+		if (body->NbSections() < 3)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the body must have 3 sections at least" << endl
 				<< abort(FatalError);
 		}
 
@@ -224,6 +233,7 @@ namespace tnbLib
 		//- io functions
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadBody(name); }), "loadBody");
+		mod->add(chaiscript::fun([](unsigned short c)-> void {HydStatic_Bonjean::verbose = c; }), "setVerbose");
 
 	}
 
@@ -244,6 +254,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
+
 	FatalError.throwExceptions();
 
 	if (argc <= 1)
@@ -265,11 +276,11 @@ int main(int argc, char *argv[])
 
 			auto mod = std::make_shared<chaiscript::Module>();
 
-			
+			setGlobals(mod);
 
 			chai.add(mod);
 
-			fileName myFileName("hydStaticModel");
+			fileName myFileName("bonjeanCurves");
 
 			try
 			{
