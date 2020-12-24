@@ -70,6 +70,7 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT virtual Standard_Boolean IsTopoSegment() const;
 
+		TnbSectPx_EXPORT virtual Standard_Boolean IsCurveQ() const;
 	};
 }
 

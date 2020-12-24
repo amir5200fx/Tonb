@@ -30,6 +30,8 @@ namespace tnbLib
 		shape,
 		topoSegment,
 		extrProfile,
+		curveQ,
+		limits,
 		other
 	};
 
