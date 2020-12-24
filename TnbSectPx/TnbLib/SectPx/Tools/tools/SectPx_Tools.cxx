@@ -15,6 +15,7 @@
 #include <SectPx_Poles.hxx>
 #include <SectPx_CPtsMap.hxx>
 #include <SectPx_TopoSegment.hxx>
+#include <SectPx_CurveQ.hxx>
 #include <SectPx_SegmentController.hxx>
 #include <SectPx_PoleController.hxx>
 #include <error.hxx>
@@ -206,8 +207,8 @@ namespace tnbLib
 std::vector<std::shared_ptr<tnbLib::SectPx_Pole>> 
 tnbLib::SectPx_Tools::TrackPoles
 (
-	const std::shared_ptr<SectPx_BndPole>& thePole0,
-	const std::shared_ptr<SectPx_BndPole>& thePole1
+	const std::shared_ptr<SectPx_Pole>& thePole0,
+	const std::shared_ptr<SectPx_Pole>& thePole1
 )
 {
 	Debug_Null_Pointer(thePole0);
@@ -227,7 +228,14 @@ tnbLib::SectPx_Tools::TrackPoles
 	while (pole NOT_EQUAL thePole1)
 	{
 		poles.push_back(pole);
+		auto pole0 = pole;
 		pole = TrackNextPole(pole);
+		if (pole0 IS_EQUAL pole)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "unable to track the inner poles" << endl
+				<< abort(FatalError);
+		}
 	}
 	poles.push_back(thePole1);
 	return std::move(poles);
@@ -451,6 +459,42 @@ std::vector<tnbLib::Pnt2d>
 tnbLib::SectPx_Tools::RetrieveControlPoints
 (
 	const std::shared_ptr<SectPx_TopoSegment>& theSeg
+)
+{
+	auto poles = TrackPoles(theSeg->Pole0(), theSeg->Pole1());
+	auto segments = RetrieveSegments(poles);
+
+	const auto first = segments[0]->Pole0()->Coord();
+	std::vector<Pnt2d> Q;
+	Q.push_back(std::move(first));
+
+	for (const auto& x : segments)
+	{
+		Debug_Null_Pointer(x);
+		if (x->HasController())
+		{
+			auto controller = x->Controller().lock();
+			Debug_Null_Pointer(controller);
+
+			const auto& cpts = controller->CPts();
+			Debug_Null_Pointer(cpts);
+
+			auto pts = cpts->Pts();
+
+			for (const auto& p : pts)
+			{
+				Q.push_back(std::move(p));
+			}
+		}
+		Q.push_back(x->Pole1()->Coord());
+	}
+	return std::move(Q);
+}
+
+std::vector<tnbLib::Pnt2d>
+tnbLib::SectPx_Tools::RetrieveControlPoints
+(
+	const std::shared_ptr<SectPx_CurveQ>& theSeg
 )
 {
 	auto poles = TrackPoles(theSeg->Pole0(), theSeg->Pole1());

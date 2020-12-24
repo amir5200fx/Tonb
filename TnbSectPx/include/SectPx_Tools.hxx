@@ -23,6 +23,7 @@ namespace tnbLib
 	class SectPx_Pole;
 	class SectPx_BndPole;
 	class SectPx_TopoSegment;
+	class SectPx_CurveQ;
 	class SectPx_Segment;
 	class SectPx_Child;
 
@@ -65,11 +66,12 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_FrameRegistry>& theReg
 			);
 
+		//- the pole1 must be after the pole0
 		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pole>>
 			TrackPoles
 			(
-				const std::shared_ptr<SectPx_BndPole>& thePole0, 
-				const std::shared_ptr<SectPx_BndPole>& thePole1
+				const std::shared_ptr<SectPx_Pole>& thePole0, 
+				const std::shared_ptr<SectPx_Pole>& thePole1
 			);
 
 		//- if the pole is boundary, the second segment is null
@@ -101,6 +103,12 @@ namespace tnbLib
 			RetrieveControlPoints
 			(
 				const std::shared_ptr<SectPx_TopoSegment>& theSeg
+			);
+
+		static TnbSectPx_EXPORT std::vector<Pnt2d>
+			RetrieveControlPoints
+			(
+				const std::shared_ptr<SectPx_CurveQ>& theSeg
 			);
 
 		static TnbSectPx_EXPORT void RemoveParentFromChildren

@@ -59,6 +59,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT virtual Standard_Boolean IsExtrProfile() const;
 
+		TnbSectPx_EXPORT virtual Standard_Boolean IsLimits() const;
+
 		TnbSectPx_EXPORT Standard_Boolean IsParent() const override;
 
 		TnbSectPx_EXPORT virtual Standard_Boolean HasChildren() const;

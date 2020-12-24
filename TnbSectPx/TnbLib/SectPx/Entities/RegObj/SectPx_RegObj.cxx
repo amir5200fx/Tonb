@@ -95,3 +95,9 @@ tnbLib::SectPx_RegObj::IsTopoSegment() const
 {
 	return Standard_False;
 }
+
+Standard_Boolean 
+tnbLib::SectPx_RegObj::IsCurveQ() const
+{
+	return Standard_False;
+}

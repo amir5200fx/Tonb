@@ -433,6 +433,21 @@
     <Filter Include="TnbLib\SectPx\Entities\Extrude\FivePoint">
       <UniqueIdentifier>{e17a0089-e003-4288-99ef-172725a5377a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\CurveQ">
+      <UniqueIdentifier>{024c84c2-3d2a-446b-9967-ff3529501492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\CurveDef">
+      <UniqueIdentifier>{2f8a6eec-25c3-4ecd-a4bd-a60869c8ef06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\CurveQ">
+      <UniqueIdentifier>{8e94d45b-949d-47fd-b06e-f19da0058487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Limits">
+      <UniqueIdentifier>{883325c9-b3dd-415e-b6d9-886cb7f6170e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Limits">
+      <UniqueIdentifier>{475b13ec-fa18-4706-97d9-c3fd2f048899}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -947,6 +962,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfiles.hxx">
       <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\CurveQ\SectPx_CurveQ.hxx">
+      <Filter>TnbLib\SectPx\Entities\CurveQ</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\CurveQ\SectPx_CurveQMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\CurveQ</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Limits\SectPx_Limits.hxx">
+      <Filter>TnbLib\SectPx\Entities\Limits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Limits\SectPx_LimitsMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Limits</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1561,6 +1588,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfileIO.cxx">
       <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\CurveQ\SectPx_CurveQ.cxx">
+      <Filter>TnbLib\SectPx\Entities\CurveQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\CurveQ\SectPx_CurveQIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\CurveQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\CurveQ\SectPx_CurveQMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\CurveQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Limits\SectPx_Limits.cxx">
+      <Filter>TnbLib\SectPx\Entities\Limits</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Limits\SectPx_LimitsIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Limits</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Limits\SectPx_LimitsMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Limits</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Limits\SectPx_LimitsMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Limits</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
