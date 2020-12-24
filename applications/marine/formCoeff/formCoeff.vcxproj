@@ -87,6 +87,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbStbGMaker\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +130,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbStbGMaker\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,6 +141,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="formCoeff.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TnbHydrostatic\TnbHydrostatic.vcxproj">
+      <Project>{33976535-7c9d-4d56-ad80-699694bf4492}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TnbMarineBase\TnbMarineBase.vcxproj">
+      <Project>{e15d4b29-deef-4205-8790-f4ca3d77f53a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

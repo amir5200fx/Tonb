@@ -65,6 +65,30 @@ namespace tnbLib
 		wettedCalculator->Perform();
 	}
 
+	void printParameters()
+	{
+		const auto& p1 = displacerCalculator->Parameters();
+
+		Info << "LOA= " << p1->Loa() << endl;
+		Info << "B= " << p1->B() << endl;
+		Info << "D= " << p1->D() << endl;
+
+		const auto& p2 = wettedCalculator->Parameters();
+
+		Info << "APP= " << p2->App() << endl;
+		Info << "AUW= " << p2->Auw() << endl;
+		Info << "AWL= " << p2->Awl() << endl;
+		Info << "BWL= " << p2->Bwl() << endl;
+		Info << "FPP= " << p2->Fpp() << endl;
+		Info << "FUW= " << p2->Fuw() << endl;
+		Info << "FWL= " << p2->Fwl() << endl;
+		Info << "LOS= " << p2->Los() << endl;
+		Info << "LPP= " << p2->Lpp() << endl;
+		Info << "LWL= " << p2->Lwl() << endl;
+		Info << "MPP= " << p2->Mpp() << endl;
+		Info << "TM= " << p2->Tm() << endl;
+	
+	}
 }
 
 #ifdef DebugInfo
@@ -80,7 +104,8 @@ namespace tnbLib
 	void formDimensions(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {calcDisplacer(); calcWetted(); }), "execute");
+		mod->add(chaiscript::fun([]()->void {calcDisplacer(); /*calcWetted();*/ }), "execute");
+		mod->add(chaiscript::fun([]()->void {printParameters(); }), "printParameters");
 	}
 
 	std::string getstring(char* argv)

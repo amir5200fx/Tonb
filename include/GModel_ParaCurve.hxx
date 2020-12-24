@@ -1,0 +1,71 @@
+#pragma once
+#ifndef _GModel_ParaCurve_Header
+#define _GModel_ParaCurve_Header
+
+#include <Standard_Handle.hxx>
+#include <GModel_Entity.hxx>
+#include <Pnt2d.hxx>
+#include <Entity2d_BoxFwd.hxx>
+
+class Geom2d_Curve;
+
+namespace tnbLib
+{
+
+	class GModel_ParaCurve
+		: public GModel_Entity
+	{
+
+		/*Private Data*/
+
+		Handle(Geom2d_Curve) theGeometry_;
+
+
+		auto& ChangeGeometry()
+		{
+			return theGeometry_;
+		}
+
+		void CheckBoundary
+		(
+			const Standard_Real x,
+			const char* theName
+		) const;
+
+		static TnbCad_EXPORT void CheckBounded
+		(
+			const Handle(Geom2d_Curve)& theCurve,
+			const char* theName
+		);
+
+	public:
+
+		TnbCad_EXPORT GModel_ParaCurve
+		(
+			const Handle(Geom2d_Curve)& theGeometry
+		);
+
+		TnbCad_EXPORT Standard_Real FirstParameter() const;
+
+		TnbCad_EXPORT Standard_Real LastParameter() const;
+
+		TnbCad_EXPORT Pnt2d Value(const Standard_Real x) const;
+
+		TnbCad_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
+
+		TnbCad_EXPORT Pnt2d FirstCoord() const;
+
+		TnbCad_EXPORT Pnt2d LastCoord() const;
+
+		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
+
+		const auto& Geometry() const
+		{
+			return theGeometry_;
+		}
+	};
+}
+
+#include <GModel_ParaCurveI.hxx>
+
+#endif // !_GModel_ParaCurve_Header
