@@ -189,6 +189,7 @@ for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_Element.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_ElementFwd.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Element\Adaptor\Mesh_ElementAdaptor.hxx" />
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Adaptor\Mesh_ElementAdaptorTypes.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Element\Mesh_Element.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Element\Mesh_ElementI.hxx" />
     <ClInclude Include="TnbLib\MeshBase\Entities\Element\Traits\Mesh2d_ElementTraits.hxx" />
@@ -248,6 +249,8 @@ for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_Element.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_ElementIO.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_Element.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_ElementIO.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\Adaptor\Mesh_ElementAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_Facet.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Entities\Facet\3d\Mesh3d_FacetIO.cxx" />
@@ -262,7 +265,9 @@ for /r "$(ProjectDir)TnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d\GeoMesh3d_Background.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\BackGround\Iso\3d\GeoMesh3d_BackgroundIO.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\2d\GeoMesh2d_Data.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\2d\GeoMesh2d_DataIO.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\3d\GeoMesh3d_Data.cxx" />
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\3d\GeoMesh3d_DataIO.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\GeoMesh_Data.cxx" />
     <ClCompile Include="TnbLib\MeshBase\Geom\MetricFunction\BackGround\GeoMetricFun_Background.cxx" />
   </ItemGroup>

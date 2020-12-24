@@ -7,6 +7,7 @@
 #include <Mesh2d_Element.hxx>
 #include <Mesh2d_Node.hxx>
 #include <Mesh2d_Edge.hxx>
+#include <MeshBase_Module.hxx>
 
 namespace tnbLib
 {
@@ -14,7 +15,24 @@ namespace tnbLib
 		GeoMesh2d_Data;
 
 	template<>
-	void GeoMesh2d_Data::Construct(const triangulation& theTriangulation);
+	TnbMeshBase_EXPORT void GeoMesh2d_Data::Construct(const triangulation& theTriangulation);
+
+
+	template<>
+	template<>
+	TnbMeshBase_EXPORT void GeoMesh2d_Data::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar,
+			const unsigned int /*file_vertion*/
+			);
+
+	template<>
+	template<>
+	TnbMeshBase_EXPORT void GeoMesh2d_Data::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar,
+			const unsigned int /*file_vertion*/
+			);
 }
 
 #endif // !_GeoMesh2d_Data_Header

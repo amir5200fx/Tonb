@@ -3,6 +3,7 @@
 #define _Mesh_Entity_Header
 
 #include <Global_Indexed.hxx>
+#include <MeshBase_Module.hxx>
 
 #include <memory>
 

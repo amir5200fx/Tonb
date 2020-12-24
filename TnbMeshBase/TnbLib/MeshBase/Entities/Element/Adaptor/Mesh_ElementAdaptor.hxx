@@ -4,7 +4,9 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <Mesh_ElementType.hxx>
+#include <MeshBase_Module.hxx>
 
 #include <memory>
 
@@ -18,6 +20,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::weak_ptr<ElementType> theNeighbors_[4];
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMeshBase_EXPORT);
 
 	public:
 
@@ -58,6 +65,11 @@ namespace tnbLib
 
 		std::weak_ptr<ElementType> theNeighbors_[3];
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMeshBase_EXPORT);
+
 	public:
 
 		Mesh_ElementAdaptor()
@@ -96,6 +108,11 @@ namespace tnbLib
 
 		std::weak_ptr<ElementType> theLeftElement_;
 		std::weak_ptr<ElementType> theRightElement_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMeshBase_EXPORT);
 
 	public:
 

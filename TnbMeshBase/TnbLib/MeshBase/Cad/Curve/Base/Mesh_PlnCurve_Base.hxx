@@ -4,6 +4,7 @@
 
 #include <Standard_Handle.hxx>
 #include <Entity2d_Chain.hxx>
+#include <MeshBase_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -35,7 +36,7 @@ namespace tnbLib
 			const std::shared_ptr<Mesh_Curve_Info>& theInfo
 		);
 
-		static std::shared_ptr<Entity2d_Chain> Discrete
+		static TnbMeshBase_EXPORT std::shared_ptr<Entity2d_Chain> Discrete
 		(
 			const Handle(Geom2d_Curve)& theCurve,
 			const Standard_Real theU0,

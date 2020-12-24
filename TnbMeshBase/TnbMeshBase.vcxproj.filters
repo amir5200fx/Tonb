@@ -480,6 +480,9 @@
     <ClInclude Include="TnbLib\MeshBase\Entities\Edge\Adaptor\Mesh_EdgeAdaptorTypes.hxx">
       <Filter>TnbLib\MeshBase\Entities\Edge\Adaptor</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MeshBase\Entities\Element\Adaptor\Mesh_ElementAdaptorTypes.hxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\Adaptor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MeshBase\Entities\Entity\Mesh_Entity.cxx">
@@ -574,6 +577,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MeshBase\Entities\Element\2d\Mesh2d_ElementIO.cxx">
       <Filter>TnbLib\MeshBase\Entities\Element\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\3d\Mesh3d_ElementIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Entities\Element\Adaptor\Mesh_ElementAdaptorIO.cxx">
+      <Filter>TnbLib\MeshBase\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\2d\GeoMesh2d_DataIO.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MeshBase\Geom\Mesh\Data\3d\GeoMesh3d_DataIO.cxx">
+      <Filter>TnbLib\MeshBase\Geom\Mesh\Data\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

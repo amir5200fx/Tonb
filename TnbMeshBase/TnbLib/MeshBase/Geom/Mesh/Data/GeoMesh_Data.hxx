@@ -3,6 +3,7 @@
 #define _GeoMesh_Data_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -45,6 +46,19 @@ namespace tnbLib
 		/*Private Data*/
 
 		elementList theElements_;
+
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			//- this function should never be called
+			NotImplemented;
+		}
 
 
 	public:
