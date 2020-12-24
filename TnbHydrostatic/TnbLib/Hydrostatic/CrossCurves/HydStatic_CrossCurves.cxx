@@ -1,6 +1,8 @@
 #include <HydStatic_CrossCurves.hxx>
 
+#include <Global_Timer.hxx>
 #include <Pnt2d.hxx>
+#include <Dir3d.hxx>
 #include <Entity2d_Box.hxx>
 #include <Entity3d_Box.hxx>
 #include <Pln_Tools.hxx>
@@ -32,6 +34,8 @@ namespace tnbLib
 {
 	const gp_Ax1 HydStatic_CrossCurves::null = gp::OX();
 	const Standard_Integer HydStatic_CrossCurves::DEFAULT_NB_WATERS(10);
+
+	unsigned short HydStatic_CrossCurves::verbose(0);
 }
 
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
@@ -112,11 +116,24 @@ namespace tnbLib
 
 void tnbLib::HydStatic_CrossCurves::Perform()
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Calculating Cross-Curves ********" << endl;
+		Info << endl;
+	}
+
 	if (NOT Body())
 	{
 		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
 			<< " no body is loaded!" << endl
 			<< abort(FatalError);
+	}
+
+	if (verbose)
+	{
+		Info << " Body's name: " << Body()->Name() << endl;
+		Info << " nb. of sections: " << Body()->NbSections() << endl;
 	}
 
 	if (NOT Domain())
@@ -141,6 +158,12 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 	}
 
 	const auto& keel = Ax().Location();
+	if (verbose)
+	{
+		Info << " Keel axis: " << endl;
+		Info << "  - location: " << Ax().Location() << endl;
+		Info << "  - direction: " << Ax().Direction() << endl;
+	}
 
 	auto body = Body()->Copy();
 
@@ -150,27 +173,69 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 	auto& curves = ChangeCrossCurves();
 	curves.reserve(Heels()->NbSections());
 
+	if (verbose)
+	{
+		Info << " - nb. of heels: " << Heels()->NbSections() << endl;
+		Info << " - nb. of waters: " << theNbWaters_ << endl;
+	}
+	if (verbose > 1)
+	{
+		const auto& inf = sysLib::gl_marine_integration_info;
+		Info << "integration's settings:" << endl;
+		Info << " - max. nb. of iterations: " << inf->MaxNbIterations() << endl;
+		Info << " - nb. of initial subdivisions: " << inf->NbInitIterations() << endl;
+		Info << " - tolerance: " << inf->Tolerance() << endl;
+	}
+
 	for (const auto h : Heels()->Sections())
 	{
+		if (verbose)
+		{
+			Info << endl;
+			Info << " - Iteration nb. " << K + 1 << ", heel = " << h << endl;
+			Info << endl;
+		}
+
 		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(h - h0), sin(h - h0)));
 
+		if (verbose) Info << " heeling the body..." << endl;
 		Marine_BodyTools::Heel(body, ax);
 
+		if (verbose)
+		{
+			Info << " calculating the waters..." << endl;
+		}
 		const auto b = Marine_BodyTools::BoundingBox(*body);
+		if (verbose)
+		{
+			Info << " z0 " << b.P0().Z() << ", z1 = " << b.P1().Z() << endl;
+		}
 		const auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), NbWaters());
 
 		auto domains = Marine_WaterLib::MultiLevelsStillWaterDomain(Body(), Domain(), *Z);
 		Debug_Null_Pointer(domains);
 
-		auto curveQ = 
-			Marine_BodyCmptLib::CrossCurve
-			(
-				body, *domains, 0, Ax(),
-				sysLib::gl_marine_integration_info
-			);
+		if (verbose) Info << " nb. of waters: " << domains->Domains().size() << endl;
+		if (verbose) Info << " calculating the cross-curve..." << endl;
+		Handle(Geom2d_Curve) curve;
+		{// timer scope
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
+			auto curveQ =
+				Marine_BodyCmptLib::CrossCurve
+				(
+					body, *domains, 0, Ax(),
+					sysLib::gl_marine_integration_info
+				);
 
-		auto curve = MarineBase_Tools::Curve(curveQ);
+			if (verbose) Info << " creating the geometric curve..." << endl;
+			curve = MarineBase_Tools::Curve(curveQ);
+		}
 		Debug_Null_Pointer(curve);
+		if (verbose)
+		{
+			Info << "the cross-curve is calculated in, " << global_time_duration << " ms" << endl;
+		}
 
 		auto cross = std::make_shared<HydStatic_CrsCurve>(++K, curve, h);
 
@@ -191,6 +256,13 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 	ChangeGraph() = std::move(graph);*/
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of Calculating Cross-Curves ********" << endl;
+		Info << endl;
+	}
 }
 
 std::shared_ptr<tnbLib::Geo_xDistb> 

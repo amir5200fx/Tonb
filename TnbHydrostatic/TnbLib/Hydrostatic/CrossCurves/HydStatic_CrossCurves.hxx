@@ -61,6 +61,8 @@ namespace tnbLib
 		static TnbHydStatic_EXPORT const gp_Ax1 null;
 		static TnbHydStatic_EXPORT const Standard_Integer DEFAULT_NB_WATERS;
 
+		static TnbHydStatic_EXPORT unsigned short verbose;
+
 		TnbHydStatic_EXPORT HydStatic_CrossCurves();
 
 		TnbHydStatic_EXPORT HydStatic_CrossCurves
