@@ -48,12 +48,12 @@ namespace tnbLib
 		return (int)getStbModel()->NbSails();
 	}
 
-	const auto& getHull()
+	model_t getHull()
 	{
 		return getStbModel()->Hull();
 	}
 
-	const auto& getTank(int i)
+	model_t getTank(int i)
 	{
 		return getStbModel()->Tanks()[i];
 	}
@@ -87,7 +87,7 @@ namespace tnbLib
 				if (hull)
 				{
 					const auto& b = hull->Body();
-					if (b) oa << b;
+					if (b) Marine_Body::Save(oa, b);
 				}
 			}
 			else if (m->IsTank())
@@ -96,7 +96,7 @@ namespace tnbLib
 				if (tank)
 				{
 					const auto& b = tank->Body();
-					if (b) oa << b;
+					if (b) Marine_Body::Save(oa, b);
 				}
 			}
 			else
@@ -108,7 +108,7 @@ namespace tnbLib
 					if (sail)
 					{
 						const auto& b = sail->Body();
-						if (b) oa << b;
+						if (b) Marine_Body::Save(oa, b);
 					}
 				}
 			}
@@ -140,10 +140,11 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()->auto {return nbSails(); }), "getNbSails");
 		mod->add(chaiscript::fun([]()->auto {return hasHull(); }), "hasHull");
 
-		mod->add(chaiscript::fun([]()->const auto&{return getHull(); }), "getHull");
-		mod->add(chaiscript::fun([](int i)->const auto&{return getTank(i); }), "getTank");
+		mod->add(chaiscript::fun([]()->auto{return getHull(); }), "getHull");
+		mod->add(chaiscript::fun([](int i)->auto{return getTank(i); }), "getTank");
 
 		mod->add(chaiscript::fun([](const model_t& m, const std::string& name, const std::string& type)->void {save(m, name, type); }), "save");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadStbModel(name); }), "loadStbModel");
 	}
 
 	std::string getString(char* argv)
