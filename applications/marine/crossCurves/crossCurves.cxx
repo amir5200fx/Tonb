@@ -1,8 +1,12 @@
+#include <Geo_Tools.hxx>
+//#include <Marine_System.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_WaterLib.hxx>
+#include <Marine_CmptLib2.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_Spacing.hxx>
 #include <HydStatic_CustomSpacing.hxx>
+#include <HydStatic_UniformSpacing.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -71,7 +75,26 @@ namespace tnbLib
 
 	void setHeels()
 	{
-		myHeels = std::make_shared<HydStatic_CustomSpacing>(DEFAULT_HEELS);
+		std::vector<double> heels;
+		heels.reserve(DEFAULT_HEELS.size());
+		for (auto h : DEFAULT_HEELS)
+		{
+			heels.push_back(Geo_Tools::DegToRadian(h));
+		}
+		myHeels = std::make_shared<HydStatic_CustomSpacing>(heels);
+	}
+
+	void setHeels(double l, double u, unsigned int n)
+	{
+		if (u <= l)
+		{
+			std::swap(l, u);
+		}
+
+		auto h = std::make_shared<HydStatic_UniformSpacing>(n);
+		h->SetLower(Geo_Tools::DegToRadian(l));
+		h->SetUpper(Geo_Tools::DegToRadian(u));
+		myHeels = h;
 	}
 
 	auto createDomain_tank(const tank_t& b)
@@ -150,7 +173,8 @@ namespace tnbLib
 		boost::archive::polymorphic_text_iarchive ar(myFile);
 
 		body_t body;
-		ar >> body;
+		//ar >> body;
+		Marine_Body::Load(ar, body);
 
 		if (body->IsHull())
 		{
@@ -165,6 +189,13 @@ namespace tnbLib
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "invalid body type!" << endl
+				<< abort(FatalError);
+		}
+
+		if (body->NbSections() < 3)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the body has not enough sections" << endl
 				<< abort(FatalError);
 		}
 
@@ -193,11 +224,13 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-
-
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](const std::vector<double>& h)-> void {setHeels(h); }), "setHeels");
+		mod->add(chaiscript::fun([](double l, double u, unsigned int n)-> void {setHeels(l, u, n); }), "setHeels");
 		mod->add(chaiscript::fun([](const unsigned int n)->void {SetNbWaters(n); }), "setNbWaters");
+		mod->add(chaiscript::fun([](unsigned short i)->void {HydStatic_CrossCurves::verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {Marine_CmptLib2::CrossCurve_Verbose = i; }), "setCrossCurveVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {Marine_CmptLib2::LeverArm_Verbose2 = i; }), "setLeverArmVerbose");
 
 		//- io functions
 
@@ -222,6 +255,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
+	//sysLib::init_gl_marine_integration_info();
 	FatalError.throwExceptions();
 
 	if (argc <= 1)
@@ -243,7 +277,7 @@ int main(int argc, char *argv[])
 
 			auto mod = std::make_shared<chaiscript::Module>();
 
-
+			setGlobals(mod);
 
 			chai.add(mod);
 
