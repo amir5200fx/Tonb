@@ -16,3 +16,18 @@ void tnbLib::sysLib::init_gl_marine_integration_info()
 	info.SetNbInitIterations(4);
 	info.SetTolerance(1.0E-4);
 }
+
+namespace tnbLib
+{
+
+	class RunInitMarineIntegration
+	{
+	public:
+		RunInitMarineIntegration()
+		{
+			tnbLib::sysLib::init_gl_marine_integration_info();
+		}
+	};
+
+	RunInitMarineIntegration runIt;
+}

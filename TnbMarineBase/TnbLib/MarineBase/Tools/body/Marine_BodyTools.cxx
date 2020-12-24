@@ -580,6 +580,29 @@ void tnbLib::Marine_BodyTools::WaterSectionOnBody
 	theBody->SetWL(std::move(cmpSect));
 }
 
+void tnbLib::Marine_BodyTools::Heel
+(
+	const std::shared_ptr<Marine_Body>& theBody, 
+	const gp_Ax1& theAx, 
+	const Standard_Real theAngle
+)
+{
+#ifdef _DEBUG
+	CheckTypeConsistency(*theBody);
+#endif // _DEBUG
+	const auto& sections = theBody->Sections();
+	MarineBase_Tools::Heel(sections, theAx, theAngle);
+}
+
+void tnbLib::Marine_BodyTools::Heel(const std::shared_ptr<Marine_Body>& theBody, const gp_Ax2d& theAx)
+{
+#ifdef _DEBUG
+	CheckTypeConsistency(*theBody);
+#endif // _DEBUG
+	const auto& sections = theBody->Sections();
+	MarineBase_Tools::Heel(sections, theAx);
+}
+
 void tnbLib::Marine_BodyTools::CheckTypeConsistency
 (
 	const Marine_Body & theBody

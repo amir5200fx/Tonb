@@ -287,7 +287,7 @@ tnbLib::MarineBase_Tools::CalcIx
 	if (innerSections.size())
 	{
 		const auto outerIx = Cad2d_CmptLib::Ix(*theSection->Wire(), y0, theInfo);
-		Debug_If_Condition(outerIx < theInfo->Tolerance());
+		//Debug_If_Condition(outerIx < theInfo->Tolerance());
 
 		auto innerIx = (Standard_Real)0;
 		for (const auto& x : innerSections)
@@ -295,7 +295,7 @@ tnbLib::MarineBase_Tools::CalcIx
 			Debug_Null_Pointer(x);
 			auto ix = Cad2d_CmptLib::Ix(*x->Wire(), y0, theInfo);
 
-			Debug_If_Condition(ix > theInfo->Tolerance());
+			//Debug_If_Condition(ix > theInfo->Tolerance());
 			innerIx += ix;
 		}
 		return outerIx + innerIx;
@@ -303,7 +303,7 @@ tnbLib::MarineBase_Tools::CalcIx
 	else
 	{
 		const auto outerIx = Cad2d_CmptLib::Ix(*theSection->Wire(), y0, theInfo);
-		Debug_If_Condition(outerIx < theInfo->Tolerance());
+		//Debug_If_Condition(outerIx < theInfo->Tolerance());
 		return outerIx;
 	}
 }
@@ -345,7 +345,7 @@ tnbLib::MarineBase_Tools::CalcIy
 	if (innerSections.size())
 	{
 		const auto outerIy = Cad2d_CmptLib::Iy(*theSection->Wire(), x0, theInfo);
-		Debug_If_Condition(outerIy < theInfo->Tolerance());
+		//Debug_If_Condition(outerIy < theInfo->Tolerance());
 
 		auto innerIy = (Standard_Real)0;
 		for (const auto& x : innerSections)
@@ -353,7 +353,7 @@ tnbLib::MarineBase_Tools::CalcIy
 			Debug_Null_Pointer(x);
 			auto iy = Cad2d_CmptLib::Iy(*x->Wire(), x0, theInfo);
 
-			Debug_If_Condition(iy > theInfo->Tolerance());
+			//Debug_If_Condition(iy > theInfo->Tolerance());
 			innerIy += iy;
 		}
 		return outerIy + innerIy;
@@ -361,7 +361,7 @@ tnbLib::MarineBase_Tools::CalcIy
 	else
 	{
 		const auto outerIy = Cad2d_CmptLib::Iy(*theSection->Wire(), x0, theInfo);
-		Debug_If_Condition(outerIy < theInfo->Tolerance());
+		//Debug_If_Condition(outerIy < theInfo->Tolerance());
 		return outerIy;
 	}
 }

@@ -44,7 +44,7 @@ if (NOT BaseLine().IsNull())																	\
 																								\
 auto& sections = body->ChangeSections();														\
 sections.reserve(NbSections());																	\
-for (const auto& x : body->Sections())															\
+for (const auto& x : Sections())																\
 {																								\
 	Debug_Null_Pointer(x);																		\
 	auto c = x->Copy();																			\

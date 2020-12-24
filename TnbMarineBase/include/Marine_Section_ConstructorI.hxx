@@ -16,7 +16,7 @@ namespace tnbLib
 			auto wire = std::dynamic_pointer_cast<Pln_Wire>(this->Wire()->Copy());
 			Debug_Null_Pointer(wire);
 
-			auto copy = std::make_shared<OuterSection<SectionType>>(this->Index(), this->Name(), wire);
+			auto copy = std::make_shared<InnerSection<SectionType>>(this->Index(), this->Name(), wire);
 			Debug_Null_Pointer(copy);
 
 			return std::move(copy);
@@ -51,9 +51,16 @@ namespace tnbLib
 			auto wire = std::dynamic_pointer_cast<Pln_Wire>(this->Wire()->Copy());
 			Debug_Null_Pointer(wire);
 
-			auto copy = std::make_shared<InnerSection<SectionType>>(this->Index(), this->Name(), wire);
+			auto copy = std::make_shared<OuterSection<SectionType>>(this->Index(), this->Name(), wire);
 			Debug_Null_Pointer(copy);
+			for (const auto& x : Inners())
+			{
+				Debug_Null_Pointer(x.second);
+				auto c = std::dynamic_pointer_cast<InnerSection<SectionType>>(x.second->Copy());
+				copy->ImportToInners(x.first, c);
 
+				c->SetOuter(copy);
+			}
 			return std::move(copy);
 		}
 
