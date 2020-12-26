@@ -13,6 +13,7 @@
 #include <Marine_Sections.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_SectTools.hxx>
+#include <MarineBase_Tools.hxx>
 
 #ifdef DebugInfo
 #undef DebugInfo
@@ -106,6 +107,27 @@ namespace tnbLib
 	}
 }
 
+Handle(Geom_Curve) 
+tnbLib::Marine_WaterTools::WaterLine
+(
+	const Marine_Wave & theWave,
+	const gp_Ax2 & theSys
+)
+{
+	const auto& waterSurface = theWave.SurfaceGeometry();
+	if (NOT waterSurface)
+	{
+		FatalErrorIn("Handle(Geom_Curve) WaterLine(const Marine_Wave&, const gp_Ax2&)")
+			<< "no geometry is found for water surface" << endl
+			<< abort(FatalError);
+	}
+
+	auto wl = waterLib::WaterLine(waterSurface, theSys);
+	Debug_Null_Pointer(wl);
+
+	return std::move(wl);
+}
+
 std::shared_ptr<tnbLib::Pln_Wire> 
 tnbLib::Marine_WaterTools::WaterSection
 (
@@ -196,6 +218,58 @@ tnbLib::Marine_WaterTools::WaterSection
 	return std::move(wires[0]);
 }
 
+std::shared_ptr<tnbLib::Pln_Wire>
+tnbLib::Marine_WaterTools::WaterSection
+(
+	const Marine_Wave & theWave,
+	const gp_Ax2 & theSys,
+	const Standard_Real theZmin, 
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto wl = WaterLine(theWave, theSys);
+	Debug_Null_Pointer(wl);
+
+	auto wire = 
+		WaterSection
+		(
+			wl, theSys, 
+			theZmin, theMinTol, theMaxTol
+		);
+	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::Marine_Section> 
+tnbLib::Marine_WaterTools::WaterSection
+(
+	const Marine_Wave & theWave, 
+	const Marine_CmpSection & section,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto b = section.BoundingBox();
+	const auto[dx, dy] = b.Length();
+	const auto zMin = b.P0().Y() - dy;
+
+	auto wire = 
+		WaterSection
+		(
+			theWave, section.CoordinateSystem(),
+			zMin, theMinTol, theMaxTol
+		);
+	Debug_Null_Pointer(wire);
+	auto wsection = 
+		Marine_SectTools::SectionCreator
+		(
+			wire, 
+			section.CoordinateSystem(),
+			Marine_SectionType::water
+		);
+	return std::move(wsection);
+}
+
 std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
 tnbLib::Marine_WaterTools::WaterSections
 (
@@ -221,13 +295,29 @@ tnbLib::Marine_WaterTools::WaterSections
 	{
 		Debug_Null_Pointer(x);
 
-		auto wl = waterLib::WaterLine(waterSurface, x->CoordinateSystem());
+		auto wl = 
+			waterLib::WaterLine
+			(
+				waterSurface, 
+				x->CoordinateSystem()
+			);
 		Debug_Null_Pointer(wl);
 
-		auto wa = WaterSection(wl, x->CoordinateSystem(), zmin, theMinTol, theMaxTol);
+		auto wa = 
+			WaterSection
+			(
+				wl, x->CoordinateSystem(), 
+				zmin, theMinTol, theMaxTol
+			);
 		Debug_Null_Pointer(wa);
 
-		auto section = Marine_SectTools::SectionCreator(wa, x->CoordinateSystem(), Marine_SectionType::water);
+		auto section = 
+			Marine_SectTools::SectionCreator
+			(
+				wa, 
+				x->CoordinateSystem(),
+				Marine_SectionType::water
+			);
 		Debug_Null_Pointer(section);
 
 		section->SetIndex(++K);
@@ -261,7 +351,12 @@ tnbLib::Marine_WaterTools::StillWaterSections
 	for (const auto& x : theBody)
 	{
 		auto section =
-			Marine_SectTools::SectionCreator(wa, x->CoordinateSystem(), Marine_SectionType::water);
+			Marine_SectTools::SectionCreator
+			(
+				wa,
+				x->CoordinateSystem(),
+				Marine_SectionType::water
+			);
 		Debug_Null_Pointer(section);
 
 		section->SetIndex(++K);
