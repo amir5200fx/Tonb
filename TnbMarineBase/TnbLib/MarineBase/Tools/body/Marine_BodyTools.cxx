@@ -383,7 +383,10 @@ tnbLib::Marine_BodyTools::WettedBody
 			>(theBody);
 		Debug_Null_Pointer(t);
 
-		auto wetted = BodyCreator(sections, t->Shape(), Marine_BodyType::wetted);
+		auto body = BodyCreator(sections, t->Shape(), Marine_BodyType::wetted);
+		auto wetted = std::dynamic_pointer_cast<marineLib::Body_Wetted>(body);
+		Debug_Null_Pointer(wetted);
+		wetted->SetDisplacer(theBody);
 
 		Marine_BodyTools::WaterSectionOnBody
 		(
@@ -393,15 +396,18 @@ tnbLib::Marine_BodyTools::WettedBody
 			<
 			marineLib::Body_Wetted
 			>
-			>(wetted),
+			>(body),
 			theDomain
 		);
-		return std::move(wetted);
+		return std::move(body);
 	}
 	else
 	{
-		auto wetted = BodyCreator(sections, Marine_BodyType::wetted);
-		return std::move(wetted);
+		auto body = BodyCreator(sections, Marine_BodyType::wetted);
+		auto wetted = std::dynamic_pointer_cast<marineLib::Body_Wetted>(body);
+		Debug_Null_Pointer(wetted);
+		wetted->SetDisplacer(theBody);
+		return std::move(body);
 	}	
 }
 

@@ -269,7 +269,7 @@ tnbLib::Marine_DisctLib::WettedBody
 		body = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Wetted>>();
 		Debug_Null_Pointer(body);
 	}
-
+	body->SetDisplacer(std::dynamic_pointer_cast<marineLib::Body_Displacer>(theModel.This()));
 	const auto& wave = theWaterDomain.Wave();
 	if (NOT wave)
 	{
