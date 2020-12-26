@@ -57,6 +57,15 @@ namespace tnbLib
 	};
 
 
+	// Forward Declarations
+	template<class T>
+	class Marine_DimensionedParam;
+
+	template<class T>
+	Ostream& operator<<(Ostream& os, const Marine_DimensionedParam<T>&);
+	/*template<class T>
+	Ostream& operator>>(Ostream& os, Marine_DimensionedParam<T>&);*/
+
 	template<class T>
 	class Marine_DimensionedParam
 		: public Global_Named
@@ -170,5 +179,7 @@ namespace tnbLib
 		typedef Marine_DimensionedParam<Vec3d> vec3Param;
 	}
 }
+
+#include <Marine_DimensionedParamI.hxx>
 
 #endif // !_Marine_DimensionedParam_Header

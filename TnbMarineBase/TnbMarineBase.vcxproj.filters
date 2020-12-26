@@ -589,6 +589,9 @@
     <Filter Include="TnbLib\MarineBase\module">
       <UniqueIdentifier>{5d05b4ea-cc7e-49a9-bfdb-a44d91c5a67b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\MidSection">
+      <UniqueIdentifier>{e349bd2f-2ca1-47fa-8ae3-552ea268e6bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1203,6 +1206,12 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Body\Marine_BodyType.hxx">
       <Filter>TnbLib\MarineBase\Entities\Body</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\MidSection\Marine_MidSection.hxx">
+      <Filter>TnbLib\MarineBase\MidSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParamI.hxx">
+      <Filter>TnbLib\MarineBase\DimensionedParam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1636,6 +1645,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Graph\Marine_GraphIO.cxx">
       <Filter>TnbLib\MarineBase\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\MidSection\Marine_MidSection.cxx">
+      <Filter>TnbLib\MarineBase\MidSection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
