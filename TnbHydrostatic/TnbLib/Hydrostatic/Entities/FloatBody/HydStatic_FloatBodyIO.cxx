@@ -7,7 +7,9 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_FloatBody)
 {
 	ar & boost::serialization::base_object<HydStatic_Entity>(*this);
 	Marine_Body::Save(ar, theDry_);
+	std::cout << "wettttted" << std::endl;
 	Marine_Body::Save(ar, theWetted_);
+	std::cout << "wettttted1" << std::endl;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_FloatBody)
