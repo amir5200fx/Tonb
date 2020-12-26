@@ -1,17 +1,20 @@
 #include <Marine_Body_Wetted.hxx>
 
 #include <Marine_CmpSection.hxx>
+#include <Marine_Body_Displacer.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::Body_Wetted)
 {
 	ar & boost::serialization::base_object<Marine_HullBody>(*this);
-	ar & Mid();
+	ar & theMid_;
+	ar & theDisplacer_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::Body_Wetted)
 {
 	ar & boost::serialization::base_object<Marine_HullBody>(*this);
-	ar & ChangeMid();
+	ar & theMid_;
+	ar & theDisplacer_;
 }
 
 #include <Marine_Shape.hxx>
