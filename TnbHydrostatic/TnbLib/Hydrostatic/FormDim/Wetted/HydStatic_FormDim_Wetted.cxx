@@ -2,8 +2,11 @@
 
 #include <Marine_Bodies.hxx>
 #include <Marine_CmptLib.hxx>
+#include <Marine_MidSection.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+unsigned short tnbLib::formDim::Wetted::verbose(0);
 
 tnbLib::formDim::Wetted::Parameter::Parameter()
 	: Tm(0)
@@ -25,6 +28,25 @@ tnbLib::formDim::Wetted::Parameter::Parameter()
 void tnbLib::formDim::Wetted::CalcTM()
 {
 	Debug_Null_Pointer(Body());
+	const auto& pars = Parameters();
+	if (NOT Body()->Mid())
+	{
+		if (verbose)
+		{
+			Info << " no mid ship section has been found" << endl;
+			Info << " attempting to construct a midship section..." << endl;
+		}
+
+		auto x = MEAN(pars->App(), pars->Fpp());
+		Marine_MidSection midSect(Body()->Displacer(), Body(), Wave());
+		midSect.ApplyAt(x);
+
+		if (verbose)
+		{
+			Info << " midShip section is added to the wetted body, successfully!" << endl;
+		}
+	}
+
 	const auto par = Marine_CmptLib::CalcTM(*Body());
 
 	Debug_Null_Pointer(ChangeParameters());
@@ -196,9 +218,11 @@ tnbLib::formDim::Wetted::Wetted()
 
 tnbLib::formDim::Wetted::Wetted
 (
-	const std::shared_ptr<marineLib::Body_Wetted>& theBody
+	const std::shared_ptr<marineLib::Body_Wetted>& theBody,
+	const std::shared_ptr<Marine_Wave>& theWave
 )
 	: theBody_(theBody)
+	, theWave_(theWave)
 {
 	// empty body
 }
@@ -208,6 +232,13 @@ void tnbLib::formDim::Wetted::Perform
 	const Standard_Real theRudderAxis
 )
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Calculating Wetted Form Dimensions ********" << endl;
+		Info << endl;
+	}
+
 	if (NOT Body())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -217,13 +248,35 @@ void tnbLib::formDim::Wetted::Perform
 
 	AllocateMemory();
 
+	const auto& pars = Parameters();
+
+	if (verbose) Info << " calculating the FUW..." << endl;
 	CalcFUW();
+	if (verbose) Info << pars->Fuw << endl;
+
+	if (verbose) Info << " calculating the AUW..." << endl;
 	CalcAUW();
+	if (verbose) Info << pars->Auw << endl;
+
+	if (verbose) Info << " calculating the AWL..." << endl;
 	CalcAWL();
+	if (verbose) Info << pars->Awl << endl;
+
+	if (verbose) Info << " calculating the FWL..." << endl;
 	CalcFWL();
+	if (verbose) Info << pars->Fwl << endl;
 
+	if (verbose) Info << " calculating the FPP..." << endl;
 	CalcFPP();
+	if (verbose) Info << pars->Fpp << endl;
 
+	if (verbose)
+	{
+		Info << " App mode is set to: " 
+			<< (AppMode() IS_EQUAL appMode::rudderAxis ? ("Rudder") : ("Auto")) 
+			<< endl;
+		Info << " calculating the APP..." << endl;
+	}
 	if (AppMode() IS_EQUAL appMode::Auto)
 	{
 		CalcAPP();
@@ -238,15 +291,40 @@ void tnbLib::formDim::Wetted::Perform
 			<< "Unspecified mode of the App" << endl
 			<< abort(FatalError);
 	}
+	if (verbose) Info << pars->App << endl;
 
+	if (verbose) Info << " calculating the LPP..." << endl;
 	CalcLPP();
-	CalcMPP();
-	CalcLWL();
-	CalcLOS();
+	if (verbose) Info << pars->Lpp << endl;
 
+	if (verbose) Info << " calculating the MPP..." << endl;
+	CalcMPP();
+	if (verbose) Info << pars->Mpp << endl;
+
+	if (verbose) Info << " calculating the LWL..." << endl;
+	CalcLWL();
+	if (verbose) Info << pars->Lwl << endl;
+
+	if (verbose) Info << " calculating the LOS..." << endl;
+	CalcLOS();
+	if (verbose) Info << pars->Los << endl;
+
+	if (verbose) Info << " calculating the BWL..." << endl;
 	CalcBWL();
+	if (verbose) Info << pars->Bwl << endl;
+
+	if (verbose) Info << " calculating the TM..." << endl;
+	CalcTM();
+	if (verbose) Info << pars->Tm << endl;
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of Calculating Wetted Form Dimensions ********" << endl;
+		Info << endl;
+	}
 }
 
 void tnbLib::formDim::Wetted::LoadBody
@@ -255,6 +333,14 @@ void tnbLib::formDim::Wetted::LoadBody
 )
 {
 	theBody_ = theBody;
+}
+
+void tnbLib::formDim::Wetted::LoadWave
+(
+	const std::shared_ptr<Marine_Wave>& theWave
+)
+{
+	theWave_ = theWave;
 }
 
 void tnbLib::formDim::Wetted::SetAppMode
