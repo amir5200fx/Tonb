@@ -695,5 +695,11 @@
     <ClCompile Include="TnbLib\Hydrostatic\Spacing\Custom\HydStatic_CustomSpacingIO.cxx">
       <Filter>TnbLib\Hydrostatic\Spacing\Custom</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\FormDim\Displacer\HydStatic_FormDim_DisplacerIO.cxx">
+      <Filter>TnbLib\Hydrostatic\FormDim\Displacer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\FormDim\Wetted\HydStatic_FormDim_WettedIO.cxx">
+      <Filter>TnbLib\Hydrostatic\FormDim\Wetted</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

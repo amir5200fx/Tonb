@@ -152,7 +152,9 @@
     <ClCompile Include="TnbLib\Hydrostatic\Entities\WDiffCurve\HydStatic_WDiffCurve.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\FormCoeff\HydStatic_FormCoeff.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\FormDim\Displacer\HydStatic_FormDim_Displacer.cxx" />
+    <ClCompile Include="TnbLib\Hydrostatic\FormDim\Displacer\HydStatic_FormDim_DisplacerIO.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\FormDim\Wetted\HydStatic_FormDim_Wetted.cxx" />
+    <ClCompile Include="TnbLib\Hydrostatic\FormDim\Wetted\HydStatic_FormDim_WettedIO.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\FunLib\HydStatic_FunLib.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\GZ\HydStatic_GZ.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Model\HydStatic_Model.cxx" />
