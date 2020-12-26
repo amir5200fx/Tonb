@@ -441,7 +441,12 @@ int main(int argc, char *argv[])
 {
 	hydrModel = std::make_shared<HydStatic_Model>();
 
-	Marine_FlatWave::dummy();
+	loadStbModel("myShip");
+	auto wave = createFlatWave(getHydrModel()->Domain());
+	loadWave(wave);
+	saveModelTo("hydrStaticModel");
+	return 0;
+	//Marine_FlatWave::dummy();
 	FatalError.throwExceptions();
 
 	if (argc <= 1)

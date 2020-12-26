@@ -46,6 +46,13 @@ namespace tnbLib
 				<< "No Stability Model has been detected" << endl
 				<< abort(FatalError);
 		}
+
+		if (NOT myModel->Wave())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "No Wave has been detected" << endl
+				<< abort(FatalError);
+		}
 	}
 
 	void calcDisplacer()
@@ -62,6 +69,7 @@ namespace tnbLib
 		const auto& wettedBody = myModel->FloatBody()->Wetted();
 		
 		wettedCalculator->LoadBody(wettedBody);
+		wettedCalculator->LoadWave(myModel->Wave());
 		wettedCalculator->Perform();
 	}
 
@@ -89,6 +97,17 @@ namespace tnbLib
 		Info << "TM= " << p2->Tm() << endl;
 	
 	}
+
+	void save(const std::string& name)
+	{
+		fileName fn(name);
+		std::ofstream myFile(fn);
+
+		boost::archive::polymorphic_text_oarchive ar(myFile);
+
+		ar << displacerCalculator;
+		ar << wettedCalculator;
+	}
 }
 
 #ifdef DebugInfo
@@ -104,8 +123,10 @@ namespace tnbLib
 	void formDimensions(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {calcDisplacer(); /*calcWetted();*/ }), "execute");
+		mod->add(chaiscript::fun([]()->void {calcDisplacer(); calcWetted(); }), "execute");
 		mod->add(chaiscript::fun([]()->void {printParameters(); }), "printParameters");
+		mod->add(chaiscript::fun([](const std::string& name)->void {save(name); }), "saveTo");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {formDim::Wetted::verbose = i; }), "setVerbose");
 	}
 
 	std::string getstring(char* argv)
@@ -145,10 +166,10 @@ int main(int argc, char* argv[])
 			chaiscript::ChaiScript chai;
 
 			auto mod = std::make_shared<chaiscript::Module>();
-
+			formDimensions(mod);
 			chai.add(mod);
 
-			fileName myFileName("FormDimensions");
+			fileName myFileName("FormDim");
 
 			try
 			{

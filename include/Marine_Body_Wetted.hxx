@@ -7,19 +7,27 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Marine_MidSection;
+
 	namespace marineLib
 	{
+
+		// Forward Declarations
+		class Body_Displacer;
 
 		class Body_Wetted
 			: public Marine_HullBody
 		{
 
 			friend class Marine_DisctLib;
+			friend class Marine_MidSection;
 
 			/*Private Data*/
 
 			
 			std::shared_ptr<Marine_CmpSection> theMid_;
+			//std::shared_ptr<Body_Displacer> theDisplacer_;
 
 
 			//- private functions and operators
@@ -71,7 +79,26 @@ namespace tnbLib
 				return theMid_;
 			}
 
+			/*const auto& Displacer() const
+			{
+				return theDisplacer_;
+			}*/
+
+			std::shared_ptr<Body_Displacer> Displacer() const
+			{
+				return nullptr;
+			}
+
 			TnbMarine_EXPORT std::shared_ptr<Marine_Body> Copy() const override;
+
+			void SetDisplacer
+			(
+				const std::shared_ptr<Body_Displacer>& theDisplacer
+			)
+			{
+				//theDisplacer_ = theDisplacer;
+			}
+
 		};
 	}
 }

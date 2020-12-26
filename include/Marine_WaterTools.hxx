@@ -28,6 +28,13 @@ namespace tnbLib
 
 	public:
 
+		static TnbMarine_EXPORT Handle(Geom_Curve) 
+			WaterLine
+			(
+				const Marine_Wave& theWave,
+				const gp_Ax2& theSys
+			);
+
 		static TnbMarine_EXPORT std::shared_ptr<Pln_Wire>
 			WaterSection
 			(
@@ -35,6 +42,25 @@ namespace tnbLib
 				const gp_Ax2& theSystem,
 				const Standard_Real theZmin,
 				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Pln_Wire> 
+			WaterSection
+			(
+				const Marine_Wave& theWave,
+				const gp_Ax2& theSys, 
+				const Standard_Real theZmin, 
+				const Standard_Real theMinTol, 
+				const Standard_Real theMaxTol
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Marine_Section>
+			WaterSection
+			(
+				const Marine_Wave& theWave, 
+				const Marine_CmpSection& section, 
+				const Standard_Real theMinTol, 
 				const Standard_Real theMaxTol
 			);
 

@@ -5,6 +5,7 @@
 #include <Marine_VesselParams.hxx>
 #include <Marine_BodiesFwd.hxx>
 #include <Global_Done.hxx>
+#include <Global_Serialization.hxx>
 #include <HydStatic_Module.hxx>
 
 #include <memory>
@@ -33,6 +34,8 @@ namespace tnbLib
 
 				//- Length overall
 				marineLib::LOA Loa;
+
+				TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 			};
 
 
@@ -46,6 +49,9 @@ namespace tnbLib
 
 
 			//- private functions
+
+
+			TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 			auto& ChangeParameters()
 			{
