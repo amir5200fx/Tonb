@@ -99,9 +99,6 @@
     <ClInclude Include="TnbLib\Global\Traits\Traits.hxx">
       <Filter>TnbLib\Global\Traits</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx">
-      <Filter>TnbLib\Global\global</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Global\module\Global_Module.hxx">
       <Filter>TnbLib\Global\module</Filter>
     </ClInclude>
@@ -110,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Global\serialization\OpenCascade_Serialization.hxx">
       <Filter>TnbLib\Global\serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx">
+      <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

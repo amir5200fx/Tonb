@@ -11,8 +11,8 @@
 template<>
 void boost::serialization::save
 (
-	TNB_oARCH_TYPE & ar, 
-	const Handle(Geom2d_Curve)& c, 
+	TNB_oARCH_TYPE & ar,
+	const Handle(Geom2d_Curve)& c,
 	const unsigned int version
 )
 {
@@ -26,7 +26,7 @@ void boost::serialization::save
 template<>
 void boost::serialization::load
 (
-	TNB_iARCH_TYPE & ar, 
+	TNB_iARCH_TYPE & ar,
 	Handle(Geom2d_Curve)& c,
 	const unsigned int version
 )
@@ -43,8 +43,8 @@ void boost::serialization::load
 template<>
 void boost::serialization::save
 (
-	TNB_oARCH_TYPE & ar, 
-	const Handle(Geom_Curve)& c, 
+	TNB_oARCH_TYPE & ar,
+	const Handle(Geom_Curve)& c,
 	const unsigned int version
 )
 {
@@ -76,7 +76,7 @@ template<>
 void boost::serialization::save
 (
 	TNB_oARCH_TYPE & ar,
-	const Handle(Geom_Surface)& sr, 
+	const Handle(Geom_Surface)& sr,
 	const unsigned int version
 )
 {
@@ -91,7 +91,7 @@ template<>
 void boost::serialization::load
 (
 	TNB_iARCH_TYPE & ar,
-	Handle(Geom_Surface)& s, 
+	Handle(Geom_Surface)& s,
 	const unsigned int version
 )
 {
