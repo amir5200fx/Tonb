@@ -510,9 +510,6 @@
     <ClInclude Include="TnbLib\Geo\Traits\Geo_Traits.hxx">
       <Filter>TnbLib\Geo\Traits</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_Polygon.hxx">
-      <Filter>TnbLib\Geo\Entities\Polygon</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_PolygonI.hxx">
       <Filter>TnbLib\Geo\Entities\Polygon</Filter>
     </ClInclude>
@@ -917,6 +914,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\PriorityList\Geo_RealPriorityList.hxx">
       <Filter>TnbLib\Geo\PriorityList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_Polygon.hxx">
+      <Filter>TnbLib\Geo\Entities\Polygon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
