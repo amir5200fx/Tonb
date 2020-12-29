@@ -5,15 +5,16 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_EdgeGeom)
 {
-	bool sense = Sense();
-	ar << Curve();
-	ar << sense;
-	ar << Mesh();
+	ar & theCurve_;
+	ar & Sense_;
+	ar & theMesh_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_EdgeGeom)
 {
-	ar >> Curve();
-	ar >> ChangeSense();
-	ar >> Mesh();
+	ar & theCurve_;
+	ar & Sense_;
+	ar & theMesh_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Pln_EdgeGeom);

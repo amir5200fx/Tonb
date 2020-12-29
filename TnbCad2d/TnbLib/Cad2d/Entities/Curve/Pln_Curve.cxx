@@ -87,8 +87,8 @@ tnbLib::Pln_Curve::Pln_Curve
 
 tnbLib::Pln_Curve::Pln_Curve
 (
-	const Standard_Integer theIndex, 
-	const word & theName, 
+	const Standard_Integer theIndex,
+	const word & theName,
 	const Handle(Geom2d_Curve)& theGeom
 )
 	: Global_Indexed(theIndex)
@@ -101,7 +101,7 @@ tnbLib::Pln_Curve::Pln_Curve
 tnbLib::Pln_Curve::Pln_Curve
 (
 	const Standard_Integer theIndex,
-	const word & theName, 
+	const word & theName,
 	const Handle(Geom2d_Curve) && theGeom
 )
 	: Global_Indexed(theIndex)
@@ -111,21 +111,21 @@ tnbLib::Pln_Curve::Pln_Curve
 	plnCurveLib::CheckBounded(Geometry(), "Pln_Curve()");
 }
 
-Standard_Real 
+Standard_Real
 tnbLib::Pln_Curve::FirstParameter() const
 {
 	Debug_Null_Pointer(Geometry());
 	return Geometry()->FirstParameter();
 }
 
-Standard_Real 
+Standard_Real
 tnbLib::Pln_Curve::LastParameter() const
 {
 	Debug_Null_Pointer(Geometry());
 	return Geometry()->LastParameter();
 }
 
-tnbLib::Pnt2d 
+tnbLib::Pnt2d
 tnbLib::Pln_Curve::Value
 (
 	const Standard_Real x
@@ -139,7 +139,7 @@ tnbLib::Pln_Curve::Value
 	return std::move(value);
 }
 
-tnbLib::Pnt2d 
+tnbLib::Pnt2d
 tnbLib::Pln_Curve::Value_normParam
 (
 	const Standard_Real x
@@ -150,8 +150,8 @@ tnbLib::Pln_Curve::Value_normParam
 	return std::move(value);
 }
 
-tnbLib::Entity2d_Box 
-tnbLib::Pln_Curve::BoundingBox(const Standard_Real Tol) const 
+tnbLib::Entity2d_Box
+tnbLib::Pln_Curve::BoundingBox(const Standard_Real Tol) const
 {
 	Debug_Null_Pointer(Geometry());
 	Bnd_Box2d BndBox;
@@ -174,7 +174,7 @@ tnbLib::Pln_Curve::BoundingBox(const Standard_Real Tol) const
 //	return Standard_True;
 //}
 
-std::shared_ptr<tnbLib::Pln_Curve> 
+std::shared_ptr<tnbLib::Pln_Curve>
 tnbLib::Pln_Curve::Copy() const
 {
 	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());
@@ -200,7 +200,7 @@ void tnbLib::Pln_Curve::Transform
 
 void tnbLib::Pln_Curve::Interpolation
 (
-	const std::vector<Pnt2d>& theQ, 
+	const std::vector<Pnt2d>& theQ,
 	const Standard_Integer theDeg,
 	const Standard_Real theTol
 )
@@ -258,17 +258,17 @@ tnbLib::Pln_Curve::Split(const Standard_Real x) const
 	Handle(Geom2d_Curve) C0, C1;
 	Pln_Tools::SplitCurve(Geometry(), x, C0, C1);
 
-	return 
-	{ 
-		std::make_shared<Pln_Curve>(C0) , 
-		std::make_shared<Pln_Curve>(C1) 
+	return
+	{
+		std::make_shared<Pln_Curve>(C0) ,
+		std::make_shared<Pln_Curve>(C1)
 	};
 }
 
 void tnbLib::Pln_Curve::Split
 (
 	const Standard_Real x,
-	std::shared_ptr<Pln_Curve>& theLeft, 
+	std::shared_ptr<Pln_Curve>& theLeft,
 	std::shared_ptr<Pln_Curve>& theRight
 ) const
 {
@@ -290,9 +290,9 @@ void tnbLib::Pln_Curve::Split
 
 void tnbLib::Pln_Curve::Split
 (
-	const Standard_Real x, 
+	const Standard_Real x,
 	Pnt2d & theCoord,
-	std::shared_ptr<Pln_Curve>& theLeft, 
+	std::shared_ptr<Pln_Curve>& theLeft,
 	std::shared_ptr<Pln_Curve>& theRight
 ) const
 {
@@ -363,7 +363,7 @@ tnbLib::Pln_Curve::Split
 	}
 
 	auto curve = std::dynamic_pointer_cast<Pln_Curve>(This());
-	
+
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	curves.reserve(theParameters.size() + 1);
 
@@ -383,7 +383,7 @@ tnbLib::Pln_Curve::Split
 
 void tnbLib::Pln_Curve::Split
 (
-	const std::vector<Standard_Real>& theParameters, 
+	const std::vector<Standard_Real>& theParameters,
 	std::vector<Pnt2d>& theCoords,
 	std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 ) const
@@ -434,9 +434,9 @@ void tnbLib::Pln_Curve::Split
 std::tuple
 <
 	std::shared_ptr<tnbLib::Pln_Curve>,
-	std::shared_ptr<tnbLib::Pln_Curve>, 
+	std::shared_ptr<tnbLib::Pln_Curve>,
 	std::shared_ptr<tnbLib::Pln_Curve>
-> 
+>
 tnbLib::Pln_Curve::Split
 (
 	const Cad2d_IntsctEntity_TangSegment & x
@@ -458,7 +458,7 @@ tnbLib::Pln_Curve::Split
 		c0 = std::move(c0x);
 		c1 = std::move(c1x);
 	}
-	
+
 	std::shared_ptr<Pln_Curve> c2, c3;
 	if (std::abs(x1 - LastParameter()) <= gp::Resolution())
 	{
@@ -472,7 +472,7 @@ tnbLib::Pln_Curve::Split
 		c2 = std::move(c2x);
 		c3 = std::move(c3x);
 	}
-	
+
 
 	auto c2t = std::make_shared<Pln_TangCurve<Pln_Curve>>(c2->Geometry());
 
@@ -501,10 +501,10 @@ tnbLib::Pln_Curve::Split
 
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 
-Standard_Boolean 
+Standard_Boolean
 tnbLib::Pln_Curve::IsValid
 (
-	const std::shared_ptr<Pln_Curve>& theCurve, 
+	const std::shared_ptr<Pln_Curve>& theCurve,
 	const Standard_Real theTol
 )
 {

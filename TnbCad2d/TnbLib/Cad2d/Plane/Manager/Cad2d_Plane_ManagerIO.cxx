@@ -6,12 +6,12 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Plane_Manager)
 {
-	ar << Corners();
-	ar << Segments();
+	ar & theVertices_;
+	ar & theEdges_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Plane_Manager)
 {
-	ar >> ChangeCorners();
-	ar >> ChangeSegments();
+	ar & theVertices_;
+	ar & theEdges_;
 }

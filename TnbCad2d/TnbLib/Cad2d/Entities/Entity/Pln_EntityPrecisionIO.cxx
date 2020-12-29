@@ -2,10 +2,10 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_EntityPrecision)
 {
-	ar & Precision();
+	ar & thePrecision_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_EntityPrecision)
 {
-	ar& Precision();
+	ar & thePrecision_;
 }

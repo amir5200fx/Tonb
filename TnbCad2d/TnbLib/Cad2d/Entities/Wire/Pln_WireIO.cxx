@@ -16,7 +16,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Wire)
 	ar & boost::serialization::base_object<Pln_WireAdaptor>(*this);
 	ar & boost::serialization::base_object<Pln_WireAux>(*this);
 
-	ar & CmpEdge();
+	ar & theEdges_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Wire)
@@ -25,5 +25,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Wire)
 	ar & boost::serialization::base_object<Pln_WireAdaptor>(*this);
 	ar & boost::serialization::base_object<Pln_WireAux>(*this);
 
-	ar & ChangeCmpEdge();
+	ar & theEdges_;
 }

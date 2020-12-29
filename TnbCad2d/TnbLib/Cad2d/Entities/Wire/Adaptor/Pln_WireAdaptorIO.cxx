@@ -4,11 +4,11 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_WireAdaptor)
 {
-	ar & Plane();
+	ar & thePlane_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_WireAdaptor)
 {
-	ar & Plane();
+	ar & thePlane_;
 }
 

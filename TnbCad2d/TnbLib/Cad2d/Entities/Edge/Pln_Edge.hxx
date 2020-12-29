@@ -54,7 +54,7 @@ namespace tnbLib
 
 		Pln_Edge
 		(
-			const std::shared_ptr<Pln_Vertex>& theVtx0, 
+			const std::shared_ptr<Pln_Vertex>& theVtx0,
 			const std::shared_ptr<Pln_Vertex>& theVtx1,
 			const Standard_Boolean Sense = Standard_True
 		)
@@ -265,7 +265,7 @@ namespace tnbLib
 		static TnbCad2d_EXPORT Standard_Boolean
 			IsConnected
 			(
-				const std::shared_ptr<Pln_Edge>& theEdge0, 
+				const std::shared_ptr<Pln_Edge>& theEdge0,
 				const std::shared_ptr<Pln_Edge>& theEdge1,
 				std::shared_ptr<Pln_Vertex>& theVtx
 			);
@@ -274,5 +274,7 @@ namespace tnbLib
 }
 
 #include <Pln_EdgeI.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Edge);
 
 #endif // !_Pln_Edge_Header

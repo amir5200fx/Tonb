@@ -4,10 +4,10 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_VertexAdaptor)
 {
-	ar << Edges();
+	ar & theEdges_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_VertexAdaptor)
 {
-	ar >> ChangeEdges();
+	ar & theEdges_;
 }

@@ -2,17 +2,12 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_WireAux)
 {
-	ar & BoundingBox();
-	ar & Orientation();
+	ar & theBoundingBox_;
+	ar & theOrientation_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_WireAux)
 {
-	Entity2d_Box b;
-	Pln_Orientation ori;
-	ar & b;
-	ar & ori;
-
-	SetBoundingBox(std::move(b));
-	SetOrientation(ori);
+	ar & theBoundingBox_;
+	ar & theOrientation_;
 }

@@ -39,3 +39,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Curve)
 	is << s;
 	LoadGeometry(is, ChangeGeometry());
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Pln_Curve);

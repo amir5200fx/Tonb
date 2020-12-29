@@ -20,8 +20,8 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Edge)
 	ar& boost::serialization::base_object<Pln_EdgeAdaptor>(*this);
 	ar& boost::serialization::base_object<Pln_EdgeGeom>(*this);
 
-	ar << Vtx0();
-	ar << Vtx1();
+	ar & theVtx0_;
+	ar & theVtx1_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Edge)
@@ -30,6 +30,8 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Edge)
 	ar& boost::serialization::base_object<Pln_EdgeAdaptor>(*this);
 	ar& boost::serialization::base_object<Pln_EdgeGeom>(*this);
 
-	ar >> ChangeVtx0();
-	ar >> ChangeVtx1();
+	ar & theVtx0_;
+	ar & theVtx1_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Pln_Edge);

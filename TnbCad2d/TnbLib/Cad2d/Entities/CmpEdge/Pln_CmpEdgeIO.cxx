@@ -15,10 +15,10 @@ void tnbLib::Pln_CmpEdge::ExportToPlt(OFstream & File) const
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_CmpEdge)
 {
-	ar & Edges();
+	ar & theEdges_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_CmpEdge)
 {
-	ar & ChangeEdges();
+	ar & theEdges_;
 }

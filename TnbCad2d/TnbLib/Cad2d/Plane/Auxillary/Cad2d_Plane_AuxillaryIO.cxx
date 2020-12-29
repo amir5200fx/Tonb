@@ -5,12 +5,12 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::cad2dLib::Plane_Auxillary)
 {
-	ar & BoundingBox();
-	ar << System();
+	ar & theBoundingBox_;
+	ar & theSystem_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::cad2dLib::Plane_Auxillary)
 {
-	ar & ChangeBoundingBox();
-	ar >> ChangeSystem();
+	ar & theBoundingBox_;
+	ar & theSystem_;
 }

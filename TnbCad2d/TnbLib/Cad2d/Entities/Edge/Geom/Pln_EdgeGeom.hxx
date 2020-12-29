@@ -48,7 +48,7 @@ namespace tnbLib
 
 		Pln_EdgeGeom
 		(
-			const std::shared_ptr<Pln_Curve>& theCurve, 
+			const std::shared_ptr<Pln_Curve>& theCurve,
 			const Standard_Boolean theSense
 		)
 			: theCurve_(theCurve)
@@ -91,9 +91,16 @@ namespace tnbLib
 			Mesh().reset();
 		}
 
+		void set_curve(const std::shared_ptr<Pln_Curve> & c)
+		{
+			theCurve_ = c;
+		}
+
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(std::shared_ptr<Pln_Curve>, Curve)
 	};
 }
 
 #endif // !_Pln_EdgeGeom_Header
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_EdgeGeom);

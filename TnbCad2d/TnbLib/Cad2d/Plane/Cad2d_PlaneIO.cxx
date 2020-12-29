@@ -6,7 +6,7 @@
 #include <Pln_CmpEdge.hxx>
 #include <Pln_Wire.hxx>
 
-std::shared_ptr<tnbLib::Entity2d_Chain> 
+std::shared_ptr<tnbLib::Entity2d_Chain>
 tnbLib::Cad2d_Plane::Polygon() const
 {
 	Debug_Null_Pointer(OuterWire());
@@ -82,8 +82,8 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::Cad2d_Plane)
 	ar & boost::serialization::base_object<cad2dLib::Plane_Auxillary>(*this);
 	ar & boost::serialization::base_object<cad2dLib::Plane_Manager>(*this);
 
-	ar & OuterWire();
-	ar & InnerWires();
+	ar & theOuter_;
+	ar & theInner_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Cad2d_Plane)
@@ -92,6 +92,6 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Cad2d_Plane)
 	ar & boost::serialization::base_object<cad2dLib::Plane_Auxillary>(*this);
 	ar & boost::serialization::base_object<cad2dLib::Plane_Manager>(*this);
 
-	ar & OuterWireRef();
-	ar & InnerWiresRef();
+	ar & theOuter_;
+	ar & theInner_;
 }
