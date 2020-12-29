@@ -266,9 +266,6 @@
     <ClCompile Include="TnbLib\StbGMaker\Maker\Entity\StbGMaker_EntityCreator.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\StbGMaker\Scripts\StbGMaker_Scripts.cxx">
-      <Filter>TnbLib\StbGMaker\Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Entities\Model\StbGMaker_ModelIO.cxx">
       <Filter>TnbLib\StbGMaker\Entities\Model</Filter>
     </ClCompile>
