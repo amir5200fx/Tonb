@@ -25,7 +25,6 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_Model)
 	ar & theStbModel_;
 	Marine_Wave::Load(ar, theWave_);
 	ar & theDomain_;
-
 	ar & theWater_;
 	ar & theFloatBody_;
 }

@@ -18,6 +18,21 @@
 
 #define SET_PARAM(Name)  ParametersRef()->Name = std::move(param)
 
+unsigned short tnbLib::formCoeff::Wetted::verbose(0);
+
+tnbLib::formCoeff::Wetted::Parameter::Parameter()
+	: Cb(0)
+	, Dispv(0)
+	, Cm(0)
+	, Am(0)
+	, Cp(0)
+	, Cvp(0)
+	, Aw(0)
+	, Cwl(0)
+{
+	// empty body
+}
+
 namespace tnbLib
 {
 	void CheckValue(const char* name, const word& parName, const Standard_Real v)
@@ -180,6 +195,13 @@ void tnbLib::formCoeff::Wetted::CalcCVP()
 
 void tnbLib::formCoeff::Wetted::Perform()
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Calculating Wetted Form Coefficients ********" << endl;
+		Info << endl;
+	}
+
 	if (NOT WettedFormDim())
 	{
 		FatalErrorIn("void tnbLib::formCoeff::Wetted::Perform()")
@@ -197,18 +219,47 @@ void tnbLib::formCoeff::Wetted::Perform()
 	Debug_Null_Pointer(WettedFormDim()->Body());
 	const auto& body = *WettedFormDim()->Body();
 
+	const auto& pars = Parameters();
+
+	if (verbose) Info << " calculating the DISPV..." << endl;
 	CalcDISPV(body);
+	if (verbose) Info << pars->Dispv << endl;
+
+	if (verbose) Info << " calculating the CB..." << endl;
 	CalcCB(body);
+	if (verbose) Info << pars->Cb << endl;
+
+	if (verbose) Info << " calculating the AM..." << endl;
 	CalcAM(body);
+	if (verbose) Info << pars->Am << endl;
 
+	if (verbose) Info << " calculating the CP..." << endl;
 	CalcCP();
+	if (verbose) Info << pars->Cp << endl;
+
+	if (verbose) Info << " calculating the CM..." << endl;
 	CalcCM();
+	if (verbose) Info << pars->Cm << endl;
 
+	if (verbose) Info << " calculating the AW..." << endl;
 	CalcAW(body);
+	if (verbose) Info << pars->Aw << endl;
 
+	if (verbose) Info << " calculating the CWL..." << endl;
 	CalcCWL();
+	if (verbose) Info << pars->Cwl << endl;
+
+	if (verbose) Info << " calculating the CVP..." << endl;
 	CalcCVP();
+	if (verbose) Info << pars->Cvp << endl;
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of the Calculating Wetted Form Coefficients ********" << endl;
+		Info << endl;
+	}
 }
 

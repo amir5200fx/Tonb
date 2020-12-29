@@ -701,5 +701,8 @@
     <ClCompile Include="TnbLib\Hydrostatic\FormDim\Wetted\HydStatic_FormDim_WettedIO.cxx">
       <Filter>TnbLib\Hydrostatic\FormDim\Wetted</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\FormCoeff\HydStatic_FormCoeffIO.cxx">
+      <Filter>TnbLib\Hydrostatic\FormCoeff</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -40,6 +40,7 @@ void tnbLib::formDim::Wetted::CalcTM()
 		auto x = MEAN(pars->App(), pars->Fpp());
 		Marine_MidSection midSect(Body()->Displacer(), Body(), Wave());
 		midSect.ApplyAt(x);
+		//midSect.ApplyAt(Body()->Sections()[0]);
 
 		if (verbose)
 		{
@@ -232,6 +233,7 @@ void tnbLib::formDim::Wetted::Perform
 	const Standard_Real theRudderAxis
 )
 {
+	
 	if (verbose)
 	{
 		Info << endl;
@@ -245,6 +247,18 @@ void tnbLib::formDim::Wetted::Perform
 			<< "the body has not been loaded!" << endl
 			<< abort(FatalError);
 	}
+
+
+	/*auto copy = std::dynamic_pointer_cast<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>(theBody_->Copy());
+	auto ship0 = std::dynamic_pointer_cast<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>(theBody_);
+	copy->SetDisplacer(ship0->Displacer());
+	copy->SetWL(ship0->WL());
+	copy->SetShape(ship0->Shape());
+
+	theBody_ = copy;*/
+
+	/*std::cout << copy->WL() << std::endl;
+	PAUSE;*/
 
 	AllocateMemory();
 
