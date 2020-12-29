@@ -337,14 +337,41 @@
     <Filter Include="TnbLib\Cad2d\module">
       <UniqueIdentifier>{c913fbf0-2c42-4944-835b-3fb0070a1a85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase">
+      <UniqueIdentifier>{585a108f-0a68-4064-92a1-92b1d795e96f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities">
+      <UniqueIdentifier>{1c095989-9f4f-407b-b7a3-bf0e2a6ab428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve">
+      <UniqueIdentifier>{cdcd6f50-4313-4def-b586-06fe35d02af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Water">
+      <UniqueIdentifier>{5a9b6688-612a-4f6b-b39e-b10b6cc22be8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Hull">
+      <UniqueIdentifier>{1652f680-67f4-42bf-bcfd-ac25ae333638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Sail">
+      <UniqueIdentifier>{78cb5cf6-a3e0-486b-9662-d88d6e8f7b63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Tank">
+      <UniqueIdentifier>{e3d1dd6e-e292-4e80-a651-2d878d9f7fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Hull\Dry">
+      <UniqueIdentifier>{6c83a2dd-9b65-4ca4-95aa-678d12a1c136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Hull\Wetted">
+      <UniqueIdentifier>{4412b628-1b38-4f85-8bfd-e8b87b7b2091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Hull\Displacer">
+      <UniqueIdentifier>{d4a64a08-5314-4371-b44c-18fb27493573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Curve\Hull\WaterLine">
+      <UniqueIdentifier>{de59335e-9312-47fc-bf68-084e65a2ff3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
       <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
     </ClInclude>
@@ -354,32 +381,17 @@
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecision.hxx">
       <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptor.hxx">
       <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_VertexI.hxx">
       <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Pln_Edge.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Adaptor\Pln_EdgeAdaptor.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Edge\Adaptor</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeom.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Edge\Geom</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdge.hxx">
       <Filter>TnbLib\Cad2d\Entities\CmpEdge</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Orientation\Pln_Orientation.hxx">
       <Filter>TnbLib\Cad2d\Entities\Orientation</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Ring\Pln_Ring.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Wire\Pln_Wire.hxx">
       <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
@@ -651,11 +663,62 @@
     <ClInclude Include="TnbLib\Cad2d\module\Cad2d_Module.hxx">
       <Filter>TnbLib\Cad2d\module</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Hull\Dry\Marine_DryCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Dry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Hull\Marine_HullCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Hull\Marine_WettedCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Wetted</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Sail\Marine_SailCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Tank\Marine_TankCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Water\Marine_WaterCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Adaptor\Pln_EdgeAdaptor.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeom.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Pln_Edge.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Ring\Pln_Ring.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Hull\Displacer\Marine_DisplacerCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Displacer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Hull\WaterLine\Marine_WaterLineCurve.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\WaterLine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurves.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurvesFwd.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
     </ClCompile>
@@ -707,9 +770,6 @@
     <ClCompile Include="TnbLib\Cad2d\Plane\Cad2d_Plane.cxx">
       <Filter>TnbLib\Cad2d\Plane</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Plane\Cad2d_PlaneIO.cxx">
-      <Filter>TnbLib\Cad2d\Plane</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Plane\Info\Cad2d_Plane_Info.cxx">
       <Filter>TnbLib\Cad2d\Plane\Info</Filter>
     </ClCompile>
@@ -721,15 +781,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Plane\System\Cad2d_Plane_System.cxx">
       <Filter>TnbLib\Cad2d\Plane\System</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Pln_WireIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdgeIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\CmpEdge</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Pln_EdgeIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Cad2d_Subdivide.cxx">
       <Filter>TnbLib\Cad2d\Subdivide</Filter>
@@ -863,44 +914,8 @@
     <ClCompile Include="TnbLib\Cad2d\Scripts\Cad2d_Scripts.cxx">
       <Filter>TnbLib\Cad2d\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_CurveIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Global\Entity\Cad_EntityIO.cxx">
       <Filter>TnbLib\Cad2d\Global\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Adaptor\Pln_EdgeAdaptorIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Edge\Adaptor</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeomIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Edge\Geom</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Ring\Pln_RingIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptorIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Pln_VertexIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecisionIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Auxillary\Pln_WireAuxIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Wire\Aux</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Adaptor\Pln_WireAdaptorIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Wire\Adaptor</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Plane\Auxillary\Cad2d_Plane_AuxillaryIO.cxx">
-      <Filter>TnbLib\Cad2d\Plane\Aux</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_ManagerIO.cxx">
-      <Filter>TnbLib\Cad2d\Plane\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Modeler\Entities\Corner\Adaptor\Cad2d_Modeler_CornerAdaptorIO.cxx">
       <Filter>TnbLib\Cad2d\Modeler\Entities\Corner\Adaptor</Filter>
@@ -928,6 +943,105 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Modeler\Cad2d_ModelerIO.cxx">
       <Filter>TnbLib\Cad2d\Modeler</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\Marine_HullCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\Marine_WettedCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Wetted</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\Marine_WettedCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Wetted</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Sail\Marine_SailCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Tank\Marine_TankCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Water\Marine_WaterCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Water\Marine_WaterCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\CmpEdge\Pln_CmpEdgeIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\CmpEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_CurveIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Adaptor\Pln_EdgeAdaptorIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Geom\Pln_EdgeGeomIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Pln_EdgeIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecisionIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Ring\Pln_RingIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptorIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Pln_VertexIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Adaptor\Pln_WireAdaptorIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Auxillary\Pln_WireAuxIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire\Aux</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Wire\Pln_WireIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Auxillary\Cad2d_Plane_AuxillaryIO.cxx">
+      <Filter>TnbLib\Cad2d\Plane\Aux</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_ManagerIO.cxx">
+      <Filter>TnbLib\Cad2d\Plane\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Plane\Cad2d_PlaneIO.cxx">
+      <Filter>TnbLib\Cad2d\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Curve\Pln_Curve.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\Dry\Marine_DryCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Dry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\Dry\Marine_DryCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Dry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Sail\Marine_SailCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Tank\Marine_TankCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\Displacer\Marine_DisplacerCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Displacer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\Displacer\Marine_DisplacerCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\Displacer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\WaterLine\Marine_WaterLineCurve.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\WaterLine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\WaterLine\Marine_WaterLineCurveIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve\Hull\WaterLine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -43,4 +43,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_EdgeAdaptor);
+
 #endif // !_Pln_EdgeAdaptor_Header

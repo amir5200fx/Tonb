@@ -108,4 +108,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Ring);
+
 #endif // !_Pln_Ring_Header

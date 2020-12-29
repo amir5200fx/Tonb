@@ -60,7 +60,7 @@ namespace tnbLib
 
 		Pln_Vertex
 		(
-			const Standard_Integer theIndex, 
+			const Standard_Integer theIndex,
 			const word& theName,
 			const Pnt2d& theCoord
 		)
@@ -118,7 +118,7 @@ namespace tnbLib
 		static inline Standard_Boolean
 			IsLess
 			(
-				const std::shared_ptr<Pln_Vertex>& theVtx0, 
+				const std::shared_ptr<Pln_Vertex>& theVtx0,
 				const std::shared_ptr<Pln_Vertex>& theVtx1
 			);
 
@@ -128,5 +128,7 @@ namespace tnbLib
 }
 
 #include <Pln_VertexI.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Vertex);
 
 #endif // !_Pln_Vertex_Header
