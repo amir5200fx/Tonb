@@ -1,0 +1,97 @@
+#pragma once
+#ifndef _Marine_WaterLineCurve_Header
+#define _Marine_WaterLineCurve_Header
+
+#include <Marine_HullCurve.hxx>
+
+namespace tnbLib
+{
+
+	class Marine_WaterLineCurve
+		: public Marine_HullCurve
+	{
+
+		/*Private Data*/
+
+
+		/*private functions and operators*/
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Marine_HullCurve>(*this);
+		}
+
+	public:
+
+		TnbCad2d_EXPORT Marine_WaterLineCurve();
+
+		TnbCad2d_EXPORT Marine_WaterLineCurve
+		(
+			const Standard_Integer theIndex,
+			const Handle(Geom2d_Curve)& theGeom
+		);
+
+		TnbCad2d_EXPORT explicit Marine_WaterLineCurve
+		(
+			const Handle(Geom2d_Curve)& theGeom
+		);
+
+		TnbCad2d_EXPORT Marine_WaterLineCurve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Handle(Geom2d_Curve)& theGeom
+		);
+
+		Standard_Boolean IsWetted() const override
+		{
+			return Standard_True;
+		}
+
+		std::shared_ptr<Pln_Curve>
+			Copy() const override;
+
+		TnbCad2d_EXPORT std::tuple
+			<
+			std::shared_ptr<Pln_Curve>,
+			std::shared_ptr<Pln_Curve>
+			>
+			Split
+			(
+				const Standard_Real x
+			) const override;
+
+		TnbCad2d_EXPORT void Split
+		(
+			const Standard_Real x,
+			std::shared_ptr<Pln_Curve>& theLeft,
+			std::shared_ptr<Pln_Curve>& theRight
+		) const override;
+
+		TnbCad2d_EXPORT void Split
+		(
+			const Standard_Real x,
+			Pnt2d& theCoord,
+			std::shared_ptr<Pln_Curve>& theLeft,
+			std::shared_ptr<Pln_Curve>& theRight
+		) const override;
+
+		TnbCad2d_EXPORT std::tuple
+			<
+			std::shared_ptr<Pln_Curve>,
+			std::shared_ptr<Pln_Curve>,
+			std::shared_ptr<Pln_Curve>
+			>
+			Split
+			(
+				const Cad2d_IntsctEntity_TangSegment& x
+			) const override;
+	};
+}
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Marine_WaterLineCurve);
+
+#endif // !_Marine_WaterLineCurve_Header
