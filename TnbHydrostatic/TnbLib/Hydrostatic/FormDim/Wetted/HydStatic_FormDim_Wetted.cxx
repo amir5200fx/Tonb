@@ -40,7 +40,6 @@ void tnbLib::formDim::Wetted::CalcTM()
 		auto x = MEAN(pars->App(), pars->Fpp());
 		Marine_MidSection midSect(Body()->Displacer(), Body(), Wave());
 		midSect.ApplyAt(x);
-		//midSect.ApplyAt(Body()->Sections()[0]);
 
 		if (verbose)
 		{
@@ -248,41 +247,29 @@ void tnbLib::formDim::Wetted::Perform
 			<< abort(FatalError);
 	}
 
-
-	/*auto copy = std::dynamic_pointer_cast<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>(theBody_->Copy());
-	auto ship0 = std::dynamic_pointer_cast<marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>>(theBody_);
-	copy->SetDisplacer(ship0->Displacer());
-	copy->SetWL(ship0->WL());
-	copy->SetShape(ship0->Shape());
-
-	theBody_ = copy;*/
-
-	/*std::cout << copy->WL() << std::endl;
-	PAUSE;*/
-
 	AllocateMemory();
 
 	const auto& pars = Parameters();
 
 	if (verbose) Info << " calculating the FUW..." << endl;
 	CalcFUW();
-	if (verbose) Info << pars->Fuw << endl;
+	if (verbose) Info << pars->Fuw << endl << endl;
 
 	if (verbose) Info << " calculating the AUW..." << endl;
 	CalcAUW();
-	if (verbose) Info << pars->Auw << endl;
+	if (verbose) Info << pars->Auw << endl << endl;
 
 	if (verbose) Info << " calculating the AWL..." << endl;
 	CalcAWL();
-	if (verbose) Info << pars->Awl << endl;
+	if (verbose) Info << pars->Awl << endl << endl;
 
 	if (verbose) Info << " calculating the FWL..." << endl;
 	CalcFWL();
-	if (verbose) Info << pars->Fwl << endl;
+	if (verbose) Info << pars->Fwl << endl << endl;
 
 	if (verbose) Info << " calculating the FPP..." << endl;
 	CalcFPP();
-	if (verbose) Info << pars->Fpp << endl;
+	if (verbose) Info << pars->Fpp << endl << endl;
 
 	if (verbose)
 	{
@@ -305,31 +292,31 @@ void tnbLib::formDim::Wetted::Perform
 			<< "Unspecified mode of the App" << endl
 			<< abort(FatalError);
 	}
-	if (verbose) Info << pars->App << endl;
+	if (verbose) Info << pars->App << endl << endl;
 
 	if (verbose) Info << " calculating the LPP..." << endl;
 	CalcLPP();
-	if (verbose) Info << pars->Lpp << endl;
+	if (verbose) Info << pars->Lpp << endl << endl;
 
 	if (verbose) Info << " calculating the MPP..." << endl;
 	CalcMPP();
-	if (verbose) Info << pars->Mpp << endl;
+	if (verbose) Info << pars->Mpp << endl << endl;
 
 	if (verbose) Info << " calculating the LWL..." << endl;
 	CalcLWL();
-	if (verbose) Info << pars->Lwl << endl;
+	if (verbose) Info << pars->Lwl << endl << endl;
 
 	if (verbose) Info << " calculating the LOS..." << endl;
 	CalcLOS();
-	if (verbose) Info << pars->Los << endl;
+	if (verbose) Info << pars->Los << endl << endl;
 
 	if (verbose) Info << " calculating the BWL..." << endl;
 	CalcBWL();
-	if (verbose) Info << pars->Bwl << endl;
+	if (verbose) Info << pars->Bwl << endl << endl;
 
 	if (verbose) Info << " calculating the TM..." << endl;
 	CalcTM();
-	if (verbose) Info << pars->Tm << endl;
+	if (verbose) Info << pars->Tm << endl << endl;
 
 	Change_IsDone() = Standard_True;
 
