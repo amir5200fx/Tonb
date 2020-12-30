@@ -150,7 +150,6 @@ tnbLib::Marine_CmptLib::CalcLWL
 			<< "failed to find water plane" << endl
 			<< abort(FatalError);
 	}
-
 	const auto b = wlSect->BoundingBox();
 	const auto[dx, dy] = b.Length();
 	marineLib::LWL param(dx);
@@ -372,6 +371,7 @@ tnbLib::Marine_CmptLib::CalcDISPV
 {
 	auto volQ = MarineBase_Tools::CalcVolume(theBody.Sections(), theInfo);
 	auto vol = MarineBase_Tools::CalcArea(volQ, theInfo);
+
 	marineLib::DISPV param(vol);
 	return std::move(param);
 }

@@ -15,7 +15,7 @@
 
 tnbLib::Marine_MidSection::Marine_MidSection
 (
-	const std::shared_ptr<marineLib::Body_Displacer>& theDisplacer, 
+	const std::shared_ptr<marineLib::Body_Displacer>& theDisplacer,
 	const std::shared_ptr<marineLib::Body_Wetted>& theBody,
 	const std::shared_ptr<Marine_Wave>& theWave
 )
@@ -28,7 +28,7 @@ tnbLib::Marine_MidSection::Marine_MidSection
 	// empty body
 }
 
-Standard_Boolean 
+Standard_Boolean
 tnbLib::Marine_MidSection::HasShape() const
 {
 	Debug_Null_Pointer(Displacer());
@@ -54,7 +54,7 @@ void tnbLib::Marine_MidSection::ApplyAt(const Standard_Real x)
 	auto x0 = syst0.Location().Z();
 	auto syst = syst0.Translated(gp_Vec(x - x0, 0, 0));
 
-	auto displacer = 
+	auto displacer =
 		std::dynamic_pointer_cast
 		<
 		marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>
@@ -64,7 +64,7 @@ void tnbLib::Marine_MidSection::ApplyAt(const Standard_Real x)
 	const auto& marineShape = displacer->Shape();
 	Debug_Null_Pointer(marineShape);
 
-	auto sectionShape = 
+	auto sectionShape =
 		Marine_DisctTools::Section(marineShape->Shape(), syst);
 	if (sectionShape.IsNull())
 	{
@@ -73,25 +73,28 @@ void tnbLib::Marine_MidSection::ApplyAt(const Standard_Real x)
 			<< abort(FatalError);
 	}
 
+	//Info << " retrieving the cmp section..." << endl;
 	auto section =
 		Marine_SectTools::CmpSectionCreator
 		(
 			Marine_SectTools::SectionCreator
 			(
 				sectionShape, syst,
-				Marine_SectionType::wetted,
+				Marine_SectionType::displacer,
 				MinTol(), MaxTol()
 			));
 	Debug_Null_Pointer(section);
 
-	auto water = 
+	//Info << " creating the water section..." << endl;
+	auto water =
 		Marine_WaterTools::WaterSection
 		(
-			*Wave(), *section, 
+			*Wave(), *section,
 			MinTol(), MaxTol()
 		);
 	Debug_Null_Pointer(water);
 
+	//Info << " boolean operator..." << endl;
 	auto wetted = Marine_BooleanOps::WettedSection(section, water);
 	if (NOT wetted)
 	{
@@ -104,4 +107,13 @@ void tnbLib::Marine_MidSection::ApplyAt(const Standard_Real x)
 	wetted->SetCoordinateSystem(section->CoordinateSystem());
 
 	Body()->SetMid(std::move(wetted));
+}
+
+void tnbLib::Marine_MidSection::ApplyAt
+(
+	const std::shared_ptr<Marine_CmpSection>& theSect
+)
+{
+	theSect->SetName("MidShip Section");
+	Body()->SetMid(theSect);
 }

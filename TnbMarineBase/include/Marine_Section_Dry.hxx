@@ -27,12 +27,21 @@ namespace tnbLib
 				ar & boost::serialization::base_object<Marine_xSection>(*this);
 			}
 
+
 		protected:
 
 			template<class... _Types>
 			Section_Dry(_Types&&... _Args)
 				: Marine_xSection(_Args...)
+			{
+				CheckCurves();
+			}
+
+			template<>
+			Section_Dry()
 			{}
+
+			TnbMarine_EXPORT void CheckCurves() const;
 
 		public:
 

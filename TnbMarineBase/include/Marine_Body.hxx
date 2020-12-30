@@ -5,6 +5,7 @@
 #include <Marine_CoordinatedEntity.hxx>
 #include <Marine_BaseLine.hxx>
 #include <Marine_BodyType.hxx>
+#include <Marine_SectionType.hxx>
 
 #include <vector>
 
@@ -35,12 +36,48 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbMarine_EXPORT);
 
+
+		void CheckSections();
+
 	protected:
 	
-		template<class... _Types>
+		/*template<class... _Types>
 		Marine_Body(_Types&&... _Args)
 			: Marine_CoordinatedEntity(_Args...)
+		{}*/
+
+
+		//- default constructor
+
+		Marine_Body()
 		{}
+
+
+		//- constructors
+
+		TnbMarine_EXPORT Marine_Body
+		(
+			const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+		);
+
+		TnbMarine_EXPORT Marine_Body
+		(
+			std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
+		);
+
+		TnbMarine_EXPORT Marine_Body
+		(
+			const Standard_Integer theIndex,
+			const word& theName, 
+			const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+		);
+
+		TnbMarine_EXPORT Marine_Body
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
+		);
 
 		auto& ChangeSections()
 		{

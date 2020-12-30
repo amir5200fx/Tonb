@@ -65,7 +65,7 @@ namespace tnbLib
 
 		TnbMarine_EXPORT void ApplyAt(const Standard_Real x);
 
-		std::shared_ptr<Marine_CmpSection> ApplyAt(const std::shared_ptr<Marine_CmpSection>& theSect);
+		TnbMarine_EXPORT void ApplyAt(const std::shared_ptr<Marine_CmpSection>& theSect);
 
 		void SetMinTol(const Standard_Real tol)
 		{
@@ -76,7 +76,7 @@ namespace tnbLib
 		{
 			theMaxTol_ = tol;
 		}
-		
+
 	};
 }
 
