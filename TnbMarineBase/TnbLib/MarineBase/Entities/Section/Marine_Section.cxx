@@ -5,6 +5,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <Marine_Section_Displacer.hxx>
+
 void tnbLib::Marine_Section::CheckWire(const Pln_Wire& theWire, const char * theName)
 {
 	if (theWire.Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)

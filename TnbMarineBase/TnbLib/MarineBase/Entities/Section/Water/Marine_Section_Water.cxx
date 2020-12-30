@@ -4,6 +4,24 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <Marine_SectTools.hxx>
+#include <Pln_Wire.hxx>
+
+void tnbLib::marineLib::Section_Water::CheckCurves() const
+{
+	Debug_Null_Pointer(Wire());
+	const auto& curves = Wire()->RetrieveCurves();
+	for (const auto& x : curves)
+	{
+		if (NOT Marine_SectTools::IsWater(x))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the curve is supposed to be a water!" << endl
+				<< abort(FatalError);
+		}
+	}
+}
+
 
 tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Water>::OuterSection
 (
