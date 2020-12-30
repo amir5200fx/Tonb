@@ -168,6 +168,26 @@ tnbLib::Pln_Curve::BoundingBox(const Standard_Real Tol) const
 	return std::move(box);
 }
 
+std::shared_ptr<tnbLib::Pln_Curve> 
+tnbLib::Pln_Curve::operator()
+(
+	const Handle(Geom2d_Curve)& theCurve
+	) const
+{
+	auto curve = std::make_shared<Pln_Curve>(theCurve);
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve> 
+tnbLib::Pln_Curve::operator()
+(
+	Handle(Geom2d_Curve) && theCurve
+	) const
+{
+	auto curve = std::make_shared<Pln_Curve>(std::move(theCurve));
+	return std::move(curve);
+}
+
 //Standard_Boolean 
 //tnbLib::Pln_Curve::IsOrphan() const
 //{
