@@ -32,7 +32,7 @@ tnbLib::stbGmakerLib::HullCreator_Shape::CreateWorkingPlane
 )
 {
 	Debug_Null_Pointer(Shape());
-	return CreateWpFromShape(Shape()->Shape(), x);
+	return CreateWpFromShape(Shape()->Shape(), x, Marine_SectionType::displacer);
 }
 
 #include <Cad2d_Plane.hxx>

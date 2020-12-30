@@ -77,7 +77,7 @@ tnbLib::stbGmakerLib::VolumeSailCreator_Shape::CreateWorkingPlane
 )
 {
 	Debug_Null_Pointer(Shape());
-	return StbGMaker_Alg::CreateWpFromShape(Shape()->Shape(), x);
+	return StbGMaker_Alg::CreateWpFromShape(Shape()->Shape(), x, Marine_SectionType::sail);
 }
 
 typename tnbLib::stbGmakerLib::sailCreatorType 

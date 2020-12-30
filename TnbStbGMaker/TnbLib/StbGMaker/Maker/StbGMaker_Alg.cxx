@@ -7,6 +7,7 @@
 #include <Cad_Tools.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_Ring.hxx>
+#include <Marine_SectTools.hxx>
 #include <StbGMaker_WP.hxx>
 #include <StbGMaker_Edge.hxx>
 #include <TnbError.hxx>
@@ -78,7 +79,8 @@ Standard_Integer
 tnbLib::StbGMaker_Alg::CreateWpFromShape
 (
 	const TopoDS_Shape & theShape,
-	const Standard_Real x
+	const Standard_Real x,
+	const Marine_SectionType t
 )
 {
 	BRepAlgoAPI_Section alg;
@@ -105,7 +107,8 @@ tnbLib::StbGMaker_Alg::CreateWpFromShape
 
 	auto tedges = Cad_Tools::RetrieveEdges(alg.Shape());
 	auto curves = Cad_Tools::RetrieveParaCurves(tedges, ax);
-	auto edges = Pln_Tools::RetrieveEdges(curves);
+	auto t_curves = Marine_SectTools::CurveCreator(curves, t);
+	auto edges = Pln_Tools::RetrieveEdges(t_curves);
 
 	std::vector<std::shared_ptr<Pln_Edge>> edges3d;
 	edges3d.reserve(edges.size());
@@ -159,7 +162,8 @@ tnbLib::StbGMaker_Alg::CreateWpFromShape
 		x3->SetMesh3d(std::move(poly));
 	}*/
 
-	auto wp = std::make_shared<StbGMaker_WP>(x);
+	//auto wp = std::make_shared<StbGMaker_WP>(x);
+	auto wp = MakeWP(x);
 	Debug_Null_Pointer(wp);
 
 	const auto& md = wp->Modify();
@@ -216,7 +220,8 @@ tnbLib::StbGMaker_Alg::CreateWorkingPlane
 	const Standard_Real x
 )
 {
-	auto wp = std::make_shared<StbGMaker_WP>(x);
+	//auto wp = std::make_shared<StbGMaker_WP>(x);
+	auto wp = MakeWP(x);
 	Debug_Null_Pointer(wp);
 
 	return AddWP(std::move(wp));

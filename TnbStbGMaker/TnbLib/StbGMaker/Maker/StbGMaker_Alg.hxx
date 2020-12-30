@@ -6,6 +6,7 @@
 #include <StbGMaker_Entity.hxx>
 #include <StbGMaker_AlgAux.hxx>
 #include <Entity3d_ChainFwd.hxx>
+#include <Marine_SectionType.hxx>
 
 #include <map>
 #include <vector>
@@ -42,6 +43,8 @@ namespace tnbLib
 			const std::shared_ptr<StbGMaker_WP>&& theWP
 		);
 
+		virtual std::shared_ptr<StbGMaker_WP> MakeWP(const Standard_Real x) const = 0;
+
 	protected:
 
 		StbGMaker_Alg()
@@ -69,7 +72,8 @@ namespace tnbLib
 			CreateWpFromShape
 			(
 				const TopoDS_Shape& theShape,
-				const Standard_Real x
+				const Standard_Real x,
+				const Marine_SectionType t
 			);
 
 	public:
