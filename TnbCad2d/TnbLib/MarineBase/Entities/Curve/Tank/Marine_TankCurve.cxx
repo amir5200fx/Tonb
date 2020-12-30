@@ -44,6 +44,26 @@ tnbLib::Marine_TankCurve::Marine_TankCurve
 }
 
 std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_TankCurve::operator()
+(
+	const Handle(Geom2d_Curve)& theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_TankCurve>(theCurve);
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_TankCurve::operator()
+(
+	Handle(Geom2d_Curve) && theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_TankCurve>(std::move(theCurve));
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
 tnbLib::Marine_TankCurve::Copy() const
 {
 	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());

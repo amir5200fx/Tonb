@@ -44,6 +44,26 @@ tnbLib::Marine_DryCurve::Marine_DryCurve
 }
 
 std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_DryCurve::operator()
+(
+	const Handle(Geom2d_Curve)& theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_DryCurve>(theCurve);
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_DryCurve::operator()
+(
+	Handle(Geom2d_Curve) && theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_DryCurve>(std::move(theCurve));
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
 tnbLib::Marine_DryCurve::Copy() const
 {
 	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());

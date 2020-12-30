@@ -10,6 +10,7 @@
 
 tnbLib::Marine_WaterCurve::Marine_WaterCurve()
 {
+	// empty body
 }
 
 tnbLib::Marine_WaterCurve::Marine_WaterCurve
@@ -19,6 +20,7 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 )
 	: Marine_PlnCurve(theIndex, theGeom)
 {
+	// empty body
 }
 
 tnbLib::Marine_WaterCurve::Marine_WaterCurve
@@ -27,6 +29,7 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 )
 	: Marine_PlnCurve(theGeom)
 {
+	// empty body
 }
 
 tnbLib::Marine_WaterCurve::Marine_WaterCurve
@@ -37,6 +40,27 @@ tnbLib::Marine_WaterCurve::Marine_WaterCurve
 )
 	: Marine_PlnCurve(theIndex, theName, theGeom)
 {
+	// empty body
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_WaterCurve::operator()
+(
+	const Handle(Geom2d_Curve)& theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_WaterCurve>(theCurve);
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_WaterCurve::operator()
+(
+	Handle(Geom2d_Curve) && theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_WaterCurve>(std::move(theCurve));
+	return std::move(curve);
 }
 
 std::shared_ptr<tnbLib::Pln_Curve>

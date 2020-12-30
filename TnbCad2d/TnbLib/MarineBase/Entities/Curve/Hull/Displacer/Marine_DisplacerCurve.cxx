@@ -43,6 +43,26 @@ tnbLib::Marine_DisplacerCurve::Marine_DisplacerCurve
 	// empty body
 }
 
+std::shared_ptr<tnbLib::Pln_Curve> 
+tnbLib::Marine_DisplacerCurve::operator()
+(
+	const Handle(Geom2d_Curve)& theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_DisplacerCurve>(theCurve);
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_DisplacerCurve::operator()
+(
+	Handle(Geom2d_Curve)&& theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_DisplacerCurve>(std::move(theCurve));
+	return std::move(curve);
+}
+
 std::shared_ptr<tnbLib::Pln_Curve>
 tnbLib::Marine_DisplacerCurve::Copy() const
 {

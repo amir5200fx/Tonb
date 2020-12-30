@@ -4,6 +4,7 @@
 
 #include <Pln_Curve.hxx>
 #include <Cad2d_Module.hxx>
+#include <Marine_PlnCurveType.hxx>
 
 namespace tnbLib
 {
@@ -47,6 +48,10 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
+		Marine_PlnCurve(Pln_Curve&& theCurve)
+			: Pln_Curve(std::move(theCurve))
+		{}
+
 	public:
 
 		Standard_Boolean IsMarine() const override
@@ -73,6 +78,8 @@ namespace tnbLib
 		{
 			return Standard_False;
 		}
+
+		virtual marineLib::curveType CurveType() const = 0;
 	};
 }
 

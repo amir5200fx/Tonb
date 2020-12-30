@@ -44,6 +44,26 @@ tnbLib::Marine_SailCurve::Marine_SailCurve
 }
 
 std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_SailCurve::operator()
+(
+	const Handle(Geom2d_Curve)& theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_SailCurve>(theCurve);
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_SailCurve::operator()
+(
+	Handle(Geom2d_Curve) && theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_SailCurve>(std::move(theCurve));
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
 tnbLib::Marine_SailCurve::Copy() const
 {
 	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());

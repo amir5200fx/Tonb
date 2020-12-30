@@ -44,6 +44,26 @@ tnbLib::Marine_WettedCurve::Marine_WettedCurve
 }
 
 std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_WettedCurve::operator()
+(
+	const Handle(Geom2d_Curve)& theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_WettedCurve>(theCurve);
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Marine_WettedCurve::operator()
+(
+	Handle(Geom2d_Curve) && theCurve
+	) const
+{
+	auto curve = std::make_shared<Marine_WettedCurve>(std::move(theCurve));
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::Pln_Curve>
 tnbLib::Marine_WettedCurve::Copy() const
 {
 	auto c = Handle(Geom2d_Curve)::DownCast(Geometry()->Copy());
