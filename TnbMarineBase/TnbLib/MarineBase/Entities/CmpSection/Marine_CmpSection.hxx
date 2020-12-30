@@ -161,7 +161,7 @@ namespace tnbLib
 
 		//- saving and loading the composite sections outside of the project!
 		static void Save(TNB_oARCH_TYPE& ar, const std::shared_ptr<Marine_CmpSection>&);
-		static void Load(TNB_oARCH_TYPE& ar, std::shared_ptr<Marine_CmpSection>&);
+		static void Load(TNB_iARCH_TYPE& ar, std::shared_ptr<Marine_CmpSection>&);
 
 	};
 }

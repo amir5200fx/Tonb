@@ -19,7 +19,7 @@ void tnbLib::Marine_CmpSection::Save(TNB_oARCH_TYPE& ar, const std::shared_ptr<M
 	ar & theSection;
 }
 
-void tnbLib::Marine_CmpSection::Load(TNB_oARCH_TYPE& ar, std::shared_ptr<Marine_CmpSection>& theSection)
+void tnbLib::Marine_CmpSection::Load(TNB_iARCH_TYPE& ar, std::shared_ptr<Marine_CmpSection>& theSection)
 {
 	ar & theSection;
 }

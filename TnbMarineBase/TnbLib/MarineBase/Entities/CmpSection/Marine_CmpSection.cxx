@@ -83,6 +83,12 @@ tnbLib::Marine_CmpSection::Marine_CmpSection
 tnbLib::Entity2d_Box 
 tnbLib::Marine_CmpSection::BoundingBox() const
 {
+	if (Sections().empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the section list is empty" << endl
+			<< abort(FatalError);
+	}
 	auto iter = Sections().begin();
 	auto b = (*iter)->BoundingBox();
 
