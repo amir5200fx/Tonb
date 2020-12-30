@@ -82,6 +82,7 @@ void tnbLib::HydStatic_Model::CalcFloatBody()
 		);
 	Debug_Null_Pointer(displacer);
 
+	if (verbose) Info << " calculating the wetted body..." << endl;
 	auto wettedBody = 
 		Marine_BodyTools::WettedBody
 		(
@@ -89,6 +90,7 @@ void tnbLib::HydStatic_Model::CalcFloatBody()
 		);
 	Debug_Null_Pointer(wettedBody);
 
+	if (verbose) Info << " calculating the dry body..." << endl;
 	auto dryBody = 
 		Marine_BodyTools::DryBody
 		(
