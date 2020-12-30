@@ -34,11 +34,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
-			Info << " polygon: points" << endl;
 			ar & thePoints_;
-			Info << " polygon: deflection" << endl;
 			ar & theDeflection_;
-			Info << " polygon: loaded" << endl;
 		}
 
 	public:
