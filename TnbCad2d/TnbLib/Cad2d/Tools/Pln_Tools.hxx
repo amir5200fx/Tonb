@@ -268,6 +268,12 @@ namespace tnbLib
 			);
 
 		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>>
+			RetrieveEdges
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+			);
+
+		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>>
 			RetrieveMergedEdges
 			(
 				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
