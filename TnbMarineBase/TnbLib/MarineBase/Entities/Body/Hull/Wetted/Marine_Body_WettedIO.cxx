@@ -23,18 +23,16 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineL
 {
 	ar & boost::serialization::base_object<Body_Wetted>(*this);
 
-	ar & Shape();
-	ar & WL();
+	ar & theShape_;
+	ar & theWater_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Body_Wetted>)
 {
 	ar & boost::serialization::base_object<Body_Wetted>(*this);
-
-	ar & ChangeShape();
-	ar & ChangeWL();
+	ar & theShape_;
+	ar & theWater_;
 }
 
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::BodyConstructor_noShape<tnbLib::marineLib::Body_Wetted>);
-
-BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::shapedWettedBody);
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Body_Wetted>);
