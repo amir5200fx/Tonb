@@ -5,6 +5,8 @@
 #include <Marine_CmpSection.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_Sections.hxx>
+#include <Marine_SectTools.hxx>
+#include <Marine_PlnCurve.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -148,6 +150,13 @@ tnbLib::Marine_BooleanOps::WettedSection
 		{
 			Debug_Null_Pointer(intsct->OuterWire());
 
+			Marine_SectTools::Section
+			(
+				intsct->OuterWire(), 
+				marineLib::curveType::displacer, 
+				marineLib::curveType::wetted
+			);
+
 			auto sect = 
 				Marine_SectTools::SectionCreator
 				(
@@ -168,6 +177,13 @@ tnbLib::Marine_BooleanOps::WettedSection
 		else
 		{
 			Debug_Null_Pointer(intsct->OuterWire());
+
+			Marine_SectTools::Section
+			(
+				intsct->OuterWire(),
+				marineLib::curveType::displacer,
+				marineLib::curveType::wetted
+			);
 
 			auto sect =
 				Marine_SectTools::SectionCreator
@@ -194,6 +210,13 @@ tnbLib::Marine_BooleanOps::WettedSection
 	{
 		Debug_Null_Pointer(x);
 		Debug_Null_Pointer(x->OuterWire());
+
+		Marine_SectTools::Section
+		(
+			x->OuterWire(), 
+			marineLib::curveType::displacer,
+			marineLib::curveType::wetted
+		);
 
 		auto sect =
 			Marine_SectTools::SectionCreator
@@ -237,7 +260,19 @@ tnbLib::Marine_BooleanOps::DrySection
 	if (subs.size() IS_EQUAL 1)
 	{
 		const auto& sect = subs[0];
-		auto dry = Marine_SectTools::SectionCreator(sect->OuterWire(), Marine_SectionType::dry);
+		Marine_SectTools::Section
+		(
+			sect->OuterWire(), 
+			marineLib::curveType::displacer, 
+			marineLib::curveType::dry
+		);
+
+		auto dry = 
+			Marine_SectTools::SectionCreator
+			(
+				sect->OuterWire(),
+				Marine_SectionType::dry
+			);
 		Debug_Null_Pointer(dry);
 
 		sections.push_back(std::move(dry));
@@ -247,7 +282,19 @@ tnbLib::Marine_BooleanOps::DrySection
 	{
 		for (const auto& sect : subs)
 		{
-			auto dry = Marine_SectTools::SectionCreator(sect->OuterWire(), Marine_SectionType::dry);
+			Marine_SectTools::Section
+			(
+				sect->OuterWire(), 
+				marineLib::curveType::displacer, 
+				marineLib::curveType::dry
+			);
+
+			auto dry =
+				Marine_SectTools::SectionCreator
+				(
+					sect->OuterWire(), 
+					Marine_SectionType::dry
+				);
 			Debug_Null_Pointer(dry);
 
 			sections.push_back(std::move(dry));
