@@ -1,5 +1,6 @@
 #include <HydStatic_Model.hxx>
 #include <HydStatic_FormCoeff.hxx>
+#include <HydStatic_FormDims.hxx>
 
 #include <HydStatic_FloatBody.hxx>
 #include <StbGMaker_Model.hxx>
@@ -19,8 +20,10 @@ namespace tnbLib
 {
 	typedef std::shared_ptr<HydStatic_Model> hModel_t;
 
-	static hModel_t myModel;
+	//static hModel_t myModel;
 	static std::shared_ptr<formCoeff::Wetted> formCoeffCalculator;
+	static std::shared_ptr<formDim::Displacer> formDisplacer;
+	static std::shared_ptr<formDim::Wetted> formWetted;
 
 	void loadModel(const std::string& name)
 	{
@@ -29,20 +32,30 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_iarchive ar(myFile);
 
-		ar >> myModel;
-		if (NOT myModel->FloatBody())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "NNo floating body information has been detected" << endl
-				<< abort(FatalError);
-		}
+		ar >> formDisplacer;
+		ar >> formWetted;
 	}
 
 	void calcFormCoeff()
 	{
-		const auto& wettedBody = myModel->FloatBody()->Wetted();
-		formCoeffCalculator = std::make_shared<formCoeff::Wetted>(wettedBody);
+		if (NOT formWetted)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no form analysis has been loaded!" << endl
+				<< abort(FatalError);
+		}
+		formCoeffCalculator = std::make_shared<formCoeff::Wetted>(formWetted);
 		formCoeffCalculator->Perform();
+	}
+
+	void saveTo(const std::string& name)
+	{
+		fileName fn(name);
+		std::ofstream myFile(fn);
+
+		boost::archive::polymorphic_text_oarchive ar(myFile);
+
+		ar << formCoeffCalculator;
 	}
 }
 
@@ -61,6 +74,8 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
 		mod->add(chaiscript::fun([]()->void {calcFormCoeff(); }), "execute");
+		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {formCoeff::Wetted::verbose = i; }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -101,11 +116,11 @@ int main(int argc, char* argv[])
 
 			auto mod = std::make_shared<chaiscript::Module>();
 
-
+			formCoefficient(mod);
 
 			chai.add(mod);
 
-			fileName myFileName("FormCoefficients");
+			fileName myFileName("formCoeff");
 
 			try
 			{
@@ -118,6 +133,10 @@ int main(int argc, char* argv[])
 			catch (const error& x)
 			{
 				Info << x.message() << endl;
+			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
 			}
 		}
 	}

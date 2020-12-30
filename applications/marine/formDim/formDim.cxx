@@ -6,6 +6,13 @@
 #include <StbGMaker_Model.hxx>
 #include <Marine_Models.hxx>
 #include <Marine_Bodies.hxx>
+#include <Marine_CmpSection.hxx>
+#include <Marine_Sections.hxx>
+#include <Pln_Wire.hxx>
+#include <Pln_Curve.hxx>
+#include <Pln_Edge.hxx>
+#include <Pln_Vertex.hxx>
+#include <Marine_WaterCurve.hxx>
 
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -20,9 +27,12 @@ namespace tnbLib
 {
 	typedef std::shared_ptr<HydStatic_Model> hModel_t;
 
+	static std::shared_ptr<Marine_CmpSection> midSect;
+	static std::shared_ptr<Pln_Curve> pCurve;
+	static std::shared_ptr<Marine_Section> mySect;
 	static hModel_t myModel;
-	static const auto displacerCalculator = std::make_shared<formDim::Displacer>();
-	static const auto wettedCalculator = std::make_shared<formDim::Wetted>();
+	static auto displacerCalculator = std::make_shared<formDim::Displacer>();
+	static auto wettedCalculator = std::make_shared<formDim::Wetted>();
 
 	void loadModel(const std::string& name)
 	{
@@ -104,10 +114,22 @@ namespace tnbLib
 		std::ofstream myFile(fn);
 
 		boost::archive::polymorphic_text_oarchive ar(myFile);
-
 		ar << displacerCalculator;
 		ar << wettedCalculator;
+
+		myFile.close();
 	}
+
+	void load(const std::string& name)
+	{
+		fileName fn(name);
+		std::ifstream myFile(fn);
+
+		boost::archive::polymorphic_text_iarchive ar(myFile);
+		ar >> displacerCalculator;
+		ar >> wettedCalculator;
+	}
+
 }
 
 #ifdef DebugInfo
@@ -126,6 +148,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()->void {calcDisplacer(); calcWetted(); }), "execute");
 		mod->add(chaiscript::fun([]()->void {printParameters(); }), "printParameters");
 		mod->add(chaiscript::fun([](const std::string& name)->void {save(name); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)->void {load(name); }), "loadFrom");
 		mod->add(chaiscript::fun([](unsigned short i)-> void {formDim::Wetted::verbose = i; }), "setVerbose");
 	}
 
@@ -146,6 +169,7 @@ using namespace tnbLib;
 
 int main(int argc, char* argv[])
 {
+
 	FatalError.throwExceptions();
 
 	if (argc <= 1)
@@ -183,6 +207,10 @@ int main(int argc, char* argv[])
 			{
 				Info << x.message() << endl;
 			}	
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl; 
+			}
 		}
 	}
 	else
