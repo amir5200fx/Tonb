@@ -113,6 +113,13 @@ namespace tnbLib
 
 		TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>> MakeChain(selctList& theList);
 
+		TnbCad2d_EXPORT virtual void
+			CheckCurveType
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge,
+				const char* name
+			) const;
+
 	public:
 
 		using cad2dLib::Modeler_Registry::IsNull;

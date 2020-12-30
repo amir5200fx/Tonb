@@ -370,6 +370,21 @@
     <Filter Include="TnbLib\MarineBase\Entities\Curve\Hull\WaterLine">
       <UniqueIdentifier>{de59335e-9312-47fc-bf68-084e65a2ff3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Modeler">
+      <UniqueIdentifier>{8fa95b65-899e-4d67-9b08-4d3531612a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Modeler\Tank">
+      <UniqueIdentifier>{863c0f37-f35a-4432-8b95-2df6ed74db0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Modeler\Sail">
+      <UniqueIdentifier>{ded1b153-db85-4b39-80a8-bbdab5b4650d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Modeler\Tools">
+      <UniqueIdentifier>{89cc4973-cfed-483e-ac62-9fc33541f400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Modeler\Displacer">
+      <UniqueIdentifier>{5b2967e4-3baf-4a97-ab5d-e8226a7bca08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -717,6 +732,18 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurvesFwd.hxx">
       <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Modeler\Tools\Marine_Modeler_Tools.hxx">
+      <Filter>TnbLib\MarineBase\Modeler\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Modeler\Displacer\Marine_DisplacerModeler.hxx">
+      <Filter>TnbLib\MarineBase\Modeler\Displacer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Modeler\Sail\Marine_SailModeler.hxx">
+      <Filter>TnbLib\MarineBase\Modeler\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Modeler\Tank\Marine_TankModeler.hxx">
+      <Filter>TnbLib\MarineBase\Modeler\Tank</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1042,6 +1069,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Hull\WaterLine\Marine_WaterLineCurveIO.cxx">
       <Filter>TnbLib\MarineBase\Entities\Curve\Hull\WaterLine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Tools\Marine_Modeler_Tool.cxx">
+      <Filter>TnbLib\MarineBase\Modeler\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Displacer\Marine_DisplacerModeler.cxx">
+      <Filter>TnbLib\MarineBase\Modeler\Displacer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Sail\Marine_SailModeler.cxx">
+      <Filter>TnbLib\MarineBase\Modeler\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Tank\Marine_TankModeler.cxx">
+      <Filter>TnbLib\MarineBase\Modeler\Tank</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
