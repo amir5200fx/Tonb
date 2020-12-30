@@ -113,6 +113,18 @@ namespace tnbLib
 
 		//Standard_Boolean IsOrphan() const override;
 
+		TnbCad2d_EXPORT virtual std::shared_ptr<Pln_Curve> 
+			operator()
+			(
+				const Handle(Geom2d_Curve)& theCurve
+				) const;
+
+		TnbCad2d_EXPORT virtual std::shared_ptr<Pln_Curve> 
+			operator()
+			(
+				Handle(Geom2d_Curve)&& theCurve
+				) const;
+
 		TnbCad2d_EXPORT virtual std::shared_ptr<Pln_Curve>
 			Copy() const;
 

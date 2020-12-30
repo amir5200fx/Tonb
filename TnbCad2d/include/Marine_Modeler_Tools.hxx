@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Cad2d_Module.hxx>
+#include <Marine_PlnCurveType.hxx>
 
 #include <memory>
 #include <vector>
@@ -37,19 +38,18 @@ namespace tnbLib
 
 		public:
 
-
-			enum class CurveType
-			{
-				displacer,
-				sail,
-				tank
-			};
-
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve> 
 				MakeCurve
 				(
 					const Handle(Geom2d_Curve)& geom, 
-					const CurveType t
+					const curveType t
+				);
+
+			static TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
+				MakeCurve
+				(
+					Handle(Geom2d_Curve)&& geom,
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -58,7 +58,7 @@ namespace tnbLib
 					const Handle(Geom2d_Curve)& geom,
 					const Pnt2d& p0,
 					const Pnt2d& p1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Ring>
@@ -66,7 +66,7 @@ namespace tnbLib
 				(
 					const Handle(Geom2d_Curve)& geom,
 					const Pnt2d& theP,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -74,7 +74,7 @@ namespace tnbLib
 				(
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -83,7 +83,7 @@ namespace tnbLib
 					const Pnt2d& theP0,
 					const Standard_Real theAngle,
 					const Standard_Real theLength,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -92,7 +92,7 @@ namespace tnbLib
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
 					const Pnt2d& theP2,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -101,7 +101,7 @@ namespace tnbLib
 					const Pnt2d& theP0,
 					const Vec2d& theV0,
 					const Pnt2d& theP1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -110,7 +110,7 @@ namespace tnbLib
 					const gp_Circ2d& theCirc,
 					const Standard_Real theAlpha0,
 					const Standard_Real theAlpha1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -119,7 +119,7 @@ namespace tnbLib
 					const gp_Circ2d& theCirc,
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -128,7 +128,7 @@ namespace tnbLib
 					const gp_Elips2d& theElips,
 					const Standard_Real theAlpha0,
 					const Standard_Real theAlpha1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -137,7 +137,7 @@ namespace tnbLib
 					const gp_Elips2d& theElips,
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -146,7 +146,7 @@ namespace tnbLib
 					const gp_Hypr2d& theHypr,
 					const Standard_Real theAlpha0,
 					const Standard_Real theAlpha1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -155,7 +155,7 @@ namespace tnbLib
 					const gp_Hypr2d& theHypr,
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -164,7 +164,7 @@ namespace tnbLib
 					const gp_Parab2d& theParab,
 					const Standard_Real theAlpha0,
 					const Standard_Real theAlpha1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
@@ -173,14 +173,14 @@ namespace tnbLib
 					const gp_Parab2d& theParab,
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Ring>
 				MakeCircle
 				(
 					const gp_Circ2d& C,
-					const CurveType t
+					const curveType t
 				);
 
 			//! Make a Circle from Geom2d <TheCirc> parallel to another
@@ -190,7 +190,7 @@ namespace tnbLib
 				(
 					const gp_Circ2d& C,
 					const Pnt2d& theP,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Ring>
@@ -199,7 +199,7 @@ namespace tnbLib
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
 					const Pnt2d& theP2,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Ring>
@@ -207,7 +207,7 @@ namespace tnbLib
 				(
 					const Pnt2d& theC,
 					const Standard_Real theRadius,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Ring>
@@ -215,14 +215,14 @@ namespace tnbLib
 				(
 					const Pnt2d& theC,
 					const Pnt2d& theP,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Ring>
 				MakeEllipse
 				(
 					const gp_Elips2d& E,
-					const CurveType t
+					const curveType t
 				);
 
 			//! Make an Ellipse centered on the point Center, where
@@ -240,14 +240,14 @@ namespace tnbLib
 					const Pnt2d& theS0,
 					const Pnt2d& theS1,
 					const Pnt2d& theCenter,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
 				Interpolation
 				(
 					const std::vector<Pnt2d>& theQ,
-					const CurveType t,
+					const curveType t,
 					const Standard_Boolean thePeriodic = Standard_False,
 					const Standard_Real theTol = 1.0E-6
 				);
@@ -258,7 +258,7 @@ namespace tnbLib
 					const std::vector<Pnt2d>& theQ,
 					const Vec2d& theFirst,
 					const Vec2d& theLast,
-					const CurveType t,
+					const curveType t,
 					const Standard_Boolean thePeriodic = Standard_False,
 					const Standard_Real theTol = 1.0E-6,
 					const Standard_Boolean theScale = Standard_True
@@ -269,14 +269,14 @@ namespace tnbLib
 				(
 					const Pnt2d& theP0,
 					const Pnt2d& theP1,
-					const CurveType t
+					const curveType t
 				);
 
 			static TnbCad2d_EXPORT void 
 				CheckCurveType
 				(
 					const std::shared_ptr<Pln_Curve>& theCurve,
-					const CurveType t
+					const curveType t
 				);
 
 		};

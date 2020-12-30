@@ -744,6 +744,9 @@
     <ClInclude Include="TnbLib\MarineBase\Modeler\Tank\Marine_TankModeler.hxx">
       <Filter>TnbLib\MarineBase\Modeler\Tank</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurveType.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Curve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1081,6 +1084,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Modeler\Tank\Marine_TankModeler.cxx">
       <Filter>TnbLib\MarineBase\Modeler\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Tank\Marine_TankModelerIO.cxx">
+      <Filter>TnbLib\MarineBase\Modeler\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Sail\Marine_SailModelerIO.cxx">
+      <Filter>TnbLib\MarineBase\Modeler\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Displacer\Marine_DisplacerModelerIO.cxx">
+      <Filter>TnbLib\MarineBase\Modeler\Displacer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

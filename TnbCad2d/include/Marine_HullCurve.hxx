@@ -51,6 +51,11 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
+		Marine_HullCurve(Pln_Curve&& theCurve)
+			: Marine_PlnCurve(std::move(theCurve))
+		{}
+
+
 
 		Standard_Boolean IsOnHull() const override
 		{

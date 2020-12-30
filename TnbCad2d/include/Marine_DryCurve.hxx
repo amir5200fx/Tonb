@@ -46,11 +46,34 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
+		Marine_DryCurve(Pln_Curve&& theCurve)
+			: Marine_HullCurve(std::move(theCurve))
+		{}
+
+
+		//- public functions and operators
 
 		Standard_Boolean IsDry() const override
 		{
 			return Standard_True;
 		}
+
+		marineLib::curveType CurveType() const override
+		{
+			return marineLib::curveType::dry;
+		}
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
+			operator()
+			(
+				const Handle(Geom2d_Curve) & theCurve
+				) const override;
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
+			operator()
+			(
+				Handle(Geom2d_Curve) && theCurve
+				) const override;
 
 		TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			Copy() const override;

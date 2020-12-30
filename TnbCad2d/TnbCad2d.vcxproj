@@ -131,6 +131,7 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurve.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurves.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurvesFwd.hxx" />
+    <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Marine_PlnCurveType.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Sail\Marine_SailCurve.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Tank\Marine_TankCurve.hxx" />
     <ClInclude Include="TnbLib\MarineBase\Entities\Curve\Water\Marine_WaterCurve.hxx" />
@@ -249,8 +250,11 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Water\Marine_WaterCurve.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Curve\Water\Marine_WaterCurveIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Modeler\Displacer\Marine_DisplacerModeler.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Displacer\Marine_DisplacerModelerIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Modeler\Sail\Marine_SailModeler.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Sail\Marine_SailModelerIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Modeler\Tank\Marine_TankModeler.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Modeler\Tank\Marine_TankModelerIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Modeler\Tools\Marine_Modeler_Tool.cxx" />
   </ItemGroup>
   <ItemGroup>
