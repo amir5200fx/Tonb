@@ -49,13 +49,13 @@ namespace tnbLib
 
 	public:
 
-		std::vector<std::shared_ptr<Pln_Entity>> 
+		std::vector<std::shared_ptr<Pln_Entity>>
 			RetrieveEntities
 			(
 				const Pln_EntityType t
 			) const;
 
-		virtual Standard_Integer NbEntities(const Pln_EntityType t) const = 0;	
+		virtual Standard_Integer NbEntities(const Pln_EntityType t) const = 0;
 
 		virtual Standard_Boolean IsOrphan() const = 0;
 
@@ -69,12 +69,15 @@ namespace tnbLib
 
 		virtual void RetrieveEntitiesTo
 		(
-			std::vector<std::shared_ptr<Pln_Entity>>& theEntities, 
+			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
 			const Pln_EntityType t
 		) const = 0;
 
-		
+
 	};
 }
+
+//BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Pln_Entity);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Entity);
 
 #endif // !_Pln_Entity_Header

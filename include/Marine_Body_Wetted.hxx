@@ -9,6 +9,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_MidSection;
+	class Marine_CmpSection;
 
 	namespace marineLib
 	{
@@ -27,7 +28,7 @@ namespace tnbLib
 
 			
 			std::shared_ptr<Marine_CmpSection> theMid_;
-			//std::shared_ptr<Body_Displacer> theDisplacer_;
+			std::shared_ptr<Body_Displacer> theDisplacer_;
 
 
 			//- private functions and operators
@@ -79,14 +80,9 @@ namespace tnbLib
 				return theMid_;
 			}
 
-			/*const auto& Displacer() const
+			const auto& Displacer() const
 			{
 				return theDisplacer_;
-			}*/
-
-			std::shared_ptr<Body_Displacer> Displacer() const
-			{
-				return nullptr;
 			}
 
 			TnbMarine_EXPORT std::shared_ptr<Marine_Body> Copy() const override;
@@ -96,7 +92,7 @@ namespace tnbLib
 				const std::shared_ptr<Body_Displacer>& theDisplacer
 			)
 			{
-				//theDisplacer_ = theDisplacer;
+				theDisplacer_ = theDisplacer;
 			}
 
 		};
@@ -139,6 +135,8 @@ namespace tnbLib
 				return theWater_;
 			}
 
+			
+
 		public:
 
 			template<class... _Types>
@@ -151,7 +149,7 @@ namespace tnbLib
 				return Standard_True;
 			}
 
-			const auto& Shape() const
+			const std::shared_ptr<Marine_Shape>& Shape() const
 			{
 				return theShape_;
 			}
@@ -176,7 +174,7 @@ namespace tnbLib
 				theShape_ = theShape;
 			}
 
-			const auto& WL() const
+			const std::shared_ptr<Marine_CmpSection>& WL() const
 			{
 				return theWater_;
 			}
@@ -186,6 +184,6 @@ namespace tnbLib
 	}
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::shapedWettedBody);
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineLib::Body_Wetted>);
 
 #endif // !_Marine_Body_Wetted_Header

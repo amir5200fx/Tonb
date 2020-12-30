@@ -40,6 +40,8 @@ namespace tnbLib
 
 		static TnbMarine_EXPORT void CheckWire(const Pln_Wire& theWire, const char* theName);
 
+		
+
 	protected:
 
 		Marine_Section()

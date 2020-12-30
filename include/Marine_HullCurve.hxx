@@ -28,28 +28,33 @@ namespace tnbLib
 
 		//- default constructor
 
-		TnbMarine_EXPORT Marine_HullCurve();
+		TnbCad2d_EXPORT Marine_HullCurve();
 
 
 		//- constructors
 
-		TnbMarine_EXPORT Marine_HullCurve
+		TnbCad2d_EXPORT Marine_HullCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		TnbMarine_EXPORT explicit Marine_HullCurve
+		TnbCad2d_EXPORT explicit Marine_HullCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		TnbMarine_EXPORT Marine_HullCurve
+		TnbCad2d_EXPORT Marine_HullCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const Handle(Geom2d_Curve)& theGeom
 		);
+
+		Marine_HullCurve(Pln_Curve&& theCurve)
+			: Marine_PlnCurve(std::move(theCurve))
+		{}
+
 
 
 		Standard_Boolean IsOnHull() const override

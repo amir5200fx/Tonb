@@ -3,7 +3,8 @@
 #define _Marine_PlnCurve_Header
 
 #include <Pln_Curve.hxx>
-#include <Marine_Module.hxx>
+#include <Cad2d_Module.hxx>
+#include <Marine_PlnCurveType.hxx>
 
 namespace tnbLib
 {
@@ -27,25 +28,29 @@ namespace tnbLib
 
 	protected:
 
-		TnbMarine_EXPORT Marine_PlnCurve();
+		TnbCad2d_EXPORT Marine_PlnCurve();
 
-		TnbMarine_EXPORT Marine_PlnCurve
+		TnbCad2d_EXPORT Marine_PlnCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		TnbMarine_EXPORT Marine_PlnCurve
+		TnbCad2d_EXPORT Marine_PlnCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		TnbMarine_EXPORT Marine_PlnCurve
+		TnbCad2d_EXPORT Marine_PlnCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const Handle(Geom2d_Curve)& theGeom
 		);
+
+		Marine_PlnCurve(Pln_Curve&& theCurve)
+			: Pln_Curve(std::move(theCurve))
+		{}
 
 	public:
 
@@ -73,6 +78,8 @@ namespace tnbLib
 		{
 			return Standard_False;
 		}
+
+		virtual marineLib::curveType CurveType() const = 0;
 	};
 }
 

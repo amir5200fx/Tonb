@@ -37,12 +37,58 @@ namespace tnbLib
 				NotImplemented;
 			}
 
+		protected:
+
+			
+
 		public:
 
-			template<class... _Types>
+			/*template<class... _Types>
 			BodyConstructor_Shape(_Types&&... _Args)
 				: BodyType(_Args...)
+			{}*/
+
+			// default constructor
+
+			BodyConstructor_Shape()
 			{}
+
+			//- constructors
+
+			BodyConstructor_Shape
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			)
+				: BodyType(theSections)
+			{}
+
+			BodyConstructor_Shape
+			(
+				std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
+			)
+				: BodyType(std::move(theSections))
+			{}
+
+			BodyConstructor_Shape
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			)
+				: BodyType(theIndex, theName, theSections)
+			{}
+
+			BodyConstructor_Shape
+			(
+				const Standard_Integer theIndex,
+				const word& theName, 
+				std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
+			)
+				: BodyType(theIndex, theName, std::move(theSections))
+			{}
+
+
+			//- public functions and operators
 
 			Standard_Boolean ShapeType() const override
 			{
@@ -84,12 +130,63 @@ namespace tnbLib
 				ar & boost::serialization::base_object<BodyType>(*this);
 			}
 
+		protected:
+
+
+			
+
 		public:
 
-			template<class... _Types>
+			/*template<class... _Types>
 			BodyConstructor_noShape(_Types&&... _Args)
 				: BodyType(_Args...)
+			{}*/
+
+
+			//- default constructor
+
+			BodyConstructor_noShape()
 			{}
+
+
+			//- constructors
+
+			BodyConstructor_noShape
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			)
+				: BodyType(theSections)
+			{}
+
+			BodyConstructor_noShape
+			(
+				std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
+			)
+				: BodyType(std::move(theSections))
+			{}
+
+			BodyConstructor_noShape
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			)
+				: BodyType(theIndex, theName, theSections)
+			{}
+
+			BodyConstructor_noShape
+			(
+				const Standard_Integer theIndex, 
+				const word& theName, 
+				std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
+			)
+				: BodyType(theIndex, theName, std::move(theSections))
+			{}
+
+
+			//- public functions and operators
+
+
 
 		};
 	}

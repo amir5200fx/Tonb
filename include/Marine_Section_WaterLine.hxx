@@ -21,12 +21,21 @@ namespace tnbLib
 
 			TNB_SERIALIZATION(TnbMarine_EXPORT);
 
+
 		protected:
 
 			template<class... _Types>
 			Section_WaterLine(_Types&&... _Args)
 				: Marine_zSection(_Args...)
+			{
+				CheckCurves();
+			}
+
+			template<>
+			Section_WaterLine()
 			{}
+
+			TnbMarine_EXPORT void CheckCurves() const;
 
 		public:
 

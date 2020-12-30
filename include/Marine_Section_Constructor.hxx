@@ -12,6 +12,8 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_Section;
+	class Marine_xSection;
+	class Marine_HullSection;
 
 	namespace marineLib
 	{
@@ -120,6 +122,36 @@ namespace tnbLib
 			}
 		};
 
+
+		template<>
+		class InnerSection<Marine_Section>
+		{
+
+		private:
+
+			InnerSection()
+			{}
+		};
+
+		template<>
+		class InnerSection<Marine_xSection>
+		{
+
+		private:
+
+			InnerSection()
+			{}
+		};
+
+		template<>
+		class InnerSection<Marine_HullSection>
+		{
+
+		private:
+
+			InnerSection()
+			{}
+		};
 	}
 
 	namespace marineLib
@@ -237,6 +269,37 @@ namespace tnbLib
 				const std::shared_ptr<innerSection>& theSection
 			);
 
+		};
+
+
+		template<>
+		class OuterSection<Marine_Section>
+		{
+
+		private:
+
+			OuterSection()
+			{}
+		};
+
+		template<>
+		class OuterSection<Marine_xSection>
+		{
+
+		private:
+
+			OuterSection()
+			{}
+		};
+
+		template<>
+		class OuterSection<Marine_HullSection>
+		{
+
+		private:
+
+			OuterSection()
+			{}
 		};
 	}
 }

@@ -39,7 +39,7 @@ namespace tnbLib
 
 
 		/*private functions and operators*/
-		
+
 		TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
 		auto& ChangeGeometry()
@@ -65,7 +65,7 @@ namespace tnbLib
 		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Standard_Integer theIndex,
-			const Handle(Geom2d_Curve)&& theGeom
+			const Handle(Geom2d_Curve) && theGeom
 		);
 
 		TnbCad2d_EXPORT Pln_Curve
@@ -75,7 +75,7 @@ namespace tnbLib
 
 		TnbCad2d_EXPORT Pln_Curve
 		(
-			const Handle(Geom2d_Curve)&& theGeom
+			const Handle(Geom2d_Curve) && theGeom
 		);
 
 		TnbCad2d_EXPORT Pln_Curve
@@ -89,7 +89,7 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Handle(Geom2d_Curve)&& theGeom
+			const Handle(Geom2d_Curve) && theGeom
 		);
 
 		const auto& Geometry() const
@@ -113,6 +113,18 @@ namespace tnbLib
 
 		//Standard_Boolean IsOrphan() const override;
 
+		TnbCad2d_EXPORT virtual std::shared_ptr<Pln_Curve> 
+			operator()
+			(
+				const Handle(Geom2d_Curve)& theCurve
+				) const;
+
+		TnbCad2d_EXPORT virtual std::shared_ptr<Pln_Curve> 
+			operator()
+			(
+				Handle(Geom2d_Curve)&& theCurve
+				) const;
+
 		TnbCad2d_EXPORT virtual std::shared_ptr<Pln_Curve>
 			Copy() const;
 
@@ -128,7 +140,7 @@ namespace tnbLib
 		TnbCad2d_EXPORT void Interpolation
 		(
 			const std::vector<Pnt2d>& theQ,
-			const Standard_Integer theDeg = 2, 
+			const Standard_Integer theDeg = 2,
 			const Standard_Real theTol = 1.0E-6
 		);
 
@@ -256,5 +268,7 @@ namespace tnbLib
 }
 
 #include <Pln_CurveI.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Curve);
 
 #endif // !_Pln_Curve_Header

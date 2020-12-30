@@ -30,7 +30,7 @@ namespace tnbLib
 		/*private functions and operators*/
 
 		friend class boost::serialization::access;
-		
+
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
@@ -41,6 +41,7 @@ namespace tnbLib
 	public:
 
 		Entity_Polygon()
+			: theDeflection_(0)
 		{}
 
 		Entity_Polygon

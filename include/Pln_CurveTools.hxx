@@ -54,7 +54,7 @@ namespace tnbLib
 				const Standard_Boolean theScale = Standard_True
 			);
 
-		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+		/*static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			MakeSegment
 			(
 				const Pnt2d& theP0,
@@ -74,6 +74,142 @@ namespace tnbLib
 				const gp_Ax2d& A,
 				const Standard_Real Radius,
 				const Standard_Boolean Sense = Standard_True
+			);*/
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeSegment
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircArc
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1,
+				const Pnt2d& theP2
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircArc
+			(
+				const Pnt2d& theP0,
+				const Vec2d& theV0,
+				const Pnt2d& theP1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircArc
+			(
+				const gp_Circ2d& theCirc,
+				const Standard_Real theAlpha0,
+				const Standard_Real theAlpha1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircArc
+			(
+				const gp_Circ2d& theCirc,
+				const Pnt2d& theP0,
+				const Pnt2d& theP1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeElipsArc
+			(
+				const gp_Elips2d& theElips,
+				const Standard_Real theAlpha0,
+				const Standard_Real theAlpha1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeElipsArc
+			(
+				const gp_Elips2d& theElips,
+				const Pnt2d& theP0,
+				const Pnt2d& theP1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeHyprArc
+			(
+				const gp_Hypr2d& theHypr,
+				const Standard_Real theAlpha0,
+				const Standard_Real theAlpha1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeHyprArc
+			(
+				const gp_Hypr2d& theHypr,
+				const Pnt2d& theP0,
+				const Pnt2d& theP1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeParbArc
+			(
+				const gp_Parab2d& theParab,
+				const Standard_Real theAlpha0,
+				const Standard_Real theAlpha1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeParabArc
+			(
+				const gp_Parab2d& theParab,
+				const Pnt2d& theP0,
+				const Pnt2d& theP1
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircle
+			(
+				const gp_Circ2d& C
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircle
+			(
+				const gp_Circ2d& C,
+				const Pnt2d& theP
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircle
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1,
+				const Pnt2d& theP2
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircle
+			(
+				const Pnt2d& theC,
+				const Standard_Real theRadius
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeCircle
+			(
+				const Pnt2d& theC,
+				const Pnt2d& theP
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeEllipse
+			(
+				const gp_Elips2d& E
+			);
+
+		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
+			MakeEllipse
+			(
+				const Pnt2d& theS0,
+				const Pnt2d& theS1,
+				const Pnt2d& theCenter
 			);
 
 		static TnbCad2d_EXPORT void

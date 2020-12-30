@@ -32,12 +32,21 @@ namespace tnbLib
 				return IsDeep_;
 			}
 
+
 		protected:
 
 			template<class... _Types>
 			Section_Wetted(_Types&&... _Args)
 				: Marine_xSection(_Args...)
+			{
+				CheckCurves();
+			}
+
+			template<>
+			Section_Wetted()
 			{}
+
+			TnbMarine_EXPORT void CheckCurves() const;
 
 		public:
 
@@ -87,6 +96,20 @@ namespace tnbLib
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::marineLib::Section_Wetted);
 
 #include <Marine_Section_Constructor.hxx>
+
+namespace tnbLib
+{
+
+	namespace marineLib
+	{
+
+		template<>
+		TnbMarine_EXPORT std::shared_ptr<Marine_Section> InnerSection<Section_Wetted>::Copy() const;
+
+		template<>
+		TnbMarine_EXPORT std::shared_ptr<Marine_Section> OuterSection<Section_Wetted>::Copy() const;
+	}
+}
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::InnerSection<tnbLib::marineLib::Section_Wetted>);
 BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::OuterSection<tnbLib::marineLib::Section_Wetted>);

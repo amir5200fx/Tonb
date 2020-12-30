@@ -7,6 +7,7 @@
 #include <HydStatic_FormDimsFwd.hxx>
 #include <HydStatic_Module.hxx>
 #include <Global_Done.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 
@@ -22,8 +23,12 @@ namespace tnbLib
 
 		public:
 
+			static TnbHydStatic_EXPORT unsigned short verbose;
+
 			struct Parameter
 			{
+
+				Parameter();
 
 				//- Block coefficient
 				marineLib::CB Cb;
@@ -51,17 +56,24 @@ namespace tnbLib
 
 				//- Waterplane-area coefficient
 				marineLib::CWL Cwl;
+
+
+				TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 			};
 
 		private:
 
 			/*Private Data*/
 
-			const std::shared_ptr<formDim::Wetted> theWeted_;
+			std::shared_ptr<formDim::Wetted> theWeted_;
 
 			std::shared_ptr<Parameter> theParameters_;
 
+
 			//- private functions
+
+
+			TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 			TnbHydStatic_EXPORT void CalcDISPV
 			(
@@ -97,14 +109,16 @@ namespace tnbLib
 				return theParameters_;
 			}
 
+			TnbHydStatic_EXPORT void AllocateMemory();
+
 		public:
 
-			Wetted
+			TnbHydStatic_EXPORT Wetted();
+
+			TnbHydStatic_EXPORT Wetted
 			(
 				const std::shared_ptr<formDim::Wetted>& theForm
-			)
-				: theWeted_(theForm)
-			{}
+			);
 
 			const auto& WettedFormDim() const
 			{
@@ -117,6 +131,14 @@ namespace tnbLib
 			}
 
 			TnbHydStatic_EXPORT void Perform();
+
+			void LoadFormDim
+			(
+				const std::shared_ptr<formDim::Wetted>& theForm
+			)
+			{
+				theWeted_ = theForm;
+			}
 		};
 	}
 }

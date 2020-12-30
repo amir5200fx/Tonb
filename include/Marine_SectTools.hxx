@@ -9,6 +9,7 @@
 #include <Marine_SectionType.hxx>
 #include <Marine_SectionsFwd.hxx>
 #include <Marine_Module.hxx>
+#include <Marine_PlnCurveType.hxx>
 
 #include <memory>
 #include <vector>
@@ -31,6 +32,8 @@ namespace tnbLib
 	{
 
 	public:
+
+		static void Section(const std::shared_ptr<Pln_Wire>& theWire, const marineLib::curveType target, const marineLib::curveType to);
 
 		static TnbMarine_EXPORT Standard_Boolean 
 			IsOuter
@@ -138,6 +141,20 @@ namespace tnbLib
 				const std::shared_ptr<Marine_Section>& theSect
 			);
 
+		static TnbMarine_EXPORT std::shared_ptr<Pln_Curve>
+			CurveCreator
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const Marine_SectionType& t
+			);
+
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Pln_Curve>> 
+			CurveCreator
+			(
+				const std::vector<Handle(Geom2d_Curve)>& theCurves, 
+				const Marine_SectionType& t
+			);
+
 		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			SectionCreator
 			(
@@ -196,9 +213,21 @@ namespace tnbLib
 			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
+			IsDry
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve
+			);
+
+		static TnbMarine_EXPORT Standard_Boolean 
 			IsWetted
 			(
 				const Marine_CmpSection& theSect
+			);
+
+		static TnbMarine_EXPORT Standard_Boolean 
+			IsWetted
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve
 			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
@@ -208,9 +237,21 @@ namespace tnbLib
 			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
+			IsDisplacer
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve
+			);
+
+		static TnbMarine_EXPORT Standard_Boolean 
 			IsSail
 			(
 				const Marine_CmpSection& theSect
+			);
+
+		static TnbMarine_EXPORT Standard_Boolean 
+			IsSail
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve
 			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
@@ -220,7 +261,25 @@ namespace tnbLib
 			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
+			IsTank
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve
+			);
+
+		static TnbMarine_EXPORT Standard_Boolean 
 			IsWaterLine
+			(
+				const Marine_CmpSection& theSect
+			);
+
+		static TnbMarine_EXPORT Standard_Boolean 
+			IsWaterLine
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve
+			);
+
+		static TnbMarine_EXPORT Standard_Boolean 
+			IsWater
 			(
 				const Marine_CmpSection& theSect
 			);
@@ -228,7 +287,7 @@ namespace tnbLib
 		static TnbMarine_EXPORT Standard_Boolean 
 			IsWater
 			(
-				const Marine_CmpSection& theSect
+				const std::shared_ptr<Pln_Curve>& theCurve
 			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
@@ -306,7 +365,11 @@ namespace tnbLib
 			static TnbMarine_EXPORT std::shared_ptr<Marine_Section> _(const std::shared_ptr<Pln_Wire>& theOuter);
 		};
 
-		static TnbMarine_EXPORT void SetLocation(const std::shared_ptr<Marine_CmpSection>& theSection, const Standard_Real x);
+		static TnbMarine_EXPORT void SetLocation
+		(
+			const std::shared_ptr<Marine_CmpSection>& theSection, 
+			const Standard_Real x
+		);
 
 		static TnbMarine_EXPORT void CheckTypeConsistency
 		(

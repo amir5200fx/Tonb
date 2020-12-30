@@ -26,37 +26,61 @@ namespace tnbLib
 
 	public:
 
-		TnbMarine_EXPORT Marine_WettedCurve();
+		TnbCad2d_EXPORT Marine_WettedCurve();
 
-		TnbMarine_EXPORT Marine_WettedCurve
+		TnbCad2d_EXPORT Marine_WettedCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		TnbMarine_EXPORT explicit Marine_WettedCurve
+		TnbCad2d_EXPORT explicit Marine_WettedCurve
 		(
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
-		TnbMarine_EXPORT Marine_WettedCurve
+		TnbCad2d_EXPORT Marine_WettedCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const Handle(Geom2d_Curve)& theGeom
 		);
 
+		Marine_WettedCurve(Pln_Curve&& theCurve)
+			: Marine_HullCurve(std::move(theCurve))
+		{}
+
+
+		//- public functions and operators
+
 		Standard_Boolean IsWetted() const override
 		{
 			return Standard_True;
 		}
 
-		std::shared_ptr<Pln_Curve>
+		marineLib::curveType CurveType() const override
+		{
+			return marineLib::curveType::wetted;
+		}
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
+			operator()
+			(
+				const Handle(Geom2d_Curve) & theCurve
+				) const override;
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
+			operator()
+			(
+				Handle(Geom2d_Curve) && theCurve
+				) const override;
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
 			Copy() const override;
 
-		TnbMarine_EXPORT std::tuple
+		TnbCad2d_EXPORT std::tuple
 			<
-			std::shared_ptr<Pln_Curve>, 
+			std::shared_ptr<Pln_Curve>,
 			std::shared_ptr<Pln_Curve>
 			>
 			Split
@@ -64,14 +88,14 @@ namespace tnbLib
 				const Standard_Real x
 			) const override;
 
-		TnbMarine_EXPORT void Split
+		TnbCad2d_EXPORT void Split
 		(
 			const Standard_Real x,
 			std::shared_ptr<Pln_Curve>& theLeft,
 			std::shared_ptr<Pln_Curve>& theRight
 		) const override;
 
-		TnbMarine_EXPORT void Split
+		TnbCad2d_EXPORT void Split
 		(
 			const Standard_Real x,
 			Pnt2d& theCoord,
@@ -79,7 +103,7 @@ namespace tnbLib
 			std::shared_ptr<Pln_Curve>& theRight
 		) const override;
 
-		TnbMarine_EXPORT std::tuple
+		TnbCad2d_EXPORT std::tuple
 			<
 			std::shared_ptr<Pln_Curve>,
 			std::shared_ptr<Pln_Curve>,

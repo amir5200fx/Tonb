@@ -4,6 +4,8 @@
 
 #include <Standard_TypeDef.hxx>
 
+#define BOOST_SERIALIZATION_DYN_LINK
+#include <boost/serialization/config.hpp>
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/split_member.hpp>
@@ -25,10 +27,8 @@
 
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-//#include <boost/archive/polymorphic_iarchive.hpp>
-//#include <boost/archive/polymorphic_oarchive.hpp>
 
-#include <boost/archive/impl/archive_serializer_map.ipp>
+//#include <boost/archive/impl/archive_serializer_map.ipp>
 
 #include <TnbError.hxx>
 #include <OSstream.hxx>

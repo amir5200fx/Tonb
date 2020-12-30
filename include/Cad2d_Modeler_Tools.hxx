@@ -2,6 +2,7 @@
 #ifndef _Cad2d_Modeler_Tools_Header
 #define _Cad2d_Modeler_Tools_Header
 
+#include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Cad2d_Module.hxx>
 
@@ -13,6 +14,7 @@ class gp_Elips2d;
 class gp_Hypr2d;
 class gp_Parab2d;
 class gp_Ax2d;
+class Geom2d_Curve;
 
 namespace tnbLib
 {
@@ -38,6 +40,21 @@ namespace tnbLib
 		{
 
 		public:
+
+			static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> 
+				MakeEdge
+				(
+					const Handle(Geom2d_Curve)& geom, 
+					const Pnt2d& p0, 
+					const Pnt2d& p1
+				);
+
+			static TnbCad2d_EXPORT std::shared_ptr<Pln_Ring> 
+				MakeRing
+				(
+					const Handle(Geom2d_Curve)& geom, 
+					const Pnt2d& theP
+				);
 
 			static TnbCad2d_EXPORT std::shared_ptr<Modeler_Segment>
 				HasRing
