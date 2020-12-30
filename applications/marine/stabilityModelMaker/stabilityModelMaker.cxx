@@ -19,8 +19,9 @@
 #include <CadIO_IGES.hxx>
 #include <CadIO_STEP.hxx>
 #include <Marine_Shapes.hxx>
+#include <Marine_Modeler_Tools.hxx>
 #include <StbGMaker_Edge.hxx>
-#include <StbGMaker_WP.hxx>
+#include <StbGMaker_WPs.hxx>
 #include <StbGMaker_ShapeTools.hxx>
 #include <StbGMaker_Creator.hxx>
 #include <StbGMaker_HullCreators.hxx>
@@ -65,6 +66,9 @@ namespace tnbLib
 	typedef std::shared_ptr<StbGMaker_TankCreator> tankCreator_t;
 
 	typedef std::shared_ptr<StbGMaker_WP> wp_t;
+	/*typedef std::shared_ptr<StbGMaker_HullWP> hullWp_t;
+	typedef std::shared_ptr<StbGMaker_SailWP> sailWP_t;
+	typedef std::shared_ptr<StbGMaker_TankWP> tankWP_t;*/
 
 	typedef std::shared_ptr<Geo_xDistb> xDisbt_t;
 	typedef std::shared_ptr<Geo_ApprxCurve_Info> apprxCurveInfo_t;
@@ -335,14 +339,14 @@ namespace tnbLib
 	{
 		const auto& modeler = wp->Modeler();
 		const auto& edges = modeler->Edges();
-		
+
 		for (const auto& x : edges)
 		{
 			if (!x.second->Mesh())
 			{
 				uniformDiscretize(x.second, n);
 				wp->Approx(x.second);
-			}	
+			}
 		}
 	}
 
@@ -400,7 +404,7 @@ namespace tnbLib
 	//- spacing functions
 
 
-	
+
 
 	//- io functions
 
@@ -408,7 +412,7 @@ namespace tnbLib
 	{
 		OFstream f(name);
 		const auto& edges = wp->Modeler()->Edges();
-		
+
 		for (const auto& x : edges)
 		{
 			const auto& edge = x.second;
@@ -428,7 +432,7 @@ namespace tnbLib
 					edge3->Mesh3d()->ExportToPlt(f);
 				}
 			}
-			
+
 		}
 	}
 
@@ -506,7 +510,7 @@ namespace tnbLib
 	void exportToPlt(const creator_t& m, const std::string& name)
 	{
 		OFstream f(name);
-		if(m->HullMaker()) exportToPlt(m->HullMaker(), f);
+		if (m->HullMaker()) exportToPlt(m->HullMaker(), f);
 		for (const auto& x : m->TankMakers())
 		{
 			exportToPlt(x.second, f);
@@ -619,7 +623,7 @@ namespace tnbLib
 		fileName myFileName(name);
 		std::ofstream myFile(myFileName);
 
-		boost::archive::polymorphic_binary_oarchive ar(myFile);
+		boost::archive::polymorphic_text_oarchive ar(myFile);
 
 		ar << model;
 	}
@@ -631,7 +635,7 @@ namespace tnbLib
 		auto t = getHull()->SelectWP(getHull()->CreateWorkingPlane(x));
 		return std::move(t);
 	}
-	
+
 	// Working Plane
 
 	/*void createSegment(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
@@ -639,13 +643,13 @@ namespace tnbLib
 		auto geom = cad2dLib::Modeler_Tools::MakeSegment(p0, p1);
 		wp->Modeler()->Import(std::move(geom));
 	}*/
-	
-	void createCirArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+
+	/*void createCirArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
 	{
 		auto geom = cad2dLib::Modeler_Tools::MakeCircArc(p0, p1, p2);
 		wp->Modeler()->Import(std::move(geom));
 	}
-	
+
 	void createCirArc(const wp_t& wp, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
 	{
 		auto geom = cad2dLib::Modeler_Tools::MakeCircArc(p0, v0, p1);
@@ -657,9 +661,9 @@ namespace tnbLib
 	{
 		auto geom = cad2dLib::Modeler_Tools::MakeCircArc(circ, alpha0, alpha1);
 		wp->Modeler()->Import(std::move(geom));
-	}
+	}*/
 
-		//   
+	//   
 
 
 	Pnt3d createPoint(const double x, const double y, const double z)
@@ -947,220 +951,619 @@ namespace tnbLib
 
 	void createSegment(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
 	{
-		auto edge = cad2dLib::Modeler_Tools::MakeSegment(p0, p1);
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge = 
+				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::Modeler_Tools::CurveType::displacer);	
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
 		auto edge3 = wpEdge(std::move(edge));
 		wp->Modeler()->Import(std::move(edge3));
 	}
 
-	 void createSegment(const wp_t& wp, const Pnt2d& p0, const double ang, const double l)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeSegment(p0, ang, l);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createSegment(const wp_t& wp, const Pnt2d& p0, const double ang, const double l)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createCircArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(p0, p1, p2);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createCircArc(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createCircArc(const wp_t& wp, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(p0, v0, p1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createCircArc(const wp_t& wp, const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	
-	 void createCircArc(const wp_t& wp, const gp_Circ2d& c, const double ang0, const double ang1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(c, ang0, ang1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
 
-	 void createCircArc(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircArc(c, p0, p1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createCircArc(const wp_t& wp, const gp_Circ2d& c, const double ang0, const double ang1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const double ang0, const double ang1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createCircArc(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeElipsArc(e, p0, p1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const double ang0, const double ang1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const double ang0, const double ang1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createElipsArc(const wp_t& wp, const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeHyprArc(h, p0, p1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const double ang0, const double ang1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createParabArc(const wp_t& wp, const gp_Parab2d& par, const double ang0, const double ang1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeParbArc(par, ang0, ang1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createHyprArc(const wp_t& wp, const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createParabArc(const wp_t& wp, const gp_Parab2d& par, const Pnt2d& p0, const Pnt2d& p1)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeParabArc(par, p0, p1);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
-	
-	 // Shapes:
+	void createParabArc(const wp_t& wp, const gp_Parab2d& par, const double ang0, const double ang1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createCircle(const wp_t& wp, const gp_Circ2d& c)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createParabArc(const wp_t& wp, const gp_Parab2d& par, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 // a circle parallel to another circle and passing through a point:
-	 void createCircle(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	// Shapes:
 
-	 void createCircle(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(p0, p1, p2);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createCircle(const wp_t& wp, const gp_Circ2d& c)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createCircle(const wp_t& wp, const Pnt2d& c, const double r)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c, r);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	// a circle parallel to another circle and passing through a point:
+	void createCircle(const wp_t& wp, const gp_Circ2d& c, const Pnt2d& p0)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createCircle(const wp_t& wp, const Pnt2d& c, const Pnt2d& p0)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeCircle(c, p0);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createCircle(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createEllipse(const wp_t& wp, const gp_Elips2d& e)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeEllipse(e);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createCircle(const wp_t& wp, const Pnt2d& c, const double r)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 //! Make an Ellipse centered on the point Center, where
-			//! -   the major axis of the ellipse is defined by Center and S1,
-			//! -   its major radius is the distance between Center and S1, and
-			//! -   its minor radius is the distance between S2 and the major axis.
-			//! The implicit orientation of the ellipse is:
-			//! -   the sense defined by Axis or E,
-			//! -   the sense defined by points Center, S1 and S2,
-			//! -   the trigonometric sense if Sense is not given or is true, or
-			//! -   the opposite sense if Sense is false.
+	void createCircle(const wp_t& wp, const Pnt2d& c, const Pnt2d& p0)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createEllipse(const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
-	 {
-		 auto edge = cad2dLib::Modeler_Tools::MakeEllipse(s0, s1, c);
-		 auto edge3 = wpEdge(std::move(edge));
-		 wp->Modeler()->Import(std::move(edge3));
-	 }
+	void createEllipse(const wp_t& wp, const gp_Elips2d& e)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 /*void createRectangular(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
-	 {
-		 auto rec = cad2dLib::Modeler_Tools::MakeRectangular(p0, p1);
-		 wp->Modeler()->Import(std::move(rec));
-	 }
+	//! Make an Ellipse centered on the point Center, where
+		   //! -   the major axis of the ellipse is defined by Center and S1,
+		   //! -   its major radius is the distance between Center and S1, and
+		   //! -   its minor radius is the distance between S2 and the major axis.
+		   //! The implicit orientation of the ellipse is:
+		   //! -   the sense defined by Axis or E,
+		   //! -   the sense defined by points Center, S1 and S2,
+		   //! -   the trigonometric sense if Sense is not given or is true, or
+		   //! -   the opposite sense if Sense is false.
 
-	 void createRectangular(const wp_t& wp, const gp_Ax2d& ax, const double dx, const double dy)
-	 {
-		 auto rec = cad2dLib::Modeler_Tools::MakeRectangular(ax, dx, dy);
-		 wp->Modeler()->Import(std::move(rec));
-	 }*/
-	
-	 //- create planes
+	void createEllipse(const wp_t& wp, const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
+	{
+		std::shared_ptr<Pln_Edge> edge;
+		if (wp->IsHull())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::Modeler_Tools::CurveType::displacer);
+		}
+		else if (wp->IsSail())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::Modeler_Tools::CurveType::sail);
+		}
+		else if (wp->IsTank())
+		{
+			edge =
+				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::Modeler_Tools::CurveType::tank);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "undefined wp!" << endl
+				<< abort(FatalError);
+		}
+		auto edge3 = wpEdge(std::move(edge));
+		wp->Modeler()->Import(std::move(edge3));
+	}
 
-	 void createPlanes(const wp_t& wp)
-	 {
-		 const auto& m = wp->Modeler();
-		 if (m->NbPlanes())
-		 {
-			 m->ClearPlanes();
-		 }
-		 
-		 Cad2d_Modeler::selctList l;
-		 m->SelectAll(l);
+	/*void createRectangular(const wp_t& wp, const Pnt2d& p0, const Pnt2d& p1)
+	{
+		auto rec = cad2dLib::Modeler_Tools::MakeRectangular(p0, p1);
+		wp->Modeler()->Import(std::move(rec));
+	}
 
-		 m->MakePlanes(l, gp::YOZ());
-	 }
+	void createRectangular(const wp_t& wp, const gp_Ax2d& ax, const double dx, const double dy)
+	{
+		auto rec = cad2dLib::Modeler_Tools::MakeRectangular(ax, dx, dy);
+		wp->Modeler()->Import(std::move(rec));
+	}*/
 
-	 void createPlanes(const hullCreator_t& m)
-	 {
-		 for (const auto& x : m->WorkingPlanes())
-		 {
-			 createPlanes(x.second);
-		 }
-	 }
+	//- create planes
 
-	 void createPlanes(const tankCreator_t& m)
-	 {
-		 for (const auto& x : m->WorkingPlanes())
-		 {
-			 createPlanes(x.second);
-		 }
-	 }
+	void createPlanes(const wp_t& wp)
+	{
+		const auto& m = wp->Modeler();
+		if (m->NbPlanes())
+		{
+			m->ClearPlanes();
+		}
 
-	 void createPlanes(const std::shared_ptr<StbGMaker_VolumeSailCreator>& m)
-	 {
-		 for (const auto& x : m->WorkingPlanes())
-		 {
-			 createPlanes(x.second);
-		 }
-	 }
+		Cad2d_Modeler::selctList l;
+		m->SelectAll(l);
 
-	 void createPlanes(const creator_t& m)
-	 {
-		 if (m->HullMaker())
-			 createPlanes(m->HullMaker());
-		 for (const auto& x : m->TankMakers())
-		 {
-			 createPlanes(x.second);
-		 }
-		 for (const auto& x : m->SailMakers())
-		 {
-			 auto sail = std::dynamic_pointer_cast<StbGMaker_VolumeSailCreator>(x.second);
-			 if (sail)
-			 {
-				 createPlanes(sail);
-			 }
-		 }
-	 }
+		m->MakePlanes(l, gp::YOZ());
+	}
+
+	void createPlanes(const hullCreator_t& m)
+	{
+		for (const auto& x : m->WorkingPlanes())
+		{
+			createPlanes(x.second);
+		}
+	}
+
+	void createPlanes(const tankCreator_t& m)
+	{
+		for (const auto& x : m->WorkingPlanes())
+		{
+			createPlanes(x.second);
+		}
+	}
+
+	void createPlanes(const std::shared_ptr<StbGMaker_VolumeSailCreator>& m)
+	{
+		for (const auto& x : m->WorkingPlanes())
+		{
+			createPlanes(x.second);
+		}
+	}
+
+	void createPlanes(const creator_t& m)
+	{
+		if (m->HullMaker())
+			createPlanes(m->HullMaker());
+		for (const auto& x : m->TankMakers())
+		{
+			createPlanes(x.second);
+		}
+		for (const auto& x : m->SailMakers())
+		{
+			auto sail = std::dynamic_pointer_cast<StbGMaker_VolumeSailCreator>(x.second);
+			if (sail)
+			{
+				createPlanes(sail);
+			}
+		}
+	}
 }
 
 #ifdef DebugInfo
@@ -1179,6 +1582,8 @@ namespace tnbLib
 
 		//- default values
 		setDefault(getDiscrtInfo());
+
+		mod->add(chaiscript::fun([](unsigned short i)->void {Cad2d_Modeler::verbose = i; }), "setVerbose");
 
 		//- io functions
 
@@ -1262,7 +1667,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const gp_Ax2& ax, const double r, const double ang1, const double ang2)->auto{auto t = createSphere(ax, r, ang1, ang2); return std::move(t); }), "createSphere");
 		mod->add(chaiscript::fun([](const gp_Ax2& ax, const double r, const double ang1, const double ang2, const double ang3)->auto{auto t = createSphere(ax, ang1, ang2, ang3); return std::move(t); }), "createSphere");
 
-		
+
 	}
 
 	void setCreators(const module_t& mod)
@@ -1348,7 +1753,6 @@ int main(int argc, char *argv[])
 	FatalError.throwExceptions();
 
 	//Cad2d_RemoveNonManifold::verbose = 1;
-	Cad2d_Modeler::verbose = 1;
 
 	if (argc <= 1)
 	{
