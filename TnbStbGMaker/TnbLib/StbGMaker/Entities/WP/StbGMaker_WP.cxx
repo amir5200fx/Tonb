@@ -10,20 +10,15 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-void tnbLib::StbGMaker_WP::MakeModeler()
-{
-	theModeler_ = std::make_shared<Cad2d_Modeler>();
-}
-
 tnbLib::StbGMaker_WP::StbGMaker_WP()
 {
-	MakeModeler();
+	 //- empty body
 }
 
 tnbLib::StbGMaker_WP::StbGMaker_WP(const Standard_Real theX)
 	: theX_(theX)
 {
-	MakeModeler();
+	//- empty body
 }
 
 tnbLib::StbGMaker_WP::StbGMaker_WP
@@ -33,7 +28,7 @@ tnbLib::StbGMaker_WP::StbGMaker_WP
 )
 	: StbGMaker_Entity(theIndex)
 {
-	MakeModeler();
+	//- empty body
 }
 
 tnbLib::StbGMaker_WP::StbGMaker_WP
@@ -44,7 +39,7 @@ tnbLib::StbGMaker_WP::StbGMaker_WP
 )
 	: StbGMaker_Entity(theIndex, theName)
 {
-	MakeModeler();
+	//- empty body
 }
 
 Standard_Integer 
@@ -192,5 +187,6 @@ void tnbLib::StbGMaker_WP::RetrievePlanesTo
 			<< " - make sure you have created one!"
 			<< abort(FatalError);
 	}
+	const auto& edges = Modeler()->Edges();
 	Modeler()->RetrievePlanesTo(thePlanes);
 }
