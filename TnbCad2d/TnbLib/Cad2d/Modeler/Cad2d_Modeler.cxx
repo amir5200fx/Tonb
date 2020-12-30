@@ -797,12 +797,22 @@ tnbLib::Cad2d_Modeler::MakeChain
 	return std::move(chain);
 }
 
+void tnbLib::Cad2d_Modeler::CheckCurveType
+(
+	const std::shared_ptr<Pln_Edge>& /*theEdge*/,
+	const char * /*name*/
+) const
+{
+	//- empty body
+}
+
 Standard_Integer
 tnbLib::Cad2d_Modeler::Import
 (
 	const std::shared_ptr<Pln_Edge>& theEdge
 )
 {
+	CheckCurveType(theEdge, FunctionSIG);
 	if (theEdge->IsRing())
 	{
 		auto ring = std::dynamic_pointer_cast<Pln_Ring>(theEdge);
@@ -822,6 +832,7 @@ tnbLib::Cad2d_Modeler::Import
 	std::shared_ptr<Pln_Edge>&& theEdge
 )
 {
+	CheckCurveType(theEdge, FunctionSIG);
 	auto edge = std::move(theEdge);
 	if (edge->IsRing())
 	{

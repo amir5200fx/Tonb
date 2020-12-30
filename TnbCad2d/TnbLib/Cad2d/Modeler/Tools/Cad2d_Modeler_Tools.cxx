@@ -14,15 +14,50 @@
 
 #include <Standard_Handle.hxx>
 #include <Geom2d_Curve.hxx>
-#include <GCE2d_MakeSegment.hxx>
-#include <GCE2d_MakeArcOfCircle.hxx>
-#include <GCE2d_MakeArcOfEllipse.hxx>
-#include <GCE2d_MakeArcOfHyperbola.hxx>
-#include <GCE2d_MakeArcOfParabola.hxx>
-#include <GCE2d_MakeCircle.hxx>
-#include <GCE2d_MakeEllipse.hxx>
 
 #include <algorithm>
+
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::cad2dLib::Modeler_Tools::MakeEdge
+(
+	const Handle(Geom2d_Curve)& geom, 
+	const Pnt2d & p0, 
+	const Pnt2d & p1
+)
+{
+	auto v0 = std::make_shared<Pln_Vertex>(0, p0);
+	Debug_Null_Pointer(v0);
+
+	auto v1 = std::make_shared<Pln_Vertex>(1, p1);
+	Debug_Null_Pointer(v1);
+
+	auto curve = std::make_shared<Pln_Curve>(0, geom);
+	Debug_Null_Pointer(curve);
+
+	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	Debug_Null_Pointer(edge);
+
+	return std::move(edge);
+}
+
+std::shared_ptr<tnbLib::Pln_Ring> 
+tnbLib::cad2dLib::Modeler_Tools::MakeRing
+(
+	const Handle(Geom2d_Curve)& geom,
+	const Pnt2d & theP
+)
+{
+	auto v = std::make_shared<Pln_Vertex>(0, theP);
+	Debug_Null_Pointer(v);
+
+	auto curve = std::make_shared<Pln_Curve>(0, geom);
+	Debug_Null_Pointer(curve);
+
+	auto edge = std::make_shared<Pln_Ring>(v, std::move(curve));
+	Debug_Null_Pointer(edge);
+
+	return std::move(edge);
+}
 
 std::shared_ptr<tnbLib::cad2dLib::Modeler_Segment>
 tnbLib::cad2dLib::Modeler_Tools::HasRing
@@ -83,49 +118,7 @@ tnbLib::cad2dLib::Modeler_Tools::IsSegment
 	}
 }
 
-namespace tnbLib
-{
 
-	std::shared_ptr<Pln_Edge> Make_Edge
-	(
-		const opencascade::handle<Geom2d_Curve>& geom,
-		const Pnt2d& p0,
-		const Pnt2d& p1
-	)
-	{
-		auto v0 = std::make_shared<Pln_Vertex>(0, p0);
-		Debug_Null_Pointer(v0);
-
-		auto v1 = std::make_shared<Pln_Vertex>(1, p1);
-		Debug_Null_Pointer(v1);
-
-		auto curve = std::make_shared<Pln_Curve>(0, geom);
-		Debug_Null_Pointer(curve);
-
-		auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
-		Debug_Null_Pointer(edge);
-
-		return std::move(edge);
-	}
-
-	std::shared_ptr<Pln_Ring> Make_Ring
-	(
-		const opencascade::handle<Geom2d_Curve>& geom,
-		const Pnt2d& theP
-	)
-	{
-		auto v = std::make_shared<Pln_Vertex>(0, theP);
-		Debug_Null_Pointer(v);
-
-		auto curve = std::make_shared<Pln_Curve>(0, geom);
-		Debug_Null_Pointer(curve);
-
-		auto edge = std::make_shared<Pln_Ring>(v, std::move(curve));
-		Debug_Null_Pointer(edge);
-
-		return std::move(edge);
-	}
-}
 
 std::shared_ptr<tnbLib::Pln_Edge> 
 tnbLib::cad2dLib::Modeler_Tools::MakeSegment
@@ -134,18 +127,18 @@ tnbLib::cad2dLib::Modeler_Tools::MakeSegment
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeSegment maker(theP0, theP1);
-	if (maker.IsDone())
+	auto curve = Pln_CurveTools::MakeSegment(theP0, theP1);
+	if (curve)
 	{
-		const auto& geom = maker.Value();
-
-		auto edge = Make_Edge(geom, theP0, theP1);
+		auto edge = MakeEdge(curve, theP0, theP1);
 		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -173,24 +166,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircArc
 	const Pnt2d & theP2
 )
 {
-	GCE2d_MakeArcOfCircle maker(theP0, theP1, theP2);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircArc(theP0, theP1, theP2);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
-		auto edge = 
-			Make_Edge
+		auto edge =
+			MakeEdge
 			(
-				geom, geom->Value(geom->FirstParameter()), 
+				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -203,24 +194,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfCircle maker(theP0, theV0, theP1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircArc(theP0, theV0, theP1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -233,24 +222,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfCircle maker(theCirc, theAlpha0, theAlpha1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircArc(theCirc, theAlpha0, theAlpha1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -263,24 +250,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfCircle maker(theCirc, theP0, theP1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircArc(theCirc, theP0, theP1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -293,24 +278,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeElipsArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfEllipse maker(theElips, theAlpha0, theAlpha1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeElipsArc(theElips, theAlpha0, theAlpha1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -323,24 +306,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeElipsArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfEllipse maker(theElips, theP0, theP1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeElipsArc(theElips, theP0, theP1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -353,24 +334,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeHyprArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfHyperbola maker(theHypr, theAlpha0, theAlpha1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeHyprArc(theHypr, theAlpha0, theAlpha1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -383,24 +362,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeHyprArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfHyperbola maker(theHypr, theP0, theP1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeHyprArc(theHypr, theP0, theP1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -413,24 +390,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeParbArc
 	const Standard_Real theAlpha1
 )
 {
-	GCE2d_MakeArcOfParabola maker(theParab, theAlpha0, theAlpha1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeParbArc(theParab, theAlpha0, theAlpha1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -443,24 +418,22 @@ tnbLib::cad2dLib::Modeler_Tools::MakeParabArc
 	const Pnt2d & theP1
 )
 {
-	GCE2d_MakeArcOfParabola maker(theParab, theP0, theP1);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeParabArc(theParab, theP0, theP1);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Edge
+			MakeEdge
 			(
 				geom, geom->Value(geom->FirstParameter()),
 				geom->Value(geom->LastParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -468,26 +441,24 @@ tnbLib::cad2dLib::Modeler_Tools::MakeParabArc
 std::shared_ptr<tnbLib::Pln_Ring>
 tnbLib::cad2dLib::Modeler_Tools::MakeCircle
 (
-	const gp_Circ2d & C
+	const gp_Circ2d & c
 )
 {
-	GCE2d_MakeCircle maker(C);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircle(c);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Ring
+			MakeRing
 			(
 				geom, geom->Value(geom->FirstParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -499,23 +470,21 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircle
 	const Pnt2d & theP
 )
 {
-	GCE2d_MakeCircle maker(C, theP);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircle(C, theP);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Ring
+			MakeRing
 			(
 				geom, geom->Value(geom->FirstParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -528,23 +497,21 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircle
 	const Pnt2d & theP2
 )
 {
-	GCE2d_MakeCircle maker(theP0, theP1, theP2);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircle(theP0, theP1, theP2);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Ring
+			MakeRing
 			(
 				geom, geom->Value(geom->FirstParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -556,23 +523,21 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircle
 	const Standard_Real theRadius
 )
 {
-	GCE2d_MakeCircle maker(theC, theRadius);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircle(theC, theRadius);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Ring
+			MakeRing
 			(
 				geom, geom->Value(geom->FirstParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -584,23 +549,21 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCircle
 	const Pnt2d & theP
 )
 {
-	GCE2d_MakeCircle maker(theC, theP);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeCircle(theC, theP);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Ring
+			MakeRing
 			(
 				geom, geom->Value(geom->FirstParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -611,23 +574,21 @@ tnbLib::cad2dLib::Modeler_Tools::MakeEllipse
 	const gp_Elips2d & E
 )
 {
-	GCE2d_MakeEllipse maker(E);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeEllipse(E);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Ring
+			MakeRing
 			(
 				geom, geom->Value(geom->FirstParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -640,23 +601,21 @@ tnbLib::cad2dLib::Modeler_Tools::MakeEllipse
 	const Pnt2d & theCenter
 )
 {
-	GCE2d_MakeEllipse maker(theS0, theS1, theCenter);
-	if (maker.IsDone())
+	auto geom = Pln_CurveTools::MakeEllipse(theS0, theS1, theCenter);
+	if (geom)
 	{
-		const auto& geom = maker.Value();
-
 		auto edge =
-			Make_Ring
+			MakeRing
 			(
 				geom, geom->Value(geom->FirstParameter())
 			);
-
-		Debug_Null_Pointer(edge);
-
 		return std::move(edge);
 	}
 	else
 	{
+		FatalErrorIn(FunctionSIG)
+			<< " no curves has been created!" << endl
+			<< abort(FatalError);
 		return nullptr;
 	}
 }
@@ -671,7 +630,7 @@ tnbLib::cad2dLib::Modeler_Tools::Interpolation
 {
 	auto geom = Pln_CurveTools::Interpolation(theQ, thePeriodic, theTol);
 	auto edge = 
-		Make_Edge
+		MakeEdge
 		(
 			geom, 
 			geom->Value(geom->FirstParameter()),
@@ -698,7 +657,7 @@ tnbLib::cad2dLib::Modeler_Tools::Interpolation
 			thePeriodic, theTol, theScale
 		);
 	auto edge =
-		Make_Edge
+		MakeEdge
 		(
 			geom,
 			geom->Value(geom->FirstParameter()),
