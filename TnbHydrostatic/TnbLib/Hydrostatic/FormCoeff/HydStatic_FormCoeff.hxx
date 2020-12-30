@@ -109,17 +109,16 @@ namespace tnbLib
 				return theParameters_;
 			}
 
+			TnbHydStatic_EXPORT void AllocateMemory();
+
 		public:
 
-			Wetted()
-			{}
+			TnbHydStatic_EXPORT Wetted();
 
-			Wetted
+			TnbHydStatic_EXPORT Wetted
 			(
 				const std::shared_ptr<formDim::Wetted>& theForm
-			)
-				: theWeted_(theForm)
-			{}
+			);
 
 			const auto& WettedFormDim() const
 			{

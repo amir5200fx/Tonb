@@ -20,6 +20,25 @@
 
 unsigned short tnbLib::formCoeff::Wetted::verbose(0);
 
+void tnbLib::formCoeff::Wetted::AllocateMemory()
+{
+	theParameters_ = std::make_shared<Parameter>();
+}
+
+tnbLib::formCoeff::Wetted::Wetted()
+{
+	AllocateMemory();
+}
+
+tnbLib::formCoeff::Wetted::Wetted
+(
+	const std::shared_ptr<formDim::Wetted>& theForm
+)
+	: theWeted_(theForm)
+{
+	AllocateMemory();
+}
+
 tnbLib::formCoeff::Wetted::Parameter::Parameter()
 	: Cb(0)
 	, Dispv(0)
@@ -140,13 +159,33 @@ void tnbLib::formCoeff::Wetted::CalcAW
 	const marineLib::Body_Wetted & theBody
 )
 {
-	auto param = 
-		Marine_CmptLib::CalcAW
-		(
-			theBody,
-			sysLib::gl_marine_integration_info
-		);
-	SET_PARAM(Aw);
+	if (theBody.ShapeType())
+	{
+		auto body = 
+			std::dynamic_pointer_cast
+			<
+			marineLib::BodyConstructor_Shape<marineLib::Body_Wetted>
+			>(theBody.This());
+		Debug_Null_Pointer(body);
+
+		auto param = 
+			Marine_CmptLib::CalcAW
+			(
+				*body->WL(), 
+				sysLib::gl_marine_integration_info
+			);
+		SET_PARAM(Aw);
+	}
+	else
+	{
+		auto param =
+			Marine_CmptLib::CalcAW
+			(
+				theBody,
+				sysLib::gl_marine_integration_info
+			);
+		SET_PARAM(Aw);
+	}
 }
 
 void tnbLib::formCoeff::Wetted::CalcCWL()
