@@ -5,6 +5,7 @@
 #include <Entity3d_Box.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_CurveTools.hxx>
 #include <Cad_Tools.hxx>
 #include <Marine_Water.hxx>
 #include <Marine_Wave.hxx>
@@ -14,6 +15,7 @@
 #include <Marine_CmpSection.hxx>
 #include <Marine_SectTools.hxx>
 #include <MarineBase_Tools.hxx>
+#include <Marine_Modeler_Tools.hxx>
 
 #ifdef DebugInfo
 #undef DebugInfo
@@ -107,7 +109,7 @@ namespace tnbLib
 	}
 }
 
-Handle(Geom_Curve) 
+Handle(Geom_Curve)
 tnbLib::Marine_WaterTools::WaterLine
 (
 	const Marine_Wave & theWave,
@@ -128,13 +130,13 @@ tnbLib::Marine_WaterTools::WaterLine
 	return std::move(wl);
 }
 
-std::shared_ptr<tnbLib::Pln_Wire> 
+std::shared_ptr<tnbLib::Pln_Wire>
 tnbLib::Marine_WaterTools::WaterSection
 (
-	const Handle(Geom_Curve)& theCurve, 
+	const Handle(Geom_Curve)& theCurve,
 	const gp_Ax2 & theSystem,
-	const Standard_Real theZmin, 
-	const Standard_Real theMinTol, 
+	const Standard_Real theZmin,
+	const Standard_Real theMinTol,
 	const Standard_Real theMaxTol
 )
 {
@@ -208,12 +210,140 @@ tnbLib::Marine_WaterTools::WaterSection
 	curves.push_back(std::make_shared<Marine_WaterCurve>(3, c2d2));
 	curves.push_back(std::make_shared<Marine_WaterCurve>(4, c2d3));
 
+	//- for some reasons this algorithm doesn't work really well!
+	/*auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	if (wire->Orientation() IS_EQUAL Pln_Orientation::Pln_Orientation_Unknown)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid wire: unknown orientation" << endl
+			<< abort(FatalError);
+	}
+	if (wire->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+	{
+		wire->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+	}
+
+	return std::move(wire);*/
+
 	auto wires = Pln_Tools::RetrieveWires(curves, theMinTol, theMaxTol);
 	if (wires.size() NOT_EQUAL 1)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "unable to detect the wire!" << endl
 			<< abort(FatalError);
+	}
+	if (wires[0]->Orientation() IS_EQUAL Pln_Orientation::Pln_Orientation_Unknown)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid wire: unknown orientation" << endl
+			<< abort(FatalError);
+	}
+	if (wires[0]->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+	{
+		wires[0]->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+	}
+	return std::move(wires[0]);
+}
+
+std::shared_ptr<tnbLib::Pln_Wire> 
+tnbLib::Marine_WaterTools::WaterSection
+(
+	const Pnt2d & theP0, 
+	const Pnt2d & theP1
+)
+{
+	const auto& P0 = theP0;
+	const auto P1 = Pnt2d(theP1.X(), theP0.Y());
+	const auto& P2 = theP1;
+	const auto P3 = Pnt2d(theP0.X(), theP1.Y());
+
+	const auto g1 = Pln_CurveTools::MakeSegment(P0, P1);
+	Debug_Null_Pointer(g1);
+
+	const auto g2 = Pln_CurveTools::MakeSegment(P1, P2);
+	Debug_Null_Pointer(g2);
+
+	const auto g3 = Pln_CurveTools::MakeSegment(P2, P3);
+	Debug_Null_Pointer(g3);
+
+	const auto g4 = Pln_CurveTools::MakeSegment(P3, P0);
+	Debug_Null_Pointer(g4);
+
+	const auto c1 = 
+		marineLib::Modeler_Tools::MakeCurve
+		(
+			std::move(g1),
+			marineLib::curveType::water
+		);
+	Debug_Null_Pointer(c1);
+
+	const auto c2 =
+		marineLib::Modeler_Tools::MakeCurve
+		(
+			std::move(g2),
+			marineLib::curveType::water
+		);
+	Debug_Null_Pointer(c1);
+
+	const auto c3 =
+		marineLib::Modeler_Tools::MakeCurve
+		(
+			std::move(g3),
+			marineLib::curveType::water
+		);
+	Debug_Null_Pointer(c3);
+
+	const auto c4 =
+		marineLib::Modeler_Tools::MakeCurve
+		(
+			std::move(g4),
+			marineLib::curveType::water
+		);
+	Debug_Null_Pointer(c4);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(4);
+
+	curves.push_back(std::move(c1));
+	curves.push_back(std::move(c2));
+	curves.push_back(std::move(c3));
+	curves.push_back(std::move(c4));
+
+	//- for some reasons this algorithm doesn't work really well!
+	/*auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	if (wire->Orientation() IS_EQUAL Pln_Orientation::Pln_Orientation_Unknown)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid wire: unknown orientation" << endl
+			<< abort(FatalError);
+	}
+	if (wire->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+	{
+		wire->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+	}
+
+	return std::move(wire);*/
+
+	auto wires = Pln_Tools::RetrieveWires(curves, 1.0E-4, 1.0E-4);
+	if (wires.size() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to detect the wire!" << endl
+			<< abort(FatalError);
+	}
+	if (wires[0]->Orientation() IS_EQUAL Pln_Orientation::Pln_Orientation_Unknown)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid wire: unknown orientation" << endl
+			<< abort(FatalError);
+	}
+	if (wires[0]->Orientation() NOT_EQUAL Pln_Orientation::Pln_Orientation_CCW)
+	{
+		wires[0]->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
 	}
 	return std::move(wires[0]);
 }
@@ -223,7 +353,7 @@ tnbLib::Marine_WaterTools::WaterSection
 (
 	const Marine_Wave & theWave,
 	const gp_Ax2 & theSys,
-	const Standard_Real theZmin, 
+	const Standard_Real theZmin,
 	const Standard_Real theMinTol,
 	const Standard_Real theMaxTol
 )
@@ -231,19 +361,19 @@ tnbLib::Marine_WaterTools::WaterSection
 	auto wl = WaterLine(theWave, theSys);
 	Debug_Null_Pointer(wl);
 
-	auto wire = 
+	auto wire =
 		WaterSection
 		(
-			wl, theSys, 
+			wl, theSys,
 			theZmin, theMinTol, theMaxTol
 		);
 	return std::move(wire);
 }
 
-std::shared_ptr<tnbLib::Marine_Section> 
+std::shared_ptr<tnbLib::Marine_Section>
 tnbLib::Marine_WaterTools::WaterSection
 (
-	const Marine_Wave & theWave, 
+	const Marine_Wave & theWave,
 	const Marine_CmpSection & section,
 	const Standard_Real theMinTol,
 	const Standard_Real theMaxTol
@@ -253,30 +383,30 @@ tnbLib::Marine_WaterTools::WaterSection
 	const auto[dx, dy] = b.Length();
 	const auto zMin = b.P0().Y() - dy;
 
-	auto wire = 
+	auto wire =
 		WaterSection
 		(
 			theWave, section.CoordinateSystem(),
 			zMin, theMinTol, theMaxTol
 		);
 	Debug_Null_Pointer(wire);
-	auto wsection = 
+	auto wsection =
 		Marine_SectTools::SectionCreator
 		(
-			wire, 
+			wire,
 			section.CoordinateSystem(),
 			Marine_SectionType::water
 		);
 	return std::move(wsection);
 }
 
-std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
+std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::Marine_WaterTools::WaterSections
 (
-	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody, 
-	const Marine_Wave & theWave, 
-	const Entity3d_Box & theDomain, 
-	const Standard_Real theMinTol, 
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
+	const Marine_Wave & theWave,
+	const Entity3d_Box & theDomain,
+	const Standard_Real theMinTol,
 	const Standard_Real theMaxTol
 )
 {
@@ -295,26 +425,26 @@ tnbLib::Marine_WaterTools::WaterSections
 	{
 		Debug_Null_Pointer(x);
 
-		auto wl = 
+		auto wl =
 			waterLib::WaterLine
 			(
-				waterSurface, 
+				waterSurface,
 				x->CoordinateSystem()
 			);
 		Debug_Null_Pointer(wl);
 
-		auto wa = 
+		auto wa =
 			WaterSection
 			(
-				wl, x->CoordinateSystem(), 
+				wl, x->CoordinateSystem(),
 				zmin, theMinTol, theMaxTol
 			);
 		Debug_Null_Pointer(wa);
 
-		auto section = 
+		auto section =
 			Marine_SectTools::SectionCreator
 			(
-				wa, 
+				wa,
 				x->CoordinateSystem(),
 				Marine_SectionType::water
 			);
@@ -326,11 +456,11 @@ tnbLib::Marine_WaterTools::WaterSections
 	return std::move(waters);
 }
 
-std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
+std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::Marine_WaterTools::StillWaterSections
 (
-	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody, 
-	const Standard_Real theZ, 
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
+	const Standard_Real theZ,
 	const Entity3d_Box & theDomain
 )
 {
@@ -340,10 +470,7 @@ tnbLib::Marine_WaterTools::StillWaterSections
 	const auto x0 = theDomain.P0().Y();
 	const auto x1 = theDomain.P1().Y();
 
-	auto pln = Cad2d_Plane::MakeBox(Pnt2d(x0, y0), Pnt2d(x1, y1));
-	Debug_Null_Pointer(pln);
-
-	const auto& wa = pln->OuterWire();
+	auto wa = WaterSection(Pnt2d(x0, y0), Pnt2d(x1, y1));
 	Debug_Null_Pointer(wa);
 
 	std::vector<std::shared_ptr<Marine_Section>> waters;
@@ -365,11 +492,11 @@ tnbLib::Marine_WaterTools::StillWaterSections
 	return std::move(waters);
 }
 
-std::shared_ptr<tnbLib::Marine_Water> 
+std::shared_ptr<tnbLib::Marine_Water>
 tnbLib::Marine_WaterTools::StillWater
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
-	const Standard_Real theZ, 
+	const Standard_Real theZ,
 	const Entity3d_Box & theDomain
 )
 {
@@ -381,7 +508,7 @@ tnbLib::Marine_WaterTools::StillWater
 	return std::move(water);
 }
 
-std::shared_ptr<tnbLib::Marine_Water> 
+std::shared_ptr<tnbLib::Marine_Water>
 tnbLib::Marine_WaterTools::Water
 (
 	const std::vector<std::shared_ptr<Marine_Section>>& theSections
@@ -407,12 +534,12 @@ tnbLib::Marine_WaterTools::Water
 	return std::move(water);
 }
 
-std::shared_ptr<tnbLib::Marine_Water> 
+std::shared_ptr<tnbLib::Marine_Water>
 tnbLib::Marine_WaterTools::Water
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theBody,
 	const std::shared_ptr<Marine_Wave>& theWave,
-	const Entity3d_Box & theDomain, 
+	const Entity3d_Box & theDomain,
 	const Standard_Real theMinTol,
 	const Standard_Real theMaxTol
 )
@@ -439,10 +566,10 @@ tnbLib::Marine_WaterTools::Water
 	}
 }
 
-std::shared_ptr<tnbLib::Marine_Wave> 
+std::shared_ptr<tnbLib::Marine_Wave>
 tnbLib::Marine_WaterTools::FlatWave
 (
-	const std::shared_ptr<Entity3d_Box>& theDomain, 
+	const std::shared_ptr<Entity3d_Box>& theDomain,
 	const Standard_Real theZ
 )
 {
@@ -460,7 +587,7 @@ tnbLib::Marine_WaterTools::FlatWave
 	return std::move(wave);
 }
 
-std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
+std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::Marine_WaterTools::RetrieveNonDeepWLs
 (
 	const Marine_CmpSection & theSection

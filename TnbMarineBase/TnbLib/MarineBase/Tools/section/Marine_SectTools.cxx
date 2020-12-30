@@ -4,16 +4,206 @@
 #include <Pln_Wire.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_CmpEdge.hxx>
+#include <Pln_Edge.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_xCmpSection.hxx>
 #include <Marine_zCmpSection.hxx>
 #include <Marine_Sections.hxx>
+#include <Marine_PlnCurves.hxx>
+#include <Marine_PlnCurves.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <gp_Pln.hxx>
 
 #include <TopoDS_Edge.hxx>
+
+void tnbLib::Marine_SectTools::Section
+(
+	const std::shared_ptr<Pln_Wire>& theWire,
+	const marineLib::curveType target,
+	const marineLib::curveType to
+)
+{
+	const auto cmpEdge = theWire->CmpEdge();
+	switch (to)
+	{
+	case marineLib::curveType::displacer:
+	{
+		for (const auto& x : cmpEdge->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& curve = x->Curve();
+			auto m = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+			if (NOT m)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the section has one non-marine curve, at least" << endl
+					<< abort(FatalError);
+			}
+
+			if (m->CurveType() IS_EQUAL target)
+			{
+				const auto curve =
+					std::make_shared<Marine_DisplacerCurve>(std::move(*x->Curve()));
+				x->SetCurve(curve);
+			}
+		}
+		break;
+	}
+	case marineLib::curveType::dry:
+	{
+		for (const auto& x : cmpEdge->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& curve = x->Curve();
+			auto m = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+			if (NOT m)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the section has one non-marine curve, at least" << endl
+					<< abort(FatalError);
+			}
+
+			if (m->CurveType() IS_EQUAL target)
+			{
+				const auto curve =
+					std::make_shared<Marine_DryCurve>(std::move(*x->Curve()));
+				x->SetCurve(curve);
+			}			
+		}
+		break;
+	}
+	case marineLib::curveType::sail:
+	{
+		for (const auto& x : cmpEdge->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& curve = x->Curve();
+			auto m = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+			if (NOT m)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the section has one non-marine curve, at least" << endl
+					<< abort(FatalError);
+			}
+
+			if (m->CurveType() IS_EQUAL target)
+			{
+				const auto curve =
+					std::make_shared<Marine_SailCurve>(std::move(*x->Curve()));
+				x->SetCurve(curve);
+			}		
+		}
+		break;
+	}
+	case marineLib::curveType::tank:
+	{
+		for (const auto& x : cmpEdge->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& curve = x->Curve();
+			auto m = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+			if (NOT m)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the section has one non-marine curve, at least" << endl
+					<< abort(FatalError);
+			}
+
+			if (m->CurveType() IS_EQUAL target)
+			{
+				const auto curve =
+					std::make_shared<Marine_TankCurve>(std::move(*x->Curve()));
+				x->SetCurve(curve);
+			}	
+		}
+		break;
+	}
+	case marineLib::curveType::water:
+	{
+		for (const auto& x : cmpEdge->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& curve = x->Curve();
+			auto m = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+			if (NOT m)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the section has one non-marine curve, at least" << endl
+					<< abort(FatalError);
+			}
+
+			if (m->CurveType() IS_EQUAL target)
+			{
+				const auto curve =
+					std::make_shared<Marine_WaterCurve>(std::move(*x->Curve()));
+				x->SetCurve(curve);
+			}	
+		}
+		break;
+	}
+	case marineLib::curveType::waterLine:
+	{
+		for (const auto& x : cmpEdge->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& curve = x->Curve();
+			auto m = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+			if (NOT m)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the section has one non-marine curve, at least" << endl
+					<< abort(FatalError);
+			}
+
+			if (m->CurveType() IS_EQUAL target)
+			{
+				const auto curve =
+					std::make_shared<Marine_WaterLineCurve>(std::move(*x->Curve()));
+				x->SetCurve(curve);
+			}		
+		}
+		break;
+	}
+	case marineLib::curveType::wetted:
+	{
+		for (const auto& x : cmpEdge->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& curve = x->Curve();
+			auto m = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+			if (NOT m)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the section has one non-marine curve, at least" << endl
+					<< abort(FatalError);
+			}
+
+			if (m->CurveType() IS_EQUAL target)
+			{
+				const auto curve =
+					std::make_shared<Marine_WettedCurve>(std::move(*x->Curve()));
+				x->SetCurve(curve);
+			}		
+		}
+		break;
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "undefined section type!" << endl
+			<< abort(FatalError);
+		break;
+	}
+}
 
 Standard_Boolean 
 tnbLib::Marine_SectTools::IsOuter
@@ -946,6 +1136,79 @@ tnbLib::Marine_SectTools::ConvertToComposite
 	}
 }
 
+#include <Marine_PlnCurves.hxx>
+
+std::shared_ptr<tnbLib::Pln_Curve> 
+tnbLib::Marine_SectTools::CurveCreator
+(
+	const Handle(Geom2d_Curve)& theCurve, 
+	const Marine_SectionType & t
+)
+{
+	switch (t)
+	{
+	case Marine_SectionType::displacer:
+	{
+		auto c = std::make_shared<Marine_DisplacerCurve>(theCurve);
+		return std::move(c);
+	}
+	case Marine_SectionType::dry:
+	{
+		auto c = std::make_shared<Marine_DryCurve>(theCurve);
+		return std::move(c);
+	}
+	case Marine_SectionType::sail:
+	{
+		auto c = std::make_shared<Marine_SailCurve>(theCurve);
+		return std::move(c);
+	}
+	case Marine_SectionType::tank:
+	{
+		auto c = std::make_shared<Marine_TankCurve>(theCurve);
+		return std::move(c);
+	}
+	case Marine_SectionType::water:
+	{
+		auto c = std::make_shared<Marine_WaterCurve>(theCurve);
+		return std::move(c);
+	}
+	case Marine_SectionType::waterLine:
+	{
+		auto c = std::make_shared<Marine_WaterLineCurve>(theCurve);
+		return std::move(c);
+	}
+	case Marine_SectionType::wetted:
+	{
+		auto c = std::make_shared<Marine_WettedCurve>(theCurve);
+		return std::move(c);
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "undefined type of the curve!" << endl
+			<< abort(FatalError);
+		return nullptr;
+		break;
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Curve>> 
+tnbLib::Marine_SectTools::CurveCreator
+(
+	const std::vector<Handle(Geom2d_Curve)>& theCurves, 
+	const Marine_SectionType & t
+)
+{
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(theCurves.size());
+	for (const auto& x : theCurves)
+	{
+		Debug_Null_Pointer(x);
+		auto curve = CurveCreator(x, t);
+		curves.push_back(std::move(curve));
+	}
+	return std::move(curves);
+}
+
 std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::Marine_SectTools::SectionCreator
 (
@@ -1061,7 +1324,11 @@ tnbLib::Marine_SectTools::SectionCreator
 				<< abort(FatalError);
 		}
 
-		curves.push_back(std::make_shared<Pln_Curve>(++K, x));
+		auto curve = CurveCreator(x, t);
+		Debug_Null_Pointer(curve);
+
+		curve->SetIndex(++K);
+		curves.push_back(std::move(curve));
 	}
 
 	auto section = 
@@ -1208,12 +1475,32 @@ tnbLib::Marine_SectTools::IsDry
 }
 
 Standard_Boolean 
+tnbLib::Marine_SectTools::IsDry
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = std::dynamic_pointer_cast<Marine_DryCurve>(theCurve);
+	return (Standard_Boolean)curve;
+}
+
+Standard_Boolean 
 tnbLib::Marine_SectTools::IsWetted
 (
 	const Marine_CmpSection & theSect
 )
 {
 	return theSect.Type() IS_EQUAL Marine_SectionType::wetted;
+}
+
+Standard_Boolean
+tnbLib::Marine_SectTools::IsWetted
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = std::dynamic_pointer_cast<Marine_WettedCurve>(theCurve);
+	return (Standard_Boolean)curve;
 }
 
 Standard_Boolean 
@@ -1225,6 +1512,16 @@ tnbLib::Marine_SectTools::IsDisplacer
 	return theSect.Type() IS_EQUAL Marine_SectionType::displacer;
 }
 
+Standard_Boolean
+tnbLib::Marine_SectTools::IsDisplacer
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = std::dynamic_pointer_cast<Marine_DisplacerCurve>(theCurve);
+	return (Standard_Boolean)curve;
+}
+
 Standard_Boolean 
 tnbLib::Marine_SectTools::IsSail
 (
@@ -1232,6 +1529,16 @@ tnbLib::Marine_SectTools::IsSail
 )
 {
 	return theSect.Type() IS_EQUAL Marine_SectionType::sail;
+}
+
+Standard_Boolean
+tnbLib::Marine_SectTools::IsSail
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = std::dynamic_pointer_cast<Marine_SailCurve>(theCurve);
+	return (Standard_Boolean)curve;
 }
 
 Standard_Boolean 
@@ -1243,6 +1550,16 @@ tnbLib::Marine_SectTools::IsTank
 	return theSect.Type() IS_EQUAL Marine_SectionType::tank;
 }
 
+Standard_Boolean
+tnbLib::Marine_SectTools::IsTank
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = std::dynamic_pointer_cast<Marine_TankCurve>(theCurve);
+	return (Standard_Boolean)curve;
+}
+
 Standard_Boolean 
 tnbLib::Marine_SectTools::IsWaterLine
 (
@@ -1252,6 +1569,16 @@ tnbLib::Marine_SectTools::IsWaterLine
 	return theSect.Type() IS_EQUAL Marine_SectionType::waterLine;
 }
 
+Standard_Boolean
+tnbLib::Marine_SectTools::IsWaterLine
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = std::dynamic_pointer_cast<Marine_WaterLineCurve>(theCurve);
+	return (Standard_Boolean)curve;
+}
+
 Standard_Boolean 
 tnbLib::Marine_SectTools::IsWater
 (
@@ -1259,6 +1586,16 @@ tnbLib::Marine_SectTools::IsWater
 )
 {
 	return theSect.Type() IS_EQUAL Marine_SectionType::water;
+}
+
+Standard_Boolean
+tnbLib::Marine_SectTools::IsWater
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = std::dynamic_pointer_cast<Marine_WaterCurve>(theCurve);
+	return (Standard_Boolean)curve;
 }
 
 namespace tnbLib
@@ -1374,8 +1711,7 @@ tnbLib::Marine_SectTools::CmpSectionCreator
 		//CheckInnerSection(x);
 	}
 
-	auto iter = theSections.cbegin();
-	if (IsXSection(*iter))
+	if (IsXSection(theSections[0]))
 	{
 		auto cmp = std::make_shared<Marine_xCmpSection>();
 		Debug_Null_Pointer(cmp);
