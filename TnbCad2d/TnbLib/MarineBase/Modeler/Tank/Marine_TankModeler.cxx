@@ -9,5 +9,5 @@ void tnbLib::Marine_TankModeler::CheckCurveType
 	const char * name
 ) const
 {
-	marineLib::Modeler_Tools::CheckCurveType(theEdge->Curve(), marineLib::Modeler_Tools::CurveType::tank);
+	marineLib::Modeler_Tools::CheckCurveType(theEdge->Curve(), marineLib::curveType::tank);
 }

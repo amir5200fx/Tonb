@@ -9,5 +9,5 @@ void tnbLib::Marine_SailModeler::CheckCurveType
 	const char * name
 ) const
 {
-	marineLib::Modeler_Tools::CheckCurveType(theEdge->Curve(), marineLib::Modeler_Tools::CurveType::sail);
+	marineLib::Modeler_Tools::CheckCurveType(theEdge->Curve(), marineLib::curveType::sail);
 }

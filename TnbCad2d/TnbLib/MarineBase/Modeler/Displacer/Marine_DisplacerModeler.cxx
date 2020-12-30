@@ -9,5 +9,5 @@ void tnbLib::Marine_DisplacerModeler::CheckCurveType
 	const char * name
 ) const
 {
-	marineLib::Modeler_Tools::CheckCurveType(theEdge->Curve(), marineLib::Modeler_Tools::CurveType::displacer);
+	marineLib::Modeler_Tools::CheckCurveType(theEdge->Curve(), marineLib::curveType::displacer);
 }
