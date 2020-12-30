@@ -29,6 +29,12 @@ namespace tnbLib
 			ar & boost::serialization::base_object<StbGMaker_EntityCreator>(*this);
 		}
 
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_WP> 
+			MakeWP
+			(
+				const Standard_Real x
+			) const override;
+
 	protected:
 
 		template<class... _Types>
@@ -39,6 +45,10 @@ namespace tnbLib
 	public:
 
 		virtual Standard_Boolean HasShape() const = 0;
+
+
+		//- public functions and operators
+
 
 	};
 }

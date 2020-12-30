@@ -24,6 +24,13 @@ namespace tnbLib
 			ar & boost::serialization::base_object<StbGMaker_GeometricSailCreator>(*this);
 		}
 
+
+		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_WP> 
+			MakeWP
+			(
+				const Standard_Real x
+			) const override;
+
 	protected:
 
 		template<class... _Types>
@@ -32,6 +39,9 @@ namespace tnbLib
 		{}
 
 	public:
+
+
+		//- public functions and operators
 
 
 	};

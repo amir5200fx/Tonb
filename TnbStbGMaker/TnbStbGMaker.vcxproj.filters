@@ -97,6 +97,15 @@
     <Filter Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\Shape">
       <UniqueIdentifier>{e22e2407-5a06-43ea-a5fc-1ba3a96bceee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\WP\Hull">
+      <UniqueIdentifier>{4c08b689-4921-47e0-a5eb-d058670c0a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\WP\Tank">
+      <UniqueIdentifier>{aad14165-82ce-48d3-860e-a088ae899ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\StbGMaker\Entities\WP\Sail">
+      <UniqueIdentifier>{0830c37c-8d0a-4a2b-924f-00eb29a6f7ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\StbGMaker\Entities\Entity\StbGMaker_Entity.hxx">
@@ -203,6 +212,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape\StbGMaker_VolumeSailCreator_noShape.hxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\WP\Hull\StbGMaker_HullWP.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\WP\Sail\StbGMaker_SailWP.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Sail</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\WP\Tank\StbGMaker_TankWP.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\StbGMaker\Entities\WP\StbGMaker_WPs.hxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +334,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape\StbGMaker_VolumeSailCreator_noShape.cxx">
       <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\noShape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\Hull\StbGMaker_HullWP.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\Hull\StbGMaker_HullWPIO.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\Sail\StbGMaker_SailWP.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\Sail\StbGMaker_SailWPIO.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Sail</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\Tank\StbGMaker_TankWP.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Entities\WP\Tank\StbGMaker_TankWPIO.cxx">
+      <Filter>TnbLib\StbGMaker\Entities\WP\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\StbGMaker\Maker\Sail\Geometric\Volume\StbGMaker_VolumeSailCreator.cxx">
+      <Filter>TnbLib\StbGMaker\Maker\Sail\Geometric\Volume</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

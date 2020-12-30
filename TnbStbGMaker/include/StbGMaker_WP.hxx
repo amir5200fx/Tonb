@@ -33,9 +33,7 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbStbGMaker_EXPORT);
 
-		TnbStbGMaker_EXPORT void MakeModeler();
-
-	public:
+	protected:
 
 		//- default constructor
 
@@ -59,10 +57,31 @@ namespace tnbLib
 			const Standard_Real theX
 		);
 
+		auto& ChangeModeler()
+		{
+			return theModeler_;
+		}
+
+	public:
 
 		TnbStbGMaker_EXPORT Standard_Integer NbPlanes() const;
 
 		TnbStbGMaker_EXPORT std::shared_ptr<Entity3d_Chain> MakeMesh() const;
+
+		virtual Standard_Boolean IsHull() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsSail() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsTank() const
+		{
+			return Standard_False;
+		}
 
 		auto X() const
 		{
@@ -91,7 +110,7 @@ namespace tnbLib
 
 		TnbStbGMaker_EXPORT void Approx(const std::shared_ptr<Pln_Edge>& theEdge);
 
-		TnbStbGMaker_EXPORT void RetrievePlanesTo
+		void RetrievePlanesTo
 		(
 			std::vector<std::shared_ptr<Cad2d_Plane>>& thePlanes
 		) const;
@@ -100,6 +119,6 @@ namespace tnbLib
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::StbGMaker_WP);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::StbGMaker_WP);
 
 #endif // !_StbGMaker_WP_Header
