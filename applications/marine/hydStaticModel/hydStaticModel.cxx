@@ -409,6 +409,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {exportFloatBodyToPlt(name); }), "exportFloatBodyToPlt");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveModelTo(name); }), "saveModelTo");
 
+		mod->add(chaiscript::fun([](unsigned short i)-> void {HydStatic_Model::verbose = i; }), "setVerbose");
 	}
 
 	void setWaves(const module_t& mod)
@@ -418,7 +419,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const wave_t& w, const Dir3d& d)->void {setVerticalDir(w, d); }), "setVerticalDirection");
 		mod->add(chaiscript::fun([](const wave_t& w, const Vec3d& v)->void {setCurrent(w, v); }), "setCurrent");
 		mod->add(chaiscript::fun([](const wave_t& w, const Vec3d& v)->void {setWind(w, v); }), "setWind");
-		
+
 		mod->add(chaiscript::fun([](const wave_t& w)-> void {loadWave(w); }), "loadWave");
 	}
 
@@ -439,15 +440,9 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	hydrModel = std::make_shared<HydStatic_Model>();
 
-	loadStbModel("myShip");
-	auto wave = createFlatWave(getHydrModel()->Domain());
-	loadWave(wave);
-	saveModelTo("hydrStaticModel");
-	return 0;
-	//Marine_FlatWave::dummy();
-	FatalError.throwExceptions();
+	hydrModel = std::make_shared<HydStatic_Model>();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
