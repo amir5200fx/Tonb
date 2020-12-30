@@ -192,7 +192,7 @@ tnbLib::Cad2d_Boolean::Union
 	auto edges0 = sub0->Segments()->RetrieveEntities();
 	auto edges1 = sub1->Segments()->RetrieveEntities();
 
-	std::vector<Handle(Geom2d_Curve)> curves;
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	Standard_Integer k0 = 0;
 	for (const auto& x : edges0)
 	{
@@ -206,7 +206,7 @@ tnbLib::Cad2d_Boolean::Union
 
 		if (NOT boolean::IsCurveInsidePolygon(*x->Curve(), *chain1, domain1))
 		{
-			curves.push_back(x->Curve()->Geometry());
+			curves.push_back(x->Curve());
 			++k0;
 		}
 	}
@@ -229,7 +229,7 @@ tnbLib::Cad2d_Boolean::Union
 
 		if (NOT boolean::IsCurveInsidePolygon(*x->Curve(), *chain0, domain0))
 		{
-			curves.push_back(x->Curve()->Geometry());
+			curves.push_back(x->Curve());
 			k1++;
 		}
 	}
@@ -363,7 +363,7 @@ tnbLib::Cad2d_Boolean::Subtract
 	auto edges0 = sub0->Segments()->RetrieveEntities();
 	auto edges1 = sub1->Segments()->RetrieveEntities();
 
-	std::vector<Handle(Geom2d_Curve)> curves;
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	Standard_Integer k0 = 0;
 	for (const auto& x : edges0)
 	{
@@ -372,13 +372,13 @@ tnbLib::Cad2d_Boolean::Subtract
 
 		if (x->Curve()->IsTangential())
 		{
-			curves.push_back(x->Curve()->Geometry());
+			curves.push_back(x->Curve());
 			continue;
 		}
 
 		if (NOT boolean::IsCurveInsidePolygon(*x->Curve(), *chain1, domain1))
 		{
-			curves.push_back(x->Curve()->Geometry());
+			curves.push_back(x->Curve());
 			++k0;
 		}
 	}
@@ -407,7 +407,8 @@ tnbLib::Cad2d_Boolean::Subtract
 
 			c->Reverse();
 
-			curves.push_back(c);
+			auto newPlnCurve = (*x->Curve())(std::move(c));
+			curves.push_back(std::move(newPlnCurve));
 
 			++k1;
 		}
