@@ -16,7 +16,9 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::vector<Pnt2d> thePnts_;
+		std::vector<std::pair<Pnt2d, Standard_Real>> thePnts_;
+
+		Standard_Real theX_;
 
 		//- private functions and operators
 
@@ -25,14 +27,25 @@ namespace tnbLib
 	public:
 
 		ShapePx_CtrlRow()
+			: theX_(0)
 		{}
 
-		ShapePx_CtrlRow(const std::vector<Pnt2d>& thePnts)
+		ShapePx_CtrlRow
+		(
+			const std::vector<std::pair<Pnt2d, Standard_Real>>& thePnts,
+			const Standard_Real x
+		)
 			: thePnts_(thePnts)
+			, theX_(x)
 		{}
 
-		ShapePx_CtrlRow(std::vector<Pnt2d>&& thePnts)
+		ShapePx_CtrlRow
+		(
+			std::vector<std::pair<Pnt2d, Standard_Real>>&& thePnts,
+			const Standard_Real x
+		)
 			: thePnts_(std::move(thePnts))
+			, theX_(x)
 		{}
 
 
@@ -46,9 +59,22 @@ namespace tnbLib
 			return thePnts_;
 		}
 
+		auto X() const
+		{
+			return theX_;
+		}
+
 		auto& PntsRef()
 		{
 			return thePnts_;
+		}
+
+		void SetX
+		(
+			const Standard_Real x
+		)
+		{
+			theX_ = x;
 		}
 	};
 }

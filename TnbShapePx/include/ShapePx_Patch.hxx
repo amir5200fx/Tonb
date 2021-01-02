@@ -9,6 +9,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class ShapePx_Section;
+	class SectPx_Limits;
 
 	class ShapePx_Patch
 		: public ShapePx_Entity
@@ -19,7 +20,7 @@ namespace tnbLib
 		std::shared_ptr<ShapePx_Section> theSection_;
 
 
-		//- Forward Declarations
+		//- private functions and operators
 
 		TNB_SERIALIZATION(TnbShapePx_EXPORT);
 

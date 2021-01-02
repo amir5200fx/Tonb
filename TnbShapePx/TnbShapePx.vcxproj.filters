@@ -308,5 +308,14 @@
     <ClCompile Include="TnbLib\ShapePx\Entities\Surface\ShapePx_SurfaceIO.cxx">
       <Filter>TnbLib\ShapePx\Entities\Surface</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Spacing\ShapePx_Spacing.cxx">
+      <Filter>TnbLib\ShapePx\Spacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Spacing\ShapePx_SpacingIO.cxx">
+      <Filter>TnbLib\ShapePx\Spacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Spacing\Uniform\ShapePx_UniformSpacingIO.cxx">
+      <Filter>TnbLib\ShapePx\Spacing\Uniform</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -40,6 +40,14 @@ namespace tnbLib
 			: theRows_(std::move(theRows))
 		{}
 
+		auto NbColumns() const
+		{
+			if (theRows_.empty())
+			{
+				return (Standard_Integer)0;
+			}
+			return theRows_[0].NbPnts();
+		}
 
 		auto NbRows() const
 		{
