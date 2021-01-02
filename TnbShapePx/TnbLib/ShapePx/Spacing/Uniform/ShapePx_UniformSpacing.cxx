@@ -3,6 +3,26 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+tnbLib::ShapePx_UniformSpacing::ShapePx_UniformSpacing
+(
+	const std::shared_ptr<SectPx_Limits>& theLimits
+)
+	: ShapePx_Spacing(theLimits)
+{
+	// empty body
+}
+
+tnbLib::ShapePx_UniformSpacing::ShapePx_UniformSpacing
+(
+	const Standard_Integer theIndex, 
+	const word & theName, 
+	const std::shared_ptr<SectPx_Limits>& theLimits
+)
+	: ShapePx_Spacing(theIndex, theName, theLimits)
+{
+	// empty body
+}
+
 std::vector<Standard_Real> 
 tnbLib::ShapePx_UniformSpacing::Sections() const
 {

@@ -15,13 +15,44 @@ namespace tnbLib
 
 		Standard_Integer theNbSections_;
 
-	public:
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<ShapePx_Spacing>(*this);
+			ar & theNbSections_;
+		}
+
+	protected:
+
+
+		//- default constructors
 
 		ShapePx_UniformSpacing()
 		{}
 
-		ShapePx_UniformSpacing(const Standard_Integer theIndex, const word& theName);
+	public:
 
+		//- constructors
+
+		ShapePx_UniformSpacing
+		(
+			const std::shared_ptr<SectPx_Limits>& theLimits
+		);
+
+		ShapePx_UniformSpacing
+		(
+			const Standard_Integer theIndex,
+			const word& theName, 
+			const std::shared_ptr<SectPx_Limits>& theLimits
+		);
+
+
+		//- public functions and operators
 
 		Standard_Integer NbSections() const override
 		{
@@ -31,5 +62,7 @@ namespace tnbLib
 		std::vector<Standard_Real> Sections() const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::ShapePx_UniformSpacing);
 
 #endif // !_ShapePx_UniformSpacing_Header

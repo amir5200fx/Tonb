@@ -9,45 +9,50 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SectPx_Limits;
+
 	class ShapePx_Spacing
 		: public ShapePx_Entity
 	{
 
 		/*Private Data*/
 
-		Standard_Real theLower_;
-		Standard_Real theUpper_;
+		std::shared_ptr<SectPx_Limits> theLimits_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbShapePx_EXPORT);
+
 
 	protected:
 
-		template<class... _Types>
-		ShapePx_Spacing(_Types&&... _Args)
-			: ShapePx_Entity(_Args...)
-			, theLower_(0)
-			, theUpper_(1)
+		ShapePx_Spacing()
 		{}
+
+		TnbShapePx_EXPORT ShapePx_Spacing
+		(
+			const std::shared_ptr<SectPx_Limits>& theLimits
+		);
+
+		TnbShapePx_EXPORT ShapePx_Spacing
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			const std::shared_ptr<SectPx_Limits>& theLimits
+		);
 
 	public:
 
-		auto Lower() const
+		const auto& Limits() const
 		{
-			return theLower_;
+			return theLimits_;
 		}
 
-		auto Upper() const
-		{
-			return theUpper_;
-		}
+		Standard_Real Lower() const;
 
-		void SetLower(const Standard_Real x)
-		{
-			theLower_ = x;
-		}
-
-		void SetUpper(const Standard_Real x)
-		{
-			theUpper_ = x;
-		}
+		Standard_Real Upper() const;
 
 		Standard_Real NormalizedParameter(const Standard_Real x) const
 		{
@@ -59,5 +64,7 @@ namespace tnbLib
 		virtual std::vector<Standard_Real> Sections() const = 0;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::ShapePx_Spacing);
 
 #endif // !_ShapePx_Spacing_Header
