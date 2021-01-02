@@ -75,13 +75,9 @@ namespace tnbLib
 			return theParToProfile_;
 		}
 
-		TnbShapePx_EXPORT Standard_Real Lower() const;
+		//TnbShapePx_EXPORT Standard_Real MinLower() const;
 
-		TnbShapePx_EXPORT Standard_Real Upper() const;
-
-		TnbShapePx_EXPORT Standard_Real MinLower() const;
-
-		TnbShapePx_EXPORT Standard_Real MaxUpper() const;
+		//TnbShapePx_EXPORT Standard_Real MaxUpper() const;
 
 		TnbShapePx_EXPORT std::shared_ptr<ShapePx_Profile>
 			RemoveProfile

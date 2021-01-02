@@ -9,6 +9,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class ShapePx_Section;
+	class SectPx_Limits;
 
 	class ShapePx_Patch
 		: public ShapePx_Entity
