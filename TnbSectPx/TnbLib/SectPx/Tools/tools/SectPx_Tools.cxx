@@ -21,6 +21,8 @@
 #include <error.hxx>
 #include <OSstream.hxx>
 
+#include <list>
+
 Standard_Boolean
 tnbLib::SectPx_Tools::IsValidToJoint
 (
@@ -172,6 +174,36 @@ tnbLib::SectPx_Tools::MakeEdge
 	return std::move(seg);
 }
 
+std::shared_ptr<tnbLib::SectPx_Segment>
+tnbLib::SectPx_Tools::CommonSegment
+(
+	const std::shared_ptr<SectPx_Pole>& thePole0,
+	const std::shared_ptr<SectPx_Pole>& thePole1
+)
+{
+	if (thePole0 IS_EQUAL thePole1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the two poles are the same!" << endl
+			<< abort(FatalError);
+	}
+	auto[seg0, seg1] = RetrieveSegments(thePole0);
+	auto[seg2, seg3] = RetrieveSegments(thePole1);
+
+	if (seg1 IS_EQUAL seg2)
+	{
+		return std::move(seg1);
+	}
+	else if (seg3 IS_EQUAL seg0)
+	{
+		return std::move(seg0);
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
 namespace tnbLib
 {
 
@@ -301,6 +333,43 @@ tnbLib::SectPx_Tools::RetrieveSegments
 			segments.push_back(std::move(seg0));
 			segments.push_back(std::move(seg1));
 		}
+	}
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Segment>> 
+tnbLib::SectPx_Tools::RetrieveInnerSegments
+(
+	const std::vector<std::shared_ptr<SectPx_Pole>>& thePoles
+)
+{
+	if (thePoles.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "not enough poles to retrieve the inner segments" << endl
+			<< abort(FatalError);
+		return std::vector<std::shared_ptr<tnbLib::SectPx_Segment>>();
+	}
+	auto iter = thePoles.begin();
+	auto p0 = (*iter);
+	iter++;
+
+	std::vector<std::shared_ptr<SectPx_Segment>> segments;
+	segments.reserve(thePoles.size() - 1);
+	while (iter NOT_EQUAL thePoles.end())
+	{
+		auto p1 = (*iter);
+		auto segment = CommonSegment(p0, p1);
+		if (NOT segment)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "there is no common segment between two poles" << endl
+				<< abort(FatalError);
+		}
+		segments.push_back(std::move(segment));
+
+		iter++;
+		p0 = p1;
 	}
 	return std::move(segments);
 }
@@ -464,6 +533,17 @@ tnbLib::SectPx_Tools::RetrieveControlPoints
 	auto poles = TrackPoles(theSeg->Pole0(), theSeg->Pole1());
 	auto segments = RetrieveSegments(poles);
 
+	auto pnts = RetrieveControlPoints(segments);
+	return std::move(pnts);
+}
+
+std::vector<tnbLib::Pnt2d> 
+tnbLib::SectPx_Tools::RetrieveControlPoints
+(
+	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+)
+{
+	const auto& segments = theSegments;
 	const auto first = segments[0]->Pole0()->Coord();
 	std::vector<Pnt2d> Q;
 	Q.push_back(std::move(first));
@@ -527,6 +607,293 @@ tnbLib::SectPx_Tools::RetrieveControlPoints
 	return std::move(Q);
 }
 
+std::vector<Standard_Real> 
+tnbLib::SectPx_Tools::RetrieveWeights
+(
+	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+)
+{
+	const auto& segments = theSegments;
+	const auto first = segments[0]->Pole0()->Coord();
+	std::vector<Standard_Real> weights;
+	if (std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(segments[0]->Pole0()))
+	{
+		weights.push_back(1.0);
+	}
+	for (const auto& x : segments)
+	{
+		Debug_Null_Pointer(x);
+		if (x->HasController())
+		{
+			auto controller = x->Controller().lock();
+			Debug_Null_Pointer(controller);
+
+			const auto& cpts = controller->CPts();
+			Debug_Null_Pointer(cpts);
+
+			auto pts = cpts->Pts();
+
+			for (const auto& p : pts)
+			{
+				weights.push_back(1.0);
+			}
+		}
+		if (std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(x->Pole1()))
+		{
+			weights.push_back(1.0);
+		}
+	}
+	return std::move(weights);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Pole>> 
+tnbLib::SectPx_Tools::RetrievePoles
+(
+	const std::shared_ptr<SectPx_CurveQ>& theSeg
+)
+{
+	auto poles = TrackPoles(theSeg->Pole0(), theSeg->Pole1());
+	return std::move(poles);
+}
+
+namespace tnbLib
+{
+	Standard_Boolean IsInsiderOrBundary(const std::shared_ptr<SectPx_Pole>& thePole)
+	{
+		if (thePole->IsBoundary())
+		{
+			return Standard_True;
+		}
+		if (std::dynamic_pointer_cast<sectPxLib::Pole_Slider>(thePole))
+		{
+			return Standard_True;
+		}
+		return Standard_False;
+	}
+
+	std::shared_ptr<SectPx_CurveQ> TrackCurve(std::list<std::shared_ptr<SectPx_Segment>>& theList)
+	{
+		auto seg = theList.front();
+		theList.pop_front();
+		const auto& p0 = seg->Pole0();
+
+		while (theList.size())
+		{
+			if (IsInsiderOrBundary(seg->Pole1()))
+			{
+				auto curve = std::make_shared<SectPx_CurveQ>(p0, seg->Pole1());
+				return std::move(curve);
+			}
+			seg = theList.front();
+			theList.pop_front();
+		}
+		return nullptr;
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_CurveQ>> 
+tnbLib::SectPx_Tools::RetrieveSubCurveQ
+(
+	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+)
+{
+	const auto& p0 = theSegments[0]->Pole0();
+	const auto& p1 = theSegments[theSegments.size() - 1]->Pole1();
+	if (NOT IsInsiderOrBundary(p0))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the first pole must be boundary or slider" << endl
+			<< abort(FatalError);
+	}
+	if (NOT IsInsiderOrBundary(p1))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the last pole must be boundary or slider" << endl
+			<< abort(FatalError);
+	}
+
+	Standard_Integer k = 0;
+	std::list<std::shared_ptr<SectPx_Segment>> segList;
+	for (const auto& x : theSegments)
+	{
+		Debug_Null_Pointer(x);
+		segList.push_back(x);
+	}
+
+	std::vector<std::shared_ptr<SectPx_CurveQ>> curves;
+	while (segList.size())
+	{
+		auto curve = TrackCurve(segList);
+		if (NOT curve)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "unable to track the curve" << endl
+				<< abort(FatalError);
+		}
+		curves.push_back(std::move(curve));
+	}
+	return std::move(curves);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Pole>> 
+tnbLib::SectPx_Tools::RetrievePoles
+(
+	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+)
+{
+	std::vector<std::shared_ptr<SectPx_Pole>> poles;
+	poles.reserve(theSegments.size() + 1);
+	for (const auto& x : theSegments)
+	{
+		Debug_Null_Pointer(x);
+		const auto& p0 = x->Pole0();
+		poles.push_back(p0);		
+	}
+	poles.push_back(theSegments[theSegments.size() - 1]->Pole1());
+	return std::move(poles);
+}
+
+std::vector<std::pair<Standard_Real, Standard_Integer>>
+tnbLib::SectPx_Tools::KnotsNoInnerSlider
+(
+	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments,
+	const Standard_Integer theDegree,
+	const Standard_Real u0,
+	const Standard_Real u1
+)
+{
+	if (u1 <= u0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid boundary knot values" << endl
+			<< abort(FatalError);
+	}
+
+	auto poles = RetrievePoles(theSegments);
+	if (NOT IsInsiderOrBundary(poles[0]))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the first pole must be boundary or slider" << endl
+			<< abort(FatalError);
+	}
+	if (NOT IsInsiderOrBundary(poles[poles.size()-1]))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the last pole must be boundary or slider" << endl
+			<< abort(FatalError);
+	}
+	//- check for inner slider poles
+	for (size_t i = 1; i < poles.size() - 1; i++)
+	{
+		const auto& x = poles[i];
+		if (std::dynamic_pointer_cast<sectPxLib::Pole_Slider>(x))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "there must be no slider pole between the segments" << endl
+				<< abort(FatalError);
+		}
+	}
+	auto pnts = RetrieveControlPoints(theSegments);
+	if (pnts.size() <= theDegree)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid degree for the curve" << endl
+			<< "p = " << theDegree << endl
+			<< "n = " << pnts.size() << endl
+			<< abort(FatalError);
+	}
+	auto knots = Knots((Standard_Integer)pnts.size(), theDegree, u0, u1);
+	return std::move(knots);
+}
+
+std::vector<std::pair<Standard_Real, Standard_Integer>>  
+tnbLib::SectPx_Tools::Knots
+(
+	const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments,
+	const Standard_Integer theDegree
+)
+{
+	Debug_If_Condition(theSegments.empty());
+
+	auto subCurves = RetrieveSubCurveQ(theSegments);
+	Debug_If_Condition(subCurves.empty());
+
+	Standard_Real u0 = 0;
+	static const Standard_Real du = 1.0;
+	std::vector<std::pair<Standard_Real, Standard_Integer>> knots;
+	for (const auto& x : subCurves)
+	{
+		Debug_Null_Pointer(x);
+		auto poles = RetrievePoles(x);
+
+		auto segments = RetrieveInnerSegments(poles);
+
+		auto knot = KnotsNoInnerSlider(segments, theDegree, u0, u0 + du);
+		u0 += du;
+
+		Add(knots, knot);
+	}
+	return std::move(knots);
+}
+
+std::pair<TColStd_Array1OfReal, TColStd_Array1OfInteger> 
+tnbLib::SectPx_Tools::Knots
+(
+	const std::vector<std::pair<Standard_Real, Standard_Integer>>& theKnots
+)
+{
+	TColStd_Array1OfReal knots(1, (Standard_Integer)theKnots.size());
+	TColStd_Array1OfInteger mults(1, (Standard_Integer)theKnots.size());
+	Standard_Integer K = 0;
+	for (const auto& x : theKnots)
+	{
+		K++;
+		knots.SetValue(K, x.first);
+		mults.SetValue(K, x.second);
+	}
+	auto paired = std::make_pair(std::move(knots), std::move(mults));
+	return std::move(paired);
+}
+
+std::vector<std::pair<Standard_Real, Standard_Integer>> 
+tnbLib::SectPx_Tools::Knots
+(
+	const Standard_Integer theNbQ, 
+	const Standard_Integer theDegree,
+	const Standard_Real theU0, 
+	const Standard_Real theU1
+)
+{
+	if (theNbQ - 1 <= theDegree)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid degree for the curve" << endl
+			<< "p = " << theDegree << endl
+			<< "n = " << theNbQ << endl
+			<< abort(FatalError);
+	}
+	const auto u0 = theU0;
+	const auto u1 = theU1;
+	const auto n = theNbQ - 1;
+	const auto p = theDegree;
+	const auto nbKnots = n + p + 2;
+	const auto nbInners = nbKnots - 2 * (p + 1);
+	Debug_If_Condition(nbInners < 0);
+	const auto du = (u1 - u0) / (nbInners + 1);
+
+	std::vector<std::pair<Standard_Real, Standard_Integer>> Knots;
+	Knots.reserve(nbInners + 2);
+	for (size_t i = 0; i < nbInners + 2; i++)
+	{
+		auto u = u0 + i * du;
+		auto paired = std::make_pair(u, 1);
+		Knots.push_back(std::move(paired));
+	}
+	Knots[0].second = p + 1;
+	Knots[Knots.size() - 1].second = p + 1;
+	return std::move(Knots);
+}
+
 void tnbLib::SectPx_Tools::RemoveParentFromChildren
 (
 	const std::shared_ptr<SectPx_Parent>& theParent
@@ -563,4 +930,44 @@ void tnbLib::SectPx_Tools::disJiont
 {
 	Debug_Null_Pointer(theInterface);
 	theInterface->disJoint();
+}
+
+void tnbLib::SectPx_Tools::Add
+(
+	std::vector<std::pair<Standard_Real, Standard_Integer>>& theCurrent, 
+	const std::vector<std::pair<Standard_Real, Standard_Integer>>& theKnot
+)
+{
+	if (theKnot.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid knot vector" << endl
+			<< abort(FatalError);
+	}
+	if (theCurrent.empty())
+	{
+		theCurrent = theKnot;
+		return;
+	}
+	auto& Un = theCurrent[theCurrent.size() - 1];
+	auto U0 = theKnot[0];
+	if (Un.second NOT_EQUAL U0.second)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the two knot vectors are not the same degree" << endl
+			<< abort(FatalError);
+	}
+	Un.second -= 1;
+	std::vector<std::pair<Standard_Real, Standard_Integer>> knots;
+	knots.reserve(theCurrent.size() + theKnot.size() - 1);
+	for (const auto& x : theCurrent)
+	{
+		knots.push_back(std::move(x));
+	}
+
+	for (size_t i = 1; i < theKnot.size(); i++)
+	{		
+		knots.push_back(theKnot[i]);
+	}
+	theCurrent = std::move(knots);
 }

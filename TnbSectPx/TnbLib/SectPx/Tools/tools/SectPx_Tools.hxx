@@ -7,6 +7,9 @@
 #include <SectPx_Module.hxx>
 #include <SectPx_JoinPriority.hxx>
 
+#include <TColStd_Array1OfReal.hxx>
+#include <TColStd_Array1OfInteger.hxx>
+
 #include <vector>
 
 namespace tnbLib
@@ -66,6 +69,13 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_FrameRegistry>& theReg
 			);
 
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_Segment> 
+			CommonSegment
+			(
+				const std::shared_ptr<SectPx_Pole>& thePole0,
+				const std::shared_ptr<SectPx_Pole>& thePole1
+			);
+
 		//- the pole1 must be after the pole0
 		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pole>>
 			TrackPoles
@@ -75,7 +85,11 @@ namespace tnbLib
 			);
 
 		//- if the pole is boundary, the second segment is null
-		static TnbSectPx_EXPORT std::pair<std::shared_ptr<SectPx_Segment>, std::shared_ptr<SectPx_Segment>>
+		static TnbSectPx_EXPORT std::pair
+			<
+			std::shared_ptr<SectPx_Segment>, 
+			std::shared_ptr<SectPx_Segment>
+			>
 			RetrieveSegments
 			(
 				const std::shared_ptr<SectPx_Pole>& thePole
@@ -83,6 +97,13 @@ namespace tnbLib
 
 		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Segment>> 
 			RetrieveSegments
+			(
+				const std::vector<std::shared_ptr<SectPx_Pole>>& thePoles
+			);
+
+		//- the poles need to be sorted
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Segment>>
+			RetrieveInnerSegments
 			(
 				const std::vector<std::shared_ptr<SectPx_Pole>>& thePoles
 			);
@@ -108,7 +129,68 @@ namespace tnbLib
 		static TnbSectPx_EXPORT std::vector<Pnt2d>
 			RetrieveControlPoints
 			(
+				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+			);
+
+		static TnbSectPx_EXPORT std::vector<Pnt2d>
+			RetrieveControlPoints
+			(
 				const std::shared_ptr<SectPx_CurveQ>& theSeg
+			);
+
+		static TnbSectPx_EXPORT std::vector<Standard_Real> 
+			RetrieveWeights
+			(
+				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pole>>
+			RetrievePoles
+			(
+				const std::shared_ptr<SectPx_CurveQ>& theSeg
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_CurveQ>> 
+			RetrieveSubCurveQ
+			(
+				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pole>> 
+			RetrievePoles
+			(
+				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::pair<Standard_Real, Standard_Integer>> 
+			KnotsNoInnerSlider
+			(
+				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments, 
+				const Standard_Integer theDegree, 
+				const Standard_Real theU0 = 0.0, 
+				const Standard_Real theU1 = 1.0
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::pair<Standard_Real, Standard_Integer>> 
+			Knots
+			(
+				const std::vector<std::shared_ptr<SectPx_Segment>>& theSegments,
+				const Standard_Integer theDegree
+			);
+
+		static TnbSectPx_EXPORT std::pair<TColStd_Array1OfReal, TColStd_Array1OfInteger> 
+			Knots
+			(
+				const std::vector<std::pair<Standard_Real, Standard_Integer>>& theKnots
+			);
+
+		static TnbSectPx_EXPORT std::vector<std::pair<Standard_Real, Standard_Integer>> 
+			Knots
+			(
+				const Standard_Integer theNbQ, 
+				const Standard_Integer theDegree, 
+				const Standard_Real theU0,
+				const Standard_Real theU1
 			);
 
 		static TnbSectPx_EXPORT void RemoveParentFromChildren
@@ -116,7 +198,16 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Parent>& theParent
 		);
 
-		static void disJiont(const std::shared_ptr<SectPx_Interface>& theInterface);
+		static TnbSectPx_EXPORT void disJiont
+		(
+			const std::shared_ptr<SectPx_Interface>& theInterface
+		);
+
+		static TnbSectPx_EXPORT void Add
+		(
+			std::vector<std::pair<Standard_Real, Standard_Integer>>& theCurrent, 
+			const std::vector<std::pair<Standard_Real, Standard_Integer>>& theKnot
+		);
 
 	};
 }
