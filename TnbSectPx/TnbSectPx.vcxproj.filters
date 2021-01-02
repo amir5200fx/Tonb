@@ -1586,9 +1586,6 @@
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Interior\Corner\SectPx_Pole_CornerAdaptor.cxx">
       <Filter>TnbLib\SectPx\Entities\Pole\Interior\Corner</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfileIO.cxx">
-      <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\CurveQ\SectPx_CurveQ.cxx">
       <Filter>TnbLib\SectPx\Entities\CurveQ</Filter>
     </ClCompile>
@@ -1609,6 +1606,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Limits\SectPx_LimitsMakerIO.cxx">
       <Filter>TnbLib\SectPx\Makers\Limits</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfileIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

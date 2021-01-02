@@ -24,7 +24,7 @@ namespace tnbLib
 		SectPx_Limits()
 		{}
 
-		SectPx_Limits(const Standard_Integer theIndex, const word& theName);
+		TnbSectPx_EXPORT SectPx_Limits(const Standard_Integer theIndex, const word& theName);
 
 		const auto& Start() const
 		{
@@ -36,17 +36,17 @@ namespace tnbLib
 			return theEnd_;
 		}
 
-		void SetStart(const std::shared_ptr<SectPx_Par>& thePar);
+		TnbSectPx_EXPORT void SetStart(const std::shared_ptr<SectPx_Par>& thePar);
 
-		void SetEnd(const std::shared_ptr<SectPx_Par>& thePar);
+		TnbSectPx_EXPORT void SetEnd(const std::shared_ptr<SectPx_Par>& thePar);
 
-		Standard_Real Lower() const;
+		TnbSectPx_EXPORT Standard_Real Lower() const;
 
-		Standard_Real Upper() const;
+		TnbSectPx_EXPORT Standard_Real Upper() const;
 
-		word RegObjTypeName() const override;
+		TnbSectPx_EXPORT word RegObjTypeName() const override;
 
-		sectPxLib::regObjType RegObjType() const override;
+		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
 
 		//- override virtual functions from parent abstract class 
 
