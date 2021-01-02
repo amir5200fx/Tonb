@@ -10,6 +10,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_CurveQ;
 	class ShapePx_Spacing;
+	class ShapePx_Patch;
 
 	class ShapePx_Surface
 		: public ShapePx_Entity
@@ -17,8 +18,9 @@ namespace tnbLib
 
 		/*private Data*/
 
+		std::shared_ptr<ShapePx_Patch> thePatch_;
 		std::shared_ptr<SectPx_CurveQ> theCurve_;
-		std::shared_ptr<ShapePx_Spacing> theSpace_;
+		std::shared_ptr<ShapePx_Spacing> theSpace_;	
 
 
 		//- private functions and operators
@@ -43,6 +45,7 @@ namespace tnbLib
 
 		TnbShapePx_EXPORT ShapePx_Surface
 		(
+			const std::shared_ptr<ShapePx_Patch>& thePatch,
 			const std::shared_ptr<SectPx_CurveQ>& theCurve,
 			const std::shared_ptr<ShapePx_Spacing>& theSpace
 		);
@@ -51,12 +54,18 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
+			const std::shared_ptr<ShapePx_Patch>& thePatch,
 			const std::shared_ptr<SectPx_CurveQ>& theCurve, 
 			const std::shared_ptr<ShapePx_Spacing>& theSpace
 		);
 
 
 		//- public functions and operators
+
+		const auto& Patch() const
+		{
+			return thePatch_;
+		}
 
 		const auto& CurveQ() const
 		{
@@ -66,6 +75,14 @@ namespace tnbLib
 		const auto& Spacing() const
 		{
 			return theSpace_;
+		}
+
+		void SetPatch
+		(
+			const std::shared_ptr<ShapePx_Patch>& thePatch
+		)
+		{
+			thePatch_ = thePatch;
 		}
 
 		void SetCurve
