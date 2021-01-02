@@ -2,10 +2,12 @@
 
 #include <SectPx_TopoSegment.hxx>
 #include <SectPx_Tools.hxx>
+#include <SectPx_Pole.hxx>
 #include <ShapePx_Spacing.hxx>
 #include <ShapePx_Section.hxx>
 #include <ShapePx_ExtrudedPatch.hxx>
 #include <ShapePx_CtrlNet.hxx>
+#include <ShapePx_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -31,46 +33,45 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 			<< abort(FatalError);
 	}
 
+	if (NOT Curve())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no curve has been found!" << endl
+			<< abort(FatalError);
+	}
+
 	auto Xs = Spacing()->Sections();
-	const auto x0 = Patch()->Lower();
-	const auto x1 = Patch()->Upper();
+	const auto x0 = Spacing()->Lower();
+	const auto x1 = Spacing()->Upper();
 
 	//- update profiles before retrieving the values
 	Patch()->UpdateProfiles();
 
 	const auto& section = Patch()->Section();
 	Debug_Null_Pointer(section);
-	const auto nbProfiles = section->NbProfiles();
 
-	std::vector<std::shared_ptr<ShapePx_CtrlNet>> nets;
-	nets.reserve(nbProfiles);
-	for (auto& x : nets)
-	{
-		x = std::make_shared<ShapePx_CtrlNet>();
-		x->RowsRef().reserve(Xs.size());
-	}
+	auto net = std::make_shared<ShapePx_CtrlNet>();
+	net->RowsRef().reserve(Xs.size());
+
+	auto poles = section->RetrievePoles(Curve());
+	auto profile = SectPx_Tools::RetrieveInnerSegments(poles);
+
+	auto knots = SectPx_Tools::Knots(profile, 3);
+
+	net->KnotsRef() = std::move(knots);
 
 	for (auto x : Xs)
 	{
-		auto xs = x0 + Spacing()->NormalizedParameter(x)*(x1 - x0);
-		auto paraList = Patch()->RetrieveParValues(xs);
-
-		const auto& section = Patch()->Section();
-		Debug_Null_Pointer(section);
+		auto paraList = Patch()->RetrieveParValues(x);
 
 		section->SetValues(paraList);
 
-		auto profiles = section->RetrieveCurveQs();
+		auto Qs = SectPx_Tools::RetrieveControlPoints(profile);
+		auto Ws = SectPx_Tools::RetrieveWeights(profile);
 
-		Standard_Integer k = 0;
-		for (const auto& p : profiles)
-		{
-			Debug_Null_Pointer(p);
-			auto pnts = SectPx_Tools::RetrieveControlPoints(p);
-
-			auto& row = nets[k++]->RowsRef();
-			row.push_back(std::move(pnts));
-		}
+		auto paired = ShapePx_Tools::CtrlRow(Qs, Ws);
+		ShapePx_CtrlRow row(std::move(paired), x);
+		net->RowsRef().push_back(std::move(row));
 	}
 	Change_IsDone() = Standard_True;
 }

@@ -13,6 +13,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class ShapePx_CtrlNet;
+	class SectPx_CurveQ;
 
 	class ShapePx_Operator
 		: public Global_Done
@@ -20,7 +21,9 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::vector<std::shared_ptr<ShapePx_CtrlNet>> theNets_;
+		std::shared_ptr<SectPx_CurveQ> theCurve_;
+
+		std::shared_ptr<ShapePx_CtrlNet> theNet_;
 
 	protected:
 
@@ -28,39 +31,56 @@ namespace tnbLib
 		ShapePx_Operator()
 		{}
 
+		ShapePx_Operator
+		(
+			const std::shared_ptr<SectPx_CurveQ>& theCurve
+		)
+			: theCurve_(theCurve)
+		{}
+
 
 		auto& NetRef()
 		{
-			return theNets_;
+			return theNet_;
 		}
 
 		void SetNet
 		(
-			const std::vector<std::shared_ptr<ShapePx_CtrlNet>>& theNets
+			const std::shared_ptr<ShapePx_CtrlNet>& theNet
 		)
 		{
-			theNets_ = theNets;
+			theNet_ = theNet;
 		}
 
-		void SetNets
+		void SetNet
 		(
-			std::vector<std::shared_ptr<ShapePx_CtrlNet>>&& theNets
+			std::shared_ptr<ShapePx_CtrlNet>&& theNet
 		)
 		{
-			theNets_ = std::move(theNets);
+			theNet_ = std::move(theNet);
 		}
 
 	public:
 
-
-		const auto& Nets() const
+		const auto& Curve() const
 		{
-			return theNets_;
+			return theCurve_;
+		}
+
+		const auto& Net() const
+		{
+			return theNet_;
 		}
 
 		TnbShapePx_EXPORT virtual Standard_Boolean IsExtrude() const;
 
 		TnbShapePx_EXPORT virtual Standard_Boolean IsRevolve() const;
+
+		void SetCurve(const std::shared_ptr<SectPx_CurveQ>& theCurve)
+		{
+			theCurve_ = theCurve;
+		}
+
 	};
 }
 
