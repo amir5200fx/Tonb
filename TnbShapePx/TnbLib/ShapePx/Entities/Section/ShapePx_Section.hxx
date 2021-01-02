@@ -15,6 +15,7 @@ namespace tnbLib
 	class SectPx_TopoSegment;
 	class SectPx_CurveQ;
 	class SectPx_Par;
+	class SectPx_Pole;
 	class ShapePx_ParValue;
 
 	class ShapePx_Section
@@ -84,6 +85,8 @@ namespace tnbLib
 
 		TnbShapePx_EXPORT std::vector<std::shared_ptr<SectPx_CurveQ>>
 			RetrieveCurveQs() const;
+
+		std::vector<std::shared_ptr<SectPx_Pole>> RetrievePoles(const std::shared_ptr<SectPx_CurveQ>& theCurve) const;
 
 		void SetRegistry(const std::shared_ptr<SectPx_FrameRegistry>& theReg)
 		{

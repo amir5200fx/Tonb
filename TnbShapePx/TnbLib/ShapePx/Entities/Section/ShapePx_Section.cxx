@@ -5,6 +5,7 @@
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_ScatterRegistry.hxx>
 #include <ShapePx_ParValue.hxx>
+#include <SectPx_CurveQ.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -115,6 +116,16 @@ tnbLib::ShapePx_Section::RetrieveCurveQs() const
 	Debug_Null_Pointer(Registry());
 	auto segments = Registry()->RetrieveCurveQs();
 	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Pole>> 
+tnbLib::ShapePx_Section::RetrievePoles
+(
+	const std::shared_ptr<SectPx_CurveQ>& theCurve
+) const
+{
+	auto poles = SectPx_Tools::TrackPoles(theCurve->Pole0(), theCurve->Pole1());
+	return std::move(poles);
 }
 
 void tnbLib::ShapePx_Section::SetValues
