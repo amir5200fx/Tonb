@@ -4,6 +4,7 @@
 #include <SectPx_Edge.hxx>
 #include <SectPx_Pars.hxx>
 #include <SectPx_Pnts.hxx>
+#include <SectPx_Datums.hxx>
 #include <SectPx_FieldFuns.hxx>
 #include <SectPx_Makers.hxx>
 #include <SectPx_Frame.hxx>
@@ -101,6 +102,12 @@ tnbLib::appl::getConstPar(const par_t & p)
 			<< abort(FatalError);
 	}
 	return std::move(item);
+}
+
+TypeName_APPL coord_t
+tnbLib::appl::getCoord(const dtm_t & p)
+{
+	return p;
 }
 
 TypeName_APPL coord_t 
@@ -209,6 +216,12 @@ const TypeName_APPL pntMaker_t &
 tnbLib::appl::getPointMaker(const frame_t& f)
 {
 	return f->PointMaker();
+}
+
+const TypeName_APPL dtmMaker_t &
+tnbLib::appl::getDatumMaker(const frame_t& f)
+{
+	return f->DatumMaker();
 }
 
 const TypeName_APPL geoMaker_t & 
@@ -568,6 +581,20 @@ TypeName_APPL pnt_t
 tnbLib::appl::createEmpty(const pntMaker_t & m, const mastPnt_t & p)
 {
 	auto t = m->SelectPnt(m->CreateEmpty(p));
+	return std::move(t);
+}
+
+TypeName_APPL dtm_t 
+tnbLib::appl::createComponent(const dtmMaker_t & m, const par_t & x, const par_t & y)
+{
+	auto t = m->SelectPnt(m->CreateComponent(x, y));
+	return std::move(t);
+}
+
+TypeName_APPL dtm_t 
+tnbLib::appl::createField(const dtmMaker_t & m, const geoMap_t & g)
+{
+	auto t = m->SelectPnt(m->CreateField(g));
 	return std::move(t);
 }
 
