@@ -4,11 +4,12 @@
 
 #include <Geo_Traits.hxx>
 #include <Global_Done.hxx>
-#include <Entity_StaticData.hxx>
-#include <Entity_Connectivity.hxx>
+#include <Entity_Polygon.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 
 #include <memory>
+
+#include <Geom2d_Curve.hxx>
 
 namespace tnbLib
 {
@@ -22,7 +23,7 @@ namespace tnbLib
 		//typedef typename down_cast_point<typename CurveTypeR::ptType>::type Point;
 		typedef typename cascadeLib::pt_type_from_curve<CurveTypeR>::ptType Point;
 
-		typedef Entity_StaticData<Point, connectivity::dual> chain;
+		typedef Entity_Polygon<Point> chain;
 		typedef std::shared_ptr<chain> chain_ptr;
 
 		typedef Geo_ApprxCurve_Info info;
@@ -66,17 +67,17 @@ namespace tnbLib
 			return theCurve_;
 		}
 
-		Standard_Real FirstParameter() const
+		auto FirstParameter() const
 		{
 			return theFirst_;
 		}
 
-		Standard_Real LastParameter() const
+		auto LastParameter() const
 		{
 			return theLast_;
 		}
 
-		Standard_Boolean IsLoaded() const
+		auto IsLoaded() const
 		{
 			return (Standard_Boolean)theCurve_;
 		}

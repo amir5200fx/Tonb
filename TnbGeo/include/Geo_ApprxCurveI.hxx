@@ -3,6 +3,8 @@
 #include <Geo_Tools.hxx>
 #include <Geo_ItemSort.hxx>
 #include <Geo_ApprxCurve_Traits.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 #include <Standard_Failure.hxx>
 namespace tnbLib
@@ -47,103 +49,197 @@ namespace tnbLib
 
 		typedef std::vector<Segment> segList;
 
+		auto CalcRandomX
+		(
+			const Standard_Integer nbPnts, 
+			const Standard_Real x0,
+			const Standard_Real x1
+		)
+		{
+			Debug_If_Condition(nbPnts <= 0);
+			std::vector<Standard_Real> xs(nbPnts);
+			for (auto& x : xs)
+			{
+				x = NumAlg_Random::Randreal(x0, x1);
+			}
+			return std::move(xs);
+		}
+
+		auto UniformDistb
+		(
+			const Standard_Integer nbPnts, 
+			const Standard_Real x0, 
+			const Standard_Real x1
+		)
+		{
+			Debug_If_Condition(nbPnts <= 0);
+			std::vector<Standard_Real> xs(nbPnts);
+			const auto dx = (x0 - x1) / nbPnts;
+			Standard_Integer i = 0;
+			for (auto& x : xs)
+			{
+				x = (x0 + 0.5*dx) + i * dx;
+				Debug_If_Condition(x >= x1);
+				i++;
+			}
+			return std::move(xs);
+		}
+
 		template<class CurveType, bool RandSamples = true>
-		struct CalcApproximate
+		struct CalcXs
 		{
-			static Standard_Real _
+			static auto _
 			(
-				const CurveType& theCurve,
-				const Segment& theSeg,
-				const Standard_Integer theNbSamples,
-				Standard_Real& length
+				const Standard_Integer nbPnts,
+				const Standard_Real x0,
+				const Standard_Real x1
 			)
 			{
-				std::vector<Standard_Real> params(theNbSamples);
-				for (auto& x : params)
-				{
-					x = NumAlg_Random::Randreal(theSeg.theX0, theSeg.theX1);
-				}
-
-				const auto P0 = theCurve.Value(theSeg.theX0);
-				const auto P1 = theCurve.Value(theSeg.theX1);
-
-				length = P0.SquareDistance(P1);
-
-				Standard_Real maxDis = 0;
-
-				for (const auto x : params)
-				{
-					const auto Q = theCurve.Value(x);
-					const auto dis = Geo_Tools::SquareDistance_cgal(Q, P0, P1);
-
-					if (dis > maxDis)
-						maxDis = dis;
-				}
-				return maxDis;
+				auto xs = CalcRandomX(nbPnts, x0, x1);
+				return std::move(xs);
 			}
 		};
 
 		template<class CurveType>
-		struct CalcApproximate<CurveType, false>
+		struct CalcXs<CurveType, false>
 		{
-			static Standard_Real _
+			static auto _
 			(
-				const CurveType& theCurve,
-				const Segment& theSeg,
-				const Standard_Integer theNbSamples,
-				Standard_Real& length
+				const Standard_Integer nbPnts,
+				const Standard_Real x0,
+				const Standard_Real x1
 			)
 			{
-				std::vector<Standard_Real> params(theNbSamples);
-				auto dx = (Standard_Real)1.0 / (Standard_Real)(theNbSamples + 1);
-				Standard_Integer K = 1;
-				for (auto& x : params)
-				{
-					x = K * dx;
-				}
-
-				const auto P0 = theCurve.Value(theSeg.theX0);
-				const auto P1 = theCurve.Value(theSeg.theX1);
-
-				length = P0.SquareDistance(P1);
-
-				Standard_Real maxDis = 0;
-
-				for (const auto x : params)
-				{
-					const auto Q = theCurve.Value(x);
-					const auto dis = Geo_Tools::SquareDistance_cgal(Q, P0, P1);
-
-					if (dis > maxDis)
-						maxDis = dis;
-				}
-				return maxDis;
+				auto xs = UniformDistb(nbPnts, x0, x1);
+				return std::move(xs);
 			}
 		};
 
 		template<class CurveType>
-		Standard_Real CalcAngle
+		auto CalcSamples
+		(
+			const CurveType& theCurve,
+			const std::vector<Standard_Real>& xs		
+		)
+		{
+			std::vector<typename Geo_ApprxCurve_Traits<CurveType>::ptType> samples;
+			samples.reserve(xs.size());
+			for (const auto x : xs)
+			{
+				auto p = theCurve.Value(x);
+				samples.push_back(std::move(p));
+			}
+			return std::move(samples);
+		}
+
+		template<class CurveType>
+		auto CalcSegPoints
 		(
 			const CurveType& theCurve,
 			const Segment& theSeg
 		)
 		{
-			typename Geo_ApprxCurve_Traits<CurveType>::ptType pt0, pt1;
-			typename Geo_ApprxCurve_Traits<CurveType>::vtType vec0, vec1;
+			Debug_If_Condition(theSeg.theX0 IS_EQUAL theSeg.theX1);
+			const auto P0 = theCurve.Value(theSeg.theX0);
+			const auto P1 = theCurve.Value(theSeg.theX1);
 
-			theCurve.D1(theSeg.theX0, pt0, vec0);
-			theCurve.D1(theSeg.theX1, pt1, vec1);
+			auto t = std::make_pair(std::move(P0), std::move(P1));
+			return std::move(t);
+		}
 
+		template<class CurveType>
+		Standard_Real CalcSqDist
+		(
+			const std::pair<typename Geo_ApprxCurve_Traits<CurveType>::ptType, typename Geo_ApprxCurve_Traits<CurveType>::ptType>& theSeg
+		)
+		{
+			const auto& p0 = theSeg.first;
+			const auto& p1 = theSeg.second;
+			return p0.SquareDistance(p1);
+		}
+
+		template<class CurveType>
+		Standard_Real CalcApproximate
+		(
+			const std::pair<typename Geo_ApprxCurve_Traits<CurveType>::ptType, typename Geo_ApprxCurve_Traits<CurveType>::ptType>& theSeg,
+			const std::vector<typename Geo_ApprxCurve_Traits<CurveType>::ptType>& theSamples
+		)
+		{
+			const auto& p0 = theSeg.first;
+			const auto& p1 = theSeg.second;
+
+			Standard_Real maxDis = 0;
+			for (const auto& x : theSamples)
+			{
+				auto dis = Geo_Tools::SquareDistance_cgal(x, p0, p1);
+				if (dis > maxDis)
+					maxDis = dis;
+			}
+			return maxDis;
+
+		}
+
+		template<class CurveType>
+		auto CalcAngle
+		(
+			const std::pair<typename Geo_ApprxCurve_Traits<CurveType>::ptType, typename Geo_ApprxCurve_Traits<CurveType>::ptType>& theSeg,
+			const typename Geo_ApprxCurve_Traits<CurveType>::ptType& p
+		)
+		{
+			const auto& p0 = theSeg.first;
+			const auto& p1 = theSeg.second;
+
+			typename Geo_ApprxCurve_Traits<CurveType>::vtType vt(p0, p1);
+			Standard_Real a0 = 0;
+			Standard_Real a1 = 0;
 			try
 			{
-				typename Geo_ApprxCurve_Traits<CurveType>::vtType vt(pt0, pt1);
-
-				return MAX(vt.Angle(vec0), vt.Angle(vec1));
+				typename Geo_ApprxCurve_Traits<CurveType>::vtType v0(p0, p);
+				a0 = vt.Angle(v0);
 			}
 			catch (const Standard_Failure&)
 			{
-				return 0;
+				a0 = 0;
 			}
+
+			try
+			{
+				typename Geo_ApprxCurve_Traits<CurveType>::vtType v0(p, p1);
+				a1 = vt.Angle(v0);
+			}
+			catch (const std::exception&)
+			{
+				a1 = 0;
+			}
+
+			return std::max(a0, a1);
+		}
+
+		template<class CurveType>
+		Standard_Real CalcMaxAngle
+		(
+			const std::pair<typename Geo_ApprxCurve_Traits<CurveType>::ptType, typename Geo_ApprxCurve_Traits<CurveType>::ptType>& theSeg,
+			const std::vector<typename Geo_ApprxCurve_Traits<CurveType>::ptType>& theSamples
+		)
+		{
+			const auto& p0 = theSeg.first;
+			const auto& p1 = theSeg.second;
+
+			typename Geo_ApprxCurve_Traits<CurveType>::vtType vt(p0, p1);
+			typename Geo_ApprxCurve_Traits<CurveType>::ptType pt;
+
+			Standard_Real maxD = 0;
+			for (const auto& x : theSamples)
+			{
+				auto d0 = p0.Distance(x);
+				auto d1 = p1.Distance(x);
+				if (d0 + d1 > maxD)
+				{
+					maxD = d0 + d1;
+					pt = x;
+				}
+			}
+			return CalcAngle<CurveType>(theSeg, pt);
 		}
 
 		template<class CurveType, bool RandSamples>
@@ -188,12 +284,20 @@ namespace tnbLib
 				return;
 			}
 
-			Standard_Real sqDis;
-			auto approx =
-				GeoLib::CalcApproximate<CurveType, RandSamples>::_(theCurve, theSeg, theNbSamples, sqDis);
+			auto segPnts = GeoLib::CalcSegPoints(theCurve, theSeg);
+			auto sqDis = GeoLib::CalcSqDist<Geom2d_Curve>(segPnts);
 
 			if (sqDis <= theMinSizeSQ)
 				return;
+
+			auto samples =
+				GeoLib::CalcSamples
+				(
+					theCurve,
+					GeoLib::CalcXs<CurveType, RandSamples>::_(theNbSamples, theSeg.theX0, theSeg.theX1)
+				);
+
+			auto approx = GeoLib::CalcApproximate<Geom2d_Curve>(segPnts, samples);
 
 			if (theApprox*sqDis < approx)
 			{
@@ -218,7 +322,7 @@ namespace tnbLib
 				return;
 			}
 
-			auto angle = GeoLib::CalcAngle<CurveType>(theCurve, theSeg);
+			auto angle = GeoLib::CalcMaxAngle<Geom2d_Curve>(segPnts, samples);
 			if (theAngle < angle)
 			{
 				Subdivide<CurveType, RandSamples>
@@ -283,10 +387,8 @@ namespace tnbLib
 
 		theChain_ = std::make_shared<chain>();
 		auto& Pts = theChain_->Points();
-		auto& Indices = theChain_->Connectivity();
 
 		Pts.reserve(Segments.size() + 2);
-		Indices.resize(Segments.size() + 1);
 
 		const auto& curve = *Curve();
 		Pts.push_back(curve.Value(FirstParameter()));
@@ -298,16 +400,6 @@ namespace tnbLib
 		}
 
 		Pts.push_back(curve.Value(LastParameter()));
-
-		Standard_Integer K = 1;
-		for (auto& x : Indices)
-		{
-			x.Value(0) = K;
-			x.Value(1) = K + 1;
-
-			++K;
-		}
-
 		Change_IsDone() = Standard_True;
 	}
 

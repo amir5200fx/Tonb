@@ -27,3 +27,23 @@ void tnbLib::sysLib::init_gl_approx_curve_info()
 	info3d.SetApprox(0.001);
 	info3d.SetAngle(2.0);
 }
+
+namespace tnbLib
+{
+
+	class RunTimeApprxCurveInfo
+	{
+
+		/*Private Data*/
+
+	public:
+
+		RunTimeApprxCurveInfo()
+		{
+			sysLib::init_gl_approx_curve_info();
+		}
+	};
+
+	TnbGeo_EXPORT RunTimeApprxCurveInfo runTimeApprxCurveInfo;
+}
+
