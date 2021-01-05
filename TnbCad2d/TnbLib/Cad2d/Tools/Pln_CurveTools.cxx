@@ -382,7 +382,7 @@ tnbLib::Pln_CurveTools::MakeParbArc
 }
 
 Handle(Geom2d_Curve)
-tnbLib::Pln_CurveTools::MakeParabArc
+tnbLib::Pln_CurveTools::MakeParbArc
 (
 	const gp_Parab2d & theParab,
 	const Pnt2d & theP0,

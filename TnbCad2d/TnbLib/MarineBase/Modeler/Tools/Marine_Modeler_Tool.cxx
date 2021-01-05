@@ -468,7 +468,7 @@ tnbLib::marineLib::Modeler_Tools::MakeParabArc
 	const curveType t
 )
 {
-	auto geom = Pln_CurveTools::MakeParabArc(theParab, theP0, theP1);
+	auto geom = Pln_CurveTools::MakeParbArc(theParab, theP0, theP1);
 	if (geom)
 	{
 		auto edge =

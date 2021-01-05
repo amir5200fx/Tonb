@@ -156,7 +156,7 @@ namespace tnbLib
 			);
 
 		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
-			MakeParabArc
+			MakeParbArc
 			(
 				const gp_Parab2d& theParab,
 				const Pnt2d& theP0,
