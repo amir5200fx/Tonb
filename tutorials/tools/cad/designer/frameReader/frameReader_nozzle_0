@@ -1,0 +1,9 @@
+setVerbose(true);
+
+loadFrame("myProfile");
+
+setParameter("par_throat_loc_field", 0.5);
+setParameter("inlet_radius", 0.3);
+setParameter("par_inlet_offset_field", 0.5);
+
+drawPlt("myProfile.plt");

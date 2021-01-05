@@ -1,0 +1,74 @@
+var x0 = createConstant("x0_const", 0);
+
+var par_ri = createFixed("inlet_radius", 0.1);
+var par_length = createFixed("total_length", 8.0);
+var par_ro = createFixed("outlet_radius", 1.0);
+
+var bnd0 = createOuterPoint("Q0", x0, par_ri);
+var bnd1 = createOuterPoint("Q5", par_length, par_ro);
+
+var bnd0_x = createXReaderField("bnd0_x_field", getCoord(bnd0));
+var bnd1_x = createXReaderField("bnd1_x_field", getCoord(bnd1));
+var bnd0_y = createYReaderField("bnd0_y_field", getCoord(bnd0));
+var bnd1_y = createYReaderField("bnd1_y_field", getCoord(bnd1));
+
+var zeroPar = createConstant("zeroPar", 0);
+var onePar = createConstant("onePar",1.0);
+
+var zeroField = createUniformField("zeroField", zeroPar);
+var oneField = createUniformField("oneField", onePar);
+ 
+var par_throat_loc_field = createFixed("par_throat_loc_field", 0.1);
+var throat_loc_field = createLinearFormField("throat_loc_field", bnd0_x, bnd1_x, par_throat_loc_field);
+var par_throat_loc = createFree("par_throat_loc", throat_loc_field);
+var par_throat_radius = createFixed("throat_radius", 0.05);
+
+var throat_datum = createDatum("throatDatum", par_throat_loc, par_throat_radius);
+
+var throat_datum_x = createXReaderField("throat_datum_x_field", getCoord(throat_datum));
+var throat_datum_y = createYReaderField("throat_datum_y_field", getCoord(throat_datum));
+
+
+var par_inlet_offset_field = createFixed("par_inlet_offset_field", 0.1);
+var inlet_offset_field = createLinearFormField("inlet_offset_field", bnd0_x, throat_datum_x, par_inlet_offset_field);
+var par_inlet_offset_x = createFree("par_inlet_offset_x", inlet_offset_field);
+var par_inlet_offset_y = createFree("par_inlet_offset_y", bnd0_y);
+var corner0 = createInnerPoint("Q1", par_inlet_offset_x, par_inlet_offset_y);
+
+var corner0_x_field = createXReaderField("corner0_x_field", getCoord(corner0));
+
+var par_throat_offset_1_x_field = createFixed("par_throat_offset_1_x_field", 0.1);
+var throat_offset_1_x_field = createLinearFormField("throat_offset_1_x_field", throat_datum_x, corner0_x_field, par_throat_offset_1_x_field);
+var par_throat_offset_1_x = createFree("par_throat_offset_1_x", throat_offset_1_x_field);
+var par_throat_offset_1_y = createFree("par_throat_offset_1_y", throat_datum_y);
+var corner1 = createInnerPoint("Q2", par_throat_offset_1_x, par_throat_offset_1_y);
+
+
+var par_outlet_offset_x_field = createFixed("par_outlet_offset_x_field ", 0.1);
+var outlet_offset_x_field = createLinearFormField("par_outlet_offset_x_field", bnd1_x, throat_datum_x, par_outlet_offset_x_field);
+var par_outlet_offset_y_field = createFixed("par_outlet_offset_y_field", 0.0);
+var outlet_offset_y_field = createLinearFormField("outlet_offset_y_field", bnd1_y, throat_datum_y, par_outlet_offset_y_field);
+var par_outlet_offset_x = createFree("par_outlet_offset_x", outlet_offset_x_field);
+var par_outlet_offset_y = createFree("par_outlet_offset_y", outlet_offset_y_field);
+var corner3 = createInnerPoint("Q4", par_outlet_offset_x, par_outlet_offset_y);
+
+var corner3_x_field = createXReaderField("corner3_x_field", getCoord(corner3));
+
+var par_throat_offset_2_field = createFixed("par_throat_offset_2", 0.1);
+var throat_offset_2_x_field = createLinearFormField("throat_offset_2_x_field", throat_datum_x, corner3_x_field, par_throat_offset_2_field);
+var par_throat_offset_2_x = createFree("par_throat_offset_2_x", throat_offset_2_x_field);
+var par_throat_offset_2_y = createFree("par_throat_offset_2_y", throat_datum_y);
+var corner2 = createInnerPoint("Q3", par_throat_offset_2_x, par_throat_offset_2_y);
+
+var myProfile = createCustomProfile(bnd0, bnd1);
+var edges_corner0 = myProfile.importPoint(corner0, myProfile.selectEdge(46));
+var edges_corner1 = myProfile.importPoint(corner1, retrieveRightEdge(edges_corner0));
+var edges_corner2 = myProfile.importPoint(corner2, retrieveRightEdge(edges_corner1));
+var edges_corner3 = myProfile.importPoint(corner3, retrieveRightEdge(edges_corner2));
+
+printRegistry();
+printFixedParameters();
+printPoints();
+
+drawPlt("myProfile.plt");
+saveTo("myProfile");
