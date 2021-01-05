@@ -955,17 +955,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge = 
-				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::Modeler_Tools::CurveType::displacer);	
+				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::curveType::displacer);	
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeSegment(p0, p1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -983,17 +983,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeSegment(p0, ang, l, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1011,17 +1011,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircArc(p0, p1, p2, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1039,17 +1039,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircArc(p0, v0, p1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1068,17 +1068,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircArc(c, ang0, ang1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1096,17 +1096,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircArc(c, p0, p1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1124,17 +1124,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeElipsArc(e, ang0, ang1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1152,17 +1152,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeElipsArc(e, p0, p1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1180,17 +1180,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeHyprArc(h, ang0, ang1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1208,17 +1208,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeHyprArc(h, p0, p1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1236,17 +1236,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeParbArc(par, ang0, ang1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1264,17 +1264,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeParabArc(par, p0, p1, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1294,17 +1294,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircle(c, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircle(c, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircle(c, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1323,17 +1323,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1351,17 +1351,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircle(p0, p1, p2, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1379,17 +1379,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircle(c, r, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1407,17 +1407,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeCircle(c, p0, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1435,17 +1435,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeEllipse(e, marineLib::curveType::tank);
 		}
 		else
 		{
@@ -1473,17 +1473,17 @@ namespace tnbLib
 		if (wp->IsHull())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::Modeler_Tools::CurveType::displacer);
+				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::curveType::displacer);
 		}
 		else if (wp->IsSail())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::Modeler_Tools::CurveType::sail);
+				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::curveType::sail);
 		}
 		else if (wp->IsTank())
 		{
 			edge =
-				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::Modeler_Tools::CurveType::tank);
+				marineLib::Modeler_Tools::MakeEllipse(s0, s1, c, marineLib::curveType::tank);
 		}
 		else
 		{
