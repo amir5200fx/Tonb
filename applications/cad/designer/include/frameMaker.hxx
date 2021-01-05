@@ -40,6 +40,7 @@ namespace tnbLib
 		TnbFrameMaker_EXPORT free_t getFreePar(const par_t& p);
 		TnbFrameMaker_EXPORT const_t getConstPar(const par_t& p);
 
+		TnbFrameMaker_EXPORT coord_t getCoord(const dtm_t& p);
 		TnbFrameMaker_EXPORT coord_t getCoord(const pnt_t& p);
 		TnbFrameMaker_EXPORT coord_t getCoord(const coord_t& p);
 
@@ -64,6 +65,7 @@ namespace tnbLib
 
 		TnbFrameMaker_EXPORT const parMaker_t& getParameterMaker(const frame_t& f);
 		TnbFrameMaker_EXPORT const pntMaker_t& getPointMaker(const frame_t& f);
+		TnbFrameMaker_EXPORT const dtmMaker_t& getDatumMaker(const frame_t& f);
 		TnbFrameMaker_EXPORT const geoMaker_t& getGeometricMapMaker(const frame_t& f);
 		TnbFrameMaker_EXPORT const cmpPrfMaker_t& getCmpProfileMaker(const frame_t& f);
 		TnbFrameMaker_EXPORT const fieldMaker_t& getFieldMaker(const frame_t& f);
@@ -134,6 +136,9 @@ namespace tnbLib
 		TnbFrameMaker_EXPORT pnt_t createInnerOffset(const pntMaker_t& m, const Pnt2d& p);
 		TnbFrameMaker_EXPORT pnt_t createField(const pntMaker_t& m, const geoMap_t& g);
 		TnbFrameMaker_EXPORT pnt_t createEmpty(const pntMaker_t& m, const mastPnt_t& p);
+
+		TnbFrameMaker_EXPORT dtm_t createComponent(const dtmMaker_t& m, const par_t& x, const par_t& y);
+		TnbFrameMaker_EXPORT dtm_t createField(const dtmMaker_t& m, const geoMap_t& g);
 
 		/*geometric map maker*/
 		TnbFrameMaker_EXPORT geoMap_t createLinearIntrpl(const geoMaker_t& m, const coord_t& q0, const coord_t& q1, const par_t& p);

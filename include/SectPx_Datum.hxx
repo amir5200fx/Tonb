@@ -33,6 +33,10 @@ namespace tnbLib
 
 	public:
 
+		TnbSectPx_EXPORT virtual Standard_Boolean IsComponent() const;
+
+		TnbSectPx_EXPORT virtual Standard_Boolean IsGeoField() const;
+
 		TnbSectPx_EXPORT Standard_Boolean IsDatum() const override;
 
 		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
