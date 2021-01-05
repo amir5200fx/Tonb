@@ -5,4 +5,9 @@
       <UniqueIdentifier>{fddb47ab-c063-4df5-8fc1-d164728156b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="frameReader.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
