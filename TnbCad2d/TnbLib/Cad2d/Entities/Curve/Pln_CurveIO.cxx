@@ -5,13 +5,15 @@
 #include <istream>
 
 #include <Geom2d_Curve.hxx>
+#include <fstream>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Pln_Curve)
 {
 	ar & boost::serialization::base_object<Global_Indexed>(*this);
 	ar & boost::serialization::base_object<Global_Named>(*this);
 
-	std::stringstream st;
+	std::ostringstream st;
+	st.precision(16);
 	GeomTools::Write(Geometry(), st);
 
 	std::string s = st.str();
