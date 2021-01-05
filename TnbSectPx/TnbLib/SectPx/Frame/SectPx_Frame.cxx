@@ -22,6 +22,9 @@ tnbLib::SectPx_Frame::EntityMaker::EntityMaker
 	Pnt = std::make_shared<maker::Point>(theFrameReg);
 	Debug_Null_Pointer(Pnt);
 
+	Dtm = std::make_shared<maker::Datum>(theFrameReg);
+	Debug_Null_Pointer(Dtm);
+
 	GeoMap = std::make_shared<maker::GeometricMap>(theFrameReg);
 	Debug_Null_Pointer(GeoMap);
 

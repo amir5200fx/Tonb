@@ -11,6 +11,7 @@ namespace tnbLib
 		// Forward Declarations
 		class Parameter;
 		class Point;
+		class Datum;
 		class GeometricMap;
 		class CmptProfile;
 		class FieldFun;

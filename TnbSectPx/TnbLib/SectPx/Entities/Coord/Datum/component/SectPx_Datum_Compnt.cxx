@@ -8,10 +8,26 @@
 
 const char* tnbLib::sectPxLib::Datum_Compnt::typeName_ = "datum_compnt";
 
+tnbLib::sectPxLib::Datum_Compnt::Datum_Compnt
+(
+	const Standard_Integer theIndex, 
+	const word & theName
+)
+	: SectPx_Datum(theIndex, theName)
+{
+	// empty body
+}
+
 tnbLib::word 
 tnbLib::sectPxLib::Datum_Compnt::RegObjTypeName() const
 {
 	return typeName_;
+}
+
+Standard_Boolean 
+tnbLib::sectPxLib::Datum_Compnt::IsComponent() const
+{
+	return Standard_True;
 }
 
 Standard_Real 

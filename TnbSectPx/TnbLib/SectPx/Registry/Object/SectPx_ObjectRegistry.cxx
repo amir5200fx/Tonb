@@ -91,7 +91,7 @@ void tnbLib::SectPx_ObjectRegistry::Add
 	}
 
 	Debug_Null_Pointer(Scatter());
-	Scatter()->ImportToScatterMap(theObj);
+	Scatter()->ImportToScatterMap(obj);
 }
 
 tnbLib::SectPx_ObjectRegistry::SectPx_ObjectRegistry

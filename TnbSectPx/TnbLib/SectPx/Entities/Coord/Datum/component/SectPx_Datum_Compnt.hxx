@@ -24,12 +24,16 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
-			template<class... _Types>
-			Datum_Compnt(_Types&&... _Args)
-				: SectPx_Datum(_Args...)
+			Datum_Compnt()
 			{}
+
+			TnbSectPx_EXPORT Datum_Compnt
+			(
+				const Standard_Integer theIndex,
+				const word& theName
+			);
 
 
 			const auto& X() const
@@ -53,6 +57,8 @@ namespace tnbLib
 			);
 
 			TnbSectPx_EXPORT word RegObjTypeName() const override;
+
+			TnbSectPx_EXPORT Standard_Boolean IsComponent() const override;
 
 			//- override virtual functions from coord abstract class
 

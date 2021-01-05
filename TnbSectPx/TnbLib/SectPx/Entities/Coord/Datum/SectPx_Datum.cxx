@@ -1,6 +1,18 @@
 #include <SectPx_Datum.hxx>
 
 Standard_Boolean 
+tnbLib::SectPx_Datum::IsComponent() const
+{
+	return Standard_False;
+}
+
+Standard_Boolean 
+tnbLib::SectPx_Datum::IsGeoField() const
+{
+	return Standard_False;
+}
+
+Standard_Boolean 
 tnbLib::SectPx_Datum::IsDatum() const
 {
 	return Standard_True;

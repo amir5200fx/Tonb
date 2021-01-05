@@ -448,6 +448,9 @@
     <Filter Include="TnbLib\SectPx\Makers\Limits">
       <UniqueIdentifier>{475b13ec-fa18-4706-97d9-c3fd2f048899}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Datum">
+      <UniqueIdentifier>{1e60c6be-35d4-4c21-b3d9-e8d4dd011e02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -974,6 +977,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Limits\SectPx_LimitsMaker.hxx">
       <Filter>TnbLib\SectPx\Makers\Limits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Datum\SectPx_DatumMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Datum</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\SectPx_Datums.hxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Datum</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\SectPx_DatumFwd.hxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Datum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1609,6 +1621,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Extrude\SectPx_ExtrProfileIO.cxx">
       <Filter>TnbLib\SectPx\Entities\Extrude</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Datum\SectPx_DatumMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Datum</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Datum\SectPx_DatumMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Datum</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

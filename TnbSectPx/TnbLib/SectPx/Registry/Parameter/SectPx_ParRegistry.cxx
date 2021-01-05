@@ -11,7 +11,7 @@ void tnbLib::SectPx_ParRegistry::CheckObjType
 	const char * funcName
 ) const
 {
-	if (NOT theObj->IsFrameRegObj())
+	if (theObj->IsFrameRegObj())
 	{
 		FatalErrorIn(funcName)
 			<< "the object has not valid type" << endl

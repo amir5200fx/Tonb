@@ -6,6 +6,16 @@
 
 const char* tnbLib::sectPxLib::Datum_GeoField::typeName_ = "datum_geoField";
 
+tnbLib::sectPxLib::Datum_GeoField::Datum_GeoField
+(
+	const Standard_Integer theIndex, 
+	const word & theName
+)
+	: SectPx_Datum(theIndex, theName)
+{
+	// empty body
+}
+
 void tnbLib::sectPxLib::Datum_GeoField::SetGeoMap
 (
 	const std::shared_ptr<SectPx_GeoMap>& theMap
@@ -18,6 +28,12 @@ tnbLib::word
 tnbLib::sectPxLib::Datum_GeoField::RegObjTypeName() const
 {
 	return typeName_;
+}
+
+Standard_Boolean 
+tnbLib::sectPxLib::Datum_GeoField::IsGeoField() const
+{
+	return Standard_True;
 }
 
 Standard_Real 

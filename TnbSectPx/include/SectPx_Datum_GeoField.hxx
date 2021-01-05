@@ -26,12 +26,16 @@ namespace tnbLib
 
 		public:
 
-			static const char* typeName_;
+			static TnbSectPx_EXPORT const char* typeName_;
 
-			template<class... _Types>
-			Datum_GeoField(_Types&&... _Args)
-				: SectPx_Datum(_Args...)
+			Datum_GeoField()
 			{}
+
+			TnbSectPx_EXPORT Datum_GeoField
+			(
+				const Standard_Integer theIndex, 
+				const word& theName
+			);
 
 			const auto& GeoMap() const
 			{
@@ -44,6 +48,8 @@ namespace tnbLib
 			);
 
 			TnbSectPx_EXPORT word RegObjTypeName() const override;
+
+			TnbSectPx_EXPORT Standard_Boolean IsGeoField() const override;
 
 			//- override virtual functions from coord abstract class
 

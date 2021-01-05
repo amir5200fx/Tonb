@@ -12,5 +12,6 @@
 #include <SectPx_FieldFunMaker.hxx>
 #include <SectPx_TopoProfileMaker.hxx>
 #include <SectPx_InterfaceMaker.hxx>
+#include <SectPx_DatumMaker.hxx>
 
 #endif // !_SectPx_Makers_Header
