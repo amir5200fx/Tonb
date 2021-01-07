@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{fddb47ab-c063-4df5-8fc1-d164728156b7}</UniqueIdentifier>
+      <UniqueIdentifier>{b08c8727-fb64-494f-ba2e-29f7c039d0e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="frameReader.cxx">
+    <ClCompile Include="sectionTunner.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

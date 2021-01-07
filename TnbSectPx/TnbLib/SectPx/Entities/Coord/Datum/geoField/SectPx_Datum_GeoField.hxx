@@ -97,4 +97,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Datum_GeoField);
+
 #endif // !_SectPx_Datum_GeoField_Header

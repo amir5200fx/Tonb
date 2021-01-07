@@ -15,3 +15,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::sectPxLib::Datum_Compnt)
 	ar & theX_;
 	ar & theY_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::sectPxLib::Datum_Compnt);

@@ -103,4 +103,6 @@ namespace tnbLib
 
 #include <SectPx_Datum_CompntI.hxx>
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::sectPxLib::Datum_Compnt);
+
 #endif // !_SectPx_Datum_Compnt_Header

@@ -499,8 +499,11 @@ namespace tnbLib
 
 	void setProfiles(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([](const appl::pnt_t& p0, const appl::pnt_t& p1)-> auto {auto t = createCustomProfile(p0, p1); return std::move(t); }), "createCustomProfile");
+		mod->add(chaiscript::fun([](const std::string& name, const appl::pnt_t& p0, const appl::pnt_t& p1)-> auto {auto t = createCustomProfile(p0, p1); return std::move(t); }), "createCustomProfile");
+
 		mod->add(chaiscript::fun([](const appl::profileMaker_t& m, int id)-> auto {auto t = appl::selectEdge(m, id); return std::move(t); }), "selectEdge");
-		mod->add(chaiscript::fun([](const appl::profileMaker_t& m, const appl::pnt_t& p, const appl::edge_t& ed)-> auto{auto t = appl::importPnt(m, p, ed); return std::move(t); }), "importEdge");
+		mod->add(chaiscript::fun([](const appl::profileMaker_t& m, const appl::pnt_t& p, const appl::edge_t& ed)-> auto{auto t = appl::importPnt(m, p, ed); return std::move(t); }), "importPoint");
 		mod->add(chaiscript::fun([](const std::pair<appl::edge_t, appl::edge_t>& p)->auto {auto t = appl::retrieveLeftEdge(p); return std::move(t); }), "retrieveLeftEdge");
 		mod->add(chaiscript::fun([](const std::pair<appl::edge_t, appl::edge_t>& p)->auto {auto t = appl::retrieveRightEdge(p); return std::move(t); }), "retrieveRightEdge");
 	}
