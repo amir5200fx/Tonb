@@ -14,6 +14,15 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Geo_MetricFunction<Point>>(*this);
+		}
+
 	protected:
 
 		GeoMetricFun_nonUniform()
@@ -35,7 +44,20 @@ namespace tnbLib
 		)
 			: Geo_MetricFunction<Point>(theIndex, theName, theBoundingBox)
 		{}
+
+
+	public:
+
+		//- public functions and operators
+
+
 	};
 }
+
+#include <GeoMetricFun2d_nonUniform.hxx>
+#include <GeoMetricFun3d_nonUniform.hxx>
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::GeoMetricFun2d_nonUniform);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::GeoMetricFun3d_nonUniform);
 
 #endif // !_GeoMetricFun_nonUniform_Header

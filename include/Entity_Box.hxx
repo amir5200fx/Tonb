@@ -373,4 +373,7 @@ namespace tnbLib
 #include <Entity_BoxI.hxx>
 #include <Entity_BoxIO.hxx>
 
+#include <Entity2d_Box.hxx>
+#include <Entity3d_Box.hxx>
+
 #endif // !_Entity_Box_Header
