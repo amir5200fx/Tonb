@@ -33,7 +33,13 @@ namespace tnbLib
 
 	public:
 
-		static void Section(const std::shared_ptr<Pln_Wire>& theWire, const marineLib::curveType target, const marineLib::curveType to);
+		static TnbMarine_EXPORT void 
+			Section
+			(
+				const std::shared_ptr<Pln_Wire>& theWire,
+				const marineLib::curveType target,
+				const marineLib::curveType to
+			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
 			IsOuter
