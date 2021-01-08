@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{00CF3B69-2A41-4038-8E73-FDE99DF1478A}</ProjectGuid>
+    <RootNamespace>TnbMesh</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\T;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\G;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\T;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\G;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Traits;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Node;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Entity;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Edge\Surface;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Edge\AnIso;$(ProjectDir)TnbLib\Aft\Entities\Facet\Traits;$(ProjectDir)TnbLib\Aft\Entities\Facet\Iso;$(ProjectDir)TnbLib\Aft\Entities\Facet\AnIso;$(ProjectDir)TnbLib\Aft\Entities\Facet;$(ProjectDir)TnbLib\Aft\Entities\Element\Traits;$(ProjectDir)TnbLib\Aft\Entities\Element\Surface;$(ProjectDir)TnbLib\Aft\Entities\Element\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Element\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Element\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Element\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Element;$(ProjectDir)TnbLib\Aft\Entities\Edge\Traits;$(ProjectDir)TnbLib\Aft\Entities\Edge\Surface;$(ProjectDir)TnbLib\Aft\Entities\Edge\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Edge\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Edge\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Edge\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Edge;$(ProjectDir)TnbLib\Aft\Entities\Node\Traits;$(ProjectDir)TnbLib\Aft\Entities\Node\Surface;$(ProjectDir)TnbLib\Aft\Entities\Node\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Node\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Node\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Node\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Node\Adaptor;$(ProjectDir)TnbLib\Aft\Entities\Node\Type;$(ProjectDir)TnbLib\Aft\Entities\Node;$(ProjectDir)TnbLib\Aft\Cad\Surface;$(ProjectDir)TnbLib\Aft\Cad\Curve\AnIso;$(ProjectDir)TnbLib\Aft\Cad\Curve\Iso\3d;$(ProjectDir)TnbLib\Aft\Cad\Curve\Iso\2d;$(ProjectDir)TnbLib\Aft\Cad\Curve;$(ProjectDir)TnbLib\Base\Cad\Wire;$(ProjectDir)TnbLib\Base\Cad\PlnRegion\Traits;$(ProjectDir)TnbLib\Base\Cad\PlnRegion;$(ProjectDir)TnbLib\Base\Cad\Patch\Traits;$(ProjectDir)TnbLib\Base\Cad\Patch;$(ProjectDir)TnbLib\Base\Cad\Curve\Traits;$(ProjectDir)TnbLib\Base\Cad\Curve\Base;$(ProjectDir)TnbLib\Base\Cad\Curve;$(ProjectDir)TnbLib\Base\MetricFunction\Background\3d;$(ProjectDir)TnbLib\Base\MetricFunction\Background\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\AnIso\3d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\AnIso\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\Iso\3d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\Iso\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\Info;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background;$(ProjectDir)TnbLib\Base\Geom\Mesh\Data\3d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Data\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Data;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge\Position;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge\TEdge;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge;$(ProjectDir)TnbLib\Base\Entities\Boundary\Facet;$(ProjectDir)TnbLib\Base\Entities\Boundary\Merge;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node\Position;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node\TNode;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node;$(ProjectDir)TnbLib\Base\Entities\Node\Traits;$(ProjectDir)TnbLib\Base\Entities\Node\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Node\3d;$(ProjectDir)TnbLib\Base\Entities\Node\2d;$(ProjectDir)TnbLib\Base\Entities\Node;$(ProjectDir)TnbLib\Base\Entities\Facet\Traits;$(ProjectDir)TnbLib\Base\Entities\Facet\3d;$(ProjectDir)TnbLib\Base\Entities\Facet;$(ProjectDir)TnbLib\Base\Entities\Element\Type;$(ProjectDir)TnbLib\Base\Entities\Element\Traits;$(ProjectDir)TnbLib\Base\Entities\Element\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Element\3d;$(ProjectDir)TnbLib\Base\Entities\Element\2d;$(ProjectDir)TnbLib\Base\Entities\Element;$(ProjectDir)TnbLib\Base\Entities\Edge\Traits;$(ProjectDir)TnbLib\Base\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Edge\3d;$(ProjectDir)TnbLib\Base\Entities\Edge\2d;$(ProjectDir)TnbLib\Base\Entities\Edge;$(ProjectDir)TnbLib\Base\Entities\Entity;$(ProjectDir)TnbLib\Base\Traits;$(ProjectDir)TnbLib\Base\module;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>TnbMesh_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib;boost_serialization-vc141-mt-gd-x64-1_75.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\T;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\G;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Edge\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\T;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\G;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Surface\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\Traits;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\bNode;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Boundary\Node\Traits;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Node;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Entity;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Edge\Surface;$(ProjectDir)TnbLib\Aft\Entities\Front\Identifiers\Edge\AnIso;$(ProjectDir)TnbLib\Aft\Entities\Facet\Traits;$(ProjectDir)TnbLib\Aft\Entities\Facet\Iso;$(ProjectDir)TnbLib\Aft\Entities\Facet\AnIso;$(ProjectDir)TnbLib\Aft\Entities\Facet;$(ProjectDir)TnbLib\Aft\Entities\Element\Traits;$(ProjectDir)TnbLib\Aft\Entities\Element\Surface;$(ProjectDir)TnbLib\Aft\Entities\Element\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Element\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Element\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Element\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Element;$(ProjectDir)TnbLib\Aft\Entities\Edge\Traits;$(ProjectDir)TnbLib\Aft\Entities\Edge\Surface;$(ProjectDir)TnbLib\Aft\Entities\Edge\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Edge\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Edge\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Edge\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Edge;$(ProjectDir)TnbLib\Aft\Entities\Node\Traits;$(ProjectDir)TnbLib\Aft\Entities\Node\Surface;$(ProjectDir)TnbLib\Aft\Entities\Node\AnIso\3d;$(ProjectDir)TnbLib\Aft\Entities\Node\AnIso\2d;$(ProjectDir)TnbLib\Aft\Entities\Node\Iso\3d;$(ProjectDir)TnbLib\Aft\Entities\Node\Iso\2d;$(ProjectDir)TnbLib\Aft\Entities\Node\Adaptor;$(ProjectDir)TnbLib\Aft\Entities\Node\Type;$(ProjectDir)TnbLib\Aft\Entities\Node;$(ProjectDir)TnbLib\Aft\Cad\Surface;$(ProjectDir)TnbLib\Aft\Cad\Curve\AnIso;$(ProjectDir)TnbLib\Aft\Cad\Curve\Iso\3d;$(ProjectDir)TnbLib\Aft\Cad\Curve\Iso\2d;$(ProjectDir)TnbLib\Aft\Cad\Curve;$(ProjectDir)TnbLib\Base\Cad\Wire;$(ProjectDir)TnbLib\Base\Cad\PlnRegion\Traits;$(ProjectDir)TnbLib\Base\Cad\PlnRegion;$(ProjectDir)TnbLib\Base\Cad\Patch\Traits;$(ProjectDir)TnbLib\Base\Cad\Patch;$(ProjectDir)TnbLib\Base\Cad\Curve\Traits;$(ProjectDir)TnbLib\Base\Cad\Curve\Base;$(ProjectDir)TnbLib\Base\Cad\Curve;$(ProjectDir)TnbLib\Base\MetricFunction\Background\3d;$(ProjectDir)TnbLib\Base\MetricFunction\Background\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\AnIso\3d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\AnIso\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\Iso\3d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\Iso\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background\Info;$(ProjectDir)TnbLib\Base\Geom\Mesh\Background;$(ProjectDir)TnbLib\Base\Geom\Mesh\Data\3d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Data\2d;$(ProjectDir)TnbLib\Base\Geom\Mesh\Data;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge\Position;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge\TEdge;$(ProjectDir)TnbLib\Base\Entities\Boundary\Edge;$(ProjectDir)TnbLib\Base\Entities\Boundary\Facet;$(ProjectDir)TnbLib\Base\Entities\Boundary\Merge;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node\Position;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node\TNode;$(ProjectDir)TnbLib\Base\Entities\Boundary\Node;$(ProjectDir)TnbLib\Base\Entities\Node\Traits;$(ProjectDir)TnbLib\Base\Entities\Node\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Node\3d;$(ProjectDir)TnbLib\Base\Entities\Node\2d;$(ProjectDir)TnbLib\Base\Entities\Node;$(ProjectDir)TnbLib\Base\Entities\Facet\Traits;$(ProjectDir)TnbLib\Base\Entities\Facet\3d;$(ProjectDir)TnbLib\Base\Entities\Facet;$(ProjectDir)TnbLib\Base\Entities\Element\Type;$(ProjectDir)TnbLib\Base\Entities\Element\Traits;$(ProjectDir)TnbLib\Base\Entities\Element\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Element\3d;$(ProjectDir)TnbLib\Base\Entities\Element\2d;$(ProjectDir)TnbLib\Base\Entities\Element;$(ProjectDir)TnbLib\Base\Entities\Edge\Traits;$(ProjectDir)TnbLib\Base\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\Base\Entities\Edge\3d;$(ProjectDir)TnbLib\Base\Entities\Edge\2d;$(ProjectDir)TnbLib\Base\Entities\Edge;$(ProjectDir)TnbLib\Base\Entities\Entity;$(ProjectDir)TnbLib\Base\Traits;$(ProjectDir)TnbLib\Base\module;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>TnbMesh_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib;boost_serialization-vc141-mt-x64-1_75.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Aft\Cad\Curve\Iso\2d\Aft2d_PlnCurve.hxx" />
+    <ClInclude Include="TnbLib\Aft\Cad\Curve\Iso\2d\Aft2d_PlnCurveFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\2d\Aft2d_SegmentEdgeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\3d\Aft3d_SegmentEdgeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode\Aft2d_BndEdgeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\AnIso\bNode\Aft3d_BndEdgeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\2d\Aft2d_SegmentEdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\3d\Aft3d_SegmentEdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode\Aft2d_BndEdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Iso\bNode\Aft3d_BndEdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode\Aft2d_BndEdgeSurfaceFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\G\Aft2d_gSegmentEdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\T\Aft2d_tSegmentEdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\2d\Aft2d_CornerNodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\2d\Aft2d_SegmentNodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\3d\Aft3d_CornerNodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\3d\Aft3d_FacetNodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\3d\Aft3d_SegmentNodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\bNode\Aft2d_BndNodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\bNode\Aft3d_BndNodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\AnIso\Traits\Aft2d_TBndNodeAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\2d\Aft2d_CornerNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\2d\Aft2d_SegmentNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\3d\Aft3d_CornerNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\3d\Aft3d_FacetNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\3d\Aft3d_SegmentNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\bNode\Aft2d_BndNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\bNode\Aft3d_BndNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Iso\Traits\Aft2d_TBndNodeTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\bNode\Aft2d_BndNodeSurfaceFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\G\Aft2d_gCornerNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\G\Aft2d_gSegmentNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\Traits\Aft2d_gBndNodeSurfaceTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\Traits\Aft2d_tBndNodeSurfaceTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tCornerNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tSegmentNodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Traits\Aft2d_BndNodeAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Traits\Aft2d_BndNodeSurfaceTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Traits\Aft2d_BndNodeTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Aft_Edge.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Aft_EdgeI.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Aft_Edges.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Aft_EdgesFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\AnIso\2d\Aft2d_EdgeAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\AnIso\2d\Aft2d_EdgeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\AnIso\3d\Aft3d_EdgeAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\AnIso\3d\Aft3d_EdgeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Iso\2d\Aft2d_Edge.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Iso\2d\Aft2d_EdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Iso\3d\Aft3d_Edge.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Iso\3d\Aft3d_EdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Surface\Aft2d_EdgeSurface.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Surface\Aft2d_EdgeSurfaceFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Traits\Aft2d_EdgeAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Traits\Aft2d_EdgeSurfaceTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Traits\Aft2d_EdgeTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Traits\Aft3d_EdgeAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Traits\Aft3d_EdgeTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Aft_Element.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Aft_ElementFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Aft_Elements.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Aft_ElementsFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\AnIso\2d\Aft2d_ElementAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\AnIso\2d\Aft2d_ElementAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\AnIso\3d\Aft3d_ElementAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\AnIso\3d\Aft3d_ElementAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Iso\2d\Aft2d_Element.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Iso\2d\Aft2d_ElementFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Iso\3d\Aft3d_Element.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Iso\3d\Aft3d_ElementFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Surface\Aft2d_ElementSurface.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Surface\Aft2d_ElementSurfaceFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Traits\Aft2d_ElementAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Traits\Aft2d_ElementSurfaceTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Traits\Aft2d_ElementTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Traits\Aft3d_ElementAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Traits\Aft3d_ElementTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Aft_Facet.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Aft_FacetFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Aft_Facets.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Aft_FacetsFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\AnIso\Aft3d_FacetAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\AnIso\Aft3d_FacetAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Iso\Aft3d_Facet.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Iso\Aft3d_FacetFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Traits\Aft3d_FacetAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Traits\Aft3d_FacetTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Front\Identifiers\Edge\AnIso\Aft2d_EdgeIdentifierAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Front\Identifiers\Edge\Surface\Aft2d_EdgeIdentifierSurface.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Front\Identifiers\Entity\Aft_EntityIdentifier.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Front\Identifiers\Node\Aft_NodeIdentifier.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Adaptor\Aft_NodeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Adaptor\Aft_NodeAdaptorTypes.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Aft_Node.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Aft_NodeI.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Aft_Nodes.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Aft_NodesFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\AnIso\2d\Aft2d_NodeAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\AnIso\2d\Aft2d_NodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\AnIso\3d\Aft3d_NodeAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\AnIso\3d\Aft3d_NodeAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Iso\2d\Aft2d_Node.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Iso\2d\Aft2d_NodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Iso\3d\Aft3d_Node.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Iso\3d\Aft3d_NodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Surface\Aft2d_NodeSurface.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Surface\Aft2d_NodeSurfaceFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Traits\Aft2d_NodeAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Traits\Aft2d_NodeSurfaceTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Traits\Aft2d_NodeTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Traits\Aft3d_NodeAnIsoTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Traits\Aft3d_NodeTraits.hxx" />
+    <ClInclude Include="TnbLib\Aft\Entities\Node\Type\Aft_NodeType.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Curve\Base\Mesh_PlnCurve_Base.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Curve\Mesh_PlnCurve.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Curve\Mesh_PlnCurveI.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Curve\Traits\Mesh_PlnCurve_Traits.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Patch\Mesh_PatchTemplate.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Patch\Traits\Mesh_PatchTemplate_Traits.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\PlnRegion\Mesh_PlnRegion.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\PlnRegion\Mesh_PlnRegionI.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\PlnRegion\Traits\Mesh_PlnRegion_Traits.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Wire\Mesh_PlnWire.hxx" />
+    <ClInclude Include="TnbLib\Base\Cad\Wire\Mesh_PlnWireI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\Adaptor\Mesh_BndEdgeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\Adaptor\Mesh_BndEdgeAdaptorI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\Adaptor\Mesh_BndEdgeGeomAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\Mesh_BndEdge.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\Mesh_BndEdgeI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\Position\Mesh_BndEdge_Position.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\TEdge\Mesh_TBndEdge.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Edge\TEdge\Mesh_TBndEdgeI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Merge\Mesh_BndMergeAlg.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Node\Adaptor\Mesh_BndNodeGeomAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Node\Mesh_BndNode.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Node\Position\Mesh_BndNode_Position.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Node\TNode\Mesh_TBndNode.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Node\TNode\Mesh_TBndNodeI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\2d\Mesh2d_Edge.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\2d\Mesh2d_EdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\3d\Mesh3d_Edge.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\3d\Mesh3d_EdgeFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\Adaptor\Mesh_EdgeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\Adaptor\Mesh_EdgeAdaptorTypes.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\Mesh_Edge.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\Mesh_EdgeI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\Traits\Mesh2d_EdgeTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Edge\Traits\Mesh3d_EdgeTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\2d\Mesh2d_Element.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\2d\Mesh2d_ElementFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\3d\Mesh3d_Element.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\3d\Mesh3d_ElementFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\Adaptor\Mesh_ElementAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\Adaptor\Mesh_ElementAdaptorTypes.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\Mesh_Element.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\Mesh_ElementI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\Traits\Mesh2d_ElementTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\Traits\Mesh3d_ElementTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Element\Type\Mesh_ElementType.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_EntityAdaptorM.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_NamedEntity.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Facet\3d\Mesh3d_Facet.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Facet\3d\Mesh3d_FacetFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Facet\Mesh_Facet.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Facet\Mesh_FacetFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Facet\Traits\Mesh3d_FacetTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\2d\Mesh2d_Node.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\2d\Mesh2d_NodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\3d\Mesh3d_Node.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\3d\Mesh3d_NodeFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\Adaptor\Mesh_NodeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\Adaptor\Mesh_NodeAdaptorTypes.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\Mesh_Node.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\Mesh_NodeI.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\Traits\Mesh2d_NodeTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Entities\Node\Traits\Mesh3d_NodeTraits.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_MetricBackground.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_MetricBackgroundFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\GeoMesh_Background.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\GeoMesh_BackgroundI.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Info\GeoMesh_Background_Info.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Iso\2d\GeoMesh2d_Background.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Iso\2d\GeoMesh2d_BackgroundFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Iso\3d\GeoMesh3d_Background.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Iso\3d\GeoMesh3d_BackgroundFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Data\2d\GeoMesh2d_Data.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Data\2d\GeoMesh2d_DataFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Data\3d\GeoMesh3d_Data.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Data\3d\GeoMesh3d_DataFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Data\GeoMesh_Data.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Data\GeoMesh_DataI.hxx" />
+    <ClInclude Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_Background.hxx" />
+    <ClInclude Include="TnbLib\Base\module\Mesh_Module.hxx" />
+    <ClInclude Include="TnbLib\Base\Traits\Mesh_TypeTraits.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Aft\Cad\Curve\Iso\2d\Aft2d_PlnCurve.cxx" />
+    <ClCompile Include="TnbLib\Aft\Entities\Front\Identifiers\Edge\AnIso\Aft2d_EdgeIdentifierAnIsoIO.cxx" />
+    <ClCompile Include="TnbLib\Aft\Entities\Front\Identifiers\Edge\Surface\Aft2d_EdgeIdentifierSurfaceIO.cxx" />
+    <ClCompile Include="TnbLib\Aft\Entities\Node\Adaptor\Aft_NodeAdaptorIO.cxx" />
+    <ClCompile Include="TnbLib\Aft\Entities\Node\Aft_Node.cxx" />
+    <ClCompile Include="TnbLib\Aft\Entities\Node\AnIso\2d\Aft2d_NodeAnIso.cxx" />
+    <ClCompile Include="TnbLib\Base\Cad\Wire\Mesh_PlnWire.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Boundary\Node\TNode\Mesh_TBndNode.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Edge\2d\Mesh2d_Edge.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Edge\2d\Mesh2d_EdgeIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Edge\3d\Mesh3d_EdgeIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Edge\Adaptor\Mesh_EdgeAdaptorIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Element\2d\Mesh2d_Element.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Element\2d\Mesh2d_ElementIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Element\3d\Mesh3d_ElementIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Element\Adaptor\Mesh_ElementAdaptorIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Element\Mesh_Element.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Facet\3d\Mesh3d_Facet.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Facet\3d\Mesh3d_FacetIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Node\2d\Mesh2d_NodeIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Node\3d\Mesh3d_NodeIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Entities\Node\Adaptor\Mesh_NodeAdaptorIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_MetricBackground.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\Iso\2d\GeoMesh2d_Background.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\Iso\3d\GeoMesh3d_Background.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Data\2d\GeoMesh2d_Data.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Data\2d\GeoMesh2d_DataIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Data\3d\GeoMesh3d_Data.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Data\3d\GeoMesh3d_DataIO.cxx" />
+    <ClCompile Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundIO.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
