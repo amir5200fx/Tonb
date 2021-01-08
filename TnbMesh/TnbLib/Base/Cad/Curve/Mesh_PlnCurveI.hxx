@@ -1,0 +1,52 @@
+#pragma once
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+namespace tnbLib
+{
+
+	template<class CurveType, class SizeFun, class MetricFun>
+	std::shared_ptr<Entity2d_Polygon>
+		Mesh_PlnCurve<CurveType, SizeFun, MetricFun>::Discrete
+		(
+			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
+		) const
+	{
+		if (NOT Curve())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no curve has been loaded" << endl
+				<< abort(FatalError);
+		}
+		auto mesh =
+			base::Discrete
+			(
+				Curve()->Geometry(),
+				Curve()->FirstParameter(), Curve()->LastParameter(),
+				theInfo);
+		return std::move(mesh);
+	}
+
+	template<class CurveType, class SizeFun, class MetricFun>
+	std::shared_ptr<Entity2d_Polygon>
+		Mesh_PlnCurve<CurveType, SizeFun, MetricFun>::Mesh
+		(
+			const std::shared_ptr<metricMap>& theMetricMap,
+			const std::shared_ptr<Mesh_Curve_Info>& theInfo
+		) const
+	{
+		if (NOT Curve())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no curve has been loaded" << endl
+				<< abort(FatalError);
+		}
+		auto mesh =
+			base::Mesh<SizeFun, MetricFun>
+			(
+				Curve()->Geometry(),
+				Curve()->FirstParameter(),
+				Curve()->LastParameter(), theMetricMap, theInfo
+				);
+		return std::move(mesh);
+	}
+}
