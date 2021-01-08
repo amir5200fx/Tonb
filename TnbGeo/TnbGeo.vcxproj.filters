@@ -409,6 +409,15 @@
     <Filter Include="TnbLib\IO\Tecplot">
       <UniqueIdentifier>{dcd33330-1976-4c9e-abd7-ec29157257a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Function\Metric\Background">
+      <UniqueIdentifier>{1c540038-74d1-4fe8-a1cd-c39e9a1bfa4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Metric\nonUniform\2d">
+      <UniqueIdentifier>{d5fb93bd-4596-4461-9728-3808e8a605d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Metric\nonUniform\3d">
+      <UniqueIdentifier>{c92560b8-2a35-45a3-a139-6abd51df2315}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -917,6 +926,24 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_Polygon.hxx">
       <Filter>TnbLib\Geo\Entities\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Metric\Background\GeoMetricFun_Background.hxx">
+      <Filter>TnbLib\Geo\Function\Metric\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Metric\Background\GeoMetricFun_BackgroundI.hxx">
+      <Filter>TnbLib\Geo\Function\Metric\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniform.hxx">
+      <Filter>TnbLib\Geo\Function\Metric\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniform.hxx">
+      <Filter>TnbLib\Geo\Function\Metric\nonUniform\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Metric\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Metric\nonUniform\3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

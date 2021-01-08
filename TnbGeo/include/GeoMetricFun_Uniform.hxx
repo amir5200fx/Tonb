@@ -27,6 +27,16 @@ namespace tnbLib
 		metric theMetric_;
 
 
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_MetricFunction<Point>>(*this);
+			ar & theMetric_;
+		}
+
+
 		metric& ChangeMetric()
 		{
 			return theMetric_;

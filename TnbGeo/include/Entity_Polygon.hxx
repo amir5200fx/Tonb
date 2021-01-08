@@ -135,4 +135,7 @@ namespace tnbLib
 
 #include <Entity_PolygonI.hxx>
 
+#include <Entity2d_Polygon.hxx>
+#include <Entity3d_Polygon.hxx>
+
 #endif // !_Entity_Polygon_Header

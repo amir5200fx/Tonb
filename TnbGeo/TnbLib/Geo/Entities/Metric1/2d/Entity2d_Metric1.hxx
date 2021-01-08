@@ -3,6 +3,8 @@
 #define _Entity2d_Metric1_Header
 
 #include <Standard_TypeDef.hxx>
+
+#include <Global_Serialization.hxx>
 #include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
 #include <armadillo.h>
@@ -23,6 +25,19 @@ namespace tnbLib
 		Standard_Real theA_;
 		Standard_Real theB_;
 		Standard_Real theC_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & theA_;
+			ar & theB_;
+			ar & theC_;
+		}
 
 	public:
 

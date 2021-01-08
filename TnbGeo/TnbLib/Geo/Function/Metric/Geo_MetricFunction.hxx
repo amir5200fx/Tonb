@@ -5,6 +5,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Global_Done.hxx>
+#include <Global_Serialization.hxx>
 #include <Entity_Box.hxx>
 #include <Geo_MetricFunctionTraits.hxx>
 
@@ -21,6 +22,20 @@ namespace tnbLib
 		/*Private Data*/
 
 		Entity_Box<Point> theBoundingBox_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+			ar & boost::serialization::base_object<Global_Done>(*this);
+			ar & theBoundingBox_;
+		}
 
 	protected:
 
@@ -69,5 +84,11 @@ namespace tnbLib
 		}
 	};
 }
+
+#include <Geo2d_MetricFunction.hxx>
+#include <Geo3d_MetricFunction.hxx>
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo2d_MetricFunction);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo3d_MetricFunction);
 
 #endif // !_Geo_MetricFunction_Header
