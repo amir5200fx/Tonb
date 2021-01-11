@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <NumAlg_Module.hxx>
 
 namespace tnbLib
@@ -27,6 +28,21 @@ namespace tnbLib
 
 		Standard_Integer theMaxNbIterations_;
 		Standard_Integer theNbInitIterations_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & IsConverged_;
+			ar & theTolerance_;
+			ar & theResult_;
+			ar & theMaxNbIterations_;
+			ar & theNbInitIterations_;
+		}
 
 	protected:
 
