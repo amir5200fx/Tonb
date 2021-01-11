@@ -3,6 +3,8 @@
 #define _SectPx_SegmentAdaptor_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <SectPx_Module.hxx>
 #include <Pnt2d.hxx>
 
 #include <memory>
@@ -20,6 +22,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::weak_ptr<SectPx_SegmentController> theController_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 
 	protected:
