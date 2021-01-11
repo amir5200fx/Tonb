@@ -4,7 +4,7 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::maker::Profile)
 {
-	ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
+	ar & boost::serialization::base_object<BasicProfile>(*this);
 	//ar & boost::serialization::base_object<Global_Done>(*this);
 
 	ar & theProfile_;
@@ -12,7 +12,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::maker::Profile)
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::maker::Profile)
 {
-	ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
+	ar & boost::serialization::base_object<BasicProfile>(*this);
 	//ar & boost::serialization::base_object<Global_Done>(*this);
 
 	ar & theProfile_;
