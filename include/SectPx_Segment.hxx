@@ -10,6 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Pole;
+	class SectPx_Edge;
 	class Pnt2d;
 
 
@@ -22,6 +23,13 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_Pole> theP0_;
 		std::shared_ptr<SectPx_Pole> theP1_;
+
+		std::shared_ptr<SectPx_Edge> theEdge_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 	public:
 
@@ -76,6 +84,11 @@ namespace tnbLib
 			return theP1_;
 		}
 
+		const auto& Edge() const
+		{
+			return theEdge_;
+		}
+
 		void SetPole0(const std::shared_ptr<SectPx_Pole>& theP0)
 		{
 			theP0_ = theP0;
@@ -84,6 +97,16 @@ namespace tnbLib
 		void SetPole1(const std::shared_ptr<SectPx_Pole>& theP1)
 		{
 			theP1_ = theP1;
+		}
+
+		void SetEdge(const std::shared_ptr<SectPx_Edge>& theEdge)
+		{
+			theEdge_ = theEdge;
+		}
+
+		void SetEdge(std::shared_ptr<SectPx_Edge>&& theEdge)
+		{
+			theEdge_ = std::move(theEdge);
 		}
 
 		TnbSectPx_EXPORT word RegObjTypeName() const override;

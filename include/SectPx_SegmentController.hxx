@@ -30,6 +30,8 @@ namespace tnbLib
 
 	protected:
 
+
+
 	public:
 
 		static TnbSectPx_EXPORT const char* typeName_;

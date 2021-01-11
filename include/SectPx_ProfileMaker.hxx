@@ -3,7 +3,7 @@
 #define _SectPx_ProfileMaker_Header
 
 #include <Standard_Handle.hxx>
-#include <SectPx_Maker.hxx>
+#include <SectPx_BasicProfileMaker.hxx>
 #include <Global_Done.hxx>
 
 class Geom2d_Curve;
@@ -23,7 +23,7 @@ namespace tnbLib
 	{
 
 		class Profile
-			: public SectPx_Maker<SectPx_FrameRegistry>
+			: public BasicProfile
 		{
 
 			/*Private Data*/
@@ -36,29 +36,6 @@ namespace tnbLib
 			Profile()
 			{}
 
-			TnbSectPx_EXPORT Standard_Integer
-				MakeEdge
-				(
-					const std::shared_ptr<SectPx_Pnt>& theP0,
-					const std::shared_ptr<SectPx_Pnt>& theP1
-				);
-
-			TnbSectPx_EXPORT std::shared_ptr<SectPx_Edge>
-				RemoveEdge
-				(
-					const Standard_Integer theIndex
-				);
-
-			TnbSectPx_EXPORT void RemoveEdge
-			(
-				const std::shared_ptr<SectPx_Edge>& theEdge
-			);
-
-			static TnbSectPx_EXPORT void AddEdgeToPnt
-			(
-				const std::shared_ptr<SectPx_Edge>& theSeg,
-				const std::shared_ptr<SectPx_Pnt>& thePnt
-			);
 
 		public:
 
@@ -67,7 +44,7 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_TopoProfile>& theProfile,
 				const std::shared_ptr<SectPx_FrameRegistry>& theRegistry
 			)
-				: SectPx_Maker<SectPx_FrameRegistry>(theRegistry)
+				: BasicProfile(theRegistry)
 				, theProfile_(theProfile)
 			{}
 
@@ -88,21 +65,6 @@ namespace tnbLib
 				(
 					const std::shared_ptr<SectPx_Pnt>& thePnt
 				) const;
-
-			TnbSectPx_EXPORT std::shared_ptr<SectPx_Edge>
-				SelectEdge
-				(
-					const Standard_Integer theIndex
-				) const;
-
-			//- Returns index of the left and right edge that are created due to the
-			//- inserting new point, respectively
-			TnbSectPx_EXPORT std::tuple<Standard_Integer, Standard_Integer>
-				ImportPnt
-				(
-					const std::shared_ptr<SectPx_Pnt>& thePnt,
-					const std::shared_ptr<SectPx_Edge>& theEdge
-				);
 
 			//- returns index of the new edge that is created after removing the point
 			//- WARNING! throws an exception if the point is in the boundary

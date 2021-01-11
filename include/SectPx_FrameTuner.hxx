@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _SectPx_FrameTunner_Header
-#define _SectPx_FrameTunner_Header
+#ifndef _SectPx_FrameTuner_Header
+#define _SectPx_FrameTuner_Header
 
 #include <SectPx_Entity.hxx>
 #include <tuple>
@@ -14,8 +14,9 @@ namespace tnbLib
 	class SectPx_Pole;
 	class SectPx_Segment;
 	class SectPx_Par;
+	class SectPx_Coord;
 
-	class SectPx_FrameTunner
+	class SectPx_FrameTuner
 		: public SectPx_Entity
 	{
 
@@ -23,7 +24,11 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_FrameRegistry> theFrameReg_;
 
+
 		//- private functions and operators
+
+
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 		const auto& FrameRegistry() const
 		{
@@ -53,13 +58,21 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Segment>& theSegment
 		);
 
+
+		SectPx_FrameTuner()
+		{}
+
 	public:
 
 		typedef Standard_Integer segmentId;
 		typedef Standard_Integer sliderId;
 		typedef Standard_Integer tightnessId;
 
-		SectPx_FrameTunner()
+		SectPx_FrameTuner
+		(
+			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
+		)
+			: theFrameReg_(theFrameReg)
 		{}
 
 		TnbSectPx_EXPORT Standard_Boolean IsContainPole(const std::shared_ptr<SectPx_Pole>& thePole) const;
@@ -91,6 +104,16 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Par>& thePar
 			);
 
+		TnbSectPx_EXPORT std::tuple
+			<
+			std::pair<segmentId, segmentId>,
+			sliderId
+			> CreateSlider
+			(
+				const std::shared_ptr<SectPx_Segment>& theSegment, 
+				const std::shared_ptr<SectPx_Coord>& theCoord
+			);
+
 		TnbSectPx_EXPORT tightnessId
 			CreateSymmTightnessDeg2
 			(
@@ -105,4 +128,4 @@ namespace tnbLib
 	};
 }
 
-#endif // !_SectPx_FrameTunner_Header
+#endif // !_SectPx_FrameTuner_Header
