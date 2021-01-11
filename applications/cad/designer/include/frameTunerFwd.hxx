@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _frameTunnerFwd_Header
-#define _frameTunnerFwd_Header
+#ifndef _frameTunerFwd_Header
+#define _frameTunerFwd_Header
 
 #include <frameMakerFwd.hxx>
 
@@ -13,13 +13,13 @@ namespace tnbLib
 {
 
 	//- Forward Declarations
-	class SectPx_FrameTunner;
+	class SectPx_FrameTuner;
 	class SectPx_Segment;
 
 	namespace appl
 	{
 
-		typedef std::shared_ptr<SectPx_FrameTunner> tunner_t;
+		typedef std::shared_ptr<SectPx_FrameTuner> tuner_t;
 		//typedef std::shared_ptr<SectPx_Frame> frame_t;
 
 		typedef std::shared_ptr<SectPx_Pole> pole_t;
@@ -28,4 +28,4 @@ namespace tnbLib
 	}
 }
 
-#endif // !_frameTunnerFwd_Header
+#endif // !_frameTunerFwd_Header
