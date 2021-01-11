@@ -90,6 +90,13 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Pnt>& thePnt
 			);
 
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_Edge> 
+			CommonEdge
+			(
+				const std::shared_ptr<SectPx_Pnt>& theP0,
+				const std::shared_ptr<SectPx_Pnt>& theP1
+			);
+
 		static TnbSectPx_EXPORT void Replace
 		(
 			const std::shared_ptr<SectPx_Pnt>& thePrior,

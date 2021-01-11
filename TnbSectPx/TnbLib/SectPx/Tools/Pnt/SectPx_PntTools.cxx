@@ -251,6 +251,35 @@ tnbLib::SectPx_PntTools::deAttach
 	return std::move(edges);
 }
 
+std::shared_ptr<tnbLib::SectPx_Edge> 
+tnbLib::SectPx_PntTools::CommonEdge
+(
+	const std::shared_ptr<SectPx_Pnt>& theP0,
+	const std::shared_ptr<SectPx_Pnt>& theP1
+)
+{
+	auto tp0 = std::dynamic_pointer_cast<SectPx_TPnt>(theP0);
+	Debug_Null_Pointer(tp0);
+
+	const auto& edges = tp0->Edges();
+	for (const auto& x : edges)
+	{
+		auto edge = x.second.lock();
+		Debug_Null_Pointer(edge);
+
+		if (edge->P0() IS_EQUAL theP1)
+		{
+			return std::move(edge);
+		}
+
+		if (edge->P1() IS_EQUAL theP1)
+		{
+			return std::move(edge);
+		}
+	}
+	return nullptr;
+}
+
 void tnbLib::SectPx_PntTools::Replace
 (
 	const std::shared_ptr<SectPx_Pnt>& thePrior,
