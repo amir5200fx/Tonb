@@ -79,3 +79,9 @@ tnbLib::SectPx_TopoSegment::IsTopoSegment() const
 {
 	return Standard_True;
 }
+
+Standard_Boolean 
+tnbLib::SectPx_TopoSegment::IsFrameRegObj() const
+{
+	return Standard_True;
+}
