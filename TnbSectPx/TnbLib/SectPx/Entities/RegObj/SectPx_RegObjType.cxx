@@ -21,6 +21,13 @@ namespace tnbLib
 	static const word pole_name = "pole";
 	static const word profile_name = "profile";
 	static const word segment_name = "segment";
+	static const word offset_profile_name = "offset profile";
+	static const word cloud_name = "cloud";
+	static const word shape_name = "shape";
+	static const word topo_segment_name = "topo segment";
+	static const word extrude_profile_name = "extrusion profile name";
+	static const word curve_q_name = "curveQ";
+	static const word limits_name = "limits";
 }
 
 tnbLib::word 
@@ -44,6 +51,13 @@ tnbLib::getRegObjTypeName(const SectPx_RegObjType t)
 	case sectPxLib::regObjType::pole: return pole_name;
 	case sectPxLib::regObjType::profile: return profile_name;
 	case sectPxLib::regObjType::segment: return segment_name;
+	case sectPxLib::regObjType::offsetProfile: return offset_profile_name;
+	case sectPxLib::regObjType::cloud: return cloud_name;
+	case sectPxLib::regObjType::shape: return shape_name;
+	case sectPxLib::regObjType::topoSegment: return topo_segment_name;
+	case sectPxLib::regObjType::extrProfile: return extrude_profile_name;
+	case sectPxLib::regObjType::curveQ: return curve_q_name;
+	case sectPxLib::regObjType::limits: return limits_name;
 	default:
 		FatalErrorIn(FunctionSIG)
 			<< "invalid type of the registry object!" << endl

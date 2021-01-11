@@ -18,12 +18,17 @@ namespace tnbLib
 	class SectPx_PntTools;
 	class SectPx_Tools;
 
-	namespace maker { class Profile; }
+	namespace maker 
+	{ 
+		class Profile;
+		class BasicProfile;
+	}
 
 	class SectPx_TPntAdaptor
 	{
 
 		friend class maker::Profile;
+		friend class maker::BasicProfile;
 		friend class SectPx_PntTools;
 		friend class SectPx_Tools;
 

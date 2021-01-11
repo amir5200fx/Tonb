@@ -382,9 +382,6 @@
     <Filter Include="TnbLib\SectPx\Join\Priority">
       <UniqueIdentifier>{afccf84b-035f-4d80-bfc9-67fa5cb3afac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\SectPx\FrameTunner">
-      <UniqueIdentifier>{bf1ec381-c7bf-4a56-bcd4-141a019bca77}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\SectPx\Entities\Shape">
       <UniqueIdentifier>{d3e68e23-38d5-4f32-b756-98c6f31f2568}</UniqueIdentifier>
     </Filter>
@@ -450,6 +447,12 @@
     </Filter>
     <Filter Include="TnbLib\SectPx\Makers\Datum">
       <UniqueIdentifier>{1e60c6be-35d4-4c21-b3d9-e8d4dd011e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\GeoMap\coordReader">
+      <UniqueIdentifier>{11c63284-9a32-4497-89c2-780ca376db01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\FrameTuner">
+      <UniqueIdentifier>{bf1ec381-c7bf-4a56-bcd4-141a019bca77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -909,9 +912,6 @@
     <ClInclude Include="TnbLib\SectPx\Join\Priority\SectPx_JoinPriority.hxx">
       <Filter>TnbLib\SectPx\Join\Priority</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\SectPx\FrameTunner\SectPx_FrameTunner.hxx">
-      <Filter>TnbLib\SectPx\FrameTunner</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Shape\SectPx_Shape.hxx">
       <Filter>TnbLib\SectPx\Entities\Shape</Filter>
     </ClInclude>
@@ -986,6 +986,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Coord\Datum\SectPx_DatumFwd.hxx">
       <Filter>TnbLib\SectPx\Entities\Coord\Datum</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\GeoMap\coordReader\SectPx_GeoMap_CoordReader.hxx">
+      <Filter>TnbLib\SectPx\GeoMap\coordReader</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\GeoMap\SectPx_GeoMaps.hxx">
+      <Filter>TnbLib\SectPx\GeoMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\FrameTuner\SectPx_FrameTuner.hxx">
+      <Filter>TnbLib\SectPx\FrameTuner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Profile\SectPx_BasicProfileMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Profile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1523,9 +1535,6 @@
     <ClCompile Include="TnbLib\SectPx\Join\SectPx_Join.cxx">
       <Filter>TnbLib\SectPx\Join</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\SectPx\FrameTunner\SectPx_FrameTunner.cxx">
-      <Filter>TnbLib\SectPx\FrameTunner</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Shape\SectPx_Shape.cxx">
       <Filter>TnbLib\SectPx\Entities\Shape</Filter>
     </ClCompile>
@@ -1627,6 +1636,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Makers\Datum\SectPx_DatumMakerIO.cxx">
       <Filter>TnbLib\SectPx\Makers\Datum</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\GeoMap\coordReader\SectPx_GeoMap_CoordReader.cxx">
+      <Filter>TnbLib\SectPx\GeoMap\coordReader</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\GeoMap\coordReader\SectPx_GeoMap_CoordReaderIO.cxx">
+      <Filter>TnbLib\SectPx\GeoMap\coordReader</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FrameTuner\SectPx_FrameTuner.cxx">
+      <Filter>TnbLib\SectPx\FrameTuner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\FrameTuner\SectPx_FrameTunerIO.cxx">
+      <Filter>TnbLib\SectPx\FrameTuner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Segment\Adaptor\SectPx_SegmentAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Segment\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_BasicProfileMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_BasicProfileMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Profile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
