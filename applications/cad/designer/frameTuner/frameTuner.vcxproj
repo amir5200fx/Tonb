@@ -23,6 +23,7 @@
     <ProjectGuid>{0683DFBD-279C-48E6-9A85-752160C63520}</ProjectGuid>
     <RootNamespace>frameTunner</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <ProjectName>frameTuner</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -73,13 +74,13 @@
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)applications\cad\designer\lib;$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)applications\cad\designer\lib\</OutDir>
-    <TargetName>TnbFrameTunner</TargetName>
+    <TargetName>TnbFrameTunerd</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)applications\cad\designer\lib;$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)applications\cad\designer\lib\</OutDir>
-    <TargetName>TnbFrameTunner</TargetName>
+    <TargetName>TnbFrameTuner</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -146,12 +147,12 @@ for /r "$(ProjectDir)" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)application
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="frameTunner.hxx" />
-    <ClInclude Include="frameTunnerFwd.hxx" />
-    <ClInclude Include="frameTunner_Module.hxx" />
+    <ClInclude Include="frameTuner.hxx" />
+    <ClInclude Include="frameTunerFwd.hxx" />
+    <ClInclude Include="frameTuner_Module.hxx" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="frameTunner.cxx" />
+    <ClCompile Include="frameTuner.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\TnbCad2d\TnbCad2d.vcxproj">

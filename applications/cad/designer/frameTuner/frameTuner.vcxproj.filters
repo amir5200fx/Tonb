@@ -6,18 +6,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="frameTunner.hxx">
+    <ClInclude Include="frameTunerFwd.hxx">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="frameTunner_Module.hxx">
+    <ClInclude Include="frameTuner_Module.hxx">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="frameTunnerFwd.hxx">
+    <ClInclude Include="frameTuner.hxx">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="frameTunner.cxx">
+    <ClCompile Include="frameTuner.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
