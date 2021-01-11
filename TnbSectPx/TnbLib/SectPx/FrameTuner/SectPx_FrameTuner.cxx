@@ -1,4 +1,4 @@
-#include <SectPx_FrameTunner.hxx>
+#include <SectPx_FrameTuner.hxx>
 
 #include <SectPx_ParRegistry.hxx>
 #include <SectPx_FrameRegistry.hxx>
@@ -14,11 +14,12 @@
 #include <SectPx_Interfaces.hxx>
 #include <SectPx_ProfileQ.hxx>
 #include <SectPx_GeoMap_LinearInterpl.hxx>
+#include <SectPx_GeoMap_CoordReader.hxx>
 #include <SectPx_OneParCPtsMap_Single.hxx>
 #include <SectPx_SegmentController.hxx>
 #include <SectPx_TightController_Deg2.hxx>
 
-void tnbLib::SectPx_FrameTunner::disJoinSegment
+void tnbLib::SectPx_FrameTuner::disJoinSegment
 (
 	const std::shared_ptr<SectPx_Pole>& thePole,
 	const std::shared_ptr<SectPx_Segment>& theSegment
@@ -81,7 +82,7 @@ void tnbLib::SectPx_FrameTunner::disJoinSegment
 	}
 }
 
-void tnbLib::SectPx_FrameTunner::disJoinSegment
+void tnbLib::SectPx_FrameTuner::disJoinSegment
 (
 	const std::shared_ptr<SectPx_Segment>& theSegment
 )
@@ -94,7 +95,7 @@ void tnbLib::SectPx_FrameTunner::disJoinSegment
 	disJoinSegment(p1, theSegment);
 }
 
-void tnbLib::SectPx_FrameTunner::JoinSegment
+void tnbLib::SectPx_FrameTuner::JoinSegment
 (
 	const std::shared_ptr<SectPx_Pole>& thePole,
 	const std::shared_ptr<SectPx_Segment>& theSegment,
@@ -133,7 +134,7 @@ void tnbLib::SectPx_FrameTunner::JoinSegment
 	}
 }
 
-void tnbLib::SectPx_FrameTunner::JoinSegment
+void tnbLib::SectPx_FrameTuner::JoinSegment
 (
 	const std::shared_ptr<SectPx_Segment>& theSegment
 )
@@ -150,7 +151,7 @@ void tnbLib::SectPx_FrameTunner::JoinSegment
 }
 
 std::shared_ptr<tnbLib::SectPx_Pole> 
-tnbLib::SectPx_FrameTunner::SelectPole
+tnbLib::SectPx_FrameTuner::SelectPole
 (
 	const Standard_Integer theIndex
 ) const
@@ -171,7 +172,7 @@ tnbLib::SectPx_FrameTunner::SelectPole
 }
 
 std::shared_ptr<tnbLib::SectPx_Segment> 
-tnbLib::SectPx_FrameTunner::SelectSegment
+tnbLib::SectPx_FrameTuner::SelectSegment
 (
 	const Standard_Integer theIndex
 ) const
@@ -185,7 +186,7 @@ tnbLib::SectPx_FrameTunner::SelectSegment
 	if (NOT seg)
 	{
 		FatalErrorIn("std::shared_ptr<SectPx_Segment> SelectSegment(const Standard_Integer theIndex) const")
-			<< "the item is not a pole!" << endl
+			<< "the item is not a segment!" << endl
 			<< abort(FatalError) << endl;
 	}
 	return std::move(seg);
@@ -195,12 +196,12 @@ std::tuple
 <
 	std::pair
 	<
-	typename tnbLib::SectPx_FrameTunner::segmentId, 
-	typename tnbLib::SectPx_FrameTunner::segmentId
+	typename tnbLib::SectPx_FrameTuner::segmentId, 
+	typename tnbLib::SectPx_FrameTuner::segmentId
 	>, 
-	typename tnbLib::SectPx_FrameTunner::sliderId
+	typename tnbLib::SectPx_FrameTuner::sliderId
 >
-tnbLib::SectPx_FrameTunner::CreateSlider
+tnbLib::SectPx_FrameTuner::CreateSlider
 (
 	const std::shared_ptr<SectPx_Segment>& theSegment,
 	const std::shared_ptr<SectPx_Par>& thePar
@@ -252,6 +253,14 @@ tnbLib::SectPx_FrameTunner::CreateSlider
 			);
 	Debug_Null_Pointer(pnt);
 
+	const auto& edge = theSegment->Edge();
+	Debug_Null_Pointer(edge);
+
+	auto prfMaker = std::make_shared<maker::BasicProfile>(FrameRegistry());
+	Debug_Null_Pointer(prfMaker);
+
+	prfMaker->ImportPnt(pnt, edge);
+
 	parentReg->Remove(theSegment);
 
 	auto slider = std::make_shared<sectPxLib::Pole_Slider>(pnt);
@@ -273,8 +282,95 @@ tnbLib::SectPx_FrameTunner::CreateSlider
 	return std::move(t);
 }
 
-typename tnbLib::SectPx_FrameTunner::tightnessId 
-tnbLib::SectPx_FrameTunner::CreateSymmTightnessDeg2
+std::tuple
+<
+	std::pair
+	<
+	typename tnbLib::SectPx_FrameTuner::segmentId,
+	typename tnbLib::SectPx_FrameTuner::segmentId
+	>,
+	typename tnbLib::SectPx_FrameTuner::sliderId
+>
+tnbLib::SectPx_FrameTuner::CreateSlider
+(
+	const std::shared_ptr<SectPx_Segment>& theSegment,
+	const std::shared_ptr<SectPx_Coord>& theCoord
+)
+{
+	Debug_Null_Pointer(theSegment);
+	if (theSegment->HasController())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the segment must have no controller!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& pntMaker = std::make_shared<maker::Point>(FrameRegistry());
+	Debug_Null_Pointer(pntMaker);
+
+	const auto& parentReg = FrameRegistry();
+	if (NOT parentReg)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no parent registry has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	disJoinSegment(theSegment);
+
+	const auto& p0 = theSegment->Pole0();
+	Debug_Null_Pointer(p0);
+
+	const auto& p1 = theSegment->Pole1();
+	Debug_Null_Pointer(p1);
+
+	const auto geoMap =
+		std::make_shared<sectPxLib::GeoMap_CoordReader>();
+	Debug_Null_Pointer(geoMap);
+
+	geoMap->SetCoord(theCoord);
+	parentReg->Import(geoMap);
+
+	const auto pnt_id = pntMaker->CreateField(geoMap);
+
+	auto pnt =
+		std::dynamic_pointer_cast<sectPxLib::Pnt_GeoField>
+		(
+			pntMaker->SelectPnt(pnt_id)
+			);
+	Debug_Null_Pointer(pnt);
+
+	const auto& edge = theSegment->Edge();
+	Debug_Null_Pointer(edge);
+
+	auto prfMaker = std::make_shared<maker::BasicProfile>(FrameRegistry());
+	Debug_Null_Pointer(prfMaker);
+
+	prfMaker->ImportPnt(pnt, edge);
+
+	parentReg->Remove(theSegment);
+
+	auto slider = std::make_shared<sectPxLib::Pole_Slider>(pnt);
+	Debug_Null_Pointer(slider);
+
+	auto seg0 = std::make_shared<SectPx_Segment>(p0, slider);
+	Debug_Null_Pointer(seg0);
+
+	auto seg1 = std::make_shared<SectPx_Segment>(slider, p1);
+	Debug_Null_Pointer(seg1);
+
+	const auto slider_id = parentReg->Import(std::move(slider));
+
+	const auto seg0_id = parentReg->Import(std::move(seg0));
+	const auto seg1_id = parentReg->Import(std::move(seg1));
+
+	auto paired = std::make_pair(seg0_id, seg1_id);
+	auto t = std::make_tuple(std::move(paired), slider_id);
+	return std::move(t);
+}
+
+typename tnbLib::SectPx_FrameTuner::tightnessId 
+tnbLib::SectPx_FrameTuner::CreateSymmTightnessDeg2
 (
 	const std::shared_ptr<SectPx_Pole>& thePole,
 	const std::shared_ptr<SectPx_Par>& thePar
@@ -596,7 +692,7 @@ namespace tnbLib
 	}
 }
 
-void tnbLib::SectPx_FrameTunner::ImportFrame
+void tnbLib::SectPx_FrameTuner::ImportFrame
 (
 	const std::shared_ptr<SectPx_Frame>& theFrame
 )
@@ -790,14 +886,14 @@ void tnbLib::SectPx_FrameTunner::ImportFrame
 		Debug_Null_Pointer(bnd1);
 
 		auto topoSeg = 
-			std::make_shared<SectPx_TopoSegment>(std::move(bnd0), std::move(bnd1));
+			std::make_shared<SectPx_TopoSegment>(bnd0, bnd1);
 		Debug_Null_Pointer(topoSeg);
+
+		FrameRegistry()->Import(topoSeg);
 
 		//- every boundary pole has to remember the adjacent topo-segment
 		bnd0->SetTopoSegment(topoSeg);
 		bnd1->SetTopoSegment(topoSeg);
-
-		FrameRegistry()->Import(topoSeg);
 
 		//-
 		//- topo-segment has been created and imported into the registry
@@ -845,8 +941,18 @@ void tnbLib::SectPx_FrameTunner::ImportFrame
 			auto pole1 = std::dynamic_pointer_cast<SectPx_Pole>(poleObj1);
 
 			auto seg = 
-				std::make_shared<SectPx_Segment>(std::move(pole0), std::move(pole1));
+				std::make_shared<SectPx_Segment>(pole0, pole1);
 			Debug_Null_Pointer(seg);
+
+			auto edge = SectPx_PntTools::CommonEdge(p0, p1);
+			if (NOT edge)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no common edge has been found between the points" << endl
+					<< abort(FatalError);
+			}
+
+			seg->SetEdge(std::move(edge));
 
 			//- every pole must be remember the adjacent segment
 			if (pole0->IsBoundary())
@@ -854,14 +960,14 @@ void tnbLib::SectPx_FrameTunner::ImportFrame
 				auto bnd = std::dynamic_pointer_cast<SectPx_BndPole>(pole0);
 				Debug_Null_Pointer(bnd);
 
-				bnd->SetSegment(seg);
+				//bnd->SetSegment(seg);
 			}
 			else
 			{ //- it's an internal pole
 				auto inter = std::dynamic_pointer_cast<SectPx_InterPole>(pole0);
 				Debug_Null_Pointer(inter);
 
-				inter->SetForward(seg);
+				//inter->SetForward(seg);
 			}
 
 			if (pole1->IsBoundary())
@@ -869,14 +975,14 @@ void tnbLib::SectPx_FrameTunner::ImportFrame
 				auto bnd = std::dynamic_pointer_cast<SectPx_BndPole>(pole1);
 				Debug_Null_Pointer(bnd);
 
-				bnd->SetSegment(seg);
+				//bnd->SetSegment(seg);
 			}
 			else
 			{//- it's an internal pole
 				auto inter = std::dynamic_pointer_cast<SectPx_InterPole>(pole1);
 				Debug_Null_Pointer(inter);
 
-				inter->SetBackward(seg);
+				//inter->SetBackward(seg);
 			}
 
 			FrameRegistry()->Import(seg);
