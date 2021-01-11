@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sectionTunner.cxx">
+    <ClCompile Include="sectionTuner.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
