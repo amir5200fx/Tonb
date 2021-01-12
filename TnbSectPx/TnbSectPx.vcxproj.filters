@@ -1658,5 +1658,8 @@
     <ClCompile Include="TnbLib\SectPx\Makers\Profile\SectPx_BasicProfileMakerIO.cxx">
       <Filter>TnbLib\SectPx\Makers\Profile</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\CurveQ\SectPx_CurveQMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\CurveQ</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

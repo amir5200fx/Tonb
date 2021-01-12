@@ -13,5 +13,6 @@
 #include <SectPx_TopoProfileMaker.hxx>
 #include <SectPx_InterfaceMaker.hxx>
 #include <SectPx_DatumMaker.hxx>
+#include <SectPx_CurveQMaker.hxx>
 
 #endif // !_SectPx_Makers_Header
