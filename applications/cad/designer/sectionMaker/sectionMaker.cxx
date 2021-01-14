@@ -1,3 +1,4 @@
+#include <Geo_Tools.hxx>
 #include <SectPx_ParRegistry.hxx>
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_CountRegistry.hxx>
@@ -11,6 +12,7 @@
 #include <SectPx_Datums.hxx>
 #include <SectPx_Makers.hxx>
 #include <SectPx_TopoProfile.hxx>
+#include <SectPx_PntTools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -34,6 +36,15 @@ namespace tnbLib
 	static const auto frameReg = std::make_shared<SectPx_FrameRegistry>(countReg, scatterReg);
 
 	static const auto myFrame = std::make_shared<SectPx_Frame>(parReg, frameReg);
+
+	static appl::edge_t firstEdge;
+
+
+	auto commonEdge(const appl::pnt_t& p0, const appl::pnt_t& p1)
+	{
+		auto t = SectPx_PntTools::CommonEdge(p0, p1);
+		return std::move(t);
+	}
 
 	//- makers
 
@@ -303,6 +314,7 @@ namespace tnbLib
 	auto createCustomProfile(const appl::pnt_t& p0, const appl::pnt_t& p1)
 	{
 		auto f = appl::createCustomProfile(getProfileMaker(), p0, p1);
+		firstEdge = commonEdge(p0, p1);
 		return std::move(f);
 	}
 
@@ -310,6 +322,7 @@ namespace tnbLib
 	{
 		auto f = appl::createCustomProfile(getProfileMaker(), p0, p1);
 		f->SetName(name);
+		firstEdge = commonEdge(p0, p1);
 		return std::move(f);
 	}
 
@@ -413,6 +426,12 @@ namespace tnbLib
 			}
 		}
 	}
+
+	auto degreeToRad(double x)
+	{
+		auto r = Geo_Tools::DegToRadian(x);
+		return r;
+	}
 }
 
 #ifdef DebugInfo
@@ -491,6 +510,8 @@ namespace tnbLib
 
 	void setGeometrics(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([](double x, double y)-> auto {auto t = Dir2d(x, y); return std::move(t); }), "createDirection");
+
 		mod->add(chaiscript::fun([](const appl::coord_t& q0, const appl::coord_t& q1, const appl::par_t& p)-> auto{auto t = createLinearInterpl(q0, q1, p); return std::move(t); }), "createLinearInterplGeoMap");
 		mod->add(chaiscript::fun([](const std::string& name, const appl::coord_t& q0, const appl::coord_t& q1, const appl::par_t& p)-> auto{auto t = createLinearInterpl(name, q0, q1, p); return std::move(t); }), "createLinearInterplGeoMap");
 		mod->add(chaiscript::fun([](const appl::coord_t& q0, const Dir2d& d0, const appl::par_t& ang0, const appl::coord_t& q1, const Dir2d& d1, const appl::par_t& ang1)-> auto{auto t = createIntersection(q0, d0, ang0, q1, d1, ang1); return std::move(t); }), "createIntersectGeoMap");
@@ -499,6 +520,8 @@ namespace tnbLib
 
 	void setProfiles(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([]()->const auto& {return firstEdge; }), "getFirstEdge");
+
 		mod->add(chaiscript::fun([](const appl::pnt_t& p0, const appl::pnt_t& p1)-> auto {auto t = createCustomProfile(p0, p1); return std::move(t); }), "createCustomProfile");
 		mod->add(chaiscript::fun([](const std::string& name, const appl::pnt_t& p0, const appl::pnt_t& p1)-> auto {auto t = createCustomProfile(p0, p1); return std::move(t); }), "createCustomProfile");
 
@@ -516,6 +539,8 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPlt(name); }), "drawPlt");
+
+		mod->add(chaiscript::fun([](double x)->auto {return degreeToRad(x); }), "degToRad");
 	}
 
 	std::string getString(char* argv)
