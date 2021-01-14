@@ -90,6 +90,37 @@ namespace tnbLib
 		{
 			return theSails_;
 		}
+
+		void SetHull(const std::shared_ptr<marineLib::Model_Hull>& theHull)
+		{
+			theHull_ = theHull;
+		}
+
+		void SetHull(std::shared_ptr<marineLib::Model_Hull>&& theHull)
+		{
+			theHull_ = std::move(theHull);
+		}
+
+		void SetSail(const std::vector<std::shared_ptr<marineLib::Model_Sail>>& theSails)
+		{
+			theSails_ = theSails;
+		}
+
+		void SetSail( std::vector<std::shared_ptr<marineLib::Model_Sail>>&& theSails)
+		{
+			theSails_ = std::move(theSails);
+		}
+
+		void SetTanks(const std::vector<std::shared_ptr<marineLib::Model_Tank>>& theTanks)
+		{
+			theTanks_ = theTanks;
+		}
+
+		void SetTanks(std::vector<std::shared_ptr<marineLib::Model_Tank>>&& theTanks)
+		{
+			theTanks_ = std::move(theTanks);
+		}
+		
 	};
 }
 
