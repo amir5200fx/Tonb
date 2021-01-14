@@ -252,19 +252,69 @@ namespace tnbLib
 				const gp_Ax2& theSystem = gp::XOY()
 			);
 
-		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
-			MakeCircle
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane> 
+			MakeBox
 			(
-				const gp_Ax22d& A, 
-				const Standard_Real Radius
+				const gp_Ax2d& theAx,
+				const Standard_Real theDx, 
+				const Standard_Real theDy, 
+				const gp_Ax2& theSystem = gp::XOY()
 			);
 
 		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
 			MakeCircle
 			(
-				const gp_Ax2d& A,
-				const Standard_Real Radius, 
-				const Standard_Boolean Sense = Standard_True
+				const gp_Circ2d& C,
+				const gp_Ax2& theSystem = gp::XOY()
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
+			MakeCircle
+			(
+				const gp_Circ2d& C,
+				const Pnt2d& theP,
+				const gp_Ax2& theSystem = gp::XOY()
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
+			MakeCircle
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1,
+				const Pnt2d& theP2,
+				const gp_Ax2& theSystem = gp::XOY()
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
+			MakeCircle
+			(
+				const Pnt2d& theC,
+				const Standard_Real theRadius,
+				const gp_Ax2& theSystem = gp::XOY()
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
+			MakeCircle
+			(
+				const Pnt2d& theC,
+				const Pnt2d& theP,
+				const gp_Ax2& theSystem = gp::XOY()
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
+			MakeEllipse
+			(
+				const gp_Elips2d& E,
+				const gp_Ax2& theSystem = gp::XOY()
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_Plane>
+			MakeEllipse
+			(
+				const Pnt2d& theS0,
+				const Pnt2d& theS1,
+				const Pnt2d& theCenter,
+				const gp_Ax2& theSystem = gp::XOY()
 			);
 
 	};

@@ -8,12 +8,15 @@
 #include <Cad_EntityManager.hxx>
 #include <Pln_Curve.hxx>
 #include <Pln_Vertex.hxx>
+#include <Pln_Ring.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
 #include <Cad2d_Plane_Info.hxx>
 
+#include <gp.hxx>
 #include <gp_Ax2.hxx>
+#include <gp_Trsf2d.hxx>
 
 void tnbLib::Cad2d_Plane::SetOuter
 (
@@ -678,6 +681,208 @@ tnbLib::Cad2d_Plane::MakeBox
 	curves.push_back(std::move(c2));
 	curves.push_back(std::move(c3));
 	curves.push_back(std::move(c4));
+
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Cad2d_Plane::MakeBox
+(
+	const gp_Ax2d & theAx, 
+	const Standard_Real theDx, 
+	const Standard_Real theDy, 
+	const gp_Ax2 & theSystem
+)
+{
+	const auto& loc = theAx.Location();
+	auto pln = MakeBox(gp::Origin2d(), theDx, theDy, theSystem);
+
+	gp_Trsf2d t;
+	t.SetTransformation(gp::OX2d(), theAx);
+	pln->Transform(t.Inverted());
+	return std::move(pln);
+}
+
+#include <Pln_CurveTools.hxx>
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Cad2d_Plane::MakeCircle
+(
+	const gp_Circ2d & C,
+	const gp_Ax2& theSystem
+)
+{
+	const auto g = Pln_CurveTools::MakeCircle(C);
+	Debug_Null_Pointer(g);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(1);
+
+	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	curves.push_back(std::move(c1));
+
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Cad2d_Plane::MakeCircle
+(
+	const gp_Circ2d & C,
+	const Pnt2d & theP,
+	const gp_Ax2 & theSystem
+)
+{
+	const auto g = Pln_CurveTools::MakeCircle(C, theP);
+	Debug_Null_Pointer(g);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(1);
+
+	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	curves.push_back(std::move(c1));
+
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Cad2d_Plane::MakeCircle
+(
+	const Pnt2d & theP0, 
+	const Pnt2d & theP1,
+	const Pnt2d & theP2,
+	const gp_Ax2 & theSystem
+)
+{
+	const auto g = Pln_CurveTools::MakeCircle(theP0, theP1, theP2);
+	Debug_Null_Pointer(g);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(1);
+
+	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	curves.push_back(std::move(c1));
+
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Cad2d_Plane::MakeCircle
+(
+	const Pnt2d & theC,
+	const Standard_Real theRadius, 
+	const gp_Ax2 & theSystem
+)
+{
+	const auto g = Pln_CurveTools::MakeCircle(theC, theRadius);
+	Debug_Null_Pointer(g);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(1);
+
+	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	curves.push_back(std::move(c1));
+
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane>
+tnbLib::Cad2d_Plane::MakeCircle
+(
+	const Pnt2d & theC, 
+	const Pnt2d & theP, 
+	const gp_Ax2 & theSystem
+)
+{
+	const auto g = Pln_CurveTools::MakeCircle(theC, theP);
+	Debug_Null_Pointer(g);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(1);
+
+	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	curves.push_back(std::move(c1));
+
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Cad2d_Plane::MakeEllipse
+(
+	const gp_Elips2d & E,
+	const gp_Ax2& theSystem
+)
+{
+	const auto g = Pln_CurveTools::MakeEllipse(E);
+	Debug_Null_Pointer(g);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(1);
+
+	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	curves.push_back(std::move(c1));
+
+	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
+	Debug_Null_Pointer(wire);
+
+	auto plane = Cad2d_Plane::MakePlane(wire, nullptr, theSystem);
+	Debug_Null_Pointer(plane);
+
+	return std::move(plane);
+}
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::Cad2d_Plane::MakeEllipse
+(
+	const Pnt2d & theS0, 
+	const Pnt2d & theS1,
+	const Pnt2d & theCenter,
+	const gp_Ax2 & theSystem
+)
+{
+	const auto g = Pln_CurveTools::MakeEllipse(theS0, theS1, theCenter);
+	Debug_Null_Pointer(g);
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(1);
+
+	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	curves.push_back(std::move(c1));
 
 	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
 	Debug_Null_Pointer(wire);
