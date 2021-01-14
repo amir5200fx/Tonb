@@ -43,22 +43,26 @@ tnbLib::Pnt2d
 tnbLib::Geo_Tools::IntersectionTwoLines
 (
 	const Pnt2d & P0,
-	const Dir2d & t0, 
+	const Dir2d & td0, 
 	const Pnt2d & P1, 
-	const Dir2d & t1,
+	const Dir2d & td1,
 	const Standard_Real theTol
 )
 {
-	if (t0.IsParallel(t1, theTol))
+	if (td0.IsParallel(td1, theTol))
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the two lines are parallel" << endl
 			<< abort(FatalError);
 	}
 
+	Vec2d t0(td0.XY());
+	Vec2d t1(td1.XY());
+
 	const auto dp = P1 - P0;
 	const auto denom = t0.Crossed(t1);
-	const auto nume = Dir2d(dp.XY()).Crossed(t1);
+
+	const auto nume = Vec2d(dp.XY()).Crossed(t1);
 
 	const auto alf = nume / denom;
 
