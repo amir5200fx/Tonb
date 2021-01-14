@@ -989,5 +989,7 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 
 			JoinSegment(seg);
 		}
+
+		IsLoaded_ = Standard_True;
 	}
 }

@@ -10,6 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Frame;
+	class SectPx_ParRegistry;
 	class SectPx_FrameRegistry;
 	class SectPx_Pole;
 	class SectPx_Segment;
@@ -22,18 +23,17 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		std::shared_ptr<SectPx_ParRegistry> theParRegistry_;
 		std::shared_ptr<SectPx_FrameRegistry> theFrameReg_;
+
+		Standard_Boolean IsLoaded_;
 
 
 		//- private functions and operators
 
 
 		TNB_SERIALIZATION(TnbSectPx_EXPORT);
-
-		const auto& FrameRegistry() const
-		{
-			return theFrameReg_;
-		}
+		
 
 		static TnbSectPx_EXPORT void disJoinSegment
 		(
@@ -60,6 +60,7 @@ namespace tnbLib
 
 
 		SectPx_FrameTuner()
+			: IsLoaded_(Standard_False)
 		{}
 
 	public:
@@ -70,10 +71,29 @@ namespace tnbLib
 
 		SectPx_FrameTuner
 		(
+			const std::shared_ptr<SectPx_ParRegistry>& theParRegistry,
 			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 		)
-			: theFrameReg_(theFrameReg)
+			: theParRegistry_(theParRegistry)
+			, theFrameReg_(theFrameReg)
+			, IsLoaded_(Standard_False)
 		{}
+
+
+		const auto& ParRegistry() const
+		{
+			return theParRegistry_;
+		}
+
+		const auto& FrameRegistry() const
+		{
+			return theFrameReg_;
+		}
+
+		Standard_Boolean IsFrameLoaded() const
+		{
+			return IsLoaded_;
+		}
 
 		TnbSectPx_EXPORT Standard_Boolean IsContainPole(const std::shared_ptr<SectPx_Pole>& thePole) const;
 
@@ -125,6 +145,8 @@ namespace tnbLib
 		(
 			const std::shared_ptr<SectPx_Frame>& theFrame
 		);
+
+		TnbSectPx_EXPORT void PrintRegistry() const;
 	};
 }
 
