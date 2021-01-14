@@ -11,7 +11,9 @@
 #include <SectPx_Datums.hxx>
 #include <SectPx_Makers.hxx>
 #include <SectPx_TopoProfile.hxx>
+#include <SectPx_TopoSegment.hxx>
 #include <SectPx_FrameTuner.hxx>
+#include <SectPx_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -34,7 +36,6 @@ namespace tnbLib
 
 	static bool verbose = false;
 	static bool loaded = false;
-
 
 	//- globals
 
@@ -80,7 +81,7 @@ namespace tnbLib
 				<< "no registry has been detected for the frame" << endl
 				<< abort(FatalError);
 		}
-		myTuner = std::make_shared<SectPx_FrameTuner>(myFrame->FrameRegistry());
+		myTuner = std::make_shared<SectPx_FrameTuner>(myFrame->ParRegistry(), myFrame->FrameRegistry());
 
 		appl::importFrame(myTuner, myFrame);
 
@@ -135,7 +136,7 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_oarchive oa(f);
 
-		oa << myFrame;
+		oa << myTuner;
 	}
 
 	void drawPlt(const std::string& name)
@@ -150,6 +151,22 @@ namespace tnbLib
 			Debug_Null_Pointer(profile);
 
 			auto pnts = profile->RetrieveCoords();
+			Io::ExportCurve(pnts, f);
+		}
+	}
+
+	void drawPolesPlt(const std::string& name)
+	{
+		fileName fn(name);
+		OFstream f(fn);
+
+		const auto& topoSegments = getScatterReg()->ScatterMap(SectPx_RegObjType::topoSegment);
+		for (const auto& x : topoSegments)
+		{
+			auto seg = std::dynamic_pointer_cast<SectPx_TopoSegment>(x.second.lock());
+			Debug_Null_Pointer(seg);
+
+			auto pnts = SectPx_Tools::RetrieveControlPoints(seg);
 			Io::ExportCurve(pnts, f);
 		}
 	}
@@ -309,6 +326,8 @@ namespace tnbLib
 		checkFrame();
 		appl::createSlider(myTuner, seg, c);
 	}
+
+	
 }
 
 #ifdef DebugInfo
@@ -328,8 +347,9 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> void {printFixedParams(); }), "printFixedParameters");
 		mod->add(chaiscript::fun([]()-> void {printPoints(); }), "printPoints");
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPlt(name); }), "drawPolesPlt");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTunerTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPlt(name); }), "drawPntsPlt");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPolesPlt(name); }), "drawPolesPlt");
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadFrame(name); }), "loadFrame");
 	}
 
@@ -400,6 +420,7 @@ int main(int argc, char *argv[])
 {
 	//FatalError.throwExceptions();
 
+
 	if (argc <= 1)
 	{
 		Info << " - No command is entered" << endl
@@ -452,5 +473,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 0;
 }
