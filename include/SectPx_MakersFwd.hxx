@@ -16,6 +16,7 @@ namespace tnbLib
 		class CmptProfile;
 		class FieldFun;
 		class Profile;
+		class CurveQ;
 	}
 }
 

@@ -23,6 +23,17 @@ namespace tnbLib
 			/*Private Data*/
 
 
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
+			}
+
+
+			CurveQ()
+			{}
 
 		public:
 
@@ -58,8 +69,18 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Pole>& thePole0,
 					const std::shared_ptr<SectPx_Pole>& thePole1
 				);
+
+			TnbSectPx_EXPORT Standard_Integer
+				CreateCurve
+				(
+					const word& name,
+					const std::shared_ptr<SectPx_Pole>& thePole0,
+					const std::shared_ptr<SectPx_Pole>& thePole1
+				);
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::CurveQ);
 
 #endif // !_SectPx_CurveQMaker_Header

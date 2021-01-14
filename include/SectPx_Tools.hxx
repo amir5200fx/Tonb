@@ -9,6 +9,7 @@
 
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array1OfInteger.hxx>
+#include <TColgp_Array1OfPnt2d.hxx>
 
 #include <vector>
 
@@ -93,6 +94,17 @@ namespace tnbLib
 			RetrieveSegments
 			(
 				const std::shared_ptr<SectPx_Pole>& thePole
+			);
+
+		//- one segment will be null respect to the boundary pole position
+		static TnbSectPx_EXPORT std::pair
+			<
+			std::shared_ptr<SectPx_Segment>,
+			std::shared_ptr<SectPx_Segment>
+			>
+			RetrieveBoundarySegment
+			(
+				const std::shared_ptr<SectPx_BndPole>& thePole
 			);
 
 		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Segment>> 
@@ -191,6 +203,18 @@ namespace tnbLib
 				const Standard_Integer theDegree, 
 				const Standard_Real theU0,
 				const Standard_Real theU1
+			);
+
+		static TnbSectPx_EXPORT TColStd_Array1OfReal 
+			Weights
+			(
+				const std::vector<Standard_Real>& theKnots
+			);
+
+		static TnbSectPx_EXPORT TColgp_Array1OfPnt2d 
+			CPts
+			(
+				const std::vector<Pnt2d>& thePoints
 			);
 
 		static TnbSectPx_EXPORT void RemoveParentFromChildren

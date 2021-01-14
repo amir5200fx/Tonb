@@ -69,6 +69,14 @@ namespace tnbLib
 					const std::shared_ptr<SectPx_Pole>& thePole0,
 					const std::shared_ptr<SectPx_Pole>& thePole1
 				);
+
+			TnbSectPx_EXPORT Standard_Integer
+				CreateCurve
+				(
+					const word& name,
+					const std::shared_ptr<SectPx_Pole>& thePole0,
+					const std::shared_ptr<SectPx_Pole>& thePole1
+				);
 		};
 	}
 }
