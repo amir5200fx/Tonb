@@ -187,6 +187,7 @@ tnbLib::SectPx_Tools::CommonSegment
 			<< "the two poles are the same!" << endl
 			<< abort(FatalError);
 	}
+
 	auto[seg0, seg1] = RetrieveSegments(thePole0);
 	auto[seg2, seg3] = RetrieveSegments(thePole1);
 
@@ -289,10 +290,7 @@ tnbLib::SectPx_Tools::RetrieveSegments
 		auto bnd = std::dynamic_pointer_cast<SectPx_BndPole>(thePole);
 		Debug_Null_Pointer(bnd);
 
-		auto seg = bnd->Segment().lock();
-		Debug_Null_Pointer(seg);
-		
-		auto t = std::make_pair(std::move(seg), nullptr);
+		auto t = RetrieveBoundarySegment(bnd);
 		return std::move(t);
 	}
 	else
@@ -307,6 +305,39 @@ tnbLib::SectPx_Tools::RetrieveSegments
 		Debug_Null_Pointer(seg1);
 
 		auto t = std::make_pair(std::move(seg0), std::move(seg1));
+		return std::move(t);
+	}
+}
+
+std::pair
+<
+	std::shared_ptr<tnbLib::SectPx_Segment>,
+	std::shared_ptr<tnbLib::SectPx_Segment>
+> 
+tnbLib::SectPx_Tools::RetrieveBoundarySegment
+(
+	const std::shared_ptr<SectPx_BndPole>& bnd
+)
+{
+	auto seg = bnd->Segment().lock();
+	Debug_Null_Pointer(seg);
+
+	if (seg->Pole0() IS_EQUAL bnd)
+	{
+		auto t = std::make_pair(nullptr, std::move(seg));
+		return std::move(t);
+	}
+	else if (seg->Pole1() IS_EQUAL bnd)
+	{
+		auto t = std::make_pair(std::move(seg), nullptr);
+		return std::move(t);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong!" << endl
+			<< abort(FatalError);
+		auto t = std::make_pair(nullptr, nullptr);
 		return std::move(t);
 	}
 }
@@ -620,6 +651,10 @@ tnbLib::SectPx_Tools::RetrieveWeights
 	{
 		weights.push_back(1.0);
 	}
+	else
+	{
+		weights.push_back(1.0);
+	}
 	for (const auto& x : segments)
 	{
 		Debug_Null_Pointer(x);
@@ -639,6 +674,10 @@ tnbLib::SectPx_Tools::RetrieveWeights
 			}
 		}
 		if (std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(x->Pole1()))
+		{
+			weights.push_back(1.0);
+		}
+		else
 		{
 			weights.push_back(1.0);
 		}
@@ -686,6 +725,11 @@ namespace tnbLib
 			}
 			seg = theList.front();
 			theList.pop_front();
+		}
+		if (IsInsiderOrBundary(seg->Pole1()))
+		{
+			auto curve = std::make_shared<SectPx_CurveQ>(p0, seg->Pole1());
+			return std::move(curve);
 		}
 		return nullptr;
 	}
@@ -921,6 +965,36 @@ void tnbLib::SectPx_Tools::RemoveParentFromChildren
 			<< " typename: " << theParent->RegObjTypeName() << endl
 			<< abort(FatalError);
 	}
+}
+
+TColStd_Array1OfReal 
+tnbLib::SectPx_Tools::Weights
+(
+	const std::vector<Standard_Real>& theKnots
+)
+{
+	TColStd_Array1OfReal ws(1, (Standard_Integer)theKnots.size());
+	Standard_Integer id = 0;
+	for (auto x : theKnots)
+	{
+		ws.SetValue(++id, x);
+	}
+	return std::move(ws);
+}
+
+TColgp_Array1OfPnt2d 
+tnbLib::SectPx_Tools::CPts
+(
+	const std::vector<Pnt2d>& thePoints
+)
+{
+	TColgp_Array1OfPnt2d pnts(1, (Standard_Integer)thePoints.size());
+	Standard_Integer id = 0;
+	for (const auto& x : thePoints)
+	{
+		pnts.SetValue(++id, x);
+	}
+	return std::move(pnts);
 }
 
 void tnbLib::SectPx_Tools::disJiont
