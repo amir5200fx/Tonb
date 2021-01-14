@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tonb", "Tonb\Tonb.vcxproj", "{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -287,6 +287,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sectionGeoCurveMaker", "sectionGeoCurveMaker", "{5259671D-850E-448E-9606-662D3AA3E69E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sectionGeoCurveMaker", "applications\cad\designer\sectionGeoCurveMaker\sectionGeoCurveMaker.vcxproj", "{1A81D749-1F51-47C7-8A00-5834BF0070B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modeler", "modeler", "{277F5C22-9A8B-4E93-9BA3-CD22A12C2D01}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "modeler", "applications\marine\cad\modeler\modeler.vcxproj", "{814C801E-D88A-4584-AEED-CD4B15BF4F73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -670,6 +674,14 @@ Global
 		{1A81D749-1F51-47C7-8A00-5834BF0070B1}.Release|x64.Build.0 = Release|x64
 		{1A81D749-1F51-47C7-8A00-5834BF0070B1}.Release|x86.ActiveCfg = Release|Win32
 		{1A81D749-1F51-47C7-8A00-5834BF0070B1}.Release|x86.Build.0 = Release|Win32
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Debug|x64.ActiveCfg = Debug|x64
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Debug|x64.Build.0 = Debug|x64
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Debug|x86.ActiveCfg = Debug|Win32
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Debug|x86.Build.0 = Debug|Win32
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Release|x64.ActiveCfg = Release|x64
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Release|x64.Build.0 = Release|x64
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Release|x86.ActiveCfg = Release|Win32
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -762,6 +774,8 @@ Global
 		{165216B0-083E-4BD5-9052-4FEE1ACDBC0D} = {FC19A8A1-F672-4A66-88D4-138C624E5AA0}
 		{5259671D-850E-448E-9606-662D3AA3E69E} = {D20240FB-E5E8-4571-93CB-96ABD6E8A5DB}
 		{1A81D749-1F51-47C7-8A00-5834BF0070B1} = {5259671D-850E-448E-9606-662D3AA3E69E}
+		{277F5C22-9A8B-4E93-9BA3-CD22A12C2D01} = {5DDD2198-D786-4495-8A81-94C602527C38}
+		{814C801E-D88A-4584-AEED-CD4B15BF4F73} = {277F5C22-9A8B-4E93-9BA3-CD22A12C2D01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}
