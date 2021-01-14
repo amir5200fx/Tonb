@@ -96,3 +96,20 @@ tnbLib::maker::CurveQ::CreateCurve
 
 	return id;
 }
+
+Standard_Integer 
+tnbLib::maker::CurveQ::CreateCurve
+(
+	const word & name, 
+	const std::shared_ptr<SectPx_Pole>& thePole0, 
+	const std::shared_ptr<SectPx_Pole>& thePole1
+)
+{
+	auto item = std::make_shared<SectPx_CurveQ>(0, name, thePole0, thePole1);
+	Debug_Null_Pointer(item);
+
+	Debug_Null_Pointer(Registry());
+	const auto id = Registry()->Import(item);
+
+	return id;
+}
