@@ -64,6 +64,8 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsCurveQ() const override;
 
+		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
+
 		const auto& Pole0() const
 		{
 			return thePole0_;

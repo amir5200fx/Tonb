@@ -77,6 +77,12 @@ tnbLib::SectPx_CurveQ::IsCurveQ() const
 	return Standard_True;
 }
 
+Standard_Boolean 
+tnbLib::SectPx_CurveQ::IsFrameRegObj() const
+{
+	return Standard_True;
+}
+
 void tnbLib::SectPx_CurveQ::LoadPole0
 (
 	const std::shared_ptr<SectPx_Pole>& thePole
