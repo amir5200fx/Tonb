@@ -119,6 +119,7 @@
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.hxx" />
     <ClInclude Include="TnbLib\Cad2d\System\TnbCad2d_System.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\Tools\Pln_CascadeTools.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Tools\Pln_CurveTools.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Tools\Pln_Tools.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Trim\EdgeEdge\Cad2d_EdgeEdgeTrim.hxx" />
@@ -228,6 +229,7 @@
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.cxx" />
     <ClCompile Include="TnbLib\Cad2d\System\TnbCad2d_System.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CascadeTools.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_Tools_RetrieveWires.cxx" />
