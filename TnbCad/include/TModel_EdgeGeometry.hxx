@@ -2,8 +2,9 @@
 #ifndef _TModel_EdgeGeometry_Header
 #define _TModel_EdgeGeometry_Header
 
+#include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
-#include <Entity3d_ChainFwd.hxx>
+#include <Entity3d_PolygonFwd.hxx>
 #include <Cad_Module.hxx>
 
 #include <memory>
@@ -24,7 +25,7 @@ namespace tnbLib
 		std::shared_ptr<TModel_Curve> theCurve_;
 		std::shared_ptr<TModel_ParaCurve> theParaCurve_;
 
-		mutable std::shared_ptr<Entity3d_Chain> theMesh_;
+		mutable std::shared_ptr<Entity3d_Polygon> theMesh_;
 
 		Standard_Boolean theSense_;
 
