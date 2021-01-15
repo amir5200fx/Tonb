@@ -5,6 +5,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <Mesh_Module.hxx>
+#include <Geo_MetricPrcsr_Traits.hxx>
 
 namespace tnbLib
 {

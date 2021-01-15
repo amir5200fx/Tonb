@@ -2,8 +2,12 @@
 #ifndef _Geo_MetricPrcsr_Header
 #define _Geo_MetricPrcsr_Header
 
+#include <Entity_Box.hxx>
 #include <Geo_MetricPrcsr_Base.hxx>
 #include <Geo_MetricPrcsrAnIso_Info.hxx>
+#include <Geo_MetricPrcsr_Traits.hxx>
+
+#include <memory>
 
 namespace tnbLib
 {
@@ -26,6 +30,19 @@ namespace tnbLib
 
 		std::shared_ptr<SizeFun> theSizeFunction_;
 		std::shared_ptr<MetricFun> theMetricFunction_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_MetricPrcsr_Base<MetricFun>>(*this);
+			ar & theSizeFunction_;
+			ar & theMetricFunction_;
+		}
 
 	public:
 
@@ -160,6 +177,18 @@ namespace tnbLib
 
 		std::shared_ptr<SizeFun> theSizeFunction_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_MetricPrcsr_Base<void>>(*this);
+			ar & theSizeFunction_;
+		}
+
 	public:
 
 		typedef Geo_MetricPrcsr_Base<void> base;
@@ -257,5 +286,7 @@ namespace tnbLib
 		) const;
 	};
 }
+
+#include <Geo_MetricPrcsrI.hxx>
 
 #endif // !_Geo_MetricPrcsr_Header
