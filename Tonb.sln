@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tonb", "Tonb\Tonb.vcxproj", "{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -303,6 +303,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "curveList", "curveList", "{9814532A-CB82-49C0-B347-758DDBEE5248}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "curveList", "applications\tools\cad2d\curveList\curveList.vcxproj", "{76E33A85-5EAF-46B0-9BEB-867F6A6E0A28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bodyList", "bodyList", "{7DF53216-C5A2-4DE6-8F83-15C7FC159F0B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bodyList", "applications\tools\marine\bodyList\bodyList.vcxproj", "{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modelList", "modelList", "{F87B7B50-4D32-451D-ACCF-E56290BD4BFC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "modelList", "applications\tools\marine\modelList\modelList.vcxproj", "{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -710,6 +718,22 @@ Global
 		{76E33A85-5EAF-46B0-9BEB-867F6A6E0A28}.Release|x64.Build.0 = Release|x64
 		{76E33A85-5EAF-46B0-9BEB-867F6A6E0A28}.Release|x86.ActiveCfg = Release|Win32
 		{76E33A85-5EAF-46B0-9BEB-867F6A6E0A28}.Release|x86.Build.0 = Release|Win32
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Debug|x64.ActiveCfg = Debug|x64
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Debug|x64.Build.0 = Debug|x64
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Debug|x86.ActiveCfg = Debug|Win32
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Debug|x86.Build.0 = Debug|Win32
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Release|x64.ActiveCfg = Release|x64
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Release|x64.Build.0 = Release|x64
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Release|x86.ActiveCfg = Release|Win32
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F}.Release|x86.Build.0 = Release|Win32
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Debug|x64.ActiveCfg = Debug|x64
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Debug|x64.Build.0 = Debug|x64
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Debug|x86.ActiveCfg = Debug|Win32
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Debug|x86.Build.0 = Debug|Win32
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Release|x64.ActiveCfg = Release|x64
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Release|x64.Build.0 = Release|x64
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Release|x86.ActiveCfg = Release|Win32
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -810,6 +834,10 @@ Global
 		{966EAD6F-CC30-4DF6-99B4-4C33394B153C} = {5406A7D6-BD23-42AE-8B7C-1BF170880D8A}
 		{9814532A-CB82-49C0-B347-758DDBEE5248} = {966EAD6F-CC30-4DF6-99B4-4C33394B153C}
 		{76E33A85-5EAF-46B0-9BEB-867F6A6E0A28} = {9814532A-CB82-49C0-B347-758DDBEE5248}
+		{7DF53216-C5A2-4DE6-8F83-15C7FC159F0B} = {5377020C-D86A-4ADC-B5CF-6F4AFC6E208C}
+		{57C9381E-55CD-4EAE-BC8F-2CCC0BF2D85F} = {7DF53216-C5A2-4DE6-8F83-15C7FC159F0B}
+		{F87B7B50-4D32-451D-ACCF-E56290BD4BFC} = {5377020C-D86A-4ADC-B5CF-6F4AFC6E208C}
+		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1} = {F87B7B50-4D32-451D-ACCF-E56290BD4BFC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}
