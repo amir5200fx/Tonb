@@ -3,6 +3,8 @@
 #define _GeoMetricFun_Background_Header
 
 #include <GeoMetricFun_nonUniform.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 #include <memory>
 
@@ -11,10 +13,10 @@ namespace tnbLib
 
 	template<class BackMeshData>
 	class GeoMetricFun_Background
-		: public GeoMetricFun_nonUniform<typename BackMeshData::ptType>
+		: public GeoMetricFun_nonUniform<typename BackMeshData::Point>
 	{
 
-		typedef typename BackMeshData::ptType Point;
+		typedef typename BackMeshData::Point Point;
 
 		/*Private Data*/
 
@@ -29,7 +31,7 @@ namespace tnbLib
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
 			Info << "this function is not supposed to be called" << endl;
-			notImplemented;
+			NotImplemented;
 		}
 
 	public:

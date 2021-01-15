@@ -205,9 +205,6 @@
     <Filter Include="TnbLib\Geo\Function">
       <UniqueIdentifier>{972d42a0-559f-40f1-982a-eb84c1528c73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr">
-      <UniqueIdentifier>{c0757d4d-87cf-44de-9f75-0774b0fca4e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Geo\Function\Metric">
       <UniqueIdentifier>{cf3e9ffa-5514-4e61-bc8a-6e9701d2a1ca}</UniqueIdentifier>
     </Filter>
@@ -246,33 +243,6 @@
     </Filter>
     <Filter Include="TnbLib\Geo\Function\Size\Uniform">
       <UniqueIdentifier>{4a671c2c-9eaa-424b-b0d8-08199b05aaee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\AnIso">
-      <UniqueIdentifier>{037c156e-38fe-4fcf-a7e7-d9e72c96e169}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\Info">
-      <UniqueIdentifier>{279a2bb6-f050-4306-843d-d508a5f3c6e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\Iso">
-      <UniqueIdentifier>{7e479660-9790-4d8d-9d5a-e336a774053f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\Traits">
-      <UniqueIdentifier>{c7e503ad-0005-4001-bb0e-64bad400abbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\System">
-      <UniqueIdentifier>{c66fb259-a07f-4d88-a72f-a5aa1973cd37}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\Iso\2d">
-      <UniqueIdentifier>{83a55e10-806f-42b6-b758-65f928ac04e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\Iso\3d">
-      <UniqueIdentifier>{29309279-78e9-4979-848d-097f018cde8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\AnIso\2d">
-      <UniqueIdentifier>{87240ecf-b9a6-4a4c-88bb-c1efa8dc5b19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\MetricPrcsr\AnIso\3d">
-      <UniqueIdentifier>{882422b7-a835-4a4a-9157-521cd20bf6fe}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Geo\Integrand">
       <UniqueIdentifier>{df66effc-2b4f-43f6-8cc4-57eabc7b96f8}</UniqueIdentifier>
@@ -693,45 +663,6 @@
     <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\GeoMetricFun_nonUniform.hxx">
       <Filter>TnbLib\Geo\Function\Metric\nonUniform</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Geo_MetricPrcsr.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Geo_MetricPrcsrI.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Traits\Geo_MetricPrcsr_Traits.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Traits</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Info\Geo_MetricPrcsrAnIso_Info.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Info</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\System\Geo_MetricPrcsr_System.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\System</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsrFwd.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Iso\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsr.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Iso\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Iso\3d\Geo3d_MetricPrcsrFwd.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Iso\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\Iso\3d\Geo3d_MetricPrcsr.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Iso\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\AnIso\2d\Geo2d_MetricPrcsrAnIsoFwd.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\AnIso\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\AnIso\2d\Geo2d_MetricPrcsrAnIso.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\AnIso\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\AnIso\3d\Geo3d_MetricPrcsrAnIsoFwd.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\AnIso\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\MetricPrcsr\AnIso\3d\Geo3d_MetricPrcsrAnIso.hxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\AnIso\3d</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Integrand\Segment\Function\Geo_SegmentIntegrand_Function.hxx">
       <Filter>TnbLib\Geo\Integrand\Segment\Function</Filter>
     </ClInclude>
@@ -1048,24 +979,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Function\Size\Surface\Geo2d_SizeFunction_Surface.cxx">
       <Filter>TnbLib\Geo\Function\Size\Surface</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\MetricPrcsr\Info\Geo_MetricPrcsrAnIso_Info.cxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Info</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\MetricPrcsr\System\Geo_MetricPrcsr_System.cxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\System</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsr.cxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Iso\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\MetricPrcsr\Iso\3d\Geo3d_MetricPrcsr.cxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\Iso\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\MetricPrcsr\AnIso\2d\Geo2d_MetricPrcsrAnIso.cxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\AnIso\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\MetricPrcsr\AnIso\3d\Geo3d_MetricPrcsrAnIso.cxx">
-      <Filter>TnbLib\Geo\MetricPrcsr\AnIso\3d</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Integrand\Segment\Geo_SegmentIntegrand.cxx">
       <Filter>TnbLib\Geo\Integrand\Segment</Filter>
