@@ -111,6 +111,20 @@ tnbLib::Pln_Curve::Pln_Curve
 	plnCurveLib::CheckBounded(Geometry(), "Pln_Curve()");
 }
 
+Standard_Boolean 
+tnbLib::Pln_Curve::IsRing
+(
+	const Standard_Real tol
+) const
+{
+	if (FirstCoord().Distance(LastCoord()) <= tol)
+	{
+		return Standard_True;
+	}
+	else
+		return Standard_False;
+}
+
 Standard_Real
 tnbLib::Pln_Curve::FirstParameter() const
 {
