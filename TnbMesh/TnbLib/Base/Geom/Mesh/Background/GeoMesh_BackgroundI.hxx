@@ -16,7 +16,6 @@ namespace tnbLib
 			FatalErrorIn("Type InterpolateAt(const Point& theCoord) const")
 				<< "the element is not found!" << endl
 				<< abort(FatalError);
-			return 0;
 		}
 		return Value;
 	}

@@ -1,6 +1,5 @@
 #include <Mesh3d_Element.hxx>
 
-#include <Mesh3d_Node.hxx>
 #include <Mesh3d_Edge.hxx>
 #include <Mesh3d_Facet.hxx>
 

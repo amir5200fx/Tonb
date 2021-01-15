@@ -162,7 +162,7 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			ar & boost::serialization::base_object<GeoMesh_Background_Cache<GeoMesh_Background_Base<MeshData>>(*this);
+			ar & boost::serialization::base_object<GeoMesh_Background_Base<MeshData>>(*this);
 			ar & theSources_;
 		}
 

@@ -60,8 +60,6 @@ namespace tnbLib
 			SecondPreferred
 		};
 
-		static const std::shared_ptr<Aft_Node> null_ptr;
-
 
 		//- default constructor
 

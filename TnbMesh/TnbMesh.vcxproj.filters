@@ -472,6 +472,18 @@
     <Filter Include="TnbLib\Base\Geom\MetricPrcsr\Base">
       <UniqueIdentifier>{7257005c-8888-461c-8233-b79d17c2dcbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\2d">
+      <UniqueIdentifier>{bd8c778e-0db8-4d47-aa50-0dec46e64db8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\3d">
+      <UniqueIdentifier>{6891aa58-9cf7-4dd5-bce0-6e427c723d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\MetricPrcsr\Iso\2d">
+      <UniqueIdentifier>{accbca54-576f-4134-a23a-a0150b7dcc6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\MetricPrcsr\Iso\3d">
+      <UniqueIdentifier>{ad6e8362-11f4-4500-b25e-4c339f326e93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -1092,6 +1104,33 @@
     <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\System\Geo_MetricPrcsr_System.hxx">
       <Filter>TnbLib\Base\Geom\MetricPrcsr\System</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Geo_MetricPrcsrI.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\2d\Geo2d_MetricPrcsrAnIso.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\2d\Geo2d_MetricPrcsrAnIsoFwd.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\3d\Geo3d_MetricPrcsrAnIso.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\AnIso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\3d\Geo3d_MetricPrcsrAnIsoFwd.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\AnIso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsr.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsrFwd.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Iso\3d\Geo3d_MetricPrcsr.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Iso\3d\Geo3d_MetricPrcsrFwd.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Iso\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -1181,9 +1220,6 @@
     <ClCompile Include="TnbLib\Aft\Entities\Node\Adaptor\Aft_NodeAdaptorIO.cxx">
       <Filter>TnbLib\Aft\Entities\Node\Adaptor</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Entities\Node\AnIso\2d\Aft2d_NodeAnIso.cxx">
-      <Filter>TnbLib\Aft\Entities\Node\AnIso\2d</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\Entities\Boundary\Node\TNode\Mesh_TBndNode.cxx">
       <Filter>TnbLib\Base\Entities\Boundary\Node\TNode</Filter>
     </ClCompile>
@@ -1195,6 +1231,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\System\Geo_MetricPrcsr_System.cxx">
       <Filter>TnbLib\Base\Geom\MetricPrcsr\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Geo_MetricPrcsr.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\2d\Geo2d_MetricPrcsrAnIso.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\3d\Geo3d_MetricPrcsrAnIso.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\AnIso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsr.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Iso\3d\Geo3d_MetricPrcsr.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Iso\3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

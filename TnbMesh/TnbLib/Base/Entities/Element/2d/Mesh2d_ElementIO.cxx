@@ -1,5 +1,8 @@
 #include <Mesh2d_Element.hxx>
 
+#include <Mesh2d_Node.hxx>
+#include <Mesh2d_Edge.hxx>
+
 namespace tnbLib
 {
 

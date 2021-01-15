@@ -1,7 +1,9 @@
 #include <Mesh_ElementAdaptorTypes.hxx>
 
+#include <Mesh3d_Node.hxx>
 #include <Mesh3d_Element.hxx>
 #include <Mesh3d_Facet.hxx>
+#include <Mesh2d_Node.hxx>
 #include <Mesh2d_Element.hxx>
 
 template<>

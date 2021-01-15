@@ -2,6 +2,7 @@
 #ifndef _Mesh3d_Element_Header
 #define _Mesh3d_Element_Header
 
+#include <Mesh3d_Node.hxx>
 #include <Mesh_Element.hxx>
 #include <Mesh3d_ElementTraits.hxx>
 

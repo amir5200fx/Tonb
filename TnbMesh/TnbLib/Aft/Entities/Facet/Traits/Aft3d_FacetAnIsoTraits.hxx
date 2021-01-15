@@ -6,6 +6,7 @@
 #include <Aft3d_EdgeAnIsoFwd.hxx>
 #include <Aft3d_FacetAnIsoFwd.hxx>
 #include <Aft3d_ElementAnIsoFwd.hxx>
+#include <Entity_Connectivity.hxx>
 
 namespace tnbLib
 {
@@ -17,6 +18,8 @@ namespace tnbLib
 		typedef Aft3d_EdgeAnIso edgeType;
 		typedef Aft3d_FacetAnIso facetType;
 		typedef Aft3d_ElementAnIso elementType;
+
+		typedef connectivity::triple connectType;
 	};
 }
 

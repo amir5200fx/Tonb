@@ -5,6 +5,8 @@
 #include <Mesh_EntityAdaptorM.hxx>
 #include <Mesh_Module.hxx>
 
+#define MESH_MODULE TnbMesh_EXPORT
+
 namespace tnbLib
 {
 
@@ -107,5 +109,7 @@ namespace tnbLib
 		}
 	};
 }
+
+#undef MESH_MODULE
 
 #endif // !_Mesh_EdgeAdaptor_Header

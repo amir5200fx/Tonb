@@ -28,8 +28,11 @@ namespace tnbLib
 		friend class boost::serialization::access;
 
 		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+			ar & theCurves_;
 		}
 
 	public:
