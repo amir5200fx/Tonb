@@ -49,7 +49,7 @@ namespace tnbLib
 
 		typedef std::vector<Segment> segList;
 
-		auto CalcRandomX
+		inline auto CalcRandomX
 		(
 			const Standard_Integer nbPnts, 
 			const Standard_Real x0,
@@ -65,7 +65,7 @@ namespace tnbLib
 			return std::move(xs);
 		}
 
-		auto UniformDistb
+		inline auto UniformDistb
 		(
 			const Standard_Integer nbPnts, 
 			const Standard_Real x0, 
@@ -285,7 +285,7 @@ namespace tnbLib
 			}
 
 			auto segPnts = GeoLib::CalcSegPoints(theCurve, theSeg);
-			auto sqDis = GeoLib::CalcSqDist<Geom2d_Curve>(segPnts);
+			auto sqDis = GeoLib::CalcSqDist<CurveType>(segPnts);
 
 			if (sqDis <= theMinSizeSQ)
 				return;
@@ -297,7 +297,7 @@ namespace tnbLib
 					GeoLib::CalcXs<CurveType, RandSamples>::_(theNbSamples, theSeg.theX0, theSeg.theX1)
 				);
 
-			auto approx = GeoLib::CalcApproximate<Geom2d_Curve>(segPnts, samples);
+			auto approx = GeoLib::CalcApproximate<CurveType>(segPnts, samples);
 
 			if (theApprox*sqDis < approx)
 			{
@@ -322,7 +322,7 @@ namespace tnbLib
 				return;
 			}
 
-			auto angle = GeoLib::CalcMaxAngle<Geom2d_Curve>(segPnts, samples);
+			auto angle = GeoLib::CalcMaxAngle<CurveType>(segPnts, samples);
 			if (theAngle < angle)
 			{
 				Subdivide<CurveType, RandSamples>
