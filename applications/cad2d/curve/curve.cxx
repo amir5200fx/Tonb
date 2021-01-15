@@ -9,6 +9,7 @@
 
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
+#include <boost/filesystem.hpp>
 
 #include <gp_Ax2d.hxx>
 #include <gp_Circ2d.hxx>
@@ -17,12 +18,69 @@
 #include <gp_Parab2d.hxx>
 #include <Geom2d_Curve.hxx>
 
+#include <vector>
+
 namespace tnbLib
 {
 
 	typedef std::shared_ptr<Pln_Curve> curve_t;
 
 	curve_t myCurve;
+
+	static double intplTol = 1.0E-6;
+
+	//- globals
+
+	void checkCurve()
+	{
+		if (NOT myCurve)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no curve has been constructed!" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void setIntplTol(double x)
+	{
+		intplTol = x;
+	}
+
+	void setName(const std::string& name)
+	{
+		checkCurve();
+		myCurve->SetName(name);
+	}
+
+	auto makePointList()
+	{
+		std::vector<Pnt2d> l;
+		return std::move(l);
+	}
+
+	void pushBackToList(std::vector<Pnt2d>& l, const Pnt2d& p)
+	{
+		l.push_back(p);
+	}
+
+	auto getCurrentPath()
+	{
+		auto dir = boost::filesystem::current_path();
+		return std::move(dir);
+	}
+
+	void removeAllSubdirectories()
+	{
+		boost::filesystem::
+	}
+
+	//- curve makers
+
+	void makeInterpolation(const std::vector<Pnt2d>& q)
+	{
+		auto geom = Pln_CurveTools::Interpolation(q, false, intplTol);
+		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+	}
 
 	auto makePoint(double x, double y)
 	{
@@ -204,6 +262,7 @@ namespace tnbLib
 
 	void exportToPlt(const std::string& name, int n)
 	{
+		checkCurve();
 		fileName fn(name);
 		OFstream f(fn);
 
@@ -243,6 +302,12 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([](double x)->void {setIntplTol(x); }), "setInterplTol");
+		mod->add(chaiscript::fun([]()->auto {return makePointList(); }), "makePointList");
+		mod->add(chaiscript::fun([](std::vector<Pnt2d>& l, const Pnt2d& p)->void {pushBackToList(l, p); }), "pushBack");
+
+		mod->add(chaiscript::fun([](const std::vector<Pnt2d>& Q)->void {makeInterpolation(Q); }), "makeInterpolation");
+
 		mod->add(chaiscript::fun([](double x, double y)-> auto {return makePoint(x, y); }), "makePoint");
 		mod->add(chaiscript::fun([](double x, double y)-> auto {return makeDir(x, y); }), "makeDirection");
 
