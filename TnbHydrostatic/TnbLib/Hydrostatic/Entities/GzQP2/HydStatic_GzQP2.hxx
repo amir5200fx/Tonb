@@ -16,6 +16,19 @@ namespace tnbLib
 		Standard_Real theParameter0_;
 		Standard_Real theParameter1_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<HydStatic_GzQ>(*this);
+			ar & theParameter0_;
+			ar & theParameter1_;
+		}
+
 	public:
 
 		HydStatic_GzQP2()
@@ -34,6 +47,8 @@ namespace tnbLib
 		{}
 
 
+		//- public functions and operators
+
 		TnbHydStatic_EXPORT std::shared_ptr<HydStatic_GzQ> Mirrored(const Pnt2d& theO) const override;
 
 		TnbHydStatic_EXPORT std::shared_ptr<HydStatic_GzQ> Mirrored(const gp_Ax2d& theAx) const override;
@@ -43,5 +58,8 @@ namespace tnbLib
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Parameter1)
 	};
 }
+
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_GzQP2);
 
 #endif // !_HydStatic_GzQP2_Header

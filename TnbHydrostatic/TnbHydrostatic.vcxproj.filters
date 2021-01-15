@@ -704,5 +704,14 @@
     <ClCompile Include="TnbLib\Hydrostatic\FormCoeff\HydStatic_FormCoeffIO.cxx">
       <Filter>TnbLib\Hydrostatic\FormCoeff</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQ\HydStatic_GzQIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\GzQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP\HydStatic_GzQPIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\GzQP</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP2\HydStatic_GzQP2IO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\GzQP2</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

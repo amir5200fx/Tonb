@@ -136,8 +136,11 @@
     <ClCompile Include="TnbLib\Hydrostatic\Entities\Functions\rArm\HydStatic_StbFun_rArm.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Entities\GM0Curve\HydStatic_GM0Curve.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP2\HydStatic_GzQP2.cxx" />
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP2\HydStatic_GzQP2IO.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP\HydStatic_GzQP.cxx" />
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP\HydStatic_GzQPIO.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQ\HydStatic_GzQ.cxx" />
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQ\HydStatic_GzQIO.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Entities\HeelCurve\DFld\HydStatic_DFldCurve.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Entities\HeelCurve\DynStb\HydStatic_DynStbCurve.cxx" />
     <ClCompile Include="TnbLib\Hydrostatic\Entities\HeelCurve\HydStatic_HeelCurve.cxx" />
