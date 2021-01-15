@@ -16,6 +16,8 @@ class gp_Ax2d;
 class gp_Ax22d;
 class gp_Trsf2d;
 
+#include <Precision.hxx>
+
 #include <memory>
 #include <vector>
 #include <tuple>
@@ -96,6 +98,12 @@ namespace tnbLib
 		{
 			return theGeometry_;
 		}
+
+		TnbCad2d_EXPORT Standard_Boolean 
+			IsRing
+			(
+				const Standard_Real tol = Precision::Confusion()
+			) const;
 
 		TnbCad2d_EXPORT Standard_Real FirstParameter() const;
 
