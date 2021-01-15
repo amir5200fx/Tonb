@@ -1,6 +1,9 @@
 #include <Pln_CurveTools.hxx>
 #include <Pln_Curve.hxx>
+#include <Pln_Ring.hxx>
+#include <Pln_Vertex.hxx>
 #include <Cad2d_Plane.hxx>
+#include <Cad2d_Modeler.hxx>
 #include <Dir2d.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
@@ -10,6 +13,7 @@
 
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
+#include <boost/filesystem.hpp>
 
 #include <gp_Ax2d.hxx>
 #include <gp_Circ2d.hxx>
@@ -30,7 +34,11 @@ namespace tnbLib
 	static gp_Ax2 mySys = gp::XOY();
 
 	static std::vector<curve_t> myCurves;
-	static size_t nbCurves;
+	static auto myModeler = std::make_shared<Cad2d_Modeler>();
+
+	static bool verbose = false;
+
+	static double ringTol = Precision::Confusion();
 
 	void checkPlane()
 	{
@@ -40,6 +48,114 @@ namespace tnbLib
 				<< "no plane has been constructed!" << endl
 				<< abort(FatalError);
 		}
+	}
+
+	void loadCurves(const std::string& name)
+	{
+		int i = 0;
+		while (true)
+		{
+			boost::filesystem::path dir(std::to_string(i));
+			if (boost::filesystem::is_directory(dir))
+			{
+				std::string address = ".\\" + std::to_string(i) + "\\" + name;
+				std::fstream file;
+				file.open(address, ios::in);
+
+				if (file.fail())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "file was not found" << endl
+						<< abort(FatalError);
+				}
+
+				boost::archive::polymorphic_text_iarchive ia(file);
+
+				curve_t curve;
+				ia >> curve;
+
+				if (verbose)
+				{
+					Info << "the file: " << address << " has been loaded, successfully." << endl;
+				}
+
+				if (NOT curve)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the curve is empty" << endl
+						<< abort(FatalError);
+				}
+				myCurves.push_back(std::move(curve));
+				++i;
+			}
+			else
+			{
+				break;
+			}
+		}
+		if (verbose)
+		{
+			Info << myCurves.size() << " curve(s) has(have) been loaded." << endl;
+		}
+	}
+
+	auto makeEdge(curve_t&& c)
+	{
+		if (c->IsRing(ringTol))
+		{
+			auto vtx = std::make_shared<Pln_Vertex>(c->FirstCoord());
+			std::shared_ptr<Pln_Edge> ring = std::make_shared<Pln_Ring>(0, "ring", vtx, std::move(c));
+			return std::move(ring);
+		}
+		else
+		{
+			auto v0 = std::make_shared<Pln_Vertex>(c->FirstCoord());
+			auto v1 = std::make_shared<Pln_Vertex>(c->LastCoord());
+			auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(c));
+			return std::move(edge);
+		}
+	}
+
+	void makePlane()
+	{
+		if (myCurves.empty())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no curve has been detected!" << endl
+				<< abort(FatalError);
+		}
+
+		std::vector<std::shared_ptr<Pln_Edge>> edges;
+		edges.reserve(myCurves.size());
+
+		for (auto& x : myCurves)
+		{
+			Debug_Null_Pointer(x);
+			auto edge = makeEdge(std::move(x));
+			edges.push_back(std::move(edge));
+		}
+
+		myModeler->Import(std::move(edges));
+
+		Cad2d_Modeler::selctList l;
+		myModeler->SelectAll(l);
+		myModeler->MakePlanes(l);
+
+		if (myModeler->NbPlanes() > 1)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no multiple planes construction is permitted" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT myModeler->NbPlanes())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no plane has been created" << endl
+				<< abort(FatalError);
+		}
+		auto iter = myModeler->Planes().begin();
+		myPlane = std::move(iter->second);
 	}
 
 	//- geometric makers
