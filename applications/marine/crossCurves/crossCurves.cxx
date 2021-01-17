@@ -7,6 +7,9 @@
 #include <HydStatic_Spacing.hxx>
 #include <HydStatic_CustomSpacing.hxx>
 #include <HydStatic_UniformSpacing.hxx>
+#include <HydStatic_HeelSpacing_Arbt.hxx>
+#include <HydStatic_HeelSpacing_Asym.hxx>
+#include <HydStatic_HeelSpacing_Stb.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -22,14 +25,15 @@
 namespace tnbLib
 {
 	static const unsigned int DEFAULT_NB_WATERS = 5;
+	static const unsigned int DEFAULT_NB_HEELS = 5;
 	static const auto crossCurves = std::make_shared<HydStatic_CrossCurves>();
 	static int nbWaters = 10;
-	static const std::vector<double> DEFAULT_HEELS = { -35.0,-30,-25,-20,-15,-10,-5,0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90 };
+	static const std::vector<double> DEFAULT_HEELS = { 0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90 };
 
 	typedef std::shared_ptr<Marine_Body> body_t;
 	typedef std::shared_ptr<marineLib::Body_Tank> tank_t;
 	typedef std::shared_ptr<marineLib::Body_Displacer> displacer_t;
-	typedef std::shared_ptr<HydStatic_Spacing> spacing_t;
+	typedef std::shared_ptr<HydStatic_HeelSpacing> spacing_t;
 
 	spacing_t myHeels;
 
@@ -47,7 +51,7 @@ namespace tnbLib
 		nbWaters = std::max(DEFAULT_NB_WATERS, n);
 	}
 
-	void setHeels(const std::vector<double>& h)
+	void setStbHeels(const std::vector<double>& h)
 	{
 		if (h.empty())
 		{
@@ -70,7 +74,84 @@ namespace tnbLib
 			x0 = x1;
 			iter++;
 		}
-		myHeels = std::make_shared<HydStatic_CustomSpacing>(h);	
+		
+		auto heels = std::make_shared<hydStcLib::HeelSpacing_Stb>();
+		heels->Perform(h);
+		myHeels = std::move(heels);
+	}
+
+	void setStbHeels(unsigned int n)
+	{
+		n = std::max(n, DEFAULT_NB_HEELS);
+
+		auto heels = std::make_shared<hydStcLib::HeelSpacing_Stb>();
+		heels->Perform(n);
+		myHeels = std::move(heels);
+	}
+
+	void setAsymmHeels(const std::vector<double>& h)
+	{
+		if (h.empty())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the list is empty" << endl
+				<< abort(FatalError);
+		}
+		auto iter = h.begin();
+		auto x0 = *iter;
+		iter++;
+		while (iter NOT_EQUAL h.end())
+		{
+			auto x1 = *iter;
+			if (x1 <= x0)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "heel list is not sorted!" << endl
+					<< abort(FatalError);
+			}
+			x0 = x1;
+			iter++;
+		}
+		auto heels = std::make_shared<hydStcLib::HeelSpacing_Asym>();
+		heels->Perform(h);
+		myHeels = std::move(heels);
+	}
+
+	void setAsymmHeels(unsigned int n)
+	{
+		n = std::max(n, DEFAULT_NB_HEELS);
+
+		auto heels = std::make_shared<hydStcLib::HeelSpacing_Asym>();
+		heels->Perform(n);
+		myHeels = std::move(heels);
+	}
+
+	void setArbtHeels(const std::vector<double>& h)
+	{
+		if (h.empty())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the list is empty" << endl
+				<< abort(FatalError);
+		}
+		auto iter = h.begin();
+		auto x0 = *iter;
+		iter++;
+		while (iter NOT_EQUAL h.end())
+		{
+			auto x1 = *iter;
+			if (x1 <= x0)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "heel list is not sorted!" << endl
+					<< abort(FatalError);
+			}
+			x0 = x1;
+			iter++;
+		}
+		auto spacing = std::make_shared<HydStatic_CustomSpacing>(std::move(h));
+		auto heels = std::make_shared<hydStcLib::HeelSpacing_Arbt>(std::move(spacing));
+		myHeels = std::move(heels);
 	}
 
 	void setHeels()
@@ -81,10 +162,10 @@ namespace tnbLib
 		{
 			heels.push_back(Geo_Tools::DegToRadian(h));
 		}
-		myHeels = std::make_shared<HydStatic_CustomSpacing>(heels);
+		setStbHeels(heels);
 	}
 
-	void setHeels(double l, double u, unsigned int n)
+	void setArbtHeels(double l, double u, unsigned int n)
 	{
 		if (u <= l)
 		{
@@ -94,7 +175,7 @@ namespace tnbLib
 		auto h = std::make_shared<HydStatic_UniformSpacing>(n);
 		h->SetLower(Geo_Tools::DegToRadian(l));
 		h->SetUpper(Geo_Tools::DegToRadian(u));
-		myHeels = h;
+		myHeels = std::make_shared<hydStcLib::HeelSpacing_Arbt>(std::move(h));
 	}
 
 	auto createDomain_tank(const tank_t& b)
@@ -225,8 +306,11 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
-		mod->add(chaiscript::fun([](const std::vector<double>& h)-> void {setHeels(h); }), "setHeels");
-		mod->add(chaiscript::fun([](double l, double u, unsigned int n)-> void {setHeels(l, u, n); }), "setHeels");
+		mod->add(chaiscript::fun([](const std::vector<double>& h)-> void {setStbHeels(h); }), "setStbHeels");
+		mod->add(chaiscript::fun([](int n)-> void {setStbHeels(n); }), "setStbHeels");
+		mod->add(chaiscript::fun([](const std::vector<double>& h)-> void {setAsymmHeels(h); }), "setAsymHeels");
+		mod->add(chaiscript::fun([](int n)-> void {setAsymmHeels(n); }), "setAsymHeels");
+		mod->add(chaiscript::fun([](double l, double u, unsigned int n)-> void {setArbtHeels(l, u, n); }), "setHeels");
 		mod->add(chaiscript::fun([](const unsigned int n)->void {SetNbWaters(n); }), "setNbWaters");
 		mod->add(chaiscript::fun([](unsigned short i)->void {HydStatic_CrossCurves::verbose = i; }), "setVerbose");
 		mod->add(chaiscript::fun([](unsigned short i)-> void {Marine_CmptLib2::CrossCurve_Verbose = i; }), "setCrossCurveVerbose");
