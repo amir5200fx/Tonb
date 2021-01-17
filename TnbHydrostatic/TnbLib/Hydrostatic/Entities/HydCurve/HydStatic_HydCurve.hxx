@@ -36,7 +36,7 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT HydStatic_HydCurve
 		(
-			const Handle(Geom2d_Curve)&& theCurve
+			Handle(Geom2d_Curve)&& theCurve
 		);
 
 		TnbHydStatic_EXPORT HydStatic_HydCurve
@@ -47,7 +47,8 @@ namespace tnbLib
 		TnbHydStatic_EXPORT HydStatic_HydCurve
 		(
 			const Standard_Integer theIndex,
-			const Handle(Geom2d_Curve)& theCurve
+			const word& theName,
+			Handle(Geom2d_Curve)&& theCurve
 		);
 
 		TnbHydStatic_EXPORT HydStatic_HydCurve

@@ -25,13 +25,13 @@ namespace tnbLib
 				: HydStatic_rArmCurve(theCurve)
 			{}
 
-			rArmCurve_Prim
+			/*rArmCurve_Prim
 			(
 				const Standard_Integer theIndex,
 				const Handle(Geom2d_Curve)& theCurve
 			)
 				: HydStatic_rArmCurve(theIndex, theCurve)
-			{}
+			{}*/
 
 			rArmCurve_Prim
 			(

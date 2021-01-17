@@ -5,6 +5,7 @@
 #include <Global_Done.hxx>
 #include <gp_Ax1.hxx>
 #include <HydStatic_Module.hxx>
+#include <HydStatic_CurveMakerType.hxx>
 #include <Global_Serialization.hxx>
 
 #include <memory>
@@ -19,7 +20,7 @@ namespace tnbLib
 	class Marine_Domain;
 	class Marine_Graph;
 	class HydStatic_CrsCurve;
-	class HydStatic_Spacing;
+	class HydStatic_HeelSpacing;
 
 	class HydStatic_CrossCurves
 		: public Global_Done
@@ -34,7 +35,7 @@ namespace tnbLib
 		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<Marine_Body> theBody_;
 
-		std::shared_ptr<HydStatic_Spacing> theHeels_;
+		std::shared_ptr<HydStatic_HeelSpacing> theHeels_;
 
 		std::vector<std::shared_ptr<HydStatic_CrsCurve>> theCrossCurves_;
 
@@ -69,7 +70,7 @@ namespace tnbLib
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain, 
 			const std::shared_ptr<Marine_Body>& theBody, 
-			const std::shared_ptr<HydStatic_Spacing>& theHeels,
+			const std::shared_ptr<HydStatic_HeelSpacing>& theHeels,
 			const Standard_Integer theNbWaters,
 			const gp_Ax1& theAx
 		);
@@ -110,7 +111,7 @@ namespace tnbLib
 			return theCrossCurves_;
 		}
 
-		TnbHydStatic_EXPORT void Perform();
+		TnbHydStatic_EXPORT void Perform(const hydStcLib::CurveMakerType t = hydStcLib::CurveMakerType::starboard);
 
 		void LoadDomain(const std::shared_ptr<Marine_Domain>& theDomain)
 		{
@@ -122,7 +123,7 @@ namespace tnbLib
 			theBody_ = theBody;
 		}
 
-		void LoadHeels(const std::shared_ptr<HydStatic_Spacing>& theHeels)
+		void LoadHeels(const std::shared_ptr<HydStatic_HeelSpacing>& theHeels)
 		{
 			theHeels_ = theHeels;
 		}

@@ -25,11 +25,11 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		TnbHydStatic_EXPORT HydStatic_WDiffCurve
+		/*TnbHydStatic_EXPORT HydStatic_WDiffCurve
 		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
-		);
+		);*/
 
 		TnbHydStatic_EXPORT HydStatic_WDiffCurve
 		(

@@ -2,16 +2,20 @@
 #ifndef _HydStatic_Tools_Header
 #define _HydStatic_Tools_Header
 
+#include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Marine_xSectionParam.hxx>
 #include <Marine_VesselParam_KG.hxx>
 #include <HydStatic_rArmCurves.hxx>
 #include <HydStatic_Module.hxx>
+#include <HydStatic_CurveMakerType.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <vector>
 #include <memory>
+
+class Geom2d_Curve;
 
 namespace tnbLib
 {
@@ -26,7 +30,10 @@ namespace tnbLib
 	class HydStatic_hArmCurve;
 	class HydStatic_AuCurve;
 	class HydStatic_rAuCurve;
+	class HydStatic_Spacing;
+	class HydStatic_CrsCurve;
 	class NumAlg_AdaptiveInteg_Info;
+	
 	class Pnt2d;
 
 	namespace hydStcLib { class rArmCurve_Eff; }
@@ -38,16 +45,48 @@ namespace tnbLib
 
 		typedef NumAlg_AdaptiveInteg_Info info;
 
-		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_hArmCurve> 
-			HeelingCurve
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_Spacing>
+			UniformSpacing
 			(
-				const std::vector<HydStatic_GzQP>& theQs
+				const Standard_Integer n, 
+				const Standard_Real u0, 
+				const Standard_Real u1
+			);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_Spacing> 
+			CustomSpacing
+			(
+				const std::vector<Standard_Real>& Us,
+				const Standard_Real u0, 
+				const Standard_Real u1
+			);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_CrsCurve> 
+			CrossCurve
+			(
+				const Handle(Geom2d_Curve)& theGeom, 
+				const hydStcLib::CurveMakerType t
+			);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_CrsCurve> 
+			CrossCurve
+			(
+				Handle(Geom2d_Curve)&& theGeom, 
+				const hydStcLib::CurveMakerType t
 			);
 
 		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_hArmCurve> 
 			HeelingCurve
 			(
-				const std::vector<HydStatic_GzQP>&& theQs
+				const std::vector<HydStatic_GzQP>& theQs,
+				const hydStcLib::CurveMakerType t
+			);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_hArmCurve> 
+			HeelingCurve
+			(
+				const std::vector<HydStatic_GzQP>&& theQs,
+				const hydStcLib::CurveMakerType t
 			);
 
 		static TnbHydStatic_EXPORT std::vector<HydStatic_GzQ> 
@@ -139,6 +178,7 @@ namespace tnbLib
 			AuCurve
 			(
 				const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theCurve, 
+				const hydStcLib::CurveMakerType t,
 				const Standard_Real y0, 
 				const std::shared_ptr<info>& theInfo
 			);
@@ -147,6 +187,7 @@ namespace tnbLib
 			AuCurve
 			(
 				const std::shared_ptr<HydStatic_hArmCurve>& theCurve,
+				const hydStcLib::CurveMakerType t,
 				const Standard_Real y0,
 				const std::shared_ptr<info>& theInfo
 			);

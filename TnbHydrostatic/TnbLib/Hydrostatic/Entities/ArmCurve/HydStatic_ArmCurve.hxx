@@ -18,30 +18,25 @@ namespace tnbLib
 
 		std::vector<HydStatic_GzQP> theQs_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<HydStatic_HydCurve>(*this);
+			ar & theQs_;
+		}
+
 	protected:
 
-		TnbHydStatic_EXPORT HydStatic_ArmCurve
-		(
-			const Handle(Geom2d_Curve)&& theCurve
-		);
 
-		TnbHydStatic_EXPORT HydStatic_ArmCurve
-		(
-			const Handle(Geom2d_Curve)& theCurve
-		);
-
-		TnbHydStatic_EXPORT HydStatic_ArmCurve
-		(
-			const Standard_Integer theIndex,
-			const Handle(Geom2d_Curve)& theCurve
-		);
-
-		TnbHydStatic_EXPORT HydStatic_ArmCurve
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const Handle(Geom2d_Curve)& theCurve
-		);
+		template<class... _Types>
+		HydStatic_ArmCurve(_Types&&... _Args)
+			: HydStatic_HydCurve(_Args...)
+		{}
 
 	public:
 
@@ -84,5 +79,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::HydStatic_ArmCurve);
 
 #endif // !_HydStatic_ArmCurve_Header

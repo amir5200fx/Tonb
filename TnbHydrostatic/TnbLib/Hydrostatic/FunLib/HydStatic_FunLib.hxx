@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <HydStatic_Module.hxx>
+#include <HydStatic_CurveMakerType.hxx>
 
 #include <memory>
 
@@ -35,14 +36,16 @@ namespace tnbLib
 			HeelingArm
 			(
 				const std::shared_ptr<HydStatic_hArmFormula>& theHeeling,
-				const std::shared_ptr<HydStatic_StbFun>& theRighting
+				const std::shared_ptr<HydStatic_StbFun>& theRighting,
+				const hydStcLib::CurveMakerType t
 			);
 
 		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_StbFun>
 			HeelingArm
 			(
 				const std::shared_ptr<HydStatic_hArmFormula>& theHeeling,
-				const Geo_xDistb& theDist
+				const Geo_xDistb& theDist,
+				const hydStcLib::CurveMakerType t
 			);
 
 		static TnbHydStatic_EXPORT Standard_Real

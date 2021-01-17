@@ -37,13 +37,7 @@ namespace tnbLib
 			return theHeel_;
 		}
 
-		void SetHeel
-		(
-			const Standard_Real theHeel
-		)
-		{
-			theHeel_ = theHeel;
-		}
+		
 
 	protected:
 
@@ -52,31 +46,34 @@ namespace tnbLib
 		HydStatic_CrsCurve()
 		{}
 
-	public:
-
 
 		//- constructors
 
 		TnbHydStatic_EXPORT HydStatic_CrsCurve
 		(
-			const Handle(Geom2d_Curve)& theCurve,
-			const Standard_Real theHeel
-		);
-
-		TnbHydStatic_EXPORT HydStatic_CrsCurve
-		(
-			const Standard_Integer theIndex,
-			const Handle(Geom2d_Curve)& theCurve,
-			const Standard_Real theHeel
+			const Handle(Geom2d_Curve)& theCurve
 		);
 
 		TnbHydStatic_EXPORT HydStatic_CrsCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Handle(Geom2d_Curve)& theCurve,
-			const Standard_Real theHeel
+			const Handle(Geom2d_Curve)& theCurve
 		);
+
+		TnbHydStatic_EXPORT HydStatic_CrsCurve
+		(
+			Handle(Geom2d_Curve)&& theCurve
+		);
+
+		TnbHydStatic_EXPORT HydStatic_CrsCurve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Handle(Geom2d_Curve)&& theCurve
+		);
+
+	public:
 
 
 		//- public functions and operators
@@ -94,11 +91,25 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real theVolume) const;
 
+		void SetHeel
+		(
+			const Standard_Real theHeel
+		)
+		{
+			theHeel_ = theHeel;
+		}
 		
 	};
 }
 
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_CrsCurve);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::HydStatic_CrsCurve);
+
+#include <HydStatic_CurveMaker.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_SymmHeel<tnbLib::HydStatic_CrsCurve>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_AsymmHeel<tnbLib::HydStatic_CrsCurve>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_StbHeel<tnbLib::HydStatic_CrsCurve>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_ArbtHeel<tnbLib::HydStatic_CrsCurve>);
 
 #endif // !_HydStatic_CrsCurve_Header

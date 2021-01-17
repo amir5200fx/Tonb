@@ -20,11 +20,11 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve
 		);
 
-		TnbHydStatic_EXPORT HydStatic_DynStbCurve
+		/*TnbHydStatic_EXPORT HydStatic_DynStbCurve
 		(
-			const Standard_Integer theIndex, 
+			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
-		);
+		);*/
 
 		TnbHydStatic_EXPORT HydStatic_DynStbCurve
 		(

@@ -10,12 +10,16 @@
 #include <HydStatic_rArmCurve.hxx>
 #include <HydStatic_hArmCurve.hxx>
 #include <HydStatic_hAuCurve.hxx>
+#include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_rArmCurve_Body.hxx>
 #include <HydStatic_rArmCurve_FSLq.hxx>
 #include <HydStatic_rArmCurve_LDT.hxx>
 #include <HydStatic_rArmCurve_LDV.hxx>
 #include <HydStatic_rArmCurve_Eff.hxx>
 #include <HydStatic_ArmCurveCreator.hxx>
+#include <HydStatic_UniformSpacing.hxx>
+#include <HydStatic_CustomSpacing.hxx>
+#include <HydStatic_CrsCurve.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -26,10 +30,97 @@
 #include <TColgp_HArray1OfPnt2d.hxx>
 #include <StdFail_NotDone.hxx>
 
+std::shared_ptr<tnbLib::HydStatic_Spacing> 
+tnbLib::HydStatic_Tools::UniformSpacing
+(
+	const Standard_Integer n, 
+	const Standard_Real u0,
+	const Standard_Real u1
+)
+{
+	auto spacing = std::make_shared<HydStatic_UniformSpacing>(n);
+	spacing->SetLower(u0);
+	spacing->SetUpper(u1);
+	return std::move(spacing);
+}
+
+std::shared_ptr<tnbLib::HydStatic_Spacing> 
+tnbLib::HydStatic_Tools::CustomSpacing
+(
+	const std::vector<Standard_Real>& Us, 
+	const Standard_Real u0, 
+	const Standard_Real u1
+)
+{
+	if (Us.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "not enough points for the spacing vector" << endl
+			<< abort(FatalError);
+	}
+#ifdef _DEBUG
+	for (size_t i = 0; i < Us.size() - 1; i++)
+	{
+		auto u00 = Us[i];
+		auto u11 = Us[i + 1];
+		if (u00 >= u11)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid heel values has been detected!" << endl
+				<< abort(FatalError);
+		}
+	}
+#endif // _DEBUG
+	if (u1 <= u0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid limits has been detected!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto x0 = Us[0];
+	const auto x1 = Us[Us.size() - 1];
+	const auto dx = x1 - x0;
+
+	std::vector<Standard_Real> xs;
+	xs.reserve(Us.size());
+	for (auto x : Us)
+	{
+		auto t = (x - x0) / dx;
+		xs.push_back(u0 + t * (u1 - u0));
+	}
+
+	auto spacing = std::make_shared<HydStatic_CustomSpacing>(std::move(xs));
+	return std::move(spacing);
+}
+
+std::shared_ptr<tnbLib::HydStatic_CrsCurve> 
+tnbLib::HydStatic_Tools::CrossCurve
+(
+	const Handle(Geom2d_Curve)& theGeom, 
+	const hydStcLib::CurveMakerType t
+)
+{
+	auto c = hydStcLib::MakeCurve<HydStatic_CrsCurve>(theGeom, t);
+	return std::move(c);
+}
+
+std::shared_ptr<tnbLib::HydStatic_CrsCurve>
+tnbLib::HydStatic_Tools::CrossCurve
+(
+	Handle(Geom2d_Curve)&& theGeom,
+	const hydStcLib::CurveMakerType t
+)
+{
+	auto c = hydStcLib::MakeCurve<HydStatic_CrsCurve>(std::move(theGeom), t);
+	return std::move(c);
+}
+
 std::shared_ptr<tnbLib::HydStatic_hArmCurve> 
 tnbLib::HydStatic_Tools::HeelingCurve
 (
-	const std::vector<HydStatic_GzQP>& theQs
+	const std::vector<HydStatic_GzQP>& theQs,
+	const hydStcLib::CurveMakerType t
 )
 {
 	const auto offsets = OffsetsFrom(theQs);
@@ -37,7 +128,7 @@ tnbLib::HydStatic_Tools::HeelingCurve
 	auto curve = MarineBase_Tools::Curve(offsets);
 	Debug_Null_Pointer(curve);
 
-	auto heeling = std::make_shared<HydStatic_hArmCurve>(std::move(curve));
+	auto heeling = hydStcLib::MakeCurve<HydStatic_hArmCurve>(std::move(curve), t);
 	Debug_Null_Pointer(heeling);
 
 	heeling->ChangeQs() = theQs;
@@ -50,7 +141,8 @@ tnbLib::HydStatic_Tools::HeelingCurve
 std::shared_ptr<tnbLib::HydStatic_hArmCurve> 
 tnbLib::HydStatic_Tools::HeelingCurve
 (
-	const std::vector<HydStatic_GzQP>&& theQs
+	const std::vector<HydStatic_GzQP>&& theQs,
+	const hydStcLib::CurveMakerType t
 )
 {
 	auto Qs = std::move(theQs);
@@ -59,7 +151,7 @@ tnbLib::HydStatic_Tools::HeelingCurve
 	auto curve = MarineBase_Tools::Curve(offsets);
 	Debug_Null_Pointer(curve);
 
-	auto heeling = std::make_shared<HydStatic_hArmCurve>(std::move(curve));
+	auto heeling = hydStcLib::MakeCurve<HydStatic_hArmCurve>(std::move(curve), t);
 	Debug_Null_Pointer(heeling);
 
 	heeling->SetQs(std::move(Qs));
@@ -230,7 +322,7 @@ tnbLib::HydStatic_Tools::ExpandToPort
 
 	const auto curve = MarineBase_Tools::Curve(offsets);
 
-	auto rArm = std::make_shared<hydStcLib::ArmCurveCreator_SymmHeel<hydStcLib::rArmCurve_Body>>(curve);
+	auto rArm = std::make_shared<hydStcLib::CurveMaker_SymmHeel<hydStcLib::rArmCurve_Body>>(std::move(curve));
 	Debug_Null_Pointer(rArm);
 
 	HydStatic_CmptLib::CalcParameters(rArm);
@@ -268,7 +360,7 @@ tnbLib::HydStatic_Tools::ExpandToPort
 
 	const auto curve = MarineBase_Tools::Curve(offsets);
 
-	auto rArm = std::make_shared<hydStcLib::ArmCurveCreator_SymmHeel<hydStcLib::rArmCurve_FSLq>>(curve);
+	auto rArm = std::make_shared<hydStcLib::CurveMaker_SymmHeel<hydStcLib::rArmCurve_FSLq>>(std::move(curve));
 	Debug_Null_Pointer(rArm);
 
 	HydStatic_CmptLib::CalcParameters(rArm);
@@ -343,9 +435,10 @@ tnbLib::HydStatic_Tools::ExpandToPort
 
 	const auto curve = MarineBase_Tools::Curve(offsets);
 
-	auto rArm = std::make_shared<hydStcLib::ArmCurveCreator_SymmHeel<hydStcLib::rArmCurve_LDT>>(curve, theGZ->D());
+	auto rArm = std::make_shared<hydStcLib::CurveMaker_SymmHeel<hydStcLib::rArmCurve_LDT>>(std::move(curve));
 	Debug_Null_Pointer(rArm);
 
+	rArm->SetD(theGZ->D());
 	HydStatic_CmptLib::CalcParameters(rArm);
 
 	rArm->SetQs(std::move(mQs));
@@ -381,9 +474,10 @@ tnbLib::HydStatic_Tools::ExpandToPort
 
 	const auto curve = MarineBase_Tools::Curve(offsets);
 
-	auto rArm = std::make_shared<hydStcLib::ArmCurveCreator_SymmHeel<hydStcLib::rArmCurve_LDV>>(curve, theGZ->D());
+	auto rArm = std::make_shared<hydStcLib::CurveMaker_SymmHeel<hydStcLib::rArmCurve_LDV>>(std::move(curve));
 	Debug_Null_Pointer(rArm);
 
+	rArm->SetD(theGZ->D());
 	HydStatic_CmptLib::CalcParameters(rArm);
 
 	rArm->SetQs(std::move(mQs));
@@ -430,6 +524,7 @@ tnbLib::HydStatic_Tools::ExpandToPort
 void tnbLib::HydStatic_Tools::AuCurve
 (
 	const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theCurve,
+	const hydStcLib::CurveMakerType t,
 	const Standard_Real y0,
 	const std::shared_ptr<info>& theInfo
 )
@@ -437,7 +532,7 @@ void tnbLib::HydStatic_Tools::AuCurve
 	Debug_Null_Pointer(theCurve);
 
 	const auto Qs = HydStatic_CmptLib::CalcAuCurve(*theCurve, y0, theInfo);
-	const auto rAu = HydStatic_rAuCurve::AuCurve(Qs);
+	const auto rAu = HydStatic_rAuCurve::AuCurve(Qs, t);
 	Debug_Null_Pointer(rAu);
 
 	theCurve->SetAuCurve(std::move(rAu));
@@ -446,6 +541,7 @@ void tnbLib::HydStatic_Tools::AuCurve
 void tnbLib::HydStatic_Tools::AuCurve
 (
 	const std::shared_ptr<HydStatic_hArmCurve>& theCurve,
+	const hydStcLib::CurveMakerType t,
 	const Standard_Real y0,
 	const std::shared_ptr<info>& theInfo
 )
@@ -453,7 +549,7 @@ void tnbLib::HydStatic_Tools::AuCurve
 	Debug_Null_Pointer(theCurve);
 
 	const auto Qs = HydStatic_CmptLib::CalcAuCurve(*theCurve, y0, theInfo);
-	const auto hAu = HydStatic_hAuCurve::AuCurve(Qs);
+	const auto hAu = HydStatic_hAuCurve::AuCurve(Qs, t);
 	Debug_Null_Pointer(hAu);
 
 	theCurve->SetAuCurve(std::move(hAu));

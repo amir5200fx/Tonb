@@ -2,10 +2,11 @@
 
 tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
 (
-	const Handle(Geom2d_Curve) && theCurve
+	Handle(Geom2d_Curve) && theCurve
 )
 	: HydStatic_ArmCurve(std::move(theCurve))
 {
+	// empty body
 }
 
 tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
@@ -14,15 +15,18 @@ tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
 )
 	: HydStatic_ArmCurve(0, "heeling arm curve", theCurve)
 {
+	// empty body
 }
 
 tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
 (
 	const Standard_Integer theIndex,
-	const Handle(Geom2d_Curve)& theCurve
+	const word & theName,
+	Handle(Geom2d_Curve)&& theCurve
 )
-	: HydStatic_ArmCurve(theIndex, "heeling arm curve", theCurve)
+	: HydStatic_ArmCurve(theIndex, theName, std::move(theCurve))
 {
+	// empty body
 }
 
 tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
@@ -33,4 +37,5 @@ tnbLib::HydStatic_hArmCurve::HydStatic_hArmCurve
 )
 	: HydStatic_ArmCurve(theIndex, theName, theCurve)
 {
+	// empty body
 }

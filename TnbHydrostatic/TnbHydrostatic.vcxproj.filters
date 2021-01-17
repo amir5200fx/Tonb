@@ -265,6 +265,21 @@
     <Filter Include="TnbLib\Hydrostatic\Spacing\Custom">
       <UniqueIdentifier>{c94d8619-9749-4e35-8ec4-8f919d610cfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\CurveMaker">
+      <UniqueIdentifier>{90635717-d8b3-4630-984b-ef78ac325432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\HeelSpacing">
+      <UniqueIdentifier>{f08e2315-c56a-4cec-aabd-a72a857a0216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\HeelSpacing\Stb">
+      <UniqueIdentifier>{e4439637-6b1b-44e8-b445-aa6fbf7f45cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\HeelSpacing\Arbt">
+      <UniqueIdentifier>{bedf273e-7b24-420b-a77c-4d911efe1cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\HeelSpacing\Asym">
+      <UniqueIdentifier>{864757ea-4484-48f8-8cb9-17dc92107785}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -519,6 +534,24 @@
     <ClInclude Include="TnbLib\Hydrostatic\Spacing\Custom\HydStatic_CustomSpacing.hxx">
       <Filter>TnbLib\Hydrostatic\Spacing\Custom</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CurveMaker\HydStatic_CurveMaker.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CurveMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CurveMaker\HydStatic_CurveMakerType.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CurveMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\HeelSpacing\HydStatic_HeelSpacing.hxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\HeelSpacing\Arbt\HydStatic_HeelSpacing_Arbt.hxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Arbt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\HeelSpacing\Asym\HydStatic_HeelSpacing_Asym.hxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Asym</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\HeelSpacing\Stb\HydStatic_HeelSpacing_Stb.hxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Stb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
@@ -712,6 +745,39 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\GzQP2\HydStatic_GzQP2IO.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\GzQP2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\AuCurve\hAuCurve\HydStatic_hAuCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\AuCurve\hAuCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\AuCurve\rAuCurve\HydStatic_rAuCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\AuCurve\rAuCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\hArmCurve\HydStatic_hArmCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\hArmCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\HydStatic_HeelSpacing.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\Arbt\HydStatic_HeelSpacing_Arbt.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Arbt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\Arbt\HydStatic_HeelSpacing_ArbtIO.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Arbt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\Asym\HydStatic_HeelSpacing_Asym.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Asym</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\Asym\HydStatic_HeelSpacing_AsymIO.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Asym</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\Stb\HydStatic_HeelSpacing_Stb.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Stb</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\Stb\HydStatic_HeelSpacing_StbIO.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing\Stb</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\HydStatic_HeelSpacingIO.cxx">
+      <Filter>TnbLib\Hydrostatic\HeelSpacing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

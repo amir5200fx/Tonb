@@ -5,6 +5,7 @@
 #include <HydStatic_rArmCurve_Body.hxx>
 #include <HydStatic_ArmCurveCreator_StbHeel.hxx>
 #include <HydStatic_CrossCurves.hxx>
+#include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_CmptLib.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -42,6 +43,35 @@ tnbLib::HydStatic_GZ::HydStatic_GZ
 	//- empty body
 }
 
+namespace tnbLib
+{
+
+	tnbLib::hydStcLib::CurveMakerType 
+		RetrieveCurveType
+		(
+			const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theCurves
+		)
+	{
+		if (theCurves.size() < 2)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid data has been detected" << endl
+				<< abort(FatalError);
+		}
+		const auto t = hydStcLib::RetrieveType(theCurves[0]);
+		for (const auto& x : theCurves)
+		{
+			if (hydStcLib::RetrieveType(x) NOT_EQUAL t)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "all of the cross-curves must be the same type" << endl
+					<< abort(FatalError);
+			}
+		}
+		return t;
+	}
+}
+
 void tnbLib::HydStatic_GZ::Perform()
 {
 	if (NOT CrossCurves())
@@ -66,14 +96,14 @@ void tnbLib::HydStatic_GZ::Perform()
 	}
 
 	const auto& crossCurves = *CrossCurves();
+	const auto t = RetrieveCurveType(crossCurves.CrossCurves());
 
 	const auto leverArms = HydStatic_CmptLib::LeverArms(crossCurves.CrossCurves(), DISPV()());
 	const auto gzQ = HydStatic_CmptLib::GZ(leverArms, KG()());
 
 	const auto curve = MarineBase_Tools::Curve(gzQ);
 
-	const auto rArm = 
-		std::make_shared<hydStcLib::ArmCurveCreator_StbHeel<hydStcLib::rArmCurve_Body>>(curve);
+	const auto rArm = hydStcLib::MakeCurve<hydStcLib::rArmCurve_Body>(std::move(curve), t);
 
 	ChangeRightingArm() = std::move(rArm);
 

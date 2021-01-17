@@ -10,41 +10,6 @@
 #include <Geom2d_TrimmedCurve.hxx>
 #include <Geom2dAPI_InterCurveCurve.hxx>
 
-tnbLib::HydStatic_ArmCurve::HydStatic_ArmCurve
-(
-	const Handle(Geom2d_Curve) && theCurve
-)
-	: HydStatic_HydCurve(std::move(theCurve))
-{
-}
-
-tnbLib::HydStatic_ArmCurve::HydStatic_ArmCurve
-(
-	const Handle(Geom2d_Curve)& theCurve
-)
-	: HydStatic_HydCurve(theCurve)
-{
-}
-
-tnbLib::HydStatic_ArmCurve::HydStatic_ArmCurve
-(
-	const Standard_Integer theIndex, 
-	const Handle(Geom2d_Curve)& theCurve
-)
-	: HydStatic_HydCurve(theIndex, theCurve)
-{
-}
-
-tnbLib::HydStatic_ArmCurve::HydStatic_ArmCurve
-(
-	const Standard_Integer theIndex, 
-	const word & theName, 
-	const Handle(Geom2d_Curve)& theCurve
-)
-	: HydStatic_HydCurve(theIndex, theName, theCurve)
-{
-}
-
 Standard_Boolean
 tnbLib::HydStatic_ArmCurve::IsIntersect
 (

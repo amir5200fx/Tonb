@@ -19,7 +19,9 @@
 #include <Marine_CmptLib2.hxx>
 #include <Marine_System.hxx>
 #include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_HeelSpacing.hxx>
 #include <HydStatic_Spacing.hxx>
+#include <HydStatic_Tools.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -48,7 +50,7 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 (
 	const std::shared_ptr<Marine_Domain>& theDomain, 
 	const std::shared_ptr<Marine_Body>& theBody,
-	const std::shared_ptr<HydStatic_Spacing>& theHeels,
+	const std::shared_ptr<HydStatic_HeelSpacing>& theHeels,
 	const Standard_Integer theNbWaters,
 	const gp_Ax1 & theAx
 )
@@ -114,7 +116,7 @@ namespace tnbLib
 	}
 }
 
-void tnbLib::HydStatic_CrossCurves::Perform()
+void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 {
 	if (verbose)
 	{
@@ -165,17 +167,18 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 		Info << "  - direction: " << Ax().Direction() << endl;
 	}
 
+	const auto& heels = Heels()->Spacing();
 	auto body = Body()->Copy();
 
 	Standard_Integer K = 0;
 	Standard_Real h0 = 0;
 	//std::vector<std::shared_ptr<Marine_GraphCurve>> curves;
 	auto& curves = ChangeCrossCurves();
-	curves.reserve(Heels()->NbSections());
+	curves.reserve(heels->NbSections());
 
 	if (verbose)
 	{
-		Info << " - nb. of heels: " << Heels()->NbSections() << endl;
+		Info << " - nb. of heels: " << heels->NbSections() << endl;
 		Info << " - nb. of waters: " << theNbWaters_ << endl;
 	}
 	if (verbose > 1)
@@ -187,7 +190,7 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 		Info << " - tolerance: " << inf->Tolerance() << endl;
 	}
 
-	for (const auto h : Heels()->Sections())
+	for (const auto h : heels->Sections())
 	{
 		if (verbose)
 		{
@@ -237,7 +240,10 @@ void tnbLib::HydStatic_CrossCurves::Perform()
 			Info << "the cross-curve is calculated in, " << global_time_duration << " ms" << endl;
 		}
 
-		auto cross = std::make_shared<HydStatic_CrsCurve>(++K, curve, h);
+		auto cross = HydStatic_Tools::CrossCurve(std::move(curve), Heels()->HeelType());
+		Debug_Null_Pointer(cross);
+		cross->SetHeel(h);
+		cross->SetIndex(++K);
 
 		/*auto gc = std::make_shared<Marine_GraphCurve>(++K, curve);
 		Debug_Null_Pointer(gc);*/

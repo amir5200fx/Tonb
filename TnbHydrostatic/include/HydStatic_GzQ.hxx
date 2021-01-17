@@ -18,6 +18,19 @@ namespace tnbLib
 		Standard_Real theHeel_;
 		Standard_Real theLeverArm_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<HydStatic_Entity>(*this);
+			ar & theHeel_;
+			ar & theLeverArm_;
+		}
+
 	public:
 
 		HydStatic_GzQ()
@@ -33,6 +46,9 @@ namespace tnbLib
 			: theHeel_(theHeel)
 			, theLeverArm_(theLever)
 		{}
+
+
+		//- public functions and operators
 
 		TnbHydStatic_EXPORT Pnt2d GetPt() const;
 
@@ -55,5 +71,7 @@ namespace tnbLib
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, LeverArm)
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_GzQ);
 
 #endif // !_HydStatic_GzQ_Header

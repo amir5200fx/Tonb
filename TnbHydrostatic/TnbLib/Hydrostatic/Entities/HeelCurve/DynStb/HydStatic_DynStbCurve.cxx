@@ -8,14 +8,14 @@ tnbLib::HydStatic_DynStbCurve::HydStatic_DynStbCurve
 {
 }
 
-tnbLib::HydStatic_DynStbCurve::HydStatic_DynStbCurve
-(
-	const Standard_Integer theIndex,
-	const Handle(Geom2d_Curve)& theCurve
-)
-	: HydStatic_HeelCurve(theIndex, theCurve)
-{
-}
+//tnbLib::HydStatic_DynStbCurve::HydStatic_DynStbCurve
+//(
+//	const Standard_Integer theIndex,
+//	const Handle(Geom2d_Curve)& theCurve
+//)
+//	: HydStatic_HeelCurve(theIndex, theCurve)
+//{
+//}
 
 tnbLib::HydStatic_DynStbCurve::HydStatic_DynStbCurve
 (

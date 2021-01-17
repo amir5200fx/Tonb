@@ -25,9 +25,6 @@ namespace tnbLib
 			: HydStatic_HydGphCurve(theCurve)																	\
 		{}																										\
 																												\
-		CLASS_NAME(const Standard_Integer theIndex, const Handle(Geom2d_Curve)& theCurve)						\
-			: HydStatic_HydGphCurve(theIndex, theCurve)															\
-		{}																										\
 																												\
 		CLASS_NAME(const Standard_Integer theIndex, const word& theName, const Handle(Geom2d_Curve)& theCurve)	\
 			: HydStatic_HydGphCurve(theIndex, theName, theCurve)												\

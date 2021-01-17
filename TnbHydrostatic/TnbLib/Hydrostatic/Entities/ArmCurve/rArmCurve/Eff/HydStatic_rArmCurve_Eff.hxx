@@ -53,13 +53,13 @@ namespace tnbLib
 				: HydStatic_rArmCurve(theCurve)
 			{}
 
-			rArmCurve_Eff
+			/*rArmCurve_Eff
 			(
 				const Standard_Integer theIndex,
 				const Handle(Geom2d_Curve)& theCurve
 			)
 				: HydStatic_rArmCurve(theIndex, theCurve)
-			{}
+			{}*/
 
 			rArmCurve_Eff
 			(

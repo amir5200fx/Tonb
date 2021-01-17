@@ -39,7 +39,8 @@ std::shared_ptr<tnbLib::HydStatic_StbFun>
 tnbLib::HydStatic_FunLib::HeelingArm
 (
 	const std::shared_ptr<HydStatic_hArmFormula>& theHeeling, 
-	const std::shared_ptr<HydStatic_StbFun>& theRighting
+	const std::shared_ptr<HydStatic_StbFun>& theRighting,
+	const hydStcLib::CurveMakerType t
 )
 {
 	Debug_Null_Pointer(theRighting);
@@ -50,7 +51,7 @@ tnbLib::HydStatic_FunLib::HeelingArm
 	const auto distb = RetrieveHeelDistb(*rArm);
 	Debug_Null_Pointer(distb);
 
-	auto hArm = HeelingArm(theHeeling, *distb);
+	auto hArm = HeelingArm(theHeeling, *distb, t);
 	return std::move(hArm);
 }
 
@@ -58,7 +59,8 @@ std::shared_ptr<tnbLib::HydStatic_StbFun>
 tnbLib::HydStatic_FunLib::HeelingArm
 (
 	const std::shared_ptr<HydStatic_hArmFormula>& theHeeling, 
-	const Geo_xDistb & theDist
+	const Geo_xDistb & theDist,
+	const hydStcLib::CurveMakerType t
 )
 {
 	std::vector<HydStatic_GzQP> Qs;
@@ -70,7 +72,7 @@ tnbLib::HydStatic_FunLib::HeelingArm
 		Qs.push_back(std::move(q));
 	}
 
-	auto hArm = HydStatic_Tools::HeelingCurve(std::move(Qs));
+	auto hArm = HydStatic_Tools::HeelingCurve(std::move(Qs), t);
 	Debug_Null_Pointer(hArm);
 
 	auto fun = std::make_shared<hydStcLib::StbFun_hArm>(std::move(hArm));

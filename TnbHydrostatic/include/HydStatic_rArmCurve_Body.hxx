@@ -25,13 +25,13 @@ namespace tnbLib
 				: rArmCurve_Prim(theCurve)
 			{}
 
-			rArmCurve_Body
+			/*rArmCurve_Body
 			(
 				const Standard_Integer theIndex,
 				const Handle(Geom2d_Curve)& theCurve
 			)
 				: rArmCurve_Prim(theIndex, theCurve)
-			{}
+			{}*/
 
 			rArmCurve_Body
 			(
