@@ -4,6 +4,7 @@
 #include <Marine_WaterLib.hxx>
 #include <Marine_CmptLib2.hxx>
 #include <HydStatic_CrossCurves.hxx>
+#include <HydStatic_CrsCurvesGraph.hxx>
 #include <HydStatic_Spacing.hxx>
 #include <HydStatic_CustomSpacing.hxx>
 #include <HydStatic_UniformSpacing.hxx>
@@ -29,6 +30,8 @@ namespace tnbLib
 	static const auto crossCurves = std::make_shared<HydStatic_CrossCurves>();
 	static int nbWaters = 10;
 	static const std::vector<double> DEFAULT_HEELS = { 0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90 };
+	static bool bodyLoad_flag = false;
+	static bool execute_flag = false;
 
 	typedef std::shared_ptr<Marine_Body> body_t;
 	typedef std::shared_ptr<marineLib::Body_Tank> tank_t;
@@ -235,6 +238,12 @@ namespace tnbLib
 
 	void execute()
 	{
+		if (NOT bodyLoad_flag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no body has been loaded!" << endl
+				<< abort(FatalError);
+		}
 		if (NOT myHeels)
 		{
 			setHeels();
@@ -242,9 +251,43 @@ namespace tnbLib
 
 		getCrossCurves()->LoadHeels(myHeels);
 		getCrossCurves()->Perform();
+
+		execute_flag = true;
 	}
 
 	//- io functions
+
+	void saveGraphTo(const std::string& name)
+	{
+		if (NOT execute_flag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no cross-curves diagram has been created" << endl
+				<< abort(FatalError);
+		}
+		fileName fn(name);
+		std::ofstream f(fn);
+
+		boost::archive::polymorphic_text_oarchive oa(f);
+
+		oa << getCrossCurves()->CrossCurves();
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT execute_flag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no cross-curves diagram has been created" << endl
+				<< abort(FatalError);
+		}
+		fileName fn(name);
+		std::ofstream f(fn);
+
+		boost::archive::polymorphic_text_oarchive oa(f);
+
+		oa << getCrossCurves();
+	}
 
 	void loadBody(const std::string& name)
 	{
@@ -289,6 +332,8 @@ namespace tnbLib
 		gp_Ax1 ax(body->CoordinateSystem().Location(), body->CoordinateSystem().XDirection());
 
 		getCrossCurves()->SetAx(ax);
+
+		bodyLoad_flag = true;
 	}
 }
 
@@ -319,7 +364,8 @@ namespace tnbLib
 		//- io functions
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadBody(name); }), "loadBody");
-
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveGraphTo(name); }), "saveGraphTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 	}
 
 	std::string getString(char* argv)
