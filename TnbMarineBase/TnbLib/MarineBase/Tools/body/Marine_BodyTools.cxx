@@ -78,9 +78,24 @@ tnbLib::Marine_BodyTools::IsSail
 }
 
 Standard_Boolean 
-tnbLib::Marine_BodyTools::IsDisplacer(const Marine_Body & theBody)
+tnbLib::Marine_BodyTools::IsDisplacer
+(
+	const Marine_Body & theBody
+)
 {
 	return theBody.Type() IS_EQUAL Marine_BodyType::displacer;
+}
+
+Standard_Real 
+tnbLib::Marine_BodyTools::CalcVolume
+(
+	const Marine_Body & theBody,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	auto volQ = MarineBase_Tools::CalcVolume(theBody.Sections(), theInfo);
+	auto vol = MarineBase_Tools::CalcArea(volQ, theInfo);
+	return vol;
 }
 
 std::shared_ptr<tnbLib::marineLib::Body_Wetted> 

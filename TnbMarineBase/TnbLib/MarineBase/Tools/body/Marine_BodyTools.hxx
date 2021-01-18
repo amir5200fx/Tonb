@@ -24,6 +24,7 @@ namespace tnbLib
 	class Marine_WaterDomain;
 	class Marine_CmpSection;
 	class Marine_Shape;
+	class NumAlg_AdaptiveInteg_Info;
 
 	class Marine_BodyTools
 	{
@@ -41,6 +42,13 @@ namespace tnbLib
 		static TnbMarine_EXPORT Standard_Boolean IsSail(const Marine_Body& theBody);
 
 		static TnbMarine_EXPORT Standard_Boolean IsDisplacer(const Marine_Body& theBody);
+
+		static TnbMarine_EXPORT Standard_Real 
+			CalcVolume
+			(
+				const Marine_Body& theBody, 
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
 
 		static TnbMarine_EXPORT std::shared_ptr<marineLib::Body_Wetted> 
 			WettedBody
