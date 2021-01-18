@@ -94,7 +94,7 @@ tnbLib::HydStatic_CrsCurve::Dispv1() const
 	Debug_Null_Pointer(Geometry());
 	const auto& geom = *Geometry();
 
-	const auto p1 = geom.Value(geom.FirstParameter());
+	const auto p1 = geom.Value(geom.LastParameter());
 	return p1.X();
 }
 
@@ -108,6 +108,8 @@ tnbLib::HydStatic_CrsCurve::Value
 	{
 		FatalErrorIn("Standard_Real Value(const Standard_Real theT) const")
 			<< "Found no intersection" << endl
+			<< " - lower: " << Dispv0() << ", upper: " << Dispv1() << endl
+			<< " - x: " << theVolume << endl
 			<< abort(FatalError);
 	}
 
@@ -122,7 +124,7 @@ tnbLib::HydStatic_CrsCurve::Value
 			<< "Invalid data" << endl
 			<< abort(FatalError);
 	}
-	auto value = Int.Point(0);
+	auto value = Int.Point(1);
 	return value.Y();
 }
 
@@ -136,6 +138,8 @@ tnbLib::HydStatic_CrsCurve::ValueP
 	{
 		FatalErrorIn("Standard_Real Value(const Standard_Real theT) const")
 			<< "Found no intersection" << endl
+			<< " - lower: " << Dispv0() << ", upper: " << Dispv1() << endl
+			<< " - x: " << theVolume << endl
 			<< abort(FatalError);
 	}
 
@@ -150,8 +154,8 @@ tnbLib::HydStatic_CrsCurve::ValueP
 			<< "Invalid data" << endl
 			<< abort(FatalError);
 	}
-	auto value = Int.Point(0);
-	auto par = Int.Intersector().Point(0).ParamOnSecond();
+	auto value = Int.Point(1);
+	auto par = Int.Intersector().Point(1).ParamOnSecond();
 	auto t = std::make_pair(value.Y(), par);
 	return std::move(t);
 }

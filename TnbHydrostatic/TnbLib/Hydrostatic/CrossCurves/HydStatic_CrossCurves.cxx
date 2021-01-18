@@ -7,6 +7,7 @@
 #include <Entity3d_Box.hxx>
 #include <Pln_Tools.hxx>
 #include <Geo_UniDistb.hxx>
+#include <Geo_CosineDistb.hxx>
 #include <Marine_Body.hxx>
 #include <Marine_BodyTools.hxx>
 #include <Marine_BodyCmptLib.hxx>
@@ -17,6 +18,7 @@
 #include <Marine_MultLevWaterDomain.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_CmptLib2.hxx>
+#include <Marine_BodyTools.hxx>
 #include <Marine_System.hxx>
 #include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_CrsCurvesGraph.hxx>
@@ -33,6 +35,8 @@
 #include <Bnd_Box2d.hxx>
 #include <Geom2d_Curve.hxx>
 
+#include <math.h>
+
 namespace tnbLib
 {
 	const gp_Ax1 HydStatic_CrossCurves::null = gp::OX();
@@ -44,7 +48,9 @@ namespace tnbLib
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
 	: theAx_(null)
 	, theNbWaters_(DEFAULT_NB_WATERS)
+	, theVolCoeff_(0.05)
 {
+	// empty body
 }
 
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
@@ -60,62 +66,78 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 	, theHeels_(theHeels)
 	, theNbWaters_(theNbWaters)
 	, theAx_(theAx)
+	, theVolCoeff_(0.05)
 {
+	// empty body
 }
 
-//namespace tnbLib
-//{
-//
-//	namespace crossCurves
-//	{
-//
-//		static std::shared_ptr<Marine_Graph>
-//			Graph
-//			(
-//				const std::vector<std::shared_ptr<Marine_GraphCurve>>& theCurves
-//			)
-//		{
-//			auto iter = theCurves.begin();
-//			const auto& x = *iter;
-//			Debug_Null_Pointer(x);
-//
-//			auto box = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()));
-//			iter++;
-//
-//			while (iter NOT_EQUAL theCurves.end())
-//			{
-//				const auto& x = *iter;
-//				Debug_Null_Pointer(x);
-//
-//				box = Entity2d_Box::Union
-//				(
-//					box,
-//					Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()))
-//				);
-//
-//				iter++;
-//			}
-//
-//			auto g = std::make_shared<Marine_Graph>();
-//			Debug_Null_Pointer(g);
-//
-//			g->X().SetLower(box.P0().X());
-//			g->X().SetUpper(box.P1().X());
-//
-//			g->Y().SetLower(box.P0().Y());
-//			g->Y().SetUpper(box.P1().Y());
-//
-//			g->Y().SetName("Lever Arm");
-//			g->X().SetName("Displacement Volume");
-//
-//			g->Title().SetName("Cross-curves of stability of the section");
-//
-//			g->ChangeCurves() = std::move(theCurves);
-//
-//			return std::move(g);
-//		}
-//	}
-//}
+namespace tnbLib
+{
+
+	namespace crossCurves
+	{
+
+		/*static std::shared_ptr<Marine_Graph>
+			Graph
+			(
+				const std::vector<std::shared_ptr<Marine_GraphCurve>>& theCurves
+			)
+		{
+			auto iter = theCurves.begin();
+			const auto& x = *iter;
+			Debug_Null_Pointer(x);
+
+			auto box = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()));
+			iter++;
+
+			while (iter NOT_EQUAL theCurves.end())
+			{
+				const auto& x = *iter;
+				Debug_Null_Pointer(x);
+
+				box = Entity2d_Box::Union
+				(
+					box,
+					Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()))
+				);
+
+				iter++;
+			}
+
+			auto g = std::make_shared<Marine_Graph>();
+			Debug_Null_Pointer(g);
+
+			g->X().SetLower(box.P0().X());
+			g->X().SetUpper(box.P1().X());
+
+			g->Y().SetLower(box.P0().Y());
+			g->Y().SetUpper(box.P1().Y());
+
+			g->Y().SetName("Lever Arm");
+			g->X().SetName("Displacement Volume");
+
+			g->Title().SetName("Cross-curves of stability of the section");
+
+			g->ChangeCurves() = std::move(theCurves);
+
+			return std::move(g);
+		}*/
+
+		auto RemoveDegeneracies(const xSectParList& l, const Standard_Real tol)
+		{
+			xSectParList xs;
+			for (const auto& x : l)
+			{
+				auto p = x;
+				if (p.x >= tol)
+				{
+					xs.push_back(std::move(p));
+				}
+			}
+			return std::move(xs);
+		}
+	}
+}
 
 void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 {
@@ -170,6 +192,9 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 
 	const auto& heels = Heels()->Spacing();
 	auto body = Body()->Copy();
+
+	const auto volume = Marine_BodyTools::CalcVolume(*body, sysLib::gl_marine_integration_info);
+	const auto volTol = volume * theVolCoeff_;
 
 	Standard_Integer K = 0;
 	Standard_Real h0 = 0;
@@ -232,6 +257,14 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 					sysLib::gl_marine_integration_info
 				);
 
+			curveQ = crossCurves::RemoveDegeneracies(curveQ, volTol);
+			if (curveQ.size() < 2)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "there are not enough data points to create a curve" << endl
+					<< abort(FatalError);
+			}
+
 			if (verbose) Info << " creating the geometric curve..." << endl;
 			curve = MarineBase_Tools::Curve(curveQ);
 		}
@@ -278,6 +311,11 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	}
 }
 
+void tnbLib::HydStatic_CrossCurves::SetVolumeCoeff(const Standard_Real x)
+{
+	theVolCoeff_ = std::min(0.5, std::max(x, 0.01));
+}
+
 std::shared_ptr<tnbLib::Geo_xDistb> 
 tnbLib::HydStatic_CrossCurves::Z
 (
@@ -286,10 +324,14 @@ tnbLib::HydStatic_CrossCurves::Z
 	const Standard_Integer theN
 )
 {
-	const auto Dz = theZ1 - theZ0;
-	const auto dz = Dz / (Standard_Real)theN;
+	const auto c = (theZ1 - theZ0) / 2;
+	const auto dt = M_PI / (Standard_Real)theN;
+	const auto dz = c * ((Standard_Real)1.0 - std::cos(dt));
 
-	auto disZ = std::make_shared<Geo_UniDistb>(theN);
+	/*const auto Dz = theZ1 - theZ0;
+	const auto dz = Dz / (Standard_Real)theN;*/
+
+	auto disZ = std::make_shared<Geo_CosineDistb>(theN);
 	Debug_Null_Pointer(disZ);
 
 	disZ->SetLower(theZ0 + 0.5*dz);

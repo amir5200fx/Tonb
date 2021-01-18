@@ -74,7 +74,8 @@ namespace tnbLib
 		const Standard_Real u1
 	)
 	{
-		Handle(Geom2d_TrimmedCurve) cliped = new Geom2d_TrimmedCurve(theGeom, u0, u1);
+		const auto du = u1 - u0;
+		Handle(Geom2d_TrimmedCurve) cliped = new Geom2d_TrimmedCurve(theGeom, u0 + 1.0E-6*du, u1 - 1.0E-6*du);
 		return std::move(cliped);
 	}
 

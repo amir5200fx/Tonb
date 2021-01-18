@@ -32,6 +32,7 @@ namespace tnbLib
 		gp_Ax1 theAx_;
 
 		Standard_Integer theNbWaters_;
+		Standard_Real theVolCoeff_;
 
 		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<Marine_Body> theBody_;
@@ -129,6 +130,8 @@ namespace tnbLib
 		{
 			theAx_ = theAx;
 		}
+
+		void TnbHydStatic_EXPORT SetVolumeCoeff(const Standard_Real x);
 
 
 		static TnbHydStatic_EXPORT std::shared_ptr<Geo_xDistb>

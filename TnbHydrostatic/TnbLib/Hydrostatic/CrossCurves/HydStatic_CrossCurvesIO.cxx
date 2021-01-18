@@ -17,6 +17,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
 	Marine_Body::Save(ar, theBody_);
 	ar & theHeels_;
 	ar & theCrossCurves_;
+	ar & theVolCoeff_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
@@ -28,4 +29,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
 	Marine_Body::Load(ar, theBody_);
 	ar & theHeels_;
 	ar & theCrossCurves_;
+	ar & theVolCoeff_;
 }
