@@ -26,7 +26,7 @@ void tnbLib::Geo_CosineDistb::Perform()
 	forThose(Index, 0, theSize_)
 	{
 		auto t = Index * dt;
-		auto x = c * ((Standard_Real)1.0 - std::cos(t));
+		auto x = Lower() + c * ((Standard_Real)1.0 - std::cos(t));
 
 		sections.push_back(x);
 	}
