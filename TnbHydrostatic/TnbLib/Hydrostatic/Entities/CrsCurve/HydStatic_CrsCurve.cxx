@@ -55,7 +55,7 @@ tnbLib::HydStatic_CrsCurve::IsIntersect
 	const Standard_Real theVolume
 ) const
 {
-	return INSIDE(theVolume, LeverArm0(), LeverArm1());
+	return INSIDE(theVolume, Dispv0(), Dispv1());
 }
 
 Standard_Real 
@@ -65,7 +65,7 @@ tnbLib::HydStatic_CrsCurve::LeverArm0() const
 	const auto& geom = *Geometry();
 
 	const auto p0 = geom.Value(geom.FirstParameter());
-	return p0.X();
+	return p0.Y();
 }
 
 Standard_Real 
@@ -75,6 +75,26 @@ tnbLib::HydStatic_CrsCurve::LeverArm1() const
 	const auto& geom = *Geometry();
 
 	const auto p1 = geom.Value(geom.LastParameter());
+	return p1.Y();
+}
+
+Standard_Real 
+tnbLib::HydStatic_CrsCurve::Dispv0() const
+{
+	Debug_Null_Pointer(Geometry());
+	const auto& geom = *Geometry();
+
+	const auto p0 = geom.Value(geom.FirstParameter());
+	return p0.X();
+}
+
+Standard_Real
+tnbLib::HydStatic_CrsCurve::Dispv1() const
+{
+	Debug_Null_Pointer(Geometry());
+	const auto& geom = *Geometry();
+
+	const auto p1 = geom.Value(geom.FirstParameter());
 	return p1.X();
 }
 
@@ -102,7 +122,36 @@ tnbLib::HydStatic_CrsCurve::Value
 			<< "Invalid data" << endl
 			<< abort(FatalError);
 	}
-
 	auto value = Int.Point(0);
 	return value.Y();
+}
+
+std::pair<Standard_Real, Standard_Real> 
+tnbLib::HydStatic_CrsCurve::ValueP
+(
+	const Standard_Real theVolume
+) const
+{
+	if (NOT IsIntersect(theVolume))
+	{
+		FatalErrorIn("Standard_Real Value(const Standard_Real theT) const")
+			<< "Found no intersection" << endl
+			<< abort(FatalError);
+	}
+
+	Handle(Geom2d_Line) l =
+		new Geom2d_Line(gp_Pnt2d(theVolume, 0), gp_Dir2d(0, 1));
+	Debug_Null_Pointer(l);
+
+	Geom2dAPI_InterCurveCurve Int(l, Geometry());
+	if (Int.NbPoints() NOT_EQUAL 1)
+	{
+		FatalErrorIn("Standard_Real Value(const Standard_Real theT) const")
+			<< "Invalid data" << endl
+			<< abort(FatalError);
+	}
+	auto value = Int.Point(0);
+	auto par = Int.Intersector().Point(0).ParamOnSecond();
+	auto t = std::make_pair(value.Y(), par);
+	return std::move(t);
 }

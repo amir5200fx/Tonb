@@ -280,6 +280,9 @@
     <Filter Include="TnbLib\Hydrostatic\HeelSpacing\Asym">
       <UniqueIdentifier>{864757ea-4484-48f8-8cb9-17dc92107785}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph">
+      <UniqueIdentifier>{bac481d3-2993-4e90-8eb4-435133ef0ac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -552,6 +555,9 @@
     <ClInclude Include="TnbLib\Hydrostatic\HeelSpacing\Stb\HydStatic_HeelSpacing_Stb.hxx">
       <Filter>TnbLib\Hydrostatic\HeelSpacing\Stb</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\HydStatic_CrsCurvesGraph.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
@@ -778,6 +784,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\HeelSpacing\HydStatic_HeelSpacingIO.cxx">
       <Filter>TnbLib\Hydrostatic\HeelSpacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\HydStatic_CrsCurvesGraph.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\HydStatic_CrsCurvesGraphIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

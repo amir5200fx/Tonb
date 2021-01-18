@@ -89,7 +89,18 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT Standard_Real LeverArm1() const;
 
+		TnbHydStatic_EXPORT Standard_Real Dispv0() const;
+
+		TnbHydStatic_EXPORT Standard_Real Dispv1() const;
+
 		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real theVolume) const;
+
+		//- the first is value and the second is the parameter
+		TnbHydStatic_EXPORT std::pair<Standard_Real, Standard_Real> 
+			ValueP
+			(
+				const Standard_Real theVolume
+			) const;
 
 		void SetHeel
 		(

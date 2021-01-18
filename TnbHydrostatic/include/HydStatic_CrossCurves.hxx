@@ -20,6 +20,7 @@ namespace tnbLib
 	class Marine_Domain;
 	class Marine_Graph;
 	class HydStatic_CrsCurve;
+	class HydStatic_CrsCurvesGraph;
 	class HydStatic_HeelSpacing;
 
 	class HydStatic_CrossCurves
@@ -37,20 +38,13 @@ namespace tnbLib
 
 		std::shared_ptr<HydStatic_HeelSpacing> theHeels_;
 
-		std::vector<std::shared_ptr<HydStatic_CrsCurve>> theCrossCurves_;
-
-		std::shared_ptr<Marine_Graph> theGraph_;
+		std::shared_ptr<HydStatic_CrsCurvesGraph> theCrossCurves_;
 
 
 		//- private functions and operators
 
 		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
-
-		auto& ChangeGraph()
-		{
-			return theGraph_;
-		}
 
 		auto& ChangeCrossCurves()
 		{
@@ -96,11 +90,6 @@ namespace tnbLib
 			return theNbWaters_;
 		}
 
-		const auto& Graph() const
-		{
-			return theGraph_;
-		}
-
 		const auto& Ax() const
 		{
 			return theAx_;
@@ -111,7 +100,10 @@ namespace tnbLib
 			return theCrossCurves_;
 		}
 
-		TnbHydStatic_EXPORT void Perform(const hydStcLib::CurveMakerType t = hydStcLib::CurveMakerType::starboard);
+		TnbHydStatic_EXPORT void Perform
+		(
+			const hydStcLib::CurveMakerType t = hydStcLib::CurveMakerType::starboard
+		);
 
 		void LoadDomain(const std::shared_ptr<Marine_Domain>& theDomain)
 		{

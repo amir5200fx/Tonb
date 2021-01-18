@@ -6,6 +6,7 @@
 #include <Marine_Graph.hxx>
 #include <HydStatic_HeelSpacing.hxx>
 #include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_CrsCurvesGraph.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
 {
@@ -16,7 +17,6 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
 	Marine_Body::Save(ar, theBody_);
 	ar & theHeels_;
 	ar & theCrossCurves_;
-	ar & theGraph_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
@@ -28,5 +28,4 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
 	Marine_Body::Load(ar, theBody_);
 	ar & theHeels_;
 	ar & theCrossCurves_;
-	ar & theGraph_;
 }

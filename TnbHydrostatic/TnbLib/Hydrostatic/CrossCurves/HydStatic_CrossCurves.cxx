@@ -19,6 +19,7 @@
 #include <Marine_CmptLib2.hxx>
 #include <Marine_System.hxx>
 #include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_CrsCurvesGraph.hxx>
 #include <HydStatic_HeelSpacing.hxx>
 #include <HydStatic_Spacing.hxx>
 #include <HydStatic_Tools.hxx>
@@ -62,59 +63,59 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 {
 }
 
-namespace tnbLib
-{
-
-	namespace crossCurves
-	{
-
-		static std::shared_ptr<Marine_Graph>
-			Graph
-			(
-				const std::vector<std::shared_ptr<Marine_GraphCurve>>& theCurves
-			)
-		{
-			auto iter = theCurves.begin();
-			const auto& x = *iter;
-			Debug_Null_Pointer(x);
-
-			auto box = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()));
-			iter++;
-
-			while (iter NOT_EQUAL theCurves.end())
-			{
-				const auto& x = *iter;
-				Debug_Null_Pointer(x);
-
-				box = Entity2d_Box::Union
-				(
-					box,
-					Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()))
-				);
-
-				iter++;
-			}
-
-			auto g = std::make_shared<Marine_Graph>();
-			Debug_Null_Pointer(g);
-
-			g->X().SetLower(box.P0().X());
-			g->X().SetUpper(box.P1().X());
-
-			g->Y().SetLower(box.P0().Y());
-			g->Y().SetUpper(box.P1().Y());
-
-			g->Y().SetName("Lever Arm");
-			g->X().SetName("Displacement Volume");
-
-			g->Title().SetName("Cross-curves of stability of the section");
-
-			g->ChangeCurves() = std::move(theCurves);
-
-			return std::move(g);
-		}
-	}
-}
+//namespace tnbLib
+//{
+//
+//	namespace crossCurves
+//	{
+//
+//		static std::shared_ptr<Marine_Graph>
+//			Graph
+//			(
+//				const std::vector<std::shared_ptr<Marine_GraphCurve>>& theCurves
+//			)
+//		{
+//			auto iter = theCurves.begin();
+//			const auto& x = *iter;
+//			Debug_Null_Pointer(x);
+//
+//			auto box = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()));
+//			iter++;
+//
+//			while (iter NOT_EQUAL theCurves.end())
+//			{
+//				const auto& x = *iter;
+//				Debug_Null_Pointer(x);
+//
+//				box = Entity2d_Box::Union
+//				(
+//					box,
+//					Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()))
+//				);
+//
+//				iter++;
+//			}
+//
+//			auto g = std::make_shared<Marine_Graph>();
+//			Debug_Null_Pointer(g);
+//
+//			g->X().SetLower(box.P0().X());
+//			g->X().SetUpper(box.P1().X());
+//
+//			g->Y().SetLower(box.P0().Y());
+//			g->Y().SetUpper(box.P1().Y());
+//
+//			g->Y().SetName("Lever Arm");
+//			g->X().SetName("Displacement Volume");
+//
+//			g->Title().SetName("Cross-curves of stability of the section");
+//
+//			g->ChangeCurves() = std::move(theCurves);
+//
+//			return std::move(g);
+//		}
+//	}
+//}
 
 void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 {
@@ -173,7 +174,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	Standard_Integer K = 0;
 	Standard_Real h0 = 0;
 	//std::vector<std::shared_ptr<Marine_GraphCurve>> curves;
-	auto& curves = ChangeCrossCurves();
+	std::vector<std::shared_ptr<HydStatic_CrsCurve>> curves;
 	curves.reserve(heels->NbSections());
 
 	if (verbose)
@@ -260,6 +261,12 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	Debug_Null_Pointer(graph);
 
 	ChangeGraph() = std::move(graph);*/
+
+	auto graph = std::make_shared<HydStatic_CrsCurvesGraph>(0, "cross-curves");
+	graph->Perform(curves);
+	Debug_If_Condition_Message(NOT graph->IsDone(), "the algorithm is not performed");
+
+	ChangeCrossCurves() = std::move(graph);
 
 	Change_IsDone() = Standard_True;
 
