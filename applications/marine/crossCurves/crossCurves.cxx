@@ -47,7 +47,10 @@ namespace tnbLib
 		return crossCurves;
 	}
 
-
+	void setVolumeTol(double x)
+	{
+		crossCurves->SetVolumeCoeff(x);
+	}
 
 	void SetNbWaters(unsigned int n)
 	{
@@ -350,6 +353,7 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([](double x)-> void {setVolumeTol(x); }), "setVolumeTol");
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](const std::vector<double>& h)-> void {setStbHeels(h); }), "setStbHeels");
 		mod->add(chaiscript::fun([](int n)-> void {setStbHeels(n); }), "setStbHeels");
@@ -386,7 +390,7 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 	//sysLib::init_gl_marine_integration_info();
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
