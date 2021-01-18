@@ -17,6 +17,7 @@ void boost::serialization::save
 )
 {
 	std::stringstream st;
+	st.precision(16);
 	GeomTools::Write(c, st);
 
 	std::string s = st.str();
@@ -49,6 +50,7 @@ void boost::serialization::save
 )
 {
 	std::stringstream st;
+	st.precision(16);
 	GeomTools::Write(c, st);
 
 	std::string s = st.str();
@@ -81,6 +83,7 @@ void boost::serialization::save
 )
 {
 	std::stringstream st;
+	st.precision(16);
 	GeomTools::Write(sr, st);
 
 	std::string s = st.str();
