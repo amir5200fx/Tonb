@@ -63,12 +63,18 @@ tnbLib::Marine_CmptLib2::LeverArm
 	{
 		Info << " calculating Iy at every sections ..." << endl;
 	}
-	const auto IyQ = MarineBase_Tools::CalcIy(theSections, x0, theInfo);
+	/*for (const auto& x : theSections)
+	{
+		const auto xBar = MarineBase_Tools::CalcXCentre(*x, theInfo);
+		Info << xBar << endl;
+	}
+	PAUSE;*/
+	const auto MyQ = MarineBase_Tools::CalcMy(theSections, x0, theInfo);
 	if (verbose)
 	{
 		Info << " calculating the Iy by integrating..." << endl;
 	}
-	const auto Iy = MarineBase_Tools::CalcArea(IyQ, theInfo);
+	const auto My = MarineBase_Tools::CalcArea(MyQ, theInfo);
 
 	if (ABS(theVolume) <= gp::Resolution())
 	{
@@ -83,7 +89,7 @@ tnbLib::Marine_CmptLib2::LeverArm
 		Info << "******* Marine_CmptLib2: End of the Calculating Lever-Arm ********" << endl;
 		Info << endl;
 	}
-	return Iy / theVolume;
+	return My / theVolume;
 }
 
 std::vector<tnbLib::marineLib::xSectionParam> 
@@ -165,7 +171,7 @@ tnbLib::Marine_CmptLib2::CrossCurve
 				if (vol >= vol_criterion)
 				{
 					if (verbose > 1) Info << " calculating the lever-arm..." << endl;
-					auto la = LeverArm(theSections, x0, vol, theInfo);
+					auto la = LeverArm(wetted, x0, vol, theInfo);
 					if (verbose > 1)
 					{
 						Info << " the lever-arm is calculated, successfully..." << endl;
