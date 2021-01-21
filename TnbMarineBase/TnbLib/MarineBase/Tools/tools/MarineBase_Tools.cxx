@@ -386,6 +386,67 @@ tnbLib::MarineBase_Tools::CalcIy
 	return sum;
 }
 
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcMy
+(
+	const std::shared_ptr<Marine_Section>& theSection,
+	const Standard_Real x0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Debug_Null_Pointer(theSection);
+	if (NOT theSection->Wire())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid section" << endl
+			<< abort(FatalError);
+	}
+
+	const auto innerSections = Marine_SectTools::RetrieveInners(theSection);
+	if (innerSections.size())
+	{
+		const auto outerMy = Cad2d_CmptLib::My(*theSection->Wire(), x0, theInfo);
+		//Debug_If_Condition(outerIy < theInfo->Tolerance());
+
+		auto innerMy = (Standard_Real)0;
+		for (const auto& x : innerSections)
+		{
+			Debug_Null_Pointer(x);
+			auto iy = Cad2d_CmptLib::My(*x->Wire(), x0, theInfo);
+
+			//Debug_If_Condition(iy > theInfo->Tolerance());
+			innerMy += iy;
+		}
+		return outerMy + innerMy;
+	}
+	else
+	{
+		const auto outerMy = Cad2d_CmptLib::My(*theSection->Wire(), x0, theInfo);
+		//Debug_If_Condition(outerIy < theInfo->Tolerance());
+		return outerMy;
+	}
+}
+
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcMy
+(
+	const Marine_CmpSection & theSection,
+	const Standard_Real x0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+#ifdef _DEBUG
+	Marine_SectTools::CheckTypeConsistency(theSection);
+#endif // _DEBUG
+	Standard_Real sum = 0;
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+		sum += CalcMy(x, x0, theInfo);
+	}
+	return sum;
+}
+
 std::vector<tnbLib::marineLib::xSectionParam> 
 tnbLib::MarineBase_Tools::CalcIx
 (
@@ -426,6 +487,29 @@ tnbLib::MarineBase_Tools::CalcIy
 		marineLib::xSectionParam ix;
 		ix.x = x->X();
 		ix.value = CalcIy(*x, x0, theInfo);
+
+		sections.push_back(std::move(ix));
+	}
+	return std::move(sections);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcMy
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const Standard_Real x0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	std::vector<marineLib::xSectionParam> sections;
+	sections.reserve(theSections.size());
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+
+		marineLib::xSectionParam ix;
+		ix.x = x->X();
+		ix.value = CalcMy(*x, x0, theInfo);
 
 		sections.push_back(std::move(ix));
 	}
