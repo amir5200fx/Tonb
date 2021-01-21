@@ -147,6 +147,7 @@ namespace tnbLib
 				const Standard_Real x0
 			)
 				: theEntity_(theEntity)
+				, theX0_(x0)
 			{}
 
 			const auto& Entity() const
@@ -292,7 +293,6 @@ tnbLib::cmptLib::MyIntegrand::Value
 	gp_Pnt2d pt;
 
 	Entity().D1(x, pt, der);
-
 	const auto dx = pt.X() - X0();
 	return (dx)*pt.Y()*der.X();
 }
