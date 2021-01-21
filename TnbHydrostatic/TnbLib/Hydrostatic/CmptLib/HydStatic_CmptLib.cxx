@@ -1,5 +1,6 @@
 #include <HydStatic_CmptLib.hxx>
 
+#include <Geo_Tools.hxx>
 #include <Entity2d_Box.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
@@ -177,7 +178,7 @@ tnbLib::HydStatic_CmptLib::LeverArms
 		}
 
 		auto value = curve.Value(theVol);
-
+		Info << x->Heel() << ",  " << value << endl;
 		HydStatic_GzQ p(x->Heel(), value);
 		pairs.push_back(std::move(p));
 	}
@@ -198,11 +199,11 @@ tnbLib::HydStatic_CmptLib::GZ
 	{
 		auto heel = x.Heel();
 		auto lk = x.LeverArm();
-
-		auto gz = lk - theKG * sin(heel);
-
+		
+		auto gz = lk - theKG * std::sin(heel);
+		Info << " lk = " << lk <<", heel = "<< Geo_Tools::RadianToDegree(heel) << ", theKG * std::sin(heel) = " << theKG * std::sin(heel) << ", gz = " << gz << endl;
 		marineLib::xSectionParam p;
-		p.x = heel;
+		p.x = Geo_Tools::RadianToDegree(heel);
 		p.value = gz;
 
 		gzs.push_back(std::move(p));
