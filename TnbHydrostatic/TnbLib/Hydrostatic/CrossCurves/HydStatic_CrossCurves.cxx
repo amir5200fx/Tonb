@@ -8,6 +8,7 @@
 #include <Pln_Tools.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CosineDistb.hxx>
+#include <Marine_CmpSection.hxx>
 #include <Marine_Body.hxx>
 #include <Marine_BodyTools.hxx>
 #include <Marine_BodyCmptLib.hxx>
@@ -193,6 +194,8 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	const auto& heels = Heels()->Spacing();
 	auto body = Body()->Copy();
 
+	//OFstream ff("bodies.plt");
+
 	const auto volume = Marine_BodyTools::CalcVolume(*body, sysLib::gl_marine_integration_info);
 	const auto volTol = volume * theVolCoeff_;
 
@@ -225,16 +228,20 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 			Info << endl;
 		}
 
-		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(h - h0), sin(h - h0)));
+		gp_Ax2d ax(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(h - h0), -sin(h - h0)));
 
 		if (verbose) Info << " heeling the body..." << endl;
 		Marine_BodyTools::Heel(body, ax);
-
+		/*for (const auto& xx : body->Sections())
+		{
+			xx->ExportToPlt(ff);
+		}*/
 		if (verbose)
 		{
 			Info << " calculating the waters..." << endl;
 		}
 		const auto b = Marine_BodyTools::BoundingBox(*body);
+
 		if (verbose)
 		{
 			Info << " z0 " << b.P0().Z() << ", z1 = " << b.P1().Z() << endl;
