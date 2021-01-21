@@ -134,6 +134,22 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
+		static TnbMarine_EXPORT Standard_Real
+			CalcMy
+			(
+				const std::shared_ptr<Marine_Section>& theSection,
+				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT Standard_Real
+			CalcMy
+			(
+				const Marine_CmpSection& theSection,
+				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
 		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam>
 			CalcIx
 			(
@@ -144,6 +160,14 @@ namespace tnbLib
 
 		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam>
 			CalcIy
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam>
+			CalcMy
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
 				const Standard_Real x0,

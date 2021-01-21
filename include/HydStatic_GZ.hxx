@@ -43,6 +43,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbHydStatic_EXPORT bool verbose;
+
 		TnbHydStatic_EXPORT HydStatic_GZ();
 
 		TnbHydStatic_EXPORT HydStatic_GZ
