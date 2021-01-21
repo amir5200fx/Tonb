@@ -429,6 +429,10 @@ int main(int argc, char *argv[])
 			{
 				Info << x.message() << endl;
 			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
+			}
 		}
 	}
 	else
