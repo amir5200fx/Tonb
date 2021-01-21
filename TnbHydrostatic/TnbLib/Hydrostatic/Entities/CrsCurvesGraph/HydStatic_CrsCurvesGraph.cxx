@@ -95,6 +95,7 @@ namespace tnbLib
 
 		auto geom = ClipCurve(theCurve->Geometry(), t0.second, t1.second);
 		auto curve = hydStcLib::MakeCurve<HydStatic_CrsCurve>(std::move(geom), t);
+		curve->SetHeel(theCurve->Heel());
 		return std::move(curve);
 	}
 }
@@ -104,6 +105,12 @@ void tnbLib::HydStatic_CrsCurvesGraph::Perform
 	const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theCurves
 )
 {
+	if (theCurves.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no curve has been loaded" << endl
+			<< abort(FatalError);
+	}
 	const auto x0 = GetMinDisplv(theCurves);
 	const auto x1 = GetMaxDisplv(theCurves);
 	const auto t = GetType(theCurves);
@@ -116,5 +123,8 @@ void tnbLib::HydStatic_CrsCurvesGraph::Perform
 		auto c = ClipCurve(x, x0, x1, t);
 		curves.push_back(std::move(c));
 	}
+	const auto& c = curves[0];
+	theMinDispv_ = c->Dispv0();
+	theMaxDispv_ = c->Dispv1();
 	Change_IsDone() = Standard_True;
 }
