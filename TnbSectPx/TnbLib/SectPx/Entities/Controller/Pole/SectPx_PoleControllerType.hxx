@@ -7,7 +7,7 @@ namespace tnbLib
 
 	enum class SectPx_PoleControllerType
 	{
-		weighted,
+		weight,
 		tightness
 	};
 
