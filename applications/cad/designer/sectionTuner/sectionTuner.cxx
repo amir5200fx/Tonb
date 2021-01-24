@@ -309,6 +309,12 @@ namespace tnbLib
 
 	//- tuner makers
 
+	void createWeight(int pole, const appl::par_t& p)
+	{
+		checkFrame();
+		appl::createWeight(myTuner, pole, p);
+	}
+
 	void createSymmTightness(int pole, const appl::par_t& p)
 	{
 		checkFrame();
@@ -396,6 +402,7 @@ namespace tnbLib
 
 	void setTuners(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([](int pole, const appl::par_t& p)->void {createWeight(pole, p); }), "createWeight");
 		mod->add(chaiscript::fun([](int pole, const appl::par_t& p)->void {createSymmTightness(pole, p); }), "createSymmTightness");
 		mod->add(chaiscript::fun([](int seg, const appl::par_t& p)-> void {createSlider(seg, p); }), "createSlider");
 		mod->add(chaiscript::fun([](int seg, const appl::coord_t& c)-> void {createSlider(seg, c); }), "createSlider");
