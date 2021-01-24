@@ -12,6 +12,7 @@ namespace tnbLib
 
 		// Forward Declarations
 		class Pole_Master;
+		class Pnt_Empty;
 
 		class Pole_Slave
 			: public SectPx_PairedPole
@@ -20,6 +21,7 @@ namespace tnbLib
 			/*Private Data*/
 
 			std::shared_ptr<Pole_Master> theMaster_;
+			std::shared_ptr<Pnt_Empty> thePnt_;
 
 
 			TNB_SERIALIZATION(TnbSectPx_EXPORT);
@@ -32,21 +34,21 @@ namespace tnbLib
 			Pole_Slave()
 			{}
 
-			Pole_Slave(const std::shared_ptr<Pole_Master>& theMaster)
-				: theMaster_(theMaster)
+			Pole_Slave(const std::shared_ptr<Pnt_Empty>& thePnt)
+				: thePnt_(thePnt)
 			{}
 
 			TnbSectPx_EXPORT Pole_Slave
 			(
 				const Standard_Integer theIndex,
-				const std::shared_ptr<Pole_Master>& theMaster
+				const std::shared_ptr<Pnt_Empty>& thePnt
 			);
 
 			TnbSectPx_EXPORT Pole_Slave
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
-				const std::shared_ptr<Pole_Master>& theMaster
+				const std::shared_ptr<Pnt_Empty>& thePnt
 			);
 
 			Standard_Boolean IsSlave() const override

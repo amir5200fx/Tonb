@@ -1,6 +1,7 @@
 #include <SectPx_Pole_Slave.hxx>
 
 #include <SectPx_Pole_Master.hxx>
+#include <SectPx_Pnts.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -9,10 +10,10 @@ const char* tnbLib::sectPxLib::Pole_Slave::typeName_ = "slave pole";
 tnbLib::sectPxLib::Pole_Slave::Pole_Slave
 (
 	const Standard_Integer theIndex,
-	const std::shared_ptr<Pole_Master>& theMaster
+	const std::shared_ptr<Pnt_Empty>& thePnt
 )
 	: SectPx_PairedPole(theIndex)
-	, theMaster_(theMaster)
+	, thePnt_(thePnt)
 {
 	// empty body
 }
@@ -21,10 +22,10 @@ tnbLib::sectPxLib::Pole_Slave::Pole_Slave
 (
 	const Standard_Integer theIndex,
 	const word & theName,
-	const std::shared_ptr<Pole_Master>& theMaster
+	const std::shared_ptr<Pnt_Empty>& thePnt
 )
 	: SectPx_PairedPole(theIndex, theName)
-	, theMaster_(theMaster)
+	, thePnt_(thePnt)
 {
 	// empty body
 }
@@ -46,6 +47,5 @@ tnbLib::sectPxLib::Pole_Slave::Coord() const
 std::shared_ptr<tnbLib::SectPx_Pnt>
 tnbLib::sectPxLib::Pole_Slave::Pnt() const
 {
-	Debug_Null_Pointer(theMaster_);
-	return theMaster_->Pnt();
+	return thePnt_;
 }
