@@ -18,6 +18,7 @@
 #include <SectPx_OneParCPtsMap_Single.hxx>
 #include <SectPx_SegmentController.hxx>
 #include <SectPx_TightController_Deg2.hxx>
+#include <SectPx_WeightController.hxx>
 
 void tnbLib::SectPx_FrameTuner::disJoinSegment
 (
@@ -274,8 +275,11 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 
 	const auto slider_id = parentReg->Import(std::move(slider));
 
-	const auto seg0_id = parentReg->Import(std::move(seg0));
-	const auto seg1_id = parentReg->Import(std::move(seg1));
+	const auto seg0_id = parentReg->Import(seg0);
+	const auto seg1_id = parentReg->Import(seg1);
+
+	JoinSegment(seg0);
+	JoinSegment(seg1);
 
 	auto paired = std::make_pair(seg0_id, seg1_id);
 	auto t = std::make_tuple(std::move(paired), slider_id);
@@ -361,8 +365,11 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 
 	const auto slider_id = parentReg->Import(std::move(slider));
 
-	const auto seg0_id = parentReg->Import(std::move(seg0));
-	const auto seg1_id = parentReg->Import(std::move(seg1));
+	const auto seg0_id = parentReg->Import(seg0);
+	const auto seg1_id = parentReg->Import(seg1);
+
+	JoinSegment(seg0);
+	JoinSegment(seg1);
 
 	auto paired = std::make_pair(seg0_id, seg1_id);
 	auto t = std::make_tuple(std::move(paired), slider_id);
@@ -383,93 +390,133 @@ tnbLib::SectPx_FrameTuner::CreateSymmTightnessDeg2
 			<< abort(FatalError);
 	}
 
-	const auto& parents = FrameRegistry();
-	Debug_Null_Pointer(parents);
-
-	if (thePole->IsInterior())
-	{
-		auto corner = std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(thePole);
-		if (NOT corner)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the pole is not corner!" << endl
-				<< abort(FatalError);
-		}
-
-		const auto bwd = corner->Backward().lock();
-		Debug_Null_Pointer(bwd);
-
-		const auto fwd = corner->Forward().lock();
-		Debug_Null_Pointer(fwd);
-
-		if (bwd->HasController())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the segment already has a controller!" << endl
-				<< abort(FatalError);
-		}
-
-		if (fwd->HasController())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the segment already has a controller!" << endl
-				<< abort(FatalError);
-		}
-
-		auto bwd_ctrl = std::make_shared<sectPxLib::OneParCPtsMap_Single>();
-		Debug_Null_Pointer(bwd_ctrl);
-
-		parents->Import(bwd_ctrl);
-
-		bwd_ctrl->SetSegment(bwd, Standard_False);
-		bwd_ctrl->SetPar(thePar);
-
-		auto fwd_ctrl = std::make_shared<sectPxLib::OneParCPtsMap_Single>();
-		Debug_Null_Pointer(fwd_ctrl);
-
-		parents->Import(fwd_ctrl);
-
-		fwd_ctrl->SetSegment(fwd);
-		fwd_ctrl->SetPar(thePar);
-
-		auto seg_bwd_ctrl = std::make_shared<SectPx_SegmentController>();
-		Debug_Null_Pointer(seg_bwd_ctrl);
-
-		seg_bwd_ctrl->SetCPts(bwd_ctrl);
-		seg_bwd_ctrl->SetSegment(bwd);
-		bwd->SetController(seg_bwd_ctrl);
-
-		auto seg_fwd_ctrl = std::make_shared<SectPx_SegmentController>();
-		Debug_Null_Pointer(seg_fwd_ctrl);
-
-		seg_fwd_ctrl->SetCPts(fwd_ctrl);
-		seg_fwd_ctrl->SetSegment(fwd);
-		fwd->SetController(seg_fwd_ctrl);
-
-		FrameRegistry()->Import(seg_bwd_ctrl);
-		FrameRegistry()->Import(seg_fwd_ctrl);
-
-		auto pole_controller =
-			std::make_shared<sectPxLib::TightController_Deg2>(corner);
-		Debug_Null_Pointer(pole_controller);
-
-		pole_controller->SetLeft(seg_bwd_ctrl);
-		pole_controller->SetRight(seg_fwd_ctrl);
-
-		bwd->SetController(seg_bwd_ctrl);
-		fwd->SetController(seg_fwd_ctrl);
-
-		auto id = FrameRegistry()->Import(std::move(pole_controller));
-		corner->InsertToControllers(id, pole_controller);
-		return id;
-	}
-	else
+	if (NOT thePole->IsInterior())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the pole is not interior!" << endl
 			<< abort(FatalError);
 	}
-	return 0;
+
+	const auto& parents = FrameRegistry();
+	Debug_Null_Pointer(parents);
+
+	auto corner = std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(thePole);
+	if (NOT corner)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the pole is not corner!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto bwd = corner->Backward().lock();
+	Debug_Null_Pointer(bwd);
+
+	const auto fwd = corner->Forward().lock();
+	Debug_Null_Pointer(fwd);
+
+	if (bwd->HasController())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the segment already has a controller!" << endl
+			<< abort(FatalError);
+	}
+
+	if (fwd->HasController())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the segment already has a controller!" << endl
+			<< abort(FatalError);
+	}
+
+	auto bwd_ctrl = std::make_shared<sectPxLib::OneParCPtsMap_Single>();
+	Debug_Null_Pointer(bwd_ctrl);
+
+	parents->Import(bwd_ctrl);
+
+	bwd_ctrl->SetSegment(bwd, Standard_False);
+	bwd_ctrl->SetPar(thePar);
+
+	auto fwd_ctrl = std::make_shared<sectPxLib::OneParCPtsMap_Single>();
+	Debug_Null_Pointer(fwd_ctrl);
+
+	parents->Import(fwd_ctrl);
+
+	fwd_ctrl->SetSegment(fwd);
+	fwd_ctrl->SetPar(thePar);
+
+	auto seg_bwd_ctrl = std::make_shared<SectPx_SegmentController>();
+	Debug_Null_Pointer(seg_bwd_ctrl);
+
+	seg_bwd_ctrl->SetCPts(bwd_ctrl);
+	seg_bwd_ctrl->SetSegment(bwd);
+	bwd->SetController(seg_bwd_ctrl);
+
+	auto seg_fwd_ctrl = std::make_shared<SectPx_SegmentController>();
+	Debug_Null_Pointer(seg_fwd_ctrl);
+
+	seg_fwd_ctrl->SetCPts(fwd_ctrl);
+	seg_fwd_ctrl->SetSegment(fwd);
+	fwd->SetController(seg_fwd_ctrl);
+
+	FrameRegistry()->Import(seg_bwd_ctrl);
+	FrameRegistry()->Import(seg_fwd_ctrl);
+
+	auto pole_controller =
+		std::make_shared<sectPxLib::TightController_Deg2>(corner);
+	Debug_Null_Pointer(pole_controller);
+
+	pole_controller->SetLeft(seg_bwd_ctrl);
+	pole_controller->SetRight(seg_fwd_ctrl);
+
+	bwd->SetController(seg_bwd_ctrl);
+	fwd->SetController(seg_fwd_ctrl);
+
+	auto id = FrameRegistry()->Import(pole_controller);
+	corner->InsertToControllers(id, pole_controller);
+	return id;
+}
+
+
+Standard_Integer 
+tnbLib::SectPx_FrameTuner::CreateWeight
+(
+	const std::shared_ptr<SectPx_Pole>& thePole,
+	const std::shared_ptr<SectPx_Par>& theWeight
+)
+{
+	if (NOT FrameRegistry()->IsContains(thePole))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the pole is not registered!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT thePole->IsInterior())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the pole is not interior!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& parents = FrameRegistry();
+	Debug_Null_Pointer(parents);
+
+	auto corner = std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(thePole);
+	if (NOT corner)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the pole is not corner!" << endl
+			<< abort(FatalError);
+	}
+
+	auto weight = std::make_shared<sectPxLib::WeightController>(corner);
+	Debug_Null_Pointer(weight);
+
+	weight->SetWeight(theWeight);
+
+	const auto id = FrameRegistry()->Import(weight);
+	corner->InsertToControllers(id, weight);
+	return id;
 }
 
 namespace tnbLib
@@ -788,7 +835,7 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				auto pnt = std::dynamic_pointer_cast<sectPxLib::Pnt_Empty>(x);
 				Debug_Null_Pointer(pnt);
 
-				auto pole = std::make_shared<sectPxLib::Pole_Slave>();
+				auto pole = std::make_shared<sectPxLib::Pole_Slave>(pnt);
 				Debug_Null_Pointer(pole);
 
 				auto paired = std::make_pair(x->Index(), FrameRegistry()->Import(pole));
@@ -815,16 +862,23 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 	for (const auto& x : slaves)
 	{
 		Debug_Null_Pointer(x);
-		auto id = x->Index();
+		const auto pnt = std::dynamic_pointer_cast<sectPxLib::Pnt_Empty>(x->Pnt());
+		Debug_Null_Pointer(pnt);
+
+		const auto& masterPnt = pnt->Master();
+		Debug_Null_Pointer(masterPnt);
+
+		auto id = masterPnt->Index();
 
 		auto iter = pntToPole.find(id);
 		if (iter IS_EQUAL pntToPole.end())
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "the item is not in the tree!" << endl
+				<< " type: " << x->typeName_ << endl
 				<< abort(FatalError);
 		}
-
+		
 		auto pole_id = iter->second;
 
 		auto pole = FrameRegistry()->SelectObj(pole_id);
