@@ -204,6 +204,33 @@ namespace tnbLib
 		return std::move(pm);
 	}
 
+	auto createOuterPoint(const std::string& name, const appl::dtm_t& d)
+	{
+		const auto& dtm_name = d->Name();
+		auto f0 = createXReaderField(dtm_name + "_xReaderField", d);
+		auto f1 = createYReaderField(dtm_name + "_yReaderField", d);
+
+		auto par0 = createFree(f0->Name() + "_par", f0);
+		auto par1 = createFree(f1->Name() + "_par", f1);
+
+		auto pm = appl::createOuterComponent(getPointMaker(), par0, par1);
+		pm->SetName(name);
+		return std::move(pm);
+	}
+
+	auto createOuterPoint(const appl::dtm_t& d)
+	{
+		const auto& dtm_name = d->Name();
+		auto f0 = createXReaderField(dtm_name + "_xReaderField", d);
+		auto f1 = createYReaderField(dtm_name + "_yReaderField", d);
+
+		auto par0 = createFree(f0->Name() + "_par", f0);
+		auto par1 = createFree(f1->Name() + "_par", f1);
+
+		auto pm = appl::createOuterComponent(getPointMaker(), par0, par1);
+		return std::move(pm);
+	}
+
 	auto createInnerPoint(const appl::par_t& x, const appl::par_t& y)
 	{
 		auto pm = appl::createInnerComponent(getPointMaker(), x, y);
@@ -214,6 +241,33 @@ namespace tnbLib
 	{
 		auto pm = appl::createInnerComponent(getPointMaker(), x, y);
 		pm->SetName(name);
+		return std::move(pm);
+	}
+
+	auto createInnerPoint(const std::string& name, const appl::dtm_t& d)
+	{
+		const auto& dtm_name = d->Name();
+		auto f0 = createXReaderField(dtm_name + "_xReaderField", d);
+		auto f1 = createYReaderField(dtm_name + "_yReaderField", d);
+
+		auto par0 = createFree(f0->Name() + "_par", f0);
+		auto par1 = createFree(f1->Name() + "_par", f1);
+
+		auto pm = appl::createInnerComponent(getPointMaker(), par0, par1);
+		pm->SetName(name);
+		return std::move(pm);
+	}
+
+	auto createInnerPoint(const appl::dtm_t& d)
+	{
+		const auto& dtm_name = d->Name();
+		auto f0 = createXReaderField(dtm_name + "_xReaderField", d);
+		auto f1 = createYReaderField(dtm_name + "_yReaderField", d);
+
+		auto par0 = createFree(f0->Name() + "_par", f0);
+		auto par1 = createFree(f1->Name() + "_par", f1);
+
+		auto pm = appl::createInnerComponent(getPointMaker(), par0, par1);
 		return std::move(pm);
 	}
 
@@ -490,7 +544,11 @@ namespace tnbLib
 	{
 		mod->add(chaiscript::fun([](const appl::par_t& x, const appl::par_t& y)-> auto{auto t = createOuterPoint(x, y); return std::move(t); }), "createOuterPoint");
 		mod->add(chaiscript::fun([](const std::string& name, const appl::par_t& x, const appl::par_t& y)-> auto{auto t = createOuterPoint(name, x, y); return std::move(t); }), "createOuterPoint");
+		mod->add(chaiscript::fun([](const appl::dtm_t& d)-> auto{auto t = createOuterPoint(d); return std::move(t); }), "createOuterPoint");
+		mod->add(chaiscript::fun([](const std::string& name, const appl::dtm_t& d)-> auto{auto t = createOuterPoint(name, d); return std::move(t); }), "createOuterPoint");
 		mod->add(chaiscript::fun([](const appl::par_t& x, const appl::par_t& y)-> auto{auto t = createInnerPoint(x, y); return std::move(t); }), "createInnerPoint");
+		mod->add(chaiscript::fun([](const std::string& name, const appl::dtm_t& d)-> auto{auto t = createInnerPoint(name, d); return std::move(t); }), "createInnerPoint");
+		mod->add(chaiscript::fun([](const appl::dtm_t& d)-> auto{auto t = createInnerPoint(d); return std::move(t); }), "createInnerPoint");
 		mod->add(chaiscript::fun([](const std::string& name, const appl::par_t& x, const appl::par_t& y)-> auto{auto t = createInnerPoint(name, x, y); return std::move(t); }), "createInnerPoint");
 		mod->add(chaiscript::fun([](const appl::geoMap_t& g)-> auto{auto t = createFieldPoint(g); return std::move(t); }), "createFieldPoint");
 		mod->add(chaiscript::fun([](const std::string& name, const appl::geoMap_t& g)-> auto{auto t = createFieldPoint(name, g); return std::move(t); }), "createFieldPoint");
@@ -560,7 +618,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
