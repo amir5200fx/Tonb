@@ -10,7 +10,7 @@ tnbLib::sectPxLib::Pnt_Empty::Pnt_Empty
 (
 	const std::shared_ptr<SectPx_MasterPnt>& theMaster
 )
-	: theMaster_(theMaster)
+	: SectPx_SlavePnt(theMaster)
 {
 	// empty body
 }
@@ -20,8 +20,7 @@ tnbLib::sectPxLib::Pnt_Empty::Pnt_Empty
 	const Standard_Integer theIndex, 
 	const std::shared_ptr<SectPx_MasterPnt>& theMaster
 )
-	: SectPx_SlavePnt(theIndex)
-	, theMaster_(theMaster)
+	: SectPx_SlavePnt(theIndex, theMaster)
 {
 	// empty body
 }
@@ -32,8 +31,7 @@ tnbLib::sectPxLib::Pnt_Empty::Pnt_Empty
 	const word & theName,
 	const std::shared_ptr<SectPx_MasterPnt>& theMaster
 )
-	: SectPx_SlavePnt(theIndex, theName)
-	, theMaster_(theMaster)
+	: SectPx_SlavePnt(theIndex, theName, theMaster)
 {
 	// empty body
 }
@@ -44,53 +42,45 @@ tnbLib::sectPxLib::Pnt_Empty::RegObjTypeName() const
 	return typeName_;
 }
 
-void tnbLib::sectPxLib::Pnt_Empty::SetMaster
-(
-	const std::shared_ptr<SectPx_MasterPnt>& theMaster
-)
-{
-	theMaster_ = theMaster;
-}
-
 Standard_Real
 tnbLib::sectPxLib::Pnt_Empty::xCoord() const
 {
-	if (NOT theMaster_)
+	if (NOT Master())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the Pnt_Empty doesn't have any master" << endl
 			<< abort(FatalError);
 	}
-	return theMaster_->xCoord();
+	return Master()->xCoord();
 }
 
 Standard_Real 
 tnbLib::sectPxLib::Pnt_Empty::yCoord() const
 {
-	if (NOT theMaster_)
+	if (NOT Master())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the Pnt_Empty doesn't have any master" << endl
 			<< abort(FatalError);
 	}
-	return theMaster_->yCoord();
+	return Master()->yCoord();
 }
 
 tnbLib::Pnt2d tnbLib::sectPxLib::Pnt_Empty::Coord() const
 {
-	if (NOT theMaster_)
+	if (NOT Master())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the Pnt_Empty doesn't have any master" << endl
 			<< abort(FatalError);
 	}
-	return theMaster_->Coord();
+	return Master()->Coord();
 }
 
 Standard_Boolean
 tnbLib::sectPxLib::Pnt_Empty::IsComplete() const
 {
-	return (Standard_Boolean)theMaster_;
+	return (Standard_Boolean)Master();
 }
 
 typename tnbLib::sectPxLib::pntType 

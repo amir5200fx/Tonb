@@ -19,9 +19,16 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			std::shared_ptr<SectPx_MasterPnt> theMaster_;
+			
+			//- private functions and operators
 
-			TNB_SERIALIZATION(TnbSectPx_EXPORT);
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<SectPx_SlavePnt>(*this);
+			}
 
 		protected:
 
@@ -50,15 +57,6 @@ namespace tnbLib
 
 			static TnbSectPx_EXPORT const char* typeName_;
 
-			const auto& Master() const
-			{
-				return theMaster_;
-			}
-
-			TnbSectPx_EXPORT void SetMaster
-			(
-				const std::shared_ptr<SectPx_MasterPnt>& theMaster
-			);
 
 			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
