@@ -9,6 +9,8 @@
 #include <SectPx_UniKnots.hxx>
 #include <SectPx_PntTools.hxx>
 #include <SectPx_Tools.hxx>
+#include <SectPx_Pnts.hxx>
+#include <SectPx_Interface.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -61,10 +63,10 @@ tnbLib::SectPx_CustomProfile::MakeProfile
 	const std::shared_ptr<SectPx_FrameRegistry>& theReg
 )
 {
-	std::vector<std::shared_ptr<SectPx_Pnt>> pnts;
+	/*std::vector<std::shared_ptr<SectPx_Pnt>> pnts;
 	pnts.reserve(2);
 	pnts.push_back(theP0);
-	pnts.push_back(theP1);
+	pnts.push_back(theP1);*/
 
 	auto seg = SectPx_Tools::MakeEdge(theP0, theP1, theReg);
 
@@ -89,25 +91,53 @@ tnbLib::SectPx_CustomProfile::MakeProfile
 	const auto interfaceMaker = std::make_shared<maker::Interface>(theReg);
 	Debug_Null_Pointer(interfaceMaker);
 
-	/*const auto intf0_id = */interfaceMaker->CreateEmpty(n0);
-	/*const auto intf1_id = */interfaceMaker->CreateEmpty(n1);
+	if (theP0->IsMaster())
+	{
+		interfaceMaker->CreateEmpty(n0);
+	}
+	else  //- the point is slave
+	{
+		auto slave = std::dynamic_pointer_cast<SectPx_SlavePnt>(theP0);
+		Debug_Null_Pointer(slave);
 
-	/*const auto intf0 = interfaceMaker->SelectInterface(intf0_id);
-	Debug_Null_Pointer(intf0);
+		const auto& master = slave->Master();
+		auto bndMaster = std::dynamic_pointer_cast<sectPxLib::OuterPnt<sectPxLib::Pnt_Compnt>>(master);
+		Debug_Null_Pointer(bndMaster);
 
-	const auto intf1 = interfaceMaker->SelectInterface(intf1_id);
-	Debug_Null_Pointer(intf1);*/
+		const auto node = bndMaster->Node().lock();
+		Debug_Null_Pointer(node);
 
-	/*theNode0->SetInterface(intf0);
-	theNode1->SetInterface(intf1);*/
+		const auto bndInterface = node->Interface().lock();
+		Debug_Null_Pointer(bndInterface);
 
-	// remove this stupid knotAlg from profile structure
-	/*auto knotAlg = std::make_shared<SectPx_UniKnots>();
-	Debug_Null_Pointer(knotAlg);
+		interfaceMaker->RemoveInterface(bndInterface->Index());
 
-	profile->SetKnot(std::move(knotAlg));*/
+		interfaceMaker->CreateJoint(node, n0);
+	}
 
+	if (theP1->IsMaster())
+	{
+		interfaceMaker->CreateEmpty(n1);
+	}
+	else   //- the point is slave
+	{
+		auto slave = std::dynamic_pointer_cast<SectPx_SlavePnt>(theP1);
+		Debug_Null_Pointer(slave);
 
+		const auto& master = slave->Master();
+		auto bndMaster = std::dynamic_pointer_cast<sectPxLib::OuterPnt<sectPxLib::Pnt_Compnt>>(master);
+		Debug_Null_Pointer(bndMaster);
+
+		const auto node = bndMaster->Node().lock();
+		Debug_Null_Pointer(node);
+
+		const auto bndInterface = node->Interface().lock();
+		Debug_Null_Pointer(bndInterface);
+
+		interfaceMaker->RemoveInterface(bndInterface->Index());
+
+		interfaceMaker->CreateJoint(n1, node);
+	}
 
 	return std::move(profile);
 }
