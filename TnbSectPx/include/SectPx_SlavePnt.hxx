@@ -7,29 +7,53 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SectPx_MasterPnt;
+
 	class SectPx_SlavePnt
 		: public SectPx_TPnt
 	{
 
 		/*Private Data*/
 
+		std::shared_ptr<SectPx_MasterPnt> theMaster_;
 
-		friend class boost::serialization::access;
-
-		template<class Archive>
-		void serialize(Archive &ar, const unsigned int file_version)
-		{
-			ar & boost::serialization::base_object<SectPx_TPnt>(*this);
-		}
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 	protected:
 
-		template<class... _Types>
-		SectPx_SlavePnt(_Types&&... _Args)
-			: SectPx_TPnt(_Args...)
+		SectPx_SlavePnt()
 		{}
 
+		TnbSectPx_EXPORT SectPx_SlavePnt
+		(
+			const std::shared_ptr<SectPx_MasterPnt>& theMaster
+		);
+
+		TnbSectPx_EXPORT SectPx_SlavePnt
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<SectPx_MasterPnt>& theMaster
+		);
+
+		TnbSectPx_EXPORT SectPx_SlavePnt
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<SectPx_MasterPnt>& theMaster
+		);
+
 	public:
+
+		const auto& Master() const
+		{
+			return theMaster_;
+		}
+
+		TnbSectPx_EXPORT void SetMaster
+		(
+			const std::shared_ptr<SectPx_MasterPnt>& theMaster
+		);
 
 		TnbSectPx_EXPORT virtual Standard_Boolean IsEmpty() const;
 

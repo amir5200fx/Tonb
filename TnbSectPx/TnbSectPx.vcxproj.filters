@@ -454,6 +454,9 @@
     <Filter Include="TnbLib\SectPx\FrameTuner">
       <UniqueIdentifier>{bf1ec381-c7bf-4a56-bcd4-141a019bca77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Controller\Pole\Weight">
+      <UniqueIdentifier>{cb6dbdfd-3a83-407a-af9b-0943e764af7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -998,6 +1001,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Makers\Profile\SectPx_BasicProfileMaker.hxx">
       <Filter>TnbLib\SectPx\Makers\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Controller\Pole\Weight\SectPx_WeightController.hxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Weight</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Constructor\SectPx_PntConstructorAdaptor.hxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Constructor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1660,6 +1669,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\CurveQ\SectPx_CurveQMakerIO.cxx">
       <Filter>TnbLib\SectPx\Makers\CurveQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\Weight\SectPx_WeightController.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Weight</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Controller\Pole\Weight\SectPx_WeightControllerIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Controller\Pole\Weight</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Slave\SectPx_SlavePntIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Slave</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Constructor\SectPx_PntConstructorAdaptor.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Constructor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

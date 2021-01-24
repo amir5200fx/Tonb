@@ -141,6 +141,13 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Par>& thePar
 			);
 
+		TnbSectPx_EXPORT Standard_Integer
+			CreateWeight
+			(
+				const std::shared_ptr<SectPx_Pole>& thePole,
+				const std::shared_ptr<SectPx_Par>& theWeight
+			);
+
 		TnbSectPx_EXPORT void ImportFrame
 		(
 			const std::shared_ptr<SectPx_Frame>& theFrame
