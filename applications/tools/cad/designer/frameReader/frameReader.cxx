@@ -11,6 +11,7 @@
 #include <SectPx_Datums.hxx>
 #include <SectPx_Makers.hxx>
 #include <SectPx_TopoProfile.hxx>
+#include <SectPx_FrameTuner.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -23,11 +24,12 @@
 #include <boost/archive/polymorphic_text_oarchive.hpp>
 
 #include <frameMaker.hxx>
+#include <frameTuner.hxx>
 
 namespace tnbLib
 {
 
-	appl::frame_t myFrame;
+	static appl::tuner_t myTuner;
 
 	std::map<word, appl::par_t> parMap;
 
@@ -35,7 +37,7 @@ namespace tnbLib
 
 	const auto& getScatterReg()
 	{
-		return myFrame->ParRegistry()->Scatter();
+		return myTuner->ParRegistry()->Scatter();
 	}
 
 	appl::par_t findPar(const std::string& name)
@@ -75,7 +77,7 @@ namespace tnbLib
 
 	void setParameter(int i, double x)
 	{
-		const auto& parMaker = myFrame->ParameterMaker();
+		auto parMaker = std::make_shared<maker::Parameter>(myTuner->ParRegistry());
 		auto par = parMaker->SelectParameter(i);
 
 		if (par->IsFixed())
@@ -104,7 +106,7 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_iarchive oa(f);
 
-		oa >> myFrame;
+		oa >> myTuner;
 
 		if (verbose)
 		{
@@ -215,7 +217,7 @@ namespace tnbLib
 
 	void printReg()
 	{
-		myFrame->PrintRegistry();
+		myTuner->PrintRegistry();
 	}
 
 	void saveTo(const std::string& name)
@@ -225,7 +227,7 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_oarchive oa(f);
 
-		oa << myFrame;
+		oa << myTuner;
 	}
 }
 
