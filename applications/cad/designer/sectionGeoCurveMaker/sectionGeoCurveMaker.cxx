@@ -186,21 +186,20 @@ namespace tnbLib
 		return std::move(c);
 	}
 
-	void makeCurve(const std::shared_ptr<SectPx_CurveQ>& curveQ)
+	void makeCurve(const std::shared_ptr<SectPx_CurveQ>& curveQ, int deg)
 	{
 		checkFrame();
 		const auto polesQ = SectPx_Tools::RetrievePoles(curveQ);
 		const auto segments = SectPx_Tools::RetrieveInnerSegments(polesQ);
 		const auto poles = SectPx_Tools::RetrieveControlPoints(segments);
 
-		const auto knots = SectPx_Tools::Knots(SectPx_Tools::Knots(segments, std::min(3, std::max(2, degree))));
+		const auto knots = SectPx_Tools::Knots(SectPx_Tools::Knots(segments, std::min(3, std::max(2, deg))));
 		const auto weights = SectPx_Tools::Weights(SectPx_Tools::RetrieveWeights(segments));
 		const auto cpts = SectPx_Tools::CPts(poles);
-
 		try
 		{
-			Handle(Geom2d_Curve) curve = 
-				new Geom2d_BSplineCurve(cpts, weights, knots.first, knots.second, degree);
+			Handle(Geom2d_Curve) curve =
+				new Geom2d_BSplineCurve(cpts, weights, knots.first, knots.second, deg);
 
 			auto plnCurve = std::make_shared<Pln_Curve>(curveQ->Index(), std::move(curve));
 			auto paired = std::make_pair(curveQ->Index(), std::move(plnCurve));
@@ -228,7 +227,7 @@ namespace tnbLib
 			auto c = std::dynamic_pointer_cast<SectPx_CurveQ>(x.second.lock());
 			Debug_Null_Pointer(c);
 
-			makeCurve(c);
+			makeCurve(c, degree);
 		}
 	}
 
@@ -260,7 +259,7 @@ namespace tnbLib
 	{
 		mod->add(chaiscript::fun([](int d)->void {degree = d; }), "setDegree");
 		mod->add(chaiscript::fun([](int id)-> auto {auto t = selectCurve(id); return std::move(t); }), "selectCurve");
-		mod->add(chaiscript::fun([](const std::shared_ptr<SectPx_CurveQ>& c)-> void {makeCurve(c); }), "makeCurve");
+		mod->add(chaiscript::fun([](const std::shared_ptr<SectPx_CurveQ>& c, int deg)-> void {makeCurve(c, deg); }), "makeCurve");
 		mod->add(chaiscript::fun([]()->void { makeAllCurves(); }), "makeAllCurves");
 	}
 
