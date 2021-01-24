@@ -18,6 +18,12 @@ tnbLib::appl::createSlider(const tuner_t & t, int seg, const coord_t & p)
 	return std::move(tt);
 }
 
+int tnbLib::appl::createWeight(const tuner_t & t, int i, const par_t & p)
+{
+	auto pole = t->SelectPole(i);
+	return t->CreateWeight(pole, p);
+}
+
 int tnbLib::appl::createSymmTightness(const tuner_t & t, int i, const par_t & p)
 {
 	auto pole = t->SelectPole(i);

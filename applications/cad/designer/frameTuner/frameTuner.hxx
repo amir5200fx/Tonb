@@ -17,6 +17,7 @@ namespace tnbLib
 
 		TnbFrameTunner_EXPORT std::tuple<std::pair<int, int>, int> createSlider(const tuner_t& t, int seg, const par_t& p);
 		TnbFrameTunner_EXPORT std::tuple<std::pair<int, int>, int> createSlider(const tuner_t& t, int seg, const coord_t& p);
+		TnbFrameTunner_EXPORT int createWeight(const tuner_t& t, int pole, const par_t& p);
 		TnbFrameTunner_EXPORT int createSymmTightness(const tuner_t& t, int pole, const par_t& p);
 
 		TnbFrameTunner_EXPORT void importFrame(const tuner_t& t, const frame_t& f);
