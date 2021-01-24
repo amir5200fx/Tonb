@@ -18,6 +18,7 @@
 #include <SectPx_CurveQ.hxx>
 #include <SectPx_SegmentController.hxx>
 #include <SectPx_PoleController.hxx>
+#include <SectPx_WeightController.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -219,7 +220,7 @@ namespace tnbLib
 			auto seg = bnd->Segment().lock();
 			Debug_Null_Pointer(seg);
 
-			Debug_If_Condition_Message(thePole IS_EQUAL seg->Pole1(), "appearently, the semnet is inverted!");
+			Debug_If_Condition_Message(thePole IS_EQUAL seg->Pole1(), "appearently, the segment is inverted!");
 			return seg->Pole1();
 		}
 		else
@@ -230,7 +231,7 @@ namespace tnbLib
 			auto seg = inter->Forward().lock();
 			Debug_Null_Pointer(seg);
 
-			Debug_If_Condition_Message(thePole IS_EQUAL seg->Pole1(), "appearently, the semnet is inverted!");
+			Debug_If_Condition_Message(thePole IS_EQUAL seg->Pole1(), "appearently, the segment is inverted!");
 			return seg->Pole1();
 		}
 		
@@ -356,8 +357,21 @@ tnbLib::SectPx_Tools::RetrieveSegments
 		
 		if (x->IsBoundary())
 		{
-			Debug_If_Condition(seg1);
-			segments.push_back(std::move(seg0));
+			if (seg0 AND NOT seg1)
+			{
+				segments.push_back(std::move(seg0));
+			}
+			else if (seg1 AND NOT seg0)
+			{
+				segments.push_back(std::move(seg1));
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "Undefined behavior has been detected: "
+					<< " for a boundary pole, there are two adjoint segments!" << endl
+					<< abort(FatalError);
+			}
 		}
 		else
 		{
@@ -647,9 +661,22 @@ tnbLib::SectPx_Tools::RetrieveWeights
 	const auto& segments = theSegments;
 	const auto first = segments[0]->Pole0()->Coord();
 	std::vector<Standard_Real> weights;
-	if (std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(segments[0]->Pole0()))
+
+	const auto corner = std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(segments[0]->Pole0());
+	if (corner)
 	{
-		weights.push_back(1.0);
+		auto w = (Standard_Real)1.0;
+		for (const auto& x : corner->Controllers())
+		{
+			auto c = std::dynamic_pointer_cast<sectPxLib::WeightController>(x.second.lock());
+			if (c)
+			{
+				Debug_Null_Pointer(c->Weight().lock());
+				w = c->Weight().lock()->Value();
+				break;
+			}
+		}
+		weights.push_back(w);
 	}
 	else
 	{
@@ -673,9 +700,21 @@ tnbLib::SectPx_Tools::RetrieveWeights
 				weights.push_back(1.0);
 			}
 		}
-		if (std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(x->Pole1()))
+		const auto corner = std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(x->Pole1());
+		if (corner)
 		{
-			weights.push_back(1.0);
+			auto w = (Standard_Real)1.0;
+			for (const auto& x : corner->Controllers())
+			{
+				auto c = std::dynamic_pointer_cast<sectPxLib::WeightController>(x.second.lock());
+				if (c)
+				{
+					Debug_Null_Pointer(c->Weight().lock());
+					w = c->Weight().lock()->Value();
+					break;
+				}
+			}
+			weights.push_back(w);
 		}
 		else
 		{
@@ -908,7 +947,7 @@ tnbLib::SectPx_Tools::Knots
 	const Standard_Real theU1
 )
 {
-	if (theNbQ - 1 <= theDegree)
+	if (theNbQ - 1 < theDegree)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "invalid degree for the curve" << endl
