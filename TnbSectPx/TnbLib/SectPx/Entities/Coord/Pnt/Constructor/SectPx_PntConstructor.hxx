@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_Serialization.hxx>
+#include <SectPx_PntConstructorAdaptor.hxx>
 
 namespace tnbLib
 {
@@ -44,6 +45,7 @@ namespace tnbLib
 		template<class PntType>
 		class OuterPnt
 			: public PntType
+			, public SectPx_PntConstructorAdaptor
 		{
 
 			/*Private Data*/
