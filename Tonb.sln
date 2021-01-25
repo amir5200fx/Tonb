@@ -316,6 +316,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "crossCurvesViewer", "crossC
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crossCurvesViewer", "applications\tools\marine\crossCurvesViewer\crossCurvesViewer.vcxproj", "{D56D47FB-383A-4227-814F-CF0C7061E6FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "curveList2d", "curveList2d", "{3605BB82-BBD4-4EC0-B281-AA9C92470216}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "curveList2d", "applications\tools\discrete\curveList2d\curveList2d.vcxproj", "{A8FEE839-B28B-41D4-BB47-CBE163CED033}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -746,6 +750,14 @@ Global
 		{D56D47FB-383A-4227-814F-CF0C7061E6FF}.Release|x64.Build.0 = Release|x64
 		{D56D47FB-383A-4227-814F-CF0C7061E6FF}.Release|x86.ActiveCfg = Release|Win32
 		{D56D47FB-383A-4227-814F-CF0C7061E6FF}.Release|x86.Build.0 = Release|Win32
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Debug|x64.ActiveCfg = Debug|x64
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Debug|x64.Build.0 = Debug|x64
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Debug|x86.ActiveCfg = Debug|Win32
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Debug|x86.Build.0 = Debug|Win32
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Release|x64.ActiveCfg = Release|x64
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Release|x64.Build.0 = Release|x64
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Release|x86.ActiveCfg = Release|Win32
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -852,6 +864,8 @@ Global
 		{8CD8DED9-3EC1-4EB0-B119-0252331F7FB1} = {F87B7B50-4D32-451D-ACCF-E56290BD4BFC}
 		{564D503B-B0B9-4EB3-A2F9-9EA0168C0D72} = {5377020C-D86A-4ADC-B5CF-6F4AFC6E208C}
 		{D56D47FB-383A-4227-814F-CF0C7061E6FF} = {564D503B-B0B9-4EB3-A2F9-9EA0168C0D72}
+		{3605BB82-BBD4-4EC0-B281-AA9C92470216} = {AE3002AC-CA8B-49E9-BFD9-6E4A20A1CC2C}
+		{A8FEE839-B28B-41D4-BB47-CBE163CED033} = {3605BB82-BBD4-4EC0-B281-AA9C92470216}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}
