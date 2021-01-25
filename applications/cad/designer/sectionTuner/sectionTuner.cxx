@@ -14,6 +14,7 @@
 #include <SectPx_TopoSegment.hxx>
 #include <SectPx_FrameTuner.hxx>
 #include <SectPx_Tools.hxx>
+#include <SectPx_RegObjType.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -88,10 +89,108 @@ namespace tnbLib
 		loaded = true;
 	}
 
+	void printObj(const std::shared_ptr<SectPx_RegObj>& item)
+	{
+		Info << "- index: " << item->Index()
+			<< ", " << getRegObjTypeName(item->RegObjType())
+			<< "'s name: "
+			<< "["
+			<< item->Name()
+			<< "]"
+			<< endl;
+	}
+
 	void printReg()
 	{
 		checkFrame();
-		myFrame->PrintRegistry();
+		const auto& scatterReg = getScatterReg();
+		Info << " parameters: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::parameter))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " field functions: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::fieldFun))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " points: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::pnt))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " edges: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::edge))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " profiles: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::profile))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " nodes: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::node))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " datums: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::datum))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " geometric maps: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::geoMap))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " interfaces: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::Interface))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " poles: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::pole))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " segments: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::segment))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
 	}
 
 	void printFixedParams()
