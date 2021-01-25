@@ -15,6 +15,7 @@
 #include <SectPx_FrameTuner.hxx>
 #include <SectPx_Tools.hxx>
 #include <SectPx_Pole.hxx>
+#include <SectPx_RegObjType.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>

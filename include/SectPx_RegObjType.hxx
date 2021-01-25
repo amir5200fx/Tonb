@@ -4,6 +4,8 @@
 
 #include <word.hxx>
 
+#include <SectPx_Module.hxx>
+
 namespace tnbLib
 {
 
@@ -35,7 +37,7 @@ namespace tnbLib
 		other
 	};
 
-	word getRegObjTypeName(const SectPx_RegObjType t);
+	TnbSectPx_EXPORT word getRegObjTypeName(const SectPx_RegObjType t);
 
 	namespace sectPxLib
 	{
