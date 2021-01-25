@@ -4,6 +4,7 @@
 #include <SectPx_Interfaces.hxx>
 #include <SectPx_Node.hxx>
 #include <SectPx_Tools.hxx>
+#include <SectPx_Pnts.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -65,10 +66,27 @@ tnbLib::maker::Interface::CreateJoint
 	const std::shared_ptr<SectPx_Node>& theNode1
 ) const
 {
-	if (NOT SectPx_Tools::IsValidToJoint(theNode0, theNode1))
+	/*if (NOT SectPx_Tools::IsValidToJoint(theNode0, theNode1))
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "Unable to join the two nodes" << endl
+			<< abort(FatalError);
+	}*/
+
+	const auto& pt0 = theNode0->Pnt();
+	const auto& pt1 = theNode1->Pnt();
+
+	if (pt0->IsMaster() AND pt1->IsMaster())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Unable to join the two nodes: the two are master" << endl
+			<< abort(FatalError);
+	}
+
+	if (pt0->IsSlave() AND pt1->IsSlave())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Unable to join the two nodes: the two are slave" << endl
 			<< abort(FatalError);
 	}
 
