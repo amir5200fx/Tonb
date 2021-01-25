@@ -416,9 +416,90 @@ namespace tnbLib
 		return std::move(edge);
 	}
 
+	void printObj(const std::shared_ptr<SectPx_RegObj>& item)
+	{
+		Info << "- index: " << item->Index()
+			<< ", " << getRegObjTypeName(item->RegObjType())
+			<< "'s name: "
+			<< "["
+			<< item->Name()
+			<< "]"
+			<< endl;
+	}
+
 	void printReg()
 	{
-		myFrame->PrintRegistry();
+		Info << " parameters: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::parameter))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " field functions: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::fieldFun))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " points: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::pnt))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " edges: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::edge))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " profiles: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::profile))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " nodes: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::node))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " datums: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::datum))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " geometric maps: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::geoMap))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
+		Info << endl;
+		Info << " interfaces: " << endl;
+		Info << endl;
+		for (const auto& x : scatterReg->ScatterMap(SectPx_RegObjType::Interface))
+		{
+			auto item = x.second.lock();
+			printObj(item);
+		}
 	}
 
 	void saveTo(const std::string& name)
