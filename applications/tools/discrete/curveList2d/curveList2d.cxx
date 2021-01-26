@@ -168,11 +168,19 @@ namespace tnbLib
 	void loadCurves(const std::string& name)
 	{
 		fileName fn(name);
-		std::ifstream f(fn);
+		std::fstream file;
+		file.open(fn, ios::in);
 
-		boost::archive::polymorphic_text_iarchive oa(f);
+		if (file.fail())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "file was not found" << endl
+				<< abort(FatalError);
+		}
 
-		oa >> myCurves;
+		boost::archive::polymorphic_text_iarchive ia(file);
+
+		ia >> myCurves;
 		if (NOT myCurves.size())
 		{
 			FatalErrorIn(FunctionSIG)

@@ -1,6 +1,8 @@
 #include <Marine_PlnCurves.hxx>
 #include <Pln_CurveTools.hxx>
 #include <Pln_Curve.hxx>
+#include <Pln_Edge.hxx>
+#include <Pln_Vertex.hxx>
 #include <Dir2d.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
@@ -10,6 +12,7 @@
 
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
+#include <boost/filesystem.hpp>
 
 #include <gp_Ax2d.hxx>
 #include <gp_Circ2d.hxx>
@@ -22,6 +25,8 @@
 #include <OSstream.hxx>
 
 
+#include <vector>
+
 namespace tnbLib
 {
 
@@ -33,13 +38,28 @@ namespace tnbLib
 	};
 
 	static myType curveType;
+	static int verbose = 0;
 
 	typedef std::shared_ptr<Pln_Curve> curve_t;
+	typedef std::shared_ptr<Pln_Edge> edge_t;
 
-	curve_t myCurve;
+	//curve_t myCurve;
+
+	static std::vector<edge_t> myCurves;
+
+	auto makeEdge(curve_t&& curve)
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(curve->Value(curve->FirstParameter()));
+		auto v1 = std::make_shared<Pln_Vertex>(curve->Value(curve->LastParameter()));
+
+		auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+
+		return std::move(edge);
+	}
 
 	void makeCurve(const Handle(Geom2d_Curve)& geom)
 	{
+		curve_t myCurve;
 		switch (curveType)
 		{
 		case tnbLib::myType::tank:
@@ -57,8 +77,43 @@ namespace tnbLib
 				<< abort(FatalError);
 			break;
 		}
+		auto edge = makeEdge(std::move(myCurve));
+		myCurves.push_back(std::move(edge));
 	}
 
+	const auto& getCurve(int i)
+	{
+		if (NOT INSIDE(i, 0, myCurves.size()))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "exceeds the span of the list" << endl
+				<< " - index: " << i << endl
+				<< " lower: " << 0 << ", upper: " << myCurves.size() - 1 << endl
+				<< abort(FatalError);
+		}
+		return myCurves[i];
+	}
+
+	void flushDirs()
+	{
+		std::vector<boost::filesystem::path> paths;
+		for 
+			(
+				boost::filesystem::directory_iterator iter(boost::filesystem::current_path()); 
+				iter != boost::filesystem::end(iter); 
+				iter++
+				)
+		{
+			if (boost::filesystem::is_directory(*iter))
+			{
+				paths.push_back(iter->path());
+			}
+		}
+		for (const auto& x : paths)
+		{
+			boost::filesystem::remove(x);
+		}
+	}
 
 	auto makePoint(double x, double y)
 	{
@@ -218,27 +273,55 @@ namespace tnbLib
 		makeCurve(trimmed);
 	}
 
-	void saveTo(const std::string& name)
+	auto makePointList()
 	{
-		fileName fn(name);
-		std::ofstream f(fn);
-
-		boost::archive::polymorphic_text_oarchive oa(f);
-
-		oa << myCurve;
+		std::vector<Pnt2d> l;
+		return std::move(l);
 	}
 
-	void loadCurve(const std::string& name)
+	void insert(std::vector<Pnt2d>& l, const Pnt2d& pt)
+	{
+		l.push_back(pt);
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (verbose)
+		{
+			Info << " nb. of curves going to be saved: " << myCurves.size() << endl;
+		}
+		size_t i = 0;
+		for (const auto& c : myCurves)
+		{
+			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			boost::filesystem::path dir(std::to_string(i));
+			boost::filesystem::create_directory(dir);
+
+			std::ofstream file(address);
+
+			boost::archive::polymorphic_text_oarchive oa(file);
+
+			oa << c;
+
+			if (verbose)
+			{
+				Info << " curve, " << i << " saved in: " << address << ", successfully!" << endl;
+			}
+			i++;
+		}
+	}
+
+	/*void loadCurve(const std::string& name)
 	{
 		fileName fn(name);
 		std::ifstream f(fn);
 
 		boost::archive::polymorphic_text_iarchive oa(f);
 
-		oa >> myCurve;
-	}
+		oa >> myCurves;
+	}*/
 
-	void exportToPlt(const std::string& name, int n)
+	/*void exportToPlt(const std::string& name, int n)
 	{
 		fileName fn(name);
 		OFstream f(fn);
@@ -263,7 +346,7 @@ namespace tnbLib
 
 			poly.ExportToPlt(f);
 		}
-	}
+	}*/
 }
 
 #ifdef DebugInfo
@@ -279,6 +362,9 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([]()->void {flushDirs(); }), "flush");
+		mod->add(chaiscript::fun([](int i)->void {verbose = i; }), "setVerbose");
+
 		mod->add(chaiscript::fun([](double x, double y)-> auto {return makePoint(x, y); }), "makePoint");
 		mod->add(chaiscript::fun([](double x, double y)-> auto {return makeDir(x, y); }), "makeDirection");
 
@@ -314,8 +400,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)-> auto {return makeEllipse(s0, s1, c); }), "makeElips");
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadCurve(name); }), "loadCurve");
-		mod->add(chaiscript::fun([](const std::string& name, int n)-> void {exportToPlt(name, n); }), "exportToPlt");
+		//mod->add(chaiscript::fun([](const std::string& name)-> void {loadCurve(name); }), "loadCurve");
+		//mod->add(chaiscript::fun([](const std::string& name, int n)-> void {exportToPlt(name, n); }), "exportToPlt");
 
 		mod->add(chaiscript::fun([](const myType t)-> void {curveType = t; }), "setType");
 	}
@@ -363,7 +449,7 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("curve");
+			fileName myFileName("TnbMarineCurve");
 
 			try
 			{
@@ -376,6 +462,17 @@ int main(int argc, char *argv[])
 			catch (const error& x)
 			{
 				Info << x.message() << endl;
+			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
+			}
+		}
+		else if (IsEqualCommand(argv[1], "--flush"))
+		{
+			try
+			{
+				flushDirs();
 			}
 			catch (const std::exception& x)
 			{

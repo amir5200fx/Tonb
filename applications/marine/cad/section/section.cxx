@@ -19,60 +19,58 @@
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
 
-
-
-
 namespace tnbLib
 {
-	static std::vector<std::shared_ptr<Marine_PlnCurve>> curves;
-	static size_t nbCurves = 0;
+	typedef std::shared_ptr<Pln_Edge> curve_t;
+
+	static std::vector<curve_t> myCurves;
 
 	static marineLib::curveType sectionType;
 	static std::shared_ptr<Cad2d_Modeler> modeler;
 	static double xLoc = 0;
-	static bool setLoc = false;
+	static bool locTag = false;
 
 	static std::shared_ptr<Marine_CmpSection> myCmpSection;
+	static int verbose = 0;
+	static bool loadingTag = false;
+	static bool exeTag = false;
 
 
 	void loadCurves(const std::string& name)
 	{
-		curves.reserve(nbCurves);
-		for (size_t i = 0; i < nbCurves; i++)
-		{
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
-			std::fstream file;
-			file.open(address, ios::in);
+		fileName fn(name);
+		std::fstream file;
+		file.open(fn, std::ios::in);
 
-			if (file.fail())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "file was not found" << endl
-					<< abort(FatalError);
-			}
-
-			boost::archive::polymorphic_text_iarchive oa(file);
-
-			std::shared_ptr<Pln_Curve> curve;
-
-			oa >> curve;
-			auto mcurve = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
-			if (!mcurve)
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "the curve is not marine type" << endl
-					<< abort(FatalError);
-			}
-			curves.push_back(std::move(mcurve));
-		}
-
-		if (curves.empty())
+		if (file.fail())
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "no curve has been loaded" << endl
+				<< "file was not found" << endl
 				<< abort(FatalError);
 		}
-		const auto& curve = curves[0];
+
+		boost::archive::polymorphic_text_iarchive ia(file);
+		ia >> myCurves;
+
+		if (NOT myCurves.size())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the curve is null" << endl
+				<< abort(FatalError);
+		}
+
+		for (const auto& x : myCurves)
+		{
+			if (NOT std::dynamic_pointer_cast<Marine_PlnCurve>(myCurves[0]->Curve()))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the curve is not marine" << endl
+					<< abort(FatalError);
+			}
+		}
+
+		const auto curve = std::dynamic_pointer_cast<Marine_PlnCurve>(myCurves[0]->Curve());
+		Debug_Null_Pointer(curve);
 
 		switch (curve->CurveType())
 		{
@@ -91,8 +89,10 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		for (const auto& x : curves)
+		for (const auto& e : myCurves)
 		{
+			auto x = std::dynamic_pointer_cast<Marine_PlnCurve>(e->Curve());
+			Debug_Null_Pointer(x);
 			if (x->CurveType() NOT_EQUAL sectionType)
 			{
 				FatalErrorIn(FunctionSIG)
@@ -101,9 +101,16 @@ namespace tnbLib
 			}
 		}
 
+		loadingTag = true;
+
+		if (verbose)
+		{
+			Info << " the curves loaded, successfully!" << endl;
+			Info << " - nb. of curves: " << myCurves.size() << endl;
+		}
 	}
 
-	auto makeEdge(const std::shared_ptr<Marine_PlnCurve>& curve)
+	/*auto makeEdge(const std::shared_ptr<Marine_PlnCurve>& curve)
 	{
 		auto v0 = std::make_shared<Pln_Vertex>(curve->Value(curve->FirstParameter()));
 		auto v1 = std::make_shared<Pln_Vertex>(curve->Value(curve->LastParameter()));
@@ -111,7 +118,7 @@ namespace tnbLib
 		auto edge = std::make_shared<Pln_Edge>(v0, v1, curve);
 
 		return std::move(edge);
-	}
+	}*/
 
 	void makeModeler()
 	{
@@ -179,24 +186,22 @@ namespace tnbLib
 
 	void execute()
 	{
-		if (!setLoc)
+		if (!loadingTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no cuveList has been loaded!" << endl
+				<< abort(FatalError);
+		}
+		if (!locTag)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no location has been set for the section" << endl
 				<< abort(FatalError);
 		}
 
-		std::vector<std::shared_ptr<Pln_Edge>> edges;
-		edges.reserve(nbCurves);
-		for (const auto& x : curves)
-		{
-			auto edge = makeEdge(x);
-			edges.push_back(std::move(edge));
-		}
-
 		makeModeler();
 
-		modeler->Import(std::move(edges));
+		modeler->Import(myCurves);
 
 		Cad2d_Modeler::selctList l;
 		modeler->SelectAll(l);
@@ -215,17 +220,36 @@ namespace tnbLib
 		Marine_SectTools::SetLocation(compSection, xLoc);
 
 		myCmpSection = std::move(compSection);
+
+		exeTag = true;
+
+		if (verbose)
+		{
+			Info << " the section is created, successfully!" << endl;
+			Info << " - location: " << xLoc << endl;
+		}
 	}
 
 	void saveTo(const std::string& name)
 	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no section has been created, yet!" << endl
+				<< " please run the 'execute' command" << endl
+				<< abort(FatalError);
+		}
 		fileName fn(name);
 		std::ofstream f(fn);
 		
 		boost::archive::polymorphic_text_oarchive oa(f);
 
 		oa << myCmpSection;
-		
+
+		if (verbose)
+		{
+			Info << " the section has been saved in: " << fn << endl;
+		}
 	}
 
 }
@@ -244,8 +268,10 @@ namespace tnbLib
 	void SectionMaker(const module_t& mod)
 	{
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void { loadCurves(name); }), "loadCurve");
+		mod->add(chaiscript::fun([](const std::string& name)-> void { loadCurves(name); }), "loadCurves");
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
+		mod->add(chaiscript::fun([](int i)-> void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](double x)->void {xLoc = x; locTag = true; }), "setLocation");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
 	}
@@ -292,7 +318,7 @@ int main(int argc, char* argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("section");
+			fileName myFileName("TnbMarineSection");
 
 			try
 			{

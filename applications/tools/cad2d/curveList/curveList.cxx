@@ -27,7 +27,15 @@ namespace tnbLib
 		while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
 		{
 			std::string address = ".\\" + std::to_string(i) + "\\" + name;
-			std::ifstream file(address);
+			std::fstream file;
+			file.open(address, ios::in);
+
+			if (file.fail())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "file was not found" << endl
+					<< abort(FatalError);
+			}
 
 			boost::archive::polymorphic_text_iarchive ia(file);
 
