@@ -54,16 +54,8 @@ namespace tnbLib
 		}
 		if (verbose)
 		{
-			if (myCurves.size() > 1)
-			{
-				Info << endl;
-				Info << " " << myCurves.size() << " nb. of curves have been loaded" << endl;
-			}
-			else
-			{
-				Info << endl;
-				Info << " " << myCurves.size() << " nb. of curve has been loaded" << endl;
-			}
+			Info << endl;
+			Info << " " << myCurves.size() << " nb. of curves have been loaded" << endl;
 		}
 	}
 
