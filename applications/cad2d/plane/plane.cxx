@@ -52,47 +52,20 @@ namespace tnbLib
 
 	void loadCurves(const std::string& name)
 	{
-		int i = 0;
-		while (true)
+		std::fstream file;
+		file.open(name, ios::in);
+
+		if (file.fail())
 		{
-			boost::filesystem::path dir(std::to_string(i));
-			if (boost::filesystem::is_directory(dir))
-			{
-				std::string address = ".\\" + std::to_string(i) + "\\" + name;
-				std::fstream file;
-				file.open(address, ios::in);
-
-				if (file.fail())
-				{
-					FatalErrorIn(FunctionSIG)
-						<< "file was not found" << endl
-						<< abort(FatalError);
-				}
-
-				boost::archive::polymorphic_text_iarchive ia(file);
-
-				curve_t curve;
-				ia >> curve;
-
-				if (verbose)
-				{
-					Info << "the file: " << address << " has been loaded, successfully." << endl;
-				}
-
-				if (NOT curve)
-				{
-					FatalErrorIn(FunctionSIG)
-						<< "the curve is empty" << endl
-						<< abort(FatalError);
-				}
-				myCurves.push_back(std::move(curve));
-				++i;
-			}
-			else
-			{
-				break;
-			}
+			FatalErrorIn(FunctionSIG)
+				<< "file was not found" << endl
+				<< abort(FatalError);
 		}
+
+		boost::archive::polymorphic_text_iarchive ia(file);
+
+		ia >> myCurves;
+
 		if (verbose)
 		{
 			Info << myCurves.size() << " curve(s) has(have) been loaded." << endl;
