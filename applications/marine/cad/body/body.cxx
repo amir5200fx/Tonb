@@ -14,6 +14,7 @@
 
 
 #include <vector>
+#include <algorithm>
 
 #include <boost/archive/polymorphic_binary_iarchive.hpp>
 #include <boost/archive/polymorphic_binary_oarchive.hpp>
@@ -23,8 +24,8 @@
 
 namespace tnbLib
 {
-	static std::vector<std::shared_ptr<Marine_CmpSection>> sections;
-	static size_t nbSections = 0;
+	typedef std::shared_ptr<Marine_CmpSection> section_t;
+	static std::vector<section_t> mySections;
 
 	static Marine_SectionType bodyType;
 	static std::shared_ptr<Marine_Body> myBody;
@@ -34,44 +35,38 @@ namespace tnbLib
 
 	void loadSections(const std::string& name)
 	{
-		sections.reserve(nbSections);
-		for (size_t i = 0; i < nbSections; i++)
+		fileName fn(name);
+		std::fstream file;
+		file.open(fn, std::ios::in);
+
+		if (file.fail())
 		{
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
-			std::fstream file;
-			file.open(address, ios::in);
-
-			if (file.fail())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "file was not found" << endl
-					<< abort(FatalError);
-			}
-
-			boost::archive::polymorphic_text_iarchive oa(file);
-
-			std::shared_ptr<Marine_CmpSection> section;
-
-			oa >> section;
-			auto mSection = std::dynamic_pointer_cast<Marine_CmpSection>(section);
-			if (!mSection)
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "the section is not marine type" << endl
-					<< abort(FatalError);
-			}
-
-			sections.push_back(section);
+			FatalErrorIn(FunctionSIG)
+				<< "file was not found" << endl
+				<< abort(FatalError);
 		}
 
-		if (sections.empty())
+		boost::archive::polymorphic_text_iarchive ia(file);
+		ia >> mySections;
+
+		if (mySections.empty())
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no section has been loaded" << endl
 				<< abort(FatalError);
 		}
 
-		const auto section = sections[0];
+		for (const auto& x : mySections)
+		{
+			if (!x)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "null section has been detected!" << endl
+					<< abort(FatalError);
+			}
+		}
+
+		const auto& section = mySections[0];
 
 		switch (section->Type())
 		{
@@ -94,7 +89,7 @@ namespace tnbLib
 			break;
 		}
 
-		for (const auto x : sections)
+		for (const auto& x : mySections)
 		{
 			if (x->Type() NOT_EQUAL bodyType)
 			{
@@ -107,6 +102,16 @@ namespace tnbLib
 		tag = true;
 	}
 
+	void sortSections(std::vector<section_t>& sections)
+	{
+		std::sort
+		(
+			sections.begin(), 
+			sections.end(), 
+			[](const section_t& s0, const section_t& s1)->bool {return s0->X() < s1->X(); }
+		);
+	}
+
 	void makeBody()
 	{
 		if (!tag)
@@ -116,21 +121,30 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		for (size_t i = 1; i < mySections.size() - 1; i++)
+		{
+			if (mySections[i]->X() <= mySections[i - 1]->X())
+			{
+				sortSections(mySections);
+				break;
+			}
+		}
+
 		switch (bodyType)
 		{
 		case tnbLib::Marine_SectionType::displacer:
 		{
-			myBody = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Displacer>>(std::move(sections));
+			myBody = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Displacer>>(std::move(mySections));
 			break;
 		}
 		case tnbLib::Marine_SectionType::sail:
 		{
-			myBody = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Sail>>(std::move(sections));
+			myBody = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Sail>>(std::move(mySections));
 			break;
 		}
 		case tnbLib::Marine_SectionType::tank:
 		{
-			myBody = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Tank>>(std::move(sections));
+			myBody = std::make_shared<marineLib::BodyConstructor_noShape<marineLib::Body_Tank>>(std::move(mySections));
 			break;
 		}
 		default:
@@ -142,6 +156,12 @@ namespace tnbLib
 
 	void saveTo(const std::string& name) 
 	{
+		if (NOT myBody)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no body has been found!" << endl
+				<< abort(FatalError);
+		}
 		fileName fn(name);
 		std::ofstream f(fn);
 
@@ -212,7 +232,7 @@ int main(int argc, char* argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("body");
+			fileName myFileName("TnbBodyMaker");
 
 			try
 			{
