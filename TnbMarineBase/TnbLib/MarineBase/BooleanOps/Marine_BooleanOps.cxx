@@ -128,7 +128,8 @@ std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::Marine_BooleanOps::WettedSection
 (
 	const std::shared_ptr<Pln_Wire>& theSection,
-	const std::shared_ptr<Pln_Wire>& theWater
+	const std::shared_ptr<Pln_Wire>& theWater,
+	const marineLib::curveType targetSection
 )
 {
 	auto section = Cad2d_Plane::MakePlane(theSection, nullptr);
@@ -143,6 +144,8 @@ tnbLib::Marine_BooleanOps::WettedSection
 		return std::vector<std::shared_ptr<Marine_Section>>();
 	}
 
+
+
 	if (planes.size() IS_EQUAL 1)
 	{
 		const auto& intsct = planes[0];
@@ -153,7 +156,7 @@ tnbLib::Marine_BooleanOps::WettedSection
 			Marine_SectTools::Section
 			(
 				intsct->OuterWire(), 
-				marineLib::curveType::displacer, 
+				targetSection,
 				marineLib::curveType::wetted
 			);
 
@@ -181,7 +184,7 @@ tnbLib::Marine_BooleanOps::WettedSection
 			Marine_SectTools::Section
 			(
 				intsct->OuterWire(),
-				marineLib::curveType::displacer,
+				targetSection,
 				marineLib::curveType::wetted
 			);
 
@@ -214,7 +217,7 @@ tnbLib::Marine_BooleanOps::WettedSection
 		Marine_SectTools::Section
 		(
 			x->OuterWire(), 
-			marineLib::curveType::displacer,
+			targetSection,
 			marineLib::curveType::wetted
 		);
 
@@ -240,7 +243,8 @@ std::vector<std::shared_ptr<tnbLib::Marine_Section>>
 tnbLib::Marine_BooleanOps::DrySection
 (
 	const std::shared_ptr<Pln_Wire>& theSection,
-	const std::shared_ptr<Pln_Wire>& theWater
+	const std::shared_ptr<Pln_Wire>& theWater,
+	const marineLib::curveType targetSection
 )
 {
 	auto section = Cad2d_Plane::MakePlane(theSection, nullptr);
@@ -263,7 +267,7 @@ tnbLib::Marine_BooleanOps::DrySection
 		Marine_SectTools::Section
 		(
 			sect->OuterWire(), 
-			marineLib::curveType::displacer, 
+			targetSection,
 			marineLib::curveType::dry
 		);
 
@@ -285,7 +289,7 @@ tnbLib::Marine_BooleanOps::DrySection
 			Marine_SectTools::Section
 			(
 				sect->OuterWire(), 
-				marineLib::curveType::displacer, 
+				targetSection,
 				marineLib::curveType::dry
 			);
 
@@ -324,32 +328,7 @@ tnbLib::Marine_BooleanOps::WettedSection
 			<< abort(FatalError);
 	}
 
-	auto sections = WettedSection(theSection->Wire(), theWater->Wire());
-	return std::move(sections);
-}
-
-std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
-tnbLib::Marine_BooleanOps::DrySection
-(
-	const std::shared_ptr<marineLib::Section_Displacer>& theSection, 
-	const std::shared_ptr<Marine_Section>& theWater
-)
-{
-	if (Marine_SectTools::HasInnerSection(theSection))
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the Section is allow to have no inner section!" << endl
-			<< abort(FatalError);
-	}
-
-	if (Marine_SectTools::HasInnerSection(theWater))
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the water section is allow to have no inner section!" << endl
-			<< abort(FatalError);
-	}
-
-	auto sections = DrySection(theSection->Wire(), theWater->Wire());
+	auto sections = WettedSection(theSection->Wire(), theWater->Wire(), marineLib::curveType::displacer);
 	return std::move(sections);
 }
 
@@ -374,7 +353,32 @@ tnbLib::Marine_BooleanOps::WettedSection
 			<< abort(FatalError);
 	}
 
-	auto sections = WettedSection(theSection->Wire(), theWater->Wire());
+	auto sections = WettedSection(theSection->Wire(), theWater->Wire(), marineLib::curveType::tank);
+	return std::move(sections);
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
+tnbLib::Marine_BooleanOps::DrySection
+(
+	const std::shared_ptr<marineLib::Section_Displacer>& theSection, 
+	const std::shared_ptr<Marine_Section>& theWater
+)
+{
+	if (Marine_SectTools::HasInnerSection(theSection))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the Section is allow to have no inner section!" << endl
+			<< abort(FatalError);
+	}
+
+	if (Marine_SectTools::HasInnerSection(theWater))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the water section is allow to have no inner section!" << endl
+			<< abort(FatalError);
+	}
+
+	auto sections = DrySection(theSection->Wire(), theWater->Wire(), marineLib::curveType::displacer);
 	return std::move(sections);
 }
 
@@ -399,7 +403,7 @@ tnbLib::Marine_BooleanOps::DrySection
 			<< abort(FatalError);
 	}
 
-	auto sections = DrySection(theSection->Wire(), theWater->Wire());
+	auto sections = DrySection(theSection->Wire(), theWater->Wire(), marineLib::curveType::tank);
 	return std::move(sections);
 }
 

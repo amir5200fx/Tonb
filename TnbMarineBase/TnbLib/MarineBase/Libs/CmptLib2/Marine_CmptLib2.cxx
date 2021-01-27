@@ -146,10 +146,10 @@ tnbLib::Marine_CmptLib2::CrossCurve
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 
-			if (verbose > 1)
+			/*if (verbose > 1)
 			{
 				Info << " calculating the wetted sections..." << endl;
-			}
+			}*/
 			auto wetted = Marine_BooleanOps::WettedSections(theSections, x->Water()->Sections());
 
 			if (wetted.size())

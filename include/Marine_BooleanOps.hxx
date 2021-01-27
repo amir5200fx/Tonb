@@ -4,6 +4,7 @@
 
 #include <Marine_CmpSectionType.hxx>
 #include <Marine_SectionsFwd.hxx>
+#include <Marine_PlnCurveType.hxx>
 #include <Marine_Module.hxx>
 
 #include <memory>
@@ -49,7 +50,8 @@ namespace tnbLib
 			WettedSection
 			(
 				const std::shared_ptr<Pln_Wire>& theSection,
-				const std::shared_ptr<Pln_Wire>& theWater
+				const std::shared_ptr<Pln_Wire>& theWater,
+				const marineLib::curveType targetSection
 			);
 
 		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
@@ -77,7 +79,8 @@ namespace tnbLib
 			DrySection
 			(
 				const std::shared_ptr<Pln_Wire>& theSection,
-				const std::shared_ptr<Pln_Wire>& theWater
+				const std::shared_ptr<Pln_Wire>& theWater,
+				const marineLib::curveType targetSection
 			);
 
 		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>

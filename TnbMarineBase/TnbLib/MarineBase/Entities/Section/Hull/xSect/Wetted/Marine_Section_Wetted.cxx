@@ -1,7 +1,7 @@
 #include <Marine_Section_Wetted.hxx>
 
 #include <Pln_Wire.hxx>
-#include <Marine_PlnCurve.hxx>
+#include <Marine_PlnCurves.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -17,7 +17,7 @@ void tnbLib::marineLib::Section_Wetted::CheckCurves() const
 		if (NOT(Marine_SectTools::IsWetted(x) OR Marine_SectTools::IsWater(x)))
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the curve is supposed to be a wetted!" << endl
+				<< " the curve is supposed to be wetted!" << endl
 				<< abort(FatalError);
 		}
 	}
