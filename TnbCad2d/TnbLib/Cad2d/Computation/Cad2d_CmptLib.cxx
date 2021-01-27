@@ -280,7 +280,7 @@ tnbLib::cmptLib::MxIntegrand::Value
 	Entity().D1(x, pt, der);
 
 	const auto y = pt.Y() - Y0();
-	return (y)*pt.Y()*der.X();
+	return 0.5*(y)*pt.Y()*der.X();
 }
 
 Standard_Real 
@@ -309,7 +309,7 @@ tnbLib::cmptLib::IxIntegrand::Value
 	Entity().D1(x, pt, der);
 
 	const auto y = pt.Y() - Yc();
-	return (y*y)*pt.Y()*der.X();
+	return (y*y)*pt.X()*der.Y();
 }
 
 Standard_Real 
@@ -617,7 +617,7 @@ tnbLib::Cad2d_CmptLib::Mx
 
 		sum += (x->Sense() ? -ix : ix);
 	}
-	return sum / 3.0;
+	return sum /*/ 3.0*/;
 }
 
 Standard_Real 
@@ -641,7 +641,7 @@ tnbLib::Cad2d_CmptLib::My
 
 		sum += (x->Sense() ? -ix : ix);
 	}
-	return sum / 3.0;
+	return sum /*/ 3.0*/;
 }
 
 Standard_Real 
@@ -663,9 +663,9 @@ tnbLib::Cad2d_CmptLib::Ix
 		const auto& geom = x->Curve()->Geometry();
 		auto ix = Ix(geom, y0, theInfo);
 
-		sum += (x->Sense() ? -ix : ix);
+		sum += (x->Sense() ? ix : -ix);
 	}
-	return sum / 3.0;
+	return sum /*/ 3.0*/;
 }
 
 Standard_Real
@@ -689,7 +689,7 @@ tnbLib::Cad2d_CmptLib::Iy
 
 		sum += (x->Sense() ? -ix : ix);
 	}
-	return sum / 3.0;
+	return sum /*/ 3.0*/;
 }
 
 Standard_Real 
