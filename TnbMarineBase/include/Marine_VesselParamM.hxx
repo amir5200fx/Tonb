@@ -18,7 +18,8 @@
 			ar & boost::serialization::base_object<Marine_VesselParam>(*this);	\
 		}																		\
 																				\
-		CLASS_NAME() {}															\
+	public:																		\
+		CLASS_NAME() : Marine_VesselParam(PARAM_NAME, PARAM_DIM){}				\
 																				\
 	public:																		\
 		static TnbMarine_EXPORT const CLASS_NAME null;							\

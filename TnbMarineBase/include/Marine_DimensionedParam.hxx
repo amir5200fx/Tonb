@@ -96,6 +96,7 @@ namespace tnbLib
 
 		Marine_DimensionedParam()
 			: theDimension_(0,1,0,0,0)
+			, theValue_(0)
 		{}
 
 
@@ -109,6 +110,7 @@ namespace tnbLib
 			: Global_Named(theName)
 			, Marine_SpecifiedParam(Standard_False)
 			, theDimension_(theDim)
+			, theValue_(0)
 		{}
 
 		Marine_DimensionedParam

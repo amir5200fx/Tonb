@@ -32,7 +32,16 @@ namespace tnbLib
 		{}
 
 
-		//- constructor
+		//- constructors
+
+
+		Marine_VesselParam
+		(
+			const word& theName,
+			const dimensionSet& theDim
+		)
+			: Marine_DimensionedParam<Standard_Real>(theName, theDim)
+		{}
 
 		Marine_VesselParam
 		(

@@ -49,7 +49,7 @@ namespace tnbLib
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
 	: theAx_(null)
 	, theNbWaters_(DEFAULT_NB_WATERS)
-	, theVolCoeff_(0.05)
+	, theVolCoeff_(0.005)
 {
 	// empty body
 }
@@ -67,7 +67,7 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 	, theHeels_(theHeels)
 	, theNbWaters_(theNbWaters)
 	, theAx_(theAx)
-	, theVolCoeff_(0.05)
+	, theVolCoeff_(0.005)
 {
 	// empty body
 }
@@ -320,7 +320,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 
 void tnbLib::HydStatic_CrossCurves::SetVolumeCoeff(const Standard_Real x)
 {
-	theVolCoeff_ = std::min(0.5, std::max(x, 0.01));
+	theVolCoeff_ = std::min(0.5, std::max(x, 0.0001));
 }
 
 std::shared_ptr<tnbLib::Geo_xDistb> 
@@ -341,8 +341,8 @@ tnbLib::HydStatic_CrossCurves::Z
 	auto disZ = std::make_shared<Geo_CosineDistb>(theN);
 	Debug_Null_Pointer(disZ);
 
-	disZ->SetLower(theZ0 + 0.5*dz);
-	disZ->SetUpper(theZ1 + 0.5*dz);
+	disZ->SetLower(theZ0 + 0.005*dz);
+	disZ->SetUpper(theZ1 + 0.005*dz);
 	disZ->Perform();
 
 	return std::move(disZ);
