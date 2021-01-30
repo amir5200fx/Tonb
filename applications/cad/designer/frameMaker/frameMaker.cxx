@@ -454,16 +454,16 @@ tnbLib::appl::createFree(const parMaker_t & m, const word & name, const fieldFun
 }
 
 TypeName_APPL par_t 
-tnbLib::appl::createFixed(const parMaker_t & m, double x)
+tnbLib::appl::createFixed(const parMaker_t & m, double x, double xmin, double xmax)
 {
-	auto t = m->SelectParameter(m->CreateFixed(x));
+	auto t = m->SelectParameter(m->CreateFixed(x, xmin, xmax));
 	return std::move(t);
 }
 
 TypeName_APPL par_t 
-tnbLib::appl::createFixed(const parMaker_t & m, const word & name, double x)
+tnbLib::appl::createFixed(const parMaker_t & m, const word & name, double x, double xmin, double xmax)
 {
-	auto t = m->SelectParameter(m->CreateFixed(name, x));
+	auto t = m->SelectParameter(m->CreateFixed(name, x, xmin, xmax));
 	return std::move(t);
 }
 
@@ -638,8 +638,8 @@ void tnbLib::appl::frameMaker::setParameters(const module_t & mod)
 {
 	mod->add(chaiscript::fun([](const parMaker_t& m, const fieldFun_t& f)-> auto {auto t = createFree(m, f); return std::move(t); }), "createFree");
 	mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, const fieldFun_t& f)-> auto {auto t = createFree(m, name, f); return std::move(t); }), "createFree");
-	mod->add(chaiscript::fun([](const parMaker_t& m, const double x)-> auto {auto t = createFixed(m, x); return std::move(t); }), "createFixed");
-	mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, const double x)-> auto {auto t = createFixed(m, name, x); return std::move(t); }), "createFixed");
+	mod->add(chaiscript::fun([](const parMaker_t& m, double x, double xmin, double xmax)-> auto {auto t = createFixed(m, x, xmin, xmax); return std::move(t); }), "createFixed");
+	mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, double x, double xmin, double xmax)-> auto {auto t = createFixed(m, name, x, xmin, xmax); return std::move(t); }), "createFixed");
 	mod->add(chaiscript::fun([](const parMaker_t& m, const double x)-> auto {auto t = createConstant(m, x); return std::move(t); }), "createConstant");
 	mod->add(chaiscript::fun([](const parMaker_t& m, const std::string& name, const double x)-> auto {auto t = createConstant(m, name, x); return std::move(t); }), "createConstant");
 	mod->add(chaiscript::fun([](const parMaker_t& m, const par_t& p)-> void {removePar(m, p); }), "remove");

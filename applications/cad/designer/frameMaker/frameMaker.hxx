@@ -113,8 +113,8 @@ namespace tnbLib
 		//- parameters: 
 		TnbFrameMaker_EXPORT par_t createFree(const parMaker_t& m, const fieldFun_t& f);
 		TnbFrameMaker_EXPORT par_t createFree(const parMaker_t& m, const word& name, const fieldFun_t& f);
-		TnbFrameMaker_EXPORT par_t createFixed(const parMaker_t& m, double x);
-		TnbFrameMaker_EXPORT par_t createFixed(const parMaker_t& m, const word& name, double x);
+		TnbFrameMaker_EXPORT par_t createFixed(const parMaker_t& m, double x, double xmin, double xmax);
+		TnbFrameMaker_EXPORT par_t createFixed(const parMaker_t& m, const word& name, double x, double xmin, double xmax);
 		TnbFrameMaker_EXPORT par_t createConstant(const parMaker_t& m, double x);
 		TnbFrameMaker_EXPORT par_t createConstant(const parMaker_t& m, const word& name, double x);
 

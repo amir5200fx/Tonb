@@ -278,15 +278,15 @@ namespace tnbLib
 		return appl::getParameterMaker(myFrame);
 	}
 
-	auto createFixed(double x)
+	auto createFixed(double x, double xmin, double xmax)
 	{
-		auto par = appl::createFixed(getParameterMaker(), x);
+		auto par = appl::createFixed(getParameterMaker(), x, xmin, xmax);
 		return std::move(par);
 	}
 
-	auto createFixed(const std::string& name, double x)
+	auto createFixed(const std::string& name, double x, double xmin, double xmax)
 	{
-		auto par = appl::createFixed(getParameterMaker(), name, x);
+		auto par = appl::createFixed(getParameterMaker(), name, x, xmin, xmax);
 		return std::move(par);
 	}
 
@@ -460,8 +460,8 @@ namespace tnbLib
 
 	void setParMakers(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](double x)->auto {auto t = createFixed(x); return std::move(t); }), "createFixed");
-		mod->add(chaiscript::fun([](const std::string& name, double x)->auto {auto t = createFixed(name, x); return std::move(t); }), "createFixed");
+		mod->add(chaiscript::fun([](double x, double xmin, double xmax)->auto {auto t = createFixed(x, xmin, xmax); return std::move(t); }), "createFixed");
+		mod->add(chaiscript::fun([](const std::string& name, double x, double xmin, double xmax)->auto {auto t = createFixed(name, x, xmin, xmax); return std::move(t); }), "createFixed");
 		mod->add(chaiscript::fun([](double x)->auto {auto t = createConstant(x); return std::move(t); }), "createConstant");
 		mod->add(chaiscript::fun([](const std::string& name, double x)->auto {auto t = createConstant(name, x); return std::move(t); }), "createConstant");
 		mod->add(chaiscript::fun([](const appl::fieldFun_t& f)->auto {auto t = createFree(f); return std::move(t); }), "createFree");
