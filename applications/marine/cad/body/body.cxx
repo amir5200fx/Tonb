@@ -31,6 +31,7 @@ namespace tnbLib
 	static std::shared_ptr<Marine_Body> myBody;
 
 	static bool tag = false;
+	static size_t verbose = 0;
 
 
 	void loadSections(const std::string& name)
@@ -100,6 +101,11 @@ namespace tnbLib
 		}
 
 		tag = true;
+
+		if (verbose)
+		{
+			Info << " the section list is loaded, successfully!" << endl;
+		}
 	}
 
 	void sortSections(std::vector<section_t>& sections)
@@ -152,6 +158,28 @@ namespace tnbLib
 				<< "This body type is not allowed." << endl
 				<< abort(FatalError);
 		}
+		if (verbose)
+		{
+			Info << " the body is created, successfully!" << endl;
+			Info << " - body type: ";
+			switch (bodyType)
+			{
+			case tnbLib::Marine_SectionType::displacer:
+				Info << "displacer" << endl;
+				break;
+			case tnbLib::Marine_SectionType::sail:
+				Info << "sail" << endl;
+				break;
+			case tnbLib::Marine_SectionType::tank:
+				Info << "tank" << endl;
+				break;
+			default:
+				FatalErrorIn(FunctionSIG)
+					<< "unspecified type of body has been detected!" << endl
+					<< abort(FatalError);
+				break;
+			}
+		}
 	}
 
 	void saveTo(const std::string& name) 
@@ -168,6 +196,11 @@ namespace tnbLib
 		boost::archive::polymorphic_text_oarchive oa(f);
 
 		oa << myBody;
+
+		if (verbose)
+		{
+			Info << " the body is saved in: " << fn << ", successfully!" << endl;
+		}
 	}
 }
 
@@ -187,6 +220,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void { loadSections(name); }), "loadSections");
 		mod->add(chaiscript::fun([]()-> void {makeBody(); }), "execute");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](int i)-> void {verbose = i; }), "setVerbose");
 
 	}
 
