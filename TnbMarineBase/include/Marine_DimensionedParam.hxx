@@ -92,7 +92,7 @@ namespace tnbLib
 
 	protected:
 
-		//- defualt constructor
+		//- default constructor
 
 		Marine_DimensionedParam()
 			: theDimension_(0,1,0,0,0)

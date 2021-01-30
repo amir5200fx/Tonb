@@ -571,6 +571,15 @@
     <Filter Include="TnbLib\MarineBase\MidSection">
       <UniqueIdentifier>{e349bd2f-2ca1-47fa-8ae3-552ea268e6bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\FRCE">
+      <UniqueIdentifier>{37ed3f03-b327-4599-bb9c-9f93ed30d612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Load">
+      <UniqueIdentifier>{b4e160e5-de9c-4339-9eb4-4d5c9ec28f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Load\LightWeight">
+      <UniqueIdentifier>{0c596fbb-294b-4604-993f-0dfa7fcf8ab0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1170,6 +1179,18 @@
     <ClInclude Include="TnbLib\MarineBase\MidSection\Marine_MidSection.hxx">
       <Filter>TnbLib\MarineBase\MidSection</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\FRCE\Marine_VesselParam_FRCE.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\FRCE</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Load\Marine_Load.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Load\LightWeight\Marine_LightWeight.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Load\LightWeight</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Load\Marine_LoadType.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Load</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1597,6 +1618,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Section\Tank\Marine_Section_Tank.cxx">
       <Filter>TnbLib\MarineBase\Entities\Section\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Load\LightWeight\Marine_LightWeightIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Load\LightWeight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
