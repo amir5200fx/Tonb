@@ -289,6 +289,24 @@ namespace tnbLib
 		if (verbose)
 		{
 			Info << " nb. of curves going to be saved: " << myCurves.size() << endl;
+			Info << " - curve type: ";
+			switch (curveType)
+			{
+			case tnbLib::myType::tank:
+				Info << "tank" << endl;
+				break;
+			case tnbLib::myType::sail:
+				Info << "sail" << endl;
+				break;
+			case tnbLib::myType::displacer:
+				Info << "displacer" << endl;
+				break;
+			default:
+				FatalErrorIn(FunctionSIG)
+					<< "unspecified curve type" << endl
+					<< abort(FatalError);
+				break;
+			}
 		}
 		size_t i = 0;
 		for (const auto& c : myCurves)
@@ -308,6 +326,28 @@ namespace tnbLib
 				Info << " curve, " << i << " saved in: " << address << ", successfully!" << endl;
 			}
 			i++;
+		}
+	}
+
+	void setType(const std::string& t)
+	{
+		if (t IS_EQUAL "displacer")
+		{
+			curveType = myType::displacer;
+		}
+		else if (t IS_EQUAL "tank")
+		{
+			curveType = myType::tank;
+		}
+		else if (t IS_EQUAL "sail")
+		{
+			curveType = myType::sail;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "unspecified curve type has been detected!" << endl
+				<< abort(FatalError);
 		}
 	}
 
@@ -403,7 +443,7 @@ namespace tnbLib
 		//mod->add(chaiscript::fun([](const std::string& name)-> void {loadCurve(name); }), "loadCurve");
 		//mod->add(chaiscript::fun([](const std::string& name, int n)-> void {exportToPlt(name, n); }), "exportToPlt");
 
-		mod->add(chaiscript::fun([](const myType t)-> void {curveType = t; }), "setType");
+		mod->add(chaiscript::fun([](const std::string& t)-> void {setType(t); }), "setType");
 	}
 
 	std::string getString(char* argv)
