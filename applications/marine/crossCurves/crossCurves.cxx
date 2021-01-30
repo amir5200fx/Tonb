@@ -3,6 +3,7 @@
 #include <Marine_Bodies.hxx>
 #include <Marine_WaterLib.hxx>
 #include <Marine_CmptLib2.hxx>
+#include <Marine_Models.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_CrsCurvesGraph.hxx>
 #include <HydStatic_Spacing.hxx>
@@ -11,6 +12,7 @@
 #include <HydStatic_HeelSpacing_Arbt.hxx>
 #include <HydStatic_HeelSpacing_Asym.hxx>
 #include <HydStatic_HeelSpacing_Stb.hxx>
+#include <StbGMaker_Model.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -33,12 +35,14 @@ namespace tnbLib
 	static bool bodyLoad_flag = false;
 	static bool execute_flag = false;
 
+	typedef std::shared_ptr<StbGMaker_Model> model_t;
 	typedef std::shared_ptr<Marine_Body> body_t;
 	typedef std::shared_ptr<marineLib::Body_Tank> tank_t;
 	typedef std::shared_ptr<marineLib::Body_Displacer> displacer_t;
 	typedef std::shared_ptr<HydStatic_HeelSpacing> spacing_t;
 
-	spacing_t myHeels;
+	static spacing_t myHeels;
+	static model_t myModel;
 
 	//- global functions
 
@@ -290,18 +294,44 @@ namespace tnbLib
 		boost::archive::polymorphic_text_oarchive oa(f);
 
 		oa << getCrossCurves();
+		oa << myModel;
 	}
 
-	void loadBody(const std::string& name)
+	void loadModel(const std::string& name)
 	{
 		fileName fn(name);
 		std::ifstream myFile(fn);
 
 		boost::archive::polymorphic_text_iarchive ar(myFile);
 
-		body_t body;
+		//body_t body;
 		//ar >> body;
-		Marine_Body::Load(ar, body);
+		//Marine_Body::Load(ar, body);
+
+		ar >> myModel;
+
+		if (NOT myModel)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " model is null" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& bodyModel = myModel->Hull();
+		if (NOT bodyModel)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " no model of displacer is found!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& body = bodyModel->Body();
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the displacer model has no body!" << endl
+				<< abort(FatalError);
+		}
 
 		if (body->IsHull())
 		{
@@ -367,7 +397,7 @@ namespace tnbLib
 
 		//- io functions
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadBody(name); }), "loadBody");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveGraphTo(name); }), "saveGraphTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 	}
