@@ -4,6 +4,7 @@
 
 #include <StbGMaker_Entity.hxx>
 #include <Marine_ModelsFwd.hxx>
+#include <Marine_LightWeight.hxx>
 
 #include <vector>
 
@@ -24,6 +25,8 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<marineLib::Model_Tank>> theTanks_;
 		std::vector<std::shared_ptr<marineLib::Model_Sail>> theSails_;
+
+		Marine_LightWeight theWeight_;
 
 
 		//- private functions and operators
@@ -65,6 +68,16 @@ namespace tnbLib
 
 
 		//- public functions and operators
+
+		const auto& LightWeight() const
+		{
+			return theWeight_;
+		}
+
+		auto& LightWeight() 
+		{
+			return theWeight_;
+		}
 
 		auto NbTanks() const
 		{
