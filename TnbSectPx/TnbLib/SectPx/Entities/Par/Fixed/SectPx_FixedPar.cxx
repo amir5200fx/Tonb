@@ -4,19 +4,24 @@ const char* tnbLib::SectPx_FixedPar::typeName_ = "fixed_parameter";
 
 tnbLib::SectPx_FixedPar::SectPx_FixedPar
 (
-	const Standard_Real theValue
+	const Standard_Real theValue,
+	const Standard_Real theMin,
+	const Standard_Real theMax
 )
-	: theValue_(theValue)
+	: theValue_(theValue, theMin, theMax)
 {
+	// empty body
 }
 
 tnbLib::SectPx_FixedPar::SectPx_FixedPar
 (
 	const Standard_Integer theIndex,
-	const Standard_Real theValue
+	const Standard_Real theValue,
+	const Standard_Real theMin,
+	const Standard_Real theMax
 )
 	: SectPx_Par(theIndex)
-	, theValue_(theValue)
+	, theValue_(theValue, theMin, theMax)
 {
 }
 
@@ -24,10 +29,12 @@ tnbLib::SectPx_FixedPar::SectPx_FixedPar
 (
 	const Standard_Integer theIndex, 
 	const word & theName,
-	const Standard_Real theValue
+	const Standard_Real theValue,
+	const Standard_Real theMin,
+	const Standard_Real theMax
 )
 	: SectPx_Par(theIndex, theName)
-	, theValue_(theValue)
+	, theValue_(theValue, theMin, theMax)
 {
 }
 

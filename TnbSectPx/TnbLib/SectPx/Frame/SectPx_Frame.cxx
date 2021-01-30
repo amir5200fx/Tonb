@@ -10,6 +10,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <math.h>
+
 tnbLib::SectPx_Frame::EntityMaker::EntityMaker
 (
 	const std::shared_ptr<SectPx_ParRegistry>& theParReg, 
@@ -154,8 +156,8 @@ tnbLib::SectPx_Frame::MakeLineSegment
 	const auto x0_id = ParameterMaker()->CreateConstant(theP0.X());
 	const auto y0_id = ParameterMaker()->CreateConstant(theP0.Y());
 
-	const auto x1_id = ParameterMaker()->CreateFixed(theP1.X());
-	const auto y1_id = ParameterMaker()->CreateFixed(theP1.Y());
+	const auto x1_id = ParameterMaker()->CreateFixed(theP1.X(), -100.0, 100.0);
+	const auto y1_id = ParameterMaker()->CreateFixed(theP1.Y(), -100.0, 100.0);
 
 	const auto p0_id =
 		PointMaker()->CreateOuterComponent
@@ -206,11 +208,11 @@ void tnbLib::SectPx_Frame::MakeCorner
 	const auto x0_id = ParameterMaker()->CreateConstant(theP0.X());
 	const auto y0_id = ParameterMaker()->CreateConstant(theP0.Y());
 
-	const auto x1_id = ParameterMaker()->CreateFixed(theP1.X());
-	const auto y1_id = ParameterMaker()->CreateFixed(theP1.Y());
+	const auto x1_id = ParameterMaker()->CreateFixed(theP1.X(), -100.0, 100.0);
+	const auto y1_id = ParameterMaker()->CreateFixed(theP1.Y(), -100.0, 100.0);
 
-	const auto angl0_id = ParameterMaker()->CreateFixed(theAngl0);
-	const auto angl1_id = ParameterMaker()->CreateFixed(theAngl1);
+	const auto angl0_id = ParameterMaker()->CreateFixed(theAngl0, -PI_2, PI_2);
+	const auto angl1_id = ParameterMaker()->CreateFixed(theAngl1, -PI_2, PI_2);
 
 	const auto p0_id =
 		PointMaker()->CreateOuterComponent
@@ -282,10 +284,10 @@ void tnbLib::SectPx_Frame::MakeUShape
 	const auto x0_id = ParameterMaker()->CreateConstant("x0", theP0.X());
 	const auto y0_id = ParameterMaker()->CreateConstant("y0", theP0.Y());
 
-	const auto x1_id = ParameterMaker()->CreateFixed("length", theP1.X());
+	const auto x1_id = ParameterMaker()->CreateFixed("length", theP1.X(), -100.0, 100.0);
 	const auto y1_id = ParameterMaker()->CreateConstant("y1", theP1.Y());
 
-	const auto w_id = ParameterMaker()->CreateFixed("width", w);
+	const auto w_id = ParameterMaker()->CreateFixed("width", w, -100.0, 100.0);
 
 	const auto p0_id =
 		PointMaker()->CreateOuterComponent
@@ -310,9 +312,9 @@ void tnbLib::SectPx_Frame::MakeUShape
 	const auto profMaker = CmptProfileMaker()->SelectProfile(profMaker_id);
 	const auto edge_id = ParRegistry()->Scatter()->LastId(SectPx_RegObjType::edge);
 
-	const auto t2_id = ParameterMaker()->CreateFixed("mid", 0.5);
-	const auto t3_id = ParameterMaker()->CreateFixed("left corner", 0);
-	const auto t4_id = ParameterMaker()->CreateFixed("right corner", 1);
+	const auto t2_id = ParameterMaker()->CreateFixed("mid", 0.5, 0, 1);
+	const auto t3_id = ParameterMaker()->CreateFixed("left corner", 0, 0, 1);
+	const auto t4_id = ParameterMaker()->CreateFixed("right corner", 1, 0, 1);
 
 
 

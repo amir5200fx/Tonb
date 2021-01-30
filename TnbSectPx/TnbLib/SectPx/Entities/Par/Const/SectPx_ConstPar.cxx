@@ -61,10 +61,10 @@ tnbLib::SectPx_ConstPar::InCycle() const
 Standard_Real 
 tnbLib::SectPx_ConstPar::Value() const
 {
-	return theValue_();
+	return theValue_;
 }
 
 void tnbLib::SectPx_ConstPar::SetValue(const Standard_Real x)
 {
-	theValue_.SetValue(x);
+	theValue_ = x;
 }

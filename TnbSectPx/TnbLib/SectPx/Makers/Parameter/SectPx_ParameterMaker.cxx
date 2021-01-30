@@ -59,10 +59,12 @@ tnbLib::maker::Parameter::CreateFree
 Standard_Integer 
 tnbLib::maker::Parameter::CreateFixed
 (
-	const Standard_Real x
+	const Standard_Real x,
+	const Standard_Real theMin,
+	const Standard_Real theMax
 ) const
 {
-	auto fixedParam = std::make_shared<SectPx_FixedPar>(x);
+	auto fixedParam = std::make_shared<SectPx_FixedPar>(x, theMin, theMax);
 	Debug_Null_Pointer(fixedParam);
 
 	Debug_Null_Pointer(Registry());
@@ -73,10 +75,12 @@ Standard_Integer
 tnbLib::maker::Parameter::CreateFixed
 (
 	const word & theName,
-	const Standard_Real x
+	const Standard_Real x,
+	const Standard_Real theMin,
+	const Standard_Real theMax
 ) const
 {
-	auto fixedParam = std::make_shared<SectPx_FixedPar>(x);
+	auto fixedParam = std::make_shared<SectPx_FixedPar>(x, theMin, theMax);
 	Debug_Null_Pointer(fixedParam);
 
 	Debug_Null_Pointer(Registry());

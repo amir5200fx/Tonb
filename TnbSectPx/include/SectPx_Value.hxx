@@ -15,6 +15,9 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		T theMin_;
+		T theMax_;
+
 		T theValue_;
 
 		mutable Standard_Boolean IsChanged_;
@@ -27,6 +30,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version)
 		{
+			ar & theMin_;
+			ar & theMax_;
 			ar & theValue_;
 			ar & IsChanged_;
 		}
@@ -34,12 +39,16 @@ namespace tnbLib
 	public:
 
 		SectPx_Value()
-			: theValue_(0)
+			: theMin_(0)
+			, theMax_(0)
+			, theValue_(0)
 			, IsChanged_(Standard_False)
 		{}
 
-		SectPx_Value(const T theValue)
-			: theValue_(theValue)
+		SectPx_Value(const T theValue, const T theMin, const T theMax)
+			: theMin_(theMin)
+			, theMax_(theMax)
+			, theValue_(theValue)
 			, IsChanged_(Standard_False)
 		{}
 
@@ -48,31 +57,32 @@ namespace tnbLib
 			return IsChanged_;
 		}
 
-		const T& Value() const
+		T Value() const
 		{
 			IsChanged_ = Standard_False;
 			return theValue_;
 		}
 
-		T& ChangeValue()
+		T MinValue() const
 		{
-			IsChanged_ = Standard_True;
-			return theValue_;
+			return theMin_;
 		}
 
-		const auto& operator()() const
+		T MaxValue() const
+		{
+			return theMax_;
+		}
+
+		auto operator()() const
 		{
 			return Value();
 		}
 
-		auto& operator()()
-		{
-			return ChangeValue();
-		}
-
-		void SetValue(const Standard_Real x)
+		void SetValue(Standard_Real x)
 		{
 			IsChanged_ = Standard_True;
+			if (x < MinValue())  x = MinValue();
+			if (x > MaxValue()) x = MaxValue();
 			theValue_ = x;
 		}
 	};
