@@ -35,6 +35,8 @@ namespace tnbLib
 	typedef std::shared_ptr<Marine_Wave> wave_t;
 	typedef std::shared_ptr<Marine_Domain> domain_t;
 
+	static size_t verbose = 0;
+
 	const auto& getHydrModel()
 	{
 		return hydrModel;
@@ -154,6 +156,18 @@ namespace tnbLib
 		wave->SetPointOnWater(d->Dim()->CalcCentre());
 		wave->SetVerticalDirection(Dir3d(0, 0, 1));
 
+		if (verbose)
+		{
+			Info << endl;
+			Info << " Wave properties:" << endl;
+			Info << " - type: flat" << endl;
+			Info << " - current: " << wave->Current() << endl;
+			Info << " - wind: " << wave->Wind() << endl;
+			Info << " - point on water: " << wave->PointOnWater() << endl;
+			Info << " - vertical direction: " << wave->VerticalDirection() << endl;
+			Info << endl;
+		}
+
 		return wave;
 	}
 
@@ -219,6 +233,14 @@ namespace tnbLib
 		auto d = createDomain();
 
 		loadDomain(d);
+
+		if (verbose)
+		{
+			Info << " the stability model is loaded, successfully!" << endl;
+
+			const auto& b = *d->Dim();
+			Info << " - domain's dimension: " << b << endl;
+		}
 	}
 
 	void exportToPlt(const wave_t& w, const std::string& name)
@@ -382,6 +404,11 @@ namespace tnbLib
 			perform();
 		}
 		ar << getHydrModel();
+
+		if (verbose)
+		{
+			Info << " the hydrostatic model is saved in: " << myFileName << ", successfully!" << endl;
+		}
 	}
 }
 
@@ -407,7 +434,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)->void {exportToPlt(getHydrModel()->Wave(), name); }), "exportWaveToPlt");
 		mod->add(chaiscript::fun([](const std::string& name)->void {exportDomain(name); }), "exportDomainToPlt");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {exportFloatBodyToPlt(name); }), "exportFloatBodyToPlt");
-		mod->add(chaiscript::fun([](const std::string& name)->void {saveModelTo(name); }), "saveModelTo");
+		mod->add(chaiscript::fun([](const std::string& name)->void {saveModelTo(name); }), "saveTo");
 
 		mod->add(chaiscript::fun([](unsigned short i)-> void {HydStatic_Model::verbose = i; }), "setVerbose");
 	}
