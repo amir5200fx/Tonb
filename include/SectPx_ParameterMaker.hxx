@@ -67,14 +67,18 @@ namespace tnbLib
 			TnbSectPx_EXPORT Standard_Integer
 				CreateFixed
 				(
-					const Standard_Real x
+					const Standard_Real x,
+					const Standard_Real theMin,
+					const Standard_Real theMax
 				) const;
 
 			TnbSectPx_EXPORT Standard_Integer
 				CreateFixed
 				(
 					const word& theName,
-					const Standard_Real x
+					const Standard_Real x,
+					const Standard_Real theMin,
+					const Standard_Real theMax
 				) const;
 
 			TnbSectPx_EXPORT Standard_Integer

@@ -44,28 +44,29 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT explicit SectPx_FixedPar
 		(
-			const Standard_Real theValue
+			const Standard_Real theValue,
+			const Standard_Real theMin,
+			const Standard_Real theMax
 		);
 
 		TnbSectPx_EXPORT SectPx_FixedPar
 		(
 			const Standard_Integer theIndex,
-			const Standard_Real theValue
+			const Standard_Real theValue,
+			const Standard_Real theMin,
+			const Standard_Real theMax
 		);
 
 		TnbSectPx_EXPORT SectPx_FixedPar
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Standard_Real theValue
+			const Standard_Real theValue,
+			const Standard_Real theMin,
+			const Standard_Real theMax
 		);
 
 		auto X() const
-		{
-			return theValue_();
-		}
-
-		auto& X()
 		{
 			return theValue_();
 		}

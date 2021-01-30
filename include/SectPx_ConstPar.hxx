@@ -14,7 +14,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		sectPxLib::real theValue_;
+		Standard_Real theValue_;
 
 
 		/*private functions and operators*/
@@ -56,9 +56,9 @@ namespace tnbLib
 			const Standard_Real theValue
 		);
 
-		const auto& X() const
+		auto X() const
 		{
-			return theValue_();
+			return theValue_;
 		}
 
 		TnbSectPx_EXPORT word RegObjTypeName() const override;
