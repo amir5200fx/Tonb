@@ -19,10 +19,6 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			LCG theLcg_;
-			VCG theVcg_;
-			TCG theTcg_;
-			
 
 			/*private functions and operators*/
 
@@ -32,9 +28,6 @@ namespace tnbLib
 			void serialize(Archive &ar, const unsigned int file_version)
 			{
 				ar & boost::serialization::base_object<Marine_HullBody>(*this);
-				ar & theLcg_;
-				ar & theVcg_;
-				ar & theTcg_;
 			}
 
 		protected:
@@ -46,36 +39,6 @@ namespace tnbLib
 
 		public:
 
-
-			const auto& Lcg() const
-			{
-				return theLcg_;
-			}
-
-			auto& LcgRef()
-			{
-				return theLcg_;
-			}
-
-			const auto& Vcg() const
-			{
-				return theVcg_;
-			}
-
-			auto& VcgRef()
-			{
-				return theVcg_;
-			}
-
-			const auto& Tcg() const
-			{
-				return theTcg_;
-			}
-
-			auto& TcgRef()
-			{
-				return theTcg_;
-			}
 
 			Standard_Boolean IsDisplacer() const override
 			{
