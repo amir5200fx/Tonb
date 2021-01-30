@@ -1,4 +1,7 @@
 #include <Pnt2d.hxx>
+#include <Marine_Models.hxx>
+#include <Marine_Bodies.hxx>
+#include <StbGMaker_Model.hxx>
 #include <HydStatic_GZ.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_rArmCurve.hxx>
@@ -25,6 +28,9 @@ namespace tnbLib
 	static const auto myGz = std::make_shared<HydStatic_GZ>();
 	static bool verbose = false;
 	static auto nPnts = DEFAULT_NB_DIVISIONS_LOW;
+
+	typedef std::shared_ptr<StbGMaker_Model> model_t;
+	static model_t myModel;
 
 	void setTessellation(const word& t)
 	{
@@ -57,7 +63,21 @@ namespace tnbLib
 
 		std::shared_ptr<HydStatic_CrossCurves> curves;
 		ar >> curves;
+		if (NOT curves)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "cross-curves graph is null" << endl
+				<< abort(FatalError);
+		}
 		myGz->LoadCrossCurves(curves);
+
+		ar >> myModel;
+		if (NOT myModel)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "stability model is null" << endl
+				<< abort(FatalError);
+		}
 
 		if (verbose)
 		{
@@ -73,10 +93,34 @@ namespace tnbLib
 		verbose = v;
 	}
 
-	void setKG(double x)
+	/*void setKG(double x)
 	{
 		marineLib::KG kg(x);
 		myGz->SetKG(std::move(kg));
+	}*/
+
+	void checkModel()
+	{
+		if (NOT myModel)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no model has been loaded!" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void setVcg(double x)
+	{
+		checkModel();
+		const auto& body = myModel->Hull()->Body();
+		myModel->LightWeight().Vcg().Value() = body->BaseLine().BaseLine().Location().Z() + x;
+	}
+
+	void setTcg(double x)
+	{
+		checkModel();
+		const auto& body = myModel->Hull()->Body();
+		myModel->LightWeight().Tcg().Value() = body->BaseLine().BaseLine().Location().Y() + x;
 	}
 
 	void setDispv(double x)
@@ -87,6 +131,22 @@ namespace tnbLib
 
 	void execute()
 	{
+		if (NOT myModel->LightWeight().Vcg().IsSpecified())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no 'VCG' is specified for the model" << endl
+				<< abort(FatalError);
+		}
+
+		if (verbose)
+		{
+			Info << " - VCG: " << myModel->LightWeight().Vcg()() << endl;
+			if (myModel->LightWeight().Tcg().IsSpecified()) Info << " - TCG: " << myModel->LightWeight().Tcg()() << endl;
+		}
+		const auto& body = myModel->Hull()->Body();
+		const auto kg = myModel->LightWeight().Vcg()() - body->BaseLine().BaseLine().Location().Z();
+		myGz->SetKG(marineLib::KG(kg));
+
 		myGz->Perform();
 	}
 
@@ -137,8 +197,10 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](bool v)->void {setVerbose(v); }), "setVerbose");
-		mod->add(chaiscript::fun([](double x)->void {setKG(x); }), "setKG");
+		//mod->add(chaiscript::fun([](double x)->void {setKG(x); }), "setKG");
 		mod->add(chaiscript::fun([](double x)->void {setDispv(x); }), "setDispv");
+		mod->add(chaiscript::fun([](double x)->void {setVcg(x); }), "setVcg");
+		mod->add(chaiscript::fun([](double x)->void {setTcg(x); }), "setTcg");
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 
 		mod->add(chaiscript::fun([](const std::string& t)-> void {setTessellation(t); }), "setTessellation");

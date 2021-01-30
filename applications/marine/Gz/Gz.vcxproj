@@ -150,6 +150,12 @@
     <ProjectReference Include="..\..\..\TnbHydrostatic\TnbHydrostatic.vcxproj">
       <Project>{33976535-7c9d-4d56-ad80-699694bf4492}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\TnbMarineBase\TnbMarineBase.vcxproj">
+      <Project>{e15d4b29-deef-4205-8790-f4ca3d77f53a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TnbStbGMaker\TnbStbGMaker.vcxproj">
+      <Project>{ceb10e49-a65f-43a7-bfb4-cb99c6d2f3f8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
