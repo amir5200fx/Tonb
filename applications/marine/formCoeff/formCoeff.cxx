@@ -25,6 +25,8 @@ namespace tnbLib
 	static std::shared_ptr<formDim::Displacer> formDisplacer;
 	static std::shared_ptr<formDim::Wetted> formWetted;
 
+	static size_t verbose = 0;
+
 	void loadModel(const std::string& name)
 	{
 		fileName fn(name);
@@ -34,6 +36,13 @@ namespace tnbLib
 
 		ar >> formDisplacer;
 		ar >> formWetted;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the model is loaded, successfully!" << endl;
+			Info << endl;
+		}
 	}
 
 	void calcFormCoeff()
@@ -56,6 +65,13 @@ namespace tnbLib
 		boost::archive::polymorphic_text_oarchive ar(myFile);
 
 		ar << formCoeffCalculator;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the form coefficient is saved in: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
 	}
 }
 
@@ -75,7 +91,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
 		mod->add(chaiscript::fun([]()->void {calcFormCoeff(); }), "execute");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([](unsigned short i)-> void {formCoeff::Wetted::verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {formCoeff::Wetted::verbose = i; verbose = i; }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
