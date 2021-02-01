@@ -78,6 +78,16 @@ namespace tnbLib
 			return Value();
 		}
 
+		void SetMinValue(const Standard_Real x)
+		{
+			theMin_ = x;
+		}
+
+		void SetMaxValue(const Standard_Real x)
+		{
+			theMax_ = x;
+		}
+
 		void SetValue(Standard_Real x)
 		{
 			IsChanged_ = Standard_True;

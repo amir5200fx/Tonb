@@ -28,11 +28,6 @@ namespace tnbLib
 			ar & theValue_;
 		}
 
-		auto& ChangeValue()
-		{
-			return theValue_;
-		}
-
 	protected:
 
 		SectPx_FixedPar()
@@ -69,6 +64,16 @@ namespace tnbLib
 		auto X() const
 		{
 			return theValue_();
+		}
+
+		const auto& Value()
+		{
+			return theValue_;
+		}
+
+		auto& ValueRef()
+		{
+			return theValue_;
 		}
 
 		TnbSectPx_EXPORT word RegObjTypeName() const override;
