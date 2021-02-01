@@ -580,6 +580,12 @@
     <Filter Include="TnbLib\MarineBase\Entities\Load\LightWeight">
       <UniqueIdentifier>{0c596fbb-294b-4604-993f-0dfa7fcf8ab0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\MidSectionApprox">
+      <UniqueIdentifier>{45fc9be5-340f-4ca6-ab24-bbaac739480a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\MidSectionApprox\Near">
+      <UniqueIdentifier>{f16283f2-e0fc-4489-8c14-ff53cf6f2887}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1191,6 +1197,12 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Load\Marine_LoadType.hxx">
       <Filter>TnbLib\MarineBase\Entities\Load</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\MidSectionApprox\Marine_MidSectionApprox.hxx">
+      <Filter>TnbLib\MarineBase\MidSectionApprox</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\MidSectionApprox\Near\Marine_MidSectionApprox_Near.hxx">
+      <Filter>TnbLib\MarineBase\MidSectionApprox\Near</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1621,6 +1633,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Load\LightWeight\Marine_LightWeightIO.cxx">
       <Filter>TnbLib\MarineBase\Entities\Load\LightWeight</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\MidSectionApprox\Marine_MidSectionApprox.cxx">
+      <Filter>TnbLib\MarineBase\MidSectionApprox</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\MidSectionApprox\Near\Marine_MidSectionApprox_Near.cxx">
+      <Filter>TnbLib\MarineBase\MidSectionApprox\Near</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

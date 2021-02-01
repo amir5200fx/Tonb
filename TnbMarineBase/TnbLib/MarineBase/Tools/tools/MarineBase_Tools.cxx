@@ -742,7 +742,7 @@ tnbLib::MarineBase_Tools::CalcWaterCurveLength
 
 		auto mCurve = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
 		Debug_Null_Pointer(mCurve);
-		Info << "is on water? " << mCurve->IsOnWater() << endl;
+
 		if (mCurve->IsOnWater())
 		{
 			Debug_Null_Pointer(curve->Geometry());
@@ -762,7 +762,7 @@ tnbLib::MarineBase_Tools::CalcWaterCurveLength
 #ifdef _DEBUG
 	Marine_SectTools::CheckTypeConsistency(theSection);
 #endif // _DEBUG
-	Info << "is wetted? " << Marine_SectTools::IsWetted(theSection) << endl;
+
 	if (NOT Marine_SectTools::IsWetted(theSection))
 	{
 		return (Standard_Real)0.;
@@ -776,7 +776,7 @@ tnbLib::MarineBase_Tools::CalcWaterCurveLength
 
 			auto wetted = Marine_SectTools::WettedSection(x);
 			Debug_Null_Pointer(wetted);
-			Info << "Is deep ? " << wetted->DeepCondition() << endl;
+
 			if (NOT wetted->DeepCondition())
 			{
 				len += CalcWaterCurveLength(*wetted, theInfo);
@@ -894,7 +894,7 @@ tnbLib::MarineBase_Tools::CalcWaterPlaneArea
 		marineLib::xSectionParam p;
 		p.x = sect->X();
 		p.value = CalcWaterCurveLength(*sect, theInfo);
-		Info << "value = " << p.value << endl;
+
 		values.push_back(std::move(p));
 	}
 	return std::move(values);
