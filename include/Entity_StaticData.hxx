@@ -59,6 +59,15 @@ namespace tnbLib
 			, theConnectivity_(theConnectivity)
 		{}
 
+		Entity_StaticData
+		(
+			pointList&& thePoints,
+			connectList&& theConnectivity
+		)
+			: thePoints_(std::move(thePoints))
+			, theConnectivity_(std::move(theConnectivity))
+		{}
+
 		const pointList& Points() const
 		{
 			return thePoints_;
@@ -166,6 +175,16 @@ namespace tnbLib
 		)
 			: Entity_StaticData<Point, ConnectType, false>(thePoints, theConnectivity)
 			, theNeighbors_(theNeighbors)
+		{}
+
+		Entity_StaticData
+		(
+			pointList&& thePoints,
+			connectList&& theConnectivity,
+			connectList&& theNeighbors
+		)
+			: Entity_StaticData<Point, ConnectType, false>(std::move(thePoints), std::move(theConnectivity))
+			, theNeighbors_(std::move(theNeighbors))
 		{}
 
 		const connectList& Neighbors() const
