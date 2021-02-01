@@ -227,13 +227,27 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 			<< abort(FatalError);
 	}
 
-	disJoinSegment(theSegment);
-
 	const auto& p0 = theSegment->Pole0();
 	Debug_Null_Pointer(p0);
 
+	if (NOT std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(p0))
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " the two end points of the segment have to be corner" << endl
+			<< abort(FatalError);
+	}
+
 	const auto& p1 = theSegment->Pole1();
 	Debug_Null_Pointer(p1);
+
+	if (NOT std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(p1))
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " the two end points of the segment have to be corner" << endl
+			<< abort(FatalError);
+	}
+
+	disJoinSegment(theSegment);
 
 	const auto geoMap =
 		std::make_shared<sectPxLib::GeoMap_LinearInterpl>();
@@ -320,13 +334,27 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 			<< abort(FatalError);
 	}
 
-	disJoinSegment(theSegment);
-
 	const auto& p0 = theSegment->Pole0();
 	Debug_Null_Pointer(p0);
 
+	if (NOT std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(p0))
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " the two end points of the segment have to be corner" << endl
+			<< abort(FatalError);
+	}
+
 	const auto& p1 = theSegment->Pole1();
 	Debug_Null_Pointer(p1);
+
+	if (NOT std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(p1))
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " the two end points of the segment have to be corner" << endl
+			<< abort(FatalError);
+	}
+
+	disJoinSegment(theSegment);
 
 	const auto geoMap =
 		std::make_shared<sectPxLib::GeoMap_CoordReader>();

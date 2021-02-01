@@ -89,6 +89,41 @@ namespace tnbLib
 		loaded = true;
 	}
 
+	void loadTuner(const std::string& name)
+	{
+
+		fileName fn(name);
+		std::ifstream f(fn);
+
+		boost::archive::polymorphic_text_iarchive ia(f);
+
+		ia >> myTuner;
+
+		if (verbose)
+		{
+			Info << " the tuner has been loaded successfully!" << endl;
+		}
+
+		if (NOT myTuner)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no tuner has been detected" << endl
+				<< abort(FatalError);
+		}
+		if (NOT myTuner->FrameRegistry())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no registry has been detected for the frame" << endl
+				<< abort(FatalError);
+		}
+		if (NOT myTuner->IsFrameLoaded())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no frame has been loaded into the tuner!" << endl
+				<< abort(FatalError);
+		}
+	}
+
 	void printObj(const std::shared_ptr<SectPx_RegObj>& item)
 	{
 		Info << "- index: " << item->Index()
@@ -452,10 +487,11 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> void {printFixedParams(); }), "printFixedParameters");
 		mod->add(chaiscript::fun([]()-> void {printPoints(); }), "printPoints");
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTunerTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPlt(name); }), "drawPntsPlt");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPolesPlt(name); }), "drawPolesPlt");
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadFrame(name); }), "loadFrame");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
 	}
 
 	void setParMakers(const module_t& mod)
@@ -524,8 +560,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	//FatalError.throwExceptions();
-
+	FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{

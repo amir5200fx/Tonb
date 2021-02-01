@@ -9,6 +9,7 @@
 #include <SectPx_Module.hxx>
 
 #include <memory>
+#include <vector>
 #include <map>
 
 namespace tnbLib
@@ -37,7 +38,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		scatterMap theMaps[nbEntities];
+		std::vector<scatterMap> theMaps;
 
 
 		//- private functions and operators
@@ -56,7 +57,9 @@ namespace tnbLib
 	public:
 
 		SectPx_ScatterRegistry()
-		{}
+		{
+			theMaps.resize(nbEntities);
+		}
 
 		TnbSectPx_EXPORT Standard_Integer LastId(SectPx_RegObjType t) const;
 

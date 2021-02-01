@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 
 #define BOOST_SERIALIZATION_DYN_LINK
+#define BOOST_ALL_DYN_LINK
 #include <boost/serialization/config.hpp>
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/base_object.hpp>
