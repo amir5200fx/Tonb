@@ -29,366 +29,85 @@
 namespace tnbLib
 {
 
-	static /*const*/ std::shared_ptr<HydStatic_Model> hydrModel /*= std::make_shared<HydStatic_Model>()*/;
+	static auto hydrModel = std::make_shared<HydStatic_Model>();
 
 	typedef std::shared_ptr<StbGMaker_Model> stbModel_t;
 	typedef std::shared_ptr<Marine_Wave> wave_t;
 	typedef std::shared_ptr<Marine_Domain> domain_t;
 
+	static stbModel_t myModel;
+	static domain_t myDomain;
+	static wave_t myWave;
+
 	static size_t verbose = 0;
-
-	const auto& getHydrModel()
-	{
-		return hydrModel;
-	}
-
-	const auto& getWave()
-	{
-		return getHydrModel()->Wave();
-	}
-
-	void loadStbModel(const stbModel_t& m)
-	{
-		getHydrModel()->LoadModel(m);
-	}
-
-	void loadWave(const wave_t& w)
-	{
-		if (NOT w->IsDone())
-		{
-			w->Perform();
-		}
-		getHydrModel()->LoadWave(w);
-	}
-
-	void loadDomain(const domain_t& d)
-	{
-		getHydrModel()->LoadDomain(d);
-	}
+	static bool loadTag = false;
 
 	void perform()
 	{
-		getHydrModel()->Perform();
-	}
-
-	auto getDisplacer()
-	{
-		if (NOT getHydrModel()->StbModel())
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "no stability model has been loaded" << endl
+				<< "the wave is not loaded!" << endl
 				<< abort(FatalError);
 		}
-
-		const auto& hull = getHydrModel()->StbModel()->Hull();
-		if (NOT hull)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the model has no hull!" << endl
-				<< abort(FatalError);
-		}
-
-		const auto& body = hull->Body();
-		if (NOT body)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "there is no body in the hull!" << endl
-				<< abort(FatalError);
-		}
-
-		auto displacer =
-			std::dynamic_pointer_cast<marineLib::Body_Displacer>(body);
-		return std::move(displacer);
-	}
-
-	auto createDomain()
-	{
-		auto domain = Marine_WaterLib::Domain(*getDisplacer());
-		return std::move(domain);
-	}
-
-	auto to3Dx(const Entity2d_Polygon& poly2, const double xi)
-	{
-		auto poly3 = std::make_shared<Entity3d_Polygon>();
-		auto& pts = poly3->Points();
-		pts.reserve(poly2.NbPoints());
-		for (const auto& x : poly2.Points())
-		{
-			auto pt3 = Pnt3d(xi, x.X(), x.Y());
-			pts.push_back(std::move(pt3));
-		}
-		return std::move(poly3);
-	}
-
-	auto to3Dz(const Entity2d_Polygon& poly2, const double zi)
-	{
-		auto poly3 = std::make_shared<Entity3d_Polygon>();
-		auto& pts = poly3->Points();
-		pts.reserve(poly2.NbPoints());
-		for (const auto& x : poly2.Points())
-		{
-			auto pt3 = Pnt3d(x.X(), x.Y(), zi);
-			pts.push_back(std::move(pt3));
-		}
-		return std::move(poly3);
-	}
-
-	auto getMesh(const std::shared_ptr<Marine_Section>& s)
-	{
-		const auto& wire = s->Wire();
-		auto poly = wire->Polygon();
-		return std::move(poly);
-	}
-
-	/* wave operators*/
-
-	std::shared_ptr<Marine_Wave> createFlatWave(const domain_t& d)
-	{
-		auto wave = std::make_shared<Marine_FlatWave>(d->Dim());
-		wave->Current().SetX(-1);
-		wave->Current().SetY(0);
-		wave->Current().SetZ(0);
-
-		wave->Wind().SetX(-1);
-		wave->Wind().SetY(0);
-		wave->Wind().SetZ(0);
-
-		wave->SetPointOnWater(d->Dim()->CalcCentre());
-		wave->SetVerticalDirection(Dir3d(0, 0, 1));
+		hydrModel->LoadDomain(myDomain);
+		hydrModel->LoadModel(myModel);
+		hydrModel->LoadWave(myWave);
+		hydrModel->Perform();
 
 		if (verbose)
 		{
-			Info << endl;
-			Info << " Wave properties:" << endl;
-			Info << " - type: flat" << endl;
-			Info << " - current: " << wave->Current() << endl;
-			Info << " - wind: " << wave->Wind() << endl;
-			Info << " - point on water: " << wave->PointOnWater() << endl;
-			Info << " - vertical direction: " << wave->VerticalDirection() << endl;
-			Info << endl;
+			Info << " the hydrostatic model is created, successfully!" << endl;
 		}
-
-		return wave;
 	}
 
-	void setCurrent(const wave_t& w, const Vec3d& v)
-	{
-		w->SetCurrent(v);
-	}
-
-	void setWind(const wave_t& w, const Vec3d& v)
-	{
-		w->SetWind(v);
-	}
-
-	void setPointOnWater(const wave_t& w, const Pnt3d& p)
-	{
-		w->SetPointOnWater(p);
-	}
-
-	void setVerticalDir(const wave_t& w, const Dir3d& d)
-	{
-		w->SetVerticalDirection(d);
-	}
-
-	void perform(const wave_t& w)
-	{
-		w->Perform();
-	}
-
-	/*End of the wave operators*/
-
-	auto createPoint(double x, double y, double z)
-	{
-		auto p = Pnt3d(x, y, z);
-		return std::move(p);
-	}
-
-	auto createVec(double x, double y, double z)
-	{
-		auto v = Vec3d(x, y, z);
-		return std::move(v);
-	}
-
-	auto createDir(double x, double y, double z)
-	{
-		auto v = Dir3d(x, y, z);
-		return std::move(v);
-	}
 
 	//- io functions
 
-	void loadStbModel(const std::string& name)
+	void loadModel(const std::string& name)
 	{
 		fileName myFileName(name);
 		std::ifstream myFile(myFileName);
 
 		boost::archive::polymorphic_text_iarchive ar(myFile);
 
-		stbModel_t m;
-		ar >> m;
+		ar >> myDomain;
+		ar >> myModel;
+		ar >> myWave;
 
-		loadStbModel(m);
+		if (NOT myDomain)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the domain is null" << endl
+				<< abort(FatalError);
+		}
 
-		auto d = createDomain();
+		if (NOT myModel)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the model is null" << endl
+				<< abort(FatalError);
+		}
 
-		loadDomain(d);
+		if (NOT myWave)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the wave is null" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT myWave->IsDone())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the wave algorithm is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		loadTag = true;
 
 		if (verbose)
 		{
-			Info << " the stability model is loaded, successfully!" << endl;
-
-			const auto& b = *d->Dim();
-			Info << " - domain's dimension: " << b << endl;
-		}
-	}
-
-	void exportToPlt(const wave_t& w, const std::string& name)
-	{
-		if (w)
-		{
-			if (NOT w->IsDone())
-			{
-				w->Perform();
-			}
-			OFstream f(name);
-			const auto& geom = w->SurfaceGeometry();
-
-			auto tri = Cad_Tools::Triangulation(geom, 15, 15);
-			tri->ExportToPlt(f);
-		}
-	}
-
-	void exportToPlt(const wave_t& w, OFstream& f)
-	{
-		if (w)
-		{
-			if (NOT w->IsDone())
-			{
-				w->Perform();
-			}
-			const auto& geom = w->SurfaceGeometry();
-
-			auto tri = Cad_Tools::Triangulation(geom, 15, 15);
-			tri->ExportToPlt(f);
-		}
-	}
-
-	void exportToPlt(const std::shared_ptr<Marine_Section>& s, OFstream& f)
-	{
-		s->ExportToPlt(f);
-	}
-
-
-
-	void exportToPlt(const std::shared_ptr<Marine_CmpSection>& s, OFstream& f)
-	{
-		if (s->IsXsection())
-		{
-			for (const auto& x : s->Sections())
-			{
-				auto poly2 = getMesh(x);
-				if (poly2)
-				{
-					auto poly3 = to3Dx(*poly2, s->X());
-					poly3->ExportToPlt(f);
-				}
-			}
-		}
-		else if (s->IsZsection())
-		{
-			for (const auto& x : s->Sections())
-			{
-				auto poly2 = getMesh(x);
-				if (poly2)
-				{
-					auto poly3 = to3Dz(*poly2, s->X());
-					poly3->ExportToPlt(f);
-				}
-			}
-		}
-		else
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "unknown cmp-section" << endl
-				<< abort(FatalError);
-		}
-	}
-
-	void exportToPlt(const std::shared_ptr<Marine_Body>& b, OFstream& f)
-	{
-		const auto& sections = b->Sections();
-		for (const auto& x : sections)
-		{
-			exportToPlt(x, f);
-		}
-	}
-
-	void exportFloatBodyToPlt(const std::string& name)
-	{
-		fileName myFileName(name);
-		OFstream f(myFileName);
-		if (NOT getHydrModel()->IsDone())
-		{
-			perform();
-		}
-		const auto& fl = getHydrModel()->FloatBody();
-		const auto& wetted = fl->Wetted();
-		const auto& dry = fl->Dry();
-
-		if (wetted)
-		{
-			exportToPlt(wetted, f);
-		}
-
-		if (dry)
-		{
-			exportToPlt(dry, f);
-		}
-	}
-
-	void exportDomain(const std::string& name)
-	{
-		fileName myFileName(name);
-		OFstream f(myFileName);
-
-		if (getHydrModel())
-		{
-			const auto& d = getHydrModel()->Domain();
-			auto tri = Cad_PreviewTools::Box(*d->Dim());
-			if (tri) tri->ExportToPlt(f);
-
-			const auto& model = getHydrModel()->StbModel();
-			if (model->Hull())
-			{
-				const auto& hull = model->Hull();
-				if (hull->Body())
-				{
-					exportToPlt(hull->Body(), f);
-				}
-			}
-
-			for (const auto& x : model->Tanks())
-			{
-				if (x->Body())
-				{
-					exportToPlt(x->Body(), f);
-				}
-			}
-
-			for (const auto& x : model->Sails())
-			{
-				auto sail = std::dynamic_pointer_cast<marineLib::Model_ShapeSail>(x);
-				if (sail)
-				{
-					exportToPlt(sail->Body(), f);
-				}
-			}
-
-			if (getHydrModel()->Wave())
-			{
-				exportToPlt(getHydrModel()->Wave(), f);
-			}
+			Info << " the wave is loaded, successfully!" << endl;
 		}
 	}
 
@@ -399,11 +118,13 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_oarchive ar(myFile);
 
-		if (NOT getHydrModel()->IsDone())
+		if (NOT hydrModel->IsDone())
 		{
-			perform();
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
 		}
-		ar << getHydrModel();
+		ar << hydrModel;
 
 		if (verbose)
 		{
@@ -425,29 +146,13 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](double x, double y, double z)-> auto{auto t = createPoint(x, y, z); return std::move(t); }), "createPnt3d");
-		mod->add(chaiscript::fun([](double x, double y, double z)-> auto{auto t = createVec(x, y, z); return std::move(t); }), "createVec3d");
-		mod->add(chaiscript::fun([](double x, double y, double z)-> auto{auto t = createDir(x, y, z); return std::move(t); }), "createDir3d");
-
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadStbModel(name); }), "loadStbModel");
-		mod->add(chaiscript::fun([](const std::string& name)->void {exportToPlt(getHydrModel()->Wave(), name); }), "exportWaveToPlt");
-		mod->add(chaiscript::fun([](const std::string& name)->void {exportDomain(name); }), "exportDomainToPlt");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {exportFloatBodyToPlt(name); }), "exportFloatBodyToPlt");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadWave");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveModelTo(name); }), "saveTo");
 
+		mod->add(chaiscript::fun([]()-> void {perform(); }), "execute");
+
 		mod->add(chaiscript::fun([](unsigned short i)-> void {HydStatic_Model::verbose = i; }), "setVerbose");
-	}
-
-	void setWaves(const module_t& mod)
-	{
-		mod->add(chaiscript::fun([]()->auto {auto t = createFlatWave(getHydrModel()->Domain()); return std::move(t); }), "createFlatWave");
-		mod->add(chaiscript::fun([](const wave_t& w, const Pnt3d& p)->void {setPointOnWater(w, p); }), "setPointOnWater");
-		mod->add(chaiscript::fun([](const wave_t& w, const Dir3d& d)->void {setVerticalDir(w, d); }), "setVerticalDirection");
-		mod->add(chaiscript::fun([](const wave_t& w, const Vec3d& v)->void {setCurrent(w, v); }), "setCurrent");
-		mod->add(chaiscript::fun([](const wave_t& w, const Vec3d& v)->void {setWind(w, v); }), "setWind");
-
-		mod->add(chaiscript::fun([](const wave_t& w)-> void {loadWave(w); }), "loadWave");
 	}
 
 	std::string getString(char* argv)
@@ -468,8 +173,8 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 
-	hydrModel = std::make_shared<HydStatic_Model>();
-	//FatalError.throwExceptions();
+	//hydrModel = std::make_shared<HydStatic_Model>();
+	FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
@@ -491,7 +196,6 @@ int main(int argc, char *argv[])
 			auto mod = std::make_shared<chaiscript::Module>();
 
 			setGlobals(mod);
-			setWaves(mod);
 
 			chai.add(mod);
 
@@ -508,6 +212,10 @@ int main(int argc, char *argv[])
 			catch (const error& x)
 			{
 				Info << x.message() << endl;
+			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
 			}
 		}
 	}
