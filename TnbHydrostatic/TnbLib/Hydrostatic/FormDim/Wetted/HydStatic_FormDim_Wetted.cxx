@@ -3,6 +3,7 @@
 #include <Marine_Bodies.hxx>
 #include <Marine_CmptLib.hxx>
 #include <Marine_MidSection.hxx>
+#include <Marine_MidSectionApprox_Near.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -37,10 +38,25 @@ void tnbLib::formDim::Wetted::CalcTM()
 			Info << " attempting to construct a midship section..." << endl;
 		}
 
-		auto x = MEAN(pars->App(), pars->Fpp());
-		Marine_MidSection midSect(Body()->Displacer(), Body(), Wave());
-		midSect.ApplyAt(x);
+		const auto& displacer = Body()->Displacer();
+		Marine_MidSection midSect(displacer, Body(), Wave());
+		if (displacer->ShapeType())
+		{
+			auto x = MEAN(pars->App(), pars->Fpp());
+			midSect.ApplyAt(x);
+		}
+		else
+		{
+			marineLib::MidSectionApprox_Near approx;
+			approx.LoadBody(displacer);
+			
+			approx.Perform(MEAN(pars->App(), pars->Fpp()));
+			Debug_If_Condition_Message(NOT approx.IsDone(), "the approximate mid-section is not performed!");
 
+			Debug_Null_Pointer(approx.Section());
+			midSect.ApplyAt(approx.Section());
+		}
+		
 		if (verbose)
 		{
 			Info << " midShip section is added to the wetted body, successfully!" << endl;
