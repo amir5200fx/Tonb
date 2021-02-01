@@ -34,6 +34,8 @@ namespace tnbLib
 	static auto displacerCalculator = std::make_shared<formDim::Displacer>();
 	static auto wettedCalculator = std::make_shared<formDim::Wetted>();
 
+	static size_t verbose = 0;
+
 	void loadModel(const std::string& name)
 	{
 		fileName fn(name);
@@ -62,6 +64,11 @@ namespace tnbLib
 			FatalErrorIn(FunctionSIG)
 				<< "No Wave has been detected" << endl
 				<< abort(FatalError);
+		}
+
+		if (verbose)
+		{
+			Info << " the hydrostatic model is loaded successfully!" << endl;
 		}
 	}
 
@@ -118,6 +125,11 @@ namespace tnbLib
 		ar << wettedCalculator;
 
 		myFile.close();
+
+		if (verbose)
+		{
+			Info << " the form dimensional analysis is saved in: " << fn << ", successfully!" << endl;
+		}
 	}
 
 	void load(const std::string& name)
@@ -145,7 +157,7 @@ namespace tnbLib
 	void formDimensions(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {calcDisplacer(); calcWetted(); }), "execute");
+		mod->add(chaiscript::fun([]()->void {calcDisplacer(); calcWetted(); if (verbose) printParameters(); }), "execute");
 		mod->add(chaiscript::fun([]()->void {printParameters(); }), "printParameters");
 		mod->add(chaiscript::fun([](const std::string& name)->void {save(name); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)->void {load(name); }), "loadFrom");
@@ -193,7 +205,7 @@ int main(int argc, char* argv[])
 			formDimensions(mod);
 			chai.add(mod);
 
-			fileName myFileName("FormDim");
+			fileName myFileName("formDim");
 
 			try
 			{
