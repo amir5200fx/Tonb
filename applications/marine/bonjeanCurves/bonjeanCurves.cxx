@@ -35,15 +35,17 @@ namespace tnbLib
 	typedef std::shared_ptr<marineLib::Body_Displacer> displacer_t;
 	typedef std::shared_ptr<HydStatic_Spacing> spacing_t;
 
+	static size_t verbose = 0;
+
 	const auto& getBnjMaker()
 	{
 		return bonjeanMaker;
 	}
 
-	void loadSpacing(const spacing_t& t)
+	/*void loadSpacing(const spacing_t& t)
 	{
 		getBnjMaker()->LoadWaters(t);
-	}
+	}*/
 
 	auto createDomain_tank(const tank_t& b)
 	{
@@ -194,9 +196,16 @@ namespace tnbLib
 
 		getBnjMaker()->LoadBody(body);
 		getBnjMaker()->LoadDomain(domain);
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the body is loaded, successfully!" << endl;
+			Info << endl;
+		}
 	}
 
-	void exportToPlt(const std::shared_ptr<Marine_Graph>& g, const std::string& name)
+	/*void exportToPlt(const std::shared_ptr<Marine_Graph>& g, const std::string& name)
 	{
 		if (g)
 		{
@@ -209,6 +218,23 @@ namespace tnbLib
 				auto pnts = discretize(*x->Curve());
 				Io::ExportCurve(pnts, f);
 			}
+		}
+	}*/
+
+	void saveTo(const std::string& name)
+	{
+		fileName fn(name);
+		std::ofstream f(fn);
+
+		boost::archive::polymorphic_text_oarchive ar(f);
+
+		ar << bonjeanMaker;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the Bonjean-curves is saved in: " << fn << ", successfully!" << endl;
+			Info << endl;
 		}
 	}
 }
@@ -226,14 +252,15 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](const spacing_t& t)->void {loadSpacing(t); }), "loadSpacing");
+		//mod->add(chaiscript::fun([](const spacing_t& t)->void {loadSpacing(t); }), "loadSpacing");
 		mod->add(chaiscript::fun([](int n)->void {createUniformSpacing(n); }), "createUniformSpacing");
 		mod->add(chaiscript::fun([]()->void {perform(); }), "execute");
 
 		//- io functions
 
+		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadBody(name); }), "loadBody");
-		mod->add(chaiscript::fun([](unsigned short c)-> void {HydStatic_Bonjean::verbose = c; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short c)-> void {HydStatic_Bonjean::verbose = c; verbose = c; }), "setVerbose");
 
 	}
 
@@ -293,6 +320,10 @@ int main(int argc, char *argv[])
 			catch (const error& x)
 			{
 				Info << x.message() << endl;
+			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
 			}
 		}
 	}
