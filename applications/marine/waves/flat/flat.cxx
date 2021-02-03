@@ -100,7 +100,7 @@ namespace tnbLib
 			Info << " - domain's dimension: " << b << endl;
 		}
 
-		myWave = std::make_shared<Marine_FlatWave>(myDomain->Dim());
+		myWave = std::make_shared<Marine_FlatWave>(myDomain);
 		const auto& wave = myWave;
 		wave->Current().SetX(-1);
 		wave->Current().SetY(0);
@@ -236,7 +236,6 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		oa << myDomain;
 		oa << myModel;
 		oa << myWave;
 
