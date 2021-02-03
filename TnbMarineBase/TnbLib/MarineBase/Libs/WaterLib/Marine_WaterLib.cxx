@@ -150,7 +150,7 @@ tnbLib::Marine_WaterLib::StillWaterDomain
 #endif // _DEBUG
 
 
-	auto wave = Marine_WaterTools::FlatWave(theDomain->Dim(), theZ);
+	auto wave = Marine_WaterTools::FlatWave(theDomain, theZ);
 	Debug_Null_Pointer(wave);
 
 	wave->Perform();
@@ -159,13 +159,12 @@ tnbLib::Marine_WaterLib::StillWaterDomain
 	auto water = 
 		Marine_WaterTools::StillWater(theBody.Sections(), theZ, *theDomain->Dim());
 
-	auto domain = theDomain;
 	auto wd = std::make_shared<Marine_WaterDomain>
 		(
-			std::move(domain), 
 			std::move(water),
 			std::move(wave)
 			);
+	wd->SetZ(theZ);
 	return std::move(wd);
 }
 
@@ -181,20 +180,19 @@ tnbLib::Marine_WaterLib::StillWaterDomain
 	Marine_BodyTools::CheckTypeConsistency(theBody);
 #endif // _DEBUG
 
-	auto wave = Marine_WaterTools::FlatWave(theDomain->Dim(), theZ);
+	auto wave = Marine_WaterTools::FlatWave(theDomain, theZ);
 	Debug_Null_Pointer(wave);
 
 	auto water =
 		Marine_WaterTools::StillWater(theBody.Sections(), theZ, *theDomain->Dim());
 
-	auto domain = theDomain;
 	auto wd = 
 		std::make_shared<Marine_WaterDomain>
 		(
-			std::move(domain),
 			std::move(water), 
 			std::move(wave)
 			);
+	wd->SetZ(theZ);
 	return std::move(wd);
 }
 
@@ -257,7 +255,9 @@ tnbLib::Marine_WaterLib::MultiLevelsStillWaterDomain
 		domains.push_back(std::move(water));
 	}
 
-	domain->SetDomains(std::move(domains));
+	domain->SetWaters(std::move(domains));
+	domain->SetDomain(theDomain);
+	domain->SetBody(std::dynamic_pointer_cast<Marine_Body>(theBody.This()));
 	return std::move(domain);
 }
 
@@ -282,7 +282,9 @@ tnbLib::Marine_WaterLib::MultiLevelsStillWaterDomain
 		domains.push_back(std::move(water));
 	}
 
-	domain->SetDomains(std::move(domains));
+	domain->SetWaters(std::move(domains));
+	domain->SetDomain(theDomain);
+	domain->SetBody(std::dynamic_pointer_cast<Marine_Body>(theBody.This()));
 	return std::move(domain);
 }
 
@@ -349,15 +351,14 @@ tnbLib::Marine_WaterLib::WaterDomain
 		);
 	Debug_Null_Pointer(water);
 
-	auto domain = theDomain;
 	auto wave = theWave;
 	auto wd =
 		std::make_shared<Marine_WaterDomain>
 		(
-			std::move(domain),
 			std::move(water),
 			std::move(wave)
 			);
+	wd->SetZ(theWave->Z());
 	return std::move(wd);
 }
 
@@ -384,15 +385,14 @@ tnbLib::Marine_WaterLib::WaterDomain
 		);
 	Debug_Null_Pointer(water);
 
-	auto domain = theDomain;
 	auto wave = theWave;
 	auto wd =
 		std::make_shared<Marine_WaterDomain>
 		(
-			std::move(domain),
 			std::move(water),
 			std::move(wave)
 			);
+	wd->SetZ(theWave->Z());
 	return std::move(wd);
 }
 
