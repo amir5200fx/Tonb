@@ -9,6 +9,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::Marine_WaterDomain)
 	ar & boost::serialization::base_object<Marine_CoordinatedEntity>(*this);
 	ar & boost::serialization::base_object<Global_Done>(*this);
 
+	ar & theZ_;
 	ar & theWater_;
 	ar & theWave_;
 }
@@ -18,6 +19,7 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Marine_WaterDomain)
 	ar & boost::serialization::base_object<Marine_CoordinatedEntity>(*this);
 	ar & boost::serialization::base_object<Global_Done>(*this);
 
+	ar & theZ_;
 	ar & theWater_;
 	ar & theWave_;
 }
