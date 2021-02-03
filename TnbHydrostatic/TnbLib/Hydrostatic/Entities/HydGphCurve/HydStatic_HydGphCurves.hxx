@@ -13,4 +13,9 @@
 #include <HydStatic_HydGphCurve_LCF.hxx>
 #include <HydStatic_HydGphCurve_MCT.hxx>
 
+#include <HydStatic_HydGphCurve_CB.hxx>
+#include <HydStatic_HydGphCurve_CM.hxx>
+#include <HydStatic_HydGphCurve_CP.hxx>
+#include <HydStatic_HydGphCurve_CWL.hxx>
+
 #endif // !_HydStatic_HydGphCurves_Header
