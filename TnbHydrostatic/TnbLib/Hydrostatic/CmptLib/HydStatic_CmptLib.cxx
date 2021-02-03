@@ -8,6 +8,7 @@
 #include <Marine_Body.hxx>
 #include <Marine_CmpSection.hxx>
 #include <MarineBase_Tools.hxx>
+#include <Marine_MultLevWaterDomain.hxx>
 #include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_Bonjean.hxx>
 #include <HydStatic_BnjCurve.hxx>
@@ -148,8 +149,8 @@ tnbLib::HydStatic_CmptLib::RetrieveAreas
 			<< abort(FatalError);
 	}
 
-	Debug_Null_Pointer(theBonjean.Body());
-	const auto& body = *theBonjean.Body();
+	Debug_Null_Pointer(theBonjean.Waters()->Body());
+	const auto& body = *theBonjean.Waters()->Body();
 
 	const auto bnjCurves = HydStatic_CmptLib::RetrieveBnjCurves(theBonjean);
 
