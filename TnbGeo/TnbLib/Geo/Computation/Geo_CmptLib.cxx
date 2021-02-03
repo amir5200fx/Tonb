@@ -2,8 +2,95 @@
 
 #include <gp.hxx>
 #include <Entity2d_Polygon.hxx>
+#include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+static const auto onePerTwelve = 1.0 / 12.0;
+
+Standard_Real 
+tnbLib::Geo_CmptLib::Area
+(
+	const Entity2d_Box & rect
+)
+{
+	auto[h, b] = rect.Length();
+	return h * b;
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::IxBar
+(
+	const Entity2d_Box & rect
+)
+{
+	auto[h, b] = rect.Length();
+	return h * h*h*b *onePerTwelve;
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::IyBar
+(
+	const Entity2d_Box & rect
+)
+{
+	auto[h, b] = rect.Length();
+	return h * b*b*b *onePerTwelve;
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::Ix
+(
+	const Entity2d_Box & b, 
+	const Standard_Real y0
+)
+{
+	auto c = b.CalcCentre();
+	auto dy = c.Y() - y0;
+	auto a = Area(b);
+
+	return IxBar(b) + a * dy*dy;
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::Iy
+(
+	const Entity2d_Box & b, 
+	const Standard_Real x0
+)
+{
+	auto c = b.CalcCentre();
+	auto dx = c.X() - x0;
+	auto a = Area(b);
+
+	return IyBar(b) + a * dx*dx;
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::Mx
+(
+	const Entity2d_Box & b,
+	const Standard_Real y0
+)
+{
+	auto c = b.CalcCentre();
+	auto dy = c.Y() - y0;
+
+	return dy * Area(b);
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::My
+(
+	const Entity2d_Box & b,
+	const Standard_Real x0
+)
+{
+	auto c = b.CalcCentre();
+	auto dx = c.X() - x0;
+
+	return dx * Area(b);
+}
 
 namespace tnbLib
 {
