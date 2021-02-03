@@ -18,6 +18,11 @@ namespace tnbLib
 		class DISPV;
 		class DISPMFW;
 		class DISPMSW;
+
+		class CB;
+		class CM;
+		class CP;
+		class CWL;
 	}
 }
 

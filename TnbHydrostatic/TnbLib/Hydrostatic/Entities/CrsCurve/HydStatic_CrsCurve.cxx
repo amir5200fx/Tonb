@@ -106,7 +106,7 @@ tnbLib::HydStatic_CrsCurve::Value
 {
 	if (NOT IsIntersect(theVolume))
 	{
-		FatalErrorIn("Standard_Real Value(const Standard_Real theT) const")
+		FatalErrorIn("Standard_Real Value(const Standard_Real theVolume) const")
 			<< "Found no intersection" << endl
 			<< " - lower: " << Dispv0() << ", upper: " << Dispv1() << endl
 			<< " - x: " << theVolume << endl
@@ -120,7 +120,7 @@ tnbLib::HydStatic_CrsCurve::Value
 	Geom2dAPI_InterCurveCurve Int(l, Geometry());
 	if (Int.NbPoints() NOT_EQUAL 1)
 	{
-		FatalErrorIn("Standard_Real Value(const Standard_Real theT) const")
+		FatalErrorIn("Standard_Real Value(const Standard_Real theVolume) const")
 			<< "Invalid data" << endl
 			<< abort(FatalError);
 	}

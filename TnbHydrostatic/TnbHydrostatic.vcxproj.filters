@@ -283,6 +283,21 @@
     <Filter Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph">
       <UniqueIdentifier>{bac481d3-2993-4e90-8eb4-435133ef0ac6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CB">
+      <UniqueIdentifier>{fd285787-5526-4b28-9f5e-86ca392fc321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CM">
+      <UniqueIdentifier>{433a0f35-3898-4ed1-b576-be0c8e07143c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CP">
+      <UniqueIdentifier>{6b43991f-f719-4b7f-a501-e346a41180ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CWL">
+      <UniqueIdentifier>{15b6031f-acfe-45b8-828e-df40b891ba40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\HydCurvesGraph">
+      <UniqueIdentifier>{30adb956-f837-4d6d-89be-e3d4716c3791}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -558,6 +573,21 @@
     <ClInclude Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\HydStatic_CrsCurvesGraph.hxx">
       <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CB\HydStatic_HydGphCurve_CB.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CB</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CM\HydStatic_HydGphCurve_CM.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CM</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CP\HydStatic_HydGphCurve_CP.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CP</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CWL\HydStatic_HydGphCurve_CWL.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CWL</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\HydCurvesGraph\HydStatic_HydCurvesGraph.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydCurvesGraph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
@@ -790,6 +820,63 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\HydStatic_CrsCurvesGraphIO.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HydCurves\HydStatic_HydCurves.cxx">
+      <Filter>TnbLib\Hydrostatic\HydCurves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\HydCurves\HydStatic_HydCurvesIO.cxx">
+      <Filter>TnbLib\Hydrostatic\HydCurves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\Aw\HydStatic_HydGphCurve_AWIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\Aw</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\DISPMFW\HydStatic_HydGphCurve_DISPMFWIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\DISPMFW</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\DISPMSW\HydStatic_HydGphCurve_DISPMSWIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\DISPMSW</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\DISPV\HydStatic_HydGphCurve_DISPVIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\DISPV</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\KB\HydStatic_HydGphCurve_KBIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\KB</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\KM\HydStatic_HydGphCurve_KMIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\KM</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\KML\HydStatic_HydGphCurve_KMLIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\KML</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\LCB\HydStatic_HydGphCurve_LCBIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\LCB</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\LCF\HydStatic_HydGphCurve_LCFIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\LCF</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\MCT\HydStatic_HydGphCurve_MCTIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\MCT</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CB\HydStatic_HydGphCurve_CBIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CB</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CM\HydStatic_HydGphCurve_CMIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CM</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CP\HydStatic_HydGphCurve_CPIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CP</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\CWL\HydStatic_HydGphCurve_CWLIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve\CWL</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydCurvesGraph\HydStatic_HydCurvesGraph.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydCurvesGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydCurvesGraph\HydStatic_HydCurvesGraphIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydCurvesGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\HydStatic_HydGphCurve.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

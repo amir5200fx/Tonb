@@ -2,6 +2,7 @@
 #ifndef _HydStatic_HydCurve_Header
 #define _HydStatic_HydCurve_Header
 
+#include <Pnt2d.hxx>
 #include <HydStatic_Entity.hxx>
 #include <Standard_Handle.hxx>
 
@@ -68,6 +69,11 @@ namespace tnbLib
 		{
 			return theGeom_;
 		}
+
+		TnbHydStatic_EXPORT Pnt2d FirstCoord() const;
+
+		TnbHydStatic_EXPORT Pnt2d LastCoord() const;
+
 	};
 }
 
