@@ -48,7 +48,6 @@ namespace tnbLib
 
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
 	: theAx_(null)
-	, theNbWaters_(DEFAULT_NB_WATERS)
 	, theVolCoeff_(0.005)
 {
 	// empty body
@@ -56,16 +55,14 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
 
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 (
-	const std::shared_ptr<Marine_Domain>& theDomain, 
 	const std::shared_ptr<Marine_Body>& theBody,
+	const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters,
 	const std::shared_ptr<HydStatic_HeelSpacing>& theHeels,
-	const Standard_Integer theNbWaters,
 	const gp_Ax1 & theAx
 )
-	: theDomain_(theDomain)
+	: theWaters_(theWaters)
 	, theBody_(theBody)
 	, theHeels_(theHeels)
-	, theNbWaters_(theNbWaters)
 	, theAx_(theAx)
 	, theVolCoeff_(0.005)
 {
@@ -156,13 +153,20 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 			<< abort(FatalError);
 	}
 
+	if (NOT Waters())
+	{
+		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
+			<< " no water is loaded!" << endl
+			<< abort(FatalError);
+	}
+
 	if (verbose)
 	{
 		Info << " Body's name: " << Body()->Name() << endl;
 		Info << " nb. of sections: " << Body()->NbSections() << endl;
 	}
 
-	if (NOT Domain())
+	if (NOT Waters()->Domain())
 	{
 		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
 			<< " no domain is loaded!" << endl
@@ -208,7 +212,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	if (verbose)
 	{
 		Info << " - nb. of heels: " << heels->NbSections() << endl;
-		Info << " - nb. of waters: " << theNbWaters_ << endl;
+		Info << " - nb. of waters: " << Waters()->Waters().size() << endl;
 	}
 	if (verbose > 1)
 	{
@@ -246,12 +250,13 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 		{
 			Info << " z0 " << b.P0().Z() << ", z1 = " << b.P1().Z() << endl;
 		}
-		const auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), NbWaters());
+		//const auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), NbWaters());
 
-		auto domains = Marine_WaterLib::MultiLevelsStillWaterDomain(Body(), Domain(), *Z);
+		const auto& domains = Waters();
+		//auto domains = Marine_WaterLib::MultiLevelsStillWaterDomain(Body(), Domain(), *Z);
 		Debug_Null_Pointer(domains);
 
-		if (verbose) Info << " nb. of waters: " << domains->Domains().size() << endl;
+		if (verbose) Info << " nb. of waters: " << domains->Waters().size() << endl;
 		if (verbose) Info << " calculating the cross-curve..." << endl;
 		Handle(Geom2d_Curve) curve;
 		{// timer scope
