@@ -9,8 +9,6 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_HydCurves)
 {
 	ar & boost::serialization::base_object<Global_Done>(*this);
 
-	ar & theDomain_;
-	ar & theBody_;
 	ar & theWaters_;
 
 	ar & RudderAxis_;
@@ -23,8 +21,6 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_HydCurves)
 {
 	ar & boost::serialization::base_object<Global_Done>(*this);
 
-	ar & theDomain_;
-	ar & theBody_;
 	ar & theWaters_;
 
 	ar & RudderAxis_;

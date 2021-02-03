@@ -231,14 +231,15 @@ void tnbLib::HydStatic_HydCurves::Perform()
 			<< abort(FatalError);
 	}
 
-	if (NOT Body())
+	auto body = std::dynamic_pointer_cast<marineLib::Body_Displacer>(Waters()->Body());
+	if (NOT body)
 	{
 		FatalErrorIn(FunctionSIG)
-			<< "no body is loaded!" << endl
+			<< "no displacer body is loaded!" << endl
 			<< abort(FatalError);
 	}
 
-	const auto& base = Body()->BaseLine();
+	const auto& base = body->BaseLine();
 
 	const auto nbWaters = Waters()->Waters().size();
 	std::vector<hydStcGphLib::xDraft> 
@@ -279,7 +280,7 @@ void tnbLib::HydStatic_HydCurves::Perform()
 		auto wetted = 
 			std::dynamic_pointer_cast<marineLib::Body_Wetted>
 			(
-				Marine_BodyTools::WettedBody(Body(), x)
+				Marine_BodyTools::WettedBody(body, x)
 				);
 		Debug_Null_Pointer(wetted);
 
