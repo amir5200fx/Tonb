@@ -24,7 +24,6 @@ namespace tnbLib
 	typedef std::shared_ptr<StbGMaker_Model> stbModel_t;
 
 	static stbModel_t myModel;	
-	static domain_t myDomain;
 
 	static size_t verbose = 0;
 
@@ -60,12 +59,6 @@ namespace tnbLib
 		return std::move(displacer);
 	}
 
-	auto createDomain()
-	{
-		auto domain = Marine_WaterLib::Domain(*getDisplacer());
-		return std::move(domain);
-	}
-
 	void loadStbModel(const std::string& name)
 	{
 		fileName fn(name);
@@ -92,15 +85,14 @@ namespace tnbLib
 			Info << " the model is loaded from: " << fn << ",successfully!" << endl;
 		}
 
-		myDomain = createDomain();
-
-		if (verbose)
+		if (NOT myModel->Domain())
 		{
-			const auto& b = *myDomain->Dim();
-			Info << " - domain's dimension: " << b << endl;
+			FatalErrorIn(FunctionSIG)
+				<< " no domain is found in the model" << endl
+				<< abort(FatalError);
 		}
 
-		myWave = std::make_shared<Marine_FlatWave>(myDomain);
+		myWave = std::make_shared<Marine_FlatWave>(myModel->Domain());
 		const auto& wave = myWave;
 		wave->Current().SetX(-1);
 		wave->Current().SetY(0);
