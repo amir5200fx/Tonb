@@ -22,6 +22,9 @@
     <ClCompile Include="stbModelMaker.cxx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\TnbMarineBase\TnbMarineBase.vcxproj">
       <Project>{e15d4b29-deef-4205-8790-f4ca3d77f53a}</Project>
     </ProjectReference>

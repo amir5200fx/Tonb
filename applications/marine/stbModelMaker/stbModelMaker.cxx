@@ -1,6 +1,8 @@
 #include <StbGMaker_Model.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_Models.hxx>
+#include <Marine_Domain.hxx>
+#include <Marine_WaterLib.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -18,8 +20,10 @@ namespace tnbLib
 
 	typedef std::shared_ptr<Marine_Body> body_t;
 	typedef std::shared_ptr<StbGMaker_Model> model_t;
+	typedef std::shared_ptr<Marine_Domain> domain_t;
 
 	static model_t myModel;
+	static domain_t myDomain;
 
 	typedef std::shared_ptr<marineLib::Model_Hull> displacer_t;
 	typedef std::shared_ptr<marineLib::Model_Tank> tank_t;
@@ -30,6 +34,12 @@ namespace tnbLib
 	static std::map<size_t, sail_t> mySails;
 
 	static size_t verbose;
+
+	auto createDomain()
+	{
+		auto domain = Marine_WaterLib::Domain(*myDisplacer->Body());
+		return std::move(domain);
+	}
 
 	void loadDisplacer(const std::string& name)
 	{
@@ -74,6 +84,14 @@ namespace tnbLib
 			Info << " displacer has been loaded from: " << address << ", successfully!" << endl;
 			Info << " - body's name: " << body->Name() << endl;
 		}
+
+		myDomain = createDomain();
+
+		if (verbose)
+		{
+			const auto& b = *myDomain->Dim();
+			Info << " - domain's dimension: " << b << endl;
+		}
 	}
 
 	void makeModel()
@@ -85,6 +103,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		myModel = std::make_shared<StbGMaker_Model>();
+		myModel->SetDomain(myDomain);
 		myModel->SetHull(myDisplacer);
 
 		if (myTanks.size())
