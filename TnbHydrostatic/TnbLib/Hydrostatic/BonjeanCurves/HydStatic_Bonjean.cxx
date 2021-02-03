@@ -27,11 +27,9 @@ unsigned short tnbLib::HydStatic_Bonjean::verbose(0);
 
 tnbLib::HydStatic_Bonjean::HydStatic_Bonjean
 (
-	const std::shared_ptr<Marine_Body>& theBody,
 	const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters
 )
-	: theBody_(theBody)
-	, theWaters_(theWaters)
+	: theWaters_(theWaters)
 {
 	//- empty body
 }
@@ -139,24 +137,26 @@ void tnbLib::HydStatic_Bonjean::Perform()
 		Info << endl;
 	}
 
-	if (NOT Body())
+	if (NOT Waters())
+	{
+		FatalErrorIn("void HydStatic_Bonjean::Perform()")
+			<< "no water distribution has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Waters()->Body())
 	{
 		FatalErrorIn("void HydStatic_Bonjean::Perform()")
 			<< "the model is not loaded!" << endl
 			<< abort(FatalError);
 	}
 
+	const auto& body = Waters()->Body();
+
 	if (verbose)
 	{
-		Info << " Body's name: " << Body()->Name() << endl;
-		Info << " nb. of sections: " << Body()->NbSections() << endl;
-	}
-
-	if (NOT Waters())
-	{
-		FatalErrorIn("void HydStatic_Bonjean::Perform()")
-			<< "no water distribution has been loaded!" << endl
-			<< abort(FatalError);
+		Info << " Body's name: " << body->Name() << endl;
+		Info << " nb. of sections: " << body->NbSections() << endl;
 	}
 
 	if (NOT Waters()->Domain())
@@ -166,16 +166,16 @@ void tnbLib::HydStatic_Bonjean::Perform()
 			<< abort(FatalError);
 	}
 
-	auto waters = Waters()->Waters();
+	const auto& waters = Waters()->Waters();	
 
-	const auto& sections = Body()->Sections();
+	const auto& sections = body->Sections();
 	if (sections.empty())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "there is no section in the body!" << endl
 			<< abort(FatalError);
 	}
-	tableOffset qArea(Body()->NbSections());
+	tableOffset qArea(body->NbSections());
 	for (auto& x : qArea)
 	{
 		x.resize(waters.size(), 0);

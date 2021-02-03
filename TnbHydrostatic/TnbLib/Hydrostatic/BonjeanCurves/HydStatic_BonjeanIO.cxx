@@ -23,7 +23,6 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_Bonjean)
 {
 	ar & boost::serialization::base_object<Global_Done>(*this);
 
-	Marine_Body::Save(ar, theBody_);
 	ar & theWaters_;
 
 	ar & theBonjean_;
@@ -34,7 +33,6 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_Bonjean)
 {
 	ar & boost::serialization::base_object<Global_Done>(*this);
 
-	Marine_Body::Load(ar, theBody_);
 	ar & theWaters_;
 
 	ar & theBonjean_;
