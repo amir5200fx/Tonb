@@ -1,6 +1,7 @@
 #include <StbGMaker_Model.hxx>
 
 #include <Marine_Models.hxx>
+#include <Marine_Domain.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::StbGMaker_Model)
 {
@@ -8,6 +9,8 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::StbGMaker_Model)
 	ar & theHull_;
 	ar & theTanks_;
 	ar & theSails_;
+
+	ar & theDomain_;
 
 	ar & theWeight_;
 }
@@ -18,6 +21,8 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::StbGMaker_Model)
 	ar & theHull_;
 	ar & theTanks_;
 	ar & theSails_;
+
+	ar & theDomain_;
 
 	ar & theWeight_;
 }
