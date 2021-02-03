@@ -33,6 +33,8 @@
 #include <Marine_VesselParam_iB.hxx>
 #include <Marine_VesselParam_KB.hxx>
 #include <Marine_VesselParam_KG.hxx>
+#include <Marine_VesselParam_KM.hxx>
+#include <Marine_VesselParam_KML.hxx>
 #include <Marine_VesselParam_LCB.hxx>
 #include <Marine_VesselParam_LCF.hxx>
 #include <Marine_VesselParam_LCG.hxx>
@@ -49,6 +51,7 @@
 #include <Marine_VesselParam_TF.hxx>
 #include <Marine_VesselParam_TM.hxx>
 #include <Marine_VesselParam_TCG.hxx>
+#include <Marine_VesselParam_TCF.hxx>
 #include <Marine_VesselParam_VCB.hxx>
 #include <Marine_VesselParam_VCG.hxx>
 #include <Marine_VesselParam_WETA.hxx>

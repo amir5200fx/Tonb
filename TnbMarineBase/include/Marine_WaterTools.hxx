@@ -23,6 +23,7 @@ namespace tnbLib
 	class Marine_Wave;
 	class Marine_Section;
 	class Marine_CmpSection;
+	class Marine_Domain;
 
 	class Marine_WaterTools
 	{
@@ -112,7 +113,7 @@ namespace tnbLib
 		static TnbMarine_EXPORT std::shared_ptr<Marine_Wave> 
 			FlatWave
 			(
-				const std::shared_ptr<Entity3d_Box>& theDomain,
+				const std::shared_ptr<Marine_Domain>& theDomain,
 				const Standard_Real theZ
 			);
 

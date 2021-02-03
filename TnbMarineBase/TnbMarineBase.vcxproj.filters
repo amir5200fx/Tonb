@@ -289,39 +289,6 @@
     <Filter Include="TnbLib\MarineBase\Rotate">
       <UniqueIdentifier>{69883273-b802-4ff3-9fca-b9476a0a9503}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs">
-      <UniqueIdentifier>{b1620c3f-7792-40ac-bf82-26087593587c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\LCF">
-      <UniqueIdentifier>{e5cb16ac-ac4f-46af-b821-e5727c8a263a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\Volume">
-      <UniqueIdentifier>{449f13a5-fb87-4cd6-96bf-80b851e32773}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\LCB">
-      <UniqueIdentifier>{5cc13b0a-2d17-4413-86f1-361cadaf03f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\KM">
-      <UniqueIdentifier>{e65ff55b-c0bd-4b20-bb8a-2f1907d12d66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\KML">
-      <UniqueIdentifier>{7a073c2d-8363-4c7e-bdb8-47f434c2df2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\KB">
-      <UniqueIdentifier>{0ada96a9-079f-41f2-9dea-12a67ac7c5a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\MCT">
-      <UniqueIdentifier>{ea096705-9175-4610-ae28-9f2125f8d96c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\AW">
-      <UniqueIdentifier>{84a6b965-46cd-4044-b40c-b100f82fcccd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\DispSW">
-      <UniqueIdentifier>{0b6900a8-cb73-4030-8b2d-9b830f0dfc83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Graphs\DispFW">
-      <UniqueIdentifier>{44f62b36-14e7-401e-acb0-a2dbe069d551}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\PortLib">
       <UniqueIdentifier>{054a827f-de9a-4b49-8a41-9790a05f17d0}</UniqueIdentifier>
     </Filter>
@@ -586,6 +553,15 @@
     <Filter Include="TnbLib\MarineBase\MidSectionApprox\Near">
       <UniqueIdentifier>{f16283f2-e0fc-4489-8c14-ff53cf6f2887}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\KM">
+      <UniqueIdentifier>{320bb4e5-f882-4521-a5df-e2edc3d5f1d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\KML">
+      <UniqueIdentifier>{0bdbf384-70cc-45c4-ba2a-b419342f7b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\TCF">
+      <UniqueIdentifier>{1a0cc789-5c2b-49f1-852b-3024c005c4e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -836,9 +812,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Rotate\Marine_Rotate.hxx">
       <Filter>TnbLib\MarineBase\Rotate</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Graphs\Marine_HsGraph.hxx">
-      <Filter>TnbLib\MarineBase\Graphs</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\PortLib\Marine_PortLib.hxx">
       <Filter>TnbLib\MarineBase\PortLib</Filter>
@@ -1202,6 +1175,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\MidSectionApprox\Near\Marine_MidSectionApprox_Near.hxx">
       <Filter>TnbLib\MarineBase\MidSectionApprox\Near</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\KM\Marine_VesselParam_KM.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\KM</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\KML\Marine_VesselParam_KML.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\KML</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\TCF\Marine_VesselParam_TCF.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\TCF</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1639,6 +1621,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\MidSectionApprox\Near\Marine_MidSectionApprox_Near.cxx">
       <Filter>TnbLib\MarineBase\MidSectionApprox\Near</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\MultLevWaterDomain\Marine_MultLevWaterDomain.cxx">
+      <Filter>TnbLib\MarineBase\Entities\MultLevWaterDomain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

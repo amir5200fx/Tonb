@@ -137,6 +137,15 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
+		static TnbMarine_EXPORT marineLib::TCF
+			CalcTCF
+			(
+				const marineLib::Body_Wetted& theBody,
+				const marineLib::AW& theAw,
+				const Standard_Real y0,
+				const std::shared_ptr<info>& theInfo
+			);
+
 		static TnbMarine_EXPORT marineLib::LCB 
 			CalcLCB
 			(
@@ -161,10 +170,28 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
+		static TnbMarine_EXPORT marineLib::BM
+			CalcBM
+			(
+				const marineLib::Body_Wetted& theBody,
+				const Standard_Real yc,
+				const marineLib::DISPV& theVolume,
+				const std::shared_ptr<info>& theInfo
+			);
+
 		static TnbMarine_EXPORT marineLib::BML
 			CalcBML
 			(
 				const Marine_CmpSection& theWPlane, 
+				const Standard_Real xc,
+				const marineLib::DISPV& theVolume,
+				const std::shared_ptr<info>& theInfo
+			);
+
+		static TnbMarine_EXPORT marineLib::BML
+			CalcBML
+			(
+				const marineLib::Body_Wetted& theBody,
 				const Standard_Real xc,
 				const marineLib::DISPV& theVolume,
 				const std::shared_ptr<info>& theInfo
@@ -183,16 +210,26 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
-		/*static TnbMarine_EXPORT Standard_Real CalcKM(const Marine_WettedBody& theBody, const std::shared_ptr<info>& theInfo);
-
-		static TnbMarine_EXPORT Standard_Real CalcKML(const Marine_WettedBody& theBody, const std::shared_ptr<info>& theInfo);*/
-
 		static TnbMarine_EXPORT marineLib::KB 
 			CalcKB
 			(
 				const marineLib::Body_Wetted& theBody,
 				const Marine_BaseLine& theBase,
 				const std::shared_ptr<info>& theInfo
+			);
+
+		static TnbMarine_EXPORT marineLib::KM 
+			CalcKM
+			(
+				const marineLib::KB& theKb, 
+				const marineLib::BM& theBm
+			);
+
+		static TnbMarine_EXPORT marineLib::KML 
+			CalcKML
+			(
+				const marineLib::KB& theKb, 
+				const marineLib::BML& theBml
 			);
 
 		static TnbMarine_EXPORT marineLib::MCT 
