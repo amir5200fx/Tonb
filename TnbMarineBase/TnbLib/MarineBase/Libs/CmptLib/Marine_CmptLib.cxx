@@ -343,6 +343,22 @@ tnbLib::Marine_CmptLib::CalcLCF
 	return std::move(param);
 }
 
+tnbLib::marineLib::TCF
+tnbLib::Marine_CmptLib::CalcTCF
+(
+	const marineLib::Body_Wetted & theBody,
+	const marineLib::AW& theAw,
+	const Standard_Real y0, 
+	const std::shared_ptr<info>& theInfo
+)
+{
+	auto MxQ = MarineBase_Tools::CalcWaterPlaneMx(theBody.Sections(), y0);
+	auto Mx = MarineBase_Tools::CalcArea(MxQ, theInfo);
+
+	marineLib::TCF param(Mx / theAw());
+	return std::move(param);
+}
+
 tnbLib::marineLib::LCB
 tnbLib::Marine_CmptLib::CalcLCB
 (
@@ -396,6 +412,27 @@ tnbLib::Marine_CmptLib::CalcBM
 	return std::move(param);
 }
 
+tnbLib::marineLib::BM
+tnbLib::Marine_CmptLib::CalcBM
+(
+	const marineLib::Body_Wetted & theBody,
+	const Standard_Real yc,
+	const marineLib::DISPV & theVolume,
+	const std::shared_ptr<info>& theInfo
+)
+{
+	if (theVolume() <= gp::Resolution())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the volume of the underwater body is zero" << endl
+			<< abort(FatalError);
+	}
+	auto ixQ = MarineBase_Tools::CalcWaterPlaneIx(theBody.Sections(), yc);
+	auto ix = MarineBase_Tools::CalcArea(ixQ, theInfo);
+	marineLib::BM param(ix / theVolume());
+	return std::move(param);
+}
+
 tnbLib::marineLib::BML
 tnbLib::Marine_CmptLib::CalcBML
 (
@@ -412,6 +449,27 @@ tnbLib::Marine_CmptLib::CalcBML
 			<< abort(FatalError);
 	}
 	auto iy = MarineBase_Tools::CalcIy(theWPlane, xc, theInfo);
+	marineLib::BML param(iy / theVolume());
+	return std::move(param);
+}
+
+tnbLib::marineLib::BML 
+tnbLib::Marine_CmptLib::CalcBML
+(
+	const marineLib::Body_Wetted & theBody,
+	const Standard_Real xc,
+	const marineLib::DISPV & theVolume,
+	const std::shared_ptr<info>& theInfo
+)
+{
+	if (theVolume() <= gp::Resolution())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the volume of the underwater body is zero" << endl
+			<< abort(FatalError);
+	}
+	auto iyQ = MarineBase_Tools::CalcWaterPlaneIy(theBody.Sections(), xc);
+	auto iy = MarineBase_Tools::CalcArea(iyQ, theInfo);
 	marineLib::BML param(iy / theVolume());
 	return std::move(param);
 }
@@ -472,6 +530,28 @@ tnbLib::Marine_CmptLib::CalcKB
 
 	const auto zbar = product / sumA;
 	marineLib::KB param(zbar - loc.Z());
+	return std::move(param);
+}
+
+tnbLib::marineLib::KM 
+tnbLib::Marine_CmptLib::CalcKM
+(
+	const marineLib::KB & theKb, 
+	const marineLib::BM & theBm
+)
+{
+	marineLib::KM param(theKb() + theBm());
+	return std::move(param);
+}
+
+tnbLib::marineLib::KML
+tnbLib::Marine_CmptLib::CalcKML
+(
+	const marineLib::KB & theKb,
+	const marineLib::BML & theBml
+)
+{
+	marineLib::KML param(theKb() + theBml());
 	return std::move(param);
 }
 
