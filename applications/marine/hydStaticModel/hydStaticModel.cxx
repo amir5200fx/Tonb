@@ -36,7 +36,6 @@ namespace tnbLib
 	typedef std::shared_ptr<Marine_Domain> domain_t;
 
 	static stbModel_t myModel;
-	static domain_t myDomain;
 	static wave_t myWave;
 
 	static size_t verbose = 0;
@@ -50,7 +49,6 @@ namespace tnbLib
 				<< "the wave is not loaded!" << endl
 				<< abort(FatalError);
 		}
-		hydrModel->LoadDomain(myDomain);
 		hydrModel->LoadModel(myModel);
 		hydrModel->LoadWave(myWave);
 		hydrModel->Perform();
@@ -71,16 +69,8 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_iarchive ar(myFile);
 
-		ar >> myDomain;
 		ar >> myModel;
 		ar >> myWave;
-
-		if (NOT myDomain)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the domain is null" << endl
-				<< abort(FatalError);
-		}
 
 		if (NOT myModel)
 		{
