@@ -13,6 +13,7 @@
 #include <EnvtPropt_Density.hxx>
 #include <Entity3d_Box.hxx>
 #include <Marine_Module.hxx>
+#include <Marine_Domain.hxx>
 #include <Geo_Serialization.hxx>
 #include <OpenCascade_Serialization.hxx>
 
@@ -122,6 +123,9 @@ namespace tnbLib
 		mutable gp_Trsf originToCurrentTransform;
 	};
 
+	// Forward Declarations
+	class Marine_Domain;
+
 	class Marine_Wave
 		: public Global_Indexed
 		, public Global_Named
@@ -141,7 +145,7 @@ namespace tnbLib
 		Vec3d theCurrent_;
 		Vec3d theWind_;
 
-		std::shared_ptr<Entity3d_Box> theDomain_;
+		std::shared_ptr<Marine_Domain> theDomain_;
 		gp_Ax2 theOrigin_;
 
 
@@ -182,7 +186,7 @@ namespace tnbLib
 
 		//- constructor
 
-		Marine_Wave(const std::shared_ptr<Entity3d_Box>& theDomain)
+		Marine_Wave(const std::shared_ptr<Marine_Domain>& theDomain)
 			: theDomain_(theDomain)
 		{}
 
@@ -200,6 +204,8 @@ namespace tnbLib
 
 
 		//- public functions and operators
+
+		virtual Standard_Real Z() const = 0;
 
 		const auto& Origin() const
 		{

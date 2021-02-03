@@ -15,7 +15,6 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_Section;
-	class Marine_Domain;
 	class Marine_Wave;
 	class Marine_Water;
 
@@ -26,7 +25,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Marine_Domain> theDomain_;
+		Standard_Real theZ_;
+
 
 		std::shared_ptr<Marine_Water> theWater_;
 		std::shared_ptr<Marine_Wave> theWave_;
@@ -36,20 +36,19 @@ namespace tnbLib
 	protected:
 
 		Marine_WaterDomain()
+			: theZ_(0)
 		{}
 
 	public:
 
 		TnbMarine_EXPORT Marine_WaterDomain
 		(
-			const std::shared_ptr<Marine_Domain>& theDomain,
 			const std::shared_ptr<Marine_Water>& theWater,
 			const std::shared_ptr<Marine_Wave>& theWave
 		);
 
 		TnbMarine_EXPORT Marine_WaterDomain
 		(
-			std::shared_ptr<Marine_Domain>&& theDomain,
 			std::shared_ptr<Marine_Water>&& theWater,
 			std::shared_ptr<Marine_Wave>&& theWave
 		);
@@ -58,7 +57,6 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
-			const std::shared_ptr<Marine_Domain>& theDomain,
 			const std::shared_ptr<Marine_Water>& theWater,
 			const std::shared_ptr<Marine_Wave>& theWave
 		);
@@ -67,18 +65,15 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			std::shared_ptr<Marine_Domain>&& theDomain,
 			std::shared_ptr<Marine_Water>&& theWater,
 			std::shared_ptr<Marine_Wave>&& theWave
 		);
 
 	public:
 
-		//Standard_Real Z() const;
-
-		const auto& Domain() const
+		auto Z() const
 		{
-			return theDomain_;
+			return theZ_;
 		}
 
 		const auto& Water() const
@@ -89,6 +84,11 @@ namespace tnbLib
 		const auto& Wave() const
 		{
 			return theWave_;
+		}
+
+		void SetZ(const Standard_Real z)
+		{
+			theZ_ = z;
 		}
 
 		TnbMarine_EXPORT void ExportToPlt(OFstream& File) const;

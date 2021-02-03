@@ -13,6 +13,16 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<HydStatic_HydCurve>(*this);
+		}
+
 	protected:
 
 		
@@ -23,12 +33,16 @@ namespace tnbLib
 
 	public:
 
-		TnbHydStatic_EXPORT Standard_Real MinValue() const;
+		TnbHydStatic_EXPORT Standard_Boolean IsIntersect(const Standard_Real theT) const;
 
-		TnbHydStatic_EXPORT Standard_Real MaxValue() const;
+		TnbHydStatic_EXPORT Standard_Real Draft0() const;
 
-		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real theT) const;
+		TnbHydStatic_EXPORT Standard_Real Draft1() const;
+
+		TnbHydStatic_EXPORT Standard_Real Draft(const Standard_Real theT) const;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::HydStatic_HydGphCurve);
 
 #endif // !_HydStatic_HydGphCurve_Header

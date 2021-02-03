@@ -4,6 +4,7 @@
 
 #include <Pnt2d.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Entity2d_BoxFwd.hxx>
 #include <Geo_Module.hxx>
 
 #include <vector>
@@ -15,6 +16,52 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbGeo_EXPORT Standard_Real 
+			Area
+			(
+				const Entity2d_Box& b
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			IxBar
+			(
+				const Entity2d_Box& b
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			IyBar
+			(
+				const Entity2d_Box& b
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			Ix
+			(
+				const Entity2d_Box& b, 
+				const Standard_Real y0
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			Iy
+			(
+				const Entity2d_Box& b,
+				const Standard_Real x0
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			Mx
+			(
+				const Entity2d_Box& b,
+				const Standard_Real y0
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			My
+			(
+				const Entity2d_Box& b,
+				const Standard_Real x0
+			);
 
 		static TnbGeo_EXPORT Standard_Real
 			Area

@@ -19,6 +19,7 @@ namespace tnbLib
 	class Marine_Body;
 	class Marine_Domain;
 	class Marine_Graph;
+	class Marine_MultLevWaterDomain;
 	class HydStatic_CrsCurve;
 	class HydStatic_CrsCurvesGraph;
 	class HydStatic_HeelSpacing;
@@ -31,11 +32,10 @@ namespace tnbLib
 
 		gp_Ax1 theAx_;
 
-		Standard_Integer theNbWaters_;
 		Standard_Real theVolCoeff_;
 
-		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<Marine_Body> theBody_;
+		std::shared_ptr<Marine_MultLevWaterDomain> theWaters_;
 
 		std::shared_ptr<HydStatic_HeelSpacing> theHeels_;
 
@@ -63,17 +63,16 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT HydStatic_CrossCurves
 		(
-			const std::shared_ptr<Marine_Domain>& theDomain, 
 			const std::shared_ptr<Marine_Body>& theBody, 
+			const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters,
 			const std::shared_ptr<HydStatic_HeelSpacing>& theHeels,
-			const Standard_Integer theNbWaters,
 			const gp_Ax1& theAx
 		);
 
 
-		const auto& Domain() const
+		const auto& Waters() const
 		{
-			return theDomain_;
+			return theWaters_;
 		}
 
 		const auto& Body() const
@@ -84,11 +83,6 @@ namespace tnbLib
 		const auto& Heels() const
 		{
 			return theHeels_;
-		}
-
-		auto NbWaters() const
-		{
-			return theNbWaters_;
 		}
 
 		const auto& Ax() const
@@ -106,24 +100,28 @@ namespace tnbLib
 			const hydStcLib::CurveMakerType t = hydStcLib::CurveMakerType::starboard
 		);
 
-		void LoadDomain(const std::shared_ptr<Marine_Domain>& theDomain)
+		void LoadWaters
+		(
+			const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters
+		)
 		{
-			theDomain_ = theDomain;
+			theWaters_ = theWaters;
 		}
 
-		void LoadBody(const std::shared_ptr<Marine_Body>& theBody)
+		void LoadBody
+		(
+			const std::shared_ptr<Marine_Body>& theBody
+		)
 		{
 			theBody_ = theBody;
 		}
 
-		void LoadHeels(const std::shared_ptr<HydStatic_HeelSpacing>& theHeels)
+		void LoadHeels
+		(
+			const std::shared_ptr<HydStatic_HeelSpacing>& theHeels
+		)
 		{
 			theHeels_ = theHeels;
-		}
-
-		void SetNbWaters(const Standard_Integer theNbWaters)
-		{
-			theNbWaters_ = theNbWaters;
 		}
 
 		void SetAx(const gp_Ax1& theAx)

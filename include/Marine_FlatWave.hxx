@@ -40,12 +40,17 @@ namespace tnbLib
 
 		//- constructor
 
-		Marine_FlatWave(const std::shared_ptr<Entity3d_Box>& theDomain)
+		Marine_FlatWave(const std::shared_ptr<Marine_Domain>& theDomain)
 			: Marine_Wave(theDomain)
 		{}
 
 
 		//- public functions and operators
+
+		Standard_Real Z() const override
+		{
+			return PointOnWater().Z();
+		}
 
 		static void dummy()
 		{}

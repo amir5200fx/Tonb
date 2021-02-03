@@ -14,4 +14,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcGphLib::LCF);
+
 #endif // !_HydStatic_HydGphCurve_LCF_Header
