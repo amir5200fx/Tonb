@@ -7,6 +7,7 @@
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
 #include <Cad_Tools.hxx>
+#include <Marine_Domain.hxx>
 #include <Marine_Water.hxx>
 #include <Marine_Wave.hxx>
 #include <Marine_WaterCurve.hxx>
@@ -569,14 +570,15 @@ tnbLib::Marine_WaterTools::Water
 std::shared_ptr<tnbLib::Marine_Wave>
 tnbLib::Marine_WaterTools::FlatWave
 (
-	const std::shared_ptr<Entity3d_Box>& theDomain,
+	const std::shared_ptr<Marine_Domain>& theDomain,
 	const Standard_Real theZ
 )
 {
 	auto wave = std::make_shared<Marine_FlatWave>(theDomain);
 	Debug_Null_Pointer(wave);
 
-	auto pointOnWater = theDomain->CalcCentre();
+	Debug_Null_Pointer(theDomain->Dim());
+	auto pointOnWater = theDomain->Dim()->CalcCentre();
 	pointOnWater.SetZ(theZ);
 
 	wave->SetVerticalDirection(Dir3d(gp::DZ().XYZ()));
