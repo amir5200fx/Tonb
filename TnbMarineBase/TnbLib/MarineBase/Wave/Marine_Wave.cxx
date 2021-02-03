@@ -1,6 +1,7 @@
 #include <Marine_Wave.hxx>
 
 #include <Entity3d_Box.hxx>
+#include <Marine_Domain.hxx>
 
 #include <gp_Ax3.hxx>
 #include <gp_Ax2.hxx>
@@ -155,7 +156,7 @@ void tnbLib::Marine_Wave::Perform()
 	//theOrigin_ = gp_Ax2(MEAN(Domain().P0(), Domain().P1()), Dir3d(0, 0, 1.0), Dir3d(1, 0, 0));
 	TransformOriginToCurrent();
 
-	auto expanded = Entity3d_Box::Union(BoundingBoxOfRotatedDomain(*Domain()), *Domain());
+	auto expanded = Entity3d_Box::Union(BoundingBoxOfRotatedDomain(*Domain()->Dim()), *Domain()->Dim());
 
 	const auto& ep0 = expanded.P0();
 	const auto& ep1 = expanded.P1();
