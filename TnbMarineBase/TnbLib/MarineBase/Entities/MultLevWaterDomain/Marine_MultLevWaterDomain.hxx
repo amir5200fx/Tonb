@@ -13,6 +13,8 @@ namespace tnbLib
 	// Forward Declarations
 	class Marine_WaterDomain;
 	class Marine_WaterLib;
+	class Marine_Domain;
+	class Marine_Body;
 
 	class Marine_MultLevWaterDomain
 		: public Marine_Entity
@@ -22,42 +24,128 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::vector<std::shared_ptr<Marine_WaterDomain>> theDomains_;
+		std::shared_ptr<Marine_Domain> theDomain_;
+		std::shared_ptr<Marine_Body> theBody_;
+
+		std::vector<std::shared_ptr<Marine_WaterDomain>> theWaters_;
 
 
 		TNB_SERIALIZATION(TnbMarine_EXPORT);
-
-		auto& ChangeDomains()
-		{
-			return theDomains_;
-		}
-
-		void SetDomains
-		(
-			const std::vector<std::shared_ptr<Marine_WaterDomain>>&& theDomains
-		)
-		{
-			theDomains_ = std::move(theDomains);
-		}
-
-		void SetDomains
-		(
-			const std::vector<std::shared_ptr<Marine_WaterDomain>>& theDomains
-		)
-		{
-			theDomains_ = theDomains;
-		}
+		
 
 	public:
 
-		template<class... _Types>
-		Marine_MultLevWaterDomain(_Types&&... _Args)
-			: Marine_Entity(_Args...)
+		//- default constructor
+
+		Marine_MultLevWaterDomain()
 		{}
 
-		const auto& Domains() const
+
+		//- constructors
+
+		TnbMarine_EXPORT Marine_MultLevWaterDomain
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		);
+
+		TnbMarine_EXPORT Marine_MultLevWaterDomain
+		(
+			const std::shared_ptr<Marine_Domain>& theDomain,
+			const std::shared_ptr<Marine_Body>& theBody,
+			const std::vector<std::shared_ptr<Marine_WaterDomain>>& theWaters
+		);
+
+		TnbMarine_EXPORT Marine_MultLevWaterDomain
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			const std::shared_ptr<Marine_Domain>& theDomain,
+			const std::shared_ptr<Marine_Body>& theBody, 
+			const std::vector<std::shared_ptr<Marine_WaterDomain>>& theWaters
+		);
+
+		TnbMarine_EXPORT Marine_MultLevWaterDomain
+		(
+			std::shared_ptr<Marine_Domain>&& theDomain,
+			std::shared_ptr<Marine_Body>&& theBody,
+			std::vector<std::shared_ptr<Marine_WaterDomain>>&& theWaters
+		);
+
+		TnbMarine_EXPORT Marine_MultLevWaterDomain
+		(
+			const Standard_Integer theIndex, 
+			const word& theName,
+			std::shared_ptr<Marine_Domain>&& theDomain,
+			std::shared_ptr<Marine_Body>&& theBody,
+			std::vector<std::shared_ptr<Marine_WaterDomain>>&& theWaters
+		);
+
+
+
+		//- public functions and operators
+
+		const auto& Domain() const
 		{
-			return theDomains_;
+			return theDomain_;
+		}
+
+		const auto& Body() const
+		{
+			return theBody_;
+		}
+
+		const auto& Waters() const
+		{
+			return theWaters_;
+		}
+
+		void SetBody
+		(
+			const std::shared_ptr<Marine_Body>& theBody
+		)
+		{
+			theBody_ = theBody;
+		}
+
+		void SetBody
+		(
+			std::shared_ptr<Marine_Body>&& theBody
+		)
+		{
+			theBody_ = std::move(theBody);
+		}
+
+		void SetWaters
+		(
+			const std::vector<std::shared_ptr<Marine_WaterDomain>>&& theWaters
+		)
+		{
+			theWaters_ = std::move(theWaters);
+		}
+
+		void SetWaters
+		(
+			const std::vector<std::shared_ptr<Marine_WaterDomain>>& theWaters
+		)
+		{
+			theWaters_ = theWaters;
+		}
+
+		void SetDomain
+		(
+			const std::shared_ptr<Marine_Domain>& theDomain
+		)
+		{
+			theDomain_ = theDomain;
+		}
+
+		void SetDomain
+		(
+			std::shared_ptr<Marine_Domain>&& theDomain
+		)
+		{
+			theDomain_ = std::move(theDomain);
 		}
 	};
 }
