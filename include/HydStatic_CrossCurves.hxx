@@ -34,7 +34,6 @@ namespace tnbLib
 
 		Standard_Real theVolCoeff_;
 
-		std::shared_ptr<Marine_Body> theBody_;
 		std::shared_ptr<Marine_MultLevWaterDomain> theWaters_;
 
 		std::shared_ptr<HydStatic_HeelSpacing> theHeels_;
@@ -63,7 +62,6 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT HydStatic_CrossCurves
 		(
-			const std::shared_ptr<Marine_Body>& theBody, 
 			const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters,
 			const std::shared_ptr<HydStatic_HeelSpacing>& theHeels,
 			const gp_Ax1& theAx
@@ -73,11 +71,6 @@ namespace tnbLib
 		const auto& Waters() const
 		{
 			return theWaters_;
-		}
-
-		const auto& Body() const
-		{
-			return theBody_;
 		}
 
 		const auto& Heels() const
@@ -106,14 +99,6 @@ namespace tnbLib
 		)
 		{
 			theWaters_ = theWaters;
-		}
-
-		void LoadBody
-		(
-			const std::shared_ptr<Marine_Body>& theBody
-		)
-		{
-			theBody_ = theBody;
 		}
 
 		void LoadHeels

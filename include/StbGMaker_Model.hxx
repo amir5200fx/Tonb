@@ -12,6 +12,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class Marine_Domain;
 
 	class StbGMaker_Model
 		: public StbGMaker_Entity
@@ -20,6 +21,8 @@ namespace tnbLib
 		friend class StbGMaker_Creator;
 
 		/*Private Data*/
+
+		std::shared_ptr<Marine_Domain> theDomain_;
 
 		std::shared_ptr<marineLib::Model_Hull> theHull_;
 
@@ -69,6 +72,11 @@ namespace tnbLib
 
 		//- public functions and operators
 
+		const auto& Domain() const
+		{
+			return theDomain_;
+		}
+
 		const auto& LightWeight() const
 		{
 			return theWeight_;
@@ -104,32 +112,66 @@ namespace tnbLib
 			return theSails_;
 		}
 
-		void SetHull(const std::shared_ptr<marineLib::Model_Hull>& theHull)
+		void SetDomain
+		(
+			const std::shared_ptr<Marine_Domain>& theDomain
+		)
+		{
+			theDomain_ = theDomain;
+		}
+
+		void SetDomain
+		(
+			std::shared_ptr<Marine_Domain>&& theDomain
+		)
+		{
+			theDomain_ = std::move(theDomain);
+		}
+
+		void SetHull
+		(
+			const std::shared_ptr<marineLib::Model_Hull>& theHull
+		)
 		{
 			theHull_ = theHull;
 		}
 
-		void SetHull(std::shared_ptr<marineLib::Model_Hull>&& theHull)
+		void SetHull
+		(
+			std::shared_ptr<marineLib::Model_Hull>&& theHull
+		)
 		{
 			theHull_ = std::move(theHull);
 		}
 
-		void SetSail(const std::vector<std::shared_ptr<marineLib::Model_Sail>>& theSails)
+		void SetSail
+		(
+			const std::vector<std::shared_ptr<marineLib::Model_Sail>>& theSails
+		)
 		{
 			theSails_ = theSails;
 		}
 
-		void SetSail(std::vector<std::shared_ptr<marineLib::Model_Sail>>&& theSails)
+		void SetSail
+		(
+			std::vector<std::shared_ptr<marineLib::Model_Sail>>&& theSails
+		)
 		{
 			theSails_ = std::move(theSails);
 		}
 
-		void SetTanks(const std::vector<std::shared_ptr<marineLib::Model_Tank>>& theTanks)
+		void SetTanks
+		(
+			const std::vector<std::shared_ptr<marineLib::Model_Tank>>& theTanks
+		)
 		{
 			theTanks_ = theTanks;
 		}
 
-		void SetTanks(std::vector<std::shared_ptr<marineLib::Model_Tank>>&& theTanks)
+		void SetTanks
+		(
+			std::vector<std::shared_ptr<marineLib::Model_Tank>>&& theTanks
+		)
 		{
 			theTanks_ = std::move(theTanks);
 		}

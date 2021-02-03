@@ -35,8 +35,6 @@ namespace tnbLib
 		Standard_Real theRhoS_;
 		Standard_Real theRhoF_;
 
-		std::shared_ptr<Marine_Domain> theDomain_;
-		std::shared_ptr<marineLib::Body_Displacer> theBody_;
 		std::shared_ptr<Marine_MultLevWaterDomain> theWaters_;
 
 
@@ -126,16 +124,6 @@ namespace tnbLib
 			return theRhoF_;
 		}
 
-		const auto& Domain() const
-		{
-			return theDomain_;
-		}
-
-		const auto& Body() const
-		{
-			return theBody_;
-		}
-
 		const auto& Waters() const
 		{
 			return theWaters_;
@@ -157,22 +145,6 @@ namespace tnbLib
 		}
 
 		TnbHydStatic_EXPORT void Perform();
-
-		void LoadDomain
-		(
-			const std::shared_ptr<Marine_Domain>& theDomain
-		)
-		{
-			theDomain_ = theDomain;
-		}
-
-		void LoadBody
-		(
-			const std::shared_ptr<marineLib::Body_Displacer>& theDisplacer
-		)
-		{
-			theBody_ = theDisplacer;
-		}
 
 		void LoadWaters
 		(
