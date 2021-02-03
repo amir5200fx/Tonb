@@ -30,7 +30,6 @@ namespace tnbLib
 
 		std::shared_ptr<StbGMaker_Model> theStbModel_;
 		std::shared_ptr<Marine_Wave> theWave_;
-		std::shared_ptr<Marine_Domain> theDomain_;
 
 
 		std::shared_ptr<Marine_Water> theWater_;
@@ -80,11 +79,6 @@ namespace tnbLib
 			return theWave_;
 		}
 
-		const auto& Domain() const
-		{
-			return theDomain_;
-		}
-
 		const auto& Water() const
 		{
 			return theWater_;
@@ -109,10 +103,6 @@ namespace tnbLib
 			theWave_ = theWave;
 		}
 
-		void LoadDomain(const std::shared_ptr<Marine_Domain>& theDomain)
-		{
-			theDomain_ = theDomain;
-		}
 	};
 }
 

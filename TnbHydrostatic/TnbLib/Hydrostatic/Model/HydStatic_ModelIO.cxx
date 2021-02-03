@@ -12,7 +12,6 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_Model)
 	ar & boost::serialization::base_object<Global_Done>(*this);
 	ar & theStbModel_;
 	Marine_Wave::Save(ar, theWave_);
-	ar & theDomain_;
 
 	ar & theWater_;
 	ar & theFloatBody_;
@@ -24,7 +23,7 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_Model)
 	ar & boost::serialization::base_object<Global_Done>(*this);
 	ar & theStbModel_;
 	Marine_Wave::Load(ar, theWave_);
-	ar & theDomain_;
+
 	ar & theWater_;
 	ar & theFloatBody_;
 }

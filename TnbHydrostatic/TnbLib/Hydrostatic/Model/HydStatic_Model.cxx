@@ -35,7 +35,7 @@ void tnbLib::HydStatic_Model::CalcWater()
 			<< abort(FatalError);
 	}
 	auto domain = 
-		Marine_WaterLib::WaterDomain(*model->Hull()->Body(), Wave(), Domain(), 1.0E-6, 1.0E-4);
+		Marine_WaterLib::WaterDomain(*model->Hull()->Body(), Wave(), Wave()->Domain(), 1.0E-6, 1.0E-4);
 	Debug_Null_Pointer(domain);
 
 	theWater_ = std::move(domain->Water());
@@ -51,7 +51,7 @@ void tnbLib::HydStatic_Model::CalcFloatBody()
 			<< abort(FatalError);
 	}
 
-	if (NOT Domain())
+	if (NOT Wave()->Domain())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no domain has been found" << endl
@@ -68,7 +68,6 @@ void tnbLib::HydStatic_Model::CalcFloatBody()
 	auto waterDomain = 
 		std::make_shared<Marine_WaterDomain>
 		(
-			Domain(),
 			Water(),
 			Wave()
 			);
