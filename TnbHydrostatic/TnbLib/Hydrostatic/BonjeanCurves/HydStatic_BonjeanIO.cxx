@@ -4,8 +4,8 @@
 #include <Marine_Domain.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_Graph.hxx>
+#include <Marine_MultLevWaterDomain.hxx>
 #include <HydStatic_BnjCurve.hxx>
-#include <HydStatic_Spacing.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_Bonjean_Entity)
 {
@@ -22,7 +22,7 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_Bonjean_Entity)
 TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_Bonjean)
 {
 	ar & boost::serialization::base_object<Global_Done>(*this);
-	ar & theDomain_;
+
 	Marine_Body::Save(ar, theBody_);
 	ar & theWaters_;
 
@@ -33,7 +33,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_Bonjean)
 TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_Bonjean)
 {
 	ar & boost::serialization::base_object<Global_Done>(*this);
-	ar & theDomain_;
+
 	Marine_Body::Load(ar, theBody_);
 	ar & theWaters_;
 

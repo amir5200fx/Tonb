@@ -6,6 +6,7 @@
 #include <Marine_Water.hxx>
 #include <Marine_WaterLib.hxx>
 #include <Marine_WaterDomain.hxx>
+#include <Marine_MultLevWaterDomain.hxx>
 #include <Marine_BooleanOps.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_GraphCurve.hxx>
@@ -26,12 +27,10 @@ unsigned short tnbLib::HydStatic_Bonjean::verbose(0);
 
 tnbLib::HydStatic_Bonjean::HydStatic_Bonjean
 (
-	const std::shared_ptr<Marine_Domain>& theDomain, 
 	const std::shared_ptr<Marine_Body>& theBody,
-	const std::shared_ptr<HydStatic_Spacing>& theWaters
+	const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters
 )
-	: theDomain_(theDomain)
-	, theBody_(theBody)
+	: theBody_(theBody)
 	, theWaters_(theWaters)
 {
 	//- empty body
@@ -160,14 +159,14 @@ void tnbLib::HydStatic_Bonjean::Perform()
 			<< abort(FatalError);
 	}
 
-	if (NOT Domain())
+	if (NOT Waters()->Domain())
 	{
 		FatalErrorIn("void HydStatic_Bonjean::Perform()")
 			<< "no domain has been loaded!" << endl
 			<< abort(FatalError);
 	}
 
-	auto spacing = Waters()->Sections();
+	auto waters = Waters()->Waters();
 
 	const auto& sections = Body()->Sections();
 	if (sections.empty())
@@ -179,37 +178,44 @@ void tnbLib::HydStatic_Bonjean::Perform()
 	tableOffset qArea(Body()->NbSections());
 	for (auto& x : qArea)
 	{
-		x.resize(spacing.size(), 0);
+		x.resize(waters.size(), 0);
 	}
 
 	if (verbose)
 	{
-		Info << " - nb. of waters: " << (int)spacing.size() << endl;
+		Info << " - nb. of waters: " << (int)waters.size() << endl;
 	}
 
 	Standard_Integer i = 0;
 	Standard_Integer iter = 0;
-	for (const auto z : spacing)
+
+	std::vector<Standard_Real> spacing;
+	spacing.reserve(waters.size());
+	for (const auto& w : waters)
 	{
+		Debug_Null_Pointer(w);
+
+		spacing.push_back(w->Z());
+
 		if (verbose)
 		{
 			Info << endl;
-			Info << " - Iteration nb. " << ++iter << ", z = " << z << endl;
+			Info << " - Iteration nb. " << ++iter << ", z = " << w->Z() << endl;
 			Info << endl;
-			Info << " z = " << z << endl;
+			Info << " z = " << w->Z() << endl;
 			Info << " Still waters calculations..." << endl;
 		}
-		auto domain = Marine_WaterLib::StillWaterDomain(Body(), Domain(), z);
-		Debug_Null_Pointer(domain);
+		//auto domain = Marine_WaterLib::StillWaterDomain(Body(), Domain(), z);
+		//Debug_Null_Pointer(domain);
 
+		Debug_Null_Pointer(w->Water());
 		if (verbose)
 		{
 			Info << " Still waters are calculated successfully" << endl;
-			Info << " nb. of water sections: " << domain->Water()->NbSections() << endl;
+			Info << " nb. of water sections: " << w->Water()->NbSections() << endl;
 		}
-
-		Debug_Null_Pointer(domain->Water());
-		const auto& wSections = domain->Water()->Sections();
+	
+		const auto& wSections = w->Water()->Sections();
 
 		if (verbose > 1)
 		{

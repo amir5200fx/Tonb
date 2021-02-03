@@ -20,6 +20,7 @@ namespace tnbLib
 	class Marine_Graph;
 	class Marine_Body;
 	class Marine_Domain;
+	class Marine_MultLevWaterDomain;
 
 	struct HydStatic_Bonjean_Entity
 	{
@@ -60,9 +61,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<Marine_Body> theBody_;
-		std::shared_ptr<HydStatic_Spacing> theWaters_;
+		std::shared_ptr<Marine_MultLevWaterDomain> theWaters_;
 
 		std::vector<std::shared_ptr<entity>> theBonjean_;
 
@@ -100,18 +100,12 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT HydStatic_Bonjean
 		(
-			const std::shared_ptr<Marine_Domain>& theDomain, 
 			const std::shared_ptr<Marine_Body>& theBody,
-			const std::shared_ptr<HydStatic_Spacing>& theWaters
+			const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters
 		);
 
 
 		//- public functions and operators
-
-		const auto& Domain() const
-		{
-			return theDomain_;
-		}
 
 		const auto& Body() const
 		{
@@ -135,14 +129,6 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT void Perform();
 
-		void LoadDomain
-		(
-			const std::shared_ptr<Marine_Domain>& theDomain
-		)
-		{
-			theDomain_ = theDomain;
-		}
-
 		void LoadBody
 		(
 			const std::shared_ptr<Marine_Body>& theBody
@@ -153,7 +139,7 @@ namespace tnbLib
 
 		void LoadWaters
 		(
-			const std::shared_ptr<HydStatic_Spacing>& theWaters
+			const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters
 		)
 		{
 			theWaters_ = theWaters;
