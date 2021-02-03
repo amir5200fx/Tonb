@@ -4,6 +4,7 @@
 #include <Marine_WaterLib.hxx>
 #include <Marine_CmptLib2.hxx>
 #include <Marine_Models.hxx>
+#include <Marine_MultLevWaterDomain.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_CrsCurvesGraph.hxx>
 #include <HydStatic_Spacing.hxx>
@@ -40,9 +41,12 @@ namespace tnbLib
 	typedef std::shared_ptr<marineLib::Body_Tank> tank_t;
 	typedef std::shared_ptr<marineLib::Body_Displacer> displacer_t;
 	typedef std::shared_ptr<HydStatic_HeelSpacing> spacing_t;
+	typedef std::shared_ptr<Marine_MultLevWaterDomain> domains_t;
 
 	static spacing_t myHeels;
-	static model_t myModel;
+	static domains_t myDomains;
+
+	static size_t verbose(0);
 
 	//- global functions
 
@@ -200,49 +204,6 @@ namespace tnbLib
 		return std::move(domain);
 	}
 
-	std::shared_ptr<Marine_Domain> createDomain(const body_t& b)
-	{
-		if (b->IsHull())
-		{
-			auto body = std::dynamic_pointer_cast<marineLib::Body_Displacer>(b);
-			if (body)
-			{
-				auto t = createDomain_displacer(body);
-				return std::move(t);
-			}
-			else
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "invalid body" << endl
-					<< abort(FatalError);
-				return nullptr;
-			}
-		}
-		else if (b->IsTank())
-		{
-			auto body = std::dynamic_pointer_cast<marineLib::Body_Tank>(b);
-			if (body)
-			{
-				auto t = createDomain_tank(body);
-				return std::move(t);
-			}
-			else
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "invalid body" << endl
-					<< abort(FatalError);
-				return nullptr;
-			}
-		}
-		else
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "invalid body" << endl
-				<< abort(FatalError);
-			return nullptr;
-		}
-	}
-
 	void execute()
 	{
 		if (NOT bodyLoad_flag)
@@ -278,6 +239,13 @@ namespace tnbLib
 		boost::archive::polymorphic_text_oarchive oa(f);
 
 		oa << getCrossCurves()->CrossCurves();
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the cross-curves graph has been saved at : " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
 	}
 
 	void saveTo(const std::string& name)
@@ -294,10 +262,16 @@ namespace tnbLib
 		boost::archive::polymorphic_text_oarchive oa(f);
 
 		oa << getCrossCurves();
-		oa << myModel;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the cross-curves has been saved at : " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
 	}
 
-	void loadModel(const std::string& name)
+	void loadWaters(const std::string& name)
 	{
 		fileName fn(name);
 		std::ifstream myFile(fn);
@@ -308,46 +282,16 @@ namespace tnbLib
 		//ar >> body;
 		//Marine_Body::Load(ar, body);
 
-		ar >> myModel;
+		ar >> myDomains;
 
-		if (NOT myModel)
+		if (NOT myDomains)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " model is null" << endl
+				<< " domains is null" << endl
 				<< abort(FatalError);
 		}
 
-		const auto& bodyModel = myModel->Hull();
-		if (NOT bodyModel)
-		{
-			FatalErrorIn(FunctionSIG) << endl
-				<< " no model of displacer is found!" << endl
-				<< abort(FatalError);
-		}
-
-		const auto& body = bodyModel->Body();
-		if (NOT body)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the displacer model has no body!" << endl
-				<< abort(FatalError);
-		}
-
-		if (body->IsHull())
-		{
-			if (NOT std::dynamic_pointer_cast<marineLib::Body_Displacer>(body))
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "invalid body type!" << endl
-					<< abort(FatalError);
-			}
-		}
-		else if (body->IsSail())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "invalid body type!" << endl
-				<< abort(FatalError);
-		}
+		const auto& body = myDomains->Body();
 
 		if (body->NbSections() < 3)
 		{
@@ -356,17 +300,20 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto domain = createDomain(body);
-
-		getCrossCurves()->LoadBody(body);
-		getCrossCurves()->LoadDomain(domain);
-		getCrossCurves()->SetNbWaters(nbWaters);
+		getCrossCurves()->LoadWaters(myDomains);
 
 		gp_Ax1 ax(body->CoordinateSystem().Location(), body->CoordinateSystem().XDirection());
 
 		getCrossCurves()->SetAx(ax);
 
 		bodyLoad_flag = true;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the waters have been loaded from: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
 	}
 }
 
@@ -391,13 +338,13 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](int n)-> void {setAsymmHeels(n); }), "setAsymHeels");
 		mod->add(chaiscript::fun([](double l, double u, unsigned int n)-> void {setArbtHeels(l, u, n); }), "setHeels");
 		mod->add(chaiscript::fun([](const unsigned int n)->void {SetNbWaters(n); }), "setNbWaters");
-		mod->add(chaiscript::fun([](unsigned short i)->void {HydStatic_CrossCurves::verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {HydStatic_CrossCurves::verbose = i; verbose = i; }), "setVerbose");
 		mod->add(chaiscript::fun([](unsigned short i)-> void {Marine_CmptLib2::CrossCurve_Verbose = i; }), "setCrossCurveVerbose");
 		mod->add(chaiscript::fun([](unsigned short i)-> void {Marine_CmptLib2::LeverArm_Verbose2 = i; }), "setLeverArmVerbose");
 
 		//- io functions
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadWaters(name); }), "loadWaters");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveGraphTo(name); }), "saveGraphTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 	}
@@ -420,7 +367,7 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 	//sysLib::init_gl_marine_integration_info();
-	//FatalError.throwExceptions();
+	FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
