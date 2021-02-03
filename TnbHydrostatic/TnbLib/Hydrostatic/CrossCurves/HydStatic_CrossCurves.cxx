@@ -55,13 +55,11 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
 
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 (
-	const std::shared_ptr<Marine_Body>& theBody,
 	const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters,
 	const std::shared_ptr<HydStatic_HeelSpacing>& theHeels,
 	const gp_Ax1 & theAx
 )
 	: theWaters_(theWaters)
-	, theBody_(theBody)
 	, theHeels_(theHeels)
 	, theAx_(theAx)
 	, theVolCoeff_(0.005)
@@ -146,13 +144,6 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 		Info << endl;
 	}
 
-	if (NOT Body())
-	{
-		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
-			<< " no body is loaded!" << endl
-			<< abort(FatalError);
-	}
-
 	if (NOT Waters())
 	{
 		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
@@ -160,10 +151,18 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 			<< abort(FatalError);
 	}
 
+	const auto& wbody = Waters()->Body();
+	if (NOT wbody)
+	{
+		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
+			<< " no body is loaded!" << endl
+			<< abort(FatalError);
+	}
+
 	if (verbose)
 	{
-		Info << " Body's name: " << Body()->Name() << endl;
-		Info << " nb. of sections: " << Body()->NbSections() << endl;
+		Info << " Body's name: " << wbody->Name() << endl;
+		Info << " nb. of sections: " << wbody->NbSections() << endl;
 	}
 
 	if (NOT Waters()->Domain())
@@ -196,7 +195,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	}
 
 	const auto& heels = Heels()->Spacing();
-	auto body = Body()->Copy();
+	auto body = wbody->Copy();
 
 	//OFstream ff("bodies.plt");
 
