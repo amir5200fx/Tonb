@@ -126,7 +126,7 @@ tnbLib::Marine_BodyCmptLib::CrossCurve
 	auto params = 
 		Marine_CmptLib2::CrossCurve
 		(
-			theBody.Sections(), theWaters.Domains(), 
+			theBody.Sections(), theWaters.Waters(), 
 			x0, theK, theInfo
 		);
 	return std::move(params);
@@ -149,7 +149,7 @@ tnbLib::Marine_BodyCmptLib::CrossCurve
 	auto params =
 		Marine_CmptLib2::CrossCurve
 		(
-			theBody.Sections(), theWaters.Domains(),
+			theBody.Sections(), theWaters.Waters(),
 			x0, theK, theInfo
 		);
 	return std::move(params);
