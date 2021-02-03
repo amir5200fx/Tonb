@@ -11,6 +11,7 @@
 #include <Entity3d_Box.hxx>
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
+#include <Geo_CmptLib.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad2d_CmptLib.hxx>
 #include <Cad2d_Plane.hxx>
@@ -752,6 +753,295 @@ tnbLib::MarineBase_Tools::CalcWaterCurveLength
 	return sum;
 }
 
+tnbLib::Entity2d_Box 
+tnbLib::MarineBase_Tools::RetrieveRectangle
+(
+	const Marine_WaterCurve & theCurve, 
+	const Standard_Real xs, 
+	const Standard_Real dx
+)
+{
+	auto p0 = theCurve.FirstCoord();
+	auto p1 = theCurve.LastCoord();
+
+	auto y0 = std::min(p0.Y(), p1.Y());
+	auto y1 = std::max(p0.Y(), p1.Y());
+
+	auto x0 = xs - 0.5*dx;
+	auto x1 = xs + 0.5*dx;
+
+	auto box = Entity2d_Box(Pnt2d(x0, y0), Pnt2d(x1, y1));
+	return std::move(box);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveIx
+(
+	const Marine_WaterCurve & theCurve, 
+	const Standard_Real y0, 
+	const Standard_Real xs, 
+	const Standard_Real dx
+)
+{
+	auto b = RetrieveRectangle(theCurve, xs, dx);
+	auto t = std::make_pair(Geo_CmptLib::Ix(b, y0), Geo_CmptLib::Area(b));
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveIy
+(
+	const Marine_WaterCurve & theCurve, 
+	const Standard_Real x0,
+	const Standard_Real xs, 
+	const Standard_Real dx
+)
+{
+	auto b = RetrieveRectangle(theCurve, xs, dx);
+	auto t = std::make_pair(Geo_CmptLib::Iy(b, x0), Geo_CmptLib::Area(b));
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveMx
+(
+	const Marine_WaterCurve & theCurve,
+	const Standard_Real y0,
+	const Standard_Real xs,
+	const Standard_Real dx
+)
+{
+	auto b = RetrieveRectangle(theCurve, xs, dx);
+	auto t = std::make_pair(Geo_CmptLib::Mx(b, y0), Geo_CmptLib::Area(b));
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveMy
+(
+	const Marine_WaterCurve & theCurve,
+	const Standard_Real x0, 
+	const Standard_Real xs, 
+	const Standard_Real dx
+)
+{
+	auto b = RetrieveRectangle(theCurve, xs, dx);
+	auto t = std::make_pair(Geo_CmptLib::My(b, x0), Geo_CmptLib::Area(b));
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveIx
+(
+	const marineLib::Section_Wetted & theSection,
+	const Standard_Real y0,
+	const Standard_Real xs, 
+	const Standard_Real dx
+)
+{
+	if (theSection.DeepCondition())
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+
+	Debug_Null_Pointer(theSection.Wire());
+	const auto& wire = *theSection.Wire();
+
+	Standard_Real sum = 0;
+	Standard_Real sumA = 0;
+	for (const auto& x : wire.Edges())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& curve = x->Curve();
+		Debug_Null_Pointer(curve);
+
+		if (NOT curve->IsMarine())
+		{
+			FatalErrorIn("Standard_Real MarineBase_Tools::CalcWaterCurveLength(Args...)")
+				<< "the curve is not marine type!" << endl
+				<< abort(FatalError);
+		}
+
+		auto mCurve = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+		Debug_Null_Pointer(mCurve);
+
+		if (mCurve->IsOnWater())
+		{
+			Debug_Null_Pointer(curve->Geometry());
+
+			auto water = std::dynamic_pointer_cast<Marine_WaterCurve>(mCurve);
+			Debug_Null_Pointer(water);
+
+			auto t = CalcWaterCurveIx(*water, y0, xs, dx);
+			sum += t.first;
+			sumA += t.second;
+		}
+	}
+	auto t = std::make_pair(sum, sumA);
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveIy
+(
+	const marineLib::Section_Wetted & theSection,
+	const Standard_Real x0, 
+	const Standard_Real xs, 
+	const Standard_Real dx
+)
+{
+	if (theSection.DeepCondition())
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+
+	Debug_Null_Pointer(theSection.Wire());
+	const auto& wire = *theSection.Wire();
+
+	Standard_Real sum = 0;
+	Standard_Real sumA = 0;
+	for (const auto& x : wire.Edges())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& curve = x->Curve();
+		Debug_Null_Pointer(curve);
+
+		if (NOT curve->IsMarine())
+		{
+			FatalErrorIn("Standard_Real MarineBase_Tools::CalcWaterCurveLength(Args...)")
+				<< "the curve is not marine type!" << endl
+				<< abort(FatalError);
+		}
+
+		auto mCurve = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+		Debug_Null_Pointer(mCurve);
+
+		if (mCurve->IsOnWater())
+		{
+			Debug_Null_Pointer(curve->Geometry());
+
+			auto water = std::dynamic_pointer_cast<Marine_WaterCurve>(mCurve);
+			Debug_Null_Pointer(water);
+
+			auto t = CalcWaterCurveIy(*water, x0, xs, dx);
+			sum += t.first;
+			sumA += t.second;
+		}
+	}
+	auto t = std::make_pair(sum, sumA);
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveMx
+(
+	const marineLib::Section_Wetted & theSection, 
+	const Standard_Real y0, 
+	const Standard_Real xs,
+	const Standard_Real dx
+)
+{
+	if (theSection.DeepCondition())
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+
+	Debug_Null_Pointer(theSection.Wire());
+	const auto& wire = *theSection.Wire();
+
+	Standard_Real sum = 0;
+	Standard_Real sumA = 0;
+	for (const auto& x : wire.Edges())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& curve = x->Curve();
+		Debug_Null_Pointer(curve);
+
+		if (NOT curve->IsMarine())
+		{
+			FatalErrorIn("Standard_Real MarineBase_Tools::CalcWaterCurveLength(Args...)")
+				<< "the curve is not marine type!" << endl
+				<< abort(FatalError);
+		}
+
+		auto mCurve = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+		Debug_Null_Pointer(mCurve);
+
+		if (mCurve->IsOnWater())
+		{
+			Debug_Null_Pointer(curve->Geometry());
+
+			auto water = std::dynamic_pointer_cast<Marine_WaterCurve>(mCurve);
+			Debug_Null_Pointer(water);
+
+			auto t = CalcWaterCurveMx(*water, y0, xs, dx);
+			sum += t.first;
+			sumA += t.second;
+		}
+	}
+	auto t = std::make_pair(sum, sumA);
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveMy
+(
+	const marineLib::Section_Wetted & theSection, 
+	const Standard_Real x0, 
+	const Standard_Real xs, 
+	const Standard_Real dx
+)
+{
+	if (theSection.DeepCondition())
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+
+	Debug_Null_Pointer(theSection.Wire());
+	const auto& wire = *theSection.Wire();
+
+	Standard_Real sum = 0;
+	Standard_Real sumA = 0;
+	for (const auto& x : wire.Edges())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& curve = x->Curve();
+		Debug_Null_Pointer(curve);
+
+		if (NOT curve->IsMarine())
+		{
+			FatalErrorIn("Standard_Real MarineBase_Tools::CalcWaterCurveLength(Args...)")
+				<< "the curve is not marine type!" << endl
+				<< abort(FatalError);
+		}
+
+		auto mCurve = std::dynamic_pointer_cast<Marine_PlnCurve>(curve);
+		Debug_Null_Pointer(mCurve);
+
+		if (mCurve->IsOnWater())
+		{
+			Debug_Null_Pointer(curve->Geometry());
+
+			auto water = std::dynamic_pointer_cast<Marine_WaterCurve>(mCurve);
+			Debug_Null_Pointer(water);
+
+			auto t = CalcWaterCurveMy(*water, x0, xs, dx);
+			sum += t.first;
+			sumA += t.second;
+		}
+	}
+	auto t = std::make_pair(sum, sumA);
+	return std::move(t);
+}
+
 Standard_Real 
 tnbLib::MarineBase_Tools::CalcWaterCurveLength
 (
@@ -784,6 +1074,198 @@ tnbLib::MarineBase_Tools::CalcWaterCurveLength
 		}
 		return len;
 	}	
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveIx
+(
+	const Marine_CmpSection & theSection,
+	const Standard_Real xs,
+	const Standard_Real y0,
+	const Standard_Real dx
+)
+{
+#ifdef _DEBUG
+	Marine_SectTools::CheckTypeConsistency(theSection);
+#endif // _DEBUG
+
+	if (NOT theSection.IsXsection())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the section is not x-section!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Marine_SectTools::IsWetted(theSection))
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+	else
+	{
+		Standard_Real sum = 0;
+		Standard_Real sumA = 0;
+		for (const auto& x : theSection.Sections())
+		{
+			Debug_Null_Pointer(x);
+
+			auto wetted = Marine_SectTools::WettedSection(x);
+			Debug_Null_Pointer(wetted);
+
+			if (NOT wetted->DeepCondition())
+			{
+				auto t = CalcWaterCurveIx(*wetted, y0, xs, dx);
+				sum += t.first;
+				sumA += t.second;
+			}
+		}
+		auto t = std::make_pair(sum, sumA);
+		return std::move(t);
+	}
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveIy
+(
+	const Marine_CmpSection & theSection,
+	const Standard_Real xs,
+	const Standard_Real x0, 
+	const Standard_Real dx
+)
+{
+#ifdef _DEBUG
+	Marine_SectTools::CheckTypeConsistency(theSection);
+#endif // _DEBUG
+
+	if (NOT theSection.IsXsection())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the section is not x-section!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Marine_SectTools::IsWetted(theSection))
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+	else
+	{
+		Standard_Real sum = 0;
+		Standard_Real sumA = 0;
+		for (const auto& x : theSection.Sections())
+		{
+			Debug_Null_Pointer(x);
+
+			auto wetted = Marine_SectTools::WettedSection(x);
+			Debug_Null_Pointer(wetted);
+
+			if (NOT wetted->DeepCondition())
+			{
+				auto t = CalcWaterCurveIy(*wetted, x0, xs, dx);
+				sum += t.first;
+				sumA += t.second;
+			}
+		}
+		auto t = std::make_pair(sum, sumA);
+		return std::move(t);
+	}
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveMx
+(
+	const Marine_CmpSection & theSection, 
+	const Standard_Real xs,
+	const Standard_Real y0, 
+	const Standard_Real dx
+)
+{
+#ifdef _DEBUG
+	Marine_SectTools::CheckTypeConsistency(theSection);
+#endif // _DEBUG
+
+	if (NOT theSection.IsXsection())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the section is not x-section!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Marine_SectTools::IsWetted(theSection))
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+	else
+	{
+		Standard_Real sum = 0;
+		Standard_Real sumA = 0;
+		for (const auto& x : theSection.Sections())
+		{
+			Debug_Null_Pointer(x);
+
+			auto wetted = Marine_SectTools::WettedSection(x);
+			Debug_Null_Pointer(wetted);
+
+			if (NOT wetted->DeepCondition())
+			{
+				auto t = CalcWaterCurveMx(*wetted, y0, xs, dx);
+				sum += t.first;
+				sumA += t.second;
+			}
+		}
+		auto t = std::make_pair(sum, sumA);
+		return std::move(t);
+	}
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcWaterCurveMy
+(
+	const Marine_CmpSection & theSection, 
+	const Standard_Real xs,
+	const Standard_Real x0,
+	const Standard_Real dx
+)
+{
+#ifdef _DEBUG
+	Marine_SectTools::CheckTypeConsistency(theSection);
+#endif // _DEBUG
+
+	if (NOT theSection.IsXsection())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the section is not x-section!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Marine_SectTools::IsWetted(theSection))
+	{
+		auto t = std::make_pair(0, 0);
+		return std::move(t);
+	}
+	else
+	{
+		Standard_Real sum = 0;
+		Standard_Real sumA = 0;
+		for (const auto& x : theSection.Sections())
+		{
+			Debug_Null_Pointer(x);
+
+			auto wetted = Marine_SectTools::WettedSection(x);
+			Debug_Null_Pointer(wetted);
+
+			if (NOT wetted->DeepCondition())
+			{
+				auto t = CalcWaterCurveMy(*wetted, x0, xs, dx);
+				sum += t.first;
+				sumA += t.second;
+			}
+		}
+		auto t = std::make_pair(sum, sumA);
+		return std::move(t);
+	}
 }
 
 Standard_Real 
@@ -899,6 +1381,203 @@ tnbLib::MarineBase_Tools::CalcWaterPlaneArea
 	}
 	return std::move(values);
 }
+
+namespace tnbLib
+{
+
+	std::vector<Standard_Real> CalcDx(const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections)
+	{
+		std::vector<Standard_Real> Dx(theSections.size(), 0);
+		for (size_t i = 1; i < theSections.size() - 1; i++)
+		{
+			auto dx0 = theSections[i]->X() - theSections[i - 1]->X();
+			auto dx1 = theSections[i + 1]->X() - theSections[i]->X();
+
+			auto dx = MEAN(dx0, dx1);
+
+			Dx[i] = dx;
+		}
+
+		Dx[0] = theSections[1]->X() - theSections[0]->X();
+		Dx[Dx.size() - 1] = theSections[theSections.size() - 1]->X() - theSections[theSections.size() - 2]->X();
+		return std::move(Dx);
+	}
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcWaterPlaneIx
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const Standard_Real y0
+)
+{
+	if (theSections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body!" << endl
+			<< abort(FatalError);
+	}
+
+	auto dx = CalcDx(theSections);
+
+	std::vector<marineLib::xSectionParam> values;
+	values.reserve(theSections.size());
+
+	size_t k = 0;
+	for (const auto& sect : theSections)
+	{
+		Debug_Null_Pointer(sect);
+
+		marineLib::xSectionParam p;
+		p.x = sect->X();
+
+		auto t = CalcWaterCurveIx(*sect, sect->X(), y0, dx[k++]);
+		if (t.second <= gp::Resolution())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid area value has been detected!" << endl
+				<< abort(FatalError);
+		}
+		p.value = t.first / t.second;
+
+		values.push_back(std::move(p));
+	}
+	return std::move(values);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam>
+tnbLib::MarineBase_Tools::CalcWaterPlaneIy
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const Standard_Real x0
+)
+{
+	if (theSections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body!" << endl
+			<< abort(FatalError);
+	}
+
+	auto dx = CalcDx(theSections);
+
+	std::vector<marineLib::xSectionParam> values;
+	values.reserve(theSections.size());
+
+	size_t k = 0;
+	for (const auto& sect : theSections)
+	{
+		Debug_Null_Pointer(sect);
+
+		marineLib::xSectionParam p;
+		p.x = sect->X();
+
+		auto t = CalcWaterCurveIy(*sect, sect->X(), x0, dx[k++]);
+		if (t.second <= gp::Resolution())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid area value has been detected!" << endl
+				<< abort(FatalError);
+		}
+		p.value = t.first / t.second;
+
+		values.push_back(std::move(p));
+	}
+	return std::move(values);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcWaterPlaneMx
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const Standard_Real y0
+)
+{
+	if (theSections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body!" << endl
+			<< abort(FatalError);
+	}
+
+	auto dx = CalcDx(theSections);
+
+	std::vector<marineLib::xSectionParam> values;
+	values.reserve(theSections.size());
+
+	size_t k = 0;
+	for (const auto& sect : theSections)
+	{
+		Debug_Null_Pointer(sect);
+
+		marineLib::xSectionParam p;
+		p.x = sect->X();
+
+		auto t = CalcWaterCurveMx(*sect, sect->X(), y0, dx[k++]);
+		if (t.second <= gp::Resolution())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid area value has been detected!" << endl
+				<< abort(FatalError);
+		}
+		p.value = t.first / t.second;
+
+		values.push_back(std::move(p));
+	}
+	return std::move(values);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcWaterPlaneMy
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const Standard_Real x0
+)
+{
+	if (theSections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body!" << endl
+			<< abort(FatalError);
+	}
+
+	auto dx = CalcDx(theSections);
+
+	std::vector<marineLib::xSectionParam> values;
+	values.reserve(theSections.size());
+
+	size_t k = 0;
+	for (const auto& sect : theSections)
+	{
+		Debug_Null_Pointer(sect);
+
+		marineLib::xSectionParam p;
+		p.x = sect->X();
+
+		auto t = CalcWaterCurveMy(*sect, sect->X(), x0, dx[k++]);
+		if (t.second <= gp::Resolution())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid area value has been detected!" << endl
+				<< abort(FatalError);
+		}
+		p.value = t.first / t.second;
+
+		values.push_back(std::move(p));
+	}
+	return std::move(values);
+}
+
+//std::vector<tnbLib::marineLib::xSectionParam> 
+//tnbLib::MarineBase_Tools::CalcWaterPlaneIx
+//(
+//	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+//	const Standard_Real y0, 
+//	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+//)
+//{
+//	return std::vector<marineLib::xSectionParam>();
+//}
 
 tnbLib::Pnt3d 
 tnbLib::MarineBase_Tools::CalcCentreProductVolume

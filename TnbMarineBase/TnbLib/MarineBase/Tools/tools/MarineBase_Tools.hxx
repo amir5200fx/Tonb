@@ -11,6 +11,7 @@
 #include <Marine_BodiesFwd.hxx>
 #include <Marine_xSectionParam.hxx>
 #include <Marine_Module.hxx>
+#include <Marine_PlnCurvesFwd.hxx>
 
 #include <memory>
 #include <vector>
@@ -237,11 +238,127 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
+		static TnbMarine_EXPORT Entity2d_Box 
+			RetrieveRectangle
+			(
+				const Marine_WaterCurve& theCurve, 
+				const Standard_Real xs, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveIx
+			(
+				const Marine_WaterCurve& theCurve, 
+				const Standard_Real y0, 
+				const Standard_Real xs, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveIy
+			(
+				const Marine_WaterCurve& theCurve,
+				const Standard_Real x0, 
+				const Standard_Real xs,
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveMx
+			(
+				const Marine_WaterCurve& theCurve, 
+				const Standard_Real y0, 
+				const Standard_Real xs, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveMy
+			(
+				const Marine_WaterCurve& theCurve, 
+				const Standard_Real x0, 
+				const Standard_Real xs, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveIx
+			(
+				const marineLib::Section_Wetted& theSection,
+				const Standard_Real y0, 
+				const Standard_Real xs,
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveIy
+			(
+				const marineLib::Section_Wetted& theSection,
+				const Standard_Real x0,
+				const Standard_Real xs, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveMx
+			(
+				const marineLib::Section_Wetted& theSection, 
+				const Standard_Real y0,
+				const Standard_Real xs, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveMy
+			(
+				const marineLib::Section_Wetted& theSection,
+				const Standard_Real x0, 
+				const Standard_Real xs,
+				const Standard_Real dx
+			);
+
 		static TnbMarine_EXPORT Standard_Real
 			CalcWaterCurveLength
 			(
 				const Marine_CmpSection& theSection,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveIx
+			(
+				const Marine_CmpSection& theSection,
+				const Standard_Real xs,
+				const Standard_Real y0,
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveIy
+			(
+				const Marine_CmpSection& theSection, 
+				const Standard_Real xs,
+				const Standard_Real x0, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveMx
+			(
+				const Marine_CmpSection& theSection,
+				const Standard_Real xs,
+				const Standard_Real y0, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcWaterCurveMy
+			(
+				const Marine_CmpSection& theSection,
+				const Standard_Real xs,
+				const Standard_Real x0,
+				const Standard_Real dx
 			);
 
 		/*static TnbMarine_EXPORT Standard_Real
@@ -282,6 +399,34 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcWaterPlaneIx
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+				const Standard_Real y0
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcWaterPlaneIy
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real x0
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcWaterPlaneMx
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+				const Standard_Real y0
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcWaterPlaneMy
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real x0
 			);
 
 		static TnbMarine_EXPORT Pnt3d
