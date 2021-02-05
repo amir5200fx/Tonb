@@ -509,26 +509,33 @@ tnbLib::marineLib::KB
 tnbLib::Marine_CmptLib::CalcKB
 (
 	const marineLib::Body_Wetted& theBody,
+	const marineLib::DISPV& theDispl,
 	const Marine_BaseLine & theBase,
 	const std::shared_ptr<info>& theInfo
 )
 {
+	if (theDispl() <= gp::Resolution())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid value of the volume has been detected!" << endl
+			<< abort(FatalError);
+	}
 	const auto& loc = theBase.BaseLine().Location();
 
-	Standard_Real sumA = 0;
-	Standard_Real product = 0;
+	std::vector<marineLib::xSectionParam> yQ;
+	yQ.reserve(theBody.Sections().size());
 	for (const auto& x : theBody.Sections())
 	{
 		Debug_Null_Pointer(x);
 
 		auto zb = MarineBase_Tools::CalcYCentre(*x, theInfo);
 		auto area = MarineBase_Tools::CalcArea(*x, theInfo);
-		
-		product += zb * area;
-		sumA += area;
+
+		auto p = marineLib::xSectionParam{ x->X(), zb*area };
+		yQ.push_back(std::move(p));
 	}
 
-	const auto zbar = product / sumA;
+	const auto zbar = MarineBase_Tools::CalcArea(yQ, theInfo) / theDispl();
 	marineLib::KB param(zbar - loc.Z());
 	return std::move(param);
 }
