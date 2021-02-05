@@ -97,7 +97,7 @@ namespace tnbLib
 	void execute()
 	{
 		const auto& dim = myModel->Domain();
-		const auto& b = *dim->Dim();
+		auto b = Marine_BodyTools::BoundingBox(*myModel->Hull()->Body());
 
 		auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), (int)nbWaters);
 		myDomains = Marine_WaterLib::MultiLevelsStillWaterDomain(*getDisplacer(), dim, *Z);
@@ -117,6 +117,13 @@ namespace tnbLib
 		boost::archive::polymorphic_text_oarchive oa(f);
 
 		oa << myDomains;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the waters is saved in: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
 	}
 }
 
