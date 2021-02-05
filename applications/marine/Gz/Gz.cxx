@@ -26,7 +26,7 @@ namespace tnbLib
 	static const unsigned int DEFAULT_NB_DIVISIONS_HIGH = 60;
 
 	static const auto myGz = std::make_shared<HydStatic_GZ>();
-	static bool verbose = false;
+	static size_t verbose(0);
 	static auto nPnts = DEFAULT_NB_DIVISIONS_LOW;
 
 	typedef std::shared_ptr<StbGMaker_Model> model_t;
@@ -87,9 +87,9 @@ namespace tnbLib
 		}
 	}
 
-	void setVerbose(bool v)
+	void setVerbose(int v)
 	{
-		HydStatic_GZ::verbose = v;
+		HydStatic_GZ::verbose = (bool)v;
 		verbose = v;
 	}
 
@@ -180,6 +180,13 @@ namespace tnbLib
 		const auto& curve = myGz->RightingArm();
 		auto pnts = getPoints(curve->Geometry());
 		Io::ExportCurve(pnts, f);
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the Gz curve is exported to: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
 	}
 }
 
@@ -196,7 +203,7 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](bool v)->void {setVerbose(v); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned int i)->void {setVerbose(i); }), "setVerbose");
 		//mod->add(chaiscript::fun([](double x)->void {setKG(x); }), "setKG");
 		mod->add(chaiscript::fun([](double x)->void {setDispv(x); }), "setDispv");
 		mod->add(chaiscript::fun([](double x)->void {setVcg(x); }), "setVcg");
