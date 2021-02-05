@@ -68,6 +68,13 @@ namespace tnbLib
 
 	void loadBonjean(const std::string& name)
 	{
+		if (verbose)
+		{
+			Info << endl;
+			Info << " loading the Bonjean-curves..." << endl;
+			Info << endl;
+		}
+
 		fileName fn(name);
 		std::ifstream myFile(fn);
 
