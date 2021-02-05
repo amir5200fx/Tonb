@@ -13,6 +13,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_HydCurves)
 
 	ar & RudderAxis_;
 	ar & theRudderAxisLoc_;
+	ar & theDisplFactor_;
 
 	ar & theGraph_;
 }
@@ -25,6 +26,7 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::HydStatic_HydCurves)
 
 	ar & RudderAxis_;
 	ar & theRudderAxisLoc_;
+	ar & theDisplFactor_;
 
 	ar & theGraph_;
 }

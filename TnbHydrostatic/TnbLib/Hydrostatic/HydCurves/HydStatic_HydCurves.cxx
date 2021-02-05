@@ -20,6 +20,15 @@
 
 size_t tnbLib::HydStatic_HydCurves::verbose(0);
 
+const Standard_Real tnbLib::HydStatic_HydCurves::DEFAULT_RHOFW(1.0);
+const Standard_Real tnbLib::HydStatic_HydCurves::DEFAULT_RHOSW(1.25);
+
+namespace tnbLib
+{
+
+	static bool nullifyMidSect = false;
+}
+
 tnbLib::marineLib::TM 
 tnbLib::HydStatic_HydCurves::CalcTM
 (
@@ -30,6 +39,7 @@ tnbLib::HydStatic_HydCurves::CalcTM
 )
 {
 	Debug_Null_Pointer(theBody);
+
 	if (NOT theBody->Mid())
 	{
 		if (verbose)
@@ -61,9 +71,12 @@ tnbLib::HydStatic_HydCurves::CalcTM
 		{
 			Info << " midShip section is added to the wetted body, successfully!" << endl;
 		}
+
+		nullifyMidSect = true;
 	}
 
 	auto par = Marine_CmptLib::CalcTM(*theBody);
+
 	return std::move(par);
 }
 
@@ -110,6 +123,8 @@ tnbLib::HydStatic_HydCurves::CalcParameters
 	const std::shared_ptr<info>& theInfo
 )
 {
+	nullifyMidSect = false;
+
 	marineLib::APP app;
 	if (RudderAxis())
 	{
@@ -200,9 +215,15 @@ tnbLib::HydStatic_HydCurves::CalcParameters
 
 	auto mct = Marine_CmptLib::CalcMCT(bml, dispv, lpp);
 
-	auto kb = Marine_CmptLib::CalcKB(body, theBase, theInfo);
+	auto kb = Marine_CmptLib::CalcKB(body, dispv, theBase, theInfo);
 	auto kml = Marine_CmptLib::CalcKML(kb, bml);
 	auto km = Marine_CmptLib::CalcKM(kb, bm);
+
+	if (nullifyMidSect)
+	{
+		//- remove the mid-section
+		theBody->NullifyMidSection();
+	}
 
 	auto t = std::make_tuple
 	(
@@ -257,26 +278,28 @@ void tnbLib::HydStatic_HydCurves::Perform()
 		xDispv,
 		xDispsw,
 		xDispfw;
-	xCb.reserve(nbWaters);
-	xCm.reserve(nbWaters);
-	xCp.reserve(nbWaters);
-	xCwl.reserve(nbWaters);
-	xLcf.reserve(nbWaters);
-	xLcb.reserve(nbWaters);
-	xAw.reserve(nbWaters);
-	xMct.reserve(nbWaters);
-	xKml.reserve(nbWaters);
-	xKm.reserve(nbWaters);
-	xKb.reserve(nbWaters);
-	xDispv.reserve(nbWaters);
-	xDispsw.reserve(nbWaters);
-	xDispfw.reserve(nbWaters);
+	xCb.reserve(nbWaters - 1);
+	xCm.reserve(nbWaters - 1);
+	xCp.reserve(nbWaters - 1);
+	xCwl.reserve(nbWaters - 1);
+	xLcf.reserve(nbWaters - 1);
+	xLcb.reserve(nbWaters - 1);
+	xAw.reserve(nbWaters - 1);
+	xMct.reserve(nbWaters - 1);
+	xKml.reserve(nbWaters - 1);
+	xKm.reserve(nbWaters - 1);
+	xKb.reserve(nbWaters - 1);
+	xDispv.reserve(nbWaters - 1);
+	xDispsw.reserve(nbWaters - 1);
+	xDispfw.reserve(nbWaters - 1);
 
-	for (const auto& x : Waters()->Waters())
+	const auto& waters = Waters()->Waters();
+	for (size_t i = 0; i < waters.size() - 1; i++)
 	{
+		const auto& x = waters[i];
 		Debug_Null_Pointer(x);
 
-		const auto& loc = x->CoordinateSystem().Location();
+		//const auto& loc = x->CoordinateSystem().Location();
 		auto wetted = 
 			std::dynamic_pointer_cast<marineLib::Body_Wetted>
 			(
@@ -292,46 +315,46 @@ void tnbLib::HydStatic_HydCurves::Perform()
 				sysLib::gl_marine_integration_info
 			);
 
-		auto cbi = hydStcGphLib::xDraft{ loc.Z(),cb() };
+		auto cbi = hydStcGphLib::xDraft{ x->Z(),cb() };
 		xCb.push_back(std::move(cbi));
 
-		auto cmi = hydStcGphLib::xDraft{ loc.Z(),cm() };
+		auto cmi = hydStcGphLib::xDraft{ x->Z(),cm() };
 		xCm.push_back(std::move(cmi));
 
-		auto cpi = hydStcGphLib::xDraft{ loc.Z(),cp() };
+		auto cpi = hydStcGphLib::xDraft{ x->Z(),cp() };
 		xCp.push_back(std::move(cpi));
 
-		auto cwli = hydStcGphLib::xDraft{ loc.Z(),cwl() };
+		auto cwli = hydStcGphLib::xDraft{ x->Z(),cwl() };
 		xCwl.push_back(std::move(cwli));
 
-		auto lcfi = hydStcGphLib::xDraft{ loc.Z(),lcf() };
+		auto lcfi = hydStcGphLib::xDraft{ x->Z(),lcf() };
 		xLcf.push_back(std::move(lcfi));
 
-		auto lcbi = hydStcGphLib::xDraft{ loc.Z(),lcb() };
+		auto lcbi = hydStcGphLib::xDraft{ x->Z(),lcb() };
 		xLcb.push_back(std::move(lcbi));
 
-		auto awi = hydStcGphLib::xDraft{ loc.Z(),aw() };
+		auto awi = hydStcGphLib::xDraft{ x->Z(),aw() };
 		xAw.push_back(std::move(awi));
 
-		auto mcti = hydStcGphLib::xDraft{ loc.Z(),mct() };
+		auto mcti = hydStcGphLib::xDraft{ x->Z(),mct() };
 		xMct.push_back(std::move(mcti));
 
-		auto kmli = hydStcGphLib::xDraft{ loc.Z(),kml() };
+		auto kmli = hydStcGphLib::xDraft{ x->Z(),kml() };
 		xKml.push_back(std::move(kmli));
 
-		auto kmi = hydStcGphLib::xDraft{ loc.Z(),km() };
+		auto kmi = hydStcGphLib::xDraft{ x->Z(),km() };
 		xKm.push_back(std::move(kmi));
 
-		auto kbi = hydStcGphLib::xDraft{ loc.Z(),kb() };
+		auto kbi = hydStcGphLib::xDraft{ x->Z(),kb() };
 		xKb.push_back(std::move(kbi));
 
-		auto dispvi = hydStcGphLib::xDraft{ loc.Z(),dispv() };
+		auto dispvi = hydStcGphLib::xDraft{ x->Z(),dispv() };
 		xDispv.push_back(std::move(dispvi));
 
-		auto dispswi = hydStcGphLib::xDraft{ loc.Z(), dispv()*RhoSW() };
+		auto dispswi = hydStcGphLib::xDraft{ x->Z(), dispv()*(RhoSW() + DisplFactor()) };
 		xDispsw.push_back(std::move(dispswi));
 
-		auto dispfwi = hydStcGphLib::xDraft{ loc.Z(), dispv()*RhoFW() };
+		auto dispfwi = hydStcGphLib::xDraft{ x->Z(), dispv()*(RhoFW() + DisplFactor()) };
 		xDispfw.push_back(std::move(dispfwi));
 	}
 
@@ -339,19 +362,33 @@ void tnbLib::HydStatic_HydCurves::Perform()
 	curves.reserve(14);
 	
 	auto cbCurve = hydStcGphLib::CB::Curve(xCb);
+	cbCurve->SetName("CB");
 	auto cmCurve = hydStcGphLib::CM::Curve(xCm);
+	cmCurve->SetName("CM");
 	auto cpCurve = hydStcGphLib::CP::Curve(xCp);
+	cpCurve->SetName("CP");
 	auto cwlCurve = hydStcGphLib::CWL::Curve(xCwl);
+	cwlCurve->SetName("CWL");
 	auto lcfCurve = hydStcGphLib::LCF::Curve(xLcf);
+	lcfCurve->SetName("LCF");
 	auto lcbCurve = hydStcGphLib::LCB::Curve(xLcb);
+	lcbCurve->SetName("LCB");
 	auto awCurve = hydStcGphLib::AW::Curve(xAw);
+	awCurve->SetName("AW");
 	auto mctCurve = hydStcGphLib::MCT::Curve(xMct);
+	mctCurve->SetName("MCT");
 	auto kmlCurve = hydStcGphLib::KML::Curve(xKml);
+	kmlCurve->SetName("KML");
 	auto kmCurve = hydStcGphLib::KM::Curve(xKm);
+	kmCurve->SetName("KM");
 	auto kbCurve = hydStcGphLib::KB::Curve(xKb);
+	kbCurve->SetName("KB");
 	auto dispvCurve = hydStcGphLib::DISPV::Curve(xDispv);
+	dispvCurve->SetName("DISPV");
 	auto dispswCurve = hydStcGphLib::DISPV::Curve(xDispsw);
+	dispswCurve->SetName("DISPSW");
 	auto dispfwCurve = hydStcGphLib::DISPV::Curve(xDispfw);
+	dispfwCurve->SetName("DISPFW");
 
 	curves.push_back(std::move(cbCurve));
 	curves.push_back(std::move(cmCurve));
@@ -370,6 +407,7 @@ void tnbLib::HydStatic_HydCurves::Perform()
 
 	auto & graph = GraphRef();
 
+	graph = std::make_shared<HydStatic_HydCurvesGraph>(0, "Hydrostatic-Curves");
 	graph->Perform(std::move(curves));
 	Debug_If_Condition_Message(NOT graph->IsDone(), "the algorihm is not performed!");
 
