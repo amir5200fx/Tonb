@@ -28,6 +28,7 @@
 #include <Marine_SectTools.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <UnitSystem.hxx>
+#include <TecPlot.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -46,6 +47,76 @@
 #include <Geom2dAPI_Interpolate.hxx>
 #include <TColgp_HArray1OfPnt2d.hxx>
 #include <StdFail_NotDone.hxx>
+
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_spline.h>
+
+namespace tnbLib
+{
+
+	static const unsigned int MIN_NB_POINTS_INTERPOLATION = 25;
+
+	std::vector<Standard_Real> TessellateX(const std::vector<Standard_Real>& x)
+	{
+		std::vector<Standard_Real> X;
+		X.reserve(2 * x.size() - 1);
+		X.push_back(x[0]);
+		for (size_t i = 1; i < x.size(); i++)
+		{
+			auto xm = MEAN(x[i - 1], x[i]);
+			X.push_back(xm);
+			X.push_back(x[i]);
+		}
+		if (X.size() >= MIN_NB_POINTS_INTERPOLATION)
+		{
+			return std::move(X);
+		}
+		else
+		{
+			auto xs = TessellateX(X);
+			return std::move(xs);
+		}
+	}
+
+	std::vector<Standard_Real> TessellateX(const double* x, size_t n)
+	{
+		std::vector<Standard_Real> xt;
+		xt.reserve(n);
+		for (size_t i = 0; i < n; i++)
+		{
+			xt.push_back(x[i]);
+		}
+		auto xs = TessellateX(xt);
+		return std::move(xs);
+	}
+
+	std::vector<marineLib::xSectionParam> SteffenTessellation(const std::vector<marineLib::xSectionParam>& theQ)
+	{
+		auto x = new double[theQ.size()];
+		auto y = new double[theQ.size()];
+
+		for (size_t i = 0; i < theQ.size(); i++)
+		{
+			x[i] = theQ[i].x;
+			y[i] = theQ[i].value;
+		}
+
+		gsl_interp_accel *acc = gsl_interp_accel_alloc();
+		gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, theQ.size());
+		gsl_spline_init(spline_steffen, x, y, theQ.size());
+
+		auto xt = TessellateX(x, theQ.size());
+		std::vector<marineLib::xSectionParam> Q;
+		Q.reserve(xt.size());
+		for (auto xi : xt)
+		{
+			double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
+			auto p = marineLib::xSectionParam{ xi,yi_steffen };
+			Q.push_back(p);
+		}
+		return std::move(Q);
+	}
+}
 
 tnbLib::Entity2d_Box
 tnbLib::MarineBase_Tools::CalcBoundingBox2D
@@ -109,12 +180,22 @@ tnbLib::MarineBase_Tools::Curve
 			<< abort(FatalError);
 	}
 
+	std::vector<marineLib::xSectionParam> Q;
+	if (theQ.size() < MIN_NB_POINTS_INTERPOLATION)
+	{
+		Q = SteffenTessellation(theQ);
+	}
+	else
+	{
+		Q = theQ;
+	}
+
 	Handle(TColgp_HArray1OfPnt2d) PtsPtr = 
-		new TColgp_HArray1OfPnt2d(1, (Standard_Integer)theQ.size());
+		new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Q.size());
 	auto& Pts = *PtsPtr;
 
 	Standard_Integer K = 0;
-	for (const auto& x : theQ)
+	for (const auto& x : Q)
 	{
 		Pts.SetValue(++K, gp_Pnt2d(x.x, x.value));
 	}
@@ -170,11 +251,21 @@ tnbLib::MarineBase_Tools::CalcArea
 			<< abort(FatalError);
 	}
 
-	Handle(TColgp_HArray1OfPnt2d) PtsPtr = new TColgp_HArray1OfPnt2d(1, (Standard_Integer)theQ.size());
+	std::vector<marineLib::xSectionParam> Q;
+	if (theQ.size() < MIN_NB_POINTS_INTERPOLATION)
+	{
+		Q = SteffenTessellation(theQ);
+	}
+	else
+	{
+		Q = theQ;
+	}
+
+	Handle(TColgp_HArray1OfPnt2d) PtsPtr = new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Q.size());
 	auto& Pts = *PtsPtr;
 
 	Standard_Integer K = 0;
-	for (const auto& x : theQ)
+	for (const auto& x : Q)
 	{
 		Pts.SetValue(++K, gp_Pnt2d(x.x, x.value));
 	}
@@ -191,6 +282,19 @@ tnbLib::MarineBase_Tools::CalcArea
 			<< "Failed to interpolation!"
 			<< abort(FatalError);
 	}
+
+	/*OFstream ff("curve.plt");
+	auto nn = 50;
+	std::vector<Pnt2d> pp;
+	pp.reserve(nn+1);
+	const auto& cc = Interpolation.Curve();
+	auto dx = (cc->LastParameter() - cc->FirstParameter()) / (nn);
+	for (size_t i = 0; i <= nn; i++)
+	{
+		auto x = cc->FirstParameter() + i * dx;
+		pp.push_back(cc->Value(x));
+	}
+	Io::ExportCurve(pp, ff);*/
 
 	try
 	{
@@ -388,6 +492,47 @@ tnbLib::MarineBase_Tools::CalcIy
 }
 
 Standard_Real 
+tnbLib::MarineBase_Tools::CalcMx
+(
+	const std::shared_ptr<Marine_Section>& theSection,
+	const Standard_Real x0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	Debug_Null_Pointer(theSection);
+	if (NOT theSection->Wire())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid section" << endl
+			<< abort(FatalError);
+	}
+
+	const auto innerSections = Marine_SectTools::RetrieveInners(theSection);
+	if (innerSections.size())
+	{
+		const auto outerMx = Cad2d_CmptLib::Mx(*theSection->Wire(), x0, theInfo);
+		//Debug_If_Condition(outerIy < theInfo->Tolerance());
+
+		auto innerMx = (Standard_Real)0;
+		for (const auto& x : innerSections)
+		{
+			Debug_Null_Pointer(x);
+			auto iy = Cad2d_CmptLib::Mx(*x->Wire(), x0, theInfo);
+
+			//Debug_If_Condition(iy > theInfo->Tolerance());
+			innerMx += iy;
+		}
+		return outerMx + innerMx;
+	}
+	else
+	{
+		const auto outerMx = Cad2d_CmptLib::Mx(*theSection->Wire(), x0, theInfo);
+		//Debug_If_Condition(outerIy < theInfo->Tolerance());
+		return outerMx;
+	}
+}
+
+Standard_Real 
 tnbLib::MarineBase_Tools::CalcMy
 (
 	const std::shared_ptr<Marine_Section>& theSection,
@@ -426,6 +571,26 @@ tnbLib::MarineBase_Tools::CalcMy
 		//Debug_If_Condition(outerIy < theInfo->Tolerance());
 		return outerMy;
 	}
+}
+
+Standard_Real 
+tnbLib::MarineBase_Tools::CalcMx
+(
+	const Marine_CmpSection & theSection,
+	const Standard_Real x0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+#ifdef _DEBUG
+	Marine_SectTools::CheckTypeConsistency(theSection);
+#endif // _DEBUG
+	Standard_Real sum = 0;
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+		sum += CalcMx(x, x0, theInfo);
+	}
+	return sum;
 }
 
 Standard_Real 
@@ -564,7 +729,24 @@ tnbLib::MarineBase_Tools::CalcCentre
 	}
 	else
 	{
-		auto c0 = Cad2d_CmptLib::Centre(*theSection->Wire(), theInfo);
+		auto mx = Cad2d_CmptLib::Mx(*theSection->Wire(), 0, theInfo);
+		for (const auto& x : innerSections)
+		{
+			Debug_Null_Pointer(x);
+			mx += Cad2d_CmptLib::Mx(*theSection->Wire(), 0, theInfo);
+		}
+
+		auto my = Cad2d_CmptLib::My(*theSection->Wire(), 0, theInfo);
+		for (const auto& x : innerSections)
+		{
+			Debug_Null_Pointer(x);
+			my += Cad2d_CmptLib::My(*theSection->Wire(), 0, theInfo);
+		}
+
+		auto area = CalcArea(theSection, theInfo);
+		Pnt2d c(my / area, mx / area);
+		return std::move(c);
+		/*auto c0 = Cad2d_CmptLib::Centre(*theSection->Wire(), theInfo);
 		auto h0 = Cad2d_CmptLib::Area(*theSection->Wire(), theInfo);
 
 		std::vector<Pnt2d> cs;
@@ -597,7 +779,7 @@ tnbLib::MarineBase_Tools::CalcCentre
 			sumA += x;
 		}
 
-		return sum / sumA;
+		return sum / sumA;*/
 	}
 }
 
@@ -608,7 +790,12 @@ tnbLib::MarineBase_Tools::CalcCentre
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
-	std::vector<Pnt2d> cs;
+	const auto mx = CalcMx(theSection, 0, theInfo);
+	const auto my = CalcMy(theSection, 0, theInfo);
+	const auto area = CalcArea(theSection, theInfo);
+	Pnt2d c(my / area, mx / area);
+	return std::move(c);
+	/*std::vector<Pnt2d> cs;
 	cs.reserve(theSection.NbSections());
 
 	std::vector<Standard_Real> h;
@@ -641,7 +828,7 @@ tnbLib::MarineBase_Tools::CalcCentre
 		sumA += x;
 	}
 
-	return sum / sumA;
+	return sum / sumA;*/
 }
 
 Standard_Real 
@@ -764,8 +951,8 @@ tnbLib::MarineBase_Tools::RetrieveRectangle
 	auto p0 = theCurve.FirstCoord();
 	auto p1 = theCurve.LastCoord();
 
-	auto y0 = std::min(p0.Y(), p1.Y());
-	auto y1 = std::max(p0.Y(), p1.Y());
+	auto y0 = std::min(p0.X(), p1.X());
+	auto y1 = std::max(p0.X(), p1.X());
 
 	auto x0 = xs - 0.5*dx;
 	auto x1 = xs + 0.5*dx;
@@ -1480,7 +1667,6 @@ tnbLib::MarineBase_Tools::CalcWaterPlaneIy
 				<< abort(FatalError);
 		}
 		p.value = t.first / t.second;
-
 		values.push_back(std::move(p));
 	}
 	return std::move(values);
@@ -1518,6 +1704,7 @@ tnbLib::MarineBase_Tools::CalcWaterPlaneMx
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "invalid area value has been detected!" << endl
+				<< " - area = " << t.second << endl
 				<< abort(FatalError);
 		}
 		p.value = t.first / t.second;
