@@ -48,6 +48,7 @@ namespace tnbLib
 
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
 	: theAx_(null)
+	, theNbWaters_(DEFAULT_NB_WATERS)
 	, theVolCoeff_(0.005)
 {
 	// empty body
@@ -55,12 +56,16 @@ tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves()
 
 tnbLib::HydStatic_CrossCurves::HydStatic_CrossCurves
 (
-	const std::shared_ptr<Marine_MultLevWaterDomain>& theWaters,
+	const std::shared_ptr<Marine_Domain>& theDomain,
+	const std::shared_ptr<Marine_Body>& theBody,
 	const std::shared_ptr<HydStatic_HeelSpacing>& theHeels,
+	const Standard_Integer theNbWaters,
 	const gp_Ax1 & theAx
 )
-	: theWaters_(theWaters)
+	: theDomain_(theDomain)
+	, theBody_(theBody)
 	, theHeels_(theHeels)
+	, theNbWaters_(theNbWaters)
 	, theAx_(theAx)
 	, theVolCoeff_(0.005)
 {
@@ -144,15 +149,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 		Info << endl;
 	}
 
-	if (NOT Waters())
-	{
-		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
-			<< " no water is loaded!" << endl
-			<< abort(FatalError);
-	}
-
-	const auto& wbody = Waters()->Body();
-	if (NOT wbody)
+	if (NOT Body())
 	{
 		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
 			<< " no body is loaded!" << endl
@@ -161,11 +158,11 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 
 	if (verbose)
 	{
-		Info << " Body's name: " << wbody->Name() << endl;
-		Info << " nb. of sections: " << wbody->NbSections() << endl;
+		Info << " Body's name: " << Body()->Name() << endl;
+		Info << " nb. of sections: " << Body()->NbSections() << endl;
 	}
 
-	if (NOT Waters()->Domain())
+	if (NOT Domain())
 	{
 		FatalErrorIn("void HydStatic_CrossCurves::Perform()")
 			<< " no domain is loaded!" << endl
@@ -195,7 +192,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	}
 
 	const auto& heels = Heels()->Spacing();
-	auto body = wbody->Copy();
+	auto body = Body()->Copy();
 
 	//OFstream ff("bodies.plt");
 
@@ -211,7 +208,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	if (verbose)
 	{
 		Info << " - nb. of heels: " << heels->NbSections() << endl;
-		Info << " - nb. of waters: " << Waters()->Waters().size() << endl;
+		Info << " - nb. of waters: " << theNbWaters_ << endl;
 	}
 	if (verbose > 1)
 	{
@@ -249,10 +246,9 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 		{
 			Info << " z0 " << b.P0().Z() << ", z1 = " << b.P1().Z() << endl;
 		}
-		//const auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), NbWaters());
+		const auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), NbWaters());
 
-		const auto& domains = Waters();
-		//auto domains = Marine_WaterLib::MultiLevelsStillWaterDomain(Body(), Domain(), *Z);
+		auto domains = Marine_WaterLib::MultiLevelsStillWaterDomain(Body(), Domain(), *Z);
 		Debug_Null_Pointer(domains);
 
 		if (verbose) Info << " nb. of waters: " << domains->Waters().size() << endl;
@@ -327,7 +323,7 @@ void tnbLib::HydStatic_CrossCurves::SetVolumeCoeff(const Standard_Real x)
 	theVolCoeff_ = std::min(0.5, std::max(x, 0.0001));
 }
 
-std::shared_ptr<tnbLib::Geo_xDistb> 
+std::shared_ptr<tnbLib::Geo_xDistb>
 tnbLib::HydStatic_CrossCurves::Z
 (
 	const Standard_Real theZ0,
