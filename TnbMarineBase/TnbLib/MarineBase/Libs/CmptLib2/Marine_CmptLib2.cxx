@@ -139,7 +139,8 @@ tnbLib::Marine_CmptLib2::CrossCurve
 
 		if (verbose > 1)
 		{
-			Info << " water's id: " << x->Index() << endl;
+			Info << " - water's id: " << x->Index() << endl;
+			Info << " - z = " << x->Z() << endl;
 			Info << " calculating the wetted sections..." << endl;
 		}
 		{ // time scope

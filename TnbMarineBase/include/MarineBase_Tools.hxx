@@ -136,9 +136,25 @@ namespace tnbLib
 			);
 
 		static TnbMarine_EXPORT Standard_Real
+			CalcMx
+			(
+				const std::shared_ptr<Marine_Section>& theSection,
+				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT Standard_Real
 			CalcMy
 			(
 				const std::shared_ptr<Marine_Section>& theSection,
+				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT Standard_Real
+			CalcMx
+			(
+				const Marine_CmpSection& theSection,
 				const Standard_Real x0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
