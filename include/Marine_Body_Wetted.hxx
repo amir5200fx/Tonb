@@ -95,6 +95,11 @@ namespace tnbLib
 				theDisplacer_ = theDisplacer;
 			}
 
+			void NullifyMidSection()
+			{
+				theMid_ = nullptr;
+			}
+
 		};
 	}
 }
