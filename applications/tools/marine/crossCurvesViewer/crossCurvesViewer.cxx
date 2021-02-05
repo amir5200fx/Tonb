@@ -29,6 +29,8 @@ namespace tnbLib
 	static graph_t myGraph;
 	static auto nPnts = DEFAULT_NB_DIVISIONS_LOW;
 
+	static size_t verbose(0);
+
 	void loadGraph(const std::string& name)
 	{
 		fileName fn(name);
@@ -42,6 +44,13 @@ namespace tnbLib
 			FatalErrorIn(FunctionSIG)
 				<< "the graph is null" << endl
 				<< abort(FatalError);
+		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the graph is loaded from: " << fn << ", successfully!" << endl;
+			Info << endl;
 		}
 	}
 
@@ -65,6 +74,13 @@ namespace tnbLib
 				<< "undefined tessellation type" << endl
 				<< abort(FatalError);
 		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the tessellation level is set to: " << t << endl;
+			Info << endl;
+		}
 	}
 
 	auto getPoints(const Handle(Geom2d_Curve)& theCurve)
@@ -85,6 +101,13 @@ namespace tnbLib
 
 	void exportToPlt(const std::string& name)
 	{
+		if (NOT myGraph)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no graph has been loaded!" << endl
+				<< abort(FatalError);
+		}
+		
 		fileName fn(name);
 		OFstream f(fn);
 
@@ -96,6 +119,13 @@ namespace tnbLib
 
 			auto pnts = getPoints(g);
 			Io::ExportCurve(pnts, f);
+		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the graph is exported to the *.Plt, succeessfully!" << endl;
+			Info << endl;
 		}
 	}
 }
@@ -117,6 +147,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {exportToPlt(name); }), "exportToPlt");
 
 		mod->add(chaiscript::fun([](const std::string& t)-> void {setTessellation(t); }), "setTessellation");
+		mod->add(chaiscript::fun([](unsigned int i)-> void {verbose = i; }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
