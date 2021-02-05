@@ -100,7 +100,7 @@ namespace tnbLib
 		fileName fn(name);
 		OFstream f(fn);
 
-		auto tri = Cad_PreviewTools::Box(*myWave->Domain());
+		auto tri = Cad_PreviewTools::Box(*myWave->Domain()->Dim());
 		if (tri) tri->ExportToPlt(f);
 
 		const auto& geom = myWave->SurfaceGeometry();
@@ -167,7 +167,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
