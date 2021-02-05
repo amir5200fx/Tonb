@@ -62,6 +62,5 @@ void tnbLib::HydStatic_HydCurvesGraph::Perform
 	theTmax_ = CalcMaxT(theCurves);
 
 	theCurves_ = std::move(theCurves);
-
 	Change_IsDone() = Standard_True;
 }
