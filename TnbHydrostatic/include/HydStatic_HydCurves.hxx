@@ -34,6 +34,7 @@ namespace tnbLib
 
 		Standard_Real theRhoS_;
 		Standard_Real theRhoF_;
+		Standard_Real theDisplFactor_;
 
 		std::shared_ptr<Marine_MultLevWaterDomain> theWaters_;
 
@@ -101,14 +102,17 @@ namespace tnbLib
 
 	public:
 
-		static size_t verbose;
+		static TnbHydStatic_EXPORT size_t verbose;
 
-		static const Standard_Real DEFAULT_RHOSW;
-		static const Standard_Real DEFAULT_RHOFW;
+		static TnbHydStatic_EXPORT const Standard_Real DEFAULT_RHOSW;
+		static TnbHydStatic_EXPORT const Standard_Real DEFAULT_RHOFW;
 
 		HydStatic_HydCurves()
 			: RudderAxis_(Standard_False)
 			, theRudderAxisLoc_(0)
+			, theDisplFactor_(0)
+			, theRhoF_(DEFAULT_RHOFW)
+			, theRhoS_(DEFAULT_RHOSW)
 		{}
 
 
@@ -122,6 +126,11 @@ namespace tnbLib
 		Standard_Real RhoFW() const
 		{
 			return theRhoF_;
+		}
+
+		Standard_Real DisplFactor() const
+		{
+			return theDisplFactor_;
 		}
 
 		const auto& Waters() const
@@ -170,6 +179,14 @@ namespace tnbLib
 		)
 		{
 			theRhoF_ = rho;
+		}
+
+		void SetDisplFactor
+		(
+			const Standard_Real x
+		)
+		{
+			theDisplFactor_ = x;
 		}
 	};
 }

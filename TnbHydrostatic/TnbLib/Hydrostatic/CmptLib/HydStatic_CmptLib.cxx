@@ -179,7 +179,7 @@ tnbLib::HydStatic_CmptLib::LeverArms
 		}
 
 		auto value = curve.Value(theVol);
-		Info << x->Heel() << ",  " << value << endl;
+
 		HydStatic_GzQ p(x->Heel(), value);
 		pairs.push_back(std::move(p));
 	}
@@ -202,7 +202,7 @@ tnbLib::HydStatic_CmptLib::GZ
 		auto lk = x.LeverArm();
 		
 		auto gz = lk - theKG * std::sin(heel);
-		Info << " lk = " << lk <<", heel = "<< Geo_Tools::RadianToDegree(heel) << ", theKG * std::sin(heel) = " << theKG * std::sin(heel) << ", gz = " << gz << endl;
+		//Info << " lk = " << lk <<", heel = "<< Geo_Tools::RadianToDegree(heel) << ", theKG * std::sin(heel) = " << theKG * std::sin(heel) << ", gz = " << gz << endl;
 		marineLib::xSectionParam p;
 		p.x = Geo_Tools::RadianToDegree(heel);
 		p.value = gz;

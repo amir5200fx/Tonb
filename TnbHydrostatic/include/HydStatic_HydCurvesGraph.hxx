@@ -41,6 +41,10 @@ namespace tnbLib
 			const word& theName
 		);
 
+		const auto& Curves() const
+		{
+			return theCurves_;
+		}
 
 		auto Tmin() const
 		{
