@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ctrlNetList">
+      <UniqueIdentifier>{5df88be5-fb1a-49c4-83b0-0bfe8b431173}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ctrlNetList.cxx">
+      <Filter>ctrlNetList</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
