@@ -367,9 +367,6 @@
     <Filter Include="TnbLib\Geo\Naca4Digit">
       <UniqueIdentifier>{87403ae5-6c62-4bcd-98c4-5bd8863af50e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Geo\module">
-      <UniqueIdentifier>{e340c5f0-49e0-45b8-98c7-83b8b22f022b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Geo\Serialization">
       <UniqueIdentifier>{6bf72750-4ab4-404c-a1fd-98200f3a8fa0}</UniqueIdentifier>
     </Filter>
@@ -387,6 +384,9 @@
     </Filter>
     <Filter Include="TnbLib\Geo\Function\Metric\nonUniform\3d">
       <UniqueIdentifier>{c92560b8-2a35-45a3-a139-6abd51df2315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\module">
+      <UniqueIdentifier>{e340c5f0-49e0-45b8-98c7-83b8b22f022b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -826,7 +826,7 @@
       <Filter>TnbLib\Geo\Naca4Digit</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\module\Geo_Module.hxx">
-      <Filter>TnbLib\Geo\module</Filter>
+      <Filter>TnbLib\Geo\Merge\module</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\IndexedItem\IndexedItemIO.hxx">
       <Filter>TnbLib\Geo\Entities\IndexedItem</Filter>
