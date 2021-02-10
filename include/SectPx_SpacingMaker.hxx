@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _SectPx_LimitsMaker_Header
-#define _SectPx_LimitsMaker_Header
+#ifndef _SectPx_SpacingMaker_Header
+#define _SectPx_SpacingMaker_Header
 
 #include <SectPx_Maker.hxx>
 
@@ -9,13 +9,14 @@ namespace tnbLib
 
 	// Forward Declarations
 	class SectPx_Par;
+	class SectPx_Spacing;
 	class SectPx_Limits;
 	class SectPx_ShapeRegistry;
 
 	namespace maker
 	{
 
-		class Limits
+		class Spacing
 			: public SectPx_Maker<SectPx_ShapeRegistry>
 		{
 
@@ -31,12 +32,12 @@ namespace tnbLib
 			}
 
 
-			Limits()
+			Spacing()
 			{}
 
 		public:
 
-			explicit Limits
+			explicit Spacing
 			(
 				const std::shared_ptr<SectPx_ShapeRegistry>& theRegistry
 			)
@@ -44,21 +45,21 @@ namespace tnbLib
 			{}
 
 
-			TnbSectPx_EXPORT std::shared_ptr<SectPx_Limits>
-				SelectLimits
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Spacing>
+				SelectSpacing
 				(
 					const Standard_Integer theIndex
 				) const;
 
 			TnbSectPx_EXPORT Standard_Integer
-				CreateLimits
+				CreateUniform
 				(
-					const std::shared_ptr<SectPx_Par>& theP0, 
-					const std::shared_ptr<SectPx_Par>& theP1
+					const std::shared_ptr<SectPx_Limits>& theLimits,
+					const Standard_Integer n
 				) const;
 
-			TnbSectPx_EXPORT std::shared_ptr<SectPx_Limits> 
-				RemoveLimits
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Spacing>
+				RemoveSpacing
 				(
 					const Standard_Integer theIndex
 				) const;
@@ -66,6 +67,6 @@ namespace tnbLib
 	}
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::maker::Limits);
+BOOST_CLASS_EXPORT_KEY(tnbLib::maker::Spacing);
 
-#endif // !_SectPx_LimitsMaker_Header
+#endif // !_SectPx_SpacingMaker_Header

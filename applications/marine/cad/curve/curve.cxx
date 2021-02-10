@@ -288,7 +288,7 @@ namespace tnbLib
 	{
 		if (verbose)
 		{
-			Info << " nb. of curves going to be saved: " << myCurves.size() << endl;
+			Info << " nb. of curves is going to be saved: " << myCurves.size() << endl;
 			Info << " - curve type: ";
 			switch (curveType)
 			{

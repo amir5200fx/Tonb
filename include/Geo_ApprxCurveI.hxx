@@ -207,7 +207,7 @@ namespace tnbLib
 				typename Geo_ApprxCurve_Traits<CurveType>::vtType v0(p, p1);
 				a1 = vt.Angle(v0);
 			}
-			catch (const std::exception&)
+			catch (const Standard_Failure&)
 			{
 				a1 = 0;
 			}

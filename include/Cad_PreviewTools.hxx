@@ -23,6 +23,12 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad_EXPORT std::shared_ptr<Entity3d_Chain> 
+			RetrieveChain
+			(
+				const std::vector<std::vector<Pnt3d>>& thePoints
+			);
+
 		//- an exception will be thrown if the surface is not bspline
 		static TnbCad_EXPORT std::shared_ptr<Entity3d_Triangulation>
 			PreviewPatchCurves

@@ -17,6 +17,9 @@ namespace tnbLib
 		class FieldFun;
 		class Profile;
 		class CurveQ;
+		class Extrude;
+		class Limits;
+		class Spacing;
 	}
 }
 

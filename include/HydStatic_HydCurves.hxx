@@ -102,6 +102,7 @@ namespace tnbLib
 
 	public:
 
+		static TnbHydStatic_EXPORT size_t clippNo;
 		static TnbHydStatic_EXPORT size_t verbose;
 
 		static TnbHydStatic_EXPORT const Standard_Real DEFAULT_RHOSW;
