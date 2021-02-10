@@ -17,6 +17,7 @@ namespace tnbLib
 	class SectPx_ScatterRegistry;
 	class SectPx_ParRegistry;
 	class SectPx_FrameRegistry;
+	class SectPx_ShapeRegistry;
 
 	class SectPx_Registry
 	{
@@ -29,6 +30,7 @@ namespace tnbLib
 		std::shared_ptr<SectPx_ScatterRegistry> theScatter_;
 
 		std::shared_ptr<SectPx_ParRegistry> theParameter_;
+		std::shared_ptr<SectPx_ShapeRegistry> theShape_;
 		std::map<Standard_Integer, std::shared_ptr<SectPx_FrameRegistry>> theFrames_;
 
 
@@ -77,6 +79,11 @@ namespace tnbLib
 		const auto& Frames() const
 		{
 			return theFrames_;
+		}
+
+		const auto& Shape() const
+		{
+			return theShape_;
 		}
 
 		TnbSectPx_EXPORT std::shared_ptr<SectPx_FrameRegistry>

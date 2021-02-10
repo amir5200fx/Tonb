@@ -4,6 +4,7 @@
 #include <SectPx_ScatterRegistry.hxx>
 #include <SectPx_ParRegistry.hxx>
 #include <SectPx_FrameRegistry.hxx>
+#include <SectPx_ShapeRegistry.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -13,6 +14,7 @@ void tnbLib::SectPx_Registry::AllocateMemory()
 	theScatter_ = std::make_shared<SectPx_ScatterRegistry>();
 
 	theParameter_ = std::make_shared<SectPx_ParRegistry>(theCounter_, theScatter_);
+	theShape_ = std::make_shared<SectPx_ShapeRegistry>(theCounter_, theScatter_);
 }
 
 std::shared_ptr<tnbLib::SectPx_FrameRegistry> 

@@ -99,7 +99,7 @@ std::vector<std::shared_ptr<tnbLib::SectPx_CurveQ>>
 tnbLib::SectPx_FrameRegistry::RetrieveCurveQs() const
 {
 	std::vector<std::shared_ptr<SectPx_CurveQ>> segList;
-	const auto& segments = Scatter()->ScatterMap(SectPx_RegObjType::topoSegment);
+	const auto& segments = Scatter()->ScatterMap(SectPx_RegObjType::curveQ);
 	for (const auto& x : segments)
 	{
 		Debug_Null_Pointer(x.second.lock());
