@@ -51,12 +51,39 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_spline.h>
 
+std::vector<Standard_Real> 
+tnbLib::MarineBase_Tools::Tessellate
+(
+	const std::vector<Standard_Real>& x,
+	const unsigned int theCriterion
+)
+{
+	std::vector<Standard_Real> X;
+	X.reserve(2 * x.size() - 1);
+	X.push_back(x[0]);
+	for (size_t i = 1; i < x.size(); i++)
+	{
+		auto xm = MEAN(x[i - 1], x[i]);
+		X.push_back(xm);
+		X.push_back(x[i]);
+	}
+	if (X.size() >= theCriterion)
+	{
+		return std::move(X);
+	}
+	else
+	{
+		auto xs = Tessellate(X, theCriterion);
+		return std::move(xs);
+	}
+}
+
 namespace tnbLib
 {
 
 	static const unsigned int MIN_NB_POINTS_INTERPOLATION = 25;
 
-	std::vector<Standard_Real> TessellateX(const std::vector<Standard_Real>& x)
+	/*std::vector<Standard_Real> TessellateX(const std::vector<Standard_Real>& x)
 	{
 		std::vector<Standard_Real> X;
 		X.reserve(2 * x.size() - 1);
@@ -76,7 +103,7 @@ namespace tnbLib
 			auto xs = TessellateX(X);
 			return std::move(xs);
 		}
-	}
+	}*/
 
 	std::vector<Standard_Real> TessellateX(const double* x, size_t n)
 	{
@@ -86,36 +113,40 @@ namespace tnbLib
 		{
 			xt.push_back(x[i]);
 		}
-		auto xs = TessellateX(xt);
+		auto xs = MarineBase_Tools::Tessellate(xt, MIN_NB_POINTS_INTERPOLATION);
 		return std::move(xs);
 	}
+}
 
-	std::vector<marineLib::xSectionParam> SteffenTessellation(const std::vector<marineLib::xSectionParam>& theQ)
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::SteffenTessellation
+(
+	const std::vector<marineLib::xSectionParam>& theQ
+)
+{
+	auto x = new double[theQ.size()];
+	auto y = new double[theQ.size()];
+
+	for (size_t i = 0; i < theQ.size(); i++)
 	{
-		auto x = new double[theQ.size()];
-		auto y = new double[theQ.size()];
-
-		for (size_t i = 0; i < theQ.size(); i++)
-		{
-			x[i] = theQ[i].x;
-			y[i] = theQ[i].value;
-		}
-
-		gsl_interp_accel *acc = gsl_interp_accel_alloc();
-		gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, theQ.size());
-		gsl_spline_init(spline_steffen, x, y, theQ.size());
-
-		auto xt = TessellateX(x, theQ.size());
-		std::vector<marineLib::xSectionParam> Q;
-		Q.reserve(xt.size());
-		for (auto xi : xt)
-		{
-			double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
-			auto p = marineLib::xSectionParam{ xi,yi_steffen };
-			Q.push_back(p);
-		}
-		return std::move(Q);
+		x[i] = theQ[i].x;
+		y[i] = theQ[i].value;
 	}
+
+	gsl_interp_accel *acc = gsl_interp_accel_alloc();
+	gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, theQ.size());
+	gsl_spline_init(spline_steffen, x, y, theQ.size());
+
+	auto xt = TessellateX(x, theQ.size());
+	std::vector<marineLib::xSectionParam> Q;
+	Q.reserve(xt.size());
+	for (auto xi : xt)
+	{
+		double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
+		auto p = marineLib::xSectionParam{ xi,yi_steffen };
+		Q.push_back(p);
+	}
+	return std::move(Q);
 }
 
 tnbLib::Entity2d_Box

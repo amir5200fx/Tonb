@@ -46,13 +46,30 @@ namespace tnbLib
 
 	public:
 
+		static TnbMarine_EXPORT std::vector<Standard_Real> 
+			Tessellate
+			(
+				const std::vector<Standard_Real>& theXs,
+				const unsigned int theCriterion
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			SteffenTessellation
+			(
+				const std::vector<marineLib::xSectionParam>& theQ
+			);
+
 		static TnbMarine_EXPORT Entity2d_Box 
 			CalcBoundingBox2D
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			);
 
-		static TnbMarine_EXPORT Entity3d_Box CalcBoundingBox(const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections);
+		static TnbMarine_EXPORT Entity3d_Box 
+			CalcBoundingBox
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
 
 
 		/*template<class SectionType>
