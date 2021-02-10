@@ -14,10 +14,14 @@
 #include <HydStatic_HydGphCurves.hxx>
 #include <HydStatic_HydCurvesGraph.hxx>
 #include <HydStatic_xDraft.hxx>
+#include <HydStatic_Tools.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <algorithm>
+
+size_t tnbLib::HydStatic_HydCurves::clippNo(1);
 size_t tnbLib::HydStatic_HydCurves::verbose(0);
 
 const Standard_Real tnbLib::HydStatic_HydCurves::DEFAULT_RHOFW(1.0);
@@ -25,7 +29,7 @@ const Standard_Real tnbLib::HydStatic_HydCurves::DEFAULT_RHOSW(1.25);
 
 namespace tnbLib
 {
-
+	static const unsigned int MIN_NB_CURVE_POINTS = 50;
 	static bool nullifyMidSect = false;
 }
 
@@ -263,6 +267,7 @@ void tnbLib::HydStatic_HydCurves::Perform()
 	const auto& base = body->BaseLine();
 
 	const auto nbWaters = Waters()->Waters().size();
+	const auto clipp = std::max(1, std::min((int)clippNo, (int)nbWaters / 3));
 	std::vector<hydStcGphLib::xDraft> 
 		xCb,
 		xCm,
@@ -278,23 +283,24 @@ void tnbLib::HydStatic_HydCurves::Perform()
 		xDispv,
 		xDispsw,
 		xDispfw;
-	xCb.reserve(nbWaters - 1);
-	xCm.reserve(nbWaters - 1);
-	xCp.reserve(nbWaters - 1);
-	xCwl.reserve(nbWaters - 1);
-	xLcf.reserve(nbWaters - 1);
-	xLcb.reserve(nbWaters - 1);
-	xAw.reserve(nbWaters - 1);
-	xMct.reserve(nbWaters - 1);
-	xKml.reserve(nbWaters - 1);
-	xKm.reserve(nbWaters - 1);
-	xKb.reserve(nbWaters - 1);
-	xDispv.reserve(nbWaters - 1);
-	xDispsw.reserve(nbWaters - 1);
-	xDispfw.reserve(nbWaters - 1);
+	xCb.reserve(nbWaters - 2*clipp);
+	xCm.reserve(nbWaters - 2*clipp);
+	xCp.reserve(nbWaters - 2*clipp);
+	xCwl.reserve(nbWaters - 2*clipp);
+	xLcf.reserve(nbWaters - 2*clipp);
+	xLcb.reserve(nbWaters - 2*clipp);
+	xAw.reserve(nbWaters - 2 * clipp);
+	xMct.reserve(nbWaters - 2*clipp);
+	xKml.reserve(nbWaters - 2*clipp);
+	xKm.reserve(nbWaters - 2*clipp);
+	xKb.reserve(nbWaters - 2*clipp);
+	xDispv.reserve(nbWaters - 2 * clipp);
+	xDispsw.reserve(nbWaters - 2*clipp);
+	xDispfw.reserve(nbWaters - 2*clipp);
 
 	const auto& waters = Waters()->Waters();
-	for (size_t i = 0; i < waters.size() - 1; i++)
+	
+	for (size_t i = clipp; i < waters.size() - clipp; i++)
 	{
 		const auto& x = waters[i];
 		Debug_Null_Pointer(x);
@@ -338,10 +344,10 @@ void tnbLib::HydStatic_HydCurves::Perform()
 
 		auto mcti = hydStcGphLib::xDraft{ x->Z(),mct() };
 		xMct.push_back(std::move(mcti));
-
+		
 		auto kmli = hydStcGphLib::xDraft{ x->Z(),kml() };
 		xKml.push_back(std::move(kmli));
-
+		
 		auto kmi = hydStcGphLib::xDraft{ x->Z(),km() };
 		xKm.push_back(std::move(kmi));
 
@@ -357,6 +363,21 @@ void tnbLib::HydStatic_HydCurves::Perform()
 		auto dispfwi = hydStcGphLib::xDraft{ x->Z(), dispv()*(RhoFW() + DisplFactor()) };
 		xDispfw.push_back(std::move(dispfwi));
 	}
+
+	xCb = HydStatic_Tools::SteffenTessellation(xCb, MIN_NB_CURVE_POINTS);
+	xCm = HydStatic_Tools::SteffenTessellation(xCm, MIN_NB_CURVE_POINTS);
+	xCp = HydStatic_Tools::SteffenTessellation(xCp, MIN_NB_CURVE_POINTS);
+	xCwl = HydStatic_Tools::SteffenTessellation(xCwl, MIN_NB_CURVE_POINTS);
+	xLcf = HydStatic_Tools::SteffenTessellation(xLcf, MIN_NB_CURVE_POINTS);
+	xLcb = HydStatic_Tools::SteffenTessellation(xLcb, MIN_NB_CURVE_POINTS);
+	xAw = HydStatic_Tools::SteffenTessellation(xAw, MIN_NB_CURVE_POINTS);
+	xMct = HydStatic_Tools::SteffenTessellation(xMct, MIN_NB_CURVE_POINTS);
+	xKml = HydStatic_Tools::SteffenTessellation(xKml, MIN_NB_CURVE_POINTS);
+	xKm = HydStatic_Tools::SteffenTessellation(xKm, MIN_NB_CURVE_POINTS);
+	xKb = HydStatic_Tools::SteffenTessellation(xKb, MIN_NB_CURVE_POINTS);
+	xDispv = HydStatic_Tools::SteffenTessellation(xDispv, MIN_NB_CURVE_POINTS);
+	xDispsw = HydStatic_Tools::SteffenTessellation(xDispsw, MIN_NB_CURVE_POINTS);
+	xDispfw = HydStatic_Tools::SteffenTessellation(xDispfw, MIN_NB_CURVE_POINTS);
 
 	std::vector<std::shared_ptr<HydStatic_HydGphCurve>> curves;
 	curves.reserve(14);
