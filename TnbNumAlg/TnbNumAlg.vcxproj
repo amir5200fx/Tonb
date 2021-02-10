@@ -89,7 +89,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>libboost_serialization-vc141-mt-gd-x64-1_75.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>boost_serialization-vc141-mt-gd-x64-1_75.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
@@ -140,7 +140,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libboost_serialization-vc141-mt-gd-x64-1_75.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>boost_serialization-vc141-mt-x64-1_75.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
