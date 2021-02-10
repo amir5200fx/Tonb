@@ -91,7 +91,7 @@ namespace tnbLib
 		const auto du = (u1 - u0) / (Standard_Real)(nPnts - 1);
 		std::vector<Pnt2d> pnts;
 		pnts.reserve(nPnts);
-		for (size_t i = 0; i <= nPnts; i++)
+		for (size_t i = 0; i < nPnts; i++)
 		{
 			auto pt = theCurve->Value(u0 + i * du);
 			pnts.push_back(std::move(pt));
