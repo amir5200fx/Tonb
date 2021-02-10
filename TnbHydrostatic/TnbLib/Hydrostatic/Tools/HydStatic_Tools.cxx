@@ -30,6 +30,56 @@
 #include <TColgp_HArray1OfPnt2d.hxx>
 #include <StdFail_NotDone.hxx>
 
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_spline.h>
+
+namespace tnbLib
+{
+	std::vector<Standard_Real> HydTessellateX(const double* x, size_t n, const unsigned int nbPts)
+	{
+		std::vector<Standard_Real> xt;
+		xt.reserve(n);
+		for (size_t i = 0; i < n; i++)
+		{
+			xt.push_back(x[i]);
+		}
+		auto xs = MarineBase_Tools::Tessellate(xt, nbPts);
+		return std::move(xs);
+	}
+}
+
+std::vector<tnbLib::hydStcGphLib::xDraft> 
+tnbLib::HydStatic_Tools::SteffenTessellation
+(
+	const std::vector<hydStcGphLib::xDraft>& theQ, 
+	const unsigned int nbPts
+)
+{
+	auto x = new double[theQ.size()];
+	auto y = new double[theQ.size()];
+
+	for (size_t i = 0; i < theQ.size(); i++)
+	{
+		x[i] = theQ[i].T;
+		y[i] = theQ[i].value;
+	}
+
+	gsl_interp_accel *acc = gsl_interp_accel_alloc();
+	gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, theQ.size());
+	gsl_spline_init(spline_steffen, x, y, theQ.size());
+
+	auto xt = HydTessellateX(x, theQ.size(), nbPts);
+	std::vector<hydStcGphLib::xDraft> Q;
+	Q.reserve(xt.size());
+	for (auto xi : xt)
+	{
+		double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
+		auto p = hydStcGphLib::xDraft{ xi,yi_steffen };
+		Q.push_back(p);
+	}
+	return std::move(Q);
+}
+
 std::shared_ptr<tnbLib::HydStatic_Spacing> 
 tnbLib::HydStatic_Tools::UniformSpacing
 (

@@ -9,6 +9,7 @@
 #include <HydStatic_rArmCurves.hxx>
 #include <HydStatic_Module.hxx>
 #include <HydStatic_CurveMakerType.hxx>
+#include <HydStatic_xDraft.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -44,6 +45,13 @@ namespace tnbLib
 	public:
 
 		typedef NumAlg_AdaptiveInteg_Info info;
+
+		static TnbHydStatic_EXPORT std::vector<hydStcGphLib::xDraft> 
+			SteffenTessellation
+			(
+				const std::vector<hydStcGphLib::xDraft>& theQ,
+				const unsigned int nbPts
+			);
 
 		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_Spacing>
 			UniformSpacing
