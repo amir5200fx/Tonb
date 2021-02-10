@@ -34,6 +34,7 @@ namespace tnbLib
 		extrProfile,
 		curveQ,
 		limits,
+		spacing,
 		other
 	};
 

@@ -52,6 +52,18 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::SetValue
 	AddParameterToParent(theValue_, thePar, FunctionSIG);
 }
 
+std::shared_ptr<tnbLib::SectPx_Par> 
+tnbLib::sectPxLib::ExtrProfile_Uniform::Start() const
+{
+	return theX0_.lock();
+}
+
+std::shared_ptr<tnbLib::SectPx_Par> 
+tnbLib::sectPxLib::ExtrProfile_Uniform::End() const
+{
+	return theX1_.lock();
+}
+
 tnbLib::word 
 tnbLib::sectPxLib::ExtrProfile_Uniform::RegObjTypeName() const
 {
@@ -121,9 +133,6 @@ tnbLib::sectPxLib::ExtrProfile_Uniform::HasChild
 	ReturnTrueIfParBelongsToThisParent(X0(), thePar);
 	ReturnTrueIfParBelongsToThisParent(X1(), thePar);
 	ReturnTrueIfParBelongsToThisParent(Value(), thePar);
-
-	ReturnTrueIfParBelongsToThisParent(Start(), thePar);
-	ReturnTrueIfParBelongsToThisParent(End(), thePar);
 	return Standard_False;
 }
 
@@ -134,9 +143,6 @@ tnbLib::sectPxLib::ExtrProfile_Uniform::RetrieveChildren() const
 	AddParToChildList(X0(), children);
 	AddParToChildList(X1(), children);
 	AddParToChildList(Value(), children);
-
-	AddParToChildList(Start(), children);
-	AddParToChildList(End(), children);
 	return std::move(children);
 }
 
@@ -159,18 +165,6 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::RemoveThisFromChildren() const
 	{
 		RemoveThisFromChild(vPar);
 	}
-
-	auto sPar = Start().lock();
-	if (sPar)
-	{
-		RemoveThisFromChild(sPar);
-	}
-
-	auto ePar = End().lock();
-	if (ePar)
-	{
-		RemoveThisFromChild(ePar);
-	}
 }
 
 void tnbLib::sectPxLib::ExtrProfile_Uniform::AddThisToChildren() const
@@ -178,9 +172,6 @@ void tnbLib::sectPxLib::ExtrProfile_Uniform::AddThisToChildren() const
 	AddThisParentToChildren(X0());
 	AddThisParentToChildren(X1());
 	AddThisParentToChildren(Value());
-
-	AddThisParentToChildren(Start());
-	AddThisParentToChildren(End());
 }
 
 void tnbLib::sectPxLib::ExtrProfile_Uniform::RemoveThisFromChild

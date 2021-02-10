@@ -79,6 +79,10 @@ namespace tnbLib
 
 			TnbSectPx_EXPORT void SetValue(const std::shared_ptr<SectPx_Par>& thePar);
 
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Par> Start() const override;
+
+			TnbSectPx_EXPORT std::shared_ptr<SectPx_Par> End() const override;
+
 			TnbSectPx_EXPORT word RegObjTypeName() const override;
 
 			TnbSectPx_EXPORT std::vector<Standard_Real> X() const override;

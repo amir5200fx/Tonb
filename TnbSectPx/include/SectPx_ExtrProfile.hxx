@@ -20,12 +20,20 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::weak_ptr<SectPx_Par> theStart_;
-		std::weak_ptr<SectPx_Par> theEnd_;
+		//std::weak_ptr<SectPx_Par> theStart_;
+		//std::weak_ptr<SectPx_Par> theEnd_;
 
 		/*private functions and operators*/
 
-		TNB_SERIALIZATION(TnbSectPx_EXPORT);
+		//TNB_SERIALIZATION(TnbSectPx_EXPORT);
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<SectPx_Parent>(*this);
+		}
 
 
 	protected:
@@ -38,25 +46,11 @@ namespace tnbLib
 
 	public:
 
-		const auto& Start() const
-		{
-			return theStart_;
-		}
+		virtual std::shared_ptr<SectPx_Par> Start() const = 0;
 
-		const auto& End() const
-		{
-			return theEnd_;
-		}
+		virtual std::shared_ptr<SectPx_Par> End() const = 0;
 
-		TnbSectPx_EXPORT void SetStart
-		(
-			const std::shared_ptr<SectPx_Par>& thePar
-		);
-
-		TnbSectPx_EXPORT void SetEnd
-		(
-			const std::shared_ptr<SectPx_Par>& thePar
-		);
+		TnbSectPx_EXPORT Standard_Boolean IsShapeRegObj() const override;
 
 		TnbSectPx_EXPORT Standard_Real Lower() const;
 

@@ -6,6 +6,7 @@
 #include <SectPx_Module.hxx>
 #include <SectPx_ParRegistry.hxx>
 #include <SectPx_FrameRegistry.hxx>
+#include <SectPx_ShapeRegistry.hxx>
 
 namespace tnbLib
 {
@@ -13,6 +14,7 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_ParRegistry;
 	class SectPx_FrameRegistry;
+	class SectPx_ShapeRegistry;
 
 	template<class RegType>
 	class SectPx_Maker
@@ -61,5 +63,6 @@ namespace tnbLib
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Maker<SectPx_ParRegistry>);
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Maker<SectPx_FrameRegistry>);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::SectPx_Maker<SectPx_ShapeRegistry>);
 
 #endif // !_SectPx_Maker_Header

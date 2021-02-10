@@ -18,6 +18,12 @@ tnbLib::SectPx_Limits::SectPx_Limits
 	// empty body
 }
 
+Standard_Boolean 
+tnbLib::SectPx_Limits::IsShapeRegObj() const
+{
+	return Standard_True;
+}
+
 void tnbLib::SectPx_Limits::SetStart(const std::shared_ptr<SectPx_Par>& thePar)
 {
 	AddParameterToParent(theStart_, thePar, FunctionSIG);
@@ -51,7 +57,7 @@ tnbLib::SectPx_Limits::RegObjTypeName() const
 typename tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_Limits::RegObjType() const
 {
-	return sectPxLib::regObjType();
+	return sectPxLib::regObjType::limits;
 }
 
 Standard_Integer 

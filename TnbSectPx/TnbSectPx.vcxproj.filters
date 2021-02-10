@@ -457,6 +457,21 @@
     <Filter Include="TnbLib\SectPx\Entities\Controller\Pole\Weight">
       <UniqueIdentifier>{cb6dbdfd-3a83-407a-af9b-0943e764af7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Extrude">
+      <UniqueIdentifier>{830010da-945c-48e0-b55b-b1c4399832ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Registry\Shape">
+      <UniqueIdentifier>{dccecbc1-794e-4eeb-8e48-5e0dd7ba98a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Spacing">
+      <UniqueIdentifier>{cb36190e-6c2b-40e9-a336-ae220ad7107a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Spacing\Uniform">
+      <UniqueIdentifier>{e1392d4e-d4b2-4b2d-8aa7-8dd28720f780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\Makers\Spacing">
+      <UniqueIdentifier>{b2dc5756-a08a-4aeb-9082-ebfcd8d05ba0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -1007,6 +1022,21 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Coord\Pnt\Constructor\SectPx_PntConstructorAdaptor.hxx">
       <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Constructor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Extrude\SectPx_ExtrudeMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Extrude</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Registry\Shape\SectPx_ShapeRegistry.hxx">
+      <Filter>TnbLib\SectPx\Registry\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Spacing\SectPx_Spacing.hxx">
+      <Filter>TnbLib\SectPx\Entities\Spacing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Spacing\Uniform\SectPx_UniformSpacing.hxx">
+      <Filter>TnbLib\SectPx\Entities\Spacing\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Makers\Spacing\SectPx_SpacingMaker.hxx">
+      <Filter>TnbLib\SectPx\Makers\Spacing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1681,6 +1711,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Pnt\Constructor\SectPx_PntConstructorAdaptor.cxx">
       <Filter>TnbLib\SectPx\Entities\Coord\Pnt\Constructor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Extrude\SectPx_ExtrudeMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Extrude</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Extrude\SectPx_ExtrudeMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Extrude</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Shape\SectPx_ShapeRegistry.cxx">
+      <Filter>TnbLib\SectPx\Registry\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Registry\Shape\SectPx_ShapeRegistryIO.cxx">
+      <Filter>TnbLib\SectPx\Registry\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Spacing\SectPx_Spacing.cxx">
+      <Filter>TnbLib\SectPx\Entities\Spacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Spacing\SectPx_SpacingIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Spacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Spacing\Uniform\SectPx_UniformSpacing.cxx">
+      <Filter>TnbLib\SectPx\Entities\Spacing\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Spacing\Uniform\SectPx_UniformSpacingIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Spacing\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Spacing\SectPx_SpacingMaker.cxx">
+      <Filter>TnbLib\SectPx\Makers\Spacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Makers\Spacing\SectPx_SpacingMakerIO.cxx">
+      <Filter>TnbLib\SectPx\Makers\Spacing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

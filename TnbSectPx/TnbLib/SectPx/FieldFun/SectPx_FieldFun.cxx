@@ -11,11 +11,11 @@ tnbLib::SectPx_FieldFun::IsFieldFun() const
 	return Standard_True;
 }
 
-//Standard_Boolean 
-//tnbLib::SectPx_FieldFun::IsFrameRegObj() const
-//{
-//	return Standard_True;
-//}
+Standard_Boolean 
+tnbLib::SectPx_FieldFun::IsParRegObj() const
+{
+	return Standard_True;
+}
 
 typename tnbLib::sectPxLib::regObjType 
 tnbLib::SectPx_FieldFun::RegObjType() const

@@ -108,6 +108,19 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::SetValue4
 	AddParameterToParent(theValue4_, thePar, FunctionSIG);
 }
 
+
+std::shared_ptr<tnbLib::SectPx_Par>
+tnbLib::sectPxLib::ExtrProfile_FivePoint::Start() const
+{
+	return theX0_.lock();
+}
+
+std::shared_ptr<tnbLib::SectPx_Par>
+tnbLib::sectPxLib::ExtrProfile_FivePoint::End() const
+{
+	return theX4_.lock();
+}
+
 tnbLib::word 
 tnbLib::sectPxLib::ExtrProfile_FivePoint::RegObjTypeName() const
 {
@@ -184,9 +197,6 @@ tnbLib::sectPxLib::ExtrProfile_FivePoint::HasChild
 		ReturnTrueIfParBelongsToThisParent((&theX0_)[i], thePar);
 		ReturnTrueIfParBelongsToThisParent((&theValue0_)[i], thePar);
 	}
-
-	ReturnTrueIfParBelongsToThisParent(Start(), thePar);
-	ReturnTrueIfParBelongsToThisParent(End(), thePar);
 	return Standard_False;
 }
 
@@ -199,9 +209,6 @@ tnbLib::sectPxLib::ExtrProfile_FivePoint::RetrieveChildren() const
 		AddParToChildList((&theX0_)[i], children);
 		AddParToChildList((&theValue0_)[i], children);
 	}
-
-	AddParToChildList(Start(), children);
-	AddParToChildList(End(), children);
 	return std::move(children);
 }
 
@@ -221,18 +228,6 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::RemoveThisFromChildren() const
 			RemoveThisFromChild(xValue);
 		}
 	}
-
-	auto sPar = Start().lock();
-	if (sPar)
-	{
-		RemoveThisFromChild(sPar);
-	}
-
-	auto ePar = End().lock();
-	if (ePar)
-	{
-		RemoveThisFromChild(ePar);
-	}
 }
 
 void tnbLib::sectPxLib::ExtrProfile_FivePoint::AddThisToChildren() const
@@ -242,9 +237,6 @@ void tnbLib::sectPxLib::ExtrProfile_FivePoint::AddThisToChildren() const
 		AddThisParentToChildren((&theX0_)[i]);
 		AddThisParentToChildren((&theValue0_)[i]);
 	}
-
-	AddThisParentToChildren(Start());
-	AddThisParentToChildren(End());
 }
 
 void tnbLib::sectPxLib::ExtrProfile_FivePoint::RemoveThisFromChild

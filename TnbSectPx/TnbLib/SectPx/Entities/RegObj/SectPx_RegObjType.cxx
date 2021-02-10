@@ -28,6 +28,7 @@ namespace tnbLib
 	static const word extrude_profile_name = "extrusion profile name";
 	static const word curve_q_name = "curveQ";
 	static const word limits_name = "limits";
+	static const word spacing_name = "spacing";
 }
 
 tnbLib::word 
@@ -58,6 +59,7 @@ tnbLib::getRegObjTypeName(const SectPx_RegObjType t)
 	case sectPxLib::regObjType::extrProfile: return extrude_profile_name;
 	case sectPxLib::regObjType::curveQ: return curve_q_name;
 	case sectPxLib::regObjType::limits: return limits_name;
+	case sectPxLib::regObjType::spacing: return spacing_name;
 	default:
 		FatalErrorIn(FunctionSIG)
 			<< "invalid type of the registry object!" << endl

@@ -16,10 +16,15 @@ namespace tnbLib
 		std::weak_ptr<SectPx_Par> theStart_;
 		std::weak_ptr<SectPx_Par> theEnd_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
+
 	public:
 
 
-		static const char* typeName_;
+		static TnbSectPx_EXPORT const char* typeName_;
 
 		SectPx_Limits()
 		{}
@@ -35,6 +40,8 @@ namespace tnbLib
 		{
 			return theEnd_;
 		}
+
+		TnbSectPx_EXPORT Standard_Boolean IsShapeRegObj() const override;
 
 		TnbSectPx_EXPORT void SetStart(const std::shared_ptr<SectPx_Par>& thePar);
 
@@ -78,5 +85,7 @@ namespace tnbLib
 		) const override;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_Limits);
 
 #endif // !_SectPx_Limits_Header

@@ -90,6 +90,12 @@ tnbLib::SectPx_RegObj::IsFrameRegObj() const
 	return Standard_False;
 }
 
+Standard_Boolean
+tnbLib::SectPx_RegObj::IsShapeRegObj() const
+{
+	return Standard_False;
+}
+
 Standard_Boolean 
 tnbLib::SectPx_RegObj::IsTopoSegment() const
 {

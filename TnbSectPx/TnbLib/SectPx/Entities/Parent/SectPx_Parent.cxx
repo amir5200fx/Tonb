@@ -70,6 +70,12 @@ tnbLib::SectPx_Parent::IsLimits() const
 }
 
 Standard_Boolean 
+tnbLib::SectPx_Parent::IsSpacing() const
+{
+	return Standard_False;
+}
+
+Standard_Boolean 
 tnbLib::SectPx_Parent::IsParent() const
 {
 	return Standard_True;

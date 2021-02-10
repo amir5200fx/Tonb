@@ -10,13 +10,13 @@ namespace tnbLib
 	// Forward Declarations
 	class SectPx_Par;
 	class SectPx_Limits;
-	class SectPx_FrameRegistry;
+	class SectPx_ShapeRegistry;
 
 	namespace maker
 	{
 
 		class Limits
-			: public SectPx_Maker<SectPx_FrameRegistry>
+			: public SectPx_Maker<SectPx_ShapeRegistry>
 		{
 
 			/*Private Data*/
@@ -27,7 +27,7 @@ namespace tnbLib
 			template<class Archive>
 			void serialize(Archive &ar, const unsigned int /*file_version*/)
 			{
-				ar & boost::serialization::base_object<SectPx_Maker<SectPx_FrameRegistry>>(*this);
+				ar & boost::serialization::base_object<SectPx_Maker<SectPx_ShapeRegistry>>(*this);
 			}
 
 
@@ -38,9 +38,9 @@ namespace tnbLib
 
 			explicit Limits
 			(
-				const std::shared_ptr<SectPx_FrameRegistry>& theRegistry
+				const std::shared_ptr<SectPx_ShapeRegistry>& theRegistry
 			)
-				: SectPx_Maker<SectPx_FrameRegistry>(theRegistry)
+				: SectPx_Maker<SectPx_ShapeRegistry>(theRegistry)
 			{}
 
 
