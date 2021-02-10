@@ -1,4 +1,5 @@
 #include <Pln_Curve.hxx>
+#include <SectPx_Registry.hxx>
 #include <SectPx_ParRegistry.hxx>
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_CountRegistry.hxx>
@@ -16,6 +17,7 @@
 #include <SectPx_Tools.hxx>
 #include <SectPx_Pole.hxx>
 #include <SectPx_RegObjType.hxx>
+#include <SectPx_CurveQ.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -37,9 +39,10 @@
 namespace tnbLib
 {
 
+	static std::shared_ptr<SectPx_Registry> myRegistry;
 	static appl::tuner_t myTuner;
 
-	static bool verbose = false;
+	static unsigned short verbose = 0;
 	static bool loaded = false;
 	static int degree = 3;
 
@@ -73,6 +76,7 @@ namespace tnbLib
 	{
 		checkFrame();
 		const auto& poles = getScatterReg()->ScatterMap(SectPx_RegObjType::pole);
+		Info << endl;
 		Info << " nb. of poles: " << poles.size() << endl;
 		Info << " the list of the poles: " << endl;
 		for (const auto& x : poles)
@@ -85,6 +89,26 @@ namespace tnbLib
 				<< p->Name() << ", value: "
 				<< p->Coord() << endl;
 		}
+		Info << endl;
+	}
+
+	void printCurves()
+	{
+		checkFrame();
+		const auto& curves = getScatterReg()->ScatterMap(SectPx_RegObjType::curveQ);
+		Info << endl;
+		Info << " nb. of curves: " << curves.size() << endl;
+		Info << " the list of the curves: " << endl;
+		for (const auto& x : curves)
+		{
+			auto p = std::dynamic_pointer_cast<SectPx_CurveQ>(x.second.lock());
+			Debug_Null_Pointer(p);
+
+			Info << " - " << "index: "
+				<< p->Index() << ", "
+				<< p->Name() << endl;
+		}
+		Info << endl;
 	}
 
 	void printReg()
@@ -100,12 +124,22 @@ namespace tnbLib
 		std::ifstream f(fn);
 
 		boost::archive::polymorphic_text_iarchive ia(f);
-
+		
+		ia >> myRegistry;
 		ia >> myTuner;
 
 		if (verbose)
 		{
+			Info << endl;
 			Info << " the tuner has been loaded successfully!" << endl;
+			Info << endl;
+		}
+
+		if (NOT myRegistry)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the registry is null" << endl
+				<< abort(FatalError);
 		}
 
 		if (NOT myTuner)
@@ -129,6 +163,13 @@ namespace tnbLib
 
 		myCurveMaker = std::make_shared<maker::CurveQ>(myTuner->FrameRegistry());
 		loaded = true;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the curve maker is created, successfully!" << endl;
+			Info << endl;
+		}
 	}
 
 	void saveTo(const std::string& name)
@@ -138,11 +179,14 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_oarchive oa(f);
 
+		oa << myRegistry;
 		oa << myTuner;
 
 		if (verbose)
 		{
+			Info << endl;
 			Info << " the tuner has been saved, successfully!" << endl;
+			Info << endl;
 		}
 	}
 
@@ -188,9 +232,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTunerTo");
 
 		mod->add(chaiscript::fun([]()->void {printPoles(); }), "printPoles");
+		mod->add(chaiscript::fun([]()->void {printCurves(); }), "printCurves");
 		mod->add(chaiscript::fun([]()->void {printReg(); }), "printRegistry");
 
-		mod->add(chaiscript::fun([](bool v)->void {verbose = v; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short v)->void {verbose = v; }), "setVerbose");
 	}
 
 	void setCurvesMakers(const module_t& mod)

@@ -1,4 +1,5 @@
 #include <Pln_Curve.hxx>
+#include <SectPx_Registry.hxx>
 #include <SectPx_ParRegistry.hxx>
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_CountRegistry.hxx>
@@ -41,10 +42,11 @@ namespace tnbLib
 
 	static appl::tuner_t myTuner;
 
-	static bool verbose = false;
+	static unsigned short verbose = 0;
 	static bool loaded = false;
 	static int degree = 3;
 
+	static std::shared_ptr<SectPx_Registry> myRegistry;
 	static std::shared_ptr<maker::CurveQ> myCurveMaker;
 	static std::map<int, std::shared_ptr<Pln_Curve>> myCurveMap;
 
@@ -80,11 +82,21 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_iarchive ia(f);
 
+		ia >> myRegistry;
 		ia >> myTuner;
 
 		if (verbose)
 		{
+			Info << endl;
 			Info << " the tuner has been loaded successfully!" << endl;
+			Info << endl;
+		}
+
+		if (NOT myRegistry)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the registry is null" << endl
+				<< abort(FatalError);
 		}
 
 		if (NOT myTuner)
@@ -151,7 +163,9 @@ namespace tnbLib
 	{
 		if (verbose)
 		{
-			Info << " nb. of curves going to be saved: " << myCurveMap.size() << endl;
+			Info << endl;
+			Info << " nb. of curves are going to be saved: " << myCurveMap.size() << endl;
+			Info << endl;
 		}
 		size_t i = 0;
 		for (const auto& x : myCurveMap)
@@ -175,6 +189,12 @@ namespace tnbLib
 			}
 			i++;
 		}
+		if (verbose)
+		{
+			Info << endl;
+			Info << " all curves have been saved, successfully!" << endl;
+			Info << endl;
+		}
 	}
 
 	//- create curves
@@ -187,14 +207,72 @@ namespace tnbLib
 	}
 
 	void makeCurve(const std::shared_ptr<SectPx_CurveQ>& curveQ, int deg)
-	{
+	{	
 		checkFrame();
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the curve with following specs are going to be created:" << endl;
+			Info << " - index: " << curveQ->Index() << " , name: " << curveQ->Name() << endl;
+			Info << " - degree: " << deg << endl;
+		}
+
+		if (verbose > 1)
+		{
+			Info << endl;
+			Info << " retrieving the poles..." << endl;
+		}
 		const auto polesQ = SectPx_Tools::RetrievePoles(curveQ);
+		if (verbose > 1)
+		{
+			Info << " - " << polesQ.size() << " nb. of poles have been retrieved" << endl;
+			Info << endl;
+		}
+
+		if (verbose > 1)
+		{
+			Info << " retrieving the inner segments..." << endl;
+		}
 		const auto segments = SectPx_Tools::RetrieveInnerSegments(polesQ);
+
+		if (verbose > 1)
+		{
+			Info << " retrieving the control points..." << endl;
+		}
 		const auto poles = SectPx_Tools::RetrieveControlPoints(segments);
 
-		const auto knots = SectPx_Tools::Knots(SectPx_Tools::Knots(segments, std::min(3, std::max(2, deg))));
+		if (verbose > 1)
+		{
+			Info << " retrieving the knots..." << endl;
+		}
+		const auto knotsVect = SectPx_Tools::Knots(segments, std::min(3, std::max(1, deg)));
+		const auto knots = SectPx_Tools::Knots(knotsVect);
+		if (verbose > 2)
+		{
+			Info << " - knots vector: " << endl;
+			Info << " ";
+			for (auto x : knotsVect)
+			{
+				Info << "(" << x.first << ", " << x.second << ")" << ", ";
+			}
+			Info << endl;
+		}
+
+		if (verbose > 1)
+		{
+			Info << " retrieving the weights..." << endl;
+		}
 		const auto weights = SectPx_Tools::Weights(SectPx_Tools::RetrieveWeights(segments));
+		if (verbose > 2)
+		{
+			Info << " - weights: " << endl;
+			Info << " ";
+			for (auto x : weights)
+			{
+				Info << x << ", ";
+			}
+			Info << endl;
+		}
 		const auto cpts = SectPx_Tools::CPts(poles);
 		try
 		{
@@ -216,6 +294,12 @@ namespace tnbLib
 			FatalErrorIn(FunctionSIG)
 				<< x.GetMessageString() << endl
 				<< abort(FatalError);
+		}
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the geometric curve has been created, successfully!" << endl;
+			Info << endl;
 		}
 	}
 
@@ -250,7 +334,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
 		mod->add(chaiscript::fun([]()->void {printCurves(); }), "printCurves");
 		mod->add(chaiscript::fun([]()->void {printPoles(); }), "printPoles");
-		mod->add(chaiscript::fun([](bool c)->void {verbose = c; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short c)->void {verbose = c; }), "setVerbose");
 
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveCurvesTo(name); }), "saveAllTo");
 	}

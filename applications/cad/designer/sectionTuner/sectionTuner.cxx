@@ -2,6 +2,7 @@
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_CountRegistry.hxx>
 #include <SectPx_ScatterRegistry.hxx>
+#include <SectPx_Registry.hxx>
 #include <SectPx_Frame.hxx>
 #include <SectPx_FieldFuns.hxx>
 #include <SectPx_Edge.hxx>
@@ -32,10 +33,11 @@
 namespace tnbLib
 {
 
-	appl::frame_t myFrame;
+	static std::shared_ptr<SectPx_Registry> myRegistry;
+	static appl::frame_t myFrame;
 	static appl::tuner_t myTuner;
 
-	static bool verbose = false;
+	static size_t verbose = 0;
 	static bool loaded = false;
 
 	//- globals
@@ -63,11 +65,34 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_iarchive oa(f);
 
+		oa >> myRegistry;
+		if (NOT myRegistry)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the registry is null" << endl
+				<< abort(FatalError);
+		}
+
+		if (myRegistry->NbFrames() NOT_EQUAL 1)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " it's not a valid registry" << endl
+				<< abort(FatalError);
+		}
+
 		oa >> myFrame;
+		if (NOT myFrame)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the frame registry is null" << endl
+				<< abort(FatalError);
+		}
 
 		if (verbose)
 		{
+			Info << endl;
 			Info << " the frame has been loaded successfully!" << endl;
+			Info << endl;
 		}
 
 		if (NOT myFrame)
@@ -87,6 +112,13 @@ namespace tnbLib
 		appl::importFrame(myTuner, myFrame);
 
 		loaded = true;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the frame is imported to the tuner, successfully!" << endl;
+			Info << endl;
+		}
 	}
 
 	void loadTuner(const std::string& name)
@@ -240,7 +272,7 @@ namespace tnbLib
 				Info << " - " << "index: "
 					<< par->Index() << ", "
 					<< par->Name() << ", value: "
-					<< par->Value() << endl;
+					<< par->Value()() << endl;
 			}
 		}
 	}
@@ -270,7 +302,15 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_oarchive oa(f);
 
+		oa << myRegistry;
 		oa << myTuner;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the tuner is saved to: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
 	}
 
 	void drawPlt(const std::string& name)
@@ -492,6 +532,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPolesPlt(name); }), "drawPolesPlt");
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadFrame(name); }), "loadFrame");
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
+
+		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
 	}
 
 	void setParMakers(const module_t& mod)

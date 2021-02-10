@@ -3,6 +3,7 @@
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_CountRegistry.hxx>
 #include <SectPx_ScatterRegistry.hxx>
+#include <SectPx_Registry.hxx>
 #include <SectPx_Frame.hxx>
 #include <SectPx_FieldFuns.hxx>
 #include <SectPx_Edge.hxx>
@@ -29,13 +30,15 @@
 namespace tnbLib
 {
 
-	static const auto countReg = std::make_shared<SectPx_CountRegistry>();
-	static const auto scatterReg = std::make_shared<SectPx_ScatterRegistry>();
+	static const auto myRegistry = std::make_shared<SectPx_Registry>();
+	//static const auto countReg = std::make_shared<SectPx_CountRegistry>();
+	//static const auto scatterReg = std::make_shared<SectPx_ScatterRegistry>();
 
-	static const auto parReg = std::make_shared<SectPx_ParRegistry>(countReg, scatterReg);
-	static const auto frameReg = std::make_shared<SectPx_FrameRegistry>(countReg, scatterReg);
+	//static const auto parReg = std::make_shared<SectPx_ParRegistry>(countReg, scatterReg);
+	//static const auto frameReg = std::make_shared<SectPx_FrameRegistry>(countReg, scatterReg);
 
-	static const auto myFrame = std::make_shared<SectPx_Frame>(parReg, frameReg);
+	static std::shared_ptr<SectPx_Frame> myFrame;// = std::make_shared<SectPx_Frame>(parReg, frameReg);
+	static std::shared_ptr<SectPx_ScatterRegistry> scatterReg;
 
 	static appl::edge_t firstEdge;
 
@@ -509,6 +512,7 @@ namespace tnbLib
 
 		boost::archive::polymorphic_text_oarchive oa(f);
 
+		oa << myRegistry;
 		oa << myFrame;
 	}
 
@@ -540,7 +544,7 @@ namespace tnbLib
 				Info << " - " << "index: " 
 					<< par->Index() << ", " 
 					<< par->Name() << ", value: " 
-					<< par->Value() << endl;
+					<< par->Value()() << endl;
 			}
 		}
 	}
@@ -700,6 +704,9 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 	//FatalError.throwExceptions();
+
+	myFrame = std::make_shared<SectPx_Frame>(myRegistry->Parameter(), myRegistry->SelectFrame(myRegistry->CreateFrame()));
+	scatterReg = myRegistry->Scatter();
 
 	if (argc <= 1)
 	{

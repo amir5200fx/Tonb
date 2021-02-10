@@ -2,7 +2,7 @@
 #ifndef _shapeMaker_Header
 #define _shapeMaker_Header
 
-#include <frameTunnerFwd.hxx>
+#include <frameTunerFwd.hxx>
 #include <SectPx_Registry.hxx>
 
 #include <vector>
