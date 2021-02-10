@@ -42,16 +42,23 @@ namespace tnbLib
 			std::shared_ptr<SectPx_ExtrProfile> theQ_;
 
 
-			interplType theType_;
+			interplType theType_ = interplType::cspline;
 
 			gsl_spline* theSpline_;
 			gsl_interp_accel* theAcc_;
+
+
+			//- private functions and operators
+
+			TNB_SERIALIZATION(TnbShapePx_EXPORT);
 
 		public:
 
 			//- default constructor
 
 			ContinProfile_OffsetCustom()
+				: theSpline_(0)
+				, theAcc_(0)
 			{}
 
 
@@ -134,5 +141,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::shapePxLib::ContinProfile_OffsetCustom);
 
 #endif // !_ShapePx_ContinProfile_OffsetCustom_Header

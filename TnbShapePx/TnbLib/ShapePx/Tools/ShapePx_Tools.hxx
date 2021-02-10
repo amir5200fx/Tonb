@@ -45,7 +45,11 @@ namespace tnbLib
 				const std::vector<Standard_Real>& theWeights
 			);
 
-		static Handle(Geom_Surface) Surface(const ShapePx_CtrlNet& theNet);
+		static TnbShapePx_EXPORT Handle(Geom_Surface) Surface
+		(
+			const ShapePx_CtrlNet& theNet, 
+			const Standard_Integer uDegree = 3
+		);
 	};
 }
 

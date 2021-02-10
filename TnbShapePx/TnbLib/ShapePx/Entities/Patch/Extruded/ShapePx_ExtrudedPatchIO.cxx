@@ -14,3 +14,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::ShapePx_ExtrudedPatch)
 	ar & theParToProfile_;
 }
 
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::ShapePx_ExtrudedPatch);
+

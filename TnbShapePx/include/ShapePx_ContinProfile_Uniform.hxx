@@ -21,6 +21,22 @@ namespace tnbLib
 			Standard_Real theX0_;
 			Standard_Real theX1_;
 
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<ShapePx_ContinProfile>(*this);
+
+				ar & theValue_;
+
+				ar & theX0_;
+				ar & theX1_;
+			}
+
 		public:
 
 			ContinProfile_Uniform()
@@ -76,5 +92,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::shapePxLib::ContinProfile_Uniform);
 
 #endif // !_ShapePx_ContinProfile_Uniform_Header

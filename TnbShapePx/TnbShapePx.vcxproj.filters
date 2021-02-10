@@ -317,5 +317,17 @@
     <ClCompile Include="TnbLib\ShapePx\Spacing\Uniform\ShapePx_UniformSpacingIO.cxx">
       <Filter>TnbLib\ShapePx\Spacing\Uniform</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Uniform\ShapePx_ContinProfile_UniformIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Linear\ShapePx_ContinProfile_LinearIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints\ShapePx_ContinProfile_ThreePointsIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\ThreePoints</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Interpl\ShapePx_ContinProfile_InterplIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Interpl</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,3 +14,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::ShapePx_GeoPatch)
 	ar & boost::serialization::base_object<ShapePx_Entity>(*this);
 	ar & theGeometry_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::ShapePx_GeoPatch);

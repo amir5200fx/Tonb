@@ -46,6 +46,11 @@ namespace tnbLib
 			gsl_spline* theSpline_;
 			gsl_interp_accel* theAcc_;
 
+
+			//- private functions and operators
+
+			TNB_SERIALIZATION(TnbShapePx_EXPORT);
+
 		public:
 
 			
@@ -167,5 +172,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::shapePxLib::ContinProfile_ThreePoints);
 
 #endif // !_ShapePx_ContinProfile_ThreePoints_Header

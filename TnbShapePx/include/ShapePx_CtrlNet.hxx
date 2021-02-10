@@ -15,6 +15,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::vector<ShapePx_CtrlRow> theRows_;
+		std::vector<std::pair<Standard_Real, Standard_Integer>> theKnots_;
 
 
 		//- private functions and operators
@@ -62,6 +63,16 @@ namespace tnbLib
 		auto& RowsRef()
 		{
 			return theRows_;
+		}
+
+		const auto& Knots() const
+		{
+			return theKnots_;
+		}
+
+		auto& KnotsRef()
+		{
+			return theKnots_;
 		}
 	};
 }

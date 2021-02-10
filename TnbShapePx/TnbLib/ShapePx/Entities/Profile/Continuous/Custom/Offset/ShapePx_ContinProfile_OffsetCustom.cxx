@@ -10,6 +10,8 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
 	const word & theName
 )
 	: ContinProfile_Custom(theIndex, theName)
+	, theAcc_(0)
+	, theSpline_(0)
 {
 	// empty body
 }
@@ -19,6 +21,8 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
 	const std::shared_ptr<SectPx_ExtrProfile>& theProfile
 )
 	: theQ_(theProfile)
+	, theAcc_(0)
+	, theSpline_(0)
 {
 	// empty body
 }
@@ -28,6 +32,8 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
 	std::shared_ptr<SectPx_ExtrProfile>&& theProfile
 )
 	: theQ_(std::move(theProfile))
+	, theAcc_(0)
+	, theSpline_(0)
 {
 	// empty body
 }
@@ -40,6 +46,8 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
 )
 	: ContinProfile_Custom(theIndex, theName)
 	, theQ_(theProfile)
+	, theAcc_(0)
+	, theSpline_(0)
 {
 	// empty body
 }
@@ -52,6 +60,8 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::ContinProfile_OffsetCustom
 )
 	: ContinProfile_Custom(theIndex, theName)
 	, theQ_(std::move(theProfile))
+	, theAcc_(0)
+	, theSpline_(0)
 {
 	// empty body
 }
@@ -69,13 +79,30 @@ namespace tnbLib
 			{
 			case SectPx_ExtrProfileType::uniform:
 			{
-				points.push_back(profile.Point(0));
+				auto x0 = profile.Lower();
+				auto x1 = profile.Upper();
+				auto v = profile.Point(0).Y();
+				const auto dx = (x1 - x0) / 4.0;
+				points.reserve(5);
+				for (size_t i = 0; i < 5; i++)
+				{
+					auto x = x0 + i * dx;
+					Pnt2d p(x, v);
+					points.push_back(std::move(p));
+				}
 				return std::move(points);
 			}
 			case SectPx_ExtrProfileType::linear:
 			{
-				points.push_back(profile.Point(0));
-				points.push_back(profile.Point(1));
+				auto p0 = profile.Point(0);
+				auto p1 = profile.Point(1);
+				const auto dp = (p1 - p0) / 4.0;
+				points.reserve(5);
+				for (size_t i = 0; i < 5; i++)
+				{
+					auto p = p0 + i * dp;
+					points.push_back(std::move(p));
+				}
 				return std::move(points);
 			}
 			case SectPx_ExtrProfileType::threePoint:
@@ -130,15 +157,15 @@ tnbLib::shapePxLib::ContinProfile_OffsetCustom::NbQs() const
 void tnbLib::shapePxLib::ContinProfile_OffsetCustom::Perform()
 {
 	Debug_Null_Pointer(ExtrudeProfile());
-	if (ExtrudeProfile()->ExtrProfileType() IS_EQUAL SectPx_ExtrProfileType::uniform)
+	/*if (ExtrudeProfile()->ExtrProfileType() IS_EQUAL SectPx_ExtrProfileType::uniform)
 	{
 		return;
-	}
+	}*/
 
-	if (ExtrudeProfile()->ExtrProfileType() IS_EQUAL SectPx_ExtrProfileType::linear)
+	/*if (ExtrudeProfile()->ExtrProfileType() IS_EQUAL SectPx_ExtrProfileType::linear)
 	{
-		return;
-	}
+		theSpline_ = gsl_spline_alloc(gsl_interp_linear, nbPoints);
+	}*/
 
 	auto offsets = GetOffsets(*ExtrudeProfile());
 	
@@ -182,11 +209,14 @@ void tnbLib::shapePxLib::ContinProfile_OffsetCustom::Perform()
 			theSpline_ = gsl_spline_alloc(gsl_interp_steffen, nbPoints);
 			break;
 		default:
+			FatalErrorIn(FunctionSIG)
+				<< "undefined interpolation type!" << endl
+				<< abort(FatalError);
 			break;
 		}
 	}
 
-	gsl_spline_init(theSpline_, xs, ys, 5);
+	gsl_spline_init(theSpline_, xs, ys, offsets.size());
 
 	delete[] xs;
 	delete[] ys;

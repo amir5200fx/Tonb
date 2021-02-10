@@ -20,9 +20,10 @@ tnbLib::ShapePx_ExtrudedPatch::ShapePx_ExtrudedPatch
 
 tnbLib::ShapePx_ExtrudedPatch::ShapePx_ExtrudedPatch
 (
+	const std::shared_ptr<SectPx_Registry>& theRegistry,
 	const std::shared_ptr<ShapePx_Section>& theSect
 )
-	: ShapePx_Patch(theSect)
+	: ShapePx_Patch(theRegistry, theSect)
 {
 	// empty body
 }
@@ -31,9 +32,10 @@ tnbLib::ShapePx_ExtrudedPatch::ShapePx_ExtrudedPatch
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
+	const std::shared_ptr<SectPx_Registry>& theRegistry,
 	const std::shared_ptr<ShapePx_Section>& theSect
 )
-	: ShapePx_Patch(theIndex, theName, theSect)
+	: ShapePx_Patch(theIndex, theName, theRegistry, theSect)
 {
 	// empty body
 }
@@ -86,6 +88,7 @@ tnbLib::ShapePx_ExtrudedPatch::RetrieveParValues
 ) const
 {
 	auto values = std::make_shared<ShapePx_ParValue>();
+	Info << "nb of pars: " << theParToProfile_.size() << endl;
 	for (const auto& x : theParToProfile_)
 	{
 		auto cont = std::dynamic_pointer_cast<ShapePx_ContinProfile>(x.second);

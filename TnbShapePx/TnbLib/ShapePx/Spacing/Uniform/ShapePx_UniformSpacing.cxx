@@ -5,9 +5,11 @@
 
 tnbLib::ShapePx_UniformSpacing::ShapePx_UniformSpacing
 (
-	const std::shared_ptr<SectPx_Limits>& theLimits
+	const std::shared_ptr<SectPx_Limits>& theLimits,
+	const Standard_Integer nbSections
 )
 	: ShapePx_Spacing(theLimits)
+	, theNbSections_(nbSections)
 {
 	// empty body
 }
@@ -16,9 +18,11 @@ tnbLib::ShapePx_UniformSpacing::ShapePx_UniformSpacing
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
-	const std::shared_ptr<SectPx_Limits>& theLimits
+	const std::shared_ptr<SectPx_Limits>& theLimits,
+	const Standard_Integer nbSections
 )
 	: ShapePx_Spacing(theIndex, theName, theLimits)
+	, theNbSections_(nbSections)
 {
 	// empty body
 }

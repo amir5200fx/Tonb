@@ -9,7 +9,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class ShapePx_ExtrudedPatch;
-	class ShapePx_Spacing;
+	class SectPx_Spacing;
 
 	class ShapePx_ExtrudeOp
 		: public ShapePx_Operator
@@ -18,11 +18,14 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<ShapePx_ExtrudedPatch> thePatch_;
-		std::shared_ptr<ShapePx_Spacing> theSpacing_;
+		std::shared_ptr<SectPx_Spacing> theSpacing_;
+
+		Standard_Integer theDegreeU_;
 
 	public:
 
 		ShapePx_ExtrudeOp()
+			: theDegreeU_(3)
 		{}
 
 
@@ -36,6 +39,11 @@ namespace tnbLib
 			return theSpacing_;
 		}
 
+		auto DegreeU() const
+		{
+			return theDegreeU_;
+		}
+
 		TnbShapePx_EXPORT void Perform();
 
 		TnbShapePx_EXPORT Standard_Boolean IsExtrude() const override;
@@ -45,9 +53,14 @@ namespace tnbLib
 			thePatch_ = thePatch;
 		}
 
-		void SetSpacing(const std::shared_ptr<ShapePx_Spacing>& theSpacing)
+		void SetSpacing(const std::shared_ptr<SectPx_Spacing>& theSpacing)
 		{
 			theSpacing_ = theSpacing;
+		}
+
+		void SetDegreeU(const Standard_Integer d)
+		{
+			theDegreeU_ = d;
 		}
 	};
 }

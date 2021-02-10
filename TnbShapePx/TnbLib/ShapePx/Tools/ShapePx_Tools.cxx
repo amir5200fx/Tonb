@@ -79,14 +79,15 @@ tnbLib::ShapePx_Tools::CtrlRow
 Handle(Geom_Surface) 
 tnbLib::ShapePx_Tools::Surface
 (
-	const ShapePx_CtrlNet & theNet
+	const ShapePx_CtrlNet & theNet,
+	const Standard_Integer uDegree
 )
 {
 	auto poles = ControlNet(theNet);
 	auto weights = Weights(theNet);
 	auto[vknots, vMults] = SectPx_Tools::Knots(theNet.Knots());
-	auto[uknots, uMults] = SectPx_Tools::Knots(SectPx_Tools::Knots(theNet.NbRows(), 3, 0, 1));
+	auto[uknots, uMults] = SectPx_Tools::Knots(SectPx_Tools::Knots(theNet.NbRows(), uDegree, 0, 1));
 
-	Handle(Geom_Surface) surface = new Geom_BSplineSurface(poles, weights, uknots, vknots, uMults, vMults, 3, 3);
+	Handle(Geom_Surface) surface = new Geom_BSplineSurface(poles, weights, uknots, vknots, uMults, vMults, uDegree, 3);
 	return std::move(surface);
 }

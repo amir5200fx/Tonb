@@ -65,4 +65,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::ShapePx_GeoPatch);
+
 #endif // !_ShapePx_GeoPatch_Header

@@ -10,6 +10,7 @@ namespace tnbLib
 	// Forward Declarations
 	class ShapePx_Section;
 	class SectPx_Limits;
+	class SectPx_Registry;
 
 	class ShapePx_Patch
 		: public ShapePx_Entity
@@ -18,6 +19,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<ShapePx_Section> theSection_;
+		std::shared_ptr<SectPx_Registry> theRegistry_;
 
 
 		//- private functions and operators
@@ -42,6 +44,7 @@ namespace tnbLib
 
 		TnbShapePx_EXPORT ShapePx_Patch
 		(
+			const std::shared_ptr<SectPx_Registry>& theRegistry,
 			const std::shared_ptr<ShapePx_Section>& theSection
 		);
 
@@ -49,6 +52,7 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
+			const std::shared_ptr<SectPx_Registry>& theRegistry,
 			const std::shared_ptr<ShapePx_Section>& theSection
 		);
 
@@ -59,9 +63,25 @@ namespace tnbLib
 			return theSection_;
 		}
 
-		void SetSection(const std::shared_ptr<ShapePx_Section>& theSection)
+		const auto& Registry() const
+		{
+			return theRegistry_;
+		}
+
+		void LoadSection
+		(
+			const std::shared_ptr<ShapePx_Section>& theSection
+		)
 		{
 			theSection_ = theSection;
+		}
+
+		void LoadRegistry
+		(
+			const std::shared_ptr<SectPx_Registry>& theReg
+		)
+		{
+			theRegistry_ = theReg;
 		}
 
 		TnbShapePx_EXPORT virtual Standard_Boolean IsExtruded() const;
@@ -69,5 +89,7 @@ namespace tnbLib
 		TnbShapePx_EXPORT virtual Standard_Boolean IsRevolved() const;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::ShapePx_Patch);
 
 #endif // !_ShapePx_Patch_Header

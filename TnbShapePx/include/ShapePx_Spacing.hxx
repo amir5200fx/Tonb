@@ -50,9 +50,9 @@ namespace tnbLib
 			return theLimits_;
 		}
 
-		Standard_Real Lower() const;
+		TnbShapePx_EXPORT Standard_Real Lower() const;
 
-		Standard_Real Upper() const;
+		TnbShapePx_EXPORT Standard_Real Upper() const;
 
 		Standard_Real NormalizedParameter(const Standard_Real x) const
 		{

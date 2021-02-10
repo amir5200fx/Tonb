@@ -19,6 +19,20 @@ namespace tnbLib
 			offsetPoint theQ0_;
 			offsetPoint theQ1_;
 
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<ShapePx_ContinProfile>(*this);
+
+				ar & theQ0_;
+				ar & theQ1_;
+			}
+
 		public:
 
 			ContinProfile_Linear()
@@ -146,5 +160,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::shapePxLib::ContinProfile_Linear);
 
 #endif // !_ShapePx_ContinProfile_Linear_Header

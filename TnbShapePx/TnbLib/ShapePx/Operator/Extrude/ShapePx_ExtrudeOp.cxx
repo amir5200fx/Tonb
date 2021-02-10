@@ -3,11 +3,12 @@
 #include <SectPx_TopoSegment.hxx>
 #include <SectPx_Tools.hxx>
 #include <SectPx_Pole.hxx>
-#include <ShapePx_Spacing.hxx>
+#include <SectPx_Spacing.hxx>
 #include <ShapePx_Section.hxx>
 #include <ShapePx_ExtrudedPatch.hxx>
 #include <ShapePx_CtrlNet.hxx>
 #include <ShapePx_Tools.hxx>
+#include <ShapePx_ParValue.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -56,7 +57,7 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 	auto poles = section->RetrievePoles(Curve());
 	auto profile = SectPx_Tools::RetrieveInnerSegments(poles);
 
-	auto knots = SectPx_Tools::Knots(profile, 3);
+	auto knots = SectPx_Tools::Knots(profile, DegreeU());
 
 	net->KnotsRef() = std::move(knots);
 
@@ -73,5 +74,7 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 		ShapePx_CtrlRow row(std::move(paired), x);
 		net->RowsRef().push_back(std::move(row));
 	}
+
+	SetNet(std::move(net));
 	Change_IsDone() = Standard_True;
 }

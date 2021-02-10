@@ -39,16 +39,18 @@ namespace tnbLib
 
 		//- constructors
 
-		ShapePx_UniformSpacing
+		TnbShapePx_EXPORT ShapePx_UniformSpacing
 		(
-			const std::shared_ptr<SectPx_Limits>& theLimits
+			const std::shared_ptr<SectPx_Limits>& theLimits,
+			const Standard_Integer nbSections
 		);
 
-		ShapePx_UniformSpacing
+		TnbShapePx_EXPORT ShapePx_UniformSpacing
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
-			const std::shared_ptr<SectPx_Limits>& theLimits
+			const std::shared_ptr<SectPx_Limits>& theLimits,
+			const Standard_Integer nbSections
 		);
 
 
@@ -59,7 +61,7 @@ namespace tnbLib
 			return theNbSections_;
 		}
 
-		std::vector<Standard_Real> Sections() const override;
+		TnbShapePx_EXPORT std::vector<Standard_Real> Sections() const override;
 	};
 }
 

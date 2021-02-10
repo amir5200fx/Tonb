@@ -49,6 +49,7 @@ namespace tnbLib
 
 		TnbShapePx_EXPORT ShapePx_ExtrudedPatch
 		(
+			const std::shared_ptr<SectPx_Registry>& theRegistry,
 			const std::shared_ptr<ShapePx_Section>& theSect
 		);
 
@@ -56,6 +57,7 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
+			const std::shared_ptr<SectPx_Registry>& theRegistry,
 			const std::shared_ptr<ShapePx_Section>& theSect
 		);
 
@@ -103,5 +105,7 @@ namespace tnbLib
 		TnbShapePx_EXPORT void UpdateProfiles();
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::ShapePx_ExtrudedPatch);
 
 #endif // !_ShapePx_ExtrudedPatch_Header

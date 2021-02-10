@@ -21,9 +21,11 @@ tnbLib::ShapePx_Patch::ShapePx_Patch
 
 tnbLib::ShapePx_Patch::ShapePx_Patch
 (
+	const std::shared_ptr<SectPx_Registry>& theRegistry,
 	const std::shared_ptr<ShapePx_Section>& theSection
 )
 	: theSection_(theSection)
+	, theRegistry_(theRegistry)
 {
 	// empty body
 }
@@ -32,10 +34,12 @@ tnbLib::ShapePx_Patch::ShapePx_Patch
 (
 	const Standard_Integer theIndex,
 	const word & theName,
+	const std::shared_ptr<SectPx_Registry>& theRegistry,
 	const std::shared_ptr<ShapePx_Section>& theSection
 )
 	: ShapePx_Entity(theIndex, theName)
 	, theSection_(theSection)
+	, theRegistry_(theRegistry)
 {
 	// empty body
 }

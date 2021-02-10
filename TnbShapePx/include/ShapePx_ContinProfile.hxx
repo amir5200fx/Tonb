@@ -13,6 +13,17 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<ShapePx_Profile>(*this);
+		}
+
 	protected:
 
 		template<class... _Types>
@@ -37,5 +48,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::ShapePx_ContinProfile);
 
 #endif // !_ShapePx_ContinProfile_Header

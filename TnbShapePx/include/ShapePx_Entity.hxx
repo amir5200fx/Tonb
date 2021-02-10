@@ -63,4 +63,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::ShapePx_Entity);
+
 #endif // !_ShapePx_Entity_Header
