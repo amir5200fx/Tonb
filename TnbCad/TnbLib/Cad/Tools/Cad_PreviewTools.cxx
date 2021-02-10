@@ -3,6 +3,7 @@
 #include <Global_Macros.hxx>
 #include <Entity3d_Box.hxx>
 #include <Entity3d_Polygon.hxx>
+#include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Geo_Tools.hxx>
 #include <Cad_Tools.hxx>
@@ -20,6 +21,78 @@
 #include <TopoDS.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopExp_Explorer.hxx>
+
+std::shared_ptr<tnbLib::Entity3d_Chain> 
+tnbLib::Cad_PreviewTools::RetrieveChain
+(
+	const std::vector<std::vector<Pnt3d>>& theRows
+)
+{
+	if (theRows.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "empty list is detected!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& row0 = theRows[0];
+	if (row0.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no points has been found at row0" << endl
+			<< abort(FatalError);
+	}
+
+	const auto nRows = theRows.size();
+	const auto nCols = row0.size();
+	for (const auto& x : theRows)
+	{
+		if (x.size() NOT_EQUAL nCols)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid net of the points" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	auto rowChain = std::make_shared<Entity3d_Chain>(theRows[0], dualConnectivityList_Chain(nCols - 1));
+	for (size_t i = 1; i < theRows.size(); i++)
+	{
+		auto chain = std::make_shared<Entity3d_Chain>(theRows[i], dualConnectivityList_Chain(nCols - 1));
+		rowChain->Add(*chain);
+	}
+
+	connectivity::dual a0;
+	a0.Value(0) = 1;
+	a0.Value(1) = 1;
+
+	auto& netConnect = rowChain->Connectivity();
+	for (size_t i = 0; i < nCols; i++)
+	{
+		//auto indices = dualConnectivityList_Chain((Standard_Integer)nRows - 1);	
+		std::vector<connectivity::dual> indices((Standard_Integer)nRows - 1, a0);
+		size_t k = 0;
+		for (auto& x : indices)
+		{
+			auto v0 = x.Value(0);
+			auto v1 = x.Value(1);
+
+			v0 += k * nCols + i;
+			v1 += (k + 1) * nCols + i;
+
+			x.Value(0) = v0;
+			x.Value(1) = v1;
+
+			++k;
+		}
+
+		for (auto& x : indices)
+		{
+			netConnect.push_back(std::move(x));
+		}
+	}
+	return std::move(rowChain);
+}
 
 //std::shared_ptr<tnbLib::Entity3d_Triangulation> 
 //tnbLib::Cad_PreviewTools::PreviewPatchCurves
