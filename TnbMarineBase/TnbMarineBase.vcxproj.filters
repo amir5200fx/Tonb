@@ -562,6 +562,12 @@
     <Filter Include="TnbLib\MarineBase\Parameter\TCF">
       <UniqueIdentifier>{1a0cc789-5c2b-49f1-852b-3024c005c4e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Coeff">
+      <UniqueIdentifier>{aa78540b-8541-451d-a601-f176abb9b782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Coeff\Cw">
+      <UniqueIdentifier>{0b9c2f04-fe00-4bfd-910b-e4d19228dafc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1184,6 +1190,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Parameter\TCF\Marine_VesselParam_TCF.hxx">
       <Filter>TnbLib\MarineBase\Parameter\TCF</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Coeff\Marine_CoeffParam.hxx">
+      <Filter>TnbLib\MarineBase\Coeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Coeff\Marine_CoeffParamM.hxx">
+      <Filter>TnbLib\MarineBase\Coeff</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Coeff\Cw\Marine_CoeffParam_Cw.hxx">
+      <Filter>TnbLib\MarineBase\Coeff\Cw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
