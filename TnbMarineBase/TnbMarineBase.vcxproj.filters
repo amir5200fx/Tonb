@@ -568,6 +568,9 @@
     <Filter Include="TnbLib\MarineBase\Coeff\Cw">
       <UniqueIdentifier>{0b9c2f04-fe00-4bfd-910b-e4d19228dafc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Environment\Pressure">
+      <UniqueIdentifier>{b71abc65-373c-4ae4-8e79-0e95d6b555b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1199,6 +1202,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Coeff\Cw\Marine_CoeffParam_Cw.hxx">
       <Filter>TnbLib\MarineBase\Coeff\Cw</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Environment\Pressure\EnvtPropt_Pressure.hxx">
+      <Filter>TnbLib\MarineBase\Environment\Pressure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

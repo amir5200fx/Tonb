@@ -12,6 +12,8 @@
 #include <Marine_xSectionParam.hxx>
 #include <Marine_Module.hxx>
 #include <Marine_PlnCurvesFwd.hxx>
+#include <Marine_EnvtParams.hxx>
+#include <Marine_CoeffParam_Cw.hxx>
 
 #include <memory>
 #include <vector>
@@ -45,6 +47,16 @@ namespace tnbLib
 	{
 
 	public:
+
+		//- the coefficient Cw depends on the form and configuration of the sail area.
+		//- an average value for Cw is 1.2. 
+		static TnbMarine_EXPORT marineLib::Pressure 
+			CalcWindPressure
+			(
+				const marineLib::coeff::Cw& theAeroResisCoeff, 
+				const marineLib::Density& theRho,
+				const marineLib::Velocity& theVel
+			);
 
 		static TnbMarine_EXPORT std::vector<Standard_Real> 
 			Tessellate

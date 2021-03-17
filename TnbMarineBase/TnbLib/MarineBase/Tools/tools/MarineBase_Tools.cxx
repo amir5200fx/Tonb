@@ -51,6 +51,18 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_spline.h>
 
+tnbLib::marineLib::Pressure 
+tnbLib::MarineBase_Tools::CalcWindPressure
+(
+	const marineLib::coeff::Cw & theAeroResisCoeff,
+	const marineLib::Density & theRho, 
+	const marineLib::Velocity & theVel
+)
+{
+	marineLib::Pressure press(0.5*theAeroResisCoeff()*theRho()*theVel()*theVel());
+	return std::move(press);
+}
+
 std::vector<Standard_Real> 
 tnbLib::MarineBase_Tools::Tessellate
 (
