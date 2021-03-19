@@ -5,7 +5,9 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Marine_xSectionParam.hxx>
-#include <Marine_VesselParam_KG.hxx>
+#include <Marine_VesselParams.hxx>
+#include <Marine_EnvtParams.hxx>
+#include <Marine_CoeffParams.hxx>
 #include <HydStatic_rArmCurves.hxx>
 #include <HydStatic_Module.hxx>
 #include <HydStatic_CurveMakerType.hxx>
@@ -45,6 +47,32 @@ namespace tnbLib
 	public:
 
 		typedef NumAlg_AdaptiveInteg_Info info;
+
+		static TnbHydStatic_EXPORT Standard_Real 
+			CalcWindHeelingArm
+			(
+				const marineLib::Pressure& theWindPrss, 
+				const marineLib::Av& theAv,
+				const marineLib::Hv& theHv, 
+				const marineLib::T& theDraft, 
+				const marineLib::Gravity& theG,
+				const marineLib::DISPM& theDispl,
+				const marineLib::HEELANG& theAngl
+			);
+
+		//- Quoting Handbuch der werfen, Vol. VII, Wegner shows that for 95% of 80 cargo ships the values of CD 
+		//- ranged between 0.19 and 0.25. For a few trawlers the values ranged between 0.3 and 0.35. ref: Ship Hydrostatics and Stability
+		static TnbHydStatic_EXPORT Standard_Real
+			CalcTurningHeelingArm
+			(
+				const marineLib::coeff::CD& theCd,
+				const marineLib::Velocity& theVel,
+				const marineLib::Gravity& theG,
+				const marineLib::LPP& theLpp, 
+				const marineLib::KG& theKg, 
+				const marineLib::T& theDraft, 
+				const marineLib::HEELANG& theAngl
+			);
 
 		static TnbHydStatic_EXPORT std::vector<hydStcGphLib::xDraft> 
 			SteffenTessellation

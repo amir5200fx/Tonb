@@ -33,6 +33,38 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_spline.h>
 
+Standard_Real 
+tnbLib::HydStatic_Tools::CalcWindHeelingArm
+(
+	const marineLib::Pressure & theWindPrss,
+	const marineLib::Av & theAv,
+	const marineLib::Hv & theHv,
+	const marineLib::T & theDraft, 
+	const marineLib::Gravity & theG, 
+	const marineLib::DISPM & theDispl,
+	const marineLib::HEELANG & theAngl
+)
+{
+	const auto cosPhi = std::cos(theAngl());
+	return theWindPrss()*theAv()*(theHv() + 0.5*theDraft())*cosPhi*cosPhi / (theG()*theDispl());
+}
+
+Standard_Real 
+tnbLib::HydStatic_Tools::CalcTurningHeelingArm
+(
+	const marineLib::coeff::CD & theCd,
+	const marineLib::Velocity & theVel,
+	const marineLib::Gravity & theG,
+	const marineLib::LPP & theLpp,
+	const marineLib::KG & theKg, 
+	const marineLib::T & theDraft, 
+	const marineLib::HEELANG & theAngl
+)
+{
+	const auto vel2 = theVel()*theVel();
+	return theCd()*vel2*(theKg() - 0.5*theDraft())*std::cos(theAngl()) / (theG()*theLpp());
+}
+
 namespace tnbLib
 {
 	std::vector<Standard_Real> HydTessellateX(const double* x, size_t n, const unsigned int nbPts)
