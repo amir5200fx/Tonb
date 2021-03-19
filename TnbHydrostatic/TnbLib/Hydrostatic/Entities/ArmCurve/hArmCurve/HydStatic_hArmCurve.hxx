@@ -22,6 +22,8 @@ namespace tnbLib
 		std::shared_ptr<HydStatic_hAuCurve> theAuCurve_;
 
 
+		//- private functions and operators
+
 		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 		auto& ChangeAuCurve()

@@ -298,6 +298,15 @@
     <Filter Include="TnbLib\Hydrostatic\Entities\HydCurvesGraph">
       <UniqueIdentifier>{30adb956-f837-4d6d-89be-e3d4716c3791}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Equilib">
+      <UniqueIdentifier>{36310347-1764-4298-bed7-7a45523e1b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Equilib\Static">
+      <UniqueIdentifier>{f46978c9-8969-4c62-af10-21d0bbd7602e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Equilib\Dynamic">
+      <UniqueIdentifier>{c170c334-8b05-4229-8f56-b390e91bdbdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -588,6 +597,15 @@
     <ClInclude Include="TnbLib\Hydrostatic\Entities\HydCurvesGraph\HydStatic_HydCurvesGraph.hxx">
       <Filter>TnbLib\Hydrostatic\Entities\HydCurvesGraph</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Equilib\Static\HydStatic_StaticEquilib.hxx">
+      <Filter>TnbLib\Hydrostatic\Equilib\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Equilib\HydStatic_Equilib.hxx">
+      <Filter>TnbLib\Hydrostatic\Equilib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Equilib\Dynamic\HydStatic_DynamicEquilib.hxx">
+      <Filter>TnbLib\Hydrostatic\Equilib\Dynamic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
@@ -610,9 +628,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\HydStatic_ArmCurve.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\ArmCurve</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\HydStatic_rArmCurve.cxx">
-      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\hArmCurve\HydStatic_hArmCurve.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\hArmCurve</Filter>
@@ -640,9 +655,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\AuCurve\rAuCurve\HydStatic_rAuCurve.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\AuCurve\rAuCurve</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Hydrostatic\Entities\AuCurve\HydStatic_AuCurve.cxx">
-      <Filter>TnbLib\Hydrostatic\Entities\AuCurve</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\WDiffCurve\HydStatic_WDiffCurve.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\WDiffCurve</Filter>
@@ -877,6 +889,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\HydGphCurve\HydStatic_HydGphCurve.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\HydGphCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Equilib\Static\HydStatic_StaticEquilib.cxx">
+      <Filter>TnbLib\Hydrostatic\Equilib\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Equilib\Dynamic\HydStatic_DynamicEquilib.cxx">
+      <Filter>TnbLib\Hydrostatic\Equilib\Dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\HydStatic_rArmCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
