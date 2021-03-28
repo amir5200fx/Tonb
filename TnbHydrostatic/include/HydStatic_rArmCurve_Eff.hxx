@@ -12,6 +12,7 @@ namespace tnbLib
 	// Forward Declarations
 	class HydStatic_rAuCurve;
 	class HydStatic_CmptLib;
+	class HydStatic_Tools;
 
 	namespace hydStcLib
 	{
@@ -28,23 +29,63 @@ namespace tnbLib
 		{
 
 			friend class HydStatic_CmptLib;
+			friend class HydStatic_Tools;
 
 			/*Private Data*/
 
 			std::shared_ptr<HydStatic_rAuCurve> theAuCurve_;
 
 			std::shared_ptr<rArmCurve_Body> theBody_;
-			std::shared_ptr<rArmCurve_TCG> theTCG_;
-			std::shared_ptr<rArmCurve_GGt> theGGt_;
-			std::shared_ptr<rArmCurve_GGv> theGGv_;
+			//std::shared_ptr<rArmCurve_TCG> theTCG_;
+			//std::shared_ptr<rArmCurve_GGt> theGGt_;
+			//std::shared_ptr<rArmCurve_GGv> theGGv_;
 			std::shared_ptr<rArmCurve_Tanks> theTanks_;
+
+
+			//- private functions and operators
+
+			TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 			auto& ChangeAuCurve()
 			{
 				return theAuCurve_;
 			}
 
-		protected:
+			auto& ChangeBody()
+			{
+				return theBody_;
+			}
+
+			auto& ChangeTanks()
+			{
+				return theTanks_;
+			}
+
+			void SetBody
+			(
+				const std::shared_ptr<rArmCurve_Body>&& theBody
+			)
+			{
+				theBody_ = std::move(theBody);
+			}
+
+			void SetTanks
+			(
+				const std::shared_ptr<rArmCurve_Tanks>&& theTanks
+			)
+			{
+				theTanks_ = std::move(theTanks);
+			}
+
+			void SetAuCurve
+			(
+				const std::shared_ptr<HydStatic_rAuCurve>&& theCurve
+			)
+			{
+				theAuCurve_ = std::move(theCurve);
+			}
+
+		public:
 
 			rArmCurve_Eff
 			(
@@ -72,9 +113,9 @@ namespace tnbLib
 
 		public:
 
-			const auto& AuCurve() const
+			Standard_Boolean HasAuCurve() const
 			{
-				return theAuCurve_;
+				return (Standard_Boolean)theAuCurve_;
 			}
 
 			Standard_Boolean IsEffective() const override
@@ -82,103 +123,82 @@ namespace tnbLib
 				return Standard_True;
 			}
 
+			const auto& AuCurve() const
+			{
+				return theAuCurve_;
+			}		
+
 			const auto& Body() const
 			{
 				return theBody_;
 			}
 
-			auto& ChangeBody()
-			{
-				return theBody_;
-			}
+			
 
-			const auto& TCG() const
+			/*const auto& TCG() const
 			{
 				return theTCG_;
-			}
+			}*/
 
-			auto& ChangeTCG()
+			/*auto& ChangeTCG()
 			{
 				return theTCG_;
-			}
+			}*/
 
-			const auto& GGt() const
+			/*const auto& GGt() const
 			{
 				return theGGt_;
-			}
+			}*/
 
-			auto& ChangeGGt()
+			/*auto& ChangeGGt()
 			{
 				return theGGt_;
-			}
+			}*/
 
-			const auto& GGv() const
+			/*const auto& GGv() const
 			{
 				return theGGv_;
-			}
+			}*/
 
-			auto& ChangeGGv()
+			/*auto& ChangeGGv()
 			{
 				return theGGv_;
-			}
+			}*/
 
 			const auto& Tanks() const
 			{
 				return theTanks_;
 			}
 
-			auto& ChangeTanks()
-			{
-				return theTanks_;
-			}
+			
 
-			void SetBody
-			(
-				const std::shared_ptr<rArmCurve_Body>&& theBody
-			)
-			{
-				theBody_ = std::move(theBody);
-			}
+			
 
-			void SetTCG
+			/*void SetTCG
 			(
 				const std::shared_ptr<rArmCurve_TCG>&& theTCG
 			)
 			{
 				theTCG_ = std::move(theTCG);
-			}
+			}*/
 
-			void SetGGt
+			/*void SetGGt
 			(
 				const std::shared_ptr<rArmCurve_GGt>&& theGGt
 			)
 			{
 				theGGt_ = std::move(theGGt);
-			}
+			}*/
 
-			void SetGGv
+			/*void SetGGv
 			(
 				const std::shared_ptr<rArmCurve_GGv>&& theGGv
 			)
 			{
 				theGGv_ = std::move(theGGv);
-			}
+			}*/
 
-			void SetTanks
-			(
-				const std::shared_ptr<rArmCurve_Tanks>&& theTanks
-			)
-			{
-				theTanks_ = std::move(theTanks);
-			}
-
-			void SetAuCurve
-			(
-				const std::shared_ptr<HydStatic_rAuCurve>&& theCurve
-			)
-			{
-				theAuCurve_ = std::move(theCurve);
-			}
+			
 
 			std::shared_ptr<HydStatic_rArmCurve>
 				ExpandToPort() const override;

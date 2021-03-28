@@ -20,6 +20,7 @@
 #include <HydStatic_UniformSpacing.hxx>
 #include <HydStatic_CustomSpacing.hxx>
 #include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_rArmCurves.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -566,6 +567,233 @@ tnbLib::HydStatic_Tools::ExpandToPort
 	return std::move(rArm);
 }
 
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::HydStatic_Tools::OffsetsFrom
+(
+	const std::vector<HydStatic_GzQ>& theQs
+)
+{
+	std::vector<marineLib::xSectionParam> Qs;
+	Qs.reserve(theQs.size());
+	for (const auto& x : theQs)
+	{
+		marineLib::xSectionParam par = { x.Heel(),x.LeverArm() };
+		Qs.push_back(std::move(par));
+	}
+	return std::move(Qs);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam>
+tnbLib::HydStatic_Tools::OffsetsFrom
+(
+	const std::vector<HydStatic_GzQP>& theQs
+)
+{
+	std::vector<marineLib::xSectionParam> Qs;
+	Qs.reserve(theQs.size());
+	for (const auto& x : theQs)
+	{
+		marineLib::xSectionParam par = { x.Heel(),x.LeverArm() };
+		Qs.push_back(std::move(par));
+	}
+	return std::move(Qs);
+}
+
+Standard_Boolean 
+tnbLib::HydStatic_Tools::IsCoating
+(
+	const std::shared_ptr<HydStatic_rArmCurve>& theArm, 
+	const std::shared_ptr<HydStatic_rArmCurve>& theTarget
+)
+{
+	Debug_Null_Pointer(theArm);
+	Debug_Null_Pointer(theTarget);
+
+	auto h0 = theArm->MinHeel();
+	auto h1 = theArm->MaxHeel();
+
+	if (NOT INSIDE(theTarget->MinHeel(), h0, h1))
+	{
+		return Standard_False;
+	}
+	if (NOT INSIDE(theTarget->MaxHeel(), h0, h1))
+	{
+		return Standard_False;
+	}
+	return Standard_True;
+}
+
+namespace tnbLib
+{
+	namespace hydStcTools
+	{
+		std::vector<HydStatic_GzQ> Union
+		(
+			const HydStatic_rArmCurve& theC0,
+			const HydStatic_rArmCurve& theC1
+		)
+		{
+			std::vector<HydStatic_GzQ> Qs;
+			Qs.reserve(theC1.Qs().size());
+
+			for (const auto& x : theC1.Qs())
+			{
+				auto h = x.Heel();
+				auto a1 = x.LeverArm();
+
+				auto a2 = theC0.Value(h);
+
+				HydStatic_GzQ q(h, a1 + a2);
+				Qs.push_back(std::move(q));
+			}
+			return std::move(Qs);
+		}
+
+		std::vector<HydStatic_GzQ> Subtract
+		(
+			const HydStatic_rArmCurve& theC0,
+			const HydStatic_rArmCurve& theC1
+		)
+		{
+			std::vector<HydStatic_GzQ> Qs;
+			Qs.reserve(theC1.Qs().size());
+
+			for (const auto& x : theC1.Qs())
+			{
+				auto h = x.Heel();
+				auto a1 = x.LeverArm();
+
+				auto a2 = theC0.Value(h);
+
+				HydStatic_GzQ q(h, a1 - a2);
+				Qs.push_back(std::move(q));
+			}
+			return std::move(Qs);
+		}
+	}
+}
+
+std::vector<tnbLib::HydStatic_GzQ> 
+tnbLib::HydStatic_Tools::Union
+(
+	const std::shared_ptr<HydStatic_rArmCurve>& theC0,
+	const std::shared_ptr<HydStatic_rArmCurve>& theC1
+)
+{
+	if (IsCoating(theC0, theC1))
+	{
+		auto Qs = hydStcTools::Union(*theC0, *theC1);
+		return std::move(Qs);
+	}
+	else if (IsCoating(theC1, theC0))
+	{
+		auto Qs = hydStcTools::Union(*theC1, *theC0);
+		return std::move(Qs);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no coating curve has been detected!" << endl
+			<< abort(FatalError);
+		std::vector<tnbLib::HydStatic_GzQ> Qs;
+		return std::move(Qs);
+	}
+}
+
+std::vector<tnbLib::HydStatic_GzQ> 
+tnbLib::HydStatic_Tools::Subtract
+(
+	const std::shared_ptr<HydStatic_rArmCurve>& theC0,
+	const std::shared_ptr<HydStatic_rArmCurve>& theC1
+)
+{
+	if (IsCoating(theC0, theC1))
+	{
+		auto Qs = hydStcTools::Subtract(*theC0, *theC1);
+		return std::move(Qs);
+	}
+	else if (IsCoating(theC1, theC0))
+	{
+		auto Qs = hydStcTools::Subtract(*theC1, *theC0);
+		return std::move(Qs);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no coating curve has been detected!" << endl
+			<< abort(FatalError);
+		std::vector<tnbLib::HydStatic_GzQ> Qs;
+		return std::move(Qs);
+	}
+}
+
+std::shared_ptr<tnbLib::hydStcLib::rArmCurve_Eff> 
+tnbLib::HydStatic_Tools::MakeEffRightCurve
+(
+	const std::vector<marineLib::xSectionParam>& theQs
+)
+{
+	const auto curve = MarineBase_Tools::Curve(theQs);
+
+	const auto rArm = std::make_shared<hydStcLib::rArmCurve_Eff>(std::move(curve));
+
+	std::vector<HydStatic_GzQP> Qs;
+	Qs.reserve(theQs.size());
+
+	for (const auto& x : theQs)
+	{
+		HydStatic_GzQP par(x.x, x.value, 0);
+		Qs.push_back(std::move(par));
+	}
+
+	rArm->SetQs(std::move(Qs));
+	return std::move(rArm);
+}
+
+std::shared_ptr<tnbLib::hydStcLib::rArmCurve_Tanks> 
+tnbLib::HydStatic_Tools::MakeTanksRightCurve
+(
+	std::shared_ptr<hydStcLib::rArmCurve_Cmpt<hydStcLib::rArmCurve_FSLq>>&& theCmpt
+)
+{
+	Debug_Null_Pointer(theCmpt);
+	const auto& curves = theCmpt->Curves();
+	if (curves.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the curves list is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto t = hydStcLib::RetrieveType(theCmpt);
+	auto iter = curves.begin();
+	auto c0 = *iter;
+	iter++;
+
+	while (iter NOT_EQUAL curves.end())
+	{
+		auto c1 = *iter;
+
+		auto Qs = HydStatic_Tools::Union(c0, c1);
+		c0 = MakeRightCurve<hydStcLib::rArmCurve_FSLq>(HydStatic_Tools::OffsetsFrom(Qs), t);
+
+		iter++;
+	}
+	
+	auto curve = std::make_shared<hydStcLib::rArmCurve_Tanks>(c0->Geometry(), std::move(theCmpt));
+	Debug_Null_Pointer(curve);
+
+	curve->SetName("tanks righting-arm curve");
+	auto& Qs = curve->ChangeQs();
+	Qs.reserve(c0->Qs().size());
+
+	for (const auto& x : c0->Qs())
+	{
+		HydStatic_GzQP par(x.Heel(), x.LeverArm(), 0);
+		Qs.push_back(std::move(par));
+	}
+	return std::move(curve);
+}
 
 //std::shared_ptr<tnbLib::HydStatic_rArmCurve> 
 //tnbLib::HydStatic_Tools::ExpandRigthingArmToPort

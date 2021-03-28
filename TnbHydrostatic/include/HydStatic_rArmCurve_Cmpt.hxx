@@ -21,6 +21,18 @@ namespace tnbLib
 
 			std::vector<std::shared_ptr<ArmCurve>> theCurves_;
 
+
+			/*private functions and operators*/
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int file_version)
+			{
+				//- this function should never be called
+				NotImplemented;
+			}
+
 		public:
 
 			rArmCurve_Cmpt()

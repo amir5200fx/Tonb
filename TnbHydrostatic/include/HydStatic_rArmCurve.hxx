@@ -7,6 +7,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class HydStatic_rAuCurve;
+
 	class HydStatic_rArmCurve
 		: public HydStatic_ArmCurve
 	{
@@ -15,16 +18,11 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		//std::shared_ptr<HydStatic_rAuCurve> theAuCurve_;
+
 		//- private functions and operators
 
-		friend class boost::serialization::access;
-
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int /*file_version*/)
-		{
-			ar & boost::serialization::base_object<HydStatic_ArmCurve>(*this);
-			ar & theQs_;
-		}
+		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 	protected:
 
@@ -35,6 +33,16 @@ namespace tnbLib
 
 	public:
 
+
+		/*Standard_Boolean HasAuCurve() const
+		{
+			return (Standard_Boolean)theAuCurve_;
+		}
+
+		const auto& AuCurve() const
+		{
+			return theAuCurve_;
+		}*/
 		
 		virtual Standard_Boolean IsEffective() const
 		{
@@ -48,6 +56,14 @@ namespace tnbLib
 
 		virtual std::shared_ptr<HydStatic_rArmCurve>
 			ExpandToPort() const = 0;
+
+		/*void SetAuCurve
+		(
+			const std::shared_ptr<HydStatic_rAuCurve>&& theCurve
+		)
+		{
+			theAuCurve_ = std::move(theCurve);
+		}*/
 
 	};
 }

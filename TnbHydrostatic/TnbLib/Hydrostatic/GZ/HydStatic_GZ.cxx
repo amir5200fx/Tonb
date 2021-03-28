@@ -8,6 +8,7 @@
 #include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_CrsCurvesGraph.hxx>
 #include <HydStatic_CmptLib.hxx>
+#include <HydStatic_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -44,35 +45,6 @@ tnbLib::HydStatic_GZ::HydStatic_GZ
 	, theDispv_(std::move(theDispv))
 {
 	//- empty body
-}
-
-namespace tnbLib
-{
-
-	tnbLib::hydStcLib::CurveMakerType 
-		RetrieveCurveType
-		(
-			const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theCurves
-		)
-	{
-		if (theCurves.size() < 2)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "invalid data has been detected" << endl
-				<< abort(FatalError);
-		}
-		const auto t = hydStcLib::RetrieveType(theCurves[0]);
-		for (const auto& x : theCurves)
-		{
-			if (hydStcLib::RetrieveType(x) NOT_EQUAL t)
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "all of the cross-curves must be the same type" << endl
-					<< abort(FatalError);
-			}
-		}
-		return t;
-	}
 }
 
 void tnbLib::HydStatic_GZ::Perform()
@@ -113,7 +85,7 @@ void tnbLib::HydStatic_GZ::Perform()
 	}
 
 	const auto& crossCurves = *CrossCurves()->CrossCurves();
-	const auto t = RetrieveCurveType(crossCurves.Curves());
+	const auto t = hydStcLib::RetrieveType(crossCurves.Curves());
 
 	if (NOT INSIDE(DISPV()(), crossCurves.MinDispv(), crossCurves.MaxDispv()))
 	{
@@ -144,9 +116,13 @@ void tnbLib::HydStatic_GZ::Perform()
 		Info << " calculating geometric curve..." << endl;
 		Info << endl;
 	}
-	const auto curve = MarineBase_Tools::Curve(gzQ);
+	//const auto curve = MarineBase_Tools::Curve(gzQ);
 
-	const auto rArm = hydStcLib::MakeCurve<hydStcLib::rArmCurve_Body>(std::move(curve), t);
+	//const auto rArm = hydStcLib::MakeCurve<hydStcLib::rArmCurve_Body>(std::move(curve), t);
+	const auto rArm = HydStatic_Tools::MakeRightCurve<hydStcLib::rArmCurve_Body>(gzQ, t);
+	Debug_Null_Pointer(rArm);
+
+	HydStatic_CmptLib::CalcParameters(rArm);
 
 	ChangeRightingArm() = std::move(rArm);
 

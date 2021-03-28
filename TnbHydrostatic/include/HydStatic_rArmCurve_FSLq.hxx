@@ -16,7 +16,25 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<rArmCurve_Prim>(*this);
+			}
+
 		protected:
+
+			//- default constructor for serialization purposes
+
+			rArmCurve_FSLq()
+			{}
+
+			//- constructors
 
 			rArmCurve_FSLq
 			(
@@ -53,5 +71,16 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::hydStcLib::rArmCurve_FSLq);
+
+#include <HydStatic_CurveMaker.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_SymmHeel<tnbLib::hydStcLib::rArmCurve_FSLq>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_AsymmHeel<tnbLib::hydStcLib::rArmCurve_FSLq>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_StbHeel<tnbLib::hydStcLib::rArmCurve_FSLq>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_ArbtHeel<tnbLib::hydStcLib::rArmCurve_FSLq>);
+
+#include <HydStatic_rArmCurve_FSLqIO.hxx>
 
 #endif // !_HydStatic_rArmCurve_FSLq_Header

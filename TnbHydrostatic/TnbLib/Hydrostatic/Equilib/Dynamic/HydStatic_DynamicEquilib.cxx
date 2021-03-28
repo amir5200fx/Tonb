@@ -4,6 +4,7 @@
 #include <HydStatic_rArmCurve.hxx>
 #include <HydStatic_hAuCurve.hxx>
 #include <HydStatic_rAuCurve.hxx>
+#include <HydStatic_rArmCurve_Eff.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

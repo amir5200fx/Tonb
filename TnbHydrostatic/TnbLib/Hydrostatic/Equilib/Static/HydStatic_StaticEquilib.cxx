@@ -2,6 +2,7 @@
 
 #include <HydStatic_hArmCurve.hxx>
 #include <HydStatic_rArmCurve.hxx>
+#include <HydStatic_rArmCurve_Eff.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

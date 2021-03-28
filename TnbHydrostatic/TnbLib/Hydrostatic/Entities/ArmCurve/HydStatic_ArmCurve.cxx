@@ -29,7 +29,7 @@ tnbLib::HydStatic_ArmCurve::MinHeel() const
 	const auto& g = *Geometry();
 
 	auto p = g.Value(g.FirstParameter());
-	return p.Y();
+	return p.X();
 }
 
 Standard_Real 
@@ -39,7 +39,7 @@ tnbLib::HydStatic_ArmCurve::MaxHeel() const
 	const auto& g = *Geometry();
 
 	auto p = g.Value(g.LastParameter());
-	return p.Y();
+	return p.X();
 }
 
 Standard_Real 

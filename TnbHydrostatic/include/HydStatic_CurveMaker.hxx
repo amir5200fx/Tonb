@@ -6,15 +6,20 @@
 #include <Standard_TypeDef.hxx>
 #include <word.hxx>
 #include <HydStatic_CurveMakerType.hxx>
+#include <HydStatic_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <memory>
+#include <vector>
 
 class Geom2d_Curve;
 
 namespace tnbLib
 {
+
+	// Forward Declarations
+	class HydStatic_CrsCurve;
 
 	namespace hydStcLib
 	{
@@ -372,6 +377,31 @@ namespace tnbLib
 				break;
 			}
 			return nullptr;
+		}
+
+		template<class CurveType>
+		CurveMakerType RetrieveType
+		(
+			const std::vector<std::shared_ptr<CurveType>>& theCurves
+		)
+		{
+			if (theCurves.size() < 2)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "invalid cross-curves has been detected" << endl
+					<< abort(FatalError);
+			}
+			const auto t = hydStcLib::RetrieveType(theCurves[0]);
+			for (const auto& x : theCurves)
+			{
+				if (hydStcLib::RetrieveType(x) NOT_EQUAL t)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "all of the cross-curves must be the same type" << endl
+						<< abort(FatalError);
+				}
+			}
+			return t;
 		}
 	}
 }

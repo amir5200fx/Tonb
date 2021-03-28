@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _HydStatic_rArmCurve_LDV_Header
-#define _HydStatic_rArmCurve_LDV_Header
+#ifndef _HydStatic_rArmCurve_Hlds_Header
+#define _HydStatic_rArmCurve_Hlds_Header
 
 #include <HydStatic_rArmCurve_Prim.hxx>
 
@@ -10,13 +10,13 @@ namespace tnbLib
 	namespace hydStcLib
 	{
 
-		class rArmCurve_LDV
+		class rArmCurve_Hlds
 			: public rArmCurve_Prim
 		{
 
 			/*Private Data*/
 
-			Standard_Real theD_;
+			Standard_Real theH_;
 
 
 			//- private functions and operators
@@ -27,7 +27,7 @@ namespace tnbLib
 			void serialize(Archive& ar, const unsigned int /*file_version*/)
 			{
 				ar & boost::serialization::base_object<rArmCurve_Prim>(*this);
-				ar & theD_;
+				ar & theH_;
 			}
 
 		protected:
@@ -35,36 +35,27 @@ namespace tnbLib
 
 			//- default constructor for serialization purposes
 
-			rArmCurve_LDV()
+			rArmCurve_Hlds()
 			{}
+
 
 			//- constructors
 
-			rArmCurve_LDV
+			rArmCurve_Hlds
 			(
 				const Handle(Geom2d_Curve)& theCurve
 			)
 				: rArmCurve_Prim(theCurve)
 			{}
 
-			rArmCurve_LDV
+			rArmCurve_Hlds
 			(
-				Handle(Geom2d_Curve)&& theCurve
+				Handle(Geom2d_Curve) && theCurve
 			)
 				: rArmCurve_Prim(std::move(theCurve))
 			{}
 
-			/*rArmCurve_LDV
-			(
-				const Standard_Integer theIndex,
-				const Handle(Geom2d_Curve)& theCurve,
-				const Standard_Real theD
-			)
-				: rArmCurve_Prim(theIndex, theCurve)
-				, theD_(theD)
-			{}*/
-
-			rArmCurve_LDV
+			rArmCurve_Hlds
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
@@ -73,23 +64,21 @@ namespace tnbLib
 				: rArmCurve_Prim(theIndex, theName, theCurve)
 			{}
 
-			rArmCurve_LDV
+			rArmCurve_Hlds
 			(
 				const Standard_Integer theIndex,
 				const word& theName,
-				Handle(Geom2d_Curve)&& theCurve
+				Handle(Geom2d_Curve) && theCurve
 			)
 				: rArmCurve_Prim(theIndex, theName, std::move(theCurve))
 			{}
 
-
 		public:
 
-			auto D() const
+			auto H() const
 			{
-				return theD_;
+				return theH_;
 			}
-
 
 			std::shared_ptr<HydStatic_rArmCurve>
 				ExpandToPort() const override
@@ -98,23 +87,23 @@ namespace tnbLib
 				return nullptr;
 			}
 
-			void SetD(const Standard_Real theD)
+			void SetH(const Standard_Real theH)
 			{
-				theD_ = theD;
+				theH_ = theH;
 			}
 		};
 	}
 }
 
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::hydStcLib::rArmCurve_LDV);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::hydStcLib::rArmCurve_Hlds);
 
 #include <HydStatic_CurveMaker.hxx>
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_SymmHeel<tnbLib::hydStcLib::rArmCurve_LDV>);
-BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_AsymmHeel<tnbLib::hydStcLib::rArmCurve_LDV>);
-BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_StbHeel<tnbLib::hydStcLib::rArmCurve_LDV>);
-BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_ArbtHeel<tnbLib::hydStcLib::rArmCurve_LDV>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_SymmHeel<tnbLib::hydStcLib::rArmCurve_Hlds>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_AsymmHeel<tnbLib::hydStcLib::rArmCurve_Hlds>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_StbHeel<tnbLib::hydStcLib::rArmCurve_Hlds>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_ArbtHeel<tnbLib::hydStcLib::rArmCurve_Hlds>);
 
-#include <HydStatic_rArmCurve_LDVIO.hxx>
+#include <HydStatic_rArmCurve_HldsIO.hxx>
 
-#endif // !_HydStatic_rArmCurve_LDV_Header
+#endif // !_HydStatic_rArmCurve_Hlds_Header
