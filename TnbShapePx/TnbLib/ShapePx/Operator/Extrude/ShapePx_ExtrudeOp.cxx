@@ -60,6 +60,7 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 	auto knots = SectPx_Tools::Knots(profile, DegreeU());
 
 	net->KnotsRef() = std::move(knots);
+	net->SetRowDegree(DegreeU());
 
 	for (auto x : Xs)
 	{

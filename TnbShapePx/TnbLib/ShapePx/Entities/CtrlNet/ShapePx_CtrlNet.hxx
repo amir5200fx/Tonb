@@ -17,6 +17,8 @@ namespace tnbLib
 		std::vector<ShapePx_CtrlRow> theRows_;
 		std::vector<std::pair<Standard_Real, Standard_Integer>> theKnots_;
 
+		Standard_Integer theRowDeg_;
+
 
 		//- private functions and operators
 
@@ -25,6 +27,7 @@ namespace tnbLib
 	public:
 
 		ShapePx_CtrlNet()
+			: theRowDeg_(3)
 		{}
 
 		ShapePx_CtrlNet
@@ -32,6 +35,7 @@ namespace tnbLib
 			const std::vector<ShapePx_CtrlRow>& theRows
 		)
 			: theRows_(theRows)
+			, theRowDeg_(3)
 		{}
 
 		ShapePx_CtrlNet
@@ -39,7 +43,13 @@ namespace tnbLib
 			std::vector<ShapePx_CtrlRow>&& theRows
 		)
 			: theRows_(std::move(theRows))
+			, theRowDeg_(3)
 		{}
+
+		auto RowDegree() const
+		{
+			return theRowDeg_;
+		}
 
 		auto NbColumns() const
 		{
@@ -73,6 +83,11 @@ namespace tnbLib
 		auto& KnotsRef()
 		{
 			return theKnots_;
+		}
+
+		void SetRowDegree(const Standard_Integer theDeg)
+		{
+			theRowDeg_ = theDeg;
 		}
 	};
 }
