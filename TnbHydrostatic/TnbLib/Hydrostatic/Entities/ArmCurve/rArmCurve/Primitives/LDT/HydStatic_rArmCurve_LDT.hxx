@@ -18,7 +18,28 @@ namespace tnbLib
 
 			Standard_Real theD_;
 
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<rArmCurve_Prim>(*this);
+				ar & theD_;
+			}
+
 		protected:
+
+
+			//- default constructor for serialization purposes
+
+			rArmCurve_LDT()
+			{}
+
+
+			//- constructors
 
 			rArmCurve_LDT
 			(
@@ -82,5 +103,17 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::hydStcLib::rArmCurve_LDT);
+
+
+#include <HydStatic_CurveMaker.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_SymmHeel<tnbLib::hydStcLib::rArmCurve_LDT>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_AsymmHeel<tnbLib::hydStcLib::rArmCurve_LDT>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_StbHeel<tnbLib::hydStcLib::rArmCurve_LDT>);
+BOOST_CLASS_EXPORT_KEY(tnbLib::hydStcLib::CurveMaker_ArbtHeel<tnbLib::hydStcLib::rArmCurve_LDT>);
+
+#include <HydStatic_rArmCurve_LDTIO.hxx>
 
 #endif // !_HydStatic_rArmCurve_LDT_Header

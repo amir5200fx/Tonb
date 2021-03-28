@@ -18,7 +18,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<HydStatic_rAuCurve> theAuCurve_;
+		//std::shared_ptr<HydStatic_rAuCurve> theAuCurve_;
 
 		//- private functions and operators
 
@@ -34,7 +34,7 @@ namespace tnbLib
 	public:
 
 
-		Standard_Boolean HasAuCurve() const
+		/*Standard_Boolean HasAuCurve() const
 		{
 			return (Standard_Boolean)theAuCurve_;
 		}
@@ -42,7 +42,7 @@ namespace tnbLib
 		const auto& AuCurve() const
 		{
 			return theAuCurve_;
-		}
+		}*/
 		
 		virtual Standard_Boolean IsEffective() const
 		{
@@ -57,13 +57,13 @@ namespace tnbLib
 		virtual std::shared_ptr<HydStatic_rArmCurve>
 			ExpandToPort() const = 0;
 
-		void SetAuCurve
+		/*void SetAuCurve
 		(
 			const std::shared_ptr<HydStatic_rAuCurve>&& theCurve
 		)
 		{
 			theAuCurve_ = std::move(theCurve);
-		}
+		}*/
 
 	};
 }

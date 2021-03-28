@@ -21,6 +21,12 @@ namespace tnbLib
 
 			std::shared_ptr<rArmCurve_LDT> theLoad_;
 
+
+			//- private functions and operators
+
+			TNB_SERIALIZATION(TnbHydStatic_EXPORT);
+
+
 		public:
 
 			rArmCurve_TCG()
