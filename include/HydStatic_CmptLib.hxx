@@ -3,7 +3,9 @@
 #define _HydStatic_CmptLib_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Marine_VesselParam_DISPV.hxx>
 #include <HydStatic_Module.hxx>
+#include <HydStatic_rArmCurvesFwd.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -102,7 +104,14 @@ namespace tnbLib
 		}
 
 		static TnbHydStatic_EXPORT std::vector<marineLib::xSectionParam>
-			RetrieveAreas(const HydStatic_Bonjean& theBonjean, const Standard_Real theTa, const Standard_Real xTa, const Standard_Real theTf, const Standard_Real xTf);
+			RetrieveAreas
+			(
+				const HydStatic_Bonjean& theBonjean,
+				const Standard_Real theTa, 
+				const Standard_Real xTa,
+				const Standard_Real theTf, 
+				const Standard_Real xTf
+			);
 
 		static TnbHydStatic_EXPORT std::vector<HydStatic_GzQ>
 			LeverArms
@@ -116,6 +125,14 @@ namespace tnbLib
 			(
 				const std::vector<HydStatic_GzQ>& thePairs, 
 				const Standard_Real theKG
+			);
+
+		static TnbHydStatic_EXPORT std::vector<marineLib::xSectionParam> 
+			FSE
+			(
+				const std::vector<HydStatic_GzQ>& thePairs, 
+				const marineLib::DISPV& theTank,
+				const marineLib::DISPV& theShip
 			);
 
 		static TnbHydStatic_EXPORT HydStatic_GzQP
@@ -189,6 +206,13 @@ namespace tnbLib
 				const HydStatic_ArmCurve& theCurve, 
 				const Standard_Real y0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<hydStcLib::rArmCurve_Eff> 
+			CalcEffectiveRightingArm
+			(
+				const std::shared_ptr<hydStcLib::rArmCurve_Body>& theBody, 
+				const std::shared_ptr<hydStcLib::rArmCurve_Tanks>& theTanks
 			);
 
 		static TnbHydStatic_EXPORT void

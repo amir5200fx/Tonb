@@ -422,6 +422,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shapeSpacing", "shapeSpacin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shapeSpacing", "applications\cad\designer\shapeSpacing\shapeSpacing.vcxproj", "{407E52DB-C39E-4396-9CB4-DF799CA257E4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stability", "stability", "{19907F8B-65BD-4126-8D1D-1E106476A2D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1219,6 +1221,7 @@ Global
 		{CE8F736C-7370-4624-8DA0-D291E9022110} = {F5D167EE-B59D-4DA8-A2F6-DA65B764188B}
 		{5C4DAB1D-E46D-4083-AE85-2049DD42DC46} = {D20240FB-E5E8-4571-93CB-96ABD6E8A5DB}
 		{407E52DB-C39E-4396-9CB4-DF799CA257E4} = {5C4DAB1D-E46D-4083-AE85-2049DD42DC46}
+		{19907F8B-65BD-4126-8D1D-1E106476A2D5} = {A87EF29D-4BA6-41E2-AB98-8D1999C82323}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}

@@ -48,7 +48,7 @@ namespace tnbLib
 		static TnbShapePx_EXPORT Handle(Geom_Surface) Surface
 		(
 			const ShapePx_CtrlNet& theNet, 
-			const Standard_Integer uDegree = 3
+			const Standard_Integer vDegree = 3
 		);
 	};
 }

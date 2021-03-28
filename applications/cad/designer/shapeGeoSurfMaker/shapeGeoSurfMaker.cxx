@@ -60,7 +60,7 @@ namespace tnbLib
 		return myNets[i];
 	}
 
-	void makeSurf(const net_t& s, int udeg)
+	void makeSurf(const net_t& s, int vdeg)
 	{
 		if (NOT loadTag)
 		{
@@ -69,7 +69,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto t = ShapePx_Tools::Surface(*s, udeg);
+		auto t = ShapePx_Tools::Surface(*s, vdeg);
 		mySurf.push_back(std::move(t));
 	}
 

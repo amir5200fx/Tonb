@@ -16,7 +16,26 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<HydStatic_rArmCurve>(*this);
+			}
+
 		protected:
+
+			//- default constructor for serialization purposes
+
+			rArmCurve_Prim()
+			{}
+
+
+			//- constructors
 
 			rArmCurve_Prim
 			(
@@ -52,5 +71,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::hydStcLib::rArmCurve_Prim);
 
 #endif // !_HydStatic_rArmCurve_Prim_Header

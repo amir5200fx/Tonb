@@ -5,11 +5,15 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Marine_xSectionParam.hxx>
-#include <Marine_VesselParam_KG.hxx>
-#include <HydStatic_rArmCurves.hxx>
+#include <Marine_VesselParams.hxx>
+#include <Marine_EnvtParams.hxx>
+#include <Marine_CoeffParams.hxx>
+#include <HydStatic_rArmCurvesFwd.hxx>
+#include <HydStatic_rArmCurve_PrimsFwd.hxx>
 #include <HydStatic_Module.hxx>
 #include <HydStatic_CurveMakerType.hxx>
 #include <HydStatic_xDraft.hxx>
+#include <HydStatic_rArmCurve_Cmpt.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -45,6 +49,32 @@ namespace tnbLib
 	public:
 
 		typedef NumAlg_AdaptiveInteg_Info info;
+
+		static TnbHydStatic_EXPORT Standard_Real 
+			CalcWindHeelingArm
+			(
+				const marineLib::Pressure& theWindPrss, 
+				const marineLib::Av& theAv,
+				const marineLib::Hv& theHv, 
+				const marineLib::T& theDraft, 
+				const marineLib::Gravity& theG,
+				const marineLib::DISPM& theDispl,
+				const marineLib::HEELANG& theAngl
+			);
+
+		//- Quoting Handbuch der werfen, Vol. VII, Wegner shows that for 95% of 80 cargo ships the values of CD 
+		//- ranged between 0.19 and 0.25. For a few trawlers the values ranged between 0.3 and 0.35. ref: Ship Hydrostatics and Stability
+		static TnbHydStatic_EXPORT Standard_Real
+			CalcTurningHeelingArm
+			(
+				const marineLib::coeff::CD& theCd,
+				const marineLib::Velocity& theVel,
+				const marineLib::Gravity& theG,
+				const marineLib::LPP& theLpp, 
+				const marineLib::KG& theKg, 
+				const marineLib::T& theDraft, 
+				const marineLib::HEELANG& theAngl
+			);
 
 		static TnbHydStatic_EXPORT std::vector<hydStcGphLib::xDraft> 
 			SteffenTessellation
@@ -170,17 +200,58 @@ namespace tnbLib
 			return std::shared_ptr<HydStatic_rArmCurve>();
 		}
 
-		static std::vector<marineLib::xSectionParam> OffsetsFrom(const std::vector<HydStatic_GzQ>& theQs)
-		{
-			NotImplemented;
-			return std::vector<marineLib::xSectionParam>();
-		}
+		static TnbHydStatic_EXPORT std::vector<marineLib::xSectionParam> 
+			OffsetsFrom
+			(
+				const std::vector<HydStatic_GzQ>& theQs
+			);
 
-		static std::vector<marineLib::xSectionParam> OffsetsFrom(const std::vector<HydStatic_GzQP>& theQs)
-		{
-			NotImplemented;
-			return std::vector<marineLib::xSectionParam>();
-		}
+		static TnbHydStatic_EXPORT std::vector<marineLib::xSectionParam> 
+			OffsetsFrom
+			(
+				const std::vector<HydStatic_GzQP>& theQs
+			);
+
+		//- return true if the Arm curve is covering the target curve
+		static TnbHydStatic_EXPORT Standard_Boolean 
+			IsCoating
+			(
+				const std::shared_ptr<HydStatic_rArmCurve>& theArm,
+				const std::shared_ptr<HydStatic_rArmCurve>& theTarget
+			);
+
+		static TnbHydStatic_EXPORT std::vector<HydStatic_GzQ> 
+			Union
+			(
+				const std::shared_ptr<HydStatic_rArmCurve>& theC0,
+				const std::shared_ptr<HydStatic_rArmCurve>& theC1
+			);
+
+		static TnbHydStatic_EXPORT std::vector<HydStatic_GzQ> 
+			Subtract
+			(
+				const std::shared_ptr<HydStatic_rArmCurve>& theC0,
+				const std::shared_ptr<HydStatic_rArmCurve>& theC1
+			);
+
+		template<class CurveType>
+		static std::shared_ptr<CurveType> MakeRightCurve
+		(
+			const std::vector<marineLib::xSectionParam>& theQs,
+			const hydStcLib::CurveMakerType t
+		);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<hydStcLib::rArmCurve_Eff> 
+			MakeEffRightCurve
+			(
+				const std::vector<marineLib::xSectionParam>& theQs
+			);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<hydStcLib::rArmCurve_Tanks> 
+			MakeTanksRightCurve
+			(
+				std::shared_ptr<hydStcLib::rArmCurve_Cmpt<hydStcLib::rArmCurve_FSLq>>&& theCmpt
+			);
 
 		static TnbHydStatic_EXPORT void
 			AuCurve
@@ -199,7 +270,11 @@ namespace tnbLib
 				const Standard_Real y0,
 				const std::shared_ptr<info>& theInfo
 			);
+
+
 	};
 }
+
+#include <HydStatic_ToolsI.hxx>
 
 #endif // !_HydStatic_Tools_Header

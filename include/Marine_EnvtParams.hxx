@@ -7,5 +7,6 @@
 #include <EnvtPropt_Gravity.hxx>
 #include <EnvtPropt_Velocity.hxx>
 #include <EnvtPropt_Viscosity.hxx>
+#include <EnvtPropt_Pressure.hxx>
 
 #endif // !_Marine_EnvtParams_Header
