@@ -27,6 +27,8 @@
 #include <HydStatic_WDiffCurve.hxx>
 #include <HydStatic_rArmCurve_Eff.hxx>
 #include <HydStatic_Tools.hxx>
+#include <HydStatic_CurveMaker.hxx>
+#include <HydStatic_rArmCurves.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -203,6 +205,36 @@ tnbLib::HydStatic_CmptLib::GZ
 		
 		auto gz = lk - theKG * std::sin(heel);
 		//Info << " lk = " << lk <<", heel = "<< Geo_Tools::RadianToDegree(heel) << ", theKG * std::sin(heel) = " << theKG * std::sin(heel) << ", gz = " << gz << endl;
+		marineLib::xSectionParam p;
+		p.x = Geo_Tools::RadianToDegree(heel);
+		p.value = gz;
+
+		gzs.push_back(std::move(p));
+	}
+	return std::move(gzs);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam>
+tnbLib::HydStatic_CmptLib::FSE
+(
+	const std::vector<HydStatic_GzQ>& thePairs, 
+	const marineLib::DISPV & theTank,
+	const marineLib::DISPV & theShip
+)
+{
+	std::vector<marineLib::xSectionParam> gzs;
+	gzs.reserve(thePairs.size());
+
+	const auto c = theTank() / theShip();
+	Debug_If_Condition(NOT INSIDE(c, 0.0, 1.0));
+
+	for (const auto& x : thePairs)
+	{
+		auto heel = x.Heel();
+		auto lk = x.LeverArm();
+
+		auto gz = c * lk;
+
 		marineLib::xSectionParam p;
 		p.x = Geo_Tools::RadianToDegree(heel);
 		p.value = gz;
@@ -767,6 +799,25 @@ tnbLib::HydStatic_CmptLib::CalcAuCurve
 		iter++;
 	}
 	return std::move(Qs);
+}
+
+std::shared_ptr<tnbLib::hydStcLib::rArmCurve_Eff> 
+tnbLib::HydStatic_CmptLib::CalcEffectiveRightingArm
+(
+	const std::shared_ptr<hydStcLib::rArmCurve_Body>& theBody,
+	const std::shared_ptr<hydStcLib::rArmCurve_Tanks>& theTanks
+)
+{
+	if (NOT HydStatic_Tools::IsCoating(theBody, theTanks))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the body curve is not covering the tanks curves" << endl
+			<< abort(FatalError);
+	}
+	auto Qs = HydStatic_Tools::Subtract(theBody, theTanks);
+	auto curve = HydStatic_Tools::MakeEffRightCurve(HydStatic_Tools::OffsetsFrom(Qs));
+
+	return std::move(curve);
 }
 
 void tnbLib::HydStatic_CmptLib::CalcParameters
