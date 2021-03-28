@@ -12,6 +12,8 @@
 #include <Marine_xSectionParam.hxx>
 #include <Marine_Module.hxx>
 #include <Marine_PlnCurvesFwd.hxx>
+#include <Marine_EnvtParams.hxx>
+#include <Marine_CoeffParam_Cw.hxx>
 
 #include <memory>
 #include <vector>
@@ -45,6 +47,16 @@ namespace tnbLib
 	{
 
 	public:
+
+		//- the coefficient Cw depends on the form and configuration of the sail area.
+		//- an average value for Cw is 1.2. 
+		static TnbMarine_EXPORT marineLib::Pressure 
+			CalcWindPressure
+			(
+				const marineLib::coeff::Cw& theAeroResisCoeff, 
+				const marineLib::Density& theRho,
+				const marineLib::Velocity& theVel
+			);
 
 		static TnbMarine_EXPORT std::vector<Standard_Real> 
 			Tessellate
@@ -172,7 +184,7 @@ namespace tnbLib
 			CalcMx
 			(
 				const Marine_CmpSection& theSection,
-				const Standard_Real x0,
+				const Standard_Real y0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
@@ -197,6 +209,14 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
 				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam>
+			CalcMx
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real y0, 
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 

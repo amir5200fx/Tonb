@@ -571,6 +571,15 @@
     <Filter Include="TnbLib\MarineBase\Environment\Pressure">
       <UniqueIdentifier>{b71abc65-373c-4ae4-8e79-0e95d6b555b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\Av">
+      <UniqueIdentifier>{6726349b-ad05-4ec6-9544-1772d004d388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Parameter\Hv">
+      <UniqueIdentifier>{c8681c41-a2c6-4cd3-84ea-2efa16603d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Coeff\CD">
+      <UniqueIdentifier>{08f6cd86-9a2d-4e79-8f94-b0549c9b079c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1205,6 +1214,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Environment\Pressure\EnvtPropt_Pressure.hxx">
       <Filter>TnbLib\MarineBase\Environment\Pressure</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\Av\Marine_VesselParam_Av.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\Av</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Parameter\Hv\Marine_VesselParam_Hv.hxx">
+      <Filter>TnbLib\MarineBase\Parameter\Hv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Coeff\CD\Marine_CoeffParam_CD.hxx">
+      <Filter>TnbLib\MarineBase\Coeff\CD</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Coeff\Marine_CoeffParams.hxx">
+      <Filter>TnbLib\MarineBase\Coeff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

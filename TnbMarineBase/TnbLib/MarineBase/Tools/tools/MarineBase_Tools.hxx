@@ -184,7 +184,7 @@ namespace tnbLib
 			CalcMx
 			(
 				const Marine_CmpSection& theSection,
-				const Standard_Real x0,
+				const Standard_Real y0,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
@@ -209,6 +209,14 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
 				const Standard_Real x0,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam>
+			CalcMx
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real y0, 
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 

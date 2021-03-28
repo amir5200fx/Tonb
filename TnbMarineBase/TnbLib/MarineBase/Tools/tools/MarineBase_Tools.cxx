@@ -538,7 +538,7 @@ Standard_Real
 tnbLib::MarineBase_Tools::CalcMx
 (
 	const std::shared_ptr<Marine_Section>& theSection,
-	const Standard_Real x0, 
+	const Standard_Real y0, 
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
@@ -553,14 +553,14 @@ tnbLib::MarineBase_Tools::CalcMx
 	const auto innerSections = Marine_SectTools::RetrieveInners(theSection);
 	if (innerSections.size())
 	{
-		const auto outerMx = Cad2d_CmptLib::Mx(*theSection->Wire(), x0, theInfo);
+		const auto outerMx = Cad2d_CmptLib::Mx(*theSection->Wire(), y0, theInfo);
 		//Debug_If_Condition(outerIy < theInfo->Tolerance());
 
 		auto innerMx = (Standard_Real)0;
 		for (const auto& x : innerSections)
 		{
 			Debug_Null_Pointer(x);
-			auto iy = Cad2d_CmptLib::Mx(*x->Wire(), x0, theInfo);
+			auto iy = Cad2d_CmptLib::Mx(*x->Wire(), y0, theInfo);
 
 			//Debug_If_Condition(iy > theInfo->Tolerance());
 			innerMx += iy;
@@ -569,7 +569,7 @@ tnbLib::MarineBase_Tools::CalcMx
 	}
 	else
 	{
-		const auto outerMx = Cad2d_CmptLib::Mx(*theSection->Wire(), x0, theInfo);
+		const auto outerMx = Cad2d_CmptLib::Mx(*theSection->Wire(), y0, theInfo);
 		//Debug_If_Condition(outerIy < theInfo->Tolerance());
 		return outerMx;
 	}
@@ -698,6 +698,29 @@ tnbLib::MarineBase_Tools::CalcIy
 		ix.value = CalcIy(*x, x0, theInfo);
 
 		sections.push_back(std::move(ix));
+	}
+	return std::move(sections);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcMx
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	const Standard_Real y0, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	std::vector<marineLib::xSectionParam> sections;
+	sections.reserve(theSections.size());
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+
+		marineLib::xSectionParam iy;
+		iy.x = x->X();
+		iy.value = CalcMx(*x, y0, theInfo);
+
+		sections.push_back(std::move(iy));
 	}
 	return std::move(sections);
 }

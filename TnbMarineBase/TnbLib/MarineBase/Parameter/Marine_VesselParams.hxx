@@ -3,6 +3,7 @@
 #define _Marine_VesselParams_Header
 
 #include <Marine_VesselParam_AM.hxx>
+#include <Marine_VesselParam_Av.hxx>
 #include <Marine_VesselParam_Amax.hxx>
 #include <Marine_VesselParam_APP.hxx>
 #include <Marine_VesselParam_AUW.hxx>
@@ -28,6 +29,7 @@
 #include <Marine_VesselParam_FWL.hxx>
 #include <Marine_VesselParam_FRCE.hxx>
 #include <Marine_VesselParam_GM.hxx>
+#include <Marine_VesselParam_Hv.hxx>
 #include <Marine_VesselParam_HEELANG.hxx>
 #include <Marine_VesselParam_TRIMANG.hxx>
 #include <Marine_VesselParam_iB.hxx>
