@@ -39,13 +39,13 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -71,9 +71,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <TargetName>$(ProjectName)d</TargetName>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -81,14 +84,22 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\Model;$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\FloodAngle;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(ProjectDir)TnbLib\ISC08\module;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CGAL_HEADER_ONLY;TnbISC08_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;boost_serialization-vc141-mt-gd-x64-1_75.lib;TnbBased.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -124,15 +135,17 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbBase\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\Model;$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\FloodAngle;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(ProjectDir)TnbLib\ISC08\module;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CGAL_HEADER_ONLY;TnbISC08_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;boost_serialization-vc141-mt-x64-1_75.lib;TnbBase.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -140,8 +153,11 @@
     <ClInclude Include="TnbLib\ISC08\Factor\ISC08_Factor.hxx" />
     <ClInclude Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.hxx" />
     <ClInclude Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Model\ISC08_Model.hxx" />
+    <ClInclude Include="TnbLib\ISC08\module\ISC08_Module.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\Ak\ISC08_Parameter_Ak.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\A\ISC08_Parameter_A.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Parameter\FloodAngle\ISC08_Parameter_FloodAngle.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\g\ISC08_Parameter_g.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_Parameter.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\ISC08_ParameterM.hxx" />
@@ -160,9 +176,24 @@
     <ClCompile Include="TnbLib\ISC08\Factor\ISC08_Factor.cxx" />
     <ClCompile Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.cxx" />
     <ClCompile Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.cxx" />
+    <ClCompile Include="TnbLib\ISC08\Model\ISC08_Model.cxx" />
     <ClCompile Include="TnbLib\ISC08\Parameter\ISC08_Parameter.cxx" />
     <ClCompile Include="TnbLib\ISC08\Table\ISC08_Table.cxx" />
     <ClCompile Include="TnbLib\ISC08\Tools\ISC08_Tools.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">
+      <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbHydrostatic\TnbHydrostatic.vcxproj">
+      <Project>{33976535-7c9d-4d56-ad80-699694bf4492}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbMarineBase\TnbMarineBase.vcxproj">
+      <Project>{e15d4b29-deef-4205-8790-f4ca3d77f53a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

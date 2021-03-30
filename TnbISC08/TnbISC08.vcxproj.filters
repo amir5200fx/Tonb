@@ -73,6 +73,15 @@
     <Filter Include="TnbLib\ISC08\Parameter\Phi">
       <UniqueIdentifier>{c000fb30-e52f-4e0d-945c-f25838ed26f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ISC08\module">
+      <UniqueIdentifier>{86ed9b9c-a767-44f6-b053-6169618f5cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Model">
+      <UniqueIdentifier>{98d40f68-8052-4986-9756-cdf0cf41ad89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\Parameter\FloodAngle">
+      <UniqueIdentifier>{79c750f5-9d69-4ae3-bbaa-35bde97b1ea3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.hxx">
@@ -129,6 +138,15 @@
     <ClInclude Include="TnbLib\ISC08\Parameter\Ak\ISC08_Parameter_Ak.hxx">
       <Filter>TnbLib\ISC08\Parameter\Ak</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\module\ISC08_Module.hxx">
+      <Filter>TnbLib\ISC08\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Model\ISC08_Model.hxx">
+      <Filter>TnbLib\ISC08\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Parameter\FloodAngle\ISC08_Parameter_FloodAngle.hxx">
+      <Filter>TnbLib\ISC08\Parameter\FloodAngle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.cxx">
@@ -151,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ISC08\CmptLib\ISC08_CmptLib.cxx">
       <Filter>TnbLib\ISC08\CmptLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\Model\ISC08_Model.cxx">
+      <Filter>TnbLib\ISC08\Model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

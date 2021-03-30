@@ -4,6 +4,10 @@
 #include <ISC08_Factor.hxx>
 #include <ISC08_Table.hxx>
 #include <HydStatic_hArmCurve.hxx>
+#include <HydStatic_rArmCurve_Eff.hxx>
+#include <HydStatic_Tools.hxx>
+#include <HydStatic_CmptLib.hxx>
+#include <Marine_xSectionParam.hxx>
 #include <error.hxx>
 #include <OSstream.hxx>
 
@@ -12,17 +16,28 @@
 std::shared_ptr<tnbLib::HydStatic_hArmCurve> 
 tnbLib::ISC08_Tools::HeelingArm
 (
-	const isc08Lib::Lw & theLw2
+	const isc08Lib::Lw & theLw2,
+	const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theEff
 )
 {
-	Handle(Geom2d_Line) line = 
-		new Geom2d_Line(gp_Pnt2d(0, theLw2()), gp_Vec2d(1, 0));
-	Debug_Null_Pointer(line);
+	const auto& eQs = theEff->Qs();
 
-	auto heeling = std::make_shared<HydStatic_hArmCurve>(0, "gust wind heeling arm", line);
-	Debug_Null_Pointer(heeling);
+	xSectParList Qs;
+	Qs.reserve(eQs.size());
 
-	return std::move(heeling);
+	for (const auto& x : eQs)
+	{
+		marineLib::xSectionParam q = { x.Heel(), theLw2() };
+		Qs.push_back(std::move(q));
+	}
+
+	const auto hArm = HydStatic_Tools::MakeHeelCurve(Qs);
+	Debug_Null_Pointer(hArm);
+
+	HydStatic_CmptLib::CalcParameters(hArm);
+
+	hArm->SetName("gust wind heeling arm");
+	return std::move(hArm);
 }
 
 Standard_Boolean 
@@ -32,7 +47,7 @@ tnbLib::ISC08_Tools::CheckData
 	const marineLib::TM & d
 )
 {
-	return NOT B() / d() <= 3.5;
+	return NOT (B() / d() <= 3.5);
 }
 
 Standard_Boolean 
