@@ -241,6 +241,12 @@ namespace tnbLib
 			const hydStcLib::CurveMakerType t
 		);
 
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_hArmCurve> 
+			MakeHeelCurve
+			(
+				const std::vector<marineLib::xSectionParam>& theQs
+			);
+
 		static TnbHydStatic_EXPORT std::shared_ptr<hydStcLib::rArmCurve_Eff> 
 			MakeEffRightCurve
 			(

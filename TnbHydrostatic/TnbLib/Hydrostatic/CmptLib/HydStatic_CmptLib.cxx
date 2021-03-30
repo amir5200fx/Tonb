@@ -29,6 +29,7 @@
 #include <HydStatic_Tools.hxx>
 #include <HydStatic_CurveMaker.hxx>
 #include <HydStatic_rArmCurves.hxx>
+#include <HydStatic_Spacing.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -758,6 +759,54 @@ tnbLib::HydStatic_CmptLib::CalcWorkDifference
 
 	wd->SetQs(std::move(Qs));
 	return std::move(wd);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::HydStatic_CmptLib::CalcAreaBetween
+(
+	const std::shared_ptr<HydStatic_hArmCurve>& theHeeling, 
+	const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theRighting, 
+	const std::shared_ptr<HydStatic_Spacing>& theSpacing
+)
+{
+	Debug_Null_Pointer(theHeeling);
+	Debug_Null_Pointer(theRighting);
+	Debug_Null_Pointer(theSpacing);
+
+	const auto hs = theSpacing->Sections();
+	if (hs.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "not enough spacing has been detected!" << endl
+			<< "- nb. of sections: " << hs.size() << endl
+			<< "- min. nb. of sections: 3" << endl
+			<< abort(FatalError);
+	}
+	const auto h0 = hs[0];
+	const auto h1 = hs[hs.size() - 1];
+
+	std::vector<marineLib::xSectionParam> Xs;
+	Xs.reserve(hs.size());
+	for (auto x : hs)
+	{
+		if (NOT INSIDE(x, h0, h1))
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "invalid heel has been detected!" << endl
+				<< " min. heel angle: " << h0 << endl
+				<< " max. heel angle: " << h1 << endl
+				<< " heel angle: " << x << endl
+				<< abort(FatalError);
+		}
+		auto he = theRighting->Value(x);
+		auto hi = theHeeling->Value(x);
+
+		auto dh = he - hi;
+
+		marineLib::xSectionParam par{ x,dh };
+		Xs.push_back(std::move(par));
+	}
+	return std::move(Xs);
 }
 
 std::vector<tnbLib::HydStatic_GzQ> 

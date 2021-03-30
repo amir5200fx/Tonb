@@ -727,6 +727,34 @@ tnbLib::HydStatic_Tools::Subtract
 	}
 }
 
+std::shared_ptr<tnbLib::HydStatic_hArmCurve> 
+tnbLib::HydStatic_Tools::MakeHeelCurve
+(
+	const std::vector<marineLib::xSectionParam>& theQs
+)
+{
+	const auto curve = MarineBase_Tools::Curve(theQs);
+
+	const auto rArm = 
+		hydStcLib::MakeCurve<HydStatic_hArmCurve>
+		(
+			std::move(curve), 
+			hydStcLib::CurveMakerType::arbitrary
+			);
+
+	std::vector<HydStatic_GzQP> Qs;
+	Qs.reserve(theQs.size());
+
+	for (const auto& x : theQs)
+	{
+		HydStatic_GzQP par(x.x, x.value, 0);
+		Qs.push_back(std::move(par));
+	}
+
+	rArm->SetQs(std::move(Qs));
+	return std::move(rArm);
+}
+
 std::shared_ptr<tnbLib::hydStcLib::rArmCurve_Eff> 
 tnbLib::HydStatic_Tools::MakeEffRightCurve
 (

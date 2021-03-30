@@ -33,6 +33,7 @@ namespace tnbLib
 	class HydStatic_hArmCurve;
 	class HydStatic_WDiffCurve;
 	class HydStatic_EqQ;
+	class HydStatic_Spacing;
 	class NumAlg_AdaptiveInteg_Info;
 
 	struct HydStatic_Bonjean_Entity;
@@ -198,6 +199,14 @@ namespace tnbLib
 			(
 				const std::shared_ptr<HydStatic_hArmCurve>& theHeeling, 
 				const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theRighting
+			);
+
+		static TnbHydStatic_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcAreaBetween
+			(
+				const std::shared_ptr<HydStatic_hArmCurve>& theHeeling,
+				const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theRighting,
+				const std::shared_ptr<HydStatic_Spacing>& theSpacing
 			);
 
 		static TnbHydStatic_EXPORT std::vector<HydStatic_GzQ>
