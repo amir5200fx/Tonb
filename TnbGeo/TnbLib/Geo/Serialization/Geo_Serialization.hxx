@@ -3,6 +3,7 @@
 #define _Geo_Serialization_Header
 
 #include <Global_Serialization.hxx>
+#include <Geo_Module.hxx>
 
 #include <gp_XY.hxx>
 #include <gp_XYZ.hxx>
@@ -18,6 +19,21 @@
 #include <gp_Mat.hxx>
 #include <gp_Vec.hxx>
 #include <gp_Vec2d.hxx>
+
+#include <TColgp_Array1OfPnt.hxx>
+#include <TColgp_Array1OfPnt2d.hxx>
+#include <TShort_Array1OfShortReal.hxx>
+#include <Poly_Array1OfTriangle.hxx>
+
+// Forward Declarations
+class Geom2d_Curve;
+class Geom_Curve;
+class Geom_Surface;
+class TopoDS_Shape;
+class Poly_Triangulation;
+class Poly_Triangle;
+class gp_Pnt;
+class gp_Pnt2d;
 
 namespace boost
 {
@@ -244,6 +260,199 @@ namespace boost
 			ar & xyz;
 			g = gp_Vec(xyz);
 		}
+
+		template<class Archive>
+		void save(Archive & /*ar*/, const Poly_Triangle&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive & /*ar*/, Poly_Triangle&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const Poly_Triangle& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				Poly_Triangle& s,
+				const unsigned int version
+				);
+
+
+		template<class Archive>
+		void save(Archive & /*ar*/, const Handle(Poly_Triangulation)&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive & /*ar*/, Handle(Poly_Triangulation)&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const Handle(Poly_Triangulation)& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				Handle(Poly_Triangulation)& s,
+				const unsigned int version
+				);
+
+		template<class Archive>
+		void save(Archive & /*ar*/, const TShort_Array1OfShortReal&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive & /*ar*/, TShort_Array1OfShortReal&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const TShort_Array1OfShortReal& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				TShort_Array1OfShortReal& s,
+				const unsigned int version
+				);
+
+		template<class Archive>
+		void save(Archive & /*ar*/, const Poly_Array1OfTriangle&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive & /*ar*/, Poly_Array1OfTriangle&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const Poly_Array1OfTriangle& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				Poly_Array1OfTriangle& s,
+				const unsigned int version
+				);
+
+		template<class Archive>
+		void save(Archive & /*ar*/, const TColgp_Array1OfPnt2d&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive & /*ar*/, TColgp_Array1OfPnt2d&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const TColgp_Array1OfPnt2d& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				TColgp_Array1OfPnt2d& s,
+				const unsigned int version
+				);
+
+		template<class Archive>
+		void save(Archive & /*ar*/, const TColgp_Array1OfPnt&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive & /*ar*/, TColgp_Array1OfPnt&, const unsigned int /*version*/)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const TColgp_Array1OfPnt& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				TColgp_Array1OfPnt& s,
+				const unsigned int version
+				);
 	}
 }
 
@@ -260,5 +469,11 @@ BOOST_SERIALIZATION_SPLIT_FREE(gp_Mat2d)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Mat)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Vec2d)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Vec)
+BOOST_SERIALIZATION_SPLIT_FREE(Poly_Triangle)
+BOOST_SERIALIZATION_SPLIT_FREE(Handle(Poly_Triangulation))
+BOOST_SERIALIZATION_SPLIT_FREE(TShort_Array1OfShortReal)
+BOOST_SERIALIZATION_SPLIT_FREE(Poly_Array1OfTriangle)
+BOOST_SERIALIZATION_SPLIT_FREE(TColgp_Array1OfPnt2d)
+BOOST_SERIALIZATION_SPLIT_FREE(TColgp_Array1OfPnt)
 
 #endif // !_Geo_Serialization_Header

@@ -319,6 +319,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\ProfileFun\Linear\Geo_ProfileFun_Linear.cxx" />
     <ClCompile Include="TnbLib\Geo\Scripts\Geo_Scripts.cxx" />
     <ClCompile Include="TnbLib\Geo\Search\PrTree\Geo_PrTree.cxx" />
+    <ClCompile Include="TnbLib\Geo\Serialization\Geo_Serialization.cxx" />
     <ClCompile Include="TnbLib\Geo\System\TnbGeo_System.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools_cgal.cxx" />

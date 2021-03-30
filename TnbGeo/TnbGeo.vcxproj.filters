@@ -1073,5 +1073,8 @@
     <ClCompile Include="TnbLib\Geo\Entities\Direct\3d\Dir3dIO.cxx">
       <Filter>TnbLib\Geo\Entities\Direct\3d</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Serialization\Geo_Serialization.cxx">
+      <Filter>TnbLib\Geo\Serialization</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
