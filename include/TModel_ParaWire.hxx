@@ -19,7 +19,25 @@ namespace tnbLib
 
 		std::shared_ptr<TModel_CmpParaCurve> theCurve_;
 
+
+		//- public functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
+	protected:
+
+
+		//- default constructor
+
+		TModel_ParaWire()
+		{}
+
+
 	public:
+
+
+		//- constructors
 
 		TnbCad_EXPORT TModel_ParaWire
 		(
@@ -40,5 +58,8 @@ namespace tnbLib
 		);
 	};
 }
+
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_ParaWire);
 
 #endif // !_TModel_ParaWire_Header

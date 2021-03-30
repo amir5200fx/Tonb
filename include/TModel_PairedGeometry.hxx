@@ -5,6 +5,8 @@
 #include <Standard_TypeDef.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad_Module.hxx>
 #include <OFstream.hxx>
 
 #include <memory>
@@ -18,6 +20,11 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<Entity3d_Polygon> theMesh_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 	protected:
 

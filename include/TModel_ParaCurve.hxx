@@ -21,6 +21,9 @@ namespace tnbLib
 
 		Handle(Geom2d_Curve) theGeometry_;
 
+
+		//- private functions and operators
+
 		auto& ChangeGeometry()
 		{
 			return theGeometry_;
@@ -37,6 +40,18 @@ namespace tnbLib
 			const Handle(Geom2d_Curve)& theCurve,
 			const char* theName
 		);
+
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
+	protected:
+
+
+		//- default constructor
+
+		TModel_ParaCurve()
+		{}
 
 	public:
 
@@ -71,5 +86,7 @@ namespace tnbLib
 }
 
 #include <TModel_ParaCurveI.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_ParaCurve);
 
 #endif // !_TModel_ParaCurve_Header

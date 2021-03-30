@@ -6,6 +6,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <Global_Serialization.hxx>
+
 namespace tnbLib
 {
 
@@ -15,6 +17,17 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Real thePrecision_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & thePrecision_;
+		}
 
 	public:
 

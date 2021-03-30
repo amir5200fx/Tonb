@@ -27,10 +27,18 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		outer theOutter_;
+		outer theOuter_;
 		inner theInner_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 	protected:
+
+		TModel_Plane()
+		{}
 
 		TnbCad_EXPORT TModel_Plane
 		(
@@ -55,9 +63,12 @@ namespace tnbLib
 
 	public:
 
+
+		//- public functions and operators
+
 		auto HasOuter() const
 		{
-			return (Standard_Boolean)theOutter_;
+			return (Standard_Boolean)theOuter_;
 		}
 
 		auto HasHole() const
@@ -69,7 +80,7 @@ namespace tnbLib
 
 		const auto& Outer() const
 		{
-			return theOutter_;
+			return theOuter_;
 		}
 
 		const auto& Holes() const
@@ -91,5 +102,7 @@ namespace tnbLib
 			MakePlane(const TModel_Surface& theSurface);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Plane);
 
 #endif // !_TModel_Plane_Header

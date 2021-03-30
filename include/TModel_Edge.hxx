@@ -30,6 +30,18 @@ namespace tnbLib
 		std::shared_ptr<TModel_Vertex> theVtx0_;
 		std::shared_ptr<TModel_Vertex> theVtx1_;
 
+
+		//- private functions and operators
+
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
+	protected:
+
+		TModel_Edge()
+		{}
+
 	public:
 
 		TnbCad_EXPORT TModel_Edge
@@ -120,5 +132,8 @@ namespace tnbLib
 			GLOBAL_ACCESS_SINGLE(std::shared_ptr<TModel_Vertex>, Vtx1)
 	};
 }
+
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Edge);
 
 #endif // !_TModel_Edge_Header

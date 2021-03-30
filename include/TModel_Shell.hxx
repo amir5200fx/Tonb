@@ -27,6 +27,11 @@ namespace tnbLib
 
 		TModel_WaterTight theWaterTight_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 	protected:
 
 		void Insert
@@ -85,5 +90,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Shell);
 
 #endif // !_TModel_Shell_Header
