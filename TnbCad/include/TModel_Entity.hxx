@@ -20,10 +20,25 @@ namespace tnbLib
 
 		/*private Data*/
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+		}
+
 	protected:
+
+		//- default constructor
 
 		TModel_Entity()
 		{}
+
+
+		//- constructors
 
 		TModel_Entity(const Standard_Integer theIndex)
 			: Global_Indexed(theIndex)
@@ -37,6 +52,9 @@ namespace tnbLib
 
 	public:
 
+
+		//- public functions and operators
+
 		virtual ~TModel_Entity()
 		{}
 
@@ -46,5 +64,8 @@ namespace tnbLib
 		}
 	};
 }
+
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::TModel_Entity);
 
 #endif // !_TModel_Entity_Header

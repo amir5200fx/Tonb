@@ -23,6 +23,15 @@ namespace tnbLib
 		std::shared_ptr<TModel_Edge> theEdge1_;
 
 
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
+	protected:
+
+		TModel_Paired()
+		{}
 
 	public:
 
@@ -70,5 +79,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Paired);
 
 #endif // !_TModel_Paired_Header

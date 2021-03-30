@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Cad_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 #include <map>
@@ -28,50 +29,51 @@ namespace tnbLib
 		edgeRegister theEdges_;
 		faceRegister theFaces_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 	protected:
+
+		//- default constructor
 
 		TModel_VertexAdaptor()
 		{}
 
 	public:
 
-		Standard_Integer NbEdges() const
+		auto NbEdges() const
 		{
 			return (Standard_Integer)theEdges_.size();
 		}
 
-		Standard_Integer NbFaces() const
+		auto NbFaces() const
 		{
 			return (Standard_Integer)theFaces_.size();
 		}
 
-		const edgeRegister& Edges() const
+		const auto& Edges() const
 		{
 			return theEdges_;
 		}
 
-		const faceRegister& Faces() const
+		const auto& Faces() const
 		{
 			return theFaces_;
 		}
 
-		void ImportToEdges
+		TnbCad_EXPORT void ImportToEdges
 		(
 			const Standard_Integer theIndex,
 			const std::weak_ptr<TModel_Edge>& theEdge
-		)
-		{
-			theEdges_.insert(std::make_pair(theIndex, theEdge));
-		}
+		);
 
-		void ImportToSurfaces
+		TnbCad_EXPORT void ImportToSurfaces
 		(
 			const Standard_Integer theIndex,
 			const std::weak_ptr<TModel_Surface>& theFace
-		)
-		{
-			theFaces_.insert(std::make_pair(theIndex, theFace));
-		}
+		);
 
 		TnbCad_EXPORT void ImportToSurfaces_dup
 		(

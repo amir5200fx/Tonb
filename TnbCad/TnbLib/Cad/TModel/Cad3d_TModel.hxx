@@ -37,6 +37,11 @@ namespace tnbLib
 
 		TopoDS_Shape theShape_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 	public:
 
 		TnbCad_EXPORT Cad3d_TModel();
@@ -99,5 +104,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Cad3d_TModel);
 
 #endif // !_Cad3d_TModel_Header]

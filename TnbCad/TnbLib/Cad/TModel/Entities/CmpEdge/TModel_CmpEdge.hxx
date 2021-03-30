@@ -29,6 +29,11 @@ namespace tnbLib
 
 		edgeList theEdges_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 	protected:
 
 		void Insert(const std::shared_ptr<TModel_Edge>& theEdge)
@@ -77,5 +82,8 @@ namespace tnbLib
 		
 	};
 }
+
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_CmpEdge);
 
 #endif // !_TModel_CmpEdge_Header

@@ -1,4 +1,4 @@
-#include <TModel_CmpCurve.hxx>
+#include <TModel_CmpParaCurve.hxx>
 
 #include <Entity2d_Box.hxx>
 #include <TModel_ParaCurve.hxx>
@@ -6,7 +6,7 @@
 #include <OSstream.hxx>
 
 tnbLib::Entity2d_Box 
-tnbLib::TModel_CmpCurve::CalcBoundingBox() const
+tnbLib::TModel_CmpParaCurve::CalcBoundingBox() const
 {
 	if (Curves().empty())
 	{

@@ -5,7 +5,7 @@ tnbLib::TModel_Plane::TModel_Plane
 	const outer & theOuter, 
 	const inner & theInner
 )
-	: theOutter_(theOuter)
+	: theOuter_(theOuter)
 	, theInner_(theInner)
 {
 }
@@ -16,7 +16,7 @@ tnbLib::TModel_Plane::TModel_Plane
 	const outer & theOuter,
 	const inner & theInner
 )
-	: theOutter_(theOuter)
+	: theOuter_(theOuter)
 	, theInner_(theInner)
 	, TModel_Entity(theIndex)
 {
@@ -29,7 +29,7 @@ tnbLib::TModel_Plane::TModel_Plane
 	const outer & theOuter,
 	const inner & theInner
 )
-	: theOutter_(theOuter)
+	: theOuter_(theOuter)
 	, theInner_(theInner)
 	, TModel_Entity(theIndex, theName)
 {

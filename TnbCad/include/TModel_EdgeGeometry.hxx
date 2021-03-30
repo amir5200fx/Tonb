@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Cad_Module.hxx>
 
@@ -29,12 +30,21 @@ namespace tnbLib
 
 		Standard_Boolean theSense_;
 
+
+		//- private functions and operators
+
 		auto& ChangeMesh() const
 		{
 			return theMesh_;
 		}
 
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 	protected:
+
+
+		TModel_EdgeGeometry()
+		{}
 
 		TModel_EdgeGeometry
 		(
@@ -46,6 +56,12 @@ namespace tnbLib
 			, theParaCurve_(thePara)
 			, theSense_(theSense)
 		{}
+
+
+		void SetGeometry(std::shared_ptr<TModel_Curve>&& theCurve)
+		{
+			theCurve_ = std::move(theCurve);
+		}
 
 	public:
 

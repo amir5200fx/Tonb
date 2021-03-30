@@ -13,6 +13,23 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<TModel_Edge>(*this);
+		}
+
+	protected:
+
+		TModel_Ring()
+		{}
+
 	public:
 
 		TnbCad_EXPORT TModel_Ring
@@ -75,5 +92,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Ring);
 
 #endif // !_TModel_Ring_Header

@@ -20,6 +20,27 @@ namespace tnbLib
 
 		Pnt3d theCoord_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<TModel_Entity>(*this);
+			ar & boost::serialization::base_object<TModel_VertexAdaptor>(*this);
+			ar & theCoord_;
+		}
+
+	protected:
+
+
+		//- default constructor
+
+		TModel_Vertex()
+		{}
+
 	public:
 
 		TModel_Vertex
@@ -56,5 +77,7 @@ namespace tnbLib
 		GLOBAL_ACCESS_SINGLE(Pnt3d, Coord)
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Vertex);
 
 #endif // !_TModel_Vertex_Header

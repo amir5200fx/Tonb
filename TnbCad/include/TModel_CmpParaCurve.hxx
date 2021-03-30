@@ -16,7 +16,7 @@ namespace tnbLib
 	class TModel_ParaWire;
 	class Cad_Tools;
 
-	class TModel_CmpCurve
+	class TModel_CmpParaCurve
 		: public TModel_Entity
 	{
 
@@ -29,6 +29,11 @@ namespace tnbLib
 
 		curveList theCurves_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 	protected:
 
 		void Insert(const std::shared_ptr<TModel_ParaCurve>& theCurve)
@@ -38,23 +43,26 @@ namespace tnbLib
 
 	public:
 
-		TModel_CmpCurve()
+		TModel_CmpParaCurve()
 		{}
 
-		TModel_CmpCurve
+		TModel_CmpParaCurve
 		(
 			const Standard_Integer theIndex
 		)
 			: TModel_Entity(theIndex)
 		{}
 
-		TModel_CmpCurve
+		TModel_CmpParaCurve
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
 		)
 			: TModel_Entity(theIndex, theName)
 		{}
+
+
+		//- public functions and operators
 
 		auto NbCurves() const
 		{
@@ -69,5 +77,7 @@ namespace tnbLib
 		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_CmpParaCurve);
 
 #endif // !_TModel_CmpParaCurve_Header

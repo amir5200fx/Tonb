@@ -21,6 +21,11 @@ namespace tnbLib
 		Handle(Geom_Curve) theGeometry_;
 
 
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
 		auto& ChangeGeometry()
 		{
 			return theGeometry_;
@@ -38,12 +43,23 @@ namespace tnbLib
 			const char* theName
 		);
 
+
+	protected:
+
+		//- default constructor for serialization purposes only!
+
+		TModel_Curve()
+		{}
+
 	public:
 
 		TnbCad_EXPORT TModel_Curve
 		(
 			const Handle(Geom_Curve) theGeometry
 		);
+
+
+		//- public functions and operators
 
 		TnbCad_EXPORT Standard_Real FirstParameter() const;
 
@@ -67,5 +83,7 @@ namespace tnbLib
 }
 
 #include <TModel_CurveI.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Curve);
 
 #endif // !_TModel_Curve_Header

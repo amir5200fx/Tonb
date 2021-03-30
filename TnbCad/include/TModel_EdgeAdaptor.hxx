@@ -3,6 +3,8 @@
 #define _TModel_EdgeAdaptor_Header
 
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad_Module.hxx>
 
 #include <TopoDS_Edge.hxx>
 
@@ -27,7 +29,12 @@ namespace tnbLib
 		std::weak_ptr<TModel_Wire> theWire_;
 		std::weak_ptr<TModel_Edge> thePairedEdge_;
 
-		TopoDS_Edge theTEdge_;
+		//TopoDS_Edge theTEdge_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 	protected:
 
@@ -42,7 +49,7 @@ namespace tnbLib
 			GLOBAL_ACCESS_SINGLE(std::weak_ptr<TModel_Edge>, PairedEdge)
 			GLOBAL_ACCESS_SINGLE(std::weak_ptr<TModel_Wire>, Wire)
 
-			GLOBAL_ACCESS_PRIM_SINGLE(TopoDS_Edge, TEdge)
+			//GLOBAL_ACCESS_PRIM_SINGLE(TopoDS_Edge, TEdge)
 	};
 }
 

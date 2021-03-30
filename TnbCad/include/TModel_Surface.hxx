@@ -45,6 +45,17 @@ namespace tnbLib
 		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;
 
 
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
+	protected:
+
+
+		//- default constructor
+
+		TModel_Surface()
+		{}
+
 	public:
 
 		TnbCad_EXPORT TModel_Surface
@@ -126,5 +137,8 @@ namespace tnbLib
 		}
 	};
 }
+
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Surface);
 
 #endif // !_TModel_Surface_Header

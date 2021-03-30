@@ -348,9 +348,6 @@
     <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaWire\TModel_ParaWire.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\ParaWire</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpCurve.hxx">
-      <Filter>TnbLib\Cad\TModel\Entities\CmpParaCurve</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Shell\TModel_Shell.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Shell</Filter>
     </ClInclude>
@@ -522,6 +519,9 @@
     <ClInclude Include="TnbLib\Cad\module\Cad_Module.hxx">
       <Filter>TnbLib\Cad\module</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpParaCurve.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\CmpParaCurve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -586,9 +586,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaWire\TModel_ParaWire.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\ParaWire</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpCurve.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\CmpParaCurve</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Shell\TModel_Shell.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Shell</Filter>
@@ -697,6 +694,66 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\NModel\Entities\Entity\NModel_Entity.cxx">
       <Filter>TnbLib\Cad\NModel\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Vertex\Adaptor\TModel_VertexAdaptorIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Vertex\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Curve\TModel_CurveIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Surface\Geometry\TModel_SurfaceGeometryIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Surface\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Surface\TModel_SurfaceIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaCurve\TModel_ParaCurveIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Vertex\TModel_VertexIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Adaptor\TModel_EdgeAdaptorIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Geometry\TModel_EdgeGeometryIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\TModel_EdgeIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpEdge\TModel_CmpEdgeIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\CmpEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\Geometry\TModel_PairedGeometryIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Paired\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Wire\TModel_WireIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaWire\TModel_ParaWireIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaWire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpParaCurve.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\CmpParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpParaCurveIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\CmpParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Ring\TModel_RingIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Shell\TModel_ShellIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Shell</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Singular\TModel_SingularEdgeIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Singular</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Plane\TModel_PlaneIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManagerIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

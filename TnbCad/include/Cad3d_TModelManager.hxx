@@ -20,6 +20,11 @@ namespace tnbLib
 		std::shared_ptr<TModel_SurfaceManager> theSurfaces_;
 
 
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
 	protected:
 
 		Cad3d_TModelManager()
