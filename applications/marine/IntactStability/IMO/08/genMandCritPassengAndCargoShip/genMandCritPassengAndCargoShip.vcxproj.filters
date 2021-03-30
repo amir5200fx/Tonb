@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{b90c0308-876e-4a68-81a7-058b3a805b4b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="genMandCritPassengAndCargoShip.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
