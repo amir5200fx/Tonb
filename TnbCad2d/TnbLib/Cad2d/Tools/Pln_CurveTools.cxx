@@ -77,10 +77,20 @@ tnbLib::Pln_CurveTools::Interpolation
 		++K;
 	}
 
-	Geom2dAPI_Interpolate interp(Q, thePeriodic, theTol);
-	interp.Perform();
+	try
+	{
+		Geom2dAPI_Interpolate interp(Q, thePeriodic, theTol);
+		interp.Perform();
 
-	return interp.Curve();
+		return interp.Curve();
+	}
+	catch (const StdFail_NotDone& f)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "catch an exception in 'Geom2dAPI_Interpolate' algorithm" << endl
+			<< " message: " << f.GetMessageString() << endl;
+		return nullptr;
+	}
 }
 
 Handle(Geom2d_Curve) 
