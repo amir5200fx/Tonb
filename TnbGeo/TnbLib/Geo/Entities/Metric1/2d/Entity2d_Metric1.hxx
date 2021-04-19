@@ -44,6 +44,15 @@ namespace tnbLib
 		Entity2d_Metric1()
 		{}
 
+		explicit Entity2d_Metric1
+		(
+			const Standard_Real x
+		)
+			: theA_(x)
+			, theB_(x)
+			, theC_(x)
+		{}
+
 		Entity2d_Metric1
 		(
 			const Standard_Real A, 
@@ -63,9 +72,11 @@ namespace tnbLib
 			const Pnt2d& E2
 		);
 
-		TnbGeo_EXPORT metric& operator*=(const Standard_Real Scalar);
+		metric& operator+=(const metric&);
+		metric& operator*=(const Standard_Real Scalar);
+		metric& operator=(const Standard_Real);
 
-		TnbGeo_EXPORT arma::mat22 Arma() const;
+		arma::mat22 Arma() const;
 
 		Standard_Real Determinant() const
 		{
@@ -142,7 +153,7 @@ namespace tnbLib
 
 		//- Static functions 
 
-		static TnbGeo_EXPORT metric Avg(const metric& M1, const metric& M2);
+		static metric Avg(const metric& M1, const metric& M2);
 
 		static TnbGeo_EXPORT metric IntersectionSR(const metric& M1, const metric& M2);
 

@@ -3,12 +3,30 @@
 namespace tnbLib
 {
 
-	inline Entity2d_Metric1 & Entity2d_Metric1::operator*=(const Standard_Real Scalar)
+	inline typename Entity2d_Metric1::metric & 
+		tnbLib::Entity2d_Metric1::operator+=(const metric & m)
+	{
+		theA_ += m.A();
+		theB_ += m.B();
+		theC_ += m.C();
+
+		return *this;
+	}
+
+	inline typename Entity2d_Metric1::metric & 
+		Entity2d_Metric1::operator*=(const Standard_Real Scalar)
 	{
 		theA_ *= Scalar;
 		theB_ *= Scalar;
 		theC_ *= Scalar;
 
+		return *this;
+	}
+
+	inline typename Entity2d_Metric1::metric &
+		tnbLib::Entity2d_Metric1::operator=(const Standard_Real x)
+	{
+		theA_ = theB_ = theC_ = x;
 		return *this;
 	}
 

@@ -2,6 +2,17 @@
 
 #include <iostream>
 
+template<>
+Standard_Boolean tnbLib::connectivity::quadruple::IsDegenerated() const
+{
+	if (Value(0) == Value(1)) return Standard_True;
+	else if (Value(0) == Value(2)) return Standard_True;
+	else if (Value(0) == Value(3)) return Standard_True;
+	else if (Value(1) == Value(2)) return Standard_True;
+	else if (Value(2) == Value(3)) return Standard_True;
+	return Standard_False;
+}
+
 std::vector<tnbLib::connectivity::dual>
 tnbLib::dualConnectivityList
 (

@@ -113,6 +113,9 @@ namespace tnbLib
 		return Standard_False;
 	}
 
+	template<>
+	TnbGeo_EXPORT Standard_Boolean connectivity::quadruple::IsDegenerated() const;
+
 	template<int Dim>
 	Standard_Integer MaxID(const std::vector<Entity_Connectivity<Dim>>&);
 

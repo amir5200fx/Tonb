@@ -34,10 +34,20 @@ namespace tnbLib
 			NotImplemented;
 		}
 
+	protected:
+
+		//- default constructor for serialization purposes only!
+
+		GeoMetricFun_Background()
+		{}
+
 	public:
 
 		typedef Point ptType;
 		typedef typename metric_type_from_point<Point>::metricType metricType;
+
+
+		//- constructors
 
 		GeoMetricFun_Background
 		(
@@ -53,6 +63,9 @@ namespace tnbLib
 			const std::shared_ptr<BackMeshData>& theBackMesh
 		);
 
+
+
+		//- public functions and operators
 
 		const std::shared_ptr<BackMeshData>& BackMesh() const
 		{
