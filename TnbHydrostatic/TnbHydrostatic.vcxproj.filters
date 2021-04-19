@@ -316,6 +316,27 @@
     <Filter Include="TnbLib\Hydrostatic\GzEff">
       <UniqueIdentifier>{f0d2bd4f-5b2e-4dac-9044-4ea89087c248}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\FillCurve">
+      <UniqueIdentifier>{e8d4acec-d34c-4c3e-8f65-33f9d948cfdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Tank">
+      <UniqueIdentifier>{98271bb6-2576-4006-95fa-1edc3164c164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\SolutionData">
+      <UniqueIdentifier>{e39ad8f7-db35-46b5-868c-8570d8984cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Shape">
+      <UniqueIdentifier>{2e4cb13e-eec4-4f78-8fa1-8f407c5e96e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Shape\Tank">
+      <UniqueIdentifier>{8a2dced5-aad9-49e4-9b12-7392a5d7315f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Shape\Sail">
+      <UniqueIdentifier>{fd59c325-5b59-427b-832b-581b5e6da6d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\Shape\Hull">
+      <UniqueIdentifier>{95f796e0-ee54-4f3b-8946-7ff389fda3e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -648,6 +669,27 @@
     <ClInclude Include="TnbLib\Hydrostatic\Tools\HydStatic_ToolsI.hxx">
       <Filter>TnbLib\Hydrostatic\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\FillCurve\HydStatic_FillCurve.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FillCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Tank\HydStatic_Tank.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\SolutionData\HydStatic_SolutionData.hxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Shape\HydStatic_Shape.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Shape\Hull\HydStatic_HullShape.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Shape\Tank\HydStatic_TankShape.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\Shape\Sail\HydStatic_SailShape.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape\Sail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
@@ -976,6 +1018,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Tanks\HydStatic_rArmCurve_Tanks.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\ArmCurve\rArmCurve\Tanks</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\FillCurve\HydStatic_FillCurve.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FillCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\FillCurve\HydStatic_FillCurveIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FillCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Tank\HydStatic_Tank.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Tank\HydStatic_TankIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HydStatic_SolutionData.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Shape\Hull\HydStatic_HullShape.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Shape\Tank\HydStatic_TankShape.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Shape\Sail\HydStatic_SailShape.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape\Sail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
