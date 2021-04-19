@@ -181,6 +181,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\SectPx\Entities\Par\SectPx_ParType.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_BndPoleAdaptor.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_InterPoleAdaptor.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_PoleAdaptor.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\Dangle\SectPx_Pole_Dangle.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master\SectPx_Pole_Master.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\SectPx_PairedPole.hxx" />
@@ -391,6 +392,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_ParIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_BndPoleAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_InterPoleAdaptorIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_PoleAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Dangle\SectPx_Pole_Dangle.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Dangle\SectPx_Pole_DangleIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master\SectPx_Pole_Master.cxx" />

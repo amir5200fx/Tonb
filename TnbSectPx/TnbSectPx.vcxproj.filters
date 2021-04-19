@@ -1038,6 +1038,9 @@
     <ClInclude Include="TnbLib\SectPx\Makers\Spacing\SectPx_SpacingMaker.hxx">
       <Filter>TnbLib\SectPx\Makers\Spacing</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_PoleAdaptor.hxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Adaptor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.cxx">
@@ -1741,6 +1744,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Makers\Spacing\SectPx_SpacingMakerIO.cxx">
       <Filter>TnbLib\SectPx\Makers\Spacing</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_PoleAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Pole\Adaptor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

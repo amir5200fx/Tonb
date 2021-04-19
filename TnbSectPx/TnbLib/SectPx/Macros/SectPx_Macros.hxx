@@ -2,23 +2,23 @@
 #ifndef _SectPx_Macros_Header
 #define _SectPx_Macros_Header
 
-#define AddParameterToParent(PAR, INPPAR, FuncName)							\
-{																			\
-	auto par = PAR.lock();													\
-	if(par)																	\
-	{																		\
-		RemoveThisFromChild(par);											\
-	}																		\
-																			\
-	PAR=INPPAR;																\
-																			\
-	if(INPPAR AND INPPAR->InCycle())										\
-	{																		\
-		FatalErrorIn(FuncName)												\
-			<< "the parameter is just taken into a cycle!" << endl			\
-			<< abort(FatalError);											\
-	}																		\
-	AddThisToChild(INPPAR);													\
+#define AddParameterToParent(PAR, INPPAR, FuncName)										\
+{																						\
+	auto par = PAR.lock();																\
+	if(par)																				\
+	{																					\
+		RemoveThisFromChild(par);														\
+	}																					\
+																						\
+	PAR=INPPAR;																			\
+																						\
+	if(INPPAR AND INPPAR->InCycle(std::dynamic_pointer_cast<SectPx_Parent>(This())))	\
+	{																					\
+		FatalErrorIn(FuncName)															\
+			<< "the parameter is just taken into a cycle!" << endl						\
+			<< abort(FatalError);														\
+	}																					\
+	AddThisToChild(INPPAR);																\
 }
 
 #define AddThisParentToChild(PAR)									\

@@ -4,6 +4,7 @@
 
 #include <SectPx_RegObj.hxx>
 #include <SectPx_PoleType.hxx>
+#include <SectPx_PoleAdaptor.hxx>
 #include <Pnt2d.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -15,6 +16,7 @@ namespace tnbLib
 
 	class SectPx_Pole
 		: public SectPx_RegObj
+		, public SectPx_PoleAdaptor
 	{
 
 		/*Private Data*/
@@ -25,6 +27,7 @@ namespace tnbLib
 		void serialize(Archive& ar, const unsigned int version)
 		{
 			ar & boost::serialization::base_object<SectPx_RegObj>(*this);
+			ar & boost::serialization::base_object<SectPx_PoleAdaptor>(*this);
 		}
 
 	protected:

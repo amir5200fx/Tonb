@@ -53,7 +53,7 @@ tnbLib::SectPx_ConstPar::IsComplete() const
 }
 
 Standard_Boolean 
-tnbLib::SectPx_ConstPar::InCycle() const
+tnbLib::SectPx_ConstPar::InCycle(const std::shared_ptr<SectPx_Parent>&) const
 {
 	return Standard_False;
 }

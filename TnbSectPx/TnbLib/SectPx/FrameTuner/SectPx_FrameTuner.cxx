@@ -4,6 +4,7 @@
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_ScatterRegistry.hxx>
 #include <SectPx_TopoSegment.hxx>
+#include <SectPx_TopoProfile.hxx>
 #include <SectPx_Frame.hxx>
 #include <SectPx_Pnts.hxx>
 #include <SectPx_Poles.hxx>
@@ -19,6 +20,27 @@
 #include <SectPx_SegmentController.hxx>
 #include <SectPx_TightController_Deg2.hxx>
 #include <SectPx_WeightController.hxx>
+
+std::shared_ptr<tnbLib::SectPx_TopoProfile> 
+tnbLib::SectPx_FrameTuner::RetrieveProfile
+(
+	const std::shared_ptr<SectPx_Segment>& theSegment
+)
+{
+	const auto& p0 = theSegment->Pole0();
+	const auto& p1 = theSegment->Pole1();
+
+	auto t0 = p0->TopoProfile().lock();
+	auto t1 = p1->TopoProfile().lock();
+
+	if (t0 NOT_EQUAL t1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unexpected error has been detected!" << endl
+			<< abort(FatalError);
+	}
+	return std::move(t0);
+}
 
 void tnbLib::SectPx_FrameTuner::disJoinSegment
 (
@@ -216,6 +238,9 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 			<< abort(FatalError);
 	}
 
+	const auto topoPrf = RetrieveProfile(theSegment);
+	Debug_Null_Pointer(topoPrf);
+
 	const auto& pntMaker = std::make_shared<maker::Point>(FrameRegistry());
 	Debug_Null_Pointer(pntMaker);
 
@@ -281,6 +306,8 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 	auto slider = std::make_shared<sectPxLib::Pole_Slider>(pnt);
 	Debug_Null_Pointer(slider);
 
+	slider->SetTopoProfile(topoPrf);
+
 	auto seg0 = std::make_shared<SectPx_Segment>(p0, slider);
 	Debug_Null_Pointer(seg0);
 
@@ -322,6 +349,9 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 			<< "the segment must have no controller!" << endl
 			<< abort(FatalError);
 	}
+
+	const auto topoPrf = RetrieveProfile(theSegment);
+	Debug_Null_Pointer(topoPrf);
 
 	const auto& pntMaker = std::make_shared<maker::Point>(FrameRegistry());
 	Debug_Null_Pointer(pntMaker);
@@ -384,6 +414,8 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 
 	auto slider = std::make_shared<sectPxLib::Pole_Slider>(pnt);
 	Debug_Null_Pointer(slider);
+
+	slider->SetTopoProfile(topoPrf);
 
 	auto seg0 = std::make_shared<SectPx_Segment>(p0, slider);
 	Debug_Null_Pointer(seg0);
@@ -815,6 +847,8 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				auto pole = std::make_shared<sectPxLib::Pole_Dangle>(pnt);
 				Debug_Null_Pointer(pole);
 
+				pole->SetTopoProfile(profile->TopoProfile());
+
 				auto paired = std::make_pair(pnt->Index(), FrameRegistry()->Import(std::move(pole)));
 				auto insert = pntToPole.insert(std::move(paired));
 				if (NOT insert.second)
@@ -829,6 +863,8 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 			{
 				auto pole = std::make_shared<sectPxLib::Pole_Corner>(x);
 				Debug_Null_Pointer(pole);
+
+				pole->SetTopoProfile(profile->TopoProfile());
 
 				auto paired = std::make_pair(x->Index(), FrameRegistry()->Import(std::move(pole)));
 				auto insert = pntToPole.insert(std::move(paired));
@@ -848,6 +884,8 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				auto pole = std::make_shared<sectPxLib::Pole_Master>(pnt);
 				Debug_Null_Pointer(pole);
 
+				pole->SetTopoProfile(profile->TopoProfile());
+
 				auto paired = std::make_pair(x->Index(), FrameRegistry()->Import(std::move(pole)));
 				auto insert = pntToPole.insert(std::move(paired));
 				if (NOT insert.second)
@@ -865,6 +903,8 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 
 				auto pole = std::make_shared<sectPxLib::Pole_Slave>(pnt);
 				Debug_Null_Pointer(pole);
+
+				pole->SetTopoProfile(profile->TopoProfile());
 
 				auto paired = std::make_pair(x->Index(), FrameRegistry()->Import(pole));
 				auto insert = pntToPole.insert(std::move(paired));

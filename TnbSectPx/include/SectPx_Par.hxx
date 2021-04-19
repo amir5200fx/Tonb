@@ -9,6 +9,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SectPx_Parent;
+
 	class SectPx_Par
 		: public SectPx_Child
 	{
@@ -47,7 +50,7 @@ namespace tnbLib
 
 		virtual Standard_Boolean IsComplete() const = 0;
 
-		virtual Standard_Boolean InCycle() const = 0;
+		virtual Standard_Boolean InCycle(const std::shared_ptr<SectPx_Parent>&) const = 0;
 
 		virtual Standard_Real Value() const = 0;
 

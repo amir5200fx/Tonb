@@ -74,7 +74,7 @@ namespace tnbLib
 
 		TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
 
-		TnbSectPx_EXPORT Standard_Boolean InCycle() const override;
+		TnbSectPx_EXPORT Standard_Boolean InCycle(const std::shared_ptr<SectPx_Parent>&) const override;
 
 		TnbSectPx_EXPORT Standard_Real Value() const override;
 

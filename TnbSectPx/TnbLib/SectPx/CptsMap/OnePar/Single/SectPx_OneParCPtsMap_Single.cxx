@@ -57,7 +57,7 @@ tnbLib::sectPxLib::OneParCPtsMap_Single::CalcCoord() const
 	const auto p1 = Pole1()->Coord();
 
 	const auto t = Par().lock();
-	Debug_If_Condition(t->InCycle());
+	Debug_If_Condition(t->InCycle(std::dynamic_pointer_cast<SectPx_Parent>(This())));
 
 	return p0 + t->Value()*(p1 - p0);
 }

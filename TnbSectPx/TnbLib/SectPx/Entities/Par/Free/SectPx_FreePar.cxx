@@ -80,23 +80,26 @@ tnbLib::SectPx_FreePar::IsComplete() const
 }
 
 Standard_Boolean 
-tnbLib::SectPx_FreePar::InCycle() const
+tnbLib::SectPx_FreePar::InCycle(const std::shared_ptr<SectPx_Parent>& theParent) const
 {
+	return Standard_False;
 	const auto par = std::dynamic_pointer_cast<SectPx_Par>(This());
-	auto parents =
+	return theParent->HasChild(par);
+	/*auto parents =
 		SectPx_ParTools::RetrieveParents
 		(
 			par
 		);
 	for (const auto& x : parents)
 	{
+		Info <<"parent list : " <<x->Name() << endl;
 		Debug_Null_Pointer(x);
 		if (x->HasChild(par))
 		{
 			return Standard_True;
 		}
 	}
-	return Standard_False;
+	return Standard_False;*/
 }
 
 Standard_Real 
