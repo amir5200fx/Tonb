@@ -20,6 +20,11 @@ namespace tnbLib
 		{
 			std::vector<Pnt2d> Coords;
 
+
+		private:
+
+			//- private functions and operators
+
 			friend class boost::serialization::access;
 
 			template<class Archive>
@@ -35,6 +40,8 @@ namespace tnbLib
 
 		std::shared_ptr<Profile> theProfile_;
 
+
+		//- private functions and operators
 
 		friend class boost::serialization::access;
 
@@ -74,6 +81,8 @@ namespace tnbLib
 			Update();
 			return theProfile_;
 		}
+
+		TnbSectPx_EXPORT Profile& ProfileRef();
 
 	};
 }

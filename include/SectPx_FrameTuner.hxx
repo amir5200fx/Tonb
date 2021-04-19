@@ -12,6 +12,7 @@ namespace tnbLib
 	class SectPx_Frame;
 	class SectPx_ParRegistry;
 	class SectPx_FrameRegistry;
+	class SectPx_TopoProfile;
 	class SectPx_Pole;
 	class SectPx_Segment;
 	class SectPx_Par;
@@ -33,7 +34,13 @@ namespace tnbLib
 
 
 		TNB_SERIALIZATION(TnbSectPx_EXPORT);
-		
+
+
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_TopoProfile> 
+			RetrieveProfile
+			(
+				const std::shared_ptr<SectPx_Segment>& theSegment
+			);
 
 		static TnbSectPx_EXPORT void disJoinSegment
 		(
