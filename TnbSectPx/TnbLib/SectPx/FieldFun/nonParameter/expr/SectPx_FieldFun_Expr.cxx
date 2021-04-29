@@ -53,7 +53,9 @@ tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
 	const word & theExpr
 )
 	: theExpr_(theExpr)
+	, addConstants_(Standard_False)
 {
+	//- empty body
 }
 
 tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
@@ -63,7 +65,9 @@ tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
 )
 	: SectPx_nonParFieldFun(theIndex)
 	, theExpr_(theExpr)
+	, addConstants_(Standard_False)
 {
+	//- empty body
 }
 
 tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
@@ -74,7 +78,9 @@ tnbLib::sectPxLib::FieldFun_Expr::FieldFun_Expr
 )
 	: SectPx_nonParFieldFun(theIndex, theName)
 	, theExpr_(theExpr)
+	, addConstants_(Standard_False)
 {
+	// empty body
 }
 
 tnbLib::word 
