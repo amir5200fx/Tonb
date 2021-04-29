@@ -278,11 +278,12 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 		std::make_shared<sectPxLib::GeoMap_LinearInterpl>();
 	Debug_Null_Pointer(geoMap);
 
+	parentReg->Import(geoMap);
+
 	geoMap->SetQ0(p0->Pnt());
 	geoMap->SetQ1(p1->Pnt());
 
 	geoMap->SetPar(thePar);
-	parentReg->Import(geoMap);
 
 	const auto pnt_id = pntMaker->CreateField(geoMap);
 
@@ -306,6 +307,8 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 	auto slider = std::make_shared<sectPxLib::Pole_Slider>(pnt);
 	Debug_Null_Pointer(slider);
 
+	const auto slider_id = parentReg->Import(slider);
+
 	slider->SetTopoProfile(topoPrf);
 
 	auto seg0 = std::make_shared<SectPx_Segment>(p0, slider);
@@ -313,8 +316,6 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 
 	auto seg1 = std::make_shared<SectPx_Segment>(slider, p1);
 	Debug_Null_Pointer(seg1);
-
-	const auto slider_id = parentReg->Import(std::move(slider));
 
 	const auto seg0_id = parentReg->Import(seg0);
 	const auto seg1_id = parentReg->Import(seg1);
@@ -390,8 +391,9 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 		std::make_shared<sectPxLib::GeoMap_CoordReader>();
 	Debug_Null_Pointer(geoMap);
 
-	geoMap->SetCoord(theCoord);
 	parentReg->Import(geoMap);
+
+	geoMap->SetCoord(theCoord);	
 
 	const auto pnt_id = pntMaker->CreateField(geoMap);
 
@@ -415,6 +417,8 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 	auto slider = std::make_shared<sectPxLib::Pole_Slider>(pnt);
 	Debug_Null_Pointer(slider);
 
+	const auto slider_id = parentReg->Import(slider);
+
 	slider->SetTopoProfile(topoPrf);
 
 	auto seg0 = std::make_shared<SectPx_Segment>(p0, slider);
@@ -422,8 +426,6 @@ tnbLib::SectPx_FrameTuner::CreateSlider
 
 	auto seg1 = std::make_shared<SectPx_Segment>(slider, p1);
 	Debug_Null_Pointer(seg1);
-
-	const auto slider_id = parentReg->Import(std::move(slider));
 
 	const auto seg0_id = parentReg->Import(seg0);
 	const auto seg1_id = parentReg->Import(seg1);
@@ -507,6 +509,8 @@ tnbLib::SectPx_FrameTuner::CreateSymmTightnessDeg2
 	auto seg_bwd_ctrl = std::make_shared<SectPx_SegmentController>();
 	Debug_Null_Pointer(seg_bwd_ctrl);
 
+	FrameRegistry()->Import(seg_bwd_ctrl);
+
 	seg_bwd_ctrl->SetCPts(bwd_ctrl);
 	seg_bwd_ctrl->SetSegment(bwd);
 	bwd->SetController(seg_bwd_ctrl);
@@ -514,16 +518,17 @@ tnbLib::SectPx_FrameTuner::CreateSymmTightnessDeg2
 	auto seg_fwd_ctrl = std::make_shared<SectPx_SegmentController>();
 	Debug_Null_Pointer(seg_fwd_ctrl);
 
+	FrameRegistry()->Import(seg_fwd_ctrl);
+
 	seg_fwd_ctrl->SetCPts(fwd_ctrl);
 	seg_fwd_ctrl->SetSegment(fwd);
 	fwd->SetController(seg_fwd_ctrl);
 
-	FrameRegistry()->Import(seg_bwd_ctrl);
-	FrameRegistry()->Import(seg_fwd_ctrl);
-
 	auto pole_controller =
 		std::make_shared<sectPxLib::TightController_Deg2>(corner);
 	Debug_Null_Pointer(pole_controller);
+
+	auto id = FrameRegistry()->Import(pole_controller);
 
 	pole_controller->SetLeft(seg_bwd_ctrl);
 	pole_controller->SetRight(seg_fwd_ctrl);
@@ -531,7 +536,6 @@ tnbLib::SectPx_FrameTuner::CreateSymmTightnessDeg2
 	bwd->SetController(seg_bwd_ctrl);
 	fwd->SetController(seg_fwd_ctrl);
 
-	auto id = FrameRegistry()->Import(pole_controller);
 	corner->InsertToControllers(id, pole_controller);
 	return id;
 }
@@ -572,9 +576,9 @@ tnbLib::SectPx_FrameTuner::CreateWeight
 	auto weight = std::make_shared<sectPxLib::WeightController>(corner);
 	Debug_Null_Pointer(weight);
 
+	const auto id = FrameRegistry()->Import(weight);
 	weight->SetWeight(theWeight);
 
-	const auto id = FrameRegistry()->Import(weight);
 	corner->InsertToControllers(id, weight);
 	return id;
 }
@@ -847,9 +851,10 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				auto pole = std::make_shared<sectPxLib::Pole_Dangle>(pnt);
 				Debug_Null_Pointer(pole);
 
+				const auto id = FrameRegistry()->Import(pole);
 				pole->SetTopoProfile(profile->TopoProfile());
 
-				auto paired = std::make_pair(pnt->Index(), FrameRegistry()->Import(std::move(pole)));
+				auto paired = std::make_pair(pnt->Index(), id);
 				auto insert = pntToPole.insert(std::move(paired));
 				if (NOT insert.second)
 				{
@@ -864,9 +869,10 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				auto pole = std::make_shared<sectPxLib::Pole_Corner>(x);
 				Debug_Null_Pointer(pole);
 
+				const auto id = FrameRegistry()->Import(pole);
 				pole->SetTopoProfile(profile->TopoProfile());
 
-				auto paired = std::make_pair(x->Index(), FrameRegistry()->Import(std::move(pole)));
+				auto paired = std::make_pair(x->Index(), id);
 				auto insert = pntToPole.insert(std::move(paired));
 				if (NOT insert.second)
 				{
@@ -884,9 +890,10 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				auto pole = std::make_shared<sectPxLib::Pole_Master>(pnt);
 				Debug_Null_Pointer(pole);
 
+				const auto id = FrameRegistry()->Import(pole);
 				pole->SetTopoProfile(profile->TopoProfile());
 
-				auto paired = std::make_pair(x->Index(), FrameRegistry()->Import(std::move(pole)));
+				auto paired = std::make_pair(x->Index(), id);
 				auto insert = pntToPole.insert(std::move(paired));
 				if (NOT insert.second)
 				{
@@ -904,9 +911,10 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				auto pole = std::make_shared<sectPxLib::Pole_Slave>(pnt);
 				Debug_Null_Pointer(pole);
 
+				const auto id = FrameRegistry()->Import(pole);
 				pole->SetTopoProfile(profile->TopoProfile());
 
-				auto paired = std::make_pair(x->Index(), FrameRegistry()->Import(pole));
+				auto paired = std::make_pair(x->Index(), id);
 				auto insert = pntToPole.insert(std::move(paired));
 				if (NOT insert.second)
 				{
@@ -1066,6 +1074,8 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 				std::make_shared<SectPx_Segment>(pole0, pole1);
 			Debug_Null_Pointer(seg);
 
+			FrameRegistry()->Import(seg);
+
 			auto edge = SectPx_PntTools::CommonEdge(p0, p1);
 			if (NOT edge)
 			{
@@ -1106,8 +1116,6 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 
 				//inter->SetBackward(seg);
 			}
-
-			FrameRegistry()->Import(seg);
 
 			JoinSegment(seg);
 		}
