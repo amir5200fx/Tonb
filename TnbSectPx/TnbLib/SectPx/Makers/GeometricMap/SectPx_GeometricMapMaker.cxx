@@ -40,11 +40,12 @@ tnbLib::maker::GeometricMap::CreateLinearInterpolation
 	auto geoMap = std::make_shared<sectPxLib::GeoMap_LinearInterpl>();
 	Debug_Null_Pointer(geoMap);
 
+	const auto id = Registry()->Import(geoMap);
+
 	geoMap->SetQ0(theQ0);
 	geoMap->SetQ1(theQ1);
 	geoMap->SetPar(thePar);
 
-	const auto id = Registry()->Import(geoMap);
 	geoMap->SetName("linear interpolation map" + std::to_string(id));
 
 	return id;

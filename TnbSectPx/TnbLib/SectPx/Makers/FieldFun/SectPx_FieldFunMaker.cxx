@@ -58,11 +58,13 @@ tnbLib::maker::FieldFun::CreateUniform
 	auto field = std::make_shared<sectPxLib::FieldFun_Uni>();
 	Debug_Null_Pointer(field);
 
+	const auto id = Registry()->Import(field);
+
 	field->SetPar(thePar);
 	field->IsRegistered() = Standard_True;
 
 	Debug_Null_Pointer(Registry());
-	return Registry()->Import(std::move(field));
+	return id;
 }
 
 Standard_Integer 
@@ -74,11 +76,13 @@ tnbLib::maker::FieldFun::CreateInverse
 	auto field = std::make_shared<sectPxLib::FieldFun_Minus>();
 	Debug_Null_Pointer(field);
 
+	const auto id = Registry()->Import(field);
+
 	field->SetPar(thePar);
 	field->IsRegistered() = Standard_True;
 
 	Debug_Null_Pointer(Registry());
-	return Registry()->Import(std::move(field));
+	return id;
 }
 
 Standard_Integer 
@@ -92,22 +96,26 @@ tnbLib::maker::FieldFun::CreateUniform
 		auto field = std::make_shared<unaryOpFieldFun::Plus<std::weak_ptr<SectPx_FieldFun>>>();
 		Debug_Null_Pointer(field);
 
+		const auto id = Registry()->Import(field);
+
 		field->SetField(theField);
 		field->IsRegistered() = Standard_True;
 
 		Debug_Null_Pointer(Registry());
-		return Registry()->Import(std::move(field));
+		return id;
 	}
 	else
 	{
 		auto field = std::make_shared<unaryOpFieldFun::Plus<std::shared_ptr<SectPx_FieldFun>>>();
 		Debug_Null_Pointer(field);
 
+		const auto id = Registry()->Import(field);
+
 		field->SetField(theField);
 		field->IsRegistered() = Standard_True;
 
 		Debug_Null_Pointer(Registry());
-		return Registry()->Import(std::move(field));
+		return id;
 	}	
 }
 
@@ -122,22 +130,26 @@ tnbLib::maker::FieldFun::CreateInverse
 		auto field = std::make_shared<unaryOpFieldFun::Minus<std::weak_ptr<SectPx_FieldFun>>>();
 		Debug_Null_Pointer(field);
 
+		const auto id = Registry()->Import(field);
+
 		field->SetField(theField);
 		field->IsRegistered() = Standard_True;
 
 		Debug_Null_Pointer(Registry());
-		return Registry()->Import(std::move(field));
+		return id;
 	}
 	else
 	{
 		auto field = std::make_shared<unaryOpFieldFun::Minus<std::shared_ptr<SectPx_FieldFun>>>();
 		Debug_Null_Pointer(field);
 
+		const auto id = Registry()->Import(field);
+
 		field->SetField(theField);
 		field->IsRegistered() = Standard_True;
 
 		Debug_Null_Pointer(Registry());
-		return Registry()->Import(std::move(field));
+		return id;
 	}
 }
 
@@ -150,10 +162,12 @@ tnbLib::maker::FieldFun::CreateReadingX
 	auto field = std::make_shared<sectPxLib::FieldFun_readX>(theCoord);
 	Debug_Null_Pointer(field);
 
+	const auto id = Registry()->Import(field);
+
 	field->IsRegistered() = Standard_True;
 
 	Debug_Null_Pointer(Registry());
-	return Registry()->Import(std::move(field));
+	return id;
 }
 
 Standard_Integer 
@@ -165,10 +179,12 @@ tnbLib::maker::FieldFun::CreateReadingY
 	auto field = std::make_shared<sectPxLib::FieldFun_readY>(theCoord);
 	Debug_Null_Pointer(field);
 
+	const auto id = Registry()->Import(field);
+
 	field->IsRegistered() = Standard_True;
 
 	Debug_Null_Pointer(Registry());
-	return Registry()->Import(std::move(field));
+	return id;
 }
 
 Standard_Integer 
@@ -180,10 +196,12 @@ tnbLib::maker::FieldFun::CreateExpression
 	auto field = std::make_shared<sectPxLib::FieldFun_Expr>(expr);
 	Debug_Null_Pointer(field);
 
+	const auto id = Registry()->Import(field);
+
 	field->IsRegistered() = Standard_True;
 
 	Debug_Null_Pointer(Registry());
-	return Registry()->Import(std::move(field));
+	return id;
 }
 
 Standard_Integer 
@@ -197,13 +215,17 @@ tnbLib::maker::FieldFun::CreateLinearForm
 	auto par = std::make_shared<sectPxLib::FieldFun_Uni>();
 	Debug_Null_Pointer(par);
 
+	Registry()->Import(par);
+
 	par->SetPar(thePar);
 
 	auto field = theF0 + (theF1 - theF0)*par;
 	Debug_Null_Pointer(field);
 
+	const auto id = Registry()->Import(field);
+
 	field->IsRegistered() = Standard_True;
-	return Registry()->Import(std::move(field));
+	return id;
 }
 
 std::vector<std::shared_ptr<tnbLib::SectPx_FieldFun>> 
