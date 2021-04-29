@@ -137,8 +137,8 @@ tnbLib::Cad_Tools::ParametricTriangulation
 	const auto Dx = theP1.X() - theP0.X();
 	const auto Dy = theP1.Y() - theP0.Y();
 
-	const auto dx = Dx / (Standard_Real)theNx;
-	const auto dy = Dy / (Standard_Real)theNy;
+	const auto dx = Dx / (Standard_Real)(theNx - 1);
+	const auto dy = Dy / (Standard_Real)(theNy - 1);
 
 	auto tri = std::make_shared<Entity2d_Triangulation>();
 	Debug_Null_Pointer(tri);
