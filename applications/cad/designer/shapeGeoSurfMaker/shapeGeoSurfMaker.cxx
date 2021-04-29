@@ -1,3 +1,4 @@
+#include <Cad_GeomSurface.hxx>
 #include <ShapePx_CtrlNet.hxx>
 #include <ShapePx_Tools.hxx>
 #include <OpenCascade_Serialization.hxx>
@@ -20,7 +21,7 @@ namespace tnbLib
 	static unsigned short verbose;
 	static std::vector<net_t> myNets;
 
-	static std::vector<Handle(Geom_Surface)> mySurf;
+	static std::vector<std::shared_ptr<Cad_GeomSurface>> mySurf;
 
 	static bool loadTag = false;
 
@@ -51,7 +52,7 @@ namespace tnbLib
 
 	const auto& selectNet(int i)
 	{
-		if (NOT INSIDE(i, 0, myNets.size()))
+		if (NOT INSIDE(i, 0, myNets.size() - 1))
 		{
 			FatalErrorIn(FunctionSIG)
 				<< " the index is exceeded the bounds of the net list" << endl
@@ -70,7 +71,8 @@ namespace tnbLib
 		}
 
 		auto t = ShapePx_Tools::Surface(*s, vdeg);
-		mySurf.push_back(std::move(t));
+		auto surf = std::make_shared<Cad_GeomSurface>(std::move(t));
+		mySurf.push_back(std::move(surf));
 	}
 
 	void saveTo(const std::string& name)
@@ -108,6 +110,8 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](int i)->const auto& {return selectNet(i); }), "selectNet");
 		mod->add(chaiscript::fun([](const net_t& n, int d)->void {makeSurf(n, d); }), "createSurface");
+
+		mod->add(chaiscript::fun([](unsigned short i)-> void {verbose = i; }), "setVerbose");
 	}
 
 	std::string getString(char* argv)

@@ -182,6 +182,18 @@ namespace tnbLib
 		appl::addVariable(f, name, x);
 	}
 
+	void addVariable(const appl::fieldFun_t& f0, const std::string& name, const appl::fieldFun_t& x)
+	{
+		auto f = std::dynamic_pointer_cast<sectPxLib::FieldFun_Expr>(f0);
+		if (NOT f)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the field is not expression" << endl
+				<< abort(FatalError);
+		}
+		appl::addVariable(f, name, x);
+	}
+
 	//- create points
 
 	const auto& getPointMaker()
@@ -623,6 +635,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const appl::fieldFun_t& f)->auto {auto t = appl::getExprField(f); return std::move(t); }), "getExprFieldFun");
 
 		mod->add(chaiscript::fun([](const appl::exprField_t& f, const std::string& name, const appl::fieldFun_t& x)-> void {addVariable(f, name, x); }), "addVariable");
+		mod->add(chaiscript::fun([](const appl::fieldFun_t& f, const std::string& name, const appl::fieldFun_t& x)-> void {addVariable(f, name, x); }), "addVariable");
 	}
 
 	void setPointMakers(const module_t& mod)

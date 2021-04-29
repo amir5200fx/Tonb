@@ -18,10 +18,12 @@
 #include <SectPx_RegObjType.hxx>
 #include <SectPx_ExtrProfiles.hxx>
 #include <SectPx_Limits.hxx>
+#include <SectPx_CurveQ.hxx>
 #include <ShapePx_ExtrudedPatch.hxx>
 #include <ShapePx_Profile.hxx>
 #include <ShapePx_Section.hxx>
 #include <ShapePx_ContinProfile_OffsetCustom.hxx>
+#include <ShapePx_ContinProfile_GeneratedCustom.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -42,12 +44,14 @@
 namespace tnbLib
 {
 
+	typedef std::shared_ptr<SectPx_CurveQ> curveQ_t;
 	typedef std::shared_ptr<ShapePx_Profile> extrProfile_t;
 	typedef std::shared_ptr<ShapePx_Section> section_t;
 	typedef std::shared_ptr<ShapePx_ExtrudedPatch> patch_t;
 	typedef std::shared_ptr<SectPx_Limits> limits_t;
 	typedef std::shared_ptr<maker::Limits> limitsMaker_t;
 	typedef std::shared_ptr<maker::Extrude> extrProfileMaker_t;
+	typedef std::shared_ptr<maker::CurveQ> curveQMaker_t;
 
 	static patch_t myPatch;
 	static section_t mySection;
@@ -57,6 +61,7 @@ namespace tnbLib
 
 	static limitsMaker_t myLimitMaker;
 	static extrProfileMaker_t myExtrProfileMaker;
+	static curveQMaker_t myCurveQMaker;
 
 	static appl::parMaker_t myParMaker;
 
@@ -289,9 +294,13 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto pars = mySection->RetrieveParameters();
-		for (const auto& x : pars)
+		const auto& reg = mySection->Registry();
+		const auto& pars = reg->Scatter()->ScatterMap(SectPx_RegObjType::parameter);
+
+		//auto pars = mySection->RetrieveParameters();
+		for (const auto& p : pars)
 		{
+			auto x = std::dynamic_pointer_cast<SectPx_Par>(p.second.lock());
 			auto paired = std::make_pair(x->Index(), x);
 			auto insert = sectionPars.insert(std::move(paired));
 
@@ -307,6 +316,7 @@ namespace tnbLib
 		myFieldMaker = std::make_shared<maker::FieldFun>(myPatch->Registry()->Parameter());
 		myLimitMaker = std::make_shared<maker::Limits>(myPatch->Registry()->Shape());
 		myExtrProfileMaker = std::make_shared<maker::Extrude>(myPatch->Registry()->Shape());
+		myCurveQMaker = std::make_shared<maker::CurveQ>(myPatch->Section()->Registry());
 
 		if (verbose)
 		{
@@ -345,8 +355,16 @@ namespace tnbLib
 
 	auto selectParameter(int i)
 	{
+		checkFrame();
 		auto t = myParMaker->SelectParameter(i);
 		return std::move(t);
+	}
+
+	auto selectCurve(int id)
+	{
+		checkFrame();
+		auto c = myCurveQMaker->SelectCurve(id);
+		return std::move(c);
 	}
 
 	limits_t createLimits(const appl::par_t& x0, const appl::par_t& x1)
@@ -372,6 +390,13 @@ namespace tnbLib
 	{
 		auto prf = myExtrProfileMaker->SelectProfile(myExtrProfileMaker->CreateLinear(x0, x1, v0, v1));
 		auto t = std::make_shared<shapePxLib::ContinProfile_OffsetCustom>(std::move(prf));
+		t->Perform();
+		return std::move(t);
+	}
+
+	extrProfile_t createGeneratedProfile(const curveQ_t& c, int degree)
+	{
+		auto t = std::make_shared<shapePxLib::ContinProfile_GeneratedCustom>(c, degree);
 		t->Perform();
 		return std::move(t);
 	}
@@ -592,16 +617,17 @@ namespace tnbLib
 				<< "no section is found for the patch!" << endl
 				<< abort(FatalError);
 		}
-		const auto parameters = section->RetrieveParameters();
+		const auto& reg = section->Registry();
+		const auto& parameters = reg->Scatter()->ScatterMap(SectPx_RegObjType::parameter);
 		Info << endl;
 		Info << " parameters: " << endl;
 		Info << endl;
 		for (const auto& x : parameters)
 		{
-			auto p = std::dynamic_pointer_cast<SectPx_FixedPar>(x);
+			auto p = std::dynamic_pointer_cast<SectPx_FixedPar>(x.second.lock());
 			if (p)
 			{
-				printObj(x);
+				printObj(p);
 			}
 		}
 	}
@@ -623,6 +649,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadPatch(name); }), "loadPatch");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](int i)-> auto {auto t = selectParameter(i); return std::move(t); }), "selectParameter");
+		mod->add(chaiscript::fun([](int i)-> auto {auto t = selectCurve(i); return std::move(t); }), "selectCurve");
 		mod->add(chaiscript::fun([]()->void {printSectionParameters(); }), "printSectionPars");
 		mod->add(chaiscript::fun([]()->void {printFixedSectionParameters(); }), "printFixedSectionPars");
 		mod->add(chaiscript::fun([]()->void {printReg(); }), "printRegistry");
@@ -637,6 +664,7 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const appl::par_t& x0, const appl::par_t& x1, const appl::par_t& v)-> auto {auto t = createUniformProfile(x0, x1, v); return std::move(t); }), "createUniformProfile");
 		mod->add(chaiscript::fun([](const appl::par_t& x0, const appl::par_t& x1, const appl::par_t& v0, const appl::par_t& v1)-> auto {auto t = createLinearProfile(x0, x1, v0, v1); return std::move(t); }), "createLinearProfile");
+		mod->add(chaiscript::fun([](const curveQ_t& c, int deg)-> auto {auto t = createGeneratedProfile(c, deg); return std::move(t); }), "createGeneratedProfile");
 
 		mod->add(chaiscript::fun([](const extrProfile_t& prf, const appl::par_t& p)-> void {importProfile(p, prf); }), "setProfileTo");
 	}
@@ -699,7 +727,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{

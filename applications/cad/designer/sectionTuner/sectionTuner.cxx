@@ -16,6 +16,7 @@
 #include <SectPx_FrameTuner.hxx>
 #include <SectPx_Tools.hxx>
 #include <SectPx_RegObjType.hxx>
+#include <SectPx_Poles.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -39,6 +40,8 @@ namespace tnbLib
 
 	static size_t verbose = 0;
 	static bool loaded = false;
+
+	static appl::dtmMaker_t myDtmMaker;
 
 	//- globals
 
@@ -111,6 +114,7 @@ namespace tnbLib
 
 		appl::importFrame(myTuner, myFrame);
 
+		myDtmMaker = std::make_shared<maker::Datum>(myTuner->FrameRegistry());
 		loaded = true;
 
 		if (verbose)
@@ -290,6 +294,24 @@ namespace tnbLib
 					<< pnt->Index() << ", "
 					<< pnt->Name() << ", value: "
 					<< pnt->Coord() << endl;
+			}
+		}
+	}
+
+	void printPoles()
+	{
+		const auto& poles = getScatterReg()->ScatterMap(SectPx_RegObjType::pole);
+		Info << " Poles: " << endl;
+		for (const auto& x : poles)
+		{
+			auto pole = std::dynamic_pointer_cast<SectPx_Pole>(x.second.lock());
+			if (pole)
+			{
+				Info << " - " << "index: "
+					<< pole->Index() << ", "
+					<< pole->Name() << ", value: "
+					<< pole->Coord() << ", point name: "
+					<< pole->Pnt()->Name() << endl;
 			}
 		}
 	}
@@ -507,7 +529,12 @@ namespace tnbLib
 		appl::createSlider(myTuner, seg, c);
 	}
 
-	
+	//- globals
+	auto selectDatum(int i)
+	{
+		auto t = myDtmMaker->SelectPnt(i);
+		return std::move(t);
+	}
 }
 
 #ifdef DebugInfo
@@ -526,12 +553,19 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> void {printReg(); }), "printRegistry");
 		mod->add(chaiscript::fun([]()-> void {printFixedParams(); }), "printFixedParameters");
 		mod->add(chaiscript::fun([]()-> void {printPoints(); }), "printPoints");
+		mod->add(chaiscript::fun([]()-> void {printPoles(); }), "printPoles");
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPlt(name); }), "drawPntsPlt");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPolesPlt(name); }), "drawPolesPlt");
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadFrame(name); }), "loadFrame");
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
+
+		mod->add(chaiscript::fun([](int i)-> auto {auto t = selectDatum(i); return std::move(t); }), "selectDatum");
+
+		mod->add(chaiscript::fun([](const appl::dtm_t& p)-> auto{auto t = appl::getCoord(p); return std::move(t); }), "getCoord");
+		mod->add(chaiscript::fun([](const appl::pnt_t& p)-> auto{auto t = appl::getCoord(p); return std::move(t); }), "getCoord");
+		mod->add(chaiscript::fun([](const appl::coord_t& p)-> auto{auto t = appl::getCoord(p); return std::move(t); }), "getCoord");
 
 		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
 	}

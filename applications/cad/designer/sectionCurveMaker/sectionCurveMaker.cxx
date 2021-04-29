@@ -72,7 +72,7 @@ namespace tnbLib
 		return myTuner->FrameRegistry()->Scatter();
 	}
 
-	void printPoles()
+	/*void printPoles()
 	{
 		checkFrame();
 		const auto& poles = getScatterReg()->ScatterMap(SectPx_RegObjType::pole);
@@ -90,7 +90,7 @@ namespace tnbLib
 				<< p->Coord() << endl;
 		}
 		Info << endl;
-	}
+	}*/
 
 	void printCurves()
 	{
@@ -107,6 +107,26 @@ namespace tnbLib
 			Info << " - " << "index: "
 				<< p->Index() << ", "
 				<< p->Name() << endl;
+		}
+		Info << endl;
+	}
+
+	void printPoles()
+	{
+		const auto& poles = getScatterReg()->ScatterMap(SectPx_RegObjType::pole);
+		Info << endl;
+		Info << " Poles: " << endl;
+		for (const auto& x : poles)
+		{
+			auto pole = std::dynamic_pointer_cast<SectPx_Pole>(x.second.lock());
+			if (pole)
+			{
+				Info << " - " << "index: "
+					<< pole->Index() << ", "
+					<< pole->Name() << ", value: "
+					<< pole->Coord() << ", point name: "
+					<< pole->Pnt()->Name() << endl;
+			}
 		}
 		Info << endl;
 	}
