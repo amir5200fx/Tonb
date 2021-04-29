@@ -529,6 +529,51 @@
     <Filter Include="TnbLib\Curve\OptmPoint\Correction\Info">
       <UniqueIdentifier>{cd02570f-0c79-4cc8-b63f-0855bc85ad6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Tools">
+      <UniqueIdentifier>{2cdbe2f1-fccd-4b19-9ed1-1f175155ce4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\VariationRate">
+      <UniqueIdentifier>{0828373f-6445-4adc-bbe2-ec58d6e0cf6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions">
+      <UniqueIdentifier>{4c1e8b95-8d3f-4c80-8e1c-3dc929863652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions\Info">
+      <UniqueIdentifier>{4c76c4e1-9aa6-43a4-9e23-e4b217616a2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions\Surface">
+      <UniqueIdentifier>{d61307db-c2fc-4047-b97b-a388b1ac33fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions\Reference">
+      <UniqueIdentifier>{d40b4df3-af5f-499c-8cb5-45c1af2f1bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions\Conditions">
+      <UniqueIdentifier>{d5121ba5-2edd-40b5-8c6f-d69c6717c7b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions\Values">
+      <UniqueIdentifier>{0aa96048-59cd-48e3-93aa-7e5ed52c7d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap">
+      <UniqueIdentifier>{1e73bb2a-ac2f-467a-abc7-6fae67a85167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d">
+      <UniqueIdentifier>{b4f9e142-996b-41b6-88c3-2b7af9d691ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d">
+      <UniqueIdentifier>{1527db69-791c-4fae-989a-d43190e1ef18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Base">
+      <UniqueIdentifier>{e5871aed-5086-46be-abb6-ca6337de6a80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Boundary">
+      <UniqueIdentifier>{075ce05d-e7db-4e1c-97fe-e4f8a4ff7890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner">
+      <UniqueIdentifier>{12ac9956-97e7-4784-86aa-f75de8134386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment">
+      <UniqueIdentifier>{84d1c696-89c0-4855-9616-9b6ce19a61cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -1242,6 +1287,54 @@
     <ClInclude Include="TnbLib\Curve\Curve\AnIso\Mesh2d_CurveAnIso.hxx">
       <Filter>TnbLib\Curve\Curve\AnIso</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\VariationRate\Mesh_VariationRateInfo.hxx">
+      <Filter>TnbLib\Base\Tools\VariationRate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\VariationRate\Mesh_VariationRate.hxx">
+      <Filter>TnbLib\Base\Tools\VariationRate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Info\Mesh_SizeMethodInfo.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Info\Mesh_RelativeAbsoluteInfo.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Info\Mesh_LaplacianSmoothingInfo.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Info\Mesh_SurfaceCurvatureInfo.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceSizeValues.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceCurvatureValues.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Reference\Mesh_ReferenceValues.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Conditions\Mesh_Conditions.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Values\Mesh_Values.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Values</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Mesh2d_SizeMapTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\Base\Mesh_SizeMapToolBase.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\Base\Mesh_SizeMapToolBaseI.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Mesh2d_BoundarySizeMapTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\BoundarySizeMap2d_CornerTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -1390,6 +1483,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Curve\OptmPoint\Correction\Mesh_CurveOptmPoint_Correction.cxx">
       <Filter>TnbLib\Curve\OptmPoint\Correction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\VariationRate\Mesh_VariationRate.cxx">
+      <Filter>TnbLib\Base\Tools\VariationRate</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Info\Mesh_LaplacianSmoothingInfo.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceSizeValues.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceCurvatureValues.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Reference\Mesh_ReferenceValues.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Conditions\Mesh_Conditions.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Values\Mesh_Values.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Mesh2d_SizeMapTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Mesh2d_BoundarySizeMapTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\BoundarySizeMap2d_CornerTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
