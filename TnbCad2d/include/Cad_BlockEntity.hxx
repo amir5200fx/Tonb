@@ -28,11 +28,16 @@ namespace tnbLib
 		template<class EntityType>
 		friend class Cad_EntityManager;
 
+	public:
+
+
 		typedef std::map
 			<
 			Standard_Integer,
 			std::shared_ptr<EntityType>
 			> indexedMap;
+
+	private:
 
 		/*Private Data*/
 

@@ -38,7 +38,11 @@ namespace tnbLib
 		, public Cad_EntityManager_Duplicator
 	{
 
+	public:
+
 		typedef std::map<word, std::shared_ptr<Cad_BlockEntity<EntityType>>> stringMapOfBlocks;
+
+	private:
 
 		/*Private Data*/
 
