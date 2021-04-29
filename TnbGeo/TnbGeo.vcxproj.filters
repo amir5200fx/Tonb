@@ -388,6 +388,27 @@
     <Filter Include="TnbLib\Geo\Merge\module">
       <UniqueIdentifier>{e340c5f0-49e0-45b8-98c7-83b8b22f022b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Space\Balanced">
+      <UniqueIdentifier>{04ea0102-2834-452c-a96a-70d4b32ed89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Space\Balanced\2d">
+      <UniqueIdentifier>{acc8a988-2a99-437c-87f5-93c32c18f97a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ItemMerge">
+      <UniqueIdentifier>{a78b9af9-fdfe-476d-969c-c0ea073657b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation">
+      <UniqueIdentifier>{d1e679af-69d7-497e-85e1-9139ab34680d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation\2d">
+      <UniqueIdentifier>{e9a06eed-f11d-477d-bf25-74ac57796281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation\2d\cdt">
+      <UniqueIdentifier>{18c85b5b-2570-4fe3-a19b-09c07cab3273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation\2d\std">
+      <UniqueIdentifier>{3d4ac6f4-a4fd-4e91-a441-32243f9b0a3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -876,6 +897,39 @@
     <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniformFwd.hxx">
       <Filter>TnbLib\Geo\Function\Metric\nonUniform\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpaceNode.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpaceNode_Internal.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpace.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpaceI.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpaceQuadrant.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpaceNode_Leaf.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemMerge\Geo_ItemMerge.hxx">
+      <Filter>TnbLib\Geo\ItemMerge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ItemMerge\Geo_ItemMergeI.hxx">
+      <Filter>TnbLib\Geo\ItemMerge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTri.hxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\std</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTriI.hxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\std</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Triangulation\2d\cdt\Geo2d_CdtDelTri.hxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\cdt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1075,6 +1129,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Serialization\Geo_Serialization.cxx">
       <Filter>TnbLib\Geo\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpace.cxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ItemMerge\Geo_ItemMerge.cxx">
+      <Filter>TnbLib\Geo\ItemMerge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTri.cxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Triangulation\2d\cdt\Geo2d_CdtDelTri.cxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\cdt</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
