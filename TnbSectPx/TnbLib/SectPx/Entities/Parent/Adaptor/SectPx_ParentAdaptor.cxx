@@ -10,6 +10,12 @@ void tnbLib::SectPx_ParentAdaptor::Add
 	const std::shared_ptr<SectPx_Parent>& theParent
 )
 {
+	if (theIndex <= 0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "attempting to import unregistered parent into the list!" << endl
+			<< abort(FatalError);
+	}
 	Debug_Null_Pointer(theParent);
 
 	auto iter = theParents_.find(theIndex);
