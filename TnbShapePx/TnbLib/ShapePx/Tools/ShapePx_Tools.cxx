@@ -85,9 +85,20 @@ tnbLib::ShapePx_Tools::Surface
 {
 	auto poles = ControlNet(theNet);
 	auto weights = Weights(theNet);
-	auto[vknots, vMults] = SectPx_Tools::Knots(theNet.Knots());
-	auto[uknots, uMults] = SectPx_Tools::Knots(SectPx_Tools::Knots(theNet.NbRows(), theNet.RowDegree(), 0, 1));
 
-	Handle(Geom_Surface) surface = new Geom_BSplineSurface(poles, weights, uknots, vknots, uMults, vMults, theNet.RowDegree(), vDegree);
-	return std::move(surface);
+	auto[vknots, vMults] = SectPx_Tools::Knots(theNet.Knots());
+	auto[uknots, uMults] = SectPx_Tools::Knots(SectPx_Tools::Knots(theNet.NbRows(), vDegree, 0, 1));
+
+	try
+	{
+		Handle(Geom_Surface) surface = new Geom_BSplineSurface(poles, weights, uknots, vknots, uMults, vMults, vDegree, theNet.RowDegree());
+		return std::move(surface);
+	}
+	catch (const Standard_Failure& x)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "opencascade error message has been detected: Unable to create geometric surface" << endl
+			<< abort(FatalError);
+		return nullptr;
+	}
 }
