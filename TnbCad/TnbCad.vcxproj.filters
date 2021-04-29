@@ -259,6 +259,9 @@
     <Filter Include="TnbLib\Cad\module">
       <UniqueIdentifier>{2b4d09d8-86bf-40d3-98a5-09330c4aad4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Entities\Surface">
+      <UniqueIdentifier>{5d914d78-299a-4093-bac4-84c104fe5493}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -522,6 +525,9 @@
     <ClInclude Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpParaCurve.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\CmpParaCurve</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.hxx">
+      <Filter>TnbLib\Cad\Entities\Surface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -754,6 +760,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManagerIO.cxx">
       <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.cxx">
+      <Filter>TnbLib\Cad\Entities\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurfaceIO.cxx">
+      <Filter>TnbLib\Cad\Entities\Surface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
