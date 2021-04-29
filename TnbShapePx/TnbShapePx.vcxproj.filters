@@ -121,6 +121,12 @@
     <Filter Include="TnbLib\ShapePx\Entities\Surface">
       <UniqueIdentifier>{890293ca-e672-4f76-879d-ec2428cd5460}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\ExtrudeProfile">
+      <UniqueIdentifier>{ffbdc599-b434-496d-b989-131d068b3e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\Patch\PatchEntity">
+      <UniqueIdentifier>{0a136111-7c72-4756-968a-690cecc07002}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -212,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\ShapePx\Entities\Surface\ShapePx_Surface.hxx">
       <Filter>TnbLib\ShapePx\Entities\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated\ShapePx_ContinProfile_GeneratedCustom.hxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +337,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Interpl\ShapePx_ContinProfile_InterplIO.cxx">
       <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Interpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated\ShapePx_ContinProfile_GeneratedCustom.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated\ShapePx_ContinProfile_GeneratedCustomIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
