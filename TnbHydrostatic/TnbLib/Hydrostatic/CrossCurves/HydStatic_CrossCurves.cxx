@@ -244,7 +244,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 
 		if (verbose)
 		{
-			Info << " z0 " << b.P0().Z() << ", z1 = " << b.P1().Z() << endl;
+			Info << " z0 = " << b.P0().Z() << ", z1 = " << b.P1().Z() << endl;
 		}
 		const auto Z = HydStatic_CrossCurves::Z(b.P0().Z(), b.P1().Z(), NbWaters());
 
