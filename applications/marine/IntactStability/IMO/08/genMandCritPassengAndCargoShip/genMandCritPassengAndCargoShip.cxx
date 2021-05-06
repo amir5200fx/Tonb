@@ -36,6 +36,12 @@ namespace tnbLib
 	static std::shared_ptr<HydStatic_hArmCurve> lw1Curve;
 	static std::shared_ptr<HydStatic_hArmCurve> lw2Curve;
 
+	static unsigned short verbose = 0;
+
+	typedef std::shared_ptr<hydStcLib::rArmCurve_Eff> gzEff_t;
+
+	static gzEff_t myGzEff;
+
 	enum class HeelSide
 	{
 		PORT,
@@ -53,6 +59,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 	}
+
+	
 
 	isc08Lib::Lw calcLw1(const std::shared_ptr<ISC08_Model>& model)
 	{

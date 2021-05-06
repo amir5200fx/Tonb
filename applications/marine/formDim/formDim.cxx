@@ -45,6 +45,13 @@ namespace tnbLib
 
 		ar >> myModel;
 
+		if (NOT myModel)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no model has been found!" << endl
+				<< abort(FatalError);
+		}
+
 		if (NOT myModel->FloatBody())
 		{
 			FatalErrorIn(FunctionSIG)
