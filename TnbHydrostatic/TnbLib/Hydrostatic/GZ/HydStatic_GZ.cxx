@@ -3,6 +3,7 @@
 #include <MarineBase_Tools.hxx>
 #include <HydStatic_GzQ.hxx>
 #include <HydStatic_rArmCurve_Body.hxx>
+#include <HydStatic_rArmCurve_FSLq.hxx>
 #include <HydStatic_ArmCurveCreator_StbHeel.hxx>
 #include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_CrsCurve.hxx>
@@ -23,7 +24,7 @@ tnbLib::HydStatic_GZ::HydStatic_GZ()
 
 tnbLib::HydStatic_GZ::HydStatic_GZ
 (
-	const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves,
+	const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves,
 	const marineLib::KG& theKG,
 	const marineLib::DISPV& theDispv
 )
@@ -36,7 +37,7 @@ tnbLib::HydStatic_GZ::HydStatic_GZ
 
 tnbLib::HydStatic_GZ::HydStatic_GZ
 (
-	std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves,
+	std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCrossCurves,
 	marineLib::KG&& theKG,
 	marineLib::DISPV&& theDispv
 )
@@ -84,7 +85,7 @@ void tnbLib::HydStatic_GZ::Perform()
 		Info << endl;
 	}
 
-	const auto& crossCurves = *CrossCurves()->CrossCurves();
+	const auto& crossCurves = *CrossCurves();
 	const auto t = hydStcLib::RetrieveType(crossCurves.Curves());
 
 	if (NOT INSIDE(DISPV()(), crossCurves.MinDispv(), crossCurves.MaxDispv()))
@@ -119,7 +120,21 @@ void tnbLib::HydStatic_GZ::Perform()
 	//const auto curve = MarineBase_Tools::Curve(gzQ);
 
 	//const auto rArm = hydStcLib::MakeCurve<hydStcLib::rArmCurve_Body>(std::move(curve), t);
-	const auto rArm = HydStatic_Tools::MakeRightCurve<hydStcLib::rArmCurve_Body>(gzQ, t);
+	std::shared_ptr<HydStatic_rArmCurve> rArm;
+	switch (theType_)
+	{
+	case tnbLib::HydStatic_GZ::bodyType::hull:
+		rArm = HydStatic_Tools::MakeRightCurve<hydStcLib::rArmCurve_Body>(gzQ, t);
+		break;
+	case tnbLib::HydStatic_GZ::bodyType::tank:
+		rArm = HydStatic_Tools::MakeRightCurve<hydStcLib::rArmCurve_FSLq>(gzQ, t);
+		break;
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "unspecified type of body has been detected!" << endl
+			<< abort(FatalError);
+		break;
+	}
 	Debug_Null_Pointer(rArm);
 
 	HydStatic_CmptLib::CalcParameters(rArm);
@@ -138,7 +153,7 @@ void tnbLib::HydStatic_GZ::Perform()
 
 void tnbLib::HydStatic_GZ::LoadCrossCurves
 (
-	const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves
+	const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves
 )
 {
 	theCrossCurves_ = theCrossCurves;
@@ -146,7 +161,7 @@ void tnbLib::HydStatic_GZ::LoadCrossCurves
 
 void tnbLib::HydStatic_GZ::LoadCrossCurves
 (
-	std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves
+	std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCrossCurves
 )
 {
 	theCrossCurves_ = std::move(theCrossCurves);
