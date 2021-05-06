@@ -63,26 +63,50 @@ namespace tnbLib
 
 			void SetBody
 			(
-				const std::shared_ptr<rArmCurve_Body>&& theBody
+				std::shared_ptr<rArmCurve_Body>&& theBody
 			)
 			{
 				theBody_ = std::move(theBody);
 			}
 
+			void SetBody
+			(
+				const std::shared_ptr<rArmCurve_Body>& theBody
+			)
+			{
+				theBody_ = theBody;
+			}
+
 			void SetTanks
 			(
-				const std::shared_ptr<rArmCurve_Tanks>&& theTanks
+				std::shared_ptr<rArmCurve_Tanks>&& theTanks
 			)
 			{
 				theTanks_ = std::move(theTanks);
 			}
 
+			void SetTanks
+			(
+				const std::shared_ptr<rArmCurve_Tanks>& theTanks
+			)
+			{
+				theTanks_ = theTanks;
+			}
+
 			void SetAuCurve
 			(
-				const std::shared_ptr<HydStatic_rAuCurve>&& theCurve
+				std::shared_ptr<HydStatic_rAuCurve>&& theCurve
 			)
 			{
 				theAuCurve_ = std::move(theCurve);
+			}
+
+			void SetAuCurve
+			(
+				const std::shared_ptr<HydStatic_rAuCurve>& theCurve
+			)
+			{
+				theAuCurve_ = theCurve;
 			}
 
 		public:
