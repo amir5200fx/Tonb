@@ -142,4 +142,6 @@ namespace tnbLib
 	}
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::shapePxLib::ContinProfile_GeneratedCustom);
+
 #endif // !_ShapePx_ContinProfile_GeneratedCustom_Header

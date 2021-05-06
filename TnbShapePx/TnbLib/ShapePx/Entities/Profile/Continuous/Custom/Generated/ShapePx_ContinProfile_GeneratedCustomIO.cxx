@@ -25,3 +25,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::shapePxLib::ContinProfile_GeneratedCustom)
 
 	ar & theProfile_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::shapePxLib::ContinProfile_GeneratedCustom);
