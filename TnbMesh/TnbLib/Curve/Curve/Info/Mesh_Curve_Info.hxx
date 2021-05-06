@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Mesh_Module.hxx>
 
 #include <memory>
 
@@ -38,8 +39,8 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer DEFAULT_MAX_LEVEL_LENGTH_CALC;
-		static const Standard_Real DEFAULT_UNDER_RELAXATION;
+		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL_LENGTH_CALC;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
 
 		Mesh_Curve_Info()
 			: theLengthCalcMaxLevel_(DEFAULT_MAX_LEVEL_LENGTH_CALC)

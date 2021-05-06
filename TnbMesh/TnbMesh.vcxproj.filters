@@ -574,6 +574,195 @@
     <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment">
       <UniqueIdentifier>{84d1c696-89c0-4855-9616-9b6ce19a61cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\Core">
+      <UniqueIdentifier>{57cad9e7-ef59-4ef1-9118-4cc883afa503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\Base">
+      <UniqueIdentifier>{7b28c63c-1ebf-4784-9259-e29a873f0a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\Iso">
+      <UniqueIdentifier>{e543e335-b1f2-454f-9d9b-8f16c3bf6751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\Surface">
+      <UniqueIdentifier>{ee8b9784-ec31-41e7-a062-71e9a31255a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Data">
+      <UniqueIdentifier>{aaf22ab3-5af1-41dd-b143-dc2c0a8e01c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front">
+      <UniqueIdentifier>{789cca8d-8a3e-4fcb-b539-fcf6984c5ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Data">
+      <UniqueIdentifier>{73620bdb-1648-48b7-88e5-b5bad2b1e4e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Info">
+      <UniqueIdentifier>{336ac07d-03e5-460b-9e8a-d6ed209f96e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Iso">
+      <UniqueIdentifier>{9162c721-d325-4646-8248-24af42d96c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Traits">
+      <UniqueIdentifier>{449d328d-1b62-4ab5-bb57-2d48883d993b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Surface">
+      <UniqueIdentifier>{80bb397d-2f90-44b6-8be6-688466e0209b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Info\2d">
+      <UniqueIdentifier>{8910334d-4e1f-4296-a3a7-6b7221cc038d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Info\3d">
+      <UniqueIdentifier>{aaf0a187-9944-436c-8257-205ae3518f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Info\2d\Adaptor">
+      <UniqueIdentifier>{77dc56c6-9c67-4d71-b9e9-d45e25e6057a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Traits">
+      <UniqueIdentifier>{6e9df14d-6093-4609-8c06-42f74b7c3631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cavity">
+      <UniqueIdentifier>{b87ad858-3a8f-46fc-b2b0-477aa64fc933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Iso\2d">
+      <UniqueIdentifier>{f18e166a-1468-45f7-a157-b838ddd2be2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Iso\3d">
+      <UniqueIdentifier>{47d4f434-f6cd-49b4-93b8-51ab80f02c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Iso\Adaptor">
+      <UniqueIdentifier>{cb107723-6c55-48fe-b029-0bc40ce57430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Iso\Info">
+      <UniqueIdentifier>{f8fb2dbd-efc9-47a3-a68d-7c1afc5cfdcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Surface\Adaptor">
+      <UniqueIdentifier>{f92bbd4d-6c72-4f10-967f-385ff2376cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Surface\Info">
+      <UniqueIdentifier>{ff1d5dc0-b926-4104-ba69-8a4a6ac60fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr">
+      <UniqueIdentifier>{0ad580fa-4184-4221-bd0f-cca5b8ea6943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\AnIso">
+      <UniqueIdentifier>{78759cad-5cca-407c-bbbc-91014e703cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Info">
+      <UniqueIdentifier>{0eb95708-8344-4938-be40-d1996eb1ae6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Iso">
+      <UniqueIdentifier>{51f53061-c081-459e-8803-57b9e072ec85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Traits">
+      <UniqueIdentifier>{f389fc17-1f5f-4c2c-bbe2-4b4bceb0a309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\System">
+      <UniqueIdentifier>{998714c8-5223-40ac-94b9-e63cfd987ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Surface">
+      <UniqueIdentifier>{23d37662-2916-4815-9866-8ef3a0335749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Iso\2d">
+      <UniqueIdentifier>{96c22c8d-158b-43e7-b23c-86c438885736}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Iso\3d">
+      <UniqueIdentifier>{959c856a-e0b7-4438-ac2d-b4fd9c936117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\AnIso\2d">
+      <UniqueIdentifier>{c62a3585-fdc6-4b36-976d-7982f93c1f10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\AnIso\3d">
+      <UniqueIdentifier>{65c6fdb3-4cff-4280-b700-11dd3ba66e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode">
+      <UniqueIdentifier>{0bb76e85-81a5-4351-8b01-8886cfd9fa43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical">
+      <UniqueIdentifier>{070baa88-3790-4f00-bc8c-d346c5701bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator">
+      <UniqueIdentifier>{40ea5971-4086-4fab-9c1c-8139691d1b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Corrector">
+      <UniqueIdentifier>{260c874a-6094-4508-8b0a-fbc2b2306509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical\AnIso">
+      <UniqueIdentifier>{eb3a1a79-21ac-4e2a-9310-0096e87f655b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical\Iso">
+      <UniqueIdentifier>{a6cf6047-01db-4a34-a8cf-3c124cf520b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical\Surface">
+      <UniqueIdentifier>{fd4e25bc-5070-4a0a-b54d-784c03023e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical\AnIso\2d">
+      <UniqueIdentifier>{a50dfae9-647c-4258-87e6-bb0afc1a7819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical\AnIso\3d">
+      <UniqueIdentifier>{f8afe12b-5ad2-4d4c-bc51-c1aa82afcc23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical\Iso\2d">
+      <UniqueIdentifier>{613ea39d-350b-4d2c-abfd-f462e334f06f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Analytical\Iso\3d">
+      <UniqueIdentifier>{f34302fa-4499-4faf-b6bf-0da21e1ab379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\AnIso">
+      <UniqueIdentifier>{d30ade33-87e0-420b-9a7f-6848e8852fab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\Iso">
+      <UniqueIdentifier>{19d4e08c-19bd-4755-8745-86446efdc707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\Surface">
+      <UniqueIdentifier>{79389f82-b5ef-4819-bc30-40592843056e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d">
+      <UniqueIdentifier>{45f0934f-a75d-42b5-8a1a-aac4f176729b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\AnIso\3d">
+      <UniqueIdentifier>{2e2bcf2c-b8a5-44ca-b05d-134a7f123ed8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\Iso\2d">
+      <UniqueIdentifier>{d475f04a-d45a-4795-b789-2290193bb8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\Iso\3d">
+      <UniqueIdentifier>{ce0fb4d9-e766-4b16-aad6-aa568b1c5232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\AnIso">
+      <UniqueIdentifier>{d6c9c9e9-7e06-4948-9f0a-f02e9bb96286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\AnIso\2d">
+      <UniqueIdentifier>{022a4536-6f5f-4dbb-b3f9-b36a619073d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\AnIso\3d">
+      <UniqueIdentifier>{10fada86-4bff-4676-acf1-729820026c1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\AnIso\Adaptor">
+      <UniqueIdentifier>{7e7cfe56-a4a9-4eb0-8291-8ddd9d1c49b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\AnIso\Info">
+      <UniqueIdentifier>{84ba4170-6b46-4b59-b49e-cf92266c3700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\AnIso">
+      <UniqueIdentifier>{090acd33-c943-4f4c-8953-de8bff1fd5a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\Iso\2d">
+      <UniqueIdentifier>{cb10dcb8-fac1-4d64-aaa9-c6759146dc6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\AnIso\2d">
+      <UniqueIdentifier>{3c89ad84-5a99-43f7-aec9-6917c98fa046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\AnIso\3d">
+      <UniqueIdentifier>{72dc30aa-272d-4067-b3db-7afcbea8d146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Tools">
+      <UniqueIdentifier>{6f402237-a9e4-4ce1-88b6-fae4eaa92067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Tools">
+      <UniqueIdentifier>{671c18e5-bfe9-4147-849a-611043dd0cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System">
+      <UniqueIdentifier>{8962a659-a44c-43e1-bf35-8dae5cf709db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -1335,6 +1524,216 @@
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\BoundarySizeMap2d_CornerTool.hxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Base\Aft_Core_Base.hxx">
+      <Filter>TnbLib\Aft\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Base\Aft_Core_BaseI.hxx">
+      <Filter>TnbLib\Aft\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Data\Mesh_RegisterEntityM.hxx">
+      <Filter>TnbLib\Base\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Data\Mesh_EntityCounterM.hxx">
+      <Filter>TnbLib\Base\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Data\Mesh_GlobalData.hxx">
+      <Filter>TnbLib\Base\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Data\Mesh_QualityMap.hxx">
+      <Filter>TnbLib\Base\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Info\2d\Adaptor\Aft2d_FrontInfoAdaptorTemplate.hxx">
+      <Filter>TnbLib\Aft\Front\Info\2d\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Info\2d\Aft2d_FrontInfoTemplate.hxx">
+      <Filter>TnbLib\Aft\Front\Info\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Info\2d\Aft2d_FrontInfoTemplateI.hxx">
+      <Filter>TnbLib\Aft\Front\Info\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Info\Aft_FrontInfo.hxx">
+      <Filter>TnbLib\Aft\Front\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Data\Mesh_Counters.hxx">
+      <Filter>TnbLib\Base\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Traits\Aft_TypeTraits.hxx">
+      <Filter>TnbLib\Aft\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cavity\Aft_CavityData.hxx">
+      <Filter>TnbLib\Aft\Cavity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Data\Aft_FrontGlobalData.hxx">
+      <Filter>TnbLib\Aft\Front\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Traits\Aft_FrontTraits.hxx">
+      <Filter>TnbLib\Aft\Front\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Adaptor\Aft2d_FrontInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Adaptor\Aft2d_FrontInfoAdaptor.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Info\Aft2d_FrontInfoFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Info\Aft2d_FrontInfo.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\2d\Aft2d_FrontGlobalDataFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\2d\Aft2d_FrontGlobalData.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\AnIso\Adaptor\Aft2d_FrontAnIsoInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\Aft\Front\AnIso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\AnIso\Adaptor\Aft2d_FrontAnIsoInfoAdaptor.hxx">
+      <Filter>TnbLib\Aft\Front\AnIso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\AnIso\Info\Aft2d_FrontAnIsoInfoFwd.hxx">
+      <Filter>TnbLib\Aft\Front\AnIso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\AnIso\Info\Aft2d_FrontAnIsoInfo.hxx">
+      <Filter>TnbLib\Aft\Front\AnIso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\AnIso\2d\Aft2d_FrontAnIsoGlobalDataFwd.hxx">
+      <Filter>TnbLib\Aft\Front\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\AnIso\2d\Aft2d_FrontAnIsoGlobalData.hxx">
+      <Filter>TnbLib\Aft\Front\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Surface\Adaptor\Aft2d_FrontSurfaceInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Surface\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Surface\Adaptor\Aft2d_FrontSurfaceInfoAdaptor.hxx">
+      <Filter>TnbLib\Aft\Front\Surface\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Surface\Info\Aft2d_FrontSurfaceInfoFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Surface\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Aft_MetricPrcsr.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Aft_MetricPrcsrI.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Info\Aft_MetricPrcsrAnIso_Info.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\System\Aft2d_MetricPrcsrAnIso_System.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Iso\2d\Aft2d_MetricPrcsr.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Iso\3d\Aft3d_MetricPrcsr.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\AnIso\2d\Aft2d_MetricPrcsrAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\AnIso\2d\Aft2d_MetricPrcsrAnIso.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Surface\Aft2d_MetricPrcsrSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Surface\Aft2d_MetricPrcsrSurface.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Surface\Info\Aft2d_FrontSurfaceInfo.hxx">
+      <Filter>TnbLib\Aft\Front\Surface\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Analytical\Aft_OptNode_Analytical.hxx">
+      <Filter>TnbLib\Aft\OptNode\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Analytical\Iso\2d\Aft2d_OptNode_Analytical.hxx">
+      <Filter>TnbLib\Aft\OptNode\Analytical\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Analytical\AnIso\2d\Aft2d_OptNodeAnIso_Analytical.hxx">
+      <Filter>TnbLib\Aft\OptNode\Analytical\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Analytical\Surface\Aft2d_OptNodeSurface_Analytical.hxx">
+      <Filter>TnbLib\Aft\OptNode\Analytical\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\Aft_OptNode_Calculator.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_CalculatorFwd.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_Calculator.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\AnIso\3d\Aft3d_OptNodeAnIso_CalculatorFwd.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\AnIso\3d\Aft3d_OptNodeAnIso_Calculator.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\Iso\2d\Aft2d_OptNode_CalculatorFwd.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\Iso\2d\Aft2d_OptNode_Calculator.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\Iso\3d\Aft3d_OptNode_CalculatorFwd.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\Iso\3d\Aft3d_OptNode_Calculator.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\Surface\Aft2d_OptNodeSurface_CalculatorFwd.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\Surface\Aft2d_OptNodeSurface_Calculator.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Aft_Core.hxx">
+      <Filter>TnbLib\Aft\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Aft_CoreI.hxx">
+      <Filter>TnbLib\Aft\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Iso\2d\Aft2d_CoreFwd.hxx">
+      <Filter>TnbLib\Aft\Core\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Iso\2d\Aft2d_Core.hxx">
+      <Filter>TnbLib\Aft\Core\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Iso\2d\Aft2d_CoreTemplate.hxx">
+      <Filter>TnbLib\Aft\Core\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\AnIso\2d\Aft2d_CoreAnIsoTemplate.hxx">
+      <Filter>TnbLib\Aft\Core\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\AnIso\2d\Aft2d_CoreAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\Core\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\AnIso\2d\Aft2d_CoreAnIso.hxx">
+      <Filter>TnbLib\Aft\Core\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Surface\Aft2d_CoreSurfaceTemplate.hxx">
+      <Filter>TnbLib\Aft\Core\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Surface\Aft2d_FrontSurfaceGlobalDataFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Surface\Aft2d_FrontSurfaceGlobalData.hxx">
+      <Filter>TnbLib\Aft\Front\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Surface\Aft2d_CoreSurface.hxx">
+      <Filter>TnbLib\Aft\Core\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Tools\MeshBase_Tools.hxx">
+      <Filter>TnbLib\Base\Tools\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System\BoundarySizeMap2d_CornerToolSystem.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -1513,6 +1912,54 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\BoundarySizeMap2d_CornerTool.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Front\Info\2d\Aft2d_FrontInfoTemplate.cxx">
+      <Filter>TnbLib\Aft\Front\Info\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Aft_MetricPrcsr.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\System\Aft2d_MetricPrcsrAnIso_System.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Info\Aft_MetricPrcsrAnIso_Info.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\AnIso\2d\Aft2d_MetricPrcsrAnIso.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Surface\Aft2d_MetricPrcsrSurface.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Analytical\Iso\2d\Aft2d_OptNode_Analytical.cxx">
+      <Filter>TnbLib\Aft\OptNode\Analytical\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Analytical\AnIso\2d\Aft2d_OptNodeAnIso_Analytical.cxx">
+      <Filter>TnbLib\Aft\OptNode\Analytical\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Analytical\Surface\Aft2d_OptNodeSurface_Analytical.cxx">
+      <Filter>TnbLib\Aft\OptNode\Analytical\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\Base\Aft_Core_Base.cxx">
+      <Filter>TnbLib\Aft\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\Aft_Core.cxx">
+      <Filter>TnbLib\Aft\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\Iso\2d\Aft2d_Core.cxx">
+      <Filter>TnbLib\Aft\Core\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\AnIso\2d\Aft2d_CoreAnIso.cxx">
+      <Filter>TnbLib\Aft\Core\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\Surface\Aft2d_CoreSurface.cxx">
+      <Filter>TnbLib\Aft\Core\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_Tools.cxx">
+      <Filter>TnbLib\Base\Tools\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System\BoundarySizeMap2d_CornerToolSystem.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

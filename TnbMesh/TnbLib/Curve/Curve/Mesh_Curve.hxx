@@ -9,6 +9,7 @@
 #include <Geo_Traits.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveEntity.hxx>
+#include <Mesh_Module.hxx>
 
 namespace tnbLib
 {
@@ -30,9 +31,9 @@ namespace tnbLib
 
 	protected:
 
-		Mesh_Curve_Base();
+		TnbMesh_EXPORT Mesh_Curve_Base();
 
-		Mesh_Curve_Base
+		TnbMesh_EXPORT Mesh_Curve_Base
 		(
 			const Standard_Real theFirst,
 			const Standard_Real theLast,
