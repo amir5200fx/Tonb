@@ -40,24 +40,44 @@ namespace tnbLib
 
 			rArmCurve_Cmpt
 			(
-				const std::vector<std::shared_ptr<ArmCurve>>&& theCurves
+				const Standard_Integer theIndex,
+				const word& theName
+			)
+				: HydStatic_Entity(theIndex, theName)
+			{}
+
+			rArmCurve_Cmpt
+			(
+				const std::vector<std::shared_ptr<ArmCurve>>& theCurves
+			)
+				: theCurves_(theCurves)
+			{}
+
+			rArmCurve_Cmpt
+			(
+				const Standard_Integer theIndex, 
+				const word& theName, 
+				const std::vector<std::shared_ptr<ArmCurve>>& theCurves
+			)
+				: HydStatic_Entity(theIndex, theName)
+				, theCurves_(theCurves)
+			{}
+
+			rArmCurve_Cmpt
+			(
+				std::vector<std::shared_ptr<ArmCurve>>&& theCurves
 			)
 				: theCurves_(std::move(theCurves))
 			{}
 
 			rArmCurve_Cmpt
 			(
-				const Standard_Integer theIndex
-			)
-				: HydStatic_Entity(theIndex)
-			{}
-
-			rArmCurve_Cmpt
-			(
-				const Standard_Integer theIndex, 
-				const word& theName
+				const Standard_Integer theIndex,
+				const word& theName,
+				std::vector<std::shared_ptr<ArmCurve>>&& theCurves
 			)
 				: HydStatic_Entity(theIndex, theName)
+				, theCurves_(std::move(theCurves))
 			{}
 
 			auto NbCurves() const
@@ -77,10 +97,18 @@ namespace tnbLib
 
 			void SetCurves
 			(
-				const std::vector<std::shared_ptr<ArmCurve>>&& theCurves
+				std::vector<std::shared_ptr<ArmCurve>>&& theCurves
 			)
 			{
 				theCurves_ = std::move(theCurves);
+			}
+
+			void SetCurves
+			(
+				const std::vector<std::shared_ptr<ArmCurve>>& theCurves
+			)
+			{
+				theCurves_ = theCurves;
 			}
 		};
 	}
