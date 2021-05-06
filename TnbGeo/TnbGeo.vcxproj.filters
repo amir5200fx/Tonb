@@ -409,6 +409,9 @@
     <Filter Include="TnbLib\Geo\Triangulation\2d\std">
       <UniqueIdentifier>{3d4ac6f4-a4fd-4e91-a441-32243f9b0a3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Interval">
+      <UniqueIdentifier>{f1482c12-fa29-488e-9d67-ed79ad406cb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -930,6 +933,18 @@
     <ClInclude Include="TnbLib\Geo\Triangulation\2d\cdt\Geo2d_CdtDelTri.hxx">
       <Filter>TnbLib\Geo\Triangulation\2d\cdt</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tools\Geo_BoxTools.hxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tools\Geo_BoxToolsI.hxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Interval\Geo_Interval.hxx">
+      <Filter>TnbLib\Geo\Interval</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Interval\Geo_IntervalI.hxx">
+      <Filter>TnbLib\Geo\Interval</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1141,6 +1156,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Triangulation\2d\cdt\Geo2d_CdtDelTri.cxx">
       <Filter>TnbLib\Geo\Triangulation\2d\cdt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_BoxTools.cxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_BoxToolsDefaults.cxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Interval\Geo_Interval.cxx">
+      <Filter>TnbLib\Geo\Interval</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
