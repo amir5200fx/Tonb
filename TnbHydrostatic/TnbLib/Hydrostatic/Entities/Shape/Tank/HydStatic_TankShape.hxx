@@ -3,11 +3,13 @@
 #define _HydStatic_TankShape_Header
 
 #include <HydStatic_Shape.hxx>
+#include <Marine_VesselParam_KG.hxx>
 
 namespace tnbLib
 {
 
 	// Forward Declarations
+	class Marine_Domain;
 	class HydStatic_FillCurve;
 	class HydStatic_CrsCurvesGraph;
 
@@ -19,7 +21,11 @@ namespace tnbLib
 
 		std::shared_ptr<marineLib::Model_Tank> theTank_;
 
+		Standard_Real thePerc_;
 
+		marineLib::KG theKg_;
+
+		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<HydStatic_FillCurve> theFill_;
 		std::shared_ptr<HydStatic_CrsCurvesGraph> theCross_;
 
@@ -29,6 +35,8 @@ namespace tnbLib
 		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 	public:
+
+		static TnbHydStatic_EXPORT Standard_Real DEFAULT_PERC_VALUE;
 
 		//- default constructor
 
@@ -79,6 +87,23 @@ namespace tnbLib
 			return theCross_;
 		}
 
+		const auto& Domain() const
+		{
+			return theDomain_;
+		}
+
+		auto FullnessPerc() const
+		{
+			return thePerc_;
+		}
+
+		TnbHydStatic_EXPORT Standard_Real Capacity() const;
+
+		const auto& KG() const
+		{
+			return theKg_;
+		}
+
 		void SetModel
 		(
 			std::shared_ptr<marineLib::Model_Tank>&& theTank
@@ -126,7 +151,29 @@ namespace tnbLib
 		{
 			theCross_ = std::move(theCurves);
 		}
+
+		void SetDomain
+		(
+			const std::shared_ptr<Marine_Domain>& theDomain
+		)
+		{
+			theDomain_ = theDomain;
+		}
+
+		void SetDomain
+		(
+			std::shared_ptr<Marine_Domain>&& theDomain
+		)
+		{
+			theDomain_ = std::move(theDomain);
+		}
+
+		TnbHydStatic_EXPORT void SetKG(const Standard_Real theKg);
+
+		TnbHydStatic_EXPORT void SetFullnessPerc(const Standard_Real x);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_TankShape);
 
 #endif // !_HydStatic_TankShape_Header

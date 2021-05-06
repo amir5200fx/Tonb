@@ -3,6 +3,8 @@
 #define _HydStatic_HullShape_Header
 
 #include <HydStatic_Shape.hxx>
+#include <Marine_VesselParam_KG.hxx>
+#include <Marine_VesselParam_DISPV.hxx>
 
 namespace tnbLib
 {
@@ -16,6 +18,8 @@ namespace tnbLib
 	{
 
 		/*Private Data*/
+
+		marineLib::DISPV theDispv_;
 
 		std::shared_ptr<marineLib::Model_Hull> theHull_;
 
@@ -37,6 +41,11 @@ namespace tnbLib
 
 		//- public functions and operators
 
+		const auto& DISPV() const
+		{
+			return theDispv_;
+		}
+
 		const auto& Hull() const
 		{
 			return theHull_;
@@ -47,17 +56,17 @@ namespace tnbLib
 			return theCross_;
 		}
 
-		void SetHull(const std::shared_ptr<marineLib::Model_Hull>& theHull)
-		{
-			theHull_ = theHull;
-		}
+		TnbHydStatic_EXPORT void SetHull(const std::shared_ptr<marineLib::Model_Hull>& theHull);
+		TnbHydStatic_EXPORT void SetHull(std::shared_ptr<marineLib::Model_Hull>&& theHull);
 
-		void SetCrossCurves(const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCross)
-		{
-			theCross_ = theCross;
-		}
+		TnbHydStatic_EXPORT void SetCrossCurves(const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCross);
+		TnbHydStatic_EXPORT void SetCrossCurves(std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCross);
 
+		TnbHydStatic_EXPORT void SetDispv(const marineLib::DISPV& theV);
+		TnbHydStatic_EXPORT void SetDispv(marineLib::DISPV&& theV);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_HullShape);
 
 #endif // !_HydStatic_HullShape_Header
