@@ -48,6 +48,14 @@ namespace tnbLib
 
 	public:
 
+		static unsigned int MIN_NB_POINTS_INTERPOLATION;
+
+		static TnbMarine_EXPORT Pnt3d 
+			CalcOxyz
+			(
+				const Entity3d_Box& theDomain
+			);
+
 		//- the coefficient Cw depends on the form and configuration of the sail area.
 		//- an average value for Cw is 1.2. 
 		static TnbMarine_EXPORT marineLib::Pressure 
@@ -101,7 +109,8 @@ namespace tnbLib
 		static TnbMarine_EXPORT Handle(Geom2d_Curve)
 			Curve
 			(
-				const std::vector<marineLib::xSectionParam>& theQ
+				const std::vector<marineLib::xSectionParam>& theQ,
+				const Standard_Boolean tessellation = Standard_True
 			);
 
 

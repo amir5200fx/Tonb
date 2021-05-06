@@ -154,3 +154,25 @@ tnbLib::Marine_BodyCmptLib::CrossCurve
 		);
 	return std::move(params);
 }
+
+tnbLib::xSectParList 
+tnbLib::Marine_BodyCmptLib::Volume
+(
+	const marineLib::Body_Tank & theBody, 
+	const Marine_MultLevWaterDomain & theWaters,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+#ifdef _DEBUG
+	Marine_BodyTools::CheckTypeConsistency(theBody);
+#endif // _DEBUG
+
+	auto params = 
+		Marine_CmptLib2::Volume
+		(
+			theBody.Sections(), 
+			theWaters.Waters(),
+			theInfo
+		);
+	return std::move(params);
+}

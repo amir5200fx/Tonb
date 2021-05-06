@@ -87,6 +87,43 @@ tnbLib::Marine_BodyTools::IsDisplacer
 }
 
 Standard_Real 
+tnbLib::Marine_BodyTools::CalcLateralArea
+(
+	const std::shared_ptr<Marine_Body>& theBody,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (NOT theBody)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the body is null" << endl
+			<< abort(FatalError);
+	}
+	auto areaQ = MarineBase_Tools::CalcLateralArea(theBody->Sections());
+	auto area = MarineBase_Tools::CalcArea(areaQ, theInfo);
+	return area;
+}
+
+Standard_Real 
+tnbLib::Marine_BodyTools::CalcLateralZbar
+(
+	const std::shared_ptr<Marine_Body>& theBody,
+	const Standard_Real z0,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	if (NOT theBody)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the body is null" << endl
+			<< abort(FatalError);
+	}
+	auto zBarQ = MarineBase_Tools::CalcLateralZbar(theBody->Sections(), z0);
+	auto zBar = MarineBase_Tools::CalcArea(zBarQ, theInfo);
+	return zBar;
+}
+
+Standard_Real 
 tnbLib::Marine_BodyTools::CalcVolume
 (
 	const Marine_Body & theBody,

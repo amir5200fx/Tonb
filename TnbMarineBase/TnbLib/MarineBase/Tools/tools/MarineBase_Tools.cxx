@@ -9,6 +9,7 @@
 #include <Pnt3d.hxx>
 #include <Entity2d_Box.hxx>
 #include <Entity3d_Box.hxx>
+#include <Geo_Interval.hxx>
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CmptLib.hxx>
@@ -50,6 +51,22 @@
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_spline.h>
+
+tnbLib::Pnt3d 
+tnbLib::MarineBase_Tools::CalcOxyz
+(
+	const Entity3d_Box & theDomain
+)
+{
+	const auto& p0 = theDomain.P0();
+	const auto& p1 = theDomain.P1();
+
+	const auto xo = p0.X();
+	const auto yo = MEAN(p0.Y(), p1.Y());
+	const auto zo = p0.Z();
+	Pnt3d Oxyz(xo, yo, zo);
+	return std::move(Oxyz);
+}
 
 tnbLib::marineLib::Pressure 
 tnbLib::MarineBase_Tools::CalcWindPressure
@@ -93,7 +110,7 @@ tnbLib::MarineBase_Tools::Tessellate
 namespace tnbLib
 {
 
-	static const unsigned int MIN_NB_POINTS_INTERPOLATION = 25;
+	unsigned int MarineBase_Tools::MIN_NB_POINTS_INTERPOLATION = 25;
 
 	/*std::vector<Standard_Real> TessellateX(const std::vector<Standard_Real>& x)
 	{
@@ -125,7 +142,7 @@ namespace tnbLib
 		{
 			xt.push_back(x[i]);
 		}
-		auto xs = MarineBase_Tools::Tessellate(xt, MIN_NB_POINTS_INTERPOLATION);
+		auto xs = MarineBase_Tools::Tessellate(xt, MarineBase_Tools::MIN_NB_POINTS_INTERPOLATION);
 		return std::move(xs);
 	}
 }
@@ -210,7 +227,8 @@ tnbLib::MarineBase_Tools::CalcBoundingBox
 Handle(Geom2d_Curve)
 tnbLib::MarineBase_Tools::Curve
 (
-	const std::vector<marineLib::xSectionParam>& theQ
+	const std::vector<marineLib::xSectionParam>& theQ,
+	const Standard_Boolean tessellation
 )
 {
 	if (theQ.size() < 2)
@@ -224,7 +242,7 @@ tnbLib::MarineBase_Tools::Curve
 	}
 
 	std::vector<marineLib::xSectionParam> Q;
-	if (theQ.size() < MIN_NB_POINTS_INTERPOLATION)
+	if (theQ.size() < MIN_NB_POINTS_INTERPOLATION AND tessellation)
 	{
 		Q = SteffenTessellation(theQ);
 	}
@@ -275,6 +293,143 @@ tnbLib::MarineBase_Tools::CalcBWL
 	const auto b = theSection.BoundingBox();
 	const auto[dx, dy] = b.Length();
 	return dx;
+}
+
+tnbLib::Geo_Interval<Standard_Real> 
+tnbLib::MarineBase_Tools::CalcLateralArea
+(
+	const std::shared_ptr<Marine_Section>& theSection
+)
+{
+	Debug_Null_Pointer(theSection);
+	const auto b = theSection->BoundingBox();
+	return Geo_Interval<Standard_Real>(b.P0().Y(), b.P1().Y());
+}
+
+namespace tnbLib
+{
+	auto Merge(std::vector<Geo_Interval<Standard_Real>>& intervals)
+	{
+		if (intervals.empty())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the list is empty" << endl
+				<< abort(FatalError);
+		}
+		std::vector<Geo_Interval<Standard_Real>> merged;
+		auto& v0 = intervals[0];
+		for (size_t i = 1; i < intervals.size(); i++)
+		{	
+			if (NOT v0.IsIntersect(intervals[i]))
+			{
+				merged.push_back(std::move(v0));
+				v0 = intervals[i];
+			}
+			else
+			{
+				auto& v1 = intervals[i];
+				auto x0 = std::min(v0.X0(), v1.X0());
+				auto x1 = std::max(v0.X1(), v1.X1());
+
+				Geo_Interval<Standard_Real> v(x0, x1);
+				v0 = std::move(v);
+			}
+		}
+		return std::move(merged);
+	}
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcLateralArea
+(
+	const std::shared_ptr<Marine_CmpSection>& theSection
+)
+{
+	Debug_Null_Pointer(theSection);
+	if (NOT theSection->IsXsection())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "it's not a x-section!" << endl
+			<< abort(FatalError);
+	}
+	std::vector<Geo_Interval<Standard_Real>> intervals;
+	intervals.reserve(theSection->NbSections());
+	for (const auto& x : theSection->Sections())
+	{
+		Debug_Null_Pointer(x);
+		auto interval = CalcLateralArea(x);
+		intervals.push_back(std::move(interval));
+	}
+
+	std::sort
+	(
+		intervals.begin(), 
+		intervals.end(), 
+		[](
+			const Geo_Interval<Standard_Real>& v0, 
+			const Geo_Interval<Standard_Real>& v1
+			)-> bool 
+	{
+		return MEAN(v0.X0(), v0.X1()) <= MEAN(v1.X0(), v1.X1()); 
+	}
+	);
+
+	auto merged = Merge(intervals);
+	
+	Standard_Real sumArea = 0;
+	Standard_Real sumNumer = 0;
+	for (const auto& x : merged)
+	{
+		auto area = x.Length();
+		auto zbar = MEAN(x.X0(), x.X1());
+
+		sumArea += area;
+		sumNumer += (zbar*area);
+	}
+	auto t = std::make_pair(sumArea, sumNumer / sumArea);
+	return std::move(t);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcLateralArea
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	std::vector<marineLib::xSectionParam> Qs;
+	Qs.reserve(theSections.size());
+	
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		auto area = CalcLateralArea(x);
+
+		marineLib::xSectionParam p{ x->X(),area.first };
+		Qs.push_back(std::move(p));
+	}
+	return std::move(Qs);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::MarineBase_Tools::CalcLateralZbar
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const Standard_Real z0
+)
+{
+	std::vector<marineLib::xSectionParam> Qs;
+	Qs.reserve(theSections.size());
+
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		auto interval = CalcLateralArea(x);
+		auto zBar = interval.second - z0;
+
+		marineLib::xSectionParam p{ x->X(),zBar };
+		Qs.push_back(std::move(p));
+	}
+	return std::move(Qs);
 }
 
 Standard_Real 

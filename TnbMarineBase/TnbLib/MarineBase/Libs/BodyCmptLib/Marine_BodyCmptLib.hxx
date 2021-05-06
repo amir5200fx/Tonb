@@ -104,6 +104,14 @@ namespace tnbLib
 				const gp_Ax1& theK,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
+
+		static TnbMarine_EXPORT xSectParList 
+			Volume
+			(
+				const marineLib::Body_Tank& theBody,
+				const Marine_MultLevWaterDomain& theWaters, 
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
 	};
 }
 

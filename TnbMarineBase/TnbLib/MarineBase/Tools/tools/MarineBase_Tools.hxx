@@ -43,10 +43,20 @@ namespace tnbLib
 	class Geo_xDistb;
 	class Cad2d_Plane;
 
+	template<class T> class Geo_Interval;
+
 	class MarineBase_Tools
 	{
 
 	public:
+
+		static unsigned int MIN_NB_POINTS_INTERPOLATION;
+
+		static TnbMarine_EXPORT Pnt3d 
+			CalcOxyz
+			(
+				const Entity3d_Box& theDomain
+			);
 
 		//- the coefficient Cw depends on the form and configuration of the sail area.
 		//- an average value for Cw is 1.2. 
@@ -83,7 +93,6 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			);
 
-
 		/*template<class SectionType>
 		static TnbMarine_EXPORT std::shared_ptr<Cad2d_Plane> 
 			ConvertToPlane
@@ -101,7 +110,8 @@ namespace tnbLib
 		static TnbMarine_EXPORT Handle(Geom2d_Curve)
 			Curve
 			(
-				const std::vector<marineLib::xSectionParam>& theQ
+				const std::vector<marineLib::xSectionParam>& theQ,
+				const Standard_Boolean tessellation = Standard_True
 			);
 
 
@@ -109,6 +119,32 @@ namespace tnbLib
 			CalcBWL
 			(
 				const Marine_CmpSection& theSection
+			);
+
+		static TnbMarine_EXPORT Geo_Interval<Standard_Real> 
+			CalcLateralArea
+			(
+				const std::shared_ptr<Marine_Section>&
+			);
+
+		//- the first and the second values are area and zBar, respectively
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcLateralArea
+			(
+				const std::shared_ptr<Marine_CmpSection>&
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcLateralArea
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcLateralZbar
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real z0
 			);
 
 		static TnbMarine_EXPORT Standard_Real

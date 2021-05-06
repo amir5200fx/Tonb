@@ -43,6 +43,21 @@ namespace tnbLib
 
 		static TnbMarine_EXPORT Standard_Boolean IsDisplacer(const Marine_Body& theBody);
 
+		static TnbMarine_EXPORT Standard_Real
+			CalcLateralArea
+			(
+				const std::shared_ptr<Marine_Body>& theBody,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbMarine_EXPORT Standard_Real 
+			CalcLateralZbar
+			(
+				const std::shared_ptr<Marine_Body>& theBody,
+				const Standard_Real z0, 
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
 		static TnbMarine_EXPORT Standard_Real 
 			CalcVolume
 			(

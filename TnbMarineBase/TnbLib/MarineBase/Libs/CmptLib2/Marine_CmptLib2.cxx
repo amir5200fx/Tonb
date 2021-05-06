@@ -14,6 +14,9 @@
 unsigned short tnbLib::Marine_CmptLib2::LeverArm_Verbose1(0);
 unsigned short tnbLib::Marine_CmptLib2::LeverArm_Verbose2(0);
 unsigned short tnbLib::Marine_CmptLib2::CrossCurve_Verbose(0);
+unsigned short tnbLib::Marine_CmptLib2::Volume_Verbose(0);
+
+Standard_Real tnbLib::Marine_CmptLib2::vol_criterion = 1.0E-4;
 
 tnbLib::marineLib::xSectionParam 
 tnbLib::Marine_CmptLib2::LeverArm
@@ -86,7 +89,7 @@ tnbLib::Marine_CmptLib2::LeverArm
 	if (verbose)
 	{
 		Info << endl;
-		Info << "******* Marine_CmptLib2: End of the Calculating Lever-Arm ********" << endl;
+		Info << "******* Marine_CmptLib2: End of the Lever-Arm Calculating ********" << endl;
 		Info << endl;
 	}
 	return My / theVolume;
@@ -109,7 +112,6 @@ tnbLib::Marine_CmptLib2::CrossCurve
 		Info << "******* Marine_CmptLib2: Calculating Cross-Curve ********" << endl;
 		Info << endl;
 	}
-	const static Standard_Real vol_criterion = 1.0E-4;
 
 	if (theWaters.size() < 2)
 	{
@@ -202,7 +204,73 @@ tnbLib::Marine_CmptLib2::CrossCurve
 	if (verbose)
 	{
 		Info << endl;
-		Info << "******* Marine_CmptLib2: End of the Calculating Cross-Curve ********" << endl;
+		Info << "******* Marine_CmptLib2: End of the Cross-Curve Calculating ********" << endl;
+		Info << endl;
+	}
+	return std::move(curves);
+}
+
+std::vector<tnbLib::marineLib::xSectionParam> 
+tnbLib::Marine_CmptLib2::Volume
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections, 
+	const std::vector<std::shared_ptr<Marine_WaterDomain>>& theWaters,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	const auto verbose = Volume_Verbose;
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Marine_CmptLib2: Calculating Volume ********" << endl;
+		Info << endl;
+	}
+
+	std::vector<marineLib::xSectionParam> curves;
+	for (const auto& x : theWaters)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x->Water());
+
+		if (verbose > 1)
+		{
+			Info << " - water's id: " << x->Index() << endl;
+			Info << " - z = " << x->Z() << endl;
+			Info << " calculating the wetted sections..." << endl;
+		}
+
+		auto wetted = Marine_BooleanOps::WettedSections(theSections, x->Water()->Sections());
+		if (wetted.size())
+		{
+			if (verbose > 1)
+			{
+				Info << " wetted sections have been detected." << endl;
+				Info << " nb. of wetted sections: " << wetted.size() << endl;
+				Info << " calculating the volume..." << endl;
+			}
+			auto volQ = MarineBase_Tools::CalcVolume(wetted, theInfo);
+			auto vol = MarineBase_Tools::CalcArea(volQ, theInfo);
+			if (verbose > 1)
+			{
+				Info << " volume= " << vol << endl;
+				Info << " for volume bigger than " << vol_criterion << ", the lever arm is calculated" << endl;
+			}
+
+			auto par = marineLib::xSectionParam{ x->Z(), vol };
+			curves.push_back(std::move(par));
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no wetted section has been detected!" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Marine_CmptLib2: End of the Volume Calculating ********" << endl;
 		Info << endl;
 	}
 	return std::move(curves);
