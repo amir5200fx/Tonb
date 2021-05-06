@@ -5,10 +5,13 @@
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
 #include <Cad2d_CmptLib.hxx>
-#include <Marine_Body.hxx>
+#include <Marine_Bodies.hxx>
+#include <Marine_BodyTools.hxx>
+#include <Marine_Models.hxx>
 #include <Marine_CmpSection.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_MultLevWaterDomain.hxx>
+#include <Marine_Domain.hxx>
 #include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_Bonjean.hxx>
 #include <HydStatic_BnjCurve.hxx>
@@ -30,6 +33,7 @@
 #include <HydStatic_CurveMaker.hxx>
 #include <HydStatic_rArmCurves.hxx>
 #include <HydStatic_Spacing.hxx>
+#include <HydStatic_TankShape.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -40,6 +44,16 @@
 #include <Geom2dAPI_ExtremaCurveCurve.hxx>
 #include <Geom2dAPI_InterCurveCurve.hxx>
 #include <GCE2d_MakeSegment.hxx>
+
+Standard_Real 
+tnbLib::HydStatic_CmptLib::RetrieveDispv
+(
+	const HydStatic_TankShape & theTank
+)
+{
+	const auto perc = theTank.FullnessPerc();
+	return perc * theTank.Capacity();
+}
 
 Standard_Real 
 tnbLib::HydStatic_CmptLib::CalcArea
@@ -865,6 +879,24 @@ tnbLib::HydStatic_CmptLib::CalcEffectiveRightingArm
 	}
 	auto Qs = HydStatic_Tools::Subtract(theBody, theTanks);
 	auto curve = HydStatic_Tools::MakeEffRightCurve(HydStatic_Tools::OffsetsFrom(Qs));
+	Debug_Null_Pointer(curve);
+
+	curve->SetBody(theBody);
+	curve->SetTanks(theTanks);
+
+	return std::move(curve);
+}
+
+std::shared_ptr<tnbLib::hydStcLib::rArmCurve_Eff> 
+tnbLib::HydStatic_CmptLib::CalcEffectiveRightingArm
+(
+	const std::shared_ptr<hydStcLib::rArmCurve_Body>& theBody
+)
+{
+	auto curve = std::make_shared<hydStcLib::rArmCurve_Eff>(theBody->Geometry());
+	Debug_Null_Pointer(curve);
+
+	curve->SetBody(theBody);
 
 	return std::move(curve);
 }
@@ -926,4 +958,44 @@ void tnbLib::HydStatic_CmptLib::CalcParameters
 
 	x = *iter;
 	x.SetParameter(geom->LastParameter());
+}
+
+void tnbLib::HydStatic_CmptLib::CalcDomain
+(
+	const std::shared_ptr<HydStatic_TankShape>& theTank
+)
+{
+	Debug_Null_Pointer(theTank);
+	const auto& model = theTank->Model();
+	if (NOT model)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " invalid tank has been detected:" << endl
+			<< " - the model of the tank is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& body = model->Body();
+	if (NOT body)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " invalid model has been detected:" << endl
+			<< " - the body of the model is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto b = Marine_BodyTools::BoundingBox(*body);
+	const auto Oxyz = MarineBase_Tools::CalcOxyz(b);
+
+	auto domain = std::make_shared<Marine_Domain>();
+	Debug_Null_Pointer(domain);
+
+	domain->SetLocation(Oxyz);
+	domain->SetIndex(theTank->Index());
+	domain->SetName("domain - " + theTank->Name());
+
+	domain->Perform(b);
+	Debug_If_Condition_Message(NOT domain->IsDone(), "the algorithm is not performed!");
+
+	theTank->SetDomain(std::move(domain));
 }
