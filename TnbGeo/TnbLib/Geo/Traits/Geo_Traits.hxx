@@ -3,6 +3,7 @@
 #define _Geo_Traits_Header
 
 #include <Traits.hxx>
+#include <Entity_Connectivity.hxx>
 
 class gp_Vec;
 class gp_Vec2d;
@@ -20,6 +21,10 @@ namespace tnbLib
 	template<class Point> struct transform_point_type {};
 	template<> struct transform_point_type<Pnt2d> { typedef gp_Trsf2d type; };
 	template<> struct transform_point_type<Pnt3d> { typedef gp_Trsf type; };
+
+	template<class Point> struct entity_connectivity_type {};
+	template<> struct entity_connectivity_type<Pnt2d> { typedef typename connectivity::triple type; };
+	template<> struct entity_connectivity_type<Pnt3d> { typedef typename connectivity::quadruple type; };
 
 	namespace cascadeLib
 	{
