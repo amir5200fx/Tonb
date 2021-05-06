@@ -13,19 +13,30 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class HydStatic_CrossCurves;
+	class HydStatic_CrsCurvesGraph;
 	class HydStatic_rArmCurve;
 
 	class HydStatic_GZ
 		: public Global_Done
 	{
 
+	public:
+
+		enum class bodyType
+		{
+			hull = 0,
+			tank
+		};
+
+	private:
+
 		/*Private Data*/
 
 		marineLib::KG theKg_;
 		marineLib::DISPV theDispv_;
+		bodyType theType_;
 
-		std::shared_ptr<HydStatic_CrossCurves> theCrossCurves_;
+		std::shared_ptr<HydStatic_CrsCurvesGraph> theCrossCurves_;
 
 		std::shared_ptr<HydStatic_rArmCurve> theRightingArm_;
 
@@ -49,14 +60,14 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT HydStatic_GZ
 		(
-			const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves,
+			const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves,
 			const marineLib::KG& theKG,
 			const marineLib::DISPV& theDispv
 		);
 
 		TnbHydStatic_EXPORT HydStatic_GZ
 		(
-			std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves,
+			std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCrossCurves,
 			marineLib::KG&& theKG,
 			marineLib::DISPV&& theDispv
 		);
@@ -81,16 +92,21 @@ namespace tnbLib
 			return theRightingArm_;
 		}
 
+		auto BodyType() const
+		{
+			return theType_;
+		}
+
 		TnbHydStatic_EXPORT void Perform();
 
 		TnbHydStatic_EXPORT void LoadCrossCurves
 		(
-			const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves
+			const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves
 		);
 
 		TnbHydStatic_EXPORT void LoadCrossCurves
 		(
-			std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves
+			std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCrossCurves
 		);
 
 		TnbHydStatic_EXPORT void SetKG(const marineLib::KG& theKG);
@@ -100,6 +116,11 @@ namespace tnbLib
 		TnbHydStatic_EXPORT void SetDispv(const marineLib::DISPV& theV);
 
 		TnbHydStatic_EXPORT void SetDispv(marineLib::DISPV&& theV);
+
+		void SetBodyType(const bodyType t)
+		{
+			theType_ = t;
+		}
 	};
 }
 

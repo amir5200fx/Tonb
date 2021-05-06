@@ -29,6 +29,12 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
+
+#include <boost/archive/polymorphic_text_iarchive.hpp>
+#include <boost/archive/polymorphic_text_oarchive.hpp>
+
 //#include <boost/archive/impl/archive_serializer_map.ipp>
 
 #include <TnbError.hxx>
@@ -36,6 +42,9 @@
 
 #define TNB_iARCH_TYPE boost::archive::polymorphic_iarchive
 #define TNB_oARCH_TYPE boost::archive::polymorphic_oarchive
+
+#define TNB_iARCH_FILE_TYPE boost::archive::polymorphic_text_iarchive
+#define TNB_oARCH_FILE_TYPE boost::archive::polymorphic_text_oarchive
 
 #define TNB_SERIALIZATION(Export)	 														\
 	template<class Archive> void save(Archive&, const unsigned int) const 							\

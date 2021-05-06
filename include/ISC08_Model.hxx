@@ -2,6 +2,7 @@
 #ifndef _ISC08_Model_Header
 #define _ISC08_Model_Header
 
+#include <Global_Serialization.hxx>
 #include <ISC08_Parameter.hxx>
 #include <ISC08_Factor.hxx>
 #include <Marine_VesselParams.hxx>
@@ -31,6 +32,23 @@ namespace tnbLib
 			marineLib::KG theKg_;
 			marineLib::DISPM theDisplm_;
 			marineLib::GM theGm_;
+
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & theB_;
+				ar & theTm_;
+				ar & theCb_;
+				ar & theLwl_;
+				ar & theKg_;
+				ar & theDisplm_;
+				ar & theGm_;
+			}
 
 		public:
 
@@ -121,6 +139,22 @@ namespace tnbLib
 
 			isc08Lib::BilgeBarCondition theBilgeCondition_;
 
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int file_version)
+			{
+				ar & theLateral_;
+				ar & theVerticalDist_;
+				ar & theAk_;
+				ar & theT_;
+
+				ar & theBilgeCondition_;
+			}
+
 		public:
 
 			Props()
@@ -188,7 +222,37 @@ namespace tnbLib
 
 		std::shared_ptr<hydStcLib::rArmCurve_Eff> theEff_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbISC08_EXPORT);
+
 	public:
+
+
+		//- default constructor
+
+		ISC08_Model()
+		{}
+
+		//- constructors
+
+		TnbISC08_EXPORT ISC08_Model
+		(
+			VesselParams&& theParameters,
+			Props&& theProperties, 
+			const std::shared_ptr<hydStcLib::rArmCurve_Eff>& theGz
+		);
+
+		TnbISC08_EXPORT ISC08_Model
+		(
+			VesselParams&& theParameters,
+			Props&& theProperties,
+			std::shared_ptr<hydStcLib::rArmCurve_Eff>&& theGz
+		);
+
+
+		//- public functions and operators
 
 		const auto& VesselParameters() const
 		{
@@ -219,6 +283,15 @@ namespace tnbLib
 		{
 			return theEff_;
 		}
+
+		TnbISC08_EXPORT void SetParameters(const VesselParams&);
+		TnbISC08_EXPORT void SetParameters(VesselParams&&);
+
+		TnbISC08_EXPORT void SetProperties(const Props&);
+		TnbISC08_EXPORT void SetProperties(Props&&);
+
+		TnbISC08_EXPORT void SetGZeff(const std::shared_ptr<hydStcLib::rArmCurve_Eff>&);
+		TnbISC08_EXPORT void SetGZeff(std::shared_ptr<hydStcLib::rArmCurve_Eff>&&);
 	};
 }
 

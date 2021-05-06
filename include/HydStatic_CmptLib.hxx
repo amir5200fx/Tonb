@@ -6,6 +6,7 @@
 #include <Marine_VesselParam_DISPV.hxx>
 #include <HydStatic_Module.hxx>
 #include <HydStatic_rArmCurvesFwd.hxx>
+#include <HydStatic_ShapesFwd.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -34,6 +35,7 @@ namespace tnbLib
 	class HydStatic_WDiffCurve;
 	class HydStatic_EqQ;
 	class HydStatic_Spacing;
+	class HydStatic_TankShape;
 	class NumAlg_AdaptiveInteg_Info;
 
 	struct HydStatic_Bonjean_Entity;
@@ -45,6 +47,12 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbHydStatic_EXPORT Standard_Real 
+			RetrieveDispv
+			(
+				const HydStatic_TankShape& theTank
+			);
 
 		static TnbHydStatic_EXPORT Standard_Real
 			CalcArea
@@ -224,12 +232,23 @@ namespace tnbLib
 				const std::shared_ptr<hydStcLib::rArmCurve_Tanks>& theTanks
 			);
 
+		static TnbHydStatic_EXPORT std::shared_ptr<hydStcLib::rArmCurve_Eff>
+			CalcEffectiveRightingArm
+			(
+				const std::shared_ptr<hydStcLib::rArmCurve_Body>& theBody
+			);
+
 		static TnbHydStatic_EXPORT void
 			CalcParameters
 			(
 				const std::shared_ptr<HydStatic_ArmCurve>& theArm
 			);
 	
+		static TnbHydStatic_EXPORT void 
+			CalcDomain
+			(
+				const std::shared_ptr<HydStatic_TankShape>& theTank
+			);
 	};
 }
 
