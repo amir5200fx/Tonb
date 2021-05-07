@@ -1,5 +1,6 @@
 #include <Geo_Tools.hxx>
 
+#include <Entity2d_Triangle.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity3d_Polygon.hxx>
 #include <Entity2d_Chain.hxx>
@@ -250,6 +251,47 @@ tnbLib::Geo_Tools::Triangulation
 		indices.push_back(std::move(t));
 	}
 	return std::move(tr);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon>
+tnbLib::Geo_Tools::GetPolygon(const Entity2d_Triangle & t)
+{
+	auto poly = std::make_shared<Entity2d_Polygon>();
+	auto pnts = poly->Points();
+	pnts.reserve(3);
+
+	pnts.push_back(t.P0());
+	pnts.push_back(t.P1());
+	pnts.push_back(t.P2());
+
+	return std::move(poly);
+}
+
+std::vector<tnbLib::Entity2d_Triangle> 
+tnbLib::Geo_Tools::GetTriangles
+(
+	const Entity2d_Triangulation & mesh
+)
+{
+	std::vector<Entity2d_Triangle> tris;
+	tris.reserve(mesh.NbConnectivity());
+
+	const auto& pnts = mesh.Points();
+	for (const auto& x : mesh.Connectivity())
+	{
+		auto v0 = Index_Of(x.Value(0));
+		auto v1 = Index_Of(x.Value(1));
+		auto v2 = Index_Of(x.Value(2));
+
+		const auto& p0 = pnts[v0];
+		const auto& p1 = pnts[v1];
+		const auto& p2 = pnts[v2];
+
+		Entity2d_Triangle t(p0, p1, p2);
+
+		tris.push_back(std::move(t));
+	}
+	return std::move(tris);
 }
 
 size_t 

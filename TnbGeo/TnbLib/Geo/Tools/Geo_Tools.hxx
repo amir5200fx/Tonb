@@ -12,6 +12,8 @@
 #include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
 #include <Entity3d_ChainFwd.hxx>
+#include <Entity2d_TriangleFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 
 #include <vector>
@@ -384,6 +386,13 @@ namespace tnbLib
 				const Entity2d_Line&
 			);
 
+		static TnbGeo_EXPORT std::vector<Pnt2d> 
+			Intersecction_cgal
+			(
+				const Entity2d_Triangle& tri0,
+				const Entity2d_Triangle& tri1
+			);
+
 		static inline Pnt2d 
 			ProjectPtAtSegment
 			(
@@ -428,6 +437,24 @@ namespace tnbLib
 				const Entity3d_Chain& theChain
 			);
 
+		static TnbGeo_EXPORT std::vector<Entity2d_Triangle> 
+			Intersections
+			(
+				const std::vector<Entity2d_Triangle>& theTriangles
+			);
+
+		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Polygon> 
+			GetPolygon
+			(
+				const Entity2d_Triangle&
+			);
+
+		static TnbGeo_EXPORT std::vector<Entity2d_Triangle> 
+			GetTriangles
+			(
+				const Entity2d_Triangulation&
+			);
+
 		template<class Type>
 		static size_t
 			FindSpan
@@ -437,9 +464,19 @@ namespace tnbLib
 				Standard_Real(*xValue)(const std::shared_ptr<Type>&)
 			);
 
-		static TnbGeo_EXPORT size_t FindSpan(const Standard_Real x, const std::vector<Standard_Real>& theSorted);
+		static TnbGeo_EXPORT size_t 
+			FindSpan
+			(
+				const Standard_Real x, 
+				const std::vector<Standard_Real>& theSorted
+			);
 
-		static TnbGeo_EXPORT void CheckSorted(const std::vector<Standard_Real>& theSorted, const char* theName);
+		static TnbGeo_EXPORT void 
+			CheckSorted
+			(
+				const std::vector<Standard_Real>& theSorted,
+				const char* theName
+			);
 	};
 }
 

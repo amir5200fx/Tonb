@@ -1,5 +1,7 @@
 #include <Geo_Tools.hxx>
 
+#include <Entity2d_Triangle.hxx>
+
 #include <CGAL\Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL\Segment_2.h>
 #include <CGAL\Segment_3.h>
@@ -15,6 +17,7 @@ typedef Kernel::Point_2 Point_2;
 typedef Kernel::Vector_2 Vector_2;
 typedef Kernel::Line_2 Line_2;
 typedef Kernel::Direction_2 Direction_2;
+typedef Kernel::Triangle_2 Triangle_2;
 
 typedef Kernel::Segment_3 Segment_3;
 typedef Kernel::Point_3 Point_3;
@@ -79,6 +82,12 @@ namespace tnbLib
 	{
 		Line_2 line(get_cgalPoint(l.P()), get_cgalDirection(l.Dir()));
 		return std::move(line);
+	}
+
+	Triangle_2 get_cgalTriange(const Entity2d_Triangle& t)
+	{
+		Triangle_2 tri(get_cgalPoint(t.P0()), get_cgalPoint(t.P1()), get_cgalPoint(t.P2()));
+		return std::move(tri);
 	}
 }
 
@@ -291,5 +300,64 @@ tnbLib::Geo_Tools::Intersection_cgal
 	{
 		auto ent = std::make_shared<IntersectEntity2d>();
 		return std::move(ent);
+	}
+}
+
+std::vector<tnbLib::Pnt2d> 
+tnbLib::Geo_Tools::Intersecction_cgal
+(
+	const Entity2d_Triangle & theTri0,
+	const Entity2d_Triangle & theTri1
+)
+{
+	auto tri0 = get_cgalTriange(theTri0);
+	auto tri1 = get_cgalTriange(theTri1);
+
+	CGAL::cpp11::result_of<Intersect_2(Triangle_2, Triangle_2)>::type
+		result = intersection(tri0, tri1);
+	if (result)
+	{
+		std::vector<tnbLib::Pnt2d> pnts;
+		if (const Point_2* p = boost::get<Point_2>(&*result))
+		{
+			pnts.reserve(1);
+			auto pt = get_Point(*p);
+			pnts.push_back(std::move(pt));
+			return std::move(pnts);
+		}
+		else if (const Segment_2* s = boost::get<Segment_2>(&*result))
+		{
+			pnts.reserve(2);
+			auto pt0 = get_Point(s->point(0));
+			auto pt1 = get_Point(s->point(1));
+			pnts.push_back(std::move(pt0));
+			pnts.push_back(std::move(pt1));
+			return std::move(pnts);
+		}
+		else if (const Triangle_2* t = boost::get<Triangle_2>(&*result))
+		{
+			pnts.reserve(3);
+			auto pt0 = get_Point(t->vertex(0));
+			auto pt1 = get_Point(t->vertex(1));
+			auto pt2 = get_Point(t->vertex(2));
+			pnts.push_back(std::move(pt0));
+			pnts.push_back(std::move(pt1));
+			pnts.push_back(std::move(pt2));
+			return std::move(pnts);
+		}
+		else
+		{
+			const std::vector<Point_2>* v = boost::get<std::vector<Point_2>>(&*result);
+			pnts.reserve(v->size());
+			for (const auto& x : *v)
+			{
+				pnts.push_back(get_Point(x));
+			}
+			return std::move(pnts);
+		}
+	}
+	else
+	{
+		return std::vector<tnbLib::Pnt2d>();
 	}
 }
