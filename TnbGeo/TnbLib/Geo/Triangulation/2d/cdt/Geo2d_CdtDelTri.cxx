@@ -1,6 +1,6 @@
 #include <Geo2d_CdtDelTri.hxx>
 
-#include <error.hxx>
+#include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <Entity_StaticData.hxx>
 
@@ -118,4 +118,6 @@ void tnbLib::Geo2d_CdtDelTri::Perform()
 
 		Indices.push_back(t);
 	}
+
+	Change_IsDone() = Standard_True;
 }

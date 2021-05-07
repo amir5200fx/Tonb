@@ -315,4 +315,6 @@ void tnbLib::Geo2d_DelTri::Triangulate()
 		Pts[i].X() = Pts[i].X()*dmax + xmin;
 		Pts[i].Y() = Pts[i].Y()*dmax + ymin;
 	}
+
+	Change_IsDone() = Standard_True;
 }
