@@ -3,6 +3,8 @@
 #include <gp.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
+#include <Entity2d_Triangle.hxx>
+#include <Geo_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -228,6 +230,18 @@ tnbLib::Geo_CmptLib::Area
 }
 
 Standard_Real 
+tnbLib::Geo_CmptLib::Area
+(
+	const Entity2d_Triangle & t
+)
+{
+	auto poly = Geo_Tools::GetPolygon(t);
+	Debug_Null_Pointer(poly);
+
+	return Area(*poly);
+}
+
+Standard_Real 
 tnbLib::Geo_CmptLib::CxProductArea
 (
 	const Entity2d_Polygon & thePoly
@@ -243,6 +257,18 @@ tnbLib::Geo_CmptLib::CxProductArea
 		sum += CxPoly(pts[i], pts[i + 1]);
 	}
 	return sum / 6.0;
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::CxProductArea
+(
+	const Entity2d_Triangle & t
+)
+{
+	auto poly = Geo_Tools::GetPolygon(t);
+	Debug_Null_Pointer(poly);
+
+	return CxProductArea(*poly);
 }
 
 Standard_Real
@@ -263,6 +289,18 @@ tnbLib::Geo_CmptLib::CyProductArea
 	return sum / 6.0;
 }
 
+Standard_Real 
+tnbLib::Geo_CmptLib::CyProductArea
+(
+	const Entity2d_Triangle & t
+)
+{
+	auto poly = Geo_Tools::GetPolygon(t);
+	Debug_Null_Pointer(poly);
+
+	return CyProductArea(*poly);
+}
+
 tnbLib::Pnt2d 
 tnbLib::Geo_CmptLib::Centre
 (
@@ -275,6 +313,16 @@ tnbLib::Geo_CmptLib::Centre
 	const auto cy = CyProductArea(thePoly) / area;
 
 	return Pnt2d(cx, cy);
+}
+
+tnbLib::Pnt2d 
+tnbLib::Geo_CmptLib::Centre(const Entity2d_Triangle & t)
+{
+	auto poly = Geo_Tools::GetPolygon(t);
+	Debug_Null_Pointer(poly);
+
+	auto pt = Centre(*poly);
+	return std::move(pt);
 }
 
 Standard_Real 
@@ -296,6 +344,19 @@ tnbLib::Geo_CmptLib::Ix
 	return sum / 12.0;
 }
 
+Standard_Real 
+tnbLib::Geo_CmptLib::Ix
+(
+	const Entity2d_Triangle & t,
+	const Standard_Real y0
+)
+{
+	auto poly = Geo_Tools::GetPolygon(t);
+	Debug_Null_Pointer(poly);
+
+	return Ix(*poly, y0);
+}
+
 Standard_Real
 tnbLib::Geo_CmptLib::Iy
 (
@@ -313,6 +374,19 @@ tnbLib::Geo_CmptLib::Iy
 		sum += IyPoly(pts[i], pts[i + 1], x0);
 	}
 	return sum / 12.0;
+}
+
+Standard_Real 
+tnbLib::Geo_CmptLib::Iy
+(
+	const Entity2d_Triangle & t,
+	const Standard_Real x0
+)
+{
+	auto poly = Geo_Tools::GetPolygon(t);
+	Debug_Null_Pointer(poly);
+
+	return Iy(*poly, x0);
 }
 
 Standard_Real

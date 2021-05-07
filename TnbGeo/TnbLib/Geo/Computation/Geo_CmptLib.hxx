@@ -5,6 +5,8 @@
 #include <Pnt2d.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Entity2d_TriangleFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <Geo_Module.hxx>
 
 #include <vector>
@@ -70,9 +72,21 @@ namespace tnbLib
 			);
 
 		static TnbGeo_EXPORT Standard_Real
+			Area
+			(
+				const Entity2d_Triangle& t
+			);
+
+		static TnbGeo_EXPORT Standard_Real
 			CxProductArea
 			(
 				const Entity2d_Polygon& thePoly
+			);
+
+		static TnbGeo_EXPORT Standard_Real
+			CxProductArea
+			(
+				const Entity2d_Triangle& t
 			);
 
 		static TnbGeo_EXPORT Standard_Real
@@ -81,10 +95,22 @@ namespace tnbLib
 				const Entity2d_Polygon& thePoly
 			);
 
+		static TnbGeo_EXPORT Standard_Real 
+			CyProductArea
+			(
+				const Entity2d_Triangle& t
+			);
+
 		static TnbGeo_EXPORT Pnt2d
 			Centre
 			(
 				const Entity2d_Polygon& thePoly
+			);
+
+		static TnbGeo_EXPORT Pnt2d 
+			Centre
+			(
+				const Entity2d_Triangle& t
 			);
 
 		static TnbGeo_EXPORT Standard_Real
@@ -94,10 +120,24 @@ namespace tnbLib
 				const Standard_Real y0
 			);
 
+		static TnbGeo_EXPORT Standard_Real 
+			Ix
+			(
+				const Entity2d_Triangle& t,
+				const Standard_Real y0
+			);
+
 		static TnbGeo_EXPORT Standard_Real
 			Iy
 			(
 				const Entity2d_Polygon& thePoly,
+				const Standard_Real x0
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			Iy
+			(
+				const Entity2d_Triangle& t,
 				const Standard_Real x0
 			);
 
@@ -139,6 +179,13 @@ namespace tnbLib
 				const Standard_Real dy, 
 				const Standard_Real Area
 			);
+
+		static Standard_Real Mx(const Entity2d_Triangulation& t, const Standard_Real y0);
+
+		static Standard_Real My(const Entity2d_Triangulation& t, const Standard_Real x0);
+
+		static Pnt2d Centre(const Entity2d_Triangulation& t);
+
 
 	};
 }
