@@ -2,6 +2,8 @@
 #ifndef _Geo2d_DelTri_Header
 #define _Geo2d_DelTri_Header
 
+#include <Global_Done.hxx>
+#include <Geo_Module.hxx>
 #include <Pnt2d.hxx>
 #include <Entity_Connectivity.hxx>
 
@@ -65,6 +67,7 @@ namespace tnbLib
 
 	class Geo2d_DelTri
 		: public Geo2d_DelTriInfo
+		, public Global_Done
 	{
 
 		typedef Entity_StaticData<Pnt2d, connectivity::triple, true>
@@ -94,23 +97,23 @@ namespace tnbLib
 			const Standard_Integer i
 		) const;
 
-		void Delaunay();
+		TnbGeo_EXPORT void Delaunay();
 
 	public:
 
 		Geo2d_DelTri()
 		{}
 
-		Geo2d_DelTri(const std::vector<Pnt2d>& thePts);
+		TnbGeo_EXPORT explicit Geo2d_DelTri(const std::vector<Pnt2d>& thePts);
 
 		const std::shared_ptr<staticData>& Data() const
 		{
 			return theData_;
 		}
 
-		void Triangulate();
+		TnbGeo_EXPORT void Triangulate();
 
-		void Import(const std::vector<Pnt2d>& thePts);
+		TnbGeo_EXPORT void Import(const std::vector<Pnt2d>& thePts);
 	};
 }
 

@@ -47,6 +47,22 @@ namespace tnbLib
 	}
 
 	template<class Point>
+	inline typename Geo_BoxTools::Box<Point> 
+		Geo_BoxTools::GetBox
+		(
+			const std::vector<Point>& theCoords,
+			const Standard_Real theOffset
+		)
+	{
+		auto b = Entity_Box<Point>::BoundingBoxOf(theCoords);
+		if (theOffset)
+		{
+			b.Expand(theOffset);
+		}
+		return std::move(b);
+	}
+
+	template<class Point>
 	inline typename Geo_BoxTools::Triangulation<Point> 
 		Geo_BoxTools::GetTriangulation
 		(
