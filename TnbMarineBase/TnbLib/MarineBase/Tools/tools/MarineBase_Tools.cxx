@@ -9,10 +9,13 @@
 #include <Pnt3d.hxx>
 #include <Entity2d_Box.hxx>
 #include <Entity3d_Box.hxx>
+#include <Entity2d_Triangle.hxx>
+#include <Entity2d_Triangulation.hxx>
 #include <Geo_Interval.hxx>
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CmptLib.hxx>
+#include <Geo_BoxTools.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad2d_CmptLib.hxx>
 #include <Cad2d_Plane.hxx>
@@ -295,6 +298,28 @@ tnbLib::MarineBase_Tools::CalcBWL
 	return dx;
 }
 
+std::vector<Standard_Real> 
+tnbLib::MarineBase_Tools::CalcDx
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	std::vector<Standard_Real> Dx(theSections.size(), 0);
+	for (size_t i = 1; i < theSections.size() - 1; i++)
+	{
+		auto dx0 = theSections[i]->X() - theSections[i - 1]->X();
+		auto dx1 = theSections[i + 1]->X() - theSections[i]->X();
+
+		auto dx = MEAN(dx0, dx1);
+
+		Dx[i] = dx;
+	}
+
+	Dx[0] = theSections[1]->X() - theSections[0]->X();
+	Dx[Dx.size() - 1] = theSections[theSections.size() - 1]->X() - theSections[theSections.size() - 2]->X();
+	return std::move(Dx);
+}
+
 tnbLib::Geo_Interval<Standard_Real> 
 tnbLib::MarineBase_Tools::CalcLateralArea
 (
@@ -306,41 +331,8 @@ tnbLib::MarineBase_Tools::CalcLateralArea
 	return Geo_Interval<Standard_Real>(b.P0().Y(), b.P1().Y());
 }
 
-namespace tnbLib
-{
-	auto Merge(std::vector<Geo_Interval<Standard_Real>>& intervals)
-	{
-		if (intervals.empty())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the list is empty" << endl
-				<< abort(FatalError);
-		}
-		std::vector<Geo_Interval<Standard_Real>> merged;
-		auto& v0 = intervals[0];
-		for (size_t i = 1; i < intervals.size(); i++)
-		{	
-			if (NOT v0.IsIntersect(intervals[i]))
-			{
-				merged.push_back(std::move(v0));
-				v0 = intervals[i];
-			}
-			else
-			{
-				auto& v1 = intervals[i];
-				auto x0 = std::min(v0.X0(), v1.X0());
-				auto x1 = std::max(v0.X1(), v1.X1());
-
-				Geo_Interval<Standard_Real> v(x0, x1);
-				v0 = std::move(v);
-			}
-		}
-		return std::move(merged);
-	}
-}
-
-std::pair<Standard_Real, Standard_Real>
-tnbLib::MarineBase_Tools::CalcLateralArea
+std::vector<tnbLib::Geo_Interval<Standard_Real>> 
+tnbLib::MarineBase_Tools::CalcLateralAreaIntervals
 (
 	const std::shared_ptr<Marine_CmpSection>& theSection
 )
@@ -363,18 +355,35 @@ tnbLib::MarineBase_Tools::CalcLateralArea
 
 	std::sort
 	(
-		intervals.begin(), 
-		intervals.end(), 
+		intervals.begin(),
+		intervals.end(),
 		[](
-			const Geo_Interval<Standard_Real>& v0, 
+			const Geo_Interval<Standard_Real>& v0,
 			const Geo_Interval<Standard_Real>& v1
-			)-> bool 
+			)-> bool
 	{
-		return MEAN(v0.X0(), v0.X1()) <= MEAN(v1.X0(), v1.X1()); 
+		return MEAN(v0.X0(), v0.X1()) <= MEAN(v1.X0(), v1.X1());
 	}
 	);
+	return std::move(intervals);
+}
 
-	auto merged = Merge(intervals);
+std::pair<Standard_Real, Standard_Real>
+tnbLib::MarineBase_Tools::CalcLateralArea
+(
+	const std::shared_ptr<Marine_CmpSection>& theSection
+)
+{
+	Debug_Null_Pointer(theSection);
+	if (NOT theSection->IsXsection())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "it's not a x-section!" << endl
+			<< abort(FatalError);
+	}
+	auto intervals = CalcLateralAreaIntervals(theSection);
+
+	auto merged = MergeIntervals(intervals);
 	
 	Standard_Real sumArea = 0;
 	Standard_Real sumNumer = 0;
@@ -1790,28 +1799,6 @@ tnbLib::MarineBase_Tools::CalcWaterPlaneArea
 	return std::move(values);
 }
 
-namespace tnbLib
-{
-
-	std::vector<Standard_Real> CalcDx(const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections)
-	{
-		std::vector<Standard_Real> Dx(theSections.size(), 0);
-		for (size_t i = 1; i < theSections.size() - 1; i++)
-		{
-			auto dx0 = theSections[i]->X() - theSections[i - 1]->X();
-			auto dx1 = theSections[i + 1]->X() - theSections[i]->X();
-
-			auto dx = MEAN(dx0, dx1);
-
-			Dx[i] = dx;
-		}
-
-		Dx[0] = theSections[1]->X() - theSections[0]->X();
-		Dx[Dx.size() - 1] = theSections[theSections.size() - 1]->X() - theSections[theSections.size() - 2]->X();
-		return std::move(Dx);
-	}
-}
-
 std::vector<tnbLib::marineLib::xSectionParam> 
 tnbLib::MarineBase_Tools::CalcWaterPlaneIx
 (
@@ -2730,6 +2717,117 @@ tnbLib::MarineBase_Tools::CreateGraph(const Handle(Geom2d_Curve)& theCurve)
 	curves.push_back(std::move(c));
 
 	return std::move(g);
+}
+
+std::vector<tnbLib::Geo_Interval<Standard_Real>>
+tnbLib::MarineBase_Tools::MergeIntervals
+(
+	const std::vector<Geo_Interval<Standard_Real>>& intervals
+)
+{
+	if (intervals.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the list is empty" << endl
+			<< abort(FatalError);
+	}
+	std::vector<Geo_Interval<Standard_Real>> merged;
+	auto v0 = intervals[0];
+	for (size_t i = 1; i < intervals.size(); i++)
+	{
+		if (NOT v0.IsIntersect(intervals[i]))
+		{
+			merged.push_back(std::move(v0));
+			v0 = intervals[i];
+		}
+		else
+		{
+			auto& v1 = intervals[i];
+			auto x0 = std::min(v0.X0(), v1.X0());
+			auto x1 = std::max(v0.X1(), v1.X1());
+
+			Geo_Interval<Standard_Real> v(x0, x1);
+			v0 = std::move(v);
+		}
+	}
+	return std::move(merged);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::MarineBase_Tools::RetrieveBox
+(
+	const Geo_Interval<Standard_Real>& theInterval, 
+	const Standard_Real xo,
+	const Standard_Real dx
+)
+{
+	const auto y0 = theInterval.X0();
+	const auto y1 = theInterval.X1();
+
+	const auto x0 = xo - 0.5*dx;
+	const auto x1 = xo + 0.5*dx;
+
+	Pnt2d p0(x0, y0);
+	Pnt2d p1(x1, y1);
+
+	Entity2d_Box b(std::move(p0), std::move(p1));
+	return std::move(b);
+}
+
+std::vector<tnbLib::Entity2d_Box>
+tnbLib::MarineBase_Tools::RetrieveLateralArea
+(
+	const std::shared_ptr<Marine_CmpSection>& theSection, 
+	const Standard_Real dx
+)
+{
+	Debug_Null_Pointer(theSection);
+
+	auto intervals = CalcLateralAreaIntervals(theSection);
+	auto merged = MergeIntervals(intervals);
+
+	std::vector<Entity2d_Box> boxes;
+	boxes.reserve(merged.size());
+	for (const auto& x : merged)
+	{
+		auto b = RetrieveBox(x, theSection->X(), dx);
+		boxes.push_back(std::move(b));
+	}
+	return std::move(boxes);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation> 
+tnbLib::MarineBase_Tools::RetrieveLateralArea
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	Check_xCmptSections(theSections);
+
+	if (theSections.size() < 3)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid body!" << endl
+			<< abort(FatalError);
+	}
+
+	auto dx = CalcDx(theSections);
+
+	auto tri = std::make_shared<Entity2d_Triangulation>();
+	Debug_Null_Pointer(tri);
+
+	for (size_t i = 0; i < theSections.size() - 1; i++)
+	{
+		auto boxes = RetrieveLateralArea(theSections[i], dx[i]);
+		for (const auto& x : boxes)
+		{
+			auto t = Geo_BoxTools::Triangulate(x);
+			Debug_Null_Pointer(t);
+
+			tri->Add(*t);
+		}
+	}
+	return std::move(tri);
 }
 
 void tnbLib::MarineBase_Tools::Check_xCmptSections
