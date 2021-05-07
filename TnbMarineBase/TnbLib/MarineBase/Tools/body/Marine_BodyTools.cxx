@@ -541,6 +541,16 @@ tnbLib::Marine_BodyTools::DryBody
 	}	
 }
 
+std::shared_ptr<tnbLib::Entity2d_Triangulation> 
+tnbLib::Marine_BodyTools::RetrieveLateralArea
+(
+	const std::shared_ptr<Marine_Body>& theBody
+)
+{
+	auto tri = MarineBase_Tools::RetrieveLateralArea(theBody->Sections());
+	return std::move(tri);
+}
+
 namespace tnbLib
 {
 	Entity2d_Box CalcBoundingBox

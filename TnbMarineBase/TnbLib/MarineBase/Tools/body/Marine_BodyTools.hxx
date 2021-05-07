@@ -7,6 +7,7 @@
 #include <Marine_BodiesFwd.hxx>
 #include <Marine_BodyType.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <Marine_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -122,6 +123,12 @@ namespace tnbLib
 			(
 				const std::shared_ptr<marineLib::Body_Displacer>& theBody, 
 				const std::shared_ptr<Marine_WaterDomain>& theDomain
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation>
+			RetrieveLateralArea
+			(
+				const std::shared_ptr<Marine_Body>& theBody
 			);
 
 		static TnbMarine_EXPORT void 
