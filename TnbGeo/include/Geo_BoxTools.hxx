@@ -50,6 +50,9 @@ namespace tnbLib
 		template<class Point>
 		static Box<Point> GetBox(const std::vector<Point>& theCoords, const Standard_Real theOffset);
 
+		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Triangulation> Triangulate(const Entity2d_Box&);
+		std::shared_ptr<Entity3d_Triangulation> Triangulate(const Entity3d_Box&);
+
 		static TnbGeo_EXPORT void GetTriangulation(const std::vector<Entity2d_Box>& theBoxes, Entity2d_Triangulation& theTri);
 		static void GetTriangulation(const std::vector<Entity3d_Box>& theBoxes, Entity3d_Triangulation& theTri);
 

@@ -2,6 +2,7 @@
 #ifndef _Geo2d_CdtDelTri_Header
 #define _Geo2d_CdtDelTri_Header
 
+#include <Global_Done.hxx>
 #include <Pnt2d.hxx>
 #include <Entity_Connectivity.hxx>
 #include <Entity2d_Polygon.hxx>
@@ -19,6 +20,7 @@ namespace tnbLib
 	typedef std::vector<std::shared_ptr<Entity2d_Polygon>> polygonList;
 
 	class Geo2d_CdtDelTri
+		: public Global_Done
 	{
 
 		typedef Entity_StaticData<Pnt2d, connectivity::triple, false>
@@ -55,7 +57,7 @@ namespace tnbLib
 			HandleDegeneracy_ = Standard_True;
 		}
 
-		void Perform();
+		TnbGeo_EXPORT void Perform();
 	};
 }
 

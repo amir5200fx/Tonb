@@ -412,6 +412,12 @@
     <Filter Include="TnbLib\Geo\Interval">
       <UniqueIdentifier>{f1482c12-fa29-488e-9d67-ed79ad406cb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Triangle\2d">
+      <UniqueIdentifier>{537339f3-59c8-4f44-bf6b-56cb1f7779c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Triangle\3d">
+      <UniqueIdentifier>{6c73df04-6e09-4ee3-9a09-39d65c19d43f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -945,6 +951,21 @@
     <ClInclude Include="TnbLib\Geo\Interval\Geo_IntervalI.hxx">
       <Filter>TnbLib\Geo\Interval</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangle\2d\Entity2d_Triangle.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangle\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangle\2d\Entity2d_TriangleFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangle\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangle\3d\Entity3d_TriangleFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangle\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangle\3d\Entity3d_Triangle.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangle\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTri_CGAL.hxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\std</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1165,6 +1186,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Interval\Geo_Interval.cxx">
       <Filter>TnbLib\Geo\Interval</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_ToolsIntersections.cxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTri_CGAL.cxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\std</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
