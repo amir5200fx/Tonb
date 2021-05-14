@@ -2,7 +2,9 @@
 #ifndef _GModel_Plane_Header
 #define _GModel_Plane_Header
 
-#include <GModel_Entity.hxx>
+#include <Global_Indexed.hxx>
+#include <Global_Named.hxx>
+#include <Cad_Module.hxx>
 #include <OFstream.hxx>
 
 #include <vector>
@@ -14,6 +16,8 @@ namespace tnbLib
 	class GModel_ParaWire;
 
 	class GModel_Plane
+		: public Global_Indexed
+		, public Global_Named
 	{
 
 		typedef std::vector<std::shared_ptr<GModel_ParaWire>> wireList;
@@ -25,18 +29,49 @@ namespace tnbLib
 		outer theOuter_;
 		inner theInner_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
+		//- default constructor
+
+		GModel_Plane()
+		{}
+
 	public:
 
-		GModel_Plane(const outer& theOuter, const inner& theInner = nullptr);
 
-		GModel_Plane(const Standard_Integer theIndex, const outer& theOuter, const inner& theInner = nullptr);
+		//- constructors
 
-		GModel_Plane(const Standard_Integer theIndex, const word& theName, const outer& theOuter, const inner& theInner = nullptr);
+		TnbCad_EXPORT GModel_Plane
+		(
+			const outer& theOuter, 
+			const inner& theInner = nullptr
+		);
+
+		TnbCad_EXPORT GModel_Plane
+		(
+			const Standard_Integer theIndex, 
+			const outer& theOuter, 
+			const inner& theInner = nullptr
+		);
+
+		TnbCad_EXPORT GModel_Plane
+		(
+			const Standard_Integer theIndex, 
+			const word& theName,
+			const outer& theOuter, 
+			const inner& theInner = nullptr
+		);
 
 
-		Standard_Boolean HasHole() const;
+		//- public functions and operators
 
-		Standard_Integer NbHoles() const;
+		TnbCad_EXPORT Standard_Boolean HasHole() const;
+
+		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
 		const auto& Inner() const
 		{

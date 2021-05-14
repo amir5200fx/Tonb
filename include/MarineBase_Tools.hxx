@@ -6,6 +6,8 @@
 #include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Entity2d_TriangleFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <dimensionedScalar.hxx>
 #include <Marine_SectionsFwd.hxx>
 #include <Marine_BodiesFwd.hxx>
@@ -42,6 +44,8 @@ namespace tnbLib
 	class Pln_Wire;
 	class Geo_xDistb;
 	class Cad2d_Plane;
+
+	template<class T> class Geo_Interval;
 
 	class MarineBase_Tools
 	{
@@ -91,7 +95,6 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			);
 
-
 		/*template<class SectionType>
 		static TnbMarine_EXPORT std::shared_ptr<Cad2d_Plane> 
 			ConvertToPlane
@@ -118,6 +121,44 @@ namespace tnbLib
 			CalcBWL
 			(
 				const Marine_CmpSection& theSection
+			);
+
+		static TnbMarine_EXPORT std::vector<Standard_Real> 
+			CalcDx
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
+
+		static TnbMarine_EXPORT Geo_Interval<Standard_Real> 
+			CalcLateralProjArea
+			(
+				const std::shared_ptr<Marine_Section>&
+			);
+
+		static TnbMarine_EXPORT std::vector<Geo_Interval<Standard_Real>> 
+			CalcLateralAreaIntervals
+			(
+				const std::shared_ptr<Marine_CmpSection>&
+			);
+
+		//- the first and the second values are area and zBar, respectively
+		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcLateralProjArea
+			(
+				const std::shared_ptr<Marine_CmpSection>&
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcLateralProjArea
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
+
+		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
+			CalcLateralZbar
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+				const Standard_Real z0
 			);
 
 		static TnbMarine_EXPORT Standard_Real
@@ -621,6 +662,33 @@ namespace tnbLib
 			CreateGraph
 			(
 				const Handle(Geom2d_Curve)& theCurve
+			);
+
+		static TnbMarine_EXPORT std::vector<Geo_Interval<Standard_Real>> 
+			MergeIntervals
+			(
+				const std::vector<Geo_Interval<Standard_Real>>& intervals
+			);
+
+		static TnbMarine_EXPORT Entity2d_Box 
+			RetrieveBox
+			(
+				const Geo_Interval<Standard_Real>& theInterval, 
+				const Standard_Real x0,
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::vector<Entity2d_Box> 
+			RetrieveLateralProjArea
+			(
+				const std::shared_ptr<Marine_CmpSection>& theSection, 
+				const Standard_Real dx
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			RetrieveLateralProjArea
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			);
 
 		static TnbMarine_EXPORT void Check_xCmptSections

@@ -40,7 +40,12 @@ namespace tnbLib
 		friend class boost::serialization::access;
 		
 		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version);
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & thePoints_;
+			ar & theConnectivity_;
+			ar & theBoundingBox_;
+		}
 
 	public:
 
@@ -158,7 +163,11 @@ namespace tnbLib
 		friend class boost::serialization::access;
 
 		template<class Archive>
-		void serialize(Archive& ar, const unsigned int version);
+		void serialize(Archive& ar, const unsigned int version)
+		{
+			ar & boost::serialization::base_object<Entity_StaticData<Point, ConnectType, false>>(*this);
+			ar & theNeighbors_;
+		}
 
 	public:
 

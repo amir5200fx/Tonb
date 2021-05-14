@@ -81,14 +81,19 @@ namespace tnbLib
 			: theMesh_(std::move(theMesh))
 		{}
 
-		Standard_Boolean IsLoaded() const
+		auto IsLoaded() const
 		{
 			return (Standard_Boolean)theMesh_;
 		}
 
-		const std::shared_ptr<MeshData>& Mesh() const
+		const auto& Mesh() const
 		{
 			return theMesh_;
+		}
+
+		const auto& BoundingBox() const
+		{
+			return theBoundingBox_;
 		}
 
 		const std::shared_ptr<elementType>& CurrentElement() const
@@ -110,6 +115,16 @@ namespace tnbLib
 		)
 		{
 			theMesh_ = std::move(theMesh);
+		}
+
+		void SetBoundingBox(const Entity_Box<Point>& theBox)
+		{
+			theBoundingBox_ = theBox;
+		}
+
+		void SetBoundingBox(Entity_Box<Point>&& theBox)
+		{
+			theBoundingBox_ = std::move(theBox);
 		}
 
 		void SetCurrent
@@ -214,7 +229,7 @@ namespace tnbLib
 			return theSources_;
 		}
 
-		void HvCorrection(const std::shared_ptr<hvInfo> theInfo);
+		void HvCorrection(const std::shared_ptr<hvInfo>& theInfo);
 		//void LaplacianSmoothing(const std::shared_ptr<laplacianInfo>& theInfo);
 
 		// - IO functions and operators

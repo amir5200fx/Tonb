@@ -39,14 +39,20 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_NodeToElementAdaptor<ElementType>>(*this);
 		}
 
+	protected:
+
+		// default constructor
+
+		Mesh_NodeAdaptor()
+		{}
+
 	public:
 
 		typedef Mesh_NodeToEdgeAdaptor<EdgeType> edgeAdaptor;
 		typedef Mesh_NodeToFacetAdaptor<FacetType> facetAdaptor;
 		typedef Mesh_NodeToElementAdaptor<ElementType> elementAdaptor;
 
-		Mesh_NodeAdaptor()
-		{}
+		
 	};
 
 	template<class EdgeType, class FacetType>
@@ -70,13 +76,19 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_NodeToBoundaryFacetAdaptor<FacetType>>(*this);
 		}
 
+	protected:
+
+		// default constructor
+
+		Mesh_NodeAdaptor()
+		{}
+
 	public:
 
 		typedef Mesh_NodeToBoundaryEdgeAdaptor<EdgeType> edgeAdaptor;
 		typedef Mesh_NodeToBoundaryFacetAdaptor<FacetType> facetAdaptor;
 
-		Mesh_NodeAdaptor()
-		{}
+		
 	};
 
 	template<class EdgeType, class ElementType>
@@ -99,13 +111,19 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_NodeToElementAdaptor<ElementType>>(*this);
 		}
 
+	protected:
+
+		// default constructor
+
+		Mesh_NodeAdaptor()
+		{}
+
 	public:
 
 		typedef Mesh_NodeToEdgeAdaptor<EdgeType> edgeAdaptor;
 		typedef Mesh_NodeToElementAdaptor<ElementType> elementAdaptor;
 
-		Mesh_NodeAdaptor()
-		{}
+		
 	};
 
 	template<class EdgeType>
@@ -126,12 +144,18 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_NodeToBoundaryEdgeAdaptor<EdgeType>>(*this);
 		}
 
+	protected:
+
+		// default constructor
+
+		Mesh_NodeAdaptor()
+		{}
+
 	public:
 
 		typedef Mesh_NodeToBoundaryEdgeAdaptor<EdgeType> edgeAdaptor;
 
-		Mesh_NodeAdaptor()
-		{}
+		
 	};
 }
 

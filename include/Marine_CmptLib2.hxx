@@ -18,6 +18,7 @@ namespace tnbLib
 	class NumAlg_AdaptiveInteg_Info;
 	class Marine_CmpSection;
 	class Marine_WaterDomain;
+	class Marine_Model;
 
 	class Marine_CmptLib2
 	{
@@ -65,6 +66,8 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_WaterDomain>>& theWaters, 
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
+
+		static Standard_Real LateralProjArea(const std::shared_ptr<Marine_Model>& theModel, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
 	};
 }
 

@@ -66,11 +66,18 @@ namespace tnbLib
 		enum
 		{
 			nbNodes = 4,
+			nbEdges = 6,
 			rank = 3
 		};
 
+
+		//- default constructor
+
 		Mesh_Element()
 		{}
+
+
+		//- constructors
 
 		Mesh_Element
 		(
@@ -93,6 +100,19 @@ namespace tnbLib
 			Node1() = theNode1;
 			Node2() = theNode2;
 			Node3() = theNode3;
+		}
+
+
+		//- public functions and operators
+
+		auto NbNodes() const
+		{
+			return (Standard_Integer)nbNodes;
+		}
+
+		auto NbEdges() const
+		{
+			return (Standard_Integer)nbEdges;
 		}
 
 		Point Centre() const
@@ -214,6 +234,8 @@ namespace tnbLib
 
 		array4 InterpWeights(const Point& theCoord) const;
 
+		connectType RetrieveConnectivity() const;
+
 		//- Static function and operators
 
 		static Standard_Boolean
@@ -297,11 +319,18 @@ namespace tnbLib
 		enum
 		{
 			nbNodes = 3,
+			nbEdges = 3,
 			rank = 2
 		};
 
+
+		//- default constructor
+
 		Mesh_Element()
 		{}
+
+
+		//- constructors
 
 		Mesh_Element
 		(
@@ -322,6 +351,19 @@ namespace tnbLib
 			Node0() = theNode0;
 			Node1() = theNode1;
 			Node2() = theNode2;
+		}
+
+
+		//- public functions and operators
+
+		auto NbNodes() const
+		{
+			return (Standard_Integer)nbNodes;
+		}
+
+		auto NbEdges() const
+		{
+			return (Standard_Integer)nbEdges;
 		}
 
 		Point Centre() const
@@ -368,6 +410,8 @@ namespace tnbLib
 		Standard_Boolean IsRightSide(const Point& theCoord) const;
 
 		Standard_Boolean IsLeftSide(const Point& theCoord) const;
+
+		connectType RetrieveConnectivity() const;
 
 		//- Static function and operators
 
@@ -452,11 +496,18 @@ namespace tnbLib
 		enum
 		{
 			nbNodes = 3,
+			nbEdges = 3,
 			rank = 2
 		};
 
+
+		//- default constructor
+
 		Mesh_Element()
 		{}
+
+
+		//- constructors
 
 		Mesh_Element
 		(
@@ -479,6 +530,18 @@ namespace tnbLib
 			Node2() = theNode2;
 		}
 
+
+		//- public functions and operators
+
+		auto NbNodes() const
+		{
+			return (Standard_Integer)nbNodes;
+		}
+
+		auto NbEdges() const
+		{
+			return (Standard_Integer)nbEdges;
+		}
 
 		Point Centre() const
 		{
@@ -583,6 +646,8 @@ namespace tnbLib
 		}
 
 		array3 InterpWeights(const Point& theCoord) const;
+
+		connectType RetrieveConnectivity() const;
 
 		//- Static function and operators
 

@@ -20,6 +20,11 @@ namespace tnbLib
 		Handle(Geom_Curve) theGeometry_;
 
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 		auto& ChangeGeometry()
 		{
 			return theGeometry_;
@@ -37,23 +42,37 @@ namespace tnbLib
 			const char* theName
 		);
 
+
+		//- default constructor
+
+		GModel_Curve()
+		{}
+
 	public:
+
+
+		//- constructors
 
 		TnbCad_EXPORT GModel_Curve
 		(
-			const Handle(Geom_Curve) theGeometry
+			const Handle(Geom_Curve)& theGeometry
 		);
 
-		TnbCad_EXPORT Standard_Real FirstParameter() const;
+		TnbCad_EXPORT GModel_Curve
+		(
+			Handle(Geom_Curve)&& theGeometry
+		);
 
+
+		//- public functions and operators
+
+		TnbCad_EXPORT Standard_Real FirstParameter() const;
 		TnbCad_EXPORT Standard_Real LastParameter() const;
 
 		TnbCad_EXPORT Pnt3d Value(const Standard_Real x) const;
-
 		TnbCad_EXPORT Pnt3d Value_normParam(const Standard_Real x) const;
 
 		TnbCad_EXPORT Pnt3d FirstCoord() const;
-
 		TnbCad_EXPORT Pnt3d LastCoord() const;
 
 		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;

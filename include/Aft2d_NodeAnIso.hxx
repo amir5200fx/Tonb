@@ -4,11 +4,6 @@
 
 #include <Aft_Node.hxx>
 #include <Aft2d_NodeAnIsoTraits.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Node<Aft2d_NodeAnIsoTraits> Aft2d_NodeAnIso;
-}
+#include <Aft2d_NodeAnIsoFwd.hxx>
 
 #endif // !_Aft2d_NodeAnIso_Header

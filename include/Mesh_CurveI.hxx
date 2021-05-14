@@ -22,16 +22,6 @@ namespace tnbLib
 		{
 			Points.push_back(curve.Value(x));
 		}
-
-		Standard_Integer K = 0;
-		auto& Indices = theChain_->Connectivity();
-		Indices.resize(theParameters.size() - 1);
-		for (auto& x : Indices)
-		{
-			x.Value(0) = K + 1;
-			x.Value(1) = K + 2;
-			++K;
-		}
 	}
 
 	template<class gCurveType, class MetricPrcsrType>

@@ -13,6 +13,8 @@ namespace tnbLib
 	template<>
 	TnbGeo_EXPORT void Entity2d_Polygon::ExportToPlt(std::fstream& File) const;
 
+
+
 }
 
 #endif // !_Entity2d_Polygon_Header

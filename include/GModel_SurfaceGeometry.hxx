@@ -4,7 +4,9 @@
 
 #include <Standard_Handle.hxx>
 #include <TopoDS_Face.hxx>
+#include <Cad_Module.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <OFstream.hxx>
 
 class Geom_Surface;
@@ -13,32 +15,44 @@ class Poly_Triangulation;
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Cad_GeomSurface;
+
 	class GModel_SurfaceGeometry
 	{
 
 		/*Private Data*/
 
-		Handle(Geom_Surface) theGeometry_;
+		std::shared_ptr<Cad_GeomSurface> theGeometry_;
 
 		TopoDS_Face theFace_;
 
 
-		static void CheckGeometry(const Handle(Geom_Surface)& thePatch, const char* theName);
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 	protected:
 
-		GModel_SurfaceGeometry
+
+		// default constructor
+
+		GModel_SurfaceGeometry()
+		{}
+
+		TnbCad_EXPORT GModel_SurfaceGeometry
 		(
-			const Handle(Geom_Surface)& theGeometry
-		)
-			: theGeometry_(theGeometry)
-		{
-			//CheckGeometry(theGeometry, "GModel_SurfaceGeometry()");
-		}
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry
+		);
+
+		TnbCad_EXPORT GModel_SurfaceGeometry
+		(
+			std::shared_ptr<Cad_GeomSurface>&& theGeometry
+		);
 
 	public:
 
-		const auto& Geometry() const
+		const auto& GeomSurface() const
 		{
 			return theGeometry_;
 		}

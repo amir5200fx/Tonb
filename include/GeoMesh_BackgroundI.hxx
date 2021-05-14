@@ -62,7 +62,7 @@ namespace tnbLib
 	template<class MeshData, class Type>
 	void GeoMesh_Background<MeshData, Type>::HvCorrection
 	(
-		const std::shared_ptr<hvInfo> theInfo
+		const std::shared_ptr<hvInfo>& theInfo
 	)
 	{
 		if (NOT theInfo)

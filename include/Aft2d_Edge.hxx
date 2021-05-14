@@ -4,11 +4,6 @@
 
 #include <Aft_Edge.hxx>
 #include <Aft2d_EdgeTraits.hxx>
-
-namespace tnbLib
-{
-	typedef Aft_Edge<Aft2d_EdgeTraits> Aft2d_Edge;
-
-}
+#include <Aft2d_EdgeFwd.hxx>
 
 #endif // !_Aft2d_Edge_Header
