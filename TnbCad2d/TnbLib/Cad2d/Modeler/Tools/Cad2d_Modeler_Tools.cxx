@@ -1379,7 +1379,7 @@ tnbLib::cad2dLib::Modeler_Tools::ConstructMergedEdges
 		if (NOT insert.second)
 		{
 			FatalErrorIn(FunctionSIG) << endl
-				<< "duplicate data!" << endl
+				<< "unable to insert the item into the map: duplicate data!" << endl
 				<< abort(FatalError);
 		}
 	}
@@ -1392,24 +1392,46 @@ tnbLib::cad2dLib::Modeler_Tools::ConstructMergedEdges
 		auto v0 = ids.first;
 		auto v1 = ids.second;
 
-		const auto& vtx0 = verticesMap[v0];
-		const auto& vtx1 = verticesMap[v1];
-
 		const auto& pEdge = idToEdgeMap[x.first];
 
-		auto edge = std::make_shared<Pln_Edge>
-			(
-				pEdge->Index(), pEdge->Name(),
-				vtx0, vtx1, pEdge->Curve(),
-				pEdge->Sense()
-				);
+		if (v0 IS_EQUAL v1)
+		{
+			const auto& vtx0 = verticesMap[v0];
 
-		edge->Mesh() = pEdge->Mesh();
+			auto edge = std::make_shared<Pln_Ring>
+				(
+					pEdge->Index(), pEdge->Name(),
+					vtx0, pEdge->Curve(),
+					pEdge->Sense()
+					);
+			Debug_Null_Pointer(edge);
 
-		vtx0->InsertToEdges(edge->Index(), edge);
-		vtx1->InsertToEdges(edge->Index(), edge);
-		Debug_Null_Pointer(edge);
-		edges.push_back(std::move(edge));
+			edge->Mesh() = pEdge->Mesh();
+
+			vtx0->InsertToEdges(edge->Index(), edge);
+
+			edges.push_back(std::move(edge));
+		}
+		else
+		{
+			const auto& vtx0 = verticesMap[v0];
+			const auto& vtx1 = verticesMap[v1];
+
+			auto edge = std::make_shared<Pln_Edge>
+				(
+					pEdge->Index(), pEdge->Name(),
+					vtx0, vtx1, pEdge->Curve(),
+					pEdge->Sense()
+					);
+			Debug_Null_Pointer(edge);
+
+			edge->Mesh() = pEdge->Mesh();
+
+			vtx0->InsertToEdges(edge->Index(), edge);
+			vtx1->InsertToEdges(edge->Index(), edge);
+			
+			edges.push_back(std::move(edge));
+		}
 	}
 	return std::move(edges);
 }
