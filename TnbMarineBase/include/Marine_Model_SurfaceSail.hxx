@@ -3,6 +3,8 @@
 #define _Marine_Model_SurfaceSail_Header
 
 #include <Marine_Model_PlnSail.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
+
 #include <TopoDS_Face.hxx>
 
 namespace tnbLib
@@ -24,10 +26,15 @@ namespace tnbLib
 
 		protected:
 
+			//- default constructor
+
 			Model_SurfaceSail()
 			{}
 
 		public:
+
+
+			//- constructors
 
 			TnbMarine_EXPORT Model_SurfaceSail
 			(
@@ -65,6 +72,9 @@ namespace tnbLib
 				TopoDS_Face&& theFace
 			);
 
+
+			//- public functions and operators
+
 			Marine_SailModelType SailType() const override
 			{
 				return Marine_SailModelType::surface;
@@ -74,6 +84,10 @@ namespace tnbLib
 			{
 				return theFace_;
 			}
+
+
+			//- static functions
+
 		};
 	}
 }

@@ -3,12 +3,14 @@
 #define _Marine_Model_LateralPlnSail_Header
 
 #include <Marine_Model_PlnSail.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 
 namespace tnbLib
 {
 
 	// Forward Declarations
 	class Cad2d_Plane;
+	class Marine_Model_SailTools;
 
 	namespace marineLib
 	{
@@ -17,22 +19,37 @@ namespace tnbLib
 			: public Model_PlnSail
 		{
 
+			friend Marine_Model_SailTools;
+
 			/*Private Data*/
 
 			std::shared_ptr<Cad2d_Plane> thePlane_;
 
 			Standard_Real theZbar_;
+			std::shared_ptr<Entity2d_Triangulation> theTriangulation_;
 
+
+			//- private functions and operators
 
 			TNB_SERIALIZATION(TnbMarine_EXPORT);
 
+			void SetTriangulation(std::shared_ptr<Entity2d_Triangulation>&& t)
+			{
+				theTriangulation_ = std::move(t);
+			}
+
 
 		protected:
+
+			//- default constructor
 
 			Model_LateralPlnSail()
 			{}
 
 		public:
+
+
+			//- constructors
 
 			TnbMarine_EXPORT Model_LateralPlnSail
 			(
@@ -77,6 +94,8 @@ namespace tnbLib
 			);
 
 
+			//- public functions and operators
+
 			const auto& Plane() const
 			{
 				return thePlane_;
@@ -85,6 +104,16 @@ namespace tnbLib
 			auto zBar() const
 			{
 				return theZbar_;
+			}
+
+			auto HasTriangulation() const
+			{
+				return (Standard_Boolean)theTriangulation_;
+			}
+
+			const auto& Triangulation() const
+			{
+				return theTriangulation_;
 			}
 
 			Marine_SailModelType SailType() const override
@@ -96,6 +125,9 @@ namespace tnbLib
 			{
 				return Standard_True;
 			}
+
+			//- static functions
+
 		};
 	}
 }

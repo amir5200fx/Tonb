@@ -7,6 +7,8 @@
 #include <MarineBase_Tools.hxx>
 #include <Marine_BooleanOps.hxx>
 #include <Marine_WaterDomain.hxx>
+#include <Marine_Models.hxx>
+#include <Marine_BodyTools.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -275,3 +277,4 @@ tnbLib::Marine_CmptLib2::Volume
 	}
 	return std::move(curves);
 }
+

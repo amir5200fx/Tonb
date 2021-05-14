@@ -18,8 +18,16 @@ namespace tnbLib
 
 		public:
 
+			//- default constructor
+
 			MidSectionApprox_Near()
 			{}
+
+
+			//- constructors
+
+
+			//- public functions and operators
 
 			TnbMarine_EXPORT void Perform(const Standard_Real x);
 

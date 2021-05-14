@@ -580,6 +580,12 @@
     <Filter Include="TnbLib\MarineBase\Coeff\CD">
       <UniqueIdentifier>{08f6cd86-9a2d-4e79-8f94-b0549c9b079c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\DiscretePlane">
+      <UniqueIdentifier>{8924d189-0a2c-4a45-9ef9-4531d7169e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Sail\Tools">
+      <UniqueIdentifier>{60918678-0522-4605-a7e8-c8e34bd98289}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1227,6 +1233,12 @@
     <ClInclude Include="TnbLib\MarineBase\Coeff\Marine_CoeffParams.hxx">
       <Filter>TnbLib\MarineBase\Coeff</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\DiscretePlane\Marine_DiscretePlane.hxx">
+      <Filter>TnbLib\MarineBase\DiscretePlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Tools\Marine_Model_SailTools.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1666,6 +1678,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\MultLevWaterDomain\Marine_MultLevWaterDomain.cxx">
       <Filter>TnbLib\MarineBase\Entities\MultLevWaterDomain</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\DiscretePlane\Marine_DiscretePlane.cxx">
+      <Filter>TnbLib\MarineBase\DiscretePlane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Tools\Marine_Model_SailTools.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
