@@ -262,6 +262,24 @@
     <Filter Include="TnbLib\Cad\Entities\Surface">
       <UniqueIdentifier>{5d914d78-299a-4093-bac4-84c104fe5493}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Tools">
+      <UniqueIdentifier>{6874933b-d3ca-4cd0-a0b5-7c803608b844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair">
+      <UniqueIdentifier>{cdcdd77e-5d04-4c8f-9688-0bc0d8883240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\OpenCascade">
+      <UniqueIdentifier>{b8a2178a-1b8f-444f-8243-5323fdbc5eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\OpenCascade\Face">
+      <UniqueIdentifier>{5149b828-950d-4ab4-af0d-93a3ee88f245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\OpenCascade\Edge">
+      <UniqueIdentifier>{78901d98-a52a-4f4b-8ce2-2aaab0bfa801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\OpenCascade\Wire">
+      <UniqueIdentifier>{2091c755-73e2-4f03-a220-243b2d5dfced}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -528,6 +546,18 @@
     <ClInclude Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.hxx">
       <Filter>TnbLib\Cad\Entities\Surface</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Cad3d_GModel.hxx">
+      <Filter>TnbLib\Cad\GModel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Tools\GModel_Tools.hxx">
+      <Filter>TnbLib\Cad\GModel\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Repair\OpenCascade\Cad_OpenCascadeRepair.hxx">
+      <Filter>TnbLib\Cad\Repair\OpenCascade</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Repair\OpenCascade\Edge\Cad_OpenCascadeRepair_Edge.hxx">
+      <Filter>TnbLib\Cad\Repair\OpenCascade\Edge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -766,6 +796,54 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurfaceIO.cxx">
       <Filter>TnbLib\Cad\Entities\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Curve\GModel_CurveIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Edge\GModel_EdgeIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurveIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\ParaWire\GModel_ParaWire.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaWire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\ParaWire\GModel_ParaWireIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaWire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Wire\GModel_Wire.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Wire\GModel_WireIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Surface\Geometry\GModel_SurfaceGeometry.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Surface\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Surface\Geometry\GModel_SurfaceGeometryIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Surface\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Surface\GModel_SurfaceIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Plane\GModel_Plane.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\Plane\GModel_PlaneIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModel.cxx">
+      <Filter>TnbLib\Cad\GModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Tools\GModel_Tools.cxx">
+      <Filter>TnbLib\Cad\GModel\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Repair\OpenCascade\Cad_OpenCascadeRepair.cxx">
+      <Filter>TnbLib\Cad\Repair\OpenCascade</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Repair\OpenCascade\Edge\Cad_OpenCascadeRepair_Edge.cxx">
+      <Filter>TnbLib\Cad\Repair\OpenCascade\Edge</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

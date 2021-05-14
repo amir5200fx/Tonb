@@ -38,21 +38,40 @@ namespace tnbLib
 
 		//- Private functions and operators
 
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
 		TnbCad_EXPORT Entity2d_Box CalcParametricBoundingBox() const;
+
+
+		//- default constructors
+
+		GModel_Surface()
+		{}
 
 	public:
 
+
+		// constructors
+
 		TnbCad_EXPORT GModel_Surface
 		(
-			const Handle(Geom_Surface)& theGeometry,
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
 
 		TnbCad_EXPORT GModel_Surface
 		(
+			std::shared_ptr<Cad_GeomSurface>&& theGeometry,
+			outer&& theOuter,
+			inner&& theInner
+		);
+
+		TnbCad_EXPORT GModel_Surface
+		(
 			const Standard_Integer theIndex,
-			const Handle(Geom_Surface)& theGeometry,
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
@@ -61,10 +80,13 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Handle(Geom_Surface)& theGeometry,
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
+
+
+		//- public functions and operators
 
 		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
@@ -116,5 +138,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::GModel_Surface);
 
 #endif // !_GModel_Surface_Header

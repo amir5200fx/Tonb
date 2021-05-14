@@ -34,6 +34,8 @@ namespace tnbLib
 		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 
+		// default constructor
+
 		Cad_GeomSurface()
 		{}
 
@@ -41,6 +43,8 @@ namespace tnbLib
 		static TnbCad_EXPORT void CheckBounded(const Handle(Geom_Surface)&);
 
 	public:
+
+		//- constructors
 
 		TnbCad_EXPORT Cad_GeomSurface(const Handle(Geom_Surface)& theSurface);
 

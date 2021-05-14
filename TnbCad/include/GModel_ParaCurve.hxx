@@ -13,13 +13,19 @@ namespace tnbLib
 {
 
 	class GModel_ParaCurve
-		: public GModel_Entity
+		: public Global_Indexed
+		, public Global_Named
+		, public std::enable_shared_from_this<GModel_ParaCurve>
 	{
 
 		/*Private Data*/
 
 		Handle(Geom2d_Curve) theGeometry_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 		auto& ChangeGeometry()
 		{
@@ -38,23 +44,37 @@ namespace tnbLib
 			const char* theName
 		);
 
+
+		//- default constructor
+
+		GModel_ParaCurve()
+		{}
+
 	public:
+
+
+		//- constructors
 
 		TnbCad_EXPORT GModel_ParaCurve
 		(
 			const Handle(Geom2d_Curve)& theGeometry
 		);
 
-		TnbCad_EXPORT Standard_Real FirstParameter() const;
+		TnbCad_EXPORT GModel_ParaCurve
+		(
+			Handle(Geom2d_Curve)&& theGeometry
+		);
 
+
+		//- public functions and operators
+
+		TnbCad_EXPORT Standard_Real FirstParameter() const;
 		TnbCad_EXPORT Standard_Real LastParameter() const;
 
 		TnbCad_EXPORT Pnt2d Value(const Standard_Real x) const;
-
 		TnbCad_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
 
 		TnbCad_EXPORT Pnt2d FirstCoord() const;
-
 		TnbCad_EXPORT Pnt2d LastCoord() const;
 
 		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
@@ -67,5 +87,7 @@ namespace tnbLib
 }
 
 #include <GModel_ParaCurveI.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::GModel_ParaCurve);
 
 #endif // !_GModel_ParaCurve_Header

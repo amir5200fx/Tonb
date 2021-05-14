@@ -26,28 +26,50 @@ namespace tnbLib
 
 		std::shared_ptr<edgeList> theEdges_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+
+		//- default constructor
+
+		GModel_Wire()
+		{}
+
 	public:
 
-		GModel_Wire
+
+		//- constructors
+
+		TnbCad_EXPORT GModel_Wire
 		(
 			const std::shared_ptr<edgeList>& theEdges
 		);
 
-		GModel_Wire
+		TnbCad_EXPORT GModel_Wire
 		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<edgeList>& theEdges
+			std::shared_ptr<edgeList>&& theEdges
 		);
 
-		GModel_Wire
+		TnbCad_EXPORT GModel_Wire
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
 			const std::shared_ptr<edgeList>& theEdges
 		);
 
+		TnbCad_EXPORT GModel_Wire
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			std::shared_ptr<edgeList>&& theEdges
+		);
 
-		Standard_Integer NbEdges() const;
+
+		//- public functions and operators
+
+		TnbCad_EXPORT Standard_Integer NbEdges() const;
 
 		const auto& Edges() const
 		{
