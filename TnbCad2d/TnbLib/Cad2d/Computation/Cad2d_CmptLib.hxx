@@ -19,11 +19,14 @@ namespace tnbLib
 	class NumAlg_AdaptiveInteg_Info;
 	class Pln_Wire;
 	class Pnt2d;
+	class Cad2d_Plane;
 
 	class Cad2d_CmptLib
 	{
 
 	public:
+
+
 
 		//- Check the convergence of the algorithm with the info parameter
 		static TnbCad2d_EXPORT Standard_Real
@@ -71,6 +74,12 @@ namespace tnbLib
 			(
 				const Pln_Wire& theWire,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbCad2d_EXPORT Standard_Real
+			DiscreteArea
+			(
+				const Pln_Wire& theWire
 			);
 
 		static TnbCad2d_EXPORT Standard_Real
@@ -165,6 +174,19 @@ namespace tnbLib
 			(
 				const Pln_Wire& theWire,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbCad2d_EXPORT Standard_Real 
+			Area
+			(
+				const Cad2d_Plane& thePlane,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static TnbCad2d_EXPORT Standard_Real
+			DiscreteArea
+			(
+				const Cad2d_Plane& thePlane
 			);
 
 		static TnbCad2d_EXPORT Standard_Real Ixy(const Pln_Wire& theWire, const Pnt2d& theC, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);

@@ -6,9 +6,11 @@
 #include <Pln_CmpEdge.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
+#include <Cad2d_Plane.hxx>
 #include <NumAlg_IntegFunc.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <Geo_CmptLib.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -503,6 +505,31 @@ tnbLib::Cad2d_CmptLib::Area
 }
 
 Standard_Real 
+tnbLib::Cad2d_CmptLib::DiscreteArea
+(
+	const Pln_Wire & theWire
+)
+{
+	const auto& edges = theWire.Edges();
+	Standard_Real sum = 0;
+	for (const auto& e : edges)
+	{
+		Debug_Null_Pointer(e);
+		if (NOT e->Mesh())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the edge has no mesh!" << endl
+				<< abort(FatalError);
+		}
+		const auto& poly = *e->Mesh();
+		auto area = Geo_CmptLib::Area(poly);
+
+		sum += (e->Sense() ? -area : area);
+	}
+	return sum;
+}
+
+Standard_Real 
 tnbLib::Cad2d_CmptLib::xCentreProductArea
 (
 	const Handle(Geom2d_Curve)& theCurve, 
@@ -786,6 +813,62 @@ tnbLib::Cad2d_CmptLib::yCentreProductArea
 	}
 
 	return sum;
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::Area
+(
+	const Cad2d_Plane & thePlane,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	const auto& outer = thePlane.OuterWire();
+	if (NOT outer)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid plane has been detected!" << endl
+			<< abort(FatalError);
+	}
+	auto area = Area(*outer, theInfo);
+	if (thePlane.InnerWires())
+	{
+		for (const auto& x : *thePlane.InnerWires())
+		{
+			area += Area(*x, theInfo);
+		}
+	}
+	return area;
+}
+
+Standard_Real 
+tnbLib::Cad2d_CmptLib::DiscreteArea
+(
+	const Cad2d_Plane & thePlane
+)
+{
+	const auto& outer = thePlane.OuterWire();
+	if (NOT outer)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid plane has been detected!" << endl
+			<< abort(FatalError);
+	}
+	auto area = DiscreteArea(*outer);
+	if (thePlane.InnerWires())
+	{
+		for (const auto& x : *thePlane.InnerWires())
+		{
+			auto iarea = DiscreteArea(*x);
+			if (iarea > 0)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "invalid value for the inner wire area has been detected!" << endl
+					<< abort(FatalError);
+			}
+			area += iarea;
+		}
+	}
+	return area;
 }
 
 //Standard_Real 
