@@ -38,9 +38,18 @@ void tnbLib::GModel_Curve::CheckBounded
 
 tnbLib::GModel_Curve::GModel_Curve
 (
-	const Handle(Geom_Curve) theGeometry
+	const Handle(Geom_Curve)& theGeometry
 )
 	: theGeometry_(theGeometry)
+{
+	CheckBounded(Geometry(), "GModel_Curve::GModel_Curve()");
+}
+
+tnbLib::GModel_Curve::GModel_Curve
+(
+	Handle(Geom_Curve)&& theGeometry
+)
+	: theGeometry_(std::move(theGeometry))
 {
 	CheckBounded(Geometry(), "GModel_Curve::GModel_Curve()");
 }

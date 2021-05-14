@@ -54,6 +54,9 @@ namespace tnbLib
 
 	public:
 
+
+		//- public functions and operators
+
 		virtual ~GModel_Entity()
 		{}
 

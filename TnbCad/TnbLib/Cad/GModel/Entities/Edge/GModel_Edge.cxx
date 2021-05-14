@@ -2,14 +2,24 @@
 
 tnbLib::GModel_Edge::GModel_Edge
 (
-	const Standard_Integer theIndex, 
 	const std::shared_ptr<GModel_ParaCurve>& thePar, 
 	const std::shared_ptr<GModel_Curve>& theCurve
 )
-	: GModel_Entity(theIndex)
-	, thePar_(thePar)
+	: thePar_(thePar)
 	, theCurve_(theCurve)
 {
+	//- empty body
+}
+
+tnbLib::GModel_Edge::GModel_Edge
+(
+	std::shared_ptr<GModel_ParaCurve>&& thePar,
+	std::shared_ptr<GModel_Curve>&& theCurve
+)
+	: thePar_(std::move(thePar))
+	, theCurve_(std::move(theCurve))
+{
+	//- empty body
 }
 
 tnbLib::GModel_Edge::GModel_Edge
@@ -23,4 +33,5 @@ tnbLib::GModel_Edge::GModel_Edge
 	, thePar_(thePar)
 	, theCurve_(theCurve)
 {
+	//- empty body
 }

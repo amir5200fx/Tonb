@@ -46,6 +46,15 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 	CheckBounded(Geometry(), "GModel_ParaCurve::GModel_ParaCurve()");
 }
 
+tnbLib::GModel_ParaCurve::GModel_ParaCurve
+(
+	Handle(Geom2d_Curve)&& theGeometry
+)
+	: theGeometry_(std::move(theGeometry))
+{
+	CheckBounded(Geometry(), "GModel_ParaCurve::GModel_ParaCurve()");
+}
+
 Standard_Real 
 tnbLib::GModel_ParaCurve::FirstParameter() const
 {

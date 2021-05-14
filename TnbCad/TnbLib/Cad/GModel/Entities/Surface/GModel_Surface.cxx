@@ -2,7 +2,7 @@
 
 tnbLib::GModel_Surface::GModel_Surface
 (
-	const Handle(Geom_Surface)& theGeometry,
+	const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 	const outer & theOuter,
 	const inner & theInner
 )
@@ -10,12 +10,26 @@ tnbLib::GModel_Surface::GModel_Surface
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
+	//- empty body
+}
+
+tnbLib::GModel_Surface::GModel_Surface
+(
+	std::shared_ptr<Cad_GeomSurface>&& theGeometry, 
+	outer && theOuter,
+	inner && theInner
+)
+	: GModel_SurfaceGeometry(std::move(theGeometry))
+	, theOuter_(std::move(theOuter))
+	, theInner_(std::move(theInner))
+{
+	//- empty body
 }
 
 tnbLib::GModel_Surface::GModel_Surface
 (
 	const Standard_Integer theIndex,
-	const Handle(Geom_Surface)& theGeometry,
+	const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 	const outer & theOuter,
 	const inner & theInner
 )
@@ -24,13 +38,14 @@ tnbLib::GModel_Surface::GModel_Surface
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
+	//- empty body
 }
 
 tnbLib::GModel_Surface::GModel_Surface
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
-	const Handle(Geom_Surface)& theGeometry,
+	const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 	const outer & theOuter,
 	const inner & theInner
 )
@@ -39,6 +54,7 @@ tnbLib::GModel_Surface::GModel_Surface
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
+	//- empty body
 }
 
 Standard_Integer
