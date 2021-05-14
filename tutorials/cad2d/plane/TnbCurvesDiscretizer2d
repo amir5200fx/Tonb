@@ -1,0 +1,7 @@
+setVerbose(true);
+
+loadCurves("myCurves");
+
+execute();
+
+exportToPlt("myCurves.plt");

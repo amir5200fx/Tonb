@@ -1,0 +1,9 @@
+setVerbose(true);
+
+loadEdges("myCurves");
+
+execute();
+
+saveTo("myDiscretizedCurves");
+
+//exportToPlt("myCurves.plt");

@@ -1,0 +1,5 @@
+setVerbose(true);
+
+loadEdges("myCurve");
+
+saveTo("myCurves");

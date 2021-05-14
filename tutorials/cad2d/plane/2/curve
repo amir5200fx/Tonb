@@ -1,0 +1,6 @@
+var p0 = makePoint(3.0, 1.0);
+var p1 = makePoint(4.0, 1.0);
+
+makeSegment(p0, p1);
+
+saveEdgeTo("myCurve");
