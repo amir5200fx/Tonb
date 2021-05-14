@@ -1,0 +1,12 @@
+for (const auto& x : theFronts)
+{
+	Debug_Null_Pointer(x);
+	const auto& n0 = x->Node0();
+	const auto& n1 = x->Node1();
+
+	n0->InsertToEdges(x->Index(), x);
+	n1->InsertToEdges(x->Index(), x);
+
+	n0->InsertToFrontEdges(x->Index(), x);
+	n1->InsertToFrontEdges(x->Index(), x);
+}

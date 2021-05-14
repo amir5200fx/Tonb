@@ -5,10 +5,10 @@
 
 namespace tnbLib
 {
-	std::shared_ptr<NumAlg_AdaptiveInteg_Info> sysLib::gl_metric_prcsr_aniso_intg_info =
+	TnbMesh_EXPORT std::shared_ptr<NumAlg_AdaptiveInteg_Info> sysLib::gl_metric_prcsr_aniso_intg_info =
 		std::make_shared<NumAlg_AdaptiveInteg_Info>();
 
-	std::shared_ptr<Aft_MetricPrcsrAnIso_Info> sysLib::gl_aft_metric_prcsr_aniso_info =
+	TnbMesh_EXPORT std::shared_ptr<Aft_MetricPrcsrAnIso_Info> sysLib::gl_aft_metric_prcsr_aniso_info =
 		std::make_shared<Aft_MetricPrcsrAnIso_Info>();
 }
 

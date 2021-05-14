@@ -4,11 +4,6 @@
 
 #include <Aft_Facet.hxx>
 #include <Aft3d_FacetAnIsoTraits.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Facet<Aft3d_FacetAnIsoTraits> Aft3d_FacetAnIso;
-}
+#include <Aft3d_FacetAnIsoFwd.hxx>
 
 #endif // !_Aft3d_FacetAnIso_Header

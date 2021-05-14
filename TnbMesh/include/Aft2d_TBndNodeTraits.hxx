@@ -3,6 +3,7 @@
 #define _Aft2d_TBndNodeTraits_Header
 
 #include <Aft2d_BndNodeTraits.hxx>
+#include <Aft2d_PlnCurveFwd.hxx>
 #include <Geo2d_SizeFunction.hxx>
 
 namespace tnbLib
@@ -11,15 +12,12 @@ namespace tnbLib
 	// Forward Declarations
 	class Pln_Curve;
 
-	template<class CrvEntity, class SizeFun, class MetricFun>
-	class Mesh_PlnCurve;
-
 	struct Aft2d_TBndNodeTraits
 	{
 
 		typedef Aft2d_BndNodeTraits bndNodeTraits;
 
-		typedef Mesh_PlnCurve<Pln_Curve, Geo2d_SizeFunction, void> curveType;
+		typedef Aft2d_PlnCurve curveType;
 		typedef void surfType;
 	};
 }

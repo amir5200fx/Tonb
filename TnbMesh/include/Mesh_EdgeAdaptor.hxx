@@ -33,10 +33,18 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_EdgeToElementAdaptor<ElementType>>(*this);
 		}
 
-	public:
+	protected:
+
+		//- default constructor
 
 		Mesh_EdgeAdaptor()
 		{}
+
+	public:
+
+
+		//- public functions and operators
+
 	};
 
 	//template<class FacetType>
@@ -54,7 +62,31 @@ namespace tnbLib
 
 	template<>
 	class Mesh_EdgeAdaptor<void, void>
-	{};
+	{
+
+		/*Private Data*/
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{}
+
+	protected:
+
+		//- default constructor
+
+		Mesh_EdgeAdaptor()
+		{}
+
+	public:
+
+		//- public functions and operators
+
+	};
 
 	template<class ElementType>
 	class Mesh_EdgeAdaptor<ElementType, void>
@@ -68,10 +100,16 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
-	public:
+	protected:
+
+		//- default constructor
 
 		Mesh_EdgeAdaptor()
 		{}
+
+	public:
+
+		//- public functions and operators
 
 		const std::weak_ptr<ElementType>& RightElement() const
 		{

@@ -4,15 +4,6 @@
 
 #include <Aft_Element.hxx>
 #include <Aft3d_ElementTraits.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Element
-		<
-		Aft3d_ElementTraits,
-		Mesh_ElementType_Tetrahedron
-		> Aft3d_Element;
-}
+#include <Aft3d_ElementFwd.hxx>
 
 #endif // !_Aft3d_Element_Header

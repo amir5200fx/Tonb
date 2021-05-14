@@ -1,6 +1,7 @@
 #pragma once
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#include <MeshBase_Tools.hxx>
 namespace tnbLib
 {
 
@@ -20,8 +21,8 @@ namespace tnbLib
 		auto mesh =
 			base::Discrete
 			(
-				Curve()->Geometry(),
-				Curve()->FirstParameter(), Curve()->LastParameter(),
+				MeshBase_Tools::Geometry(Curve()),
+				MeshBase_Tools::FirstParameter(Curve()), MeshBase_Tools::LastParameter(Curve()),
 				theInfo);
 		return std::move(mesh);
 	}
@@ -43,9 +44,9 @@ namespace tnbLib
 		auto mesh =
 			base::Mesh<SizeFun, MetricFun>
 			(
-				Curve()->Geometry(),
-				Curve()->FirstParameter(),
-				Curve()->LastParameter(), theMetricMap, theInfo
+				MeshBase_Tools::Geometry(Curve()),
+				MeshBase_Tools::FirstParameter(Curve()),
+				MeshBase_Tools::LastParameter(Curve()), theMetricMap, theInfo
 				);
 		return std::move(mesh);
 	}

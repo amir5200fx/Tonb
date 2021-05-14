@@ -7,11 +7,11 @@ namespace tnbLib
 
 	// Forward Declarations
 	template<class BndNodeTraits>
-	class Aft_BndNode;
+	class Mesh_BndNode;
 
 	struct Aft2d_BndNodeTraits;
 
-	typedef Aft_BndNode<Aft2d_BndNodeTraits>
+	typedef Mesh_BndNode<Aft2d_BndNodeTraits>
 		Aft2d_BndNode;
 }
 

@@ -50,11 +50,6 @@ namespace tnbLib
 		template< bool cond, typename U >
 		using resolvedType = typename std::enable_if< cond, U >::type;
 
-		enum
-		{
-			nbNodes = 2
-		};
-
 
 		//- default constructor
 
@@ -82,11 +77,6 @@ namespace tnbLib
 
 
 		//- public functions and operators
-
-		auto NbNodes() const
-		{
-			return (Standard_Integer)nbNodes;
-		}
 
 		auto SearchRadius() const
 		{

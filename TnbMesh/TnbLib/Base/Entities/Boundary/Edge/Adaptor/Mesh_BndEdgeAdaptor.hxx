@@ -40,10 +40,16 @@ namespace tnbLib
 			ar & boost::serialization::base_object<base>(*this);
 		}
 
-	public:
+	protected:
+
+		//- default constructor
 
 		Mesh_BndEdgeAdaptor()
 		{}
+
+	public:
+
+		
 
 		//- public functions and operators
 

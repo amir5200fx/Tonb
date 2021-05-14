@@ -1,0 +1,16 @@
+base::NodeCounter() = (Standard_Integer)theBoundary.size();
+base::ElementCounter() = 0;
+base::EdgeCounter() = (Standard_Integer)theBoundary.size();
+
+CheckBoundary(GetBoundaryEntities());
+
+const auto& nodes = RetrieveNodesFrom(GetBoundaryEntities());
+
+auto box = RetrieveBoundingBox(nodes);
+
+// Set Searching Region
+base::SetGeometryRegion(box.OffSet(0.01 * box.Diameter()));
+
+// Insert To Front
+base::InsertToGeometry(nodes);
+base::InsertToPriority(GetBoundaryEntities());

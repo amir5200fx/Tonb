@@ -1,0 +1,37 @@
+const auto& edge0 = base::CreatedEdge0();
+if (edge0)
+{
+	const auto& n0 = edge0->Node0();
+	const auto& n1 = edge0->Node1();
+
+	n0->SetRadius(MAX(n0->Radius(), edge0->CharLength()));
+	n1->SetRadius(MAX(n1->Radius(), edge0->CharLength()));
+
+	if (base::IsOnLevel(*edge0))
+	{
+		base::InsertToCurrentFronts(edge0->Index(), edge0);
+	}
+	else
+	{
+		base::InsertToNextFronts(edge0->Index(), edge0);
+	}
+}
+
+const auto& edge1 = base::CreatedEdge1();
+if (edge1)
+{
+	const auto& n0 = edge1->Node0();
+	const auto& n1 = edge1->Node1();
+
+	n0->SetRadius(MAX(n0->Radius(), edge1->CharLength()));
+	n1->SetRadius(MAX(n1->Radius(), edge1->CharLength()));
+
+	if (base::IsOnLevel(*edge1))
+	{
+		base::InsertToCurrentFronts(edge1->Index(), edge1);
+	}
+	else
+	{
+		base::InsertToNextFronts(edge1->Index(), edge1);
+	}
+}

@@ -38,6 +38,7 @@ namespace tnbLib
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
 			ar & boost::serialization::base_object<nodeAdaptor>(*this);
+			ar & boost::serialization::base_object<typename BndNodeTraits::nodeType>(*this);
 		}
 
 
@@ -48,6 +49,9 @@ namespace tnbLib
 
 		typedef typename BndNodeTraits::nodeType base;
 
+		using nodeType::Merge_Alg;
+
+	protected:
 
 		//- default constructors
 

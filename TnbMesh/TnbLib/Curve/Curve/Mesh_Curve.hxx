@@ -4,8 +4,7 @@
 
 #include <Standard_Handle.hxx>
 #include <Global_Done.hxx>
-#include <Entity_Connectivity.hxx>
-#include <Entity_StaticData.hxx>
+#include <Entity_Polygon.hxx>
 #include <Geo_Traits.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveEntity.hxx>
@@ -85,7 +84,7 @@ namespace tnbLib
 
 		typedef Mesh_Curve_Info info;
 		typedef NumAlg_AdaptiveInteg_Info intgInfo;
-		typedef Entity_StaticData<Point, connectivity::dual> chain;
+		typedef Entity_Polygon<Point> chain;
 		typedef Mesh_CurveEntity<gCurveType, MetricPrcsrType> entity;
 
 

@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
+#include <Mesh_Module.hxx>
 
 namespace tnbLib
 {
@@ -31,8 +32,8 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer DEFAULT_MX_NB_ITERS;
-		static const Standard_Real DEFAULT_FACTOR;
+		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MX_NB_ITERS;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_FACTOR;
 
 		GeoMesh_Background_SmoothingHvCorrection_Info()
 			: theMaxNbIters_(DEFAULT_MX_NB_ITERS)
@@ -67,8 +68,8 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer DEFAULT_MX_NB_ITERS;
-		static const Standard_Real DEFAULT_FACTOR;
+		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MX_NB_ITERS;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_FACTOR;
 
 		GeoMesh_Background_SmoothingLaplacian_Info()
 			: theMaxNbIters_(DEFAULT_MX_NB_ITERS)

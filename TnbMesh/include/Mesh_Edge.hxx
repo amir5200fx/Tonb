@@ -63,6 +63,7 @@ namespace tnbLib
 
 		enum
 		{
+			nbNodes = 2,
 			rank = 1,
 			hierarchy = 0
 		};
@@ -84,6 +85,11 @@ namespace tnbLib
 		{
 			theNodes_[0] = theNode0;
 			theNodes_[1] = theNode1;
+		}
+
+		auto NbNodes() const
+		{
+			return (Standard_Integer)nbNodes;
 		}
 
 		const std::shared_ptr<nodeType>& Node0() const

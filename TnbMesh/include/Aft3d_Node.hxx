@@ -4,11 +4,6 @@
 
 #include <Aft_Node.hxx>
 #include <Aft3d_NodeTraits.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Node<Aft3d_NodeTraits> Aft3d_Node;
-}
+#include <Aft3d_NodeFwd.hxx>
 
 #endif // !_Aft3d_Node_Header

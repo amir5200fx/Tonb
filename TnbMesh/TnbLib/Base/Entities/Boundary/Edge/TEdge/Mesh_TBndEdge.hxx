@@ -4,7 +4,7 @@
 
 #include <Mesh_BndEdge.hxx>
 #include <Mesh_BndEdgeAdaptor.hxx>
-#include <Entity2d_ChainFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 
 #include <vector>
 
@@ -85,7 +85,7 @@ namespace tnbLib
 		static std::vector<std::shared_ptr<Mesh_TBndEdge>>
 			GetTopology
 			(
-				const Entity2d_Chain& theChain,
+				const Entity2d_Polygon& theChain,
 				const std::shared_ptr<typename TBndEdgeTraits::curveType>& theCurve
 			);
 

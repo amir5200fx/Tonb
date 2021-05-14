@@ -34,6 +34,7 @@ namespace tnbLib
 			FatalErrorIn(FunctionSIG)
 				<< "undefined merging alg has been detected!" << endl
 				<< abort(FatalError);
+			return theNode0;
 		}
 	}
 }

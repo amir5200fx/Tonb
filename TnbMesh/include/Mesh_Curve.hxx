@@ -4,11 +4,11 @@
 
 #include <Standard_Handle.hxx>
 #include <Global_Done.hxx>
-#include <Entity_Connectivity.hxx>
-#include <Entity_StaticData.hxx>
+#include <Entity_Polygon.hxx>
 #include <Geo_Traits.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveEntity.hxx>
+#include <Mesh_Module.hxx>
 
 namespace tnbLib
 {
@@ -30,9 +30,9 @@ namespace tnbLib
 
 	protected:
 
-		Mesh_Curve_Base();
+		TnbMesh_EXPORT Mesh_Curve_Base();
 
-		Mesh_Curve_Base
+		TnbMesh_EXPORT Mesh_Curve_Base
 		(
 			const Standard_Real theFirst,
 			const Standard_Real theLast,
@@ -84,7 +84,7 @@ namespace tnbLib
 
 		typedef Mesh_Curve_Info info;
 		typedef NumAlg_AdaptiveInteg_Info intgInfo;
-		typedef Entity_StaticData<Point, connectivity::dual> chain;
+		typedef Entity_Polygon<Point> chain;
 		typedef Mesh_CurveEntity<gCurveType, MetricPrcsrType> entity;
 
 

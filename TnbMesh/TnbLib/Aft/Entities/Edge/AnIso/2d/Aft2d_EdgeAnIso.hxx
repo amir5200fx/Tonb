@@ -5,11 +5,6 @@
 #include <Aft_Edge.hxx>
 #include <Aft2d_EdgeAnIsoTraits.hxx>
 #include <Aft2d_EdgeIdentifierAnIso.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Edge<Aft2d_EdgeAnIsoTraits> Aft2d_EdgeAnIso;
-}
+#include <Aft2d_EdgeAnIsoFwd.hxx>
 
 #endif // !_Aft2d_EdgeAnIso_Header

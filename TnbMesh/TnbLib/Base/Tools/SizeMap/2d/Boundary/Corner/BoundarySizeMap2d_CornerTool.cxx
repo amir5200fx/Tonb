@@ -16,6 +16,50 @@
 
 namespace tnbLib
 {
+	const Standard_Integer tnbLib::BoundarySizeMap2d_CornerTool::DEFAULT_BUCKETSIZE = 4;
+	const Standard_Integer tnbLib::BoundarySizeMap2d_CornerTool::DEFAULT_MIN_SUBDIVISION = 2;
+	const Standard_Integer tnbLib::BoundarySizeMap2d_CornerTool::DEFAULT_MAX_SUBDIVISION = 5;
+}
+
+tnbLib::BoundarySizeMap2d_CornerTool::BoundarySizeMap2d_CornerTool
+(
+	const std::shared_ptr<Mesh_ReferenceValues>& theRef,
+	const std::shared_ptr<Cad2d_Plane>& thePlane
+)
+	: Mesh2d_BoundarySizeMapTool(theRef, thePlane)
+	, theBucketSize_(DEFAULT_BUCKETSIZE)
+	, theMinSubdivision_(DEFAULT_MIN_SUBDIVISION)
+	, theMaxSubdivision_(DEFAULT_MAX_SUBDIVISION)
+{
+	//- empty body
+}
+
+void tnbLib::BoundarySizeMap2d_CornerTool::SetBucketSize
+(
+	const Standard_Integer theSize
+)
+{
+	theBucketSize_ = theSize;
+}
+
+void tnbLib::BoundarySizeMap2d_CornerTool::SetMinSubdivision
+(
+	const Standard_Integer nbLevels
+)
+{
+	theMinSubdivision_ = nbLevels;
+}
+
+void tnbLib::BoundarySizeMap2d_CornerTool::SetMaxSubdivision
+(
+	const Standard_Integer nbLevels
+)
+{
+	theMaxSubdivision_ = nbLevels;
+}
+
+namespace tnbLib
+{
 
 	namespace meshLib
 	{

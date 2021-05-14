@@ -4,15 +4,6 @@
 
 #include <Aft_Element.hxx>
 #include <Aft2d_ElementAnIsoTraits.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Element
-		<
-		Aft2d_ElementAnIsoTraits,
-		Mesh_ElementType_Triangle2D
-		> Aft2d_ElementAnIso;
-}
+#include <Aft2d_ElementAnIsoFwd.hxx>
 
 #endif // !_Aft2d_ElementAnIso_Header

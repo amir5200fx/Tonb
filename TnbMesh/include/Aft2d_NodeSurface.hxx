@@ -4,11 +4,6 @@
 
 #include <Aft_Node.hxx>
 #include <Aft2d_NodeSurfaceTraits.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Node<Aft2d_NodeSurfaceTraits> Aft2d_NodeSurface;
-}
+#include <Aft2d_NodeSurfaceFwd.hxx>
 
 #endif // !_Aft2d_NodeSurface_Header

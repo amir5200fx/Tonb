@@ -1,0 +1,15 @@
+for (const auto& x : theFronts)
+{
+	Debug_Null_Pointer(x->Node0());
+	Debug_Null_Pointer(x->Node1());
+
+	const auto& n0 = *x->Node0();
+	const auto& n1 = *x->Node1();
+
+	if (n0.NbFrontEdges() NOT_EQUAL 2 OR n1.NbFrontEdges() NOT_EQUAL 2)
+	{
+		FatalErrorIn("void CheckBoundary(const std::vector<std::shared_ptr<frontType>>& theFronts)")
+			<< "The edge is not manifold" << endl
+			<< abort(FatalError);
+	}
+}

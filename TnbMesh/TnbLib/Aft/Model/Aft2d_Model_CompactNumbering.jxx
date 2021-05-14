@@ -1,0 +1,29 @@
+auto nodes = RetrieveNodesFrom(theElements);
+auto edges = RetrieveEdgesFrom(theElements);
+
+cache::NodesIndices = std::make_shared<typename cache::indexMap>();
+auto& nodesIndices = *cache::NodesIndices;
+cache::nodeIndex = 0;
+
+cache::EdgesIndices = std::make_shared<typename cache::indexMap>();
+auto& edgesIndices = *cache::EdgesIndices;
+cache::edgeIndex = 0;
+
+cache::ElementsIndices = std::make_shared<typename cache::indexMap>();
+auto& elementsIndices = *cache::ElementsIndices;
+cache::elementIndex = 0;
+
+for (const auto& x : nodes)
+{
+	nodesIndices.insert(std::make_pair(x->Index(), ++cache::nodeIndex));
+}
+
+for (const auto& x : edges)
+{
+	edgesIndices.insert(std::make_pair(x->Index(), ++cache::edgeIndex));
+}
+
+for (const auto& x : theElements)
+{
+	elementsIndices.insert(std::make_pair(x->Index(), ++cache::elementIndex));
+}

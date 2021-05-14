@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Mesh_Module.hxx>
 
 namespace tnbLib
 {
@@ -20,10 +21,10 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_TOLERANCE;
-		static const Standard_Real DEFAULT_UNDER_RELAXATION;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
 
-		static const Standard_Integer DEFAULT_MAX_LEVEL;
+		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL;
 
 		Mesh_CurveOptmPoint_Correction_Info()
 			: theTolerance_(DEFAULT_TOLERANCE)

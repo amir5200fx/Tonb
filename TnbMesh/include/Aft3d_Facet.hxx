@@ -4,11 +4,6 @@
 
 #include <Aft_Facet.hxx>
 #include <Aft3d_FacetTraits.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft_Facet<Aft3d_FacetTraits> Aft3d_Facet;
-}
+#include <Aft3d_FacetFwd.hxx>
 
 #endif // !_Aft3d_Facet_Header

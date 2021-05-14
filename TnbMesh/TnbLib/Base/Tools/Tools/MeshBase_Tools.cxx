@@ -1,9 +1,14 @@
 #include <MeshBase_Tools.hxx>
 
+#include <Pln_Curve.hxx>
+#include <TModel_ParaCurve.hxx>
+#include <GModel_ParaCurve.hxx>
 #include <GeoMesh2d_Background.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#include <Geom2d_Curve.hxx>
 
 void tnbLib::MeshBase_Tools::SetSourcesToMesh
 (
@@ -50,4 +55,94 @@ void tnbLib::MeshBase_Tools::SetSourcesToMesh
 		if (sources[n1] <= x.second) sources[n1] = x.second;
 		if (sources[n2] <= x.second) sources[n2] = x.second;
 	}
+}
+
+const Handle(Geom2d_Curve)& 
+tnbLib::MeshBase_Tools::Geometry
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->Geometry();
+}
+
+const Handle(Geom2d_Curve)&
+tnbLib::MeshBase_Tools::Geometry
+(
+	const std::shared_ptr<TModel_ParaCurve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->Geometry();
+}
+
+const Handle(Geom2d_Curve)&
+tnbLib::MeshBase_Tools::Geometry
+(
+	const std::shared_ptr<GModel_ParaCurve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->Geometry();
+}
+
+Standard_Real 
+tnbLib::MeshBase_Tools::FirstParameter
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->FirstParameter();
+}
+
+Standard_Real
+tnbLib::MeshBase_Tools::FirstParameter
+(
+	const std::shared_ptr<TModel_ParaCurve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->FirstParameter();
+}
+
+Standard_Real
+tnbLib::MeshBase_Tools::FirstParameter
+(
+	const std::shared_ptr<GModel_ParaCurve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->FirstParameter();
+}
+
+Standard_Real
+tnbLib::MeshBase_Tools::LastParameter
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->LastParameter();
+}
+
+Standard_Real
+tnbLib::MeshBase_Tools::LastParameter
+(
+	const std::shared_ptr<TModel_ParaCurve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->LastParameter();
+}
+
+Standard_Real
+tnbLib::MeshBase_Tools::LastParameter
+(
+	const std::shared_ptr<GModel_ParaCurve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	return theCurve->LastParameter();
 }

@@ -12,9 +12,9 @@ namespace tnbLib
 	template<class CurveType, class SizeFun, class MetricFun>
 	class Mesh_PlnCurve;
 
-	class TModel_parCurve;
+	class TModel_ParaCurve;
 
-	typedef Mesh_PlnCurve<TModel_parCurve, Geo2d_SizeFunction, Geo2d_MetricFunction>
+	typedef Mesh_PlnCurve<TModel_ParaCurve, Geo2d_SizeFunction, Geo2d_MetricFunction>
 		Aft2d_tPlnCurveSurface;
 }
 

@@ -25,10 +25,14 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
-	public:
+	protected:
+
+		// default constructor
 
 		Mesh_BndEdgeGeomAdaptorBase()
 		{}
+
+	public:
 
 
 		//- public functions and operators
@@ -68,11 +72,17 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_BndEdgeGeomAdaptorBase<CurveType>>(*this);
 		}
 
-	public:
+	protected:
+
+		// default constructor
 
 		Mesh_BndEdgeGeomAdaptor()
 		{}
 
+
+	public:
+
+		
 
 		//- public functions and operators
 
@@ -96,10 +106,14 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_BndEdgeGeomAdaptorBase<CurveType>>(*this);
 		}
 
-	public:
+	protected:
+
+		// default constructor
 
 		Mesh_BndEdgeGeomAdaptor()
 		{}
+
+	public:
 
 
 		//- public functions and operators
@@ -119,10 +133,14 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
-	public:
+	protected:
+
+		// default constructor
 
 		Mesh_BndEdgeGeomAdaptor()
 		{}
+
+	public:
 
 
 		//- public functions and operators

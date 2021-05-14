@@ -2,6 +2,7 @@
 #ifndef _Mesh_PlnCurve_Header
 #define _Mesh_PlnCurve_Header
 
+#include <Global_Indexed.hxx>
 #include <Mesh_PlnCurve_Base.hxx>
 #include <Mesh_PlnCurve_Traits.hxx>
 #include <Entity_Polygon.hxx>
@@ -12,6 +13,7 @@ namespace tnbLib
 	template<class CurveType, class SizeFun, class MetricFun = void>
 	class Mesh_PlnCurve
 		: public Mesh_PlnCurve_Base
+		, public Global_Indexed
 	{
 
 		typedef Geo_MetricPrcsr<SizeFun, MetricFun> metricMap;
@@ -31,6 +33,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+
 			ar & theCurve_;
 			ar & theMesh_;
 		}
@@ -54,6 +58,15 @@ namespace tnbLib
 			const std::shared_ptr<CurveType>& theCurve
 		)
 			: theCurve_(theCurve)
+		{}
+
+		Mesh_PlnCurve
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<CurveType>& theCurve
+		)
+			: Global_Indexed(theIndex)
+			, theCurve_(theCurve)
 		{}
 
 

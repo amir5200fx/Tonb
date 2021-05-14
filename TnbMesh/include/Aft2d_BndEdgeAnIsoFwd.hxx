@@ -6,11 +6,11 @@ namespace tnbLib
 {
 	// Forward Declarations
 	template<class BndEdgeTraits>
-	class Aft_BndEdge;
+	class Mesh_BndEdge;
 
 	struct Aft2d_BndEdgeAnIsoTraits;
 
-	typedef Aft_BndEdge<Aft2d_BndEdgeAnIsoTraits>
+	typedef Mesh_BndEdge<Aft2d_BndEdgeAnIsoTraits>
 		Aft2d_BndEdgeAnIso;
 }
 

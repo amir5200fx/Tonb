@@ -1,0 +1,20 @@
+const auto clength = theFront.CharLength();
+
+const auto& vrtx0 = *theFront.Node0();
+const auto& vrtx1 = *theFront.Node1();
+
+const auto l0 = theMetric.CalcDistance(vrtx0.Coord(), theNode.Coord());
+const auto l1 = theMetric.CalcDistance(vrtx1.Coord(), theNode.Coord());
+
+const auto angN0 = (l0 * l0 + clength * clength - l1 * l1) / (2.0 * l0 * clength);
+if (NOT INSIDE(angN0, -CosAngle, CosAngle))
+{
+	return Standard_True;
+}
+
+const auto angN1 = (l1 * l1 + clength * clength - l0 * l0) / (2.0 * l1 * clength);
+if (NOT INSIDE(angN1, -CosAngle, CosAngle))
+{
+	return Standard_True;
+}
+return Standard_False;

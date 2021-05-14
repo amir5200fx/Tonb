@@ -33,10 +33,16 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Mesh_BndNodeToSurfaceAdaptor<SurfType>>(*this);
 		}
 
-	public:
+	protected:
+
+		// default constructor
 
 		Mesh_BndNodeGeomAdaptor()
 		{}
+
+	public:
+
+		
 
 		//- public functions and operators
 
@@ -56,10 +62,16 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
-	public:
+	protected:
+
+		// default constructor
 
 		Mesh_BndNodeGeomAdaptor()
 		{}
+
+	public:
+
+		
 
 
 		//- public functions and operators
@@ -94,10 +106,16 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
-	public:
+	protected:
+
+		// default constructor
 
 		Mesh_BndNodeGeomAdaptor()
 		{}
+
+	public:
+
+		
 
 
 		//- public functions and operators
