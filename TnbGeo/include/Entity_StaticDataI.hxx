@@ -46,7 +46,7 @@ namespace tnbLib
 		return std::move(p);
 	}
 
-	template<class Point, class ConnectType, bool NeighbData>
+	/*template<class Point, class ConnectType, bool NeighbData>
 	template<class Archive>
 	void Entity_StaticData<Point, ConnectType, NeighbData>::serialize
 	(
@@ -57,17 +57,17 @@ namespace tnbLib
 		ar & Points();
 		ar & Connectivity();
 		ar & BoundingBox();
-	}
+	}*/
 
-	template<class Point, class ConnectType>
+	/*template<class Point, class ConnectType>
 	template<class Archive>
 	void Entity_StaticData<Point, ConnectType, true>::serialize
 	(
-		Archive & ar, 
+		Archive & ar,
 		const unsigned int version
 	)
 	{
 		ar& boost::serialization::base_object<base>(*this);
 		ar& Neighbors();
-	}
+	}*/
 }

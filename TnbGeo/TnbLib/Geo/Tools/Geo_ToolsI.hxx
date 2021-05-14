@@ -35,7 +35,7 @@ tnbLib::Geo_Tools::Distance_cgal
 	const Pnt2d & theP1
 )
 {
-	return sqrt(SquareDistance_cgal(theQ, theP0, theP1));
+	return std::sqrt(SquareDistance_cgal(theQ, theP0, theP1));
 }
 
 inline Standard_Real 
@@ -46,7 +46,7 @@ tnbLib::Geo_Tools::Distance_cgal
 	const Pnt3d & theP1
 )
 {
-	return sqrt(SquareDistance_cgal(theQ, theP0, theP1));
+	return std::sqrt(SquareDistance_cgal(theQ, theP0, theP1));
 }
 
 inline Standard_Real 
@@ -58,7 +58,7 @@ tnbLib::Geo_Tools::Distance_cgal
 	const Pnt3d & theP2
 )
 {
-	return sqrt(SquareDistance_cgal(theQ, theP0, theP1, theP2));
+	return std::sqrt(SquareDistance_cgal(theQ, theP0, theP1, theP2));
 }
 
 inline Standard_Real 
@@ -70,7 +70,17 @@ tnbLib::Geo_Tools::DistanceSegments_cgal
 	const Pnt3d & theP1
 )
 {
-	return sqrt(SquareDistanceSegments_cgal(theQ0, theQ1, theP0, theP1));
+	return std::sqrt(SquareDistanceSegments_cgal(theQ0, theQ1, theP0, theP1));
+}
+
+inline Standard_Real 
+tnbLib::Geo_Tools::Distance_cgal
+(
+	const Pnt3d & thePoint, 
+	const gp_Pln & thePlane
+)
+{
+	return std::sqrt(SquareDistance_cgal(thePoint, thePlane));
 }
 
 inline Standard_Real 

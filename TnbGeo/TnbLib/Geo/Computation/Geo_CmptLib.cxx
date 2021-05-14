@@ -5,10 +5,55 @@
 #include <Entity2d_Box.hxx>
 #include <Entity2d_Triangle.hxx>
 #include <Geo_Tools.hxx>
+#include <NumAlg_GaussQuadrature.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 static const auto onePerTwelve = 1.0 / 12.0;
+
+Standard_Real 
+tnbLib::Geo_CmptLib::Determinant
+(
+	const Pnt2d & p0,
+	const Pnt2d & p1
+)
+{
+	const auto x0 = p0.X();
+	const auto y0 = p0.Y();
+
+	const auto x1 = p1.X();
+	const auto y1 = p1.Y();
+
+	return x0 * y1 - x1 * y0;
+}
+
+namespace tnbLib
+{
+
+	class SegmentIntegrationFunction
+	{
+
+		/*Private Data*/
+
+		const Entity_Segment<const Pnt2d&>& theSegment_;
+
+		Standard_Real theY0_;
+
+	public:
+
+		SegmentIntegrationFunction(const Entity_Segment<const Pnt2d&>& theSegment, const Standard_Real y0)
+			: theSegment_(theSegment)
+			, theY0_(y0)
+		{}
+
+		auto Value(const Standard_Real x) const
+		{
+			auto y0 = theSegment_.P0().Y();
+			auto y1 = theSegment_.P1().Y();
+			return (y0 + x * (y1 - y0)) - theY0_;
+		}
+	};
+}
 
 Standard_Real 
 tnbLib::Geo_CmptLib::Area
@@ -109,22 +154,6 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 		}
-	}
-
-	inline Standard_Real 
-		Determinant
-		(
-			const Pnt2d& p0, 
-			const Pnt2d& p1
-		)
-	{
-		const auto x0 = p0.X();
-		const auto y0 = p0.Y();
-
-		const auto x1 = p1.X();
-		const auto y1 = p1.Y();
-
-		return x0 * y1 - x1 * y0;
 	}
 
 	inline Standard_Real 

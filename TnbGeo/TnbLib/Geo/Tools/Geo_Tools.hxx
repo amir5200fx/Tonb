@@ -13,11 +13,14 @@
 #include <Entity2d_ChainFwd.hxx>
 #include <Entity3d_ChainFwd.hxx>
 #include <Entity2d_TriangleFwd.hxx>
+#include <Entity3d_TriangleFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 
 #include <vector>
 #include <memory>
+
+class gp_Pln;
 
 namespace tnbLib
 {
@@ -226,6 +229,20 @@ namespace tnbLib
 				const Pnt3d& theP1
 			);
 
+		static TnbGeo_EXPORT Standard_Real 
+			SquareDistance_cgal
+			(
+				const Pnt3d& thePoint,
+				const gp_Pln& thePlane
+			);
+
+		static inline Standard_Real 
+			Distance_cgal
+			(
+				const Pnt3d& thePoint,
+				const gp_Pln& thePlane
+			);
+
 		static TnbGeo_EXPORT Standard_Real
 			Oriented_cgal
 			(
@@ -362,6 +379,13 @@ namespace tnbLib
 				const std::vector<Pnt2d>& thePts
 			);
 
+		static TnbGeo_EXPORT Pnt3d
+			ProjectToPlane_cgal
+			(
+				const Pnt3d& thePoint, 
+				const gp_Pln& thePlane
+			);
+
 		static TnbGeo_EXPORT Pnt2d 
 			IntersectionTwoLines
 			(
@@ -449,10 +473,23 @@ namespace tnbLib
 				const Entity2d_Triangle&
 			);
 
+		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Polygon>
+			GetPolygon
+			(
+				const Entity_Triangle<const Pnt2d&>&
+			);
+
 		static TnbGeo_EXPORT std::vector<Entity2d_Triangle> 
 			GetTriangles
 			(
 				const Entity2d_Triangulation&
+			);
+
+		static TnbGeo_EXPORT std::shared_ptr<Entity3d_Triangle>
+			ProjectToPlane
+			(
+				const Entity3d_Triangle& theTri, 
+				const gp_Pln& thePlane
 			);
 
 		template<class Type>
@@ -471,11 +508,20 @@ namespace tnbLib
 				const std::vector<Standard_Real>& theSorted
 			);
 
+		static TnbGeo_EXPORT std::tuple<Standard_Real, Standard_Real, Standard_Real, Standard_Real>
+			GetCoefficients(const gp_Pln& thePlane);
+
 		static TnbGeo_EXPORT void 
 			CheckSorted
 			(
 				const std::vector<Standard_Real>& theSorted,
 				const char* theName
+			);
+
+		static TnbGeo_EXPORT void 
+			MakeTrianglesCCW
+			(
+				const std::shared_ptr<Entity2d_Triangulation>& t
 			);
 	};
 }

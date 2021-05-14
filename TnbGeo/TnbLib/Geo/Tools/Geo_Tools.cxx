@@ -1,11 +1,14 @@
 #include <Geo_Tools.hxx>
 
 #include <Entity2d_Triangle.hxx>
+#include <Entity3d_Triangle.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity3d_Polygon.hxx>
 #include <Entity2d_Chain.hxx>
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
+
+#include <gp_Pln.hxx>
 
 tnbLib::Pnt2d
 tnbLib::Geo_Tools::GetIntersectionPoint
@@ -267,6 +270,23 @@ tnbLib::Geo_Tools::GetPolygon(const Entity2d_Triangle & t)
 	return std::move(poly);
 }
 
+std::shared_ptr<tnbLib::Entity2d_Polygon> 
+tnbLib::Geo_Tools::GetPolygon
+(
+	const Entity_Triangle<const Pnt2d&>& t
+)
+{
+	auto poly = std::make_shared<Entity2d_Polygon>();
+	auto pnts = poly->Points();
+	pnts.reserve(3);
+
+	pnts.push_back(t.P0());
+	pnts.push_back(t.P1());
+	pnts.push_back(t.P2());
+
+	return std::move(poly);
+}
+
 std::vector<tnbLib::Entity2d_Triangle> 
 tnbLib::Geo_Tools::GetTriangles
 (
@@ -292,6 +312,25 @@ tnbLib::Geo_Tools::GetTriangles
 		tris.push_back(std::move(t));
 	}
 	return std::move(tris);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Triangle>
+tnbLib::Geo_Tools::ProjectToPlane
+(
+	const Entity3d_Triangle & theTri,
+	const gp_Pln & thePlane
+)
+{
+	const auto& p0 = theTri.P0();
+	const auto& p1 = theTri.P1();
+	const auto& p2 = theTri.P2();
+
+	auto prjP0 = ProjectToPlane_cgal(p0, thePlane);
+	auto prjP1 = ProjectToPlane_cgal(p1, thePlane);
+	auto prjP2 = ProjectToPlane_cgal(p2, thePlane);
+
+	auto t = std::make_shared<Entity3d_Triangle>(std::move(prjP0), std::move(prjP1), std::move(prjP2));
+	return std::move(t);
 }
 
 size_t 
@@ -322,6 +361,18 @@ tnbLib::Geo_Tools::FindSpan
 	return mid;
 }
 
+std::tuple<Standard_Real, Standard_Real, Standard_Real, Standard_Real> 
+tnbLib::Geo_Tools::GetCoefficients
+(
+	const gp_Pln & thePlane
+)
+{
+	Standard_Real a, b, c, d;
+	thePlane.Coefficients(a, b, c, d);
+	auto t = std::make_tuple(a, b, c, d);
+	return std::move(t);
+}
+
 void tnbLib::Geo_Tools::CheckSorted
 (
 	const std::vector<Standard_Real>& theSorted,
@@ -342,5 +393,34 @@ void tnbLib::Geo_Tools::CheckSorted
 		}
 		x0 = *iter;
 		iter++;
+	}
+}
+
+
+#include <Entity2d_PolygonTools.hxx>
+
+void tnbLib::Geo_Tools::MakeTrianglesCCW
+(
+	const std::shared_ptr<Entity2d_Triangulation>& t
+)
+{
+	const auto& pnts = t->Points();
+	auto& indices = t->Connectivity();
+
+	for (auto& x : indices)
+	{
+		auto& i0 = x.Value(0);
+		auto& i1 = x.Value(1);
+		auto& i2 = x.Value(2);
+
+		const auto& p0 = pnts[Index_Of(i0)];
+		const auto& p1 = pnts[Index_Of(i1)];
+		const auto& p2 = pnts[Index_Of(i2)];
+
+		Entity_Triangle<const Pnt2d&> tri(p0, p1, p2);
+		if (Entity2d_PolygonTools::GetOrientation(tri) IS_EQUAL Entity2d_PolygonOrientation::cw)
+		{
+			std::swap(i0, i2);
+		}
 	}
 }

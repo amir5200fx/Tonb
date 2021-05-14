@@ -14,10 +14,20 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	template<class Point> class Entity_Segment;
+
 	class Geo_CmptLib
 	{
 
 	public:
+
+		static TnbGeo_EXPORT Standard_Real 
+			Determinant
+			(
+				const Pnt2d& p0,
+				const Pnt2d& p1
+			);
 
 		static TnbGeo_EXPORT Standard_Real 
 			Area

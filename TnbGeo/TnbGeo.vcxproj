@@ -146,8 +146,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Entities\Metric2\2d\Entity2d_Metric2I.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonFwd.hxx" />
-    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_SIDE.hxx" />
-    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_Tools.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonOrientation.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonSide.hxx" />
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_Polygon.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_PolygonFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_Polygon.hxx" />
@@ -307,7 +308,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1IO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Metric2\2d\Entity2d_Metric2.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonIO.cxx" />
-    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_Tools.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools_cgal.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_PolygonIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\StaticData\Entity_StaticData.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_Tetrahedralization.cxx" />
@@ -357,6 +359,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   <ItemGroup>
     <ProjectReference Include="..\TnbGlobal\TnbGlobal.vcxproj">
       <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbNumAlg\TnbNumAlg.vcxproj">
+      <Project>{9d2ace52-928f-4b06-aecd-3a7cef4f63bb}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

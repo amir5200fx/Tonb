@@ -6,6 +6,7 @@
 #include <CGAL\Segment_2.h>
 #include <CGAL\Segment_3.h>
 #include <CGAL\Polygon_2.h>
+#include <CGAL\Plane_3.h>
 #include <CGAL\intersections.h>
 
 
@@ -18,6 +19,7 @@ typedef Kernel::Vector_2 Vector_2;
 typedef Kernel::Line_2 Line_2;
 typedef Kernel::Direction_2 Direction_2;
 typedef Kernel::Triangle_2 Triangle_2;
+typedef Kernel::Plane_3 Plane_3;
 
 typedef Kernel::Segment_3 Segment_3;
 typedef Kernel::Point_3 Point_3;
@@ -153,6 +155,20 @@ tnbLib::Geo_Tools::SquareDistanceSegments_cgal
 }
 
 Standard_Real 
+tnbLib::Geo_Tools::SquareDistance_cgal
+(
+	const Pnt3d & thePoint,
+	const gp_Pln & thePlane
+)
+{
+	auto[a, b, c, d] = GetCoefficients(thePlane);
+	Plane_3 pln(a, b, c, d);
+	Point_3 pt(thePoint.X(), thePoint.Y(), thePoint.Z());
+
+	return cgal_object.compute_squared_distance_3_object()(pt, pln);
+}
+
+Standard_Real 
 tnbLib::Geo_Tools::Oriented_cgal
 (
 	const Pnt2d & theQ, 
@@ -225,6 +241,22 @@ tnbLib::Geo_Tools::IsSimple_cgal
 		poly.push_back(Point_2(x.X(), x.Y()));
 	}
 	return poly.is_simple();
+}
+
+tnbLib::Pnt3d 
+tnbLib::Geo_Tools::ProjectToPlane_cgal
+(
+	const Pnt3d & thePoint, 
+	const gp_Pln & thePlane
+)
+{	
+	auto[a, b, c, d] = GetCoefficients(thePlane);
+	Plane_3 plane(a, b, c, d);
+	Point_3 pt(thePoint.X(), thePoint.Y(), thePoint.Z());
+	
+	auto proj = plane.projection(pt);
+	Pnt3d p(proj.x(), proj.y(), proj.z());
+	return std::move(p);
 }
 
 std::shared_ptr<tnbLib::Geo_Tools::IntersectEntity2d> 

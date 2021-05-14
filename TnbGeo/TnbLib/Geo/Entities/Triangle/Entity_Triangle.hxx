@@ -36,11 +36,16 @@ namespace tnbLib
 
 	public:
 
+		//- default constructor
+
 		Entity_Triangle()
 			: theP0_(Point::null)
 			, theP1_(Point::null)
 			, theP2_(Point::null)
 		{}
+
+
+		//- constructors
 
 		Entity_Triangle
 		(
@@ -52,6 +57,20 @@ namespace tnbLib
 			, theP1_(theP1)
 			, theP2_(theP2)
 		{}
+
+		Entity_Triangle
+		(
+			Point&& theP0,
+			Point&& theP1,
+			Point&& theP2
+		)
+			: theP0_(std::move(theP0))
+			, theP1_(std::move(theP1))
+			, theP2_(std::move(theP2))
+		{}
+
+
+		//- public functions and operators
 
 		const Point& P0() const
 		{
@@ -131,6 +150,18 @@ namespace tnbLib
 			}
 			
 		}
+
+		auto Reverted() const
+		{
+			auto t = *this;
+			t.Revert();
+			return std::move(t);
+		}
+
+		void Revert()
+		{
+			std::swap(theP0_, theP1_);
+		}
 	};
 
 	template<>
@@ -145,6 +176,11 @@ namespace tnbLib
 
 	public:
 
+		//- default constructor
+
+
+		//- constructors
+
 		Entity_Triangle
 		(
 			const Pnt2d& p0, 
@@ -155,6 +191,9 @@ namespace tnbLib
 			, theP1_(p1)
 			, theP2_(p2)
 		{}
+
+
+		//- public functions and operators
 
 		const auto& P0() const
 		{
@@ -242,6 +281,12 @@ namespace tnbLib
 
 	public:
 
+
+		//- default constructor
+
+
+		//- constructors
+
 		Entity_Triangle
 		(
 			const Pnt3d& p0,
@@ -252,6 +297,9 @@ namespace tnbLib
 			, theP1_(p1)
 			, theP2_(p2)
 		{}
+
+
+		//- public functions and operators
 
 		const auto& P0() const
 		{

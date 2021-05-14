@@ -525,12 +525,6 @@
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon.hxx">
       <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_SIDE.hxx">
-      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_Tools.hxx">
-      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonFwd.hxx">
       <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
     </ClInclude>
@@ -966,6 +960,15 @@
     <ClInclude Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTri_CGAL.hxx">
       <Filter>TnbLib\Geo\Triangulation\2d\std</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonOrientation.hxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonSide.hxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.hxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1015,9 +1018,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Metric2\2d\Entity2d_Metric2.cxx">
       <Filter>TnbLib\Geo\Entities\Metric2\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon_Tools.cxx">
-      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonIO.cxx">
       <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
@@ -1192,6 +1192,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTri_CGAL.cxx">
       <Filter>TnbLib\Geo\Triangulation\2d\std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools_cgal.cxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.cxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
