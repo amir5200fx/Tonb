@@ -392,6 +392,17 @@ tnbLib::Marine_CmptLib::CalcDISPV
 	return std::move(param);
 }
 
+tnbLib::marineLib::DISPM 
+tnbLib::Marine_CmptLib::CalcDISPM
+(
+	const marineLib::DISPV & theDispv,
+	const marineLib::Density & theRho
+)
+{
+	marineLib::DISPM param(theDispv()*theRho());
+	return std::move(param);
+}
+
 tnbLib::marineLib::BM
 tnbLib::Marine_CmptLib::CalcBM
 (

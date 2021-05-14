@@ -6,6 +6,7 @@
 #include <Marine_VesselParams.hxx>
 #include <Marine_BodiesFwd.hxx>
 #include <Marine_Module.hxx>
+#include <EnvtPropt_Density.hxx>
 
 #include <memory>
 #include <tuple>
@@ -161,6 +162,13 @@ namespace tnbLib
 				const std::shared_ptr<info>& theInfo
 			);
 
+		static TnbMarine_EXPORT marineLib::DISPM 
+			CalcDISPM
+			(
+				const marineLib::DISPV& theDispv, 
+				const marineLib::Density& theRho
+			);
+
 		static TnbMarine_EXPORT marineLib::BM 
 			CalcBM
 			(
@@ -224,6 +232,13 @@ namespace tnbLib
 			(
 				const marineLib::KB& theKb, 
 				const marineLib::BM& theBm
+			);
+
+		static TnbMarine_EXPORT marineLib::GM 
+			CalcGM
+			(
+				const marineLib::KB& theKb, 
+				const marineLib::KG& theKg
 			);
 
 		static TnbMarine_EXPORT marineLib::KML 
