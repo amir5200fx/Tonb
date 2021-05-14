@@ -385,6 +385,9 @@
     <Filter Include="TnbLib\MarineBase\Modeler\Displacer">
       <UniqueIdentifier>{5b2967e4-3baf-4a97-ab5d-e8226a7bca08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\MergePlane">
+      <UniqueIdentifier>{a1aa7c33-89e0-4909-b083-3e0ea0e30599}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -750,6 +753,9 @@
     <ClInclude Include="TnbLib\Cad2d\Tools\Pln_CascadeTools.hxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\MergePlane\Cad2d_MergePlane.hxx">
+      <Filter>TnbLib\Cad2d\MergePlane</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1099,6 +1105,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CascadeTools.cxx">
       <Filter>TnbLib\Cad2d\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\MergePlane\Cad2d_MergePlane.cxx">
+      <Filter>TnbLib\Cad2d\MergePlane</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
