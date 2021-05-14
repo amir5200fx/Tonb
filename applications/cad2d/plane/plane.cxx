@@ -2,6 +2,7 @@
 #include <Pln_Curve.hxx>
 #include <Pln_Ring.hxx>
 #include <Pln_Vertex.hxx>
+#include <Pln_Edge.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Dir2d.hxx>
@@ -28,15 +29,16 @@ namespace tnbLib
 {
 
 	typedef std::shared_ptr<Pln_Curve> curve_t;
+	typedef std::shared_ptr<Pln_Edge> edge_t;
 	typedef std::shared_ptr<Cad2d_Plane> plane_t;
 
 	static plane_t myPlane;
 	static gp_Ax2 mySys = gp::XOY();
 
-	static std::vector<curve_t> myCurves;
+	static std::vector<edge_t> myCurves;
 	static auto myModeler = std::make_shared<Cad2d_Modeler>();
 
-	static bool verbose = false;
+	static unsigned short verbose = 0;
 
 	static double ringTol = Precision::Confusion();
 
@@ -62,13 +64,13 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		boost::archive::polymorphic_text_iarchive ia(file);
+		TNB_iARCH_FILE_TYPE ia(file);
 
 		ia >> myCurves;
 
 		if (verbose)
 		{
-			Info << myCurves.size() << " curve(s) has(have) been loaded." << endl;
+			Info << myCurves.size() << " edge(s) has(have) been loaded." << endl;
 		}
 	}
 
@@ -94,21 +96,11 @@ namespace tnbLib
 		if (myCurves.empty())
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "no curve has been detected!" << endl
+				<< "no edge has been detected!" << endl
 				<< abort(FatalError);
 		}
 
-		std::vector<std::shared_ptr<Pln_Edge>> edges;
-		edges.reserve(myCurves.size());
-
-		for (auto& x : myCurves)
-		{
-			Debug_Null_Pointer(x);
-			auto edge = makeEdge(std::move(x));
-			edges.push_back(std::move(edge));
-		}
-
-		myModeler->Import(std::move(edges));
+		myModeler->Import(myCurves);
 
 		Cad2d_Modeler::selctList l;
 		myModeler->SelectAll(l);
@@ -220,7 +212,7 @@ namespace tnbLib
 		fileName fn(name);
 		std::ofstream f(fn);
 
-		boost::archive::polymorphic_text_oarchive oa(f);
+		TNB_oARCH_FILE_TYPE oa(f);
 
 		oa << myPlane;
 	}
@@ -247,8 +239,13 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([]()->void {makePlane(); }), "execute");
+
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadCurves(name); }), "loadCurves");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)->void {exportToPlt(name); }), "drawToPlt");
+
+		mod->add(chaiscript::fun([](unsigned short c)-> void {verbose = c; Cad2d_Modeler::verbose = c; }), "setVerbose");
 	}
 
 	void setGeometrics(const module_t& mod)

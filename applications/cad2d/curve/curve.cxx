@@ -1,5 +1,8 @@
 #include <Pln_CurveTools.hxx>
 #include <Pln_Curve.hxx>
+#include <Pln_Edge.hxx>
+#include <Pln_Ring.hxx>
+#include <Pln_Vertex.hxx>
 #include <Dir2d.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
@@ -24,10 +27,12 @@ namespace tnbLib
 {
 
 	typedef std::shared_ptr<Pln_Curve> curve_t;
+	typedef std::shared_ptr<Pln_Edge> edge_t;
 
 	curve_t myCurve;
 
 	static double intplTol = 1.0E-6;
+	static double ringTol = Precision::Confusion();
 
 	//- globals
 
@@ -69,10 +74,10 @@ namespace tnbLib
 		return std::move(dir);
 	}
 
-	void removeAllSubdirectories()
+	/*void removeAllSubdirectories()
 	{
 		boost::filesystem::
-	}
+	}*/
 
 	//- curve makers
 
@@ -242,12 +247,46 @@ namespace tnbLib
 
 	void saveTo(const std::string& name)
 	{
+		if (NOT myCurve)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no curve has been created!" << endl
+				<< abort(FatalError);
+		}
 		fileName fn(name);
 		std::ofstream f(fn);
 
 		boost::archive::polymorphic_text_oarchive oa(f);
 
 		oa << myCurve;
+	}
+
+	void saveEdgeTo(const std::string& name)
+	{
+		if (NOT myCurve)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no curve has been created!" << endl
+				<< abort(FatalError);
+		}
+		fileName fn(name);
+		std::ofstream f(fn);
+
+		boost::archive::polymorphic_text_oarchive oa(f);
+
+		if (myCurve->IsRing(ringTol))
+		{
+			auto vtx = std::make_shared<Pln_Vertex>(myCurve->FirstCoord());
+			std::shared_ptr<Pln_Edge> ring = std::make_shared<Pln_Ring>(vtx, myCurve);
+			oa << ring;
+		}
+		else
+		{
+			auto v0 = std::make_shared<Pln_Vertex>(myCurve->FirstCoord());
+			auto v1 = std::make_shared<Pln_Vertex>(myCurve->LastCoord());
+			auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), myCurve);
+			oa << edge;
+		}
 	}
 
 	void loadCurve(const std::string& name)
@@ -343,6 +382,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)-> auto {return makeEllipse(s0, s1, c); }), "makeElips");
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveEdgeTo(name); }), "saveEdgeTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadCurve(name); }), "loadCurve");
 		mod->add(chaiscript::fun([](const std::string& name, int n)-> void {exportToPlt(name, n); }), "exportToPlt");
 	}
