@@ -226,6 +226,13 @@ namespace tnbLib
 				const marineLib::BM& theBm
 			);
 
+		static TnbMarine_EXPORT marineLib::GM 
+			CalcGM
+			(
+				const marineLib::KB& theKb, 
+				const marineLib::KG& theKg
+			);
+
 		static TnbMarine_EXPORT marineLib::KML 
 			CalcKML
 			(

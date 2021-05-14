@@ -551,6 +551,17 @@ tnbLib::Marine_CmptLib::CalcKM
 	return std::move(param);
 }
 
+tnbLib::marineLib::GM 
+tnbLib::Marine_CmptLib::CalcGM
+(
+	const marineLib::KB & theKb,
+	const marineLib::KG & theKg
+)
+{
+	marineLib::GM param(theKb() - theKg());
+	return std::move(param);
+}
+
 tnbLib::marineLib::KML
 tnbLib::Marine_CmptLib::CalcKML
 (
