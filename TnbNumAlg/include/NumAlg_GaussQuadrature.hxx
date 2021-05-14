@@ -27,7 +27,7 @@ namespace tnbLib
 		(
 			const fun& theFunction
 		)
-			: fun(theFunction)
+			: Function(theFunction)
 			, NumAlg_IntegBond(-1, +1)
 			, theResult_(0)
 		{}
@@ -38,7 +38,7 @@ namespace tnbLib
 			const Standard_Real theLower,
 			const Standard_Real theUpper
 		)
-			: fun(theFunction)
+			: Function(theFunction)
 			, NumAlg_IntegBond(theLower, theUpper)
 			, theResult_(0)
 		{}
