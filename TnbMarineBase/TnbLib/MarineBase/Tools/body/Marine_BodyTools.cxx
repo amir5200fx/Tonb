@@ -15,6 +15,8 @@
 #include <Marine_SectTools.hxx>
 #include <MarineBase_Tools.hxx>
 #include <Marine_Shape.hxx>
+#include <Marine_Models.hxx>
+#include <Marine_Model_SailTools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -87,7 +89,7 @@ tnbLib::Marine_BodyTools::IsDisplacer
 }
 
 Standard_Real 
-tnbLib::Marine_BodyTools::CalcLateralArea
+tnbLib::Marine_BodyTools::CalcLateralProjArea
 (
 	const std::shared_ptr<Marine_Body>& theBody,
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
@@ -99,7 +101,7 @@ tnbLib::Marine_BodyTools::CalcLateralArea
 			<< "the body is null" << endl
 			<< abort(FatalError);
 	}
-	auto areaQ = MarineBase_Tools::CalcLateralArea(theBody->Sections());
+	auto areaQ = MarineBase_Tools::CalcLateralProjArea(theBody->Sections());
 	auto area = MarineBase_Tools::CalcArea(areaQ, theInfo);
 	return area;
 }
@@ -542,13 +544,145 @@ tnbLib::Marine_BodyTools::DryBody
 }
 
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 
-tnbLib::Marine_BodyTools::RetrieveLateralArea
+tnbLib::Marine_BodyTools::RetrieveLateralProjArea
 (
 	const std::shared_ptr<Marine_Body>& theBody
 )
 {
-	auto tri = MarineBase_Tools::RetrieveLateralArea(theBody->Sections());
+	auto tri = MarineBase_Tools::RetrieveLateralProjArea(theBody->Sections());
 	return std::move(tri);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation>
+tnbLib::Marine_BodyTools::RetrieveLateralProjArea
+(
+	const std::shared_ptr<marineLib::Model_Sail>& theModel
+)
+{
+	switch (theModel->SailType())
+	{
+	case Marine_SailModelType::constant_area:
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no geometrical representation for a constant area sail is available!" << endl
+			<< abort(FatalError);
+		break;
+	}
+	case Marine_SailModelType::lateral_plane:
+	{
+		auto plane = std::dynamic_pointer_cast<marineLib::Model_LateralPlnSail>(theModel);
+		Debug_Null_Pointer(plane);
+
+		if (NOT plane->HasTriangulation())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the plane sail has no triangulation!" << endl
+				<< abort(FatalError);
+		}
+		auto tri = plane->Triangulation();
+		return std::move(tri);
+		break;
+	}
+	case Marine_SailModelType::profile_area:
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no geometrical representation for a profile area sail is available!" << endl
+			<< abort(FatalError);
+		break;
+	}
+	case Marine_SailModelType::shape:
+	{
+		auto shape = std::dynamic_pointer_cast<marineLib::Model_ShapeSail>(theModel);
+		Debug_Null_Pointer(shape);
+
+		const auto& body = shape->Body();
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the model hull has no body!" << endl
+				<< abort(FatalError);
+		}
+
+		auto tri = RetrieveLateralProjArea(body);
+		return std::move(tri);
+		break;
+	}
+	case Marine_SailModelType::surface:
+	{
+		auto surf = std::dynamic_pointer_cast<marineLib::Model_SurfaceSail>(theModel);
+		Debug_Null_Pointer(surf);
+
+		auto tri = Marine_Model_SailTools::LateralProjArea(surf);
+		return std::move(tri);
+		break;
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "unexpected type of the sail has been detected!" << endl
+			<< abort(FatalError);
+		break;
+	}
+	return nullptr;
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation>
+tnbLib::Marine_BodyTools::RetrieveLateralProjArea
+(
+	const std::shared_ptr<Marine_Model>& theModel
+)
+{
+	switch (theModel->Type())
+	{
+	case Marine_ModelType::hull:
+	{
+		auto hull = std::dynamic_pointer_cast<marineLib::Model_Hull>(theModel);
+		Debug_Null_Pointer(hull);
+
+		const auto& body = hull->Body();
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the model hull has no body!" << endl
+				<< abort(FatalError);
+		}
+
+		auto tri = RetrieveLateralProjArea(body);
+		return std::move(tri);
+		break;
+	}
+	case Marine_ModelType::sail:
+	{
+		auto sail = std::dynamic_pointer_cast<marineLib::Model_Sail>(theModel);
+		Debug_Null_Pointer(sail);
+
+		auto tri = RetrieveLateralProjArea(sail);
+		return std::move(tri);
+		break;
+	}
+	case Marine_ModelType::tank:
+	{
+		auto tank = std::dynamic_pointer_cast<marineLib::Model_Tank>(theModel);
+		Debug_Null_Pointer(tank);
+
+		const auto& body = tank->Body();
+		if (NOT body)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the model tank has no body!" << endl
+				<< abort(FatalError);
+		}
+
+		auto tri = RetrieveLateralProjArea(body);
+		return std::move(tri);
+		break;
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< " unexpected type of the model has been detected!" << endl
+			<< abort(FatalError);
+		break;
+	}
+	return nullptr;
 }
 
 namespace tnbLib

@@ -6,6 +6,7 @@
 #include <Marine_SectionsFwd.hxx>
 #include <Marine_BodiesFwd.hxx>
 #include <Marine_BodyType.hxx>
+#include <Marine_SailModelsFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Marine_Module.hxx>
@@ -25,6 +26,7 @@ namespace tnbLib
 	class Marine_WaterDomain;
 	class Marine_CmpSection;
 	class Marine_Shape;
+	class Marine_Model;
 	class NumAlg_AdaptiveInteg_Info;
 
 	class Marine_BodyTools
@@ -45,7 +47,7 @@ namespace tnbLib
 		static TnbMarine_EXPORT Standard_Boolean IsDisplacer(const Marine_Body& theBody);
 
 		static TnbMarine_EXPORT Standard_Real
-			CalcLateralArea
+			CalcLateralProjArea
 			(
 				const std::shared_ptr<Marine_Body>& theBody,
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
@@ -126,9 +128,21 @@ namespace tnbLib
 			);
 
 		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation>
-			RetrieveLateralArea
+			RetrieveLateralProjArea
 			(
 				const std::shared_ptr<Marine_Body>& theBody
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation>
+			RetrieveLateralProjArea
+			(
+				const std::shared_ptr<Marine_Model>& theModel
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			RetrieveLateralProjArea
+			(
+				const std::shared_ptr<marineLib::Model_Sail>& theSail
 			);
 
 		static TnbMarine_EXPORT void 

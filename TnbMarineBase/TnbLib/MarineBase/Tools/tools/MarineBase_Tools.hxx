@@ -130,7 +130,7 @@ namespace tnbLib
 			);
 
 		static TnbMarine_EXPORT Geo_Interval<Standard_Real> 
-			CalcLateralArea
+			CalcLateralProjArea
 			(
 				const std::shared_ptr<Marine_Section>&
 			);
@@ -143,13 +143,13 @@ namespace tnbLib
 
 		//- the first and the second values are area and zBar, respectively
 		static TnbMarine_EXPORT std::pair<Standard_Real, Standard_Real>
-			CalcLateralArea
+			CalcLateralProjArea
 			(
 				const std::shared_ptr<Marine_CmpSection>&
 			);
 
 		static TnbMarine_EXPORT std::vector<marineLib::xSectionParam> 
-			CalcLateralArea
+			CalcLateralProjArea
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			);
@@ -679,14 +679,14 @@ namespace tnbLib
 			);
 
 		static TnbMarine_EXPORT std::vector<Entity2d_Box> 
-			RetrieveLateralArea
+			RetrieveLateralProjArea
 			(
 				const std::shared_ptr<Marine_CmpSection>& theSection, 
 				const Standard_Real dx
 			);
 
 		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation> 
-			RetrieveLateralArea
+			RetrieveLateralProjArea
 			(
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			);

@@ -321,7 +321,7 @@ tnbLib::MarineBase_Tools::CalcDx
 }
 
 tnbLib::Geo_Interval<Standard_Real> 
-tnbLib::MarineBase_Tools::CalcLateralArea
+tnbLib::MarineBase_Tools::CalcLateralProjArea
 (
 	const std::shared_ptr<Marine_Section>& theSection
 )
@@ -349,7 +349,7 @@ tnbLib::MarineBase_Tools::CalcLateralAreaIntervals
 	for (const auto& x : theSection->Sections())
 	{
 		Debug_Null_Pointer(x);
-		auto interval = CalcLateralArea(x);
+		auto interval = CalcLateralProjArea(x);
 		intervals.push_back(std::move(interval));
 	}
 
@@ -369,7 +369,7 @@ tnbLib::MarineBase_Tools::CalcLateralAreaIntervals
 }
 
 std::pair<Standard_Real, Standard_Real>
-tnbLib::MarineBase_Tools::CalcLateralArea
+tnbLib::MarineBase_Tools::CalcLateralProjArea
 (
 	const std::shared_ptr<Marine_CmpSection>& theSection
 )
@@ -400,7 +400,7 @@ tnbLib::MarineBase_Tools::CalcLateralArea
 }
 
 std::vector<tnbLib::marineLib::xSectionParam> 
-tnbLib::MarineBase_Tools::CalcLateralArea
+tnbLib::MarineBase_Tools::CalcLateralProjArea
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 )
@@ -411,7 +411,7 @@ tnbLib::MarineBase_Tools::CalcLateralArea
 	for (const auto& x : theSections)
 	{
 		Debug_Null_Pointer(x);
-		auto area = CalcLateralArea(x);
+		auto area = CalcLateralProjArea(x);
 
 		marineLib::xSectionParam p{ x->X(),area.first };
 		Qs.push_back(std::move(p));
@@ -432,7 +432,7 @@ tnbLib::MarineBase_Tools::CalcLateralZbar
 	for (const auto& x : theSections)
 	{
 		Debug_Null_Pointer(x);
-		auto interval = CalcLateralArea(x);
+		auto interval = CalcLateralProjArea(x);
 		auto zBar = interval.second - z0;
 
 		marineLib::xSectionParam p{ x->X(),zBar };
@@ -2775,7 +2775,7 @@ tnbLib::MarineBase_Tools::RetrieveBox
 }
 
 std::vector<tnbLib::Entity2d_Box>
-tnbLib::MarineBase_Tools::RetrieveLateralArea
+tnbLib::MarineBase_Tools::RetrieveLateralProjArea
 (
 	const std::shared_ptr<Marine_CmpSection>& theSection, 
 	const Standard_Real dx
@@ -2797,7 +2797,7 @@ tnbLib::MarineBase_Tools::RetrieveLateralArea
 }
 
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 
-tnbLib::MarineBase_Tools::RetrieveLateralArea
+tnbLib::MarineBase_Tools::RetrieveLateralProjArea
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 )
@@ -2818,7 +2818,7 @@ tnbLib::MarineBase_Tools::RetrieveLateralArea
 
 	for (size_t i = 0; i < theSections.size() - 1; i++)
 	{
-		auto boxes = RetrieveLateralArea(theSections[i], dx[i]);
+		auto boxes = RetrieveLateralProjArea(theSections[i], dx[i]);
 		for (const auto& x : boxes)
 		{
 			auto t = Geo_BoxTools::Triangulate(x);
