@@ -1209,18 +1209,15 @@ tnbLib::Marine_SectTools::CurveCreator
 	return std::move(curves);
 }
 
-std::vector<std::shared_ptr<tnbLib::Marine_Section>>
+std::vector<std::shared_ptr<tnbLib::Marine_Section>> 
 tnbLib::Marine_SectTools::SectionCreator
 (
-	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
-	const gp_Ax2 & theSystem,
-	const Marine_SectionType & t,
-	const Standard_Real theMinTol,
-	const Standard_Real theMaxTol
+	const std::vector<std::shared_ptr<Pln_Wire>>& theWires, 
+	const gp_Ax2 & theSystem, 
+	const Marine_SectionType & t
 )
 {
-	auto wires = Pln_Tools::RetrieveWires(theCurves, theMinTol, theMaxTol);
-
+	auto wires = theWires;
 	Pln_Tools::SortWires(wires);
 
 	Standard_Integer K = 0;
@@ -1293,6 +1290,22 @@ tnbLib::Marine_SectTools::SectionCreator
 			sections.push_back(std::move(section));*/
 		}
 	}
+	return std::move(sections);
+}
+
+std::vector<std::shared_ptr<tnbLib::Marine_Section>>
+tnbLib::Marine_SectTools::SectionCreator
+(
+	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+	const gp_Ax2 & theSystem,
+	const Marine_SectionType & t,
+	const Standard_Real theMinTol,
+	const Standard_Real theMaxTol
+)
+{
+	auto wires = Pln_Tools::RetrieveWires(theCurves, theMinTol, theMaxTol);
+
+	auto sections = Marine_SectTools::SectionCreator(wires, theSystem, t);
 	return std::move(sections);
 }
 

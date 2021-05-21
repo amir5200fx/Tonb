@@ -161,6 +161,14 @@ namespace tnbLib
 				const Marine_SectionType& t
 			);
 
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>> 
+			SectionCreator
+			(
+				const std::vector<std::shared_ptr<Pln_Wire>>& theWires, 
+				const gp_Ax2& theSystem, 
+				const Marine_SectionType& t
+			);
+
 		static TnbMarine_EXPORT std::vector<std::shared_ptr<Marine_Section>>
 			SectionCreator
 			(
