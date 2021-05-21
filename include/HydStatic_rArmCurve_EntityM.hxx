@@ -20,6 +20,8 @@
 		TNB_SERIALIZATION(TnbHydStatic_EXPORT);																													\
 																																								\
 																																								\
+		/*default constructor*/																																	\
+		CLASS_NAME() {}																																			\
 																																								\
 	public:																																						\
 																																								\

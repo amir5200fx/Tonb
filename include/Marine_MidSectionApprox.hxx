@@ -26,8 +26,16 @@ namespace tnbLib
 
 	protected:
 
+
+		//- default constructor
+
 		Marine_MidSectionApprox()
 		{}
+
+
+		//- constructors
+
+		//- protected functions and operators
 
 		auto& SectionRef()
 		{
@@ -35,6 +43,9 @@ namespace tnbLib
 		}
 
 	public:
+
+
+		//- public functions and operators
 
 		const auto& Section() const
 		{

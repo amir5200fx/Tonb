@@ -109,7 +109,16 @@ namespace tnbLib
 				theAuCurve_ = theCurve;
 			}
 
+
+			//- default constructor
+
+			rArmCurve_Eff()
+			{}
+
 		public:
+
+
+			//- constructors
 
 			rArmCurve_Eff
 			(
@@ -135,7 +144,8 @@ namespace tnbLib
 				: HydStatic_rArmCurve(theIndex, theName, theCurve)
 			{}
 
-		public:
+
+			//- public functions and operators
 
 			Standard_Boolean HasAuCurve() const
 			{
@@ -224,7 +234,7 @@ namespace tnbLib
 
 			
 
-			std::shared_ptr<HydStatic_rArmCurve>
+			TnbHydStatic_EXPORT std::shared_ptr<HydStatic_rArmCurve>
 				ExpandToPort() const override;
 		};
 	}
