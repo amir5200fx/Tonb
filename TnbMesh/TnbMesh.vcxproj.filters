@@ -913,6 +913,45 @@
     <Filter Include="TnbLib\Aft\Data\AnIso\2d">
       <UniqueIdentifier>{f3eaa9db-e51b-4172-ab6c-01bedc72ce60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\SolutionData">
+      <UniqueIdentifier>{786f527b-3d24-46f9-b81c-ed28ccd1c7eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl">
+      <UniqueIdentifier>{cf457b01-2f55-4f85-9cf5-0c12dc387c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Boundary">
+      <UniqueIdentifier>{df79442b-d20e-4e57-a0dc-4e6e61b1c480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Feature">
+      <UniqueIdentifier>{0ce6c4be-0716-4879-b5fd-40bb9a4be676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Volumetric">
+      <UniqueIdentifier>{e1ec626e-a885-456e-b1ba-76b3d965bd6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Boundary\2d">
+      <UniqueIdentifier>{4d6c8aab-efd2-47ae-8ac0-69c7e1532d59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\2d">
+      <UniqueIdentifier>{b9500375-50a6-4712-8753-b62dca99494a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\3d">
+      <UniqueIdentifier>{64686159-5447-42e8-89ba-028e44fce549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\traits">
+      <UniqueIdentifier>{0a1516d1-74b3-4f4a-b5de-d8d7fdec32f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Region">
+      <UniqueIdentifier>{e83ae267-1063-41b4-841d-236458ff2199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Region\traits">
+      <UniqueIdentifier>{b1d986a7-eba6-49a8-9a8c-9512a579ab8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Domain">
+      <UniqueIdentifier>{7a59290e-c89e-4384-a0e0-ffe5a28b1dba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\TopoData">
+      <UniqueIdentifier>{7c866906-ed3f-4917-9bcd-c61b501bc9d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -2079,6 +2118,54 @@
     <ClInclude Include="TnbLib\Aft\Data\AnIso\2d\Aft2d_GlobalDataAnIsoFwd.hxx">
       <Filter>TnbLib\Aft\Data\AnIso\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\SolutionData\Mesh2d_SolutionData.hxx">
+      <Filter>TnbLib\Base\SolutionData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Mesh_SizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\traits\Mesh_SizeMapControl_Traits.hxx">
+      <Filter>TnbLib\SizeMapControl\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Mesh_SizeMapControlI.hxx">
+      <Filter>TnbLib\SizeMapControl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\2d\Mesh2d_SizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\2d\Mesh2d_SizeMapControlFwd.hxx">
+      <Filter>TnbLib\SizeMapControl\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Boundary\Mesh_BoundarySizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Boundary\2d\Mesh2d_BoundarySizeMapControlFwd.hxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Boundary\2d\Mesh2d_BoundarySizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Feature\Mesh_FeatureSizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Feature</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Volumetric\Mesh_VolumetricSizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Volumetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Region\Mesh_Region.hxx">
+      <Filter>TnbLib\Region</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Region\Mesh_RegionI.hxx">
+      <Filter>TnbLib\Region</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Domain\Mesh_Domain.hxx">
+      <Filter>TnbLib\Domain</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\TopoData\Aft_TopoGlobalData.hxx">
+      <Filter>TnbLib\Aft\TopoData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\TopoData\Aft_TopoGlobalDataI.hxx">
+      <Filter>TnbLib\Aft\TopoData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -2386,6 +2473,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Data\AnIso\2d\Aft2d_GlobalDataAnIsoIO.cxx">
       <Filter>TnbLib\Aft\Data\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Mesh2d_SizeMapToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\BoundarySizeMap2d_CornerToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Mesh_SizeMapControl.cxx">
+      <Filter>TnbLib\SizeMapControl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\2d\Mesh2d_SizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Region\Mesh_Region.cxx">
+      <Filter>TnbLib\Region</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

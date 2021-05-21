@@ -2,6 +2,7 @@
 #ifndef _Mesh2d_SizeMapTool_Header
 #define _Mesh2d_SizeMapTool_Header
 
+#include <Global_Done.hxx>
 #include <Mesh_SizeMapToolBase.hxx>
 #include <GeoMesh2d_BackgroundFwd.hxx>
 
@@ -15,12 +16,17 @@ namespace tnbLib
 
 	class Mesh2d_SizeMapTool
 		: public Mesh_SizeMapToolBase<GeoMesh2d_Background>
+		, public Global_Done
 	{
 
 		/*Private Data*/
 
 		std::shared_ptr<Cad2d_Plane> thePlane_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
 	protected:
 
@@ -41,6 +47,9 @@ namespace tnbLib
 		{}
 
 
+		virtual ~Mesh2d_SizeMapTool()
+		{}
+
 	public:
 
 
@@ -49,6 +58,30 @@ namespace tnbLib
 			return thePlane_;
 		}
 	};
+}
+
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Mesh2d_SizeMapTool);
+
+
+namespace tnbLib
+{
+
+	template<>
+	template<>
+	void Mesh_SizeMapToolBase<GeoMesh2d_Background>::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar, 
+			const unsigned int /*file_version*/
+			);
+
+	template<>
+	template<>
+	void Mesh_SizeMapToolBase<GeoMesh2d_Background>::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar,
+			const unsigned int /*file_version*/
+			);
 }
 
 #endif // !_Mesh2d_SizeMapTool_Header

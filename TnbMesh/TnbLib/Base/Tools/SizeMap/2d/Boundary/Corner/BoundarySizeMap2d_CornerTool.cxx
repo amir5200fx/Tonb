@@ -170,12 +170,17 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 	Standard_Real elemSize, minElemSize, spanAngle;
 	RetrieveValues(elemSize, minElemSize, spanAngle);
 
-	Standard_Real radius;
+	Standard_Real radius = 0;
 	if (MeshConditions().CustomBoundaryGrowthRate()) 
 		radius = ::tnbLib::meshLib::CalcRadius(Mesh_VariationRate::Rate(MeshValues().BoundaryGrowthRate()), elemSize, ReferenceValues()->BaseSize());
 	else
 		radius = ::tnbLib::meshLib::CalcRadius(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()), elemSize, ReferenceValues()->BaseSize());
-
+	if (radius IS_EQUAL 0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid radius value has been detected!" << endl
+			<< abort(FatalError);
+	}
 	std::vector<std::pair<Pnt2d, Standard_Real>> compactItems;
 	{
 		std::vector<std::pair<Pnt2d, Standard_Real>> sources;
@@ -245,5 +250,6 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()));
 	bMesh->HvCorrection(hvInfo);
 
-
+	ChangeBackMesh() = std::move(bMesh);
+	Change_IsDone() = Standard_True;
 }
