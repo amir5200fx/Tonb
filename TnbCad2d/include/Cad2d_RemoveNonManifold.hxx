@@ -283,6 +283,9 @@ namespace tnbLib
 			return theEdges_;
 		}
 
+		TnbCad2d_EXPORT std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> 
+			RetrieveCompundEdges() const;
+
 		TnbCad2d_EXPORT std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>
 			RetrieveRings() const;
 

@@ -636,6 +636,19 @@ tnbLib::Cad2d_RemoveNonManifold::NbRings() const
 }
 
 std::vector<std::shared_ptr<tnbLib::Cad2d_RemoveNonManifold::Segment>> 
+tnbLib::Cad2d_RemoveNonManifold::RetrieveCompundEdges() const
+{
+	std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> segments;
+	segments.reserve(theSegments_.size());
+	for (const auto& x : theSegments_)
+	{
+		Debug_Null_Pointer(x.second);
+		segments.push_back(x.second);
+	}
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::Cad2d_RemoveNonManifold::Segment>> 
 tnbLib::Cad2d_RemoveNonManifold::RetrieveRings() const
 {
 	std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> segments;

@@ -20,6 +20,7 @@
 #include <Cad2d_Modeler_Corner.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Geo_BoxTools.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
 #include <gp_Pln.hxx>
@@ -840,6 +841,23 @@ tnbLib::Pln_Tools::BoundingBox
 	return std::move(b);
 }
 
+tnbLib::Entity2d_Box 
+tnbLib::Pln_Tools::BoundingBox
+(
+	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+)
+{
+	auto iter = theCurves.begin();
+	auto b = (*iter)->BoundingBox(0);
+	iter++;
+	while (iter NOT_EQUAL theCurves.end())
+	{
+		b = Geo_BoxTools::Union(b, (*iter)->BoundingBox(0));
+		iter++;
+	}
+	return std::move(b);
+}
+
 void tnbLib::Pln_Tools::SplitCurve
 (
 	const Handle(Geom2d_Curve)& theCurve,
@@ -1178,8 +1196,8 @@ namespace tnbLib
 		static void MergeVertices
 		(
 			const std::vector<std::shared_ptr<Edge>>& theEdges,
-			const Standard_Real theMinTol,
-			const Standard_Real theMaxTol
+			const Standard_Real theTol,
+			const Standard_Real theRadius
 		)
 		{
 			auto unMergedVertices = 
@@ -1206,7 +1224,7 @@ namespace tnbLib
 
 				std::vector<std::shared_ptr<Vertex>> candidates;
 				search.GeometrySearch
-				(Entity2d_Box(x->Coord - Pnt2d(theMaxTol, theMaxTol), x->Coord + Pnt2d(theMaxTol, theMaxTol)),
+				(Entity2d_Box(x->Coord - Pnt2d(theRadius, theRadius), x->Coord + Pnt2d(theRadius, theRadius)),
 					candidates);
 
 				if (candidates.empty())
@@ -1230,7 +1248,7 @@ namespace tnbLib
 						}
 					}
 
-					if (minDis <= theMinTol)
+					if (minDis <= theTol)
 					{
 						search.RemoveFromGeometry(found);
 
@@ -1478,14 +1496,14 @@ std::vector<std::shared_ptr<tnbLib::Pln_Edge>>
 tnbLib::Pln_Tools::RetrieveMergedEdges
 (
 	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
-	const Standard_Real theMinTol,
-	const Standard_Real theMaxTol
+	const Standard_Real theTol,
+	const Standard_Real theRadius
 )
 {
 	auto segments = retrieveWires::RetrieveUnMergedEdges(theCurves);
 	auto unMergedVertices = retrieveWires::RetrieveUnMergedVerticesFromEdges(segments);
 
-	retrieveWires::MergeVertices(segments, theMinTol, theMaxTol);
+	retrieveWires::MergeVertices(segments, theTol, theRadius);
 
 	auto mergedVerticesMap = retrieveWires::RetrieveMergedVertices(segments);
 
@@ -1552,28 +1570,8 @@ tnbLib::Pln_Tools::RetrieveWire
 	const std::shared_ptr<Pln_Vertex>& theVtx
 )
 {
-	if (theVtx->IsRingPoint())
-	{
-		auto cmpEdge = std::make_shared<Pln_CmpEdge>();
-		Debug_Null_Pointer(cmpEdge);
-
-		std::vector<std::weak_ptr<Pln_Edge>> wEdges;
-		theVtx->RetrieveEdgesTo(wEdges);
-
-		cmpEdge->Insert(wEdges[0].lock());
-
-		auto wire = std::make_shared<Pln_Wire>(cmpEdge);
-		Debug_Null_Pointer(wire);
-
-		return std::move(wire);
-	}
-
-	auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+	auto cmpEdge = RetrieveCompoundEdge(theVtx);
 	Debug_Null_Pointer(cmpEdge);
-
-	cmpEdge->ChangeEdges() = retrieveWires::TrackWire(theVtx);
-
-	SameSense(cmpEdge);
 
 	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
 	Debug_Null_Pointer(wire);
@@ -1585,6 +1583,34 @@ tnbLib::Pln_Tools::RetrieveWire
 	}
 
 	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::Pln_CmpEdge> 
+tnbLib::Pln_Tools::RetrieveCompoundEdge
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx
+)
+{
+	if (theVtx->IsRingPoint())
+	{
+		auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+		Debug_Null_Pointer(cmpEdge);
+
+		std::vector<std::weak_ptr<Pln_Edge>> wEdges;
+		theVtx->RetrieveEdgesTo(wEdges);
+
+		cmpEdge->Insert(wEdges[0].lock());
+
+		return std::move(cmpEdge);
+	}
+
+	auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+	Debug_Null_Pointer(cmpEdge);
+
+	cmpEdge->ChangeEdges() = retrieveWires::TrackWire(theVtx);
+
+	SameSense(cmpEdge);
+	return std::move(cmpEdge);
 }
 
 void tnbLib::Pln_Tools::SameSense

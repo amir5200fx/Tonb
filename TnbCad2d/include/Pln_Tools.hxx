@@ -245,6 +245,12 @@ namespace tnbLib
 				const Standard_Real theU1
 			);
 
+		static TnbCad2d_EXPORT Entity2d_Box 
+			BoundingBox
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves
+			);
+
 		//- an exception will be thrown if the curve is not bounded and the x exceeds the boundary
 		static TnbCad2d_EXPORT void
 			SplitCurve
@@ -301,6 +307,12 @@ namespace tnbLib
 
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Wire>
 			RetrieveWire
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_CmpEdge> 
+			RetrieveCompoundEdge
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx
 			);
