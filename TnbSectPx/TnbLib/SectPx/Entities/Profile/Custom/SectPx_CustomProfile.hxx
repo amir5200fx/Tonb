@@ -18,6 +18,8 @@ namespace tnbLib
 		/*Private Data*/
 
 
+		//- private functions and operators
+
 		friend class boost::serialization::access;
 
 		template<class Archive>
@@ -28,12 +30,18 @@ namespace tnbLib
 
 	protected:
 
+
+		//- default constructor
+
 		SectPx_CustomProfile()
 		{}
 
 	public:
 
 		static TnbSectPx_EXPORT const char* typeName_;
+
+
+		//- constructors
 
 		TnbSectPx_EXPORT SectPx_CustomProfile
 		(
@@ -55,6 +63,9 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Node>& theNode0,
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
+
+
+		//- public functions and operators
 
 		TnbSectPx_EXPORT word RegObjTypeName() const override;
 

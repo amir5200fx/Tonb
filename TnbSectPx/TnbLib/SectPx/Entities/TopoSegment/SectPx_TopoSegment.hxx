@@ -29,8 +29,14 @@ namespace tnbLib
 
 		static TnbSectPx_EXPORT const char* typeName_;
 
+
+		//- default constructor
+
 		SectPx_TopoSegment()
 		{}
+
+
+		//- constructors
 
 		TnbSectPx_EXPORT SectPx_TopoSegment
 		(
@@ -66,6 +72,13 @@ namespace tnbLib
 			std::shared_ptr<SectPx_BndPole>&& thePole1
 		);
 
+
+		//- public functions and operators
+
+		virtual Standard_Boolean IsExtruder() const
+		{
+			return Standard_False;
+		}
 
 		const auto& Pole0() const
 		{

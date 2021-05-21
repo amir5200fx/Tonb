@@ -198,6 +198,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\SectPx\Entities\ProfileQ\SectPx_ProfileQ.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Profile\Approx\SectPx_ApproxProfile.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfile.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfile.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfile.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Profile\SectPx_TopoProfile.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\RegObj\FrameReg\SectPx_FrameRegObj.hxx" />
@@ -211,6 +212,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\SectPx\Entities\Shape\SectPx_Shape.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Spacing\SectPx_Spacing.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Spacing\Uniform\SectPx_UniformSpacing.hxx" />
+    <ClInclude Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_ExtrTopoSegment.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_TopoSegment.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Values\SectPx_Values.hxx" />
     <ClInclude Include="TnbLib\SectPx\Entities\Value\SectPx_Value.hxx" />
@@ -412,6 +414,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Approx\SectPx_ApproxProfile.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfile.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_CustomProfileIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfile.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfileIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfile.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -434,6 +438,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Spacing\SectPx_SpacingIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Spacing\Uniform\SectPx_UniformSpacing.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Spacing\Uniform\SectPx_UniformSpacingIO.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_ExtrTopoSegment.cxx" />
+    <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_ExtrTopoSegmentIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_TopoSegment.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_TopoSegmentIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\cross\SectPx_BinaryOpFieldFun_Cross.cxx" />

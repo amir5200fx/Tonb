@@ -61,6 +61,13 @@ namespace tnbLib
 				);
 
 			TnbSectPx_EXPORT Standard_Integer
+				CreateExtruderCustomProfile
+				(
+					const std::shared_ptr<SectPx_Pnt>& theP0,
+					const std::shared_ptr<SectPx_Pnt>& theP1
+				);
+
+			TnbSectPx_EXPORT Standard_Integer
 				CreateInterplProfile
 				(
 					const std::shared_ptr<SectPx_Cloud>& theCloud

@@ -29,12 +29,20 @@ namespace tnbLib
 		std::shared_ptr<SectPx_KnotVector> theKnotAlg_;
 
 
+		//- private functions and operators
+
 		TNB_SERIALIZATION(TnbSectPx_EXPORT);
 
 	protected:
 
+
+		//- default constructor
+
 		SectPx_TopoProfile()
 		{}
+
+
+		//- constructors
 
 		TnbSectPx_EXPORT SectPx_TopoProfile
 		(
@@ -57,6 +65,9 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
+
+		//- protected functions and operators
+
 		virtual void Update() const
 		{}
 
@@ -68,6 +79,15 @@ namespace tnbLib
 		);
 
 	public:
+
+
+		//- public functions and operators
+
+
+		virtual Standard_Boolean IsExtruder() const
+		{
+			return Standard_False;
+		}
 
 		const auto& Node0() const
 		{

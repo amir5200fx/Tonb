@@ -1,18 +1,14 @@
 #pragma once
-#ifndef _SectPx_CustomProfile_Header
-#define _SectPx_CustomProfile_Header
+#ifndef _SectPx_ExtrCustomProfile_Header
+#define _SectPx_ExtrCustomProfile_Header
 
-#include <SectPx_TopoProfile.hxx>
+#include <SectPx_CustomProfile.hxx>
 
 namespace tnbLib
 {
 
-	// Forward Declarations
-	class SectPx_Pnt;
-	class SectPx_FrameRegistry;
-
-	class SectPx_CustomProfile
-		: public SectPx_TopoProfile
+	class SectPx_ExtrCustomProfile
+		: public SectPx_CustomProfile
 	{
 
 		/*Private Data*/
@@ -25,7 +21,7 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive &ar, const unsigned int file_version)
 		{
-			ar & boost::serialization::base_object<SectPx_TopoProfile>(*this);
+			ar & boost::serialization::base_object<SectPx_CustomProfile>(*this);
 		}
 
 	protected:
@@ -33,30 +29,27 @@ namespace tnbLib
 
 		//- default constructor
 
-		SectPx_CustomProfile()
+		SectPx_ExtrCustomProfile()
 		{}
 
 	public:
 
-		static TnbSectPx_EXPORT const char* typeName_;
-
-
 		//- constructors
 
-		TnbSectPx_EXPORT SectPx_CustomProfile
+		TnbSectPx_EXPORT SectPx_ExtrCustomProfile
 		(
 			const std::shared_ptr<SectPx_Node>& theNode0,
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
-		TnbSectPx_EXPORT SectPx_CustomProfile
+		TnbSectPx_EXPORT SectPx_ExtrCustomProfile
 		(
 			const Standard_Integer theIndex,
 			const std::shared_ptr<SectPx_Node>& theNode0,
 			const std::shared_ptr<SectPx_Node>& theNode1
 		);
 
-		TnbSectPx_EXPORT SectPx_CustomProfile
+		TnbSectPx_EXPORT SectPx_ExtrCustomProfile
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -67,18 +60,22 @@ namespace tnbLib
 
 		//- public functions and operators
 
-		TnbSectPx_EXPORT word RegObjTypeName() const override;
+		Standard_Boolean IsExtruder() const override
+		{
+			return Standard_True;
+		}
 
-		static TnbSectPx_EXPORT std::shared_ptr<SectPx_CustomProfile>
+		static TnbSectPx_EXPORT std::shared_ptr<SectPx_ExtrCustomProfile>
 			MakeProfile
 			(
 				const std::shared_ptr<SectPx_Pnt>& theP0,
 				const std::shared_ptr<SectPx_Pnt>& theP1,
 				const std::shared_ptr<SectPx_FrameRegistry>& theReg
 			);
+
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_CustomProfile);
+BOOST_CLASS_EXPORT_KEY(tnbLib::SectPx_ExtrCustomProfile);
 
-#endif // !_SectPx_CustomProfile_Header
+#endif // !_SectPx_ExtrCustomProfile_Header

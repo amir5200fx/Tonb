@@ -415,9 +415,6 @@
     <Filter Include="TnbLib\SectPx\Entities\TopoSegment">
       <UniqueIdentifier>{d5ffc62a-3141-475a-b733-0d17ad8b9c3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\SectPx\Entities\TopoSegment\Adaptor">
-      <UniqueIdentifier>{94e8765f-4fd9-4095-98d1-0b1d0f246edc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\SectPx\Entities\Extrude\Linear">
       <UniqueIdentifier>{7f840764-c5b9-491d-beee-e8f59822033a}</UniqueIdentifier>
     </Filter>
@@ -1040,6 +1037,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_PoleAdaptor.hxx">
       <Filter>TnbLib\SectPx\Entities\Pole\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_ExtrTopoSegment.hxx">
+      <Filter>TnbLib\SectPx\Entities\TopoSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfile.hxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1747,6 +1750,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Pole\Adaptor\SectPx_PoleAdaptorIO.cxx">
       <Filter>TnbLib\SectPx\Entities\Pole\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_ExtrTopoSegmentIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\TopoSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\TopoSegment\SectPx_ExtrTopoSegment.cxx">
+      <Filter>TnbLib\SectPx\Entities\TopoSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfile.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfileIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

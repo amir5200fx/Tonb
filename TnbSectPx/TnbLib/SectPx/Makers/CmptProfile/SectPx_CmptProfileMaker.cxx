@@ -68,6 +68,35 @@ tnbLib::maker::CmptProfile::CreateCustomProfile
 	return id;
 }
 
+Standard_Integer
+tnbLib::maker::CmptProfile::CreateExtruderCustomProfile
+(
+	const std::shared_ptr<SectPx_Pnt>& theP0,
+	const std::shared_ptr<SectPx_Pnt>& theP1
+)
+{
+	Debug_Null_Pointer(Registry());
+
+	auto tProfileMaker = std::make_shared<TopoProfile>(Registry());
+	Debug_Null_Pointer(tProfileMaker);
+
+	const auto tProfile_id = tProfileMaker->CreateExtruderCustomProfile(theP0, theP1);
+	const auto tProfile = tProfileMaker->SelectProfile(tProfile_id);
+	Debug_Null_Pointer(tProfile);
+
+	auto profileMaker = std::make_shared<Profile>(tProfile, Registry());
+	Debug_Null_Pointer(profileMaker);
+
+	const auto id = Counter().RetrieveIndex();
+	static const auto name = "profile maker";
+
+	profileMaker->SetIndex(id);
+	profileMaker->SetName(name + std::to_string(id));
+
+	AddProfile(id, std::move(profileMaker));
+	return id;
+}
+
 Standard_Integer 
 tnbLib::maker::CmptProfile::CreateInterplProfile
 (

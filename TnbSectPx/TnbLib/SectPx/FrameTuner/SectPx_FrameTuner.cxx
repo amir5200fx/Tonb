@@ -4,6 +4,7 @@
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_ScatterRegistry.hxx>
 #include <SectPx_TopoSegment.hxx>
+#include <SectPx_ExtrTopoSegment.hxx>
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_Frame.hxx>
 #include <SectPx_Pnts.hxx>
@@ -1015,19 +1016,38 @@ void tnbLib::SectPx_FrameTuner::ImportFrame
 		auto bnd1 = std::dynamic_pointer_cast<SectPx_BndPole>(poleObj1);
 		Debug_Null_Pointer(bnd1);
 
-		auto topoSeg = 
-			std::make_shared<SectPx_TopoSegment>(bnd0, bnd1);
-		Debug_Null_Pointer(topoSeg);
+		if (profile->TopoProfile()->IsExtruder())
+		{
+			auto topoSeg =
+				std::make_shared<SectPx_ExtrTopoSegment>(bnd0, bnd1);
+			Debug_Null_Pointer(topoSeg);
 
-		FrameRegistry()->Import(topoSeg);
+			FrameRegistry()->Import(topoSeg);
 
-		//- every boundary pole has to remember the adjacent topo-segment
-		bnd0->SetTopoSegment(topoSeg);
-		bnd1->SetTopoSegment(topoSeg);
+			//- every boundary pole has to remember the adjacent topo-segment
+			bnd0->SetTopoSegment(topoSeg);
+			bnd1->SetTopoSegment(topoSeg);
 
-		//-
-		//- topo-segment has been created and imported into the registry
-		//-
+			//-
+			//- topo-segment has been created and imported into the registry
+			//-
+		}
+		else
+		{
+			auto topoSeg =
+				std::make_shared<SectPx_TopoSegment>(bnd0, bnd1);
+			Debug_Null_Pointer(topoSeg);
+
+			FrameRegistry()->Import(topoSeg);
+
+			//- every boundary pole has to remember the adjacent topo-segment
+			bnd0->SetTopoSegment(topoSeg);
+			bnd1->SetTopoSegment(topoSeg);
+
+			//-
+			//- topo-segment has been created and imported into the registry
+			//-
+		}
 
 		const auto& Q = profileQ->Q();
 		forThose(Index, 0, Q.size() - 2)

@@ -5,6 +5,7 @@
 #include <SectPx_NodeMaker.hxx>
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_CustomProfile.hxx>
+#include <SectPx_ExtrCustomProfile.hxx>
 #include <SectPx_InterplProfile.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -41,6 +42,26 @@ tnbLib::maker::TopoProfile::CreateCustomProfile
 {
 	auto profile =
 		SectPx_CustomProfile::MakeProfile
+		(
+			theP0,
+			theP1,
+			Registry()
+		);
+	Debug_Null_Pointer(profile);
+
+	Debug_Null_Pointer(Registry());
+	return Registry()->Import(std::move(profile));
+}
+
+Standard_Integer
+tnbLib::maker::TopoProfile::CreateExtruderCustomProfile
+(
+	const std::shared_ptr<SectPx_Pnt>& theP0,
+	const std::shared_ptr<SectPx_Pnt>& theP1
+)
+{
+	auto profile =
+		SectPx_ExtrCustomProfile::MakeProfile
 		(
 			theP0,
 			theP1,
