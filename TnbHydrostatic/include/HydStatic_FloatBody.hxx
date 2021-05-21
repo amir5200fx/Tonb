@@ -33,25 +33,25 @@ namespace tnbLib
 
 		//- constructors
 
-		HydStatic_FloatBody
+		TnbHydStatic_EXPORT HydStatic_FloatBody
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
 		);
 
-		HydStatic_FloatBody
+		TnbHydStatic_EXPORT HydStatic_FloatBody
 		(
 			const std::shared_ptr<marineLib::Body_Dry>& theDry,
 			const std::shared_ptr<marineLib::Body_Wetted>& theWetted
 		);
 
-		HydStatic_FloatBody
+		TnbHydStatic_EXPORT HydStatic_FloatBody
 		(
 			std::shared_ptr<marineLib::Body_Dry>&& theDry,
 			std::shared_ptr<marineLib::Body_Wetted>&& theWetted
 		);
 
-		HydStatic_FloatBody
+		TnbHydStatic_EXPORT HydStatic_FloatBody
 		(
 			const Standard_Integer theIndex,
 			const word& theName, 
@@ -59,7 +59,7 @@ namespace tnbLib
 			const std::shared_ptr<marineLib::Body_Wetted>& theWetted
 		);
 
-		HydStatic_FloatBody
+		TnbHydStatic_EXPORT HydStatic_FloatBody
 		(
 			const Standard_Integer theIndex, 
 			const word& theName,

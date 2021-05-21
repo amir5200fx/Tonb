@@ -343,6 +343,18 @@
     <Filter Include="TnbLib\Hydrostatic\SolutionData\GzEff">
       <UniqueIdentifier>{5a08c5e1-6aba-4bba-b7c7-376425d433ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\ModelShape">
+      <UniqueIdentifier>{fde83a37-3f04-42f2-9abf-a85113a5c1c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\SolutionData\HullData">
+      <UniqueIdentifier>{5474ab72-ebd2-47f5-ba27-c325d87c13cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\SolutionData\HullData\Coeffs">
+      <UniqueIdentifier>{6b211ca7-7f26-406a-9b67-b02b611cf839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams">
+      <UniqueIdentifier>{4546e183-0956-4ead-a6bd-f0f26ea4f0eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -714,6 +726,21 @@
     <ClInclude Include="TnbLib\Hydrostatic\SolutionData\GzEff\HydStatic_SolutionData_GzEff.hxx">
       <Filter>TnbLib\Hydrostatic\SolutionData\GzEff</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\ModelShape\HydStatic_ModelShape.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ModelShape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\SolutionData\HullData\Coeffs\HydStatic_SolutionData_Coeffs.hxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Coeffs</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_Bonjean.hxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_GZ.hxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_HydCurves.hxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.cxx">
@@ -1084,6 +1111,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\SolutionData\GzEff\HydStatic_SolutionData_GzEffIO.cxx">
       <Filter>TnbLib\Hydrostatic\SolutionData\GzEff</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ModelShape\HydStatic_ModelShape.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ModelShape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\ModelShape\HydStatic_ModelShapeIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\ModelShape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Coeffs\HydStatic_SolutionData_Coeffs.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Coeffs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Coeffs\HydStatic_SolutionData_CoeffsIO.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Coeffs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_Bonjean.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_BonjeanIO.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_GZ.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_GZIO.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_HydCurves.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_HydCurvesIO.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
