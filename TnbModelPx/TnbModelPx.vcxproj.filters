@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{6c09d6ab-78c7-4d3f-a3f5-60be400ec14d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx">
+      <UniqueIdentifier>{8b944bac-4e74-4697-b5ab-6b02cc286d2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities">
+      <UniqueIdentifier>{a1fe045b-2402-4215-bb14-9cfb1a46a868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Entity">
+      <UniqueIdentifier>{6c3de0fa-d4a9-4f6b-8906-f92a2164740e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Propeller">
+      <UniqueIdentifier>{aefabf9a-e8c2-40f9-aca0-6ba0b3291dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Duct">
+      <UniqueIdentifier>{562ec9dc-cfe5-43f4-807b-6c9cc81b4ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Vessel">
+      <UniqueIdentifier>{6b87d6de-2671-4d9e-bde6-8b31616ddc25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Type">
+      <UniqueIdentifier>{6680a5f5-579b-49c2-beba-6ec4ca317fac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Module">
+      <UniqueIdentifier>{006702d7-9253-4d88-b42a-33760f509a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Vessel">
+      <UniqueIdentifier>{6d5c1589-e641-4d5c-ac55-a252aed47963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Vessel\DisplNo1">
+      <UniqueIdentifier>{ea1e19a2-6ec1-4fe8-97bc-bc37f1e16b09}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\ModelPx\Entities\Entity\ModelPx_Entity.hxx">
+      <Filter>TnbLib\ModelPx\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ModelPx\Entities\Vessel\ModelPx_Vessel.hxx">
+      <Filter>TnbLib\ModelPx\Entities\Vessel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ModelPx\Entities\Type\ModelPx_Type.hxx">
+      <Filter>TnbLib\ModelPx\Entities\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ModelPx\Module\ModelPx_Module.hxx">
+      <Filter>TnbLib\ModelPx\Module</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\ModelPx\Entities\Entity\ModelPx_Entity.cxx">
+      <Filter>TnbLib\ModelPx\Entities\Entity</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
