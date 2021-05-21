@@ -280,6 +280,9 @@
     <Filter Include="TnbLib\Cad\Repair\OpenCascade\Wire">
       <UniqueIdentifier>{2091c755-73e2-4f03-a220-243b2d5dfced}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\ShapeSection">
+      <UniqueIdentifier>{a5e74083-f72f-4386-8f92-f93121fb2af4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -557,6 +560,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Repair\OpenCascade\Edge\Cad_OpenCascadeRepair_Edge.hxx">
       <Filter>TnbLib\Cad\Repair\OpenCascade\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ShapeSection\Cad_ShapeSection.hxx">
+      <Filter>TnbLib\Cad\ShapeSection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -844,6 +850,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Repair\OpenCascade\Edge\Cad_OpenCascadeRepair_Edge.cxx">
       <Filter>TnbLib\Cad\Repair\OpenCascade\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ShapeSection\Cad_ShapeSection.cxx">
+      <Filter>TnbLib\Cad\ShapeSection</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
