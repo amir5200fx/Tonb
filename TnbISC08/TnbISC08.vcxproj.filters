@@ -82,6 +82,18 @@
     <Filter Include="TnbLib\ISC08\Parameter\FloodAngle">
       <UniqueIdentifier>{79c750f5-9d69-4ae3-bbaa-35bde97b1ea3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ISC08\Model\Tools">
+      <UniqueIdentifier>{08fd51e1-27cf-4c76-9e58-2d58e295fd2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\SolutionData">
+      <UniqueIdentifier>{443d8247-2adc-488c-b26c-60e336c499cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\SolutionData\Passenger">
+      <UniqueIdentifier>{5b133f0f-7f48-49c1-a64a-d6db5287baac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ISC08\GeomModel">
+      <UniqueIdentifier>{f0fdb376-5f01-436c-9320-d60ddb904f2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.hxx">
@@ -147,6 +159,15 @@
     <ClInclude Include="TnbLib\ISC08\Parameter\FloodAngle\ISC08_Parameter_FloodAngle.hxx">
       <Filter>TnbLib\ISC08\Parameter\FloodAngle</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\Model\Tools\ISC08_ModelTools.hxx">
+      <Filter>TnbLib\ISC08\Model\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_Passenger.hxx">
+      <Filter>TnbLib\ISC08\SolutionData\Passenger</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_PassengerFwd.hxx">
+      <Filter>TnbLib\ISC08\SolutionData\Passenger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.cxx">
@@ -172,6 +193,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ISC08\Model\ISC08_Model.cxx">
       <Filter>TnbLib\ISC08\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\Model\Tools\ISC08_ModelTools.cxx">
+      <Filter>TnbLib\ISC08\Model\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_Passenger.cxx">
+      <Filter>TnbLib\ISC08\SolutionData\Passenger</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_PassengerIO.cxx">
+      <Filter>TnbLib\ISC08\SolutionData\Passenger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

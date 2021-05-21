@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\Model;$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\FloodAngle;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(ProjectDir)TnbLib\ISC08\module;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\SolutionData\Passenger;$(ProjectDir)TnbLib\ISC08\Model\Tools;$(ProjectDir)TnbLib\ISC08\Model;$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\FloodAngle;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(ProjectDir)TnbLib\ISC08\module;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbStbGMaker\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CGAL_HEADER_ONLY;TnbISC08_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -135,7 +135,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\Model;$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\FloodAngle;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(ProjectDir)TnbLib\ISC08\module;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\ISC08\SolutionData\Passenger;$(ProjectDir)TnbLib\ISC08\Model\Tools;$(ProjectDir)TnbLib\ISC08\Model;$(ProjectDir)TnbLib\ISC08\CmptLib;$(ProjectDir)TnbLib\ISC08\Parameter\FloodAngle;$(ProjectDir)TnbLib\ISC08\Parameter\Ak;$(ProjectDir)TnbLib\ISC08\Parameter\Phi;$(ProjectDir)TnbLib\ISC08\Parameter\T;$(ProjectDir)TnbLib\ISC08\Parameter\P;$(ProjectDir)TnbLib\ISC08\Parameter\g;$(ProjectDir)TnbLib\ISC08\Parameter\Z;$(ProjectDir)TnbLib\ISC08\Parameter\A;$(ProjectDir)TnbLib\ISC08\Parameter\Lw;$(ProjectDir)TnbLib\ISC08\Parameter;$(ProjectDir)TnbLib\ISC08\Factor;$(ProjectDir)TnbLib\ISC08\Table;$(ProjectDir)TnbLib\ISC08\Tools;$(ProjectDir)TnbLib\ISC08\General\Criteria\GustWind;$(ProjectDir)TnbLib\ISC08\General\Criteria\RightLever;$(ProjectDir)TnbLib\ISC08\module;$(SolutionDir)TnbHydrostatic\include;$(SolutionDir)TnbMarineBase\include;$(SolutionDir)TnbStbGMaker\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CGAL_HEADER_ONLY;TnbISC08_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -154,6 +154,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.hxx" />
     <ClInclude Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.hxx" />
     <ClInclude Include="TnbLib\ISC08\Model\ISC08_Model.hxx" />
+    <ClInclude Include="TnbLib\ISC08\Model\Tools\ISC08_ModelTools.hxx" />
     <ClInclude Include="TnbLib\ISC08\module\ISC08_Module.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\Ak\ISC08_Parameter_Ak.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\A\ISC08_Parameter_A.hxx" />
@@ -167,6 +168,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\ISC08\Parameter\P\ISC08_Parameter_P.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\T\ISC08_Parameter_T.hxx" />
     <ClInclude Include="TnbLib\ISC08\Parameter\Z\ISC08_Parameter_Z.hxx" />
+    <ClInclude Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_Passenger.hxx" />
+    <ClInclude Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_PassengerFwd.hxx" />
     <ClInclude Include="TnbLib\ISC08\Table\ISC08_Table.hxx" />
     <ClInclude Include="TnbLib\ISC08\Table\ISC08_Tables.hxx" />
     <ClInclude Include="TnbLib\ISC08\Tools\ISC08_Tools.hxx" />
@@ -177,7 +180,10 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\ISC08\General\Criteria\GustWind\ISC08_GustWind.cxx" />
     <ClCompile Include="TnbLib\ISC08\General\Criteria\RightLever\ISC08_RightLevCrit.cxx" />
     <ClCompile Include="TnbLib\ISC08\Model\ISC08_Model.cxx" />
+    <ClCompile Include="TnbLib\ISC08\Model\Tools\ISC08_ModelTools.cxx" />
     <ClCompile Include="TnbLib\ISC08\Parameter\ISC08_Parameter.cxx" />
+    <ClCompile Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_Passenger.cxx" />
+    <ClCompile Include="TnbLib\ISC08\SolutionData\Passenger\ISC08_SolutionData_PassengerIO.cxx" />
     <ClCompile Include="TnbLib\ISC08\Table\ISC08_Table.cxx" />
     <ClCompile Include="TnbLib\ISC08\Tools\ISC08_Tools.cxx" />
   </ItemGroup>
@@ -193,6 +199,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     </ProjectReference>
     <ProjectReference Include="..\TnbMarineBase\TnbMarineBase.vcxproj">
       <Project>{e15d4b29-deef-4205-8790-f4ca3d77f53a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbStbGMaker\TnbStbGMaker.vcxproj">
+      <Project>{ceb10e49-a65f-43a7-bfb4-cb99c6d2f3f8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
