@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{59D7DBDF-FECF-4B61-93FC-3C97C7B4467E}</ProjectGuid>
-    <RootNamespace>GzEff</RootNamespace>
+    <ProjectGuid>{BC988294-081D-42AE-8EA6-A5EAA67CD4E2}</ProjectGuid>
+    <RootNamespace>flat</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,13 +70,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\marine\solutionData\GzEff\</OutDir>
-    <TargetName>$(ProjectName)d</TargetName>
+    <OutDir>$(SolutionDir)bin\marine\hydrostatic\hullData\coefficients\wave\flat\</OutDir>
+    <TargetName>hullDataFlatWaved</TargetName>
     <IncludePath>$(ARMADILLO_INCLUDEDIR);$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\marine\solutionData\GzEff\</OutDir>
+    <OutDir>$(SolutionDir)bin\marine\hydrostatic\hullData\coefficients\wave\flat\</OutDir>
+    <TargetName>hullDataFlatWave</TargetName>
     <IncludePath>$(ARMADILLO_INCLUDEDIR);$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -141,17 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GzEff.cxx" />
+    <ClCompile Include="flat.cxx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\TnbHydrostatic\TnbHydrostatic.vcxproj">
+    <ProjectReference Include="..\..\..\..\..\..\..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\..\TnbHydrostatic\TnbHydrostatic.vcxproj">
       <Project>{33976535-7c9d-4d56-ad80-699694bf4492}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\TnbISC08\TnbISC08.vcxproj">
-      <Project>{eb6b172d-7eaf-4816-a430-e793f9bb51bf}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\TnbStbGMaker\TnbStbGMaker.vcxproj">
-      <Project>{ceb10e49-a65f-43a7-bfb4-cb99c6d2f3f8}</Project>
+    <ProjectReference Include="..\..\..\..\..\..\..\TnbMarineBase\TnbMarineBase.vcxproj">
+      <Project>{e15d4b29-deef-4205-8790-f4ca3d77f53a}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
