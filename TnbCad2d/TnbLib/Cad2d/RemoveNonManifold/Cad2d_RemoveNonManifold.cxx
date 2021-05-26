@@ -5,6 +5,7 @@
 #include <Pln_Edge.hxx>
 #include <Pln_Ring.hxx>
 #include <Pln_CmpEdge.hxx>
+#include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -235,24 +236,6 @@ void tnbLib::Cad2d_RemoveNonManifold::Ring::CheckRing()
 
 void tnbLib::Cad2d_RemoveNonManifold::Import
 (
-	std::shared_ptr<Node>&& theNode
-)
-{
-	auto& nodes = NodesRef();
-	
-	auto paired = std::make_pair(theNode->Index(), std::move(theNode));
-	auto insert = nodes.insert(std::move(paired));
-	if (NOT insert.second)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "duplicate data" << endl
-			<< " - index = " << theNode->Index() << endl
-			<< abort(FatalError);
-	}
-}
-
-void tnbLib::Cad2d_RemoveNonManifold::Import
-(
 	std::shared_ptr<Segment>&& theSegment
 )
 {
@@ -269,23 +252,51 @@ void tnbLib::Cad2d_RemoveNonManifold::Import
 	}
 }
 
-void tnbLib::Cad2d_RemoveNonManifold::Remove
+void tnbLib::Cad2d_RemoveNonManifold::RemoveManifols
 (
-	const std::shared_ptr<Node>& theNode
-)
+	const std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>& theSegments
+) const
 {
-	auto& nodes = NodesRef();
-
-	auto iter = nodes.find(theNode->Index());
-	if (iter IS_EQUAL nodes.end())
+	for (const auto& seg : theSegments)
 	{
-		FatalErrorIn(FunctionSIG)
-			<< "the item is not in the tree!" << endl
-			<< " - index = " << theNode->Index() << endl
-			<< abort(FatalError);
+		Debug_Null_Pointer(seg);
+		for (const auto& x : seg->Edges())
+		{
+			Debug_Null_Pointer(x);
+
+			const auto& v0 = x->Vtx0();
+			Debug_Null_Pointer(v0);
+
+			auto iter = theManifolds_.find(v0->Index());
+			if (iter NOT_EQUAL theManifolds_.end())
+			{
+				theManifolds_.erase(iter);
+			}
+			/*else*/
+			//{
+				//- do nothing!
+				//- 
+				//- the vertex has been removed
+				//  [5/25/2021 Amir]
+			//}
+
+			const auto& v1 = x->Vtx1();
+			Debug_Null_Pointer(v1);
+
+			iter = theManifolds_.find(v1->Index());
+			if (iter NOT_EQUAL theManifolds_.end())
+			{
+				theManifolds_.erase(iter);
+			}
+			/*else*/
+			//{
+				//- do nothing!
+				//- 
+				//- the vertex has been removed
+				//  [5/25/2021 Amir]
+			//}
+		}
 	}
-	Debug_If_Condition(iter->second NOT_EQUAL theNode);
-	nodes.erase(iter);
 }
 
 void tnbLib::Cad2d_RemoveNonManifold::InsertVertices
@@ -302,7 +313,12 @@ void tnbLib::Cad2d_RemoveNonManifold::InsertVertices
 			auto node = std::make_shared<Node>(x->Index(), x);
 			Debug_Null_Pointer(node);
 
-			Import(std::move(node));
+			Import(std::move(node), NodesRef());
+		}
+		else
+		{
+			auto vtx = x;
+			Import(std::move(vtx), Manifolds());
 		}
 	}
 }
@@ -363,52 +379,52 @@ namespace tnbLib
 		return nullptr;
 	}
 
-	std::tuple
-		<
-		std::vector<std::shared_ptr<Pln_Edge>>,
-		std::shared_ptr<Pln_Vertex>,
-		std::shared_ptr<Pln_Vertex>
-		>
-		MarchOnEdges
-		(
-			const std::shared_ptr<Pln_Vertex>& theVtx, 
-			const std::shared_ptr<Pln_Edge>& theEdge
-		)
+}
+
+std::tuple
+<
+	std::vector<std::shared_ptr<tnbLib::Pln_Edge>>, 
+	std::shared_ptr<tnbLib::Pln_Vertex>, 
+	std::shared_ptr<tnbLib::Pln_Vertex>
+> 
+tnbLib::Cad2d_RemoveNonManifold::MarchOnEdges
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx, 
+	const std::shared_ptr<Pln_Edge>& theEdge
+) const
+{
+	if (Cad2d_RemoveNonManifold::verbose > 1)
 	{
-		if (Cad2d_RemoveNonManifold::verbose > 1)
-		{
-			Info << " - marching on the edges..." << endl;
-		}
-
-		theVtx->RemoveFromEdges(theEdge->Index());
-
-		auto v0 = theVtx;
-		auto nextEdge = theEdge;
-
-		std::vector<std::shared_ptr<Pln_Edge>> edges;
-		edges.push_back(nextEdge);
-
-		auto nextVtx = NextNode(theVtx, nextEdge);
-		while (nextVtx->IsManifold())
-		{
-			nextEdge = NextEdge(nextVtx, nextEdge);
-			edges.push_back(nextEdge);
-
-			nextVtx = NextNode(nextVtx, nextEdge);
-		}
-
-		if (theVtx NOT_EQUAL nextVtx) nextVtx->RemoveFromEdges(nextEdge->Index());
-		auto v1 = nextVtx;
-		auto t = std::make_tuple(std::move(edges), std::move(v0), std::move(v1));
-
-		if (Cad2d_RemoveNonManifold::verbose > 1)
-		{
-			Info << " - " << edges.size() << " edges are detected" << endl;
-			Info << " ***** Leaving the MarchOnEdges function ******" << endl;
-		}
-		return std::move(t);
+		Info << " - marching on the edges..." << endl;
 	}
 
+	theVtx->RemoveFromEdges(theEdge->Index());
+
+	auto v0 = theVtx;
+	auto nextEdge = theEdge;
+
+	std::vector<std::shared_ptr<Pln_Edge>> edges;
+	edges.push_back(nextEdge);
+
+	auto nextVtx = NextNode(theVtx, nextEdge);
+	while (nextVtx->IsManifold())
+	{
+		nextEdge = NextEdge(nextVtx, nextEdge);
+		edges.push_back(nextEdge);
+
+		nextVtx = NextNode(nextVtx, nextEdge);
+	}
+
+	if (theVtx NOT_EQUAL nextVtx) nextVtx->RemoveFromEdges(nextEdge->Index());
+	auto v1 = nextVtx;
+	auto t = std::make_tuple(std::move(edges), std::move(v0), std::move(v1));
+
+	if (Cad2d_RemoveNonManifold::verbose > 1)
+	{
+		Info << " - " << edges.size() << " edges are detected" << endl;
+		Info << " ***** Leaving the MarchOnEdges function ******" << endl;
+	}
+	return std::move(t);
 }
 
 std::shared_ptr<tnbLib::Cad2d_RemoveNonManifold::Node> 
@@ -507,18 +523,25 @@ tnbLib::Cad2d_RemoveNonManifold::RetrieveSegments
 	return std::move(segments);
 }
 
-std::vector<std::shared_ptr<tnbLib::Cad2d_RemoveNonManifold::Segment>> 
+std::tuple
+<
+	std::vector<std::shared_ptr<tnbLib::Cad2d_RemoveNonManifold::Segment>>,
+	std::vector<std::shared_ptr<tnbLib::Cad2d_RemoveNonManifold::Segment>>
+>
 tnbLib::Cad2d_RemoveNonManifold::InsertEdges()
 {
 	const auto& nodes = Nodes();
-	if (nodes.empty())
-	{
-		return std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>();
-	}
 
 	std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> nonRings;
+	std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> rings;
+	if (nodes.empty())
+	{
+		auto t = std::make_tuple(std::move(rings), std::move(nonRings));
+		return std::move(t);
+	}
+	
 	std::vector<std::shared_ptr<Node>> removed;
-
+	
 	for (const auto& x : nodes)
 	{
 		Debug_Null_Pointer(x.second);
@@ -532,6 +555,7 @@ tnbLib::Cad2d_RemoveNonManifold::InsertEdges()
 				Debug_Null_Pointer(segment);
 				if (segment->IsRing())
 				{
+					rings.push_back(segment);
 					Import(std::move(segment));
 				}
 				else
@@ -546,12 +570,63 @@ tnbLib::Cad2d_RemoveNonManifold::InsertEdges()
 		}
 	}
 
-	for (const auto& x : removed)
+	for (auto& x : removed)
 	{
-		Remove(x);
+		Remove(x, NodesRef());
 	}
 
-	return std::move(nonRings);
+	auto t = std::make_tuple(std::move(rings), std::move(nonRings));
+	return std::move(t);
+}
+
+namespace tnbLib
+{
+	auto RetrieveRing(const Standard_Integer segId, const std::shared_ptr<Pln_Vertex>& theVtx)
+	{
+		auto wire = Pln_Tools::RetrieveWire(theVtx);
+		Debug_Null_Pointer(wire);
+		Debug_Null_Pointer(wire->CmpEdge());
+
+		auto node0 = std::make_shared<Cad2d_RemoveNonManifold::Node>(theVtx->Index(), theVtx);
+		auto node1 = node0;
+		auto v = node0;
+		Debug_Null_Pointer(node0);
+	
+		auto edges = wire->CmpEdge()->Edges();
+		auto segment = 
+			std::make_shared<Cad2d_RemoveNonManifold::Ring>
+			(
+				segId, std::move(node0),
+				std::move(node1), std::move(edges)
+				);
+		Debug_Null_Pointer(segment);
+
+		v->Insert(segId, segment);
+		return std::move(segment);
+	}
+}
+
+void tnbLib::Cad2d_RemoveNonManifold::RetrieveManifoldRings()
+{
+	auto& nodesMap = theManifolds_;
+	auto& Ids = theSegmentCounter_;
+
+	while (nodesMap.size())
+	{
+		auto iter = nodesMap.begin();
+		Debug_Null_Pointer(iter->second);
+
+		auto ring = RetrieveRing(Ids.RetrieveIndex(), iter->second);
+		auto nodes = Pln_Tools::RetrieveVertices(ring->Edges());
+
+		for (const auto& x : nodes)
+		{
+			Debug_Null_Pointer(x);
+			Remove(x, nodesMap);
+		}
+
+		Import(std::move(ring));
+	}
 }
 
 void tnbLib::Cad2d_RemoveNonManifold::AttachEdgesToNodes
@@ -692,7 +767,7 @@ void tnbLib::Cad2d_RemoveNonManifold::Perform()
 		Info << " - registering the non-manifold nodes into a map" << endl;
 	}
 
-	//- registering the non-manifold nodes
+	//- registering manifolds and non-manifold nodes
 	InsertVertices(nodes);
 
 	if (verbose)
@@ -714,7 +789,10 @@ void tnbLib::Cad2d_RemoveNonManifold::Perform()
 
 		//- the detected rings will be registered and non-ring segments will be retrieved
 		//- no non-ring segment is registered at the moment.
-		auto segments = InsertEdges();
+		auto[rings, segments]  = InsertEdges();
+
+		RemoveManifols(rings);
+		RemoveManifols(segments);
 
 		if (Segments().size() > nbRings)
 		{  // this means still some rings have been detected and the algorithm must be continued
@@ -757,6 +835,8 @@ void tnbLib::Cad2d_RemoveNonManifold::Perform()
 		Debug_Null_Pointer(x.second);
 		AttachEdgesToNodes(x.second);
 	}
+
+	RetrieveManifoldRings();
 
 	if (verbose)
 	{
