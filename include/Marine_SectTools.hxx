@@ -5,6 +5,9 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
+#include <Entity3d_ChainFwd.hxx>
+#include <Entity2d_ChainFwd.hxx>
 #include <Marine_CmpSectionType.hxx>
 #include <Marine_SectionType.hxx>
 #include <Marine_SectionsFwd.hxx>
@@ -378,6 +381,18 @@ namespace tnbLib
 		{
 			static TnbMarine_EXPORT std::shared_ptr<Marine_Section> _(const std::shared_ptr<Pln_Wire>& theOuter);
 		};
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Chain> 
+			RetrieveTriangulation
+			(
+				const std::shared_ptr<Marine_Section>&
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity3d_Chain> 
+			RetrieveTriangulation
+			(
+				const Marine_CmpSection&
+			);
 
 		static TnbMarine_EXPORT void SetLocation
 		(
