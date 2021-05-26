@@ -21,6 +21,8 @@
 #include <memory>
 
 class gp_Pln;
+class gp_Lin2d;
+class gp_Lin;
 
 namespace tnbLib
 {
@@ -387,6 +389,13 @@ namespace tnbLib
 			);
 
 		static TnbGeo_EXPORT Pnt2d 
+			ProjectToLine_cgal
+			(
+				const Pnt2d& pt, 
+				const Entity2d_Line& line
+			);
+
+		static TnbGeo_EXPORT Pnt2d 
 			IntersectionTwoLines
 			(
 				const Pnt2d& P0,
@@ -507,6 +516,8 @@ namespace tnbLib
 				const Standard_Real x, 
 				const std::vector<Standard_Real>& theSorted
 			);
+
+		static TnbGeo_EXPORT Entity2d_Line GetLine(const gp_Lin2d&);
 
 		static TnbGeo_EXPORT std::tuple<Standard_Real, Standard_Real, Standard_Real, Standard_Real>
 			GetCoefficients(const gp_Pln& thePlane);

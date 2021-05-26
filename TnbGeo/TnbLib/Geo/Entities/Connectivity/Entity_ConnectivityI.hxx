@@ -53,4 +53,34 @@ namespace tnbLib
 		return std::move(connectivities);
 	}
 
+	template<int Dim>
+	std::vector<Entity_Connectivity<Dim>> 
+		CombineConnectivities
+		(
+			std::vector<Entity_Connectivity<Dim>>&& theC0,
+			std::vector<Entity_Connectivity<Dim>>&& theC1
+		)
+	{
+		auto c0 = std::move(theC0);
+		auto c1 = std::move(theC1);
+
+		const auto maxId = MaxID(c0);
+		std::vector<Entity_Connectivity<Dim>> connectivities;
+		connectivities.reserve(c0.size() + c1.size());
+
+		for (auto& x : c0)
+		{
+			connectivities.push_back(std::move(x));
+		}
+
+		for (auto& x : c1)
+		{
+			for (size_t i = 0; i < x.nbCmpts; i++)
+			{
+				x.Value(i) += maxId;
+			}
+			connectivities.push_back(std::move(x));
+		}
+		return std::move(connectivities);
+	}
 }

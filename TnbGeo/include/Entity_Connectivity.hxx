@@ -127,6 +127,14 @@ namespace tnbLib
 			const std::vector<Entity_Connectivity<Dim>>& theC1
 		);
 
+	template<int Dim>
+	std::vector<Entity_Connectivity<Dim>>
+		CombineConnectivities
+		(
+			std::vector<Entity_Connectivity<Dim>>&& theC0,
+			std::vector<Entity_Connectivity<Dim>>&& theC1
+		);
+
 	TnbGeo_EXPORT std::vector<connectivity::dual> dualConnectivityList(const Standard_Integer theNbEdges);
 
 	TnbGeo_EXPORT std::vector<connectivity::dual> dualConnectivityList_Chain(const Standard_Integer theNbEdges, const Standard_Boolean IsClosed = Standard_False);

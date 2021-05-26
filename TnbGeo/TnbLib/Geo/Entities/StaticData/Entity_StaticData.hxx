@@ -137,6 +137,7 @@ namespace tnbLib
 		void Merging(const Standard_Boolean HandleDegeneracy, const Standard_Real Resolution, const Standard_Real Radius);
 
 		void Add(const Entity_StaticData& theChain);
+		void Add(Entity_StaticData&& theChain);
 
 		void ExportToPlt(std::fstream& File) const;
 

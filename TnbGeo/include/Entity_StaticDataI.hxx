@@ -10,7 +10,7 @@ namespace tnbLib
 		pointList points;
 		points.reserve(thePoints_.size() + theChain.NbPoints());
 
-		for (const auto& x : thePoints_)
+		for (auto& x : thePoints_)
 		{
 			points.push_back(std::move(x));
 		}
@@ -24,6 +24,38 @@ namespace tnbLib
 
 		thePoints_.clear();
 		theConnectivity_.clear();
+
+		thePoints_ = std::move(points);
+		theConnectivity_ = std::move(connectivities);
+
+		if (theBoundingBox_)
+			theBoundingBox_ = nullptr;
+	}
+
+	template<class Point, class ConnectType, bool NeighbData>
+	void Entity_StaticData<Point, ConnectType, NeighbData>::Add
+	(
+		Entity_StaticData && theChain
+	)
+	{
+		auto c = std::move(theChain);
+		pointList points;
+		points.reserve(thePoints_.size() + c.NbPoints());
+
+		for (auto& x : thePoints_)
+		{
+			points.push_back(std::move(x));
+		}
+
+		for (auto& x : c.Points())
+		{
+			points.push_back(std::move(x));
+		}
+
+		auto connectivities = CombineConnectivities(std::move(theConnectivity_), std::move(c.theConnectivity_));
+
+		//thePoints_.clear();
+		//theConnectivity_.clear();
 
 		thePoints_ = std::move(points);
 		theConnectivity_ = std::move(connectivities);
