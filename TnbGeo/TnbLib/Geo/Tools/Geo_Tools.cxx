@@ -9,6 +9,7 @@
 #include <Entity3d_Triangulation.hxx>
 
 #include <gp_Pln.hxx>
+#include <gp_Lin2d.hxx>
 
 tnbLib::Pnt2d
 tnbLib::Geo_Tools::GetIntersectionPoint
@@ -359,6 +360,13 @@ tnbLib::Geo_Tools::FindSpan
 		mid = (low + high) / 2;
 	}
 	return mid;
+}
+
+tnbLib::Entity2d_Line 
+tnbLib::Geo_Tools::GetLine(const gp_Lin2d & l)
+{
+	Entity2d_Line line(Pnt2d(l.Position().Location()), Dir2d(l.Direction()));
+	return std::move(line);
 }
 
 std::tuple<Standard_Real, Standard_Real, Standard_Real, Standard_Real> 

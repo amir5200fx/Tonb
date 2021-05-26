@@ -259,6 +259,19 @@ tnbLib::Geo_Tools::ProjectToPlane_cgal
 	return std::move(p);
 }
 
+tnbLib::Pnt2d 
+tnbLib::Geo_Tools::ProjectToLine_cgal
+(
+	const Pnt2d & pt,
+	const Entity2d_Line & line
+)
+{
+	auto l = get_cgalLine(line);
+	auto prj = l.projection(get_cgalPoint(pt));
+	auto p = get_Point(prj);
+	return std::move(p);
+}
+
 std::shared_ptr<tnbLib::Geo_Tools::IntersectEntity2d> 
 tnbLib::Geo_Tools::Intersection_cgal
 (
