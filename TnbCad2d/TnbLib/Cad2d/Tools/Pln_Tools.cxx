@@ -1262,12 +1262,12 @@ namespace tnbLib
 				}
 			}
 
-			if (search.Size())
+			/*if (search.Size())
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "Invalid Wire! tree size = "<< search.Size() << endl
 					<< abort(FatalError);
-			}
+			}*/
 		}
 
 
@@ -1317,30 +1317,45 @@ namespace tnbLib
 				const auto& x = iter->second;
 
 				auto pair = x->Pair.lock();
-				Debug_Null_Pointer(pair);
-
-				pairdVertices.erase(pair->Index);
-
-				auto M = MEAN(x->Coord, pair->Coord);
-				auto vtx = std::make_shared<Pln_Vertex>(++nbVertices, M);
-				Debug_Null_Pointer(vtx);
-
-				auto insert0 = vertices.insert(std::make_pair(x->Index, vtx));
-				if (NOT insert0.second)
+				if (pair)
 				{
-					FatalErrorIn(FunctionSIG)
-						<< "duplicate data: " << x->Index << endl
-						<< abort(FatalError);
-				}
+					Debug_Null_Pointer(pair);
 
-				auto insert1 = vertices.insert(std::make_pair(pair->Index, vtx));
-				if (NOT insert1.second)
+					pairdVertices.erase(pair->Index);
+
+					auto M = MEAN(x->Coord, pair->Coord);
+					auto vtx = std::make_shared<Pln_Vertex>(++nbVertices, M);
+					Debug_Null_Pointer(vtx);
+
+					auto insert0 = vertices.insert(std::make_pair(x->Index, vtx));
+					if (NOT insert0.second)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "duplicate data: " << x->Index << endl
+							<< abort(FatalError);
+					}
+
+					auto insert1 = vertices.insert(std::make_pair(pair->Index, vtx));
+					if (NOT insert1.second)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "duplicate data: " << pair->Index << endl
+							<< abort(FatalError);
+					}
+				}
+				else
 				{
-					FatalErrorIn(FunctionSIG)
-						<< "duplicate data: " << pair->Index << endl
-						<< abort(FatalError);
-				}
+					auto vtx = std::make_shared<Pln_Vertex>(++nbVertices, x->Coord);
+					Debug_Null_Pointer(vtx);
 
+					auto insert = vertices.insert(std::make_pair(x->Index, vtx));
+					if (NOT insert.second)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "duplicate data: " << x->Index << endl
+							<< abort(FatalError);
+					}
+				}
 				iter++;
 			}
 
@@ -2031,6 +2046,48 @@ tnbLib::Pln_Tools::RetrieveEdges
 		}
 	}
 	return std::move(edges);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Chain>
+tnbLib::Pln_Tools::RetrieveTriangulation
+(
+	const Pln_Edge & theEdge
+)
+{
+	if (NOT theEdge.Mesh())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the edge is not discretized!" << endl
+			<< abort(FatalError);
+	}
+	auto tri = std::make_shared<Entity2d_Chain>();
+	Debug_Null_Pointer(tri);
+
+	tri->Points() = theEdge.Mesh()->Points();
+	tri->Connectivity() = dualConnectivityList_Chain(theEdge.Mesh()->NbPoints() - 1);
+	return std::move(tri);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Chain> 
+tnbLib::Pln_Tools::RetrieveTriangulation
+(
+	const Pln_Wire & theWire
+)
+{
+	auto tri = std::make_shared<Entity2d_Chain>();
+	Debug_Null_Pointer(tri);
+
+	for (const auto& x : theWire.Edges())
+	{
+		Debug_Null_Pointer(x);
+
+		auto t = RetrieveTriangulation(*x);
+		Debug_Null_Pointer(t);
+
+		auto& tRef = *t;
+		tri->Add(std::move(tRef));
+	}
+	return std::move(tri);
 }
 
 std::vector<Handle(Geom2d_Curve)> 
