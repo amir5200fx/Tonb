@@ -199,12 +199,16 @@ namespace tnbLib
 		/*Private Data*/
 
 		mutable Geo_ItemCounter theSegmentCounter_;
+		mutable std::map<Standard_Integer, std::shared_ptr<Pln_Vertex>> theManifolds_;
 
 		std::map<Standard_Integer, std::shared_ptr<Node>> theNodes_;
 		std::map<Standard_Integer, std::shared_ptr<Segment>> theSegments_;
 
+
 		const std::vector<std::shared_ptr<Pln_Edge>>& theEdges_;
 
+
+		//- private functions and operators
 
 		auto& SegmentCounter() const
 		{
@@ -231,6 +235,11 @@ namespace tnbLib
 			return theSegments_;
 		}
 
+		auto& Manifolds() const
+		{
+			return theManifolds_;
+		}
+
 		TnbCad2d_EXPORT std::shared_ptr<Node>
 			SelectNode
 			(
@@ -249,18 +258,53 @@ namespace tnbLib
 				const std::shared_ptr<Cad2d_RemoveNonManifold::Node>& theNode)
 			;
 
-		TnbCad2d_EXPORT void Import(std::shared_ptr<Node>&& theNode);
+		std::tuple
+			<
+			std::vector<std::shared_ptr<Pln_Edge>>,
+			std::shared_ptr<Pln_Vertex>,
+			std::shared_ptr<Pln_Vertex>
+			>
+			MarchOnEdges
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx,
+				const std::shared_ptr<Pln_Edge>& theEdge
+			) const;
+
+		template<class NodeType>
+		static void Import
+		(
+			std::shared_ptr<NodeType>&& theNode, 
+			std::map<Standard_Integer, std::shared_ptr<NodeType>>&
+		);
+
 		TnbCad2d_EXPORT void Import(std::shared_ptr<Segment>&& theSegment);
 
-		TnbCad2d_EXPORT void Remove(const std::shared_ptr<Node>& theNode);
+		template<class NodeType>
+		static void Remove
+		(
+			const std::shared_ptr<NodeType>& theNode, 
+			std::map<Standard_Integer, std::shared_ptr<NodeType>>&
+		);
+
+		TnbCad2d_EXPORT void RemoveManifols
+		(
+			const std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>& theSegments
+		) const;
 
 		TnbCad2d_EXPORT void InsertVertices
 		(
 			const std::vector<std::shared_ptr<Pln_Vertex>>& theVertices
 		);
 
-		TnbCad2d_EXPORT std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>
+		//- the first list is ring and th second is non-ring
+		TnbCad2d_EXPORT std::tuple
+			<
+			std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>, 
+			std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>
+			>
 			InsertEdges();
+
+		void RetrieveManifoldRings();
 
 		TnbCad2d_EXPORT void AttachEdgesToNodes
 		(
@@ -269,12 +313,20 @@ namespace tnbLib
 
 	public:
 
+		//- default constructor
+
+
+		//- constructors
+
 		Cad2d_RemoveNonManifold
 		(
 			const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 		)
 			: theEdges_(theEdges)
 		{}
+
+
+		//- public functions and operators
 
 		TnbCad2d_EXPORT Standard_Integer NbRings() const;
 
@@ -292,5 +344,7 @@ namespace tnbLib
 		TnbCad2d_EXPORT void Perform();
 	};
 }
+
+#include <Cad2d_RemoveNonManifoldI.hxx>
 
 #endif // !_Cad2d_RemoveNonManifold_Header

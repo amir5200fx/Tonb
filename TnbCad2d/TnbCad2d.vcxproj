@@ -100,6 +100,7 @@
     <ClInclude Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_Manager.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Plane\System\Cad2d_Plane_System.hxx" />
     <ClInclude Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifold.hxx" />
+    <ClInclude Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifoldI.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Scripts\Cad2d_Scripts.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Sketch\Cad2d_Sketch.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Sketch\Geo\Cad2d_GeoSketch.hxx" />

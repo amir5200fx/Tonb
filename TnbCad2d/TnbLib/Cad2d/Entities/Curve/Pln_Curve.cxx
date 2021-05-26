@@ -56,7 +56,7 @@ tnbLib::Pln_Curve::Pln_Curve
 
 tnbLib::Pln_Curve::Pln_Curve
 (
-	const Handle(Geom2d_Curve) && theGeom
+	Handle(Geom2d_Curve) && theGeom
 )
 	: theGeometry_(std::move(theGeom))
 {
@@ -77,7 +77,7 @@ tnbLib::Pln_Curve::Pln_Curve
 tnbLib::Pln_Curve::Pln_Curve
 (
 	const Standard_Integer theIndex,
-	const Handle(Geom2d_Curve) && theGeom
+	Handle(Geom2d_Curve) && theGeom
 )
 	: Global_Indexed(theIndex)
 	, theGeometry_(std::move(theGeom))
@@ -102,7 +102,7 @@ tnbLib::Pln_Curve::Pln_Curve
 (
 	const Standard_Integer theIndex,
 	const word & theName,
-	const Handle(Geom2d_Curve) && theGeom
+	Handle(Geom2d_Curve) && theGeom
 )
 	: Global_Indexed(theIndex)
 	, Global_Named(theName)

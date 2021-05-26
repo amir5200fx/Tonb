@@ -67,7 +67,7 @@ namespace tnbLib
 		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Standard_Integer theIndex,
-			const Handle(Geom2d_Curve) && theGeom
+			Handle(Geom2d_Curve) && theGeom
 		);
 
 		TnbCad2d_EXPORT Pln_Curve
@@ -77,7 +77,7 @@ namespace tnbLib
 
 		TnbCad2d_EXPORT Pln_Curve
 		(
-			const Handle(Geom2d_Curve) && theGeom
+			Handle(Geom2d_Curve) && theGeom
 		);
 
 		TnbCad2d_EXPORT Pln_Curve
@@ -91,7 +91,7 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Handle(Geom2d_Curve) && theGeom
+			Handle(Geom2d_Curve) && theGeom
 		);
 
 		const auto& Geometry() const
@@ -279,4 +279,4 @@ namespace tnbLib
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Curve);
 
-#endif // !_Pln_Curve_Header
+#endif // !_Pln_Curve_Header 

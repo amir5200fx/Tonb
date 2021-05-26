@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_ChainFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Cad2d_Module.hxx>
 #include <Pln_Orientation.hxx>
@@ -405,6 +406,9 @@ namespace tnbLib
 			(
 				const TopoDS_Shape& theEdges
 			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Entity2d_Chain> RetrieveTriangulation(const Pln_Edge&);
+		static TnbCad2d_EXPORT std::shared_ptr<Entity2d_Chain> RetrieveTriangulation(const Pln_Wire&);
 
 		static TnbCad2d_EXPORT std::vector<Handle(Geom2d_Curve)>
 			RetrieveParaCurves

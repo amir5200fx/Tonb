@@ -756,6 +756,9 @@
     <ClInclude Include="TnbLib\Cad2d\MergePlane\Cad2d_MergePlane.hxx">
       <Filter>TnbLib\Cad2d\MergePlane</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifoldI.hxx">
+      <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
