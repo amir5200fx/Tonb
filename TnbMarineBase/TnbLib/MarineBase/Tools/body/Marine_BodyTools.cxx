@@ -1,5 +1,6 @@
 #include <Marine_BodyTools.hxx>
 
+#include <Entity3d_Chain.hxx>
 #include <Cad2d_Modeler.hxx>
 #include <Cad_Tools.hxx>
 #include <Pln_Vertex.hxx>
@@ -683,6 +684,26 @@ tnbLib::Marine_BodyTools::RetrieveLateralProjArea
 		break;
 	}
 	return nullptr;
+}
+
+std::shared_ptr<tnbLib::Entity3d_Chain> 
+tnbLib::Marine_BodyTools::RetrieveTriangulations
+(
+	const Marine_Body & theBody
+)
+{
+	auto tri = std::make_shared<Entity3d_Chain>();
+	Debug_Null_Pointer(tri);
+
+	for (const auto& x : theBody.Sections())
+	{
+		auto t = Marine_SectTools::RetrieveTriangulation(*x);
+		Debug_Null_Pointer(t);
+
+		auto& tRef = *t;
+		tri->Add(std::move(tRef));
+	}
+	return std::move(tri);
 }
 
 namespace tnbLib

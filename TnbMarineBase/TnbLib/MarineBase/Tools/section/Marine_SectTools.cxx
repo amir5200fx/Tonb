@@ -1,6 +1,8 @@
 #include <Marine_SectTools.hxx>
 
 #include <Entity3d_Box.hxx>
+#include <Entity2d_Chain.hxx>
+#include <Entity3d_Chain.hxx>
 #include <Pln_Wire.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Pln_Tools.hxx>
@@ -1836,6 +1838,108 @@ namespace tnbLib
 
 		return std::move(sect);
 	}
+}
+
+std::shared_ptr<tnbLib::Entity2d_Chain> 
+tnbLib::Marine_SectTools::RetrieveTriangulation
+(
+	const std::shared_ptr<Marine_Section>& theSection
+)
+{
+	const auto& wire = theSection->Wire();
+	Debug_Null_Pointer(wire);
+
+	auto tri = Pln_Tools::RetrieveTriangulation(*wire);
+	if (HasInnerSection(theSection))
+	{
+		auto inners = RetrieveInners(theSection);
+		for (const auto& x : inners)
+		{
+			Debug_Null_Pointer(x);
+			const auto& w = x->Wire();
+			Debug_Null_Pointer(w);
+
+			auto t = Pln_Tools::RetrieveTriangulation(*w);
+			tri->Add(std::move(*t));
+		}
+		return std::move(tri);
+	}
+	else
+	{
+		return std::move(tri);
+	}
+}
+
+namespace tnbLib
+{
+	auto to3D(const std::shared_ptr<Entity2d_Chain>& chain, const Standard_Real xCoord, const Standard_Boolean xPlane = Standard_True)
+	{
+		auto t = std::make_shared<Entity3d_Chain>();
+		Debug_Null_Pointer(t);
+
+		t->Connectivity() = std::move(chain->Connectivity());
+		auto& points = t->Points();
+		points.reserve(chain->NbPoints());
+		if (xPlane)
+		{
+			for (auto& x : chain->Points())
+			{
+				auto pt3 = Pnt3d(xCoord, x.X(), x.Y());
+				points.push_back(std::move(pt3));
+			}
+		}
+		else
+		{
+			for (auto& x : chain->Points())
+			{
+				auto pt3 = Pnt3d(x.X(), x.Y(), xCoord);
+				points.push_back(std::move(pt3));
+			}
+		}
+		return std::move(t);
+	}
+}
+
+std::shared_ptr<tnbLib::Entity3d_Chain>
+tnbLib::Marine_SectTools::RetrieveTriangulation
+(
+	const Marine_CmpSection & theSection
+)
+{
+	auto t = std::make_shared<Entity3d_Chain>();
+	Debug_Null_Pointer(t);
+	
+	if (theSection.IsXsection())
+	{
+		for (const auto& x : theSection.Sections())
+		{
+			Debug_Null_Pointer(x);
+			auto tri2 = RetrieveTriangulation(x);
+
+			auto tri3 = to3D(tri2, theSection.X());
+			auto& tri3Ref = *tri3;
+			t->Add(std::move(tri3Ref));
+		}
+	}
+	else if (theSection.IsZsection())
+	{
+		for (const auto& x : theSection.Sections())
+		{
+			Debug_Null_Pointer(x);
+			auto tri2 = RetrieveTriangulation(x);
+
+			auto tri3 = to3D(tri2, theSection.X(), Standard_False);
+			auto& tri3Ref = *tri3;
+			t->Add(std::move(tri3Ref));
+		}
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid section type has been detected!" << endl
+			<< abort(FatalError);
+	}
+	return std::move(t);
 }
 
 void tnbLib::Marine_SectTools::SetLocation

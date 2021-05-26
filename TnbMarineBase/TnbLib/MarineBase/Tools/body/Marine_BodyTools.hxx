@@ -9,6 +9,8 @@
 #include <Marine_SailModelsFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
+#include <Entity3d_ChainFwd.hxx>
 #include <Marine_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -143,6 +145,12 @@ namespace tnbLib
 			RetrieveLateralProjArea
 			(
 				const std::shared_ptr<marineLib::Model_Sail>& theSail
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity3d_Chain> 
+			RetrieveTriangulations
+			(
+				const Marine_Body& theBody
 			);
 
 		static TnbMarine_EXPORT void 
