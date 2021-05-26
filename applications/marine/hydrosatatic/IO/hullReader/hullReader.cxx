@@ -8,8 +8,12 @@
 #include <Cad2d_RemoveNonManifold.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_Curve.hxx>
+#include <Pln_Vertex.hxx>
+#include <Pln_CurveTools.hxx>
 #include <Cad_ShapeSection.hxx>
+#include <Cad_Shape.hxx>
 #include <Cad_Tools.hxx>
+#include <Geo_Tools.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CosineDistb.hxx>
 #include <Entity3d_Box.hxx>
@@ -19,10 +23,15 @@
 
 #include <gp_Ax2.hxx>
 #include <gp_Pln.hxx>
+#include <gp_Lin2d.hxx>
+#include <gp_Lin.hxx>
+#include <gp_Pnt.hxx>
 #include <TopoDS_Shape.hxx>
 #include <TopoDS_Edge.hxx>
 #include <Bnd_Box.hxx>
 #include <Geom2d_Curve.hxx>
+#include <ProjLib.hxx>
+
 
 #include <memory>
 
@@ -32,7 +41,7 @@ namespace tnbLib
 	static bool bodyTypeTag = false;
 	static bool makeShapeHull = true;
 
-	static TopoDS_Shape myHull;
+	static std::shared_ptr<Cad_Shape> myHull;
 	static unsigned short verbose(0);
 
 	static const unsigned int DEFAULT_NB_SECTIONS = 25;
@@ -43,9 +52,17 @@ namespace tnbLib
 
 	static const double DEFAULT_MIN_TOL = 1.0E-4;
 	static const double DEFAULT_MAX_TOL = 1.0E-3;
+	static const double DEFAULT_TOL = 1.0E-6;
 
 	static auto myMinTol = DEFAULT_MIN_TOL;
 	static auto myMaxTol = DEFAULT_MAX_TOL;
+	static auto myTol = DEFAULT_TOL;
+
+	static int myNbPts = 5;
+
+	static gp_Ax2d myAxis = gp::OY2d();
+
+	typedef std::shared_ptr<Pln_Curve> curve_t;
 
 	enum class bodyType
 	{
@@ -78,7 +95,7 @@ namespace tnbLib
 			ar >> myHull;		
 		}
 
-		if (myHull.IsNull())
+		if (NOT myHull)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< " the loaded model is null" << endl
@@ -119,10 +136,105 @@ namespace tnbLib
 		}
 	}
 
+	auto calcDistance(const gp_Pnt2d& pt, const gp_Lin2d& line)
+	{
+		return line.Distance(pt);
+	}
+
+	auto calcD1D2(const curve_t& curve, const gp_Lin2d& line)
+	{
+		auto p0 = curve->FirstCoord();
+		auto p1 = curve->LastCoord();
+
+		auto d0 = line.Distance(p0);
+		auto d1 = line.Distance(p1);
+
+		auto t = std::make_pair(d0, d1);
+		return std::move(t);
+	}
+
+	auto areOverlaped(const curve_t& curve, const gp_Lin2d& line, int nbPts, double eps)
+	{
+		const auto u0 = curve->FirstParameter();
+		const auto u1 = curve->LastParameter();
+		auto du = (u1 - u0) / (double)nbPts;
+		for (int i = 0; i < nbPts; i++)
+		{
+			auto u = u0 + 0.5*du;
+			auto pt = curve->Value(u);
+			auto d = line.Distance(pt);
+
+			if (d > eps) return false;
+		}
+		return true;
+	}
+
 	auto calcBoundingBox(const TopoDS_Shape& shape)
 	{
 		auto b = Cad_Tools::BoundingBox(Cad_Tools::BoundingBox(shape));
 		return std::move(b);
+	}
+
+	auto X0(const Entity3d_Box& b)
+	{
+		return std::min(b.P0().X(), b.P1().X());
+	}
+
+	auto X1(const Entity3d_Box& b)
+	{
+		return std::max(b.P0().X(), b.P1().X());
+	}
+
+	auto Y0(const Entity3d_Box& b)
+	{
+		return std::min(b.P0().Y(), b.P1().Y());
+	}
+
+	auto Y1(const Entity3d_Box& b)
+	{
+		return std::max(b.P0().Y(), b.P1().Y());
+	}
+
+	auto X0(const Entity2d_Box& b)
+	{
+		return std::min(b.P0().X(), b.P1().X());
+	}
+
+	auto X1(const Entity2d_Box& b)
+	{
+		return std::max(b.P0().X(), b.P1().X());
+	}
+
+	auto isValidSimulation(const Entity3d_Box& b)
+	{
+		const auto xo = myAxis.Location().X();
+		bodyTypeTag = true;
+		myBodyType = bodyType::symm;
+		if (std::abs(xo - Y0(b)) <= myTol * std::abs(Y0(b) - Y1(b))) return true;
+		//if (xo > Y1(b)) return true;
+		auto ym = MEAN(Y0(b), Y1(b));
+		myBodyType = bodyType::full;
+		return (std::abs(ym - xo) <= myTol*std::abs(Y0(b) - Y1(b)));
+	}
+
+
+
+	auto retrieveFlipCurves(const std::vector<curve_t>& curves, double tol)
+	{
+		std::vector<curve_t> flipCurves;
+		gp_Lin2d line(myAxis);
+		gp_Trsf2d trans;
+		trans.SetMirror(myAxis);
+		for (const auto& x : curves)
+		{
+			if (NOT areOverlaped(x, line, myNbPts, tol))
+			{
+				auto g = Handle(Geom2d_Curve)::DownCast(x->Geometry()->Transformed(trans));
+				auto c = std::make_shared<Pln_Curve>(0, "flipped " + x->Name(), std::move(g));
+				flipCurves.push_back(std::move(c));
+			}
+		}
+		return std::move(flipCurves);
 	}
 
 	std::shared_ptr<Geo_xDistb> calcDistrb(double x0, double x1, int n, const std::string& alg)
@@ -156,16 +268,6 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		return nullptr;
-	}
-
-	auto X0(const Entity3d_Box& b)
-	{
-		return b.P0().X();
-	}
-
-	auto X1(const Entity3d_Box& b)
-	{
-		return b.P1().X();
 	}
 
 	std::vector<std::pair<TopoDS_Shape, Standard_Real>> 
@@ -269,14 +371,130 @@ namespace tnbLib
 		return std::move(compoundEdges);
 	}
 
-	auto retrieveSectionEdges(const TopoDS_Shape& shape, double x)
+	auto repairFullSection(const std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>& segments, double tol)
+	{
+		gp_Lin2d line(myAxis);
+		std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> dangles;
+		for (const auto& x : segments)
+		{
+			if (NOT x->IsRing())
+			{
+				const auto& n0 = x->Node0();
+				const auto& n1 = x->Node1();
+
+				auto d0 = calcDistance(n0->Vtx()->Coord(), line);
+				auto d1 = calcDistance(n1->Vtx()->Coord(), line);
+
+				if (d0 > tol AND d1 > tol)
+				{
+					dangles.push_back(x);
+				}
+
+				
+			}
+		}
+
+		if (dangles.empty())
+		{
+			return std::shared_ptr<Pln_Curve>();
+		}
+		if (dangles.size() > 1)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid section  has been detected!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& seg = segments[0];
+		const auto& n0 = seg->Node0();
+		const auto& n1 = seg->Node1();
+
+		auto geom = Pln_CurveTools::MakeSegment(n0->Vtx()->Coord(), n1->Vtx()->Coord());
+		auto curve = std::make_shared<Pln_Curve>(std::move(geom));
+		return std::move(curve);
+	}
+
+	auto repairSymmSection(const std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>>& segments, double tol)
+	{
+		gp_Lin2d line(myAxis);
+		std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> dangles;
+		for (const auto& x : segments)
+		{
+			if (NOT x->IsRing())
+			{
+				const auto& n0 = x->Node0();
+				const auto& n1 = x->Node1();
+
+				auto d0 = calcDistance(n0->Vtx()->Coord(), line);
+				auto d1 = calcDistance(n1->Vtx()->Coord(), line);
+
+				if (d0 <= tol AND d1 <= tol)
+				{
+					continue;
+				}
+
+				if (d0 > tol AND d1 > tol)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "invalid section has been detected!" << endl
+						<< abort(FatalError);
+				}
+
+				dangles.push_back(x);
+			}
+		}
+		if (dangles.empty())
+		{
+			return std::shared_ptr<Pln_Curve>();
+		}
+		if (dangles.size() > 1)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid section  has been detected!" << endl
+				<< abort(FatalError);
+		}
+		const auto& seg = segments[0];
+		const auto& n0 = seg->Node0();
+		const auto& n1 = seg->Node1();
+
+		const auto d0 = calcDistance(n0->Vtx()->Coord(), line);
+		const auto d1 = calcDistance(n1->Vtx()->Coord(), line);
+
+		if (d0 > tol)
+		{
+			const auto& coord = n0->Vtx()->Coord();
+			auto pproj = Geo_Tools::ProjectToLine_cgal(coord, Geo_Tools::GetLine(line));
+
+			auto geom = Pln_CurveTools::MakeSegment(coord, pproj);
+			auto curve = Marine_SectTools::CurveCreator(geom, Marine_SectionType::displacer);
+			return std::move(curve);
+		}
+		else if (d1 > tol)
+		{
+			const auto& coord = n1->Vtx()->Coord();
+			auto pproj = Geo_Tools::ProjectToLine_cgal(coord, Geo_Tools::GetLine(line));
+
+			auto geom = Pln_CurveTools::MakeSegment(coord, pproj);
+			auto curve = Marine_SectTools::CurveCreator(geom, Marine_SectionType::displacer);
+			return std::move(curve);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "unexpected situation has been detected!" << endl
+				<< abort(FatalError);
+		}
+		return std::shared_ptr<Pln_Curve>();
+	}
+
+	auto retrieveSectionEdges(const TopoDS_Shape& shape, double x, double tol)
 	{
 		const auto edges = Cad_Tools::RetrieveEdges(shape);
 		const auto ax2 = gp_Ax2(gp_Pnt(x, 0, 0), gp::DX(), gp::DY());
 		const auto paraCurves = Cad_Tools::RetrieveParaCurves(edges, ax2);
 
-		const auto plnCurves = Marine_SectTools::CurveCreator(paraCurves, Marine_SectionType::displacer);
-	
+		auto plnCurves = Marine_SectTools::CurveCreator(paraCurves, Marine_SectionType::displacer);
+
 		const auto compoundEdges = retrieveMergedEdges(plnCurves);
 
 		checkBodyType(compoundEdges);
@@ -284,13 +502,30 @@ namespace tnbLib
 		switch (myBodyType)
 		{
 		case tnbLib::bodyType::full:
-			return std::move(compoundEdges);
+		{
+			if (auto deck = repairFullSection(compoundEdges, tol))
+			{
+				plnCurves.push_back(std::move(deck));
+
+				const auto allCompoundEdges = retrieveMergedEdges(plnCurves);
+				return std::move(allCompoundEdges);
+			}
+			else
+			{
+				return std::move(compoundEdges);
+			}
 			break;
+		}
 		case tnbLib::bodyType::symm:
 		{
-			const auto allPlnCurves = retrieveSymmSectionCurves(plnCurves);
-			const auto allCompoundEdges = retrieveMergedEdges(allPlnCurves);
-			return std::move(allCompoundEdges);
+			if (auto deck = repairSymmSection(compoundEdges, tol))
+			{
+				plnCurves.push_back(std::move(deck));
+				auto allPlnCurves = retrieveSymmSectionCurves(plnCurves);
+
+				const auto allCompoundEdges = retrieveMergedEdges(allPlnCurves);
+				return std::move(allCompoundEdges);
+			}
 			break;
 		}
 		default:
@@ -316,9 +551,10 @@ namespace tnbLib
 		return std::move(wires);
 	}
 
-	auto retrieveSection(const TopoDS_Shape& shape, const gp_Ax2& ax2, double x)
+	auto retrieveSection(const TopoDS_Shape& shape, const gp_Ax2& ax2, double x, double tol)
 	{
-		const auto cmpEdges = retrieveSectionEdges(shape, x);
+		const auto cmpEdges = retrieveSectionEdges(shape, x, tol);
+
 		for (const auto& x : cmpEdges)
 		{
 			if (NOT x->IsRing())
@@ -348,14 +584,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		if (NOT bodyTypeTag)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " no type of the body has been assigned!" << endl
-				<< abort(FatalError);
-		}
-
-		if (myHull.IsNull())
+		if (NOT myHull)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "the model is empty!" << endl
@@ -371,26 +600,101 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		const auto b = calcBoundingBox(myHull);
+		const TopoDS_Shape& h = myHull->Shape();
+		if (h.IsNull())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the model is empty!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto b = calcBoundingBox(h);
+
+		if (NOT isValidSimulation(b))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "it's not a valid simulation: please check the XZ-plane" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT bodyTypeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " no type of the body has been assigned!" << endl
+				<< abort(FatalError);
+		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the detected type of body: " << (myBodyType IS_EQUAL bodyType::full ? "Full Body" : "Symm Body") << endl;
+			Info << endl;
+		}
+	
 		const auto d = b.Diameter();
 		auto dist = calcDistrb(X0(b) + d * 1.0E-4, X1(b) - d * 1.0E-4, nbSections, myDistbAlg);
 
-		const auto edges = retrieveShapeSections(*dist, myHull);
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the spacing algorithm is set to : " << myDistbAlg << endl;
+			Info << " - nb. of sections: " << nbSections << endl;
+			Info << endl;
+		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " retrieving the intersection curves..." << endl;
+			Info << endl;
+		}
+		const auto edges = retrieveShapeSections(*dist, h);
 
 		const auto Oxyz = MarineBase_Tools::CalcOxyz(b);
 		const auto ax2 = gp_Ax2(Oxyz, gp::DX());
+		const auto baseLine = gp_Ax1(Oxyz, gp::DX());
 
+		const auto tol = myTol * std::abs(Y0(b) - Y1(b));
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " creating the sections..." << endl;
+			Info << endl;
+		}
+
+		size_t k = 0;
 		std::vector<std::shared_ptr<Marine_CmpSection>> sections;
 		sections.reserve(edges.size());
 		for (const auto& x : edges)
 		{
-			auto cmpSection = retrieveSection(x.first, ax2, x.second);
+			if (verbose)
+			{
+				//Info << endl;
+				Info << " creating the section nb. " << k++ << endl;
+				//Info << endl;
+			}
+			auto cmpSection = retrieveSection(x.first, ax2, x.second, tol);
 			sections.push_back(std::move(cmpSection));
+		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the sections are created, successfully!" << endl;
+			Info << endl;
+		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the body maker is set to: " << (makeShapeHull IS_EQUAL true ? "TRUE" : "FALSE") << endl;
+			Info << endl;
 		}
 
 		if (makeShapeHull)
 		{
-			auto shape = std::make_shared<marineLib::Shape_Hull>(0, name, myHull);
+			auto shape = std::make_shared<marineLib::Shape_Hull>(0, name, h);
 			auto body = Marine_BodyTools::BodyCreator(sections, shape, Marine_BodyType::displacer);
 
 			myBody = std::move(body);
@@ -400,7 +704,17 @@ namespace tnbLib
 			auto body = Marine_BodyTools::BodyCreator(sections, Marine_BodyType::displacer);
 			myBody = std::move(body);
 		}
+		myBody->SetName(name);
+		myBody->SetCoordinateSystem(ax2);
+		myBody->SetBaseLine(baseLine);
 
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the body is created, successfully!" << endl;
+			Info << " - body's name: " << myBody->Name() << endl;
+			Info << endl;
+		}
 	}
 
 }
@@ -425,9 +739,12 @@ namespace tnbLib
 		//- settings
 		mod->add(chaiscript::fun([](double x)-> void {myMinTol = x; }), "setMinTol");
 		mod->add(chaiscript::fun([](double x)-> void {myMaxTol = x; }), "setMaxTol");
+		mod->add(chaiscript::fun([](double x)-> void {myTol = x; }), "setTol");
 		mod->add(chaiscript::fun([](int n)->void {nbSections = n; }), "setNbSections");
+		mod->add(chaiscript::fun([](double x)->void {myAxis.SetLocation(gp_Pnt2d(x, 0)); }), "setXZPlane");
 		mod->add(chaiscript::fun([](const std::string& name)->void {myDistbAlg = name; }), "setDistbAlg");
-		mod->add(chaiscript::fun([](size_t t)->void {verbose = t; }), "setVerbose");
+		mod->add(chaiscript::fun([](bool c)->void {makeShapeHull = c; }), "useCad");
+		mod->add(chaiscript::fun([](unsigned short t)->void {verbose = t; /*Cad2d_RemoveNonManifold::verbose = t;*/ }), "setVerbose");
 
 		mod->add(chaiscript::fun([](const std::string& name)->void {execute(name); }), "execute");
 	}
@@ -449,7 +766,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
@@ -474,7 +791,7 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullReader");
+			fileName myFileName("hydstcHullReader");
 
 			try
 			{
