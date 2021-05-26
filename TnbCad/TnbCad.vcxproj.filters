@@ -283,6 +283,9 @@
     <Filter Include="TnbLib\Cad\ShapeSection">
       <UniqueIdentifier>{a5e74083-f72f-4386-8f92-f93121fb2af4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Entities\Shape">
+      <UniqueIdentifier>{7551753c-a862-4f4b-9600-4b59270ab7ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -563,6 +566,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\ShapeSection\Cad_ShapeSection.hxx">
       <Filter>TnbLib\Cad\ShapeSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\Shape\Cad_Shape.hxx">
+      <Filter>TnbLib\Cad\Entities\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -853,6 +859,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\ShapeSection\Cad_ShapeSection.cxx">
       <Filter>TnbLib\Cad\ShapeSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\Shape\Cad_ShapeIO.cxx">
+      <Filter>TnbLib\Cad\Entities\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\Shape\Cad_Shape.cxx">
+      <Filter>TnbLib\Cad\Entities\Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
