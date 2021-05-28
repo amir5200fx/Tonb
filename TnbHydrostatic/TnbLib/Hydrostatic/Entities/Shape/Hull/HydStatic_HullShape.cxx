@@ -1,5 +1,23 @@
 #include <HydStatic_HullShape.hxx>
 
+#include <Marine_Model_Hull.hxx>
+#include <Marine_Bodies.hxx>
+
+Standard_Boolean 
+tnbLib::HydStatic_HullShape::IsSymmetric() const
+{
+	const auto& model = theHull_;
+	const auto& body = model->Body();
+	if (auto bodyShape = std::dynamic_pointer_cast<marineLib::BodyConstructor_Shape<marineLib::Body_Displacer>>(body))
+	{
+		return bodyShape->IsSymmetric();
+	}
+	else
+	{
+		return Standard_False;
+	}
+}
+
 void tnbLib::HydStatic_HullShape::SetHull
 (
 	const std::shared_ptr<marineLib::Model_Hull>& theHull

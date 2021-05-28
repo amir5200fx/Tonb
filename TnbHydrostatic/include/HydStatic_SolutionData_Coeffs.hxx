@@ -44,6 +44,8 @@ namespace tnbLib
 
 			/*Private Data*/
 
+			Standard_Boolean IsSymmetric_;
+
 			std::shared_ptr<marineLib::Body_Displacer> theHull_;
 			std::shared_ptr<Marine_Domain> theDomain_;
 			std::shared_ptr<Marine_Wave> theWave_;
@@ -73,6 +75,7 @@ namespace tnbLib
 			//- default constructor
 
 			SolutionData_Coeffs()
+				: IsSymmetric_(Standard_False)
 			{}
 
 
@@ -112,6 +115,16 @@ namespace tnbLib
 			auto CurrentSolution() const
 			{
 				return theCurrent_;
+			}
+
+			auto IsSymmetric() const
+			{
+				return IsSymmetric_;
+			}
+
+			void SetSymmetric(const Standard_Boolean symm)
+			{
+				IsSymmetric_ = symm;
 			}
 
 			void SetCurrentSolution(const solutionOrder theSolution)
