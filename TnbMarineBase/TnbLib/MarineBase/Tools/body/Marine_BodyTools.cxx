@@ -17,6 +17,7 @@
 #include <MarineBase_Tools.hxx>
 #include <Marine_Shape.hxx>
 #include <Marine_Models.hxx>
+#include <Marine_Shapes.hxx>
 #include <Marine_Model_SailTools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -27,6 +28,7 @@
 
 #include <Geom_Plane.hxx>
 #include <gp_Pln.hxx>
+#include <gp_Ax2d.hxx>
 #include <GeomAPI_IntSS.hxx>
 #include <BRepAlgoAPI_Section.hxx>
 #include <TopoDS.hxx>
@@ -356,6 +358,15 @@ tnbLib::Marine_BodyTools::BodyCreator
 		Debug_Null_Pointer(body);
 
 		body->SetShape(theShape);
+
+		auto shape = std::dynamic_pointer_cast<marineLib::Shape_Hull>(theShape);
+		if (NOT shape)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the shape is not hull!" << endl
+				<< abort(FatalError);
+		}
+		body->SetSymmetric(shape->IsSymmetric());
 		return std::move(body);
 	}
 	case Marine_BodyType::dry:
@@ -375,6 +386,14 @@ tnbLib::Marine_BodyTools::BodyCreator
 			>(std::move(sections));
 		Debug_Null_Pointer(body);
 
+		auto shape = std::dynamic_pointer_cast<marineLib::Shape_Hull>(theShape);
+		if (NOT shape)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the shape is not hull!" << endl
+				<< abort(FatalError);
+		}
+		body->SetSymmetric(shape->IsSymmetric());
 		body->SetShape(theShape);
 		return std::move(body);
 	}
@@ -395,6 +414,14 @@ tnbLib::Marine_BodyTools::BodyCreator
 			>(std::move(sections));
 		Debug_Null_Pointer(body);
 
+		auto shape = std::dynamic_pointer_cast<marineLib::Shape_Hull>(theShape);
+		if (NOT shape)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the shape is not hull!" << endl
+				<< abort(FatalError);
+		}
+		body->SetSymmetric(shape->IsSymmetric());
 		body->SetShape(theShape);
 		return std::move(body);
 	}
@@ -415,6 +442,13 @@ tnbLib::Marine_BodyTools::BodyCreator
 			>(std::move(sections));
 		Debug_Null_Pointer(body);
 
+		auto shape = std::dynamic_pointer_cast<marineLib::Shape_Sail>(theShape);
+		if (NOT shape)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the shape is not hull!" << endl
+				<< abort(FatalError);
+		}
 		body->SetShape(theShape);
 		return std::move(body);
 	}
@@ -435,6 +469,13 @@ tnbLib::Marine_BodyTools::BodyCreator
 			>(std::move(sections));
 		Debug_Null_Pointer(body);
 
+		auto shape = std::dynamic_pointer_cast<marineLib::Shape_Tank>(theShape);
+		if (NOT shape)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the shape is not hull!" << endl
+				<< abort(FatalError);
+		}
 		body->SetShape(theShape);
 		return std::move(body);
 	}
@@ -462,7 +503,7 @@ tnbLib::Marine_BodyTools::WettedBody
 			theBody->Sections(), 
 			theDomain->Water()->Sections()
 		);
-
+	
 	if (sections.empty())
 	{
 		return nullptr;
@@ -490,6 +531,7 @@ tnbLib::Marine_BodyTools::WettedBody
 			>
 			>(body);
 		Debug_Null_Pointer(shapeBody);
+
 		Marine_BodyTools::WaterSectionOnBody
 		(
 			shapeBody,
@@ -736,6 +778,8 @@ void tnbLib::Marine_BodyTools::WaterSectionOnBody
 	Debug_Null_Pointer(theDomain);
 	Debug_Null_Pointer(theDomain->Wave());
 
+	const auto symmBody = theBody->IsSymmetric();
+	//std::cout << "is symm?" << (symmBody ? "true" : "false") << std::endl;
 	const auto& shape = theBody->Shape();
 	Debug_Null_Pointer(shape);
 
@@ -786,6 +830,7 @@ void tnbLib::Marine_BodyTools::WaterSectionOnBody
 			wave->SurfaceGeometry()
 		);
 	}
+	Debug_If_Condition(paraCurves.empty());
 	/*auto curves =
 		Pln_Tools::RetrieveCurves
 		(
@@ -803,8 +848,24 @@ void tnbLib::Marine_BodyTools::WaterSectionOnBody
 	const auto b = CalcBoundingBox(curves);*/
 
 	//auto curves = Pln_Tools::RetrieveCurves(paraCurves);
+
+	const auto& sys = theBody->CoordinateSystem();
+	const auto& loc = sys.Location();
+	const auto& dir = sys.XDirection();
+	gp_Ax2d ax(gp_Pnt2d(loc.X(), loc.Y()), gp_Dir2d(dir.X(), dir.Y()));
+
+
 	auto curves = Marine_SectTools::CurveCreator(paraCurves, Marine_SectionType::waterLine);
-	auto edges = Pln_Tools::RetrieveMergedEdges(curves, 1.0e-3, 1.0e-6);
+	if (symmBody)
+	{
+		curves = Marine_SectTools::RepairSymmetricDeckSection(curves, ax, 1.0E-6, 1.0E-3);
+	}
+	else
+	{
+		curves = Marine_SectTools::RepairFullDeckSection(curves, ax, 1.0E-6, 1.0E-3);
+	}
+	//std::cout << "nb of curves: " << curves.size() << std::endl;
+	auto edges = Pln_Tools::RetrieveMergedEdges(curves, 1.0e-6, 1.0e-3);
 
 	/*auto modeler = std::make_shared<Cad2d_Modeler>();
 	modeler->Import(edges);
@@ -836,6 +897,13 @@ void tnbLib::Marine_BodyTools::WaterSectionOnBody
 			);
 		Debug_Null_Pointer(sect);
 		sections.push_back(std::move(sect));
+	}
+
+	if (sections.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no section has been retrieved!" << endl
+			<< abort(FatalError);
 	}
 
 	auto cmpSect = Marine_SectTools::CmpSectionCreator(sections);

@@ -207,6 +207,37 @@ void tnbLib::Marine_SectTools::Section
 	}
 }
 
+tnbLib::Marine_SectionType 
+tnbLib::Marine_SectTools::ConvertType
+(
+	const Marine_PlnCurveType t
+)
+{
+	switch (t)
+	{
+	case Marine_PlnCurveType::displacer:
+		return Marine_SectionType::displacer;
+	case Marine_PlnCurveType::dry:
+		return Marine_SectionType::dry;
+	case Marine_PlnCurveType::sail:
+		return Marine_SectionType::sail;
+	case Marine_PlnCurveType::tank:
+		return Marine_SectionType::tank;
+	case Marine_PlnCurveType::water:
+		return Marine_SectionType::water;
+	case Marine_PlnCurveType::waterLine:
+		return Marine_SectionType::waterLine;
+	case Marine_PlnCurveType::wetted:
+		return Marine_SectionType::wetted;
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "unspecified type of the section has been detected!" << endl
+			<< abort(FatalError);
+		break;
+	}
+	return Marine_SectionType::wetted;
+}
+
 Standard_Boolean 
 tnbLib::Marine_SectTools::IsOuter
 (
@@ -1715,7 +1746,7 @@ tnbLib::Marine_SectTools::CmpSectionCreator
 	if (theSections.empty())
 	{
 		FatalErrorIn(FunctionSIG)
-			<< "empty list" << endl
+			<< "the body has no section!" << endl
 			<< abort(FatalError);
 	}
 

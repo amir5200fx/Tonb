@@ -1,5 +1,7 @@
 #include <Marine_MidSection.hxx>
 
+#include <Dir3d.hxx>
+#include <Pln_Tools.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_DisctTools.hxx>
 #include <Marine_SectTools.hxx>
@@ -12,6 +14,7 @@
 #include <OSstream.hxx>
 
 #include <TopoDS_Shape.hxx>
+#include <TopoDS_Edge.hxx>
 
 tnbLib::Marine_MidSection::Marine_MidSection
 (
@@ -49,7 +52,10 @@ void tnbLib::Marine_MidSection::ApplyAt(const Standard_Real x)
 	}
 
 	const auto& sys = Displacer()->CoordinateSystem();
-	gp_Ax2 syst0(sys.Location(), sys.XDirection(), sys.YDirection());
+	const auto& loc = sys.Location();
+	const auto& dir = sys.Direction();
+	gp_Ax2 syst0(loc, sys.XDirection(), sys.YDirection());
+	gp_Ax2d ax(gp_Pnt2d(loc.Y(), loc.Z()), gp_Dir2d(dir.Y(), dir.Z()));
 
 	auto x0 = syst0.Location().Z();
 	auto syst = syst0.Translated(gp_Vec(x - x0, 0, 0));
@@ -74,12 +80,25 @@ void tnbLib::Marine_MidSection::ApplyAt(const Standard_Real x)
 	}
 
 	//Info << " retrieving the cmp section..." << endl;
+	auto edges = Pln_Tools::RetrieveEdges(sectionShape);
+	auto gCurves = Pln_Tools::RetrieveParaCurves(edges, syst);
+	auto paraCurves = Marine_SectTools::CurveCreator(gCurves, Marine_SectionType::displacer);
+
+	if (displacer->IsSymmetric())
+	{
+		paraCurves = Marine_SectTools::RepairSymmetricStation(paraCurves, ax, MinTol(), MaxTol());
+	}
+	else
+	{
+		paraCurves = Marine_SectTools::RepairFullStation(paraCurves, ax, MinTol(), MaxTol());
+	}
+
 	auto section =
 		Marine_SectTools::CmpSectionCreator
 		(
 			Marine_SectTools::SectionCreator
 			(
-				sectionShape, syst,
+				paraCurves, syst,
 				Marine_SectionType::displacer,
 				MinTol(), MaxTol()
 			));

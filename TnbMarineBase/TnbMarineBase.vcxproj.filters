@@ -1685,6 +1685,9 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Tools\Marine_Model_SailTools.cxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Tools\section\Marine_SectToolsRepairment.cxx">
+      <Filter>TnbLib\MarineBase\Tools\section</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

@@ -378,6 +378,7 @@
     <ClCompile Include="TnbLib\MarineBase\Tools\disct\Marine_DisctTools.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Tools\section\Marine_SectTools.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Tools\section\Marine_SectToolsBase.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Tools\section\Marine_SectToolsRepairment.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Tools\tools\MarineBase_Tools.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Tools\water\Marine_WaterTools.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Wave\FirstOrder\Marine_FirstOrderWave.cxx" />
