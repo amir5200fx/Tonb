@@ -25,6 +25,7 @@ namespace tnbLib
 
 			std::shared_ptr<Marine_Shape> theShape_;
 
+			Standard_Boolean IsSymmetric_;
 
 			/*private functions and operators*/
 
@@ -51,6 +52,7 @@ namespace tnbLib
 			// default constructor
 
 			BodyConstructor_Shape()
+				: IsSymmetric_(Standard_False)
 			{}
 
 			//- constructors
@@ -60,6 +62,7 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			)
 				: BodyType(theSections)
+				, IsSymmetric_(Standard_False)
 			{}
 
 			BodyConstructor_Shape
@@ -67,6 +70,7 @@ namespace tnbLib
 				std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
 			)
 				: BodyType(std::move(theSections))
+				, IsSymmetric_(Standard_False)
 			{}
 
 			BodyConstructor_Shape
@@ -76,6 +80,7 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			)
 				: BodyType(theIndex, theName, theSections)
+				, IsSymmetric_(Standard_False)
 			{}
 
 			BodyConstructor_Shape
@@ -85,6 +90,7 @@ namespace tnbLib
 				std::vector<std::shared_ptr<Marine_CmpSection>>&& theSections
 			)
 				: BodyType(theIndex, theName, std::move(theSections))
+				, IsSymmetric_(Standard_False)
 			{}
 
 
@@ -100,9 +106,19 @@ namespace tnbLib
 				return theShape_;
 			}
 
+			auto IsSymmetric() const
+			{
+				return IsSymmetric_;
+			}
+
 			void SetShape(const std::shared_ptr<Marine_Shape>& theShape)
 			{
 				theShape_ = theShape;
+			}
+
+			void SetSymmetric(const Standard_Boolean symm)
+			{
+				IsSymmetric_ = symm;
 			}
 		};
 

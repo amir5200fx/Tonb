@@ -24,6 +24,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineL
 	ar & boost::serialization::base_object<Body_Wetted>(*this);
 
 	ar & theShape_;
+	ar & IsSymmetric_;
 	ar & theWater_;
 }
 
@@ -31,6 +32,7 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::marineLib::BodyConstructor_Shape<tnbLib::marineL
 {
 	ar & boost::serialization::base_object<Body_Wetted>(*this);
 	ar & theShape_;
+	ar & IsSymmetric_;
 	ar & theWater_;
 }
 

@@ -20,6 +20,7 @@ namespace tnbLib
 		{
 			ar & boost::serialization::base_object<Body_Dry>(*this);
 			ar & theShape_;
+			ar & IsSymmetric_;
 		}
 
 		template<>
@@ -32,6 +33,7 @@ namespace tnbLib
 		{
 			ar & boost::serialization::base_object<Body_Dry>(*this);
 			ar & theShape_;
+			ar & IsSymmetric_;
 		}
 	}
 }
