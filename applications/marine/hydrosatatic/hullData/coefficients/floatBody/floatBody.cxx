@@ -75,10 +75,17 @@ namespace tnbLib
 			Info << " calculating the wetted body..." << endl;
 			Info << endl;
 		}
+		auto wetted = Marine_BodyTools::WettedBody(displacer, myWaterDomain);
+		if (NOT wetted)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no wetted body has been created!" << endl
+				<< abort(FatalError);
+		}
 		auto wettedBody =
 			Marine_BodyTools::WettedBody
 			(
-				Marine_BodyTools::WettedBody(displacer, myWaterDomain)
+				wetted
 			);
 
 		if (verbose)
@@ -215,7 +222,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{

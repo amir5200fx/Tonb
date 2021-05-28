@@ -651,7 +651,7 @@ namespace tnbLib
 		const auto edges = retrieveShapeSections(*dist, h);
 
 		const auto Oxyz = MarineBase_Tools::CalcOxyz(b);
-		const auto ax2 = gp_Ax2(Oxyz, gp::DX());
+		const auto ax2 = gp_Ax2(Oxyz, gp::DZ());
 		const auto baseLine = gp_Ax1(Oxyz, gp::DX());
 
 		const auto tol = myTol * std::abs(Y0(b) - Y1(b));
@@ -695,6 +695,10 @@ namespace tnbLib
 		if (makeShapeHull)
 		{
 			auto shape = std::make_shared<marineLib::Shape_Hull>(0, name, h);
+			if (myBodyType IS_EQUAL bodyType::symm)
+			{
+				shape->SetSymmetric(Standard_True);
+			}
 			auto body = Marine_BodyTools::BodyCreator(sections, shape, Marine_BodyType::displacer);
 
 			myBody = std::move(body);

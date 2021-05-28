@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("isc08DispDimAnalys");
+			fileName myFileName("hullDataDispDimAnalys");
 
 			try
 			{

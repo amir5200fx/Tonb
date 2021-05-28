@@ -16,6 +16,7 @@ namespace tnbLib
 
 			/*Private Data*/
 
+			Standard_Boolean IsSymmetric_;
 
 			/*private functions and operators*/
 
@@ -25,11 +26,13 @@ namespace tnbLib
 			void serialize(Archive &ar, const unsigned int file_version)
 			{
 				ar & boost::serialization::base_object<Marine_Shape>(*this);
+				ar & IsSymmetric_;
 			}
 
 		protected:
 
 			Shape_Hull()
+				: IsSymmetric_(Standard_False)
 			{}
 
 		public:
@@ -63,6 +66,16 @@ namespace tnbLib
 			Standard_Boolean IsHull() const override
 			{
 				return Standard_True;
+			}
+
+			auto IsSymmetric() const
+			{
+				return IsSymmetric_;
+			}
+
+			void SetSymmetric(const Standard_Boolean symm)
+			{
+				IsSymmetric_ = symm;
 			}
 		};
 	}

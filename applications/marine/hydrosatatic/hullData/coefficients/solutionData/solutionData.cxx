@@ -98,6 +98,15 @@ namespace tnbLib
 		}
 		mySolutionData = std::make_shared<hydStcLib::SolutionData_Coeffs>(model->Body());
 		mySolutionData->LoadDomain(domain);
+		mySolutionData->SetCurrentSolution(hydStcLib::SolutionData_Coeffs::solutionOrder::model);
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " - symmetric body? " << (shape->IsSymmetric() ? "yes" : "no") << endl;
+			Info << endl;
+		}
+		mySolutionData->SetSymmetric(shape->IsSymmetric());
 	}
 }
 

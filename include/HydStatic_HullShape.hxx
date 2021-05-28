@@ -56,6 +56,8 @@ namespace tnbLib
 			return theCross_;
 		}
 
+		TnbHydStatic_EXPORT Standard_Boolean IsSymmetric() const;
+
 		TnbHydStatic_EXPORT void SetHull(const std::shared_ptr<marineLib::Model_Hull>& theHull);
 		TnbHydStatic_EXPORT void SetHull(std::shared_ptr<marineLib::Model_Hull>&& theHull);
 

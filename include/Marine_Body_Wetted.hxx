@@ -124,6 +124,8 @@ namespace tnbLib
 
 			std::shared_ptr<Marine_Shape> theShape_;
 
+			Standard_Boolean IsSymmetric_;
+
 			std::shared_ptr<Marine_CmpSection> theWater_;
 
 			//- private functions and operators
@@ -147,6 +149,7 @@ namespace tnbLib
 			template<class... _Types>
 			BodyConstructor_Shape(_Types&&... _Args)
 				: Body_Wetted(_Args...)
+				, IsSymmetric_(Standard_False)
 			{}
 
 			Standard_Boolean ShapeType() const override
@@ -157,6 +160,11 @@ namespace tnbLib
 			const std::shared_ptr<Marine_Shape>& Shape() const
 			{
 				return theShape_;
+			}
+
+			auto IsSymmetric() const
+			{
+				return IsSymmetric_;
 			}
 
 			void SetWL(const std::shared_ptr<Marine_CmpSection>& theWater)
@@ -177,6 +185,11 @@ namespace tnbLib
 			void SetShape(std::shared_ptr<Marine_Shape>&& theShape)
 			{
 				theShape_ = theShape;
+			}
+
+			void SetSymmetric(const Standard_Boolean symm)
+			{
+				IsSymmetric_ = symm;
 			}
 
 			const std::shared_ptr<Marine_CmpSection>& WL() const

@@ -21,6 +21,7 @@ class gp_Ax2;
 class Geom2d_Curve;
 class TopoDS_Shape;
 class gp_Pln;
+class gp_Ax2d;
 
 namespace tnbLib
 {
@@ -42,6 +43,12 @@ namespace tnbLib
 				const std::shared_ptr<Pln_Wire>& theWire,
 				const marineLib::curveType target,
 				const marineLib::curveType to
+			);
+
+		static TnbMarine_EXPORT Marine_SectionType 
+			ConvertType
+			(
+				const Marine_PlnCurveType t
 			);
 
 		static TnbMarine_EXPORT Standard_Boolean 
@@ -392,6 +399,48 @@ namespace tnbLib
 			RetrieveTriangulation
 			(
 				const Marine_CmpSection&
+			);
+
+		static TnbMarine_EXPORT Marine_PlnCurveType 
+			CheckCurveType
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>&
+			);
+
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Pln_Curve>> 
+			RepairSymmetricDeckSection
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves, 
+				const gp_Ax2d& theAxis, 
+				const Standard_Real theMinTol, 
+				const Standard_Real theMaxTol
+			);
+
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Pln_Curve>> 
+			RepairFullDeckSection
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves, 
+				const gp_Ax2d& theAxis, 
+				const Standard_Real theMinTol, 
+				const Standard_Real theMaxTol
+			);
+
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Pln_Curve>>
+			RepairSymmetricStation
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const gp_Ax2d& theAxis,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Pln_Curve>>
+			RepairFullStation
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const gp_Ax2d& theAxis,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
 			);
 
 		static TnbMarine_EXPORT void SetLocation
