@@ -10,6 +10,7 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::hydStcLib::SolutionData_Coeffs)
 {
+	ar & IsSymmetric_;
 	ar & theHull_;
 	ar & theDomain_;
 	ar & theWave_;
@@ -27,6 +28,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::hydStcLib::SolutionData_Coeffs)
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::hydStcLib::SolutionData_Coeffs)
 {
+	ar & IsSymmetric_;
 	ar & theHull_;
 	ar & theDomain_;
 	ar & theWave_;
