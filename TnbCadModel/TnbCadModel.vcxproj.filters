@@ -79,6 +79,18 @@
     <Filter Include="TnbLib\CadModel\module">
       <UniqueIdentifier>{1b024732-198e-4c8f-91c8-e9b87dd8ff08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\CadModel\Propeller">
+      <UniqueIdentifier>{320460bc-4598-4f8a-a633-aa2a78f4e441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Propeller\Blade">
+      <UniqueIdentifier>{a4dfbfd6-4dfc-45b2-8e5a-d3618944911b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Propeller\Section">
+      <UniqueIdentifier>{9008b392-becd-4ede-a6db-b7d3e5ef1df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\CadModel\Propeller\Blade\Profile">
+      <UniqueIdentifier>{5f881532-bec4-4b09-9575-d49559afe3fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\CadModel\Entities\Entity\CadModel_Entity.hxx">
