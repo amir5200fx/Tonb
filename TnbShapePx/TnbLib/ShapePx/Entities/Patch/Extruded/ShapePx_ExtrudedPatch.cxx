@@ -69,7 +69,7 @@ tnbLib::ShapePx_ExtrudedPatch::RemoveProfile
 )
 {
 	auto iter = theParToProfile_.find(theParIndex);
-	if (iter NOT_EQUAL theParToProfile_.end())
+	if (iter IS_EQUAL theParToProfile_.end())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< " the item is not in the tree!" << endl
@@ -88,7 +88,7 @@ tnbLib::ShapePx_ExtrudedPatch::RetrieveParValues
 ) const
 {
 	auto values = std::make_shared<ShapePx_ParValue>();
-	Info << "nb of pars: " << theParToProfile_.size() << endl;
+
 	for (const auto& x : theParToProfile_)
 	{
 		auto cont = std::dynamic_pointer_cast<ShapePx_ContinProfile>(x.second);
