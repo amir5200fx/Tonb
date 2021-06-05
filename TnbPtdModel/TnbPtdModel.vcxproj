@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{1182D70E-284D-4A5B-97B6-C3612C250EF4}</ProjectGuid>
+    <RootNamespace>TnbPtdModel</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)d</TargetName>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\SectionQ;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profiles;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\View;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Info;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\Parameters;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Fixed;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Constant;$(ProjectDir)TnbLib\PtdModel\Entities\Par;$(ProjectDir)TnbLib\PtdModel\Entities\BndValue;$(ProjectDir)TnbLib\PtdModel\Entities\Value;$(ProjectDir)TnbLib\PtdModel\Entities\Entity;$(ProjectDir)TnbLib\PtdModel\FormMaker;$(ProjectDir)TnbLib\PtdModel\Form\Custom;$(ProjectDir)TnbLib\PtdModel\Form\SixPars;$(ProjectDir)TnbLib\PtdModel\Form\FivePars;$(ProjectDir)TnbLib\PtdModel\Form\FourPars;$(ProjectDir)TnbLib\PtdModel\Form\ThreePars;$(ProjectDir)TnbLib\PtdModel\Form\Uniform;$(ProjectDir)TnbLib\PtdModel\Form\Linear;$(ProjectDir)TnbLib\PtdModel\Form;$(ProjectDir)TnbLib\PtdModel\xPars;$(ProjectDir)TnbLib\PtdModel\Module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>TnbPtdModel_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\SectionQ;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profiles;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\View;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Info;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\Parameters;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Fixed;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Constant;$(ProjectDir)TnbLib\PtdModel\Entities\Par;$(ProjectDir)TnbLib\PtdModel\Entities\BndValue;$(ProjectDir)TnbLib\PtdModel\Entities\Value;$(ProjectDir)TnbLib\PtdModel\Entities\Entity;$(ProjectDir)TnbLib\PtdModel\FormMaker;$(ProjectDir)TnbLib\PtdModel\Form\Custom;$(ProjectDir)TnbLib\PtdModel\Form\SixPars;$(ProjectDir)TnbLib\PtdModel\Form\FivePars;$(ProjectDir)TnbLib\PtdModel\Form\FourPars;$(ProjectDir)TnbLib\PtdModel\Form\ThreePars;$(ProjectDir)TnbLib\PtdModel\Form\Uniform;$(ProjectDir)TnbLib\PtdModel\Form\Linear;$(ProjectDir)TnbLib\PtdModel\Form;$(ProjectDir)TnbLib\PtdModel\xPars;$(ProjectDir)TnbLib\PtdModel\Module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>TnbPtdModel_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValue.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValueI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Entity\PtdModel_Entity.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Parameters\PtdModel_Parameters.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Parameters\PtdModel_ParametersI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\Constant\PtdModel_ConstPar.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedPar.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedParI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\PtdModel_Par.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\PtdModel_Pars.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Value\PtdModel_Value.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Value\PtdModel_ValueI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\FormMaker\PtdModel_FormMaker.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\Custom\PtdModel_CustomForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsFormI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsFormI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearFormI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\PtdModel_Form.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\PtdModel_Forms.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsFormI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsFormI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_Camber.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_CamberI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord\PtdModel_BladeFormNo1_Chord.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord\PtdModel_BladeFormNo1_ChordI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch\PtdModel_BladeFormNo1_Pitch.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch\PtdModel_BladeFormNo1_PitchI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\PtdModel_BladeFormMakerNo1.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake\PtdModel_BladeFormNo1_Rake.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake\PtdModel_BladeFormNo1_RakeI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew\PtdModel_BladeFormNo1_Skew.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew\PtdModel_BladeFormNo1_SkewI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness\PtdModel_BladeFormNo1_Thickness.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness\PtdModel_BladeFormNo1_ThicknessI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\PtdModel_PropBladeNo1.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Parameters\PtdModel_PropParametersNo1.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Module\PtdModel_Module.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\ExpandedView\PtdModel_BladeExpandedView.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\ExpandedView\PtdModel_BladeExpandedViewI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFace.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFaceI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeForm.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeFormI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalPars.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalParsI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfo.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfoI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfiles.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfilesI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfile.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfileI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\PtdModel_PropBlade.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\SectionQ\PtdModel_BladeSectionQ.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\SectionQ\PtdModel_BladeSectionQI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSection.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSectionI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSection.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSection.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeView.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeViewI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Entity\PtdModel_PropEntity.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Profile\PtdModel_Profile.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Profile\Uniform\PtdModel_UniformProfile.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Section\PtdModel_PropSection.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\xPars\PtdModel_xPars.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\xPars\PtdModel_xParsI.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValue.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValueIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Parameters\PtdModel_ParametersIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Par\Constant\PtdModel_ConstParIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedPar.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedParIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Value\PtdModel_Value.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Value\PtdModel_ValueIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\FormMaker\PtdModel_FormMaker.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsForm.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsFormIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsForm.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsFormIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearForm.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearFormIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\PtdModel_Form.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsForm.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsFormIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsForm.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsFormIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformForm.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformFormIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_Camber.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord\PtdModel_BladeFormNo1_Chord.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch\PtdModel_BladeFormNo1_Pitch.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\PtdModel_BladeFormMakerNo1.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake\PtdModel_BladeFormNo1_Rake.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew\PtdModel_BladeFormNo1_Skew.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness\PtdModel_BladeFormNo1_Thickness.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\PtdModel_PropBladeNo1.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFace.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFaceIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeForm.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeFormIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalParsIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfoIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfiles.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfilesIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfile.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfileIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\PtdModel_PropBlade.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSection.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSectionIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSection.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSectionIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSection.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSectionIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeViewIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\xPars\PtdModel_xParsIO.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

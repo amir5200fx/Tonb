@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{d1c2cb23-705d-4cf8-b83a-cb3b7a2dd60c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel">
+      <UniqueIdentifier>{ecc5c282-8a13-43fa-b82d-a7c46a2b6321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities">
+      <UniqueIdentifier>{6585adf8-321c-44fc-ba4a-b2f471f48afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\Entity">
+      <UniqueIdentifier>{bf5f9fca-21d7-4af1-9ec2-22f8b8fea347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\Par">
+      <UniqueIdentifier>{24ec3828-1bb6-4071-bb2f-ddb316bf4c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\Par\Constant">
+      <UniqueIdentifier>{523fffa2-4090-4ee5-83b6-c88bb593586c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\Par\Fixed">
+      <UniqueIdentifier>{b60fca3c-843b-4d59-a17c-66aee57385a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\BndValue">
+      <UniqueIdentifier>{8cd778b4-ecf7-4259-8af8-9af7881f1c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller">
+      <UniqueIdentifier>{6d93d5e0-181f-4773-b738-8209a748cb53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Section">
+      <UniqueIdentifier>{4d7f0a25-8089-4a11-9353-b20b6b38acfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade">
+      <UniqueIdentifier>{973c4518-85ab-4463-b82d-7c6c264da3db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Profile">
+      <UniqueIdentifier>{78b5360b-633a-47b3-808f-8240d792b2ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Entity">
+      <UniqueIdentifier>{dc210517-e25a-4fe0-9fd9-739cebd68193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Profile\Linear">
+      <UniqueIdentifier>{f4bb3c90-0fa2-4c29-93a7-bf82bff710b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Profile\Uniform">
+      <UniqueIdentifier>{4e41a5a8-439e-4523-b92d-d74dda18b324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Module">
+      <UniqueIdentifier>{b237551f-3d87-4933-af49-a1f3d90a6868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form">
+      <UniqueIdentifier>{2f7f310c-e9eb-4a2f-bea8-b1c3327c07da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form\Linear">
+      <UniqueIdentifier>{dca6671b-090a-47e8-8490-50551dca3793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form\Uniform">
+      <UniqueIdentifier>{a52fd857-2bbc-4eb6-8a3e-716920ee0673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form\SixPars">
+      <UniqueIdentifier>{8ad82a89-705a-4fd9-9fff-c2a1606080b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form\FivePars">
+      <UniqueIdentifier>{d618402f-1ba1-4eaf-9bd4-21ef21c8403f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form\FourPars">
+      <UniqueIdentifier>{d734f310-aee7-4503-8a95-2008d876d16f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form\ThreePars">
+      <UniqueIdentifier>{78d7d52e-a574-444b-a7b3-d6aeeeffb219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Form\CustomPars">
+      <UniqueIdentifier>{6f3c8c1d-cc08-4b67-bf8d-865066ee592d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\xPars">
+      <UniqueIdentifier>{0c46fb4b-9736-49ba-95ed-e60ac1abde56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\ExpandedView">
+      <UniqueIdentifier>{2253b6cd-46c5-468f-9e94-40264b51e8d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Section">
+      <UniqueIdentifier>{a6131d9d-8131-4c5c-ad99-a2a5c9825d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped">
+      <UniqueIdentifier>{e6c2218e-3f75-43e6-b8ce-ca9a1862a73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Section\Wrapped">
+      <UniqueIdentifier>{e372c8ab-bd48-451e-b0cc-7c2ba8f0332b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Face">
+      <UniqueIdentifier>{7e9297b6-ffa9-4a80-bb90-43454f226cf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\View">
+      <UniqueIdentifier>{4b329a91-96a3-4e86-a980-d3d1eb1a0b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Profile">
+      <UniqueIdentifier>{4b2ddd42-262e-4685-b0ff-00b26d50dc9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Profiles">
+      <UniqueIdentifier>{47c8d9e4-d7d5-497b-9933-9aba61798797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Info">
+      <UniqueIdentifier>{56baebe7-73da-4500-abca-bf8d56bbbe2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\Form">
+      <UniqueIdentifier>{b62def24-6fca-46ae-a0a7-ab8b24a590f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models">
+      <UniqueIdentifier>{6261132e-0c85-4804-8d4a-00fa8419abdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller">
+      <UniqueIdentifier>{9b19fbdb-db44-408a-99d5-189d8b4f5637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1">
+      <UniqueIdentifier>{41e63d21-0060-49bc-b3c4-6ed28acd7cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Parameters">
+      <UniqueIdentifier>{be565dfc-6185-42ea-9528-695b8686c844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade">
+      <UniqueIdentifier>{2989dc5b-2776-428f-b665-48c5a5e71c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form">
+      <UniqueIdentifier>{03a03ebb-7145-4f8c-9e3c-d98d0062422b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch">
+      <UniqueIdentifier>{ba203916-cc0d-4a0f-a333-67015a65ebfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord">
+      <UniqueIdentifier>{1292dfa4-5fd8-433f-84dc-46e54615ee7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber">
+      <UniqueIdentifier>{cb11285e-a810-4d84-944d-ebeb1c4ccd6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew">
+      <UniqueIdentifier>{ab980787-c814-44fe-903e-014d3a2a5966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness">
+      <UniqueIdentifier>{44be1562-bcf7-488c-9058-675b6e280418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake">
+      <UniqueIdentifier>{6f2bc57d-e2c0-4f14-b2b3-f4ca47d78384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters">
+      <UniqueIdentifier>{a7d91295-e13a-426b-a70d-7409c09ca995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\Value">
+      <UniqueIdentifier>{009378c5-efa6-48c0-b518-3f921bf6fe99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\Parameters">
+      <UniqueIdentifier>{9e0a25c8-6e3d-4dbd-81e8-d09da572ac81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\FormMaker">
+      <UniqueIdentifier>{dd70124f-1fc7-423f-aa12-086a7f1ae94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Propeller\Blade\SectionQ">
+      <UniqueIdentifier>{8e7386a3-9f0d-4677-ac1d-3b1f47eeb609}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Entity\PtdModel_Entity.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\PtdModel_Par.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Par</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\Constant\PtdModel_ConstPar.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Par\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedPar.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Par\Fixed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValue.hxx">
+      <Filter>TnbLib\PtdModel\Entities\BndValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Profile\PtdModel_Profile.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Profile\Uniform\PtdModel_UniformProfile.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Profile\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Module\PtdModel_Module.hxx">
+      <Filter>TnbLib\PtdModel\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\PtdModel_Form.hxx">
+      <Filter>TnbLib\PtdModel\Form</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformForm.hxx">
+      <Filter>TnbLib\PtdModel\Form\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearForm.hxx">
+      <Filter>TnbLib\PtdModel\Form\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsForm.hxx">
+      <Filter>TnbLib\PtdModel\Form\ThreePars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsForm.hxx">
+      <Filter>TnbLib\PtdModel\Form\FourPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsForm.hxx">
+      <Filter>TnbLib\PtdModel\Form\FivePars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\Custom\PtdModel_CustomForm.hxx">
+      <Filter>TnbLib\PtdModel\Form\CustomPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsForm.hxx">
+      <Filter>TnbLib\PtdModel\Form\SixPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\xPars\PtdModel_xPars.hxx">
+      <Filter>TnbLib\PtdModel\xPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSection.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSectionI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSection.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section\Wrapped</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSection.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFace.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Face</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeView.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\View</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\ExpandedView\PtdModel_BladeExpandedView.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\ExpandedView</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\ExpandedView\PtdModel_BladeExpandedViewI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\ExpandedView</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfile.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Entity\PtdModel_PropEntity.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfiles.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Section\PtdModel_PropSection.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\PtdModel_PropBlade.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfo.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeForm.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Form</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Parameters\PtdModel_PropParametersNo1.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\PtdModel_Forms.hxx">
+      <Filter>TnbLib\PtdModel\Form</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\PtdModel_Pars.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Par</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch\PtdModel_BladeFormNo1_Pitch.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew\PtdModel_BladeFormNo1_Skew.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness\PtdModel_BladeFormNo1_Thickness.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake\PtdModel_BladeFormNo1_Rake.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_Camber.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord\PtdModel_BladeFormNo1_Chord.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalPars.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\GlobalParameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\PtdModel_PropBladeNo1.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFaceI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Face</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeFormI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Form</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalParsI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\GlobalParameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfoI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfileI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfilesI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeViewI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\View</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsFormI.hxx">
+      <Filter>TnbLib\PtdModel\Form\ThreePars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsFormI.hxx">
+      <Filter>TnbLib\PtdModel\Form\FourPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsFormI.hxx">
+      <Filter>TnbLib\PtdModel\Form\FivePars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsFormI.hxx">
+      <Filter>TnbLib\PtdModel\Form\SixPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValueI.hxx">
+      <Filter>TnbLib\PtdModel\Entities\BndValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedParI.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Par\Fixed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Value\PtdModel_Value.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Value\PtdModel_ValueI.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\xPars\PtdModel_xParsI.hxx">
+      <Filter>TnbLib\PtdModel\xPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Parameters\PtdModel_Parameters.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Parameters\PtdModel_ParametersI.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_CamberI.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord\PtdModel_BladeFormNo1_ChordI.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch\PtdModel_BladeFormNo1_PitchI.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake\PtdModel_BladeFormNo1_RakeI.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew\PtdModel_BladeFormNo1_SkewI.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness\PtdModel_BladeFormNo1_ThicknessI.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearFormI.hxx">
+      <Filter>TnbLib\PtdModel\Form\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\FormMaker\PtdModel_FormMaker.hxx">
+      <Filter>TnbLib\PtdModel\FormMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\PtdModel_BladeFormMakerNo1.hxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\SectionQ\PtdModel_BladeSectionQ.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\SectionQ</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\SectionQ\PtdModel_BladeSectionQI.hxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\SectionQ</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\PtdModel\xPars\PtdModel_xParsIO.cxx">
+      <Filter>TnbLib\PtdModel\xPars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSection.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section\Wrapped</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\PtdModel_PropBlade.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch\PtdModel_BladeFormNo1_Pitch.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew\PtdModel_BladeFormNo1_Skew.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness\PtdModel_BladeFormNo1_Thickness.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake\PtdModel_BladeFormNo1_Rake.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_Camber.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord\PtdModel_BladeFormNo1_Chord.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfile.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\PtdModel_PropBladeNo1.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFaceIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFace.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeForm.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Form</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Form\PtdModel_BladeFormIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Form</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalParsIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\GlobalParameters</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfoIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profile\PtdModel_BladeProfileIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfiles.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Profiles\PtdModel_BladeProfilesIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Profiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSection.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSectionIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSectionIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSection.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSectionIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\Section\Wrapped</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeViewIO.cxx">
+      <Filter>TnbLib\PtdModel\Propeller\Blade\View</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformForm.cxx">
+      <Filter>TnbLib\PtdModel\Form\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformFormIO.cxx">
+      <Filter>TnbLib\PtdModel\Form\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearForm.cxx">
+      <Filter>TnbLib\PtdModel\Form\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\Linear\PtdModel_LinearFormIO.cxx">
+      <Filter>TnbLib\PtdModel\Form\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\PtdModel_Form.cxx">
+      <Filter>TnbLib\PtdModel\Form</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsForm.cxx">
+      <Filter>TnbLib\PtdModel\Form\ThreePars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\ThreePars\PtdModel_ThreeParsFormIO.cxx">
+      <Filter>TnbLib\PtdModel\Form\ThreePars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsForm.cxx">
+      <Filter>TnbLib\PtdModel\Form\FourPars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\FourPars\PtdModel_FourParsFormIO.cxx">
+      <Filter>TnbLib\PtdModel\Form\FourPars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsForm.cxx">
+      <Filter>TnbLib\PtdModel\Form\FivePars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\FivePars\PtdModel_FiveParsFormIO.cxx">
+      <Filter>TnbLib\PtdModel\Form\FivePars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsForm.cxx">
+      <Filter>TnbLib\PtdModel\Form\SixPars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Form\SixPars\PtdModel_SixParsFormIO.cxx">
+      <Filter>TnbLib\PtdModel\Form\SixPars</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Par\Constant\PtdModel_ConstParIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Par\Constant</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedPar.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Par\Fixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Par\Fixed\PtdModel_FixedParIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Par\Fixed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Value\PtdModel_Value.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Value\PtdModel_ValueIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValueIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\BndValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValue.cxx">
+      <Filter>TnbLib\PtdModel\Entities\BndValue</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Parameters\PtdModel_ParametersIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\FormMaker\PtdModel_FormMaker.cxx">
+      <Filter>TnbLib\PtdModel\FormMaker</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\PtdModel_BladeFormMakerNo1.cxx">
+      <Filter>TnbLib\PtdModel\Models\Propeller\No1\Blade\Form</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>
