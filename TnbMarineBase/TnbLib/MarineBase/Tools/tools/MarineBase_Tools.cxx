@@ -264,21 +264,21 @@ tnbLib::MarineBase_Tools::Curve
 		Pts.SetValue(++K, gp_Pnt2d(x.x, x.value));
 	}
 
-	Geom2dAPI_Interpolate Interpolation(PtsPtr, Standard_False, 1.0e-6);
-	Interpolation.Perform();
-
-	if (!Interpolation.IsDone())
-	{
-		FatalErrorIn
-		(
-			"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
-		)
-			<< "Failed to interpolation!"
-			<< abort(FatalError);
-	}
-
 	try
 	{
+		Geom2dAPI_Interpolate Interpolation(PtsPtr, Standard_False, 1.0e-6);
+		Interpolation.Perform();
+
+		if (!Interpolation.IsDone())
+		{
+			FatalErrorIn
+			(
+				"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
+			)
+				<< "Failed to interpolation!"
+				<< abort(FatalError);
+		}
+
 		return Interpolation.Curve();
 	}
 	catch (StdFail_NotDone&)

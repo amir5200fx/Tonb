@@ -926,8 +926,8 @@ tnbLib::Marine_SectTools::DisplacerSection
 	const std::shared_ptr<Marine_Section>& theSection
 )
 {
-	auto wetted = std::dynamic_pointer_cast<marineLib::Section_Displacer>(theSection);
-	if (NOT wetted)
+	auto disp = std::dynamic_pointer_cast<marineLib::Section_Displacer>(theSection);
+	if (NOT disp)
 	{
 		FatalErrorIn
 		(
@@ -936,7 +936,7 @@ tnbLib::Marine_SectTools::DisplacerSection
 			<< "the sections is not displacer" << endl
 			<< abort(FatalError);
 	}
-	return std::move(wetted);
+	return std::move(disp);
 }
 
 std::shared_ptr<tnbLib::marineLib::Section_Sail> 

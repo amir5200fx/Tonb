@@ -289,9 +289,6 @@
     <Filter Include="TnbLib\MarineBase\Rotate">
       <UniqueIdentifier>{69883273-b802-4ff3-9fca-b9476a0a9503}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\PortLib">
-      <UniqueIdentifier>{054a827f-de9a-4b49-8a41-9790a05f17d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\Section\Water">
       <UniqueIdentifier>{c2d28120-80c4-45a8-bbf0-494fff8c2c55}</UniqueIdentifier>
     </Filter>
@@ -837,9 +834,6 @@
     <ClInclude Include="TnbLib\MarineBase\Rotate\Marine_Rotate.hxx">
       <Filter>TnbLib\MarineBase\Rotate</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\PortLib\Marine_PortLib.hxx">
-      <Filter>TnbLib\MarineBase\PortLib</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\CG\Marine_CG.hxx">
       <Filter>TnbLib\MarineBase\Entities\CG</Filter>
     </ClInclude>
@@ -1324,9 +1318,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Launch\Marine_Launch.cxx">
       <Filter>TnbLib\MarineBase\Launch</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\PortLib\Marine_PortLib.cxx">
-      <Filter>TnbLib\MarineBase\PortLib</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\CG\Component\Marine_CGCompt.cxx">
       <Filter>TnbLib\MarineBase\Entities\CG\Component</Filter>
