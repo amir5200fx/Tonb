@@ -355,6 +355,9 @@
     <Filter Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams">
       <UniqueIdentifier>{4546e183-0956-4ead-a6bd-f0f26ea4f0eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\BonjeanGraph">
+      <UniqueIdentifier>{b3b43441-82c6-451f-90bd-6b418c5d9f98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -740,6 +743,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_HydCurves.hxx">
       <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_DisContinuBonjean.hxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanCurves</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_DisContinuBonjeanI.hxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanCurves</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\BonjeanGraph\HydStatic_BonjeanGraph.hxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\BonjeanGraph\HydStatic_BonjeanGraphI.hxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanGraph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1142,5 +1157,20 @@
     <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_HydCurvesIO.cxx">
       <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_DisContinuBonjean.cxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanCurves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_DisContinuBonjeanRecalculate.cxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanCurves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\BonjeanGraph\HydStatic_BonjeanGraph.cxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\BonjeanGraph\HydStatic_BonjeanGraphIO.cxx">
+      <Filter>TnbLib\Hydrostatic\BonjeanGraph</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

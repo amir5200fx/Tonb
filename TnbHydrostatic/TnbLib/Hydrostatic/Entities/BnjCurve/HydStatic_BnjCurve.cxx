@@ -15,6 +15,16 @@ tnbLib::HydStatic_BnjCurve::HydStatic_BnjCurve
 )
 	: HydStatic_HydCurve(0, "bonjean curve", theCurve)
 {
+	// empty body [6/3/2021 Amir]
+}
+
+tnbLib::HydStatic_BnjCurve::HydStatic_BnjCurve
+(
+	Handle(Geom2d_Curve)&& theCurve
+)
+	: HydStatic_HydCurve(0, "bonjean curve", std::move(theCurve))
+{
+	// empty body [6/3/2021 Amir]
 }
 
 tnbLib::HydStatic_BnjCurve::HydStatic_BnjCurve
@@ -24,6 +34,7 @@ tnbLib::HydStatic_BnjCurve::HydStatic_BnjCurve
 )
 	: HydStatic_HydCurve(theIndex, "bonjean curve", theCurve)
 {
+	// empty body [6/3/2021 Amir]
 }
 
 tnbLib::HydStatic_BnjCurve::HydStatic_BnjCurve
@@ -34,6 +45,7 @@ tnbLib::HydStatic_BnjCurve::HydStatic_BnjCurve
 )
 	: HydStatic_HydCurve(theIndex, theName, theCurve)
 {
+	// empty body [6/3/2021 Amir]
 }
 
 Standard_Boolean 

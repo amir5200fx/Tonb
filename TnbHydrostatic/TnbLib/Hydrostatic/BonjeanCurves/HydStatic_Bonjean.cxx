@@ -58,6 +58,7 @@ namespace tnbLib
 				}
 			}
 
+			indx = 0;  //  [5/29/2021 Amir]
 			if (indx < 0)
 			{
 				FatalErrorIn(FunctionSIG)
