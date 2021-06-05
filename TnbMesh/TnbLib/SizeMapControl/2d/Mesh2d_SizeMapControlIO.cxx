@@ -2,7 +2,7 @@
 
 #include <Cad2d_Plane.hxx>
 #include <Mesh_ReferenceValues.hxx>
-#include <Mesh2d_SizeMapControl.hxx>
+#include <Mesh2d_SizeMapTool.hxx>
 
 namespace tnbLib
 {

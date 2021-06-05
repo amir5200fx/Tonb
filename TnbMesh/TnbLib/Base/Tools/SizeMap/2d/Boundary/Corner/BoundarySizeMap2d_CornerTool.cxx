@@ -26,7 +26,7 @@ tnbLib::BoundarySizeMap2d_CornerTool::BoundarySizeMap2d_CornerTool
 	const std::shared_ptr<Mesh_ReferenceValues>& theRef,
 	const std::shared_ptr<Cad2d_Plane>& thePlane
 )
-	: Mesh2d_BoundarySizeMapTool(theRef, thePlane)
+	: Mesh2d_BoundarySizeMapTool(thePlane, theRef)
 	, theBucketSize_(DEFAULT_BUCKETSIZE)
 	, theMinSubdivision_(DEFAULT_MIN_SUBDIVISION)
 	, theMaxSubdivision_(DEFAULT_MAX_SUBDIVISION)

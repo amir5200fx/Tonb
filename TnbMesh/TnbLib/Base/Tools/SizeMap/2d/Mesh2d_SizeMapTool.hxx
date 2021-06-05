@@ -47,11 +47,12 @@ namespace tnbLib
 		{}
 
 
+	public:
+
 		virtual ~Mesh2d_SizeMapTool()
 		{}
 
-	public:
-
+		//- public functions and operators
 
 		const auto& Plane() const
 		{
@@ -59,10 +60,6 @@ namespace tnbLib
 		}
 	};
 }
-
-
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Mesh2d_SizeMapTool);
-
 
 namespace tnbLib
 {
@@ -83,5 +80,7 @@ namespace tnbLib
 			const unsigned int /*file_version*/
 			);
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Mesh2d_SizeMapTool);
 
 #endif // !_Mesh2d_SizeMapTool_Header

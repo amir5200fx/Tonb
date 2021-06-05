@@ -25,6 +25,7 @@ namespace tnbLib
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
 			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & theName_;
 		}
 
 	protected:

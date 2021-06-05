@@ -22,6 +22,20 @@ namespace tnbLib
 		std::list<word> theCornerPatches_;
 		std::list<word> theSegmentPatches_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh2d_SizeMapTool>(*this);
+
+			ar & theCornerPatches_;
+			ar & theSegmentPatches_;
+		}
+
 	protected:
 
 		//- default constructor
@@ -33,8 +47,8 @@ namespace tnbLib
 
 		Mesh2d_BoundarySizeMapTool
 		(
-			const std::shared_ptr<Mesh_ReferenceValues>& theRef,
-			const std::shared_ptr<Cad2d_Plane>& thePlane
+			const std::shared_ptr<Cad2d_Plane>& thePlane,
+			const std::shared_ptr<Mesh_ReferenceValues>& theRef
 		)
 			: Mesh2d_SizeMapTool(theRef, thePlane)
 		{}
@@ -72,5 +86,7 @@ namespace tnbLib
 		TnbMesh_EXPORT std::vector<std::shared_ptr<Pln_Edge>> RetrieveSegments() const;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Mesh2d_BoundarySizeMapTool);
 
 #endif // !_Mesh2d_BoundarySizeMapTool_Header

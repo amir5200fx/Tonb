@@ -5,12 +5,10 @@
 #include <Entity2d_Metric1.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <GeoMesh_Background.hxx>
+#include <GeoMesh2d_MetricBackgroundFwd.hxx>
 
 namespace tnbLib
 {
-
-	typedef GeoMesh_Background<GeoMesh2d_Data, Entity2d_Metric1>
-		GeoMesh2d_MetricBackground;
 
 	template<>
 	void GeoMesh2d_MetricBackground::HvCorrection

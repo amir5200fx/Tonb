@@ -952,6 +952,24 @@
     <Filter Include="TnbLib\Aft\TopoData">
       <UniqueIdentifier>{7c866906-ed3f-4917-9bcd-c61b501bc9d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\SolutionData\2d">
+      <UniqueIdentifier>{36c92cf2-fd4d-4859-a938-c0d98abc08a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\UnionSizeMap">
+      <UniqueIdentifier>{7b26e1e3-a88d-4622-a5d2-1c4bf2aed73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\UnionSizeMap\traits">
+      <UniqueIdentifier>{9247a1ef-bfc2-4cd4-a3a6-07e35adeb2a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\UnionSizeMap\2d">
+      <UniqueIdentifier>{707cc1af-4fb3-40b0-8877-0c5c52829180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso">
+      <UniqueIdentifier>{18807768-894e-4569-8212-cffe6ea49b0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\UnionSizeMap\2d\AnIso">
+      <UniqueIdentifier>{805dd5c3-9b6c-4e92-bee3-e9ca73af15e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -2118,9 +2136,6 @@
     <ClInclude Include="TnbLib\Aft\Data\AnIso\2d\Aft2d_GlobalDataAnIsoFwd.hxx">
       <Filter>TnbLib\Aft\Data\AnIso\2d</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Base\SolutionData\Mesh2d_SolutionData.hxx">
-      <Filter>TnbLib\Base\SolutionData</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\SizeMapControl\Mesh_SizeMapControl.hxx">
       <Filter>TnbLib\SizeMapControl</Filter>
     </ClInclude>
@@ -2165,6 +2180,30 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\TopoData\Aft_TopoGlobalDataI.hxx">
       <Filter>TnbLib\Aft\TopoData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SolutionData\Mesh_SolutionData.hxx">
+      <Filter>TnbLib\Base\SolutionData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SolutionData\2d\Mesh2d_SolutionData.hxx">
+      <Filter>TnbLib\Base\SolutionData\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SolutionData\2d\Mesh2d_SolutionDataFwd.hxx">
+      <Filter>TnbLib\Base\SolutionData\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\Mesh_UnionSizeMap.hxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\Mesh_UnionSizeMapI.hxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\traits\Mesh_UnionSizeMap_Traits.hxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMap.hxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap\2d\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMapFwd.hxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap\2d\Iso</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2488,6 +2527,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Region\Mesh_Region.cxx">
       <Filter>TnbLib\Region</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\Mesh_UnionSizeMap.cxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMap.cxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap\2d\Iso</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
