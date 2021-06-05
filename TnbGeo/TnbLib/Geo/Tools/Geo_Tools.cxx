@@ -257,6 +257,34 @@ tnbLib::Geo_Tools::Triangulation
 	return std::move(tr);
 }
 
+std::shared_ptr<tnbLib::Entity2d_Triangulation>
+tnbLib::Geo_Tools::Triangulation
+(
+	const Entity2d_Chain & theChain
+)
+{
+	auto tr = std::make_shared<Entity2d_Triangulation>();
+	Debug_Null_Pointer(tr);
+
+	auto& pts = tr->Points();
+	auto& indices = tr->Connectivity();
+
+	pts = theChain.Points();
+	for (const auto& x : theChain.Connectivity())
+	{
+		auto i0 = x.Value(0);
+		auto i1 = x.Value(1);
+
+		connectivity::triple t;
+		t.Value(0) = i0;
+		t.Value(1) = i1;
+		t.Value(2) = i0;
+
+		indices.push_back(std::move(t));
+	}
+	return std::move(tr);
+}
+
 std::shared_ptr<tnbLib::Entity2d_Polygon>
 tnbLib::Geo_Tools::GetPolygon(const Entity2d_Triangle & t)
 {

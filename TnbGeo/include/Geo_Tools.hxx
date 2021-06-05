@@ -470,6 +470,12 @@ namespace tnbLib
 				const Entity3d_Chain& theChain
 			);
 
+		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Triangulation>
+			Triangulation
+			(
+				const Entity2d_Chain& theChain
+			);
+
 		static TnbGeo_EXPORT std::vector<Entity2d_Triangle> 
 			Intersections
 			(

@@ -139,6 +139,8 @@ namespace tnbLib
 		void Add(const Entity_StaticData& theChain);
 		void Add(Entity_StaticData&& theChain);
 
+		void Clear();
+
 		void ExportToPlt(std::fstream& File) const;
 
 		void ExportToPlt(OFstream& File) const;
@@ -212,6 +214,9 @@ namespace tnbLib
 			const Standard_Integer theElement,
 			const Standard_Integer theEdge
 		);
+
+		void Clear();
+
 	};
 }
 

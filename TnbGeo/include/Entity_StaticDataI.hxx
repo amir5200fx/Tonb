@@ -65,6 +65,14 @@ namespace tnbLib
 	}
 
 	template<class Point, class ConnectType, bool NeighbData>
+	void Entity_StaticData<Point, ConnectType, NeighbData>::Clear()
+	{
+		thePoints_.clear();
+		theConnectivity_.clear();
+		theBoundingBox_.reset();
+	}
+
+	template<class Point, class ConnectType, bool NeighbData>
 	std::shared_ptr<Entity_StaticData<Point, ConnectType, NeighbData>>
 		Entity_StaticData<Point, ConnectType, NeighbData>::Added
 		(
@@ -102,4 +110,11 @@ namespace tnbLib
 		ar& boost::serialization::base_object<base>(*this);
 		ar& Neighbors();
 	}*/
+
+	template<class Point, class ConnectType>
+	inline void tnbLib::Entity_StaticData<Point, ConnectType, true>::Clear()
+	{
+		base::Clear();
+		theNeighbors_.clear();
+	}
 }
