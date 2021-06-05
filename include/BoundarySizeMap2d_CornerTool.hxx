@@ -24,6 +24,19 @@ namespace tnbLib
 		{}
 
 
+		//- private functions and operators
+
+		friend boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh2d_BoundarySizeMapTool>(*this);
+			ar & theBucketSize_;
+			ar & theMinSubdivision_;
+			ar & theMaxSubdivision_;
+		}
+
 	public:
 
 
@@ -61,5 +74,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::BoundarySizeMap2d_CornerTool);
 
 #endif // !_BoundarySizeMap2d_CornerTool_Header

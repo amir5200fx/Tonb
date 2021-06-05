@@ -4,12 +4,10 @@
 
 #include <GeoMesh_Background.hxx>
 #include <GeoMesh2d_Data.hxx>
+#include <GeoMesh2d_BackgroundFwd.hxx>
 
 namespace tnbLib
 {
-
-	typedef GeoMesh_Background<GeoMesh2d_Data, Standard_Real>
-		GeoMesh2d_Background;
 
 	template<>
 	void GeoMesh2d_Background::HvCorrection

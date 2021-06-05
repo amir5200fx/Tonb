@@ -47,7 +47,12 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
-		static std::shared_ptr<Pln_Wire> WaterSection(const Pnt2d& theP0, const Pnt2d& theP1);
+		static TnbMarine_EXPORT std::shared_ptr<Pln_Wire> 
+			WaterSection
+			(
+				const Pnt2d& theP0, 
+				const Pnt2d& theP1
+			);
 
 		static TnbMarine_EXPORT std::shared_ptr<Pln_Wire> 
 			WaterSection

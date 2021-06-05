@@ -36,9 +36,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< " this function is not supposed to be called!" << endl
-				<< abort(FatalError);
+			// it's not supposed to be called! [5/30/2021 Amir]
+			NotImplemented;
 		}
 
 	protected:
@@ -59,6 +58,9 @@ namespace tnbLib
 			: theReference_(theRef)
 		{}
 
+
+		virtual ~Mesh_SizeMapToolBase()
+		{}
 
 		auto& ChangeBackMesh()
 		{

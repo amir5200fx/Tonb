@@ -44,6 +44,11 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT HydStatic_BnjCurve
 		(
+			Handle(Geom2d_Curve)&& theCurve
+		);
+
+		TnbHydStatic_EXPORT HydStatic_BnjCurve
+		(
 			const Standard_Integer theIndex,
 			const Handle(Geom2d_Curve)& theCurve
 		);
@@ -56,7 +61,7 @@ namespace tnbLib
 		);
 
 
-		//- private functions and operators
+		//- public functions and operators
 
 		TnbHydStatic_EXPORT Standard_Boolean IsIntersect
 		(

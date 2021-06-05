@@ -34,6 +34,21 @@
     <Filter Include="TnbLib\ModelPx\Vessel\DisplNo1">
       <UniqueIdentifier>{ea1e19a2-6ec1-4fe8-97bc-bc37f1e16b09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Parameter">
+      <UniqueIdentifier>{df7f86dc-2b6f-4faa-a8ce-10ae234bf02f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Parameter\Constant">
+      <UniqueIdentifier>{42bdd5ed-5b38-4f9a-92d4-56e3edb262a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Parameter\Free">
+      <UniqueIdentifier>{c6160523-4a34-4e3a-a911-a0cc64c0e3a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\Parameter\Fixed">
+      <UniqueIdentifier>{e5a21034-e738-4a3d-9473-ad94f839a335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ModelPx\Entities\FieldFunction">
+      <UniqueIdentifier>{08223a9a-3032-48f8-abc7-23840875e92f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ModelPx\Entities\Entity\ModelPx_Entity.hxx">
@@ -47,6 +62,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\ModelPx\Module\ModelPx_Module.hxx">
       <Filter>TnbLib\ModelPx\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ModelPx\Entities\Parameter\ModelPx_Parameter.hxx">
+      <Filter>TnbLib\ModelPx\Entities\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ModelPx\Entities\FieldFunction\ModelPx_FieldFunction.hxx">
+      <Filter>TnbLib\ModelPx\Entities\FieldFunction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

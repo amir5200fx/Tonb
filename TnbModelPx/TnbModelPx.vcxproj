@@ -137,6 +137,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ModelPx\Entities\Entity\ModelPx_Entity.hxx" />
+    <ClInclude Include="TnbLib\ModelPx\Entities\FieldFunction\ModelPx_FieldFunction.hxx" />
+    <ClInclude Include="TnbLib\ModelPx\Entities\Parameter\ModelPx_Parameter.hxx" />
     <ClInclude Include="TnbLib\ModelPx\Entities\Type\ModelPx_Type.hxx" />
     <ClInclude Include="TnbLib\ModelPx\Entities\Vessel\ModelPx_Vessel.hxx" />
     <ClInclude Include="TnbLib\ModelPx\Module\ModelPx_Module.hxx" />
