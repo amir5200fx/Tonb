@@ -195,6 +195,39 @@ tnbLib::SectPx_PntTools::TrackPnts
 	return std::move(pnts);
 }
 
+std::vector<std::shared_ptr<tnbLib::SectPx_Pnt>> 
+tnbLib::SectPx_PntTools::Neighbors
+(
+	const std::shared_ptr<SectPx_Pnt>& thePnt
+)
+{
+	std::vector<std::shared_ptr<SectPx_Pnt>> neighbors;
+	neighbors.reserve(2);
+
+	auto tPnt = std::dynamic_pointer_cast<SectPx_TPnt>(thePnt);
+	Debug_Null_Pointer(tPnt);
+
+	const auto& edges = tPnt->Edges();
+	for (const auto& x : edges)
+	{
+		auto edge = x.second.lock();
+		Debug_Null_Pointer(edge);
+
+		const auto& p0 = edge->P0();
+		const auto& p1 = edge->P0();
+
+		if (p0 NOT_EQUAL thePnt)
+		{
+			neighbors.push_back(p0);
+		}
+		if (p1 NOT_EQUAL thePnt)
+		{
+			neighbors.push_back(p1);
+		}
+	}
+	return std::move(neighbors);
+}
+
 void tnbLib::SectPx_PntTools::deAttach
 (
 	const std::shared_ptr<SectPx_TPnt>& thePnt,
