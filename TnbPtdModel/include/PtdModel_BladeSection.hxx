@@ -3,7 +3,7 @@
 #define _PtdModel_BladeSection_Header
 
 #include <Pnt3d.hxx>
-#include <PtdModel_Module.hxx>
+#include <PtdModel_AirfoilSectionQ.hxx>
 
 #include <vector>
 
@@ -11,17 +11,23 @@ namespace tnbLib
 {
 
 	class PtdModel_BladeSection
+		: public PtdModel_AirfoilSectionQ<Pnt3d>
 	{
 
-		/*Private Data*/
+		typedef PtdModel_AirfoilSectionQ<Pnt3d> base;
 
-		std::vector<Pnt3d> theFace_;
-		std::vector<Pnt3d> theBack_;
+		/*Private Data*/
 
 
 		//- private functions and operators
 
-		TNB_SERIALIZATION(TnbPtdModel_EXPORT);
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<PtdModel_AirfoilSectionQ<Pnt3d>>(*this);
+		}
 
 	protected:
 
@@ -56,12 +62,12 @@ namespace tnbLib
 
 		const auto& Face() const
 		{
-			return theFace_;
+			return base::FaceQ().Points;
 		}
 
 		const auto& Back() const
 		{
-			return theBack_;
+			return base::BackQ().Points;
 		}
 
 		inline void SetFace(std::vector<Pnt3d>&&);

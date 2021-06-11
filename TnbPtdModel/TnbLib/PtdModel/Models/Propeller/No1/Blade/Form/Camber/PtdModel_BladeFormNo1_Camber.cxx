@@ -14,6 +14,8 @@ namespace tnbLib
 	word ptdModel::BladeFormNo1_Camber::MAX_CAMBER_LOCATION = "MaxCamberLoc";
 	word ptdModel::BladeFormNo1_Camber::ROOT_WEIGHT = "RootWeight";
 	word ptdModel::BladeFormNo1_Camber::TIP_WEIGHT = "TipWeight";
+
+	word ptdModel::BladeFormNo1_Camber::TypeName_ = "Camber";
 }
 
 #define GetId(par) (size_t)Parameters::par
@@ -32,6 +34,12 @@ Standard_Integer
 tnbLib::ptdModel::BladeFormNo1_Camber::NbParameters() const
 {
 	return Standard_Integer(6);
+}
+
+tnbLib::word 
+tnbLib::ptdModel::BladeFormNo1_Camber::GetTypeName() const
+{
+	return TypeName_;
 }
 
 tnbLib::word 
@@ -55,6 +63,8 @@ tnbLib::ptdModel::BladeFormNo1_Camber::CreateForm() const
 	auto form = std::make_shared<PtdModel_SixParsForm>();
 	Debug_Null_Pointer(form);
 
+	form->SetName(GetTypeName());
+
 	for (int i = 0; i < NbParameters(); i++)
 	{
 		auto x = PtdModel_FormMaker::Parameter(Parameter(i));
@@ -67,7 +77,7 @@ tnbLib::ptdModel::BladeFormNo1_Camber::CreateForm() const
 #include <Dir2d.hxx>
 #include <Geo_Tools.hxx>
 #include <Pln_CurveTools.hxx>
-#include <PtdModel_BladeProfile.hxx>
+#include <PtdModel_Profile.hxx>
 
 #include <Standard_Handle.hxx>
 #include <TColgp_Array1OfPnt2d.hxx>
@@ -75,15 +85,18 @@ tnbLib::ptdModel::BladeFormNo1_Camber::CreateForm() const
 
 #define GetParameter(par) PtdModel_Form::Parameter(Parameter((int)par), parMap)->Value()
 
-std::shared_ptr<tnbLib::PtdModel_BladeProfile>
+std::shared_ptr<tnbLib::PtdModel_Profile>
 tnbLib::ptdModel::BladeFormNo1_Camber::CreateProfile
 (
-	const std::shared_ptr<PtdModel_BladeGlobalPars>& theGlobal,
+	const std::shared_ptr<PtdModel_GlobalPars>& theGlobal,
 	const std::shared_ptr<PtdModel_Form>& theForm
 ) const
 {
-	const auto rH = theGlobal->HubRadius()->Value();
-	const auto dia = theGlobal->Diameter()->Value();
+	auto global = std::dynamic_pointer_cast<PtdModel_BladeGlobalPars>(theGlobal);
+	Debug_Null_Pointer(global);
+
+	const auto rH = global->HubRadius()->Value();
+	const auto dia = global->Diameter()->Value();
 
 	auto parMap = theForm->Parameters();
 
@@ -120,6 +133,9 @@ tnbLib::ptdModel::BladeFormNo1_Camber::CreateProfile
 	Mults.SetValue(2, 2);
 	Mults.SetValue(3, 3);
 
-	auto profile = PtdModel_BladeProfile::MakeProfile(Poles, Weights, Knots, Mults, Degree);
+	auto profile = PtdModel_Profile::MakeProfile(Poles, Weights, Knots, Mults, Degree);
+	Debug_Null_Pointer(profile);
+
+	profile->SetName(GetTypeName());
 	return std::move(profile);
 }

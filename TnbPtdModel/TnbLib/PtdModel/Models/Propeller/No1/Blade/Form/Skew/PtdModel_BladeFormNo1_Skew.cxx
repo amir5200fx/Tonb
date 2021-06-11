@@ -11,6 +11,8 @@ namespace tnbLib
 	word ptdModel::BladeFormNo1_Skew::ROOT_STEEP = "RootSteep";
 	word ptdModel::BladeFormNo1_Skew::TIP_SKEW = "TipSkew";
 	word ptdModel::BladeFormNo1_Skew::TIP_STEEP = "TipSteep";
+
+	word ptdModel::BladeFormNo1_Skew::TypeName_ = "Skew";
 }
 
 #define GetId(par) (size_t)Parameters::par
@@ -25,6 +27,12 @@ void tnbLib::ptdModel::BladeFormNo1_Skew::Init()
 Standard_Integer tnbLib::ptdModel::BladeFormNo1_Skew::NbParameters() const
 {
 	return 3;
+}
+
+tnbLib::word
+tnbLib::ptdModel::BladeFormNo1_Skew::GetTypeName() const
+{
+	return TypeName_;
 }
 
 tnbLib::word 
@@ -45,6 +53,8 @@ tnbLib::ptdModel::BladeFormNo1_Skew::CreateForm() const
 	auto form = std::make_shared<PtdModel_ThreeParsForm>();
 	Debug_Null_Pointer(form);
 
+	form->SetName(GetTypeName());
+
 	for (int i = 0; i < NbParameters(); i++)
 	{
 		auto x = PtdModel_FormMaker::Parameter(Parameter(i));
@@ -57,7 +67,7 @@ tnbLib::ptdModel::BladeFormNo1_Skew::CreateForm() const
 #include <Dir2d.hxx>
 #include <Geo_Tools.hxx>
 #include <Pln_CurveTools.hxx>
-#include <PtdModel_BladeProfile.hxx>
+#include <PtdModel_Profile.hxx>
 
 #include <Standard_Handle.hxx>
 #include <TColgp_Array1OfPnt2d.hxx>
@@ -65,17 +75,23 @@ tnbLib::ptdModel::BladeFormNo1_Skew::CreateForm() const
 
 #define GetParameter(par) PtdModel_Form::Parameter(Parameter((int)par), parMap)->Value()
 
-std::shared_ptr<tnbLib::PtdModel_BladeProfile> 
+std::shared_ptr<tnbLib::PtdModel_Profile> 
 tnbLib::ptdModel::BladeFormNo1_Skew::CreateProfile
 (
-	const std::shared_ptr<PtdModel_BladeGlobalPars>& theGlobal,
+	const std::shared_ptr<PtdModel_GlobalPars>& theGlobal,
 	const std::shared_ptr<PtdModel_Form>& theForm
 ) const
 {
+	auto global = std::dynamic_pointer_cast<PtdModel_BladeGlobalPars>(theGlobal);
+	Debug_Null_Pointer(global);
+
+	const auto rH = global->HubRadius()->Value();
+	const auto dia = global->Diameter()->Value();
+
 	auto parMap = theForm->Parameters();
 
-	Pnt2d p0(theGlobal->HubRadius()->Value(), 0);
-	Pnt2d p2(theGlobal->Diameter()->Value() / 2.0, GetParameter(Parameters::tipSkew));
+	Pnt2d p0(rH, 0);
+	Pnt2d p2(dia / 2.0, GetParameter(Parameters::tipSkew));
 
 	const auto dx = std::abs(p2.X() - p0.X());
 	const auto dy = std::abs(p2.Y() - p0.Y());
@@ -118,6 +134,9 @@ tnbLib::ptdModel::BladeFormNo1_Skew::CreateProfile
 	Mults.SetValue(1, 3);
 	Mults.SetValue(2, 3);
 
-	auto profile = PtdModel_BladeProfile::MakeProfile(Poles, Weights, Knots, Mults, Degree);
+	auto profile = PtdModel_Profile::MakeProfile(Poles, Weights, Knots, Mults, Degree);
+	Debug_Null_Pointer(profile);
+
+	profile->SetName(GetTypeName());
 	return std::move(profile);
 }

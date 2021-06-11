@@ -55,6 +55,11 @@ namespace tnbLib
 			return theValue_;
 		}
 
+		auto& BndValueRef()
+		{
+			return theValue_;
+		}
+
 		TnbPtdModel_EXPORT Standard_Real Value() const override;
 	};
 }

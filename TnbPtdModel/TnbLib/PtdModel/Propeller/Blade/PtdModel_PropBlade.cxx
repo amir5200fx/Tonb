@@ -3,20 +3,33 @@
 #include <Geo_xDistb.hxx>
 #include <PtdModel_xPars.hxx>
 #include <PtdModel_Form.hxx>
+#include <PtdModel_Forms.hxx>
+#include <PtdModel_Face.hxx>
 #include <PtdModel_FormMaker.hxx>
+#include <PtdModel_Profile.hxx>
+#include <PtdModel_Profiles.hxx>
+#include <PtdModel_BladeGlobalPars.hxx>
 #include <PtdModel_BladeInfo.hxx>
-#include <PtdModel_BladeFace.hxx>
-#include <PtdModel_BladeForm.hxx>
 #include <PtdModel_BladeView.hxx>
-#include <PtdModel_BladeForm.hxx>
-#include <PtdModel_BladeProfile.hxx>
-#include <PtdModel_BladeProfiles.hxx>
-#include <PtdModel_BladeFace.hxx>
 #include <PtdModel_WrappedBladeSection.hxx>
 #include <PtdModel_UnWrappedBladeSection.hxx>
 #include <PtdModel_BladeExpandedView.hxx>
+#include <PtdModel_PropSection.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+tnbLib::PtdModel_PropBlade::PtdModel_PropBlade
+(
+	const std::shared_ptr<PtdModel_BladeGlobalPars>& pars
+)
+{
+	auto bladeInfo = std::make_shared<PtdModel_BladeInfo>();
+	Debug_Null_Pointer(bladeInfo);
+
+	bladeInfo->SetGlobals(pars);
+
+	theBladeInfo_ = std::move(bladeInfo);
+}
 
 Standard_Integer 
 tnbLib::PtdModel_PropBlade::NbSections() const
@@ -28,37 +41,6 @@ tnbLib::PtdModel_PropBlade::NbSections() const
 			<< abort(FatalError);
 	}
 	return xDistb()->Size();
-}
-
-void tnbLib::PtdModel_PropBlade::CreateProfiles()
-{
-	if (NOT BladeInfo())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "no info has been found!" << endl
-			<< abort(FatalError);
-	}
-
-	const auto& bladeForm = BladeInfo()->BladeForm();
-	if (NOT bladeForm)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "no blade form has been found!" << endl
-			<< abort(FatalError);
-	}
-
-	const auto& globalPars = BladeInfo()->Globals();
-	if (NOT globalPars)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "no global parameters has been found!" << endl
-			<< abort(FatalError);
-	}
-
-	for (const auto& x : bladeForm->Forms())
-	{
-
-	}
 }
 
 void tnbLib::PtdModel_PropBlade::CalcXParameters()
@@ -99,6 +81,13 @@ void tnbLib::PtdModel_PropBlade::CalcXParameters()
 
 void tnbLib::PtdModel_PropBlade::CalcBladeView()
 {
+	if (NOT Section())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no section has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
 	auto bladeView = std::make_shared<PtdModel_BladeView>();
 	Debug_Null_Pointer(bladeView);
 
@@ -106,7 +95,7 @@ void tnbLib::PtdModel_PropBlade::CalcBladeView()
 	expandedViews.reserve(NbSections());
 	for (Standard_Integer section = 0; section < NbSections(); section++)
 	{
-		auto sectionQ = CreateSectionQ(section);
+		auto sectionQ = Section()->SectionQ(section, *this);
 		Debug_Null_Pointer(sectionQ);
 
 		auto expandedView = CreateExpandView(*sectionQ);
@@ -121,50 +110,6 @@ void tnbLib::PtdModel_PropBlade::CalcBladeView()
 	bladeView->SetWrappedSections(std::move(wrappedView));
 
 	theBladeView_ = std::move(bladeView);
-}
-
-void tnbLib::PtdModel_PropBlade::ImportMakers
-(
-	const std::vector<std::shared_ptr<PtdModel_FormMaker>>& theMakers
-)
-{
-	if (NOT BladeInfo())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "no info has been found!" << endl
-			<< abort(FatalError);
-	}
-
-	const auto& globalPars = BladeInfo()->Globals();
-	if (NOT globalPars)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "no global parameters has been found!" << endl
-			<< abort(FatalError);
-	}
-
-	auto bladeForm = std::make_shared<PtdModel_BladeForm>();
-	Debug_Null_Pointer(bladeForm);
-
-	auto bladeProfiles = std::make_shared<PtdModel_BladeProfiles>();
-	Debug_Null_Pointer(bladeProfiles);
-
-	for (const auto& maker : theMakers)
-	{
-		Debug_Null_Pointer(maker);
-
-		auto form = maker->CreateForm();
-		Debug_Null_Pointer(form);
-
-		auto profile = maker->CreateProfile(globalPars, form);
-		Debug_Null_Pointer(profile);
-
-		bladeForm->Import(std::move(form));
-		bladeProfiles->Import(std::move(profile));
-	}
-
-	BladeInfo()->SetBladeForm(std::move(bladeForm));
-	theProfiles_ = std::move(bladeProfiles);
 }
 
 void tnbLib::PtdModel_PropBlade::CreateFaces()
@@ -199,7 +144,7 @@ void tnbLib::PtdModel_PropBlade::CreateFaces()
 		}
 	}
 
-	theFace_ = PtdModel_BladeFace::CreateFace(Qs);
+	theFace_ = PtdModel_Face::CreateFace(Qs);
 
 	for (size_t section = 0; section < nbSections; section++)
 	{
@@ -216,5 +161,76 @@ void tnbLib::PtdModel_PropBlade::CreateFaces()
 		}
 	}
 
-	theBack_ = PtdModel_BladeFace::CreateFace(Qs);
+	theBack_ = PtdModel_Face::CreateFace(Qs);
 }
+
+void tnbLib::PtdModel_PropBlade::Perform()
+{
+	if (NOT BladeInfo())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no blade info has been found!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT BladeInfo()->BladeForm())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no blade form has been created!" << endl
+			<< "- please make sure the form maker has been imported." << endl
+			<< abort(FatalError);
+	}
+
+	CalcXParameters();
+
+	CalcBladeView();
+
+	CreateFaces();
+
+	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::PtdModel_PropBlade::ImportMakers
+(
+	const std::vector<std::shared_ptr<PtdModel_FormMaker>>& theMakers
+)
+{
+	if (NOT BladeInfo())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no info has been found!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& globalPars = BladeInfo()->Globals();
+	if (NOT globalPars)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no global parameters has been found!" << endl
+			<< abort(FatalError);
+	}
+
+	auto bladeForm = std::make_shared<PtdModel_Forms>();
+	Debug_Null_Pointer(bladeForm);
+
+	auto bladeProfiles = std::make_shared<PtdModel_Profiles>();
+	Debug_Null_Pointer(bladeProfiles);
+
+	for (const auto& maker : theMakers)
+	{
+		Debug_Null_Pointer(maker);
+
+		auto form = maker->CreateForm();
+		Debug_Null_Pointer(form);
+
+		auto profile = maker->CreateProfile(globalPars, form);
+		Debug_Null_Pointer(profile);
+
+		bladeForm->Import(std::move(form));
+		bladeProfiles->Import(std::move(profile));
+	}
+
+	BladeInfo()->SetBladeForm(std::move(bladeForm));
+	theProfiles_ = std::move(bladeProfiles);
+}
+

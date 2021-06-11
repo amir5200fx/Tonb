@@ -9,12 +9,12 @@ inline void tnbLib::PtdModel_BladeInfo::SetNbSpans(const Standard_Integer n)
 	theNbSpans_ = n;
 }
 
-inline void tnbLib::PtdModel_BladeInfo::SetBladeForm(const std::shared_ptr<PtdModel_BladeForm>& form)
+inline void tnbLib::PtdModel_BladeInfo::SetBladeForm(const std::shared_ptr<PtdModel_Forms>& form)
 {
 	theBladeForm_ = form;
 }
 
-inline void tnbLib::PtdModel_BladeInfo::SetBladeForm(std::shared_ptr<PtdModel_BladeForm>&& form)
+inline void tnbLib::PtdModel_BladeInfo::SetBladeForm(std::shared_ptr<PtdModel_Forms>&& form)
 {
 	theBladeForm_ = std::move(form);
 }

@@ -10,6 +10,11 @@ tnbLib::PtdModel_FormMaker::Parameter(const word & name) const
 	auto iter = theParameters_.find(name);
 	if (iter IS_EQUAL theParameters_.end())
 	{
+		Info << "parameters: " << endl;
+		for (const auto& x : theParameters_)
+		{
+			Info << " - " << x.first << endl;
+		}
 		FatalErrorIn(FunctionSIG)
 			<< "unable to find the parameter!" << endl
 			<< " -name: " << name << endl

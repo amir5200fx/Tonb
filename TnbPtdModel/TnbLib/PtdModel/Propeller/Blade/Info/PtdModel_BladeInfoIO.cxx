@@ -1,6 +1,6 @@
 #include <PtdModel_BladeInfo.hxx>
 
-#include <PtdModel_BladeForm.hxx>
+#include <PtdModel_Forms.hxx>
 #include <PtdModel_BladeGlobalPars.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::PtdModel_BladeInfo)

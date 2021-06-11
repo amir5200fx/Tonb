@@ -22,13 +22,3 @@ inline void tnbLib::PtdModel_BladeView::SetUnWrappedSections
 {
 	theUnWrappedSections_ = std::move(theSections);
 }
-
-inline void tnbLib::PtdModel_BladeView::SetFace(std::shared_ptr<PtdModel_BladeFace>&& face)
-{
-	theFace_ = std::move(face);
-}
-
-inline void tnbLib::PtdModel_BladeView::SetBack(std::shared_ptr<PtdModel_BladeFace>&& face)
-{
-	theBack_ = std::move(face);
-}

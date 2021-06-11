@@ -42,6 +42,9 @@ namespace tnbLib
 
 		public:
 
+
+			static TnbPtdModel_EXPORT word TypeName_;
+
 			//- default constructor
 
 			BladeFormNo1_Thickness()
@@ -56,15 +59,16 @@ namespace tnbLib
 			//- public functions and operators
 
 			TnbPtdModel_EXPORT Standard_Integer NbParameters() const override;
+			TnbPtdModel_EXPORT word GetTypeName() const override;
 
 			TnbPtdModel_EXPORT word Parameter(const Standard_Integer theIndex) const override;
 			inline word Parameter(const Parameters) const;
 
 			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Form> CreateForm() const override;
-			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_BladeProfile>
+			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Profile>
 				CreateProfile
 				(
-					const std::shared_ptr<PtdModel_BladeGlobalPars>&,
+					const std::shared_ptr<PtdModel_GlobalPars>&,
 					const std::shared_ptr<PtdModel_Form>&
 				) const override;
 		};

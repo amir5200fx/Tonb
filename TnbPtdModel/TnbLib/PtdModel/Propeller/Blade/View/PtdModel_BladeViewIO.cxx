@@ -1,6 +1,6 @@
 #include <PtdModel_BladeView.hxx>
 
-#include <PtdModel_BladeFace.hxx>
+#include <PtdModel_Face.hxx>
 #include <PtdModel_BladeExpandedView.hxx>
 #include <PtdModel_WrappedBladeSection.hxx>
 #include <PtdModel_UnWrappedBladeSection.hxx>

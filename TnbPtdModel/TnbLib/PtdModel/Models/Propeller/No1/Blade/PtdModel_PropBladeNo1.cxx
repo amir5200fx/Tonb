@@ -1,9 +1,11 @@
 #include <PtdModel_PropBladeNo1.hxx>
 
+#include <PtdModel_Face.hxx>
+#include <PtdModel_BladeInfo.hxx>
 #include <PtdModel_BladeSectionQ.hxx>
 #include <PtdModel_BladeView.hxx>
-#include <PtdModel_BladeFace.hxx>
 #include <PtdModel_BladeExpandedView.hxx>
+#include <PtdModel_BladeFormMakersNo1.hxx>
 #include <PtdModel_WrappedBladeSection.hxx>
 #include <PtdModel_UnWrappedBladeSection.hxx>
 #include <PtdModel_xPars.hxx>
@@ -15,9 +17,15 @@ tnbLib::PtdModel_PropBladeNo1::CreateExpandView
 ) const
 {
 	const auto& xPars = xParameters();
+	if (NOT xPars)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no xParameters has been found!" << endl
+			<< abort(FatalError);
+	}
 
-	const auto xChord = xPars->SelectParameter("xChord");
-	const auto xSkew = xPars->SelectParameter("xSkew");
+	const auto xChord = xPars->SelectParameter(ptdModel::BladeFormNo1_Chord::TypeName_);
+	const auto xSkew = xPars->SelectParameter(ptdModel::BladeFormNo1_Skew::TypeName_);
 
 	const auto& xChordRef = *xChord;
 	const auto& xSkewRef = *xSkew;
@@ -65,12 +73,19 @@ tnbLib::PtdModel_PropBladeNo1::CreateExpandView
 std::vector<std::shared_ptr<tnbLib::PtdModel_UnWrappedBladeSection>>
 tnbLib::PtdModel_PropBladeNo1::CreateUnWrappedView() const
 {
+	if (NOT xParameters())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no xParameters has been found!" << endl
+			<< abort(FatalError);
+	}
+
 	const auto& X = xParameters()->Xs();
 
-	const auto xSkew = xParameters()->SelectParameter("xSkew");
-	const auto xRake = xParameters()->SelectParameter("xRake");
-	const auto xPitch = xParameters()->SelectParameter("xPitchAngle");
-	const auto xChord = xParameters()->SelectParameter("xChord");
+	const auto xSkew = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Skew::TypeName_);
+	const auto xRake = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Rake::TypeName_);
+	const auto xPitch = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Pitch::TypeName_);
+	const auto xChord = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Chord::TypeName_);
 
 	const auto& xSkewRef = *xSkew;
 	const auto& xRakeRef = *xRake;
@@ -151,15 +166,22 @@ tnbLib::PtdModel_PropBladeNo1::CreateUnWrappedView() const
 std::vector<std::shared_ptr<tnbLib::PtdModel_WrappedBladeSection>>
 tnbLib::PtdModel_PropBladeNo1::CreateWrappedView() const
 {
+	if (NOT xParameters())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no xParameters has been found!" << endl
+			<< abort(FatalError);
+	}
+
 	Debug_If_Condition(NOT xParameters()->NbSections());
 	const auto nbSections = xParameters()->NbSections();
 
 	const auto& X = xParameters()->Xs();
 
-	const auto xSkew = xParameters()->SelectParameter("xSkew");
-	const auto xRake = xParameters()->SelectParameter("xRake");
-	const auto xPitch = xParameters()->SelectParameter("xPitchAngle");
-	const auto xChord = xParameters()->SelectParameter("xChord");
+	const auto xSkew = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Skew::TypeName_);
+	const auto xRake = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Rake::TypeName_);
+	const auto xPitch = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Pitch::TypeName_);
+	const auto xChord = xParameters()->SelectParameter(ptdModel::BladeFormNo1_Chord::TypeName_);
 
 	const auto& xSkewRef = *xSkew;
 	const auto& xRakeRef = *xRake;

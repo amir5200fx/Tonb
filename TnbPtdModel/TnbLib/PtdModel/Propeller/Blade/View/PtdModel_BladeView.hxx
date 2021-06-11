@@ -15,7 +15,7 @@ namespace tnbLib
 	class PtdModel_BladeExpandedView;
 	class PtdModel_WrappedBladeSection;
 	class PtdModel_UnWrappedBladeSection;
-	class PtdModel_BladeFace;
+	class PtdModel_Face;
 
 	class PtdModel_BladeView
 	{

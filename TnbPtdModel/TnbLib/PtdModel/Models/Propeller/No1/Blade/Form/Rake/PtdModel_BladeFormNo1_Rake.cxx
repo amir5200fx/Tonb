@@ -9,6 +9,8 @@
 namespace tnbLib
 {
 	word ptdModel::BladeFormNo1_Rake::TIP_RAKE = "TipRake";
+
+	word ptdModel::BladeFormNo1_Rake::TypeName_ = "Rake";
 }
 
 void tnbLib::ptdModel::BladeFormNo1_Rake::Init()
@@ -20,6 +22,12 @@ Standard_Integer
 tnbLib::ptdModel::BladeFormNo1_Rake::NbParameters() const
 {
 	return 1;
+}
+
+tnbLib::word
+tnbLib::ptdModel::BladeFormNo1_Rake::GetTypeName() const
+{
+	return TypeName_;
 }
 
 tnbLib::word 
@@ -34,6 +42,8 @@ tnbLib::ptdModel::BladeFormNo1_Rake::CreateForm() const
 	auto form = std::make_shared<PtdModel_UniformForm>();
 	Debug_Null_Pointer(form);
 
+	form->SetName(GetTypeName());
+
 	auto x = PtdModel_FormMaker::Parameter(Parameter(0));
 	form->SetValue(std::move(x));
 	return std::move(form);
@@ -43,7 +53,7 @@ tnbLib::ptdModel::BladeFormNo1_Rake::CreateForm() const
 #include <Dir2d.hxx>
 #include <Geo_Tools.hxx>
 #include <Pln_CurveTools.hxx>
-#include <PtdModel_BladeProfile.hxx>
+#include <PtdModel_Profile.hxx>
 
 #include <Standard_Handle.hxx>
 #include <TColgp_Array1OfPnt2d.hxx>
@@ -51,17 +61,22 @@ tnbLib::ptdModel::BladeFormNo1_Rake::CreateForm() const
 
 #define GetParameter(par) PtdModel_Form::Parameter(Parameter((int)par), parMap)->Value()
 
-std::shared_ptr<tnbLib::PtdModel_BladeProfile> 
+std::shared_ptr<tnbLib::PtdModel_Profile> 
 tnbLib::ptdModel::BladeFormNo1_Rake::CreateProfile
 (
-	const std::shared_ptr<PtdModel_BladeGlobalPars>& theGlobal,
+	const std::shared_ptr<PtdModel_GlobalPars>& theGlobal,
 	const std::shared_ptr<PtdModel_Form>& theForm
 ) const
 {
+	auto global = std::dynamic_pointer_cast<PtdModel_BladeGlobalPars>(theGlobal);
+	Debug_Null_Pointer(global);
+
+	const auto dia = global->Diameter()->Value();
+
 	auto parMap = theForm->Parameters();
 
 	Pnt2d p0(0, 0);
-	Pnt2d p1(theGlobal->Diameter()->Value() / 2, GetParameter(Parameters::tipRake));
+	Pnt2d p1(dia / 2, GetParameter(Parameters::tipRake));
 
 	Standard_Integer NbPoles = 2;
 	Standard_Integer Degree = 1;
@@ -81,6 +96,9 @@ tnbLib::ptdModel::BladeFormNo1_Rake::CreateProfile
 	Mults.SetValue(1, 2);
 	Mults.SetValue(2, 2);
 
-	auto profile = PtdModel_BladeProfile::MakeProfile(Poles, Weights, Knots, Mults, Degree);
+	auto profile = PtdModel_Profile::MakeProfile(Poles, Weights, Knots, Mults, Degree);
+	Debug_Null_Pointer(profile);
+
+	profile->SetName(GetTypeName());
 	return std::move(profile);
 }

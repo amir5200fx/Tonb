@@ -2,7 +2,7 @@
 #ifndef _PtdModel_BladeFormNo1_Camber_Header
 #define _PtdModel_BladeFormNo1_Camber_Header
 
-#include <PtdModel_BladeFormNo1.hxx>
+#include <PtdModel_BladeFormMakerNo1.hxx>
 
 namespace tnbLib
 {
@@ -11,7 +11,7 @@ namespace tnbLib
 	{
 
 		class BladeFormNo1_Camber
-			: public PtdModel_BladeFormNo1
+			: public PtdModel_BladeFormMakerNo1
 		{
 
 		public:
@@ -45,6 +45,8 @@ namespace tnbLib
 
 		public:
 
+			static TnbPtdModel_EXPORT word TypeName_;
+
 			//- default constructor
 
 			BladeFormNo1_Camber()
@@ -59,15 +61,16 @@ namespace tnbLib
 			//- public functions and operators
 
 			TnbPtdModel_EXPORT Standard_Integer NbParameters() const override;
+			TnbPtdModel_EXPORT word GetTypeName() const override;
 
 			TnbPtdModel_EXPORT word Parameter(const Standard_Integer theIndex) const override;
 			inline word Parameter(const Parameters) const;
 
 			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Form> CreateForm() const override;
-			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_BladeProfile>
+			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Profile>
 				CreateProfile
 				(
-					const std::shared_ptr<PtdModel_BladeGlobalPars>&,
+					const std::shared_ptr<PtdModel_GlobalPars>&,
 					const std::shared_ptr<PtdModel_Form>&
 				) const override;
 		};

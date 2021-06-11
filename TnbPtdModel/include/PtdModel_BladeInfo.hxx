@@ -12,7 +12,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class PtdModel_BladeForm;
+	class PtdModel_Forms;
 	class PtdModel_BladeGlobalPars;
 	class PtdModel_Par;
 
@@ -21,7 +21,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<PtdModel_BladeForm> theBladeForm_;
+		std::shared_ptr<PtdModel_Forms> theBladeForm_;
 		std::shared_ptr<PtdModel_BladeGlobalPars> theGlobals_;
 
 		Standard_Integer theNbSections_;
@@ -69,8 +69,8 @@ namespace tnbLib
 		inline void SetNbSections(const Standard_Integer);
 		inline void SetNbSpans(const Standard_Integer);
 
-		inline void SetBladeForm(const std::shared_ptr<PtdModel_BladeForm>&);
-		inline void SetBladeForm(std::shared_ptr<PtdModel_BladeForm>&&);
+		inline void SetBladeForm(const std::shared_ptr<PtdModel_Forms>&);
+		inline void SetBladeForm(std::shared_ptr<PtdModel_Forms>&&);
 		inline void SetGlobals(const std::shared_ptr<PtdModel_BladeGlobalPars>&);
 		inline void SetGlobals(std::shared_ptr<PtdModel_BladeGlobalPars>&&);
 
