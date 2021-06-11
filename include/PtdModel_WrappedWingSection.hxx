@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _PtdModel_BladeSection_Header
-#define _PtdModel_BladeSection_Header
+#ifndef _PtdModel_WrappedWingSection_Header
+#define _PtdModel_WrappedWingSection_Header
 
 #include <Pnt3d.hxx>
 #include <PtdModel_AirfoilSectionQ.hxx>
@@ -10,7 +10,7 @@
 namespace tnbLib
 {
 
-	class PtdModel_BladeSection
+	class PtdModel_WrappedWingSection
 		: public PtdModel_AirfoilSectionQ<Pnt3d>
 	{
 
@@ -29,31 +29,29 @@ namespace tnbLib
 			ar & boost::serialization::base_object<PtdModel_AirfoilSectionQ<Pnt3d>>(*this);
 		}
 
-	protected:
+	public:
 
 		//- default constructor
 
-		PtdModel_BladeSection()
+		PtdModel_WrappedWingSection()
 		{}
+
 
 		//- constructors
 
-		TnbPtdModel_EXPORT PtdModel_BladeSection
+		TnbPtdModel_EXPORT PtdModel_WrappedWingSection
 		(
-			const std::vector<Pnt3d>& theFace, 
+			const std::vector<Pnt3d>& theFace,
 			const std::vector<Pnt3d>& theBack
 		);
 
-		TnbPtdModel_EXPORT PtdModel_BladeSection
+		TnbPtdModel_EXPORT PtdModel_WrappedWingSection
 		(
 			std::vector<Pnt3d>&& theFace,
 			std::vector<Pnt3d>&& theBack
 		);
 
 	public:
-
-		virtual ~PtdModel_BladeSection()
-		{}
 
 
 		//- public functions and operators
@@ -72,11 +70,10 @@ namespace tnbLib
 
 		inline void SetFace(std::vector<Pnt3d>&&);
 		inline void SetBack(std::vector<Pnt3d>&&);
+
 	};
 }
 
-#include <PtdModel_BladeSectionI.hxx>
+#include <PtdModel_WrappedWingSectionI.hxx>
 
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::PtdModel_BladeSection);
-
-#endif // !_PtdModel_BladeSection_Header
+#endif // !_PtdModel_WrappedWingSection_Header

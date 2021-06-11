@@ -1,8 +1,8 @@
 #pragma once
-#ifndef _PtdModel_BladeFormNo1_Skew_Header
-#define _PtdModel_BladeFormNo1_Skew_Header
+#ifndef _PtdModel_WingFormNo1_Camber_Header
+#define _PtdModel_WingFormNo1_Camber_Header
 
-#include <PtdModel_BladeFormMakerNo1.hxx>
+#include <PtdModel_WingFormMakerNo1.hxx>
 
 namespace tnbLib
 {
@@ -10,28 +10,28 @@ namespace tnbLib
 	namespace ptdModel
 	{
 
-		class BladeFormNo1_Skew
-			: public PtdModel_BladeFormMakerNo1
+		class WingFormNo1_Camber
+			: public PtdModel_WingFormMakerNo1
 		{
 
 		public:
 
 			enum class Parameters
 			{
-				rootSteep = 0,
-				tipSkew,
-				tipSteep
+				rootCamber = 0
 			};
 
-			static TnbPtdModel_EXPORT word ROOT_STEEP;
-			static TnbPtdModel_EXPORT word TIP_SKEW;
-			static TnbPtdModel_EXPORT word TIP_STEEP;
+			static TnbPtdModel_EXPORT word ROOT_CAMBER;
 
 		private:
 
+
 			/*Private Data*/
 
-			word theParameters_[3];
+			word theParameter_;
+
+
+			//- private functions and operators
 
 			TnbPtdModel_EXPORT void Init();
 
@@ -41,14 +41,13 @@ namespace tnbLib
 
 			//- default constructor
 
-			BladeFormNo1_Skew()
+			WingFormNo1_Camber()
 			{
 				Init();
 			}
 
 
 			//- constructors
-
 
 
 			//- public functions and operators
@@ -70,6 +69,6 @@ namespace tnbLib
 	}
 }
 
-#include <PtdModel_BladeFormNo1_SkewI.hxx>
+#include <PtdModel_WingFormNo1_CamberI.hxx>
 
-#endif // !_PtdModel_BladeFormNo1_Skew_Header
+#endif // !_PtdModel_WingFormNo1_Camber_Header

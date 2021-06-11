@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _PtdModel_BladeFormNo1_Skew_Header
-#define _PtdModel_BladeFormNo1_Skew_Header
+#ifndef _PtdModel_BladeFormNo1_CamberLoc_Header
+#define _PtdModel_BladeFormNo1_CamberLoc_Header
 
 #include <PtdModel_BladeFormMakerNo1.hxx>
 
@@ -10,7 +10,7 @@ namespace tnbLib
 	namespace ptdModel
 	{
 
-		class BladeFormNo1_Skew
+		class BladeFormNo1_CamberLoc
 			: public PtdModel_BladeFormMakerNo1
 		{
 
@@ -18,20 +18,19 @@ namespace tnbLib
 
 			enum class Parameters
 			{
-				rootSteep = 0,
-				tipSkew,
-				tipSteep
+				maxCamberLoc = 0
 			};
 
-			static TnbPtdModel_EXPORT word ROOT_STEEP;
-			static TnbPtdModel_EXPORT word TIP_SKEW;
-			static TnbPtdModel_EXPORT word TIP_STEEP;
+			static TnbPtdModel_EXPORT word MAX_CAMBER_LOC;
 
 		private:
 
 			/*Private Data*/
 
-			word theParameters_[3];
+			word theParameter_;
+
+
+			//- private functions and operators
 
 			TnbPtdModel_EXPORT void Init();
 
@@ -41,17 +40,16 @@ namespace tnbLib
 
 			//- default constructor
 
-			BladeFormNo1_Skew()
+			BladeFormNo1_CamberLoc()
 			{
 				Init();
 			}
 
-
 			//- constructors
 
 
-
 			//- public functions and operators
+
 
 			TnbPtdModel_EXPORT Standard_Integer NbParameters() const override;
 			TnbPtdModel_EXPORT word GetTypeName() const override;
@@ -66,10 +64,11 @@ namespace tnbLib
 					const std::shared_ptr<PtdModel_GlobalPars>&,
 					const std::shared_ptr<PtdModel_Form>&
 				) const override;
+
 		};
 	}
 }
 
-#include <PtdModel_BladeFormNo1_SkewI.hxx>
+#include <PtdModel_BladeFormNo1_CamberLocI.hxx>
 
-#endif // !_PtdModel_BladeFormNo1_Skew_Header
+#endif // !_PtdModel_BladeFormNo1_CamberLoc_Header

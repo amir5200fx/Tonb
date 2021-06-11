@@ -364,10 +364,10 @@ namespace tnbLib
 			auto cost = tc[i].X();
 			auto sint = tc[i].Y();
 
-			auto xu = xc[i] + yt * sint;
-			auto yu = yc[i] - yt * cost;
+			auto xl = xc[i] + yt * sint;
+			auto yl = yc[i] - yt * cost;
 
-			Pnt2d pt(xu, yu);
+			Pnt2d pt(xl, yl);
 			pts.push_back(std::move(pt));
 		}
 		return std::move(pts);

@@ -78,6 +78,12 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_Node>& theNode1
 			);
 
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pnt>> 
+			Neighbors
+			(
+				const std::shared_ptr<SectPx_Pnt>& thePnt
+			);
+
 		static TnbSectPx_EXPORT void deAttach
 		(
 			const std::shared_ptr<SectPx_TPnt>& thePnt,

@@ -2,8 +2,7 @@
 #ifndef _PtdModel_BladeGlobalPars_Header
 #define _PtdModel_BladeGlobalPars_Header
 
-#include <Global_Serialization.hxx>
-#include <PtdModel_Module.hxx>
+#include <PtdModel_GlobalPars.hxx>
 
 #include <memory>
 
@@ -14,6 +13,7 @@ namespace tnbLib
 	class PtdModel_Par;
 
 	class PtdModel_BladeGlobalPars
+		: public PtdModel_GlobalPars
 	{
 
 		/*Private Data*/

@@ -1,9 +1,9 @@
 #pragma once
-#ifndef _PtdModel_BladeFace_Header
-#define _PtdModel_BladeFace_Header
+#ifndef _PtdModel_WingFace_Header
+#define _PtdModel_WingFace_Header
 
 #include <Standard_Handle.hxx>
-#include <PtdModel_PropEntity.hxx>
+#include <PtdModel_WingEntity.hxx>
 
 class Geom_Surface;
 
@@ -15,8 +15,8 @@ namespace tnbLib
 	// Forward Declarations
 	class Pnt3d;
 
-	class PtdModel_BladeFace
-		: public PtdModel_PropEntity
+	class PtdModel_WingFace
+		: public PtdModel_WingEntity
 	{
 
 		/*Private Data*/
@@ -28,20 +28,16 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbPtdModel_EXPORT);
 
-
 	public:
 
 		//- default constructor
 
-		inline PtdModel_BladeFace();
-
+		inline PtdModel_WingFace();
 
 		//- constructors
 
-		inline PtdModel_BladeFace(const Handle(Geom_Surface)&);
-
-		inline PtdModel_BladeFace(Handle(Geom_Surface) && );
-
+		inline PtdModel_WingFace(const Handle(Geom_Surface)&);
+		inline PtdModel_WingFace(Handle(Geom_Surface) && );
 
 		//- public functions and operators
 
@@ -56,7 +52,7 @@ namespace tnbLib
 
 		//- static functions and operators
 
-		static TnbPtdModel_EXPORT std::shared_ptr<PtdModel_BladeFace> 
+		static TnbPtdModel_EXPORT std::shared_ptr<PtdModel_WingFace>
 			CreateFace
 			(
 				std::vector<std::vector<Pnt3d>>&
@@ -64,8 +60,6 @@ namespace tnbLib
 	};
 }
 
-#include <PtdModel_BladeFaceI.hxx>
+#include <PtdModel_WingFaceI.hxx>
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::PtdModel_BladeFace);
-
-#endif // !_PtdModel_BladeFace_Header
+#endif // !_PtdModel_WingFace_Header

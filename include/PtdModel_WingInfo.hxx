@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _PtdModel_BladeInfo_Header
-#define _PtdModel_BladeInfo_Header
+#ifndef _PtdModel_WingInfo_Header
+#define _PtdModel_WingInfo_Header
 
 #include <Standard_TypeDef.hxx>
 #include <Global_Serialization.hxx>
@@ -13,16 +13,16 @@ namespace tnbLib
 
 	// Forward Declarations
 	class PtdModel_Forms;
-	class PtdModel_BladeGlobalPars;
 	class PtdModel_Par;
+	class PtdModel_WingGlobalPars;
 
-	class PtdModel_BladeInfo
+	class PtdModel_WingInfo
 	{
 
 		/*Private Data*/
 
-		std::shared_ptr<PtdModel_Forms> theBladeForm_;
-		std::shared_ptr<PtdModel_BladeGlobalPars> theGlobals_;
+		std::shared_ptr<PtdModel_Forms> theForms_;
+		std::shared_ptr<PtdModel_WingGlobalPars> theGlobals_;
 
 		Standard_Integer theNbSections_;
 		Standard_Integer theNbSpans_;
@@ -32,22 +32,22 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbPtdModel_EXPORT);
 
-
 	public:
 
 		//- default constructor
 
-		PtdModel_BladeInfo()
+		PtdModel_WingInfo()
 		{}
+
 
 		//- constructors
 
 
 		//- public functions and operators
 
-		const auto& BladeForm() const
+		const auto& Forms() const
 		{
-			return theBladeForm_;
+			return theForms_;
 		}
 
 		const auto& Globals() const
@@ -69,14 +69,14 @@ namespace tnbLib
 		inline void SetNbSections(const Standard_Integer);
 		inline void SetNbSpans(const Standard_Integer);
 
-		inline void SetBladeForm(const std::shared_ptr<PtdModel_Forms>&);
-		inline void SetBladeForm(std::shared_ptr<PtdModel_Forms>&&);
-		inline void SetGlobals(const std::shared_ptr<PtdModel_BladeGlobalPars>&);
-		inline void SetGlobals(std::shared_ptr<PtdModel_BladeGlobalPars>&&);
+		inline void SetForms(const std::shared_ptr<PtdModel_Forms>&);
+		inline void SetForms(std::shared_ptr<PtdModel_Forms>&&);
+		inline void SetLength(const std::shared_ptr<PtdModel_WingGlobalPars>&);
+		inline void SetLength(std::shared_ptr<PtdModel_WingGlobalPars>&&);
 
 	};
 }
 
-#include <PtdModel_BladeInfoI.hxx>
+#include <PtdModel_WingInfoI.hxx>
 
-#endif // !_PtdModel_BladeInfo_Header
+#endif // !_PtdModel_WingInfo_Header
