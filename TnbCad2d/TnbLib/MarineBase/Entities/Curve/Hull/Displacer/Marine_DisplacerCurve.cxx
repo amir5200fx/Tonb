@@ -165,8 +165,34 @@ tnbLib::Marine_DisplacerCurve::Split
 	const auto x0 = x.Parameter0();
 	const auto x1 = x.Parameter1();
 
-	auto[c0, c1] = this->Split(x0);
-	auto[c2, c3] = c1->Split(x1);
+	std::shared_ptr<Pln_Curve> c0, c1;
+
+	if (std::abs(x0 - FirstParameter()) <= gp::Resolution())
+	{
+		c0 = nullptr;
+		c1 = std::dynamic_pointer_cast<Pln_Curve>(This());
+	}
+	else
+	{
+		auto[c0x, c1x] = this->Split(x0);
+
+		c0 = std::move(c0x);
+		c1 = std::move(c1x);
+	}
+
+	std::shared_ptr<Pln_Curve> c2, c3;
+	if (std::abs(x1 - LastParameter()) <= gp::Resolution())
+	{
+		c3 = nullptr;
+		c2 = std::dynamic_pointer_cast<Pln_Curve>(This());
+	}
+	else
+	{
+		auto[c2x, c3x] = c1->Split(x1);
+
+		c2 = std::move(c2x);
+		c3 = std::move(c3x);
+	}
 
 	auto c2t = std::make_shared<Pln_TangCurve<Marine_DisplacerCurve>>(c2->Geometry());
 
