@@ -75,7 +75,7 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 			{
 				continue;
 			}
-			
+
 			auto[c0, c1] = curve->Split(orth->CharParameter());
 
 			Debug_Null_Pointer(c0);
@@ -116,15 +116,15 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 				curves.push_back(c1);
 			}
 
-			if (NOT c2)
+			curve = c2;
+
+			if (NOT curve)
 			{
 				break;
 			}
-
-			curve = c2;
 		}
 	}
 
-	curves.push_back(curve);
+	if (curve AND Pln_Curve::IsValid(curve, theTol)) curves.push_back(curve);
 	return std::move(curves);
 }

@@ -267,8 +267,19 @@ namespace tnbLib
 				const Standard_Real MinorRadius
 			);
 
-		static TnbCad2d_EXPORT Standard_Boolean IsValid(const std::shared_ptr<Pln_Curve>& theCurve, const Standard_Real theTol);
+		static TnbCad2d_EXPORT Standard_Boolean 
+			IsValid
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve, 
+				const Standard_Real theTol
+			);
 
+		static TnbCad2d_EXPORT Standard_Boolean 
+			IsDegenerate
+			(
+				const std::shared_ptr<Pln_Curve>& theCurve, 
+				const Standard_Real theTol
+			);
 		//- Macros
 
 

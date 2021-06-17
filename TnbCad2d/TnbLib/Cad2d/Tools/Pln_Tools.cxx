@@ -366,12 +366,12 @@ namespace tnbLib
 		{
 			if (sense)
 			{
-				auto pt = curve.LastCoord();
+				auto pt = curve.FirstCoord();
 				return std::move(pt);
 			}
 			else
 			{
-				auto pt = curve.FirstCoord();
+				auto pt = curve.LastCoord();
 				return std::move(pt);
 			}
 		}
@@ -379,12 +379,12 @@ namespace tnbLib
 		{
 			if (sense)
 			{
-				auto pt = curve.FirstCoord();
+				auto pt = curve.LastCoord();
 				return std::move(pt);
 			}
 			else
 			{
-				auto pt = curve.LastCoord();
+				auto pt = curve.FirstCoord();
 				return std::move(pt);
 			}
 		}
@@ -427,7 +427,8 @@ tnbLib::Pln_Tools::MakeWire
 		if (p0.Distance(p1) > theMaxTol)
 		{
 			FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
-				<< "the curve is not formed a wire; max tolerance = " << theMaxTol << endl
+				<< "the wire is not formed by the curve; max tolerance = " << theMaxTol << endl
+				<< "tol = " << p0.Distance(p1) << endl
 				<< abort(FatalError);
 		}
 
@@ -455,6 +456,13 @@ tnbLib::Pln_Tools::MakeWire
 	forThose(Index, 0, theCurves.size() - 1)
 	{
 		auto p1 = GetCoord(*theCurves[Index], theSense[Index], 0);
+		if (p0.Distance(p1) > theMaxTol)
+		{
+			FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
+				<< "the wire is not formed by the curves; max tolerance = " << theMaxTol << endl
+				<< "tol = " << p0.Distance(p1) << endl
+				<< abort(FatalError);
+		}
 
 		auto m = MEAN(p0, p1);
 

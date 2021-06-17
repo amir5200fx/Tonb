@@ -480,6 +480,7 @@ tnbLib::Pln_Curve::Split
 	const auto x1 = x.Parameter1();
 
 	std::shared_ptr<Pln_Curve> c0, c1;
+	
 	if (std::abs(x0 - FirstParameter()) <= gp::Resolution())
 	{
 		c0 = nullptr;
@@ -506,7 +507,6 @@ tnbLib::Pln_Curve::Split
 		c2 = std::move(c2x);
 		c3 = std::move(c3x);
 	}
-
 
 	auto c2t = std::make_shared<Pln_TangCurve<Pln_Curve>>(c2->Geometry());
 
@@ -556,4 +556,14 @@ tnbLib::Pln_Curve::IsValid
 		return Standard_False;
 	}
 	return Standard_True;
+}
+
+Standard_Boolean 
+tnbLib::Pln_Curve::IsDegenerate
+(
+	const std::shared_ptr<Pln_Curve>& theCurve, 
+	const Standard_Real theTol
+)
+{
+	return std::abs(theCurve->FirstParameter() - theCurve->LastParameter()) <= theTol;
 }

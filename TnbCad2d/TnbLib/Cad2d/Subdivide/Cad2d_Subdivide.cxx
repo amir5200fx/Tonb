@@ -354,9 +354,11 @@ namespace tnbLib
 			Debug_Null_Pointer(outer);
 
 			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
+
 			auto[minTol, maxTol] = outer->BoundTolerance();
 
 			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(maxTol, theTol));
+
 			Debug_Null_Pointer(newOuter);
 
 			newOuter->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
