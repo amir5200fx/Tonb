@@ -1,8 +1,8 @@
 #include <HydStatic_SolutionData_Bonjean.hxx>
 
+#include <HydStatic_BonjeanGraph.hxx>
 #include <Marine_Body_Displacer.hxx>
 #include <Marine_Domain.hxx>
-#include <Marine_Graph.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::hydStcLib::SolutionData_Bonjean)
 {

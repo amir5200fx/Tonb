@@ -670,6 +670,9 @@ namespace tnbLib
 
 		dist->SetLower(z0);
 		dist->SetUpper(z1);
+		dist->Perform();
+
+		Debug_If_Condition_Message(NOT dist->IsDone(), "the algorithm is not performed");
 
 		const auto y0 = domain.P0().Z();
 
@@ -680,6 +683,7 @@ namespace tnbLib
 		As.reserve(nbLevels);
 		for (auto z : dist->Values())
 		{
+
 			if (std::abs(z - z0) <= gp::Resolution())
 			{
 				auto t = std::make_pair(z0, 0.0);
@@ -700,12 +704,14 @@ namespace tnbLib
 			Debug_Null_Pointer(water);
 
 			auto wettedSections = Marine_BooleanOps::WettedSection(sect, water);
+
 			Standard_Real sumArea = 0;
 			for (const auto& x : wettedSections)
 			{
 				Debug_Null_Pointer(x);
 
 				auto area = MarineBase_Tools::CalcArea(x, sysLib::gl_marine_integration_info);
+
 				Debug_If_Condition(area < 0);
 				sumArea += area;
 			}
@@ -815,6 +821,10 @@ void tnbLib::HydStatic_DisContinuBonjean::Perform()
 
 		clips->SetSection(sect);
 
+		if (verbose)
+		{
+			Info << " - section nb. " << sect->Index() << endl;
+		}
 		for (const auto& x : sect->Sections())
 		{
 			auto displacer = Marine_SectTools::DisplacerSection(x);
@@ -824,7 +834,7 @@ void tnbLib::HydStatic_DisContinuBonjean::Perform()
 			auto geom = (Handle(Geom2d_Curve))MakeCurve(Qs);
 			auto bonj = std::make_shared<HydStatic_BnjCurve>(std::move(geom));
 
-			auto s = RetrieveSpan(geom);
+			auto s = RetrieveSpan(bonj->Geometry());
 			auto clip = std::make_shared<Clip>(std::move(s), std::move(bonj));
 			Debug_Null_Pointer(clip);
 
@@ -838,6 +848,13 @@ void tnbLib::HydStatic_DisContinuBonjean::Perform()
 	theSections_ = std::move(sectionClips);
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of the Calculating Bonjean Curves ********" << endl;
+		Info << endl;
+	}
 }
 
 std::shared_ptr<tnbLib::HydStatic_BonjeanGraph> 

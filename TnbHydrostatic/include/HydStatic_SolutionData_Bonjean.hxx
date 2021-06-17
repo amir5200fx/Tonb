@@ -13,7 +13,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_Domain;
-	class Marine_Graph;
+	class HydStatic_BonjeanGraph;
 
 	namespace hydStcLib
 	{
@@ -27,7 +27,7 @@ namespace tnbLib
 			std::shared_ptr<Marine_Domain> theDomain_;
 
 
-			std::shared_ptr<Marine_Graph> theGraph_;
+			std::shared_ptr<HydStatic_BonjeanGraph> theGraph_;
 
 
 			//- private functions and operators
@@ -79,9 +79,14 @@ namespace tnbLib
 				theDomain_ = theDomain;
 			}
 
-			void SetGraph(const std::shared_ptr<Marine_Graph>& theGraph)
+			void SetGraph(const std::shared_ptr<HydStatic_BonjeanGraph>& theGraph)
 			{
 				theGraph_ = theGraph;
+			}
+
+			void SetGraph(std::shared_ptr<HydStatic_BonjeanGraph>&& theGraph)
+			{
+				theGraph_ = std::move(theGraph);
 			}
 		};
 	}
