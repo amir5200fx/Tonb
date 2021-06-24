@@ -92,6 +92,11 @@ namespace tnbLib
 		return std::move(par);
 	}
 
+	void removePar(const appl::par_t& t)
+	{
+		appl::removePar(getParameterMaker(), t);
+	}
+
 	//- field functions
 
 	const auto& getFieldMaker()
@@ -192,6 +197,11 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		appl::addVariable(f, name, x);
+	}
+
+	void nullifyField(const appl::fieldFun_t& t)
+	{
+		t->RemoveThisFromChildren();
 	}
 
 	//- create points
@@ -613,6 +623,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const appl::free_t& p)-> auto {auto t = appl::getPar(p); return std::move(t); }), "getPar");
 		mod->add(chaiscript::fun([](const appl::const_t& p)-> auto {auto t = appl::getPar(p); return std::move(t); }), "getPar");
 		mod->add(chaiscript::fun([](const appl::par_t& p)-> auto {auto t = appl::getPar(p); return std::move(t); }), "getPar");
+
+		mod->add(chaiscript::fun([](const appl::par_t& p)-> void {removePar(p); }), "removePar");
 	}
 
 	void setFieldMakers(const module_t& mod)
@@ -636,6 +648,8 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const appl::exprField_t& f, const std::string& name, const appl::fieldFun_t& x)-> void {addVariable(f, name, x); }), "addVariable");
 		mod->add(chaiscript::fun([](const appl::fieldFun_t& f, const std::string& name, const appl::fieldFun_t& x)-> void {addVariable(f, name, x); }), "addVariable");
+
+		mod->add(chaiscript::fun([](const appl::fieldFun_t& f)-> void {nullifyField(f); }), "nullifyFieldFun");
 	}
 
 	void setPointMakers(const module_t& mod)
