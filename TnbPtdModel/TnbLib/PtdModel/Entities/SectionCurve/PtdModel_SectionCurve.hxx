@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _PtdModel_Profile_Header
-#define _PtdModel_Profile_Header
+#ifndef _PtdModel_SectionCurve_Header
+#define _PtdModel_SectionCurve_Header
 
 #include <PtdModel_Entity.hxx>
 
@@ -17,12 +17,10 @@ class Geom2d_Curve;
 namespace tnbLib
 {
 
-	// Forward Declarations
-	
-
-	class PtdModel_Profile
+	class PtdModel_SectionCurve
 		: public PtdModel_Entity
 	{
+
 
 		/*Private Data*/
 
@@ -35,22 +33,18 @@ namespace tnbLib
 
 	public:
 
-
 		//- default constructor
-		PtdModel_Profile()
+		PtdModel_SectionCurve()
 		{}
+
 
 		//- constructors
 
-		TnbPtdModel_EXPORT PtdModel_Profile
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
+		PtdModel_SectionCurve(const Standard_Integer theIndex, const word& theName);
 
-		TnbPtdModel_EXPORT PtdModel_Profile(const Handle(Geom2d_Curve)&);
+		PtdModel_SectionCurve(const Handle(Geom2d_Curve)&);
 
-		TnbPtdModel_EXPORT PtdModel_Profile(Handle(Geom2d_Curve) && );
+		PtdModel_SectionCurve(Handle(Geom2d_Curve) && );
 
 
 		//- public functions and operators
@@ -63,16 +57,9 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
-		TnbPtdModel_EXPORT std::vector<Standard_Real>
-			RetrieveValues
-			(
-				const std::vector<Standard_Real>&
-			) const;
-
-
 		//- static functions and operators
 
-		static TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Profile>
+		static TnbPtdModel_EXPORT std::shared_ptr<PtdModel_SectionCurve>
 			MakeProfile
 			(
 				const TColgp_Array1OfPnt2d& thePoles,
@@ -84,8 +71,6 @@ namespace tnbLib
 	};
 }
 
-#include <PtdModel_ProfileI.hxx>
+#include <PtdModel_SectionCurveI.hxx>
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::PtdModel_Profile);
-
-#endif // !_PtdModel_Profile_Header
+#endif // !_PtdModel_SectionCurve_Header

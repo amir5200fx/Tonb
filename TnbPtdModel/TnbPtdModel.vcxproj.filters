@@ -217,6 +217,27 @@
     <Filter Include="TnbLib\PtdModel\Entities\AirfoilSectionQ">
       <UniqueIdentifier>{76ff146b-d165-4a39-a15e-8679d09766ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdModel\SimpleExtruded">
+      <UniqueIdentifier>{79ac5466-acfd-43df-bfb5-8e80627418ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\SimpleExtruded\Entity">
+      <UniqueIdentifier>{42b03d64-2fd9-470b-9ce2-fb97721bb29e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\SectionCurve">
+      <UniqueIdentifier>{e3b9d818-d8a0-414b-a77c-62e662fb6922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters">
+      <UniqueIdentifier>{84848c1a-98df-48f4-9d91-fd34af5a2eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\Section">
+      <UniqueIdentifier>{3a5b7516-c620-4997-8759-00891bfd1997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\SimpleExtruded\WrappedSection">
+      <UniqueIdentifier>{95589841-6b46-47d3-95d8-35bf611fcfdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\View">
+      <UniqueIdentifier>{3c23cdbb-5be3-490a-8deb-950535241398}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdModel\Entities\Entity\PtdModel_Entity.hxx">
@@ -537,6 +558,39 @@
     <ClInclude Include="TnbLib\PtdModel\Wing\WrappedSection\PtdModel_WrappedWingSectionI.hxx">
       <Filter>TnbLib\PtdModel\Wing\WrappedSection</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\Entity\PtdModel_SimpleExtrudedEntity.hxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\SectionCurve\PtdModel_SectionCurve.hxx">
+      <Filter>TnbLib\PtdModel\Entities\SectionCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\SectionCurve\PtdModel_SectionCurveI.hxx">
+      <Filter>TnbLib\PtdModel\Entities\SectionCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalPars.hxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\GlobalParameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalParsI.hxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\GlobalParameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Section\PtdModel_Section.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\Section\PtdModel_SectionI.hxx">
+      <Filter>TnbLib\PtdModel\Entities\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\WrappedSection\PtdModel_WrappedSimpleExtrudedSection.hxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\WrappedSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\WrappedSection\PtdModel_WrappedSimpleExtrudedSectionI.hxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\WrappedSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\View\PtdModel_View.hxx">
+      <Filter>TnbLib\PtdModel\Entities\View</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\View\PtdModel_ViewI.hxx">
+      <Filter>TnbLib\PtdModel\Entities\View</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\PtdModel\xPars\PtdModel_xParsIO.cxx">
@@ -748,6 +802,33 @@
     </ClCompile>
     <ClCompile Include="TnbLib\PtdModel\Wing\GlobalParameters\PtdModel_WingGlobalParsIO.cxx">
       <Filter>TnbLib\PtdModel\Wing\GlobalParameters</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\SectionCurve\PtdModel_SectionCurve.cxx">
+      <Filter>TnbLib\PtdModel\Entities\SectionCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\SectionCurve\PtdModel_SectionCurveIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\SectionCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalParsIO.cxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\GlobalParameters</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalPars.cxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\GlobalParameters</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Section\PtdModel_Section.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\Section\PtdModel_SectionIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\SimpleExtruded\WrappedSection\PtdModel_WrappedSimpleExtrudedSection.cxx">
+      <Filter>TnbLib\PtdModel\SimpleExtruded\WrappedSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\View\PtdModel_View.cxx">
+      <Filter>TnbLib\PtdModel\Entities\View</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\View\PtdModel_ViewIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
