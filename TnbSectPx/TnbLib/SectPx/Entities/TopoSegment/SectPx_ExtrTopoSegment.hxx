@@ -13,6 +13,10 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbSectPx_EXPORT);
+
 	public:
 
 		//- default constructor

@@ -410,7 +410,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{E15D4B29-DEEF-4205-8790-F4CA3D77F53A}</ProjectGuid>
     <RootNamespace>TnbMarineBase</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

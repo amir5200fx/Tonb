@@ -137,7 +137,7 @@ namespace tnbLib
 
 			TnbShapePx_EXPORT std::vector<Standard_Real> X() const override;
 
-			void Update() override;
+			TnbShapePx_EXPORT void Update() override;
 		};
 	}
 }

@@ -321,7 +321,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{33976535-7C9D-4D56-AD80-699694BF4492}</ProjectGuid>
     <RootNamespace>TnbHydrostatic</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
