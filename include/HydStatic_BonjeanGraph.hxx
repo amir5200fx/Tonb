@@ -47,7 +47,7 @@ namespace tnbLib
 				std::vector<std::shared_ptr<HydStatic_BnjCurve>>&& theCurves
 			);
 
-			GraphSect
+			TnbHydStatic_EXPORT GraphSect
 			(
 				const std::shared_ptr<Marine_CmpSection>& theSection,
 				const std::vector<std::shared_ptr<HydStatic_BnjCurve>>& theCurves

@@ -187,7 +187,7 @@ namespace tnbLib
 
 		//- constructors
 
-		HydStatic_DisContinuBonjean
+		TnbHydStatic_EXPORT HydStatic_DisContinuBonjean
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain,
 			const std::shared_ptr<Marine_Body>& theBody, 
