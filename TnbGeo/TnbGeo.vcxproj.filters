@@ -418,6 +418,18 @@
     <Filter Include="TnbLib\Geo\Entities\Triangle\3d">
       <UniqueIdentifier>{6c73df04-6e09-4ee3-9a09-39d65c19d43f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\nonUniform">
+      <UniqueIdentifier>{394a7b3b-ca85-4ced-ad17-f00106dbecc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\nonUniform\2d">
+      <UniqueIdentifier>{58c213fa-4066-41ff-9ad0-088caf153731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\nonUniform\3d">
+      <UniqueIdentifier>{01c805f8-0bb4-4707-b21e-9df33a18bf3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\Background">
+      <UniqueIdentifier>{2d9a80e2-27bc-453f-8439-61675b0e1234}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -969,6 +981,39 @@
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.hxx">
       <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonI.hxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_PolygonI.hxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun2d_Uniform.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun3d_Uniform.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\GeoSizeFun_nonUniform.hxx">
+      <Filter>TnbLib\Geo\Function\Size\nonUniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniform.hxx">
+      <Filter>TnbLib\Geo\Function\Size\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Size\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Size\nonUniform\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniform.hxx">
+      <Filter>TnbLib\Geo\Function\Size\nonUniform\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Background\GeoSizeFun_Background.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Background\GeoSizeFun_BackgroundI.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1198,6 +1243,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.cxx">
       <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Size\Surface\Geo2d_SizeFunction_SurfaceIO.cxx">
+      <Filter>TnbLib\Geo\Function\Size\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun_UniformIO.cxx">
+      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

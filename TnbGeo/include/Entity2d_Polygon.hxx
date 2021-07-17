@@ -11,10 +11,18 @@ namespace tnbLib
 	typedef Entity_Polygon<Pnt2d> Entity2d_Polygon;
 
 	template<>
+	const Pnt2d& Entity2d_Polygon::Coord(const Standard_Integer theIndex) const;
+
+	template<>
+	Pnt2d& Entity2d_Polygon::Coord(const Standard_Integer theIndex);
+
+	template<>
 	TnbGeo_EXPORT void Entity2d_Polygon::ExportToPlt(std::fstream& File) const;
 
 
 
 }
+
+#include <Entity2d_PolygonI.hxx>
 
 #endif // !_Entity2d_Polygon_Header

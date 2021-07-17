@@ -21,10 +21,18 @@ namespace tnbLib
 	template<class Point> struct transform_point_type {};
 	template<> struct transform_point_type<Pnt2d> { typedef gp_Trsf2d type; };
 	template<> struct transform_point_type<Pnt3d> { typedef gp_Trsf type; };
+	template<> struct transform_point_type<std::pair<Pnt2d, Standard_Real>> { typedef gp_Trsf2d type; };
+	template<> struct transform_point_type<std::pair<Pnt3d, Standard_Real>> { typedef gp_Trsf type; };
 
 	template<class Point> struct entity_connectivity_type {};
 	template<> struct entity_connectivity_type<Pnt2d> { typedef typename connectivity::triple type; };
 	template<> struct entity_connectivity_type<Pnt3d> { typedef typename connectivity::quadruple type; };
+
+	template<class T> struct entity_coord {};
+	template<> struct entity_coord<Pnt2d> { typedef Pnt2d coord; };
+	template<> struct entity_coord<Pnt3d> { typedef Pnt3d coord; };
+	template<> struct entity_coord<std::pair<Pnt2d, Standard_Real>> { typedef Pnt2d coord; };
+	template<> struct entity_coord<std::pair<Pnt3d, Standard_Real>> { typedef Pnt3d coord; };
 
 	namespace cascadeLib
 	{
