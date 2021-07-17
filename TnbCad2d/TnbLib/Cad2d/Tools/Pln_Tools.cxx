@@ -41,6 +41,40 @@
 #include <TopoDS_Shape.hxx>
 #include <Precision.hxx>
 
+Standard_Real 
+tnbLib::Pln_Tools::CalcPrecision
+(
+	const Pln_Vertex & theVtx
+)
+{
+	if (theVtx.IsOrphan())
+	{
+		return 0;
+	}
+	if (theVtx.IsRingPoint())
+	{
+		return 0;
+	}
+	const auto& coord = theVtx.Coord();
+	Standard_Real tol = RealLast();
+	for (const auto& x : theVtx.RetrieveEdges())
+	{
+		auto edge = x.lock();
+		Debug_Null_Pointer(edge);
+
+		const auto& curve = edge->Curve();
+		auto p0 = curve->FirstCoord();
+		auto p1 = curve->LastCoord();
+
+		auto d = std::sqrt(std::min(p0.SquareDistance(coord), p1.SquareDistance(coord)));
+		if (d <= tol)
+		{
+			tol = d;
+		}
+	}
+	return tol;
+}
+
 Standard_Boolean 
 tnbLib::Pln_Tools::IsBounded
 (
@@ -591,6 +625,13 @@ tnbLib::Pln_Tools::RetrieveBoundingBox
 //}
 
 std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
+tnbLib::Pln_Tools::RetrieveVertices(const Pln_Wire & theWire)
+{
+	auto vertices = RetrieveVertices(theWire.Edges());
+	return std::move(vertices);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
 tnbLib::Pln_Tools::RetrieveVertices
 (
 	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
@@ -1118,10 +1159,13 @@ namespace tnbLib
 			Standard_Integer Index;
 			Pnt2d Coord;
 
+			Standard_Real Prec;
+
 			std::weak_ptr<Vertex> Pair;
 
 			Vertex(const Standard_Integer theIndex, const Pnt2d& theCoord)
 				: Index(theIndex), Coord(theCoord)
+				, Prec(0)
 			{}
 
 			static const Pnt2d& GetCoord(const std::shared_ptr<Vertex>& theVtx)
@@ -1262,6 +1306,8 @@ namespace tnbLib
 
 						x->Pair = found;
 						found->Pair = x;
+
+						x->Prec = minDis;
 					}
 					else
 					{
@@ -1334,6 +1380,8 @@ namespace tnbLib
 					auto M = MEAN(x->Coord, pair->Coord);
 					auto vtx = std::make_shared<Pln_Vertex>(++nbVertices, M);
 					Debug_Null_Pointer(vtx);
+
+					vtx->SetPrecision(x->Prec);
 
 					auto insert0 = vertices.insert(std::make_pair(x->Index, vtx));
 					if (NOT insert0.second)
@@ -2166,6 +2214,19 @@ void tnbLib::Pln_Tools::RetrieveInnerOuterWires
 	for (const auto& x : removes)
 	{
 		theWires.erase(x);
+	}
+}
+
+void tnbLib::Pln_Tools::SetPrecision
+(
+	const std::shared_ptr<Pln_Wire>& theWire
+)
+{
+	const auto vertices = RetrieveVertices(*theWire);
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		x->SetPrecision(CalcPrecision(*x));
 	}
 }
 
