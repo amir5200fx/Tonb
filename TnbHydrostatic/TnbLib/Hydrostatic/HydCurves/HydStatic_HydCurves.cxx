@@ -27,10 +27,46 @@ size_t tnbLib::HydStatic_HydCurves::verbose(0);
 const Standard_Real tnbLib::HydStatic_HydCurves::DEFAULT_RHOFW(1.0);
 const Standard_Real tnbLib::HydStatic_HydCurves::DEFAULT_RHOSW(1.25);
 
+const Standard_Integer tnbLib::HydStatic_HydCurves::steffenTessellInfo::DEFAULT_NB_SAMPLES(50);
+
+const Standard_Real tnbLib::HydStatic_HydCurves::algInfo::DEFAULT_DISPL_FACTOR(0);
+
 namespace tnbLib
 {
-	static const unsigned int MIN_NB_CURVE_POINTS = 50;
 	static bool nullifyMidSect = false;
+}
+
+tnbLib::HydStatic_HydCurves::steffenTessellInfo::steffenTessellInfo()
+	: Apply(Standard_False)
+	, NbSamples(DEFAULT_NB_SAMPLES)
+{
+	// empty body [7/9/2021 Amir]
+}
+
+tnbLib::HydStatic_HydCurves::waterInfo::waterInfo()
+	: RhoS(DEFAULT_RHOSW)
+	, RhoF(DEFAULT_RHOFW)
+{
+	// empty body [7/9/2021 Amir]
+}
+
+tnbLib::HydStatic_HydCurves::rudderInfo::rudderInfo()
+	: RudderAxis(Standard_False)
+	, RudderAxisLoc(0)
+{
+	// empty body [7/9/2021 Amir]
+}
+
+tnbLib::HydStatic_HydCurves::algInfo::algInfo()
+	: DisplFactor(DEFAULT_DISPL_FACTOR)
+	, Interpolate(Standard_False)
+{
+	// empty body [7/9/2021 Amir]
+}
+
+tnbLib::HydStatic_HydCurves::HydStatic_HydCurves()
+{
+	// empty body [6/26/2021 Amir]
 }
 
 tnbLib::marineLib::TM 
@@ -130,9 +166,9 @@ tnbLib::HydStatic_HydCurves::CalcParameters
 	nullifyMidSect = false;
 
 	marineLib::APP app;
-	if (RudderAxis())
+	if (RudderInfo().RudderAxis)
 	{
-		app = CalcAPP(RudderAxisLoc());
+		app = CalcAPP(RudderInfo().RudderAxisLoc);
 	}
 	else
 	{
@@ -247,8 +283,45 @@ tnbLib::HydStatic_HydCurves::CalcParameters
 	return std::move(t);
 }
 
+namespace tnbLib
+{
+	void PrintParameter(const Marine_VesselParam& p)
+	{
+		Info << " - " << p.Name() << ": " << p();
+	}
+
+	auto GetValues(const std::vector<hydStcGphLib::xDraft>& xs)
+	{
+		std::vector<Standard_Real> values;
+		values.reserve(xs.size());
+		for (const auto& x : xs)
+		{
+			values.push_back(x.value);
+		}
+		return std::move(values);
+	}
+
+	auto GetDrafts(const std::vector<hydStcGphLib::xDraft>& xs)
+	{
+		std::vector<Standard_Real> values;
+		values.reserve(xs.size());
+		for (const auto& x : xs)
+		{
+			values.push_back(x.T);
+		}
+		return std::move(values);
+	}
+}
+
 void tnbLib::HydStatic_HydCurves::Perform()
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Calculating Hydrostatic Curves ********" << endl;
+		Info << endl;
+	}
+
 	if (NOT Waters())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -264,9 +337,21 @@ void tnbLib::HydStatic_HydCurves::Perform()
 			<< abort(FatalError);
 	}
 
+	if (verbose)
+	{
+		Info << " Body's name: " << body->Name() << endl;
+		Info << " nb. of sections: " << body->NbSections() << endl;
+		Info << endl;
+	}
+
 	const auto& base = body->BaseLine();
 
 	const auto nbWaters = Waters()->Waters().size();
+	if (verbose)
+	{
+		Info << " nb. of waters: " << nbWaters << endl;
+		Info << endl;
+	}
 	const auto clipp = std::max(1, std::min((int)clippNo, (int)nbWaters / 3));
 	std::vector<hydStcGphLib::xDraft> 
 		xCb,
@@ -300,6 +385,7 @@ void tnbLib::HydStatic_HydCurves::Perform()
 
 	const auto& waters = Waters()->Waters();
 	
+	size_t waterLev = 0;
 	for (size_t i = clipp; i < waters.size() - clipp; i++)
 	{
 		const auto& x = waters[i];
@@ -320,6 +406,24 @@ void tnbLib::HydStatic_HydCurves::Perform()
 				x->Wave(),
 				sysLib::gl_marine_integration_info
 			);
+
+		if (verbose)
+		{	
+			Info << "- water level, " << waterLev++ << endl;
+			PrintParameter(cb);
+			PrintParameter(cm);
+			PrintParameter(cp);
+			PrintParameter(cwl);
+			PrintParameter(lcf);
+			PrintParameter(lcb);
+			PrintParameter(aw);
+			PrintParameter(mct);
+			PrintParameter(kml);
+			PrintParameter(km);
+			PrintParameter(kb);
+			PrintParameter(dispv);
+			Info << endl;
+		}
 
 		auto cbi = hydStcGphLib::xDraft{ x->Z(),cb() };
 		xCb.push_back(std::move(cbi));
@@ -357,86 +461,173 @@ void tnbLib::HydStatic_HydCurves::Perform()
 		auto dispvi = hydStcGphLib::xDraft{ x->Z(),dispv() };
 		xDispv.push_back(std::move(dispvi));
 
-		auto dispswi = hydStcGphLib::xDraft{ x->Z(), dispv()*(RhoSW() + DisplFactor()) };
+		auto dispswi = hydStcGphLib::xDraft{ x->Z(), dispv()*(WaterInfo().RhoS + AlgInfo().DisplFactor) };
 		xDispsw.push_back(std::move(dispswi));
 
-		auto dispfwi = hydStcGphLib::xDraft{ x->Z(), dispv()*(RhoFW() + DisplFactor()) };
+		auto dispfwi = hydStcGphLib::xDraft{ x->Z(), dispv()*(WaterInfo().RhoF + AlgInfo().DisplFactor) };
 		xDispfw.push_back(std::move(dispfwi));
 	}
 
-	xCb = HydStatic_Tools::SteffenTessellation(xCb, MIN_NB_CURVE_POINTS);
-	xCm = HydStatic_Tools::SteffenTessellation(xCm, MIN_NB_CURVE_POINTS);
-	xCp = HydStatic_Tools::SteffenTessellation(xCp, MIN_NB_CURVE_POINTS);
-	xCwl = HydStatic_Tools::SteffenTessellation(xCwl, MIN_NB_CURVE_POINTS);
-	xLcf = HydStatic_Tools::SteffenTessellation(xLcf, MIN_NB_CURVE_POINTS);
-	xLcb = HydStatic_Tools::SteffenTessellation(xLcb, MIN_NB_CURVE_POINTS);
-	xAw = HydStatic_Tools::SteffenTessellation(xAw, MIN_NB_CURVE_POINTS);
-	xMct = HydStatic_Tools::SteffenTessellation(xMct, MIN_NB_CURVE_POINTS);
-	xKml = HydStatic_Tools::SteffenTessellation(xKml, MIN_NB_CURVE_POINTS);
-	xKm = HydStatic_Tools::SteffenTessellation(xKm, MIN_NB_CURVE_POINTS);
-	xKb = HydStatic_Tools::SteffenTessellation(xKb, MIN_NB_CURVE_POINTS);
-	xDispv = HydStatic_Tools::SteffenTessellation(xDispv, MIN_NB_CURVE_POINTS);
-	xDispsw = HydStatic_Tools::SteffenTessellation(xDispsw, MIN_NB_CURVE_POINTS);
-	xDispfw = HydStatic_Tools::SteffenTessellation(xDispfw, MIN_NB_CURVE_POINTS);
+	// create CSV table [7/10/2021 Amir]
 
-	std::vector<std::shared_ptr<HydStatic_HydGphCurve>> curves;
-	curves.reserve(14);
-	
-	auto cbCurve = hydStcGphLib::CB::Curve(xCb);
-	cbCurve->SetName("CB");
-	auto cmCurve = hydStcGphLib::CM::Curve(xCm);
-	cmCurve->SetName("CM");
-	auto cpCurve = hydStcGphLib::CP::Curve(xCp);
-	cpCurve->SetName("CP");
-	auto cwlCurve = hydStcGphLib::CWL::Curve(xCwl);
-	cwlCurve->SetName("CWL");
-	auto lcfCurve = hydStcGphLib::LCF::Curve(xLcf);
-	lcfCurve->SetName("LCF");
-	auto lcbCurve = hydStcGphLib::LCB::Curve(xLcb);
-	lcbCurve->SetName("LCB");
-	auto awCurve = hydStcGphLib::AW::Curve(xAw);
-	awCurve->SetName("AW");
-	auto mctCurve = hydStcGphLib::MCT::Curve(xMct);
-	mctCurve->SetName("MCT");
-	auto kmlCurve = hydStcGphLib::KML::Curve(xKml);
-	kmlCurve->SetName("KML");
-	auto kmCurve = hydStcGphLib::KM::Curve(xKm);
-	kmCurve->SetName("KM");
-	auto kbCurve = hydStcGphLib::KB::Curve(xKb);
-	kbCurve->SetName("KB");
-	auto dispvCurve = hydStcGphLib::DISPV::Curve(xDispv);
-	dispvCurve->SetName("DISPV");
-	auto dispswCurve = hydStcGphLib::DISPV::Curve(xDispsw);
-	dispswCurve->SetName("DISPSW");
-	auto dispfwCurve = hydStcGphLib::DISPV::Curve(xDispfw);
-	dispfwCurve->SetName("DISPFW");
+	theCSV_ = std::make_shared<csvTable>();
+	Debug_Null_Pointer(theCSV_);
 
-	curves.push_back(std::move(cbCurve));
-	curves.push_back(std::move(cmCurve));
-	curves.push_back(std::move(cpCurve));
-	curves.push_back(std::move(cwlCurve));
-	curves.push_back(std::move(lcfCurve));
-	curves.push_back(std::move(lcbCurve));
-	curves.push_back(std::move(awCurve));
-	curves.push_back(std::move(mctCurve));
-	curves.push_back(std::move(kmlCurve));
-	curves.push_back(std::move(kmCurve));
-	curves.push_back(std::move(kbCurve));
-	curves.push_back(std::move(dispvCurve));
-	curves.push_back(std::move(dispfwCurve));
-	curves.push_back(std::move(dispswCurve));
+	auto& columns = theCSV_->Columns;
+	columns.reserve(15);
 
-	auto & graph = GraphRef();
+	colTable drafts = { "T", GetDrafts(xCb) };
+	colTable cb = { "cb", GetValues(xCb) };
+	colTable cm = { "cm", GetValues(xCm) };
+	colTable cp = { "cp", GetValues(xCp) };
+	colTable cwl = { "cwl",GetValues(xCwl) };
+	colTable lcf = { "lcf",GetValues(xLcf) };
+	colTable lcb = { "lcb",GetValues(xLcb) };
+	colTable aw = { "aw",GetValues(xAw) };
+	colTable mct = { "mct",GetValues(xMct) };
+	colTable kml = { "kml",GetValues(xKml) };
+	colTable km = { "km",GetValues(xKm) };
+	colTable kb = { "kb",GetValues(xKb) };
+	colTable dispv = { "dispv",GetValues(xDispv) };
+	colTable dispsw = { "dispsw",GetValues(xDispsw) };
+	colTable dispfw = { "dispfw",GetValues(xDispfw) };
 
-	graph = std::make_shared<HydStatic_HydCurvesGraph>(0, "Hydrostatic-Curves");
-	graph->Perform(std::move(curves));
-	Debug_If_Condition_Message(NOT graph->IsDone(), "the algorihm is not performed!");
+	columns.push_back(std::move(drafts));
+	columns.push_back(std::move(cb));
+	columns.push_back(std::move(cm));
+	columns.push_back(std::move(cp));
+	columns.push_back(std::move(cwl));
+	columns.push_back(std::move(lcf));
+	columns.push_back(std::move(lcb));
+	columns.push_back(std::move(aw));
+	columns.push_back(std::move(mct));
+	columns.push_back(std::move(kml));
+	columns.push_back(std::move(km));
+	columns.push_back(std::move(kb));
+	columns.push_back(std::move(dispv));
+	columns.push_back(std::move(dispsw));
+	columns.push_back(std::move(dispfw));
+
+	if (theAlgInfo_.Interpolate)
+	{
+		if (AlgInfo().SteffenInfo.Apply)
+		{
+			if (verbose)
+			{
+				Info << endl;
+				Info << " use of the Steffen tessellation option has been activated." << endl;
+				Info << " nb. of offset points: " << xCb.size() << endl;
+				Info << " nb. of offset points criterion has been set to: " << AlgInfo().SteffenInfo.NbSamples << endl;
+				Info << endl;
+			}
+			xCb = HydStatic_Tools::SteffenTessellation(xCb, AlgInfo().SteffenInfo.NbSamples);
+			xCm = HydStatic_Tools::SteffenTessellation(xCm, AlgInfo().SteffenInfo.NbSamples);
+			xCp = HydStatic_Tools::SteffenTessellation(xCp, AlgInfo().SteffenInfo.NbSamples);
+			xCwl = HydStatic_Tools::SteffenTessellation(xCwl, AlgInfo().SteffenInfo.NbSamples);
+			xLcf = HydStatic_Tools::SteffenTessellation(xLcf, AlgInfo().SteffenInfo.NbSamples);
+			xLcb = HydStatic_Tools::SteffenTessellation(xLcb, AlgInfo().SteffenInfo.NbSamples);
+			xAw = HydStatic_Tools::SteffenTessellation(xAw, AlgInfo().SteffenInfo.NbSamples);
+			xMct = HydStatic_Tools::SteffenTessellation(xMct, AlgInfo().SteffenInfo.NbSamples);
+			xKml = HydStatic_Tools::SteffenTessellation(xKml, AlgInfo().SteffenInfo.NbSamples);
+			xKm = HydStatic_Tools::SteffenTessellation(xKm, AlgInfo().SteffenInfo.NbSamples);
+			xKb = HydStatic_Tools::SteffenTessellation(xKb, AlgInfo().SteffenInfo.NbSamples);
+			xDispv = HydStatic_Tools::SteffenTessellation(xDispv, AlgInfo().SteffenInfo.NbSamples);
+			xDispsw = HydStatic_Tools::SteffenTessellation(xDispsw, AlgInfo().SteffenInfo.NbSamples);
+			xDispfw = HydStatic_Tools::SteffenTessellation(xDispfw, AlgInfo().SteffenInfo.NbSamples);
+
+			if (verbose)
+			{
+				Info << " nb. of offset points after tessellating: " << xCb.size() << endl;
+				Info << endl;
+			}
+		}
+
+		std::vector<std::shared_ptr<HydStatic_HydGphCurve>> curves;
+		curves.reserve(14);
+
+		auto cbCurve = hydStcGphLib::CB::Curve(xCb);
+		cbCurve->SetName("CB");
+		auto cmCurve = hydStcGphLib::CM::Curve(xCm);
+		cmCurve->SetName("CM");
+		auto cpCurve = hydStcGphLib::CP::Curve(xCp);
+		cpCurve->SetName("CP");
+		auto cwlCurve = hydStcGphLib::CWL::Curve(xCwl);
+		cwlCurve->SetName("CWL");
+		auto lcfCurve = hydStcGphLib::LCF::Curve(xLcf);
+		lcfCurve->SetName("LCF");
+		auto lcbCurve = hydStcGphLib::LCB::Curve(xLcb);
+		lcbCurve->SetName("LCB");
+		auto awCurve = hydStcGphLib::AW::Curve(xAw);
+		awCurve->SetName("AW");
+		auto mctCurve = hydStcGphLib::MCT::Curve(xMct);
+		mctCurve->SetName("MCT");
+		auto kmlCurve = hydStcGphLib::KML::Curve(xKml);
+		kmlCurve->SetName("KML");
+		auto kmCurve = hydStcGphLib::KM::Curve(xKm);
+		kmCurve->SetName("KM");
+		auto kbCurve = hydStcGphLib::KB::Curve(xKb);
+		kbCurve->SetName("KB");
+		auto dispvCurve = hydStcGphLib::DISPV::Curve(xDispv);
+		dispvCurve->SetName("DISPV");
+		auto dispswCurve = hydStcGphLib::DISPV::Curve(xDispsw);
+		dispswCurve->SetName("DISPSW");
+		auto dispfwCurve = hydStcGphLib::DISPV::Curve(xDispfw);
+		dispfwCurve->SetName("DISPFW");
+
+		curves.push_back(std::move(cbCurve));
+		curves.push_back(std::move(cmCurve));
+		curves.push_back(std::move(cpCurve));
+		curves.push_back(std::move(cwlCurve));
+		curves.push_back(std::move(lcfCurve));
+		curves.push_back(std::move(lcbCurve));
+		curves.push_back(std::move(awCurve));
+		curves.push_back(std::move(mctCurve));
+		curves.push_back(std::move(kmlCurve));
+		curves.push_back(std::move(kmCurve));
+		curves.push_back(std::move(kbCurve));
+		curves.push_back(std::move(dispvCurve));
+		curves.push_back(std::move(dispfwCurve));
+		curves.push_back(std::move(dispswCurve));
+
+		auto & graph = GraphRef();
+
+		graph = std::make_shared<HydStatic_HydCurvesGraph>(0, "Hydrostatic-Curves");
+		graph->Perform(std::move(curves));
+		Debug_If_Condition_Message(NOT graph->IsDone(), "the algorihm is not performed!");
+	}
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of the Calculating Hydrostatic Curves ********" << endl;
+		Info << endl;
+	}
 }
 
 void tnbLib::HydStatic_HydCurves::SetRudderLocation(const Standard_Real x)
 {
-	RudderAxis_ = Standard_True;
-	theRudderAxisLoc_ = x;
+	theRudderInfo_.RudderAxis = Standard_True;
+	theRudderInfo_.RudderAxisLoc = x;
+}
+
+void tnbLib::HydStatic_HydCurves::SetRhoSW(const Standard_Real rho)
+{
+	theWaterInfo_.RhoS = rho;
+}
+
+void tnbLib::HydStatic_HydCurves::SetRhoFW(const Standard_Real rho)
+{
+	theWaterInfo_.RhoF = rho;
+}
+
+void tnbLib::HydStatic_HydCurves::SetSteffenTessellation(const Standard_Boolean useSteffen)
+{
+	theAlgInfo_.SteffenInfo.Apply = useSteffen;
+}
+
+void tnbLib::HydStatic_HydCurves::SetInterpolation(const Standard_Boolean doIt)
+{
+	theAlgInfo_.Interpolate = doIt;
 }
