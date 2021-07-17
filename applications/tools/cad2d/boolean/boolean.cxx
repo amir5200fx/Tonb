@@ -24,6 +24,8 @@ namespace tnbLib
 	static std::vector<plane_t> myPlanes;
 	static std::vector<plane_t> mySumPlanes;
 
+	static double myTol = 1.0e-6;
+
 	void loadPlanes(const std::string& name)
 	{
 		if (verbose)
@@ -71,7 +73,7 @@ namespace tnbLib
 			mySumPlanes.clear();
 		}
 
-		auto pln = Cad2d_Boolean::Union(myPlanes[0], myPlanes[1]);
+		auto pln = Cad2d_Boolean::Union(myPlanes[0], myPlanes[1], myTol);
 		if (pln)
 		{
 			mySumPlanes.push_back(std::move(pln));
@@ -90,7 +92,7 @@ namespace tnbLib
 			mySumPlanes.clear();
 		}
 
-		auto plns = Cad2d_Boolean::Subtract(myPlanes[0], myPlanes[1]);
+		auto plns = Cad2d_Boolean::Subtract(myPlanes[0], myPlanes[1], myTol);
 		if (plns.empty())
 		{
 			mySumPlanes.push_back(myPlanes[0]);
@@ -108,7 +110,7 @@ namespace tnbLib
 			mySumPlanes.clear();
 		}
 
-		auto plns = Cad2d_Boolean::Intersection(myPlanes[0], myPlanes[1]);
+		auto plns = Cad2d_Boolean::Intersection(myPlanes[0], myPlanes[1], myTol);
 		if (plns.empty())
 		{
 			// empty body
@@ -192,7 +194,7 @@ namespace tnbLib
 
 	void setTolerance(double tol)
 	{
-		Cad2d_Boolean::Tolerance = tol;
+		myTol = tol;
 	}
 }
 
