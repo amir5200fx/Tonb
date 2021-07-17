@@ -104,6 +104,16 @@ tnbLib::maker::Profile::RemovePnt
 )
 {
 	Debug_Null_Pointer(thePnt);
+
+	if (thePnt->HasChildMap())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the point is under the usage of a geometric map!" << endl
+			<< " if you insist on to remove this point, make sure you have "
+			<< " removed all the geometric maps that use this point." << endl
+			<< abort(FatalError);
+	}
+
 	if (IsOnBoundary(thePnt))
 	{
 		FatalErrorIn(FunctionSIG)

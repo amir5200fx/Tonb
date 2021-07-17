@@ -103,6 +103,8 @@ namespace tnbLib
 				(
 					const std::shared_ptr<SectPx_Cloud>& theCloud
 				);
+
+			void RemoveProfile(const Standard_Integer theIndex);
 		};
 	}
 }

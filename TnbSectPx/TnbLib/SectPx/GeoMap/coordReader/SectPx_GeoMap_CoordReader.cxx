@@ -25,7 +25,21 @@ void tnbLib::sectPxLib::GeoMap_CoordReader::SetCoord
 	const std::shared_ptr<SectPx_Coord>& theQ
 )
 {
+	if (theCoord_)
+	{
+		auto geoMap = theCoord_->RemoveGeoMap(Index());
+#ifdef _DEBUG
+		if (geoMap NOT_EQUAL std::dynamic_pointer_cast<SectPx_GeoMap>(This()))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+#endif // _DEBUG
+
+	}
 	theCoord_ = theQ;
+	theCoord_->ImportToGeoMaps(std::dynamic_pointer_cast<SectPx_GeoMap>(This()));
 }
 
 tnbLib::word 
@@ -45,6 +59,21 @@ tnbLib::sectPxLib::GeoMap_CoordReader::CalcCoord() const
 	}
 
 	return theCoord_->Coord();
+}
+
+Standard_Integer 
+tnbLib::sectPxLib::GeoMap_CoordReader::NbCoords() const
+{
+	return 1;
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Coord>> 
+tnbLib::sectPxLib::GeoMap_CoordReader::RetrieveCoords() const
+{
+	std::vector<std::shared_ptr<SectPx_Coord>> coords;
+	coords.reserve(1);
+	coords.push_back(Coord());
+	return std::move(coords);
 }
 
 Standard_Integer 

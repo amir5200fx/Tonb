@@ -652,6 +652,26 @@ tnbLib::SectPx_Tools::RetrieveControlPoints
 	return std::move(Q);
 }
 
+std::vector<std::shared_ptr<tnbLib::SectPx_Pnt>> 
+tnbLib::SectPx_Tools::RetrieveInnerPoints
+(
+	const std::shared_ptr<SectPx_TopoProfile>& theProfile
+)
+{
+	Debug_Null_Pointer(theProfile->Node0());
+	Debug_Null_Pointer(theProfile->Node1());
+	auto pnts = SectPx_PntTools::TrackPnts(theProfile->Node0(), theProfile->Node1());
+
+	std::vector<std::shared_ptr<SectPx_Pnt>> inners;
+	inners.reserve(pnts.size() - 2);
+	for (size_t i = 1; i < pnts.size() - 1; i++)
+	{
+		auto& x = pnts[i];
+		inners.push_back(std::move(x));
+	}
+	return std::move(inners);
+}
+
 std::vector<Standard_Real> 
 tnbLib::SectPx_Tools::RetrieveWeights
 (

@@ -124,3 +124,14 @@ tnbLib::maker::CmptProfile::CreateInterplProfile
 	AddProfile(id, std::move(profileMaker));
 	return id;
 }
+
+//void tnbLib::maker::CmptProfile::RemoveProfile
+//(
+//	const Standard_Integer theIndex
+//)
+//{
+//	auto profile = SelectProfile(theIndex);
+//	Debug_Null_Pointer(profile);
+//
+//	
+//}

@@ -125,6 +125,12 @@ namespace tnbLib
 		{
 			return theParents_;
 		}
+
+		TnbSectPx_EXPORT Standard_Boolean 
+			HasThisParent
+			(
+				const std::shared_ptr<SectPx_Parent>&
+			) const;
 	};
 }
 

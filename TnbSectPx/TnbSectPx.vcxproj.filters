@@ -469,6 +469,9 @@
     <Filter Include="TnbLib\SectPx\Makers\Spacing">
       <UniqueIdentifier>{b2dc5756-a08a-4aeb-9082-ebfcd8d05ba0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\Entities\Coord\Adaptor">
+      <UniqueIdentifier>{c86eb2d5-131f-4faa-b3d4-fcd5dafb9036}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -1043,6 +1046,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfile.hxx">
       <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\Entities\Coord\Adaptor\SectPx_CoordAdaptor.hxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Adaptor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1762,6 +1768,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfileIO.cxx">
       <Filter>TnbLib\SectPx\Entities\Profile\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Adaptor\SectPx_CoordAdaptor.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\Entities\Coord\Adaptor\SectPx_CoordAdaptorIO.cxx">
+      <Filter>TnbLib\SectPx\Entities\Coord\Adaptor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

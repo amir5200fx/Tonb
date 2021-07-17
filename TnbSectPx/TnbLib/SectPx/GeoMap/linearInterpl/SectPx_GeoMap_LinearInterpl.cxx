@@ -15,7 +15,20 @@ void tnbLib::sectPxLib::GeoMap_LinearInterpl::SetQ0
 	const std::shared_ptr<SectPx_Coord>& theQ0
 )
 {
+	if (theQ0_)
+	{
+		auto geoMap = theQ0_->RemoveGeoMap(Index());
+#ifdef _DEBUG
+		if (geoMap NOT_EQUAL std::dynamic_pointer_cast<SectPx_GeoMap>(This()))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+#endif // _DEBUG
+	}
 	theQ0_ = theQ0;
+	theQ0_->ImportToGeoMaps(std::dynamic_pointer_cast<SectPx_GeoMap>(This()));
 }
 
 void tnbLib::sectPxLib::GeoMap_LinearInterpl::SetQ1
@@ -23,7 +36,20 @@ void tnbLib::sectPxLib::GeoMap_LinearInterpl::SetQ1
 	const std::shared_ptr<SectPx_Coord>& theQ1
 )
 {
+	if (theQ1_)
+	{
+		auto geoMap = theQ1_->RemoveGeoMap(Index());
+#ifdef _DEBUG
+		if (geoMap NOT_EQUAL std::dynamic_pointer_cast<SectPx_GeoMap>(This()))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+#endif // _DEBUG
+	}
 	theQ1_ = theQ1;
+	theQ1_->ImportToGeoMaps(std::dynamic_pointer_cast<SectPx_GeoMap>(This()));
 }
 
 void tnbLib::sectPxLib::GeoMap_LinearInterpl::SetPar
@@ -66,6 +92,22 @@ tnbLib::sectPxLib::GeoMap_LinearInterpl::CalcCoord() const
 
 	auto pt = q0->Coord() + x * (q1->Coord() - q0->Coord());
 	return std::move(pt);
+}
+
+Standard_Integer 
+tnbLib::sectPxLib::GeoMap_LinearInterpl::NbCoords() const
+{
+	return 2;
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Coord>> 
+tnbLib::sectPxLib::GeoMap_LinearInterpl::RetrieveCoords() const
+{
+	std::vector<std::shared_ptr<SectPx_Coord>> coords;
+	coords.reserve(2);
+	coords.push_back(Q0());
+	coords.push_back(Q1());
+	return std::move(coords);
 }
 
 Standard_Integer 

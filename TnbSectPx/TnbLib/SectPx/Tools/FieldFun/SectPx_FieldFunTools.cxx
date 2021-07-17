@@ -1,6 +1,7 @@
 #include <SectPx_FieldFunTools.hxx>
 
 #include <SectPx_FieldFuns.hxx>
+#include <SectPx_Par.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -11,7 +12,21 @@ tnbLib::SectPx_FieldFunTools::IsRemovable
 )
 {
 	Debug_Null_Pointer(theField);
-	return NOT theField->HasChildren();
+	if (theField->HasChildren())
+	{
+		auto children = theField->RetrieveChildren();
+		for (const auto& x : children)
+		{
+			auto par = std::dynamic_pointer_cast<SectPx_Par>(x);
+			Debug_Null_Pointer(par);
+
+			if (par->HasThisParent(theField))
+			{
+				return Standard_False;
+			}
+		}
+	}
+	return Standard_True;
 }
 
 Standard_Boolean 

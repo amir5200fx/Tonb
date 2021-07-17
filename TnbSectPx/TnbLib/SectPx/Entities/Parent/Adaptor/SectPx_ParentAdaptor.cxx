@@ -113,3 +113,29 @@ void tnbLib::SectPx_ParentAdaptor::ImportToParents
 {
 	Add(theParent->Index(), theParent);
 }
+
+Standard_Boolean 
+tnbLib::SectPx_ParentAdaptor::HasThisParent
+(
+	const std::shared_ptr<SectPx_Parent>& theParent
+) const
+{
+	auto id = theParent->Index();
+	auto iter = theParents_.find(id);
+	if (iter IS_EQUAL theParents_.end())
+	{
+		return Standard_False;
+	}
+
+#ifdef _DEBUG
+	auto x = iter->second.Parent.lock();
+	if (x NOT_EQUAL theParent)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "contradictory data has been detected!" << endl
+			<< " - two different parents have the same id!" << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
+	return Standard_True;
+}

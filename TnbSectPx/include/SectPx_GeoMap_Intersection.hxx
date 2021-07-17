@@ -113,6 +113,11 @@ namespace tnbLib
 
 			TnbSectPx_EXPORT Pnt2d CalcCoord() const override;
 
+			TnbSectPx_EXPORT Standard_Integer NbCoords() const override;
+
+			TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Coord>>
+				RetrieveCoords() const override;
+
 			//- override virtual functions from parent abstract class 
 
 			TnbSectPx_EXPORT Standard_Integer NbChildren() const override;

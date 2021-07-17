@@ -15,7 +15,20 @@ void tnbLib::sectPxLib::GeoMap_Intersection::SetQ0
 	const std::shared_ptr<SectPx_Coord>& theQ0
 )
 {
+	if (theQ0_)
+	{
+		auto geoMap = theQ0_->RemoveGeoMap(Index());
+#ifdef _DEBUG
+		if (geoMap NOT_EQUAL std::dynamic_pointer_cast<SectPx_GeoMap>(This()))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+#endif // _DEBUG
+	}
 	theQ0_ = theQ0;
+	theQ0_->ImportToGeoMaps(std::dynamic_pointer_cast<SectPx_GeoMap>(This()));
 }
 
 void tnbLib::sectPxLib::GeoMap_Intersection::SetQ1
@@ -23,7 +36,20 @@ void tnbLib::sectPxLib::GeoMap_Intersection::SetQ1
 	const std::shared_ptr<SectPx_Coord>& theQ1
 )
 {
+	if (theQ1_)
+	{
+		auto geoMap = theQ1_->RemoveGeoMap(Index());
+#ifdef _DEBUG
+		if (geoMap NOT_EQUAL std::dynamic_pointer_cast<SectPx_GeoMap>(This()))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+#endif // _DEBUG
+	}
 	theQ1_ = theQ1;
+	theQ1_->ImportToGeoMaps(std::dynamic_pointer_cast<SectPx_GeoMap>(This()));
 }
 
 void tnbLib::sectPxLib::GeoMap_Intersection::SetDir0
@@ -103,6 +129,22 @@ tnbLib::sectPxLib::GeoMap_Intersection::CalcCoord() const
 			Geo_Tools::IntersectionTwoLines(p0, dir0, p1, dir1, 1.0e-6);
 		return std::move(pt);
 	}
+}
+
+Standard_Integer 
+tnbLib::sectPxLib::GeoMap_Intersection::NbCoords() const
+{
+	return 2;
+}
+
+std::vector<std::shared_ptr<tnbLib::SectPx_Coord>> 
+tnbLib::sectPxLib::GeoMap_Intersection::RetrieveCoords() const
+{
+	std::vector<std::shared_ptr<SectPx_Coord>> coords;
+	coords.reserve(2);
+	coords.push_back(Q0());
+	coords.push_back(Q1());
+	return std::move(coords);
 }
 
 Standard_Integer 
