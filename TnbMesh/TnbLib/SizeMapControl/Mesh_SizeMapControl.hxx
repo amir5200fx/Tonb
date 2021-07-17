@@ -70,7 +70,7 @@ namespace tnbLib
 
 		//- protected functions and operators
 
-		void Import(const word& theName, const std::shared_ptr<sizeMapTool>& theSizeMap);
+		
 
 	public:
 
@@ -90,6 +90,8 @@ namespace tnbLib
 		{
 			return theBoundaries_;
 		}
+
+		void Import(const word& theName, const std::shared_ptr<sizeMapTool>& theSizeMap);
 
 		void LoadGeometry(const std::shared_ptr<GeomType>& theGeometry)
 		{

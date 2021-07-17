@@ -47,13 +47,13 @@ void tnbLib::MeshBase_Tools::SetSourcesToMesh
 		auto n1 = Index_Of(currentRef.Node1()->Index());
 		auto n2 = Index_Of(currentRef.Node2()->Index());
 
-		auto v0 = theSources[n0].second;
-		auto v1 = theSources[n1].second;
-		auto v2 = theSources[n2].second;
+		auto v0 = sources[n0];
+		auto v1 = sources[n1];
+		auto v2 = sources[n2];
 
-		if (sources[n0] <= x.second) sources[n0] = x.second;
-		if (sources[n1] <= x.second) sources[n1] = x.second;
-		if (sources[n2] <= x.second) sources[n2] = x.second;
+		if (v0 < x.second) sources[n0] = v0;
+		if (v1 < x.second) sources[n1] = v1;
+		if (v2 < x.second) sources[n2] = v2;
 	}
 }
 

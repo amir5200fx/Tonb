@@ -127,9 +127,6 @@
     <Filter Include="TnbLib\Base\MetricFunction\Background\3d">
       <UniqueIdentifier>{570658c4-2901-45e4-8036-7799f03547da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Base\SizeFunction">
-      <UniqueIdentifier>{21e6e051-1cfd-4bcb-aa60-f223e1bfd3d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Base\Cad">
       <UniqueIdentifier>{de36cd79-61d9-4d88-b740-916325aad140}</UniqueIdentifier>
     </Filter>
@@ -969,6 +966,27 @@
     </Filter>
     <Filter Include="TnbLib\Base\Tools\UnionSizeMap\2d\AnIso">
       <UniqueIdentifier>{805dd5c3-9b6c-4e92-bee3-e9ca73af15e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Feature\2d">
+      <UniqueIdentifier>{eef7e410-d323-4365-b0d2-0e8cb10d8f3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Volumetric\2d">
+      <UniqueIdentifier>{55862463-1822-4b27-a426-dc3028ca4554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\ReMesh">
+      <UniqueIdentifier>{79da1dd7-60f7-4832-a86d-8aaa2ce8a6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\ReMesh\2d">
+      <UniqueIdentifier>{57aae3a6-1b8e-4102-900e-599010b4ffe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\ReMesh\Traits">
+      <UniqueIdentifier>{e20a1965-a864-4eeb-bfc8-7b7f022bb702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Curve\Traits">
+      <UniqueIdentifier>{d0e21ba2-4fcb-4773-b5e8-8362557318d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Mesh\Background\System">
+      <UniqueIdentifier>{adc9de68-567c-4def-af0f-2fce114514ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1923,9 +1941,6 @@
     <ClInclude Include="TnbLib\Base\Tools\Tools\MeshBase_Tools.hxx">
       <Filter>TnbLib\Base\Tools\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System\BoundarySizeMap2d_CornerToolSystem.hxx">
-      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Base\Entities\Node\Mesh_NodesFwd.hxx">
       <Filter>TnbLib\Base\Entities\Node</Filter>
     </ClInclude>
@@ -2205,6 +2220,48 @@
     <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMapFwd.hxx">
       <Filter>TnbLib\Base\Tools\UnionSizeMap\2d\Iso</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\SolutionData\Mesh_SolutionDataI.hxx">
+      <Filter>TnbLib\Base\SolutionData</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Feature\2d\Mesh2d_FeatureSizeMapControlFwd.hxx">
+      <Filter>TnbLib\SizeMapControl\Feature\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Feature\2d\Mesh2d_FeatureSizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Feature\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Volumetric\2d\Mesh2d_VolumetricSizeMapControlFwd.hxx">
+      <Filter>TnbLib\SizeMapControl\Volumetric\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Volumetric\2d\Mesh2d_VolumetricSizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Volumetric\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\BoundarySizeMap2d_SegmentTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\ReMesh\Mesh_CurveRemesh.hxx">
+      <Filter>TnbLib\Curve\ReMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\ReMesh\Traits\Mesh_CurveRemeshTraits.hxx">
+      <Filter>TnbLib\Curve\ReMesh\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\ReMesh\Mesh_CurveRemeshI.hxx">
+      <Filter>TnbLib\Curve\ReMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\ReMesh\2d\Mesh2d_CurveRemesh.hxx">
+      <Filter>TnbLib\Curve\ReMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\ReMesh\2d\Mesh2d_CurveRemeshFwd.hxx">
+      <Filter>TnbLib\Curve\ReMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\Traits\Mesh_CurveTraits.hxx">
+      <Filter>TnbLib\Curve\Curve\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\Iso\Mesh2d_CurveI.hxx">
+      <Filter>TnbLib\Curve\Curve\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\System\GeoMesh_Background_System.hxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -2429,9 +2486,6 @@
     <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_Tools.cxx">
       <Filter>TnbLib\Base\Tools\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System\BoundarySizeMap2d_CornerToolSystem.cxx">
-      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\System</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\Iso\bNode\Aft2d_BndNodeIO.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Node\Iso\bNode</Filter>
     </ClCompile>
@@ -2533,6 +2587,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMap.cxx">
       <Filter>TnbLib\Base\Tools\UnionSizeMap\2d\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\SolutionData\2d\Mesh2d_SolutionDataIO.cxx">
+      <Filter>TnbLib\Base\SolutionData\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\BoundarySizeMap2d_SegmentTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\BoundarySizeMap2d_SegmentToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\ReMesh\2d\Mesh2d_CurveRemesh.cxx">
+      <Filter>TnbLib\Curve\ReMesh\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\Iso\Mesh2d_Curve.cxx">
+      <Filter>TnbLib\Curve\Curve\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\System\GeoMesh_Background_System.cxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

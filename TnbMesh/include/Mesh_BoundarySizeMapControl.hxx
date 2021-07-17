@@ -35,6 +35,9 @@ namespace tnbLib
 	protected:
 
 
+	public:
+
+
 		//- default constructor
 		Mesh_BoundarySizeMapControl()
 		{}
@@ -44,13 +47,11 @@ namespace tnbLib
 
 		Mesh_BoundarySizeMapControl
 		(
-			const std::shared_ptr<GeomType>& theGeometry, 
-			const std::shared_ptr<Mesh_SizeMapControl>& theRef
+			const std::shared_ptr<GeomType>& theGeometry,
+			const std::shared_ptr<Mesh_ReferenceValues>& theRef
 		)
 			: base(theGeometry, theRef)
 		{}
-
-	public:
 
 
 		//- public functions and operators
