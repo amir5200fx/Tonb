@@ -150,6 +150,12 @@ namespace tnbLib
 				const std::shared_ptr<SectPx_CurveQ>& theSeg
 			);
 
+		static TnbSectPx_EXPORT std::vector<std::shared_ptr<SectPx_Pnt>> 
+			RetrieveInnerPoints
+			(
+				const std::shared_ptr<SectPx_TopoProfile>&
+			);
+
 		static TnbSectPx_EXPORT std::vector<Standard_Real> 
 			RetrieveWeights
 			(

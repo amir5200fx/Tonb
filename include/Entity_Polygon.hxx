@@ -18,6 +18,7 @@ namespace tnbLib
 	class Entity_Polygon
 	{
 
+		typename typedef entity_coord<Point>::coord coord;
 		typedef std::vector<Point> pointList;
 
 		/*Private Data*/
@@ -28,6 +29,10 @@ namespace tnbLib
 
 
 		/*private functions and operators*/
+
+
+		const coord& Coord(const Standard_Integer) const;
+		coord& Coord(const Standard_Integer);
 
 		friend class boost::serialization::access;
 
@@ -40,9 +45,15 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [7/14/2021 Amir]
+
 		Entity_Polygon()
 			: theDeflection_(0)
 		{}
+
+
+		// constructors [7/14/2021 Amir]
 
 		Entity_Polygon
 		(
@@ -61,6 +72,9 @@ namespace tnbLib
 			: thePoints_(std::move(thePoints))
 			, theDeflection_(theDeflection)
 		{}
+
+
+		// public functions and operators [7/14/2021 Amir]
 
 		Entity_Polygon Reversed() const
 		{
@@ -96,31 +110,29 @@ namespace tnbLib
 
 		Standard_Boolean IsClosed() const
 		{
-			const auto& p0 = thePoints_[0];
-			const auto& p1 = thePoints_[thePoints_.size() - 1];
+			const auto& p0 = Coord(0);
+			const auto& p1 = Coord((Standard_Integer)thePoints_.size() - 1);
 
 			return p0.Distance(p1) <= gp::Resolution();
 		}
 
-		const Point& GetPoint(const Standard_Integer theIndex) const
+		const coord& GetPoint(const Standard_Integer theIndex) const
 		{
-			return thePoints_[theIndex];
+			return Coord(theIndex);
 		}
 
-		Point& GetPoint(const Standard_Integer theIndex)
+		coord& GetPoint(const Standard_Integer theIndex)
 		{
-			return thePoints_[theIndex];
+			return Coord(theIndex);
 		}
 
 		void Transform
 		(
-			const typename transform_point_type<Point>::type& theTrasf
+			const typename transform_point_type<coord>::type& theTrasf
 		)
 		{
-			for (auto& x : thePoints_)
-			{
-				x.Transform(theTrasf);
-			}
+			for (Standard_Integer i = 0; i < NbPoints() - 1; i++)
+				Coord(i).Transform(theTrasf);
 		}
 
 		void Reverse();

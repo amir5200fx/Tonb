@@ -26,6 +26,8 @@ namespace tnbLib
 		Standard_Integer theMaxLevel_;
 		Standard_Integer theMaxUnbalancing_;
 
+		Standard_Integer theNbItems_;
+
 		Standard_Boolean(*theSubdivider)(const Entity2d_Box&, const T*);
 		Standard_Boolean IsBalanced_;
 
@@ -53,6 +55,14 @@ namespace tnbLib
 	public:
 
 		Geo2d_ApprxSpace()
+			: theNbItems_(0)
+			, theRoot_(NULL)
+			, theMinLevel_(2)
+			, theMaxLevel_(6)
+			, theMaxUnbalancing_(2)
+			, theObject_(NULL)
+			, theSubdivider(NULL)
+			, IsBalanced_(Standard_False)
 		{}
 
 		~Geo2d_ApprxSpace();

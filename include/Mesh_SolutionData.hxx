@@ -4,6 +4,9 @@
 
 #include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
+#include <Mesh_BoundarySizeMapControl.hxx>
+#include <Mesh_FeatureSizeMapControl.hxx>
+#include <Mesh_VolumetricSizeMapControl.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -44,7 +47,7 @@ namespace tnbLib
 			NotImplemented;
 		}
 
-		void CreateSizeMap();
+		//void CreateSizeMap();
 
 		//- default constructor
 
@@ -54,11 +57,15 @@ namespace tnbLib
 	public:
 
 		
-		static unsigned short verbose;
+		//static unsigned short verbose;
 
 		//- constructors
 
-		Mesh_SolutionData(const std::shared_ptr<GeomType>& theGeometry, const std::shared_ptr<Mesh_ReferenceValues>& theReferences);
+		Mesh_SolutionData
+		(
+			const std::shared_ptr<GeomType>& theGeometry,
+			const std::shared_ptr<Mesh_ReferenceValues>& theReferences
+		);
 
 
 		//- public functions and operators
@@ -119,5 +126,7 @@ namespace tnbLib
 		}*/
 	};
 }
+
+#include <Mesh_SolutionDataI.hxx>
 
 #endif // !_Mesh_SolutionData_Header

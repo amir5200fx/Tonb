@@ -179,7 +179,7 @@ namespace tnbLib
 
 			std::ofstream file(address);
 
-			boost::archive::polymorphic_text_oarchive oa(file);
+			TNB_oARCH_FILE_TYPE oa(file);
 
 			oa << c;
 

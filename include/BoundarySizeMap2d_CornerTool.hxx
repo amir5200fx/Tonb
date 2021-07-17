@@ -13,7 +13,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Standard_Integer theBucketSize_;
+		Standard_Integer theUnbalancing_;
 		Standard_Integer theMinSubdivision_;
 		Standard_Integer theMaxSubdivision_;
 
@@ -32,15 +32,16 @@ namespace tnbLib
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
 			ar & boost::serialization::base_object<Mesh2d_BoundarySizeMapTool>(*this);
-			ar & theBucketSize_;
+			ar & theUnbalancing_;
 			ar & theMinSubdivision_;
 			ar & theMaxSubdivision_;
 		}
 
 	public:
 
+		static TnbMesh_EXPORT unsigned short verbose;
 
-		static TnbMesh_EXPORT const Standard_Integer DEFAULT_BUCKETSIZE;
+		static TnbMesh_EXPORT const Standard_Integer DEFAULT_UNBALANCING;
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MIN_SUBDIVISION;
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_SUBDIVISION;
 
@@ -66,7 +67,12 @@ namespace tnbLib
 			return theMinSubdivision_;
 		}
 
-		TnbMesh_EXPORT void SetBucketSize(const Standard_Integer theSize);
+		auto Unbalancing() const
+		{
+			return theUnbalancing_;
+		}
+
+		TnbMesh_EXPORT void SetUnbalancing(const Standard_Integer theSize);
 		TnbMesh_EXPORT void SetMinSubdivision(const Standard_Integer nbLevels);
 		TnbMesh_EXPORT void SetMaxSubdivision(const Standard_Integer nbLevels);
 

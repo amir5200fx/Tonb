@@ -28,21 +28,136 @@ namespace tnbLib
 	{
 
 
+	public:
+
+		struct colTable
+		{
+			word Name;
+
+			std::vector<Standard_Real> Values;
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int /*file_version*/)
+			{
+				ar & Name;
+				ar & Values;
+			}
+		};
+
+		struct csvTable
+		{
+			std::vector<colTable> Columns;
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int /*file_version*/)
+			{
+				ar & Columns;
+			}
+		};
+
+		struct steffenTessellInfo
+		{
+
+			static TnbHydStatic_EXPORT const Standard_Integer DEFAULT_NB_SAMPLES;
+
+			// default constructor [7/9/2021 Amir]
+			steffenTessellInfo();
+
+			Standard_Boolean Apply;
+			Standard_Integer NbSamples;
+
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int /*file_version*/)
+			{
+				ar & Apply;
+				ar & NbSamples;
+			}
+		};
+
+		struct waterInfo
+		{
+			// default constructor [7/9/2021 Amir]
+			waterInfo();
+
+
+			Standard_Real RhoS;
+			Standard_Real RhoF;
+
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int /*file_version*/)
+			{
+				ar & RhoS;
+				ar & RhoF;
+			}
+		};
+
+		struct rudderInfo
+		{
+			// default constructor [7/9/2021 Amir]
+			rudderInfo();
+
+			Standard_Boolean RudderAxis;
+			Standard_Real RudderAxisLoc;
+
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int /*file_version*/)
+			{
+				ar & RudderAxis;
+				ar & RudderAxisLoc;
+			}
+		};
+
+		struct algInfo
+		{
+
+			static TnbHydStatic_EXPORT const Standard_Real DEFAULT_DISPL_FACTOR;
+
+			// default constructor [7/9/2021 Amir]
+			algInfo();
+
+			Standard_Boolean Interpolate;
+			Standard_Real DisplFactor;
+
+			steffenTessellInfo SteffenInfo;
+
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive &ar, const unsigned int /*file_version*/)
+			{
+				ar & Interpolate;
+				ar & DisplFactor;
+				ar & SteffenInfo;
+			}
+		};
+
+	private:
+
 		typedef NumAlg_AdaptiveInteg_Info info;
 
 		/*Private Data*/
 
-		Standard_Real theRhoS_;
-		Standard_Real theRhoF_;
-		Standard_Real theDisplFactor_;
+		waterInfo theWaterInfo_;
+		rudderInfo theRudderInfo_;
+		algInfo theAlgInfo_;
 
 		std::shared_ptr<Marine_MultLevWaterDomain> theWaters_;
 
-
-		Standard_Boolean RudderAxis_;
-		Standard_Real theRudderAxisLoc_;
-
-
+		std::shared_ptr<csvTable> theCSV_;
 		std::shared_ptr<HydStatic_HydCurvesGraph> theGraph_;
 
 
@@ -100,6 +215,7 @@ namespace tnbLib
 			return theGraph_;
 		}
 
+
 	public:
 
 		static TnbHydStatic_EXPORT size_t clippNo;
@@ -108,30 +224,27 @@ namespace tnbLib
 		static TnbHydStatic_EXPORT const Standard_Real DEFAULT_RHOSW;
 		static TnbHydStatic_EXPORT const Standard_Real DEFAULT_RHOFW;
 
-		HydStatic_HydCurves()
-			: RudderAxis_(Standard_False)
-			, theRudderAxisLoc_(0)
-			, theDisplFactor_(0)
-			, theRhoF_(DEFAULT_RHOFW)
-			, theRhoS_(DEFAULT_RHOSW)
-		{}
+
+		// default constructor [7/9/2021 Amir]
+
+		TnbHydStatic_EXPORT HydStatic_HydCurves();
 
 
 		//- public functions and operators
 
-		Standard_Real RhoSW() const
+		const auto& WaterInfo() const
 		{
-			return theRhoS_;
+			return theWaterInfo_;
 		}
 
-		Standard_Real RhoFW() const
+		const auto& RudderInfo() const
 		{
-			return theRhoF_;
+			return theRudderInfo_;
 		}
 
-		Standard_Real DisplFactor() const
+		const auto& AlgInfo() const
 		{
-			return theDisplFactor_;
+			return theAlgInfo_;
 		}
 
 		const auto& Waters() const
@@ -139,19 +252,14 @@ namespace tnbLib
 			return theWaters_;
 		}
 
-		auto RudderAxis() const
-		{
-			return RudderAxis_;
-		}
-
-		auto RudderAxisLoc() const
-		{
-			return theRudderAxisLoc_;
-		}
-
 		const auto& Graph() const
 		{
 			return theGraph_;
+		}
+
+		const auto& CsvTable() const
+		{
+			return theCSV_;
 		}
 
 		TnbHydStatic_EXPORT void Perform();
@@ -166,29 +274,10 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT void SetRudderLocation(const Standard_Real x);
 
-		void SetRhoSW
-		(
-			const Standard_Real rho
-		)
-		{
-			theRhoS_ = rho;
-		}
-
-		void SetRhoFW
-		(
-			const Standard_Real rho
-		)
-		{
-			theRhoF_ = rho;
-		}
-
-		void SetDisplFactor
-		(
-			const Standard_Real x
-		)
-		{
-			theDisplFactor_ = x;
-		}
+		TnbHydStatic_EXPORT void SetRhoSW(const Standard_Real rho);
+		TnbHydStatic_EXPORT void SetRhoFW(const Standard_Real rho);
+		TnbHydStatic_EXPORT void SetSteffenTessellation(const Standard_Boolean useSteffen);
+		TnbHydStatic_EXPORT void SetInterpolation(const Standard_Boolean doIt);
 	};
 }
 

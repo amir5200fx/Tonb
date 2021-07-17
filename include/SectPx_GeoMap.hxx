@@ -6,9 +6,13 @@
 #include <Pnt2d.hxx>
 
 #include <memory>
+#include <vector>
 
 namespace tnbLib
 {
+
+	// Forward Declarations
+	class SectPx_Coord;
 
 	class SectPx_GeoMap
 		: public SectPx_Parent
@@ -33,6 +37,8 @@ namespace tnbLib
 
 	public:
 
+		TnbSectPx_EXPORT virtual ~SectPx_GeoMap();
+
 		TnbSectPx_EXPORT Standard_Boolean IsGeoMap() const override;
 
 		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
@@ -42,6 +48,11 @@ namespace tnbLib
 		virtual Standard_Boolean IsComplete() const = 0;
 
 		virtual Pnt2d CalcCoord() const = 0;
+
+		virtual Standard_Integer NbCoords() const = 0;
+
+		TnbSectPx_EXPORT virtual std::vector<std::shared_ptr<SectPx_Coord>> RetrieveCoords() const;
+
 	};
 }
 

@@ -49,6 +49,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad2d_EXPORT Standard_Real CalcPrecision(const Pln_Vertex&);
+
 		static TnbCad2d_EXPORT Standard_Boolean
 			IsBounded
 			(
@@ -172,6 +174,12 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
 				const Standard_Boolean checkManifold = Standard_True,
 				const Standard_Integer verbose = 0
+			);
+
+		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Vertex>> 
+			RetrieveVertices
+			(
+				const Pln_Wire&
 			);
 
 		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Vertex>>
@@ -430,6 +438,12 @@ namespace tnbLib
 			std::shared_ptr<Pln_Wire>& theOuter, 
 			std::vector<std::shared_ptr<Pln_Wire>>& theInners
 		);
+
+		static TnbCad2d_EXPORT void SetPrecision
+		(
+			const std::shared_ptr<Pln_Wire>&
+		);
+		
 	};
 }
 

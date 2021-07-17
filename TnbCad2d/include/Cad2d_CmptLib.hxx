@@ -26,7 +26,12 @@ namespace tnbLib
 
 	public:
 
-
+		static TnbCad2d_EXPORT Standard_Real 
+			Curvature
+			(
+				const Handle(Geom2d_Curve)& theCurve, 
+				const Standard_Real thePar
+			);
 
 		//- Check the convergence of the algorithm with the info parameter
 		static TnbCad2d_EXPORT Standard_Real
