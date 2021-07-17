@@ -21,6 +21,20 @@ namespace tnbLib
 
 		Entity_Box<Point> theBoundingBox_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+			ar & boost::serialization::base_object<Global_Done>(*this);
+			ar & theBoundingBox_;
+		}
+
 	protected:
 
 
@@ -60,5 +74,11 @@ namespace tnbLib
 
 	};
 }
+
+#include <Geo2d_SizeFunction.hxx>
+#include <Geo3d_SizeFunction.hxx>
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo2d_SizeFunction);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo3d_SizeFunction);
 
 #endif // !_Geo_SizeFunction_Header

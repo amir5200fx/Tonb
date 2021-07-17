@@ -25,6 +25,11 @@ namespace tnbLib
 
 		std::shared_ptr<Geo3d_SizeFunction> theSize3d_;
 
+
+		// private functions and operators [7/17/2021 Amir]
+
+		TNB_SERIALIZATION(TnbGeo_EXPORT);
+
 	public:
 
 		Geo2d_SizeFunction_Surface(const Entity2d_Box& theBox)
@@ -65,5 +70,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Geo2d_SizeFunction_Surface);
 
 #endif // !_Geo2d_SizeFunction_Surface_Header

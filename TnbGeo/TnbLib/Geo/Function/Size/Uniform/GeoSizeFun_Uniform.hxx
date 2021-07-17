@@ -18,6 +18,18 @@ namespace tnbLib
 
 		Standard_Real theSize_;
 
+
+		// private functions and operators [7/17/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_SizeFunction<Point>>(*this);
+			ar & theSize_;
+		}
+
 	public:
 
 		GeoSizeFun_Uniform
@@ -51,5 +63,6 @@ namespace tnbLib
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Size)
 	};
 }
+
 
 #endif // !_GeoSizeFun_Uniform_Header
