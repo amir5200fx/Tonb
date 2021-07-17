@@ -3,7 +3,7 @@
 #define _SectPx_Coord_Header
 
 #include <Pnt2d.hxx>
-#include <SectPx_ParentAdaptor.hxx>
+#include <SectPx_CoordAdaptor.hxx>
 #include <Global_Serialization.hxx>
 
 #include <memory>
@@ -12,7 +12,7 @@ namespace tnbLib
 {
 
 	class SectPx_Coord
-		/*: public SectPx_ParentAdaptor*/
+		: public SectPx_CoordAdaptor
 	{
 
 		/*Private Data*/
@@ -21,7 +21,9 @@ namespace tnbLib
 
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version)
-		{}
+		{
+			boost::serialization::base_object<SectPx_CoordAdaptor>(*this);
+		}
 
 	protected:
 
