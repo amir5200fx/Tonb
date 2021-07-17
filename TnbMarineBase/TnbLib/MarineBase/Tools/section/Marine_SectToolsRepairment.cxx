@@ -315,7 +315,8 @@ tnbLib::Marine_SectTools::RepairSymmetricStation
 	alg.Perform();
 
 	const auto segments = alg.RetrieveCompundEdges();
-
+	//std::cout <<"loc: "<< theAxis.Location() << std::endl;
+	//std::cout << "dir: " << theAxis.Direction() << std::endl;
 	gp_Lin2d line(theAxis);
 
 	std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> dangles;
@@ -334,6 +335,9 @@ tnbLib::Marine_SectTools::RepairSymmetricStation
 			auto d0 = line.Distance(n0->Vtx()->Coord());
 			auto d1 = line.Distance(n1->Vtx()->Coord());
 
+			//std::cout << d0 << ", " << d1 << std::endl;
+			//std::cout << "tol = " << tol << std::endl;
+
 			if (d0 <= tol AND d1 <= tol)
 			{
 				continue;
@@ -343,6 +347,9 @@ tnbLib::Marine_SectTools::RepairSymmetricStation
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "invalid section has been detected!" << endl
+					<< " - tol: " << tol << endl
+					<< " - d0: " << d0 << endl
+					<< " - d1: " << d1 << endl
 					<< abort(FatalError);
 			}
 
