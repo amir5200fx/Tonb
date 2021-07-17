@@ -356,8 +356,7 @@ namespace tnbLib
 			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
 
 			auto[minTol, maxTol] = outer->BoundTolerance();
-
-			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(maxTol, theTol));
+			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(2.05*maxTol, theTol));
 
 			Debug_Null_Pointer(newOuter);
 
@@ -377,7 +376,7 @@ namespace tnbLib
 
 					auto[minTol, maxTol] = x->BoundTolerance();
 
-					auto newInner = Pln_Tools::MakeWire(newWire_curves, innerSense, MAX(maxTol, theTol));
+					auto newInner = Pln_Tools::MakeWire(newWire_curves, innerSense, MAX(2.05*maxTol, theTol));
 					Debug_Null_Pointer(newInner);
 
 					newInner->ApplyOrientation(Pln_Orientation::Pln_Orientation_CW);
