@@ -96,6 +96,11 @@ void tnbLib::Cad2d_Plane::Make
 	auto edges = RetrieveEdges(theOuter, theInners);
 
 	auto vertices = Pln_Tools::RetrieveVertices(edges);
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		x->SetPrecision(Pln_Tools::CalcPrecision(*x));
+	}
 	
 	auto edgeBlock = 
 		std::make_shared<Cad_BlockEntity<Pln_Edge>>("Default Block Edge", edges);
