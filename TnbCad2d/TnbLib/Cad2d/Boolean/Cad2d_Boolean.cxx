@@ -17,7 +17,7 @@
 namespace tnbLib
 {
 
-	Standard_Real Cad2d_Boolean::Tolerance(1.0E-6);
+	//Standard_Real Cad2d_Boolean::Tolerance(1.0E-6);
 
 	namespace boolean
 	{
@@ -124,7 +124,8 @@ std::shared_ptr<tnbLib::Cad2d_Plane>
 tnbLib::Cad2d_Boolean::Union
 (
 	const std::shared_ptr<Cad2d_Plane>& thePlane0,
-	const std::shared_ptr<Cad2d_Plane>& thePlane1
+	const std::shared_ptr<Cad2d_Plane>& thePlane1,
+	const Standard_Real theTol
 )
 {
 	if (NOT thePlane0)
@@ -144,6 +145,8 @@ tnbLib::Cad2d_Boolean::Union
 	auto bb0 = thePlane0->BoundingBox(0);
 	auto bb1 = thePlane1->BoundingBox(0);
 
+	const auto tol = std::min(bb0.Diameter(), bb1.Diameter())*theTol;
+
 	if (NOT bb0.IsIntersect(bb1))
 	{
 		return nullptr;
@@ -155,7 +158,7 @@ tnbLib::Cad2d_Boolean::Union
 	intersection->LoadPlane0(thePlane0);
 	intersection->LoadPlane1(thePlane1);
 
-	intersection->SetTolerance(Tolerance);
+	intersection->SetTolerance(tol);
 
 	intersection->Perform();
 	Debug_If_Condition_Message(NOT intersection->IsDone(), "the algorithm is not performed!");
@@ -252,8 +255,8 @@ tnbLib::Cad2d_Boolean::Union
 	auto wires =
 		Pln_Tools::RetrieveWires
 		(curves,
-			MAX(MAX(minTol0, minTol1), Tolerance),
-			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
+			MAX(MAX(minTol0, minTol1), tol),
+			10.0*MAX(MAX(maxTol0, maxTol1), tol));
 
 	auto outer = Pln_Tools::RetrieveOuterWire(wires);
 	if (NOT outer)
@@ -285,7 +288,8 @@ std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>
 tnbLib::Cad2d_Boolean::Subtract
 (
 	const std::shared_ptr<Cad2d_Plane>& thePlane0, 
-	const std::shared_ptr<Cad2d_Plane>& thePlane1
+	const std::shared_ptr<Cad2d_Plane>& thePlane1,
+	const Standard_Real theTol
 )
 {
 	if (NOT thePlane0)
@@ -311,6 +315,8 @@ tnbLib::Cad2d_Boolean::Subtract
 	auto bb0 = thePlane0->BoundingBox(0);
 	auto bb1 = thePlane1->BoundingBox(0);
 
+	const auto tol = std::min(bb0.Diameter(), bb1.Diameter())*theTol;
+
 	if (NOT bb0.IsIntersect(bb1))
 	{
 		return std::vector<std::shared_ptr<Cad2d_Plane>>();
@@ -326,7 +332,7 @@ tnbLib::Cad2d_Boolean::Subtract
 	intersection->LoadPlane0(thePlane0);
 	intersection->LoadPlane1(plane1);
 
-	intersection->SetTolerance(Tolerance);
+	intersection->SetTolerance(tol);
 
 	intersection->Perform();
 	Debug_If_Condition_Message(NOT intersection->IsDone(), "the algorithm is not performed!");
@@ -436,8 +442,8 @@ tnbLib::Cad2d_Boolean::Subtract
 		Pln_Tools::RetrieveWires
 		(
 			curves, 
-			MAX(MAX(minTol0, minTol1), Tolerance),
-			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
+			MAX(MAX(minTol0, minTol1), tol),
+			10.0*MAX(MAX(maxTol0, maxTol1), tol));
 
 	auto planes = Pln_Tools::RetrievePlanes(wires, thePlane0->System());
 	return std::move(planes);
@@ -472,7 +478,8 @@ std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>
 tnbLib::Cad2d_Boolean::Intersection
 (
 	const std::shared_ptr<Cad2d_Plane>& thePlane0, 
-	const std::shared_ptr<Cad2d_Plane>& thePlane1
+	const std::shared_ptr<Cad2d_Plane>& thePlane1,
+	const Standard_Real theTol
 )
 {
 	if (NOT thePlane0)
@@ -492,6 +499,8 @@ tnbLib::Cad2d_Boolean::Intersection
 	auto bb0 = thePlane0->BoundingBox(0);
 	auto bb1 = thePlane1->BoundingBox(0);
 
+	const auto tol = std::min(bb0.Diameter(), bb1.Diameter())*theTol;
+
 	if (NOT bb0.IsIntersect(bb1))
 	{
 		return std::vector<std::shared_ptr<tnbLib::Cad2d_Plane>>();
@@ -503,7 +512,7 @@ tnbLib::Cad2d_Boolean::Intersection
 	intersection->LoadPlane0(thePlane0);
 	intersection->LoadPlane1(thePlane1);
 
-	intersection->SetTolerance(Tolerance);
+	intersection->SetTolerance(tol);
 
 	intersection->Perform();
 	Debug_If_Condition_Message(NOT intersection->IsDone(), "the algorithm is not performed!");
@@ -534,7 +543,6 @@ tnbLib::Cad2d_Boolean::Intersection
 	Debug_Null_Pointer(subdivide);
 
 	subdivide->LoadIntersectionAlgorithm(intersection);
-
 	subdivide->Perform();
 
 	Debug_If_Condition_Message(NOT subdivide->IsDone(), "the algorithm is not performed!");
@@ -628,8 +636,8 @@ tnbLib::Cad2d_Boolean::Intersection
 		Pln_Tools::RetrieveWires
 		(
 			curves, 
-			MAX(MAX(minTol0, minTol1), Tolerance),
-			10.0*MAX(MAX(maxTol0, maxTol1), Tolerance));
+			MAX(MAX(minTol0, minTol1), tol),
+			10.0*MAX(MAX(maxTol0, maxTol1), tol));
 
 	auto planes = Pln_Tools::RetrievePlanes(wires, thePlane0->System());
 	return std::move(planes);
