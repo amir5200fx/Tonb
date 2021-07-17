@@ -330,6 +330,42 @@ tnbLib::cmptLib::IyIntegrand::Value
 }
 
 Standard_Real 
+tnbLib::Cad2d_CmptLib::Curvature
+(
+	const Handle(Geom2d_Curve)& theCurve, 
+	const Standard_Real thePar
+)
+{
+	Debug_Null_Pointer(theCurve);
+
+
+#ifdef _DEBUG
+	if (NOT Pln_Tools::IsBounded(theCurve))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the curve must be bounded!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT INSIDE(thePar, theCurve->FirstParameter(), theCurve->LastParameter()))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the parameter is not inside the span of the curve!" << endl
+			<< " - parameter: " << thePar << endl
+			<< " - first: " << theCurve->FirstParameter() << endl
+			<< " - last: " << theCurve->LastParameter() << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
+	gp_Pnt2d Point;
+	gp_Vec2d Vector1;
+	gp_Vec2d Vector2;
+
+	theCurve->D2(thePar, Point, Vector1, Vector2);
+	return ABS(Vector1.Crossed(Vector2)) / (std::pow(Vector1.Magnitude(), 3));
+}
+
+Standard_Real 
 tnbLib::Cad2d_CmptLib::AreaUnderCurve
 (
 	const Handle(Geom2d_Curve)& theCurve,
@@ -337,12 +373,14 @@ tnbLib::Cad2d_CmptLib::AreaUnderCurve
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
+#ifdef _DEBUG
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
 		FatalErrorIn("Standard_Real Cad2d_CmptLib::AreaUnderCurve(Args...)")
 			<< "the curve must be bounded!" << endl
 			<< abort(FatalError);
 	}
+#endif // _DEBUG
 
 	cmptLib::AreaIntegrand fun(*theCurve, y0);
 	NumAlg_AdaptiveInteg<cmptLib::AreaIntegrand> 
@@ -367,12 +405,14 @@ tnbLib::Cad2d_CmptLib::Mx
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
+#ifdef _DEBUG
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
 		FatalErrorIn("Standard_Real Cad2d_CmptLib::Mx(Args...)")
 			<< "the curve must be bounded!" << endl
 			<< abort(FatalError);
 	}
+#endif // _DEBUG
 
 	cmptLib::MxIntegrand fun(*theCurve, y0);
 	NumAlg_AdaptiveInteg<cmptLib::MxIntegrand>
@@ -397,12 +437,14 @@ tnbLib::Cad2d_CmptLib::My
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
+#ifdef _DEBUG
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
 		FatalErrorIn("Standard_Real Cad2d_CmptLib::My(Args...)")
 			<< "the curve must be bounded!" << endl
 			<< abort(FatalError);
 	}
+#endif // _DEBUG
 
 	cmptLib::MyIntegrand fun(*theCurve, x0);
 	NumAlg_AdaptiveInteg<cmptLib::MyIntegrand>
@@ -427,12 +469,14 @@ tnbLib::Cad2d_CmptLib::Ix
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
+#ifdef _DEBUG
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
 		FatalErrorIn("Standard_Real Cad2d_CmptLib::Ix(Args...)")
 			<< "the curve must be bounded!" << endl
 			<< abort(FatalError);
 	}
+#endif // _DEBUG
 
 	cmptLib::IxIntegrand fun(*theCurve, y0);
 	NumAlg_AdaptiveInteg<cmptLib::IxIntegrand>
@@ -457,12 +501,14 @@ tnbLib::Cad2d_CmptLib::Iy
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
+#ifdef _DEBUG
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
 		FatalErrorIn("Standard_Real Cad2d_CmptLib::Iy(Args...)")
 			<< "the curve must be bounded!" << endl
 			<< abort(FatalError);
 	}
+#endif // _DEBUG
 
 	cmptLib::IyIntegrand fun(*theCurve, x0);
 	NumAlg_AdaptiveInteg<cmptLib::IyIntegrand>
@@ -536,12 +582,14 @@ tnbLib::Cad2d_CmptLib::xCentreProductArea
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
+#ifdef _DEBUG
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
 		FatalErrorIn("Standard_Real Cad2d_CmptLib::xCentreProductArea(Args...)")
 			<< "the curve must be bounded!" << endl
 			<< abort(FatalError);
 	}
+#endif // _DEBUG
 
 	cmptLib::xCentreIntegrand fun(*theCurve);
 	NumAlg_AdaptiveInteg<cmptLib::xCentreIntegrand>
@@ -565,12 +613,14 @@ tnbLib::Cad2d_CmptLib::yCentreProductArea
 	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 )
 {
+#ifdef _DEBUG
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
 		FatalErrorIn("Standard_Real Cad2d_CmptLib::xCentreProductArea(Args...)")
 			<< "the curve must be bounded!" << endl
 			<< abort(FatalError);
 	}
+#endif // _DEBUG
 
 	cmptLib::yCentreIntegrand fun(*theCurve);
 	NumAlg_AdaptiveInteg<cmptLib::yCentreIntegrand>
