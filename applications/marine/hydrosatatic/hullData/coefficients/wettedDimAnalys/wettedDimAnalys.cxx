@@ -149,6 +149,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](double x)->void {rudderAxis = x; }), "setRudderAxis");
 
 		mod->add(chaiscript::fun([](size_t t)->void {verbose = t; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {formDim::Wetted::verbose = i; }), "setAnalysVerbose");
 
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 	}
@@ -170,7 +171,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{

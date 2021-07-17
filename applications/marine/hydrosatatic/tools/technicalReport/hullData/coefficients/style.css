@@ -1,0 +1,35 @@
+body{
+	background-color: #f4f4f4;
+	color: black;
+
+	font-size: 14px;
+	margin: 2px;
+}
+
+th
+{
+	background-color: black;
+	color: white;
+}
+
+td{
+	text-align: center;
+}
+
+table, th, td{
+	border: 1px solid #000;
+}
+
+table{
+	border-spacing: 1px;
+	margin: auto;
+}
+
+caption{
+	text-align: left;
+}
+
+.container{
+	width: 80%;
+	margin: auto;
+}

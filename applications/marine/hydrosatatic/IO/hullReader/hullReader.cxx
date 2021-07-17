@@ -575,6 +575,17 @@ namespace tnbLib
 		return std::move(cmpSection);
 	}
 
+	auto getCorners(const Entity3d_Box& b)
+	{
+		std::vector<Pnt3d> pts;
+		pts.reserve(2);
+
+		pts.push_back(b.P0());
+		pts.push_back(b.P1());
+
+		return std::move(pts);
+	}
+
 	void execute(const std::string& name)
 	{
 		if (NOT loadTag)
@@ -608,7 +619,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		const auto b = calcBoundingBox(h);
+		auto b = calcBoundingBox(h);
 
 		if (NOT isValidSimulation(b))
 		{
@@ -629,6 +640,21 @@ namespace tnbLib
 			Info << endl;
 			Info << " the detected type of body: " << (myBodyType IS_EQUAL bodyType::full ? "Full Body" : "Symm Body") << endl;
 			Info << endl;
+		}
+
+		if (myBodyType IS_EQUAL bodyType::symm)
+		{
+			auto corners = getCorners(b);
+
+			auto p0 = b.P0();
+			auto p1 = b.P1();
+
+			p0.Y() *= (-1.0);
+			p1.Y() *= (-1.0);
+			corners.push_back(std::move(p0));
+			corners.push_back(std::move(p1));
+
+			b = Entity3d_Box::BoundingBoxOf(corners);
 		}
 	
 		const auto d = b.Diameter();
