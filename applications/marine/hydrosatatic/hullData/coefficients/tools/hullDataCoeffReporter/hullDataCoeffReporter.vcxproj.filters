@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{ab52d509-0aad-417b-b95e-27beb07d29c0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="hullDataCoeffReporter.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportTable.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="CsvUtil.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ReportTable.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="CsvUtil.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="category.csv">
+      <Filter>src</Filter>
+    </None>
+    <None Include="charts.css">
+      <Filter>src</Filter>
+    </None>
+  </ItemGroup>
+</Project>
