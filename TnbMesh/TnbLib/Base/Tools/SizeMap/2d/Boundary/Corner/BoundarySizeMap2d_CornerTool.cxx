@@ -1,5 +1,6 @@
 #include <BoundarySizeMap2d_CornerTool.hxx>
 
+#include <Global_Timer.hxx>
 #include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
 #include <Geo_BoxTools.hxx>
@@ -8,7 +9,7 @@
 #include <Cad2d_Plane.hxx>
 #include <GeoMesh2d_Background.hxx>
 #include <MeshBase_Tools.hxx>
-#include <BoundarySizeMap2d_CornerToolSystem.hxx>
+#include <GeoMesh_Background_System.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -16,9 +17,11 @@
 
 namespace tnbLib
 {
-	const Standard_Integer tnbLib::BoundarySizeMap2d_CornerTool::DEFAULT_BUCKETSIZE = 4;
+	const Standard_Integer tnbLib::BoundarySizeMap2d_CornerTool::DEFAULT_UNBALANCING = 2;
 	const Standard_Integer tnbLib::BoundarySizeMap2d_CornerTool::DEFAULT_MIN_SUBDIVISION = 2;
 	const Standard_Integer tnbLib::BoundarySizeMap2d_CornerTool::DEFAULT_MAX_SUBDIVISION = 5;
+
+	unsigned short BoundarySizeMap2d_CornerTool::verbose(0);
 }
 
 tnbLib::BoundarySizeMap2d_CornerTool::BoundarySizeMap2d_CornerTool
@@ -27,19 +30,19 @@ tnbLib::BoundarySizeMap2d_CornerTool::BoundarySizeMap2d_CornerTool
 	const std::shared_ptr<Cad2d_Plane>& thePlane
 )
 	: Mesh2d_BoundarySizeMapTool(thePlane, theRef)
-	, theBucketSize_(DEFAULT_BUCKETSIZE)
+	, theUnbalancing_(DEFAULT_UNBALANCING)
 	, theMinSubdivision_(DEFAULT_MIN_SUBDIVISION)
 	, theMaxSubdivision_(DEFAULT_MAX_SUBDIVISION)
 {
 	//- empty body
 }
 
-void tnbLib::BoundarySizeMap2d_CornerTool::SetBucketSize
+void tnbLib::BoundarySizeMap2d_CornerTool::SetUnbalancing
 (
 	const Standard_Integer theSize
 )
 {
-	theBucketSize_ = theSize;
+	theUnbalancing_ = theSize;
 }
 
 void tnbLib::BoundarySizeMap2d_CornerTool::SetMinSubdivision
@@ -135,7 +138,8 @@ tnbLib::meshLib::BalancedQuadTreeObject::Subdivide
 	Debug_Null_Pointer(t);
 	const auto& obj = *t;
 
-	const auto tol = obj.Tolerance;
+	//const auto tol = obj.Tolerance;  //  [7/3/2021 Amir]
+	const auto tol = obj.Tolerance*b.Diameter();
 
 	const auto h1 = obj.ElementSize(b.SubDivide(Box2d_SubDivideAlgorithm_Quad_SW).CalcCentre());
 	const auto h2 = obj.ElementSize(b.SubDivide(Box2d_SubDivideAlgorithm_Quad_SE).CalcCentre());
@@ -163,12 +167,31 @@ tnbLib::meshLib::BalancedQuadTreeObject::Subdivide
 
 void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 {
+	if (verbose)
+	{
+		Info << " Retrieving the corners..." << endl;
+		Info << endl;
+	}
+
 	auto corners = RetrieveCorners();
+	if (verbose)
+	{
+		Info << " - nb. of corners: " << corners.size() << endl;
+		Info << endl;
+	}
 	if (corners.empty()) return;
 
 	//! Retrieve sizes
 	Standard_Real elemSize, minElemSize, spanAngle;
 	RetrieveValues(elemSize, minElemSize, spanAngle);
+
+	if (verbose)
+	{
+		Info << " - Target element size: " << elemSize << endl;
+		Info << " - Min. element size: " << minElemSize << endl;
+		Info << " - Span size angle: " << spanAngle << endl;
+		Info << endl;
+	}
 
 	Standard_Real radius = 0;
 	if (MeshConditions().CustomBoundaryGrowthRate()) 
@@ -181,8 +204,25 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 			<< "invalid radius value has been detected!" << endl
 			<< abort(FatalError);
 	}
+
+	if (verbose > 1)
+	{
+		Info << " - Radius: " << radius << endl;
+		Info << endl;
+	}
+	const auto b = Plane()->BoundingBox(0.0);
+	const auto expB = b.Expanded(0.15*b.Diameter());
+
+	if (verbose)
+	{
+		Info << " Retrieving compact sources..." << endl;
+		Info << endl;
+	}
 	std::vector<std::pair<Pnt2d, Standard_Real>> compactItems;
 	{
+		Global_Timer myTimer;
+		myTimer.SetInfo(Global_TimerInfo_ms);
+
 		std::vector<std::pair<Pnt2d, Standard_Real>> sources;
 		sources.reserve(corners.size());
 		for (const auto& x : corners)
@@ -200,22 +240,44 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 		compactItems = mergAlg.CompactItems();
 	}
 
-	const auto b = Plane()->BoundingBox(0.0);
-	const auto expB = b.Expanded(0.15*b.Diameter());
+	if (verbose)
+	{
+		Info << " - compact sources are retrieved in: " << global_time_duration << " ms." << endl;
+		Info << endl;
+	}
 
+	if (verbose)
+	{
+		Info << " Approximating the whole domain..." << endl;
+		Info << endl;
+	}
 	std::vector<Entity2d_Box> boxes;
 	{
 		meshLib::BalancedQuadTreeObject obj(compactItems);
 		if (MeshConditions().CustomBoundaryGrowthRate()) obj.Tolerance = Mesh_VariationRate::Rate(MeshValues().BoundaryGrowthRate());
 		else obj.Tolerance = Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate());
+
+		if (verbose)
+		{
+			Info << " - Boundary growth rate: " << obj.Tolerance << endl;
+			Info << endl;
+			Info << " - Min. nb. of subdivisions: " << MinSubdivision() << endl;
+			Info << " - Max. nb. of subdivisions: " << MaxSubdivision() << endl;
+			Info << " - Unbalancing: " << Unbalancing() << endl;
+			Info << endl;
+		}
 		obj.Radius2 = radius * radius;
 		obj.Target = elemSize;
 		obj.BaseSize = ReferenceValues()->BaseSize();
+
+		Global_Timer myTimer;
+		myTimer.SetInfo(Global_TimerInfo_ms);
 
 		Geo2d_ApprxSpace<meshLib::BalancedQuadTreeObject> tree;
 
 		tree.SetMinLevel(MinSubdivision());
 		tree.SetMaxLevel(MaxSubdivision());
+		tree.SetMaxUnbalancingLevel(Unbalancing());
 
 		tree.SetObject(&obj);
 		tree.SetSubdivider(&meshLib::BalancedQuadTreeObject::Subdivide);
@@ -228,8 +290,35 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 		tree.Clear();
 	}
 
-	const auto triangulation = Geo_BoxTools::GetTriangulation(boxes);
+	if (verbose)
+	{
+		Info << " - The Whole domain is approximated in: " << global_time_duration << " ms." << endl;
+		Info << endl;
+	}
 
+	if (verbose)
+	{
+		Info << " Triangulation of the domain..." << endl;
+		Info << endl;
+	}
+	Entity2d_Triangulation triangulation;
+	{
+		Global_Timer myTimer;
+		myTimer.SetInfo(Global_TimerInfo_ms);
+		triangulation = Geo_BoxTools::GetTriangulation(boxes);
+	}
+
+	if (verbose)
+	{
+		Info << " - the domain is triangulated in: " << global_time_duration << " ms." << endl;
+		Info << endl;
+	}
+
+	if (verbose)
+	{
+		Info << " Constructing the background mesh..." << endl;
+		Info << endl;
+	}
 	const auto bMesh = std::make_shared<GeoMesh2d_Background>();
 	Debug_Null_Pointer(bMesh);
 
@@ -237,6 +326,11 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 	bMesh->InitiateCurrentElement();
 	bMesh->SetBoundingBox(std::move(expB));
 
+	if (verbose)
+	{
+		Info << " Setting the sources into the background mesh..." << endl;
+		Info << endl;
+	}
 	MeshBase_Tools::SetSourcesToMesh(compactItems, ReferenceValues()->BaseSize(), *bMesh);
 	compactItems.clear();
 
@@ -248,6 +342,13 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->BoundaryGrowthRate()));
 	else
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()));
+
+	if (verbose)
+	{
+		Info << " Applying Hv-correction..." << endl;
+		Info << " - Max. nb. of iterations: " << hvInfo->MaxNbIters() << endl;
+		Info << endl;
+	}
 	bMesh->HvCorrection(hvInfo);
 
 	ChangeBackMesh() = std::move(bMesh);
