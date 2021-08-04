@@ -61,7 +61,7 @@ void tnbLib::Cad_Shape::CalcBoundingBox()
 			<< abort(FatalError);
 	}
 	Bnd_Box box;
-	BRepBndLib::Add(Shape(), box);
+	BRepBndLib::AddOptimal(Shape(), box, Standard_False, Standard_False);
 
 	auto b = Cad_Tools::BoundingBox(box);
 	theBoundingBox_ = std::make_shared<Entity3d_Box>(std::move(b));
