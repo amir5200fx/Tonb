@@ -566,7 +566,7 @@ tnbLib::Marine_BodyTools::DryBody
 			theBody->Sections(),
 			theDomain->Water()->Sections()
 		);
-
+	
 	if (theBody->ShapeType())
 	{
 		auto t =

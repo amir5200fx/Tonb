@@ -441,6 +441,38 @@ tnbLib::MarineBase_Tools::CalcLateralZbar
 	return std::move(Qs);
 }
 
+namespace tnbLib
+{
+	auto NormalizedQs(const std::vector<marineLib::xSectionParam>& theQ)
+	{
+		auto iter = theQ.begin();
+		auto maxValue = iter->value;
+		for (const auto& x : theQ)
+		{
+			if (x.value > maxValue) maxValue = x.value;
+		}
+
+		auto minX = iter->x;
+		auto maxX = minX;
+		for (const auto& x : theQ)
+		{
+			if (x.x > maxX) maxX = x.x;
+			if (x.x < minX) minX = x.x;
+		}
+
+		auto dx = maxX - minX;
+		auto Qs = theQ;
+		for (auto& x : Qs)
+		{
+			x.value *= (1.0 / maxValue);
+			x.x -= minX;
+			x.x *= (1.0 / dx);
+		}
+		auto t = std::make_tuple(dx, maxValue, std::move(Qs));
+		return std::move(t);
+	}
+}
+
 Standard_Real 
 tnbLib::MarineBase_Tools::CalcArea
 (
@@ -458,14 +490,16 @@ tnbLib::MarineBase_Tools::CalcArea
 			<< abort(FatalError);
 	}
 
+	auto [dx, maxValue, Qn] = NormalizedQs(theQ);
+
 	std::vector<marineLib::xSectionParam> Q;
-	if (theQ.size() < MIN_NB_POINTS_INTERPOLATION)
+	if (Qn.size() < MIN_NB_POINTS_INTERPOLATION)
 	{
-		Q = SteffenTessellation(theQ);
+		Q = SteffenTessellation(Qn);
 	}
 	else
 	{
-		Q = theQ;
+		Q = Qn;
 	}
 
 	Handle(TColgp_HArray1OfPnt2d) PtsPtr = new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Q.size());
@@ -505,7 +539,8 @@ tnbLib::MarineBase_Tools::CalcArea
 
 	try
 	{
-		return Cad2d_CmptLib::AreaUnderCurve(Interpolation.Curve(), 0, theInfo);
+		auto area0 = Cad2d_CmptLib::AreaUnderCurve(Interpolation.Curve(), 0, theInfo);
+		return area0 * (dx*maxValue);
 	}
 	catch (StdFail_NotDone&)
 	{

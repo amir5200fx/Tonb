@@ -207,6 +207,85 @@ void tnbLib::Marine_SectTools::Section
 	}
 }
 
+void tnbLib::Marine_SectTools::ForcedToChangeType
+(
+	const std::shared_ptr<Pln_Wire>& theWire,
+	const Marine_PlnCurveType t
+)
+{
+	switch (t)
+	{
+	case Marine_PlnCurveType::displacer:
+	{
+		for (const auto& x : theWire->Edges())
+		{
+			const auto& c = x->Curve();
+			x->Curve() = std::make_shared<Marine_DisplacerCurve>(c->Index(), c->Name(), c->Geometry());
+		}
+		break;
+	}
+	case  Marine_PlnCurveType::dry:
+	{
+		for (const auto& x : theWire->Edges())
+		{
+			const auto& c = x->Curve();
+			x->Curve() = std::make_shared<Marine_DryCurve>(c->Index(), c->Name(), c->Geometry());
+		}
+		break;
+	}
+	case Marine_PlnCurveType::sail:
+	{
+		for (const auto& x : theWire->Edges())
+		{
+			const auto& c = x->Curve();
+			x->Curve() = std::make_shared<Marine_SailCurve>(c->Index(), c->Name(), c->Geometry());
+		}
+		break;
+	}
+	case Marine_PlnCurveType::tank:
+	{
+		for (const auto& x : theWire->Edges())
+		{
+			const auto& c = x->Curve();
+			x->Curve() = std::make_shared<Marine_TankCurve>(c->Index(), c->Name(), c->Geometry());
+		}
+		break;
+	}
+	case Marine_PlnCurveType::water:
+	{
+		for (const auto& x : theWire->Edges())
+		{
+			const auto& c = x->Curve();
+			x->Curve() = std::make_shared<Marine_WaterCurve>(c->Index(), c->Name(), c->Geometry());
+		}
+		break;
+	}
+	case Marine_PlnCurveType::waterLine:
+	{
+		for (const auto& x : theWire->Edges())
+		{
+			const auto& c = x->Curve();
+			x->Curve() = std::make_shared<Marine_WaterLineCurve>(c->Index(), c->Name(), c->Geometry());
+		}
+		break;
+	}
+	case Marine_PlnCurveType::wetted:
+	{
+		for (const auto& x : theWire->Edges())
+		{
+			const auto& c = x->Curve();
+			x->Curve() = std::make_shared<Marine_WettedCurve>(c->Index(), c->Name(), c->Geometry());
+		}
+		break;
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "undefined section type!" << endl
+			<< abort(FatalError);
+		break;
+	}
+}
+
 tnbLib::Marine_SectionType 
 tnbLib::Marine_SectTools::ConvertType
 (
