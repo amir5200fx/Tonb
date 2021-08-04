@@ -214,6 +214,21 @@ tnbLib::Geo_Tools::HasIntersection_cgal
 }
 
 Standard_Boolean 
+tnbLib::Geo_Tools::IsCcwOrder
+(
+	const std::vector<Pnt2d>& thePts
+)
+{
+	Standard_Real sum = 0;
+	for (size_t i = 1; i < thePts.size() - 1; i++)
+	{
+		sum += CrossProduct(thePts[i - 1], thePts[i]);
+	}
+	sum += CrossProduct(thePts[thePts.size() - 1], thePts[0]);
+	return sum > 0;
+}
+
+Standard_Boolean 
 tnbLib::Geo_Tools::IsCcwOrder_cgal
 (
 	const std::vector<Pnt2d>& thePts
