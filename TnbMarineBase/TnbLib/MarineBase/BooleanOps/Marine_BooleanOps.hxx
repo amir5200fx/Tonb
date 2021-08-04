@@ -25,6 +25,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMarine_EXPORT unsigned short verbose;
+
 		static TnbMarine_EXPORT std::shared_ptr<Marine_Section> 
 			Union
 			(

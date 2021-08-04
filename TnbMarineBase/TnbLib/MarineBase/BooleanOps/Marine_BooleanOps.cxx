@@ -1,6 +1,7 @@
 #include <Marine_BooleanOps.hxx>
 
 #include <Cad2d_Boolean.hxx>
+#include <Pln_Tools.hxx>
 #include <Marine_SectTools.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_Section.hxx>
@@ -9,6 +10,8 @@
 #include <Marine_PlnCurve.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+unsigned short tnbLib::Marine_BooleanOps::verbose(0);
 
 std::shared_ptr<tnbLib::Marine_Section>
 tnbLib::Marine_BooleanOps::Union
@@ -132,25 +135,72 @@ tnbLib::Marine_BooleanOps::WettedSection
 	const marineLib::curveType targetSection
 )
 {
+	if (verbose)
+	{
+		Info << endl
+			<< " Entering into the function:" << endl
+			<< FunctionSIG << endl;
+	}
+#ifdef _DEBUG
+	Pln_Tools::CheckManifold(theSection);
+	Pln_Tools::CheckManifold(theWater);
+#endif // _DEBUG
+
+	Pln_Tools::SetPrecision(theSection);
+	Pln_Tools::SetPrecision(theWater);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Making a plane from the section wire" << endl;
+	}
+
 	auto section = Cad2d_Plane::MakePlane(theSection, nullptr);
 	Debug_Null_Pointer(section);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Making a plane from the water wire" << endl;
+	}
 
 	auto water = Cad2d_Plane::MakePlane(theWater, nullptr);
 	Debug_Null_Pointer(water);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Calculating the intersection between the section and the water plane" << endl;
+	}
+
 	auto planes = Cad2d_Boolean::Intersection(section, water);
 	if (planes.empty())
 	{
+		if (verbose)
+		{
+			Info << endl
+				<< " no intersection has been found!" << endl
+				<< " leaving the function" << endl;
+		}
 		return std::vector<std::shared_ptr<Marine_Section>>();
 	}
 
-
-
+	if (verbose)
+	{
+		Info << endl
+			<< " nb. of planes: " << planes.size() << endl;
+	}
 	if (planes.size() IS_EQUAL 1)
 	{
 		const auto& intsct = planes[0];
 		if (intsct IS_EQUAL section)
 		{
+			if (verbose)
+			{
+				Info << endl
+					<< " the section is underwater, completely!" << endl
+					<< " - deep condition is applied" << endl;
+			}
 			Debug_Null_Pointer(intsct->OuterWire());
 
 			Marine_SectTools::Section
@@ -175,10 +225,21 @@ tnbLib::Marine_BooleanOps::WettedSection
 
 			std::vector<std::shared_ptr<tnbLib::Marine_Section>> l;
 			l.push_back(std::move(wetted));
+
+			if (verbose)
+			{
+				Info << endl
+					<< "Leaving the function" << endl;
+			}
 			return std::move(l);
 		}
 		else
 		{
+			if (verbose)
+			{
+				Info << endl
+					<< " the section is in touch with the water surface" << endl;
+			}
 			Debug_Null_Pointer(intsct->OuterWire());
 
 			Marine_SectTools::Section
@@ -203,8 +264,20 @@ tnbLib::Marine_BooleanOps::WettedSection
 
 			std::vector<std::shared_ptr<tnbLib::Marine_Section>> l;
 			l.push_back(std::move(wetted));
+
+			if (verbose)
+			{
+				Info << endl
+					<< "Leaving the function" << endl;
+			}
 			return std::move(l);
 		}
+	}
+
+	if (verbose)
+	{
+		Info << endl
+			<< " the section is in touch with the water surface" << endl;
 	}
 
 	std::vector<std::shared_ptr<tnbLib::Marine_Section>> l;
@@ -236,6 +309,11 @@ tnbLib::Marine_BooleanOps::WettedSection
 
 		l.push_back(std::move(wetted));
 	}
+	if (verbose)
+	{
+		Info << endl
+			<< "Leaving the function" << endl;
+	}
 	return std::move(l);
 }
 
@@ -247,13 +325,51 @@ tnbLib::Marine_BooleanOps::DrySection
 	const marineLib::curveType targetSection
 )
 {
+	if (verbose)
+	{
+		Info << endl
+			<< " Entering into the function:" << endl
+			<< FunctionSIG << endl;
+	}
+
+#ifdef _DEBUG
+	Pln_Tools::CheckManifold(theSection);
+	Pln_Tools::CheckManifold(theWater);
+#endif // _DEBUG
+
+	Pln_Tools::SetPrecision(theSection);
+	Pln_Tools::SetPrecision(theWater);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Making a plane from the section wire" << endl;
+	}
+
 	auto section = Cad2d_Plane::MakePlane(theSection, nullptr);
 	Debug_Null_Pointer(section);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Making a plane from the water wire" << endl;
+	}
 
 	auto water = Cad2d_Plane::MakePlane(theWater, nullptr);
 	Debug_Null_Pointer(water);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Subtracting the water plane from the section" << endl;
+	}
 	auto subs = Cad2d_Boolean::Subtract(section, water);
+	
+	if (verbose)
+	{
+		Info << endl
+			<< " nb. of planes: " << subs.size() << endl;
+	}
 	if (subs.empty())
 	{
 		return std::vector<std::shared_ptr<Marine_Section>>();
@@ -280,6 +396,12 @@ tnbLib::Marine_BooleanOps::DrySection
 		Debug_Null_Pointer(dry);
 
 		sections.push_back(std::move(dry));
+
+		if (verbose)
+		{
+			Info << endl
+				<< "Leaving the function" << endl;
+		}
 		return std::move(sections);
 	}
 	else
@@ -302,6 +424,12 @@ tnbLib::Marine_BooleanOps::DrySection
 			Debug_Null_Pointer(dry);
 
 			sections.push_back(std::move(dry));
+		}
+
+		if (verbose)
+		{
+			Info << endl
+				<< "Leaving the function" << endl;
 		}
 		return std::move(sections);
 	}
