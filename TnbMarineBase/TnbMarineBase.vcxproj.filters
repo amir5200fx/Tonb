@@ -583,6 +583,9 @@
     <Filter Include="TnbLib\MarineBase\Entities\Model\Sail\Tools">
       <UniqueIdentifier>{60918678-0522-4605-a7e8-c8e34bd98289}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\IO">
+      <UniqueIdentifier>{936b8f27-070f-43b5-bf5e-a2005932d9af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1233,6 +1236,18 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Tools\Marine_Model_SailTools.hxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Body\Marine_BodyModelType.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_ShapeIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_SectionsIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1678,6 +1693,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Tools\section\Marine_SectToolsRepairment.cxx">
       <Filter>TnbLib\MarineBase\Tools\section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_ShapeIOImp.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_SectionsIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

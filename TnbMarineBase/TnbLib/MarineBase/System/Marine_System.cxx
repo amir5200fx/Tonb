@@ -12,7 +12,7 @@ namespace tnbLib
 void tnbLib::sysLib::init_gl_marine_integration_info()
 {
 	auto& info = *gl_marine_integration_info;
-	info.SetMaxNbIterations(100);
+	info.SetMaxNbIterations(50);
 	info.SetNbInitIterations(4);
 	info.SetTolerance(1.0E-4);
 }
