@@ -188,6 +188,23 @@ namespace boost
 		}
 
 		template<class Archive>
+		void save(Archive& ar, const gp_Ax2d & g, const unsigned int /*version*/)
+		{
+			ar << g.Location();
+			ar << g.Direction();
+		}
+
+		template<class Archive>
+		void load(Archive& ar, gp_Ax2d & g, const unsigned int /*version*/)
+		{
+			auto& loc = const_cast<gp_Pnt2d&>(g.Location());
+			auto& dir = const_cast<gp_Dir2d&>(g.Direction());
+
+			ar >> loc;
+			ar >> dir;
+		}
+
+		template<class Archive>
 		void save(Archive & ar, const gp_Mat2d & g, const unsigned int /*version*/)
 		{
 			ar & g(1, 1);
