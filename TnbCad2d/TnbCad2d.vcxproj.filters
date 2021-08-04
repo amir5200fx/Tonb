@@ -1112,5 +1112,8 @@
     <ClCompile Include="TnbLib\Cad2d\MergePlane\Cad2d_MergePlane.cxx">
       <Filter>TnbLib\Cad2d\MergePlane</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifoldIO.cxx">
+      <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

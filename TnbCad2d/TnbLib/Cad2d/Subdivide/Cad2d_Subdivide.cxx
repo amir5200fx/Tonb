@@ -352,7 +352,7 @@ namespace tnbLib
 
 			auto outer = thePlane->OuterWire();
 			Debug_Null_Pointer(outer);
-
+			
 			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
 
 			auto[minTol, maxTol] = outer->BoundTolerance();

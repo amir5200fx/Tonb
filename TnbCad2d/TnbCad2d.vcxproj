@@ -219,6 +219,7 @@
     <ClCompile Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_ManagerIO.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Plane\System\Cad2d_Plane_System.cxx" />
     <ClCompile Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifold.cxx" />
+    <ClCompile Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifoldIO.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Scripts\Cad2d_Scripts.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Sketch\Cad2d_Sketch.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Sketch\Geo\CircArc\GeoSketch2d_CircArc.cxx" />
