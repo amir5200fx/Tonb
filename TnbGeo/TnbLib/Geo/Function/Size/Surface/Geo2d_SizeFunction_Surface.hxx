@@ -30,7 +30,18 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbGeo_EXPORT);
 
+
+	protected:
+
+		// default constructor [7/21/2021 Amir]
+
+		Geo2d_SizeFunction_Surface()
+		{}
+
 	public:
+
+
+		//- constructors
 
 		Geo2d_SizeFunction_Surface(const Entity2d_Box& theBox)
 			: Geo2d_SizeFunction(theBox)

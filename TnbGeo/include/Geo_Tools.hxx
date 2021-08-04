@@ -370,6 +370,12 @@ namespace tnbLib
 			);
 
 		static TnbGeo_EXPORT Standard_Boolean
+			IsCcwOrder
+			(
+				const std::vector<Pnt2d>& thePts
+			);
+
+		static TnbGeo_EXPORT Standard_Boolean
 			IsCcwOrder_cgal
 			(
 				const std::vector<Pnt2d>& thePts

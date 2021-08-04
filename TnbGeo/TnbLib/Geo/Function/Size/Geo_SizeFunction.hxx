@@ -38,6 +38,14 @@ namespace tnbLib
 	protected:
 
 
+		// default constructor [7/21/2021 Amir]
+
+		Geo_SizeFunction()
+		{}
+
+
+		// constructors [7/21/2021 Amir]
+
 		Geo_SizeFunction(const Entity_Box<Point>& theBox)
 			: theBoundingBox_(theBox)
 		{}

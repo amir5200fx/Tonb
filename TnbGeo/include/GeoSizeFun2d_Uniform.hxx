@@ -11,4 +11,6 @@ namespace tnbLib
 	typedef GeoSizeFun_Uniform<Pnt2d> GeoSizeFun2d_Uniform;
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::GeoSizeFun2d_Uniform);
+
 #endif // !_GeoSizeFun2d_Uniform_Header

@@ -30,7 +30,17 @@ namespace tnbLib
 			ar & theSize_;
 		}
 
+	protected:
+
+		// default constructor [7/21/2021 Amir]
+
+		GeoSizeFun_Uniform()
+		{}
+
 	public:
+
+
+		// constructors [7/21/2021 Amir]
 
 		GeoSizeFun_Uniform
 		(
