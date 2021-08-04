@@ -2,14 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{6a9b45dd-a9ef-41ce-88e2-311b484b4540}</UniqueIdentifier>
+      <UniqueIdentifier>{28b1c2d3-582b-490f-811f-21f7b82d8631}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="hullReader1.cxx">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="hullReader.cxx">
+    <ClCompile Include="shapeReader.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

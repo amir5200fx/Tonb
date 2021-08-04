@@ -112,12 +112,12 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		Entity2d_Box box;
+		/*Entity2d_Box box;
 		for (const auto& x : graph->Curves())
 		{
 			auto b = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Curve()));
 			box = Geo_BoxTools::Union(b, box);
-		}
+		}*/
 
 		myInfo->SetApprox(box.Diameter()*myInfo->Approx());
 		myInfo->SetMinSize(box.Diameter()*myInfo->MinSize());

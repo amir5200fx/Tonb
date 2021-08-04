@@ -296,6 +296,14 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
+		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>>
+			RetrieveMergedEdges
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+				const Standard_Real theMinTol,
+				const Standard_Real theMaxTol
+			);
+
 		//- WARNING! make sure the object is manifold then call this method
 		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Wire>>
 			RetrieveWires
@@ -440,6 +448,11 @@ namespace tnbLib
 		);
 
 		static TnbCad2d_EXPORT void SetPrecision
+		(
+			const std::shared_ptr<Pln_Wire>&
+		);
+
+		static TnbCad2d_EXPORT void CheckManifold
 		(
 			const std::shared_ptr<Pln_Wire>&
 		);

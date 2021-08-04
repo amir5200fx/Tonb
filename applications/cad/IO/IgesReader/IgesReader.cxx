@@ -19,6 +19,13 @@ namespace tnbLib
 
 	static shape_t myShape;
 
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void loadModel(const std::string& name)
 	{
 		fileName fn(name);
@@ -100,7 +107,7 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 	}
@@ -136,7 +143,12 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " Function list:" << endl;
+			Info << " - loadModel(string)" << endl;
+			Info << " - saveTo(string)" << endl;
+			Info << " - setVerbose(unsigned int)" << endl;
+			Info << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{

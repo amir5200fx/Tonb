@@ -3,9 +3,12 @@
 #include <Cad_FastDiscrete.hxx>
 #include <FastDiscrete_Params.hxx>
 #include <Cad_Shape.hxx>
+#include <Cad_Tools.hxx>
 #include <Geo_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#include <Poly_Triangulation.hxx>
 
 namespace tnbLib
 {
@@ -26,6 +29,106 @@ namespace tnbLib
 	auto adaptiveMin = false;
 	auto internalVerticesMode = true;
 	auto controlSurfaceDeflection = true;
+
+	void setAngle(double x)
+	{
+		myAngle = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - Angle deflection is set to: " << myAngle << endl;
+		}
+	}
+
+	void setDeflection(double x)
+	{
+		myDeflection = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - Deflection is set to: " << myDeflection << endl;
+		}
+	}
+
+	void setMinSize(double x)
+	{
+		myMinSize = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - Min. size is set to: " << myMinSize << endl;
+		}
+	}
+
+	void setRelativeMode(bool x)
+	{
+		inRalative = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - Relative mode is set to: " << inRalative << endl;
+		}
+	}
+
+	void setParallelMode(bool x)
+	{
+		inParallel = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - Parallel mode is set to: " << (inParallel ? "TRUE" : "FALSE") << endl;
+		}
+	}
+
+	void setAdaptiveMin(bool x)
+	{
+		adaptiveMin = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - AdaptiveMin is set to:" << (adaptiveMin ? "TRUE" : "FALSE") << endl;
+		}
+	}
+
+	void setInternalVertices(bool x)
+	{
+		internalVerticesMode = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - Internal vertices mode is set to: " << (internalVerticesMode ? "TRUE" : "FALSE") << endl;
+		}
+	}
+
+	void setControlSurfaceDeflection(bool x)
+	{
+		controlSurfaceDeflection = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - Control surface deflection is set to: " << (controlSurfaceDeflection ? "TRUE" : "FALSE") << endl;
+		}
+	}
+
+	void printDefaults()
+	{
+		Info << " Default values of the FastDiscrete algorithm are:" << endl
+			<< " - angle: " << myAngle << endl
+			<< " - deflection: " << myDeflection << endl
+			<< " - min. size: " << myMinSize << endl
+			<< " - parallel mode? " << (inParallel ? "yes" : "no") << endl
+			<< " - relative mode? " << (inRalative ? "yes" : "no") << endl
+			<< " - adaptive min.? " << (adaptiveMin ? "yes" : "no") << endl
+			<< " - internal vertices mode? " << (internalVerticesMode ? "yes" : "no") << endl
+			<< " - control surface deflection? " << (controlSurfaceDeflection ? "yes" : "no") << endl;
+	}
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
 	void loadModel(const std::string& name)
 	{
@@ -110,6 +213,42 @@ namespace tnbLib
 			timer.SetInfo(Global_TimerInfo_s);
 			Cad_FastDiscrete::Triangulation(myShape->Shape(), params);
 		}
+		if (verbose > 1)
+		{
+			const auto surfaces = Cad_Tools::RetrieveTriangulation(myShape->Shape());
+			Info << " - nb. of surfaces: " << surfaces.size() << endl;
+			size_t k = 0;
+			size_t nbNodes = 0;
+			size_t nbTris = 0;
+			for (const auto& x : surfaces)
+			{
+				if (x)
+				{
+					Info << " - surface nb. " << k++ << ": "
+						<< "nb. of nodes: " << x->NbNodes() << ", nb. of triangles: " << x->NbTriangles()
+						<< ", Deflection: " << x->Deflection() << endl;
+
+					nbNodes += x->NbNodes();
+					nbTris += x->NbTriangles();
+				}
+			}
+			Info << endl;
+			Info << " - Total nb. of nodes: " << nbNodes << endl;
+			Info << " - Total nb. of triangles: " << nbTris << endl;
+			Info << endl;
+
+			/*double yMin = RealLast();
+			for (const auto& x : surfaces)
+			{
+				const auto& nodes = x->Nodes();
+				for (const auto& n : nodes)
+				{
+					if (n.Coord().Y() < yMin) yMin = n.Coord().Y();
+				}
+			}
+			std::cout << "yMin = " << yMin << std::endl;*/
+		}
+
 		if (verbose)
 		{
 			Info << endl;
@@ -139,17 +278,18 @@ namespace tnbLib
 		//- io functions
 
 		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([]()-> void {printDefaults(); }), "printDefaults");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
-		mod->add(chaiscript::fun([](double x)-> void {myAngle = x; }), "setAngle");
-		mod->add(chaiscript::fun([](double x)-> void {myDeflection = x; }), "setDeflection");
-		mod->add(chaiscript::fun([](double x)-> void {myMinSize = x; }), "setMinSize");
-		mod->add(chaiscript::fun([](bool c)-> void {inParallel = c; }), "parallelMode");
-		mod->add(chaiscript::fun([](bool c)-> void {inRalative = c; }), "relativeMode");
-		mod->add(chaiscript::fun([](bool c)-> void {adaptiveMin = c; }), "adaptiveMinMode");
-		mod->add(chaiscript::fun([](bool c)-> void {internalVerticesMode = c; }), "internalVerticesMode");
-		mod->add(chaiscript::fun([](bool c)-> void {controlSurfaceDeflection = c; }), "controlSurfaceDeflectionMode");
+		mod->add(chaiscript::fun([](double x)-> void {setAngle(x); }), "setAngle");
+		mod->add(chaiscript::fun([](double x)-> void {setDeflection(x); }), "setDeflection");
+		mod->add(chaiscript::fun([](double x)-> void {setMinSize(x); }), "setMinSize");
+		mod->add(chaiscript::fun([](bool c)-> void {setParallelMode(c); }), "setParallelMode");
+		mod->add(chaiscript::fun([](bool c)-> void {setRelativeMode(c); }), "setRelativeMode");
+		mod->add(chaiscript::fun([](bool c)-> void {setAdaptiveMin(c); }), "setAdaptiveMinMode");
+		mod->add(chaiscript::fun([](bool c)-> void {setInternalVertices(c); }), "setInternalVerticesMode");
+		mod->add(chaiscript::fun([](bool c)-> void {setControlSurfaceDeflection(c); }), "setControlSurfaceDeflectionMode");
 	}
 
 	std::string getString(char* argv)
@@ -184,7 +324,22 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << "This application is aimed to discrete surfaces of the shape." << endl;
+			Info << endl;
+			Info << " Function list:" << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl
+				<< " - printDefaults()" << endl << endl
+				<< " - loadModel(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+				<< " - setAngle(double)" << endl
+				<< " - setDeflection(double)" << endl
+				<< " - setMinSize(double)" << endl
+				<< " - setParallelMode(bool)" << endl
+				<< " - setAdaptiveMinMode(bool)" << endl
+				<< " - setInternalVerticesMode(bool)" << endl
+				<< " - setControlSurfaceDeflectionMode(bool)" << endl << endl
+				<< " - execute()" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -214,6 +369,12 @@ int main(int argc, char *argv[])
 			{
 				Info << x.what() << endl;
 			}
+		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
 		}
 	}
 	else

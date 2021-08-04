@@ -6,12 +6,19 @@
 #include <Marine_WaterLib.hxx>
 #include <Marine_WaterDomain.hxx>
 #include <Marine_Wave.hxx>
+#include <Marine_BooleanOps.hxx>
+#include <Marine_CmpSection.hxx>
+#include <Marine_Section.hxx>
 #include <HydStatic_FloatBody.hxx>
 #include <HydStatic_ModelShape.hxx>
 #include <HydStatic_Shapes.hxx>
 #include <StbGMaker_Model.hxx>
+#include <Pln_Wire.hxx>
+#include <Pln_CmpEdge.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#include <OFstream.hxx>
 
 namespace tnbLib
 {
@@ -69,6 +76,23 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		/*fileName nn("wire.plt");
+		OFstream ff(nn);
+		for (const auto& x : displacer->Sections())
+		{
+			std::cout << "nb. of sections: " << x->Sections().size() << std::endl << std::endl;
+			for (const auto& s : x->Sections())
+			{
+				const auto& wire = s->Wire();
+				std::cout << "nb of edges: " << wire->Edges().size() << std::endl;
+
+				if (wire->Edges().size() == 1)
+				{
+					wire->ExportToPlt(ff);
+				}
+			}
+		}*/
+
 		if (verbose)
 		{
 			Info << endl;
@@ -100,6 +124,13 @@ namespace tnbLib
 			(
 				Marine_BodyTools::DryBody(displacer, myWaterDomain)
 			);
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " creating float body..." << endl;
+			Info << endl;
+		}
 
 		auto floatBody =
 			std::make_shared<HydStatic_FloatBody>
@@ -223,7 +254,7 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 	//FatalError.throwExceptions();
-
+	//Marine_BooleanOps::verbose = 1;
 	if (argc <= 1)
 	{
 		Info << " - No command is entered" << endl

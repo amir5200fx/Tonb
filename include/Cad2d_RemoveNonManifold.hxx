@@ -38,7 +38,22 @@ namespace tnbLib
 
 			std::map<Standard_Integer, std::weak_ptr<Segment>> theSegments_;
 
+
+			// private functions and operators [7/21/2021 Amir]
+
+			TNB_SERIALIZATION(TnbCad2d_EXPORT);
+
+
+		protected:
+
+			// default constructor [7/21/2021 Amir]
+
+			Node()
+			{}
+
 		public:
+
+			// constructors [7/21/2021 Amir]
 
 			Node
 			(
@@ -55,6 +70,9 @@ namespace tnbLib
 				: Global_Indexed(theIndex)
 				, theVtx_(theVtx)
 			{}
+
+
+			// public functions and operators [7/21/2021 Amir]
 
 			const auto& Vtx() const
 			{
@@ -100,7 +118,21 @@ namespace tnbLib
 			std::shared_ptr<Node> theNode0_;
 			std::shared_ptr<Node> theNode1_;
 
+
+			// private functions and operators [7/21/2021 Amir]
+
+			TNB_SERIALIZATION(TnbCad2d_EXPORT);
+
+		protected:
+
+			// default constructor [7/21/2021 Amir]
+
+			Segment()
+			{}
+
 		public:
+
+			// constructors [7/21/2021 Amir]
 
 			TnbCad2d_EXPORT Segment
 			(
@@ -116,6 +148,9 @@ namespace tnbLib
 				std::shared_ptr<Node>&& theNode1,
 				std::vector<std::shared_ptr<Pln_Edge>>&& theEdges
 			);
+
+
+			// public functions and operators [7/21/2021 Amir]
 
 			const auto& Edges() const
 			{
@@ -155,7 +190,23 @@ namespace tnbLib
 
 			TnbCad2d_EXPORT void CheckRing();
 
+
+			// private functions and operators [7/21/2021 Amir]
+
+			TNB_SERIALIZATION(TnbCad2d_EXPORT);
+
+			
+		protected:
+
+			// default constructor [7/21/2021 Amir]
+
+			Ring()
+			{}
+
 		public:
+
+
+			// constructors [7/21/2021 Amir]
 
 			Ring
 			(
@@ -187,6 +238,9 @@ namespace tnbLib
 			{
 				CheckRing();
 			}
+
+
+			// public functions and operators [7/21/2021 Amir]
 
 			Standard_Boolean IsRing() const override
 			{
@@ -346,5 +400,8 @@ namespace tnbLib
 }
 
 #include <Cad2d_RemoveNonManifoldI.hxx>
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Cad2d_RemoveNonManifold::Segment);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Cad2d_RemoveNonManifold::Ring);
 
 #endif // !_Cad2d_RemoveNonManifold_Header

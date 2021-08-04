@@ -122,7 +122,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadSoluData");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 
-		mod->add(chaiscript::fun([](size_t t)->void {verbose = t; }), "setVerbose");
+		mod->add(chaiscript::fun([](size_t t)->void {verbose = t; formCoeff::Wetted::verbose = t; }), "setVerbose");
 
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 	}

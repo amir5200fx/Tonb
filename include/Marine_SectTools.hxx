@@ -45,6 +45,13 @@ namespace tnbLib
 				const marineLib::curveType to
 			);
 
+		static TnbMarine_EXPORT void 
+			ForcedToChangeType
+			(
+				const std::shared_ptr<Pln_Wire>& theWire,
+				const Marine_PlnCurveType t
+			);
+
 		static TnbMarine_EXPORT Marine_SectionType 
 			ConvertType
 			(

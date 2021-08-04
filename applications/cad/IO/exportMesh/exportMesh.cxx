@@ -16,6 +16,13 @@ namespace tnbLib
 	static unsigned short verbose(0);
 	static bool loadtag = false;
 
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void loadModel(const std::string& name)
 	{
 		fileName fn(name);
@@ -108,7 +115,7 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 	}
@@ -145,7 +152,13 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << "This application is aimed to retrieve the mesh of the surfaces." << endl;
+			Info << endl;
+			Info << " Function list:" << endl
+				<< " - setVerbose(unsigned short)" << endl
+				<< " - loadModel(string)" << endl
+				<< " - saveTo(string)" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -175,6 +188,12 @@ int main(int argc, char *argv[])
 			{
 				Info << x.what() << endl;
 			}
+		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
 		}
 	}
 	else

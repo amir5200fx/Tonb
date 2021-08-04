@@ -101,6 +101,6 @@ namespace tnbLib
 	};
 }
 
-#endif // !_Pln_EdgeGeom_Header
-
 BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_EdgeGeom);
+
+#endif // !_Pln_EdgeGeom_Header
