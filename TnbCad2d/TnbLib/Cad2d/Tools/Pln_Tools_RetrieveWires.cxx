@@ -52,13 +52,37 @@ tnbLib::Pln_Tools::RetrieveOrientation
 			}
 		}
 
+		/*for (const auto& x : Pts)
+		{
+			std::cout << x << std::endl;
+		}*/
 		/*for (const auto& pt : appx_pts)
 		{
 			Pts.push_back(pt);
 		}*/
 	}
 
-	if (Geo_Tools::IsCcwOrder_cgal(Pts)) return Pln_Orientation::Pln_Orientation_CCW;
+#ifdef _DEBUG
+	if (NOT Geo_Tools::IsSimple_cgal(Pts))
+	{
+		Warning << " the polygon is not simple!" << endl
+			<< " - Please check the data." << endl;
+	}
+	else
+	{
+		if (Geo_Tools::IsCcwOrder_cgal(Pts) NOT_EQUAL Geo_Tools::IsCcwOrder(Pts))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory results are detected!" << endl
+				<< abort(FatalError);
+		}
+	}
+#endif // _DEBUG
+
+
+	/*if (Geo_Tools::IsCcwOrder_cgal(Pts)) return Pln_Orientation::Pln_Orientation_CCW;
+	else return Pln_Orientation::Pln_Orientation_CW;*/
+	if (Geo_Tools::IsCcwOrder(Pts)) return Pln_Orientation::Pln_Orientation_CCW;
 	else return Pln_Orientation::Pln_Orientation_CW;
 }
 
