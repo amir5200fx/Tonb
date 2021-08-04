@@ -6,6 +6,7 @@
 #include <Geo_Tools.hxx>
 #include <Pln_Curve.hxx>
 #include <Pln_Wire.hxx>
+#include <Pln_CmpEdge.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
 #include <TnbError.hxx>
@@ -255,7 +256,7 @@ tnbLib::Cad2d_Boolean::Union
 	auto wires =
 		Pln_Tools::RetrieveWires
 		(curves,
-			MAX(MAX(minTol0, minTol1), tol),
+			MAX(2.1*MAX(maxTol0, maxTol1), tol),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
 			10.0*MAX(MAX(maxTol0, maxTol1), tol));
 
 	auto outer = Pln_Tools::RetrieveOuterWire(wires);
@@ -266,6 +267,8 @@ tnbLib::Cad2d_Boolean::Union
 			<< abort(FatalError);
 	}
 
+	Pln_Tools::SetPrecision(outer);
+
 	auto inners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
 	Debug_Null_Pointer(inners);
 
@@ -275,6 +278,8 @@ tnbLib::Cad2d_Boolean::Union
 		if (x NOT_EQUAL outer)
 		{
 			inners->push_back(x);
+
+			Pln_Tools::SetPrecision(x);
 		}
 	}
 	
@@ -442,8 +447,13 @@ tnbLib::Cad2d_Boolean::Subtract
 		Pln_Tools::RetrieveWires
 		(
 			curves, 
-			MAX(MAX(minTol0, minTol1), tol),
+			MAX(2.1*MAX(maxTol0, maxTol1), tol),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
 			10.0*MAX(MAX(maxTol0, maxTol1), tol));
+
+	for (const auto& x : wires)
+	{
+		Pln_Tools::SetPrecision(x);
+	}
 
 	auto planes = Pln_Tools::RetrievePlanes(wires, thePlane0->System());
 	return std::move(planes);
@@ -625,6 +635,14 @@ tnbLib::Cad2d_Boolean::Intersection
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
+	/*{
+		std::cout << "tolerance: " << tol << std::endl;
+		std::cout << "min. tol0: " << minTol0 << ", max. tol0: " << maxTol0 << std::endl;
+		std::cout << "min. tol1: " << minTol1 << ", max. tol1: " << maxTol1 << std::endl;
+		std::cout << std::endl;
+		std::cout << "min. tol: " << MAX(MAX(minTol0, minTol1), tol) << ", max. tol: " << 10.0*MAX(MAX(maxTol0, maxTol1), tol) << std::endl;
+		std::cout << std::endl;
+	}*/
 	if (curves.empty())
 	{
 		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Intersection(Args...)")
@@ -636,8 +654,13 @@ tnbLib::Cad2d_Boolean::Intersection
 		Pln_Tools::RetrieveWires
 		(
 			curves, 
-			MAX(MAX(minTol0, minTol1), tol),
+			MAX(2.1*MAX(maxTol0, maxTol1), tol),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
 			10.0*MAX(MAX(maxTol0, maxTol1), tol));
+
+	for (const auto& x : wires)
+	{
+		Pln_Tools::SetPrecision(x);
+	}
 
 	auto planes = Pln_Tools::RetrievePlanes(wires, thePlane0->System());
 	return std::move(planes);
