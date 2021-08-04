@@ -1316,6 +1316,25 @@ namespace tnbLib
 				}
 			}
 
+			{ // info scope
+				/*std::cout << "tree size: " << search.Size() << std::endl;
+				std::cout << "tol: " << theTol << std::endl;
+
+				std::vector<std::shared_ptr<Vertex>> items;
+				search.RetrieveFromGeometryTo(items);
+
+				for (const auto& x : items)
+				{
+					std::cout << "pt = " << x->Coord << std::endl;
+				}
+
+				if (items.size())
+				{
+					std::cout << Distance(items[0]->Coord, items[3]->Coord) << std::endl;
+					std::cout << Distance(items[1]->Coord, items[2]->Coord) << std::endl;
+				}
+				std::cout << std::endl;*/
+			}
 			/*if (search.Size())
 			{
 				FatalErrorIn(FunctionSIG)
@@ -1422,18 +1441,12 @@ namespace tnbLib
 			RetrieveEdges
 			(
 				const std::vector<std::shared_ptr<Edge>>& theEdges, 
-				const std::map<Standard_Integer, std::shared_ptr<Pln_Vertex>>& theVertices
+				const std::map<Standard_Integer, std::shared_ptr<Pln_Vertex>>& theVertices,
+				const Standard_Boolean approx = Standard_True
 			)
 		{
 			std::vector<std::shared_ptr<Pln_Edge>> edges;
 			edges.reserve(theEdges.size());
-
-			auto apxInfo = std::make_shared<Geo_ApprxCurve_Info>();
-			Debug_Null_Pointer(apxInfo);
-
-			apxInfo->SetAngle(2.0);
-			apxInfo->SetMinSize(1.0E-3);
-			apxInfo->SetNbSamples(3);
 
 			Standard_Integer nbEdges = 0;
 			for (const auto& x : theEdges)
@@ -1449,6 +1462,15 @@ namespace tnbLib
 				const auto& vtx0 = theVertices.at(v0);
 				const auto& vtx1 = theVertices.at(v1);
 
+				auto apxInfo = std::make_shared<Geo_ApprxCurve_Info>();
+				Debug_Null_Pointer(apxInfo);
+
+				const auto d = x->Curve->BoundingBox(0).Diameter();
+
+				apxInfo->SetAngle(2.0);
+				apxInfo->SetMinSize(1.0E-3*d);
+				apxInfo->SetNbSamples(3);
+
 				if (vtx0 IS_EQUAL vtx1)
 				{
 					auto edge = std::make_shared<Pln_Ring>(++nbEdges, vtx0);
@@ -1456,7 +1478,7 @@ namespace tnbLib
 
 					x->Curve->SetIndex(nbEdges);
 					edge->SetCurve(x->Curve);
-					edge->Approx(apxInfo);
+					if (approx) edge->Approx(apxInfo);
 					vtx0->InsertToEdges(edge->Index(), edge);
 
 					edges.push_back(std::move(edge));
@@ -1471,7 +1493,7 @@ namespace tnbLib
 
 					x->Curve->SetIndex(nbEdges);
 					edge->SetCurve(x->Curve);
-					edge->Approx(apxInfo);
+					if (approx) edge->Approx(apxInfo);
 					edges.push_back(std::move(edge));
 				}	
 			}
@@ -1489,6 +1511,7 @@ namespace tnbLib
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "Invalid Wire: the wire is not manifold" << endl
+					<< " nb. of edges: " << theVtx->NbEdges() << endl
 					<< abort(FatalError);
 			}
 
@@ -1496,6 +1519,7 @@ namespace tnbLib
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "Invalid Wire: the wire is not manifold" << endl
+					<< " nb. of edges: " << theVtx->NbEdges() << endl
 					<< abort(FatalError);
 			}
 
@@ -1579,6 +1603,52 @@ tnbLib::Pln_Tools::RetrieveMergedEdges
 	auto mergedVerticesMap = retrieveWires::RetrieveMergedVertices(segments);
 
 	auto edges = retrieveWires::RetrieveEdges(segments, mergedVerticesMap);
+	return std::move(edges);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Edge>>
+tnbLib::Pln_Tools::RetrieveMergedEdges
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges,
+	const Standard_Real theTol,
+	const Standard_Real theRadius
+)
+{
+	std::map<size_t, std::shared_ptr<Entity2d_Polygon>> polyMap;
+	size_t k = 0;
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		if (NOT x->Mesh())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the edge doesn't have mesh!" << endl
+				<< abort(FatalError);
+		}
+		auto paired = std::make_pair(k++, x->Mesh());
+		polyMap.insert(std::move(paired));
+	}
+
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(theEdges.size());
+	for (const auto& x : theEdges)
+	{
+		curves.push_back(x->Curve());
+	}
+	auto segments = retrieveWires::RetrieveUnMergedEdges(curves);
+	auto unMergedVertices = retrieveWires::RetrieveUnMergedVerticesFromEdges(segments);
+
+	retrieveWires::MergeVertices(segments, theTol, theRadius);
+
+	auto mergedVerticesMap = retrieveWires::RetrieveMergedVertices(segments);
+
+	auto edges = retrieveWires::RetrieveEdges(segments, mergedVerticesMap, Standard_False);
+	k = 0;
+	for (const auto& x : edges)
+	{
+		const auto& mesh = polyMap[k++];
+		x->Mesh() = mesh;
+	}
 	return std::move(edges);
 }
 
@@ -2227,6 +2297,25 @@ void tnbLib::Pln_Tools::SetPrecision
 	{
 		Debug_Null_Pointer(x);
 		x->SetPrecision(CalcPrecision(*x));
+	}
+}
+
+void tnbLib::Pln_Tools::CheckManifold
+(
+	const std::shared_ptr<Pln_Wire>& theWire
+)
+{
+	const auto vertices = RetrieveVertices(*theWire);
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		if (NOT x->IsManifold())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the wire is non-manifold" << endl
+				<< " - nb. of edges: " << x->NbEdges() << endl
+				<< abort(FatalError);
+		}
 	}
 }
 
