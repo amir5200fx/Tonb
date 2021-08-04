@@ -31,7 +31,7 @@ void tnbLib::CadIO_STEP::ReadFile
 		SetFileName(theName);
 
 		Bnd_Box box;
-		BRepBndLib::Add(Shape(), box);
+		BRepBndLib::AddOptimal(Shape(), box, Standard_False, Standard_False);
 
 		SetBoundingBox(Cad_Tools::BoundingBox(box));
 

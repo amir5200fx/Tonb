@@ -102,11 +102,12 @@ tnbLib::Cad_Tools::BoundingBox
 Bnd_Box 
 tnbLib::Cad_Tools::BoundingBox
 (
-	const TopoDS_Shape & theShape
+	const TopoDS_Shape & theShape, 
+	const Standard_Boolean useTri
 )
 {
 	Bnd_Box B;
-	BRepBndLib::Add(theShape, B);
+	BRepBndLib::AddOptimal(theShape, B, useTri, Standard_False);
 
 	return std::move(B);
 }

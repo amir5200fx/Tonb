@@ -62,7 +62,8 @@ namespace tnbLib
 		static TnbCad_EXPORT Bnd_Box
 			BoundingBox
 			(
-				const TopoDS_Shape& theShape
+				const TopoDS_Shape& theShape, 
+				const Standard_Boolean useTri = Standard_False
 			);
 
 		static TnbCad_EXPORT std::shared_ptr<Entity2d_Triangulation>
