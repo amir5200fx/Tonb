@@ -16,6 +16,26 @@ namespace tnbLib
 
 		Standard_Integer theSize_;
 
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_xDistb>(*this);
+			ar & theSize_;
+		}
+
+
+	protected:
+
+		//- default constructor
+
+		Geo_CosineDistb()
+		{}
+
 	public:
 
 		Geo_CosineDistb(const Standard_Integer theSize)
@@ -25,5 +45,7 @@ namespace tnbLib
 		TnbGeo_EXPORT void Perform();
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Geo_CosineDistb);
 
 #endif // !_Geo_CosineDistb_Header

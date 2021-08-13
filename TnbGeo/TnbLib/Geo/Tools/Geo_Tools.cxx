@@ -1,5 +1,6 @@
 #include <Geo_Tools.hxx>
 
+#include <Pnt2d.hxx>
 #include <Entity2d_Triangle.hxx>
 #include <Entity3d_Triangle.hxx>
 #include <Entity2d_Polygon.hxx>
@@ -44,6 +45,52 @@ tnbLib::Geo_Tools::GetIntersectionSegment
 	return std::move(seg);
 }
 
+Standard_Boolean
+tnbLib::Geo_Tools::IsCcwOrder
+(
+	const std::vector<Pnt2d>& thePts
+)
+{
+	auto Pts = thePts;
+
+	auto iter = Pts.begin();
+	auto xMin = iter->X();
+	auto yMin = iter->Y();
+	auto xMax = xMin;
+	auto yMax = yMin;
+	iter++;
+	while (iter NOT_EQUAL Pts.end())
+	{
+		auto x = iter->X();
+		auto y = iter->Y();
+
+		if (x > xMax) xMax = x;
+		if (y > yMax) yMax = y;
+		if (x < xMin) xMin = x;
+		if (y < yMin) yMin = y;
+		iter++;
+	}
+
+	auto dx = xMax - xMin;
+	auto dy = yMax - yMin;
+
+	for (auto& p : Pts)
+	{
+		p.X() -= xMin;
+		p.Y() -= yMin;
+		p.X() /= dx;
+		p.Y() /= dy;
+	}
+
+	Standard_Real sum = 0;
+	for (size_t i = 1; i < Pts.size() - 1; i++)
+	{
+		sum += CrossProduct(Pts[i - 1], Pts[i]);
+	}
+	sum += CrossProduct(Pts[Pts.size() - 1], Pts[0]);
+	return sum > 0;
+}
+
 tnbLib::Pnt2d 
 tnbLib::Geo_Tools::IntersectionTwoLines
 (
@@ -73,6 +120,73 @@ tnbLib::Geo_Tools::IntersectionTwoLines
 
 	const auto pt = P0 + alf * Pnt2d(t0.XY());
 	return std::move(pt);
+}
+
+std::pair<tnbLib::Pnt2d, Standard_Boolean> 
+tnbLib::Geo_Tools::IntersectTwoLines
+(
+	const Pnt2d & P0,
+	const Dir2d & td0,
+	const Pnt2d & P1, 
+	const Dir2d & td1,
+	Standard_Real & gamma0, 
+	Standard_Real & gamma1, 
+	const Standard_Real tol
+)
+{
+	if (td0.IsParallel(td1, tol))
+	{
+		auto t = std::make_pair(Pnt2d(0, 0), Standard_False);
+		return std::move(t);
+	}
+
+	Vec2d t0(td0.XY());
+	Vec2d t1(td1.XY());
+
+	const auto dp = P1 - P0;
+	const auto denom = t0.Crossed(t1);
+
+	const auto nume0 = Vec2d(dp.XY()).Crossed(t1);
+	const auto nume1 = Vec2d(dp.XY()).Crossed(t0);
+
+	gamma0 = nume0 / denom;
+	gamma1 = nume1 / denom;
+
+	auto pt = P0 + gamma0 * Pnt2d(t0.XY());
+	auto t = std::make_pair(std::move(pt), Standard_True);
+	return std::move(t);
+}
+
+std::pair<tnbLib::Pnt2d, Standard_Boolean> 
+tnbLib::Geo_Tools::IntersectTwoLines
+(
+	const Pnt2d & P0,
+	const Vec2d & t0, 
+	const Pnt2d & P1, 
+	const Vec2d & t1,
+	Standard_Real & gamma0, 
+	Standard_Real & gamma1, 
+	const Standard_Real tol
+)
+{
+	if (t0.IsParallel(t1, tol))
+	{
+		auto t = std::make_pair(Pnt2d(0, 0), Standard_False);
+		return std::move(t);
+	}
+
+	const auto dp = P1 - P0;
+	const auto denom = t0.Crossed(t1);
+
+	const auto nume0 = Vec2d(dp.XY()).Crossed(t1);
+	const auto nume1 = Vec2d(dp.XY()).Crossed(t0);
+
+	gamma0 = nume0 / denom;
+	gamma1 = nume1 / denom;
+
+	auto pt = P0 + gamma0 * Pnt2d(t0.XY());
+	auto t = std::make_pair(std::move(pt), Standard_True);
+	return std::move(t);
 }
 
 std::shared_ptr<tnbLib::Entity2d_Chain> 

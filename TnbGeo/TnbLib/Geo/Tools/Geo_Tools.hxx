@@ -411,6 +411,30 @@ namespace tnbLib
 				const Standard_Real theAngTol
 			);
 
+		static TnbGeo_EXPORT std::pair<Pnt2d, Standard_Boolean> 
+			IntersectTwoLines
+			(
+				const Pnt2d& p0, 
+				const Dir2d& t0, 
+				const Pnt2d& p1, 
+				const Dir2d& t1,
+				Standard_Real& gamma0, 
+				Standard_Real& gamma1,
+				const Standard_Real tol = 1.0E-6
+			);
+
+		static TnbGeo_EXPORT std::pair<Pnt2d, Standard_Boolean>
+			IntersectTwoLines
+			(
+				const Pnt2d& p0,
+				const Vec2d& t0,
+				const Pnt2d& p1,
+				const Vec2d& t1,
+				Standard_Real& gamma0,
+				Standard_Real& gamma1,
+				const Standard_Real tol = 1.0E-6
+			);
+
 		static TnbGeo_EXPORT std::shared_ptr<IntersectEntity2d> 
 			Intersection_cgal
 			(

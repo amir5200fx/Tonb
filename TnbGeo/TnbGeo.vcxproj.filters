@@ -430,6 +430,12 @@
     <Filter Include="TnbLib\Geo\Function\Size\Background">
       <UniqueIdentifier>{2d9a80e2-27bc-453f-8439-61675b0e1234}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\AffineTrsf">
+      <UniqueIdentifier>{378daccc-e5dd-4fc4-b359-c47f320b2f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq">
+      <UniqueIdentifier>{7877bbab-2b74-47d9-abed-ebb7081ce925}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1014,6 +1020,12 @@
     <ClInclude Include="TnbLib\Geo\Function\Size\Background\GeoSizeFun_BackgroundI.hxx">
       <Filter>TnbLib\Geo\Function\Size\Background</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq\Geo_AffineTrsf_PtsToUnitSq.hxx">
+      <Filter>TnbLib\Geo\AffineTrsf\PtsToUnitSq</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq\Geo_AffineTrsf_PtsToUnitSqFwd.hxx">
+      <Filter>TnbLib\Geo\AffineTrsf\PtsToUnitSq</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1249,6 +1261,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun_UniformIO.cxx">
       <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Distributor\Geo_xDistbIO.cxx">
+      <Filter>TnbLib\Geo\Distributor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Distributor\Cosine\Geo_CosineDistbIO.cxx">
+      <Filter>TnbLib\Geo\Distributor\Cosine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Distributor\Uniform\Geo_UniDistbIO.cxx">
+      <Filter>TnbLib\Geo\Distributor\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq\Geo_AffineTrsf_PtsToUnitSq.cxx">
+      <Filter>TnbLib\Geo\AffineTrsf\PtsToUnitSq</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
