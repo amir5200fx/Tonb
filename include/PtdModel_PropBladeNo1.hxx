@@ -16,10 +16,15 @@ namespace tnbLib
 
 		//- private functions and operators
 
-		std::shared_ptr<PtdModel_BladeExpandedView> CreateExpandView(const PtdModel_BladeSectionQ&) const override;
+		TnbPtdModel_EXPORT std::shared_ptr<PtdModel_BladeExpandedView> 
+			CreateExpandView
+			(
+				const Standard_Integer section,
+				const PtdModel_BladeSectionQ&
+			) const override;
 		
-		std::vector<std::shared_ptr<PtdModel_UnWrappedBladeSection>> CreateUnWrappedView() const override;
-		std::vector<std::shared_ptr<PtdModel_WrappedBladeSection>> CreateWrappedView() const override;
+		TnbPtdModel_EXPORT std::vector<std::shared_ptr<PtdModel_UnWrappedBladeSection>> CreateUnWrappedView() const override;
+		TnbPtdModel_EXPORT std::vector<std::shared_ptr<PtdModel_WrappedBladeSection>> CreateWrappedView() const override;
 
 
 		//- default constructor
@@ -32,7 +37,7 @@ namespace tnbLib
 		
 		//- constructors
 
-		PtdModel_PropBladeNo1(const std::shared_ptr<PtdModel_BladeGlobalPars>&);
+		TnbPtdModel_EXPORT PtdModel_PropBladeNo1(const std::shared_ptr<PtdModel_BladeGlobalPars>&);
 
 
 		//- public functions and operators

@@ -55,7 +55,7 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbPtdModel_EXPORT);
 
-		virtual std::shared_ptr<PtdModel_BladeExpandedView> CreateExpandView(const PtdModel_BladeSectionQ&) const = 0;
+		virtual std::shared_ptr<PtdModel_BladeExpandedView> CreateExpandView(const Standard_Integer section, const PtdModel_BladeSectionQ&) const = 0;
 		
 		virtual std::vector<std::shared_ptr<PtdModel_UnWrappedBladeSection>> CreateUnWrappedView() const = 0;
 		virtual std::vector<std::shared_ptr<PtdModel_WrappedBladeSection>> CreateWrappedView() const = 0;
@@ -95,6 +95,12 @@ namespace tnbLib
 
 	public:
 
+		static TnbPtdModel_EXPORT unsigned short verbose;
+
+		static TnbPtdModel_EXPORT const Standard_Integer DEFAULT_NB_SECTIONS;
+		static TnbPtdModel_EXPORT const Standard_Integer DEFAULT_NB_SPANS;
+
+
 		//- public functions and operators
 
 		TnbPtdModel_EXPORT Standard_Integer NbSections() const;
@@ -129,9 +135,15 @@ namespace tnbLib
 			return theFace_;
 		}
 
-		void Perform();
+		TnbPtdModel_EXPORT void Perform();
+
+		TnbPtdModel_EXPORT void SetxDistb(const std::shared_ptr<Geo_xDistb>&);
+		TnbPtdModel_EXPORT void SetxDistb(std::shared_ptr<Geo_xDistb>&&);
+		TnbPtdModel_EXPORT void SetSection(const std::shared_ptr<PtdModel_PropSection>&);
+		TnbPtdModel_EXPORT void SetSection(std::shared_ptr<PtdModel_PropSection>&&);
 
 		TnbPtdModel_EXPORT void ImportMakers(const std::vector<std::shared_ptr<PtdModel_FormMaker>>&);
+
 	};
 }
 

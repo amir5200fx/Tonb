@@ -67,7 +67,7 @@ namespace tnbLib
 			inline word Parameter(const Parameters) const;
 
 			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Form> CreateForm() const override;
-			std::shared_ptr<PtdModel_Profile>
+			TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Profile>
 				CreateProfile
 				(
 					const std::shared_ptr<PtdModel_GlobalPars>&,

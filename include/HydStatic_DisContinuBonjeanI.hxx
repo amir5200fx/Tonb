@@ -145,4 +145,10 @@ inline void tnbLib::HydStatic_DisContinuBonjean::SetNbLevels
 	theNbLevels_ = n;
 }
 
-
+inline void tnbLib::HydStatic_DisContinuBonjean::SetInterplScheme
+(
+	const interplScheme s
+)
+{
+	theInterplScheme_ = s;
+}
