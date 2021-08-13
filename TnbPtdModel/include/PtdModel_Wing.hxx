@@ -4,6 +4,7 @@
 
 #include <Global_Done.hxx>
 #include <PtdModel_Entity.hxx>
+#include <PtdModel_IO_Wing.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 
@@ -140,6 +141,9 @@ namespace tnbLib
 		TnbPtdModel_EXPORT void SetSection(std::shared_ptr<PtdModel_WingSection>&&);
 
 		TnbPtdModel_EXPORT void ImportMakers(const std::vector<std::shared_ptr<PtdModel_FormMaker>>&);
+
+
+		TnbPtdModel_EXPORT std::shared_ptr<ptdModel::io::Wing> MakeIO() const;
 	};
 }
 

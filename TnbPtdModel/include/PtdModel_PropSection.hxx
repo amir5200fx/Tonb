@@ -37,6 +37,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbPtdModel_EXPORT unsigned short verbose;
+
 		//- public functions and operators
 
 		virtual std::shared_ptr<PtdModel_BladeSectionQ> SectionQ(const Standard_Integer, const PtdModel_PropBlade&) const = 0;

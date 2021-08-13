@@ -73,7 +73,7 @@ tnbLib::ptdModel::BladeFormNo1_CamberLoc::CreateProfile
 
 	auto parMap = theForm->Parameters();
 
-	Pnt2d p0(0, 0);
+	Pnt2d p0(0, GetParameter(Parameters::maxCamberLoc));
 	Pnt2d p1(global->Diameter()->Value() / 2, GetParameter(Parameters::maxCamberLoc));
 
 	Standard_Integer NbPoles = 2;

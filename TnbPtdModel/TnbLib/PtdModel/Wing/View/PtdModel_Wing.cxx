@@ -266,3 +266,13 @@ void tnbLib::PtdModel_Wing::ImportMakers
 	WingInfo()->SetForms(std::move(wingForm));
 	theProfiles_ = std::move(bladeProfiles);
 }
+
+std::shared_ptr<tnbLib::ptdModel::io::Wing> 
+tnbLib::PtdModel_Wing::MakeIO() const
+{
+	auto obj = std::make_shared<ptdModel::io::Wing>();
+	obj->SetLower(LowerPatch());
+	obj->SetUpper(UpperPatch());
+
+	return std::move(obj);
+}

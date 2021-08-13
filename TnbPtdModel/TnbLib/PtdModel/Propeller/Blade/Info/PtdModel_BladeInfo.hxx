@@ -38,6 +38,8 @@ namespace tnbLib
 		//- default constructor
 
 		PtdModel_BladeInfo()
+			: theNbSections_(0)
+			, theNbSpans_(0)
 		{}
 
 		//- constructors

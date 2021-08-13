@@ -120,7 +120,9 @@ tnbLib::ptdModel::BladeFormNo1_Pitch::CreateProfile
 	}
 	else
 	{
-		p1 = Geo_Tools::IntersectionTwoLines(p0, t0, p1, t2, 1.0E-7);
+		Standard_Real gamma0, gamma1;
+		auto ent = Geo_Tools::IntersectTwoLines(p0, t0, p2, t2, gamma0, gamma1, 1.0E-7);
+		p1 = ent.first;
 	}
 
 	Standard_Integer NbPoles = 3;

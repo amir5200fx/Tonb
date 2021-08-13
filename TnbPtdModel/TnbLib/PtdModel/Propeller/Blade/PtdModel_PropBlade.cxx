@@ -28,7 +28,18 @@ tnbLib::PtdModel_PropBlade::PtdModel_PropBlade
 
 	bladeInfo->SetGlobals(pars);
 
+	bladeInfo->SetNbSections(DEFAULT_NB_SECTIONS);
+	bladeInfo->SetNbSpans(DEFAULT_NB_SPANS);
+
 	theBladeInfo_ = std::move(bladeInfo);
+}
+
+namespace tnbLib
+{
+	unsigned short PtdModel_PropBlade::verbose(0);
+
+	const Standard_Integer PtdModel_PropBlade::DEFAULT_NB_SECTIONS = 10;
+	const Standard_Integer PtdModel_PropBlade::DEFAULT_NB_SPANS = 25;
 }
 
 Standard_Integer 
@@ -91,6 +102,8 @@ void tnbLib::PtdModel_PropBlade::CalcBladeView()
 	auto bladeView = std::make_shared<PtdModel_BladeView>();
 	Debug_Null_Pointer(bladeView);
 
+	theBladeView_ = bladeView;
+
 	std::vector<std::shared_ptr<PtdModel_BladeExpandedView>> expandedViews;
 	expandedViews.reserve(NbSections());
 	for (Standard_Integer section = 0; section < NbSections(); section++)
@@ -98,22 +111,26 @@ void tnbLib::PtdModel_PropBlade::CalcBladeView()
 		auto sectionQ = Section()->SectionQ(section, *this);
 		Debug_Null_Pointer(sectionQ);
 
-		auto expandedView = CreateExpandView(*sectionQ);
+		auto expandedView = CreateExpandView(section, *sectionQ);
 		expandedViews.push_back(std::move(expandedView));
 	}
 
-	auto unWrappedView = CreateUnWrappedView();
-	auto wrappedView = CreateWrappedView();
-
 	bladeView->SetExpandedViews(std::move(expandedViews));
-	bladeView->SetUnWrappedSections(std::move(unWrappedView));
-	bladeView->SetWrappedSections(std::move(wrappedView));
 
-	theBladeView_ = std::move(bladeView);
+	auto unWrappedView = CreateUnWrappedView();
+	bladeView->SetUnWrappedSections(std::move(unWrappedView));
+
+	auto wrappedView = CreateWrappedView();
+	bladeView->SetWrappedSections(std::move(wrappedView));
 }
 
 void tnbLib::PtdModel_PropBlade::CreateFaces()
 {
+	if (verbose)
+	{
+		Info << endl
+			<< "*********** Creating Faces ************" << endl;
+	}
 	if (NOT BladeInfo())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -126,42 +143,92 @@ void tnbLib::PtdModel_PropBlade::CreateFaces()
 
 	const auto& wrappedSections = BladeView()->WrappedSections();
 
+	if (verbose)
+	{
+		Info << endl
+			<< " retrieving the face offsets..." << endl;
+	}
 	std::vector<std::vector<Pnt3d>> Qs;
 	Qs.reserve(nbSections);
 	for (size_t section = 0; section < nbSections; section++)
 	{
+		if (verbose > 1)
+		{
+			Info << endl
+				<< " - section nb. " << section << endl;
+		}
 		Debug_Bad_Index(section, 0, wrappedSections.size() - 1);
 		const auto& wrappedSection = wrappedSections[section];
 
 		const auto& pts = wrappedSection->Face();
 
-		auto& Q = Qs[section];
+		if (verbose > 1)
+		{
+			Info << endl
+				<< " - face offsets: " << endl;
+			for (const auto& x : pts)
+			{
+				Info << " - " << x << endl;
+			}
+			Info << endl;
+		}
+		std::vector<Pnt3d> Q;
 		Q.reserve(nbSpans);
 		for (size_t i = 0; i < nbSpans; i++)
 		{
 			Debug_Bad_Index(i, 0, pts.size() - 1);
 			Q.push_back(pts[i]);
 		}
+		Qs.push_back(std::move(Q));
 	}
-
 	theFace_ = PtdModel_Face::CreateFace(Qs);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " retrieving the back offsets..." << endl;
+	}
+	std::vector<std::vector<Pnt3d>> Qs1;
+	Qs1.reserve(nbSections);
 	for (size_t section = 0; section < nbSections; section++)
 	{
+		if (verbose > 1)
+		{
+			Info << endl
+				<< " - section nb. " << section << endl;
+		}
 		Debug_Bad_Index(section, 0, wrappedSections.size() - 1);
 		const auto& wrappedSection = wrappedSections[section];
 
 		const auto& pts = wrappedSection->Back();
 
-		auto& Q = Qs[section];
+		if (verbose > 1)
+		{
+			Info << endl
+				<< " - back offsets: " << endl;
+			for (const auto& x : pts)
+			{
+				Info << " - " << x << endl;
+			}
+			Info << endl;
+		}
+		std::vector<Pnt3d> Q;
+		Q.reserve(nbSpans);
 		for (size_t i = 0; i < nbSpans; i++)
 		{
 			Debug_Bad_Index(i, 0, pts.size() - 1);
 			Q.push_back(pts[i]);
 		}
+		Qs1.push_back(std::move(Q));
 	}
 
-	theBack_ = PtdModel_Face::CreateFace(Qs);
+	theBack_ = PtdModel_Face::CreateFace(Qs1);
+
+	if (verbose)
+	{
+		Info << endl
+			<< "*********** End of the Creating Faces ************" << endl;
+	}
 }
 
 void tnbLib::PtdModel_PropBlade::Perform()
@@ -188,6 +255,38 @@ void tnbLib::PtdModel_PropBlade::Perform()
 	CreateFaces();
 
 	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::PtdModel_PropBlade::SetxDistb
+(
+	const std::shared_ptr<Geo_xDistb>& theDistb
+)
+{
+	theDistb_ = theDistb;
+}
+
+void tnbLib::PtdModel_PropBlade::SetxDistb
+(
+	std::shared_ptr<Geo_xDistb>&& theDistb
+)
+{
+	theDistb_ = std::move(theDistb);
+}
+
+void tnbLib::PtdModel_PropBlade::SetSection
+(
+	const std::shared_ptr<PtdModel_PropSection>& theSection
+)
+{
+	theSection_ = theSection;
+}
+
+void tnbLib::PtdModel_PropBlade::SetSection
+(
+	std::shared_ptr<PtdModel_PropSection>&& theSection
+)
+{
+	theSection_ = std::move(theSection);
 }
 
 void tnbLib::PtdModel_PropBlade::ImportMakers

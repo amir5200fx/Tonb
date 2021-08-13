@@ -10,9 +10,28 @@
 #include <PtdModel_UnWrappedBladeSection.hxx>
 #include <PtdModel_xPars.hxx>
 
+#include <Geo_Tools.hxx>
+#include <TecPlot.hxx>
+
+namespace tnbLib
+{
+	OFstream myUnWrappedViewFile(fileName("unwrapped.plt"));
+	OFstream myWrappedViewFile(fileName("wrapped.plt"));
+}
+
+tnbLib::PtdModel_PropBladeNo1::PtdModel_PropBladeNo1
+(
+	const std::shared_ptr<PtdModel_BladeGlobalPars>& thePars
+)
+	: PtdModel_PropBlade(thePars)
+{
+	// empty body [8/11/2021 Amir]
+}
+
 std::shared_ptr<tnbLib::PtdModel_BladeExpandedView> 
 tnbLib::PtdModel_PropBladeNo1::CreateExpandView
 (
+	const Standard_Integer section,
 	const PtdModel_BladeSectionQ& theQ
 ) const
 {
@@ -49,14 +68,14 @@ tnbLib::PtdModel_PropBladeNo1::CreateExpandView
 
 	for (size_t i = 0; i < Qf.size(); i++)
 	{
-		x.push_back(0.5*xChordRef[i] - (Qf[i].X() + xSkewRef[i]));
-		xs.push_back(0.5*xChordRef[i] - Qf[i].X());
+		x.push_back(0.5*xChordRef[section] - (Qf[i].X() + xSkewRef[section]));
+		xs.push_back(0.5*xChordRef[section] - Qf[i].X());
 
 		tb.push_back(Qb[i].Y());
 		tf.push_back(Qf[i].Y());
 
-		yb.push_back(Qb[i].Y() + xPars->Xs()[i]);
-		yf.push_back(Qf[i].Y() + xPars->Xs()[i]);
+		yb.push_back(Qb[i].Y() + xPars->Xs()[section]);
+		yf.push_back(Qf[i].Y() + xPars->Xs()[section]);
 	}
 
 	t->SetX(std::move(x));
@@ -155,6 +174,9 @@ tnbLib::PtdModel_PropBladeNo1::CreateUnWrappedView() const
 			face.push_back(std::move(ptFace));
 		}
 
+		Io::ExportCurve(back, myUnWrappedViewFile);
+		Io::ExportCurve(face, myUnWrappedViewFile);
+
 		t->SetBack(std::move(back));
 		t->SetFace(std::move(face));
 
@@ -243,20 +265,23 @@ tnbLib::PtdModel_PropBladeNo1::CreateWrappedView() const
 
 			Pnt3d ptBack
 			(
-				X[section]*sinOmegab,
+				- X[section]*sinOmegab,
 				X[section]*cosOmegab,
-				sk*sinPitch + rk - xs * sinPitch - tb * cosPitch
+				sk*sinPitch + rk - xs * sinPitch + tb * cosPitch
 			);
 			Pnt3d ptFace
 			(
-				X[section]*sinOmegaf,
+				- X[section]*sinOmegaf,
 				X[section]*cosOmegaf,
-				sk*sinPitch + rk - xs * sinPitch - tf * cosPitch
+				sk*sinPitch + rk - xs * sinPitch + tf * cosPitch
 			);
 
 			back.push_back(std::move(ptBack));
 			face.push_back(std::move(ptFace));
 		}
+
+		Io::ExportCurve(back, myWrappedViewFile);
+		Io::ExportCurve(face, myWrappedViewFile);
 
 		t->SetBack(std::move(back));
 		t->SetFace(std::move(face));

@@ -238,6 +238,24 @@
     <Filter Include="TnbLib\PtdModel\Entities\View">
       <UniqueIdentifier>{3c23cdbb-5be3-490a-8deb-950535241398}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdModel\SolidMaker">
+      <UniqueIdentifier>{9fd829d8-f93a-41dc-b3fc-b9e230a7202d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\SolidMaker\Wing">
+      <UniqueIdentifier>{f784a59e-702d-47fd-91f3-e6f8f4dd3870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\SolidMaker\Wing\No1">
+      <UniqueIdentifier>{78b064bd-063c-4b78-8bda-e565e9f7174f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\IO">
+      <UniqueIdentifier>{cee5a39e-05be-4895-9283-ee20562d3825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\IO\Wing">
+      <UniqueIdentifier>{82e45159-2cca-4aa1-978c-60346d27cae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Tools">
+      <UniqueIdentifier>{2ce6b043-c032-4dc7-b2bf-8ab7b1fcabd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdModel\Entities\Entity\PtdModel_Entity.hxx">
@@ -591,6 +609,18 @@
     <ClInclude Include="TnbLib\PtdModel\Entities\View\PtdModel_ViewI.hxx">
       <Filter>TnbLib\PtdModel\Entities\View</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\SolidMaker\Wing\PtdModel_SolidMaker_Wing.hxx">
+      <Filter>TnbLib\PtdModel\SolidMaker\Wing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\SolidMaker\Wing\No1\PtdModel_SolidMaker_WingNo1.hxx">
+      <Filter>TnbLib\PtdModel\SolidMaker\Wing\No1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\IO\Wing\PtdModel_IO_Wing.hxx">
+      <Filter>TnbLib\PtdModel\IO\Wing</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\IO\Wing\PtdModel_IO_WingFwd.hxx">
+      <Filter>TnbLib\PtdModel\IO\Wing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\PtdModel\xPars\PtdModel_xParsIO.cxx">
@@ -829,6 +859,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\PtdModel\Entities\View\PtdModel_ViewIO.cxx">
       <Filter>TnbLib\PtdModel\Entities\View</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\Wing\No1\PtdModel_SolidMaker_WingNo1.cxx">
+      <Filter>TnbLib\PtdModel\SolidMaker\Wing\No1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\IO\Wing\PtdModel_IO_WingIO.cxx">
+      <Filter>TnbLib\PtdModel\IO\Wing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

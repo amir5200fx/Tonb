@@ -8,6 +8,13 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <TecPlot.hxx>
+
+namespace tnbLib
+{
+	//OFstream exportNacaFile(fileName("section.plt"));
+}
+
 std::shared_ptr<tnbLib::PtdModel_BladeSectionQ> 
 tnbLib::ptdModel::PropSectionNo1_Naca4Digit::SectionQ
 (
@@ -15,6 +22,11 @@ tnbLib::ptdModel::PropSectionNo1_Naca4Digit::SectionQ
 	const PtdModel_PropBlade & theBlade
 ) const
 {
+	if (verbose)
+	{
+		Info << endl
+			<< "************ Calculating section offsets ************" << endl;
+	}
 	const auto& bladeInfo = BladeInfo(theBlade);
 	if (NOT bladeInfo)
 	{
@@ -23,10 +35,17 @@ tnbLib::ptdModel::PropSectionNo1_Naca4Digit::SectionQ
 			<< abort(FatalError);
 	}
 	const auto nbSpans = bladeInfo->NbSpans();
+
+	if (verbose)
+	{
+		Info << endl
+			<< " - nb. of spans: " << nbSpans << endl;
+	}
 	if (nbSpans < 10)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "Not enough nb. of spans has been detected!" << endl
+			<< " nb. of spans: " << nbSpans << endl
 			<< abort(FatalError);
 	}
 
@@ -53,6 +72,16 @@ tnbLib::ptdModel::PropSectionNo1_Naca4Digit::SectionQ
 	}
 	xs.push_back(1.0 - TrailEdgeGap());
 
+	if (verbose > 1)
+	{
+		Info << " - xs: {" << endl;
+		for (auto x : xs)
+		{
+			Info << " - " << x << endl;
+		}
+		Info << "}" << endl;
+	}
+
 	const auto xChord = (*chordList)[section];
 	const auto xCamber = (*camberList)[section];
 	const auto xCamberLoc = (*camberMaxLocList)[section];
@@ -60,11 +89,27 @@ tnbLib::ptdModel::PropSectionNo1_Naca4Digit::SectionQ
 	const auto oneMinusxCamberLoc2 = (1.0 - xCamberLoc)*(1.0 - xCamberLoc);
 	const auto xThick = (*thickList)[section] / 0.2;
 
+	if (verbose > 1)
+	{
+		Info << endl;
+		Info << " - chord: " << xChord 
+			<< ", camber: " << xCamber 
+			<< ", camberLoc: " << xCamberLoc 
+			<< ", thick: " << xThick << endl;
+		Info << endl;
+	}
+
 	Standard_Real yc, ypc;
 
 	std::vector<Pnt2d> Tb, Tf;
 	Tb.reserve(nbSpans);
 	Tf.reserve(nbSpans);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " - xCamberLoc: " << xCamberLoc << endl;
+	}
 
 	for (size_t i = 0; i < nbSpans; i++)
 	{
@@ -86,10 +131,39 @@ tnbLib::ptdModel::PropSectionNo1_Naca4Digit::SectionQ
 
 		Pnt2d TbP(x*xChord - yt * std::sin(angle), -yc - yt * std::cos(angle));
 		Pnt2d TfP(x*xChord + yt * std::sin(angle), -yc + yt * std::cos(angle));
-
+		
 		Tb.push_back(std::move(TbP));
 		Tf.push_back(std::move(TfP));
 	}
+
+	if (verbose > 1)
+	{
+		Info << endl;
+		Info << " - Tb: {" << endl;
+		for (const auto& x : Tb)
+		{
+			Info << " - " << x << endl;
+		}
+		Info << "}" << endl;
+
+		Info << endl;
+		Info << " - Tf: {" << endl;
+		for (const auto& x : Tf)
+		{
+			Info << " - " << x << endl;
+		}
+		Info << "}" << endl;
+	}
+
+
+	//Io::ExportCurve(Tb, exportNacaFile);
+	//Io::ExportCurve(Tf, exportNacaFile);
 	auto Q = std::make_shared<PtdModel_BladeSectionQ>(std::move(Tb), std::move(Tf));
+
+	if (verbose)
+	{
+		Info << endl
+			<< "************ Enf of the Calculating section offsets ************" << endl;
+	}
 	return std::move(Q);
 }
