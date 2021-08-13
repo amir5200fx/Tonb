@@ -83,23 +83,40 @@ tnbLib::Marine_DisplacerCurve::Split
 	const Standard_Real x
 ) const
 {
-	if (NOT INSIDE(x, FirstParameter(), LastParameter()))
+	/*if (NOT INSIDE(x, FirstParameter(), LastParameter()))
 	{
 		FatalErrorIn("void Split()")
 			<< "Invalid Parameter: " << x << endl
 			<< " - First parameter: " << FirstParameter() << endl
 			<< " - Last Parameter: " << LastParameter() << endl
 			<< abort(FatalError);
+	}*/
+
+	auto p = x;
+	if (p < FirstParameter())
+	{
+		WarningInFunction << " the parameter value is lesser than the first one" << endl
+			<< " - parameter: " << x << endl
+			<< " - first: " << FirstParameter() << endl;
+		p = FirstParameter();
+	}
+	if (p > LastParameter())
+	{
+		WarningInFunction << " the parameter value is bigger than the last one" << endl
+			<< " - parameter: " << x << endl
+			<< " - last: " << LastParameter() << endl;
+		p = LastParameter();
 	}
 
 	Handle(Geom2d_Curve) C0, C1;
-	Pln_Tools::SplitCurve(Geometry(), x, C0, C1);
+	Pln_Tools::SplitCurve(Geometry(), p, C0, C1);
 
-	return
-	{
-		std::make_shared<Marine_DisplacerCurve>(C0) ,
-		std::make_shared<Marine_DisplacerCurve>(C1)
-	};
+	std::shared_ptr<Pln_Curve> curve0, curve1;
+	if (C0) curve0 = std::make_shared<Marine_DisplacerCurve>(C0);
+	if (C1) curve1 = std::make_shared<Marine_DisplacerCurve>(C1);
+
+	auto t = std::make_tuple(std::move(curve0), std::move(curve1));
+	return std::move(t);
 }
 
 void tnbLib::Marine_DisplacerCurve::Split
