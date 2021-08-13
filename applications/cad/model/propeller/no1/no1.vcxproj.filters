@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{80cc5397-d4cd-4e6d-9707-33c7b5dea4f4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="no1.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InitCamber.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InitCamberLoc.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InitChord.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InitThick.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InitPitch.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InitSkew.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InitRake.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InitCamber.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="config.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="makers.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InitCamberLoc.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InitChord.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InitThick.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InitPitch.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InitSkew.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InitRake.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
