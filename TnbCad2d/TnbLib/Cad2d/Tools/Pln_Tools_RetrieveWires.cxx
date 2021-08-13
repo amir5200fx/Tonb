@@ -72,6 +72,12 @@ tnbLib::Pln_Tools::RetrieveOrientation
 	{
 		if (Geo_Tools::IsCcwOrder_cgal(Pts) NOT_EQUAL Geo_Tools::IsCcwOrder(Pts))
 		{
+			/*std::cout << (Geo_Tools::IsCcwOrder_cgal(Pts) ? "yes" : "no") << std::endl;
+			std::cout << (Geo_Tools::IsCcwOrder(Pts) ? "yes" : "no") << std::endl;
+
+			OFstream myFile(fileName("polygon.plt"));
+			Io::ExportCurve(Pts, myFile);*/
+
 			FatalErrorIn(FunctionSIG)
 				<< "contradictory results are detected!" << endl
 				<< abort(FatalError);

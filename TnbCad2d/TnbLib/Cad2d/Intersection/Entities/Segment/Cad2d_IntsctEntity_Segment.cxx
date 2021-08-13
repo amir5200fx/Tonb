@@ -78,6 +78,16 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 
 			auto[c0, c1] = curve->Split(orth->CharParameter());
 
+			if (NOT c0)
+			{
+				continue;
+			}
+
+			if (NOT c1)
+			{
+				continue;
+			}
+
 			Debug_Null_Pointer(c0);
 			Debug_Null_Pointer(c1);
 

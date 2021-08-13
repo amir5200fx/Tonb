@@ -936,8 +936,31 @@ void tnbLib::Pln_Tools::SplitCurve
 	auto first = theCurve->FirstParameter();
 	auto last = theCurve->LastParameter();
 
-	theC0 = Pln_Tools::ConvertToTrimmedCurve(theCurve, first, theX);
-	theC1 = Pln_Tools::ConvertToTrimmedCurve(theCurve, theX, last);
+	if (theX > first)
+	{
+		theC0 = Pln_Tools::ConvertToTrimmedCurve(theCurve, first, theX);
+	}
+	else
+	{
+#ifdef _DEBUG
+		WarningInFunction 
+			<< "the c0 curve is null!" << endl;
+#endif // _DEBUG
+		theC0 = nullptr;
+	}
+	
+	if (last > theX)
+	{
+		theC1 = Pln_Tools::ConvertToTrimmedCurve(theCurve, theX, last);
+	}
+	else
+	{
+#ifdef _DEBUG
+		WarningInFunction
+			<< "the c0 curve is null!" << endl;
+#endif // _DEBUG
+		theC1 = nullptr;
+	}
 }
 
 std::vector<std::shared_ptr<tnbLib::Pln_Curve>>

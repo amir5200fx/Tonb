@@ -388,6 +388,27 @@
     <Filter Include="TnbLib\Cad2d\MergePlane">
       <UniqueIdentifier>{a1aa7c33-89e0-4909-b083-3e0ea0e30599}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Interpolation">
+      <UniqueIdentifier>{407d9f55-fd00-4f66-9f6b-f188ff9dd2d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Interpolation\Local">
+      <UniqueIdentifier>{08602010-ea8b-4c03-9905-f118fcd2fa21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Interpolation\Global">
+      <UniqueIdentifier>{a598a9ef-d6eb-4208-8af7-8610a89a9cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Interpolation\Ubar">
+      <UniqueIdentifier>{107279ea-ebec-4d7d-b643-df0083831bf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Interpolation\Ubar\Uniform">
+      <UniqueIdentifier>{2bee7263-bb54-4a00-a45a-ce4cc215dee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Interpolation\Ubar\ChordLength">
+      <UniqueIdentifier>{6c614658-e68d-41d4-b117-9cd8bebd0f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Interpolation\Ubar\Centripetal">
+      <UniqueIdentifier>{b0d8a495-98ef-48e6-ad56-7713e0847875}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -759,6 +780,24 @@
     <ClInclude Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifoldI.hxx">
       <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Interpolation\Local\Cad2d_LocalInterpl.hxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Local</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Interpolation\Ubar\Cad2d_InterpUbarMap.hxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Interpolation\Ubar\Uniform\Cad2d_InterpUbarMap_Uniform.hxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Interpolation\Ubar\ChordLen\Cad2d_InterpUbarMap_ChordLen.hxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar\ChordLength</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Interpolation\Ubar\Centripetal\Cad2d_InterpUbarMap_Centripetal.hxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar\Centripetal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Interpolation\Ubar\Cad2d_InterpUbarMaps.hxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1114,6 +1153,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\RemoveNonManifold\Cad2d_RemoveNonManifoldIO.cxx">
       <Filter>TnbLib\Cad2d\RemoveNonManifold</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Interpolation\Local\Cad2d_LocalInterpl.cxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Local</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Interpolation\Ubar\Uniform\Cad2d_InterpUbarMap_Uniform.cxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Interpolation\Ubar\Centripetal\Cad2d_InterpUbarMap_Centripetal.cxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar\Centripetal</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Interpolation\Ubar\ChordLen\Cad2d_InterpUbarMap_ChordLen.cxx">
+      <Filter>TnbLib\Cad2d\Interpolation\Ubar\ChordLength</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
