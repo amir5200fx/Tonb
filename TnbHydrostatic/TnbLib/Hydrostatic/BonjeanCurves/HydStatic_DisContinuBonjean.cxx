@@ -7,6 +7,10 @@
 #include <Geo2d_ApprxCurve.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
+#include <Cad2d_LocalInterpl.hxx>
+#include <Cad2d_InterpUbarMap_Centripetal.hxx>
+#include <Cad2d_InterpUbarMap_ChordLen.hxx>
+#include <Cad2d_InterpUbarMap_Uniform.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -605,6 +609,11 @@ namespace tnbLib
 }
 
 tnbLib::HydStatic_DisContinuBonjean::HydStatic_DisContinuBonjean
+()
+	: theNbLevels_(0)
+{}
+
+tnbLib::HydStatic_DisContinuBonjean::HydStatic_DisContinuBonjean
 (
 	const std::shared_ptr<Marine_Domain>& theDomain, 
 	const std::shared_ptr<Marine_Body>& theBody,
@@ -721,7 +730,7 @@ namespace tnbLib
 		return std::move(As);
 	}
 
-	auto MakeCurve(const std::vector<std::pair<Standard_Real, Standard_Real>>& Qs)
+	auto MakeCurveGlobal(const std::vector<std::pair<Standard_Real, Standard_Real>>& Qs)
 	{
 		Handle(TColgp_HArray1OfPnt2d) offsets = new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Qs.size());
 		auto& offsetsRef = *offsets;
@@ -757,6 +766,93 @@ namespace tnbLib
 		}
 		Handle(Geom2d_BSplineCurve) curve;
 		return curve;
+	}
+
+	auto MakeCurveLocal
+	(
+		const std::vector<std::pair<Standard_Real, Standard_Real>>& Qs,
+		const HydStatic_DisContinuBonjean::localInfo& theInfo
+	)
+	{
+		std::vector<Pnt2d> pts;
+		pts.reserve(Qs.size());
+
+		for (const auto& x : Qs)
+		{
+			auto pt = Pnt2d(x.first, x.second);
+			pts.push_back(std::move(pt));
+		}
+
+		std::shared_ptr<Cad2d_InterpUbarMap> ubarMap;
+		switch (theInfo.KnotsType)
+		{
+		case HydStatic_DisContinuBonjean::localInfo::knotsType::uniform:
+		{
+			ubarMap = std::make_shared<Cad2d_InterpUbarMap_Uniform>();
+			break;
+		}
+		case HydStatic_DisContinuBonjean::localInfo::knotsType::chordLen:
+		{
+			ubarMap = std::make_shared<Cad2d_InterpUbarMap_ChordLen>();
+			break;
+		}
+		case HydStatic_DisContinuBonjean::localInfo::knotsType::centripetal:
+		{
+			ubarMap = std::make_shared<Cad2d_InterpUbarMap_Centripetal>();
+			break;
+		}
+		default:
+			FatalErrorIn(FunctionSIG)
+				<< "unspecified type of knots vector calculator has been detected!" << endl
+				<< abort(FatalError);
+			break;
+		}
+
+		Cad2d_LocalInterpl interpolation(pts);
+		
+		switch (theInfo.NeighborType)
+		{
+		case HydStatic_DisContinuBonjean::localInfo::neighborType::threePoint:
+		{
+			interpolation.SetType(Cad2d_LocalInterpl::neighborType::threePoint);
+			break;
+		}
+		case HydStatic_DisContinuBonjean::localInfo::neighborType::fivePoint:
+		{
+			interpolation.SetType(Cad2d_LocalInterpl::neighborType::fivePoint);
+			break;
+		}
+		default:
+			FatalErrorIn(FunctionSIG)
+				<< "unspecified type of neighbor has been detected!" << endl
+				<< abort(FatalError);
+			break;
+		}
+
+		switch (theInfo.ContinuityType)
+		{
+		case HydStatic_DisContinuBonjean::localInfo::continuityType::C1:
+		{
+			interpolation.SetContinuity(Cad2d_LocalInterpl::continuity::C1);
+			break;
+		}
+		case HydStatic_DisContinuBonjean::localInfo::continuityType::G1:
+		{
+			interpolation.SetContinuity(Cad2d_LocalInterpl::continuity::G1);
+			break;
+		}
+		default:
+			FatalErrorIn(FunctionSIG)
+				<< "unspecified type of continuity has been detected!" << endl
+				<< abort(FatalError);
+			break;
+		}
+
+		interpolation.SetTolerance(theInfo.Tolerance);
+
+		interpolation.Perform();
+		auto curve = interpolation.Curve();
+		return std::move(curve);
 	}
 }
 
@@ -831,7 +927,22 @@ void tnbLib::HydStatic_DisContinuBonjean::Perform()
 			Debug_Null_Pointer(displacer);
 
 			auto Qs = CalcSectionArea(*domain->Dim(), displacer, NbLevels());
-			auto geom = (Handle(Geom2d_Curve))MakeCurve(Qs);
+
+			Handle(Geom2d_Curve) geom;
+			switch (theInterplScheme_)
+			{
+			case tnbLib::HydStatic_DisContinuBonjean::interplScheme::Global:
+				geom = (Handle(Geom2d_Curve))MakeCurveGlobal(Qs);
+				break;
+			case tnbLib::HydStatic_DisContinuBonjean::interplScheme::Local:
+				geom = MakeCurveLocal(Qs, LocalInterplInfo());
+				break;
+			default:
+				FatalErrorIn(FunctionSIG)
+					<< "unspecified type of interpolation has been detected!" << endl
+					<< abort(FatalError);
+				break;
+			}
 			auto bonj = std::make_shared<HydStatic_BnjCurve>(std::move(geom));
 
 			auto s = RetrieveSpan(bonj->Geometry());

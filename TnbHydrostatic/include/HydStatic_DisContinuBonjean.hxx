@@ -153,12 +153,57 @@ namespace tnbLib
 		};
 
 
+		enum class interplScheme
+		{
+			Global = 0,
+			Local
+		};
+
+		struct localInfo
+		{
+
+			localInfo()
+				: Tolerance(1.0E-6)
+				, NeighborType(neighborType::fivePoint)
+				, ContinuityType(continuityType::G1)
+				, KnotsType(knotsType::chordLen)
+			{}
+
+			enum class neighborType
+			{
+				threePoint = 0,
+				fivePoint
+			};
+
+			enum class continuityType
+			{
+				G1 = 0,
+				C1
+			};
+
+			enum class knotsType
+			{
+				chordLen = 0,
+				centripetal,
+				uniform
+			};
+
+			neighborType NeighborType;
+			continuityType ContinuityType;
+			knotsType KnotsType;
+
+			Standard_Real Tolerance;
+		};
+
 	private:
 
 		/*Private Data*/
 
 		std::shared_ptr<Marine_Domain> theDomain_;
 		std::shared_ptr<Marine_Body> theBody_;
+
+		interplScheme theInterplScheme_;
+		localInfo theLocalInterplInfo_;
 
 		Standard_Integer theNbLevels_;
 
@@ -182,8 +227,7 @@ namespace tnbLib
 
 		//- default constructor
 
-		HydStatic_DisContinuBonjean()
-		{}
+		TnbHydStatic_EXPORT HydStatic_DisContinuBonjean();
 
 		//- constructors
 
@@ -217,11 +261,22 @@ namespace tnbLib
 			return theSections_;
 		}
 
+		const auto& LocalInterplInfo() const
+		{
+			return theLocalInterplInfo_;
+		}
+
+		auto& LocalInterplInfoRef()
+		{
+			return theLocalInterplInfo_;
+		}
+
 		TnbHydStatic_EXPORT void Perform();
 
 		inline void LoadDomain(const std::shared_ptr<Marine_Domain>& theDomain);
 		inline void LoadBody(const std::shared_ptr<Marine_Body>& theBody);
 		inline void SetNbLevels(const Standard_Integer n);
+		inline void SetInterplScheme(const interplScheme);
 
 		//- static functions and operators
 
