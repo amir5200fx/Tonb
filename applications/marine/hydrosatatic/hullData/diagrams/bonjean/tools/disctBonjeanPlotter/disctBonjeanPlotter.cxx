@@ -99,6 +99,20 @@ namespace tnbLib
 		}
 	}
 
+	auto calcBoundingBox(const std::vector<std::shared_ptr<HydStatic_BnjCurve>>& curves)
+	{
+		auto iter = curves.begin();
+		auto b = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox((*iter)->Geometry()));
+
+		iter++;
+		while (iter NOT_EQUAL curves.end())
+		{
+			b = Geo_BoxTools::Union(b, Pln_Tools::BoundingBox(Pln_Tools::BoundingBox((*iter)->Geometry())));
+			iter++;
+		}
+		return std::move(b);
+	}
+
 	void saveTo(const std::string& name)
 	{
 		if (NOT mySolutionData)
@@ -116,15 +130,17 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		/*Entity2d_Box box;
-		for (const auto& section : graph->Sections())
+		const auto& sections = graph->Sections();
+
+		auto iter = sections.begin();
+		auto box = calcBoundingBox((*iter)->Curves());
+		iter++;
+
+		while (iter NOT_EQUAL sections.end())
 		{
-			for (const auto& x : section->Curves())
-			{
-				auto b = Pln_Tools::BoundingBox(Pln_Tools::BoundingBox(x->Geometry()));
-				box = Geo_BoxTools::Union(b, box);
-			}
-		}*/
+			box = Geo_BoxTools::Union(box, calcBoundingBox((*iter)->Curves()));
+			iter++;
+		}
 
 		myInfo->SetApprox(box.Diameter()*myInfo->Approx());
 		myInfo->SetMinSize(box.Diameter()*myInfo->MinSize());	

@@ -249,14 +249,24 @@ namespace tnbLib
 
 		auto iter = surfaces.begin();
 		auto points = retrievePoints(*iter);
+		/*double yMin = RealLast();
+		for (const auto& x : points)
+		{
+			if (x.Y() < yMin) yMin = x.Y();
+		}*/
 		auto b = Geo_BoxTools::GetBox(points, 0);
 		iter++;
 		while (iter NOT_EQUAL surfaces.end())
 		{
 			auto points = retrievePoints(*iter);
+			/*for (const auto& x : points)
+			{
+				if (x.Y() < yMin) yMin = x.Y();
+			}*/
 			b = Geo_BoxTools::Union(b, Geo_BoxTools::GetBox(points, 0));
 			iter++;
 		}
+		//std::cout << "yMin= " << yMin << std::endl;
 		return std::move(b);
 	}
 

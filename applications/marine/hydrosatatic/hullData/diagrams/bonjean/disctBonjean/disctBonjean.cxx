@@ -7,6 +7,7 @@
 #include <Marine_WaterLib.hxx>
 #include <Geo_CosineDistb.hxx>
 #include <Entity3d_Box.hxx>
+#include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -20,8 +21,28 @@ namespace tnbLib
 
 	static size_t nbWaters = 20;
 	static bool loadTag = false;
+	static bool exeTag = false;
 
 	soluData_t mySolutionData;
+
+	static std::string myInterplScheme = "global";
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
+	void setInterplScheme(const std::string& name)
+	{
+		myInterplScheme = name;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the interpolation scheme is set to: " << myInterplScheme << endl;
+		}
+	}
 
 	void loadSolutionDate(const std::string& name)
 	{
@@ -29,14 +50,19 @@ namespace tnbLib
 		if (verbose)
 		{
 			Info << endl;
-			Info << " loading the solution data from, " << fn << endl;
+			Info << " loading the model from, " << fn << endl;
 			Info << endl;
 		}
 		std::ifstream myFile(fn);
 
-		TNB_iARCH_FILE_TYPE ar(myFile);
+		{//- timer scope
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
 
-		ar >> mySolutionData;
+			TNB_iARCH_FILE_TYPE ar(myFile);
+			ar >> mySolutionData;
+		}
+
 		if (NOT mySolutionData)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -44,22 +70,22 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		loadTag = true;
-
 		if (verbose)
 		{
 			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully!" << endl;
+			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
 			Info << endl;
 		}
+
+		loadTag = true;
 	}
 
 	void saveTo(const std::string& name)
 	{
-		if (NOT mySolutionData)
+		if (NOT exeTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " no solution data has been loaded!" << endl
+				<< "the application has not been performed!" << endl
 				<< abort(FatalError);
 		}
 
@@ -112,11 +138,28 @@ namespace tnbLib
 		}
 
 		auto alg = std::make_shared<HydStatic_DisContinuBonjean>(domain, body, nbWaters);
+
+		if (myInterplScheme IS_EQUAL "local")
+		{
+			alg->SetInterplScheme(HydStatic_DisContinuBonjean::interplScheme::Local);
+		}
+		else if (myInterplScheme IS_EQUAL "global")
+		{
+			alg->SetInterplScheme(HydStatic_DisContinuBonjean::interplScheme::Global);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid interpolation scheme has been detected!" << endl
+				<< " - valid interpolation schemes are: local, global" << endl
+				<< abort(FatalError);
+		}
 		alg->Perform();
 
 		auto g = HydStatic_DisContinuBonjean::RetrieveGraph(alg->Sections());
-
 		mySolutionData->SetGraph(std::move(g));
+
+		exeTag = true;
 	}
 
 }
@@ -136,6 +179,8 @@ namespace tnbLib
 	{
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](int n)-> void {nbWaters = n; }), "setNbWaters");
+
+		mod->add(chaiscript::fun([](const std::string& name)-> void {myInterplScheme = name; }), "setInterplScheme");
 
 		//- io functions
 
