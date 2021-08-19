@@ -14,6 +14,7 @@
 #include <PtdModel_WrappedBladeSection.hxx>
 #include <PtdModel_UnWrappedBladeSection.hxx>
 #include <PtdModel_BladeExpandedView.hxx>
+#include <PtdModel_BladeFaces.hxx>
 #include <PtdModel_PropSection.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -28,7 +29,7 @@ tnbLib::PtdModel_PropBlade::PtdModel_PropBlade
 
 	bladeInfo->SetGlobals(pars);
 
-	bladeInfo->SetNbSections(DEFAULT_NB_SECTIONS);
+	//bladeInfo->SetNbSections(DEFAULT_NB_SECTIONS);
 	bladeInfo->SetNbSpans(DEFAULT_NB_SPANS);
 
 	theBladeInfo_ = std::move(bladeInfo);
@@ -39,7 +40,7 @@ namespace tnbLib
 	unsigned short PtdModel_PropBlade::verbose(0);
 
 	const Standard_Integer PtdModel_PropBlade::DEFAULT_NB_SECTIONS = 10;
-	const Standard_Integer PtdModel_PropBlade::DEFAULT_NB_SPANS = 25;
+	const Standard_Integer PtdModel_PropBlade::DEFAULT_NB_SPANS = 55;
 }
 
 Standard_Integer 
@@ -138,7 +139,7 @@ void tnbLib::PtdModel_PropBlade::CreateFaces()
 			<< abort(FatalError);
 	}
 
-	const auto nbSections = BladeInfo()->NbSections();
+	const auto nbSections = NbSections();
 	const auto nbSpans = BladeInfo()->NbSpans();
 
 	const auto& wrappedSections = BladeView()->WrappedSections();
@@ -181,7 +182,8 @@ void tnbLib::PtdModel_PropBlade::CreateFaces()
 		}
 		Qs.push_back(std::move(Q));
 	}
-	theFace_ = PtdModel_Face::CreateFace(Qs);
+	auto gFace = PtdModel_Face::CreateFace(Qs);
+	theFace_ = std::make_shared<ptdModel::BladeFace_Press>(std::move(gFace));
 
 	if (verbose)
 	{
@@ -222,7 +224,8 @@ void tnbLib::PtdModel_PropBlade::CreateFaces()
 		Qs1.push_back(std::move(Q));
 	}
 
-	theBack_ = PtdModel_Face::CreateFace(Qs1);
+	auto gBack = PtdModel_Face::CreateFace(Qs1);
+	theBack_ = std::make_shared<ptdModel::BladeFace_Suct>(std::move(gBack));
 
 	if (verbose)
 	{
