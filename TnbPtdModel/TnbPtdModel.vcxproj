@@ -84,10 +84,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdModel\IO\Wing;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\WrappedSection;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\Entity;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing\No1;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing;$(ProjectDir)TnbLib\PtdModel\Wing\Face;$(ProjectDir)TnbLib\PtdModel\Wing\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Wing\SectionQ;$(ProjectDir)TnbLib\PtdModel\Wing\Section;$(ProjectDir)TnbLib\PtdModel\Wing\Info;$(ProjectDir)TnbLib\PtdModel\Wing\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Wing\View;$(ProjectDir)TnbLib\PtdModel\Wing\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Wing\Entity;$(ProjectDir)TnbLib\PtdModel\Wing;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\MaxCamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\SectionQ;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profiles;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\View;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Info;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\View;$(ProjectDir)TnbLib\PtdModel\Entities\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Entities\Parameters;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Fixed;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Constant;$(ProjectDir)TnbLib\PtdModel\Entities\Par;$(ProjectDir)TnbLib\PtdModel\Entities\BndValue;$(ProjectDir)TnbLib\PtdModel\Entities\Value;$(ProjectDir)TnbLib\PtdModel\Entities\Forms;$(ProjectDir)TnbLib\PtdModel\Entities\Face;$(ProjectDir)TnbLib\PtdModel\Entities\Profiles;$(ProjectDir)TnbLib\PtdModel\Entities\Profile;$(ProjectDir)TnbLib\PtdModel\Entities\AirfoilSectionQ;$(ProjectDir)TnbLib\PtdModel\Entities\SectionCurve;$(ProjectDir)TnbLib\PtdModel\Entities\Section;$(ProjectDir)TnbLib\PtdModel\Entities\Entity;$(ProjectDir)TnbLib\PtdModel\FormMaker;$(ProjectDir)TnbLib\PtdModel\Form\Custom;$(ProjectDir)TnbLib\PtdModel\Form\SixPars;$(ProjectDir)TnbLib\PtdModel\Form\FivePars;$(ProjectDir)TnbLib\PtdModel\Form\FourPars;$(ProjectDir)TnbLib\PtdModel\Form\ThreePars;$(ProjectDir)TnbLib\PtdModel\Form\Uniform;$(ProjectDir)TnbLib\PtdModel\Form\Linear;$(ProjectDir)TnbLib\PtdModel\Form;$(ProjectDir)TnbLib\PtdModel\xPars;$(ProjectDir)TnbLib\PtdModel\Module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdModel\IO\Wing;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\WrappedSection;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\Entity;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing\No1;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropBlades;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropHub;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropBlade;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Propeller;$(ProjectDir)TnbLib\PtdModel\Wing\Face;$(ProjectDir)TnbLib\PtdModel\Wing\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Wing\SectionQ;$(ProjectDir)TnbLib\PtdModel\Wing\Section;$(ProjectDir)TnbLib\PtdModel\Wing\Info;$(ProjectDir)TnbLib\PtdModel\Wing\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Wing\View;$(ProjectDir)TnbLib\PtdModel\Wing\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Wing\Entity;$(ProjectDir)TnbLib\PtdModel\Wing;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1\Parameters;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\MaxCamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\SectionQ;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profiles;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Press;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Suct;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Tip;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Root;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Trail;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Lead;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\View;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Info;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Tail;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Shaft;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Nose;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Tail;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Shaft;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Nose;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\View;$(ProjectDir)TnbLib\PtdModel\Entities\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Entities\Parameters;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Fixed;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Constant;$(ProjectDir)TnbLib\PtdModel\Entities\Par;$(ProjectDir)TnbLib\PtdModel\Entities\BndValue;$(ProjectDir)TnbLib\PtdModel\Entities\Value;$(ProjectDir)TnbLib\PtdModel\Entities\Forms;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Hub;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blades;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Child;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Parent;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller;$(ProjectDir)TnbLib\PtdModel\Entities\Shape;$(ProjectDir)TnbLib\PtdModel\Entities\Face;$(ProjectDir)TnbLib\PtdModel\Entities\Curve\3d;$(ProjectDir)TnbLib\PtdModel\Entities\Curve\2d;$(ProjectDir)TnbLib\PtdModel\Entities\Curve;$(ProjectDir)TnbLib\PtdModel\Entities\Profiles;$(ProjectDir)TnbLib\PtdModel\Entities\Profile;$(ProjectDir)TnbLib\PtdModel\Entities\AirfoilSectionQ;$(ProjectDir)TnbLib\PtdModel\Entities\SectionCurve;$(ProjectDir)TnbLib\PtdModel\Entities\Section;$(ProjectDir)TnbLib\PtdModel\Entities\Entity;$(ProjectDir)TnbLib\PtdModel\FormMaker;$(ProjectDir)TnbLib\PtdModel\Form\Custom;$(ProjectDir)TnbLib\PtdModel\Form\SixPars;$(ProjectDir)TnbLib\PtdModel\Form\FivePars;$(ProjectDir)TnbLib\PtdModel\Form\FourPars;$(ProjectDir)TnbLib\PtdModel\Form\ThreePars;$(ProjectDir)TnbLib\PtdModel\Form\Uniform;$(ProjectDir)TnbLib\PtdModel\Form\Linear;$(ProjectDir)TnbLib\PtdModel\Form;$(ProjectDir)TnbLib\PtdModel\xPars;$(ProjectDir)TnbLib\PtdModel\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbPtdModel_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,10 +135,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdModel\IO\Wing;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\WrappedSection;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\Entity;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing\No1;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing;$(ProjectDir)TnbLib\PtdModel\Wing\Face;$(ProjectDir)TnbLib\PtdModel\Wing\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Wing\SectionQ;$(ProjectDir)TnbLib\PtdModel\Wing\Section;$(ProjectDir)TnbLib\PtdModel\Wing\Info;$(ProjectDir)TnbLib\PtdModel\Wing\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Wing\View;$(ProjectDir)TnbLib\PtdModel\Wing\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Wing\Entity;$(ProjectDir)TnbLib\PtdModel\Wing;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\MaxCamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\SectionQ;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profiles;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\View;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Info;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\View;$(ProjectDir)TnbLib\PtdModel\Entities\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Entities\Parameters;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Fixed;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Constant;$(ProjectDir)TnbLib\PtdModel\Entities\Par;$(ProjectDir)TnbLib\PtdModel\Entities\BndValue;$(ProjectDir)TnbLib\PtdModel\Entities\Value;$(ProjectDir)TnbLib\PtdModel\Entities\Forms;$(ProjectDir)TnbLib\PtdModel\Entities\Face;$(ProjectDir)TnbLib\PtdModel\Entities\Profiles;$(ProjectDir)TnbLib\PtdModel\Entities\Profile;$(ProjectDir)TnbLib\PtdModel\Entities\AirfoilSectionQ;$(ProjectDir)TnbLib\PtdModel\Entities\SectionCurve;$(ProjectDir)TnbLib\PtdModel\Entities\Section;$(ProjectDir)TnbLib\PtdModel\Entities\Entity;$(ProjectDir)TnbLib\PtdModel\FormMaker;$(ProjectDir)TnbLib\PtdModel\Form\Custom;$(ProjectDir)TnbLib\PtdModel\Form\SixPars;$(ProjectDir)TnbLib\PtdModel\Form\FivePars;$(ProjectDir)TnbLib\PtdModel\Form\FourPars;$(ProjectDir)TnbLib\PtdModel\Form\ThreePars;$(ProjectDir)TnbLib\PtdModel\Form\Uniform;$(ProjectDir)TnbLib\PtdModel\Form\Linear;$(ProjectDir)TnbLib\PtdModel\Form;$(ProjectDir)TnbLib\PtdModel\xPars;$(ProjectDir)TnbLib\PtdModel\Module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdModel\IO\Wing;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\WrappedSection;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\Entity;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing\No1;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropBlades;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropHub;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropBlade;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Propeller;$(ProjectDir)TnbLib\PtdModel\Wing\Face;$(ProjectDir)TnbLib\PtdModel\Wing\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Wing\SectionQ;$(ProjectDir)TnbLib\PtdModel\Wing\Section;$(ProjectDir)TnbLib\PtdModel\Wing\Info;$(ProjectDir)TnbLib\PtdModel\Wing\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Wing\View;$(ProjectDir)TnbLib\PtdModel\Wing\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Wing\Entity;$(ProjectDir)TnbLib\PtdModel\Wing;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1\Parameters;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\MaxCamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\SectionQ;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profiles;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Press;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Suct;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Tip;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Root;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Trail;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Lead;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\View;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Info;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Tail;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Shaft;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Nose;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Tail;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Shaft;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Nose;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\View;$(ProjectDir)TnbLib\PtdModel\Entities\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Entities\Parameters;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Fixed;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Constant;$(ProjectDir)TnbLib\PtdModel\Entities\Par;$(ProjectDir)TnbLib\PtdModel\Entities\BndValue;$(ProjectDir)TnbLib\PtdModel\Entities\Value;$(ProjectDir)TnbLib\PtdModel\Entities\Forms;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Hub;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blades;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Child;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Parent;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller;$(ProjectDir)TnbLib\PtdModel\Entities\Shape;$(ProjectDir)TnbLib\PtdModel\Entities\Face;$(ProjectDir)TnbLib\PtdModel\Entities\Curve\3d;$(ProjectDir)TnbLib\PtdModel\Entities\Curve\2d;$(ProjectDir)TnbLib\PtdModel\Entities\Curve;$(ProjectDir)TnbLib\PtdModel\Entities\Profiles;$(ProjectDir)TnbLib\PtdModel\Entities\Profile;$(ProjectDir)TnbLib\PtdModel\Entities\AirfoilSectionQ;$(ProjectDir)TnbLib\PtdModel\Entities\SectionCurve;$(ProjectDir)TnbLib\PtdModel\Entities\Section;$(ProjectDir)TnbLib\PtdModel\Entities\Entity;$(ProjectDir)TnbLib\PtdModel\FormMaker;$(ProjectDir)TnbLib\PtdModel\Form\Custom;$(ProjectDir)TnbLib\PtdModel\Form\SixPars;$(ProjectDir)TnbLib\PtdModel\Form\FivePars;$(ProjectDir)TnbLib\PtdModel\Form\FourPars;$(ProjectDir)TnbLib\PtdModel\Form\ThreePars;$(ProjectDir)TnbLib\PtdModel\Form\Uniform;$(ProjectDir)TnbLib\PtdModel\Form\Linear;$(ProjectDir)TnbLib\PtdModel\Form;$(ProjectDir)TnbLib\PtdModel\xPars;$(ProjectDir)TnbLib\PtdModel\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbPtdModel_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +153,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\PtdModel\Entities\AirfoilSectionQ\PtdModel_AirfoilSectionQI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValue.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValueI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Curve\2d\PtdModel2d_Curve.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Curve\2d\PtdModel2d_CurveFwd.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Curve\3d\PtdModel3d_Curve.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Curve\3d\PtdModel3d_CurveFwd.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Curve\PtdModel_Curve.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\Entity\PtdModel_Entity.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\Face\PtdModel_Face.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\Face\PtdModel_FaceI.hxx" />
@@ -172,6 +179,14 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\PtdModel\Entities\SectionCurve\PtdModel_SectionCurveI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\Section\PtdModel_Section.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\Section\PtdModel_SectionI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blades\PtdModel_Shape_PropBlades.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Child\PtdModel_Shape_PropBladeChild.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Parent\PtdModel_Shape_PropBladeParent.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\PtdModel_Shape_PropBlade.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\Propeller\Entity\PtdModel_Shape_PropEntity.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\Propeller\Hub\PtdModel_Shape_PropHub.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\Propeller\PtdModel_PropShape.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Entities\Shape\PtdModel_Shape.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\Value\PtdModel_Value.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\Value\PtdModel_ValueI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Entities\View\PtdModel_View.hxx" />
@@ -193,6 +208,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformForm.hxx" />
     <ClInclude Include="TnbLib\PtdModel\IO\Wing\PtdModel_IO_Wing.hxx" />
     <ClInclude Include="TnbLib\PtdModel\IO\Wing\PtdModel_IO_WingFwd.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Hub\No1\Parameters\PtdModel_PropHubParsNo1.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Hub\No1\PtdModel_PropHubNo1.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Models\Hub\No1\Section\PtdModel_PropHubSectionNo1.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc\PtdModel_BladeFormNo1_CamberLoc.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc\PtdModel_BladeFormNo1_CamberLocI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_Camber.hxx" />
@@ -229,6 +247,16 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\PtdModel\Module\PtdModel_Module.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\ExpandedView\PtdModel_BladeExpandedView.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\ExpandedView\PtdModel_BladeExpandedViewI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\Lead\PtdModel_BladeFace_Lead.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\Press\PtdModel_BladeFace_Press.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFace.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFaceM.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFaces.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFacesFwd.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\Root\PtdModel_BladeFace_Root.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\Suct\PtdModel_BladeFace_Suct.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\Tip\PtdModel_BladeFace_Tip.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Face\Trail\PtdModel_BladeFace_Trail.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalPars.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalParsI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfo.hxx" />
@@ -238,17 +266,42 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\SectionQ\PtdModel_BladeSectionQI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSection.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSectionI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSections.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSection.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSection.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeView.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeViewI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Entity\PtdModel_PropEntity.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\Hub\PtdModel_HubCurve_Hub.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\Nose\PtdModel_HubCurve_Nose.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\PtdModel_HubCurve.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\PtdModel_HubCurveM.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\PtdModel_HubCurves.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\PtdModel_HubCurvesFwd.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\Shaft\PtdModel_HubCurve_Shaft.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Curve\Tail\PtdModel_HubCurve_Tail.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\Hub\PtdModel_HubFace_Hub.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\Nose\PtdModel_HubFace_Nose.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\PtdModel_HubFace.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\PtdModel_HubFacesFwd.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\PtdModel_HubFaceM.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\PtdModel_HubFaces.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\Shaft\PtdModel_HubFace_Shaft.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Face\Tail\PtdModel_HubFace_Tail.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Parameters\PtdModel_PropHubPars.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\PtdModel_PropHub.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\Propeller\Hub\Section\PtdModel_PropHubSection.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Propeller\Section\PtdModel_PropSection.hxx" />
     <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\Entity\PtdModel_SimpleExtrudedEntity.hxx" />
     <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalPars.hxx" />
     <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalParsI.hxx" />
     <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\WrappedSection\PtdModel_WrappedSimpleExtrudedSection.hxx" />
     <ClInclude Include="TnbLib\PtdModel\SimpleExtruded\WrappedSection\PtdModel_WrappedSimpleExtrudedSectionI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\SolidMaker\PropBlades\PtdModel_SolidMaker_PropBlades.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\SolidMaker\PropBlade\PtdModel_SolidMaker_PropBlade.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\SolidMaker\PropBlade\PtdModel_SolidMaker_PropBladeI.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\SolidMaker\Propeller\PtdModel_SolidMaker_Propeller.hxx" />
+    <ClInclude Include="TnbLib\PtdModel\SolidMaker\PropHub\PtdModel_SolidMaker_PropHub.hxx" />
     <ClInclude Include="TnbLib\PtdModel\SolidMaker\Wing\No1\PtdModel_SolidMaker_WingNo1.hxx" />
     <ClInclude Include="TnbLib\PtdModel\SolidMaker\Wing\PtdModel_SolidMaker_Wing.hxx" />
     <ClInclude Include="TnbLib\PtdModel\Wing\Entity\PtdModel_WingEntity.hxx" />
@@ -272,6 +325,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   <ItemGroup>
     <ClCompile Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValue.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\BndValue\PtdModel_BndValueIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Curve\2d\PtdModel2d_CurveIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Curve\3d\PtdModel3d_CurveIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\Face\PtdModel_Face.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\Face\PtdModel_FaceIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\Forms\PtdModel_Forms.cxx" />
@@ -288,6 +343,21 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\PtdModel\Entities\SectionCurve\PtdModel_SectionCurveIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\Section\PtdModel_Section.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\Section\PtdModel_SectionIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blades\PtdModel_Shape_PropBlades.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blades\PtdModel_Shape_PropBladesIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Child\PtdModel_Shape_PropBladeChild.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Child\PtdModel_Shape_PropBladeChildIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Parent\PtdModel_Shape_PropBladeParent.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Parent\PtdModel_Shape_PropBladeParentIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\PtdModel_Shape_PropBlade.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Blade\PtdModel_Shape_PropBladeIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Entity\PtdModel_Shape_PropEntity.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Hub\PtdModel_Shape_PropHub.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\Hub\PtdModel_Shape_PropHubIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\PtdModel_PropShape.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\Propeller\PtdModel_PropShapeIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\PtdModel_Shape.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Entities\Shape\PtdModel_ShapeIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\Value\PtdModel_Value.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\Value\PtdModel_ValueIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Entities\View\PtdModel_View.cxx" />
@@ -307,6 +377,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformForm.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Form\Uniform\PtdModel_UniformFormIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\IO\Wing\PtdModel_IO_WingIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Hub\No1\Parameters\PtdModel_PropHubParsNo1IO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Hub\No1\PtdModel_PropHubNo1.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Hub\No1\PtdModel_PropHubNo1IO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Hub\No1\Section\PtdModel_PropHubSectionNo1.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Hub\No1\Section\PtdModel_PropHubSectionNo1IO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc\PtdModel_BladeFormNo1_CamberLoc.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber\PtdModel_BladeFormNo1_Camber.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord\PtdModel_BladeFormNo1_Chord.cxx" />
@@ -316,7 +391,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew\PtdModel_BladeFormNo1_Skew.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness\PtdModel_BladeFormNo1_Thickness.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\PtdModel_PropBladeNo1.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Blade\PtdModel_PropBladeNo1IO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Section\Naca4Digit\PtdModel_PropSectionNo1_Naca4Digit.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Models\Propeller\No1\Section\Naca4Digit\PtdModel_PropSectionNo1_Naca4DigitIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Wing\No1\Form\Camber\PtdModel_WingFormNo1_Camber.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Wing\No1\Form\Camber\PtdModel_WingFormNo1_CamberIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Wing\No1\Form\Chord\PtdModel_WingFormNo1_Chord.cxx" />
@@ -328,19 +405,46 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\PtdModel\Models\Wing\No1\Form\Thickness\PtdModel_WingFormNo1_ThicknessIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Wing\No1\PtdModel_WingNo1.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Models\Wing\No1\Section\Naca4Digit\PtdModel_WingSectionNo1_Naca4Digit.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\Lead\PtdModel_BladeFace_LeadIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\Press\PtdModel_BladeFace_PressIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\PtdModel_BladeFace.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\Root\PtdModel_BladeFace_RootIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\Suct\PtdModel_BladeFace_SuctIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\Tip\PtdModel_BladeFace_TipIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Face\Trail\PtdModel_BladeFace_TrailIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\GlobalParameters\PtdModel_BladeGlobalParsIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Info\PtdModel_BladeInfoIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\PtdModel_PropBlade.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\PtdModel_PropBladeIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSection.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSectionsIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSection.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped\PtdModel_UnWrappedBladeSectionIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSection.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection\PtdModel_WrappedBladeSectionIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Blade\View\PtdModel_BladeViewIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Curve\Hub\PtdModel_HubCurve_HubIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Curve\Nose\PtdModel_HubCurve_NoseIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Curve\Shaft\PtdModel_HubCurve_ShaftIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Curve\Tail\PtdModel_HubCurve_TailIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Face\Hub\PtdModel_HubFace_HubIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Face\Nose\PtdModel_HubFace_NoseIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Face\PtdModel_HubFace.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Face\Shaft\PtdModel_HubFace_ShaftIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\Face\Tail\PtdModel_HubFace_TailIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\PtdModel_PropHub.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\Propeller\Hub\PtdModel_PropHubIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Propeller\Section\PtdModel_PropSection.cxx" />
     <ClCompile Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalPars.cxx" />
     <ClCompile Include="TnbLib\PtdModel\SimpleExtruded\GlobalParameters\PtdModel_SimpleExtrudedGlobalParsIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\SimpleExtruded\WrappedSection\PtdModel_WrappedSimpleExtrudedSection.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\PropBlades\PtdModel_SolidMaker_PropBlades.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\PropBlade\PtdModel_SolidMaker_PropBlade.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\PropBlade\PtdModel_SolidMaker_PropBladeIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\Propeller\PtdModel_SolidMaker_Propeller.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\Propeller\PtdModel_SolidMaker_PropellerIO.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\PropHub\PtdModel_SolidMaker_PropHub.cxx" />
+    <ClCompile Include="TnbLib\PtdModel\SolidMaker\PropHub\PtdModel_SolidMaker_PropHubIO.cxx" />
     <ClCompile Include="TnbLib\PtdModel\SolidMaker\Wing\No1\PtdModel_SolidMaker_WingNo1.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Wing\GlobalParameters\PtdModel_WingGlobalPars.cxx" />
     <ClCompile Include="TnbLib\PtdModel\Wing\GlobalParameters\PtdModel_WingGlobalParsIO.cxx" />
@@ -356,6 +460,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TnbCad\TnbCad.vcxproj">
+      <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
       <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
     </ProjectReference>

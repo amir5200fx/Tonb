@@ -40,11 +40,15 @@ namespace tnbLib
 
 		//- constructors
 
-		PtdModel_SectionCurve(const Standard_Integer theIndex, const word& theName);
+		TnbPtdModel_EXPORT PtdModel_SectionCurve
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		);
 
-		PtdModel_SectionCurve(const Handle(Geom2d_Curve)&);
+		TnbPtdModel_EXPORT PtdModel_SectionCurve(const Handle(Geom2d_Curve)&);
 
-		PtdModel_SectionCurve(Handle(Geom2d_Curve) && );
+		TnbPtdModel_EXPORT PtdModel_SectionCurve(Handle(Geom2d_Curve) && );
 
 
 		//- public functions and operators

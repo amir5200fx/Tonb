@@ -55,7 +55,12 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbPtdModel_EXPORT);
 
-		virtual std::shared_ptr<PtdModel_BladeExpandedView> CreateExpandView(const Standard_Integer section, const PtdModel_BladeSectionQ&) const = 0;
+		virtual std::shared_ptr<PtdModel_BladeExpandedView> 
+			CreateExpandView
+			(
+				const Standard_Integer section,
+				const PtdModel_BladeSectionQ&
+			) const = 0;
 		
 		virtual std::vector<std::shared_ptr<PtdModel_UnWrappedBladeSection>> CreateUnWrappedView() const = 0;
 		virtual std::vector<std::shared_ptr<PtdModel_WrappedBladeSection>> CreateWrappedView() const = 0;
@@ -81,16 +86,6 @@ namespace tnbLib
 
 		//- protected functions and operators
 
-		const auto& BladeInfo() const
-		{
-			return theBladeInfo_;
-		}
-
-		const auto& xParameters() const
-		{
-			return theParameters_;
-		}
-
 		
 
 	public:
@@ -104,6 +99,16 @@ namespace tnbLib
 		//- public functions and operators
 
 		TnbPtdModel_EXPORT Standard_Integer NbSections() const;
+
+		const auto& xParameters() const
+		{
+			return theParameters_;
+		}
+
+		const auto& BladeInfo() const
+		{
+			return theBladeInfo_;
+		}
 
 		const auto& xDistb() const
 		{

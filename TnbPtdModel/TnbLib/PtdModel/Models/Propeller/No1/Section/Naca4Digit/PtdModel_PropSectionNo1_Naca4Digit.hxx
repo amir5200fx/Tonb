@@ -18,6 +18,18 @@ namespace tnbLib
 
 			Standard_Real theTrailEdgeGap_;
 
+
+			//- private functions and operators
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & boost::serialization::base_object<PtdModel_PropSectionNo1>(*this);
+				ar & theTrailEdgeGap_;
+			}
+
 		public:
 
 			//- default constructor
@@ -46,5 +58,7 @@ namespace tnbLib
 		};
 	}
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::ptdModel::PropSectionNo1_Naca4Digit);
 
 #endif // !_PtdModel_PropSectionNo1_Naca4Digit_Header

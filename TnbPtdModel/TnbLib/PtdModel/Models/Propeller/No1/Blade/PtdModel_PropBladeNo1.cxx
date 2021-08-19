@@ -15,8 +15,8 @@
 
 namespace tnbLib
 {
-	OFstream myUnWrappedViewFile(fileName("unwrapped.plt"));
-	OFstream myWrappedViewFile(fileName("wrapped.plt"));
+	//OFstream myUnWrappedViewFile(fileName("unwrapped.plt"));
+	//OFstream myWrappedViewFile(fileName("wrapped.plt"));
 }
 
 tnbLib::PtdModel_PropBladeNo1::PtdModel_PropBladeNo1
@@ -174,8 +174,8 @@ tnbLib::PtdModel_PropBladeNo1::CreateUnWrappedView() const
 			face.push_back(std::move(ptFace));
 		}
 
-		Io::ExportCurve(back, myUnWrappedViewFile);
-		Io::ExportCurve(face, myUnWrappedViewFile);
+		//Io::ExportCurve(back, myUnWrappedViewFile);
+		//Io::ExportCurve(face, myUnWrappedViewFile);
 
 		t->SetBack(std::move(back));
 		t->SetFace(std::move(face));
@@ -280,8 +280,8 @@ tnbLib::PtdModel_PropBladeNo1::CreateWrappedView() const
 			face.push_back(std::move(ptFace));
 		}
 
-		Io::ExportCurve(back, myWrappedViewFile);
-		Io::ExportCurve(face, myWrappedViewFile);
+		//Io::ExportCurve(back, myWrappedViewFile);
+		//Io::ExportCurve(face, myWrappedViewFile);
 
 		t->SetBack(std::move(back));
 		t->SetFace(std::move(face));

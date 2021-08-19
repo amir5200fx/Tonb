@@ -16,6 +16,15 @@ namespace tnbLib
 
 		//- private functions and operators
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<PtdModel_PropBlade>(*this);
+		}
+
 		TnbPtdModel_EXPORT std::shared_ptr<PtdModel_BladeExpandedView> 
 			CreateExpandView
 			(
@@ -45,6 +54,8 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::PtdModel_PropBladeNo1);
 
 #endif // !_PtdModel_PropBladeNo1_Header
 

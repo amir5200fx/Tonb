@@ -9,7 +9,7 @@
 #include <GeomAPI_PointsToBSplineSurface.hxx>
 #include <Geom_BSplineSurface.hxx>
 
-std::shared_ptr<tnbLib::PtdModel_Face>
+Handle(Geom_Surface)
 tnbLib::PtdModel_Face::CreateFace(std::vector<std::vector<Pnt3d>>& Qs)
 {
 	try
@@ -44,8 +44,7 @@ tnbLib::PtdModel_Face::CreateFace(std::vector<std::vector<Pnt3d>>& Qs)
 
 		Debug_If_Condition_Message(NOT alg.IsDone(), "interpolation is not performed");
 
-		auto face = std::make_shared<PtdModel_Face>(alg.Surface());
-		return std::move(face);
+		return alg.Surface();
 
 	}
 	catch (const StdFail_NotDone&)

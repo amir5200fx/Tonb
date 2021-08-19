@@ -117,7 +117,8 @@ void tnbLib::PtdModel_Wing::CreateFaces()
 		Qs.push_back(std::move(Q));
 	}
 
-	theLower_ = PtdModel_Face::CreateFace(Qs);
+	auto gLower = PtdModel_Face::CreateFace(Qs);
+	theLower_ = std::make_shared<PtdModel_Face>(std::move(gLower));
 
 	std::vector<std::vector<Pnt3d>> Qs1;
 	Qs1.reserve(nbSections);
@@ -138,7 +139,8 @@ void tnbLib::PtdModel_Wing::CreateFaces()
 		Qs1.push_back(std::move(Q));
 	}
 
-	theUpper_ = PtdModel_Face::CreateFace(Qs1);
+	auto gUpper = PtdModel_Face::CreateFace(Qs1);
+	theUpper_ = std::make_shared<PtdModel_Face>(std::move(gUpper));
 }
 
 namespace tnbLib

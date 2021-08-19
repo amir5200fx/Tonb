@@ -105,7 +105,7 @@ tnbLib::ptdModel::BladeFormNo1_Chord::CreateProfile
 	Pnt2d p2(GetParameter(Parameters::maxChordLoc)*(dia / 2 - rH) + rH, GetParameter(Parameters::maxChord));
 	Pnt2d p3(dia / 2, p2.Y());
 	Pnt2d p4(p3.X(), GetParameter(Parameters::tipChord));
-	std::cout << "tip chord: " << GetParameter(Parameters::tipChord) << std::endl;
+
 	p1 += GetParameter(Parameters::rootWeight)*(p2 - p1);
 
 	Standard_Integer NbPoles = 5;
