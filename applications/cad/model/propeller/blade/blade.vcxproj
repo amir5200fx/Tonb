@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{D21557A3-8355-43AF-B758-2191A8E336B1}</ProjectGuid>
-    <RootNamespace>no1</RootNamespace>
+    <ProjectGuid>{E23BF6E2-9B76-4312-BC4B-ED99BF47061F}</ProjectGuid>
+    <RootNamespace>blade</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,14 +70,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\cad\model\propeller\no1\</OutDir>
-    <TargetName>propMakerNo1d</TargetName>
+    <OutDir>$(SolutionDir)bin\cad\model\propeller\blade\</OutDir>
+    <TargetName>propBladeMakerd</TargetName>
     <IncludePath>$(ARMADILLO_INCLUDEDIR);$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\cad\model\propeller\no1\</OutDir>
-    <TargetName>propMakerNo1</TargetName>
+    <OutDir>$(SolutionDir)bin\cad\model\propeller\blade\</OutDir>
+    <TargetName>propBladeMaker</TargetName>
     <IncludePath>$(ARMADILLO_INCLUDEDIR);$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -142,32 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InitCamber.cxx" />
-    <ClCompile Include="InitCamberLoc.cxx" />
-    <ClCompile Include="InitChord.cxx" />
-    <ClCompile Include="InitPitch.cxx" />
-    <ClCompile Include="InitRake.cxx" />
-    <ClCompile Include="InitSkew.cxx" />
-    <ClCompile Include="InitThick.cxx" />
-    <ClCompile Include="no1.cxx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="InitCamber.hxx" />
-    <ClInclude Include="config.hxx" />
-    <ClInclude Include="InitCamberLoc.hxx" />
-    <ClInclude Include="InitChord.hxx" />
-    <ClInclude Include="InitPitch.hxx" />
-    <ClInclude Include="InitRake.hxx" />
-    <ClInclude Include="InitSkew.hxx" />
-    <ClInclude Include="InitThick.hxx" />
-    <ClInclude Include="makers.hxx" />
+    <ClCompile Include="blade.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\TnbCad\TnbCad.vcxproj">
       <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\TnbGeo\TnbGeo.vcxproj">
-      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
       <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>

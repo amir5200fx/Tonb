@@ -2,6 +2,7 @@
 #include <PtdModel_BladeFormMakersNo1.hxx>
 #include <PtdModel_PropSectionNo1_Naca4Digit.hxx>
 #include <PtdModel_BladeGlobalPars.hxx>
+#include <PtdModel_BladeInfo.hxx>
 #include <PtdModel_Pars.hxx>
 #include <PtdModel_Face.hxx>
 #include <Cad_GeomSurface.hxx>
@@ -57,7 +58,14 @@ namespace tnbLib
 
 	static std::shared_ptr<Cad_Shape> myShape;
 
-	std::shared_ptr<PtdModel_PropBladeNo1> myBlade;
+	std::shared_ptr<PtdModel_PropBlade> myBlade;
+
+	void setVerbose(unsigned short i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
 	void createMakers()
 	{
@@ -80,6 +88,7 @@ namespace tnbLib
 
 		myBlade = std::make_shared<PtdModel_PropBladeNo1>(myGlobals);
 		myBlade->ImportMakers(*myMakers);
+		//myBlade->BladeInfo()->SetNbSpans(35);
 
 		auto distb = std::make_shared<Geo_UniDistb>(myNbSections - 1);
 		distb->SetLower(myHubRadius->Value()/* + 1.0E-4*(myPropDiameter->Value() / 2.0 - myHubRadius->Value())*/);
@@ -91,7 +100,7 @@ namespace tnbLib
 
 		myBlade->Perform();
 
-		if (shapeTag)
+		/*if (shapeTag)
 		{
 			auto face0 = BRepBuilderAPI_MakeFace(myBlade->BackPatch()->Surface(), myTol);
 			auto face1 = BRepBuilderAPI_MakeFace(myBlade->FacePatch()->Surface(), myTol);
@@ -104,7 +113,7 @@ namespace tnbLib
 			myBuilder.Add(myCompound, face1);
 
 			myShape = std::make_shared<Cad_Shape>(0, "myBlade", std::move(myCompound));
-		}
+		}*/
 
 		exeTag = true;
 	}
@@ -174,18 +183,43 @@ namespace tnbLib
 
 	void saveTo(const std::string& name)
 	{
-		if (shapeTag)
+		/*if (shapeTag)
 		{
 			saveShapeTo(name);
 		}
 		else
 		{
 			saveGeomTo(name);
+		}*/
+
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		fileName fn(name);
+		std::ofstream myFile(fn);
+
+		TNB_oARCH_FILE_TYPE ar(myFile);
+
+		ar << myBlade;
+
+		myFile.close();
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the body is saved in: " << fn << ", successfully!" << endl;
+			Info << endl;
 		}
 	}
 }
 
-
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
 
 #include <chaiscript/chaiscript.hpp>
 
@@ -197,8 +231,8 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
-		mod->add(chaiscript::fun([](bool tag)-> void {shapeTag = tag; }), "setShapeTag");
-		//mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		//mod->add(chaiscript::fun([](bool tag)-> void {shapeTag = tag; }), "setShapeTag");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 	}
@@ -249,7 +283,7 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("propMakerNo1");
+			fileName myFileName("propBladeInfoNo1");
 
 			try
 			{
