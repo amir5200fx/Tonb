@@ -1,8 +1,8 @@
 #pragma once
-inline void tnbLib::PtdModel_BladeInfo::SetNbSections(const Standard_Integer n)
-{
-	theNbSections_ = n;
-}
+//inline void tnbLib::PtdModel_BladeInfo::SetNbSections(const Standard_Integer n)
+//{
+//	theNbSections_ = n;
+//}
 
 inline void tnbLib::PtdModel_BladeInfo::SetNbSpans(const Standard_Integer n)
 {

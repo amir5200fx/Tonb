@@ -13,6 +13,17 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<PtdModel_PropSection>(*this);
+		}
+
 	protected:
 
 		//- default constructor
@@ -27,5 +38,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::PtdModel_PropSectionNo1);
 
 #endif // !_PtdModel_PropSectionNo1_Header

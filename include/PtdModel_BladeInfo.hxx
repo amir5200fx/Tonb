@@ -24,7 +24,7 @@ namespace tnbLib
 		std::shared_ptr<PtdModel_Forms> theBladeForm_;
 		std::shared_ptr<PtdModel_BladeGlobalPars> theGlobals_;
 
-		Standard_Integer theNbSections_;
+		//Standard_Integer theNbSections_;
 		Standard_Integer theNbSpans_;
 
 
@@ -38,8 +38,8 @@ namespace tnbLib
 		//- default constructor
 
 		PtdModel_BladeInfo()
-			: theNbSections_(0)
-			, theNbSpans_(0)
+			: /*theNbSections_(0)
+			, */theNbSpans_(0)
 		{}
 
 		//- constructors
@@ -57,10 +57,10 @@ namespace tnbLib
 			return theGlobals_;
 		}
 
-		auto NbSections() const
+		/*auto NbSections() const
 		{
 			return theNbSections_;
-		}
+		}*/
 
 		auto NbSpans() const
 		{
@@ -68,7 +68,7 @@ namespace tnbLib
 		}
 
 
-		inline void SetNbSections(const Standard_Integer);
+		//inline void SetNbSections(const Standard_Integer);
 		inline void SetNbSpans(const Standard_Integer);
 
 		inline void SetBladeForm(const std::shared_ptr<PtdModel_Forms>&);

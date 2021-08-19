@@ -56,7 +56,7 @@ namespace tnbLib
 
 		//- static functions and operators
 
-		static TnbPtdModel_EXPORT std::shared_ptr<PtdModel_Face>
+		static TnbPtdModel_EXPORT Handle(Geom_Surface)
 			CreateFace
 			(
 				std::vector<std::vector<Pnt3d>>&
