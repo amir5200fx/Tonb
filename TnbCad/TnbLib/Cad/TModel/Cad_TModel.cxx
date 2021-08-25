@@ -1,10 +1,10 @@
-#include <Cad3d_TModel.hxx>
+#include <Cad_TModel.hxx>
 
-tnbLib::Cad3d_TModel::Cad3d_TModel()
+tnbLib::Cad_TModel::Cad_TModel()
 {
 }
 
-tnbLib::Cad3d_TModel::Cad3d_TModel
+tnbLib::Cad_TModel::Cad_TModel
 (
 	const Standard_Integer theIndex
 )
@@ -12,7 +12,7 @@ tnbLib::Cad3d_TModel::Cad3d_TModel
 {
 }
 
-tnbLib::Cad3d_TModel::Cad3d_TModel
+tnbLib::Cad_TModel::Cad_TModel
 (
 	const Standard_Integer theIndex,
 	const word & theName
@@ -22,7 +22,7 @@ tnbLib::Cad3d_TModel::Cad3d_TModel
 }
 
 Standard_Integer 
-tnbLib::Cad3d_TModel::NbHoles() const
+tnbLib::Cad_TModel::NbHoles() const
 {
 	if (Holes())
 	{

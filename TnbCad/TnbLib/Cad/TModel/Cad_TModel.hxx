@@ -1,9 +1,9 @@
 #pragma once
-#ifndef _Cad3d_TModel_Header
-#define _Cad3d_TModel_Header
+#ifndef _Cad_TModel_Header
+#define _Cad_TModel_Header
 
 #include <TModel_Entity.hxx>
-#include <Cad3d_TModelManager.hxx>
+#include <Cad_TModelManager.hxx>
 #include <Entity3d_Box.hxx>
 #include <OFstream.hxx>
 
@@ -17,10 +17,11 @@ namespace tnbLib
 	// Forward Declarations
 	class TModel_Shell;
 	class Cad_Tools;
+	class Cad_SolidMaker;
 
-	class Cad3d_TModel
+	class Cad_TModel
 		: public TModel_Entity
-		, public Cad3d_TModelManager
+		, public Cad_TModelManager
 	{
 
 		typedef std::vector<std::shared_ptr<TModel_Shell>> shellList;
@@ -29,6 +30,7 @@ namespace tnbLib
 		typedef std::shared_ptr<shellList> inner;
 
 		friend class Cad_Tools;
+		friend class Cad_SolidMaker;
 
 		/*Private Data*/
 
@@ -44,14 +46,14 @@ namespace tnbLib
 
 	public:
 
-		TnbCad_EXPORT Cad3d_TModel();
+		TnbCad_EXPORT Cad_TModel();
 
-		TnbCad_EXPORT Cad3d_TModel
+		TnbCad_EXPORT Cad_TModel
 		(
 			const Standard_Integer theIndex
 		);
 
-		TnbCad_EXPORT Cad3d_TModel
+		TnbCad_EXPORT Cad_TModel
 		(
 			const Standard_Integer theIndex,
 			const word& theName
@@ -105,6 +107,6 @@ namespace tnbLib
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::Cad3d_TModel);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Cad_TModel);
 
-#endif // !_Cad3d_TModel_Header]
+#endif // !_Cad_TModel_Header]
