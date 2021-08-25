@@ -433,13 +433,6 @@ tnbLib::Pln_Tools::MakeWire
 	const Standard_Real theMaxTol
 )
 {
-	if (theCurves.empty())
-	{
-		FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
-			<< "the list of the curves is empty!" << endl
-			<< abort(FatalError);
-	}
-
 	auto info = std::make_shared<Geo_ApprxCurve_Info>();
 	Debug_Null_Pointer(info);
 
@@ -448,6 +441,33 @@ tnbLib::Pln_Tools::MakeWire
 	info->SetApprox(1.0E-2);
 	info->SetMinSize(1.0e-3);
 	info->SetInitNbSubdivision(2);
+
+	auto wire = MakeWire(theCurves, theSense, info, theMaxTol);
+	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::Pln_Wire> 
+tnbLib::Pln_Tools::MakeWire
+(
+	const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+	const std::vector<Standard_Boolean>& theSense, 
+	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo, 
+	const Standard_Real theMaxTol
+)
+{
+	if (theCurves.empty())
+	{
+		FatalErrorIn("std::vector<std::shared_ptr<tnbLib::Pln_Wire>> Pln_Tools::MakeWire(Args...)")
+			<< "the list of the curves is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT theInfo)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the approx. curve info is null" << endl
+			<< abort(FatalError);
+	}
 
 	if (theCurves.size() IS_EQUAL 1)
 	{
@@ -475,7 +495,7 @@ tnbLib::Pln_Tools::MakeWire
 		Debug_Null_Pointer(ring);
 
 		ring->SetIndex(1);
-		ring->Approx(info);
+		ring->Approx(theInfo);
 
 		auto wire = MakeWire(ring);
 
@@ -486,7 +506,7 @@ tnbLib::Pln_Tools::MakeWire
 	vertices.reserve(theCurves.size());
 
 	auto p0 = GetCoord(*theCurves[theCurves.size() - 1], theSense[theSense.size() - 1], 1);
-	
+
 	forThose(Index, 0, theCurves.size() - 1)
 	{
 		auto p1 = GetCoord(*theCurves[Index], theSense[Index], 0);
@@ -528,7 +548,7 @@ tnbLib::Pln_Tools::MakeWire
 		Debug_Null_Pointer(edge);
 
 		edge->SetIndex(++K);
-		edge->Approx(info);
+		edge->Approx(theInfo);
 
 		edges.push_back(std::move(edge));
 	}

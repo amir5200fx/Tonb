@@ -34,6 +34,7 @@ namespace tnbLib
 	class Pln_Curve;
 	class Pln_Vertex;
 	class Cad2d_Plane;
+	class Geo_ApprxCurve_Info;
 	class NumAlg_AdaptiveInteg_Info;
 
 	template<class T>
@@ -128,6 +129,15 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
 				const std::vector<Standard_Boolean>& theSense,
+				const Standard_Real theMaxTol
+			);
+
+		static std::shared_ptr<Pln_Wire>
+			MakeWire
+			(
+				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves,
+				const std::vector<Standard_Boolean>& theSense,
+				const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo,
 				const Standard_Real theMaxTol
 			);
 
