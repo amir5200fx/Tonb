@@ -35,7 +35,10 @@ namespace tnbLib
 	protected:
 
 		TModel_SurfaceGeometry()
-		{}
+		{
+			theGeometry_.Nullify();
+			theMesh_.Nullify();
+		}
 
 		TModel_SurfaceGeometry
 		(
@@ -43,6 +46,7 @@ namespace tnbLib
 		)
 			: theGeometry_(theGeometry)
 		{
+			theMesh_.Nullify();
 			//CheckGeometry(theGeometry, "TModel_SurfaceGeometry()");
 		}
 
@@ -58,7 +62,7 @@ namespace tnbLib
 			return theMesh_;
 		}
 
-		Handle(Poly_Triangulation) RetrieveTriangulation() const;
+		//Handle(Poly_Triangulation) RetrieveTriangulation() const;
 
 		void SetTriangulation(const Handle(Poly_Triangulation)& tri)
 		{

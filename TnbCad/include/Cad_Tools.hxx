@@ -26,7 +26,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class Cad3d_TModel;
+	class Cad_TModel;
 	class TModel_Surface;
 	class TModel_Edge;
 	class TModel_Curve;
@@ -132,14 +132,14 @@ namespace tnbLib
 				const TopoDS_Shape& theShape
 			);
 
-		static TnbCad_EXPORT std::shared_ptr<Cad3d_TModel>
+		static TnbCad_EXPORT std::shared_ptr<Cad_TModel>
 			MakeSolid
 			(
 				const TopoDS_Shape& theShape,
 				const Standard_Real theTolerance
 			);
 
-		static TnbCad_EXPORT std::shared_ptr<Cad3d_TModel>
+		static TnbCad_EXPORT std::shared_ptr<Cad_TModel>
 			MakeSolid
 			(
 				const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces,
@@ -197,6 +197,18 @@ namespace tnbLib
 			(
 				const std::vector<TopoDS_Edge>& theEdges,
 				const Handle(Geom_Surface) theSurface
+			);
+
+		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>> 
+			RetrieveEdges
+			(
+				const std::vector<std::shared_ptr<TModel_Surface>>&
+			);
+
+		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>> 
+			RetrieveFreeEdges
+			(
+				const std::shared_ptr<Cad_TModel>&
 			);
 
 		static TnbCad_EXPORT Standard_Boolean

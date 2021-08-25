@@ -43,6 +43,10 @@ namespace tnbLib
 
 	public:
 
+		typedef Pnt3d pType;
+
+		//- constructors
+
 		TModel_Vertex
 		(
 			const Standard_Integer theIndex
@@ -68,6 +72,9 @@ namespace tnbLib
 			: TModel_Entity(theIndex, theName)
 			, theCoord_(theCoord)
 		{}
+
+
+		//- public functions and operators
 
 		Standard_Integer NbRings() const;
 

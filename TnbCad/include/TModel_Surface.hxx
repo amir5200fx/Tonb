@@ -58,6 +58,9 @@ namespace tnbLib
 
 	public:
 
+
+		// constructors
+
 		TnbCad_EXPORT TModel_Surface
 		(
 			const Handle(Geom_Surface)& theGeometry, 
@@ -81,6 +84,9 @@ namespace tnbLib
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
+
+
+		//- public functions and operators
 
 		TnbCad_EXPORT Standard_Integer NbHoles() const;
 

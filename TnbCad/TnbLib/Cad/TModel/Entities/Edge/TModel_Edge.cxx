@@ -2,10 +2,10 @@
 
 tnbLib::TModel_Edge::TModel_Edge
 (
-	const std::shared_ptr<TModel_Vertex>& theVtx0, 
-	const std::shared_ptr<TModel_Vertex>& theVtx1, 
-	const std::shared_ptr<TModel_Curve>& theCurve, 
-	const std::shared_ptr<TModel_ParaCurve>& theParaCurve, 
+	const std::shared_ptr<TModel_Vertex>& theVtx0,
+	const std::shared_ptr<TModel_Vertex>& theVtx1,
+	const std::shared_ptr<TModel_Curve>& theCurve,
+	const std::shared_ptr<TModel_ParaCurve>& theParaCurve,
 	const Standard_Boolean theSense
 )
 	: TModel_EdgeGeometry(theCurve, theParaCurve, theSense)

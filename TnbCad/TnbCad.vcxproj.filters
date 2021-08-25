@@ -286,6 +286,15 @@
     <Filter Include="TnbLib\Cad\Entities\Shape">
       <UniqueIdentifier>{7551753c-a862-4f4b-9600-4b59270ab7ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\ConformBoundaries">
+      <UniqueIdentifier>{286981c2-4df5-486c-b289-a113c0ceb3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker">
+      <UniqueIdentifier>{e20f8531-08ed-49a4-afd7-450e0e521f52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid">
+      <UniqueIdentifier>{ec0aa1aa-9c0a-405e-8ad2-fa0f4d3dc0f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -383,21 +392,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Plane\TModel_Plane.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Cad3d_TModel.hxx">
-      <Filter>TnbLib\Cad\TModel</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_VertexManager.hxx">
-      <Filter>TnbLib\Cad\TModel\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_PairedManager.hxx">
-      <Filter>TnbLib\Cad\TModel\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_SurfaceManager.hxx">
-      <Filter>TnbLib\Cad\TModel\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManager.hxx">
-      <Filter>TnbLib\Cad\TModel\Manager</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\System\TModel_System.hxx">
       <Filter>TnbLib\Cad\TModel\System</Filter>
@@ -570,6 +564,30 @@
     <ClInclude Include="TnbLib\Cad\Entities\Shape\Cad_Shape.hxx">
       <Filter>TnbLib\Cad\Entities\Shape</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ConformBnds\Cad_ConformBnds.hxx">
+      <Filter>TnbLib\Cad\ConformBoundaries</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\Cad_SolidMaker.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\Cad_TModelManager.hxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\Cad_TModelManagersFwd.hxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Cad_TModel.hxx">
+      <Filter>TnbLib\Cad\TModel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_SegmentManager.hxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_FaceManager.hxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_CornerManager.hxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -640,15 +658,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Plane\TModel_Plane.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Cad3d_TModel.cxx">
-      <Filter>TnbLib\Cad\TModel</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Cad3d_TModelIO.cxx">
-      <Filter>TnbLib\Cad\TModel</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManager.cxx">
-      <Filter>TnbLib\Cad\TModel\Manager</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Info\TModel_FixWire_Info.cxx">
       <Filter>TnbLib\Cad\TModel\Info</Filter>
@@ -800,9 +809,6 @@
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Plane\TModel_PlaneIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Plane</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad3d_TModelManagerIO.cxx">
-      <Filter>TnbLib\Cad\TModel\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.cxx">
       <Filter>TnbLib\Cad\Entities\Surface</Filter>
     </ClCompile>
@@ -865,6 +871,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Entities\Shape\Cad_Shape.cxx">
       <Filter>TnbLib\Cad\Entities\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ConformBnds\Cad_ConformBnds.cxx">
+      <Filter>TnbLib\Cad\ConformBoundaries</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\Cad_SolidMaker.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad_TModelManager.cxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad_TModelManagerIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Cad_TModelIO.cxx">
+      <Filter>TnbLib\Cad\TModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Cad_TModel.cxx">
+      <Filter>TnbLib\Cad\TModel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,23 +1,28 @@
 #pragma once
-#ifndef _Cad3d_TModelManager_Header
-#define _Cad3d_TModelManager_Header
+#ifndef _Cad_TModelManager_Header
+#define _Cad_TModelManager_Header
 
-#include <TModel_VertexManager.hxx>
-#include <TModel_PairedManager.hxx>
-#include <TModel_SurfaceManager.hxx>
+#include <TModel_CornerManager.hxx>
+#include <TModel_SegmentManager.hxx>
+#include <TModel_FaceManager.hxx>
 #include <Cad_Module.hxx>
 
 namespace tnbLib
 {
 
-	class Cad3d_TModelManager
+	// Forward Declarations
+	class Cad_SolidMaker;
+
+	class Cad_TModelManager
 	{
+
+		friend class Cad_SolidMaker;
 
 		/*Private Data*/
 
-		std::shared_ptr<TModel_VertexManager> theVertices_;
-		std::shared_ptr<TModel_PairedManager> theEdges_;
-		std::shared_ptr<TModel_SurfaceManager> theSurfaces_;
+		std::shared_ptr<TModel_CornerManager> theVertices_;
+		std::shared_ptr<TModel_SegmentManager> theEdges_;
+		std::shared_ptr<TModel_FaceManager> theSurfaces_;
 
 
 		//- private functions and operators
@@ -27,20 +32,20 @@ namespace tnbLib
 
 	protected:
 
-		Cad3d_TModelManager()
+		Cad_TModelManager()
 		{}
 
-		auto& ChangeCorners()
+		auto& CornersRef()
 		{
 			return theVertices_;
 		}
 
-		auto& ChangeSegments()
+		auto& SegmentsRef()
 		{
 			return theEdges_;
 		}
 
-		auto& ChangeFaces()
+		auto& FacesRef()
 		{
 			return theSurfaces_;
 		}
@@ -94,4 +99,4 @@ namespace tnbLib
 	};
 }
 
-#endif // !_Cad3d_TModelManager_Header
+#endif // !_Cad_TModelManager_Header
