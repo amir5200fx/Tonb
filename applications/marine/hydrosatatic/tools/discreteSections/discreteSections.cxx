@@ -1,6 +1,7 @@
 #include <Marine_BodyModelType.hxx>
 #include <Marine_PlnCurves.hxx>
 #include <Marine_SectionsIO.hxx>
+#include <Marine_DisctSectionsIO.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Geo2d_ApprxCurve.hxx>
 #include <Geo_BoxTools.hxx>
@@ -163,8 +164,21 @@ namespace tnbLib
 		fileName fn(name);
 		std::ofstream myFile(fn);
 
+		auto myDisctSections = std::make_shared<marineLib::io::DisctSections>();
+		myDisctSections->LoadSections(mySections);
+		
+		auto myInfo = std::make_shared<marineLib::io::DisctSections::AlgInfo>();
+		myInfo->Angle = myAngle;
+		myInfo->Deflection = myDeflection;
+		myInfo->initNbSubdivision = myInitNbSubdivision;
+		myInfo->maxNbSubdivision = myMaxNbSubdivision;
+		myInfo->minSize = myMinSize;
+		myInfo->nbSmaples = myNbSamples;
+
+		myDisctSections->SetInfo(std::move(myInfo));
+
 		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << mySections;
+		ar << myDisctSections;
 
 		myFile.close();
 

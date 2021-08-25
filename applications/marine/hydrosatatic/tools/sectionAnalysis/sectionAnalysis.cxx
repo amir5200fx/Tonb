@@ -1,6 +1,7 @@
 #include <Marine_BodyModelType.hxx>
 #include <Marine_SectTools.hxx>
 #include <Marine_SectionsIO.hxx>
+#include <Marine_DisctSectionsIO.hxx>
 #include <Marine_AnalysisSectionsIO.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Cad_Shape.hxx>
@@ -25,7 +26,7 @@ namespace tnbLib
 	static bool exeTag = false;
 	static unsigned short verbose(0);
 
-	static std::shared_ptr<marineLib::io::Sections> mySections;
+	static std::shared_ptr<marineLib::io::DisctSections> mySections;
 
 	static const double DEFAULT_MIN_TOL = 1.0E-4;
 	static const double DEFAULT_MAX_TOL = 1.0E-3;
@@ -35,7 +36,7 @@ namespace tnbLib
 
 	typedef std::shared_ptr<Cad2d_RemoveNonManifold::Segment> segment_t;
 	typedef std::shared_ptr<std::vector<segment_t>> segmentList_t;
-	static std::vector<segmentList_t> mySegments;
+	static std::vector<std::pair<segmentList_t, double>> mySegments;
 
 	void setVerbose(unsigned int i)
 	{
@@ -121,8 +122,9 @@ namespace tnbLib
 		for (const auto& x : mySegments)
 		{
 			auto section = std::make_shared<marineLib::io::AnalysisSections::Section>();
-			section->SegmentsRef() = *x;
-
+			section->SegmentsRef() = *x.first;
+			section->SetX(x.second);
+			
 			sections.push_back(std::move(section));
 		}
 
@@ -182,7 +184,13 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		const auto& sections = mySections->GetSections();
+		if (NOT mySections->GetSections())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no sections data have been provided!" << endl
+				<< abort(FatalError);
+		}
+		const auto& sections = mySections->GetSections()->GetSections();
 
 		mySegments.reserve(sections.size());
 		size_t k = 0;
@@ -211,7 +219,8 @@ namespace tnbLib
 				}
 			}
 
-			mySegments.push_back(std::move(cmpEdges_ptr));
+			auto t = std::make_pair(std::move(cmpEdges_ptr), x->X());
+			mySegments.push_back(std::move(t));
 		}
 		exeTag = true;
 	}

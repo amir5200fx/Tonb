@@ -1,5 +1,7 @@
 #include <Marine_AnalysisSectionsIO.hxx>
+#include <Marine_AnalysisSectionsReportIO.hxx>
 #include <Marine_SectionsIO.hxx>
+#include <Marine_DisctSectionsIO.hxx>
 #include <Marine_ShapeIO.hxx>
 #include <Marine_SectTools.hxx>
 #include <Marine_CmpSection.hxx>
@@ -23,7 +25,7 @@ namespace tnbLib
 	static unsigned short verbose(0);
 
 	static std::string sectionType = "displacer";
-	static std::shared_ptr<marineLib::io::AnalysisSections> myAnalyzer;
+	static std::shared_ptr<marineLib::io::AnalysisSectionsReport> myReport;
 
 	static std::vector<std::shared_ptr<Marine_CmpSection>> mySections;
 
@@ -90,10 +92,10 @@ namespace tnbLib
 			timer.SetInfo(Global_TimerInfo_ms);
 
 			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> myAnalyzer;
+			ar >> myReport;
 		}
 
-		if (NOT myAnalyzer)
+		if (NOT myReport)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< " the loaded model is null" << endl
@@ -235,13 +237,29 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		const auto& model = myAnalyzer->Model();
+		if (NOT myReport->Valid())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the model has one invalid section, at least!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& myAnalyzer = myReport->Analysis();
+		if (NOT myAnalyzer)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no analysis is found!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& model = myAnalyzer->Model()->GetSections();
 		if (NOT model)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no model has been found!" << endl
 				<< abort(FatalError);
 		}
+
 		const auto& shape = model->GetShape();
 		if (NOT shape)
 		{

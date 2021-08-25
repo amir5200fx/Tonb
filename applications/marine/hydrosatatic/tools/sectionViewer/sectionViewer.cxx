@@ -8,6 +8,7 @@
 #include <Pln_Tools.hxx>
 #include <Pln_Edge.hxx>
 #include <Cad_Tools.hxx>
+#include <Marine_DisctSectionsIO.hxx>
 #include <Marine_SectionsIO.hxx>
 #include <Marine_ShapeIO.hxx>
 #include <Marine_PlnCurves.hxx>
@@ -25,7 +26,7 @@ namespace tnbLib
 
 	static bool loadTag = false;
 
-	static std::shared_ptr<marineLib::io::Sections> mySections;
+	static std::shared_ptr<marineLib::io::DisctSections> mySections;
 
 	static int mySection = -1;
 	static std::string sModel = "union";
@@ -38,7 +39,7 @@ namespace tnbLib
 				<< "no model has been loaded yet!" << endl
 				<< abort(FatalError);
 		}
-		const auto& sections = mySections->GetSections();
+		const auto& sections = mySections->GetSections()->GetSections();
 		mySection = (i < 0 ? 0 : i);
 		mySection = (i > sections.size() ? (int)sections.size() : i);
 		if (verbose)
@@ -58,7 +59,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		Info << endl
-			<< " - nb. of sections: " << mySections->GetSections().size() << endl;
+			<< " - nb. of sections: " << mySections->GetSections()->GetSections().size() << endl;
 	}
 
 	void setType(const std::string& name)
@@ -194,7 +195,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		const auto& sections = mySections->GetSections();
+		const auto& sections = mySections->GetSections()->GetSections();
 
 
 		if (sModel IS_EQUAL "union")
@@ -259,7 +260,7 @@ namespace tnbLib
 
 			auto tri = Geo_Tools::Triangulation(*chain);
 
-			const auto& b = *mySections->GetShape()->PreciseBndBox();
+			const auto& b = *mySections->GetSections()->GetShape()->PreciseBndBox();
 			auto corners = getCorners(b);
 
 			auto& pts = tri->Points();
