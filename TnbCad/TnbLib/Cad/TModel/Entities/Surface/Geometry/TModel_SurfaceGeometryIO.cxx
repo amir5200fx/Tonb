@@ -9,27 +9,49 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::TModel_SurfaceGeometry)
 {
-	ar & theGeometry_;
-	ar & theMesh_;
-	//TopoDS_Shape sh = theFace_;
-	//ar & sh;
+	auto hasGeometry = false;
+	if (theGeometry_)
+	{
+		hasGeometry = true;
+		ar & hasGeometry;
+		ar & theGeometry_;
+	}
+	else
+	{
+		ar & hasGeometry;
+	}
+	
+	auto hasMesh = false;
+	if (theMesh_)
+	{
+		hasMesh = true;
+		ar & hasMesh;
+		ar & theMesh_;
+	}
+	else
+	{
+		ar & hasMesh;
+	}
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::TModel_SurfaceGeometry)
 {
-	ar & theGeometry_;
-	ar & theMesh_;
-	/*TopoDS_Shape sh;
-	ar & sh;
+	bool hasGeometry;
+	bool hasMesh;
 
-	if (NOT sh.IsNull())
+	theGeometry_.Nullify();
+	theMesh_.Nullify();
+
+	ar & hasGeometry;
+	if (hasGeometry)
 	{
-		const TopoDS_Face& face = TopoDS::Face(sh);
-		theFace_ = face;
+		ar & theGeometry_;
 	}
 
-	if (NOT theFace_.IsNull())
+	ar & hasMesh;
+
+	if (hasMesh)
 	{
-		theGeometry_ = BRep_Tool::Surface(theFace_);
-	}*/
+		ar & theMesh_;
+	}	
 }
