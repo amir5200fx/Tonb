@@ -13,7 +13,7 @@
 #include <TModel_Ring.hxx>
 #include <TModel_Paired.hxx>
 #include <TModel_Wire.hxx>
-#include <Cad3d_TModel.hxx>
+#include <Cad_TModel.hxx>
 #include <Cad_BlockEntity.hxx>
 #include <Cad_EntityManager.hxx>
 #include <Entity3d_Box.hxx>
@@ -383,137 +383,137 @@ tnbLib::Cad_Tools::GetEdge
 	return std::move(edge);
 }
 
-std::shared_ptr<tnbLib::TModel_Surface> 
-tnbLib::Cad_Tools::GetSurface(const TopoDS_Face & theFace)
-{
-	NotImplemented;
-	return nullptr;
-}
-
 //std::shared_ptr<tnbLib::TModel_Surface> 
-//tnbLib::Cad_Tools::GetSurface
-//(
-//	const TopoDS_Face & theFace
-//)
+//tnbLib::Cad_Tools::GetSurface(const TopoDS_Face & theFace)
 //{
-//	//const auto forwardFace = theFace;
-//	const auto forwardFace = TopoDS::Face(theFace.Oriented(TopAbs_FORWARD));
-//
-//	auto cmpEdge = std::make_shared<TModel_CmpEdge>();
-//	Debug_Null_Pointer(cmpEdge);
-//
-//	auto& outter_edges = cmpEdge->ChangeEdges();
-//
-//	const auto Tol = sysLib::tmodel_fix_wire_info->Tolerance();
-//	Standard_Integer K = 0;
-//	Standard_Integer wireIndex = 0;
-//
-//	const auto outer_wire = BRepTools::OuterWire(forwardFace);
-//
-//	if (outer_wire.IsNull())
-//	{
-//		FatalErrorIn(FunctionSIG)
-//			<< "Null outer wire" << endl
-//			<< abort(FatalError);
-//	}
-//
-//	ShapeFix_Wire SFWF(outer_wire, forwardFace, Tol);
-//
-//	SFWF.SetPrecision(sysLib::tmodel_fix_wire_info->Precision());
-//	SFWF.SetMaxTolerance(sysLib::tmodel_fix_wire_info->MaxTolerance());
-//	SFWF.SetMinTolerance(sysLib::tmodel_fix_wire_info->MinTolerance());
-//
-//	SFWF.FixReorder();
-//	SFWF.ClosedWireMode() = Standard_True;
-//	SFWF.FixClosed();
-//	SFWF.FixConnected();
-//
-//	SFWF.Perform();
-//
-//	auto fixed_outer_wire = SFWF.Wire();
-//
-//	for (
-//		BRepTools_WireExplorer anEdgeExp(fixed_outer_wire);
-//		anEdgeExp.More();
-//		anEdgeExp.Next()
-//		)
-//	{
-//		K++;
-//
-//		auto edge = TopoDS::Edge(anEdgeExp.Current());
-//		auto new_edge = GetEdge(K, edge, forwardFace);
-//
-//		outter_edges.push_back(new_edge);
-//	}
-//
-//	auto outerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
-//	std::shared_ptr<std::vector<std::shared_ptr<TModel_Wire>>> Qwire;
-//	for (
-//		TopExp_Explorer aWireExp(forwardFace, TopAbs_WIRE);
-//		aWireExp.More();
-//		aWireExp.Next()
-//		)
-//	{
-//		auto wire = TopoDS::Wire(aWireExp.Current());
-//
-//		if (wire.IsNull()) continue;
-//		if (wire IS_EQUAL outer_wire) continue;
-//		// has inner wire
-//
-//		auto cmpEdge = std::make_shared<TModel_CmpEdge>();
-//		Debug_Null_Pointer(cmpEdge);
-//
-//		auto& Inner_edges = cmpEdge->ChangeEdges();
-//
-//		ShapeFix_Wire SFWF(wire, forwardFace, Tol);
-//
-//		SFWF.SetPrecision(sysLib::tmodel_fix_wire_info->Precision());
-//		SFWF.SetMaxTolerance(sysLib::tmodel_fix_wire_info->MaxTolerance());
-//		SFWF.SetMinTolerance(sysLib::tmodel_fix_wire_info->MinTolerance());
-//
-//		SFWF.FixReorder();
-//		SFWF.ClosedWireMode() = Standard_True;
-//		SFWF.FixClosed();
-//		SFWF.FixConnected();
-//
-//		SFWF.Perform();
-//		wire = SFWF.WireAPIMake();
-//
-//		for (
-//			BRepTools_WireExplorer anEdgeExp(wire);
-//			anEdgeExp.More();
-//			anEdgeExp.Next()
-//			)
-//		{
-//			auto edge = TopoDS::Edge(anEdgeExp.Current());
-//
-//			K++;
-//
-//			Inner_edges.push_back(GetEdge(K, edge, forwardFace));
-//		}
-//
-//		if (Inner_edges.empty())
-//		{
-//			FatalErrorIn("Cad3d_SolidTools::face_ptr Cad_Tools::GetSurface(const TopoDS_Face & theFace)")
-//				<< "Empty wire" << endl
-//				<< abort(FatalError);
-//		}
-//
-//		auto innerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
-//
-//		if (NOT Qwire) Qwire = std::make_shared<std::vector<std::shared_ptr<TModel_Wire>>>();
-//		Qwire->push_back(innerWire);
-//	}
-//
-//	TopLoc_Location Location;
-//	auto geometry = BRep_Tool::Surface(forwardFace, Location);
-//
-//	auto face =
-//		std::make_shared<TModel_Surface>(geometry, outerWire, Qwire);
-//	face->SetFace(theFace);
-//
-//	return std::move(face);
+//	NotImplemented;
+//	return nullptr;
 //}
+
+std::shared_ptr<tnbLib::TModel_Surface> 
+tnbLib::Cad_Tools::GetSurface
+(
+	const TopoDS_Face & theFace
+)
+{
+	//const auto forwardFace = theFace;
+	const auto forwardFace = TopoDS::Face(theFace.Oriented(TopAbs_FORWARD));
+
+	auto cmpEdge = std::make_shared<TModel_CmpEdge>();
+	Debug_Null_Pointer(cmpEdge);
+
+	auto& outter_edges = cmpEdge->ChangeEdges();
+
+	const auto Tol = sysLib::tmodel_fix_wire_info->Tolerance();
+	Standard_Integer K = 0;
+	Standard_Integer wireIndex = 0;
+
+	const auto outer_wire = BRepTools::OuterWire(forwardFace);
+
+	if (outer_wire.IsNull())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Null outer wire" << endl
+			<< abort(FatalError);
+	}
+
+	ShapeFix_Wire SFWF(outer_wire, forwardFace, Tol);
+
+	SFWF.SetPrecision(sysLib::tmodel_fix_wire_info->Precision());
+	SFWF.SetMaxTolerance(sysLib::tmodel_fix_wire_info->MaxTolerance());
+	SFWF.SetMinTolerance(sysLib::tmodel_fix_wire_info->MinTolerance());
+
+	SFWF.FixReorder();
+	SFWF.ClosedWireMode() = Standard_True;
+	SFWF.FixClosed();
+	SFWF.FixConnected();
+
+	SFWF.Perform();
+
+	auto fixed_outer_wire = SFWF.Wire();
+
+	for (
+		BRepTools_WireExplorer anEdgeExp(fixed_outer_wire);
+		anEdgeExp.More();
+		anEdgeExp.Next()
+		)
+	{
+		K++;
+
+		auto edge = TopoDS::Edge(anEdgeExp.Current());
+		auto new_edge = GetEdge(K, edge, forwardFace);
+
+		outter_edges.push_back(new_edge);
+	}
+
+	auto outerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
+	std::shared_ptr<std::vector<std::shared_ptr<TModel_Wire>>> Qwire;
+	for (
+		TopExp_Explorer aWireExp(forwardFace, TopAbs_WIRE);
+		aWireExp.More();
+		aWireExp.Next()
+		)
+	{
+		auto wire = TopoDS::Wire(aWireExp.Current());
+
+		if (wire.IsNull()) continue;
+		if (wire IS_EQUAL outer_wire) continue;
+		// has inner wire
+
+		auto cmpEdge = std::make_shared<TModel_CmpEdge>();
+		Debug_Null_Pointer(cmpEdge);
+
+		auto& Inner_edges = cmpEdge->ChangeEdges();
+
+		ShapeFix_Wire SFWF(wire, forwardFace, Tol);
+
+		SFWF.SetPrecision(sysLib::tmodel_fix_wire_info->Precision());
+		SFWF.SetMaxTolerance(sysLib::tmodel_fix_wire_info->MaxTolerance());
+		SFWF.SetMinTolerance(sysLib::tmodel_fix_wire_info->MinTolerance());
+
+		SFWF.FixReorder();
+		SFWF.ClosedWireMode() = Standard_True;
+		SFWF.FixClosed();
+		SFWF.FixConnected();
+
+		SFWF.Perform();
+		wire = SFWF.WireAPIMake();
+
+		for (
+			BRepTools_WireExplorer anEdgeExp(wire);
+			anEdgeExp.More();
+			anEdgeExp.Next()
+			)
+		{
+			auto edge = TopoDS::Edge(anEdgeExp.Current());
+
+			K++;
+
+			Inner_edges.push_back(GetEdge(K, edge, forwardFace));
+		}
+
+		if (Inner_edges.empty())
+		{
+			FatalErrorIn("Cad3d_SolidTools::face_ptr Cad_Tools::GetSurface(const TopoDS_Face & theFace)")
+				<< "Empty wire" << endl
+				<< abort(FatalError);
+		}
+
+		auto innerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
+
+		if (NOT Qwire) Qwire = std::make_shared<std::vector<std::shared_ptr<TModel_Wire>>>();
+		Qwire->push_back(innerWire);
+	}
+
+	TopLoc_Location Location;
+	auto geometry = BRep_Tool::Surface(forwardFace, Location);
+
+	auto face =
+		std::make_shared<TModel_Surface>(geometry, outerWire, Qwire);
+	//face->SetFace(theFace);
+
+	return std::move(face);
+}
 
 std::vector<std::shared_ptr<tnbLib::TModel_Surface>> 
 tnbLib::Cad_Tools::GetSurfaces
@@ -546,7 +546,7 @@ tnbLib::Cad_Tools::GetSurfaces
 	return std::move(list);
 }
 
-std::shared_ptr<tnbLib::Cad3d_TModel> 
+std::shared_ptr<tnbLib::Cad_TModel> 
 tnbLib::Cad_Tools::MakeSolid
 (
 	const TopoDS_Shape & theShape,
@@ -811,7 +811,7 @@ namespace tnbLib
 		static void MakePointsOnSolid
 		(
 			const Entity3d_Chain& Chain,
-			std::shared_ptr<TModel_VertexManager>& thePointsOnSolid,
+			std::shared_ptr<TModel_CornerManager>& thePointsOnSolid,
 			std::vector<std::shared_ptr<TModel_Vertex>>& thePts
 		)
 		{
@@ -827,13 +827,13 @@ namespace tnbLib
 			}
 
 			auto block = std::make_shared<Cad_BlockEntity<TModel_Vertex>>("Default Block Point", thePts);
-			thePointsOnSolid = std::make_shared<TModel_VertexManager>("Default Block Point", block);
+			thePointsOnSolid = std::make_shared<TModel_CornerManager>("Default Block Point", block);
 		}
 
 		static void MakePairedEdges
 		(
 			const std::vector<std::shared_ptr<TModel_Edge>>& theEdges,
-			std::shared_ptr<TModel_PairedManager>& thePairedEdges
+			std::shared_ptr<TModel_SegmentManager>& thePairedEdges
 		)
 		{
 			Adt_AvlTree<std::shared_ptr<TModel_Edge>> tree;
@@ -871,7 +871,7 @@ namespace tnbLib
 			}
 
 			auto block = std::make_shared<Cad_BlockEntity<TModel_Paired>>("Default Block Edge", QPaired);
-			thePairedEdges = std::make_shared<TModel_PairedManager>("Default Block Edge", block);
+			thePairedEdges = std::make_shared<TModel_SegmentManager>("Default Block Edge", block);
 		}
 
 		static void MarchingOnShell
@@ -917,7 +917,7 @@ namespace tnbLib
 		static void MakeFaces
 		(
 			const std::vector<std::shared_ptr<TModel_Surface>>& theList,
-			std::shared_ptr<TModel_SurfaceManager>& theFaces
+			std::shared_ptr<TModel_FaceManager>& theFaces
 		)
 		{
 			std::vector<std::shared_ptr<TModel_Surface>> Faces(theList.size());
@@ -925,11 +925,11 @@ namespace tnbLib
 				Faces[Index] = theList[Index];
 
 			auto block = std::make_shared<Cad_BlockEntity<TModel_Surface>>("Default Block Surface", Faces);
-			theFaces = std::make_shared<TModel_SurfaceManager>("Default Block Surface", block);
+			theFaces = std::make_shared<TModel_FaceManager>("Default Block Surface", block);
 		}
 
 
-		static void LinkEdges(const std::shared_ptr<TModel_PairedManager>& theEdges)
+		static void LinkEdges(const std::shared_ptr<TModel_SegmentManager>& theEdges)
 		{
 			Debug_Null_Pointer(theEdges);
 
@@ -960,14 +960,14 @@ namespace tnbLib
 	}
 }
 
-std::shared_ptr<tnbLib::Cad3d_TModel> 
+std::shared_ptr<tnbLib::Cad_TModel> 
 tnbLib::Cad_Tools::MakeSolid
 (
 	const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces,
 	const Standard_Real theTolerance
 )
 {
-	auto solid = std::make_shared<Cad3d_TModel>();
+	auto solid = std::make_shared<Cad_TModel>();
 
 	auto box = BoundingBox(theSurfaces);
 
@@ -993,7 +993,7 @@ tnbLib::Cad_Tools::MakeSolid
 	const auto& merged = *merge.Merged();
 
 	std::vector<std::shared_ptr<TModel_Vertex>> vertices;
-	tModel::MakePointsOnSolid(merged, solid->ChangeCorners(), vertices);
+	tModel::MakePointsOnSolid(merged, solid->CornersRef(), vertices);
 
 	Debug_Null_Pointer(solid->Corners());
 
@@ -1009,11 +1009,11 @@ tnbLib::Cad_Tools::MakeSolid
 
 	tModel::Assembly(merged, vertices, EdgesOnSolid);
 
-	tModel::MakePairedEdges(EdgesOnSolid, solid->ChangeSegments());
+	tModel::MakePairedEdges(EdgesOnSolid, solid->SegmentsRef());
 
 	Debug_Null_Pointer(solid->Segments());
 
-	tModel::MakeFaces(theSurfaces, solid->ChangeFaces());
+	tModel::MakeFaces(theSurfaces, solid->FacesRef());
 
 	Debug_Null_Pointer(solid->Faces());
 
@@ -1148,6 +1148,41 @@ tnbLib::Cad_Tools::RetrieveParaCurves
 		curves.push_back(std::move(bounded));
 	}
 	return std::move(curves);
+}
+
+std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
+tnbLib::Cad_Tools::RetrieveEdges(const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces)
+{
+	std::vector<std::shared_ptr<TModel_Edge>> edges;
+	for (const auto& x : theSurfaces)
+	{
+		Debug_Null_Pointer(x);
+		auto surfEdges = x->RetrieveEdges();
+		for (auto& e : surfEdges)
+		{
+			edges.push_back(std::move(e));
+		}
+	}
+	return std::move(edges);
+}
+
+std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
+tnbLib::Cad_Tools::RetrieveFreeEdges(const std::shared_ptr<Cad_TModel>& theSolid)
+{
+	if (NOT theSolid)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the solid is null" << endl
+			<< abort(FatalError);
+	}
+
+	std::vector<std::shared_ptr<TModel_Edge>> edges;
+	for (const auto& x : theSolid->RetrieveSegments())
+	{
+		Debug_Null_Pointer(x);
+		if (NOT x->IsPaired()) edges.push_back(x->Edge0());
+	}
+	return std::move(edges);
 }
 
 std::vector<Handle(Poly_Triangulation)> 
