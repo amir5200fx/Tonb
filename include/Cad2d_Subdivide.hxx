@@ -17,6 +17,7 @@ namespace tnbLib
 	class Cad2d_Plane;
 	class Cad2d_PlanePlaneIntersection;
 	class Cad2d_IntsctEntity_Pair;
+	class Geo_ApprxCurve_Info;
 
 	class Cad2d_Subdivide
 		: public Global_Done
@@ -30,8 +31,6 @@ namespace tnbLib
 		std::shared_ptr<Cad2d_Plane> thePlane0_;
 		std::shared_ptr<Cad2d_Plane> thePlane1_;
 
-
-
 		auto& ChangePlane0()
 		{
 			return thePlane0_;
@@ -44,7 +43,20 @@ namespace tnbLib
 
 	public:
 
-		TnbCad2d_EXPORT Cad2d_Subdivide();
+
+		static TnbCad2d_EXPORT std::shared_ptr<Geo_ApprxCurve_Info> myApprxCurveInfo;
+		static TnbCad2d_EXPORT Standard_Boolean overrideMyApprxCurveInfo;
+
+		//- default constructor
+
+		Cad2d_Subdivide()
+		{}
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		const auto& IntersectionAlgorithm() const
 		{
@@ -71,6 +83,15 @@ namespace tnbLib
 			theAlgorithm_ = theAlgorithm;
 		}
 
+		void SetOverrideApprxInfo(const Standard_Boolean approxInfo)
+		{
+			overrideMyApprxCurveInfo = approxInfo;
+		}
+
+		void SetOverrideApprxInfo(const std::shared_ptr<Geo_ApprxCurve_Info>& approxInfo)
+		{
+			myApprxCurveInfo = approxInfo;
+		}
 
 		static TnbCad2d_EXPORT std::tuple<std::shared_ptr<Pln_CmpEdge>, std::shared_ptr<Pln_CmpEdge>>
 			RetrieveSubEdges

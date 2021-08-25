@@ -55,9 +55,15 @@ namespace tnbLib
 
 		typedef Pnt2d ptType;
 
+
+		//- default constructor
+
 		Pln_Curve()
 		{}
 
+
+		//- constructors
+
 		TnbCad2d_EXPORT Pln_Curve
 		(
 			const Standard_Integer theIndex,
@@ -93,6 +99,9 @@ namespace tnbLib
 			const word& theName,
 			Handle(Geom2d_Curve) && theGeom
 		);
+
+
+		//- public functions and operators
 
 		const auto& Geometry() const
 		{
@@ -105,16 +114,15 @@ namespace tnbLib
 				const Standard_Real tol = Precision::Confusion()
 			) const;
 
-		TnbCad2d_EXPORT Standard_Real FirstParameter() const;
+		TnbCad2d_EXPORT Standard_Boolean IsLinear() const;
 
+		TnbCad2d_EXPORT Standard_Real FirstParameter() const;
 		TnbCad2d_EXPORT Standard_Real LastParameter() const;
 
 		TnbCad2d_EXPORT Pnt2d Value(const Standard_Real x) const;
-
 		TnbCad2d_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
 
 		inline Pnt2d FirstCoord() const;
-
 		inline Pnt2d LastCoord() const;
 
 		TnbCad2d_EXPORT Entity2d_Box BoundingBox(const Standard_Real Tol) const;
