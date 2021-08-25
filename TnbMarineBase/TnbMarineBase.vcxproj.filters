@@ -586,6 +586,48 @@
     <Filter Include="TnbLib\MarineBase\IO">
       <UniqueIdentifier>{936b8f27-070f-43b5-bf5e-a2005932d9af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections">
+      <UniqueIdentifier>{92f7401e-5fe4-4dea-88fe-e82140aeb7e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\Segment">
+      <UniqueIdentifier>{7b5c531b-1e6f-41c2-9df0-f68120cebca2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\Segment\Hover">
+      <UniqueIdentifier>{04696778-085f-447c-9064-69f7669d1c5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\Segment\Cross">
+      <UniqueIdentifier>{900f17cc-c561-474c-bb2e-007bca89e1c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\Section">
+      <UniqueIdentifier>{2c04ff7e-a8b2-459c-8b5f-016dd0e6e6d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\Section\OneEdgeMiss">
+      <UniqueIdentifier>{5d6c0b4a-d123-412f-924f-57f17c3c1a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\Section\TwoEdgeMiss">
+      <UniqueIdentifier>{c1e9c047-0d76-42ca-9cd8-f622e31be78c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\RepairSection">
+      <UniqueIdentifier>{86ba960e-690b-4b9f-aea1-6fc327b81be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\AnalyzSection">
+      <UniqueIdentifier>{d4e7acf7-7ccf-4fc7-b553-cfdb31583996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\AnalyzBody">
+      <UniqueIdentifier>{d549d510-0b83-47b2-af0a-3df98c595542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\FixedSection">
+      <UniqueIdentifier>{7866a040-6a19-4375-ab94-5e9207790f64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\FixedBody">
+      <UniqueIdentifier>{8541b636-7b9a-489e-acdf-c162a5034db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\Section\Ring">
+      <UniqueIdentifier>{57036a5d-491f-49b4-a9fc-18f23949f3e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\RepairSections\CmpSection">
+      <UniqueIdentifier>{4d2de3c1-f8f5-4ee3-9c90-ea13bd81038b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.hxx">
@@ -1248,6 +1290,63 @@
     <ClInclude Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsIO.hxx">
       <Filter>TnbLib\MarineBase\IO</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Segment\MarineRepairSect_Segment.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Segment\Cross\MarineRepairSect_CrossSegment.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Segment\Cross</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Segment\Hover\MarineRepairSect_HoverSegment.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Segment\Hover</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Section\MarineRepairSect_Section.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Section\OneEdgeMiss\MarineRepairSect_OneEdgeMissSection.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\OneEdgeMiss</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Section\TwoEdgeMiss\MarineRepairSect_TwoEdgeMissSection.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\TwoEdgeMiss</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\RepairSection\Marine_RepairSection.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\RepairSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\AnalyzSection\MarineRepairSect_AnalyzSection.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\AnalyzSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\AnalyzBody\MarineRepairSect_AnalyzBody.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\AnalyzBody</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Marine_RepairSections.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\FixedSection\MarineRepairSect_FixedSection.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\FixedSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\FixedBody\MarineRepairSect_FixedBody.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\FixedBody</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Section\Ring\MarineRepairSect_RingSection.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\CmpSection\MarineRepairSect_CmpSection.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\CmpSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Section\MarineRepairSect_Sections.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\RepairSections\Segment\MarineRepairSect_Segments.hxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_DisctSectionsIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_RepairSectionsIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsReportIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1701,6 +1800,60 @@
       <Filter>TnbLib\MarineBase\IO</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\RepairSection\Marine_RepairSection.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\RepairSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Section\OneEdgeMiss\MarineRepairSect_OneEdgeMissSection.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\OneEdgeMiss</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Section\OneEdgeMiss\MarineRepairSect_OneEdgeMissSectionIO.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\OneEdgeMiss</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Section\TwoEdgeMiss\MarineRepairSect_TwoEdgeMissSection.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\TwoEdgeMiss</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Section\TwoEdgeMiss\MarineRepairSect_TwoEdgeMissSectionIO.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\TwoEdgeMiss</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Segment\MarineRepairSect_SegmentIO.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Segment\Hover\MarineRepairSect_HoverSegmentIO.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Segment\Hover</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Segment\Cross\MarineRepairSect_CrossSegmentIO.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Segment\Cross</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\AnalyzSection\MarineRepairSect_AnalyzSection.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\AnalyzSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\AnalyzBody\MarineRepairSect_AnalyzBody.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\AnalyzBody</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Marine_RepairSections.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Section\Ring\MarineRepairSect_RingSectionIO.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\Section\Ring\MarineRepairSect_RingSection.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\Section\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\CmpSection\MarineRepairSect_CmpSection.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\CmpSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\RepairSections\CmpSection\MarineRepairSect_CmpSectionIO.cxx">
+      <Filter>TnbLib\MarineBase\RepairSections\CmpSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_DisctSectionsIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_RepairSectionsIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsReportIO.cxx">
       <Filter>TnbLib\MarineBase\IO</Filter>
     </ClCompile>
   </ItemGroup>

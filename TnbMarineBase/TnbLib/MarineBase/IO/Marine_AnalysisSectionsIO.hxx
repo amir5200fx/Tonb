@@ -18,7 +18,7 @@ namespace tnbLib
 		{
 
 			// Forward Declarations
-			class Sections;
+			class DisctSections;
 
 			class AnalysisSections
 			{
@@ -32,6 +32,7 @@ namespace tnbLib
 
 					std::vector<std::shared_ptr<Cad2d_RemoveNonManifold::Segment>> theSegments_;
 
+					Standard_Real theX_;
 
 					//- private functions and operators
 
@@ -42,6 +43,7 @@ namespace tnbLib
 					//- default constructor
 
 					Section()
+						: theX_(0)
 					{}
 
 					//- public functions and operators
@@ -56,15 +58,27 @@ namespace tnbLib
 						return theSegments_;
 					}
 
+					auto X() const
+					{
+						return theX_;
+					}
+
+					void SetX(const Standard_Real x)
+					{
+						theX_ = x;
+					}
+
 				};
 
 			private:
 
 				/*Private Data*/
 
-				std::shared_ptr<Sections> theModel_;
+				std::shared_ptr<DisctSections> theModel_;
 				std::vector<std::shared_ptr<Section>> theSections_;
 				
+				Standard_Real theMinTol_;
+				Standard_Real theMaxTol_;
 
 				//- private functions and operators
 
@@ -90,14 +104,34 @@ namespace tnbLib
 					return theSections_;
 				}
 
+				auto MinTolerance() const
+				{
+					return theMinTol_;
+				}
+
+				auto MaxTolerance() const
+				{
+					return theMaxTol_;
+				}
+
 				auto& SectionsRef()
 				{
 					return theSections_;
 				}
 
-				void LoadModel(const std::shared_ptr<Sections>& theModel)
+				void LoadModel(const std::shared_ptr<DisctSections>& theModel)
 				{
 					theModel_ = theModel;
+				}
+
+				void SetMinTolerance(const Standard_Real x)
+				{
+					theMinTol_ = x;
+				}
+
+				void SetMaxTolerance(const Standard_Real x)
+				{
+					theMaxTol_ = x;
 				}
 			};
 		}
