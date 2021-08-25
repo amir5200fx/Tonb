@@ -156,7 +156,7 @@ namespace tnbLib
 		if (NOT exeTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "the algorithm has not been performed" << endl
+				<< "the aaplication has not been performed" << endl
 				<< abort(FatalError);
 		}
 		fileName fn(name);
