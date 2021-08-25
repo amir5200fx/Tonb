@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _TModel_PairedManager_Header
-#define _TModel_PairedManager_Header
+#ifndef _TModel_SegmentManager_Header
+#define _TModel_SegmentManager_Header
 
 #include <Cad_EntityManager.hxx>
 
@@ -11,7 +11,7 @@ namespace tnbLib
 	class TModel_Paired;
 
 	typedef Cad_EntityManager<TModel_Paired>
-		TModel_PairedManager;
+		TModel_SegmentManager;
 }
 
-#endif // !_TModel_PairedManager_Header
+#endif // !_TModel_SegmentManager_Header

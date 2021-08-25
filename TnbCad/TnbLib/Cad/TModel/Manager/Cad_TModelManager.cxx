@@ -1,31 +1,31 @@
-#include <Cad3d_TModelManager.hxx>
+#include <Cad_TModelManager.hxx>
 
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 Standard_Integer 
-tnbLib::Cad3d_TModelManager::NbCorners() const
+tnbLib::Cad_TModelManager::NbCorners() const
 {
 	Debug_Null_Pointer(Corners());
 	return (Standard_Integer)Corners()->Size();
 }
 
 Standard_Integer 
-tnbLib::Cad3d_TModelManager::NbSegments() const
+tnbLib::Cad_TModelManager::NbSegments() const
 {
 	Debug_Null_Pointer(Segments());
 	return (Standard_Integer)Segments()->Size();
 }
 
 Standard_Integer 
-tnbLib::Cad3d_TModelManager::NbFaces() const
+tnbLib::Cad_TModelManager::NbFaces() const
 {
 	Debug_Null_Pointer(Faces());
 	return (Standard_Integer)Faces()->Size();
 }
 
 std::vector<std::shared_ptr<tnbLib::TModel_Vertex>> 
-tnbLib::Cad3d_TModelManager::RetrieveCorners() const
+tnbLib::Cad_TModelManager::RetrieveCorners() const
 {
 	std::vector<std::shared_ptr<TModel_Vertex>> corners;
 	RetrieveCornersTo(corners);
@@ -34,7 +34,7 @@ tnbLib::Cad3d_TModelManager::RetrieveCorners() const
 }
 
 std::vector<std::shared_ptr<tnbLib::TModel_Paired>> 
-tnbLib::Cad3d_TModelManager::RetrieveSegments() const
+tnbLib::Cad_TModelManager::RetrieveSegments() const
 {
 	std::vector<std::shared_ptr<TModel_Paired>> segments;
 	RetrieveSegmentsTo(segments);
@@ -43,7 +43,7 @@ tnbLib::Cad3d_TModelManager::RetrieveSegments() const
 }
 
 std::vector<std::shared_ptr<tnbLib::TModel_Surface>> 
-tnbLib::Cad3d_TModelManager::RetrieveFaces() const
+tnbLib::Cad_TModelManager::RetrieveFaces() const
 {
 	std::vector<std::shared_ptr<TModel_Surface>> faces;
 	RetrieveFacesTo(faces);
@@ -51,7 +51,7 @@ tnbLib::Cad3d_TModelManager::RetrieveFaces() const
 	return std::move(faces);
 }
 
-void tnbLib::Cad3d_TModelManager::RetrieveCornersTo
+void tnbLib::Cad_TModelManager::RetrieveCornersTo
 (
 	std::vector<std::shared_ptr<TModel_Vertex>>& theVertices
 ) const
@@ -66,7 +66,7 @@ void tnbLib::Cad3d_TModelManager::RetrieveCornersTo
 	}
 }
 
-void tnbLib::Cad3d_TModelManager::RetrieveSegmentsTo
+void tnbLib::Cad_TModelManager::RetrieveSegmentsTo
 (
 	std::vector<std::shared_ptr<TModel_Paired>>& theEdges
 ) const
@@ -81,7 +81,7 @@ void tnbLib::Cad3d_TModelManager::RetrieveSegmentsTo
 	}
 }
 
-void tnbLib::Cad3d_TModelManager::RetrieveFacesTo
+void tnbLib::Cad_TModelManager::RetrieveFacesTo
 (
 	std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
 ) const
