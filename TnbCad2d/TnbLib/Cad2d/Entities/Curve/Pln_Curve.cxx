@@ -10,6 +10,7 @@
 #include <Geom2d_Curve.hxx>
 #include <Geom2d_BoundedCurve.hxx>
 #include <Geom2d_BSplineCurve.hxx>
+#include <Geom2d_Line.hxx>
 #include <StdFail_NotDone.hxx>
 #include <Bnd_Box2d.hxx>
 #include <BndLib_Add2dCurve.hxx>
@@ -123,6 +124,31 @@ tnbLib::Pln_Curve::IsRing
 	}
 	else
 		return Standard_False;
+}
+
+Standard_Boolean 
+tnbLib::Pln_Curve::IsLinear() const
+{
+	if (auto g = Handle(Geom2d_BSplineCurve)::DownCast(Geometry()))
+	{
+		if (g->Degree() IS_EQUAL 1)
+		{
+			return Standard_True;
+		}
+		else
+		{
+			return Standard_False;
+		}
+	}
+
+	if (auto g = Handle(Geom2d_Line)::DownCast(Geometry()))
+	{
+		return Standard_True;
+	}
+	else
+	{
+		return Standard_False;
+	}
 }
 
 Standard_Real
