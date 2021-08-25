@@ -20,22 +20,33 @@ void tnbLib::Pln_EdgeGeom::Approx
 			<< abort(FatalError);
 	}
 
-	const auto& curve = *Curve();
-	Geo2d_ApprxCurve approx
-	(
-		curve.Geometry(), 
-		curve.FirstParameter(), 
-		curve.LastParameter(), theInfo);
+	if (Curve()->IsLinear())
+	{
+		auto& pts = Mesh()->Points();
+		pts.reserve(2);
 
-	approx.Perform();
-	Debug_If_Condition_Message(NOT approx.IsDone(), "the algorithm is not performed!");
+		pts.push_back(Curve()->FirstCoord());
+		pts.push_back(Curve()->LastCoord());
+	}
+	else
+	{
+		const auto& curve = *Curve();
+		Geo2d_ApprxCurve approx
+		(
+			curve.Geometry(),
+			curve.FirstParameter(),
+			curve.LastParameter(), theInfo);
 
-	const auto& chain = approx.Chain();
+		approx.Perform();
+		Debug_If_Condition_Message(NOT approx.IsDone(), "the algorithm is not performed!");
 
-	Mesh() = std::make_shared<Entity2d_Polygon>();
-	Debug_Null_Pointer(Mesh());
+		const auto& chain = approx.Chain();
 
-	auto& pts = Mesh()->Points();
-	pts = std::move(chain->Points());
+		Mesh() = std::make_shared<Entity2d_Polygon>();
+		Debug_Null_Pointer(Mesh());
+
+		auto& pts = Mesh()->Points();
+		pts = std::move(chain->Points());
+	}
 }
 
