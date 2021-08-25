@@ -542,7 +542,18 @@ namespace tnbLib
 			<
 			is_three_dimension<(int)Point::dim>::value, U
 			>
-			SwitchToClear(internalNode*& t);
+			SwitchToClear(internalNode*& t)
+		{
+			if (t->BwdSw()) Clear(t->BwdSw());
+			if (t->BwdSe()) Clear(t->BwdSe());
+			if (t->BwdNe()) Clear(t->BwdNe());
+			if (t->BwdNw()) Clear(t->BwdNw());
+
+			if (t->FwdSw()) Clear(t->FwdSw());
+			if (t->FwdSe()) Clear(t->FwdSe());
+			if (t->FwdNe()) Clear(t->FwdNe());
+			if (t->FwdNw()) Clear(t->FwdNw());
+		}
 
 		void Clear(node*& t)
 		{
@@ -780,6 +791,57 @@ namespace tnbLib
 			}
 		}
 
+		template<class U = void>
+		resolvedType
+			<
+			is_two_dimension<(int)Point::dim>::value, U
+			>
+			NullifyPointer
+			(
+				node*& t, internalNode*& Internal
+			)
+		{
+			if
+				(
+					!Internal->Sw() &&
+					!Internal->Se() &&
+					!Internal->Ne() &&
+					!Internal->Nw()
+					)
+			{
+				delete t;
+				t = nullptr;
+			}
+		}
+
+		template<class U = void>
+		resolvedType
+			<
+			is_three_dimension<(int)Point::dim>::value, U
+			>
+			NullifyPointer
+			(
+				node*& t, internalNode*& Internal
+			)
+		{
+			if
+				(
+					!Internal->BwdSw() &&
+					!Internal->BwdSe() &&
+					!Internal->BwdNe() &&
+					!Internal->BwdNw() &&
+
+					!Internal->FwdSw() &&
+					!Internal->FwdSe() &&
+					!Internal->FwdNe() &&
+					!Internal->FwdNw()
+					)
+			{
+				delete t;
+				t = nullptr;
+			}
+		}
+
 		void Remove(const T& theItem, node*& t)
 		{
 			if (!t)
@@ -819,7 +881,8 @@ namespace tnbLib
 
 				SwitchToRemove(theItem, Internal);
 
-				if
+				NullifyPointer(t, Internal);
+				/*if
 					(
 						!Internal->Sw() &&
 						!Internal->Se() &&
@@ -829,7 +892,7 @@ namespace tnbLib
 				{
 					delete t;
 					t = nullptr;
-				}
+				}*/
 			}
 		}
 
