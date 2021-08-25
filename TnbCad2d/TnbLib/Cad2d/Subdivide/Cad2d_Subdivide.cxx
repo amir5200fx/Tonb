@@ -32,10 +32,6 @@
 #include <Geo_CurveIntegrand_Function.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
-tnbLib::Cad2d_Subdivide::Cad2d_Subdivide()
-{
-}
-
 namespace tnbLib
 {
 	
@@ -45,6 +41,9 @@ namespace tnbLib
 	typedef std::vector<std::shared_ptr<Cad2d_IntsctEntity_Segment>> entityList;
 	typedef std::map<Standard_Integer, std::shared_ptr<entityList>>
 		entityMap;
+
+	std::shared_ptr<Geo_ApprxCurve_Info> Cad2d_Subdivide::myApprxCurveInfo = nullptr;
+	Standard_Boolean Cad2d_Subdivide::overrideMyApprxCurveInfo = Standard_False;
 
 	namespace subdivide
 	{
@@ -356,7 +355,16 @@ namespace tnbLib
 			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
 
 			auto[minTol, maxTol] = outer->BoundTolerance();
-			auto newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(2.05*maxTol, theTol));
+
+			std::shared_ptr<Pln_Wire> newOuter;
+			if (Cad2d_Subdivide::overrideMyApprxCurveInfo)
+			{
+				newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, Cad2d_Subdivide::myApprxCurveInfo, MAX(2.05*maxTol, theTol));
+			}
+			else
+			{
+				newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(2.05*maxTol, theTol));
+			}
 
 			Debug_Null_Pointer(newOuter);
 
@@ -376,7 +384,15 @@ namespace tnbLib
 
 					auto[minTol, maxTol] = x->BoundTolerance();
 
-					auto newInner = Pln_Tools::MakeWire(newWire_curves, innerSense, MAX(2.05*maxTol, theTol));
+					std::shared_ptr<Pln_Wire> newInner;
+					if (Cad2d_Subdivide::overrideMyApprxCurveInfo)
+					{
+						newInner = Pln_Tools::MakeWire(newWire_curves, innerSense, Cad2d_Subdivide::myApprxCurveInfo, MAX(2.05*maxTol, theTol));
+					}
+					else
+					{
+						newInner = Pln_Tools::MakeWire(newWire_curves, innerSense, MAX(2.05*maxTol, theTol));
+					}
 					Debug_Null_Pointer(newInner);
 
 					newInner->ApplyOrientation(Pln_Orientation::Pln_Orientation_CW);
