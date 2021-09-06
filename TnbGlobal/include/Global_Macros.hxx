@@ -70,6 +70,9 @@
 
 #define FreeAll(Array)  forThose(Index, 0, MaxIndexOf(Array)) NULLify(Array[Index]);
 
+#define FirstItem(Vector) Vector[0]
+#define LastItem(Vector) Vector[Vector.size() - 1]
+
 #define DisallowBitWiseCopy(TypeName)      \
   TypeName(const TypeName&) = delete;      \
   void operator=(const TypeName&) = delete;
