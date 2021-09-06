@@ -1,6 +1,7 @@
 #include <Geo_Serialization.hxx>
 
 #include <Poly_Triangulation.hxx>
+#include <gp_Pln.hxx>
 
 template<>
 void boost::serialization::save
@@ -225,4 +226,31 @@ void boost::serialization::load
 	{
 		ar >> s.ChangeValue(id);
 	}
+}
+
+template<>
+void boost::serialization::save
+(
+	TNB_oARCH_TYPE & ar,
+	const gp_Pln& sr,
+	const unsigned int version
+)
+{
+	ar << sr.Location();
+	ar << sr.Direct();
+}
+
+template<>
+void boost::serialization::load
+(
+	TNB_iARCH_TYPE & ar,
+	gp_Pln& s,
+	const unsigned int version
+)
+{
+	gp_Pnt p;
+	gp_Dir d;
+	ar >> p;
+	ar >> d;
+	s = gp_Pln(p, d);
 }
