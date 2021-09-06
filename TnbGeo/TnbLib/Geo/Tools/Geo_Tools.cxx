@@ -12,6 +12,81 @@
 #include <gp_Pln.hxx>
 #include <gp_Lin2d.hxx>
 
+arma::mat 
+tnbLib::Geo_Tools::CalcRotationMatrix
+(
+	const Dir3d & theV1,
+	const Dir3d & theV2
+)
+{
+	auto v3 = theV1.Crossed(theV2);
+	auto v2 = v3.Crossed(theV1);
+
+	static const Dir3d e1(1, 0, 0);
+	static const Dir3d e2(0, 1, 0);
+	static const Dir3d e3(0, 0, 1);
+
+	arma::mat R(3, 3);
+
+	R(0, 0) = e1.Dot(theV1);
+	R(0, 1) = e1.Dot(v2);
+	R(0, 2) = e1.Dot(v3);
+
+	R(1, 0) = e2.Dot(theV1);
+	R(1, 1) = e2.Dot(v2);
+	R(1, 2) = e2.Dot(v3);
+
+	R(2, 0) = e3.Dot(theV1);
+	R(2, 1) = e3.Dot(v2);
+	R(2, 2) = e3.Dot(v3);
+
+	return std::move(R);
+}
+
+namespace tnbLib
+{
+
+	template<class T>
+	auto GetVec(const T& pt)
+	{
+		arma::vec p(3);
+
+		p(0) = pt.X();
+		p(1) = pt.Y();
+		p(2) = pt.Z();
+
+		return std::move(p);
+	}
+}
+
+std::tuple<tnbLib::Pnt2d, tnbLib::Pnt2d, tnbLib::Pnt2d, arma::mat>
+tnbLib::Geo_Tools::ProjectToPlane
+(
+	const Pnt3d & theP1,
+	const Pnt3d & theP2,
+	const Pnt3d & theP3
+)
+{
+	Vec3d v1(theP2, theP1);
+	Vec3d v2(theP3, theP1);
+
+	auto R1 = CalcRotationMatrix(v1, v2);
+	auto R = arma::inv(R1);
+
+	auto p2 = GetVec<Vec3d>(v1);
+	auto p3 = GetVec<Vec3d>(v2);
+
+	p2 = R * p2;
+	p3 = R * p3;
+
+	auto pp1 = Pnt2d(0, 0);
+	auto pp2 = Pnt2d(p2(0), p2(1));
+	auto pp3 = Pnt2d(p3(0), p3(1));
+
+	auto t = std::make_tuple(std::move(pp1), std::move(pp2), std::move(pp3), std::move(R));
+	return std::move(t);
+}
+
 tnbLib::Pnt2d
 tnbLib::Geo_Tools::GetIntersectionPoint
 (
