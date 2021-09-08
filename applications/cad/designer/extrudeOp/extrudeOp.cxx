@@ -3,6 +3,7 @@
 #include <ShapePx_ExtrudeOp.hxx>
 #include <ShapePx_Spacing.hxx>
 #include <ShapePx_CtrlNet.hxx>
+#include <ShapePx_TopoCtrlNet.hxx>
 #include <SectPx_FrameRegistry.hxx>
 #include <SectPx_ScatterRegistry.hxx>
 #include <SectPx_Registry.hxx>
@@ -33,7 +34,7 @@ namespace tnbLib
 	typedef std::shared_ptr<ShapePx_ExtrudedPatch> patch_t;
 	typedef std::shared_ptr<SectPx_Spacing> spacing_t;
 	typedef std::shared_ptr<SectPx_CurveQ> curve_t;
-	typedef std::shared_ptr<ShapePx_CtrlNet> net_t;
+	typedef std::shared_ptr<ShapePx_TopoCtrlNet> net_t;
 
 	static patch_t myPatch;
 	//static spacing_t mySpacing;
