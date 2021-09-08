@@ -34,6 +34,7 @@ class Poly_Triangulation;
 class Poly_Triangle;
 class gp_Pnt;
 class gp_Pnt2d;
+class gp_Pln;
 
 namespace boost
 {
@@ -470,6 +471,38 @@ namespace boost
 				TColgp_Array1OfPnt& s,
 				const unsigned int version
 				);
+
+		template<class Archive>
+		void save(Archive& ar, const gp_Pln&, const unsigned int)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive& ar, gp_Pln&, const unsigned int)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const gp_Pln& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				gp_Pln& s,
+				const unsigned int version
+				);
 	}
 }
 
@@ -492,5 +525,6 @@ BOOST_SERIALIZATION_SPLIT_FREE(TShort_Array1OfShortReal)
 BOOST_SERIALIZATION_SPLIT_FREE(Poly_Array1OfTriangle)
 BOOST_SERIALIZATION_SPLIT_FREE(TColgp_Array1OfPnt2d)
 BOOST_SERIALIZATION_SPLIT_FREE(TColgp_Array1OfPnt)
+BOOST_SERIALIZATION_SPLIT_FREE(gp_Pln)
 
 #endif // !_Geo_Serialization_Header
