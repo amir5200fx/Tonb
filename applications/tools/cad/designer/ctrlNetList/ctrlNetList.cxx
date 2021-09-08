@@ -1,4 +1,4 @@
-#include <ShapePx_CtrlNet.hxx>
+#include <ShapePx_TopoCtrlNet.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -18,7 +18,7 @@
 namespace tnbLib
 {
 
-	typedef std::shared_ptr<ShapePx_CtrlNet> net_t;
+	typedef std::shared_ptr<ShapePx_TopoCtrlNet> net_t;
 
 	std::vector<net_t> myNets;
 	static unsigned short verbose = 0;

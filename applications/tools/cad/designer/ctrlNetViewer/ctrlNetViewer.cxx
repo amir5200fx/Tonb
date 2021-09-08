@@ -1,6 +1,8 @@
 #include <Entity3d_Chain.hxx>
 #include <Cad_PreviewTools.hxx>
+#include <ShapePx_TopoCtrlNet.hxx>
 #include <ShapePx_CtrlNet.hxx>
+#include <ShapePx_Tools.hxx>
 #include <TecPlot.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -21,7 +23,7 @@
 namespace tnbLib
 {
 
-	typedef std::shared_ptr<ShapePx_CtrlNet> net_t;
+	typedef std::shared_ptr<ShapePx_TopoCtrlNet> net_t;
 
 	std::vector<net_t> myNets;
 	static unsigned short verbose = 0;
@@ -53,7 +55,7 @@ namespace tnbLib
 		loadTag = true;
 	}
 
-	void exportToPlt(const net_t& net, OFstream& f)
+	void exportToPlt(const std::shared_ptr<ShapePx_CtrlNet>& net, OFstream& f)
 	{
 		std::vector<std::vector<Pnt3d>> rows;
 		rows.reserve(net->NbRows());
@@ -83,7 +85,8 @@ namespace tnbLib
 		{
 			if (x)
 			{
-				exportToPlt(x, f);
+				auto net = ShapePx_Tools::CreateControlNet(*x);
+				exportToPlt(net, f);
 			}
 		}
 
