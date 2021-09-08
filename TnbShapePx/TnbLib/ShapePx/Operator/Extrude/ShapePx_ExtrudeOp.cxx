@@ -6,7 +6,7 @@
 #include <SectPx_Spacing.hxx>
 #include <ShapePx_Section.hxx>
 #include <ShapePx_ExtrudedPatch.hxx>
-#include <ShapePx_CtrlNet.hxx>
+#include <ShapePx_TopoCtrlNet.hxx>
 #include <ShapePx_Tools.hxx>
 #include <ShapePx_ParValue.hxx>
 #include <TnbError.hxx>
@@ -51,8 +51,8 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 	const auto& section = Patch()->Section();
 	Debug_Null_Pointer(section);
 
-	auto net = std::make_shared<ShapePx_CtrlNet>();
-	net->RowsRef().reserve(Xs.size());
+	auto net = std::make_shared<ShapePx_TopoCtrlNet>();
+	net->SectionsRef().reserve(Xs.size());
 
 	auto poles = section->RetrievePoles(Curve());
 	auto profile = SectPx_Tools::RetrieveInnerSegments(poles);
@@ -62,19 +62,27 @@ void tnbLib::ShapePx_ExtrudeOp::Perform()
 	net->KnotsRef() = std::move(knots);
 	net->SetRowDegree(DegreeU());
 
+	std::vector<std::shared_ptr<ShapePx_TopoSection>> sections;
+	sections.reserve(Xs.size());
 	for (auto x : Xs)
 	{
 		auto paraList = Patch()->RetrieveParValues(x);
 
 		section->SetValues(paraList);
 
-		auto Qs = SectPx_Tools::RetrieveControlPoints(profile);
-		auto Ws = SectPx_Tools::RetrieveWeights(profile);
+		auto topoSection = ShapePx_Tools::MakeTopoSection(profile, x);
+		sections.push_back(std::move(topoSection));
 
-		auto paired = ShapePx_Tools::CtrlRow(Qs, Ws);
-		ShapePx_CtrlRow row(std::move(paired), x);
-		net->RowsRef().push_back(std::move(row));
+		//auto Qs = SectPx_Tools::RetrieveControlPoints(profile);
+		//auto Ws = SectPx_Tools::RetrieveWeights(profile);
+
+		//auto paired = ShapePx_Tools::CtrlRow(Qs, Ws);
+
+
+		//ShapePx_CtrlRow row(std::move(paired), x);
+		//net->RowsRef().push_back(std::move(row));
 	}
+	net->SectionsRef() = std::move(sections);
 
 	SetNet(std::move(net));
 	Change_IsDone() = Standard_True;
