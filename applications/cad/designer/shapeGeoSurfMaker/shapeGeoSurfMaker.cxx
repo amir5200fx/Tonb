@@ -1,5 +1,5 @@
 #include <Cad_GeomSurface.hxx>
-#include <ShapePx_CtrlNet.hxx>
+#include <ShapePx_TopoCtrlNet.hxx>
 #include <ShapePx_Tools.hxx>
 #include <OpenCascade_Serialization.hxx>
 #include <TnbError.hxx>
@@ -16,7 +16,7 @@
 namespace tnbLib
 {
 
-	typedef std::shared_ptr<ShapePx_CtrlNet> net_t;
+	typedef std::shared_ptr<ShapePx_TopoCtrlNet> net_t;
 
 	static unsigned short verbose;
 	static std::vector<net_t> myNets;
@@ -70,7 +70,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto t = ShapePx_Tools::Surface(*s, vdeg);
+		auto net = ShapePx_Tools::CreateControlNet(*s);
+		auto t = ShapePx_Tools::Surface(*net, vdeg);
 		auto surf = std::make_shared<Cad_GeomSurface>(std::move(t));
 		mySurf.push_back(std::move(surf));
 	}
