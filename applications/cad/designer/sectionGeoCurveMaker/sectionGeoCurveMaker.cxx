@@ -245,7 +245,7 @@ namespace tnbLib
 		{
 			Info << " retrieving the knots..." << endl;
 		}
-		const auto knotsVect = SectPx_Tools::Knots(segments, std::min(3, std::max(1, deg)));
+		const auto knotsVect = SectPx_Tools::Knots(segments, std::min(4, std::max(1, deg)));
 		const auto knots = SectPx_Tools::Knots(knotsVect);
 		if (verbose > 2)
 		{
