@@ -127,6 +127,57 @@
     <Filter Include="TnbLib\ShapePx\Entities\Patch\PatchEntity">
       <UniqueIdentifier>{0a136111-7c72-4756-968a-690cecc07002}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoCtrlNet">
+      <UniqueIdentifier>{72ad90df-e117-4bd7-9cc5-5e624167c454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection">
+      <UniqueIdentifier>{43ddf001-b46c-43f1-af41-d484b8232363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities">
+      <UniqueIdentifier>{1d95af4a-fef4-4373-92af-6687ac7abcf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Entity">
+      <UniqueIdentifier>{6b20e547-dd28-4aca-8ba6-345305993d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole">
+      <UniqueIdentifier>{df767679-18e0-4bee-9bf2-fbdba971ecb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd">
+      <UniqueIdentifier>{7df7cc3c-e85d-4d86-9bd0-9840114339ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter">
+      <UniqueIdentifier>{f7356a9e-688f-481d-87e2-615d0d1a8a27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Corner">
+      <UniqueIdentifier>{89a34f09-b904-41ca-ae98-e7c4faff3d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Slider">
+      <UniqueIdentifier>{329b6a2f-3244-4996-9187-207d5c8f548f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\OnSegment">
+      <UniqueIdentifier>{272940ab-4a77-4d02-8832-0b13f14b363a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Adaptor">
+      <UniqueIdentifier>{c7dddfbe-3cc1-4bd3-8c3d-9cb35312ab17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Segment">
+      <UniqueIdentifier>{2e70badb-d439-431e-a713-6702edb3e0c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Profile">
+      <UniqueIdentifier>{05650208-e3bf-4127-9dc8-7b7e15caf77d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node">
+      <UniqueIdentifier>{b0c779b1-ee4a-49cc-9d31-a4003659ad05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node\Adaptor">
+      <UniqueIdentifier>{46574f3c-b7b9-4274-88df-fc7759cc4ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\ConicSection">
+      <UniqueIdentifier>{9f1bea3e-cdaa-428c-8234-7f036d233731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor">
+      <UniqueIdentifier>{ac8172bf-d73a-4bdc-998a-c1defc1cee22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -221,6 +272,66 @@
     </ClInclude>
     <ClInclude Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated\ShapePx_ContinProfile_GeneratedCustom.hxx">
       <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Entity\ShapePx_TopoSectEntity.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node\Adaptor\ShapePx_TopoSectNodeAdaptor.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node\ShapePx_TopoSectNode.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\ShapePx_TopoSectPole_Bnd.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\ShapePx_TopoSectPole_Inter.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\ShapePx_TopoSectPole_Inters.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\ShapePx_TopoSectPole_IntersFwd.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Adaptor\ShapePx_TopoSectPole_InterAdaptor.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Corner\ShapePx_TopoSect_Corner.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\OnSegment\ShapePx_TopoSect_OnSegment.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\OnSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Slider\ShapePx_TopoSect_Slider.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\ShapePx_TopoSectPole.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\ShapePx_TopoSectPoles.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\ShapePx_TopoSectPolesFwd.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Profile\ShapePx_TopoSectProfile.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Segment\ShapePx_TopoSectSegment.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\ShapePx_TopoSection.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoCtrlNet\ShapePx_TopoCtrlNet.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoCtrlNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\ConicSection\ShapePx_ConicSection.hxx">
+      <Filter>TnbLib\ShapePx\ConicSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor\ShapePx_TopoSectPole_BndAdaptor.hxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +454,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated\ShapePx_ContinProfile_GeneratedCustomIO.cxx">
       <Filter>TnbLib\ShapePx\Entities\Profile\Continuous\Custom\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node\Adaptor\ShapePx_TopoSectNodeAdaptorIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Node\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node\ShapePx_TopoSectNodeIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\ShapePx_TopoSectPole_BndIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Adaptor\ShapePx_TopoSectPole_InterAdaptorIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Corner\ShapePx_TopoSect_CornerIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\OnSegment\ShapePx_TopoSect_OnSegmentIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\OnSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Slider\ShapePx_TopoSect_SliderIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Inter\Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Profile\ShapePx_TopoSectProfileIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Segment\ShapePx_TopoSectSegmentIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\ShapePx_TopoSectionIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoCtrlNet\ShapePx_TopoCtrlNetIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoCtrlNet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\ConicSection\ShapePx_ConicSection.cxx">
+      <Filter>TnbLib\ShapePx\ConicSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor\ShapePx_TopoSectPole_BndAdaptorIO.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,8 +12,9 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class ShapePx_CtrlNet;
+	//class ShapePx_CtrlNet;
 	class SectPx_CurveQ;
+	class ShapePx_TopoCtrlNet;
 
 	class ShapePx_Operator
 		: public Global_Done
@@ -23,7 +24,7 @@ namespace tnbLib
 
 		std::shared_ptr<SectPx_CurveQ> theCurve_;
 
-		std::shared_ptr<ShapePx_CtrlNet> theNet_;
+		std::shared_ptr<ShapePx_TopoCtrlNet> theNet_;
 
 	protected:
 
@@ -46,7 +47,7 @@ namespace tnbLib
 
 		void SetNet
 		(
-			const std::shared_ptr<ShapePx_CtrlNet>& theNet
+			const std::shared_ptr<ShapePx_TopoCtrlNet>& theNet
 		)
 		{
 			theNet_ = theNet;
@@ -54,7 +55,7 @@ namespace tnbLib
 
 		void SetNet
 		(
-			std::shared_ptr<ShapePx_CtrlNet>&& theNet
+			std::shared_ptr<ShapePx_TopoCtrlNet>&& theNet
 		)
 		{
 			theNet_ = std::move(theNet);
