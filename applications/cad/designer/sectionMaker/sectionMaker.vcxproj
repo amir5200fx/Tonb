@@ -72,12 +72,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\cad\designer\sectionMaker\</OutDir>
     <TargetName>$(ProjectName)d</TargetName>
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(GSL_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(GSL_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(GSL_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)applications\cad\designer\lib;$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\cad\designer\sectionMaker\</OutDir>
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(GSL_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(GSL_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(GSL_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)applications\cad\designer\lib;$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -154,9 +154,6 @@
     </ProjectReference>
     <ProjectReference Include="..\frameMaker\frameMaker.vcxproj">
       <Project>{31939ce1-86fa-4997-a749-84205af3a7df}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\frameTunner\frameTunner.vcxproj">
-      <Project>{0683dfbd-279c-48e6-9a85-752160c63520}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

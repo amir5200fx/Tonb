@@ -746,7 +746,106 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to create a parametric section." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - saveTo(string)" << endl 
+				<< " - drawPlt(string)" << endl << endl
+
+				<< " # parameters: " << endl << endl
+				<< " - createFixed(value, minValue, maxValue)" << endl
+				<< " - createFixed(string, value, minValue, maxValue);    - 'string' is the name of the parameter" << endl
+				<< " - createConstant(value)" << endl
+				<< " - createConstant(string, value);                     - 'string' is the name of the parameter" << endl
+				<< " - createFree(fieldFunction)" << endl
+				<< " - createFree(string, fieldFunction);                 - 'string' is the name of the parameter" << endl << endl
+
+				<< " - getFixedPar(parameter)" << endl
+				<< " - getFreePar(parameter)" << endl
+				<< " - getConstPar(parameter)" << endl << endl
+				
+				<< " - getPar(fixed parameter)" << endl
+				<< " - getPar(free parameter)" << endl
+				<< " - getPar(constant parameter)" << endl
+				<< " - getPar(parameter)" << endl << endl
+
+				<< " # fields: " << endl << endl
+				<< " - createUniformField(parameter)" << endl
+				<< " - createUniformField(string, parameter)" << endl
+				<< " - createMinusField(parameter)" << endl
+				<< " - createMinusField(string, parameter)" << endl
+				<< " - createXReaderField(coord)" << endl
+				<< " - createXReaderField(string, coord)" << endl
+				<< " - createYReaderField(coord)" << endl
+				<< " - createYReaderField(string, coord)" << endl
+				<< " - createLinearFormField(fieldFun0, fieldFun1, parameter)" << endl
+				<< " - createLinearFormField(string, fieldFun0, fieldFun1, parameter)" << endl
+				<< " - createExprField(expression)" << endl
+				<< " - createExprField(string, expression)" << endl << endl
+
+				<< " - getFieldFun(exprField)" << endl
+				<< " - getFieldFun(fieldFun)" << endl
+				<< " - getExprFieldFun(fieldFun)" << endl << endl
+
+				<< " - addVariable(exprField, string, fieldFun)" << endl
+				<< " - addVariable(Field, string, fieldFun)" << endl << endl
+
+				<< " # Point makers: " << endl << endl
+				<< " - createOuterPoint(x, y)" << endl
+				<< " - createOuterPoint(string, x, y)" << endl
+				<< " - createOuterPoint(datum)" << endl
+				<< " - createOuterPoint(string, datum)" << endl << endl
+				
+				<< " - createInnerPoint(x, y)" << endl
+				<< " - createInnerPoint(string, x, y)" << endl
+				<< " - createInnerPoint(datum)" << endl
+				<< " - createInnerPoint(string, datum)" << endl << endl
+
+				<< " - createFieldPoint(geoMap)" << endl
+				<< " - createFieldPoint(string, geoMap)" << endl << endl
+
+				<< " - createSlavePoint(master)" << endl
+				<< " - createSlavePoint(string, master)" << endl << endl
+
+				<< " - createDatum(x, y)" << endl
+				<< " - createDatum(string, x, y)" << endl
+				<< " - createDatum(geoMap)" << endl
+				<< " - createDatum(string, geoMap)" << endl << endl
+
+				<< " - getCoord(datum)" << endl
+				<< " - getCoord(point)" << endl
+				<< " - getCoord(coord)" << endl << endl
+
+				<< " - getMaster(point)" << endl << endl
+
+				<< " # Geometric operators: " << endl << endl
+				<< " - createDirection(double x, double y)" << endl
+				<< " - createLinearInterplGeoMap(coord, coord, parameter)" << endl
+				<< " - createLinearInterplGeoMap(string, coord, coord, parameter)" << endl
+				<< " - createIntersectGeoMap(coord0, dir0, angle0 [parameter], coord1, dir1, angle1 [parameter])" << endl
+				<< " - createIntersectGeoMap(string, coord0, dir0, angle0 [parameter], coord1, dir1, angle1 [parameter])" << endl << endl
+
+				<< " # Profile operators: " << endl << endl
+				<< " - getFirstEdge()" << endl << endl
+
+				<< " - createCustomProfile(point0, point1)" << endl
+				<< " - createCustomProfile(string, point0, point1)" << endl << endl
+
+				<< " - selectEdge(profileMaker, id)" << endl
+				<< " - importPoint(profileMaker, point, edge);                     - outputs: pair of the new left edge and the new right edge <edge, edge>;" << endl
+				<< " - retrieveLeftEdge(<edge, edge>)" << endl
+				<< " - retrieveRightEdge(<edge, edge>)" << endl << endl
+
+				<< " # Global functions: " << endl << endl
+				<< " - printRegistry()" << endl
+				<< " - printFixedParameters()" << endl
+				<< " - printPoints()" << endl << endl
+
+				<< " - degToRad(double)" << endl
+				<< endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
