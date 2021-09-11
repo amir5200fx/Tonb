@@ -40,7 +40,7 @@ namespace tnbLib
 
 	template<bool BoundCheck = false>
 	struct NumAlg_Secant_Function
-		: public NumAlg_NewtonSolver_Value
+		: public NumAlg_Secant_Value
 	{
 		void CheckBound(Standard_Real& x) const
 		{
@@ -71,9 +71,9 @@ namespace tnbLib
 
 		virtual Standard_Integer& ChangeNbIter() = 0;
 
-		virtual NumAlg_NewtonSolver_Condition Condition() const = 0;
+		virtual NumAlg_Secant_Condition Condition() const = 0;
 
-		virtual NumAlg_NewtonSolver_Condition& ChangeCondition() = 0;
+		virtual NumAlg_Secant_Condition& ChangeCondition() = 0;
 
 		virtual Standard_Real& ChangeResidual() = 0;
 
@@ -119,8 +119,7 @@ namespace tnbLib
 			ChangeResidual() = (Standard_Real)0.;
 			ChangeP0() = p0;
 			ChangeP1() = p1;
-			ChangeResult() = (Standard_Real)0.;
-			ChangeCondition() = NumAlg_NewtonSolver_Condition::LEVEL_EXCEEDED;
+			ChangeCondition() = NumAlg_Secant_Condition::LEVEL_EXCEEDED;
 
 			forThose(Iter, 1, MaxNbIterations())
 			{
@@ -130,14 +129,14 @@ namespace tnbLib
 				if (ABS(df) <= Zero())
 				{
 					dp = (Standard_Real)0.;
-					ChangeCondition() = NumAlg_NewtonSolver_Condition::ZERODIVIDE;
+					ChangeCondition() = NumAlg_Secant_Condition::ZERODIVIDE;
 				}
 				else
 				{
 					dp = y1 / df;
 				}
 
-				p2 = p1 - dp;
+				auto p2 = p1 - dp;
 
 				fun::CheckBound(p2);
 				y2 = fun::Value(p2);
@@ -145,15 +144,15 @@ namespace tnbLib
 				rel_err = (Standard_Real)2.0 * ABS(dp) / (ABS(p1) + Small());
 
 				if (rel_err < Tolerance() OR ABS(y1) < Zero())
-					if (Condition() NOT_EQUAL NumAlg_NewtonSolver_Condition::ZERODIVIDE)
-						ChangeCondition() = NumAlg_NewtonSolver_Condition::CONVERGED;
+					if (Condition() NOT_EQUAL NumAlg_Secant_Condition::ZERODIVIDE)
+						ChangeCondition() = NumAlg_Secant_Condition::CONVERGED;
 
 				p0 = p1;
 				p1 = p2;
 				y0 = y1;
 				y1 = y2;
 
-				if (Condition() NOT_EQUAL NumAlg_NewtonSolver_Condition::LEVEL_EXCEEDED)
+				if (Condition() NOT_EQUAL NumAlg_Secant_Condition::LEVEL_EXCEEDED)
 					break;
 			}
 
@@ -176,57 +175,57 @@ namespace tnbLib
 		NumAlg_Secant_Info& theInfo_;
 
 
-		auto& ChangeNbIter() override
+		Standard_Integer& ChangeNbIter() override
 		{
 			return theInfo_.ChangeNbIter();
 		}
 
-		auto& ChangeCondition() override
+		NumAlg_Secant_Condition& ChangeCondition() override
 		{
 			return theInfo_.ChangeCondition();
 		}
 
-		auto& ChangeResidual() override
+		Standard_Real& ChangeResidual() override
 		{
 			return theInfo_.ChangeResidual();
 		}
 
-		auto& ChangeP0() override
+		Standard_Real& ChangeP0() override
 		{
 			return theInfo_.ChangeX0();
 		}
 
-		auto& ChangeP1() override
+		Standard_Real& ChangeP1() override
 		{
 			return theInfo_.ChangeX1();
 		}
 
-		auto MaxNbIterations() const override
+		Standard_Integer MaxNbIterations() const override
 		{
 			return theInfo_.MaxIterations();
 		}
 
-		auto UnderRelaxation() const override
+		Standard_Real UnderRelaxation() const override
 		{
 			return theInfo_.UnderRelaxation();
 		}
 
-		auto Tolerance() const override
+		Standard_Real Tolerance() const override
 		{
 			return theInfo_.Tolerance();
 		}
 
-		auto Zero() const override
+		Standard_Real Zero() const override
 		{
 			return theInfo_.Zero();
 		}
 
-		auto Small() const override
+		Standard_Real Small() const override
 		{
 			return theInfo_.Small();
 		}
 
-		auto Condition() const override
+		NumAlg_Secant_Condition Condition() const override
 		{
 			return theInfo_.Condition();
 		}
@@ -236,8 +235,8 @@ namespace tnbLib
 		
 		NumAlg_Secant
 		(
-			const auto& fun& theFun,
-			const NumAlg_Secant_Info& theInfo
+			const fun& theFun,
+			NumAlg_Secant_Info& theInfo
 		)
 			: NumAlg_Secant_Alg<fun>(theFun)
 			, theInfo_(theInfo)
@@ -257,7 +256,80 @@ namespace tnbLib
 	};
 
 
+	template<class Function>
+	class NumAlg_Secant<Function, false>
+		: public NumAlg_Secant_Alg<Function>
+		, public NumAlg_Secant_Info
+	{
+		typedef Function fun;
+		typedef NumAlg_Secant_Info info;
 
+		/*Private Data*/
+
+		Standard_Integer& ChangeNbIter() override
+		{
+			return info::ChangeNbIter();
+		}
+
+		NumAlg_Secant_Condition& ChangeCondition() override
+		{
+			return info::ChangeCondition();
+		}
+
+		Standard_Real& ChangeResidual() override
+		{
+			return info::ChangeResidual();
+		}
+
+		Standard_Real& ChangeP0() override
+		{
+			return info::ChangeX0();
+		}
+
+		Standard_Real& ChangeP1() override
+		{
+			return info::ChangeX1();
+		}
+
+		Standard_Integer MaxNbIterations() const override
+		{
+			return info::MaxIterations();
+		}
+
+		Standard_Real UnderRelaxation() const override
+		{
+			return info::UnderRelaxation();
+		}
+
+		Standard_Real Tolerance() const override
+		{
+			return info::Tolerance();
+		}
+
+		Standard_Real Zero() const override
+		{
+			return info::Zero();
+		}
+
+		Standard_Real Small() const override
+		{
+			return info::Small();
+		}
+
+		NumAlg_Secant_Condition Condition() const override
+		{
+			return info::Condition();
+		}
+
+	public:
+
+		NumAlg_Secant
+		(
+			const Function& theFunction
+		)
+			: NumAlg_Secant_Alg<Function>(theFunction)
+		{}
+	};
 }
 
 #endif // !_NumAlg_Secant_Header
