@@ -178,6 +178,12 @@
     <Filter Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor">
       <UniqueIdentifier>{ac8172bf-d73a-4bdc-998a-c1defc1cee22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\ShapePx\ConicSection\Arc">
+      <UniqueIdentifier>{e8e8b554-7048-415a-b9e3-90a1c13e1882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\ShapePx\ConicSection\Arc\IterInfo">
+      <UniqueIdentifier>{b81badef-8f80-456a-9683-4b437c2fe131}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\ShapePx\Entities\Entity\ShapePx_Entity.hxx">
@@ -332,6 +338,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor\ShapePx_TopoSectPole_BndAdaptor.hxx">
       <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\ConicSection\CircleArc\ShapePx_ArcSection.hxx">
+      <Filter>TnbLib\ShapePx\ConicSection\Arc</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\ShapePx\ConicSection\CircleArc\IterInfo\ShapePx_ArcSectionIterInfo.hxx">
+      <Filter>TnbLib\ShapePx\ConicSection\Arc\IterInfo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor\ShapePx_TopoSectPole_BndAdaptorIO.cxx">
       <Filter>TnbLib\ShapePx\Entities\TopoSection\Entities\Pole\Bnd\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\ConicSection\CircleArc\ShapePx_ArcSection.cxx">
+      <Filter>TnbLib\ShapePx\ConicSection\Arc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

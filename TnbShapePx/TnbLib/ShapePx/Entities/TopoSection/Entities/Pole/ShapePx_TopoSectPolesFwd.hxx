@@ -7,6 +7,8 @@
 namespace tnbLib
 {
 
+	class ShapePx_TopoSectPole;
+
 	namespace shapePxLib
 	{
 
