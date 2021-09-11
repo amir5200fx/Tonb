@@ -170,5 +170,11 @@
     <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadrature.cxx">
       <Filter>TnbLib\NumAlg\Integration\GaussQuadrature</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\Secant\Info\NumAlg_Secant_Info.cxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Secant\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info\NumAlg_FalsePos_Info.cxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

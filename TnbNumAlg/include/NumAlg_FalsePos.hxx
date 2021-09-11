@@ -10,23 +10,23 @@
 namespace tnbLib
 {
 
-	class NumAlg_FalsePos_Bound
-		: public Global_Bound<Standard_Real>
-	{
+	//class NumAlg_FalsePos_Bound
+	//	: public Global_Bound<Standard_Real>
+	//{
 
-		/*Private Data*/
+	//	/*Private Data*/
 
-	protected:
+	//protected:
 
-		NumAlg_FalsePos_Bound
-		(
-			const Standard_Real theLower = 0,
-			const Standard_Real theUpper = 0
-		)
-			: Global_Bound<Standard_Real>(theLower, theUpper)
-		{}
+	//	NumAlg_FalsePos_Bound
+	//	(
+	//		const Standard_Real theLower = 0,
+	//		const Standard_Real theUpper = 0
+	//	)
+	//		: Global_Bound<Standard_Real>(theLower, theUpper)
+	//	{}
 
-	};
+	//};
 
 	struct NumAlg_FalsePos_Function
 	{
@@ -75,8 +75,8 @@ namespace tnbLib
 
 		void Perform(const Standard_Real x0, const Standard_Real x1)
 		{
-			fun::CheckBound(x0);
-			fun::CheckBound(x1);
+			//fun::CheckBound(x0);
+			//fun::CheckBound(x1);
 
 			auto ya = fun::Value(x0);
 			auto yb = fun::Value(x1);
@@ -160,12 +160,12 @@ namespace tnbLib
 			return theInfo_.ChangeResult();
 		}
 
-		auto& ChangeA()
+		Standard_Real& ChangeA()
 		{
 			return theInfo_.ChangeX0();
 		}
 
-		auto& ChangeB()
+		Standard_Real& ChangeB()
 		{
 			return theInfo_.ChangeX1();
 		}
@@ -225,47 +225,47 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		auto& ChangeNbIter() override
+		Standard_Integer& ChangeNbIter() override
 		{
 			return info::ChangeNbIter();
 		}
 
-		auto& ChangeResidual() override
+		Standard_Real& ChangeResidual() override
 		{
 			return info::ChangeResidual();
 		}
 
-		auto& ChangeConverge() override
+		Standard_Boolean& ChangeConverge() override
 		{
 			return info::Change_IsConverged();
 		}
 
-		auto& ChangeResult() override
+		Standard_Real& ChangeResult() override
 		{
 			return info::ChangeResult();
 		}
 
-		auto& ChangeA()
+		Standard_Real& ChangeA()
 		{
 			return info::ChangeX0();
 		}
 
-		auto& ChangeB()
+		Standard_Real& ChangeB()
 		{
 			return info::ChangeX1();
 		}
 
-		auto MaxNbIterations() const override
+		Standard_Integer MaxNbIterations() const override
 		{
 			return info::MaxIterations();
 		}
 
-		auto Tolerance() const override
+		Standard_Real Tolerance() const override
 		{
 			return info::Tolerance();
 		}
 
-		auto Delta() const override
+		Standard_Real Delta() const override
 		{
 			return info::Delta();
 		}

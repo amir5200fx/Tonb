@@ -82,7 +82,7 @@ namespace tnbLib
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_SMALL;
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_ZERO;
 
-		NumAlg_NewtonSolver_Info();
+		TnbNumAlg_EXPORT NumAlg_NewtonSolver_Info();
 
 		auto NbIterations() const
 		{

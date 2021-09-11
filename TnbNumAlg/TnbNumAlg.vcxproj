@@ -176,7 +176,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\Nodes\NumAlg_GaussQuadrature_Nodes.cxx" />
     <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\NumAlg_GaussQuadrature.cxx" />
     <ClCompile Include="TnbLib\NumAlg\Integration\GaussQuadrature\Weights\NumAlg_GaussQuadrature_Weights.cxx" />
+    <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info\NumAlg_FalsePos_Info.cxx" />
     <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\Newton\Info\NumAlg_NewtonSolver_Info.cxx" />
+    <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\Secant\Info\NumAlg_Secant_Info.cxx" />
     <ClCompile Include="TnbLib\NumAlg\System\NumAlg_Random_System.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
