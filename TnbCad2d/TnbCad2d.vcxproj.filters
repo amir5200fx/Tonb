@@ -409,6 +409,9 @@
     <Filter Include="TnbLib\Cad2d\Interpolation\Ubar\Centripetal">
       <UniqueIdentifier>{b0d8a495-98ef-48e6-ad56-7713e0847875}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\QuadraticArc">
+      <UniqueIdentifier>{fd0d8e91-07e4-4723-84e0-0bab3e1ca62b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -798,6 +801,9 @@
     <ClInclude Include="TnbLib\Cad2d\Interpolation\Ubar\Cad2d_InterpUbarMaps.hxx">
       <Filter>TnbLib\Cad2d\Interpolation\Ubar</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\QuadraticArc\Cad2d_QuadraticArc.hxx">
+      <Filter>TnbLib\Cad2d\QuadraticArc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1165,6 +1171,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Interpolation\Ubar\ChordLen\Cad2d_InterpUbarMap_ChordLen.cxx">
       <Filter>TnbLib\Cad2d\Interpolation\Ubar\ChordLength</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\QuadraticArc\Cad2d_QuadraticArc.cxx">
+      <Filter>TnbLib\Cad2d\QuadraticArc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
