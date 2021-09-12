@@ -73,6 +73,12 @@
     <Filter Include="TnbLib\NumAlg\module">
       <UniqueIdentifier>{e4578b94-b487-4fe8-837a-19ec5b1d9f62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\Bisection">
+      <UniqueIdentifier>{4d94e5c6-9f80-4a02-a74e-7ca50c272ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\NonLinearSolver\Bisection\Info">
+      <UniqueIdentifier>{370419f2-ffeb-4621-acda-46f509fbc53b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
@@ -144,6 +150,12 @@
     <ClInclude Include="TnbLib\NumAlg\module\NumAlg_Module.hxx">
       <Filter>TnbLib\NumAlg\module</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Bisection\NumAlg_BisectionSolver.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Bisection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Bisection\Info\NumAlg_BisectionSolver_Info.hxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Bisection\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">
@@ -175,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info\NumAlg_FalsePos_Info.cxx">
       <Filter>TnbLib\NumAlg\NonLinearSolver\FalsePosition\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\Bisection\Info\NumAlg_BisectionSolver_Info.cxx">
+      <Filter>TnbLib\NumAlg\NonLinearSolver\Bisection\Info</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

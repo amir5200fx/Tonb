@@ -1,49 +1,38 @@
 #pragma once
-#ifndef _NumAlg_Secant_Info_Header
-#define _NumAlg_Secant_Info_Header
+#ifndef _NumAlg_BisectionSolver_Info_Header
+#define _NumAlg_BisectionSolver_Info_Header
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
-#include <NumAlg_Secant_Condition.hxx>
 #include <NumAlg_Module.hxx>
 
 namespace tnbLib
 {
 
 	// Forward Declarations
-	template<class Function>
-	class NumAlg_Secant_Alg;
-
 	template<class Function, bool RefInfo>
-	class NumAlg_Secant;
+	class NumAlg_BisectionSolver;
 
-	class NumAlg_Secant_Info
+	class NumAlg_BisectionSolver_Info
 	{
 
-		template<class Function>
-		friend class NumAlg_Secant_Alg;
-
 		template<class Function, bool RefInfo>
-		friend class NumAlg_Secant;
+		friend class NumAlg_BisectionSolver;
 
 		/*Private Data*/
 
 		Standard_Integer theMaxIterations_;
 		Standard_Integer theIter_;
 
+		Standard_Real theDelta_;
 		Standard_Real theTolerance_;
-		Standard_Real theUnderRelaxation_;
 
 		Standard_Real theResidual_;
-		Standard_Real theSmall_;
-		Standard_Real theZero_;
-		Standard_Real theDelta_;
 		Standard_Real theX0_;
 		Standard_Real theX1_;
+		Standard_Real theResult_;
 
 		Standard_Boolean IsConverged_;
-
-		NumAlg_Secant_Condition theCondition_;
 
 	protected:
 
@@ -67,14 +56,14 @@ namespace tnbLib
 			return theX1_;
 		}
 
+		auto& ChangeResult()
+		{
+			return theResult_;
+		}
+
 		auto& Change_IsConverged()
 		{
 			return IsConverged_;
-		}
-
-		auto& ChangeCondition()
-		{
-			return theCondition_;
 		}
 
 		void Reset()
@@ -83,6 +72,7 @@ namespace tnbLib
 			theResidual_ = 0;
 			theX0_ = 0;
 			theX1_ = 0;
+			theResult_ = 0;
 
 			IsConverged_ = Standard_False;
 		}
@@ -93,11 +83,14 @@ namespace tnbLib
 
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_DELTA;
-		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
-		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_SMALL;
-		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_ZERO;
 
-		TnbNumAlg_EXPORT NumAlg_Secant_Info();
+
+		//- default constructor
+
+		TnbNumAlg_EXPORT NumAlg_BisectionSolver_Info();
+
+
+		//- public functions and operators
 
 		auto NbIterations() const
 		{
@@ -119,27 +112,22 @@ namespace tnbLib
 			return theX1_;
 		}
 
+		auto Result() const
+		{
+			return theResult_;
+		}
+
 		auto IsConverged() const
 		{
 			return IsConverged_;
 		}
 
-		auto Condition() const
-		{
-			return theCondition_;
-		}
-
 		//- Macros
 
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Tolerance)
-			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Small)
-			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Zero)
-			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Delta)
-			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, UnderRelaxation)
-
+		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Delta)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Integer, MaxIterations)
-
 	};
 }
 
-#endif // !_NumAlg_Secant_Info_Header
+#endif // !_NumAlg_BisectionSolver_Info_Header
