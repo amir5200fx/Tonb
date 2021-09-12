@@ -14,6 +14,7 @@ namespace tnbLib
 	class TModel_Vertex
 		: public TModel_Entity
 		, public TModel_VertexAdaptor
+		, public Cad_EntityPrecision
 	{
 
 		/*Private Data*/
@@ -23,7 +24,9 @@ namespace tnbLib
 
 		//- private functions and operators
 
-		friend class boost::serialization::access;
+		TNB_SERIALIZATION(TnbCad_EXPORT);
+
+		/*friend class boost::serialization::access;
 
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int file_version)
@@ -31,7 +34,7 @@ namespace tnbLib
 			ar & boost::serialization::base_object<TModel_Entity>(*this);
 			ar & boost::serialization::base_object<TModel_VertexAdaptor>(*this);
 			ar & theCoord_;
-		}
+		}*/
 
 	protected:
 

@@ -1,34 +1,20 @@
 #pragma once
-#ifndef _NumAlg_FalsePos_Header
-#define _NumAlg_FalsePos_Header
+#ifndef _NumAlg_BisectionSolver_Header
+#define _NumAlg_BisectionSolver_Header
 
 #include <Global_Bound.hxx>
 #include <Global_Done.hxx>
-#include <NumAlg_FalsePos_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 #include <NumAlg_System.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
+#include <gp.hxx>
 
 namespace tnbLib
 {
 
-	class NumAlg_FalsePos_Bound
-		: public Global_Bound<Standard_Real>
-	{
-
-		/*Private Data*/
-
-	protected:
-
-		NumAlg_FalsePos_Bound
-		(
-			const Standard_Real theLower = 0,
-			const Standard_Real theUpper = 0
-		)
-			: Global_Bound<Standard_Real>(theLower, theUpper)
-		{}
-
-	};
-
-	struct NumAlg_FalsePos_Value
+	struct NumAlg_Bisection_Function
 	{
 		virtual Standard_Real Value(const Standard_Real) const
 		{
@@ -37,33 +23,11 @@ namespace tnbLib
 		}
 	};
 
-	template<bool BoundCheck = false>
-	struct NumAlg_FalsePos_Function
-		: public NumAlg_FalsePos_Value
-	{
-		void CheckBound(Standard_Real& x) const
-		{
-			Iter::CheckBound<false>(x, 0, 0);
-		}
-	};
-
-	template<>
-	struct NumAlg_FalsePos_Function<true>
-		: public NumAlg_FalsePos_Bound
-		, public NumAlg_FalsePos_Value
-	{
-		void CheckBound(Standard_Real& x) const
-		{
-			Iter::CheckBound(x, Lower(), Upper());
-		}
-	};
-
 	template<class Function>
-	class NumAlg_FalsePos_Alg
+	class NumAlg_Bisection_Alg
 		: public Function
 		, public Global_Done
 	{
-
 		typedef Function fun;
 
 		/*Private Data*/
@@ -86,28 +50,39 @@ namespace tnbLib
 
 		virtual Standard_Boolean& ChangeConverge() = 0;
 
+		static Standard_Boolean AreSameSign(const Standard_Real x0, const Standard_Real x1)
+		{
+			return x0 * x1 > 0;
+		}
+
 	protected:
 
-		NumAlg_FalsePos_Alg(const fun& theFun)
-			: fun(theFun)
+		//- default constructor
+
+		NumAlg_Bisection_Alg(const fun& theFunc)
+			: fun(theFunc)
 		{}
+
 
 	public:
 
-		void Perform(const Standard_Real X0, const Standard_Real X1)
+		//- public functions and operators
+
+		void Perform(const Standard_Real x0, const Standard_Real x1)
 		{
-			auto x0 = X0;
-			auto x1 = X1;
-
-			fun::CheckBound(x0);
-			fun::CheckBound(x1);
-
 			auto ya = fun::Value(x0);
 			auto yb = fun::Value(x1);
 
 			ChangeNbIter() = 0;
 			ChangeResidual() = (Standard_Real)0.;
 			ChangeResult() = (Standard_Real)0.;
+
+			if (ya*yb >= 0)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the values of f(x0) and f(x1) are not differ in sign!" << endl
+					<< abort(FatalError);
+			}
 
 			auto b = x1;
 			auto a = x0;
@@ -123,24 +98,26 @@ namespace tnbLib
 			{
 				ChangeNbIter()++;
 
-				auto dx = yb * (b - a) / (yb - ya);
-				c = b - dx;
-
-				fun::CheckBound(c);
+				c = 0.5*(a + b);
 				yc = fun::Value(c);
 
-				if (yb*yc > 0)
+				if (std::abs(yc) <= gp::Resolution())
+				{
+					a = c;
+					b = c;
+				}
+				else if (AreSameSign(yb, yc))
 				{
 					b = c;
-					yb = yc;	
+					yb = yc;
 				}
 				else
 				{
 					a = c;
-					ya = yc;	
+					ya = yc;
 				}
 
-				if (std::abs(dx) <= Delta() AND std::abs(yc) <= Tolerance())
+				if (std::abs(a-b) <= Delta() OR std::abs(yc) <= Tolerance())
 				{
 					ChangeConverge() = Standard_True;
 					break;
@@ -154,20 +131,18 @@ namespace tnbLib
 			ChangeResidual() = yc;
 			Change_IsDone() = Standard_True;
 		}
-
 	};
 
-
 	template<class Function, bool RefInfo = true>
-	class NumAlg_FalsePos
-		: public NumAlg_FalsePos_Alg<Function>
+	class NumAlg_BisectionSolver
+		: public NumAlg_Bisection_Alg<Function>
 	{
 
 		typedef Function fun;
 
 		/*Private Data*/
 
-		NumAlg_FalsePos_Info& theInfo_;
+		NumAlg_BisectionSolver_Info& theInfo_;
 
 
 		Standard_Integer& ChangeNbIter() override
@@ -217,36 +192,43 @@ namespace tnbLib
 
 	public:
 
-		NumAlg_FalsePos
+		//- default constructor
+
+
+		//- constructors
+
+		NumAlg_BisectionSolver
 		(
-			const Function& theFunction,
-			NumAlg_FalsePos_Info& theInfo
+			const Function& theFun, 
+			NumAlg_BisectionSolver_Info& theInfo
 		)
-			: NumAlg_FalsePos_Alg<Function>(theFunction)
+			: NumAlg_Bisection_Alg<Function>(theFun)
 			, theInfo_(theInfo)
 		{
 			theInfo_.Reset();
 		}
+
+		//- public functions and operators
 
 		const auto& Info() const
 		{
 			return theInfo_;
 		}
 
-		auto& Info()
+		auto& InfoRef()
 		{
 			return theInfo_;
 		}
 	};
 
 	template<class Function>
-	class NumAlg_FalsePos<Function, false>
-		: public NumAlg_FalsePos_Alg<Function>
-		, public NumAlg_FalsePos_Info
+	class NumAlg_BisectionSolver<Function, false>
+		: public NumAlg_Bisection_Alg<Function>
+		, public NumAlg_BisectionSolver_Info
 	{
 
 		typedef Function fun;
-		typedef NumAlg_FalsePos_Info info;
+		typedef NumAlg_BisectionSolver_Info info;
 
 		/*Private Data*/
 
@@ -297,13 +279,17 @@ namespace tnbLib
 
 	public:
 
-		NumAlg_FalsePos
-		(
-			const Function& theFunction
-		)
-			: NumAlg_FalsePos_Alg<Function>(theFunction)
+		//- default constructor
+
+
+		//- constructors
+
+		NumAlg_BisectionSolver(const Function& theFun)
+			: NumAlg_Bisection_Alg<Function>(theFun)
 		{}
+
+
 	};
 }
 
-#endif // !_NumAlg_FalsePos_Header
+#endif // !_NumAlg_BisectionSolver_Header

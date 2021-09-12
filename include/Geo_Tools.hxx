@@ -3,6 +3,8 @@
 #define _Geo_Tools_Header
 
 #include <Dir2d.hxx>
+#include <Dir3d.hxx>
+#include <Vec3d.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 
@@ -19,6 +21,8 @@
 
 #include <vector>
 #include <memory>
+
+#include <armadillo.h>
 
 class gp_Pln;
 class gp_Lin2d;
@@ -132,6 +136,17 @@ namespace tnbLib
 				return true;
 			}
 		};
+
+		static TnbGeo_EXPORT arma::mat 
+			CalcRotationMatrix(const Dir3d&, const Dir3d&);
+
+		static TnbGeo_EXPORT std::tuple<Pnt2d, Pnt2d, Pnt2d, arma::mat> 
+			ProjectToPlane
+			(
+				const Pnt3d& theP0, 
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2
+			);
 
 		static TnbGeo_EXPORT Pnt2d
 			GetIntersectionPoint

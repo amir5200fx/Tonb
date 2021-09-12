@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _NumAlg_FalsePos_Info_Header
-#define _NumAlg_FalsePos_Info_Header
+#ifndef _NumAlg_BisectionSolver_Info_Header
+#define _NumAlg_BisectionSolver_Info_Header
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
@@ -11,13 +11,13 @@ namespace tnbLib
 
 	// Forward Declarations
 	template<class Function, bool RefInfo>
-	class NumAlg_FalsePos;
+	class NumAlg_BisectionSolver;
 
-	class NumAlg_FalsePos_Info
+	class NumAlg_BisectionSolver_Info
 	{
 
 		template<class Function, bool RefInfo>
-		friend class NumAlg_FalsePos;
+		friend class NumAlg_BisectionSolver;
 
 		/*Private Data*/
 
@@ -84,7 +84,13 @@ namespace tnbLib
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_DELTA;
 
-		TnbNumAlg_EXPORT NumAlg_FalsePos_Info();
+
+		//- default constructor
+
+		TnbNumAlg_EXPORT NumAlg_BisectionSolver_Info();
+
+
+		//- public functions and operators
 
 		auto NbIterations() const
 		{
@@ -119,10 +125,9 @@ namespace tnbLib
 		//- Macros
 
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Tolerance)
-			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Delta)
-
+		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Delta)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Integer, MaxIterations)
 	};
 }
 
-#endif // !_NumAlg_FalsePos_Info_Header
+#endif // !_NumAlg_BisectionSolver_Info_Header

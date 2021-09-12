@@ -32,6 +32,8 @@ namespace tnbLib
 	class TModel_Curve;
 	class TModel_Shell;
 	class TModel_ParaWire;
+	class TModel_Vertex;
+	class TModel_Wire;
 
 	template<class EntityType>
 	class Cad_BlockEntity;
@@ -40,6 +42,8 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbCad_EXPORT Standard_Real CalcPrecision(const TModel_Vertex&);
 
 		static TnbCad_EXPORT Standard_Boolean
 			IsBounded
@@ -216,6 +220,8 @@ namespace tnbLib
 			(
 				const Cad_BlockEntity<TModel_Surface>& theBlock
 			);
+
+		static TnbCad_EXPORT void SetPrecision(const std::shared_ptr<Cad_TModel>& theSolid);
 
 		static TnbCad_EXPORT void ExportToIGES
 		(

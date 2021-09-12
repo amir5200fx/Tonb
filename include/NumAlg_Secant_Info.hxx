@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <NumAlg_Secant_Condition.hxx>
+#include <NumAlg_Module.hxx>
 
 namespace tnbLib
 {
@@ -13,11 +14,17 @@ namespace tnbLib
 	template<class Function>
 	class NumAlg_Secant_Alg;
 
+	template<class Function, bool RefInfo>
+	class NumAlg_Secant;
+
 	class NumAlg_Secant_Info
 	{
 
 		template<class Function>
 		friend class NumAlg_Secant_Alg;
+
+		template<class Function, bool RefInfo>
+		friend class NumAlg_Secant;
 
 		/*Private Data*/
 
@@ -30,6 +37,7 @@ namespace tnbLib
 		Standard_Real theResidual_;
 		Standard_Real theSmall_;
 		Standard_Real theZero_;
+		Standard_Real theDelta_;
 		Standard_Real theX0_;
 		Standard_Real theX1_;
 
@@ -81,14 +89,15 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer MAX_NB_ITERATIONS;
+		static TnbNumAlg_EXPORT const Standard_Integer MAX_NB_ITERATIONS;
 
-		static const Standard_Real DEFAULT_TOLERANCE;
-		static const Standard_Real DEFAULT_UNDER_RELAXATION;
-		static const Standard_Real DEFAULT_SMALL;
-		static const Standard_Real DEFAULT_ZERO;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_DELTA;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_SMALL;
+		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_ZERO;
 
-		NumAlg_Secant_Info();
+		TnbNumAlg_EXPORT NumAlg_Secant_Info();
 
 		auto NbIterations() const
 		{
@@ -125,6 +134,7 @@ namespace tnbLib
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Tolerance)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Small)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Zero)
+			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Delta)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, UnderRelaxation)
 
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Integer, MaxIterations)
