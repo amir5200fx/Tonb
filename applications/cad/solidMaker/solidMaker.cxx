@@ -14,13 +14,13 @@ namespace tnbLib
 
 	static unsigned short verbose(0);
 
-	static auto myMinTol = 1.0E-6;
-	static auto myMaxTol = 1.0E-3;
+	static auto myTol = 1.0E-6;
+	//static auto myMaxTol = 1.0E-3;
 
 	static std::shared_ptr<Cad_Shape> myShape;
 	static std::shared_ptr<Cad_TModel> mySolid;
 
-	void setMinTolerance(double x)
+	/*void setMinTolerance(double x)
 	{
 		myMinTol = x;
 		if (verbose)
@@ -28,14 +28,14 @@ namespace tnbLib
 			Info << " - the min. tolerance is set to: " << x << endl;
 			Info << endl;
 		}
-	}
+	}*/
 
-	void setMaxTolerance(double x)
+	void setTolerance(double x)
 	{
-		myMaxTol = x;
+		myTol = x;
 		if (verbose)
 		{
-			Info << " - the max. tolerance is set to: " << x << endl;
+			Info << " - the tolerance is set to: " << x << endl;
 			Info << endl;
 		}
 	}
@@ -112,11 +112,13 @@ namespace tnbLib
 	{
 		const auto d = myShape->BoundingBox()->Diameter();
 
-		auto maker = std::make_shared<Cad_SolidMaker>(myShape->Shape(), myMinTol*d, myMaxTol*d);
-		maker->Perform();
-		Debug_If_Condition_Message(NOT maker->IsDone(), "the application is not performed!");
+		mySolid = Cad_Tools::MakeSolid(myShape->Shape(), myTol*d);
 
-		mySolid = maker->Solid();
+		//auto maker = std::make_shared<Cad_SolidMaker>(myShape->Shape(), myMinTol*d, myMaxTol*d);
+		//maker->Perform();
+		//Debug_If_Condition_Message(NOT maker->IsDone(), "the application is not performed!");
+
+		//mySolid = maker->Solid();
 
 		mySolid->SetName(name);
 
@@ -153,8 +155,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 
 		//- settings
-		mod->add(chaiscript::fun([](double x)-> void {setMinTolerance(x); }), "setMinTol");
-		mod->add(chaiscript::fun([](double x)-> void {setMaxTolerance(x); }), "setMaxTol");
+		mod->add(chaiscript::fun([](double x)-> void {setTolerance(x); }), "setTolerance");
+		//mod->add(chaiscript::fun([](double x)-> void {setMaxTolerance(x); }), "setMaxTol");
 		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); }), "setVerbose");
 
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
