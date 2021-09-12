@@ -47,6 +47,36 @@
 #include <STEPControl_Controller.hxx>
 #include <STEPControl_Writer.hxx>
 
+Standard_Real 
+tnbLib::Cad_Tools::CalcPrecision(const TModel_Vertex & theVtx)
+{
+	if (theVtx.IsOrphan())
+	{
+		return 0;
+	}
+	const auto& coord = theVtx.Coord();
+	Standard_Real tol = RealLast();
+	for (const auto& x : theVtx.Edges())
+	{
+		auto edge = x.second.lock();
+		Debug_Null_Pointer(edge);
+
+		if (edge->IsDegenerated())
+		{
+			const auto& curve = edge->Curve();
+			auto p0 = curve->FirstCoord();
+			auto p1 = curve->LastCoord();
+
+			auto d = std::sqrt(std::min(p0.SquareDistance(coord), p1.SquareDistance(coord)));
+			if (d <= tol)
+			{
+				tol = d;
+			}
+		}
+	}
+	return tol;
+}
+
 Standard_Boolean 
 tnbLib::Cad_Tools::IsBounded
 (
@@ -259,14 +289,19 @@ tnbLib::Cad_Tools::Triangulation
 	auto& indices = triangulation->Connectivity();
 
 	pts.reserve(theTriangulation.NbNodes());
-	for (const auto& x : theTriangulation.Nodes())
+
+	const auto& nodes = theTriangulation.Nodes();
+	forThose(i, 1, nodes.Size())
 	{
-		pts.push_back(x);
+		pts.push_back(nodes.Value(i));
 	}
 
 	indices.reserve(theTriangulation.NbTriangles());
-	for (const auto& x : theTriangulation.Triangles())
+
+	const auto& tris = theTriangulation.Triangles();
+	forThose(i, 1, tris.Size())
 	{
+		const auto& x = tris.Value(i);
 		Standard_Integer i0, i1, i2;
 		x.Get(i0, i1, i2);
 
@@ -969,9 +1004,9 @@ tnbLib::Cad_Tools::MakeSolid
 {
 	auto solid = std::make_shared<Cad_TModel>();
 
-	auto box = BoundingBox(theSurfaces);
+	//auto box = BoundingBox(theSurfaces);
 
-	const auto tol = theTolerance * box.Diameter();
+	const auto tol = theTolerance; /** box.Diameter();*/
 	auto EdgesOnSolid = RetrieveNonSingularEdges(theSurfaces);
 
 	Standard_Integer K = 0;
@@ -1018,6 +1053,8 @@ tnbLib::Cad_Tools::MakeSolid
 	Debug_Null_Pointer(solid->Faces());
 
 	tModel::LinkEdges(solid->Segments());
+
+	SetPrecision(solid);
 
 	return std::move(solid);
 }
@@ -1204,6 +1241,19 @@ tnbLib::Cad_Tools::RetrieveTriangulation
 			tris.push_back(tri);
 	}
 	return std::move(tris);
+}
+
+void tnbLib::Cad_Tools::SetPrecision
+(
+	const std::shared_ptr<Cad_TModel>& theSolid
+)
+{
+	auto vertices = theSolid->RetrieveCorners();
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		x->SetPrecision(CalcPrecision(*x));
+	}
 }
 
 void tnbLib::Cad_Tools::ExportToIGES

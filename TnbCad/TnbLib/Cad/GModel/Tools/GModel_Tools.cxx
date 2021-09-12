@@ -187,9 +187,12 @@ tnbLib::GModel_Tools::GetSurfaces(const TopoDS_Shape & theShape)
 			auto trans = aLoc.Transformation();
 
 			auto& pts = tri->ChangeNodes();
-			for (auto& x : pts)
+			forThose(i, 1, pts.Size())
 			{
+				auto x = pts.Value(i);
 				x.Transform(trans);
+
+				pts.SetValue(i, x);
 			}
 		}
 

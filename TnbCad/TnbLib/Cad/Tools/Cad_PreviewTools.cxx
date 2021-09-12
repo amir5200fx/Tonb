@@ -137,17 +137,17 @@ tnbLib::Cad_PreviewTools::PreviewUnMergedPatchCurves
 	std::vector<std::shared_ptr<Entity3d_Polygon>> polygons;
 	polygons.reserve(uknots.Size() + vknots.Size());
 
-	for (const auto& x : uknots)
+	forThose(i, 1, uknots.Size())
 	{
-		auto tr = PreviewCurveOnSurface_U(theSurface, x, theNbSegments_U);
+		auto tr = PreviewCurveOnSurface_U(theSurface, uknots.Value(i), theNbSegments_U);
 		Debug_Null_Pointer(tr);
 
 		polygons.push_back(std::move(tr));
 	}
 
-	for (const auto& x : vknots)
+	forThose(i, 1, vknots.Size())
 	{
-		auto tr = PreviewCurveOnSurface_V(theSurface, x, theNbSegments_V);
+		auto tr = PreviewCurveOnSurface_V(theSurface, vknots.Value(i), theNbSegments_V);
 		Debug_Null_Pointer(tr);
 
 		polygons.push_back(std::move(tr));
