@@ -18,6 +18,6 @@ namespace tnbLib
 {
 	const Standard_Integer NumAlg_FalsePos_Info::MAX_NB_ITERATIONS(500);
 
-	const Standard_Real NumAlg_FalsePos_Info::DEFAULT_TOLERANCE(1.0E-8);
-	const Standard_Real NumAlg_FalsePos_Info::DEFAULT_DELTA(1.0E-6);
+	const Standard_Real NumAlg_FalsePos_Info::DEFAULT_TOLERANCE(1.0E-6);
+	const Standard_Real NumAlg_FalsePos_Info::DEFAULT_DELTA(1.0E-8);
 }

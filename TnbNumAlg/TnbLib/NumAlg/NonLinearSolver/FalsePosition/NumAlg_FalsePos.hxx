@@ -10,30 +10,51 @@
 namespace tnbLib
 {
 
-	//class NumAlg_FalsePos_Bound
-	//	: public Global_Bound<Standard_Real>
-	//{
+	class NumAlg_FalsePos_Bound
+		: public Global_Bound<Standard_Real>
+	{
 
-	//	/*Private Data*/
+		/*Private Data*/
 
-	//protected:
+	protected:
 
-	//	NumAlg_FalsePos_Bound
-	//	(
-	//		const Standard_Real theLower = 0,
-	//		const Standard_Real theUpper = 0
-	//	)
-	//		: Global_Bound<Standard_Real>(theLower, theUpper)
-	//	{}
+		NumAlg_FalsePos_Bound
+		(
+			const Standard_Real theLower = 0,
+			const Standard_Real theUpper = 0
+		)
+			: Global_Bound<Standard_Real>(theLower, theUpper)
+		{}
 
-	//};
+	};
 
-	struct NumAlg_FalsePos_Function
+	struct NumAlg_FalsePos_Value
 	{
 		virtual Standard_Real Value(const Standard_Real) const
 		{
 			Iter::ChackFun("Standard_Real Value(const Standard_Real) const");
 			return 0;
+		}
+	};
+
+	template<bool BoundCheck = false>
+	struct NumAlg_FalsePos_Function
+		: public NumAlg_FalsePos_Value
+	{
+		void CheckBound(Standard_Real& x) const
+		{
+			Iter::CheckBound<false>(x, 0, 0);
+		}
+	};
+
+	template<>
+	struct NumAlg_FalsePos_Function<true>
+		: public NumAlg_FalsePos_Bound
+		, public NumAlg_FalsePos_Value
+	{
+		void CheckBound(Standard_Real& x) const
+		{
+			Iter::CheckBound(x, Lower(), Upper());
 		}
 	};
 
@@ -73,10 +94,13 @@ namespace tnbLib
 
 	public:
 
-		void Perform(const Standard_Real x0, const Standard_Real x1)
+		void Perform(const Standard_Real X0, const Standard_Real X1)
 		{
-			//fun::CheckBound(x0);
-			//fun::CheckBound(x1);
+			auto x0 = X0;
+			auto x1 = X1;
+
+			fun::CheckBound(x0);
+			fun::CheckBound(x1);
 
 			auto ya = fun::Value(x0);
 			auto yb = fun::Value(x1);
@@ -102,6 +126,7 @@ namespace tnbLib
 				auto dx = yb * (b - a) / (yb - ya);
 				c = b - dx;
 
+				fun::CheckBound(c);
 				yc = fun::Value(c);
 
 				if (yb*yc > 0)
@@ -115,7 +140,7 @@ namespace tnbLib
 					ya = yc;	
 				}
 
-				if (ABS(dx) <= Delta() OR ABS(yc) <= Tolerance())
+				if (std::abs(dx) <= Delta() AND std::abs(yc) <= Tolerance())
 				{
 					ChangeConverge() = Standard_True;
 					break;
