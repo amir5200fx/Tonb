@@ -295,6 +295,12 @@
     <Filter Include="TnbLib\Cad\Maker\Solid">
       <UniqueIdentifier>{ec0aa1aa-9c0a-405e-8ad2-fa0f4d3dc0f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\PolesNetPrcssr">
+      <UniqueIdentifier>{66dfc9e9-dd07-49c1-b683-38be2dead9b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\ConicApexMaker">
+      <UniqueIdentifier>{9159d29d-f41e-4fa2-a66f-dac17c9697a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -587,6 +593,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_CornerManager.hxx">
       <Filter>TnbLib\Cad\TModel\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\PolesNetPrcssr\Cad_PolesNetPrcssr.hxx">
+      <Filter>TnbLib\Cad\PolesNetPrcssr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\PolesNetPrcssr\Cad_PolesNetPrcssrI.hxx">
+      <Filter>TnbLib\Cad\PolesNetPrcssr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ConicApexMaker\Cad_ConicApexMaker.hxx">
+      <Filter>TnbLib\Cad\ConicApexMaker</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -889,6 +904,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Cad_TModel.cxx">
       <Filter>TnbLib\Cad\TModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\PolesNetPrcssr\Cad_PolesNetPrcssr.cxx">
+      <Filter>TnbLib\Cad\PolesNetPrcssr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ConicApexMaker\Cad_ConicApexMaker.cxx">
+      <Filter>TnbLib\Cad\ConicApexMaker</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
