@@ -91,6 +91,8 @@ namespace tnbLib
 
 		virtual Standard_Real Small() const = 0;
 
+		virtual Standard_Real Delta() const = 0;
+
 	protected:
 
 		NumAlg_Secant_Alg
@@ -126,7 +128,7 @@ namespace tnbLib
 				ChangeNbIter()++;
 
 				df = (y1 - y0) / (p1 - p0);
-				if (ABS(df) <= Zero())
+				if (std::abs(df) <= Zero())
 				{
 					dp = (Standard_Real)0.;
 					ChangeCondition() = NumAlg_Secant_Condition::ZERODIVIDE;
@@ -141,9 +143,9 @@ namespace tnbLib
 				fun::CheckBound(p2);
 				y2 = fun::Value(p2);
 
-				rel_err = (Standard_Real)2.0 * ABS(dp) / (ABS(p1) + Small());
+				rel_err = (Standard_Real)2.0 * std::abs(dp) / (std::abs(p2) + Small());
 
-				if (rel_err < Tolerance() OR ABS(y1) < Zero())
+				if (rel_err < Delta() AND std::abs(y2) < Tolerance())
 					if (Condition() NOT_EQUAL NumAlg_Secant_Condition::ZERODIVIDE)
 						ChangeCondition() = NumAlg_Secant_Condition::CONVERGED;
 
@@ -223,6 +225,11 @@ namespace tnbLib
 		Standard_Real Small() const override
 		{
 			return theInfo_.Small();
+		}
+
+		Standard_Real Delta() const override
+		{
+			return theInfo_.Delta();
 		}
 
 		NumAlg_Secant_Condition Condition() const override
@@ -314,6 +321,11 @@ namespace tnbLib
 		Standard_Real Small() const override
 		{
 			return info::Small();
+		}
+
+		Standard_Real Delta() const override
+		{
+			return info::Delta();
 		}
 
 		NumAlg_Secant_Condition Condition() const override
