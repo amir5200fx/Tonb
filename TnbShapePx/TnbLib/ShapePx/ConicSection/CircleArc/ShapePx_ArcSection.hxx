@@ -27,12 +27,13 @@ namespace tnbLib
 	public:
 
 		static TnbShapePx_EXPORT const Standard_Real DEFAULT_TOLERANCE;
-		static const std::shared_ptr<ShapePx_ArcSectionIterInfo> DEFAULT_ITER_INFO;
+		static TnbShapePx_EXPORT const std::shared_ptr<ShapePx_ArcSectionIterInfo> DEFAULT_ITER_INFO;
 
 		//- default constructor
 
 		ShapePx_ArcSection()
 			: theTolerance_(DEFAULT_TOLERANCE)
+			, theIterInfo_(DEFAULT_ITER_INFO)
 		{}
 
 
@@ -44,6 +45,7 @@ namespace tnbLib
 		)
 			: ShapePx_ConicSection(theSection)
 			, theTolerance_(DEFAULT_TOLERANCE)
+			, theIterInfo_(DEFAULT_ITER_INFO)
 		{}
 
 

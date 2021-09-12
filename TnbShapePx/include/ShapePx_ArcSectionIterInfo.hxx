@@ -4,6 +4,7 @@
 
 #include <NumAlg_Secant_Info.hxx>
 #include <NumAlg_FalsePos_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 
 #include <memory>
 
@@ -67,6 +68,28 @@ namespace tnbLib
 		//- constructors
 
 		ShapePx_ArcSectionIterInfo_Secant(const std::shared_ptr<NumAlg_Secant_Info>& theInfo)
+			: theInfo_(theInfo)
+		{}
+
+		const auto& Info() const
+		{
+			return theInfo_;
+		}
+	};
+
+	class ShapePx_ArcSectionIterInfo_Bisection
+		: public ShapePx_ArcSectionIterInfo
+	{
+
+		/*Private Data*/
+
+		std::shared_ptr<NumAlg_BisectionSolver_Info> theInfo_;
+
+	public:
+
+		//- constructors
+
+		ShapePx_ArcSectionIterInfo_Bisection(const std::shared_ptr<NumAlg_BisectionSolver_Info>& theInfo)
 			: theInfo_(theInfo)
 		{}
 

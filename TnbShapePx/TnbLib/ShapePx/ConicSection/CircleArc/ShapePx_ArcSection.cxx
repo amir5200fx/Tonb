@@ -3,11 +3,13 @@
 #include <ShapePx_TopoSect_Corner.hxx>
 #include <ShapePx_TopoSectSegment.hxx>
 #include <Cad2d_QuadraticArc.hxx>
+#include <Pln_CurveTools.hxx>
 #include <Geo_Tools.hxx>
 #include <Vec2d.hxx>
 #include <Dir2d.hxx>
 #include <NumAlg_FalsePos.hxx>
 #include <NumAlg_Secant.hxx>
+#include <NumAlg_BisectionSolver.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -19,11 +21,11 @@
 #include <Geom2d_BSplineCurve.hxx>
 #include <Geom2dAPI_InterCurveCurve.hxx>
 
-#define IterType tnbLib::ShapePx_ArcSectionIterInfo_FalsePos
+#define IterType tnbLib::ShapePx_ArcSectionIterInfo_Bisection
 
 const Standard_Real tnbLib::ShapePx_ArcSection::DEFAULT_TOLERANCE(1.0E-6);
 const std::shared_ptr<tnbLib::ShapePx_ArcSectionIterInfo> 
-tnbLib::ShapePx_ArcSection::DEFAULT_ITER_INFO = std::make_shared<IterType>(std::make_shared<NumAlg_FalsePos_Info>());
+tnbLib::ShapePx_ArcSection::DEFAULT_ITER_INFO = std::make_shared<IterType>(std::make_shared<NumAlg_BisectionSolver_Info>());
 
 namespace tnbLib
 {
@@ -55,7 +57,39 @@ void tnbLib::ArcSectionIterInfo_RunTimeConfig::Init()
 	myInfo->SetMaxIterations(500);
 }
 
-static tnbLib::ArcSectionIterInfo_RunTimeConfig myRunTimeConfig;
+static const tnbLib::ArcSectionIterInfo_RunTimeConfig myRunTimeConfig;
+
+static const auto myBisInfo = std::make_shared<tnbLib::NumAlg_BisectionSolver_Info>();
+
+namespace tnbLib
+{
+
+	class ArcSectionBisectionInitIterInfo_RunTimeConfig
+	{
+
+		/*Private Data*/
+
+	public:
+
+		//- default constructor
+
+		ArcSectionBisectionInitIterInfo_RunTimeConfig()
+		{
+			Init();
+		}
+
+		static void Init();
+	};
+}
+
+void tnbLib::ArcSectionBisectionInitIterInfo_RunTimeConfig::Init()
+{
+	myBisInfo->SetTolerance(1.0e-3);
+	myBisInfo->SetDelta(1.0E-3);
+	myBisInfo->SetMaxIterations(5);
+}
+
+static const tnbLib::ArcSectionBisectionInitIterInfo_RunTimeConfig myInitBisectionRunTimeConfig;
 
 namespace tnbLib
 {
@@ -172,8 +206,8 @@ namespace tnbLib
 
 	auto CalcPointOnEllipse
 	(
-		const Handle(Geom2d_Ellipse)& elps,
-		const Handle(Geom2d_Line)& l, 
+		const Handle(Geom2d_Curve)& elps,
+		const Handle(Geom2d_Curve)& l, 
 		const Standard_Real tol
 	)
 	{
@@ -184,6 +218,7 @@ namespace tnbLib
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "invalid situation has been detected!" << endl
+				<< " - nb. of intersection points: " << alg.NbPoints() << endl
 				<< abort(FatalError);
 		}
 		return alg.Point(1);
@@ -228,11 +263,21 @@ namespace tnbLib
 		knots.SetValue(2, 1.0);
 
 		TColStd_Array1OfInteger mults(1, 2);
-		mults.SetValue(0, 5);
 		mults.SetValue(1, 5);
+		mults.SetValue(2, 5);
 		
-		Handle(Geom2d_BSplineCurve) curve = new Geom2d_BSplineCurve(poles, weights, knots, mults, 4);
-		return std::move(curve);
+		Handle(Geom2d_BSplineCurve) curve;
+		try
+		{
+			curve = new Geom2d_BSplineCurve(poles, weights, knots, mults, 4);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl;
+			return std::move(curve);
+		}
 	}
 
 	auto RetrieveCoords(const std::shared_ptr<ShapePx_TopoSection>& section)
@@ -290,7 +335,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Pnt2d thePointOnEllipse_;
+		Pnt2d theCentre_;
 
 		Standard_Real theRadius_;
 		Standard_Real theTolerance_;
@@ -298,7 +343,7 @@ namespace tnbLib
 		std::vector<Standard_Real> theWs_;
 
 		Handle(Geom2d_BSplineCurve) theCurve_;
-		Handle(Geom2d_Line) theLine_;
+		Handle(Geom2d_Curve) theLine_;
 
 	public:
 
@@ -311,13 +356,13 @@ namespace tnbLib
 		ArcSection_Function
 		(
 			const Standard_Real theRadius,
-			const Pnt2d& thePointOnEllipse, 
+			const Pnt2d& theCentre, 
 			const std::vector<Standard_Real>& theWs, 
 			const Handle(Geom2d_BSplineCurve)& theCurve,
-			const Handle(Geom2d_Line)& theLine
+			const Handle(Geom2d_Curve)& theLine
 		)
 			: theRadius_(theRadius)
-			, thePointOnEllipse_(thePointOnEllipse)
+			, theCentre_(theCentre)
 			, theWs_(theWs)
 			, theCurve_(theCurve)
 			, theLine_(theLine)
@@ -334,9 +379,9 @@ namespace tnbLib
 			return theRadius_;
 		}
 
-		const auto& PointOnEllipse() const
+		const auto& Centre() const
 		{
-			return thePointOnEllipse_;
+			return theCentre_;
 		}
 
 		const auto& Curve() const
@@ -354,9 +399,9 @@ namespace tnbLib
 			return theWs_;
 		}
 
-		void SetPointOnEllipse(Pnt2d&& coord)
+		void SetCentre(Pnt2d&& coord)
 		{
-			thePointOnEllipse_ = std::move(coord);
+			theCentre_ = std::move(coord);
 		}
 
 		void SetWs(std::vector<Standard_Real>&& theWs)
@@ -387,13 +432,13 @@ namespace tnbLib
 		Standard_Real Value(const Standard_Real x) const override
 		{
 			Debug_Null_Pointer(Curve());
-			
+
 			Curve()->SetWeight(2, Ws()[1] * x);
 			Curve()->SetWeight(3, x);
 			Curve()->SetWeight(4, Ws()[3] * x);
-
+			
 			auto pt = CalcPointOnArc(Line(), Curve(), Tolerance());
-			return pt.Distance(PointOnEllipse()) - Radius();
+			return pt.Distance(Centre()) - Radius();
 		}
 	};
 }
@@ -415,9 +460,11 @@ void tnbLib::ShapePx_ArcSection::Perform()
 
 	try
 	{
-		Handle(Geom2d_Ellipse) elps = new Geom2d_Ellipse(RetrieveEllipse(centre, p0, p2, Tolerance()));
+		//Handle(Geom2d_Ellipse) elps = new Geom2d_Ellipse(RetrieveEllipse(centre, p0, p2, Tolerance()));
+		auto elps = Pln_CurveTools::MakeElipsArc(RetrieveEllipse(centre, p0, p2, Tolerance()), p0, p2);
 
-		Handle(Geom2d_Line) line = new Geom2d_Line(centre, Dir2d(centre, corner));
+		//Handle(Geom2d_Line) line = new Geom2d_Line(centre, Dir2d(centre, corner));
+		auto line = Pln_CurveTools::MakeSegment(centre, corner);
 
 		const auto pointOnEllipse = ::tnbLib::CalcPointOnEllipse(elps, line, Tolerance());
 		const auto radius = centre.Distance(pointOnEllipse);
@@ -454,22 +501,48 @@ void tnbLib::ShapePx_ArcSection::Perform()
 		{
 			const auto arc = CreateArc(::tnbLib::RetrieveCoords(section));
 
-			if (auto iterInfo = std::dynamic_pointer_cast<ShapePx_ArcSectionIterInfo_FalsePos>(IterInfo()))
+			if (auto iterInfo = std::dynamic_pointer_cast<ShapePx_ArcSectionIterInfo_Bisection>(IterInfo()))
 			{
-				ArcSection_Function<NumAlg_FalsePos_Function> func(radius, pointOnEllipse, WeightCoffs(), arc, line);
-				NumAlg_FalsePos<ArcSection_Function<NumAlg_FalsePos_Function>, true> alg(func, *iterInfo->Info());
-				alg.Perform(1.0E-4, 1.0);
+				ArcSection_Function<NumAlg_Bisection_Function> func(radius, centre, WeightCoffs(), arc, line);
+				NumAlg_BisectionSolver<ArcSection_Function<NumAlg_Bisection_Function>, true> alg(func, *iterInfo->Info());
+
+				alg.Perform(0.01, 1.0);
 				Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");
 
 				auto w = iterInfo->Info()->Result();
 
 				setWeights5(w, WeightCoffs(), section);
 			}
+			else if (auto iterInfo = std::dynamic_pointer_cast<ShapePx_ArcSectionIterInfo_FalsePos>(IterInfo()))
+			{
+				ArcSection_Function<NumAlg_Bisection_Function> bisFunc(radius, centre, WeightCoffs(), arc, line);
+				NumAlg_BisectionSolver<ArcSection_Function<NumAlg_Bisection_Function>, true> initGuess(bisFunc, *myBisInfo);
+				initGuess.Perform(0.01, 1.0);
+				Debug_If_Condition_Message(NOT initGuess.IsDone(), "the algorithm is not performed");
+
+				ArcSection_Function<NumAlg_FalsePos_Function<true>> func(radius, centre, WeightCoffs(), arc, line);
+				NumAlg_FalsePos<ArcSection_Function<NumAlg_FalsePos_Function<true>>, true> alg(func, *iterInfo->Info());
+				alg.SetLower(0);
+				alg.SetUpper(1);
+				alg.Perform(myBisInfo->X0(), myBisInfo->X1());
+				Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");
+
+				auto w = MEAN(iterInfo->Info()->X0(), iterInfo->Info()->X1());
+
+				setWeights5(w, WeightCoffs(), section);
+			}
 			else if (auto iterInfo = std::dynamic_pointer_cast<ShapePx_ArcSectionIterInfo_Secant>(IterInfo()))
 			{
-				ArcSection_Function<NumAlg_Secant_Function<true>> func(radius, pointOnEllipse, WeightCoffs(), arc, line);
+				ArcSection_Function<NumAlg_Bisection_Function> bisFunc(radius, centre, WeightCoffs(), arc, line);
+				NumAlg_BisectionSolver<ArcSection_Function<NumAlg_Bisection_Function>, true> initGuess(bisFunc, *myBisInfo);
+				initGuess.Perform(0.01, 1.0);
+				Debug_If_Condition_Message(NOT initGuess.IsDone(), "the algorithm is not performed");
+
+				ArcSection_Function<NumAlg_Secant_Function<true>> func(radius, centre, WeightCoffs(), arc, line);
 				NumAlg_Secant<ArcSection_Function<NumAlg_Secant_Function<true>>, true> alg(func, *iterInfo->Info());
-				alg.Perform(1.0E-4, 1.0);
+				alg.SetLower(0);
+				alg.SetUpper(1);
+				alg.Perform(myBisInfo->X0(), myBisInfo->X1());
 				Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");
 
 				auto w = MEAN(iterInfo->Info()->X0(), iterInfo->Info()->X1());
