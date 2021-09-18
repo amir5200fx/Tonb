@@ -9,7 +9,7 @@ tnbLib::ptdModel::Shape_PropBladeParent::Shape_PropBladeParent
 	: Shape_PropBlade(theShape)
 	, theInfo_(theInfo)
 	, theFaces_(theFaces)
-	, theAx_(gp::OZ())
+	, theAx_(gp::XOY())
 {
 	//- empty body
 }
@@ -23,7 +23,7 @@ tnbLib::ptdModel::Shape_PropBladeParent::Shape_PropBladeParent
 	: Shape_PropBlade(std::move(theShape))
 	, theInfo_(std::move(theInfo))
 	, theFaces_(std::move(theFaces))
-	, theAx_(gp::OZ())
+	, theAx_(gp::XOY())
 {
 	//- empty body
 }
@@ -39,7 +39,7 @@ tnbLib::ptdModel::Shape_PropBladeParent::Shape_PropBladeParent
 	: Shape_PropBlade(theIndex, theName, theShape)
 	, theInfo_(theInfo)
 	, theFaces_(theFaces)
-	, theAx_(gp::OZ())
+	, theAx_(gp::XOY())
 {
 	//- empty body
 }
@@ -55,7 +55,7 @@ tnbLib::ptdModel::Shape_PropBladeParent::Shape_PropBladeParent
 	: Shape_PropBlade(theIndex, theName, std::move(theShape))
 	, theInfo_(std::move(theInfo))
 	, theFaces_(std::move(theFaces))
-	, theAx_(gp::OZ())
+	, theAx_(gp::XOY())
 {
 	//- empty body
 }
@@ -80,7 +80,7 @@ void tnbLib::ptdModel::Shape_PropBladeParent::SetFaces(std::vector<std::shared_p
 	theFaces_ = std::move(theFaces);
 }
 
-void tnbLib::ptdModel::Shape_PropBladeParent::SetAxis(const gp_Ax1 & theAx)
+void tnbLib::ptdModel::Shape_PropBladeParent::SetAxis(const gp_Ax2 & theAx)
 {
 	theAx_ = theAx;
 }

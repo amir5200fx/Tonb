@@ -4,7 +4,7 @@
 
 #include <PtdModel_Shape_PropBlade.hxx>
 
-#include <gp_Ax1.hxx>
+#include <gp_Ax2.hxx>
 
 namespace tnbLib
 {
@@ -22,7 +22,7 @@ namespace tnbLib
 
 			std::vector<std::shared_ptr<PtdModel_Face>> theFaces_;
 
-			gp_Ax1 theAx_;
+			gp_Ax2 theAx_;
 
 			//- private functions and operators
 
@@ -94,7 +94,7 @@ namespace tnbLib
 			TnbPtdModel_EXPORT void SetFaces(const std::vector<std::shared_ptr<PtdModel_Face>>& theFaces);
 			TnbPtdModel_EXPORT void SetFaces(std::vector<std::shared_ptr<PtdModel_Face>>&& theFaces);
 
-			void SetAxis(const gp_Ax1&);
+			void SetAxis(const gp_Ax2&);
 		};
 	}
 }

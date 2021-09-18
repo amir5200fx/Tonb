@@ -50,7 +50,7 @@ void tnbLib::ptdModel::SolidMaker_PropBlades::Perform()
 			<< abort(FatalError);
 	}
 
-	const auto& ax = parent->Axis();
+	const auto& ax = parent->Axis().Axis();
 
 	const auto dTheta = 2.0*M_PI / (Standard_Real)NbBlades();
 
