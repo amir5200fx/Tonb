@@ -210,7 +210,7 @@ namespace tnbLib
 
 			if (verbose)
 			{
-				Info << " net, " << i << " saved in: " << address << ", successfully!" << endl;
+				Info << " net, " << i << " is saved in: " << address << ", successfully!" << endl;
 			}
 			i++;
 		}
