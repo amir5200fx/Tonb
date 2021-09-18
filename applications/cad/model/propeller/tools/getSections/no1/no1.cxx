@@ -5,6 +5,7 @@
 #include <PtdModel_BladeFormMakersNo1.hxx>
 #include <PtdModel_BladeExpandedView.hxx>
 #include <PtdModel_BladeSections.hxx>
+#include <PtdModel_BladeSection.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -16,7 +17,7 @@ namespace tnbLib
 	static bool loadTag = false;
 	static bool exeTag = false;
 
-	static std::shared_ptr<PtdModel_PropBladeNo1> myBlade;
+	static std::shared_ptr<PtdModel_PropBlade> myBlade;
 	static std::shared_ptr<PtdModel_BladeSections> mySections;
 
 	static bool doSkew = true;
@@ -28,6 +29,36 @@ namespace tnbLib
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
+	}
+
+	void setDoSkew(bool c)
+	{
+		doSkew = c;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the skew tag is set to: " << (doSkew ? "TRUE" : "FALSE") << endl;
+		}
+	}
+
+	void setDoRake(bool c)
+	{
+		doRake = c;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the rake tag is set to: " << (doRake ? "TRUE" : "FALSE") << endl;
+		}
+	}
+
+	void setDoPitch(bool c)
+	{
+		doPitch = c;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the pitch tag is set to: " << (doPitch ? "TRUE" : "FALSE") << endl;
+		}
 	}
 
 	void LoadModel(const std::string& name)
@@ -146,7 +177,7 @@ namespace tnbLib
 
 		const auto nbSpans = expandedViews[0]->NbSpans();
 
-		std::vector<std::shared_ptr<PtdModel_UnWrappedBladeSection>> bladeSections;
+		std::vector<std::shared_ptr<PtdModel_BladeSection>> bladeSections;
 		bladeSections.reserve(xPars->NbSections());
 
 		for (size_t section = 0; section < xPars->NbSections(); section++)
@@ -220,7 +251,105 @@ namespace tnbLib
 		}
 
 		mySections = std::make_shared<PtdModel_BladeSections>(std::move(bladeSections));
-	
+
 		exeTag = true;
+	}
+}
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+#include <chaiscript/chaiscript.hpp>
+
+namespace tnbLib
+{
+
+	typedef std::shared_ptr<chaiscript::Module> module_t;
+
+	void setFunctions(const module_t& mod)
+	{
+		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](bool c)-> void {setDoPitch(c); }), "doPaitch");
+		mod->add(chaiscript::fun([](bool c)-> void {setDoSkew(c); }), "doSkew");
+		mod->add(chaiscript::fun([](bool c)-> void {setDoRake(c); }), "doRake");
+
+		mod->add(chaiscript::fun([](const std::string& name)-> void {LoadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+	}
+
+	std::string getString(char* argv)
+	{
+		std::string argument(argv);
+		return std::move(argument);
+	}
+
+	Standard_Boolean IsEqualCommand(char* argv, const std::string& command)
+	{
+		auto argument = getString(argv);
+		return argument IS_EQUAL command;
+	}
+}
+
+using namespace tnbLib;
+
+int main(int argc, char *argv[])
+{
+
+	//FatalError.throwExceptions();
+
+	//PtdModel_PropSection::verbose = 2;
+	//PtdModel_PropBlade::verbose = 2;
+
+	if (argc <= 1)
+	{
+		Info << " - No command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
+
+	if (argc IS_EQUAL 2)
+	{
+		if (IsEqualCommand(argv[1], "--help"))
+		{
+			Info << "this is help" << endl;
+		}
+		else if (IsEqualCommand(argv[1], "--run"))
+		{
+			chaiscript::ChaiScript chai;
+
+			auto mod = std::make_shared<chaiscript::Module>();
+
+			setFunctions(mod);
+
+			chai.add(mod);
+
+			std::string address = ".\\system\\getSectionsPropNo1";
+			fileName myFileName(address);
+
+			try
+			{
+				chai.eval_file(myFileName);
+			}
+			catch (const chaiscript::exception::eval_error& x)
+			{
+				Info << x.pretty_print() << endl;
+			}
+			catch (const error& x)
+			{
+				Info << x.message() << endl;
+			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
+			}
+		}
+	}
+	else
+	{
+		Info << " - No valid command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
 	}
 }
