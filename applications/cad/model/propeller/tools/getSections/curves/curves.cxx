@@ -116,6 +116,7 @@ namespace tnbLib
 		for (const auto& x : Qs3d)
 		{
 			Pnt2d pt(x.X(), x.Z());
+			//pt.Mirror(gp::OY2d());
 			Qs.push_back(std::move(pt));
 		}
 		return std::move(Qs);

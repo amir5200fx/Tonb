@@ -271,7 +271,7 @@ namespace tnbLib
 	{
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
-		mod->add(chaiscript::fun([](bool c)-> void {setDoPitch(c); }), "doPaitch");
+		mod->add(chaiscript::fun([](bool c)-> void {setDoPitch(c); }), "doPitch");
 		mod->add(chaiscript::fun([](bool c)-> void {setDoSkew(c); }), "doSkew");
 		mod->add(chaiscript::fun([](bool c)-> void {setDoRake(c); }), "doRake");
 
