@@ -261,9 +261,9 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			tnbLib::Info << endl;
-			tnbLib::Info << " This application is aimed to create an apex patch." << endl;
-			tnbLib::Info << endl
+			Info << endl;
+			Info << " This application is aimed to create an apex patch." << endl;
+			Info << endl
 				<< " Function list:" << endl
 				<< " - loadModel(string)" << endl
 				<< " - saveTo(string)" << endl << endl
