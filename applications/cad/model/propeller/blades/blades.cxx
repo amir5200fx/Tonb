@@ -208,7 +208,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("propBladesMaker");
+			std::string address = ".\\system\\propBladesMaker";
+			fileName myFileName(address);
 
 			try
 			{

@@ -199,7 +199,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("propHubMaker");
+			std::string address = ".\\system\\propHubMaker";
+			fileName myFileName(address);
 
 			try
 			{
