@@ -52,9 +52,6 @@
     <Filter Include="TnbLib\Geo\Entities\Chain">
       <UniqueIdentifier>{c992d454-3344-4c01-92f9-fd8b1f5811d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Geo\Entities\Connectivity">
-      <UniqueIdentifier>{9f48e764-717e-425a-9422-f637916696d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Geo\Entities\Direct">
       <UniqueIdentifier>{6f0b70cf-1d58-41ee-aa08-ec078e3483d2}</UniqueIdentifier>
     </Filter>
@@ -435,6 +432,9 @@
     </Filter>
     <Filter Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq">
       <UniqueIdentifier>{7877bbab-2b74-47d9-abed-ebb7081ce925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Connectivity">
+      <UniqueIdentifier>{9f48e764-717e-425a-9422-f637916696d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
