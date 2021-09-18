@@ -301,6 +301,9 @@
     <Filter Include="TnbLib\Cad\ConicApexMaker">
       <UniqueIdentifier>{9159d29d-f41e-4fa2-a66f-dac17c9697a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Entities\Curve">
+      <UniqueIdentifier>{9cd9ea34-43ad-494f-b111-b112dde56508}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -602,6 +605,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\ConicApexMaker\Cad_ConicApexMaker.hxx">
       <Filter>TnbLib\Cad\ConicApexMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\Curve\Cad_GeomCurve.hxx">
+      <Filter>TnbLib\Cad\Entities\Curve</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -911,5 +917,14 @@
     <ClCompile Include="TnbLib\Cad\ConicApexMaker\Cad_ConicApexMaker.cxx">
       <Filter>TnbLib\Cad\ConicApexMaker</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\Curve\Cad_GeomCurve.cxx">
+      <Filter>TnbLib\Cad\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\Curve\Cad_GeomCurveIO.cxx">
+      <Filter>TnbLib\Cad\Entities\Curve</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
