@@ -128,7 +128,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("meshList2dToPlt");
+			std::string address = ".\\system\\meshList2dToPlt";
+			fileName myFileName(address);
 
 			try
 			{

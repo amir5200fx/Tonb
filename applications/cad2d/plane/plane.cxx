@@ -319,7 +319,8 @@ int main(int argc, char* argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("plane");
+			std::string address = ".\\system\\plane";
+			fileName myFileName(address);
 
 			try
 			{

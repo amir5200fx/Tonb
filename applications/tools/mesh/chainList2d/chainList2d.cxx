@@ -142,7 +142,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbChainList2d");
+			std::string address = ".\\system\\TnbChainList2d";
+			fileName myFileName(address);
 
 			try
 			{

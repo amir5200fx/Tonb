@@ -142,7 +142,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbMeshList");
+			std::string address = ".\\system\\TnbMeshList";
+			fileName myFileName(address);
 
 			try
 			{

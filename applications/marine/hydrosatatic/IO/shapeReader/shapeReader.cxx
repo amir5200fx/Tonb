@@ -403,7 +403,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcShapeReader");
+			std::string address = ".\\system\\hydstcShapeReader";
+			fileName myFileName(address);
 
 			try
 			{

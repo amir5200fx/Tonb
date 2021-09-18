@@ -302,7 +302,9 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbEdgesDiscretizer2d");
+
+			std::string address = ".\\system\\TnbEdgesDiscretizer2d";
+			fileName myFileName(address);
 
 			try
 			{
