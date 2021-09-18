@@ -7,6 +7,7 @@
 
 #include <boost/archive/polymorphic_binary_iarchive.hpp>
 #include <boost/archive/polymorphic_binary_oarchive.hpp>
+#include <boost/filesystem.hpp>
 
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
@@ -22,8 +23,10 @@ namespace tnbLib
 	static std::vector<net_t> myNets;
 
 	static std::vector<std::shared_ptr<Cad_GeomSurface>> mySurf;
+	static std::vector<unsigned int> mySurfDegs;
 
 	static bool loadTag = false;
+	static bool exeTag = false;
 
 	void loadNet(const std::string& name)
 	{
@@ -40,6 +43,8 @@ namespace tnbLib
 		boost::archive::polymorphic_text_iarchive ia(f);
 		ia >> myNets;
 
+		mySurfDegs.resize(myNets.size(), 3);
+
 		if (verbose)
 		{
 			Info << endl;
@@ -48,6 +53,39 @@ namespace tnbLib
 		}
 
 		loadTag = true;
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		fileName fn(name);
+		std::ofstream f(fn);
+
+		size_t i = 0;
+		for (const auto& x : mySurf)
+		{
+			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			boost::filesystem::path dir(std::to_string(i));
+			boost::filesystem::create_directory(dir);
+
+			std::ofstream file(address);
+
+			boost::archive::polymorphic_text_oarchive oa(file);
+
+			oa << x;
+
+			if (verbose)
+			{
+				Info << " surface " << i << " saved in: " << address << ", successfully!" << endl;
+			}
+			i++;
+		}
 	}
 
 	const auto& selectNet(int i)
@@ -76,20 +114,46 @@ namespace tnbLib
 		mySurf.push_back(std::move(surf));
 	}
 
-	void saveTo(const std::string& name)
+	void setDeg(size_t i, unsigned int deg)
 	{
-		fileName fn(name);
-		std::ofstream f(fn);
+		if (NOT INSIDE(i, 0, myNets.size() - 1))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the index is exceeded the bounds of the net list" << endl
+				<< abort(FatalError);
+		}
+		mySurfDegs[i] = deg;
+	}
 
-		boost::archive::polymorphic_text_oarchive oa(f);
-		oa << mySurf;
+	void execute()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " no control-net list has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
 
 		if (verbose)
 		{
-			Info << endl;
-			Info << " the surfaces are saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
+			Info << " creating surfaces..."
+				<< endl;
 		}
+		for (size_t i = 0; i < myNets.size(); i++)
+		{
+			makeSurf(myNets[i], mySurfDegs[i]);
+			if (verbose)
+			{
+				Info << " - surface nb. " << i + 1 << " is created, successfully!" << endl;
+			}
+		}
+
+		if (verbose)
+		{
+			Info << endl
+				<< " The application is done: All surfaces are created, successfully!" << endl;
+		}
+		exeTag = true;
 	}
 }
 
@@ -106,12 +170,20 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
+
+		//- io functions
+
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadNet(name); }), "loadNets");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
-		mod->add(chaiscript::fun([](int i)->const auto& {return selectNet(i); }), "selectNet");
-		mod->add(chaiscript::fun([](const net_t& n, int d)->void {makeSurf(n, d); }), "createSurface");
+		//- methods
+		mod->add(chaiscript::fun([](size_t i, unsigned int deg)-> void {setDeg(i, deg); }), "setDegree");
+		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 
+		//mod->add(chaiscript::fun([](int i)->const auto& {return selectNet(i); }), "selectNet");
+		//mod->add(chaiscript::fun([](const net_t& n, int d)->void {makeSurf(n, d); }), "createSurface");
+
+		//- settings
 		mod->add(chaiscript::fun([](unsigned short i)-> void {verbose = i; }), "setVerbose");
 	}
 
@@ -145,7 +217,17 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << "This application is aimed to create geometric surfaces from control-net vector." << endl;
+			Info << endl
+				<< " - the function list is: " << endl
+				<< " - loadNets(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " - setDegree(net index, deg);   the default value for a surface is 3." << endl
+				<< " - execute()" << endl
+				<< endl
+				<< " # settings: " << endl
+				<< " - setVerbose(unsigned short);  levels: 0, 1" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -175,6 +257,12 @@ int main(int argc, char *argv[])
 			{
 				Info << x.what() << endl;
 			}
+		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
 		}
 	}
 	else
