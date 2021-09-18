@@ -373,6 +373,12 @@
     <Filter Include="TnbLib\PtdModel\SolidMaker\PropBlades">
       <UniqueIdentifier>{1c8cbf10-fbcf-4f5a-8af5-e7b39ac6f89a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\RadialSection">
+      <UniqueIdentifier>{0f982f72-40c3-41dc-86f3-6ed7fc59a382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Entities\BladeRadialSections">
+      <UniqueIdentifier>{3bafa3d6-0566-4f85-8dde-ec625cc7474f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdModel\Entities\Entity\PtdModel_Entity.hxx">
@@ -891,6 +897,12 @@
     <ClInclude Include="TnbLib\PtdModel\Propeller\Blade\Section\PtdModel_BladeSections.hxx">
       <Filter>TnbLib\PtdModel\Propeller\Blade\Section</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\RadialSection\PtdModel_RadialSection.hxx">
+      <Filter>TnbLib\PtdModel\Entities\RadialSection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Entities\BladeRadialSections\PtdModel_BladeRadialSections.hxx">
+      <Filter>TnbLib\PtdModel\Entities\BladeRadialSections</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\PtdModel\xPars\PtdModel_xParsIO.cxx">
@@ -1288,6 +1300,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\PtdModel\Models\Hub\No1\PtdModel_PropHubNo1IO.cxx">
       <Filter>TnbLib\PtdModel\Models\Hub\No1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\RadialSection\PtdModel_RadialSectionIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\RadialSection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdModel\Entities\BladeRadialSections\PtdModel_BladeRadialSectionsIO.cxx">
+      <Filter>TnbLib\PtdModel\Entities\BladeRadialSections</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
