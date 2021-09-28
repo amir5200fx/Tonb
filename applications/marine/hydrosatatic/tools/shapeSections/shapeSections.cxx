@@ -576,7 +576,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcShapeSections");
+			std::string address = ".\\system\\hydstcShapeSections";
+			fileName myFileName(address);
 
 			try
 			{

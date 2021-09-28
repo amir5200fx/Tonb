@@ -261,7 +261,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("edge2d");
+			std::string address = ".\\system\\edge2d";
+			fileName myFileName(address);
 
 			try
 			{

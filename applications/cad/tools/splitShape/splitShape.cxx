@@ -214,7 +214,6 @@ namespace tnbLib
 
 		try
 		{
-
 			BRepAlgoAPI_Section aSection(myShape->Shape(), gp_Pln(myLoc, myDir), Standard_False);
 			aSection.ComputePCurveOn1(Standard_True);
 			aSection.Approximation(Standard_True);
@@ -222,11 +221,11 @@ namespace tnbLib
 			aSection.Build();
 
 			BRepFeat_SplitShape spliter(myShape->Shape());
-			for (TopExp_Explorer iter(myShape->Shape(), TopAbs_EDGE); iter.More(); iter.Next())
+			for (TopExp_Explorer iter(aSection.Shape(), TopAbs_EDGE); iter.More(); iter.Next())
 			{
 				TopoDS_Shape anEdge = iter.Current();
 				TopoDS_Face aFace;
-
+				
 				if (aSection.HasAncestorFaceOn1(anEdge, aFace))
 				{
 					TopoDS_Edge E = TopoDS::Edge(anEdge);
@@ -252,7 +251,6 @@ namespace tnbLib
 			for (auto i = aLeftShapes.cbegin(); i != aLeftShapes.cend(); i++)
 			{
 				aLeftShapeMap.Add(*i);
-
 				aBuilder.Add(aLeftCompound, *i);
 			}
 
@@ -267,7 +265,7 @@ namespace tnbLib
 					aBuilder.Add(aRightCompound, *i);
 				}
 			}
-			PAUSE;
+
 			mySub0 = std::make_shared<Cad_Shape>(0, "left side of " + myShape->Name(), aLeftCompound);
 			mySub1 = std::make_shared<Cad_Shape>(0, "right side of " + myShape->Name(), aRightCompound);
 		}

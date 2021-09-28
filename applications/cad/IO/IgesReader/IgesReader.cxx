@@ -160,7 +160,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("igesReader");
+			std::string address = ".\\system\\igesReader";
+			fileName myFileName(address);
 
 			try
 			{

@@ -249,7 +249,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("curve2d");
+			std::string address = ".\\system\\curve2d";
+			fileName myFileName(address);
 
 			try
 			{

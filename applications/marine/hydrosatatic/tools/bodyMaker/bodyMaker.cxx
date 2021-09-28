@@ -281,7 +281,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcBodyMaker");
+			std::string address = ".\\system\\hydstcBodyMaker";
+			fileName myFileName(address);
 
 			try
 			{

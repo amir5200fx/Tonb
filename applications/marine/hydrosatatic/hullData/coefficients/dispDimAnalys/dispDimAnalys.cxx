@@ -161,7 +161,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataDispDimAnalys");
+			std::string address = ".\\system\\hullDataDispDimAnalys";
+			fileName myFileName(address);
 
 			try
 			{

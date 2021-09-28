@@ -537,7 +537,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("tecReportWettedCoeff");
+			std::string address = ".\\system\\tecReportWettedCoeff";
+			fileName myFileName(address);
 
 			try
 			{

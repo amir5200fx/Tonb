@@ -216,7 +216,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbPgSurfaceDiscretizer");
+			std::string address = ".\\system\\TnbPgSurfaceDiscretizer";
+			fileName myFileName(address);
 
 			try
 			{

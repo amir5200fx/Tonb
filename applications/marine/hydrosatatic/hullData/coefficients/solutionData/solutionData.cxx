@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << " This application is aimed to provide a solution data for the hydrostatic coefficients of hull" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -175,7 +175,9 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataSolutionData");
+
+			std::string address = ".\\system\\hullDataSolutionData";
+			fileName myFileName(address);
 
 			try
 			{

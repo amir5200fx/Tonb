@@ -289,7 +289,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataFlatWave");
+			std::string address = ".\\system\\hullDataFlatWave";
+			fileName myFileName(address);
 
 			try
 			{

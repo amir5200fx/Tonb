@@ -443,7 +443,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcDiscreteSections");
+			std::string address = ".\\system\\hydstcDiscreteSections";
+			fileName myFileName(address);
 
 			try
 			{

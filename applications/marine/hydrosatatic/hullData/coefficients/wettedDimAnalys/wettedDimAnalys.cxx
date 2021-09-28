@@ -196,7 +196,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataWettedDimAnalys");
+			std::string address = ".\\system\\hullDataWettedDimAnalys";
+			fileName myFileName(address);
 
 			try
 			{

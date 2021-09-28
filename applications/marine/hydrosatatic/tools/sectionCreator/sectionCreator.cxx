@@ -378,7 +378,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcSectionCreator");
+			std::string address = ".\\system\\hydstcSectionCreator";
+			fileName myFileName(address);
 
 			try
 			{

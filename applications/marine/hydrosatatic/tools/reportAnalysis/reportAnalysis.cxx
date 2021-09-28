@@ -197,7 +197,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcReportAnalysis");
+			std::string address = ".\\system\\hydstcReportAnalysis";
+			fileName myFileName(address);
 
 			try
 			{

@@ -274,7 +274,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataWaveViewer");
+			std::string address = ".\\system\\hullDataWaveViewer";
+			fileName myFileName(address);
 
 			try
 			{

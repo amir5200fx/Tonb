@@ -1,4 +1,5 @@
 #include <Pln_CurveTools.hxx>
+#include <Pln_Tools.hxx>
 #include <Pln_Curve.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Ring.hxx>
@@ -23,20 +24,28 @@
 
 #include <vector>
 
+#include <boost/filesystem.hpp>
+
+#define SetNameIndex(myName) (int)myCurves.size(), myName + std::to_string((int)myCurves.size())
+
 namespace tnbLib
 {
 
 	typedef std::shared_ptr<Pln_Curve> curve_t;
 	typedef std::shared_ptr<Pln_Edge> edge_t;
 
-	curve_t myCurve;
+	//curve_t myCurve;
+
+	static std::vector<curve_t> myCurves;
 
 	static double intplTol = 1.0E-6;
 	static double ringTol = Precision::Confusion();
 
+	static unsigned short verbose(0);
+
 	//- globals
 
-	void checkCurve()
+	/*void checkCurve()
 	{
 		if (NOT myCurve)
 		{
@@ -44,6 +53,13 @@ namespace tnbLib
 				<< "no curve has been constructed!" << endl
 				<< abort(FatalError);
 		}
+	}*/
+
+	void setVerbose(unsigned short i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
 	}
 
 	void setIntplTol(double x)
@@ -51,10 +67,9 @@ namespace tnbLib
 		intplTol = x;
 	}
 
-	void setName(const std::string& name)
+	void setName(const curve_t& c, const std::string& name)
 	{
-		checkCurve();
-		myCurve->SetName(name);
+		c->SetName(name);
 	}
 
 	auto makePointList()
@@ -81,10 +96,17 @@ namespace tnbLib
 
 	//- curve makers
 
-	void makeInterpolation(const std::vector<Pnt2d>& q)
+	auto makeInterpolation(const std::vector<Pnt2d>& q)
 	{
 		auto geom = Pln_CurveTools::Interpolation(q, false, intplTol);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("interpl "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
 	auto makePoint(double x, double y)
@@ -137,159 +159,270 @@ namespace tnbLib
 		return std::move(g);
 	}
 
-	void makeSegment(const Pnt2d& p0, const Pnt2d& p1)
+	auto makeSegment(const Pnt2d& p0, const Pnt2d& p1)
 	{
 		auto geom = Pln_CurveTools::MakeSegment(p0, p1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("segment "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircArc(const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	auto makeCircArc(const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
 	{
 		auto geom = Pln_CurveTools::MakeCircArc(p0, p1, p2);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircArc(const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p2)
+	auto makeCircArc(const Pnt2d& p0, const Vec2d& v0, const Pnt2d& p2)
 	{
 		auto geom = Pln_CurveTools::MakeCircArc(p0, v0, p2);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircArc(const gp_Circ2d& c, double a0, double a1)
+	auto makeCircArc(const gp_Circ2d& c, double a0, double a1)
 	{
 		auto geom = Pln_CurveTools::MakeCircArc(c, a0, a1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircArc(const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)
+	auto makeCircArc(const gp_Circ2d& c, const Pnt2d& p0, const Pnt2d& p1)
 	{
 		auto geom = Pln_CurveTools::MakeCircArc(c, p0, p1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeElipsArc(const gp_Elips2d& e, double a0, double a1)
+	auto makeElipsArc(const gp_Elips2d& e, double a0, double a1)
 	{
 		auto geom = Pln_CurveTools::MakeElipsArc(e, a0, a1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("ellipse "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeElipsArc(const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)
+	auto makeElipsArc(const gp_Elips2d& e, const Pnt2d& p0, const Pnt2d& p1)
 	{
 		auto geom = Pln_CurveTools::MakeElipsArc(e, p0, p1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("ellipse "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeHyprArc(const gp_Hypr2d& h, double a0, double a1)
+	auto makeHyprArc(const gp_Hypr2d& h, double a0, double a1)
 	{
 		auto geom = Pln_CurveTools::MakeHyprArc(h, a0, a1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("hyperbola "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeHyprArc(const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)
+	auto makeHyprArc(const gp_Hypr2d& h, const Pnt2d& p0, const Pnt2d& p1)
 	{
 		auto geom = Pln_CurveTools::MakeHyprArc(h, p0, p1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("hyperbola "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeParbArc(const gp_Parab2d& p, double a0, double a1)
+	auto makeParbArc(const gp_Parab2d& p, double a0, double a1)
 	{
 		auto geom = Pln_CurveTools::MakeParbArc(p, a0, a1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("parabola "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeParbArc(const gp_Parab2d& p, const Pnt2d& p0, const Pnt2d& p1)
+	auto makeParbArc(const gp_Parab2d& p, const Pnt2d& p0, const Pnt2d& p1)
 	{
 		auto geom = Pln_CurveTools::MakeParbArc(p, p0, p1);
-		myCurve = std::make_shared<Pln_Curve>(std::move(geom));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("parabola "), std::move(geom));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircle(const gp_Circ2d& C)
+	auto makeCircle(const gp_Circ2d& C)
 	{
 		auto geom = Pln_CurveTools::MakeCircle(C);
 		auto trimmed = Pln_CurveTools::Trim(geom, geom->FirstParameter(), geom->LastParameter());
-		myCurve = std::make_shared<Pln_Curve>(std::move(trimmed));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(trimmed));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircle(const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
+	auto makeCircle(const Pnt2d& p0, const Pnt2d& p1, const Pnt2d& p2)
 	{
 		auto geom = Pln_CurveTools::MakeCircle(p0, p1, p2);
 		auto trimmed = Pln_CurveTools::Trim(geom, geom->FirstParameter(), geom->LastParameter());
-		myCurve = std::make_shared<Pln_Curve>(std::move(trimmed));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(trimmed));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircle(const Pnt2d& p0, double r)
+	auto makeCircle(const Pnt2d& p0, double r)
 	{
 		auto geom = Pln_CurveTools::MakeCircle(p0, r);
 		auto trimmed = Pln_CurveTools::Trim(geom, geom->FirstParameter(), geom->LastParameter());
-		myCurve = std::make_shared<Pln_Curve>(std::move(trimmed));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(trimmed));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeCircle(const Pnt2d& c, const Pnt2d& p)
+	auto makeCircle(const Pnt2d& c, const Pnt2d& p)
 	{
 		auto geom = Pln_CurveTools::MakeCircle(c, p);
 		auto trimmed = Pln_CurveTools::Trim(geom, geom->FirstParameter(), geom->LastParameter());
-		myCurve = std::make_shared<Pln_Curve>(std::move(trimmed));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("circle "), std::move(trimmed));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeEllipse(const gp_Elips2d& E)
+	auto makeEllipse(const gp_Elips2d& E)
 	{
 		auto geom = Pln_CurveTools::MakeEllipse(E);
 		auto trimmed = Pln_CurveTools::Trim(geom, geom->FirstParameter(), geom->LastParameter());
-		myCurve = std::make_shared<Pln_Curve>(std::move(trimmed));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("ellipse "), std::move(trimmed));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
-	void makeEllipse(const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
+	auto makeEllipse(const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)
 	{
 		auto geom = Pln_CurveTools::MakeEllipse(s0, s1, c);
 		auto trimmed = Pln_CurveTools::Trim(geom, geom->FirstParameter(), geom->LastParameter());
-		myCurve = std::make_shared<Pln_Curve>(std::move(trimmed));
+		auto myCurve = std::make_shared<Pln_Curve>(SetNameIndex("ellipse "), std::move(trimmed));
+		myCurves.push_back(myCurve);
+
+		if (verbose)
+		{
+			Info << " - a curve, id: " << myCurve->Index() << ", name: " << myCurve->Name() << ", is created, successfully!" << endl;
+		}
+		return myCurve;
 	}
 
 	void saveTo(const std::string& name)
 	{
-		if (NOT myCurve)
+		if (verbose)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "no curve has been created!" << endl
-				<< abort(FatalError);
+			Info << endl;
 		}
-		fileName fn(name);
-		std::ofstream f(fn);
 
-		boost::archive::polymorphic_text_oarchive oa(f);
+		auto myEdges = Pln_Tools::RetrieveEdges(myCurves);
 
-		oa << myCurve;
-	}
-
-	void saveEdgeTo(const std::string& name)
-	{
-		if (NOT myCurve)
+		size_t i = 0;
+		for (const auto& x : myEdges)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "no curve has been created!" << endl
-				<< abort(FatalError);
+			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			boost::filesystem::path dir(std::to_string(i));
+			boost::filesystem::create_directory(dir);
+
+			std::ofstream file(address);
+
+			TNB_oARCH_FILE_TYPE oa(file);
+
+			oa << x;
+
+			if (verbose)
+			{
+				Info << " - curve, id:  " << x->Index() << ", name: " << x->Name() << "is saved in: " << address << ", successfully!" << endl;
+			}
+			i++;
 		}
-		fileName fn(name);
-		std::ofstream f(fn);
 
-		boost::archive::polymorphic_text_oarchive oa(f);
-
-		if (myCurve->IsRing(ringTol))
+		if (verbose)
 		{
-			auto vtx = std::make_shared<Pln_Vertex>(myCurve->FirstCoord());
-			std::shared_ptr<Pln_Edge> ring = std::make_shared<Pln_Ring>(vtx, myCurve);
-			oa << ring;
-		}
-		else
-		{
-			auto v0 = std::make_shared<Pln_Vertex>(myCurve->FirstCoord());
-			auto v1 = std::make_shared<Pln_Vertex>(myCurve->LastCoord());
-			auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), myCurve);
-			oa << edge;
+			Info << endl
+				<< " all curves are saved, successfully!" << endl;
 		}
 	}
 
-	void loadCurve(const std::string& name)
+	/*void loadCurve(const std::string& name)
 	{
 		fileName fn(name);
 		std::ifstream f(fn);
@@ -297,35 +430,7 @@ namespace tnbLib
 		boost::archive::polymorphic_text_iarchive oa(f);
 
 		oa >> myCurve;
-	}
-
-	void exportToPlt(const std::string& name, int n)
-	{
-		checkCurve();
-		fileName fn(name);
-		OFstream f(fn);
-
-		n = std::max(n, 5);
-		if (myCurve)
-		{
-			const auto& geom = myCurve->Geometry();
-			const auto u0 = myCurve->FirstParameter();
-			const auto u1 = myCurve->LastParameter();
-			const auto du = (u1 - u0) / n;
-
-			Entity2d_Polygon poly;
-			auto& pnts = poly.Points();
-			pnts.reserve(n);
-			for (size_t i = 0; i <= n; i++)
-			{
-				auto u = u0 + i * du;
-
-				pnts.push_back(geom->Value(u));
-			}
-
-			poly.ExportToPlt(f);
-		}
-	}
+	}*/
 }
 
 #ifdef DebugInfo
@@ -341,6 +446,7 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
+		mod->add(chaiscript::fun([](const curve_t& c, const std::string& name)-> void {setName(c, name); }), "setName");
 		mod->add(chaiscript::fun([](double x)->void {setIntplTol(x); }), "setInterplTol");
 		mod->add(chaiscript::fun([]()->auto {return makePointList(); }), "makePointList");
 		mod->add(chaiscript::fun([](std::vector<Pnt2d>& l, const Pnt2d& p)->void {pushBackToList(l, p); }), "pushBack");
@@ -382,9 +488,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const Pnt2d& s0, const Pnt2d& s1, const Pnt2d& c)-> auto {return makeEllipse(s0, s1, c); }), "makeElips");
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveEdgeTo(name); }), "saveEdgeTo");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadCurve(name); }), "loadCurve");
-		mod->add(chaiscript::fun([](const std::string& name, int n)-> void {exportToPlt(name, n); }), "exportToPlt");
+		mod->add(chaiscript::fun([](unsigned short c)-> void {setVerbose(c); }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -418,7 +522,62 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to create a list of planar curve." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # geometric operators: " << endl << endl
+				<< " - [point]     makePoint(x, y) " << endl
+				<< " - [direction] makeDirection(x,y) " << endl
+				<< " - [axis]      makeAxis(point, direction) " << endl << endl
+
+				<< " - [geo circle] makeGeoCircle(axis, radius) " << endl
+				<< " - [geo ellips] makeGeoEllips(axis, radius1, radius2);    radius1 >= radius2" << endl
+				<< " - [geo hybr]   makeGeoHybr(axis, radius1, radius2);      radius1 >= radius2 " << endl
+				<< " - [geo parab]  makeGeoParab(axis, focal) " << endl
+				<< " - [geo parab]  makeGeoParab(directrix axis, focal point) " << endl << endl << endl
+
+				<< " # curve makers: " << endl << endl
+				
+				<< " - [curve] makeSegment(point, point)" << endl <<endl
+
+				<< " - [curve] makeCircArc(point, point, point)" << endl
+				<< " - [curve] makeCircArc(point0, vector0, point1)" << endl
+				<< " - [curve] makeCircArc(geoCircle, double a0, double a1)" << endl
+				<< " - [curve] makeCircArc(geoCircle, point p0, point p1)" << endl << endl
+
+				<< " - [curve] makeElipsArc(geoEllips, double a0, double a1)" << endl
+				<< " - [curve] makeElipsArc(geoEllips, double a0, double a1)" << endl << endl
+
+				<< " - [curve] makeHyprArc(geoHypr, double a0, double a1)" << endl
+				<< " - [curve] makeHyprArc(geoHypr, double a0, double a1)" << endl << endl
+
+				<< " - [curve] makeParbArc(geoParab, double a0, double a1)" << endl
+				<< " - [curve] makeParbArc(geoParab, double a0, double a1)" << endl << endl
+
+				<< " - [curve] makeCircle(geoCircle)" << endl
+				<< " - [curve] makeCircle(point p0, point p1, point p2)" << endl
+				<< " - [curve] makeCircle(point p0, radius)" << endl
+				<< " - [curve] makeCircle(centre point, point)" << endl << endl
+
+				<< " - [curve] makeElips(geoEllips)" << endl
+				<< " - [curve] makeElips(point s0, point s1, point c)" << endl << endl
+
+				<< " - [curve] makeInterpolation(point list)" << endl
+
+				<< " # Global functions: " << endl << endl
+
+				<< " - [point list] makePointList()" << endl
+				<< " - setInterplTol(double)" << endl
+				<< " - (pointList).pushBack(point)" << endl
+				<< " - (curve).SetName(string)" << endl
+				<< " - setVerbose(int)" << endl
+
+				<< endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -430,7 +589,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("curve");
+			std::string address = ".\\system\\curveMaker2d";
+			fileName myFileName(address);
 
 			try
 			{

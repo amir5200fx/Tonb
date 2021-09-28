@@ -170,7 +170,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcModelShape");
+			std::string address = ".\\system\\hydstcModelShape";
+			fileName myFileName(address);
 
 			try
 			{

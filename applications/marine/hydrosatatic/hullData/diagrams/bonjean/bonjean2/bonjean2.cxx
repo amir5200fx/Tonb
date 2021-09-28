@@ -161,6 +161,8 @@ namespace tnbLib
 		Debug_If_Condition_Message(NOT solver->IsDone(), "the application is not performed!");
 
 		mySolutionData->SetSections(solver->Sections());
+
+		exeTag = true;
 	}
 }
 
@@ -243,7 +245,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataBonjean");
+			std::string address = ".\\system\\hullDataBonjean";
+			fileName myFileName(address);
 
 			try
 			{

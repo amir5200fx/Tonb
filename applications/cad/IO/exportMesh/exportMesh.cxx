@@ -170,7 +170,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("exportShapeMesh");
+			std::string address = ".\\system\\exportShapeMesh";
+			fileName myFileName(address);
 
 			try
 			{

@@ -286,7 +286,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbCurvesDiscretizer2d");
+			std::string address = ".\\system\\TnbCurvesDiscretizer2d";
+			fileName myFileName(address);
 
 			try
 			{

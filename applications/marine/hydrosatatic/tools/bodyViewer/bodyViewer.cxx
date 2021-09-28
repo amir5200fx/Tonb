@@ -142,7 +142,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcBodyViewer");
+			std::string address = ".\\system\\hydstcBodyViewer";
+			fileName myFileName(address);
 
 			try
 			{

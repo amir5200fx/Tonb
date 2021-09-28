@@ -373,7 +373,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hydstcSectionViewer");
+			std::string address = ".\\system\\hydstcSectionViewer";
+			fileName myFileName(address);
 
 			try
 			{

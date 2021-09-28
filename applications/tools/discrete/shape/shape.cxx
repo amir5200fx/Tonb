@@ -351,7 +351,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("discreteShape");
+			std::string address = ".\\system\\discreteShape";
+			fileName myFileName(address);
 
 			try
 			{

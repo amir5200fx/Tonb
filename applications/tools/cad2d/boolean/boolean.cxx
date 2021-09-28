@@ -1,5 +1,6 @@
 #include <Cad2d_Boolean.hxx>
 #include <Cad2d_Plane.hxx>
+#include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -19,51 +20,96 @@ namespace tnbLib
 	typedef std::shared_ptr<Cad2d_Plane> plane_t;
 
 	static unsigned short verbose = 0;
-	static bool loaded = false;
+	static bool loadTag = false;
+	static bool exeTag = false;
 
-	static std::vector<plane_t> myPlanes;
+	static plane_t myPln0;
+	static plane_t myPln1;
+
+	//static std::vector<plane_t> myPlanes;
 	static std::vector<plane_t> mySumPlanes;
 
 	static double myTol = 1.0e-6;
+
+	void setVerbose(unsigned short i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
 	void loadPlanes(const std::string& name)
 	{
 		if (verbose)
 		{
-			Info << endl;
-			Info << " loading the plane list..." << endl;
-			Info << endl;
+			Info << endl
+				<< " loading the planes..." << endl;
 		}
 
-		std::fstream file;
-		file.open(name, std::ios::in);
+		{//- timer scope
+			size_t i = 0;
 
-		if (file.fail())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "file was not found: " << name << endl
-				<< abort(FatalError);
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
+
+			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			std::fstream file;
+			file.open(address, ios::in);
+
+			if (file.fail())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "file was not found" << endl
+					<< abort(FatalError);
+			}
+
+			TNB_iARCH_FILE_TYPE ia(file);
+			ia >> myPln0;
+
+			if (verbose)
+			{
+				Info << endl
+					<< " the plane 0 is loaded, from: " << address << ", successfully in " << global_time_duration << " ms." << endl
+					<< endl;
+			}
 		}
 
-		boost::archive::polymorphic_text_iarchive ia(file);
+		{//- timer scope
+			size_t i = 1;
 
-		ia >> myPlanes;
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
 
-		if (myPlanes.size() NOT_EQUAL 2)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "there must be two planes in the list" << endl
-				<< abort(FatalError);
+			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			std::fstream file;
+			file.open(address, ios::in);
+
+			if (file.fail())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "file was not found" << endl
+					<< abort(FatalError);
+			}
+
+			TNB_iARCH_FILE_TYPE ia(file);
+			ia >> myPln0;
+
+			if (verbose)
+			{
+				Info << endl
+					<< " the plane 1 is loaded, from: " << address << ", successfully in " << global_time_duration << " ms." << endl
+					<< endl;
+			}
 		}
-
-		loaded = true;
 
 		if (verbose)
 		{
-			Info << endl;
-			Info << " the plane list has been loaded, successfully!" << endl;
-			Info << endl;
+			Info << endl
+				<< " all planes are loaded, successfully!" << endl
+				<< endl;
 		}
+
+		loadTag = true;
 	}
 
 	void unionOp()
@@ -73,15 +119,15 @@ namespace tnbLib
 			mySumPlanes.clear();
 		}
 
-		auto pln = Cad2d_Boolean::Union(myPlanes[0], myPlanes[1], myTol);
+		auto pln = Cad2d_Boolean::Union(myPln0, myPln1, myTol);
 		if (pln)
 		{
 			mySumPlanes.push_back(std::move(pln));
 		}
 		else
 		{
-			mySumPlanes.push_back(myPlanes[0]);
-			mySumPlanes.push_back(myPlanes[1]);
+			mySumPlanes.push_back(myPln0);
+			mySumPlanes.push_back(myPln1);
 		}
 	}
 
@@ -92,10 +138,10 @@ namespace tnbLib
 			mySumPlanes.clear();
 		}
 
-		auto plns = Cad2d_Boolean::Subtract(myPlanes[0], myPlanes[1], myTol);
+		auto plns = Cad2d_Boolean::Subtract(myPln0, myPln1, myTol);
 		if (plns.empty())
 		{
-			mySumPlanes.push_back(myPlanes[0]);
+			mySumPlanes.push_back(myPln0);
 		}
 		else
 		{
@@ -110,7 +156,7 @@ namespace tnbLib
 			mySumPlanes.clear();
 		}
 
-		auto plns = Cad2d_Boolean::Intersection(myPlanes[0], myPlanes[1], myTol);
+		auto plns = Cad2d_Boolean::Intersection(myPln0, myPln1, myTol);
 		if (plns.empty())
 		{
 			// empty body
@@ -123,10 +169,10 @@ namespace tnbLib
 
 	void execute(const std::string& op)
 	{
-		if (NOT loaded)
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "no plane has been loaded!" << endl
+				<< "no planes have been loaded!" << endl
 				<< abort(FatalError);
 		}
 
@@ -168,7 +214,7 @@ namespace tnbLib
 		size_t i = 0;
 		for (const auto& x : mySumPlanes)
 		{
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			std::string address = ".\\results\\" + std::to_string(i) + "\\" + name;
 			boost::filesystem::path dir(std::to_string(i));
 			boost::filesystem::create_directory(dir);
 
@@ -250,7 +296,21 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to apply the boolean operators to the planes." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - loadPlanes(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # Global functions: " << endl << endl
+
+				<< " - setTolerance(double)" << endl
+				<< " - execute()" << endl
+
+				<< endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -262,7 +322,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("boolean");
+			std::string address = ".\\system\\booleanOp2d";
+			fileName myFileName(address);
 
 			try
 			{
