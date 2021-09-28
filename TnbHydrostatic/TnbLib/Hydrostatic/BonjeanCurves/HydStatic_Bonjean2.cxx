@@ -67,15 +67,15 @@ namespace tnbLib
 		const auto nbLevels = dist->Size();
 		std::vector<std::pair<Standard_Real, Standard_Real>> As;
 		As.reserve(nbLevels);
+
 		for (auto z : dist->Values())
 		{
 			if (std::abs(z - z0) <= gp::Resolution())
 			{
-				auto t = std::make_pair(z0, 0.0);
-				As.push_back(std::move(t));
+				//auto t = std::make_pair(0.0, z0);
+				//As.push_back(std::move(t));
 				continue;
 			}
-
 			auto y1 = z;
 
 			auto wa = Marine_WaterTools::WaterSection(Pnt2d(x0, y0), Pnt2d(x1, y1));
@@ -91,11 +91,10 @@ namespace tnbLib
 
 			auto wettedSections = Marine_BooleanOps::WettedSection(section, water);
 			auto area = CalcArea(wettedSections);
-
-			auto t = std::make_pair(z, area);
+			//std::cout << "z = " << z << ", area: " << area << std::endl;
+			auto t = std::make_pair(area, z);
 			As.push_back(std::move(t));		
 		}
-
 		auto curve = std::make_shared<HydStatic_HydOffsetCurve>(std::move(As));
 		return std::move(curve);
 	}
@@ -119,6 +118,8 @@ tnbLib::HydStatic_Bonjean2::CreateDistribution
 
 		distb->Perform();
 		Debug_If_Condition_Message(NOT distb->IsDone(), "the algorithm is not performed!");
+		return std::move(distb);
+		break;
 	}
 	case tnbLib::HydStatic_Bonjean2::levDistb::cosine:
 	{
@@ -129,6 +130,8 @@ tnbLib::HydStatic_Bonjean2::CreateDistribution
 
 		distb->Perform();
 		Debug_If_Condition_Message(NOT distb->IsDone(), "the algorithm is not performed!");
+		return std::move(distb);
+		break;
 	}
 	default:
 		FatalErrorIn(FunctionSIG)
