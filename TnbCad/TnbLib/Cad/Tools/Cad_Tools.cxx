@@ -96,7 +96,18 @@ tnbLib::Cad_Tools::BoundingBox
 	Standard_Real Ymin, Ymax;
 	Standard_Real Zmin, Zmax;
 
-	theBox.Get(Xmin, Ymin, Zmin, Xmax, Ymax, Zmax);
+	try
+	{
+		theBox.Get(Xmin, Ymin, Zmin, Xmax, Ymax, Zmax);
+	}
+	catch (const Standard_Failure& x)
+	{
+		//- the box is void
+
+		FatalErrorIn(FunctionSIG)
+			<< x.GetMessageString() << endl
+			<< abort(FatalError);
+	}
 
 	Entity3d_Box 
 		box(Pnt3d(Xmin, Ymin, Zmin), Pnt3d(Xmax, Ymax, Zmax));
