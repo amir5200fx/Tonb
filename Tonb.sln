@@ -921,6 +921,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "curves", "curves", "{A33B22
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "curves", "applications\cad\model\propeller\tools\getSections\curves\curves.vcxproj", "{CDB130DE-8AD2-49AD-8E6C-254034DC99C0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bonjean2Plotter", "bonjean2Plotter", "{59111345-1431-4AF0-8D34-4420EAEE393D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bonjean2Plotter", "applications\marine\hydrosatatic\hullData\diagrams\bonjean\tools\bonjean2Plotter\bonjean2Plotter.vcxproj", "{83B4610F-AD3E-45B3-B309-C979700BF8B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "planar", "planar", "{7D0EF974-8F2D-4484-85AC-D64FBAE44D66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -2343,6 +2349,14 @@ Global
 		{CDB130DE-8AD2-49AD-8E6C-254034DC99C0}.Release|x64.Build.0 = Release|x64
 		{CDB130DE-8AD2-49AD-8E6C-254034DC99C0}.Release|x86.ActiveCfg = Release|Win32
 		{CDB130DE-8AD2-49AD-8E6C-254034DC99C0}.Release|x86.Build.0 = Release|Win32
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Debug|x64.ActiveCfg = Debug|x64
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Debug|x64.Build.0 = Debug|x64
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Debug|x86.ActiveCfg = Debug|Win32
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Debug|x86.Build.0 = Debug|Win32
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Release|x64.ActiveCfg = Release|x64
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Release|x64.Build.0 = Release|x64
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Release|x86.ActiveCfg = Release|Win32
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2752,6 +2766,9 @@ Global
 		{E77ED76A-6C80-4578-BACF-AABBDC3B3BA0} = {138CDD60-EC50-4D06-824B-C09B7F77C6F7}
 		{A33B227B-1B5E-4C9F-A095-C462B25AFCBA} = {4068AA80-E279-4E76-9591-8CF4DB9747BF}
 		{CDB130DE-8AD2-49AD-8E6C-254034DC99C0} = {A33B227B-1B5E-4C9F-A095-C462B25AFCBA}
+		{59111345-1431-4AF0-8D34-4420EAEE393D} = {FCC73AFE-2956-4443-9042-621386501361}
+		{83B4610F-AD3E-45B3-B309-C979700BF8B9} = {59111345-1431-4AF0-8D34-4420EAEE393D}
+		{7D0EF974-8F2D-4484-85AC-D64FBAE44D66} = {95000DE0-8BCD-4530-A46B-4BD58B48FDAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}
