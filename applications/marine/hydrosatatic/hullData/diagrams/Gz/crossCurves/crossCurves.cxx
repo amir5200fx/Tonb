@@ -14,6 +14,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <boost/filesystem.hpp>
+
 namespace tnbLib
 {
 
@@ -34,6 +36,13 @@ namespace tnbLib
 	static const auto crossCurves = std::make_shared<HydStatic_CrossCurves>();
 	static spacing_t myHeels;
 
+	void setVerbose(unsigned short i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void loadSolutionData(const std::string& name)
 	{
 		fileName fn(name);
@@ -45,9 +54,14 @@ namespace tnbLib
 		}
 		std::ifstream myFile(fn);
 
-		TNB_iARCH_FILE_TYPE ar(myFile);
+		{//- timer scope
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
 
-		ar >> mySolutionData;
+			TNB_iARCH_FILE_TYPE ar(myFile);
+			ar >> mySolutionData;
+		}
+
 		if (NOT mySolutionData)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -297,6 +311,10 @@ namespace tnbLib
 
 	void setFunctions(const module_t& mod)
 	{
+
+		mod->add(chaiscript::fun([]()-> auto {return std::vector<double>(); }), "createList");
+		mod->add(chaiscript::fun([](std::vector<double>& v, double x)-> void {v.push_back(x); }), "pushBack");
+
 		mod->add(chaiscript::fun([](double x)-> void {setVolumeTol(x); }), "setVolumeTol");
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](const std::vector<double>& h)-> void {setStbHeels(h); }), "setStbHeels");
@@ -331,6 +349,10 @@ namespace tnbLib
 
 using namespace tnbLib;
 
+#include <filesystem>
+
+namespace fs = std::filesystem;
+
 int main(int argc, char *argv[])
 {
 	//sysLib::init_gl_marine_integration_info();
@@ -347,7 +369,32 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to calculate the Cross-Curves of hull." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - loadSoluData(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # Settings: " << endl << endl
+				<< " - setNbWaters(int)" << endl
+				<< " - setHeels(double lower, double upper, int n)" << endl
+				<< " - setAsymHeels(int)" << endl
+				<< " - setStbHeels(int)" << endl << endl
+
+				<< " # Global functions: " << endl << endl
+
+				<< " - execute()" << endl
+				<< " - setVerbose(int)" << endl
+				<< " - setCrossCurvesVerbose(int)" << endl
+				<< " - setLeverArmVerbose(int)" << endl
+				<< " - setVolumeTol(double)" << endl
+				<< " - [double list] createList()" << endl
+				<< " - (double List).pushBack(double)" << endl
+
+				<< endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -359,7 +406,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataCrossCurves");
+			std::string address = ".\\system\\hullDataCrossCurves";
+			fileName myFileName(address);
 
 			try
 			{
