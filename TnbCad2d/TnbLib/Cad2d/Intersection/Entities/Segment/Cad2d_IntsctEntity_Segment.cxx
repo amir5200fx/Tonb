@@ -7,23 +7,6 @@
 
 #include <algorithm>
 
-tnbLib::Cad2d_IntsctEntity_Segment::Cad2d_IntsctEntity_Segment
-(
-	const Standard_Integer theIndex
-)
-	: Cad2d_IntsctEntity(theIndex)
-{
-}
-
-tnbLib::Cad2d_IntsctEntity_Segment::Cad2d_IntsctEntity_Segment
-(
-	const Standard_Integer theIndex,
-	const word & theName
-)
-	: Cad2d_IntsctEntity(theIndex, theName)
-{
-}
-
 Standard_Boolean 
 tnbLib::Cad2d_IntsctEntity_Segment::CompareEntities
 (
@@ -53,6 +36,25 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 	const Standard_Real theTol
 )
 {
+	typedef std::shared_ptr<Cad2d_IntsctEntity_Segment> intsctSegment_t;
+	typedef std::shared_ptr<Pln_Curve> curve_t;
+
+	static auto par_distance = [](const intsctSegment_t& ent, const curve_t& curve)
+	{
+		return std::min
+		(
+			std::abs(ent->CharParameter() - curve->FirstParameter()),
+			std::abs(ent->CharParameter() - curve->LastParameter())
+		);
+	};
+
+	typedef std::shared_ptr<Cad2d_IntsctEntity_TangSegment> tangSegment_t;
+
+	static auto tang_segment_par_length = [](const tangSegment_t& t)
+	{
+		return std::abs(t->Parameter0() - t->Parameter1());
+	};
+
 	auto curve = theEdge->Curve();
 
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
@@ -62,21 +64,12 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 
 		if (x->IsOrthogonal())
 		{
-			auto orth = std::dynamic_pointer_cast<Cad2d_IntsctEntity_OrthSegment>(x);
-			Debug_Null_Pointer(orth);
-
-			if (
-				std::abs(orth->CharParameter() - curve->FirstParameter()) 
-				<= gp::Resolution() 
-				OR 
-				std::abs(orth->CharParameter() - curve->LastParameter()) 
-				<= gp::Resolution()
-				)
+			if (par_distance(x, curve) <= gp::Resolution())
 			{
 				continue;
 			}
 
-			auto[c0, c1] = curve->Split(orth->CharParameter());
+			auto[c0, c1] = curve->Split(x->CharParameter());
 
 			if (NOT c0)
 			{
@@ -89,12 +82,14 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 			}
 
 			Debug_Null_Pointer(c0);
-			Debug_Null_Pointer(c1);
+			Debug_Null_Pointer(c1);	
 
-			if (Pln_Curve::IsValid(c0, theTol))
+			/*if (Pln_Curve::IsValid(c0, theTol))
 			{
 				curves.push_back(c0);
-			}
+			}*/
+
+			curves.push_back(std::move(c0));
 
 			curve = c1;
 		}
@@ -103,7 +98,7 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 			auto tang = std::dynamic_pointer_cast<Cad2d_IntsctEntity_TangSegment>(x);
 			Debug_Null_Pointer(tang);
 
-			if (std::abs(tang->Parameter0() - tang->Parameter1()) <= gp::Resolution())
+			if (tang_segment_par_length(tang) <= gp::Resolution())
 			{
 				continue;
 			}
@@ -116,15 +111,17 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 
 			Debug_Null_Pointer(c1);
 
-			if (c0 AND Pln_Curve::IsValid(c0, theTol))
+			if (c0 /*AND Pln_Curve::IsValid(c0, theTol)*/)
 			{
-				curves.push_back(c0);
+				curves.push_back(std::move(c0));
 			}
 
-			if (Pln_Curve::IsValid(c1, theTol))
+			/*if (Pln_Curve::IsValid(c1, theTol))
 			{
 				curves.push_back(c1);
-			}
+			}*/
+
+			curves.push_back(std::move(c1));
 
 			curve = c2;
 
@@ -135,6 +132,6 @@ tnbLib::Cad2d_IntsctEntity_Segment::SubdivideEdge
 		}
 	}
 
-	if (curve AND Pln_Curve::IsValid(curve, theTol)) curves.push_back(curve);
+	if (curve /*AND Pln_Curve::IsValid(curve, theTol)*/) curves.push_back(std::move(curve));
 	return std::move(curves);
 }

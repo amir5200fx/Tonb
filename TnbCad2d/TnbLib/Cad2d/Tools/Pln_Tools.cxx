@@ -16,6 +16,7 @@
 #include <Pln_Ring.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_CmpEdge.hxx>
+#include <Pln_CurveTools.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Cad2d_Modeler_Corner.hxx>
 #include <Cad2d_Modeler_Tools.hxx>
@@ -497,7 +498,11 @@ tnbLib::Pln_Tools::MakeWire
 		ring->SetIndex(1);
 		ring->Approx(theInfo);
 
+		v->InsertToEdges(ring->Index(), ring);
+
 		auto wire = MakeWire(ring);
+
+		ring->SetWire(wire);
 
 		return std::move(wire);
 	}
@@ -550,11 +555,20 @@ tnbLib::Pln_Tools::MakeWire
 		edge->SetIndex(++K);
 		edge->Approx(theInfo);
 
+		v0->InsertToEdges(edge->Index(), edge);
+		v1->InsertToEdges(edge->Index(), edge);
+
 		edges.push_back(std::move(edge));
 	}
 
 	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
 	Debug_Null_Pointer(wire);
+
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		x->SetWire(wire);
+	}
 
 	return std::move(wire);
 }
@@ -1373,8 +1387,7 @@ namespace tnbLib
 
 				if (items.size())
 				{
-					std::cout << Distance(items[0]->Coord, items[3]->Coord) << std::endl;
-					std::cout << Distance(items[1]->Coord, items[2]->Coord) << std::endl;
+					std::cout << Distance(items[0]->Coord, items[1]->Coord) << std::endl;
 				}
 				std::cout << std::endl;*/
 			}
@@ -1747,6 +1760,59 @@ tnbLib::Pln_Tools::RetrieveWires
 	}
 	return std::move(wires);
 }
+
+//std::shared_ptr<tnbLib::Pln_Wire> 
+//tnbLib::Pln_Tools::FillGaps
+//(
+//	const std::shared_ptr<Pln_Wire>& theWire,
+//	const Standard_Real tol
+//)
+//{
+//	static auto calcGap = [](const std::shared_ptr<Pln_Edge>& edge0, const std::shared_ptr<Pln_Edge>& edge1)
+//	{
+//		auto p0 = edge0->LastCoord(edge0->Sense());
+//		auto p1 = edge1->FirstCoord(edge1->Sense());
+//		auto t = std::make_tuple(p0.Distance(p1), std::move(p0), std::move(p1));
+//		return std::move(t);
+//	};
+//
+//	const auto& cmpEdge = theWire->CmpEdge();
+//	Debug_Null_Pointer(cmpEdge);
+//	const auto& edges = cmpEdge->Edges();
+//
+//	std::vector<std::shared_ptr<Pln_Curve>> curves;
+//	std::vector<Standard_Boolean> senses;
+//	for (size_t i = 1; i < edges.size(); i++)
+//	{
+//		const auto& edge0 = edges[i - 1];
+//		const auto& edge1 = edges[i];
+//
+//		Debug_Null_Pointer(edge0);
+//		Debug_Null_Pointer(edge1);
+//
+//		curves.push_back(edge0->Curve());
+//		senses.push_back(edge0->Sense());
+//
+//		auto[gap, p0, p1] = calcGap(edge0, edge1);
+//		if (gap < tol)
+//		{
+//			auto curve = std::make_shared<Pln_Curve>(Pln_CurveTools::MakeSegment(p0, p1));
+//			curves.push_back(std::move(curve));
+//			senses.push_back(Standard_True);
+//		}
+//	}
+//	curves.push_back(LastItem(edges)->Curve());
+//	senses.push_back(LastItem(edges)->Sense());
+//
+//	if (curves.size() IS_EQUAL edges.size())
+//	{
+//		return theWire;
+//	}
+//	else
+//	{
+//		auto wire=
+//	}
+//}
 
 std::shared_ptr<tnbLib::Pln_Wire> 
 tnbLib::Pln_Tools::RetrieveWire
@@ -2332,15 +2398,58 @@ void tnbLib::Pln_Tools::RetrieveInnerOuterWires
 
 void tnbLib::Pln_Tools::SetPrecision
 (
-	const std::shared_ptr<Pln_Wire>& theWire
+	const std::shared_ptr<Pln_Wire>& theWire, 
+	const Standard_Real theOffsetTol
 )
 {
 	const auto vertices = RetrieveVertices(*theWire);
 	for (const auto& x : vertices)
 	{
 		Debug_Null_Pointer(x);
-		x->SetPrecision(CalcPrecision(*x));
+		x->SetPrecision(CalcPrecision(*x) + theOffsetTol);
 	}
+}
+
+void tnbLib::Pln_Tools::PlaceVertices
+(
+	const std::shared_ptr<Pln_Wire>& theWire
+)
+{
+	if (NOT theWire)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the wire is null" << endl
+			<< abort(FatalError);
+	}
+	auto vertices = theWire->RetrieveVertices();
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		PlaceVertex(x);
+	}
+}
+
+void tnbLib::Pln_Tools::PlaceVertex
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx
+)
+{
+	Debug_Null_Pointer(theVtx);
+	if (NOT theVtx->IsManifold())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the vertex is not manifold" << endl
+			<< abort(FatalError);
+	}
+
+	auto bwd = BackwardEdge(theVtx);
+	auto fwd = ForwardEdge(theVtx);
+
+	auto p0 = bwd->LastCoord(bwd->Sense());
+	auto p1 = fwd->FirstCoord(fwd->Sense());
+
+	auto mp = MEAN(p0, p1);
+	theVtx->Coord() = std::move(mp);
 }
 
 void tnbLib::Pln_Tools::CheckManifold

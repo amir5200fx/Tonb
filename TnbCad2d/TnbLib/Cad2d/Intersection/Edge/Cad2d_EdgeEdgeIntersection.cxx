@@ -12,27 +12,6 @@
 
 #include <Geom2dAPI_InterCurveCurve.hxx>
 
-tnbLib::Cad2d_EdgeEdgeIntersection::Cad2d_EdgeEdgeIntersection()
-{
-}
-
-tnbLib::Cad2d_EdgeEdgeIntersection::Cad2d_EdgeEdgeIntersection
-(
-	const Standard_Integer theIndex
-)
-	: Cad2d_EntityEntityIntersection(theIndex)
-{
-}
-
-tnbLib::Cad2d_EdgeEdgeIntersection::Cad2d_EdgeEdgeIntersection
-(
-	const Standard_Integer theIndex,
-	const word & theName
-)
-	: Cad2d_EntityEntityIntersection(theIndex, theName)
-{
-}
-
 void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()
 {
 	if (NOT Edge0())
@@ -89,7 +68,7 @@ void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()
 	const auto& alg = Inter.Intersector();
 
 	auto& entities = ChangeEntities();
-	entities.reserve(alg.NbPoints() + alg.NbPoints());
+	entities.reserve(alg.NbPoints() + alg.NbSegments());
 
 	forThose(Index, 1, alg.NbPoints())
 	{
@@ -109,10 +88,10 @@ void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()
 		entity0->SetParameter(pt.ParamOnFirst());
 		entity1->SetParameter(pt.ParamOnSecond());
 
-		auto pair = std::make_shared<Cad2d_IntsctEntity_Pair>(Index, entity0, entity1);
+		auto pair = std::make_shared<Cad2d_IntsctEntity_Pair>(Index, std::move(entity0), std::move(entity1));
 		Debug_Null_Pointer(pair);
 
-		entities.push_back(pair);
+		entities.push_back(std::move(pair));
 	}
 
 	forThose(Index, 1, alg.NbSegments())
@@ -132,8 +111,6 @@ void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()
 				<< "the segment does not have first point!" << endl
 				<< abort(FatalError);
 		}
-
-
 
 		auto entity0 = std::make_shared<Cad2d_IntsctEntity_TangSegment>(Index);
 		auto entity1 = std::make_shared<Cad2d_IntsctEntity_TangSegment>(Index);
@@ -166,10 +143,10 @@ void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()
 			entity1->SetParameter1(pt1.ParamOnSecond());
 		}
 
-		auto pair = std::make_shared<Cad2d_IntsctEntity_Pair>(Index, entity0, entity1);
+		auto pair = std::make_shared<Cad2d_IntsctEntity_Pair>(Index, std::move(entity0), std::move(entity1));
 		Debug_Null_Pointer(pair);
 
-		entities.push_back(pair);
+		entities.push_back(std::move(pair));
 	}
 
 	Change_IsDone() = Standard_True;
@@ -194,6 +171,13 @@ tnbLib::Cad2d_EdgeEdgeIntersection::ConvertFrom
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "null intersection" << endl
+			<< abort(FatalError);
+	}
+
+	if (theAlg.NbEntities() > 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "multiply intersection points between the vertex and the edge have been detected!" << endl
 			<< abort(FatalError);
 	}
 
@@ -264,7 +248,7 @@ tnbLib::Cad2d_EdgeEdgeIntersection::ConvertFrom
 				<< abort(FatalError);
 		}
 
-		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(ent, entity1);
+		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(std::move(ent), std::move(entity1));
 
 		entities.push_back(std::move(nPair));
 	}
@@ -286,7 +270,7 @@ tnbLib::Cad2d_EdgeEdgeIntersection::ConvertFrom
 				<< abort(FatalError);
 		}
 
-		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(ent, entity1);
+		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(std::move(ent), std::move(entity1));
 
 		entities.push_back(std::move(nPair));
 	}

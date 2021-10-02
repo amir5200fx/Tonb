@@ -172,29 +172,6 @@ namespace tnbLib
 			return std::move(edges);
 		}*/
 
-		static void 
-			InsertToMap
-			(
-				const Standard_Integer theIndex,
-				const std::shared_ptr<Cad2d_IntsctEntity_Segment>& theEntity,
-				entityMap& theMap
-			)
-		{
-			auto iter = theMap.find(theIndex);
-			if (iter IS_EQUAL theMap.end())
-			{
-				auto l = std::make_shared<entityList>();
-				l->push_back(theEntity);
-
-				auto insert = theMap.insert(std::make_pair(theIndex, std::move(l)));
-			}
-			else
-			{
-				auto& l = *iter->second;
-				l.push_back(theEntity);
-			}
-		}
-
 		/*static std::vector<std::shared_ptr<Pln_Edge>>
 			ReplaceEdge
 			(
@@ -223,63 +200,7 @@ namespace tnbLib
 			return std::move(edges);
 		}*/
 
-		static std::tuple
-			<
-			std::vector<std::shared_ptr<Pln_Curve>>, 
-			std::vector<Standard_Boolean>
-			>
-			SubdivideWire
-			(
-				const std::shared_ptr<Pln_Wire>& theWire,
-				const entityMap& theMap,
-				const Standard_Real theTol
-			)
-		{
-			const auto& edges = theWire->Edges();
-
-			std::vector<std::shared_ptr<Pln_Curve>> newCurves;
-			std::vector<Standard_Boolean> senses;
-			for (const auto& x : edges)
-			{
-				Debug_Null_Pointer(x);
-
-				auto iter = theMap.find(x->Index());
-				if (iter IS_EQUAL theMap.end())
-				{
-					newCurves.push_back(std::dynamic_pointer_cast<Pln_Curve>(x->Curve()->Copy()));
-					senses.push_back(x->Sense());
-				}
-				else
-				{
-					Debug_Null_Pointer(iter->second);
-					auto& l = *iter->second;
-
-					Cad2d_IntsctEntity_Segment::SortEntities(l);
-
-					auto subEdges = Cad2d_IntsctEntity_Segment::SubdivideEdge(x, l, theTol);
-
-					if (NOT x->Sense())
-					{
-						std::reverse(subEdges.begin(), subEdges.end());
-					}
-
-					for (const auto& i : subEdges)
-					{
-						Debug_Null_Pointer(i);
-						senses.push_back(x->Sense());
-					}
-
-					for (const auto& i : subEdges)
-					{
-						Debug_Null_Pointer(i);
-						newCurves.push_back(i);
-					}
-				}
-			}
-
-			auto t = std::make_tuple(std::move(newCurves), std::move(senses));
-			return std::move(t);
-		}
+		
 
 		/*static std::shared_ptr<Pln_Wire>
 			SubdivideWire
@@ -340,77 +261,196 @@ namespace tnbLib
 			return std::move(wire);
 		}*/
 
-		static std::shared_ptr<Cad2d_Plane>
-			SubdividePalne
-			(
-				const std::shared_ptr<Cad2d_Plane>& thePlane, 
-				const entityMap& theMap,
-				const Standard_Real theTol
-			)
+		
+	}
+
+	void InsertToMap
+	(
+		const Standard_Integer theIndex,
+		std::shared_ptr<Cad2d_IntsctEntity_Segment>&& theEntity,
+		entityMap& theMap
+	)
+	{
+		auto iter = theMap.find(theIndex);
+		if (iter IS_EQUAL theMap.end())
 		{
+			auto l = std::make_shared<entityList>();
+			l->push_back(std::move(theEntity));
 
-			auto outer = thePlane->OuterWire();
-			Debug_Null_Pointer(outer);
-			
-			auto[newOuter_curves, outerSense] = SubdivideWire(outer, theMap, theTol);
-
-			auto[minTol, maxTol] = outer->BoundTolerance();
-
-			std::shared_ptr<Pln_Wire> newOuter;
-			if (Cad2d_Subdivide::overrideMyApprxCurveInfo)
+			auto paired = std::make_pair(theIndex, std::move(l));
+			auto insert = theMap.insert(std::move(paired));
+			if (NOT insert.second)
 			{
-				newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, Cad2d_Subdivide::myApprxCurveInfo, MAX(2.05*maxTol, theTol));
+				FatalErrorIn(FunctionSIG)
+					<< "duplicate data!" << endl
+					<< abort(FatalError);
+			}
+		}
+		else
+		{
+			auto& l = *iter->second;
+			l.push_back(std::move(theEntity));
+		}
+	}
+
+	auto SubdivideWire
+	(
+		const std::shared_ptr<Pln_Wire>& theWire,
+		const entityMap& theMap,
+		const Standard_Real theTol
+	)
+	{
+		const auto& edges = theWire->Edges();
+
+		std::vector<std::shared_ptr<Pln_Curve>> newCurves;
+		std::vector<Standard_Boolean> senses;
+		for (const auto& x : edges)
+		{
+			Debug_Null_Pointer(x);
+
+			auto iter = theMap.find(x->Index());
+			if (iter IS_EQUAL theMap.end())
+			{
+				newCurves.push_back(std::dynamic_pointer_cast<Pln_Curve>(x->Curve()->Copy()));
+				senses.push_back(x->Sense());
 			}
 			else
 			{
-				newOuter = Pln_Tools::MakeWire(newOuter_curves, outerSense, MAX(2.05*maxTol, theTol));
-			}
+				Debug_Null_Pointer(iter->second);
+				auto& l = *iter->second;
 
-			Debug_Null_Pointer(newOuter);
+				Cad2d_IntsctEntity_Segment::SortEntities(l);
 
-			newOuter->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+				auto subEdges = Cad2d_IntsctEntity_Segment::SubdivideEdge(x, l, theTol);
 
-			if (thePlane->InnerWires())
-			{
-				const auto& inners = thePlane->InnerWires();
-				Debug_Null_Pointer(inners);
-
-				auto newInners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
-				for (const auto& x : *inners)
+				if (NOT x->Sense())
 				{
-					Debug_Null_Pointer(x);
-
-					auto[newWire_curves, innerSense] = SubdivideWire(x, theMap, theTol);
-
-					auto[minTol, maxTol] = x->BoundTolerance();
-
-					std::shared_ptr<Pln_Wire> newInner;
-					if (Cad2d_Subdivide::overrideMyApprxCurveInfo)
-					{
-						newInner = Pln_Tools::MakeWire(newWire_curves, innerSense, Cad2d_Subdivide::myApprxCurveInfo, MAX(2.05*maxTol, theTol));
-					}
-					else
-					{
-						newInner = Pln_Tools::MakeWire(newWire_curves, innerSense, MAX(2.05*maxTol, theTol));
-					}
-					Debug_Null_Pointer(newInner);
-
-					newInner->ApplyOrientation(Pln_Orientation::Pln_Orientation_CW);
-
-					newInners->push_back(std::move(newInner));
+					std::reverse(subEdges.begin(), subEdges.end());
 				}
 
-				auto plane = Cad2d_Plane::MakePlane(newOuter, newInners, thePlane->System());
-				Debug_Null_Pointer(plane);
+				for (const auto& i : subEdges)
+				{
+					Debug_Null_Pointer(i);
+					senses.push_back(x->Sense());
+				}
 
-				return std::move(plane);
+				for (const auto& i : subEdges)
+				{
+					Debug_Null_Pointer(i);
+					newCurves.push_back(i);
+				}
+			}
+		}
+
+		auto t = std::make_tuple(std::move(newCurves), std::move(senses));
+		return std::move(t);
+	}
+
+	auto SubdividePalne
+	(
+		const std::shared_ptr<Cad2d_Plane>& thePlane,
+		const entityMap& theMap,
+		const Standard_Real theTol
+	)
+	{
+
+		auto outer = thePlane->OuterWire();
+		Debug_Null_Pointer(outer);
+
+		auto[newOuterCurves, outerSense] = SubdivideWire(outer, theMap, theTol);
+		auto[minTol, maxTol] = outer->BoundTolerance();
+
+		std::shared_ptr<Pln_Wire> newOuter;
+		if (Cad2d_Subdivide::overrideMyApprxCurveInfo)
+		{
+			newOuter = Pln_Tools::MakeWire
+			(
+				newOuterCurves, 
+				outerSense, 
+				Cad2d_Subdivide::myApprxCurveInfo, 
+				MAX(2.05*maxTol, theTol)
+			);
+		}
+		else
+		{
+			newOuter = Pln_Tools::MakeWire
+			(
+				newOuterCurves,
+				outerSense, 
+				MAX(2.05*maxTol, theTol)
+			);
+		}
+
+		Debug_Null_Pointer(newOuter);
+
+		newOuter->ApplyOrientation(Pln_Orientation::Pln_Orientation_CCW);
+
+		//- replace the vertices and update the precisions
+#ifdef _DEBUG
+		Pln_Tools::CheckManifold(newOuter);
+#endif // _DEBUG
+
+		Pln_Tools::PlaceVertices(newOuter);
+		Pln_Tools::SetPrecision(newOuter);
+
+		if (thePlane->InnerWires())
+		{
+			const auto& inners = thePlane->InnerWires();
+			Debug_Null_Pointer(inners);
+
+			auto newInners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
+			for (const auto& x : *inners)
+			{
+				Debug_Null_Pointer(x);
+
+				auto[newWireCurves, innerSense] = SubdivideWire(x, theMap, theTol);
+				auto[minTol, maxTol] = x->BoundTolerance();
+
+				std::shared_ptr<Pln_Wire> newInner;
+				if (Cad2d_Subdivide::overrideMyApprxCurveInfo)
+				{
+					newInner = Pln_Tools::MakeWire
+					(
+						newWireCurves,
+						innerSense,
+						Cad2d_Subdivide::myApprxCurveInfo, 
+						MAX(2.05*maxTol, theTol)
+					);
+				}
+				else
+				{
+					newInner = Pln_Tools::MakeWire
+					(
+						newWireCurves,
+						innerSense,
+						MAX(2.05*maxTol, theTol)
+					);
+				}
+				Debug_Null_Pointer(newInner);
+
+#ifdef _DEBUG
+				Pln_Tools::CheckManifold(newInner);
+#endif // _DEBUG
+
+				newInner->ApplyOrientation(Pln_Orientation::Pln_Orientation_CW);
+
+				//- replace the vertices and update the precisions
+				Pln_Tools::PlaceVertices(newInner);
+				Pln_Tools::SetPrecision(newInner);
+
+				newInners->push_back(std::move(newInner));
 			}
 
-			auto plane = Cad2d_Plane::MakePlane(newOuter, nullptr, thePlane->System());
+			auto plane = Cad2d_Plane::MakePlane(newOuter, newInners, thePlane->System());
 			Debug_Null_Pointer(plane);
 
 			return std::move(plane);
 		}
+
+		auto plane = Cad2d_Plane::MakePlane(newOuter, nullptr, thePlane->System());
+		Debug_Null_Pointer(plane);
+
+		return std::move(plane);
 	}
 }
 
@@ -467,19 +507,19 @@ void tnbLib::Cad2d_Subdivide::Perform()
 			auto ent1 = std::dynamic_pointer_cast<Cad2d_IntsctEntity_Segment>(pair->Entity1());
 			Debug_Null_Pointer(ent1);
 
-			subdivide::InsertToMap(edge0.Index(), ent0, entities0);
-			subdivide::InsertToMap(edge1.Index(), ent1, entities1);
+			InsertToMap(edge0.Index(), std::move(ent0), entities0);
+			InsertToMap(edge1.Index(), std::move(ent1), entities1);
 		}
 	}
 
 	ChangePlane0() = 
-		subdivide::SubdividePalne
+		SubdividePalne
 		(
 			IntersectionAlgorithm()->Plane0(), 
 			entities0, IntersectionAlgorithm()->Tolerance());
-	
+
 	ChangePlane1() = 
-		subdivide::SubdividePalne
+		SubdividePalne
 		(IntersectionAlgorithm()->Plane1(), 
 			entities1, IntersectionAlgorithm()->Tolerance());
 

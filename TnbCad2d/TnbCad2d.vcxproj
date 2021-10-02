@@ -55,11 +55,9 @@
     <ClInclude Include="TnbLib\Cad2d\Intersection\Cad2d_EntityEntityIntersection.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Edge\Cad2d_EdgeEdgeIntersection.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Adaptor\Cad2d_IntsctEntity_Adaptor.hxx" />
-    <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\CmpEntity\Cad2d_CmpIntsctEntity.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Entity\Cad2d_IntsctEntity.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Pair\Cad2d_IntsctEntity_Pair.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Point\Cad2d_IntsctEntity_Point.hxx" />
-    <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Region\Cad2d_IntsctEntity_Region.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Segment\Cad2d_IntsctEntity_Segment.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal\Cad2d_IntsctEntity_OrthSegment.hxx" />
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Segment\Tangential\Cad2d_IntsctEntity_TangSegment.hxx" />
@@ -188,8 +186,6 @@
     <ClCompile Include="TnbLib\Cad2d\Interpolation\Ubar\Uniform\Cad2d_InterpUbarMap_Uniform.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Intersection\Cad2d_EntityEntityIntersection.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Intersection\Edge\Cad2d_EdgeEdgeIntersection.cxx" />
-    <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Entity\Cad2d_IntsctEntity.cxx" />
-    <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Point\Cad2d_IntsctEntity_Point.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Segment\Cad2d_IntsctEntity_Segment.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal\Cad2d_IntsctEntity_OrthSegment.cxx" />
     <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Segment\Tangential\Cad2d_IntsctEntity_TangSegment.cxx" />

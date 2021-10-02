@@ -8,6 +8,60 @@
 
 #include <Geom2d_Curve.hxx>
 
+tnbLib::Pnt2d 
+tnbLib::Pln_EdgeGeom::FirstCoord() const
+{
+	if (NOT Mesh())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the edge is not discretized!" << endl
+			<< abort(FatalError);
+	}
+	return FirstItem(Mesh()->Points());
+}
+
+tnbLib::Pnt2d 
+tnbLib::Pln_EdgeGeom::LastCoord() const
+{
+	if (NOT Mesh())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the edge is not discretized!" << endl
+			<< abort(FatalError);
+	}
+	return LastItem(Mesh()->Points());
+}
+
+tnbLib::Pnt2d 
+tnbLib::Pln_EdgeGeom::FirstCoord(const Standard_Boolean theSense) const
+{
+	if (theSense)
+	{
+		auto pt = FirstCoord();
+		return std::move(pt);
+	}
+	else
+	{
+		auto pt = LastCoord();
+		return std::move(pt);
+	}
+}
+
+tnbLib::Pnt2d
+tnbLib::Pln_EdgeGeom::LastCoord(const Standard_Boolean theSense) const
+{
+	if (theSense)
+	{
+		auto pt = LastCoord();
+		return std::move(pt);
+	}
+	else
+	{
+		auto pt = FirstCoord();
+		return std::move(pt);
+	}
+}
+
 void tnbLib::Pln_EdgeGeom::Approx
 (
 	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo

@@ -11,10 +11,6 @@
 
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
 
-tnbLib::Cad2d_VertexEdgeIntersection::Cad2d_VertexEdgeIntersection()
-{
-}
-
 void tnbLib::Cad2d_VertexEdgeIntersection::Perform()
 {
 	if (NOT Vtx())
@@ -52,25 +48,26 @@ void tnbLib::Cad2d_VertexEdgeIntersection::Perform()
 	Geom2dAPI_ProjectPointOnCurve
 		alg(Vtx()->Coord(), curve.Geometry());
 
-	if (alg.LowerDistance() <= Tolerance())
+	auto& entities = ChangeEntities();
+	Standard_Integer k = 0;
+	for (Standard_Integer i = 1; i <= alg.NbPoints(); i++)
 	{
-		auto& entities = ChangeEntities();
-		entities.reserve(1);
+		if (alg.Distance(i) <= Tolerance())
+		{
+			auto entity0 = std::make_shared<Cad2d_IntsctEntity_Point>(++k);
+			auto entity1 = std::make_shared<Cad2d_IntsctEntity_OrthSegment>(k);
 
-		auto entity0 = std::make_shared<Cad2d_IntsctEntity_Point>(1);
-		auto entity1 = std::make_shared<Cad2d_IntsctEntity_OrthSegment>(1);
-		
-		entity0->SetParentVertex(Vtx());
-		entity1->SetParentEdge(Edge());
+			entity0->SetParentVertex(Vtx());
 
-		entity1->SetCoord(alg.NearestPoint());
+			entity1->SetParentEdge(Edge());
+			entity1->SetCoord(alg.Point(i));
+			entity1->SetParameter(alg.Parameter(i));
 
-		entity1->SetParameter(alg.LowerDistanceParameter());
+			auto pair = std::make_shared<Cad2d_IntsctEntity_Pair>(k, std::move(entity0), std::move(entity1));
+			Debug_Null_Pointer(pair);
 
-		auto pair = std::make_shared<Cad2d_IntsctEntity_Pair>(1, entity0, entity1);
-		Debug_Null_Pointer(pair);
-
-		entities.push_back(pair);
+			entities.push_back(std::move(pair));
+		}
 	}
 
 	Change_IsDone() = Standard_True;

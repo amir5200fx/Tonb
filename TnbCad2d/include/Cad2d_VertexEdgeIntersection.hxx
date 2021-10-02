@@ -27,7 +27,16 @@ namespace tnbLib
 
 	public:
 
-		TnbCad2d_EXPORT Cad2d_VertexEdgeIntersection();
+		//- default constructor
+
+		Cad2d_VertexEdgeIntersection()
+		{}
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		const auto& Vtx() const
 		{
@@ -44,6 +53,8 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		TnbCad2d_EXPORT void Perform();
+
 		void LoadVertex(const std::shared_ptr<Pln_Vertex>& theVtx)
 		{
 			theVtx_ = theVtx;
@@ -54,9 +65,8 @@ namespace tnbLib
 			theEdge_ = theEdge;
 		}
 
-		TnbCad2d_EXPORT void Perform();
-
 		//- Macros
+
 	};
 }
 

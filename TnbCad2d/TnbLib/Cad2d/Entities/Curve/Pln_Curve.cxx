@@ -1,6 +1,7 @@
 #include <Pln_Curve.hxx>
 
 #include <Entity2d_Box.hxx>
+#include <Entity2d_Polygon.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_TangCurve.hxx>
 #include <Cad2d_IntsctEntity_TangSegment.hxx>
@@ -23,7 +24,10 @@ void tnbLib::Pln_Curve::CheckBoundary(const Standard_Real x, const char* theName
 	if (NOT INSIDE(x, Geometry()->FirstParameter(), Geometry()->LastParameter()))
 	{
 		FatalErrorIn(theName) << endl
-			<< "the geometry curve is not bounded!" << endl
+			<< "the parameter exceeds the bounds of the curve!" << endl
+			<< " - parameter: " << x << endl
+			<< " - U0: " << Geometry()->FirstParameter() << endl
+			<< " - U1: " << Geometry()->LastParameter() << endl
 			<< abort(FatalError);
 	}
 }
@@ -592,4 +596,33 @@ tnbLib::Pln_Curve::IsDegenerate
 )
 {
 	return std::abs(theCurve->FirstParameter() - theCurve->LastParameter()) <= theTol;
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon> 
+tnbLib::Pln_Curve::Discretize
+(
+	const Pln_Curve & theCurve,
+	const Standard_Integer theNbSegments
+)
+{
+	auto nbSegments = std::max(1, theNbSegments);
+
+	auto poly = std::make_shared<Entity2d_Polygon>();
+	Debug_Null_Pointer(poly);
+
+	auto& points = poly->Points();
+	points.reserve(theNbSegments + 1);
+
+	const auto u0 = theCurve.FirstParameter();
+	const auto u1 = theCurve.LastParameter();
+	const auto du = (theCurve.LastParameter() - u0)/(Standard_Real)nbSegments;
+
+	for (size_t i = 0; i <= nbSegments; i++)
+	{
+		auto u = u0 + i * du;
+		if (u > u1) u = u1;
+		auto pt = theCurve.Value(u);
+		points.push_back(std::move(pt));
+	}
+	return std::move(poly);
 }

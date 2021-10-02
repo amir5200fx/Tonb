@@ -24,12 +24,24 @@ namespace tnbLib
 
 	public:
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_OrthSegment();
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex);
+		//- default constructor
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex, const word& theName);
+		Cad2d_IntsctEntity_OrthSegment()
+		{}
 
+		//- constructors
+
+		explicit Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex)
+			: Cad2d_IntsctEntity_Segment(theIndex)
+		{}
+
+		Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex, const word& theName)
+			: Cad2d_IntsctEntity_Segment(theIndex, theName)
+		{}
+
+
+		//- public functions and operators
 
 		Standard_Boolean IsOrthogonal() const override
 		{

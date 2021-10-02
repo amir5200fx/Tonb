@@ -25,6 +25,11 @@ namespace tnbLib
 
 	public:
 
+		//- default constructor
+
+
+		//- constructors
+
 		Cad2d_IntsctEntity_Pair
 		(
 			const std::shared_ptr<Cad2d_IntsctEntity>& theEnt0,
@@ -32,6 +37,16 @@ namespace tnbLib
 		)
 			: theEntity0_(theEnt0)
 			, theEntity1_(theEnt1)
+		{}
+
+
+		Cad2d_IntsctEntity_Pair
+		(
+			std::shared_ptr<Cad2d_IntsctEntity>&& theEnt0,
+			std::shared_ptr<Cad2d_IntsctEntity>&& theEnt1
+		)
+			: theEntity0_(std::move(theEnt0))
+			, theEntity1_(std::move(theEnt1))
 		{}
 
 		Cad2d_IntsctEntity_Pair
@@ -44,6 +59,20 @@ namespace tnbLib
 			, theEntity0_(theEnt0)
 			, theEntity1_(theEnt1)
 		{}
+
+		Cad2d_IntsctEntity_Pair
+		(
+			const Standard_Integer theIndex,
+			std::shared_ptr<Cad2d_IntsctEntity>&& theEnt0,
+			std::shared_ptr<Cad2d_IntsctEntity>&& theEnt1
+		)
+			: Global_Indexed(theIndex)
+			, theEntity0_(std::move(theEnt0))
+			, theEntity1_(std::move(theEnt1))
+		{}
+
+
+		//- public functions and operators
 
 		const auto& Entity0() const
 		{

@@ -38,9 +38,20 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad2d_EXPORT unsigned short verbose;
 		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 
-		TnbCad2d_EXPORT Cad2d_PlanePlaneIntersection();
+
+		//- default constructor
+
+		Cad2d_PlanePlaneIntersection()
+		{}
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		auto NbEntities() const
 		{

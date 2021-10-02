@@ -10,6 +10,8 @@
 #include <Cad2d_Module.hxx>
 #include <Pln_Orientation.hxx>
 
+#include <Precision.hxx>
+
 #include <list>
 #include <vector>
 #include <memory>
@@ -332,6 +334,8 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
+		static std::shared_ptr<Pln_Wire> FillGaps(const std::shared_ptr<Pln_Wire>& theWire, const Standard_Real tol);
+
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Wire>
 			RetrieveWire
 			(
@@ -459,8 +463,13 @@ namespace tnbLib
 
 		static TnbCad2d_EXPORT void SetPrecision
 		(
-			const std::shared_ptr<Pln_Wire>&
+			const std::shared_ptr<Pln_Wire>&, 
+			const Standard_Real theOffsetTol = Precision::Confusion()
 		);
+
+		static TnbCad2d_EXPORT void PlaceVertices(const std::shared_ptr<Pln_Wire>&);
+
+		static TnbCad2d_EXPORT void PlaceVertex(const std::shared_ptr<Pln_Vertex>&);
 
 		static TnbCad2d_EXPORT void CheckManifold
 		(

@@ -9,16 +9,22 @@
 #include <Pln_CmpEdge.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Precision.hxx>
 #include <Geom2d_Curve.hxx>
 
+
+#include <Entity2d_Polygon.hxx>
+
 namespace tnbLib
 {
 
 	//Standard_Real Cad2d_Boolean::Tolerance(1.0E-6);
+
+	//OFstream myFile(fileName("curves.plt"));
 
 	namespace boolean
 	{
@@ -110,10 +116,62 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		static auto RetriveMinMaxTolerance(const Standard_Real maxTol0, const Standard_Real maxTol1, const Standard_Real tol)
+		{
+			auto t = std::make_pair(MAX(4.1*MAX(maxTol0, maxTol1), tol), 10.0*MAX(MAX(maxTol0, maxTol1), tol));
+			return std::move(t);
+		}
 
+		static auto myInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
+		class MyInfoRunTimeConfig
+		{
+
+		public:
+
+			MyInfoRunTimeConfig()
+			{
+				Init();
+			}
+
+			static void Init();
+		};
 		
+		static auto RemoveDegeneratedCurves
+		(
+			std::vector<std::shared_ptr<Pln_Curve>>&& Crvs,
+			const Standard_Real tol
+		)
+		{
+			std::vector<std::shared_ptr<Pln_Curve>> curves;
+			for (auto& x : Crvs)
+			{
+				Debug_Null_Pointer(x);
+				Debug_Null_Pointer(x->Geometry());
+				auto b = x->BoundingBox(0);
+				auto d = b.Diameter();
+
+				myInfo->SetTolerance(d*Precision::Confusion());
+				
+				auto len = Pln_Tools::Length(*x->Geometry(), myInfo);
+
+				if (len > tol)
+				{
+					curves.push_back(std::move(x));
+				}
+			}
+			return std::move(curves);
+		}
 	}
 }
+
+void tnbLib::boolean::MyInfoRunTimeConfig::Init()
+{
+	myInfo->SetMaxNbIterations(100);
+	myInfo->SetNbInitIterations(4);
+	myInfo->SetTolerance(1.0E-6);
+}
+
+static tnbLib::boolean::MyInfoRunTimeConfig myInfoRunTimeConfigObj;
 
 #include <Pln_Edge.hxx>
 #include <Cad_EntityManager.hxx>
@@ -253,11 +311,15 @@ tnbLib::Cad2d_Boolean::Union
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
+	const auto[minTol, maxTol] = boolean::RetriveMinMaxTolerance(maxTol0, maxTol1, tol);
+
+	curves = boolean::RemoveDegeneratedCurves(std::move(curves), minTol + Precision::Confusion());
+
 	auto wires =
 		Pln_Tools::RetrieveWires
 		(curves,
-			MAX(2.1*MAX(maxTol0, maxTol1), tol),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
-			10.0*MAX(MAX(maxTol0, maxTol1), tol));
+			minTol + Precision::Confusion(),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
+			maxTol);
 
 	auto outer = Pln_Tools::RetrieveOuterWire(wires);
 	if (NOT outer)
@@ -267,6 +329,7 @@ tnbLib::Cad2d_Boolean::Union
 			<< abort(FatalError);
 	}
 
+	Pln_Tools::PlaceVertices(outer);
 	Pln_Tools::SetPrecision(outer);
 
 	auto inners = std::make_shared<std::vector<std::shared_ptr<Pln_Wire>>>();
@@ -279,6 +342,7 @@ tnbLib::Cad2d_Boolean::Union
 		{
 			inners->push_back(x);
 
+			Pln_Tools::PlaceVertices(x);
 			Pln_Tools::SetPrecision(x);
 		}
 	}
@@ -436,6 +500,10 @@ tnbLib::Cad2d_Boolean::Subtract
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
+	const auto[minTol, maxTol] = boolean::RetriveMinMaxTolerance(maxTol0, maxTol1, tol);
+
+	curves = boolean::RemoveDegeneratedCurves(std::move(curves), minTol + Precision::Confusion());
+
 	if (curves.empty())
 	{
 		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Subtract(Args...)")
@@ -447,11 +515,12 @@ tnbLib::Cad2d_Boolean::Subtract
 		Pln_Tools::RetrieveWires
 		(
 			curves, 
-			MAX(2.1*MAX(maxTol0, maxTol1), tol),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
-			10.0*MAX(MAX(maxTol0, maxTol1), tol));
+			minTol + Precision::Confusion(),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
+			maxTol);
 
 	for (const auto& x : wires)
 	{
+		Pln_Tools::PlaceVertices(x);
 		Pln_Tools::SetPrecision(x);
 	}
 
@@ -635,6 +704,19 @@ tnbLib::Cad2d_Boolean::Intersection
 	auto[minTol0, maxTol0] = thePlane0->BoundTolerance();
 	auto[minTol1, maxTol1] = thePlane1->BoundTolerance();
 
+	const auto[minTol, maxTol] = boolean::RetriveMinMaxTolerance(maxTol0, maxTol1, tol);
+
+	curves = boolean::RemoveDegeneratedCurves(std::move(curves), minTol + Precision::Confusion());
+
+	/*{
+
+		for (const auto& x : curves)
+		{
+			auto poly = Pln_Curve::Discretize(*x, 40);
+			poly->ExportToPlt(myFile);
+		}
+	}*/
+
 	/*{
 		std::cout << "tolerance: " << tol << std::endl;
 		std::cout << "min. tol0: " << minTol0 << ", max. tol0: " << maxTol0 << std::endl;
@@ -649,16 +731,17 @@ tnbLib::Cad2d_Boolean::Intersection
 			<< "Contradictory data: there is no curve be created from boolean operator" << endl
 			<< abort(FatalError);
 	}
-
+	
 	auto wires =
 		Pln_Tools::RetrieveWires
 		(
 			curves, 
-			MAX(2.1*MAX(maxTol0, maxTol1), tol),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
-			10.0*MAX(MAX(maxTol0, maxTol1), tol));
+			minTol + Precision::Confusion(),  // the min. tolerance is set to the max. tolerance of the planes [8/4/2021 Amir]
+			maxTol);
 
 	for (const auto& x : wires)
 	{
+		Pln_Tools::PlaceVertices(x);
 		Pln_Tools::SetPrecision(x);
 	}
 

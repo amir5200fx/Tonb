@@ -34,11 +34,21 @@ namespace tnbLib
 
 	protected:
 
-		TnbCad2d_EXPORT Cad2d_EntityEntityIntersection();
+		//- default constructor
 
-		TnbCad2d_EXPORT Cad2d_EntityEntityIntersection(const Standard_Integer theIndex);
+		Cad2d_EntityEntityIntersection()
+		{}
 
-		TnbCad2d_EXPORT Cad2d_EntityEntityIntersection(const Standard_Integer theIndex, const word& theName);
+		//- constructors
+
+		Cad2d_EntityEntityIntersection(const Standard_Integer theIndex)
+			: Global_Indexed(theIndex)
+		{}
+
+		Cad2d_EntityEntityIntersection(const Standard_Integer theIndex, const word& theName)
+			: Global_Indexed(theIndex)
+			, Global_Named(theName)
+		{}
 
 
 		auto& ChangeEntities()
@@ -49,6 +59,9 @@ namespace tnbLib
 	public:
 
 		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+
+
+		//- public functions and operators
 
 		virtual ~Cad2d_EntityEntityIntersection()
 		{}
