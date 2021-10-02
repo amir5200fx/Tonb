@@ -11,6 +11,8 @@
 #include <HydStatic_hArmCurve.hxx>
 #include <HydStatic_hAuCurve.hxx>
 #include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_CrsCurveQ.hxx>
+#include <HydStatic_CurveQMaker.hxx>
 #include <HydStatic_rArmCurve_Body.hxx>
 #include <HydStatic_rArmCurve_FSLq.hxx>
 #include <HydStatic_rArmCurve_LDT.hxx>
@@ -19,7 +21,6 @@
 #include <HydStatic_ArmCurveCreator.hxx>
 #include <HydStatic_UniformSpacing.hxx>
 #include <HydStatic_CustomSpacing.hxx>
-#include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_rArmCurves.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
@@ -175,6 +176,61 @@ tnbLib::HydStatic_Tools::CustomSpacing
 
 	auto spacing = std::make_shared<HydStatic_CustomSpacing>(std::move(xs));
 	return std::move(spacing);
+}
+
+std::shared_ptr<tnbLib::HydStatic_CrsCurveQ> 
+tnbLib::HydStatic_Tools::Trim
+(
+	const std::shared_ptr<HydStatic_CrsCurveQ>& theCurve, 
+	const Standard_Real x0,
+	const Standard_Real x1,
+	const hydStcLib::CurveMakerType t,
+	const Standard_Real tol
+)
+{
+	static auto check_boundaries = [](const Standard_Real x, const Standard_Real bnd, const Standard_Real tol)
+	{
+		return (Standard_Boolean)(std::abs(x - bnd) <= tol);
+	};
+
+	Debug_Null_Pointer(theCurve);
+	if (x1 <= x0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid data have been detected!" << endl
+			<< abort(FatalError);
+	}
+
+	auto span0 = theCurve->FindSpan(x0);
+	auto span1 = theCurve->FindSpan(x1);
+
+	const auto y0 = theCurve->Value(span0, x0);
+	const auto y1 = theCurve->Value(span1, x1);
+
+	std::vector<std::pair<Standard_Real, Standard_Real>> Qs;
+	if (NOT check_boundaries(x0, theCurve->Lower(), tol))
+	{
+		auto paired = std::make_pair(x0, y0);
+		Qs.push_back(std::move(paired));
+	}
+
+	for (const auto& x : theCurve->Qs())
+	{
+		auto[xvalue, yvalue] = x;
+		if (INSIDE(xvalue, x0, x1))
+		{
+			auto paired = std::make_pair(xvalue, yvalue);
+			Qs.push_back(std::move(paired));
+		}
+	}
+
+	if (NOT check_boundaries(x1, theCurve->Upper(), tol))
+	{
+		auto paired = std::make_pair(x1, y1);
+		Qs.push_back(std::move(paired));
+	}
+	auto curve = hydStcLib::MakeCurveQ<HydStatic_CrsCurveQ>(std::move(Qs), t);
+	return std::move(curve);
 }
 
 std::shared_ptr<tnbLib::HydStatic_CrsCurve> 

@@ -37,6 +37,7 @@ namespace tnbLib
 	class HydStatic_rAuCurve;
 	class HydStatic_Spacing;
 	class HydStatic_CrsCurve;
+	class HydStatic_CrsCurveQ;
 	class NumAlg_AdaptiveInteg_Info;
 	
 	class Pnt2d;
@@ -97,6 +98,16 @@ namespace tnbLib
 				const std::vector<Standard_Real>& Us,
 				const Standard_Real u0, 
 				const Standard_Real u1
+			);
+
+		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_CrsCurveQ>
+			Trim
+			(
+				const std::shared_ptr<HydStatic_CrsCurveQ>& theCurve, 
+				const Standard_Real x0,
+				const Standard_Real x1, 
+				const hydStcLib::CurveMakerType t,
+				const Standard_Real tol = gp::Resolution()
 			);
 
 		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_CrsCurve> 
