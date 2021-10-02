@@ -10,6 +10,7 @@
 #include <boost/archive/polymorphic_text_iarchive.hpp>
 #include <boost/archive/polymorphic_text_oarchive.hpp>
 #include <boost/filesystem.hpp>
+#include <filesystem>
 
 #include <fstream>
 #include <vector>
@@ -92,7 +93,7 @@ namespace tnbLib
 			}
 
 			TNB_iARCH_FILE_TYPE ia(file);
-			ia >> myPln0;
+			ia >> myPln1;
 
 			if (verbose)
 			{
@@ -215,8 +216,8 @@ namespace tnbLib
 		for (const auto& x : mySumPlanes)
 		{
 			std::string address = ".\\results\\" + std::to_string(i) + "\\" + name;
-			boost::filesystem::path dir(std::to_string(i));
-			boost::filesystem::create_directory(dir);
+			//boost::filesystem::path dir(std::to_string(i));
+			std::filesystem::create_directories("results/" + std::to_string(i));
 
 			std::ofstream file(address);
 
@@ -308,7 +309,7 @@ int main(int argc, char *argv[])
 				<< " # Global functions: " << endl << endl
 
 				<< " - setTolerance(double)" << endl
-				<< " - execute()" << endl
+				<< " - execute(operation);    - operation: union, intersect, and subtract" << endl
 
 				<< endl;
 		}
