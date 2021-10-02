@@ -13,6 +13,7 @@
 #include <Marine_MultLevWaterDomain.hxx>
 #include <Marine_Domain.hxx>
 #include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_CrsCurvesGraph.hxx>
 #include <HydStatic_Bonjean.hxx>
 #include <HydStatic_BnjCurve.hxx>
 #include <HydStatic_GzQ.hxx>
@@ -180,24 +181,19 @@ tnbLib::HydStatic_CmptLib::RetrieveAreas
 std::vector<tnbLib::HydStatic_GzQ> 
 tnbLib::HydStatic_CmptLib::LeverArms
 (
-	const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theCurves,
+	const std::shared_ptr<HydStatic_CrsCurvesGraph>& theGraph,
 	const Standard_Real theVol
 )
 {
+	Debug_Null_Pointer(theGraph);
+	auto values = theGraph->RetrieveLeverArms(theVol);
+
 	std::vector<HydStatic_GzQ> pairs;
-	for (const auto& x : theCurves)
+	for (const auto& x : values)
 	{
-		Debug_Null_Pointer(x);
-		
-		const auto& curve = *x;
-		if (NOT curve.IsIntersect(theVol))
-		{
-			continue;
-		}
+		auto[arm, heel] = x;
 
-		auto value = curve.Value(theVol);
-
-		HydStatic_GzQ p(x->Heel(), value);
+		HydStatic_GzQ p(heel.value, arm.value);
 		pairs.push_back(std::move(p));
 	}
 	return std::move(pairs);
