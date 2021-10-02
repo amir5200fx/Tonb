@@ -24,7 +24,7 @@ namespace tnbLib
 	class HydStatic_BnjCurve;
 	class HydStatic_Bonjean;
 	class HydStatic_CrossCurves;
-	class HydStatic_CrsCurve;
+	class HydStatic_CrsCurvesGraph;
 	class HydStatic_GzQ;
 	class HydStatic_GzQP;
 	class HydStatic_GzQP2;
@@ -125,7 +125,7 @@ namespace tnbLib
 		static TnbHydStatic_EXPORT std::vector<HydStatic_GzQ>
 			LeverArms
 			(
-				const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theCurves, 
+				const std::shared_ptr<HydStatic_CrsCurvesGraph>& theGraph,
 				const Standard_Real theVol
 			);
 

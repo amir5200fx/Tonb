@@ -361,6 +361,15 @@
     <Filter Include="TnbLib\Hydrostatic\Entities\OffsetCurve">
       <UniqueIdentifier>{85b43d08-ae28-4ad7-b73a-9e87284af607}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\CrsCurveQ">
+      <UniqueIdentifier>{421d77db-4212-44c4-9647-3634fbd828bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurvesGraph">
+      <UniqueIdentifier>{6ebd0b0c-0c8b-42e3-9aac-a06e68ef0ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph">
+      <UniqueIdentifier>{313972c0-24e6-4863-a737-29519cb6645b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -767,6 +776,21 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_Bonjean2.hxx">
       <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CrsCurveQ\HydStatic_CrsCurveQ.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurveQ</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CurveMaker\HydStatic_CurveQMaker.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CurveMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\HydStatic_CrsCurvesGraphOps.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurvesGraph\HydStatic_GeomCrsCurvesGraph.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurvesGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph\HydStatic_OffsetCrsCurvesGraph.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1192,6 +1216,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\SolutionData\HullData\Diagrams\HydStatic_SolutionData_Bonjean2IO.cxx">
       <Filter>TnbLib\Hydrostatic\SolutionData\HullData\Diagrams</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurveQ\HydStatic_CrsCurveQ.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurveQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\OffsetCurve\HydStatic_HydOffsetCurve.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\OffsetCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\HydStatic_CrsCurvesGraphOps.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurvesGraph\HydStatic_GeomCrsCurvesGraph.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurvesGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurvesGraph\HydStatic_GeomCrsCurvesGraphIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurvesGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph\HydStatic_OffsetCrsCurvesGraph.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph\HydStatic_OffsetCrsCurvesGraphIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurveQ\HydStatic_CrsCurveQIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\CrsCurveQ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
