@@ -4,6 +4,7 @@
 
 #include <Global_Done.hxx>
 #include <HydStatic_Entity.hxx>
+#include <HydStatic_CurveMakerType.hxx>
 
 namespace tnbLib
 {
@@ -16,10 +17,22 @@ namespace tnbLib
 		, public Global_Done
 	{
 
+	public:
+
+		struct Heel
+		{
+			Standard_Real value;
+		};
+
+		struct LeverArm
+		{
+			Standard_Real value;
+		};
+
+	private:
+
 		/*Private Data*/
 
-
-		std::vector<std::shared_ptr<HydStatic_CrsCurve>> theCurves_;
 
 		Standard_Real theMinDispv_;
 		Standard_Real theMaxDispv_;
@@ -27,38 +40,51 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
-	public:
+	protected:
+
+
+		//- default constructor
 
 		HydStatic_CrsCurvesGraph()
 		{}
 
-		TnbHydStatic_EXPORT HydStatic_CrsCurvesGraph
+
+		//- constructors
+
+		HydStatic_CrsCurvesGraph
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
-		);
+		)
+			: HydStatic_Entity(theIndex, theName)
+		{}
 
 
-		const auto& Curves() const
-		{
-			return theCurves_;
-		}
+		//- protected functions and operators
 
-		auto MinDispv() const
-		{
-			return theMinDispv_;
-		}
+		TnbHydStatic_EXPORT void SetMinDispv(const Standard_Real);
+		TnbHydStatic_EXPORT void SetMaxDispv(const Standard_Real);
 
-		auto MaxDispv() const
-		{
-			return theMaxDispv_;
-		}
+		TnbHydStatic_EXPORT void CheckIsDone() const;
 
-		TnbHydStatic_EXPORT void Perform
-		(
-			const std::vector<std::shared_ptr<HydStatic_CrsCurve>>& theUnClipped
-		);
+	public:
+
+		//- public functions and operators
+
+		virtual Standard_Integer NbCurves() const = 0;
+		virtual hydStcLib::CurveMakerType CurveType() const = 0;
+
+		TnbHydStatic_EXPORT Standard_Boolean IsInside(const Standard_Real x) const;
+
+		TnbHydStatic_EXPORT Standard_Real MinDispv() const;
+		TnbHydStatic_EXPORT Standard_Real MaxDispv() const;
+
+		virtual std::vector<std::pair<LeverArm, Heel>> RetrieveLeverArms(const Standard_Real x) const = 0;
+
+		TnbHydStatic_EXPORT void CheckVolume(const Standard_Real x) const;
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::HydStatic_CrsCurvesGraph);
 
 #endif // !_HydStatic_CrsCurvesGraph_Header
