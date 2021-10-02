@@ -21,8 +21,9 @@
 #include <Marine_CmptLib2.hxx>
 #include <Marine_BodyTools.hxx>
 #include <Marine_System.hxx>
-#include <HydStatic_CrsCurve.hxx>
-#include <HydStatic_CrsCurvesGraph.hxx>
+#include <HydStatic_CurveQMaker.hxx>
+#include <HydStatic_CrsCurveQ.hxx>
+#include <HydStatic_OffsetCrsCurvesGraph.hxx>
 #include <HydStatic_HeelSpacing.hxx>
 #include <HydStatic_Spacing.hxx>
 #include <HydStatic_Tools.hxx>
@@ -124,16 +125,27 @@ namespace tnbLib
 			return std::move(g);
 		}*/
 
-		auto RemoveDegeneracies(const xSectParList& l, const Standard_Real tol)
+		auto RemoveDegeneracies(xSectParList&& l, const Standard_Real tol)
 		{
 			xSectParList xs;
+			for (auto& x : l)
+			{
+				if (x.x >= tol)
+				{
+					xs.push_back(std::move(x));
+				}
+			}
+			return std::move(xs);
+		}
+
+		auto RetrieveQs(const xSectParList& l)
+		{
+			std::vector<std::pair<Standard_Real, Standard_Real>> xs;
+			xs.reserve(l.size());
 			for (const auto& x : l)
 			{
-				auto p = x;
-				if (p.x >= tol)
-				{
-					xs.push_back(std::move(p));
-				}
+				auto paired = std::make_pair(x.x, x.value);
+				xs.push_back(std::move(paired));
 			}
 			return std::move(xs);
 		}
@@ -202,7 +214,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 	Standard_Integer K = 0;
 	Standard_Real h0 = 0;
 	//std::vector<std::shared_ptr<Marine_GraphCurve>> curves;
-	std::vector<std::shared_ptr<HydStatic_CrsCurve>> curves;
+	std::vector<std::shared_ptr<HydStatic_CrsCurveQ>> curves;
 	curves.reserve(heels->NbSections());
 
 	if (verbose)
@@ -253,7 +265,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 
 		if (verbose) Info << " nb. of waters: " << domains->Waters().size() << endl;
 		if (verbose) Info << " calculating the cross-curve..." << endl;
-		Handle(Geom2d_Curve) curve;
+		std::shared_ptr<HydStatic_CrsCurveQ> curve;
 		{// timer scope
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
@@ -264,7 +276,7 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 					sysLib::gl_marine_integration_info
 				);
 
-			curveQ = crossCurves::RemoveDegeneracies(curveQ, volTol);
+			curveQ = crossCurves::RemoveDegeneracies(std::move(curveQ), volTol);
 			if (curveQ.size() < 2)
 			{
 				FatalErrorIn(FunctionSIG)
@@ -273,7 +285,10 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 			}
 
 			if (verbose) Info << " creating the geometric curve..." << endl;
-			curve = MarineBase_Tools::Curve(curveQ);
+			auto offsets = crossCurves::RetrieveQs(curveQ);
+
+			curve = hydStcLib::MakeCurveQ<HydStatic_CrsCurveQ>(std::move(offsets), Heels()->HeelType());
+			//curve = MarineBase_Tools::Curve(curveQ);
 		}
 		Debug_Null_Pointer(curve);
 		if (verbose)
@@ -281,15 +296,15 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 			Info << "the cross-curve is calculated in, " << global_time_duration << " ms" << endl;
 		}
 
-		auto cross = HydStatic_Tools::CrossCurve(std::move(curve), Heels()->HeelType());
-		Debug_Null_Pointer(cross);
-		cross->SetHeel(h);
-		cross->SetIndex(++K);
+		//auto cross = HydStatic_Tools::CrossCurve(std::move(curve), Heels()->HeelType());
+		//Debug_Null_Pointer(cross);
+		curve->SetHeel(h);
+		curve->SetIndex(++K);
 
 		/*auto gc = std::make_shared<Marine_GraphCurve>(++K, curve);
 		Debug_Null_Pointer(gc);*/
 
-		curves.push_back(std::move(cross));
+		curves.push_back(std::move(curve));
 
 		h0 = h;
 		/*gp_Ax2d ax1(Pnt2d(keel.Y(), keel.Z()), gp_Dir2d(cos(-h), sin(-h)));
@@ -302,11 +317,17 @@ void tnbLib::HydStatic_CrossCurves::Perform(const hydStcLib::CurveMakerType t)
 
 	ChangeGraph() = std::move(graph);*/
 
-	auto graph = std::make_shared<HydStatic_CrsCurvesGraph>(0, "cross-curves");
-	graph->Perform(curves);
+	if (verbose)
+	{
+		Info << endl
+			<< " all cross-curves are calculated, successfully!" << endl;
+	}
+
+	auto graph = std::make_shared<HydStatic_OffsetCrsCurvesGraph>(0, "cross-curves");
+	graph->Perform(std::move(curves));
 	Debug_If_Condition_Message(NOT graph->IsDone(), "the algorithm is not performed");
 
-	ChangeCrossCurves() = std::move(graph);
+	GraphRef() = std::move(graph);
 
 	Change_IsDone() = Standard_True;
 

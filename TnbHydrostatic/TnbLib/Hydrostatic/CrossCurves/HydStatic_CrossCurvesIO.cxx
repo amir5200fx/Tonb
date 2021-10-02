@@ -5,7 +5,7 @@
 #include <Marine_Body.hxx>
 #include <Marine_Graph.hxx>
 #include <HydStatic_HeelSpacing.hxx>
-#include <HydStatic_CrsCurve.hxx>
+#include <HydStatic_CrsCurveQ.hxx>
 #include <HydStatic_CrsCurvesGraph.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_CrossCurves)
