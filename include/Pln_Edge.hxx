@@ -49,8 +49,13 @@ namespace tnbLib
 
 		typedef Pnt2d ptType;
 
+		//- default constructor
+
 		Pln_Edge()
 		{}
+
+
+		//- constructors
 
 		Pln_Edge
 		(
@@ -182,6 +187,9 @@ namespace tnbLib
 			, theVtx1_(std::move(theVtx1))
 		{}
 
+
+		//- public functions and operators
+
 		TnbCad2d_EXPORT Standard_Boolean IsDangle() const;
 
 		TnbCad2d_EXPORT Standard_Boolean IsOrphan() const override;
@@ -198,12 +206,12 @@ namespace tnbLib
 			const Standard_Integer theIndex
 		) const;
 
-		const std::shared_ptr<Pln_Vertex>& Vtx0() const
+		const auto& Vtx0() const
 		{
 			return theVtx0_;
 		}
 
-		const std::shared_ptr<Pln_Vertex>& Vtx1() const
+		const auto& Vtx1() const
 		{
 			return theVtx1_;
 		}

@@ -26,11 +26,22 @@ namespace tnbLib
 
 	public:
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_TangSegment();
+		//- default constructor
 
-		TnbCad2d_EXPORT explicit Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex);
+		Cad2d_IntsctEntity_TangSegment()
+		{}
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex, const word& theName);
+		//- constructors
+
+		explicit Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex)
+			: Cad2d_IntsctEntity_Segment(theIndex)
+		{}
+
+		Cad2d_IntsctEntity_TangSegment(const Standard_Integer theIndex, const word& theName)
+			: Cad2d_IntsctEntity_Segment(theIndex, theName)
+		{}
+
+		//- public functions and operators
 
 		TnbCad2d_EXPORT Standard_Real CharParameter() const override;
 

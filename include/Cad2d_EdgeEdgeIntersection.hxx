@@ -29,18 +29,31 @@ namespace tnbLib
 
 	public:
 
-		TnbCad2d_EXPORT Cad2d_EdgeEdgeIntersection();
 
-		TnbCad2d_EXPORT Cad2d_EdgeEdgeIntersection
+		//- default constructor
+
+		Cad2d_EdgeEdgeIntersection()
+		{}
+
+		//- constructors
+
+		Cad2d_EdgeEdgeIntersection
 		(
 			const Standard_Integer theIndex
-		);
+		)
+			: Cad2d_EntityEntityIntersection(theIndex)
+		{}
 
-		TnbCad2d_EXPORT Cad2d_EdgeEdgeIntersection
+		Cad2d_EdgeEdgeIntersection
 		(
 			const Standard_Integer theIndex, 
 			const word& theName
-		);
+		)
+			: Cad2d_EntityEntityIntersection(theIndex, theName)
+		{}
+
+
+		//- public functions and operators
 
 		const auto& Edge0() const
 		{

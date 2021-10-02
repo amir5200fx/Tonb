@@ -76,6 +76,12 @@ namespace tnbLib
 			return Sense_;
 		}
 
+		TnbCad2d_EXPORT Pnt2d FirstCoord() const;
+		TnbCad2d_EXPORT Pnt2d LastCoord() const;
+
+		TnbCad2d_EXPORT Pnt2d FirstCoord(const Standard_Boolean theSense) const;
+		TnbCad2d_EXPORT Pnt2d LastCoord(const Standard_Boolean theSense) const;
+
 		std::shared_ptr<Entity2d_Polygon>& Mesh() const
 		{
 			return theMesh_;

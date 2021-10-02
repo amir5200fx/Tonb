@@ -39,8 +39,14 @@ namespace tnbLib
 
 		typedef Pnt2d ptType;
 
+
+		//- default constructor
+
 		Pln_Vertex()
 		{}
+
+
+		//- constructors
 
 		Pln_Vertex
 		(
@@ -68,13 +74,19 @@ namespace tnbLib
 			, theCoord_(theCoord)
 		{}
 
+
+		//- public functions and operators
+
 		inline Standard_Boolean IsDangle() const;
 
 		TnbCad2d_EXPORT Standard_Boolean IsRingPoint() const;
-
 		TnbCad2d_EXPORT Standard_Boolean IsManifold() const;
 
 		TnbCad2d_EXPORT Standard_Real Angle() const;
+		TnbCad2d_EXPORT Standard_Real CalcGap() const;
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> BackWardEdge() const;
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> ForwardEdge() const;
 
 		inline Standard_Integer NbEntities(const Pln_EntityType t) const override;
 
@@ -94,6 +106,7 @@ namespace tnbLib
 			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
 			const Pln_EntityType t
 		) const override;
+
 
 		//- virtual functions
 

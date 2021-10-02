@@ -23,13 +23,24 @@ namespace tnbLib
 
 	public:
 
+
+		//- default constructor
+
 		Cad2d_IntsctEntity_Segment()
 		{}
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex);
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex, const word& theName);
+		//- constructors
 
+		Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex)
+			: Cad2d_IntsctEntity(theIndex)
+		{}
+
+		Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex, const word& theName)
+			: Cad2d_IntsctEntity(theIndex, theName)
+		{}
+
+		//- public functions and operators
 
 		const auto& ParentEdge() const
 		{

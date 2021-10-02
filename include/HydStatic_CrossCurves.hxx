@@ -19,7 +19,7 @@ namespace tnbLib
 	class Marine_Body;
 	class Marine_Domain;
 	class Marine_Graph;
-	class HydStatic_CrsCurve;
+	class HydStatic_CrsCurveQ;
 	class HydStatic_CrsCurvesGraph;
 	class HydStatic_HeelSpacing;
 
@@ -47,7 +47,7 @@ namespace tnbLib
 		TNB_SERIALIZATION(TnbHydStatic_EXPORT);
 
 
-		auto& ChangeCrossCurves()
+		auto& GraphRef()
 		{
 			return theCrossCurves_;
 		}

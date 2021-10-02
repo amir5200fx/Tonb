@@ -11,7 +11,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class HydStatic_CrossCurves;
+	class HydStatic_CrsCurvesGraph;
 	class HydStatic_rArmCurve;
 
 	class HydStatic_FreeSurfEff
@@ -23,7 +23,7 @@ namespace tnbLib
 		marineLib::DISPV theTank_;
 		marineLib::DISPV theShip_;
 
-		std::shared_ptr<HydStatic_CrossCurves> theCrossCurves_;
+		std::shared_ptr<HydStatic_CrsCurvesGraph> theCrossCurves_;
 
 		std::shared_ptr<HydStatic_rArmCurve> theRightingArm_;
 
@@ -51,7 +51,7 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT HydStatic_FreeSurfEff
 		(
-			const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves, 
+			const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves,
 			const marineLib::DISPV& theTank,
 			const marineLib::DISPV& theShip
 		);
@@ -85,20 +85,17 @@ namespace tnbLib
 
 		TnbHydStatic_EXPORT void LoadCrossCurves
 		(
-			const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves
+			const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves
 		);
 
 		TnbHydStatic_EXPORT void LoadCrossCurves
 		(
-			std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves
+			std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCrossCurves
 		);
 
 		TnbHydStatic_EXPORT void SetTankDispv(const marineLib::DISPV& theDispv);
-
 		TnbHydStatic_EXPORT void SetTankDispv(marineLib::DISPV&& theDispv);
-
 		TnbHydStatic_EXPORT void SetShipDispv(const marineLib::DISPV& theDispv);
-
 		TnbHydStatic_EXPORT void SetShipDispv(marineLib::DISPV&& theDispv);
 
 	};

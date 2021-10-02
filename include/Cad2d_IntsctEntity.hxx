@@ -23,21 +23,35 @@ namespace tnbLib
 
 	protected:
 
+
+		//- default constructor
+
 		Cad2d_IntsctEntity()
 		{}
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity
+
+		//- constructors
+
+		Cad2d_IntsctEntity
 		(
 			const Standard_Integer theIndex
-		);
+		)
+			: Global_Indexed(theIndex)
+		{}
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity
+		Cad2d_IntsctEntity
 		(
 			const Standard_Integer theIndex,
 			const word& theName
-		);
+		)
+			: Global_Indexed(theIndex)
+			, Global_Named(theName)
+		{}
 
 	public:
+
+
+		//- public functions and operators
 
 		virtual ~Cad2d_IntsctEntity()
 		{}

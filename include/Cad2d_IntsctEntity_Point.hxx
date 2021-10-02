@@ -21,11 +21,20 @@ namespace tnbLib
 
 	public:
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_Point();
+		//- default constructor
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_Point(const Standard_Integer theIndex);
+		Cad2d_IntsctEntity_Point()
+		{}
 
-		TnbCad2d_EXPORT Cad2d_IntsctEntity_Point(const Standard_Integer theIndex, const word& theName);
+		Cad2d_IntsctEntity_Point(const Standard_Integer theIndex)
+			: Cad2d_IntsctEntity(theIndex)
+		{}
+
+		Cad2d_IntsctEntity_Point(const Standard_Integer theIndex, const word& theName)
+			: Cad2d_IntsctEntity(theIndex, theName)
+		{}
+
+		//- public functions and operators
 
 		const auto& ParentVertex() const
 		{
