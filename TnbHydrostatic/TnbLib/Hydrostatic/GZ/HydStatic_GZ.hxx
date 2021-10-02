@@ -110,11 +110,8 @@ namespace tnbLib
 		);
 
 		TnbHydStatic_EXPORT void SetKG(const marineLib::KG& theKG);
-
 		TnbHydStatic_EXPORT void SetKG(marineLib::KG&& theKG);
-
 		TnbHydStatic_EXPORT void SetDispv(const marineLib::DISPV& theV);
-
 		TnbHydStatic_EXPORT void SetDispv(marineLib::DISPV&& theV);
 
 		void SetBodyType(const bodyType t)

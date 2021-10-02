@@ -86,7 +86,7 @@ void tnbLib::HydStatic_GZ::Perform()
 	}
 
 	const auto& crossCurves = *CrossCurves();
-	const auto t = hydStcLib::RetrieveType(crossCurves.Curves());
+	const auto t = crossCurves.CurveType();
 
 	if (NOT INSIDE(DISPV()(), crossCurves.MinDispv(), crossCurves.MaxDispv()))
 	{
@@ -103,7 +103,7 @@ void tnbLib::HydStatic_GZ::Perform()
 		Info << " calculating lever arms..." << endl;
 		Info << endl;
 	}
-	const auto leverArms = HydStatic_CmptLib::LeverArms(crossCurves.Curves(), DISPV()());
+	const auto leverArms = HydStatic_CmptLib::LeverArms(CrossCurves(), DISPV()());
 
 	if (verbose)
 	{
