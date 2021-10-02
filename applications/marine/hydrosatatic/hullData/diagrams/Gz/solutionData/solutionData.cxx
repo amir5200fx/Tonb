@@ -3,6 +3,7 @@
 #include <HydStatic_HullShape.hxx>
 #include <Marine_Bodies.hxx>
 #include <Marine_Models.hxx>
+#include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -17,6 +18,13 @@ namespace tnbLib
 	model_t myBody;
 	soluData_t mySolutionData;
 
+	void setVerbose(unsigned short i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void loadModel(const std::string& name)
 	{
 		fileName fn(name);
@@ -28,9 +36,14 @@ namespace tnbLib
 		}
 		std::ifstream myFile(fn);
 
-		TNB_iARCH_FILE_TYPE ar(myFile);
+		{//- timer scope
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
 
-		ar >> myBody;
+			TNB_iARCH_FILE_TYPE ar(myFile);
+			ar >> myBody;
+		}
+
 		if (NOT myBody)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -154,7 +167,21 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to create solution data for the GZ simulation." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - loadModel(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # Global functions: " << endl << endl
+
+				<< " - execute()" << endl
+				<< " - setVerbose(int)" << endl
+
+				<< endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -166,7 +193,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("hullDataSolutionData");
+			std::string address = ".\\system\\hullDataSolutionData";
+			fileName myFileName(address);
 
 			try
 			{

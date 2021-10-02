@@ -145,6 +145,9 @@
     <ClCompile Include="solutionData.cxx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\..\..\TnbHydrostatic\TnbHydrostatic.vcxproj">
       <Project>{33976535-7c9d-4d56-ad80-699694bf4492}</Project>
     </ProjectReference>
