@@ -4,7 +4,6 @@
 #include <HydStatic_rArmCurve_FSLq.hxx>
 #include <HydStatic_CurveMaker.hxx>
 #include <HydStatic_CrsCurve.hxx>
-#include <HydStatic_CrossCurves.hxx>
 #include <HydStatic_CrsCurvesGraph.hxx>
 #include <HydStatic_CmptLib.hxx>
 #include <HydStatic_Tools.hxx>
@@ -22,7 +21,7 @@ tnbLib::HydStatic_FreeSurfEff::HydStatic_FreeSurfEff()
 
 tnbLib::HydStatic_FreeSurfEff::HydStatic_FreeSurfEff
 (
-	const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves, 
+	const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves,
 	const marineLib::DISPV & theTank,
 	const marineLib::DISPV & theShip
 )
@@ -70,8 +69,8 @@ void tnbLib::HydStatic_FreeSurfEff::Perform()
 		Info << endl;
 	}
 
-	const auto& crossCurves = *CrossCurves()->CrossCurves();
-	const auto t = hydStcLib::RetrieveType(crossCurves.Curves());
+	const auto& crossCurves = *CrossCurves();
+	const auto t = crossCurves.CurveType();
 
 	if (NOT INSIDE(TankDispv()(), crossCurves.MinDispv(), crossCurves.MaxDispv()))
 	{
@@ -88,7 +87,7 @@ void tnbLib::HydStatic_FreeSurfEff::Perform()
 		Info << " calculating lever arms..." << endl;
 		Info << endl;
 	}
-	const auto leverArms = HydStatic_CmptLib::LeverArms(crossCurves.Curves(), TankDispv()());
+	const auto leverArms = HydStatic_CmptLib::LeverArms(CrossCurves(), TankDispv()());
 
 	if (verbose)
 	{
@@ -123,7 +122,7 @@ void tnbLib::HydStatic_FreeSurfEff::Perform()
 
 void tnbLib::HydStatic_FreeSurfEff::LoadCrossCurves
 (
-	const std::shared_ptr<HydStatic_CrossCurves>& theCrossCurves
+	const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCrossCurves
 )
 {
 	theCrossCurves_ = theCrossCurves;
@@ -131,7 +130,7 @@ void tnbLib::HydStatic_FreeSurfEff::LoadCrossCurves
 
 void tnbLib::HydStatic_FreeSurfEff::LoadCrossCurves
 (
-	std::shared_ptr<HydStatic_CrossCurves>&& theCrossCurves
+	std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCrossCurves
 )
 {
 	theCrossCurves_ = std::move(theCrossCurves);
