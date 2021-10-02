@@ -131,7 +131,7 @@ namespace tnbLib
 			const typename transform_point_type<coord>::type& theTrasf
 		)
 		{
-			for (Standard_Integer i = 0; i < NbPoints() - 1; i++)
+			for (Standard_Integer i = 0; i < NbPoints(); i++)
 				Coord(i).Transform(theTrasf);
 		}
 

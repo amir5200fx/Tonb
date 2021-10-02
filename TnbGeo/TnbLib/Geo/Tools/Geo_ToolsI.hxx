@@ -300,6 +300,30 @@ tnbLib::Geo_Tools::IsOneCommonPointTwoTriangles
 										return Standard_False;
 }
 
+inline Standard_Real 
+tnbLib::Geo_Tools::Interpolate
+(
+	const Standard_Real x,
+	const std::pair<Standard_Real, Standard_Real>& theLower, 
+	const std::pair<Standard_Real, Standard_Real>& theUpper
+)
+{
+	const auto[x0, y0] = theLower;
+	const auto[x1, y1] = theUpper;
+
+	if (NOT INSIDE(x, x0, x1))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the parameter, x, exceeds the boundary of the span [x0, x1]." << endl
+			<< "  - x: " << x << endl
+			<< "  - x0: " << x0 << endl
+			<< "  - x1: " << x1 << endl
+			<< abort(FatalError);
+	}
+
+	return y0 + ((x - x0) / (x1 - x0))*(y1 - y0);
+}
+
 inline tnbLib::Pnt2d 
 tnbLib::Geo_Tools::ProjectPtAtSegment
 (
@@ -333,8 +357,8 @@ namespace tnbLib
 	size_t Geo_Tools::FindSpan
 	(
 		const Standard_Real x, 
-		const std::vector<std::shared_ptr<Type>>& theSorted,
-		Standard_Real(*xValue)(const std::shared_ptr<Type>&)
+		const std::vector<Type>& theSorted,
+		Standard_Real(*xValue)(const Type&)
 	)
 	{
 #ifdef _DEBUG
@@ -342,7 +366,7 @@ namespace tnbLib
 #endif // _DEBUG
 
 		auto high = theSorted.size() - 1;
-		if (x IS_EQUAL xValue(theSorted[high]))
+		if (x >= xValue(theSorted[high]))
 		{
 			return high;
 		}

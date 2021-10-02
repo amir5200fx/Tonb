@@ -471,6 +471,14 @@ namespace tnbLib
 				const Entity2d_Triangle& tri1
 			);
 
+		static  inline Standard_Real 
+			Interpolate
+			(
+				const Standard_Real x, 
+				const std::pair<Standard_Real, Standard_Real>& theLower, 
+				const std::pair<Standard_Real, Standard_Real>& theUpper
+			);
+
 		static inline Pnt2d 
 			ProjectPtAtSegment
 			(
@@ -557,8 +565,8 @@ namespace tnbLib
 			FindSpan
 			(
 				const Standard_Real x,
-				const std::vector<std::shared_ptr<Type>>& theSorted,
-				Standard_Real(*xValue)(const std::shared_ptr<Type>&)
+				const std::vector<Type>& theSorted,
+				Standard_Real(*xValue)(const Type&)
 			);
 
 		static TnbGeo_EXPORT size_t 
