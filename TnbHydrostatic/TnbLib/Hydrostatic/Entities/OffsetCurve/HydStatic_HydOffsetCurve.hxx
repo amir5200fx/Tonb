@@ -32,11 +32,17 @@ namespace tnbLib
 
 		//- constructors
 
-		HydStatic_HydOffsetCurve(const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs)
+		HydStatic_HydOffsetCurve
+		(
+			const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs
+		)
 			: theQs_(theQs)
 		{}
 
-		HydStatic_HydOffsetCurve(std::vector<std::pair<Standard_Real, Standard_Real>>&& theQs)
+		HydStatic_HydOffsetCurve
+		(
+			std::vector<std::pair<Standard_Real, Standard_Real>>&& theQs
+		)
 			: theQs_(std::move(theQs))
 		{}
 
@@ -64,6 +70,28 @@ namespace tnbLib
 
 		//- public functions and operators
 
+		TnbHydStatic_EXPORT Standard_Integer NbSpans() const;
+
+		TnbHydStatic_EXPORT Standard_Integer LowerSpan() const;
+		TnbHydStatic_EXPORT Standard_Integer UpperSpan() const;
+
+		TnbHydStatic_EXPORT Standard_Integer FindSpan(const Standard_Real x) const;
+
+		TnbHydStatic_EXPORT std::pair<Standard_Real, Standard_Real> Span(const Standard_Integer) const;
+		TnbHydStatic_EXPORT std::pair<Standard_Real, Standard_Real> SpanValue(const Standard_Integer) const;
+
+		//- return true if the parameter x is inside the span [lower, upper]
+		TnbHydStatic_EXPORT Standard_Boolean IsInside(const Standard_Real x) const;
+
+		TnbHydStatic_EXPORT Standard_Real Lower() const;
+		TnbHydStatic_EXPORT Standard_Real Upper() const;
+
+		TnbHydStatic_EXPORT Standard_Real FirstValue() const;
+		TnbHydStatic_EXPORT Standard_Real LastValue() const;
+
+		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Real x) const;
+		TnbHydStatic_EXPORT Standard_Real Value(const Standard_Integer span, const Standard_Real x) const;
+
 		auto NbPoints() const
 		{
 			return (Standard_Integer)theQs_.size();
@@ -88,6 +116,8 @@ namespace tnbLib
 		{
 			theQs_ = std::move(theQs);
 		}
+
+		TnbHydStatic_EXPORT void CheckSpan(const Standard_Integer) const;
 	};
 }
 
