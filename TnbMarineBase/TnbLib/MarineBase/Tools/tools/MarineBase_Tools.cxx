@@ -4,6 +4,7 @@
 #include <Pln_Wire.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Curve.hxx>
+#include <Pln_CurveTools.hxx>
 
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
@@ -11,11 +12,13 @@
 #include <Entity3d_Box.hxx>
 #include <Entity2d_Triangle.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Entity3d_Triangulation.hxx>
 #include <Geo_Interval.hxx>
 #include <Geo_xDistb.hxx>
 #include <Geo_UniDistb.hxx>
 #include <Geo_CmptLib.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Geo_Tools.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad2d_CmptLib.hxx>
 #include <Cad2d_Plane.hxx>
@@ -156,29 +159,80 @@ tnbLib::MarineBase_Tools::SteffenTessellation
 	const std::vector<marineLib::xSectionParam>& theQ
 )
 {
-	auto x = new double[theQ.size()];
-	auto y = new double[theQ.size()];
-
-	for (size_t i = 0; i < theQ.size(); i++)
+	if (theQ.size() <= 2)
 	{
-		x[i] = theQ[i].x;
-		y[i] = theQ[i].value;
+		FatalErrorIn(FunctionSIG)
+			<< "no enough data points are provided!" << endl
+			<< abort(FatalError);
 	}
 
-	gsl_interp_accel *acc = gsl_interp_accel_alloc();
-	gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, theQ.size());
-	gsl_spline_init(spline_steffen, x, y, theQ.size());
-
-	auto xt = TessellateX(x, theQ.size());
-	std::vector<marineLib::xSectionParam> Q;
-	Q.reserve(xt.size());
-	for (auto xi : xt)
+	if (theQ.size() < 5)
 	{
-		double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
-		auto p = marineLib::xSectionParam{ xi,yi_steffen };
-		Q.push_back(p);
+		std::vector<Pnt2d> Qs;
+		Qs.reserve(theQ.size() * 2 - 1);
+		for (const auto& x : theQ)
+		{
+			auto pt = marineLib::point(x);
+			Qs.push_back(std::move(pt));
+		}
+
+		const auto n = Qs.size();
+		for (int i = n - 2; i >= 0; i--)
+		{
+			const auto& pt = Qs[i];
+			auto ptp = pt.Mirrored(Qs[n - 1]);
+			Qs.push_back(std::move(ptp));
+		}
+
+		auto x = new double[Qs.size()];
+		auto y = new double[Qs.size()];
+		for (size_t i = 0; i < Qs.size(); i++)
+		{
+			x[i] = Qs[i].X();
+			y[i] = Qs[i].Y();
+		}
+
+		gsl_interp_accel *acc = gsl_interp_accel_alloc();
+		gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, Qs.size());
+		gsl_spline_init(spline_steffen, x, y, Qs.size());
+
+		auto xt = TessellateX(x, theQ.size());
+		std::vector<marineLib::xSectionParam> Q;
+		Q.reserve(xt.size());
+		for (auto xi : xt)
+		{
+			double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
+			auto p = marineLib::xSectionParam{ xi,yi_steffen };
+			Q.push_back(p);
+		}
+		return std::move(Q);
 	}
-	return std::move(Q);
+	else
+	{
+		auto x = new double[theQ.size()];
+		auto y = new double[theQ.size()];
+
+		for (size_t i = 0; i < theQ.size(); i++)
+		{
+			x[i] = theQ[i].x;
+			y[i] = theQ[i].value;
+		}
+
+		gsl_interp_accel *acc = gsl_interp_accel_alloc();
+		gsl_spline *spline_steffen = gsl_spline_alloc(gsl_interp_steffen, theQ.size());
+		gsl_spline_init(spline_steffen, x, y, theQ.size());
+
+		auto xt = TessellateX(x, theQ.size());
+		std::vector<marineLib::xSectionParam> Q;
+		Q.reserve(xt.size());
+		for (auto xi : xt)
+		{
+			double yi_steffen = gsl_spline_eval(spline_steffen, xi, acc);
+			auto p = marineLib::xSectionParam{ xi,yi_steffen };
+			Q.push_back(p);
+		}
+		return std::move(Q);
+	}
 }
 
 tnbLib::Entity2d_Box
@@ -231,7 +285,8 @@ Handle(Geom2d_Curve)
 tnbLib::MarineBase_Tools::Curve
 (
 	const std::vector<marineLib::xSectionParam>& theQ,
-	const Standard_Boolean tessellation
+	const Standard_Boolean tessellation,
+	const Standard_Real tol
 )
 {
 	if (theQ.size() < 2)
@@ -244,46 +299,64 @@ tnbLib::MarineBase_Tools::Curve
 			<< abort(FatalError);
 	}
 
-	std::vector<marineLib::xSectionParam> Q;
-	if (theQ.size() < MIN_NB_POINTS_INTERPOLATION AND tessellation)
+	if (theQ.size() IS_EQUAL 2)
 	{
-		Q = SteffenTessellation(theQ);
-	}
-	else
-	{
-		Q = theQ;
-	}
+		const auto& Q0 = theQ[0];
+		const auto& Q1 = theQ[1];
 
-	Handle(TColgp_HArray1OfPnt2d) PtsPtr = 
-		new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Q.size());
-	auto& Pts = *PtsPtr;
-
-	Standard_Integer K = 0;
-	for (const auto& x : Q)
-	{
-		Pts.SetValue(++K, gp_Pnt2d(x.x, x.value));
-	}
-
-	try
-	{
-		Geom2dAPI_Interpolate Interpolation(PtsPtr, Standard_False, 1.0e-6);
-		Interpolation.Perform();
-
-		if (!Interpolation.IsDone())
+		if (marineLib::distance(Q0, Q1) <= tol)
 		{
-			FatalErrorIn
-			(
-				"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
-			)
-				<< "Failed to interpolation!"
+			FatalErrorIn(FunctionSIG)
+				<< "invalid data for interpolating points have been detected!" << endl
 				<< abort(FatalError);
 		}
 
-		return Interpolation.Curve();
+		auto curve = Pln_CurveTools::MakeSegment(marineLib::point(Q0), marineLib::point(Q1));
+		return std::move(curve);
 	}
-	catch (StdFail_NotDone&)
+	else
 	{
-		return nullptr;
+		std::vector<marineLib::xSectionParam> Q;
+		if (theQ.size() < MIN_NB_POINTS_INTERPOLATION AND tessellation)
+		{
+			Q = SteffenTessellation(theQ);
+		}
+		else
+		{
+			Q = theQ;
+		}
+
+		Handle(TColgp_HArray1OfPnt2d) PtsPtr =
+			new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Q.size());
+		auto& Pts = *PtsPtr;
+
+		Standard_Integer K = 0;
+		for (const auto& x : Q)
+		{
+			Pts.SetValue(++K, marineLib::point(x));
+		}
+
+		try
+		{
+			Geom2dAPI_Interpolate Interpolation(PtsPtr, Standard_False, tol);
+			Interpolation.Perform();
+
+			if (!Interpolation.IsDone())
+			{
+				FatalErrorIn
+				(
+					"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
+				)
+					<< "Failed to interpolation!"
+					<< abort(FatalError);
+			}
+
+			return Interpolation.Curve();
+		}
+		catch (StdFail_NotDone&)
+		{
+			return nullptr;
+		}
 	}
 }
 
@@ -452,6 +525,11 @@ namespace tnbLib
 			if (x.value > maxValue) maxValue = x.value;
 		}
 
+		if (maxValue < 1.0)
+		{
+			maxValue = 1.0;
+		}
+
 		auto minX = iter->x;
 		auto maxX = minX;
 		for (const auto& x : theQ)
@@ -490,68 +568,78 @@ tnbLib::MarineBase_Tools::CalcArea
 			<< abort(FatalError);
 	}
 
-	auto [dx, maxValue, Qn] = NormalizedQs(theQ);
-
-	std::vector<marineLib::xSectionParam> Q;
-	if (Qn.size() < MIN_NB_POINTS_INTERPOLATION)
+	if (theQ.size() IS_EQUAL 2)
 	{
-		Q = SteffenTessellation(Qn);
+		const auto& q0 = theQ[0];
+		const auto& q1 = theQ[1];
+
+		return 0.5*(q0.value + q1.value)*(q1.x - q0.x);
 	}
 	else
 	{
-		Q = Qn;
-	}
+		auto[dx, maxValue, Qn] = NormalizedQs(theQ);
 
-	Handle(TColgp_HArray1OfPnt2d) PtsPtr = new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Q.size());
-	auto& Pts = *PtsPtr;
+		std::vector<marineLib::xSectionParam> Q;
+		if (Qn.size() < MIN_NB_POINTS_INTERPOLATION)
+		{
+			Q = SteffenTessellation(Qn);
+		}
+		else
+		{
+			Q = Qn;
+		}
 
-	Standard_Integer K = 0;
-	for (const auto& x : Q)
-	{
-		Pts.SetValue(++K, gp_Pnt2d(x.x, x.value));
-	}
+		Handle(TColgp_HArray1OfPnt2d) PtsPtr = new TColgp_HArray1OfPnt2d(1, (Standard_Integer)Q.size());
+		auto& Pts = *PtsPtr;
 
-	Geom2dAPI_Interpolate Interpolation(PtsPtr, Standard_False, 1.0e-6);
-	Interpolation.Perform();
+		Standard_Integer K = 0;
+		for (const auto& x : Q)
+		{
+			Pts.SetValue(++K, gp_Pnt2d(x.x, x.value));
+		}
 
-	if (!Interpolation.IsDone())
-	{
-		FatalErrorIn
-		(
-			"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
-		)
-			<< "Failed to interpolation!"
-			<< abort(FatalError);
-	}
+		Geom2dAPI_Interpolate Interpolation(PtsPtr, Standard_False, 1.0e-6);
+		Interpolation.Perform();
 
-	/*OFstream ff("curve.plt");
-	auto nn = 50;
-	std::vector<Pnt2d> pp;
-	pp.reserve(nn+1);
-	const auto& cc = Interpolation.Curve();
-	auto dx = (cc->LastParameter() - cc->FirstParameter()) / (nn);
-	for (size_t i = 0; i <= nn; i++)
-	{
-		auto x = cc->FirstParameter() + i * dx;
-		pp.push_back(cc->Value(x));
-	}
-	Io::ExportCurve(pp, ff);*/
+		if (!Interpolation.IsDone())
+		{
+			FatalErrorIn
+			(
+				"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
+			)
+				<< "Failed to interpolation!"
+				<< abort(FatalError);
+		}
 
-	try
-	{
-		auto area0 = Cad2d_CmptLib::AreaUnderCurve(Interpolation.Curve(), 0, theInfo);
-		return area0 * (dx*maxValue);
-	}
-	catch (StdFail_NotDone&)
-	{
-		FatalErrorIn
-		(
-			"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
-		)
-			<< "Failed to interpolation!"
-			<< abort(FatalError);
+		/*OFstream ff("curve.plt");
+		auto nn = 50;
+		std::vector<Pnt2d> pp;
+		pp.reserve(nn+1);
+		const auto& cc = Interpolation.Curve();
+		auto dx = (cc->LastParameter() - cc->FirstParameter()) / (nn);
+		for (size_t i = 0; i <= nn; i++)
+		{
+			auto x = cc->FirstParameter() + i * dx;
+			pp.push_back(cc->Value(x));
+		}
+		Io::ExportCurve(pp, ff);*/
 
-		return 0;
+		try
+		{
+			auto area0 = Cad2d_CmptLib::AreaUnderCurve(Interpolation.Curve(), 0, theInfo);
+			return area0 * (dx*maxValue);
+		}
+		catch (StdFail_NotDone&)
+		{
+			FatalErrorIn
+			(
+				"Standard_Real MarineBase_Tools::CalcArea(const std::vector<marineLib::xSectionParam>& theQ)"
+			)
+				<< "Failed to interpolation!"
+				<< abort(FatalError);
+
+			return 0;
+		}
 	}
 }
 
@@ -2865,6 +2953,151 @@ tnbLib::MarineBase_Tools::RetrieveLateralProjArea
 	return std::move(tri);
 }
 
+std::shared_ptr<tnbLib::Entity2d_Triangulation> 
+tnbLib::MarineBase_Tools::RetrieveTriangulation
+(
+	const Marine_Section & theSection
+)
+{
+	const auto& wire = theSection.Wire();
+	const auto& edges = wire->Edges();
+	auto tris = std::make_shared<Entity2d_Triangulation>();
+	Debug_Null_Pointer(tris);
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		const auto& mesh = x->Mesh();
+		if (NOT mesh)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the edge is not discretized!" << endl
+				<< abort(FatalError);
+		}
+		auto chain = Geo_Tools::RetrieveChain(*mesh);
+		auto tri = *Geo_Tools::Triangulation(*chain);
+		tris->Add(std::move(tri));
+	}
+	return std::move(tris);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation> 
+tnbLib::MarineBase_Tools::RetrieveTriangulation
+(
+	const Marine_CmpSection & theSection
+)
+{
+	auto tris = std::make_shared<Entity2d_Triangulation>();
+	Debug_Null_Pointer(tris);
+	for (const auto& x : theSection.Sections())
+	{
+		Debug_Null_Pointer(x);
+		auto tri = *RetrieveTriangulation(*x);
+		tris->Add(std::move(tri));
+	}
+	return std::move(tris);
+}
+
+std::vector<std::shared_ptr<tnbLib::Entity2d_Triangulation>> 
+tnbLib::MarineBase_Tools::RetrieveTriangulations2d
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	std::vector<std::shared_ptr<Entity2d_Triangulation>> tris;
+	tris.reserve(theSections.size());
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		auto tri = RetrieveTriangulation(*x);
+		tris.push_back(std::move(tri));
+	}
+	return std::move(tris);
+}
+
+std::vector<std::shared_ptr<tnbLib::Entity2d_Triangulation>>
+tnbLib::MarineBase_Tools::RetrieveTriangulations2d
+(
+	const std::vector<std::shared_ptr<Marine_Section>>& theSections
+)
+{
+	std::vector<std::shared_ptr<Entity2d_Triangulation>> tris;
+	tris.reserve(theSections.size());
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		auto tri = RetrieveTriangulation(*x);
+		tris.push_back(std::move(tri));
+	}
+	return std::move(tris);
+}
+
+namespace tnbLib
+{
+
+	auto RetrieveTriangulation3d(const Standard_Real xcoord, const std::shared_ptr<Entity2d_Triangulation>& tri2d)
+	{
+		auto pts2d = std::move(tri2d->Points());
+		auto indices = std::move(tri2d->Connectivity());
+		std::vector<Pnt3d> pts;
+		pts.reserve(pts2d.size());
+		for (const auto& x : pts2d)
+		{
+			Pnt3d pt(xcoord, x.X(), x.Y());
+			pts.push_back(std::move(pt));
+		}
+
+		auto tri = std::make_shared<Entity3d_Triangulation>();
+		Debug_Null_Pointer(tri);
+		tri->Points() = std::move(pts);
+		tri->Connectivity() = std::move(indices);
+		return std::move(tri);
+	}
+}
+
+std::shared_ptr<tnbLib::Entity3d_Triangulation> 
+tnbLib::MarineBase_Tools::RetrieveTriangulation
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+)
+{
+	auto tris2d = RetrieveTriangulations2d(theSections);
+	size_t i = 0;
+	auto tris = std::make_shared<Entity3d_Triangulation>();
+	Debug_Null_Pointer(tris);
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(tris2d[i]);
+		auto xcoord = x->X();
+		auto tri = *RetrieveTriangulation3d(xcoord, tris2d[i]);
+		tris->Add(std::move(tri));
+		i++;
+	}
+	return std::move(tris);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Triangulation>
+tnbLib::MarineBase_Tools::RetrieveTriangulation
+(
+	const std::vector<std::shared_ptr<Marine_Section>>& theSections
+)
+{
+	auto tris2d = RetrieveTriangulations2d(theSections);
+	size_t i = 0;
+	auto tris = std::make_shared<Entity3d_Triangulation>();
+	Debug_Null_Pointer(tris);
+	for (const auto& x : theSections)
+	{
+		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(tris2d[i]);
+		auto xcoord = Marine_Section::GetXcoord(x);
+		auto tri = *RetrieveTriangulation3d(xcoord, tris2d[i]);
+		tris->Add(std::move(tri));
+		i++;
+	}
+	return std::move(tris);
+}
+
 void tnbLib::MarineBase_Tools::Check_xCmptSections
 (
 	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
@@ -2880,4 +3113,28 @@ void tnbLib::MarineBase_Tools::Check_xCmptSections
 				<< abort(FatalError);
 		}
 	}
+}
+
+void tnbLib::MarineBase_Tools::ExportToPlt
+(
+	const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+	OFstream & theFile
+)
+{
+	auto tri = RetrieveTriangulation(theSections);
+	Debug_Null_Pointer(tri);
+
+	tri->ExportToPlt(theFile);
+}
+
+void tnbLib::MarineBase_Tools::ExportToPlt
+(
+	const std::vector<std::shared_ptr<Marine_Section>>& theSections,
+	OFstream & theFile
+)
+{
+	auto tri = RetrieveTriangulation(theSections);
+	Debug_Null_Pointer(tri);
+
+	tri->ExportToPlt(theFile);
 }

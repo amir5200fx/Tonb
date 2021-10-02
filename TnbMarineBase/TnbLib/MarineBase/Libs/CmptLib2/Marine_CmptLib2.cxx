@@ -13,6 +13,16 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#ifdef _DEBUG
+#ifdef _PLOT
+namespace tnbLib
+{
+	OFstream mySectionViewFile(fileName("wettedSections_handler.plt"));
+}
+#endif // _PLOT
+#endif // _DEBUG
+
+
 unsigned short tnbLib::Marine_CmptLib2::LeverArm_Verbose1(0);
 unsigned short tnbLib::Marine_CmptLib2::LeverArm_Verbose2(0);
 unsigned short tnbLib::Marine_CmptLib2::CrossCurve_Verbose(0);
@@ -79,6 +89,7 @@ tnbLib::Marine_CmptLib2::LeverArm
 	{
 		Info << " calculating the Iy by integrating..." << endl;
 	}
+
 	const auto My = MarineBase_Tools::CalcArea(MyQ, theInfo);
 
 	if (ABS(theVolume) <= gp::Resolution())
@@ -155,9 +166,33 @@ tnbLib::Marine_CmptLib2::CrossCurve
 			{
 				Info << " calculating the wetted sections..." << endl;
 			}*/
-			auto wetted = Marine_BooleanOps::WettedSections(theSections, x->Water()->Sections());
 
-			if (wetted.size())
+			std::vector<std::shared_ptr<Marine_CmpSection>> wetted;
+#ifdef _DEBUG
+			try
+			{
+				wetted = Marine_BooleanOps::WettedSections(theSections, x->Water()->Sections());
+			}
+			catch (const error&)
+			{
+#ifdef _PLOT
+				MarineBase_Tools::ExportToPlt(theSections, mySectionViewFile);
+				MarineBase_Tools::ExportToPlt(x->Water()->Sections(), mySectionViewFile);
+
+				FatalErrorIn(FunctionSIG)
+					<< "unable to retrieve wetted sections" << endl
+					<< abort(FatalError);
+#else
+				FatalErrorIn(FunctionSIG)
+					<< "unable to retrieve wetted sections" << endl
+					<< abort(FatalError);
+#endif // _PLOT
+
+			}
+#else
+			wetted = Marine_BooleanOps::WettedSections(theSections, x->Water()->Sections());
+#endif // _DEBUG
+			if (wetted.size() > 1)
 			{
 				if (verbose > 1)
 				{

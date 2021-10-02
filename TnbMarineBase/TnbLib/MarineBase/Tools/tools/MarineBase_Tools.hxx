@@ -8,6 +8,7 @@
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_TriangleFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
 #include <dimensionedScalar.hxx>
 #include <Marine_SectionsFwd.hxx>
 #include <Marine_BodiesFwd.hxx>
@@ -113,7 +114,8 @@ namespace tnbLib
 			Curve
 			(
 				const std::vector<marineLib::xSectionParam>& theQ,
-				const Standard_Boolean tessellation = Standard_True
+				const Standard_Boolean tessellation = Standard_True,
+				const Standard_Real tol = 1.0E-6
 			);
 
 
@@ -691,9 +693,57 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
 			);
 
+		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			RetrieveTriangulation
+			(
+				const Marine_Section&
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			RetrieveTriangulation
+			(
+				const Marine_CmpSection&
+			);
+
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Entity2d_Triangulation>> 
+			RetrieveTriangulations2d
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
+
+		static TnbMarine_EXPORT std::vector<std::shared_ptr<Entity2d_Triangulation>>
+			RetrieveTriangulations2d
+			(
+				const std::vector<std::shared_ptr<Marine_Section>>& theSections
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity3d_Triangulation> 
+			RetrieveTriangulation
+			(
+				const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+			);
+
+		static TnbMarine_EXPORT std::shared_ptr<Entity3d_Triangulation>
+			RetrieveTriangulation
+			(
+				const std::vector<std::shared_ptr<Marine_Section>>& theSections
+			);
+
 		static TnbMarine_EXPORT void Check_xCmptSections
 		(
 			const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections
+		);
+
+		static TnbMarine_EXPORT void ExportToPlt
+		(
+			const std::vector<std::shared_ptr<Marine_CmpSection>>& theSections,
+			OFstream&
+		);
+
+		static TnbMarine_EXPORT void ExportToPlt
+		(
+			const std::vector<std::shared_ptr<Marine_Section>>& theSections, 
+			OFstream&
 		);
 	};
 }

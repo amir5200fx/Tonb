@@ -2,14 +2,30 @@
 
 #include <Cad2d_Boolean.hxx>
 #include <Pln_Tools.hxx>
+#include <Entity2d_Triangulation.hxx>
 #include <Marine_SectTools.hxx>
 #include <Marine_CmpSection.hxx>
 #include <Marine_Section.hxx>
 #include <Marine_Sections.hxx>
 #include <Marine_SectTools.hxx>
 #include <Marine_PlnCurve.hxx>
+#include <MarineBase_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#ifdef _SaveData
+#include <filesystem>
+#endif // _SaveData
+
+
+//#ifdef _DEBUG
+//#ifdef _PLOT
+//namespace tnbLib
+//{
+//	OFstream myBooleanOpsSectionViewFile(fileName("wettedSection_handler.plt"));
+//}
+//#endif // _PLOT
+//#endif // _DEBUG
 
 unsigned short tnbLib::Marine_BooleanOps::verbose(0);
 
@@ -173,7 +189,56 @@ tnbLib::Marine_BooleanOps::WettedSection
 			<< " Calculating the intersection between the section and the water plane" << endl;
 	}
 
-	auto planes = Cad2d_Boolean::Intersection(section, water);
+	std::vector<std::shared_ptr<Cad2d_Plane>> planes;
+#ifdef _DEBUG
+	try
+	{
+		planes = Cad2d_Boolean::Intersection(section, water);
+	}
+	catch (const error&)
+	{
+#ifdef _SaveData
+		{//- saving scope
+			size_t i = 0;
+			const auto name = "plane";
+			const auto folder = "results_booleanOps/" + std::to_string(i);
+			std::string address = ".\\results_booleanOps\\" + std::to_string(i) + "\\" + name;
+			//boost::filesystem::path dir(folder);
+			std::filesystem::create_directories(folder);
+
+			fileName fn(address);
+
+			std::ofstream myFile(fn);
+			TNB_oARCH_FILE_TYPE ar(myFile);
+			ar << section;
+	}
+
+		{//- saving scope
+			size_t i = 1;
+			const auto name = "plane";
+			const auto folder = "results_booleanOps/" + std::to_string(i);
+			std::string address = ".\\results_booleanOps\\" + std::to_string(i) + "\\" + name;
+			//boost::filesystem::path dir(folder);
+			std::filesystem::create_directories(folder);
+
+			fileName fn(address);
+
+			std::ofstream myFile(fn);
+			TNB_oARCH_FILE_TYPE ar(myFile);
+			ar << water;
+		}
+		std::exit(1);
+#else
+		FatalErrorIn(FunctionSIG)
+			<< "unable to retrieve wetted section" << endl
+			<< abort(FatalError);
+#endif // _SaveData
+
+	}
+#else
+	planes = Cad2d_Boolean::Intersection(section, water);
+#endif // _DEBUG
+	
 	if (planes.empty())
 	{
 		if (verbose)
@@ -700,7 +765,67 @@ tnbLib::Marine_BooleanOps::WettedSections
 		const auto& wa = theWaterSections[K++];
 		Debug_Null_Pointer(wa);
 
-		auto wetted = WettedSection(x, wa);
+		std::shared_ptr<Marine_CmpSection> wetted;
+#ifdef _DEBUG
+		try
+		{
+			wetted = WettedSection(x, wa);
+		}
+		catch (const error&)
+		{
+#ifdef _PLOT
+
+			OFstream myFile(fileName(".\\results_booleanOps\\wettedSection.plt"));
+
+			auto tri0 = MarineBase_Tools::RetrieveTriangulation(*x);
+			Debug_Null_Pointer(tri0);
+			tri0->ExportToPlt(myBooleanOpsSectionViewFile);
+
+			auto tri1 = MarineBase_Tools::RetrieveTriangulation(*wa);
+			Debug_Null_Pointer(tri1);
+			tri1->ExportToPlt(myBooleanOpsSectionViewFile);
+			std::exit(1);
+#elif _SaveData
+			{//- saving scope
+				size_t i = 0;
+				const auto name = "section";
+				const auto folder = "results_booleanOps/" + std::to_string(i);
+				std::string address = ".\\results_booleanOps\\" + std::to_string(i) + "\\" + name;
+				//boost::filesystem::path dir(folder);
+				std::filesystem::create_directories(folder);
+
+				fileName fn(address);
+
+				std::ofstream myFile(fn);
+				TNB_oARCH_FILE_TYPE ar(myFile);
+				ar << x;
+			}
+
+			{//- saving scope
+				size_t i = 1;
+				const auto name = "section";
+				const auto folder = "results_booleanOps/" + std::to_string(i);
+				std::string address = ".\\results_booleanOps\\" + std::to_string(i) + "\\" + name;
+				//boost::filesystem::path dir(folder);
+				std::filesystem::create_directories(folder);
+
+				fileName fn(address);
+
+				std::ofstream myFile(fn);
+				TNB_oARCH_FILE_TYPE ar(myFile);
+				ar << wa;
+			}
+			std::exit(1);
+#else
+			FatalErrorIn(FunctionSIG)
+				<< "unable to retrieve wetted section" << endl
+				<< abort(FatalError);
+#endif // _PLOT
+		}
+#else
+		wetted = WettedSection(x, wa);
+#endif // _DEBUG
+
 		if (wetted)
 		{
 			sections.push_back(std::move(wetted));

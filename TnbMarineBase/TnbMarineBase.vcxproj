@@ -262,7 +262,10 @@
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\Analysis\BasicDim\Marine_BasicDim.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Analysis\Marine_Analysis.cxx" />
-    <ClCompile Include="TnbLib\MarineBase\BooleanOps\Marine_BooleanOps.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\BooleanOps\Marine_BooleanOps.cxx">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Boundary\Marine_Boundary.cxx" />
     <ClCompile Include="TnbLib\MarineBase\CriterionTable\Marine_CriterionTable.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Criterion\Expln\Marine_Criterion_Epln.cxx" />
@@ -390,7 +393,10 @@
     <ClCompile Include="TnbLib\MarineBase\Launch\THWL\Marine_THWlLaunch.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Launch\WLV\Marine_WlvLaunch.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Libs\BodyCmptLib\Marine_BodyCmptLib.cxx" />
-    <ClCompile Include="TnbLib\MarineBase\Libs\CmptLib2\Marine_CmptLib2.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Libs\CmptLib2\Marine_CmptLib2.cxx">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Libs\CmptLib\Marine_CmptLib.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Libs\DisctLib\Marine_DisctLib.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Libs\WaterLib\Marine_WaterLib.cxx" />
