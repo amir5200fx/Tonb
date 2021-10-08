@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="exportMesh.cxx">
+    <ClCompile Include="tnbExportShapeMesh.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,23 +1,20 @@
-#include <Global_Timer.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_Tools.hxx>
+#include <Entity3d_Box.hxx>
+#include <Entity3d_Triangulation.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <TopoDS_Shape.hxx>
-#include <IGESControl_Reader.hxx>
-#include <Bnd_Box.hxx>
-#include <BRepBndLib.hxx>
+#include <Poly_Triangulation.hxx>
 
 namespace tnbLib
 {
 
 	typedef std::shared_ptr<Cad_Shape> shape_t;
 
-	static unsigned short verbose(0);
-	static bool loadTag = false;
-
 	static shape_t myShape;
+	static unsigned short verbose(0);
+	static bool loadtag = false;
 
 	void setVerbose(unsigned int i)
 	{
@@ -35,25 +32,18 @@ namespace tnbLib
 			Info << " loading the model from, " << fn << endl;
 			Info << endl;
 		}
-		
-		{// timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_s);
+		std::ifstream myFile(fn);
 
-			IGESControl_Reader Reader;
-			Reader.ReadFile(name.c_str());
+		TNB_iARCH_FILE_TYPE ar(myFile);
 
-			Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
-			Reader.TransferList(myList);
-
-			myShape = std::make_shared<Cad_Shape>(0, name, Reader.OneShape());
-		}
-
-		if (verbose)
+		ar >> myShape;
+		if (NOT myShape)
 		{
-			Info << "IGES File Imported Successfully in "
-				<< global_time_duration << " seconds.";
+			FatalErrorIn(FunctionSIG)
+				<< " the loaded shape is null" << endl
+				<< abort(FatalError);
 		}
+
 		if (verbose)
 		{
 			Info << endl;
@@ -62,12 +52,12 @@ namespace tnbLib
 			Info << endl;
 		}
 
-		loadTag = true;
+		loadtag = true;
 	}
 
 	void saveTo(const std::string& name)
 	{
-		if (NOT loadTag)
+		if (NOT loadtag)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no shape has been loaded!" << endl
@@ -77,19 +67,37 @@ namespace tnbLib
 		fileName fn(name);
 		std::ofstream myFile(fn);
 
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << myShape;
+		auto mesh = Cad_Tools::RetrieveTriangulation(myShape->Shape());
+		if (mesh.empty())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no mesh has been found for the shape!" << endl
+				<< abort(FatalError);
+		}
 
-		myFile.close();
+		auto tris = std::make_shared<Entity3d_Triangulation>();
+		for (const auto& x : mesh)
+		{
+			if (x)
+			{
+				auto tri = Cad_Tools::Triangulation(*x);
+				if (tri)
+				{
+					tris->Add(*tri);
+				}
+			}
+		}
+
+		TNB_oARCH_FILE_TYPE ar(myFile);
+		ar << tris;
 
 		if (verbose)
 		{
 			Info << endl;
-			Info << " the shape is saved in: " << fn << ", successfully!" << endl;
+			Info << " the triangulation is saved in: " << fn << ", successfully!" << endl;
 			Info << endl;
 		}
 	}
-
 }
 
 #ifdef DebugInfo
@@ -123,6 +131,7 @@ namespace tnbLib
 		auto argument = getString(argv);
 		return argument IS_EQUAL command;
 	}
+
 }
 
 using namespace tnbLib;
@@ -144,11 +153,13 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " Function list:" << endl;
-			Info << " - loadModel(string)" << endl;
-			Info << " - saveTo(string)" << endl;
-			Info << " - setVerbose(unsigned int)" << endl;
+			Info << "This application is aimed to retrieve the mesh of the surfaces." << endl;
 			Info << endl;
+			Info << " Function list:" << endl
+				<< " - setVerbose(unsigned short)" << endl
+				<< " - loadModel(string)" << endl
+				<< " - saveTo(string)" << endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -160,12 +171,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\igesReader";
+			std::string address = ".\\system\\tnbExportShapeMesh";
 			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -180,6 +192,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -187,5 +205,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }
