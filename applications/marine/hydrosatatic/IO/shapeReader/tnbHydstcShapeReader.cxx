@@ -156,7 +156,7 @@ namespace tnbLib
 		if (NOT exeTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "the aaplication has not been performed" << endl
+				<< "the application has not been performed" << endl
 				<< abort(FatalError);
 		}
 		fileName fn(name);
@@ -383,15 +383,23 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << endl;
-			Info << " Function list:" << endl;
-			Info << " - loadModel(string)" << endl;
-			Info << " - saveTo(string)" << endl << endl;
-			Info << " - setTol(double)" << endl;
-			Info << " - setXZPlane(double)" << endl;
-			Info << " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl;
-			Info << " - execute()" << endl;
-			Info << endl;
+			Info << " This application is aimed to read a hydrostatic shape from a shape file." << endl << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - loadModel(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # Settings: " << endl << endl
+				<< " - setTol(double)" << endl
+				<< " - setXZPlane(double)" << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+
+				<< " # Operators:" << endl << endl
+				<< " - execute()" << endl
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -403,12 +411,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\hydstcShapeReader";
+			std::string address = ".\\system\\tnbHydstcShapeReader";
 			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -436,5 +445,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

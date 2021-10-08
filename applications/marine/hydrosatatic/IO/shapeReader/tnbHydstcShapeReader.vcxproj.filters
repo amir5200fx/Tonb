@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="shapeReader.cxx">
+    <ClCompile Include="tnbHydstcShapeReader.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
