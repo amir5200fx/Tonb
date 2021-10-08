@@ -4,18 +4,22 @@
 #include <OFstream.hxx>
 #include <OSstream.hxx>
 
-#include <vector>
-
 namespace tnbLib
 {
 
 	typedef std::shared_ptr<Entity3d_Triangulation> mesh_t;
 
 	static unsigned short verbose(0);
+	static mesh_t myMesh;
 
 	static bool loadTag = false;
 
-	static std::vector<mesh_t> myMeshes;
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
 	void loadModel(const std::string& name)
 	{
@@ -23,19 +27,25 @@ namespace tnbLib
 		if (verbose)
 		{
 			Info << endl;
-			Info << " loading the list from, " << fn << endl;
+			Info << " loading the model from, " << fn << endl;
 			Info << endl;
 		}
 		std::ifstream myFile(fn);
 
 		TNB_iARCH_FILE_TYPE ar(myFile);
 
-		ar >> myMeshes;
+		ar >> myMesh;
+		if (NOT myMesh)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the loaded body is null" << endl
+				<< abort(FatalError);
+		}
 
 		if (verbose)
 		{
 			Info << endl;
-			Info << " the mesh list is loaded, from: " << name << ", successfully!" << endl;
+			Info << " the mesh is loaded, from: " << name << ", successfully!" << endl;
 			Info << endl;
 		}
 
@@ -54,14 +64,9 @@ namespace tnbLib
 		fileName fn(name);
 		OFstream myFile(fn);
 
-		for (const auto& x : myMeshes)
-		{
-			if (x)
-			{
-				x->ExportToPlt(myFile);
-			}
-		}
+		myMesh->ExportToPlt(myFile);
 	}
+
 }
 
 #ifdef DebugInfo
@@ -79,7 +84,7 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadMesh");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {exportTo(name); }), "saveTo");
 	}
@@ -116,7 +121,13 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << "This application is aimed to convert the mesh to *.plt file format." << endl;
+			Info << endl;
+			Info << " Function list:" << endl
+				<< " - setVerbose(unsigned short)" << endl
+				<< " - loadMesh(string)" << endl
+				<< " - saveTo(string)" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -128,7 +139,7 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\meshListToPlt";
+			std::string address = ".\\system\\tnbShapeMeshToPlt";
 			fileName myFileName(address);
 
 			try
@@ -147,6 +158,12 @@ int main(int argc, char *argv[])
 			{
 				Info << x.what() << endl;
 			}
+		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
 		}
 	}
 	else
