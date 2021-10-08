@@ -141,7 +141,7 @@ tnbLib::Pln_Tools::Length
 std::shared_ptr<tnbLib::Entity2d_Polygon> 
 tnbLib::Pln_Tools::UniformDiscrete
 (
-	const Handle(Geom2d_Curve) theCurve,
+	const Handle(Geom2d_Curve)& theCurve,
 	const Standard_Integer nbSeg
 )
 {
