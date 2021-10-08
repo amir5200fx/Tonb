@@ -139,7 +139,22 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to create a list of control nets." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadNets(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # Settings: " << endl <<endl
+
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl
+
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -151,11 +166,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbCtrlNetList");
+			std::string address = ".\\system\\tnbPxModelCtrlNetList";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -170,6 +187,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -177,5 +200,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }
