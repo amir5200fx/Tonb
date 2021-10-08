@@ -589,7 +589,7 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\curveMaker2d";
+			std::string address = ".\\system\\tnbCurveMaker2d";
 			fileName myFileName(address);
 
 			try

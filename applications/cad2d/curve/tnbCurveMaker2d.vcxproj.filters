@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="curve.cxx">
+    <ClCompile Include="tnbCurveMaker2d.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
