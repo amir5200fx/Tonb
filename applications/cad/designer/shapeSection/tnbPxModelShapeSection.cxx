@@ -155,7 +155,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {makeSection(name); }), "createSection");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {makeSection(name); }), "execute");
 		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
 	}
 
@@ -189,7 +189,17 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << "This application is aimed to create a shape section." << endl;
+			Info << endl
+				<< " - the function are: " << endl << endl
+				<< " - loadTuner(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " - execute(name)" << endl
+				<< endl
+				<< " # settings: " << endl
+				<< " - setVerbose(unsigned short);  levels: 0, 1" << endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -201,11 +211,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbShapeSection");
+			std::string address = ".\\system\\tnbPxModelShapeSection";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -220,6 +232,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -227,5 +245,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-	return 0;
+	return 1;
 }

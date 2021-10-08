@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{1d147bc9-df0b-4b20-9897-ff3448da3624}</UniqueIdentifier>
+      <UniqueIdentifier>{4a21b2f1-a194-4f72-9a0c-863c3d1d545c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sectionCurveMaker.cxx">
+    <ClCompile Include="tnbPxModelShapeSpacing.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

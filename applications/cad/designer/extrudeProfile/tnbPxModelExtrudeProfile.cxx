@@ -740,7 +740,70 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to create a parametric section." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - loadPatch(name)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # parameters: " << endl << endl
+				<< " - [Par] createFixed(value, minValue, maxValue)" << endl
+				<< " - [Par] createFixed(string, value, minValue, maxValue);    - 'string' is the name of the parameter" << endl
+				<< " - [Par] createConstant(value)" << endl
+				<< " - [Par] createConstant(string, value);                     - 'string' is the name of the parameter" << endl
+				<< " - [Par] createFree(fieldFunction)" << endl
+				<< " - [Par] createFree(string, fieldFunction);                 - 'string' is the name of the parameter" << endl << endl
+
+				<< " - [Fixed-Par] getFixedPar(Par)" << endl
+				<< " - [Free-Par] getFreePar(Par)" << endl
+				<< " - [Const-Par] getConstPar(Par)" << endl << endl
+
+				<< " - [Par] getPar(Fixed-Par)" << endl
+				<< " - [Par] getPar(Free-Par)" << endl
+				<< " - [Par] getPar(Const-Par)" << endl
+				<< " - [Par] getPar(Par)" << endl << endl
+
+				<< " # fields: " << endl << endl
+				<< " - [Field] createUniformField(name [optional], Par)" << endl
+				<< " - [Field] createMinusField(name [optional], Par)" << endl
+				<< " - [Field] createXReaderField(name [optional], Coord)" << endl
+				<< " - [Field] createYReaderField(name [optional], Coord)" << endl
+				<< " - [Field] createLinearFormField(name [optional], Field0, Field1, Par)" << endl
+				<< " - [Field] createExprField(name [optional], Expression)" << endl << endl
+
+				<< " - [Field] getFieldFun(ExprField)" << endl
+				<< " - [Filed] getFieldFun(Field)" << endl
+				<< " - [ExprField] getExprFieldFun(Field)" << endl << endl
+
+				<< " - addVariable(ExprField, name, Field)" << endl
+				<< " - (ExprField).addVariable(name, Field)" << endl << endl
+
+				<< " # Profile operators: " << endl << endl
+
+				<< " - [Profile] createUniformProfile(x0 [par], x1 [par], value [par])" << endl
+				<< " - [Profile] createLinearProfile(x0 [par], x1 [par], value0 [par], value1 [par])" << endl
+				<< " - [Profile] createGeneratedProfile(CurvQ, degree)" << endl << endl
+
+				<< " - setProfileTo(Profile, par)" << endl
+				<< " - (Profile).setProfileTo(par)" << endl << endl
+
+				<< " # Global functions: " << endl << endl
+				<< " - printRegistry()" << endl
+				<< " - printSectionPars()" << endl
+				<< " - printFixedSectionPars()" << endl << endl
+
+				<< " - [Par] selectParameter(index)" << endl
+				<< " - [CurveQ] selectCurve(index)" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -755,11 +818,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbExtrudeProfile");
+			std::string address = ".\\system\\tnbPxModelExtrudeProfile";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -781,5 +846,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-	return 0;
+	return 1;
 }

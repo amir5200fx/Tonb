@@ -336,7 +336,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()->void {printPoles(); }), "printPoles");
 		mod->add(chaiscript::fun([](unsigned short c)->void {verbose = c; }), "setVerbose");
 
-		mod->add(chaiscript::fun([](const std::string& name)->void {saveCurvesTo(name); }), "saveAllTo");
+		mod->add(chaiscript::fun([](const std::string& name)->void {saveCurvesTo(name); }), "saveTo");
 	}
 
 	void setCurves(const module_t& mod)
@@ -377,7 +377,24 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << "This application is aimed to create geometric curves." << endl;
+			Info << endl
+				<< " - the function are: " << endl << endl
+				<< " - loadTuner(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " - printCurves()" << endl
+				<< " - printPoles()" << endl
+				<< endl
+				<< " # settings: " << endl
+				<< " - setVerbose(unsigned short);  levels: 0, 1" << endl << endl
+				<< " - setDegree(n [integer])" << endl << endl
+
+				<< " - operators: " << endl
+				<< " - [CuvreQ] selectCurve(index)" << endl << endl
+				<< " - makeCurve(CurveQ, n [integer])" << endl
+				<< " - makeAllCurves()" << endl << endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -390,11 +407,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("sectionGeoCurveMaker");
+			std::string address = ".\\system\\tnbPxModelSectionGeoCurveMaker";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -409,6 +428,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -416,5 +441,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

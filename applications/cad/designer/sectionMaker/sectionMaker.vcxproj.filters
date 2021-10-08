@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sectionMaker.cxx">
+    <ClCompile Include="tnbPxModelSectionMaker.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

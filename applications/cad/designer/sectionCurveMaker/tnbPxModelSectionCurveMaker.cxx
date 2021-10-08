@@ -249,7 +249,7 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTunerTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
 		mod->add(chaiscript::fun([]()->void {printPoles(); }), "printPoles");
 		mod->add(chaiscript::fun([]()->void {printCurves(); }), "printCurves");
@@ -297,7 +297,34 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to create curve." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadTuner(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # Global functions: " << endl << endl
+
+				<< " - printRegistry()" << endl
+				<< " - printPoles()" << endl
+				<< " - printCurves()" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+
+				<< " # operators: " << endl << endl
+
+				<< " - [Pole] selectBoundaryPole(index)" << endl
+				<< " - [Pole] selectSliderPole(index)" << endl << endl
+
+				<< " - createCurve(name [optional], Pole0, Pole1)" << endl
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -310,7 +337,8 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("sectionCurveMaker");
+			std::string address = ".\\system\\tnbPxModelSectionCurveMaker";
+			fileName myFileName(address);
 
 			try
 			{

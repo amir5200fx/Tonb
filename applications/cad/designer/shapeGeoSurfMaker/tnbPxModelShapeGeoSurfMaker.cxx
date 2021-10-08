@@ -5,12 +5,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <boost/archive/polymorphic_binary_iarchive.hpp>
-#include <boost/archive/polymorphic_binary_oarchive.hpp>
 #include <boost/filesystem.hpp>
-
-#include <boost/archive/polymorphic_text_iarchive.hpp>
-#include <boost/archive/polymorphic_text_oarchive.hpp>
 
 #include <Geom_Surface.hxx>
 
@@ -40,7 +35,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		boost::archive::polymorphic_text_iarchive ia(f);
+		TNB_iARCH_FILE_TYPE ia(f);
 		ia >> myNets;
 
 		mySurfDegs.resize(myNets.size(), 3);
@@ -64,9 +59,6 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
-		std::ofstream f(fn);
-
 		size_t i = 0;
 		for (const auto& x : mySurf)
 		{
@@ -76,7 +68,7 @@ namespace tnbLib
 
 			std::ofstream file(address);
 
-			boost::archive::polymorphic_text_oarchive oa(file);
+			TNB_oARCH_FILE_TYPE oa(file);
 
 			oa << x;
 
@@ -228,6 +220,7 @@ int main(int argc, char *argv[])
 				<< endl
 				<< " # settings: " << endl
 				<< " - setVerbose(unsigned short);  levels: 0, 1" << endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -239,11 +232,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbShapeGeoSurfMaker");
+			std::string address = ".\\system\\tnbPxModelShapeGeoSurfMaker";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -271,5 +266,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

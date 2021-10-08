@@ -649,7 +649,61 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to tune the section." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - loadFrame(string)" << endl
+				<< " - saveTo(string)" << endl
+				<< " - drawPntsPlt(string)" << endl
+				<< " - drawPolesPlt(string)" << endl << endl
+
+				<< " # parameters: " << endl << endl
+				<< " - [Par] createFixed(string [opt.], value, minValue, maxValue);    - 'string' is the name of the parameter" << endl
+				<< " - [Par] createConstant(string [opt.], value);                     - 'string' is the name of the parameter" << endl
+				<< " - [Par] createFree(string [opt.], Field);                 - 'string' is the name of the parameter" << endl << endl
+
+				<< " - [Fixed-Par] getFixedPar(Par)" << endl
+				<< " - [Free-Par] getFreePar(Par)" << endl
+				<< " - [Const-Par] getConstPar(Par)" << endl << endl
+
+				<< " - [Par] getPar(Fixed-Par)" << endl
+				<< " - [Par] getPar(Free-Par)" << endl
+				<< " - [Par] getPar(Const-Par)" << endl
+				<< " - [Par] getPar(Par)" << endl << endl
+
+				<< " # fields: " << endl << endl
+				<< " - [Field] createUniformField(name [opt.], Par)" << endl
+				<< " - [Field] createMinusField(name [opt.], Par)" << endl
+				<< " - [Field] createXReaderField(name [opt.], Coord)" << endl
+				<< " - [Field] createYReaderField(name [opt.], Coord)" << endl
+				<< " - [Field] createLinearFormField(name [opt.], Field0, Field1, Par)" << endl
+				<< " - [Field] createExprField(name [opt.], Expression)" << endl << endl
+
+				<< " - [Field] getFieldFun(ExprField)" << endl
+				<< " - [Field] getFieldFun(Field)" << endl
+				<< " - [Field] getExprFieldFun(Field)" << endl << endl
+
+				<< " - addVariable(ExprField, name, Field)" << endl << endl
+
+				<< " # Global functions: " << endl << endl
+				<< " - printRegistry()" << endl
+				<< " - printFixedParameters()" << endl
+				<< " - printPoles()" << endl
+				<< " - printPoints()" << endl << endl
+
+				<< " - createWeight(pole [index], Par)" << endl
+				<< " - createSymmTightness(pole [index], Par)" << endl
+				<< " - createSlider(segment [index], Par)" << endl
+				<< " - createSlider(segment [index], Coord)" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -664,11 +718,14 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("sectionTuner");
+
+			std::string address = ".\\system\\tnbPxModelSectionTuner";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{

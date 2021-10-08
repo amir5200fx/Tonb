@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{b08c8727-fb64-494f-ba2e-29f7c039d0e2}</UniqueIdentifier>
+      <UniqueIdentifier>{dfdfc067-886a-4950-b36e-3f1cc941030d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sectionTuner.cxx">
+    <ClCompile Include="tnbPxModelSectionGeoCurveMaker.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

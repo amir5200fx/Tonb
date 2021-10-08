@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{598a018a-04fa-4b96-bc3d-65e824c6b466}</UniqueIdentifier>
+      <UniqueIdentifier>{a41b4348-c146-4bef-b932-d993713f3c22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="extrudeOp.cxx">
+    <ClCompile Include="tnbPxModelExtrudeProfile.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

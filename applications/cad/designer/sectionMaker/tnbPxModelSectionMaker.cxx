@@ -756,96 +756,78 @@ int main(int argc, char *argv[])
 				<< " - drawPlt(string)" << endl << endl
 
 				<< " # parameters: " << endl << endl
-				<< " - createFixed(value, minValue, maxValue)" << endl
-				<< " - createFixed(string, value, minValue, maxValue);    - 'string' is the name of the parameter" << endl
-				<< " - createConstant(value)" << endl
-				<< " - createConstant(string, value);                     - 'string' is the name of the parameter" << endl
-				<< " - createFree(fieldFunction)" << endl
-				<< " - createFree(string, fieldFunction);                 - 'string' is the name of the parameter" << endl << endl
+				<< " - [Par] createFixed(string [opt.], value, minValue, maxValue);    - 'string' is the name of the parameter" << endl
+				<< " - [Par] createConstant(string [opt.], value);                     - 'string' is the name of the parameter" << endl
+				<< " - [Par] createFree(string [opt.], Field);                 - 'string' is the name of the parameter" << endl << endl
 
-				<< " - getFixedPar(parameter)" << endl
-				<< " - getFreePar(parameter)" << endl
-				<< " - getConstPar(parameter)" << endl << endl
+				<< " - [Fixed-Par] getFixedPar(Par)" << endl
+				<< " - [Free-Par] getFreePar(Par)" << endl
+				<< " - [Const-Par] getConstPar(Par)" << endl << endl
 				
-				<< " - getPar(fixed parameter)" << endl
-				<< " - getPar(free parameter)" << endl
-				<< " - getPar(constant parameter)" << endl
-				<< " - getPar(parameter)" << endl << endl
+				<< " - [Par] getPar(Fixed-Par)" << endl
+				<< " - [Par] getPar(Free-Par)" << endl
+				<< " - [Par] getPar(Const-Par)" << endl
+				<< " - [Par] getPar(Par)" << endl << endl
 
 				<< " # fields: " << endl << endl
-				<< " - createUniformField(parameter)" << endl
-				<< " - createUniformField(string, parameter)" << endl
-				<< " - createMinusField(parameter)" << endl
-				<< " - createMinusField(string, parameter)" << endl
-				<< " - createXReaderField(coord)" << endl
-				<< " - createXReaderField(string, coord)" << endl
-				<< " - createYReaderField(coord)" << endl
-				<< " - createYReaderField(string, coord)" << endl
-				<< " - createLinearFormField(fieldFun0, fieldFun1, parameter)" << endl
-				<< " - createLinearFormField(string, fieldFun0, fieldFun1, parameter)" << endl
-				<< " - createExprField(expression)" << endl
-				<< " - createExprField(string, expression)" << endl << endl
+				<< " - [Field] createUniformField(name [opt.], Par)" << endl
+				<< " - [Field] createMinusField(name [opt.], Par)" << endl
+				<< " - [Field] createXReaderField(name [opt.], Coord)" << endl
+				<< " - [Field] createYReaderField(name [opt.], Coord)" << endl
+				<< " - [Field] createLinearFormField(name [opt.], Field0, Field1, Par)" << endl
+				<< " - [Field] createExprField(name [opt.], Expression)" << endl << endl
 
-				<< " - getFieldFun(exprField)" << endl
-				<< " - getFieldFun(fieldFun)" << endl
-				<< " - getExprFieldFun(fieldFun)" << endl << endl
+				<< " - [Field] getFieldFun(ExprField)" << endl
+				<< " - [Field] getFieldFun(Field)" << endl
+				<< " - [Field] getExprFieldFun(Field)" << endl << endl
 
-				<< " - addVariable(exprField, string, fieldFun)" << endl
-				<< " - addVariable(Field, string, fieldFun)" << endl << endl
+				<< " - addVariable(ExprField, name, Field)" << endl
+				<< " - addVariable(Field, name, Field)" << endl << endl
 
 				<< " # Point makers: " << endl << endl
-				<< " - createOuterPoint(x, y)" << endl
-				<< " - createOuterPoint(string, x, y)" << endl
-				<< " - createOuterPoint(datum)" << endl
-				<< " - createOuterPoint(string, datum)" << endl << endl
+
+				<< " - [Point] createOuterPoint(name [opt.], x, y)" << endl
+				<< " - [Point] createOuterPoint(name [opt.], datum)" << endl << endl
 				
-				<< " - createInnerPoint(x, y)" << endl
-				<< " - createInnerPoint(string, x, y)" << endl
-				<< " - createInnerPoint(datum)" << endl
-				<< " - createInnerPoint(string, datum)" << endl << endl
+				<< " - [Point] createInnerPoint(name [opt.], x, y)" << endl
+				<< " - [Point] createInnerPoint(name [opt.], Datum)" << endl << endl
 
-				<< " - createFieldPoint(geoMap)" << endl
-				<< " - createFieldPoint(string, geoMap)" << endl << endl
+				<< " - [Point] createFieldPoint(name [opt.], GeoMap)" << endl << endl
 
-				<< " - createSlavePoint(master)" << endl
-				<< " - createSlavePoint(string, master)" << endl << endl
+				<< " - [Point] createSlavePoint(name [opt.], Master)" << endl << endl
 
-				<< " - createDatum(x, y)" << endl
-				<< " - createDatum(string, x, y)" << endl
-				<< " - createDatum(geoMap)" << endl
-				<< " - createDatum(string, geoMap)" << endl << endl
+				<< " - [Datum] createDatum(name [opt.], x, y)" << endl
+				<< " - [Datum] createDatum(name [opt.], geoMap)" << endl << endl
 
-				<< " - getCoord(datum)" << endl
-				<< " - getCoord(point)" << endl
-				<< " - getCoord(coord)" << endl << endl
+				<< " - [Coord] getCoord(datum)" << endl
+				<< " - [Coord] getCoord(point)" << endl
+				<< " - [Coord] getCoord(coord)" << endl << endl
 
-				<< " - getMaster(point)" << endl << endl
+				<< " - [Master] getMaster(point)" << endl << endl
 
 				<< " # Geometric operators: " << endl << endl
-				<< " - createDirection(double x, double y)" << endl
-				<< " - createLinearInterplGeoMap(coord, coord, parameter)" << endl
-				<< " - createLinearInterplGeoMap(string, coord, coord, parameter)" << endl
-				<< " - createIntersectGeoMap(coord0, dir0, angle0 [parameter], coord1, dir1, angle1 [parameter])" << endl
-				<< " - createIntersectGeoMap(string, coord0, dir0, angle0 [parameter], coord1, dir1, angle1 [parameter])" << endl << endl
+				<< " - [Dir] createDirection(double x, double y)" << endl
+				<< " - [GeoMap] createLinearInterplGeoMap(name [opt.], coord, coord, parameter)" << endl
+				<< " - [GeoMap] createIntersectGeoMap(name [opt.], Coord0, Dir0, angle0 [Par], Coord1, Dir1, angle1 [Par])" << endl << endl
 
 				<< " # Profile operators: " << endl << endl
-				<< " - getFirstEdge()" << endl << endl
+				<< " - [Edge] getFirstEdge()" << endl << endl
 
-				<< " - createCustomProfile(point0, point1)" << endl
-				<< " - createCustomProfile(string, point0, point1)" << endl << endl
+				<< " - [Profile] createCustomProfile(name [opt.], Point0, Point1)" << endl << endl
 
-				<< " - selectEdge(profileMaker, id)" << endl
-				<< " - importPoint(profileMaker, point, edge);                     - outputs: pair of the new left edge and the new right edge <edge, edge>;" << endl
-				<< " - retrieveLeftEdge(<edge, edge>)" << endl
-				<< " - retrieveRightEdge(<edge, edge>)" << endl << endl
+				<< " - [Edge] selectEdge(profileMaker, id)" << endl
+				<< " - [<Edge, Edge>] importPoint(Profile, point, Edge); - outputs: pair of the new left edge and the new right edge <edge, edge>;" << endl
+				<< " - [Edge] retrieveLeftEdge(<Edge, Edge>)" << endl
+				<< " - [Edge] retrieveRightEdge(<Edge, Edge>)" << endl << endl
 
 				<< " # Global functions: " << endl << endl
 				<< " - printRegistry()" << endl
 				<< " - printFixedParameters()" << endl
 				<< " - printPoints()" << endl << endl
 
-				<< " - degToRad(double)" << endl
+				<< " - [double] degToRad(double)" << endl
 				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -862,11 +844,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("sectionMaker");
+			std::string address = ".\\system\\tnbPxModelSectionMaker";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -888,5 +872,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

@@ -169,7 +169,17 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << "This application is aimed to create a shape patch." << endl;
+			Info << endl
+				<< " - the function list is: " << endl
+				<< " - loadSection(string)" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " - makeExtrPatch()" << endl << endl
+
+				<< " # settings: " << endl <<endl
+				<< " - setVerbose(unsigned short);  levels: 0, 1" << endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -181,11 +191,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("TnbShapePatch");
+			std::string address = ".\\system\\tnbPxModelShapePatch";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -207,5 +219,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-	return 0;
+	return 1;
 }
