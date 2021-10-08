@@ -59,7 +59,7 @@ namespace tnbLib
 		for (const auto& x : theCurves)
 		{
 			Debug_Null_Pointer(x);
-			auto f = x->Dispv0();
+			auto f = x->LowerDispv();
 			if (f > maxVal)
 			{
 				maxVal = f;
@@ -78,7 +78,7 @@ namespace tnbLib
 		for (const auto& x : theCurves)
 		{
 			Debug_Null_Pointer(x);
-			auto f = x->Dispv1();
+			auto f = x->UpperDispv();
 			if (f < minVal)
 			{
 				minVal = f;

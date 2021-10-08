@@ -38,6 +38,7 @@ namespace tnbLib
 	class HydStatic_Spacing;
 	class HydStatic_CrsCurve;
 	class HydStatic_CrsCurveQ;
+	class HydStatic_FillCurveQ;
 	class NumAlg_AdaptiveInteg_Info;
 	
 	class Pnt2d;
@@ -108,6 +109,13 @@ namespace tnbLib
 				const Standard_Real x1, 
 				const hydStcLib::CurveMakerType t,
 				const Standard_Real tol = gp::Resolution()
+			);
+
+		static TnbHydStatic_EXPORT Standard_Real 
+			CalcZ
+			(
+				const HydStatic_FillCurveQ&, 
+				const Standard_Real theVolume
 			);
 
 		static TnbHydStatic_EXPORT std::shared_ptr<HydStatic_CrsCurve> 

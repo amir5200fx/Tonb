@@ -31,8 +31,8 @@ void tnbLib::HydStatic_OffsetCrsCurvesGraph::Perform()
 	const auto& c = curves[0];
 	Debug_Null_Pointer(c);
 
-	SetMinDispv(c->Dispv0());
-	SetMaxDispv(c->Dispv1());
+	SetMinDispv(c->LowerDispv());
+	SetMaxDispv(c->UpperDispv());
 
 	theCurves_ = std::move(curves);
 

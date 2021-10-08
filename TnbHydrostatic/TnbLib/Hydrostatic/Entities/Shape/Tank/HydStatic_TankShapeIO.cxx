@@ -1,7 +1,7 @@
 #include <HydStatic_TankShape.hxx>
 
 #include <Marine_Model_Tank.hxx>
-#include <HydStatic_FillCurve.hxx>
+#include <HydStatic_FillCurveQ.hxx>
 #include <HydStatic_CrsCurvesGraph.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::HydStatic_TankShape)

@@ -10,7 +10,7 @@
 #include <Marine_WaterLib.hxx>
 #include <Marine_MultLevWaterDomain.hxx>
 #include <Marine_System.hxx>
-#include <HydStatic_FillCurve.hxx>
+#include <HydStatic_FillCurveQ.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -21,9 +21,23 @@ unsigned short tnbLib::HydStatic_FillTank::verbose = 0;
 
 namespace tnbLib
 {
-	auto ConvertToOffset(const std::vector<marineLib::xSectionParam>& Qs)
+	typedef std::pair<Standard_Real, Standard_Real> offset;
+
+	/*auto ConvertToOffset(const std::vector<marineLib::xSectionParam>& Qs)
 	{
 		typedef HydStatic_FillCurve::offSet offset;
+		std::vector<offset> offsets;
+		offsets.reserve(Qs.size());
+		for (const auto& x : Qs)
+		{
+			auto par = offset{ x.x,x.value };
+			offsets.push_back(std::move(par));
+		}
+		return std::move(offsets);
+	}*/
+
+	auto ConvertToOffset(const std::vector<marineLib::xSectionParam>& Qs)
+	{	
 		std::vector<offset> offsets;
 		offsets.reserve(Qs.size());
 		for (const auto& x : Qs)
@@ -82,8 +96,8 @@ void tnbLib::HydStatic_FillTank::Perform()
 	if (verbose) Info << " nb. of waters: " << domains->Waters().size() << endl;
 	if (verbose) Info << " calculating the volumes..." << endl;
 
-	Handle(Geom2d_Curve) curve;
-	std::vector<HydStatic_FillCurve::offSet> offsets;
+	//Handle(Geom2d_Curve) curve;
+	std::vector<offset> offsets;
 	{// timer scope
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
@@ -105,17 +119,17 @@ void tnbLib::HydStatic_FillTank::Perform()
 				<< abort(FatalError);
 		}
 
-		if (verbose) Info << " creating the geometric curve..." << endl;
-		curve = MarineBase_Tools::Curve(curveQ);
+		//if (verbose) Info << " creating the geometric curve..." << endl;
+		//curve = MarineBase_Tools::Curve(curveQ);
 	}
-	Debug_Null_Pointer(curve);
+	//Debug_Null_Pointer(curve);
 	if (verbose)
 	{
 		Info << "the volume-curve is calculated in, " << global_time_duration << " ms" << endl;
 	}
 
 	auto fillCurve = 
-		std::make_shared<HydStatic_FillCurve>(0, "fill-curve", std::move(curve));
+		std::make_shared<HydStatic_FillCurveQ>(0, "fill-curve", std::move(offsets));
 	Debug_Null_Pointer(fillCurve);
 
 	fillCurve->SetQs(std::move(offsets));

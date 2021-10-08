@@ -370,6 +370,9 @@
     <Filter Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph">
       <UniqueIdentifier>{313972c0-24e6-4863-a737-29519cb6645b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\Entities\FillCurveQ">
+      <UniqueIdentifier>{91780530-5fc0-46f4-bad4-da3637425052}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -791,6 +794,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph\HydStatic_OffsetCrsCurvesGraph.hxx">
       <Filter>TnbLib\Hydrostatic\Entities\CrsCurvesGraph\CrsCurveQsGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\Entities\FillCurveQ\HydStatic_FillCurveQ.hxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FillCurveQ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1240,6 +1246,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\Entities\CrsCurveQ\HydStatic_CrsCurveQIO.cxx">
       <Filter>TnbLib\Hydrostatic\Entities\CrsCurveQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\FillCurveQ\HydStatic_FillCurveQ.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FillCurveQ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\FillCurveQ\HydStatic_FillCurveQIO.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\FillCurveQ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

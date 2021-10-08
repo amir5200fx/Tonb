@@ -12,6 +12,7 @@
 #include <HydStatic_hAuCurve.hxx>
 #include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_CrsCurveQ.hxx>
+#include <HydStatic_FillCurveQ.hxx>
 #include <HydStatic_CurveQMaker.hxx>
 #include <HydStatic_rArmCurve_Body.hxx>
 #include <HydStatic_rArmCurve_FSLq.hxx>
@@ -231,6 +232,51 @@ tnbLib::HydStatic_Tools::Trim
 	}
 	auto curve = hydStcLib::MakeCurveQ<HydStatic_CrsCurveQ>(std::move(Qs), t);
 	return std::move(curve);
+}
+
+Standard_Real 
+tnbLib::HydStatic_Tools::CalcZ
+(
+	const HydStatic_FillCurveQ & theCurve,
+	const Standard_Real theVolume
+)
+{
+	if (theVolume >= theCurve.MaxVolume())
+	{
+		if (theVolume > theCurve.MaxVolume())
+		{
+			WarningIn(FunctionSIG)
+				<< "the volume is bigger than the maximum capacity of the tank!" << endl
+				<< " - volume: " << theVolume << endl
+				<< " - max. capacity: " << theCurve.MaxVolume() << endl;
+		}
+		return theCurve.UpperZ();
+	}
+
+	if (theVolume <= 0.0)
+	{
+		if (theVolume < 0.0)
+		{
+			WarningIn(FunctionSIG)
+				<< "the volume value is negative!" << endl
+				<< " - volume: " << theVolume << endl
+				<< " - max. capacity: " << theCurve.MaxVolume() << endl;
+		}
+		return theCurve.LowerZ();
+	}
+
+	const auto span = 
+		Geo_Tools::FindSpan<std::pair<Standard_Real, Standard_Real>>
+		(
+			theVolume,
+			theCurve(),
+			[](const std::pair<Standard_Real, Standard_Real>& paired) {return paired.second; }
+			);
+
+	auto x0 = std::make_pair(theCurve()[span].second, theCurve()[span].first);
+	auto x1 = std::make_pair(theCurve()[span + 1].second, theCurve()[span + 1].first);
+
+	return Geo_Tools::Interpolate(theVolume, x0, x1);
 }
 
 std::shared_ptr<tnbLib::HydStatic_CrsCurve> 

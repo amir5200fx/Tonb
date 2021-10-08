@@ -1,6 +1,6 @@
 #include <HydStatic_TankShape.hxx>
 
-#include <HydStatic_FillCurve.hxx>
+#include <HydStatic_FillCurveQ.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -9,7 +9,7 @@ Standard_Real tnbLib::HydStatic_TankShape::DEFAULT_PERC_VALUE(0.5);
 tnbLib::HydStatic_TankShape::HydStatic_TankShape
 (
 	const std::shared_ptr<marineLib::Model_Tank>& theTank,
-	const std::shared_ptr<HydStatic_FillCurve>& theFill,
+	const std::shared_ptr<HydStatic_FillCurveQ>& theFill,
 	const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCross
 )
 	: theTank_(theTank)
@@ -23,7 +23,7 @@ tnbLib::HydStatic_TankShape::HydStatic_TankShape
 tnbLib::HydStatic_TankShape::HydStatic_TankShape
 (
 	std::shared_ptr<marineLib::Model_Tank>&& theTank,
-	std::shared_ptr<HydStatic_FillCurve>&& theFill,
+	std::shared_ptr<HydStatic_FillCurveQ>&& theFill,
 	std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCross
 )
 	: theTank_(std::move(theTank))
@@ -39,7 +39,7 @@ tnbLib::HydStatic_TankShape::HydStatic_TankShape
 	const Standard_Integer theIndex,
 	const word & theName,
 	const std::shared_ptr<marineLib::Model_Tank>& theTank,
-	const std::shared_ptr<HydStatic_FillCurve>& theFill,
+	const std::shared_ptr<HydStatic_FillCurveQ>& theFill,
 	const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCross
 )
 	: HydStatic_Shape(theIndex, theName)

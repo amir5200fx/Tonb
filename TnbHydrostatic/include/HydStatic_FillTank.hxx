@@ -14,7 +14,7 @@ namespace tnbLib
 	// Forward Declarations
 	class Geo_xDistb;
 	class Marine_Domain;
-	class HydStatic_FillCurve;
+	class HydStatic_FillCurveQ;
 
 	class HydStatic_FillTank
 		: public Global_Done
@@ -28,7 +28,7 @@ namespace tnbLib
 		Standard_Integer theNbWaters_;
 
 
-		std::shared_ptr<HydStatic_FillCurve> theCurve_;
+		std::shared_ptr<HydStatic_FillCurveQ> theCurve_;
 
 	public:
 

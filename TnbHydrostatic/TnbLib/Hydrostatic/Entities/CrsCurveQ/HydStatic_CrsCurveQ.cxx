@@ -1,25 +1,25 @@
 #include <HydStatic_CrsCurveQ.hxx>
 
 Standard_Real 
-tnbLib::HydStatic_CrsCurveQ::LeverArm0() const
+tnbLib::HydStatic_CrsCurveQ::FirstLeverArm() const
 {
 	return FirstValue();
 }
 
 Standard_Real 
-tnbLib::HydStatic_CrsCurveQ::LeverArm1() const
+tnbLib::HydStatic_CrsCurveQ::LastLeverArm() const
 {
 	return LastValue();
 }
 
 Standard_Real 
-tnbLib::HydStatic_CrsCurveQ::Dispv0() const
+tnbLib::HydStatic_CrsCurveQ::LowerDispv() const
 {
 	return Lower();
 }
 
 Standard_Real 
-tnbLib::HydStatic_CrsCurveQ::Dispv1() const
+tnbLib::HydStatic_CrsCurveQ::UpperDispv() const
 {
 	return Upper();
 }

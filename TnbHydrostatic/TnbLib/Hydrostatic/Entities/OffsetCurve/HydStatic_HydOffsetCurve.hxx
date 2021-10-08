@@ -107,12 +107,17 @@ namespace tnbLib
 			return theQs_;
 		}
 
-		void SetQs(const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs)
+		const auto& operator()() const
+		{
+			return Qs();
+		}
+
+		virtual void SetQs(const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs)
 		{
 			theQs_ = theQs;
 		}
 
-		void SetQs(std::vector<std::pair<Standard_Real, Standard_Real>>&& theQs)
+		virtual void SetQs(std::vector<std::pair<Standard_Real, Standard_Real>>&& theQs)
 		{
 			theQs_ = std::move(theQs);
 		}
