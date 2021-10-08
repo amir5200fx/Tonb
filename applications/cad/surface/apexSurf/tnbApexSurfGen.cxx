@@ -155,6 +155,7 @@ namespace tnbLib
 
 		alg->SetAxis(myAxis);
 		alg->SetTolerance(myTol);
+		alg->SetBoundary(myBnd);
 
 		alg->Perform();
 
@@ -248,7 +249,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	//FatalError.throwExceptions();
+	FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
@@ -264,15 +265,29 @@ int main(int argc, char *argv[])
 			Info << endl;
 			Info << " This application is aimed to create an apex patch." << endl;
 			Info << endl
-				<< " Function list:" << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
 				<< " - loadModel(string)" << endl
 				<< " - saveTo(string)" << endl << endl
 
+				<< " # Settings: " << endl << endl
 
+				<< " - setApexLoc(Point)" << endl
+				<< " - setApexDir(Direction)" << endl
+				<< " - setTolerance(double)" << endl
+				<< " - setBoundary(string);         - boundaries: u0, un, v0 and vn" << endl
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
 
-				<< " - execute()" << endl
+				<< " # operators: " << endl << endl
+
+				<< " - [Point] createPoint(double, double, double)" << endl
+				<< " - [direction] createDirection(double, double, double)" << endl << endl
+
+				<< " - execute(name [optional])" << endl
 				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -284,11 +299,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("arcBndSection");
+			std::string address = ".\\system\\tnbApexSurfGen";
+			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -316,5 +333,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }
