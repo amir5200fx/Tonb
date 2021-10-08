@@ -173,7 +173,7 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create a section list." << endl;
+			Info << " This application is aimed to scale a shape." << endl;
 			Info << endl
 				<< " Function list:" << endl
 				<< " - loadModel(string)" << endl
@@ -183,6 +183,7 @@ int main(int argc, char *argv[])
 
 				<< " - execute()" << endl
 				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -195,12 +196,13 @@ int main(int argc, char *argv[])
 			chai.add(mod);
 
 
-			std::string address = ".\\system\\scale";
+			std::string address = ".\\system\\tnbScaleShape";
 			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -228,5 +230,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }
