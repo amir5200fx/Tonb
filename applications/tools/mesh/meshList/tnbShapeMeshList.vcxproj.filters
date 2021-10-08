@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="meshList.cxx">
+    <ClCompile Include="tnbShapeMeshList.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
