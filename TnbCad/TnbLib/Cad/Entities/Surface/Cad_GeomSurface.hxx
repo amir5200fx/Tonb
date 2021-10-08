@@ -46,17 +46,41 @@ namespace tnbLib
 
 		//- constructors
 
-		TnbCad_EXPORT Cad_GeomSurface(const Handle(Geom_Surface)& theSurface);
+		TnbCad_EXPORT Cad_GeomSurface
+		(
+			const Handle(Geom_Surface)& theSurface
+		);
 
-		TnbCad_EXPORT Cad_GeomSurface(Handle(Geom_Surface)&& theSurface);
+		TnbCad_EXPORT Cad_GeomSurface
+		(
+			Handle(Geom_Surface)&& theSurface
+		);
 
-		TnbCad_EXPORT Cad_GeomSurface(const Standard_Integer theIndex, const Handle(Geom_Surface)& theSurface);
+		TnbCad_EXPORT Cad_GeomSurface
+		(
+			const Standard_Integer theIndex, 
+			const Handle(Geom_Surface)& theSurface
+		);
 
-		TnbCad_EXPORT Cad_GeomSurface(const Standard_Integer theIndex, Handle(Geom_Surface)&& theSurface);
+		TnbCad_EXPORT Cad_GeomSurface
+		(
+			const Standard_Integer theIndex, 
+			Handle(Geom_Surface)&& theSurface
+		);
 
-		TnbCad_EXPORT Cad_GeomSurface(const Standard_Integer theIndex, const word& theName, const Handle(Geom_Surface)& theSurface);
+		TnbCad_EXPORT Cad_GeomSurface
+		(
+			const Standard_Integer theIndex,
+			const word& theName, 
+			const Handle(Geom_Surface)& theSurface
+		);
 
-		TnbCad_EXPORT Cad_GeomSurface(const Standard_Integer theIndex, const word& theName, Handle(Geom_Surface)&& theSurface);
+		TnbCad_EXPORT Cad_GeomSurface
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			Handle(Geom_Surface)&& theSurface
+		);
 
 
 		//- public functions and operators
@@ -76,7 +100,7 @@ namespace tnbLib
 		TnbCad_EXPORT Pnt3d Value(const Pnt2d&) const;
 
 		TnbCad_EXPORT Entity2d_Box ParametricBoundingBox() const;
-		Entity3d_Box BoundingBox() const;
+		TnbCad_EXPORT Entity3d_Box BoundingBox() const;
 	};
 }
 

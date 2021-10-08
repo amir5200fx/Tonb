@@ -117,6 +117,11 @@ namespace tnbLib
 		{
 			theTolerance_ = theTol;
 		}
+
+		void SetBoundary(const bndPatch bnd)
+		{
+			theBoundary_ = bnd;
+		}
 	};
 }
 

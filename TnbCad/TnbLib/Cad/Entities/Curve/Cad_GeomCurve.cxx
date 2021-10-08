@@ -9,6 +9,7 @@
 #include <BRepBndLib.hxx>
 #include <BRepAdaptor_Curve.hxx>
 #include <BndLib_Add3dCurve.hxx>
+#include <BRepBuilderAPI_MakeEdge.hxx>
 #include <Adaptor3d_Curve.hxx>
 
 void tnbLib::Cad_GeomCurve::CheckBounded(const Handle(Geom_Curve)& theCurve)
@@ -94,14 +95,34 @@ tnbLib::Cad_GeomCurve::LastParameter() const
 }
 
 tnbLib::Pnt3d 
+tnbLib::Cad_GeomCurve::FirstValue() const
+{
+	auto pt = Value(FirstParameter());
+	return std::move(pt);
+}
+
+tnbLib::Pnt3d
+tnbLib::Cad_GeomCurve::LastValue() const
+{
+	auto pt = Value(LastParameter());
+	return std::move(pt);
+}
+
+tnbLib::Pnt3d 
 tnbLib::Cad_GeomCurve::Value(const Standard_Real x) const
 {
 	auto pt = Pnt3d(Geometry()->Value(x));
 	return std::move(pt);
 }
 
-//tnbLib::Entity3d_Box 
-//tnbLib::Cad_GeomCurve::CalcBoundingBox() const
-//{
-//	
-//}
+tnbLib::Entity3d_Box
+tnbLib::Cad_GeomCurve::CalcBoundingBox() const
+{
+	auto edge = BRepBuilderAPI_MakeEdge(Geometry());
+	//auto geom = BRepAdaptor_Curve(edge);
+	Bnd_Box b;
+	BRepBndLib::Add(edge, b, Standard_False);
+
+	auto box = Cad_Tools::BoundingBox(b);
+	return std::move(box);
+}

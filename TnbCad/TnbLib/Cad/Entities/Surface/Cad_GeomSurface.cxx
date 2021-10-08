@@ -142,3 +142,22 @@ tnbLib::Cad_GeomSurface::ParametricBoundingBox() const
 	Entity2d_Box b(Pnt2d(u0, v0), Pnt2d(u1, v1));
 	return std::move(b);
 }
+
+//#include <BndLib_AddSurface.hxx>
+#include <BRepBuilderAPI_MakeFace.hxx>
+#include <BRepBndLib.hxx>
+#include <Bnd_Box.hxx>
+
+#include <Cad_Tools.hxx>
+#include <Entity3d_Box.hxx>
+
+tnbLib::Entity3d_Box 
+tnbLib::Cad_GeomSurface::BoundingBox() const
+{
+	auto face = BRepBuilderAPI_MakeFace(Geometry(), 1.0E-6);
+	Bnd_Box b;
+	BRepBndLib::Add(face, b, Standard_False);
+
+	auto box = Cad_Tools::BoundingBox(b);
+	return std::move(box);
+}

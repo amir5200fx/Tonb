@@ -30,32 +30,32 @@ tnbLib::Cad_ConicApexMaker::RetrieveBoundary() const
 	{
 	case tnbLib::Cad_ConicApexMaker::bndPatch::U0:
 	{
-		auto B0 = prcssr->PoleColumn(1);
-		auto B1 = prcssr->FirstPoleColumn();
-
-		auto t = std::make_pair(std::move(B0), std::move(B1));
-		return std::move(t);
-	}
-	case tnbLib::Cad_ConicApexMaker::bndPatch::Un:
-	{
-		auto B0 = prcssr->PoleColumn(prcssr->NbColumns() - 2);
-		auto B1 = prcssr->LastPoleColumn();
-
-		auto t = std::make_pair(std::move(B0), std::move(B1));
-		return std::move(t);
-	}
-	case tnbLib::Cad_ConicApexMaker::bndPatch::V0:
-	{
 		auto B0 = prcssr->PoleRow(1);
 		auto B1 = prcssr->FirstPoleRow();
 
 		auto t = std::make_pair(std::move(B0), std::move(B1));
 		return std::move(t);
 	}
-	case tnbLib::Cad_ConicApexMaker::bndPatch::Vn:
+	case tnbLib::Cad_ConicApexMaker::bndPatch::Un:
 	{
 		auto B0 = prcssr->PoleRow(prcssr->NbRows() - 2);
 		auto B1 = prcssr->LastPoleRow();
+
+		auto t = std::make_pair(std::move(B0), std::move(B1));
+		return std::move(t);
+	}
+	case tnbLib::Cad_ConicApexMaker::bndPatch::V0:
+	{
+		auto B0 = prcssr->PoleColumn(1);
+		auto B1 = prcssr->FirstPoleColumn();
+
+		auto t = std::make_pair(std::move(B0), std::move(B1));
+		return std::move(t);
+	}
+	case tnbLib::Cad_ConicApexMaker::bndPatch::Vn:
+	{
+		auto B0 = prcssr->PoleColumn(prcssr->NbColumns() - 2);
+		auto B1 = prcssr->LastPoleColumn();
 
 		auto t = std::make_pair(std::move(B0), std::move(B1));
 		return std::move(t);
@@ -165,7 +165,7 @@ namespace tnbLib
 		std::vector<Dir3d> normals;
 		normals.reserve(nth);
 
-		for (size_t i = 0; i <= nth; i++)
+		for (size_t i = 0; i < nth; i++)
 		{
 			auto theta = i * dTheta;
 
@@ -173,13 +173,12 @@ namespace tnbLib
 			tr.SetRotation(ax, theta);
 
 			auto n = n0.Transformed(tr);
-
 			normals.push_back(std::move(n));
 		}
 		return std::move(normals);
 	}
 
-	std::vector<Dir3d> CalcSurfNormals
+	auto CalcSurfNormals
 	(
 		const std::vector<Cad_ConicApexMaker::Pw>& theBnds,
 		const Pnt3d& origin,
@@ -261,13 +260,23 @@ namespace tnbLib
 		const Standard_Real tol
 	)
 	{
-		auto e0 = ProjectSegment(Entity_Segment<const Pnt3d&>(B0, B1), pl);
-		auto e1 = ProjectSegment(origin, dir, pl);
+		try
+		{
+			auto e0 = ProjectSegment(Entity_Segment<const Pnt3d&>(B0, B1), pl);
+			auto e1 = ProjectSegment(origin, dir, pl);
 
-		auto intP = Geo_Tools::IntersectionTwoLines(e0.P0(), CalcDir(e0), e1.P0(), CalcDir(e1), tol);
+			auto intP = Geo_Tools::IntersectionTwoLines(e0.P0(), CalcDir(e0), e1.P0(), CalcDir(e1), tol);
 
-		auto pnt = pl->Value(intP.X(), intP.Y());
-		return std::move(pnt);
+			auto pnt = pl->Value(intP.X(), intP.Y());
+			return std::move(pnt);
+		}
+		catch (const error& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.message() << endl
+				<< abort(FatalError);
+			return gp_Pnt();
+		}
 	}
 
 	auto ProjectPoint(const Pnt3d& pt, const Handle(Geom_Line)& l)
@@ -287,15 +296,25 @@ namespace tnbLib
 
 	auto CalcNormalBoundaryOfSurf(const Pnt3d& p0, const Pnt3d& p1, const gp_Ax1& ax)
 	{
-		Handle(Geom_Line) line = new Geom_Line(ax);
+		try
+		{
+			Handle(Geom_Line) line = new Geom_Line(ax);
 
-		auto pp0 = ProjectPoint(p0, line);
-		auto pp1 = ProjectPoint(p1, line);
+			auto pp0 = ProjectPoint(p0, line);
+			auto pp1 = ProjectPoint(p1, line);
 
-		auto v0 = p0 - pp0;
-		auto v1 = p1 - pp1;
-		auto n = Dir3d(CrossProduct(v0, v1).XYZ());
-		return std::move(n);
+			auto v0 = p0 - pp0;
+			auto v1 = p1 - pp1;
+			auto n = Dir3d(CrossProduct(v0, v1).XYZ());
+			return std::move(n);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+			return Dir3d();
+		}
 	}
 
 	auto ReverseBoundary(const Pnt3d& p0, const Pnt3d& p1, const gp_Ax1& ax)
@@ -345,6 +364,7 @@ namespace tnbLib
 	)
 	{
 		const auto[p0, p1] = RetrieveVectorBoundaryOfSurf(Bs, tol);
+
 		if (ReverseBoundary(p0, p1, ax))
 		{
 			return Standard_True;
@@ -441,7 +461,7 @@ namespace tnbLib
 		{
 			ws.SetValue(i, 1, 1.0);
 			ws.SetValue(i, 2, 1.0);
-			ws.SetValue(i, 3, RetrieveWeight(Bs[i]));
+			ws.SetValue(i, 3, RetrieveWeight(Bs[i - 1]));
 		}
 		return std::move(ws);
 	}
@@ -475,7 +495,7 @@ namespace tnbLib
 		const auto poles = RetrievePoles(Bs, corners, origin);
 		const auto weights = RetrieveWeights(Bs);
 		const auto[uKnots, uMults] = RetrieveKnots(knots);
-		
+
 		const auto vDeg = 2;
 		TColStd_Array1OfReal vKnots(1, 2);
 		vKnots.SetValue(1, 0.0);
@@ -519,6 +539,7 @@ void tnbLib::Cad_ConicApexMaker::Perform()
 	Debug_Null_Pointer(prcssr);
 
 	auto[B0, B1] = RetrieveBoundary();
+
 	const auto nbPoles = (Standard_Integer)B1.size();
 	if (nbPoles < 2)
 	{
@@ -534,7 +555,7 @@ void tnbLib::Cad_ConicApexMaker::Perform()
 	}
 
 	const auto origin = RetrieveOrigin();
-
+	
 	const auto[N0, spanAngle] = CalcSpanAngle(B1, Axis(), Tolerance());
 
 	const auto dTheta = spanAngle / (Standard_Real)(nbPoles - 1);
@@ -551,7 +572,7 @@ void tnbLib::Cad_ConicApexMaker::Perform()
 
 		auto pln = CreatePlane(origin, normSurfs[i]);
 
-		auto corner = CalcCorner(b0, b1, origin, Axis().Direction(), pln, Tolerance());
+		auto corner = CalcCorner(b0, b1, origin, normals[i], pln, Tolerance());
 		corners.push_back(std::move(corner));
 	}
 
