@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadModel("myBodySectionsReport");
+
+execute();
+
+saveTo("myDisplacerSections");

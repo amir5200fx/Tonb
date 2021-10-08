@@ -1,0 +1,12 @@
+setVerbose(1);
+
+loadModel("myBody");
+
+setClipPerc(0.01);
+setNbSections(35);
+
+setSpacing("cosine");
+
+execute();
+
+saveTo("myBodySections");

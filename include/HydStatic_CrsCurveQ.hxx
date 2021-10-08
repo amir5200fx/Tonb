@@ -79,11 +79,11 @@ namespace tnbLib
 			return theHeel_;
 		}
 
-		TnbHydStatic_EXPORT Standard_Real LeverArm0() const;
-		TnbHydStatic_EXPORT Standard_Real LeverArm1() const;
+		TnbHydStatic_EXPORT Standard_Real FirstLeverArm() const;
+		TnbHydStatic_EXPORT Standard_Real LastLeverArm() const;
 
-		TnbHydStatic_EXPORT Standard_Real Dispv0() const;
-		TnbHydStatic_EXPORT Standard_Real Dispv1() const;
+		TnbHydStatic_EXPORT Standard_Real LowerDispv() const;
+		TnbHydStatic_EXPORT Standard_Real UpperDispv() const;
 
 		TnbHydStatic_EXPORT Standard_Real LeverArm(const Standard_Real theVolume) const;
 

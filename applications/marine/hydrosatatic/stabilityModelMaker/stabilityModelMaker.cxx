@@ -3,6 +3,7 @@
 #include <Marine_Models.hxx>
 #include <Marine_Domain.hxx>
 #include <Marine_WaterLib.hxx>
+#include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -23,8 +24,8 @@ namespace tnbLib
 	typedef std::shared_ptr<marineLib::Model_Sail> sail_t;
 
 	static displacer_t myDisplacer;
-	static std::map<size_t, tank_t> myTanks;
-	static std::map<size_t, sail_t> mySails;
+	static std::vector<tank_t> myTanks;
+	static std::vector<sail_t> mySails;
 
 	static unsigned short verbose(0);
 
@@ -34,48 +35,181 @@ namespace tnbLib
 		return std::move(domain);
 	}
 
-	void loadDisplacer(const std::string& name)
+	auto getAllFilesNames(const boost::filesystem::path& p)
 	{
-		boost::filesystem::path dir("displacer");
-		if (NOT boost::filesystem::is_directory(dir))
+		boost::filesystem::directory_iterator end_itr;
+
+		std::vector<std::string> names;
+		for (boost::filesystem::directory_iterator iter(p); iter != end_itr; iter++)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "no 'displacer' directory has been found!" << endl
-				<< abort(FatalError);
+			if (boost::filesystem::is_regular_file(iter->path()))
+			{
+				auto file = iter->path().filename().string();
+				names.push_back(std::move(file));
+			}
+		}
+		return std::move(names);
+	}
+
+	auto getSingleFile(const boost::filesystem::path& p)
+	{
+		auto files = getAllFilesNames(p);
+		if (files.size())
+		{
+			return files[0];
+		}
+		return std::string();
+	}
+
+	void loadModel()
+	{
+		{ //- loading displacer part
+			boost::filesystem::path dir("displacer");
+			if (NOT boost::filesystem::is_directory(dir))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no 'displacer' directory has been found!" << endl
+					<< abort(FatalError);
+			}
+
+			auto name = getSingleFile(dir);
+
+			fileName fn(name);
+			std::string address = ".\\displacer\\" + name;
+
+			std::fstream file;
+
+			file.open(address, std::ios::in);
+			if (file.fail())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "unable to open the file: " << address << endl
+					<< abort(FatalError);
+			}
+
+			TNB_iARCH_FILE_TYPE ar(file);
+
+			body_t body;
+			{//- timer scope
+				Global_Timer timer;
+				timer.SetInfo(Global_TimerInfo_ms);
+
+				ar >> body;
+			}
+
+			auto displacer = std::dynamic_pointer_cast<marineLib::Body_Displacer>(body);
+			if (NOT displacer)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the body is not displacer!" << endl
+					<< abort(FatalError);
+			}
+
+			myDisplacer = std::make_shared<marineLib::Model_Hull>(std::move(displacer));
+
+			if (verbose)
+			{
+				Info << " The displacer has been loaded from: " << address << ", successfully in " << global_time_duration << " ms." << endl;
+				Info << " - body's name: " << body->Name() << endl;
+			}
 		}
 
-		fileName fn(name);
-		std::string address = ".\\displacer\\" + name;
-
-		std::fstream file;
-
-		file.open(address, std::ios::in);
-		if (file.fail())
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "unable to open the file: " << address << endl
-				<< abort(FatalError);
+			boost::filesystem::path dir("tanks");
+			if (boost::filesystem::is_directory(dir))
+			{
+				size_t i = 0;
+				while (boost::filesystem::is_directory(boost::filesystem::path(L"/tanks/" + std::to_wstring(i))))
+				{
+					auto name = getSingleFile(boost::filesystem::path(L"/tanks/" + std::to_wstring(i)));
+					std::string address = ".\\tanks\\" + std::to_string(i) + "\\" + name;
+					std::fstream file;
+					file.open(address, ios::in);
+
+					if (file.fail())
+					{
+						continue;
+					}
+
+					TNB_iARCH_FILE_TYPE ar(file);
+
+					tank_t tank;
+					{//- timer scope
+						Global_Timer timer;
+						timer.SetInfo(Global_TimerInfo_ms);
+
+						ar >> tank;
+					}
+
+					if (verbose)
+					{
+						Info << " The tank has been loaded from: " << address << ", successfully in " << global_time_duration << " ms." << endl;
+						Info << " - tank's name: " << tank->Name() << endl;
+					}
+
+					myTanks.push_back(std::move(tank));
+				}
+
+				if (verbose)
+				{
+					Info << endl
+						<< " - nb. of tanks: " << myTanks.size() << endl;
+				}
+			}
+			else
+			{
+				Info << endl
+					<< " - no tanks have been detected." << endl;
+			}
 		}
 
-		TNB_iARCH_FILE_TYPE ar(file);
-
-		body_t body;
-		ar >> body;
-
-		auto displacer = std::dynamic_pointer_cast<marineLib::Body_Displacer>(body);
-		if (NOT displacer)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "the body is not displacer!" << endl
-				<< abort(FatalError);
-		}
+			boost::filesystem::path dir("sails");
+			if (boost::filesystem::is_directory(dir))
+			{
+				size_t i = 0;
+				while (boost::filesystem::is_directory(boost::filesystem::path(L"/sails/" + std::to_wstring(i))))
+				{
+					auto name = getSingleFile(boost::filesystem::path(L"/sails/" + std::to_wstring(i)));
+					std::string address = ".\\sails\\" + std::to_string(i) + "\\" + name;
+					std::fstream file;
+					file.open(address, ios::in);
 
-		myDisplacer = std::make_shared<marineLib::Model_Hull>(std::move(displacer));
+					if (file.fail())
+					{
+						continue;
+					}
 
-		if (verbose)
-		{
-			Info << " displacer has been loaded from: " << address << ", successfully!" << endl;
-			Info << " - body's name: " << body->Name() << endl;
+					TNB_iARCH_FILE_TYPE ar(file);
+
+					sail_t sail;
+					{//- timer scope
+						Global_Timer timer;
+						timer.SetInfo(Global_TimerInfo_ms);
+
+						ar >> sail;
+					}
+
+					if (verbose)
+					{
+						Info << " The sail has been loaded from: " << address << ", successfully in " << global_time_duration << " ms." << endl;
+						Info << " - tank's name: " << sail->Name() << endl;
+					}
+
+					mySails.push_back(std::move(sail));
+				}
+
+				if (verbose)
+				{
+					Info << endl
+						<< " - nb. of sails: " << mySails.size() << endl;
+				}
+			}
+			else
+			{
+				Info << endl
+					<< " - no sails have been detected." << endl;
+			}
 		}
 
 		myDomain = createDomain();
@@ -101,22 +235,12 @@ namespace tnbLib
 
 		if (myTanks.size())
 		{
-			std::vector<tank_t> tanks;
-			for (const auto& x : myTanks)
-			{
-				tanks.push_back(x.second);
-			}
-			myModel->SetTanks(std::move(tanks));
+			myModel->SetTanks(myTanks);
 		}
 
 		if (mySails.size())
 		{
-			std::vector<sail_t> sails;
-			for (const auto& x : mySails)
-			{
-				sails.push_back(x.second);
-			}
-			myModel->SetSail(std::move(sails));
+			myModel->SetSail(mySails);
 		}
 	}
 
@@ -125,7 +249,7 @@ namespace tnbLib
 		fileName fn(name);
 		std::ofstream f(fn);
 
-		boost::archive::polymorphic_text_oarchive oa(f);
+		TNB_oARCH_FILE_TYPE oa(f);
 		oa << myModel;
 
 		if (verbose)
@@ -150,7 +274,7 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadDisplacer(name); }), "loadDisplacer");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModels");
 		mod->add(chaiscript::fun([]()->void {makeModel(); }), "execute");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](int i)->void {verbose = i; }), "setVerbose");
@@ -186,7 +310,22 @@ int main(int argc, char* argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to create a stability model." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # I/O functions: " << endl
+				<< " - loadModels()" << endl
+				<< " - saveTo(string)" << endl << endl
+
+				<< " # Settings: " << endl << endl
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+
+				<< " # functions: " << endl << endl
+
+				<< " - execute()" << endl
+				<< endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{

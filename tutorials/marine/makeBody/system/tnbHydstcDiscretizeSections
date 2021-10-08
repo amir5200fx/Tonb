@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadModel("myBodySections");
+
+execute();
+
+saveTo("myBodySectionsD");

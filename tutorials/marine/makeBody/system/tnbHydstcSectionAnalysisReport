@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadModel("myBodySectionsAnalyz");
+
+execute();
+
+saveTo("myBodySectionsReport");
