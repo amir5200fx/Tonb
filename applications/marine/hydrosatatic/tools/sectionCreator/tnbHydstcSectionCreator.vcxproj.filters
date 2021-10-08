@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{c4fcb607-ce9e-40fa-a94c-ded8519560da}</UniqueIdentifier>
+      <UniqueIdentifier>{91b3ae7a-7d0e-4b28-a1a1-f73194dfedc3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="discreteSections.cxx">
+    <ClCompile Include="tnbHydstcSectionCreator.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

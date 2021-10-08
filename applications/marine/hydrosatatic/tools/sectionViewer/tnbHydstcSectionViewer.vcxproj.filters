@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sectionViewer.cxx">
+    <ClCompile Include="tnbHydstcSectionViewer.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

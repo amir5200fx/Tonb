@@ -416,10 +416,12 @@ int main(int argc, char *argv[])
 			Info << endl;
 			Info << " This application is aimed to discrete the sections of the hull." << endl;
 			Info << endl
-				<< " Function list:" << endl
+				<< " Function list:" << endl << endl
+				<< " # IO functions: " << endl << endl
 				<< " - loadModel(string)" << endl
 				<< " - saveTo(string)" << endl << endl
 
+				<< " # Settings:" << endl << endl
 				<< " - setAngle(double);  " << endl
 				<< " - setDeflection(double);  " << endl
 				<< " - setMinSize(double);  " << endl
@@ -430,8 +432,15 @@ int main(int argc, char *argv[])
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl
 				<< " - printSettings()" << endl << endl
 
+				<< " # Operators:" << endl << endl
 				<< " - execute()" << endl
 				<< endl;
+			return 0;
+		}
+		else if (IsEqualCommand(argv[1], "--settings"))
+		{
+			printSettings();
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -443,12 +452,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\hydstcDiscreteSections";
+			std::string address = ".\\system\\tnbHydstcDiscretizeSections";
 			fileName myFileName(address);
 
 			try
 			{
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -476,5 +486,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }
