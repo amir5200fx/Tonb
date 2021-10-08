@@ -6,7 +6,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="paraCurveOnSurface.cxx">
+    <ClCompile Include="tnbParaCurveOnSurface.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
