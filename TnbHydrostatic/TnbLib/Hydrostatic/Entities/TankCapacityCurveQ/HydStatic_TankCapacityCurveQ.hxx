@@ -1,13 +1,13 @@
 #pragma once
-#ifndef _HydStatic_FillCurveQ_Header
-#define _HydStatic_FillCurveQ_Header
+#ifndef _HydStatic_TankCapacityCurveQ_Header
+#define _HydStatic_TankCapacityCurveQ_Header
 
 #include <HydStatic_HydOffsetCurve.hxx>
 
 namespace tnbLib
 {
 
-	class HydStatic_FillCurveQ
+	class HydStatic_TankCapacityCurveQ
 		: public HydStatic_HydOffsetCurve
 	{
 
@@ -31,30 +31,30 @@ namespace tnbLib
 
 		//- default constructor
 
-		HydStatic_FillCurveQ()
+		HydStatic_TankCapacityCurveQ()
 		{}
 
 
 		//- constructors
 
-		TnbHydStatic_EXPORT HydStatic_FillCurveQ
+		TnbHydStatic_EXPORT HydStatic_TankCapacityCurveQ
 		(
 			const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs
 		);
 
-		TnbHydStatic_EXPORT HydStatic_FillCurveQ
+		TnbHydStatic_EXPORT HydStatic_TankCapacityCurveQ
 		(
 			std::vector<std::pair<Standard_Real, Standard_Real>>&& theQs
 		);
 
-		TnbHydStatic_EXPORT HydStatic_FillCurveQ
+		TnbHydStatic_EXPORT HydStatic_TankCapacityCurveQ
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs
 		);
 
-		TnbHydStatic_EXPORT HydStatic_FillCurveQ
+		TnbHydStatic_EXPORT HydStatic_TankCapacityCurveQ
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -78,7 +78,7 @@ namespace tnbLib
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_FillCurveQ);
+BOOST_CLASS_EXPORT_KEY(tnbLib::HydStatic_TankCapacityCurveQ);
 
 
-#endif // !_HydStatic_FillCurveQ_Header
+#endif // !_HydStatic_TankCapacityCurveQ_Header

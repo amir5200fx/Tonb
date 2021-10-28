@@ -1,6 +1,6 @@
-#include <HydStatic_FillCurveQ.hxx>
+#include <HydStatic_TankCapacityCurveQ.hxx>
 
-void tnbLib::HydStatic_FillCurveQ::Check()
+void tnbLib::HydStatic_TankCapacityCurveQ::Check()
 {
 	auto iter = Qs().begin();
 	auto z0 = iter->second;
@@ -18,7 +18,7 @@ void tnbLib::HydStatic_FillCurveQ::Check()
 	}
 }
 
-tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
+tnbLib::HydStatic_TankCapacityCurveQ::HydStatic_TankCapacityCurveQ
 (
 	const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs
 )
@@ -27,7 +27,7 @@ tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
 	Check();
 }
 
-tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
+tnbLib::HydStatic_TankCapacityCurveQ::HydStatic_TankCapacityCurveQ
 (
 	std::vector<std::pair<Standard_Real, Standard_Real>>&& theQs
 )
@@ -36,7 +36,7 @@ tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
 	Check();
 }
 
-tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
+tnbLib::HydStatic_TankCapacityCurveQ::HydStatic_TankCapacityCurveQ
 (
 	const Standard_Integer theIndex, 
 	const word & theName,
@@ -47,7 +47,7 @@ tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
 	Check();
 }
 
-tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
+tnbLib::HydStatic_TankCapacityCurveQ::HydStatic_TankCapacityCurveQ
 (
 	const Standard_Integer theIndex,
 	const word & theName, 
@@ -59,42 +59,42 @@ tnbLib::HydStatic_FillCurveQ::HydStatic_FillCurveQ
 }
 
 Standard_Real 
-tnbLib::HydStatic_FillCurveQ::FirstVolume() const
+tnbLib::HydStatic_TankCapacityCurveQ::FirstVolume() const
 {
 	return FirstValue();
 }
 
 Standard_Real 
-tnbLib::HydStatic_FillCurveQ::LastVolume() const
+tnbLib::HydStatic_TankCapacityCurveQ::LastVolume() const
 {
 	return LastValue();
 }
 
 Standard_Real 
-tnbLib::HydStatic_FillCurveQ::MaxVolume() const
+tnbLib::HydStatic_TankCapacityCurveQ::MaxVolume() const
 {
 	return LastValue();
 }
 
 Standard_Real 
-tnbLib::HydStatic_FillCurveQ::LowerZ() const
+tnbLib::HydStatic_TankCapacityCurveQ::LowerZ() const
 {
 	return Lower();
 }
 
 Standard_Real 
-tnbLib::HydStatic_FillCurveQ::UpperZ() const
+tnbLib::HydStatic_TankCapacityCurveQ::UpperZ() const
 {
 	return Upper();
 }
 
 Standard_Real 
-tnbLib::HydStatic_FillCurveQ::Volume(const Standard_Real theZ) const
+tnbLib::HydStatic_TankCapacityCurveQ::Volume(const Standard_Real theZ) const
 {
 	return Value(theZ);
 }
 
-void tnbLib::HydStatic_FillCurveQ::SetQs
+void tnbLib::HydStatic_TankCapacityCurveQ::SetQs
 (
 	const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs
 )
@@ -103,7 +103,7 @@ void tnbLib::HydStatic_FillCurveQ::SetQs
 	Check();
 }
 
-void tnbLib::HydStatic_FillCurveQ::SetQs
+void tnbLib::HydStatic_TankCapacityCurveQ::SetQs
 (
 	std::vector<std::pair<Standard_Real, Standard_Real>>&& theQs
 )

@@ -1,4 +1,4 @@
-#include <HydStatic_FillTank.hxx>
+#include <HydStatic_TankCapacity.hxx>
 
 #include <Entity3d_Box.hxx>
 #include <Global_Timer.hxx>
@@ -10,14 +10,14 @@
 #include <Marine_WaterLib.hxx>
 #include <Marine_MultLevWaterDomain.hxx>
 #include <Marine_System.hxx>
-#include <HydStatic_FillCurveQ.hxx>
+#include <HydStatic_TankCapacityCurveQ.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>
 
-Standard_Real tnbLib::HydStatic_FillTank::DELTA_WATER_COEFF = 0.005;
-unsigned short tnbLib::HydStatic_FillTank::verbose = 0;
+Standard_Real tnbLib::HydStatic_TankCapacity::DELTA_WATER_COEFF = 0.005;
+unsigned short tnbLib::HydStatic_TankCapacity::verbose = 0;
 
 namespace tnbLib
 {
@@ -49,7 +49,7 @@ namespace tnbLib
 	}
 }
 
-void tnbLib::HydStatic_FillTank::Perform()
+void tnbLib::HydStatic_TankCapacity::Perform()
 {
 	if (verbose)
 	{
@@ -87,7 +87,7 @@ void tnbLib::HydStatic_FillTank::Perform()
 		Info << "   z0 = " << b.P0().Z() << ", z1 = " << b.P1().Z() << endl;
 		Info << endl;
 	}
-	const auto Z = HydStatic_FillTank::Z(b.P0().Z(), b.P1().Z(), NbWaters());
+	const auto Z = HydStatic_TankCapacity::Z(b.P0().Z(), b.P1().Z(), NbWaters());
 
 	const auto& domain = Domain();
 	auto domains = Marine_WaterLib::MultiLevelsStillWaterDomain(*Tank(), domain, *Z);
@@ -129,7 +129,7 @@ void tnbLib::HydStatic_FillTank::Perform()
 	}
 
 	auto fillCurve = 
-		std::make_shared<HydStatic_FillCurveQ>(0, "fill-curve", std::move(offsets));
+		std::make_shared<HydStatic_TankCapacityCurveQ>(0, "fill-curve", std::move(offsets));
 	Debug_Null_Pointer(fillCurve);
 
 	fillCurve->SetQs(std::move(offsets));
@@ -146,7 +146,7 @@ void tnbLib::HydStatic_FillTank::Perform()
 }
 
 std::shared_ptr<tnbLib::Geo_xDistb> 
-tnbLib::HydStatic_FillTank::Z
+tnbLib::HydStatic_TankCapacity::Z
 (
 	const Standard_Real z0, 
 	const Standard_Real z1,

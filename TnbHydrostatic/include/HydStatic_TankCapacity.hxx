@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _HydStatic_FillTank_Header
-#define _HydStatic_FillTank_Header
+#ifndef _HydStatic_TankCapacity_Header
+#define _HydStatic_TankCapacity_Header
 
 #include <Global_Done.hxx>
 #include <Marine_BodiesFwd.hxx>
@@ -14,9 +14,9 @@ namespace tnbLib
 	// Forward Declarations
 	class Geo_xDistb;
 	class Marine_Domain;
-	class HydStatic_FillCurveQ;
+	class HydStatic_TankCapacityCurveQ;
 
-	class HydStatic_FillTank
+	class HydStatic_TankCapacity
 		: public Global_Done
 	{
 
@@ -28,17 +28,17 @@ namespace tnbLib
 		Standard_Integer theNbWaters_;
 
 
-		std::shared_ptr<HydStatic_FillCurveQ> theCurve_;
+		std::shared_ptr<HydStatic_TankCapacityCurveQ> theCurve_;
 
 	public:
 
 		static TnbHydStatic_EXPORT Standard_Real DELTA_WATER_COEFF;
 		static TnbHydStatic_EXPORT unsigned short verbose;
 
-		HydStatic_FillTank()
+		HydStatic_TankCapacity()
 		{}
 
-		HydStatic_FillTank
+		HydStatic_TankCapacity
 		(
 			const std::shared_ptr<Marine_Domain>& theDomain,
 			const std::shared_ptr<marineLib::Body_Tank>& theTank,
@@ -99,4 +99,4 @@ namespace tnbLib
 	};
 }
 
-#endif // !_HydStatic_FillTank_Header
+#endif // !_HydStatic_TankCapacity_Header

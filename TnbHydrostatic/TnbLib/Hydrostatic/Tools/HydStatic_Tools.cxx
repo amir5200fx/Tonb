@@ -12,7 +12,7 @@
 #include <HydStatic_hAuCurve.hxx>
 #include <HydStatic_CrsCurve.hxx>
 #include <HydStatic_CrsCurveQ.hxx>
-#include <HydStatic_FillCurveQ.hxx>
+#include <HydStatic_TankCapacityCurveQ.hxx>
 #include <HydStatic_CurveQMaker.hxx>
 #include <HydStatic_rArmCurve_Body.hxx>
 #include <HydStatic_rArmCurve_FSLq.hxx>
@@ -237,7 +237,7 @@ tnbLib::HydStatic_Tools::Trim
 Standard_Real 
 tnbLib::HydStatic_Tools::CalcZ
 (
-	const HydStatic_FillCurveQ & theCurve,
+	const HydStatic_TankCapacityCurveQ & theCurve,
 	const Standard_Real theVolume
 )
 {
