@@ -2,6 +2,8 @@
 
 #include <Marine_BodyTools.hxx>
 
+const std::string tnbLib::Marine_Body::extention = ".body";
+
 void tnbLib::Marine_Body::CheckSections()
 {
 	if (NbSections() < 3)
