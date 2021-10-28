@@ -17,7 +17,7 @@ namespace tnbLib
 		class Model_ProfileAreaSail;
 		class Model_SurfaceSail;
 		class Model_LateralPlnSail;
-		class Model_ShapeSail;
+		class Model_BodySail;
 	}
 }
 

@@ -457,9 +457,6 @@
     <Filter Include="TnbLib\MarineBase\Entities\Model\Sail\Geomety">
       <UniqueIdentifier>{657d69dc-8b44-4cc9-a140-7ad0bb68163c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Entities\Model\Sail\Geomety\Shape">
-      <UniqueIdentifier>{dc1a7164-927a-4061-b1b4-c2e128622944}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\Model\Sail\Geomety\Plane">
       <UniqueIdentifier>{77a5bd57-c99b-431b-b91b-4f94c6b93f19}</UniqueIdentifier>
     </Filter>
@@ -627,6 +624,9 @@
     </Filter>
     <Filter Include="TnbLib\MarineBase\RepairSections\CmpSection">
       <UniqueIdentifier>{4d2de3c1-f8f5-4ee3-9c90-ea13bd81038b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Entities\Model\Sail\Geomety\Body">
+      <UniqueIdentifier>{dc1a7164-927a-4061-b1b4-c2e128622944}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1086,9 +1086,6 @@
     <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\3D\Marine_Model_SurfaceSail.hxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Plane\3D</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSail.hxx">
-      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Shape</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\MarineBase\Entities\Body\Constructor\Marine_BodyConstructor.hxx">
       <Filter>TnbLib\MarineBase\Entities\Body\Constructor</Filter>
     </ClInclude>
@@ -1347,6 +1344,18 @@
     <ClInclude Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsReportIO.hxx">
       <Filter>TnbLib\MarineBase\IO</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Body\Marine_Model_BodySail.hxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_HullShapeIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_TankShapeIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\MarineBase\IO\Marine_SailShapeIO.hxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\MarineBase\DimensionedParam\Marine_DimensionedParam.cxx">
@@ -1514,9 +1523,6 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Profile\Marine_Model_ProfileAreaSail.cxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Area\Profile</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSail.cxx">
-      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Shape</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Lateral\Marine_Model_LateralPlnSail.cxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Plane\Lateral</Filter>
     </ClCompile>
@@ -1624,9 +1630,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Profile\Marine_Model_ProfileAreaSailIO.cxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Area\Profile</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Shape\Marine_Model_ShapeSailIO.cxx">
-      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Shape</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Plane\Lateral\Marine_Model_LateralPlnSailIO.cxx">
       <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Plane\Lateral</Filter>
@@ -1854,6 +1857,21 @@
       <Filter>TnbLib\MarineBase\IO</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\MarineBase\IO\Marine_AnalysisSectionsReportIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Body\Marine_Model_BodySail.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Geometry\Body\Marine_Model_BodySailIO.cxx">
+      <Filter>TnbLib\MarineBase\Entities\Model\Sail\Geomety\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_HullShapeIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_TankShapeIO.cxx">
+      <Filter>TnbLib\MarineBase\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\MarineBase\IO\Marine_SailShapeIO.cxx">
       <Filter>TnbLib\MarineBase\IO</Filter>
     </ClCompile>
   </ItemGroup>

@@ -635,7 +635,7 @@ tnbLib::Marine_BodyTools::RetrieveLateralProjArea
 	}
 	case Marine_SailModelType::shape:
 	{
-		auto shape = std::dynamic_pointer_cast<marineLib::Model_ShapeSail>(theModel);
+		auto shape = std::dynamic_pointer_cast<marineLib::Model_BodySail>(theModel);
 		Debug_Null_Pointer(shape);
 
 		const auto& body = shape->Body();
