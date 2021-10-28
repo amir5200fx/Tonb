@@ -1274,5 +1274,20 @@
     <ClCompile Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq\Geo_AffineTrsf_PtsToUnitSq.cxx">
       <Filter>TnbLib\Geo\AffineTrsf\PtsToUnitSq</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_Triangulation.cxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.cxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Chain\3d\Entity3d_Chain.cxx">
+      <Filter>TnbLib\Geo\Entities\Chain\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon.cxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_Polygon.cxx">
+      <Filter>TnbLib\Geo\Entities\Polygon\3d</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

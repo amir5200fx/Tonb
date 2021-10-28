@@ -52,8 +52,17 @@ namespace tnbLib
 		typedef Point ptType;
 		typedef ConnectType connectType;
 
+
+		static TnbGeo_EXPORT const std::string extension;
+
+
+		//- default constructor
+
 		Entity_StaticData()
 		{}
+
+
+		//- constructors
 
 		Entity_StaticData
 		(
@@ -72,6 +81,9 @@ namespace tnbLib
 			: thePoints_(std::move(thePoints))
 			, theConnectivity_(std::move(theConnectivity))
 		{}
+
+
+		//- public functions and operators
 
 		const pointList& Points() const
 		{
@@ -176,8 +188,14 @@ namespace tnbLib
 
 		typedef Entity_StaticData<Point, ConnectType, false> base;
 
+
+		//- default constructor
+
 		Entity_StaticData()
 		{}
+
+
+		//- constructors
 
 		Entity_StaticData
 		(
@@ -198,6 +216,9 @@ namespace tnbLib
 			: Entity_StaticData<Point, ConnectType, false>(std::move(thePoints), std::move(theConnectivity))
 			, theNeighbors_(std::move(theNeighbors))
 		{}
+
+
+		//- public functions and operators
 
 		const connectList& Neighbors() const
 		{

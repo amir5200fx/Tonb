@@ -310,6 +310,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Entities\Box\3d\Entity3d_Box.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_Chain.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Chain\2d\Entity2d_ChainIO.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Chain\3d\Entity3d_Chain.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Chain\3d\Entity3d_ChainIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Connectivity\Entity_Connectivity.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Direct\2d\Dir2d.cxx" />
@@ -324,15 +325,19 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1IO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Metric2\2d\Entity2d_Metric2.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_Polygon.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools_cgal.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_Polygon.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_PolygonIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\StaticData\Entity_StaticData.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_Tetrahedralization.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_TetrahedralizationTools.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_Triangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationN.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2d.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Vector\3d\Vec3d.cxx" />

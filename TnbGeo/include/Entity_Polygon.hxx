@@ -45,6 +45,7 @@ namespace tnbLib
 
 	public:
 
+		static TnbGeo_EXPORT const std::string extension;
 
 		// default constructor [7/14/2021 Amir]
 

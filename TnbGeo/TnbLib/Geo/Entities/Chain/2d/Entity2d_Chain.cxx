@@ -2,6 +2,8 @@
 
 #include <Entity2d_Box.hxx>
 
+const std::string tnbLib::Entity2d_Chain::extension = ".chain2d";
+
 namespace tnbLib
 {
 	
