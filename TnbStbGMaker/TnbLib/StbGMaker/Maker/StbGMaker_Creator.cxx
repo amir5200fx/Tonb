@@ -217,15 +217,13 @@ tnbLib::StbGMaker_Creator::CreateConstAreaSailMaker
 Standard_Integer 
 tnbLib::StbGMaker_Creator::CreatePlaneGeomSailMaker
 (
-	const std::shared_ptr<Cad2d_Plane>& thePlane,
-	const Standard_Real theZbar
+	const std::shared_ptr<Cad2d_Plane>& thePlane
 )
 {
 	auto sail =
 		std::make_shared<stbGmakerLib::GeometricSailCreator_Plane>
 		(
-			thePlane,
-			theZbar
+			thePlane
 			);
 	Debug_Null_Pointer(sail);
 
@@ -242,15 +240,13 @@ tnbLib::StbGMaker_Creator::CreatePlaneGeomSailMaker
 Standard_Integer
 tnbLib::StbGMaker_Creator::CreatePlaneGeomSailMaker
 (
-	std::shared_ptr<Cad2d_Plane>&& thePlane,
-	const Standard_Real theZbar
+	std::shared_ptr<Cad2d_Plane>&& thePlane
 )
 {
 	auto sail =
 		std::make_shared<stbGmakerLib::GeometricSailCreator_Plane>
 		(
-			std::move(thePlane), 
-			theZbar
+			std::move(thePlane)
 			);
 	Debug_Null_Pointer(sail);
 

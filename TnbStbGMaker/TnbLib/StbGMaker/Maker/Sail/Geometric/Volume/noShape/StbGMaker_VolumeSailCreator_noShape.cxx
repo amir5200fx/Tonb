@@ -90,7 +90,7 @@ void tnbLib::stbGmakerLib::VolumeSailCreator_noShape::ExportAs
 	auto sail = std::dynamic_pointer_cast<marineLib::Body_Sail>(body);
 	Debug_Null_Pointer(sail);
 
-	theModel = std::make_shared<marineLib::Model_ShapeSail>
+	theModel = std::make_shared<marineLib::Model_BodySail>
 		(
 			Index(),
 			Name(),

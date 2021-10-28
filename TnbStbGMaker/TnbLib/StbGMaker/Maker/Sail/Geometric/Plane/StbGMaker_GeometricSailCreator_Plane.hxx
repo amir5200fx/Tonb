@@ -21,8 +21,6 @@ namespace tnbLib
 
 			std::shared_ptr<Cad2d_Plane> thePlane_;
 
-			Standard_Real theZbar_;
-
 
 			TNB_SERIALIZATION(TnbStbGMaker_EXPORT);
 
@@ -33,51 +31,40 @@ namespace tnbLib
 
 			TnbStbGMaker_EXPORT GeometricSailCreator_Plane
 			(
-				const std::shared_ptr<Cad2d_Plane>& thePlane,
-				Standard_Real theZbar
+				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
 			TnbStbGMaker_EXPORT GeometricSailCreator_Plane
 			(
-				std::shared_ptr<Cad2d_Plane>&& thePlane,
-				Standard_Real theZbar
-			);
-
-			TnbStbGMaker_EXPORT GeometricSailCreator_Plane
-			(
-				const Standard_Integer theIndex,
-				const std::shared_ptr<Cad2d_Plane>& thePlane,
-				Standard_Real theZbar
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
 			TnbStbGMaker_EXPORT GeometricSailCreator_Plane
 			(
 				const Standard_Integer theIndex,
-				std::shared_ptr<Cad2d_Plane>&& thePlane,
-				Standard_Real theZbar
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
+
+			TnbStbGMaker_EXPORT GeometricSailCreator_Plane
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
 			TnbStbGMaker_EXPORT GeometricSailCreator_Plane
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
-				const std::shared_ptr<Cad2d_Plane>& thePlane,
-				Standard_Real theZbar
+				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
 			TnbStbGMaker_EXPORT GeometricSailCreator_Plane
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
-				std::shared_ptr<Cad2d_Plane>&& thePlane,
-				Standard_Real theZbar
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
-
-			auto zBar() const
-			{
-				return theZbar_;
-			}
 
 			const auto& Plane() const
 			{
