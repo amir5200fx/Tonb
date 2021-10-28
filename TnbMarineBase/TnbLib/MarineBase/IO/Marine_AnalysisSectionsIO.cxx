@@ -2,6 +2,8 @@
 
 #include <Marine_DisctSectionsIO.hxx>
 
+const std::string tnbLib::marineLib::io::AnalysisSections::extention = ".hsasects";
+
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::io::AnalysisSections::Section)
 {
 	ar & theSegments_;

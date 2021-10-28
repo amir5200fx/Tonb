@@ -2,6 +2,8 @@
 
 #include <Marine_SectionsIO.hxx>
 
+const std::string tnbLib::marineLib::io::DisctSections::extention = ".hsdsects";
+
 tnbLib::marineLib::io::DisctSections::AlgInfo::AlgInfo()
 	: Deflection(0)
 	, Angle(0)

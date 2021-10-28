@@ -2,6 +2,8 @@
 
 #include <Marine_AnalysisSectionsIO.hxx>
 
+const std::string tnbLib::marineLib::io::AnalysisSectionsReport::extention = ".hsasectsr";
+
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::io::AnalysisSectionsReport)
 {
 	ar & theAnalysis_;

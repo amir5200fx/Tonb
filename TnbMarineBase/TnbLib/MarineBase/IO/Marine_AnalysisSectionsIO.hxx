@@ -86,6 +86,8 @@ namespace tnbLib
 
 			public:
 
+				static TnbMarine_EXPORT const std::string extention;
+
 				//- default constructor
 
 				AnalysisSections()

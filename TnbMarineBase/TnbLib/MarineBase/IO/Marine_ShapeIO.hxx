@@ -30,18 +30,15 @@ namespace tnbLib
 
 				std::shared_ptr<Cad_Shape> theShape_;
 
-				std::shared_ptr<Entity3d_Box> theBoundingBox_;
-
 				Standard_Real theTol_;
-				gp_Ax2d theAx_;
-				Marine_BodyModelType theType_;
+				
 
 
 				//- private functions and operators
 
 				TNB_SERIALIZATION(TnbMarine_EXPORT);
 
-			public:
+			protected:
 
 
 				//- default constructor
@@ -49,62 +46,39 @@ namespace tnbLib
 				Shape()
 				{}
 
+			public:
+
+				static TnbMarine_EXPORT const std::string extention;
 
 				//- public functions and operators
 
 				const auto& GetShape() const
 				{
 					return theShape_;
-				}
-
-				const auto& PreciseBndBox() const
-				{
-					return theBoundingBox_;
-				}
-
-				const auto& Ax() const
-				{
-					return theAx_;
-				}
+				}		
 
 				auto Tolerance() const
 				{
 					return theTol_;
-				}
+				}	
 
-				auto ShapeType() const
-				{
-					return theType_;
-				}
+				TnbMarine_EXPORT virtual std::shared_ptr<Entity3d_Box> BoundingBox() const;
 
 				void LoadShape(const std::shared_ptr<Cad_Shape>& theShape)
 				{
 					theShape_ = theShape;
 				}
 
-				void LoadPreciseBndBox(const std::shared_ptr<Entity3d_Box>& b)
-				{
-					theBoundingBox_ = b;
-				}
-
 				void SetTol(const Standard_Real tol)
 				{
 					theTol_ = tol;
-				}
-
-				void SetAx(const gp_Ax2d& ax)
-				{
-					theAx_ = ax;
-				}
-
-				void SetType(const Marine_BodyModelType t)
-				{
-					theType_ = t;
-				}
+				}		
 
 			};
 		}
 	}
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::marineLib::io::Shape);
 
 #endif // !_Marine_ShapeIO_Header
