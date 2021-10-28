@@ -188,6 +188,13 @@ namespace tnbLib
 				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
+		static TnbCad2d_EXPORT Pnt2d 
+			Centre
+			(
+				const Cad2d_Plane& thePlane,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
 		static TnbCad2d_EXPORT Standard_Real
 			DiscreteArea
 			(

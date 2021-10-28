@@ -884,10 +884,57 @@ tnbLib::Cad2d_CmptLib::Area
 	{
 		for (const auto& x : *thePlane.InnerWires())
 		{
+#ifdef _DEBUG
+			auto iArea = Area(*x, theInfo);
+			if (iArea > 0.0)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the inner wire area is not less than zero!" << endl
+					<< abort(FatalError);
+			}
+			area += iArea;
+#else
 			area += Area(*x, theInfo);
+#endif // _DEBUG
+
 		}
 	}
 	return area;
+}
+
+tnbLib::Pnt2d 
+tnbLib::Cad2d_CmptLib::Centre
+(
+	const Cad2d_Plane & thePlane, 
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	auto centre = Centre(*thePlane.OuterWire(), theInfo);
+
+	if (const auto& inners = thePlane.InnerWires())
+	{
+		auto area = Area(*thePlane.OuterWire(), theInfo);
+		Debug_If_Condition(area < 0);
+
+		auto productArea = area * centre;
+		auto totArea = area;
+
+		for (const auto& x : *inners)
+		{
+			centre = Centre(*x, theInfo);
+			area = Area(*x, theInfo);
+			Debug_If_Condition(area > 0);
+
+			productArea += area * centre;
+			totArea += area;
+		}
+		auto c = productArea / totArea;
+		return std::move(c);
+	}
+	else
+	{	
+		return std::move(centre);
+	}
 }
 
 Standard_Real 
