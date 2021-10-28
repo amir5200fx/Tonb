@@ -103,6 +103,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\global\Global_AccessMethod.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Bound.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Done.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_File.hxx" />
+    <ClInclude Include="TnbLib\Global\global\Global_FileI.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Indexed.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Macros.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Message.hxx" />
@@ -118,6 +120,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Global\error\TnbError.cxx" />
+    <ClCompile Include="TnbLib\Global\global\Global_File.cxx" />
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx" />
     <ClCompile Include="TnbLib\Global\global\Global_Timer.cxx" />
     <ClCompile Include="TnbLib\Global\global\UnitSystem.cxx" />

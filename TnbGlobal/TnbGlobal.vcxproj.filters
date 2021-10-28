@@ -111,6 +111,12 @@
     <ClInclude Include="TnbLib\Global\global\Global_Serialization.hxx">
       <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_File.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\global\Global_FileI.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx">
@@ -130,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Global\serialization\OpenCascade_Serialization.cxx">
       <Filter>TnbLib\Global\serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\global\Global_File.cxx">
+      <Filter>TnbLib\Global\global</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
