@@ -6,6 +6,6 @@
 #include <Marine_Model_ProfileAreaSail.hxx>
 #include <Marine_Model_SurfaceSail.hxx>
 #include <Marine_Model_LateralPlnSail.hxx>
-#include <Marine_Model_ShapeSail.hxx>
+#include <Marine_Model_BodySail.hxx>
 
 #endif // !_Marine_SailModels_Header

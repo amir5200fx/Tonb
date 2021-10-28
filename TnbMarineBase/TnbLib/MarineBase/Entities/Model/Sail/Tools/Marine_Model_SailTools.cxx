@@ -1,5 +1,7 @@
 #include <Marine_Model_SailTools.hxx>
 
+#include <Marine_Model_SurfaceSail.hxx>
+#include <Cad_Shape.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Geo2d_CdtDelTri.hxx>
 #include <Geo_Tools.hxx>
@@ -14,7 +16,10 @@
 #include <gp.hxx>
 #include <gp_Pln.hxx>
 #include <Poly_Triangulation.hxx>
+#include <TopoDS_Shape.hxx>
 #include <TopoDS_Face.hxx>
+#include <TopExp_Explorer.hxx>
+#include <TopoDS.hxx>
 
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 
 tnbLib::Marine_Model_SailTools::LateralProjArea
@@ -29,36 +34,55 @@ tnbLib::Marine_Model_SailTools::LateralProjArea
 			<< abort(FatalError);
 	}
 
-	const auto& face = theSail->Face();
-	auto poly = Cad_Tools::RetrieveTriangulation(face);
-	if (NOT poly)
+	const auto& shape = theSail->Shape();
+	Debug_Null_Pointer(shape);
+
+	auto totTri = std::make_shared<Entity2d_Triangulation>();
+	for (
+		TopExp_Explorer aFaceExp(shape->Shape().Oriented(TopAbs_FORWARD), TopAbs_FACE);
+		aFaceExp.More();
+		aFaceExp.Next()
+		)
 	{
-		FatalErrorIn(FunctionSIG)
-			<< "the face has no mesh!" << endl
-			<< abort(FatalError);
+		auto face = TopoDS::Face(aFaceExp.Current());
+
+		if (face.IsNull())
+		{
+			continue;
+		}
+
+		auto poly = Cad_Tools::RetrieveTriangulation(face);
+		if (NOT poly)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the face has no mesh!" << endl
+				<< abort(FatalError);
+		}
+		auto triangulation3d =
+			Cad_Tools::Triangulation(*poly);
+
+		gp_Pln yPlane(gp::Origin(), gp::DY());
+		std::vector<Pnt2d> pnts;
+		pnts.reserve(triangulation3d->NbPoints());
+		for (const auto& x : triangulation3d->Points())
+		{
+			auto pt3 = Geo_Tools::ProjectToPlane_cgal(x, yPlane);
+			Pnt2d pt2(pt3.X(), pt3.Z());
+			pnts.push_back(std::move(pt2));
+		}
+
+		auto tri = std::make_shared<Entity2d_Triangulation>();
+		Debug_Null_Pointer(tri);
+
+		auto& indices = triangulation3d->Connectivity();
+		tri->Points() = std::move(pnts);
+		tri->Connectivity() = std::move(indices);
+
+		Geo_Tools::MakeTrianglesCCW(tri);
+
+		totTri->Add(*tri);
 	}
-	auto triangulation3d = 
-		Cad_Tools::Triangulation(*poly);
-
-	gp_Pln yPlane(gp::Origin(), gp::DY());
-	std::vector<Pnt2d> pnts;
-	pnts.reserve(triangulation3d->NbPoints());
-	for (const auto& x : triangulation3d->Points())
-	{
-		auto pt3 = Geo_Tools::ProjectToPlane_cgal(x, yPlane);
-		Pnt2d pt2(pt3.X(), pt3.Z());
-		pnts.push_back(std::move(pt2));
-	}
-
-	auto tri = std::make_shared<Entity2d_Triangulation>();
-	Debug_Null_Pointer(tri);
-
-	auto& indices = triangulation3d->Connectivity();
-	tri->Points() = std::move(pnts);
-	tri->Connectivity() = std::move(indices);
-
-	Geo_Tools::MakeTrianglesCCW(tri);
-	return std::move(tri);
+	return std::move(totTri);
 }
 
 std::shared_ptr<tnbLib::Entity2d_Chain> 

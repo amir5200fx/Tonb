@@ -1,6 +1,6 @@
-#include <Marine_Model_ShapeSail.hxx>
+#include <Marine_Model_BodySail.hxx>
 
-tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
+tnbLib::marineLib::Model_BodySail::Model_BodySail
 (
 	const std::shared_ptr<Body_Sail>& theSail
 )
@@ -8,7 +8,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 {
 }
 
-tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
+tnbLib::marineLib::Model_BodySail::Model_BodySail
 (
 	std::shared_ptr<Body_Sail>&& theSail
 )
@@ -16,7 +16,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 {
 }
 
-tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
+tnbLib::marineLib::Model_BodySail::Model_BodySail
 (
 	const Standard_Integer theIndex, 
 	const std::shared_ptr<Body_Sail>& theSail
@@ -26,7 +26,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 {
 }
 
-tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
+tnbLib::marineLib::Model_BodySail::Model_BodySail
 (
 	const Standard_Integer theIndex,
 	std::shared_ptr<Body_Sail>&& theSail
@@ -36,7 +36,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 {
 }
 
-tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
+tnbLib::marineLib::Model_BodySail::Model_BodySail
 (
 	const Standard_Integer theIndex,
 	const word & theName, 
@@ -47,7 +47,7 @@ tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
 {
 }
 
-tnbLib::marineLib::Model_ShapeSail::Model_ShapeSail
+tnbLib::marineLib::Model_BodySail::Model_BodySail
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 

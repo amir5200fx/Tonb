@@ -2,37 +2,37 @@
 
 tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 (
-	const TopoDS_Face & theFace
+	const std::shared_ptr<Cad_Shape> & theFace
 )
-	: theFace_(theFace)
+	: theShape_(theFace)
 {
 }
 
 tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 (
-	TopoDS_Face && theFace
+	std::shared_ptr<Cad_Shape> && theFace
 )
-	: theFace_(std::move(theFace))
+	: theShape_(std::move(theFace))
 {
 }
 
 tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 (
 	const Standard_Integer theIndex,
-	const TopoDS_Face & theFace
+	const std::shared_ptr<Cad_Shape> & theFace
 )
 	: Model_PlnSail(theIndex)
-	, theFace_(theFace)
+	, theShape_(theFace)
 {
 }
 
 tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 (
 	const Standard_Integer theIndex, 
-	TopoDS_Face && theFace
+	std::shared_ptr<Cad_Shape> && theFace
 )
 	: Model_PlnSail(theIndex)
-	, theFace_(std::move(theFace))
+	, theShape_(std::move(theFace))
 {
 }
 
@@ -40,10 +40,10 @@ tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 (
 	const Standard_Integer theIndex, 
 	const word & theName,
-	const TopoDS_Face & theFace
+	const std::shared_ptr<Cad_Shape> & theFace
 )
 	: Model_PlnSail(theIndex, theName)
-	, theFace_(theFace)
+	, theShape_(theFace)
 {
 }
 
@@ -51,9 +51,9 @@ tnbLib::marineLib::Model_SurfaceSail::Model_SurfaceSail
 (
 	const Standard_Integer theIndex, 
 	const word & theName,
-	TopoDS_Face && theFace
+	std::shared_ptr<Cad_Shape> && theFace
 )
 	: Model_PlnSail(theIndex, theName)
-	, theFace_(std::move(theFace))
+	, theShape_(std::move(theFace))
 {
 }
