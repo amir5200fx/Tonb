@@ -47,6 +47,35 @@
 #include <STEPControl_Controller.hxx>
 #include <STEPControl_Writer.hxx>
 
+Standard_Boolean 
+tnbLib::Cad_Tools::HasTriangulation
+(
+	const TopoDS_Shape & theShape
+)
+{
+	for (
+		TopExp_Explorer aFaceExp(theShape, TopAbs_FACE);
+		aFaceExp.More();
+		aFaceExp.Next()
+		)
+	{
+		auto raw = TopoDS::Face(aFaceExp.Current());
+
+		if (raw.IsNull())
+		{
+			continue;
+		}
+
+		TopLoc_Location Loc;
+		auto Triangulation = BRep_Tool::Triangulation(raw, Loc);
+		if (Triangulation)
+		{
+			return Standard_True;
+		}
+	}
+	return Standard_False;
+}
+
 Standard_Real 
 tnbLib::Cad_Tools::CalcPrecision(const TModel_Vertex & theVtx)
 {
