@@ -18,6 +18,8 @@
 #include <Geom2dAPI_Interpolate.hxx>
 #include <TColgp_HArray1OfPnt2d.hxx>
 
+const std::string tnbLib::Pln_Curve::extension = ".plncurve";
+
 void tnbLib::Pln_Curve::CheckBoundary(const Standard_Real x, const char* theName) const
 {
 	Debug_Null_Pointer(Geometry());
