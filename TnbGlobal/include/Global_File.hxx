@@ -26,6 +26,7 @@ namespace tnbLib
 		TnbGlobal_EXPORT std::string GetSystemFile(const std::string& theAppName);
 
 		TnbGlobal_EXPORT std::vector<boost::filesystem::path> GetAllFileNames(const boost::filesystem::path&);
+		TnbGlobal_EXPORT std::vector<boost::filesystem::path> GetAllFileNames(const boost::filesystem::path&, const std::string& extension);
 		TnbGlobal_EXPORT boost::filesystem::path GetSingleFile(const boost::filesystem::path&, const std::string& extension);
 
 		TnbGlobal_EXPORT void CheckExtension(const std::string&);

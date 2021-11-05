@@ -70,6 +70,27 @@ tnbLib::file::GetAllFileNames(const boost::filesystem::path& p)
 	return std::move(names);
 }
 
+std::vector<boost::filesystem::path> 
+tnbLib::file::GetAllFileNames
+(
+	const boost::filesystem::path & p,
+	const std::string & extension
+)
+{
+	boost::filesystem::directory_iterator end_itr;
+
+	std::vector<boost::filesystem::path> names;
+	for (boost::filesystem::directory_iterator iter(p); iter != end_itr; iter++)
+	{
+		if (boost::filesystem::is_regular_file(iter->path()) && iter->path().extension() == extension)
+		{
+			auto file = iter->path();
+			names.push_back(std::move(file));
+		}
+	}
+	return std::move(names);
+}
+
 boost::filesystem::path 
 tnbLib::file::GetSingleFile
 (

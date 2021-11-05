@@ -45,6 +45,8 @@ namespace tnbLib
 				ar >> myObj;
 			}
 
+			myFile.close();
+
 			if (verbose)
 			{
 				Info << endl;
