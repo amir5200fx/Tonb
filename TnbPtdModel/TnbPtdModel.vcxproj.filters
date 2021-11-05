@@ -379,6 +379,24 @@
     <Filter Include="TnbLib\PtdModel\Entities\BladeRadialSections">
       <UniqueIdentifier>{3bafa3d6-0566-4f85-8dde-ec625cc7474f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdModel\Vessel">
+      <UniqueIdentifier>{cdfbb667-d866-4b06-b655-b1c6a710b546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Vessel\Displt">
+      <UniqueIdentifier>{e1891d9f-6b50-4ce9-b8bf-dc50ad54c12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Vessel\Displt\Entity">
+      <UniqueIdentifier>{31c89a5c-5498-4cde-9f6b-566d7ad76ec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Vessel\Entity">
+      <UniqueIdentifier>{018de8fa-8142-40ee-8231-bfed16525f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Vessel\Section">
+      <UniqueIdentifier>{68a33248-e1d3-4f7b-af26-d22c960084a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdModel\Vessel\SectionQ">
+      <UniqueIdentifier>{9f64d2bd-b97a-45fd-b4a7-6a7bb875038e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdModel\Entities\Entity\PtdModel_Entity.hxx">
@@ -902,6 +920,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\PtdModel\Entities\BladeRadialSections\PtdModel_BladeRadialSections.hxx">
       <Filter>TnbLib\PtdModel\Entities\BladeRadialSections</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Vessel\Displt\Entity\PtdModel_DispltEntity.hxx">
+      <Filter>TnbLib\PtdModel\Vessel\Displt\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Vessel\Entity\PtdModel_VesselEntity.hxx">
+      <Filter>TnbLib\PtdModel\Vessel\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Vessel\Section\PtdModel_VesselSection.hxx">
+      <Filter>TnbLib\PtdModel\Vessel\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdModel\Vessel\SectionQ\PtdModel_VesselSectionQ.hxx">
+      <Filter>TnbLib\PtdModel\Vessel\SectionQ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
