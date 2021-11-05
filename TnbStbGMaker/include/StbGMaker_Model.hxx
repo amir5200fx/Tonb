@@ -53,6 +53,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbStbGMaker_EXPORT const std::string extension;
+
 		//- default constructor
 
 		StbGMaker_Model()

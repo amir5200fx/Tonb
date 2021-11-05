@@ -1,5 +1,7 @@
 #include <StbGMaker_Model.hxx>
 
+const std::string tnbLib::StbGMaker_Model::extension = ".stbmodel";
+
 tnbLib::StbGMaker_Model::StbGMaker_Model
 (
 	const Standard_Integer theIndex
