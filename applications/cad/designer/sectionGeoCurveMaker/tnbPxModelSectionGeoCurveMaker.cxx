@@ -17,6 +17,7 @@
 #include <SectPx_Tools.hxx>
 #include <SectPx_CurveQ.hxx>
 #include <SectPx_Pole.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -39,11 +40,15 @@
 
 namespace tnbLib
 {
+	static const std::string loadExt = SectPx_FrameTuner::extension;
+	static const std::string saveExt = Pln_Curve::extension;
 
 	static appl::tuner_t myTuner;
 
 	static unsigned short verbose = 0;
-	static bool loaded = false;
+	static bool loadTag = false;
+	static std::string myFileName;
+
 	static int degree = 3;
 
 	static std::shared_ptr<SectPx_Registry> myRegistry;
@@ -54,12 +59,19 @@ namespace tnbLib
 
 	void checkFrame()
 	{
-		if (NOT loaded)
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no frame has been loaded" << endl
 				<< abort(FatalError);
 		}
+	}
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
 	}
 
 	const auto& getFrameRegistry()
@@ -76,8 +88,9 @@ namespace tnbLib
 
 	void loadTuner(const std::string& name)
 	{
+		file::CheckExtension(name);
 
-		fileName fn(name);
+		fileName fn(name + loadExt);
 		std::ifstream f(fn);
 
 		boost::archive::polymorphic_text_iarchive ia(f);
@@ -119,7 +132,71 @@ namespace tnbLib
 		}
 
 		myCurveMaker = std::make_shared<maker::CurveQ>(myTuner->FrameRegistry());
-		loaded = true;
+		loadTag = true;
+	}
+
+	void loadTuner()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadTuner(myFileName);
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " nb. of curves are going to be saved: " << myCurveMap.size() << endl;
+			Info << endl;
+		}
+		size_t i = 0;
+		for (const auto& x : myCurveMap)
+		{
+			const auto& c = x.second;
+
+
+			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			boost::filesystem::path dir(std::to_string(i));
+			boost::filesystem::create_directory(dir);
+
+			std::ofstream file(address);
+
+			TNB_oARCH_FILE_TYPE oa(file);
+
+			oa << c;
+
+			if (verbose)
+			{
+				Info << " curve, " << x.first << " saved in: " << address << ", successfully!" << endl;
+			}
+			i++;
+		}
+		if (verbose)
+		{
+			Info << endl;
+			Info << " all curves have been saved, successfully!" << endl;
+			Info << endl;
+		}
+	}
+
+	void saveTo()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	void printPoles()
@@ -156,44 +233,6 @@ namespace tnbLib
 				<< c->Pole0()->Index()
 				<< ", to pole: " << c->Pole1()->Index()
 				<< endl;
-		}
-	}
-
-	void saveCurvesTo(const std::string& name)
-	{
-		if (verbose)
-		{
-			Info << endl;
-			Info << " nb. of curves are going to be saved: " << myCurveMap.size() << endl;
-			Info << endl;
-		}
-		size_t i = 0;
-		for (const auto& x : myCurveMap)
-		{
-			const auto& c = x.second;
-
-			
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
-			boost::filesystem::path dir(std::to_string(i));
-			boost::filesystem::create_directory(dir);
-
-			std::ofstream file(address);
-
-			TNB_oARCH_FILE_TYPE oa(file);
-
-			oa << c;
-
-			if (verbose)
-			{
-				Info << " curve, " << x.first << " saved in: " << address << ", successfully!" << endl;
-			}
-			i++;
-		}
-		if (verbose)
-		{
-			Info << endl;
-			Info << " all curves have been saved, successfully!" << endl;
-			Info << endl;
 		}
 	}
 
@@ -332,11 +371,13 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
+		mod->add(chaiscript::fun([]()->void {loadTuner(); }), "loadTuner");
+		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
+
 		mod->add(chaiscript::fun([]()->void {printCurves(); }), "printCurves");
 		mod->add(chaiscript::fun([]()->void {printPoles(); }), "printPoles");
-		mod->add(chaiscript::fun([](unsigned short c)->void {verbose = c; }), "setVerbose");
-
-		mod->add(chaiscript::fun([](const std::string& name)->void {saveCurvesTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](unsigned short c)->void {setVerbose(c); }), "setVerbose");
 	}
 
 	void setCurves(const module_t& mod)
@@ -380,8 +421,8 @@ int main(int argc, char *argv[])
 			Info << "This application is aimed to create geometric curves." << endl;
 			Info << endl
 				<< " - the function are: " << endl << endl
-				<< " - loadTuner(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadTuner(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - printCurves()" << endl
 				<< " - printPoles()" << endl
@@ -407,11 +448,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelSectionGeoCurveMaker";
-			fileName myFileName(address);
-
 			try
 			{
+				std::string address = ".\\system\\tnbPxModelSectionGeoCurveMaker";
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

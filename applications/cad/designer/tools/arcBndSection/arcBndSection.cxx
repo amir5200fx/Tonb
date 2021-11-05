@@ -8,6 +8,7 @@
 #include <NumAlg_FalsePos_Info.hxx>
 #include <NumAlg_Secant_Info.hxx>
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -19,6 +20,9 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = ShapePx_TopoCtrlNet::extension;
+	static const std::string saveExt = ShapePx_TopoCtrlNet::extension;
+
 	typedef std::shared_ptr<ShapePx_TopoCtrlNet> net_t;
 
 	static net_t myNet;
@@ -26,6 +30,8 @@ namespace tnbLib
 
 	static bool loadTag = false;
 	static bool exeTag = false;
+	static std::string myFileName;
+
 	static unsigned short verbose(0);
 
 	static auto myAlg = std::make_shared<ShapePx_ArcSection>();
@@ -49,22 +55,9 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
+		file::CheckExtension(name);
 
-			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> myNet;
-		}
-
+		myNet = file::LoadFile<std::shared_ptr<ShapePx_TopoCtrlNet>>(name + loadExt, verbose);
 		if (NOT myNet)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -72,14 +65,14 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
-			Info << endl;
-		}
-
 		loadTag = true;
+	}
+
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
 	}
 
 	void saveTo(const std::string& name)
@@ -91,7 +84,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
+		fileName fn(name + saveExt);
 		std::ofstream myFile(fn);
 
 		TNB_oARCH_FILE_TYPE ar(myFile);
@@ -105,6 +98,18 @@ namespace tnbLib
 			Info << " the file is saved in: " << fn << ", successfully!" << endl;
 			Info << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	void exportToPlt(const std::shared_ptr<ShapePx_CtrlNet>& net, OFstream& f)
@@ -323,7 +328,9 @@ namespace tnbLib
 	{
 		//- io functions
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)->void {exportToPlt(name); }), "exportToPlt");
 
 		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_Secant_Info>& info)-> void {printInfo(info); }), "printInfo");
@@ -396,8 +403,8 @@ int main(int argc, char *argv[])
 			tnbLib::Info << " This application is aimed to modify boundary sections of a control net." << endl;
 			tnbLib::Info << endl
 				<< " Function list:" << endl
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadModel(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - printInfo(info)" << endl
 				<< " - printIterInfo()" << endl

@@ -12,6 +12,7 @@
 #include <SectPx_CurveQ.hxx>
 #include <SectPx_Makers.hxx>
 #include <SectPx_Spacing.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -30,6 +31,9 @@
 
 namespace tnbLib
 {
+
+	static const std::string loadExt = ShapePx_Patch::extension;
+	static const std::string saveExt = ShapePx_TopoCtrlNet::extension;
 
 	typedef std::shared_ptr<ShapePx_ExtrudedPatch> patch_t;
 	typedef std::shared_ptr<SectPx_Spacing> spacing_t;
@@ -54,6 +58,8 @@ namespace tnbLib
 	static std::shared_ptr<maker::Spacing> mySpacingMaker;
 
 	static bool loadTag = false;
+	static bool exeTag = false;
+	static std::string myFileName;
 
 	static std::map<int, int> degreeMap;
 
@@ -67,30 +73,30 @@ namespace tnbLib
 		}
 	}
 
-	void loadSpacing(const std::string& name)
+	void setVerbose(unsigned int i)
 	{
-		fileName fn(name);
-		std::ifstream f(fn);
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
-		if (f.fail())
+	void loadPatch(const std::string& name)
+	{
+		file::CheckExtension(name);
+
+		auto patch = file::LoadFile<std::shared_ptr<ShapePx_Patch>>(name + loadExt, verbose);
+		if (NOT patch)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "couldn't open the file: " << fn << endl
+				<< "the patch file is null!" << endl
 				<< abort(FatalError);
 		}
 
-		boost::archive::polymorphic_text_iarchive ia(f);
-
-		std::shared_ptr<ShapePx_Patch> patch;
-		ia >> patch;
-		//ia >> mySpacings;
-
 		myPatch = std::dynamic_pointer_cast<ShapePx_ExtrudedPatch>(patch);
-
 		if (NOT myPatch)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "the patch is null" << endl
+				<< "the patch is not extruded" << endl
 				<< abort(FatalError);
 		}
 
@@ -100,20 +106,6 @@ namespace tnbLib
 				<< " no section has been found in the patch!" << endl
 				<< abort(FatalError);
 		}
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the patch has been loaded from: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
-
-		/*if (verbose)
-		{
-			Info << endl;
-			Info << " the spacing list has been loaded from: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}*/
 
 		myCurves = myPatch->Section()->RetrieveCurveQs();
 		if (myCurves.empty())
@@ -133,6 +125,64 @@ namespace tnbLib
 		myCurveMaker = std::make_shared<maker::CurveQ>(myPatch->Section()->Registry());
 
 		loadTag = true;
+	}
+
+	void loadPatch()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadPatch(myFileName);
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		file::CheckExtension(name);
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " " << myNets.size() << " nb. of curves is going to be saved." << endl;
+			Info << endl;
+		}
+
+		size_t i = 0;
+		for (const auto& x : myNets)
+		{
+			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			boost::filesystem::path dir(std::to_string(i));
+			boost::filesystem::create_directory(dir);
+
+			std::ofstream file(address + saveExt);
+
+			boost::archive::polymorphic_text_oarchive oa(file);
+
+			oa << x;
+
+			if (verbose)
+			{
+				Info << " net, " << i << " is saved in: " << address << ", successfully!" << endl;
+			}
+			i++;
+		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	auto selectCurve(int i)
@@ -183,37 +233,8 @@ namespace tnbLib
 			Info << " the control nets are created, successfully!" << endl;
 			Info << endl;
 		}
-	}
 
-	void saveTo(const std::string& name)
-	{
-		checkLoad();
-		if (verbose)
-		{
-			Info << endl;
-			Info << " " << myNets.size() << " nb. of curves is going to be saved." << endl;
-			Info << endl;
-		}
-
-		size_t i = 0;
-		for (const auto& x : myNets)
-		{
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
-			boost::filesystem::path dir(std::to_string(i));
-			boost::filesystem::create_directory(dir);
-
-			std::ofstream file(address);
-
-			boost::archive::polymorphic_text_oarchive oa(file);
-
-			oa << x;
-
-			if (verbose)
-			{
-				Info << " net, " << i << " is saved in: " << address << ", successfully!" << endl;
-			}
-			i++;
-		}
+		exeTag = true;
 	}
 
 	void printObj(const std::shared_ptr<SectPx_RegObj>& item)
@@ -422,12 +443,14 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadSpacing(name); }), "loadPatch");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadPatch(name); }), "loadPatch");
+		mod->add(chaiscript::fun([]()->void {loadPatch(); }), "loadPatch");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {printCurves(); }), "printCurves");
 		mod->add(chaiscript::fun([]()->void {printSpacings(); }), "printSpacings");
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 
 		mod->add(chaiscript::fun([](int i)-> auto{return selectCurve(i); }), "selectCurve");
 		mod->add(chaiscript::fun([](int i)-> auto{return selectSpacing(i); }), "selectSpacing");
@@ -475,8 +498,8 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadPatch(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadPatch(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Global functions: " << endl << endl
 
@@ -508,11 +531,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelExtrudeOp";
-			fileName myFileName(address);
-
 			try
 			{
+				std::string address = ".\\system\\tnbPxModelExtrudeOp";
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

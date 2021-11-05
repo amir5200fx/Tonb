@@ -18,6 +18,7 @@
 #include <SectPx_Pole.hxx>
 #include <SectPx_RegObjType.hxx>
 #include <SectPx_CurveQ.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -39,11 +40,16 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = SectPx_FrameTuner::extension;
+	static const std::string saveExt = SectPx_FrameTuner::extension;
+
 	static std::shared_ptr<SectPx_Registry> myRegistry;
 	static appl::tuner_t myTuner;
 
 	static unsigned short verbose = 0;
-	static bool loaded = false;
+	static bool loadTag = false;
+	static std::string myFileName;
+
 	static int degree = 3;
 
 	static std::shared_ptr<maker::CurveQ> myCurveMaker;
@@ -52,12 +58,19 @@ namespace tnbLib
 
 	void checkFrame()
 	{
-		if (NOT loaded)
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no frame has been loaded" << endl
 				<< abort(FatalError);
 		}
+	}
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
 	}
 
 	const auto& getFrameRegistry()
@@ -139,8 +152,9 @@ namespace tnbLib
 
 	void loadTuner(const std::string& name)
 	{
+		file::CheckExtension(name);
 
-		fileName fn(name);
+		fileName fn(name + loadExt);
 		std::ifstream f(fn);
 
 		boost::archive::polymorphic_text_iarchive ia(f);
@@ -182,7 +196,7 @@ namespace tnbLib
 		}
 
 		myCurveMaker = std::make_shared<maker::CurveQ>(myTuner->FrameRegistry());
-		loaded = true;
+		loadTag = true;
 
 		if (verbose)
 		{
@@ -192,9 +206,25 @@ namespace tnbLib
 		}
 	}
 
+	void loadTuner()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadTuner(myFileName);
+	}
+
 	void saveTo(const std::string& name)
 	{
-		fileName fn(name);
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
 		std::ofstream f(fn);
 
 		boost::archive::polymorphic_text_oarchive oa(f);
@@ -208,6 +238,18 @@ namespace tnbLib
 			Info << " the tuner has been saved, successfully!" << endl;
 			Info << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	//- curve maker
@@ -249,13 +291,15 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
+		mod->add(chaiscript::fun([]()->void {loadTuner(); }), "loadTuner");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
 		mod->add(chaiscript::fun([]()->void {printPoles(); }), "printPoles");
 		mod->add(chaiscript::fun([]()->void {printCurves(); }), "printCurves");
 		mod->add(chaiscript::fun([]()->void {printReg(); }), "printRegistry");
 
-		mod->add(chaiscript::fun([](unsigned short v)->void {verbose = v; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short v)->void {setVerbose(v); }), "setVerbose");
 	}
 
 	void setCurvesMakers(const module_t& mod)
@@ -304,8 +348,8 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadTuner(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadTuner(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Global functions: " << endl << endl
 
@@ -335,14 +379,15 @@ int main(int argc, char *argv[])
 			setGlobals(mod);
 			setCurvesMakers(mod);
 
-			chai.add(mod);
-
-			std::string address = ".\\system\\tnbPxModelSectionCurveMaker";
-			fileName myFileName(address);
+			chai.add(mod);	
 
 			try
 			{
+				std::string address = ".\\system\\tnbPxModelSectionCurveMaker";
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -364,5 +409,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

@@ -66,6 +66,8 @@ namespace tnbLib
 		);
 
 
+		//- default constructor
+
 		SectPx_FrameTuner()
 			: IsLoaded_(Standard_False)
 		{}
@@ -75,6 +77,10 @@ namespace tnbLib
 		typedef Standard_Integer segmentId;
 		typedef Standard_Integer sliderId;
 		typedef Standard_Integer tightnessId;
+
+		static TnbSectPx_EXPORT const std::string extension;
+
+		//- constructors
 
 		SectPx_FrameTuner
 		(
@@ -86,6 +92,8 @@ namespace tnbLib
 			, IsLoaded_(Standard_False)
 		{}
 
+
+		//- public functions and operators
 
 		const auto& ParRegistry() const
 		{

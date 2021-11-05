@@ -24,6 +24,7 @@
 #include <ShapePx_Section.hxx>
 #include <ShapePx_ContinProfile_OffsetCustom.hxx>
 #include <ShapePx_ContinProfile_GeneratedCustom.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -43,6 +44,8 @@
 
 namespace tnbLib
 {
+	static const std::string loadExt = ShapePx_Patch::extension;
+	static const std::string saveExt = ShapePx_Patch::extension;
 
 	typedef std::shared_ptr<SectPx_CurveQ> curveQ_t;
 	typedef std::shared_ptr<ShapePx_Profile> extrProfile_t;
@@ -68,7 +71,9 @@ namespace tnbLib
 	static std::map<int, appl::par_t> sectionPars;
 
 	static unsigned short verbose = 0;
-	static bool loaded = false;
+	static bool loadTag = false;
+	static bool exeTag = false;
+	static std::string myFileName;
 
 
 	typedef std::tuple<appl::par_t, appl::par_t, appl::par_t, appl::par_t>
@@ -76,9 +81,16 @@ namespace tnbLib
 
 	//- globals
 
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void checkFrame()
 	{
-		if (NOT loaded)
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no frame has been loaded" << endl
@@ -253,26 +265,13 @@ namespace tnbLib
 
 	void loadPatch(const std::string& name)
 	{
-		fileName fn(name);
-		std::ifstream f(fn);
+		file::CheckExtension(name);
 
-		boost::archive::polymorphic_text_iarchive ia(f);
-
-		std::shared_ptr<ShapePx_Patch> patch;
-		ia >> patch;
-		//ia >> sectionPars;
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the patch is loaded form: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
-
+		auto patch = file::LoadFile<std::shared_ptr<ShapePx_Patch>>(name + loadExt, verbose);
 		if (NOT patch)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the patch is null" << endl
+				<< "the patch file is null!" << endl
 				<< abort(FatalError);
 		}
 
@@ -328,7 +327,53 @@ namespace tnbLib
 			Info << endl;
 		}
 
-		loaded = true;
+		loadTag = true;
+	}
+
+	void loadPatch()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadPatch(myFileName);
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
+		std::ofstream f(fn);
+
+		boost::archive::polymorphic_text_oarchive oa(f);
+
+		std::shared_ptr<ShapePx_Patch> patch = myPatch;
+		oa << patch;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the patch is saved at: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
+	}
+
+	void saveTo()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	/*profileBnd createProfileBound
@@ -411,24 +456,6 @@ namespace tnbLib
 		}
 
 		myPatch->ImportProfileForParameter(par->Index(), prf);
-	}
-
-	void saveTo(const std::string& name)
-	{
-		fileName fn(name);
-		std::ofstream f(fn);
-
-		boost::archive::polymorphic_text_oarchive oa(f);
-
-		std::shared_ptr<ShapePx_Patch> patch = myPatch;
-		oa << patch;
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the patch is saved at: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
 	}
 
 	void printObj(const std::shared_ptr<SectPx_RegObj>& item)
@@ -647,14 +674,16 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadPatch(name); }), "loadPatch");
+		mod->add(chaiscript::fun([]()-> void {loadPatch(); }), "loadPatch");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([](int i)-> auto {auto t = selectParameter(i); return std::move(t); }), "selectParameter");
 		mod->add(chaiscript::fun([](int i)-> auto {auto t = selectCurve(i); return std::move(t); }), "selectCurve");
 		mod->add(chaiscript::fun([]()->void {printSectionParameters(); }), "printSectionPars");
 		mod->add(chaiscript::fun([]()->void {printFixedSectionParameters(); }), "printFixedSectionPars");
 		mod->add(chaiscript::fun([]()->void {printReg(); }), "printRegistry");
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 	}
 
 	void setProfiles(const module_t& mod)
@@ -746,8 +775,8 @@ int main(int argc, char *argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - loadPatch(name)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadPatch(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # parameters: " << endl << endl
 				<< " - [Par] createFixed(value, minValue, maxValue)" << endl
@@ -818,11 +847,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelExtrudeProfile";
-			fileName myFileName(address);
-
 			try
 			{
+				std::string address = ".\\system\\tnbPxModelExtrudeProfile";
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

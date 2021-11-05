@@ -17,6 +17,7 @@
 #include <SectPx_Tools.hxx>
 #include <SectPx_RegObjType.hxx>
 #include <SectPx_Poles.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -33,21 +34,31 @@
 
 namespace tnbLib
 {
+	static const std::string loadExt = SectPx_Frame::extension;
+	static const std::string saveExt = SectPx_FrameTuner::extension;
 
 	static std::shared_ptr<SectPx_Registry> myRegistry;
 	static appl::frame_t myFrame;
 	static appl::tuner_t myTuner;
 
 	static size_t verbose = 0;
-	static bool loaded = false;
+	static bool loadTag = false;
+	static std::string myFileName;
 
 	static appl::dtmMaker_t myDtmMaker;
 
 	//- globals
 
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void checkFrame()
 	{
-		if (NOT loaded)
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no frame has been loaded" << endl
@@ -63,7 +74,16 @@ namespace tnbLib
 
 	void loadFrame(const std::string& name)
 	{
-		fileName fn(name);
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		file::CheckExtension(name);
+
+		fileName fn(name + loadExt);
 		std::ifstream f(fn);
 
 		boost::archive::polymorphic_text_iarchive oa(f);
@@ -115,7 +135,7 @@ namespace tnbLib
 		appl::importFrame(myTuner, myFrame);
 
 		myDtmMaker = std::make_shared<maker::Datum>(myTuner->FrameRegistry());
-		loaded = true;
+		loadTag = true;
 
 		if (verbose)
 		{
@@ -125,7 +145,14 @@ namespace tnbLib
 		}
 	}
 
-	void loadTuner(const std::string& name)
+	void loadFrame()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadFrame(myFileName);
+	}
+
+	/*void loadTuner(const std::string& name)
 	{
 
 		fileName fn(name);
@@ -158,6 +185,35 @@ namespace tnbLib
 				<< "no frame has been loaded into the tuner!" << endl
 				<< abort(FatalError);
 		}
+	}*/
+
+	void saveTo(const std::string& name)
+	{
+		checkFrame();
+
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
+		std::ofstream f(fn);
+
+		boost::archive::polymorphic_text_oarchive oa(f);
+
+		oa << myRegistry;
+		oa << myTuner;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the tuner is saved to: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
+	}
+
+	void saveTo()
+	{
+		checkFrame();
+
+		saveTo(myFileName);
 	}
 
 	void printObj(const std::shared_ptr<SectPx_RegObj>& item)
@@ -313,25 +369,6 @@ namespace tnbLib
 					<< pole->Coord() << ", point name: "
 					<< pole->Pnt()->Name() << endl;
 			}
-		}
-	}
-
-	void saveTo(const std::string& name)
-	{
-		checkFrame();
-		fileName fn(name);
-		std::ofstream f(fn);
-
-		boost::archive::polymorphic_text_oarchive oa(f);
-
-		oa << myRegistry;
-		oa << myTuner;
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the tuner is saved to: " << fn << ", successfully!" << endl;
-			Info << endl;
 		}
 	}
 
@@ -556,10 +593,12 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()-> void {printPoles(); }), "printPoles");
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPlt(name); }), "drawPntsPlt");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {drawPolesPlt(name); }), "drawPolesPlt");
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadFrame(name); }), "loadFrame");
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
+		mod->add(chaiscript::fun([]()->void {loadFrame(); }), "loadFrame");
+		//mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
 
 		mod->add(chaiscript::fun([](int i)-> auto {auto t = selectDatum(i); return std::move(t); }), "selectDatum");
 
@@ -567,7 +606,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const appl::pnt_t& p)-> auto{auto t = appl::getCoord(p); return std::move(t); }), "getCoord");
 		mod->add(chaiscript::fun([](const appl::coord_t& p)-> auto{auto t = appl::getCoord(p); return std::move(t); }), "getCoord");
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 	}
 
 	void setParMakers(const module_t& mod)
@@ -655,8 +694,8 @@ int main(int argc, char *argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - loadFrame(string)" << endl
-				<< " - saveTo(string)" << endl
+				<< " - loadFrame(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl
 				<< " - drawPntsPlt(string)" << endl
 				<< " - drawPolesPlt(string)" << endl << endl
 
@@ -718,13 +757,12 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-
-			std::string address = ".\\system\\tnbPxModelSectionTuner";
-			fileName myFileName(address);
-
 			try
 			{
-				chai.eval_file(myFileName);
+				std::string address = ".\\system\\tnbPxModelSectionTuner";
+				fileName theFileName(address);
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
@@ -747,5 +785,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-	return 0;
+	return 1;
 }

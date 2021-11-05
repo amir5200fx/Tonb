@@ -2,6 +2,7 @@
 #include <ShapePx_TopoCtrlNet.hxx>
 #include <ShapePx_Tools.hxx>
 #include <OpenCascade_Serialization.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -11,6 +12,9 @@
 
 namespace tnbLib
 {
+
+	static const std::string loadExt = ShapePx_TopoCtrlNet::extension + "list";
+	static const std::string saveExt = Cad_GeomSurface::extension;
 
 	typedef std::shared_ptr<ShapePx_TopoCtrlNet> net_t;
 
@@ -22,32 +26,37 @@ namespace tnbLib
 
 	static bool loadTag = false;
 	static bool exeTag = false;
+	static std::string myFileName;
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
 	void loadNet(const std::string& name)
 	{
-		fileName fn(name);
-		std::ifstream f(fn);
+		file::CheckExtension(name);
 
-		if (f.fail())
+		myNets = file::LoadFile<std::vector<net_t>>(name + loadExt, verbose);
+		if (myNets.empty())
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "couldn't open the file: " << fn << endl
+				<< "no control net has been found!" << endl
 				<< abort(FatalError);
 		}
 
-		TNB_iARCH_FILE_TYPE ia(f);
-		ia >> myNets;
-
 		mySurfDegs.resize(myNets.size(), 3);
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the control-net list has been loaded from: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
-
 		loadTag = true;
+	}
+
+	void loadNet()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadNet(myFileName);
 	}
 
 	void saveTo(const std::string& name)
@@ -59,6 +68,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		file::CheckExtension(name);
+
 		size_t i = 0;
 		for (const auto& x : mySurf)
 		{
@@ -66,7 +77,7 @@ namespace tnbLib
 			boost::filesystem::path dir(std::to_string(i));
 			boost::filesystem::create_directory(dir);
 
-			std::ofstream file(address);
+			std::ofstream file(address + saveExt);
 
 			TNB_oARCH_FILE_TYPE oa(file);
 
@@ -78,6 +89,18 @@ namespace tnbLib
 			}
 			i++;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	const auto& selectNet(int i)
@@ -166,7 +189,9 @@ namespace tnbLib
 		//- io functions
 
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadNet(name); }), "loadNets");
+		mod->add(chaiscript::fun([]()->void {loadNet(); }), "loadNets");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
 		//- methods
 		mod->add(chaiscript::fun([](size_t i, unsigned int deg)-> void {setDeg(i, deg); }), "setDegree");
@@ -176,7 +201,7 @@ namespace tnbLib
 		//mod->add(chaiscript::fun([](const net_t& n, int d)->void {makeSurf(n, d); }), "createSurface");
 
 		//- settings
-		mod->add(chaiscript::fun([](unsigned short i)-> void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -212,8 +237,8 @@ int main(int argc, char *argv[])
 			Info << "This application is aimed to create geometric surfaces from control-net vector." << endl;
 			Info << endl
 				<< " - the function list is: " << endl
-				<< " - loadNets(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadNets(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - setDegree(net index, deg);   the default value for a surface is 3." << endl
 				<< " - execute()" << endl
@@ -232,12 +257,12 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelShapeGeoSurfMaker";
-			fileName myFileName(address);
-
 			try
 			{
-				chai.eval_file(myFileName);
+				std::string address = ".\\system\\tnbPxModelShapeGeoSurfMaker";
+				fileName theFileName(address);
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)

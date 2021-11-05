@@ -28,8 +28,13 @@ namespace tnbLib
 
 	protected:
 
+		//- default constructor
+
 		ShapePx_Patch()
 		{}
+
+
+		//- constructors
 
 		TnbShapePx_EXPORT ShapePx_Patch
 		(
@@ -57,6 +62,10 @@ namespace tnbLib
 		);
 
 	public:
+
+		static TnbShapePx_EXPORT const std::string extension;
+
+		//- public functions and operators
 
 		const auto& Section() const
 		{

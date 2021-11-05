@@ -51,10 +51,20 @@ namespace tnbLib
 
 	public:
 
+		static TnbSectPx_EXPORT const std::string extension;
+
+		//- default constructor
+
 		SectPx_Registry()
 		{
 			AllocateMemory();
 		}
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		auto NbFrames() const
 		{

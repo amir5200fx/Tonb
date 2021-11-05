@@ -14,6 +14,7 @@
 #include <SectPx_Makers.hxx>
 #include <SectPx_TopoProfile.hxx>
 #include <SectPx_PntTools.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <OFstream.hxx>
@@ -29,6 +30,8 @@
 
 namespace tnbLib
 {
+
+	static const std::string saveExt = SectPx_Frame::extension;
 
 	static const auto myRegistry = std::make_shared<SectPx_Registry>();
 	//static const auto countReg = std::make_shared<SectPx_CountRegistry>();
@@ -529,7 +532,9 @@ namespace tnbLib
 
 	void saveTo(const std::string& name)
 	{
-		fileName fn(name);
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
 		std::ofstream f(fn);
 
 		boost::archive::polymorphic_text_oarchive oa(f);
@@ -844,11 +849,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelSectionMaker";
-			fileName myFileName(address);
-
 			try
 			{
+				std::string address = ".\\system\\tnbPxModelSectionMaker";
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

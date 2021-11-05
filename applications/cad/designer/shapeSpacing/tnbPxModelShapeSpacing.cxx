@@ -10,6 +10,7 @@
 #include <SectPx_ShapeRegistry.hxx>
 #include <SectPx_UniformSpacing.hxx>
 #include <SectPx_Pars.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -28,6 +29,9 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = ShapePx_Patch::extension;
+	static const std::string saveExt = ShapePx_Patch::extension;
+
 	typedef std::shared_ptr<ShapePx_Spacing> spacing_t;
 	typedef std::shared_ptr<SectPx_Limits> limits_t;
 	typedef std::shared_ptr<maker::Limits> limitMaker_t;
@@ -41,10 +45,12 @@ namespace tnbLib
 
 	static unsigned short verbose = 0;
 
+	static bool loadTag = false;
+	static bool exeTag = false;
+	static std::string myFileName;
+
 	static limitMaker_t myLimitMaker;
 	static spacingMaker_t mySpacingMaker;
-
-	static bool loadTag = false;
 
 	void checkLoad()
 	{
@@ -54,6 +60,13 @@ namespace tnbLib
 				<< " no patch is loaded, yet!" << endl
 				<< abort(FatalError);
 		}
+	}
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
 	}
 
 	auto makeLimits(const appl::par_t& x0, const appl::par_t& x1)
@@ -71,6 +84,8 @@ namespace tnbLib
 
 	void loadPatch(const std::string& name)
 	{
+		file::CheckExtension(name);
+
 		if (verbose)
 		{
 			Info << endl;
@@ -78,7 +93,7 @@ namespace tnbLib
 			Info << endl;
 		}
 
-		fileName fn(name);
+		fileName fn(name + loadExt);
 		std::ifstream f(fn);
 
 		if (f.fail())
@@ -124,15 +139,24 @@ namespace tnbLib
 		loadTag = true;
 	}
 
-	auto selectParameter(int i)
+	void loadPatch()
 	{
-		checkLoad();
-		auto item = myParMaker->SelectParameter(i);
-		return std::move(item);
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadPatch(myFileName);
 	}
 
 	void saveTo(const std::string& name)
 	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		file::CheckExtension(name);
+
 		if (verbose)
 		{
 			Info << endl;
@@ -156,6 +180,25 @@ namespace tnbLib
 			Info << " - filename: " << fn << endl;
 			Info << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
+	}
+
+	auto selectParameter(int i)
+	{
+		checkLoad();
+		auto item = myParMaker->SelectParameter(i);
+		return std::move(item);
 	}
 
 	void printObj(const std::shared_ptr<SectPx_RegObj>& item)
@@ -392,14 +435,16 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadPatch(name); }), "loadPatch");
+		mod->add(chaiscript::fun([]()->void {loadPatch(); }), "loadPatch");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {printReg(); }), "printRegistry");
 		mod->add(chaiscript::fun([]()->void {printSectionParameters(); }), "printSectionPars");
 		mod->add(chaiscript::fun([]()->void {printFixedSectionParameters(); }), "printFixedSectionPars");
 		mod->add(chaiscript::fun([]()->void {printGlobalParameters(); }), "printGlobalPars");
 		mod->add(chaiscript::fun([]()->void {printFixedGlobalParameters(); }), "printFixedGlobalPars");
 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {verbose = i; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
 
 		mod->add(chaiscript::fun([](int i)-> auto{auto t = selectParameter(i); return std::move(t); }), "selectParameter");
 
@@ -441,8 +486,8 @@ int main(int argc, char *argv[])
 			Info << "This application is aimed to create a shape section." << endl;
 			Info << endl
 				<< " - the function are: " << endl << endl
-				<< " - loadPatch(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadPatch(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - printRegistry()" << endl
 				<< " - printSectionPars()" << endl
@@ -469,12 +514,14 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelShapeSpacing";
-			fileName myFileName(address);
+			
 
 			try
 			{
-				chai.eval_file(myFileName);
+				std::string address = ".\\system\\tnbPxModelShapeSpacing";
+				fileName theFileName(address);
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)

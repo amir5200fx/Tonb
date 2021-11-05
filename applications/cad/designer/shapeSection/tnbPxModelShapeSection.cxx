@@ -4,6 +4,7 @@
 #include <SectPx_Registry.hxx>
 #include <SectPx_FrameTuner.hxx>
 #include <SectPx_Par.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -23,6 +24,9 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = SectPx_FrameTuner::extension;
+	static const std::string saveExt = ShapePx_Section::extension;
+
 	typedef std::shared_ptr<SectPx_Registry> registry_t;
 	typedef std::shared_ptr<ShapePx_Section> section_t;
 	typedef std::shared_ptr<SectPx_FrameTuner> tuner_t;
@@ -35,9 +39,22 @@ namespace tnbLib
 
 	static unsigned short verbose = 0;
 
+	static bool loadTag = false;
+	static bool exeTag = false;
+	static std::string myFileName;
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void loadTuner(const std::string& name)
 	{
-		fileName fn(name);
+		file::CheckExtension(name);
+
+		fileName fn(name + loadExt);
 		std::ifstream f(fn);
 
 		if (f.fail())
@@ -79,6 +96,54 @@ namespace tnbLib
 			Info << " the tuner has been loaded from: " << fn << ", successfully!" << endl;
 			Info << endl;
 		}
+
+		loadTag = true;
+	}
+
+	void loadTuner()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadTuner(myFileName);
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " no section has been created!" << endl
+				<< abort(FatalError);
+		}
+
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
+		std::ofstream f(fn);
+
+		boost::archive::polymorphic_text_oarchive oa(f);
+		oa << myRegistry;
+		oa << mySection;
+		//oa << sectionPars;
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the section is saved to: " << fn << ", successfully!" << endl;
+			Info << endl;
+		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	void makeSection(const std::string& name)
@@ -111,30 +176,8 @@ namespace tnbLib
 			Info << " the section of the shape has been created, successfully!" << endl;
 			Info << endl;
 		}
-	}
 
-	void saveTo(const std::string& name)
-	{
-		if (NOT mySection)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " no section has been created!" << endl
-				<< abort(FatalError);
-		}
-		fileName fn(name);
-		std::ofstream f(fn);
-
-		boost::archive::polymorphic_text_oarchive oa(f);
-		oa << myRegistry;
-		oa << mySection;
-		//oa << sectionPars;
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the section is saved to: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
+		exeTag = true;
 	}
 
 }
@@ -153,7 +196,9 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadTuner(name); }), "loadTuner");
+		mod->add(chaiscript::fun([]()->void {loadTuner(); }), "loadTuner");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {makeSection(name); }), "execute");
 		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
@@ -192,8 +237,8 @@ int main(int argc, char *argv[])
 			Info << "This application is aimed to create a shape section." << endl;
 			Info << endl
 				<< " - the function are: " << endl << endl
-				<< " - loadTuner(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadTuner(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - execute(name)" << endl
 				<< endl
@@ -211,12 +256,12 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelShapeSection";
-			fileName myFileName(address);
-
 			try
 			{
-				chai.eval_file(myFileName);
+				std::string address = ".\\system\\tnbPxModelShapeSection";
+				fileName theFileName(address);
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
