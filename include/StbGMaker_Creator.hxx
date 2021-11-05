@@ -105,15 +105,13 @@ namespace tnbLib
 		TnbStbGMaker_EXPORT Standard_Integer
 			CreatePlaneGeomSailMaker
 			(
-				const std::shared_ptr<Cad2d_Plane>& thePlane,
-				const Standard_Real theZbar
+				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
 		TnbStbGMaker_EXPORT Standard_Integer
 			CreatePlaneGeomSailMaker
 			(
-				std::shared_ptr<Cad2d_Plane>&& thePlane,
-				const Standard_Real theZbar
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
 		TnbStbGMaker_EXPORT std::shared_ptr<StbGMaker_TankCreator>

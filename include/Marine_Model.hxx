@@ -24,6 +24,9 @@ namespace tnbLib
 
 	protected:
 
+
+		//- constructors
+
 		template<class... _Types>
 		Marine_Model(_Types&&... _Args)
 			: Marine_CoordinatedEntity(_Args...)
@@ -31,6 +34,9 @@ namespace tnbLib
 
 	public:
 
+		static TnbMarine_EXPORT const std::string extension;
+
+		//- public functions and operators
 
 		virtual Marine_ModelType Type() const = 0;
 

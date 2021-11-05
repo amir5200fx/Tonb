@@ -5,10 +5,11 @@
 #include <Marine_Model_PlnSail.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 
-#include <TopoDS_Face.hxx>
-
 namespace tnbLib
 {
+
+	// Forward Declarations
+	class Cad_Shape;
 
 	namespace marineLib
 	{
@@ -19,7 +20,7 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			TopoDS_Face theFace_;
+			std::shared_ptr<Cad_Shape> theShape_;
 
 
 			TNB_SERIALIZATION(TnbMarine_EXPORT);
@@ -38,38 +39,38 @@ namespace tnbLib
 
 			TnbMarine_EXPORT Model_SurfaceSail
 			(
-				const TopoDS_Face& theFace
+				const std::shared_ptr<Cad_Shape>& theShape
 			);
 
 			TnbMarine_EXPORT Model_SurfaceSail
 			(
-				TopoDS_Face&& theFace
-			);
-
-			TnbMarine_EXPORT Model_SurfaceSail
-			(
-				const Standard_Integer theIndex,
-				const TopoDS_Face& theFace
+				std::shared_ptr<Cad_Shape>&& theShape
 			);
 
 			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const Standard_Integer theIndex,
-				TopoDS_Face&& theFace
+				const std::shared_ptr<Cad_Shape>& theShape
+			);
+
+			TnbMarine_EXPORT Model_SurfaceSail
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Cad_Shape>&& theShape
 			);
 
 			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
-				const TopoDS_Face& theFace
+				const std::shared_ptr<Cad_Shape>& theShape
 			);
 
 			TnbMarine_EXPORT Model_SurfaceSail
 			(
 				const Standard_Integer theIndex,
 				const word& theName, 
-				TopoDS_Face&& theFace
+				std::shared_ptr<Cad_Shape>&& theShape
 			);
 
 
@@ -80,9 +81,9 @@ namespace tnbLib
 				return Marine_SailModelType::surface;
 			}
 
-			const auto& Face() const
+			const auto& Shape() const
 			{
-				return theFace_;
+				return theShape_;
 			}
 
 

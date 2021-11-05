@@ -33,6 +33,9 @@ namespace tnbLib
 
 	protected:
 
+
+		//- constructors
+
 		Geo_ProfileFun
 		(
 			const Standard_Real theLower,
@@ -64,6 +67,10 @@ namespace tnbLib
 		{}
 
 	public:
+
+		static TnbGeo_EXPORT const std::string extension;
+
+		//- public functions and operators
 
 		virtual Standard_Real Value(const Standard_Real x) const = 0;
 

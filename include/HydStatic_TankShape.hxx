@@ -10,7 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Marine_Domain;
-	class HydStatic_FillCurveQ;
+	class HydStatic_TankCapacityCurveQ;
 	class HydStatic_CrsCurvesGraph;
 
 	class HydStatic_TankShape
@@ -26,7 +26,7 @@ namespace tnbLib
 		marineLib::KG theKg_;
 
 		std::shared_ptr<Marine_Domain> theDomain_;
-		std::shared_ptr<HydStatic_FillCurveQ> theFill_;
+		std::shared_ptr<HydStatic_TankCapacityCurveQ> theFill_;
 		std::shared_ptr<HydStatic_CrsCurvesGraph> theCross_;
 
 
@@ -49,14 +49,14 @@ namespace tnbLib
 		TnbHydStatic_EXPORT HydStatic_TankShape
 		(
 			const std::shared_ptr<marineLib::Model_Tank>& theTank,
-			const std::shared_ptr<HydStatic_FillCurveQ>& theFill,
+			const std::shared_ptr<HydStatic_TankCapacityCurveQ>& theFill,
 			const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCross
 		);
 
 		TnbHydStatic_EXPORT HydStatic_TankShape
 		(
 			std::shared_ptr<marineLib::Model_Tank>&& theTank,
-			std::shared_ptr<HydStatic_FillCurveQ>&& theFill,
+			std::shared_ptr<HydStatic_TankCapacityCurveQ>&& theFill,
 			std::shared_ptr<HydStatic_CrsCurvesGraph>&& theCross
 		);
 
@@ -65,7 +65,7 @@ namespace tnbLib
 			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<marineLib::Model_Tank>& theTank,
-			const std::shared_ptr<HydStatic_FillCurveQ>& theFill,
+			const std::shared_ptr<HydStatic_TankCapacityCurveQ>& theFill,
 			const std::shared_ptr<HydStatic_CrsCurvesGraph>& theCross
 		);
 
@@ -122,7 +122,7 @@ namespace tnbLib
 
 		void SetFillCurve
 		(
-			const std::shared_ptr<HydStatic_FillCurveQ>& theCurve
+			const std::shared_ptr<HydStatic_TankCapacityCurveQ>& theCurve
 		)
 		{
 			theFill_ = theCurve;
@@ -130,7 +130,7 @@ namespace tnbLib
 
 		void SetFillCurve
 		(
-			std::shared_ptr<HydStatic_FillCurveQ>&& theCurve
+			std::shared_ptr<HydStatic_TankCapacityCurveQ>&& theCurve
 		)
 		{
 			theFill_ = std::move(theCurve);

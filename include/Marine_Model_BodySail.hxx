@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _Marine_Model_ShapeSail_Header
-#define _Marine_Model_ShapeSail_Header
+#ifndef _Marine_Model_BodySail_Header
+#define _Marine_Model_BodySail_Header
 
 #include <Marine_Model_GeoSail.hxx>
 
@@ -13,7 +13,7 @@ namespace tnbLib
 		// Forward Declarations
 		class Body_Sail;
 
-		class Model_ShapeSail
+		class Model_BodySail
 			: public Model_GeoSail
 		{
 
@@ -26,41 +26,41 @@ namespace tnbLib
 
 		protected:
 
-			Model_ShapeSail()
+			Model_BodySail()
 			{}
 
 		public:
 
-			TnbMarine_EXPORT Model_ShapeSail
+			TnbMarine_EXPORT Model_BodySail
 			(
 				const std::shared_ptr<Body_Sail>& theSail
 			);
 
-			TnbMarine_EXPORT Model_ShapeSail
+			TnbMarine_EXPORT Model_BodySail
 			(
 				std::shared_ptr<Body_Sail>&& theSail
 			);
 
-			TnbMarine_EXPORT Model_ShapeSail
+			TnbMarine_EXPORT Model_BodySail
 			(
 				const Standard_Integer theIndex,
 				const std::shared_ptr<Body_Sail>& theSail
 			);
 
-			TnbMarine_EXPORT Model_ShapeSail
+			TnbMarine_EXPORT Model_BodySail
 			(
 				const Standard_Integer theIndex, 
 				std::shared_ptr<Body_Sail>&& theSail
 			);
 
-			TnbMarine_EXPORT Model_ShapeSail
+			TnbMarine_EXPORT Model_BodySail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
 				const std::shared_ptr<Body_Sail>& theSail
 			);
 
-			TnbMarine_EXPORT Model_ShapeSail
+			TnbMarine_EXPORT Model_BodySail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
@@ -80,6 +80,6 @@ namespace tnbLib
 	}
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_ShapeSail);
+BOOST_CLASS_EXPORT_KEY(tnbLib::marineLib::Model_BodySail);
 
-#endif // !_Marine_Model_ShapeSail_Header
+#endif // !Marine_Model_BodySail_Header

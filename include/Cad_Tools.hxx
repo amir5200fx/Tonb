@@ -43,7 +43,17 @@ namespace tnbLib
 
 	public:
 
-		static TnbCad_EXPORT Standard_Real CalcPrecision(const TModel_Vertex&);
+		static TnbCad_EXPORT Standard_Boolean 
+			HasTriangulation
+			(
+				const TopoDS_Shape& theShape
+			);
+
+		static TnbCad_EXPORT Standard_Real 
+			CalcPrecision
+			(
+				const TModel_Vertex&
+			);
 
 		static TnbCad_EXPORT Standard_Boolean
 			IsBounded

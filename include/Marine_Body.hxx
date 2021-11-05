@@ -46,7 +46,6 @@ namespace tnbLib
 			: Marine_CoordinatedEntity(_Args...)
 		{}*/
 
-
 		//- default constructor
 
 		Marine_Body()
@@ -90,6 +89,8 @@ namespace tnbLib
 		}
 
 	public:
+
+		static TnbMarine_EXPORT const std::string extention;
 
 		TnbMarine_EXPORT Standard_Integer NbSections() const;
 

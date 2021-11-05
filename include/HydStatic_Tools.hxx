@@ -38,7 +38,7 @@ namespace tnbLib
 	class HydStatic_Spacing;
 	class HydStatic_CrsCurve;
 	class HydStatic_CrsCurveQ;
-	class HydStatic_FillCurveQ;
+	class HydStatic_TankCapacityCurveQ;
 	class NumAlg_AdaptiveInteg_Info;
 	
 	class Pnt2d;
@@ -114,7 +114,7 @@ namespace tnbLib
 		static TnbHydStatic_EXPORT Standard_Real 
 			CalcZ
 			(
-				const HydStatic_FillCurveQ&, 
+				const HydStatic_TankCapacityCurveQ&, 
 				const Standard_Real theVolume
 			);
 

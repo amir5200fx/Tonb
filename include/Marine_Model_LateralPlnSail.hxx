@@ -25,13 +25,18 @@ namespace tnbLib
 
 			std::shared_ptr<Cad2d_Plane> thePlane_;
 
-			Standard_Real theZbar_;
 			std::shared_ptr<Entity2d_Triangulation> theTriangulation_;
 
 
 			//- private functions and operators
 
 			TNB_SERIALIZATION(TnbMarine_EXPORT);
+
+
+			auto& TriangulationRef()
+			{
+				return theTriangulation_;
+			}
 
 			void SetTriangulation(std::shared_ptr<Entity2d_Triangulation>&& t)
 			{
@@ -53,44 +58,38 @@ namespace tnbLib
 
 			TnbMarine_EXPORT Model_LateralPlnSail
 			(
-				const std::shared_ptr<Cad2d_Plane>& thePlane,
-				Standard_Real theZbar
+				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
 			TnbMarine_EXPORT Model_LateralPlnSail
 			(
-				std::shared_ptr<Cad2d_Plane>&& thePlane,
-				Standard_Real theZbar
-			);
-
-			TnbMarine_EXPORT Model_LateralPlnSail
-			(
-				const Standard_Integer theIndex,
-				const std::shared_ptr<Cad2d_Plane>& thePlane,
-				Standard_Real theZbar
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
 			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const Standard_Integer theIndex,
-				std::shared_ptr<Cad2d_Plane>&& thePlane,
-				Standard_Real theZbar
+				const std::shared_ptr<Cad2d_Plane>& thePlane
+			);
+
+			TnbMarine_EXPORT Model_LateralPlnSail
+			(
+				const Standard_Integer theIndex,
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
 			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName,
-				const std::shared_ptr<Cad2d_Plane>& thePlane,
-				Standard_Real theZbar
+				const std::shared_ptr<Cad2d_Plane>& thePlane
 			);
 
 			TnbMarine_EXPORT Model_LateralPlnSail
 			(
 				const Standard_Integer theIndex, 
 				const word& theName, 
-				std::shared_ptr<Cad2d_Plane>&& thePlane,
-				Standard_Real theZbar
+				std::shared_ptr<Cad2d_Plane>&& thePlane
 			);
 
 
@@ -99,11 +98,6 @@ namespace tnbLib
 			const auto& Plane() const
 			{
 				return thePlane_;
-			}
-
-			auto zBar() const
-			{
-				return theZbar_;
 			}
 
 			auto HasTriangulation() const
