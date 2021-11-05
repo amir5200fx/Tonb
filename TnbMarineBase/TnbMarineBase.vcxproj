@@ -317,6 +317,7 @@
     <ClCompile Include="TnbLib\MarineBase\Entities\Load\LightWeight\Marine_LightWeightIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Hull\Marine_Model_Hull.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Hull\Marine_Model_HullIO.cxx" />
+    <ClCompile Include="TnbLib\MarineBase\Entities\Model\Marine_Model.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Const\Marine_Model_ConstAreaSail.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Const\Marine_Model_ConstAreaSailIO.cxx" />
     <ClCompile Include="TnbLib\MarineBase\Entities\Model\Sail\Area\Marine_Model_AreaSail.cxx" />
