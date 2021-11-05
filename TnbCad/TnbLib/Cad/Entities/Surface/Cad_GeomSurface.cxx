@@ -7,6 +7,8 @@
 
 #include <Geom_BoundedSurface.hxx>
 
+const std::string tnbLib::Cad_GeomSurface::extension = ".gsurf";
+
 void tnbLib::Cad_GeomSurface::CheckBounded(const Handle(Geom_Surface)& s)
 {
 	auto bounded = Handle(Geom_BoundedSurface)::DownCast(s);
