@@ -1,0 +1,10 @@
+setVerbose(1);
+
+setTol(1.0E-4);
+setXZPlane(0.0);
+
+loadModel();
+
+execute();
+
+saveTo();

@@ -1,0 +1,12 @@
+setVerbose(1);
+
+setClipPerc(0.05);
+setNbSections(35);
+
+setSpacing("uniform");
+
+loadModel();
+
+execute();
+
+saveTo();

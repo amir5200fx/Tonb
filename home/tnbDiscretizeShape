@@ -1,0 +1,14 @@
+setVerbose(1);
+
+setAngle(5.0);
+setDeflection(0.001);
+setMinSize(1.0E-4);
+
+setParallelMode(true);
+
+loadModel();
+
+execute();
+
+saveTo();
+

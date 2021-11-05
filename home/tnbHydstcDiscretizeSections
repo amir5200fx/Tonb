@@ -1,0 +1,15 @@
+setVerbose(1);
+
+setAngle(2.0);
+setDeflection(0.001);
+setMinSize(1.0E-5);
+setMaxNbSubdivisions(50);
+setNbInitSubdivisions(4);
+setNbSamples(5);
+
+loadModel();
+
+execute();
+
+saveTo();
+
