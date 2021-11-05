@@ -1,5 +1,7 @@
 #include <ShapePx_Patch.hxx>
 
+const std::string tnbLib::ShapePx_Patch::extension = ".shpxpatch";
+
 tnbLib::ShapePx_Patch::ShapePx_Patch
 (
 	const Standard_Integer theIndex

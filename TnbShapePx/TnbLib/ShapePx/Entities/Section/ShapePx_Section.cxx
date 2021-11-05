@@ -9,6 +9,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+const std::string tnbLib::ShapePx_Section::extension = ".shpxsect";
+
 tnbLib::ShapePx_Section::ShapePx_Section
 (
 	const Standard_Integer theIndex

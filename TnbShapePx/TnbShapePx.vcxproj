@@ -234,6 +234,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\ShapePx\Entities\Surface\ShapePx_Surface.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Surface\ShapePx_SurfaceIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\Tip\Spherical\ShapePx_SphericalTip.cxx" />
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoCtrlNet\ShapePx_TopoCtrlNet.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\TopoCtrlNet\ShapePx_TopoCtrlNetIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node\Adaptor\ShapePx_TopoSectNodeAdaptorIO.cxx" />
     <ClCompile Include="TnbLib\ShapePx\Entities\TopoSection\Entities\Node\ShapePx_TopoSectNodeIO.cxx" />

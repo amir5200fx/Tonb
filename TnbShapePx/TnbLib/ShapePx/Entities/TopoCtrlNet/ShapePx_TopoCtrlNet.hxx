@@ -29,6 +29,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbShapePx_EXPORT const std::string extension;
+
 		//- default constructor
 
 		ShapePx_TopoCtrlNet()

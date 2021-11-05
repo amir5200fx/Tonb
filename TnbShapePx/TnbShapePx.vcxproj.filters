@@ -509,5 +509,8 @@
     <ClCompile Include="TnbLib\ShapePx\ConicSection\CircleArc\ShapePx_ArcSection.cxx">
       <Filter>TnbLib\ShapePx\ConicSection\Arc</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\ShapePx\Entities\TopoCtrlNet\ShapePx_TopoCtrlNet.cxx">
+      <Filter>TnbLib\ShapePx\Entities\TopoCtrlNet</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
