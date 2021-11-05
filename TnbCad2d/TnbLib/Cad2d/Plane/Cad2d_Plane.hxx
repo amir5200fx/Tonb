@@ -94,6 +94,10 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad2d_EXPORT const std::string extension;
+
+		//- constructors
+
 		TnbCad2d_EXPORT Cad2d_Plane
 		(
 			const gp_Ax2& theSystem = gp::XOY()
@@ -131,6 +135,9 @@ namespace tnbLib
 		);
 
 	public:
+
+
+		//- public functions and operators
 
 		TnbCad2d_EXPORT Standard_Integer NbWires() const;
 

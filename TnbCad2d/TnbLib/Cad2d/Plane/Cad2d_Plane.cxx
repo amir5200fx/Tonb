@@ -245,6 +245,8 @@ void tnbLib::Cad2d_Plane::CheckInners
 	}
 }
 
+const std::string tnbLib::Cad2d_Plane::extension = ".plane";
+
 //- Constructors
 
 tnbLib::Cad2d_Plane::Cad2d_Plane
