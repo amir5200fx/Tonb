@@ -12,6 +12,8 @@
 
 #include <math.h>
 
+const std::string tnbLib::SectPx_Frame::extension = ".spxframe";
+
 tnbLib::SectPx_Frame::EntityMaker::EntityMaker
 (
 	const std::shared_ptr<SectPx_ParRegistry>& theParReg, 

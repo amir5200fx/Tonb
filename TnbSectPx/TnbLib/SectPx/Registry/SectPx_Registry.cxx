@@ -8,6 +8,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+const std::string tnbLib::SectPx_Registry::extension = ".spxreg";
+
 void tnbLib::SectPx_Registry::AllocateMemory()
 {
 	theCounter_ = std::make_shared<SectPx_CountRegistry>();

@@ -71,10 +71,17 @@ namespace tnbLib
 
 	protected:
 
+
+		//- default constructor
+
 		SectPx_Frame()
 		{}
 
 	public:
+
+		static TnbSectPx_EXPORT const std::string extension;
+
+		//- constructors
 
 		TnbSectPx_EXPORT SectPx_Frame
 		(
@@ -96,6 +103,9 @@ namespace tnbLib
 			const std::shared_ptr<SectPx_ParRegistry>& theParReg,
 			const std::shared_ptr<SectPx_FrameRegistry>& theFrameReg
 		);
+
+
+		//- public functions and operators
 
 		const auto& ParRegistry() const
 		{

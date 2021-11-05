@@ -22,6 +22,8 @@
 #include <SectPx_TightController_Deg2.hxx>
 #include <SectPx_WeightController.hxx>
 
+const std::string tnbLib::SectPx_FrameTuner::extension = ".spxftuner";
+
 std::shared_ptr<tnbLib::SectPx_TopoProfile> 
 tnbLib::SectPx_FrameTuner::RetrieveProfile
 (
