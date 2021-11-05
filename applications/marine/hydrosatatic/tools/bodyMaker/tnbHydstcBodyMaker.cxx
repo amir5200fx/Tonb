@@ -1,11 +1,17 @@
 #include <Marine_CmpSection.hxx>
 #include <Marine_Bodies.hxx>
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
 {
+
+	static const std::string loadExt = ".hsslst";
+	static const std::string saveExt = Marine_Body::extention;
+
+	static std::string myFileName;
 
 	static bool loadTag = false;
 	static bool exeTag = false;
@@ -27,23 +33,9 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		file::CheckExtension(name);
 
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
-
-			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> mySections;
-		}
-
+		mySections = file::LoadFile<std::vector<std::shared_ptr<Marine_CmpSection>>>(name + loadExt, verbose);
 		if (mySections.empty())
 		{
 			FatalErrorIn(FunctionSIG)
@@ -104,6 +96,13 @@ namespace tnbLib
 		loadTag = true;
 	}
 
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
+	}
+
 	void saveTo(const std::string& name)
 	{
 		if (NOT exeTag)
@@ -113,20 +112,21 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
-		std::ofstream myFile(fn);
+		file::CheckExtension(name);
 
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << myBody;
+		file::SaveTo(myBody, name + saveExt, verbose);
+	}
 
-		myFile.close();
-
-		if (verbose)
+	void saveTo()
+	{
+		if (NOT exeTag)
 		{
-			Info << endl;
-			Info << " the file is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
+			FatalErrorIn(FunctionSIG)
+				<< "the application has not been performed" << endl
+				<< abort(FatalError);
 		}
+
+		saveTo(myFileName);
 	}
 
 	void sortSections(std::vector<section_t>& sections)
@@ -222,7 +222,9 @@ namespace tnbLib
 	{
 		//- io functions
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
 		//- settings
 		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); }), "setVerbose");
@@ -265,8 +267,8 @@ int main(int argc, char *argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions:" << endl << endl
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadModel(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
@@ -284,13 +286,13 @@ int main(int argc, char *argv[])
 
 			setFunctions(mod);
 
-			chai.add(mod);
-
-			std::string address = ".\\system\\tnbHydstcBodyMaker";
-			fileName myFileName(address);
+			chai.add(mod);	
 
 			try
 			{
+				//std::string address = ".\\system\\tnbHydstcBodyMaker";
+				fileName myFileName(file::GetSystemFile("tnbHydstcBodyMaker"));
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

@@ -2,6 +2,7 @@
 #include <Marine_SectTools.hxx>
 #include <Marine_PlnCurves.hxx>
 #include <Marine_ShapeIO.hxx>
+#include <Marine_HullShapeIO.hxx>
 #include <Marine_SectionsIO.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_ShapeSection.hxx>
@@ -16,6 +17,7 @@
 #include <OpenCascade_Serialization.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -35,10 +37,13 @@
 
 namespace tnbLib
 {
-
+	static const std::string loadExt = marineLib::io::Shape::extention;
+	static const std::string saveExt = marineLib::io::Sections::extention;
 	static bool loadTag = false;
 	static bool bodyTypeTag = false;
 	static bool exeTag = false;
+
+	static std::string myFileName;
 
 	static const unsigned int DEFAULT_NB_SECTIONS = 25;
 	static const unsigned int DEFAULT_MIN_NB_SECTIONS = 10;
@@ -139,39 +144,23 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		file::CheckExtension(name);
 
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
-
-			TNB_iARCH_FILE_TYPE ar(myFile);
-
-			ar >> myShape;
-		}
-
+		myShape = file::LoadFile<std::shared_ptr<marineLib::io::Shape>>(name + loadExt, verbose);
 		if (NOT myShape)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< " the loaded model is null" << endl
 				<< abort(FatalError);
 		}
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
-			Info << endl;
-		}
-
 		loadTag = true;
+	}
+
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
 	}
 
 	void saveTo(const std::string& name)
@@ -183,21 +172,21 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
-		std::ofstream myFile(fn);
+		file::CheckExtension(name);
 
-		TNB_oARCH_FILE_TYPE ar(myFile);
+		file::SaveTo(mySections, name + saveExt, verbose);
+	}
 
-		ar << mySections;
-
-		myFile.close();
-
-		if (verbose)
+	void saveTo()
+	{
+		if (NOT exeTag)
 		{
-			Info << endl;
-			Info << " the body is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
+			FatalErrorIn(FunctionSIG)
+				<< "the application has not been performed" << endl
+				<< abort(FatalError);
 		}
+
+		saveTo(myFileName);
 	}
 
 	auto getCorners(const Entity3d_Box& b)
@@ -291,9 +280,12 @@ namespace tnbLib
 
 		paraCurves = removeDegeneracies(paraCurves, tol);
 
-		if (myShape->ShapeType() IS_EQUAL Marine_BodyModelType::symm)
+		if (auto hullShape = std::dynamic_pointer_cast<marineLib::io::HullShape>(myShape))
 		{
-			paraCurves = retrieveSymmSectionCurves(paraCurves);
+			if (hullShape->ShapeType() IS_EQUAL Marine_BodyModelType::symm)
+			{
+				paraCurves = retrieveSymmSectionCurves(paraCurves);
+			}
 		}
 
 		std::vector<std::shared_ptr<Pln_Curve>> plnCurves;
@@ -433,24 +425,29 @@ namespace tnbLib
 				<< "no bounding box has been detected!" << endl
 				<< abort(FatalError);
 		}*/
-		auto b = *myShape->PreciseBndBox();
+
+
+		auto b = *myShape->BoundingBox();
 		auto tol = myShape->Tolerance();
 
-		if (myShape->ShapeType() IS_EQUAL Marine_BodyModelType::symm)
+		if (auto hullShape = std::dynamic_pointer_cast<marineLib::io::HullShape>(myShape))
 		{
-			auto corners = getCorners(b);
+			if (hullShape->ShapeType() IS_EQUAL Marine_BodyModelType::symm)
+			{
+				auto corners = getCorners(b);
 
-			auto p0 = b.P0();
-			auto p1 = b.P1();
+				auto p0 = b.P0();
+				auto p1 = b.P1();
 
-			p0.Y() *= (-1.0);
-			p1.Y() *= (-1.0);
-			corners.push_back(std::move(p0));
-			corners.push_back(std::move(p1));
+				p0.Y() *= (-1.0);
+				p1.Y() *= (-1.0);
+				corners.push_back(std::move(p0));
+				corners.push_back(std::move(p1));
 
-			b = Entity3d_Box::BoundingBoxOf(corners);
+				b = Entity3d_Box::BoundingBoxOf(corners);
 
-			myShape->LoadPreciseBndBox(std::make_shared<Entity3d_Box>(b));
+				hullShape->SetPreciseBndBox(std::make_shared<Entity3d_Box>(b));
+			}
 		}
 
 		const auto totLen = X1(b) - X0(b);
@@ -504,11 +501,15 @@ namespace tnbLib
 	{
 		//- io functions
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
+
 		mod->add(chaiscript::fun([]()-> void {printSettings(); }), "printSettings");
 
 		//- settings
 		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); }), "setVerbose");
+
 		mod->add(chaiscript::fun([](const std::string& name)->void {setDistribution(name); }), "setSpacing");
 		//mod->add(chaiscript::fun([](const std::string& name)-> void {setSectionType(name); }), "setSectionType");
 		mod->add(chaiscript::fun([](int n)->void {setNbSections(n); }), "setNbSections");
@@ -551,8 +552,8 @@ int main(int argc, char *argv[])
 			Info << " This application is aimed to retrieve the sections from the shape." << endl;
 			Info << endl
 				<< " Function list:" << endl
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadModel(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - setClipPerc(double);         - the value of the clip must be between 0 and 0.3" << endl
 				<< " - setNbSections(int);          - the allowed min. nb. of sections is " << DEFAULT_MIN_NB_SECTIONS << endl
@@ -582,11 +583,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbHydstcShapeSections";
-			fileName myFileName(address);
-
 			try
 			{
+				//std::string address = ".\\system\\tnbHydstcShapeSections";
+				fileName myFileName(file::GetSystemFile("tnbHydstcShapeSections"));
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

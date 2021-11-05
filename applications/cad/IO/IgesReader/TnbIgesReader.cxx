@@ -1,4 +1,5 @@
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_Tools.hxx>
 #include <TnbError.hxx>
@@ -14,10 +15,14 @@ namespace tnbLib
 
 	typedef std::shared_ptr<Cad_Shape> shape_t;
 
+	static const std::string loadExt = ".iges";
+	static const std::string extension = Cad_Shape::extention;
 	static unsigned short verbose(0);
 	static bool loadTag = false;
 
 	static shape_t myShape;
+
+	static std::string myFileName;
 
 	void setVerbose(unsigned int i)
 	{
@@ -28,7 +33,7 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
+		fileName fn(name + loadExt);
 		if (verbose)
 		{
 			Info << endl;
@@ -41,7 +46,7 @@ namespace tnbLib
 			timer.SetInfo(Global_TimerInfo_s);
 
 			IGESControl_Reader Reader;
-			Reader.ReadFile(name.c_str());
+			Reader.ReadFile(fn.c_str());
 
 			Handle(TColStd_HSequenceOfTransient) myList = Reader.GiveList("iges-faces");
 			Reader.TransferList(myList);
@@ -65,6 +70,13 @@ namespace tnbLib
 		loadTag = true;
 	}
 
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
+	}
+
 	void saveTo(const std::string& name)
 	{
 		if (NOT loadTag)
@@ -74,20 +86,21 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
-		std::ofstream myFile(fn);
+		file::CheckExtension(name);
 
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << myShape;
+		file::SaveTo(myShape, name + extension, verbose);
+	}
 
-		myFile.close();
-
-		if (verbose)
+	void saveTo()
+	{
+		if (NOT loadTag)
 		{
-			Info << endl;
-			Info << " the shape is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
+			FatalErrorIn(FunctionSIG)
+				<< "no shape has been loaded!" << endl
+				<< abort(FatalError);
 		}
+
+		saveTo(myFileName);
 	}
 
 }
@@ -107,9 +120,15 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
+		
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+
+		//- settings
+
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -148,8 +167,8 @@ int main(int argc, char *argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadModel(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
@@ -168,11 +187,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\TnbIgesReader";
-			fileName myFileName(address);
-
 			try
 			{
+				auto address = file::GetSystemFile("TnbIgesReader");
+
+				//std::string address = ".\\system\\TnbIgesReader";
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

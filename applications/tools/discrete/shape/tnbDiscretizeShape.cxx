@@ -5,21 +5,29 @@
 #include <Cad_Shape.hxx>
 #include <Cad_Tools.hxx>
 #include <Geo_Tools.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Poly_Triangulation.hxx>
+#include <BRepTools.hxx>
+
+#include <boost/filesystem.hpp>
 
 namespace tnbLib
 {
+
+	static const std::string extension = Cad_Shape::extention;
 
 	typedef std::shared_ptr<Cad_Shape> shape_t;
 	typedef std::shared_ptr<FastDiscrete_Params> param_t;
 
 	static unsigned short verbose(0);
 	static bool loadTag = false;
+	static bool exeTag = false;
 
 	static shape_t myShape;
+	static std::string myFileName;
 	
 	double myAngle = 5.0;
 	double myDeflection = 1.0E-3;
@@ -29,6 +37,13 @@ namespace tnbLib
 	auto adaptiveMin = false;
 	auto internalVerticesMode = true;
 	auto controlSurfaceDeflection = true;
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
 	void setAngle(double x)
 	{
@@ -123,38 +138,19 @@ namespace tnbLib
 			<< " - control surface deflection? " << (controlSurfaceDeflection ? "yes" : "no") << endl;
 	}
 
-	void setVerbose(unsigned int i)
-	{
-		Info << endl;
-		Info << " - the verbosity level is set to: " << i << endl;
-		verbose = i;
-	}
-
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		file::CheckExtension(name);
 
-		TNB_iARCH_FILE_TYPE ar(myFile);
-
-		ar >> myShape;
+		myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + extension, verbose);
 		if (NOT myShape)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the loaded body is null" << endl
+				<< " the loaded model is null" << endl
 				<< abort(FatalError);
 		}
-
 		if (verbose)
 		{
-			Info << endl;
-			Info << " the shape is loaded, from: " << name << ", successfully!" << endl;
 			Info << " - shape's name: " << myShape->Name() << endl;
 			Info << endl;
 		}
@@ -162,33 +158,56 @@ namespace tnbLib
 		loadTag = true;
 	}
 
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), extension);
+		myFileName = name.string();
+		loadModel(myFileName);
+	}
+
 	void saveTo(const std::string& name)
 	{
-		if (NOT loadTag)
+		if (NOT exeTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "no shape has been loaded!" << endl
+				<< "the algorithm has not been performed!" << endl
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
-		std::ofstream myFile(fn);
+		file::CheckExtension(name);
 
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << myShape;
+		file::SaveTo(myShape, name + extension, verbose);
+	}
 
-		myFile.close();
-
-		if (verbose)
+	void saveTo()
+	{
+		if (NOT exeTag)
 		{
-			Info << endl;
-			Info << " the shape is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
 		}
+
+		saveTo(myFileName);
 	}
 
 	void execute()
 	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		
+		if (Cad_Tools::HasTriangulation(myShape->Shape()))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the shape has already been discretized!" << endl
+				<< abort(FatalError);
+		}
+
 		const auto& b = myShape->BoundingBox();
 		if (NOT b)
 		{
@@ -256,6 +275,8 @@ namespace tnbLib
 			Info << endl;
 
 		}
+
+		exeTag = true;
 	}
 
 
@@ -277,10 +298,16 @@ namespace tnbLib
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		//- io functions
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
-		mod->add(chaiscript::fun([]()-> void {printDefaults(); }), "printDefaults");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+
+		mod->add(chaiscript::fun([]()-> void {printDefaults(); }), "printDefaults");
+
+		//- settings
+
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 
 		mod->add(chaiscript::fun([](double x)-> void {setAngle(x); }), "setAngle");
 		mod->add(chaiscript::fun([](double x)-> void {setDeflection(x); }), "setDeflection");
@@ -327,11 +354,16 @@ int main(int argc, char *argv[])
 			Info << endl;
 			Info << "This application is aimed to discrete surfaces of the shape." << endl;
 			Info << endl;
-			Info << " Function list:" << endl
+			Info << " Function list:" << endl << endl
+				
+				<< " # IO functions: " << endl << endl
+
+				<< " - printDefaults()" << endl
+				<< " - loadModel(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
 				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl
-				<< " - printDefaults()" << endl << endl
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
 				<< " - setAngle(double)" << endl
 				<< " - setDeflection(double)" << endl
 				<< " - setMinSize(double)" << endl
@@ -339,7 +371,9 @@ int main(int argc, char *argv[])
 				<< " - setAdaptiveMinMode(bool)" << endl
 				<< " - setInternalVerticesMode(bool)" << endl
 				<< " - setControlSurfaceDeflectionMode(bool)" << endl << endl
+
 				<< " - execute()" << endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -351,12 +385,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbDiscretizeShape";
-			fileName myFileName(address);
+			//std::string address = ".\\system\\tnbDiscretizeShape";	
 
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbDiscretizeShape"));
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -384,5 +419,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

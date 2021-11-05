@@ -151,9 +151,10 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)d.pdb" </Comma
     </Link>
     <PostBuildEvent>
       <Command>del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).exp" 
-del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).ilk" 
 del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).lib" 
-del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).pdb" </Command>
+del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).pdb" 
+del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).iobj" 
+del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).ipdb" </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

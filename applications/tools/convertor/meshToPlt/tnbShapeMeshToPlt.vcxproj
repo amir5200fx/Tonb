@@ -160,6 +160,9 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).pdb" </Comman
     <ProjectReference Include="..\..\..\..\TnbGeo\TnbGeo.vcxproj">
       <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

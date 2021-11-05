@@ -11,6 +11,7 @@
 #include <Pln_Edge.hxx>
 #include <Cad2d_RemoveNonManifold.hxx>
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -21,6 +22,11 @@
 
 namespace tnbLib
 {
+
+	static const std::string loadExt = marineLib::io::DisctSections::extention;
+	static const std::string saveExt = marineLib::io::AnalysisSections::extention;
+
+	static std::string myFileName;
 
 	static bool loadTag = false;
 	static bool exeTag = false;
@@ -67,23 +73,9 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		file::CheckExtension(name);
 
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
-
-			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> mySections;
-		}
-
+		mySections = file::LoadFile<std::shared_ptr<marineLib::io::DisctSections>>(name + loadExt, verbose);
 		if (NOT mySections)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -91,14 +83,14 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
-			Info << endl;
-		}
-
 		loadTag = true;
+	}
+
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
 	}
 
 	void saveTo(const std::string& name)
@@ -110,7 +102,9 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
 		std::ofstream myFile(fn);
 
 		auto analyzerIO = std::make_shared<marineLib::io::AnalysisSections>();
@@ -139,6 +133,18 @@ namespace tnbLib
 			Info << " the file is saved in: " << fn << ", successfully!" << endl;
 			Info << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application has not been performed" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	auto retrieveCmpEdges(const std::vector<std::shared_ptr<Pln_Edge>>& edges)
@@ -241,7 +247,9 @@ namespace tnbLib
 	{
 		//- io functions
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
 		//- settings
 		mod->add(chaiscript::fun([](double x)-> void {setMinTol(x); }), "setMinTol");
@@ -284,8 +292,8 @@ int main(int argc, char *argv[])
 			Info << " This application is aimed to analyze the sections." << endl;
 			Info << endl
 				<< " Function list:" << endl
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadModel(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1, 2" << endl
 				<< " - setMinTol(double);" << endl
@@ -305,11 +313,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbHydstcSectionAnalysis";
-			fileName myFileName(address);
-
 			try
 			{
+				//std::string address = ".\\system\\tnbHydstcSectionAnalysis";
+				fileName myFileName(file::GetSystemFile("tnbHydstcSectionAnalysis"));
+
 				chai.eval_file(myFileName);
 				return 0;
 			}
