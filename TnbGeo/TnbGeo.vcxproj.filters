@@ -1289,5 +1289,8 @@
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_Polygon.cxx">
       <Filter>TnbLib\Geo\Entities\Polygon\3d</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ProfileFun\Geo_ProfileFun.cxx">
+      <Filter>TnbLib\Geo\ProfileFun</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
