@@ -90,7 +90,7 @@ namespace tnbLib
 
 	public:
 
-		static TnbMarine_EXPORT const std::string extention;
+		static TnbMarine_EXPORT const std::string extension;
 
 		TnbMarine_EXPORT Standard_Integer NbSections() const;
 

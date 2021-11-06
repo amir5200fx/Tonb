@@ -48,7 +48,7 @@ namespace tnbLib
 
 			public:
 
-				static TnbMarine_EXPORT const std::string extention;
+				static TnbMarine_EXPORT const std::string extension;
 
 				//- public functions and operators
 
