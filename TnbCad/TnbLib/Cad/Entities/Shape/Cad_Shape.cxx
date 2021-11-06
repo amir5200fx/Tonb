@@ -5,7 +5,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-const std::string tnbLib::Cad_Shape::extention = ".shape";
+const std::string tnbLib::Cad_Shape::extension = ".shape";
 
 tnbLib::Cad_Shape::Cad_Shape
 (

@@ -39,7 +39,7 @@ namespace tnbLib
 
 	public:
 
-		static TnbCad_EXPORT const std::string extention;
+		static TnbCad_EXPORT const std::string extension;
 
 		//- default constructors
 
