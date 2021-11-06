@@ -389,8 +389,8 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbDiscretizeShape"));
-				chai.eval_file(myFileName);
+				fileName theFileName(file::GetSystemFile("tnbDiscretizeShape"));
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)

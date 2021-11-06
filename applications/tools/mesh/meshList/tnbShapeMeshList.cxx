@@ -10,7 +10,7 @@
 namespace tnbLib
 {
 	static const std::string loadExt = Entity3d_Triangulation::extension;
-	static const std::string saveExt = Entity3d_Triangulation::extension;
+	static const std::string saveExt = Entity3d_Triangulation::extension + "list";
 
 	typedef std::shared_ptr<Entity3d_Triangulation> tri_t;
 
@@ -138,6 +138,11 @@ namespace tnbLib
 			Info << " meshes are saved in: " << fn << ", successfully!" << endl;
 		}
 	}
+
+	void saveTo()
+	{
+		saveTo("mesh");
+	}
 }
 
 #ifdef DebugInfo
@@ -156,6 +161,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadMeshes(name); }), "loadMesh");
 		mod->add(chaiscript::fun([]()->void {loadMeshes(); }), "loadMesh");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([](unsigned short c)->void {verbose = c; }), "setVerbose");
 	}
 
@@ -212,8 +218,8 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				std::string address = ".\\system\\tnbShapeMeshList";
-				fileName myFileName(address);
+				//std::string address = ".\\system\\tnbShapeMeshList";
+				fileName myFileName(file::GetSystemFile("tnbShapeMeshList"));
 
 				chai.eval_file(myFileName);
 				return 0;

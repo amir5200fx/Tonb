@@ -1,5 +1,6 @@
 #include <Entity3d_Triangulation.hxx> 
 #include <Entity3d_Box.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OFstream.hxx>
 #include <OSstream.hxx>
@@ -9,40 +10,42 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = Entity3d_Triangulation::extension + "list";
+	static const std::string saveExt = ".plt";
+
 	typedef std::shared_ptr<Entity3d_Triangulation> mesh_t;
 
 	static unsigned short verbose(0);
 
 	static bool loadTag = false;
+	static std::string myFileName;
 
 	static std::vector<mesh_t> myMeshes;
 
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the list from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		file::CheckExtension(name);
 
-		TNB_iARCH_FILE_TYPE ar(myFile);
-
-		ar >> myMeshes;
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the mesh list is loaded, from: " << name << ", successfully!" << endl;
-			Info << endl;
-		}
+		myMeshes = file::LoadFile<std::vector<mesh_t>>(name + loadExt, verbose);
 
 		loadTag = true;
 	}
 
-	void exportTo(const std::string& name)
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
+	}
+
+	void saveTo(const std::string& name)
 	{
 		if (NOT loadTag)
 		{
@@ -51,7 +54,9 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
 		OFstream myFile(fn);
 
 		for (const auto& x : myMeshes)
@@ -61,6 +66,24 @@ namespace tnbLib
 				x->ExportToPlt(myFile);
 			}
 		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " the file is saved in: " << fn << ", successfully!" << endl;
+		}
+	}
+
+	void saveTo()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no mesh has been loaded!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 }
 
@@ -79,9 +102,13 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadMesh");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {exportTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "loadMesh");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+
+
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -121,8 +148,8 @@ int main(int argc, char *argv[])
 			Info << endl;
 			Info << " Function list:" << endl <<endl
 				<< " - setVerbose(unsigned short)" << endl <<endl
-				<< " - loadMesh(string)" << endl
-				<< " - saveTo(string)" << endl;
+				<< " - loadMesh(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -134,12 +161,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbShapeMeshListToPlt";
-			fileName myFileName(address);
 
 			try
 			{
-				chai.eval_file(myFileName);
+				//std::string address = ".\\system\\tnbShapeMeshListToPlt";
+				fileName theFileName(file::GetSystemFile("tnbShapeMeshListToPlt"));
+
+				chai.eval_file(theFileName);
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{

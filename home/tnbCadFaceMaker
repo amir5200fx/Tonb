@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadModel("mySurface");
+
+execute("myShape");
+
+saveTo("myShape");

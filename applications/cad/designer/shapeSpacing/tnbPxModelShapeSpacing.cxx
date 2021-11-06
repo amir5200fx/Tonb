@@ -46,7 +46,6 @@ namespace tnbLib
 	static unsigned short verbose = 0;
 
 	static bool loadTag = false;
-	static bool exeTag = false;
 	static std::string myFileName;
 
 	static limitMaker_t myLimitMaker;
@@ -148,10 +147,10 @@ namespace tnbLib
 
 	void saveTo(const std::string& name)
 	{
-		if (NOT exeTag)
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "the application is not performed!" << endl
+				<< "no file has been loaded!" << endl
 				<< abort(FatalError);
 		}
 
@@ -164,7 +163,7 @@ namespace tnbLib
 			Info << endl;
 		}
 
-		fileName fn(name);
+		fileName fn(name + saveExt);
 		std::ofstream f(fn);
 
 		boost::archive::polymorphic_text_oarchive oa(f);
@@ -184,10 +183,10 @@ namespace tnbLib
 
 	void saveTo()
 	{
-		if (NOT exeTag)
+		if (NOT loadTag)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "the application is not performed!" << endl
+				<< "no file has been loaded!" << endl
 				<< abort(FatalError);
 		}
 

@@ -74,13 +74,6 @@ namespace tnbLib
 
 	void loadFrame(const std::string& name)
 	{
-		if (NOT loadTag)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no file has been loaded, yet!" << endl
-				<< abort(FatalError);
-		}
-
 		file::CheckExtension(name);
 
 		fileName fn(name + loadExt);

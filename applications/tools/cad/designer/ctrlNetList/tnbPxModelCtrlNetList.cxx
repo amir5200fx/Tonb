@@ -1,4 +1,5 @@
 #include <ShapePx_TopoCtrlNet.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -18,6 +19,9 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = ShapePx_TopoCtrlNet::extension;
+	static const std::string saveExt = ShapePx_TopoCtrlNet::extension + "list";
+
 	typedef std::shared_ptr<ShapePx_TopoCtrlNet> net_t;
 
 	std::vector<net_t> myNets;
@@ -25,7 +29,14 @@ namespace tnbLib
 
 	static bool loadTag = false;
 
-	void loadNets(const std::string& name)
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
+	void loadNets()
 	{
 		if (verbose)
 		{
@@ -35,7 +46,9 @@ namespace tnbLib
 		size_t i = 0;
 		while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
 		{
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			auto name = file::GetSingleFile(".\\" + std::to_string(i), loadExt).string();
+
+			std::string address = ".\\" + std::to_string(i) + "\\" + name + loadExt;
 			std::fstream file;
 			file.open(address, std::ios::in);
 
@@ -78,7 +91,7 @@ namespace tnbLib
 				<< "no net has been loaded!" << endl
 				<< abort(FatalError);
 		}
-		fileName fn(name);
+		fileName fn(name + saveExt);
 		std::ofstream f(fn);
 
 		boost::archive::polymorphic_text_oarchive oa(f);
@@ -88,6 +101,11 @@ namespace tnbLib
 		{
 			Info << " nets are saved in: " << fn << ", successfully!" << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		saveTo("ctrlnet");
 	}
 }
 
@@ -104,9 +122,11 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadNets(name); }), "loadNets");
+		mod->add(chaiscript::fun([]()->void {loadNets(); }), "loadNets");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([](int c)->void {verbose = c; }), "setVerbose");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -146,8 +166,8 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadNets(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadNets()" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl <<endl
 
@@ -166,11 +186,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbPxModelCtrlNetList";
-			fileName myFileName(address);
-
 			try
 			{
+				//std::string address = ".\\system\\tnbPxModelCtrlNetList";
+				fileName myFileName(file::GetSystemFile("tnbPxModelCtrlNetList"));
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

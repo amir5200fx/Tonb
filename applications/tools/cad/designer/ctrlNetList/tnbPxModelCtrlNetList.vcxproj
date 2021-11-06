@@ -158,6 +158,9 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).pdb" </Comman
     <ClCompile Include="tnbPxModelCtrlNetList.cxx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\TnbShapePx\TnbShapePx.vcxproj">
       <Project>{11ecf6dd-b134-4344-855a-4e3f553a3338}</Project>
     </ProjectReference>
