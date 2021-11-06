@@ -12,7 +12,7 @@
 namespace tnbLib
 {
 	static const std::string saveExt = Marine_Model::extension;
-	static const std::string loadExt = Cad_Shape::extention;
+	static const std::string loadExt = Cad_Shape::extension;
 
 	static std::string myFileName;
 

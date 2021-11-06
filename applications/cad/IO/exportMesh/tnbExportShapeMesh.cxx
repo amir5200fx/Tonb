@@ -13,7 +13,7 @@ namespace tnbLib
 
 	typedef std::shared_ptr<Cad_Shape> shape_t;
 
-	static const std::string loadExt = Cad_Shape::extention;
+	static const std::string loadExt = Cad_Shape::extension;
 	static const std::string saveExt = Entity3d_Triangulation::extension;
 
 	static shape_t myShape;

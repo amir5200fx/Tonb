@@ -9,8 +9,8 @@
 
 namespace tnbLib
 {
-	static const std::string loadExt = Cad_Shape::extention;
-	static const std::string saveExt = marineLib::io::Shape::extention;
+	static const std::string loadExt = Cad_Shape::extension;
+	static const std::string saveExt = marineLib::io::Shape::extension;
 	static bool loadTag = false;
 
 	static std::shared_ptr<Cad_Shape> myShape;
@@ -120,7 +120,9 @@ namespace tnbLib
 	{
 		//- io functions
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
 		//- settings
 		mod->add(chaiscript::fun([](double x)-> void {setTolerance(x); }), "setTol");
@@ -183,12 +185,14 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbHydstcTankReader";
-			fileName myFileName(address);
+			
 
 			try
 			{
-				chai.eval_file(myFileName);
+				//std::string address = ".\\system\\tnbHydstcTankReader";
+				fileName theFileName(file::GetSystemFile("tnbHydstcTankReader"));
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)

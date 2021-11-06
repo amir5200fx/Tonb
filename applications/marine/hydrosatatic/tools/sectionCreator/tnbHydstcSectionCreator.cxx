@@ -24,7 +24,7 @@
 
 namespace tnbLib
 {
-	static const std::string loadExt = marineLib::io::AnalysisSectionsReport::extention;
+	static const std::string loadExt = marineLib::io::AnalysisSectionsReport::extension;
 	static const std::string saveExt = ".hsslst";
 
 	static std::string myFileName;

@@ -37,8 +37,8 @@
 
 namespace tnbLib
 {
-	static const std::string loadExt = marineLib::io::Shape::extention;
-	static const std::string saveExt = marineLib::io::Sections::extention;
+	static const std::string loadExt = marineLib::io::Shape::extension;
+	static const std::string saveExt = marineLib::io::Sections::extension;
 	static bool loadTag = false;
 	static bool bodyTypeTag = false;
 	static bool exeTag = false;

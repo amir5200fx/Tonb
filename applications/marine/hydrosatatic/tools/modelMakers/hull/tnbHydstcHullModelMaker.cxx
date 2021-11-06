@@ -11,7 +11,7 @@ namespace tnbLib
 {
 
 	static const std::string saveExt = Marine_Model::extension;
-	static const std::string loadExt = Marine_Body::extention;
+	static const std::string loadExt = Marine_Body::extension;
 
 	static std::string myFileName;
 

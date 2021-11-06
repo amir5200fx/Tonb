@@ -16,7 +16,7 @@ namespace tnbLib
 	typedef std::shared_ptr<Cad_Shape> shape_t;
 
 	static const std::string loadExt = ".iges";
-	static const std::string extension = Cad_Shape::extention;
+	static const std::string extension = Cad_Shape::extension;
 	static unsigned short verbose(0);
 	static bool loadTag = false;
 

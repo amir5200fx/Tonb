@@ -29,8 +29,8 @@
 namespace tnbLib
 {
 
-	static const std::string loadExt = Cad_Shape::extention;
-	static const std::string saveExt = marineLib::io::Shape::extention;
+	static const std::string loadExt = Cad_Shape::extension;
+	static const std::string saveExt = marineLib::io::Shape::extension;
 	static bool loadTag = false;
 	static bool bodyTypeTag = false;
 	static bool exeTag = false;

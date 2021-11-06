@@ -13,7 +13,7 @@
 namespace tnbLib
 {
 
-	static const std::string extension = Cad_Shape::extention;
+	static const std::string extension = Cad_Shape::extension;
 
 	static unsigned short verbose(0);
 	static bool exeTag = false;

@@ -9,7 +9,7 @@ namespace tnbLib
 {
 
 	static const std::string loadExt = ".hsslst";
-	static const std::string saveExt = Marine_Body::extention;
+	static const std::string saveExt = Marine_Body::extension;
 
 	static std::string myFileName;
 

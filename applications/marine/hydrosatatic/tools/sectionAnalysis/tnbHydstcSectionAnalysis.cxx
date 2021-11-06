@@ -23,8 +23,8 @@
 namespace tnbLib
 {
 
-	static const std::string loadExt = marineLib::io::DisctSections::extention;
-	static const std::string saveExt = marineLib::io::AnalysisSections::extention;
+	static const std::string loadExt = marineLib::io::DisctSections::extension;
+	static const std::string saveExt = marineLib::io::AnalysisSections::extension;
 
 	static std::string myFileName;
 

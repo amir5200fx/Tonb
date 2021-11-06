@@ -1,6 +1,7 @@
 #include <Entity3d_Triangulation.hxx>
 #include <Entity2d_Box.hxx>
 #include <Global_Serialization.hxx>
+#include <Global_File.hxx>
 
 #include <vector>
 
@@ -8,6 +9,8 @@
 
 namespace tnbLib
 {
+	static const std::string loadExt = Entity3d_Triangulation::extension;
+	static const std::string saveExt = Entity3d_Triangulation::extension;
 
 	typedef std::shared_ptr<Entity3d_Triangulation> tri_t;
 
@@ -23,34 +26,10 @@ namespace tnbLib
 		verbose = i;
 	}
 
-	auto getAllFilesNames(const boost::filesystem::path& p)
-	{
-		boost::filesystem::directory_iterator end_itr;
-
-		std::vector<std::string> names;
-		for (boost::filesystem::directory_iterator iter(p); iter != end_itr; iter++)
-		{
-			if (boost::filesystem::is_regular_file(iter->path()))
-			{
-				auto file = iter->path().filename().string();
-				names.push_back(std::move(file));
-			}
-		}
-		return std::move(names);
-	}
-
-	auto getSingleFile(const boost::filesystem::path& p)
-	{
-		auto files = getAllFilesNames(p);
-		if (files.size())
-		{
-			return files[0];
-		}
-		return std::string();
-	}
-
 	void loadMeshes(const std::string& name)
 	{
+		file::CheckExtension(name);
+
 		if (verbose)
 		{
 			Info << "loading the meshes..." << endl;
@@ -60,7 +39,7 @@ namespace tnbLib
 		size_t i = 0;
 		while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
 		{
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			std::string address = ".\\" + std::to_string(i) + "\\" + name + loadExt;
 			std::fstream file;
 			file.open(address, ios::in);
 
@@ -89,6 +68,8 @@ namespace tnbLib
 			Info << endl
 				<< " All files are loaded, successfully!" << endl;
 		}
+
+		loadTag = true;
 	}
 
 	void loadMeshes()
@@ -102,8 +83,8 @@ namespace tnbLib
 		size_t i = 0;
 		while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
 		{
-			auto name = getSingleFile(boost::filesystem::path(std::to_string(i)));
-			std::string address = ".\\" + std::to_string(i) + "\\" + name;
+			auto name = file::GetSingleFile(boost::filesystem::path(std::to_string(i)), loadExt).string();
+			std::string address = ".\\" + std::to_string(i) + "\\" + name + loadExt;
 			std::fstream file;
 			file.open(address, ios::in);
 
@@ -132,11 +113,20 @@ namespace tnbLib
 			Info << endl
 				<< " All files are loaded, successfully!" << endl;
 		}
+
+		loadTag = true;
 	}
 
 	void saveTo(const std::string& name)
 	{
-		fileName fn(name);
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded!" << endl
+				<< abort(FatalError);
+		}
+
+		fileName fn(name + saveExt);
 		std::ofstream f(fn);
 
 		TNB_oARCH_FILE_TYPE oa(f);
@@ -220,11 +210,11 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbShapeMeshList";
-			fileName myFileName(address);
-
 			try
 			{
+				std::string address = ".\\system\\tnbShapeMeshList";
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

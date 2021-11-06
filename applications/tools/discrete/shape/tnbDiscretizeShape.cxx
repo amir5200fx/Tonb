@@ -17,7 +17,7 @@
 namespace tnbLib
 {
 
-	static const std::string extension = Cad_Shape::extention;
+	static const std::string extension = Cad_Shape::extension;
 
 	typedef std::shared_ptr<Cad_Shape> shape_t;
 	typedef std::shared_ptr<FastDiscrete_Params> param_t;

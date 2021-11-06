@@ -7,6 +7,7 @@
 #include <Entity3d_Polygon.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -17,8 +18,12 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = Cad_GeomSurface::extension;
+	static const std::string saveExt = Entity3d_Triangulation::extension;
+
 	static bool loadTag = false;
 	static bool exeTag = false;
+	static std::string myFileName;
 	static unsigned short verbose(0);
 
 	static std::shared_ptr<Cad_GeomSurface> mySurf;
@@ -76,22 +81,9 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
+		file::CheckExtension(name);
 
-			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> mySurf;
-		}
-
+		mySurf = file::LoadFile<std::shared_ptr<Cad_GeomSurface>>(name + loadExt, verbose);
 		if (NOT mySurf)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -99,14 +91,14 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
-			Info << endl;
-		}
-
 		loadTag = true;
+	}
+
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
 	}
 
 	void saveTo(const std::string& name)
@@ -125,7 +117,7 @@ namespace tnbLib
 			boost::filesystem::path dir(std::to_string(i));
 			boost::filesystem::create_directory(dir);
 
-			std::ofstream file(address);
+			std::ofstream file(address + saveExt);
 
 			TNB_oARCH_FILE_TYPE oa(file);
 
@@ -143,6 +135,18 @@ namespace tnbLib
 			Info << endl
 				<< " All files are saved, successfully!" << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	auto calcBoundaryCurve(const std::shared_ptr<Cad_GeomSurface>& s, const std::string& bnd)
@@ -304,7 +308,9 @@ namespace tnbLib
 		//- io functions
 
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
 		//- methods
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
@@ -355,8 +361,8 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadModel(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Methods: " << endl << endl
 
@@ -383,14 +389,14 @@ int main(int argc, char *argv[])
 
 			setGlobals(mod);
 
-			chai.add(mod);
-
-			std::string address = ".\\system\\tnbApexSurfGenPreview";
-			fileName myFileName(address);
+			chai.add(mod);		
 
 			try
 			{
-				chai.eval_file(myFileName);
+				std::string address = ".\\system\\tnbApexSurfGenPreview";
+				fileName theFileName(address);
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
