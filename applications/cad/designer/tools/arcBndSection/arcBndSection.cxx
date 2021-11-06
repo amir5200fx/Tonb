@@ -84,6 +84,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		file::CheckExtension(name);
+
 		fileName fn(name + saveExt);
 		std::ofstream myFile(fn);
 

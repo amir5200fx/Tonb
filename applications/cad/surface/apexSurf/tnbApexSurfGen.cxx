@@ -1,6 +1,7 @@
 #include <Cad_ConicApexMaker.hxx>
 #include <Cad_GeomSurface.hxx>
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -8,6 +9,9 @@
 
 namespace tnbLib
 {
+
+	static const std::string loadExt = Cad_GeomSurface::extension;
+	static const std::string saveExt = Cad_GeomSurface::extension;
 
 	static std::shared_ptr<Cad_GeomSurface> mySurf;
 	static std::shared_ptr<Cad_GeomSurface> myApex;
@@ -18,6 +22,7 @@ namespace tnbLib
 
 	static bool loadTag = false;
 	static bool exeTag = false;
+	static std::string myFileName;
 	static unsigned short verbose(0);
 
 	void setVerbose(unsigned short i)
@@ -83,22 +88,9 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
+		file::CheckExtension(name);
 
-			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> mySurf;
-		}
-
+		mySurf = file::LoadFile<std::shared_ptr<Cad_GeomSurface>>(name + loadExt, verbose);
 		if (NOT mySurf)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -106,14 +98,14 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
-			Info << endl;
-		}
-
 		loadTag = true;
+	}
+
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
 	}
 
 	void saveTo(const std::string& name)
@@ -125,7 +117,9 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
+		file::CheckExtension(name);
+
+		fileName fn(name + saveExt);
 		std::ofstream myFile(fn);
 
 		TNB_oARCH_FILE_TYPE ar(myFile);
@@ -139,6 +133,18 @@ namespace tnbLib
 			Info << " the file is saved in: " << fn << ", successfully!" << endl;
 			Info << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	void createPatch(const std::string& name)
@@ -216,7 +222,9 @@ namespace tnbLib
 	{
 		//- io functions
 		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
 		//- settings
 		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); }), "setVerbose");
@@ -298,13 +306,14 @@ int main(int argc, char *argv[])
 			setFunctions(mod);
 
 			chai.add(mod);
-
-			std::string address = ".\\system\\tnbApexSurfGen";
-			fileName myFileName(address);
+	
 
 			try
 			{
-				chai.eval_file(myFileName);
+				std::string address = ".\\system\\tnbApexSurfGen";
+				fileName theFileName(address);
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
