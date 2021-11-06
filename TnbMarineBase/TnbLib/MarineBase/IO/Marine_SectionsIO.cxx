@@ -3,7 +3,7 @@
 #include <Pln_Edge.hxx>
 #include <Marine_ShapeIO.hxx>
 
-const std::string tnbLib::marineLib::io::Sections::extention = ".hsssects";
+const std::string tnbLib::marineLib::io::Sections::extension = ".hsssects";
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::io::Sections::Section)
 {

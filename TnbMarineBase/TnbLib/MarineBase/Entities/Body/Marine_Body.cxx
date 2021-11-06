@@ -2,7 +2,7 @@
 
 #include <Marine_BodyTools.hxx>
 
-const std::string tnbLib::Marine_Body::extention = ".body";
+const std::string tnbLib::Marine_Body::extension = ".body";
 
 void tnbLib::Marine_Body::CheckSections()
 {

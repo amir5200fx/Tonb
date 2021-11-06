@@ -2,7 +2,7 @@
 
 #include <Cad_Shape.hxx>
 
-const std::string tnbLib::marineLib::io::Shape::extention = ".hsshape";
+const std::string tnbLib::marineLib::io::Shape::extension = ".hsshape";
 
 std::shared_ptr<tnbLib::Entity3d_Box>
 tnbLib::marineLib::io::Shape::BoundingBox() const

@@ -2,7 +2,7 @@
 
 #include <Marine_DisctSectionsIO.hxx>
 
-const std::string tnbLib::marineLib::io::AnalysisSections::extention = ".hsasects";
+const std::string tnbLib::marineLib::io::AnalysisSections::extension = ".hsasects";
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::marineLib::io::AnalysisSections::Section)
 {

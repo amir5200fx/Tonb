@@ -2,7 +2,7 @@
 
 #include <Marine_SectionsIO.hxx>
 
-const std::string tnbLib::marineLib::io::DisctSections::extention = ".hsdsects";
+const std::string tnbLib::marineLib::io::DisctSections::extension = ".hsdsects";
 
 tnbLib::marineLib::io::DisctSections::AlgInfo::AlgInfo()
 	: Deflection(0)
