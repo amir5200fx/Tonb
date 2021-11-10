@@ -304,6 +304,12 @@
     <Filter Include="TnbLib\Cad\Entities\Curve">
       <UniqueIdentifier>{9cd9ea34-43ad-494f-b111-b112dde56508}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Patch">
+      <UniqueIdentifier>{d07b8807-6528-4508-a91a-c4b1c141fcb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Patch\RailRevolve">
+      <UniqueIdentifier>{e0bdeffd-8f1e-4054-9402-e8444c1fe6ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -608,6 +614,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Entities\Curve\Cad_GeomCurve.hxx">
       <Filter>TnbLib\Cad\Entities\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Patch\RailRevolve\Cad_RailRevolve.hxx">
+      <Filter>TnbLib\Cad\Patch\RailRevolve</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -922,6 +931,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Entities\Curve\Cad_GeomCurveIO.cxx">
       <Filter>TnbLib\Cad\Entities\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Patch\RailRevolve\Cad_RailRevolve.cxx">
+      <Filter>TnbLib\Cad\Patch\RailRevolve</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

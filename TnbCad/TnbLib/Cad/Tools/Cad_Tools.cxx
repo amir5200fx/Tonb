@@ -27,9 +27,14 @@
 #include <OSstream.hxx>
 
 #include <gp_Pln.hxx>
+#include <Geom_Line.hxx>
 #include <Geom_Plane.hxx>
 #include <Geom_BoundedSurface.hxx>
 #include <Geom_TrimmedCurve.hxx>
+#include <Geom_BSplineCurve.hxx>
+#include <Geom_BSplineSurface.hxx>
+#include <GeomAPI_ProjectPointOnCurve.hxx>
+#include <GeomAPI_ProjectPointOnSurf.hxx>
 #include <Bnd_Box.hxx>
 #include <BRep_Tool.hxx>
 #include <BRepLib.hxx>
@@ -46,6 +51,10 @@
 #include <IGESControl_Writer.hxx>
 #include <STEPControl_Controller.hxx>
 #include <STEPControl_Writer.hxx>
+#include <TColgp_Array1OfPnt.hxx>
+#include <TColStd_Array1OfReal.hxx>
+#include <TColStd_Array1OfInteger.hxx>
+#include <TColStd_Array1OfReal.hxx>
 
 Standard_Boolean 
 tnbLib::Cad_Tools::HasTriangulation
@@ -180,6 +189,253 @@ tnbLib::Cad_Tools::BoundingBox
 	BRepBndLib::AddOptimal(theShape, B, useTri, Standard_False);
 
 	return std::move(B);
+}
+
+tnbLib::Pnt2d 
+tnbLib::Cad_Tools::Project
+(
+	const Pnt3d & thePoint, 
+	const Handle(Geom_Plane)& thePlane
+)
+{
+	GeomAPI_ProjectPointOnSurf alg;
+	alg.Init(thePoint, thePlane);
+	alg.Perform(thePoint);
+
+	if (alg.NbPoints() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong!" << endl
+			<< " - invalid nb. of projected points has have been detected!" << endl
+			<< abort(FatalError);
+	}
+	Standard_Real u, v;
+	alg.LowerDistanceParameters(u, v);
+
+	Pnt2d pt(u, v);
+	return std::move(pt);
+}
+
+Standard_Real
+tnbLib::Cad_Tools::Project
+(
+	const Pnt3d & thePoint, 
+	const Handle(Geom_Line)& theLine
+)
+{
+	GeomAPI_ProjectPointOnCurve alg;
+	alg.Init(thePoint, theLine);
+	alg.Perform(thePoint);
+
+	if (alg.NbPoints() NOT_EQUAL 1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong: unable to calculate the projected point" << endl
+			<< abort(FatalError);
+	}
+	return alg.LowerDistanceParameter();
+}
+
+tnbLib::Entity_Segment<tnbLib::Pnt2d> 
+tnbLib::Cad_Tools::Project
+(
+	const Entity3d_SegmentRef & theSeg,
+	const Handle(Geom_Plane)& thePlane
+)
+{
+	auto p0 = Project(theSeg.P0(), thePlane);
+	auto p1 = Project(theSeg.P1(), thePlane);
+
+	Entity_Segment<Pnt2d> seg2(std::move(p0), std::move(p1));
+	return std::move(seg2);
+}
+
+Handle(Geom_BSplineCurve) 
+tnbLib::Cad_Tools::BoundaryCurveU0
+(
+	const Handle(Geom_BSplineSurface)& thePatch
+)
+{
+	const auto& net = thePatch->Poles();
+	TColgp_Array1OfPnt poles(1, net.RowLength());
+	for (Standard_Integer i = 1; i <= net.RowLength(); i++)
+	{
+		const auto& pt = net.Value(1, i);
+		poles.SetValue(i, pt);
+	}
+	
+	if (thePatch->Weights())
+	{
+		const auto& wnet = *thePatch->Weights();
+		TColStd_Array1OfReal weights(1, wnet.RowLength());
+		for (Standard_Integer i = 1; i <= wnet.RowLength(); i++)
+		{
+			weights.SetValue(i, wnet.Value(1, i));
+		}
+
+		Handle(Geom_BSplineCurve) curve = 
+			new Geom_BSplineCurve
+			(
+				poles, weights, 
+				thePatch->UKnots(), thePatch->UMultiplicities(),
+				thePatch->UDegree(),
+				thePatch->UPeriod()
+			);
+		return std::move(curve);
+	}
+	else
+	{
+		Handle(Geom_BSplineCurve) curve =
+			new Geom_BSplineCurve
+			(
+				poles,
+				thePatch->UKnots(), thePatch->UMultiplicities(),
+				thePatch->UDegree(),
+				thePatch->UPeriod()
+			);
+		return std::move(curve);
+	}
+}
+
+Handle(Geom_BSplineCurve)
+tnbLib::Cad_Tools::BoundaryCurveUn
+(
+	const Handle(Geom_BSplineSurface)& thePatch
+)
+{
+	const auto& net = thePatch->Poles();
+	TColgp_Array1OfPnt poles(1, net.RowLength());
+	for (Standard_Integer i = 1; i <= net.RowLength(); i++)
+	{
+		const auto& pt = net.Value(net.ColLength(), i);
+		poles.SetValue(i, pt);
+	}
+
+	if (thePatch->Weights())
+	{
+		const auto& wnet = *thePatch->Weights();
+		TColStd_Array1OfReal weights(1, wnet.RowLength());
+		for (Standard_Integer i = 1; i <= wnet.RowLength(); i++)
+		{
+			weights.SetValue(i, wnet.Value(net.ColLength(), i));
+		}
+
+		Handle(Geom_BSplineCurve) curve =
+			new Geom_BSplineCurve
+			(
+				poles, weights,
+				thePatch->UKnots(), thePatch->UMultiplicities(),
+				thePatch->UDegree(),
+				thePatch->UPeriod()
+			);
+		return std::move(curve);
+	}
+	else
+	{
+		Handle(Geom_BSplineCurve) curve =
+			new Geom_BSplineCurve
+			(
+				poles,
+				thePatch->UKnots(), thePatch->UMultiplicities(),
+				thePatch->UDegree(),
+				thePatch->UPeriod()
+			);
+		return std::move(curve);
+	}
+}
+
+Handle(Geom_BSplineCurve)
+tnbLib::Cad_Tools::BoundaryCurveV0
+(
+	const Handle(Geom_BSplineSurface)& thePatch
+)
+{
+	const auto& net = thePatch->Poles();
+	TColgp_Array1OfPnt poles(1, net.ColLength());
+	for (Standard_Integer i = 1; i <= net.ColLength(); i++)
+	{
+		const auto& pt = net.Value(i, 1);
+		poles.SetValue(i, pt);
+	}
+
+	if (thePatch->Weights())
+	{
+		const auto& wnet = *thePatch->Weights();
+		TColStd_Array1OfReal weights(1, wnet.ColLength());
+		for (Standard_Integer i = 1; i <= wnet.ColLength(); i++)
+		{
+			weights.SetValue(i, wnet.Value(i, 1));
+		}
+
+		Handle(Geom_BSplineCurve) curve =
+			new Geom_BSplineCurve
+			(
+				poles, weights,
+				thePatch->VKnots(), thePatch->VMultiplicities(),
+				thePatch->VDegree(),
+				thePatch->VPeriod()
+			);
+		return std::move(curve);
+	}
+	else
+	{
+		Handle(Geom_BSplineCurve) curve =
+			new Geom_BSplineCurve
+			(
+				poles,
+				thePatch->VKnots(), thePatch->VMultiplicities(),
+				thePatch->VDegree(),
+				thePatch->VPeriod()
+			);
+		return std::move(curve);
+	}
+}
+
+Handle(Geom_BSplineCurve)
+tnbLib::Cad_Tools::BoundaryCurveVn
+(
+	const Handle(Geom_BSplineSurface)& thePatch
+)
+{
+	const auto& net = thePatch->Poles();
+	TColgp_Array1OfPnt poles(1, net.ColLength());
+	for (Standard_Integer i = 1; i <= net.ColLength(); i++)
+	{
+		const auto& pt = net.Value(i, net.RowLength());
+		poles.SetValue(i, pt);
+	}
+
+	if (thePatch->Weights())
+	{
+		const auto& wnet = *thePatch->Weights();
+		TColStd_Array1OfReal weights(1, wnet.ColLength());
+		for (Standard_Integer i = 1; i <= wnet.ColLength(); i++)
+		{
+			weights.SetValue(i, wnet.Value(i, wnet.RowLength()));
+		}
+
+		Handle(Geom_BSplineCurve) curve =
+			new Geom_BSplineCurve
+			(
+				poles, weights,
+				thePatch->VKnots(), thePatch->VMultiplicities(),
+				thePatch->VDegree(),
+				thePatch->VPeriod()
+			);
+		return std::move(curve);
+	}
+	else
+	{
+		Handle(Geom_BSplineCurve) curve =
+			new Geom_BSplineCurve
+			(
+				poles,
+				thePatch->VKnots(), thePatch->VMultiplicities(),
+				thePatch->VDegree(),
+				thePatch->VPeriod()
+			);
+		return std::move(curve);
+	}
 }
 
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 
@@ -1281,6 +1537,29 @@ tnbLib::Cad_Tools::RetrieveTriangulation
 			tris.push_back(tri);
 	}
 	return std::move(tris);
+}
+
+std::vector<TopoDS_Face> 
+tnbLib::Cad_Tools::RetrieveFaces
+(
+	const TopoDS_Shape & theShape
+)
+{
+	std::vector<TopoDS_Face> faces;
+	for
+		(
+			TopExp_Explorer Explorer(theShape, TopAbs_FACE);
+			Explorer.More();
+			Explorer.Next()
+			)
+	{
+		auto face = TopoDS::Face(Explorer.Current());
+		if (NOT face.IsNull())
+		{
+			faces.push_back(std::move(face));
+		}
+	}
+	return std::move(faces);
 }
 
 void tnbLib::Cad_Tools::SetPrecision

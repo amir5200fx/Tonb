@@ -1,24 +1,27 @@
-#include <Cad_ConicApexMaker.hxx>
+#include <Cad_RailRevolve.hxx>
+#include <Cad_GeomCurve.hxx>
 #include <Cad_GeomSurface.hxx>
+#include <Dir3d.hxx>
 #include <Global_Timer.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom_BSplineSurface.hxx>
+#include <Geom_BSplineCurve.hxx>
 
 namespace tnbLib
 {
-
-	static const std::string loadExt = Cad_GeomSurface::extension;
 	static const std::string saveExt = Cad_GeomSurface::extension;
+
+	static std::shared_ptr<Cad_GeomCurve> myGeneratrix;
+	static std::shared_ptr<Cad_GeomCurve> myRail;
 
 	static std::shared_ptr<Cad_GeomSurface> mySurf;
 	static std::shared_ptr<Cad_GeomSurface> myApex;
 
 	static gp_Ax1 myAxis;
 	static double myTol = 1.0e-6;
-	static auto myBnd = Cad_ConicApexMaker::bndPatch::U0;
 
 	static bool loadTag = false;
 	static bool exeTag = false;
@@ -50,33 +53,6 @@ namespace tnbLib
 		}
 	}
 
-	void setBoundary(const std::string& b)
-	{
-		if (b IS_EQUAL "u0")
-		{
-			myBnd = Cad_ConicApexMaker::bndPatch::U0;
-		}
-		else if (b IS_EQUAL "un")
-		{
-			myBnd = Cad_ConicApexMaker::bndPatch::Un;
-		}
-		else if (b IS_EQUAL "v0")
-		{
-			myBnd = Cad_ConicApexMaker::bndPatch::V0;
-		}
-		else if (b IS_EQUAL "vn")
-		{
-			myBnd = Cad_ConicApexMaker::bndPatch::Vn;
-		}
-		else
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "unrecognized boundary side has been detected!" << endl
-				<< " - boundaries: u0, un, v0, vn" << endl
-				<< abort(FatalError);
-		}
-	}
-
 	void setTol(double x)
 	{
 		myTol = x;
@@ -86,26 +62,65 @@ namespace tnbLib
 		}
 	}
 
-	void loadModel(const std::string& name)
+	void loadFile()
 	{
-		file::CheckExtension(name);
+		const auto currentPath = boost::filesystem::current_path().string();
 
-		mySurf = file::LoadFile<std::shared_ptr<Cad_GeomSurface>>(name + loadExt, verbose);
-		if (NOT mySurf)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the loaded model is null" << endl
-				<< abort(FatalError);
+		{//- loading generatrix curve
+			if (NOT boost::filesystem::is_directory("generatrix"))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no 'generatrix' directory has been found!" << endl
+					<< abort(FatalError);
+			}
+
+			//- change the current path
+			boost::filesystem::current_path(currentPath + R"(\generatrix)");
+
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_GeomCurve::extension).string();
+
+			myGeneratrix = file::LoadFile<std::shared_ptr<Cad_GeomCurve>>(name + Cad_GeomCurve::extension, verbose);
+			if (NOT myGeneratrix)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the generatrix curve is null!" << endl
+					<< abort(FatalError);
+			}
+
+			//- change the current path
+			boost::filesystem::current_path(currentPath);
 		}
 
-		loadTag = true;
-	}
+		{//- loading generatrix curve
+			if (NOT boost::filesystem::is_directory("rail"))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no 'rail' directory has been found!" << endl
+					<< abort(FatalError);
+			}
 
-	void loadModel()
-	{
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
-		myFileName = name.string();
-		loadModel(myFileName);
+			//- change the current path
+			boost::filesystem::current_path(currentPath + R"(\rail)");
+
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_GeomCurve::extension).string();
+
+			myRail = file::LoadFile<std::shared_ptr<Cad_GeomCurve>>(name + Cad_GeomCurve::extension, verbose);
+			if (NOT myRail)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the rail curve is null!" << endl
+					<< abort(FatalError);
+			}
+
+			//- change the current path
+			boost::filesystem::current_path(currentPath);
+		}
+
+		if (verbose)
+		{
+			Info << endl
+				<< " - all curves have been loaded, successfully!" << endl;
+		}
 	}
 
 	void saveTo(const std::string& name)
@@ -157,15 +172,16 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto alg = std::make_shared<Cad_ConicApexMaker>(patch);
+		auto alg = std::make_shared<Cad_RailRevolve>();
 
 		alg->SetAxis(myAxis);
 		alg->SetTolerance(myTol);
-		alg->SetBoundary(myBnd);
+		alg->LoadGeneratrix(Handle(Geom_BSplineCurve)::DownCast(myGeneratrix->Geometry()));
+		alg->LoadRail(Handle(Geom_BSplineCurve)::DownCast(myRail->Geometry()));
 
 		alg->Perform();
 
-		myApex = std::make_shared<Cad_GeomSurface>(0, name, alg->Apex());
+		myApex = std::make_shared<Cad_GeomSurface>(0, name, alg->Patch());
 	}
 
 	void execute()
@@ -221,8 +237,7 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
+		mod->add(chaiscript::fun([]()->void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
@@ -231,7 +246,6 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const Pnt3d& p)-> void {setApexLoc(p); }), "setApexLoc");
 		mod->add(chaiscript::fun([](const Dir3d& d)-> void {setApexDir(d); }), "setApexDir");
 		mod->add(chaiscript::fun([](double x)-> void {setTol(x); }), "setTolerance");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {setBoundary(name); }), "setBoundary");
 
 		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return createPoint(x, y, z); }), "createPoint");
 		mod->add(chaiscript::fun([](double x, double y, double z) -> auto {return createDir(x, y, z); }), "createDirection");
@@ -277,7 +291,7 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadModel(string)" << endl
+				<< " - loadFile()" << endl
 				<< " - saveTo(string)" << endl << endl
 
 				<< " # Settings: " << endl << endl
@@ -285,7 +299,6 @@ int main(int argc, char *argv[])
 				<< " - setApexLoc(Point)" << endl
 				<< " - setApexDir(Direction)" << endl
 				<< " - setTolerance(double)" << endl
-				<< " - setBoundary(string);         - boundaries: u0, un, v0 and vn" << endl
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
 
 				<< " # operators: " << endl << endl

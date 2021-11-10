@@ -158,8 +158,8 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadMeshes(name); }), "loadMesh");
-		mod->add(chaiscript::fun([]()->void {loadMeshes(); }), "loadMesh");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadMeshes(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadMeshes(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([](unsigned short c)->void {verbose = c; }), "setVerbose");
@@ -202,7 +202,7 @@ int main(int argc, char *argv[])
 
 				<< " - setVerbose(unsigned short)" << endl << endl
 
-				<< " - loadMesh(name [optional])" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(string)" << endl;
 			return 0;
 		}

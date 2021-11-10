@@ -12,6 +12,8 @@
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <Adaptor3d_Curve.hxx>
 
+const std::string tnbLib::Cad_GeomCurve::extension = ".gcurve";
+
 void tnbLib::Cad_GeomCurve::CheckBounded(const Handle(Geom_Curve)& theCurve)
 {
 	if (NOT Cad_Tools::IsBounded(theCurve))

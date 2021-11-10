@@ -4,6 +4,7 @@
 
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
+#include <Entity_Segment.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
@@ -15,9 +16,13 @@ class TopoDS_Face;
 class TopoDS_Edge;
 class TopoDS_Wire;
 class Geom_Curve;
+class Geom_Line;
 class Geom_Surface;
+class Geom_Plane;
 class Geom2d_Curve;
 class Poly_Triangulation;
+class Geom_BSplineCurve;
+class Geom_BSplineSurface;
 
 #include <memory>
 #include <vector>
@@ -79,6 +84,21 @@ namespace tnbLib
 				const TopoDS_Shape& theShape, 
 				const Standard_Boolean useTri = Standard_False
 			);
+
+		static TnbCad_EXPORT Pnt2d Project(const Pnt3d& thePoint, const Handle(Geom_Plane)& thePlane);
+		static TnbCad_EXPORT Standard_Real Project(const Pnt3d& thePoint, const Handle(Geom_Line)& theLine);
+
+		static TnbCad_EXPORT Entity_Segment<Pnt2d> 
+			Project
+			(
+				const Entity3d_SegmentRef& theSeg,
+				const Handle(Geom_Plane)& thePlane
+			);
+
+		static TnbCad_EXPORT Handle(Geom_BSplineCurve) BoundaryCurveU0(const Handle(Geom_BSplineSurface)&);
+		static TnbCad_EXPORT Handle(Geom_BSplineCurve) BoundaryCurveUn(const Handle(Geom_BSplineSurface)&);
+		static TnbCad_EXPORT Handle(Geom_BSplineCurve) BoundaryCurveV0(const Handle(Geom_BSplineSurface)&);
+		static TnbCad_EXPORT Handle(Geom_BSplineCurve) BoundaryCurveVn(const Handle(Geom_BSplineSurface)&);
 
 		static TnbCad_EXPORT std::shared_ptr<Entity2d_Triangulation>
 			ParametricTriangulation
@@ -189,6 +209,12 @@ namespace tnbLib
 
 		static TnbCad_EXPORT std::vector<Handle(Poly_Triangulation)>
 			RetrieveTriangulation
+			(
+				const TopoDS_Shape& theShape
+			);
+
+		static TnbCad_EXPORT std::vector<TopoDS_Face> 
+			RetrieveFaces
 			(
 				const TopoDS_Shape& theShape
 			);

@@ -340,7 +340,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_Triangulation.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_TriangulationIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2d.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2dIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Entities\Vector\3d\Vec3d.cxx" />
+    <ClCompile Include="TnbLib\Geo\Entities\Vector\3d\Vec3dIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Function\Size\Surface\Geo2d_SizeFunction_Surface.cxx" />
     <ClCompile Include="TnbLib\Geo\Function\Size\Surface\Geo2d_SizeFunction_SurfaceIO.cxx" />
     <ClCompile Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun_UniformIO.cxx" />

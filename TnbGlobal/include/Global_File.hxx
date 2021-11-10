@@ -35,6 +35,9 @@ namespace tnbLib
 		void SaveTo(const T&, const std::string& name, const unsigned short verbose);
 
 		template<class T>
+		void SaveListTo(const std::vector<T>&, const std::string& name, const unsigned short verbose);
+
+		template<class T>
 		T LoadFile(const std::string& name, const unsigned short verbose);
 	}
 }

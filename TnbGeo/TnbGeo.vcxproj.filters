@@ -1292,5 +1292,11 @@
     <ClCompile Include="TnbLib\Geo\ProfileFun\Geo_ProfileFun.cxx">
       <Filter>TnbLib\Geo\ProfileFun</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Vector\3d\Vec3dIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Vector\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2dIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Vector\2d</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

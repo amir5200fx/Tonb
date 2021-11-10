@@ -4,6 +4,7 @@
 #include <Entity3d_Triangulation.hxx>
 #include <Entity3d_Box.hxx>
 #include <Global_Timer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -13,10 +14,14 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = Cad_GeomSurface::extension;
+	static const std::string saveExt = Entity3d_Triangulation::extension;
+
 	static bool loadTag = false;
 	static bool exeTag = false;
 	static unsigned short verbose(0);
 
+	static std::string myFileName;
 	static std::shared_ptr<Cad_GeomSurface> mySurf;
 	static std::shared_ptr<Entity3d_Triangulation> myTri;
 
@@ -27,39 +32,31 @@ namespace tnbLib
 		verbose = i;
 	}
 
-	void loadModel(const std::string& name)
+	void loadFile(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
+		file::CheckExtension(name);
 
-			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> mySurf;
-		}
-
+		mySurf = file::LoadFile<std::shared_ptr<Cad_GeomSurface>>(name + loadExt, verbose);
 		if (NOT mySurf)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the loaded model is null" << endl
+				<< "the shape is null!" << endl
 				<< abort(FatalError);
 		}
 
 		if (verbose)
 		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
+			Info << " - surface's name: " << mySurf->Name() << endl;
 			Info << endl;
 		}
-
 		loadTag = true;
+	}
+
+	void loadFile()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadFile(myFileName);
 	}
 
 	void saveTo(const std::string& name)
@@ -71,7 +68,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
+		fileName fn(name + saveExt);
 		std::ofstream myFile(fn);
 
 		TNB_oARCH_FILE_TYPE ar(myFile);
@@ -85,6 +82,18 @@ namespace tnbLib
 			Info << " the file is saved in: " << fn << ", successfully!" << endl;
 			Info << endl;
 		}
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application has not been performed!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
 	}
 
 	void execute()
@@ -144,10 +153,17 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
-		mod->add(chaiscript::fun([](int c)->void {verbose = c; }), "setVerbose");
 
+		//- IO functions:
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+
+		//- Settings:
+		mod->add(chaiscript::fun([](unsigned short c)->void {setVerbose(c); }), "setVerbose");
+
+		//- operators:
 		mod->add(chaiscript::fun([]() ->void {execute(); }), "execute");
 	}
 
@@ -188,8 +204,8 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
@@ -211,12 +227,12 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbSurfacePolesViewer";
-			fileName myFileName(address);
-
 			try
 			{
-				chai.eval_file(myFileName);
+				//std::string address = ".\\system\\tnbSurfacePolesViewer";
+				fileName theFileName(file::GetSystemFile("tnbSurfacePolesViewer"));
+
+				chai.eval_file(theFileName);
 				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)

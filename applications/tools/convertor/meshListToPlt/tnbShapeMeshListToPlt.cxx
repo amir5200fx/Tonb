@@ -102,8 +102,8 @@ namespace tnbLib
 	{
 		//- io functions
 
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadMesh");
-		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "loadMesh");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()-> void {loadModel(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
 			Info << endl;
 			Info << " Function list:" << endl <<endl
 				<< " - setVerbose(unsigned short)" << endl <<endl
-				<< " - loadMesh(name [optional])" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
