@@ -124,6 +124,7 @@ namespace tnbLib
 
 		//- settings
 		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); }), "setVerbose");
+		mod->add(chaiscript::fun([](double x)-> void {setPar(x); }), "setParameter");
 
 		//- operators
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
@@ -167,6 +168,8 @@ int main(int argc, char *argv[])
 				<< " - loadFile(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
+
+				<< " - setParameter(double)" << endl
 				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl

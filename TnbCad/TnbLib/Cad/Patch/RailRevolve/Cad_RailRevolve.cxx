@@ -167,7 +167,17 @@ void tnbLib::Cad_RailRevolve::Perform()
 
 	const auto& genPoles = Generatrix()->Poles();
 	const auto& railPoles = Rail()->Poles();
-	
+
+	for (int i = 1; i <= genPoles.Size(); i++)
+	{
+		std::cout << genPoles.Value(i) << std::endl;
+	}
+
+	for (int i = 1; i <= railPoles.Size(); i++)
+	{
+		std::cout << railPoles.Value(i) << std::endl;
+	}
+
 	auto genWeights = RetrieveWeights(Generatrix()->Weights(), genPoles.Size());
 	auto railWeights = RetrieveWeights(Rail()->Weights(), railPoles.Size());
 
@@ -187,6 +197,12 @@ void tnbLib::Cad_RailRevolve::Perform()
 	TColgp_Array2OfPnt Poles(1, railPoles.Size(), 1, genPoles.Size());
 	TColStd_Array2OfReal Weights(1, railPoles.Size(), 1, genPoles.Size());
 
+	for (Standard_Integer j = 1; j <= genPoles.Size(); j++)
+	{
+		Poles.SetValue(1, j, genPoles.Value(j));
+		Weights.SetValue(1, j, genWeights[j - 1] * railWeights[0]);
+	}
+
 	for (Standard_Integer j = 1; j < railPoles.Size(); j++)
 	{
 		const auto& Q0 = railPoles.Value(j);
@@ -199,7 +215,7 @@ void tnbLib::Cad_RailRevolve::Perform()
 		{
 			for (Standard_Integer i = 1; i <= genPoles.Size(); i++)
 			{
-				pts.push_back(genPoles.Value(i));
+				pts.push_back(Poles.Value(j, i));
 			}
 		}
 		else
@@ -207,42 +223,36 @@ void tnbLib::Cad_RailRevolve::Perform()
 			try
 			{
 				auto angle = CalcAngle(Q0, Q1, axLine);
+
 				auto P1 = Q1;
+				//pts.push_back(genPoles.Value(1));
+				pts.push_back(railPoles.Value(j + 1));
 				for (Standard_Integer i = 2; i <= genPoles.Size(); i++)
 				{
-					const auto& pt = genPoles.Value(i);
+					//const auto& pt = genPoles.Value(i);
+					const auto& pt = Poles.Value(j, i);
 					auto ppt = ProjectPoint(pt, axLine);
 
 					if (ppt.Distance(pt) <= tol)
-					{
+					{				
 						pts.push_back(pt);
 					}
 					else
 					{
-						const auto& P0 = genPoles.Value(i - 1);
+						//const auto& P0 = genPoles.Value(i - 1);
+						const auto& P0 = Poles.Value(j, i - 1);
 
-						auto n = CalcNormalPlane(pt, P0, P1);
-						auto pln = CreatePlane(pt, n);
-
-
+						auto t = Dir3d(P0, P1);
 						auto e = Dir3d(ppt, pt);
 						e.Rotate(Axis(), angle);
 
-						Handle(Geom_Line) eLine = new Geom_Line(ppt, e);
+						auto n = Axis().Direction().Crossed(e);
+						auto pln = CreatePlane(ppt, n);
 
-						auto rotatedPoint = Intersect(eLine, pln);
+						Handle(Geom_Line) tLine = new Geom_Line(pt, t);
+						auto rotatedPoint = Intersect(tLine, pln);
 
-						auto t = CalcDir(ProjectSegment(Entity3d_SegmentRef(Q1, rotatedPoint), pln));
-
-						auto O2 = ProjectPoint(pt, pln);
-						auto e2 = ProjectSegment(Entity3d_SegmentRef(Q0, Q1), pln);
-						auto dir = CalcDir(e2);
-
-						auto intP2 = Geo_Tools::IntersectionTwoLines(e2.P1(), t, O2, dir, Precision::Angular());
-
-						auto intP = pln->Value(intP2.X(), intP2.Y());
-
-						pts.push_back(intP);
+						pts.push_back(std::move(rotatedPoint));
 					}
 				}
 			}
@@ -256,8 +266,8 @@ void tnbLib::Cad_RailRevolve::Perform()
 		
 		for (Standard_Integer i = 0; i < pts.size(); i++)
 		{
-			Poles.SetValue(j, i + 1, pts[i]);
-			Weights.SetValue(j, i + 1, railWeights[j - 1] * genWeights[i]);
+			Poles.SetValue(j + 1, i + 1, pts[i]);
+			Weights.SetValue(j + 1, i + 1, /*railWeights[j + 1] **/ genWeights[i]);
 		}
 	}
 	

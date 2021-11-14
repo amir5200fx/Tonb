@@ -257,107 +257,13 @@ tnbLib::Cad_Tools::BoundaryCurveU0
 )
 {
 	const auto& net = thePatch->Poles();
-	TColgp_Array1OfPnt poles(1, net.RowLength());
-	for (Standard_Integer i = 1; i <= net.RowLength(); i++)
-	{
-		const auto& pt = net.Value(1, i);
-		poles.SetValue(i, pt);
-	}
-	
-	if (thePatch->Weights())
-	{
-		const auto& wnet = *thePatch->Weights();
-		TColStd_Array1OfReal weights(1, wnet.RowLength());
-		for (Standard_Integer i = 1; i <= wnet.RowLength(); i++)
-		{
-			weights.SetValue(i, wnet.Value(1, i));
-		}
-
-		Handle(Geom_BSplineCurve) curve = 
-			new Geom_BSplineCurve
-			(
-				poles, weights, 
-				thePatch->UKnots(), thePatch->UMultiplicities(),
-				thePatch->UDegree(),
-				thePatch->UPeriod()
-			);
-		return std::move(curve);
-	}
-	else
-	{
-		Handle(Geom_BSplineCurve) curve =
-			new Geom_BSplineCurve
-			(
-				poles,
-				thePatch->UKnots(), thePatch->UMultiplicities(),
-				thePatch->UDegree(),
-				thePatch->UPeriod()
-			);
-		return std::move(curve);
-	}
-}
-
-Handle(Geom_BSplineCurve)
-tnbLib::Cad_Tools::BoundaryCurveUn
-(
-	const Handle(Geom_BSplineSurface)& thePatch
-)
-{
-	const auto& net = thePatch->Poles();
-	TColgp_Array1OfPnt poles(1, net.RowLength());
-	for (Standard_Integer i = 1; i <= net.RowLength(); i++)
-	{
-		const auto& pt = net.Value(net.ColLength(), i);
-		poles.SetValue(i, pt);
-	}
-
-	if (thePatch->Weights())
-	{
-		const auto& wnet = *thePatch->Weights();
-		TColStd_Array1OfReal weights(1, wnet.RowLength());
-		for (Standard_Integer i = 1; i <= wnet.RowLength(); i++)
-		{
-			weights.SetValue(i, wnet.Value(net.ColLength(), i));
-		}
-
-		Handle(Geom_BSplineCurve) curve =
-			new Geom_BSplineCurve
-			(
-				poles, weights,
-				thePatch->UKnots(), thePatch->UMultiplicities(),
-				thePatch->UDegree(),
-				thePatch->UPeriod()
-			);
-		return std::move(curve);
-	}
-	else
-	{
-		Handle(Geom_BSplineCurve) curve =
-			new Geom_BSplineCurve
-			(
-				poles,
-				thePatch->UKnots(), thePatch->UMultiplicities(),
-				thePatch->UDegree(),
-				thePatch->UPeriod()
-			);
-		return std::move(curve);
-	}
-}
-
-Handle(Geom_BSplineCurve)
-tnbLib::Cad_Tools::BoundaryCurveV0
-(
-	const Handle(Geom_BSplineSurface)& thePatch
-)
-{
-	const auto& net = thePatch->Poles();
 	TColgp_Array1OfPnt poles(1, net.ColLength());
 	for (Standard_Integer i = 1; i <= net.ColLength(); i++)
 	{
 		const auto& pt = net.Value(i, 1);
 		poles.SetValue(i, pt);
 	}
-
+	
 	if (thePatch->Weights())
 	{
 		const auto& wnet = *thePatch->Weights();
@@ -367,32 +273,51 @@ tnbLib::Cad_Tools::BoundaryCurveV0
 			weights.SetValue(i, wnet.Value(i, 1));
 		}
 
-		Handle(Geom_BSplineCurve) curve =
-			new Geom_BSplineCurve
-			(
-				poles, weights,
-				thePatch->VKnots(), thePatch->VMultiplicities(),
-				thePatch->VDegree(),
-				thePatch->VPeriod()
-			);
-		return std::move(curve);
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles, weights,
+					thePatch->UKnots(), thePatch->UMultiplicities(),
+					thePatch->UDegree(),
+					thePatch->IsUPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
 	}
 	else
 	{
-		Handle(Geom_BSplineCurve) curve =
-			new Geom_BSplineCurve
-			(
-				poles,
-				thePatch->VKnots(), thePatch->VMultiplicities(),
-				thePatch->VDegree(),
-				thePatch->VPeriod()
-			);
-		return std::move(curve);
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles,
+					thePatch->UKnots(), thePatch->UMultiplicities(),
+					thePatch->UDegree(),
+					thePatch->IsUPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
 	}
+	return Handle(Geom_BSplineCurve)();
 }
 
 Handle(Geom_BSplineCurve)
-tnbLib::Cad_Tools::BoundaryCurveVn
+tnbLib::Cad_Tools::BoundaryCurveUn
 (
 	const Handle(Geom_BSplineSurface)& thePatch
 )
@@ -411,31 +336,182 @@ tnbLib::Cad_Tools::BoundaryCurveVn
 		TColStd_Array1OfReal weights(1, wnet.ColLength());
 		for (Standard_Integer i = 1; i <= wnet.ColLength(); i++)
 		{
-			weights.SetValue(i, wnet.Value(i, wnet.RowLength()));
+			weights.SetValue(i, wnet.Value(i, net.RowLength()));
 		}
 
-		Handle(Geom_BSplineCurve) curve =
-			new Geom_BSplineCurve
-			(
-				poles, weights,
-				thePatch->VKnots(), thePatch->VMultiplicities(),
-				thePatch->VDegree(),
-				thePatch->VPeriod()
-			);
-		return std::move(curve);
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles, weights,
+					thePatch->UKnots(), thePatch->UMultiplicities(),
+					thePatch->UDegree(),
+					thePatch->IsUPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
 	}
 	else
 	{
-		Handle(Geom_BSplineCurve) curve =
-			new Geom_BSplineCurve
-			(
-				poles,
-				thePatch->VKnots(), thePatch->VMultiplicities(),
-				thePatch->VDegree(),
-				thePatch->VPeriod()
-			);
-		return std::move(curve);
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles,
+					thePatch->UKnots(), thePatch->UMultiplicities(),
+					thePatch->UDegree(),
+					thePatch->IsUPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
 	}
+	return Handle(Geom_BSplineCurve)();
+}
+
+Handle(Geom_BSplineCurve)
+tnbLib::Cad_Tools::BoundaryCurveV0
+(
+	const Handle(Geom_BSplineSurface)& thePatch
+)
+{
+	const auto& net = thePatch->Poles();
+	TColgp_Array1OfPnt poles(1, net.RowLength());
+	for (Standard_Integer i = 1; i <= net.RowLength(); i++)
+	{
+		const auto& pt = net.Value(1, i);
+		poles.SetValue(i, pt);
+	}
+
+	if (thePatch->Weights())
+	{
+		const auto& wnet = *thePatch->Weights();
+		TColStd_Array1OfReal weights(1, wnet.RowLength());
+		for (Standard_Integer i = 1; i <= wnet.RowLength(); i++)
+		{
+			weights.SetValue(i, wnet.Value(1, i));
+		}
+
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles, weights,
+					thePatch->VKnots(), thePatch->VMultiplicities(),
+					thePatch->VDegree(),
+					thePatch->IsVPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
+	}
+	else
+	{
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles,
+					thePatch->VKnots(), thePatch->VMultiplicities(),
+					thePatch->VDegree(),
+					thePatch->IsVPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
+	}
+	return Handle(Geom_BSplineCurve)();
+}
+
+Handle(Geom_BSplineCurve)
+tnbLib::Cad_Tools::BoundaryCurveVn
+(
+	const Handle(Geom_BSplineSurface)& thePatch
+)
+{
+	const auto& net = thePatch->Poles();
+	TColgp_Array1OfPnt poles(1, net.RowLength());
+	for (Standard_Integer i = 1; i <= net.RowLength(); i++)
+	{
+		const auto& pt = net.Value(net.ColLength(), i);
+		poles.SetValue(i, pt);
+	}
+
+	if (thePatch->Weights())
+	{
+		const auto& wnet = *thePatch->Weights();
+		TColStd_Array1OfReal weights(1, wnet.RowLength());
+		for (Standard_Integer i = 1; i <= wnet.RowLength(); i++)
+		{
+			weights.SetValue(i, wnet.Value(wnet.ColLength(), i));
+		}
+
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles, weights,
+					thePatch->VKnots(), thePatch->VMultiplicities(),
+					thePatch->VDegree(),
+					thePatch->IsVPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
+	}
+	else
+	{
+		try
+		{
+			Handle(Geom_BSplineCurve) curve =
+				new Geom_BSplineCurve
+				(
+					poles,
+					thePatch->VKnots(), thePatch->VMultiplicities(),
+					thePatch->VDegree(),
+					thePatch->IsVPeriodic()
+				);
+			return std::move(curve);
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
+	}
+	return Handle(Geom_BSplineCurve)();
 }
 
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 

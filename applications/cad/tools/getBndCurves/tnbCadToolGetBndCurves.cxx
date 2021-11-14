@@ -70,7 +70,7 @@ namespace tnbLib
 			boost::filesystem::path dir(std::to_string(i));
 			boost::filesystem::create_directory(dir);
 
-			std::ofstream file(address);
+			std::ofstream file(address + saveExt);
 
 			TNB_oARCH_FILE_TYPE oa(file);
 
@@ -90,7 +90,7 @@ namespace tnbLib
 			boost::filesystem::path dir(std::to_string(i));
 			boost::filesystem::create_directory(dir);
 
-			std::ofstream file(address);
+			std::ofstream file(address + saveExt);
 
 			TNB_oARCH_FILE_TYPE oa(file);
 
@@ -110,7 +110,7 @@ namespace tnbLib
 			boost::filesystem::path dir(std::to_string(i));
 			boost::filesystem::create_directory(dir);
 
-			std::ofstream file(address);
+			std::ofstream file(address + saveExt);
 
 			TNB_oARCH_FILE_TYPE oa(file);
 
@@ -130,7 +130,7 @@ namespace tnbLib
 			boost::filesystem::path dir(std::to_string(i));
 			boost::filesystem::create_directory(dir);
 
-			std::ofstream file(address);
+			std::ofstream file(address + saveExt);
 
 			TNB_oARCH_FILE_TYPE oa(file);
 

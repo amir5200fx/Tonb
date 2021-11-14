@@ -116,6 +116,8 @@ namespace tnbLib
 			boost::filesystem::current_path(currentPath);
 		}
 
+		loadTag = true;
+
 		if (verbose)
 		{
 			Info << endl
@@ -164,18 +166,11 @@ namespace tnbLib
 
 	void createPatch(const std::string& name)
 	{
-		auto patch = Handle(Geom_BSplineSurface)::DownCast(mySurf->Geometry());
-		if (NOT patch)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no bspline surface has been detected!" << endl
-				<< abort(FatalError);
-		}
-
 		auto alg = std::make_shared<Cad_RailRevolve>();
 
 		alg->SetAxis(myAxis);
 		alg->SetTolerance(myTol);
+
 		alg->LoadGeneratrix(Handle(Geom_BSplineCurve)::DownCast(myGeneratrix->Geometry()));
 		alg->LoadRail(Handle(Geom_BSplineCurve)::DownCast(myRail->Geometry()));
 
@@ -271,7 +266,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
