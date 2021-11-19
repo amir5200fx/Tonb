@@ -35,6 +35,16 @@ namespace tnbLib
 
 	protected:
 
+
+		//- default constructor
+
+
+		Geo_MetricPrcsr_Base()
+		{}
+
+
+		//- constructors
+
 		Geo_MetricPrcsr_Base
 		(
 			const std::shared_ptr<info>& theInfo
@@ -56,6 +66,9 @@ namespace tnbLib
 		{}
 
 	public:
+
+
+		//- public functions and operators
 
 		const std::shared_ptr<info>& Info() const
 		{

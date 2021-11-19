@@ -652,8 +652,10 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Info\Geo_MetricPrcsrAnIso_Info.cxx" />
     <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Info\Geo_MetricPrcsrAnIso_InfoIO.cxx" />
     <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsr.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsrIO.cxx" />
     <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Iso\3d\Geo3d_MetricPrcsr.cxx" />
     <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\System\Geo_MetricPrcsr_System.cxx" />
+    <ClCompile Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundExtension.cxx" />
     <ClCompile Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundIO.cxx" />
     <ClCompile Include="TnbLib\Base\SolutionData\2d\Mesh2d_SolutionDataIO.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\Conditions\Conditions\Mesh_Conditions.cxx" />

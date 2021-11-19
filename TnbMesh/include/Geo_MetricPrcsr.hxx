@@ -52,6 +52,12 @@ namespace tnbLib
 		typedef Point ptType;
 		typedef typename cascadeLib::vec_type_from_point<Point>::vcType vcType;
 
+
+		static TnbMesh_EXPORT const std::string extension;
+
+
+		//- constructors
+
 		Geo_MetricPrcsr(const std::shared_ptr<info>& theInfo)
 			: Geo_MetricPrcsr_Base<MetricFun>(theInfo)
 		{}
@@ -79,6 +85,9 @@ namespace tnbLib
 			, theSizeFunction_(theSizeFunction)
 			, theMetricFunction_(theMetricFunction)
 		{}
+
+
+		//- public functions and operators
 
 		const Entity_Box<Point>& BoundingBox() const
 		{
@@ -178,6 +187,12 @@ namespace tnbLib
 		std::shared_ptr<SizeFun> theSizeFunction_;
 
 
+		//- default constructor
+
+		Geo_MetricPrcsr()
+		{}
+
+
 		//- private functions and operators
 
 		friend class boost::serialization::access;
@@ -196,6 +211,12 @@ namespace tnbLib
 
 		typedef Point ptType;
 		typedef typename cascadeLib::vec_type_from_point<Point>::vcType vcType;
+
+
+		static TnbMesh_EXPORT const std::string extension;
+
+
+		//- constructors
 
 		Geo_MetricPrcsr(const std::shared_ptr<info>& theInfo)
 			: Geo_MetricPrcsr_Base<void>(theInfo)
@@ -220,6 +241,9 @@ namespace tnbLib
 			: Geo_MetricPrcsr_Base<void>(theIndex, theName, theInfo)
 			, theSizeFunction_(theSizeFunction)
 		{}
+
+
+		//- public functions and operators
 
 		const Entity_Box<Point>& BoundingBox() const
 		{

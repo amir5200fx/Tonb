@@ -23,6 +23,8 @@
 #include <map>
 #include <algorithm>
 
+unsigned short tnbLib::Mesh2d_CurveRemesh::verbose(0);
+
 namespace tnbLib
 {
 
@@ -284,9 +286,9 @@ namespace tnbLib
 				FatalErrorIn(FunctionSIG)
 					<< "duplicate data!" << endl
 					<< abort(FatalError);
-			}
-			return std::move(curveMap);
+			}		
 		}
+		return std::move(curveMap);
 	}
 
 	auto RetrieveCoords
@@ -654,7 +656,7 @@ void tnbLib::Mesh2d_CurveRemesh::Perform()
 			<< abort(FatalError);
 	}
 
-	auto uniSize = std::make_shared<GeoSizeFun2d_Uniform>(BaseSize());
+	auto uniSize = std::make_shared<GeoSizeFun2d_Uniform>(BaseSize(), *BoundingBox());
 	Debug_Null_Pointer(uniSize);
 
 	const auto length0 = Discretize(uniSize);

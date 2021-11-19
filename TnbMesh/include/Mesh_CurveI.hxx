@@ -6,8 +6,8 @@
 namespace tnbLib
 {
 
-	template<class gCurveType, class MetricPrcsrType>
-	void Mesh_Curve<gCurveType, MetricPrcsrType>::MakeChain
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	void Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::MakeChain
 	(
 		const std::vector<Standard_Real>& theParameters
 	)
@@ -24,8 +24,8 @@ namespace tnbLib
 		}
 	}
 
-	template<class gCurveType, class MetricPrcsrType>
-	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType>::CalcNextParameter
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcNextParameter
 	(
 		const Standard_Real theU0,
 		const Standard_Real theGuess,
@@ -91,8 +91,8 @@ namespace tnbLib
 		}
 	}
 
-	template<class gCurveType, class MetricPrcsrType>
-	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType>::CalcNextParameter
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcNextParameter
 	(
 		const Standard_Real theU0,
 		const Standard_Real theGuess,
@@ -110,8 +110,8 @@ namespace tnbLib
 				theCurve, theInfo);
 	}
 
-	template<class gCurveType, class MetricPrcsrType>
-	Mesh_Curve<gCurveType, MetricPrcsrType>::Mesh_Curve
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::Mesh_Curve
 	(
 		const Handle(gCurveType)& theCurve,
 		const Standard_Real theU0,
@@ -125,8 +125,8 @@ namespace tnbLib
 	{
 	}
 
-	template<class gCurveType, class MetricPrcsrType>
-	void Mesh_Curve<gCurveType, MetricPrcsrType>::LoadCurve
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	void Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::LoadCurve
 	(
 		const Handle(gCurveType)& theCurve,
 		const Standard_Real theU0,
@@ -138,20 +138,36 @@ namespace tnbLib
 		ChangeLastParameter() = theU1;
 	}
 
-	template<class gCurveType, class MetricPrcsrType>
-	void Mesh_Curve<gCurveType, MetricPrcsrType>::Perform()
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	void tnbLib::Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::LoadMap
+	(
+		const std::shared_ptr<MetricPrcsrType>& theSizeMap
+	)
+	{
+		theMetricMap_ = theSizeMap;
+	}
+
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::Perform()
 	{
 		if (NOT Geometry())
 		{
 			FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
-				<< "No curve has been loaded to discretization" << endl
+				<< "No curve has been loaded" << endl
 				<< abort(FatalError);
 		}
 
 		if (NOT MetricMap())
 		{
 			FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
-				<< "No sizeMap has been loaded to discretization" << endl
+				<< "No sizeMap has been loaded" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT Info())
+		{
+			FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+				<< "No sizeMap has been loaded" << endl
 				<< abort(FatalError);
 		}
 
@@ -219,10 +235,12 @@ namespace tnbLib
 		MakeChain(Parameters);
 
 		Change_IsDone() = Standard_True;
+
+		return curveLength;
 	}
 
-	template<class gCurveType, class MetricPrcsrType>
-	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType>::CalcLength
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcLength
 	(
 		const entity& theCurve,
 		const Standard_Integer theLevel,
@@ -267,8 +285,8 @@ namespace tnbLib
 		}
 	}
 
-	template<class gCurveType, class MetricPrcsrType>
-	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType>::CalcLength
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcLength
 	(
 		const entity& theCurve,
 		const Standard_Integer theMaxLevel,

@@ -4,6 +4,8 @@
 #include <Geo_SegmentIntegrand_Function.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
+const std::string tnbLib::Geo3d_MetricPrcsrAnIso::extension = ".mprcsr3d";
+
 namespace tnbLib
 {
 

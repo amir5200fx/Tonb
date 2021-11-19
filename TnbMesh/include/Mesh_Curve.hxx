@@ -9,6 +9,7 @@
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveEntity.hxx>
 #include <Mesh_Module.hxx>
+#include <Mesh_CurveTraits.hxx>
 
 namespace tnbLib
 {
@@ -74,13 +75,14 @@ namespace tnbLib
 	};
 
 
-	template<class gCurveType, class MetricPrcsrType>
+	template<class gCurveType, class MetricPrcsrType, bool SavePars = false>
 	class Mesh_Curve
 		: public Global_Done
 		, public Mesh_Curve_Base
 	{
 
-		typedef typename cascadeLib::pt_type_from_curve<gCurveType>::ptType Point;
+		typedef typename meshCurveTraits::point_type<gCurveType, SavePars>::Point Point;
+		//typedef typename cascadeLib::pt_type_from_curve<gCurveType>::ptType Point;
 
 		typedef Mesh_Curve_Info info;
 		typedef NumAlg_AdaptiveInteg_Info intgInfo;
@@ -99,10 +101,7 @@ namespace tnbLib
 
 		//- private functions and operators
 
-		void MakeChain
-		(
-			const std::vector<Standard_Real>& theParameters
-		);
+		void MakeChain(const std::vector<Standard_Real>& theParameters);
 
 		static Standard_Real
 			CalcNextParameter
@@ -131,8 +130,14 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [7/14/2021 Amir]
+
 		Mesh_Curve()
 		{}
+
+
+		// constructors [7/14/2021 Amir]
 
 		Mesh_Curve
 		(
@@ -142,6 +147,9 @@ namespace tnbLib
 			const std::shared_ptr<MetricPrcsrType>& theMetricMap,
 			const std::shared_ptr<info>& theInfo
 		);
+
+
+		// public functions and operators [7/14/2021 Amir]
 
 		const Handle(gCurveType)& Geometry() const
 		{
@@ -170,8 +178,8 @@ namespace tnbLib
 			const std::shared_ptr<MetricPrcsrType>& theSizeMap
 		);
 
-
-		void Perform();
+		// return the curve length [7/14/2021 Amir]
+		Standard_Real Perform();
 
 
 		//- static functions and operators

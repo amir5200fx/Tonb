@@ -2606,6 +2606,12 @@
     <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\System\GeoMesh_Background_System.cxx">
       <Filter>TnbLib\Base\Geom\Mesh\Background\System</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundExtension.cxx">
+      <Filter>TnbLib\Base\MetricFunction\Background\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Iso\2d\Geo2d_MetricPrcsrIO.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Iso\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Aft\Model\Aft2d_Model_Import.jxx">
