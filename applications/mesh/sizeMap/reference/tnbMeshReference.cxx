@@ -1,5 +1,6 @@
 #include <Mesh_ReferenceValues.hxx>
 #include <Geo_Tools.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -11,7 +12,7 @@ namespace tnbLib
 	static unsigned short verbose = 0;
 	typedef std::shared_ptr<Mesh_ReferenceValues> ref_t;
 
-	
+
 	static double myBaseSize = 0.01;
 	static auto myRef = std::make_shared<Mesh_ReferenceValues>(myBaseSize);
 
@@ -278,7 +279,36 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << " This application is aimed to create a reference values for mesh mesh algorithm." << endl << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - saveTo(name)" << endl << endl
+
+				<< " # Settings: " << endl << endl
+				<< " - setBaseSize(double)" << endl
+				<< " - setsetDefaultGrowthRate(string);      Types: verySlow, slow, moderate, fast, costum" << endl 
+				<< " - setBoundaryGrowthRate(string);        Types: verySlow, slow, moderate, fast, costum" << endl << endl
+
+				<< " - setValueType(surfaceValues, string);  Types: relativeToBase, absolute" << endl
+				<< " - setMethod(surfaceValues, string);     Types: minOnly, minAndTarget" << endl
+				<< " - setMinSize(surfaceValues, double)" << endl
+				<< " - setTargetSize(surfaceValues, double)" << endl << endl
+
+				<< " - setType(surfaceCurvatureValues, string);  Types: continum, custom, disable" << endl
+				<< " - setSpanAngle(surfaceCurvatureValues, double)" << endl
+
+				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+
+				<< " # Operators:" << endl << endl
+
+				<< " - [surfaceValues] getSurfaceSizeValues()" << endl
+				<< " - [surfaceCurvatureValues] getCurvatureValues()" << endl
+
+				<< " - execute()" << endl
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -290,11 +320,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			fileName myFileName("refSizeMap");
-
 			try
 			{
+				//std::string address = ".\\system\\tnbHydstcHullReader";
+				fileName myFileName(file::GetSystemFile("tnbMeshReference"));
+
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -311,9 +343,9 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "Undefined command has been detected!" << endl
-				<< abort(FatalError);
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
 		}
 	}
 	else
@@ -322,5 +354,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

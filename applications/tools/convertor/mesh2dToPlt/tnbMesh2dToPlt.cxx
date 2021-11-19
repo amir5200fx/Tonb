@@ -1,5 +1,6 @@
 #include <Entity2d_Triangulation.hxx> 
 #include <Entity2d_Box.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OFstream.hxx>
 #include <OSstream.hxx>
@@ -7,45 +8,48 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = Entity2d_Triangulation::extension;
+	static const std::string saveExt = ".plt";
+
 	typedef std::shared_ptr<Entity2d_Triangulation> mesh_t;
 
 	static unsigned short verbose(0);
 	static mesh_t myMesh;
 
+	static std::string myFileName;
+
 	static bool loadTag = false;
 
-	void loadModel(const std::string& name)
+	void setVerbose(unsigned int i)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
 
-		TNB_iARCH_FILE_TYPE ar(myFile);
+	void loadFile(const std::string& name)
+	{
+		file::CheckExtension(name);
 
-		ar >> myMesh;
+		myMesh = file::LoadFile<std::shared_ptr<Entity2d_Triangulation>>(name + loadExt, verbose);
 		if (NOT myMesh)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the loaded body is null" << endl
+				<< " the edge is null" << endl
 				<< abort(FatalError);
-		}
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the mesh is loaded, from: " << name << ", successfully!" << endl;
-			Info << endl;
 		}
 
 		loadTag = true;
 	}
 
-	void exportTo(const std::string& name)
+	void loadFile()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt).string();
+		myFileName = name;
+		loadFile(name);
+	}
+
+	void saveTo(const std::string& name)
 	{
 		if (NOT loadTag)
 		{
@@ -54,12 +58,23 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
+		fileName fn(name + saveExt);
 		OFstream myFile(fn);
 
 		myMesh->ExportToPlt(myFile);
 	}
 
+	void saveTo()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no mesh has been loaded!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
+	}
 }
 
 #ifdef DebugInfo
@@ -76,10 +91,15 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
+	
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+
+		//- settings
 
 		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadMesh");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {exportTo(name); }), "saveTo");
 	}
 
 	std::string getString(char* argv)
@@ -114,7 +134,24 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to convert a mesh file to the *.plt file format." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+
+				<< " # operators: " << endl
+
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -126,12 +163,13 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\mesh2dToPlt";
-			fileName myFileName(address);
+			//std::string address = ".\\system\\mesh2dToPlt";
 
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbMesh2dToPlt"));
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -153,5 +191,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }
