@@ -1,0 +1,8 @@
+setVerbose(1);
+
+var P0 = createPoint(0, 0);
+var P1 = createPoint(1, 0);
+
+make(P0, P1, "myEdge");
+
+saveTo();

@@ -47,6 +47,18 @@ namespace tnbLib
 	}
 
 	template<class Point>
+	inline typename Geo_BoxTools::Box<Point>
+		Geo_BoxTools::GetBox
+		(
+			const Point & theCoord,
+			const Standard_Real theRadius
+		)
+	{
+		auto b = Entity_Box<Point>::Box(theCoord, theRadius);
+		return std::move(b);
+	}
+
+	template<class Point>
 	inline typename Geo_BoxTools::Box<Point> 
 		Geo_BoxTools::GetBox
 		(

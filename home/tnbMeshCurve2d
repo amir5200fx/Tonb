@@ -1,0 +1,34 @@
+setVerbose(1);
+
+setOverallLenMaxLevel(10);
+setUnderRelaxation(0.85);
+setIgnoreNonConvergency(true);
+
+var overallLenInfo = getOverallLenIntegInfo();
+var integInfo = getIntegInfo();
+var iterInfo = getIterInfo();
+var corrInfo = getCorrInfo();
+
+overallLenInfo.setMaxNbIterations(500);
+overallLenInfo.setNbInitIterations(10);
+overallLenInfo.setTolerance(1.0E-8);
+
+integInfo.setMaxNbIterations(50);
+integInfo.setNbInitIterations(4);
+integInfo.setTolerance(1.0E-4);
+
+iterInfo.setMaxNbIterations(50);
+iterInfo.setSmall(1.0E-6);
+iterInfo.setZero(1.0E-8);
+iterInfo.setTolerance(1.0E-4);
+iterInfo.setUnderRelaxation(0.9);
+
+corrInfo.setMaxLev(5);
+corrInfo.setTolerance(1.0E-2);
+corrInfo.setUnderRelaxation(0.85);
+
+loadFile();
+
+execute();
+
+saveTo();

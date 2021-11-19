@@ -1,0 +1,9 @@
+setVerbose(1);
+
+setSize(0.01);
+
+loadFile();
+
+execute("uniSizeFun");
+
+saveTo();
