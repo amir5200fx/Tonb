@@ -1,5 +1,7 @@
 #include <Entity3d_Box.hxx>
 
+const std::string tnbLib::Entity3d_Box::extension = ".gbox3d";
+
 namespace tnbLib
 {
 

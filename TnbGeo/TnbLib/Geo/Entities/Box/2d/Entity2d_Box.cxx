@@ -1,5 +1,7 @@
 #include <Entity2d_Box.hxx>
 
+const std::string tnbLib::Entity2d_Box::extension = ".gbox2d";
+
 namespace tnbLib
 {
 

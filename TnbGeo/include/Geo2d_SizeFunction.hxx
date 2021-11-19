@@ -4,11 +4,6 @@
 
 #include <Geo_SizeFunction.hxx>
 #include <Pnt2d.hxx>
-
-namespace tnbLib
-{
-
-	typedef Geo_SizeFunction<Pnt2d> Geo2d_SizeFunction;
-}
+#include <Geo2d_SizeFunctionFwd.hxx>
 
 #endif // !_Geo2d_SizeFunction_Header

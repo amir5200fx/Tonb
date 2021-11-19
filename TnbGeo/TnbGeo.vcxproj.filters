@@ -1298,5 +1298,35 @@
     <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2dIO.cxx">
       <Filter>TnbLib\Geo\Entities\Vector\2d</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Metric\2d\Geo2d_MetricFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Metric\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Metric\3d\Geo3d_MetricFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Metric\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniform.cxx">
+      <Filter>TnbLib\Geo\Function\Metric\nonUniform\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniform.cxx">
+      <Filter>TnbLib\Geo\Function\Metric\nonUniform\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Metric\Uniform\2d\GeoMetricFun2d_Uniform.cxx">
+      <Filter>TnbLib\Geo\Function\Metric\Uniform\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Size\2d\Geo2d_SizeFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Size\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Size\3d\Geo3d_SizeFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Size\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniform.cxx">
+      <Filter>TnbLib\Geo\Function\Size\nonUniform\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniform.cxx">
+      <Filter>TnbLib\Geo\Function\Size\nonUniform\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun_Uniform.cxx">
+      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,6 +7,16 @@
 #include <Global_Indexed.hxx>
 #include <Entity_Box.hxx>
 
+#ifdef TnbGeo_EXPORT_DEFINE
+#define TnbGeoSizeFun_EXPORT __declspec(dllexport)
+#else
+#ifdef TnbGeoSizeFun_EXPORT_DEFINE
+#define TnbGeoSizeFun_EXPORT __declspec(dllexport)
+#else
+#define TnbGeoSizeFun_EXPORT __declspec(dllimport)
+#endif
+#endif
+
 namespace tnbLib
 {
 
@@ -65,6 +75,8 @@ namespace tnbLib
 
 		typedef Point ptType;
 		typedef Entity_Box<Point> boxType;
+
+		static const TnbGeoSizeFun_EXPORT std::string extension;
 
 		const Entity_Box<Point>& BoundingBox() const
 		{

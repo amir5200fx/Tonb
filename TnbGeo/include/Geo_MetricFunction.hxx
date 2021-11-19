@@ -9,6 +9,16 @@
 #include <Entity_Box.hxx>
 #include <Geo_MetricFunctionTraits.hxx>
 
+#ifdef TnbGeo_EXPORT_DEFINE
+#define TnbGeoMetricFun_EXPORT __declspec(dllexport)
+#else
+#ifdef TnbGeoMetricFun_EXPORT_DEFINE
+#define TnbGeoMetricFun_EXPORT __declspec(dllexport)
+#else
+#define TnbGeoMetricFun_EXPORT __declspec(dllimport)
+#endif
+#endif
+
 namespace tnbLib
 {
 
@@ -70,6 +80,8 @@ namespace tnbLib
 
 		typedef Point ptType;
 		typedef typename metric_type_from_point<Point>::metricType metricType;
+
+		static TnbGeoMetricFun_EXPORT const std::string extension;
 
 		const Entity_Box<Point>& BoundingBox() const
 		{

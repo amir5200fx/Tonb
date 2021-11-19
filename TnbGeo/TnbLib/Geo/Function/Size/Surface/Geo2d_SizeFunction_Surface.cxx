@@ -6,6 +6,8 @@
 
 #include <Geom_Surface.hxx>
 
+const std::string tnbLib::Geo2d_SizeFunction_Surface::extension = ".gfun2d";
+
 Standard_Real
 tnbLib::Geo2d_SizeFunction_Surface::Value
 (

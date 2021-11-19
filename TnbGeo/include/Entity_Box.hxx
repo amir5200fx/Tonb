@@ -45,8 +45,15 @@ namespace tnbLib
 
 		typedef Point ptType;
 
+		static TnbGeo_EXPORT const std::string extension;
+
+		//- default constructor
+
 		Entity_Box()
 		{}
+
+
+		//- constructors
 
 		Entity_Box
 		(
@@ -65,6 +72,9 @@ namespace tnbLib
 			: theP0_(std::move(theP0))
 			, theP1_(std::move(theP1))
 		{}
+
+
+		//- public functions and operators
 
 		Standard_Real Diameter() const
 		{

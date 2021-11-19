@@ -58,7 +58,7 @@ namespace tnbLib
 			const Standard_Real theSize,
 			const Entity_Box<Point>& theBox
 		)
-			: Geo_SizeFunction(theIndex, theName, theBox)
+			: Geo_SizeFunction<Point>(theIndex, theName, theBox)
 			, theSize_(theSize)
 		{}
 
