@@ -168,15 +168,15 @@ void tnbLib::Cad_RailRevolve::Perform()
 	const auto& genPoles = Generatrix()->Poles();
 	const auto& railPoles = Rail()->Poles();
 
-	for (int i = 1; i <= genPoles.Size(); i++)
+	/*for (int i = 1; i <= genPoles.Size(); i++)
 	{
 		std::cout << genPoles.Value(i) << std::endl;
-	}
+	}*/
 
-	for (int i = 1; i <= railPoles.Size(); i++)
+	/*for (int i = 1; i <= railPoles.Size(); i++)
 	{
 		std::cout << railPoles.Value(i) << std::endl;
-	}
+	}*/
 
 	auto genWeights = RetrieveWeights(Generatrix()->Weights(), genPoles.Size());
 	auto railWeights = RetrieveWeights(Rail()->Weights(), railPoles.Size());
@@ -267,7 +267,7 @@ void tnbLib::Cad_RailRevolve::Perform()
 		for (Standard_Integer i = 0; i < pts.size(); i++)
 		{
 			Poles.SetValue(j + 1, i + 1, pts[i]);
-			Weights.SetValue(j + 1, i + 1, /*railWeights[j + 1] **/ genWeights[i]);
+			Weights.SetValue(j + 1, i + 1, railWeights[j] * genWeights[i]);
 		}
 	}
 	
