@@ -8,6 +8,8 @@
 
 #include <Geom2d_Curve.hxx>
 
+const std::string tnbLib::Pln_Edge::extension = ".edge2d";
+
 Standard_Boolean 
 tnbLib::Pln_Edge::IsDangle() const
 {

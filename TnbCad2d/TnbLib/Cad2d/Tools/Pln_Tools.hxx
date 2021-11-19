@@ -139,6 +139,12 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const Handle(Geom2d_Curve)& theCurve);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const std::shared_ptr<Pln_Curve>& theCurve);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(std::shared_ptr<Pln_Curve>&& theCurve);
+
 		static std::shared_ptr<Pln_Wire>
 			MakeWire
 			(

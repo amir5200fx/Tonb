@@ -49,6 +49,8 @@ namespace tnbLib
 
 		typedef Pnt2d ptType;
 
+		static TnbCad2d_EXPORT const std::string extension;
+
 		//- default constructor
 
 		Pln_Edge()

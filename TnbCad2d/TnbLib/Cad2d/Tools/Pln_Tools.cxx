@@ -447,6 +447,61 @@ tnbLib::Pln_Tools::MakeWire
 	return std::move(wire);
 }
 
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::Pln_Tools::MakeEdge
+(
+	const Handle(Geom2d_Curve)& theCurve
+)
+{
+	auto curve = std::make_shared<Pln_Curve>(theCurve);
+	Debug_Null_Pointer(curve);
+
+	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
+	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
+	Debug_Null_Pointer(v0);
+	Debug_Null_Pointer(v1);
+
+	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	return std::move(edge);
+}
+
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::Pln_Tools::MakeEdge
+(
+	const std::shared_ptr<Pln_Curve>& theCurve
+)
+{
+	auto curve = theCurve;
+	Debug_Null_Pointer(curve);
+
+	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
+	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
+	Debug_Null_Pointer(v0);
+	Debug_Null_Pointer(v1);
+
+	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	return std::move(edge);
+	
+}
+
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::Pln_Tools::MakeEdge
+(
+	std::shared_ptr<Pln_Curve>&& theCurve
+)
+{
+	auto curve = std::move(theCurve);
+	Debug_Null_Pointer(curve);
+
+	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
+	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
+	Debug_Null_Pointer(v0);
+	Debug_Null_Pointer(v1);
+
+	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	return std::move(edge);
+}
+
 std::shared_ptr<tnbLib::Pln_Wire> 
 tnbLib::Pln_Tools::MakeWire
 (
