@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <NumAlg_Module.hxx>
 
 namespace tnbLib
@@ -33,6 +34,28 @@ namespace tnbLib
 		Standard_Real theResult_;
 
 		Standard_Boolean IsConverged_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theMaxIterations_;
+			ar & theIter_;
+
+			ar & theDelta_;
+			ar & theTolerance_;
+
+			ar & theResidual_;
+			ar & theX0_;
+			ar & theX1_;
+			ar & theResult_;
+
+			ar & IsConverged_;
+		}
 
 	protected:
 
@@ -88,6 +111,9 @@ namespace tnbLib
 		//- default constructor
 
 		TnbNumAlg_EXPORT NumAlg_BisectionSolver_Info();
+
+
+		//- constructors
 
 
 		//- public functions and operators
