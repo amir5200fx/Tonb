@@ -76,6 +76,16 @@ namespace tnbLib
 
 		//- private functions and operators
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			Info << " This function is not supposed to be called!" << endl;
+			NotImplemented;
+		}
+
 		void Import
 		(
 			const std::vector<std::shared_ptr<frontType>>& theBoundary,

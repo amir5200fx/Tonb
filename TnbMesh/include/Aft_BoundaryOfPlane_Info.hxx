@@ -5,6 +5,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Mesh_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 #include <map>
@@ -19,6 +20,29 @@ namespace tnbLib
 	{
 
 		static TnbMesh_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+
+
+	private:
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			//- empty body
+		}
+
+	protected:
+
+		//- default constructor
+
+		Aft_BoundaryOfPlane_Info_Base()
+		{}
+
+		//- constructors
+
 	};
 
 	template<class MetricPrcsrInfo>
@@ -41,12 +65,34 @@ namespace tnbLib
 
 		Standard_Boolean OverrideInfo_;
 
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			Info << "WARNING! This functions is not supposed to be called!" << endl;
+			NotImplemented;
+		}
+
+
+		//- default constructor
+
+
 	public:
+
+
+		//- constructors
 
 		Aft_BoundaryOfPlane_Info()
 			: OverrideInfo_(Standard_False)
 			, theMergeTolerance_(DEFAULT_TOLERANCE)
 		{}
+
+
+		//- public functions and operators
 
 		auto OverrideInfo() const
 		{

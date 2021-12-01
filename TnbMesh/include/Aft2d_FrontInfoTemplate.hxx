@@ -6,6 +6,7 @@
 #include <Aft_FrontInfo.hxx>
 #include <Mesh_Counters.hxx>
 #include <Aft_TypeTraits.hxx>
+#include <Global_Serialization.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -40,6 +41,18 @@ namespace tnbLib
 		using resolvedType = typename std::enable_if< cond, U >::type;
 
 		/*Private Data*/
+
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Aft_FrontInfo<FrontAdaptor>>(*this);
+			ar & boost::serialization::base_object<Mesh2d_FrontCounter>(*this);
+		}
 
 	protected:
 
@@ -276,10 +289,18 @@ namespace tnbLib
 		//	}
 		//}
 
-	public:
+		//- default constructor
 
 		Aft2d_FrontInfoTemplate()
 		{}
+
+		//- constructors
+
+
+	public:
+
+
+		//- public functions and operators
 
 		void SetPaires()
 		{

@@ -44,10 +44,43 @@ namespace tnbLib
 
 		Standard_Real theMinDistanceFactor_;
 
-	public:
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & AppendedNode_;
+			ar & theAlgCondition_;
+			ar & thePointCondition_;
+
+			ar & theCandidateSize_;
+
+			ar & theElementSize_;
+
+			ar & theLocalRadius_;
+			ar & theSearchRadius_;
+			ar & theMaxElmLength_;
+
+			ar & theMinDistanceFactor_;
+		}
+
+	protected:
+
+		// default constructor
 
 		Aft_FrontInfoBase()
 		{}
+
+
+		//- constructors
+
+
+	public:
+
+		//- public functions and operators
 
 		auto AppendedNode() const
 		{
@@ -245,10 +278,31 @@ namespace tnbLib
 
 		elementTypePtr theElement_;
 
-	public:
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			Info << "WARNING! This functions is not supposed to be called!" << endl;
+			NotImplemented;
+		}
+
+	protected:
+
+		//- default constructor
 
 		Aft_FrontInfo()
 		{}
+
+
+		//- constructors
+
+	public:
+
+		//- public functions and operators
 
 		const auto& Coord() const
 		{

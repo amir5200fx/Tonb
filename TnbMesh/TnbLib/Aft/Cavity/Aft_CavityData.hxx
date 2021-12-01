@@ -18,10 +18,31 @@ namespace tnbLib
 
 		/*Private Data*/
 
-	public:
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Mesh_RegisterCertaintyCavitie<FrontEntity>>(*this);
+			ar & boost::serialization::base_object<Mesh_RegisterUnCertaintyCavitie<FrontEntity>>(*this);
+		}
+
+	protected:
+
+		//- default constructor
 
 		Mesh_CavityData()
 		{}
+
+
+		//- constructors
+
+	public:
+
+		//- Public functions and operators
 
 	};
 }

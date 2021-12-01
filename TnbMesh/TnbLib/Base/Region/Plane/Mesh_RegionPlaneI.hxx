@@ -9,7 +9,7 @@ namespace tnbLib
 		wireList& theWires
 	) const
 	{
-		theWires.push_back(theOutter_);
+		theWires.push_back(theOuter_);
 		if (theInner_)
 		{
 			for (const auto& x : *theInner_)

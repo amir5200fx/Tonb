@@ -27,6 +27,15 @@ namespace tnbLib
 
 	protected:
 
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& /*ar*/, const unsigned int /*file_version*/)
+		{}
+
+
 		template<class SizeFun, class MetricFun = void>
 		static std::shared_ptr<Entity2d_Polygon> Mesh
 		(

@@ -30,9 +30,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			ar & boost::serialization::base_object<Global_Indexed>(*this);
-			ar & boost::serialization::base_object<Global_Named>(*this);
-			ar & theCurves_;
+			Info << "WARNING! This function is not supposed to be called!" << endl;
+			NotImplemented;
 		}
 
 	public:

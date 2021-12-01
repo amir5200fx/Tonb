@@ -44,6 +44,13 @@ namespace tnbLib
 			ar & theMetricFunction_;
 		}
 
+	protected:
+
+		// default constructor [11/24/2021 Amir]
+
+		Geo_MetricPrcsr()
+		{}
+
 	public:
 
 		typedef Geo_MetricPrcsr_Base<MetricFun> base;
@@ -187,12 +194,6 @@ namespace tnbLib
 		std::shared_ptr<SizeFun> theSizeFunction_;
 
 
-		//- default constructor
-
-		Geo_MetricPrcsr()
-		{}
-
-
 		//- private functions and operators
 
 		friend class boost::serialization::access;
@@ -203,6 +204,13 @@ namespace tnbLib
 			ar & boost::serialization::base_object<Geo_MetricPrcsr_Base<void>>(*this);
 			ar & theSizeFunction_;
 		}
+
+	protected:
+
+		//- default constructor
+
+		Geo_MetricPrcsr()
+		{}
 
 	public:
 

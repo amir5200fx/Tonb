@@ -51,7 +51,22 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// Private functions and operators [11/24/2021 Amir]
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<base>(*this);
+		}
+
 	protected:
+
+
+		// Protected functions and operators [11/24/2021 Amir]
 
 		void RetrieveLocalFrontNodes
 		(
@@ -68,8 +83,13 @@ namespace tnbLib
 
 	public:
 
+		//- default constructor
+
 		Aft_Core()
 		{}
+
+
+		//- constructors
 
 		Aft_Core
 		(
@@ -78,6 +98,7 @@ namespace tnbLib
 		)
 			: base(theSizeMap, theCoordCalculator)
 		{}
+		
 	};
 
 	template
@@ -125,7 +146,22 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// Private functions and operators [11/24/2021 Amir]
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<base>(*this);
+		}
+
 	protected:
+
+
+		// Protected functions and operators [11/24/2021 Amir]
 
 		void RetrieveLocalFrontNodes
 		(
@@ -140,10 +176,17 @@ namespace tnbLib
 
 		void UpdateFront();
 
+
 	public:
+
+
+		// default constructor [11/24/2021 Amir]
 
 		Aft_Core()
 		{}
+
+
+		// constructors [11/24/2021 Amir]
 
 		Aft_Core
 		(
@@ -152,6 +195,10 @@ namespace tnbLib
 		)
 			: base(theSizeMap, theCoordCalculator)
 		{}
+
+
+		// Public functions and operators [11/24/2021 Amir]
+
 	};
 
 }

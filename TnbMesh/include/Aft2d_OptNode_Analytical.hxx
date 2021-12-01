@@ -13,7 +13,7 @@ namespace tnbLib
 		Aft2d_OptNode_Analytical;
 
 	template<>
-	void Aft2d_OptNode_Analytical::Perform();
+	TnbMesh_EXPORT void Aft2d_OptNode_Analytical::Perform();
 }
 
 #endif // !_Aft2d_OptNode_Analytical_Header
