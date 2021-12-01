@@ -26,6 +26,24 @@ namespace tnbLib
 		Standard_Boolean theOrientCheck_;
 		Standard_Boolean theNbPtsCheck_;
 
+
+		//- private functions and operators 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Global_Indexed>(*this);
+			ar & boost::serialization::base_object<Global_Named>(*this);
+			ar & boost::serialization::base_object<Global_Done>(*this);
+
+			ar & theSimpleCheck_;
+			ar & theInnerCheck_;
+			ar & theOrientCheck_;
+			ar & theNbPtsCheck_;
+		}
+
 	protected:
 
 
@@ -39,6 +57,7 @@ namespace tnbLib
 		{}
 
 
+		//- private functions and operators
 
 		void SetSimpleCheck(const Standard_Boolean check)
 		{
@@ -78,6 +97,11 @@ namespace tnbLib
 		);
 
 	public:
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		auto SimpleCheck() const
 		{

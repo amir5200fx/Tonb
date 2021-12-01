@@ -16,11 +16,24 @@
 namespace tnbLib
 {
 
-	struct Aft_Core_Base_Info
+	struct Aft_Core_BaseInfo
 	{
 
 		static TnbMesh_EXPORT const Standard_Real SIZE_TO_HIGHT_ELEMENT_COEFF;
 		static TnbMesh_EXPORT const Standard_Integer RESERVED_SORT_SIZE;
+
+	private:
+
+		// Private functions and operators [11/24/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			// empty body [11/24/2021 Amir]
+		}
+
 	};
 
 	template<class OptNodeAlg, class FrontInfo, class FrontData, class SizeFun, class MetricFun>
@@ -28,7 +41,7 @@ namespace tnbLib
 		: public Mesh_GlobalData<typename FrontInfo::elementType>
 		, public FrontInfo
 		, public FrontData
-		, public Aft_Core_Base_Info
+		, public Aft_Core_BaseInfo
 	{
 
 	public:
@@ -55,7 +68,22 @@ namespace tnbLib
 		std::shared_ptr<OptNodeAlg> theNodeCalculator_;
 		std::shared_ptr<metricMap> theMetricMap_;
 
+
+		// Private functions and operators [11/24/2021 Amir]
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			Info << "This functions is not supposed to be called!" << endl;
+			NotImplemented;
+		}
+
 	public:
+
+		// Public functions and operators [11/24/2021 Amir]
 
 		const auto& NodeCalculator() const
 		{
@@ -68,6 +96,9 @@ namespace tnbLib
 		}
 
 	protected:
+
+
+		// Protected functions and operators [11/24/2021 Amir]
 
 		struct mySort
 		{
@@ -121,6 +152,22 @@ namespace tnbLib
 				Geo_Sort::Sort<Standard_Real>
 					(Quality_, Indices_, theSize);
 			}
+
+		private:
+
+			// Private functions and operators [11/24/2021 Amir]
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar & Quality_;
+				ar & Indices_;
+
+				ar & Size_;
+			}
+
 		};
 
 		static mySort Sort;
@@ -318,8 +365,14 @@ namespace tnbLib
 			std::vector<std::shared_ptr<nodeType>>& theInners
 		) const;
 
+
+		// default constructor [11/24/2021 Amir]
+
 		Aft_Core_Base()
 		{}
+
+
+		// constructors [11/24/2021 Amir]
 
 		Aft_Core_Base
 		(
@@ -330,7 +383,12 @@ namespace tnbLib
 			, theNodeCalculator_(theNodeAlg)
 		{}
 
+
+
 	public:
+
+
+		// Public function and operators [11/24/2021 Amir]
 
 		auto IsMetricMapLoaded() const
 		{

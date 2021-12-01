@@ -3,6 +3,9 @@
 #define _Aft2d_FrontInfoAdaptorTemplate_Header
 
 #include <Standard_TypeDef.hxx>
+#include <Global_Serialization.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 #include <memory>
 
@@ -27,6 +30,18 @@ namespace tnbLib
 
 		std::shared_ptr<edgeType> theCreated0_;
 		std::shared_ptr<edgeType> theCreated1_;
+
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			Info << "WARNING! This function is not supposed to be called!" << endl;
+			NotImplemented;
+		}
 
 	public:
 

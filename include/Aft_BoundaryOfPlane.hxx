@@ -58,11 +58,32 @@ namespace tnbLib
 
 		void UpdateFront();
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			Info << "WARNING! This functions is not supposed to be called!" << endl;
+			NotImplemented;
+		}
+
+		//- default constructor
+
+		Aft_BoundaryOfPlane()
+		{}
+
 	public:
+
+
+		//- constructors
 
 		Aft_BoundaryOfPlane(const std::shared_ptr<info>& theInfo)
 			: theInfo_(theInfo)
 		{}
+
+
+		//- public functions and operators
 
 		const std::shared_ptr<metricPrcsr>& MetricProcessor() const
 		{

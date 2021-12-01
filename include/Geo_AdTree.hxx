@@ -51,10 +51,16 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [11/22/2021 Amir]
+
 		Geo_AdTreeNode()
 			: theLeft_(0)
 			, theRight_(0)
 		{}
+
+
+		// constructors [11/22/2021 Amir]
 
 		Geo_AdTreeNode
 		(
@@ -68,6 +74,9 @@ namespace tnbLib
 			, theLeft_(0)
 			, theRight_(0)
 		{}
+
+
+		// Public functions and operators [11/22/2021 Amir]
 
 		NodeType* LeftPtr() const
 		{
@@ -131,37 +140,16 @@ namespace tnbLib
 
 		NodeType* theRoot_;
 
-		friend class boost::serialization::access;
 
-		template<class Archive>
-		void Serialize(Archive& ar, NodeType* t)
-		{
-			ar & t;
-			if (t->LeftPtr())
-			{
-				Serialize(ar, t->LeftPtr());
-			}
-			if (t->RightPtr())
-			{
-				Serialize(ar, t->RightPtr());
-			}
-		}
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
 
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version)
 		{
+			ar & boost::serialization::base_object<Geo_SearchTree<T>>(*this);
 			ar & theRoot_;
-			if (theRoot_)
-			{
-				if (theRoot_->LeftPtr())
-				{
-					Serialize(ar, theRoot_->LeftPtr());
-				}
-				if (theRoot_->RightPtr())
-				{
-					Serialize(ar, theRoot_->RightPtr());
-				}
-			}
 		}
 
 		void CheckFun() const
@@ -396,9 +384,17 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [11/22/2021 Amir]
+
 		Geo_AdTree()
 			: theRoot_(0)
 		{}
+
+
+		// constructors [11/22/2021 Amir]
+
+		// Public functions and operators [11/22/2021 Amir]
 
 		~Geo_AdTree()
 		{
