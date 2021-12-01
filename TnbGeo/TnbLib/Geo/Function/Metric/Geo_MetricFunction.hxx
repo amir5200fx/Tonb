@@ -49,8 +49,14 @@ namespace tnbLib
 
 	protected:
 
+
+		// default constructor [11/24/2021 Amir]
+
 		Geo_MetricFunction()
 		{}
+
+
+		// constructors [11/24/2021 Amir]
 
 		Geo_MetricFunction
 		(
@@ -70,6 +76,7 @@ namespace tnbLib
 			, theBoundingBox_(theBox)
 		{}
 
+		// Protected functions and operators [11/24/2021 Amir]
 
 		Entity_Box<Point>& ChangeBoundingBox()
 		{
@@ -82,6 +89,9 @@ namespace tnbLib
 		typedef typename metric_type_from_point<Point>::metricType metricType;
 
 		static TnbGeoMetricFun_EXPORT const std::string extension;
+
+
+		// Public functions and operators [11/24/2021 Amir]
 
 		const Entity_Box<Point>& BoundingBox() const
 		{
