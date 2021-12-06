@@ -1,11 +1,9 @@
 #pragma once
-#ifndef _Geo_MetricPrcsrAnIso_Info_Header
-#define _Geo_MetricPrcsrAnIso_Info_Header
+#ifndef _Geo_MetricPrcsr_Info_Header
+#define _Geo_MetricPrcsr_Info_Header
 
-#include <Standard_TypeDef.hxx>
-#include <Global_AccessMethod.hxx>
-#include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
+#include <Global_Serialization.hxx>
 
 #include <memory>
 
@@ -15,43 +13,35 @@ namespace tnbLib
 	// Forward Declarations
 	class NumAlg_AdaptiveInteg_Info;
 
-	class Geo_MetricPrcsrAnIso_Info
+	class Geo_MetricPrcsr_Info
 	{
 
 		/*Private Data*/
 
-		Standard_Integer theNbSamples_;
-
 		std::shared_ptr<NumAlg_AdaptiveInteg_Info> theIntgInfo_;
 
-
-		//- private functions and operators
+		// Private Data [12/4/2021 Amir]
 
 		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
 	public:
 
-		static TnbMesh_EXPORT const Standard_Integer DEFAULT_NB_SAMPLES;
-
-
 		// default constructor [12/4/2021 Amir]
 
-		Geo_MetricPrcsrAnIso_Info()
-			: theNbSamples_(DEFAULT_NB_SAMPLES)
+		Geo_MetricPrcsr_Info()
 		{}
 
 
 		// constructors [12/4/2021 Amir]
 
-		Geo_MetricPrcsrAnIso_Info
+		Geo_MetricPrcsr_Info
 		(
 			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 		)
-			: theNbSamples_(DEFAULT_NB_SAMPLES)
-			, theIntgInfo_(theInfo)
+			: theIntgInfo_(theInfo)
 		{}
 
-		Geo_MetricPrcsrAnIso_Info
+		Geo_MetricPrcsr_Info
 		(
 			std::shared_ptr<NumAlg_AdaptiveInteg_Info>&& theInfo
 		)
@@ -59,10 +49,11 @@ namespace tnbLib
 		{}
 
 
-		virtual ~Geo_MetricPrcsrAnIso_Info()
+		virtual ~Geo_MetricPrcsr_Info()
 		{}
 
-		// public functions and operators [12/4/2021 Amir]
+
+		// Public functions and operators [12/4/2021 Amir]
 
 		const auto& IntegInfo() const
 		{
@@ -84,12 +75,9 @@ namespace tnbLib
 		{
 			theIntgInfo_ = std::move(theInfo);
 		}
-
-		//- Macros
-		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Integer, NbSamples)
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::Geo_MetricPrcsrAnIso_Info);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Geo_MetricPrcsr_Info);
 
-#endif // !_Geo_MetricPrcsrAnIso_Info_Header
+#endif // !_Geo_MetricPrcsr_Info_Header

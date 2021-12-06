@@ -96,4 +96,14 @@ namespace tnbLib
 	};
 }
 
+#include <Geo_MetricPrcsrInfo.hxx>
+#include <Geo_MetricPrcsrAnIsoInfo.hxx>
+
+namespace tnbLib
+{
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(Geo_MetricPrcsrInfo);
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(Geo2d_MetricPrcsrAnIsoInfo);
+	BOOST_SERIALIZATION_ASSUME_ABSTRACT(Geo3d_MetricPrcsrAnIsoInfo);
+}
+
 #endif // !_Geo_MetricPrcsr_Base_Header
