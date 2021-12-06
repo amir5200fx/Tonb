@@ -8,7 +8,7 @@
 namespace tnbLib
 {
 
-	static auto myInfo = std::make_shared<typename Geo2d_MetricPrcsr::info>();
+	static auto myInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
 
 	class IntegInfoRunTime
 	{
