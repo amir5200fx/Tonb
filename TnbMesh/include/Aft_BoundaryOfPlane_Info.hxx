@@ -83,6 +83,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const std::string extension;
+
 
 		//- constructors
 

@@ -15,6 +15,7 @@
 #include <GeoMetricFun2d_Background.hxx>
 #include <GeoMesh_Background_System.hxx>
 #include <GeoMesh_Background_Info.hxx>
+#include <Geo_MetricPrcsr_Info.hxx>
 #include <MeshBase_Tools.hxx>
 #include <Mesh_VariationRate.hxx>
 #include <TnbError.hxx>
@@ -512,11 +513,16 @@ Standard_Real tnbLib::Mesh2d_CurveRemesh::Discretize
 	const std::shared_ptr<Geo2d_SizeFunction>& theSizeFun
 )
 {
+	const auto gMetricInfo = 
+		std::make_shared<Geo_MetricPrcsr_Info>
+		(
+			sysLib::gl_geo_metric_processor_integration_info
+			);
 	const auto metricMap = 
 		std::make_shared<Geo2d_MetricPrcsr>
 		(
 			theSizeFun, 
-			sysLib::gl_geo_metric_processor_integration_info
+			gMetricInfo
 			);
 	Debug_Null_Pointer(metricMap);
 

@@ -49,6 +49,7 @@ namespace tnbLib
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL_LENGTH_CALC;
 		static TnbMesh_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
 
+		static TnbMesh_EXPORT const std::string extension;
 
 		//- default constructor
 

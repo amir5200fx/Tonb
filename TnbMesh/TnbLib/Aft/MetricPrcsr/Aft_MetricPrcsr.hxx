@@ -12,6 +12,7 @@
 #include <Aft3d_FacetFwd.hxx>
 #include <Aft3d_FacetAnIsoFwd.hxx>
 #include <Aft_MetricPrcsrAnIso_Info.hxx>
+#include <OSstream.hxx>
 
 namespace tnbLib
 {
@@ -72,7 +73,7 @@ namespace tnbLib
 			/*ar & boost::serialization::base_object<base>(*this);
 			ar & theInfo_;*/
 
-			Info << "This function is not supposed to be called!" << endl;
+			tnbLib::Info << "This function is not supposed to be called!" << endl;
 			NotImplemented;
 		}
 
@@ -202,7 +203,7 @@ namespace tnbLib
 		{
 			/*ar & boost::serialization::base_object<base>(*this);
 			ar & theInfo_;*/
-			Info << "This functions is not supposed to be called!" << endl;
+			tnbLib::Info << "This functions is not supposed to be called!" << endl;
 			NotImplemented;
 		}
 

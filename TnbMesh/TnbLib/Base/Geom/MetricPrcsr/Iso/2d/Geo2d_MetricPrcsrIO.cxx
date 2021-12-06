@@ -1,6 +1,6 @@
 #include <Geo2d_MetricPrcsr.hxx>
 
-#include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <Geo_MetricPrcsr_Info.hxx>
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Geo_MetricPrcsr_Base<void>)

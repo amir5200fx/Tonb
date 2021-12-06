@@ -13,3 +13,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Geo_MetricPrcsrAnIso_Info)
 	ar & theNbSamples_;
 	ar & theIntgInfo_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Geo_MetricPrcsrAnIso_Info);

@@ -40,11 +40,11 @@ namespace tnbLib
 			const auto& xCurve = x->Curve();
 			Debug_Null_Pointer(xCurve);
 
-			curves.push_back(std::make_shared<plnCurveType>(*xCurve));
+			curves.push_back(std::make_shared<plnCurveType>(xCurve));
 		}
 
 		auto wire =
-			std::make_shared<plnWireType>(curves_ptr);
+			std::make_shared<plnWireType>(std::move(curves));
 
 		return std::move(wire);
 	}

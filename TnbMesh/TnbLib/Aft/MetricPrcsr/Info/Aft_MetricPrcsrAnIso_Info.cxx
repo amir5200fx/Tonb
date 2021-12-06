@@ -8,3 +8,5 @@ namespace tnbLib
 
 	const Standard_Real Aft_MetricPrcsrAnIso_Info::DEFAULT_TOLERANCE(0.005);
 }
+
+const std::string tnbLib::Aft_MetricPrcsrAnIso_Info::extension = ".mpainfo";

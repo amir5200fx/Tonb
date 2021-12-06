@@ -2,6 +2,7 @@
 #ifndef _Aft2d_BoundaryOfPlane_Info_Header
 #define _Aft2d_BoundaryOfPlane_Info_Header
 
+#include <Mesh_Module.hxx>
 #include <Aft_BoundaryOfPlane_Info.hxx>
 #include <Aft2d_BoundaryOfPlane_InfoFwd.hxx>
 

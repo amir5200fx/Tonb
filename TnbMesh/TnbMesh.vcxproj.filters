@@ -910,9 +910,6 @@
     <Filter Include="TnbLib\Aft\Data\AnIso\2d">
       <UniqueIdentifier>{f3eaa9db-e51b-4172-ab6c-01bedc72ce60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Base\SolutionData">
-      <UniqueIdentifier>{786f527b-3d24-46f9-b81c-ed28ccd1c7eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\SizeMapControl">
       <UniqueIdentifier>{cf457b01-2f55-4f85-9cf5-0c12dc387c75}</UniqueIdentifier>
     </Filter>
@@ -948,9 +945,6 @@
     </Filter>
     <Filter Include="TnbLib\Aft\TopoData">
       <UniqueIdentifier>{7c866906-ed3f-4917-9bcd-c61b501bc9d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Base\SolutionData\2d">
-      <UniqueIdentifier>{36c92cf2-fd4d-4859-a938-c0d98abc08a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Base\Tools\UnionSizeMap">
       <UniqueIdentifier>{7b26e1e3-a88d-4622-a5d2-1c4bf2aed73c}</UniqueIdentifier>
@@ -1017,6 +1011,12 @@
     </Filter>
     <Filter Include="TnbLib\Base\MetricMapController\Traits">
       <UniqueIdentifier>{cff88a62-1e9e-4152-872a-c9836b743417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\SolutionData">
+      <UniqueIdentifier>{786f527b-3d24-46f9-b81c-ed28ccd1c7eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\SolutionData\2d">
+      <UniqueIdentifier>{36c92cf2-fd4d-4859-a938-c0d98abc08a4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2226,15 +2226,6 @@
     <ClInclude Include="TnbLib\Aft\TopoData\Aft_TopoGlobalDataI.hxx">
       <Filter>TnbLib\Aft\TopoData</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Base\SolutionData\Mesh_SolutionData.hxx">
-      <Filter>TnbLib\Base\SolutionData</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Base\SolutionData\2d\Mesh2d_SolutionData.hxx">
-      <Filter>TnbLib\Base\SolutionData\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Base\SolutionData\2d\Mesh2d_SolutionDataFwd.hxx">
-      <Filter>TnbLib\Base\SolutionData\2d</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\Mesh_UnionSizeMap.hxx">
       <Filter>TnbLib\Base\Tools\UnionSizeMap</Filter>
     </ClInclude>
@@ -2249,9 +2240,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMapFwd.hxx">
       <Filter>TnbLib\Base\Tools\UnionSizeMap\2d\Iso</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Base\SolutionData\Mesh_SolutionDataI.hxx">
-      <Filter>TnbLib\Base\SolutionData</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\SizeMapControl\Feature\2d\Mesh2d_FeatureSizeMapControlFwd.hxx">
       <Filter>TnbLib\SizeMapControl\Feature\2d</Filter>
@@ -2321,6 +2309,27 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\MetricPrcsr\Iso\2d\Aft2d_MetricPrcsrFwd.hxx">
       <Filter>TnbLib\Aft\MetricPrcsr\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\2d\Aft2d_SolutionDataAnIso.hxx">
+      <Filter>TnbLib\Aft\SolutionData\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\2d\Aft2d_SolutionDataBase.hxx">
+      <Filter>TnbLib\Aft\SolutionData\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\2d\Aft2d_SolutionData.hxx">
+      <Filter>TnbLib\Aft\SolutionData\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Info\Aft_MetricPrcsr_Info.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Info\Geo_MetricPrcsr_Info.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Base\Geo_MetricPrcsrInfo.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Base\Geo_MetricPrcsrAnIsoInfo.hxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2648,9 +2657,6 @@
     <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMap.cxx">
       <Filter>TnbLib\Base\Tools\UnionSizeMap\2d\Iso</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Base\SolutionData\2d\Mesh2d_SolutionDataIO.cxx">
-      <Filter>TnbLib\Base\SolutionData\2d</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\BoundarySizeMap2d_SegmentTool.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment</Filter>
     </ClCompile>
@@ -2713,6 +2719,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\MetricPrcsr\Iso\2d\Aft2d_MetricPrcsrIO.cxx">
       <Filter>TnbLib\Aft\MetricPrcsr\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\2d\Aft2d_SolutionDataBase.cxx">
+      <Filter>TnbLib\Aft\SolutionData\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\2d\Aft2d_SolutionDataBaseIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\2d\Aft2d_SolutionDataAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\2d\Aft2d_SolutionDataIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\Info\Iso\Aft2d_BoundaryOfPlane_Info.cxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\Info\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\Info\AnIso\Aft2d_BoundaryOfPlaneAnIso_InfoIO.cxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\Info\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\Info\AnIso\Aft2d_BoundaryOfPlaneAnIso_Info.cxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\Info\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\Info\Geo_MetricPrcsr_InfoIO.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Info\Aft_MetricPrcsr_InfoIO.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Info\Aft_MetricPrcsrAnIso_InfoIO.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

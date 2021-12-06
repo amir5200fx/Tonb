@@ -58,6 +58,13 @@ namespace tnbLib
 			: theCurve_(theCurve)
 		{}
 
+		explicit Mesh_PlnCurve
+		(
+			std::shared_ptr<CurveType>&& theCurve
+		)
+			: theCurve_(std::move(theCurve))
+		{}
+
 		Mesh_PlnCurve
 		(
 			const Standard_Integer theIndex,

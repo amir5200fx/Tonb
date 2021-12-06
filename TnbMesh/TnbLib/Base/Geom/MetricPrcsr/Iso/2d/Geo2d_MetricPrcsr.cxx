@@ -2,6 +2,7 @@
 
 #include <Geo_SegmentIntegrand.hxx>
 #include <Geo_SegmentIntegrand_Function.hxx>
+#include <Geo_MetricPrcsr_Info.hxx>
 #include <NumAlg_AdaptiveInteg.hxx>
 
 const std::string tnbLib::Geo2d_MetricPrcsr::extension = ".mprcsr2d";
@@ -24,7 +25,8 @@ namespace tnbLib
 		Geo2d_SegmentIntegrand_Function func(line);
 
 		Debug_Null_Pointer(base::Info());
-		auto& inf = *base::Info();
+		Debug_Null_Pointer(base::Info()->IntegInfo());
+		auto& inf = *base::Info()->IntegInfo();
 
 		NumAlg_AdaptiveInteg<Geo2d_SegmentIntegrand_Function> alg(func, 0.0, 1.0, inf);
 		alg.Perform();

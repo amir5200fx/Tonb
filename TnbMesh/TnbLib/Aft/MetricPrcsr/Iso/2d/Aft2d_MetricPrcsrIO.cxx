@@ -1,6 +1,6 @@
 #include <Aft2d_MetricPrcsr.hxx>
 
-#include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <Geo_MetricPrcsr_Info.hxx>
 
 namespace tnbLib
 {
