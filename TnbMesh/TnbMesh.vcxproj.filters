@@ -1018,6 +1018,15 @@
     <Filter Include="TnbLib\Aft\SolutionData\2d">
       <UniqueIdentifier>{36c92cf2-fd4d-4859-a938-c0d98abc08a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions\Reference\2d">
+      <UniqueIdentifier>{20353134-5c4f-4324-b44d-29fcfb8aed52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\Conditions\Reference\3d">
+      <UniqueIdentifier>{2f7f2107-1272-47a0-9432-c8d7333cc2e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Traits">
+      <UniqueIdentifier>{b6b40780-81d4-4942-96b0-f65c042ce794}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -2331,6 +2340,24 @@
     <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Base\Geo_MetricPrcsrAnIsoInfo.hxx">
       <Filter>TnbLib\Base\Geom\MetricPrcsr\Base</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Reference\2d\Mesh2d_ReferenceValues.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Reference\3d\Mesh3d_ReferenceValues.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Reference\3d\Mesh3d_ReferenceValuesFwd.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Reference\2d\Mesh2d_ReferenceValuesFwd.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\Traits\Mesh_SizeMapTool_Traits.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\MetricMapController\Traits\Mesh_MetricMapController_Traits.hxx">
+      <Filter>TnbLib\Base\MetricMapController\Traits</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -2491,9 +2518,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceCurvatureValues.cxx">
       <Filter>TnbLib\Base\Tools\Conditions\Surface</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Base\Tools\Conditions\Reference\Mesh_ReferenceValues.cxx">
-      <Filter>TnbLib\Base\Tools\Conditions\Reference</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\Conditions\Conditions\Mesh_Conditions.cxx">
       <Filter>TnbLib\Base\Tools\Conditions\Conditions</Filter>
@@ -2749,6 +2773,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\MetricPrcsr\Info\Aft_MetricPrcsrAnIso_InfoIO.cxx">
       <Filter>TnbLib\Aft\MetricPrcsr\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Reference\2d\Mesh2d_ReferenceValuesIO.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Reference\2d\Mesh2d_ReferenceValues.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Reference\3d\Mesh3d_ReferenceValues.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Conditions\Reference\3d\Mesh3d_ReferenceValuesIO.cxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

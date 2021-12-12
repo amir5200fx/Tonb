@@ -8,6 +8,7 @@
 #include <Mesh_BoundarySizeMapControl.hxx>
 #include <Mesh_FeatureSizeMapControl.hxx>
 #include <Mesh_VolumetricSizeMapControl.hxx>
+#include <Mesh_MetricMapController_Traits.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -18,6 +19,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	template<class Box>
 	class Mesh_ReferenceValues;
 
 	template<class GeomType> class Mesh_BoundarySizeMapControl;
@@ -29,10 +31,17 @@ namespace tnbLib
 		: public Global_Done
 	{
 
+	public:
+
+		typedef typename mesh_metricMapController_traits<GeomType>::boxType boxType;
+		typedef Mesh_ReferenceValues<boxType> meshRefValuesType;
+
+	private:
+
 		/*Private Data*/
 
 		std::shared_ptr<GeomType> theGeometry_;
-		std::shared_ptr<Mesh_ReferenceValues> theReferences_;
+		std::shared_ptr<meshRefValuesType> theReferences_;
 
 
 		Mesh_BoundarySizeMapControl<GeomType> theBoundaries_;
@@ -69,7 +78,7 @@ namespace tnbLib
 		Mesh_MetricMapController
 		(
 			const std::shared_ptr<GeomType>& theGeometry,
-			const std::shared_ptr<Mesh_ReferenceValues>& theReferences
+			const std::shared_ptr<meshRefValuesType>& theReferences
 		);
 
 

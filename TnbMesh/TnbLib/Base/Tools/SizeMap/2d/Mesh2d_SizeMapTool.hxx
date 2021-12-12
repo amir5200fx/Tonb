@@ -39,7 +39,7 @@ namespace tnbLib
 
 		Mesh2d_SizeMapTool
 		(
-			const std::shared_ptr<Mesh_ReferenceValues>& theRef, 
+			const std::shared_ptr<Mesh2d_ReferenceValues>& theRef, 
 			const std::shared_ptr<Cad2d_Plane>& thePlane
 		)
 			: Mesh_SizeMapToolBase<GeoMesh2d_Background>(theRef)

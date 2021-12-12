@@ -55,7 +55,7 @@ namespace tnbLib
 
 		//- constructors
 
-		BoundarySizeMap2d_SegmentTool(const std::shared_ptr<Mesh_ReferenceValues>& theRef, const std::shared_ptr<Cad2d_Plane>& thePlane);
+		BoundarySizeMap2d_SegmentTool(const std::shared_ptr<Mesh2d_ReferenceValues>& theRef, const std::shared_ptr<Cad2d_Plane>& thePlane);
 
 
 		//- public functions and operators

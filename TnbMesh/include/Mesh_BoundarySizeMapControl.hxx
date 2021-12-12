@@ -16,6 +16,7 @@ namespace tnbLib
 
 		typedef Mesh_SizeMapControl<GeomType> base;
 		using base::sizeMapTool;
+		using base::meshRefValuesType;
 
 	private:
 
@@ -48,7 +49,7 @@ namespace tnbLib
 		Mesh_BoundarySizeMapControl
 		(
 			const std::shared_ptr<GeomType>& theGeometry,
-			const std::shared_ptr<Mesh_ReferenceValues>& theRef
+			const std::shared_ptr<meshRefValuesType>& theRef
 		)
 			: base(theGeometry, theRef)
 		{}
