@@ -119,6 +119,12 @@ namespace tnbLib
 		}
 
 		exeTag = true;
+
+		if (verbose)
+		{
+			Info << endl
+				<< " - the application is performed, successfully!" << endl;
+		}
 	}
 }
 

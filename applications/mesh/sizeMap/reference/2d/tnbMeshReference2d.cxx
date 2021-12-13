@@ -1,44 +1,84 @@
-#include <Mesh_ReferenceValues.hxx>
+#include <Mesh2d_ReferenceValues.hxx>
 #include <Geo_Tools.hxx>
+#include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-#include <fstream>
-
 namespace tnbLib
 {
+	static std::string extension = Mesh2d_ReferenceValues::extension;
 
+	static bool loadTag = false;
 	static unsigned short verbose = 0;
-	typedef std::shared_ptr<Mesh_ReferenceValues> ref_t;
-
 
 	static double myBaseSize = 0.01;
-	static auto myRef = std::make_shared<Mesh_ReferenceValues>(myBaseSize);
+	static auto myRef = std::make_shared<Mesh2d_ReferenceValues>(myBaseSize, nullptr);
 
 	static const double DEFAULT_MIN_SIZE = 1.0E-6;
 
-	void saveTo(const std::string& name)
+	void checkFolder(const std::string& name)
 	{
-		if (NOT myRef)
+		if (NOT boost::filesystem::is_directory(name))
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "no ref. data has been created!" << endl
+				<< "no {" << name << "} directory has been found!" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
+	void loadFile()
+	{
+		checkFolder("region");
+
+		const auto currentPath = boost::filesystem::current_path();
+
+		boost::filesystem::current_path(currentPath.string() + R"(\region)");
+
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity2d_Box::extension).string();
+
+		file::CheckExtension(name);
+
+		auto myRegion = file::LoadFile<std::shared_ptr<Entity2d_Box>>(name + Entity2d_Box::extension, verbose);
+		if (NOT myRegion)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the region file is null!" << endl
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
-		std::ofstream f(fn);
+		//- change back the current path
+		boost::filesystem::current_path(currentPath);
 
-		TNB_oARCH_FILE_TYPE oa(f);
+		myRef->SetRegion(std::move(myRegion));
 
-		oa << myRef;
+		loadTag = true;
+	}
 
-		if (verbose)
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT loadTag)
 		{
-			Info << " the reference values are saved to: " << fn << ", successfully!" << endl;
-			Info << endl;
+			FatalErrorIn(FunctionSIG)
+				<< "no region has been loaded!" << endl
+				<< abort(FatalError);
 		}
+
+		file::CheckExtension(name);
+		file::SaveTo(myRef, name + extension, verbose);
+	}
+
+	void saveTo()
+	{
+		saveTo("meshReference");
 	}
 
 	void setBaseSize(double x)
@@ -213,8 +253,6 @@ namespace tnbLib
 		if (x < DEFAULT_MIN_SIZE) x = DEFAULT_MIN_SIZE;
 		v.SetSpanAngle(x);
 	}
-
-
 }
 
 #ifdef DebugInfo
@@ -230,23 +268,29 @@ namespace tnbLib
 
 	void setFuns(const module_t& mod)
 	{
+		// io functions [12/12/2021 Amir]
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+
+
+		// settings [12/12/2021 Amir]
 
 		mod->add(chaiscript::fun([](double x)-> void {setBaseSize(x); }), "setBaseSize");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {setGrowthRate(name); }), "setDefaultGrowthRate");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {setBoundaryGrowthRate(name); }), "setBoundaryGrowthRate");
 
-		mod->add(chaiscript::fun([]()-> auto& {return getSurfaceSizeValues(); }), "getSurfaceSizeValues");
-		mod->add(chaiscript::fun([](Mesh_SurfaceSizeValues& v, const std::string& name)-> void {setValueMethod(v, name); }), "setValueType");
-		mod->add(chaiscript::fun([](Mesh_SurfaceSizeValues& v, const std::string& name)-> void {setMethod(v, name); }), "setMethod");
-		mod->add(chaiscript::fun([](Mesh_SurfaceSizeValues& v, double x)-> void {setMinSize(v, x); }), "setMinSize");
-		mod->add(chaiscript::fun([](Mesh_SurfaceSizeValues& v, double x)->void {setTargetSize(v, x); }), "setTargetSize");
 
-		mod->add(chaiscript::fun([]()-> auto&{return getCurvatureValues(); }), "getCurvatureValues");
-		mod->add(chaiscript::fun([](Mesh_SurfaceCurvatureValues& v, const std::string& name)-> void {setCurvatureInfo(v, name); }), "setType");
-		mod->add(chaiscript::fun([](Mesh_SurfaceCurvatureValues& v, double x)-> void {setSpanAngle(v, x); }), "setSpanAngle");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setValueMethod(getSurfaceSizeValues(), name); }), "setSurfSizeValueType");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setMethod(getSurfaceSizeValues(), name); }), "setSurfSizeMethod");
+		mod->add(chaiscript::fun([](double x)-> void {setMinSize(getSurfaceSizeValues(), x); }), "setSurfMinSize");
+		mod->add(chaiscript::fun([](double x)->void {setTargetSize(getSurfaceSizeValues(), x); }), "setSurfTargetSize");
 
-		mod->add(chaiscript::fun([](unsigned short i)-> void {verbose = i; }), "setVerbose");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {setCurvatureInfo(getCurvatureValues(), name); }), "setCurvatureType");
+		mod->add(chaiscript::fun([](double x)-> void {setSpanAngle(getCurvatureValues(), x); }), "setCurvatureSpanAngle");
+
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		
 	}
 
 	std::string getString(char* argv)
@@ -279,34 +323,31 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to create a reference values for mesh mesh algorithm." << endl << endl;
+			Info << " This application is aimed to create a reference values for mesh2d algorithm." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - saveTo(name)" << endl << endl
+
+				<< " - loadFile()" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 				<< " - setBaseSize(double)" << endl
-				<< " - setsetDefaultGrowthRate(string);      Types: verySlow, slow, moderate, fast, costum" << endl 
+				<< " - setDefaultGrowthRate(string);         Types: verySlow, slow, moderate, fast, costum" << endl
 				<< " - setBoundaryGrowthRate(string);        Types: verySlow, slow, moderate, fast, costum" << endl << endl
 
-				<< " - setValueType(surfaceValues, string);  Types: relativeToBase, absolute" << endl
-				<< " - setMethod(surfaceValues, string);     Types: minOnly, minAndTarget" << endl
-				<< " - setMinSize(surfaceValues, double)" << endl
-				<< " - setTargetSize(surfaceValues, double)" << endl << endl
+				<< " - setSurfSizeValueType(string);  Types: relativeToBase, absolute" << endl
+				<< " - setSurfSizeMethod(string);     Types: minOnly, minAndTarget" << endl
+				<< " - setSurfMinSize(double)" << endl
+				<< " - setSurfTargetSize(double)" << endl << endl
 
-				<< " - setType(surfaceCurvatureValues, string);  Types: continum, custom, disable" << endl
-				<< " - setSpanAngle(surfaceCurvatureValues, double)" << endl
+				<< " - setCurvatureType(string);  Types: continum, custom, disable" << endl
+				<< " - setCurvatureSpanAngle(double)" << endl
 
 				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
-				<< " # Operators:" << endl << endl
-
-				<< " - [surfaceValues] getSurfaceSizeValues()" << endl
-				<< " - [surfaceCurvatureValues] getCurvatureValues()" << endl
-
-				<< " - execute()" << endl
+				<< " # Operators:" << endl
 				<< endl;
 			return 0;
 		}
@@ -322,8 +363,7 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				//std::string address = ".\\system\\tnbHydstcHullReader";
-				fileName myFileName(file::GetSystemFile("tnbMeshReference"));
+				fileName myFileName(file::GetSystemFile("tnbMeshReference2d"));
 
 				chai.eval_file(myFileName);
 				return 0;

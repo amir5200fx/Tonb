@@ -123,4 +123,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh_Curve_Info);
+
 #endif // !_Mesh_Curve_Info_Header

@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{61e876ba-f555-4949-a8e9-1eeeb5c9f006}</UniqueIdentifier>
+      <UniqueIdentifier>{d511ab35-278b-41da-8c56-ec44ee24d7d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tnbMeshReference.cxx">
+    <ClCompile Include="tnbMeshMetricInfo.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

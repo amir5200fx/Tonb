@@ -23,6 +23,9 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+	protected:
+
 		// the geometry [12/4/2021 Amir]
 		std::shared_ptr<Cad2d_Plane> thePlane_;
 
@@ -90,6 +93,11 @@ namespace tnbLib
 		const auto& Mesh() const
 		{
 			return theMesh_;
+		}
+
+		const auto& GlobalCurveInfo() const
+		{
+			return theGlobalCurveInfo_;
 		}
 
 		const auto& CurveInfo() const

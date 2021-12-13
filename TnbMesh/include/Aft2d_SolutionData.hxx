@@ -82,6 +82,11 @@ namespace tnbLib
 			return theEdges_;
 		}
 
+		const auto& Region() const
+		{
+			return theRegion_;
+		}
+
 		void SetRegion(const std::shared_ptr<Aft2d_RegionPlane>& theRegion)
 		{
 			theRegion_ = theRegion;

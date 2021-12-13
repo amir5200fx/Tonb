@@ -2,6 +2,7 @@
 #ifndef _Mesh_SizeMapToolBase_Header
 #define _Mesh_SizeMapToolBase_Header
 
+#include <Mesh_SizeMapTool_Traits.hxx>
 #include <Mesh_Conditions.hxx>
 #include <Mesh_Values.hxx>
 #include <TnbError.hxx>
@@ -13,11 +14,19 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	template<class Box>
 	class Mesh_ReferenceValues;
 
 	template<class BackGroundMesh>
 	class Mesh_SizeMapToolBase
 	{
+
+	public:
+
+		typedef typename mesh_sizeMapTool_traits<BackGroundMesh>::boxType boxType;
+		typedef Mesh_ReferenceValues<boxType> meshRefValuesType;
+
+	private:
 
 		/*Private Data*/
 
@@ -25,7 +34,7 @@ namespace tnbLib
 
 		Mesh_Values theValues_;
 
-		std::shared_ptr<Mesh_ReferenceValues> theReference_;
+		std::shared_ptr<meshRefValuesType> theReference_;
 		std::shared_ptr<BackGroundMesh> theBackMesh_;
 
 		//- private functions and operators
@@ -53,7 +62,7 @@ namespace tnbLib
 
 		Mesh_SizeMapToolBase
 		(
-			const std::shared_ptr<Mesh_ReferenceValues>& theRef
+			const std::shared_ptr<meshRefValuesType>& theRef
 		)
 			: theReference_(theRef)
 		{}

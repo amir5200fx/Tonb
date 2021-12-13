@@ -1,0 +1,8 @@
+setVerbose(1);
+
+var P0 = createPoint(0, 0);
+var P1 = createPoint(1, 1);
+
+makeBox(P0, P1, "box");
+
+saveTo();

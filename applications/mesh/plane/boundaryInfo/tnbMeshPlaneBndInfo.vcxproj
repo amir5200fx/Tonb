@@ -157,6 +157,9 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).ipdb" </Comma
     <ClCompile Include="tnbMeshPlaneBndInfo.cxx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\TnbCad2d\TnbCad2d.vcxproj">
+      <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
       <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
     </ProjectReference>

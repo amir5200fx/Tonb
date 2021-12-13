@@ -33,3 +33,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh_Curve_Info)
 
 	ar & theCorrAlgInfo_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Mesh_Curve_Info);

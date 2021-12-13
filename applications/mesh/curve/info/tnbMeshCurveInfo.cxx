@@ -14,6 +14,10 @@ namespace tnbLib
 	static unsigned short verbose = 0;
 	static bool exeTag = false;
 
+	static int myOverallLenMaxLev = 10;
+	static double myUR = 0.8;
+	static bool ignoreNonConv = true;
+
 	static std::shared_ptr<Mesh_Curve_Info> myInfo;
 
 	static const auto myOverallLenIntegInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
@@ -209,6 +213,10 @@ namespace tnbLib
 	{
 		myInfo = std::make_shared<Mesh_Curve_Info>();
 
+		myInfo->SetLengthCalcMaxLevel(myOverallLenMaxLev);
+		myInfo->SetUnderRelaxation(myUR);
+		myInfo->SetIgnoreNonConvergency(ignoreNonConv);
+
 		myInfo->OverrideCorrAlgInfo(myOptPointCorrInfo);
 		myInfo->OverrideNewtonIntgInfo(myIterIntegInfo);
 		myInfo->OverrideNewtonIterInfo(myNewtonIterInfo);
@@ -256,9 +264,9 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>& info, double x)-> void {setTolerance(info, x); }), "setTolerance");
 		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>& info, double x)-> void {setUnderRelaxation(info, x); }), "setUnderRelaxation");
 
-		mod->add(chaiscript::fun([](int n) -> void {myInfo->SetLengthCalcMaxLevel(n); }), "setOverallLenMaxLevel");
-		mod->add(chaiscript::fun([](double x) -> void {myInfo->SetUnderRelaxation(x); }), "setUnderRelaxation");
-		mod->add(chaiscript::fun([](bool x) -> void {myInfo->SetIgnoreNonConvergency(x); }), "setIgnoreNonConvergency");
+		mod->add(chaiscript::fun([](int n) -> void {myOverallLenMaxLev = n; }), "setOverallLenMaxLevel");
+		mod->add(chaiscript::fun([](double x) -> void {myUR = x; }), "setUnderRelaxation");
+		mod->add(chaiscript::fun([](bool x) -> void {ignoreNonConv = x; }), "setIgnoreNonConvergency");
 
 		//- operators
 
@@ -303,7 +311,7 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to discretize a curve." << endl;
+			Info << " This application is aimed to create a curve mesh info file." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

@@ -76,7 +76,7 @@ namespace tnbLib
 		typedef Point ptType;
 		typedef Entity_Box<Point> boxType;
 
-		static const TnbGeoSizeFun_EXPORT std::string extension;
+		static TnbGeoSizeFun_EXPORT const std::string extension;
 
 		const Entity_Box<Point>& BoundingBox() const
 		{
@@ -92,6 +92,9 @@ namespace tnbLib
 			Change_IsDone() = Standard_True;
 		}
 
+		//static TnbGeoSizeFun_EXPORT void Save(TNB_oARCH_TYPE& ar, const std::shared_ptr<Geo_SizeFunction<Point>>&);
+		//static TnbGeoSizeFun_EXPORT void Load(TNB_iARCH_TYPE& ar, std::shared_ptr<Geo_SizeFunction<Point>>&);
+
 	};
 }
 
@@ -100,5 +103,8 @@ namespace tnbLib
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo2d_SizeFunction);
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo3d_SizeFunction);
+
+BOOST_CLASS_TRACKING(tnbLib::Geo_SizeFunction<tnbLib::Pnt2d>, boost::serialization::track_always);
+BOOST_CLASS_TRACKING(tnbLib::Geo_SizeFunction<tnbLib::Pnt3d>, boost::serialization::track_always);
 
 #endif // !_Geo_SizeFunction_Header

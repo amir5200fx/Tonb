@@ -174,12 +174,12 @@ namespace tnbLib
 
 	auto loadSizeFunction()
 	{
-		checkFolder("plane");
+		checkFolder("sizeMap");
 
 		const auto currentPath = boost::filesystem::current_path();
 
 		// change the current path [12/4/2021 Amir]
-		boost::filesystem::current_path(currentPath.string() + R"(\plane)");
+		boost::filesystem::current_path(currentPath.string() + R"(\sizeMap)");
 
 		auto name = file::GetSingleFile(boost::filesystem::current_path(), Geo2d_SizeFunction::extension).string();
 
@@ -242,6 +242,8 @@ namespace tnbLib
 		soluData->LoadSizeFunction(std::move(sizeFun));
 
 		soluData->LoadPlane(std::move(plane));
+
+		mySolutionData = std::move(soluData);
 
 		exeTag = true;
 

@@ -12,6 +12,7 @@ tnbLib::NumAlg_NewtonSolver_Info::NumAlg_NewtonSolver_Info()
 	, theSmall_(DEFAULT_SMALL)
 	, theZero_(DEFAULT_ZERO)
 	, IsConverged_(Standard_False)
+	, theCondition_(NumAlg_NewtonSolver_Condition::LEVEL_EXCEEDED)
 {}
 
 namespace tnbLib

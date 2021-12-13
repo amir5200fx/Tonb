@@ -10,14 +10,15 @@
 TNB_SAVE_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataBase)
 {
 	ar & thePlane_;
-
+	
 	ar & theGlobalCurveInfo_;
-	ar & theCurveInfo_;
 
-	ar & theSizeFun_;
+	ar & theCurveInfo_;
 
 	ar & theBoundaryMesh_;
 	ar & theMesh_;
+
+	//ar & theSizeFun_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataBase)
@@ -25,10 +26,11 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataBase)
 	ar & thePlane_;
 
 	ar & theGlobalCurveInfo_;
-	ar & theCurveInfo_;
 
-	ar & theSizeFun_;
+	ar & theCurveInfo_;
 
 	ar & theBoundaryMesh_;
 	ar & theMesh_;
+
+	//ar & theSizeFun_;
 }

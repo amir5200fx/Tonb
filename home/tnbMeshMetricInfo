@@ -1,0 +1,10 @@
+setVerbose(1);
+
+setMaxNbIterations(40);
+setNbInitIterations(4);
+
+setTolerance(1.0E-4);
+
+execute();
+
+saveTo("metricInfo");
