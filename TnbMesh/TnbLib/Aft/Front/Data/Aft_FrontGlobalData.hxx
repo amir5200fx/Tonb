@@ -37,12 +37,35 @@ namespace tnbLib
 
 		//DisallowBitWiseCopy(Aft_FrontGlobalData);
 
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<GeomSearch<std::shared_ptr<typename FrontEntity::nodeType>>>(*this);
+			ar & boost::serialization::base_object<PriorityList<std::shared_ptr<FrontEntity>>>(*this);
+			ar & boost::serialization::base_object<Mesh_CavityData<FrontEntity>>(*this);
+			ar & boost::serialization::base_object<Mesh_RegisterNextFront<FrontEntity>>(*this);
+
+			ar & theLevelNb_;
+			ar & theLevelMaxIndex_;
+		}
+
 	public:
+
+
+		// default constructor [11/22/2021 Amir]
 
 		Aft_FrontGlobalData()
 			: theLevelNb_(0)
 			, theLevelMaxIndex_(0)
 		{}
+
+
+		// Public functions and operators [11/22/2021 Amir]
 
 		auto LevelNumber() const
 		{

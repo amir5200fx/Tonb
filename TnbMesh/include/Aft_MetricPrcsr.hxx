@@ -12,6 +12,7 @@
 #include <Aft3d_FacetFwd.hxx>
 #include <Aft3d_FacetAnIsoFwd.hxx>
 #include <Aft_MetricPrcsrAnIso_Info.hxx>
+#include <OSstream.hxx>
 
 namespace tnbLib
 {
@@ -52,6 +53,10 @@ namespace tnbLib
 
 		std::shared_ptr<info> theInfo_;
 
+
+
+		// Private functions and operators [11/24/2021 Amir]
+
 		Point CorrEffRegion
 		(
 			const Point& theCentre,
@@ -59,7 +64,30 @@ namespace tnbLib
 			const Standard_Real theRadius
 		) const;
 
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			/*ar & boost::serialization::base_object<base>(*this);
+			ar & theInfo_;*/
+
+			tnbLib::Info << "This function is not supposed to be called!" << endl;
+			NotImplemented;
+		}
+
+	protected:
+
+		// default constructor [11/24/2021 Amir]
+
+		Aft_MetricPrcsr()
+		{}
+
 	public:
+
+
+		// Public functions and operators [11/24/2021 Amir]
 
 		Aft_MetricPrcsr
 		(
@@ -90,6 +118,9 @@ namespace tnbLib
 			: base(theIndex, theName, theSizeFunction, theMetricFunction, theInfo)
 			, theInfo_(theInfo)
 		{}
+
+
+		// Public functions and operators [11/24/2021 Amir]
 
 		const std::shared_ptr<info>& Info() const
 		{
@@ -160,7 +191,34 @@ namespace tnbLib
 
 		std::shared_ptr<info> theInfo_;
 
+
+		// Private functions and operators [11/24/2021 Amir]
+
+
+		friend class boost::serialization::access;
+
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			/*ar & boost::serialization::base_object<base>(*this);
+			ar & theInfo_;*/
+			tnbLib::Info << "This functions is not supposed to be called!" << endl;
+			NotImplemented;
+		}
+
+	protected:
+
+		// default constructor [11/24/2021 Amir]
+
+
+		Aft_MetricPrcsr()
+		{}
+
 	public:
+
+
+		// constructors [11/24/2021 Amir]
 
 		Aft_MetricPrcsr
 		(
@@ -194,6 +252,9 @@ namespace tnbLib
 		)
 			: base(theIndex, theName, theFun, theInfo)
 		{}
+
+
+		// Public functions and operators [11/24/2021 Amir]
 
 		Standard_Real Oriented(const Point& thePt, const frontType& theFront) const;
 

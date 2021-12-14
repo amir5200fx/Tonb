@@ -1,0 +1,13 @@
+setVerbose(1);
+
+var info = getIntegInfo();
+
+info.setMaxNbIterations(50);
+info.setNbInitIterations(4);
+info.setTolerance(1.0E-4);
+
+loadFile();
+
+execute("processor");
+
+saveTo();

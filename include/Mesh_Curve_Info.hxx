@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
 
 #include <memory>
@@ -37,16 +38,32 @@ namespace tnbLib
 
 		std::shared_ptr<corrInfo> theCorrAlgInfo_;
 
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+
+
 	public:
 
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL_LENGTH_CALC;
 		static TnbMesh_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
+
+		static TnbMesh_EXPORT const std::string extension;
+
+		//- default constructor
 
 		Mesh_Curve_Info()
 			: theLengthCalcMaxLevel_(DEFAULT_MAX_LEVEL_LENGTH_CALC)
 			, theUnderRelaxation_(DEFAULT_UNDER_RELAXATION)
 			, IgnoreNonConvergency_(Standard_True)
 		{}
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		auto IgnoreNonConvergency() const
 		{
@@ -105,5 +122,7 @@ namespace tnbLib
 
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh_Curve_Info);
 
 #endif // !_Mesh_Curve_Info_Header

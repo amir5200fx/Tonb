@@ -5,6 +5,9 @@
 #include <map>
 #include <memory>
 
+#include <Mesh_Module.hxx>
+#include <Global_Serialization.hxx>
+
 namespace tnbLib
 {
 
@@ -21,6 +24,23 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// Private functions and operators [11/25/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & nodeIndex;
+			ar & edgeIndex;
+			ar & elementIndex;
+
+			ar & NodesIndices;
+			ar & EdgesIndices;
+			ar & ElementsIndices;
+		}
+
 	protected:
 
 		mutable unsigned nodeIndex;
@@ -31,8 +51,14 @@ namespace tnbLib
 		mutable std::shared_ptr<indexMap> EdgesIndices;
 		mutable std::shared_ptr<indexMap> ElementsIndices;
 
+
+		// default constructor [11/25/2021 Amir]
+
 		Aft2d_Model_Cache()
 		{}
+
+		// constructors [11/25/2021 Amir]
+
 	};
 
 	class Aft3d_Model_Cache
@@ -46,6 +72,25 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// Private functions and operators [11/25/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & nodeIndex;
+			ar & edgeIndex;
+			ar & facetIndex;
+			ar & elementIndex;
+
+			ar & NodesIndices;
+			ar & EdgesIndices;
+			ar & FacetsIndices;
+			ar & ElementsIndices;
+		}
+
 	protected:
 
 		mutable unsigned nodeIndex;
@@ -58,8 +103,13 @@ namespace tnbLib
 		mutable std::shared_ptr<indexMap> FacetsIndices;
 		mutable std::shared_ptr<indexMap> ElementsIndices;
 
+		// default constructors [11/25/2021 Amir]
+
 		Aft3d_Model_Cache()
 		{}
+
+		// constructors [11/25/2021 Amir]
+
 	};
 }
 

@@ -1,5 +1,6 @@
 #include <Geo2d_SizeFunction_Surface.hxx>
 
+#include <Geo2d_SizeFunction.hxx>
 #include <Geo3d_SizeFunction.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>

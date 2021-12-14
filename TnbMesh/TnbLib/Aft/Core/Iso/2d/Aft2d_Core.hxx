@@ -5,6 +5,7 @@
 #include <Aft2d_CoreTemplate.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Aft2d_OptNode_Calculator.hxx>
+#include <Aft2d_CoreBase.hxx>
 
 namespace tnbLib
 {

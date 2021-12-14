@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <NumAlg_Module.hxx>
 #include <NumAlg_NewtonSolver_Condition.hxx>
 
@@ -36,6 +37,31 @@ namespace tnbLib
 		Standard_Boolean IsConverged_;
 
 		NumAlg_NewtonSolver_Condition theCondition_;
+
+
+		//- private functions and operators
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theMaxIterations_;
+			ar & theIter_;
+
+			ar & theTolerance_;
+			ar & theUnderRelaxation_;
+
+			ar & theResidual_;
+			ar & theResult_;
+			ar & theSmall_;
+			ar & theZero_;
+
+			ar & IsConverged_;
+
+			ar & theCondition_;
+		}
 
 	protected:
 
@@ -82,7 +108,16 @@ namespace tnbLib
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_SMALL;
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_ZERO;
 
+
+		//- default constructor
+
 		TnbNumAlg_EXPORT NumAlg_NewtonSolver_Info();
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		auto NbIterations() const
 		{

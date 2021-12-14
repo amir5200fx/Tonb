@@ -16,6 +16,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	template<class Box>
 	class Mesh_ReferenceValues;
 
 	template<class GeomType>
@@ -25,12 +26,15 @@ namespace tnbLib
 	public:
 
 		typedef typename size_map_type<GeomType>::type sizeMapTool;
+		typedef typename size_map_type<GeomType>::boxType boxType;
+
+		typedef Mesh_ReferenceValues<boxType> meshRefValuesType;
 
 	private:
 
 		/*Private Data*/
 
-		std::shared_ptr<Mesh_ReferenceValues> theReference_;
+		std::shared_ptr<meshRefValuesType> theReference_;
 		std::shared_ptr<GeomType> theGeometry_;
 
 		std::map<word, std::shared_ptr<sizeMapTool>> theBoundaries_;
@@ -58,7 +62,7 @@ namespace tnbLib
 		Mesh_SizeMapControl
 		(
 			const std::shared_ptr<GeomType>& theGeometry, 
-			const std::shared_ptr<Mesh_ReferenceValues>& theRef
+			const std::shared_ptr<meshRefValuesType>& theRef
 		)
 			: theGeometry_(theGeometry)
 			, theReference_(theRef)
@@ -98,11 +102,20 @@ namespace tnbLib
 			theGeometry_ = theGeometry;
 		}
 
-		void LoadReference(const std::shared_ptr<Mesh_ReferenceValues>& theRef)
+		void LoadGeometry(std::shared_ptr<GeomType>&& theGeometry)
+		{
+			theGeometry_ = std::move(theGeometry);
+		}
+
+		void LoadReference(const std::shared_ptr<meshRefValuesType>& theRef)
 		{
 			theReference_ = theRef;
 		}
 
+		void LoadReference(std::shared_ptr<meshRefValuesType>&& theRef)
+		{
+			theReference_ = std::move(theRef);
+		}
 	};
 }
 

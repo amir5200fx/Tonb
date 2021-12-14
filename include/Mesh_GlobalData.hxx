@@ -29,10 +29,18 @@ namespace tnbLib
 
 		//- private functions and operators
 
-		TNB_SERIALIZATION(TnbMesh_EXPORT);
+		friend class boost::serialization::access;
 
-	public:
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Mesh_NamedEntity>(*this);
+			ar & boost::serialization::base_object<Mesh_RegisterElement<ElementType>>(*this);
 
+			ar & theQuality_;
+		}
+
+	protected:
 
 		//- default constructor
 
@@ -42,6 +50,9 @@ namespace tnbLib
 
 
 		//- constructors
+
+
+	public:
 
 
 		//- public functions and operators

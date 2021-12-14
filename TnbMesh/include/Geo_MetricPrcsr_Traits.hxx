@@ -9,8 +9,9 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class NumAlg_AdaptiveInteg_Info;
+	//class NumAlg_AdaptiveInteg_Info;
 	class Geo_MetricPrcsrAnIso_Info;
+	class Geo_MetricPrcsr_Info;
 
 	template<class MetricFun>
 	struct geo_metric_processor_info_type {};
@@ -30,7 +31,7 @@ namespace tnbLib
 	template<> 
 	struct geo_metric_processor_info_type<void>
 	{
-		typedef NumAlg_AdaptiveInteg_Info type;
+		typedef Geo_MetricPrcsr_Info type;
 	};
 
 }

@@ -33,10 +33,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			ar & boost::serialization::base_object<Global_Indexed>(*this);
-
-			ar & theCurve_;
-			ar & theMesh_;
+			Info << "WARNING! This function is not supposed to be called." << endl;
+			NotImplemented;
 		}
 
 	public:
@@ -58,6 +56,13 @@ namespace tnbLib
 			const std::shared_ptr<CurveType>& theCurve
 		)
 			: theCurve_(theCurve)
+		{}
+
+		explicit Mesh_PlnCurve
+		(
+			std::shared_ptr<CurveType>&& theCurve
+		)
+			: theCurve_(std::move(theCurve))
 		{}
 
 		Mesh_PlnCurve

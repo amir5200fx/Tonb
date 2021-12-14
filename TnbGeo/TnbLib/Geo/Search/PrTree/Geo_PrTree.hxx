@@ -54,7 +54,20 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<std::list<T>>(*this);
+		}
+
 	public:
+
+		//- default constructor
 
 		Geo_PrTreeBucket()
 		{}
@@ -84,10 +97,31 @@ namespace tnbLib
 		leafList theFNeighbors_;
 		leafList theBNeighbors_;
 
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theSNeighbors_;
+			ar & theENeighbors_;
+			ar & theNNeighbors_;
+			ar & theWNeighbors_;
+			ar & theFNeighbors_;
+			ar & theBNeighbors_;
+		}
+
 	public:
+
+		//- default constructor
 
 		Geo_PrTreeLeafHub()
 		{}
+
+
+		//- public functions and operators
 
 		const leafList& SNeighbors() const
 		{
@@ -163,10 +197,29 @@ namespace tnbLib
 		leafList theNNeighbors_;
 		leafList theWNeighbors_;
 
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theSNeighbors_;
+			ar & theENeighbors_;
+			ar & theNNeighbors_;
+			ar & theWNeighbors_;
+		}
+
 	public:
+
+		//- default constructor
 
 		Geo_PrTreeLeafHub()
 		{}
+
+
+		//- public functions and operators
 
 		const leafList& SNeighbors() const
 		{
@@ -230,7 +283,29 @@ namespace tnbLib
 		node* theBwdNePtr_;
 		node* theBwdNwPtr_;
 
+
+		//- Private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theFwdSwPtr_;
+			ar & theFwdSePtr_;
+			ar & theFwdNePtr_;
+			ar & theFwdNwPtr_;
+
+			ar & theBwdSwPtr_;
+			ar & theBwdSePtr_;
+			ar & theBwdNePtr_;
+			ar & theBwdNwPtr_;
+		}
+
 	public:
+
+
+		//- default constructor
 
 		Geo_PrTreeInternalHub()
 			: theFwdSwPtr_(0)
@@ -242,6 +317,12 @@ namespace tnbLib
 			, theBwdNePtr_(0)
 			, theBwdNwPtr_(0)
 		{}
+
+
+		//- constructors
+
+
+		// public functions and operators [11/22/2021 Amir]
 
 		node* FwdSw() const
 		{
@@ -336,7 +417,23 @@ namespace tnbLib
 		node* theNePtr_;
 		node* theNwPtr_;
 
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theSwPtr_;
+			ar & theSePtr_;
+			ar & theNePtr_;
+			ar & theNwPtr_;
+		}
+
 	public:
+
+
+		//- default constructor
 
 		Geo_PrTreeInternalHub()
 			: theSwPtr_(0)
@@ -344,6 +441,12 @@ namespace tnbLib
 			, theNePtr_(0)
 			, theNwPtr_(0)
 		{}
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		node* Sw() const
 		{
@@ -396,14 +499,32 @@ namespace tnbLib
 
 		BoxType theBox_;
 
+
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & theBox_;
+		}
+
 	public:
+
+		// default constructor [11/22/2021 Amir]
 
 		Geo_PrTreeNode()
 		{}
 
+		// constructors [11/22/2021 Amir]
+
 		Geo_PrTreeNode(const BoxType& theBox)
 			: theBox_(theBox)
 		{}
+
+
+		// public functions and operators [11/22/2021 Amir]
 
 		virtual ~Geo_PrTreeNode()
 		{}
@@ -428,10 +549,33 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<Geo_PrTreeNode<typename remove_pointer<T>::type::ptType>>(*this);
+			ar & boost::serialization::base_object<Geo_PrTreeBucket<T>>(*this);
+			ar & boost::serialization::base_object<Geo_PrTreeLeafHub<T, Dim, Balanced>>(*this);
+		}
+
+	protected:
+
+
+		
+
 	public:
+
+		// default constructor [11/22/2021 Amir]
 
 		Geo_PrTreeLeaf()
 		{}
+
+
+		// public functions and operators [11/22/2021 Amir]
 
 		~Geo_PrTreeLeaf() override
 		{}
@@ -445,10 +589,32 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_PrTreeNode<Point>>(*this);
+			ar & boost::serialization::base_object<Geo_PrTreeInternalHub<Point, Dim>>(*this);
+		}
+
+	protected:
+
+
 	public:
+
+
+		// default constructor [11/22/2021 Amir]
 
 		Geo_PrTreeInternal()
 		{}
+
+		// constructors [11/22/2021 Amir]
+
+		// public functions and operators [11/22/2021 Amir]
 
 		~Geo_PrTreeInternal() override
 		{}
@@ -462,11 +628,29 @@ namespace tnbLib
 
 		Standard_Integer theNbSubDivide_;
 
+
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_SearchTree_Base>(*this);
+			ar & theNbSubDivide_;
+		}
+
 	protected:
+
+		// default constructor [11/22/2021 Amir]
 
 		Geo_PrTreeBase()
 			: theNbSubDivide_(0)
 		{}
+
+		// constructors [11/22/2021 Amir]
+
+
 
 		Standard_Integer NbSubdivide() const
 		{
@@ -484,10 +668,27 @@ namespace tnbLib
 		int BUCKET_SIZE;
 		int MAX_INNER_SUBDIVIDE;
 
+
+		//- default constructor
+
 		Geo_PrTreeInfo()
 			: BUCKET_SIZE(8)
 			, MAX_INNER_SUBDIVIDE(20)
 		{}
+
+	private:
+
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & BUCKET_SIZE;
+			ar & MAX_INNER_SUBDIVIDE;
+		}
+
 	};
 
 	template
@@ -518,6 +719,21 @@ namespace tnbLib
 		using resolvedType = typename std::enable_if< cond, U >::type;
 
 		node* theRoot_;
+
+
+		// Private functions and operators [11/22/2021 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar & boost::serialization::base_object<Geo_PrTreeBase>(*this);
+			ar & boost::serialization::base_object<Geo_SearchTree<T>>(*this);
+			ar & boost::serialization::base_object<Geo_PrTreeInfo>(*this);
+
+			ar & theRoot_;
+		}
 
 		Standard_Boolean IsFull(const leafNode* t) const
 		{
@@ -1264,9 +1480,18 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [11/22/2021 Amir]
+
 		Geo_PrTree()
 			: theRoot_(nullptr)
 		{}
+
+
+		// constructors [11/22/2021 Amir]
+
+
+		// Public functions and operators [11/22/2021 Amir]
 
 		~Geo_PrTree()
 		{

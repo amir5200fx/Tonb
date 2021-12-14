@@ -9,7 +9,7 @@ namespace tnbLib
 		wireList& theWires
 	) const
 	{
-		theWires.push_back(theOutter_);
+		theWires.push_back(theOuter_);
 		if (theInner_)
 		{
 			for (const auto& x : *theInner_)
@@ -40,11 +40,11 @@ namespace tnbLib
 			const auto& xCurve = x->Curve();
 			Debug_Null_Pointer(xCurve);
 
-			curves.push_back(std::make_shared<plnCurveType>(*xCurve));
+			curves.push_back(std::make_shared<plnCurveType>(xCurve));
 		}
 
 		auto wire =
-			std::make_shared<plnWireType>(curves_ptr);
+			std::make_shared<plnWireType>(std::move(curves));
 
 		return std::move(wire);
 	}

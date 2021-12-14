@@ -26,7 +26,7 @@ namespace tnbLib
 
 tnbLib::BoundarySizeMap2d_CornerTool::BoundarySizeMap2d_CornerTool
 (
-	const std::shared_ptr<Mesh_ReferenceValues>& theRef,
+	const std::shared_ptr<Mesh2d_ReferenceValues>& theRef,
 	const std::shared_ptr<Cad2d_Plane>& thePlane
 )
 	: Mesh2d_BoundarySizeMapTool(thePlane, theRef)

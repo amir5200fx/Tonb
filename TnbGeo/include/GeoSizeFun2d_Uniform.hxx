@@ -12,5 +12,6 @@ namespace tnbLib
 }
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::GeoSizeFun2d_Uniform);
+BOOST_CLASS_TRACKING(tnbLib::GeoSizeFun2d_Uniform, boost::serialization::track_always);
 
 #endif // !_GeoSizeFun2d_Uniform_Header

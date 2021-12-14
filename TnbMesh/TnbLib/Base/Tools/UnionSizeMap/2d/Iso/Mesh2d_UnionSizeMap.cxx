@@ -17,7 +17,7 @@ Standard_Boolean tnbLib::Mesh2d_UnionSizeMap::TreeObject::Subdivide(const Entity
 	const auto h3 = ElementSize(b.P1());
 	const auto h4 = ElementSize(b.Corner(Box2d_PickAlgorithm_NW));
 
-	const auto tol = Tolerance();
+	const auto tol = Tolerance() * b.Diameter();
 
 	if (TOLERANCE(h1, h2) > tol)
 		return Standard_True;

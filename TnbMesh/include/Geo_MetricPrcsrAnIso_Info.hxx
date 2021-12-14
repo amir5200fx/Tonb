@@ -33,9 +33,15 @@ namespace tnbLib
 
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_NB_SAMPLES;
 
+
+		// default constructor [12/4/2021 Amir]
+
 		Geo_MetricPrcsrAnIso_Info()
 			: theNbSamples_(DEFAULT_NB_SAMPLES)
 		{}
+
+
+		// constructors [12/4/2021 Amir]
 
 		Geo_MetricPrcsrAnIso_Info
 		(
@@ -45,6 +51,18 @@ namespace tnbLib
 			, theIntgInfo_(theInfo)
 		{}
 
+		Geo_MetricPrcsrAnIso_Info
+		(
+			std::shared_ptr<NumAlg_AdaptiveInteg_Info>&& theInfo
+		)
+			: theIntgInfo_(std::move(theInfo))
+		{}
+
+
+		virtual ~Geo_MetricPrcsrAnIso_Info()
+		{}
+
+		// public functions and operators [12/4/2021 Amir]
 
 		const auto& IntegInfo() const
 		{
@@ -59,9 +77,19 @@ namespace tnbLib
 			theIntgInfo_ = theInfo;
 		}
 
+		void OverrideIntegInfo
+		(
+			std::shared_ptr<NumAlg_AdaptiveInteg_Info>&& theInfo
+		)
+		{
+			theIntgInfo_ = std::move(theInfo);
+		}
+
 		//- Macros
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Integer, NbSamples)
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Geo_MetricPrcsrAnIso_Info);
 
 #endif // !_Geo_MetricPrcsrAnIso_Info_Header

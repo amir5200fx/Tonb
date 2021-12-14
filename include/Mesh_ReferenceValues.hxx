@@ -5,15 +5,18 @@
 #include <Mesh_SurfaceSizeValues.hxx>
 #include <Mesh_SurfaceCurvatureValues.hxx>
 #include <Mesh_VariationRate.hxx>
+#include <Entity2d_BoxFwd.hxx>
 
 namespace tnbLib
 {
 
+	template<class Box>
 	class Mesh_ReferenceValues
 	{
 
 		/*Private Data*/
 
+		std::shared_ptr<Box> theRegion_;
 
 		Standard_Real theBase_;
 
@@ -32,21 +35,49 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			ar & theBase_;
-			ar & theSurfaceSize_;
-			ar & theSurfaceCurvature_;
-			ar & theDefaultGrowthRate_;
-			ar & theBoundaryGrowthRate_;
+			Info << " This function is not supposed to be called!" << endl;
+			NotImplemented;
 		}
-
-
-		Mesh_ReferenceValues()
-			: theBase_(0)
-		{}
 
 	public:
 
-		TnbMesh_EXPORT Mesh_ReferenceValues(const Standard_Real theBaseSize);
+		static TnbMesh_EXPORT const std::string extension;
+
+
+		//- default constructor
+
+		Mesh_ReferenceValues()
+			: theBase_(0)
+		{
+			theBoundaryGrowthRate_ = Mesh_VariationRateInfo::moderate;
+			theDefaultGrowthRate_ = Mesh_VariationRateInfo::moderate;
+		}
+
+		// constructors [12/7/2021 Amir]
+
+		Mesh_ReferenceValues
+		(
+			const Standard_Real theBaseSize,
+			const std::shared_ptr<Box>& theRegion
+		)
+			: theBase_(theBaseSize)
+			, theRegion_(theRegion)
+		{
+			theBoundaryGrowthRate_ = Mesh_VariationRateInfo::moderate;
+			theDefaultGrowthRate_ = Mesh_VariationRateInfo::moderate;
+		}
+
+		Mesh_ReferenceValues
+		(
+			const Standard_Real theBaseSize,
+			std::shared_ptr<Box>&& theRegion
+		)
+			: theBase_(theBaseSize)
+			, theRegion_(std::move(theRegion))
+		{
+			theBoundaryGrowthRate_ = Mesh_VariationRateInfo::moderate;
+			theDefaultGrowthRate_ = Mesh_VariationRateInfo::moderate;
+		}
 
 
 		//- public functions and operators
@@ -54,6 +85,11 @@ namespace tnbLib
 		auto BaseSize() const
 		{
 			return theBase_;
+		}
+
+		const auto& Region() const
+		{
+			return theRegion_;
 		}
 
 		auto& ChangeBaseSize()
@@ -96,6 +132,16 @@ namespace tnbLib
 			theBase_ = theSize;
 		}
 
+		void SetRegion(const std::shared_ptr<Entity2d_Box>& theRegion)
+		{
+			theRegion_ = theRegion;
+		}
+
+		void SetRegion(std::shared_ptr<Entity2d_Box>&& theRegion)
+		{
+			theRegion_ = std::move(theRegion);
+		}
+
 		void SetDefaultGrowthRate(const Mesh_VariationRateInfo info)
 		{
 			theDefaultGrowthRate_ = info;
@@ -108,5 +154,8 @@ namespace tnbLib
 
 	};
 }
+
+#include <Mesh2d_ReferenceValues.hxx>
+#include <Mesh3d_ReferenceValues.hxx>
 
 #endif // !_Mesh_ReferenceValues_Header

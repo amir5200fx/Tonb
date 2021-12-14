@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 #include <NumAlg_Secant_Condition.hxx>
 #include <NumAlg_Module.hxx>
 
@@ -44,6 +45,33 @@ namespace tnbLib
 		Standard_Boolean IsConverged_;
 
 		NumAlg_Secant_Condition theCondition_;
+
+
+		//- private functions and operators
+
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & theMaxIterations_;
+			ar & theIter_;
+
+			ar & theTolerance_;
+			ar & theUnderRelaxation_;
+
+			ar & theResidual_;
+			ar & theSmall_;
+			ar & theZero_;
+			ar & theDelta_;
+			ar & theX0_;
+			ar & theX1_;
+
+			ar & IsConverged_;
+
+			ar & theCondition_;
+		}
 
 	protected:
 
@@ -97,7 +125,16 @@ namespace tnbLib
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_SMALL;
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_ZERO;
 
+
+		//- default constructor
+
 		TnbNumAlg_EXPORT NumAlg_Secant_Info();
+
+
+		//- constructors
+
+
+		//- public functions and operators
 
 		auto NbIterations() const
 		{

@@ -5,6 +5,7 @@
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
 #include <OFstream.hxx>
+#include <TnbError.hxx>
 #include <Mesh_RegionPlaneTraits.hxx>
 
 #include <memory>
@@ -49,10 +50,33 @@ namespace tnbLib
 
 		std::shared_ptr<plnType> thePlane_;
 
-		outer theOutter_;
+		outer theOuter_;
 		inner theInner_;
 
+
+		//- default constructor
+
+		Mesh_RegionPlane()
+		{}
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& /*ar*/, const unsigned int /*file_version*/)
+		{
+			Info << "WARNING! This function is not supposed to be called." << endl;
+			NotImplemented;
+		}
+
 	public:
+
+		//- default constructor
+
+
+		//- constructors
 
 		Mesh_RegionPlane
 		(
@@ -61,7 +85,7 @@ namespace tnbLib
 			const inner& theInner = nullptr
 		)
 			: thePlane_(thePlane)
-			, theOutter_(theOuter)
+			, theOuter_(theOuter)
 			, theInner_(theInner)
 		{}
 
@@ -76,9 +100,12 @@ namespace tnbLib
 			: Global_Indexed(theIndex)
 			, Global_Named(theName)
 			, thePlane_(thePlane)
-			, theOutter_(theOuter)
+			, theOuter_(theOuter)
 			, theInner_(theInner)
 		{}
+
+
+		//- public functions and operators
 
 		const auto& Plane() const
 		{
@@ -103,7 +130,7 @@ namespace tnbLib
 
 		const auto& Outer() const
 		{
-			return theOutter_;
+			return theOuter_;
 		}
 
 		void RetrieveWiresTo(wireList& theWires) const;
