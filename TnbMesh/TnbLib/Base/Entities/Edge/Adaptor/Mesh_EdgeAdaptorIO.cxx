@@ -7,51 +7,51 @@
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh3d_EdgeToFacetAdaptor)
 {
-	ar & theFacets_;
+	//ar & theFacets_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh3d_EdgeToFacetAdaptor)
 {
-	ar & theFacets_;
+	//ar & theFacets_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh3d_EdgeToElementAdaptor)
 {
-	ar & theElements_;
+	//ar & theElements_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh3d_EdgeToElementAdaptor)
 {
-	ar & theElements_;
+	//ar & theElements_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh_EdgeAdaptor<tnbLib::Mesh2d_Element>)
 {
-	ar & theRight_;
-	ar & theLeft_;
+	//ar & theRight_;
+	//ar & theLeft_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh_EdgeAdaptor<tnbLib::Mesh2d_Element>)
 {
-	ar & theRight_;
-	ar & theLeft_;
+	//ar & theRight_;
+	//ar & theLeft_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh_EdgeAdaptor<tnbLib::Mesh3d_Facet>)
 {
-	ar & theRight_;
-	ar & theLeft_;
+	//ar & theRight_;
+	//ar & theLeft_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh_EdgeAdaptor<tnbLib::Mesh3d_Facet>)
 {
-	ar & theRight_;
-	ar & theLeft_;
+	//ar & theRight_;
+	//ar & theLeft_;
 }

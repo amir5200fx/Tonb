@@ -12,6 +12,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+unsigned short tnbLib::Aft2d_BoundaryOfPlane::verbose = 0;
+
 void tnbLib::Aft2d_BoundaryOfPlane::UpdateFront()
 {
 	if (NOT MetricProcessor())
@@ -36,6 +38,12 @@ void tnbLib::Aft2d_BoundaryOfPlane::UpdateFront()
 
 void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 {
+	if (verbose)
+	{
+		tnbLib::Info << endl
+			<< "****** Meshing the boundaries ******" << endl << endl;
+	}
+
 	if (NOT MetricProcessor())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -57,6 +65,11 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 			<< abort(FatalError);
 	}
 
+	if (verbose)
+	{
+		tnbLib::Info << " Retrieving the wires..." << endl;
+	}
+
 	std::vector<std::shared_ptr<typename Aft2d_RegionPlane::plnWireType>> wires;
 	Plane()->RetrieveWiresTo(wires);
 	if (wires.empty())
@@ -64,6 +77,11 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 		FatalErrorIn(FunctionSIG)
 			<< "invalid plane has been detected: the wire list is empty!" << endl
 			<< abort(FatalError);
+	}
+
+	if (verbose)
+	{
+		tnbLib::Info << " - nb. of wires: " << wires.size() << endl << endl;
 	}
 
 	const auto& infoMap = Info()->Curve();
@@ -77,6 +95,15 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 
 	for (const auto& wire : wires)
 	{
+		if (verbose)
+		{
+			tnbLib::Info << " - wire's name: "
+				<< wire->Name()
+				<< ", index: "
+				<< wire->Index()
+				<< endl << endl;
+		}
+
 		Debug_Null_Pointer(wire);
 
 		std::vector<std::shared_ptr<Aft2d_SegmentEdge>> Medges;
@@ -84,6 +111,11 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 		std::vector<Entity2d_Box> wBoxes;
 		const auto& curves = wire->Curves();
 		wBoxes.reserve(curves.size());
+
+		if (verbose)
+		{
+			tnbLib::Info << " - nb. of curves: " << curves.size() << endl << endl;
+		}
 		for (const auto& x : curves)
 		{
 			Debug_Null_Pointer(x);
@@ -91,6 +123,7 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 			Debug_Null_Pointer(Info()->GlobalCurve());
 			auto currentInfo = Info()->GlobalCurve();
 
+			Standard_Boolean overrideInfo = Standard_False;
 			if (Info()->OverrideInfo() AND infoMap.size())
 			{
 				auto iter = infoMap.find(x->Index());
@@ -98,11 +131,26 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 				if (iter NOT_EQUAL infoMap.end())
 				{
 					currentInfo = iter->second;
+					overrideInfo = Standard_True;
 				}
 			}
 
+			if (verbose)
+			{
+				tnbLib::Info << " - curve no. " << x->Index() << "." << endl;
+				tnbLib::Info << "   Using local info: " << (overrideInfo ? "YES." : "NO.") << endl;
+			}
+
+			if (verbose)
+			{
+				tnbLib::Info << "   Discretizing..." << endl;
+			}
 			auto mesh = Aft_Tools::RetrieveTopoMesh(x, MetricProcessor(), currentInfo);
 
+			if (verbose)
+			{
+				tnbLib::Info << "   Discretization is done!" << endl;
+			}
 			auto nodes = Aft_Tools::RetrieveNodes(Aft_Tools::UpCast(mesh));
 			auto box = Geo_BoxTools::GetBox(Aft_Tools::RetrieveGeometry(nodes), 0.0);
 
@@ -132,6 +180,13 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 			x->SetIndex(++Ke);
 		}
 
+		if (verbose)
+		{
+			tnbLib::Info << endl;
+			tnbLib::Info << " Merging the edges..." << endl;
+			tnbLib::Info << " - Tolerance: " << Info()->MergeTolerance() << endl << endl;
+		}
+
 		Aft_Tools::MergeDangles(Medges, Info()->MergeTolerance());
 
 		for (const auto& x : Medges)
@@ -148,26 +203,73 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 			n0->SetIndex(++Kn);
 		}
 
+		if (verbose)
+		{
+			tnbLib::Info << " Checking the min. nb. of the points in a wire: ";
+		}
 		if (CheckWireNbPts(boundaries))
 		{
 			SetNbPtsCheck(Standard_True);
 			//Checked = Standard_True;
+
+			if (verbose)
+			{
+				tnbLib::Info << " NO!" << endl;
+			}
 			continue;
 		}
+		else
+		{
+			if (verbose)
+			{
+				tnbLib::Info << " OK!" << endl;
+			}
+		}
 
+		if (verbose)
+		{
+			tnbLib::Info << " Checking the simplicity of the wire: ";
+		}
 		if (CheckSimplicity(boundaries))
 		{
 			SetSimpleCheck(Standard_True);
 			//Checked = Standard_True;
+
+			if (verbose)
+			{
+				tnbLib::Info << " NO!" << endl;
+			}
 			continue;
 		}
+		else
+		{
+			if (verbose)
+			{
+				tnbLib::Info << " OK!" << endl;
+			}
+		}
 
+		if (verbose)
+		{
+			tnbLib::Info << " Checking the wire orientation: ";
+		}
 		if (wires[0] IS_EQUAL wire)
 		{
 			if (CheckWireOrientation(boundaries, Standard_True))
 			{
 				SetOrientCheck(Standard_True);
 				//Checked = Standard_True;
+				if (verbose)
+				{
+					tnbLib::Info << " NO!" << endl;
+				}
+			}
+			else
+			{
+				if (verbose)
+				{
+					tnbLib::Info << " OK!" << endl;
+				}
 			}
 		}
 		else
@@ -176,6 +278,17 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 			{
 				SetOrientCheck(Standard_True);
 				//Checked = Standard_True;
+				if (verbose)
+				{
+					tnbLib::Info << " NO!" << endl;
+				}
+			}
+			else
+			{
+				if (verbose)
+				{
+					tnbLib::Info << " OK!" << endl;
+				}
 			}
 		}
 	}
@@ -184,19 +297,57 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 	auto box0 = *iter;
 	iter++;
 
+	if (verbose)
+	{
+		tnbLib::Info << " Checking the inner wires: ";
+	}
+	Standard_Boolean innerWireCheck = Standard_False;
 	while (iter NOT_EQUAL boxes.end())
 	{
 		if (NOT Entity2d_Box::IsInside(iter->OffSet(1.0E-4), box0))
 		{
 			SetInnerCheck(Standard_True);
+			innerWireCheck = Standard_True;
 			break;
 		}
 		iter++;
 	}
 
+	if (innerWireCheck)
+	{
+		if (verbose)
+		{
+			tnbLib::Info << " NO!" << endl;
+		}
+	}
+	else
+	{
+		if (verbose)
+		{
+			tnbLib::Info << " OK!" << endl;
+		}
+	}
+
+	if (verbose)
+	{
+		tnbLib::Info << endl;
+		tnbLib::Info << " Activating the boundary edges..." << endl;
+	}
+
 	Aft_Tools::ActiveBoundaryEdges(boundaries);
 
+	if (verbose)
+	{
+		tnbLib::Info << endl;
+		tnbLib::Info << " Updating the front..." << endl;
+	}
 	UpdateFront();
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		tnbLib::Info << endl
+			<< "****** End of the Meshing the boundaries ******" << endl << endl;
+	}
 }

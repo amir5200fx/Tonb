@@ -7,6 +7,8 @@
 #include <Aft2d_RegionPlaneFwd.hxx>
 #include <Aft2d_SegmentEdgeFwd.hxx>
 #include <Aft2d_BoundaryOfPlane_InfoFwd.hxx>
+#include <Aft2d_OptNode_CalculatorFwd.hxx>
+#include <Aft2d_ElementFwd.hxx>
 
 #include <vector>
 
@@ -25,6 +27,8 @@ namespace tnbLib
 
 		std::shared_ptr<Aft_MetricPrcsr_Info> theGlobalMetricInfo_;
 
+		std::shared_ptr<Aft2d_OptNode_Calculator> theNodeCalculator_;
+
 
 		// Results [12/1/2021 Amir]
 
@@ -34,6 +38,8 @@ namespace tnbLib
 		std::shared_ptr<Aft2d_RegionPlane> theRegion_;
 
 		std::vector<std::shared_ptr<Aft2d_SegmentEdge>> theEdges_;
+
+		std::vector<std::shared_ptr<Aft2d_Element>> theElements_;
 
 		// Private functions and operators [12/1/2021 Amir]
 
@@ -67,6 +73,11 @@ namespace tnbLib
 			return theGlobalMetricInfo_;
 		}
 
+		const auto& NodeCalculator() const
+		{
+			return theNodeCalculator_;
+		}
+
 		const auto& Metric() const
 		{
 			return theMetric_;
@@ -85,6 +96,11 @@ namespace tnbLib
 		const auto& Region() const
 		{
 			return theRegion_;
+		}
+
+		const auto& Elements() const
+		{
+			return theElements_;
 		}
 
 		void SetRegion(const std::shared_ptr<Aft2d_RegionPlane>& theRegion)
@@ -127,6 +143,16 @@ namespace tnbLib
 			theMetric_ = std::move(theMetric);
 		}
 
+		void SetElements(const std::vector<std::shared_ptr<Aft2d_Element>>& theElements)
+		{
+			theElements_ = theElements;
+		}
+
+		void SetElements(std::vector<std::shared_ptr<Aft2d_Element>>&& theElements)
+		{
+			theElements_ = std::move(theElements);
+		}
+
 		void LoadGlobalMetricInfo(const std::shared_ptr<Aft_MetricPrcsr_Info>& theInfo)
 		{
 			theGlobalMetricInfo_ = theInfo;
@@ -135,6 +161,16 @@ namespace tnbLib
 		void LoadGlobalMetricInfo(std::shared_ptr<Aft_MetricPrcsr_Info>&& theInfo)
 		{
 			theGlobalMetricInfo_ = std::move(theInfo);
+		}
+
+		void LoadNodeCalculator(const std::shared_ptr<Aft2d_OptNode_Calculator>& theCalculator)
+		{
+			theNodeCalculator_ = theCalculator;
+		}
+
+		void LoadNodeCalculator(std::shared_ptr<Aft2d_OptNode_Calculator>&& theCalculator)
+		{
+			theNodeCalculator_ = std::move(theCalculator);
 		}
 	};
 }

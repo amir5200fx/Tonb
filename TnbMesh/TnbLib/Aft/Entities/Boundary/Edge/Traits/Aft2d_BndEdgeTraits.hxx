@@ -2,8 +2,8 @@
 #ifndef _Aft2d_BndEdgeTraits_Header
 #define _Aft2d_BndEdgeTraits_Header
 
-#include <Aft2d_Edge.hxx>
-#include <Aft2d_BndNode.hxx>
+#include <Aft2d_EdgeFwd.hxx>
+#include <Aft2d_BndNodeFwd.hxx>
 
 namespace tnbLib
 {

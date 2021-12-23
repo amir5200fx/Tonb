@@ -18,14 +18,14 @@ namespace tnbLib
 		ar & boost::serialization::base_object<Global_Named>(*this);
 		ar & boost::serialization::base_object<Global_Done>(*this);
 
-		ar & theFront_;
-		ar & theMetricMap_;
+		//ar & theFront_;
+		//ar & theMetricMap_;
 
-		ar & theSize_;
+		//ar & theSize_;
 
-		ar & theCoord_;
+		//ar & theCoord_;
 
-		ar & IsConverged_;
+		//ar & IsConverged_;
 	}
 
 	template<>
@@ -40,13 +40,13 @@ namespace tnbLib
 		ar & boost::serialization::base_object<Global_Named>(*this);
 		ar & boost::serialization::base_object<Global_Done>(*this);
 
-		ar & theFront_;
-		ar & theMetricMap_;
+		//ar & theFront_;
+		//ar & theMetricMap_;
 
-		ar & theSize_;
+		//ar & theSize_;
 
-		ar & theCoord_;
+		//ar & theCoord_;
 
-		ar & IsConverged_;
+		//ar & IsConverged_;
 	}
 }

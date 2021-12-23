@@ -49,6 +49,8 @@ namespace tnbLib
 		typedef Aft_MetricPrcsr<frontType, SizeFun, MetricFun>
 			metricMap;
 
+	private:
+
 		/*Private Data*/
 
 
@@ -143,6 +145,8 @@ namespace tnbLib
 
 		typedef Aft_MetricPrcsr<frontType, SizeFun, void>
 			metricMap;
+
+	private:
 
 		/*Private Data*/
 

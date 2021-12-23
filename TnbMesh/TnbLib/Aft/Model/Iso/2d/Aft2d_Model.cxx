@@ -1,5 +1,9 @@
 #include <Aft2d_Model.hxx>
 
+#include <Aft2d_Edge.hxx>
+
+unsigned short tnbLib::Aft2d_Model::verbose(0);
+
 template<>
 void tnbLib::Aft2d_Model::Import
 (
@@ -72,6 +76,11 @@ namespace tnbLib
 template<>
 void tnbLib::Aft2d_Model::MeshingOneLevel()
 {
+	if (verbose)
+	{
+		Info << " - Level nb. " << base::LevelNumber() << endl;
+	}
+
 	ModifyLocalFront(DEFAULT_LOCALFRONT_FACTOR);
 
 	while (GetFrontEntity())

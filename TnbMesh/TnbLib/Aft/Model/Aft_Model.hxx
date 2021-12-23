@@ -128,6 +128,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT unsigned short verbose;
+
 		//- default constructor
 
 		Aft_Model()

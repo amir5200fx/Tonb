@@ -9,6 +9,7 @@
 #include <OSstream.hxx>
 
 #include <memory>
+#include <array>
 
 namespace tnbLib
 {
@@ -45,7 +46,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<nodeType> theNodes_[2];
+		std::array<std::shared_ptr<nodeType>, 2> theNodes_;
 
 
 		//- private functions and operators

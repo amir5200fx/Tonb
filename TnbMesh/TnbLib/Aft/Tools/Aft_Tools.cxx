@@ -1,13 +1,13 @@
 #include <Aft_Tools.hxx>
 
-#include <Aft2d_Node.hxx>
-#include <Aft2d_NodeAnIso.hxx>
-#include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_Edge.hxx>
 #include <Aft2d_SegmentEdge.hxx>
 #include <Aft2d_SegmentEdgeAnIso.hxx>
 #include <Aft2d_PlnCurve.hxx>
 #include <Aft2d_PlnCurveAnIso.hxx>
+#include <Aft_Elements.hxx>
+#include <Aft_Nodes.hxx>
+#include <Entity2d_Chain.hxx>
 //#include <Aft2d_gPlnCurveSurface.hxx>
 //#include <Aft2d_tPlnCurveSurface.hxx>
 //#include <Aft2d_gSegmentEdge.hxx>
@@ -63,6 +63,46 @@ tnbLib::Aft_Tools::RetrieveNodes
 //	auto nodes = Aft2d_EdgeSurface::RetrieveNodes(theEdges);
 //	return std::move(nodes);
 //}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_Node>>
+tnbLib::Aft_Tools::RetrieveNodes
+(
+	const std::vector<std::shared_ptr<Aft2d_Element>>& theElements
+)
+{
+	auto nodes = Aft2d_Element::RetrieveNodes(theElements);
+	return std::move(std::move(nodes));
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_NodeAnIso>>
+tnbLib::Aft_Tools::RetrieveNodes
+(
+	const std::vector<std::shared_ptr<Aft2d_ElementAnIso>>& theElements
+)
+{
+	auto nodes = Aft2d_ElementAnIso::RetrieveNodes(theElements);
+	return std::move(std::move(nodes));
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_NodeSurface>>
+tnbLib::Aft_Tools::RetrieveNodes
+(
+	const std::vector<std::shared_ptr<Aft2d_ElementSurface>>& theElements
+)
+{
+	auto nodes = Aft2d_ElementSurface::RetrieveNodes(theElements);
+	return std::move(std::move(nodes));
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft3d_Node>>
+tnbLib::Aft_Tools::RetrieveNodes
+(
+	const std::vector<std::shared_ptr<Aft3d_Element>>& theElements
+)
+{
+	auto nodes = Aft3d_Element::RetrieveNodes(theElements);
+	return std::move(std::move(nodes));
+}
 
 std::vector<tnbLib::Pnt2d> 
 tnbLib::Aft_Tools::RetrieveGeometry
@@ -145,3 +185,18 @@ void tnbLib::Aft_Tools::ActiveBoundaryEdges(const std::vector<std::shared_ptr<Af
 {
 	Aft2d_SegmentEdgeAnIso::ActiveBoundaryEdges(UpCast(theEdges));
 }
+
+//void tnbLib::Aft_Tools::Connect(const std::vector<std::shared_ptr<Aft2d_Edge>>& theEdges)
+//{
+//	for (const auto& x : theEdges)
+//	{
+//		const auto& n0 = x->Node0();
+//		const auto& n1 = x->Node1();
+//
+//		Debug_Null_Pointer(n0);
+//		Debug_Null_Pointer(n1);
+//
+//		n0->InsertToEdges(x->Index(), x);
+//		n1->InsertToEdges(x->Index(), x);
+//	}
+//}

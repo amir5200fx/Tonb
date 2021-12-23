@@ -5,6 +5,7 @@
 #include <Aft2d_MetricPrcsrAnIso.hxx>
 #include <Aft2d_RegionPlaneAnIso.hxx>
 #include <Aft2d_SegmentEdgeAnIso.hxx>
+#include <Aft2d_ElementAnIso.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Entity2d_Box.hxx>
 
@@ -21,7 +22,9 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataAnIso)
 
 	ar & theEdges_;
 
-	ar & theSizeFun_;
+	ar & theElements_;
+
+	//ar & theSizeFun_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataAnIso)
@@ -37,7 +40,9 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataAnIso)
 
 	ar & theEdges_;
 
-	ar & theSizeFun_;
+	ar & theElements_;
+
+	//ar & theSizeFun_;
 }
 
 BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Aft2d_SolutionDataAnIso);
