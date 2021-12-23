@@ -386,6 +386,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Aft\MetricPrcsr\System\Aft2d_MetricPrcsrAnIso_System.hxx" />
     <ClInclude Include="TnbLib\Aft\Model\Aft_Model.hxx" />
     <ClInclude Include="TnbLib\Aft\Model\Aft_ModelI.hxx" />
+    <ClInclude Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIso.hxx" />
+    <ClInclude Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIsoFwd.hxx" />
     <ClInclude Include="TnbLib\Aft\Model\Cache\Aft_Model_Cache.hxx" />
     <ClInclude Include="TnbLib\Aft\Model\Constants\Aft_Model_Constants.hxx" />
     <ClInclude Include="TnbLib\Aft\Model\Iso\2d\Aft2d_Model.hxx" />
@@ -751,6 +753,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Aft\OptNode\Analytical\AnIso\2d\Aft2d_OptNodeAnIso_Analytical.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Analytical\Iso\2d\Aft2d_OptNode_Analytical.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Analytical\Surface\Aft2d_OptNodeSurface_Analytical.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_Calculator.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_CalculatorIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Calculator\Iso\2d\Aft2d_OptNode_Calculator.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Calculator\Iso\2d\Aft2d_OptNode_CalculatorIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Calculator\Iso\2d\Aft2d_StdOptNode.cxx" />

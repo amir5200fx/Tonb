@@ -1111,6 +1111,9 @@
     <Filter Include="TnbLib\Base\Cad\Wire\AnIso">
       <UniqueIdentifier>{d8617d65-041d-437c-9182-abb1baaefce6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\Model\AnIso\2d">
+      <UniqueIdentifier>{51acad17-f7c8-487e-a5b5-1f06668fef94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -2622,6 +2625,12 @@
     <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\T\Aft2d_tRegionPlaneSurface.hxx">
       <Filter>TnbLib\Aft\Region\Plane\Surface\T</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIso.hxx">
+      <Filter>TnbLib\Aft\Model\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\Model\AnIso\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -3223,6 +3232,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Core\Base\Iso\2d\Aft2d_CoreBase.cxx">
       <Filter>TnbLib\Aft\Core\Base\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_Calculator.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_CalculatorIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
