@@ -2,6 +2,7 @@
 #include <Aft2d_SolutionDataAnIso.hxx>
 #include <Aft2d_BoundaryOfPlane_Info.hxx>
 #include <Aft2d_BoundaryOfPlaneAnIso_Info.hxx>
+#include <Aft2d_Element.hxx>
 #include <GeoSizeFun2d_Uniform.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Cad2d_Plane.hxx>

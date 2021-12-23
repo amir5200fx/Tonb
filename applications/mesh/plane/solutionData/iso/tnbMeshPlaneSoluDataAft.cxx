@@ -1,4 +1,5 @@
 #include <Aft2d_SolutionData.hxx>
+#include <Aft2d_OptNode_Calculator.hxx>
 #include <Aft_MetricPrcsr_Info.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Cad2d_Plane.hxx>
@@ -222,6 +223,31 @@ namespace tnbLib
 		return std::move(plane);
 	}
 
+	auto loadNodeCreator()
+	{
+		checkFolder("plane");
+
+		const auto currentPath = boost::filesystem::current_path();
+
+		// change the current path [12/21/2021 Amir]
+		boost::filesystem::current_path(currentPath.string() + R"(\nodeCreator)");
+
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), Aft2d_OptNode_Calculator::extension).string();
+
+		auto alg = file::LoadFile<std::shared_ptr<Aft2d_OptNode_Calculator>>(name + Aft2d_OptNode_Calculator::extension, verbose);
+		if (NOT alg)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the node creator file is null" << endl
+				<< abort(FatalError);
+		}
+
+		// change back the current path [12/21/2021 Amir]
+		boost::filesystem::current_path(currentPath);
+
+		return std::move(alg);
+	}
+
 	void execute()
 	{
 		auto metricInfo = loadGlobalInfo();
@@ -231,6 +257,8 @@ namespace tnbLib
 		auto sizeFun = loadSizeFunction();
 
 		auto plane = loadPlane();
+
+		auto nodeCreator = loadNodeCreator();
 
 		auto soluData = std::make_shared<Aft2d_SolutionData>();
 
@@ -242,6 +270,8 @@ namespace tnbLib
 		soluData->LoadSizeFunction(std::move(sizeFun));
 
 		soluData->LoadPlane(std::move(plane));
+
+		soluData->LoadNodeCalculator(std::move(nodeCreator));
 
 		mySolutionData = std::move(soluData);
 

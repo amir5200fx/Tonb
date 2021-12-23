@@ -6,6 +6,7 @@
 #include <Geo2d_MetricFunction.hxx>
 #include <Aft_MetricPrcsr_Info.hxx>
 #include <Aft_MetricPrcsrAnIso_Info.hxx>
+#include <Cad2d_Plane.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -91,12 +92,23 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		if (NOT mySoluData->Plane())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no shape has been found!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto box = mySoluData->Plane()->BoundingBox(0);
+
 		if (mySoluData->IsIso())
 		{
 			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
 			Debug_Null_Pointer(soluData);
 
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsr>(0, name, soluData->SizeFunction(), soluData->GlobalMetricInfo());
+			metricPrcsr->SetDimSize(box.Diameter());
+
 			soluData->SetMetric(std::move(metricPrcsr));
 		}
 		else if (mySoluData->IsAnIso())
@@ -112,6 +124,8 @@ namespace tnbLib
 			}
 
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrAnIso>(0, name, soluData->SizeFunction(), soluData->MetricFunction(), soluData->GlobalMetricInfo());
+			metricPrcsr->SetDimSize(box.Diameter());
+
 			soluData->SetMetric(std::move(metricPrcsr));
 		}
 		else

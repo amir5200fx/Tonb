@@ -10,6 +10,7 @@
 #include <Aft2d_RegionPlaneAnIso.hxx>
 #include <Aft2d_SolutionData.hxx>
 #include <Aft2d_SolutionDataAnIso.hxx>
+#include <Aft2d_Element.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
