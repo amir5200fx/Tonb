@@ -28,7 +28,7 @@ namespace tnbLib
 
 		// private functions and operators [7/17/2021 Amir]
 
-		TNB_SERIALIZATION(TnbGeo_EXPORT);
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
 
 	protected:

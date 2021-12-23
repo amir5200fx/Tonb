@@ -1,4 +1,5 @@
 setVerbose(1);
+setBndMeshVerbose(1);
 
 loadFile();
 

@@ -6,16 +6,7 @@
 #include <Global_Named.hxx>
 #include <Global_Indexed.hxx>
 #include <Entity_Box.hxx>
-
-#ifdef TnbGeo_EXPORT_DEFINE
-#define TnbGeoSizeFun_EXPORT __declspec(dllexport)
-#else
-#ifdef TnbGeoSizeFun_EXPORT_DEFINE
-#define TnbGeoSizeFun_EXPORT __declspec(dllexport)
-#else
-#define TnbGeoSizeFun_EXPORT __declspec(dllimport)
-#endif
-#endif
+#include <Mesh_Module.hxx>
 
 namespace tnbLib
 {
@@ -76,7 +67,7 @@ namespace tnbLib
 		typedef Point ptType;
 		typedef Entity_Box<Point> boxType;
 
-		static TnbGeoSizeFun_EXPORT const std::string extension;
+		static TnbMesh_EXPORT const std::string extension;
 
 		const Entity_Box<Point>& BoundingBox() const
 		{
@@ -103,8 +94,5 @@ namespace tnbLib
 
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo2d_SizeFunction);
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Geo3d_SizeFunction);
-
-BOOST_CLASS_TRACKING(tnbLib::Geo_SizeFunction<tnbLib::Pnt2d>, boost::serialization::track_always);
-BOOST_CLASS_TRACKING(tnbLib::Geo_SizeFunction<tnbLib::Pnt3d>, boost::serialization::track_always);
 
 #endif // !_Geo_SizeFunction_Header

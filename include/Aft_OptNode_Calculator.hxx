@@ -6,6 +6,7 @@
 #include <Global_Named.hxx>
 #include <Global_Done.hxx>
 #include <Global_Serialization.hxx>
+#include <Mesh_Module.hxx>
 //#include <Aft_MetricPrcsr.hxx>
 
 #include <Standard_Real.hxx>
@@ -62,6 +63,7 @@ namespace tnbLib
 		Aft_OptNode_Calculator()
 			: theSize_(0)
 			, IsConverged_(Standard_True)
+			, theCoord_(Pnt2d::null)
 		{}
 
 
@@ -79,6 +81,8 @@ namespace tnbLib
 
 	public:
 
+
+		static TnbMesh_EXPORT const std::string extension;
 
 		//- public functions and operators
 

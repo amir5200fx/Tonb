@@ -44,7 +44,7 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			ar & boost::serialization::base_object<Mesh_Node<NodeTraits>>(*this);
+			ar & boost::serialization::base_object<baseType>(*this);
 			ar & boost::serialization::base_object<Aft_NodeIdentifier<NodeTraits::nType>>(*this);
 			ar & boost::serialization::base_object<nodeAdaptor>(*this);
 		}

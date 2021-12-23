@@ -95,6 +95,8 @@ namespace tnbLib
 			const Standard_Real theTol
 		);
 
+		//static void Connect(const std::vector<std::shared_ptr<Mesh_TBndEdge>>& theEdges);
+
 		static std::vector<std::shared_ptr<typename TBndEdgeTraits::bndEdgeTraits::edgeType>>
 			UpCast
 			(

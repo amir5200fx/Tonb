@@ -16,7 +16,7 @@ namespace tnbLib
 		typedef Aft2d_NodeSurface nodeType;
 		typedef Aft2d_EdgeSurface edgeType;
 		typedef void facetType;
-		typedef Aft2d_ElementSurface elementTypa;
+		typedef Aft2d_ElementSurface elementType;
 
 		typedef connectivity::triple connectType;
 	};

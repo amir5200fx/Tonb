@@ -8,16 +8,7 @@
 #include <Global_Serialization.hxx>
 #include <Entity_Box.hxx>
 #include <Geo_MetricFunctionTraits.hxx>
-
-#ifdef TnbGeo_EXPORT_DEFINE
-#define TnbGeoMetricFun_EXPORT __declspec(dllexport)
-#else
-#ifdef TnbGeoMetricFun_EXPORT_DEFINE
-#define TnbGeoMetricFun_EXPORT __declspec(dllexport)
-#else
-#define TnbGeoMetricFun_EXPORT __declspec(dllimport)
-#endif
-#endif
+#include <Mesh_Module.hxx>
 
 namespace tnbLib
 {
@@ -88,7 +79,7 @@ namespace tnbLib
 		typedef Point ptType;
 		typedef typename metric_type_from_point<Point>::metricType metricType;
 
-		static TnbGeoMetricFun_EXPORT const std::string extension;
+		static TnbMesh_EXPORT const std::string extension;
 
 
 		// Public functions and operators [11/24/2021 Amir]

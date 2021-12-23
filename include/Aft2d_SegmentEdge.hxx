@@ -3,6 +3,8 @@
 #define _Aft2d_SegmentEdge_Header
 
 #include <Mesh_TBndEdge.hxx>
+#include <Aft2d_Edge.hxx>
+#include <Aft2d_BndNode.hxx>
 #include <Aft2d_TBndEdgeTraits.hxx>
 #include <Aft2d_SegmentEdgeFwd.hxx>
 
@@ -23,6 +25,7 @@ namespace tnbLib
 		const std::vector<std::shared_ptr<Aft2d_SegmentEdge>>& theWire,
 		const Standard_Real theTol
 	);
+
 }
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_SegmentEdge);

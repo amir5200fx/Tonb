@@ -7,13 +7,13 @@
 #include <Aft3d_ElementFwd.hxx>
 #include <Aft3d_FacetFwd.hxx>
 #include <Aft_NodeType.hxx>
+#include <Mesh3d_NodeTraits.hxx>
 
 namespace tnbLib
 {
 
 	struct Aft3d_NodeTraits
 	{
-
 		typedef Aft3d_Edge edgeType;
 		typedef Aft3d_Element elementType;
 		typedef Aft3d_Facet facetType;
