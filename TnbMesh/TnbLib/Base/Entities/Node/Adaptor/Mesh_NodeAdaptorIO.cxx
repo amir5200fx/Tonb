@@ -12,95 +12,95 @@
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh3d_NodeToEdgeAdaptor)
 {
-	ar & theEdges_;
+	//ar & theEdges_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh3d_NodeToEdgeAdaptor)
 {
-	ar & theEdges_;
+	//ar & theEdges_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh3d_NodeToFacetAdaptor)
 {
-	ar & theFacets_;
+	//ar & theFacets_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh3d_NodeToFacetAdaptor)
 {
-	ar & theFacets_;
+	//ar & theFacets_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh3d_NodeToElementAdaptor)
 {
-	ar & theElements_;
+	//ar & theElements_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh3d_NodeToElementAdaptor)
 {
-	ar & theElements_;
+	//ar & theElements_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh3d_NodeToBoundaryEdgeAdaptor)
 {
-	ar & theBoundaryEdges_;
+	//ar & theBoundaryEdges_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh3d_NodeToBoundaryEdgeAdaptor)
 {
-	ar & theBoundaryEdges_;
+	//ar & theBoundaryEdges_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh3d_NodeToBoundaryFacetAdaptor)
 {
-	ar & theBoundaryFacets_;
+	//ar & theBoundaryFacets_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh3d_NodeToBoundaryFacetAdaptor)
 {
-	ar & theBoundaryFacets_;
+	//ar & theBoundaryFacets_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh2d_NodeToEdgeAdaptor)
 {
-	ar & theEdges_;
+	//ar & theEdges_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh2d_NodeToEdgeAdaptor)
 {
-	ar & theEdges_;
+	//ar & theEdges_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh2d_NodeToElementAdaptor)
 {
-	ar & theElements_;
+	//ar & theElements_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh2d_NodeToElementAdaptor)
 {
-	ar & theElements_;
+	//ar & theElements_;
 }
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh2d_NodeToBoundaryEdgeAdaptor)
 {
-	ar & theBoundaryEdges_;
+	//ar & theBoundaryEdges_;
 }
 
 template<>
 TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh2d_NodeToBoundaryEdgeAdaptor)
 {
-	ar & theBoundaryEdges_;
+	//ar & theBoundaryEdges_;
 }

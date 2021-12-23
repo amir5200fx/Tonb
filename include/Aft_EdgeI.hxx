@@ -17,24 +17,29 @@ namespace tnbLib
 			const auto& n0 = x->Node0();
 			const auto& n1 = x->Node1();
 
+			Debug_Null_Pointer(n0);
+			Debug_Null_Pointer(n1);
+
 			auto iter = nodes_map.find(n0->Index());
 			if (iter == nodes_map.end())
 			{
-				nodes_map.insert(std::make_pair(n0->Index(), n0));
+				auto paired = std::make_pair(n0->Index(), n0);
+				nodes_map.insert(std::move(paired));
 			}
 
 			iter = nodes_map.find(n1->Index());
 			if (iter == nodes_map.end())
 			{
-				nodes_map.insert(std::make_pair(n1->Index(), n1));
+				auto paired = std::make_pair(n1->Index(), n1);
+				nodes_map.insert(std::move(paired));
 			}
 		}
 
 		std::vector<std::shared_ptr<nodeType>> nodes;
 		nodes.reserve(nodes_map.size());
-		for (const auto& x : nodes_map)
+		for (auto& x : nodes_map)
 		{
-			nodes.push_back(x.second);
+			nodes.push_back(std::move(x.second));
 		}
 		return std::move(nodes);
 	}

@@ -2,8 +2,7 @@
 #ifndef _Aft2d_PlnCurveAnIso_Header
 #define _Aft2d_PlnCurveAnIso_Header
 
-#include <Mesh_PlnCurve.hxx>
-#include <Pln_Curve.hxx>
+#include <Mesh2d_PlnCurveAnIso.hxx>
 #include <Aft2d_PlnCurveAnIsoFwd.hxx>
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 #include <Aft2d_SegmentEdgeAnIsoFwd.hxx>

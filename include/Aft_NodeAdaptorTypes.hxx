@@ -7,9 +7,33 @@
 #include <Aft_NodesFwd.hxx>
 #include <Aft_EdgesFwd.hxx>
 #include <Aft_FacetsFwd.hxx>
+#include <Aft_ElementsFwd.hxx>
 
 namespace tnbLib
 {
+
+	typedef Mesh_NodeToEdgeAdaptor<Aft3d_Edge> Aft3d_NodeToEdgeAdaptor;
+	typedef Mesh_NodeToEdgeAdaptor<Aft3d_EdgeAnIso> Aft3d_NodeToEdgeAnIsoAdaptor;
+	typedef Mesh_NodeToFacetAdaptor<Aft3d_Facet> Aft3d_NodeToFacetAdaptor;
+	typedef Mesh_NodeToFacetAdaptor<Aft3d_FacetAnIso> Aft3d_NodeToFacetAnIsoAdaptor;
+	typedef Mesh_NodeToElementAdaptor<Aft3d_Element> Aft3d_NodeToElementAdaptor;
+	typedef Mesh_NodeToElementAdaptor<Aft3d_ElementAnIso> Aft3d_NodeToElementAnIsoAdaptor;
+
+	typedef Mesh_NodeToBoundaryEdgeAdaptor<Aft3d_Edge> Aft3d_NodeToBoundaryEdgeAdaptor;
+	typedef Mesh_NodeToBoundaryEdgeAdaptor<Aft3d_EdgeAnIso> Aft3d_NodeToBoundaryEdgeAnIsoAdaptor;
+	typedef Mesh_NodeToBoundaryFacetAdaptor<Aft3d_Facet> Aft3d_NodeToBoundaryFacetAdaptor;
+	typedef Mesh_NodeToBoundaryFacetAdaptor<Aft3d_FacetAnIso> Aft3d_NodeToBoundaryFacetAnIsoAdaptor;
+
+	typedef Mesh_NodeToEdgeAdaptor<Aft2d_Edge> Aft2d_NodeToEdgeAdaptor;
+	typedef Mesh_NodeToEdgeAdaptor<Aft2d_EdgeAnIso> Aft2d_NodeToEdgeAnIsoAdaptor;
+	typedef Mesh_NodeToEdgeAdaptor<Aft2d_EdgeSurface> Aft2d_NodeToEdgeSurfaceAdaptor;
+	typedef Mesh_NodeToElementAdaptor<Aft2d_Element> Aft2d_NodeToElementAdaptor;
+	typedef Mesh_NodeToElementAdaptor<Aft2d_ElementAnIso> Aft2d_NodeToElementAnIsoAdaptor;
+	typedef Mesh_NodeToElementAdaptor<Aft2d_ElementSurface> Aft2d_NodeToElementSurfaceAdaptor;
+
+	typedef Mesh_NodeToBoundaryEdgeAdaptor<Aft2d_Edge> Aft2d_NodeToBoundaryEdgeAdaptor;
+	typedef Mesh_NodeToBoundaryEdgeAdaptor<Aft2d_EdgeAnIso> Aft2d_NodeToBoundaryEdgeAnIsoAdaptor;
+	typedef Mesh_NodeToBoundaryEdgeAdaptor<Aft2d_EdgeSurface> Aft2d_NodeToBoundaryEdgeSurfaceAdaptor;
 
 	typedef Mesh_NodeToFrontEdgeAdaptor<Aft2d_Edge> Mesh2d_NodeToFrontEdgeAdaptor;
 	typedef Mesh_NodeToFrontEdgeAdaptor<Aft2d_EdgeAnIso> Mesh2d_NodeToFrontEdgeAnIsoAdaptor;

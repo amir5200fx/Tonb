@@ -4,13 +4,13 @@
 
 #include <Aft2d_Node.hxx>
 #include <Aft2d_ElementFwd.hxx>
+#include <Mesh2d_EdgeTraits.hxx>
 
 namespace tnbLib
 {
 
 	struct Aft2d_EdgeTraits
 	{
-
 		typedef Aft2d_Node nodeType;
 		typedef void facetType;
 		typedef Aft2d_Element elementType;

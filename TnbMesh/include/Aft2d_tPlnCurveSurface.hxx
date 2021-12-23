@@ -16,6 +16,22 @@ namespace tnbLib
 
 	template<>
 	template<>
+	TnbMesh_EXPORT void Aft2d_tPlnCurveSurface::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft2d_tPlnCurveSurface::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar, 
+			const unsigned int file_version
+			);
+
+	template<>
+	template<>
 	static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>
 		Aft2d_tPlnCurveSurface::TopoMesh<Aft2d_tSegmentEdge>
 		(

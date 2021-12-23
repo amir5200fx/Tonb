@@ -163,9 +163,6 @@
     <Filter Include="TnbLib\Aft\Cad\Curve\AnIso">
       <UniqueIdentifier>{fda69f43-a67a-475d-ab87-4f5625087279}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Aft\Cad\Surface">
-      <UniqueIdentifier>{4b63fc29-6052-4d6c-b278-62453c1c4742}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Aft\Cad\Curve\Iso\2d">
       <UniqueIdentifier>{475ad894-4d62-4f41-acba-02313d7eac46}</UniqueIdentifier>
     </Filter>
@@ -432,12 +429,6 @@
     </Filter>
     <Filter Include="TnbLib\Aft\Cad\Curve\AnIso\2d">
       <UniqueIdentifier>{85ade699-ba58-43c5-9603-bfd53aff3b15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Aft\Cad\Surface\G">
-      <UniqueIdentifier>{74fd5250-8b31-40a2-bd16-86eedfeb8e36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Aft\Cad\Surface\T">
-      <UniqueIdentifier>{9844fd0f-1ce9-439d-a1e8-f4ab5d7099aa}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Curve">
       <UniqueIdentifier>{febdfcb6-5198-4f9f-8f2e-5e3cc23ce0d5}</UniqueIdentifier>
@@ -1027,6 +1018,99 @@
     <Filter Include="TnbLib\Base\Tools\SizeMap\Traits">
       <UniqueIdentifier>{b6b40780-81d4-4942-96b0-f65c042ce794}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function">
+      <UniqueIdentifier>{7286c5b0-fd72-4adc-834d-d160bb7f46cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size">
+      <UniqueIdentifier>{22b93c39-1eea-41d0-aae4-81eb7b6a970c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\2d">
+      <UniqueIdentifier>{d67981c3-a89d-4f24-812e-2a16be833110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\3d">
+      <UniqueIdentifier>{26b5fde8-519d-474e-9300-ca04216643a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\Uniform">
+      <UniqueIdentifier>{18e95fbf-b591-412a-8faa-cdb5594ee0b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\Surface">
+      <UniqueIdentifier>{2ba354b5-9baf-4bc7-a994-732f3074607b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\nonUniform">
+      <UniqueIdentifier>{2718da89-c712-4a38-9886-5ccb5f52ede2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\nonUniform\2d">
+      <UniqueIdentifier>{d6c8f8d1-7bf2-48bb-a287-fd742b74465d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\nonUniform\3d">
+      <UniqueIdentifier>{f05e728d-dd9d-4aac-a358-b840cdb555a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Size\Background">
+      <UniqueIdentifier>{a11ecfa8-b8a4-4876-b06b-82c000297365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric">
+      <UniqueIdentifier>{bd8b797c-7c27-47ce-907c-4aee304b7860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\3d">
+      <UniqueIdentifier>{f0b2c446-ad28-4e3d-a671-199f8223f570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\2d">
+      <UniqueIdentifier>{f707f62b-673b-422e-a8fb-92959fec392f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Traits">
+      <UniqueIdentifier>{2177080e-0ef1-4e29-96c8-65cb821043b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Uniform">
+      <UniqueIdentifier>{aba687a4-1245-4bba-8f67-38fdfdb8f740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Uniform\2d">
+      <UniqueIdentifier>{7fdaae96-426d-4d80-97c3-f6682e3a61c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Uniform\3d">
+      <UniqueIdentifier>{5c8e4073-2494-46d0-9981-0266bb7b5671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\nonUniform">
+      <UniqueIdentifier>{7f46276e-7037-49c9-aa43-61891316c1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\nonUniform\2d">
+      <UniqueIdentifier>{90e0567e-5e81-4a20-8ad5-539cfe82b9ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\nonUniform\3d">
+      <UniqueIdentifier>{ff35570e-1f9b-4207-bef9-0b723080c21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Background">
+      <UniqueIdentifier>{474defdf-4895-4d2f-9743-a0e7013ad0fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Edge\Adaptor">
+      <UniqueIdentifier>{f54ce637-532d-4c1f-8e7b-7f9f93588c1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Element\Adaptor">
+      <UniqueIdentifier>{90639d9f-9ed0-455c-b78b-32937cdea26b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\IO">
+      <UniqueIdentifier>{3da4b5b2-e640-4b57-90ce-c56f790e6860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Curve\Surface">
+      <UniqueIdentifier>{dfbd873f-8d2f-47f8-a6d8-ea38dd65b016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Curve\Surface\G">
+      <UniqueIdentifier>{a8600a56-60d2-470c-a0de-6daf024799b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Curve\Surface\T">
+      <UniqueIdentifier>{f2db24d9-36f5-45ea-bc17-15ba1622f823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Patch">
+      <UniqueIdentifier>{4b63fc29-6052-4d6c-b278-62453c1c4742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Patch\G">
+      <UniqueIdentifier>{74fd5250-8b31-40a2-bd16-86eedfeb8e36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Patch\T">
+      <UniqueIdentifier>{9844fd0f-1ce9-439d-a1e8-f4ab5d7099aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Cad\Wire\AnIso">
+      <UniqueIdentifier>{d8617d65-041d-437c-9182-abb1baaefce6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -1605,17 +1689,8 @@
     <ClInclude Include="TnbLib\Aft\Cad\Curve\AnIso\2d\Aft2d_PlnCurveAnIsoFwd.hxx">
       <Filter>TnbLib\Aft\Cad\Curve\AnIso\2d</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Cad\Surface\G\Aft2d_gPlnCurveSurfaceFwd.hxx">
-      <Filter>TnbLib\Aft\Cad\Surface\G</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Cad\Surface\T\Aft2d_tPlnCurveSurfaceFwd.hxx">
-      <Filter>TnbLib\Aft\Cad\Surface\T</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Aft\Cad\Curve\Aft2d_PlnCurvesFwd.hxx">
       <Filter>TnbLib\Aft\Cad\Curve</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Cad\Surface\Aft2d_PlnCurveSurfacesFwd.hxx">
-      <Filter>TnbLib\Aft\Cad\Surface</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Base\Geo_MetricPrcsr_Base.hxx">
       <Filter>TnbLib\Base\Geom\MetricPrcsr\Base</Filter>
@@ -2145,12 +2220,6 @@
     <ClInclude Include="TnbLib\Aft\Tools\Aft_Tools.hxx">
       <Filter>TnbLib\Aft\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Cad\Surface\G\Aft2d_gPlnCurveSurface.hxx">
-      <Filter>TnbLib\Aft\Cad\Surface\G</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Cad\Surface\T\Aft2d_tPlnCurveSurface.hxx">
-      <Filter>TnbLib\Aft\Cad\Surface\T</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Aft\Model\Traits\Aft_Model_Traits.hxx">
       <Filter>TnbLib\Aft\Model\Traits</Filter>
     </ClInclude>
@@ -2357,6 +2426,201 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Base\MetricMapController\Traits\Mesh_MetricMapController_Traits.hxx">
       <Filter>TnbLib\Base\MetricMapController\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Geo_SizeFunction.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\2d\Geo2d_SizeFunction.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\2d\Geo2d_SizeFunctionFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\3d\Geo3d_SizeFunction.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\3d\Geo3d_SizeFunctionFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Uniform\GeoSizeFun_Uniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Uniform\GeoSizeFun2d_Uniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Uniform\GeoSizeFun3d_Uniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun_Background.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun_BackgroundI.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Surface\Geo2d_SizeFunction_Surface.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\nonUniform\GeoSizeFun_nonUniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\nonUniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\nonUniform\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\nonUniform\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Geo_MetricFunction.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\2d\Geo2d_MetricFunction.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\2d\Geo2d_MetricFunctionFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\3d\Geo3d_MetricFunction.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\3d\Geo3d_MetricFunctionFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Uniform\GeoMetricFun_Uniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Uniform\2d\GeoMetricFun2d_Uniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Uniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Background\GeoMetricFun_Background.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Background\GeoMetricFun_BackgroundI.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Traits\Geo_MetricFunctionTraits.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\nonUniform\GeoMetricFun_nonUniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\nonUniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\nonUniform\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniform.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\nonUniform\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniformFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\nonUniform\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Adaptor\Aft_EdgeAdaptorTypes.hxx">
+      <Filter>TnbLib\Aft\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Element\Adaptor\Aft_ElementAdaptorTypes.hxx">
+      <Filter>TnbLib\Aft\Entities\Element\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\IO\Mesh_IO.hxx">
+      <Filter>TnbLib\Base\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\IO\Mesh_IOI.hxx">
+      <Filter>TnbLib\Base\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Aft_BndNodes.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\bNode\Aft2d_BndNodeSurface.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\bNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\G\Aft2d_gCornerNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\G\Aft2d_gSegmentNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tCornerNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tSegmentNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode\Aft2d_BndEdgeSurface.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Curve\Surface\G\Aft2d_gPlnCurveSurface.hxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Curve\Surface\G\Aft2d_gPlnCurveSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Curve\Surface\T\Aft2d_tPlnCurveSurface.hxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Curve\Surface\T\Aft2d_tPlnCurveSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Curve\Surface\Aft2d_PlnCurveSurfacesFwd.hxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Tools\Aft_ToolsI.hxx">
+      <Filter>TnbLib\Aft\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Patch\G\Aft2d_gPatch.hxx">
+      <Filter>TnbLib\Aft\Cad\Patch\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Patch\G\Aft2d_gPatchFwd.hxx">
+      <Filter>TnbLib\Aft\Cad\Patch\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Patch\T\Aft2d_tPatchFwd.hxx">
+      <Filter>TnbLib\Aft\Cad\Patch\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Patch\T\Aft2d_tPatch.hxx">
+      <Filter>TnbLib\Aft\Cad\Patch\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Curve\AnIso\Mesh2d_PlnCurveAnIsoFwd.hxx">
+      <Filter>TnbLib\Base\Cad\Curve\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Curve\AnIso\Mesh2d_PlnCurveAnIso.hxx">
+      <Filter>TnbLib\Base\Cad\Curve\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Wire\AnIso\Mesh2d_PlnWireAnIsoFwd.hxx">
+      <Filter>TnbLib\Base\Cad\Wire\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Wire\AnIso\Mesh2d_PlnWireAnIso.hxx">
+      <Filter>TnbLib\Base\Cad\Wire\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Wire\Surface\G\Aft2d_gPlnWireSurface.hxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Cad\Wire\Surface\T\Aft2d_tPlnWireSurface.hxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\G\Aft2d_gSegmentEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Traits\Aft2d_BndEdgeSurfaceTraits.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\Traits\Aft2d_tBndEdgeSurfaceTraits.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\Traits\Aft2d_gBndEdgeSurfaceTraits.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\T\Aft2d_tSegmentEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\G\Aft2d_gRegionPlaneSurface.hxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\T\Aft2d_tRegionPlaneSurface.hxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\T</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2567,9 +2831,6 @@
     <ClCompile Include="TnbLib\Aft\Core\Aft_Core.cxx">
       <Filter>TnbLib\Aft\Core</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Core\Iso\2d\Aft2d_Core.cxx">
-      <Filter>TnbLib\Aft\Core\Iso\2d</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Aft\Core\AnIso\2d\Aft2d_CoreAnIso.cxx">
       <Filter>TnbLib\Aft\Core\AnIso\2d</Filter>
     </ClCompile>
@@ -2635,12 +2896,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Tools\Aft_Tools.cxx">
       <Filter>TnbLib\Aft\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Cad\Surface\G\Aft2d_gPlnCurveSurface.cxx">
-      <Filter>TnbLib\Aft\Cad\Surface\G</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Cad\Surface\T\Aft2d_tPlnCurveSurface.cxx">
-      <Filter>TnbLib\Aft\Cad\Surface\T</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Model\Constants\Aft_Model_Constants.cxx">
       <Filter>TnbLib\Aft\Model\Constants</Filter>
@@ -2785,6 +3040,189 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\Conditions\Reference\3d\Mesh3d_ReferenceValuesIO.cxx">
       <Filter>TnbLib\Base\Tools\Conditions\Reference\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\2d\Geo2d_SizeFunction.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\3d\Geo3d_SizeFunction.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\Uniform\GeoSizeFun_Uniform.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\Uniform\GeoSizeFun_UniformIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\Surface\Geo2d_SizeFunction_Surface.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\Surface\Geo2d_SizeFunction_SurfaceIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniform.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\nonUniform\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniform.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\nonUniform\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\2d\Geo2d_MetricFunction.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\3d\Geo3d_MetricFunction.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Uniform\2d\GeoMetricFun2d_Uniform.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Uniform\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniform.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\nonUniform\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniform.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\nonUniform\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Node\Iso\2d\Aft2d_NodeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Node\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Node\Iso\3d\Aft3d_NodeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Node\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Node\Surface\Aft2d_NodeSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Node\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Node\AnIso\2d\Aft2d_NodeAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Node\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Node\AnIso\3d\Aft3d_NodeAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Node\AnIso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Edge\Iso\2d\Aft2d_EdgeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Edge\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Edge\Iso\3d\Aft3d_EdgeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Edge\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Edge\Surface\Aft2d_EdgeSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Edge\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Edge\AnIso\2d\Aft2d_EdgeAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Edge\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Edge\AnIso\3d\Aft3d_EdgeAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Edge\AnIso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\Iso\2d\Aft2d_Element.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\Iso\2d\Aft2d_ElementIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\Iso\3d\Aft3d_Element.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\Iso\3d\Aft3d_ElementIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\Surface\Aft2d_ElementSurface.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\Surface\Aft2d_ElementSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\AnIso\2d\Aft2d_ElementAnIso.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\AnIso\2d\Aft2d_ElementAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Edge\Adaptor\Aft_EdgeAdaptorIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Element\Adaptor\Aft_ElementAdaptorIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\IO\Mesh_IO.cxx">
+      <Filter>TnbLib\Base\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\Surface\bNode\Aft2d_BndNodeSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\bNode</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\Surface\G\Aft2d_gCornerNodeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\Surface\G\Aft2d_gSegmentNodeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tCornerNodeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Node\Surface\T\Aft2d_tSegmentNodeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Node\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode\Aft2d_BndEdgeSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\bNode</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Curve\Surface\G\Aft2d_gPlnCurveSurface.cxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Curve\Surface\T\Aft2d_tPlnCurveSurface.cxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Patch\G\Aft2d_gPatch.cxx">
+      <Filter>TnbLib\Aft\Cad\Patch\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Patch\G\Aft2d_gPatchIO.cxx">
+      <Filter>TnbLib\Aft\Cad\Patch\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Patch\T\Aft2d_tPatch.cxx">
+      <Filter>TnbLib\Aft\Cad\Patch\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Patch\T\Aft2d_tPatchIO.cxx">
+      <Filter>TnbLib\Aft\Cad\Patch\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Curve\AnIso\Mesh2d_PlnCurveAnIsoIO.cxx">
+      <Filter>TnbLib\Base\Cad\Curve\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Wire\AnIso\Mesh2d_PlnWireAnIso.cxx">
+      <Filter>TnbLib\Base\Cad\Wire\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Curve\Surface\G\Aft2d_gPlnCurveSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Curve\Surface\T\Aft2d_tPlnCurveSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Cad\Curve\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Wire\Surface\G\Aft2d_gPlnWireSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Wire\Surface\T\Aft2d_tPlnWireSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\G\Aft2d_gSegmentEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\T\Aft2d_tSegmentEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\G\Aft2d_gSegmentEdgeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\T\Aft2d_tSegmentEdgeIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\G\Aft2d_gRegionPlaneSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\T\Aft2d_tRegionPlaneSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\Iso\2d\Aft2d_StdOptNodeIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\Iso\2d\Aft2d_OptNode_Calculator.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\Base\Iso\2d\Aft2d_CoreBase.cxx">
+      <Filter>TnbLib\Aft\Core\Base\Iso\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

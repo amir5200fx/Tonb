@@ -43,10 +43,10 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<nodeType> theNodes_[4];
+		std::array<std::shared_ptr<nodeType>, 4> theNodes_;
 
-		std::shared_ptr<edgeType> theEdges_[6];
-		std::shared_ptr<facetType> theFacets_[4];
+		std::array<std::shared_ptr<edgeType>, 6> theEdges_;
+		std::array<std::shared_ptr<facetType>, 4> theFacets_;
 
 
 		//- private functions and operators
@@ -251,6 +251,12 @@ namespace tnbLib
 			return theElement0->Index() < theElement1->Index();
 		}
 
+		static std::vector<std::shared_ptr<nodeType>>
+			RetrieveNodes
+			(
+				const std::vector<std::shared_ptr<Mesh_Element>>&
+			);
+
 		//- Marcos
 
 		GLOBAL_ACCESS_VECTOR(std::shared_ptr<nodeType>, Node, 0)
@@ -298,8 +304,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<nodeType> theNodes_[3];
-		std::shared_ptr<edgeType> theEdges_[3];
+		std::array<std::shared_ptr<nodeType>, 3> theNodes_;
+		std::array<std::shared_ptr<edgeType>, 3> theEdges_;
 
 
 		//- private functions and operators
@@ -429,6 +435,12 @@ namespace tnbLib
 			return theElement0->Index() < theElement1->Index();
 		}
 
+		static std::vector<std::shared_ptr<nodeType>>
+			RetrieveNodes
+			(
+				const std::vector<std::shared_ptr<Mesh_Element>>&
+			);
+
 		//- Marcos
 
 		GLOBAL_ACCESS_VECTOR(std::shared_ptr<nodeType>, Node, 0)
@@ -475,8 +487,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<nodeType> theNodes_[3];
-		std::shared_ptr<edgeType> theEdges_[3];
+		std::array<std::shared_ptr<nodeType>, 3> theNodes_;
+		std::array<std::shared_ptr<edgeType>, 3> theEdges_;
 
 
 		//- private functions and operators
@@ -664,6 +676,12 @@ namespace tnbLib
 
 			return theElement0->Index() < theElement1->Index();
 		}
+
+		static std::vector<std::shared_ptr<nodeType>>
+			RetrieveNodes
+			(
+				const std::vector<std::shared_ptr<Mesh_Element>>&
+			);
 
 		//- Marcos
 

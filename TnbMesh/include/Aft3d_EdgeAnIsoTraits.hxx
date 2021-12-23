@@ -5,13 +5,13 @@
 #include <Aft3d_NodeAnIso.hxx>
 #include <Aft3d_FacetAnIsoFwd.hxx>
 #include <Aft3d_ElementAnIsoFwd.hxx>
+#include <Mesh3d_EdgeTraits.hxx>
 
 namespace tnbLib
 {
 
 	struct Aft3d_EdgeAnIsoTraits
 	{
-
 		typedef Aft3d_NodeAnIso nodeType;
 		typedef Aft3d_Facet facetType;
 		typedef Aft3d_ElementAnIso elementType;

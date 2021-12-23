@@ -27,4 +27,6 @@ namespace tnbLib
 			);
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Aft2d_OptNode_Calculator);
+
 #endif // !_Aft2d_OptNode_Calculator_Header

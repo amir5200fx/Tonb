@@ -3,6 +3,8 @@
 #define _Aft2d_SegmentEdgeAnIso_Header
 
 #include <Mesh_TBndEdge.hxx>
+#include <Aft2d_EdgeAnIso.hxx>
+#include <Aft2d_BndNodeAnIso.hxx>
 #include <Aft2d_TBndEdgeAnIsoTraits.hxx>
 #include <Aft2d_SegmentEdgeAnIsoFwd.hxx>
 

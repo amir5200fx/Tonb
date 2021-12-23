@@ -7,6 +7,7 @@
 #include <Aft2d_SegmentEdgeAnIso.hxx>
 #include <Aft2d_PlnCurve.hxx>
 #include <Aft2d_PlnCurveAnIso.hxx>
+#include <Aft2d_Element.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Global_File.hxx>
 #include <OSstream.hxx>
@@ -188,6 +189,7 @@ namespace tnbLib
 		// settings [12/13/2021 Amir]
 
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {Aft2d_BoundaryOfPlane::verbose = i; }), "setBndMeshVerbose");
 
 		// operators [12/13/2021 Amir]
 
@@ -235,7 +237,8 @@ int main(int argc, char *argv[])
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl
+				<< " - setBndMeshVerbose(unsigned int); Levels: 0, 1" << endl << endl
 
 				<< " # Operators:" << endl << endl
 

@@ -9,6 +9,7 @@
 #include <Mesh_Module.hxx>
 
 #include <memory>
+#include <array>
 
 namespace tnbLib
 {
@@ -19,7 +20,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::weak_ptr<ElementType> theNeighbors_[4];
+		std::array<std::weak_ptr<ElementType>, 4> theNeighbors_;
 
 
 		//- private functions and operators
@@ -28,8 +29,21 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [12/19/2021 Amir]
+
 		Mesh_ElementAdaptor()
 		{}
+
+
+		// constructors [12/19/2021 Amir]
+
+
+
+		virtual ~Mesh_ElementAdaptor()
+		{}
+
+		// public functions and operators [12/19/2021 Amir]
 
 		const std::weak_ptr<ElementType>&
 			Neighbor
@@ -63,7 +77,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::weak_ptr<ElementType> theNeighbors_[3];
+		std::array<std::weak_ptr<ElementType>, 3> theNeighbors_;
 
 
 		//- private functions and operators
@@ -72,8 +86,20 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [12/19/2021 Amir]
+
 		Mesh_ElementAdaptor()
 		{}
+
+
+		// constructors [12/19/2021 Amir]
+
+
+		virtual ~Mesh_ElementAdaptor()
+		{}
+
+
+		// public functions and operators [12/19/2021 Amir]
 
 		const std::weak_ptr<ElementType>&
 			Neighbor
@@ -116,7 +142,16 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [12/19/2021 Amir]
+
 		Mesh_ElementAdaptor()
+		{}
+
+
+		// constructors [12/19/2021 Amir]
+
+
+		virtual ~Mesh_ElementAdaptor()
 		{}
 
 		//- Macros

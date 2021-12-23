@@ -7,6 +7,7 @@
 #include <Aft2d_RegionPlaneAnIsoFwd.hxx>
 #include <Aft2d_SegmentEdgeAnIsoFwd.hxx>
 #include <Aft2d_BoundaryOfPlaneAnIso_InfoFwd.hxx>
+#include <Aft2d_ElementAnIso.hxx>
 #include <Geo2d_MetricFunction.hxx>
 
 namespace tnbLib
@@ -32,6 +33,8 @@ namespace tnbLib
 		std::shared_ptr<Aft2d_MetricPrcsrAnIso> theMetric_;
 
 		std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnIso>> theEdges_;
+
+		std::vector<std::shared_ptr<Aft2d_ElementAnIso>> theElements_;
 
 		// private functions and operators [12/1/2021 Amir]
 
@@ -91,6 +94,11 @@ namespace tnbLib
 			return theRegion_;
 		}
 
+		const auto& Elements() const
+		{
+			return theElements_;
+		}
+
 		void SetRegion(const std::shared_ptr<Aft2d_RegionPlaneAnIso>& theRegion)
 		{
 			theRegion_ = theRegion;
@@ -129,6 +137,16 @@ namespace tnbLib
 		void SetMetric(std::shared_ptr<Aft2d_MetricPrcsrAnIso>&& theMetric)
 		{
 			theMetric_ = std::move(theMetric);
+		}
+
+		void SetElements(const std::vector<std::shared_ptr<Aft2d_ElementAnIso>>& theElements)
+		{
+			theElements_ = theElements;
+		}
+
+		void SetElements(std::vector<std::shared_ptr<Aft2d_ElementAnIso>>&& theElements)
+		{
+			theElements_ = std::move(theElements);
 		}
 
 		void LoadGlobalMetricInfo(const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& theInfo)

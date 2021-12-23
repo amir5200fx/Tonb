@@ -6,13 +6,13 @@
 #include <Aft2d_EdgeSurfaceFwd.hxx>
 #include <Aft2d_ElementSurfaceFwd.hxx>
 #include <Aft_NodeType.hxx>
+#include <Mesh2d_NodeTraits.hxx>
 
 namespace tnbLib
 {
 
 	struct Aft2d_NodeSurfaceTraits
 	{
-
 		typedef Aft2d_EdgeSurface edgeType;
 		typedef Aft2d_ElementSurface elementType;
 		typedef void facetType;

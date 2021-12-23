@@ -157,20 +157,20 @@ namespace tnbLib
 
 			// Private functions and operators [11/24/2021 Amir]
 
-			friend class boost::serialization::access;
+			//friend class boost::serialization::access;
 
-			template<class Archive>
-			void serialize(Archive& ar, const unsigned int /*file_version*/)
-			{
-				ar & Quality_;
-				ar & Indices_;
+			//template<class Archive>
+			//void serialize(Archive& ar, const unsigned int /*file_version*/)
+			//{
+			//	ar & Quality_;
+			//	ar & Indices_;
 
-				ar & Size_;
-			}
+			//	ar & Size_;
+			//}
 
 		};
 
-		static mySort Sort;
+		static TnbMesh_EXPORT mySort Sort;
 
 		template<class U = void>
 		static resolvedType<is_two_dimension<(int)Point::dim>::value, U> Update_Pmin_Pmax

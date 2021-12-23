@@ -3,6 +3,8 @@
 #define _Aft2d_BndEdge_Header
 
 #include <Mesh_BndEdge.hxx>
+#include <Aft2d_Edge.hxx>
+#include <Aft2d_BndNode.hxx>
 #include <Aft2d_BndEdgeTraits.hxx>
 #include <Aft2d_BndEdgeFwd.hxx>
 

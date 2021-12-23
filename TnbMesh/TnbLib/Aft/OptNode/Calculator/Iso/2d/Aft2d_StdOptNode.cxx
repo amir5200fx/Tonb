@@ -30,7 +30,7 @@ void tnbLib::Aft2d_StdOptNode::Perform()
 			<< abort(FatalError);
 	}
 
-	Aft2d_OptNode_Analytical alg(0, *Front());
+	Aft2d_OptNode_Analytical alg(Size(), *Front());
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");
 

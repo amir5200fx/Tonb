@@ -199,48 +199,6 @@
     <Filter Include="TnbLib\Geo\Tools">
       <UniqueIdentifier>{282eae9c-34cf-4afd-8df6-23c853b89ba5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Geo\Function">
-      <UniqueIdentifier>{972d42a0-559f-40f1-982a-eb84c1528c73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric">
-      <UniqueIdentifier>{cf3e9ffa-5514-4e61-bc8a-6e9701d2a1ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size">
-      <UniqueIdentifier>{3980e237-52ee-46e0-ae35-9be65162aff6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\2d">
-      <UniqueIdentifier>{2f2eea0b-7351-4946-9f78-a57e86d4d5e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\3d">
-      <UniqueIdentifier>{ae221e64-f5c4-449c-a2fd-d6e7d3b6fb51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\nonUniform">
-      <UniqueIdentifier>{9a1ab922-5cd4-4c25-9692-96dee13b0c9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\Traits">
-      <UniqueIdentifier>{128602ff-745a-42c4-8ddc-c52889965440}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\Uniform">
-      <UniqueIdentifier>{8dcb24e0-c994-4de7-9a9e-f4c7cd6f6a34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\Uniform\2d">
-      <UniqueIdentifier>{a80af961-fc37-4e76-a41b-f17b04ba7618}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\Uniform\3d">
-      <UniqueIdentifier>{a27707b6-aa23-42d3-9fe9-7bb229ca6582}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\2d">
-      <UniqueIdentifier>{c0aefd8f-5559-46e4-aaa4-b17fdd98451c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\3d">
-      <UniqueIdentifier>{42cf8162-d153-49b6-b011-b8c85488c013}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\Surface">
-      <UniqueIdentifier>{b480fc5f-a824-4080-915d-06f24a4f1567}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\Uniform">
-      <UniqueIdentifier>{4a671c2c-9eaa-424b-b0d8-08199b05aaee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Geo\Integrand">
       <UniqueIdentifier>{df66effc-2b4f-43f6-8cc4-57eabc7b96f8}</UniqueIdentifier>
     </Filter>
@@ -373,15 +331,6 @@
     <Filter Include="TnbLib\IO\Tecplot">
       <UniqueIdentifier>{dcd33330-1976-4c9e-abd7-ec29157257a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\Background">
-      <UniqueIdentifier>{1c540038-74d1-4fe8-a1cd-c39e9a1bfa4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\nonUniform\2d">
-      <UniqueIdentifier>{d5fb93bd-4596-4461-9728-3808e8a605d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Metric\nonUniform\3d">
-      <UniqueIdentifier>{c92560b8-2a35-45a3-a139-6abd51df2315}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Geo\Merge\module">
       <UniqueIdentifier>{e340c5f0-49e0-45b8-98c7-83b8b22f022b}</UniqueIdentifier>
     </Filter>
@@ -414,18 +363,6 @@
     </Filter>
     <Filter Include="TnbLib\Geo\Entities\Triangle\3d">
       <UniqueIdentifier>{6c73df04-6e09-4ee3-9a09-39d65c19d43f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\nonUniform">
-      <UniqueIdentifier>{394a7b3b-ca85-4ced-ad17-f00106dbecc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\nonUniform\2d">
-      <UniqueIdentifier>{58c213fa-4066-41ff-9ad0-088caf153731}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\nonUniform\3d">
-      <UniqueIdentifier>{01c805f8-0bb4-4707-b21e-9df33a18bf3a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\Function\Size\Background">
-      <UniqueIdentifier>{2d9a80e2-27bc-453f-8439-61675b0e1234}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Geo\AffineTrsf">
       <UniqueIdentifier>{378daccc-e5dd-4fc4-b359-c47f320b2f28}</UniqueIdentifier>
@@ -657,54 +594,6 @@
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\3d\Geo3d_ApprxCurve.hxx">
       <Filter>TnbLib\Geo\Approximation\Curve\3d</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\Geo_SizeFunction.hxx">
-      <Filter>TnbLib\Geo\Function\Size</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\2d\Geo2d_SizeFunctionFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Size\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\2d\Geo2d_SizeFunction.hxx">
-      <Filter>TnbLib\Geo\Function\Size\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\3d\Geo3d_SizeFunctionFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Size\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\3d\Geo3d_SizeFunction.hxx">
-      <Filter>TnbLib\Geo\Function\Size\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun_Uniform.hxx">
-      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\Surface\Geo2d_SizeFunction_Surface.hxx">
-      <Filter>TnbLib\Geo\Function\Size\Surface</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\Geo_MetricFunction.hxx">
-      <Filter>TnbLib\Geo\Function\Metric</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\Traits\Geo_MetricFunctionTraits.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\Traits</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\2d\Geo2d_MetricFunctionFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\2d\Geo2d_MetricFunction.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\3d\Geo3d_MetricFunctionFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\3d\Geo3d_MetricFunction.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\Uniform\GeoMetricFun_Uniform.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\Uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\Uniform\2d\GeoMetricFun2d_Uniform.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\Uniform\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\GeoMetricFun_nonUniform.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\nonUniform</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Integrand\Segment\Function\Geo_SegmentIntegrand_Function.hxx">
       <Filter>TnbLib\Geo\Integrand\Segment\Function</Filter>
     </ClInclude>
@@ -900,24 +789,6 @@
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\Entity_Polygon.hxx">
       <Filter>TnbLib\Geo\Entities\Polygon</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\Background\GeoMetricFun_Background.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\Background\GeoMetricFun_BackgroundI.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniform.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\nonUniform\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniform.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\nonUniform\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniformFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\nonUniform\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniformFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Metric\nonUniform\3d</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\2d\Geo2d_ApprxSpaceNode.hxx">
       <Filter>TnbLib\Geo\Approximation\Space\Balanced\2d</Filter>
     </ClInclude>
@@ -992,33 +863,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Polygon\3d\Entity3d_PolygonI.hxx">
       <Filter>TnbLib\Geo\Entities\Polygon\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun2d_Uniform.hxx">
-      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun3d_Uniform.hxx">
-      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\GeoSizeFun_nonUniform.hxx">
-      <Filter>TnbLib\Geo\Function\Size\nonUniform</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniform.hxx">
-      <Filter>TnbLib\Geo\Function\Size\nonUniform\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniformFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Size\nonUniform\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniformFwd.hxx">
-      <Filter>TnbLib\Geo\Function\Size\nonUniform\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniform.hxx">
-      <Filter>TnbLib\Geo\Function\Size\nonUniform\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\Background\GeoSizeFun_Background.hxx">
-      <Filter>TnbLib\Geo\Function\Size\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Function\Size\Background\GeoSizeFun_BackgroundI.hxx">
-      <Filter>TnbLib\Geo\Function\Size\Background</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq\Geo_AffineTrsf_PtsToUnitSq.hxx">
       <Filter>TnbLib\Geo\AffineTrsf\PtsToUnitSq</Filter>
@@ -1123,9 +967,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools_cgal.cxx">
       <Filter>TnbLib\Geo\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\Surface\Geo2d_SizeFunction_Surface.cxx">
-      <Filter>TnbLib\Geo\Function\Size\Surface</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Integrand\Segment\Geo_SegmentIntegrand.cxx">
       <Filter>TnbLib\Geo\Integrand\Segment</Filter>
@@ -1256,12 +1097,6 @@
     <ClCompile Include="TnbLib\Geo\Entities\Polygon\2d\Entity2d_PolygonTools.cxx">
       <Filter>TnbLib\Geo\Entities\Polygon\2d</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\Surface\Geo2d_SizeFunction_SurfaceIO.cxx">
-      <Filter>TnbLib\Geo\Function\Size\Surface</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun_UniformIO.cxx">
-      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Geo\Distributor\Geo_xDistbIO.cxx">
       <Filter>TnbLib\Geo\Distributor</Filter>
     </ClCompile>
@@ -1297,36 +1132,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2dIO.cxx">
       <Filter>TnbLib\Geo\Entities\Vector\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Metric\2d\Geo2d_MetricFunction.cxx">
-      <Filter>TnbLib\Geo\Function\Metric\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Metric\3d\Geo3d_MetricFunction.cxx">
-      <Filter>TnbLib\Geo\Function\Metric\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Metric\nonUniform\2d\GeoMetricFun2d_nonUniform.cxx">
-      <Filter>TnbLib\Geo\Function\Metric\nonUniform\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Metric\nonUniform\3d\GeoMetricFun3d_nonUniform.cxx">
-      <Filter>TnbLib\Geo\Function\Metric\nonUniform\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Metric\Uniform\2d\GeoMetricFun2d_Uniform.cxx">
-      <Filter>TnbLib\Geo\Function\Metric\Uniform\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\2d\Geo2d_SizeFunction.cxx">
-      <Filter>TnbLib\Geo\Function\Size\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\3d\Geo3d_SizeFunction.cxx">
-      <Filter>TnbLib\Geo\Function\Size\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\nonUniform\2d\GeoSizeFun2d_nonUniform.cxx">
-      <Filter>TnbLib\Geo\Function\Size\nonUniform\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\nonUniform\3d\GeoSizeFun3d_nonUniform.cxx">
-      <Filter>TnbLib\Geo\Function\Size\nonUniform\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Function\Size\Uniform\GeoSizeFun_Uniform.cxx">
-      <Filter>TnbLib\Geo\Function\Size\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
