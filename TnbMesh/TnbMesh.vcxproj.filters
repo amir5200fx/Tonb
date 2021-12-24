@@ -1114,6 +1114,9 @@
     <Filter Include="TnbLib\Aft\Model\AnIso\2d">
       <UniqueIdentifier>{51acad17-f7c8-487e-a5b5-1f06668fef94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\std">
+      <UniqueIdentifier>{fcf78b60-d5e4-45d0-887b-da4fd92dbdec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -2631,6 +2634,15 @@
     <ClInclude Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIsoFwd.hxx">
       <Filter>TnbLib\Aft\Model\AnIso\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\std\Aft2d_StdOptNodeAnIso.hxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d\std</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIsoI.hxx">
+      <Filter>TnbLib\Aft\Model\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Uniform\2d\GeoMetricFun2d_UniformFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Uniform\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -3238,6 +3250,33 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\Aft2d_OptNodeAnIso_CalculatorIO.cxx">
       <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\std\Aft2d_StdOptNodeAnIso.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d\std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\std\Aft2d_StdOptNodeAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\AnIso\2d\std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Model\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\AnIso\2d\Aft2d_ModelAnIso.cxx">
+      <Filter>TnbLib\Aft\Model\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Uniform\2d\GeoMetricFun2d_UniformIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Uniform\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\AnIso\Aft2d_RegionPlaneAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\AnIso\2d\Aft2d_MetricPrcsrAnIsoIO.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\AnIso\2d\Geo2d_MetricPrcsrAnIsoIO.cxx">
+      <Filter>TnbLib\Base\Geom\MetricPrcsr\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\AnIso\Aft2d_BoundaryOfPlaneAnIso.cxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\AnIso</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

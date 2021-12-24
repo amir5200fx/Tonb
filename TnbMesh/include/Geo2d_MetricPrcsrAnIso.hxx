@@ -6,17 +6,25 @@
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo2d_MetricFunction.hxx>
 #include <Entity2d_Metric1.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 
 namespace tnbLib
 {
-	typedef Geo_MetricPrcsr<Geo2d_SizeFunction, Geo2d_MetricFunction>
-		Geo2d_MetricPrcsrAnIso;
+	template<>
+	TnbMesh_EXPORT Standard_Real 
+		Geo2d_MetricPrcsrAnIso::CalcDistance
+		(
+			const Pnt2d& theP0, 
+			const Pnt2d& theP1
+		) const;
 
 	template<>
-	TnbMesh_EXPORT Standard_Real Geo2d_MetricPrcsrAnIso::CalcDistance(const Pnt2d& theP0, const Pnt2d& theP1) const;
-
-	template<>
-	TnbMesh_EXPORT Standard_Real Geo2d_MetricPrcsrAnIso::CalcUnitDistance(const Pnt2d& theP0, const Pnt2d& theP1) const;
+	TnbMesh_EXPORT Standard_Real 
+		Geo2d_MetricPrcsrAnIso::CalcUnitDistance
+		(
+			const Pnt2d& theP0,
+			const Pnt2d& theP1
+		) const;
 }
 
 #endif // !_Geo2d_MetricPrcsrAnIso_Header
