@@ -7,6 +7,7 @@
 #include <Aft2d_RegionPlaneAnIsoFwd.hxx>
 #include <Aft2d_SegmentEdgeAnIsoFwd.hxx>
 #include <Aft2d_BoundaryOfPlaneAnIso_InfoFwd.hxx>
+#include <Aft2d_OptNodeAnIso_CalculatorFwd.hxx>
 #include <Aft2d_ElementAnIso.hxx>
 #include <Geo2d_MetricFunction.hxx>
 
@@ -24,6 +25,8 @@ namespace tnbLib
 
 		std::shared_ptr<Aft_MetricPrcsrAnIso_Info> theGlobalMetricInfo_;
 		std::shared_ptr<Geo2d_MetricFunction> theMetricFunction_;
+
+		std::shared_ptr<Aft2d_OptNodeAnIso_Calculator> theNodeCalculator_;
 
 		// Results [12/1/2021 Amir]
 
@@ -67,6 +70,11 @@ namespace tnbLib
 		const auto& GlobalMetricInfo() const
 		{
 			return theGlobalMetricInfo_;
+		}
+
+		const auto& NodeCalculator() const
+		{
+			return theNodeCalculator_;
 		}
 
 		const auto& MetricFunction() const
@@ -159,16 +167,25 @@ namespace tnbLib
 			theGlobalMetricInfo_ = std::move(theInfo);
 		}
 
-		void SetMetricFunction(const std::shared_ptr<Geo2d_MetricFunction>& theFun)
+		void LoadMetricFunction(const std::shared_ptr<Geo2d_MetricFunction>& theFun)
 		{
 			theMetricFunction_ = theFun;
 		}
 
-		void SetMetricFunction(std::shared_ptr<Geo2d_MetricFunction>&& theFun)
+		void LoadMetricFunction(std::shared_ptr<Geo2d_MetricFunction>&& theFun)
 		{
 			theMetricFunction_ = std::move(theFun);
 		}
 
+		void LoadNodeCalculator(const std::shared_ptr<Aft2d_OptNodeAnIso_Calculator>& theCalculator)
+		{
+			theNodeCalculator_ = theCalculator;
+		}
+
+		void LoadNodeCalculator(std::shared_ptr<Aft2d_OptNodeAnIso_Calculator>&& theCalculator)
+		{
+			theNodeCalculator_ = std::move(theCalculator);
+		}
 	};
 }
 
