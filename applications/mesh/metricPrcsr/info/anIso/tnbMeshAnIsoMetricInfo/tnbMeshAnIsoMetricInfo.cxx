@@ -1,4 +1,4 @@
-#include <Aft_MetricPrcsr_Info.hxx>
+#include <Aft_MetricPrcsrAnIso_Info.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <Global_File.hxx>
 #include <OSstream.hxx>
@@ -7,13 +7,18 @@
 namespace tnbLib
 {
 
-	static const std::string extension = Aft_MetricPrcsr_Info::extension;
+	static const std::string extension = Aft_MetricPrcsrAnIso_Info::extension;
 
 	static bool exeTag = false;
 	static unsigned short verbose = 0;
-	
+
+	static int myNbSamples = Aft_MetricPrcsrAnIso_Info::DEFAULT_NB_SAMPLES;
+	static int myNbIters = Aft_MetricPrcsrAnIso_Info::DEFAULT_NB_ITERS;
+
+	static double myTolerance = Aft_MetricPrcsrAnIso_Info::DEFAULT_TOLERANCE;
+
 	static const auto myIntegInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
-	static std::shared_ptr<Aft_MetricPrcsr_Info> myInfo;
+	static std::shared_ptr<Aft_MetricPrcsrAnIso_Info> myInfo;
 
 	class NumIntegInfoRunTime
 	{
@@ -47,19 +52,18 @@ const tnbLib::NumIntegInfoRunTime NumIntegInfoRunTimeObj;
 
 namespace tnbLib
 {
-
-	void setMaxNbIterations(int n)
+	void setMaxNbIterations(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo, int n)
 	{
-		myIntegInfo->SetMaxNbIterations(n);
+		theInfo->SetMaxNbIterations(n);
 		if (verbose)
 		{
-			Info << " - the mx. nb. of iterations is set to: " << n << endl;
+			Info << " - the mx. nb. of integration iterations is set to: " << n << endl;
 		}
 	}
 
-	void setNbInitIterations(int n)
+	void setNbInitIterations(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo, int n)
 	{
-		myIntegInfo->SetNbInitIterations(n);
+		theInfo->SetNbInitIterations(n);
 
 		if (verbose)
 		{
@@ -67,26 +71,41 @@ namespace tnbLib
 		}
 	}
 
+	void setTolerance(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo, double x)
+	{
+		theInfo->SetTolerance(x);
+
+		if (verbose)
+		{
+			Info << " - the integration tolerance is set to: " << x << endl;
+		}
+	}
+
 	void setTolerance(double x)
 	{
-		myIntegInfo->SetTolerance(x);
-
+		myTolerance = x;
 		if (verbose)
 		{
 			Info << " - the tolerance is set to: " << x << endl;
 		}
 	}
 
-	void execute()
+	void setNbSamples(int n)
 	{
-		myInfo = std::make_shared<Aft_MetricPrcsr_Info>(myIntegInfo);
-
+		myNbSamples = n;
 		if (verbose)
 		{
-			Info << " the application is performed, successfully!" << endl;
+			Info << " - the nb. of sample points is set to: " << n << endl;
 		}
+	}
 
-		exeTag = true;
+	void setNbIters(int n)
+	{
+		myNbIters = n;
+		if (verbose)
+		{
+			Info << " - the nb. of iterations is set to: " << n << endl;
+		}
 	}
 
 	void saveTo(const std::string& name)
@@ -105,6 +124,18 @@ namespace tnbLib
 	void saveTo()
 	{
 		saveTo("metricInfo");
+	}
+
+	void execute()
+	{
+		myInfo = std::make_shared<Aft_MetricPrcsrAnIso_Info>(myIntegInfo, myNbSamples, myNbIters, myTolerance);
+
+		if (verbose)
+		{
+			Info << " the application is performed, successfully!" << endl;
+		}
+
+		exeTag = true;
 	}
 }
 
@@ -126,11 +157,15 @@ namespace tnbLib
 
 		// settings [12/3/2021 Amir]
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
-		mod->add(chaiscript::fun([](int n)-> void {setMaxNbIterations(n); }), "setMaxNbIterations");
-		mod->add(chaiscript::fun([](int n)-> void {setNbInitIterations(n); }), "setNbInitIterations");
+		mod->add(chaiscript::fun([](int n)-> void {setNbSamples(n); }), "setNbSamples");
+		mod->add(chaiscript::fun([](int n)-> void {setNbIters(n); }), "setNbIterations");
 		mod->add(chaiscript::fun([](double x)-> void {setTolerance(x); }), "setTolerance");
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& f, int n)-> void {setMaxNbIterations(f, n); }), "setMaxNbIterations");
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& f, int n)-> void {setNbInitIterations(f, n); }), "setNbInitIterations");
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& f, double x)-> void {setTolerance(f, x); }), "setTolerance");
 
 		// Operators [12/4/2021 Amir]
+		mod->add(chaiscript::fun([]()-> const auto& {return myIntegInfo; }), "getIntegInfo");
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 	}
 
@@ -165,7 +200,7 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create an iso-metric info file." << endl;
+			Info << " This application is aimed to create an aniso-metric info file." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -177,12 +212,17 @@ int main(int argc, char *argv[])
 
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
 
-				<< " - setMaxNbIterations(int)" << endl
-				<< " - setNbInitIterations(int)" << endl
-				<< " - setTolerance(double)" << endl << endl
+				<< " - (IntegInfo).setMaxNbIterations(int)" << endl
+				<< " - (IntegInfo).setNbInitIterations(int)" << endl
+				<< " - (IntegInfo).setTolerance(double)" << endl << endl
+
+				<< " - setTolerance(double)" << endl
+				<< " - setNbIterations(int)" << endl
+				<< " - setNbSamples(int)" << endl << endl
 
 				<< " # operators: " << endl << endl
 
+				<< " - [IntegInfo] getItegInfo()" << endl
 				<< " - execute()" << endl
 				<< endl;
 			return 0;
@@ -200,7 +240,7 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				fileName theFileName(file::GetSystemFile("tnbMeshMetricInfo"));
+				fileName theFileName(file::GetSystemFile("tnbMeshAnIsoMetricInfo"));
 
 				chai.eval_file(theFileName);
 				return 0;
