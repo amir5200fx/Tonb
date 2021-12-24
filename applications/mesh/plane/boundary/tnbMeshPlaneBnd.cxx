@@ -189,7 +189,7 @@ namespace tnbLib
 		// settings [12/13/2021 Amir]
 
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
-		mod->add(chaiscript::fun([](unsigned short i)-> void {Aft2d_BoundaryOfPlane::verbose = i; }), "setBndMeshVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {Aft2d_BoundaryOfPlane::verbose = i; Aft2d_BoundaryOfPlaneAnIso::verbose = i; }), "setBndMeshVerbose");
 
 		// operators [12/13/2021 Amir]
 
