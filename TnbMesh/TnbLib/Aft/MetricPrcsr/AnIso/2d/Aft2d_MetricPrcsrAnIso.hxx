@@ -8,15 +8,10 @@
 #include <Geo2d_MetricFunction.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Aft2d_MetricPrcsrAnIsoFwd.hxx>
 
 namespace tnbLib
 {
-
-	// Forward Declarations
-	class Entity2d_Metric1;
-
-	typedef Aft_MetricPrcsr<Aft2d_EdgeAnIso, Geo2d_SizeFunction, Geo2d_MetricFunction>
-		Aft2d_MetricPrcsrAnIso;
 
 	template<>
 	Entity2d_Box Aft2d_MetricPrcsrAnIso::CalcSearchRegion
@@ -48,6 +43,27 @@ namespace tnbLib
 		const Pnt2d& theCentre,
 		const Aft2d_EdgeAnIso& theFront
 	) const;
+}
+
+namespace tnbLib
+{
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft2d_MetricPrcsrAnIso::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft2d_MetricPrcsrAnIso::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
 }
 
 #endif // !_Aft2d_MetricPrcsrAnIso_Header
