@@ -44,6 +44,13 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [12/23/2021 Amir]
+
+		GeoMetricFun_Uniform()
+		{}
+
+		// constructors [12/23/2021 Amir]
+
 		GeoMetricFun_Uniform
 		(
 			const metric2& theMetric,
@@ -86,6 +93,9 @@ namespace tnbLib
 			, theMetric_(theMetric)
 		{}
 
+
+		// public functions and operators [12/23/2021 Amir]
+
 		const metric& Metric() const
 		{
 			return theMetric_;
@@ -94,6 +104,16 @@ namespace tnbLib
 		metric Value(const Point& theCoord) const override
 		{
 			return theMetric_;
+		}
+
+		void SetMetric(const metric& theM)
+		{
+			theMetric_ = theM;
+		}
+
+		void SetMetric(metric&& theM)
+		{
+			theMetric_ = std::move(theM);
 		}
 
 	};
