@@ -55,6 +55,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT unsigned short verbose;
+
 		//- constructors
 
 		Aft_BoundaryOfPlane(const std::shared_ptr<info>& theInfo)

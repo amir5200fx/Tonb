@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create an iso metric info file." << endl;
+			Info << " This application is aimed to create an iso-metric info file." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

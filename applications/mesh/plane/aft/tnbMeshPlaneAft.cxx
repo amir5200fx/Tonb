@@ -3,10 +3,14 @@
 #include <Aft2d_SolutionData.hxx>
 #include <Aft2d_SolutionDataAnIso.hxx>
 #include <Aft2d_OptNode_Calculator.hxx>
+#include <Aft2d_OptNodeAnIso_Calculator.hxx>
 #include <Aft2d_MetricPrcsr.hxx>
+#include <Aft2d_MetricPrcsrAnIso.hxx>
 #include <Aft_Tools.hxx>
 #include <Aft2d_SegmentEdge.hxx>
+#include <Aft2d_SegmentEdgeAnIso.hxx>
 #include <Aft2d_Model.hxx>
+#include <Aft2d_ModelAnIso.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Global_File.hxx>
 #include <Global_Timer.hxx>
@@ -153,9 +157,66 @@ namespace tnbLib
 		}
 		else if (mySoluData->IsAnIso())
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "AnIsotropic meshing is not supported!" << endl
-				<< abort(FatalError);
+			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionDataAnIso>(mySoluData);
+			Debug_Null_Pointer(soluData);
+
+			const auto& boundaries = soluData->BoundaryEdges();
+			if (boundaries.empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no boundary edge has been detected!" << endl
+					<< abort(FatalError);
+			}
+
+			if (NOT soluData->NodeCalculator())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no node creator has been detected!" << endl
+					<< abort(FatalError);
+			}
+
+			if (NOT soluData->Metric())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no metric processor has been found!" << endl
+					<< abort(FatalError);
+			}
+
+			soluData->NodeCalculator()->SetMetricMap(soluData->Metric());
+
+			Aft_Tools::Connect(boundaries);
+
+			auto mesher = std::make_shared<Aft2d_ModelAnIso>();
+			mesher->LoadMetricMap(soluData->Metric());
+			mesher->LoadBoundaryMetricMap(soluData->Metric());
+
+			mesher->LoadBoundaryEdges(Aft_Tools::UpCast(soluData->BoundaryEdges()));
+			mesher->LoadNodeCalculator(soluData->NodeCalculator());
+
+			{// timer scope [12/22/2021 Amir]
+				Global_Timer timer;
+				timer.SetInfo(Global_TimerInfo_s);
+
+				mesher->Perform();
+			}
+
+
+
+			const auto& elemMap = mesher->RetrieveElements();
+			std::vector<std::shared_ptr<Aft2d_ElementAnIso>> elements;
+			elements.reserve(elemMap.size());
+			for (const auto& x : elemMap)
+			{
+				elements.push_back(x.second);
+			}
+
+			soluData->SetElements(std::move(elements));
+
+			if (verbose)
+			{
+				Info << " - the application is performed, successfully!" << endl;
+				Info << " - Nb. of generated elements: " << mesher->NbElements() << ", in " << global_time_duration << " seconds." << endl;
+			}
 		}
 		else
 		{

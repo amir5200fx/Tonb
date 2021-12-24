@@ -1,0 +1,15 @@
+setVerbose(1);
+
+var integInfo = getIntegInfo();
+
+integInfo.setMaxNbIterations(40);
+integInfo.setNbInitIterations(4);
+integInfo.setTolerance(1.0E-4);
+
+setTolerance(0.005);
+setNbIterations(4);
+setNbSamples(3);
+
+execute();
+
+saveTo("metricInfo");

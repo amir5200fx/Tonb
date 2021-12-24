@@ -79,7 +79,20 @@ namespace tnbLib
 		}
 		else if (mySoluData->IsAnIso())
 		{
-			NotImplemented;
+			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionDataAnIso>(mySoluData);
+			Debug_Null_Pointer(soluData);
+
+			const auto& elements = soluData->Elements();
+			if (elements.empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no element has been detected!" << endl
+					<< abort(FatalError);
+			}
+
+			auto mesh = Aft_Tools::RetrieveTriangleMesh(elements);
+
+			file::SaveTo(mesh, name + Entity2d_Triangulation::extension, verbose);
 		}
 		else
 		{

@@ -5,8 +5,10 @@
 #include <Aft2d_MetricPrcsrAnIso.hxx>
 #include <Aft2d_RegionPlaneAnIso.hxx>
 #include <Aft2d_SegmentEdgeAnIso.hxx>
+#include <Aft2d_OptNodeAnIso_Calculator.hxx>
 #include <Aft2d_ElementAnIso.hxx>
 #include <Geo2d_SizeFunction.hxx>
+#include <Geo2d_MetricFunction.hxx>
 #include <Entity2d_Box.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataAnIso)
@@ -14,6 +16,9 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataAnIso)
 	ar & boost::serialization::base_object<Aft2d_SolutionDataBase>(*this);
 
 	ar & theGlobalMetricInfo_;
+	ar & theMetricFunction_;
+
+	ar & theNodeCalculator_;
 
 	ar & theBoundaryInfo_;
 
@@ -32,6 +37,9 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Aft2d_SolutionDataAnIso)
 	ar & boost::serialization::base_object<Aft2d_SolutionDataBase>(*this);
 
 	ar & theGlobalMetricInfo_;
+	ar & theMetricFunction_;
+
+	ar & theNodeCalculator_;
 
 	ar & theBoundaryInfo_;
 

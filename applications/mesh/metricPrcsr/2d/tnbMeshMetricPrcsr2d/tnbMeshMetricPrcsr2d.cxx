@@ -2,6 +2,7 @@
 #include <Aft2d_MetricPrcsrAnIso.hxx>
 #include <Aft2d_SolutionData.hxx>
 #include <Aft2d_SolutionDataAnIso.hxx>
+#include <Aft2d_Element.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo2d_MetricFunction.hxx>
 #include <Aft_MetricPrcsr_Info.hxx>

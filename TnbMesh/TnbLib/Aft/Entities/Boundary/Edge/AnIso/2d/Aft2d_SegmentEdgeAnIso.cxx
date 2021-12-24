@@ -28,13 +28,15 @@ tnbLib::Aft2d_SegmentEdgeAnIso::GetTopology
 	nodes.reserve(pts.size());
 
 	Standard_Integer K = 0;
-	auto n0 = std::make_shared<Aft2d_CornerNodeAnIso>(++K, pts[K - 1]);
+	K++;
+	auto n0 = std::make_shared<Aft2d_CornerNodeAnIso>(K, pts[K - 1]);
 	nodes.push_back(n0);
 	n0->InsertToCurves(theCurve->Index(), theCurve);
 
 	forThose(Index, 1, pts.size() - 2)
 	{
-		auto n = std::make_shared<Aft2d_SegmentNodeAnIso>(++K, pts[K - 1]);
+		K++;
+		auto n = std::make_shared<Aft2d_SegmentNodeAnIso>(K, pts[K - 1]);
 		Debug_Null_Pointer(n);
 
 		n->SetCurve(theCurve);
@@ -42,7 +44,8 @@ tnbLib::Aft2d_SegmentEdgeAnIso::GetTopology
 		nodes.push_back(std::move(n));
 	}
 
-	auto n1 = std::make_shared<Aft2d_CornerNodeAnIso>(++K, pts[K - 1]);
+	K++;
+	auto n1 = std::make_shared<Aft2d_CornerNodeAnIso>(K, pts[K - 1]);
 	nodes.push_back(n1);
 	n1->InsertToCurves(theCurve->Index(), theCurve);
 

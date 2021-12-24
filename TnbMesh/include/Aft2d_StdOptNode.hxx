@@ -34,6 +34,9 @@ namespace tnbLib
 
 		// constructors [11/27/2021 Amir     
 
+
+		// public functions and operators [12/23/2021 Amir]
+
 		TnbMesh_EXPORT void Perform() override;
 
 	};

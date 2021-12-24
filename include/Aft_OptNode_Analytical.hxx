@@ -32,6 +32,11 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [12/23/2021 Amir]
+
+
+		// constructors [12/23/2021 Amir]
+
 		Aft_OptNode_Analytical
 		(
 			const Standard_Real theSize,
@@ -42,6 +47,9 @@ namespace tnbLib
 			, theMetric_(theMetric)
 			, theFront_(theFront)
 		{}
+
+
+		// public functions and operators [12/23/2021 Amir]
 
 		auto ElementSize() const
 		{
@@ -64,6 +72,7 @@ namespace tnbLib
 		}
 
 		void Perform();
+
 	};
 
 	template<class FrontType>
@@ -89,6 +98,11 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [12/23/2021 Amir]
+
+
+		// constructors [12/23/2021 Amir]
+
 		Aft_OptNode_Analytical
 		(
 			const Standard_Real theSize,
@@ -97,6 +111,9 @@ namespace tnbLib
 			: theSize_(theSize)
 			, theFront_(theFront)
 		{}
+
+
+		// public functions and operators [12/23/2021 Amir]
 
 		auto ElementSize() const
 		{

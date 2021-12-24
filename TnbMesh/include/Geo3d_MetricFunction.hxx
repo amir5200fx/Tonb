@@ -5,11 +5,6 @@
 #include <Geo_MetricFunction.hxx>
 #include <Pnt3d.hxx>
 #include <Entity3d_Metric1.hxx>
-
-namespace tnbLib
-{
-
-	typedef Geo_MetricFunction<Pnt3d> Geo3d_MetricFunction;
-}
+#include <Geo3d_MetricFunctionFwd.hxx>
 
 #endif // !_Geo3d_MetricFunction_Header
