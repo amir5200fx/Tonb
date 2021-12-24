@@ -53,9 +53,27 @@ namespace tnbLib
 
 		Geo_MetricPrcsrAnIso_Info
 		(
+			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo,
+			const Standard_Integer theNbSamples
+		)
+			: theNbSamples_(theNbSamples)
+			, theIntgInfo_(theInfo)
+		{}
+
+		Geo_MetricPrcsrAnIso_Info
+		(
 			std::shared_ptr<NumAlg_AdaptiveInteg_Info>&& theInfo
 		)
 			: theIntgInfo_(std::move(theInfo))
+		{}
+
+		Geo_MetricPrcsrAnIso_Info
+		(
+			std::shared_ptr<NumAlg_AdaptiveInteg_Info>&& theInfo,
+			const Standard_Integer theNbSamples
+		)
+			: theIntgInfo_(std::move(theInfo))
+			, theNbSamples_(theNbSamples)
 		{}
 
 

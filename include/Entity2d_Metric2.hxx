@@ -24,12 +24,18 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [12/23/2021 Amir]
+
 		Entity2d_Metric2()
 			: theH1_(1.0)
 			, theH2_(1.0)
 			, theE1_(gp::DX2d())
 			, theE2_(gp::DY2d())
 		{}
+
+
+		// constructors [12/23/2021 Amir]
 
 		Entity2d_Metric2
 		(
@@ -43,6 +49,9 @@ namespace tnbLib
 			, theE1_(theE1)
 			, theE2_(theE2)
 		{}
+
+
+		// public functions and operators [12/23/2021 Amir]
 
 		Standard_Real H1() const
 		{
