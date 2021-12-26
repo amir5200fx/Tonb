@@ -58,6 +58,13 @@ namespace tnbLib
 
 		Geo_MetricFunction
 		(
+			Entity_Box<Point>&& theBox
+		)
+			: theBoundingBox_(std::move(theBox))
+		{}
+
+		Geo_MetricFunction
+		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const Entity_Box<Point>& theBox
@@ -65,6 +72,17 @@ namespace tnbLib
 			: Global_Indexed(theIndex)
 			, Global_Named(theName)
 			, theBoundingBox_(theBox)
+		{}
+
+		Geo_MetricFunction
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Entity_Box<Point>&& theBox
+		)
+			: Global_Indexed(theIndex)
+			, Global_Named(theName)
+			, theBoundingBox_(std::move(theBox))
 		{}
 
 		// Protected functions and operators [11/24/2021 Amir]
