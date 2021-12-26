@@ -1117,6 +1117,30 @@
     <Filter Include="TnbLib\Aft\OptNode\Calculator\AnIso\2d\std">
       <UniqueIdentifier>{fcf78b60-d5e4-45d0-887b-da4fd92dbdec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\Model\Surface">
+      <UniqueIdentifier>{1184ef58-2603-4a2c-bc07-0e8a32a60d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Model\Surface\G">
+      <UniqueIdentifier>{3d9aa68a-0d9c-40ed-a9a8-4bc04f05ae2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Model\Surface\T">
+      <UniqueIdentifier>{d29ffda6-0159-4144-9ec6-43a6a2d6e8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Calculator\Surface\std">
+      <UniqueIdentifier>{aee23f62-fafc-4e21-a7ca-dad7bcb7b85a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface">
+      <UniqueIdentifier>{ffe787eb-ef92-44bc-b269-cdc8f3177781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface\Plane">
+      <UniqueIdentifier>{c02e527d-b99d-4607-b5fd-60b9f4ea1bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface\Exact">
+      <UniqueIdentifier>{373ccea1-5cfb-4237-ab1e-a0190e139913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface\Approx">
+      <UniqueIdentifier>{a54d7c05-456e-4197-b3d0-5d8011076beb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -2643,6 +2667,30 @@
     <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Uniform\2d\GeoMetricFun2d_UniformFwd.hxx">
       <Filter>TnbLib\Base\Geom\Function\Metric\Uniform\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Surface\G\Aft2d_gModelSurface.hxx">
+      <Filter>TnbLib\Aft\Model\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Surface\G\Aft2d_gModelSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\Model\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Surface\G\Aft2d_gModelSurfaceI.hxx">
+      <Filter>TnbLib\Aft\Model\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Surface\T\Aft2d_tModelSurface.hxx">
+      <Filter>TnbLib\Aft\Model\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Surface\T\Aft2d_tModelSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\Model\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Surface\T\Aft2d_tModelSurfaceI.hxx">
+      <Filter>TnbLib\Aft\Model\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Surface\Plane\GeoMetricFun2d_Plane.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Surface\Exact\GeoMetricFun2d_ExactSurface.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Exact</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -3277,6 +3325,39 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Boundary\Plane\AnIso\Aft2d_BoundaryOfPlaneAnIso.cxx">
       <Filter>TnbLib\Aft\Boundary\Plane\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\Surface\Aft2d_OptNodeSurface_Calculator.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Calculator\Surface\Aft2d_OptNodeSurface_CalculatorIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Calculator\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Surface\Aft2d_MetricPrcsrSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\Surface\G\Aft2d_gModelSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Model\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\Surface\G\Aft2d_gModelSurface.cxx">
+      <Filter>TnbLib\Aft\Model\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\Surface\T\Aft2d_tModelSurface.cxx">
+      <Filter>TnbLib\Aft\Model\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\Surface\T\Aft2d_tModelSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\Model\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Plane\GeoMetricFun2d_PlaneIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Plane\GeoMetricFun2d_Plane.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Exact\GeoMetricFun2d_ExactSurface.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Exact</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Exact\GeoMetricFun2d_ExactSurfaceIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Exact</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

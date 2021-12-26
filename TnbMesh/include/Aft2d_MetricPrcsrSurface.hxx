@@ -7,12 +7,10 @@
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo2d_MetricFunction.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Aft2d_MetricPrcsrSurfaceFwd.hxx>
 
 namespace tnbLib
 {
-
-	typedef Aft_MetricPrcsr<Aft2d_EdgeSurface, Geo2d_SizeFunction, Geo2d_MetricFunction>
-		Aft2d_MetricPrcsrSurface;
 
 	template<>
 	Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
@@ -45,5 +43,27 @@ namespace tnbLib
 		const Aft2d_EdgeSurface& theFront
 	) const;
 }
+
+namespace tnbLib
+{
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft2d_MetricPrcsrSurface::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft2d_MetricPrcsrSurface::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
+}
+
 
 #endif // !_Aft2d_MetricPrcsrSurface_Header
