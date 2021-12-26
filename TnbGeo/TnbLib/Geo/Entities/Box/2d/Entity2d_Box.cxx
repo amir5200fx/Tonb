@@ -1,6 +1,7 @@
 #include <Entity2d_Box.hxx>
 
 const std::string tnbLib::Entity2d_Box::extension = ".gbox2d";
+const tnbLib::Entity2d_Box tnbLib::Entity2d_Box::norm_box = tnbLib::Entity2d_Box(Pnt2d::null, Pnt2d(1, 1));
 
 namespace tnbLib
 {
