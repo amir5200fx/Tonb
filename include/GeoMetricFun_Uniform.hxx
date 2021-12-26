@@ -36,6 +36,8 @@ namespace tnbLib
 			ar & theMetric_;
 		}
 
+	protected:
+
 
 		metric& ChangeMetric()
 		{
@@ -50,6 +52,15 @@ namespace tnbLib
 		{}
 
 		// constructors [12/23/2021 Amir]
+
+		GeoMetricFun_Uniform
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Entity_Box<Point>& theBox
+		)
+			: Geo_MetricFunction<Point>(theIndex, theName, theBox)
+		{}
 
 		GeoMetricFun_Uniform
 		(
