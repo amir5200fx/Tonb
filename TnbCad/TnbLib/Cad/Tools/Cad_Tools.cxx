@@ -16,6 +16,7 @@
 #include <Cad_TModel.hxx>
 #include <Cad_BlockEntity.hxx>
 #include <Cad_EntityManager.hxx>
+#include <Entity2d_Metric1.hxx>
 #include <Entity3d_Box.hxx>
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
@@ -1636,6 +1637,51 @@ tnbLib::Cad_Tools::RetrieveFaces
 		}
 	}
 	return std::move(faces);
+}
+
+tnbLib::Entity2d_Metric1 
+tnbLib::Cad_Tools::CalcMetric
+(
+	const Pnt2d& thePnt,
+	const Handle(Geom_Surface)& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+
+	gp_Vec D1U, D1V;
+	gp_Pnt Pt;
+
+	theSurface->D1(thePnt.X(), thePnt.Y(), Pt, D1U, D1V);
+
+	Standard_Real A = D1U.Dot(D1U);
+	Standard_Real B = D1U.Dot(D1V);
+	Standard_Real C = D1V.Dot(D1V);
+
+	Entity2d_Metric1 m(A, B, C);
+	return std::move(m);
+}
+
+tnbLib::Entity2d_Metric1 
+tnbLib::Cad_Tools::CalcMetric
+(
+	const Standard_Real theX,
+	const Standard_Real theY,
+	const Handle(Geom_Surface)& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+
+	gp_Vec D1U, D1V;
+	gp_Pnt Pt;
+
+	theSurface->D1(theX, theY, Pt, D1U, D1V);
+
+	Standard_Real A = D1U.Dot(D1U);
+	Standard_Real B = D1U.Dot(D1V);
+	Standard_Real C = D1V.Dot(D1V);
+
+	Entity2d_Metric1 m(A, B, C);
+	return std::move(m);
 }
 
 void tnbLib::Cad_Tools::SetPrecision

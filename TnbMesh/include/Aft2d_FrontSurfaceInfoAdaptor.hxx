@@ -7,12 +7,7 @@
 #include <Aft2d_EdgeSurfaceFwd.hxx>
 #include <Aft2d_ElementSurfaceFwd.hxx>
 #include <Aft_FrontTraits.hxx>
+#include <Aft2d_FrontSurfaceInfoAdaptorFwd.hxx>
 
-namespace tnbLib
-{
-
-	typedef Aft2d_FrontInfoAdaptorTemplate<Aft_FrontTraits<Aft2d_EdgeSurface>>
-		Aft2d_FrontSurfaceInfoAdaptor;
-}
 
 #endif // !_Aft2d_FrontSurfaceInfoAdaptor_Header

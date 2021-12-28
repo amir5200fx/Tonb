@@ -1,5 +1,12 @@
 #pragma once
 #include <Global_Macros.hxx>
+inline std::tuple<Standard_Real, Standard_Real> 
+tnbLib::Pnt2d::Components() const
+{
+	auto t = std::make_tuple(X(), Y());
+	return std::move(t);
+}
+
 namespace tnbLib
 {
 

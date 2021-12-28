@@ -207,6 +207,9 @@ namespace tnbLib
 			return X()*theOther.X() + Y()*theOther.Y();
 		}
 
+		inline std::tuple<Standard_Real, Standard_Real>
+			Components() const;
+
 		void Get
 		(
 			Standard_Real& theX,

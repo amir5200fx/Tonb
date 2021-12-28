@@ -46,6 +46,7 @@ namespace tnbLib
 		typedef Point ptType;
 
 		static TnbGeo_EXPORT const std::string extension;
+		static TnbGeo_EXPORT const Entity_Box<Point> norm_box;
 
 		//- default constructor
 

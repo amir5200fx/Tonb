@@ -41,8 +41,13 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [12/26/2021 Amir]
+
 		Entity2d_Metric1()
 		{}
+
+
+		// constructors [12/26/2021 Amir]
 
 		explicit Entity2d_Metric1
 		(
@@ -72,43 +77,46 @@ namespace tnbLib
 			const Pnt2d& E2
 		);
 
+
+		// public functions and operators [12/26/2021 Amir]
+
 		metric& operator+=(const metric&);
 		metric& operator*=(const Standard_Real Scalar);
 		metric& operator=(const Standard_Real);
 
-		arma::mat22 Arma() const;
+		inline arma::mat22 Arma() const;
 
-		Standard_Real Determinant() const
+		auto Determinant() const
 		{
 			return theA_ * theC_ - theB_ * theB_;
 		}
 
-		Standard_Real A() const
+		auto A() const
 		{
 			return theA_;
 		}
 
-		Standard_Real B() const
+		auto B() const
 		{
 			return theB_;
 		}
 
-		Standard_Real C() const
+		auto C() const
 		{
 			return theC_;
 		}
 
-		Standard_Real& A()
+		auto& A()
 		{
 			return theA_;
 		}
 
-		Standard_Real& B()
+		auto& B()
 		{
 			return theB_;
 		}
 
-		Standard_Real& C()
+		auto& C()
 		{
 			return theC_;
 		}

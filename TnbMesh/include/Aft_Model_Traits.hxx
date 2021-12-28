@@ -16,6 +16,8 @@ namespace tnbLib
 	class Cad2d_Plane;
 	class GModel_Surface;
 	class TModel_Surface;
+	class GModel_Plane;
+	class TModel_Plane;
 	class Aft2d_Model_Cache;
 	class Aft3d_Model_Cache;
 
@@ -46,7 +48,7 @@ namespace tnbLib
 	};
 
 	template<class SizeFun, class MetricFun>
-	struct aft_model_traits<GModel_Surface, SizeFun, MetricFun>
+	struct aft_model_traits<GModel_Plane, SizeFun, MetricFun>
 	{
 		typedef Aft2d_EdgeSurface frontType;
 		typedef Aft2d_ElementSurface elementType;
@@ -58,7 +60,7 @@ namespace tnbLib
 	};
 
 	template<class SizeFun, class MetricFun>
-	struct aft_model_traits<TModel_Surface, SizeFun, MetricFun>
+	struct aft_model_traits<TModel_Plane, SizeFun, MetricFun>
 	{
 		typedef Aft2d_EdgeSurface frontType;
 		typedef Aft2d_ElementSurface elementType;

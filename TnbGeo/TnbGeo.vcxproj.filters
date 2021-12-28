@@ -373,6 +373,36 @@
     <Filter Include="TnbLib\Geo\Entities\Connectivity">
       <UniqueIdentifier>{9f48e764-717e-425a-9422-f637916696d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints">
+      <UniqueIdentifier>{2d3e4ba9-31ff-4231-a960-c5a1fd13502a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d">
+      <UniqueIdentifier>{6fd943b5-1992-41bf-8e38-4e6c571264be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\3d">
+      <UniqueIdentifier>{5d9cd5e7-bce8-4094-bfdf-426e7eee790e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d\4pts">
+      <UniqueIdentifier>{20d065a5-6eb5-472f-9ed0-2e6a2d60e7ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d\5pts">
+      <UniqueIdentifier>{eae08d2a-a1ec-404e-81a7-dc740287310d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d\8pts">
+      <UniqueIdentifier>{98b8fe04-35fd-4dfd-9fa8-a502918dd33d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d\9pts">
+      <UniqueIdentifier>{0f974953-4b33-4441-ba43-4dbc43300722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d\8pts2ply">
+      <UniqueIdentifier>{edd80a6d-6c44-429d-9d0d-3c387effb4dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d\9pts2ply">
+      <UniqueIdentifier>{cbf1710f-c332-4f20-8d1c-1a9a7f6d79f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\SamplePoints\2d\13pts2ply">
+      <UniqueIdentifier>{9dfde024-b864-4061-940b-4b7a7621d57b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -870,6 +900,30 @@
     <ClInclude Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq\Geo_AffineTrsf_PtsToUnitSqFwd.hxx">
       <Filter>TnbLib\Geo\AffineTrsf\PtsToUnitSq</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\4pts\Geo2d_SamplePoints_4Pts.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\4pts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\5pts\Geo2d_SamplePoints_5Pts.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\5pts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\8pts\Geo2d_SamplePoints_8Pts.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\8pts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\9pts\Geo2d_SamplePoints_9Pts.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\9pts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\8pts2ply\Geo2d_SamplePoints_8Pts2ply.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\8pts2ply</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\9pts2ply\Geo2d_SamplePoints_9Pts2ply.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\9pts2ply</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\SamplePoints\2d\13pts2ply\Geo2d_SamplePoints_13Pts2ply.hxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\13pts2ply</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1133,5 +1187,34 @@
     <ClCompile Include="TnbLib\Geo\Entities\Vector\2d\Vec2dIO.cxx">
       <Filter>TnbLib\Geo\Entities\Vector\2d</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\SamplePoints\2d\4pts\Geo2d_SamplePoints_4Pts.cxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\4pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\SamplePoints\2d\5pts\Geo2d_SamplePoints_5Pts.cxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\5pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\SamplePoints\2d\8pts\Geo2d_SamplePoints_8Pts.cxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\8pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\SamplePoints\2d\9pts\Geo2d_SamplePoints_9Pts.cxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\9pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\SamplePoints\2d\9pts2ply\Geo2d_SamplePoints_9Pts2ply.cxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\9pts2ply</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\SamplePoints\2d\13pts2ply\Geo2d_SamplePoints_13Pts2ply.cxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\13pts2ply</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\SamplePoints\2d\8pts2ply\Geo2d_SamplePoints_8Pts2ply.cxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d\8pts2ply</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d</Filter>
+    </None>
+    <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_RetrievePoints.jxx">
+      <Filter>TnbLib\Geo\SamplePoints\2d</Filter>
+    </None>
   </ItemGroup>
 </Project>
