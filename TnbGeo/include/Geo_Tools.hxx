@@ -10,6 +10,7 @@
 
 #include <Entity_Segment.hxx>
 #include <Entity_Line.hxx>
+#include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
@@ -471,12 +472,19 @@ namespace tnbLib
 				const Entity2d_Triangle& tri1
 			);
 
-		static  inline Standard_Real 
+		static inline Standard_Real 
 			Interpolate
 			(
 				const Standard_Real x, 
 				const std::pair<Standard_Real, Standard_Real>& theLower, 
 				const std::pair<Standard_Real, Standard_Real>& theUpper
+			);
+
+		static TnbGeo_EXPORT std::pair<Standard_Real, Standard_Real>
+			Interpolate
+			(
+				const Entity2d_Box& theBox, 
+				const std::pair<Standard_Real, Standard_Real>& pt
 			);
 
 		static inline Pnt2d 

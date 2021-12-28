@@ -1,6 +1,7 @@
 #include <Geo_Tools.hxx>
 
 #include <Pnt2d.hxx>
+#include <Entity2d_Box.hxx>
 #include <Entity2d_Triangle.hxx>
 #include <Entity3d_Triangle.hxx>
 #include <Entity2d_Polygon.hxx>
@@ -262,6 +263,24 @@ tnbLib::Geo_Tools::IntersectTwoLines
 	auto pt = P0 + gamma0 * Pnt2d(t0.XY());
 	auto t = std::make_pair(std::move(pt), Standard_True);
 	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real>
+tnbLib::Geo_Tools::Interpolate
+(
+	const Entity2d_Box & theBox,
+	const std::pair<Standard_Real, Standard_Real>& pt
+)
+{
+	const auto[u0, v0] = theBox.P0().Components();
+	const auto[u1, v1] = theBox.P1().Components();
+
+	const auto[s, t] = pt;
+	const auto u = u0 + t * (u1 - u0);
+	const auto v = v0 + s * (v1 - v0);
+
+	auto paired = std::make_pair(u, v);
+	return std::move(paired);
 }
 
 std::shared_ptr<tnbLib::Entity2d_Chain> 

@@ -1,4 +1,11 @@
 #pragma once
+inline std::tuple<Standard_Real, Standard_Real, Standard_Real> 
+tnbLib::Pnt3d::Components() const
+{
+	auto t = std::make_tuple(X(), Y(), Z());
+	return std::move(t);
+}
+
 namespace tnbLib
 {
 
