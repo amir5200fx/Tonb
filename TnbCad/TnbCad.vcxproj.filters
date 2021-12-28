@@ -322,6 +322,15 @@
     <Filter Include="TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion\MinMax">
       <UniqueIdentifier>{d171fa8f-56c6-49ee-babf-31f030945034}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Analyzer">
+      <UniqueIdentifier>{9b51a7a6-57c1-4811-80b1-188a69bc1c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Analyzer\GModel">
+      <UniqueIdentifier>{6169b1ed-ab5b-46cb-8750-de5cdc09eeb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Analyzer\GModel\Surface">
+      <UniqueIdentifier>{69aafb1c-49b2-4eae-95a6-e8ee48876f6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -970,6 +979,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\ApproxMetric\Subdivider\Cad_ApprxMetricSubdivider.cxx">
       <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModelIO.cxx">
+      <Filter>TnbLib\Cad\GModel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

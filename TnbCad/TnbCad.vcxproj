@@ -144,6 +144,7 @@
     <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.cxx" />
     <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurfaceIO.cxx" />
     <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModel.cxx" />
+    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModelIO.cxx" />
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Curve\GModel_Curve.cxx" />
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Curve\GModel_CurveIO.cxx" />
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Edge\GModel_Edge.cxx" />
