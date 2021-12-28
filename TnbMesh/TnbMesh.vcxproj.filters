@@ -1141,6 +1141,9 @@
     <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface\Approx">
       <UniqueIdentifier>{a54d7c05-456e-4197-b3d0-5d8011076beb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApproxSurfMetric">
+      <UniqueIdentifier>{c3106a6a-388d-405d-b9c4-73da4372b0c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">

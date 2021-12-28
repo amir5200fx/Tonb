@@ -214,6 +214,9 @@ namespace tnbLib
 			return std::move(Copy);
 		}
 
+		inline std::tuple<Standard_Real, Standard_Real, Standard_Real>
+			Components() const;
+
 		void Normalize()
 		{
 			Standard_Real d = TwoNorm();
