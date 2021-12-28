@@ -39,6 +39,7 @@ namespace tnbLib
 	class TModel_ParaWire;
 	class TModel_Vertex;
 	class TModel_Wire;
+	class Entity2d_Metric1;
 
 	template<class EntityType>
 	class Cad_BlockEntity;
@@ -255,6 +256,21 @@ namespace tnbLib
 			IsClosed
 			(
 				const Cad_BlockEntity<TModel_Surface>& theBlock
+			);
+
+		static TnbCad_EXPORT Entity2d_Metric1 
+			CalcMetric
+			(
+				const Pnt2d& thePnt, 
+				const Handle(Geom_Surface)&
+			);
+
+		static TnbCad_EXPORT Entity2d_Metric1 
+			CalcMetric
+			(
+				const Standard_Real theX,
+				const Standard_Real theY,
+				const Handle(Geom_Surface)&
 			);
 
 		static TnbCad_EXPORT void SetPrecision(const std::shared_ptr<Cad_TModel>& theSolid);

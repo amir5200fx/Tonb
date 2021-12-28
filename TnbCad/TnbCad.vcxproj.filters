@@ -310,6 +310,18 @@
     <Filter Include="TnbLib\Cad\Patch\RailRevolve">
       <UniqueIdentifier>{e0bdeffd-8f1e-4054-9402-e8444c1fe6ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\ApproxSurfMetric">
+      <UniqueIdentifier>{3769b17d-2f97-4ca9-837b-b1e2e2fbc7ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\ApproxSurfMetric\Subdivider">
+      <UniqueIdentifier>{01945598-122e-4931-af53-325d53869037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion">
+      <UniqueIdentifier>{cbb43062-e972-499c-8601-419ed6764c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion\MinMax">
+      <UniqueIdentifier>{d171fa8f-56c6-49ee-babf-31f030945034}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -617,6 +629,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Patch\RailRevolve\Cad_RailRevolve.hxx">
       <Filter>TnbLib\Cad\Patch\RailRevolve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ApproxMetric\Cad_ApprxMetric.hxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ApproxMetric\Subdivider\Criterion\Cad_ApprxMetricCriterion.hxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ApproxMetric\Subdivider\Criterion\MinMax\Cad_ApprxMetricCriterion_MinMax.hxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion\MinMax</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ApproxMetric\Subdivider\Cad_ApprxMetricSubdivider.hxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -934,6 +958,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Patch\RailRevolve\Cad_RailRevolve.cxx">
       <Filter>TnbLib\Cad\Patch\RailRevolve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ApproxMetric\Cad_ApprxMetric.cxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ApproxMetric\Subdivider\Criterion\Cad_ApprxMetricCriterion.cxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ApproxMetric\Subdivider\Criterion\MinMax\Cad_ApprxMetricCriterion_MinMax.cxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion\MinMax</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ApproxMetric\Subdivider\Cad_ApprxMetricSubdivider.cxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
