@@ -21,6 +21,7 @@ namespace tnbLib
 	// Forward Declarations [12/27/2021 Amir]
 	class Geo2d_SamplePoints;
 	class Cad_ApprxMetricCriterion;
+	class Cad_ApprxMetricInfo;
 
 	class Cad_ApprxMetric
 		: public Global_Done
@@ -31,38 +32,20 @@ namespace tnbLib
 		Handle(Geom_Surface) theGeometry_;
 
 		std::shared_ptr<Entity2d_Box> theDomain_;
-
-		Standard_Integer theMinLevel_;
-		Standard_Integer theMaxLevel_;
-		Standard_Integer theUnbalancing_;
-
-		Standard_Real theResolution_;
-		Standard_Real theTolerance_;
-
-		std::shared_ptr<Geo2d_SamplePoints> theSamples_;
-		std::shared_ptr<Cad_ApprxMetricCriterion> theCriterion_;
+		std::shared_ptr<Cad_ApprxMetricInfo> theInfo_;
 
 
 		std::shared_ptr<Entity2d_Triangulation> theTriangulation_;
-		std::vector<Entity2d_Metric1> theValues_;
 
 	public:
 
-		static TnbCad_EXPORT const Standard_Integer DEFAULT_MIN_LEVEL;
-		static TnbCad_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL;
-		static TnbCad_EXPORT const Standard_Integer DEFAULT_UNBALANCING;
-
-		static TnbCad_EXPORT const Standard_Real DEFAULT_RESOLUTION;
-		static TnbCad_EXPORT const Standard_Real DEFAULT_TOLERANCE;
-
+		static TnbCad_EXPORT const std::shared_ptr<Cad_ApprxMetricInfo> DEFAULT_INFO;
 		static TnbCad_EXPORT unsigned short verbose;
 
 		// default constructor [12/25/2021 Amir]
 
 		Cad_ApprxMetric()
-			: theMinLevel_(DEFAULT_MIN_LEVEL)
-			, theMaxLevel_(DEFAULT_MAX_LEVEL)
-			, theUnbalancing_(DEFAULT_UNBALANCING)
+			: theInfo_(DEFAULT_INFO)
 		{}
 
 
@@ -75,6 +58,7 @@ namespace tnbLib
 		)
 			: theGeometry_(theGeometry)
 			, theDomain_(theDomain)
+			, theInfo_(DEFAULT_INFO)
 		{}
 
 		// public functions and operators [12/27/2021 Amir]
@@ -89,29 +73,9 @@ namespace tnbLib
 			return theDomain_;
 		}
 
-		auto MinLevel() const
+		const auto& Info() const
 		{
-			return theMinLevel_;
-		}
-
-		auto MaxLevel() const
-		{
-			return theMaxLevel_;
-		}
-
-		auto Unbalancing() const
-		{
-			return theUnbalancing_;
-		}
-
-		auto Resolution() const
-		{
-			return theResolution_;
-		}
-
-		auto Tolerance() const
-		{
-			return theTolerance_;
+			return theInfo_;
 		}
 
 		const auto& Triangulation() const
@@ -124,25 +88,6 @@ namespace tnbLib
 			return theTriangulation_;
 		}
 
-		const auto& Values() const
-		{
-			return theValues_;
-		}
-
-		auto& ValuesRef()
-		{
-			return theValues_;
-		}
-
-		const auto& Samples() const
-		{
-			return theSamples_;
-		}
-
-		const auto& Criterion() const
-		{
-			return theCriterion_;
-		}
 
 		TnbCad_EXPORT void Perform();
 
@@ -156,39 +101,19 @@ namespace tnbLib
 			theDomain_ = theDomain;
 		}
 
-		void OverrideSamples(const std::shared_ptr<Geo2d_SamplePoints>& theSamples)
+		void LoadDomain(std::shared_ptr<Entity2d_Box>&& theDomain)
 		{
-			theSamples_ = theSamples;
+			theDomain_ = std::move(theDomain);
 		}
 
-		void OverrideCriterion(const std::shared_ptr<Cad_ApprxMetricCriterion>& theCriterion)
+		void OverrideInfo(const std::shared_ptr<Cad_ApprxMetricInfo>& theInfo)
 		{
-			theCriterion_ = theCriterion;
-		}
-		
-		void SetMinLevel(const Standard_Integer lev)
-		{
-			theMinLevel_ = lev;
+			theInfo_ = theInfo;
 		}
 
-		void SetMaxLevel(const Standard_Integer lev)
+		void OverrideInfo(std::shared_ptr<Cad_ApprxMetricInfo>&& theInfo)
 		{
-			theMaxLevel_ = lev;
-		}
-
-		void SetUnbalancing(const Standard_Integer lev)
-		{
-			theUnbalancing_ = lev;
-		}
-
-		void SetResolution(const Standard_Real theRes)
-		{
-			theResolution_ = theRes;
-		}
-
-		void SetTolerance(const Standard_Real theTol)
-		{
-			theTolerance_ = theTol;
+			theInfo_ = std::move(theInfo);
 		}
 	};
 }
