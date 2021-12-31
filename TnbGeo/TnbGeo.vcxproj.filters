@@ -403,6 +403,18 @@
     <Filter Include="TnbLib\Geo\SamplePoints\2d\13pts2ply">
       <UniqueIdentifier>{9dfde024-b864-4061-940b-4b7a7621d57b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\MeshValue">
+      <UniqueIdentifier>{77f52328-daa5-4e47-abc8-e1e13fa8d869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\MeshValue\2d">
+      <UniqueIdentifier>{48830765-9c89-4871-9931-70221992b44e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\MeshValue\3d">
+      <UniqueIdentifier>{7ba77d4f-0f21-458e-afea-524ebbc895fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Merge\Point\Info">
+      <UniqueIdentifier>{f1ede0b4-3f83-423e-89bc-24d6269590a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -924,6 +936,24 @@
     <ClInclude Include="TnbLib\Geo\SamplePoints\2d\13pts2ply\Geo2d_SamplePoints_13Pts2ply.hxx">
       <Filter>TnbLib\Geo\SamplePoints\2d\13pts2ply</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\MeshValue\Entity_MeshValue.hxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MeshValue.hxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MeshValueFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MetricMeshValue.hxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MetricMeshValueFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Merge\Point\Info\Merge_PntInfo.hxx">
+      <Filter>TnbLib\Geo\Merge\Point\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1207,6 +1237,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\SamplePoints\2d\8pts2ply\Geo2d_SamplePoints_8Pts2ply.cxx">
       <Filter>TnbLib\Geo\SamplePoints\2d\8pts2ply</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MeshValue.cxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MeshValueIO.cxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MetricMeshValue.cxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\MeshValue\2d\Entity2d_MetricMeshValueIO.cxx">
+      <Filter>TnbLib\Geo\Entities\MeshValue\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Merge\Point\Info\Merge_PntInfo.cxx">
+      <Filter>TnbLib\Geo\Merge\Point\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

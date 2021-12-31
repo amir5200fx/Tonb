@@ -7,8 +7,6 @@
 #include <Global_Serialization.hxx>
 #include <Cad_Module.hxx>
 
-#include <TopoDS_Shape.hxx>
-
 #include <memory>
 #include <vector>
 
@@ -27,8 +25,6 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		TopoDS_Shape theShape_;
-
 		std::vector<std::shared_ptr<GModel_Surface>> theSurfaces_;
 
 
@@ -44,22 +40,58 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad_EXPORT const std::string extension;
 
 		//- constructors
 
-		Cad3d_GModel(const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces);
+		Cad3d_GModel
+		(
+			const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces
+		)
+			: theSurfaces_(theSurfaces)
+		{}
 
-		Cad3d_GModel(std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces);
+		Cad3d_GModel
+		(
+			std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces
+		)
+			: theSurfaces_(std::move(theSurfaces))
+		{}
 
-		Cad3d_GModel(const Standard_Integer theIndex, const word& theName, const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces);
+		Cad3d_GModel
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces
+		)
+			: Global_Indexed(theIndex)
+			, Global_Named(theName)
+			, theSurfaces_(theSurfaces)
+		{}
 
-		Cad3d_GModel(const Standard_Integer theIndex, const word& theName, std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces);
+		Cad3d_GModel
+		(
+			const Standard_Integer theIndex, 
+			const word& theName, 
+			std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces
+		)
+			: Global_Indexed(theIndex)
+			, Global_Named(theName)
+			, theSurfaces_(std::move(theSurfaces))
+		{}
 
 
 		//- public functions and operators
 
-		Standard_Integer NbSurfaces() const;
+		auto NbSurfaces() const
+		{
+			return (Standard_Integer)theSurfaces_.size();
+		}
 
+		const auto& Surfaces() const
+		{
+			return theSurfaces_;
+		}
 
 	};
 }

@@ -20,10 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{D91CBC49-F854-4DC8-ACF3-6F83F3EB4260}</ProjectGuid>
-    <RootNamespace>TnbIgesReader</RootNamespace>
+    <ProjectGuid>{5B99AC55-CBBB-43C1-9DDF-E5D5E8DE3D0B}</ProjectGuid>
+    <RootNamespace>tnbCadToolGModelMetricAnalyzer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
-    <ProjectName>TnbIgesReader</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,7 +77,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>$(ProjectName)</TargetName>
     <IncludePath>$(ARMADILLO_INCLUDEDIR);$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -88,9 +86,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,9 +135,9 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)d.pdb" </Comma
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,13 +154,16 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).ipdb" </Comma
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TnbIgesReader.cxx" />
+    <ClCompile Include="tnbCadToolGModelMetricAnalyzer.cxx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\TnbCad\TnbCad.vcxproj">
+    <ProjectReference Include="..\..\..\..\..\..\TnbCad\TnbCad.vcxproj">
       <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+    <ProjectReference Include="..\..\..\..\..\..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
       <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
     </ProjectReference>
   </ItemGroup>

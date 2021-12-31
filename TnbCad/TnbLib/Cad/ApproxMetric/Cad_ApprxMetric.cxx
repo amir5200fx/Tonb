@@ -1,6 +1,7 @@
 #include <Cad_ApprxMetric.hxx>
 
 #include <Cad_ApprxMetricSubdivider.hxx>
+#include <Cad_ApprxMetricInfo.hxx>
 #include <Geo2d_ApprxSpace.hxx>
 #include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
@@ -10,14 +11,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-const Standard_Integer tnbLib::Cad_ApprxMetric::DEFAULT_MIN_LEVEL(2);
-const Standard_Integer tnbLib::Cad_ApprxMetric::DEFAULT_MAX_LEVEL(6);
-const Standard_Integer tnbLib::Cad_ApprxMetric::DEFAULT_UNBALANCING(2);
-
-const Standard_Real tnbLib::Cad_ApprxMetric::DEFAULT_RESOLUTION(1.0E-4);
-const Standard_Real tnbLib::Cad_ApprxMetric::DEFAULT_TOLERANCE(1.0E-6);
-
 unsigned short tnbLib::Cad_ApprxMetric::verbose(0);
+
+const std::shared_ptr<tnbLib::Cad_ApprxMetricInfo> tnbLib::Cad_ApprxMetric::DEFAULT_INFO =
+std::make_shared<tnbLib::Cad_ApprxMetricInfo>();
 
 namespace tnbLib
 {
@@ -108,6 +105,13 @@ namespace tnbLib
 
 void tnbLib::Cad_ApprxMetric::Perform()
 {
+	if (verbose)
+	{
+		tnbLib::Info << endl
+			<< "******* Approximating the Surface Metric ********" << endl
+			<< endl;
+	}
+
 	if (NOT Geometry())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -122,16 +126,29 @@ void tnbLib::Cad_ApprxMetric::Perform()
 			<< abort(FatalError);
 	}
 
-	Cad_ApprxMetricSubdivider subdivider(Geometry());
-
-	if (Samples())
+	if (NOT Info())
 	{
-		subdivider.SetSamples(Samples());
+		FatalErrorIn(FunctionSIG)
+			<< "no info is loaded!" << endl
+			<< abort(FatalError);
 	}
 
-	if (Criterion())
+	Cad_ApprxMetricSubdivider subdivider(Geometry());
+
+	if (Info()->Samples())
 	{
-		subdivider.SetCriterion(Criterion());
+		subdivider.SetSamples(Info()->Samples());
+	}
+
+	if (Info()->Criterion())
+	{
+		subdivider.SetCriterion(Info()->Criterion());
+	}
+
+	if (verbose)
+	{
+		tnbLib::Info << endl
+			<< " Discretizing the space..." << endl;
 	}
 
 	std::vector<Entity2d_Box> boxes;
@@ -141,9 +158,9 @@ void tnbLib::Cad_ApprxMetric::Perform()
 
 		Geo2d_ApprxSpace<Cad_ApprxMetricSubdivider> alg;
 		alg.SetDomain(*Domain());
-		alg.SetMinLevel(MinLevel());
-		alg.SetMaxLevel(MaxLevel());
-		alg.SetMaxUnbalancingLevel(Unbalancing());
+		alg.SetMinLevel(Info()->MinLevel());
+		alg.SetMaxLevel(Info()->MaxLevel());
+		alg.SetMaxUnbalancingLevel(Info()->Unbalancing());
 
 		alg.SetObject(&subdivider);
 		alg.SetSubdivider(&Cad_ApprxMetricSubdivider::Subdivide);
@@ -158,13 +175,21 @@ void tnbLib::Cad_ApprxMetric::Perform()
 
 	if (verbose)
 	{
-		Info << " - the space is discretized in, " << global_time_duration << ", ms." << endl;
+		tnbLib::Info << " - the space is discretized in, " << global_time_duration << ", ms." << endl;
 	}
 
 	if (verbose)
 	{
-		Info << endl
+		tnbLib::Info << endl
 			<< " - Merging the points..." << endl;
+	}
+
+	const auto res = Info()->MergeInfo().Resolution();
+	const auto tol = Info()->MergeInfo().Radius();
+
+	if (verbose)
+	{
+		tnbLib::Info << " - resolution: " << res << ", Tolerance: " << tol << "." << endl;
 	}
 
 	std::vector<Pnt2d> points;
@@ -185,10 +210,10 @@ void tnbLib::Cad_ApprxMetric::Perform()
 			const auto& p2 = b.P1();
 			auto p3 = b.Corner(Box2d_PickAlgorithm_NW);
 
-			InsertPoint(tree, p0, Resolution(), Tolerance());
-			InsertPoint(tree, p1, Resolution(), Tolerance());
-			InsertPoint(tree, p2, Resolution(), Tolerance());
-			InsertPoint(tree, p3, Resolution(), Tolerance());
+			InsertPoint(tree, p0, res, tol);
+			InsertPoint(tree, p1, res, tol);
+			InsertPoint(tree, p2, res, tol);
+			InsertPoint(tree, p3, res, tol);
 
 			boxes.pop_back();
 		}
@@ -206,15 +231,39 @@ void tnbLib::Cad_ApprxMetric::Perform()
 		}
 	}
 
-	Geo2d_DelTri triAlg(points);
-	triAlg.Triangulate();
+	if (verbose)
+	{
+		tnbLib::Info << endl
+			<< " - Triangulation the points..." << endl;
+	}
 
-	auto tri = std::make_shared<Entity2d_Triangulation>
-		(
-			std::move(points), 
-			std::move(triAlg.Data()->Connectivity())
-			);
-	theTriangulation_ = std::move(tri);
+	{// timer scope [12/31/2021 Amir]
+		Global_Timer timer;
+		timer.SetInfo(Global_TimerInfo_ms);
+
+		Geo2d_DelTri triAlg(points);
+		triAlg.Triangulate();
+
+		auto tri = std::make_shared<Entity2d_Triangulation>
+			(
+				std::move(points),
+				std::move(triAlg.Data()->Connectivity())
+				);
+		theTriangulation_ = std::move(tri);
+	}
+
+	if (verbose)
+	{
+		tnbLib::Info << endl
+			<< " - the space is triangulated in, " << global_time_duration << ", ms." << endl;
+	}
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		tnbLib::Info << endl
+			<< "******* Surface Metric is approximated, successfully! ********" << endl
+			<< endl;
+	}
 }

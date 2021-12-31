@@ -46,13 +46,26 @@ namespace tnbLib
 
 		//- constructors
 
-		TnbCad_EXPORT Cad_Shape(const TopoDS_Shape& theShape);
+		TnbCad_EXPORT Cad_Shape
+		(
+			const TopoDS_Shape& theShape
+		);
 
-		TnbCad_EXPORT Cad_Shape(const Standard_Integer theIndex, const word& theName, const TopoDS_Shape& theShape);
+		TnbCad_EXPORT Cad_Shape
+		(
+			const Standard_Integer theIndex, 
+			const word& theName,
+			const TopoDS_Shape& theShape
+		);
 
 		TnbCad_EXPORT Cad_Shape(TopoDS_Shape&& theShape);
 
-		TnbCad_EXPORT Cad_Shape(const Standard_Integer theIndex, const word& theName, TopoDS_Shape&& theShape);
+		TnbCad_EXPORT Cad_Shape
+		(
+			const Standard_Integer theIndex,
+			const word& theName, 
+			TopoDS_Shape&& theShape
+		);
 
 
 		//- public functions and operators

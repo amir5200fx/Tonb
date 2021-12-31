@@ -322,6 +322,18 @@
     <Filter Include="TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion\MinMax">
       <UniqueIdentifier>{d171fa8f-56c6-49ee-babf-31f030945034}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Analyzer">
+      <UniqueIdentifier>{9b51a7a6-57c1-4811-80b1-188a69bc1c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Analyzer\GModel">
+      <UniqueIdentifier>{6169b1ed-ab5b-46cb-8750-de5cdc09eeb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Analyzer\GModel\Surface">
+      <UniqueIdentifier>{69aafb1c-49b2-4eae-95a6-e8ee48876f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\ApproxSurfMetric\Info">
+      <UniqueIdentifier>{ef39a352-3589-4f31-a6a0-e63aeee91038}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -641,6 +653,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\ApproxMetric\Subdivider\Cad_ApprxMetricSubdivider.hxx">
       <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Analyzer\GModel\Surface\GModel_MetricAnalyzer.hxx">
+      <Filter>TnbLib\Cad\Analyzer\GModel\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ApproxMetric\Info\Cad_ApprxMetricInfo.hxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Info</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -970,6 +988,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\ApproxMetric\Subdivider\Cad_ApprxMetricSubdivider.cxx">
       <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModelIO.cxx">
+      <Filter>TnbLib\Cad\GModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Analyzer\GModel\Surface\GModel_MetricAnalyzer.cxx">
+      <Filter>TnbLib\Cad\Analyzer\GModel\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Analyzer\GModel\Surface\GModel_MetricAnalyzerIO.cxx">
+      <Filter>TnbLib\Cad\Analyzer\GModel\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ApproxMetric\Info\Cad_ApprxMetricInfoIO.cxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ApproxMetric\Info\Cad_ApprxMetricInfo.cxx">
+      <Filter>TnbLib\Cad\ApproxSurfMetric\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
