@@ -88,6 +88,10 @@ namespace tnbLib
 			return (Standard_Integer)theSurfaces_.size();
 		}
 
+		const auto& Surfaces() const
+		{
+			return theSurfaces_;
+		}
 
 	};
 }
