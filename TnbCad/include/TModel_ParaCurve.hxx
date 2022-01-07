@@ -55,21 +55,23 @@ namespace tnbLib
 
 	public:
 
-		TnbCad_EXPORT TModel_ParaCurve
+		// constructors [1/5/2022 Amir]
+
+		TnbCad_EXPORT explicit TModel_ParaCurve
 		(
 			const Handle(Geom2d_Curve)& theGeometry
 		);
 
-		TnbCad_EXPORT Standard_Real FirstParameter() const;
 
+		// public functions and operators [1/5/2022 Amir]
+
+		TnbCad_EXPORT Standard_Real FirstParameter() const;
 		TnbCad_EXPORT Standard_Real LastParameter() const;
 
 		TnbCad_EXPORT Pnt2d Value(const Standard_Real x) const;
-
 		TnbCad_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
 
 		Pnt2d FirstCoord() const;
-
 		Pnt2d LastCoord() const;
 
 		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
