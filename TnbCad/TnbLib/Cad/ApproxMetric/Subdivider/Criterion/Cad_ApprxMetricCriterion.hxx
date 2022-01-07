@@ -17,6 +17,7 @@ namespace tnbLib
 
 	// Forward Declarations [12/26/2021 Amir]
 	class Geo2d_SamplePoints;
+	class Cad_MetricCalculator;
 
 	class Cad_ApprxMetricCriterion
 	{
@@ -24,6 +25,8 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Real theTolerance_;
+
+		std::shared_ptr<Cad_MetricCalculator> theCalculator_;
 
 	protected:
 
@@ -37,9 +40,11 @@ namespace tnbLib
 
 		Cad_ApprxMetricCriterion
 		(
-			const Standard_Real theTol
+			const Standard_Real theTol,
+			const std::shared_ptr<Cad_MetricCalculator>& theCalculator
 		)
 			: theTolerance_(theTol)
+			, theCalculator_(theCalculator)
 		{}
 
 	public:
@@ -54,9 +59,19 @@ namespace tnbLib
 			return theTolerance_;
 		}
 
+		const auto& MetricCalculator() const
+		{
+			return theCalculator_;
+		}
+
 		void SetTolerance(const Standard_Real theTol)
 		{
 			theTolerance_ = theTol;
+		}
+
+		void SetMetricCalculator(const std::shared_ptr<Cad_MetricCalculator>& theCalculator)
+		{
+			theCalculator_ = theCalculator;
 		}
 
 		virtual Standard_Boolean Subdivide

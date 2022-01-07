@@ -1,6 +1,7 @@
 #include <Cad_ApprxMetricCriterion_MinMax.hxx>
 
 #include <Geo2d_SamplePoints.hxx>
+#include <Cad_MetricCalculator.hxx>
 #include <Cad_Tools.hxx>
 #include <Geo_Tools.hxx>
 #include <Entity2d_Box.hxx>
@@ -9,7 +10,7 @@
 #include <OSstream.hxx>
 
 Standard_Boolean 
-tnbLib::Cad_ApprxMetricCriterion_MinMax::Subdivide
+tnbLib::cadLib::ApprxMetricCriterion_MinMax::Subdivide
 (
 	const Entity2d_Box & theDomain, 
 	const std::shared_ptr<Geo2d_SamplePoints>& theSamples,
@@ -17,6 +18,7 @@ tnbLib::Cad_ApprxMetricCriterion_MinMax::Subdivide
 ) const
 {
 	Debug_Null_Pointer(theSamples);
+	Debug_Null_Pointer(MetricCalculator());
 	auto samples = theSamples->RetrieveSamples();
 
 	const auto d = theDomain.Diameter();
@@ -32,7 +34,8 @@ tnbLib::Cad_ApprxMetricCriterion_MinMax::Subdivide
 		auto xy = std::make_pair(x, y);
 
 		auto[px, py] = Geo_Tools::Interpolate(theDomain, xy);
-		auto m = Cad_Tools::CalcMetric(px, py, theGeometry);
+		auto m = MetricCalculator()->CalcMetric(px, py, theGeometry);
+		//auto m = Cad_Tools::CalcMetric(px, py, theGeometry);
 
 		auto dis = Entity2d_Metric1::DistanceSQ(p0, p1, m);
 
