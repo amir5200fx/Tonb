@@ -50,12 +50,15 @@ namespace tnbLib
 
 		//- constructors
 
-		TModel_Vertex
+		explicit TModel_Vertex
 		(
 			const Standard_Integer theIndex
 		)
 			: TModel_Entity(theIndex)
 		{}
+
+
+		// constructors [1/5/2022 Amir]
 
 		TModel_Vertex
 		(

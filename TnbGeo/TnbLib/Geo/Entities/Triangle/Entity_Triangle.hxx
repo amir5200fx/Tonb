@@ -210,7 +210,7 @@ namespace tnbLib
 			return theP2_;
 		}
 
-		const auto& Vertex(const Standard_Integer theIndex)
+		const auto& Vertex(const Standard_Integer theIndex) const
 		{
 			if (theIndex == 0)
 			{
@@ -316,7 +316,7 @@ namespace tnbLib
 			return theP2_;
 		}
 
-		const auto& Vertex(const Standard_Integer theIndex)
+		const auto& Vertex(const Standard_Integer theIndex) const
 		{
 			if (theIndex == 0)
 			{

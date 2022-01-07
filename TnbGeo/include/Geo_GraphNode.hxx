@@ -41,9 +41,45 @@ namespace tnbLib
 
 	public:
 
-		Geo_GraphNode(const Standard_Integer theIndex)
+		// default constructor [1/5/2022 Amir]
+
+		Geo_GraphNode()
+		{}
+
+
+		// constructors [1/5/2022 Amir]
+
+		explicit Geo_GraphNode
+		(
+			const Standard_Integer theIndex
+		)
 			: Global_Indexed(theIndex)
 		{}
+
+		Geo_GraphNode
+		(
+			const Standard_Integer theIndex,
+			const Point& theCoord
+		)
+			: Global_Indexed(theIndex)
+			, theCoord_(theCoord)
+		{}
+
+		Geo_GraphNode
+		(
+			const Standard_Integer theIndex,
+			Point&& theCoord
+		)
+			: Global_Indexed(theIndex)
+			, theCoord_(std::move(theCoord))
+		{}
+
+
+		virtual ~Geo_GraphNode()
+		{}
+
+
+		// public functions and operators [1/5/2022 Amir]
 
 		Standard_Integer NbEdges() const
 		{
@@ -68,22 +104,22 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		void RemoveFromEdges(const Standard_Integer theIndex)
-		{
-			auto iter = theEdges_.find(theIndex);
-			if (iter IS_EQUAL theEdges_.end())
-			{
-				FatalErrorIn("void Remove(const Standard_Integer theIndex)")
-					<< "the item is not in the tree: " << theIndex << endl
-					<< abort(FatalError);
-			}
+		Standard_Boolean IsManifold() const;
+		Standard_Boolean IsBoundary() const;
+		Standard_Boolean IsOrphan() const;
 
-			theEdges_.erase(iter);
-		}
+		std::vector<std::weak_ptr<edgeType>> RetrieveEdges() const;
+
+		void InsertToEdges(const Standard_Integer theIndex, const std::shared_ptr<edgeType>& theEdge);
+		void InsertToEdges(const Standard_Integer theIndex, std::shared_ptr<edgeType>&& theEdge);
+
+		void RemoveFromEdges(const Standard_Integer theIndex);
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(Point, Coord)
 	};
 }
+
+#include <Geo_GraphNodeI.hxx>
 
 #endif // !_Geo_GraphNode_Header

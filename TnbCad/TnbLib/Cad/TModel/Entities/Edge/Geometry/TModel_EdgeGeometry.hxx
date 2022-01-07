@@ -23,72 +23,45 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<TModel_Curve> theCurve_;
 		std::shared_ptr<TModel_ParaCurve> theParaCurve_;
-
-		mutable std::shared_ptr<Entity3d_Polygon> theMesh_;
-
-		Standard_Boolean theSense_;
 
 
 		//- private functions and operators
-
-		auto& ChangeMesh() const
-		{
-			return theMesh_;
-		}
 
 		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 	protected:
 
 
+		// default constructor [1/6/2022 Amir]
+
 		TModel_EdgeGeometry()
 		{}
 
-		TModel_EdgeGeometry
+		// constructors [1/6/2022 Amir]
+
+		explicit TModel_EdgeGeometry
 		(
-			const std::shared_ptr<TModel_Curve>& theCurve, 
-			const std::shared_ptr<TModel_ParaCurve>& thePara,
-			const Standard_Boolean theSense = Standard_True
+			const std::shared_ptr<TModel_ParaCurve>& thePara
 		)
-			: theCurve_(theCurve)
-			, theParaCurve_(thePara)
-			, theSense_(theSense)
+			: theParaCurve_(thePara)
 		{}
 
 
-		void SetGeometry(std::shared_ptr<TModel_Curve>&& theCurve)
-		{
-			theCurve_ = std::move(theCurve);
-		}
-
 	public:
 
-		auto Sense() const
-		{
-			return theSense_;
-		}
 
-		const auto& Curve() const
-		{
-			return theCurve_;
-		}
+		// public functions and operators [1/6/2022 Amir]
 
 		const auto& ParaCurve() const
 		{
 			return theParaCurve_;
 		}
 
-		const auto& Mesh() const
-		{
-			return theMesh_;
-		}
-
-		TnbCad_EXPORT void Discrete
+		/*TnbCad_EXPORT void Discrete
 		(
 			const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
-		) const;
+		) const;*/
 
 		//- Macros
 		

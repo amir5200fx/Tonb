@@ -53,7 +53,9 @@ namespace tnbLib
 
 	public:
 
-		TnbCad_EXPORT TModel_Curve
+		// constructor [1/5/2022 Amir]
+
+		TnbCad_EXPORT explicit TModel_Curve
 		(
 			const Handle(Geom_Curve) theGeometry
 		);
@@ -62,15 +64,12 @@ namespace tnbLib
 		//- public functions and operators
 
 		TnbCad_EXPORT Standard_Real FirstParameter() const;
-
 		TnbCad_EXPORT Standard_Real LastParameter() const;
 
 		TnbCad_EXPORT Pnt3d Value(const Standard_Real x) const;
-
 		TnbCad_EXPORT Pnt3d Value_normParam(const Standard_Real x) const;
 
 		Pnt3d FirstCoord() const;
-
 		Pnt3d LastCoord() const;
 
 		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;

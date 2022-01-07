@@ -61,9 +61,6 @@
     <Filter Include="TnbLib\Cad\TModel\Entities\ParaCurve">
       <UniqueIdentifier>{e558df64-5e2a-4b9e-b3c1-5e467380d204}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad\TModel\Entities\Ring">
-      <UniqueIdentifier>{20bfeea4-4a8f-432b-95ed-a4f39bff2b6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Cad\TModel\Entities\Singular">
       <UniqueIdentifier>{7e9acbce-a6a9-4fd2-b9e2-c73148bc2767}</UniqueIdentifier>
     </Filter>
@@ -334,6 +331,33 @@
     <Filter Include="TnbLib\Cad\ApproxSurfMetric\Info">
       <UniqueIdentifier>{ef39a352-3589-4f31-a6a0-e63aeee91038}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\MetricCalculator">
+      <UniqueIdentifier>{d7607325-d40c-4557-9a39-b57d2dd81756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\MetricCalculator\Std">
+      <UniqueIdentifier>{b97ece6e-01d3-4b1d-bcbb-29174e62b72a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\MetricCalculator\SizeFun">
+      <UniqueIdentifier>{d1fa088a-00ad-4e0d-9286-aeac3e8dacf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Edge\Singular">
+      <UniqueIdentifier>{f566fe85-f906-46eb-a373-688553bbe655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Edge\Generated">
+      <UniqueIdentifier>{46226401-b77a-4f69-89dc-6d484e5a4be6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Segment">
+      <UniqueIdentifier>{0c1cc636-d6f8-443f-8fa7-ea0b1d604601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Ring">
+      <UniqueIdentifier>{b837e476-8412-43c1-8dde-2b3b5148564f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Geometry">
+      <UniqueIdentifier>{a082b79a-8fef-4349-b70c-0ad896ce784b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Adaptor">
+      <UniqueIdentifier>{04a04d65-02c3-4cc6-ae7b-ff70b7b0a7fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -371,12 +395,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Geometry\TModel_EdgeGeometry.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Edge\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Entities\Singular\TModel_SingularEdge.hxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Singular</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Entities\Ring\TModel_Ring.hxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Ring</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Paired\TModel_Paired.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Paired</Filter>
@@ -660,6 +678,36 @@
     <ClInclude Include="TnbLib\Cad\ApproxMetric\Info\Cad_ApprxMetricInfo.hxx">
       <Filter>TnbLib\Cad\ApproxSurfMetric\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\MetricCalculator\Cad_MetricCalculator.hxx">
+      <Filter>TnbLib\Cad\MetricCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\MetricCalculator\Std\Cad_MetricCalculator_Std.hxx">
+      <Filter>TnbLib\Cad\MetricCalculator\Std</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\MetricCalculator\SizeFun\Cad_MetricCalculator_SizeFun.hxx">
+      <Filter>TnbLib\Cad\MetricCalculator\SizeFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Singular\TModel_SingularEdge.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Singular</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Generated\TModel_GeneratedEdge.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Geometry\TModel_GeneratedEdgeGeometry.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Ring\TModel_RingEdge.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Adaptor\TModel_GeneratedEdgeAdaptor.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Segment\TModel_SegmentEdge.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\TModel_Edges.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -682,12 +730,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Geometry\TModel_EdgeGeometry.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Edge\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\Singular\TModel_SingularEdge.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Singular</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\Ring\TModel_Ring.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Ring</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\TModel_Paired.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Paired</Filter>
@@ -715,9 +757,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\IO\Format\STEP\CadIO_STEP.cxx">
       <Filter>TnbLib\Cad\IO\Format\STEP</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpEdge\TModel_CmpEdge.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\CmpEdge</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Wire\TModel_Wire.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Wire</Filter>
@@ -869,14 +908,8 @@
     <ClCompile Include="TnbLib\Cad\TModel\Entities\CmpParaCurve\TModel_CmpParaCurveIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\CmpParaCurve</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\Ring\TModel_RingIO.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Ring</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Shell\TModel_ShellIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Shell</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\Singular\TModel_SingularEdgeIO.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Singular</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Plane\TModel_PlaneIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Plane</Filter>
@@ -1003,6 +1036,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\ApproxMetric\Info\Cad_ApprxMetricInfo.cxx">
       <Filter>TnbLib\Cad\ApproxSurfMetric\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\MetricCalculator\Std\Cad_MetricCalculator_Std.cxx">
+      <Filter>TnbLib\Cad\MetricCalculator\Std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\MetricCalculator\SizeFun\Cad_MetricCalculator_SizeFun.cxx">
+      <Filter>TnbLib\Cad\MetricCalculator\SizeFun</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Ring\TModel_RingEdgeIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Segment\TModel_SegmentEdgeIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Adaptor\TModel_GeneratedEdgeAdaptorIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Geometry\TModel_GeneratedEdgeGeometryIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Singular\TModel_SingularEdgeIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Singular</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,12 +5,12 @@
 #include <TModel_System.hxx>
 #include <TModel_Curve.hxx>
 #include <TModel_ParaCurve.hxx>
-#include <TModel_Edge.hxx>
+#include <TModel_Edges.hxx>
 #include <TModel_CmpEdge.hxx>
 #include <TModel_SingularEdge.hxx>
 #include <TModel_Surface.hxx>
 #include <TModel_Vertex.hxx>
-#include <TModel_Ring.hxx>
+//#include <TModel_Ring.hxx>
 #include <TModel_Paired.hxx>
 #include <TModel_Wire.hxx>
 #include <Cad_TModel.hxx>
@@ -86,7 +86,7 @@ tnbLib::Cad_Tools::HasTriangulation
 	return Standard_False;
 }
 
-Standard_Real 
+Standard_Real
 tnbLib::Cad_Tools::CalcPrecision(const TModel_Vertex & theVtx)
 {
 	if (theVtx.IsOrphan())
@@ -100,9 +100,11 @@ tnbLib::Cad_Tools::CalcPrecision(const TModel_Vertex & theVtx)
 		auto edge = x.second.lock();
 		Debug_Null_Pointer(edge);
 
-		if (edge->IsDegenerated())
+		if (NOT edge->IsDegenerated())
 		{
-			const auto& curve = edge->Curve();
+			auto g = std::dynamic_pointer_cast<TModel_GeneratedEdge>(edge);
+			Debug_Null_Pointer(g);
+			const auto& curve = g->Curve();
 			auto p0 = curve->FirstCoord();
 			auto p1 = curve->LastCoord();
 
@@ -767,7 +769,7 @@ tnbLib::Cad_Tools::GetEdge
 		}
 
 		auto curveOnSurface = std::make_shared<TModel_Curve>(Curve);
-		newEdge = std::make_shared<TModel_Edge>(curveOnSurface, curveOnPlane);
+		newEdge = std::make_shared<TModel_SegmentEdge>(curveOnSurface, curveOnPlane);
 	}
 	else
 	{
@@ -810,7 +812,7 @@ tnbLib::Cad_Tools::GetSurface
 	auto cmpEdge = std::make_shared<TModel_CmpEdge>();
 	Debug_Null_Pointer(cmpEdge);
 
-	auto& outter_edges = cmpEdge->ChangeEdges();
+	auto& outter_edges = cmpEdge->EdgesRef();
 
 	const auto Tol = sysLib::tmodel_fix_wire_info->Tolerance();
 	Standard_Integer K = 0;
@@ -871,7 +873,7 @@ tnbLib::Cad_Tools::GetSurface
 		auto cmpEdge = std::make_shared<TModel_CmpEdge>();
 		Debug_Null_Pointer(cmpEdge);
 
-		auto& Inner_edges = cmpEdge->ChangeEdges();
+		auto& Inner_edges = cmpEdge->EdgesRef();
 
 		ShapeFix_Wire SFWF(wire, forwardFace, Tol);
 
@@ -983,11 +985,15 @@ namespace tnbLib
 			const std::shared_ptr<TModel_Edge>& theEdge1
 		)
 		{
-			Debug_Null_Pointer(theEdge0->Curve());
-			Debug_Null_Pointer(theEdge1->Curve());
+			auto g0 = std::dynamic_pointer_cast<TModel_GeneratedEdge>(theEdge0);
+			auto g1 = std::dynamic_pointer_cast<TModel_GeneratedEdge>(theEdge1);
+			Debug_Null_Pointer(g0);
+			Debug_Null_Pointer(g1);
+			Debug_Null_Pointer(g0->Curve());
+			Debug_Null_Pointer(g1->Curve());
 
-			const auto& geometry0 = *theEdge0->Curve();
-			const auto& geometry1 = *theEdge1->Curve();
+			const auto& geometry0 = *g0->Curve();
+			const auto& geometry1 = *g1->Curve();
 
 			return SquareDistance(geometry0.Value_normParam(0.5), geometry1.Value_normParam(0.5));
 		}
@@ -1008,9 +1014,11 @@ namespace tnbLib
 			for (const auto& x : Edges)
 			{
 				Debug_Null_Pointer(x);
-				Debug_Null_Pointer(x->Curve());
+				auto g = std::dynamic_pointer_cast<TModel_GeneratedEdge>(x);
+				Debug_Null_Pointer(g);
+				Debug_Null_Pointer(g->Curve());
 
-				const auto& curve = *x->Curve();
+				const auto& curve = *g->Curve();
 
 				Points[IP] = curve.FirstCoord();
 				IP++;
@@ -1031,123 +1039,124 @@ namespace tnbLib
 			const std::vector<std::shared_ptr<TModel_Edge>>& theEdges
 		)
 		{
-			if (theEdges.size() < 2)
-			{
-				FatalErrorIn("void Pairing(const edgeList& theEdges)")
-					<< "Invalid Solid" << endl
-					<< abort(FatalError);
-			}
+			NotImplemented;
+			//if (theEdges.size() < 2)
+			//{
+			//	FatalErrorIn("void Pairing(const edgeList& theEdges)")
+			//		<< "Invalid Solid" << endl
+			//		<< abort(FatalError);
+			//}
 
-			Adt_AvlTree<std::shared_ptr<TModel_Edge>> tree;
-			tree.SetComparableFunction(&TModel_Edge::IsLess);
+			//Adt_AvlTree<std::shared_ptr<TModel_Edge>> tree;
+			//tree.SetComparableFunction(&TModel_Edge::IsLess);
 
-			for (const auto& x : theEdges)
-				tree.Insert(x);
+			//for (const auto& x : theEdges)
+			//	tree.Insert(x);
 
-			if (tree.IsEmpty())
-			{
-				FatalErrorIn("void Pairing(const edgeList& theEdges)")
-					<< "Invalid Solid" << endl
-					<< abort(FatalError);
-			}
+			//if (tree.IsEmpty())
+			//{
+			//	FatalErrorIn("void Pairing(const edgeList& theEdges)")
+			//		<< "Invalid Solid" << endl
+			//		<< abort(FatalError);
+			//}
 
-			std::shared_ptr<TModel_Edge> edge;
-			tree.Root(edge);
-			tree.Remove(edge);
+			//std::shared_ptr<TModel_Edge> edge;
+			//tree.Root(edge);
+			//tree.Remove(edge);
 
-			while (NOT tree.IsEmpty())
-			{
-				const auto& vtx0 = edge->Vtx0();
-				const auto& vtx1 = edge->Vtx1();
+			//while (NOT tree.IsEmpty())
+			//{
+			//	const auto& vtx0 = edge->Vtx0();
+			//	const auto& vtx1 = edge->Vtx1();
 
-				std::shared_ptr<TModel_Vertex> vtx;
-				if (vtx0->NbEdges() <= vtx1->NbEdges())
-					vtx = vtx0;
-				else
-					vtx = vtx1;
+			//	std::shared_ptr<TModel_Vertex> vtx;
+			//	if (vtx0->NbEdges() <= vtx1->NbEdges())
+			//		vtx = vtx0;
+			//	else
+			//		vtx = vtx1;
 
-				const auto& compareList = vtx->Edges();
-				auto v0 = vtx0->Index();
-				auto v1 = vtx1->Index();
+			//	const auto& compareList = vtx->Edges();
+			//	auto v0 = vtx0->Index();
+			//	auto v1 = vtx1->Index();
 
-				if (edge->IsRing())
-				{
-					auto ring = std::dynamic_pointer_cast<TModel_Ring>(edge);
-					Debug_Null_Pointer(ring);
+			//	if (edge->IsRing())
+			//	{
+			//		auto ring = std::dynamic_pointer_cast<TModel_RingEdge>(edge);
+			//		Debug_Null_Pointer(ring);
 
-					auto tol2 = ring->Presicion()*ring->Presicion();
+			//		auto tol2 = ring->Presicion()*ring->Presicion();
 
-					for (const auto& w_compare : compareList)
-					{
-						auto compare = w_compare.second.lock();
-						Debug_Null_Pointer(compare);
+			//		for (const auto& w_compare : compareList)
+			//		{
+			//			auto compare = w_compare.second.lock();
+			//			Debug_Null_Pointer(compare);
 
-						if (compare IS_EQUAL edge) continue;
+			//			if (compare IS_EQUAL edge) continue;
 
-						auto compareRing = std::dynamic_pointer_cast<TModel_Ring>(compare);
-						if (compareRing)
-						{
-							if (squareMaxDistance_1(ring, compareRing) <= tol2)
-							{
-								edge->SetPairedEdge(compare);
-								compare->SetPairedEdge(edge);
+			//			auto compareRing = std::dynamic_pointer_cast<TModel_RingEdge>(compare);
+			//			if (compareRing)
+			//			{
+			//				if (squareMaxDistance_1(ring, compareRing) <= tol2)
+			//				{
+			//					edge->SetPairedEdge(compare);
+			//					compare->SetPairedEdge(edge);
 
-								tree.Remove(compare);
-							}
-						}
-					}
-				}
-				else
-				{
-					std::vector<std::shared_ptr<TModel_Edge>> paired;
+			//					tree.Remove(compare);
+			//				}
+			//			}
+			//		}
+			//	}
+			//	else
+			//	{
+			//		std::vector<std::shared_ptr<TModel_Edge>> paired;
 
-					Debug_Null_Pointer(edge->Curve());
-					auto tol2 = edge->Presicion()*edge->Presicion();
+			//		Debug_Null_Pointer(edge->Curve());
+			//		auto tol2 = edge->Presicion()*edge->Presicion();
 
-					for (const auto& w_compare : compareList)
-					{
-						auto compare = w_compare.second.lock();
-						Debug_Null_Pointer(compare);
+			//		for (const auto& w_compare : compareList)
+			//		{
+			//			auto compare = w_compare.second.lock();
+			//			Debug_Null_Pointer(compare);
 
-						if (compare IS_EQUAL edge) continue;
+			//			if (compare IS_EQUAL edge) continue;
 
-						if (Geo_Tools::IsPairedTwoSegments(v0, v1, compare->Vtx0()->Index(), compare->Vtx1()->Index()))
-						{
-							if (squareMaxDistance_1(edge, compare) <= tol2)
-							{
-								paired.push_back(compare);
-							}
+			//			if (Geo_Tools::IsPairedTwoSegments(v0, v1, compare->Vtx0()->Index(), compare->Vtx1()->Index()))
+			//			{
+			//				if (squareMaxDistance_1(edge, compare) <= tol2)
+			//				{
+			//					paired.push_back(compare);
+			//				}
 
-							//paired.push_back(compare);
-						}
-					}
+			//				//paired.push_back(compare);
+			//			}
+			//		}
 
-					/*if (paired.empty())
-				{
-					cout << "nothing found!" << std::endl;
-				}*/
-					if (paired.size() > 1)
-					{
-						if (edge->PairedEdge().lock())
-						{
-							FatalErrorIn("void Pairing(const edgeList& theEdges)")
-								<< "the solid is not a manifold type"
-								<< abort(FatalError);
-						}
-					}
+			//		/*if (paired.empty())
+			//	{
+			//		cout << "nothing found!" << std::endl;
+			//	}*/
+			//		if (paired.size() > 1)
+			//		{
+			//			if (edge->PairedEdge().lock())
+			//			{
+			//				FatalErrorIn("void Pairing(const edgeList& theEdges)")
+			//					<< "the solid is not a manifold type"
+			//					<< abort(FatalError);
+			//			}
+			//		}
 
-					if (paired.size() IS_EQUAL 1)
-					{
-						edge->SetPairedEdge(paired[0]);
-						paired[0]->SetPairedEdge(edge);
-					}
-				}
+			//		if (paired.size() IS_EQUAL 1)
+			//		{
+			//			edge->SetPairedEdge(paired[0]);
+			//			paired[0]->SetPairedEdge(edge);
+			//		}
+			//	}
 
-				if (tree.IsEmpty()) break;
+			//	if (tree.IsEmpty()) break;
 
-				tree.Root(edge);
-				tree.Remove(edge);
-			}
+			//	tree.Root(edge);
+			//	tree.Remove(edge);
+			//}
 		}
 
 		static void Assembly
@@ -1178,21 +1187,28 @@ namespace tnbLib
 
 				Debug_Null_Pointer(theEdges[Index]);
 
-				theEdges[Index]->Vtx0() = vtx0;
-				theEdges[Index]->Vtx1() = vtx1;
-
-				theEdges[Index]->SetIndex(Index + 1);
-
 				if (v0 IS_EQUAL v1)
 				{
-					//! For ring configuration
+					auto g = std::dynamic_pointer_cast<TModel_RingEdge>(theEdges[Index]);
+					Debug_Null_Pointer(g);
+
+					g->Vtx() = vtx0;
+
 					vtx0->ImportToEdges(theEdges[Index]->Index(), theEdges[Index]);
 				}
 				else
 				{
+					auto g = std::dynamic_pointer_cast<TModel_SegmentEdge>(theEdges[Index]);
+					Debug_Null_Pointer(g);
+
+					g->Vtx0() = vtx0;
+					g->Vtx1() = vtx1;
+
 					vtx0->ImportToEdges(theEdges[Index]->Index(), theEdges[Index]);
 					vtx1->ImportToEdges(theEdges[Index]->Index(), theEdges[Index]);
-				}
+				}				
+
+				theEdges[Index]->SetIndex(Index + 1);
 			}
 
 			Pairing(theEdges);
@@ -1258,8 +1274,12 @@ namespace tnbLib
 
 			while (NOT tree.IsEmpty())
 			{
-				auto w_paired = edge->PairedEdge();
-				auto paired = w_paired.lock();
+				auto generated = std::dynamic_pointer_cast<TModel_GeneratedEdge>(edge);
+				Debug_Null_Pointer(generated);
+
+				auto w_paired = generated->PairedEdge();
+				auto paired = std::dynamic_pointer_cast<TModel_GeneratedEdge>(w_paired.lock());
+				Debug_Null_Pointer(paired);
 
 				if (paired)
 				{
@@ -1269,7 +1289,7 @@ namespace tnbLib
 				auto pairedOnSolid = std::make_shared<TModel_Paired>(++k, edge, paired);
 				QPaired.push_back(pairedOnSolid);
 
-				edge->SetPaired(pairedOnSolid);
+				generated->SetPaired(pairedOnSolid);
 				if (paired) paired->SetPaired(pairedOnSolid);
 
 				if (tree.IsEmpty()) break;
@@ -1299,8 +1319,10 @@ namespace tnbLib
 
 			std::shared_ptr<TModel_Edge> null = nullptr;
 
-			for (const auto& x : edges)
+			for (const auto& e : edges)
 			{
+				Debug_Null_Pointer(e);
+				auto x = std::dynamic_pointer_cast<TModel_GeneratedEdge>(e);
 				Debug_Null_Pointer(x);
 
 				pairedList.push_back(x->PairedEdge().lock());
@@ -1311,7 +1333,10 @@ namespace tnbLib
 			{
 				if (x)
 				{
-					auto paired = x->PairedEdge().lock();
+					auto g = std::dynamic_pointer_cast<TModel_GeneratedEdge>(x);
+					Debug_Null_Pointer(g);
+
+					auto paired = std::dynamic_pointer_cast<TModel_GeneratedEdge>(g->PairedEdge().lock());
 					if (paired)
 					{
 						Debug_Null_Pointer(paired->Surface().lock());
@@ -1348,8 +1373,8 @@ namespace tnbLib
 			{
 				Debug_Null_Pointer(paired);
 
-				auto edge0 = paired->Edge0();
-				auto edge1 = paired->Edge1();
+				auto edge0 = std::dynamic_pointer_cast<TModel_GeneratedEdge>(paired->Edge0());
+				auto edge1 = std::dynamic_pointer_cast<TModel_GeneratedEdge>(paired->Edge1());
 
 				if (NOT edge0)
 				{
@@ -1681,6 +1706,63 @@ tnbLib::Cad_Tools::CalcMetric
 	Standard_Real C = D1V.Dot(D1V);
 
 	Entity2d_Metric1 m(A, B, C);
+	return std::move(m);
+}
+
+tnbLib::Entity2d_Metric1
+tnbLib::Cad_Tools::CalcMetric
+(
+	const Pnt2d& thePnt,
+	const Handle(Geom_Surface)& theSurface,
+	Standard_Real(*sizeFun)(const Pnt3d&)
+)
+{
+	Debug_Null_Pointer(theSurface);
+
+	gp_Vec D1U, D1V;
+	gp_Pnt Pt;
+
+	theSurface->D1(thePnt.X(), thePnt.Y(), Pt, D1U, D1V);
+
+	Standard_Real A = D1U.Dot(D1U);
+	Standard_Real B = D1U.Dot(D1V);
+	Standard_Real C = D1V.Dot(D1V);
+
+	const auto h = sizeFun(Pt);
+	Debug_If_Condition(h <= gp::Resolution());
+
+	const auto invH = 1.0 / (h * h);
+
+	Entity2d_Metric1 m(invH * A, invH * B, invH * C);
+	return std::move(m);
+}
+
+tnbLib::Entity2d_Metric1
+tnbLib::Cad_Tools::CalcMetric
+(
+	const Standard_Real theX,
+	const Standard_Real theY,
+	const Handle(Geom_Surface)& theSurface,
+	Standard_Real(*sizeFun)(const Pnt3d&)
+)
+{
+	Debug_Null_Pointer(theSurface);
+
+	gp_Vec D1U, D1V;
+	gp_Pnt Pt;
+
+	theSurface->D1(theX, theY, Pt, D1U, D1V);
+
+	Standard_Real A = D1U.Dot(D1U);
+	Standard_Real B = D1U.Dot(D1V);
+	Standard_Real C = D1V.Dot(D1V);
+
+	const auto h = sizeFun(Pt);
+	Debug_If_Condition(h <= gp::Resolution());
+
+	const auto invH = 1.0 / (h * h);
+
+	Entity2d_Metric1 m(invH * A, invH * B, invH * C);
 	return std::move(m);
 }
 

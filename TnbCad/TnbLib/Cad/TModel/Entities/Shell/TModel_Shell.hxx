@@ -52,8 +52,13 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [1/5/2022 Amir]
+
 		TModel_Shell()
 		{}
+
+
+		// constructors [1/5/2022 Amir]
 
 		TModel_Shell
 		(
@@ -69,6 +74,8 @@ namespace tnbLib
 		)
 			: TModel_Entity(theIndex, theName)
 		{}
+
+		// public functions and operators [1/5/2022 Amir]
 
 		auto NbSurfaces() const
 		{

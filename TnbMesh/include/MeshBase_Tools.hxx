@@ -5,8 +5,12 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Mesh_Module.hxx>
+#include <Mesh2d_ElementFwd.hxx>
+#include <Mesh2d_EdgeFwd.hxx>
+#include <Mesh2d_NodeFwd.hxx>
 #include <GeoMesh2d_BackgroundFwd.hxx>
 #include <Global_Serialization.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -35,7 +39,7 @@ namespace tnbLib
 		static TnbMesh_EXPORT void SetSourcesToMesh
 		(
 			const std::vector<std::pair<Pnt2d, Standard_Real>>& theSources,
-			const Standard_Real theBaseSize, 
+			const Standard_Real theBaseSize,
 			GeoMesh2d_Background& theMesh
 		);
 
@@ -50,6 +54,26 @@ namespace tnbLib
 		static TnbMesh_EXPORT Standard_Real LastParameter(const std::shared_ptr<Pln_Curve>& theCurve);
 		static TnbMesh_EXPORT Standard_Real LastParameter(const std::shared_ptr<TModel_ParaCurve>& theCurve);
 		static TnbMesh_EXPORT Standard_Real LastParameter(const std::shared_ptr<GModel_ParaCurve>& theCurve);
+
+		static TnbMesh_EXPORT Standard_Boolean IsSense(const std::shared_ptr<Mesh2d_Element>&, const std::shared_ptr<Mesh2d_Edge>&);
+		static TnbMesh_EXPORT Standard_Integer NodePos(const std::shared_ptr<Mesh2d_Element>&, const std::shared_ptr<Mesh2d_Node>&);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Node>> MakeNodes(const std::vector<Pnt2d>&);
+
+		// Warning! - no edge has been created by calling this function [1/1/2022 Amir]
+		//          - no connection is made between elements and nodes
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Element>> MakeElements(const Entity2d_Triangulation&);
+
+		// creating edges for the elements [1/1/2022 Amir]
+		// note: nodes and edges are connected with creating edges
+		static TnbMesh_EXPORT void MakeEdges(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
+
+		static TnbMesh_EXPORT void ConnectNodesAndElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
+		static TnbMesh_EXPORT void ConnectNodesAndEdges(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
+		static TnbMesh_EXPORT void ConnectEdgesAndElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
+		static TnbMesh_EXPORT void ConnectElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Element>> MakeMesh(const Entity2d_Triangulation&);
 
 		template<class T>
 		static void Save(const std::map<Standard_Integer, std::weak_ptr<T>>& theMap, TNB_oARCH_TYPE& ar)

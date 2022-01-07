@@ -570,6 +570,26 @@ tnbLib::Geo_Tools::ProjectToPlane
 	return std::move(t);
 }
 
+tnbLib::Entity_Triangle<const tnbLib::Pnt2d&> 
+tnbLib::Geo_Tools::GetTriangle
+(
+	const Standard_Integer theIndex,
+	const Entity2d_Triangulation & theTriangulation
+)
+{
+	const auto& indices = theTriangulation.Connectivity();
+	const auto& points = theTriangulation.Points();
+
+	const auto& t = indices[theIndex];
+
+	const auto v0 = Index_Of(t.Value(0));
+	const auto v1 = Index_Of(t.Value(1));
+	const auto v2 = Index_Of(t.Value(2));
+
+	Entity_Triangle<const Pnt2d&> tri(points[v0], points[v1], points[v2]);
+	return std::move(tri);
+}
+
 size_t 
 tnbLib::Geo_Tools::FindSpan
 (

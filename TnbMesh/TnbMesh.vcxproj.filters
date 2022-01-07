@@ -1144,6 +1144,75 @@
     <Filter Include="TnbLib\Base\Geom\ApproxSurfMetric">
       <UniqueIdentifier>{c3106a6a-388d-405d-b9c4-73da4372b0c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad">
+      <UniqueIdentifier>{26efce75-c6dd-4628-a87e-5d44c2c377da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair">
+      <UniqueIdentifier>{0001bde1-d732-42c2-b2ab-c322bae7530b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\ColorMetric">
+      <UniqueIdentifier>{5104759a-3316-450a-8d0b-6d4cb46df428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity">
+      <UniqueIdentifier>{12a9a9f7-5384-44e4-b9da-bfd179859946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve">
+      <UniqueIdentifier>{ba8449da-1e02-4d44-92b4-a92b5eab5cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\Line">
+      <UniqueIdentifier>{603535fe-046e-40c7-a88c-bfb91b3e4667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\Pole">
+      <UniqueIdentifier>{dd33098d-857e-492d-86cf-938cc0ad2677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone">
+      <UniqueIdentifier>{32c2b404-ae2e-4f09-b607-e0c37d34ba60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line">
+      <UniqueIdentifier>{33d2d8ab-9ec4-4fe6-92a9-4a073f33c815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line\Corner">
+      <UniqueIdentifier>{da0e4da8-bf6b-4488-b812-55db53d8a9ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line\Dangle">
+      <UniqueIdentifier>{51e73906-47e6-43bb-91f7-9a38b78782eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line\Loop">
+      <UniqueIdentifier>{068a9cb8-fb81-4e25-b941-15e478c95ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line\WholeSide">
+      <UniqueIdentifier>{ef8235f9-72ed-4de8-927c-46f6329e0d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line\TwoSide">
+      <UniqueIdentifier>{39134313-7376-47ff-a6fd-cd80b4829431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Pole">
+      <UniqueIdentifier>{aac8465a-cc66-4b81-9186-bf0f56704d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Pole\Corner">
+      <UniqueIdentifier>{6052bdf4-aa80-4e7e-befa-9f45336b5860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Pole\Loop">
+      <UniqueIdentifier>{f3b33f55-9dee-4881-b614-017141d594d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Pole\WholeSide">
+      <UniqueIdentifier>{4a8df907-2b7e-4a88-afba-ff52fcc18074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Pole\PartialSide">
+      <UniqueIdentifier>{a142a285-aaaf-4499-bc21-70a41727e077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Traits">
+      <UniqueIdentifier>{da3c03f5-4e56-44d8-9fff-2fcf61825ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Type">
+      <UniqueIdentifier>{368dd1d8-4211-4ad6-ae48-aee0d8080827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Traits">
+      <UniqueIdentifier>{f077758e-ed62-439d-a463-43daf9b2e404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\SingularityHorizons">
+      <UniqueIdentifier>{7c61141e-fa7a-48d1-8b30-233b6496a4ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -1886,9 +1955,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\Core\Base\Aft_Core_BaseI.hxx">
       <Filter>TnbLib\Aft\Core\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Base\Data\Mesh_RegisterEntityM.hxx">
-      <Filter>TnbLib\Base\Data</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Base\Data\Mesh_EntityCounterM.hxx">
       <Filter>TnbLib\Base\Data</Filter>
@@ -2694,6 +2760,15 @@
     <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Surface\Exact\GeoMetricFun2d_ExactSurface.hxx">
       <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Exact</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\ColorMetric\Cad_ColorApprxMetric.hxx">
+      <Filter>TnbLib\Cad\ColorMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\SingularityHorizons\Cad_SingularityHorizons.hxx">
+      <Filter>TnbLib\Cad\SingularityHorizons</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Data\Mesh_RegisterEntityM.hxx">
+      <Filter>TnbLib\Base\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -3361,6 +3436,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Exact\GeoMetricFun2d_ExactSurfaceIO.cxx">
       <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Exact</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\ColorMetric\Cad_ColorApprxMetric.cxx">
+      <Filter>TnbLib\Cad\ColorMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsConversion.cxx">
+      <Filter>TnbLib\Base\Tools\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\SingularityHorizons\Cad_SingularityHorizons.cxx">
+      <Filter>TnbLib\Cad\SingularityHorizons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

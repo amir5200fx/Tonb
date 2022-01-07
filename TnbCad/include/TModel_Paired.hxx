@@ -30,10 +30,15 @@ namespace tnbLib
 
 	protected:
 
+		// default constructor [1/5/2022 Amir]
+
 		TModel_Paired()
 		{}
 
 	public:
+
+
+		// constructors [1/5/2022 Amir]
 
 		TnbCad_EXPORT TModel_Paired
 		(
@@ -55,6 +60,9 @@ namespace tnbLib
 			const std::shared_ptr<TModel_Edge>& theEdge0,
 			const std::shared_ptr<TModel_Edge>& theEdge1
 		);
+
+
+		// public functions and operators [1/5/2022 Amir]
 
 		TnbCad_EXPORT Standard_Boolean IsFree() const;
 

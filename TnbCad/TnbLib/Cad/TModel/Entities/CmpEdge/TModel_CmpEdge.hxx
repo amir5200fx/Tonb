@@ -19,15 +19,13 @@ namespace tnbLib
 		: public TModel_Entity
 	{
 
-		typedef std::vector<std::shared_ptr<TModel_Edge>> edgeList;
-
 		friend class TModel_Edge;
 		friend class TModel_Wire;
 		friend class Cad_Tools;
 
 		/*Private Data*/
 
-		edgeList theEdges_;
+		std::vector<std::shared_ptr<TModel_Edge>> theEdges_;
 
 
 		//- private functions and operators
@@ -41,15 +39,19 @@ namespace tnbLib
 			theEdges_.push_back(theEdge);
 		}
 
-		edgeList& ChangeEdges()
+		auto& EdgesRef()
 		{
 			return theEdges_;
 		}
 
 	public:
 
+		// default constructor [1/6/2022 Amir]
+
 		TModel_CmpEdge()
 		{}
+
+		// constructors [1/6/2022 Amir]
 
 		TModel_CmpEdge
 		(
@@ -66,6 +68,8 @@ namespace tnbLib
 			: TModel_Entity(theIndex, theName)
 		{}
 
+
+		// public functions and operators [1/6/2022 Amir]
 
 		auto NbEdges() const
 		{

@@ -6,8 +6,6 @@
 #include <Global_Serialization.hxx>
 #include <Cad_Module.hxx>
 
-#include <TopoDS_Edge.hxx>
-
 #include <memory>
 
 namespace tnbLib
@@ -25,9 +23,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::weak_ptr<TModel_Surface> theSurface_;
-		std::weak_ptr<TModel_Paired> thePaired_;
 		std::weak_ptr<TModel_Wire> theWire_;
-		std::weak_ptr<TModel_Edge> thePairedEdge_;
 
 		//TopoDS_Edge theTEdge_;
 
@@ -38,18 +34,19 @@ namespace tnbLib
 
 	protected:
 
+		// default constructor [1/5/2022 Amir]
+
 		TModel_EdgeAdaptor()
 		{}
+
+		// constructors [1/5/2022 Amir]
 
 	public:
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(std::weak_ptr<TModel_Surface>, Surface)
-			GLOBAL_ACCESS_SINGLE(std::weak_ptr<TModel_Paired>, Paired)
-			GLOBAL_ACCESS_SINGLE(std::weak_ptr<TModel_Edge>, PairedEdge)
 			GLOBAL_ACCESS_SINGLE(std::weak_ptr<TModel_Wire>, Wire)
 
-			//GLOBAL_ACCESS_PRIM_SINGLE(TopoDS_Edge, TEdge)
 	};
 }
 

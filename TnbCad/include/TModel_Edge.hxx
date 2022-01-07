@@ -27,9 +27,6 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<TModel_Vertex> theVtx0_;
-		std::shared_ptr<TModel_Vertex> theVtx1_;
-
 
 		//- private functions and operators
 
@@ -39,69 +36,41 @@ namespace tnbLib
 
 	protected:
 
+		// default constructor [1/6/2022 Amir]
+
 		TModel_Edge()
+		{}
+
+		// constructors [1/5/2022 Amir]
+
+
+		explicit TModel_Edge
+		(
+			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
+		)
+			: TModel_EdgeGeometry(theParaCurve)
+		{}
+
+		TModel_Edge
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
+		)
+			: TModel_Entity(theIndex, theName)
+			, TModel_EdgeGeometry(theParaCurve)
 		{}
 
 	public:
 
-		TnbCad_EXPORT TModel_Edge
-		(
-			const std::shared_ptr<TModel_Vertex>& theVtx0,
-			const std::shared_ptr<TModel_Vertex>& theVtx1, 
-			const std::shared_ptr<TModel_Curve>& theCurve, 
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve,
-			const Standard_Boolean theSense = Standard_True
-		);
-
-		TnbCad_EXPORT TModel_Edge
-		(
-			const std::shared_ptr<TModel_Curve>& theCurve,
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve,
-			const Standard_Boolean theSense = Standard_True
-		);
-
-		TnbCad_EXPORT TModel_Edge
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<TModel_Vertex>& theVtx0,
-			const std::shared_ptr<TModel_Vertex>& theVtx1,
-			const std::shared_ptr<TModel_Curve>& theCurve,
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve,
-			const Standard_Boolean theSense = Standard_True
-		);
-
-		TnbCad_EXPORT TModel_Edge
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<TModel_Curve>& theCurve,
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve,
-			const Standard_Boolean theSense = Standard_True
-		);
-
-		TnbCad_EXPORT TModel_Edge
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const std::shared_ptr<TModel_Vertex>& theVtx0,
-			const std::shared_ptr<TModel_Vertex>& theVtx1,
-			const std::shared_ptr<TModel_Curve>& theCurve,
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve,
-			const Standard_Boolean theSense = Standard_True
-		);
-
-		TnbCad_EXPORT TModel_Edge
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const std::shared_ptr<TModel_Curve>& theCurve,
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve,
-			const Standard_Boolean theSense = Standard_True
-		);
-
-
 		//- virtual functions and operators
 
 		virtual Standard_Boolean IsDegenerated() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsSegment() const
 		{
 			return Standard_False;
 		}
@@ -128,12 +97,9 @@ namespace tnbLib
 		}
 
 		//- Macros
-		GLOBAL_ACCESS_SINGLE(std::shared_ptr<TModel_Vertex>, Vtx0)
-			GLOBAL_ACCESS_SINGLE(std::shared_ptr<TModel_Vertex>, Vtx1)
 	};
 }
 
-
-BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Edge);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::TModel_Edge);
 
 #endif // !_TModel_Edge_Header

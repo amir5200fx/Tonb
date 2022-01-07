@@ -19,15 +19,10 @@ namespace tnbLib
 	class TModel_VertexAdaptor
 	{
 
-		typedef std::map<Standard_Integer, std::weak_ptr<TModel_Edge>>
-			edgeRegister;
-		typedef std::map<Standard_Integer, std::weak_ptr<TModel_Surface>>
-			faceRegister;
-
 		/*Private Data*/
 
-		edgeRegister theEdges_;
-		faceRegister theFaces_;
+		std::map<Standard_Integer, std::weak_ptr<TModel_Edge>> theEdges_;
+		std::map<Standard_Integer, std::weak_ptr<TModel_Surface>> theFaces_;
 
 
 		//- private functions and operators
@@ -41,7 +36,12 @@ namespace tnbLib
 		TModel_VertexAdaptor()
 		{}
 
+
+		// constructors [1/6/2022 Amir]
+
 	public:
+
+		// public functions and operators [1/6/2022 Amir]
 
 		auto NbEdges() const
 		{
@@ -82,7 +82,6 @@ namespace tnbLib
 		);
 
 		TnbCad_EXPORT void RemoveFromEdges(const Standard_Integer theIndex);
-
 		TnbCad_EXPORT void RemoveFromFaces(const Standard_Integer theIndex);
 	};
 }

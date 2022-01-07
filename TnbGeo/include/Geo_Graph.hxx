@@ -38,8 +38,14 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [1/5/2022 Amir]
+
 		Geo_Graph()
 		{}
+
+
+		// constructors [1/5/2022 Amir]
 
 		Geo_Graph
 		(
@@ -49,6 +55,9 @@ namespace tnbLib
 			: Global_Indexed(theIndex)
 			, Global_Named(theName)
 		{}
+
+
+		// public functions and operators [1/5/2022 Amir]
 
 		Standard_Integer NbEdges() const
 		{
@@ -73,6 +82,9 @@ namespace tnbLib
 			return theEdges_;
 		}
 
+		void Insert(const Standard_Integer theIndex, const std::shared_ptr<EdgeType>&);
+		void Insert(const Standard_Integer theIndex, std::shared_ptr<EdgeType>&&);
+
 		void Remove(const Standard_Integer theIndex)
 		{
 			auto iter = theEdges_.find(theIndex);
@@ -83,7 +95,7 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 
-			nodeType::deAttach(theIndex);
+			edgeType::deAttach(theIndex);
 
 			theEdges_.erase(iter);
 		}

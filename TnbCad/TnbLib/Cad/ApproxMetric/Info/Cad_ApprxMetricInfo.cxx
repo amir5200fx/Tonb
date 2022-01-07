@@ -14,7 +14,7 @@ const std::shared_ptr<tnbLib::Geo2d_SamplePoints> tnbLib::Cad_ApprxMetricInfo::D
 std::make_shared<tnbLib::Geo2d_SamplePoints_5Pts>();
 
 const std::shared_ptr<tnbLib::Cad_ApprxMetricCriterion> tnbLib::Cad_ApprxMetricInfo::DEFAULT_CRITERION =
-std::make_shared<tnbLib::Cad_ApprxMetricCriterion_MinMax>();
+std::make_shared<tnbLib::cadLib::ApprxMetricCriterion_MinMax>();
 
 tnbLib::Cad_ApprxMetricInfo::Cad_ApprxMetricInfo()
 	: theMinLevel_(DEFAULT_MIN_LEVEL)

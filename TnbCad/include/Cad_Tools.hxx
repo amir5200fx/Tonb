@@ -273,6 +273,23 @@ namespace tnbLib
 				const Handle(Geom_Surface)&
 			);
 
+		static TnbCad_EXPORT Entity2d_Metric1
+			CalcMetric
+			(
+				const Pnt2d& thePnt,
+				const Handle(Geom_Surface)&,
+				Standard_Real(*sizeFun)(const Pnt3d&)
+			);
+
+		static TnbCad_EXPORT Entity2d_Metric1
+			CalcMetric
+			(
+				const Standard_Real theX,
+				const Standard_Real theY,
+				const Handle(Geom_Surface)&,
+				Standard_Real(*sizeFun)(const Pnt3d&)
+			);
+
 		static TnbCad_EXPORT void SetPrecision(const std::shared_ptr<Cad_TModel>& theSolid);
 
 		static TnbCad_EXPORT void ExportToIGES

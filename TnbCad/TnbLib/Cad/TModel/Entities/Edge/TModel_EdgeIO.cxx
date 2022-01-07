@@ -12,9 +12,6 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::TModel_Edge)
 	ar & boost::serialization::base_object<TModel_EdgeAdaptor>(*this);
 	ar & boost::serialization::base_object<TModel_EdgeGeometry>(*this);
 	ar & boost::serialization::base_object<Cad_EntityPrecision>(*this);
-
-	ar & theVtx0_;
-	ar & theVtx1_;
 }
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::TModel_Edge)
@@ -23,9 +20,4 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::TModel_Edge)
 	ar & boost::serialization::base_object<TModel_EdgeAdaptor>(*this);
 	ar & boost::serialization::base_object<TModel_EdgeGeometry>(*this);
 	ar & boost::serialization::base_object<Cad_EntityPrecision>(*this);
-
-	ar & theVtx0_;
-	ar & theVtx1_;
 }
-
-BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::TModel_Edge);

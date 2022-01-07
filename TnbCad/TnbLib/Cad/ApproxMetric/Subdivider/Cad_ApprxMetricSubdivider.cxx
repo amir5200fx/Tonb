@@ -10,7 +10,7 @@
 #include <Geom_Surface.hxx>
 
 const std::shared_ptr<tnbLib::Cad_ApprxMetricCriterion> tnbLib::Cad_ApprxMetricSubdivider::DEFAULT_CRITERION =
-std::make_shared<tnbLib::Cad_ApprxMetricCriterion_MinMax>();
+std::make_shared<tnbLib::cadLib::ApprxMetricCriterion_MinMax>();
 
 const std::shared_ptr<tnbLib::Geo2d_SamplePoints> tnbLib::Cad_ApprxMetricSubdivider::DEFAULT_SAMPLES =
 std::make_shared<tnbLib::Geo2d_SamplePoints_5Pts>();

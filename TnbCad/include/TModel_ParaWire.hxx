@@ -39,7 +39,7 @@ namespace tnbLib
 
 		//- constructors
 
-		TnbCad_EXPORT TModel_ParaWire
+		TnbCad_EXPORT explicit TModel_ParaWire
 		(
 			const std::shared_ptr<TModel_CmpParaCurve>& theCurve
 		);
@@ -56,6 +56,11 @@ namespace tnbLib
 			const word& theName,
 			const std::shared_ptr<TModel_CmpParaCurve>& theCurve
 		);
+
+
+		// public functions and operators [1/5/2022 Amir]
+
+
 	};
 }
 
