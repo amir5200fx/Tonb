@@ -93,7 +93,7 @@ tnbLib::TModel_Curve::CalcBoundingBox() const
 {
 	Debug_Null_Pointer(Geometry());
 	Bnd_Box BndBox;
-	BndLib_Add3dCurve::Add
+	BndLib_Add3dCurve::AddOptimal
 	(
 		GeomAdaptor_Curve(Geometry()),
 		FirstParameter(),

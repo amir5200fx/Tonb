@@ -58,20 +58,20 @@ tnbLib::TModel_Surface::HasHole() const
 	return NbHoles();
 }
 
-Standard_Boolean 
-tnbLib::TModel_Surface::IsClamped() const
-{
-	Debug_Null_Pointer(theOuter_);
-	Debug_Null_Pointer(theOuter_->CmpEdge());
-
-	const auto& cmpEdge = *theOuter_->CmpEdge();
-	for (const auto& x : cmpEdge.Edges())
-	{
-		Debug_Null_Pointer(x);
-		if (NOT x->PairedEdge().lock()) return Standard_False;
-	}
-	return Standard_True;
-}
+//Standard_Boolean 
+//tnbLib::TModel_Surface::IsClamped() const
+//{
+//	Debug_Null_Pointer(theOuter_);
+//	Debug_Null_Pointer(theOuter_->CmpEdge());
+//
+//	const auto& cmpEdge = *theOuter_->CmpEdge();
+//	for (const auto& x : cmpEdge.Edges())
+//	{
+//		Debug_Null_Pointer(x);
+//		if (NOT x->PairedEdge().lock()) return Standard_False;
+//	}
+//	return Standard_True;
+//}
 
 std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
 tnbLib::TModel_Surface::RetrieveEdges() const

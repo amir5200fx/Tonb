@@ -9,10 +9,10 @@
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::TModel_EdgeAdaptor)
 {
-	ar & theSurface_;
-	ar & thePaired_;
-	ar & theWire_;
-	ar & thePairedEdge_;
+	//ar & theSurface_;
+	//ar & thePaired_;
+	//ar & theWire_;
+	//ar & thePairedEdge_;
 
 	//TopoDS_Shape sh = theTEdge_;
 	//ar & sh;
@@ -20,10 +20,10 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::TModel_EdgeAdaptor)
 
 TNB_LOAD_IMPLEMENTATION(tnbLib::TModel_EdgeAdaptor)
 {
-	ar & theSurface_;
-	ar & thePaired_;
-	ar & theWire_;
-	ar & thePairedEdge_;
+	//ar & theSurface_;
+	//ar & thePaired_;
+	//ar & theWire_;
+	//ar & thePairedEdge_;
 
 	//TopoDS_Shape sh;
 	//ar & sh;

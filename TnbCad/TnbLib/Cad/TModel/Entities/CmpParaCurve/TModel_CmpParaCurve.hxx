@@ -20,14 +20,12 @@ namespace tnbLib
 		: public TModel_Entity
 	{
 
-		typedef std::vector<std::shared_ptr<TModel_ParaCurve>> curveList;
-
 		friend TModel_ParaWire;
 		friend Cad_Tools;
 
 		/*Private Data*/
 
-		curveList theCurves_;
+		std::vector<std::shared_ptr<TModel_ParaCurve>> theCurves_;
 
 
 		//- private functions and operators
@@ -43,10 +41,15 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [1/5/2022 Amir]
+
 		TModel_CmpParaCurve()
 		{}
 
-		TModel_CmpParaCurve
+
+		// constructors [1/5/2022 Amir]
+
+		explicit TModel_CmpParaCurve
 		(
 			const Standard_Integer theIndex
 		)
