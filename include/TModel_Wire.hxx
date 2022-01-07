@@ -36,7 +36,7 @@ namespace tnbLib
 
 		//- constructors
 
-		TnbCad_EXPORT TModel_Wire
+		TnbCad_EXPORT explicit TModel_Wire
 		(
 			const std::shared_ptr<TModel_CmpEdge>& theEdge
 		);

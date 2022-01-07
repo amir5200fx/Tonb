@@ -13,72 +13,71 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		std::shared_ptr<TModel_Vertex> theVtx_;
 
-		friend class boost::serialization::access;
+		// private functions and operators [1/6/2022 Amir]
 
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int file_version)
-		{
-			ar & boost::serialization::base_object<TModel_Edge>(*this);
-		}
-
+		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 	protected:
 
-
-		//- default constructor
+		// default constructor [1/6/2022 Amir]
 
 		TModel_SingularEdge()
 		{}
 
 	public:
 
-		TnbCad_EXPORT TModel_SingularEdge
+		// constructors [1/6/2022 Amir]
+
+		TModel_SingularEdge
 		(
 			const std::shared_ptr<TModel_Vertex>& theVtx,
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
-		);
+		)
+			: TModel_Edge(theParaCurve)
+			, theVtx_(theVtx)
+		{}
 
-		TnbCad_EXPORT TModel_SingularEdge
+		explicit TModel_SingularEdge
 		(
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
-		);
+		)
+			: TModel_Edge(theParaCurve)
+		{}
 
-		TnbCad_EXPORT TModel_SingularEdge
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<TModel_Vertex>& theVtx,
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
-		);
-
-		TnbCad_EXPORT TModel_SingularEdge
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
-		);
-
-		TnbCad_EXPORT TModel_SingularEdge
+		TModel_SingularEdge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<TModel_Vertex>& theVtx,
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
-		);
+		)
+			: TModel_Edge(theIndex, theName, theParaCurve)
+			, theVtx_(theVtx)
+		{}
 
-		TnbCad_EXPORT TModel_SingularEdge
+		TModel_SingularEdge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
 			const std::shared_ptr<TModel_ParaCurve>& theParaCurve
-		);
+		)
+			: TModel_Edge(theIndex, theName, theParaCurve)
+		{}
+
+		// public functions and operators [1/6/2022 Amir]
 
 
-		//- override functions and operators
+		// override functions and operators [1/6/2022 Amir]
 
-		Standard_Boolean IsDegenerated() const override
+		Standard_Boolean IsRing() const override
 		{
 			return Standard_True;
 		}
+
+		//- Macros
+		GLOBAL_ACCESS_SINGLE(std::shared_ptr<TModel_Vertex>, Vtx)
 	};
 }
 

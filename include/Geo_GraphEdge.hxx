@@ -26,34 +26,44 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<nodeType> theNode0_;
-		std::shared_ptr<nodeType> theNode1_;
+
+	protected:
+
+		// default constructor [1/5/2022 Amir]
+
+		Geo_GraphEdge()
+		{}
+
+
+		// constructors [1/5/2022 Amir]
+
+		explicit Geo_GraphEdge
+		(
+			const Standard_Integer theIndex
+		)
+			: Global_Indexed(theIndex)
+		{}
 
 	public:
 
-		Geo_GraphEdge(const Standard_Integer theIndex)
-			: Global_Indexed(theIndex)
-		{}
 
-		Geo_GraphEdge
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<nodeType>& theNode0,
-			const std::shared_ptr<nodeType>& theNode1
-		)
-			: Global_Indexed(theIndex)
-			, theNode0_(theNode0)
-			, theNode1_(theNode1)
-		{}
+		// public functions and operators [1/5/2022 Amir]
 
-		static void deAttach(const std::shared_ptr<Geo_GraphEdge>& theEdge);
+		virtual Standard_Boolean IsSegment() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsRing() const
+		{
+			return Standard_False;
+		}
+
 
 		//- Macros
-		GLOBAL_ACCESS_SINGLE(std::shared_ptr<nodeType>, Node0)
-			GLOBAL_ACCESS_SINGLE(std::shared_ptr<nodeType>, Node1)
+
 	};
 }
 
-#include <Geo_GraphEdgeI.hxx>
 
 #endif // !_Geo_GraphEdge_Header

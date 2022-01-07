@@ -8,6 +8,7 @@
 #include <map>
 #include <memory>
 
+
 #define Mesh_RegisterEntity(EntityName, EntityType)																							\
 	template<class EntityType>																												\
 	class Mesh_Register##EntityName																											\

@@ -37,8 +37,14 @@ namespace tnbLib
 
 	protected:
 
+
+		// default constructor [1/5/2022 Amir]
+
 		TModel_Plane()
 		{}
+
+
+		// constructors [1/5/2022 Amir]
 
 		TnbCad_EXPORT TModel_Plane
 		(
