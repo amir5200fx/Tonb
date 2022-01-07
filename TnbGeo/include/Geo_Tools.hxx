@@ -10,6 +10,7 @@
 
 #include <Entity_Segment.hxx>
 #include <Entity_Line.hxx>
+#include <Entity_Triangle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity3d_PolygonFwd.hxx>
@@ -566,6 +567,13 @@ namespace tnbLib
 			(
 				const Entity3d_Triangle& theTri, 
 				const gp_Pln& thePlane
+			);
+
+		static TnbGeo_EXPORT Entity_Triangle<const Pnt2d&> 
+			GetTriangle
+			(
+				const Standard_Integer theIndex,
+				const Entity2d_Triangulation&
 			);
 
 		template<class Type>

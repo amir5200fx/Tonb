@@ -115,15 +115,6 @@
     <Filter Include="TnbLib\Geo\knit">
       <UniqueIdentifier>{6848cf8e-fc61-43bd-83c5-03f09931b2e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Geo\knit\Chain">
-      <UniqueIdentifier>{373fa1db-74ff-4611-97a3-497ecb3d73e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\knit\Chain\Node">
-      <UniqueIdentifier>{f0afe4bd-b62e-42d2-9d4f-4b7d1eeb3b65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\knit\Chain\Node\Type">
-      <UniqueIdentifier>{b489acec-7e1b-4675-b25a-acbc675e5276}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Geo\Graph">
       <UniqueIdentifier>{44a9f80d-3f8a-4b1e-96d3-cf13b385e3de}</UniqueIdentifier>
     </Filter>
@@ -150,15 +141,6 @@
     </Filter>
     <Filter Include="TnbLib\Geo\Entities\Triangulation\3d">
       <UniqueIdentifier>{d36aa539-be92-4b81-b83a-d3ccf944722f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\knit\Node">
-      <UniqueIdentifier>{9431c4a3-fb53-48e3-ab17-f0f785414d3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\knit\Node\Type">
-      <UniqueIdentifier>{55bf005b-fec7-4792-9115-f4726a074906}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Geo\knit\Edge">
-      <UniqueIdentifier>{f036f91b-adc3-4c58-ac3b-448648fade0e}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Geo\Graph\Node\Adaptor">
       <UniqueIdentifier>{658812b6-bfeb-480d-b88e-14be8b6b4e96}</UniqueIdentifier>
@@ -415,6 +397,81 @@
     <Filter Include="TnbLib\Geo\Merge\Point\Info">
       <UniqueIdentifier>{f1ede0b4-3f83-423e-89bc-24d6269590a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Mesh">
+      <UniqueIdentifier>{1cfbc89f-eb9c-424a-9b60-f870436acd53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Data">
+      <UniqueIdentifier>{17533323-af80-40f8-92c7-944d1b96f8f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\knit\Node">
+      <UniqueIdentifier>{ebed9354-02a3-4132-b2cf-d762c9e375c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\knit\Node\Type">
+      <UniqueIdentifier>{3ca8ca03-2cfe-4923-aa1f-6757876d9244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\knit\Registry">
+      <UniqueIdentifier>{d34338a6-7da8-46e5-9642-3286bc96b396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\knit\2d">
+      <UniqueIdentifier>{5217b2fd-fb70-4ae6-8623-d65d007df030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\knit\2d\Traits">
+      <UniqueIdentifier>{a736f094-bcce-4c83-86e6-ef41b4b6c239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Node\2d">
+      <UniqueIdentifier>{ba6b92f7-1beb-4304-96dd-9c6c77049c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Node\2d\Traits">
+      <UniqueIdentifier>{680a3741-1ae6-4b2b-a172-36b75e6376e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Edge\2d">
+      <UniqueIdentifier>{0c3314e1-66a6-4c7a-9c4d-4584a9aa2953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Edge\2d\Traits">
+      <UniqueIdentifier>{99f2bd42-f879-434e-9aad-41b9bbe1c630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\2d">
+      <UniqueIdentifier>{a2b8ae97-8ba3-4599-a105-22604ece680d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Edge\Segment">
+      <UniqueIdentifier>{47eb546e-6d44-4e55-94f7-c1c7fb2521ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Edge\Ring">
+      <UniqueIdentifier>{1faeb8ab-0515-44b0-8140-03fef2bde7cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Edge\2d\Segment">
+      <UniqueIdentifier>{a5f4a616-8ac2-4bdc-8663-47118bf3a7a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Edge\2d\Ring">
+      <UniqueIdentifier>{f06f43ae-278f-4188-9b8f-33ec422729dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon">
+      <UniqueIdentifier>{3157b92c-20d1-4845-b889-3ad32f13183d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\Edge">
+      <UniqueIdentifier>{ff77fed4-61d0-43ed-88ad-a158bc5386ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\Edge\Traits">
+      <UniqueIdentifier>{ea767a5f-b1df-44f3-b546-702f0cbcd61e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\Edge\Adaptor">
+      <UniqueIdentifier>{adc648c4-6c6a-4395-a135-26b65dae467f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\Edge\Segment">
+      <UniqueIdentifier>{e982dc3d-7cf8-4b77-be11-0875ae69f8a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\Edge\Ring">
+      <UniqueIdentifier>{86b498b9-7018-46d3-8c69-aa30e0a73fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\2d">
+      <UniqueIdentifier>{8323c2ff-938b-4bdc-a33f-6e09ad2b91ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\Node">
+      <UniqueIdentifier>{f9d05be9-e4bd-4d3e-bcda-90facb6d5591}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Polygon\Node\Traits">
+      <UniqueIdentifier>{7c448324-d3c9-4451-85dd-f4fe313420f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -446,12 +503,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Box\3d\Entity3d_BoxFwd.hxx">
       <Filter>TnbLib\Geo\Entities\Box\3d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Chain\Node\Knit_ChainNode.hxx">
-      <Filter>TnbLib\Geo\knit\Chain\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Chain\Node\Knit_ChainNodeI.hxx">
-      <Filter>TnbLib\Geo\knit\Chain\Node</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Graph\Node\Geo_GraphNode.hxx">
       <Filter>TnbLib\Geo\Graph\Node</Filter>
@@ -561,32 +612,11 @@
     <ClInclude Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1I.hxx">
       <Filter>TnbLib\Geo\Entities\Metric1\3d</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Graph\Edge\Geo_GraphEdgeI.hxx">
-      <Filter>TnbLib\Geo\Graph\Edge</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Node\Geo_KnitNode.hxx">
-      <Filter>TnbLib\Geo\knit\Node</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Geo\Graph\Node\Adaptor\Geo_GraphNodeAdaptor.hxx">
       <Filter>TnbLib\Geo\Graph\Node\Adaptor</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Graph\Edge\Adaptor\Geo_GraphEdgeAdaptor.hxx">
       <Filter>TnbLib\Geo\Graph\Edge\Adaptor</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Chain\Node\Type\Knit_ChainNode_Type.hxx">
-      <Filter>TnbLib\Geo\knit\Chain\Node\Type</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Node\Type\Geo_KnitNodeType.hxx">
-      <Filter>TnbLib\Geo\knit\Node\Type</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Edge\Geo_KnitEdge.hxx">
-      <Filter>TnbLib\Geo\knit\Edge</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Geo_KnitGraph.hxx">
-      <Filter>TnbLib\Geo\knit</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Geo\Knit\Geo_KnitGraphI.hxx">
-      <Filter>TnbLib\Geo\knit</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_Triangulation.hxx">
       <Filter>TnbLib\Geo\Entities\Triangulation\2d</Filter>
@@ -954,6 +984,126 @@
     <ClInclude Include="TnbLib\Geo\Merge\Point\Info\Merge_PntInfo.hxx">
       <Filter>TnbLib\Geo\Merge\Point\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\Node\Type\Knit_ChainNode_Type.hxx">
+      <Filter>TnbLib\Geo\knit\Node\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\Node\Knit_ChainNode.hxx">
+      <Filter>TnbLib\Geo\knit\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\Node\Knit_ChainNodeI.hxx">
+      <Filter>TnbLib\Geo\knit\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\Registry\Knit_ChainRegistry.hxx">
+      <Filter>TnbLib\Geo\knit\Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\Geo_KnitChain.hxx">
+      <Filter>TnbLib\Geo\knit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\Geo_KnitChainI.hxx">
+      <Filter>TnbLib\Geo\knit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Node\Geo_GraphNodeI.hxx">
+      <Filter>TnbLib\Geo\Graph\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\2d\Geo2d_KnitChain.hxx">
+      <Filter>TnbLib\Geo\knit\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\2d\Geo2d_KnitChainFwd.hxx">
+      <Filter>TnbLib\Geo\knit\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\2d\Traits\Geo2d_KnitChainTraits.hxx">
+      <Filter>TnbLib\Geo\knit\2d\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Node\2d\Geo2d_GraphNode.hxx">
+      <Filter>TnbLib\Geo\Graph\Node\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Node\2d\Geo2d_GraphNodeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Node\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Node\2d\Traits\Geo2d_GraphNodeTraits.hxx">
+      <Filter>TnbLib\Geo\Graph\Node\2d\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\2d\Geo2d_GraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\2d\Geo2d_GraphEdgeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\2d\Traits\Geo2d_GraphEdgeTraits.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\2d\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\2d\Geo2d_Graph.hxx">
+      <Filter>TnbLib\Geo\Graph\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\2d\Geo2d_GraphFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Knit\Registry\Knit_ChainRegistryI.hxx">
+      <Filter>TnbLib\Geo\knit\Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\Segment\Geo_SegmentGraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\Segment\Geo_SegmentGraphEdgeI.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\Ring\Geo_RingGraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\Ring\Geo_RingGraphEdgeI.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\2d\Segment\Geo2d_SegmentGraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\2d\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\2d\Segment\Geo2d_SegmentGraphEdgeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\2d\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\2d\Ring\Geo2d_RingGraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\2d\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Edge\2d\Ring\Geo2d_RingGraphEdgeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Edge\2d\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Traits\Geo2d_PolygonGraphEdgeTraits.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Adaptor\Geo2d_PolygonGraphEdgeAdaptor.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Geo2d_PolygonGraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Geo2d_PolygonGraphEdgeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Ring\Geo2d_PolygonRingGraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Ring\Geo2d_PolygonRingGraphEdgeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Segment\Geo2d_PolygonSegmentGraphEdge.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Edge\Segment\Geo2d_PolygonSegmentGraphEdgeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Edge\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\2d\Geo2d_PolygonGraph.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\2d\Geo2d_PolygonGraphFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Node\Traits\Geo2d_PolygonGraphNodeTraits.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Node\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Node\Geo2d_PolygonGraphNode.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Polygon\Node\Geo2d_PolygonGraphNodeFwd.hxx">
+      <Filter>TnbLib\Geo\Graph\Polygon\Node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -976,9 +1126,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Box\3d\Entity3d_Box.cxx">
       <Filter>TnbLib\Geo\Entities\Box\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Knit\Chain\Node\Knit_ChainNode.cxx">
-      <Filter>TnbLib\Geo\knit\Chain\Node</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Connectivity\Entity_Connectivity.cxx">
       <Filter>TnbLib\Geo\Entities\Connectivity</Filter>
@@ -1027,9 +1174,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Metric1\3d\Entity3d_Metric1IO.cxx">
       <Filter>TnbLib\Geo\Entities\Metric1\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Geo\Knit\Geo_KnitGraph.cxx">
-      <Filter>TnbLib\Geo\knit</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Triangulation\2d\Entity2d_TriangulationIO.cxx">
       <Filter>TnbLib\Geo\Entities\Triangulation\2d</Filter>
@@ -1252,6 +1396,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Merge\Point\Info\Merge_PntInfo.cxx">
       <Filter>TnbLib\Geo\Merge\Point\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Knit\Geo_KnitChain.cxx">
+      <Filter>TnbLib\Geo\knit</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Knit\Registry\Knit_ChainRegistry.cxx">
+      <Filter>TnbLib\Geo\knit\Registry</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Graph\Edge\Segment\Geo_SegmentGraphEdge.cxx">
+      <Filter>TnbLib\Geo\Graph\Edge\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Graph\Edge\Ring\Geo_RingGraphEdge.cxx">
+      <Filter>TnbLib\Geo\Graph\Edge\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Knit\2d\Geo2d_KnitChain.cxx">
+      <Filter>TnbLib\Geo\knit\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
