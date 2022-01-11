@@ -66,6 +66,16 @@ namespace tnbLib
 
 		// public functions and operators [1/6/2022 Amir]
 
+		virtual Standard_Boolean IsSegment() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsRing() const
+		{
+			return Standard_False;
+		}
+
 	};
 }
 
