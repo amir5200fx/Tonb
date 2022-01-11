@@ -35,12 +35,15 @@ namespace tnbLib
 	// Forward Declarations
 	class Cad_TModel;
 	class TModel_Surface;
+	class TModel_Wire;
+	class TModel_Paired;
 	class TModel_Edge;
 	class TModel_Curve;
 	class TModel_Shell;
 	class TModel_ParaWire;
 	class TModel_Vertex;
 	class TModel_Wire;
+	class TModel_ManifoldPaired;
 	class Entity2d_Metric1;
 
 	template<class EntityType>
@@ -234,6 +237,8 @@ namespace tnbLib
 				const TopoDS_Shape& theShape
 			);
 
+		static std::vector<std::shared_ptr<TModel_Vertex>> RetrieveVertices(const std::shared_ptr<TModel_Surface>&);
+
 		static TnbCad_EXPORT std::vector<TopoDS_Face> 
 			RetrieveFaces
 			(
@@ -268,6 +273,12 @@ namespace tnbLib
 
 		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>> 
 			RetrieveFreeEdges
+			(
+				const std::shared_ptr<Cad_TModel>&
+			);
+
+		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Paired>> 
+			RetrieveManifoldEdges
 			(
 				const std::shared_ptr<Cad_TModel>&
 			);
@@ -309,6 +320,14 @@ namespace tnbLib
 				const Handle(Geom_Surface)&,
 				Standard_Real(*sizeFun)(const Pnt3d&)
 			);
+
+		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Surface>&);
+		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Edge>&);
+		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Wire>&);
+		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Paired>&);
+		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_ManifoldPaired>&);
+
+		static TnbCad_EXPORT void Connect(const std::shared_ptr<Cad_TModel>&);
 
 		static TnbCad_EXPORT void SetPrecision(const std::shared_ptr<Cad_TModel>& theSolid);
 

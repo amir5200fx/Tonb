@@ -4,6 +4,31 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+std::vector<std::shared_ptr<tnbLib::TModel_Edge>>
+tnbLib::TModel_nonManifoldPaired::RetrieveEdges() const
+{
+	std::vector<std::shared_ptr<TModel_Edge>> edges;
+	edges.reserve(NbEdges());
+	for (const auto& x : Edges())
+	{
+		Debug_Null_Pointer(x.second);
+		edges.push_back(x.second);
+	}
+	return std::move(edges);
+}
+
+void tnbLib::TModel_nonManifoldPaired::RetrieveEdgesTo
+(
+	std::vector<std::shared_ptr<TModel_Edge>>& theEdges
+) const
+{
+	for (const auto& x : Edges())
+	{
+		Debug_Null_Pointer(x.second);
+		theEdges.push_back(x.second);
+	}
+}
+
 void tnbLib::TModel_nonManifoldPaired::SetPairs() const
 {
 	auto thisPaired = std::dynamic_pointer_cast<TModel_Paired>(std::const_pointer_cast<TModel_Entity>(This()));

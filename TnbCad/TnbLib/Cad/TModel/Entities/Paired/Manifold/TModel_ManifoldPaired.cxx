@@ -14,6 +14,25 @@ void tnbLib::TModel_ManifoldPaired::CheckManifold()
 	}
 }
 
+std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
+tnbLib::TModel_ManifoldPaired::RetrieveEdges() const
+{
+	std::vector<std::shared_ptr<TModel_Edge>> edges;
+	edges.reserve(2);
+	edges.push_back(Edge0());
+	edges.push_back(Edge1());
+	return std::move(edges);
+}
+
+void tnbLib::TModel_ManifoldPaired::RetrieveEdgesTo
+(
+	std::vector<std::shared_ptr<TModel_Edge>>& theEdges
+) const
+{
+	theEdges.push_back(Edge0());
+	theEdges.push_back(Edge1());
+}
+
 void tnbLib::TModel_ManifoldPaired::SetPairs() const
 {
 	auto g0 = std::dynamic_pointer_cast<TModel_GeneratedEdge>(theEdge0_);

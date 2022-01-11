@@ -10,6 +10,8 @@
 #include <TModel_SingularEdge.hxx>
 #include <TModel_Surface.hxx>
 #include <TModel_Vertex.hxx>
+#include <TModel_Paired.hxx>
+#include <TModel_Edges.hxx>
 //#include <TModel_Ring.hxx>
 #include <TModel_Paired.hxx>
 #include <TModel_Wire.hxx>
@@ -1635,7 +1637,10 @@ tnbLib::Cad_Tools::RetrieveEdges(const std::vector<std::shared_ptr<TModel_Surfac
 }
 
 std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
-tnbLib::Cad_Tools::RetrieveFreeEdges(const std::shared_ptr<Cad_TModel>& theSolid)
+tnbLib::Cad_Tools::RetrieveFreeEdges
+(
+	const std::shared_ptr<Cad_TModel>& theSolid
+)
 {
 	if (NOT theSolid)
 	{
@@ -1661,6 +1666,31 @@ tnbLib::Cad_Tools::RetrieveFreeEdges(const std::shared_ptr<Cad_TModel>& theSolid
 					edges.push_back(e.second);
 				}
 			}
+		}
+	}
+	return std::move(edges);
+}
+
+std::vector<std::shared_ptr<tnbLib::TModel_Paired>> 
+tnbLib::Cad_Tools::RetrieveManifoldEdges
+(
+	const std::shared_ptr<Cad_TModel>& theSolid
+)
+{
+	if (NOT theSolid)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the solid is null" << endl
+			<< abort(FatalError);
+	}
+
+	std::vector<std::shared_ptr<TModel_Paired>> edges;
+	for (const auto& x : theSolid->RetrieveSegments())
+	{
+		Debug_Null_Pointer(x);
+		if (x->IsManifold())
+		{
+			edges.push_back(x);
 		}
 	}
 	return std::move(edges);
@@ -1810,6 +1840,146 @@ tnbLib::Cad_Tools::CalcMetric
 
 	Entity2d_Metric1 m(invH * A, invH * B, invH * C);
 	return std::move(m);
+}
+
+void tnbLib::Cad_Tools::Connect
+(
+	const std::shared_ptr<TModel_Surface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+
+	const auto edges = theSurface->RetrieveEdges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		x->SetSurface(theSurface);
+	}
+
+	const auto vertices = Cad_Tools::RetrieveVertices(theSurface);
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		x->ImportToSurfaces(theSurface->Index(), theSurface);
+	}
+}
+
+void tnbLib::Cad_Tools::Connect
+(
+	const std::shared_ptr<TModel_Edge>& theEdge
+)
+{
+	Debug_Null_Pointer(theEdge);
+	const auto vertices = theEdge->RetrieveVertices();
+	for (const auto& x : vertices)
+	{
+		Debug_Null_Pointer(x);
+		x->ImportToEdges(theEdge->Index(), theEdge);
+	}
+}
+
+void tnbLib::Cad_Tools::Connect
+(
+	const std::shared_ptr<TModel_Wire>& theWire
+)
+{
+	Debug_Null_Pointer(theWire);
+	Debug_Null_Pointer(theWire->CmpEdge());
+
+	const auto& edges = theWire->CmpEdge()->Edges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		x->SetWire(theWire);
+	}
+}
+
+void tnbLib::Cad_Tools::Connect
+(
+	const std::shared_ptr<TModel_Paired>& thePaired
+)
+{
+	const auto& edges = thePaired->RetrieveEdges();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		auto g = std::dynamic_pointer_cast<TModel_GeneratedEdge>(x);
+		Debug_Null_Pointer(g);
+
+		g->SetPaired(thePaired);
+	}
+}
+
+void tnbLib::Cad_Tools::Connect
+(
+	const std::shared_ptr<TModel_ManifoldPaired>& thePaired
+)
+{
+	Debug_Null_Pointer(thePaired);
+	const auto& e0 = thePaired->Edge0();
+	const auto& e1 = thePaired->Edge1();
+
+	Debug_Null_Pointer(e0);
+	Debug_Null_Pointer(e1);
+
+	auto g0 = std::dynamic_pointer_cast<TModel_GeneratedEdge>(e0);
+	Debug_Null_Pointer(g0);
+
+	auto g1 = std::dynamic_pointer_cast<TModel_GeneratedEdge>(e1);
+	Debug_Null_Pointer(g1);
+
+	g0->SetPairedEdge(g1);
+	g1->SetPairedEdge(g0);
+}
+
+void tnbLib::Cad_Tools::Connect
+(
+	const std::shared_ptr<Cad_TModel>& theModel
+)
+{
+	Debug_Null_Pointer(theModel);
+	const auto surfaces = theModel->RetrieveFaces();
+
+	for (const auto& x : surfaces)
+	{
+		Debug_Null_Pointer(x);
+		Connect(x);
+
+		const auto& outer = x->Outer();
+		Debug_Null_Pointer(outer);
+
+		Connect(outer);
+
+		if (x->Inner())
+		{
+			for (const auto& wire : *x->Inner())
+			{
+				Connect(wire);
+			}
+		}
+
+		auto edges = x->RetrieveEdges();
+		for (const auto& e : edges)
+		{
+			Debug_Null_Pointer(e);
+			Connect(e);
+		}
+	}
+
+	const auto edges = theModel->RetrieveSegments();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		Connect(x);
+	}
+
+	const auto manifolds = Cad_Tools::RetrieveManifoldEdges(theModel);
+
+	for (const auto& x : manifolds)
+	{
+		Debug_Null_Pointer(x);
+		Connect(x);
+	}
 }
 
 void tnbLib::Cad_Tools::SetPrecision
