@@ -70,16 +70,7 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		virtual Standard_Boolean IsSegment() const
-		{
-			return Standard_False;
-		}
-
-		virtual Standard_Boolean IsRing() const
-		{
-			return Standard_False;
-		}
-
+		virtual void RetrieveVerticesTo(std::vector<std::shared_ptr<TModel_Vertex>>&) const = 0;
 
 		//- Static functions and operators
 

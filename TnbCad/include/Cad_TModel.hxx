@@ -18,6 +18,7 @@ namespace tnbLib
 	class TModel_Shell;
 	class Cad_Tools;
 	class Cad_SolidMaker;
+	class Cad_tModelMaker;
 
 	class Cad_TModel
 		: public TModel_Entity
@@ -31,6 +32,7 @@ namespace tnbLib
 
 		friend class Cad_Tools;
 		friend class Cad_SolidMaker;
+		friend class Cad_tModelMaker;
 
 		/*Private Data*/
 

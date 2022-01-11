@@ -93,6 +93,11 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		TnbCad_EXPORT void RetrieveVerticesTo
+		(
+			std::vector<std::shared_ptr<TModel_Vertex>>&
+		) const override;
+
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(std::shared_ptr<TModel_Vertex>, Vtx0)
 			GLOBAL_ACCESS_SINGLE(std::shared_ptr<TModel_Vertex>, Vtx1)
