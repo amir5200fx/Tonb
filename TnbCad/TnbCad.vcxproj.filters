@@ -61,9 +61,6 @@
     <Filter Include="TnbLib\Cad\TModel\Entities\ParaCurve">
       <UniqueIdentifier>{e558df64-5e2a-4b9e-b3c1-5e467380d204}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad\TModel\Entities\Singular">
-      <UniqueIdentifier>{7e9acbce-a6a9-4fd2-b9e2-c73148bc2767}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Cad\Entities\Precision">
       <UniqueIdentifier>{3ffc6107-11da-4ede-969d-a0eccac54177}</UniqueIdentifier>
     </Filter>
