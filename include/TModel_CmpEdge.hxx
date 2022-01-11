@@ -14,6 +14,7 @@ namespace tnbLib
 	class TModel_Edge;
 	class TModel_Wire;
 	class Cad_Tools;
+	class Cad_tSurfaceMaker;
 
 	class TModel_CmpEdge
 		: public TModel_Entity
@@ -22,6 +23,7 @@ namespace tnbLib
 		friend class TModel_Edge;
 		friend class TModel_Wire;
 		friend class Cad_Tools;
+		friend class Cad_tSurfaceMaker;
 
 		/*Private Data*/
 

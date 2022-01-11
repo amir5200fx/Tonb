@@ -358,6 +358,66 @@
     <Filter Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Adaptor">
       <UniqueIdentifier>{04a04d65-02c3-4cc6-ae7b-ff70b7b0a7fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\T">
+      <UniqueIdentifier>{53a40104-606b-4238-b109-fc73801a0e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\G">
+      <UniqueIdentifier>{c35c01eb-b806-4689-9a8f-dd811a4619ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Surface">
+      <UniqueIdentifier>{ee3c03dd-ffcd-466b-8f52-6bc6ecb51be9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Surface\T">
+      <UniqueIdentifier>{2302bfe4-8382-412d-a783-ab0299015720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Surface\G">
+      <UniqueIdentifier>{a33d1bd6-4ec2-4931-9108-fe9be84b86bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Edge">
+      <UniqueIdentifier>{2f654453-6824-4885-adb2-4ca4d2fb67a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Edge\T">
+      <UniqueIdentifier>{68ac6645-82f8-429d-8fbd-8c20664a6b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Edge\Info">
+      <UniqueIdentifier>{2be82f09-e04b-4c5f-aaa8-f62da51cc6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Edge\Info\Absolute">
+      <UniqueIdentifier>{bfe57223-6b7b-47a0-ae0c-7735b70da490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Edge\Info\Relative">
+      <UniqueIdentifier>{268f58ee-240d-4329-9992-ec1c97a67a92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Surface\Info">
+      <UniqueIdentifier>{1f7b9717-11bb-4370-9bd6-e62f48d4d166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Surface\Info\Absolute">
+      <UniqueIdentifier>{e0a430d8-e80e-4ee5-9335-58b6a510660d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Surface\Info\Relative">
+      <UniqueIdentifier>{046b0800-d0b8-496c-b2bf-16b5879fee6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\Info">
+      <UniqueIdentifier>{d6f110e5-74fe-4602-b553-4d64768554e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\Info\Absolute">
+      <UniqueIdentifier>{493f84a5-00f8-41f9-a71c-4fbe4820819c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\Info\Relative">
+      <UniqueIdentifier>{235bdca7-2dff-4887-9b6f-bdcdecfc89cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion">
+      <UniqueIdentifier>{c7fdf7f0-a064-49cf-b7cf-7c7dd442e563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist">
+      <UniqueIdentifier>{8d3f0703-275f-450d-97a0-d77f252563d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Paired\Manifold">
+      <UniqueIdentifier>{492a69d5-4339-4dec-9546-c37b1fd79ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\Paired\nonManifold">
+      <UniqueIdentifier>{6713a036-dd07-4f9f-8ed6-5c064c963d4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -708,6 +768,45 @@
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Edge\TModel_Edges.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Edge</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\T\Cad_tModelMaker.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Surface\T\Cad_tSurfaceMaker.hxx">
+      <Filter>TnbLib\Cad\Maker\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Edge\T\Cad_tEdgeMaker.hxx">
+      <Filter>TnbLib\Cad\Maker\Edge\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Edge\Info\Cad_tEdgeMakerInfo.hxx">
+      <Filter>TnbLib\Cad\Maker\Edge\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Edge\Info\Absolute\Cad_tEdgeMakerInfo_Absolute.hxx">
+      <Filter>TnbLib\Cad\Maker\Edge\Info\Absolute</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Edge\Info\Relative\Cad_tEdgeMakerInfo_Relative.hxx">
+      <Filter>TnbLib\Cad\Maker\Edge\Info\Relative</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Surface\Info\Cad_tSurfaceMakerInfo.hxx">
+      <Filter>TnbLib\Cad\Maker\Surface\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Surface\Info\Absolute\Cad_tSurfaceMakerInfo_Absolute.hxx">
+      <Filter>TnbLib\Cad\Maker\Surface\Info\Absolute</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\Info\Cad_tModelMakerInfo.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\Info\Absolute\Cad_tModelMakerInfo_Absolute.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid\Info\Absolute</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\Cad_tModelMaker_PairCrvCriterion.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Paired\Manifold\TModel_ManifoldPaired.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Paired\Manifold</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\Paired\nonManifold\TModel_nonManifoldPaired.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Paired\nonManifold</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -730,9 +829,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Geometry\TModel_EdgeGeometry.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Edge\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\TModel_Paired.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Paired</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\TModel_PairedIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Paired</Filter>
@@ -1056,6 +1152,60 @@
       <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Singular\TModel_SingularEdgeIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Singular</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\T\Cad_tModelMaker.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Edge\T\Cad_tEdgeMaker.cxx">
+      <Filter>TnbLib\Cad\Maker\Edge\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Edge\Info\Absolute\Cad_tEdgeMakerInfo_Absolute.cxx">
+      <Filter>TnbLib\Cad\Maker\Edge\Info\Absolute</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Edge\Info\Absolute\Cad_tEdgeMakerInfo_AbsoluteIO.cxx">
+      <Filter>TnbLib\Cad\Maker\Edge\Info\Absolute</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Edge\Info\Relative\Cad_tEdgeMakerInfo_Relative.cxx">
+      <Filter>TnbLib\Cad\Maker\Edge\Info\Relative</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Edge\Info\Relative\Cad_tEdgeMakerInfo_RelativeIO.cxx">
+      <Filter>TnbLib\Cad\Maker\Edge\Info\Relative</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Surface\Info\Absolute\Cad_tSurfaceMakerInfo_Absolute.cxx">
+      <Filter>TnbLib\Cad\Maker\Surface\Info\Absolute</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Surface\Info\Absolute\Cad_tSurfaceMakerInfo_AbsoluteIO.cxx">
+      <Filter>TnbLib\Cad\Maker\Surface\Info\Absolute</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Surface\T\Cad_tSurfaceMaker.cxx">
+      <Filter>TnbLib\Cad\Maker\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\Info\Absolute\Cad_tModelMakerInfo_Absolute.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\Info\Absolute</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\Info\Absolute\Cad_tModelMakerInfo_AbsoluteIO.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\Info\Absolute</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\Manifold\TModel_ManifoldPaired.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Paired\Manifold</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\Manifold\TModel_ManifoldPairedIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Paired\Manifold</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\nonManifold\TModel_nonManifoldPaired.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Paired\nonManifold</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Paired\nonManifold\TModel_nonManifoldPairedIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Paired\nonManifold</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Segment\TModel_SegmentEdge.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Generated\Ring\TModel_RingEdge.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\Edge\Generated\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Singular\Geometry\TModel_SingularEdge.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Edge\Singular</Filter>
     </ClCompile>
   </ItemGroup>
