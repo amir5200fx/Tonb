@@ -111,6 +111,9 @@ namespace tnbLib
 
 		// override functions and operators [1/9/2022 Amir]
 
+		TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>> RetrieveEdges() const override;
+
+		TnbCad_EXPORT void RetrieveEdgesTo(std::vector<std::shared_ptr<TModel_Edge>>&) const override;
 		TnbCad_EXPORT void SetPairs() const override;
 	};
 }

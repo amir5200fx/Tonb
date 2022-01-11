@@ -70,6 +70,8 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual std::vector<std::shared_ptr<TModel_Vertex>> RetrieveVertices() const = 0;
+
 		virtual void RetrieveVerticesTo(std::vector<std::shared_ptr<TModel_Vertex>>&) const = 0;
 
 		//- Static functions and operators

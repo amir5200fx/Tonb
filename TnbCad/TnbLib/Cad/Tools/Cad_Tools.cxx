@@ -1717,6 +1717,44 @@ tnbLib::Cad_Tools::RetrieveTriangulation
 	return std::move(tris);
 }
 
+std::vector<std::shared_ptr<tnbLib::TModel_Vertex>> 
+tnbLib::Cad_Tools::RetrieveVertices
+(
+	const std::shared_ptr<TModel_Surface>& theSurface
+)
+{
+	std::vector<std::shared_ptr<TModel_Vertex>> vertices;
+	const auto edges = theSurface->RetrieveEdges();
+	std::map<Standard_Integer, std::shared_ptr<TModel_Vertex>> regMap;
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		auto vtxs = x->RetrieveVertices();
+		for (const auto& v : vtxs)
+		{
+			Debug_Null_Pointer(v);
+			auto iter = regMap.find(v->Index());
+			if (iter IS_EQUAL regMap.end())
+			{
+				auto paired = std::make_pair(v->Index(), v);
+				auto insert = regMap.insert(std::move(paired));
+				if (NOT insert.second)
+				{
+					// duplicate data has been detected [1/11/2022 Amir]
+					// do nothing! [1/11/2022 Amir]
+				}
+			}
+		}
+	}
+	vertices.reserve(regMap.size());
+	for (const auto& x : regMap)
+	{
+		Debug_Null_Pointer(x.second);
+		vertices.push_back(std::move(x.second));
+	}
+	return std::move(vertices);
+}
+
 std::vector<TopoDS_Face> 
 tnbLib::Cad_Tools::RetrieveFaces
 (

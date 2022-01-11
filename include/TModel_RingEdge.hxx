@@ -85,6 +85,8 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Vertex>> RetrieveVertices() const override;
+
 		TnbCad_EXPORT void RetrieveVerticesTo
 		(
 			std::vector<std::shared_ptr<TModel_Vertex>>&

@@ -237,7 +237,11 @@ namespace tnbLib
 				const TopoDS_Shape& theShape
 			);
 
-		static std::vector<std::shared_ptr<TModel_Vertex>> RetrieveVertices(const std::shared_ptr<TModel_Surface>&);
+		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Vertex>> 
+			RetrieveVertices
+			(
+				const std::shared_ptr<TModel_Surface>&
+			);
 
 		static TnbCad_EXPORT std::vector<TopoDS_Face> 
 			RetrieveFaces

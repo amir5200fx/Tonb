@@ -56,6 +56,9 @@ namespace tnbLib
 
 		// public functions and operators [1/5/2022 Amir]
 
+		virtual std::vector<std::shared_ptr<TModel_Edge>> RetrieveEdges() const = 0;
+
+		virtual void RetrieveEdgesTo(std::vector<std::shared_ptr<TModel_Edge>>&) const = 0;
 		virtual void SetPairs() const = 0;
 
 		virtual Standard_Boolean IsManifold() const
