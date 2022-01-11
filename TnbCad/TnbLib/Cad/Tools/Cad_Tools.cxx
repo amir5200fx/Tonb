@@ -127,6 +127,36 @@ tnbLib::Cad_Tools::IsBounded
 	return (Standard_Boolean)Handle(Geom_BoundedCurve)::DownCast(theCurve);
 }
 
+Standard_Boolean
+tnbLib::Cad_Tools::IsRing
+(
+	const Handle(Geom2d_Curve)& theCurve,
+	const Standard_Real u0,
+	const Standard_Real u1,
+	const Standard_Real tol
+)
+{
+	auto p0 = theCurve->Value(u0);
+	auto p1 = theCurve->Value(u1);
+
+	return (Standard_Boolean)(p0.Distance(p1) <= tol);
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsRing
+(
+	const Handle(Geom_Curve)& theCurve,
+	const Standard_Real u0,
+	const Standard_Real u1,
+	const Standard_Real tol
+)
+{
+	auto p0 = theCurve->Value(u0);
+	auto p1 = theCurve->Value(u1);
+
+	return (Standard_Boolean)(p0.Distance(p1) <= tol);
+}
+
 tnbLib::Entity3d_Box 
 tnbLib::Cad_Tools::BoundingBox
 (
@@ -1260,7 +1290,8 @@ namespace tnbLib
 			std::shared_ptr<TModel_SegmentManager>& thePairedEdges
 		)
 		{
-			Adt_AvlTree<std::shared_ptr<TModel_Edge>> tree;
+			NotImplemented;
+			/*Adt_AvlTree<std::shared_ptr<TModel_Edge>> tree;
 			tree.SetComparableFunction(&TModel_Edge::IsLess);
 
 			tree.Insert(theEdges);
@@ -1299,7 +1330,7 @@ namespace tnbLib
 			}
 
 			auto block = std::make_shared<Cad_BlockEntity<TModel_Paired>>("Default Block Edge", QPaired);
-			thePairedEdges = std::make_shared<TModel_SegmentManager>("Default Block Edge", block);
+			thePairedEdges = std::make_shared<TModel_SegmentManager>("Default Block Edge", block);*/
 		}
 
 		static void MarchingOnShell
@@ -1309,7 +1340,8 @@ namespace tnbLib
 			std::vector<std::shared_ptr<TModel_Entity>>& QShell
 		)
 		{
-			tree.Remove(Face);
+			NotImplemented;
+			/*tree.Remove(Face);
 			QShell.push_back(Face);
 
 			const auto edges = Face->RetrieveEdges();
@@ -1343,7 +1375,7 @@ namespace tnbLib
 						MarchingOnShell(paired->Surface().lock(), tree, QShell);
 					}
 				}
-			}
+			}*/
 		}
 
 
@@ -1364,7 +1396,8 @@ namespace tnbLib
 
 		static void LinkEdges(const std::shared_ptr<TModel_SegmentManager>& theEdges)
 		{
-			Debug_Null_Pointer(theEdges);
+			NotImplemented;
+			/*Debug_Null_Pointer(theEdges);
 
 			std::vector<std::shared_ptr<TModel_Paired>> edges;
 			theEdges->RetrieveEntitiesTo(edges);
@@ -1388,7 +1421,7 @@ namespace tnbLib
 					edge0->SetPairedEdge(edge1);
 					edge1->SetPairedEdge(edge0);
 				}
-			}
+			}*/
 		}
 	}
 }
@@ -1615,7 +1648,20 @@ tnbLib::Cad_Tools::RetrieveFreeEdges(const std::shared_ptr<Cad_TModel>& theSolid
 	for (const auto& x : theSolid->RetrieveSegments())
 	{
 		Debug_Null_Pointer(x);
-		if (NOT x->IsPaired()) edges.push_back(x->Edge0());
+		if (NOT x->IsManifold())
+		{
+			auto nonMan = std::dynamic_pointer_cast<TModel_nonManifoldPaired>(x);
+			Debug_Null_Pointer(nonMan);
+
+			if (nonMan->NbEdges() IS_EQUAL 1)
+			{
+				for (const auto& e : nonMan->Edges())
+				{
+					Debug_Null_Pointer(e.second);
+					edges.push_back(e.second);
+				}
+			}
+		}
 	}
 	return std::move(edges);
 }

@@ -11,22 +11,28 @@ namespace tnbLib
 
 	// Forward Declarations
 	class TModel_Edge;
+	class Cad_tModelMaker;
 
 	class TModel_Paired
 		: public TModel_Entity
 		, public TModel_PairedGeometry
 	{
 
-		/*Private Data*/
+		friend class Cad_tModelMaker;
 
-		std::shared_ptr<TModel_Edge> theEdge0_;
-		std::shared_ptr<TModel_Edge> theEdge1_;
+		/*Private Data*/
 
 
 		//- private functions and operators
 
-		TNB_SERIALIZATION(TnbCad_EXPORT);
+		friend class boost::serialization::access;
 
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar & boost::serialization::base_object<TModel_Entity>(*this);
+			ar & boost::serialization::base_object<TModel_PairedGeometry>(*this);
+		}
 
 	protected:
 
@@ -35,59 +41,36 @@ namespace tnbLib
 		TModel_Paired()
 		{}
 
+		// constructors [1/9/2022 Amir]
+
+		TModel_Paired
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		)
+			: TModel_Entity(theIndex, theName)
+		{}
+
 	public:
-
-
-		// constructors [1/5/2022 Amir]
-
-		TnbCad_EXPORT TModel_Paired
-		(
-			const std::shared_ptr<TModel_Edge>& theEdge0,
-			const std::shared_ptr<TModel_Edge>& theEdge1
-		);
-
-		TnbCad_EXPORT TModel_Paired
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<TModel_Edge>& theEdge0,
-			const std::shared_ptr<TModel_Edge>& theEdge1
-		);
-
-		TnbCad_EXPORT TModel_Paired
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const std::shared_ptr<TModel_Edge>& theEdge0,
-			const std::shared_ptr<TModel_Edge>& theEdge1
-		);
 
 
 		// public functions and operators [1/5/2022 Amir]
 
-		TnbCad_EXPORT Standard_Boolean IsFree() const;
+		virtual void SetPairs() const = 0;
 
-		const auto& Edge0() const
+		virtual Standard_Boolean IsManifold() const
 		{
-			return theEdge0_;
+			return Standard_False;
 		}
 
-		const auto& Edge1() const
-		{
-			return theEdge1_;
-		}
 
-		TnbCad_EXPORT const std::shared_ptr<TModel_Edge>& Other
-		(
-			const std::shared_ptr<TModel_Edge>& theEdge
-		);
-
-		Standard_Boolean IsPaired() const
-		{
-			return theEdge0_ && theEdge1_;
-		}
+		
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Paired);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::TModel_Paired);
+
+#include <TModel_ManifoldPaired.hxx>
+#include <TModel_nonManifoldPaired.hxx>
 
 #endif // !_TModel_Paired_Header

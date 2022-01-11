@@ -71,10 +71,15 @@ namespace tnbLib
 
 		// override functions and operators [1/6/2022 Amir]
 
-		Standard_Boolean IsRing() const override
+		Standard_Boolean IsDegenerated() const override
 		{
 			return Standard_True;
 		}
+
+		TnbCad_EXPORT void RetrieveVerticesTo
+		(
+			std::vector<std::shared_ptr<TModel_Vertex>>&
+		) const override;
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(std::shared_ptr<TModel_Vertex>, Vtx)
