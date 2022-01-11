@@ -20,9 +20,11 @@ class Geom_Line;
 class Geom_Surface;
 class Geom_Plane;
 class Geom2d_Curve;
+class Geom_Curve;
 class Poly_Triangulation;
 class Geom_BSplineCurve;
 class Geom_BSplineSurface;
+class Geom2d_TrimmedCurve;
 
 #include <memory>
 #include <vector>
@@ -65,6 +67,24 @@ namespace tnbLib
 			IsBounded
 			(
 				const Handle(Geom_Curve)& theCurve
+			);
+
+		static TnbCad_EXPORT Standard_Boolean
+			IsRing
+			(
+				const Handle(Geom2d_Curve)& theCurve,
+				const Standard_Real u0, 
+				const Standard_Real u1, 
+				const Standard_Real tol
+			);
+
+		static TnbCad_EXPORT Standard_Boolean
+			IsRing
+			(
+				const Handle(Geom_Curve)& theCurve,
+				const Standard_Real u0, 
+				const Standard_Real u1, 
+				const Standard_Real tol
 			);
 
 		static TnbCad_EXPORT Entity3d_Box
