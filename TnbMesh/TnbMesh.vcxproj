@@ -164,7 +164,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Aft\Boundary\Plane\Info\Iso\Aft2d_BoundaryOfPlane_InfoFwd.hxx" />
     <ClInclude Include="TnbLib\Aft\Boundary\Plane\Iso\Aft2d_BoundaryOfPlane.hxx" />
     <ClInclude Include="TnbLib\Aft\Boundary\Plane\Iso\Aft2d_BoundaryOfPlaneFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Boundary\Plane\Surface\G\Aft2d_gBoundaryOfPlaneSurface.hxx" />
     <ClInclude Include="TnbLib\Aft\Boundary\Plane\Surface\G\Aft2d_gBoundaryOfPlaneSurfaceFwd.hxx" />
+    <ClInclude Include="TnbLib\Aft\Boundary\Plane\Surface\T\Aft2d_tBoundaryOfPlaneSurface.hxx" />
     <ClInclude Include="TnbLib\Aft\Boundary\Plane\Surface\T\Aft2d_tBoundaryOfPlaneSurfaceFwd.hxx" />
     <ClInclude Include="TnbLib\Aft\Boundary\Plane\Traits\Aft_BoundaryOfPlane_Traits.hxx" />
     <ClInclude Include="TnbLib\Aft\Cad\Curve\Aft2d_PlnCurvesFwd.hxx" />
@@ -681,6 +683,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Aft\Boundary\Plane\Info\Iso\Aft2d_BoundaryOfPlane_InfoIO.cxx" />
     <ClCompile Include="TnbLib\Aft\Boundary\Plane\Iso\Aft2d_BoundaryOfPlane.cxx" />
     <ClCompile Include="TnbLib\Aft\Boundary\Plane\Iso\Aft2d_BoundaryOfPlaneIO.cxx" />
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\Surface\G\Aft2d_gBoundaryOfPlaneSurface.cxx" />
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\Surface\T\Aft2d_tBoundaryOfPlaneSurface.cxx" />
     <ClCompile Include="TnbLib\Aft\Cad\Curve\AnIso\2d\Aft2d_PlnCurveAnIso.cxx" />
     <ClCompile Include="TnbLib\Aft\Cad\Curve\AnIso\2d\Aft2d_PlnCurveAnIso_Base.cxx" />
     <ClCompile Include="TnbLib\Aft\Cad\Curve\Iso\2d\Aft2d_PlnCurve.cxx" />
