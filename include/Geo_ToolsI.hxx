@@ -1,5 +1,5 @@
 #pragma once
-
+#include <Global_Tools.hxx>
 inline Standard_Integer 
 tnbLib::Geo_Tools::Round
 (
@@ -361,24 +361,6 @@ namespace tnbLib
 		Standard_Real(*xValue)(const Type&)
 	)
 	{
-#ifdef _DEBUG
-		//CheckSorted(theSorted, "size_t Geo_Tools::FindSpan(Args...)");
-#endif // _DEBUG
-
-		auto high = theSorted.size() - 1;
-		if (x >= xValue(theSorted[high]))
-		{
-			return high;
-		}
-
-		size_t low = 0;
-		auto mid = (low + high) / 2;
-		while (x < xValue(theSorted[mid]) OR x >= xValue(theSorted[mid + 1]))
-		{
-			if (x < xValue(theSorted[mid])) high = mid;
-			else low = mid;
-			mid = (low + high) / 2;
-		}
-		return mid;
+		return Global_Tools::FindSpan<Type>(x, theSorted, xValue);
 	}
 }
