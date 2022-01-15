@@ -10,7 +10,7 @@ class Geom2d_Curve;
 namespace tnbLib
 {
 
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		class ProfileFun_Geom

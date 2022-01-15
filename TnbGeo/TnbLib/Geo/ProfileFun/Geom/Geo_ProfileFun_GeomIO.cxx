@@ -6,7 +6,7 @@
 
 #include <Geom2d_Curve.hxx>
 
-TNB_SAVE_IMPLEMENTATION(tnbLib::GeoLib::ProfileFun_Geom)
+TNB_SAVE_IMPLEMENTATION(tnbLib::geoLib::ProfileFun_Geom)
 {
 	std::stringstream st;
 	GeomTools::Write(theCurve_, st);
@@ -15,7 +15,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::GeoLib::ProfileFun_Geom)
 	ar << s;
 }
 
-TNB_LOAD_IMPLEMENTATION(tnbLib::GeoLib::ProfileFun_Geom)
+TNB_LOAD_IMPLEMENTATION(tnbLib::geoLib::ProfileFun_Geom)
 {
 	std::string s;
 	ar >> s;

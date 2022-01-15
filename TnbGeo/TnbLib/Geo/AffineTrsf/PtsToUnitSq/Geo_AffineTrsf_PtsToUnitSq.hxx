@@ -10,7 +10,7 @@
 namespace tnbLib
 {
 
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		//- Forward Declarations

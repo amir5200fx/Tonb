@@ -5,7 +5,7 @@
 #include <OSstream.hxx>
 
 tnbLib::Pnt2d 
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfPoint(const Pnt2d & theQ) const
+tnbLib::geoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfPoint(const Pnt2d & theQ) const
 {
 	auto x = theQ;
 	x.X() -= theXmin_;
@@ -17,7 +17,7 @@ tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfPoint(const Pnt2d & theQ) con
 }
 
 tnbLib::Pnt2d 
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcInvTrsfPoint(const Pnt2d & theQ) const
+tnbLib::geoLib::AffineTrsf_PtsToUnitSqObj::CalcInvTrsfPoint(const Pnt2d & theQ) const
 {
 	auto x = theQ;
 
@@ -30,7 +30,7 @@ tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcInvTrsfPoint(const Pnt2d & theQ) 
 }
 
 Standard_Real 
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfX(const Standard_Real theX) const
+tnbLib::geoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfX(const Standard_Real theX) const
 {
 	auto x = theX;
 	x -= theXmin_;
@@ -39,7 +39,7 @@ tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfX(const Standard_Real theX) c
 }
 
 Standard_Real
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfY(const Standard_Real theX) const
+tnbLib::geoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfY(const Standard_Real theX) const
 {
 	auto x = theX;
 	x -= theYmin_;
@@ -48,7 +48,7 @@ tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcTrsfY(const Standard_Real theX) c
 }
 
 Standard_Real 
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcInvX(const Standard_Real theX) const
+tnbLib::geoLib::AffineTrsf_PtsToUnitSqObj::CalcInvX(const Standard_Real theX) const
 {
 	auto x = theX;
 	x *= theDx_;
@@ -57,7 +57,7 @@ tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcInvX(const Standard_Real theX) co
 }
 
 Standard_Real
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcInvY(const Standard_Real theX) const
+tnbLib::geoLib::AffineTrsf_PtsToUnitSqObj::CalcInvY(const Standard_Real theX) const
 {
 	auto x = theX;
 	x *= theDy_;
@@ -65,8 +65,8 @@ tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj::CalcInvY(const Standard_Real theX) co
 	return x;
 }
 
-const tnbLib::GeoLib::AffineTrsf_PtsToUnitSqObj & 
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSq::TrsfObj() const
+const tnbLib::geoLib::AffineTrsf_PtsToUnitSqObj & 
+tnbLib::geoLib::AffineTrsf_PtsToUnitSq::TrsfObj() const
 {
 	if (NOT IsDone())
 	{
@@ -77,7 +77,7 @@ tnbLib::GeoLib::AffineTrsf_PtsToUnitSq::TrsfObj() const
 	return theObj_;
 }
 
-void tnbLib::GeoLib::AffineTrsf_PtsToUnitSq::Perform()
+void tnbLib::geoLib::AffineTrsf_PtsToUnitSq::Perform()
 {
 	auto b = Geo_BoxTools::GetBox(thePts_, 0);
 
@@ -102,7 +102,7 @@ void tnbLib::GeoLib::AffineTrsf_PtsToUnitSq::Perform()
 }
 
 std::vector<tnbLib::Pnt2d> 
-tnbLib::GeoLib::AffineTrsf_PtsToUnitSq::CalcTrsfPoints(const std::vector<Pnt2d>& theQs) const
+tnbLib::geoLib::AffineTrsf_PtsToUnitSq::CalcTrsfPoints(const std::vector<Pnt2d>& theQs) const
 {
 	if (NOT IsDone())
 	{
