@@ -25,5 +25,20 @@ tnbLib::Global_EntityTable::SpanValues
 		auto t = std::make_pair(0.0, 0.0);
 		return std::move(t);
 	}
-	
+}
+
+std::vector<Standard_Real> 
+tnbLib::Global_EntityTable::Entities
+(
+	const std::vector<Standard_Integer>& theIndices
+) const
+{
+	std::vector<Standard_Real> ents;
+	ents.reserve(theIndices.size());
+
+	for (auto id : theIndices)
+	{
+		ents.push_back(theValues_[id]);
+	}
+	return std::move(ents);
 }

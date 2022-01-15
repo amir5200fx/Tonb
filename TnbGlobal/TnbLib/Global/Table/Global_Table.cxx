@@ -115,3 +115,91 @@ tnbLib::Global_Table::ColumnSpan() const
 	auto t = std::make_pair(cols[0], cols[cols.size() - 1]);
 	return std::move(t);
 }
+
+std::vector<Standard_Real> 
+tnbLib::Global_Table::RowEntities
+(
+	const Standard_Real xCol,
+	const std::vector<Standard_Integer>& theIndices
+) const
+{
+	std::vector<Standard_Real> values;
+	values.reserve(theIndices.size());
+
+	const auto& rows = Row();
+	const auto rowX = rows.Entities(theIndices);
+
+	const auto& ets = Entities();
+	for (auto x : rowX)
+	{
+		auto v = ets.Value(x, xCol);
+		values.push_back(std::move(v));
+	}
+	return std::move(values);
+}
+
+std::vector<Standard_Real> 
+tnbLib::Global_Table::ColEntities
+(
+	const Standard_Real xRow, 
+	const std::vector<Standard_Integer>& theIndices
+) const
+{
+	std::vector<Standard_Real> values;
+	values.reserve(theIndices.size());
+
+	const auto& cols = Column();
+	const auto colX = cols.Entities(theIndices);
+
+	const auto& ets = Entities();
+	for (auto x : colX)
+	{
+		auto v = ets.Value(xRow, x);
+		values.push_back(std::move(v));
+	}
+	return std::move(values);
+}
+
+std::vector<std::pair<Standard_Real, Standard_Real>> 
+tnbLib::Global_Table::RowEntities
+(
+	const Standard_Real xCol,
+	const std::vector<Standard_Integer>& theIndices,
+	const Global_Table & theTable
+)
+{
+	std::vector<std::pair<Standard_Real, Standard_Real>> values;
+	values.reserve(theIndices.size());
+	const auto& rows = theTable.Row();
+	const auto rowX = rows.Entities(theIndices);
+	const auto rowValues = theTable.RowEntities(xCol, theIndices);
+
+	for (size_t i = 0; i < theIndices.size(); i++)
+	{
+		auto paired = std::make_pair(rowX[i], rowValues[i]);
+		values.push_back(std::move(paired));
+	}
+	return std::move(values);
+}
+
+std::vector<std::pair<Standard_Real, Standard_Real>> 
+tnbLib::Global_Table::ColEntities
+(
+	const Standard_Real xRow,
+	const std::vector<Standard_Integer>& theIndices,
+	const Global_Table & theTable
+)
+{
+	std::vector<std::pair<Standard_Real, Standard_Real>> values;
+	values.reserve(theIndices.size());
+	const auto& cols = theTable.Column();
+	const auto colX = cols.Entities(theIndices);
+	const auto colValues = theTable.ColEntities(xRow, theIndices);
+
+	for (size_t i = 0; i < theIndices.size(); i++)
+	{
+		auto paired = std::make_pair(colX[i], colValues[i]);
+		values.push_back(std::move(paired));
+	}
+	return std::move(values);
+}
