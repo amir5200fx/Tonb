@@ -4,7 +4,7 @@
 
 namespace tnbLib
 {
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		class AffineTrsf_PtsToUnitSqObj;

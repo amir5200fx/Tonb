@@ -10,7 +10,7 @@
 namespace tnbLib
 {
 
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		struct Segment
@@ -284,20 +284,20 @@ namespace tnbLib
 				return;
 			}
 
-			auto segPnts = GeoLib::CalcSegPoints(theCurve, theSeg);
-			auto sqDis = GeoLib::CalcSqDist<CurveType>(segPnts);
+			auto segPnts = geoLib::CalcSegPoints(theCurve, theSeg);
+			auto sqDis = geoLib::CalcSqDist<CurveType>(segPnts);
 
 			if (sqDis <= theMinSizeSQ)
 				return;
 
 			auto samples =
-				GeoLib::CalcSamples
+				geoLib::CalcSamples
 				(
 					theCurve,
-					GeoLib::CalcXs<CurveType, RandSamples>::_(theNbSamples, theSeg.theX0, theSeg.theX1)
+					geoLib::CalcXs<CurveType, RandSamples>::_(theNbSamples, theSeg.theX0, theSeg.theX1)
 				);
 
-			auto approx = GeoLib::CalcApproximate<CurveType>(segPnts, samples);
+			auto approx = geoLib::CalcApproximate<CurveType>(segPnts, samples);
 
 			if (theApprox*sqDis < approx)
 			{
@@ -322,7 +322,7 @@ namespace tnbLib
 				return;
 			}
 
-			auto angle = GeoLib::CalcMaxAngle<CurveType>(segPnts, samples);
+			auto angle = geoLib::CalcMaxAngle<CurveType>(segPnts, samples);
 			if (theAngle < angle)
 			{
 				Subdivide<CurveType, RandSamples>
@@ -370,11 +370,11 @@ namespace tnbLib
 		Debug_Null_Pointer(Info());
 		const auto& theInfo = *Info();
 
-		GeoLib::segList Segments;
-		GeoLib::Subdivide<typename remove_pointer<CurveType>::type, RandSamples>
+		geoLib::segList Segments;
+		geoLib::Subdivide<typename remove_pointer<CurveType>::type, RandSamples>
 			(
 				*Curve(),
-				GeoLib::Segment(FirstParameter(), LastParameter()),
+				geoLib::Segment(FirstParameter(), LastParameter()),
 				theInfo.NbSamples(),
 				theInfo.Approx()*theInfo.Approx(),
 				Geo_Tools::DegToRadian(theInfo.Angle()),
@@ -382,7 +382,7 @@ namespace tnbLib
 				0, theInfo.InitNbSubdivision(), theInfo.MaxNbSubdivision(), Segments
 				);
 
-		Geo_ItemSort<GeoLib::Segment> sorting(&GeoLib::Segment::IsLess);
+		Geo_ItemSort<geoLib::Segment> sorting(&geoLib::Segment::IsLess);
 		sorting.Perform(Segments);
 
 		theChain_ = std::make_shared<chain>();

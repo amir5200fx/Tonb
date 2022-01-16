@@ -9,6 +9,6 @@ namespace tnbLib
 		const Standard_Real x
 	) const
 	{
-		return GeoLib::SegmentIntegrand<MetricPrcsrType, UnitLength>::_(x, Entity());
+		return geoLib::SegmentIntegrand<MetricPrcsrType, UnitLength>::_(x, Entity());
 	}
 }

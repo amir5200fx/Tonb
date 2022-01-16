@@ -40,6 +40,21 @@
     <Filter Include="TnbLib\Global\serialization">
       <UniqueIdentifier>{1d8a773e-0a66-42e0-a31f-85a7950da812}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Global\Table">
+      <UniqueIdentifier>{6e8c394e-7fa0-417b-8d2d-4de20b68bbcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\Table\Row">
+      <UniqueIdentifier>{068d1bf6-544e-46ef-9d54-5ce113a4bce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\Table\Column">
+      <UniqueIdentifier>{22e7048f-b827-443e-95ee-3097abad1e50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\Table\Entity">
+      <UniqueIdentifier>{bb4c225b-927f-4499-b9d0-dd9abdcff212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Global\Tools">
+      <UniqueIdentifier>{f056b88d-83ba-4623-909d-426578900e4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Global\containers\ADT\Ary1d\Adt_Ary1d.hxx">
@@ -117,6 +132,24 @@
     <ClInclude Include="TnbLib\Global\global\Global_FileI.hxx">
       <Filter>TnbLib\Global\global</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Global\Table\Global_Table.hxx">
+      <Filter>TnbLib\Global\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\Table\Row\Global_RowTable.hxx">
+      <Filter>TnbLib\Global\Table\Row</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\Table\Column\Global_ColumnTable.hxx">
+      <Filter>TnbLib\Global\Table\Column</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\Table\Entity\Global_EntityTable.hxx">
+      <Filter>TnbLib\Global\Table\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\Tools\Global_Tools.hxx">
+      <Filter>TnbLib\Global\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Global\Tools\Global_ToolsI.hxx">
+      <Filter>TnbLib\Global\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Global\global\Global_Message.cxx">
@@ -139,6 +172,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Global\global\Global_File.cxx">
       <Filter>TnbLib\Global\global</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\Table\Global_Table.cxx">
+      <Filter>TnbLib\Global\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\Tools\Global_Tools.cxx">
+      <Filter>TnbLib\Global\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Global\Table\Entity\Global_EntityTable.cxx">
+      <Filter>TnbLib\Global\Table\Entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

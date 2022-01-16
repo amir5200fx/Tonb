@@ -3,7 +3,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
+tnbLib::geoLib::ProfileFun_Geom::ProfileFun_Geom
 (
 	const Handle(Geom2d_Curve)& theCurve,
 	const Standard_Real theLower,
@@ -14,7 +14,7 @@ tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
 {
 }
 
-tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
+tnbLib::geoLib::ProfileFun_Geom::ProfileFun_Geom
 (
 	Handle(Geom2d_Curve) && theCurve, 
 	const Standard_Real theLower,
@@ -25,7 +25,7 @@ tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
 {
 }
 
-tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
+tnbLib::geoLib::ProfileFun_Geom::ProfileFun_Geom
 (
 	const Standard_Integer theIndex,
 	const Handle(Geom2d_Curve)& theCurve, 
@@ -37,7 +37,7 @@ tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
 {
 }
 
-tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
+tnbLib::geoLib::ProfileFun_Geom::ProfileFun_Geom
 (
 	const Standard_Integer theIndex, 
 	Handle(Geom2d_Curve) && theCurve, 
@@ -49,7 +49,7 @@ tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
 {
 }
 
-tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
+tnbLib::geoLib::ProfileFun_Geom::ProfileFun_Geom
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
@@ -62,7 +62,7 @@ tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
 {
 }
 
-tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
+tnbLib::geoLib::ProfileFun_Geom::ProfileFun_Geom
 (
 	const Standard_Integer theIndex, 
 	const word & theName, 
@@ -79,7 +79,7 @@ tnbLib::GeoLib::ProfileFun_Geom::ProfileFun_Geom
 #include <Geom2d_Line.hxx>
 
 Standard_Real 
-tnbLib::GeoLib::ProfileFun_Geom::Value
+tnbLib::geoLib::ProfileFun_Geom::Value
 (
 	const Standard_Real x
 ) const

@@ -57,9 +57,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,9 +81,10 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Global\Tools;$(ProjectDir)TnbLib\Global\Table\Entity;$(ProjectDir)TnbLib\Global\Table\Column;$(ProjectDir)TnbLib\Global\Table\Row;$(ProjectDir)TnbLib\Global\Table;$(ProjectDir)TnbLib\Global\serialization;$(ProjectDir)TnbLib\Global\Traits;$(ProjectDir)TnbLib\Global\error;$(ProjectDir)TnbLib\Global\containers\ADT\List;$(ProjectDir)TnbLib\Global\containers\ADT\Avl;$(ProjectDir)TnbLib\Global\containers\ADT\Ary2d;$(ProjectDir)TnbLib\Global\containers\ADT\Ary1d;$(ProjectDir)TnbLib\Global\module;$(ProjectDir)TnbLib\Global\global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TnbGlobal_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,6 +118,12 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\module\Global_Module.hxx" />
     <ClInclude Include="TnbLib\Global\serialization\dimensionSet_Serialization.hxx" />
     <ClInclude Include="TnbLib\Global\serialization\OpenCascade_Serialization.hxx" />
+    <ClInclude Include="TnbLib\Global\Table\Column\Global_ColumnTable.hxx" />
+    <ClInclude Include="TnbLib\Global\Table\Entity\Global_EntityTable.hxx" />
+    <ClInclude Include="TnbLib\Global\Table\Global_Table.hxx" />
+    <ClInclude Include="TnbLib\Global\Table\Row\Global_RowTable.hxx" />
+    <ClInclude Include="TnbLib\Global\Tools\Global_Tools.hxx" />
+    <ClInclude Include="TnbLib\Global\Tools\Global_ToolsI.hxx" />
     <ClInclude Include="TnbLib\Global\Traits\Traits.hxx" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +134,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Global\global\UnitSystem.cxx" />
     <ClCompile Include="TnbLib\Global\serialization\dimensionSet_Serialization.cxx" />
     <ClCompile Include="TnbLib\Global\serialization\OpenCascade_Serialization.cxx" />
+    <ClCompile Include="TnbLib\Global\Table\Entity\Global_EntityTable.cxx" />
+    <ClCompile Include="TnbLib\Global\Table\Global_Table.cxx" />
+    <ClCompile Include="TnbLib\Global\Tools\Global_Tools.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

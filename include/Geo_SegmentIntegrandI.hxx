@@ -18,7 +18,7 @@ namespace tnbLib
 namespace tnbLib
 {
 
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		template<class MetricPrcsrType, bool UnitLength = false>

@@ -37,7 +37,7 @@ namespace tnbLib
 namespace tnbLib
 {
 
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		template<class CurveType, class MetricPrcsrType = void, bool UnitLength = false>
