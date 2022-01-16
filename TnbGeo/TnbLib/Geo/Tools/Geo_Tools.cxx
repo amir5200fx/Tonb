@@ -9,6 +9,7 @@
 #include <Entity2d_Chain.hxx>
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
+#include <Global_Tools.hxx>
 
 #include <gp_Pln.hxx>
 #include <gp_Lin2d.hxx>
@@ -597,25 +598,7 @@ tnbLib::Geo_Tools::FindSpan
 	const std::vector<Standard_Real>& theSorted
 )
 {
-#ifdef _DEBUG
-	CheckSorted(theSorted, "size_t Geo_Tools::FindSpan(Args...)");
-#endif // _DEBUG
-
-	auto high = theSorted.size() - 1;
-	if (x IS_EQUAL theSorted[high])
-	{
-		return high;
-	}
-
-	size_t low = 0;
-	auto mid = (low + high) / 2;
-	while (x < theSorted[mid] OR x >= theSorted[mid + 1])
-	{
-		if (x < theSorted[mid]) high = mid;
-		else low = mid;
-		mid = (low + high) / 2;
-	}
-	return mid;
+	return Global_Tools::FindSpan(x, theSorted);
 }
 
 tnbLib::Entity2d_Line 

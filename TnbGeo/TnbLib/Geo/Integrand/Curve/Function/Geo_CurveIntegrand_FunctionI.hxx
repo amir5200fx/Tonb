@@ -9,7 +9,7 @@ namespace tnbLib
 		const Standard_Real x
 	) const
 	{
-		return GeoLib::CurveIntegrand<CurveType, MetricPrcsrType, UnitLength>::_(x, Entity());
+		return geoLib::CurveIntegrand<CurveType, MetricPrcsrType, UnitLength>::_(x, Entity());
 	}
 
 	template<class CurveType>
@@ -18,6 +18,6 @@ namespace tnbLib
 		const Standard_Real x
 	) const
 	{
-		return GeoLib::CurveIntegrand<CurveType, void, false>::_(x, Entity());
+		return geoLib::CurveIntegrand<CurveType, void, false>::_(x, Entity());
 	}
 }

@@ -7,7 +7,7 @@
 namespace tnbLib
 {
 
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		class ProfileFun_Const

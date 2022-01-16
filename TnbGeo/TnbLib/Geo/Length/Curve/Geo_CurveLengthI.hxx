@@ -7,7 +7,7 @@
 namespace tnbLib
 {
 
-	namespace GeoLib
+	namespace geoLib
 	{
 
 		template<class gCurveType, class MetricPrcsrType>

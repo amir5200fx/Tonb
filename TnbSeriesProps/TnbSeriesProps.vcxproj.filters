@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{36448662-18d5-4f92-a9c9-30cbfd6e8229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps">
+      <UniqueIdentifier>{f5620183-1485-4a82-afc7-5638f38e2623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB">
+      <UniqueIdentifier>{76ef8cb5-678a-4ec4-be67-a0a2caf4b27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\Entity">
+      <UniqueIdentifier>{e56abe5f-5f0e-4e29-bf2f-a8b4a97411f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB\Section">
+      <UniqueIdentifier>{3760945a-7120-4c15-a800-c2ad7c1148cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\module">
+      <UniqueIdentifier>{0e8b24ed-8502-4a59-9a22-09ddcde9b9a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB\Section\TableV2">
+      <UniqueIdentifier>{49c01693-1750-4257-a9af-c6fd4758aa8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB\Section\TableV1">
+      <UniqueIdentifier>{a6d281ea-3703-48b1-9eff-5925c10ffdda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB\Tools">
+      <UniqueIdentifier>{f96a3c70-d8b4-4e52-9f38-b9f2f0247888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate">
+      <UniqueIdentifier>{e95a6f84-cb94-4eed-bbed-1744f96de476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1">
+      <UniqueIdentifier>{8cb06e12-ee8e-408d-9516-0f383b88edd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2">
+      <UniqueIdentifier>{d7d9af39-20df-4765-988a-864946d1b28e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\SeriesProps\Entity\SeriesProps_Entity.hxx">
+      <Filter>TnbLib\SeriesProps\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\module\SeriesProps_Module.hxx">
+      <Filter>TnbLib\SeriesProps\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\WageningenB\Section\SeriesProps_WagenB_Section.hxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\WageningenB\Section\TableV1\SeriesProps_WagenB_TableV1.hxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\TableV1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\WageningenB\Section\TableV2\SeriesProps_WagenB_TableV2.hxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\TableV2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\WageningenB\Tools\SeriesProps_WagenBTools.hxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\SeriesProps_TabulatedWagenB.hxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\Interpolate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1\SeriesProps_TabulatedWagenB_V1.hxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\SeriesProps\Entity\SeriesProps_Entity.cxx">
+      <Filter>TnbLib\SeriesProps\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\SeriesProps_WagenB_Section.cxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\TableV1\SeriesProps_WagenB_TableV1.cxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\TableV1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\TableV2\SeriesProps_WagenB_TableV2.cxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\TableV2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Tools\SeriesProps_WagenBTools.cxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\SeriesProps_TabulatedWagenB.cxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\Interpolate</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1\SeriesProps_TabulatedWagenB_V1.cxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

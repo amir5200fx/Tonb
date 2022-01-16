@@ -4,7 +4,7 @@
 #include <OSstream.hxx>
 
 Standard_Real 
-tnbLib::GeoLib::ProfileFun_Linear::Value
+tnbLib::geoLib::ProfileFun_Linear::Value
 (
 	const Standard_Real x
 ) const

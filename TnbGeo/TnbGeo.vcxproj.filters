@@ -472,6 +472,24 @@
     <Filter Include="TnbLib\Geo\Graph\Polygon\Node\Traits">
       <UniqueIdentifier>{7c448324-d3c9-4451-85dd-f4fe313420f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Function">
+      <UniqueIdentifier>{95ecf509-91fb-47c8-950b-bfc813b1e3dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Interpl">
+      <UniqueIdentifier>{2a163a96-3045-4457-8ba8-f546ff3c0a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Interpl\Linear">
+      <UniqueIdentifier>{10fe214e-cf4e-4d78-a73f-231f3dba5182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Sampling">
+      <UniqueIdentifier>{b3c09e9d-a2b9-4d69-bd02-b64feff9cae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Sampling\Linear">
+      <UniqueIdentifier>{841b0bc5-1e22-472c-947d-7898f28d4b4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Table">
+      <UniqueIdentifier>{ebcd0aab-e977-40f6-bdaf-d7307320cbf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1104,6 +1122,21 @@
     <ClInclude Include="TnbLib\Geo\Graph\Polygon\Node\Geo2d_PolygonGraphNodeFwd.hxx">
       <Filter>TnbLib\Geo\Graph\Polygon\Node</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Interpl\Geo_InterplFunction.hxx">
+      <Filter>TnbLib\Geo\Function\Interpl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Interpl\Linear\Geo_LinInterplFunction.hxx">
+      <Filter>TnbLib\Geo\Function\Interpl\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Sampling\Geo_SamplingFunction.hxx">
+      <Filter>TnbLib\Geo\Function\Sampling</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Sampling\Linear\Geo_LinSamplingFunction.hxx">
+      <Filter>TnbLib\Geo\Function\Sampling\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Table\Geo_TableFunction.hxx">
+      <Filter>TnbLib\Geo\Function\Table</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1411,6 +1444,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Knit\2d\Geo2d_KnitChain.cxx">
       <Filter>TnbLib\Geo\knit\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Interpl\Linear\Geo_LinInterplFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Interpl\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Sampling\Linear\Geo_LinSamplingFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Sampling\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Table\Geo_TableFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Table</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
