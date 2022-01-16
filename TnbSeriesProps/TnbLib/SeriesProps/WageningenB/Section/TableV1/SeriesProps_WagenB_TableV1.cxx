@@ -488,7 +488,7 @@ namespace tnbLib
 }
 
 const std::shared_ptr<tnbLib::Global_Table> tnbLib::wagenB::table_v1 =
-std::make_shared<tnbLib::Global_Table>(std::move(tableV1::myRowTable), std::move(tableV1::myColTable));
+std::make_shared<tnbLib::Global_Table>(std::move(tnbLib::tableV1::myRowTable), std::move(tnbLib::tableV1::myColTable));
 
 namespace tnbLib
 {
