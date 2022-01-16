@@ -24,6 +24,6 @@ namespace tnbLib
 	) const
 	{
 		Geo_CurveIntegrand<gCurveType, MetricPrcsrType> Integrand(Entity().Curve(), Entity().SizeMap());
-		return GeoLib::CalcCurveLength<gCurveType, MetricPrcsrType>::_(Integrand, X0(), x, *Info()) - Step();
+		return geoLib::CalcCurveLength<gCurveType, MetricPrcsrType>::_(Integrand, X0(), x, *Info()) - Step();
 	}
 }
