@@ -46,20 +46,6 @@ namespace tnbLib
 
 		TNB_SERIALIZATION(TnbCad_EXPORT);
 
-	public:
-
-		TnbCad_EXPORT Cad_TModel();
-
-		TnbCad_EXPORT Cad_TModel
-		(
-			const Standard_Integer theIndex
-		);
-
-		TnbCad_EXPORT Cad_TModel
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		);
 
 	protected:
 
@@ -72,6 +58,31 @@ namespace tnbLib
 		}
 
 	public:
+
+		static TnbCad_EXPORT const std::string extension;
+
+		// default constructor [1/16/2022 Amir]
+
+		Cad_TModel()
+		{}
+
+		explicit Cad_TModel
+		(
+			const Standard_Integer theIndex
+		)
+			: TModel_Entity(theIndex, "tmodel")
+		{}
+
+		Cad_TModel
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		)
+			: TModel_Entity(theIndex, theName)
+		{}
+
+
+		// public functions and operators [1/16/2022 Amir]
 
 		const auto& Shape() const
 		{

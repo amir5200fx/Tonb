@@ -1,25 +1,6 @@
 #include <Cad_TModel.hxx>
 
-tnbLib::Cad_TModel::Cad_TModel()
-{
-}
-
-tnbLib::Cad_TModel::Cad_TModel
-(
-	const Standard_Integer theIndex
-)
-	: TModel_Entity(theIndex)
-{
-}
-
-tnbLib::Cad_TModel::Cad_TModel
-(
-	const Standard_Integer theIndex,
-	const word & theName
-)
-	: TModel_Entity(theIndex, theName)
-{
-}
+const std::string tnbLib::Cad_TModel::extension = ".tmodel";
 
 Standard_Integer 
 tnbLib::Cad_TModel::NbHoles() const

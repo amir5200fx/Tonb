@@ -2769,6 +2769,12 @@
     <ClInclude Include="TnbLib\Base\Data\Mesh_RegisterEntityM.hxx">
       <Filter>TnbLib\Base\Data</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Boundary\Plane\Surface\G\Aft2d_gBoundaryOfPlaneSurface.hxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Boundary\Plane\Surface\T\Aft2d_tBoundaryOfPlaneSurface.hxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\Surface\T</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -3445,6 +3451,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\SingularityHorizons\Cad_SingularityHorizons.cxx">
       <Filter>TnbLib\Cad\SingularityHorizons</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\Surface\G\Aft2d_gBoundaryOfPlaneSurface.cxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Boundary\Plane\Surface\T\Aft2d_tBoundaryOfPlaneSurface.cxx">
+      <Filter>TnbLib\Aft\Boundary\Plane\Surface\T</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

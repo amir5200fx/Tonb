@@ -415,6 +415,12 @@
     <Filter Include="TnbLib\Cad\TModel\Entities\Paired\nonManifold">
       <UniqueIdentifier>{6713a036-dd07-4f9f-8ed6-5c064c963d4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single">
+      <UniqueIdentifier>{ea76ee51-c657-48da-a251-5ec51c0f4213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Length">
+      <UniqueIdentifier>{7385ea44-4230-4b2d-b52f-833589780275}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -803,6 +809,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Paired\nonManifold\TModel_nonManifoldPaired.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Paired\nonManifold</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Cad_tModelMaker_SamplePtsDistPairCrvCriterion.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtsDistPairCrvCriterion.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Length\Cad_CurveLength.hxx">
+      <Filter>TnbLib\Cad\Length</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1204,6 +1219,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Singular\Geometry\TModel_SingularEdge.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Edge\Singular</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtsDistPairCrvCriterion.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\Cad_tModelMaker_PairCrvCriterion.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Length\Cad_CurveLength.cxx">
+      <Filter>TnbLib\Cad\Length</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
