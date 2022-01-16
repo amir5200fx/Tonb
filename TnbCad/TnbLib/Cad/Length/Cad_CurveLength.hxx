@@ -75,7 +75,7 @@ namespace tnbLib
 			return theInfo_;
 		}
 
-		Standard_Real Result() const;
+		TnbCad_EXPORT Standard_Real Result() const;
 
 		TnbCad_EXPORT void Perform();
 		TnbCad_EXPORT void Perform(const Standard_Real theLower, const Standard_Real theUpper);

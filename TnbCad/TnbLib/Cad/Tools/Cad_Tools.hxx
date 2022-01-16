@@ -45,6 +45,7 @@ namespace tnbLib
 	class TModel_Wire;
 	class TModel_ManifoldPaired;
 	class Entity2d_Metric1;
+	class NumAlg_AdaptiveInteg_Info;
 
 	template<class EntityType>
 	class Cad_BlockEntity;
@@ -64,6 +65,13 @@ namespace tnbLib
 			CalcPrecision
 			(
 				const TModel_Vertex&
+			);
+
+		static TnbCad_EXPORT Standard_Real 
+			CalcLength
+			(
+				const Handle(Geom_Curve)& theCurve, 
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			);
 
 		static TnbCad_EXPORT Standard_Boolean

@@ -23,6 +23,15 @@ namespace tnbLib
 			tModelMaker_OnePtsDistPairCrvCriterion()
 			{}
 
+			// constructors [1/16/2022 Amir]
+
+			explicit tModelMaker_OnePtsDistPairCrvCriterion
+			(
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			)
+				: Cad_tModelMaker_SamplePtsDistPairCrvCriterion(theInfo)
+			{}
+
 			// override functions and operators [1/16/2022 Amir]
 
 			Standard_Boolean ArePaired(const std::shared_ptr<TModel_Curve>& theCurve0, const std::shared_ptr<TModel_Curve>& theCurve1) const override;
