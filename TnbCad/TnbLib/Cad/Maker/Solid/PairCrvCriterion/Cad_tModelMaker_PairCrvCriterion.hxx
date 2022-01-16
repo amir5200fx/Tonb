@@ -24,6 +24,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		Standard_Real theTolerance_;
 
 		// private functions and operators [1/7/2022 Amir]
 
@@ -32,7 +33,7 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
-			// empty body [1/7/2022 Amir]
+			ar & theTolerance_;
 		}
 
 	protected:
@@ -40,16 +41,28 @@ namespace tnbLib
 		// default constructor [1/7/2022 Amir]
 
 		Cad_tModelMaker_PairCrvCriterion()
+			: theTolerance_(DEFAULT_TOLERANCE)
 		{}
 
 		// constructors [1/7/2022 Amir]
 
+		explicit Cad_tModelMaker_PairCrvCriterion(const Standard_Real theTol)
+			: theTolerance_(theTol)
+		{}
+
 	public:
+
+		static const Standard_Real DEFAULT_TOLERANCE;
 
 		virtual ~Cad_tModelMaker_PairCrvCriterion()
 		{}
 
 		// public functions and operators [1/7/2022 Amir]
+
+		auto Tolerance() const
+		{
+			return theTolerance_;
+		}
 
 		virtual Standard_Boolean 
 			ArePaired
@@ -57,6 +70,11 @@ namespace tnbLib
 				const std::shared_ptr<TModel_Curve>& theCurve0,
 				const std::shared_ptr<TModel_Curve>& theCurve1
 			) const = 0;
+
+		void SetTolerance(const Standard_Real theTol)
+		{
+			theTolerance_ = theTol;
+		}
 
 	};
 }
