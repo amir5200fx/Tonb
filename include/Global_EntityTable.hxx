@@ -82,6 +82,12 @@ namespace tnbLib
 				const Standard_Integer theSpan
 			) const;
 
+		TnbGlobal_EXPORT std::vector<Standard_Real> 
+			Entities
+			(
+				const std::vector<Standard_Integer>&
+			) const;
+
 		void SetValues(const std::vector<Standard_Real>& theValues)
 		{
 			theValues_ = theValues;

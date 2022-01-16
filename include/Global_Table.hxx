@@ -126,6 +126,37 @@ namespace tnbLib
 		{
 			return theEntities_;
 		}
+
+		TnbGlobal_EXPORT std::vector<Standard_Real>
+			RowEntities
+			(
+				const Standard_Real xCol,
+				const std::vector<Standard_Integer>&
+			) const;
+
+		TnbGlobal_EXPORT std::vector<Standard_Real>
+			ColEntities
+			(
+				const Standard_Real xRow, 
+				const std::vector<Standard_Integer>&
+			) const;
+
+		static TnbGlobal_EXPORT std::vector<std::pair<Standard_Real, Standard_Real>> 
+			RowEntities
+			(
+				const Standard_Real xCol,
+				const std::vector<Standard_Integer>&,
+				const Global_Table&
+			);
+
+		static TnbGlobal_EXPORT std::vector<std::pair<Standard_Real, Standard_Real>> 
+			ColEntities
+			(
+				const Standard_Real xRow,
+				const std::vector<Standard_Integer>&,
+				const Global_Table&
+			);
+		
 	};
 }
 
