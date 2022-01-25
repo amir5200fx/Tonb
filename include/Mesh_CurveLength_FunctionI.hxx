@@ -33,4 +33,36 @@ namespace tnbLib
 		curve.D1(p, pt, vec);
 		return map.IntegrandPerSize(pt, vec);
 	}
+
+
+	template<class gCurveType>
+	Mesh_CurveLength_Function<gCurveType, void>::Mesh_CurveLength_Function
+	(
+		const entity& theEntity
+	)
+		: theEntity_(theEntity)
+	{}
+
+	template<class gCurveType>
+	Standard_Real Mesh_CurveLength_Function<gCurveType, void>::Value
+	(
+		const Standard_Real x
+	) const
+	{
+		const auto h = theEntity_.Size();
+		const auto& curve = theEntity_.Curve();
+
+		auto first = theEntity_.FirstParameter();
+		auto last = theEntity_.LastParameter();
+
+		auto p = x;
+		if (p < first) p = first;
+		if (p > last) p = last;
+
+		Point pt;
+		Vector vec;
+
+		curve.D1(p, pt, vec);
+		return (1.0 / h)*std::sqrt(vec.Dot(vec));
+	}
 }

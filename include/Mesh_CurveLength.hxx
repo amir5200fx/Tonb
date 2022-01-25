@@ -17,7 +17,7 @@ namespace tnbLib
 
 		typedef NumAlg_AdaptiveInteg_Info info;
 
-		template<class gCurveType, class MetricPrcsrType>
+		template<class gCurveType, class MetricPrcsrType = void>
 		static Standard_Real Length
 		(
 			const Mesh_CurveEntity<gCurveType, MetricPrcsrType>& theEntity,
@@ -26,7 +26,7 @@ namespace tnbLib
 			info& theInfo
 		);
 
-		template<class gCurveType, class MetricPrcsrType>
+		template<class gCurveType, class MetricPrcsrType = void>
 		static Standard_Real Length
 		(
 			const Mesh_CurveEntity<gCurveType, MetricPrcsrType>& theEntity,

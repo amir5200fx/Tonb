@@ -27,6 +27,12 @@ namespace tnbLib
 
 	protected:
 
+
+		// default constructor [1/16/2022 Amir]
+
+
+		// constructors [1/16/2022 Amir]
+
 		Mesh_CurveOptmPoint_Correction_Base
 		(
 			const Standard_Real theU0,
@@ -46,6 +52,9 @@ namespace tnbLib
 
 	public:
 
+
+		// public functions and operators [1/16/2022 Amir]
+
 		const auto& Info() const
 		{
 			return theInfo_;
@@ -62,7 +71,7 @@ namespace tnbLib
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Guess)
 	};
 
-	template<class gCurveType, class MetricPrcsrType>
+	template<class gCurveType, class MetricPrcsrType = void>
 	class Mesh_CurveOptmPoint_Correction
 		: public Global_Done
 		, public Mesh_CurveOptmPoint_Correction_Base
@@ -77,6 +86,12 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [1/16/2022 Amir]
+
+
+		// constructors [1/16/2022 Amir]
+
 		Mesh_CurveOptmPoint_Correction
 		(
 			const Standard_Real theU0,
@@ -87,6 +102,51 @@ namespace tnbLib
 			: Mesh_CurveOptmPoint_Correction_Base(theU0, theGuess, theInfo)
 			, theCurve_(theCurve)
 		{}
+
+
+		// public functions and operators [1/16/2022 Amir]
+
+		const auto& Entity() const
+		{
+			return theCurve_;
+		}
+
+		void Perform();
+	};
+
+	template<class gCurveType>
+	class Mesh_CurveOptmPoint_Correction<gCurveType, void>
+		: public Global_Done
+		, public Mesh_CurveOptmPoint_Correction_Base
+	{
+
+		typedef Mesh_CurveEntity<gCurveType> entity;
+		typedef Mesh_CurveOptmPoint_Correction_Info info;
+
+		/*Private Data*/
+
+		const entity& theCurve_;
+
+	public:
+
+		// default constructor [1/16/2022 Amir]
+
+
+		// constructors [1/16/2022 Amir]
+
+		Mesh_CurveOptmPoint_Correction
+		(
+			const Standard_Real theU0,
+			const Standard_Real theGuess,
+			const entity& theCurve,
+			const info& theInfo
+		)
+			: Mesh_CurveOptmPoint_Correction_Base(theU0, theGuess, theInfo)
+			, theCurve_(theCurve)
+		{}
+
+
+		// public functions and operators [1/16/2022 Amir]
 
 		const auto& Entity() const
 		{

@@ -6,6 +6,7 @@
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Geo2d_PolygonGraphFwd.hxx>
+#include <Mesh_Module.hxx>
 
 #include <Standard_Handle.hxx>
 
@@ -83,7 +84,7 @@ namespace tnbLib
 			return theMergeTolerance_;
 		}
 
-		void Perform();
+		TnbMesh_EXPORT void Perform();
 	};
 }
 

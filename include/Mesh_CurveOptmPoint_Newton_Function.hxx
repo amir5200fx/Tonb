@@ -55,13 +55,45 @@ namespace tnbLib
 		}
 	};
 
-	template<class gCurveType, class MetricPrcsrType>
+	template<class gCurveType, class MetricPrcsrType = void>
 	class Mesh_CurveOptmPoint_Newton_Function
 		: public NumAlg_NewtonSolver_Function<true>
 		, public Mesh_CurveOptmPoint_Newton_Function_Base
 	{
 
 		typedef Mesh_CurveEntity<gCurveType, MetricPrcsrType> entity;
+		typedef NumAlg_AdaptiveInteg_Info info;
+
+		/*Private Data*/
+
+		const entity& theCurve_;
+
+	public:
+
+		Mesh_CurveOptmPoint_Newton_Function
+		(
+			const Standard_Real theX0,
+			const Standard_Real theStep,
+			const entity& theCurve,
+			const std::shared_ptr<info>& theInfo
+		);
+
+		const auto& Entity() const
+		{
+			return theCurve_;
+		}
+
+		Standard_Real Value(const Standard_Real x) const override;
+	};
+
+
+	template<class gCurveType>
+	class Mesh_CurveOptmPoint_Newton_Function<gCurveType, void>
+		: public NumAlg_NewtonSolver_Function<true>
+		, public Mesh_CurveOptmPoint_Newton_Function_Base
+	{
+
+		typedef Mesh_CurveEntity<gCurveType> entity;
 		typedef NumAlg_AdaptiveInteg_Info info;
 
 		/*Private Data*/

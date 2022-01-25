@@ -53,7 +53,7 @@ namespace tnbLib
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Step)
 	};
 
-	template<class gCurveType, class MetricPrcsrType>
+	template<class gCurveType, class MetricPrcsrType = void>
 	class Mesh_CurveOptmPoint_Newton
 		: public Global_Done
 		, public Mesh_CurveOptmPoint_Newton_Base

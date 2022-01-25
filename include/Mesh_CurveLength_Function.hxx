@@ -12,14 +12,18 @@ namespace tnbLib
 	template<class gCurveType, class MetricPrcsrType>
 	class Mesh_CurveEntity;
 
-	template<class gCurveType, class MetricPrcsrType>
+	template<class gCurveType, class MetricPrcsrType = void>
 	class Mesh_CurveLength_Function
 		: public NumAlg_IntegFunc
 	{
 
+	public:
+
 		typedef Mesh_CurveEntity<gCurveType, MetricPrcsrType> entity;
 		typedef typename cascadeLib::pt_type_from_curve<gCurveType>::ptType Point;
 		typedef typename cascadeLib::vec_type_from_point<Point>::vcType Vector;
+
+	private:
 
 		/*Private Data*/
 
@@ -30,6 +34,32 @@ namespace tnbLib
 		Mesh_CurveLength_Function(const entity& theEntity);
 
 		Standard_Real Value(const Standard_Real x) const override;
+	};
+
+
+	template<class gCurveType>
+	class Mesh_CurveLength_Function<gCurveType, void>
+		: public NumAlg_IntegFunc
+	{
+
+	public:
+
+		typedef Mesh_CurveEntity<gCurveType, void> entity;
+		typedef typename cascadeLib::pt_type_from_curve<gCurveType>::ptType Point;
+		typedef typename cascadeLib::vec_type_from_point<Point>::vcType Vector;
+
+	private:
+
+		/*Private Data*/
+
+		const entity& theEntity_;
+
+	public:
+
+		Mesh_CurveLength_Function(const entity& theEntity);
+
+		Standard_Real Value(const Standard_Real x) const override;
+
 	};
 }
 

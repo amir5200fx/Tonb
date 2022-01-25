@@ -27,6 +27,17 @@ namespace tnbLib
 		auto Pt = theCurve_.Value(x);
 		return std::move(Pt);
 	}
+
+	template<class gCurveType>
+	typename Mesh_CurveEntity<gCurveType, void>::Point
+		Mesh_CurveEntity<gCurveType, void>::Value
+		(
+			const Standard_Real x
+		) const
+	{
+		auto Pt = theCurve_.Value(x);
+		return std::move(Pt);
+	}
 }
 
 //- Static members
@@ -50,4 +61,25 @@ Standard_Real tnbLib::Mesh_CurveEntity<gCurveType, MetricPrcsrType>::Integrand
 
 	theEntity.Curve().D1(param, point, vector);
 	return theEntity.SizeMap().IntegrandPerSize(point, vector);
+}
+
+template<class gCurveType>
+Standard_Real tnbLib::Mesh_CurveEntity<gCurveType, void>::Integrand
+(
+	const Standard_Real x,
+	const Mesh_CurveEntity& theEntity
+)
+{
+	auto first = theEntity.FirstParameter();
+	auto last = theEntity.LastParameter();
+
+	auto param = x;
+	if (param < first) param = first;
+	if (param > last) param = last;
+
+	Point point;
+	typename cascadeLib::vec_type_from_point<Point>::vcType vector;
+
+	theEntity.Curve().D1(param, point, vector);
+	return (1.0 / theEntity.Size())*std::sqrt(vector.Dot(vector));
 }

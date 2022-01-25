@@ -5,7 +5,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
-#include <Mesh_Module.hxx>
+#include <Geo_Module.hxx>
 
 namespace tnbLib
 {
@@ -35,10 +35,10 @@ namespace tnbLib
 
 	public:
 
-		static TnbMesh_EXPORT const Standard_Real DEFAULT_TOLERANCE;
-		static TnbMesh_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
+		static TnbGeo_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbGeo_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
 
-		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL;
+		static TnbGeo_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL;
 
 
 		//- default constructor
@@ -53,7 +53,7 @@ namespace tnbLib
 		//- constructors
 
 
-		//- public functions and perators
+		//- public functions and operators
 
 
 		//- macros
