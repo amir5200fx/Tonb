@@ -20,15 +20,16 @@ namespace tnbApiStabilityModelMaker
 
         static string resutDirectory = "result";
 
-        static string hullExtension = ".hull";
-        static string tankListExtension = ".tankList";
-        static string sailListExtension = ".sailList";
+        static string hullExtension = "*.hull";
+        static string tankListExtension = "*.tankList";
+        static string sailListExtension = "*.sailList";
 
-        static string shapeExtension = ".shape";
+        static string shapeExtension = "*.shape";
 
 
         static private List<string> listAllFiles(string dir, string extension)
         {
+            Console.WriteLine(dir);
             return Directory.GetFiles(dir, extension, SearchOption.TopDirectoryOnly).ToList();
         }
 
@@ -38,7 +39,7 @@ namespace tnbApiStabilityModelMaker
             if (fileList.Count != 1)
             {
                 Console.WriteLine("");
-                Console.WriteLine("unable to load '*." + extension + "' file in the directory!");
+                Console.WriteLine("unable to load '*" + extension + "' file in the directory!");
                 foreach (var ifile in fileList)
                 {
                     Console.WriteLine(ifile);
@@ -125,69 +126,109 @@ namespace tnbApiStabilityModelMaker
             }
         }
 
-        static void runApplication(string nameApp)
+        static void runApplication(string nameApp, bool runInDebugMode = false)
         {
-            var proc = new Process
+            try
             {
-                StartInfo = new ProcessStartInfo
+                if (runInDebugMode)
                 {
-                    FileName = nameApp,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
+                    Console.WriteLine(" Warning: the application is going to run in DEBUG mode!");
+                    Console.WriteLine(" - Application's Name: " + nameApp);
                 }
-            };
+                var proc = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = nameApp + ".exe",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
 
-            proc.Start();
-            while (!proc.StandardOutput.EndOfStream)
-            {
-                var line = proc.StandardOutput.ReadLine();
-                Console.WriteLine(line);
+                proc.Start();
+                while (!proc.StandardOutput.EndOfStream)
+                {
+                    var line = proc.StandardOutput.ReadLine();
+                    Console.WriteLine(line);
+                }
+
+                if (proc.ExitCode > 0)
+                {
+                    Environment.Exit(1);
+                }
             }
-
-            if (proc.ExitCode > 0)
+            catch(Exception ex)
             {
-                Environment.Exit(1);
+                if (runInDebugMode)
+                {
+                    Console.WriteLine(ex.Message);
+                    Environment.Exit(1);
+                }
+
+                runApplication(nameApp + "d", true);
             }
         }
 
-        static void runApplicationRunArg(string nameApp)
+        static void runApplicationRunArg(string nameApp, bool runInDebugMode = false)
         {
-            var proc = new Process
+            try
             {
-                StartInfo = new ProcessStartInfo
+                if (runInDebugMode)
                 {
-                    FileName = nameApp,
-                    Arguments = "--run",
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
+                    Console.WriteLine(" Warning: the application is going to run in DEBUG mode!");
+                    Console.WriteLine(" - Application's Name: " + nameApp);
                 }
-            };
+                var proc = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = nameApp + ".exe",
+                        Arguments = "--run",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
 
-            proc.Start();
-            while (!proc.StandardOutput.EndOfStream)
-            {
-                var line = proc.StandardOutput.ReadLine();
-                Console.WriteLine(line);
+                proc.Start();
+                while (!proc.StandardOutput.EndOfStream)
+                {
+                    var line = proc.StandardOutput.ReadLine();
+                    Console.WriteLine(line);
+                }
+
+                if (proc.ExitCode > 0)
+                {
+                    Environment.Exit(1);
+                }
             }
-
-            if (proc.ExitCode > 0)
+            catch(Exception ex)
             {
-                Environment.Exit(1);
+                if (runInDebugMode)
+                {
+                    Console.WriteLine(ex.Message);
+                    Environment.Exit(1);
+                }
+
+                runApplicationRunArg(nameApp + "d", true);
             }
         }
 
         static void createHullModel()
         {
+            Directory.SetCurrentDirectory(hullDirectory);
+
             //- create shape hull
-            runApplication("tnbHydstcHullReader.exe");
+            runApplicationRunArg("tnbHydstcHullReader");
 
             //- create hull body
-            runApplication("tnbApiHydstcBodyMaker.exe");
+            runApplication("tnbApiHydstcBodyMaker");
 
             //- create model
-            runApplication("tnbHydstcHullModelMaker.exe");
+            runApplicationRunArg("tnbHydstcHullModelMaker");
+
+            Directory.SetCurrentDirectory(currentPath);
         }
 
         static void createTankModels()
@@ -199,13 +240,13 @@ namespace tnbApiStabilityModelMaker
                 Directory.SetCurrentDirectory(tanksDirectory + @"\" + i.ToString());
 
                 //- create shape hull
-                runApplication("tnbHydstcTankReader.exe");
+                runApplicationRunArg("tnbHydstcTankReader");
 
                 //- create hull body
-                runApplication("tnbApiHydstcBodyMaker.exe");
+                runApplication("tnbApiHydstcBodyMaker");
 
                 //- create model
-                runApplication("tnbHydstcTankModelMaker.exe");
+                runApplicationRunArg("tnbHydstcTankModelMaker");
 
                 i++;
             }
@@ -220,13 +261,13 @@ namespace tnbApiStabilityModelMaker
                 Directory.SetCurrentDirectory(sailsDirectory + @"\" + i.ToString());
 
                 //- create shape hull
-                runApplication("tnbHydstcSailReader.exe");
+                runApplicationRunArg("tnbHydstcSailReader");
 
                 //- create hull body
-                runApplication("tnbApiHydstcBodyMaker.exe");
+                runApplication("tnbApiHydstcBodyMaker");
 
                 //- create model
-                runApplication("tnbHydstcBodySailModelMaker.exe");
+                runApplicationRunArg("tnbHydstcBodySailModelMaker");
 
                 i++;
             }
@@ -241,7 +282,7 @@ namespace tnbApiStabilityModelMaker
                 Directory.SetCurrentDirectory(sailsDirectory + @"\" + i.ToString());
 
                 //- create model
-                runApplication("tnbHydstcShapeSailModelMaker.exe");
+                runApplicationRunArg("tnbHydstcShapeSailModelMaker");
 
                 i++;
             }
@@ -256,7 +297,7 @@ namespace tnbApiStabilityModelMaker
                 Directory.SetCurrentDirectory(sailsDirectory + @"\" + i.ToString());
 
                 //- create model
-                runApplication("tnbApiHydstcLateralPlaneSailModelMaker.exe");
+                runApplication("tnbApiHydstcLateralPlaneSailModelMaker");
 
                 i++;
             }
@@ -283,7 +324,7 @@ namespace tnbApiStabilityModelMaker
             if (fileList.Count != 1)
             {
                 Console.WriteLine("");
-                Console.WriteLine("unable to load '*." + extension + "' file in the directory!");
+                Console.WriteLine("unable to load '*" + extension + "' file in the directory!");
                 foreach (var ifile in fileList)
                 {
                     Console.WriteLine(ifile);
@@ -310,9 +351,9 @@ namespace tnbApiStabilityModelMaker
         {
             currentPath = Directory.GetCurrentDirectory();
 
-            hullDirectory = currentPath + @"\hull";
-            sailsDirectory = currentPath + @"\sails";
-            tanksDirectory = currentPath + @"\tanks";
+            hullDirectory = currentPath + @"\hull\";
+            sailsDirectory = currentPath + @"\sails\";
+            tanksDirectory = currentPath + @"\tanks\";
 
             {//- hull scope
                 checkHullDirectory();
@@ -320,9 +361,9 @@ namespace tnbApiStabilityModelMaker
                 //- check .shape file
                 checkFile(hullDirectory, shapeExtension);
 
+                Console.WriteLine("creating the hull...");
                 createHullModel();
             }
-
 
             if (Directory.Exists(tanksDirectory))
             {
@@ -345,13 +386,13 @@ namespace tnbApiStabilityModelMaker
                 {
                     Directory.SetCurrentDirectory(sailsDirectory);
 
-                    runApplication("tnbApiHydstcProfileAreaSailModelMaker.exe");
+                    runApplication("tnbApiHydstcProfileAreaSailModelMaker");
                 }
                 else if(text == "constArea")
                 {
                     Directory.SetCurrentDirectory(sailsDirectory);
 
-                    runApplication("tnbApiHydstcConstAreaSailModelMaker.exe");
+                    runApplication("tnbApiHydstcConstAreaSailModelMaker");
                 }
                 else if(text == "body")
                 {
@@ -424,6 +465,8 @@ namespace tnbApiStabilityModelMaker
                 }               
 
             }
+
+            Console.WriteLine("the application is performed, successfully!");
         }
     }
 }
