@@ -490,6 +490,36 @@
     <Filter Include="TnbLib\Geo\Function\Table">
       <UniqueIdentifier>{ebcd0aab-e977-40f6-bdaf-d7307320cbf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Mesh\Curve">
+      <UniqueIdentifier>{12e73d65-8906-460f-9bcb-b29085295e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\Entity">
+      <UniqueIdentifier>{81833c00-5f19-4c17-901f-532cb2bd9644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\Length">
+      <UniqueIdentifier>{c958ddad-b0f8-4e8b-aaca-1b578c239222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\Length\Function">
+      <UniqueIdentifier>{a216749c-e762-4b5b-88bb-e16e3b345f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint">
+      <UniqueIdentifier>{20a084b3-f0b3-4b99-b72d-4292f0301e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint\Correction">
+      <UniqueIdentifier>{1a1e6a44-9f57-4e76-81ce-9e266c63751e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint\Correction\Info">
+      <UniqueIdentifier>{c5637b78-58b8-405b-90a0-0643a799c484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint\Newton">
+      <UniqueIdentifier>{0d7828f5-5c98-410a-9daa-07f22e071393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation">
+      <UniqueIdentifier>{955dd0a8-bb35-4a03-84e7-6df716125b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Function">
+      <UniqueIdentifier>{12c250c7-af7a-4db5-95fd-e6a52eb80bec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1137,6 +1167,51 @@
     <ClInclude Include="TnbLib\Geo\Function\Table\Geo_TableFunction.hxx">
       <Filter>TnbLib\Geo\Function\Table</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\Entity\Mesh_CurveEntity.hxx">
+      <Filter>TnbLib\Mesh\Curve\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\Entity\Mesh_CurveEntityI.hxx">
+      <Filter>TnbLib\Mesh\Curve\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\Length\Function\Mesh_CurveLength_Function.hxx">
+      <Filter>TnbLib\Mesh\Curve\Length\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\Length\Function\Mesh_CurveLength_FunctionI.hxx">
+      <Filter>TnbLib\Mesh\Curve\Length\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\Length\Mesh_CurveLength.hxx">
+      <Filter>TnbLib\Mesh\Curve\Length</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\Length\Mesh_CurveLengthI.hxx">
+      <Filter>TnbLib\Mesh\Curve\Length</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Correction\Info\Mesh_CurveOptmPoint_Correction_Info.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Correction\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Correction\Mesh_CurveOptmPoint_Correction.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Correction\Mesh_CurveOptmPoint_CorrectionI.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Function\Mesh_CurveOptmPoint_Newton_Function.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Function\Mesh_CurveOptmPoint_Newton_FunctionI.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation\Mesh_CurveOptmPoint_Newton_Derivation.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation\Mesh_CurveOptmPoint_Newton_DerivationI.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Mesh_CurveOptmPoint_Newton.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Mesh_CurveOptmPoint_NewtonI.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1453,6 +1528,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Function\Table\Geo_TableFunction.cxx">
       <Filter>TnbLib\Geo\Function\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\Length\Function\Mesh_CurveLength_Function.cxx">
+      <Filter>TnbLib\Mesh\Curve\Length\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\Length\Mesh_CurveLength.cxx">
+      <Filter>TnbLib\Mesh\Curve\Length</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\Correction\Info\Mesh_CurveOptmPoint_Correction_Info.cxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Correction\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\Correction\Mesh_CurveOptmPoint_Correction.cxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Correction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Function\Mesh_CurveOptmPoint_Newton_Function.cxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation\Mesh_CurveOptmPoint_Newton_Derivation.cxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Mesh_CurveOptmPoint_Newton.cxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
