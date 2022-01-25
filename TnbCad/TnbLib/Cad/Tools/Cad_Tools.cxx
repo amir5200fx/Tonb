@@ -19,6 +19,7 @@
 #include <Cad_BlockEntity.hxx>
 #include <Cad_EntityManager.hxx>
 #include <Cad_CurveLength.hxx>
+#include <Cad_CurveLength_Info.hxx>
 #include <Entity2d_Metric1.hxx>
 #include <Entity3d_Box.hxx>
 #include <Entity3d_Chain.hxx>
@@ -125,7 +126,7 @@ Standard_Real
 tnbLib::Cad_Tools::CalcLength
 (
 	const Handle(Geom_Curve)& theCurve,
-	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+	const std::shared_ptr<Cad_CurveLength_Info>& theInfo
 )
 {
 	auto alg = std::make_shared<Cad_CurveLength>(theCurve, theInfo);

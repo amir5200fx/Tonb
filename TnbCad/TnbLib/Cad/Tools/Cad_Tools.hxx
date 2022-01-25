@@ -34,6 +34,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Cad_TModel;
+	class Cad_CurveLength_Info;
 	class TModel_Surface;
 	class TModel_Wire;
 	class TModel_Paired;
@@ -71,7 +72,7 @@ namespace tnbLib
 			CalcLength
 			(
 				const Handle(Geom_Curve)& theCurve, 
-				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+				const std::shared_ptr<Cad_CurveLength_Info>& theInfo
 			);
 
 		static TnbCad_EXPORT Standard_Boolean
