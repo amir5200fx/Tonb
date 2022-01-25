@@ -424,6 +424,12 @@
     <Filter Include="TnbLib\Cad\Splitter">
       <UniqueIdentifier>{520828df-4240-4d34-95b0-e114e4199d0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Splitter\Info">
+      <UniqueIdentifier>{37616132-7c24-47aa-93ff-f8d90da6a2c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Length\Info">
+      <UniqueIdentifier>{1cdd050d-f308-4170-8fe2-4469992ad11f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -816,14 +822,20 @@
     <ClInclude Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Cad_tModelMaker_SamplePtsDistPairCrvCriterion.hxx">
       <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtsDistPairCrvCriterion.hxx">
-      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad\Length\Cad_CurveLength.hxx">
       <Filter>TnbLib\Cad\Length</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Splitter\Cad_CurveSplitter.hxx">
       <Filter>TnbLib\Cad\Splitter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Splitter\Info\Cad_CurveSplitter_Info.hxx">
+      <Filter>TnbLib\Cad\Splitter\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Length\Info\Cad_CurveLength_Info.hxx">
+      <Filter>TnbLib\Cad\Length\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtDistPairCrvCriterion.hxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1226,9 +1238,6 @@
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Edge\Singular\Geometry\TModel_SingularEdge.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Edge\Singular</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtsDistPairCrvCriterion.cxx">
-      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\Cad_tModelMaker_PairCrvCriterion.cxx">
       <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion</Filter>
     </ClCompile>
@@ -1240,6 +1249,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Splitter\Cad_CurveSplitter.cxx">
       <Filter>TnbLib\Cad\Splitter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Length\Info\Cad_CurveLength_Info.cxx">
+      <Filter>TnbLib\Cad\Length\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Splitter\Info\Cad_CurveSplitter_Info.cxx">
+      <Filter>TnbLib\Cad\Splitter\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Splitter\Info\Cad_CurveSplitter_InfoIO.cxx">
+      <Filter>TnbLib\Cad\Splitter\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtDistPairCrvCriterion.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtDistPairCrvCriterionIO.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Cad_tModelMaker_SamplePtsDistPairCrvCriterionIO.cxx">
+      <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Length\Info\Cad_CurveLength_InfoIO.cxx">
+      <Filter>TnbLib\Cad\Length\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
