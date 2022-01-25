@@ -1725,6 +1725,15 @@ tnbLib::Pln_Tools::RetrieveMergedEdges
 	const Standard_Real theRadius
 )
 {
+	if (theRadius < theTol)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the radius must be lesser than the tolerance." << endl
+			<< " - Tolerance: " << theTol << endl
+			<< " - Radius: " << theRadius << endl
+			<< abort(FatalError);
+	}
+
 	std::map<size_t, std::shared_ptr<Entity2d_Polygon>> polyMap;
 	size_t k = 0;
 	for (const auto& x : theEdges)

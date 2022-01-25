@@ -48,6 +48,50 @@ namespace tnbApiHydstcBodyMaker
             }
         }
 
+        static void runApplicationRunArg(string nameApp, bool runInDebugMode = false)
+        {
+            try
+            {
+                if (runInDebugMode)
+                {
+                    Console.WriteLine(" Warning: the application is going to run in DEBUG mode!");
+                    Console.WriteLine(" - Application's Name: " + nameApp);
+                }
+                var proc = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = nameApp + ".exe",
+                        Arguments = "--run",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
+
+                proc.Start();
+                while (!proc.StandardOutput.EndOfStream)
+                {
+                    var line = proc.StandardOutput.ReadLine();
+                    Console.WriteLine(line);
+                }
+
+                if (proc.ExitCode > 0)
+                {
+                    Environment.Exit(1);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (runInDebugMode)
+                {
+                    Console.WriteLine(ex.Message);
+                    Environment.Exit(1);
+                }
+                runApplicationRunArg(nameApp + "d", true);             
+            }
+        }
+
         static void Main(string[] args)
         {
 
@@ -60,31 +104,7 @@ namespace tnbApiHydstcBodyMaker
 
             var root = Directory.GetCurrentDirectory();
 
-            {
-                var proc = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "tnbHydstcShapeSections.exe",
-                        Arguments = "--run",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    }
-                };
-
-                proc.Start();
-                while (!proc.StandardOutput.EndOfStream)
-                {
-                    var line = proc.StandardOutput.ReadLine();
-                    Console.WriteLine(line);
-                }
-
-                if (proc.ExitCode > 0)
-                {
-                    Environment.Exit(1);
-                }
-            }
+            runApplicationRunArg("tnbHydstcShapeSections");
 
             Console.WriteLine("");
             Console.WriteLine("The tnbHydstcShapeSections application is completed(1/6), successfully!");
@@ -95,33 +115,10 @@ namespace tnbApiHydstcBodyMaker
             Console.WriteLine("Discretizing the edges of the sections...");
             Console.WriteLine("Starting the tnbHydstcDiscretizeSections application:");
 
-            {
-                var proc = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "tnbHydstcDiscretizeSections.exe",
-                        Arguments = "--run",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    }
-                };
 
-                proc.Start();
-                while (!proc.StandardOutput.EndOfStream)
-                {
-                    var line = proc.StandardOutput.ReadLine();
-                    Console.WriteLine(line);
-                }
+            runApplicationRunArg("tnbHydstcDiscretizeSections");
 
-                if (proc.ExitCode > 0)
-                {
-                    Environment.Exit(1);
-                }
-            }
-
-            removeFiles(root, extension2);
+            //removeFiles(root, extension2);
 
             Console.WriteLine("");
             Console.WriteLine("The tnbHydstcDiscretizeSections application is completed(2/6), successfully!");
@@ -132,33 +129,9 @@ namespace tnbApiHydstcBodyMaker
             Console.WriteLine("Analyzing the sections...");
             Console.WriteLine("Starting the tnbHydstcSectionAnalysis application:");
 
-            {
-                var proc = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "tnbHydstcSectionAnalysis.exe",
-                        Arguments = "--run",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    }
-                };
+            runApplicationRunArg("tnbHydstcSectionAnalysis");
 
-                proc.Start();
-                while (!proc.StandardOutput.EndOfStream)
-                {
-                    var line = proc.StandardOutput.ReadLine();
-                    Console.WriteLine(line);
-                }
-
-                if (proc.ExitCode > 0)
-                {
-                    Environment.Exit(1);
-                }
-            }
-
-            removeFiles(root, extension3);
+            //removeFiles(root, extension3);
 
             Console.WriteLine("");
             Console.WriteLine("The tnbHydstcSectionAnalysis application is completed(3/6), successfully!");
@@ -169,33 +142,9 @@ namespace tnbApiHydstcBodyMaker
             Console.WriteLine("Reporting the Analyzing of the sections...");
             Console.WriteLine("Starting the tnbHydstcSectionAnalysisReport application:");
 
-            {
-                var proc = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "tnbHydstcSectionAnalysisReport.exe",
-                        Arguments = "--run",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    }
-                };
+            runApplicationRunArg("tnbHydstcSectionAnalysisReport");
 
-                proc.Start();
-                while (!proc.StandardOutput.EndOfStream)
-                {
-                    var line = proc.StandardOutput.ReadLine();
-                    Console.WriteLine(line);
-                }
-
-                if (proc.ExitCode > 0)
-                {
-                    Environment.Exit(1);
-                }
-            }
-
-            removeFiles(root, extension4);
+            //removeFiles(root, extension4);
 
             Console.WriteLine("");
             Console.WriteLine("The tnbHydstcSectionAnalysisReport application is completed(4/6), successfully!");
@@ -206,33 +155,9 @@ namespace tnbApiHydstcBodyMaker
             Console.WriteLine("Making the sections...");
             Console.WriteLine("Starting the tnbHydstcSectionCreator application:");
 
-            {
-                var proc = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "tnbHydstcSectionCreator.exe",
-                        Arguments = "--run",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    }
-                };
+            runApplicationRunArg("tnbHydstcSectionCreator");
 
-                proc.Start();
-                while (!proc.StandardOutput.EndOfStream)
-                {
-                    var line = proc.StandardOutput.ReadLine();
-                    Console.WriteLine(line);
-                }
-
-                if (proc.ExitCode > 0)
-                {
-                    Environment.Exit(1);
-                }
-            }
-
-            removeFiles(root, extension5);
+            //removeFiles(root, extension5);
 
             Console.WriteLine("");
             Console.WriteLine("The tnbHydstcSectionCreator application is completed(5/6), successfully!");
@@ -243,33 +168,9 @@ namespace tnbApiHydstcBodyMaker
             Console.WriteLine("Making the body...");
             Console.WriteLine("Starting the tnbHydstcBodyMaker application:");
 
-            {
-                var proc = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "tnbHydstcBodyMaker.exe",
-                        Arguments = "--run",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        CreateNoWindow = true
-                    }
-                };
+            runApplicationRunArg("tnbHydstcBodyMaker");
 
-                proc.Start();
-                while (!proc.StandardOutput.EndOfStream)
-                {
-                    var line = proc.StandardOutput.ReadLine();
-                    Console.WriteLine(line);
-                }
-
-                if (proc.ExitCode > 0)
-                {
-                    Environment.Exit(1);
-                }
-            }
-
-            removeFiles(root, extension6);
+            //removeFiles(root, extension6);
 
             Console.WriteLine("");
             Console.WriteLine("The tnbHydstcBodyMaker application is completed(6/6), successfully!");

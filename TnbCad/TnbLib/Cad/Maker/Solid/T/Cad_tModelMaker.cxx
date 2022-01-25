@@ -1,8 +1,14 @@
 #include <Cad_tModelMaker.hxx>
 
+#include <Cad_tEdgeMaker.hxx>
+#include <Cad_tSurfaceMaker.hxx>
 #include <Cad_tSurfaceMakerInfo.hxx>
 #include <Cad_tModelMakerInfo.hxx>
 #include <Cad_tModelMaker_PairCrvCriterion.hxx>
+#include <Cad_tEdgeMakerInfo_Absolute.hxx>
+#include <Cad_tSurfaceMakerInfo_Absolute.hxx>
+#include <Cad_tModelMakerInfo_Absolute.hxx>
+#include <Cad_tModelMaker_OnePtDistPairCrvCriterion.hxx>
 #include <Cad_BlockEntity.hxx>
 #include <Cad_TModel.hxx>
 #include <TModel_CornerManager.hxx>
@@ -14,6 +20,46 @@
 #include <Geo_PrTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity3d_Box.hxx>
+
+const std::shared_ptr<tnbLib::Cad_tModelMaker::MakerInfo> tnbLib::Cad_tModelMaker::DEFAULT_INFO =
+std::make_shared<tnbLib::Cad_tModelMaker::MakerInfo>();
+
+const std::shared_ptr<tnbLib::Cad_tModelMaker_PairCrvCriterion> tnbLib::Cad_tModelMaker::DEFAULT_CRITERION =
+std::make_shared<cadLib::tModelMaker_OnePtDistPairCrvCriterion>();
+
+namespace tnbLib
+{
+
+	class Cad_tModelMakerRunTimeSetConfigs
+	{
+
+		/*Private Data*/
+
+	public:
+
+		// default constructor [1/21/2022 Amir]
+
+		Cad_tModelMakerRunTimeSetConfigs()
+		{
+			SetConfigs();
+		}
+
+		// public functions and operators [1/21/2022 Amir]
+
+		static void SetConfigs();
+	};
+}
+
+void tnbLib::Cad_tModelMakerRunTimeSetConfigs::SetConfigs()
+{
+	auto& myInfo = *Cad_tModelMaker::DEFAULT_INFO;
+
+	myInfo.edgeInfo = std::make_shared<tnbLib::Cad_tEdgeMakerInfo_Absolute>(Precision::Confusion());
+	myInfo.surfInfo = std::make_shared<tnbLib::Cad_tSurfaceMakerInfo_Absolute>();
+	myInfo.modelInfo = std::make_shared<tnbLib::Cad_tModelMakerInfo_Absolute>();
+}
+
+static const tnbLib::Cad_tModelMakerRunTimeSetConfigs mytModelMakerRunTimeSetConfigsObj;
 
 void tnbLib::Cad_tModelMaker::MakerInfo::Check() const
 {

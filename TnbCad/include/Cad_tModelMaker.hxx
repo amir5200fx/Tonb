@@ -57,8 +57,8 @@ namespace tnbLib
 
 	public:
 
-		static const std::shared_ptr<MakerInfo> DEFAULT_INFO;
-		static const std::shared_ptr<Cad_tModelMaker_PairCrvCriterion> DEFAULT_CRITERION;
+		static TnbCad_EXPORT const std::shared_ptr<MakerInfo> DEFAULT_INFO;
+		static TnbCad_EXPORT const std::shared_ptr<Cad_tModelMaker_PairCrvCriterion> DEFAULT_CRITERION;
 
 		// default constructor [1/6/2022 Amir]
 
@@ -103,7 +103,7 @@ namespace tnbLib
 			return theCriterion_;
 		}
 
-		void Perform();
+		TnbCad_EXPORT void Perform();
 
 	};
 }

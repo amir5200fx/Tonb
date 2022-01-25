@@ -12,6 +12,7 @@
 #include <Marine_SectionsIO.hxx>
 #include <Marine_ShapeIO.hxx>
 #include <Marine_PlnCurves.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -22,6 +23,8 @@
 namespace tnbLib
 {
 
+	static const std::string loadExt = marineLib::io::DisctSections::extension;
+	static const std::string saveExt = Entity3d_Triangulation::extension;
 	static unsigned short verbose(0);
 
 	static bool loadTag = false;
@@ -30,6 +33,7 @@ namespace tnbLib
 
 	static int mySection = -1;
 	static std::string sModel = "union";
+	static std::string myFileName;
 
 	void selectSection(int i)
 	{
@@ -81,23 +85,9 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		file::CheckExtension(name);
 
-		{//- timer scope
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
-
-			TNB_iARCH_FILE_TYPE ar(myFile);
-			ar >> mySections;
-		}
-
+		mySections = file::LoadFile<std::shared_ptr<marineLib::io::DisctSections>>(name + loadExt, verbose);
 		if (NOT mySections)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -105,14 +95,14 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
-			Info << endl;
-		}
-
 		loadTag = true;
+	}
+
+	void loadModel()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
+		myFileName = name.string();
+		loadModel(myFileName);
 	}
 
 	auto getChain3d(const Entity2d_Chain& chain, double coord)
@@ -205,7 +195,7 @@ namespace tnbLib
 
 			auto tri = Geo_Tools::Triangulation(*chain);
 
-			fileName fn(name);
+			fileName fn(name + saveExt);
 			std::ofstream myFile(fn);
 
 			TNB_oARCH_FILE_TYPE ar(myFile);
@@ -227,7 +217,7 @@ namespace tnbLib
 			size_t i = 0;
 			for (const auto& x : edges)
 			{
-				std::string address = ".\\" + std::to_string(i) + "\\" + name;
+				std::string address = ".\\" + std::to_string(i) + "\\" + name + saveExt;
 				boost::filesystem::path dir(std::to_string(i));
 				boost::filesystem::create_directory(dir);
 
@@ -260,7 +250,7 @@ namespace tnbLib
 
 			auto tri = Geo_Tools::Triangulation(*chain);
 
-			const auto& b = *mySections->GetSections()->GetShape()->PreciseBndBox();
+			const auto& b = *mySections->GetSections()->GetShape()->BoundingBox();
 			auto corners = getCorners(b);
 
 			auto& pts = tri->Points();
@@ -269,7 +259,7 @@ namespace tnbLib
 				pts.push_back(x);
 			}
 
-			fileName fn(name);
+			fileName fn(name + saveExt);
 			std::ofstream myFile(fn);
 
 			TNB_oARCH_FILE_TYPE ar(myFile);
@@ -292,6 +282,18 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 	}
+
+	void saveTo()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded, yet!" << endl
+				<< abort(FatalError);
+		}
+
+		saveTo(myFileName);
+	}
 }
 
 #ifdef DebugInfo
@@ -308,8 +310,10 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
 		//- settings
 		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); }), "setVerbose");
@@ -353,8 +357,8 @@ int main(int argc, char *argv[])
 			Info << " This application is aimed to retrieve the mesh from the shape." << endl;
 			Info << endl
 				<< " Function list:" << endl
-				<< " - loadModel(string)" << endl
-				<< " - saveTo(string)" << endl << endl
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - setType(string);             - types: union, list" << endl
 				<< " - selectSection(int)" << endl
@@ -374,11 +378,10 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbHydstcSectionViewer";
-			fileName myFileName(address);
-
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbHydstcSectionViewer"));
+
 				chai.eval_file(myFileName);
 				return 0;
 			}

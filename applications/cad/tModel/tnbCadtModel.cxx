@@ -1,7 +1,14 @@
 #include <Cad_tModelMaker.hxx>
+#include <Cad_tModelMakerInfo_Absolute.hxx>
+#include <Cad_tEdgeMakerInfo_Absolute.hxx>
+#include <Cad_tSurfaceMakerInfo_Absolute.hxx>
+#include <Cad_tModelMaker_OnePtDistPairCrvCriterion.hxx>
+#include <Cad_CurveLength_Info.hxx>
+#include <Cad_CurveSplitter_Info.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_TModel.hxx>
 #include <Global_File.hxx>
+#include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -18,6 +25,14 @@ namespace tnbLib
 	static std::shared_ptr<Cad_TModel> myModel;
 	static std::shared_ptr<Cad_Shape> myShape;
 	static std::string myFileName;
+
+	static auto myCrvLenInfo = std::make_shared<Cad_CurveLength_Info>();
+	static auto myCrvSplitInfo = std::make_shared<Cad_CurveSplitter_Info>();
+
+	static auto myEdgeMakerInfo = std::make_shared<Cad_tEdgeMakerInfo_Absolute>();
+	static auto mySurfMakerInfo = std::make_shared<Cad_tSurfaceMakerInfo_Absolute>();
+	static auto myModelMakerInfo = std::make_shared<Cad_tModelMakerInfo_Absolute>();
+	static auto myPairCriterion = std::make_shared<cadLib::tModelMaker_OnePtDistPairCrvCriterion>(myCrvLenInfo, myCrvSplitInfo);
 
 	void setVerbose(unsigned int i)
 	{
@@ -81,6 +96,26 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		{
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_ms);
 
+			auto myModelInfo = std::make_shared<Cad_tModelMaker::MakerInfo>();
+			myModelInfo->edgeInfo = myEdgeMakerInfo;
+			myModelInfo->modelInfo = myModelMakerInfo;
+			myModelInfo->surfInfo = mySurfMakerInfo;
+
+			auto myMaker =
+				std::make_shared<Cad_tModelMaker>(myShape->Shape(), myModelInfo, myPairCriterion);
+			myMaker->Perform();
+
+			myModel = myMaker->Model();
+		}
+
+		if (verbose)
+		{
+			Info << endl
+				<< "- the application is performed, successfully, in "<< global_time_duration << " ms." << endl;
+		}
 	}
 }

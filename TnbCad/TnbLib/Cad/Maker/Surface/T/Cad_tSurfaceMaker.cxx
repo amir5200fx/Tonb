@@ -6,6 +6,8 @@
 #include <TModel_Surface.hxx>
 #include <Cad_tSurfaceMakerInfo.hxx>
 #include <Cad_tEdgeMakerInfo.hxx>
+#include <Cad_tEdgeMakerInfo_Absolute.hxx>
+#include <Cad_tSurfaceMakerInfo_Absolute.hxx>
 #include <Cad_tEdgeMaker.hxx>
 
 #include <TopoDS.hxx>
@@ -14,6 +16,42 @@
 #include <BRepTools_WireExplorer.hxx>
 #include <ShapeFix_Wire.hxx>
 #include <TopExp_Explorer.hxx>
+
+const std::shared_ptr<tnbLib::Cad_tSurfaceMaker::MakerInfo> tnbLib::Cad_tSurfaceMaker::DEFAULT_INFO =
+std::make_shared<tnbLib::Cad_tSurfaceMaker::MakerInfo>();
+
+namespace tnbLib
+{
+
+	class Cad_tSurfaceMakerRunTimeSetConfigs
+	{
+
+		/*Private Data*/
+
+	public:
+
+		// default constructor [1/21/2022 Amir]
+
+		Cad_tSurfaceMakerRunTimeSetConfigs()
+		{
+			SetConfigs();
+		}
+
+		// public functions and operators [1/21/2022 Amir]
+
+		static void SetConfigs();
+	};
+}
+
+void tnbLib::Cad_tSurfaceMakerRunTimeSetConfigs::SetConfigs()
+{
+	auto& myInfo = *Cad_tSurfaceMaker::DEFAULT_INFO;
+
+	myInfo.Edge = std::make_shared<tnbLib::Cad_tEdgeMakerInfo_Absolute>(Precision::Confusion());
+	myInfo.Surface = std::make_shared<tnbLib::Cad_tSurfaceMakerInfo_Absolute>();
+}
+
+static const tnbLib::Cad_tSurfaceMakerRunTimeSetConfigs mytSurfaceMakerRunTimeSetConfigsObj;
 
 void tnbLib::Cad_tSurfaceMaker::Perform()
 {

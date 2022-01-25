@@ -52,7 +52,7 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Real DEFAULT_TOLERANCE;
+		static TnbCad_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 
 		virtual ~Cad_tModelMaker_PairCrvCriterion()
 		{}
