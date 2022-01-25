@@ -1,4 +1,4 @@
-setVerbose(1);
+setVerbose(2);
 
 setMinTol(1.0E-6);
 setMaxTol(1.0E-4);
