@@ -1,0 +1,3 @@
+#include <Cad_tModelMaker_OnePtDistPairCrvCriterion.hxx>
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::cadLib::tModelMaker_OnePtDistPairCrvCriterion);
