@@ -11,8 +11,8 @@
 #include <Pnt3d.hxx>
 #include <Dir3d.hxx>
 
-const std::shared_ptr<tnbLib::NumAlg_AdaptiveInteg_Info> tnbLib::Cad_CurveLength::DEFAULT_INFO =
-std::make_shared<tnbLib::NumAlg_AdaptiveInteg_Info>();
+const std::shared_ptr<tnbLib::Cad_CurveLength_Info> tnbLib::Cad_CurveLength::DEFAULT_INFO =
+std::make_shared<tnbLib::Cad_CurveLength_Info>();
 
 Standard_Real tnbLib::Cad_CurveLength::Result() const
 {
@@ -25,35 +25,76 @@ Standard_Real tnbLib::Cad_CurveLength::Result() const
 	return theLength_;
 }
 
+#include <Mesh_CurveEntity.hxx>
+#include <Mesh_CurveLength.hxx>
+
 namespace tnbLib
 {
 
-	class CadCurveLengthRunTimeInfo
+	namespace crvLen
 	{
 
-		/*Private Data*/
-
-	public:
-
-		// default constructor [1/16/2022 Amir]
-
-		CadCurveLengthRunTimeInfo()
+		static Standard_Real 
+			CalcLength
+			(
+				const Mesh_CurveEntity<Geom_Curve>& theCurve, 
+				const Standard_Integer theLevel,
+				const Standard_Integer theMaxLevel
+			)
 		{
-			SetInfo();
+			try
+			{
+				return Mesh_CurveLength::Length(theCurve, *theCurve.IntegInfo());
+			}
+			catch (const ConvError&)
+			{
+				if (theLevel > theMaxLevel)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "Can not Calculate length of the curve" << endl
+						<< " - Level of the calculation: " << theLevel << endl
+						<< " - Max. nb of the levels: " << theMaxLevel << endl
+						<< abort(FatalError);
+				}
+
+				return 
+					CalcLength
+					(
+						Mesh_CurveEntity<Geom_Curve>
+						(
+							theCurve.Curve(), 
+							theCurve.IntegInfo(), 
+							theCurve.Size(), 
+							theCurve.FirstParameter(), 
+							MEAN(theCurve.FirstParameter(), theCurve.LastParameter())), 
+						theLevel + 1, theMaxLevel) 
+					+ CalcLength
+					(
+						Mesh_CurveEntity<Geom_Curve>
+						(
+							theCurve.Curve(), 
+							theCurve.IntegInfo(), 
+							theCurve.Size(), 
+							MEAN(theCurve.FirstParameter(), theCurve.LastParameter()), 
+							theCurve.LastParameter()), 
+						theLevel + 1, theMaxLevel);
+			}
 		}
 
-		static void SetInfo();
-	};
-}
-
-static const tnbLib::CadCurveLengthRunTimeInfo myCadCurveLengthRunTimeInfoObj;
-
-void tnbLib::CadCurveLengthRunTimeInfo::SetInfo()
-{
-	const auto& myInfo = Cad_CurveLength::DEFAULT_INFO;
-	myInfo->SetTolerance(1.0E-6);
-	myInfo->SetMaxNbIterations(200);
-	myInfo->SetNbInitIterations(8);
+		static Standard_Real 
+			CalcLength
+			(
+				const Handle(Geom_Curve)& theCurve
+				, const Standard_Real theFirst,
+				const Standard_Real theLast,
+				const Standard_Integer theMaxLevel,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			)
+		{
+			Mesh_CurveEntity<Geom_Curve> ent(*theCurve, theInfo, 1.0, theFirst, theLast);
+			return CalcLength(ent, 0, theMaxLevel);
+		}
+	}
 }
 
 void tnbLib::Cad_CurveLength::Perform()
@@ -84,7 +125,7 @@ void tnbLib::Cad_CurveLength::Perform
 			<< abort(FatalError);
 	}
 
-	if (NOT IntegInfo())
+	if (NOT CurveLengthInfo())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no integ info has been found!" << endl
@@ -121,11 +162,14 @@ void tnbLib::Cad_CurveLength::Perform
 			<< abort(FatalError);
 	}
 
-	const auto myIntegrand = std::make_shared<Geo_CurveIntegrand<Handle(Geom_Curve)>>(Geometry());
-	Debug_Null_Pointer(myIntegrand);
-
-	auto& integInfo = *IntegInfo();
-	theLength_ = geoLib::CalcCurveLength<Handle(Geom_Curve)>::_(*myIntegrand, theLower, theUpper, integInfo);
+	theLength_ = 
+		crvLen::CalcLength
+		(
+			Geometry(), 
+			lower, upper, 
+			CurveLengthInfo()->MaxLevel(), 
+			CurveLengthInfo()->IntegInfo()
+		);
 
 	Change_IsDone() = Standard_True;
 }

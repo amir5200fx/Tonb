@@ -2,9 +2,10 @@
 #ifndef _Cad_CurveLength_Header
 #define _Cad_CurveLength_Header
 
-#include <Standard_Handle.hxx>
-#include <Cad_Module.hxx>
+#include <Cad_CurveLength_Info.hxx>
 #include <Global_Done.hxx>
+
+#include <Standard_Handle.hxx>
 
 // Forward Declarations [1/16/2022 Amir]
 class Geom_Curve;
@@ -27,7 +28,7 @@ namespace tnbLib
 
 		Handle(Geom_Curve) theCurve_;
 
-		std::shared_ptr<NumAlg_AdaptiveInteg_Info> theInfo_;
+		std::shared_ptr<Cad_CurveLength_Info> theInfo_;
 
 		// result [1/16/2022 Amir]
 		Standard_Real theLength_;
@@ -35,7 +36,7 @@ namespace tnbLib
 	public:
 
 
-		static TnbCad_EXPORT const std::shared_ptr<NumAlg_AdaptiveInteg_Info> DEFAULT_INFO;
+		static TnbCad_EXPORT const std::shared_ptr<Cad_CurveLength_Info> DEFAULT_INFO;
 
 		// default constructor [1/16/2022 Amir]
 
@@ -55,7 +56,7 @@ namespace tnbLib
 		Cad_CurveLength
 		(
 			const Handle(Geom_Curve)& theCurve, 
-			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			const std::shared_ptr<Cad_CurveLength_Info>& theInfo
 		)
 			: theCurve_(theCurve)
 			, theInfo_(theInfo)
@@ -70,7 +71,7 @@ namespace tnbLib
 			return theCurve_;
 		}
 
-		const auto& IntegInfo() const
+		const auto& CurveLengthInfo() const
 		{
 			return theInfo_;
 		}
@@ -85,12 +86,12 @@ namespace tnbLib
 			theCurve_ = theCurve;
 		}
 
-		void OverrideIntegInfo(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo)
+		void OverrideInfo(const std::shared_ptr<Cad_CurveLength_Info>& theInfo)
 		{
 			theInfo_ = theInfo;
 		}
 
-		void OverrideIntegInfo(std::shared_ptr<NumAlg_AdaptiveInteg_Info>&& theInfo)
+		void OverrideInfo(std::shared_ptr<Cad_CurveLength_Info>&& theInfo)
 		{
 			theInfo_ = std::move(theInfo);
 		}
