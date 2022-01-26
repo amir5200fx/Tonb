@@ -406,6 +406,30 @@
     <Filter Include="TnbLib\Cad2d\QuadraticArc">
       <UniqueIdentifier>{fd0d8e91-07e4-4723-84e0-0bab3e1ca62b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings">
+      <UniqueIdentifier>{3dc5a7ce-4578-444f-980d-05debe2beb84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings\Node">
+      <UniqueIdentifier>{3e161748-759b-434b-a0a1-115c24186818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings\Link">
+      <UniqueIdentifier>{0e2f5935-0b41-4e11-a196-00e3d7c899db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings\Link\Segment">
+      <UniqueIdentifier>{286c12bc-ae42-434f-b982-35c809e8f10c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings\Link\Ring">
+      <UniqueIdentifier>{ed257ecb-4751-402f-a2f8-f5bb4e38400c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings\Node\Adaptor">
+      <UniqueIdentifier>{cb3a9bb1-e482-4572-a5d4-f827a2f5273a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings\Petal">
+      <UniqueIdentifier>{ce7769c3-2bae-4f5c-b0ec-d1bb1ca2bf80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\IdentRings\Entity">
+      <UniqueIdentifier>{9a7944cb-389c-4d63-8e4a-93af1f94f51d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -792,6 +816,30 @@
     <ClInclude Include="TnbLib\Cad2d\QuadraticArc\Cad2d_QuadraticArc.hxx">
       <Filter>TnbLib\Cad2d\QuadraticArc</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Cad2d_IdentRings.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Link\Cad2d_IdentRings_Link.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Link</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Link\Ring\Cad2d_IdentRings_Ring.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Link\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Link\Segment\Cad2d_IdentRings_Segment.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Link\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Node\Cad2d_IdentRings_Node.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Node\Adaptor\Cad2d_IdentRings_NodeAdaptor.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Petal\Cad2d_IdentRings_Petal.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Petal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\IdentRings\Entity\Cad2d_IdentRings_Entity.hxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1156,6 +1204,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\QuadraticArc\Cad2d_QuadraticArc.cxx">
       <Filter>TnbLib\Cad2d\QuadraticArc</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\IdentRings\Node\Adaptor\Cad2d_IdentRings_NodeAdaptor.cxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Node\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\IdentRings\Cad2d_IdentRings.cxx">
+      <Filter>TnbLib\Cad2d\IdentRings</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\IdentRings\Link\Ring\Cad2d_IdentRings_Ring.cxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Link\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\IdentRings\Link\Segment\Cad2d_IdentRings_Segment.cxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Link\Segment</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
