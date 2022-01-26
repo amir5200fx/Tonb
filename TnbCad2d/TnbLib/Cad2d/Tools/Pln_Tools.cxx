@@ -2185,6 +2185,91 @@ tnbLib::Pln_Tools::RetrievePlanes
 	return std::move(planes);
 }
 
+std::shared_ptr<tnbLib::Pln_Vertex> 
+tnbLib::Pln_Tools::NextNode
+(
+	const std::shared_ptr<Pln_Vertex>& theNode,
+	const std::shared_ptr<Pln_Edge>& theEdge
+)
+{
+	Debug_Null_Pointer(theNode);
+	Debug_Null_Pointer(theEdge);
+
+	const auto& v0 = theEdge->Vtx0();
+	const auto& v1 = theEdge->Vtx1();
+
+	if (v0 IS_EQUAL theNode)
+	{
+		return v1;
+	}
+	if (v1 IS_EQUAL theNode)
+	{
+		return v0;
+	}
+	return nullptr;
+}
+
+std::shared_ptr<tnbLib::Pln_Edge> 
+tnbLib::Pln_Tools::NextEdge
+(
+	const std::shared_ptr<Pln_Edge>& theEdge,
+	const std::shared_ptr<Pln_Vertex>& theVtx
+)
+{
+	const auto edges = theVtx->RetrieveEdges();
+	if (edges.size() NOT_EQUAL 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the vertex is not manifold" << endl
+			<< abort(FatalError);
+	}
+
+	if (edges[0].lock() IS_EQUAL theEdge)
+	{
+		return edges[1].lock();
+	}
+	if (edges[1].lock() IS_EQUAL theEdge)
+	{
+		return edges[0].lock();
+	}
+	FatalErrorIn(FunctionSIG)
+		<< "Unable to find the next edge" << endl
+		<< abort(FatalError);
+	return nullptr;
+}
+
+std::tuple
+<
+	std::vector<std::shared_ptr<tnbLib::Pln_Edge>>,
+	std::shared_ptr<tnbLib::Pln_Vertex>, 
+	std::shared_ptr<tnbLib::Pln_Vertex>
+> 
+tnbLib::Pln_Tools::MarchOnEdges
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx, 
+	const std::shared_ptr<Pln_Edge>& theEdge
+)
+{
+	auto v0 = theVtx;
+	auto nextEdge = theEdge;
+
+	std::vector<std::shared_ptr<Pln_Edge>> edges;
+	edges.push_back(nextEdge);
+
+	auto nextVtx = Pln_Tools::NextNode(theVtx, nextEdge);
+	while (nextVtx->IsManifold())
+	{
+		nextEdge = Pln_Tools::NextEdge(nextEdge, nextVtx);
+		edges.push_back(nextEdge);
+
+		nextVtx = Pln_Tools::NextNode(nextVtx, nextEdge);
+	}
+
+	auto v1 = nextVtx;
+	auto t = std::make_tuple(std::move(edges), std::move(v0), std::move(v1));
+	return std::move(t);
+}
+
 std::shared_ptr<tnbLib::Pln_Edge> 
 tnbLib::Pln_Tools::ForwardEdge
 (

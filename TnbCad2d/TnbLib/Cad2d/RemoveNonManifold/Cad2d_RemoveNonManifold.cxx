@@ -323,64 +323,6 @@ void tnbLib::Cad2d_RemoveNonManifold::InsertVertices
 	}
 }
 
-namespace tnbLib
-{
-
-	std::shared_ptr<Pln_Vertex> 
-		NextNode
-		(
-			const std::shared_ptr<Pln_Vertex>& theNode,
-			const std::shared_ptr<Pln_Edge>& theEdge
-		)
-	{
-		Debug_Null_Pointer(theNode);
-		Debug_Null_Pointer(theEdge);
-
-		const auto& v0 = theEdge->Vtx0();
-		const auto& v1 = theEdge->Vtx1();
-
-		if (v0 IS_EQUAL theNode)
-		{
-			return v1;
-		}
-		if (v1 IS_EQUAL theNode)
-		{
-			return v0;
-		}
-		return nullptr;
-	}
-
-	std::shared_ptr<Pln_Edge> 
-		NextEdge
-		(
-			const std::shared_ptr<Pln_Vertex>& theVtx,
-			const std::shared_ptr<Pln_Edge>& theEdge
-		)
-	{
-		const auto& edges = theVtx->RetrieveEdges();
-		if (edges.size() NOT_EQUAL 2)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the vertex is not manifold" << endl
-				<< abort(FatalError);
-		}
-
-		if (edges[0].lock() IS_EQUAL theEdge)
-		{
-			return edges[1].lock();
-		}
-		if (edges[1].lock() IS_EQUAL theEdge)
-		{
-			return edges[0].lock();
-		}
-		FatalErrorIn(FunctionSIG)
-			<< "Unable to find the next edge" << endl
-			<< abort(FatalError);
-		return nullptr;
-	}
-
-}
-
 std::tuple
 <
 	std::vector<std::shared_ptr<tnbLib::Pln_Edge>>, 
@@ -398,7 +340,15 @@ tnbLib::Cad2d_RemoveNonManifold::MarchOnEdges
 		Info << " - marching on the edges..." << endl;
 	}
 
-	theVtx->RemoveFromEdges(theEdge->Index());
+	auto[edges, v0, v1] = Pln_Tools::MarchOnEdges(theVtx, theEdge);
+
+	v0->RemoveFromEdges(FirstItem(edges)->Index());
+	if (v0 NOT_EQUAL v1)
+	{
+		v1->RemoveFromEdges(LastItem(edges)->Index());
+	}
+
+	/*theVtx->RemoveFromEdges(theEdge->Index());
 
 	auto v0 = theVtx;
 	auto nextEdge = theEdge;
@@ -406,17 +356,17 @@ tnbLib::Cad2d_RemoveNonManifold::MarchOnEdges
 	std::vector<std::shared_ptr<Pln_Edge>> edges;
 	edges.push_back(nextEdge);
 
-	auto nextVtx = NextNode(theVtx, nextEdge);
+	auto nextVtx = Pln_Tools::NextNode(theVtx, nextEdge);
 	while (nextVtx->IsManifold())
 	{
-		nextEdge = NextEdge(nextVtx, nextEdge);
+		nextEdge = Pln_Tools::NextEdge(nextEdge, nextVtx);
 		edges.push_back(nextEdge);
 
-		nextVtx = NextNode(nextVtx, nextEdge);
+		nextVtx = Pln_Tools::NextNode(nextVtx, nextEdge);
 	}
 
 	if (theVtx NOT_EQUAL nextVtx) nextVtx->RemoveFromEdges(nextEdge->Index());
-	auto v1 = nextVtx;
+	auto v1 = nextVtx;*/
 	auto t = std::make_tuple(std::move(edges), std::move(v0), std::move(v1));
 
 	if (Cad2d_RemoveNonManifold::verbose > 1)
