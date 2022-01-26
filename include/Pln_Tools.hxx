@@ -378,6 +378,38 @@ namespace tnbLib
 				const gp_Ax2& theAx
 			);
 
+		// the node is on the edge [1/25/2022 Amir]
+		// - the function returns the next node on the edge
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> 
+			NextNode
+			(
+				const std::shared_ptr<Pln_Vertex>& theNode,
+				const std::shared_ptr<Pln_Edge>&
+			);
+
+		// the node is on the edge [1/25/2022 Amir]
+		// - the function returns the next edge that has the common node, theNode, with theEdge.
+		// - WARNING: the node must be manifold; an exception will be thrown, otherwise.
+		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> 
+			NextEdge
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge,
+				const std::shared_ptr<Pln_Vertex>& theNode
+			);
+
+		// Marching on the edges while the vertices are manifold [1/25/2022 Amir]
+		static std::tuple
+			<
+			std::vector<std::shared_ptr<Pln_Edge>>,
+			std::shared_ptr<Pln_Vertex>,
+			std::shared_ptr<Pln_Vertex>
+			> 
+			MarchOnEdges
+			(
+				const std::shared_ptr<Pln_Vertex>& theVertex, 
+				const std::shared_ptr<Pln_Edge>& theDirection
+			);
+
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge>
 			ForwardEdge
 			(
