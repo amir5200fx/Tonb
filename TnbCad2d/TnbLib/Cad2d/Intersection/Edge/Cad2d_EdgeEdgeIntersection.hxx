@@ -37,7 +37,7 @@ namespace tnbLib
 
 		//- constructors
 
-		Cad2d_EdgeEdgeIntersection
+		explicit Cad2d_EdgeEdgeIntersection
 		(
 			const Standard_Integer theIndex
 		)
@@ -46,10 +46,42 @@ namespace tnbLib
 
 		Cad2d_EdgeEdgeIntersection
 		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Edge>& theEdge0,
+			const std::shared_ptr<Pln_Edge>& theEdge1
+		)
+			: Cad2d_EntityEntityIntersection(theIndex)
+			, theEdge0_(theEdge0)
+			, theEdge1_(theEdge1)
+		{}
+
+		Cad2d_EdgeEdgeIntersection
+		(
+			const std::shared_ptr<Pln_Edge>& theEdge0,
+			const std::shared_ptr<Pln_Edge>& theEdge1
+		)
+			: theEdge0_(theEdge0)
+			, theEdge1_(theEdge1)
+		{}
+
+		Cad2d_EdgeEdgeIntersection
+		(
 			const Standard_Integer theIndex, 
 			const word& theName
 		)
 			: Cad2d_EntityEntityIntersection(theIndex, theName)
+		{}
+
+		Cad2d_EdgeEdgeIntersection
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::shared_ptr<Pln_Edge>& theEdge0,
+			const std::shared_ptr<Pln_Edge>& theEdge1
+		)
+			: Cad2d_EntityEntityIntersection(theIndex, theName)
+			, theEdge0_(theEdge0)
+			, theEdge1_(theEdge1)
 		{}
 
 

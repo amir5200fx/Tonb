@@ -35,6 +35,14 @@ namespace tnbLib
 
 		//- constructors
 
+		Cad2d_VertexEdgeIntersection
+		(
+			const std::shared_ptr<Pln_Vertex>& theVtx,
+			const std::shared_ptr<Pln_Edge>& theCurve
+		)
+			: theVtx_(theVtx)
+			, theEdge_(theCurve)
+		{}
 
 		//- public functions and operators
 
