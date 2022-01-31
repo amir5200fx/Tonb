@@ -430,6 +430,24 @@
     <Filter Include="TnbLib\Cad2d\IdentRings\Entity">
       <UniqueIdentifier>{9a7944cb-389c-4d63-8e4a-93af1f94f51d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Search">
+      <UniqueIdentifier>{61bce850-de79-4411-97c2-eb6f3ba3cf2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Search\Curve">
+      <UniqueIdentifier>{9ff7780a-2dd8-4e18-958b-b3eaaeba2c6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Search\Curve\BruteForce">
+      <UniqueIdentifier>{c30230e2-82ed-498e-ac9b-5a1c1450f3d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\CrvsIntsct">
+      <UniqueIdentifier>{49a733ad-731e-4afb-8fb7-bc2c05a46b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Intersection\Vertex">
+      <UniqueIdentifier>{46e9482b-30fe-490b-b5b0-a304335761f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\SubdivideCrvs">
+      <UniqueIdentifier>{5250ef28-91ee-4639-b724-440d026267a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -840,6 +858,21 @@
     <ClInclude Include="TnbLib\Cad2d\IdentRings\Entity\Cad2d_IdentRings_Entity.hxx">
       <Filter>TnbLib\Cad2d\IdentRings\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Search\Curve\Cad2d_SearchCrv.hxx">
+      <Filter>TnbLib\Cad2d\Search\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Search\Curve\BruteForce\Cad2d_BruteForceSearchCrv.hxx">
+      <Filter>TnbLib\Cad2d\Search\Curve\BruteForce</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\CrvsIntsct\Cad2d_CrvsIntsct.hxx">
+      <Filter>TnbLib\Cad2d\CrvsIntsct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Intersection\Vertex\Cad2d_VertexVertexIntersection.hxx">
+      <Filter>TnbLib\Cad2d\Intersection\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\SubdivideCrvs\Cad2d_SubdivideCrvs.hxx">
+      <Filter>TnbLib\Cad2d\SubdivideCrvs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1216,6 +1249,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\IdentRings\Link\Segment\Cad2d_IdentRings_Segment.cxx">
       <Filter>TnbLib\Cad2d\IdentRings\Link\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Search\Curve\BruteForce\Cad2d_BruteForceSearchCrv.cxx">
+      <Filter>TnbLib\Cad2d\Search\Curve\BruteForce</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\CrvsIntsct\Cad2d_CrvsIntsct.cxx">
+      <Filter>TnbLib\Cad2d\CrvsIntsct</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Vertex\Cad2d_VertexVertexIntersection.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\SubdivideCrvs\Cad2d_SubdivideCrvs.cxx">
+      <Filter>TnbLib\Cad2d\SubdivideCrvs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
