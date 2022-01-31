@@ -1,0 +1,8 @@
+setVerbose(1);
+setMakerVerbose(1);
+
+loadFile();
+
+execute();
+
+saveTo();

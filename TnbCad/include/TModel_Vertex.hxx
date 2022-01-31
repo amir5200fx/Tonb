@@ -72,11 +72,30 @@ namespace tnbLib
 		TModel_Vertex
 		(
 			const Standard_Integer theIndex,
+			Pnt3d&& theCoord
+		)
+			: TModel_Entity(theIndex)
+			, theCoord_(std::move(theCoord))
+		{}
+
+		TModel_Vertex
+		(
+			const Standard_Integer theIndex,
 			const word& theName,
 			const Pnt3d& theCoord
 		)
 			: TModel_Entity(theIndex, theName)
 			, theCoord_(theCoord)
+		{}
+
+		TModel_Vertex
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Pnt3d&& theCoord
+		)
+			: TModel_Entity(theIndex, theName)
+			, theCoord_(std::move(theCoord))
 		{}
 
 

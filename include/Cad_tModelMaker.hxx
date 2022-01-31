@@ -57,6 +57,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad_EXPORT unsigned short verbose;
+
 		static TnbCad_EXPORT const std::shared_ptr<MakerInfo> DEFAULT_INFO;
 		static TnbCad_EXPORT const std::shared_ptr<Cad_tModelMaker_PairCrvCriterion> DEFAULT_CRITERION;
 
