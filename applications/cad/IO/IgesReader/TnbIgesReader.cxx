@@ -189,7 +189,7 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				auto address = file::GetSystemFile("TnbIgesReader");
+				auto address = file::GetSystemFile("tnbIgesReader");
 
 				//std::string address = ".\\system\\TnbIgesReader";
 				fileName myFileName(address);
