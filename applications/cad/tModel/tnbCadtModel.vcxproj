@@ -156,6 +156,14 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).ipdb" </Comma
   <ItemGroup>
     <ClCompile Include="tnbCadtModel.cxx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TnbCad\TnbCad.vcxproj">
+      <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

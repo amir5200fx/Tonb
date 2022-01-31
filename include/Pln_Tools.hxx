@@ -305,6 +305,8 @@ namespace tnbLib
 				const std::vector<Handle(Geom2d_Curve)>& theCurves
 			);
 
+		// This function creates an edge list from a list of curves. [1/30/2022 Amir]
+		// WARNING! No connection is made between vertices and the edge to which they belong.
 		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>>
 			RetrieveEdges
 			(
