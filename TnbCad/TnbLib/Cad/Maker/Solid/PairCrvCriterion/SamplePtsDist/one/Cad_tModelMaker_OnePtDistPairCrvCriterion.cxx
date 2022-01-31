@@ -52,12 +52,12 @@ tnbLib::cadLib::tModelMaker_OnePtDistPairCrvCriterion::ArePaired
 
 	const auto crvLen0 = Cad_Tools::CalcLength(g0, CurveLengthInfo());
 	const auto crvLen1 = Cad_Tools::CalcLength(g1, CurveLengthInfo());
-
+	
 	if (std::abs(crvLen0 - crvLen1) < Tolerance())
 	{
 		const auto pt0 = crvCriterion::GetSamplePoint(g0, CurveSplitterInfo());
 		const auto pt1 = crvCriterion::GetSamplePoint(g1, CurveSplitterInfo());
-
+		
 		if (pt0.Distance(pt1) <= Tolerance())
 		{
 			return Standard_True;

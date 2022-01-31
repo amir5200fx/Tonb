@@ -3,6 +3,7 @@
 #include <TModel_Edges.hxx>
 #include <TModel_Curve.hxx>
 #include <TModel_ParaCurve.hxx>
+#include <TModel_Vertex.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_tEdgeMakerInfo.hxx>
@@ -101,17 +102,30 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 
 		if (Cad_Tools::IsRing(Curve, U0, U1, tol))
 		{
+			auto pm = MEAN(Pnt3d(Curve->Value(U0)), Pnt3d(Curve->Value(U1)));
+			auto vtx = std::make_shared<TModel_Vertex>(0, std::move(pm));
+
 			auto curveOnSurface = std::make_shared<TModel_Curve>(Curve);
-			newEdge = std::make_shared<TModel_RingEdge>(curveOnSurface, curveOnPlane);
+			newEdge = std::make_shared<TModel_RingEdge>(vtx, curveOnSurface, curveOnPlane);
 		}
 		else
 		{
+			auto p0 = Pnt3d(Curve->Value(U0));
+			auto p1 = Pnt3d(Curve->Value(U1));
+
+			auto vtx0 = std::make_shared<TModel_Vertex>(0, std::move(p0));
+			auto vtx1 = std::make_shared<TModel_Vertex>(0, std::move(p1));
+
 			auto curveOnSurface = std::make_shared<TModel_Curve>(Curve);
-			newEdge = std::make_shared<TModel_SegmentEdge>(curveOnSurface, curveOnPlane);
+			newEdge = std::make_shared<TModel_SegmentEdge>(vtx0, vtx1, curveOnSurface, curveOnPlane);
 		}
 	}
 	else
 	{ // the curve is deGenerated [1/7/2022 Amir]
+		/*auto pt2d = curveOnPlane->Value(MEAN(curveOnPlane->FirstParameter(), curveOnPlane->LastParameter()));
+		auto pm = patch->Value(pt2d.X(), pt2d.Y());
+		auto vtx = std::make_shared<TModel_Vertex>(0, std::move(pm));*/
+
 		newEdge = std::make_shared<TModel_SingularEdge>(curveOnPlane);
 	}
 
