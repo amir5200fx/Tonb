@@ -26,11 +26,39 @@ namespace tnbLib
 		Cad2d_IntsctEntity_Point()
 		{}
 
-		Cad2d_IntsctEntity_Point(const Standard_Integer theIndex)
+
+		// constructors [1/27/2022 Amir]
+
+		explicit Cad2d_IntsctEntity_Point
+		(
+			const Standard_Integer theIndex
+		)
 			: Cad2d_IntsctEntity(theIndex)
 		{}
 
-		Cad2d_IntsctEntity_Point(const Standard_Integer theIndex, const word& theName)
+		Cad2d_IntsctEntity_Point
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<Pln_Vertex>& theVtx
+		)
+			: Cad2d_IntsctEntity(theIndex)
+			, theVertex_(theVtx)
+		{}
+
+		Cad2d_IntsctEntity_Point
+		(
+			const Standard_Integer theIndex,
+			std::shared_ptr<Pln_Vertex>&& theVtx
+		)
+			: Cad2d_IntsctEntity(theIndex)
+			, theVertex_(std::move(theVtx))
+		{}
+
+		Cad2d_IntsctEntity_Point
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		)
 			: Cad2d_IntsctEntity(theIndex, theName)
 		{}
 
@@ -49,6 +77,11 @@ namespace tnbLib
 		void SetParentVertex(const std::shared_ptr<Pln_Vertex>& theVtx)
 		{
 			theVertex_ = theVtx;
+		}
+
+		void SetParentVertex(std::shared_ptr<Pln_Vertex>&& theVtx)
+		{
+			theVertex_ = std::move(theVtx);
 		}
 
 		//- Macros
