@@ -470,9 +470,6 @@ void tnbLib::Cad2d_Subdivide::Perform()
 			<< abort(FatalError);
 	}
 
-	std::map<Standard_Integer, std::shared_ptr<Pln_CmpEdge>>
-		subEdgeMap0, subEdgeMap1;
-
 	entityMap entities0, entities1;
 
 	const auto& entities = IntersectionAlgorithm()->Entities();
