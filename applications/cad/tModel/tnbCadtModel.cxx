@@ -15,6 +15,8 @@
 namespace tnbLib
 {
 
+	static double myTol = 1.0E-6;
+
 	static const std::string loadExt = Cad_Shape::extension;
 	static const std::string saveExt = Cad_TModel::extension;
 
@@ -96,6 +98,9 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		const auto d = myShape->BoundingBox()->Diameter();
+		myPairCriterion->SetTolerance(myTol*d);
+
 		{
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
@@ -111,6 +116,16 @@ namespace tnbLib
 
 			myModel = myMaker->Model();
 		}
+
+		if (verbose)
+		{
+			Info << endl;
+			Info << " - Number of corners: " << myModel->NbCorners() << endl
+				<< " - Number of segments: " << myModel->NbSegments() << endl
+				<< " - Number of faces: " << myModel->NbFaces() << endl << endl;
+		}
+
+		exeTag = true;
 
 		if (verbose)
 		{
@@ -156,6 +171,7 @@ namespace tnbLib
 
 		// settings [1/31/2022 Amir]
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {Cad_tModelMaker::verbose = i; }), "setMakerVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -186,7 +202,7 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to read an IGES file format." << endl << endl;
+			Info << " This application is aimed to create a TModel from a shape." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -195,7 +211,8 @@ int main(int argc, char *argv[])
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
-				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl
+				<< " - setMakerVerbose(unsigned int); Levels: 0, 1" << endl << endl
 
 				<< " # Operators:" << endl << endl
 
