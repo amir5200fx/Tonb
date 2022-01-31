@@ -63,6 +63,12 @@ namespace tnbLib
 			return theFaces_;
 		}
 
+		TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>> RetrieveEdges() const;
+		TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Surface>> RetrieveSurfaces() const;
+
+		TnbCad_EXPORT void RetrieveEdgesTo(std::vector<std::shared_ptr<TModel_Edge>>&) const;
+		TnbCad_EXPORT void RetrieveSurfacesTo(std::vector<std::shared_ptr<TModel_Surface>>&) const;
+
 		TnbCad_EXPORT void ImportToEdges
 		(
 			const Standard_Integer theIndex,

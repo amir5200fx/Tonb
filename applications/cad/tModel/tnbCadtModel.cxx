@@ -15,6 +15,8 @@
 namespace tnbLib
 {
 
+	static double myTol = 1.0E-6;
+
 	static const std::string loadExt = Cad_Shape::extension;
 	static const std::string saveExt = Cad_TModel::extension;
 
@@ -96,6 +98,9 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		const auto d = myShape->BoundingBox()->Diameter();
+		myPairCriterion->SetTolerance(myTol*d);
+
 		{
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
@@ -114,8 +119,144 @@ namespace tnbLib
 
 		if (verbose)
 		{
+			Info << endl;
+			Info << " - Number of corners: " << myModel->NbCorners() << endl
+				<< " - Number of segments: " << myModel->NbSegments() << endl
+				<< " - Number of faces: " << myModel->NbFaces() << endl << endl;
+		}
+
+		exeTag = true;
+
+		if (verbose)
+		{
 			Info << endl
 				<< "- the application is performed, successfully, in "<< global_time_duration << " ms." << endl;
 		}
 	}
+
+	void execute()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded!" << endl
+				<< abort(FatalError);
+		}
+
+		execute(myShape->Name());
+	}
+}
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+#include <chaiscript/chaiscript.hpp>
+
+namespace tnbLib
+{
+	typedef std::shared_ptr<chaiscript::Module> module_t;
+
+	void setFunctions(const module_t& mod)
+	{
+		// io functions [1/31/2022 Amir]
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+
+		// operators [1/31/2022 Amir]
+		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {execute(name); }), "execute");
+
+		// settings [1/31/2022 Amir]
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {Cad_tModelMaker::verbose = i; }), "setMakerVerbose");
+	}
+
+	std::string getString(char* argv)
+	{
+		std::string argument(argv);
+		return std::move(argument);
+	}
+
+	Standard_Boolean IsEqualCommand(char* argv, const std::string& command)
+	{
+		auto argument = getString(argv);
+		return argument IS_EQUAL command;
+	}
+}
+
+using namespace tnbLib;
+
+int main(int argc, char *argv[])
+{
+	if (argc <= 1)
+	{
+		Info << " - No command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
+
+	if (argc IS_EQUAL 2)
+	{
+		if (IsEqualCommand(argv[1], "--help"))
+		{
+			Info << " This application is aimed to create a TModel from a shape." << endl << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl
+				<< " - setMakerVerbose(unsigned int); Levels: 0, 1" << endl << endl
+
+				<< " # Operators:" << endl << endl
+
+				<< " - execute(name [optional])" << endl
+				<< endl;
+			return 0;
+		}
+		else if (IsEqualCommand(argv[1], "--run"))
+		{
+			chaiscript::ChaiScript chai;
+
+			auto mod = std::make_shared<chaiscript::Module>();
+
+			setFunctions(mod);
+
+			chai.add(mod);
+
+			try
+			{
+				auto address = file::GetSystemFile("tnbCadtModel");
+				fileName myFileName(address);
+
+				chai.eval_file(myFileName);
+				return 0;
+			}
+			catch (const chaiscript::exception::eval_error& x)
+			{
+				Info << x.pretty_print() << endl;
+			}
+			catch (const error& x)
+			{
+				Info << x.message() << endl;
+			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
+			}
+		}
+	}
+	else
+	{
+		Info << " - No valid command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
+	return 1;
 }

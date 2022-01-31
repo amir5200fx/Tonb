@@ -87,6 +87,11 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual Standard_Boolean IsVertexVertex() const
+		{
+			return Standard_False;
+		}
+
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(Standard_Real, Tolerance)
 	};

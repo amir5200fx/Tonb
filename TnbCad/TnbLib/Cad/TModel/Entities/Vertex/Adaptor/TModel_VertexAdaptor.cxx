@@ -4,6 +4,48 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
+tnbLib::TModel_VertexAdaptor::RetrieveEdges() const
+{
+	std::vector<std::shared_ptr<TModel_Edge>> edges;
+	RetrieveEdgesTo(edges);
+	return std::move(edges);
+}
+
+std::vector<std::shared_ptr<tnbLib::TModel_Surface>> 
+tnbLib::TModel_VertexAdaptor::RetrieveSurfaces() const
+{
+	std::vector<std::shared_ptr<TModel_Surface>> surfaces;
+	RetrieveSurfacesTo(surfaces);
+	return std::move(surfaces);
+}
+
+void tnbLib::TModel_VertexAdaptor::RetrieveEdgesTo
+(
+	std::vector<std::shared_ptr<TModel_Edge>>& theEdges
+) const
+{
+	for (const auto& x : Edges())
+	{
+		auto e = x.second.lock();
+		Debug_Null_Pointer(e);
+		theEdges.push_back(std::move(e));
+	}
+}
+
+void tnbLib::TModel_VertexAdaptor::RetrieveSurfacesTo
+(
+	std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
+) const
+{
+	for (const auto& x : Faces())
+	{
+		auto s = x.second.lock();
+		Debug_Null_Pointer(s);
+		theSurfaces.push_back(std::move(s));
+	}
+}
+
 void tnbLib::TModel_VertexAdaptor::ImportToEdges
 (
 	const Standard_Integer theIndex, 

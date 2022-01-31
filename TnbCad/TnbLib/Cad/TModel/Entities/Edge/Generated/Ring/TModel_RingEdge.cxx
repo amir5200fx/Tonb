@@ -14,5 +14,11 @@ void tnbLib::TModel_RingEdge::RetrieveVerticesTo
 	std::vector<std::shared_ptr<TModel_Vertex>>& theVertices
 ) const
 {
+	if (NOT Vtx())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no vertex is attached to the ring!" << endl
+			<< abort(FatalError);
+	}
 	theVertices.push_back(Vtx());
 }

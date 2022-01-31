@@ -17,9 +17,13 @@
 #include <TModel_Vertex.hxx>
 #include <TModel_Edges.hxx>
 #include <TModel_Paired.hxx>
+#include <TModel_Curve.hxx>
+#include <TModel_Surface.hxx>
 #include <Geo_PrTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity3d_Box.hxx>
+
+unsigned short tnbLib::Cad_tModelMaker::verbose = 0;
 
 const std::shared_ptr<tnbLib::Cad_tModelMaker::MakerInfo> tnbLib::Cad_tModelMaker::DEFAULT_INFO =
 std::make_shared<tnbLib::Cad_tModelMaker::MakerInfo>();
@@ -522,6 +526,11 @@ namespace tnbLib
 			return thePairCriterion_;
 		}
 
+		const auto& IdToNodeMap() const
+		{
+			return theIdToNodeMap_;
+		}
+
 		void CalcIdToNodeMap();
 		void CalcMergedEdges();
 
@@ -638,18 +647,32 @@ tnbLib::MergeSegments::RetrieveNodes
 	const std::vector<std::shared_ptr<Edge>>& edges
 )
 {
-	std::vector<std::shared_ptr<Node>> vertices;
-	vertices.reserve(2 * edges.size());
-
+	std::map<Standard_Integer, std::shared_ptr<Node>> regNodes;
 	for (const auto& x : edges)
 	{
 		Debug_Null_Pointer(x);
 		auto nodes = x->RetrieveNodes();
-		for (const auto& n : nodes)
+		for (auto& n : nodes)
 		{
 			Debug_Null_Pointer(n);
-			vertices.push_back(n);
+			auto paired = std::make_pair(n->Index(), std::move(n));
+			auto insert = regNodes.insert(std::move(paired));
+			if (NOT insert.second)
+			{
+				// do nothing! duplicate data [1/31/2022 Amir]
+			}
 		}
+	}
+
+	std::vector<std::shared_ptr<Node>> vertices;
+	vertices.reserve(regNodes.size());
+
+	for (auto& x : regNodes)
+	{
+		auto& n = x.second;
+		Debug_Null_Pointer(n);
+
+		vertices.push_back(std::move(n));
 	}
 	return std::move(vertices);
 }
@@ -705,7 +728,7 @@ void tnbLib::MergeSegments::EdgeAdaptor::ImportToEdges(const std::shared_ptr<TMo
 
 	auto paired = std::make_pair(theEdge->Index(), theEdge);
 	auto insert = theEdges_.insert(std::move(paired));
-	if (NOT paired.second)
+	if (NOT insert.second)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "duplicate item has been detected!" << endl
@@ -794,6 +817,7 @@ void tnbLib::MergeSegments::CalcIdToNodeMap()
 			engine.InsertToGeometry(newNode);
 
 			newNode->SetPrecision(0);
+			newNode->ImportToVertices(x);
 		}
 		else
 		{
@@ -874,12 +898,11 @@ void tnbLib::MergeSegments::CalcMergedEdges()
 				if (ringPaired.second)
 				{
 					auto& newEdge = ringPaired.first;
+					newEdge->SetIndex(++nbEdges);
 
 					newEdge->ImportToEdges(x);
 
 					n->ImportToEdges(newEdge);
-
-					newEdge->SetIndex(++nbEdges);
 
 					theMergedEdges_.push_back(std::move(newEdge));
 				}
@@ -904,13 +927,12 @@ void tnbLib::MergeSegments::CalcMergedEdges()
 				if (edgePaired.second)
 				{
 					auto& newEdge = edgePaired.first;
+					newEdge->SetIndex(++nbEdges);
 
 					newEdge->ImportToEdges(x);
 
 					n0->ImportToEdges(newEdge);
-					n1->ImportToEdges(newEdge);
-
-					newEdge->SetIndex(++nbEdges);
+					n1->ImportToEdges(newEdge);		
 
 					theMergedEdges_.push_back(std::move(newEdge));
 				}
@@ -944,7 +966,6 @@ void tnbLib::MergeSegments::Perform()
 	}
 
 	CalcIdToNodeMap();
-
 	CalcMergedEdges();
 
 	Change_IsDone() = Standard_True;
@@ -1019,7 +1040,7 @@ tnbLib::MergeSegments::MakeNewEdge
 					auto t = std::make_pair(std::move(edge), Standard_False);
 					return std::move(t);
 				}
-			}	
+			}
 		}
 	}
 
@@ -1117,6 +1138,55 @@ tnbLib::MergeSegments::CommonEdge
 namespace tnbLib
 {
 
+	void ReplaceVertex
+	(
+		const std::shared_ptr<MergeSegments::Node>& node,
+		const std::shared_ptr<TModel_Vertex>& vertex
+	)
+	{
+		for (const auto& x : node->Vertices())
+		{
+			const auto& n = x.second;
+			Debug_Null_Pointer(n);
+
+			auto edges = n->RetrieveEdges();
+			Debug_If_Condition_Message(edges.empty(), "the edge and the sub-vertices are not linked!");
+
+			for (const auto& e : edges)
+			{
+				Debug_Null_Pointer(e);
+				if (auto seg = std::dynamic_pointer_cast<TModel_SegmentEdge>(e))
+				{
+					if (seg->Vtx0() IS_EQUAL n)
+					{
+						seg->SetVtx0(vertex);
+					}
+					else if (seg->Vtx1() IS_EQUAL n)
+					{
+						seg->SetVtx1(vertex);
+					}
+					else
+					{
+						FatalErrorIn(FunctionSIG)
+							<< " contradictory data has been detected." << endl
+							<< abort(FatalError);
+					}		
+				}
+				else if (auto ring = std::dynamic_pointer_cast<TModel_RingEdge>(e))
+				{
+					ring->SetVtx(vertex);
+				}
+
+				vertex->ImportToEdges(e->Index(), e);
+				for (const auto& s : n->RetrieveSurfaces())
+				{
+					Debug_Null_Pointer(s);
+					vertex->ImportToSurfaces(s->Index(), s);
+				}
+			}
+		}
+	}
+
 	auto CreateVertices(const std::vector<std::shared_ptr<MergeSegments::Node>>& nodes)
 	{
 		Standard_Integer nbNodes = 0;
@@ -1129,6 +1199,10 @@ namespace tnbLib
 			const auto& coord = x->Coord();
 
 			auto vertex = std::make_shared<TModel_Vertex>(++nbNodes, coord);
+			Debug_Null_Pointer(vertex);
+
+			ReplaceVertex(x, vertex);
+
 			vertices.push_back(std::move(vertex));
 		}
 		return std::move(vertices);
@@ -1264,7 +1338,7 @@ namespace tnbLib
 				auto s = surfMaker->Surface();
 				Debug_Null_Pointer(s);
 
-				s->SetIndex(k);
+				s->SetIndex(++k);
 				s->SetName("surface " + std::to_string(k));
 
 				surfaceList.push_back(std::move(s));
@@ -1272,10 +1346,82 @@ namespace tnbLib
 		}
 		return std::move(surfaceList);
 	}
+
+	void LinkEdges(const std::vector<std::shared_ptr<TModel_Edge>>& theEdges)
+	{
+		for (const auto& x : theEdges)
+		{
+			Debug_Null_Pointer(x);
+			if (NOT x->IsDegenerated())
+			{
+				if (auto seg = std::dynamic_pointer_cast<TModel_SegmentEdge>(x))
+				{
+					const auto& v0 = seg->Vtx0();
+					const auto& v1 = seg->Vtx1();
+
+					Debug_Null_Pointer(v0);
+					Debug_Null_Pointer(v1);
+
+					v0->ImportToEdges(x->Index(), x);
+					v1->ImportToEdges(x->Index(), x);
+				}
+				else if (auto ring = std::dynamic_pointer_cast<TModel_RingEdge>(x))
+				{
+					const auto& v = ring->Vtx();
+					Debug_Null_Pointer(v);
+
+					v->ImportToEdges(x->Index(), x);
+				}
+				else
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "unspecified type of segment has been detected!" << endl
+						<< abort(FatalError);
+				}
+			}
+		}
+	}
+
+	void RenumberingEdges(const std::vector<std::shared_ptr<TModel_Edge>>& theEdges)
+	{
+		Standard_Integer k = 0;
+		for (const auto& x : theEdges)
+		{
+			Debug_Null_Pointer(x);
+			x->SetIndex(++k);
+		}
+	}
+
+	void RenumberingNodes(const std::vector<std::shared_ptr<TModel_Edge>>& theEdges)
+	{
+		Standard_Integer k = 0;
+		for (const auto& x : theEdges)
+		{
+			Debug_Null_Pointer(x);
+			if (NOT x->IsDegenerated())
+			{
+				std::vector<std::shared_ptr<TModel_Vertex>> vertices;
+				x->RetrieveVerticesTo(vertices);
+
+				for (const auto& v : vertices)
+				{
+					Debug_Null_Pointer(v);
+					if (NOT v->Index()) v->SetIndex(++k);
+				}
+			}
+		}
+	}
 }
 
 void tnbLib::Cad_tModelMaker::Perform()
 {
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Creating TModel ********" << endl;
+		Info << endl;
+	}
+
 	if (Shape().IsNull())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -1292,36 +1438,83 @@ void tnbLib::Cad_tModelMaker::Perform()
 	);
 	Debug_Null_Pointer(surfInfo);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Retrieving the surfaces..." << endl;
+	}
+
 	const auto surfaces = RetrieveSurfaces(Shape(), surfInfo);
 
 	auto solid = std::make_shared<Cad_TModel>();
 	Debug_Null_Pointer(solid);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Retrieving the edges..." << endl;
+	}
 	const auto edges = Cad_Tools::RetrieveEdges(surfaces);
 
+	RenumberingEdges(edges);
+	RenumberingNodes(edges);
+
+	LinkEdges(edges);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Merging the segments..." << endl;
+	}
 	auto mergeAlg = std::make_shared<MergeSegments>(edges, GetInfo()->modelInfo, PairCriterion());
 	Debug_Null_Pointer(mergeAlg);
 
 	mergeAlg->Perform();
 	Debug_If_Condition_Message(NOT mergeAlg->IsDone(), "the algorithm is not performed");
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Retrieving the vertices..." << endl;
+	}
 	const auto& mergedEdges = mergeAlg->MergedEdges();
+
 	const auto mergedNodes = MergeSegments::RetrieveNodes(mergedEdges);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Creating the corner manager..." << endl;
+	}
 	auto vertices = CreateVertices(mergedNodes);
 	auto cornerManager = MakeCornerManager(vertices);
 
 	SetCornerManager(std::move(cornerManager), solid);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Creating the segment manager..." << endl;
+	}
 	auto segments = CreateSegments(mergedEdges);
 	auto segmentManagr = MakeSegmentManager(segments);
 
 	SetSegmentManager(std::move(segmentManagr), solid);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Creating the face manager..." << endl;
+	}
 	auto faceManager = MakeFaceManager(surfaces);
 
 	SetFaceManager(std::move(faceManager), solid);
 
+	if (verbose)
+	{
+		Info << endl
+			<< " Linking the segments..." << endl;
+	}
 	LinkEdges(solid->Segments());
 
 	solid->SetShape(Shape());
@@ -1329,4 +1522,11 @@ void tnbLib::Cad_tModelMaker::Perform()
 	theModel_ = std::move(solid);
 
 	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of the Creating a TModel ********" << endl;
+		Info << endl;
+	}
 }

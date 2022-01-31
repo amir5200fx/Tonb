@@ -80,7 +80,7 @@ namespace tnbLib
 		return alg->Entities();
 	}
 
-	static auto 
+	static std::shared_ptr<Cad2d_IntsctEntity_Pair>
 		Intersection
 		(
 			const std::shared_ptr<Pln_Vertex>& theVtx,
