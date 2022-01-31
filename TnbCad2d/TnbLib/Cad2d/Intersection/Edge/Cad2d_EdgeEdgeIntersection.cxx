@@ -187,34 +187,43 @@ tnbLib::Cad2d_EdgeEdgeIntersection::ConvertFrom
 	auto fwd = Pln_Tools::ForwardEdge(vtx);
 	auto bwd = Pln_Tools::BackwardEdge(vtx);
 
-	Debug_Null_Pointer(fwd);
-	Debug_Null_Pointer(bwd);
+	if (NOT fwd AND NOT bwd)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "orphan vertex has been detected!" << endl
+			<< abort(FatalError);
+	}
 
-	auto alg0 = std::make_shared<Cad2d_EdgeEdgeIntersection>();
-	auto alg1 = std::make_shared<Cad2d_EdgeEdgeIntersection>();
+	//Debug_Null_Pointer(fwd);
+	//Debug_Null_Pointer(bwd);
 
-	Debug_Null_Pointer(alg0);
-	Debug_Null_Pointer(alg1);
+	std::shared_ptr<Cad2d_EdgeEdgeIntersection> alg0;
+	std::shared_ptr<Cad2d_EdgeEdgeIntersection> alg1;
+	//auto alg0 = std::make_shared<Cad2d_EdgeEdgeIntersection>();
+	//auto alg1 = std::make_shared<Cad2d_EdgeEdgeIntersection>();
+
+	//Debug_Null_Pointer(alg0);
+	//Debug_Null_Pointer(alg1);
 
 	auto entity1 = std::make_shared<Cad2d_IntsctEntity_OrthSegment>(0);
 	Debug_Null_Pointer(entity1);
 
 	const auto& pair = theAlg.Entities()[0];
 
-	const auto& prior0 = pair->Entity0();
-	const auto& prior1 = pair->Entity1();
+	const auto& ent0 = pair->Entity0();
+	const auto& ent1 = pair->Entity1();
 
-	Debug_Null_Pointer(prior0);
-	Debug_Null_Pointer(prior1);
+	Debug_Null_Pointer(ent0);
+	Debug_Null_Pointer(ent1);
 
-	if (NOT prior0->IsPoint())
+	if (NOT ent0->IsPoint())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "contradictory data!" << endl
 			<< abort(FatalError);
 	}
 
-	if (NOT prior1->IsSegment())
+	if (NOT ent1->IsSegment())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "contradictory data!" << endl
@@ -224,14 +233,18 @@ tnbLib::Cad2d_EdgeEdgeIntersection::ConvertFrom
 	/*auto intsct0 = std::dynamic_pointer_cast<Cad2d_IntsctEntity_Point>(prior0);
 	Debug_Null_Pointer(intsct0);*/
 
-	auto intsc1 = std::dynamic_pointer_cast<Cad2d_IntsctEntity_OrthSegment>(prior1);
+	auto intsc1 = std::dynamic_pointer_cast<Cad2d_IntsctEntity_OrthSegment>(ent1);
 	Debug_Null_Pointer(intsc1);
 
 	entity1->SetParentEdge(edge);
 	entity1->SetParameter(intsc1->Parameter());
 	entity1->SetCoord(intsc1->Coord());
 
+	if (fwd)
 	{
+		alg0 = std::make_shared<Cad2d_EdgeEdgeIntersection>();
+		Debug_Null_Pointer(alg0);
+
 		auto& entities = alg0->ChangeEntities();
 
 		auto ent = std::make_shared<Cad2d_IntsctEntity_OrthSegment>(0);
@@ -248,12 +261,16 @@ tnbLib::Cad2d_EdgeEdgeIntersection::ConvertFrom
 				<< abort(FatalError);
 		}
 
-		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(std::move(ent), std::move(entity1));
+		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(ent, entity1);
 
 		entities.push_back(std::move(nPair));
 	}
 
+	if (bwd)
 	{
+		auto alg1 = std::make_shared<Cad2d_EdgeEdgeIntersection>();
+		Debug_Null_Pointer(alg1);
+
 		auto& entities = alg1->ChangeEntities();
 
 		auto ent = std::make_shared<Cad2d_IntsctEntity_OrthSegment>(0);
@@ -270,11 +287,11 @@ tnbLib::Cad2d_EdgeEdgeIntersection::ConvertFrom
 				<< abort(FatalError);
 		}
 
-		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(std::move(ent), std::move(entity1));
+		auto nPair = std::make_shared<Cad2d_IntsctEntity_Pair>(ent, entity1);
 
 		entities.push_back(std::move(nPair));
 	}
 
-	auto t = std::make_tuple(alg0, alg1);
+	auto t = std::make_tuple(std::move(alg0), std::move(alg1));
 	return std::move(t);
 }

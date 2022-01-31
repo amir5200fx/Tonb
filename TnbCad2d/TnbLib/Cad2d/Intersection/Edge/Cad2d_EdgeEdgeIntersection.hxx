@@ -120,6 +120,9 @@ namespace tnbLib
 
 		TnbCad2d_EXPORT void Perform();
 
+		//- the first intersection entity is the forward edge and the second one is 
+		//- the backward edge of the vertex 
+		//- Warning! If the vertex is dangled-type, one of two entities will be null, so both need to be checked.
 		static TnbCad2d_EXPORT std::tuple
 			<
 			std::shared_ptr<Cad2d_EdgeEdgeIntersection>,
