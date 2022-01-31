@@ -445,6 +445,9 @@
     <Filter Include="TnbLib\Cad2d\Intersection\Vertex">
       <UniqueIdentifier>{46e9482b-30fe-490b-b5b0-a304335761f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\SubdivideCrvs">
+      <UniqueIdentifier>{5250ef28-91ee-4639-b724-440d026267a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -867,6 +870,9 @@
     <ClInclude Include="TnbLib\Cad2d\Intersection\Vertex\Cad2d_VertexVertexIntersection.hxx">
       <Filter>TnbLib\Cad2d\Intersection\Vertex</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\SubdivideCrvs\Cad2d_SubdivideCrvs.hxx">
+      <Filter>TnbLib\Cad2d\SubdivideCrvs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1252,6 +1258,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Intersection\Vertex\Cad2d_VertexVertexIntersection.cxx">
       <Filter>TnbLib\Cad2d\Intersection\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\SubdivideCrvs\Cad2d_SubdivideCrvs.cxx">
+      <Filter>TnbLib\Cad2d\SubdivideCrvs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
