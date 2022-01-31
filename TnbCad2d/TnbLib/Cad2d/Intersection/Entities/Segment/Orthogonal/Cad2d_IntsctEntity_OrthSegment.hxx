@@ -28,16 +28,22 @@ namespace tnbLib
 		//- default constructor
 
 		Cad2d_IntsctEntity_OrthSegment()
+			: theParameter_(0)
+			, theCoord_(Pnt2d::null)
 		{}
 
 		//- constructors
 
 		explicit Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex)
 			: Cad2d_IntsctEntity_Segment(theIndex)
+			, theParameter_(0)
+			, theCoord_(Pnt2d::null)
 		{}
 
 		Cad2d_IntsctEntity_OrthSegment(const Standard_Integer theIndex, const word& theName)
 			: Cad2d_IntsctEntity_Segment(theIndex, theName)
+			, theParameter_(0)
+			, theCoord_(Pnt2d::null)
 		{}
 
 
