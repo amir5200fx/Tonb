@@ -541,13 +541,43 @@ namespace tnbLib
 
 		//- static functions and operators
 
-		static std::pair<std::shared_ptr<Edge>, Standard_Boolean> MakeNewEdge(const std::shared_ptr<Node>&, const std::shared_ptr<Node>&, const std::shared_ptr<TModel_Edge>&, const std::shared_ptr<Cad_tModelMaker_PairCrvCriterion>&);
-		static std::pair<std::shared_ptr<Edge>, Standard_Boolean> MakeNewRing(const std::shared_ptr<Node>&, const std::shared_ptr<TModel_Edge>&, const std::shared_ptr<Cad_tModelMaker_PairCrvCriterion>&);
-		static std::shared_ptr<Edge> CommonEdge(const std::shared_ptr<Node>&, const std::shared_ptr<Node>&);
+		static std::pair<std::shared_ptr<Edge>, Standard_Boolean> 
+			MakeNewEdge
+			(
+				const std::shared_ptr<Node>&,
+				const std::shared_ptr<Node>&, 
+				const std::shared_ptr<TModel_Edge>&, 
+				const std::shared_ptr<Cad_tModelMaker_PairCrvCriterion>&
+			);
+		static std::pair<std::shared_ptr<Edge>, Standard_Boolean> 
+			MakeNewRing
+			(
+				const std::shared_ptr<Node>&,
+				const std::shared_ptr<TModel_Edge>&,
+				const std::shared_ptr<Cad_tModelMaker_PairCrvCriterion>&
+			);
+		static std::shared_ptr<Edge> 
+			CommonEdge
+			(
+				const std::shared_ptr<Node>&,
+				const std::shared_ptr<Node>&
+			);
 
-		static std::vector<std::shared_ptr<Node>> RetrieveNodes(const std::vector<std::shared_ptr<Edge>>&);
-		static std::vector<Pnt3d> RetrieveCoords(const std::vector<std::shared_ptr<Node>>&);
-		static Entity3d_Box CalcBoundingBox(const std::vector<std::shared_ptr<Node>>&);
+		static std::vector<std::shared_ptr<Node>> 
+			RetrieveNodes
+			(
+				const std::vector<std::shared_ptr<Edge>>&
+			);
+		static std::vector<Pnt3d> 
+			RetrieveCoords
+			(
+				const std::vector<std::shared_ptr<Node>>&
+			);
+		static Entity3d_Box 
+			CalcBoundingBox
+			(
+				const std::vector<std::shared_ptr<Node>>&
+			);
 
 		//static std::vector<std::shared_ptr<Edge>> RetrieveEdges(const std::vector<std::shared_ptr<TModel_Edge>>&);
 	};
