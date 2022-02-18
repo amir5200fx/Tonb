@@ -31,7 +31,7 @@ namespace tnbLib
 
 		TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>>
 			Find(const std::shared_ptr<Pln_Edge>&) const override;
-		std::vector<std::shared_ptr<Pln_Edge>> AllCurves() const override;
+		TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>> AllCurves() const override;
 
 		// public functions and operators [1/26/2022 Amir]
 
