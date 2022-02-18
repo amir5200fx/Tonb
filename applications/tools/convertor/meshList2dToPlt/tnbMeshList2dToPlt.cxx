@@ -1,45 +1,34 @@
-#include <Entity2d_Triangulation.hxx> 
+#include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Box.hxx>
+#include <Global_File.hxx>
+#include <Global_Timer.hxx>
 #include <TnbError.hxx>
-#include <OFstream.hxx>
 #include <OSstream.hxx>
-
-#include <vector>
 
 namespace tnbLib
 {
 
-	typedef std::shared_ptr<Entity2d_Triangulation> mesh_t;
-
-	static unsigned short verbose(0);
+	static unsigned short verbose = 0;
 
 	static bool loadTag = false;
+	static std::string loadExt = Entity2d_Triangulation::extension + "list";
+	static std::string myFileName;
 
-	static std::vector<mesh_t> myMeshes;
+	static std::vector<std::shared_ptr<Entity2d_Triangulation>> myMeshes;
 
-	void loadModel(const std::string& name)
+	void loadFile(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the list from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
+		file::CheckExtension(name);
 
-		TNB_iARCH_FILE_TYPE ar(myFile);
-
-		ar >> myMeshes;
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the mesh list is loaded, from: " << name << ", successfully!" << endl;
-			Info << endl;
-		}
+		myMeshes = file::LoadFile<std::vector<std::shared_ptr<Entity2d_Triangulation>>>(name + loadExt, verbose);
 
 		loadTag = true;
+	}
+
+	void loadFile()
+	{
+		myFileName = file::GetSingleFile(boost::filesystem::current_path(), loadExt).string();
+		loadFile(myFileName);
 	}
 
 	void exportTo(const std::string& name)
@@ -51,7 +40,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		fileName fn(name);
+		fileName fn(name + ".plt");
 		OFstream myFile(fn);
 
 		for (const auto& x : myMeshes)
@@ -61,6 +50,18 @@ namespace tnbLib
 				x->ExportToPlt(myFile);
 			}
 		}
+	}
+
+	void exportTo()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no mesh has been loaded!" << endl
+				<< abort(FatalError);
+		}
+
+		exportTo(myFileName);
 	}
 }
 
@@ -78,10 +79,13 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-
-		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadMeshes");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {exportTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {exportTo(); }), "saveTo");
+
+		// settings [2/12/2022 Amir]
+		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -95,15 +99,13 @@ namespace tnbLib
 		auto argument = getString(argv);
 		return argument IS_EQUAL command;
 	}
-
 }
 
 using namespace tnbLib;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-	//sysLib::init_gl_marine_integration_info();
-	//FatalError.throwExceptions();
+	FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
@@ -116,7 +118,17 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << endl;
+			Info << " This application is aimed to export mesh list to *.plt file format." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # I/O functions: " << endl
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -128,11 +140,10 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\meshList2dToPlt";
-			fileName myFileName(address);
-
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbMeshList2dToPlt"));
+
 				chai.eval_file(myFileName);
 			}
 			catch (const chaiscript::exception::eval_error& x)
@@ -155,5 +166,4 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
 }
