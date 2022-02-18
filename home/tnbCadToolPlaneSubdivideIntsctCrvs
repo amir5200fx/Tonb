@@ -1,0 +1,9 @@
+setVerbose(1);
+
+setTolerance(1.0E-6);
+
+loadFile();
+
+execute();
+
+saveTo("subCurves");

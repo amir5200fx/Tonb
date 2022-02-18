@@ -1,0 +1,16 @@
+setVerbose(1);
+
+setAngle(5.0);  //- degree
+setTargetSize(1.0E-2);
+setMinSize(1.0E-4);
+
+setMaxNbSubdivisions(10);
+setInitNbSubdivisions(2);
+
+setNbSamples(4);
+
+loadFile();
+
+execute();
+
+saveTo();
