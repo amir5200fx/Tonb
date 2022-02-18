@@ -26,16 +26,10 @@ namespace tnbLib
 			const Standard_Real theTol
 		)
 	{
-		auto alg = std::make_shared<Cad2d_VertexVertexIntersection>(theVtx0, theVtx1);
-		Debug_Null_Pointer(alg);
-
-		alg->SetTolerance(theTol);
-		alg->Perform();
-		Debug_If_Condition_Message(NOT alg->IsDone(), "the algorithm is not performed");
-
-		if (alg->NbEntities())
+		auto ent = Cad2d_VertexVertexIntersection::Intersect(theVtx0, theVtx1, theTol);
+		if (ent->NbEntities())
 		{
-			return alg->Entities()[0];
+			return ent->Entities()[0];
 		}
 		return nullptr;
 	}
@@ -48,21 +42,15 @@ namespace tnbLib
 			const Standard_Real theTol
 		)
 	{
-		auto alg = std::make_shared<Cad2d_VertexEdgeIntersection>(theVtx, theCurve);
-		Debug_Null_Pointer(alg);
-
-		alg->SetTolerance(theTol);
-		alg->Perform();
-		Debug_If_Condition_Message(NOT alg->IsDone(), "the algorithm is not performed");
-
-		if (alg->NbEntities())
+		auto ent = Cad2d_VertexEdgeIntersection::Intersect(theVtx, theCurve, theTol);
+		if (ent->NbEntities())
 		{
-			return alg->Entities()[0];
+			return ent->Entities()[0];
 		}
 		return nullptr;
 	}
 
-	static std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>> 
+	static auto 
 		IntersectionCurveCurve
 		(
 			const std::shared_ptr<Pln_Edge>& theCurve0, 
@@ -70,14 +58,9 @@ namespace tnbLib
 			const Standard_Real theTol
 		)
 	{
-		auto alg = std::make_shared<Cad2d_EdgeEdgeIntersection>(theCurve0, theCurve1);
-		Debug_Null_Pointer(alg);
-
-		alg->SetTolerance(theTol);
-		alg->Perform();
-		Debug_If_Condition_Message(NOT alg->IsDone(), "the algorithm is not performed");
-
-		return alg->Entities();
+		static auto alg = Cad2d_EdgeEdgeIntersection();
+		auto ent = alg(theCurve0, theCurve1, theTol);
+		return std::move(ent);
 	}
 
 	static std::shared_ptr<Cad2d_IntsctEntity_Pair>
@@ -137,7 +120,7 @@ namespace tnbLib
 		const Standard_Real theTol
 	)
 	{
-		std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>> entities;
+		std::vector<std::shared_ptr<Cad2d_EntityEntityIntersection>> entities;
 		{
 			const auto& vtx = theCurve0->Vtx0();
 			Debug_Null_Pointer(vtx);
@@ -145,7 +128,11 @@ namespace tnbLib
 			auto ent = Intersection(vtx, theCurve1, theTol);
 			if (ent)
 			{
-				entities.push_back(std::move(ent));
+				auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(vtx, theCurve1);
+				Debug_Null_Pointer(entity);
+
+				entity->EntitiesRef().push_back(std::move(ent));
+				entities.push_back(std::move(entity));
 			}
 		}
 
@@ -156,18 +143,28 @@ namespace tnbLib
 			auto ent = Intersection(vtx, theCurve1, theTol);
 			if (ent)
 			{
-				entities.push_back(std::move(ent));
+				auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(vtx, theCurve1);
+				Debug_Null_Pointer(entity);
+
+				entity->EntitiesRef().push_back(std::move(ent));
+				entities.push_back(std::move(entity));
 			}
 		}
 
 		if (auto x = IntersectionPointCurve(theCurve1->Vtx0(), theCurve0, theTol))
 		{
-			entities.push_back(std::move(x));
+			auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(theCurve1->Vtx0(), theCurve0);
+			Debug_Null_Pointer(entity);
+			entity->EntitiesRef().push_back(std::move(x));
+			entities.push_back(std::move(entity));
 		}
 
 		if (auto x = IntersectionPointCurve(theCurve1->Vtx1(), theCurve0, theTol))
 		{
-			entities.push_back(std::move(x));
+			auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(theCurve1->Vtx1(), theCurve0);
+			Debug_Null_Pointer(entity);
+			entity->EntitiesRef().push_back(std::move(x));
+			entities.push_back(std::move(entity));
 		}
 		return std::move(entities);
 	}
@@ -182,12 +179,9 @@ namespace tnbLib
 		auto entities = ExtremetiesIntersections(theCurve0, theCurve1, theTol);
 
 		auto inners = IntersectionCurveCurve(theCurve0, theCurve1, theTol);
-		if (inners.size())
+		if (inners->NbEntities())
 		{
-			for (const auto& x : inners)
-			{
-				entities.push_back(std::move(x));
-			}
+			entities.push_back(std::move(inners));
 		}
 		return std::move(entities);
 	}
@@ -208,7 +202,7 @@ namespace tnbLib
 		return Standard_False;
 	}
 
-	static std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>>
+	static std::vector<std::shared_ptr<Cad2d_EntityEntityIntersection>>
 		Intersection
 		(
 			const std::shared_ptr<Pln_Edge>& theCurve, 
@@ -240,7 +234,7 @@ namespace tnbLib
 			curveNbs = iter->second;
 		}
 
-		std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>> entities;
+		std::vector<std::shared_ptr<Cad2d_EntityEntityIntersection>> entities;
 		for (const auto& x : theCurves)
 		{
 			Debug_Null_Pointer(x);
@@ -316,7 +310,7 @@ void tnbLib::Cad2d_CrvsIntsct::Perform()
 
 	const auto curves = Engine()->AllCurves();
 
-	std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>> entities;
+	std::vector<std::shared_ptr<Cad2d_EntityEntityIntersection>> entities;
 	for (const auto& x : curves)
 	{
 		Debug_Null_Pointer(x);
