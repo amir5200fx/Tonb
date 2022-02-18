@@ -11,23 +11,41 @@
 
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
 
-void tnbLib::Cad2d_VertexEdgeIntersection::Perform()
+std::shared_ptr<tnbLib::Cad2d_VertexEdgeIntersection> 
+tnbLib::Cad2d_VertexEdgeIntersection::operator()
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx,
+	const std::shared_ptr<Pln_Edge>& theEdge, 
+	const Standard_Real theTol
+	) const
 {
-	if (NOT Vtx())
+	auto ent = Cad2d_VertexEdgeIntersection::Intersect(theVtx, theEdge, theTol);
+	return std::move(ent);
+}
+
+std::shared_ptr<tnbLib::Cad2d_VertexEdgeIntersection> 
+tnbLib::Cad2d_VertexEdgeIntersection::Intersect
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx, 
+	const std::shared_ptr<Pln_Edge>& theEdge, 
+	const Standard_Real theTol
+)
+{
+	if (NOT theVtx)
 	{
 		FatalErrorIn("void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()")
 			<< "the vertex is not loaded!" << endl
 			<< abort(FatalError);
 	}
 
-	if (NOT Edge())
+	if (NOT theEdge)
 	{
 		FatalErrorIn("void tnbLib::Cad2d_EdgeEdgeIntersection::Perform()")
 			<< "the edge is not loaded!" << endl
 			<< abort(FatalError);
 	}
 
-	const auto& edge = *Edge();
+	const auto& edge = *theEdge;
 
 	if (NOT edge.Curve())
 	{
@@ -46,20 +64,24 @@ void tnbLib::Cad2d_VertexEdgeIntersection::Perform()
 	}
 
 	Geom2dAPI_ProjectPointOnCurve
-		alg(Vtx()->Coord(), curve.Geometry());
+		alg(theVtx->Coord(), curve.Geometry());
 
-	auto& entities = ChangeEntities();
+	auto ent = std::make_shared<Cad2d_VertexEdgeIntersection>(theVtx, theEdge);
+	Debug_Null_Pointer(ent);
+	ent->SetTolerance(theTol);
+
+	auto& entities = ent->EntitiesRef();
 	Standard_Integer k = 0;
 	for (Standard_Integer i = 1; i <= alg.NbPoints(); i++)
 	{
-		if (alg.Distance(i) <= Tolerance())
+		if (alg.Distance(i) <= theTol)
 		{
 			auto entity0 = std::make_shared<Cad2d_IntsctEntity_Point>(++k);
 			auto entity1 = std::make_shared<Cad2d_IntsctEntity_OrthSegment>(k);
 
-			entity0->SetParentVertex(Vtx());
+			entity0->SetParentVertex(theVtx);
 
-			entity1->SetParentEdge(Edge());
+			entity1->SetParentEdge(theEdge);
 			entity1->SetCoord(alg.Point(i));
 			entity1->SetParameter(alg.Parameter(i));
 
@@ -69,6 +91,5 @@ void tnbLib::Cad2d_VertexEdgeIntersection::Perform()
 			entities.push_back(std::move(pair));
 		}
 	}
-
-	Change_IsDone() = Standard_True;
+	return std::move(ent);
 }

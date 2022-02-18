@@ -50,12 +50,6 @@ namespace tnbLib
 			, Global_Named(theName)
 		{}
 
-
-		auto& ChangeEntities()
-		{
-			return theEntities_;
-		}
-
 	public:
 
 		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
@@ -63,19 +57,43 @@ namespace tnbLib
 
 		//- public functions and operators
 
-		virtual ~Cad2d_EntityEntityIntersection()
-		{}
-
 
 		auto NbEntities() const
 		{
 			return (Standard_Integer)theEntities_.size();
 		}
 
+		auto Tolerance() const
+		{
+			return theTolerance_;
+		}
+
 		const auto& Entities() const
 		{
 			return theEntities_;
 		}
+
+		auto& EntitiesRef()
+		{
+			return theEntities_;
+		}
+
+		void SetTolerance(const Standard_Real theTol)
+		{
+			theTolerance_ = theTol;
+		}
+
+		void SetEntities(const std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>>& theEntities)
+		{
+			theEntities_ = theEntities;
+		}
+
+		void SetEntities(std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>>&& theEntities)
+		{
+			theEntities_ = std::move(theEntities);
+		}
+
+		// virtual functions and operators [2/4/2022 Amir]
 
 		virtual Standard_Boolean IsEdgeEdge() const
 		{
@@ -92,8 +110,10 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+
+
 		//- Macros
-		GLOBAL_ACCESS_SINGLE(Standard_Real, Tolerance)
+		
 	};
 }
 

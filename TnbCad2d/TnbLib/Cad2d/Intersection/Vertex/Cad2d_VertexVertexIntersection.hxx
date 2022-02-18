@@ -69,7 +69,23 @@ namespace tnbLib
 			return theVtx1_;
 		}
 
-		void Perform();
+		TnbCad2d_EXPORT std::shared_ptr<Cad2d_VertexVertexIntersection> 
+			operator()
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx0, 
+				const std::shared_ptr<Pln_Vertex>& theVtx1,
+				const Standard_Real theTol
+				) const;
+
+		// static functions and operators [2/4/2022 Amir]
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_VertexVertexIntersection> 
+			Intersect
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx0,
+				const std::shared_ptr<Pln_Vertex>& theVtx1, 
+				const Standard_Real theTol
+			);
 	};
 }
 
