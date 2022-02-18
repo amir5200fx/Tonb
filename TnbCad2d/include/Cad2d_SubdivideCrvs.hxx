@@ -3,6 +3,7 @@
 #define _Cad2d_SubdivideCrvs_Header
 
 #include <Global_Done.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <map>
 #include <memory>
@@ -75,7 +76,7 @@ namespace tnbLib
 			return theTolerance_;
 		}
 
-		void Perform();
+		TnbCad2d_EXPORT void Perform();
 	};
 }
 

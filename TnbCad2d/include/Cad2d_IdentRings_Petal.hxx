@@ -9,6 +9,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [2/1/2022 Amir]
+	class Pln_Wire;
+
 	namespace cad2dLib
 	{
 
@@ -97,6 +100,12 @@ namespace tnbLib
 			}
 
 			void Detach();
+
+			static TnbCad2d_EXPORT std::shared_ptr<Pln_Wire> 
+				MakeWire
+				(
+					const std::shared_ptr<cad2dLib::IdentRings_Petal>& thePetal
+				);
 		};
 	}
 }

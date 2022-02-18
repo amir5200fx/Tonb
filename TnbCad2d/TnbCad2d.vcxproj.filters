@@ -448,6 +448,21 @@
     <Filter Include="TnbLib\Cad2d\SubdivideCrvs">
       <UniqueIdentifier>{5250ef28-91ee-4639-b724-440d026267a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\SubdivideCurve">
+      <UniqueIdentifier>{a4b6b49f-19e7-4ea3-ad2f-44cdc80d3640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Length">
+      <UniqueIdentifier>{22bf7135-3e96-420f-9a23-fcc27d2db5c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Length\UniDiscret">
+      <UniqueIdentifier>{9f5a6b74-5c3e-4212-9404-133016afad14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Length\Adaptive">
+      <UniqueIdentifier>{010c593b-7743-46cd-a614-b85169417169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Length\Adaptive\Info">
+      <UniqueIdentifier>{a21d721d-5b4a-47c6-81d4-8aa759ac4b53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -873,6 +888,21 @@
     <ClInclude Include="TnbLib\Cad2d\SubdivideCrvs\Cad2d_SubdivideCrvs.hxx">
       <Filter>TnbLib\Cad2d\SubdivideCrvs</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\SubdivideCurve\Cad2d_SubdivideCurve.hxx">
+      <Filter>TnbLib\Cad2d\SubdivideCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Length\Cad2d_CurveLength.hxx">
+      <Filter>TnbLib\Cad2d\Length</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Length\UniDiscret\Cad2d_CurveLength_UniDiscret.hxx">
+      <Filter>TnbLib\Cad2d\Length\UniDiscret</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Length\Adaptive\Cad2d_CurveLength_Adaptive.hxx">
+      <Filter>TnbLib\Cad2d\Length\Adaptive</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Length\Adaptive\Info\Cad2d_CurveLength_Adaptive_Info.hxx">
+      <Filter>TnbLib\Cad2d\Length\Adaptive\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1261,6 +1291,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\SubdivideCrvs\Cad2d_SubdivideCrvs.cxx">
       <Filter>TnbLib\Cad2d\SubdivideCrvs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\IdentRings\Petal\Cad2d_IdentRings_Petal.cxx">
+      <Filter>TnbLib\Cad2d\IdentRings\Petal</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\SubdivideCurve\Cad2d_SubdivideCurve.cxx">
+      <Filter>TnbLib\Cad2d\SubdivideCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Length\Cad2d_CurveLength.cxx">
+      <Filter>TnbLib\Cad2d\Length</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Length\UniDiscret\Cad2d_CurveLength_UniDiscret.cxx">
+      <Filter>TnbLib\Cad2d\Length\UniDiscret</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Length\Adaptive\Info\Cad2d_CurveLength_Adaptive_Info.cxx">
+      <Filter>TnbLib\Cad2d\Length\Adaptive\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Length\Adaptive\Info\Cad2d_CurveLength_Adaptive_InfoIO.cxx">
+      <Filter>TnbLib\Cad2d\Length\Adaptive\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Length\Adaptive\Cad2d_CurveLength_Adaptive.cxx">
+      <Filter>TnbLib\Cad2d\Length\Adaptive</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

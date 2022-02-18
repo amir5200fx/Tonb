@@ -45,6 +45,8 @@ namespace tnbLib
 		TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
 
+		// private functions and operators [2/3/2022 Amir]
+
 		auto& ChangeCmpEdge()
 		{
 			return theEdges_;
@@ -66,9 +68,16 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad2d_EXPORT const std::string extension;
+
+		// default constructor [2/3/2022 Amir]
+
 		Pln_Wire()
 		{}
 
+
+		// constructors [2/3/2022 Amir]
+
 		TnbCad2d_EXPORT Pln_Wire
 		(
 			const std::shared_ptr<Pln_CmpEdge>& theEdge
@@ -104,6 +113,9 @@ namespace tnbLib
 			const word& theName,
 			const std::shared_ptr<Pln_CmpEdge>&& theEdge
 		);
+
+
+		// public functions and operators [2/3/2022 Amir]
 
 		TnbCad2d_EXPORT Standard_Integer NbEdges() const;
 

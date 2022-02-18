@@ -205,6 +205,16 @@ namespace tnbLib
 			return theEdges_;
 		}
 
+		const auto& Segments() const
+		{
+			return theSegments_;
+		}
+
+		const auto& Petals() const
+		{
+			return thePetals_;
+		}
+
 		TnbCad2d_EXPORT void Perform();
 
 		
