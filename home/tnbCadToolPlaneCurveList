@@ -1,0 +1,5 @@
+setVerbose(1);
+
+loadFiles();
+
+saveTo("curveList");

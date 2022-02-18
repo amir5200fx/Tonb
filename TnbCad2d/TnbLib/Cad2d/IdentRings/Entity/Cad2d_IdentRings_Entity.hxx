@@ -3,6 +3,7 @@
 #define _Cad2d_IdentRings_Entity_Header
 
 #include <Global_Indexed.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 

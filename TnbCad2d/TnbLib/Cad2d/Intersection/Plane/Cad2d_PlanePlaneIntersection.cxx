@@ -149,19 +149,14 @@ void tnbLib::Cad2d_PlanePlaneIntersection::Perform()
 
 			if (Geo_BoxTools::IsIntersect(b, boxes1[k++]))
 			{
-				auto alg = std::make_shared<Cad2d_EdgeEdgeIntersection>(++K);
-				Debug_Null_Pointer(alg);
 
-				alg->LoadEdge0(x);
-				alg->LoadEdge1(edge);
+				auto ent = Cad2d_EdgeEdgeIntersection::Intersect(x, edge, Tolerance());
+				Debug_Null_Pointer(ent);
 
-				alg->SetTolerance(Tolerance());
-
-				alg->Perform();
-
-				if (alg->NbEntities())
+				ent->SetIndex(++K);
+				if (ent->NbEntities())
 				{
-					entities.push_back(std::move(alg));
+					entities.push_back(std::move(ent));
 				}
 			}
 		}

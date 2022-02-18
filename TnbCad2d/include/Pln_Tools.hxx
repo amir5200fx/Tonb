@@ -139,6 +139,12 @@ namespace tnbLib
 				const Standard_Real theMaxTol
 			);
 
+		// Returns true if the vertex is on the edge. [2/2/2022 Amir]
+		static Standard_Boolean IsOnEdge(const std::shared_ptr<Pln_Vertex>&, const std::shared_ptr<Pln_Edge>&);
+		
+		// Warning! Returns a null pointer if there is no common vertex between the two edges. [2/2/2022 Amir]
+		static std::shared_ptr<Pln_Vertex> CommonVertex(const std::shared_ptr<Pln_Edge>& theEdge0, const std::shared_ptr<Pln_Edge>& theEdge1);
+
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const Handle(Geom2d_Curve)& theCurve);
 
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const std::shared_ptr<Pln_Curve>& theCurve);
@@ -283,6 +289,12 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Curve>>& theCurves
 			);
 
+		static TnbCad2d_EXPORT Entity2d_Box 
+			BoundingBox
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>&
+			);
+
 		//- an exception will be thrown if the curve is not bounded and the x exceeds the boundary
 		static TnbCad2d_EXPORT void
 			SplitCurve
@@ -291,6 +303,12 @@ namespace tnbLib
 				const Standard_Real theX,
 				Handle(Geom2d_Curve)& theC0,
 				Handle(Geom2d_Curve)& theC1
+			);
+
+		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Curve>>
+			RetrieveCurves
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>&
 			);
 
 		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Curve>>
@@ -349,18 +367,25 @@ namespace tnbLib
 
 		static std::shared_ptr<Pln_Wire> FillGaps(const std::shared_ptr<Pln_Wire>& theWire, const Standard_Real tol);
 
+		// It makes a wire from a vertex that belongs to a list of edges that defines a ring. [2/2/2022 Amir]
+		// - Make sure all vertices are manifold.
+		// - Warning! the sense of the edges may be changed.
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Wire>
 			RetrieveWire
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx
 			);
 
+		// It tracks a composite edge from a vertex of a ring. [2/2/2022 Amir]
+		// - Warning! the sense of the edges may be changed.
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_CmpEdge> 
 			RetrieveCompoundEdge
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx
 			);
 
+		// It makes all edges in the same sense. [2/2/2022 Amir]
+		// - Warning! the sense of the edges may be changed.
 		static TnbCad2d_EXPORT void
 			SameSense
 			(
@@ -521,6 +546,15 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Wire>&
 		);
 		
+		static TnbCad2d_EXPORT void CheckWire(const std::shared_ptr<Pln_Edge>&);
+		static TnbCad2d_EXPORT void CheckWire(const std::vector<std::shared_ptr<Pln_Edge>>&);
+
+		static TnbCad2d_EXPORT void Connect(const std::shared_ptr<Pln_Edge>&);
+		static TnbCad2d_EXPORT void Connect(const Standard_Integer theIndex, const std::shared_ptr<Pln_Edge>&);
+
+		static TnbCad2d_EXPORT void Connect(const std::shared_ptr<Pln_Wire>&);
+
+		static TnbCad2d_EXPORT void Connect(const std::shared_ptr<Cad2d_Plane>&);
 	};
 }
 

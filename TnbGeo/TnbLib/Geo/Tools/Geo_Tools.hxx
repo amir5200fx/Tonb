@@ -162,6 +162,12 @@ namespace tnbLib
 				const std::shared_ptr<IntersectEntity2d>&
 			);
 
+		static TnbGeo_EXPORT Standard_Real 
+			CalcLength
+			(
+				const Entity2d_Polygon&
+			);
+
 		static inline Standard_Integer
 			Round
 			(

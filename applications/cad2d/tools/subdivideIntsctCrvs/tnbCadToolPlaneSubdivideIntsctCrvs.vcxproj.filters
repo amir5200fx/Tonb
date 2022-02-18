@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{c1b15b7b-5c01-4761-8910-864c6173e4f9}</UniqueIdentifier>
+      <UniqueIdentifier>{792db068-11b0-4d66-959a-7ce44222a63c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="meshList2d.cxx">
+    <ClCompile Include="tnbCadToolPlaneSubdivideIntsctCrvs.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

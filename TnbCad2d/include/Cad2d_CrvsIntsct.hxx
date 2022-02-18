@@ -13,6 +13,7 @@ namespace tnbLib
 	// Forward Declarations [1/27/2022 Amir]
 	class Cad2d_SearchCrv;
 	class Cad2d_IntsctEntity_Pair;
+	class Cad2d_EntityEntityIntersection;
 
 	class Cad2d_CrvsIntsct
 		: public Global_Done
@@ -28,7 +29,7 @@ namespace tnbLib
 
 		// outputs [1/27/2022 Amir]
 
-		std::vector<std::shared_ptr<Cad2d_IntsctEntity_Pair>> theEntities_;
+		std::vector<std::shared_ptr<Cad2d_EntityEntityIntersection>> theEntities_;
 
 
 		// private functions and operators [1/27/2022 Amir]

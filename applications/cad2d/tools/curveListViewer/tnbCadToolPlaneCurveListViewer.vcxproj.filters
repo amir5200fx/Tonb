@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{7430e3f3-02d4-4ede-aa8c-9e0d7b5bfccf}</UniqueIdentifier>
+      <UniqueIdentifier>{969c5b30-eb66-483f-aa2d-d0c427716061}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="meshList2dToPlt.cxx">
+    <ClCompile Include="tnbCadToolPlaneCurveListViewer.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

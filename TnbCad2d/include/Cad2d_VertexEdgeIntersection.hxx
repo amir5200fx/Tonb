@@ -61,17 +61,33 @@ namespace tnbLib
 			return Standard_True;
 		}
 
-		TnbCad2d_EXPORT void Perform();
-
-		void LoadVertex(const std::shared_ptr<Pln_Vertex>& theVtx)
+		void SetVertex(const std::shared_ptr<Pln_Vertex>& theVtx)
 		{
 			theVtx_ = theVtx;
 		}
 
-		void LoadEdge(const std::shared_ptr<Pln_Edge>& theEdge)
+		void SetEdge(const std::shared_ptr<Pln_Edge>& theEdge)
 		{
 			theEdge_ = theEdge;
 		}
+
+		TnbCad2d_EXPORT std::shared_ptr<Cad2d_VertexEdgeIntersection>
+			operator()
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx, 
+				const std::shared_ptr<Pln_Edge>& theEdge, 
+				const Standard_Real theTol
+				) const;
+
+		// static functions and operators [2/4/2022 Amir]
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_VertexEdgeIntersection> 
+			Intersect
+			(
+				const std::shared_ptr<Pln_Vertex>& theVtx,
+				const std::shared_ptr<Pln_Edge>& theEdge,
+				const Standard_Real theTol
+			);
 
 		//- Macros
 

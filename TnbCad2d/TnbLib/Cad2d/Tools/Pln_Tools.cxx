@@ -447,6 +447,48 @@ tnbLib::Pln_Tools::MakeWire
 	return std::move(wire);
 }
 
+Standard_Boolean 
+tnbLib::Pln_Tools::IsOnEdge
+(
+	const std::shared_ptr<Pln_Vertex>& theVtx,
+	const std::shared_ptr<Pln_Edge>& theEdge
+)
+{
+	if (theEdge->Vtx0() IS_EQUAL theVtx)
+	{
+		return Standard_True;
+	}	
+	if (theEdge->Vtx1() IS_EQUAL theVtx)
+	{
+		return Standard_True;
+	}
+	return Standard_False;
+}
+
+std::shared_ptr<tnbLib::Pln_Vertex> 
+tnbLib::Pln_Tools::CommonVertex
+(
+	const std::shared_ptr<Pln_Edge>& theEdge0,
+	const std::shared_ptr<Pln_Edge>& theEdge1
+)
+{
+	Debug_Null_Pointer(theEdge0);
+	Debug_Null_Pointer(theEdge1);
+
+	const auto& v0 = theEdge0->Vtx0();
+	const auto& v1 = theEdge0->Vtx1();
+
+	if (IsOnEdge(v0, theEdge1))
+	{
+		return v0;
+	}
+	if (IsOnEdge(v1, theEdge1))
+	{
+		return v1;
+	}
+	return nullptr;
+}
+
 std::shared_ptr<tnbLib::Pln_Edge> 
 tnbLib::Pln_Tools::MakeEdge
 (
@@ -996,6 +1038,16 @@ tnbLib::Pln_Tools::BoundingBox
 	return std::move(b);
 }
 
+tnbLib::Entity2d_Box
+tnbLib::Pln_Tools::BoundingBox
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	auto b = BoundingBox(RetrieveCurves(theEdges));
+	return std::move(b);
+}
+
 void tnbLib::Pln_Tools::SplitCurve
 (
 	const Handle(Geom2d_Curve)& theCurve,
@@ -1050,6 +1102,22 @@ void tnbLib::Pln_Tools::SplitCurve
 #endif // _DEBUG
 		theC1 = nullptr;
 	}
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Curve>>
+tnbLib::Pln_Tools::RetrieveCurves
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	std::vector<std::shared_ptr<Pln_Curve>> curves;
+	curves.reserve(theEdges.size());
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		curves.push_back(x->Curve());
+	}
+	return std::move(curves);
 }
 
 std::vector<std::shared_ptr<tnbLib::Pln_Curve>>
@@ -2616,6 +2684,145 @@ void tnbLib::Pln_Tools::CheckManifold
 				<< "the wire is non-manifold" << endl
 				<< " - nb. of edges: " << x->NbEdges() << endl
 				<< abort(FatalError);
+		}
+	}
+}
+
+void tnbLib::Pln_Tools::CheckWire(const std::shared_ptr<Pln_Edge>& theEdge)
+{
+	if (NOT theEdge->IsRing())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "The edge is not a ring." << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::Pln_Tools::CheckWire
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	if (theEdges.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the edge list is empty." << endl
+			<< abort(FatalError);
+	}
+
+	if (theEdges.size() IS_EQUAL 1)
+	{
+		CheckWire(theEdges.at(0));
+		return;
+	}
+	else
+	{
+		// Check if all edges are a segment. [2/2/2022 Amir]
+		for (const auto& x : theEdges)
+		{
+			Debug_Null_Pointer(x);
+			if (x->IsRing())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "The edge is supposed to be a segment, not a ring." << endl
+					<< abort(FatalError);
+			}
+		}
+
+		// Check if each two-consecutive edges have an intersection, [2/2/2022 Amir]
+		for (size_t k = 1; k < theEdges.size(); k++)
+		{
+			const auto& e0 = theEdges[k - 1];
+			const auto& e1 = theEdges[k];
+
+			Debug_Null_Pointer(e0);
+			Debug_Null_Pointer(e1);
+
+			auto vtx = CommonVertex(e0, e1);
+			if (NOT vtx)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "The two following edges have no intersection." << endl
+					<< abort(FatalError);
+			}
+
+			if (NOT vtx->IsManifold())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "The vertex is not manifold." << endl
+					<< abort(FatalError);
+			}
+		}
+	}
+}
+
+void tnbLib::Pln_Tools::Connect
+(
+	const std::shared_ptr<Pln_Edge>& theEdge
+)
+{
+	Debug_Null_Pointer(theEdge);
+
+	const auto& v0 = theEdge->Vtx0();
+	Debug_Null_Pointer(v0);
+
+	const auto& v1 = theEdge->Vtx1();
+	Debug_Null_Pointer(v1);
+
+	v0->InsertToEdges(theEdge->Index(), theEdge);
+	v1->InsertToEdges(theEdge->Index(), theEdge);
+}
+
+void tnbLib::Pln_Tools::Connect
+(
+	const Standard_Integer theIndex, 
+	const std::shared_ptr<Pln_Edge>& theEdge
+)
+{
+	Debug_Null_Pointer(theEdge);
+
+	const auto& v0 = theEdge->Vtx0();
+	Debug_Null_Pointer(v0);
+
+	const auto& v1 = theEdge->Vtx1();
+	Debug_Null_Pointer(v1);
+
+	v0->InsertToEdges(theIndex, theEdge);
+	v1->InsertToEdges(theIndex, theEdge);
+}
+
+void tnbLib::Pln_Tools::Connect
+(
+	const std::shared_ptr<Pln_Wire>& theWire
+)
+{
+	Debug_Null_Pointer(theWire);
+	for (const auto& x : theWire->Edges())
+	{
+		Debug_Null_Pointer(x);
+		x->SetWire(theWire);
+
+		Connect(x);
+	}
+}
+
+void tnbLib::Pln_Tools::Connect
+(
+	const std::shared_ptr<Cad2d_Plane>& thePlane
+)
+{
+	Debug_Null_Pointer(thePlane);
+	const auto& outer = thePlane->OuterWire();
+	Debug_Null_Pointer(outer);
+
+	Connect(outer);
+
+	if (thePlane->InnerWires())
+	{
+		for (const auto& x : *thePlane->InnerWires())
+		{
+			Debug_Null_Pointer(x);
+			Connect(x);
 		}
 	}
 }

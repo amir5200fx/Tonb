@@ -102,6 +102,14 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		TnbCad2d_EXPORT std::shared_ptr<Cad2d_EdgeEdgeIntersection> 
+			operator()
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge0, 
+				const std::shared_ptr<Pln_Edge>& theEdge1, 
+				const Standard_Real theTol
+				) const;
+
 		void LoadEdge0
 		(
 			const std::shared_ptr<Pln_Edge>& theEdge
@@ -118,8 +126,6 @@ namespace tnbLib
 			theEdge1_ = theEdge;
 		}
 
-		TnbCad2d_EXPORT void Perform();
-
 		//- the first intersection entity is the forward edge and the second one is 
 		//- the backward edge of the vertex 
 		//- Warning! If the vertex is dangled-type, one of two entities will be null, so both need to be checked.
@@ -131,6 +137,14 @@ namespace tnbLib
 			ConvertFrom
 			(
 				const Cad2d_VertexEdgeIntersection& theAlg,
+				const Standard_Real theTol
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Cad2d_EdgeEdgeIntersection> 
+			Intersect
+			(
+				const std::shared_ptr<Pln_Edge>& theEdge0, 
+				const std::shared_ptr<Pln_Edge>& theEdge1, 
 				const Standard_Real theTol
 			);
 	};

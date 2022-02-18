@@ -10,6 +10,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+const std::string tnbLib::Pln_Wire::extension = ".wire2d";
+
 tnbLib::Entity2d_Box
 tnbLib::Pln_Wire::CalcBoundingBox
 (
