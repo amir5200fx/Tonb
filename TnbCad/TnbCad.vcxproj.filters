@@ -675,9 +675,6 @@
     <ClInclude Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.hxx">
       <Filter>TnbLib\Cad\Entities\Surface</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad\GModel\Cad3d_GModel.hxx">
-      <Filter>TnbLib\Cad\GModel</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad\GModel\Tools\GModel_Tools.hxx">
       <Filter>TnbLib\Cad\GModel\Tools</Filter>
     </ClInclude>
@@ -836,6 +833,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\one\Cad_tModelMaker_OnePtDistPairCrvCriterion.hxx">
       <Filter>TnbLib\Cad\Maker\Solid\PairCrvCriterion\SamplePtsDist\Single</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Cad_GModel.hxx">
+      <Filter>TnbLib\Cad\GModel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1082,9 +1082,6 @@
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Plane\GModel_PlaneIO.cxx">
       <Filter>TnbLib\Cad\GModel\Entities\Plane</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModel.cxx">
-      <Filter>TnbLib\Cad\GModel</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad\GModel\Tools\GModel_Tools.cxx">
       <Filter>TnbLib\Cad\GModel\Tools</Filter>
     </ClCompile>
@@ -1147,9 +1144,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\ApproxMetric\Subdivider\Cad_ApprxMetricSubdivider.cxx">
       <Filter>TnbLib\Cad\ApproxSurfMetric\Subdivider</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModelIO.cxx">
-      <Filter>TnbLib\Cad\GModel</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Analyzer\GModel\Surface\GModel_MetricAnalyzer.cxx">
       <Filter>TnbLib\Cad\Analyzer\GModel\Surface</Filter>
@@ -1270,6 +1264,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Length\Info\Cad_CurveLength_InfoIO.cxx">
       <Filter>TnbLib\Cad\Length\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Cad_GModel.cxx">
+      <Filter>TnbLib\Cad\GModel</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Cad_GModelIO.cxx">
+      <Filter>TnbLib\Cad\GModel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,7 @@
     <ClInclude Include="TnbLib\Cad\Entities\Precision\Cad_EntityPrecision.hxx" />
     <ClInclude Include="TnbLib\Cad\Entities\Shape\Cad_Shape.hxx" />
     <ClInclude Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.hxx" />
-    <ClInclude Include="TnbLib\Cad\GModel\Cad3d_GModel.hxx" />
+    <ClInclude Include="TnbLib\Cad\GModel\Cad_GModel.hxx" />
     <ClInclude Include="TnbLib\Cad\GModel\Entities\Curve\GModel_Curve.hxx" />
     <ClInclude Include="TnbLib\Cad\GModel\Entities\Curve\GModel_CurveI.hxx" />
     <ClInclude Include="TnbLib\Cad\GModel\Entities\Edge\GModel_Edge.hxx" />
@@ -176,8 +176,8 @@
     <ClCompile Include="TnbLib\Cad\Entities\Shape\Cad_ShapeIO.cxx" />
     <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurface.cxx" />
     <ClCompile Include="TnbLib\Cad\Entities\Surface\Cad_GeomSurfaceIO.cxx" />
-    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModel.cxx" />
-    <ClCompile Include="TnbLib\Cad\GModel\Cad3d_GModelIO.cxx" />
+    <ClCompile Include="TnbLib\Cad\GModel\Cad_GModel.cxx" />
+    <ClCompile Include="TnbLib\Cad\GModel\Cad_GModelIO.cxx" />
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Curve\GModel_Curve.cxx" />
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Curve\GModel_CurveIO.cxx" />
     <ClCompile Include="TnbLib\Cad\GModel\Entities\Edge\GModel_Edge.cxx" />

@@ -20,9 +20,13 @@ namespace tnbLib
 		, public Global_Named
 	{
 
+	public:
+
 		typedef std::vector<std::shared_ptr<GModel_ParaWire>> wireList;
 		typedef std::shared_ptr<GModel_ParaWire> outer;
 		typedef std::shared_ptr<wireList> inner;
+
+	private:
 
 		/*Private Data*/
 
@@ -49,6 +53,12 @@ namespace tnbLib
 		(
 			const outer& theOuter, 
 			const inner& theInner = nullptr
+		);
+
+		GModel_Plane
+		(
+			outer&& theOuter,
+			inner&& theInner
 		);
 
 		TnbCad_EXPORT GModel_Plane

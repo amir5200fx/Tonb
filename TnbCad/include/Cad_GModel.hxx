@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _Cad3d_GModel_Header
-#define _Cad3d_GModel_Header
+#ifndef _Cad_GModel_Header
+#define _Cad_GModel_Header
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
@@ -18,7 +18,7 @@ namespace tnbLib
 	// Forward Declarations
 	class GModel_Surface;
 
-	class Cad3d_GModel
+	class Cad_GModel
 		: public Global_Indexed
 		, public Global_Named
 	{
@@ -35,7 +35,7 @@ namespace tnbLib
 
 		//- default constructor
 
-		Cad3d_GModel()
+		Cad_GModel()
 		{}
 
 	public:
@@ -44,21 +44,21 @@ namespace tnbLib
 
 		//- constructors
 
-		Cad3d_GModel
+		Cad_GModel
 		(
 			const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces
 		)
 			: theSurfaces_(theSurfaces)
 		{}
 
-		Cad3d_GModel
+		Cad_GModel
 		(
 			std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces
 		)
 			: theSurfaces_(std::move(theSurfaces))
 		{}
 
-		Cad3d_GModel
+		Cad_GModel
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
@@ -69,7 +69,7 @@ namespace tnbLib
 			, theSurfaces_(theSurfaces)
 		{}
 
-		Cad3d_GModel
+		Cad_GModel
 		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
@@ -96,4 +96,4 @@ namespace tnbLib
 	};
 }
 
-#endif // !_Cad3d_GModel_Header
+#endif // !_Cad_GModel_Header
