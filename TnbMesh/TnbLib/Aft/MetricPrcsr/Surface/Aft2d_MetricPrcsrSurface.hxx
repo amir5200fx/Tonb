@@ -6,6 +6,7 @@
 #include <Aft2d_EdgeSurface.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo2d_MetricFunction.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Aft2d_MetricPrcsrSurfaceFwd.hxx>
 
@@ -13,7 +14,7 @@ namespace tnbLib
 {
 
 	template<>
-	Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
+	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
 	(
 		const Standard_Real theRadius,
 		const Entity2d_Metric1& theMetric,
@@ -21,7 +22,7 @@ namespace tnbLib
 	) const;
 
 	template<>
-	Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
+	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
 	(
 		const Standard_Real theRaius,
 		const Pnt2d& theCentre,
@@ -29,14 +30,14 @@ namespace tnbLib
 	) const;
 
 	template<>
-	Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
+	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
 	(
 		const Standard_Real theRaius,
 		const Aft2d_EdgeSurface& theFront
 	) const;
 
 	template<>
-	Entity2d_Box Aft2d_MetricPrcsrSurface::CalcEffectiveFront
+	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcEffectiveFront
 	(
 		const Standard_Real theRadius,
 		const Pnt2d& theCentre,
@@ -65,5 +66,6 @@ namespace tnbLib
 
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Aft2d_MetricPrcsrSurface);
 
 #endif // !_Aft2d_MetricPrcsrSurface_Header

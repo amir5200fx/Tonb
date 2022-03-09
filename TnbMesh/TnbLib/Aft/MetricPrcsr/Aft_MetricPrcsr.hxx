@@ -128,10 +128,10 @@ namespace tnbLib
 		}
 
 		Standard_Real Oriented(const Point& thePt, const frontType& theFront) const;
-
 		Standard_Real CalcDistance(const Point& thePt, const frontType& theFront) const;
-
 		Standard_Real CalcSquareDistance(const Point& thePt, const frontType& theFront) const;
+		
+		virtual Standard_Real CalcElementSize(const std::shared_ptr<frontType>& theFront) const;
 
 		template<class U = Standard_Real>
 		resolvedType<is_three_dimension<(int)Point::dim>::value, U> CalcDistance(const Point& thePt, const subFront& theEntity) const;
@@ -147,13 +147,10 @@ namespace tnbLib
 
 		Point CalcCentreOf(const frontType& theFront) const;
 
-		box CalcSearchRegion(const Standard_Real theRadius, const metricType& theMetric, const Point& theCentre) const;
-
-		box CalcSearchRegion(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
-
-		box CalcSearchRegion(const Standard_Real theRadius, const frontType& theFront) const;
-
-		box CalcEffectiveFront(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
+		virtual box CalcSearchRegion(const Standard_Real theRadius, const metricType& theMetric, const Point& theCentre) const;
+		virtual box CalcSearchRegion(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
+		virtual box CalcSearchRegion(const Standard_Real theRadius, const frontType& theFront) const;
+		virtual box CalcEffectiveFront(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
 
 		//metricType CalcEffectiveMetric(const Point& theP0, const Point& theP1) const;
 	};
@@ -257,10 +254,10 @@ namespace tnbLib
 		// Public functions and operators [11/24/2021 Amir]
 
 		Standard_Real Oriented(const Point& thePt, const frontType& theFront) const;
-
 		Standard_Real CalcDistance(const Point& thePt, const frontType& theFront) const;
-
 		Standard_Real CalcSquareDistance(const Point& thePt, const frontType& theFront) const;
+
+		virtual Standard_Real CalcElementSize(const std::shared_ptr<frontType>& theFront) const;
 
 		template<class U = Standard_Real>
 		resolvedType<is_three_dimension<(int)Point::dim>::value, U> CalcDistance(const Point& thePt, const subFront& theEntity) const;
@@ -276,13 +273,10 @@ namespace tnbLib
 
 		Point CalcCentreOf(const frontType& theFront) const;
 
-		box CalcSearchRegion(const Standard_Real theRadius, const Point& theCentre) const;
-
-		box CalcSearchRegion(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
-
-		box CalcSearchRegion(const Standard_Real theRadius, const frontType& theFront) const;
-
-		box CalcEffectiveFront(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
+		virtual box CalcSearchRegion(const Standard_Real theRadius, const Point& theCentre) const;
+		virtual box CalcSearchRegion(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
+		virtual box CalcSearchRegion(const Standard_Real theRadius, const frontType& theFront) const;
+		virtual box CalcEffectiveFront(const Standard_Real theRadius, const Point& theCentre, const frontType& theFront) const;
 	};
 }
 

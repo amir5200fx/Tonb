@@ -25,7 +25,7 @@ namespace tnbLib
 		const auto Qd = theCentre - dQd;
 		const auto Qu = theCentre + dQd;
 
-		std::vector<Pnt2d> Pts(4);
+		static std::vector<Pnt2d> Pts(4);
 		Pts[0] = Qd + dQr;
 		Pts[1] = Qu + dQr;
 		Pts[2] = Qu - dQr;
@@ -64,7 +64,7 @@ namespace tnbLib
 		const auto Qd = theCentre - dQd;
 		const auto Qu = theCentre + dQd;
 
-		std::vector<Pnt2d> Pts(4);
+		static std::vector<Pnt2d> Pts(4);
 		Pts[0] = Qd + dQr;
 		Pts[1] = Qu + dQr;
 		Pts[2] = Qu - dQr;
@@ -103,7 +103,7 @@ namespace tnbLib
 		auto Qd = centre - dQd;
 		auto Qu = centre + dQd;
 
-		std::vector<Pnt2d> Pts(4);
+		static std::vector<Pnt2d> Pts(4);
 		Pts[0] = Qd + dQr;
 		Pts[1] = Qu + dQr;
 		Pts[2] = Qu - dQr;
@@ -121,7 +121,7 @@ namespace tnbLib
 		const Aft2d_EdgeSurface& /*theEdge*/
 	) const
 	{
-		std::vector<Pnt2d> Pts(4);
+		static std::vector<Pnt2d> Pts(4);
 
 		Pts[0] = theCentre - Pnt2d(0, theRadius);
 		Pts[1] = theCentre + Pnt2d(theRadius, 0);
