@@ -1,13 +1,13 @@
 #pragma once
-#ifndef _Aft2d_StdOptNodeAnIso_Header
-#define _Aft2d_StdOptNodeAnIso_Header
+#ifndef _Aft2d_StdOptNodeAnIso_Calculator_Header
+#define _Aft2d_StdOptNodeAnIso_Calculator_Header
 
 #include <Aft2d_OptNodeAnIso_Calculator.hxx>
 
 namespace tnbLib
 {
 
-	class Aft2d_StdOptNodeAnIso
+	class Aft2d_StdOptNodeAnIso_Calculator
 		: public Aft2d_OptNodeAnIso_Calculator
 	{
 
@@ -27,7 +27,7 @@ namespace tnbLib
 
 		// default constructor [12/23/2021 Amir]
 
-		Aft2d_StdOptNodeAnIso()
+		Aft2d_StdOptNodeAnIso_Calculator()
 		{}
 
 
@@ -40,6 +40,6 @@ namespace tnbLib
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_StdOptNodeAnIso);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_StdOptNodeAnIso_Calculator);
 
-#endif // !_Aft2d_StdOptNodeAnIso_Header
+#endif // !_Aft2d_StdOptNodeAnIso_Calculator_Header

@@ -5,6 +5,8 @@
 #include <Global_Done.hxx>
 #include <Standard_TypeDef.hxx>
 
+#include <Aft_OptNode_AnalyticalTraits.hxx>
+
 namespace tnbLib
 {
 
@@ -13,7 +15,11 @@ namespace tnbLib
 		: public Global_Done
 	{
 
-		typedef typename FrontType::nodeType::ptType Point;
+	public:
+
+		typedef typename point_type_from_front<FrontType>::ptType Point;
+
+	private:
 
 		/*Private Data*/
 
@@ -80,7 +86,11 @@ namespace tnbLib
 		: public Global_Done
 	{
 
-		typedef typename FrontType::nodeType::ptType Point;
+	public:
+
+		typedef typename point_type_from_front<FrontType>::ptType Point;
+
+	private:
 
 		/*Private Data*/
 
