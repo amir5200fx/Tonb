@@ -17,4 +17,6 @@ namespace tnbLib
 		) const;
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::Geo2d_MetricPrcsr);
+
 #endif // !_Geo2d_MetricPrcsr_Header

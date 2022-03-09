@@ -68,7 +68,7 @@ namespace tnbLib
 			return theSize3d_;
 		}
 
-		Standard_Real Value(const Pnt2d& theCoord) const override;
+		TnbMesh_EXPORT Standard_Real Value(const Pnt2d& theCoord) const override;
 
 		void LoadSurface(const Handle(Geom_Surface)& theSurface)
 		{
