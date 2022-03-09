@@ -57,6 +57,75 @@ void tnbLib::MeshBase_Tools::SetSourcesToMesh
 	}
 }
 
+tnbLib::Pnt2d 
+tnbLib::MeshBase_Tools::CorrectCoord
+(
+	const Pnt2d & theCentre, 
+	const Pnt2d & theCoord,
+	const Entity2d_Box & theDomain
+)
+{
+	static const auto cte = (1.0 - EPS6);
+
+	const auto& p0 = theDomain.P0();
+	const auto& p1 = theDomain.P1();
+
+	const auto xmin = p0.X();
+	const auto xmax = p1.X();
+	const auto ymin = p0.Y();
+	const auto ymax = p1.Y();
+
+	const auto x0 = theCentre.X();
+	const auto y0 = theCentre.Y();
+
+	const auto du = theCoord - theCentre;
+	const auto dx = du.X();
+	const auto dy = du.Y();
+
+	const auto x = theCoord.X();
+	if (x > xmax)
+	{
+		const auto y = y0 + (dy / dx)*(xmax - x0);
+		const auto du1 = Pnt2d(xmax, y) - theCentre;
+
+		auto newPoint = theCentre + cte * du1;
+		return std::move(newPoint);
+	}
+
+	if (x < xmin)
+	{
+		const auto y = y0 + (dy / dx)*(xmin - x0);
+		const auto du1 = Pnt2d(xmin, y) - theCentre;
+
+		auto newPoint = theCentre + cte * du1;
+		return std::move(newPoint);
+	}
+
+	const auto y = theCoord.Y();
+	if (y > ymax)
+	{
+		const auto x = x0 + (dx / dy)*(ymax - y0);
+		const auto du1 = Pnt2d(x, ymax) - theCentre;
+
+		auto newPoint = theCentre + cte * du1;
+		return std::move(newPoint);
+	}
+
+	if (y < ymin)
+	{
+		const auto x = x0 + (dx / dy)*(ymin - y0);
+		const auto du1 = Pnt2d(x, ymin) - theCentre;
+
+		auto newPoint = theCentre + cte * du1;
+		return std::move(newPoint);
+	}
+
+	FatalErrorIn(FunctionSIG)
+		<< "unpredictable condition is occurred!" << endl
+		<< abort(FatalError);
+	return Pnt2d::null;
+}
+
 const Handle(Geom2d_Curve)& 
 tnbLib::MeshBase_Tools::Geometry
 (
