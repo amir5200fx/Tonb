@@ -2,15 +2,12 @@
 #ifndef _Aft2d_OptNode_Analytical_Header
 #define _Aft2d_OptNode_Analytical_Header
 
-#include <Global_Done.hxx>
+#include <Aft2d_OptNode_AnalyticalFwd.hxx>
 #include <Aft_OptNode_Analytical.hxx>
 #include <Aft2d_Edge.hxx>
 
 namespace tnbLib
 {
-
-	typedef Aft_OptNode_Analytical<Aft2d_Edge>
-		Aft2d_OptNode_Analytical;
 
 	template<>
 	TnbMesh_EXPORT void Aft2d_OptNode_Analytical::Perform();

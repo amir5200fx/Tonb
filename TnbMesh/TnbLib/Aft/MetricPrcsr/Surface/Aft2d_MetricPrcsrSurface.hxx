@@ -9,6 +9,7 @@
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Aft2d_MetricPrcsrSurfaceFwd.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
 
 namespace tnbLib
 {

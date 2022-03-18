@@ -3,6 +3,7 @@
 #include <Aft2d_Edge.hxx>
 #include <Aft2d_SegmentEdge.hxx>
 #include <Aft2d_SegmentEdgeAnIso.hxx>
+#include <Aft2d_SegmentEdgeUniMetric.hxx>
 #include <Aft2d_PlnCurve.hxx>
 #include <Aft2d_PlnCurveAnIso.hxx>
 #include <Aft_Elements.hxx>
@@ -10,8 +11,10 @@
 #include <Entity2d_Chain.hxx>
 //#include <Aft2d_gPlnCurveSurface.hxx>
 //#include <Aft2d_tPlnCurveSurface.hxx>
-//#include <Aft2d_gSegmentEdge.hxx>
-//#include <Aft2d_tSegmentEdge.hxx>
+#include <Aft2d_gSegmentEdge.hxx>
+#include <Aft2d_tSegmentEdge.hxx>
+#include <Aft2d_gSegmentEdgeUniMetric.hxx>
+#include <Aft2d_tSegmentEdgeUniMetric.hxx>
 
 std::vector<std::shared_ptr<tnbLib::Aft2d_Edge>> 
 tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_SegmentEdge>>& theSegments)
@@ -27,12 +30,40 @@ tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnI
 	return std::move(segments);
 }
 
-//std::vector<std::shared_ptr<tnbLib::Aft2d_Edge>>
-//tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_gSegmentEdge>>& theSegments)
-//{
-//	auto segments = Aft2d_gSegmentEdge::UpCast(theSegments);
-//	return std::move(segments);
-//}
+std::vector<std::shared_ptr<tnbLib::Aft2d_EdgeAnIso>>
+tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_SegmentEdgeUniMetric>>& theSegments)
+{
+	auto segments = Aft2d_SegmentEdgeUniMetric::UpCast(theSegments);
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_EdgeSurface>>
+tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_gSegmentEdge>>& theSegments)
+{
+	auto segments = Aft2d_gSegmentEdge::UpCast(theSegments);
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_EdgeSurface>>
+tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>& theSegments)
+{
+	auto segments = Aft2d_tSegmentEdge::UpCast(theSegments);
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_EdgeSurface>>
+tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_gSegmentEdgeUniMetric>>& theSegments)
+{
+	auto segments = Aft2d_gSegmentEdgeUniMetric::UpCast(theSegments);
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_EdgeSurface>>
+tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_tSegmentEdgeUniMetric>>& theSegments)
+{
+	auto segments = Aft2d_tSegmentEdgeUniMetric::UpCast(theSegments);
+	return std::move(segments);
+}
 
 std::vector<std::shared_ptr<tnbLib::Aft2d_Node>> 
 tnbLib::Aft_Tools::RetrieveNodes

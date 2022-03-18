@@ -6,6 +6,8 @@
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo2d_MetricFunction.hxx>
 #include <Aft2d_OptNodeSurface_Calculator.hxx>
+#include <Aft2d_CoreBaseSurface.hxx>
+#include <Aft2d_CoreSurfaceFwd.hxx>
 
 namespace tnbLib
 {

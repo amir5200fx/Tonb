@@ -4,8 +4,8 @@
 
 #include <Geo2d_SizeFunctionFwd.hxx>
 #include <Geo2d_MetricFunctionFwd.hxx>
-#include <Aft2d_PlnCurveFwd.hxx>
-#include <Aft2d_PlnWireFwd.hxx>
+#include <Aft2d_PlnCurveAnIsoFwd.hxx>
+#include <Aft2d_PlnWireAnIsoFwd.hxx>
 
 namespace tnbLib
 {

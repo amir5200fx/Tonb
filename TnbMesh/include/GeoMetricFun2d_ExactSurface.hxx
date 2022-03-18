@@ -35,14 +35,14 @@ namespace tnbLib
 
 		// constructors [12/24/2021 Amir]
 
-		GeoMetricFun2d_ExactSurface
+		explicit GeoMetricFun2d_ExactSurface
 		(
 			const Entity2d_Box& theDomain
 		)
 			: GeoMetricFun2d_nonUniform(0, "surfaceMetric", theDomain)
 		{}
 
-		GeoMetricFun2d_ExactSurface
+		explicit GeoMetricFun2d_ExactSurface
 		(
 			Entity2d_Box&& theDomain
 		)
