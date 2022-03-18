@@ -1,16 +1,16 @@
-#include <Aft2d_tPlnCurveSurface.hxx>
+#include <Aft2d_gPlnCurveSurfaceUniMetric.hxx>
 
-#include <Aft2d_tSegmentEdge.hxx>
-#include <Geo2d_MetricPrcsrAnIso.hxx>
-#include <Mesh2d_CurveAnIso.hxx>
+#include <Aft2d_gSegmentEdgeUniMetric.hxx>
+#include <Geo2d_MetricPrcsrUniMetric.hxx>
+#include <Mesh2d_CurveUniMetric.hxx>
 
 template<>
 template<>
-std::vector<std::shared_ptr<tnbLib::Aft2d_tSegmentEdge>>
-tnbLib::Aft2d_tPlnCurveSurface::TopoMesh<tnbLib::Aft2d_tSegmentEdge>
+std::vector<std::shared_ptr<tnbLib::Aft2d_gSegmentEdgeUniMetric>>
+tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::TopoMesh<tnbLib::Aft2d_gSegmentEdgeUniMetric>
 (
-	const std::shared_ptr<Aft2d_tPlnCurveSurface>& theCurve,
-	const std::shared_ptr<Geo2d_MetricPrcsrAnIso>& theMap,
+	const std::shared_ptr<Aft2d_gPlnCurveSurfaceUniMetric>& theCurve,
+	const std::shared_ptr<Geo2d_MetricPrcsrUniMetric>& theMap,
 	const std::shared_ptr<Mesh_Curve_Info>& theInfo
 	)
 {
@@ -22,7 +22,7 @@ tnbLib::Aft2d_tPlnCurveSurface::TopoMesh<tnbLib::Aft2d_tSegmentEdge>
 	Debug_Null_Pointer(chain);
 
 	const auto& sizeMap = *theMap;
-	auto edges = Aft2d_tSegmentEdge::GetTopology(*chain, theCurve);
+	auto edges = Aft2d_gSegmentEdgeUniMetric::GetTopology(*chain, theCurve);
 
 	for (const auto& x : edges)
 	{
