@@ -1,0 +1,285 @@
+#include <Aft2d_gModelSurface.hxx>
+#include <Aft2d_gModelSurfaceUniMetric.hxx>
+#include <Aft2d_gSolutionDataSurface.hxx>
+#include <Aft2d_MetricPrcsrSurface.hxx>
+#include <Aft2d_MetricPrcsrSurfaceUniMetric.hxx>
+#include <Aft2d_gBoundaryOfPlaneSurfaceUniMetric.hxx>
+#include <Aft2d_gBoundaryOfPlaneSurface.hxx>
+#include <Aft2d_BoundaryOfPlaneAnIso_Info.hxx>
+#include <Aft2d_gRegionPlaneSurfaceUniMetric.hxx>
+#include <Aft2d_gRegionPlaneSurface.hxx>
+#include <Aft2d_OptNodeSurface_Algs.hxx>
+#include <Aft2d_EdgeSurface.hxx>
+#include <Aft_Tools.hxx>
+#include <GModel_Tools.hxx>
+#include <GeoSizeFun2d_Surface.hxx>
+#include <GeoMetricFun2d_ExactSurface.hxx>
+#include <GeoMetricFun2d_Plane.hxx>
+#include <Cad_GModel.hxx>
+#include <GModel_Surface.hxx>
+#include <GModel_Plane.hxx>
+#include <Cad_GeomSurface.hxx>
+#include <Entity2d_Box.hxx>
+#include <Global_File.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
+#include <Geom_Surface.hxx>
+#include <Geom_Plane.hxx>
+
+namespace tnbLib
+{
+
+	static const std::string extension = Aft2d_gSolutionDataSurface::extension;
+
+	static unsigned short verbose = 0;
+	static bool loadTag = false;
+	static bool exeTag = false;
+
+	static std::shared_ptr<Aft2d_gSolutionDataSurface> mySoluData;
+	static std::string myFileName;
+
+	static double myTol = 1.0E-6;
+
+	void setVerbose(unsigned int i)
+	{
+		Info << endl;
+		Info << " - the verbosity level is set to: " << i << endl;
+		verbose = i;
+	}
+
+	void setTolerance(double x)
+	{
+		myTol = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the tolerance is set to: " << myTol << endl;
+		}
+	}
+
+	void loadFile(const std::string& name)
+	{
+		file::CheckExtension(name);
+
+		mySoluData = file::LoadFile<std::shared_ptr<Aft2d_gSolutionDataSurface>>(name + extension, verbose);
+		if (NOT mySoluData)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the data solution file is null!" << endl
+				<< abort(FatalError);
+		}
+
+		loadTag = true;
+	}
+
+	void loadFile()
+	{
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), extension).string();
+		myFileName = name;
+		loadFile(name);
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+
+		file::CheckExtension(name);
+
+		file::SaveTo(mySoluData, name + extension, verbose);
+	}
+
+	void saveTo()
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+		saveTo(myFileName);
+	}
+
+	auto mesh
+	(
+		const std::shared_ptr<Aft2d_MetricPrcsrSurface>& theMetricPrcsr, 
+		const std::shared_ptr<Aft2d_OptNodeSurface_Calculator>& theCalculator, 
+		const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theBoundaries
+	)
+	{
+		auto alg = std::make_shared<Aft2d_gModelSurface>();
+		alg->LoadMetricMap(theMetricPrcsr);
+		alg->LoadBoundaryMetricMap(theMetricPrcsr);
+
+		alg->LoadBoundaryEdges(theBoundaries);
+		alg->LoadNodeCalculator(theCalculator);
+
+		{// timer scope [3/12/2022 Amir]
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_s);
+
+			alg->Perform();
+		}
+
+		const auto& elemMap = alg->RetrieveElements();
+		std::vector<std::shared_ptr<Aft2d_ElementSurface>> elements;
+		elements.reserve(elemMap.size());
+		for (const auto& x : elemMap)
+		{
+			elements.push_back(x.second);
+		}
+		return std::move(elements);
+	}
+
+	auto mesh
+	(
+		const std::shared_ptr<Aft2d_MetricPrcsrSurfaceUniMetric>& theMetricPrcsr,
+		const std::shared_ptr<Aft2d_OptNodeSurfaceUniMetric_Calculator>& theCalculator,
+		const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theBoundaries
+	)
+	{
+		auto alg = std::make_shared<Aft2d_gModelSurfaceUniMetric>();
+		alg->LoadMetricMap(theMetricPrcsr);
+		alg->LoadBoundaryMetricMap(theMetricPrcsr);
+
+		alg->LoadBoundaryEdges(theBoundaries);
+		alg->LoadNodeCalculator(theCalculator);
+
+		{// timer scope [3/12/2022 Amir]
+			Global_Timer timer;
+			timer.SetInfo(Global_TimerInfo_s);
+
+			alg->Perform();
+		}
+
+		const auto& elemMap = alg->RetrieveElements();
+		std::vector<std::shared_ptr<Aft2d_ElementSurface>> elements;
+		elements.reserve(elemMap.size());
+		for (const auto& x : elemMap)
+		{
+			elements.push_back(x.second);
+		}
+		return std::move(elements);
+	}
+
+	auto mesh
+	(
+		const std::shared_ptr<GModel_Surface>& theSurface, 
+		const std::shared_ptr<Geo2d_SizeFunction>& theSizeFun, 
+		const std::shared_ptr<Aft2d_OptNodeSurfaceUniMetric_Calculator>& theUniMetricCalculator, 
+		const std::shared_ptr<Aft2d_OptNodeSurface_Calculator>& theCalculator,
+		const std::shared_ptr<Aft2d_BoundaryOfPlaneAnIso_Info>& theBndInfo,
+		const std::shared_ptr<Aft_MetricPrcsrAnIso_Info>& theInfo
+	)
+	{
+		if (NOT theSurface->GeomSurface())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no geometry has been found!" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT theSurface->GeomSurface()->Geometry())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no geometry has been found!" << endl
+				<< abort(FatalError);
+		}
+		const auto& geometry = theSurface->GeomSurface()->Geometry();
+
+		auto wire = GModel_Tools::GetOuterParaWire(theSurface);
+		auto box = GModel_Tools::CalcBoundingBox(*wire);
+
+		auto d = box.Diameter();
+		auto tol = myTol * d;
+
+		auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
+
+		if (GModel_Tools::IsPlane(theSurface))
+		{
+			auto gPlane = Handle(Geom_Plane)::DownCast(geometry);
+			if (NOT gPlane)
+			{
+				FatalErrorIn(FunctionSIG) << endl
+					<< "the geometry is not plane!" << endl
+					<< abort(FatalError);
+			}
+			auto metricFun = std::make_shared<GeoMetricFun2d_Plane>(gPlane, box);
+			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurfaceUniMetric>(theSizeFun, metricFun, theInfo);
+			metricPrcsr->SetDimSize(box.Diameter());
+
+			auto plnRegion = Aft2d_gRegionPlaneSurfaceUniMetric::MakePlane(pln);
+
+			auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurfaceUniMetric>(theBndInfo);
+			bnd->LoadMetricProcessor(metricPrcsr);
+			bnd->LoadPlane(plnRegion);
+
+			bnd->Perform();
+			if (NOT bnd->IsDone())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the application is not performed!" << endl
+					<< abort(FatalError);
+			}
+
+			const auto& boundaries = bnd->Boundaries();
+
+			auto elements = mesh(metricPrcsr, theUniMetricCalculator, Aft_Tools::UpCast(boundaries));
+			return std::move(elements);
+		}
+		else
+		{
+			auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(geometry, box);
+			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(theSizeFun, metricFun, theInfo);
+			metricPrcsr->SetDimSize(box.Diameter());
+
+			auto plnRegion = Aft2d_gRegionPlaneSurface::MakePlane(pln);
+
+			auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurface>(theBndInfo);
+			bnd->LoadMetricProcessor(metricPrcsr);
+			bnd->LoadPlane(plnRegion);
+
+			bnd->Perform();
+			if (NOT bnd->IsDone())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the application is not performed!" << endl
+					<< abort(FatalError);
+			}
+
+			const auto& boundaries = bnd->Boundaries();
+
+			auto elements = mesh(metricPrcsr, theCalculator, Aft_Tools::UpCast(boundaries));
+			return std::move(elements);
+		}
+	}
+
+	void execute()
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded!" << endl
+				<< abort(FatalError);
+		}
+
+		const auto& model = mySoluData->Geometry();
+		if (NOT model)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "th model is null!" << endl
+				<< abort(FatalError);
+		}
+
+		for (const auto& x : model->Surfaces())
+		{
+			Debug_Null_Pointer(x);
+
+		}
+	}
+}
