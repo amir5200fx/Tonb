@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{42ad1c78-f9d0-44c4-8d68-9654dbc95fc9}</UniqueIdentifier>
+      <UniqueIdentifier>{1b8404dc-8fb7-43b5-b8fd-4c82b6bd9f49}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="solidManager.cxx">
+    <ClCompile Include="tnbCadToolSolidManager.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
