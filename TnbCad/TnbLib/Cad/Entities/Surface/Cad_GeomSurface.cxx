@@ -11,13 +11,13 @@ const std::string tnbLib::Cad_GeomSurface::extension = ".gsurf";
 
 void tnbLib::Cad_GeomSurface::CheckBounded(const Handle(Geom_Surface)& s)
 {
-	auto bounded = Handle(Geom_BoundedSurface)::DownCast(s);
+	/*auto bounded = Handle(Geom_BoundedSurface)::DownCast(s);
 	if (NOT bounded)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the surface is not bounded!" << endl
 			<< abort(FatalError);
-	}
+	}*/
 }
 
 tnbLib::Cad_GeomSurface::Cad_GeomSurface

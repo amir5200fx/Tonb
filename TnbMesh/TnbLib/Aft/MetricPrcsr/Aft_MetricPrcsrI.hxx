@@ -1,6 +1,8 @@
 #pragma once
 #include <Global_Macros.hxx>
 #include <Geo_Tools.hxx>
+#include <OSstream.hxx>
+#include <TnbError.hxx>
 namespace tnbLib
 {
 
@@ -65,6 +67,16 @@ namespace tnbLib
 		const auto& p1 = theFront.Node1()->Coord();
 		const auto pt = Geo_Tools::ProjectPtAtSegment(thePt, p0, p1);
 		return base::CalcSquareDistance(thePt, pt);
+	}
+
+	template<class FrontType, class SizeFun, class MetricFun>
+	Standard_Real Aft_MetricPrcsr<FrontType, SizeFun, MetricFun>::CalcElementSize
+	(
+		const std::shared_ptr<frontType>& theFront
+	) const
+	{
+		Debug_Null_Pointer(theFront);
+		return base::CalcElementSize(theFront->Centre());
 	}
 
 	template<class FrontType, class SizeFun, class MetricFun>
@@ -159,6 +171,16 @@ namespace tnbLib
 	) const
 	{
 		return theFront.CalcSquareDistance(thePt);
+	}
+
+	template<class FrontType, class SizeFun>
+	Standard_Real Aft_MetricPrcsr<FrontType, SizeFun, void>::CalcElementSize
+	(
+		const std::shared_ptr<frontType>& theFront
+	) const
+	{
+		Debug_Null_Pointer(theFront);
+		return base::CalcElementSize(theFront->Centre());
 	}
 
 	template<class FrontType, class SizeFun>

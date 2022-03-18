@@ -5,6 +5,66 @@
 
 #include <gp.hxx>
 #endif // _DEBUG
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+template<class T>
+inline std::shared_ptr<T> 
+tnbLib::Global_Tools::Find
+(
+	const std::map<Standard_Integer, std::shared_ptr<T>>& theMap,
+	const Standard_Integer theIndex
+)
+{
+	auto iter = theMap.find(theIndex);
+	if (iter IS_EQUAL theMap.end())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the item is not found!" << endl
+			<< " - index: " << theIndex << endl
+			<< abort(FatalError);
+	}
+	return iter->second;
+}
+
+template<class T>
+inline void tnbLib::Global_Tools::Insert
+(
+	const Standard_Integer theIndex, 
+	const std::shared_ptr<T>& theItem,
+	std::map<Standard_Integer, std::shared_ptr<T>>& theMap
+)
+{
+	auto paired = std::make_pair(theIndex, theItem);
+	auto insert = theMap.insert(std::move(paired));
+	if (NOT insert.second)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "duplicate data is detected!" << endl
+			<< " - index: " << theIndex << endl
+			<< abort(FatalError);
+	}
+}
+
+template<class T>
+inline void tnbLib::Global_Tools::Insert
+(
+	const Standard_Integer theIndex,
+	std::shared_ptr<T>&& theItem,
+	std::map<Standard_Integer, std::shared_ptr<T>>& theMap
+)
+{
+	auto paired = std::make_pair(theIndex, std::move(theItem));
+	auto insert = theMap.insert(std::move(paired));
+	if (NOT insert.second)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "duplicate data is detected!" << endl
+			<< " - index: " << theIndex << endl
+			<< abort(FatalError);
+	}
+}
+
+
 namespace tnbLib
 {
 

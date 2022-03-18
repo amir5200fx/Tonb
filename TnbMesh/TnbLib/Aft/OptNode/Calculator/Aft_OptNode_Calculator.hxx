@@ -7,6 +7,7 @@
 #include <Global_Done.hxx>
 #include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
+#include <Geo_SizeFunctionTraits.hxx>
 //#include <Aft_MetricPrcsr.hxx>
 
 #include <Standard_Real.hxx>
@@ -30,7 +31,7 @@ namespace tnbLib
 		typedef Aft_MetricPrcsr<FrontType, SizeFun, MetricFun>
 			metricMap;
 		typedef FrontType frontType;
-		typedef typename SizeFun::ptType Point;
+		typedef typename point_type_from_sizeMap<SizeFun>::ptType Point;
 
 		/*Private Data*/
 

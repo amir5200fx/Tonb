@@ -6,7 +6,7 @@ namespace tnbLib
 {
 	template<>
 	template<>
-	void Aft2d_Edge2dPriorityList::serialize<TNB_iARCH_TYPE>
+	void Aft2d_EdgePriorityList::serialize<TNB_iARCH_TYPE>
 		(
 			TNB_iARCH_TYPE& ar,
 			const unsigned int /*file_version*/
@@ -17,7 +17,7 @@ namespace tnbLib
 
 	template<>
 	template<>
-	void Aft2d_Edge2dPriorityList::serialize<TNB_oARCH_TYPE>
+	void Aft2d_EdgePriorityList::serialize<TNB_oARCH_TYPE>
 		(
 			TNB_oARCH_TYPE& ar,
 			const unsigned int /*file_version*/

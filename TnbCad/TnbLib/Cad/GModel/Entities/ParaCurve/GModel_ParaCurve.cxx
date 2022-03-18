@@ -8,6 +8,50 @@
 #include <Geom2d_Curve.hxx>
 #include <Geom2d_BoundedCurve.hxx>
 
+tnbLib::GModel_ParaCurve::GModel_ParaCurve
+(
+	const Handle(Geom2d_Curve)& theGeometry
+)
+	: theGeometry_(theGeometry)
+{
+	CheckBounded(theGeometry, FunctionSIG);
+}
+
+tnbLib::GModel_ParaCurve::GModel_ParaCurve
+(
+	const Standard_Integer theIndex, 
+	const word & theName, 
+	const Handle(Geom2d_Curve)& theGeometry
+)
+	: Global_Indexed(theIndex)
+	, Global_Named(theName)
+	, theGeometry_(theGeometry)
+{
+	CheckBounded(theGeometry, FunctionSIG);
+}
+
+tnbLib::GModel_ParaCurve::GModel_ParaCurve
+(
+	Handle(Geom2d_Curve)&& theGeometry
+)
+	: theGeometry_(std::move(theGeometry))
+{
+	CheckBounded(theGeometry, FunctionSIG);
+}
+
+tnbLib::GModel_ParaCurve::GModel_ParaCurve
+(
+	const Standard_Integer theIndex,
+	const word & theName,
+	Handle(Geom2d_Curve) && theGeometry
+)
+	: Global_Indexed(theIndex)
+	, Global_Named(theName)
+	, theGeometry_(std::move(theGeometry))
+{
+	CheckBounded(theGeometry, FunctionSIG);
+}
+
 void tnbLib::GModel_ParaCurve::CheckBoundary
 (
 	const Standard_Real x, 
@@ -35,24 +79,6 @@ void tnbLib::GModel_ParaCurve::CheckBounded
 			<< "the geometry curve is not bounded!" << endl
 			<< abort(FatalError);
 	}
-}
-
-tnbLib::GModel_ParaCurve::GModel_ParaCurve
-(
-	const Handle(Geom2d_Curve)& theGeometry
-)
-	: theGeometry_(theGeometry)
-{
-	CheckBounded(Geometry(), "GModel_ParaCurve::GModel_ParaCurve()");
-}
-
-tnbLib::GModel_ParaCurve::GModel_ParaCurve
-(
-	Handle(Geom2d_Curve)&& theGeometry
-)
-	: theGeometry_(std::move(theGeometry))
-{
-	CheckBounded(Geometry(), "GModel_ParaCurve::GModel_ParaCurve()");
 }
 
 Standard_Real 

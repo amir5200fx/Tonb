@@ -14,7 +14,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations [12/29/2021 Amir]
-	class Cad3d_GModel;
+	class Cad_GModel;
 	class GModel_Surface;
 	class Cad_ApprxMetricInfo;
 
@@ -24,7 +24,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Cad3d_GModel> theModel_;
+		std::shared_ptr<Cad_GModel> theModel_;
 		
 		std::map<Standard_Integer, std::shared_ptr<Entity2d_MetricMeshValue>>
 			theMetrics_;
@@ -54,12 +54,12 @@ namespace tnbLib
 
 		// constructors [12/29/2021 Amir]
 
-		GModel_MetricAnalyzer(const std::shared_ptr<Cad3d_GModel>& theModel)
+		GModel_MetricAnalyzer(const std::shared_ptr<Cad_GModel>& theModel)
 			: theModel_(theModel)
 			, theGlobalInfo_(DEFAULT_INFO)
 		{}
 
-		GModel_MetricAnalyzer(std::shared_ptr<Cad3d_GModel>&& theModel)
+		GModel_MetricAnalyzer(std::shared_ptr<Cad_GModel>&& theModel)
 			: theModel_(std::move(theModel))
 			, theGlobalInfo_(DEFAULT_INFO)
 		{}
@@ -93,12 +93,12 @@ namespace tnbLib
 
 		TnbCad_EXPORT void Perform();
 
-		void SetModel(const std::shared_ptr<Cad3d_GModel>& theModel)
+		void SetModel(const std::shared_ptr<Cad_GModel>& theModel)
 		{
 			theModel_ = theModel;
 		}
 
-		void SetModel(std::shared_ptr<Cad3d_GModel>&& theModel)
+		void SetModel(std::shared_ptr<Cad_GModel>&& theModel)
 		{
 			theModel_ = std::move(theModel);
 		}

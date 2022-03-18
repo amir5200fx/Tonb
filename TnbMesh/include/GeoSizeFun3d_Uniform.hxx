@@ -4,12 +4,7 @@
 
 #include <Pnt3d.hxx>
 #include <GeoSizeFun_Uniform.hxx>
-
-namespace tnbLib
-{
-
-	typedef GeoSizeFun_Uniform<Pnt3d> GeoSizeFun3d_Uniform;
-}
+#include <GeoSizeFun3d_UniformFwd.hxx>
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::GeoSizeFun3d_Uniform);
 

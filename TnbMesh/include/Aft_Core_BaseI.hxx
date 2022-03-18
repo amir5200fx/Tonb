@@ -258,12 +258,12 @@ namespace tnbLib
 	void Aft_Core_Base<OptNodeAlg, FrontInfo, FrontData, SizeFun, MetricFun>::CalcElementSize()
 	{
 		Debug_Null_Pointer(frontInfo::CurrentFront());
-		const auto& coord = frontInfo::CurrentFront()->Centre();
+		//const auto& coord = frontInfo::CurrentFront()->Centre();
 
 		Debug_Null_Pointer(theMetricMap_);
 		frontInfo::SetElementSize
 		(
-			theMetricMap_->CalcElementSize(coord)*
+			theMetricMap_->CalcElementSize(frontInfo::CurrentFront())*
 			SIZE_TO_HIGHT_ELEMENT_COEFF
 		);
 	}

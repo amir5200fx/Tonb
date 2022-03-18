@@ -6,7 +6,9 @@
 
 #include <Standard_TypeDef.hxx>
 
+#include <memory>
 #include <vector>
+#include <map>
 
 namespace tnbLib
 {
@@ -18,6 +20,30 @@ namespace tnbLib
 	{
 
 	public:
+
+		template<class T>
+		static std::shared_ptr<T> 
+			Find
+			(
+				const std::map<Standard_Integer, std::shared_ptr<T>>&,
+				const Standard_Integer theIndex
+			);
+
+		template<class T>
+		static void Insert
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<T>& theItem, 
+			std::map<Standard_Integer, std::shared_ptr<T>>&
+		);
+
+		template<class T>
+		static void Insert
+		(
+			const Standard_Integer theIndex,
+			std::shared_ptr<T>&& theItem,
+			std::map<Standard_Integer, std::shared_ptr<T>>&
+		);
 
 		template<class Type>
 		static size_t

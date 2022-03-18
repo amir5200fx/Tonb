@@ -11,6 +11,7 @@
 #include <GeoMesh2d_BackgroundFwd.hxx>
 #include <Global_Serialization.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_BoxFwd.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -42,6 +43,8 @@ namespace tnbLib
 			const Standard_Real theBaseSize,
 			GeoMesh2d_Background& theMesh
 		);
+
+		static TnbMesh_EXPORT Pnt2d CorrectCoord(const Pnt2d& theCentre, const Pnt2d& theCoord, const Entity2d_Box&);
 
 		static TnbMesh_EXPORT const Handle(Geom2d_Curve)& Geometry(const std::shared_ptr<Pln_Curve>& theCurve);
 		static TnbMesh_EXPORT const Handle(Geom2d_Curve)& Geometry(const std::shared_ptr<TModel_ParaCurve>& theCurve);

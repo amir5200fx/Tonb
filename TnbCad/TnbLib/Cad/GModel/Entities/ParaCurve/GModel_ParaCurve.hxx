@@ -55,13 +55,27 @@ namespace tnbLib
 
 		//- constructors
 
-		TnbCad_EXPORT GModel_ParaCurve
+		TnbCad_EXPORT explicit GModel_ParaCurve
 		(
 			const Handle(Geom2d_Curve)& theGeometry
 		);
 
 		TnbCad_EXPORT GModel_ParaCurve
 		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Handle(Geom2d_Curve)& theGeometry
+		);
+
+		TnbCad_EXPORT GModel_ParaCurve
+		(
+			Handle(Geom2d_Curve)&& theGeometry
+		);
+
+		TnbCad_EXPORT GModel_ParaCurve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
 			Handle(Geom2d_Curve)&& theGeometry
 		);
 

@@ -76,9 +76,6 @@ namespace tnbLib
 			return theEdges_;
 		}
 
-		Entity2d_Box CalcParametricBoundingBox() const;
-
-
 		//- Io functions and operators
 
 		void ExportPlaneCurvesToPlt
@@ -89,14 +86,14 @@ namespace tnbLib
 
 		//- Static functions and operators
 
-		static std::shared_ptr<std::vector<std::shared_ptr<GModel_ParaCurve>>>
-			RetrievePlaneCurves
+		static TnbCad_EXPORT std::shared_ptr<std::vector<std::shared_ptr<GModel_ParaCurve>>>
+			RetrieveParaCurves
 			(
 				const GModel_Wire& theWire
 			);
 
-		static std::shared_ptr<GModel_ParaWire> 
-			RetrieveParWire
+		static TnbCad_EXPORT std::shared_ptr<GModel_ParaWire>
+			RetrieveParaWire
 			(
 				const GModel_Wire& theWire
 			);

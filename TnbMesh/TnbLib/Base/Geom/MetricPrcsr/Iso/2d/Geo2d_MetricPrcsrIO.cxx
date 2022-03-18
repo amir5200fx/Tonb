@@ -21,3 +21,5 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Geo_MetricPrcsr_Base<void>)
 	ar & theDimSize_;
 	ar & theInfo_;
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Geo2d_MetricPrcsr);

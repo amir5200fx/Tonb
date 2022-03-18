@@ -11,7 +11,7 @@ namespace tnbLib
 	void Aft2d_OptNodeAnIso_Analytical::Perform()
 	{
 
-		//static const Standard_Real C3(1.7320508075688773);
+		static const Standard_Real c3 = 0.86602540378443864676372317075294;
 
 		const auto h = ElementSize();
 
@@ -26,8 +26,8 @@ namespace tnbLib
 		const auto& v0 = Front().Node0()->Coord();
 		const auto& v1 = Front().Node1()->Coord();
 
-		const auto D = sqrt(m.Determinant());
-		const auto cte = 1.0 / (D*Entity2d_Metric1::Distance(centre, v1, m));
+		const auto D = std::sqrt(m.Determinant());
+		const auto cte = c3 / (D*Entity2d_Metric1::Distance(centre, v1, m));
 
 		auto dU = v1 - centre;
 

@@ -1,6 +1,6 @@
 #include <GModel_MetricAnalyzer.hxx>
 
-#include <Cad3d_GModel.hxx>
+#include <Cad_GModel.hxx>
 #include <GModel_Surface.hxx>
 #include <Cad_ApprxMetricInfo.hxx>
 #include <Cad_ApprxMetric.hxx>

@@ -1,6 +1,6 @@
 #include <GModel_MetricAnalyzer.hxx>
 
-#include <Cad3d_GModel.hxx>
+#include <Cad_GModel.hxx>
 #include <Cad_ApprxMetricInfo.hxx>
 #include <Entity2d_Metric1.hxx>
 #include <Entity2d_MetricMeshValue.hxx>

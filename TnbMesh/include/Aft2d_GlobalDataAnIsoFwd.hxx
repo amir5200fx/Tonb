@@ -8,8 +8,8 @@ namespace tnbLib
 {
 
 	//- Forward Declarations
-
-	template<class ElementType> class Mesh_GlobalData;
+	template<class ElementType> 
+	class Mesh_GlobalData;
 
 	typedef Mesh_GlobalData<Aft2d_ElementAnIso> Aft2d_GlobalDataAnIso;
 }

@@ -13,6 +13,17 @@ tnbLib::GModel_Plane::GModel_Plane
 
 tnbLib::GModel_Plane::GModel_Plane
 (
+	outer && theOuter, 
+	inner && theInner
+)
+	: theOuter_(std::move(theOuter))
+	, theInner_(std::move(theInner))
+{
+	// empty body [2/19/2022 Amir]
+}
+
+tnbLib::GModel_Plane::GModel_Plane
+(
 	const Standard_Integer theIndex,
 	const outer & theOuter, 
 	const inner & theInner

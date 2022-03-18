@@ -16,6 +16,9 @@
 #include <Aft2d_SegmentEdgeAnIsoFwd.hxx>
 #include <Aft2d_gSegmentEdgeFwd.hxx>
 #include <Aft2d_tSegmentEdgeFwd.hxx>
+#include <Aft2d_SegmentEdgeUniMetricFwd.hxx>
+#include <Aft2d_gSegmentEdgeUniMetricFwd.hxx>
+#include <Aft2d_tSegmentEdgeUniMetricFwd.hxx>
 #include <Aft2d_PlnCurveFwd.hxx>
 #include <Aft2d_PlnCurveAnIsoFwd.hxx>
 #include <Aft2d_gPlnCurveSurfaceFwd.hxx>
@@ -56,6 +59,12 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnIso>>&
 			);
 
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_EdgeAnIso>>
+			UpCast
+			(
+				const std::vector<std::shared_ptr<Aft2d_SegmentEdgeUniMetric>>&
+			);
+
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_EdgeSurface>> 
 			UpCast
 			(
@@ -66,6 +75,18 @@ namespace tnbLib
 			UpCast
 			(
 				const std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>&
+			);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_EdgeSurface>>
+			UpCast
+			(
+				const std::vector<std::shared_ptr<Aft2d_gSegmentEdgeUniMetric>>&
+			);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_EdgeSurface>>
+			UpCast
+			(
+				const std::vector<std::shared_ptr<Aft2d_tSegmentEdgeUniMetric>>&
 			);
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_Node>> 

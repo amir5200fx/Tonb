@@ -3,6 +3,7 @@
 #define _Aft2d_gBoundaryOfPlaneSurfaceFwd_Header
 
 #include <Aft2d_gRegionPlaneSurfaceFwd.hxx>
+#include <Aft2d_MetricPrcsrSurfaceFwd.hxx>
 #include <Geo2d_SizeFunctionFwd.hxx>
 #include <Geo2d_MetricFunctionFwd.hxx>
 

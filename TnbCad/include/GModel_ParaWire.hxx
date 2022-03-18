@@ -76,8 +76,6 @@ namespace tnbLib
 			return theCurves_;
 		}
 
-		Entity2d_Box CalcBoundingBox() const;
-
 		//- IO functions and operators
 
 		void ExportToPlt(OFstream& File) const;
