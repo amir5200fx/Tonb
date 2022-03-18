@@ -1,19 +1,19 @@
-#include <Aft2d_gSegmentEdge.hxx>
+#include <Aft2d_gSegmentEdgeUniMetric.hxx>
 
 #include <Entity2d_Polygon.hxx>
-#include <Aft2d_gPlnCurveSurface.hxx>
+#include <Aft2d_gPlnCurveSurfaceUniMetric.hxx>
 #include <Aft2d_NodeSurface.hxx>
-#include <Aft2d_gCornerNode.hxx>
-#include <Aft2d_gSegmentNode.hxx>
+#include <Aft2d_gCornerNodeUniMetric.hxx>
+#include <Aft2d_gSegmentNodeUniMetric.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 template<>
-std::vector<std::shared_ptr<tnbLib::Aft2d_gSegmentEdge>>
-tnbLib::Aft2d_gSegmentEdge::GetTopology
+std::vector<std::shared_ptr<tnbLib::Aft2d_gSegmentEdgeUniMetric>>
+tnbLib::Aft2d_gSegmentEdgeUniMetric::GetTopology
 (
 	const Entity2d_Polygon& theChain,
-	const std::shared_ptr<Aft2d_gPlnCurveSurface>& theCurve
+	const std::shared_ptr<Aft2d_gPlnCurveSurfaceUniMetric>& theCurve
 )
 {
 	const auto& pts = theChain.Points();
@@ -29,14 +29,14 @@ tnbLib::Aft2d_gSegmentEdge::GetTopology
 
 	Standard_Integer K = 0;
 	K++;
-	auto n0 = std::make_shared<Aft2d_gCornerNode>(K, pts[K - 1]);
+	auto n0 = std::make_shared<Aft2d_gCornerNodeUniMetric>(K, pts[K - 1]);
 	nodes.push_back(n0);
 	n0->InsertToCurves(theCurve->Index(), theCurve);
 
 	forThose(Index, 1, pts.size() - 2)
 	{
 		K++;
-		auto n = std::make_shared<Aft2d_gSegmentNode>(K, pts[K - 1]);
+		auto n = std::make_shared<Aft2d_gSegmentNodeUniMetric>(K, pts[K - 1]);
 		Debug_Null_Pointer(n);
 
 		n->SetCurve(theCurve);
@@ -45,11 +45,11 @@ tnbLib::Aft2d_gSegmentEdge::GetTopology
 	}
 
 	K++;
-	auto n1 = std::make_shared<Aft2d_gCornerNode>(K, pts[K - 1]);
+	auto n1 = std::make_shared<Aft2d_gCornerNodeUniMetric>(K, pts[K - 1]);
 	nodes.push_back(n1);
 	n1->InsertToCurves(theCurve->Index(), theCurve);
 
-	std::vector<std::shared_ptr<Aft2d_gSegmentEdge>> edges;
+	std::vector<std::shared_ptr<Aft2d_gSegmentEdgeUniMetric>> edges;
 	edges.reserve(pts.size() - 1);
 
 	K = 0;
@@ -61,7 +61,7 @@ tnbLib::Aft2d_gSegmentEdge::GetTopology
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
 
-		auto edge = std::make_shared<Aft2d_gSegmentEdge>(++K, n0, n1);
+		auto edge = std::make_shared<Aft2d_gSegmentEdgeUniMetric>(++K, n0, n1);
 		Debug_Null_Pointer(edge);
 
 		edge->SetCurve(theCurve);
@@ -72,9 +72,9 @@ tnbLib::Aft2d_gSegmentEdge::GetTopology
 }
 
 template<>
-void tnbLib::Aft2d_gSegmentEdge::MergeDangles
+void tnbLib::Aft2d_gSegmentEdgeUniMetric::MergeDangles
 (
-	const std::vector<std::shared_ptr<Aft2d_gSegmentEdge>>& theWire,
+	const std::vector<std::shared_ptr<Aft2d_gSegmentEdgeUniMetric>>& theWire,
 	const Standard_Real theTol
 )
 {
@@ -110,13 +110,13 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 			continue;
 		}*/
 
-		const auto cn0 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e0.Node1());
-		const auto cn1 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e1.Node0());
+		const auto cn0 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e0.Node1());
+		const auto cn1 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e1.Node0());
 
 		if (cn0 AND cn1)
 		{
 			auto node =
-				Aft2d_gCornerNode::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+				Aft2d_gCornerNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
 
 			e0.SetNode1(node);
 			e1.SetNode0(node);
@@ -156,13 +156,13 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 		return;
 	}*/
 
-	const auto cn0 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e0.Node1());
-	const auto cn1 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e1.Node0());
+	const auto cn0 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e0.Node1());
+	const auto cn1 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e1.Node0());
 
 	if (cn0 AND cn1)
 	{
 		auto node =
-			Aft2d_gCornerNode::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+			Aft2d_gCornerNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
 
 		e0.SetNode1(node);
 		e1.SetNode0(node);
