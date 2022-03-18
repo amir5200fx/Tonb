@@ -20,6 +20,7 @@
 #include <Cad_EntityManager.hxx>
 #include <Cad_CurveLength.hxx>
 #include <Cad_CurveLength_Info.hxx>
+#include <Cad_GeomSurface.hxx>
 #include <Entity2d_Metric1.hxx>
 #include <Entity3d_Box.hxx>
 #include <Entity3d_Chain.hxx>
@@ -38,6 +39,9 @@
 #include <Geom_TrimmedCurve.hxx>
 #include <Geom_BSplineCurve.hxx>
 #include <Geom_BSplineSurface.hxx>
+#include <Geom_CylindricalSurface.hxx>
+#include <Geom_SphericalSurface.hxx>
+#include <Geom_SweptSurface.hxx>
 #include <GeomAPI_ProjectPointOnCurve.hxx>
 #include <GeomAPI_ProjectPointOnSurf.hxx>
 #include <Bnd_Box.hxx>
@@ -60,6 +64,81 @@
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array1OfInteger.hxx>
 #include <TColStd_Array1OfReal.hxx>
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsBounded
+(
+	const std::shared_ptr<Cad_GeomSurface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	Debug_Null_Pointer(theSurface->Geometry());
+	return (Standard_Boolean)Handle(Geom_BoundedSurface)::DownCast(theSurface->Geometry());
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsPlane
+(
+	const std::shared_ptr<Cad_GeomSurface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	Debug_Null_Pointer(theSurface->Geometry());
+	return (Standard_Boolean)Handle(Geom_Plane)::DownCast(theSurface->Geometry());
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsCylinder
+(
+	const std::shared_ptr<Cad_GeomSurface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	Debug_Null_Pointer(theSurface->Geometry());
+	return (Standard_Boolean)Handle(Geom_CylindricalSurface)::DownCast(theSurface->Geometry());
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsSphere
+(
+	const std::shared_ptr<Cad_GeomSurface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	Debug_Null_Pointer(theSurface->Geometry());
+	return (Standard_Boolean)Handle(Geom_SphericalSurface)::DownCast(theSurface->Geometry());
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsSwept
+(
+	const std::shared_ptr<Cad_GeomSurface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	Debug_Null_Pointer(theSurface->Geometry());
+	return (Standard_Boolean)Handle(Geom_SweptSurface)::DownCast(theSurface->Geometry());
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsUniMetric
+(
+	const std::shared_ptr<Cad_GeomSurface>& theSurface
+)
+{
+	if (IsPlane(theSurface))
+	{
+		return Standard_True;
+	}
+	else if (IsCylinder(theSurface))
+	{
+		return Standard_True;
+	}
+	else
+	{
+		return Standard_False;
+	}
+}
 
 Standard_Boolean 
 tnbLib::Cad_Tools::HasTriangulation

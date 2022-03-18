@@ -29,6 +29,11 @@ namespace tnbLib
 
 	public:
 
+		static TnbCad_EXPORT Standard_Boolean IsPlane(const std::shared_ptr<GModel_Surface>&);
+		static TnbCad_EXPORT Standard_Boolean IsCylinder(const std::shared_ptr<GModel_Surface>&);
+
+		static TnbCad_EXPORT Standard_Boolean IsUniMetric(const std::shared_ptr<GModel_Surface>&);
+
 		static TnbCad_EXPORT std::shared_ptr<GModel_Edge>
 			GetEdge
 			(

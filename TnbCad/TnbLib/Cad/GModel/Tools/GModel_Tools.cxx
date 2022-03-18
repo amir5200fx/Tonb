@@ -1,5 +1,6 @@
 #include <GModel_Tools.hxx>
 
+#include <Cad_Tools.hxx>
 #include <Cad_GeomSurface.hxx>
 #include <GModel_Curve.hxx>
 #include <GModel_ParaCurve.hxx>
@@ -25,6 +26,36 @@
 #include <ShapeFix_Wire.hxx>
 #include <BRepTools_WireExplorer.hxx>
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
+
+Standard_Boolean 
+tnbLib::GModel_Tools::IsPlane
+(
+	const std::shared_ptr<GModel_Surface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	return Cad_Tools::IsPlane(theSurface->GeomSurface());
+}
+
+Standard_Boolean
+tnbLib::GModel_Tools::IsCylinder
+(
+	const std::shared_ptr<GModel_Surface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	return Cad_Tools::IsCylinder(theSurface->GeomSurface());
+}
+
+Standard_Boolean 
+tnbLib::GModel_Tools::IsUniMetric
+(
+	const std::shared_ptr<GModel_Surface>& theSurface
+)
+{
+	Debug_Null_Pointer(theSurface);
+	return Cad_Tools::IsUniMetric(theSurface->GeomSurface());
+}
 
 std::shared_ptr<tnbLib::GModel_Edge> 
 tnbLib::GModel_Tools::GetEdge
