@@ -225,14 +225,41 @@ namespace tnbLib
 		const typename stringMapOfBlocks::const_iterator & theBlock
 	)
 	{
-		auto iter = theBlocks_.begin();
-		while (iter NOT_EQUAL theBlocks_.end())
+		typedef typename stringMapOfBlocks::const_iterator c_iter;
+		typedef typename stringMapOfBlocks::iterator iter;
+
+		std::vector<c_iter> cits;
+		cits.reserve(theBlocks_.size());
+		for (c_iter it = theBlocks_.begin(); it != theBlocks_.end(); ++it)
 		{
-			if (iter NOT_EQUAL theBlock)
+			if (it NOT_EQUAL theBlock)
 			{
-				CombineBlocks(theBlock, iter);
+				cits.push_back(it);
 			}
 		}
+
+		if (cits.empty())
+			return;
+
+		if (cits.size() > 1)
+		{
+			CombineBlocks(cits, cits.at(0)->first);
+		}
+#ifdef _DEBUG
+		if (theBlocks_.size() NOT_EQUAL 2)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "unexpected condition has been detected!" << endl
+				<< abort(FatalError);
+		}
+#endif // _DEBUG
+		c_iter it = theBlocks_.cbegin();
+		c_iter b0 = theBlocks_.cbegin();
+		++it;
+		c_iter b1 = it;
+
+		auto cond = (theBlock IS_EQUAL b0) ? PrimBlock::First : PrimBlock::Second;
+		CombineBlocks(b0, b1, cond);
 	}
 
 	template<class EntityType>
