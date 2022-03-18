@@ -1,0 +1,82 @@
+setVerbose(1);
+
+loadFile("myBox");
+
+printFaceBlocks();
+
+var manager = getFaces();
+
+var mainBlock = manager.selectBlock("Default Block Surface");
+printEntities(mainBlock);
+
+mainBlock.split([1, 2], "Block1");
+
+printFaceBlocks();
+
+print(" ");
+print(" # Blocks after splitting!");
+print(" ");
+
+print(" ");
+print(" block 1: ");
+print(" ");
+
+printEntities(mainBlock);
+
+print(" ");
+print(" block 2: ");
+print(" ");
+
+var block1 = selectBlock(manager, "Block1");
+
+printEntities(block1);
+
+print(" ");
+print(" # Combining the blocks: ");
+print(" ");
+
+manager.combine(["Block1", "Default Block Surface"], "my block");
+
+printFaceBlocks();
+
+var myBlock = manager.selectBlock("my block");
+printEntities(myBlock);
+
+print(" ");
+print(" # Renaming the block: ");
+print(" ");
+
+myBlock.rename("new block");
+
+printFaceBlocks();
+
+var mainBlock1 = manager.selectBlock("new block");
+mainBlock1.split([3, 5], "Block2");
+
+printFaceBlocks();
+
+print(" ");
+print(" # Blocks after splitting (1)!");
+print(" ");
+
+print(" ");
+print(" block 1: ");
+print(" ");
+
+printEntities(mainBlock1);
+
+print(" ");
+print(" block 2: ");
+print(" ");
+
+var block2 = selectBlock(manager, "Block2");
+
+printEntities(block2);
+
+print(" ");
+print(" # Compacting the blocks: ");
+print(" ");
+
+manager.compact("compacted blocks");
+
+printFaceBlocks();
