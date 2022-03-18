@@ -1,4 +1,4 @@
-#include <Geo2d_SizeFunction_Surface.hxx>
+#include <GeoSizeFun2d_Surface.hxx>
 
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo3d_SizeFunction.hxx>
@@ -7,17 +7,15 @@
 
 #include <Geom_Surface.hxx>
 
-const std::string tnbLib::Geo2d_SizeFunction_Surface::extension = ".gfun2d";
-
 Standard_Real
-tnbLib::Geo2d_SizeFunction_Surface::Value
+tnbLib::GeoSizeFun2d_Surface::Value
 (
 	const Pnt2d & theCoord
 ) const
 {
 	Debug_Null_Pointer(Surface());
-	Debug_Null_Pointer(Size3d());
+	Debug_Null_Pointer(SizeFun3d());
 
 	auto pt = Surface()->Value(theCoord.X(), theCoord.Y());
-	return Size3d()->Value(pt);
+	return SizeFun3d()->Value(pt);
 }

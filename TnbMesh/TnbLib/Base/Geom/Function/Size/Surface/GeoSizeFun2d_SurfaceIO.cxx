@@ -1,11 +1,11 @@
-#include <Geo2d_SizeFunction_Surface.hxx>
+#include <GeoSizeFun2d_Surface.hxx>
 
 #include <OpenCascade_Serialization.hxx>
 #include <Geo3d_SizeFunction.hxx>
 
 #include <Geom_Surface.hxx>
 
-TNB_SAVE_IMPLEMENTATION(tnbLib::Geo2d_SizeFunction_Surface)
+TNB_SAVE_IMPLEMENTATION(tnbLib::GeoSizeFun2d_Surface)
 {
 	ar & boost::serialization::base_object<Geo2d_SizeFunction>(*this);
 
@@ -13,7 +13,7 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::Geo2d_SizeFunction_Surface)
 	ar & theSize3d_;
 }
 
-TNB_LOAD_IMPLEMENTATION(tnbLib::Geo2d_SizeFunction_Surface)
+TNB_LOAD_IMPLEMENTATION(tnbLib::GeoSizeFun2d_Surface)
 {
 	ar & boost::serialization::base_object<Geo2d_SizeFunction>(*this);
 
@@ -21,4 +21,4 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Geo2d_SizeFunction_Surface)
 	ar & theSize3d_;
 }
 
-BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Geo2d_SizeFunction_Surface);
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::GeoSizeFun2d_Surface);
