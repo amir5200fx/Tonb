@@ -13,8 +13,6 @@
 #include <list>
 #include <map>
 
-#include "Pln_Edge.hxx"
-
 namespace tnbLib
 {
 

@@ -9,20 +9,10 @@
 #include <Aft2d_FrontGlobalData.hxx>
 #include <Aft2d_GlobalData.hxx>
 #include <Geo2d_SizeFunction.hxx>
+#include <Aft2d_CoreBaseFwd.hxx>
 
 namespace tnbLib
 {
-
-	typedef Aft_Core_Base
-		<
-		Aft2d_OptNode_Calculator,
-		Aft2d_FrontInfo,
-		Aft2d_FrontGlobalData,
-		Geo2d_SizeFunction, 
-		void
-		>
-		Aft2d_CoreBase;
-
 
 	template<>
 	template<>

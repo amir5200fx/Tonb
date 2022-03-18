@@ -5,6 +5,7 @@
 #include <Aft_MetricPrcsr.hxx>
 #include <Aft2d_Edge.hxx>
 #include <Geo2d_SizeFunction.hxx>
+#include <Geo2d_MetricPrcsr.hxx>
 #include <Aft2d_MetricPrcsrFwd.hxx>
 
 namespace tnbLib

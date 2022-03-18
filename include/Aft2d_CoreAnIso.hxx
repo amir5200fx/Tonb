@@ -6,6 +6,8 @@
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo2d_MetricFunction.hxx>
 #include <Aft2d_OptNodeAnIso_Calculator.hxx>
+#include <Aft2d_CoreBaseAnIso.hxx>
+#include <Aft2d_CoreAnIsoFwd.hxx>
 
 namespace tnbLib
 {

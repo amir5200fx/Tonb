@@ -4,6 +4,7 @@
 
 #include <Geo2d_MetricFunctionFwd.hxx>
 #include <Geo3d_MetricFunctionFwd.hxx>
+#include <GeoMetricFun2d_UniformFwd.hxx>
 
 namespace tnbLib
 {
@@ -18,6 +19,12 @@ namespace tnbLib
 
 	template<> 
 	struct geo_metric_processor_info_type<Geo2d_MetricFunction>
+	{
+		typedef Geo_MetricPrcsrAnIso_Info type;
+	};
+
+	template<>
+	struct geo_metric_processor_info_type<GeoMetricFun2d_Uniform>
 	{
 		typedef Geo_MetricPrcsrAnIso_Info type;
 	};

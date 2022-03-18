@@ -15,6 +15,7 @@ namespace tnbLib
 	template<class SizeFun, class MetricFun = void>
 	class Geo_MetricPrcsr
 		: public Geo_MetricPrcsr_Base<MetricFun>
+		, public std::enable_shared_from_this<Geo_MetricPrcsr<SizeFun, MetricFun>>
 	{
 
 	public:
@@ -118,7 +119,7 @@ namespace tnbLib
 			const Point& theP1
 		) const;
 
-		Standard_Real CalcElementSize
+		virtual Standard_Real CalcElementSize
 		(
 			const Point& theCoord
 		) const;
@@ -181,6 +182,7 @@ namespace tnbLib
 	template<class SizeFun>
 	class Geo_MetricPrcsr<SizeFun, void>
 		: public Geo_MetricPrcsr_Base<void>
+		, public std::enable_shared_from_this<Geo_MetricPrcsr<SizeFun, void>>
 	{
 
 	public:
@@ -270,7 +272,7 @@ namespace tnbLib
 			const Point& theP1
 		) const;
 
-		Standard_Real CalcElementSize
+		virtual Standard_Real CalcElementSize
 		(
 			const Point& theCoord
 		) const;

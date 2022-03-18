@@ -225,7 +225,7 @@ namespace tnbLib
 
 	auto loadNodeCreator()
 	{
-		checkFolder("plane");
+		checkFolder("nodeCreator");
 
 		const auto currentPath = boost::filesystem::current_path();
 

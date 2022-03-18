@@ -33,6 +33,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class Cad_GeomSurface;
 	class Cad_TModel;
 	class Cad_CurveLength_Info;
 	class TModel_Surface;
@@ -55,6 +56,15 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbCad_EXPORT Standard_Boolean IsBounded(const std::shared_ptr<Cad_GeomSurface>&);
+
+		static TnbCad_EXPORT Standard_Boolean IsPlane(const std::shared_ptr<Cad_GeomSurface>&);
+		static TnbCad_EXPORT Standard_Boolean IsCylinder(const std::shared_ptr<Cad_GeomSurface>&);
+		static TnbCad_EXPORT Standard_Boolean IsSphere(const std::shared_ptr<Cad_GeomSurface>&);
+		static TnbCad_EXPORT Standard_Boolean IsSwept(const std::shared_ptr<Cad_GeomSurface>&);
+
+		static TnbCad_EXPORT Standard_Boolean IsUniMetric(const std::shared_ptr<Cad_GeomSurface>&);
 
 		static TnbCad_EXPORT Standard_Boolean 
 			HasTriangulation

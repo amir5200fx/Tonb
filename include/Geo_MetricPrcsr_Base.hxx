@@ -75,7 +75,7 @@ namespace tnbLib
 			return theInfo_;
 		}
 
-		const Standard_Real DimSize() const
+		auto DimSize() const
 		{
 			return theDimSize_;
 		}

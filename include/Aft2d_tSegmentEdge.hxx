@@ -11,11 +11,19 @@ namespace tnbLib
 {
 
 	template<>
-	static std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>
-		Aft2d_tSegmentEdge::GetTopology(const Entity2d_Polygon& theChain, const std::shared_ptr<Aft2d_tPlnCurveSurface>& theCurve);
+	static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>
+		Aft2d_tSegmentEdge::GetTopology
+		(
+			const Entity2d_Polygon& theChain, 
+			const std::shared_ptr<Aft2d_tPlnCurveSurface>& theCurve
+		);
 
 	template<>
-	static void Aft2d_tSegmentEdge::MergeDangles(const std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>& theWire, const Standard_Real theTol);
+	static TnbMesh_EXPORT void Aft2d_tSegmentEdge::MergeDangles
+	(
+		const std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>& theWire,
+		const Standard_Real theTol
+	);
 
 }
 

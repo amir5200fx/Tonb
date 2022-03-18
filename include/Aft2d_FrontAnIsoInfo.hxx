@@ -8,12 +8,6 @@
 #include <Aft2d_ElementAnIso.hxx>
 #include <Aft2d_EdgeAnIso.hxx>
 #include <Aft2d_NodeAnIso.hxx>
-
-namespace tnbLib
-{
-
-	typedef Aft2d_FrontInfoTemplate<Aft_FrontTraits<Aft2d_EdgeAnIso>, Aft2d_FrontAnIsoInfoAdaptor>
-		Aft2d_FrontAnIsoInfo;
-}
+#include <Aft2d_FrontAnIsoInfoFwd.hxx>
 
 #endif // !_Aft2d_FrontAnIsoInfo_Header

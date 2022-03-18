@@ -203,11 +203,11 @@ int main(int argc, char* argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbCadBox";
-			fileName myFileName(address);
-
 			try
 			{
+				auto address = file::GetSystemFile("tnbCadBox");
+				fileName myFileName(address);
+
 				chai.eval_file(myFileName);
 				return 0;
 			}
