@@ -10,8 +10,6 @@
 #include <memory>
 #include <vector>
 
-#include "Aft2d_BoundaryOfPlaneAnIsoFwd.hxx"
-
 namespace tnbLib
 {
 
