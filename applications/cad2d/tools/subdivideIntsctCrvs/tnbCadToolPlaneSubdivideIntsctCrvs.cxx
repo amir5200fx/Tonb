@@ -2,6 +2,8 @@
 #include <Cad2d_CrvsIntsct.hxx>
 #include <Cad2d_BruteForceSearchCrv.hxx>
 #include <Pln_Edge.hxx>
+#include <Pln_Tools.hxx>
+#include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -103,13 +105,16 @@ namespace tnbLib
 		}
 
 		{
+			auto b = Pln_Tools::RetrieveBoundingBox(myCurves);
+			const auto d = b.Diameter();
+
 			auto engine = std::make_shared<Cad2d_BruteForceSearchCrv>();
 			for (auto& x : myCurves)
 			{
 				engine->Insert(std::move(x));
 			}
 
-			auto intscAlg = std::make_shared<Cad2d_CrvsIntsct>(engine, myTol);
+			auto intscAlg = std::make_shared<Cad2d_CrvsIntsct>(engine, myTol*d);
 			intscAlg->Perform();
 			Debug_If_Condition_Message(NOT intscAlg->IsDone(), "the application is not performed!");
 
@@ -121,7 +126,7 @@ namespace tnbLib
 					<< " - the detected number of entities: " << pairs.size() << endl;
 			}
 		
-			auto subAlg = std::make_shared<Cad2d_SubdivideCrvs>(intscAlg->Entities(), myTol);
+			auto subAlg = std::make_shared<Cad2d_SubdivideCrvs>(intscAlg->Entities(), myTol*d);
 			Debug_Null_Pointer(subAlg);
 
 			subAlg->Perform();
