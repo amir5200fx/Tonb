@@ -16,7 +16,6 @@
 #include <Precision.hxx>
 #include <Geom2d_Curve.hxx>
 
-
 #include <Entity2d_Polygon.hxx>
 
 namespace tnbLib

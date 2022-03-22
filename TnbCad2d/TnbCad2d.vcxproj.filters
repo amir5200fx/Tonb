@@ -463,6 +463,15 @@
     <Filter Include="TnbLib\Cad2d\Length\Adaptive\Info">
       <UniqueIdentifier>{a21d721d-5b4a-47c6-81d4-8aa759ac4b53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Merge">
+      <UniqueIdentifier>{6e573afb-5db2-408c-802b-7255de866faa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Merge\Curves">
+      <UniqueIdentifier>{0761e8f4-8168-4104-9c10-5cef3580702e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Merge\Curves\Info">
+      <UniqueIdentifier>{3cf08f4f-e9d5-4fa1-891b-7ed8458e2bb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -903,6 +912,12 @@
     <ClInclude Include="TnbLib\Cad2d\Length\Adaptive\Info\Cad2d_CurveLength_Adaptive_Info.hxx">
       <Filter>TnbLib\Cad2d\Length\Adaptive\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Merge\Curves\Cad2d_MergeCurves.hxx">
+      <Filter>TnbLib\Cad2d\Merge\Curves</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Merge\Curves\Info\Cad2d_MergeCurvesInfo.hxx">
+      <Filter>TnbLib\Cad2d\Merge\Curves\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1312,6 +1327,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Length\Adaptive\Cad2d_CurveLength_Adaptive.cxx">
       <Filter>TnbLib\Cad2d\Length\Adaptive</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Merge\Curves\Cad2d_MergeCurves.cxx">
+      <Filter>TnbLib\Cad2d\Merge\Curves</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Merge\Curves\Info\Cad2d_MergeCurvesInfo.cxx">
+      <Filter>TnbLib\Cad2d\Merge\Curves\Info</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

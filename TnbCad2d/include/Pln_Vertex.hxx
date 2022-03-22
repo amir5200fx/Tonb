@@ -57,6 +57,13 @@ namespace tnbLib
 
 		Pln_Vertex
 		(
+			Pnt2d&& theCoord
+		)
+			: theCoord_(std::move(theCoord))
+		{}
+
+		Pln_Vertex
+		(
 			const Standard_Integer theIndex,
 			const Pnt2d& theCoord
 		)
@@ -67,11 +74,30 @@ namespace tnbLib
 		Pln_Vertex
 		(
 			const Standard_Integer theIndex,
+			Pnt2d&& theCoord
+		)
+			: Pln_Entity(theIndex)
+			, theCoord_(std::move(theCoord))
+		{}
+
+		Pln_Vertex
+		(
+			const Standard_Integer theIndex,
 			const word& theName,
 			const Pnt2d& theCoord
 		)
 			: Pln_Entity(theIndex, theName)
 			, theCoord_(theCoord)
+		{}
+
+		Pln_Vertex
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Pnt2d&& theCoord
+		)
+			: Pln_Entity(theIndex, theName)
+			, theCoord_(std::move(theCoord))
 		{}
 
 
