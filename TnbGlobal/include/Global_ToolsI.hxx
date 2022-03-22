@@ -64,6 +64,33 @@ inline void tnbLib::Global_Tools::Insert
 	}
 }
 
+template<class T>
+inline void tnbLib::Global_Tools::InsertIgnoreDup
+(
+	const Standard_Integer theIndex,
+	std::shared_ptr<T>&& theItem,
+	std::map<Standard_Integer, std::shared_ptr<T>>& theMap
+)
+{
+	auto paired = std::make_pair(theIndex, std::move(theItem));
+	auto insert = theMap.insert(std::move(paired));
+	if (NOT insert.second)
+	{
+		// do nothing [3/22/2022 Amir]
+	}
+}
+
+template<class T>
+inline void tnbLib::Global_Tools::InsertIgnoreDup
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<T>& theItem,
+	std::map<Standard_Integer, std::shared_ptr<T>>& theMap
+)
+{
+	auto item = theItem;
+	InsertIgnoreDup(theIndex, std::move(item), theMap);
+}
 
 namespace tnbLib
 {

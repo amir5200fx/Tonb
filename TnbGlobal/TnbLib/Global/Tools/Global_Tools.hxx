@@ -45,6 +45,22 @@ namespace tnbLib
 			std::map<Standard_Integer, std::shared_ptr<T>>&
 		);
 
+		template<class T>
+		static void InsertIgnoreDup
+		(
+			const Standard_Integer theIndex,
+			std::shared_ptr<T>&& theItem, 
+			std::map<Standard_Integer, std::shared_ptr<T>>&
+		);
+
+		template<class T>
+		static void InsertIgnoreDup
+		(
+			const Standard_Integer theIndex,
+			const std::shared_ptr<T>& theItem,
+			std::map<Standard_Integer, std::shared_ptr<T>>&
+		);
+
 		template<class Type>
 		static size_t
 			FindSpan
