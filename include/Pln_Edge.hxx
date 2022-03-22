@@ -17,12 +17,15 @@ namespace tnbLib
 	class Pln_Curve;
 	class Pln_Wire;
 	class Pln_CmpEdge;
+	class Cad2d_MergeCurves;
 
 	class Pln_Edge
 		: public Pln_Entity
 		, public Pln_EdgeAdaptor
 		, public Pln_EdgeGeom
 	{
+
+		friend class Cad2d_MergeCurves;
 
 		/*Private Data*/
 

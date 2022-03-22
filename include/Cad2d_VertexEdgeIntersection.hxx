@@ -44,6 +44,13 @@ namespace tnbLib
 			, theEdge_(theCurve)
 		{}
 
+		// override functions and operators [3/19/2022 Amir]
+
+		Standard_Boolean IsVertexEdge() const override
+		{
+			return Standard_True;
+		}
+
 		//- public functions and operators
 
 		const auto& Vtx() const
@@ -54,11 +61,6 @@ namespace tnbLib
 		const auto& Edge() const
 		{
 			return theEdge_;
-		}
-
-		Standard_Boolean IsVertexEdge() const override
-		{
-			return Standard_True;
 		}
 
 		void SetVertex(const std::shared_ptr<Pln_Vertex>& theVtx)

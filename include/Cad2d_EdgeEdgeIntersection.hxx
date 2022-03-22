@@ -85,6 +85,13 @@ namespace tnbLib
 		{}
 
 
+		// override functions and operators [3/19/2022 Amir]
+
+		Standard_Boolean IsEdgeEdge() const override
+		{
+			return Standard_True;
+		}
+
 		//- public functions and operators
 
 		const auto& Edge0() const
@@ -95,12 +102,7 @@ namespace tnbLib
 		const auto& Edge1() const
 		{
 			return theEdge1_;
-		}
-
-		Standard_Boolean IsEdgeEdge() const override
-		{
-			return Standard_True;
-		}
+		}	
 
 		TnbCad2d_EXPORT std::shared_ptr<Cad2d_EdgeEdgeIntersection> 
 			operator()
