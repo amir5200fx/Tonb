@@ -328,7 +328,7 @@ void tnbLib::Cad2d_MergeCurves::Renumber
 	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 )
 {
-	{// renumber the vertices [3/22/2022 Roya]
+	{// renumber the vertices [3/22/2022 Amir]
 		auto vertices = RetrieveVertices(theEdges);
 		Standard_Integer k = 0;
 		for (const auto& x : vertices)
