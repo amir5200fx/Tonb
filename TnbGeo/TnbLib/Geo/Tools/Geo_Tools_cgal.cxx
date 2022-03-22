@@ -1,7 +1,9 @@
 #include <Geo_Tools.hxx>
 
 #include <Entity2d_Triangle.hxx>
-
+#ifdef Handle
+#undef Handle
+#endif // Handle
 #include <CGAL\Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL\Segment_2.h>
 #include <CGAL\Segment_3.h>

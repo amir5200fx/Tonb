@@ -11,6 +11,9 @@
 #include <Entity3d_Triangulation.hxx>
 #include <Global_Tools.hxx>
 
+#ifdef Handle
+#undef Handle
+#endif // Handle
 #include <gp_Pln.hxx>
 #include <gp_Lin2d.hxx>
 

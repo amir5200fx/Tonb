@@ -3,6 +3,10 @@
 #include <Entity2d_Triangulation.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#ifdef Handle
+#undef Handle
+#endif // Handle
+
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Triangulation_2.h>

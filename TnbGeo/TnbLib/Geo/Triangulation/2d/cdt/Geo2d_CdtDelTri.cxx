@@ -3,7 +3,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <Entity_StaticData.hxx>
-
+#ifdef Handle
+#undef Handle
+#endif // Handle
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
 #include <CGAL/Triangulation_vertex_base_with_info_2.h>
