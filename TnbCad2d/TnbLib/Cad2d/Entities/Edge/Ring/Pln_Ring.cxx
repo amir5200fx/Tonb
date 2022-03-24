@@ -23,7 +23,7 @@ void tnbLib::Pln_Ring::RetrieveEntitiesTo
 {
 	if (t IS_EQUAL Pln_EntityType::VERTEX)
 	{
-		theEntities.push_back(Vtx0());
+		theEntities.push_back(Vtx());
 	}
 	if (t IS_EQUAL Pln_EntityType::EDGE)
 	{

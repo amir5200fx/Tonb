@@ -451,7 +451,7 @@ Standard_Boolean
 tnbLib::Pln_Tools::IsOnEdge
 (
 	const std::shared_ptr<Pln_Vertex>& theVtx,
-	const std::shared_ptr<Pln_Edge>& theEdge
+	const std::shared_ptr<Pln_Segment>& theEdge
 )
 {
 	if (theEdge->Vtx0() IS_EQUAL theVtx)
@@ -468,8 +468,8 @@ tnbLib::Pln_Tools::IsOnEdge
 std::shared_ptr<tnbLib::Pln_Vertex> 
 tnbLib::Pln_Tools::CommonVertex
 (
-	const std::shared_ptr<Pln_Edge>& theEdge0,
-	const std::shared_ptr<Pln_Edge>& theEdge1
+	const std::shared_ptr<Pln_Segment>& theEdge0,
+	const std::shared_ptr<Pln_Segment>& theEdge1
 )
 {
 	Debug_Null_Pointer(theEdge0);
@@ -774,8 +774,8 @@ tnbLib::Pln_Tools::RetrieveVertices
 	for (const auto& x : theEdges)
 	{
 		Debug_Null_Pointer(x);
-		compact.InsertIgnoreDup(x->Vtx0());
-		compact.InsertIgnoreDup(x->Vtx1());
+		compact.InsertIgnoreDup(x->Vertex(Pln_Edge::edgePoint::first));
+		compact.InsertIgnoreDup(x->Vertex(Pln_Edge::edgePoint::last));
 	}
 
 	if (compact.Size() < theEdges.size())
@@ -826,8 +826,8 @@ tnbLib::Pln_Tools::Intersection
 std::shared_ptr<tnbLib::Pln_Vertex> 
 tnbLib::Pln_Tools::Intersection
 (
-	const std::shared_ptr<Pln_Edge>& theEdge0,
-	const std::shared_ptr<Pln_Edge>& theEdge1
+	const std::shared_ptr<Pln_Segment>& theEdge0,
+	const std::shared_ptr<Pln_Segment>& theEdge1
 )
 {
 	const auto& v0 = theEdge0->Vtx0();
@@ -1727,21 +1727,21 @@ namespace tnbLib
 
 			Debug_Null_Pointer(edge);
 
-			if (edge->Vtx0() NOT_EQUAL theVtx)
+			if (edge->Vertex(Pln_Edge::edgePoint::first) NOT_EQUAL theVtx)
 			{
-				auto pair = std::make_pair(edge->Vtx0(), edge);
+				auto pair = std::make_pair(edge->Vertex(Pln_Edge::edgePoint::first), edge);
 				return std::move(pair);
 			}
-			else if (edge->Vtx1() NOT_EQUAL theVtx)
+			else if (edge->Vertex(Pln_Edge::edgePoint::last) NOT_EQUAL theVtx)
 			{
-				auto pair = std::make_pair(edge->Vtx1(), edge);
+				auto pair = std::make_pair(edge->Vertex(Pln_Edge::edgePoint::last), edge);
 				return std::move(pair);
 			}
 
 			FatalErrorIn(FunctionSIG)
 				<< "Invalid Data" << endl
 				<< abort(FatalError);
-			auto pair = std::make_pair(edge->Vtx0(), edge);
+			auto pair = std::make_pair(edge->Vertex(Pln_Edge::edgePoint::first), edge);
 			return pair;
 		}
 
@@ -1869,8 +1869,8 @@ tnbLib::Pln_Tools::RetrieveWires
 	for (const auto& x : edges)
 	{
 		Debug_Null_Pointer(x);
-		vertexMap.InsertIgnoreDup(x->Vtx0());
-		vertexMap.InsertIgnoreDup(x->Vtx1());
+		vertexMap.InsertIgnoreDup(x->Vertex(Pln_Edge::edgePoint::first));
+		vertexMap.InsertIgnoreDup(x->Vertex(Pln_Edge::edgePoint::last));
 	}
 
 	std::vector<std::shared_ptr<tnbLib::Pln_Wire>> wires;
@@ -2037,7 +2037,7 @@ void tnbLib::Pln_Tools::SameSense
 			edge1->Reverse(Standard_True);
 		}
 
-		if (edge0->Vtx1() NOT_EQUAL edge1->Vtx0())
+		if (edge0->Vertex(Pln_Edge::edgePoint::last) NOT_EQUAL edge1->Vertex(Pln_Edge::edgePoint::first))
 		{
 			FatalErrorIn("void tnbLib::Pln_Tools::SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge)")
 				<< "Invalid CmpEdge: the two edges are not consecutive" << endl
@@ -2263,8 +2263,8 @@ tnbLib::Pln_Tools::NextNode
 	Debug_Null_Pointer(theNode);
 	Debug_Null_Pointer(theEdge);
 
-	const auto& v0 = theEdge->Vtx0();
-	const auto& v1 = theEdge->Vtx1();
+	const auto& v0 = theEdge->Vertex(Pln_Edge::edgePoint::first);
+	const auto& v1 = theEdge->Vertex(Pln_Edge::edgePoint::last);
 
 	if (v0 IS_EQUAL theNode)
 	{
@@ -2352,7 +2352,7 @@ tnbLib::Pln_Tools::ForwardEdge
 		auto edge = x.lock();
 		Debug_Null_Pointer(edge);
 
-		if (edge->Vtx0() IS_EQUAL theVtx)
+		if (edge->FirstVtx() IS_EQUAL theVtx)
 			return std::move(edge);
 	}
 	return nullptr;
@@ -2372,7 +2372,7 @@ tnbLib::Pln_Tools::BackwardEdge
 		auto edge = x.lock();
 		Debug_Null_Pointer(edge);
 
-		if (edge->Vtx1() IS_EQUAL theVtx)
+		if (edge->LastVtx() IS_EQUAL theVtx)
 			return std::move(edge);
 	}
 	return nullptr;
@@ -2732,8 +2732,8 @@ void tnbLib::Pln_Tools::CheckWire
 		// Check if each two-consecutive edges have an intersection, [2/2/2022 Amir]
 		for (size_t k = 1; k < theEdges.size(); k++)
 		{
-			const auto& e0 = theEdges[k - 1];
-			const auto& e1 = theEdges[k];
+			const auto e0 = std::dynamic_pointer_cast<Pln_Segment>(theEdges[k - 1]);
+			const auto e1 = std::dynamic_pointer_cast<Pln_Segment>(theEdges[k]);
 
 			Debug_Null_Pointer(e0);
 			Debug_Null_Pointer(e1);
@@ -2762,15 +2762,30 @@ void tnbLib::Pln_Tools::Connect
 )
 {
 	Debug_Null_Pointer(theEdge);
+	if (auto ring = std::dynamic_pointer_cast<Pln_Ring>(theEdge))
+	{
+		const auto& v0 = ring->Vtx();
+		Debug_Null_Pointer(v0);
 
-	const auto& v0 = theEdge->Vtx0();
-	Debug_Null_Pointer(v0);
+		v0->InsertToEdges(theEdge->Index(), theEdge);
+	}
+	else if (auto seg = std::dynamic_pointer_cast<Pln_Segment>(theEdge))
+	{
+		const auto& v0 = seg->Vtx0();
+		Debug_Null_Pointer(v0);
 
-	const auto& v1 = theEdge->Vtx1();
-	Debug_Null_Pointer(v1);
+		const auto& v1 = seg->Vtx1();
+		Debug_Null_Pointer(v1);
 
-	v0->InsertToEdges(theEdge->Index(), theEdge);
-	v1->InsertToEdges(theEdge->Index(), theEdge);
+		v0->InsertToEdges(theEdge->Index(), theEdge);
+		v1->InsertToEdges(theEdge->Index(), theEdge);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unspecified type of edge has been detected!" << endl
+			<< abort(FatalError);
+	}
 }
 
 void tnbLib::Pln_Tools::Connect
@@ -2780,15 +2795,30 @@ void tnbLib::Pln_Tools::Connect
 )
 {
 	Debug_Null_Pointer(theEdge);
+	if (auto ring = std::dynamic_pointer_cast<Pln_Ring>(theEdge))
+	{
+		const auto& v0 = ring->Vtx();
+		Debug_Null_Pointer(v0);
 
-	const auto& v0 = theEdge->Vtx0();
-	Debug_Null_Pointer(v0);
+		v0->InsertToEdges(theIndex, theEdge);
+	}
+	else if (auto seg = std::dynamic_pointer_cast<Pln_Segment>(theEdge))
+	{
+		const auto& v0 = seg->Vtx0();
+		Debug_Null_Pointer(v0);
 
-	const auto& v1 = theEdge->Vtx1();
-	Debug_Null_Pointer(v1);
+		const auto& v1 = seg->Vtx1();
+		Debug_Null_Pointer(v1);
 
-	v0->InsertToEdges(theIndex, theEdge);
-	v1->InsertToEdges(theIndex, theEdge);
+		v0->InsertToEdges(theIndex, theEdge);
+		v1->InsertToEdges(theIndex, theEdge);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unspecified type of edge has been detected!" << endl
+			<< abort(FatalError);
+	}
 }
 
 void tnbLib::Pln_Tools::Connect

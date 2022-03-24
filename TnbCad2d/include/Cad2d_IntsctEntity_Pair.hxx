@@ -4,6 +4,8 @@
 
 #include <Global_Indexed.hxx>
 #include <Global_Named.hxx>
+#include <Global_Serialization.hxx>
+#include <Cad2d_Module.hxx>
 
 #include <memory>
 
@@ -22,6 +24,17 @@ namespace tnbLib
 
 		std::shared_ptr<Cad2d_IntsctEntity> theEntity0_;
 		std::shared_ptr<Cad2d_IntsctEntity> theEntity1_;
+
+
+		// private functions and operators [3/22/2022 Amir]
+
+		TNB_SERIALIZATION(TnbCad2d_EXPORT);
+
+
+		// default constructor [3/22/2022 Amir]
+
+		Cad2d_IntsctEntity_Pair()
+		{}
 
 	public:
 

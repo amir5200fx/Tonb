@@ -4,6 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 #include <Global_AccessMethod.hxx>
+#include <Global_Serialization.hxx>
 
 #include <map>
 #include <memory>
@@ -20,6 +21,17 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::weak_ptr<Cad2d_IntsctEntity> thePair_;
+
+
+		// private functions and operators [3/22/2022 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			// empty body [3/22/2022 Amir]
+		}
 
 	protected:
 

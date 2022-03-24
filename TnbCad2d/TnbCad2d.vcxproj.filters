@@ -472,6 +472,12 @@
     <Filter Include="TnbLib\Cad2d\Merge\Curves\Info">
       <UniqueIdentifier>{3cf08f4f-e9d5-4fa1-891b-7ed8458e2bb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Edge\Segment">
+      <UniqueIdentifier>{f7570de6-2295-47f9-b797-c1d894388fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\Edge\Ring">
+      <UniqueIdentifier>{1f10ceb5-e2b9-479b-8fab-1fb02192f1a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -615,21 +621,6 @@
     <ClInclude Include="TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal\Cad2d_IntsctEntity_OrthSegment.hxx">
       <Filter>TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Entity\Cad2d_SubEntity.hxx">
-      <Filter>TnbLib\Cad2d\Subdivide\Entities\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Vertex\Cad2d_SubEntity_Vertex.hxx">
-      <Filter>TnbLib\Cad2d\Subdivide\Entities\Vertex</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Edge\Cad2d_SubEntity_Edge.hxx">
-      <Filter>TnbLib\Cad2d\Subdivide\Entities\Edge</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Edge\Tangential\Cad2d_SubEntity_TangEdge.hxx">
-      <Filter>TnbLib\Cad2d\Subdivide\Entities\Edge\Tangential</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Subdivide\Entities\Vertex\Adaptor\Cad2d_SubEntity_VertexAdaptor.hxx">
-      <Filter>TnbLib\Cad2d\Subdivide\Entities\Vertex\Adaptor</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Cad2d_Subdivide.hxx">
       <Filter>TnbLib\Cad2d\Subdivide</Filter>
     </ClInclude>
@@ -650,9 +641,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Boolean\Cad2d_Boolean.hxx">
       <Filter>TnbLib\Cad2d\Boolean</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.hxx">
-      <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.hxx">
       <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
@@ -795,9 +783,6 @@
     <ClInclude Include="TnbLib\Cad2d\Entities\Entity\Pln_Entity.hxx">
       <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Cad2d\Entities\Ring\Pln_Ring.hxx">
-      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Vertex\Pln_Vertex.hxx">
       <Filter>TnbLib\Cad2d\Entities\Vertex</Filter>
     </ClInclude>
@@ -918,6 +903,12 @@
     <ClInclude Include="TnbLib\Cad2d\Merge\Curves\Info\Cad2d_MergeCurvesInfo.hxx">
       <Filter>TnbLib\Cad2d\Merge\Curves\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Segment\Pln_Segment.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Ring\Pln_Ring.hxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Ring</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad2d\Tools\Pln_CurveTools.cxx">
@@ -1010,9 +1001,6 @@
     <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal\Cad2d_IntsctEntity_OrthSegment.cxx">
       <Filter>TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangEdge.cxx">
-      <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Subdivide\Tangential\Pln_TangCurve.cxx">
       <Filter>TnbLib\Cad2d\Subdivide\Tangential</Filter>
     </ClCompile>
@@ -1072,9 +1060,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Modeler\Tools\Cad2d_Modeler_Tools.cxx">
       <Filter>TnbLib\Cad2d\Modeler\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Ring\Pln_Ring.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Plane\Manager\Cad2d_Plane_Manager.cxx">
       <Filter>TnbLib\Cad2d\Plane\Manager</Filter>
@@ -1183,9 +1168,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Entities\Entity\Pln_EntityPrecisionIO.cxx">
       <Filter>TnbLib\Cad2d\Entities\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad2d\Entities\Ring\Pln_RingIO.cxx">
-      <Filter>TnbLib\Cad2d\Entities\Ring</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Entities\Vertex\Adaptor\Pln_VertexAdaptorIO.cxx">
       <Filter>TnbLib\Cad2d\Entities\Vertex\Adaptor</Filter>
@@ -1333,6 +1315,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\Merge\Curves\Info\Cad2d_MergeCurvesInfo.cxx">
       <Filter>TnbLib\Cad2d\Merge\Curves\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Pair\Cad2d_IntsctEntity_PairIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Entities\Pair</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Point\Cad2d_IntsctEntity_PointIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Entities\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Segment\Cad2d_IntsctEntity_SegmentIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Entities\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal\Cad2d_IntsctEntity_OrthSegmentIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Entities\Segment\Orthogonal</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Entities\Segment\Tangential\Cad2d_IntsctEntity_TangSegmentIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Entities\Segment\Tangential</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Cad2d_EntityEntityIntersectionIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Edge\Cad2d_EdgeEdgeIntersectionIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\Vertex\Cad2d_VertexVertexIntersectionIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Intersection\VertexEdge\Cad2d_VertexEdgeIntersectionIO.cxx">
+      <Filter>TnbLib\Cad2d\Intersection\VertexEdge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Segment\Pln_Segment.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Segment\Pln_SegmentIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Ring\Pln_Ring.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Ring\Pln_RingIO.cxx">
+      <Filter>TnbLib\Cad2d\Entities\Edge\Ring</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

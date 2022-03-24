@@ -21,7 +21,7 @@ namespace tnbLib
 	class Cad2d_EntityEntityIntersection
 		: public Global_Indexed
 		, public Global_Named
-		, public Global_Done
+		/*, public Global_Done*/
 		, public std::enable_shared_from_this<Cad2d_EntityEntityIntersection>
 	{
 
@@ -31,6 +31,11 @@ namespace tnbLib
 			theEntities_;
 
 		Standard_Real theTolerance_;
+
+
+		// private functions and operators [3/22/2022 Amir]
+
+		TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
 	protected:
 
@@ -53,7 +58,7 @@ namespace tnbLib
 	public:
 
 		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
-
+		static TnbCad2d_EXPORT const std::string extension;
 
 		//- public functions and operators
 
@@ -116,5 +121,7 @@ namespace tnbLib
 		
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Cad2d_EntityEntityIntersection);
 
 #endif // !_Cad2d_EntityEntityIntersection_Header

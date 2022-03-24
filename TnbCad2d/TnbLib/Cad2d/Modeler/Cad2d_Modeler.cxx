@@ -118,7 +118,7 @@ void tnbLib::Cad2d_Modeler::RemoveRing
 	}
 #endif // DEBUG
 
-	const auto& v = theRing->Vtx0();
+	const auto& v = theRing->Vtx();
 
 	v->RemoveFromEdges(theRing->Index());
 
@@ -217,8 +217,8 @@ void tnbLib::Cad2d_Modeler::RemoveEdge
 	}
 #endif // DEBUG
 
-	const auto& v0 = theEdge->Vtx0();
-	const auto& v1 = theEdge->Vtx1();
+	const auto v0 = theEdge->FirstVtx();
+	const auto v1 = theEdge->LastVtx();
 
 	v0->RemoveFromEdges(theEdge->Index());
 	v1->RemoveFromEdges(theEdge->Index());
@@ -517,7 +517,7 @@ tnbLib::Cad2d_Modeler::AddVertex
 Standard_Integer
 tnbLib::Cad2d_Modeler::AddEdge
 (
-	const std::shared_ptr<Pln_Edge>& theEdge
+	const std::shared_ptr<Pln_Segment>& theEdge
 )
 {
 	if (verbose)
@@ -594,9 +594,9 @@ tnbLib::Cad2d_Modeler::AddRing
 	theRing->Index() = EdgeCounter().RetrieveIndex();
 	theRing->Name() = "ring nb. " + theRing->Index();
 
-	const auto crn = AddVertex(theRing->Vtx0(), theRing->Index());
+	const auto crn = AddVertex(theRing->Vtx(), theRing->Index());
 
-	const auto& v = theRing->Vtx0();
+	const auto& v = theRing->Vtx();
 
 	v->InsertToEdges(theRing->Index(), theRing);
 
@@ -657,145 +657,145 @@ tnbLib::Cad2d_Modeler::AddSegment
 	return theSegmnt->Index();
 }
 
-std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
-tnbLib::Cad2d_Modeler::MakeChain
-(
-	selctList & theList
-)
-{
-	std::map<Standard_Integer, std::shared_ptr<Pln_Edge>> edgeList;
-	for (const auto& x : theList.Items())
-	{
-		const auto edge = x.second.lock();
-		if (NOT edge) continue;
-
-		auto paired = std::make_pair(x.first, std::move(edge));
-		edgeList.insert(std::move(paired));
-	}
-
-	std::map<Standard_Integer, std::shared_ptr<corner>> vertexToCornerMap;
-	for (const auto& x : edgeList)
-	{
-		const auto& edge = x.second;
-
-		Debug_Null_Pointer(edge->Vtx0());
-		Debug_Null_Pointer(edge->Vtx1());
-
-		const auto& v0 = edge->Vtx0();
-		const auto& v1 = edge->Vtx1();
-
-		const auto& corner0 = FindCorner(v0);
-		const auto& corner1 = FindCorner(v1);
-
-		if (IsNull(corner0))
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-				<< "unable to detect the corner for v0" << endl
-				<< abort(FatalError);
-		}
-
-		if (IsNull(corner1))
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-				<< "unable to detect the corner for v1" << endl
-				<< abort(FatalError);
-		}
-
-		auto insert0 = vertexToCornerMap.insert(std::make_pair(v0->Index(), corner0));
-		if (NOT insert0.second)
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-				<< "unable to import the corner to the tree" << endl
-				<< abort(FatalError);
-		}
-
-		auto insert1 = vertexToCornerMap.insert(std::make_pair(v1->Index(), corner1));
-		if (NOT insert1.second)
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-				<< "unable to import the corner to the tree" << endl
-				<< abort(FatalError);
-		}
-	}
-
-	auto& edges = edgeList;
-	auto iter = edges.begin();
-
-	auto item = iter->second;
-	edges.erase(iter);
-
-	std::vector<std::shared_ptr<Pln_Edge>> chain;
-	chain.reserve(theList.NbItems());
-
-	chain.push_back(item);
-	while (edges.size())
-	{
-		const auto& vtx = item->Vtx1();
-		
-		auto citer = vertexToCornerMap.find(vtx->Index());
-		if (citer IS_EQUAL vertexToCornerMap.end())
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-				<< "unable to find corner" << endl
-				<< abort(FatalError);
-		}
-
-		const auto& c = citer->second;
-		Debug_Null_Pointer(c);
-
-		std::shared_ptr<Pln_Edge> next_edge;
-
-		Standard_Integer k = 0;
-		const auto& cvertices = c->Vertices();
-		for (const auto& x : cvertices)
-		{
-			const auto& cvtx = x.second;
-			Debug_Null_Pointer(cvtx);
-
-			const auto& cedges = cvtx->Edges();
-			if (cedges.size() NOT_EQUAL 1)
-			{
-				FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-					<< "contradictory data" << endl
-					<< abort(FatalError);
-			}
-
-			auto next = cedges.begin()->second.lock();
-			Debug_Null_Pointer(next);
-
-			auto found = edges.find(next->Index());
-			if (found IS_EQUAL edges.end())
-				continue;
-
-			k++;
-			next_edge = next;
-		}
-
-		if (k NOT_EQUAL 1)
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-				<< "the chain is not closed or is not defined any valid type of non-manifold object!" << endl
-				<< abort(FatalError);
-		}
-
-		Debug_Null_Pointer(next_edge);
-
-		auto iter = edges.find(next_edge->Index());
-		if (iter IS_EQUAL edges.end())
-		{
-			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
-				<< "contradictory data" << endl
-				<< abort(FatalError);
-		}
-
-		edges.erase(iter);
-
-		item = std::move(next_edge);
-
-		chain.push_back(item);
-	}
-	return std::move(chain);
-}
+//std::vector<std::shared_ptr<tnbLib::Pln_Edge>> 
+//tnbLib::Cad2d_Modeler::MakeChain
+//(
+//	selctList & theList
+//)
+//{
+//	std::map<Standard_Integer, std::shared_ptr<Pln_Edge>> edgeList;
+//	for (const auto& x : theList.Items())
+//	{
+//		const auto edge = x.second.lock();
+//		if (NOT edge) continue;
+//
+//		auto paired = std::make_pair(x.first, std::move(edge));
+//		edgeList.insert(std::move(paired));
+//	}
+//
+//	std::map<Standard_Integer, std::shared_ptr<corner>> vertexToCornerMap;
+//	for (const auto& x : edgeList)
+//	{
+//		const auto& edge = x.second;
+//
+//		Debug_Null_Pointer(edge->Vtx0());
+//		Debug_Null_Pointer(edge->Vtx1());
+//
+//		const auto& v0 = edge->Vtx0();
+//		const auto& v1 = edge->Vtx1();
+//
+//		const auto& corner0 = FindCorner(v0);
+//		const auto& corner1 = FindCorner(v1);
+//
+//		if (IsNull(corner0))
+//		{
+//			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//				<< "unable to detect the corner for v0" << endl
+//				<< abort(FatalError);
+//		}
+//
+//		if (IsNull(corner1))
+//		{
+//			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//				<< "unable to detect the corner for v1" << endl
+//				<< abort(FatalError);
+//		}
+//
+//		auto insert0 = vertexToCornerMap.insert(std::make_pair(v0->Index(), corner0));
+//		if (NOT insert0.second)
+//		{
+//			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//				<< "unable to import the corner to the tree" << endl
+//				<< abort(FatalError);
+//		}
+//
+//		auto insert1 = vertexToCornerMap.insert(std::make_pair(v1->Index(), corner1));
+//		if (NOT insert1.second)
+//		{
+//			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//				<< "unable to import the corner to the tree" << endl
+//				<< abort(FatalError);
+//		}
+//	}
+//
+//	auto& edges = edgeList;
+//	auto iter = edges.begin();
+//
+//	auto item = iter->second;
+//	edges.erase(iter);
+//
+//	std::vector<std::shared_ptr<Pln_Edge>> chain;
+//	chain.reserve(theList.NbItems());
+//
+//	chain.push_back(item);
+//	while (edges.size())
+//	{
+//		const auto& vtx = item->Vtx1();
+//		
+//		auto citer = vertexToCornerMap.find(vtx->Index());
+//		if (citer IS_EQUAL vertexToCornerMap.end())
+//		{
+//			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//				<< "unable to find corner" << endl
+//				<< abort(FatalError);
+//		}
+//
+//		const auto& c = citer->second;
+//		Debug_Null_Pointer(c);
+//
+//		std::shared_ptr<Pln_Edge> next_edge;
+//
+//		Standard_Integer k = 0;
+//		const auto& cvertices = c->Vertices();
+//		for (const auto& x : cvertices)
+//		{
+//			const auto& cvtx = x.second;
+//			Debug_Null_Pointer(cvtx);
+//
+//			const auto& cedges = cvtx->Edges();
+//			if (cedges.size() NOT_EQUAL 1)
+//			{
+//				FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//					<< "contradictory data" << endl
+//					<< abort(FatalError);
+//			}
+//
+//			auto next = cedges.begin()->second.lock();
+//			Debug_Null_Pointer(next);
+//
+//			auto found = edges.find(next->Index());
+//			if (found IS_EQUAL edges.end())
+//				continue;
+//
+//			k++;
+//			next_edge = next;
+//		}
+//
+//		if (k NOT_EQUAL 1)
+//		{
+//			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//				<< "the chain is not closed or is not defined any valid type of non-manifold object!" << endl
+//				<< abort(FatalError);
+//		}
+//
+//		Debug_Null_Pointer(next_edge);
+//
+//		auto iter = edges.find(next_edge->Index());
+//		if (iter IS_EQUAL edges.end())
+//		{
+//			FatalErrorIn("std::vector<std::shared_ptr<Pln_Edge>> MakeChain(const selctList& theList)")
+//				<< "contradictory data" << endl
+//				<< abort(FatalError);
+//		}
+//
+//		edges.erase(iter);
+//
+//		item = std::move(next_edge);
+//
+//		chain.push_back(item);
+//	}
+//	return std::move(chain);
+//}
 
 void tnbLib::Cad2d_Modeler::CheckCurveType
 (
@@ -813,37 +813,20 @@ tnbLib::Cad2d_Modeler::Import
 )
 {
 	CheckCurveType(theEdge, FunctionSIG);
-	if (theEdge->IsRing())
+	if (auto ring = std::dynamic_pointer_cast<Pln_Ring>(theEdge))
 	{
-		auto ring = std::dynamic_pointer_cast<Pln_Ring>(theEdge);
-		Debug_Null_Pointer(ring);
-
 		return AddRing(ring);
+	}
+	else if (auto seg = std::dynamic_pointer_cast<Pln_Segment>(theEdge))
+	{
+		return AddEdge(seg);
 	}
 	else
 	{
-		return AddEdge(theEdge);
-	}
-}
-
-Standard_Integer 
-tnbLib::Cad2d_Modeler::Import
-(
-	std::shared_ptr<Pln_Edge>&& theEdge
-)
-{
-	CheckCurveType(theEdge, FunctionSIG);
-	auto edge = std::move(theEdge);
-	if (edge->IsRing())
-	{
-		auto ring = std::dynamic_pointer_cast<Pln_Ring>(edge);
-		Debug_Null_Pointer(ring);
-
-		return AddRing(ring);
-	}
-	else
-	{
-		return AddEdge(edge);
+		FatalErrorIn(FunctionSIG)
+			<< "unspecified type of edge has been detected!" << endl
+			<< abort(FatalError);
+		return 0;
 	}
 }
 
@@ -855,17 +838,6 @@ void tnbLib::Cad2d_Modeler::Import
 	for (const auto& x : theEdegs)
 	{
 		Import(x);
-	}
-}
-
-void tnbLib::Cad2d_Modeler::Import
-(
-	std::vector<std::shared_ptr<Pln_Edge>>&& theEdegs
-)
-{
-	for (const auto& x : theEdegs)
-	{
-		Import(std::move(x));
 	}
 }
 

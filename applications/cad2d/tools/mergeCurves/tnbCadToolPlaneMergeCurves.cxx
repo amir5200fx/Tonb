@@ -1,4 +1,6 @@
 #include <Cad2d_CurveLength_UniDiscret.hxx>
+#include <Cad2d_MergeCurves.hxx>
+#include <Cad2d_MergeCurvesInfo.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Tools.hxx>
 #include <Entity2d_Box.hxx>
@@ -112,11 +114,15 @@ namespace tnbLib
 		const auto tol = myTol * b.Diameter();
 
 		auto curves = removeDegenerateCurves(myCurves, tol);
-		auto merged = Pln_Tools::RetrieveMergedEdges(curves, tol, 10.0*tol);
+
+		auto algInfo = std::make_shared<Cad2d_MergeCurvesInfo>(tol, 10.0 * tol);
+		auto mergeAlg = std::make_shared<Cad2d_MergeCurves>(curves, algInfo);
+		mergeAlg->Perform();
+		//auto merged = Pln_Tools::RetrieveMergedEdges(curves, tol, 10.0*tol);
 
 		exeTag = true;
 
-		myMergedCurves = std::move(merged);
+		myMergedCurves = std::move(curves);
 
 		if (verbose)
 		{

@@ -64,6 +64,7 @@ void tnbLib::Pln_Wire::CheckWire
 {
 	const auto& edges = theEdges;
 
+	// if the size is 1 then the edge must be a ring [3/23/2022 Amir]
 	if (edges.size() IS_EQUAL 1)
 	{
 		if (NOT edges[0]->IsRing())
@@ -75,10 +76,12 @@ void tnbLib::Pln_Wire::CheckWire
 		return;
 	}
 
-	forThose(Index, 1, edges.size() - 1)
+	auto segments = Pln_Tools::RetrieveSegments(edges);
+	forThose(Index, 1, segments.size() - 1)
 	{
-		const auto& edge0 = edges[Index - 1];
-		const auto& edge1 = edges[Index];
+		
+		const auto& edge0 = segments[Index - 1];
+		const auto& edge1 = segments[Index];
 
 		if (edge0->Vtx1() NOT_EQUAL edge1->Vtx0())
 		{
@@ -88,8 +91,8 @@ void tnbLib::Pln_Wire::CheckWire
 		}
 	}
 
-	const auto& last = edges[edges.size() - 1];
-	const auto& first = edges[0];
+	const auto& last = segments[edges.size() - 1];
+	const auto& first = segments[0];
 
 	if (last->Vtx1() NOT_EQUAL first->Vtx0())
 	{
@@ -488,7 +491,7 @@ void tnbLib::Pln_Wire::RetrieveVerticesTo
 	for (const auto& x : Edges())
 	{
 		Debug_Null_Pointer(x);
-		theVertices.push_back(x->Vtx0());
+		theVertices.push_back(x->Vertex(Pln_Edge::edgePoint::first));
 	}
 }
 
@@ -507,7 +510,7 @@ void tnbLib::Pln_Wire::RetrieveVerticesTo
 	for (const auto& x : Edges())
 	{
 		Debug_Null_Pointer(x);
-		theVertices.push_back(x->Vtx0());
+		theVertices.push_back(x->Vertex(Pln_Edge::edgePoint::first));
 	}
 }
 

@@ -76,7 +76,7 @@ tnbLib::Pln_CmpEdge::IsValidForWire
 	const auto& edges = Edges();
 	if (edges.size() IS_EQUAL 1)
 	{
-		if (edges[0]->Vtx0() NOT_EQUAL edges[0]->Vtx1())
+		if (NOT edges[0]->IsRing())
 		{
 			return Standard_False;
 		}
@@ -84,22 +84,22 @@ tnbLib::Pln_CmpEdge::IsValidForWire
 
 	auto iter = edges.begin();
 
-	auto vtx0 = (*iter)->Vtx1();
+	auto vtx0 = (*iter)->Vertex(Pln_Edge::edgePoint::last);
 	iter++;
 
 	while (iter NOT_EQUAL edges.end())
 	{
-		auto vtx1 = (*iter)->Vtx0();
+		auto vtx1 = (*iter)->Vertex(Pln_Edge::edgePoint::first);
 
 		if (vtx0 NOT_EQUAL vtx1)
 			return Standard_False;
 
-		vtx0 = (*iter)->Vtx1();
+		vtx0 = (*iter)->Vertex(Pln_Edge::edgePoint::last);
 
 		iter++;
 	}
 
-	if (vtx0 NOT_EQUAL(*edges.begin())->Vtx0())
+	if (vtx0 NOT_EQUAL(*edges.begin())->Vertex(Pln_Edge::edgePoint::first))
 		return Standard_False;
 
 	return Standard_True;
@@ -130,8 +130,8 @@ tnbLib::Pln_CmpEdge::Copy() const
 	for (const auto& x : Edges())
 	{
 		Debug_Null_Pointer(x);
-		const auto& v0 = vtxMap[x->Vtx0()->Index()];
-		const auto& v1 = vtxMap[x->Vtx1()->Index()];
+		const auto& v0 = vtxMap[x->FirstVtx()->Index()];
+		const auto& v1 = vtxMap[x->LastVtx()->Index()];
 
 		if (v0 IS_EQUAL v1)
 		{

@@ -21,6 +21,19 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// private functions and operators [3/22/2022 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar& boost::serialization::base_object<Global_Indexed>(*this);
+			ar& boost::serialization::base_object<Global_Named>(*this);
+			ar& boost::serialization::base_object<Cad2d_IntsctEntity_Adaptor>(*this);
+		}
+
 	protected:
 
 
@@ -67,5 +80,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Cad2d_IntsctEntity);
 
 #endif // !_Cad2d_IntsctEntity_Header

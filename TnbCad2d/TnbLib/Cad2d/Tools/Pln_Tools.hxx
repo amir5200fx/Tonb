@@ -31,6 +31,7 @@ namespace tnbLib
 	class Pln_Entity;
 	class Pln_Edge;
 	class Pln_Ring;
+	class Pln_Segment;
 	class Pln_CmpEdge;
 	class Pln_Wire;
 	class Pln_Curve;
@@ -140,10 +141,10 @@ namespace tnbLib
 			);
 
 		// Returns true if the vertex is on the edge. [2/2/2022 Amir]
-		static Standard_Boolean IsOnEdge(const std::shared_ptr<Pln_Vertex>&, const std::shared_ptr<Pln_Edge>&);
+		static Standard_Boolean IsOnEdge(const std::shared_ptr<Pln_Vertex>&, const std::shared_ptr<Pln_Segment>&);
 		
 		// Warning! Returns a null pointer if there is no common vertex between the two edges. [2/2/2022 Amir]
-		static std::shared_ptr<Pln_Vertex> CommonVertex(const std::shared_ptr<Pln_Edge>& theEdge0, const std::shared_ptr<Pln_Edge>& theEdge1);
+		static std::shared_ptr<Pln_Vertex> CommonVertex(const std::shared_ptr<Pln_Segment>& theEdge0, const std::shared_ptr<Pln_Segment>& theEdge1);
 
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const Handle(Geom2d_Curve)& theCurve);
 
@@ -223,6 +224,8 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
 			);
 
+		static std::vector<std::shared_ptr<Pln_Segment>> RetrieveSegments(const std::vector<std::shared_ptr<Pln_Edge>>&);
+
 		//- an exception will be thrown if the curve is not bounded
 		static TnbCad2d_EXPORT std::shared_ptr<Geom2dAPI_InterCurveCurve>
 			Intersection
@@ -235,8 +238,8 @@ namespace tnbLib
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex>
 			Intersection
 			(
-				const std::shared_ptr<Pln_Edge>& theEdge0,
-				const std::shared_ptr<Pln_Edge>& theEdge1
+				const std::shared_ptr<Pln_Segment>& theEdge0,
+				const std::shared_ptr<Pln_Segment>& theEdge1
 			);
 
 		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
@@ -516,6 +519,9 @@ namespace tnbLib
 				const std::vector<TopoDS_Edge>& theEdges,
 				const gp_Ax2& theSystem
 			);
+
+		static void ChangeVertex(const std::shared_ptr<Pln_Ring>&, const std::shared_ptr<Pln_Vertex>&);
+		static void ChangeVertex(const std::shared_ptr<Pln_Segment>&, const std::shared_ptr<Pln_Vertex>&, const std::shared_ptr<Pln_Vertex>&);
 
 		static TnbCad2d_EXPORT void
 			ImportToCorner

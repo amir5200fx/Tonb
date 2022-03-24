@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1321
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tonb", "Tonb\Tonb.vcxproj", "{5AAE3E84-CA99-45B0-B7DC-2F8D2133B9AD}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -1275,6 +1275,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbMeshgSurfAft", "applications\mesh\surface\g\aft\tnbMeshgSurfAft\tnbMeshgSurfAft.vcxproj", "{7EF64021-D713-4B15-AAF0-BF3595FE04DC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbCadToolSolidManager", "applications\cad\tools\solidManager\tnbCadToolSolidManager.vcxproj", "{A144D834-E9A4-4470-9D1A-867BDF32F70E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "intrpl", "intrpl", "{518203A2-7012-4D66-AFF9-504327323BF3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbCadToolPlaneInterpl", "applications\cad2d\tools\intrpl\tnbCadToolPlaneInterpl.vcxproj", "{B9A7B936-4816-4D4A-8A06-D651A7FCE076}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "crvCrvIntsct", "crvCrvIntsct", "{11A25600-8986-41A1-BC1E-73FB182A73D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbCadToolPlaneCrvCrvIntsct", "applications\cad2d\tools\crvCrvIntsct\tnbCadToolPlaneCrvCrvIntsct.vcxproj", "{E473D8C5-0D93-4A4F-8306-D082ED5F2724}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3734,6 +3742,26 @@ Global
 		{A144D834-E9A4-4470-9D1A-867BDF32F70E}.Release|x64.Build.0 = Release|x64
 		{A144D834-E9A4-4470-9D1A-867BDF32F70E}.Release|x86.ActiveCfg = Release|Win32
 		{A144D834-E9A4-4470-9D1A-867BDF32F70E}.Release|x86.Build.0 = Release|Win32
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Debug|x64.ActiveCfg = Debug|x64
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Debug|x64.Build.0 = Debug|x64
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Debug|x86.ActiveCfg = Debug|Win32
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Debug|x86.Build.0 = Debug|Win32
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Release|Any CPU.ActiveCfg = Release|Win32
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Release|x64.ActiveCfg = Release|x64
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Release|x64.Build.0 = Release|x64
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Release|x86.ActiveCfg = Release|Win32
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076}.Release|x86.Build.0 = Release|Win32
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Debug|x64.ActiveCfg = Debug|x64
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Debug|x64.Build.0 = Debug|x64
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Debug|x86.ActiveCfg = Debug|Win32
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Debug|x86.Build.0 = Debug|Win32
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Release|x64.ActiveCfg = Release|x64
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Release|x64.Build.0 = Release|x64
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Release|x86.ActiveCfg = Release|Win32
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -4321,6 +4349,10 @@ Global
 		{7824BBA2-8D00-41AF-8210-67993EB0B8B3} = {20B46ED7-2676-487E-9AB6-03D3688BECBF}
 		{7EF64021-D713-4B15-AAF0-BF3595FE04DC} = {7824BBA2-8D00-41AF-8210-67993EB0B8B3}
 		{A144D834-E9A4-4470-9D1A-867BDF32F70E} = {A5397473-277E-4F40-B636-FB674C762E35}
+		{518203A2-7012-4D66-AFF9-504327323BF3} = {2B9D1311-B35A-472E-9E60-9E55DB487FF9}
+		{B9A7B936-4816-4D4A-8A06-D651A7FCE076} = {518203A2-7012-4D66-AFF9-504327323BF3}
+		{11A25600-8986-41A1-BC1E-73FB182A73D1} = {2B9D1311-B35A-472E-9E60-9E55DB487FF9}
+		{E473D8C5-0D93-4A4F-8306-D082ED5F2724} = {11A25600-8986-41A1-BC1E-73FB182A73D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}
