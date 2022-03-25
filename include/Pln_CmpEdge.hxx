@@ -24,15 +24,13 @@ namespace tnbLib
 	class Pln_CmpEdge
 	{
 
-		typedef std::vector<std::shared_ptr<Pln_Edge>> edgeList;
-
 		friend class Pln_Edge;
 		friend class Pln_Wire;
 		friend class Pln_Tools;
 
 		/*Private Data*/
 
-		edgeList theEdges_;
+		std::vector<std::shared_ptr<Pln_Edge>> theEdges_;
 
 
 		/*private functions and operators*/
@@ -65,9 +63,14 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [3/24/2022 Amir]
 
 		Pln_CmpEdge()
 		{}
+
+		// constructors [3/24/2022 Amir]
+
+		// public functions and operators [3/24/2022 Amir]
 
 		Standard_Boolean IsValidForWire
 		(

@@ -25,30 +25,15 @@ namespace tnbLib
 		, public Pln_EdgeGeom
 	{
 
-		friend class Cad2d_MergeCurves;
-
 		/*Private Data*/
-
-		std::shared_ptr<Pln_Vertex> theVtx0_;
-		std::shared_ptr<Pln_Vertex> theVtx1_;
 
 
 		/*private functions and operators*/
 
 
-		auto& ChangeVtx0()
-		{
-			return theVtx0_;
-		}
-
-		auto& ChangeVtx1()
-		{
-			return theVtx1_;
-		}
-
 		TNB_SERIALIZATION(TnbCad2d_EXPORT);
 
-	public:
+	protected:
 
 		typedef Pnt2d ptType;
 
@@ -56,197 +41,135 @@ namespace tnbLib
 
 		//- default constructor
 
-		Pln_Edge()
-		{}
-
 
 		//- constructors
 
 		Pln_Edge
 		(
-			const std::shared_ptr<Pln_Vertex>& theVtx0,
-			const std::shared_ptr<Pln_Vertex>& theVtx1,
 			const Standard_Boolean Sense = Standard_True
 		)
-			: theVtx0_(theVtx0)
-			, theVtx1_(theVtx1)
-			, Pln_EdgeGeom(Sense)
+			: Pln_EdgeGeom(Sense)
 		{}
+
 
 		Pln_Edge
 		(
-			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1,
-			const Standard_Boolean Sense = Standard_True
-		)
-			: theVtx0_(std::move(theVtx0))
-			, theVtx1_(std::move(theVtx1))
-			, Pln_EdgeGeom(Sense)
-		{}
-
-		Pln_Edge
-		(
-			const std::shared_ptr<Pln_Vertex>& theVtx0,
-			const std::shared_ptr<Pln_Vertex>& theVtx1,
 			const std::shared_ptr<Pln_Curve>& theCurve,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_EdgeGeom(theCurve, Sense)
-			, theVtx0_(theVtx0)
-			, theVtx1_(theVtx1)
 		{}
 
 		Pln_Edge
 		(
-			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1,
 			const std::shared_ptr<Pln_Curve>&& theCurve,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_EdgeGeom(std::move(theCurve), Sense)
-			, theVtx0_(std::move(theVtx0))
-			, theVtx1_(std::move(theVtx1))
 		{}
 
 		Pln_Edge
 		(
 			const Standard_Integer theIndex,
-			const std::shared_ptr<Pln_Vertex>& theVtx0,
-			const std::shared_ptr<Pln_Vertex>& theVtx1,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex)
 			, Pln_EdgeGeom(Sense)
-			, theVtx0_(theVtx0)
-			, theVtx1_(theVtx1)
-		{}
-
-		Pln_Edge
-		(
-			const Standard_Integer theIndex,
-			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1,
-			const Standard_Boolean Sense = Standard_True
-		)
-			: Pln_Entity(theIndex)
-			, Pln_EdgeGeom(Sense)
-			, theVtx0_(std::move(theVtx0))
-			, theVtx1_(std::move(theVtx1))
 		{}
 
 		Pln_Edge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const std::shared_ptr<Pln_Vertex>& theVtx0,
-			const std::shared_ptr<Pln_Vertex>& theVtx1,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex, theName)
 			, Pln_EdgeGeom(Sense)
-			, theVtx0_(theVtx0)
-			, theVtx1_(theVtx1)
 		{}
 
 		Pln_Edge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1,
-			const Standard_Boolean Sense = Standard_True
-		)
-			: Pln_Entity(theIndex, theName)
-			, Pln_EdgeGeom(Sense)
-			, theVtx0_(std::move(theVtx0))
-			, theVtx1_(std::move(theVtx1))
-		{}
-
-		Pln_Edge
-		(
-			const Standard_Integer theIndex,
-			const word& theName,
-			const std::shared_ptr<Pln_Vertex>& theVtx0,
-			const std::shared_ptr<Pln_Vertex>& theVtx1,
 			const std::shared_ptr<Pln_Curve>& theCurve,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex, theName)
 			, Pln_EdgeGeom(theCurve, Sense)
-			, theVtx0_(theVtx0)
-			, theVtx1_(theVtx1)
 		{}
 
 		Pln_Edge
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const std::shared_ptr<Pln_Vertex>&& theVtx0,
-			const std::shared_ptr<Pln_Vertex>&& theVtx1,
 			const std::shared_ptr<Pln_Curve>&& theCurve,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex, theName)
 			, Pln_EdgeGeom(std::move(theCurve), Sense)
-			, theVtx0_(std::move(theVtx0))
-			, theVtx1_(std::move(theVtx1))
 		{}
 
+	public:
+
+		enum class edgePoint
+		{
+			first,
+			last
+		};
 
 		//- public functions and operators
 
-		TnbCad2d_EXPORT Standard_Boolean IsDangle() const;
-
-		TnbCad2d_EXPORT Standard_Boolean IsOrphan() const override;
+		virtual Standard_Boolean IsDangle() const = 0;
+		//TnbCad2d_EXPORT Standard_Boolean IsOrphan() const override;
 
 		TnbCad2d_EXPORT Standard_Integer NbEntities(const Pln_EntityType t) const override;
 
-		TnbCad2d_EXPORT Standard_Integer GetIndex
+		virtual edgePoint GetPoint
 		(
 			const std::shared_ptr<Pln_Vertex>& theVertex
-		) const;
+		) const = 0;
 
 		TnbCad2d_EXPORT Standard_Real Parameter
 		(
-			const Standard_Integer theIndex
+			const edgePoint theIndex
 		) const;
-
-		const auto& Vtx0() const
-		{
-			return theVtx0_;
-		}
-
-		const auto& Vtx1() const
-		{
-			return theVtx1_;
-		}
 
 		TnbCad2d_EXPORT Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
 
-		TnbCad2d_EXPORT std::shared_ptr<Pln_Entity>
-			Copy() const override;
+		/*TnbCad2d_EXPORT std::shared_ptr<Pln_Entity>
+			Copy() const override;*/
 
 		TnbCad2d_EXPORT Pln_EntityType Type() const override;
 
 		//- WARNING! the edge must be orphan for transforming
-		TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t) override;
+		//TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t) override;
 
-		TnbCad2d_EXPORT void RetrieveEntitiesTo
+		/*TnbCad2d_EXPORT void RetrieveEntitiesTo
 		(
 			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
 			const Pln_EntityType t
-		) const override;
+		) const override;*/
 
-		TnbCad2d_EXPORT void Reverse
+		virtual void Reverse
 		(
-			const Standard_Boolean ApplyToMesh = Standard_True
-		);
+			const Standard_Boolean ApplyToMesh
+		) = 0;
 
 		TnbCad2d_EXPORT void ExportToPlt(OFstream& File) const;
 
 		//- virtual functions
 
+		virtual std::shared_ptr<Pln_Vertex> Vertex(const edgePoint) const = 0;
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> FirstVtx() const;
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> LastVtx() const;
+
 		virtual Standard_Boolean IsRing() const
+		{
+			return Standard_False;
+		}
+
+		virtual Standard_Boolean IsSegment() const
 		{
 			return Standard_False;
 		}
@@ -289,5 +212,8 @@ namespace tnbLib
 #include <Pln_EdgeI.hxx>
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Edge);
+
+#include <Pln_Segment.hxx>
+#include <Pln_Ring.hxx>
 
 #endif // !_Pln_Edge_Header

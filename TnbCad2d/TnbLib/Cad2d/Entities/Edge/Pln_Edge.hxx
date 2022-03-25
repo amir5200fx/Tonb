@@ -124,14 +124,14 @@ namespace tnbLib
 
 		TnbCad2d_EXPORT Standard_Integer NbEntities(const Pln_EntityType t) const override;
 
-		virtual Standard_Integer GetIndex
+		virtual edgePoint GetPoint
 		(
 			const std::shared_ptr<Pln_Vertex>& theVertex
 		) const = 0;
 
 		TnbCad2d_EXPORT Standard_Real Parameter
 		(
-			const Standard_Integer theIndex
+			const edgePoint theIndex
 		) const;
 
 		TnbCad2d_EXPORT Entity2d_Box BoundingBox(const Standard_Real Tol) const override;
@@ -152,7 +152,7 @@ namespace tnbLib
 
 		virtual void Reverse
 		(
-			const Standard_Boolean ApplyToMesh = Standard_True
+			const Standard_Boolean ApplyToMesh
 		) = 0;
 
 		TnbCad2d_EXPORT void ExportToPlt(OFstream& File) const;
@@ -161,8 +161,8 @@ namespace tnbLib
 
 		virtual std::shared_ptr<Pln_Vertex> Vertex(const edgePoint) const = 0;
 
-		std::shared_ptr<Pln_Vertex> FirstVtx() const;
-		std::shared_ptr<Pln_Vertex> LastVtx() const;
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> FirstVtx() const;
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> LastVtx() const;
 
 		virtual Standard_Boolean IsRing() const
 		{

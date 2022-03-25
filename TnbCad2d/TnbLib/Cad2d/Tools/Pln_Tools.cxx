@@ -348,7 +348,7 @@ tnbLib::Pln_Tools::MakeWire
 		const auto& v0 = vertices[i0];
 		const auto& v1 = vertices[i1];
 
-		auto edge = std::make_shared<Pln_Edge>(v0, v1, x);
+		auto edge = std::make_shared<Pln_Segment>(v0, v1, x);
 		Debug_Null_Pointer(edge);
 
 		K++;
@@ -503,7 +503,7 @@ tnbLib::Pln_Tools::MakeEdge
 	Debug_Null_Pointer(v0);
 	Debug_Null_Pointer(v1);
 
-	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
 	return std::move(edge);
 }
 
@@ -521,7 +521,7 @@ tnbLib::Pln_Tools::MakeEdge
 	Debug_Null_Pointer(v0);
 	Debug_Null_Pointer(v1);
 
-	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
 	return std::move(edge);
 	
 }
@@ -540,7 +540,7 @@ tnbLib::Pln_Tools::MakeEdge
 	Debug_Null_Pointer(v0);
 	Debug_Null_Pointer(v1);
 
-	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
 	return std::move(edge);
 }
 
@@ -646,7 +646,7 @@ tnbLib::Pln_Tools::MakeWire
 		const auto& v0 = vertices[K];
 		const auto& v1 = vertices[(K + 1) % theCurves.size()];
 
-		auto edge = std::make_shared<Pln_Edge>(v0, v1, x, theSense[K]);
+		auto edge = std::make_shared<Pln_Segment>(v0, v1, x, theSense[K]);
 		Debug_Null_Pointer(edge);
 
 		edge->SetIndex(++K);
@@ -789,6 +789,29 @@ tnbLib::Pln_Tools::RetrieveVertices
 	compact.RetrieveTo(list);
 
 	return std::move(list);
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Segment>> 
+tnbLib::Pln_Tools::RetrieveSegments
+(
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
+)
+{
+	std::vector<std::shared_ptr<Pln_Segment>> segments;
+	segments.reserve(theEdges.size());
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		auto seg = std::dynamic_pointer_cast<Pln_Segment>(x);
+		if (NOT seg)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the edge is not segment" << endl
+				<< abort(FatalError);
+		}
+		segments.push_back(std::move(seg));
+	}
+	return std::move(segments);
 }
 
 std::shared_ptr<Geom2dAPI_InterCurveCurve>
@@ -1228,7 +1251,7 @@ tnbLib::Pln_Tools::RetrieveEdges
 		auto curve = std::make_shared<Pln_Curve>(k + 1, std::move(x));
 		Debug_Null_Pointer(curve);
 
-		auto edge = std::make_shared<Pln_Edge>(std::move(vertices[2 * i]), std::move(vertices[2 * i + 1]), std::move(curve));
+		auto edge = std::make_shared<Pln_Segment>(std::move(vertices[2 * i]), std::move(vertices[2 * i + 1]), std::move(curve));
 		Debug_Null_Pointer(edge);
 
 		edge->SetIndex(++k);
@@ -1313,7 +1336,7 @@ tnbLib::Pln_Tools::RetrieveEdges
 	for (const auto& x : curves)
 	{
 		Debug_Null_Pointer(x);
-		auto edge = std::make_shared<Pln_Edge>(std::move(vertices[2 * i]), std::move(vertices[2 * i + 1]), x);
+		auto edge = std::make_shared<Pln_Segment>(std::move(vertices[2 * i]), std::move(vertices[2 * i + 1]), x);
 		Debug_Null_Pointer(edge);
 
 		edge->SetIndex(++k);
@@ -1652,7 +1675,7 @@ namespace tnbLib
 
 				if (vtx0 IS_EQUAL vtx1)
 				{
-					auto edge = std::make_shared<Pln_Ring>(++nbEdges, vtx0);
+					auto edge = std::make_shared<Pln_Ring>(++nbEdges, "", vtx0);
 					Debug_Null_Pointer(edge);
 
 					x->Curve->SetIndex(nbEdges);
@@ -1664,7 +1687,7 @@ namespace tnbLib
 				}
 				else
 				{
-					auto edge = std::make_shared<Pln_Edge>(++nbEdges, vtx0, vtx1);
+					auto edge = std::make_shared<Pln_Segment>(++nbEdges, "", vtx0, vtx1);
 					Debug_Null_Pointer(edge);
 
 					vtx0->InsertToEdges(edge->Index(), edge);
@@ -2024,15 +2047,15 @@ void tnbLib::Pln_Tools::SameSense
 				<< abort(FatalError);
 		}
 
-		auto indx0 = edge0->GetIndex(vtx);
-		auto indx1 = edge1->GetIndex(vtx);
+		auto indx0 = edge0->GetPoint(vtx);
+		auto indx1 = edge1->GetPoint(vtx);
 
-		if (indx0 NOT_EQUAL 1)
+		if (indx0 NOT_EQUAL Pln_Edge::edgePoint::last)
 		{
 			edge0->Reverse(Standard_True);
 		}
 
-		if (indx1 NOT_EQUAL 0)
+		if (indx1 NOT_EQUAL Pln_Edge::edgePoint::first)
 		{
 			edge1->Reverse(Standard_True);
 		}
@@ -2572,6 +2595,50 @@ tnbLib::Pln_Tools::RetrieveParaCurves
 		curves.push_back(std::move(curve));
 	}
 	return std::move(curves);
+}
+
+void tnbLib::Pln_Tools::ChangeVertex
+(
+	const std::shared_ptr<Pln_Ring>& theRing, 
+	const std::shared_ptr<Pln_Vertex>& theVtx
+)
+{
+	Debug_Null_Pointer(theRing);
+	theRing->VtxRef() = theVtx;
+}
+
+void tnbLib::Pln_Tools::ChangeVertex
+(
+	const std::shared_ptr<Pln_Segment>& theSeg,
+	const std::shared_ptr<Pln_Vertex>& theV0,
+	const std::shared_ptr<Pln_Vertex>& theV1
+)
+{
+	Debug_Null_Pointer(theSeg);
+	theSeg->Vtx0Ref() = theV0;
+	theSeg->Vtx1Ref() = theV1;
+}
+
+void tnbLib::Pln_Tools::ChangeVertex
+(
+	const std::shared_ptr<Pln_Ring>& theRing,
+	std::shared_ptr<Pln_Vertex>&& theVtx
+)
+{
+	Debug_Null_Pointer(theRing);
+	theRing->VtxRef() = std::move(theVtx);
+}
+
+void tnbLib::Pln_Tools::ChangeVertex
+(
+	const std::shared_ptr<Pln_Segment>& theSeg,
+	std::shared_ptr<Pln_Vertex>&& theV0,
+	std::shared_ptr<Pln_Vertex>&& theV1
+)
+{
+	Debug_Null_Pointer(theSeg);
+	theSeg->Vtx0Ref() = std::move(theV0);
+	theSeg->Vtx1Ref() = std::move(theV1);
 }
 
 void tnbLib::Pln_Tools::RetrieveInnerOuterWires

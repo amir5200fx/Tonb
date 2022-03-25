@@ -156,7 +156,7 @@ tnbLib::Pln_CmpEdge::Copy() const
 			auto curve = std::dynamic_pointer_cast<Pln_Curve>(x->Curve()->Copy());
 			Debug_Null_Pointer(curve);
 
-			auto edge = std::make_shared<Pln_Edge>(x->Index(), x->Name(), v0, v1, curve, x->Sense());
+			auto edge = std::make_shared<Pln_Segment>(x->Index(), x->Name(), v0, v1, curve, x->Sense());
 			Debug_Null_Pointer(edge);
 
 			if (x->Mesh())
@@ -225,7 +225,7 @@ void tnbLib::Pln_CmpEdge::Reverse()
 	for (auto& x : edges)
 	{
 		Debug_Null_Pointer(x);
-		x->Reverse();
+		x->Reverse(Standard_True);
 	}
 	std::reverse(edges.begin(), edges.end());
 }

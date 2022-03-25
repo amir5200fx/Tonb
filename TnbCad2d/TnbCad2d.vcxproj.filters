@@ -19,9 +19,6 @@
     <Filter Include="TnbLib\Cad2d\Entities\Orientation">
       <UniqueIdentifier>{1e64524c-60e1-4f45-8e8e-15fe2cf258be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad2d\Entities\Ring">
-      <UniqueIdentifier>{bab5b4c9-6c0a-4682-9cb5-4a50877607c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Cad2d\Entities\Vertex">
       <UniqueIdentifier>{7f523ef2-90e0-4e0c-9a05-c266a716677e}</UniqueIdentifier>
     </Filter>

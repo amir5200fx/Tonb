@@ -7,7 +7,7 @@
 
 namespace tnbLib
 {
-	const std::shared_ptr<Pln_Edge> cad2dLib::Modeler_Registry::null_edge = std::make_shared<Pln_Edge>();
+	const std::shared_ptr<Pln_Edge> cad2dLib::Modeler_Registry::null_edge = std::make_shared<Pln_Segment>();
 }
 
 tnbLib::cad2dLib::Modeler_Registry::Modeler_Registry()

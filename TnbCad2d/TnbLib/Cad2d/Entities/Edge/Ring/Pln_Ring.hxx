@@ -7,11 +7,15 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [3/25/2022 Amir]
+	class Pln_Tools;
+
 	class Pln_Ring
 		: public Pln_Edge
 	{
 
 		friend class Cad2d_MergeCurves;
+		friend class Pln_Tools;
 
 		/*Private Data*/
 
@@ -116,7 +120,12 @@ namespace tnbLib
 
 		//- override virtual functions
 
-		Standard_Boolean IsOrphan() const override;
+		TnbCad2d_EXPORT Standard_Boolean IsDangle() const override;
+		TnbCad2d_EXPORT edgePoint GetPoint(const std::shared_ptr<Pln_Vertex>& theVertex) const override;
+
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> Vertex(const edgePoint) const override;
+
+		TnbCad2d_EXPORT Standard_Boolean IsOrphan() const override;
 		TnbCad2d_EXPORT Standard_Integer NbEntities(const Pln_EntityType t) const override;
 
 		Standard_Boolean IsRing() const override
@@ -124,11 +133,17 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		TnbCad2d_EXPORT std::shared_ptr<Pln_Entity>
+			Copy() const override;
+
 		TnbCad2d_EXPORT void RetrieveEntitiesTo
 		(
 			std::vector<std::shared_ptr<Pln_Entity>>& theEntities,
 			const Pln_EntityType t
 		) const override;
+
+		TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t) override;
+		TnbCad2d_EXPORT void Reverse(const Standard_Boolean ApplyToMesh) override;
 
 
 		// public functions and operators [3/23/2022 Amir]

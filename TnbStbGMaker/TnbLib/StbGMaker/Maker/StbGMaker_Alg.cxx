@@ -126,7 +126,10 @@ tnbLib::StbGMaker_Alg::CreateWpFromShape
 		}
 		else
 		{
-			auto edge = std::make_shared<StbGMaker_Edge<Pln_Edge>>(std::move(*x));
+			auto seg = std::dynamic_pointer_cast<Pln_Segment>(x);
+			Debug_Null_Pointer(seg);
+
+			auto edge = std::make_shared<StbGMaker_Edge<Pln_Segment>>(std::move(*seg));
 			Debug_Null_Pointer(edge);
 
 			edges3d.push_back(std::move(edge));

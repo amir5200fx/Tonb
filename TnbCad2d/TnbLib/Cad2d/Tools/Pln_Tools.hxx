@@ -147,9 +147,7 @@ namespace tnbLib
 		static std::shared_ptr<Pln_Vertex> CommonVertex(const std::shared_ptr<Pln_Segment>& theEdge0, const std::shared_ptr<Pln_Segment>& theEdge1);
 
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const Handle(Geom2d_Curve)& theCurve);
-
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(const std::shared_ptr<Pln_Curve>& theCurve);
-
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Edge> MakeEdge(std::shared_ptr<Pln_Curve>&& theCurve);
 
 		static std::shared_ptr<Pln_Wire>
@@ -224,7 +222,11 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Wire>>& theWires
 			);
 
-		static std::vector<std::shared_ptr<Pln_Segment>> RetrieveSegments(const std::vector<std::shared_ptr<Pln_Edge>>&);
+		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Segment>>
+			RetrieveSegments
+			(
+				const std::vector<std::shared_ptr<Pln_Edge>>&
+			);
 
 		//- an exception will be thrown if the curve is not bounded
 		static TnbCad2d_EXPORT std::shared_ptr<Geom2dAPI_InterCurveCurve>
@@ -520,8 +522,10 @@ namespace tnbLib
 				const gp_Ax2& theSystem
 			);
 
-		static void ChangeVertex(const std::shared_ptr<Pln_Ring>&, const std::shared_ptr<Pln_Vertex>&);
-		static void ChangeVertex(const std::shared_ptr<Pln_Segment>&, const std::shared_ptr<Pln_Vertex>&, const std::shared_ptr<Pln_Vertex>&);
+		static TnbCad2d_EXPORT void ChangeVertex(const std::shared_ptr<Pln_Ring>&, const std::shared_ptr<Pln_Vertex>&);
+		static TnbCad2d_EXPORT void ChangeVertex(const std::shared_ptr<Pln_Segment>&, const std::shared_ptr<Pln_Vertex>&, const std::shared_ptr<Pln_Vertex>&);
+		static TnbCad2d_EXPORT void ChangeVertex(const std::shared_ptr<Pln_Ring>&, std::shared_ptr<Pln_Vertex>&&);
+		static TnbCad2d_EXPORT void ChangeVertex(const std::shared_ptr<Pln_Segment>&, std::shared_ptr<Pln_Vertex>&&, std::shared_ptr<Pln_Vertex>&&);
 
 		static TnbCad2d_EXPORT void
 			ImportToCorner
