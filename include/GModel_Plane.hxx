@@ -83,12 +83,12 @@ namespace tnbLib
 
 		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
-		const auto& Inner() const
+		const auto& InnerWires() const
 		{
 			return theInner_;
 		}
 
-		const auto& Outer() const
+		const auto& OuterWire() const
 		{
 			return theOuter_;
 		}

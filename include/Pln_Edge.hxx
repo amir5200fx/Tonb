@@ -35,9 +35,7 @@ namespace tnbLib
 
 	protected:
 
-		typedef Pnt2d ptType;
-
-		static TnbCad2d_EXPORT const std::string extension;
+		
 
 		//- default constructor
 
@@ -62,7 +60,7 @@ namespace tnbLib
 
 		Pln_Edge
 		(
-			const std::shared_ptr<Pln_Curve>&& theCurve,
+			std::shared_ptr<Pln_Curve>&& theCurve,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_EdgeGeom(std::move(theCurve), Sense)
@@ -102,7 +100,7 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const std::shared_ptr<Pln_Curve>&& theCurve,
+			std::shared_ptr<Pln_Curve>&& theCurve,
 			const Standard_Boolean Sense = Standard_True
 		)
 			: Pln_Entity(theIndex, theName)
@@ -110,6 +108,10 @@ namespace tnbLib
 		{}
 
 	public:
+
+		typedef Pnt2d ptType;
+
+		static TnbCad2d_EXPORT const std::string extension;
 
 		enum class edgePoint
 		{
@@ -211,7 +213,7 @@ namespace tnbLib
 
 #include <Pln_EdgeI.hxx>
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Edge);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Pln_Edge);
 
 #include <Pln_Segment.hxx>
 #include <Pln_Ring.hxx>

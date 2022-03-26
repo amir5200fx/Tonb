@@ -39,10 +39,10 @@ namespace tnbLib
 
 	public:
 
-		static const Standard_Integer DEFAULT_MAX_NB_ITERATIONS;
+		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_NB_ITERATIONS;
 
-		static const Standard_Real DEFAULT_TOLERANCE;
-		static const Standard_Real DEFAULT_UNDER_RELAXATION;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_UNDER_RELAXATION;
 
 		// default constructor [3/1/2022 Amir]
 

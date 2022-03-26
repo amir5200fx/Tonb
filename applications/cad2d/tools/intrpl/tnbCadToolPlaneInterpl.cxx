@@ -145,7 +145,6 @@ int main(int argc, char* argv[])
 				<< " # operators: " << endl << endl
 
 				<< " - [Point] createPoint(double, double)" << endl
-
 				<< " - make(point list, name [optional])" << endl
 				<< endl;
 			return 0;
@@ -154,6 +153,10 @@ int main(int argc, char* argv[])
 		{
 			chaiscript::ChaiScript chai;
 
+			chai.add(chaiscript::user_type<Pnt2d>(), "pnt2d");
+			chai.add(chaiscript::constructor<Pnt2d()>(), "pnt2d");
+			chai.add(chaiscript::constructor<Pnt2d(const Pnt2d&)>(), "pnt2d");
+			chai.add(chaiscript::constructor<Pnt2d(Pnt2d&&)>(), "pnt2d");
 			chai.add(chaiscript::bootstrap::standard_library::vector_type<std::vector<Pnt2d>>("std_vector_pnt2d"));
 			chai.add(chaiscript::vector_conversion<std::vector<Pnt2d>>());
 

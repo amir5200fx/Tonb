@@ -57,7 +57,7 @@ namespace tnbLib
 
 		Pln_EdgeGeom
 		(
-			const std::shared_ptr<Pln_Curve>&& theCurve,
+			std::shared_ptr<Pln_Curve>&& theCurve,
 			const Standard_Boolean theSense
 		)
 			: theCurve_(std::move(theCurve))

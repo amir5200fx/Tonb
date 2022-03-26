@@ -1198,15 +1198,6 @@
     <Filter Include="TnbLib\Aft\SolutionData\Surface">
       <UniqueIdentifier>{64d7c377-e7e9-475c-b161-f873fcc47544}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\Adaptive">
-      <UniqueIdentifier>{6af5d20f-eb0e-440a-b8be-f1d04b3211d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\Adaptive\RefineSearch">
-      <UniqueIdentifier>{165e9319-8ea2-4c2e-9a04-c74cad585789}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\Adaptive\RefineSearchRefineElmSize">
-      <UniqueIdentifier>{2655bc54-fb06-4f69-91a9-117199d96591}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Aft\OptNode\Calculator\Surface\CorrFactor">
       <UniqueIdentifier>{1fe17ab3-4bc6-4c6d-9968-cdabaf59ad1e}</UniqueIdentifier>
     </Filter>
@@ -1215,9 +1206,6 @@
     </Filter>
     <Filter Include="TnbLib\Aft\OptNode\Calculator\Surface\CorrFactor\oneLevIter">
       <UniqueIdentifier>{86a55d59-9f18-402f-913b-812c04792ead}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\Adaptive\RefineSearchRefineElmSize\Info">
-      <UniqueIdentifier>{59aa2faa-6d68-4240-a681-8cca675a4878}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\Method">
       <UniqueIdentifier>{9962eac3-41bb-4979-9523-fdeb1279626f}</UniqueIdentifier>
@@ -4627,6 +4615,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Cad\Curve\AnIso\UniMetric\Mesh2d_PlnCurveUniMetricIO.cxx">
       <Filter>TnbLib\Base\Cad\Curve\AnIso\2d\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\G\Aft2d_gRegionPlaneSurface.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\G\UniMetric\Aft2d_gRegionPlaneSurfaceUniMetric.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\G\UniMetric</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

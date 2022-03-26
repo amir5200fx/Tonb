@@ -187,4 +187,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_CLASS_EXPORT_KEY(tnbLib::Pln_Segment);
+
 #endif // !_Pln_Segment_Header

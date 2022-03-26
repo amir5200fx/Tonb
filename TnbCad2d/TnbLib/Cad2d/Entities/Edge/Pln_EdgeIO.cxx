@@ -27,5 +27,3 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Pln_Edge)
 	ar& boost::serialization::base_object<Pln_EdgeAdaptor>(*this);
 	ar& boost::serialization::base_object<Pln_EdgeGeom>(*this);
 }
-
-BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Pln_Edge);

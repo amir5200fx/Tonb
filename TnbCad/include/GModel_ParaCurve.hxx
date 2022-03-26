@@ -63,6 +63,12 @@ namespace tnbLib
 		TnbCad_EXPORT GModel_ParaCurve
 		(
 			const Standard_Integer theIndex,
+			const Handle(Geom2d_Curve)& theGeometry
+		);
+
+		TnbCad_EXPORT GModel_ParaCurve
+		(
+			const Standard_Integer theIndex,
 			const word& theName,
 			const Handle(Geom2d_Curve)& theGeometry
 		);
@@ -70,6 +76,12 @@ namespace tnbLib
 		TnbCad_EXPORT GModel_ParaCurve
 		(
 			Handle(Geom2d_Curve)&& theGeometry
+		);
+
+		TnbCad_EXPORT GModel_ParaCurve
+		(
+			const Standard_Integer theIndex,
+			Handle(Geom2d_Curve) && theGeometry
 		);
 
 		TnbCad_EXPORT GModel_ParaCurve
@@ -92,6 +104,11 @@ namespace tnbLib
 		TnbCad_EXPORT Pnt2d LastCoord() const;
 
 		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
+
+		const auto& Curve() const
+		{
+			return theGeometry_;
+		}
 
 		const auto& Geometry() const
 		{

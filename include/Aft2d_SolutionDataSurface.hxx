@@ -115,16 +115,6 @@ namespace tnbLib
 			return theMetricFunMethod_;
 		}
 
-		const auto& SizeFunction() const
-		{
-			return theSizeFun_;
-		}
-
-		auto& SizeFunctionRef()
-		{
-			return theSizeFun_;
-		}
-
 		const auto& GlobalCurveInfo() const
 		{
 			return theGlobalCurveInfo_;

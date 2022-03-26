@@ -257,13 +257,7 @@ tnbLib::GModel_Tools::CalcBoundingBox
 	const GModel_ParaWire & theWire
 )
 {
-	if (NOT theWire.Curves())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the wire is null!" << endl
-			<< abort(FatalError);
-	}
-	const auto curves = *theWire.Curves();
+	const auto& curves = theWire.Curves();
 	if (curves.empty())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -1075,8 +1069,13 @@ namespace tnbLib
 		static auto CreateWire(const std::shared_ptr<GModel_ParaWire>& theWire, const Standard_Real theTol)
 		{
 			Debug_Null_Pointer(theWire);
-			Debug_Null_Pointer(theWire->Curves());
-			const auto& curves = *theWire->Curves();
+			if (theWire->Curves().empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " the edge list is empty" << endl
+					<< abort(FatalError);
+			}
+			const auto& curves = theWire->Curves();
 			if (curves.size() IS_EQUAL 1)
 			{
 				auto links = CreateWire(curves.at(0), theTol);
@@ -1165,8 +1164,13 @@ tnbLib::GModel_Tools::TrimWire
 )
 {
 	Debug_Null_Pointer(theWire);
-	Debug_Null_Pointer(theWire->Curves());
-	const auto& curves = *theWire->Curves();
+	if (theWire->Curves().empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the edge list is empty" << endl
+			<< abort(FatalError);
+	}
+	const auto& curves = theWire->Curves();
 	if (curves.size() > 1)
 	{
 		auto trimmed = repairWire::TrimCurves(curves);
