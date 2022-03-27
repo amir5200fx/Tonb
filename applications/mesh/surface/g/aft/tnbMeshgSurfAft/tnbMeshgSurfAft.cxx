@@ -1,8 +1,3 @@
-#include <GModel_Surface.hxx>
-#include <GModel_Plane.hxx>
-#include <GModel_ParaCurve.hxx>
-#include <GModel_ParaWire.hxx>
-#include <Cad_GeomSurface.hxx>
 #include <Aft2d_gModelSurface.hxx>
 #include <Aft2d_gModelSurfaceUniMetric.hxx>
 #include <Aft2d_gSolutionDataSurface.hxx>
@@ -22,7 +17,13 @@
 #include <Aft_SizeCorr_IterativeInfo.hxx>
 #include <Aft_SizeCorr_FractionInfo.hxx>
 #include <Aft_MetricPrcsrAnIso_Info.hxx>
+#include <Cad_Tools.hxx>
 #include <GModel_Tools.hxx>
+#include <GModel_Surface.hxx>
+#include <GModel_Plane.hxx>
+#include <GModel_ParaCurve.hxx>
+#include <GModel_ParaWire.hxx>
+#include <Cad_GeomSurface.hxx>
 #include <GeoSizeFun2d_Surface.hxx>
 #include <GeoMetricFun2d_ExactSurface.hxx>
 #include <GeoMetricFun2d_Plane.hxx>
@@ -274,15 +275,10 @@ namespace tnbLib
 		}
 	}
 
-	auto retrieveTris2d(const std::vector<std::shared_ptr<Aft2d_ElementSurface>>& elemnts)
+	auto retrieveTris3d(const std::shared_ptr<GModel_Surface>& surface, const Entity2d_Triangulation& theTris)
 	{
-		auto nodes = Aft2d_gModelSurface::RetrieveNodesFrom(elemnts);
-		std::map<Standard_Integer, std::shared_ptr<Aft2d_NodeSurface>> nodeMap;
-		for (const auto& x : nodes)
-		{
-			Global_Tools::Insert(x->Index(), x, nodeMap);
-		}
-
+		auto tris3d = Cad_Tools::Triangulation(*surface->GeomSurface()->Geometry(), theTris);
+		return std::move(tris3d);
 	}
 
 	void execute()
@@ -330,7 +326,11 @@ namespace tnbLib
 			Debug_Null_Pointer(x);
 			auto plnMesh = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metricPrcsrInfo);
 			auto tris = Aft_Tools::RetrieveTriangleMesh(plnMesh);
+			auto tris3d = retrieveTris3d(x, *tris);
+
+			Global_Tools::Insert(x->Index(), tris3d, mySoluData->TrisRef());
 		}
+		exeTag = true;
 	}
 }
 
