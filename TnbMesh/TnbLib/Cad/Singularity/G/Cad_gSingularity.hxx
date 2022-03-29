@@ -4,12 +4,17 @@
 
 #include <Cad_Singularity.hxx>
 #include <Cad_gSingularityFwd.hxx>
+#include <Cad_gSingularZoneFwd.hxx>
 
 namespace tnbLib
 {
 
 #ifdef _DEBUG
-	
+	template<>
+	std::shared_ptr<Cad_gSingularZone> Cad_gSingularity::TypeDetection(const Entity2d_Polygon& thePoly, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
+
+	template<>
+	std::shared_ptr<Cad_gSingularZone> Cad_gSingularity::TypeDetection(const Entity2d_Polygon& thePoly0, const Entity2d_Polygon& thePoly1, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
 #endif // _DEBUG
 
 }

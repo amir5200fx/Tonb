@@ -60,9 +60,12 @@ namespace tnbLib
 		}
 
 
-		static std::shared_ptr<singularZone> TypeDetection(const Entity2d_Polygon& thePoly0, const Entity2d_Polygon& thePoly1, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&, const Geo2d_SizeFunction&);
+		std::shared_ptr<singularZone> TypeDetection(const Entity2d_Polygon& thePoly, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
+		std::shared_ptr<singularZone> TypeDetection(const Entity2d_Polygon& thePoly0, const Entity2d_Polygon& thePoly1, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
 
 	public:
+
+		static unsigned short verbose;
 
 		// default constructor [12/31/2021 Amir]
 

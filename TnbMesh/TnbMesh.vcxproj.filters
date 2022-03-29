@@ -1549,6 +1549,15 @@
     <Filter Include="TnbLib\Cad\Singularity\T">
       <UniqueIdentifier>{10e37286-05a9-4107-8c90-6d2f2480f8d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\G">
+      <UniqueIdentifier>{abd2a39c-4545-4606-9211-05290aed84c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\T">
+      <UniqueIdentifier>{9e029cd4-5207-42ca-896b-9ec76d9998d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Base">
+      <UniqueIdentifier>{0ca5f34f-96b7-4faa-a5d5-33f6b8e306a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -3711,6 +3720,24 @@
     <ClInclude Include="TnbLib\Cad\Singularity\G\Cad_gSingularityFwd.hxx">
       <Filter>TnbLib\Cad\Singularity\G</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\G\Cad_gSingularZone.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\G\Cad_gSingularZoneFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\T\Cad_tSingularZone.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\T\Cad_tSingularZoneFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Base\Cad_SingularityBase.hxx">
+      <Filter>TnbLib\Cad\Singularity\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Base\Cad_SingularityBaseI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -4750,6 +4777,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Singularity\G\Cad_gSingularity.cxx">
       <Filter>TnbLib\Cad\Singularity\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\G\Cad_gSingularZone.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\T\Cad_tSingularZone.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Base\Cad_SingularityBase.cxx">
+      <Filter>TnbLib\Cad\Singularity\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
