@@ -1543,6 +1543,12 @@
     <Filter Include="TnbLib\Aft\Region\Plane\AnIso\UniMetric">
       <UniqueIdentifier>{a355e7f9-3aad-49a3-8028-7e02a51ebe41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\G">
+      <UniqueIdentifier>{7d002a17-38c6-48d5-80cc-0f23d09acc76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\T">
+      <UniqueIdentifier>{10e37286-05a9-4107-8c90-6d2f2480f8d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -3612,6 +3618,99 @@
     <ClInclude Include="TnbLib\Base\Cad\Curve\AnIso\UniMetric\Mesh2d_PlnCurveUniMetricFwd.hxx">
       <Filter>TnbLib\Base\Cad\Curve\AnIso\2d\UniMetric</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Cad_SingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Pole\Cad_PoleSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Line\Cad_LineSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Traits\Cad_SingularityTraits.hxx">
+      <Filter>TnbLib\Cad\Singularity\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Type\Cad_SingularType.hxx">
+      <Filter>TnbLib\Cad\Singularity\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Cad_SingularZone.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\Cad_PoleSingularZone.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\Cad_LineSingularZone.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Traits\Cad_SingularZoneTraits.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\Corner\Cad_PoleSingularZone_Corner.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\Corner\Cad_PoleSingularZone_CornerI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\Loop\Cad_PoleSingularZone_Loop.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\Loop</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\Loop\Cad_PoleSingularZone_LoopI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\Loop</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\PartialSide\Cad_PoleSingularZone_PartialSide.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\PartialSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\PartialSide\Cad_PoleSingularZone_PartialSideI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\PartialSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\WholeSide\Cad_PoleSingularZone_WholeSide.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\WholeSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\WholeSide\Cad_PoleSingularZone_WholeSideI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\WholeSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\Corner\Cad_LineSingularZone_Corner.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\Corner\Cad_LineSingularZone_CornerI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\Dangle\Cad_LineSingularZone_Dangle.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Dangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\Dangle\Cad_LineSingularZone_DangleI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Dangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\Loop\Cad_LineSingularZone_Loop.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Loop</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\Loop\Cad_LineSingularZone_LoopI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Loop</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\TwoSide\Cad_LineSingularZone_TwoSide.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\TwoSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\TwoSide\Cad_LineSingularZone_TwoSideI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\TwoSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\WholeSide\Cad_LineSingularZone_WholeSide.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\WholeSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\WholeSide\Cad_LineSingularZone_WholeSideI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\WholeSide</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Cad_Singularity.hxx">
+      <Filter>TnbLib\Cad\Singularity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Cad_SingularityI.hxx">
+      <Filter>TnbLib\Cad\Singularity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\G\Cad_gSingularity.hxx">
+      <Filter>TnbLib\Cad\Singularity\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\G\Cad_gSingularityFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\G</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -4621,6 +4720,36 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\G\UniMetric\Aft2d_gRegionPlaneSurfaceUniMetric.cxx">
       <Filter>TnbLib\Aft\Region\Plane\Surface\G\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Pole\Corner\Cad_PoleSingularZone_Corner.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Pole\Loop\Cad_PoleSingularZone_Loop.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\Loop</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Pole\PartialSide\Cad_PoleSingularZone_PartialSide.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\PartialSide</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Pole\WholeSide\Cad_PoleSingularZone_WholeSide.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole\WholeSide</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Line\Corner\Cad_LineSingularZone_Corner.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Line\Dangle\Cad_LineSingularZone_Dangle.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Dangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Line\Loop\Cad_LineSingularZone_Loop.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\Loop</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Line\TwoSide\Cad_LineSingularZone_TwoSide.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\TwoSide</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Line\WholeSide\Cad_LineSingularZone_WholeSide.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\WholeSide</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\G\Cad_gSingularity.cxx">
+      <Filter>TnbLib\Cad\Singularity\G</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

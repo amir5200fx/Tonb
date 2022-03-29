@@ -56,7 +56,8 @@ tnbLib::GModel_Wire::RetrieveParaCurves
 	const GModel_Wire & theWire
 )
 {
-	std::shared_ptr<std::vector<std::shared_ptr<GModel_ParaCurve>>> paraCurves;
+	auto paraCurves = std::make_shared<std::vector<std::shared_ptr<GModel_ParaCurve>>>();
+	Debug_Null_Pointer(paraCurves);
 	const auto& edges = theWire.Edges();
 	for (const auto& x : *edges)
 	{

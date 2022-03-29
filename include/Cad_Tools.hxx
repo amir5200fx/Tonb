@@ -6,6 +6,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Entity_Segment.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Cad_Module.hxx>
@@ -58,6 +59,7 @@ namespace tnbLib
 	public:
 
 		static TnbCad_EXPORT Standard_Boolean IsBounded(const std::shared_ptr<Cad_GeomSurface>&);
+		static TnbCad_EXPORT Standard_Boolean IsBounded(const Handle(Geom_Surface)&);
 
 		static TnbCad_EXPORT Standard_Boolean IsPlane(const std::shared_ptr<Cad_GeomSurface>&);
 		static TnbCad_EXPORT Standard_Boolean IsCylinder(const std::shared_ptr<Cad_GeomSurface>&);
@@ -180,6 +182,13 @@ namespace tnbLib
 				const Handle(Geom_Curve)& theCurve,
 				const Standard_Real u0,
 				const Standard_Real u1
+			);
+
+		static TnbCad_EXPORT Handle(Geom_Surface) 
+			ConvertToTrimmed
+			(
+				const Handle(Geom_Surface)&,
+				const Entity2d_Box&
 			);
 
 		static TnbCad_EXPORT std::shared_ptr<TModel_Edge>

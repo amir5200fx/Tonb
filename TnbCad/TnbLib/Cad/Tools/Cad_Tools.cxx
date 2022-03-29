@@ -35,7 +35,7 @@
 #include <gp_Pln.hxx>
 #include <Geom_Line.hxx>
 #include <Geom_Plane.hxx>
-#include <Geom_BoundedSurface.hxx>
+#include <Geom_RectangularTrimmedSurface.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <Geom_BSplineCurve.hxx>
 #include <Geom_BSplineSurface.hxx>
@@ -74,6 +74,13 @@ tnbLib::Cad_Tools::IsBounded
 	Debug_Null_Pointer(theSurface);
 	Debug_Null_Pointer(theSurface->Geometry());
 	return (Standard_Boolean)Handle(Geom_BoundedSurface)::DownCast(theSurface->Geometry());
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsBounded(const Handle(Geom_Surface)& theSurface)
+{
+	Debug_Null_Pointer(theSurface);
+	return (Standard_Boolean)Handle(Geom_BoundedSurface)::DownCast(theSurface);
 }
 
 Standard_Boolean 
@@ -828,6 +835,30 @@ tnbLib::Cad_Tools::ConvertToTrimmed
 {
 	Handle(Geom_Curve) trimmed =
 		new Geom_TrimmedCurve(theCurve, u0, u1);
+	return std::move(trimmed);
+}
+
+Handle(Geom_Surface)
+tnbLib::Cad_Tools::ConvertToTrimmed
+(
+	const Handle(Geom_Surface)& theSurface,
+	const Entity2d_Box & theBnd
+)
+{
+#ifdef _DEBUG
+	if (IsBounded(theSurface))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the surface is already trimmed!" << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
+	const auto u0 = theBnd.P0().X();
+	const auto u1 = theBnd.P1().X();
+	const auto v0 = theBnd.P0().Y();
+	const auto v1 = theBnd.P1().Y();
+	Handle(Geom_Surface) trimmed = 
+		new Geom_RectangularTrimmedSurface(theSurface, u0, u1, v0, v1);
 	return std::move(trimmed);
 }
 

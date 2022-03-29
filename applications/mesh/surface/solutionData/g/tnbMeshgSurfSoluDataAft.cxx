@@ -193,11 +193,6 @@ namespace tnbLib
 		return std::move(sizeFun);
 	}
 
-	void loadFile()
-	{
-		loadModelFile();
-	}
-
 	void saveTo(const std::string& name)
 	{
 		if (NOT exeTag)
@@ -241,11 +236,13 @@ namespace tnbLib
 		}
 
 		auto sizeFun = loadSizeFunction();
+		auto[glCrvInfo, crvInfos] = loadCurveInfo();
 
 		auto soluData = std::make_shared<Aft2d_gSolutionDataSurface>();
 
 		soluData->SetGeometry(std::move(myModel));	
 		soluData->SetSizeFun(std::move(sizeFun));
+		soluData->SetGlobalCurveInfo(std::move(glCrvInfo));
 
 		mySolutionData = std::move(soluData);
 
@@ -273,7 +270,7 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		// io functions [2/23/2022 Amir]
-		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		//mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
 		// settings [2/23/2022 Amir]
@@ -320,7 +317,7 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile()" << endl
+				/*<< " - loadFile()" << endl*/
 				<< " - saveTo(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl

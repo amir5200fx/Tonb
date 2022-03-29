@@ -12,7 +12,7 @@ namespace tnbLib
 
 		struct LineSingularZone_TwoSideBase
 		{
-			static TnbCad_EXPORT const word typeName;
+			static TnbMesh_EXPORT const word typeName;
 		};
 
 		template<class SurfPln>

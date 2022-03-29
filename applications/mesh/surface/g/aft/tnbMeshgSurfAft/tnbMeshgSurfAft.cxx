@@ -28,6 +28,7 @@
 #include <GeoMetricFun2d_ExactSurface.hxx>
 #include <GeoMetricFun2d_Plane.hxx>
 #include <Cad_GModel.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
 
 #include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
@@ -202,7 +203,6 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		const auto& geometry = theSurface->GeomSurface()->Geometry();
-
 		auto wire = GModel_Tools::GetOuterParaWire(theSurface);
 		auto box = GModel_Tools::CalcBoundingBox(*wire);
 
@@ -210,10 +210,12 @@ namespace tnbLib
 		auto tol = myTol * d;
 
 		auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
+		std::cout << "plane is created!" << std::endl;
 		auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
 
 		if (GModel_Tools::IsPlane(theSurface))
 		{
+			std::cout << "it's plane!" << std::endl;
 			auto gPlane = Handle(Geom_Plane)::DownCast(geometry);
 			if (NOT gPlane)
 			{
@@ -221,9 +223,21 @@ namespace tnbLib
 					<< "the geometry is not plane!" << endl
 					<< abort(FatalError);
 			}
+			PAUSE;
 			auto metricFun = std::make_shared<GeoMetricFun2d_Plane>(gPlane, box);
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurfaceUniMetric>(sizeFun, metricFun, theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
+
+			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(theUniMetricCalculator))
+			{
+				std::cout << "yessss" << std::endl;
+				optNodeAlg->SetMetricMap(metricPrcsr);
+			}
+			else
+			{
+				std::cout << "noooooooooo" << std::endl;
+			}
+			PAUSE;
 
 			auto plnRegion = Aft2d_gRegionPlaneSurfaceUniMetric::MakePlane(pln);
 
@@ -248,9 +262,15 @@ namespace tnbLib
 		}
 		else
 		{
+			std::cout << "it's not plane!" << std::endl;
 			auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(geometry, box);
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(sizeFun, metricFun, theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
+
+			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_nonIterAdaptive>(theUniMetricCalculator))
+			{
+				optNodeAlg->SetMetricMap(metricPrcsr);
+			}
 
 			auto plnRegion = Aft2d_gRegionPlaneSurface::MakePlane(pln);
 
@@ -300,6 +320,11 @@ namespace tnbLib
 
 		const auto& sizeFun3d = mySoluData->SizeFun();
 
+		auto integInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
+		integInfo->SetMaxNbIterations(50);
+		integInfo->SetNbInitIterations(4);
+		integInfo->SetTolerance(1.0E-4);
+
 		auto iterInfo = std::make_shared<Aft_SizeCorr_IterativeInfo>();
 		iterInfo->SetIgnoreNonConvergency(Standard_True);
 		iterInfo->SetMaxNbIters(5);
@@ -311,22 +336,35 @@ namespace tnbLib
 		auto anIsoOptNodeInfo = std::make_shared<Aft2d_OptNodeAnIso_nonIterAdaptiveInfo>(iterInfo, fracInfo);
 		auto anIsoOptNodeUniMetric = std::make_shared<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(anIsoOptNodeInfo);
 		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_nonIterAdaptive>(anIsoOptNodeInfo);
-
-		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
-		bndInfo->SetOverrideInfo(Standard_False);
-		bndInfo->SetMergeTolerance(1.0E-6);
-
+		
 		auto metricPrcsrInfo = std::make_shared<Aft_MetricPrcsrAnIso_Info>();
 		metricPrcsrInfo->SetNbIters(5);
 		metricPrcsrInfo->SetNbSamples(3);
 		metricPrcsrInfo->SetTolerance(0.02);
-
+		metricPrcsrInfo->OverrideIntegInfo(integInfo);
+		
+		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
+		bndInfo->SetOverrideInfo(Standard_False);
+		bndInfo->OverrideGlobalCurve(mySoluData->GlobalCurveInfo());
+		bndInfo->SetMergeTolerance(1.0E-6);
+		bndInfo->OverrideGlobalMetricPrcsr(metricPrcsrInfo);
+		
 		for (const auto& x : model->Surfaces())
 		{
 			Debug_Null_Pointer(x);
+			if (verbose)
+			{
+				Info << endl
+					<< "- meshing surface, " << x->Index() << endl;
+			}
 			auto plnMesh = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metricPrcsrInfo);
 			auto tris = Aft_Tools::RetrieveTriangleMesh(plnMesh);
 			auto tris3d = retrieveTris3d(x, *tris);
+
+			if (verbose)
+			{
+				Info << " - surface, " << x->Index() << ", is discretized, successfully!" << endl;
+			}
 
 			Global_Tools::Insert(x->Index(), tris3d, mySoluData->TrisRef());
 		}

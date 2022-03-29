@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7EF64021-D713-4B15-AAF0-BF3595FE04DC}</ProjectGuid>
-    <RootNamespace>tnbMeshgSurfAft</RootNamespace>
+    <ProjectGuid>{27FF5E94-AE96-43C0-A73C-85475E10338D}</ProjectGuid>
+    <RootNamespace>tnbCadToolShapeBndBox</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -86,10 +86,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,10 +136,10 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)d.pdb" </Comma
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,26 +156,17 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).ipdb" </Comma
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="tnbMeshgSurfAft.cxx" />
+    <ClCompile Include="tnbCadToolShapeBndBox.cxx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\TnbCad2d\TnbCad2d.vcxproj">
-      <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\TnbCad\TnbCad.vcxproj">
+    <ProjectReference Include="..\..\..\..\TnbCad\TnbCad.vcxproj">
       <Project>{f14396e4-5995-4cc2-8101-42854ce5c625}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\TnbGeo\TnbGeo.vcxproj">
+    <ProjectReference Include="..\..\..\..\TnbGeo\TnbGeo.vcxproj">
       <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+    <ProjectReference Include="..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
       <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\TnbMesh\TnbMesh.vcxproj">
-      <Project>{00cf3b69-2a41-4038-8e73-fde99df1478a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\TnbNumAlg\TnbNumAlg.vcxproj">
-      <Project>{9d2ace52-928f-4b06-aecd-3a7cef4f63bb}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

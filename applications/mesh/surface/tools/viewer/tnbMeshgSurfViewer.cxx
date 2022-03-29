@@ -1,23 +1,23 @@
-#include <Cad_GModel.hxx>
-#include <GModel_Tools.hxx>
-#include <Cad_Shape.hxx>
+#include <Aft2d_gSolutionDataSurface.hxx>
+#include <Entity3d_Triangulation.hxx>
+#include <Entity3d_Box.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
 {
-
-	static const std::string loadExt = Cad_Shape::extension;
-	static const std::string saveExt = Cad_GModel::extension;
-
 	static unsigned short verbose = 0;
 	static bool loadTag = false;
 	static bool exeTag = false;
 
-	static std::shared_ptr<Cad_GModel> myModel;
-	static std::shared_ptr<Cad_Shape> myShape;
+	static std::shared_ptr<Aft2d_gSolutionDataSurface> mySoluData;
 	static std::string myFileName;
+
+	static const std::string loadExt = Aft2d_gSolutionDataSurface::extension;
+	static const std::string saveExt = Entity3d_Triangulation::extension + "list";
+
+	static std::vector<std::shared_ptr<Entity3d_Triangulation>> myTris;
 
 	void setVerbose(unsigned int i)
 	{
@@ -30,20 +30,21 @@ namespace tnbLib
 	{
 		file::CheckExtension(name);
 
-		myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + loadExt, verbose);
-		if (NOT myShape)
+		mySoluData = file::LoadFile<std::shared_ptr<Aft2d_gSolutionDataSurface>>(name + loadExt, verbose);
+		myFileName = name;
+		if (NOT mySoluData)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the shape file is null!" << endl
+				<< "the data solution file is null!" << endl
 				<< abort(FatalError);
 		}
+
 		loadTag = true;
 	}
 
 	void loadFile()
 	{
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt).string();
-		myFileName = name;
+		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt).string();		
 		loadFile(name);
 	}
 
@@ -58,7 +59,7 @@ namespace tnbLib
 
 		file::CheckExtension(name);
 
-		file::SaveTo(myModel, name + saveExt, verbose);
+		file::SaveTo(myTris, name + saveExt, verbose);
 	}
 
 	void saveTo()
@@ -72,34 +73,6 @@ namespace tnbLib
 		saveTo(myFileName);
 	}
 
-	void execute(const std::string& name)
-	{
-		if (NOT loadTag)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no file has been loaded!" << endl
-				<< abort(FatalError);
-		}
-
-		auto surfaces = GModel_Tools::GetSurfaces(myShape->Shape());
-		if (surfaces.empty())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no surface is found!" << endl
-				<< abort(FatalError);
-		}
-
-		myModel = std::make_shared<Cad_GModel>(std::move(surfaces));
-		myModel->SetName(name);
-
-		if (verbose)
-		{
-			Info << endl
-				<< " - the application is performed, successfully!" << endl;
-		}
-		exeTag = true;
-	}
-
 	void execute()
 	{
 		if (NOT loadTag)
@@ -109,7 +82,20 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		execute(myShape->Name());
+		const auto& tris = mySoluData->Tris();
+		myTris.reserve(tris.size());
+		for (const auto& x : tris)
+		{
+			myTris.push_back(x.second);
+		}
+
+		exeTag = true;
+
+		if (verbose)
+		{
+			Info << endl
+				<< " The application is performed, successfully!" << endl;
+		}
 	}
 }
 
@@ -126,18 +112,17 @@ namespace tnbLib
 
 	void setFuns(const module_t& mod)
 	{
-		// io functions [12/28/2021 Amir]
+		// io functions 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
 
-		// settings [12/28/2021 Amir]
+		// settings 
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
 
-		// operators [12/28/2021 Amir]
+		// operators 
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {execute(name); }), "execute");
 	}
 
 	std::string getString(char* argv)
@@ -170,7 +155,7 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to create a GModel for a shape." << endl << endl;
+			Info << " This application is aimed to retrieve the triangulations from a solution data." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -185,7 +170,7 @@ int main(int argc, char *argv[])
 
 				<< " # Operators:" << endl << endl
 
-				<< " - execute(name [optional])" << endl
+				<< " - execute()" << endl
 				<< endl;
 			return 0;
 		}
@@ -201,7 +186,7 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbCadGModel"));
+				fileName myFileName(file::GetSystemFile("tnbMeshgSurfViewer"));
 
 				chai.eval_file(myFileName);
 				return 0;
