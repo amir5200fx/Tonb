@@ -14,7 +14,7 @@
 namespace tnbLib
 {
 
-	// Forward Declarations [3/21/2022 Roya]
+	// Forward Declarations [3/21/2022 Amir]
 	class Pln_Edge;
 	class Pln_Vertex;
 	class Cad2d_MergeCurvesInfo;
@@ -41,16 +41,16 @@ namespace tnbLib
 
 			typedef Pnt2d ptType;
 
-			// default constructor [3/21/2022 Roya]
+			// default constructor [3/21/2022 Amir]
 
 
-			// constructors [3/21/2022 Roya]
+			// constructors [3/21/2022 Amir]
 
 			Node(const Standard_Integer theIndex)
 				: Global_Indexed(theIndex)
 			{}
 
-			// public functions and operators [3/21/2022 Roya]
+			// public functions and operators [3/21/2022 Amir]
 
 			const auto& Coord() const
 			{
@@ -102,18 +102,18 @@ namespace tnbLib
 
 		public:
 
-			// default constructor [3/21/2022 Roya]
+			// default constructor [3/21/2022 Amir]
 
 			Link()
 			{}
 
-			// constructors [3/21/2022 Roya]
+			// constructors [3/21/2022 Amir]
 
 			explicit Link(const Standard_Integer theIndex)
 				: Global_Indexed(theIndex)
 			{}
 
-			// public functions and operators [3/21/2022 Roya]
+			// public functions and operators [3/21/2022 Amir]
 
 			virtual Standard_Boolean IsRing() const
 			{
@@ -146,13 +146,13 @@ namespace tnbLib
 
 		public:
 
-			// default constructor [3/21/2022 Roya]
+			// default constructor [3/21/2022 Amir]
 
 			RingLink()
 			{}
 
 
-			// constructors [3/21/2022 Roya]
+			// constructors [3/21/2022 Amir]
 
 
 			RingLink
@@ -173,14 +173,14 @@ namespace tnbLib
 				, theNode_(std::move(theNode))
 			{}
 
-			// override functions and operators [3/21/2022 Roya]
+			// override functions and operators [3/21/2022 Amir]
 
 			Standard_Boolean IsRing() const override
 			{
 				return Standard_True;
 			}
 
-			// public functions and operators [3/21/2022 Roya]
+			// public functions and operators [3/21/2022 Amir]
 
 			const auto& GetNode() const
 			{
@@ -204,12 +204,12 @@ namespace tnbLib
 
 		public:
 
-			// default constructor [3/21/2022 Roya]
+			// default constructor [3/21/2022 Amir]
 
 			SegmentLink()
 			{}
 
-			// constructors [3/21/2022 Roya]
+			// constructors [3/21/2022 Amir]
 
 			SegmentLink
 			(
@@ -233,14 +233,14 @@ namespace tnbLib
 				, theNode1_(std::move(theNode1))
 			{}
 
-			// override functions and operators [3/21/2022 Roya]
+			// override functions and operators [3/21/2022 Amir]
 
 			Standard_Boolean IsSegment() const override
 			{
 				return Standard_True;
 			}
 
-			// public functions and operators [3/21/2022 Roya]
+			// public functions and operators [3/21/2022 Amir]
 
 			const auto& Node0() const
 			{
@@ -263,7 +263,7 @@ namespace tnbLib
 			}
 		};
 
-		// static functions and operators [3/21/2022 Roya]
+		// static functions and operators [3/21/2022 Amir]
 		
 		static TnbCad2d_EXPORT std::map<Standard_Integer, std::shared_ptr<Node>> RetrieveNodes(const std::vector<std::shared_ptr<Link>>&);
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> MergeNode(const std::shared_ptr<Node>&);
@@ -277,7 +277,7 @@ namespace tnbLib
 		const std::vector<std::shared_ptr<Pln_Edge>>& theCurves_;
 
 
-		// private functions [3/21/2022 Roya]
+		// private functions [3/21/2022 Amir]
 
 		TnbCad2d_EXPORT std::vector<std::shared_ptr<Link>> CreateLinks(const std::vector<std::shared_ptr<Pln_Edge>>&) const;
 		static TnbCad2d_EXPORT std::vector<Pnt2d> RetrieveCoords(const std::vector<std::shared_ptr<Pln_Edge>>&);
@@ -286,10 +286,10 @@ namespace tnbLib
 
 		static TnbCad2d_EXPORT const std::shared_ptr<Cad2d_MergeCurvesInfo> DEFAULT_INFO;
 
-		// default constructor [3/21/2022 Roya]
+		// default constructor [3/21/2022 Amir]
 
 
-		// constructors [3/21/2022 Roya]
+		// constructors [3/21/2022 Amir]
 
 		explicit Cad2d_MergeCurves
 		(
@@ -308,7 +308,7 @@ namespace tnbLib
 			, theInfo_(theInfo)
 		{}
 
-		// public functions and operators [3/21/2022 Roya]
+		// public functions and operators [3/21/2022 Amir]
 
 		const auto& Curves() const
 		{
@@ -323,7 +323,7 @@ namespace tnbLib
 		TnbCad2d_EXPORT void Perform();
 
 
-		// static functions and operators [3/22/2022 Roya]
+		// static functions and operators [3/22/2022 Amir]
 
 		static TnbCad2d_EXPORT void Renumber(const std::vector<std::shared_ptr<Pln_Edge>>&);
 	};

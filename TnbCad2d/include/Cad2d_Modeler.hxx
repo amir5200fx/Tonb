@@ -22,6 +22,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Pln_Edge;
+	class Pln_Segment;
 	class Pln_Vertex;
 	class Pln_Ring;
 
@@ -84,7 +85,7 @@ namespace tnbLib
 		TnbCad2d_EXPORT Standard_Integer
 			AddEdge
 			(
-				const std::shared_ptr<Pln_Edge>& theEdge
+				const std::shared_ptr<Pln_Segment>& theEdge
 			);
 
 		TnbCad2d_EXPORT Standard_Integer
@@ -162,20 +163,20 @@ namespace tnbLib
 			const std::shared_ptr<Pln_Edge>& theEdge
 		);
 
-		TnbCad2d_EXPORT Standard_Integer Import
+		/*TnbCad2d_EXPORT Standard_Integer Import
 		(
 			std::shared_ptr<Pln_Edge>&& theEdge
-		);
+		);*/
 
 		TnbCad2d_EXPORT void Import
 		(
 			const std::vector<std::shared_ptr<Pln_Edge>>& theEdegs
 		);
 
-		TnbCad2d_EXPORT void Import
+		/*TnbCad2d_EXPORT void Import
 		(
 			std::vector<std::shared_ptr<Pln_Edge>>&& theEdegs
-		);
+		);*/
 
 		TnbCad2d_EXPORT void Trim
 		(

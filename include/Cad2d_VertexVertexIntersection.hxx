@@ -22,6 +22,10 @@ namespace tnbLib
 		std::shared_ptr<Pln_Vertex> theVtx0_;
 		std::shared_ptr<Pln_Vertex> theVtx1_;
 
+		// private functions and operators [3/22/2022 Amir]
+
+		TNB_SERIALIZATION(TnbCad2d_EXPORT);
+
 	public:
 
 		// default constructor [1/27/2022 Amir]
@@ -88,5 +92,7 @@ namespace tnbLib
 			);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Cad2d_VertexVertexIntersection);
 
 #endif // !_Cad2d_VertexVertexIntersection_Header

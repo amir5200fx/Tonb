@@ -6,8 +6,10 @@
 #include <Standard_TypeDef.hxx>
 #include <Entity_Segment.hxx>
 #include <Entity3d_BoxFwd.hxx>
+#include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Cad_Module.hxx>
 
 class Bnd_Box;
@@ -58,6 +60,7 @@ namespace tnbLib
 	public:
 
 		static TnbCad_EXPORT Standard_Boolean IsBounded(const std::shared_ptr<Cad_GeomSurface>&);
+		static TnbCad_EXPORT Standard_Boolean IsBounded(const Handle(Geom_Surface)&);
 
 		static TnbCad_EXPORT Standard_Boolean IsPlane(const std::shared_ptr<Cad_GeomSurface>&);
 		static TnbCad_EXPORT Standard_Boolean IsCylinder(const std::shared_ptr<Cad_GeomSurface>&);
@@ -85,6 +88,8 @@ namespace tnbLib
 				const std::shared_ptr<Cad_CurveLength_Info>& theInfo
 			);
 
+		static TnbCad_EXPORT Pnt3d CalcCoord(const Pnt2d&, const Geom_Surface&);
+
 		static TnbCad_EXPORT Standard_Boolean
 			IsBounded
 			(
@@ -108,6 +113,8 @@ namespace tnbLib
 				const Standard_Real u1, 
 				const Standard_Real tol
 			);
+
+		static TnbCad_EXPORT Entity2d_Box ParametricDomain(const Geom_Surface& theSurf);
 
 		static TnbCad_EXPORT Entity3d_Box
 			BoundingBox
@@ -180,6 +187,13 @@ namespace tnbLib
 				const Handle(Geom_Curve)& theCurve,
 				const Standard_Real u0,
 				const Standard_Real u1
+			);
+
+		static TnbCad_EXPORT Handle(Geom_Surface) 
+			ConvertToTrimmed
+			(
+				const Handle(Geom_Surface)&,
+				const Entity2d_Box&
 			);
 
 		static TnbCad_EXPORT std::shared_ptr<TModel_Edge>
@@ -343,6 +357,10 @@ namespace tnbLib
 				const Handle(Geom_Surface)&,
 				Standard_Real(*sizeFun)(const Pnt3d&)
 			);
+
+		// calculate the polygon length on the surface [3/29/2022 Amir]
+		static TnbCad_EXPORT Standard_Real CalcLength(const Entity2d_Polygon& thePoly, const Geom_Surface&);
+		static TnbCad_EXPORT Standard_Real CalcSegmentLength(const Pnt2d& theP0, const Pnt2d& theP1, const Geom_Surface&);
 
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Surface>&);
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Edge>&);

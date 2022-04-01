@@ -5,10 +5,8 @@
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Pln_Vertex.hxx>
 #include <Pln_Curve.hxx>
-#include <Pln_TangCurve.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_CmpEdge.hxx>
-#include <Pln_TangEdge.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad2d_Plane.hxx>

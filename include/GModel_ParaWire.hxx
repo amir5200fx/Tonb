@@ -73,7 +73,7 @@ namespace tnbLib
 
 		const auto& Curves() const
 		{
-			return theCurves_;
+			return *theCurves_;
 		}
 
 		//- IO functions and operators

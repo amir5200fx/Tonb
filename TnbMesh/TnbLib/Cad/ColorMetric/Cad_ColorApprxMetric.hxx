@@ -6,6 +6,7 @@
 
 #include <Global_Done.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Mesh2d_ElementFwd.hxx>
 
 #include <memory>
@@ -89,6 +90,10 @@ namespace tnbLib
 			return theCriterion_;
 		}
 
+		Standard_Integer NbElements() const;
+		Standard_Integer Value(const Standard_Integer theIndex) const;
+		Standard_Integer Value(const Pnt2d& theCoord) const;
+
 		void Perform();
 
 		void LoadGeoemtry(const Handle(Geom_Surface)& theGeometry)
@@ -110,6 +115,8 @@ namespace tnbLib
 		{
 			theCriterion_ = theCrit;
 		}
+
+		static void Check(const Entity2d_Polygon&, const Cad_ColorApprxMetric&);
 	};
 }
 

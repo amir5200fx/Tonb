@@ -295,7 +295,7 @@ using namespace tnbLib;
 
 int main(int argc, char* argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{

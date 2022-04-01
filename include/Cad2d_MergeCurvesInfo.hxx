@@ -18,7 +18,7 @@ namespace tnbLib
 		Standard_Real theRadius_;
 
 
-		// private functions and operators [3/22/2022 Roya]
+		// private functions and operators [3/22/2022 Amir]
 
 		friend class boost::serialization::access;
 
@@ -34,14 +34,14 @@ namespace tnbLib
 		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 		static TnbCad2d_EXPORT const Standard_Real DEFAULT_RADIUS;
 
-		// default constructor [3/21/2022 Roya]
+		// default constructor [3/21/2022 Amir]
 
 		Cad2d_MergeCurvesInfo()
 			: theTolerance_(DEFAULT_TOLERANCE)
 			, theRadius_(DEFAULT_RADIUS)
 		{}
 
-		// constructors [3/21/2022 Roya]
+		// constructors [3/21/2022 Amir]
 
 		Cad2d_MergeCurvesInfo
 		(
@@ -52,7 +52,7 @@ namespace tnbLib
 			, theRadius_(theRadius)
 		{}
 
-		// public functions and operators [3/21/2022 Roya]
+		// public functions and operators [3/21/2022 Amir]
 
 		auto Tolerance() const
 		{

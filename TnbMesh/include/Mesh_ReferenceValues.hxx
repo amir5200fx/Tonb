@@ -132,12 +132,12 @@ namespace tnbLib
 			theBase_ = theSize;
 		}
 
-		void SetRegion(const std::shared_ptr<Entity2d_Box>& theRegion)
+		void SetRegion(const std::shared_ptr<Box>& theRegion)
 		{
 			theRegion_ = theRegion;
 		}
 
-		void SetRegion(std::shared_ptr<Entity2d_Box>&& theRegion)
+		void SetRegion(std::shared_ptr<Box>&& theRegion)
 		{
 			theRegion_ = std::move(theRegion);
 		}

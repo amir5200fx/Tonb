@@ -73,7 +73,7 @@ namespace tnbLib
 	{
 		if (theCurve->IsRing())
 		{
-			if (auto x = IntersectionTwoPoints(theVtx, theCurve->Vtx0(), theTol))
+			if (auto x = IntersectionTwoPoints(theVtx, theCurve->FirstVtx(), theTol))
 			{
 				return std::move(x);
 			}
@@ -95,12 +95,12 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 #endif // _DEBUG
-			if (auto x = IntersectionTwoPoints(theVtx, theCurve->Vtx0(), theTol))
+			if (auto x = IntersectionTwoPoints(theVtx, theCurve->FirstVtx(), theTol))
 			{
 				return std::move(x);
 			}
 
-			if (auto x = IntersectionTwoPoints(theVtx, theCurve->Vtx1(), theTol))
+			if (auto x = IntersectionTwoPoints(theVtx, theCurve->LastVtx(), theTol))
 			{
 				return std::move(x);
 			}
@@ -122,7 +122,7 @@ namespace tnbLib
 	{
 		std::vector<std::shared_ptr<Cad2d_EntityEntityIntersection>> entities;
 		{
-			const auto& vtx = theCurve0->Vtx0();
+			const auto vtx = theCurve0->FirstVtx();
 			Debug_Null_Pointer(vtx);
 
 			auto ent = Intersection(vtx, theCurve1, theTol);
@@ -137,7 +137,7 @@ namespace tnbLib
 		}
 
 		{
-			const auto& vtx = theCurve0->Vtx1();
+			const auto vtx = theCurve0->LastVtx();
 			Debug_Null_Pointer(vtx);
 
 			auto ent = Intersection(vtx, theCurve1, theTol);
@@ -151,17 +151,17 @@ namespace tnbLib
 			}
 		}
 
-		if (auto x = IntersectionPointCurve(theCurve1->Vtx0(), theCurve0, theTol))
+		if (auto x = IntersectionPointCurve(theCurve1->FirstVtx(), theCurve0, theTol))
 		{
-			auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(theCurve1->Vtx0(), theCurve0);
+			auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(theCurve1->FirstVtx(), theCurve0);
 			Debug_Null_Pointer(entity);
 			entity->EntitiesRef().push_back(std::move(x));
 			entities.push_back(std::move(entity));
 		}
 
-		if (auto x = IntersectionPointCurve(theCurve1->Vtx1(), theCurve0, theTol))
+		if (auto x = IntersectionPointCurve(theCurve1->LastVtx(), theCurve0, theTol))
 		{
-			auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(theCurve1->Vtx1(), theCurve0);
+			auto entity = std::make_shared<Cad2d_VertexEdgeIntersection>(theCurve1->LastVtx(), theCurve0);
 			Debug_Null_Pointer(entity);
 			entity->EntitiesRef().push_back(std::move(x));
 			entities.push_back(std::move(entity));

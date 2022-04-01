@@ -12,6 +12,7 @@
 #include <Aft2d_MetricPrcsrSurfaceFwd.hxx>
 #include <Aft2d_MetricPrcsrSurface_Method.hxx>
 #include <Geo2d_MetricFunction_SurfaceMethod.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
 
 #include <memory>
 #include <map>
@@ -65,6 +66,8 @@ namespace tnbLib
 
 		// results [2/18/2022 Amir]
 
+		std::map<Standard_Integer, std::shared_ptr<Entity3d_Triangulation>> theTris_;
+		std::shared_ptr<Entity3d_Triangulation> theMergedTris_;
 
 		// private functions and operators [2/23/2022 Amir]
 
@@ -115,16 +118,6 @@ namespace tnbLib
 			return theMetricFunMethod_;
 		}
 
-		const auto& SizeFunction() const
-		{
-			return theSizeFun_;
-		}
-
-		auto& SizeFunctionRef()
-		{
-			return theSizeFun_;
-		}
-
 		const auto& GlobalCurveInfo() const
 		{
 			return theGlobalCurveInfo_;
@@ -138,6 +131,26 @@ namespace tnbLib
 		const auto& MetricPrcsrInfo() const
 		{
 			return theMetricPrcsrInfo_;
+		}
+
+		const auto& Tris() const
+		{
+			return theTris_;
+		}
+
+		auto& TrisRef()
+		{
+			return theTris_;
+		}
+
+		const auto& MergedTris() const
+		{
+			return theMergedTris_;
+		}
+
+		auto& MergedTrisRef() 
+		{
+			return theMergedTris_;
 		}
 
 		std::shared_ptr<Mesh_Curve_Info> CurveInfo(const Standard_Integer theSurfId) const;

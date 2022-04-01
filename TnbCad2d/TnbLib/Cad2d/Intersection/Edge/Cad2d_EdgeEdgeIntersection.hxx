@@ -27,6 +27,11 @@ namespace tnbLib
 		std::shared_ptr<Pln_Edge> theEdge0_;
 		std::shared_ptr<Pln_Edge> theEdge1_;
 
+
+		// private functions and operators [3/22/2022 Amir]
+
+		TNB_SERIALIZATION(TnbCad2d_EXPORT);
+
 	public:
 
 
@@ -151,5 +156,7 @@ namespace tnbLib
 			);
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Cad2d_EdgeEdgeIntersection);
 
 #endif // !_Cad2d_EdgeEdgeIntersection_Header

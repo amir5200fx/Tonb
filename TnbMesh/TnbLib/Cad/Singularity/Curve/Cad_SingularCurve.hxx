@@ -5,6 +5,8 @@
 #include <Standard_TypeDef.hxx>
 #include <Global_Serialization.hxx>
 
+class Geom2d_Curve;
+
 namespace tnbLib
 {
 
@@ -15,7 +17,7 @@ namespace tnbLib
 
 	public:
 
-		typedef typename CurveType::geomType geomType;
+		//typedef typename CurveType::geomType geomType;
 
 	private:
 
@@ -39,11 +41,11 @@ namespace tnbLib
 
 		// constructors [12/31/2021 Amir]
 
-		Cad_SingularCurve(const Handle(geomType)& theGeometry)
+		Cad_SingularCurve(const Handle(Geom2d_Curve)& theGeometry)
 			: CurveType(theGeometry)
 		{}
 
-		Cad_SingularCurve(Handle(geomType)&& theGeometry)
+		Cad_SingularCurve(Handle(Geom2d_Curve)&& theGeometry)
 			: CurveType(std::move(theGeometry))
 		{}
 

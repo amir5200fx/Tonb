@@ -24,6 +24,22 @@ namespace tnbLib
 		Pnt2d theCoord0_;
 		Pnt2d theCoord1_;
 
+
+		// private functions and operators [3/22/2022 Amir]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar& boost::serialization::base_object<Cad2d_IntsctEntity_Segment>(*this);
+
+			ar& theParameter0_;
+			ar& theParameter1_;
+			ar& theCoord0_;
+			ar& theCoord1_;
+		}
+
 	public:
 
 		//- default constructor
@@ -54,5 +70,7 @@ namespace tnbLib
 			GLOBAL_ACCESS_SINGLE(Pnt2d, Coord1)
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Cad2d_IntsctEntity_TangSegment);
 
 #endif // !_Cad2d_IntsctEntity_TangSegment_Header

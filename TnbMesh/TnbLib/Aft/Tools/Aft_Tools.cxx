@@ -155,15 +155,15 @@ tnbLib::Aft_Tools::RetrieveGeometry
 	return std::move(coords);
 }
 
-//std::vector<tnbLib::Pnt2d>
-//tnbLib::Aft_Tools::RetrieveGeometry
-//(
-//	const std::vector<std::shared_ptr<Aft2d_NodeSurface>>& theNodes
-//)
-//{
-//	auto coords = Aft2d_NodeSurface::RetrieveGeometry(theNodes);
-//	return std::move(coords);
-//}
+std::vector<tnbLib::Pnt2d>
+tnbLib::Aft_Tools::RetrieveGeometry
+(
+	const std::vector<std::shared_ptr<Aft2d_NodeSurface>>& theNodes
+)
+{
+	auto coords = Aft2d_NodeSurface::RetrieveGeometry(theNodes);
+	return std::move(coords);
+}
 
 std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdge>> 
 tnbLib::Aft_Tools::RetrieveTopoMesh

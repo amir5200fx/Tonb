@@ -132,7 +132,7 @@ tnbLib::marineLib::Modeler_Tools::MakeEdge
 	auto curve = MakeCurve(geom, t);
 	Debug_Null_Pointer(curve);
 
-	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
 	Debug_Null_Pointer(edge);
 
 	return std::move(edge);

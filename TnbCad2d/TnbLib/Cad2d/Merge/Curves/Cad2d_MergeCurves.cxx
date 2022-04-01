@@ -3,6 +3,7 @@
 #include <Cad2d_MergeCurvesInfo.hxx>
 #include <Pln_Ring.hxx>
 #include <Pln_Vertex.hxx>
+#include <Pln_Tools.hxx>
 #include <Geo_PrTree.hxx>
 #include <Entity2d_Box.hxx>
 #include <Global_Tools.hxx>
@@ -184,7 +185,7 @@ tnbLib::Cad2d_MergeCurves::CreateLinks
 		std::vector<std::shared_ptr<Node>> candidates;
 		if (x->IsRing())
 		{
-			const auto& vtx = x->Vtx0();
+			const auto vtx = x->FirstVtx();
 			Debug_Null_Pointer(vtx);
 
 			auto n = insert_to_engine(engine, vtx, radius, tol);
@@ -195,8 +196,8 @@ tnbLib::Cad2d_MergeCurves::CreateLinks
 		}
 		else
 		{
-			const auto& vtx0 = x->Vtx0();
-			const auto& vtx1 = x->Vtx1();
+			const auto vtx0 = x->FirstVtx();
+			const auto vtx1 = x->LastVtx();
 			Debug_Null_Pointer(vtx0);
 			Debug_Null_Pointer(vtx1);
 
@@ -224,19 +225,40 @@ tnbLib::Cad2d_MergeCurves::RetrieveCoords
 	{
 		if (x->IsRing())
 		{
-			const auto& v0 = x->Vtx0();
+			const auto v0 = x->FirstVtx();
 			coords.push_back(v0->Coord());
 		}
 		else
 		{
-			const auto& v0 = x->Vtx0();
-			const auto& v1 = x->Vtx1();
+			const auto v0 = x->FirstVtx();
+			const auto v1 = x->LastVtx();
 
 			coords.push_back(v0->Coord());
 			coords.push_back(v1->Coord());
 		}
 	}
 	return std::move(coords);
+}
+
+namespace tnbLib
+{
+	static void ChangeVertex(const std::shared_ptr<Pln_Edge>& edge, const std::shared_ptr<Pln_Vertex>& v0, const std::shared_ptr<Pln_Vertex>& v1)
+	{
+		if (auto ring = std::dynamic_pointer_cast<Pln_Ring>(edge))
+		{
+			Pln_Tools::ChangeVertex(ring, v0);
+		}
+		else if (auto seg = std::dynamic_pointer_cast<Pln_Segment>(edge))
+		{
+			Pln_Tools::ChangeVertex(seg, v0, v1);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "unspecified type of edge has been detected!" << endl
+				<< abort(FatalError);
+		}
+	}
 }
 
 void tnbLib::Cad2d_MergeCurves::Perform()
@@ -270,8 +292,7 @@ void tnbLib::Cad2d_MergeCurves::Perform()
 
 			v->InsertToEdges(ed->Index(), ed);
 
-			ed->ChangeVtx0() = v;
-			ed->ChangeVtx1() = v;
+			ChangeVertex(ed, v, v);
 		}
 		else if (auto seg = std::dynamic_pointer_cast<SegmentLink>(x))
 		{
@@ -284,8 +305,7 @@ void tnbLib::Cad2d_MergeCurves::Perform()
 			v0->InsertToEdges(ed->Index(), ed);
 			v1->InsertToEdges(ed->Index(), ed);
 
-			ed->ChangeVtx0() = v0;
-			ed->ChangeVtx1() = v1;
+			ChangeVertex(ed, v0, v1);
 		}
 		else
 		{
@@ -308,12 +328,12 @@ namespace tnbLib
 			Debug_Null_Pointer(x);
 			if (x->IsRing())
 			{
-				vertices.push_back(x->Vtx0());
+				vertices.push_back(x->FirstVtx());
 			}
 			else
 			{
-				vertices.push_back(x->Vtx0());
-				vertices.push_back(x->Vtx1());
+				vertices.push_back(x->FirstVtx());
+				vertices.push_back(x->LastVtx());
 			}
 		}
 		return std::move(vertices);

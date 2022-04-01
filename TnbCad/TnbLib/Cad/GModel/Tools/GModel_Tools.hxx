@@ -38,7 +38,8 @@ namespace tnbLib
 			GetEdge
 			(
 				const TopoDS_Edge& theEdge, 
-				const TopoDS_Face& theFace
+				const TopoDS_Face& theFace,
+				const Standard_Integer theIndex
 			);
 
 		static TnbCad_EXPORT std::shared_ptr<GModel_Surface>

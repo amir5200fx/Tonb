@@ -34,7 +34,7 @@ tnbLib::cad2dLib::Modeler_Tools::MakeEdge
 	auto curve = std::make_shared<Pln_Curve>(0, geom);
 	Debug_Null_Pointer(curve);
 
-	auto edge = std::make_shared<Pln_Edge>(std::move(v0), std::move(v1), std::move(curve));
+	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
 	Debug_Null_Pointer(edge);
 
 	return std::move(edge);
@@ -891,10 +891,10 @@ namespace tnbLib
 			std::map<Standard_Integer, std::shared_ptr<cad2dLib::Modeler_Corner>>& vtxToCorners
 		)
 	{
-		const auto& v0 = theEdge->Vtx0();
+		const auto v0 = theEdge->FirstVtx();
 		Debug_Null_Pointer(v0);
 
-		const auto& v1 = theEdge->Vtx1();
+		const auto v1 = theEdge->LastVtx();
 		Debug_Null_Pointer(v1);
 
 		const auto& crn0 = FindCorner(v0, vtxToCorners);
@@ -992,14 +992,14 @@ namespace tnbLib
 
 				std::shared_ptr<Pln_Vertex> v0;
 
-				auto piter = paired.find(x->Vtx1()->Index());
+				auto piter = paired.find(x->LastVtx()->Index());
 				if (piter IS_EQUAL paired.end())
 				{
-					v0 = x->Vtx1();
+					v0 = x->LastVtx();
 				}
 				else
 				{
-					v0 = x->Vtx0();
+					v0 = x->FirstVtx();
 				}
 
 				auto iter = theVtxToCorners.find(v0->Index());
@@ -1237,12 +1237,12 @@ tnbLib::cad2dLib::Modeler_Tools::MakeConsecutive
 		const auto& crn0 = indexToCornerMap[mVertices[x->corner0]->Index()];
 
 		Standard_Boolean reversed = Standard_False;
-		if (NOT crn0->IsInside(x->edge->Vtx0()))
+		if (NOT crn0->IsInside(x->edge->FirstVtx()))
 		{
 			reversed = Standard_True;
 		}
 
-		auto edge = std::make_shared<Pln_Edge>
+		auto edge = std::make_shared<Pln_Segment>
 			(
 				mVertices[x->corner0], mVertices[x->corner1],
 				x->edge->Curve(),
@@ -1294,8 +1294,8 @@ tnbLib::cad2dLib::Modeler_Tools::MakeCorners
 		auto crn = std::make_shared<Modeler_Corner>(1);
 		Debug_Null_Pointer(crn);
 
-		ImportVtxToCorner(theEdges[0]->Vtx0(), crn);
-		SetCoordToCorner(theEdges[0]->Vtx0()->Coord(), crn);
+		ImportVtxToCorner(theEdges[0]->FirstVtx(), crn);
+		SetCoordToCorner(theEdges[0]->FirstVtx()->Coord(), crn);
 
 		corners.push_back(std::move(crn));
 
@@ -1355,11 +1355,11 @@ tnbLib::cad2dLib::Modeler_Tools::ConstructMergedEdges
 					iter = edgesMap.find(edge->Index());
 				}
 
-				if (edge->Vtx0() IS_EQUAL vertex)
+				if (edge->FirstVtx() IS_EQUAL vertex)
 				{
 					iter->second.first = x->Index();
 				}
-				if (edge->Vtx1() IS_EQUAL vertex)
+				if (edge->LastVtx() IS_EQUAL vertex)
 				{
 					iter->second.second = x->Index();
 				}
@@ -1417,7 +1417,7 @@ tnbLib::cad2dLib::Modeler_Tools::ConstructMergedEdges
 			const auto& vtx0 = verticesMap[v0];
 			const auto& vtx1 = verticesMap[v1];
 
-			auto edge = std::make_shared<Pln_Edge>
+			auto edge = std::make_shared<Pln_Segment>
 				(
 					pEdge->Index(), pEdge->Name(),
 					vtx0, vtx1, pEdge->Curve(),

@@ -27,18 +27,18 @@ namespace tnbLib
 
 	public:
 
-		typedef typename Cad_SingularCurve<CurveType>::geomType geomType;
+		//typedef typename Cad_SingularCurve<CurveType>::geomType geomType;
 
 		// default constructor [12/31/2021 Amir]
 
 
 		// constructors [12/31/2021 Amir]
 
-		Cad_LineSingularCurve(const Handle(geomType)& theGeometry)
+		explicit Cad_LineSingularCurve(const Handle(Geom2d_Curve)& theGeometry)
 			: Cad_SingularCurve<CurveType>(theGeometry)
 		{}
 
-		Cad_LineSingularCurve(Handle(geomType)&& theGeometry)
+		Cad_LineSingularCurve(Handle(Geom2d_Curve)&& theGeometry)
 			: Cad_SingularCurve<CurveType>(std::move(theGeometry))
 		{}
 

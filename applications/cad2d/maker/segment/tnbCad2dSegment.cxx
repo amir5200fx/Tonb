@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 
 				<< " # operators: " << endl << endl
 
-				<< " - [Point] createPoint(double, double, double)" << endl
+				<< " - [Point] createPoint(double, double)" << endl
 
 				<< " - make(Point0, Point1, name [optional])" << endl
 				<< endl;

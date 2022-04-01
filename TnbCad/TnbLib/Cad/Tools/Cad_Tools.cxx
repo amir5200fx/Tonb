@@ -26,6 +26,7 @@
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Entity2d_Polygon.hxx>
 #include <Adt_AvlTree.hxx>
 #include <Geo_Tools.hxx>
 #include <Merge3d_Chain.hxx>
@@ -35,7 +36,7 @@
 #include <gp_Pln.hxx>
 #include <Geom_Line.hxx>
 #include <Geom_Plane.hxx>
-#include <Geom_BoundedSurface.hxx>
+#include <Geom_RectangularTrimmedSurface.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <Geom_BSplineCurve.hxx>
 #include <Geom_BSplineSurface.hxx>
@@ -74,6 +75,13 @@ tnbLib::Cad_Tools::IsBounded
 	Debug_Null_Pointer(theSurface);
 	Debug_Null_Pointer(theSurface->Geometry());
 	return (Standard_Boolean)Handle(Geom_BoundedSurface)::DownCast(theSurface->Geometry());
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsBounded(const Handle(Geom_Surface)& theSurface)
+{
+	Debug_Null_Pointer(theSurface);
+	return (Standard_Boolean)Handle(Geom_BoundedSurface)::DownCast(theSurface);
 }
 
 Standard_Boolean 
@@ -216,6 +224,17 @@ tnbLib::Cad_Tools::CalcLength
 	return alg->Result();
 }
 
+tnbLib::Pnt3d 
+tnbLib::Cad_Tools::CalcCoord
+(
+	const Pnt2d & thePt, 
+	const Geom_Surface & theSurface
+)
+{
+	auto pt = theSurface.Value(thePt.X(), thePt.Y());
+	return std::move(pt);
+}
+
 Standard_Boolean 
 tnbLib::Cad_Tools::IsBounded
 (
@@ -253,6 +272,21 @@ tnbLib::Cad_Tools::IsRing
 	auto p1 = theCurve->Value(u1);
 
 	return (Standard_Boolean)(p0.Distance(p1) <= tol);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Cad_Tools::ParametricDomain
+(
+	const Geom_Surface & theSurf
+)
+{
+	Standard_Real u0, u1, v0, v1;
+	theSurf.Bounds(u0, u1, v0, v1);
+
+	auto p0 = Pnt2d(u0, v0);
+	auto p1 = Pnt2d(u1, v1);
+	Entity2d_Box b(std::move(p0), std::move(p1));
+	return std::move(b);
 }
 
 tnbLib::Entity3d_Box 
@@ -828,6 +862,30 @@ tnbLib::Cad_Tools::ConvertToTrimmed
 {
 	Handle(Geom_Curve) trimmed =
 		new Geom_TrimmedCurve(theCurve, u0, u1);
+	return std::move(trimmed);
+}
+
+Handle(Geom_Surface)
+tnbLib::Cad_Tools::ConvertToTrimmed
+(
+	const Handle(Geom_Surface)& theSurface,
+	const Entity2d_Box & theBnd
+)
+{
+#ifdef _DEBUG
+	if (IsBounded(theSurface))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the surface is already trimmed!" << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
+	const auto u0 = theBnd.P0().X();
+	const auto u1 = theBnd.P1().X();
+	const auto v0 = theBnd.P0().Y();
+	const auto v1 = theBnd.P1().Y();
+	Handle(Geom_Surface) trimmed = 
+		new Geom_RectangularTrimmedSurface(theSurface, u0, u1, v0, v1);
 	return std::move(trimmed);
 }
 
@@ -1974,6 +2032,45 @@ tnbLib::Cad_Tools::CalcMetric
 
 	Entity2d_Metric1 m(invH * A, invH * B, invH * C);
 	return std::move(m);
+}
+
+Standard_Real 
+tnbLib::Cad_Tools::CalcLength
+(
+	const Entity2d_Polygon & thePoly,
+	const Geom_Surface & theSurf
+)
+{
+#ifdef _DEBUG
+	Entity2d_Polygon::Check(thePoly);
+#endif // _DEBUG
+	auto domain = ParametricDomain(theSurf);
+	Standard_Real d = 0;
+	const auto& pts = thePoly.Points();
+	for (size_t i = 1; i < pts.size(); i++)
+	{
+		const auto& p0 = pts[i - 1];
+		const auto& p1 = pts[i];
+
+		auto P0 = CalcCoord(p0, theSurf);
+		auto P1 = CalcCoord(p1, theSurf);
+
+		d += Distance(P0, P1);
+	}
+	return d;
+}
+
+Standard_Real 
+tnbLib::Cad_Tools::CalcSegmentLength
+(
+	const Pnt2d & theP0, 
+	const Pnt2d & theP1, 
+	const Geom_Surface & theSurf
+)
+{
+	const auto p0 = CalcCoord(theP0, theSurf);
+	const auto p1 = CalcCoord(theP1, theSurf);
+	return p0.Distance(p1);
 }
 
 void tnbLib::Cad_Tools::Connect

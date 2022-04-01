@@ -15,7 +15,7 @@ namespace tnbLib
 {
 
 	template<>
-	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
+	TnbMesh_EXPORT Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
 	(
 		const Standard_Real theRadius,
 		const Entity2d_Metric1& theMetric,
@@ -23,7 +23,7 @@ namespace tnbLib
 	) const;
 
 	template<>
-	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
+	TnbMesh_EXPORT Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
 	(
 		const Standard_Real theRaius,
 		const Pnt2d& theCentre,
@@ -31,14 +31,14 @@ namespace tnbLib
 	) const;
 
 	template<>
-	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
+	TnbMesh_EXPORT Entity2d_Box Aft2d_MetricPrcsrSurface::CalcSearchRegion
 	(
 		const Standard_Real theRaius,
 		const Aft2d_EdgeSurface& theFront
 	) const;
 
 	template<>
-	virtual Entity2d_Box Aft2d_MetricPrcsrSurface::CalcEffectiveFront
+	TnbMesh_EXPORT Entity2d_Box Aft2d_MetricPrcsrSurface::CalcEffectiveFront
 	(
 		const Standard_Real theRadius,
 		const Pnt2d& theCentre,

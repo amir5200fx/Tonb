@@ -32,6 +32,17 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 
 tnbLib::GModel_ParaCurve::GModel_ParaCurve
 (
+	const Standard_Integer theIndex,
+	const Handle(Geom2d_Curve)& theGeometry
+)
+	: Global_Indexed(theIndex)
+	, theGeometry_(theGeometry)
+{
+	CheckBounded(theGeometry, FunctionSIG);
+}
+
+tnbLib::GModel_ParaCurve::GModel_ParaCurve
+(
 	Handle(Geom2d_Curve)&& theGeometry
 )
 	: theGeometry_(std::move(theGeometry))
@@ -47,6 +58,17 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 )
 	: Global_Indexed(theIndex)
 	, Global_Named(theName)
+	, theGeometry_(std::move(theGeometry))
+{
+	CheckBounded(theGeometry, FunctionSIG);
+}
+
+tnbLib::GModel_ParaCurve::GModel_ParaCurve
+(
+	const Standard_Integer theIndex,
+	Handle(Geom2d_Curve) && theGeometry
+)
+	: Global_Indexed(theIndex)
 	, theGeometry_(std::move(theGeometry))
 {
 	CheckBounded(theGeometry, FunctionSIG);

@@ -21,7 +21,13 @@ namespace tnbLib
 
 		std::shared_ptr<Pln_Edge> theEdge_;
 
-	public:
+
+		// private functions and operators [3/22/2022 Amir]
+
+
+		TNB_SERIALIZATION(TnbCad2d_EXPORT);
+
+	protected:
 
 
 		//- default constructor
@@ -39,6 +45,9 @@ namespace tnbLib
 		Cad2d_IntsctEntity_Segment(const Standard_Integer theIndex, const word& theName)
 			: Cad2d_IntsctEntity(theIndex, theName)
 		{}
+
+
+	public:
 
 		//- public functions and operators
 
@@ -94,5 +103,7 @@ namespace tnbLib
 			);
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Cad2d_IntsctEntity_Segment);
 
 #endif // !_Cad2d_IntsctEntity_Segment_Header

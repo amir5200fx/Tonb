@@ -2,10 +2,11 @@
 #ifndef _Cad_SingularZone_Header
 #define _Cad_SingularZone_Header
 
+#include <word.hxx>
 #include <Global_Indexed.hxx>
 #include <Cad_SingularType.hxx>
 #include <Cad_SingularZoneTraits.hxx>
-#include <Cad_Module.hxx>
+#include <Mesh_Module.hxx>
 
 #include <memory>
 #include <vector>

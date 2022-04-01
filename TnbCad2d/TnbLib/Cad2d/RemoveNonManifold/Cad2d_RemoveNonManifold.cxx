@@ -129,8 +129,8 @@ tnbLib::Cad2d_RemoveNonManifold::Segment::RetrieveEdges() const
 	for (const auto& x : Edges())
 	{
 		Debug_Null_Pointer(x);
-		const auto& pv0 = x->Vtx0();
-		const auto& pv1 = x->Vtx1();
+		const auto pv0 = x->FirstVtx();
+		const auto pv1 = x->LastVtx();
 
 		Debug_Null_Pointer(pv0);
 		Debug_Null_Pointer(pv1);
@@ -176,7 +176,7 @@ tnbLib::Cad2d_RemoveNonManifold::Segment::RetrieveEdges() const
 			{
 				auto curve = x->Curve()->Copy();
 				auto c =
-					std::make_shared<Pln_Edge>
+					std::make_shared<Pln_Segment>
 					(
 						x->Index(), x->Name(),
 						std::move(v0), std::move(v1),
@@ -190,7 +190,7 @@ tnbLib::Cad2d_RemoveNonManifold::Segment::RetrieveEdges() const
 			else
 			{
 				auto c =
-					std::make_shared<Pln_Edge>
+					std::make_shared<Pln_Segment>
 					(
 						x->Index(), x->Name(),
 						std::move(v0), std::move(v1),
@@ -209,13 +209,13 @@ tnbLib::Cad2d_RemoveNonManifold::Segment::RetrieveEdges() const
 		Debug_Null_Pointer(x);
 		if (x->IsRing())
 		{
-			const auto& v = x->Vtx0();
+			const auto v = x->FirstVtx();
 			v->InsertToEdges(x->Index(), x);
 		}
 		else
 		{
-			const auto& v0 = x->Vtx0();
-			const auto& v1 = x->Vtx1();
+			const auto v0 = x->FirstVtx();
+			const auto v1 = x->LastVtx();
 
 			v0->InsertToEdges(x->Index(), x);
 			v1->InsertToEdges(x->Index(), x);
@@ -264,7 +264,7 @@ void tnbLib::Cad2d_RemoveNonManifold::RemoveManifols
 		{
 			Debug_Null_Pointer(x);
 
-			const auto& v0 = x->Vtx0();
+			const auto v0 = x->FirstVtx();
 			Debug_Null_Pointer(v0);
 
 			auto iter = theManifolds_.find(v0->Index());
@@ -280,7 +280,7 @@ void tnbLib::Cad2d_RemoveNonManifold::RemoveManifols
 				//  [5/25/2021 Amir]
 			//}
 
-			const auto& v1 = x->Vtx1();
+			const auto v1 = x->LastVtx();
 			Debug_Null_Pointer(v1);
 
 			iter = theManifolds_.find(v1->Index());
@@ -596,7 +596,7 @@ void tnbLib::Cad2d_RemoveNonManifold::AttachEdgesToNodes
 	{
 		if (edge0->IsRing())
 		{
-			const auto& vtx = edge0->Vtx0();
+			const auto& vtx = edge0->FirstVtx();
 			Debug_Null_Pointer(vtx);
 
 			vtx->InsertToEdges(edge0->Index(), edge0);
@@ -614,13 +614,13 @@ void tnbLib::Cad2d_RemoveNonManifold::AttachEdgesToNodes
 	const auto& v0 = node0->Vtx();
 	const auto& v1 = node1->Vtx();
 
-	if (edge0->Vtx0() IS_EQUAL v0)
+	if (edge0->FirstVtx() IS_EQUAL v0)
 	{
-		edge0->Vtx0()->InsertToEdges(edge0->Index(), edge0);
+		edge0->FirstVtx()->InsertToEdges(edge0->Index(), edge0);
 	}
-	else if (edge0->Vtx1() IS_EQUAL v0)
+	else if (edge0->LastVtx() IS_EQUAL v0)
 	{
-		edge0->Vtx1()->InsertToEdges(edge0->Index(), edge0);
+		edge0->LastVtx()->InsertToEdges(edge0->Index(), edge0);
 	}
 	else
 	{
@@ -629,13 +629,13 @@ void tnbLib::Cad2d_RemoveNonManifold::AttachEdgesToNodes
 			<< abort(FatalError);
 	}
 
-	if (edge1->Vtx0() IS_EQUAL v1)
+	if (edge1->FirstVtx() IS_EQUAL v1)
 	{
-		edge1->Vtx0()->InsertToEdges(edge1->Index(), edge1);
+		edge1->FirstVtx()->InsertToEdges(edge1->Index(), edge1);
 	}
-	else if (edge1->Vtx1() IS_EQUAL v1)
+	else if (edge1->LastVtx() IS_EQUAL v1)
 	{
-		edge1->Vtx1()->InsertToEdges(edge1->Index(), edge1);
+		edge1->LastVtx()->InsertToEdges(edge1->Index(), edge1);
 	}
 	else
 	{

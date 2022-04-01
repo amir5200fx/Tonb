@@ -73,12 +73,12 @@ void tnbLib::Cad2d_EdgeEdgeTrim::Perform(const Standard_Real theTol)
 	}
 
 	const auto& alg = *Intersection();
-	if (NOT alg.IsDone())
+	/*if (NOT alg.IsDone())
 	{
 		FatalErrorIn("void tnbLib::Cad2d_EdgeEdgeTrim::Perform()")
 			<< "the intersection algorithm is not performed!" << endl
 			<< abort(FatalError);
-	}
+	}*/
 
 	if (NOT alg.NbEntities())
 	{

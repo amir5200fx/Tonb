@@ -155,8 +155,8 @@ namespace tnbLib
 			Debug_Null_Pointer(theNode);
 			Debug_Null_Pointer(theEdge);
 
-			const auto& v0 = theEdge->Vtx0();
-			const auto& v1 = theEdge->Vtx1();
+			const auto v0 = theEdge->FirstVtx();
+			const auto v1 = theEdge->LastVtx();
 
 			if (v0 IS_EQUAL theNode)
 			{
@@ -200,7 +200,7 @@ namespace tnbLib
 			return std::move(wire);
 		}
 
-		const auto& vtx = edge->Vtx0();
+		const auto vtx = edge->FirstVtx();
 		auto nextEdge = edge;
 		list.push_back(nextEdge);
 

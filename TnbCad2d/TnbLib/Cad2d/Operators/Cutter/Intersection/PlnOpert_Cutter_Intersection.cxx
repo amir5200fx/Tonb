@@ -311,7 +311,7 @@ namespace tnbLib
 				auto edge = e.lock();
 				Debug_Null_Pointer(edge);
 
-				auto id = edge->GetIndex(vtx);
+				auto id = edge->GetPoint(vtx);
 				auto edge_param = edge->Parameter(id);
 
 				const auto& c = edge->Curve();

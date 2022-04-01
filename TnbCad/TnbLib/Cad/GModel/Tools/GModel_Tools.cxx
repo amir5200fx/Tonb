@@ -61,7 +61,8 @@ std::shared_ptr<tnbLib::GModel_Edge>
 tnbLib::GModel_Tools::GetEdge
 (
 	const TopoDS_Edge & edge,
-	const TopoDS_Face & theFace
+	const TopoDS_Face & theFace,
+	const Standard_Integer theIndex
 )
 {
 	Standard_Real u0, u1, U0, U1;
@@ -86,6 +87,16 @@ tnbLib::GModel_Tools::GetEdge
 	auto pCurve = Handle(Geom2d_Curve)::DownCast(pCurve0->Copy());
 	auto Curve = BRep_Tool::Curve(edge, eLoc, U0, U1);
 
+	if (NOT Pln_Tools::IsBounded(pCurve))
+	{
+		pCurve = Pln_Tools::ConvertToTrimmedCurve(pCurve, u0, u1);
+	}
+
+	if (NOT Cad_Tools::IsBounded(Curve))
+	{
+		Curve = Cad_Tools::ConvertToTrimmed(Curve, U0, U1);
+	}
+
 	if (edge.Orientation() IS_EQUAL TopAbs_REVERSED)
 	{
 		auto temp = u1;
@@ -95,6 +106,9 @@ tnbLib::GModel_Tools::GetEdge
 	}
 
 	auto curveOnPlane = std::make_shared<GModel_ParaCurve>(pCurve);
+	Debug_Null_Pointer(curveOnPlane);
+
+	curveOnPlane->SetIndex(theIndex);
 
 	if (Curve)
 	{
@@ -133,11 +147,12 @@ tnbLib::GModel_Tools::GetSurface(const TopoDS_Face & theFace)
 		anEdgeExp.Next()
 		)
 	{
+		++id;
 		auto edge = TopoDS::Edge(anEdgeExp.Current());
-		auto newEdge = GetEdge(edge, forwardFace);
+		auto newEdge = GetEdge(edge, forwardFace, id);
 		Debug_Null_Pointer(newEdge);
 
-		newEdge->SetIndex(++id);
+		newEdge->SetIndex(id);
 
 		outterEdges.push_back(std::move(newEdge));
 	}
@@ -172,11 +187,12 @@ tnbLib::GModel_Tools::GetSurface(const TopoDS_Face & theFace)
 			anEdgeExp.Next()
 			)
 		{
+			++id;
 			auto edge = TopoDS::Edge(anEdgeExp.Current());
-			auto newEdge = GetEdge(edge, forwardFace);
+			auto newEdge = GetEdge(edge, forwardFace, id);
 			Debug_Null_Pointer(newEdge);
 
-			newEdge->SetIndex(++id);
+			newEdge->SetIndex(id);
 
 			innerEdges.push_back(std::move(newEdge));
 		}
@@ -199,7 +215,11 @@ tnbLib::GModel_Tools::GetSurface(const TopoDS_Face & theFace)
 
 	TopLoc_Location Location;
 	auto surface = BRep_Tool::Surface(forwardFace, Location);
-	
+	/*if (NOT Cad_Tools::IsBounded(surface))
+	{
+		auto domain = GModel_Tools::CalcBoundingBox(*GModel_Wire::RetrieveParaWire(*gOuterWire));
+		surface = Cad_Tools::ConvertToTrimmed(surface, domain);
+	}*/
 	auto geometry = std::make_shared<Cad_GeomSurface>(std::move(surface));
 	Debug_Null_Pointer(geometry);
 
@@ -257,13 +277,7 @@ tnbLib::GModel_Tools::CalcBoundingBox
 	const GModel_ParaWire & theWire
 )
 {
-	if (NOT theWire.Curves())
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the wire is null!" << endl
-			<< abort(FatalError);
-	}
-	const auto curves = *theWire.Curves();
+	const auto& curves = theWire.Curves();
 	if (curves.empty())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -774,6 +788,10 @@ namespace tnbLib
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "invalid type of geometry has been detected!" << endl
+					<< " - P0 : " << p0 << endl
+					<< " - P1 : " << p1 << endl
+					<< " - t0 : " << d0 << endl
+					<< " - t1 : " << d1 << endl
 					<< abort(FatalError);
 			}
 			auto ptEnt = std::dynamic_pointer_cast<Geo_Tools::PointIntersectEntity2d>(entity);
@@ -920,8 +938,12 @@ namespace tnbLib
 			}
 			const auto maxIndex = MaxIndex(theCurves);
 			std::vector<std::shared_ptr<GModel_ParaCurve>> curves(maxIndex + 1);
+			for (const auto& x : theCurves)
+			{
+				curves[x->Index()] = x;
+			}
 
-			const auto& c0 = theCurves.at(curves.size() - 1);
+			const auto& c0 = theCurves.at(theCurves.size() - 1);
 			const auto& c1 = theCurves.at(0);
 
 			Debug_Null_Pointer(c0);
@@ -936,8 +958,8 @@ namespace tnbLib
 
 			for (size_t i = 1; i < theCurves.size(); i++)
 			{
-				const auto& c0 = curves.at(i - 1);
-				const auto& c1 = curves.at(i);
+				const auto& c0 = curves.at(theCurves.at(i - 1)->Index());
+				const auto& c1 = curves.at(theCurves.at(i)->Index());
 
 				Debug_Null_Pointer(c0);
 				Debug_Null_Pointer(c1);
@@ -1024,6 +1046,20 @@ namespace tnbLib
 		{
 			std::vector<std::shared_ptr<SegmentNode>> nodes;
 			nodes.reserve(theCurves.size());
+			{
+				const auto& curve0 = theCurves.at(theCurves.size() - 1);
+				const auto& curve1 = theCurves.at(0);
+
+				Debug_Null_Pointer(curve0);
+				Debug_Null_Pointer(curve1);
+
+				auto node = CreateNode(curve0, curve1, theTol);
+				Debug_Null_Pointer(node);
+				node->SetIndex(1);
+
+				nodes.push_back(std::move(node));
+			}
+
 			for (size_t i = 1; i < theCurves.size(); i++)
 			{
 				const auto& curve0 = theCurves.at(i - 1);
@@ -1034,7 +1070,7 @@ namespace tnbLib
 
 				auto node = CreateNode(curve0, curve1, theTol);
 				Debug_Null_Pointer(node);
-				node->SetIndex((Standard_Integer)i);
+				node->SetIndex((Standard_Integer)i + 1);
 
 				nodes.push_back(std::move(node));
 			}
@@ -1047,7 +1083,7 @@ namespace tnbLib
 				Debug_Null_Pointer(x);
 
 				const auto& node0 = nodes.at(k - 1);
-				const auto& node1 = nodes.at(k);
+				const auto& node1 = nodes.at(k % (Standard_Integer)theCurves.size());
 				Debug_Null_Pointer(node0);
 				Debug_Null_Pointer(node1);
 
@@ -1061,13 +1097,12 @@ namespace tnbLib
 				{
 					node0->SetForward(edge);
 				}
-
 				if (v1.Distance(node1->Coord()) <= theTol)
 				{
 					node1->SetBackward(edge);
 				}	
-
 				links.push_back(std::move(edge));
+				k++;
 			}
 			return std::move(links);
 		}
@@ -1075,8 +1110,13 @@ namespace tnbLib
 		static auto CreateWire(const std::shared_ptr<GModel_ParaWire>& theWire, const Standard_Real theTol)
 		{
 			Debug_Null_Pointer(theWire);
-			Debug_Null_Pointer(theWire->Curves());
-			const auto& curves = *theWire->Curves();
+			if (theWire->Curves().empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " the edge list is empty" << endl
+					<< abort(FatalError);
+			}
+			const auto& curves = theWire->Curves();
 			if (curves.size() IS_EQUAL 1)
 			{
 				auto links = CreateWire(curves.at(0), theTol);
@@ -1165,8 +1205,13 @@ tnbLib::GModel_Tools::TrimWire
 )
 {
 	Debug_Null_Pointer(theWire);
-	Debug_Null_Pointer(theWire->Curves());
-	const auto& curves = *theWire->Curves();
+	if (theWire->Curves().empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the edge list is empty" << endl
+			<< abort(FatalError);
+	}
+	const auto& curves = theWire->Curves();
 	if (curves.size() > 1)
 	{
 		auto trimmed = repairWire::TrimCurves(curves);
@@ -1205,11 +1250,14 @@ tnbLib::GModel_Tools::GetInnerParaWires
 	Debug_Null_Pointer(theSurface);
 	const auto& inners = theSurface->Inner();
 	std::vector<std::shared_ptr<GModel_ParaWire>> wires;
-	for (const auto& x : *inners)
+	if (inners)
 	{
-		Debug_Null_Pointer(x);
-		auto wire = GModel_Wire::RetrieveParaWire(*x);
-		wires.push_back(std::move(wire));
+		for (const auto& x : *inners)
+		{
+			Debug_Null_Pointer(x);
+			auto wire = GModel_Wire::RetrieveParaWire(*x);
+			wires.push_back(std::move(wire));
+		}
 	}
 	return std::move(wires);
 }
@@ -1260,6 +1308,14 @@ tnbLib::GModel_Tools::GetParaPlane
 			innerWires->push_back(std::move(innerWire));
 		}
 	}
-	auto plane = std::make_shared<GModel_Plane>(std::move(outerWire), std::move(innerWires));
-	return std::move(plane);
+	if (innerWires->size())
+	{
+		auto plane = std::make_shared<GModel_Plane>(std::move(outerWire), std::move(innerWires));
+		return std::move(plane);
+	}
+	else
+	{
+		auto plane = std::make_shared<GModel_Plane>(outerWire);
+		return std::move(plane);
+	}
 }

@@ -55,6 +55,8 @@ namespace tnbLib
 
 	public:
 
+		typedef Geom2d_Curve geomType;
+
 		// constructors [1/5/2022 Amir]
 
 		TnbCad_EXPORT explicit TModel_ParaCurve

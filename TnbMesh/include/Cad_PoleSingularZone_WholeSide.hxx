@@ -12,7 +12,7 @@ namespace tnbLib
 
 		struct PoleSingularZone_WholeSideBase
 		{
-			static TnbCad_EXPORT const word typeName;
+			static TnbMesh_EXPORT const word typeName;
 		};
 
 		template<class SurfPln>

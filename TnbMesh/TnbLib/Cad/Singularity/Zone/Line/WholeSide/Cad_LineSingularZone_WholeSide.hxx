@@ -12,7 +12,7 @@ namespace tnbLib
 
 		struct LineSingularZone_WholeSideBase
 		{
-			static TnbCad_EXPORT const word typeName;
+			static TnbMesh_EXPORT const word typeName;
 		};
 
 		template<class SurfPln>
@@ -117,6 +117,7 @@ namespace tnbLib
 			// override functions and operators [12/31/2021 Amir]
 
 			Cad_SingularType ZoneType() const override;
+			word ZoneTypeName() const override;
 
 			Standard_Integer NbHorizons() const override;
 			std::shared_ptr<curveType> Horizon(const Standard_Integer theIndex) const override;

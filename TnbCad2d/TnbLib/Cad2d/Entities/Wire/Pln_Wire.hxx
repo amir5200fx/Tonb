@@ -55,13 +55,9 @@ namespace tnbLib
 		TnbCad2d_EXPORT Entity2d_Box CalcBoundingBox(const Standard_Real theTol) const;
 
 		TnbCad2d_EXPORT void SetEdges(const std::shared_ptr<Pln_CmpEdge>&& theEdges);
-
 		TnbCad2d_EXPORT void CheckWire(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
-
 		TnbCad2d_EXPORT void CreateWire(const std::shared_ptr<Pln_CmpEdge>& theEdge);
-
 		TnbCad2d_EXPORT void CreateWire(const std::shared_ptr<Pln_CmpEdge>&& theEdge);
-
 		TnbCad2d_EXPORT void CheckWireConsistency(const char* theName) const;
 
 		TnbCad2d_EXPORT void ForcedTransform(const gp_Trsf2d& t);

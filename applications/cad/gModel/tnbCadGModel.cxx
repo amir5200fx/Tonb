@@ -1,4 +1,4 @@
-#include <Cad3d_GModel.hxx>
+#include <Cad_GModel.hxx>
 #include <GModel_Tools.hxx>
 #include <Cad_Shape.hxx>
 #include <Global_File.hxx>
@@ -9,13 +9,13 @@ namespace tnbLib
 {
 
 	static const std::string loadExt = Cad_Shape::extension;
-	static const std::string saveExt = Cad3d_GModel::extension;
+	static const std::string saveExt = Cad_GModel::extension;
 
 	static unsigned short verbose = 0;
 	static bool loadTag = false;
 	static bool exeTag = false;
 
-	static std::shared_ptr<Cad3d_GModel> myModel;
+	static std::shared_ptr<Cad_GModel> myModel;
 	static std::shared_ptr<Cad_Shape> myShape;
 	static std::string myFileName;
 
@@ -89,7 +89,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		myModel = std::make_shared<Cad3d_GModel>(std::move(surfaces));
+		myModel = std::make_shared<Cad_GModel>(std::move(surfaces));
 		myModel->SetName(name);
 
 		if (verbose)

@@ -6,6 +6,7 @@
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Geo2d_PolygonGraphFwd.hxx>
+#include <Entity2d_BoxFwd.hxx>
 #include <Mesh_Module.hxx>
 
 #include <Standard_Handle.hxx>
@@ -54,6 +55,9 @@ namespace tnbLib
 
 		// public functions and operators [1/2/2022 Amir]
 
+		Standard_Boolean HasHorizon() const;
+		Standard_Integer NbHorizons() const;
+
 		const auto& Geometry() const
 		{
 			return theGeometry_;
@@ -85,6 +89,10 @@ namespace tnbLib
 		}
 
 		TnbMesh_EXPORT void Perform();
+
+
+		static Entity2d_Box RetrieveDomain(const Cad_SingularityHorizons&);
+		static std::vector<std::shared_ptr<Entity2d_Polygon>> RetrieveHorizons(const Cad_SingularityHorizons&);
 	};
 }
 

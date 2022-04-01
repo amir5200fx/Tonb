@@ -91,7 +91,7 @@ tnbLib::Pln_Vertex::BackWardEdge() const
 		auto e0 = edges[0].lock();
 		Debug_Null_Pointer(e0);
 
-		if (e0->Vtx1() IS_EQUAL thisPtr)
+		if (e0->Vertex(Pln_Edge::edgePoint::last) IS_EQUAL thisPtr)
 		{
 			return std::move(e0);
 		}
@@ -99,7 +99,7 @@ tnbLib::Pln_Vertex::BackWardEdge() const
 		auto e1 = edges[1].lock();
 		Debug_Null_Pointer(e1);
 
-		if (e1->Vtx1() IS_EQUAL thisPtr)
+		if (e1->Vertex(Pln_Edge::edgePoint::last) IS_EQUAL thisPtr)
 		{
 			return std::move(e1);
 		}
@@ -141,7 +141,7 @@ tnbLib::Pln_Vertex::ForwardEdge() const
 		auto e0 = edges[0].lock();
 		Debug_Null_Pointer(e0);
 
-		if (e0->Vtx0() IS_EQUAL thisPtr)
+		if (e0->Vertex(Pln_Edge::edgePoint::first) IS_EQUAL thisPtr)
 		{
 			return std::move(e0);
 		}
@@ -149,7 +149,7 @@ tnbLib::Pln_Vertex::ForwardEdge() const
 		auto e1 = edges[1].lock();
 		Debug_Null_Pointer(e1);
 
-		if (e1->Vtx0() IS_EQUAL thisPtr)
+		if (e1->Vertex(Pln_Edge::edgePoint::first) IS_EQUAL thisPtr)
 		{
 			return std::move(e1);
 		}
