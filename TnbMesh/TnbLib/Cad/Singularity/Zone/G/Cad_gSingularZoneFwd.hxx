@@ -6,12 +6,12 @@ namespace tnbLib
 {
 
 	// Forward Declarations [3/29/2022 Amir]
-	class GModel_Surface;
+	class GModel_Plane;
 
 	template<class SurfPln>
 	class Cad_SingularZone;
 
-	typedef Cad_SingularZone<GModel_Surface> Cad_gSingularZone;
+	typedef Cad_SingularZone<GModel_Plane> Cad_gSingularZone;
 }
 
 #endif // !_Cad_gSingularZoneFwd_Header

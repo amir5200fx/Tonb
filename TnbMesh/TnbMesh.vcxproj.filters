@@ -1558,6 +1558,15 @@
     <Filter Include="TnbLib\Cad\Singularity\Base">
       <UniqueIdentifier>{0ca5f34f-96b7-4faa-a5d5-33f6b8e306a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\G\Base">
+      <UniqueIdentifier>{9d0289e9-3378-479e-9b9a-e4a59a68f4d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\T\Base">
+      <UniqueIdentifier>{95b00651-750c-4e8c-b7c4-41b61632c67b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Tools">
+      <UniqueIdentifier>{52db9df0-3782-49e4-86ad-443acb294070}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -3738,6 +3747,18 @@
     <ClInclude Include="TnbLib\Cad\Singularity\Base\Cad_SingularityBaseI.hxx">
       <Filter>TnbLib\Cad\Singularity\Base</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\G\Base\Cad_gSingularityBase.hxx">
+      <Filter>TnbLib\Cad\Singularity\G\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\G\Base\Cad_gSingularityBaseFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\G\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Tools\Cad_SingularityTools.hxx">
+      <Filter>TnbLib\Cad\Singularity\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Tools\Cad_SingularityToolsI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -4786,6 +4807,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Singularity\Base\Cad_SingularityBase.cxx">
       <Filter>TnbLib\Cad\Singularity\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\G\Base\Cad_gSingularityBase.cxx">
+      <Filter>TnbLib\Cad\Singularity\G\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Tools\Cad_SingularityTools.cxx">
+      <Filter>TnbLib\Cad\Singularity\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Cad_Singularity.cxx">
+      <Filter>TnbLib\Cad\Singularity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include <Cad_Tools.hxx>
+#include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 namespace tnbLib
@@ -67,7 +68,7 @@ namespace tnbLib
 			const Entity2d_Box & theBox,
 			const Standard_Integer s0, 
 			const Geom_Surface & theSurface, 
-			const Standard_Real theTol
+			const Standard_Real tol
 		)
 	{
 		const auto& p0 = theBox.P0();

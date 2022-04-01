@@ -2,6 +2,7 @@
 #ifndef _Cad_SingularZone_Header
 #define _Cad_SingularZone_Header
 
+#include <word.hxx>
 #include <Global_Indexed.hxx>
 #include <Cad_SingularType.hxx>
 #include <Cad_SingularZoneTraits.hxx>

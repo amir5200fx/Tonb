@@ -52,6 +52,7 @@ namespace tnbLib
 
 	public:
 
+		typedef Geom2d_Curve geomType;
 
 		//- constructors
 
