@@ -433,6 +433,36 @@
     <Filter Include="TnbLib\Cad\TModel\Tools">
       <UniqueIdentifier>{2dbc61c2-b71f-40be-9745-139cb12d7e66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Approx">
+      <UniqueIdentifier>{b90a447a-0c95-43c9-bfcc-44c6b6f92b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve">
+      <UniqueIdentifier>{19ad99eb-4785-4e05-8927-cde38ee668ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve\Para">
+      <UniqueIdentifier>{ac3de2a8-8b38-470e-a046-873e23965ceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve\Para\G">
+      <UniqueIdentifier>{d395a12b-4fb0-48af-a7ec-e4fc8b0152b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve\Para\T">
+      <UniqueIdentifier>{93aef214-47c6-4e3c-84cb-eab2f2135a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire">
+      <UniqueIdentifier>{3e830442-86b1-451c-bf0c-c17bbc46841a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Para">
+      <UniqueIdentifier>{4f603dd8-e4e2-490f-81e8-531bf92e00fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Para\G">
+      <UniqueIdentifier>{7e1e1483-857b-4cf4-99cc-8054d7c07556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Para\T">
+      <UniqueIdentifier>{869d03e1-5072-475f-8811-03d646d45c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Traits">
+      <UniqueIdentifier>{ebf8204d-783d-42c4-843b-68523fe5bb2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -842,6 +872,39 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Tools\TModel_Tools.hxx">
       <Filter>TnbLib\Cad\TModel\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Cad_ApprxCurve.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Cad_ApprxCurveI.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\G\Cad_gApprxParaCurve.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\G\Cad_gApprxParaCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\T\Cad_tApprxParaCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\T\Cad_tApprxParaCurve.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Cad_ApprxWire.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Traits\Cad_ApprxWireTraits.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Cad_ApprxWireI.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxParaWire.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxParaWireFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1279,6 +1342,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Tools\TModel_Tools.cxx">
       <Filter>TnbLib\Cad\TModel\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\Curve\Cad_ApprxCurve.cxx">
+      <Filter>TnbLib\Cad\Approx\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\Wire\Cad_ApprxWire.cxx">
+      <Filter>TnbLib\Cad\Approx\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxParaWire.cxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
