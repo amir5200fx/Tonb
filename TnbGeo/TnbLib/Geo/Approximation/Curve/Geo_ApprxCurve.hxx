@@ -19,6 +19,8 @@ namespace tnbLib
 		: public Global_Done
 	{
 
+	public:
+
 		typedef typename remove_pointer<CurveType>::type CurveTypeR;
 		//typedef typename down_cast_point<typename CurveTypeR::ptType>::type Point;
 		typedef typename cascadeLib::pt_type_from_curve<CurveTypeR>::ptType Point;
@@ -27,6 +29,8 @@ namespace tnbLib
 		typedef std::shared_ptr<chain> chain_ptr;
 
 		typedef Geo_ApprxCurve_Info info;
+
+	private:
 
 		/*Private Data*/
 

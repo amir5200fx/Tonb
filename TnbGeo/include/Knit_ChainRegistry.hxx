@@ -70,7 +70,8 @@ namespace tnbLib
 		void Insert(std::shared_ptr<NodeType>&&);
 		void Insert(std::shared_ptr<EdgeType>&&);
 
-
+		void ClearNodes();
+		void ClearEdges();
 	};
 }
 

@@ -100,3 +100,15 @@ inline void tnbLib::Knit_ChainRegistry<NodeType, EdgeType>::Insert
 			<< abort(FatalError);
 	}
 }
+
+template<class NodeType, class EdgeType>
+inline void tnbLib::Knit_ChainRegistry<NodeType, EdgeType>::ClearNodes()
+{
+	theNodes_.clear();
+}
+
+template<class NodeType, class EdgeType>
+inline void tnbLib::Knit_ChainRegistry<NodeType, EdgeType>::ClearEdges()
+{
+	theEdges_.clear();
+}

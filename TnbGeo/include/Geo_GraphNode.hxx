@@ -41,6 +41,8 @@ namespace tnbLib
 
 	public:
 
+		typedef Point ptType;
+
 		// default constructor [1/5/2022 Amir]
 
 		Geo_GraphNode()

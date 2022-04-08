@@ -520,6 +520,24 @@
     <Filter Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Function">
       <UniqueIdentifier>{12c250c7-af7a-4db5-95fd-e6a52eb80bec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\TopoAnalysis">
+      <UniqueIdentifier>{801e2ac5-1aaf-47ce-8ab3-5eaf2e8ceb5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\TopoAnalysis\Chain">
+      <UniqueIdentifier>{2ba83522-b00f-40ca-8a6e-041c5388183b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\TopoAnalysis\Chain\Entity">
+      <UniqueIdentifier>{e2abc655-1ded-4817-8e08-d313b1d16a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\TopoAnalysis\Chain\Traits">
+      <UniqueIdentifier>{9c061010-bc29-4f7c-b47c-9a26a074840f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\TopoAnalysis\Chain\2d">
+      <UniqueIdentifier>{6a02e3b0-9c94-43fa-92fe-98ccad6af9de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Node">
+      <UniqueIdentifier>{94c927fe-cdc8-4686-8756-d5b05f466623}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1212,6 +1230,33 @@
     <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Mesh_CurveOptmPoint_NewtonI.hxx">
       <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\Entity\Geo_TopoChainAnalysis_Entity.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\Entity\Geo_TopoChainAnalysis_EntityI.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\Geo_TopoChainAnalysis.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\Geo_TopoChainAnalysisI.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\Traits\Geo2d_TopoChainAnalysisTraits.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Node\Geo2d_TopoChainAnalysis_Node.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\2d\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Node\Geo2d_TopoChainAnalysis_NodeFwd.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\2d\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Geo2d_TopoChainAnalysis.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Geo2d_TopoChainAnalysisFwd.hxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1549,6 +1594,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\Newton\Mesh_CurveOptmPoint_Newton.cxx">
       <Filter>TnbLib\Mesh\Curve\OptmPoint\Newton</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\TopoAnalysis\Chain\Geo_TopoChainAnalysis.cxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

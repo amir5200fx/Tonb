@@ -21,6 +21,7 @@ namespace tnbLib
 
 		typedef NodeType base;
 		typedef typename base::Point Point;
+		typedef Point ptType;
 
 		// default constructor [1/3/2022 Amir]
 
@@ -49,6 +50,11 @@ namespace tnbLib
 		// public functions and operators [1/3/2022 Amir]
 
 		auto Type() const
+		{
+			return theType_;
+		}
+
+		auto& TypeRef()
 		{
 			return theType_;
 		}
