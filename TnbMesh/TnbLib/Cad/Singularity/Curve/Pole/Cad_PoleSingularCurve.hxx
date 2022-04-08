@@ -13,6 +13,12 @@ namespace tnbLib
 		: public Cad_SingularCurve<CurveType>
 	{
 
+	public:
+
+		typedef typename cad_singular_curve_traits<CurveType>::baseCurveType baseCurveType;
+
+	private:
+
 		/*Private Data*/
 
 		Pnt2d theMid_;
@@ -37,23 +43,23 @@ namespace tnbLib
 
 		// constructors [12/31/2021 Amir]
 
-		explicit Cad_PoleSingularCurve(const Handle(Geom2d_Curve)& theGeometry)
-			: Cad_SingularCurve<CurveType>(theGeometry)
+		explicit Cad_PoleSingularCurve(const std::shared_ptr<baseCurveType>& theCurve)
+			: Cad_SingularCurve<CurveType>(theCurve)
 			, theMid_(Pnt2d::null)
 		{}
 
-		Cad_PoleSingularCurve(const Handle(Geom2d_Curve)& theGeometry, const Pnt2d& theMid)
-			: Cad_SingularCurve<CurveType>(theGeometry)
+		Cad_PoleSingularCurve(const std::shared_ptr<baseCurveType>& theCurve, const Pnt2d& theMid)
+			: Cad_SingularCurve<CurveType>(theCurve)
 			, theMid_(theMid)
 		{}
 
-		Cad_PoleSingularCurve(Handle(Geom2d_Curve) && theGeometry)
-			: Cad_SingularCurve<CurveType>(std::move(theGeometry))
+		Cad_PoleSingularCurve(std::shared_ptr<baseCurveType>&& theCurve)
+			: Cad_SingularCurve<CurveType>(std::move(theCurve))
 			, theMid_(Pnt2d::null)
 		{}
 
-		Cad_PoleSingularCurve(Handle(Geom2d_Curve) && theGeometry, Pnt2d&& theMid)
-			: Cad_SingularCurve<CurveType>(std::move(theGeometry))
+		Cad_PoleSingularCurve(std::shared_ptr<baseCurveType>&& theCurve, Pnt2d&& theMid)
+			: Cad_SingularCurve<CurveType>(std::move(theCurve))
 			, theMid_(std::move(theMid))
 		{}
 
@@ -64,6 +70,13 @@ namespace tnbLib
 		{
 			return Standard_True;
 		}
+
+		Standard_Boolean HasSubcurves() const override
+		{
+			return Standard_False;
+		}
+
+		void CalcSubcurves() const override;
 
 		// public functions and operators [12/31/2021 Amir]
 
@@ -83,5 +96,7 @@ namespace tnbLib
 		}
 	};
 }
+
+#include <Cad_PoleSingularCurveI.hxx>
 
 #endif // !_Cad_PoleSingularCurve_Header
