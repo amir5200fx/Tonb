@@ -4,6 +4,7 @@
 #include <Cad_SingularityTools.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Geo2d_PolygonGraph.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 template<class SurfType>

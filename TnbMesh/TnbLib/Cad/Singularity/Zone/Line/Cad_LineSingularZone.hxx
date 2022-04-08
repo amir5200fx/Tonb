@@ -3,6 +3,8 @@
 #define _Cad_LineSingularZone_Header
 
 #include <Cad_SingularZone.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
 
 namespace tnbLib
 {
@@ -11,6 +13,12 @@ namespace tnbLib
 	class Cad_LineSingularZone
 		: public Cad_SingularZone<SurfPln>
 	{
+
+	public:
+
+		typedef typename cad_singular_zone_traits<SurfPln>::surfType surfType;
+
+	private:
 
 		/*Private Data*/
 
@@ -52,6 +60,10 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		void ProjectBoundariesToHorizons(const surfType&) override
+		{
+			NotImplemented;
+		}
 	};
 }
 

@@ -1,0 +1,1 @@
+#include <Cad_SingularZone.hxx>

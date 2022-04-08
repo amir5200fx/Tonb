@@ -12,8 +12,8 @@
 #include <Cad_LineSingularZone_TwoSide.hxx>
 #include <Cad_LineSingularZone_WholeSide.hxx>
 #include <Cad_SingularityTools.hxx>
-#include <Cad_PoleSingularCurve.hxx>
-#include <Cad_LineSingularCurve.hxx>
+#include <Cad_gPoleSingularCurve.hxx>
+#include <Cad_gLineSingularCurve.hxx>
 #include <GModel_ParaCurve.hxx>
 #include <Cad_Tools.hxx>
 #include <Pln_Curve.hxx>
@@ -26,6 +26,8 @@
 
 #include <Geom_Surface.hxx>
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
+
+unsigned short tnbLib::Cad_gSingularity::verbose(0);
 
 template<>
 std::shared_ptr<tnbLib::Cad_gSingularZone> 
@@ -139,7 +141,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 		{
 			if (s0 IS_EQUAL s1)
 			{
-				auto curve = Cad_SingularityTools::ParametricPoleCurve<GModel_ParaCurve>(thePoly);
+				auto curve = Cad_SingularityTools::ParametricPoleCurve<Aft2d_gPlnCurveSurface>(thePoly);
 				Debug_Null_Pointer(curve);
 
 				auto Pm = Cad_SingularityTools::FindParametricCoord(thePoly, theSurface, 0.5*length);
@@ -153,7 +155,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 			}
 			else if (ABS(s0 - s1) IS_EQUAL 1)
 			{
-				auto curve = Cad_SingularityTools::ParametricPoleCurve<GModel_ParaCurve>(thePoly);
+				auto curve = Cad_SingularityTools::ParametricPoleCurve<Aft2d_gPlnCurveSurface>(thePoly);
 				Debug_Null_Pointer(curve);
 
 				auto Pm = Cad_SingularityTools::FindParametricCoord(thePoly, theSurface, 0.5*length);
@@ -166,11 +168,14 @@ tnbLib::Cad_gSingularity::TypeDetection
 			}
 			else if (ABS(s0 - s1) IS_EQUAL 2)
 			{
-				auto pcurve = Cad_SingularityTools::GetParaCurve(p0, p1);
+				auto geom = Cad_SingularityTools::GetParaCurve(p0, p1);
+				Debug_Null_Pointer(geom);
+
+				auto pcurve = std::make_shared<GModel_ParaCurve>(std::move(geom));
 				Debug_Null_Pointer(pcurve);
 
 				const auto Pm = MEAN(p0, p1);
-				auto curve = std::make_shared<Cad_PoleSingularCurve<GModel_ParaCurve>>(std::move(pcurve), std::move(Pm));
+				auto curve = std::make_shared<Cad_gPoleSingularCurve>(std::move(pcurve), std::move(Pm));
 
 				auto singularity =
 					std::make_shared<cadLib::PoleSingularZone_Corner<GModel_Plane>>

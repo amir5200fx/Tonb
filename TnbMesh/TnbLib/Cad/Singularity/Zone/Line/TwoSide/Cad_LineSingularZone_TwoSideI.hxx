@@ -9,6 +9,13 @@ tnbLib::cadLib::LineSingularZone_TwoSide<SurfPln>::ZoneType() const
 }
 
 template<class SurfPln>
+inline tnbLib::word 
+tnbLib::cadLib::LineSingularZone_TwoSide<SurfPln>::ZoneTypeName() const
+{
+	return LineSingularZone_TwoSideBase::typeName;
+}
+
+template<class SurfPln>
 inline Standard_Integer 
 tnbLib::cadLib::LineSingularZone_TwoSide<SurfPln>::NbHorizons() const
 {

@@ -10,7 +10,7 @@ namespace tnbLib
 {
 
 	template<>
-	static TnbMesh_EXPORT std::shared_ptr<GModel_ParaCurve> 
+	static TnbMesh_EXPORT std::shared_ptr<Aft2d_gPlnCurveSurface> 
 		Cad_gSingularityBase::ParametricCurve_Pole
 		(
 			const Pnt2d& theP0, 
@@ -18,7 +18,7 @@ namespace tnbLib
 		);
 
 	template<>
-	static TnbMesh_EXPORT std::shared_ptr<GModel_ParaCurve> 
+	static TnbMesh_EXPORT std::shared_ptr<Aft2d_gPlnCurveSurface>
 		Cad_gSingularityBase::ParametricCurve_Line
 		(
 			const Pnt2d& theP0,

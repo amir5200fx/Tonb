@@ -9,6 +9,13 @@ tnbLib::cadLib::PoleSingularZone_WholeSide<SurfPln>::ZoneType() const
 }
 
 template<class SurfPln>
+inline tnbLib::word 
+tnbLib::cadLib::PoleSingularZone_WholeSide<SurfPln>::ZoneTypeName() const
+{
+	return PoleSingularZone_WholeSideBase::typeName;
+}
+
+template<class SurfPln>
 inline Standard_Integer 
 tnbLib::cadLib::PoleSingularZone_WholeSide<SurfPln>::NbHorizons() const
 {

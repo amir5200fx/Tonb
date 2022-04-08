@@ -2,12 +2,13 @@
 #ifndef _Cad_Singularity_Header
 #define _Cad_Singularity_Header
 
-#include <Global_Done.hxx>
 #include <Cad_SingularityBase.hxx>
 #include <Cad_SingularityTraits.hxx>
 #include <Geo2d_SizeFunctionFwd.hxx>
 #include <GeoMesh2d_DataFwd.hxx>
+#include <Mesh_Module.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Global_Done.hxx>
 
 #include <memory>
 #include <vector>
@@ -78,7 +79,7 @@ namespace tnbLib
 
 		typedef Cad_SingularityBase<typename cad_singularity_traits<SurfType>::parCurveType> base;
 
-		static unsigned short verbose;
+		static TnbMesh_EXPORT unsigned short verbose;
 
 		// default constructor [12/31/2021 Amir]
 

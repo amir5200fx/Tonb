@@ -2,6 +2,8 @@
 #ifndef _Cad_gSingularityBaseFwd_Header
 #define _Cad_gSingularityBaseFwd_Header
 
+#include <Aft2d_gPlnCurveSurfaceFwd.hxx>
+
 namespace tnbLib
 {
 
@@ -9,9 +11,7 @@ namespace tnbLib
 	template<class CurveType>
 	class Cad_SingularityBase;
 
-	class GModel_ParaCurve;
-
-	typedef Cad_SingularityBase<GModel_ParaCurve> Cad_gSingularityBase;
+	typedef Cad_SingularityBase<Aft2d_gPlnCurveSurface> Cad_gSingularityBase;
 }
 
 #endif // !_Cad_gSingularityBaseFwd_Header
