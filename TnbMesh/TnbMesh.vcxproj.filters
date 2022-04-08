@@ -1567,6 +1567,63 @@
     <Filter Include="TnbLib\Cad\Singularity\Tools">
       <UniqueIdentifier>{52db9df0-3782-49e4-86ad-443acb294070}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane">
+      <UniqueIdentifier>{30ae26d2-0fa1-491d-a94d-9490d4e94f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane\Tools">
+      <UniqueIdentifier>{787511e8-1016-4cd1-b81e-de3f81ec45db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane\Traits">
+      <UniqueIdentifier>{f3cfb021-292c-47d5-94fc-329081c7bf74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\SubdivideHorizon">
+      <UniqueIdentifier>{a52d262e-bc8e-4895-b311-ca57476156d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\SubdivideHorizon\Tools">
+      <UniqueIdentifier>{ac5ceadc-2d6b-422d-a008-974a03cc7dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Topology">
+      <UniqueIdentifier>{248f5f5c-3865-42ec-8589-e4891ece45cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Topology\Tools">
+      <UniqueIdentifier>{2e43c901-b094-451a-bee5-956f82d746bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane\Polygon">
+      <UniqueIdentifier>{8a51ca36-08e4-4c68-a977-e24d26616599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane\G">
+      <UniqueIdentifier>{b751b983-c1ff-4d5b-856c-3b797015d33f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane\T">
+      <UniqueIdentifier>{1e20ec71-599e-48e2-b63b-4eb3916a6de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line\G">
+      <UniqueIdentifier>{90cdef52-81f7-4b5f-82e1-d59410d2dd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Zone\Line\T">
+      <UniqueIdentifier>{975af1cb-b73d-4559-9515-b0ccedc0ef3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\Line\G">
+      <UniqueIdentifier>{4a1b6bd5-c610-49d5-8699-01321404aa0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\Line\T">
+      <UniqueIdentifier>{3c31150c-fd58-4561-b704-9cd9e0c66ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\Pole\G">
+      <UniqueIdentifier>{8f3e1847-ca1e-4b9d-8636-7e0718c423c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\Pole\T">
+      <UniqueIdentifier>{58827004-ed22-4e58-b188-b6f76b5c4cad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\G">
+      <UniqueIdentifier>{68ee0efd-7aa5-47bf-a121-6419c0757c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\T">
+      <UniqueIdentifier>{0cac71ae-cea7-4b96-9f85-3588678c6278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Curve\Traits">
+      <UniqueIdentifier>{56520b57-5c9e-41a0-bbc1-e900034a6f92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -3759,6 +3816,117 @@
     <ClInclude Include="TnbLib\Cad\Singularity\Tools\Cad_SingularityToolsI.hxx">
       <Filter>TnbLib\Cad\Singularity\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Cad_ModifySingularPlane.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Cad_ModifySingularPlaneI.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Tools\Cad_ModifySingularPlaneTools.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Tools\Cad_ModifySingularPlaneToolsI.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Traits\Cad_ModifySingularPlaneTraits.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\SubdivideHorizon\Cad_SubdivideHorizon.hxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\SubdivideHorizon\Cad_SubdivideHorizonI.hxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\SubdivideHorizon\Tools\Cad_SubdivideHorizonTools.hxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\Cad_SingularityTopology.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\Tools\Cad_SingularityTopologyTools.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\Tools\Cad_SingularityTopologyToolsI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\Cad_SingularityTopologyI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Polygon\Cad_ModifySingularPlane_PolygonLib.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Polygon\Cad_ModifySingularPlane_PolygonPoint.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Polygon\Cad_ModifySingularPlane_Polygon.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\G\Cad_gModifySingularPlane.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\G\Cad_gModifySingularPlaneFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\T\Cad_tModifySingularPlaneFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Polygon\Cad_ModifySingularPlane_PolygonFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Pole\Cad_PoleSingularZoneI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\G\Cad_gLineSingularZone.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Line\G\Cad_gLineSingularZoneFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Pole\G\Cad_gPoleSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Pole\G\Cad_gPoleSingularCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\G\Cad_gSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\G\Cad_gSingularCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\T\Cad_tSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\T\Cad_tSingularCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Pole\T\Cad_tPoleSingularCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Pole\T\Cad_tPoleSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Line\G\Cad_gLineSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Line\G\Cad_gLineSingularCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Line\T\Cad_tLineSingularCurve.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Line\T\Cad_tLineSingularCurveFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Traits\Cad_SingularCurveTraits.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Pole\Cad_PoleSingularCurveI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Line\Cad_LineSingularCurveI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -4816,6 +4984,39 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Singularity\Cad_Singularity.cxx">
       <Filter>TnbLib\Cad\Singularity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\ModifyPlane\Tools\Cad_ModifySingularPlaneTools.cxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\SubdivideHorizon\Cad_SubdivideHorizon.cxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\SubdivideHorizon\Tools\Cad_SubdivideHorizonTools.cxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Topology\Tools\Cad_SingularityTopologyTools.cxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Topology\Cad_SingularityTopology.cxx">
+      <Filter>TnbLib\Cad\Singularity\Topology</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Cad_SingularZone.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\ModifyPlane\Polygon\Cad_ModifySingularPlane_PolygonLib.cxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\ModifyPlane\G\Cad_gModifySingularPlane.cxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\ModifyPlane\Cad_ModifySingularPlane_Polygons.cxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Pole\Cad_PoleSingularZone.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Pole</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Zone\Line\G\Cad_gLineSingularZone.cxx">
+      <Filter>TnbLib\Cad\Singularity\Zone\Line\G</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
