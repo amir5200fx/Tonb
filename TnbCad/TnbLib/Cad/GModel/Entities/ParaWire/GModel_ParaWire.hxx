@@ -71,6 +71,8 @@ namespace tnbLib
 
 		TnbCad_EXPORT Standard_Integer NbCurves() const;
 
+		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
+
 		const auto& Curves() const
 		{
 			return *theCurves_;

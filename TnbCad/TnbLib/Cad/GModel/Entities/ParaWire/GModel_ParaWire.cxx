@@ -1,5 +1,8 @@
 #include <GModel_ParaWire.hxx>
 
+#include <GModel_Tools.hxx>
+#include <Entity2d_Box.hxx>
+
 tnbLib::GModel_ParaWire::GModel_ParaWire
 (
 	const std::shared_ptr<curveList>& theCurves
@@ -48,4 +51,11 @@ Standard_Integer
 tnbLib::GModel_ParaWire::NbCurves() const
 {
 	return (Standard_Integer)theCurves_->size();
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::GModel_ParaWire::CalcBoundingBox() const
+{
+	auto b = GModel_Tools::CalcBoundingBox(*this);
+	return std::move(b);
 }

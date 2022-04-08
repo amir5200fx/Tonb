@@ -144,6 +144,8 @@ tnbLib::GModel_ParaCurve::Value_normParam
 
 #include <Bnd_Box2d.hxx>
 #include <BndLib_Add2dCurve.hxx>
+#include <Pln_Tools.hxx>
+#include <GModel_Tools.hxx>
 
 tnbLib::Entity2d_Box
 tnbLib::GModel_ParaCurve::CalcBoundingBox() const
@@ -157,4 +159,19 @@ tnbLib::GModel_ParaCurve::CalcBoundingBox() const
 
 	Entity2d_Box box(Pnt2d(Xmin, Ymin), Pnt2d(Xmax, Ymax));
 	return std::move(box);
+}
+
+std::pair
+<
+	std::shared_ptr<tnbLib::GModel_ParaCurve>,
+	std::shared_ptr<tnbLib::GModel_ParaCurve>
+> 
+tnbLib::GModel_ParaCurve::Split
+(
+	const Standard_Real thePar,
+	const std::shared_ptr<GModel_ParaCurve>& theCurve
+)
+{
+	auto t = GModel_Tools::Split(thePar, theCurve);
+	return std::move(t);
 }

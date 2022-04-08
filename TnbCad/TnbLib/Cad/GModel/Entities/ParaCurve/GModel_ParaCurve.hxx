@@ -9,6 +9,8 @@
 
 class Geom2d_Curve;
 
+#include <vector>
+
 namespace tnbLib
 {
 
@@ -115,6 +117,13 @@ namespace tnbLib
 		{
 			return theGeometry_;
 		}
+
+		static TnbCad_EXPORT std::pair<std::shared_ptr<GModel_ParaCurve>, std::shared_ptr<GModel_ParaCurve>> 
+			Split
+			(
+				const Standard_Real thePar,
+				const std::shared_ptr<GModel_ParaCurve>&
+			);
 	};
 }
 
