@@ -2,6 +2,7 @@
 #ifndef _Cad_SingularZone_Header
 #define _Cad_SingularZone_Header
 
+#include <word.hxx>
 #include <Global_Indexed.hxx>
 #include <Cad_SingularType.hxx>
 #include <Cad_SingularZoneTraits.hxx>
@@ -21,6 +22,7 @@ namespace tnbLib
 	public:
 
 		typedef typename cad_singular_zone_traits<SurfPln>::curveType curveType;
+		typedef typename cad_singular_zone_traits<SurfPln>::surfType surfType;
 
 	private:
 
@@ -82,6 +84,10 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		virtual void ProjectBoundariesToHorizons(const surfType&) = 0;
+
+		std::vector<std::shared_ptr<curveType>> Horizons() const;
+
 		const auto& Plane() const
 		{
 			return thePlane_;
@@ -91,6 +97,13 @@ namespace tnbLib
 		{
 			return theCurves_;
 		}
+
+		auto& CurvesRef()
+		{
+			return theCurves_;
+		}
+
+		void CreatePaired3d(const surfType&);
 
 		void SetPlane(const std::shared_ptr<SurfPln>& thePlane)
 		{
@@ -102,6 +115,7 @@ namespace tnbLib
 			thePlane_ = std::move(thePlane);
 		}
 
+		static std::vector<std::shared_ptr<curveType>> RetrieveHorizons(const std::vector<std::shared_ptr<Cad_SingularZone<SurfPln>>>&);
 	};
 }
 

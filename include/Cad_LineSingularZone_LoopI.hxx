@@ -10,6 +10,13 @@ tnbLib::cadLib::LineSingularZone_Loop<SurfPln>::ZoneType() const
 }
 
 template<class SurfPln>
+inline tnbLib::word 
+tnbLib::cadLib::LineSingularZone_Loop<SurfPln>::ZoneTypeName() const
+{
+	return LineSingularZone_LoopBase::typeName;
+}
+
+template<class SurfPln>
 inline Standard_Integer 
 tnbLib::cadLib::LineSingularZone_Loop<SurfPln>::NbHorizons() const
 {

@@ -10,6 +10,13 @@ tnbLib::cadLib::LineSingularZone_WholeSide<SurfPln>::ZoneType() const
 }
 
 template<class SurfPln>
+inline tnbLib::word 
+tnbLib::cadLib::LineSingularZone_WholeSide<SurfPln>::ZoneTypeName() const
+{
+	return LineSingularZone_WholeSideBase::typeName;
+}
+
+template<class SurfPln>
 inline Standard_Integer 
 tnbLib::cadLib::LineSingularZone_WholeSide<SurfPln>::NbHorizons() const
 {

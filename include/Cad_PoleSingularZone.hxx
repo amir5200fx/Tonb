@@ -13,6 +13,12 @@ namespace tnbLib
 		: public Cad_SingularZone<SurfPln>
 	{
 
+	public:
+
+		typedef typename cad_singular_zone_traits<SurfPln>::surfType surfType;
+
+	private:
+
 		/*Private Data*/
 
 		Pnt2d theCoord_;
@@ -72,7 +78,11 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		void ProjectBoundariesToHorizons(const surfType&) override;
+
 	};
 }
+
+#include <Cad_PoleSingularZoneI.hxx>
 
 #endif // !_Cad_PoleSingularZone_Header
