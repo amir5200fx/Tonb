@@ -206,6 +206,115 @@ tnbLib::Pln_Tools::MakeCompoundEdge
 	return std::move(pln);
 }
 
+std::pair<Handle(Geom2d_Curve), Handle(Geom2d_Curve)> 
+tnbLib::Pln_Tools::Split
+(
+	const Standard_Real x, 
+	const Handle(Geom2d_Curve)& theCurve
+)
+{
+#ifdef _DEBUG
+	if (NOT IsBounded(theCurve))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the curve is not bounded!" << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
+
+	const auto fp = theCurve->FirstParameter();
+	const auto lp = theCurve->LastParameter();
+	if (NOT INSIDE(x, fp, lp))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "The Parameter is out of valid range: " << x << endl
+			<< " - First parameter: " << fp << endl
+			<< " - Last Parameter: " << lp << endl
+			<< abort(FatalError);
+	}
+	if (auto trimmed = Handle(Geom2d_TrimmedCurve)::DownCast(theCurve))
+	{
+		auto geom = trimmed->BasisCurve();
+		Debug_Null_Pointer(geom);
+
+		auto c0 = Pln_CurveTools::Trim(geom, fp, x);
+		auto c1 = Pln_CurveTools::Trim(geom, x, lp);
+
+		auto t = std::make_pair(std::move(c0), std::move(c1));
+		return std::move(t);
+	}
+	else
+	{
+		auto c0 = Pln_CurveTools::Trim(theCurve, fp, x);
+		auto c1 = Pln_CurveTools::Trim(theCurve, x, lp);
+
+		auto t = std::make_pair(std::move(c0), std::move(c1));
+		return std::move(t);
+	}
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon> 
+tnbLib::Pln_Tools::MergeApproxWire
+(
+	const std::vector<std::shared_ptr<Entity2d_Polygon>>& theCurves,
+	const Standard_Real theTol
+)
+{
+	static auto first_point = [](const std::vector<std::shared_ptr<Entity2d_Polygon>>::const_iterator& iter)
+	{
+		Debug_If_Condition((*iter)->Points().empty());
+		return (*iter)->Points().at(0);
+	};
+	std::vector<Pnt2d> pts;
+#ifdef _DEBUG
+	if (NOT theCurves.size())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the list is empty" << endl
+			<< abort(FatalError);
+	}
+#else
+	if (theCurves.empty())
+	{
+		auto poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
+		return std::move(poly);
+	}
+#endif // _DEBUG
+	auto iter = theCurves.begin();
+	pts = (*iter)->Points();
+	if (theCurves.size() IS_EQUAL 1)
+	{
+		auto poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
+		return std::move(poly);
+	}
+	iter++;
+	while (iter NOT_EQUAL theCurves.end())
+	{
+		const auto& p0 = pts.at(pts.size() - 1);
+		const auto p1 = first_point(iter);
+		if (p0.Distance(p1) <= theTol)
+		{
+			auto inner = (*iter)->Points().begin();
+			inner++;
+			while (inner NOT_EQUAL(*iter)->Points().end())
+			{
+				pts.push_back(inner->Coord());
+				inner++;
+			}
+		}
+		else
+		{
+			for (const auto& x : (*iter)->Points())
+			{
+				pts.push_back(x);
+			}
+		}
+		iter++;
+	}
+	auto poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
+	return std::move(poly);
+}
+
 namespace tnbLib
 {
 
@@ -1079,7 +1188,7 @@ void tnbLib::Pln_Tools::SplitCurve
 	Handle(Geom2d_Curve)& theC1
 )
 {
-	auto trimmed = Handle(Geom2d_BoundedCurve)::DownCast(theCurve);
+	/*auto trimmed = Handle(Geom2d_BoundedCurve)::DownCast(theCurve);
 	if (NOT trimmed)
 	{
 		FatalErrorIn("void SplitCurve(const Handle(Geom2d_Curve)& theCurve, const Standard_Real theX, Handle(Geom2d_Curve)& theC0, Handle(Geom2d_Curve)& theC1)")
@@ -1095,14 +1204,17 @@ void tnbLib::Pln_Tools::SplitCurve
 			<< " - First parameter: " << theCurve->FirstParameter() << endl
 			<< " - Last parameter: " << theCurve->LastParameter() << endl
 			<< abort(FatalError);
-	}
+	}*/
+
+	auto[c0, c1] = Split(theX, theCurve);
 
 	auto first = theCurve->FirstParameter();
 	auto last = theCurve->LastParameter();
 
 	if (theX > first)
 	{
-		theC0 = Pln_Tools::ConvertToTrimmedCurve(theCurve, first, theX);
+		//theC0 = Pln_Tools::ConvertToTrimmedCurve(theCurve, first, theX);
+		theC0 = c0;
 	}
 	else
 	{
@@ -1115,7 +1227,8 @@ void tnbLib::Pln_Tools::SplitCurve
 	
 	if (last > theX)
 	{
-		theC1 = Pln_Tools::ConvertToTrimmedCurve(theCurve, theX, last);
+		//theC1 = Pln_Tools::ConvertToTrimmedCurve(theCurve, theX, last);
+		theC1 = c1;
 	}
 	else
 	{
@@ -2922,6 +3035,37 @@ void tnbLib::Pln_Tools::Connect
 			Connect(x);
 		}
 	}
+}
+
+void tnbLib::Pln_Tools::WatertightWire
+(
+	const std::vector<std::shared_ptr<Entity2d_Polygon>>& theWire
+)
+{
+	for (size_t i = 1; i < theWire.size(); i++)
+	{
+		const auto& poly0 = theWire.at(i - 1);
+		const auto& poly1 = theWire.at(i);
+
+		Debug_If_Condition(NOT poly0->NbPoints());
+		Debug_If_Condition(NOT poly1->NbPoints());
+
+		auto& pts0 = poly0->Points();
+		auto& pts1 = poly1->Points();
+
+		pts0.at(pts0.size() - 1) = pts1.at(0) = MEAN(pts0.at(pts0.size() - 1), pts1.at(0));
+	}
+
+	const auto& poly0 = theWire.at(theWire.size() - 1);
+	const auto& poly1 = theWire.at(0);
+
+	Debug_If_Condition(NOT poly0->NbPoints());
+	Debug_If_Condition(NOT poly1->NbPoints());
+
+	auto& pts0 = poly0->Points();
+	auto& pts1 = poly1->Points();
+
+	pts0.at(pts0.size() - 1) = pts1.at(0) = MEAN(pts0.at(pts0.size() - 1), pts1.at(0));
 }
 
 //std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 

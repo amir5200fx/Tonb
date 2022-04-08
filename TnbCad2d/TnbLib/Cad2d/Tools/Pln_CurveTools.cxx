@@ -38,10 +38,10 @@ tnbLib::Pln_CurveTools::Trim
 	const Standard_Real theP1
 )
 {
-	if (theP0 >= theP1)
+	if (theP0 > theP1)
 	{
 		FatalErrorIn("Handle(Geom2d_Curve) Trim(Args...)")
-			<< "invalid data: p0 >= p1" << endl
+			<< "invalid data: p0 > p1" << endl
 			<< abort(FatalError);
 	}
 

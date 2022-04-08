@@ -117,6 +117,20 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
 			);
 
+		static TnbCad2d_EXPORT std::pair<Handle(Geom2d_Curve), Handle(Geom2d_Curve)>
+			Split
+			(
+				const Standard_Real x,
+				const Handle(Geom2d_Curve)&
+			);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Entity2d_Polygon> 
+			MergeApproxWire
+			(
+				const std::vector<std::shared_ptr<Entity2d_Polygon>>&, 
+				const Standard_Real theTol
+			);
+
 		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Edge>> Merged(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges);
 
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Wire>
@@ -565,6 +579,8 @@ namespace tnbLib
 		static TnbCad2d_EXPORT void Connect(const std::shared_ptr<Pln_Wire>&);
 
 		static TnbCad2d_EXPORT void Connect(const std::shared_ptr<Cad2d_Plane>&);
+
+		static TnbCad2d_EXPORT void WatertightWire(const std::vector<std::shared_ptr<Entity2d_Polygon>>& theWire);
 	};
 }
 
