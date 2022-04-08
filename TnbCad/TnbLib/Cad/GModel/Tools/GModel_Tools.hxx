@@ -23,6 +23,7 @@ namespace tnbLib
 	class GModel_Plane;
 	class GModel_Wire;
 	class GModel_ParaWire;
+	class GModel_ParaCurve;
 
 	class GModel_Tools
 	{
@@ -33,6 +34,13 @@ namespace tnbLib
 		static TnbCad_EXPORT Standard_Boolean IsCylinder(const std::shared_ptr<GModel_Surface>&);
 
 		static TnbCad_EXPORT Standard_Boolean IsUniMetric(const std::shared_ptr<GModel_Surface>&);
+
+		static TnbCad_EXPORT std::pair<std::shared_ptr<GModel_ParaCurve>, std::shared_ptr<GModel_ParaCurve>> 
+			Split
+			(
+				const Standard_Real x, 
+				const std::shared_ptr<GModel_ParaCurve>&
+			);
 
 		static TnbCad_EXPORT std::shared_ptr<GModel_Edge>
 			GetEdge

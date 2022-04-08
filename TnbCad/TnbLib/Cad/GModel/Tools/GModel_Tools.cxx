@@ -57,6 +57,24 @@ tnbLib::GModel_Tools::IsUniMetric
 	return Cad_Tools::IsUniMetric(theSurface->GeomSurface());
 }
 
+std::pair<std::shared_ptr<tnbLib::GModel_ParaCurve>, std::shared_ptr<tnbLib::GModel_ParaCurve>> 
+tnbLib::GModel_Tools::Split
+(
+	const Standard_Real x,
+	const std::shared_ptr<GModel_ParaCurve>& theCurve
+)
+{
+	Debug_Null_Pointer(theCurve);
+	Debug_Null_Pointer(theCurve->Geometry());
+	auto[g0, g1] = Pln_Tools::Split(x, theCurve->Geometry());
+
+	auto c0 = std::make_shared<GModel_ParaCurve>(std::move(g0));
+	auto c1 = std::make_shared<GModel_ParaCurve>(std::move(g1));
+
+	auto t = std::make_pair(std::move(c0), std::move(c1));
+	return std::move(t);
+}
+
 std::shared_ptr<tnbLib::GModel_Edge> 
 tnbLib::GModel_Tools::GetEdge
 (
