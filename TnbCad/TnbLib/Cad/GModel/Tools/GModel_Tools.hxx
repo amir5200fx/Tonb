@@ -6,6 +6,7 @@
 #include <Entity2d_BoxFwd.hxx>
 
 #include <Standard_TypeDef.hxx>
+#include <Standard_Handle.hxx>
 
 #include <memory>
 #include <vector>
@@ -13,6 +14,7 @@
 class TopoDS_Face;
 class TopoDS_Edge;
 class TopoDS_Shape;
+class Geom_Surface;
 
 namespace tnbLib
 {
@@ -29,6 +31,8 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbCad_EXPORT Handle(Geom_Surface) RetrieveGeometry(const GModel_Surface&);
 
 		static TnbCad_EXPORT Standard_Boolean IsPlane(const std::shared_ptr<GModel_Surface>&);
 		static TnbCad_EXPORT Standard_Boolean IsCylinder(const std::shared_ptr<GModel_Surface>&);

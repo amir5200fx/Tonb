@@ -236,6 +236,35 @@ namespace tnbLib
 
 		connectType RetrieveConnectivity() const;
 
+		std::tuple
+			<
+			std::shared_ptr<nodeType>, 
+			std::shared_ptr<nodeType>, 
+			std::shared_ptr<nodeType>, 
+			std::shared_ptr<nodeType>
+			>
+			Nodes() const;
+
+		std::tuple
+			<
+			std::shared_ptr<edgeType>, 
+			std::shared_ptr<edgeType>, 
+			std::shared_ptr<edgeType>, 
+			std::shared_ptr<edgeType>, 
+			std::shared_ptr<edgeType>,
+			std::shared_ptr<edgeType>
+			>
+			Edges() const;
+
+		std::tuple
+			<
+			std::shared_ptr<facetType>,
+			std::shared_ptr<facetType>,
+			std::shared_ptr<facetType>,
+			std::shared_ptr<facetType>
+			>
+			Facets() const;
+
 		//- Static function and operators
 
 		static Standard_Boolean
@@ -418,6 +447,22 @@ namespace tnbLib
 		Standard_Boolean IsLeftSide(const Point& theCoord) const;
 
 		connectType RetrieveConnectivity() const;
+
+		std::tuple
+			<
+			std::shared_ptr<nodeType>,
+			std::shared_ptr<nodeType>,
+			std::shared_ptr<nodeType>
+			>
+			Nodes() const;
+
+		std::tuple
+			<
+			std::shared_ptr<edgeType>,
+			std::shared_ptr<edgeType>, 
+			std::shared_ptr<edgeType>
+			>
+			Edges() const;
 
 		//- Static function and operators
 
@@ -660,6 +705,22 @@ namespace tnbLib
 		array3 InterpWeights(const Point& theCoord) const;
 
 		connectType RetrieveConnectivity() const;
+
+		std::tuple
+			<
+			std::shared_ptr<nodeType>, 
+			std::shared_ptr<nodeType>,
+			std::shared_ptr<nodeType>
+			>
+			Nodes() const;
+
+		std::tuple
+			<
+			std::shared_ptr<edgeType>,
+			std::shared_ptr<edgeType>, 
+			std::shared_ptr<edgeType>
+			>
+			Edges() const;
 
 		//- Static function and operators
 

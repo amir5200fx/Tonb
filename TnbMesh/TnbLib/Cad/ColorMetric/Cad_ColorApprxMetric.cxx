@@ -1,16 +1,65 @@
 #include <Cad_ColorApprxMetric.hxx>
 
 #include <Mesh2d_Element.hxx>
+#include <Mesh2d_Edge.hxx>
 #include <Mesh2d_Node.hxx>
 #include <MeshBase_Tools.hxx>
 #include <Cad_MetricCalculator.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Metric1.hxx>
+#include <Entity2d_Polygon.hxx>
+#include <Entity2d_Box.hxx>
 #include <Adt_AvlTree.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom_Surface.hxx>
+
+Standard_Integer 
+tnbLib::Cad_ColorApprxMetric::NbElements() const
+{
+	CheckDone((*this));
+	return (Standard_Integer)theElements_.size();
+}
+
+Standard_Integer 
+tnbLib::Cad_ColorApprxMetric::Value
+(
+	const Standard_Integer theIndex
+) const
+{
+	CheckDone((*this));
+	Debug_Bad_Index(theIndex, 0, NbElements() - 1);
+	return theElements_.at(theIndex).second;
+}
+
+Standard_Integer 
+tnbLib::Cad_ColorApprxMetric::Value
+(
+	const Pnt2d & theCoord
+) const
+{
+	CheckDone((*this));
+#ifdef _DEBUG
+	const auto& d = theApproximation_->BoundingBox();
+	Debug_Null_Pointer(d);
+	if (NOT d->IsInside(theCoord))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the coord is outside of the domain!" << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
+
+	if (NOT theStart_)
+	{
+		theStart_ = LastItem(theElements_).first;
+	}
+	auto elm = MeshBase_Tools::ElementLocation(theStart_, theCoord);
+	Debug_Null_Pointer(elm);
+	theStart_ = elm;
+	return Value(Index_Of(elm->Index()));
+}
 
 namespace tnbLib
 {
@@ -165,4 +214,30 @@ void tnbLib::Cad_ColorApprxMetric::Perform()
 	theElements_ = std::move(marks);
 
 	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::Cad_ColorApprxMetric::Check
+(
+	const Entity2d_Polygon & thePoly,
+	const Cad_ColorApprxMetric & theApprox
+)
+{
+	if (NOT theApprox.IsDone())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the application is not performed!" << endl
+			<< abort(FatalError);
+	}
+	const auto& pts = thePoly.Points();
+	const auto& d = theApprox.Approximation()->BoundingBox();
+	Debug_Null_Pointer(d);
+	for (const auto& x : pts)
+	{
+		if (NOT d->IsInside(x))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the coord is outside of the domain!" << endl
+				<< abort(FatalError);
+		}
+	}
 }

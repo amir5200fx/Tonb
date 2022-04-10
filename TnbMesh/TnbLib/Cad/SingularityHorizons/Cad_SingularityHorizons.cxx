@@ -13,9 +13,25 @@
 #include <Entity2d_Chain.hxx>
 #include <Entity_Segment.hxx>
 #include <Entity_Triangle.hxx>
+#include <Entity2d_Box.hxx>
 #include <Pnt2d.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+Standard_Boolean 
+tnbLib::Cad_SingularityHorizons::HasHorizon() const
+{
+	CheckDone((*this));
+	return (Standard_Boolean)NbHorizons();
+}
+
+Standard_Integer 
+tnbLib::Cad_SingularityHorizons::NbHorizons() const
+{
+	CheckDone((*this));
+	Debug_Null_Pointer(theHorizons_);
+	return Horizons()->NbEdges();
+}
 
 namespace tnbLib
 {
@@ -353,4 +369,36 @@ void tnbLib::Cad_SingularityHorizons::Perform()
 
 	theHorizons_ = std::move(graph);
 	Change_IsDone() = Standard_True;
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Cad_SingularityHorizons::RetrieveDomain
+(
+	const Cad_SingularityHorizons & theHorizons
+)
+{
+	CheckDone(theHorizons);
+	Debug_Null_Pointer(theHorizons.Approximation());
+	Debug_Null_Pointer(theHorizons.Approximation()->BoundingBox());
+	return *theHorizons.Approximation()->BoundingBox();
+}
+
+std::vector<std::shared_ptr<tnbLib::Entity2d_Polygon>> 
+tnbLib::Cad_SingularityHorizons::RetrieveHorizons
+(
+	const Cad_SingularityHorizons & theHorizons
+)
+{
+	Debug_Null_Pointer(theHorizons.Horizons());
+	const auto& graph = theHorizons.Horizons();
+
+	std::vector<std::shared_ptr<Entity2d_Polygon>> polygons;
+	polygons.reserve(theHorizons.NbHorizons());
+	for (const auto& x : graph->Edges())
+	{
+		const auto& e = x.second;
+		Debug_Null_Pointer(e);
+		polygons.push_back(e->Polygon());
+	}
+	return std::move(polygons);
 }

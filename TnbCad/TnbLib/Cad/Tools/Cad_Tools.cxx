@@ -27,6 +27,8 @@
 #include <Entity3d_Triangulation.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Polygon.hxx>
+#include <Entity2d_MetricMeshValue.hxx>
+#include <Entity2d_MeshValue.hxx>
 #include <Adt_AvlTree.hxx>
 #include <Geo_Tools.hxx>
 #include <Merge3d_Chain.hxx>
@@ -850,6 +852,74 @@ tnbLib::Cad_Tools::Triangulation
 		indices.push_back(std::move(I));
 	}
 	return std::move(triangulation);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation>
+tnbLib::Cad_Tools::ParaTriangulation
+(
+	const Poly_Triangulation & theTriangulation
+)
+{
+	if (NOT theTriangulation.HasUVNodes())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the triangulation has no UNNodes!" << endl
+			<< abort(FatalError);
+	}
+	auto triangulation = std::make_shared<Entity2d_Triangulation>();
+	Debug_Null_Pointer(triangulation);
+
+	auto& pts = triangulation->Points();
+	auto& indices = triangulation->Connectivity();
+
+	pts.reserve(theTriangulation.NbNodes());
+
+	const auto& nodes = theTriangulation.UVNodes();
+	forThose(i, 1, nodes.Size())
+	{	
+		pts.push_back(nodes.Value(i));
+	}
+
+	indices.reserve(theTriangulation.NbTriangles());
+
+	const auto& tris = theTriangulation.Triangles();
+	forThose(i, 1, tris.Size())
+	{
+		const auto& x = tris.Value(i);
+		Standard_Integer i0, i1, i2;
+		x.Get(i0, i1, i2);
+
+		connectivity::triple I;
+		I.Value(0) = i0;
+		I.Value(1) = i1;
+		I.Value(2) = i2;
+
+		indices.push_back(std::move(I));
+	}
+	return std::move(triangulation);
+}
+
+std::shared_ptr<tnbLib::Entity2d_MetricMeshValue> 
+tnbLib::Cad_Tools::CalcMetrics
+(
+	const Handle(Geom_Surface)& theSurface, 
+	const Entity2d_Triangulation & theApprox
+)
+{
+	auto meshV = std::make_shared<Entity2d_MetricMeshValue>();
+	Debug_Null_Pointer(meshV);
+
+	auto mesh = std::make_shared<Entity2d_Triangulation>(theApprox);
+	std::vector<Entity2d_Metric1> ms;
+	ms.reserve(theApprox.NbPoints());
+	for (const auto& x : theApprox.Points())
+	{
+		auto m = CalcMetric(x, theSurface);
+		ms.push_back(std::move(m));
+	}
+	meshV->ValuesRef() = std::move(ms);
+	meshV->MeshRef() = std::move(mesh);
+	return std::move(meshV);
 }
 
 Handle(Geom_Curve)

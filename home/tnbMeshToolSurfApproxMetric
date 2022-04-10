@@ -1,0 +1,13 @@
+setVerbose(1);
+
+setMinLev(2);
+setMaxLev(6);
+setUnbalancing(2);
+
+setSampleType("5pts");
+
+loadFile();
+
+execute();
+
+saveTo();

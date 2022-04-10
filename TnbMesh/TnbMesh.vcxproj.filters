@@ -3927,6 +3927,9 @@
     <ClInclude Include="TnbLib\Cad\Singularity\Curve\Line\Cad_LineSingularCurveI.hxx">
       <Filter>TnbLib\Cad\Singularity\Curve\Line</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsI.hxx">
+      <Filter>TnbLib\Base\Tools\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">

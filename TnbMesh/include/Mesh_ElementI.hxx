@@ -33,6 +33,50 @@ namespace tnbLib
 }
 
 template<class ElementTraits, tnbLib::Mesh_ElementType ElmType>
+inline std::tuple
+<
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::nodeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::nodeType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::nodeType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::nodeType>
+> 
+tnbLib::Mesh_Element<ElementTraits, ElmType>::Nodes() const
+{
+	auto t = std::make_tuple(Node0(), Node1(), Node2(), Node3());
+	return std::move(t);
+}
+
+template<class ElementTraits, tnbLib::Mesh_ElementType ElmType>
+inline std::tuple
+<
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::edgeType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::edgeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::edgeType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::edgeType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::edgeType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::edgeType>
+> 
+tnbLib::Mesh_Element<ElementTraits, ElmType>::Edges() const
+{
+	auto t = std::make_tuple(Edge0(), Edge1(), Edge2(), Edge3(), Edge4(), Edge5());
+	return std::move(t);
+}
+
+template<class ElementTraits, tnbLib::Mesh_ElementType ElmType>
+inline std::tuple
+<
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::facetType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::facetType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::facetType>, 
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::facetType>
+> 
+tnbLib::Mesh_Element<ElementTraits, ElmType>::Facets() const
+{
+	auto t = std::make_tuple(Facet0(), Facet1(), Facet2(), Facet3());
+	return std::move(t);
+}
+
+template<class ElementTraits, tnbLib::Mesh_ElementType ElmType>
 inline std::vector<std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, ElmType>::nodeType>>
 tnbLib::Mesh_Element<ElementTraits, ElmType>::RetrieveNodes
 (
@@ -143,6 +187,32 @@ tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::Retrie
 }
 
 template<class ElementTraits>
+inline std::tuple
+<
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::nodeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::nodeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::nodeType>
+>
+tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::Nodes() const
+{
+	auto t = std::make_tuple(Node0(), Node1(), Node2());
+	return std::move(t);
+}
+
+template<class ElementTraits>
+inline std::tuple
+<
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::edgeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::edgeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::edgeType>
+>
+tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::Edges() const
+{
+	auto t = std::make_tuple(Edge0(), Edge1(), Edge2());
+	return std::move(t);
+}
+
+template<class ElementTraits>
 inline std::vector<std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::nodeType>>
 tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::RetrieveNodes
 (
@@ -191,4 +261,30 @@ tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::Retrie
 		nodes.push_back(std::move(x.second));
 	}
 	return std::move(nodes);
+}
+
+template<class ElementTraits>
+inline std::tuple
+<
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::nodeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::nodeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::nodeType>
+>
+tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::Nodes() const
+{
+	auto t = std::make_tuple(Node0(), Node1(), Node2());
+	return std::move(t);
+}
+
+template<class ElementTraits>
+inline std::tuple
+<
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::edgeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::edgeType>,
+	std::shared_ptr<typename tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::edgeType>
+>
+tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle2D>::Edges() const
+{
+	auto t = std::make_tuple(Edge0(), Edge1(), Edge2());
+	return std::move(t);
 }

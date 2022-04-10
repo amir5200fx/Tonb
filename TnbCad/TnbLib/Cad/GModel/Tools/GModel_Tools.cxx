@@ -16,6 +16,7 @@
 #include <Vec2d.hxx>
 #include <Dir2d.hxx>
 
+#include <Geom_Surface.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Edge.hxx>
@@ -26,6 +27,16 @@
 #include <ShapeFix_Wire.hxx>
 #include <BRepTools_WireExplorer.hxx>
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
+
+Handle(Geom_Surface)
+tnbLib::GModel_Tools::RetrieveGeometry
+(
+	const GModel_Surface & theSurface
+)
+{
+	Debug_Null_Pointer(theSurface.GeomSurface());
+	return theSurface.GeomSurface()->Geometry();
+}
 
 Standard_Boolean 
 tnbLib::GModel_Tools::IsPlane
@@ -283,6 +294,7 @@ tnbLib::GModel_Tools::GetSurfaces(const TopoDS_Shape & theShape)
 		Debug_Null_Pointer(face);
 
 		face->SetIndex(++k);
+		face->SetFace(raw);
 
 		surfaces.push_back(std::move(face));
 	}

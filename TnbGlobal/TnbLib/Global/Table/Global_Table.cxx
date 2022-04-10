@@ -123,6 +123,7 @@ tnbLib::Global_Table::RowEntities
 	const std::vector<Standard_Integer>& theIndices
 ) const
 {
+	std::cout << "check this function!" << std::endl;
 	std::vector<Standard_Real> values;
 	values.reserve(theIndices.size());
 
@@ -131,7 +132,7 @@ tnbLib::Global_Table::RowEntities
 
 	const auto& ets = Entities();
 	for (auto x : rowX)
-	{
+	{	
 		auto v = ets.Value(x, xCol);
 		values.push_back(std::move(v));
 	}

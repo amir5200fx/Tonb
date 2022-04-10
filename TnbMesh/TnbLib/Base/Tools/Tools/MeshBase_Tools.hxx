@@ -12,6 +12,8 @@
 #include <Global_Serialization.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Entity2d_MetricMeshValueFwd.hxx>
+#include <Entity2d_MeshValueFwd.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -44,7 +46,20 @@ namespace tnbLib
 			GeoMesh2d_Background& theMesh
 		);
 
-		static TnbMesh_EXPORT Pnt2d CorrectCoord(const Pnt2d& theCentre, const Pnt2d& theCoord, const Entity2d_Box&);
+		static TnbMesh_EXPORT std::shared_ptr<Entity2d_MeshValue> 
+			CalcDeterminants
+			(
+				const std::shared_ptr<Entity2d_Triangulation>& theAprx, 
+				const Entity2d_MetricMeshValue&
+			);
+
+		static TnbMesh_EXPORT Pnt2d 
+			CorrectCoord
+			(
+				const Pnt2d& theCentre, 
+				const Pnt2d& theCoord, 
+				const Entity2d_Box&
+			);
 
 		static TnbMesh_EXPORT const Handle(Geom2d_Curve)& Geometry(const std::shared_ptr<Pln_Curve>& theCurve);
 		static TnbMesh_EXPORT const Handle(Geom2d_Curve)& Geometry(const std::shared_ptr<TModel_ParaCurve>& theCurve);
@@ -77,6 +92,9 @@ namespace tnbLib
 		static TnbMesh_EXPORT void ConnectElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Element>> MakeMesh(const Entity2d_Triangulation&);
+
+		template<class ElementType>
+		static std::shared_ptr<ElementType> ElementLocation(const std::shared_ptr<ElementType>& theStart, const typename ElementType::Point& theCoord);
 
 		template<class T>
 		static void Save(const std::map<Standard_Integer, std::weak_ptr<T>>& theMap, TNB_oARCH_TYPE& ar)
@@ -145,5 +163,7 @@ namespace tnbLib
 		}
 	};
 }
+
+#include <MeshBase_ToolsI.hxx>
 
 #endif // !_MeshBase_Tools_Header

@@ -1,5 +1,16 @@
 #include <GModel_Surface.hxx>
 
+#include <GModel_Tools.hxx>
+#include <GModel_Wire.hxx>
+
+tnbLib::Entity2d_Box 
+tnbLib::GModel_Surface::CalcParametricBoundingBox() const
+{
+	auto wire = GModel_Wire::RetrieveParaWire(*theOuter_);
+	auto box = GModel_Tools::CalcBoundingBox(*wire);
+	return std::move(box);
+}
+
 tnbLib::GModel_Surface::GModel_Surface
 (
 	const std::shared_ptr<Cad_GeomSurface>& theGeometry,
@@ -10,7 +21,7 @@ tnbLib::GModel_Surface::GModel_Surface
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
-	//- empty body
+	theParaBoundingBox_ = CalcParametricBoundingBox();
 }
 
 tnbLib::GModel_Surface::GModel_Surface
@@ -23,7 +34,7 @@ tnbLib::GModel_Surface::GModel_Surface
 	, theOuter_(std::move(theOuter))
 	, theInner_(std::move(theInner))
 {
-	//- empty body
+	theParaBoundingBox_ = CalcParametricBoundingBox();
 }
 
 tnbLib::GModel_Surface::GModel_Surface
@@ -38,7 +49,7 @@ tnbLib::GModel_Surface::GModel_Surface
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
-	//- empty body
+	theParaBoundingBox_ = CalcParametricBoundingBox();
 }
 
 tnbLib::GModel_Surface::GModel_Surface
@@ -54,7 +65,7 @@ tnbLib::GModel_Surface::GModel_Surface
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
-	//- empty body
+	theParaBoundingBox_ = CalcParametricBoundingBox();
 }
 
 Standard_Integer

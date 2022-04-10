@@ -128,6 +128,38 @@ namespace tnbLib
 
 		void Perform();
 
+		void LoadHorizons(const std::shared_ptr<Cad_SingularityHorizons>& theHorizons)
+		{
+			theHorizons_ = theHorizons;
+		}
+
+		void LoadHorizons(std::shared_ptr<Cad_SingularityHorizons>&& theHorizons)
+		{
+			theHorizons_ = std::move(theHorizons);
+		}
+
+		void LoadColors(const std::shared_ptr<Cad_ColorApprxMetric>& theColors)
+		{
+			theColors_ = theColors;
+		}
+
+		void LoadColors(std::shared_ptr<Cad_ColorApprxMetric>&& theColors)
+		{
+			theColors_ = std::move(theColors);
+		}
+
+		void LoadSizeFun(const std::shared_ptr<Geo2d_SizeFunction>& theSize)
+		{
+			theSizeFun_ = theSize;
+		}
+
+		void LoadSizeFun(std::shared_ptr<Geo2d_SizeFunction>&& theSize)
+		{
+			theSizeFun_ = std::move(theSize);
+		}
+
+
+
 		static Pnt2d GetSamplePoint(const Entity2d_Polygon&);
 	};
 }

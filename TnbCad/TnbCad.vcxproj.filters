@@ -463,6 +463,9 @@
     <Filter Include="TnbLib\Cad\Approx\Wire\Traits">
       <UniqueIdentifier>{ebf8204d-783d-42c4-843b-68523fe5bb2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\IO\ApproxMetric">
+      <UniqueIdentifier>{fdcfbc35-c5aa-484b-b6d4-409f4563fb18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -905,6 +908,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxParaWireFwd.hxx">
       <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\IO\ApproxMetric\Cad_ApprxMetricIO.hxx">
+      <Filter>TnbLib\Cad\IO\ApproxMetric</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1351,6 +1357,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxParaWire.cxx">
       <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\IO\ApproxMetric\Cad_ApprxMetricIO.cxx">
+      <Filter>TnbLib\Cad\IO\ApproxMetric</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

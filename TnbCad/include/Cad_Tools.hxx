@@ -10,6 +10,8 @@
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Entity2d_MetricMeshValueFwd.hxx>
+#include <Entity2d_MeshValueFwd.hxx>
 #include <Cad_Module.hxx>
 
 class Bnd_Box;
@@ -135,8 +137,19 @@ namespace tnbLib
 				const Standard_Boolean useTri = Standard_False
 			);
 
-		static TnbCad_EXPORT Pnt2d Project(const Pnt3d& thePoint, const Handle(Geom_Plane)& thePlane);
-		static TnbCad_EXPORT Standard_Real Project(const Pnt3d& thePoint, const Handle(Geom_Line)& theLine);
+		static TnbCad_EXPORT Pnt2d 
+			Project
+			(
+				const Pnt3d& thePoint,
+				const Handle(Geom_Plane)& thePlane
+			);
+
+		static TnbCad_EXPORT Standard_Real 
+			Project
+			(
+				const Pnt3d& thePoint, 
+				const Handle(Geom_Line)& theLine
+			);
 
 		static TnbCad_EXPORT Entity_Segment<Pnt2d> 
 			Project
@@ -179,6 +192,19 @@ namespace tnbLib
 			Triangulation
 			(
 				const Poly_Triangulation& theTriangulation
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			ParaTriangulation
+			(
+				const Poly_Triangulation& theTriangulation
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<Entity2d_MetricMeshValue>
+			CalcMetrics
+			(
+				const Handle(Geom_Surface)& theSurface, 
+				const Entity2d_Triangulation& theApprox
 			);
 
 		static TnbCad_EXPORT Handle(Geom_Curve)
@@ -359,8 +385,20 @@ namespace tnbLib
 			);
 
 		// calculate the polygon length on the surface [3/29/2022 Amir]
-		static TnbCad_EXPORT Standard_Real CalcLength(const Entity2d_Polygon& thePoly, const Geom_Surface&);
-		static TnbCad_EXPORT Standard_Real CalcSegmentLength(const Pnt2d& theP0, const Pnt2d& theP1, const Geom_Surface&);
+		static TnbCad_EXPORT Standard_Real 
+			CalcLength
+			(
+				const Entity2d_Polygon& thePoly, 
+				const Geom_Surface&
+			);
+
+		static TnbCad_EXPORT Standard_Real 
+			CalcSegmentLength
+			(
+				const Pnt2d& theP0, 
+				const Pnt2d& theP1,
+				const Geom_Surface&
+			);
 
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Surface>&);
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Edge>&);

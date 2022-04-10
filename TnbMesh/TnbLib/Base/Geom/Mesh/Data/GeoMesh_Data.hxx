@@ -64,8 +64,23 @@ namespace tnbLib
 
 	public:
 
+		// default constructor [4/8/2022 Amir]
+
 		GeoMesh_Data()
 		{}
+
+		// constructors [4/8/2022 Amir]
+
+		explicit GeoMesh_Data(const elementList& theElements)
+			: theElements_(theElements)
+		{}
+
+		GeoMesh_Data(elementList&& theElements)
+			: theElements_(std::move(theElements))
+		{}
+
+
+		// public functions and operators [4/8/2022 Amir]
 
 		void Construct(const triangulation& theTriangulation);
 

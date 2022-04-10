@@ -37,3 +37,15 @@
 #else
 #define Debug_Null_Pointer(Pointer) ((void)0)
 #endif // FULLDEBUG
+
+#ifdef FULLDEBUG
+#define CheckDone(App)									\
+ if (NOT App.IsDone())										\
+ {														\
+	 FatalErrorIn(FunctionSIG)							\
+		 << "the application is not performed!" << endl	\
+		 << abort(FatalError);							\
+ }
+#else
+ #define CheckDone(App)	((void)0)
+#endif // FULLDEBUG

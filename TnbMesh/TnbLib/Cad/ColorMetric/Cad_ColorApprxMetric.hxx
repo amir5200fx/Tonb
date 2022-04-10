@@ -8,6 +8,7 @@
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Mesh2d_ElementFwd.hxx>
+#include <Mesh_Module.hxx>
 
 #include <memory>
 #include <vector>
@@ -21,8 +22,15 @@ namespace tnbLib
 	// Forward Declarations [1/1/2022 Amir]
 	class Cad_MetricCalculator;
 
+	struct Cad_ColorApprxMetricCache
+	{
+
+		mutable std::shared_ptr<Mesh2d_Element> theStart_;
+	};
+
 	class Cad_ColorApprxMetric
 		: public Global_Done
+		, public Cad_ColorApprxMetricCache
 	{
 
 		/*Private Data*/
@@ -40,14 +48,16 @@ namespace tnbLib
 		// output results [1/1/2022 Amir]
 
 		std::vector<std::pair<std::shared_ptr<Mesh2d_Element>, Standard_Integer>> theElements_;
+	
 
 	public:
 
-		static const Standard_Real DEFAULT_CRITERION;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_CRITERION;
 
 		// default constructor [1/1/2022 Amir]
 
 		Cad_ColorApprxMetric()
+			: theCriterion_(DEFAULT_CRITERION)
 		{}
 
 		// constructors [1/1/2022 Amir]
@@ -61,6 +71,7 @@ namespace tnbLib
 			: theGeometry_(theGeometry)
 			, theApproximation_(theApprox)
 			, theCalculator_(theCalculator)
+			, theCriterion_(DEFAULT_CRITERION)
 		{}
 
 		// public functions and operators [1/1/2022 Amir]
@@ -90,11 +101,11 @@ namespace tnbLib
 			return theCriterion_;
 		}
 
-		Standard_Integer NbElements() const;
-		Standard_Integer Value(const Standard_Integer theIndex) const;
-		Standard_Integer Value(const Pnt2d& theCoord) const;
+		TnbMesh_EXPORT Standard_Integer NbElements() const;
+		TnbMesh_EXPORT Standard_Integer Value(const Standard_Integer theIndex) const;
+		TnbMesh_EXPORT Standard_Integer Value(const Pnt2d& theCoord) const;
 
-		void Perform();
+		TnbMesh_EXPORT void Perform();
 
 		void LoadGeoemtry(const Handle(Geom_Surface)& theGeometry)
 		{
@@ -116,7 +127,11 @@ namespace tnbLib
 			theCriterion_ = theCrit;
 		}
 
-		static void Check(const Entity2d_Polygon&, const Cad_ColorApprxMetric&);
+		static TnbMesh_EXPORT void Check
+		(
+			const Entity2d_Polygon&,
+			const Cad_ColorApprxMetric&
+		);
 	};
 }
 

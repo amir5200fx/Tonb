@@ -5,6 +5,9 @@
 #include <GModel_ParaCurve.hxx>
 #include <GeoMesh2d_Background.hxx>
 #include <GeoMesh2d_Data.hxx>
+#include <Entity2d_MeshValue.hxx>
+#include <Entity2d_MetricMeshValue.hxx>
+#include <Entity2d_Metric1.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -55,6 +58,68 @@ void tnbLib::MeshBase_Tools::SetSourcesToMesh
 		if (v1 < x.second) sources[n1] = v1;
 		if (v2 < x.second) sources[n2] = v2;
 	}
+}
+
+std::shared_ptr<tnbLib::Entity2d_MeshValue> 
+tnbLib::MeshBase_Tools::CalcDeterminants
+(
+	const std::shared_ptr<Entity2d_Triangulation> & theAprx,
+	const Entity2d_MetricMeshValue & theMs
+)
+{
+	Debug_Null_Pointer(theAprx);
+
+	const auto& bMesh = theMs.Mesh();
+	Debug_Null_Pointer(bMesh);
+
+	auto elemnts = MakeMesh(*bMesh);
+#ifdef _DEBUG
+	if (elemnts.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the list of elements is empty!" << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
+	auto start = elemnts.front();
+
+	const auto& ms = theMs.Values();
+	const auto& pts = theAprx->Points();
+	std::vector<Standard_Real> hs;
+	hs.reserve(pts.size());
+	for (const auto& x : pts)
+	{
+		auto loc = ElementLocation(start, x);
+		if (NOT loc)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the point is outside of the domain!" << endl
+				<< abort(FatalError);
+		}
+		auto[v0, v1, v2] = loc->Nodes();
+
+		const auto& m0 = ms.at(Index_Of(v0->Index()));
+		const auto& m1 = ms.at(Index_Of(v1->Index()));
+		const auto& m2 = ms.at(Index_Of(v2->Index()));
+
+		auto det0 = m0.Determinant();
+		auto det1 = m1.Determinant();
+		auto det2 = m2.Determinant();
+
+		auto ws = loc->InterpWeights(x);
+		
+		Standard_Real sumA = ws[0] + ws[1] + ws[2];
+		Standard_Real numer = ws[0] * det0 + ws[1] * det1 + ws[2] * det2;
+		
+		auto h = (1.0 / sumA)*numer;
+		hs.push_back(h);
+	}
+	auto approximated = std::make_shared<Entity2d_MeshValue>();
+	Debug_Null_Pointer(approximated);
+
+	approximated->SetMesh(theAprx);
+	approximated->SetValues(std::move(hs));
+	return std::move(approximated);
 }
 
 tnbLib::Pnt2d 

@@ -797,6 +797,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\Base\Mesh_SizeMapToolBaseI.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\Traits\Mesh_SizeMapTool_Traits.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\Tools\MeshBase_Tools.hxx" />
+    <ClInclude Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsI.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMap.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMapFwd.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\Mesh_UnionSizeMap.hxx" />

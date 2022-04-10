@@ -45,9 +45,14 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_DEGEN_CRITERION;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_MERGING_TOLERANCE;
+
 		// default constructor [1/2/2022 Amir]
 
 		Cad_SingularityHorizons()
+			: theCriterion_(DEFAULT_DEGEN_CRITERION)
+			, theMergeTolerance_(DEFAULT_MERGING_TOLERANCE)
 		{}
 
 		// constructors [1/2/2022 Amir]
@@ -55,8 +60,8 @@ namespace tnbLib
 
 		// public functions and operators [1/2/2022 Amir]
 
-		Standard_Boolean HasHorizon() const;
-		Standard_Integer NbHorizons() const;
+		TnbMesh_EXPORT Standard_Boolean HasHorizon() const;
+		TnbMesh_EXPORT Standard_Integer NbHorizons() const;
 
 		const auto& Geometry() const
 		{
@@ -90,9 +95,27 @@ namespace tnbLib
 
 		TnbMesh_EXPORT void Perform();
 
+		void SetDegeneracyCriterion(const Standard_Real x)
+		{
+			theCriterion_ = x;
+		}
 
-		static Entity2d_Box RetrieveDomain(const Cad_SingularityHorizons&);
-		static std::vector<std::shared_ptr<Entity2d_Polygon>> RetrieveHorizons(const Cad_SingularityHorizons&);
+		void SetMergingTolerance(const Standard_Real x)
+		{
+			theMergeTolerance_ = x;
+		}
+
+		static TnbMesh_EXPORT Entity2d_Box
+			RetrieveDomain
+			(
+				const Cad_SingularityHorizons&
+			);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Entity2d_Polygon>> 
+			RetrieveHorizons
+			(
+				const Cad_SingularityHorizons&
+			);
 	};
 }
 

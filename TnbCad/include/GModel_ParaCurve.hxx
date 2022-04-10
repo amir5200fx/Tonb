@@ -118,8 +118,12 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
-		static std::pair<std::shared_ptr<GModel_ParaCurve>, std::shared_ptr<GModel_ParaCurve>> Split(const Standard_Real thePar, const std::shared_ptr<GModel_ParaCurve>&);
-		static std::vector<std::shared_ptr<GModel_ParaCurve>> Split(const std::vector<Standard_Real>& thePars, const std::shared_ptr<GModel_ParaCurve>&, const Standard_Real theTol0, const Standard_Real theTol1);
+		static TnbCad_EXPORT std::pair<std::shared_ptr<GModel_ParaCurve>, std::shared_ptr<GModel_ParaCurve>> 
+			Split
+			(
+				const Standard_Real thePar,
+				const std::shared_ptr<GModel_ParaCurve>&
+			);
 	};
 }
 
