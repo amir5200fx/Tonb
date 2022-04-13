@@ -494,12 +494,22 @@ namespace tnbLib
 				const std::pair<Standard_Real, Standard_Real>& pt
 			);
 
+		template<class T>
+		static T LinearInterpolate(const T& x0, const T& x1, const T& t);
+
 		static inline Pnt2d 
 			ProjectPtAtSegment
 			(
 				const Pnt2d& thePt,
 				const Pnt2d& theP0, 
 				const Pnt2d& theP1
+			);
+
+		static TnbGeo_EXPORT std::vector<Pnt2d> 
+			DistributeInDomain
+			(
+				const std::vector<Pnt2d>&, 
+				const Entity2d_Box&
 			);
 
 		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Chain>
@@ -597,6 +607,9 @@ namespace tnbLib
 				const Standard_Real x, 
 				const std::vector<Standard_Real>& theSorted
 			);
+
+		template<class Type>
+		static Type CalcLinearPar(const Type& x0, const Type& x1, const Type& p);
 
 		static TnbGeo_EXPORT Entity2d_Line GetLine(const gp_Lin2d&);
 

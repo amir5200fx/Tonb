@@ -305,6 +305,36 @@ tnbLib::Geo_Tools::Interpolate
 	return std::move(paired);
 }
 
+std::vector<tnbLib::Pnt2d> 
+tnbLib::Geo_Tools::DistributeInDomain
+(
+	const std::vector<Pnt2d>& thePts, 
+	const Entity2d_Box & theDomain
+)
+{
+	const auto[xmin, xmax] = theDomain.Bound(0);
+	const auto[ymin, ymax] = theDomain.Bound(1);
+
+	const auto b = Entity2d_Box::BoundingBoxOf(thePts);
+	const auto[x0, x1] = b.Bound(0);
+	const auto[y0, y1] = b.Bound(1);
+
+	std::vector<Pnt2d> pts;
+	pts.reserve(thePts.size());
+	for (const auto& x : thePts)
+	{
+		auto tx = CalcLinearPar(x0, x1, x.X());
+		auto ty = CalcLinearPar(y0, y1, x.Y());
+
+		auto xp = LinearInterpolate(xmin, xmax, tx);
+		auto yp = LinearInterpolate(ymin, ymax, ty);
+
+		Pnt2d pt(xp, yp);
+		pts.push_back(std::move(pt));
+	}
+	return std::move(pts);
+}
+
 std::shared_ptr<tnbLib::Entity2d_Chain> 
 tnbLib::Geo_Tools::RetrieveChain
 (
