@@ -51,6 +51,8 @@ namespace tnbLib
 template<>
 void tnbLib::Geo2d_KnitChain::Perform()
 {
+	theGraph_ = std::make_shared<Geo2d_PolygonGraph>();
+
 	// creating regular chains [1/5/2022 Amir]
 	auto start = FindStart(Knit_ChainNode_Type::start);
 
@@ -58,16 +60,20 @@ void tnbLib::Geo2d_KnitChain::Perform()
 	while (start)
 	{
 		auto poly = GetPolygon(start);
+		Debug_Null_Pointer(poly);
+
 		auto[n0, n1] = CreateNodes(poly);
 
 		auto edge = std::make_shared<Geo2d_PolygonSegmentGraphEdge>
-			(++nbEdges, std::move(n0), std::move(n1));
+			(++nbEdges, n0, n1);
 		Debug_Null_Pointer(edge);
 
 		edge->SetPolygon(std::move(poly));
 
 		n0->InsertToEdges(edge->Index(), edge);
 		n1->InsertToEdges(edge->Index(), edge);
+
+		theGraph_->Insert(edge->Index(), edge);
 
 		start = FindStart(Knit_ChainNode_Type::start);
 	}
@@ -83,12 +89,14 @@ void tnbLib::Geo2d_KnitChain::Perform()
 			auto n = CreateRingNode(poly);
 
 			auto edge = std::make_shared<Geo2d_PolygonRingGraphEdge>
-				(++nbRings, std::move(n));
+				(++nbRings, n);
 			Debug_Null_Pointer(edge);
 
 			edge->SetPolygon(std::move(poly));
 
 			n->InsertToEdges(edge->Index(), edge);
+
+			theGraph_->Insert(edge->Index(), edge);
 
 			start = FindStart(Knit_ChainNode_Type::regular);
 		}

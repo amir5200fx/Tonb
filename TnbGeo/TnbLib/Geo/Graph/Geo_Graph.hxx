@@ -85,21 +85,10 @@ namespace tnbLib
 		void Insert(const Standard_Integer theIndex, const std::shared_ptr<EdgeType>&);
 		void Insert(const Standard_Integer theIndex, std::shared_ptr<EdgeType>&&);
 
-		void Remove(const Standard_Integer theIndex)
-		{
-			auto iter = theEdges_.find(theIndex);
-			if (iter IS_EQUAL theEdges_.end())
-			{
-				FatalErrorIn("void Remove(const Standard_Integer theIndex)")
-					<< "the item is not in the tree: " << theIndex << endl
-					<< abort(FatalError);
-			}
-
-			edgeType::deAttach(theIndex);
-
-			theEdges_.erase(iter);
-		}
+		void Remove(const Standard_Integer theIndex);
 	};
 }
+
+#include <Geo_GraphI.hxx>
 
 #endif // !_Geo_Graph_Header

@@ -204,6 +204,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Graph\Edge\Segment\Geo_SegmentGraphEdge.hxx" />
     <ClInclude Include="TnbLib\Geo\Graph\Edge\Segment\Geo_SegmentGraphEdgeI.hxx" />
     <ClInclude Include="TnbLib\Geo\Graph\Geo_Graph.hxx" />
+    <ClInclude Include="TnbLib\Geo\Graph\Geo_GraphI.hxx" />
     <ClInclude Include="TnbLib\Geo\Graph\Node\2d\Geo2d_GraphNode.hxx" />
     <ClInclude Include="TnbLib\Geo\Graph\Node\2d\Geo2d_GraphNodeFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Graph\Node\2d\Traits\Geo2d_GraphNodeTraits.hxx" />
@@ -399,6 +400,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Function\Table\Geo_TableFunction.cxx" />
     <ClCompile Include="TnbLib\Geo\Graph\Edge\Ring\Geo_RingGraphEdge.cxx" />
     <ClCompile Include="TnbLib\Geo\Graph\Edge\Segment\Geo_SegmentGraphEdge.cxx" />
+    <ClCompile Include="TnbLib\Geo\Graph\Geo_Graph.cxx" />
     <ClCompile Include="TnbLib\Geo\Integrand\Curve\Function\Geo_CurveIntegrand_Function.cxx" />
     <ClCompile Include="TnbLib\Geo\Integrand\Segment\Geo_SegmentIntegrand.cxx" />
     <ClCompile Include="TnbLib\Geo\Interval\Geo_Interval.cxx" />

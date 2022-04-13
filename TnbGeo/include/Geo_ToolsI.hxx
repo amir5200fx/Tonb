@@ -324,6 +324,17 @@ tnbLib::Geo_Tools::Interpolate
 	return y0 + ((x - x0) / (x1 - x0))*(y1 - y0);
 }
 
+template<class T>
+inline T tnbLib::Geo_Tools::LinearInterpolate
+(
+	const T & x0,
+	const T & x1, 
+	const T & t
+)
+{
+	return x0 + t * (x1 - x0);
+}
+
 inline tnbLib::Pnt2d 
 tnbLib::Geo_Tools::ProjectPtAtSegment
 (
@@ -363,4 +374,16 @@ namespace tnbLib
 	{
 		return Global_Tools::FindSpan<Type>(x, theSorted, xValue);
 	}
+}
+
+template<class Type>
+inline Type 
+tnbLib::Geo_Tools::CalcLinearPar
+(
+	const Type & x0, 
+	const Type & x1, 
+	const Type & p
+)
+{
+	return (p - x0) / (x1 - x0);
 }

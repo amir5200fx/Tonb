@@ -1263,6 +1263,9 @@
     <ClInclude Include="TnbLib\Geo\Entities\MeshValue\3d\Entity3d_MeshValue.hxx">
       <Filter>TnbLib\Geo\Entities\MeshValue\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Geo_GraphI.hxx">
+      <Filter>TnbLib\Geo\Graph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1609,6 +1612,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\MeshValue\3d\Entity3d_MeshValueIO.cxx">
       <Filter>TnbLib\Geo\Entities\MeshValue\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Graph\Geo_Graph.cxx">
+      <Filter>TnbLib\Geo\Graph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
