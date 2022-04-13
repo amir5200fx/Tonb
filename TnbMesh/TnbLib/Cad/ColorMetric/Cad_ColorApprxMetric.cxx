@@ -15,6 +15,10 @@
 
 #include <Geom_Surface.hxx>
 
+#include <stack>
+
+const Standard_Real tnbLib::Cad_ColorApprxMetric::DEFAULT_CRITERION(1.0E-6);
+
 Standard_Integer 
 tnbLib::Cad_ColorApprxMetric::NbElements() const
 {
@@ -67,31 +71,85 @@ namespace tnbLib
 
 	static void TrackRegion
 	(
-		const Mesh2d_Element& theElement,
+		const std::shared_ptr<Mesh2d_Element>& theElement,
 		Adt_AvlTree<std::shared_ptr<Mesh2d_Element>>& theRegister,
 		elementList& theList
 	)
 	{
-		const auto n0 = theElement.Neighbor0().lock();
-		if (n0 AND NOT theRegister.RemoveIgnoreWarning(n0))
+		if (NOT theElement)
 		{
-			theList.push_back(n0);
-			TrackRegion(*n0, theRegister, theList);
+			return;
+		}
+		std::stack<std::shared_ptr<Mesh2d_Element>> stk;
+		stk.push(theElement);
+
+		while (NOT stk.empty())
+		{
+			auto elm = stk.top();
+			stk.pop();
+			
+			auto n0 = elm->Neighbor0().lock();
+			if (n0)
+			{
+				if (NOT theRegister.RemoveIgnoreWarning(n0))
+				{
+					theList.push_back(n0);
+					stk.push(std::move(n0));
+				}
+			}
+
+			auto n1 = elm->Neighbor1().lock();
+			if (n1)
+			{
+				if (NOT theRegister.RemoveIgnoreWarning(n1))
+				{
+					theList.push_back(n1);
+					stk.push(std::move(n1));
+				}
+			}
+
+			auto n2 = elm->Neighbor2().lock();
+			if (n2)
+			{
+				if (NOT theRegister.RemoveIgnoreWarning(n2))
+				{
+					theList.push_back(n2);
+					stk.push(std::move(n2));
+				}
+			}
+		}
+		/*std::cout << "inner" << std::endl;
+		const auto n0 = theElement.Neighbor0().lock();
+		if (n0)
+		{
+			if (NOT theRegister.RemoveIgnoreWarning(n0))
+			{
+				theList.push_back(n0);
+				TrackRegion(*n0, theRegister, theList);
+			}
 		}
 
 		const auto n1 = theElement.Neighbor1().lock();
-		if (n1 AND NOT theRegister.RemoveIgnoreWarning(n1))
+		if (n1)
 		{
-			theList.push_back(n1);
-			TrackRegion(*n1, theRegister, theList);
+			if (NOT theRegister.RemoveIgnoreWarning(n1))
+			{
+				theList.push_back(n1);
+				TrackRegion(*n1, theRegister, theList);
+			}	
 		}
 
 		const auto n2 = theElement.Neighbor2().lock();
-		if (n2 AND NOT theRegister.RemoveIgnoreWarning(n2))
+		if (n2)
 		{
-			theList.push_back(n2);
-			TrackRegion(*n2, theRegister, theList);
-		}
+			if (NOT theRegister.RemoveIgnoreWarning(n2))
+			{
+				theList.push_back(n2);
+				TrackRegion(*n2, theRegister, theList);
+			}	
+		}*/
+
+
 	}
 
 	static std::vector<std::shared_ptr<elementList>> 
@@ -110,8 +168,8 @@ namespace tnbLib
 			blackElements.Remove(root);
 
 			l->push_back(root);
-
-			TrackRegion(*root, blackElements, *l);
+			std::cout << "track" << std::endl;
+			TrackRegion(root, blackElements, *l);
 
 			regions.push_back(std::move(l));
 		}
@@ -180,13 +238,20 @@ void tnbLib::Cad_ColorApprxMetric::Perform()
 			<< abort(FatalError);
 	}
 
+	if (NOT MetricCalculator())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no metric calculator has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
 	auto mesh = MeshBase_Tools::MakeMesh(*Approximation());
 
 	std::vector<std::pair<std::shared_ptr<Mesh2d_Element>, Standard_Integer>> marks(mesh.size());
 	for (const auto& x : mesh)
 	{
 		auto paired = std::make_pair(x, 0);
-		marks[Index_Of(x->Index())] = std::move(paired);
+		marks.at(Index_Of(x->Index())) = std::move(paired);
 	}
 
 	Adt_AvlTree<std::shared_ptr<Mesh2d_Element>> reg;
@@ -207,13 +272,28 @@ void tnbLib::Cad_ColorApprxMetric::Perform()
 
 		for (const auto& x : region)
 		{
-			marks[Index_Of(x->Index())].second = regionNb;
+			marks.at(Index_Of(x->Index())).second = regionNb;
 		}
 	}
-
 	theElements_ = std::move(marks);
 
 	Change_IsDone() = Standard_True;
+}
+
+Standard_Real 
+tnbLib::Cad_ColorApprxMetric::CalcCriterion
+(
+	const Standard_Real theMaxDet
+)
+{
+	if (std::abs(theMaxDet) <= gp::Resolution())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid value of max. det. has been detected!" << endl
+			<< " - max. det: " << theMaxDet << endl
+			<< abort(FatalError);
+	}
+	return 1.0 / theMaxDet;
 }
 
 void tnbLib::Cad_ColorApprxMetric::Check
