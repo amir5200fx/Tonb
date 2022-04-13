@@ -46,6 +46,13 @@ namespace tnbLib
 			GeoMesh2d_Background& theMesh
 		);
 
+		static TnbMesh_EXPORT std::vector<Standard_Real>
+			CalcDeterminants
+			(
+				const std::vector<Pnt2d>& thePts,
+				const Entity2d_MetricMeshValue&
+			);
+
 		static TnbMesh_EXPORT std::shared_ptr<Entity2d_MeshValue> 
 			CalcDeterminants
 			(
