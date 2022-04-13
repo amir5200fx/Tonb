@@ -384,6 +384,21 @@ namespace tnbLib
 				Standard_Real(*sizeFun)(const Pnt3d&)
 			);
 
+		static TnbCad_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcMaxMinMetrics
+			(
+				const Handle(Geom_Surface)&, 
+				const Entity2d_Triangulation&
+			);
+
+		static TnbCad_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcMaxMinMetrics
+			(
+				const Handle(Geom_Surface)&,
+				const Entity2d_Triangulation&,
+				Standard_Real(*sizeFun)(const Pnt3d&)
+			);
+
 		// calculate the polygon length on the surface [3/29/2022 Amir]
 		static TnbCad_EXPORT Standard_Real 
 			CalcLength

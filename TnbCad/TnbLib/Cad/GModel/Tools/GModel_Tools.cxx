@@ -121,9 +121,12 @@ tnbLib::GModel_Tools::GetEdge
 		pCurve = Pln_Tools::ConvertToTrimmedCurve(pCurve, u0, u1);
 	}
 
-	if (NOT Cad_Tools::IsBounded(Curve))
+	if (Curve)
 	{
-		Curve = Cad_Tools::ConvertToTrimmed(Curve, U0, U1);
+		if (NOT Cad_Tools::IsBounded(Curve))
+		{
+			Curve = Cad_Tools::ConvertToTrimmed(Curve, U0, U1);
+		}
 	}
 
 	if (edge.Orientation() IS_EQUAL TopAbs_REVERSED)

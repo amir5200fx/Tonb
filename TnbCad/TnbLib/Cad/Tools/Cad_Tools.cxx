@@ -2104,6 +2104,61 @@ tnbLib::Cad_Tools::CalcMetric
 	return std::move(m);
 }
 
+std::pair<Standard_Real, Standard_Real> 
+tnbLib::Cad_Tools::CalcMaxMinMetrics
+(
+	const Handle(Geom_Surface)& theSurface, 
+	const Entity2d_Triangulation & theApprox
+)
+{
+	const auto& pts = theApprox.Points();
+	auto minDet = RealLast();
+	auto maxDet = RealFirst();
+	for (const auto& x : pts)
+	{
+		auto m = CalcMetric(x, theSurface);
+		auto det = m.Determinant();
+		if (det < minDet)
+		{
+			minDet = det;
+		}
+		if (det > maxDet)
+		{
+			maxDet = det;
+		}
+	}
+	auto t = std::make_pair(maxDet, minDet);
+	return std::move(t);
+}
+
+std::pair<Standard_Real, Standard_Real> 
+tnbLib::Cad_Tools::CalcMaxMinMetrics
+(
+	const Handle(Geom_Surface)& theSurface,
+	const Entity2d_Triangulation & theApprox, 
+	Standard_Real(*sizeFun)(const Pnt3d &)
+)
+{
+	const auto& pts = theApprox.Points();
+	auto minDet = RealLast();
+	auto maxDet = RealFirst();
+	for (const auto& x : pts)
+	{
+		auto m = CalcMetric(x, theSurface, sizeFun);
+		auto det = m.Determinant();
+		if (det < minDet)
+		{
+			minDet = det;
+		}
+		if (det > maxDet)
+		{
+			maxDet = det;
+		}
+	}
+	auto t = std::make_pair(maxDet, minDet);
+	return std::move(t);
+}
+
 Standard_Real 
 tnbLib::Cad_Tools::CalcLength
 (
