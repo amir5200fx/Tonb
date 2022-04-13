@@ -57,6 +57,18 @@ namespace tnbLib
 
 		// constructors [1/2/2022 Amir]
 
+		Cad_SingularityHorizons
+		(
+			const Handle(Geom_Surface)& theGeom,
+			const std::shared_ptr<Entity2d_Triangulation>& theApprox,
+			const std::shared_ptr<Cad_MetricCalculator>& theCalculator
+		)
+			: theGeometry_(theGeom)
+			, theApproximation_(theApprox)
+			, theCalculator_(theCalculator)
+			, theCriterion_(DEFAULT_DEGEN_CRITERION)
+			, theMergeTolerance_(DEFAULT_MERGING_TOLERANCE)
+		{}
 
 		// public functions and operators [1/2/2022 Amir]
 
@@ -94,6 +106,21 @@ namespace tnbLib
 		}
 
 		TnbMesh_EXPORT void Perform();
+
+		void LoadGeometry(const Handle(Geom_Surface)& theGeom)
+		{
+			theGeometry_ = theGeom;
+		}
+
+		void LoadApproximation(const std::shared_ptr<Entity2d_Triangulation>& theApprox)
+		{
+			theApproximation_ = theApprox;
+		}
+
+		void LoadMetricCalculato(const std::shared_ptr<Cad_MetricCalculator>& theCalculator)
+		{
+			theCalculator_ = theCalculator;
+		}
 
 		void SetDegeneracyCriterion(const Standard_Real x)
 		{

@@ -18,6 +18,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+const Standard_Real tnbLib::Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION(1.0E-6);
+const Standard_Real tnbLib::Cad_SingularityHorizons::DEFAULT_MERGING_TOLERANCE(1.0E-6);
+
 Standard_Boolean 
 tnbLib::Cad_SingularityHorizons::HasHorizon() const
 {
