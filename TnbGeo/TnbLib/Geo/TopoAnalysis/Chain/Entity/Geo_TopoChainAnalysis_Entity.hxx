@@ -21,11 +21,12 @@ namespace tnbLib
 
 		Standard_Boolean IsRing_;
 
-	protected:
+	public:
 
 		// default constructor [4/1/2022 Amir]
 
 		Geo_TopoChainAnalysis_Entity()
+			: IsRing_(Standard_False)
 		{}
 
 
@@ -33,6 +34,7 @@ namespace tnbLib
 
 		Geo_TopoChainAnalysis_Entity(const Standard_Integer theIndex)
 			: Global_Indexed(theIndex)
+			, IsRing_(Standard_False)
 		{}
 
 	public:

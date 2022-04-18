@@ -29,6 +29,7 @@ namespace tnbLib
 
 		// constructors [1/3/2022 Amir]
 
+	public:
 
 		// public functions and operators [1/3/2022 Amir]
 
