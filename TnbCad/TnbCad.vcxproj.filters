@@ -466,6 +466,9 @@
     <Filter Include="TnbLib\Cad\IO\ApproxMetric">
       <UniqueIdentifier>{fdcfbc35-c5aa-484b-b6d4-409f4563fb18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Approx\CurveOnSurface">
+      <UniqueIdentifier>{2fb5d195-9c75-467f-a6b2-050c09a68d6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -911,6 +914,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\IO\ApproxMetric\Cad_ApprxMetricIO.hxx">
       <Filter>TnbLib\Cad\IO\ApproxMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\CurveOnSurface\Cad_ApprxCurveOnSurface.hxx">
+      <Filter>TnbLib\Cad\Approx\CurveOnSurface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1360,6 +1366,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\IO\ApproxMetric\Cad_ApprxMetricIO.cxx">
       <Filter>TnbLib\Cad\IO\ApproxMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\CurveOnSurface\Cad_ApprxCurveOnSurface.cxx">
+      <Filter>TnbLib\Cad\Approx\CurveOnSurface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
