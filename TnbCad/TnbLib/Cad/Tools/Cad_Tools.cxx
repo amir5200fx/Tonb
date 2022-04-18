@@ -922,6 +922,30 @@ tnbLib::Cad_Tools::CalcMetrics
 	return std::move(meshV);
 }
 
+std::shared_ptr<tnbLib::Entity2d_MetricMeshValue> 
+tnbLib::Cad_Tools::CalcMetrics
+(
+	const Handle(Geom_Surface)& theSurface, 
+	const Entity2d_Triangulation & theApprox,
+	Standard_Real(*sizeFun)(const Pnt3d &)
+)
+{
+	auto meshV = std::make_shared<Entity2d_MetricMeshValue>();
+	Debug_Null_Pointer(meshV);
+
+	auto mesh = std::make_shared<Entity2d_Triangulation>(theApprox);
+	std::vector<Entity2d_Metric1> ms;
+	ms.reserve(theApprox.NbPoints());
+	for (const auto& x : theApprox.Points())
+	{
+		auto m = CalcMetric(x, theSurface, sizeFun);
+		ms.push_back(std::move(m));
+	}
+	meshV->ValuesRef() = std::move(ms);
+	meshV->MeshRef() = std::move(mesh);
+	return std::move(meshV);
+}
+
 Handle(Geom_Curve)
 tnbLib::Cad_Tools::ConvertToTrimmed
 (
