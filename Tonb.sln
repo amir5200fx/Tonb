@@ -1322,6 +1322,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbMeshValue2dToPlt", "appl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbMeshValue2dListToPlt", "applications\tools\convertor\meshValue2dListToPlt\tnbMeshValue2dListToPlt\tnbMeshValue2dListToPlt.vcxproj", "{7B5ADE16-4459-4C9C-BB25-B79F23BB963F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "singularityDetection", "singularityDetection", "{9199B365-0025-49F8-8C8F-6BD6820BAE82}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbMeshToolSingularityDetection", "applications\mesh\tools\singularityDetection\tnbMeshToolSingularityDetection\tnbMeshToolSingularityDetection.vcxproj", "{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "singularityHorizonsViewer", "singularityHorizonsViewer", "{59F711ED-5425-4AAE-9048-4832AA71AF57}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbMeshToolSingularityHorizonsViewer", "applications\mesh\tools\singularityHorizonsViewer\tnbMeshToolSingularityHorizonsViewer\tnbMeshToolSingularityHorizonsViewer.vcxproj", "{4E16ADAB-7F61-430D-834A-9BE2363817F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "singularityModifyPlaneViewer", "singularityModifyPlaneViewer", "{02AB38E5-D956-4CEE-BF71-0DE16E03943F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbMeshToolSingularityModifyPlaneViewer", "applications\mesh\tools\singularityModifyPlaneViewer\tnbMeshToolSingularityModifyPlaneViewer.vcxproj", "{336B7DAA-D8F3-4747-831D-AC28B3532354}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -3890,6 +3902,36 @@ Global
 		{7B5ADE16-4459-4C9C-BB25-B79F23BB963F}.Release|x64.Build.0 = Release|x64
 		{7B5ADE16-4459-4C9C-BB25-B79F23BB963F}.Release|x86.ActiveCfg = Release|Win32
 		{7B5ADE16-4459-4C9C-BB25-B79F23BB963F}.Release|x86.Build.0 = Release|Win32
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Debug|x64.ActiveCfg = Debug|x64
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Debug|x64.Build.0 = Debug|x64
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Debug|x86.ActiveCfg = Debug|Win32
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Debug|x86.Build.0 = Debug|Win32
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Release|Any CPU.ActiveCfg = Release|Win32
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Release|x64.ActiveCfg = Release|x64
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Release|x64.Build.0 = Release|x64
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Release|x86.ActiveCfg = Release|Win32
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82}.Release|x86.Build.0 = Release|Win32
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Debug|x64.ActiveCfg = Debug|x64
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Debug|x64.Build.0 = Debug|x64
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Debug|x86.ActiveCfg = Debug|Win32
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Debug|x86.Build.0 = Debug|Win32
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Release|Any CPU.ActiveCfg = Release|Win32
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Release|x64.ActiveCfg = Release|x64
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Release|x64.Build.0 = Release|x64
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Release|x86.ActiveCfg = Release|Win32
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0}.Release|x86.Build.0 = Release|Win32
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Debug|x64.ActiveCfg = Debug|x64
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Debug|x64.Build.0 = Debug|x64
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Debug|x86.ActiveCfg = Debug|Win32
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Debug|x86.Build.0 = Debug|Win32
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|Any CPU.ActiveCfg = Release|Win32
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|x64.ActiveCfg = Release|x64
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|x64.Build.0 = Release|x64
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|x86.ActiveCfg = Release|Win32
+		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -4500,6 +4542,12 @@ Global
 		{B515DEBF-2478-44A7-B463-EC1119BC05CA} = {0807ED46-6651-48F9-B2D1-3570E50517E0}
 		{ADD0B6CA-21D6-499C-BAD9-3DB6609E88FA} = {5BE9DC18-C99C-44D7-BE19-DA6BC367695B}
 		{7B5ADE16-4459-4C9C-BB25-B79F23BB963F} = {B515DEBF-2478-44A7-B463-EC1119BC05CA}
+		{9199B365-0025-49F8-8C8F-6BD6820BAE82} = {607CD2FD-189F-48B3-982E-CFE91605CE8F}
+		{137EEFC7-FA0A-4DDF-9583-9D88B8001A82} = {9199B365-0025-49F8-8C8F-6BD6820BAE82}
+		{59F711ED-5425-4AAE-9048-4832AA71AF57} = {607CD2FD-189F-48B3-982E-CFE91605CE8F}
+		{4E16ADAB-7F61-430D-834A-9BE2363817F0} = {59F711ED-5425-4AAE-9048-4832AA71AF57}
+		{02AB38E5-D956-4CEE-BF71-0DE16E03943F} = {607CD2FD-189F-48B3-982E-CFE91605CE8F}
+		{336B7DAA-D8F3-4747-831D-AC28B3532354} = {02AB38E5-D956-4CEE-BF71-0DE16E03943F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93099114-9B19-4038-837D-C830D759F3F9}

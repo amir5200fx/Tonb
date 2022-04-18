@@ -9,15 +9,50 @@
 
 class Geom2d_Curve;
 class Geom_Curve;
+class Geom_Surface;
 
-#include "Aft2d_gPlnCurveSurface.hxx"
+#include <Standard_Handle.hxx>
 
 namespace tnbLib
 {
 
+	// Forward Declarations [4/18/2022 Amir]
+	class Geo_ApprxCurve_Info;
+
+	class Cad_SingularCurveBase
+	{
+
+		/*Private Data*/
+
+	protected:
+
+		// default constructor [4/18/2022 Amir]
+
+		Cad_SingularCurveBase()
+		{}
+
+		// constructors [4/18/2022 Amir]
+
+	public:
+
+		static TnbMesh_EXPORT std::shared_ptr<Geo_ApprxCurve_Info> ApproxInfo;
+
+		// public functions and operators [4/18/2022 Amir]
+
+		static TnbMesh_EXPORT Handle(Geom_Curve)
+			CalcCurve3d
+			(
+				const Handle(Geom2d_Curve)& para,
+				const Handle(Geom_Surface)&, 
+				const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo
+			);
+
+	};
+
 	template<class CurveType>
 	class Cad_SingularCurve
 		: public CurveType
+		, public Cad_SingularCurveBase
 	{
 
 	public:
@@ -59,6 +94,8 @@ namespace tnbLib
 		{}
 
 	public:
+
+		
 
 		// public functions and operators [12/31/2021 Amir]
 

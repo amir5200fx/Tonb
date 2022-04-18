@@ -8,6 +8,8 @@
 
 namespace tnbLib
 {
+	template<>
+	TnbMesh_EXPORT Entity2d_Box Mesh2d_PlnWireAnIso::CalcBoundingBox(const Mesh2d_PlnCurveAnIso&);
 
 	template<>
 	template<>

@@ -1,7 +1,7 @@
 setVerbose(1);
 
 setMinLev(2);
-setMaxLev(6);
+setMaxLev(5);
 setUnbalancing(2);
 
 setSampleType("5pts");

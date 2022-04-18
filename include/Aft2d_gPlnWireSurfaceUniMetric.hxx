@@ -10,6 +10,9 @@ namespace tnbLib
 {
 
 	template<>
+	Entity2d_Box Aft2d_gPlnWireSurfaceUniMetric::CalcBoundingBox(const Aft2d_gPlnCurveSurfaceUniMetric&);
+
+	template<>
 	template<>
 	TnbMesh_EXPORT void Aft2d_gPlnWireSurfaceUniMetric::serialize<TNB_iARCH_TYPE>
 		(

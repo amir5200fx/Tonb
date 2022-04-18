@@ -196,7 +196,7 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create a box." << endl;
+			Info << " This application is aimed to create a sphere." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -230,7 +230,7 @@ int main(int argc, char* argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbCadSphere";
+			auto address = file::GetSystemFile("tnbCadSphere");
 			fileName myFileName(address);
 
 			try

@@ -26,10 +26,40 @@ namespace tnbLib
 	template<class SurfPln>
 	class Cad_SingularZone;
 
+	class Cad_SingularityNonTempBase
+	{
+
+		/*Private Data*/
+
+	protected:
+
+		// default constructor [4/17/2022 Amir]
+
+		Cad_SingularityNonTempBase()
+		{}
+
+		// constructors [4/17/2022 Amir]
+
+	public:
+
+		static TnbMesh_EXPORT std::pair
+			<
+			std::shared_ptr<Entity2d_Polygon>, 
+			std::shared_ptr<Entity2d_Polygon>
+			> 
+			RetrievePair
+			(
+				const std::vector<std::shared_ptr<Entity2d_Polygon>>&
+			);
+
+		static TnbMesh_EXPORT Pnt2d GetSamplePoint(const Entity2d_Polygon&);
+	};
+
 	template<class SurfType>
 	class Cad_Singularity
 		: public Global_Done
 		, public Cad_SingularityBase<typename cad_singularity_traits<SurfType>::parCurveType>
+		, public Cad_SingularityNonTempBase
 	{
 
 	public:
@@ -73,17 +103,17 @@ namespace tnbLib
 		std::shared_ptr<singularZone> TypeDetection(const Entity2d_Polygon& thePoly, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
 		std::shared_ptr<singularZone> TypeDetection(const Entity2d_Polygon& thePoly0, const Entity2d_Polygon& thePoly1, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
 
-		static std::pair<std::shared_ptr<Entity2d_Polygon>, std::shared_ptr<Entity2d_Polygon>> RetrievePair(const std::vector<std::shared_ptr<Entity2d_Polygon>>&);
-
 	public:
 
 		typedef Cad_SingularityBase<typename cad_singularity_traits<SurfType>::parCurveType> base;
 
 		static TnbMesh_EXPORT unsigned short verbose;
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_WEIGHT;
 
 		// default constructor [12/31/2021 Amir]
 
 		Cad_Singularity()
+			: theWeight_(DEFAULT_WEIGHT)
 		{}
 
 		// constructors [12/31/2021 Amir]
@@ -158,9 +188,22 @@ namespace tnbLib
 			theSizeFun_ = std::move(theSize);
 		}
 
+		void LoadParaPlane(const std::shared_ptr<plnType>& thePlane)
+		{
+			thePlane_ = thePlane;
+		}
 
+		void LoadParaPlane(std::shared_ptr<plnType>&& thePlane)
+		{
+			thePlane_ = std::move(thePlane);
+		}
 
-		static Pnt2d GetSamplePoint(const Entity2d_Polygon&);
+		void SetWeight(const Standard_Real theWeight)
+		{
+			theWeight_ = theWeight;
+		}
+
+		
 	};
 }
 

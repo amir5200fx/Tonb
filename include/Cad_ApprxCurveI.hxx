@@ -10,7 +10,7 @@ inline void tnbLib::Cad_ApprxCurve<CurveType, RandSamples>::Perform()
 			<< "no curve has been loaded!" << endl
 			<< abort(FatalError);
 	}
-	const auto& geom = Curve()->Geometry();
+	const auto geom = Curve()->Geometry();
 	Debug_Null_Pointer(geom);
 
 	const auto fprm = Curve()->FirstParameter();

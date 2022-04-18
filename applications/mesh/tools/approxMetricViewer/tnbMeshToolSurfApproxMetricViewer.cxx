@@ -6,6 +6,7 @@
 #include <GModel_Tools.hxx>
 #include <GModel_Surface.hxx>
 #include <Geo_Tools.hxx>
+#include <Geo3d_SizeFunction.hxx>
 #include <Entity3d_MeshValue.hxx>
 #include <Entity2d_MetricMeshValue.hxx>
 #include <Entity2d_Triangulation.hxx>
@@ -23,6 +24,7 @@ namespace tnbLib
 
 	static std::shared_ptr<Cad_ApprxMetricIO> myIO;
 	static std::vector<std::shared_ptr<Entity3d_MeshValue>> myApproxs;
+	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
 
 	static unsigned short verbose = 0;
 	static bool loadTag = false;
@@ -83,6 +85,50 @@ namespace tnbLib
 		saveTo(myFileName);
 	}
 
+	auto checkFolder(const std::string& name)
+	{
+		if (NOT boost::filesystem::is_directory(name))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	void loadSizeFun()
+	{
+		if (checkFolder("sizeMap"))
+		{
+			return;
+		}
+		else
+		{
+			const auto currentPath = boost::filesystem::current_path();
+
+			// change the current path [12/4/2021 Amir]
+			boost::filesystem::current_path(currentPath.string() + R"(\sizeMap)");
+
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Geo3d_SizeFunction::extension).string();
+
+			auto sizeFun = file::LoadFile<std::shared_ptr<Geo3d_SizeFunction>>(name + Geo3d_SizeFunction::extension, verbose);
+			if (NOT sizeFun)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " the size function file is null" << endl
+					<< abort(FatalError);
+			}
+
+			//- change back the current path
+			boost::filesystem::current_path(currentPath);
+
+			mySizeFun = std::move(sizeFun);
+		}
+	}
+
+	auto calcSize(const Pnt3d& pt)
+	{
+		return mySizeFun->Value(pt);
+	}
+
 	void execute()
 	{
 		if (NOT loadTag)
@@ -91,6 +137,8 @@ namespace tnbLib
 				<< "no file has been loaded!" << endl
 				<< abort(FatalError);
 		}
+
+		loadSizeFun();
 
 		const auto& model = myIO->Model();
 		const auto& approxMap = myIO->Approx();
@@ -120,7 +168,16 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 			auto geom = GModel_Tools::RetrieveGeometry(*x);
-			auto metrics = Cad_Tools::CalcMetrics(geom, *metricApprox);
+			std::shared_ptr<Entity2d_MetricMeshValue> metrics;
+			if (mySizeFun)
+			{
+				metrics = Cad_Tools::CalcMetrics(geom, *metricApprox, &calcSize);
+			}
+			else
+			{
+				metrics = Cad_Tools::CalcMetrics(geom, *metricApprox);
+			}
+			//auto metrics = Cad_Tools::CalcMetrics(geom, *metricApprox);
 			auto poly = Cad_Tools::RetrieveTriangulation(x->Face());
 			if (NOT poly)
 			{
@@ -131,13 +188,19 @@ namespace tnbLib
 			auto tri = Cad_Tools::ParaTriangulation(*poly);
 			auto tri3d = Cad_Tools::Triangulation(*geom, *tri);
 
-			auto meshV = MeshBase_Tools::CalcDeterminants(tri, *metrics);
-			auto& values = meshV->ValuesRef();
+			auto b = Entity2d_Box::BoundingBoxOf(tri->Points());
+			b.Expand(-b.Diameter()*1.0E-6);
+			auto shrinkedPts = Geo_Tools::DistributeInDomain(tri->Points(), b);
+			auto hs = MeshBase_Tools::CalcDeterminants(shrinkedPts, *metrics);
+
+			//auto meshV = MeshBase_Tools::CalcDeterminants(tri, *metrics);
+			//auto& values = meshV->ValuesRef();
 
 			auto meshV3d = std::make_shared<Entity3d_MeshValue>();
 			
 			meshV3d->SetMesh(std::move(tri3d));
-			meshV3d->SetValues(std::move(values));
+			//meshV3d->SetValues(std::move(values));
+			meshV3d->SetValues(std::move(hs));
 
 			myApproxs.push_back(std::move(meshV3d));
 		}

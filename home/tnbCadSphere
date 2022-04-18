@@ -1,0 +1,7 @@
+setVerbose(1);
+
+var centre = createPoint(0.0, 0.0, 0.0);
+
+makeSphere(centre, 1.0, "mySphere");
+
+saveTo();

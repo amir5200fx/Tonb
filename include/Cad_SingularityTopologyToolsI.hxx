@@ -26,22 +26,22 @@ tnbLib::Cad_SingularityTopologyTools::GetChainList
 		Debug_Null_Pointer(chain0);
 		Debug_Null_Pointer(chain1);
 
-		const auto& pts0 = chain0->Points();
-		const auto& pts1 = chain1->Points();
+		auto& pts0 = chain0->Points();
+		auto& pts1 = chain1->Points();
 
 		Debug_If_Condition(pts0.size() NOT_EQUAL 2);
 		Debug_If_Condition(pts1.size() NOT_EQUAL 2);
 
-		pts0[1] = pts1[0] = MEAN(pts0[1], pts1[0]);
+		pts0.at(1) = pts1.at(0) = MEAN(pts0.at(1), pts1.at(0));
 	}
 
-	const auto& chain0 = chains[chains.size() - 1];
-	const auto& chain1 = chains[0];
+	const auto& chain0 = chains.at(chains.size() - 1);
+	const auto& chain1 = chains.at(0);
 
 	auto& pts0 = chain0->Points();
 	auto& pts1 = chain1->Points();
 
-	pts0[1] = pts1[0] = MEAN(pts0[1], pts1[0]);
+	pts0.at(1) = pts1.at(0) = MEAN(pts0.at(1), pts1.at(0));
 
 	return std::move(chains);
 }

@@ -1,0 +1,9 @@
+setVerbose(1);
+
+setDegenCrit(1.0E-4);
+
+loadFile();
+
+execute();
+
+saveTo();

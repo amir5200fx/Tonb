@@ -40,9 +40,7 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::GetWire
 		}
 		curves.push_back(iter->second);
 	}
-	
-	auto curves_p = std::make_shared<std::vector<parCurveType>>(std::move(curves));
-	auto wire = std::make_shared<parWireType>(std::move(curves_p));
+	auto wire = std::make_shared<parWireType>(std::move(curves));
 	return std::move(wire);
 }
 
@@ -79,7 +77,7 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::FormNewPlanes
 	for (const auto& x : outerWires)
 	{
 		Debug_Null_Pointer(x);
-		auto b = x->CalcBoundingBox();
+		auto b = x->CalcParametricBoundingBox();
 		outerBoxes.push_back(std::move(b));
 	}
 
@@ -88,7 +86,7 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::FormNewPlanes
 	for (const auto& x : innerWires)
 	{
 		Debug_Null_Pointer(x);
-		const auto b = x->CalcBoundingBox();
+		const auto b = x->CalcParametricBoundingBox();
 
 		Standard_Boolean found = Standard_False;
 		for (size_t i = 0; i < outerBoxes.size(); i++)
@@ -158,7 +156,7 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::FormNewPlanes
 		Debug_Null_Pointer(outer);
 		Debug_Null_Pointer(x.second);
 
-		auto plane = std::make_shared<plnType>(++k, outer, l);
+		auto plane = std::make_shared<plnType>(++k, "", nullptr, outer, l);
 		planes.push_back(std::move(plane));
 	}
 	return std::move(planes);
@@ -189,6 +187,7 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::GetSample
 			<< abort(FatalError);
 	}
 
+	Debug_Null_Pointer(iter->second);
 	const auto& curve = *iter->second;
 	auto pt = curve.Value(MEAN(curve.FirstParameter(), curve.LastParameter()));
 	return std::move(pt);
@@ -385,6 +384,41 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveColoredEdges
 }
 
 template<class SurfType>
+inline Standard_Boolean 
+tnbLib::Cad_ModifySingularPlane<SurfType>::IsZonesLoaded() const
+{
+	return NOT theZones_.empty();
+}
+
+template<class SurfType>
+inline Standard_Boolean 
+tnbLib::Cad_ModifySingularPlane<SurfType>::IsPlaneLoaded() const
+{
+	return (Standard_Boolean)thePlane_;
+}
+
+template<class SurfType>
+inline Standard_Boolean 
+tnbLib::Cad_ModifySingularPlane<SurfType>::IsColorsLoaded() const
+{
+	return (Standard_Boolean)theColors_;
+}
+
+template<class SurfType>
+inline Standard_Boolean 
+tnbLib::Cad_ModifySingularPlane<SurfType>::IsSurfaceLoaded() const
+{
+	return (Standard_Boolean)theSurface_;
+}
+
+template<class SurfType>
+inline Standard_Boolean 
+tnbLib::Cad_ModifySingularPlane<SurfType>::IsApproxInfoLoaded() const
+{
+	return (Standard_Boolean)theApproxInfo_;
+}
+
+template<class SurfType>
 inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 {
 	if (NOT IsZonesLoaded())
@@ -412,6 +446,13 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 	{
 		FatalErrorIn("void Perform()") << endl
 			<< "The face has not been loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT IsApproxInfoLoaded())
+	{
+		FatalErrorIn("void Perform()") << endl
+			<< "The approximating info has not been loaded!" << endl
 			<< abort(FatalError);
 	}
 
@@ -551,7 +592,7 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::RetrieveWires
 {
 	std::vector<std::shared_ptr<parWireType>> wires;
 	wires.reserve(thePlane.NbHoles() + 1);
-	const auto& outer = thePlane.OuterWire();
+	const auto& outer = thePlane.Outer();
 	if (NOT outer)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -559,9 +600,9 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::RetrieveWires
 			<< abort(FatalError);
 	}
 	wires.push_back(outer);
-	if (thePlane.InnerWires())
+	if (thePlane.Inner())
 	{
-		for (const auto& x : *thePlane.InnerWires())
+		for (const auto& x : *thePlane.Inner())
 		{
 			Debug_Null_Pointer(x);
 			wires.push_back(x);

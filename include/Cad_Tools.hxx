@@ -207,6 +207,14 @@ namespace tnbLib
 				const Entity2d_Triangulation& theApprox
 			);
 
+		static TnbCad_EXPORT std::shared_ptr<Entity2d_MetricMeshValue> 
+			CalcMetrics
+			(
+				const Handle(Geom_Surface)& theSurface,
+				const Entity2d_Triangulation& theApprox,
+				Standard_Real(*sizeFun)(const Pnt3d&)
+			);
+
 		static TnbCad_EXPORT Handle(Geom_Curve)
 			ConvertToTrimmed
 			(
@@ -381,6 +389,21 @@ namespace tnbLib
 				const Standard_Real theX,
 				const Standard_Real theY,
 				const Handle(Geom_Surface)&,
+				Standard_Real(*sizeFun)(const Pnt3d&)
+			);
+
+		static TnbCad_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcMaxMinMetrics
+			(
+				const Handle(Geom_Surface)&, 
+				const Entity2d_Triangulation&
+			);
+
+		static TnbCad_EXPORT std::pair<Standard_Real, Standard_Real>
+			CalcMaxMinMetrics
+			(
+				const Handle(Geom_Surface)&,
+				const Entity2d_Triangulation&,
 				Standard_Real(*sizeFun)(const Pnt3d&)
 			);
 

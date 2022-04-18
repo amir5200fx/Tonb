@@ -113,9 +113,9 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 			<< abort(FatalError);
 	}
 
-	for (size_t i = 0; i < echains.size(); i++)
+	for (Standard_Integer i = 0; i < echains.size(); i++)
 	{
-		auto paired = std::make_pair(echains[i], curves[i]);
+		auto paired = std::make_pair(echains.at(i), curves.at(i));
 		auto insert = theEdges.insert(std::move(paired));
 		if (NOT insert.second)
 		{

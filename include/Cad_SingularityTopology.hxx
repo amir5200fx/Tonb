@@ -8,6 +8,8 @@
 
 #include <list>
 
+#include "Geo2d_TopoChainAnalysis.hxx"
+
 namespace tnbLib
 {
 

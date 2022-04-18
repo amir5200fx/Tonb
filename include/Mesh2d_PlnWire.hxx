@@ -10,6 +10,9 @@ namespace tnbLib
 {
 
 	template<>
+	TnbMesh_EXPORT Entity2d_Box Mesh2d_PlnWire::CalcBoundingBox(const Mesh2d_PlnCurve&);
+
+	template<>
 	template<>
 	TnbMesh_EXPORT void Mesh2d_PlnWire::serialize<TNB_iARCH_TYPE>
 		(

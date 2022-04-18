@@ -336,6 +336,13 @@ namespace tnbLib
 		apprxInfo->OverrideSamples(samples);
 		apprxInfo->OverrideCriterion(criterion);
 
+		if (myShape->Shape().IsNull())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no shape has been detected!" << endl
+				<< abort(FatalError);
+		}
+
 		auto surfaces = GModel_Tools::GetSurfaces(myShape->Shape());
 		if (surfaces.empty())
 		{
@@ -362,8 +369,10 @@ namespace tnbLib
 				auto geom = GModel_Tools::RetrieveGeometry(*x);
 				auto b = x->ParaBoundingBox();
 				auto domain = std::make_shared<Entity2d_Box>(std::move(b));
+
 				auto apprxMetricAlg = std::make_shared<Cad_ApprxMetric>(geom, domain);
 				apprxMetricAlg->OverrideInfo(apprxInfo);
+
 				apprxMetricAlg->Perform();
 
 				auto tri = apprxMetricAlg->Triangulation();

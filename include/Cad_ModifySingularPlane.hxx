@@ -14,6 +14,10 @@
 #include <vector>
 
 #include "GModel_Surface.hxx"
+#include "GModel_ParaCurve.hxx"
+#include "Aft2d_gPlnCurveSurface.hxx"
+#include "Aft2d_gRegionPlaneSurface.hxx"
+#include "Aft2d_gPlnWireSurface.hxx"
 
 #include <Standard_TypeDef.hxx>
 
@@ -39,12 +43,24 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<meshLib::singularity::Polygon>> thePolygons_;
 
+		Standard_Real theTolerance_;
+
+	public:
+
+		static TnbMesh_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+
+
 	protected:
 
 		// default constructor [4/3/2022 Amir]
 
 		Cad_ModifySingularPlaneBase()
+			: theTolerance_(DEFAULT_TOLERANCE)
 		{}
+
+
+		// constructors [4/14/2022 Amir]
+
 
 		// protected functions and operators [4/3/2022 Amir]
 
@@ -56,7 +72,12 @@ namespace tnbLib
 		TnbMesh_EXPORT void RegisterPolygon(const Entity2d_Polygon&);
 		TnbMesh_EXPORT void Reserve(const size_t);
 
-		TnbMesh_EXPORT Standard_Boolean InsidePolygon(const Standard_Integer theIndex, const Pnt2d&) const;
+		TnbMesh_EXPORT Standard_Boolean 
+			InsidePolygon
+			(
+				const Standard_Integer theIndex,
+				const Pnt2d&
+			) const;
 
 	public:
 
@@ -66,6 +87,17 @@ namespace tnbLib
 		{
 			return thePolygons_;
 		}
+
+		auto Tolerance() const
+		{
+			return theTolerance_;
+		}
+
+		void SetTolerance(const Standard_Real theTol)
+		{
+			theTolerance_ = theTol;
+		}
+
 	};
 
 	template<class SurfType>
@@ -96,9 +128,6 @@ namespace tnbLib
 		std::shared_ptr<SurfType> theSurface_;
 
 		std::shared_ptr<Cad_ColorApprxMetric> theColors_;
-	
-
-		Standard_Real theTolerance_;
 
 
 		// outputs [3/31/2022 Amir]
@@ -173,15 +202,21 @@ namespace tnbLib
 	public:
 
 
+		// default constructor [4/14/2022 Amir]
+
+		Cad_ModifySingularPlane()
+		{}
+
+		// constructors [4/14/2022 Amir]
+
+		// public functions and operators [4/14/2022 Amir]
+
 		Standard_Boolean IsZonesLoaded() const;
 		Standard_Boolean IsPlaneLoaded() const;
 		Standard_Boolean IsColorsLoaded() const;
 		Standard_Boolean IsSurfaceLoaded() const;
-
-		auto Tolerance() const
-		{
-			return theTolerance_;
-		}
+		Standard_Boolean IsApproxInfoLoaded() const;
+		
 
 		const auto& Zones() const
 		{
@@ -210,6 +245,55 @@ namespace tnbLib
 
 		void Perform();
 
+		void LoadZones(const std::vector<std::shared_ptr<singularZoneType>>& theZones)
+		{
+			theZones_ = theZones;
+		}
+
+		void LoadZones(std::vector<std::shared_ptr<singularZoneType>>&& theZones)
+		{
+			theZones_ = std::move(theZones);
+		}
+
+		void LoadSurface(const std::shared_ptr<SurfType>& theSurface)
+		{
+			theSurface_ = theSurface;
+		}
+
+		void LoadSurface(std::shared_ptr<SurfType>&& theSurface)
+		{
+			theSurface_ = std::move(theSurface);
+		}
+
+		void LoadPlane(const std::shared_ptr<plnType>& thePlane)
+		{
+			thePlane_ = thePlane;
+		}
+
+		void LoadPlane(std::shared_ptr<plnType>&& thePlane)
+		{
+			thePlane_ = std::move(thePlane);
+		}
+
+		void LoadColors(const std::shared_ptr<Cad_ColorApprxMetric>& theColors)
+		{
+			theColors_ = theColors;
+		}
+
+		void LoadColors(std::shared_ptr<Cad_ColorApprxMetric>&& theColors)
+		{
+			theColors_ = std::move(theColors);
+		}
+
+		void LoadApproxInfo(const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo)
+		{
+			theApproxInfo_ = theInfo;
+		}
+
+		void LoadApproxInfo(std::shared_ptr<Geo_ApprxCurve_Info>&& theInfo)
+		{
+			theApproxInfo_ = std::move(theInfo);
+		}
 
 		static std::vector<std::shared_ptr<parWireType>> RetrieveWires(const plnType&);
 	};
