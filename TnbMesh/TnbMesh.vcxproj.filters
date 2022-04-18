@@ -1624,6 +1624,48 @@
     <Filter Include="TnbLib\Cad\Singularity\Curve\Traits">
       <UniqueIdentifier>{56520b57-5c9e-41a0-bbc1-e900034a6f92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane\Tools\G">
+      <UniqueIdentifier>{1242f7d3-2f40-4b51-9ca4-22e92533db8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\ModifyPlane\Tools\T">
+      <UniqueIdentifier>{5fad0a9b-737f-4b1e-a0c7-b57d820e3c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx">
+      <UniqueIdentifier>{7da94000-ddd2-4599-9cf9-3fcf25094f24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve">
+      <UniqueIdentifier>{4d15ac26-eb38-48df-9970-2aca267e6c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve\Para">
+      <UniqueIdentifier>{35cb5149-9eef-451c-833a-51d724b2946b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve\Para\G">
+      <UniqueIdentifier>{78ff5a92-3f5f-44bb-812d-abfe6025e712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Curve\Para\T">
+      <UniqueIdentifier>{630fd59a-c607-43ff-ba31-201136e7513c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire">
+      <UniqueIdentifier>{4000e0ec-396b-431f-a119-05494be3c8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Traits">
+      <UniqueIdentifier>{11bc52d4-51fb-4963-b2d0-0b6638702a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Para">
+      <UniqueIdentifier>{91b0dc0d-e0b0-4597-b181-8dd4016a4366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Para\G">
+      <UniqueIdentifier>{0184c5d2-61eb-4c22-b799-6b57d7be625b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Wire\Para\T">
+      <UniqueIdentifier>{87543c56-4ca1-4de5-bd11-f0528bb366ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Topology\Tools\G">
+      <UniqueIdentifier>{1cc73c19-3046-40b2-b371-f83e7cfca067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Topology\Tools\T">
+      <UniqueIdentifier>{613b964a-67e8-41c3-b9b4-54f79a700093}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -3930,6 +3972,42 @@
     <ClInclude Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsI.hxx">
       <Filter>TnbLib\Base\Tools\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Tools\G\Cad_gModifySingularPlaneTools.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Tools\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\ModifyPlane\Tools\T\Cad_tModifySingularPlaneTools.hxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane\Tools\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Traits\Cad_ApprxPlnWireSurfaceTraits.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\G\Cad_gApprxPlnCurveSurface.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\G\Cad_gApprxPlnCurveSurfaceFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\T\Cad_tApprxPlnCurveSurface.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Curve\Para\T\Cad_tApprxPlnCurveSurfaceFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Curve\Para\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxPlnWireSurface.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxPlnWireSurfaceFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\Tools\G\Cad_gSingularityTopologyTools.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\Tools\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\Tools\T\Cad_tSingularityTopologyTools.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\Tools\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Zone\Cad_SingularZoneI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Zone</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5020,6 +5098,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Singularity\Zone\Line\G\Cad_gLineSingularZone.cxx">
       <Filter>TnbLib\Cad\Singularity\Zone\Line\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\ModifyPlane\Cad_ModifySingularPlane.cxx">
+      <Filter>TnbLib\Cad\Singularity\ModifyPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Curve\Iso\Mesh2d_PlnCurve.cxx">
+      <Filter>TnbLib\Base\Cad\Curve\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Curve\AnIso\Mesh2d_PlnCurveAnIso.cxx">
+      <Filter>TnbLib\Base\Cad\Curve\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Curve\AnIso\UniMetric\Mesh2d_PlnCurveUniMetric.cxx">
+      <Filter>TnbLib\Base\Cad\Curve\AnIso\2d\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\Wire\Para\G\Cad_gApprxPlnWireSurface.cxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Wire\Iso\Mesh2d_PlnWire.cxx">
+      <Filter>TnbLib\Base\Cad\Wire\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Wire\AnIso\Mesh2d_PlnWireAnIso.cxx">
+      <Filter>TnbLib\Base\Cad\Wire\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Wire\AnIso\UniMetric\Mesh2d_PlnWireUniMetric.cxx">
+      <Filter>TnbLib\Base\Cad\Wire\AnIso\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Wire\Surface\G\Aft2d_gPlnWireSurface.cxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Wire\Surface\G\UniMetric\Aft2d_gPlnWireSurfaceUniMetric.cxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\G\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Wire\Surface\T\Aft2d_tPlnWireSurface.cxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Cad\Wire\Surface\T\UniMetric\Aft2d_tPlnWireSurfaceUniMetric.cxx">
+      <Filter>TnbLib\Aft\Cad\Wire\Surface\T\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Curve\Cad_SingularCurve.cxx">
+      <Filter>TnbLib\Cad\Singularity\Curve</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

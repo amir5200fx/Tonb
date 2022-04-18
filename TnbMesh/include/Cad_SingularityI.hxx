@@ -10,6 +10,20 @@
 template<class SurfType>
 inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 {
+	if (NOT SizeFun())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no size fun has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT ParaPlane())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no plane has been loaded!" << endl
+			<< abort(FatalError);
+	}
+
 	if (NOT Horizons())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -113,7 +127,7 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 				}
 				else if (l.size() IS_EQUAL 2)
 				{
-					const auto[pl0, pl1] = RetrievePair(l);
+					const auto[pl0, pl1] = Cad_SingularityNonTempBase::RetrievePair(l);
 					Debug_Null_Pointer(pl0);
 					Debug_Null_Pointer(pl1);
 

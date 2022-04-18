@@ -127,6 +127,12 @@ namespace tnbLib
 			theCriterion_ = theCrit;
 		}
 
+		static TnbMesh_EXPORT Standard_Real 
+			CalcCriterion
+			(
+				const Standard_Real theMaxDet
+			);
+
 		static TnbMesh_EXPORT void Check
 		(
 			const Entity2d_Polygon&,

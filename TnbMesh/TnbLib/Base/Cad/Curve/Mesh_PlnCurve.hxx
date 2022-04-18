@@ -3,12 +3,18 @@
 #define _Mesh_PlnCurve_Header
 
 #include <Global_Indexed.hxx>
+#include <Mesh_Module.hxx>
 #include <Mesh_PlnCurve_Base.hxx>
 #include <Mesh_PlnCurve_Traits.hxx>
 #include <Entity_Polygon.hxx>
 
+#include <Standard_Handle.hxx>
+
 namespace tnbLib
 {
+
+	// Forward Declarations [4/15/2022 Amir]
+	class Pnt2d;
 
 	template<class CurveType, class SizeFun, class MetricFun = void>
 	class Mesh_PlnCurve
@@ -41,6 +47,7 @@ namespace tnbLib
 
 		typedef typename Mesh_PlnCurve_Traits<CurveType>::geomType geomType;
 		typedef Mesh_PlnCurve_Base base;
+		typedef CurveType curveType;
 
 
 		//- default constructor
@@ -76,6 +83,15 @@ namespace tnbLib
 
 
 		//- public functions and operators
+
+		Handle(geomType) Geometry() const;
+
+	 	Standard_Real FirstParameter() const;
+		Standard_Real LastParameter() const;
+
+		Pnt2d Value(const Standard_Real) const;
+
+		std::pair<Standard_Real, Standard_Real> Bounds() const;
 
 		const auto& Curve() const
 		{

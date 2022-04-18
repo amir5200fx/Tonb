@@ -5,8 +5,21 @@
 #include <Mesh_PlnCurve.hxx>
 #include <Mesh2d_PlnCurveAnIsoFwd.hxx>
 
+
 namespace tnbLib
 {
+
+	template<>
+	TnbMesh_EXPORT Handle(Geom2d_Curve) Mesh2d_PlnCurveAnIso::Geometry() const;
+
+	template<>
+	TnbMesh_EXPORT Standard_Real Mesh2d_PlnCurveAnIso::FirstParameter() const;
+
+	template<>
+	TnbMesh_EXPORT Standard_Real Mesh2d_PlnCurveAnIso::LastParameter() const;
+
+	template<>
+	TnbMesh_EXPORT Pnt2d Mesh2d_PlnCurveAnIso::Value(const Standard_Real) const;
 
 	template<>
 	template<>

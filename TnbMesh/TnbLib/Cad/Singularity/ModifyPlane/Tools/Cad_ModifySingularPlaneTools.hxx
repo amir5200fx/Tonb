@@ -51,6 +51,17 @@ namespace tnbLib
 		typedef typename cad_modify_singular_plane_traits<SurfPlnType>::curveType curveType;
 		typedef typename cad_modify_singular_plane_traits<SurfPlnType>::wireType wireType;
 
+		static std::pair
+			<
+			std::shared_ptr<curveType>, 
+			std::shared_ptr<curveType>
+			> 
+			Split
+			(
+				const Standard_Real x, 
+				const std::shared_ptr<curveType>&
+			);
+
 		//static std::pair<std::shared_ptr<curveType>, std::shared_ptr<curveType>> SplitCurve(const std::shared_ptr<curveType>&, const Standard_Real x, const Standard_Real theTol);
 		static std::vector<std::shared_ptr<curveType>>
 			SubCurves
@@ -125,5 +136,8 @@ namespace tnbLib
 }
 
 #include <Cad_ModifySingularPlaneToolsI.hxx>
+
+#include <Cad_gModifySingularPlaneTools.hxx>
+#include <Cad_tModifySingularPlaneTools.hxx>
 
 #endif // !_Cad_ModifySingularPlaneTools_Header

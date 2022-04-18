@@ -34,6 +34,9 @@ namespace tnbLib
 			NotImplemented;
 		}
 
+
+		static Entity2d_Box CalcBoundingBox(const MeshPlnCurve&);
+
 	public:
 
 		typedef MeshPlnCurve plnCurveType;

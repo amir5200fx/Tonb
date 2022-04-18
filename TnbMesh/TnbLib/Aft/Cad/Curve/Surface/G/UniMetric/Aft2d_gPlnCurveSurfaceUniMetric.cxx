@@ -3,6 +3,42 @@
 #include <Aft2d_gSegmentEdgeUniMetric.hxx>
 #include <Geo2d_MetricPrcsrUniMetric.hxx>
 #include <Mesh2d_CurveUniMetric.hxx>
+#include <GModel_ParaCurve.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
+template<>
+Handle(Geom2d_Curve)
+tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::Geometry() const
+{
+	Debug_Null_Pointer(Curve());
+	return Curve()->Geometry();
+}
+
+template<>
+Standard_Real 
+tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::FirstParameter() const
+{
+	Debug_Null_Pointer(Curve());
+	return Curve()->FirstParameter();
+}
+
+template<>
+Standard_Real 
+tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::LastParameter() const
+{
+	Debug_Null_Pointer(Curve());
+	return Curve()->LastParameter();
+}
+
+template<>
+tnbLib::Pnt2d
+tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::Value(const Standard_Real x) const
+{
+	Debug_Null_Pointer(Curve());
+	auto pt = Curve()->Value(x);
+	return std::move(pt);
+}
 
 template<>
 template<>

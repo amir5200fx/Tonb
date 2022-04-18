@@ -4,6 +4,10 @@
 
 #include <Aft2d_gPlnCurveSurfaceFwd.hxx>
 #include <Aft2d_tPlnCurveSurfaceFwd.hxx>
+#include <Aft2d_gPlnWireSurfaceFwd.hxx>
+#include <Aft2d_tPlnWireSurfaceFwd.hxx>
+#include <Aft2d_gRegionPlaneSurfaceFwd.hxx>
+#include <Aft2d_tRegionPlaneSurfaceFwd.hxx>
 
 namespace tnbLib
 {
@@ -26,17 +30,17 @@ namespace tnbLib
 	template<> 
 	struct cad_singularity_traits<GModel_Surface>
 	{
-		typedef GModel_Plane plnType;
+		typedef Aft2d_gRegionPlaneSurface plnType;
 		typedef Aft2d_gPlnCurveSurface parCurveType;
-		typedef GModel_ParaWire parWireType;
+		typedef Aft2d_gPlnWireSurface parWireType;
 	};
 
 	template<>
 	struct cad_singularity_traits<TModel_Surface>
 	{
-		typedef TModel_Plane plnType;
+		typedef Aft2d_tRegionPlaneSurface plnType;
 		typedef Aft2d_tPlnCurveSurface parCurveType;
-		typedef TModel_ParaWire parWireType;
+		typedef Aft2d_tPlnWireSurface parWireType;
 	};
 }
 

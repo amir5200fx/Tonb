@@ -1,10 +1,6 @@
 #pragma once
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
-#include "GModel_Plane.hxx"
-#include "GModel_ParaWire.hxx"
-#include "GModel_ParaCurve.hxx"
 template<class SurfPlnType>
 inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::curveType>>
 tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::SubCurves
@@ -31,7 +27,7 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::SubCurves
 	auto curve = theCurve;
 	for (auto x : thePars)
 	{
-		auto[c0, c1] = curveType::Split(x, curve);
+		auto[c0, c1] = Split(x, curve);
 		curves.push_back(std::move(c0));
 		curve = std::move(c1);
 	}
@@ -53,10 +49,7 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyWires
 	{
 		Debug_Null_Pointer(wire);
 
-		auto curves_p = std::make_shared<std::vector<std::shared_ptr<curveType>>>();
-		Debug_Null_Pointer(curves_p);
-
-		auto& curves = *curves_p;
+		std::vector<std::shared_ptr<curveType>> curves;
 		for (const auto& x : wire->Curves())
 		{
 			Debug_Null_Pointer(x);
@@ -92,7 +85,7 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyWires
 		}
 
 		auto newWire = 
-			std::make_shared<wireType>(wire->Index(), wire->Name(), std::move(curves_p));
+			std::make_shared<wireType>(wire->Index(), wire->Name(), std::move(curves));
 		Debug_Null_Pointer(newWire);
 		mWires.push_back(std::move(newWire));
 	}
@@ -177,7 +170,7 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::CalcParts
 			const auto& horizon = zone.Horizon(iz);
 			Debug_Null_Pointer(horizon);
 
-			auto alg = std::make_shared<Cad_SubdivideHorizon<curveType>>(x);
+			auto alg = std::make_shared<Cad_SubdivideHorizon<curveType>>(horizon);
 			Debug_Null_Pointer(alg);
 
 			alg->Perform(theCurves);

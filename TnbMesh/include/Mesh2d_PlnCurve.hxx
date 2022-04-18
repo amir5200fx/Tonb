@@ -9,6 +9,18 @@ namespace tnbLib
 {
 
 	template<>
+	Handle(Geom2d_Curve) Mesh2d_PlnCurve::Geometry() const;
+
+	template<>
+	TnbMesh_EXPORT Standard_Real Mesh2d_PlnCurve::FirstParameter() const;
+
+	template<>
+	TnbMesh_EXPORT Standard_Real Mesh2d_PlnCurve::LastParameter() const;
+
+	template<>
+	TnbMesh_EXPORT Pnt2d Mesh2d_PlnCurve::Value(const Standard_Real) const;
+
+	template<>
 	template<>
 	TnbMesh_EXPORT void Mesh2d_PlnCurve::serialize<TNB_oARCH_TYPE>
 		(

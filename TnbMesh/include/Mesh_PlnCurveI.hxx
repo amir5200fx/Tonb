@@ -2,6 +2,14 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 #include <MeshBase_Tools.hxx>
+template<class CurveType, class SizeFun, class MetricFun>
+inline std::pair<Standard_Real, Standard_Real> 
+tnbLib::Mesh_PlnCurve<CurveType, SizeFun, MetricFun>::Bounds() const
+{
+	auto t = std::make_pair(FirstParameter(), LastParameter());
+	return std::move(t);
+}
+
 namespace tnbLib
 {
 

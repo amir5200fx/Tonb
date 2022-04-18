@@ -103,7 +103,7 @@ namespace tnbLib
 			return theCurves_;
 		}
 
-		void CreatePaired3d(const surfType&);
+		void CreatePaired3d(const surfType&) const;
 
 		void SetPlane(const std::shared_ptr<SurfPln>& thePlane)
 		{
@@ -118,5 +118,7 @@ namespace tnbLib
 		static std::vector<std::shared_ptr<curveType>> RetrieveHorizons(const std::vector<std::shared_ptr<Cad_SingularZone<SurfPln>>>&);
 	};
 }
+
+#include <Cad_SingularZoneI.hxx>
 
 #endif // !_Cad_SingularZone_Header

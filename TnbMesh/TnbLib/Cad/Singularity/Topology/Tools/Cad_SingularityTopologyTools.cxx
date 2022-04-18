@@ -1,11 +1,26 @@
 #include <Cad_SingularityTopologyTools.hxx>
 
+#include <Aft2d_gPlnCurveSurface.hxx>
+#include <Aft2d_gPlnWireSurface.hxx>
 #include <Pln_Tools.hxx>
 #include <Entity2d_Chain.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>
+
+template<>
+std::shared_ptr<std::vector<std::shared_ptr<tnbLib::Aft2d_gPlnCurveSurface>>>
+tnbLib::Cad_SingularityTopologyTools::RetrieveCurves<tnbLib::Aft2d_gPlnCurveSurface, tnbLib::Aft2d_gPlnWireSurface>
+(
+	const std::shared_ptr<Aft2d_gPlnWireSurface>& theWire
+	)
+{
+	Debug_Null_Pointer(theWire);
+	auto curves = theWire->Curves();
+	auto t = std::make_shared<std::vector<std::shared_ptr<tnbLib::Aft2d_gPlnCurveSurface>>>(std::move(curves));
+	return std::move(t);
+}
 
 std::shared_ptr<tnbLib::Entity2d_Chain> 
 tnbLib::Cad_SingularityTopologyTools::GetChain

@@ -5,6 +5,36 @@
 #include <Mesh2d_CurveAnIso.hxx>
 
 template<>
+Handle(Geom2d_Curve)
+tnbLib::Aft2d_tPlnCurveSurface::Geometry() const
+{
+	Debug_Null_Pointer(Curve());
+	return Curve()->Geometry();
+}
+
+template<>
+Standard_Real tnbLib::Aft2d_tPlnCurveSurface::FirstParameter() const
+{
+	Debug_Null_Pointer(Curve());
+	return Curve()->FirstParameter();
+}
+
+template<>
+Standard_Real tnbLib::Aft2d_tPlnCurveSurface::LastParameter() const
+{
+	Debug_Null_Pointer(Curve());
+	return Curve()->LastParameter();
+}
+
+template<>
+tnbLib::Pnt2d tnbLib::Aft2d_tPlnCurveSurface::Value(const Standard_Real x) const
+{
+	Debug_Null_Pointer(Curve());
+	auto pt = Curve()->Value(x);
+	return std::move(pt);
+}
+
+template<>
 template<>
 std::vector<std::shared_ptr<tnbLib::Aft2d_tSegmentEdge>>
 tnbLib::Aft2d_tPlnCurveSurface::TopoMesh<tnbLib::Aft2d_tSegmentEdge>

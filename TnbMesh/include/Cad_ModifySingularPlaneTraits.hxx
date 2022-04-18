@@ -2,6 +2,13 @@
 #ifndef _Cad_ModifySingularPlaneTraits_Header
 #define _Cad_ModifySingularPlaneTraits_Header
 
+#include <Aft2d_gPlnCurveSurfaceFwd.hxx>
+#include <Aft2d_tPlnCurveSurfaceFwd.hxx>
+#include <Aft2d_gPlnWireSurfaceFwd.hxx>
+#include <Aft2d_tPlnWireSurfaceFwd.hxx>
+#include <Aft2d_gRegionPlaneSurfaceFwd.hxx>
+#include <Aft2d_tRegionPlaneSurfaceFwd.hxx>
+
 namespace tnbLib
 {
 
@@ -9,25 +16,19 @@ namespace tnbLib
 	struct cad_modify_singular_plane_traits {};
 
 	// Forward Declarations [3/31/2022 Amir]
-	class GModel_Plane;
-	class TModel_Plane;
-	class GModel_ParaCurve;
-	class TModel_ParaCurve;
-	class GModel_ParaWire;
-	class TModel_ParaWire;
 
 	template<>
-	struct cad_modify_singular_plane_traits<GModel_Plane>
+	struct cad_modify_singular_plane_traits<Aft2d_gRegionPlaneSurface>
 	{
-		typedef GModel_ParaWire wireType;
-		typedef GModel_ParaCurve curveType;
+		typedef Aft2d_gPlnWireSurface wireType;
+		typedef Aft2d_gPlnCurveSurface curveType;
 	};
 
 	template<>
-	struct cad_modify_singular_plane_traits<TModel_Plane>
+	struct cad_modify_singular_plane_traits<Aft2d_tRegionPlaneSurface>
 	{
-		typedef TModel_ParaWire wireType;
-		typedef TModel_ParaCurve curveType;
+		typedef Aft2d_tPlnWireSurface wireType;
+		typedef Aft2d_tPlnCurveSurface curveType;
 	};
 }
 

@@ -26,7 +26,11 @@ namespace tnbLib
 	public:
 
 		template<class CurveType, class WireType>
-		static std::shared_ptr<std::vector<CurveType>> RetrieveCurves(const std::shared_ptr<WireType>&);
+		static std::shared_ptr<std::vector<std::shared_ptr<CurveType>>> 
+			RetrieveCurves
+			(
+				const std::shared_ptr<WireType>&
+			);
 
 		static TnbMesh_EXPORT std::shared_ptr<Entity2d_Chain> 
 			GetChain
@@ -48,7 +52,11 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<CurveType>>&
 			);
 
-		static TnbMesh_EXPORT std::pair<std::shared_ptr<Entity2d_Chain>, std::shared_ptr<Entity2d_Chain>>
+		static TnbMesh_EXPORT std::pair
+			<
+			std::shared_ptr<Entity2d_Chain>,
+			std::shared_ptr<Entity2d_Chain>
+			>
 			Split
 			(
 				const Entity2d_Chain&,
@@ -67,5 +75,8 @@ namespace tnbLib
 }
 
 #include <Cad_SingularityTopologyToolsI.hxx>
+
+#include <Cad_gSingularityTopologyTools.hxx>
+#include <Cad_tSingularityTopologyTools.hxx>
 
 #endif // !_Cad_SingularityTopologyTools_Header

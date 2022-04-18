@@ -1,5 +1,6 @@
 #include <Cad_gSingularity.hxx>
 
+#include <Aft2d_gRegionPlaneSurface.hxx>
 #include <Mesh2d_Element.hxx>
 #include <Cad_LineSingularZone_Loop.hxx>
 #include <Cad_PoleSingularZone_Loop.hxx>
@@ -28,6 +29,7 @@
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
 
 unsigned short tnbLib::Cad_gSingularity::verbose(0);
+const Standard_Real tnbLib::Cad_gSingularity::DEFAULT_WEIGHT = 1.25;
 
 template<>
 std::shared_ptr<tnbLib::Cad_gSingularZone> 
@@ -71,7 +73,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 			}
 
 			auto singularity = 
-				std::make_shared<cadLib::PoleSingularZone_Loop<GModel_Plane>>
+				std::make_shared<cadLib::PoleSingularZone_Loop<Aft2d_gRegionPlaneSurface>>
 				(
 					++nbZones,
 					ParaPlane(),
@@ -88,7 +90,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 			}
 
 			auto singularity = 
-				std::make_shared<cadLib::LineSingularZone_Loop<GModel_Plane>>
+				std::make_shared<cadLib::LineSingularZone_Loop<Aft2d_gRegionPlaneSurface>>
 				(
 					++nbZones, 
 					ParaPlane(), 
@@ -148,7 +150,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 				curve->SetMidCoord(std::move(Pm));
 
 				auto singularity = 
-					std::make_shared<cadLib::PoleSingularZone_PartialSide<GModel_Plane>>
+					std::make_shared<cadLib::PoleSingularZone_PartialSide<Aft2d_gRegionPlaneSurface>>
 					(++nbZones, ParaPlane(), curve);
 				return std::move(singularity);
 
@@ -162,7 +164,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 				curve->SetMidCoord(std::move(Pm));
 
 				auto singularity =
-					std::make_shared<cadLib::PoleSingularZone_Corner<GModel_Plane>>
+					std::make_shared<cadLib::PoleSingularZone_Corner<Aft2d_gRegionPlaneSurface>>
 					(++nbZones, ParaPlane(), curve);
 				return std::move(singularity);
 			}
@@ -178,7 +180,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 				auto curve = std::make_shared<Cad_gPoleSingularCurve>(std::move(pcurve), std::move(Pm));
 
 				auto singularity =
-					std::make_shared<cadLib::PoleSingularZone_Corner<GModel_Plane>>
+					std::make_shared<cadLib::PoleSingularZone_Corner<Aft2d_gRegionPlaneSurface>>
 					(++nbZones, ParaPlane(), curve);
 				return std::move(singularity);
 			}
@@ -198,7 +200,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 				auto curves = base::LineHorizonCurves_Dangle(b, s0);
 
 				auto singularity = 
-					std::make_shared<cadLib::LineSingularZone_Dangle<GModel_Plane>>
+					std::make_shared<cadLib::LineSingularZone_Dangle<Aft2d_gRegionPlaneSurface>>
 					(++nbZones, ParaPlane(), curves.at(0), curves.at(1), curves.at(2));
 				return std::move(singularity);
 			}
@@ -209,15 +211,16 @@ tnbLib::Cad_gSingularity::TypeDetection
 					(b, s0, theSurface, Weight()*size);
 
 				auto singularity = 
-					std::make_shared<cadLib::LineSingularZone_Corner<GModel_Plane>>
+					std::make_shared<cadLib::LineSingularZone_Corner<Aft2d_gRegionPlaneSurface>>
 					(++nbZones, ParaPlane(), curves.at(0), curves.at(1));
+				return std::move(singularity);
 			}
 			else if (ABS(s0 - s1) IS_EQUAL 2)
 			{
 				auto curves = base::LineHorizonCurves_WholeSide(b, s0);
 
 				auto singularity =
-					std::make_shared<cadLib::LineSingularZone_WholeSide<GModel_Plane>>
+					std::make_shared<cadLib::LineSingularZone_WholeSide<Aft2d_gRegionPlaneSurface>>
 					(++nbZones, ParaPlane(), curves.at(0));
 				return std::move(singularity);
 			}
@@ -345,7 +348,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 	const auto curves = base::LineHorizonCurves_TwoSided(box, s00);
 
 	auto singularity = 
-		std::make_shared<cadLib::LineSingularZone_TwoSide<GModel_Plane>>
+		std::make_shared<cadLib::LineSingularZone_TwoSide<Aft2d_gRegionPlaneSurface>>
 		(++NbZonesRef(), ParaPlane(), curves.at(0), curves.at(1));
 	return std::move(singularity);
 }

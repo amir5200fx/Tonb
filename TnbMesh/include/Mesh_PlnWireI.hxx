@@ -14,10 +14,13 @@ namespace tnbLib
 				<< "there is no curve int the wire!" << endl
 				<< abort(FatalError);
 		}
-		auto box = curves[0]->Curve()->BoundingBox();
+
+		Debug_Null_Pointer(curves[0]);
+		auto box = CalcBoundingBox(*curves.at(0));
 		forThose(Index, 1, curves.size() - 1)
 		{
-			box = Entity2d_Box::Union(box, curves[Index]->Curve()->BoundingBox());
+			Debug_Null_Pointer(curves.at(Index));
+			box = Entity2d_Box::Union(box, CalcBoundingBox(*curves.at(Index)));
 		}
 		return std::move(box);
 	}

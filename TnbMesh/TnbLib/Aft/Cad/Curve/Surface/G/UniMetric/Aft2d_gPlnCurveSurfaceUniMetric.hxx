@@ -15,6 +15,18 @@ namespace tnbLib
 {
 
 	template<>
+	TnbMesh_EXPORT Handle(Geom2d_Curve) Aft2d_gPlnCurveSurfaceUniMetric::Geometry() const;
+
+	template<>
+	TnbMesh_EXPORT Standard_Real Aft2d_gPlnCurveSurfaceUniMetric::FirstParameter() const;
+
+	template<>
+	TnbMesh_EXPORT Standard_Real Aft2d_gPlnCurveSurfaceUniMetric::LastParameter() const;
+
+	template<>
+	TnbMesh_EXPORT Pnt2d Aft2d_gPlnCurveSurfaceUniMetric::Value(const Standard_Real) const;
+
+	template<>
 	template<>
 	TnbMesh_EXPORT void Aft2d_gPlnCurveSurfaceUniMetric::serialize<TNB_iARCH_TYPE>
 		(

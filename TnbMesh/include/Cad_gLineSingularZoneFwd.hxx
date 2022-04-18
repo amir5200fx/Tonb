@@ -2,6 +2,8 @@
 #ifndef _Cad_gLineSingularZoneFwd_Header
 #define _Cad_gLineSingularZoneFwd_Header
 
+#include <Aft2d_gRegionPlaneSurfaceFwd.hxx>
+
 namespace tnbLib
 {
 
@@ -11,7 +13,7 @@ namespace tnbLib
 
 	class GModel_Plane;
 
-	typedef Cad_LineSingularZone<GModel_Plane> Cad_gLineSingularZone;
+	typedef Cad_LineSingularZone<Aft2d_gRegionPlaneSurface> Cad_gLineSingularZone;
 }
 
 #endif // !_Cad_gLineSingularZoneFwd_Header

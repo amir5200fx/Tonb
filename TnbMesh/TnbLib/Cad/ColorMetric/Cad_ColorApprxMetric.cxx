@@ -168,7 +168,7 @@ namespace tnbLib
 			blackElements.Remove(root);
 
 			l->push_back(root);
-			std::cout << "track" << std::endl;
+
 			TrackRegion(root, blackElements, *l);
 
 			regions.push_back(std::move(l));
