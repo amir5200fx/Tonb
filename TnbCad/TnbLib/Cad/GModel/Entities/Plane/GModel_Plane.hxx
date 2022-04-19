@@ -55,7 +55,7 @@ namespace tnbLib
 			const inner& theInner = nullptr
 		);
 
-		GModel_Plane
+		TnbCad_EXPORT GModel_Plane
 		(
 			outer&& theOuter,
 			inner&& theInner

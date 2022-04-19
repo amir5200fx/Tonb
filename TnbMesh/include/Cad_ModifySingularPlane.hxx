@@ -243,6 +243,11 @@ namespace tnbLib
 			return theApproxInfo_;
 		}
 
+		const auto& ModifiedPlanes() const
+		{
+			return theModifieds_;
+		}
+
 		void Perform();
 
 		void LoadZones(const std::vector<std::shared_ptr<singularZoneType>>& theZones)

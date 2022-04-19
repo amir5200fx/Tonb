@@ -133,6 +133,11 @@ namespace tnbLib
 			return theOuter_;
 		}
 
+		void SetPlane(const std::shared_ptr<plnType>& thePlane)
+		{
+			thePlane_ = thePlane;
+		}
+
 		void RetrieveWiresTo(wireList& theWires) const;
 
 		void ExportToPlt(OFstream& File) const;
@@ -152,6 +157,9 @@ namespace tnbLib
 			(
 				const std::shared_ptr<plnType>& thePlane
 			);
+
+		template<class PlnType>
+		static std::shared_ptr<PlnType> MakeOrignPlane(const std::shared_ptr<Mesh_RegionPlane>&);
 
 	};
 }

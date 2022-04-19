@@ -28,11 +28,20 @@ namespace tnbLib
 
 	// Forward Declarations [3/26/2022 Amir]
 	class GModel_ParaWire;
+	class GModel_Plane;
 
 	template<>
 	template<>
 	static TnbMesh_EXPORT std::shared_ptr<Aft2d_gPlnWireSurface>
 		Aft2d_gRegionPlaneSurface::MakeMeshWire<GModel_ParaWire>(const GModel_ParaWire&);
+
+	template<>
+	template<>
+	static TnbMesh_EXPORT std::shared_ptr<GModel_Plane> 
+		Aft2d_gRegionPlaneSurface::MakeOrignPlane
+		(
+			const std::shared_ptr<Aft2d_gRegionPlaneSurface>&
+		);
 }
 
 #endif // !_Aft2d_gRegionPlaneSurface_Header

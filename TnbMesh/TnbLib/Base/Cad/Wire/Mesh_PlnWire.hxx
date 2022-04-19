@@ -109,6 +109,9 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<Mesh_PlnWire>>& theWires
 			);
+
+		template<class WireType>
+		static std::shared_ptr<WireType> MakeOrignWire(const std::shared_ptr<Mesh_PlnWire>&);
 	};
 }
 

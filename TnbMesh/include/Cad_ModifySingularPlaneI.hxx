@@ -578,7 +578,14 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 			<< abort(FatalError);
 	}
 
-	ModifiedPlanesRef() = FormNewPlanes(outerWires, innerWires, edgeToCurve);
+	auto modifieds = FormNewPlanes(outerWires, innerWires, edgeToCurve);
+	for (const auto& x : modifieds)
+	{
+		Debug_Null_Pointer(x);
+		x->SetPlane(Plane()->Plane());
+	}
+	
+	ModifiedPlanesRef() = std::move(modifieds);
 
 	Change_IsDone() = Standard_True;
 }

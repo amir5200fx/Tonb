@@ -9,8 +9,19 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [4/19/2022 Amir]
+	class GModel_ParaWire;
+
 	template<>
-	Entity2d_Box Aft2d_gPlnWireSurfaceUniMetric::CalcBoundingBox(const Aft2d_gPlnCurveSurfaceUniMetric&);
+	template<>
+	TnbMesh_EXPORT std::shared_ptr<GModel_ParaWire>
+		Aft2d_gPlnWireSurfaceUniMetric::MakeOrignWire<GModel_ParaWire>
+		(
+			const std::shared_ptr<Aft2d_gPlnWireSurfaceUniMetric>&
+			);
+
+	template<>
+	TnbMesh_EXPORT Entity2d_Box Aft2d_gPlnWireSurfaceUniMetric::CalcBoundingBox(const Aft2d_gPlnCurveSurfaceUniMetric&);
 
 	template<>
 	template<>

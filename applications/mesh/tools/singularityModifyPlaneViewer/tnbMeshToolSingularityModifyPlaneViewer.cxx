@@ -6,6 +6,7 @@
 #include <Cad_MetricCalculator_SizeFun.hxx>
 #include <Cad_MetricCalculator_Std.hxx>
 #include <Cad_ApprxMetricIO.hxx>
+#include <Cad_gApprxParaPlane.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_Shape.hxx>
 #include <GModel_Tools.hxx>
@@ -33,13 +34,13 @@
 namespace tnbLib
 {
 	static const auto loadExt = Cad_ApprxMetricIO::extension;
-	static const auto saveExt = Entity3d_Triangulation::extension + "list";
+	static const auto saveExt = Entity2d_Triangulation::extension + "list";
 
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
-	static std::shared_ptr<Geo_ApprxCurve_Info> myApproxInfo;
+	static std::shared_ptr<Geo_ApprxCurve_Info> myApproxInfo = std::make_shared<Geo_ApprxCurve_Info>();
 
 	static std::shared_ptr<Cad_ApprxMetricIO> myApproxMetrics;
-	static std::vector<std::shared_ptr<Entity3d_Triangulation>> myHorizons;
+	static std::vector<std::shared_ptr<Entity2d_Triangulation>> myPlanes;
 
 	static unsigned short verbose = 0;
 	static bool loadTag = false;
@@ -101,7 +102,7 @@ namespace tnbLib
 
 		file::CheckExtension(name);
 
-		file::SaveTo(myHorizons, name + saveExt, verbose);
+		file::SaveTo(myPlanes, name + saveExt, verbose);
 	}
 
 	void saveTo()
@@ -128,7 +129,8 @@ namespace tnbLib
 	{
 		if (checkFolder("sizeMap"))
 		{
-			return;
+			FatalErrorIn(FunctionSIG)
+				<< "no size map has been found!" << endl;
 		}
 		else
 		{
@@ -173,6 +175,60 @@ namespace tnbLib
 				std::make_shared<cadLib::MetricCalculator_Std>();
 			return std::move(alg);
 		}
+	}
+
+	auto approxPlane(const std::shared_ptr<GModel_Plane>& thePlane)
+	{
+		auto alg = std::make_shared<Cad_gApprxParaPlane>(thePlane, myApproxInfo);
+		alg->Perform();
+		if (NOT alg->IsDone())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+		return alg->Polygons();
+	}
+
+	auto approxPlane(const std::vector<std::shared_ptr<GModel_Plane>>& thePlanes)
+	{
+		std::vector<std::shared_ptr<Entity2d_Polygon>> polys;
+		auto iter = thePlanes.begin();
+		auto p = approxPlane(*iter);
+		for (auto& x : p)
+		{
+			polys.push_back(std::move(x));
+		}
+		iter++;
+		while (iter NOT_EQUAL thePlanes.end())
+		{
+			auto p = approxPlane(*iter);
+			for (auto& x : p)
+			{
+				polys.push_back(std::move(x));
+			}
+			iter++;
+		}
+		return std::move(polys);
+	}
+
+	auto makeOrignPlanes(const std::vector<std::shared_ptr<Aft2d_gRegionPlaneSurface>>& thePlanes)
+	{
+		std::vector<std::shared_ptr<GModel_Plane>> origns;
+		origns.reserve(thePlanes.size());
+		for (const auto& x : thePlanes)
+		{
+			auto pln = Aft2d_gRegionPlaneSurface::MakeOrignPlane<GModel_Plane>(x);
+			origns.push_back(std::move(pln));
+		}
+		return std::move(origns);
+	}
+
+	auto makeTriangulation(const std::vector<std::shared_ptr<Entity2d_Polygon>>& thePolys)
+	{
+		auto chain = Geo_Tools::RetrieveChain(thePolys);
+		auto tri = Geo_Tools::Triangulation(*chain);
+		return std::move(tri);
 	}
 
 	void execute()
@@ -265,68 +321,62 @@ namespace tnbLib
 
 			if (horizonAlg->HasHorizon())
 			{
-				const auto& horizons = horizonAlg->Horizons();
-				Debug_Null_Pointer(horizons);
+				auto paraPlane = GModel_Tools::GetParaPlane(x, myTol);
+				auto regionPln = Aft2d_gRegionPlaneSurface::MakePlane(paraPlane);
 
-				for (const auto& pedge : horizons->Edges())
+				auto surfSizeFun = std::make_shared<GeoSizeFun2d_Surface>(geom, mySizeFun, x->ParaBoundingBox());
+
+				auto zonesAlg = std::make_shared<Cad_gSingularity>();
+
+				zonesAlg->LoadColors(colors);
+				zonesAlg->LoadHorizons(horizonAlg);
+				zonesAlg->LoadSizeFun(surfSizeFun);
+
+				zonesAlg->LoadParaPlane(regionPln);
+
+				zonesAlg->SetWeight(mySingZoneWeight);
+
+				zonesAlg->Perform();
+				if (NOT zonesAlg->IsDone())
 				{
-					Debug_Null_Pointer(pedge.second);
-					const auto& poly = pedge.second->Polygon();
-					Debug_Null_Pointer(poly);
-
-					auto tri2d = Geo_Tools::Triangulation(*Geo_Tools::RetrieveChain(*poly));
-					auto tri = Cad_Tools::Triangulation(*geom, *tri2d);
-
-					myHorizons.push_back(std::move(tri));
+					FatalErrorIn(FunctionSIG)
+						<< "the application is not performed!" << endl
+						<< abort(FatalError);
 				}
-			}
 
-			auto paraPlane = GModel_Tools::GetParaPlane(x, myTol);
-			auto regionPln = Aft2d_gRegionPlaneSurface::MakePlane(paraPlane);
+				auto modifyAlg = std::make_shared<Cad_gModifySingularPlane>();
 
-			auto surfSizeFun = std::make_shared<GeoSizeFun2d_Surface>(geom, mySizeFun, x->ParaBoundingBox());
+				modifyAlg->LoadColors(std::move(colors));
+				modifyAlg->LoadZones(zonesAlg->Zones());
+				modifyAlg->LoadPlane(regionPln);
+				modifyAlg->LoadSurface(x);
+				modifyAlg->LoadApproxInfo(myApproxInfo);
 
-			auto zonesAlg = std::make_shared<Cad_gSingularity>();
+				modifyAlg->SetTolerance(myTol);
 
-			zonesAlg->LoadColors(colors);
-			zonesAlg->LoadHorizons(horizonAlg);
-			zonesAlg->LoadSizeFun(surfSizeFun);
-			
-			zonesAlg->LoadParaPlane(regionPln);
+				modifyAlg->Perform();
+				if (NOT modifyAlg->IsDone())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the application is not performed!" << endl
+						<< abort(FatalError);
+				}
 
-			zonesAlg->SetWeight(mySingZoneWeight);
+				auto polys0 = approxPlane(paraPlane);
+				auto polys1 = approxPlane(makeOrignPlanes(modifyAlg->ModifiedPlanes()));
 
-			zonesAlg->Perform();
-			if (NOT zonesAlg->IsDone())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "the application is not performed!" << endl
-					<< abort(FatalError);
-			}
+				auto tri0 = makeTriangulation(polys0);
+				auto tri1 = makeTriangulation(polys1);
 
-			auto modifyAlg = std::make_shared<Cad_gModifySingularPlane>();
-			
-			modifyAlg->LoadColors(std::move(colors));
-			modifyAlg->LoadZones(zonesAlg->Zones());
-			modifyAlg->LoadPlane(regionPln);
-			modifyAlg->LoadSurface(x);
-			modifyAlg->LoadApproxInfo(myApproxInfo);
-
-			modifyAlg->SetTolerance(myTol);
-
-			modifyAlg->Perform();
-			if (NOT modifyAlg->IsDone())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "the application is not performed!" << endl
-					<< abort(FatalError);
+				myPlanes.push_back(std::move(tri0));
+				myPlanes.push_back(std::move(tri1));
 			}
 		}
 
 		if (verbose)
 		{
 			Info << endl
-				<< " - Nb. of singularity horizons: " << myHorizons.size() << endl;
+				<< " - Nb. of singularity horizons: " << myPlanes.size() / 2 << endl;
 		}
 
 		exeTag = true;

@@ -469,6 +469,18 @@
     <Filter Include="TnbLib\Cad\Approx\CurveOnSurface">
       <UniqueIdentifier>{2fb5d195-9c75-467f-a6b2-050c09a68d6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Plane">
+      <UniqueIdentifier>{0c5e58dc-33ee-4eaa-a80e-5a2815717056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Plane\Traits">
+      <UniqueIdentifier>{4c1ece66-5e9b-4dd9-b501-256d4bb8304d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Plane\G">
+      <UniqueIdentifier>{4f6a2067-657e-4e55-80c1-e0fcf197ca7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Approx\Plane\T">
+      <UniqueIdentifier>{082687f9-a24d-42e8-8ce8-72028d113a37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -917,6 +929,27 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Approx\CurveOnSurface\Cad_ApprxCurveOnSurface.hxx">
       <Filter>TnbLib\Cad\Approx\CurveOnSurface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Plane\Cad_ApprxParaPlane.hxx">
+      <Filter>TnbLib\Cad\Approx\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Plane\Cad_ApprxParaPlaneI.hxx">
+      <Filter>TnbLib\Cad\Approx\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Plane\Traits\Cad_ApprxParaPlaneTraits.hxx">
+      <Filter>TnbLib\Cad\Approx\Plane\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Plane\G\Cad_gApprxParaPlane.hxx">
+      <Filter>TnbLib\Cad\Approx\Plane\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Plane\G\Cad_gApprxParaPlaneFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Plane\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Plane\T\Cad_tApprxParaPlaneFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Plane\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Plane\T\Cad_tApprxParaPlane.hxx">
+      <Filter>TnbLib\Cad\Approx\Plane\T</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1369,6 +1402,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Approx\CurveOnSurface\Cad_ApprxCurveOnSurface.cxx">
       <Filter>TnbLib\Cad\Approx\CurveOnSurface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\Plane\G\Cad_gApprxParaPlane.cxx">
+      <Filter>TnbLib\Cad\Approx\Plane\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\Plane\T\Cad_tApprxParaPlane.cxx">
+      <Filter>TnbLib\Cad\Approx\Plane\T</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
