@@ -3,6 +3,7 @@
 #include <Cad_ApprxCurveOnSurface.hxx>
 #include <Pln_Tools.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
+#include <Merge3d_Pnt.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity3d_Box.hxx>
 #include <TnbError.hxx>
@@ -90,15 +91,51 @@ namespace tnbLib
 				{
 					Offsets->SetValue(++id, x);
 				}
-				GeomAPI_Interpolate Interpol(Offsets, Standard_False, tol);
-				Interpol.Perform();
-				if (NOT Interpol.IsDone())
+				try
+				{
+					GeomAPI_Interpolate Interpol(Offsets, Standard_False, tol);
+					Interpol.Perform();
+					if (NOT Interpol.IsDone())
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "unable to interpolate the offsets!" << endl
+							<< abort(FatalError);
+					}
+					return Interpol.Curve();
+				}
+				catch (const Standard_Failure& x)
 				{
 					FatalErrorIn(FunctionSIG)
-						<< "unable to interpolate the offsets!" << endl
+						<< x.GetMessageString() << endl
+						<< " - nb. of points: " << pts.size() << endl
+						<< abort(FatalError);
+					return nullptr;
+				}
+			}
+
+			static std::vector<Pnt3d> Merge(const std::vector<Pnt3d>& thePts, const Standard_Real tol)
+			{
+				if (thePts.size() < 2)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "invalid nb. of pts has been detected!" << endl
 						<< abort(FatalError);
 				}
-				return Interpol.Curve();
+				std::vector<Pnt3d> pts;
+				pts.reserve(thePts.size());
+				auto iter = thePts.begin();
+				pts.push_back(*iter);
+				iter++;
+				while (iter NOT_EQUAL thePts.end())
+				{
+					if ((*iter).Distance(LastItem(pts)) <= tol)
+					{
+						continue;
+					}
+					pts.push_back(*iter);
+					iter++;
+				}
+				return std::move(pts);
 			}
 		}
 	}
@@ -123,7 +160,20 @@ tnbLib::Cad_SingularCurveBase::CalcCurve3d
 			<< abort(FatalError);
 	}
 
-	auto alg = std::make_shared<Cad_ApprxCurveOnSurface>();
+	static const Standard_Integer nbPts = 50;
+	std::vector<Pnt2d> ppts;
+	ppts.reserve(nbPts);
+	auto du = (para->LastParameter() - para->FirstParameter()) / (Standard_Real)nbPts;
+	for (Standard_Integer i = 0; i <= nbPts; i++)
+	{
+		auto u = para->FirstParameter() + i * du;
+		if (u < para->FirstParameter()) u = para->FirstParameter();
+		if (u > para->LastParameter()) u = para->LastParameter();
+		auto p = para->Value(u);
+		ppts.push_back(std::move(p));
+	}
+
+	/*auto alg = std::make_shared<Cad_ApprxCurveOnSurface>();
 	Debug_Null_Pointer(alg);
 
 	alg->SetParaCurve(para, para->FirstParameter(), para->LastParameter());
@@ -134,11 +184,13 @@ tnbLib::Cad_SingularCurveBase::CalcCurve3d
 	Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed!");
 
 	const auto& poly = alg->Approx();
-	Debug_Null_Pointer(poly);
+	Debug_Null_Pointer(poly);*/
 
-	auto pts = meshLib::singularLib::CalcOffsets(poly->Points(), *theSurf);
+	auto pts = meshLib::singularLib::CalcOffsets(ppts, *theSurf);
 	auto b = Entity3d_Box::BoundingBoxOf(pts);
-	auto tol = b.Diameter()*1.0E-5;
+	auto tol = b.Diameter()*1.0E-6;
+	auto merged = meshLib::singularLib::Merge(pts, tol);
+
 	auto c = meshLib::singularLib::Interpolate(pts, tol);
 	return std::move(c);
 }

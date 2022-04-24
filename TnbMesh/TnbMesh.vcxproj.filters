@@ -1666,6 +1666,15 @@
     <Filter Include="TnbLib\Cad\Singularity\Topology\Tools\T">
       <UniqueIdentifier>{613b964a-67e8-41c3-b9b4-54f79a700093}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\SubdivideHorizon\G">
+      <UniqueIdentifier>{15214542-16f3-40e8-a218-56178bbfe08e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Topology\G">
+      <UniqueIdentifier>{48a36838-03cd-443a-83e6-e3ebcaac849a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Singularity\Topology\T">
+      <UniqueIdentifier>{18c5aaca-4cb0-4723-8c94-30b456dc4ba9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4008,6 +4017,18 @@
     <ClInclude Include="TnbLib\Cad\Singularity\Zone\Cad_SingularZoneI.hxx">
       <Filter>TnbLib\Cad\Singularity\Zone</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\SubdivideHorizon\G\Cad_gSubdivideHorizon.hxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\SubdivideHorizon\G\Cad_gSubdivideHorizonFwd.hxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\G\Cad_gSingularityTopology.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Topology\G\Cad_gSingularityTopologyFwd.hxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\G</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5137,6 +5158,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Singularity\Curve\Cad_SingularCurve.cxx">
       <Filter>TnbLib\Cad\Singularity\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\SubdivideHorizon\G\Cad_gSubdivideHorizon.cxx">
+      <Filter>TnbLib\Cad\SubdivideHorizon\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Topology\G\Cad_gSingularityTopology.cxx">
+      <Filter>TnbLib\Cad\Singularity\Topology\G</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

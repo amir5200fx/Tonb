@@ -33,6 +33,9 @@ namespace tnbLib
 			const Geom_Surface&
 		) const;
 
+
+	template<>
+	TnbMesh_EXPORT void Cad_gSingularity::Perform();
 #endif // _DEBUG
 
 }

@@ -44,16 +44,16 @@ tnbLib::Cad_ColorApprxMetric::Value
 ) const
 {
 	CheckDone((*this));
-#ifdef _DEBUG
-	const auto& d = theApproximation_->BoundingBox();
-	Debug_Null_Pointer(d);
-	if (NOT d->IsInside(theCoord))
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the coord is outside of the domain!" << endl
-			<< abort(FatalError);
-	}
-#endif // _DEBUG
+//#ifdef _DEBUG
+//	const auto& d = theApproximation_->BoundingBox();
+//	Debug_Null_Pointer(d);
+//	if (NOT d->IsInside(theCoord))
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the coord is outside of the domain!" << endl
+//			<< abort(FatalError);
+//	}
+//#endif // _DEBUG
 
 	if (NOT theStart_)
 	{
@@ -309,11 +309,12 @@ void tnbLib::Cad_ColorApprxMetric::Check
 			<< abort(FatalError);
 	}
 	const auto& pts = thePoly.Points();
-	const auto& d = theApprox.Approximation()->BoundingBox();
-	Debug_Null_Pointer(d);
+	const auto d = Entity2d_Box::BoundingBoxOf(theApprox.Approximation()->Points());
+	//const auto& d = theApprox.Approximation()->BoundingBox();
+	//Debug_Null_Pointer(d);
 	for (const auto& x : pts)
 	{
-		if (NOT d->IsInside(x))
+		if (NOT d.IsInside(x))
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "the coord is outside of the domain!" << endl

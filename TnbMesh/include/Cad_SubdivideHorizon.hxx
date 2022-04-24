@@ -104,4 +104,6 @@ namespace tnbLib
 
 #include <Cad_SubdivideHorizonI.hxx>
 
+#include <Cad_gSubdivideHorizon.hxx>
+
 #endif // !_Cad_SubdivideHorizon_Header

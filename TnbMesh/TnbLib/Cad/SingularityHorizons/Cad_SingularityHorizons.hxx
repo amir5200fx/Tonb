@@ -38,6 +38,7 @@ namespace tnbLib
 
 		Standard_Real theCriterion_;
 		Standard_Real theMergeTolerance_;
+		Standard_Real theMaxDet_;
 		
 		// output results [1/2/2022 Amir]
 
@@ -53,6 +54,7 @@ namespace tnbLib
 		Cad_SingularityHorizons()
 			: theCriterion_(DEFAULT_DEGEN_CRITERION)
 			, theMergeTolerance_(DEFAULT_MERGING_TOLERANCE)
+			, theMaxDet_(0)
 		{}
 
 		// constructors [1/2/2022 Amir]
@@ -61,13 +63,15 @@ namespace tnbLib
 		(
 			const Handle(Geom_Surface)& theGeom,
 			const std::shared_ptr<Entity2d_Triangulation>& theApprox,
-			const std::shared_ptr<Cad_MetricCalculator>& theCalculator
+			const std::shared_ptr<Cad_MetricCalculator>& theCalculator,
+			const Standard_Real theMaxDet
 		)
 			: theGeometry_(theGeom)
 			, theApproximation_(theApprox)
 			, theCalculator_(theCalculator)
 			, theCriterion_(DEFAULT_DEGEN_CRITERION)
 			, theMergeTolerance_(DEFAULT_MERGING_TOLERANCE)
+			, theMaxDet_(theMaxDet)
 		{}
 
 		// public functions and operators [1/2/2022 Amir]
@@ -105,6 +109,11 @@ namespace tnbLib
 			return theMergeTolerance_;
 		}
 
+		auto MaxDet() const
+		{
+			return theMaxDet_;
+		}
+
 		TnbMesh_EXPORT void Perform();
 
 		void LoadGeometry(const Handle(Geom_Surface)& theGeom)
@@ -130,6 +139,11 @@ namespace tnbLib
 		void SetMergingTolerance(const Standard_Real x)
 		{
 			theMergeTolerance_ = x;
+		}
+
+		void SetMaxDet(const Standard_Real theMax)
+		{
+			theMaxDet_ = theMax;
 		}
 
 		static TnbMesh_EXPORT Entity2d_Box

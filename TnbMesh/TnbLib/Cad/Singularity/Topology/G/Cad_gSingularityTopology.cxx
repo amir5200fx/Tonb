@@ -1,9 +1,13 @@
-#pragma once
-#ifndef _DEBUG
+#include <Cad_gSingularityTopology.hxx>
+
 #include <Cad_SingularityTopologyTools.hxx>
+#include <Aft2d_gPlnCurveSurface.hxx>
+#include <Aft2d_gPlnWireSurface.hxx>
 #include <Merge2d_Chain.hxx>
-template<class SurfType>
-inline void tnbLib::Cad_SingularityTopology<SurfType>::Perform()
+#include <Entity2d_Chain.hxx>
+#ifdef _DEBUG
+template<>
+void tnbLib::Cad_gSingularityTopology::Perform()
 {
 	//- There is a complexity about the curves excluding the one had retrieved from
 	//- the intersection operator:
@@ -14,13 +18,13 @@ inline void tnbLib::Cad_SingularityTopology<SurfType>::Perform()
 	//- the solid_plane including horizon ones.
 
 	const auto& wireList = Wires();
-	std::vector<std::shared_ptr<std::vector<std::shared_ptr<parCurveType>>>>
+	std::vector<std::shared_ptr<std::vector<std::shared_ptr<Aft2d_gPlnCurveSurface>>>>
 		wires;
 	wires.reserve(wireList.size());
 	for (const auto& x : wireList)
 	{
 		Debug_Null_Pointer(x);
-		auto wire = Cad_SingularityTopologyTools::RetrieveCurves<parCurveType, parWireType>(x);
+		auto wire = Cad_SingularityTopologyTools::RetrieveCurves<Aft2d_gPlnCurveSurface, Aft2d_gPlnWireSurface>(x);
 
 		wires.push_back(std::move(wire));
 	}
@@ -69,16 +73,16 @@ inline void tnbLib::Cad_SingularityTopology<SurfType>::Perform()
 	Change_IsDone() = Standard_True;
 }
 
-template<class SurfType>
-inline std::shared_ptr<tnbLib::Geo2d_TopoChainAnalysis>
-tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
+template<>
+std::shared_ptr<tnbLib::Geo2d_TopoChainAnalysis> 
+tnbLib::Cad_gSingularityTopology::GetTopology
 (
-	const std::map<std::shared_ptr<parCurveType>, std::shared_ptr<Entity2d_Chain>>& theCurves,
-	std::map<std::shared_ptr<edgeType>, std::shared_ptr<parCurveType>>& theEdges
+	const std::map<std::shared_ptr<Aft2d_gPlnCurveSurface>, std::shared_ptr<Entity2d_Chain>>& theCurves,
+	std::map<std::shared_ptr<Geo2d_SegmentGraphEdge>, std::shared_ptr<Aft2d_gPlnCurveSurface>>& theEdges
 )
 {
 	std::vector<std::shared_ptr<Entity2d_Chain>> chains;
-	std::vector<std::shared_ptr<parCurveType>> curves;
+	std::vector<std::shared_ptr<Aft2d_gPlnCurveSurface>> curves;
 	chains.reserve(theCurves.size());
 	curves.reserve(theCurves.size());
 
@@ -90,6 +94,7 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 
 	Merge2d_Chain alg;
 	alg.Import(chains);
+	alg.SetRemoveDegeneracy();
 
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the application is not performed!");
@@ -100,8 +105,11 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 	auto topo = std::make_shared<Geo2d_TopoChainAnalysis>();
 	Debug_Null_Pointer(topo);
 
+	const auto& indices = merged->Connectivity();
+
 	topo->Import(*merged);
 	topo->Perform();
+
 	topo->reReisterEdges();
 
 	const auto& echains = topo->Edges();
@@ -114,9 +122,11 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 			<< abort(FatalError);
 	}
 
-	for (Standard_Integer i = 0; i < echains.size(); i++)
+	Standard_Integer k = 0;
+	for (const auto& x : echains)
 	{
-		auto paired = std::make_pair(echains.at(i), curves.at(i));
+		Debug_Null_Pointer(x.second);
+		auto paired = std::make_pair(x.second, curves.at(k++));
 		auto insert = theEdges.insert(std::move(paired));
 		if (NOT insert.second)
 		{
@@ -130,5 +140,4 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 
 	return std::move(topo);
 }
-#endif // !_DEBUG
-
+#endif // _DEBUG

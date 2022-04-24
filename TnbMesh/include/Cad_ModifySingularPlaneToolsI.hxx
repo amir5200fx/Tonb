@@ -1,11 +1,12 @@
 #pragma once
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#ifndef _DEBUG
 template<class SurfPlnType>
 inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::curveType>>
 tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::SubCurves
 (
-	const std::shared_ptr<curveType>& theCurve, 
+	const std::shared_ptr<curveType>& theCurve,
 	const std::list<Standard_Real>& thePars,
 	const Standard_Real theTol
 )
@@ -34,6 +35,7 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::SubCurves
 	curves.push_back(std::move(curve));
 	return std::move(curves);
 }
+#endif // !_DEBUG
 
 template<class SurfPlnType>
 inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::wireType>> 
@@ -92,12 +94,13 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyWires
 	return std::move(mWires);
 }
 
+#ifndef _DEBUG
 template<class SurfPlnType>
-inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::curveType>> 
+inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::curveType>>
 tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyHorizons
 (
 	const std::vector<std::shared_ptr<curveType>>& theCurves,
-	const std::map<std::shared_ptr<curveType>, std::shared_ptr<std::list<Standard_Real>>>& theSubMap, 
+	const std::map<std::shared_ptr<curveType>, std::shared_ptr<std::list<Standard_Real>>>& theSubMap,
 	const Standard_Real theTol
 )
 {
@@ -156,7 +159,7 @@ inline std::list
 >
 tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::CalcParts
 (
-	const std::vector<std::shared_ptr<Cad_SingularZone<SurfPlnType>>>& theZones, 
+	const std::vector<std::shared_ptr<Cad_SingularZone<SurfPlnType>>>& theZones,
 	const std::vector<std::shared_ptr<curveType>>& theCurves
 )
 {
@@ -180,6 +183,8 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::CalcParts
 	}
 	return std::move(subsList);
 }
+#endif // !_DEBUG
+
 
 template<class SurfPlnType>
 inline std::map

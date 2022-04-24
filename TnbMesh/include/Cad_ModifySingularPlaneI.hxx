@@ -1,8 +1,10 @@
 #pragma once
+#ifndef _TNB_HEADER_IMPL
 #include <Cad_ModifySingularPlaneTools.hxx>
+#endif //_TNB_HEADER_IMPL
 #include <Cad_SingularityTopology.hxx>
 #include <Cad_ColorApprxMetric.hxx>
-#include "GModel_Plane.hxx"
+
 template<class SurfType>
 inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RegisterPolygons
 (
@@ -418,6 +420,7 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::IsApproxInfoLoaded() const
 	return (Standard_Boolean)theApproxInfo_;
 }
 
+#ifndef _DEBUG
 template<class SurfType>
 inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 {
@@ -457,29 +460,29 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 	}
 
 	auto wires = RetrieveWires(*Plane());
-	const auto bcurves = 
+	const auto bcurves =
 		Cad_ModifySingularPlaneTools<plnType>::RetrieveCurves(wires);
 
-	auto subsList = 
+	auto subsList =
 		Cad_ModifySingularPlaneTools<plnType>::CalcParts(Zones(), bcurves);
 	auto subMap = Cad_SubdivideHorizon<parCurveType>::Merge(subsList);
 
-	auto horizonCurves = 
+	auto horizonCurves =
 		Cad_SingularZone<plnType>::RetrieveHorizons(Zones());
 
-	auto modifiedWires = 
+	auto modifiedWires =
 		Cad_ModifySingularPlaneTools<plnType>::ModifyWires(wires, subMap, Tolerance());
-	auto modifiedHorizons = 
-		Cad_ModifySingularPlaneTools<plnType>::ModifyHorizons(horizonCurves, subMap, Tolerance());
+	auto modifiedHorizons =
+		Cad_ModifySingularPlaneTools<plnType>::ModifyHorizons(horizonCurves, subMap, 1.0E-12);
 
-	auto curveTypes = 
+	auto curveTypes =
 		Cad_ModifySingularPlaneTools<plnType>::CurveToTypeMap(modifiedHorizons, modifiedWires);
-	auto wireApprox = 
+	auto wireApprox =
 		Cad_ModifySingularPlaneTools<plnType>::GetPolygons(modifiedWires, ApproxInfo());
 
 	RegisterPolygons(wireApprox);
 
-	auto topology = 
+	auto topology =
 		std::make_shared<Cad_SingularityTopology<SurfType>>
 		(modifiedWires, modifiedHorizons);
 	Debug_Null_Pointer(topology);
@@ -492,7 +495,7 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 	// Removing the horizons that are outside of the domain
 	RemoveOutOfBoundaryHorizons
 	(
-		*topology, 
+		*topology,
 		(Standard_Integer)wireApprox.size(),
 		edgeToCurve, curveTypes
 	);
@@ -504,7 +507,7 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 		> colored;
 	RemoveColoredEdges
 	(
-		*topology, 
+		*topology,
 		*theColors_,
 		edgeToCurve,
 		curveTypes, colored
@@ -536,7 +539,7 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 	for (const auto& x : zones)
 	{
 		Debug_Null_Pointer(x);
-		
+
 		x->CreatePaired3d(*Surface());
 		x->ProjectBoundariesToHorizons(*Surface());
 	}
@@ -584,11 +587,13 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 		Debug_Null_Pointer(x);
 		x->SetPlane(Plane()->Plane());
 	}
-	
+
 	ModifiedPlanesRef() = std::move(modifieds);
 
 	Change_IsDone() = Standard_True;
 }
+#endif // !_DEBUG
+
 
 template<class SurfType>
 inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlane<SurfType>::parWireType>> 

@@ -1,4 +1,5 @@
 #pragma once
+#ifndef _DEBUG
 #include <Cad_SingularityTopologyTools.hxx>
 #include <Merge2d_Chain.hxx>
 template<class SurfType>
@@ -69,7 +70,7 @@ inline void tnbLib::Cad_SingularityTopology<SurfType>::Perform()
 }
 
 template<class SurfType>
-inline std::shared_ptr<tnbLib::Geo2d_TopoChainAnalysis> 
+inline std::shared_ptr<tnbLib::Geo2d_TopoChainAnalysis>
 tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 (
 	const std::map<std::shared_ptr<parCurveType>, std::shared_ptr<Entity2d_Chain>>& theCurves,
@@ -129,3 +130,5 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 
 	return std::move(topo);
 }
+#endif // !_DEBUG
+

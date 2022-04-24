@@ -45,7 +45,8 @@ namespace tnbLib
 			const Handle(Geom_Surface)& theGeometry,
 			const std::shared_ptr<Cad_MetricCalculator>& theCalculator,
 			const Entity_Segment<const Pnt2d&>& theSeg,
-			const Standard_Real theCriterion
+			const Standard_Real theCriterion,
+			const Standard_Real theCoeff
 		)
 	{
 		const auto& p0 = theSeg.P0();
@@ -54,8 +55,8 @@ namespace tnbLib
 		const auto m0 = theCalculator->CalcMetric(p0, theGeometry);
 		const auto m1 = theCalculator->CalcMetric(p1, theGeometry);
 
-		const auto det0 = m0.Determinant();
-		const auto det1 = m1.Determinant();
+		const auto det0 = m0.Determinant() * theCoeff;
+		const auto det1 = m1.Determinant() * theCoeff;
 
 		if (det0 > theCriterion AND det1 > theCriterion)
 		{
@@ -210,7 +211,8 @@ namespace tnbLib
 			const std::shared_ptr<Cad_MetricCalculator>& theCalculator,
 			const Entity_Triangle<const Pnt2d&>& theTriangle,
 			const Standard_Real theCriterion, 
-			const Standard_Real theMergeTol
+			const Standard_Real theMergeTol,
+			const Standard_Real theCoeff
 		)
 	{
 		auto seg = std::make_shared<Entity2d_Chain>();
@@ -225,7 +227,8 @@ namespace tnbLib
 					theGeometry, 
 					theCalculator,
 					theTriangle.Segment(0),
-					theCriterion
+					theCriterion,
+					theCoeff
 				);
 			if (cond)
 			{
@@ -240,7 +243,8 @@ namespace tnbLib
 					theGeometry,
 					theCalculator,
 					theTriangle.Segment(1),
-					theCriterion
+					theCriterion,
+					theCoeff
 				);
 			if (cond)
 			{
@@ -255,7 +259,8 @@ namespace tnbLib
 					theGeometry,
 					theCalculator,
 					theTriangle.Segment(2),
-					theCriterion
+					theCriterion,
+					theCoeff
 				);
 			if (cond)
 			{
@@ -314,6 +319,15 @@ void tnbLib::Cad_SingularityHorizons::Perform()
 			<< abort(FatalError);
 	}
 
+	if (MaxDet() <= gp::Resolution())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid max. det. has been detected!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto weight = 1.0 / MaxDet();
+
 	std::vector<std::shared_ptr<Entity2d_Chain>> list;
 	for (Standard_Integer tri = 0; tri < Approximation()->NbConnectivity(); tri++)
 	{
@@ -326,7 +340,8 @@ void tnbLib::Cad_SingularityHorizons::Perform()
 				MetricCalculator(),
 				triangle,
 				Criterion(),
-				MergingTolerance()
+				MergingTolerance(),
+				weight
 			);
 
 		if (path)
@@ -382,8 +397,16 @@ tnbLib::Cad_SingularityHorizons::RetrieveDomain
 {
 	CheckDone(theHorizons);
 	Debug_Null_Pointer(theHorizons.Approximation());
-	Debug_Null_Pointer(theHorizons.Approximation()->BoundingBox());
-	return *theHorizons.Approximation()->BoundingBox();
+	if (NOT theHorizons.Approximation()->BoundingBox())
+	{
+		const auto& pnts = theHorizons.Approximation()->Points();
+		auto bx = Entity2d_Box::BoundingBoxOf(pnts);
+		return std::move(bx);
+	}
+	else
+	{
+		return *theHorizons.Approximation()->BoundingBox();
+	}	
 }
 
 std::vector<std::shared_ptr<tnbLib::Entity2d_Polygon>> 
