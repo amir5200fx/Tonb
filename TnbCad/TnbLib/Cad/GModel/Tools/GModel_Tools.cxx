@@ -77,8 +77,20 @@ tnbLib::GModel_Tools::Split
 {
 	Debug_Null_Pointer(theCurve);
 	Debug_Null_Pointer(theCurve->Geometry());
+#ifdef _DEBUG
+	if (NOT INSIDE(x, theCurve->FirstParameter(), theCurve->LastParameter()))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the parameter is outside of the span." << endl
+			<< " - x: " << x << endl
+			<< " - first parameter: " << theCurve->FirstParameter() << endl
+			<< " - last parameter: " << theCurve->LastParameter() << endl
+			<< abort(FatalError);
+	}
+#endif // _DEBUG
 	auto[g0, g1] = Pln_Tools::Split(x, theCurve->Geometry());
-
+	Debug_Null_Pointer(g0);
+	Debug_Null_Pointer(g1);
 	auto c0 = std::make_shared<GModel_ParaCurve>(std::move(g0));
 	auto c1 = std::make_shared<GModel_ParaCurve>(std::move(g1));
 
@@ -850,7 +862,18 @@ namespace tnbLib
 			Debug_Null_Pointer(theCurve);
 			Geom2dAPI_ProjectPointOnCurve alg(theCoord, theCurve->Geometry());
 			Pnt2d pt = alg.NearestPoint();
-			auto t = std::make_pair(std::move(pt), alg.LowerDistanceParameter());
+			auto u = alg.LowerDistanceParameter();
+			if (u < theCurve->FirstParameter())
+			{
+				u = theCurve->FirstParameter();
+				pt = theCurve->Value(u);
+			}
+			if (u > theCurve->LastParameter())
+			{
+				u = theCurve->LastParameter();
+				pt = theCurve->Value(u);
+			}
+			auto t = std::make_pair(std::move(pt), u);
 			return std::move(t);
 		}
 
@@ -862,8 +885,20 @@ namespace tnbLib
 				auto t = std::make_pair(theCurve, Standard_False);
 				return std::move(t);
 			}
+#ifdef _DEBUG
+			if (NOT INSIDE(u, theCurve->FirstParameter(), theCurve->LastParameter()))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the parameter is outside of the span." << endl
+					<< " - x: " << u << endl
+					<< " - first parameter: " << theCurve->FirstParameter() << endl
+					<< " - last parameter: " << theCurve->LastParameter() << endl
+					<< abort(FatalError);
+			}
+#endif // _DEBUG
 			Handle(Geom2d_Curve) c0, c1;
 			Pln_Tools::SplitCurve(theCurve->Geometry(), u, c0, c1);
+			Debug_Null_Pointer(c1);
 
 			auto c = std::make_shared<GModel_ParaCurve>(theCurve->Index(), theCurve->Name(), std::move(c1));
 			auto t = std::make_pair(std::move(c), Standard_True);
@@ -878,8 +913,20 @@ namespace tnbLib
 				auto t = std::make_pair(theCurve, Standard_False);
 				return std::move(t);
 			}
+#ifdef _DEBUG
+			if (NOT INSIDE(u, theCurve->FirstParameter(), theCurve->LastParameter()))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the parameter is outside of the span." << endl
+					<< " - x: " << u << endl
+					<< " - first parameter: " << theCurve->FirstParameter() << endl
+					<< " - last parameter: " << theCurve->LastParameter() << endl
+					<< abort(FatalError);
+			}
+#endif // _DEBUG
 			Handle(Geom2d_Curve) c0, c1;
 			Pln_Tools::SplitCurve(theCurve->Geometry(), u, c0, c1);
+			Debug_Null_Pointer(c0);
 
 			auto c = std::make_shared<GModel_ParaCurve>(theCurve->Index(), theCurve->Name(), std::move(c0));
 			auto t = std::make_pair(std::move(c), Standard_True);
@@ -1341,6 +1388,7 @@ tnbLib::GModel_Tools::GetParaPlane
 			innerWires->push_back(std::move(innerWire));
 		}
 	}
+
 	if (innerWires->size())
 	{
 		auto plane = std::make_shared<GModel_Plane>(std::move(outerWire), std::move(innerWires));

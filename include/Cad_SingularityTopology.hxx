@@ -88,7 +88,12 @@ namespace tnbLib
 
 		void Perform();
 
-		static std::shared_ptr<Geo2d_TopoChainAnalysis> GetTopology(const std::map<std::shared_ptr<parCurveType>, std::shared_ptr<Entity2d_Chain>>&, std::map<std::shared_ptr<edgeType>, std::shared_ptr<parCurveType>>&);
+		static std::shared_ptr<Geo2d_TopoChainAnalysis>
+			GetTopology
+			(
+				const std::map<std::shared_ptr<parCurveType>, std::shared_ptr<Entity2d_Chain>>&, 
+				std::map<std::shared_ptr<edgeType>, std::shared_ptr<parCurveType>>&
+			);
 
 		
 		
@@ -96,5 +101,7 @@ namespace tnbLib
 }
 
 #include <Cad_SingularityTopologyI.hxx>
+
+#include <Cad_gSingularityTopology.hxx>
 
 #endif // !_Cad_SingularityTopology_Header

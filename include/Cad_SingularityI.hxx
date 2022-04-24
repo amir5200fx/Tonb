@@ -1,4 +1,5 @@
 #pragma once
+#ifdef _TNB_HEADER_IMPL
 #include <Cad_SingularityHorizons.hxx>
 #include <Cad_ColorApprxMetric.hxx>
 #include <Cad_SingularityTools.hxx>
@@ -7,6 +8,9 @@
 #include <Geo2d_PolygonGraph.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#endif // !_TNB_HEADER_IMPL
+
+#ifdef _TNB_HEADER_IMPL
 template<class SurfType>
 inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 {
@@ -149,3 +153,5 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 
 	Change_IsDone() = Standard_True;
 }
+#endif // _TNB_HEADER_IMPL
+

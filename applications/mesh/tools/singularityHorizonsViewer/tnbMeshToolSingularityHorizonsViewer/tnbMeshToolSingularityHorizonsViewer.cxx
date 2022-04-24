@@ -218,8 +218,19 @@ namespace tnbLib
 					<< "no geometry has been found!" << endl
 					<< abort(FatalError);
 			}
-			auto[maxDet, minDet] = Cad_Tools::CalcMaxMinMetrics(geom, *metricApprox);
-			auto criterion = Cad_ColorApprxMetric::CalcCriterion(maxDet);
+			Standard_Real myMaxDet = 0;
+			if (mySizeFun)
+			{
+				auto[maxDet, minDet] = Cad_Tools::CalcMaxMinMetrics(geom, *metricApprox, &calcSize);
+				myMaxDet = maxDet;
+			}
+			else
+			{
+				auto[maxDet, minDet] = Cad_Tools::CalcMaxMinMetrics(geom, *metricApprox);
+				myMaxDet = maxDet;
+			}
+			
+			auto criterion = Cad_ColorApprxMetric::CalcCriterion(myMaxDet);
 
 			auto colors = std::make_shared<Cad_ColorApprxMetric>();
 
@@ -240,6 +251,7 @@ namespace tnbLib
 			auto horizonAlg = std::make_shared<Cad_SingularityHorizons>();
 
 			horizonAlg->SetDegeneracyCriterion(myDegenCrit);
+			horizonAlg->SetMaxDet(myMaxDet);
 
 			horizonAlg->LoadGeometry(geom);
 			horizonAlg->LoadApproximation(metricApprox);

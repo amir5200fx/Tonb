@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugNoCopy|Win32">
+      <Configuration>DebugNoCopy</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugNoCopy|x64">
+      <Configuration>DebugNoCopy</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -31,6 +39,12 @@
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -39,6 +53,12 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -59,10 +79,16 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -70,6 +96,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)d</TargetName>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
     <TargetName>$(ProjectName)d</TargetName>
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
@@ -101,7 +132,41 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)inclu
 for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdModel\IO\Wing;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\WrappedSection;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\SimpleExtruded\Entity;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing\No1;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Wing;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropBlades;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropHub;$(ProjectDir)TnbLib\PtdModel\SolidMaker\PropBlade;$(ProjectDir)TnbLib\PtdModel\SolidMaker\Propeller;$(ProjectDir)TnbLib\PtdModel\Wing\Face;$(ProjectDir)TnbLib\PtdModel\Wing\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Wing\SectionQ;$(ProjectDir)TnbLib\PtdModel\Wing\Section;$(ProjectDir)TnbLib\PtdModel\Wing\Info;$(ProjectDir)TnbLib\PtdModel\Wing\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Wing\View;$(ProjectDir)TnbLib\PtdModel\Wing\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Wing\Entity;$(ProjectDir)TnbLib\PtdModel\Wing;$(ProjectDir)TnbLib\PtdModel\Vessel\Displt\Entity;$(ProjectDir)TnbLib\PtdModel\Vessel\Entity;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1\Parameters;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Hub\No1;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Section;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\MaxCamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1\Form;$(ProjectDir)TnbLib\PtdModel\Models\Wing\No1;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Chord;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\CamberLoc;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Camber;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Rake;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Thickness;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Skew;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form\Pitch;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Blade;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section\Naca4Digit;$(ProjectDir)TnbLib\PtdModel\Models\Propeller\No1\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\UnWrapped;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section\WrappedSection;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\SectionQ;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\ExpandedView;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profiles;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Press;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Suct;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Tip;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Root;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Trail;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face\Lead;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\View;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Info;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade\Form;$(ProjectDir)TnbLib\PtdModel\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Tail;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Shaft;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face\Nose;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Face;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Tail;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Shaft;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve\Nose;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Curve;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Hub;$(ProjectDir)TnbLib\PtdModel\Propeller\Profile;$(ProjectDir)TnbLib\PtdModel\Propeller\Parameters;$(ProjectDir)TnbLib\PtdModel\Propeller\Section;$(ProjectDir)TnbLib\PtdModel\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\View;$(ProjectDir)TnbLib\PtdModel\Entities\GlobalParameters;$(ProjectDir)TnbLib\PtdModel\Entities\Parameters;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Fixed;$(ProjectDir)TnbLib\PtdModel\Entities\Par\Constant;$(ProjectDir)TnbLib\PtdModel\Entities\Par;$(ProjectDir)TnbLib\PtdModel\Entities\BndValue;$(ProjectDir)TnbLib\PtdModel\Entities\Value;$(ProjectDir)TnbLib\PtdModel\Entities\Forms;$(ProjectDir)TnbLib\PtdModel\Entities\BladeRadialSections;$(ProjectDir)TnbLib\PtdModel\Entities\RadialSection;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Hub;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blades;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Child;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade\Parent;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Blade;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller\Entity;$(ProjectDir)TnbLib\PtdModel\Entities\Shape\Propeller;$(ProjectDir)TnbLib\PtdModel\Entities\Shape;$(ProjectDir)TnbLib\PtdModel\Entities\Face;$(ProjectDir)TnbLib\PtdModel\Entities\Curve\3d;$(ProjectDir)TnbLib\PtdModel\Entities\Curve\2d;$(ProjectDir)TnbLib\PtdModel\Entities\Curve;$(ProjectDir)TnbLib\PtdModel\Entities\Profiles;$(ProjectDir)TnbLib\PtdModel\Entities\Profile;$(ProjectDir)TnbLib\PtdModel\Entities\AirfoilSectionQ;$(ProjectDir)TnbLib\PtdModel\Entities\SectionCurve;$(ProjectDir)TnbLib\PtdModel\Entities\Section;$(ProjectDir)TnbLib\PtdModel\Entities\Entity;$(ProjectDir)TnbLib\PtdModel\FormMaker;$(ProjectDir)TnbLib\PtdModel\Form\Custom;$(ProjectDir)TnbLib\PtdModel\Form\SixPars;$(ProjectDir)TnbLib\PtdModel\Form\FivePars;$(ProjectDir)TnbLib\PtdModel\Form\FourPars;$(ProjectDir)TnbLib\PtdModel\Form\ThreePars;$(ProjectDir)TnbLib\PtdModel\Form\Uniform;$(ProjectDir)TnbLib\PtdModel\Form\Linear;$(ProjectDir)TnbLib\PtdModel\Form;$(ProjectDir)TnbLib\PtdModel\xPars;$(ProjectDir)TnbLib\PtdModel\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>TnbPtdModel_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>

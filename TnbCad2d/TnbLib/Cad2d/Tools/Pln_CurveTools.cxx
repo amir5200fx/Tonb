@@ -27,17 +27,19 @@
 #include <GCE2d_MakeArcOfParabola.hxx>
 #include <GCE2d_MakeCircle.hxx>
 #include <GCE2d_MakeEllipse.hxx>
+#include <Standard_Failure.hxx>
 
 #include <algorithm>
 
 Handle(Geom2d_Curve)
 tnbLib::Pln_CurveTools::Trim
 (
-	const Handle(Geom2d_Curve) theCurve,
+	const Handle(Geom2d_Curve)& theCurve,
 	const Standard_Real theP0, 
 	const Standard_Real theP1
 )
 {
+	Debug_Null_Pointer(theCurve);
 	if (theP0 > theP1)
 	{
 		FatalErrorIn("Handle(Geom2d_Curve) Trim(Args...)")
@@ -48,8 +50,18 @@ tnbLib::Pln_CurveTools::Trim
 	const auto p0 = std::max(theP0, theCurve->FirstParameter());
 	const auto p1 = std::min(theP1, theCurve->LastParameter());
 
-	Handle(Geom2d_TrimmedCurve) t = new Geom2d_TrimmedCurve(theCurve, p0, p1);
-	return std::move(t);
+	try
+	{
+		Handle(Geom2d_TrimmedCurve) t = new Geom2d_TrimmedCurve(theCurve, p0, p1);
+		return std::move(t);
+	}
+	catch (const Standard_Failure& x)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< x.GetMessageString() << endl
+			<< abort(FatalError);
+		return nullptr;
+	}
 }
 
 Handle(Geom2d_Curve) 

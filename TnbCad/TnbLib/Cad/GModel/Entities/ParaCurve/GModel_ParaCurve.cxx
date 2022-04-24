@@ -14,7 +14,7 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 )
 	: theGeometry_(theGeometry)
 {
-	CheckBounded(theGeometry, FunctionSIG);
+	CheckBounded(theGeometry_, FunctionSIG);
 }
 
 tnbLib::GModel_ParaCurve::GModel_ParaCurve
@@ -27,7 +27,7 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 	, Global_Named(theName)
 	, theGeometry_(theGeometry)
 {
-	CheckBounded(theGeometry, FunctionSIG);
+	CheckBounded(theGeometry_, FunctionSIG);
 }
 
 tnbLib::GModel_ParaCurve::GModel_ParaCurve
@@ -38,7 +38,7 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 	: Global_Indexed(theIndex)
 	, theGeometry_(theGeometry)
 {
-	CheckBounded(theGeometry, FunctionSIG);
+	CheckBounded(theGeometry_, FunctionSIG);
 }
 
 tnbLib::GModel_ParaCurve::GModel_ParaCurve
@@ -47,7 +47,7 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 )
 	: theGeometry_(std::move(theGeometry))
 {
-	CheckBounded(theGeometry, FunctionSIG);
+	CheckBounded(theGeometry_, FunctionSIG);
 }
 
 tnbLib::GModel_ParaCurve::GModel_ParaCurve
@@ -60,7 +60,7 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 	, Global_Named(theName)
 	, theGeometry_(std::move(theGeometry))
 {
-	CheckBounded(theGeometry, FunctionSIG);
+	CheckBounded(theGeometry_, FunctionSIG);
 }
 
 tnbLib::GModel_ParaCurve::GModel_ParaCurve
@@ -71,7 +71,7 @@ tnbLib::GModel_ParaCurve::GModel_ParaCurve
 	: Global_Indexed(theIndex)
 	, theGeometry_(std::move(theGeometry))
 {
-	CheckBounded(theGeometry, FunctionSIG);
+	CheckBounded(theGeometry_, FunctionSIG);
 }
 
 void tnbLib::GModel_ParaCurve::CheckBoundary

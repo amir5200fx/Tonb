@@ -3,6 +3,7 @@
 #include <Pln_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#ifndef _DEBUG
 template<class PlnCurveType>
 inline void tnbLib::Cad_SubdivideHorizon<PlnCurveType>::Perform
 (
@@ -33,7 +34,7 @@ inline void tnbLib::Cad_SubdivideHorizon<PlnCurveType>::Perform
 				<< abort(FatalError);
 		}
 
-		auto [pairs, intsct] = 
+		auto[pairs, intsct] =
 			Cad_SubdivideHorizonTools::CalcIntersections(x->Geometry(), Horizon()->Geometry());
 		if (intsct)
 		{
@@ -79,6 +80,7 @@ inline void tnbLib::Cad_SubdivideHorizon<PlnCurveType>::Perform
 
 	Change_IsDone() = Standard_True;
 }
+#endif // !_DEBUG
 
 template<class PlnCurveType>
 inline std::map<std::shared_ptr<PlnCurveType>, std::shared_ptr<std::list<Standard_Real>>> 
@@ -142,6 +144,10 @@ tnbLib::Cad_SubdivideHorizon<PlnCurveType>::Merge
 		{
 			l->push_back(p);
 		}
+	}
+	for (const auto& x : merged)
+	{
+		x.second->sort();
 	}
 	return std::move(merged);
 }

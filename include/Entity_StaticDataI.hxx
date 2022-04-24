@@ -118,3 +118,12 @@ namespace tnbLib
 		theNeighbors_.clear();
 	}
 }
+
+#include <Geo_BoxTools.hxx>
+
+template<class Point, class ConnectType, bool NeighbData>
+inline void tnbLib::Entity_StaticData<Point, ConnectType, NeighbData>::CalcBoundingBox()
+{
+	auto b = std::make_shared<Entity_Box<Point>>(Geo_BoxTools::GetBox(Points(), 0));
+	theBoundingBox_ = std::move(b);
+}

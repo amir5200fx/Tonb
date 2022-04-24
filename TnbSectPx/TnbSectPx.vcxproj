@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugNoCopy|x64">
+      <Configuration>DebugNoCopy</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -23,6 +27,12 @@
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -38,6 +48,9 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -47,11 +60,40 @@
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SectPx\Conic;$(ProjectDir)TnbLib\SectPx\CurveDef;$(ProjectDir)TnbLib\SectPx\Join\Priority;$(ProjectDir)TnbLib\SectPx\Join;$(ProjectDir)TnbLib\SectPx\CptsMap\OnePar\Single;$(ProjectDir)TnbLib\SectPx\CptsMap\OnePar;$(ProjectDir)TnbLib\SectPx\CptsMap;$(ProjectDir)TnbLib\SectPx\Curve;$(ProjectDir)TnbLib\SectPx\Offset\Component;$(ProjectDir)TnbLib\SectPx\Offset;$(ProjectDir)TnbLib\SectPx\KnotVector\Fixed;$(ProjectDir)TnbLib\SectPx\KnotVector\Uniform;$(ProjectDir)TnbLib\SectPx\KnotVector;$(ProjectDir)TnbLib\SectPx\Script;$(ProjectDir)TnbLib\SectPx\FrameTuner;$(ProjectDir)TnbLib\SectPx\FrameAPI;$(ProjectDir)TnbLib\SectPx\Frame\Modify;$(ProjectDir)TnbLib\SectPx\Frame\Parameter;$(ProjectDir)TnbLib\SectPx\Frame\Registry;$(ProjectDir)TnbLib\SectPx\Frame\Dimension;$(ProjectDir)TnbLib\SectPx\Frame;$(ProjectDir)TnbLib\SectPx\Makers\Spacing;$(ProjectDir)TnbLib\SectPx\Makers\Extrude;$(ProjectDir)TnbLib\SectPx\Makers\CurveQ;$(ProjectDir)TnbLib\SectPx\Makers\Shape;$(ProjectDir)TnbLib\SectPx\Makers\TopoProfile;$(ProjectDir)TnbLib\SectPx\Makers\Profile;$(ProjectDir)TnbLib\SectPx\Makers\Node;$(ProjectDir)TnbLib\SectPx\Makers\CmptProfile;$(ProjectDir)TnbLib\SectPx\Makers\Interface;$(ProjectDir)TnbLib\SectPx\Makers\FieldFun;$(ProjectDir)TnbLib\SectPx\Makers\GeometricMap;$(ProjectDir)TnbLib\SectPx\Makers\Point;$(ProjectDir)TnbLib\SectPx\Makers\Parameter;$(ProjectDir)TnbLib\SectPx\Makers\Datum;$(ProjectDir)TnbLib\SectPx\Makers;$(ProjectDir)TnbLib\SectPx\GeoMap\coordReader;$(ProjectDir)TnbLib\SectPx\GeoMap\intersection;$(ProjectDir)TnbLib\SectPx\GeoMap\linearInterpl;$(ProjectDir)TnbLib\SectPx\GeoMap;$(ProjectDir)TnbLib\SectPx\Registry\Shape;$(ProjectDir)TnbLib\SectPx\Registry\Scatter;$(ProjectDir)TnbLib\SectPx\Registry\Parameter;$(ProjectDir)TnbLib\SectPx\Registry\Counter;$(ProjectDir)TnbLib\SectPx\Registry\Frame;$(ProjectDir)TnbLib\SectPx\Registry\Object;$(ProjectDir)TnbLib\SectPx\Registry;$(ProjectDir)TnbLib\SectPx\FieldFun\Adaptor;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\divide;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\subtract;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps\sum;$(ProjectDir)TnbLib\SectPx\FieldFun\binaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\readX;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\readY;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter\expr;$(ProjectDir)TnbLib\SectPx\FieldFun\nonParameter;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\func;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\minus;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter\uni;$(ProjectDir)TnbLib\SectPx\FieldFun\oneParameter;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\minus;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps\plus;$(ProjectDir)TnbLib\SectPx\FieldFun\unaryOps;$(ProjectDir)TnbLib\SectPx\FieldFun;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\binaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\binaryOps\divide;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\binaryOps\subtract;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\binaryOps\sum;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\binaryOps;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\nonParameter\readX;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\nonParameter\readY;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\nonParameter\expr;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\nonParameter;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\oneParameter\func;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\oneParameter\minus;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\oneParameter\uni;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\oneParameter;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\unaryOps\cross;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\unaryOps\minus;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\unaryOps\plus;$(ProjectDir)TnbLib\SectPx\FieldFunCloud\unaryOps;$(ProjectDir)TnbLib\SectPx\FieldFunCloud;$(ProjectDir)TnbLib\SectPx\Tools\tools;$(ProjectDir)TnbLib\SectPx\Tools\Pnt;$(ProjectDir)TnbLib\SectPx\Tools\Par;$(ProjectDir)TnbLib\SectPx\Tools\FieldFun;$(ProjectDir)TnbLib\SectPx\Macros;$(ProjectDir)TnbLib\SectPx\Entities\Spacing\Uniform;$(ProjectDir)TnbLib\SectPx\Entities\Spacing;$(ProjectDir)TnbLib\SectPx\Entities\Limits;$(ProjectDir)TnbLib\SectPx\Entities\CurveQ;$(ProjectDir)TnbLib\SectPx\Entities\Shape\Profile;$(ProjectDir)TnbLib\SectPx\Entities\Shape\Section;$(ProjectDir)TnbLib\SectPx\Entities\Shape;$(ProjectDir)TnbLib\SectPx\Entities\Controller\Segment;$(ProjectDir)TnbLib\SectPx\Entities\Controller\Pole\Weight;$(ProjectDir)TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg3;$(ProjectDir)TnbLib\SectPx\Entities\Controller\Pole\Tightness\deg2;$(ProjectDir)TnbLib\SectPx\Entities\Controller\Pole\Tightness;$(ProjectDir)TnbLib\SectPx\Entities\Controller\Pole;$(ProjectDir)TnbLib\SectPx\Entities\Controller;$(ProjectDir)TnbLib\SectPx\Entities\Cloud\Field\naca4Digit;$(ProjectDir)TnbLib\SectPx\Entities\Cloud\Field\expr;$(ProjectDir)TnbLib\SectPx\Entities\Cloud\Field;$(ProjectDir)TnbLib\SectPx\Entities\Cloud\Offset;$(ProjectDir)TnbLib\SectPx\Entities\Cloud;$(ProjectDir)TnbLib\SectPx\Entities\OffsetProfile;$(ProjectDir)TnbLib\SectPx\Entities\Value;$(ProjectDir)TnbLib\SectPx\Entities\Values;$(ProjectDir)TnbLib\SectPx\Entities\Segment\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Segment;$(ProjectDir)TnbLib\SectPx\Entities\RegObj\FrameReg;$(ProjectDir)TnbLib\SectPx\Entities\RegObj\ParReg;$(ProjectDir)TnbLib\SectPx\Entities\RegObj;$(ProjectDir)TnbLib\SectPx\Entities\ProfileQ;$(ProjectDir)TnbLib\SectPx\Entities\Profile\Interpl;$(ProjectDir)TnbLib\SectPx\Entities\Profile\Approx;$(ProjectDir)TnbLib\SectPx\Entities\Profile\Custom;$(ProjectDir)TnbLib\SectPx\Entities\Profile;$(ProjectDir)TnbLib\SectPx\Entities\Extrude\FivePoint;$(ProjectDir)TnbLib\SectPx\Entities\Extrude\ThreePoint;$(ProjectDir)TnbLib\SectPx\Entities\Extrude\Linear;$(ProjectDir)TnbLib\SectPx\Entities\Extrude\Uniform;$(ProjectDir)TnbLib\SectPx\Entities\Extrude;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Dangle;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired\Slave;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired\Master;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd\Paired;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Bnd;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior\Corner;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior\Slider;$(ProjectDir)TnbLib\SectPx\Entities\Pole\Interior;$(ProjectDir)TnbLib\SectPx\Entities\Pole;$(ProjectDir)TnbLib\SectPx\Entities\Parent\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Parent;$(ProjectDir)TnbLib\SectPx\Entities\Par\Const;$(ProjectDir)TnbLib\SectPx\Entities\Par\Fixed;$(ProjectDir)TnbLib\SectPx\Entities\Par\Free;$(ProjectDir)TnbLib\SectPx\Entities\Par;$(ProjectDir)TnbLib\SectPx\Entities\ParCloud\Const;$(ProjectDir)TnbLib\SectPx\Entities\ParCloud\Fixed;$(ProjectDir)TnbLib\SectPx\Entities\ParCloud\Free;$(ProjectDir)TnbLib\SectPx\Entities\ParCloud;$(ProjectDir)TnbLib\SectPx\Entities\Overrider\Coord;$(ProjectDir)TnbLib\SectPx\Entities\Overrider\GeoMap;$(ProjectDir)TnbLib\SectPx\Entities\Overrider;$(ProjectDir)TnbLib\SectPx\Entities\Node\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Node;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Empty;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired\Joint;$(ProjectDir)TnbLib\SectPx\Entities\Interface\Paired;$(ProjectDir)TnbLib\SectPx\Entities\Interface;$(ProjectDir)TnbLib\SectPx\Entities\Frame;$(ProjectDir)TnbLib\SectPx\Entities\Edge;$(ProjectDir)TnbLib\SectPx\Entities\Coord\XY;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum\component;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum\geoField;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Datum;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Constructor;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master\offset;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master\component;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master\geoField;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Master;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Slave\empty;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\Slave;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\TPnt\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt\TPnt;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Pnt;$(ProjectDir)TnbLib\SectPx\Entities\Coord\Adaptor;$(ProjectDir)TnbLib\SectPx\Entities\Coord;$(ProjectDir)TnbLib\SectPx\Entities\CmptProfile;$(ProjectDir)TnbLib\SectPx\Entities\Child;$(ProjectDir)TnbLib\SectPx\Entities\TopoSegment;$(ProjectDir)TnbLib\SectPx\Entities\Entity;$(ProjectDir)TnbLib\SectPx\Module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>TnbSectPx_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib</AdditionalDependencies>
+      <StackReserveSize>
+      </StackReserveSize>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -392,6 +434,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Par\Free\SectPx_FreeParIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_Par.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Par\SectPx_ParIO.cxx" />
@@ -421,6 +464,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Custom\SectPx_ExtrCustomProfileIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfile.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Profile\Interpl\SectPx_InterplProfileIO.cxx" />
@@ -456,6 +500,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\FieldFun\binaryOps\sum\SectPx_BinaryOpFieldFun_SumIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_Expr.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\FieldFun\nonParameter\expr\SectPx_FieldFun_ExprIO.cxx" />
@@ -473,6 +518,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\FieldFun\oneParameter\uni\SectPx_FieldFun_UniIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\FieldFun\SectPx_FieldFun.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\FieldFun\unaryOps\minus\SectPx_UnaryOpFieldFun_Minus.cxx" />
@@ -485,6 +531,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\FrameTuner\SectPx_FrameTunerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Frame\SectPx_Frame.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Frame\SectPx_FrameIO.cxx" />
@@ -510,6 +557,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Makers\Extrude\SectPx_ExtrudeMakerIO.cxx" />
     <ClCompile Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMaker.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Makers\FieldFun\SectPx_FieldFunMakerIO.cxx" />
@@ -549,15 +597,18 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\SectPx\Script\SectPx_Script.cxx" />
     <ClCompile Include="TnbLib\SectPx\Tools\FieldFun\SectPx_FieldFunTools.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Tools\Par\SectPx_ParTools.cxx" />
     <ClCompile Include="TnbLib\SectPx\Tools\Pnt\SectPx_PntTools.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Tools\tools\SectPx_Tools.cxx">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemGroup>

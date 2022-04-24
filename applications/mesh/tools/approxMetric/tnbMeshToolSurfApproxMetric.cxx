@@ -19,6 +19,7 @@
 //#include <Geo2d_SamplePoints_8Pts2ply.hxx>
 #include <Geo2d_SamplePoints_9Pts.hxx>
 //#include <Geo2d_SamplePoints_9Pts2ply.hxx>
+#include <Entity2d_Triangulation.hxx>
 #include <Merge_PntInfo.hxx>
 #include <Global_File.hxx>
 #include <Global_Timer.hxx>
@@ -376,6 +377,7 @@ namespace tnbLib
 				apprxMetricAlg->Perform();
 
 				auto tri = apprxMetricAlg->Triangulation();
+				tri->CalcBoundingBox();
 
 				auto paired = std::make_pair(x->Index(), std::move(tri));
 				auto insert = apprx.insert(std::move(paired));

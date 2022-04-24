@@ -30,7 +30,7 @@ namespace tnbLib
 		static TnbCad2d_EXPORT Handle(Geom2d_Curve)
 			Trim
 			(
-				const Handle(Geom2d_Curve), 
+				const Handle(Geom2d_Curve)&, 
 				const Standard_Real theP0, 
 				const Standard_Real theP1
 			);

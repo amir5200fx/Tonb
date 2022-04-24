@@ -3,14 +3,108 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 template<class ChainTraits>
+inline Standard_Integer 
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::NbEnds() const
+{
+	return (Standard_Integer)theEnds_.size();
+}
+
+template<class ChainTraits>
+inline std::vector<std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::nodeType>> 
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RetrieveEnds() const
+{
+	std::vector<std::shared_ptr<nodeType>> nodes;
+	for (const auto& x : theEnds_)
+	{
+		nodes.push_back(x.second);
+	}
+	return std::move(nodes);
+}
+
+template<class ChainTraits>
+inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::ImportToEnds
+(
+	const std::shared_ptr<nodeType>& theNode
+)
+{
+	Global_Tools::Insert(theNode->Index(), theNode, theEnds_);
+}
+
+template<class ChainTraits>
+inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RemoveFromEnds
+(
+	const std::shared_ptr<nodeType>& theNode
+)
+{
+	auto iter = theEnds_.find(theNode->Index());
+	if (iter IS_EQUAL theEnds_.end())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the item is not in the map!" << endl
+			<< abort(FatalError);
+	}
+	theEnds_.erase(iter);
+}
+
+template<class ChainTraits>
+inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RegisterEnds()
+{
+	for (const auto& x : base::Nodes())
+	{
+		Debug_Null_Pointer(x.second);
+		auto node = std::dynamic_pointer_cast<nodeType>(x.second);
+		Debug_Null_Pointer(node);
+		if (node->Type() IS_EQUAL Knit_ChainNode_Type::start)
+		{
+			node->TypeRef() = Knit_ChainNode_Type::end;
+			ImportToEnds(node);
+		}
+	}
+}
+
+template<class ChainTraits>
 inline std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::nodeType> 
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RetrieveStart()
+{
+	if (NOT NbEnds())
+	{
+		return nullptr;
+	}
+	auto ends = RetrieveEnds();
+	std::shared_ptr<nodeType> node;
+	for (const auto& x : ends)
+	{
+		if (IsStart(x))
+		{
+			node = x;
+			break;
+		}
+		else
+		{
+			RemoveFromEnds(x);
+		}
+	}
+	if (NOT node)
+	{
+		return nullptr;
+	}
+	Debug_Null_Pointer(node);
+	//RemoveFromEnds(node);
+
+	node->TypeRef() = Knit_ChainNode_Type::start;
+	return std::move(node);
+}
+
+#ifndef _DEBUG
+template<class ChainTraits>
+inline std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::nodeType>
 tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Next
 (
 	const std::shared_ptr<nodeType>& theNode,
 	std::shared_ptr<edgeType>& theEdge
 )
 {
-	if (theNode->Type() NOT_EQUAL Knit_ChainNode_Type::regular)
+	if (theNode->Type() IS_EQUAL Knit_ChainNode_Type::end)
 	{
 		if (NOT theNode->NbEdges())
 		{
@@ -19,11 +113,23 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Next
 		return nullptr;
 	}
 
+	if (theNode->Type() IS_EQUAL Knit_ChainNode_Type::start)
+	{
+		theNode->TypeRef() = Knit_ChainNode_Type::end;
+	}
+
 	auto edges = theNode->RetrieveEdges();
-	
+
 	std::shared_ptr<edgeType> edge;
 	std::shared_ptr<nodeType> next;
 
+	/*if (edges.size() NOT_EQUAL 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to decide the path!" << endl
+			<< " - the node is not regular" << endl
+			<< abort(FatalError);
+	}*/
 	if (edges.size() > 1)
 	{
 		Standard_Integer cond = 1;
@@ -53,11 +159,44 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Next
 		Debug_Null_Pointer(edge);
 	}
 
-	theNode->RemoveFromEdges(edge->Index());
+	try
+	{
+		theNode->RemoveFromEdges(edge->Index());
+	}
+	catch (const error& err)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< err.message() << endl
+			<< abort(FatalError);
+	}
 	base::RemoveItem(edge);
 
-	next = std::dynamic_pointer_cast<nodeType>(edge->Node1());
+	if (edge->Node0() IS_EQUAL theNode)
+	{
+		next = std::dynamic_pointer_cast<nodeType>(edge->Node1());
+	}
+	else if (edge->Node1() IS_EQUAL theNode)
+	{
+		next = std::dynamic_pointer_cast<nodeType>(edge->Node0());
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unable to track the path!" << endl
+			<< abort(FatalError);
+	}
+
 	Debug_Null_Pointer(next);
+	try
+	{
+		next->RemoveFromEdges(edge->Index());
+	}
+	catch (const error& err)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< err.message() << endl
+			<< abort(FatalError);
+	}
 
 	if (next IS_EQUAL theNode)
 	{
@@ -70,14 +209,14 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Next
 	{
 		base::RemoveItem(theNode);
 	}
-	else
+	/*else
 	{
-		auto edges = theNode->RetrieveEdges();
+		auto edges0 = theNode->RetrieveEdges();
 		Standard_Integer cond = 1;
-		for (const auto& x : edges)
+		for (const auto& x : edges0)
 		{
 			Debug_Null_Pointer(x.lock());
-			auto seg = std::dynamic_pointer_cast<edgeType>(x.lock());
+			auto seg = std::dynamic_pointer_cast<Geo2d_SegmentGraphEdge>(x.lock());
 			Debug_Null_Pointer(seg);
 
 			if (seg->Node0() IS_EQUAL theNode)
@@ -95,12 +234,12 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Next
 				theNode->TypeRef() = Knit_ChainNode_Type::start;
 			}
 		}
-	}
+	}*/
 
-	next->RemoveFromEdges(edge->Index());
 	theEdge = edge;
 	return std::move(next);
 }
+#endif // !_DEBUG
 
 template<class ChainTraits>
 inline std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::nodeType> 
@@ -109,7 +248,7 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::FindStart
 	const Knit_ChainNode_Type t
 ) const
 {
-	auto nodes = base::Nodes();
+	const auto& nodes = base::Nodes();
 	for (const auto& x : nodes)
 	{
 		Debug_Null_Pointer(x.second);
@@ -129,21 +268,111 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::GetEntity
 	const std::shared_ptr<nodeType>& theStart
 )
 {
-	theStart->TypeRef() = Knit_ChainNode_Type::regular;
+	//theStart->TypeRef() = Knit_ChainNode_Type::regular;
 	auto poly = std::make_shared<entityType>();
 	Debug_Null_Pointer(poly);
 
 	auto& ents = poly->EntitiesRef();
 	std::shared_ptr<edgeType> edge;
 	auto next = Next(theStart, edge);
-
+	if (NOT next)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid chain has been detected!" << endl
+			<< abort(FatalError);
+	}
+	auto last = next;
 	while (next)
 	{
 		ents.push_back(edge);
 		next = Next(next, edge);
+		if (next)
+		{
+			last = next;
+		}
 	}
+	//SetType(theStart);
+	//SetType(last);
 	return std::move(poly);
 }
+
+#ifndef _DEBUG
+template<class ChainTraits>
+inline std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::entityType>
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::GetRing
+(
+	const std::shared_ptr<nodeType>& theNode
+)
+{
+	auto sn = std::make_shared<nodeType>(++theMaxIndex_, theNode->Coord());
+	Debug_Null_Pointer(sn);
+	sn->TypeRef() = Knit_ChainNode_Type::start;
+
+	auto fn = std::make_shared<nodeType>(++theMaxIndex_, theNode->Coord());
+	Debug_Null_Pointer(fn);
+	fn->TypeRef() = Knit_ChainNode_Type::end;
+
+	auto edges = theNode->RetrieveEdges();
+	if (edges.size() NOT_EQUAL 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the node is not regular!" << endl
+			<< abort(FatalError);
+	}
+
+	{
+		auto edge = std::dynamic_pointer_cast<edgeType>(edges.at(0).lock());
+		Debug_Null_Pointer(edge);
+
+		if (edge->Node0() IS_EQUAL theNode)
+		{
+			edge->SetNode0(sn);
+		}
+		else if (edge->Node1() IS_EQUAL theNode)
+		{
+			edge->SetNode1(sn);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+		sn->InsertToEdges(edge->Index(), edge);
+	}
+
+	{
+		auto edge = std::dynamic_pointer_cast<edgeType>(edges.at(1).lock());
+		Debug_Null_Pointer(edge);
+
+		if (edge->Node0() IS_EQUAL theNode)
+		{
+			edge->SetNode0(fn);
+		}
+		else if (edge->Node1() IS_EQUAL theNode)
+		{
+			edge->SetNode1(fn);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+		fn->InsertToEdges(edge->Index(), edge);
+	}
+
+	theNode->ClearEdges();
+
+	base::RemoveItem(theNode);
+
+	base::Insert(sn);
+	base::Insert(fn);
+
+	auto ent = GetEntity(sn);
+	return std::move(ent);
+}
+#endif // !_DEBUG
 
 template<class ChainTraits>
 inline std::vector<std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::nodeType>>
@@ -208,14 +437,26 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::GetEdges() const
 }
 
 template<class ChainTraits>
-inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::SetTypes()
+inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::SetNodesToNone()
 {
-	const auto& nodes = base::Nodes();
-	for (const auto& n : nodes)
+	for (const auto& x : base::Nodes())
 	{
-		const auto& x = n.second;
-		Debug_Null_Pointer(x);
+		Debug_Null_Pointer(x.second);
+		auto node = std::dynamic_pointer_cast<nodeType>(x.second);
+		Debug_Null_Pointer(node);
+		node->TypeRef() = Knit_ChainNode_Type::none;
+	}
+}
 
+#ifndef _DEBUG
+template<class ChainTraits>
+inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::SetType
+(
+	const std::shared_ptr<nodeType>& x
+) const
+{
+	if (x->Type() IS_EQUAL Knit_ChainNode_Type::none)
+	{
 		if (x->NbEdges() IS_EQUAL 1)
 		{
 			auto edges = x->RetrieveEdges();
@@ -232,8 +473,9 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::SetTypes()
 				x->TypeRef() = Knit_ChainNode_Type::end;
 			}
 		}
-		else if (x->NbEdges() IS_EQUAL 2)
+		else if (x->NbEdges() > 2)
 		{
+			//x->TypeRef() = Knit_ChainNode_Type::end;
 			auto edges = x->RetrieveEdges();
 
 			Standard_Integer cond = 1;
@@ -263,6 +505,27 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::SetTypes()
 			// regular node [4/1/2022 Amir]
 			x->TypeRef() = Knit_ChainNode_Type::regular;
 		}
+	}
+	else
+	{
+		/*if (x->Type() IS_EQUAL Knit_ChainNode_Type::end)
+		{
+			x->TypeRef() = Knit_ChainNode_Type::start;
+		}*/
+	}
+}
+#endif // !_DEBUG
+
+template<class ChainTraits>
+inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::SetTypes() const
+{
+	const auto& nodes = base::Nodes();
+	for (const auto& n : nodes)
+	{
+		const auto& x = n.second;
+		Debug_Null_Pointer(x);
+
+		SetType(x);
 	}
 }
 
@@ -312,6 +575,38 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::UpdateNodeTypes
 }
 
 template<class ChainTraits>
+inline Standard_Boolean 
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::IsStart(const std::shared_ptr<nodeType>& x)
+{
+	auto edges = x->RetrieveEdges();
+	if (edges.empty())
+	{
+		return Standard_False;
+	}
+
+	Standard_Integer cond = 0;
+	for (const auto& wie : edges)
+	{
+		Debug_Null_Pointer(wie.lock());
+		auto ie = std::dynamic_pointer_cast<edgeType>(wie.lock());
+		Debug_Null_Pointer(ie);
+		if (ie->Node0() IS_EQUAL x)
+		{
+			cond = 1;
+			break;
+		}
+	}
+	if (cond)
+	{
+		return Standard_True;
+	}
+	else
+	{
+		return Standard_False;
+	}
+}
+
+template<class ChainTraits>
 inline std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::entityType> 
 tnbLib::Geo_TopoChainAnalysis<ChainTraits>::deAttachEntity
 (
@@ -350,21 +645,31 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::deAttachEntity
 	return std::move(item);
 }
 
+#ifndef _DEBUG
 template<class ChainTraits>
 inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Perform()
 {
-	Standard_Integer k = 0;
+	RegisterEnds();
 
+	Standard_Integer k = 0;
 	// create regular chains [4/2/2022 Amir]
-	auto start = FindStart(Knit_ChainNode_Type::start);
+	//auto start = FindStart(Knit_ChainNode_Type::start);
+	auto start = RetrieveStart();
 	while (start)
 	{
+		if (start->Type() NOT_EQUAL Knit_ChainNode_Type::start)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid type for a start point" << endl
+				<< abort(FatalError);
+		}
 		auto ent = std::make_pair(++k, GetEntity(start));
 		ent.second->IsRingRef() = Standard_False;
 
 		theRegister_.insert(std::move(ent));
 
-		start = FindStart(Knit_ChainNode_Type::start);
+		//start = FindStart(Knit_ChainNode_Type::start);
+		start = RetrieveStart();
 	}
 
 	// create ring chains [4/2/2022 Amir]
@@ -373,7 +678,9 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Perform()
 		start = FindStart(Knit_ChainNode_Type::regular);
 		while (start)
 		{
-			auto ent = std::make_pair(++k, GetEntity(start));
+			//start->TypeRef() = Knit_ChainNode_Type::start;
+
+			auto ent = std::make_pair(++k, GetRing(start));
 			ent.second->IsRingRef() = Standard_True;
 
 			theRegister_.insert(std::move(ent));
@@ -381,11 +688,11 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Perform()
 			start = FindStart(Knit_ChainNode_Type::regular);
 		}
 	}
-
 	if (base::NbNodes())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the node tree is not empty!" << endl
+			<< " - nb nodes: " << base::NbNodes() << endl
 			<< abort(FatalError);
 	}
 
@@ -393,6 +700,7 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Perform()
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the edge tree is not empty!" << endl
+			<< " - nb edges: " << base::NbEdges() << endl
 			<< abort(FatalError);
 	}
 
@@ -418,6 +726,7 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Import
 		{
 			auto n = std::make_shared<nodeType>(++k, x);
 			Debug_Null_Pointer(n);
+			n->TypeRef() = Knit_ChainNode_Type::none;
 			nodes.push_back(n);
 			base::Insert(std::move(n));
 
@@ -443,6 +752,7 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Import
 	}
 	SetTypes();
 }
+#endif // !_DEBUG
 
 template<class ChainTraits>
 inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::reLink()
@@ -459,6 +769,18 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::reLink()
 	{
 		base::Insert(x);
 	}
+
+	/*for (const auto& x : edges)
+	{
+		auto e = std::dynamic_pointer_cast<edgeType>(x);
+		Debug_Null_Pointer(e);
+		Debug_Null_Pointer(e->Node0());
+		Debug_Null_Pointer(e->Node1());
+		e->Node0()->InsertToEdges(e->Index(), e);
+		e->Node1()->InsertToEdges(e->Index(), e);
+	}*/
+
+	SetNodesToNone();
 
 	SetTypes();
 

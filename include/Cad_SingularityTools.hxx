@@ -7,6 +7,7 @@
 
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <Mesh_Module.hxx>
 
 #include <vector>
@@ -33,6 +34,9 @@ namespace tnbLib
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Pln_Curve>> 
 			RetrieveSides(const Entity2d_Box&);
+
+		static TnbMesh_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			GetTriangulation(const Entity2d_Box&);
 
 		static TnbMesh_EXPORT Handle(Geom2d_Curve) GetParaCurve(const Pnt2d&, const Pnt2d&);
 		static TnbMesh_EXPORT Handle(Geom2d_Curve) GetParaCurve(const std::vector<Pnt2d>&);
