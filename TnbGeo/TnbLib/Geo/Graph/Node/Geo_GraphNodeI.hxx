@@ -85,3 +85,9 @@ inline void tnbLib::Geo_GraphNode<NodeTraits>::RemoveFromEdges
 
 	theEdges_.erase(iter);
 }
+
+template<class NodeTraits>
+inline void tnbLib::Geo_GraphNode<NodeTraits>::ClearEdges()
+{
+	theEdges_.clear();
+}

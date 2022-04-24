@@ -1616,6 +1616,9 @@
     <ClCompile Include="TnbLib\Geo\Graph\Geo_Graph.cxx">
       <Filter>TnbLib\Geo\Graph</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Geo2d_TopoChainAnalysis.cxx">
+      <Filter>TnbLib\Geo\TopoAnalysis\Chain\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">

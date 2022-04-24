@@ -116,6 +116,7 @@ namespace tnbLib
 		void InsertToEdges(const Standard_Integer theIndex, std::shared_ptr<edgeType>&& theEdge);
 
 		void RemoveFromEdges(const Standard_Integer theIndex);
+		void ClearEdges();
 
 		//- Macros
 		GLOBAL_ACCESS_SINGLE(Point, Coord)

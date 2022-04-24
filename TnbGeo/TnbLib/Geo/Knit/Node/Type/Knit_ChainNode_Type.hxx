@@ -7,7 +7,8 @@ namespace tnbLib
 
 	enum class Knit_ChainNode_Type
 	{
-		start = 0,
+		none = 0,
+		start,
 		regular,
 		end
 	};

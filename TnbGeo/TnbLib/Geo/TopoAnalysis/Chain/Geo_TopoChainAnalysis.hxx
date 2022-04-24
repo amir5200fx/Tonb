@@ -52,6 +52,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		std::map<Standard_Integer, std::shared_ptr<nodeType>> theEnds_;
 		std::map<Standard_Integer, std::shared_ptr<entityType>> theRegister_;
 
 		Standard_Integer theMaxIndex_;
@@ -59,17 +60,33 @@ namespace tnbLib
 
 		// private functions and operators [4/1/2022 Amir]
 
+		Standard_Integer NbEnds() const;
+
+		std::vector<std::shared_ptr<nodeType>> RetrieveEnds() const;
+
+		void ImportToEnds(const std::shared_ptr<nodeType>&);
+		void RemoveFromEnds(const std::shared_ptr<nodeType>&);
+
+		void RegisterEnds();
+
+		std::shared_ptr<nodeType> RetrieveStart();
+
 		std::shared_ptr<nodeType> Next(const std::shared_ptr<nodeType>&, std::shared_ptr<edgeType>&);
 		std::shared_ptr<nodeType> FindStart(const Knit_ChainNode_Type) const;
 
 		std::shared_ptr<entityType> GetEntity(const std::shared_ptr<nodeType>&);
+		std::shared_ptr<entityType> GetRing(const std::shared_ptr<nodeType>&);
 
 		std::vector<std::shared_ptr<nodeType>> GetNodes() const;
 		std::vector<std::shared_ptr<edgeType>> GetEdges() const;
 
-		void SetTypes();
+		void SetNodesToNone();
+		void SetType(const std::shared_ptr<nodeType>&) const;
+		void SetTypes() const;
 		void CompleteTopology();
 		void UpdateNodeTypes(const std::shared_ptr<nodeType>&) const;
+
+		static Standard_Boolean IsStart(const std::shared_ptr<nodeType>&);
 
 	public:
 

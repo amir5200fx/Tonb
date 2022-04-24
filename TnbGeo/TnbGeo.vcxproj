@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugNoCopy|x64">
+      <Configuration>DebugNoCopy</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -23,6 +27,12 @@
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -38,6 +48,9 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -46,6 +59,13 @@
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GMP_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GMP_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)d</TargetName>
+    <OutDir>$(SolutionDir)$(Platform)\Debug\</OutDir>
+    <IntDir>$(Platform)\Debug\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GMP_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
@@ -71,6 +91,26 @@
 if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
 for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)include" /y
 for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Geo\TopoAnalysis\Chain\Entity\Ring;$(ProjectDir)TnbLib\Geo\TopoAnalysis\Chain\Entity\Segment;$(ProjectDir)TnbLib\Geo\TopoAnalysis\Chain\Entity;$(ProjectDir)TnbLib\Geo\TopoAnalysis\Chain\Traits;$(ProjectDir)TnbLib\Geo\TopoAnalysis\Chain\2d\Node;$(ProjectDir)TnbLib\Geo\TopoAnalysis\Chain\2d;$(ProjectDir)TnbLib\Geo\TopoAnalysis\Chain;$(ProjectDir)TnbLib\Geo\Function\Table\Linear;$(ProjectDir)TnbLib\Geo\Function\Table;$(ProjectDir)TnbLib\Geo\Function\Interpl\Linear;$(ProjectDir)TnbLib\Geo\Function\Interpl;$(ProjectDir)TnbLib\Geo\Function\Sampling\Linear;$(ProjectDir)TnbLib\Geo\Function\Sampling;$(ProjectDir)TnbLib\Geo\SamplePoints\3d;$(ProjectDir)TnbLib\Geo\SamplePoints\2d\13pts2ply;$(ProjectDir)TnbLib\Geo\SamplePoints\2d\9pts2ply;$(ProjectDir)TnbLib\Geo\SamplePoints\2d\8pts2ply;$(ProjectDir)TnbLib\Geo\SamplePoints\2d\9pts;$(ProjectDir)TnbLib\Geo\SamplePoints\2d\8pts;$(ProjectDir)TnbLib\Geo\SamplePoints\2d\5pts;$(ProjectDir)TnbLib\Geo\SamplePoints\2d\4pts;$(ProjectDir)TnbLib\Geo\SamplePoints\2d;$(ProjectDir)TnbLib\Geo\AffineTrsf\PtsToUnitSq;$(ProjectDir)TnbLib\Geo\Interval;$(ProjectDir)TnbLib\Geo\Naca4Digit;$(ProjectDir)TnbLib\Geo\Scripts;$(ProjectDir)TnbLib\Geo\ProfileFun\Geom;$(ProjectDir)TnbLib\Geo\ProfileFun\Linear;$(ProjectDir)TnbLib\Geo\ProfileFun\Const;$(ProjectDir)TnbLib\Geo\ProfileFun;$(ProjectDir)TnbLib\Geo\PriorityList;$(ProjectDir)TnbLib\Geo\Length\Curve;$(ProjectDir)TnbLib\Geo\Distributor\Cosine;$(ProjectDir)TnbLib\Geo\Distributor\Uniform;$(ProjectDir)TnbLib\Geo\Distributor;$(ProjectDir)TnbLib\Geo\Counter;$(ProjectDir)TnbLib\Geo\Computation;$(ProjectDir)TnbLib\Geo\Search\AdTree;$(ProjectDir)TnbLib\Geo\Search\PrTree;$(ProjectDir)TnbLib\Geo\Search;$(ProjectDir)TnbLib\Geo\Merge\Chain\3d;$(ProjectDir)TnbLib\Geo\Merge\Chain\2d;$(ProjectDir)TnbLib\Geo\Merge\StaticData;$(ProjectDir)TnbLib\Geo\Merge\Point\3d;$(ProjectDir)TnbLib\Geo\Merge\Point\2d;$(ProjectDir)TnbLib\Geo\Merge\Point\Info;$(ProjectDir)TnbLib\Geo\Merge\Point;$(ProjectDir)TnbLib\Geo\Integrand\Segment\Function;$(ProjectDir)TnbLib\Geo\Integrand\Segment;$(ProjectDir)TnbLib\Geo\Integrand\Curve\Function;$(ProjectDir)TnbLib\Geo\Integrand\Curve;$(ProjectDir)TnbLib\Geo\MetricPrcsr\Info;$(ProjectDir)TnbLib\Geo\MetricPrcsr\AnIso\3d;$(ProjectDir)TnbLib\Geo\MetricPrcsr\AnIso\2d;$(ProjectDir)TnbLib\Geo\MetricPrcsr\Iso\3d;$(ProjectDir)TnbLib\Geo\MetricPrcsr\Iso\2d;$(ProjectDir)TnbLib\Geo\MetricPrcsr\System;$(ProjectDir)TnbLib\Geo\MetricPrcsr\Traits;$(ProjectDir)TnbLib\Geo\MetricPrcsr;$(ProjectDir)TnbLib\Geo\ItemSearch\BinSearch;$(ProjectDir)TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Octant;$(ProjectDir)TnbLib\Geo\ItemSearch\Mx-CIF\Octree\Node;$(ProjectDir)TnbLib\Geo\ItemSearch\Mx-CIF\Octree;$(ProjectDir)TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Quadrant;$(ProjectDir)TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree\Node;$(ProjectDir)TnbLib\Geo\ItemSearch\Mx-CIF\Quadtree;$(ProjectDir)TnbLib\Geo\ItemSearch;$(ProjectDir)TnbLib\Geo\ItemMerge;$(ProjectDir)TnbLib\Geo\Function\Metric\Background\3d;$(ProjectDir)TnbLib\Geo\Function\Metric\Background\2d;$(ProjectDir)TnbLib\Geo\Function\Metric\Background;$(ProjectDir)TnbLib\Geo\Function\Metric\nonUniform\3d;$(ProjectDir)TnbLib\Geo\Function\Metric\nonUniform\2d;$(ProjectDir)TnbLib\Geo\Function\Metric\nonUniform;$(ProjectDir)TnbLib\Geo\Function\Metric\Uniform\3d;$(ProjectDir)TnbLib\Geo\Function\Metric\Uniform\2d;$(ProjectDir)TnbLib\Geo\Function\Metric\Uniform;$(ProjectDir)TnbLib\Geo\Function\Metric\Traits;$(ProjectDir)TnbLib\Geo\Function\Metric\3d;$(ProjectDir)TnbLib\Geo\Function\Metric\2d;$(ProjectDir)TnbLib\Geo\Function\Metric;$(ProjectDir)TnbLib\Geo\Function\Size\Background;$(ProjectDir)TnbLib\Geo\Function\Size\nonUniform\3d;$(ProjectDir)TnbLib\Geo\Function\Size\nonUniform\2d;$(ProjectDir)TnbLib\Geo\Function\Size\nonUniform;$(ProjectDir)TnbLib\Geo\Function\Size\Uniform;$(ProjectDir)TnbLib\Geo\Function\Size\Surface;$(ProjectDir)TnbLib\Geo\Function\Size\3d;$(ProjectDir)TnbLib\Geo\Function\Size\2d;$(ProjectDir)TnbLib\Geo\Function\Size;$(ProjectDir)TnbLib\Geo\Approximation\Space;$(ProjectDir)TnbLib\Geo\Approximation\Curve\Traits;$(ProjectDir)TnbLib\Geo\Approximation\Curve\System;$(ProjectDir)TnbLib\Geo\Approximation\Curve\Info;$(ProjectDir)TnbLib\Geo\Approximation\Curve\3d;$(ProjectDir)TnbLib\Geo\Approximation\Curve\2d;$(ProjectDir)TnbLib\Geo\Approximation\Curve;$(ProjectDir)TnbLib\Geo\Approximation\Space\Balanced\2d;$(ProjectDir)TnbLib\Geo\Tools;$(ProjectDir)TnbLib\Geo\Sort;$(ProjectDir)TnbLib\Geo\Traits;$(ProjectDir)TnbLib\Geo\Graph\Polygon\Edge\Traits;$(ProjectDir)TnbLib\Geo\Graph\Polygon\Edge\Adaptor;$(ProjectDir)TnbLib\Geo\Graph\Polygon\Edge\Ring;$(ProjectDir)TnbLib\Geo\Graph\Polygon\Edge\Segment;$(ProjectDir)TnbLib\Geo\Graph\Polygon\Edge;$(ProjectDir)TnbLib\Geo\Graph\Polygon\Node\Traits;$(ProjectDir)TnbLib\Geo\Graph\Polygon\Node;$(ProjectDir)TnbLib\Geo\Graph\Polygon\2d;$(ProjectDir)TnbLib\Geo\Graph\Polygon;$(ProjectDir)TnbLib\Geo\Graph\2d;$(ProjectDir)TnbLib\Geo\Graph;$(ProjectDir)TnbLib\Geo\Graph\Edge\Adaptor;$(ProjectDir)TnbLib\Geo\Graph\Edge\2d\Traits;$(ProjectDir)TnbLib\Geo\Graph\Edge\2d\Ring;$(ProjectDir)TnbLib\Geo\Graph\Edge\2d\Segment;$(ProjectDir)TnbLib\Geo\Graph\Edge\2d;$(ProjectDir)TnbLib\Geo\Graph\Edge\Ring;$(ProjectDir)TnbLib\Geo\Graph\Edge\Segment;$(ProjectDir)TnbLib\Geo\Graph\Edge;$(ProjectDir)TnbLib\Geo\Graph\Node\Adaptor;$(ProjectDir)TnbLib\Geo\Graph\Node\2d\Traits;$(ProjectDir)TnbLib\Geo\Graph\Node\2d;$(ProjectDir)TnbLib\Geo\Graph\Node;$(ProjectDir)TnbLib\Geo\Knit\Chain\Node\Type;$(ProjectDir)TnbLib\Geo\Knit\Chain\Node;$(ProjectDir)TnbLib\Geo\Knit\Chain;$(ProjectDir)TnbLib\Geo\Knit\Registry;$(ProjectDir)TnbLib\Geo\Knit\2d\Traits;$(ProjectDir)TnbLib\Geo\Knit\2d;$(ProjectDir)TnbLib\Geo\Knit;$(ProjectDir)TnbLib\Geo\Knit\Edge;$(ProjectDir)TnbLib\Geo\Knit\Node\Type;$(ProjectDir)TnbLib\Geo\Knit\Node;$(ProjectDir)TnbLib\Geo\Entities\MeshValue\3d;$(ProjectDir)TnbLib\Geo\Entities\MeshValue\2d;$(ProjectDir)TnbLib\Geo\Entities\MeshValue;$(ProjectDir)TnbLib\Geo\Entities\Vector\3d;$(ProjectDir)TnbLib\Geo\Entities\Vector\2d;$(ProjectDir)TnbLib\Geo\Entities\Triangulation\3d;$(ProjectDir)TnbLib\Geo\Entities\Triangulation\2d;$(ProjectDir)TnbLib\Geo\Entities\Triangle\3d;$(ProjectDir)TnbLib\Geo\Entities\Triangle\2d;$(ProjectDir)TnbLib\Geo\Entities\Triangle;$(ProjectDir)TnbLib\Geo\Entities\Tetrahedralization;$(ProjectDir)TnbLib\Geo\Entities\StaticData;$(ProjectDir)TnbLib\Geo\Entities\Segment;$(ProjectDir)TnbLib\Geo\Entities\Polygon\3d;$(ProjectDir)TnbLib\Geo\Entities\Polygon\2d;$(ProjectDir)TnbLib\Geo\Entities\Polygon;$(ProjectDir)TnbLib\Geo\Entities\Metric2\3d;$(ProjectDir)TnbLib\Geo\Entities\Metric2\2d;$(ProjectDir)TnbLib\Geo\Entities\Metric1\3d;$(ProjectDir)TnbLib\Geo\Entities\Metric1\2d;$(ProjectDir)TnbLib\Geo\Entities\Line\3d;$(ProjectDir)TnbLib\Geo\Entities\Line\2d;$(ProjectDir)TnbLib\Geo\Entities\Line;$(ProjectDir)TnbLib\Geo\Entities\IndexedItem\Point;$(ProjectDir)TnbLib\Geo\Entities\IndexedItem;$(ProjectDir)TnbLib\Geo\Entities\Eigen\3d;$(ProjectDir)TnbLib\Geo\Entities\Eigen\2d;$(ProjectDir)TnbLib\Geo\Entities\Direct\3d;$(ProjectDir)TnbLib\Geo\Entities\Direct\2d;$(ProjectDir)TnbLib\Geo\Entities\Connectivity;$(ProjectDir)TnbLib\Geo\Entities\Chain\3d;$(ProjectDir)TnbLib\Geo\Entities\Chain\2d;$(ProjectDir)TnbLib\Geo\Entities\Chain;$(ProjectDir)TnbLib\Geo\Entities\Box\3d;$(ProjectDir)TnbLib\Geo\Entities\Box\2d;$(ProjectDir)TnbLib\Geo\Entities\Box;$(ProjectDir)TnbLib\Geo\Point\3d;$(ProjectDir)TnbLib\Geo\Point\2d;$(ProjectDir)TnbLib\Geo\System;$(ProjectDir)TnbLib\Geo\module;$(ProjectDir)TnbLib\Geo\Serialization;$(ProjectDir)TnbLib\Geo\Triangulation\2d\std;$(ProjectDir)TnbLib\Geo\Triangulation\2d\cdt;$(ProjectDir)TnbLib\Mesh\Curve\OptmPoint\Correction\Info;$(ProjectDir)TnbLib\Mesh\Curve\OptmPoint\Correction;$(ProjectDir)TnbLib\Mesh\Curve\OptmPoint\Newton\Function;$(ProjectDir)TnbLib\Mesh\Curve\OptmPoint\Newton\Derivation;$(ProjectDir)TnbLib\Mesh\Curve\OptmPoint\Newton;$(ProjectDir)TnbLib\Mesh\Curve\Length\Function;$(ProjectDir)TnbLib\Mesh\Curve\Length;$(ProjectDir)TnbLib\Mesh\Curve\Entity;$(ProjectDir)TnbLib\IO\TecPlot;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CGAL_HEADER_ONLY;TnbGeo_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -442,6 +482,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_ToolsIntersections.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools_cgal.cxx" />
+    <ClCompile Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Geo2d_TopoChainAnalysis.cxx" />
     <ClCompile Include="TnbLib\Geo\TopoAnalysis\Chain\Geo_TopoChainAnalysis.cxx" />
     <ClCompile Include="TnbLib\Geo\Triangulation\2d\cdt\Geo2d_CdtDelTri.cxx" />
     <ClCompile Include="TnbLib\Geo\Triangulation\2d\std\Geo2d_DelTri.cxx" />
