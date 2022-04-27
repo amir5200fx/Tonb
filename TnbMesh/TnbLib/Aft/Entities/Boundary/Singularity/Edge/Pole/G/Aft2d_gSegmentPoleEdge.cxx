@@ -1,0 +1,90 @@
+#include <Aft2d_gSegmentPoleEdge.hxx>
+
+#include <Aft2d_gCornerPoleNode.hxx>
+#include <Aft2d_gSegmentPoleNode.hxx>
+#include <Aft2d_gPlnCurveSurface.hxx>
+#include <Entity2d_Polygon.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
+template<>
+void tnbLib::Aft2d_gSegmentPoleEdge::SingularityContraction
+(
+	const Geo2d_MetricPrcsrAnIso& thePrcsr
+)
+{
+	if (auto n = std::dynamic_pointer_cast<Aft2d_gCornerPoleNode>(this->Node0()))
+	{
+		n->RemoveThis(thePrcsr);
+	}
+	else if (auto n = std::dynamic_pointer_cast<Aft2d_gCornerPoleNode>(this->Node1()))
+	{
+		n->RemoveThis(thePrcsr);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no corner node has been found!" << endl
+			<< abort(FatalError);
+	}
+}
+
+template<>
+std::vector<std::shared_ptr<tnbLib::Aft2d_gSegmentEdge>>
+tnbLib::Aft2d_gSegmentPoleEdge::GetTopology
+(
+	const Entity2d_Polygon& thePoly,
+	const std::shared_ptr<Aft2d_gPlnCurveSurface>& theCurve
+)
+{
+	static const Standard_Integer nbPts = 3;
+	static const Standard_Integer nbEdges = nbPts - 1;
+	static const Standard_Integer midPtId = 1;
+
+	const auto& pts = thePoly.Points();
+	if (pts.size() NOT_EQUAL nbPts)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid chain has been detected" << endl
+			<< abort(FatalError);
+	}
+
+	auto n0 = std::make_shared<Aft2d_gCornerPoleNode>(1, pts.at(0));
+	Debug_Null_Pointer(n0);
+
+	n0->InsertToCurves(theCurve->Index(), theCurve);
+
+	auto n1 = std::make_shared<Aft2d_gSegmentPoleNode>(2, pts.at(1));
+	Debug_Null_Pointer(n1);
+
+	n1->SetCurve(theCurve);
+	// fix the middle node [4/26/2022 Amir]
+	n1->IsFixedRef() = Standard_True;
+
+	auto n2 = std::make_shared<Aft2d_gCornerPoleNode>(3, pts.at(2));
+	Debug_Null_Pointer(n2);
+
+	n2->InsertToCurves(theCurve->Index(), theCurve);
+
+	std::vector<std::shared_ptr<Aft2d_gSegmentEdge>> edges;
+	edges.reserve(nbEdges);
+
+	{// create the first edge [4/26/2022 Amir]
+		auto edge = std::make_shared<Aft2d_gSegmentPoleEdge>(1, n0, n1);
+		Debug_Null_Pointer(edge);
+
+		edge->SetCurve(theCurve);
+
+		edges.push_back(std::move(edge));
+	}
+
+	{// create the second edge [4/26/2022 Amir]
+		auto edge = std::make_shared<Aft2d_gSegmentPoleEdge>(2, n1, n2);
+		Debug_Null_Pointer(edge);
+
+		edge->SetCurve(theCurve);
+
+		edges.push_back(std::move(edge));
+	}
+	return std::move(edges);
+}
