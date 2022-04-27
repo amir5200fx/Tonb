@@ -118,6 +118,8 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
+		TnbCad_EXPORT void Reverse();
+
 		static TnbCad_EXPORT std::pair<std::shared_ptr<GModel_ParaCurve>, std::shared_ptr<GModel_ParaCurve>> 
 			Split
 			(

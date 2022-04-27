@@ -6,6 +6,7 @@
 #include <Mesh_Module.hxx>
 #include <Mesh_PlnCurve_Base.hxx>
 #include <Mesh_PlnCurve_Traits.hxx>
+#include <Geo_MetricPrcsr.hxx>
 #include <Entity_Polygon.hxx>
 
 #include <Standard_Handle.hxx>
@@ -22,8 +23,12 @@ namespace tnbLib
 		, public Global_Indexed
 	{
 
+	public:
+
 		typedef Geo_MetricPrcsr<SizeFun, MetricFun> metricMap;
 		typedef typename Mesh_PlnCurve_Traits<CurveType>::ptType Point;
+
+	private:
 
 		/*Private Data*/
 
@@ -82,6 +87,11 @@ namespace tnbLib
 		{}
 
 
+		// virtual functions and operators [4/25/2022 Amir]
+
+		virtual Standard_Boolean IsSingular() const;
+		virtual void OrientWith(const std::shared_ptr<Mesh_PlnCurve>&);
+
 		//- public functions and operators
 
 		Handle(geomType) Geometry() const;
@@ -90,7 +100,26 @@ namespace tnbLib
 		Standard_Real LastParameter() const;
 
 		Pnt2d Value(const Standard_Real) const;
+		Pnt2d FirstCoord() const;
+		Pnt2d LastCoord() const;
 
+		virtual Standard_Real 
+			CalcCharLength
+			(
+				const Pnt2d&, 
+				const Pnt2d&, 
+				const std::shared_ptr<metricMap>&
+			) const;
+
+		virtual Pnt2d 
+			CalcCentre
+			(
+				const Pnt2d&, 
+				const Pnt2d&, 
+				const std::shared_ptr<metricMap>&
+			) const;
+
+		std::pair<Pnt2d, Pnt2d> BoundCoords() const;
 		std::pair<Standard_Real, Standard_Real> Bounds() const;
 
 		const auto& Curve() const
@@ -124,6 +153,8 @@ namespace tnbLib
 		{
 			theMesh_ = std::move(theMesh);
 		}
+
+		void Reverse();
 
 		//- static functions
 

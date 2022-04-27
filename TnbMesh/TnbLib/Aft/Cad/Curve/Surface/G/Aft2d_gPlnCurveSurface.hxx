@@ -9,7 +9,7 @@
 //#include <Geo2d_MetricFunction.hxx>
 #include <Aft2d_gPlnCurveSurfaceFwd.hxx>
 #include <Aft2d_gSegmentEdgeFwd.hxx>
-#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
 
 namespace tnbLib
 {
@@ -25,6 +25,9 @@ namespace tnbLib
 
 	template<>
 	TnbMesh_EXPORT Pnt2d Aft2d_gPlnCurveSurface::Value(const Standard_Real) const;
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_gPlnCurveSurface::Reverse();
 
 	template<>
 	template<>

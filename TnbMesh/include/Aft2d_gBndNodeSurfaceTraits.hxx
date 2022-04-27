@@ -5,6 +5,7 @@
 #include <Aft2d_BndNodeSurfaceTraits.hxx>
 #include <Geo2d_SizeFunction.hxx>
 #include <Geo2d_MetricFunction.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 
 namespace tnbLib
 {
@@ -21,6 +22,7 @@ namespace tnbLib
 
 		typedef Mesh_PlnCurve<GModel_ParaCurve, Geo2d_SizeFunction, Geo2d_MetricFunction> curveType;
 		typedef void surfType;
+		typedef Geo2d_MetricPrcsrAnIso metricPrcsr;
 	};
 }
 

@@ -65,8 +65,8 @@ tnbLib::Aft2d_PlnCurve::TopoMesh<tnbLib::Aft2d_SegmentEdge>
 		const auto& P0 = x->Node0()->Coord();
 		const auto& P1 = x->Node1()->Coord();
 
-		x->SetCharLength(sizeMap.CalcDistance(P0, P1));
-		x->SetCentre(sizeMap.CalcCentre(P0, P1));
+		x->SetCharLength(theCurve->CalcCharLength(P0, P1, theMap));
+		x->SetCentre(theCurve->CalcCentre(P0, P1, theMap));
 	}
 	return std::move(edges);
 }

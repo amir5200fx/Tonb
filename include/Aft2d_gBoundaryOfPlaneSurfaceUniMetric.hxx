@@ -11,4 +11,18 @@
 #include <Aft2d_BoundaryOfPlaneAnIso_Info.hxx>
 #include <Aft2d_gBoundaryOfPlaneSurfaceUniMetricFwd.hxx>
 
+#ifdef _DEBUG
+namespace tnbLib
+{
+	template<>
+	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies();
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront();
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurfaceUniMetric::Perform();
+}
+#endif // _DEBUG
+
 #endif // !_Aft2d_gBoundaryOfPlaneSurfaceUniMetric_Header

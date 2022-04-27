@@ -41,6 +41,13 @@ tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::Value(const Standard_Real x) const
 }
 
 template<>
+void tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::Reverse()
+{
+	Debug_Null_Pointer(Curve());
+	Curve()->Reverse();
+}
+
+template<>
 template<>
 std::vector<std::shared_ptr<tnbLib::Aft2d_gSegmentEdgeUniMetric>>
 tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::TopoMesh<tnbLib::Aft2d_gSegmentEdgeUniMetric>
@@ -67,8 +74,8 @@ tnbLib::Aft2d_gPlnCurveSurfaceUniMetric::TopoMesh<tnbLib::Aft2d_gSegmentEdgeUniM
 		const auto& P0 = x->Node0()->Coord();
 		const auto& P1 = x->Node1()->Coord();
 
-		x->SetCharLength(sizeMap.CalcDistance(P0, P1));
-		x->SetCentre(sizeMap.CalcCentre(P0, P1));
+		x->SetCharLength(theCurve->CalcCharLength(P0, P1, theMap));
+		x->SetCentre(theCurve->CalcCentre(P0, P1, theMap));
 	}
 	return std::move(edges);
 }

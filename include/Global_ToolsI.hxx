@@ -161,4 +161,21 @@ namespace tnbLib
 
 		return LinearInterpolate(x0, x1, y0, y1, x);
 	}
+
+	template<class Type, class UpType>
+	inline std::vector<std::shared_ptr<UpType>> 
+		Global_Tools::UpCast
+		(
+			const std::vector<std::shared_ptr<Type>>& theList
+		)
+	{
+		std::vector<std::shared_ptr<UpType>> l;
+		l.reserve(theList.size());
+		for (const auto& x : theList)
+		{
+			std::shared_ptr<UpType> up = x;
+			l.push_back(std::move(up));
+		}
+		return std::move(l);
+	}
 }

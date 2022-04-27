@@ -101,3 +101,8 @@ tnbLib::TModel_ParaCurve::CalcBoundingBox() const
 	Entity2d_Box box(Pnt2d(Xmin, Ymin), Pnt2d(Xmax, Ymax));
 	return std::move(box);
 }
+
+void tnbLib::TModel_ParaCurve::Reverse()
+{
+	Geometry()->Reverse();
+}

@@ -118,6 +118,63 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::SubCurv
 }
 
 template<>
+std::vector<std::shared_ptr<tnbLib::Aft2d_gPlnWireSurface>>
+tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::ModifyWires
+(
+	const std::vector<std::shared_ptr<Aft2d_gPlnWireSurface>>& theWires,
+	const std::map<std::shared_ptr<curveType>, std::shared_ptr<std::list<Standard_Real>>>& theSubMap,
+	const Standard_Real theTol
+)
+{
+	std::vector<std::shared_ptr<wireType>> mWires;
+	for (const auto& wire : theWires)
+	{
+		Debug_Null_Pointer(wire);
+
+		std::vector<std::shared_ptr<curveType>> curves;
+		for (const auto& x : wire->Curves())
+		{
+			Debug_Null_Pointer(x);
+			const auto iter = theSubMap.find(x);
+			if (iter IS_EQUAL theSubMap.end())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the curve is not found!" << endl
+					<< abort(FatalError);
+			}
+
+			Debug_Null_Pointer(iter->second);
+			auto& l = *iter->second;
+
+			if (l.empty())
+			{
+				curves.push_back(x);
+			}
+			else
+			{
+				if (l.size() > 2)
+				{
+					l.sort();
+				}
+
+				auto subCurves = SubCurves(x, l, theTol);
+				for (auto& sub : subCurves)
+				{
+					Debug_Null_Pointer(sub);
+					curves.push_back(std::move(sub));
+				}
+			}
+		}
+
+		auto newWire =
+			std::make_shared<wireType>(wire->Index(), wire->Name(), std::move(curves));
+		Debug_Null_Pointer(newWire);
+		mWires.push_back(std::move(newWire));
+	}
+	return std::move(mWires);
+}
+
+template<>
 std::list<std::shared_ptr<tnbLib::Cad_gSubdivideHorizon>> 
 tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::CalcParts
 (

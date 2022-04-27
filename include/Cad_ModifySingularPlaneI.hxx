@@ -42,6 +42,13 @@ tnbLib::Cad_ModifySingularPlane<SurfType>::GetWire
 		}
 		curves.push_back(iter->second);
 	}
+	parWireType::OrientSingularCurves(curves);
+	Standard_Integer k = 0;
+	for (const auto& x : curves)
+	{
+		Debug_Null_Pointer(x);
+		x->SetIndex(++k);
+	}
 	auto wire = std::make_shared<parWireType>(std::move(curves));
 	return std::move(wire);
 }

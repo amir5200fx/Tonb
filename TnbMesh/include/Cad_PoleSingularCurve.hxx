@@ -3,7 +3,7 @@
 #define _Cad_PoleSingularCurve_Header
 
 #include <Cad_SingularCurve.hxx>
-#include <Pnt2d.hxx>
+#include <Entity2d_Polygon.hxx>
 
 namespace tnbLib
 {
@@ -16,6 +16,7 @@ namespace tnbLib
 	public:
 
 		typedef typename cad_singular_curve_traits<CurveType>::baseCurveType baseCurveType;
+		using typename Cad_SingularCurve<CurveType>::metricMap;
 
 	private:
 
@@ -76,6 +77,29 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		Standard_Real 
+			CalcCharLength
+			(
+				const Pnt2d&, 
+				const Pnt2d&, 
+				const std::shared_ptr<metricMap>&
+			) const override;
+
+		Pnt2d 
+			CalcCentre
+			(
+				const Pnt2d&, 
+				const Pnt2d&, 
+				const std::shared_ptr<metricMap>&
+			) const override;
+
+		std::shared_ptr<Entity2d_Polygon>
+			Mesh
+			(
+				const std::shared_ptr<metricMap>& theMetricMap,
+				const std::shared_ptr<Mesh_Curve_Info>& theInfo
+			) const override;
+
 		void CalcSubcurves() const override;
 
 		// public functions and operators [12/31/2021 Amir]
@@ -94,6 +118,17 @@ namespace tnbLib
 		{
 			theMid_ = std::move(theCoord);
 		}
+
+
+		// static functions and operators [4/26/2022 Amir]
+		template<class EdgeType, class PlnCurve>
+		static std::vector<std::shared_ptr<EdgeType>> TopoMesh
+		(
+			const std::shared_ptr<PlnCurve>& theCurve,
+			const std::shared_ptr<metricMap>& theMetricMap,
+			const std::shared_ptr<Mesh_Curve_Info>& theInfo
+		);
+
 	};
 }
 

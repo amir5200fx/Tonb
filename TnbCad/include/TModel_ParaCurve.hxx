@@ -83,6 +83,8 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
+		TnbCad_EXPORT void Reverse();
+
 		//- IO functions and operators
 
 		//void ExportToPlt(OFstream& File) const;

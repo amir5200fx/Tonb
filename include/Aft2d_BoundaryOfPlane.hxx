@@ -4,7 +4,7 @@
 
 #include <Aft_BoundaryOfPlane.hxx>
 #include <Aft2d_BoundaryOfPlaneFwd.hxx>
-#include <Geo2d_MetricPrcsrFwd.hxx>
+#include <Geo2d_MetricPrcsr.hxx>
 
 namespace tnbLib
 {

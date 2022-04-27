@@ -35,3 +35,10 @@ tnbLib::Pnt2d tnbLib::Mesh2d_PlnCurveUniMetric::Value(const Standard_Real x) con
 	auto pt = Curve()->Value(x);
 	return std::move(pt);
 }
+
+template<>
+void tnbLib::Mesh2d_PlnCurveUniMetric::Reverse()
+{
+	Debug_Null_Pointer(Curve());
+	Curve()->Reverse();
+}

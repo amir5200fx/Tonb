@@ -38,6 +38,15 @@ namespace tnbLib
 		);
 
 	template<>
+	TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_gPlnWireSurface>> 
+		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::ModifyWires
+		(
+			const std::vector<std::shared_ptr<Aft2d_gPlnWireSurface>>& theWires, 
+			const std::map<std::shared_ptr<curveType>, std::shared_ptr<std::list<Standard_Real>>>& theSubMap, 
+			const Standard_Real theTol
+		);
+
+	template<>
 	TnbMesh_EXPORT std::list<std::shared_ptr<Cad_gSubdivideHorizon>> 
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::CalcParts
 		(

@@ -35,13 +35,12 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::SubCurves
 	curves.push_back(std::move(curve));
 	return std::move(curves);
 }
-#endif // !_DEBUG
 
 template<class SurfPlnType>
-inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::wireType>> 
+inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::wireType>>
 tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyWires
 (
-	const std::vector<std::shared_ptr<wireType>>& theWires, 
+	const std::vector<std::shared_ptr<wireType>>& theWires,
 	const std::map<std::shared_ptr<curveType>, std::shared_ptr<std::list<Standard_Real>>>& theSubMap,
 	const Standard_Real theTol
 )
@@ -86,7 +85,7 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyWires
 			}
 		}
 
-		auto newWire = 
+		auto newWire =
 			std::make_shared<wireType>(wire->Index(), wire->Name(), std::move(curves));
 		Debug_Null_Pointer(newWire);
 		mWires.push_back(std::move(newWire));
@@ -94,7 +93,6 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyWires
 	return std::move(mWires);
 }
 
-#ifndef _DEBUG
 template<class SurfPlnType>
 inline std::vector<std::shared_ptr<typename tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::curveType>>
 tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyHorizons

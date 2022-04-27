@@ -9,6 +9,7 @@
 #include <Aft2d_RegionPlane.hxx>
 #include <Aft_Tools.hxx>
 #include <Geo2d_MetricPrcsr.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

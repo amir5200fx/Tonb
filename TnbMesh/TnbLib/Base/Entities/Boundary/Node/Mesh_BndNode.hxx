@@ -79,7 +79,15 @@ namespace tnbLib
 
 		//- public functions and operators
 
+		virtual Standard_Boolean IsSegment() const
+		{
+			return Standard_False;
+		}
 
+		virtual Standard_Boolean IsCorner() const
+		{
+			return Standard_False;
+		}
 	};
 }
 

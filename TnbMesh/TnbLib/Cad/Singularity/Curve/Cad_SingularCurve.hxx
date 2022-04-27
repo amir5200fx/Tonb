@@ -6,6 +6,7 @@
 #include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
 #include <Cad_SingularCurveTraits.hxx>
+#include <Entity2d_Polygon.hxx>
 
 class Geom2d_Curve;
 class Geom_Curve;
@@ -18,6 +19,10 @@ namespace tnbLib
 
 	// Forward Declarations [4/18/2022 Amir]
 	class Geo_ApprxCurve_Info;
+	class Mesh_Curve_Info;
+
+	template<class SizeFun, class MetricFun>
+	class Geo_MetricPrcsr;
 
 	class Cad_SingularCurveBase
 	{
@@ -60,6 +65,8 @@ namespace tnbLib
 		//typedef typename CurveType::geomType geomType;
 		typedef typename cad_singular_curve_traits<CurveType>::baseCurveType baseCurveType;
 
+		using typename CurveType::metricMap;
+
 	private:
 
 		/*Private Data*/
@@ -96,6 +103,13 @@ namespace tnbLib
 	public:
 
 		
+		// override functions and operators [4/25/2022 Amir]
+
+		Standard_Boolean IsSingular() const override;
+
+		
+
+		void OrientWith(const std::shared_ptr<CurveType>&) override;
 
 		// public functions and operators [12/31/2021 Amir]
 
@@ -119,6 +133,8 @@ namespace tnbLib
 
 	};
 }
+
+#include <Cad_SingularCurveI.hxx>
 
 #endif // !_Cad_SingularCurve_Header
 

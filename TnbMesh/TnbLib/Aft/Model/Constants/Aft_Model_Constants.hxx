@@ -12,10 +12,10 @@ namespace tnbLib
 
 	struct Aft_Model_Constants
 	{
-		static TnbMesh_EXPORT const Standard_Integer ALLOWED_MAX_LEVEL_GENERATION;
+		static TnbMesh_EXPORT Standard_Integer ALLOWED_MAX_LEVEL_GENERATION;
 
-		static TnbMesh_EXPORT const Standard_Real DEFAULT_LOCALFRONT_FACTOR;
-		static TnbMesh_EXPORT const Standard_Real DEFAULT_MIN_DISTANCE_FACTOR;
+		static TnbMesh_EXPORT Standard_Real DEFAULT_LOCALFRONT_FACTOR;
+		static TnbMesh_EXPORT Standard_Real DEFAULT_MIN_DISTANCE_FACTOR;
 
 	private:
 

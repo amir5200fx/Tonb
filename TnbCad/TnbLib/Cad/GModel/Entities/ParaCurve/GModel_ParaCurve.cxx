@@ -161,6 +161,11 @@ tnbLib::GModel_ParaCurve::CalcBoundingBox() const
 	return std::move(box);
 }
 
+void tnbLib::GModel_ParaCurve::Reverse()
+{
+	Geometry()->Reverse();
+}
+
 std::pair
 <
 	std::shared_ptr<tnbLib::GModel_ParaCurve>,

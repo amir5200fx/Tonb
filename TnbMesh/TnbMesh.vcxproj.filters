@@ -1675,6 +1675,51 @@
     <Filter Include="TnbLib\Cad\Singularity\Topology\T">
       <UniqueIdentifier>{18c5aaca-4cb0-4723-8c94-30b456dc4ba9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity">
+      <UniqueIdentifier>{21358642-ac88-40a8-b3e2-016519c55f10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Node">
+      <UniqueIdentifier>{4023cc1b-6b27-4be4-b259-9bc46ddca3ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge">
+      <UniqueIdentifier>{68e93698-db83-4263-9c3f-9cbe528c346f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole">
+      <UniqueIdentifier>{d227fc88-c1c3-4979-92c1-319e4abbb4c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line">
+      <UniqueIdentifier>{e2620fe8-c7e4-479c-85ee-36753e5af5af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole">
+      <UniqueIdentifier>{7e38ea04-135c-4352-9081-baab2546e846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line">
+      <UniqueIdentifier>{a258c6c7-f0a7-4c50-89af-67907b92f9ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G">
+      <UniqueIdentifier>{770cfc1d-fb16-4a63-b1b8-19eff7ad4a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T">
+      <UniqueIdentifier>{1ef30893-076f-45c8-8e69-b007653783f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G">
+      <UniqueIdentifier>{a4574d82-3cfa-4a0a-8b0b-4b9514ba810f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T">
+      <UniqueIdentifier>{2698a622-40ee-421a-a6da-3c8d6c852a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G">
+      <UniqueIdentifier>{2d1e20df-27c7-4b16-a49e-face6edf507d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\T">
+      <UniqueIdentifier>{9941308a-6672-4ae6-a4d5-10ce1043adc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\G">
+      <UniqueIdentifier>{80261cfe-a88d-43a4-9742-733cd5bbd7a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T">
+      <UniqueIdentifier>{eb4c90b1-cd74-4c29-95f7-5fc7303432da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4029,6 +4074,114 @@
     <ClInclude Include="TnbLib\Cad\Singularity\Topology\G\Cad_gSingularityTopologyFwd.hxx">
       <Filter>TnbLib\Cad\Singularity\Topology\G</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Singularity\Curve\Cad_SingularCurveI.hxx">
+      <Filter>TnbLib\Cad\Singularity\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Aft2d_SingularNodeTemplate.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\Aft2d_PoleNodeTemplate.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\Aft2d_PoleNodeTemplateI.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G\Aft2d_gCornerPoleNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G\Aft2d_gCornerPoleNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G\Aft2d_gSegmentPoleNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G\Aft2d_gSegmentPoleNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T\Aft2d_tCornerPoleNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T\Aft2d_tCornerPoleNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T\Aft2d_tSegmentPoleNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T\Aft2d_tSegmentPoleNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\Aft2d_LineNodeTemplate.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\Aft2d_LineNodeTemplateI.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G\Aft2d_gCornerLineNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G\Aft2d_gCornerLineNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G\Aft2d_gSegmentLineNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G\Aft2d_gSegmentLineNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T\Aft2d_tCornerLineNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T\Aft2d_tCornerLineNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T\Aft2d_tSegmentLineNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T\Aft2d_tSegmentLineNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Aft2d_SingularEdgeTemplate.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\Aft2d_PoleEdgeTemplate.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\Aft2d_PoleEdgeTemplateI.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\Aft2d_LineEdgeTemplate.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\Aft2d_LineEdgeTemplateI.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G\Aft2d_gSegmentPoleEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G\Aft2d_gSegmentPoleEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\T\Aft2d_tSegmentPoleEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\T\Aft2d_tSegmentPoleEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\G\Aft2d_gSegmentLineEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\G\Aft2d_gSegmentLineEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T\Aft2d_tSegmentLineEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T\Aft2d_tSegmentLineEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Aft2d_SingularNodeTemplateI.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5164,6 +5317,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Singularity\Topology\G\Cad_gSingularityTopology.cxx">
       <Filter>TnbLib\Cad\Singularity\Topology\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\Aft2d_PoleNodeTemplate.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Line\Aft2d_LineNodeTemplate.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\Aft2d_PoleEdgeTemplate.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\Aft2d_LineEdgeTemplate.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G\Aft2d_gCornerPoleNode.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Curve\Pole\G\Cad_gPoleSingularCurve.cxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G\Aft2d_gSegmentPoleEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

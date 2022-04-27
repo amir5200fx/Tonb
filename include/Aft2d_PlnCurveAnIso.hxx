@@ -4,7 +4,7 @@
 
 #include <Mesh2d_PlnCurveAnIso.hxx>
 #include <Aft2d_PlnCurveAnIsoFwd.hxx>
-#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <Aft2d_SegmentEdgeAnIsoFwd.hxx>
 
 namespace tnbLib

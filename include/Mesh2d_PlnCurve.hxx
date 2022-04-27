@@ -4,6 +4,7 @@
 
 #include <Mesh_PlnCurve.hxx>
 #include <Mesh2d_PlnCurveFwd.hxx>
+#include <Geo2d_MetricPrcsr.hxx>
 
 namespace tnbLib
 {
@@ -19,6 +20,9 @@ namespace tnbLib
 
 	template<>
 	TnbMesh_EXPORT Pnt2d Mesh2d_PlnCurve::Value(const Standard_Real) const;
+
+	template<>
+	TnbMesh_EXPORT void Mesh2d_PlnCurve::Reverse();
 
 	template<>
 	template<>

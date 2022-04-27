@@ -152,6 +152,8 @@ namespace tnbLib
 
 		//Pln_EntityType Type() const override;
 
+		TnbCad2d_EXPORT void Reverse();
+
 		TnbCad2d_EXPORT void Transform(const gp_Trsf2d& t);
 
 		TnbCad2d_EXPORT void Interpolation

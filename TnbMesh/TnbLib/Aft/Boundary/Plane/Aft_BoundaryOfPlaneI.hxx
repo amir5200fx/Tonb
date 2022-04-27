@@ -6,6 +6,9 @@
 
 namespace tnbLib
 {
+	
+
+#ifndef _DEBUG
 	template<class RegionType, class SizeFun, class MetricFun>
 	inline void Aft_BoundaryOfPlane<RegionType, SizeFun, MetricFun>::RemoveDegeneracies()
 	{
@@ -17,7 +20,7 @@ namespace tnbLib
 		for (const auto& x : boundaries)
 		{
 			Debug_Null_Pointer(x);
-			if (NOT x->IsPoleSingular())
+			if (x->CharLength() > 0)
 			{
 				modified.push_back(x);
 			}
@@ -268,7 +271,7 @@ namespace tnbLib
 			{
 				base::SetNbPtsCheck(Standard_True);
 				Checked = Standard_True;
-				
+
 				if (verbose)
 				{
 					tnbLib::Info << " NO!" << endl;
@@ -291,7 +294,7 @@ namespace tnbLib
 			{
 				base::SetSimpleCheck(Standard_True);
 				Checked = Standard_True;
-				
+
 				if (verbose)
 				{
 					tnbLib::Info << " NO!" << endl;
@@ -414,6 +417,8 @@ namespace tnbLib
 				<< "****** End of the Meshing the boundaries ******" << endl << endl;
 		}
 	}
+#endif // !_DEBUG
+
 }
 
 namespace tnbLib

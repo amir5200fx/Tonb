@@ -4,7 +4,7 @@
 
 #include <Mesh2d_PlnCurveUniMetric.hxx>
 #include <Aft2d_PlnCurveUniMetricFwd.hxx>
-#include <Geo2d_MetricPrcsrUniMetricFwd.hxx>
+#include <Geo2d_MetricPrcsrUniMetric.hxx>
 #include <Aft2d_SegmentEdgeUniMetricFwd.hxx>
 
 namespace tnbLib

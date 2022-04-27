@@ -4,7 +4,7 @@
 
 #include <Mesh2d_PlnCurve.hxx>
 #include <Aft2d_PlnCurveFwd.hxx>
-#include <Geo2d_MetricPrcsrFwd.hxx>
+#include <Geo2d_MetricPrcsr.hxx>
 #include <Aft2d_SegmentEdgeFwd.hxx>
 
 

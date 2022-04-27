@@ -32,3 +32,10 @@ tnbLib::Pnt2d tnbLib::Mesh2d_PlnCurve::Value(const Standard_Real x) const
 	auto pt = Curve()->Value(x);
 	return std::move(pt);
 }
+
+template<>
+void tnbLib::Mesh2d_PlnCurve::Reverse()
+{
+	Debug_Null_Pointer(Curve());
+	Curve()->Reverse();
+}

@@ -256,6 +256,11 @@ tnbLib::Pln_Curve::Copy() const
 //	return Pln_EntityType::CURVE;
 //}
 
+void tnbLib::Pln_Curve::Reverse()
+{
+	Geometry()->Reverse();
+}
+
 void tnbLib::Pln_Curve::Transform
 (
 	const gp_Trsf2d & t

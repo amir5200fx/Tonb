@@ -15,7 +15,7 @@ tnbLib::GeoMetricFun2d_ExactSurface::Value
 	gp_Vec D1U, D1V;
 	gp_Pnt Pt;
 
-	Geometry()->D1(0, 0, Pt, D1U, D1V);
+	Geometry()->D1(theCoord.X(), theCoord.Y(), Pt, D1U, D1V);
 
 	Standard_Real A = D1U.Dot(D1U);
 	Standard_Real B = D1U.Dot(D1V);

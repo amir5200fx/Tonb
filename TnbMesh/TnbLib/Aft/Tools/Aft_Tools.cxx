@@ -85,15 +85,15 @@ tnbLib::Aft_Tools::RetrieveNodes
 	return std::move(nodes);
 }
 
-//std::vector<std::shared_ptr<tnbLib::Aft2d_NodeSurface>>
-//tnbLib::Aft_Tools::RetrieveNodes
-//(
-//	const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theEdges
-//)
-//{
-//	auto nodes = Aft2d_EdgeSurface::RetrieveNodes(theEdges);
-//	return std::move(nodes);
-//}
+std::vector<std::shared_ptr<tnbLib::Aft2d_NodeSurface>>
+tnbLib::Aft_Tools::RetrieveNodes
+(
+	const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theEdges
+)
+{
+	auto nodes = Aft2d_EdgeSurface::RetrieveNodes(theEdges);
+	return std::move(nodes);
+}
 
 std::vector<std::shared_ptr<tnbLib::Aft2d_Node>>
 tnbLib::Aft_Tools::RetrieveNodes

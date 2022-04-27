@@ -117,6 +117,10 @@ namespace tnbLib
 				const std::vector<Standard_Real>& theSorted,
 				const char* theName
 			);
+
+		template<class Type, class UpType>
+		static std::vector<std::shared_ptr<UpType>> 
+			UpCast(const std::vector<std::shared_ptr<Type>>&);
 	};
 }
 

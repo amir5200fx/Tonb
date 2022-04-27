@@ -28,6 +28,7 @@ namespace tnbLib
 		typedef Mesh_BndEdge<typename TBndEdgeTraits::bndEdgeTraits> bndEdgeType;
 		typedef TBndEdgeTraits traitsType;
 		typedef typename TBndEdgeTraits::metricPrcsr metricPrcsr;
+		typedef typename TBndEdgeTraits::curveType curveType;
 
 		typedef Mesh_BndEdgeAdaptor
 			<

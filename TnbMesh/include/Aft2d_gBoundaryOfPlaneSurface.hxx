@@ -10,5 +10,21 @@
 #include <Aft2d_gPlnWireSurface.hxx>
 #include <Aft2d_BoundaryOfPlaneAnIso_Info.hxx>
 #include <Aft2d_gBoundaryOfPlaneSurfaceFwd.hxx>
+#include <Mesh_Module.hxx>
+
+#ifdef _DEBUG
+namespace tnbLib
+{
+	template<>
+	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurface::RemoveDegeneracies();
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurface::UpdateFront();
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurface::Perform();
+}
+#endif // _DEBUG
+
 
 #endif // !_Aft2d_gBoundaryOfPlaneSurface_Header
