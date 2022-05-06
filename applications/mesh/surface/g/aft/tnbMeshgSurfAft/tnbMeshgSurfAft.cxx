@@ -402,7 +402,7 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 
-			std::cout << "nb of horizons: " << horizonAlg->NbHorizons() << std::endl;
+			//std::cout << "nb of horizons: " << horizonAlg->NbHorizons() << std::endl;
 			if (horizonAlg->HasHorizon())
 			{
 				auto regionPln = Aft2d_gRegionPlaneSurface::MakePlane(pln);

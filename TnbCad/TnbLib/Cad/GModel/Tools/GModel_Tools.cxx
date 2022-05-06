@@ -831,13 +831,15 @@ namespace tnbLib
 			auto entity = Geo_Tools::Intersection_cgal(line0, line1);
 			if (NOT entity->IsPoint())
 			{
-				FatalErrorIn(FunctionSIG)
+				auto pm = MEAN(p0, p1);
+				return std::move(pm);
+				/*FatalErrorIn(FunctionSIG)
 					<< "invalid type of geometry has been detected!" << endl
 					<< " - P0 : " << p0 << endl
 					<< " - P1 : " << p1 << endl
 					<< " - t0 : " << d0 << endl
 					<< " - t1 : " << d1 << endl
-					<< abort(FatalError);
+					<< abort(FatalError);*/
 			}
 			auto ptEnt = std::dynamic_pointer_cast<Geo_Tools::PointIntersectEntity2d>(entity);
 			Debug_Null_Pointer(ptEnt);

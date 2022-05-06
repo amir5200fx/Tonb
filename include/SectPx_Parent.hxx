@@ -32,41 +32,47 @@ namespace tnbLib
 
 	protected:
 
-		template<class... _Types>
-		SectPx_Parent(_Types&&... _Args)
-			: SectPx_RegObj(_Args...)
+		// default constructor [4/27/2022 Amir]
+
+		SectPx_Parent()
 		{}
+
+		// constructors [4/27/2022 Amir]
+
+		explicit SectPx_Parent(const Standard_Integer theIndex)
+			: SectPx_RegObj(theIndex)
+		{}
+
+		SectPx_Parent
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		)
+			: SectPx_RegObj(theIndex, theName)
+		{}
+
 
 	public:
 
-		TnbSectPx_EXPORT virtual Standard_Integer NbChildren() const;
-
-		TnbSectPx_EXPORT virtual Standard_Integer NbChildMaps() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsPnt() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsDatum() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsGeoMap() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsFieldFun() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsController() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsCPtsMap() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsCloud() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsExtrProfile() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsLimits() const;
-
-		TnbSectPx_EXPORT virtual Standard_Boolean IsSpacing() const;
+		// override functions and operators [4/27/2022 Amir]
 
 		TnbSectPx_EXPORT Standard_Boolean IsParent() const override;
 
-		TnbSectPx_EXPORT virtual Standard_Boolean HasChildren() const;
+		// public functions and operators [4/27/2022 Amir]
 
+		TnbSectPx_EXPORT virtual Standard_Integer NbChildren() const;
+		TnbSectPx_EXPORT virtual Standard_Integer NbChildMaps() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsPnt() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsDatum() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsGeoMap() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsFieldFun() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsController() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsCPtsMap() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsCloud() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsExtrProfile() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsLimits() const;
+		TnbSectPx_EXPORT virtual Standard_Boolean IsSpacing() const;		
+		TnbSectPx_EXPORT virtual Standard_Boolean HasChildren() const;
 		TnbSectPx_EXPORT virtual Standard_Boolean HasChildMap() const;
 
 		TnbSectPx_EXPORT virtual std::shared_ptr<SectPx_Parent> ChildMap(const Standard_Integer theIndex) const;

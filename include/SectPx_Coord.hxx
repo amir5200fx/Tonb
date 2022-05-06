@@ -27,10 +27,18 @@ namespace tnbLib
 
 	protected:
 
+		// default constructor [4/27/2022 Amir]
+
 		SectPx_Coord()
 		{}
 
+
+		// constructors [4/27/2022 Amir]
+
 	public:
+
+
+		// public functions and operators [4/27/2022 Amir]
 
 		virtual Standard_Real xCoord() const = 0;
 

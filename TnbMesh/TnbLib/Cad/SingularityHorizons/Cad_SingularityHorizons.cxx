@@ -32,8 +32,14 @@ Standard_Integer
 tnbLib::Cad_SingularityHorizons::NbHorizons() const
 {
 	CheckDone((*this));
-	Debug_Null_Pointer(theHorizons_);
-	return Horizons()->NbEdges();
+	if (NOT Horizons())
+	{
+		return 0;
+	}
+	else
+	{
+		return Horizons()->NbEdges();
+	}
 }
 
 namespace tnbLib

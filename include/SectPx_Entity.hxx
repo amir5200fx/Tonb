@@ -34,10 +34,15 @@ namespace tnbLib
 
 	protected:
 
+		// default constructor [4/27/2022 Amir]
+
 		SectPx_Entity()
 		{}
 
-		SectPx_Entity
+
+		// constructors [4/27/2022 Amir]
+
+		explicit SectPx_Entity
 		(
 			const Standard_Integer theIndex
 		)
@@ -55,6 +60,8 @@ namespace tnbLib
 
 	public:
 
+
+		// public functions and operators [4/27/2022 Amir]
 
 		virtual ~SectPx_Entity()
 		{}

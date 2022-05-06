@@ -178,4 +178,28 @@ namespace tnbLib
 		}
 		return std::move(l);
 	}
+
+	template<class T1, class T2>
+	inline std::vector<std::pair<T1, T2>>
+		tnbLib::Global_Tools::ConvertToPairedList
+		(
+			const std::vector<T1>& l1,
+			const std::vector<T2>& l2
+		)
+	{
+		if (l1.size() NOT_EQUAL l2.size())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the lists are not the same size!" << endl
+				<< abort(FatalError);
+		}
+		std::vector<std::pair<T1, T2>> pairedlist;
+		pairedlist.reserve(l1.size());
+		for (size_t i = 0; i < l1.size(); i++)
+		{
+			auto p = std::make_pair(l1.at(i), l2.at(i));
+			pairedlist.push_back(std::move(p));
+		}
+		return std::move(pairedlist);
+	}
 }
