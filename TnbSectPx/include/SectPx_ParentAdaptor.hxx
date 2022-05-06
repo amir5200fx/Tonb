@@ -94,8 +94,14 @@ namespace tnbLib
 
 	protected:
 
+
+		// default constructor [4/27/2022 Amir]
+
 		SectPx_ParentAdaptor()
 		{}
+
+
+		// constructors [4/27/2022 Amir]
 
 		TnbSectPx_EXPORT std::weak_ptr<SectPx_Parent>
 			SelectParent
@@ -115,6 +121,9 @@ namespace tnbLib
 		);
 
 	public:
+
+
+		// public functions and operators [4/27/2022 Amir]
 
 		auto NbParents() const
 		{

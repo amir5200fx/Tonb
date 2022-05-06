@@ -33,14 +33,22 @@ namespace tnbLib
 
 			static TnbSectPx_EXPORT const char* typeName_;
 
+
+			// default constructor [4/27/2022 Amir]
+
 			GeoMap_CoordReader()
 			{}
+
+			// constructors [4/27/2022 Amir]
 
 			TnbSectPx_EXPORT GeoMap_CoordReader
 			(
 				const Standard_Integer theIndex, 
 				const word& theName
 			);
+
+
+			// public functions and operators [4/27/2022 Amir]
 
 			const auto& Coord() const
 			{

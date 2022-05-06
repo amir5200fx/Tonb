@@ -30,12 +30,30 @@ namespace tnbLib
 
 	protected:
 
-		template<class... _Types>
-		SectPx_GeoMap(_Types&&... _Args)
-			: SectPx_Parent(_Args...)
+
+		// default constructor [4/27/2022 Amir]
+
+		SectPx_GeoMap()
+		{}
+
+
+		// constructors [4/27/2022 Amir]
+
+		explicit SectPx_GeoMap(const Standard_Integer theIndex)
+			: SectPx_Parent(theIndex)
+		{}
+
+		SectPx_GeoMap
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		)
+			: SectPx_Parent(theIndex, theName)
 		{}
 
 	public:
+
+		// public functions and operators [4/27/2022 Amir]
 
 		TnbSectPx_EXPORT virtual ~SectPx_GeoMap();
 

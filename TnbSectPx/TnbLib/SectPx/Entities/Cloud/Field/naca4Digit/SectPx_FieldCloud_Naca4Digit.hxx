@@ -34,6 +34,10 @@ namespace tnbLib
 			Standard_Boolean CloseTail_ = Standard_False;
 
 
+			// default constructor [4/27/2022 Amir]
+
+			// constructors [4/27/2022 Amir]
+
 			FieldCloud_Naca4DigitBase
 			(
 				const Standard_Integer nbSegments = DEFAULT_NB_SEGMENTS
@@ -64,6 +68,9 @@ namespace tnbLib
 
 			static const Standard_Integer DEFAULT_NB_SEGMENTS = 25;
 
+
+			// public functions and operators [4/27/2022 Amir]
+
 			const auto& Chord() const
 			{
 				return theChord_;
@@ -90,11 +97,8 @@ namespace tnbLib
 			}
 
 			TnbSectPx_EXPORT void SetChord(const std::shared_ptr<SectPx_Par>& thePar);
-
 			TnbSectPx_EXPORT void SetMaxCamber(const std::shared_ptr<SectPx_Par>& thePar);
-
 			TnbSectPx_EXPORT void SetMaxCamberLoc(const std::shared_ptr<SectPx_Par>& thePar);
-
 			TnbSectPx_EXPORT void SetMaxThickness(const std::shared_ptr<SectPx_Par>& thePar);
 
 			void SetNbSegments(const Standard_Integer nb)
@@ -114,9 +118,7 @@ namespace tnbLib
 			//- override virtual functions from parent abstract class 
 
 			TnbSectPx_EXPORT Standard_Integer NbChildren() const override;
-
 			TnbSectPx_EXPORT Standard_Boolean IsComplete() const override;
-
 			TnbSectPx_EXPORT Standard_Boolean HasChildren() const override;
 
 			TnbSectPx_EXPORT Standard_Boolean HasChild

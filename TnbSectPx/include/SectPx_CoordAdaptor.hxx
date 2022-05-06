@@ -37,6 +37,9 @@ namespace tnbLib
 
 		typedef std::map<Standard_Integer, std::weak_ptr<SectPx_GeoMap>>::const_iterator mapIter;
 
+
+		// public functions and operators [4/27/2022 Amir]
+
 		auto NbGeoMaps() const
 		{
 			return (Standard_Integer)theGeoMaps_.size();

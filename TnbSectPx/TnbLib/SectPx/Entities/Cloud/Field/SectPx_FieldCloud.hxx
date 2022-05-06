@@ -15,6 +15,9 @@ namespace tnbLib
 		/*Private Data*/
 
 
+
+		// private functions and operators [4/27/2022 Amir]
+
 		friend class boost::serialization::access;
 
 		template<class Archive>
@@ -25,14 +28,32 @@ namespace tnbLib
 
 	protected:
 
-		template<class... _Types>
-		SectPx_FieldCloud(_Types&&... _Args)
-			: SectPx_Cloud(_Args...)
+
+		// default constructor [4/27/2022 Amir]
+
+		SectPx_FieldCloud()
 		{}
+
+
+		// constructors [4/27/2022 Amir]
+
+		explicit SectPx_FieldCloud(const Standard_Integer theIndex)
+			: SectPx_Cloud(theIndex)
+		{}
+
+
+		SectPx_FieldCloud
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		)
+			: SectPx_Cloud(theIndex, theName)
+		{}
+
 
 	public:
 
-		
+		// public functions and operators [4/27/2022 Amir]
 		
 	};
 }

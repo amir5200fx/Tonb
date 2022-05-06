@@ -56,23 +56,46 @@ namespace tnbLib
 
 	protected:
 
-		template<class... _Types>
-		SectPx_Cloud(_Types&&... _Args)
-			: SectPx_Parent(_Args...)
+		// default constructor [4/27/2022 Amir]
+
+		SectPx_Cloud()
 		{
 			AllocateMemory();
 		}
+
+		// constructors [4/27/2022 Amir]
+
+		explicit SectPx_Cloud(const Standard_Integer theIndex)
+		{
+			AllocateMemory();
+		}
+
+		SectPx_Cloud
+		(
+			const Standard_Integer theIndex,
+			const word& theName
+		)
+		{
+			AllocateMemory();
+		}
+
+
+		// protected functions and operators [4/27/2022 Amir]
 
 		virtual void Update() const
 		{}
 
 	public:
 
+
+		// override functions and operators [4/27/2022 Amir]
+
 		TnbSectPx_EXPORT Standard_Boolean IsCloud() const override;
-
 		TnbSectPx_EXPORT Standard_Boolean IsFrameRegObj() const override;
-
 		TnbSectPx_EXPORT sectPxLib::regObjType RegObjType() const override;
+
+
+		// public funcctions and operators [4/27/2022 Amir]
 
 		virtual Standard_Boolean IsComplete() const = 0;
 

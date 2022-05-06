@@ -30,16 +30,40 @@ namespace tnbLib
 
 	protected:
 
-		template<class... _Types>
-		SectPx_Child(_Types&&... _Args)
-			: SectPx_RegObj(_Args...)
+
+		// default constructor [4/27/2022 Amir]
+
+		SectPx_Child()
 		{}
+
+
+		// constructors [4/27/2022 Amir]
+
+		explicit SectPx_Child(const Standard_Integer theIndex)
+			: SectPx_RegObj(theIndex)
+		{}
+
+		SectPx_Child
+		(
+			const Standard_Integer theIndex, 
+			const word& theName
+		)
+			: SectPx_RegObj(theIndex, theName)
+		{}
+
 
 	public:
 
-		TnbSectPx_EXPORT Standard_Boolean IsChild() const override;
 
+		// override functions and operators [4/27/2022 Amir]
+
+		TnbSectPx_EXPORT Standard_Boolean IsChild() const override;
 		TnbSectPx_EXPORT Standard_Boolean IsParRegObj() const override;
+
+
+		// public functions and operators [4/27/2022 Amir]
+
+		
 
 	};
 }
