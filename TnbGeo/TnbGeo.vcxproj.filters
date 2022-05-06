@@ -538,6 +538,60 @@
     <Filter Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Node">
       <UniqueIdentifier>{94c927fe-cdc8-4686-8756-d5b05f466623}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil">
+      <UniqueIdentifier>{501425be-6e9b-4fd0-8836-d9f7b0ba68d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\Surface">
+      <UniqueIdentifier>{d6ff9fdc-5f8b-4b3f-adc9-3c2c2068eb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\Surface\Face">
+      <UniqueIdentifier>{8b836efa-8231-4798-9325-061c8d861a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\Surface\Back">
+      <UniqueIdentifier>{51209f77-62da-40b4-8881-9ccc53375be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Propeller">
+      <UniqueIdentifier>{c7eb4c4c-966f-4eaf-a59f-4153d1292066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Propeller\Blade">
+      <UniqueIdentifier>{9c1d1344-de03-44db-aabb-4786d11a4a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Propeller\Blade\ExpandedView">
+      <UniqueIdentifier>{609d6f16-518c-482a-a309-e6ba7a4a5eb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Propeller\Blade\Section">
+      <UniqueIdentifier>{47da2215-2d95-413e-b4a0-f739bb90a073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\2d">
+      <UniqueIdentifier>{bed68d88-4c5c-4d19-b5a0-531ad191e9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\3d">
+      <UniqueIdentifier>{2049b5b9-3a94-4907-8537-485ba9482580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\Surface\Back\2d">
+      <UniqueIdentifier>{fe6832d4-f6cd-4a04-aea2-21afed8d70e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\Surface\Back\3d">
+      <UniqueIdentifier>{e57d9913-001a-4199-b186-35209ce6281b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\Surface\Face\2d">
+      <UniqueIdentifier>{723bd5d9-2c17-4ee4-9c13-418219e26e2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Airfoil\Surface\Face\3d">
+      <UniqueIdentifier>{82dd4d75-9147-41a7-bbef-d69567d0f03a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Propeller\Blade\Section\Wrappred">
+      <UniqueIdentifier>{e2921467-cdd8-4714-b9fe-039ecdbcbed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Propeller\Blade\Section\UnWrapped">
+      <UniqueIdentifier>{ac1048db-dba6-4833-a8a9-56c74b28e989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Propeller\Blade\Views">
+      <UniqueIdentifier>{c2428792-cb07-4398-8999-5d1d499c15ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Interpl\Steffen">
+      <UniqueIdentifier>{a5736a51-ae3f-4480-8835-dc7f2e8021aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1266,6 +1320,78 @@
     <ClInclude Include="TnbLib\Geo\Graph\Geo_GraphI.hxx">
       <Filter>TnbLib\Geo\Graph</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Geo_AirfoilSurface.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Face\Geo_AirfoilFace.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Face</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Back\Geo_AirfoilBack.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Back</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Geo_AirfoilSection.hxx">
+      <Filter>TnbLib\Geo\Airfoil</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Propeller\Blade\ExpandedView\Geo_BladeExpandedView.hxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\ExpandedView</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Propeller\Blade\ExpandedView\Geo_BladeExpandedViewI.hxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\ExpandedView</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Propeller\Blade\Section\Geo_BladeSection.hxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\2d\Geo2d_AirfoilSection.hxx">
+      <Filter>TnbLib\Geo\Airfoil\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\2d\Geo2d_AirfoilSectionFwd.hxx">
+      <Filter>TnbLib\Geo\Airfoil\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\3d\Geo3d_AirfoilSectionFwd.hxx">
+      <Filter>TnbLib\Geo\Airfoil\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\3d\Geo3d_AirfoilSection.hxx">
+      <Filter>TnbLib\Geo\Airfoil\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Back\2d\Geo2d_AirfoilBack.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Back\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Back\2d\Geo2d_AirfoilBackFwd.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Back\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Back\3d\Geo3d_AirfoilBackFwd.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Back\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Back\3d\Geo3d_AirfoilBack.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Back\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Face\2d\Geo2d_AirfoilFace.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Face\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Face\2d\Geo2d_AirfoilFaceFwd.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Face\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Face\3d\Geo3d_AirfoilFace.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Face\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Airfoil\Surface\Face\3d\Geo3d_AirfoilFaceFwd.hxx">
+      <Filter>TnbLib\Geo\Airfoil\Surface\Face\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Propeller\Blade\Section\Wrapped\Geo_WrappedBladeSection.hxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Section\Wrappred</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Propeller\Blade\Section\UnWrapped\Geo_UnWrappedBladeSection.hxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Section\UnWrapped</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Propeller\Blade\Views\Geo_BladeViews.hxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Propeller\Blade\Views\Geo_BladeViewsI.hxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Interpl\Steffen\Geo_SteffenInterplFunction.hxx">
+      <Filter>TnbLib\Geo\Function\Interpl\Steffen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1618,6 +1744,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Geo2d_TopoChainAnalysis.cxx">
       <Filter>TnbLib\Geo\TopoAnalysis\Chain\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Propeller\Blade\Section\Wrapped\Geo_WrappedBladeSectionIO.cxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Section\Wrappred</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Propeller\Blade\Section\UnWrapped\Geo_UnWrappedBladeSectionIO.cxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Section\UnWrapped</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Propeller\Blade\Views\Geo_BladeViewsIO.cxx">
+      <Filter>TnbLib\Geo\Propeller\Blade\Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
