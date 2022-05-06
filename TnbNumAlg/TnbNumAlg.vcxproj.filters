@@ -79,6 +79,12 @@
     <Filter Include="TnbLib\NumAlg\NonLinearSolver\Bisection\Info">
       <UniqueIdentifier>{370419f2-ffeb-4621-acda-46f509fbc53b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\NumAlg\Interpl">
+      <UniqueIdentifier>{72086e54-7fb2-42e9-be57-2f715f841025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Interpl\Steffen">
+      <UniqueIdentifier>{eddfa7bf-91ef-4306-bffd-184c244af932}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
@@ -156,6 +162,12 @@
     <ClInclude Include="TnbLib\NumAlg\NonLinearSolver\Bisection\Info\NumAlg_BisectionSolver_Info.hxx">
       <Filter>TnbLib\NumAlg\NonLinearSolver\Bisection\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Interpl\NumAlg_InterplFunc.hxx">
+      <Filter>TnbLib\NumAlg\Interpl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Interpl\Steffen\NumAlg_SteffenInterplFunc.hxx">
+      <Filter>TnbLib\NumAlg\Interpl\Steffen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">
@@ -190,6 +202,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\NumAlg\NonLinearSolver\Bisection\Info\NumAlg_BisectionSolver_Info.cxx">
       <Filter>TnbLib\NumAlg\NonLinearSolver\Bisection\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Interpl\Steffen\NumAlg_SteffenInterplFunc.cxx">
+      <Filter>TnbLib\NumAlg\Interpl\Steffen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Interpl\NumAlg_InterplFunc.cxx">
+      <Filter>TnbLib\NumAlg\Interpl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
