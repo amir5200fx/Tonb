@@ -121,6 +121,13 @@ namespace tnbLib
 		template<class Type, class UpType>
 		static std::vector<std::shared_ptr<UpType>> 
 			UpCast(const std::vector<std::shared_ptr<Type>>&);
+
+		template<class T1, class T2>
+		static std::vector<std::pair<T1, T2>>
+			ConvertToPairedList
+			(
+				const std::vector<T1>&, const std::vector<T2>&
+			);
 	};
 }
 
