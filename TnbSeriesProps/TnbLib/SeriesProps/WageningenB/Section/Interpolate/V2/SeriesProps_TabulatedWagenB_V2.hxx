@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _SeriesProps_TabulatedWagenB_V1_Header
-#define _SeriesProps_TabulatedWagenB_V1_Header
+#ifndef _SeriesProps_TabulatedWagenB_V2_Header
+#define _SeriesProps_TabulatedWagenB_V2_Header
 
 #include <SeriesProps_TabulatedWagenB.hxx>
 
@@ -10,7 +10,7 @@ namespace tnbLib
 	namespace seriesProps
 	{
 
-		class TabulatedWagenB_V1
+		class TabulatedWagenB_V2
 			: public SeriesProps_TabulatedWagenB
 		{
 
@@ -21,8 +21,8 @@ namespace tnbLib
 			static TnbSeriesProps_EXPORT const Standard_Real maxTabulatedRadius;
 
 			// default constructor [1/12/2022 Amir]
-			
-			TabulatedWagenB_V1()
+
+			TabulatedWagenB_V2()
 			{}
 
 			// constructors [1/12/2022 Amir]
@@ -35,7 +35,7 @@ namespace tnbLib
 				return maxTabulatedRadius;
 			}
 
-			TnbSeriesProps_EXPORT Standard_Real 
+			TnbSeriesProps_EXPORT Standard_Real
 				Value
 				(
 					const Standard_Real rPerR,
@@ -46,8 +46,8 @@ namespace tnbLib
 
 		};
 
-		extern TnbSeriesProps_EXPORT std::shared_ptr<TabulatedWagenB_V1> gl_wagenB_V1_values;
+		extern TnbSeriesProps_EXPORT std::shared_ptr<TabulatedWagenB_V2> gl_wagenB_V2_values;
 	}
 }
 
-#endif // !_SeriesProps_TabulatedWagenB_V1_Header
+#endif // !_SeriesProps_TabulatedWagenB_V2_Header
