@@ -592,6 +592,15 @@
     <Filter Include="TnbLib\Geo\Function\Interpl\Steffen">
       <UniqueIdentifier>{a5736a51-ae3f-4480-8835-dc7f2e8021aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Maker">
+      <UniqueIdentifier>{425e8260-db69-4979-baf1-e3771f5688d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Maker\Propeller">
+      <UniqueIdentifier>{28100ca2-d723-4458-8877-055e99e76be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Maker\Propeller\Blade">
+      <UniqueIdentifier>{1924a60d-8c6e-4c4b-bee6-e45a2eb3c880}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1392,6 +1401,9 @@
     <ClInclude Include="TnbLib\Geo\Function\Interpl\Steffen\Geo_SteffenInterplFunction.hxx">
       <Filter>TnbLib\Geo\Function\Interpl\Steffen</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Maker\Propeller\Blade\Geo_PropBladeMaker.hxx">
+      <Filter>TnbLib\Geo\Maker\Propeller\Blade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1753,6 +1765,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Propeller\Blade\Views\Geo_BladeViewsIO.cxx">
       <Filter>TnbLib\Geo\Propeller\Blade\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Maker\Propeller\Blade\Geo_PropBladeMaker.cxx">
+      <Filter>TnbLib\Geo\Maker\Propeller\Blade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

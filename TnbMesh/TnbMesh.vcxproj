@@ -1387,6 +1387,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Cad\Singularity\Base\Cad_SingularityBase.cxx" />
     <ClCompile Include="TnbLib\Cad\Singularity\Cad_Singularity.cxx" />
     <ClCompile Include="TnbLib\Cad\Singularity\Curve\Cad_SingularCurve.cxx" />
+    <ClCompile Include="TnbLib\Cad\Singularity\Curve\Line\G\Cad_gLineSingularCurve.cxx" />
     <ClCompile Include="TnbLib\Cad\Singularity\Curve\Pole\G\Cad_gPoleSingularCurve.cxx" />
     <ClCompile Include="TnbLib\Cad\Singularity\G\Base\Cad_gSingularityBase.cxx" />
     <ClCompile Include="TnbLib\Cad\Singularity\G\Cad_gSingularity.cxx" />

@@ -64,6 +64,9 @@ namespace tnbLib
 
 		// override functions and operators [4/5/2022 Amir]
 
+		std::pair<std::shared_ptr<CurveType>, std::shared_ptr<CurveType>>
+			Split(const Standard_Real x) const override;
+
 		Standard_Boolean IsLine() const override
 		{
 			return Standard_True;

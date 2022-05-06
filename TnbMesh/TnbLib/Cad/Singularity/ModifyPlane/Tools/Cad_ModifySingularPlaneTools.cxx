@@ -26,7 +26,7 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::Split
 )
 {
 	Debug_Null_Pointer(theCurve);
-	const auto& curve = theCurve->Curve();
+	/*const auto& curve = theCurve->Curve();
 	Debug_Null_Pointer(curve);
 
 	auto[c0, c1] = GModel_ParaCurve::Split(x, curve);
@@ -45,6 +45,8 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::Split
 	auto C0 = std::make_shared<Aft2d_gPlnCurveSurface>(std::move(c0));
 	auto C1 = std::make_shared<Aft2d_gPlnCurveSurface>(std::move(c1));
 	auto t = std::make_pair(std::move(C0), std::move(C1));
+	return std::move(t);*/
+	auto t = theCurve->Split(x);
 	return std::move(t);
 }
 

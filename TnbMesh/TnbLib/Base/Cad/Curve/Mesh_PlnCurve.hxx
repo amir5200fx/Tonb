@@ -92,6 +92,12 @@ namespace tnbLib
 		virtual Standard_Boolean IsSingular() const;
 		virtual void OrientWith(const std::shared_ptr<Mesh_PlnCurve>&);
 
+		virtual std::pair<std::shared_ptr<Mesh_PlnCurve>, std::shared_ptr<Mesh_PlnCurve>> Split(const Standard_Real x) const
+		{
+			NotImplemented;
+			return std::pair<std::shared_ptr<Mesh_PlnCurve>, std::shared_ptr<Mesh_PlnCurve>>();
+		}
+
 		//- public functions and operators
 
 		Handle(geomType) Geometry() const;

@@ -62,6 +62,8 @@
 #include <Geom_Surface.hxx>
 #include <Geom_Plane.hxx>
 
+#include <Cad_gApprxParaPlane.hxx>
+
 namespace tnbLib
 {
 
@@ -402,7 +404,7 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 
-			//std::cout << "nb of horizons: " << horizonAlg->NbHorizons() << std::endl;
+			std::cout << "nb of horizons: " << horizonAlg->NbHorizons() << std::endl;
 			if (horizonAlg->HasHorizon())
 			{
 				auto regionPln = Aft2d_gRegionPlaneSurface::MakePlane(pln);
@@ -425,6 +427,8 @@ namespace tnbLib
 						<< abort(FatalError);
 				}
 
+				std::cout << "nb. of zones: " << zonesAlg->NbZones() << std::endl;
+
 				auto modifyAlg = std::make_shared<Cad_gModifySingularPlane>();
 
 				modifyAlg->LoadColors(std::move(colors));
@@ -444,8 +448,26 @@ namespace tnbLib
 				}
 				std::cout << "the plane has been modified!" << std::endl;
 				const auto& modifiedPlns = modifyAlg->ModifiedPlanes();
+
+				std::cout << "nb. of modified planes: " << modifiedPlns.size() << std::endl;
 				for (const auto& ip : modifiedPlns)
 				{
+					
+					{
+						auto orgPln = Aft2d_gRegionPlaneSurface::MakeOrignPlane<GModel_Plane>(ip);
+
+						auto appxInfo = std::make_shared<Geo_ApprxCurve_Info>();
+						Cad_gApprxParaPlane appxAlg(orgPln, appxInfo);
+						appxAlg.Perform();
+
+						const auto& polys = appxAlg.Polygons();
+						
+						OFstream myFile("plane.plt");
+						for (const auto& x : polys)
+						{
+							x->ExportToPlt(myFile);
+						}
+					}
 					auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurface>(theBndInfo);
 					bnd->LoadMetricProcessor(metricPrcsr);
 					bnd->LoadPlane(ip);

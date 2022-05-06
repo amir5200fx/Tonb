@@ -103,7 +103,10 @@ namespace tnbLib
 				<< "invalid type of wire has been detected!" << endl
 				<< abort(FatalError);
 		}
-		
+		/*for (const auto& x : theWire)
+		{
+			std::cout << "is singular?" << x->IsSingular() << std::endl;
+		}*/
 
 		const auto[b, id] = RetrieveIndicatorCurve(theWire);
 		if (NOT b)

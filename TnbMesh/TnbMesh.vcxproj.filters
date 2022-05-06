@@ -5339,6 +5339,9 @@
     <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G\Aft2d_gSegmentPoleEdge.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\G</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Curve\Line\G\Cad_gLineSingularCurve.cxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line\G</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Aft\Model\Aft2d_Model_Import.jxx">

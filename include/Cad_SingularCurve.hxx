@@ -107,8 +107,6 @@ namespace tnbLib
 
 		Standard_Boolean IsSingular() const override;
 
-		
-
 		void OrientWith(const std::shared_ptr<CurveType>&) override;
 
 		// public functions and operators [12/31/2021 Amir]

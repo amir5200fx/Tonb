@@ -74,6 +74,44 @@ tnbLib::Aft2d_gSegmentEdge::GetTopology
 #include <Aft2d_gCornerPoleNode.hxx>
 #include <Aft2d_gCornerLineNode.hxx>
 
+#ifdef _DEBUG
+#include <Aft_Tools.hxx>
+#include <Geo_Tools.hxx>
+#include <Global_Tools.hxx>
+#include <Global_File.hxx>
+
+namespace tnbLib
+{
+
+	namespace meshLib
+	{
+
+		static void ExportInvalidWireAtMergeDangles
+		(
+			const std::vector<std::shared_ptr<Aft2d_gSegmentEdge>>& theWire
+		)
+		{
+			auto wire = Global_Tools::UpCast<Aft2d_gSegmentEdge, Aft2d_EdgeSurface>(theWire);
+			auto nodes = Aft_Tools::RetrieveNodes(wire);
+			auto pnts = Aft_Tools::RetrieveGeometry(nodes);
+			auto ids = Aft_Tools::RetrieveEdgeConnectivities(wire);
+
+			for (auto& x : ids)
+			{
+				x.Value(0) += 1;
+				x.Value(1) += 1;
+			}
+
+			Entity2d_Chain chains(std::move(pnts), std::move(ids));
+			auto tris = Geo_Tools::Triangulation(chains);
+
+			tnbLib::file::SaveTo(tris, "exportInvalidWireAtMergeDangles" + Entity2d_Triangulation::extension, 1);
+		}
+	}
+}
+#endif // _DEBUG
+
+
 template<>
 void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 (
@@ -94,6 +132,10 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 
 		if (Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) > theTol)
 		{
+#ifdef _DEBUG
+			meshLib::ExportInvalidWireAtMergeDangles(theWire);
+#endif // _DEBUG
+
 			FatalErrorIn(FunctionSIG) << endl
 				<< "Invalid Wire" << endl
 				<< " - distance: " << Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) << endl

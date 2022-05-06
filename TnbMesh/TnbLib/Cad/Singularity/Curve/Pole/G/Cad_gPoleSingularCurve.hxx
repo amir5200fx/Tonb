@@ -10,6 +10,14 @@ namespace tnbLib
 {
 
 	template<>
+	TnbMesh_EXPORT std::pair
+		<
+		std::shared_ptr<Aft2d_gPlnCurveSurface>, 
+		std::shared_ptr<Aft2d_gPlnCurveSurface>
+		>
+		Cad_gPoleSingularCurve::Split(const Standard_Real x) const;
+
+	template<>
 	template<>
 	static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_gSegmentEdge>> 
 		Cad_gPoleSingularCurve::TopoMesh<Aft2d_gSegmentEdge>

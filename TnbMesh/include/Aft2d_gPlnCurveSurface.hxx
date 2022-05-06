@@ -15,6 +15,14 @@ namespace tnbLib
 {
 
 	template<>
+	TnbMesh_EXPORT std::pair
+		<
+		std::shared_ptr<Aft2d_gPlnCurveSurface>,
+		std::shared_ptr<Aft2d_gPlnCurveSurface>
+		>
+		Aft2d_gPlnCurveSurface::Split(const Standard_Real) const;
+
+	template<>
 	TnbMesh_EXPORT Handle(Geom2d_Curve) Aft2d_gPlnCurveSurface::Geometry() const;
 
 	template<>

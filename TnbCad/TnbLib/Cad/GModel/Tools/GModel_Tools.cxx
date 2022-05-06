@@ -1253,6 +1253,36 @@ namespace tnbLib
 			}
 		}
 
+		static void CheckWire(const std::shared_ptr<GModel_ParaWire>& theWire, const Standard_Real tol)
+		{
+			//std::cout << "checking wire...." << std::endl;
+			const auto& curves = theWire->Curves();
+			for (size_t i = 1; i < curves.size(); i++)
+			{
+				const auto& c0 = curves.at(i - 1);
+				const auto& c1 = curves.at(i);
+
+				if (c0->LastCoord().Distance(c1->FirstCoord()) > tol)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "invalid wire has been detected!" << endl
+						<< "- tol: " << tol << endl
+						<< abort(FatalError);
+				}
+			}
+
+			const auto& c0 = curves.at(curves.size() - 1);
+			const auto& c1 = curves.at(0);
+
+			if (c0->LastCoord().Distance(c1->FirstCoord()) > tol)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "invalid wire has been detected!" << endl
+					<< "- tol: " << tol << endl
+					<< abort(FatalError);
+			}
+		}
+
 		static auto CreateWire(const std::vector<std::shared_ptr<Link>>& theLinks)
 		{
 			std::vector<std::shared_ptr<GModel_ParaCurve>> curves;
@@ -1391,8 +1421,18 @@ tnbLib::GModel_Tools::GetParaPlane
 		}
 	}
 
+#ifdef _DEBUG
+	repairWire::CheckWire(outerWire, theTol);
+#endif // _DEBUG
+
 	if (innerWires->size())
 	{
+#ifdef _DEBUG
+		for (const auto& x : *innerWires)
+		{
+			repairWire::CheckWire(x, theTol);
+		}
+#endif // _DEBUG
 		auto plane = std::make_shared<GModel_Plane>(std::move(outerWire), std::move(innerWires));
 		return std::move(plane);
 	}
