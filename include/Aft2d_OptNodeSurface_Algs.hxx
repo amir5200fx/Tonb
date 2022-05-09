@@ -7,5 +7,6 @@
 #include <Aft2d_OptNodeSurfaceUniMetric_IterAdaptive.hxx>
 #include <Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive.hxx>
 #include <Aft2d_OptNodeSurfaceUniMetric_Standard.hxx>
+#include <Aft2d_OptNodeSurface_Altr.hxx>
 
 #endif // !_Aft2d_OptNodeSurface_Algs_Header

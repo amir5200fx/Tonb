@@ -28,6 +28,9 @@ namespace tnbLib
 
 		template<class FrontType, class SizeFun, class MetricFun, class InfoType>
 		static Standard_Boolean Correct(const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap, typename point_type_from_sizeMap<SizeFun>::ptType& theP0, const FrontType& theEdge, const InfoType& theInfo);
+
+		template<class SizeFun, class MetricFun, class InfoType>
+		static Standard_Boolean Correct(const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap, const typename point_type_from_sizeMap<SizeFun>::ptType& theP0, typename point_type_from_sizeMap<SizeFun>::ptType& theP, const Standard_Real h, const InfoType& theInfo);
 	};
 }
 
