@@ -11,6 +11,9 @@
 #include <Aft2d_gRegionPlaneSurfaceUniMetric.hxx>
 #include <Aft2d_gRegionPlaneSurface.hxx>
 #include <Aft2d_OptNodeSurface_Algs.hxx>
+#include <Aft2d_AltrOptNodeSurface_MetricCorr.hxx>
+#include <Aft2d_AltrOptNodeSurface_NelderMead.hxx>
+#include <Aft2d_AltrOptNodeSurface_PerpenDir.hxx>
 #include <Aft2d_EdgeSurface.hxx>
 #include <Aft2d_OptNodeAnIso_nonIterAdaptiveInfo.hxx>
 #include <Aft_Tools.hxx>
@@ -52,6 +55,7 @@
 //#include <Geo2d_SamplePoints_9Pts2ply.hxx>
 #include <Cad_GModel.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
+#include <NumAlg_NelderMeadInfo.hxx>
 
 #include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
@@ -77,7 +81,7 @@ namespace tnbLib
 	static std::shared_ptr<Cad_ApprxMetricInfo> myMetricApproxInfo;
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
 
-	static double myDegenCrit = Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
+	static double myDegenCrit = 1.0e-5;//Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
 	static auto mySingZoneWeight = Cad_gSingularity::DEFAULT_WEIGHT;
 
 	static std::shared_ptr<Aft2d_gSolutionDataSurface> mySoluData;
@@ -341,7 +345,7 @@ namespace tnbLib
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(sizeFun, metricFun, theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
 
-			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_Standard>(theCalculator))
+			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_Altr>(theCalculator))
 			{
 				optNodeAlg->SetMetricMap(metricPrcsr);
 			}
@@ -609,27 +613,44 @@ namespace tnbLib
 		const auto& sizeFun3d = mySoluData->SizeFun();
 
 		auto integInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
-		integInfo->SetMaxNbIterations(50);
-		integInfo->SetNbInitIterations(4);
-		integInfo->SetTolerance(1.0E-4);
+		integInfo->SetMaxNbIterations(200);
+		integInfo->SetNbInitIterations(3);
+		integInfo->SetTolerance(1.0E-5);
 
 		auto iterInfo = std::make_shared<Aft_SizeCorr_IterativeInfo>();
 		iterInfo->SetIgnoreNonConvergency(Standard_True);
-		iterInfo->SetMaxNbIters(150);
-		iterInfo->SetTolerance(0.005);
-		iterInfo->SetUnderRelaxation(0.9);
+		iterInfo->SetMaxNbIters(30);
+		iterInfo->SetTolerance(1.0E-3);
+		iterInfo->SetUnderRelaxation(0.85);
 
 		auto fracInfo = std::make_shared<Aft_SizeCorr_FractionInfo>();
 
 		auto anIsoOptNodeInfo = std::make_shared<Aft2d_OptNodeAnIso_nonIterAdaptiveInfo>(iterInfo, fracInfo);
 		auto anIsoOptNodeUniMetric = std::make_shared<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(anIsoOptNodeInfo);
 		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_nonIterAdaptive>(anIsoOptNodeInfo);
-		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Standard>(iterInfo);
+		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Standard>(iterInfo);
+
+		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_MetricCorr>();
+		anIsoOptNode_altrAlg->SetIterInfo(iterInfo);
+		anIsoOptNode_altrAlg->SetMaxLev(5);
+
+		/*auto nelderInfo = std::make_shared<NumAlg_NelderMeadInfo>();
+		nelderInfo->SetMaxNbIterations(50);
+		nelderInfo->SetTolerance(1.0E-3);*/
+
+		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_NelderMead>();
+		anIsoOptNode_altrAlg->SetInfo(nelderInfo);*/
+
+		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_PerpenDir>();
+		anIsoOptNode_altrAlg->SetInfo(iterInfo);
+		anIsoOptNode_altrAlg->SetMaxLev(3);*/
+
+		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Altr>(anIsoOptNode_altrAlg, iterInfo);
 
 		auto metricPrcsrInfo = std::make_shared<Aft_MetricPrcsrAnIso_Info>();
-		metricPrcsrInfo->SetNbIters(5);
+		metricPrcsrInfo->SetNbIters(50);
 		metricPrcsrInfo->SetNbSamples(3);
-		metricPrcsrInfo->SetTolerance(0.02);
+		metricPrcsrInfo->SetTolerance(0.0025);
 		metricPrcsrInfo->OverrideIntegInfo(integInfo);
 		
 		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
