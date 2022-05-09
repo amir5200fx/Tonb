@@ -141,8 +141,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto n0 = Dir2d(v0.Rotated(M_PI_2));
-		auto n1 = Dir2d(v1.Rotated(M_PI_2));
+		auto n0 = Dir2d(Vec2d(v0.Rotated(M_PI_2)));
+		auto n1 = Dir2d(Vec2d(v1.Rotated(M_PI_2)));
 
 		if (n0.IsParallel(n1, tol))
 		{
