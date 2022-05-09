@@ -14,10 +14,9 @@ namespace tnbLib
 		static const Standard_Real c3 = 0.86602540378443864676372317075294;
 
 		const auto h = ElementSize();
+		const auto& m0 = Metric();
 
-		const auto invH2 = (Standard_Real)1.0 / (h*h);
-		const auto m = invH2 * Metric();
-
+		const auto& invH2 = (Standard_Real)1.0 / (h * h);
 		const auto& centre = Front().Centre();
 
 		Debug_Null_Pointer(Front().Node0());
@@ -26,8 +25,9 @@ namespace tnbLib
 		const auto& v0 = Front().Node0()->Coord();
 		const auto& v1 = Front().Node1()->Coord();
 
+		Entity2d_Metric1 m(invH2*m0.A(), invH2*m0.B(), invH2*m0.C());
 		const auto D = std::sqrt(m.Determinant());
-		const auto cte = c3 / (D*Entity2d_Metric1::Distance(centre, v1, m));
+		const auto cte = c3 / (D * /*Entity2d_Metric1::Distance(centre, v1, m)*/Length());
 
 		auto dU = v1 - centre;
 
@@ -41,10 +41,9 @@ namespace tnbLib
 		orthM(1, 0) = m.A();
 		orthM(1, 1) = m.B();
 
-		U = cte * (orthM*U);
+		U = cte * (orthM * U);
 
 		Pnt2d P(centre.X() + U(0), centre.Y() + U(1));
-
 		ChangeCoord() = std::move(P);
 
 		Change_IsDone() = Standard_True;

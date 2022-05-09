@@ -1720,6 +1720,36 @@
     <Filter Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T">
       <UniqueIdentifier>{eb4c90b1-cd74-4c29-95f7-5fc7303432da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Optimz">
+      <UniqueIdentifier>{0232f648-8e1f-4f4b-b781-93e179bc0b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Optimz\NelderMead">
+      <UniqueIdentifier>{18e67578-cf3e-49ec-a393-05dc934c4f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Optimz\Surface">
+      <UniqueIdentifier>{40be24a3-beb8-4810-8202-e59bc17ae0f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Optimz\NelderMead\Surface">
+      <UniqueIdentifier>{7d6f0e4f-b94b-4106-9e54-8e47344eb2d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg">
+      <UniqueIdentifier>{782bb3f7-f1f0-48d5-958b-e343871f1233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface">
+      <UniqueIdentifier>{a5cb214c-d154-4451-9d87-dafb33da56ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\MetricCorr">
+      <UniqueIdentifier>{9a4a0919-7395-4282-83cb-22eb205b0bcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Algorithms\Surface\Altr">
+      <UniqueIdentifier>{0a3ce0ab-853b-4977-a623-76f2e778e706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\NelderMead">
+      <UniqueIdentifier>{50bd0a3e-71c7-489e-ab74-cdd98b05cf79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\PerpenDir">
+      <UniqueIdentifier>{19448c0c-26a5-4331-ad63-c9795c392528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4182,6 +4212,36 @@
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Aft2d_SingularNodeTemplateI.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Optimz\Surface\Aft2d_OptNodeSurface_Optimz.hxx">
+      <Filter>TnbLib\Aft\OptNode\Optimz\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Optimz\NelderMead\Surface\Aft2d_OptNodeSurface_NelderMeadObj.hxx">
+      <Filter>TnbLib\Aft\OptNode\Optimz\NelderMead\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\Aft2d_AltrOptNodeSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\MetricCorr\Aft2d_AltrOptNodeSurface_MetricCorr.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\MetricCorr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Algorithms\Surface\Altr\Aft2d_OptNodeSurface_Altr.hxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\Altr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Algorithms\Surface\Altr\Aft2d_OptNodeSurface_AltrFwd.hxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\Altr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Aft_AltrOptNode.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\Aft2d_AltrOptNodeSurface.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\NelderMead\Aft2d_AltrOptNodeSurface_NelderMead.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\NelderMead</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\PerpenDir\Aft2d_AltrOptNodeSurface_PerpenDir.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\PerpenDir</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5341,6 +5401,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Singularity\Curve\Line\G\Cad_gLineSingularCurve.cxx">
       <Filter>TnbLib\Cad\Singularity\Curve\Line\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Optimz\NelderMead\Surface\Aft2d_OptNodeSurface_NelderMeadObj.cxx">
+      <Filter>TnbLib\Aft\OptNode\Optimz\NelderMead\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\MetricCorr\Aft2d_AltrOptNodeSurface_MetricCorr.cxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\MetricCorr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\Altr\Aft2d_OptNodeSurface_Altr.cxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\Altr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\Altr\Aft2d_OptNodeSurface_AltrIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\Altr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\NelderMead\Aft2d_AltrOptNodeSurface_NelderMead.cxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\NelderMead</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\PerpenDir\Aft2d_AltrOptNodeSurface_PerpenDir.cxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\PerpenDir</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

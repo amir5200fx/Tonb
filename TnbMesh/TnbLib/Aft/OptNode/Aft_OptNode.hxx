@@ -3,6 +3,7 @@
 #define _Aft_OptNode_Header
 
 #include <Aft_OptNode_Calculator.hxx>
+#include <Aft_OptNodeAnIso_Traits.hxx>
 
 namespace tnbLib
 {
@@ -12,7 +13,17 @@ namespace tnbLib
 		: public Aft_OptNode_Calculator<FrontType, SizeFun, MetricFun>
 	{
 
+	public:
+
+		typedef typename info_type_from_aniso_optNode_alg<Aft_OptNode<FrontType, SizeFun, MetricFun, CorrAlg, AltrAlg>>::infoType infoType;
+
+	private:
+
 		/*Private Data*/
+
+		std::shared_ptr<infoType> theInfo_;
+
+		std::shared_ptr<AltrAlg> theAlterAlg_;
 
 	public:
 
@@ -23,10 +34,41 @@ namespace tnbLib
 
 		// constructors [3/1/2022 Amir]
 
+		Aft_OptNode
+		(
+			const std::shared_ptr<AltrAlg>& theAlterAlg,
+			const std::shared_ptr<infoType>& theInfo
+		)
+			: theInfo_(theInfo)
+			, theAlterAlg_(theAlterAlg)
+		{}
 
 		// override functions and operators [3/1/2022 Amir]
 
 		void Perform() override;
+
+
+		// public functions and operators [5/8/2022 Amir]
+
+		const auto& AlterAlg() const
+		{
+			return theAlterAlg_;
+		}
+
+		const auto& GetInfo() const
+		{
+			return theInfo_;
+		}
+
+		void SetInfo(const std::shared_ptr<infoType>& theInfo)
+		{
+			theInfo_ = theInfo;
+		}
+
+		void SetAlterAlg(const std::shared_ptr<AltrAlg>& theAlg)
+		{
+			theAlterAlg_ = theAlg;
+		}
 
 	};
 

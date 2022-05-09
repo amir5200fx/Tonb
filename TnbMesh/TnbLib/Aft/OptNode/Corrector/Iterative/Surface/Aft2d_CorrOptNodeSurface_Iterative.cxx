@@ -38,6 +38,7 @@ void tnbLib::Aft2d_CorrOptNodeSurface_Iterative::Perform
 		Info << " WARNING: failed to calculate optimized node." << endl;
 	}
 
+	IsConverged_ = !cond;
 	CoordRef() = std::move(P);
 	Change_IsDone() = Standard_True;
 }

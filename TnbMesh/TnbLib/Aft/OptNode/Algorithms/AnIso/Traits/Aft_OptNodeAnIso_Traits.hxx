@@ -9,6 +9,7 @@
 #include <Aft2d_OptNodeSurface_nonIterAdaptiveFwd.hxx>
 #include <Aft2d_OptNodeAnIso_StandardFwd.hxx>
 #include <Aft2d_OptNodeSurface_StandardFwd.hxx>
+#include <Aft2d_OptNodeSurface_AltrFwd.hxx>
 #include <Aft2d_OptNodeSurfaceUniMetric_IterAdaptiveFwd.hxx>
 #include <Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptiveFwd.hxx>
 
@@ -30,6 +31,7 @@ namespace tnbLib
 	template<> struct info_type_from_aniso_optNode_alg<Aft2d_OptNodeSurface_nonIterAdaptive> { typedef Aft2d_OptNodeAnIso_nonIterAdaptiveInfo infoType; };
 	template<> struct info_type_from_aniso_optNode_alg<Aft2d_OptNodeSurfaceUniMetric_IterAdaptive> { typedef Aft_SizeCorr_IterativeInfo infoType; };
 	template<> struct info_type_from_aniso_optNode_alg<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive> { typedef Aft2d_OptNodeAnIso_nonIterAdaptiveInfo infoType; };
+	template<> struct info_type_from_aniso_optNode_alg<Aft2d_OptNodeSurface_Altr> { typedef Aft_SizeCorr_IterativeInfo infoType; };
 }
 
 #endif // !_Aft_OptNodeAnIso_Traits_Header

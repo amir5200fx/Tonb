@@ -325,7 +325,7 @@ namespace tnbLib
 				0.95*MAX
 				(
 					sizeMap.CalcDistance(frontInfo::Coord(), current.Centre()),
-					frontInfo::ElementSize()
+					frontInfo::ElementSize() * 0.8660254
 				)
 			);
 

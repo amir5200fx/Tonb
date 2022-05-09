@@ -24,6 +24,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		Standard_Real theSize_;
+		Standard_Real theLen_;
 
 		const MetricType& theMetric_;
 		const FrontType& theFront_;
@@ -46,10 +47,12 @@ namespace tnbLib
 		Aft_OptNode_Analytical
 		(
 			const Standard_Real theSize,
+			const Standard_Real theLength,
 			const MetricType& theMetric,
 			const FrontType& theFront
 		)
 			: theSize_(theSize)
+			, theLen_(theLength)
 			, theMetric_(theMetric)
 			, theFront_(theFront)
 		{}
@@ -60,6 +63,11 @@ namespace tnbLib
 		auto ElementSize() const
 		{
 			return theSize_;
+		}
+
+		auto Length() const
+		{
+			return theLen_;
 		}
 
 		const auto& Metric() const

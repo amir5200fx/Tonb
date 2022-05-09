@@ -48,7 +48,12 @@ void tnbLib::Aft2d_IterOptNodeSurface_Calculator::Perform()
 	}
 
 	auto m = MetricMap()->CalcMetric(Front()->Centre());
-	Aft2d_OptNodeSurface_Analytical alg(Size(), m, *Front());
+
+	const auto& v0 = Front()->Node0()->Coord();
+	const auto& v1 = Front()->Node1()->Coord();
+	const auto len = MetricMap()->CalcUnitDistance(v0, v1) / 2.0;
+	//std::cout << "len: " << len << std::endl;
+	Aft2d_OptNodeSurface_Analytical alg(Size(), len, m, *Front());
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");
 
@@ -65,5 +70,7 @@ void tnbLib::Aft2d_IterOptNodeSurface_Calculator::Perform()
 	Debug_If_Condition_Message(NOT corrector->IsDone(), "the algorithm is not performed!");
 
 	ChangeCoord() = corrector->Coord();
+	Change_IsConverged() = corrector->IsConverged();
+
 	Change_IsDone() = Standard_True;
 }
