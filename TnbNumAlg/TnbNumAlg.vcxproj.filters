@@ -85,6 +85,21 @@
     <Filter Include="TnbLib\NumAlg\Interpl\Steffen">
       <UniqueIdentifier>{eddfa7bf-91ef-4306-bffd-184c244af932}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\NumAlg\Optimization">
+      <UniqueIdentifier>{809702a2-9039-4e1e-9351-48fe7eb274b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Optimization\NelderMead">
+      <UniqueIdentifier>{36ad74de-ab29-4356-93f0-d6a0174a1d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Optimization\NelderMead\Info">
+      <UniqueIdentifier>{006881ce-986c-4f2a-8f02-d376272636a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Optimization\NelderMead\Coeffs">
+      <UniqueIdentifier>{dac0d042-5a9e-4485-9216-b0bceada6d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\NumAlg\Optimization\NelderMead\Func">
+      <UniqueIdentifier>{9a9af689-4a5b-4afa-beba-23e3d6dcabde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
@@ -168,6 +183,18 @@
     <ClInclude Include="TnbLib\NumAlg\Interpl\Steffen\NumAlg_SteffenInterplFunc.hxx">
       <Filter>TnbLib\NumAlg\Interpl\Steffen</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\Info\NumAlg_NelderMeadInfo.hxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\Coeffs\NumAlg_NelderMeadCoeffs.hxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead\Coeffs</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\NumAlg_NelderMead.hxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\NumAlg_NelderMeadI.hxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">
@@ -208,6 +235,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\NumAlg\Interpl\NumAlg_InterplFunc.cxx">
       <Filter>TnbLib\NumAlg\Interpl</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Optimization\NelderMead\Info\NumAlg_NelderMeadInfo.cxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Optimization\NelderMead\Coeffs\NumAlg_NelderMeadCoeffs.cxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead\Coeffs</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Optimization\NelderMead\NumAlg_NelderMead.cxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
