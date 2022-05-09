@@ -1,4 +1,5 @@
 #pragma once
+#include <Cad_SingularCurve.hxx>
 #include <Global_Macros.hxx>
 #include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
@@ -20,15 +21,15 @@ namespace tnbLib
 		for (const auto& x : boundaries)
 		{
 			Debug_Null_Pointer(x);
-			if (x->CharLength() > 0)
-			{
-				modified.push_back(x);
-			}
-			else
+			if (x->IsSingular())
 			{
 				x->SingularityContraction(*MetricProcessor());
 
 				if (NOT contracted) contracted = Standard_True;
+			}
+			else
+			{
+				modified.push_back(x);
 			}
 		}
 
@@ -205,7 +206,32 @@ namespace tnbLib
 				{
 					tnbLib::Info << "   Discretizing..." << endl;
 				}
-				auto mesh = curveType::template TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
+
+				std::vector<std::shared_ptr<bndType>> mesh;
+				if (x->IsSingular())
+				{
+					auto singCurve = std::dynamic_pointer_cast<Cad_SingularCurve<curveType>>(x);
+					Debug_Null_Pointer(singCurve);
+
+					if (singCurve->IsPole())
+					{
+						mesh = curveType::template TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
+					}
+					else if (singCurve->IsLine())
+					{
+						NotImplemented;
+					}
+					else
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "invalid data has been detected!" << endl
+							<< abort(FatalError);
+					}
+				}
+				else
+				{
+					mesh = curveType::template TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
+				}
 
 				if (verbose)
 				{

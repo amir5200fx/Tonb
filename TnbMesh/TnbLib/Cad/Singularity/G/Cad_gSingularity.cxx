@@ -15,13 +15,13 @@
 #include <Cad_SingularityTools.hxx>
 #include <Cad_gPoleSingularCurve.hxx>
 #include <Cad_gLineSingularCurve.hxx>
-#ifndef _TNB_HEADER_IMPL
+#ifdef _DEBUG
 #include <Cad_SingularityHorizons.hxx>
 #include <Cad_ColorApprxMetric.hxx>
 #include <Cad_SingularityTools.hxx>
 #include <Geo2d_PolygonGraph.hxx>
 #include <Geo_BoxTools.hxx>
-#endif // _TNB_HEADER_IMPL
+#endif // _DEBUG
 #include <GModel_ParaCurve.hxx>
 #include <Cad_Tools.hxx>
 #include <Pln_Curve.hxx>
@@ -362,7 +362,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 	return std::move(singularity);
 }
 
-#ifndef _TNB_HEADER_IMPL
+#ifdef _DEBUG
 template<>
 void tnbLib::Cad_gSingularity::Perform()
 {
@@ -506,4 +506,4 @@ void tnbLib::Cad_gSingularity::Perform()
 
 	Change_IsDone() = Standard_True;
 }
-#endif // _TNB_HEADER_IMPL
+#endif // _DEBUG

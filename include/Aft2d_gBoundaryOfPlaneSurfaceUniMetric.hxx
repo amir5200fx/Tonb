@@ -5,6 +5,10 @@
 #include <Geo2d_SizeFunction.hxx>
 #include <GeoMetricFun2d_Uniform.hxx>
 #include <Aft_BoundaryOfPlane.hxx>
+#ifndef _DEBUG
+#include <Aft2d_gPlnCurveSurfaceUniMetric.hxx>
+#include <Cad_gSingularCurve.hxx>
+#endif // !_DEBUG
 #include <Aft2d_gRegionPlaneSurfaceUniMetric.hxx>
 #include <Aft2d_gSegmentEdgeUniMetric.hxx>
 #include <Aft2d_gPlnWireSurfaceUniMetric.hxx>

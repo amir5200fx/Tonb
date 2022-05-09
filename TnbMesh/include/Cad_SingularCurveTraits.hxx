@@ -4,6 +4,8 @@
 
 #include <Aft2d_gPlnCurveSurfaceFwd.hxx>
 #include <Aft2d_tPlnCurveSurfaceFwd.hxx>
+#include <Aft2d_gPlnCurveSurfaceUniMetricFwd.hxx>
+#include <Aft2d_tPlnCurveSurfaceUniMetricFwd.hxx>
 
 namespace tnbLib
 {
@@ -25,8 +27,22 @@ namespace tnbLib
 	};
 
 	template<>
-	struct cad_singular_curve_traits<Aft2d_tPlnCurveSurface> 
-	{ 
+	struct cad_singular_curve_traits<Aft2d_gPlnCurveSurfaceUniMetric>
+	{
+		typedef GModel_Surface surfType;
+		typedef GModel_ParaCurve baseCurveType;
+	};
+
+	template<>
+	struct cad_singular_curve_traits<Aft2d_tPlnCurveSurface>
+	{
+		typedef TModel_Surface surfType;
+		typedef TModel_ParaCurve baseCurveType;
+	};
+
+	template<>
+	struct cad_singular_curve_traits<Aft2d_tPlnCurveSurfaceUniMetric>
+	{
 		typedef TModel_Surface surfType;
 		typedef TModel_ParaCurve baseCurveType;
 	};

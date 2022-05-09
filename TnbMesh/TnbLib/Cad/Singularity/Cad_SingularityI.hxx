@@ -1,5 +1,5 @@
 #pragma once
-#ifdef _TNB_HEADER_IMPL
+#ifndef _DEBUG
 #include <Cad_SingularityHorizons.hxx>
 #include <Cad_ColorApprxMetric.hxx>
 #include <Cad_SingularityTools.hxx>
@@ -8,9 +8,9 @@
 #include <Geo2d_PolygonGraph.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-#endif // !_TNB_HEADER_IMPL
+#endif // !_DEBUG
 
-#ifdef _TNB_HEADER_IMPL
+#ifndef _DEBUG
 template<class SurfType>
 inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 {
@@ -62,7 +62,8 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 	}
 	else
 	{
-		const auto d = Cad_SingularityHorizons::RetrieveDomain(*Horizons());
+		auto d = Cad_SingularityHorizons::RetrieveDomain(*Horizons());
+		//d.Expand(0.1*d.Diameter());
 		const auto& gsurf = Horizons()->Geometry();
 
 		const auto& colors = *Colors();
@@ -99,59 +100,59 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 				horizonMap.insert(std::move(paired));
 			}
 			horizonMap.at(icolor)->push_back(poly);
+		}
 
-			const auto tris = Geo_BoxTools::Triangulate(d);
-			const auto sides = Cad_SingularityTools::RetrieveSides(d);
+		const auto tris = Cad_SingularityTools::GetTriangulation(d);
+		const auto sides = Cad_SingularityTools::RetrieveSides(d);
 
-			GeoMesh2d_Data bmesh;
-			bmesh.Construct(*tris);
+		GeoMesh2d_Data bmesh;
+		bmesh.Construct(*tris);
 
-			auto& zones = ZonesRef();
-			zones.reserve(horizonMap.size());
-			for (const auto& x : horizonMap)
+		auto& zones = ZonesRef();
+		zones.reserve(horizonMap.size());
+
+		for (const auto& x : horizonMap)
+		{
+			Debug_Null_Pointer(x.second);
+			const auto& l = *x.second;
+
+			if (l.empty())
 			{
-				Debug_Null_Pointer(x.second);
-				const auto& l = *x.second;
+				FatalErrorIn(FunctionSIG)
+					<< "empty list has been detected!" << endl
+					<< abort(FatalError);
+			}
+			if (l.size() IS_EQUAL 1)
+			{
+				Debug_Null_Pointer(l.front());
+				auto t = TypeDetection(*l.front(), bmesh, sides, *gsurf);
+				Debug_Null_Pointer(t);
 
-				if (l.empty())
-				{
-					FatalErrorIn(FunctionSIG)
-						<< "empty list has been detected!" << endl
-						<< abort(FatalError);
-				}
+				t->SetIndex(x.first);
+				zones.push_back(std::move(t));
+			}
+			else if (l.size() IS_EQUAL 2)
+			{
+				const auto[pl0, pl1] = Cad_SingularityNonTempBase::RetrievePair(l);
+				Debug_Null_Pointer(pl0);
+				Debug_Null_Pointer(pl1);
 
-				if (l.size() IS_EQUAL 1)
-				{
-					Debug_Null_Pointer(l.front());
-					auto t = TypeDetection(*l.front(), bmesh, sides, *gsurf);
-					Debug_Null_Pointer(t);
+				auto t = TypeDetection(*pl0, *pl1, bmesh, sides, *gsurf);
+				Debug_Null_Pointer(t);
 
-					t->SetIndex(x.first);
-					zones.push_back(std::move(t));
-				}
-				else if (l.size() IS_EQUAL 2)
-				{
-					const auto[pl0, pl1] = Cad_SingularityNonTempBase::RetrievePair(l);
-					Debug_Null_Pointer(pl0);
-					Debug_Null_Pointer(pl1);
-
-					auto t = TypeDetection(*pl0, *pl1, bmesh, sides, *gsurf);
-					Debug_Null_Pointer(t);
-
-					t->SetIndex(x.first);
-					zones.push_back(std::move(t));
-				}
-				else
-				{
-					FatalErrorIn(FunctionSIG)
-						<< "unexpected situation has been detected!" << endl
-						<< abort(FatalError);
-				}
+				t->SetIndex(x.first);
+				zones.push_back(std::move(t));
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "unexpected situation has been detected!" << endl
+					<< abort(FatalError);
 			}
 		}
 	}
 
 	Change_IsDone() = Standard_True;
 }
-#endif // _TNB_HEADER_IMPL
+#endif // __DEBUG
 

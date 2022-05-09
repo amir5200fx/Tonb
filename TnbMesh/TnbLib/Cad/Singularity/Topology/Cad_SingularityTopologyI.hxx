@@ -90,6 +90,7 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 
 	Merge2d_Chain alg;
 	alg.Import(chains);
+	alg.SetRemoveDegeneracy();
 
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the application is not performed!");
@@ -100,8 +101,11 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 	auto topo = std::make_shared<Geo2d_TopoChainAnalysis>();
 	Debug_Null_Pointer(topo);
 
+	const auto& indices = merged->Connectivity();
+
 	topo->Import(*merged);
 	topo->Perform();
+
 	topo->reReisterEdges();
 
 	const auto& echains = topo->Edges();
@@ -114,9 +118,11 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 			<< abort(FatalError);
 	}
 
-	for (Standard_Integer i = 0; i < echains.size(); i++)
+	Standard_Integer k = 0;
+	for (const auto& x : echains)
 	{
-		auto paired = std::make_pair(echains.at(i), curves.at(i));
+		Debug_Null_Pointer(x.second);
+		auto paired = std::make_pair(x.second, curves.at(k++));
 		auto insert = theEdges.insert(std::move(paired));
 		if (NOT insert.second)
 		{

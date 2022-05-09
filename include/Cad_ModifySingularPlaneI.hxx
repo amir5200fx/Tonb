@@ -1,7 +1,7 @@
 #pragma once
-#ifndef _TNB_HEADER_IMPL
+#ifndef _DEBUG
 #include <Cad_ModifySingularPlaneTools.hxx>
-#endif //_TNB_HEADER_IMPL
+#endif //_DEBUG
 #include <Cad_SingularityTopology.hxx>
 #include <Cad_ColorApprxMetric.hxx>
 
@@ -469,7 +469,6 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::Perform()
 	auto wires = RetrieveWires(*Plane());
 	const auto bcurves =
 		Cad_ModifySingularPlaneTools<plnType>::RetrieveCurves(wires);
-
 	auto subsList =
 		Cad_ModifySingularPlaneTools<plnType>::CalcParts(Zones(), bcurves);
 	auto subMap = Cad_SubdivideHorizon<parCurveType>::Merge(subsList);

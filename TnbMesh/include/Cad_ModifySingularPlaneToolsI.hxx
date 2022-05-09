@@ -12,22 +12,30 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::SubCurves
 )
 {
 #ifdef _DEBUG
-	auto x0 = thePars.front();
-	for (auto x : thePars)
 	{
-		if (x < x0)
+		auto x0 = thePars.front();
+		for (auto x : thePars)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "the list is not sorted!" << endl
-				<< abort(FatalError);
+			if (x < x0)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the list is not sorted!" << endl
+					<< abort(FatalError);
+			}
+			x0 = x;
 		}
-		x0 = x;
 	}
 #endif // _DEBUG
 	std::vector<std::shared_ptr<curveType>> curves;
 	auto curve = theCurve;
+	auto x0 = curve->FirstParameter();
+	auto x1 = curve->LastParameter();
 	for (auto x : thePars)
 	{
+		if (std::abs(x - x0) <= theTol OR std::abs(x - x1) <= theTol)
+		{
+			continue;
+		}
 		auto[c0, c1] = Split(x, curve);
 		curves.push_back(std::move(c0));
 		curve = std::move(c1);
@@ -127,7 +135,6 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::ModifyHorizons
 			{
 				l.sort();
 			}
-
 			auto subCurves = SubCurves(x, l, theTol);
 			if (subCurves.size())
 			{
