@@ -22,6 +22,7 @@ namespace tnbLib
 		Standard_Real theGuess_;
 
 		Standard_Real theCorrected_;
+		Standard_Real theLen_;
 
 		const info& theInfo_;
 
@@ -43,6 +44,7 @@ namespace tnbLib
 			, theGuess_(theGuess)
 			, theInfo_(theInfo)
 			, theCorrected_(0)
+			, theLen_(1.0)
 		{}
 
 		auto& ChangeCorrected()
@@ -69,6 +71,7 @@ namespace tnbLib
 
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, U0)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Guess)
+			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Len)
 	};
 
 	template<class gCurveType, class MetricPrcsrType = void>

@@ -142,6 +142,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\containers\ADT\List\Adt_SlList.hxx" />
     <ClInclude Include="TnbLib\Global\error\TnbError.hxx" />
     <ClInclude Include="TnbLib\Global\error\TnbErrorM.hxx" />
+    <ClInclude Include="TnbLib\Global\error\TnbErrorManip.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_AccessMethod.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Bound.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Done.hxx" />

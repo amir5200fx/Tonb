@@ -73,5 +73,6 @@ namespace tnbLib
 }
 
 #include <TnbErrorM.hxx>
+#include <TnbErrorManip.hxx>
 
 #endif // !_TnbError_Header
