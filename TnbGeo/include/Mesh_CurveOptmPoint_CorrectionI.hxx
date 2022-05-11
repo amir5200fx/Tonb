@@ -22,9 +22,9 @@ namespace tnbLib
 
 		forThose(Iter, 1, nbLevels)
 		{
-			auto dis = map.CalcUnitDistance(P0, curve.Value(Correct));
+			auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
 			auto du = (Correct - Umin) / dis;
-			//Correct = Umin + underRelaxation*du;
+			Correct = Umin + underRelaxation*du;
 			Correct = Umin + du;
 
 			if (Correct < Umin) Correct = Umin;
@@ -57,9 +57,9 @@ namespace tnbLib
 		Geo_CurveIntegrand<gCurveType> integrand(curve);
 		forThose(Iter, 1, nbLevels)
 		{
-			auto dis = s * geoLib::CalcCurveLength<gCurveType>::_(integrand, Umin, Correct, integInfo);
+			auto dis = s * geoLib::CalcCurveLength<gCurveType>::_(integrand, Umin, Correct, integInfo) / Len();
 			auto du = (Correct - Umin) / dis;
-			//Correct = Umin + underRelaxation*du;
+			Correct = Umin + underRelaxation*du;
 			Correct = Umin + du;
 
 			if (Correct < Umin) Correct = Umin;

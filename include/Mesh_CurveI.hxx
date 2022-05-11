@@ -37,13 +37,24 @@ namespace tnbLib
 		const info & theInfo
 	)
 	{
+		if (theGuess <= theU0)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " invalid initial guess for optimum point has been detected!" << endl
+				<< " - u0: " << theU0 << endl
+				<< " - guess: " << theGuess << endl
+				<< " - step: " << theStep << endl
+				<< " - uMax: " << theUmax << endl
+				<< abort(FatalError);
+		}
 		Mesh_CurveOptmPoint_Correction<gCurveType, MetricPrcsrType>
 			correction(theU0, theGuess, theCurve, *theInfo.CorrAlgInfo());
+		correction.SetLen(theStep);
 		correction.Perform();
 
 		Debug_If_Condition_Message(NOT correction.IsDone(),
 			"mesh_curveoptpoint_correction algorithm has not been performed!");
-		auto corrected = correction.Corrected();
+		const auto corrected = correction.Corrected();
 
 		Mesh_CurveOptmPoint_Newton<gCurveType, MetricPrcsrType>
 			Iteration(theU0, theStep, theCurve);
@@ -69,12 +80,11 @@ namespace tnbLib
 				FatalErrorIn(FunctionSIG)
 					<< "Can not Calculate parameter of the curve" << endl
 					<< abort(FatalError);
+				return Iteration.Corrected();
 			}
-
 			const auto ds2 = theStep / 2;
 			const auto du = theU0 + (corrected - theU0) / 2;
-
-			auto u0 =
+			auto um =
 				CalcNextParameter
 				(
 					theU0,
@@ -84,8 +94,8 @@ namespace tnbLib
 			return
 				CalcNextParameter
 				(
-					u0, u0 + du, ds2,
-					theUmax, theLevel + 1,
+					um, 2.0*um - theU0, ds2,
+					theUmax, theLevel,
 					theMaxLevel, theCurve, theInfo
 				);
 		}
@@ -226,12 +236,12 @@ namespace tnbLib
 			Parameters[Index] = U1;
 
 			Guess = U1 + MIN(dt, Info()->UnderRelaxation()*(Parameters[Index] - Parameters[Index - 1]));
-
 			Debug_If_Condition(Guess <= U1);
 
 			U0 = U1;
 		}
-
+		std::cout << std::endl;
+		std::cout << std::endl;
 		MakeChain(Parameters);
 
 		Change_IsDone() = Standard_True;

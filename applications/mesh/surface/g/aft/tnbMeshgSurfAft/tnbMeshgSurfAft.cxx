@@ -280,6 +280,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		const auto& geometry = theSurface->GeomSurface()->Geometry();
+
 		auto wire = GModel_Tools::GetOuterParaWire(theSurface);
 		auto box = GModel_Tools::CalcBoundingBox(*wire);
 
@@ -289,7 +290,6 @@ namespace tnbLib
 		auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
 
 		auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
-
 		auto metricCalculator = createMetricCalculator();
 
 		std::vector<std::vector<std::shared_ptr<Aft2d_ElementSurface>>> meshes;
@@ -357,7 +357,6 @@ namespace tnbLib
 			}
 
 			auto surfSizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
-
 			auto apprxMetricAlg = std::make_shared<Cad_ApprxMetric>(geometry, std::make_shared<Entity2d_Box>(box));
 			apprxMetricAlg->OverrideInfo(myMetricApproxInfo);
 
@@ -374,7 +373,6 @@ namespace tnbLib
 				auto[maxDet, minDet] = Cad_Tools::CalcMaxMinMetrics(geometry, *apprxMetricAlg->Triangulation());
 				myMaxDet = maxDet;
 			}
-
 			auto colors = std::make_shared<Cad_ColorApprxMetric>();
 
 			colors->SetCriterion(myDegenCrit);
@@ -663,12 +661,17 @@ namespace tnbLib
 
 		for (const auto& x : model->Surfaces())
 		{
+
 			Debug_Null_Pointer(x);
 			if (verbose)
 			{
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
+			/*if (x->Index() NOT_EQUAL 3)
+			{
+				continue;
+			}*/
 			auto plnMesh = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metricPrcsrInfo);
 			if (plnMesh.size() IS_EQUAL 1)
 			{
@@ -676,7 +679,7 @@ namespace tnbLib
 				file::SaveTo(tris, "planar" + Entity2d_Triangulation::extension, 1);
 				//std::exit(0);
 				auto tris3d = retrieveTris3d(x, *tris);
-
+				std::cout << " - nb. of elements: " << tris3d->NbConnectivity() << std::endl;
 				Global_Tools::Insert(x->Index(), tris3d, mySoluData->TrisRef());
 			}
 			else
@@ -688,7 +691,7 @@ namespace tnbLib
 					mesh2d.Add(*tris);
 				}
 				auto tris3d = retrieveTris3d(x, mesh2d);
-
+				std::cout << " - nb. of elements: " << tris3d->NbConnectivity() << std::endl;
 				Global_Tools::Insert(x->Index(), tris3d, mySoluData->TrisRef());
 			}		
 
@@ -747,6 +750,7 @@ using namespace tnbLib;
 int main(int argc, char *argv[])
 {
 	//FatalError.throwExceptions();
+	FatalConvError.throwExceptions();
 
 	if (argc <= 1)
 	{

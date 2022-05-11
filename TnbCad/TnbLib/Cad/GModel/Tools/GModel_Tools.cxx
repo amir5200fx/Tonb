@@ -1114,7 +1114,7 @@ namespace tnbLib
 			auto node = std::make_shared<RingNode>(1, std::move(Pm));
 
 			auto curve = theCurve;
-			auto edge = std::make_shared<Ring>(1, std::move(curve), std::move(node));
+			auto edge = std::make_shared<Ring>(1, std::move(curve), node);
 
 			if (Pm.Distance(P0) <= theTol)
 			{
@@ -1390,11 +1390,11 @@ tnbLib::GModel_Tools::GetParaPlane
 			<< " - the surface has no outer wire!" << endl
 			<< abort(FatalError);
 	}
-
 	const auto trimOuterWire = TrimWire(unRepOuterWire);
 	Debug_Null_Pointer(trimOuterWire);
 
 	const auto outerEdges = repairWire::CreateWire(trimOuterWire, theTol);
+
 	repairWire::CheckWire(outerEdges);
 
 	auto outerWire = repairWire::CreateWire(outerEdges);
