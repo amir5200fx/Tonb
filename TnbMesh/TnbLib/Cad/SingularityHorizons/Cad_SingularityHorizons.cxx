@@ -183,6 +183,7 @@ namespace tnbLib
 			const std::shared_ptr<Cad_MetricCalculator>& theCalculator, 
 			const Entity_Triangle<const Pnt2d&>& theTriangle,
 			const Standard_Real theCriterion,
+			const Standard_Real theCoeff,
 			Entity2d_Chain& theSeg
 		)
 	{
@@ -193,10 +194,10 @@ namespace tnbLib
 		const auto m0 = theCalculator->CalcMetric(p0, theGeometry);
 		const auto m1 = theCalculator->CalcMetric(p1, theGeometry);
 		const auto m2 = theCalculator->CalcMetric(p2, theGeometry);
-
-		const auto det0 = m0.Determinant();
-		const auto det1 = m1.Determinant();
-		const auto det2 = m2.Determinant();
+		
+		const auto det0 = m0.Determinant() * theCoeff;
+		const auto det1 = m1.Determinant() * theCoeff;
+		const auto det2 = m2.Determinant() * theCoeff;
 
 		const auto& pt = theTriangle.Vertex(StandPoint(det0, det1, det2, theCriterion));
 
@@ -303,7 +304,7 @@ namespace tnbLib
 		indices[0].Value(0) = 1;
 		indices[0].Value(1) = 2;
 
-		CheckOrientation(theGeometry, theCalculator, theTriangle, theCriterion, *seg);
+		CheckOrientation(theGeometry, theCalculator, theTriangle, theCriterion, theCoeff, *seg);
 
 		return std::move(seg);
 	}

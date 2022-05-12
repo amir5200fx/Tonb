@@ -18,7 +18,7 @@ tnbLib::Aft2d_AltrOptNodeSurface_MetricCorr::Iter
 	const Entity2d_Metric1& theM
 )
 {
-	std::cout << "level: " << theLev << std::endl;
+	//std::cout << "level: " << theLev << std::endl;
 	if (theLev > MaxLev())
 	{
 		return Standard_False;
@@ -47,10 +47,10 @@ tnbLib::Aft2d_AltrOptNodeSurface_MetricCorr::Iter
 
 	if (NOT corr.IsConverged())
 	{
-		std::cout << "centre: " << Front()->Centre() << std::endl;
+		/*std::cout << "centre: " << Front()->Centre() << std::endl;
 		std::cout << "len: " << Front()->Length3D() << ",  " << Front()->CharLength() << std::endl;
 		std::cout << "M0: " << theM0.A()<<",  "<< theM0.B()<<",  "<< theM0.C() << std::endl;
-		std::cout << "det0: " << theM0.Determinant() << ",  det1: " << MetricMap()->CalcMetric(corr.Coord()).Determinant() << std::endl;
+		std::cout << "det0: " << theM0.Determinant() << ",  det1: " << MetricMap()->CalcMetric(corr.Coord()).Determinant() << std::endl;*/
 		return Iter(theLev + 1, theM0, MetricMap()->CalcMetric(corr.Coord()));
 	}
 	return Standard_True;
@@ -75,7 +75,7 @@ void tnbLib::Aft2d_AltrOptNodeSurface_MetricCorr::Perform()
 	{
 		IsConvergedRef() = Standard_False;
 	}
-	std::cout << std::endl;
-	std::cout << std::endl;
+	/*std::cout << std::endl;
+	std::cout << std::endl;*/
 	Change_IsDone() = Standard_True;
 }

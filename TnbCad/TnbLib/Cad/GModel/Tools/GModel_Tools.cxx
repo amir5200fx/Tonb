@@ -149,6 +149,14 @@ tnbLib::GModel_Tools::GetEdge
 		pCurve->Reverse();
 	}
 
+	if (pCurve->LastParameter() < pCurve->FirstParameter())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid curve parameterization has been detected!" << endl
+			<< " - first: " << pCurve->FirstParameter() << endl
+			<< " - last: " << pCurve->LastParameter() << endl
+			<< abort(FatalError);
+	}
 	auto curveOnPlane = std::make_shared<GModel_ParaCurve>(pCurve);
 	Debug_Null_Pointer(curveOnPlane);
 
@@ -824,6 +832,13 @@ namespace tnbLib
 			const auto p1 = thePoint1;
 			const Dir2d d0 = theTang0;
 			const Dir2d d1 = theTang1;
+
+			const auto angle = std::abs(d0.Angle(d1));
+			if (angle <= 0.05*PI OR angle >= 0.95*PI)
+			{
+				auto pm = MEAN(p0, p1);
+				return std::move(pm);
+			}
 			
 			Entity2d_Line line0(std::move(p0), std::move(d0));
 			Entity2d_Line line1(std::move(p1), std::move(d1));
@@ -962,7 +977,6 @@ namespace tnbLib
 		{
 			const auto[P0, t0] = CalcTangent(theCurve0, CurvePoint::end);
 			const auto[P1, t1] = CalcTangent(theCurve1, CurvePoint::start);
-
 			auto coord = CalcIntersectionPoint(P0, t0, P1, t1);
 			return std::move(coord);
 		}
@@ -970,6 +984,7 @@ namespace tnbLib
 		static auto TrimCornerCurves(const std::shared_ptr<GModel_ParaCurve>& theCurve0, const std::shared_ptr<GModel_ParaCurve>& theCurve1)
 		{
 			const auto coord = CalcCornerPoint(theCurve0, theCurve1);
+
 			auto[c0, trimmed0] = SplitCurve(coord, theCurve0, CurvePoint::end);
 			auto[c1, trimmed1] = SplitCurve(coord, theCurve1, CurvePoint::start);
 			auto t = std::make_pair(std::move(c0), std::move(c1));
@@ -1019,10 +1034,11 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 			const auto maxIndex = MaxIndex(theCurves);
+
 			std::vector<std::shared_ptr<GModel_ParaCurve>> curves(maxIndex + 1);
 			for (const auto& x : theCurves)
 			{
-				curves[x->Index()] = x;
+				curves.at(x->Index()) = x;
 			}
 
 			const auto& c0 = theCurves.at(theCurves.size() - 1);
@@ -1324,6 +1340,7 @@ tnbLib::GModel_Tools::TrimWire
 			<< abort(FatalError);
 	}
 	const auto& curves = theWire->Curves();
+
 	if (curves.size() > 1)
 	{
 		auto trimmed = repairWire::TrimCurves(curves);
@@ -1390,6 +1407,7 @@ tnbLib::GModel_Tools::GetParaPlane
 			<< " - the surface has no outer wire!" << endl
 			<< abort(FatalError);
 	}
+
 	const auto trimOuterWire = TrimWire(unRepOuterWire);
 	Debug_Null_Pointer(trimOuterWire);
 
@@ -1401,7 +1419,9 @@ tnbLib::GModel_Tools::GetParaPlane
 	Debug_Null_Pointer(outerWire);
 
 	auto innerWires = std::make_shared<GModel_Plane::wireList>();
+
 	auto unRepinnerWires = GetInnerParaWires(theSurface);
+
 	if (unRepinnerWires.size())
 	{
 		for (const auto& x : unRepinnerWires)

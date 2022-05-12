@@ -128,6 +128,14 @@ namespace tnbLib
 			(
 				const std::vector<T1>&, const std::vector<T2>&
 			);
+
+		template<class Type1, class Type2, int nbVaries>
+		static std::vector<std::array<Type2, nbVaries>> ConvertToArrayField(const std::vector<Type1>&);
+
+		template<>
+		static TnbGlobal_EXPORT std::vector<std::array<Standard_Real, 1>> 
+			ConvertToArrayField<Standard_Real, Standard_Real, 1>
+			(const std::vector<Standard_Real>&);
 	};
 }
 

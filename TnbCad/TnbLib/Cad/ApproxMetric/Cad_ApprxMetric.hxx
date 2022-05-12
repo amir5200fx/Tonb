@@ -7,6 +7,7 @@
 #include <Standard_Handle.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity2d_MeshValueFwd.hxx>
 #include <Entity2d_Metric1.hxx>
 
 #include <memory>
@@ -22,6 +23,7 @@ namespace tnbLib
 	class Geo2d_SamplePoints;
 	class Cad_ApprxMetricCriterion;
 	class Cad_ApprxMetricInfo;
+	class Cad_MetricCalculator;
 
 	class Cad_ApprxMetric
 		: public Global_Done
@@ -115,6 +117,23 @@ namespace tnbLib
 		{
 			theInfo_ = std::move(theInfo);
 		}
+
+		// static functions and operators [5/11/2022 Amir]
+
+		static TnbCad_EXPORT std::shared_ptr<Entity2d_MeshValue> 
+			CalcDeterminants
+			(
+				const std::shared_ptr<Entity2d_Triangulation>&,
+				const Handle(Geom_Surface)&
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<Entity2d_MeshValue> 
+			CalcDeterminants
+			(
+				const std::shared_ptr<Entity2d_Triangulation>&,
+				const std::shared_ptr<Cad_MetricCalculator>&, 
+				const Handle(Geom_Surface)&
+			);
 	};
 }
 

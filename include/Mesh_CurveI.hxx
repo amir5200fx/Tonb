@@ -47,18 +47,50 @@ namespace tnbLib
 				<< " - uMax: " << theUmax << endl
 				<< abort(FatalError);
 		}
-		Mesh_CurveOptmPoint_Correction<gCurveType, MetricPrcsrType>
-			correction(theU0, theGuess, theCurve, *theInfo.CorrAlgInfo());
-		correction.SetLen(theStep);
-		correction.Perform();
 
-		Debug_If_Condition_Message(NOT correction.IsDone(),
-			"mesh_curveoptpoint_correction algorithm has not been performed!");
-		const auto corrected = correction.Corrected();
+		Standard_Real corrected = theGuess;
+		try
+		{
+			Mesh_CurveOptmPoint_Correction<gCurveType, MetricPrcsrType>
+				correction(theU0, theGuess, theCurve, *theInfo.CorrAlgInfo());
+
+			correction.SetLen(theStep);
+			correction.Perform();
+
+			Debug_If_Condition_Message(NOT correction.IsDone(),
+				"mesh_curveoptpoint_correction algorithm has not been performed!");
+			corrected = correction.Corrected();
+		}
+		catch (const ConvError&)
+		{
+			if (theLevel > theMaxLevel)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "Can not Calculate parameter of the curve" << endl
+					<< abort(FatalError);
+				return 0;
+			}
+
+			const auto ds2 = 0.5*theStep;
+			const auto du = theU0 + 0.5*(corrected - theU0);
+			auto um =
+				CalcNextParameter
+				(
+					theU0,
+					du, ds2, theUmax,
+					theLevel + 1, theMaxLevel,
+					theCurve, theInfo);
+			return
+				CalcNextParameter
+				(
+					um, 2.0*um - theU0, ds2,
+					theUmax, theLevel,
+					theMaxLevel, theCurve, theInfo
+				);
+		}
 
 		Mesh_CurveOptmPoint_Newton<gCurveType, MetricPrcsrType>
-			Iteration(theU0, theStep, theCurve);
-
+			Iteration(theU0, theStep, theCurve);	
 		try
 		{
 			Iteration.Perform(corrected, theInfo.NewtonIterInfo(),
@@ -82,8 +114,8 @@ namespace tnbLib
 					<< abort(FatalError);
 				return Iteration.Corrected();
 			}
-			const auto ds2 = theStep / 2;
-			const auto du = theU0 + (corrected - theU0) / 2;
+			const auto ds2 = 0.5*theStep;
+			const auto du = theU0 + 0.5*(corrected - theU0);
 			auto um =
 				CalcNextParameter
 				(
@@ -208,10 +240,10 @@ namespace tnbLib
 
 		std::vector<Standard_Real> Parameters(NbSegments + 1);
 
-		Parameters[0] = FirstParameter();
-		Parameters[Parameters.size() - 1] = LastParameter();
+		Parameters.at(0) = FirstParameter();
+		Parameters.at(Parameters.size() - 1) = LastParameter();
 
-		U0 = Parameters[0];
+		U0 = Parameters.at(0);
 		Guess = U0 + dt;  // Debug: 4/14/2018
 
 		if (Guess < FirstParameter()) Guess = FirstParameter();
@@ -240,8 +272,7 @@ namespace tnbLib
 
 			U0 = U1;
 		}
-		std::cout << std::endl;
-		std::cout << std::endl;
+
 		MakeChain(Parameters);
 
 		Change_IsDone() = Standard_True;

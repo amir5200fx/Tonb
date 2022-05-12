@@ -331,18 +331,19 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveOutOfBoundaryHorizo
 	{
 		return;
 	}
-
+	
 	for (const auto x : removeList)
 	{
 		topo->DestroyEntity(x);
 	}
 }
 
+#ifndef _DEBUG
 template<class SurfType>
 inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveColoredEdges
 (
-	Cad_SingularityTopology<SurfType>& theTopo, 
-	const Cad_ColorApprxMetric & theColors, 
+	Cad_SingularityTopology<SurfType>& theTopo,
+	const Cad_ColorApprxMetric & theColors,
 	const typename Cad_SingularityTopology<SurfType>::edgeToCurveMap & theEdgeToCurve,
 	const std::map<std::shared_ptr<parCurveType>, Cad_ModifySingularPlaneToolsBase::pCurveType>& theMap,
 	std::map<std::shared_ptr<Geo2d_TopoChainAnalysis::entityType>, Standard_Integer>& theColored
@@ -356,17 +357,20 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveColoredEdges
 	std::vector<Standard_Integer> removeList;
 	for (const auto& x : ents)
 	{
+
 		auto t = RetrieveType(*x.second, theEdgeToCurve, theMap);
 		if (t NOT_EQUAL Cad_ModifySingularPlaneToolsBase::pCurveType::horizon)
 		{
 			const auto pt = GetSample(*x.second, theEdgeToCurve);
 			const auto color = theColors.Value(pt);
+
 			if (color)
 			{
 				removeList.push_back(x.first);
 			}
 		}
 	}
+
 	if (removeList.empty())
 	{
 		return;
@@ -391,6 +395,8 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveColoredEdges
 		theColored.insert(std::move(paired));
 	}
 }
+#endif // !_DEBUG
+
 
 template<class SurfType>
 inline Standard_Boolean 

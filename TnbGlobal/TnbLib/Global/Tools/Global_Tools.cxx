@@ -105,3 +105,21 @@ void tnbLib::Global_Tools::CheckSorted
 		iter++;
 	}
 }
+
+template<>
+inline std::vector<std::array<Standard_Real, 1>> 
+tnbLib::Global_Tools::ConvertToArrayField<Standard_Real, Standard_Real, 1>
+(
+	const std::vector<Standard_Real>& theHs
+	)
+{
+	std::vector<std::array<Standard_Real, 1>> values;
+	values.reserve(theHs.size());
+	for (auto x : theHs)
+	{
+		std::array<Standard_Real, 1> h;
+		h.at(0) = x;
+		values.push_back(std::move(h));
+	}
+	return std::move(values);
+}

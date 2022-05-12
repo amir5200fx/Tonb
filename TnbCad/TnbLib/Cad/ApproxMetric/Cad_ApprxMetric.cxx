@@ -2,11 +2,14 @@
 
 #include <Cad_ApprxMetricSubdivider.hxx>
 #include <Cad_ApprxMetricInfo.hxx>
+#include <Cad_Tools.hxx>
+#include <Cad_MetricCalculator.hxx>
 #include <Geo2d_ApprxSpace.hxx>
 #include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo2d_DelTri.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Entity2d_MeshValue.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -266,4 +269,85 @@ void tnbLib::Cad_ApprxMetric::Perform()
 			<< "******* Surface Metric is approximated, successfully! ********" << endl
 			<< endl;
 	}
+}
+
+std::shared_ptr<tnbLib::Entity2d_MeshValue> 
+tnbLib::Cad_ApprxMetric::CalcDeterminants
+(
+	const std::shared_ptr<Entity2d_Triangulation> & theTri,
+	const Handle(Geom_Surface)& theSurface
+)
+{
+	if (NOT theTri)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "null mesh pointer has been detected!" << endl
+			<< abort(FatalError);
+	}
+	if (NOT theSurface)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no surface has been found." << endl
+			<< abort(FatalError);
+	}
+	auto values = std::make_shared<Entity2d_MeshValue>();
+	Debug_Null_Pointer(values);
+
+	const auto& pts = theTri->Points();
+	std::vector<Standard_Real> hs;
+	hs.reserve(pts.size());
+	for (const auto& x : pts)
+	{
+		auto m = Cad_Tools::CalcMetric(x, theSurface);
+		auto d = m.Determinant();
+		hs.push_back(d);
+	}
+
+	values->MeshRef() = theTri;
+	values->ValuesRef() = std::move(hs);
+	return std::move(values);
+}
+
+std::shared_ptr<tnbLib::Entity2d_MeshValue> 
+tnbLib::Cad_ApprxMetric::CalcDeterminants
+(
+	const std::shared_ptr<Entity2d_Triangulation>& theTri,
+	const std::shared_ptr<Cad_MetricCalculator>& theCalculator,
+	const Handle(Geom_Surface)& theSurface
+)
+{
+	if (NOT theTri)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "null mesh pointer has been detected!" << endl
+			<< abort(FatalError);
+	}
+	if (NOT theCalculator)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no metric calculator has been detected!" << endl
+			<< abort(FatalError);
+	}
+	if (NOT theSurface)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no surface has been found." << endl
+			<< abort(FatalError);
+	}
+	auto values = std::make_shared<Entity2d_MeshValue>();
+	Debug_Null_Pointer(values);
+
+	const auto& pts = theTri->Points();
+	std::vector<Standard_Real> hs;
+	hs.reserve(pts.size());
+	for (const auto& x : pts)
+	{
+		auto m = theCalculator->CalcMetric(x, theSurface);
+		auto d = m.Determinant();
+		hs.push_back(d);
+	}
+
+	values->MeshRef() = theTri;
+	values->ValuesRef() = std::move(hs);
+	return std::move(values);
 }

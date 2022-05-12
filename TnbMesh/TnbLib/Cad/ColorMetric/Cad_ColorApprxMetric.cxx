@@ -182,7 +182,8 @@ namespace tnbLib
 			const Mesh2d_Element& theElement,
 			const Handle(Geom_Surface)& theGeometry, 
 			const std::shared_ptr<Cad_MetricCalculator>& theCalculator,
-			const Standard_Real theCriterion
+			const Standard_Real theCriterion,
+			const Standard_Real theCoeff
 		)
 	{
 		const auto& P0 = theElement.Node0()->Coord();
@@ -190,13 +191,13 @@ namespace tnbLib
 		const auto& P2 = theElement.Node2()->Coord();
 
 		auto m0 = theCalculator->CalcMetric(P0, theGeometry);
-		if (m0.Determinant() < theCriterion) return Standard_True;
+		if (m0.Determinant()*theCoeff < theCriterion) return Standard_True;
 
 		auto m1 = theCalculator->CalcMetric(P1, theGeometry);
-		if (m1.Determinant() < theCriterion) return Standard_True;
+		if (m1.Determinant()*theCoeff < theCriterion) return Standard_True;
 
 		auto m2 = theCalculator->CalcMetric(P2, theGeometry);
-		if (m2.Determinant() < theCriterion) return Standard_True;
+		if (m2.Determinant()*theCoeff < theCriterion) return Standard_True;
 
 		return Standard_False;
 	}
@@ -208,13 +209,14 @@ namespace tnbLib
 			const std::vector<std::shared_ptr<Mesh2d_Element>>& theElements,
 			const Handle(Geom_Surface)& theGeometry, 
 			const std::shared_ptr<Cad_MetricCalculator>& theCalculator,
-			const Standard_Real theCriterion
+			const Standard_Real theCriterion,
+			const Standard_Real theCoeff
 		)
 	{
 		for (const auto& x : theElements)
 		{
 			Debug_Null_Pointer(x);
-			if (IsDegenerated(*x, theGeometry, theCalculator, theCriterion))
+			if (IsDegenerated(*x, theGeometry, theCalculator, theCriterion, theCoeff))
 			{
 				theReg.Insert(x);
 			}
@@ -257,7 +259,8 @@ void tnbLib::Cad_ColorApprxMetric::Perform()
 	Adt_AvlTree<std::shared_ptr<Mesh2d_Element>> reg;
 	reg.SetComparableFunction(&Mesh2d_Element::IsLess);
 
-	RegisterBlackElements(reg, mesh, Geometry(), MetricCalculator(), Criterion());
+	const auto weight = 1.0 / MaxDet();
+	RegisterBlackElements(reg, mesh, Geometry(), MetricCalculator(), Criterion(), weight);
 
 	const auto regions = TrackRegions(reg);
 	Debug_If_Condition_Message(reg.Size(), "the register must be empty!");

@@ -1,4 +1,5 @@
 #pragma once
+#include <MeshBase_Tools.hxx>
 #include <Global_Macros.hxx>
 #include <Geo_Tools.hxx>
 #include <OSstream.hxx>
@@ -18,13 +19,24 @@ namespace tnbLib
 		const auto nbIters = Info()->NbIters();
 		const auto tol = Info()->Tolerance();
 
+		const auto& domain = this->BoundingBox();
+
 		auto P = theP;
+		if (NOT domain.IsInside(P))
+		{
+			P = MeshBase_Tools::CorrectCoord(theCentre, P, domain);
+		}
 		forThose(Iter, 1, nbIters)
 		{
 			auto d = CalcDistance(theCentre, P) / theRadius;
-			P = theCentre + (1.0 / d)*(P - theCentre);
 
-			if (d <= tol)
+			P = theCentre + (1.0 / d)*(P - theCentre);
+			if (NOT domain.IsInside(P))
+			{
+				P = MeshBase_Tools::CorrectCoord(theCentre, P, domain);
+			}
+
+			if (std::abs(1.0- d) <= tol)
 			{
 				break;
 			}

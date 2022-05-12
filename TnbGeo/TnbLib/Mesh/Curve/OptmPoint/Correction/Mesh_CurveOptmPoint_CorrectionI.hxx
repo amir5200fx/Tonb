@@ -23,8 +23,9 @@ namespace tnbLib
 		forThose(Iter, 1, nbLevels)
 		{
 			auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
+
 			auto du = (Correct - Umin) / dis;
-			Correct = Umin + underRelaxation*du;
+			//Correct = Umin + underRelaxation*du;
 			Correct = Umin + du;
 
 			if (Correct < Umin) Correct = Umin;
@@ -33,6 +34,14 @@ namespace tnbLib
 			if (ABS(1.0 - dis) < tol) break;
 		}
 
+		// check the corrected value [5/11/2022 Amir]
+		const auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
+		if (std::abs(1.0 - dis) > 0.15)
+		{
+			FatalConvErrorIn(FunctionSIG, nbLevels, tol)
+				<< "the optm. point algorithm has not been converged!" << endl
+				<< abort(FatalConvError);
+		}
 		ChangeCorrected() = Correct;
 		Change_IsDone() = Standard_True;
 	}
@@ -59,7 +68,7 @@ namespace tnbLib
 		{
 			auto dis = s * geoLib::CalcCurveLength<gCurveType>::_(integrand, Umin, Correct, integInfo) / Len();
 			auto du = (Correct - Umin) / dis;
-			Correct = Umin + underRelaxation*du;
+			//Correct = Umin + underRelaxation*du;
 			Correct = Umin + du;
 
 			if (Correct < Umin) Correct = Umin;

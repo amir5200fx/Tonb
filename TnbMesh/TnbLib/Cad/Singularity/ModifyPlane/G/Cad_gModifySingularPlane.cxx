@@ -4,7 +4,66 @@
 #include <Cad_SingularityTopology.hxx>
 #include <Cad_ColorApprxMetric.hxx>
 
+#include <TecPlot.hxx>
+
 #ifdef _DEBUG
+
+template<>
+void tnbLib::Cad_gModifySingularPlane::RemoveColoredEdges
+(
+	Cad_SingularityTopology<GModel_Surface>& theTopo, 
+	const Cad_ColorApprxMetric & theColors, 
+	const Cad_SingularityTopology<GModel_Surface>::edgeToCurveMap & theEdgeToCurve, 
+	const std::map<std::shared_ptr<Aft2d_gPlnCurveSurface>, Cad_ModifySingularPlaneToolsBase::pCurveType>& theMap, 
+	std::map<std::shared_ptr<Geo_TopoChainAnalysis_Entity<Geo2d_SegmentGraphEdge>>, Standard_Integer>& theColored
+)
+{
+	const auto& topology = theTopo.Topology();
+
+	Debug_Null_Pointer(topology);
+	const auto& ents = topology->Entities();
+	std::vector<Standard_Integer> removeList;
+	for (const auto& x : ents)
+	{
+		
+		auto t = RetrieveType(*x.second, theEdgeToCurve, theMap);
+		if (t NOT_EQUAL Cad_ModifySingularPlaneToolsBase::pCurveType::horizon)
+		{
+			const auto pt = GetSample(*x.second, theEdgeToCurve);
+			const auto color = theColors.Value(pt);
+
+			if (color)
+			{
+				removeList.push_back(x.first);
+			}
+		}
+	}
+
+	if (removeList.empty())
+	{
+		return;
+	}
+
+	for (const auto x : removeList)
+	{
+		auto iter = ents.find(x);
+		if (iter IS_EQUAL ents.end())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the item is not found!" << endl
+				<< abort(FatalError);
+		}
+		auto pt = GetSample(*iter->second, theEdgeToCurve);
+		auto color = theColors.Value(pt);
+
+		auto ent = topology->deAttachEntity(iter->first);
+		topology->RemoveFromRegistry(iter->first);
+
+		auto paired = std::make_pair(std::move(ent), std::move(color));
+		theColored.insert(std::move(paired));
+	}
+}
+
 template<>
 void tnbLib::Cad_gModifySingularPlane::Perform()
 {
@@ -55,6 +114,7 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 
 	auto modifiedWires =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::ModifyWires(wires, subMap, Tolerance());
+
 	auto modifiedHorizons =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::ModifyHorizons(horizonCurves, subMap, 1.0E-12);
 
@@ -72,7 +132,7 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 
 	topology->Perform();
 	Debug_If_Condition_Message(NOT topology->IsDone(), "the application is not performed!");
-
+	
 	const auto& edgeToCurve = topology->EdgeToCurveMap();
 
 	// Removing the horizons that are outside of the domain
@@ -139,9 +199,18 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 	{
 		Debug_Null_Pointer(x.second);
 		const auto& chain = *x.second;
-
+		
 		if (NOT chain.IsRing())
 		{
+
+			/*OFstream myFile("failed_chain.plt");
+			std::vector<Pnt2d> mypoints;
+			for (const auto& e : chain.Entities())
+			{
+				mypoints.push_back(e->Node0()->Coord());
+				mypoints.push_back(e->Node1()->Coord());
+			}
+			Io::ExportCurve(mypoints, myFile);*/
 			FatalErrorIn(FunctionSIG)
 				<< "the chain is not a ring!" << endl
 				<< abort(FatalError);

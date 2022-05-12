@@ -17,6 +17,7 @@ tnbLib::Mesh_PlnCurve_Base::Mesh<tnbLib::Geo2d_SizeFunction, tnbLib::Geo2d_Metri
 	const std::shared_ptr<Mesh_Curve_Info>& theInfo
 	)
 {
+	Debug_If_Condition(theU1 <= theU0);
 	Mesh2d_CurveAnIso alg(theCurve, theU0, theU1, theMap, theInfo);
 
 	if (NOT alg.Geometry())

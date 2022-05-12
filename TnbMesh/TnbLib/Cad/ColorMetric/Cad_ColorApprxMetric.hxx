@@ -44,6 +44,7 @@ namespace tnbLib
 		std::shared_ptr<Cad_MetricCalculator> theCalculator_;
 
 		Standard_Real theCriterion_;
+		Standard_Real theMaxDet_;
 
 		// output results [1/1/2022 Amir]
 
@@ -58,6 +59,7 @@ namespace tnbLib
 
 		Cad_ColorApprxMetric()
 			: theCriterion_(DEFAULT_CRITERION)
+			, theMaxDet_(1.0)
 		{}
 
 		// constructors [1/1/2022 Amir]
@@ -72,6 +74,7 @@ namespace tnbLib
 			, theApproximation_(theApprox)
 			, theCalculator_(theCalculator)
 			, theCriterion_(DEFAULT_CRITERION)
+			, theMaxDet_(1.0)
 		{}
 
 		// public functions and operators [1/1/2022 Amir]
@@ -101,6 +104,11 @@ namespace tnbLib
 			return theCriterion_;
 		}
 
+		auto MaxDet() const
+		{
+			return theMaxDet_;
+		}
+
 		TnbMesh_EXPORT Standard_Integer NbElements() const;
 		TnbMesh_EXPORT Standard_Integer Value(const Standard_Integer theIndex) const;
 		TnbMesh_EXPORT Standard_Integer Value(const Pnt2d& theCoord) const;
@@ -125,6 +133,11 @@ namespace tnbLib
 		void SetCriterion(const Standard_Real theCrit)
 		{
 			theCriterion_ = theCrit;
+		}
+
+		void SetMaxDet(const Standard_Real theDet)
+		{
+			theMaxDet_ = theDet;
 		}
 
 		static TnbMesh_EXPORT Standard_Real 
