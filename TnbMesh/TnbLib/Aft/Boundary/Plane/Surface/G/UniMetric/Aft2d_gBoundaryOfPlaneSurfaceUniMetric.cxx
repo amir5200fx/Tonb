@@ -2,6 +2,8 @@
 
 #include <Aft2d_gPlnWireSurfaceUniMetric.hxx>
 #include <Aft2d_gPlnCurveSurfaceUniMetric.hxx>
+#include <Aft2d_gSegmentGapEdgeUniMetric.hxx>
+#include <Cad_gPlnGapCurveUniMetric.hxx>
 #include <Global_Macros.hxx>
 #include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
@@ -9,7 +11,6 @@
 
 unsigned short tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::verbose(0);
 
-#ifdef _DEBUG
 template<>
 void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies()
 {
@@ -25,11 +26,23 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies()
 		{
 			modified.push_back(x);
 		}
-		else
+		else if (x->IsGap())
 		{
-			x->SingularityContraction(*MetricProcessor());
+			auto gapEdge = std::dynamic_pointer_cast<Aft2d_gSegmentGapEdgeUniMetric>(x);
+			Debug_Null_Pointer(gapEdge);
+
+			gapEdge->Contraction(*MetricProcessor());
 
 			if (NOT contracted) contracted = Standard_True;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "under uniform metric situation, zero characteristic length has been detected." << endl
+				<< abort(FatalError);
+			/*x->SingularityContraction(*MetricProcessor());
+
+			if (NOT contracted) contracted = Standard_True;*/
 		}
 	}
 
@@ -47,6 +60,8 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies()
 		x->Node0()->SetIndex(++Kn);
 	}
 }
+
+#ifdef _DEBUG
 
 template<>
 void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront()
@@ -95,6 +110,8 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront()
 		n0->SetMetric(M);
 	}
 }
+
+#endif // _DEBUG
 
 template<>
 void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::Perform()
@@ -206,7 +223,15 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::Perform()
 			{
 				tnbLib::Info << "   Discretizing..." << endl;
 			}
-			auto mesh = Aft2d_gPlnCurveSurfaceUniMetric::TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
+			std::vector<std::shared_ptr<bndType>> mesh;
+			if (x->IsGap())
+			{
+				mesh = Cad_gPlnGapCurveUniMetric::TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
+			}
+			else
+			{
+				mesh = Aft2d_gPlnCurveSurfaceUniMetric::TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
+			}
 
 			if (verbose)
 			{
@@ -418,4 +443,3 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::Perform()
 			<< "****** End of the Meshing the boundaries ******" << endl << endl;
 	}
 }
-#endif // _DEBUG

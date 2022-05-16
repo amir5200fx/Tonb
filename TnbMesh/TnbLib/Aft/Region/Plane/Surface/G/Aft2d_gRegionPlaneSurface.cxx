@@ -2,6 +2,7 @@
 
 #include <Aft2d_gPlnWireSurface.hxx>
 #include <Aft2d_gPlnCurveSurface.hxx>
+#include <Cad_gPlnGapCurve.hxx>
 #include <GModel_ParaWire.hxx>
 #include <GModel_Plane.hxx>
 
@@ -22,7 +23,16 @@ tnbLib::Aft2d_gRegionPlaneSurface::MakeMeshWire<tnbLib::GModel_ParaWire>
 	for (const auto& x : theWire.Curves())
 	{
 		Debug_Null_Pointer(x);
-		curves.push_back(std::make_shared<Aft2d_gPlnCurveSurface>(x));
+		if (x->IsGap())
+		{
+			auto curve = std::make_shared<Cad_gPlnGapCurve>(x);
+			curves.push_back(std::move(curve));
+		}
+		else
+		{
+			auto curve = std::make_shared<Aft2d_gPlnCurveSurface>(x);
+			curves.push_back(std::move(curve));
+		}
 	}
 	auto wire =
 		std::make_shared<Aft2d_gPlnWireSurface>(std::move(curves));

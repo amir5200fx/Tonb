@@ -38,8 +38,17 @@ namespace tnbLib
 
 	public:
 
+
+		// default constructor [5/12/2022 Amir]
+
 		Aft_EntityIdentifier()
 		{}
+
+
+		// constructors [5/12/2022 Amir]
+
+
+		// public functions and operators [5/12/2022 Amir]
 
 		const metric& EffectiveMetric() const
 		{

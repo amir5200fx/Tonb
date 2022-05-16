@@ -2,6 +2,7 @@
 
 #include <Aft2d_gPlnWireSurfaceUniMetric.hxx>
 #include <Aft2d_gPlnCurveSurfaceUniMetric.hxx>
+#include <Cad_gPlnGapCurveUniMetric.hxx>
 #include <GModel_ParaWire.hxx>
 
 template<>
@@ -21,7 +22,16 @@ tnbLib::Aft2d_gRegionPlaneSurfaceUniMetric::MakeMeshWire<tnbLib::GModel_ParaWire
 	for (const auto& x : theWire.Curves())
 	{
 		Debug_Null_Pointer(x);
-		curves.push_back(std::make_shared<Aft2d_gPlnCurveSurfaceUniMetric>(x));
+		if (x->IsGap())
+		{
+			auto curve = std::make_shared<Cad_gPlnGapCurveUniMetric>(x);
+			curves.push_back(std::move(curve));
+		}
+		else
+		{
+			auto curve = std::make_shared<Aft2d_gPlnCurveSurfaceUniMetric>(x);
+			curves.push_back(std::move(curve));
+		}
 	}
 	auto wire =
 		std::make_shared<Aft2d_gPlnWireSurfaceUniMetric>(std::move(curves));

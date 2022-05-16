@@ -3,8 +3,10 @@
 #include <Aft2d_gPlnWireSurface.hxx>
 #include <Aft2d_gPlnCurveSurface.hxx>
 #include <Aft2d_gPlnWireSurface.hxx>
+#include <Aft2d_gSegmentGapEdge.hxx>
 #include <Cad_gPoleSingularCurve.hxx>
 #include <Cad_gLineSingularCurve.hxx>
+#include <Cad_gPlnGapCurve.hxx>
 #include <Global_Macros.hxx>
 #include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
@@ -27,6 +29,15 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::RemoveDegeneracies()
 		if (x->IsSingular())
 		{
 			x->SingularityContraction(*MetricProcessor());
+
+			if (NOT contracted) contracted = Standard_True;
+		}
+		else if (x->IsGap())
+		{
+			auto gapEdge = std::dynamic_pointer_cast<Aft2d_gSegmentGapEdge>(x);
+			Debug_Null_Pointer(gapEdge);
+
+			gapEdge->Contraction(*MetricProcessor());
 
 			if (NOT contracted) contracted = Standard_True;
 		}
@@ -231,6 +242,10 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::Perform()
 						<< "invalid data has been detected!" << endl
 						<< abort(FatalError);
 				}
+			}
+			else if (x->IsGap())
+			{
+				mesh = Cad_gPlnGapCurve::TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
 			}
 			else
 			{

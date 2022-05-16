@@ -30,7 +30,7 @@ namespace tnbLib
 
 		// constructors [4/25/2022 Amir]
 
-		Aft2d_SingularEdgeTemplate(const Standard_Integer theIndex)
+		explicit Aft2d_SingularEdgeTemplate(const Standard_Integer theIndex)
 			: BndEdgeType(theIndex)
 		{}
 

@@ -61,7 +61,7 @@ namespace tnbLib
 
 		//- constructors
 
-		Mesh_BndNode
+		explicit Mesh_BndNode
 		(
 			const Standard_Integer theIndex
 		)
@@ -76,6 +76,12 @@ namespace tnbLib
 			: nodeType(theIndex, theCoord)
 		{}
 
+		// virtual functions and operators [5/13/2022 Amir]
+
+		virtual Standard_Boolean IsGap() const
+		{
+			return Standard_False;
+		}
 
 		//- public functions and operators
 

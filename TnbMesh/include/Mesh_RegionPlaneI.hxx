@@ -1,4 +1,5 @@
 #pragma once
+#include <Cad_PlnGapCurve.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 namespace tnbLib
@@ -40,7 +41,16 @@ namespace tnbLib
 			const auto& xCurve = x->Curve();
 			Debug_Null_Pointer(xCurve);
 
-			curves.push_back(std::make_shared<plnCurveType>(xCurve));
+			if (xCurve->IsGap())
+			{
+				auto gapCurve = std::make_shared<Cad_PlnGapCurve<plnCurveType>>(xCurve);
+				curves.push_back(std::move(gapCurve));
+			}
+			else
+			{
+				auto curve = std::make_shared<plnCurveType>(xCurve);
+				curves.push_back(std::move(curve));
+			}
 		}
 
 		auto wire =

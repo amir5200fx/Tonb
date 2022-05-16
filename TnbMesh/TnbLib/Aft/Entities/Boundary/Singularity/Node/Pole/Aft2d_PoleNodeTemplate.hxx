@@ -36,6 +36,7 @@ namespace tnbLib
 			const Pnt2d& theCoord
 		)
 			: Aft2d_SingularNodeTemplate<BndNodeType>(theIndex, theCoord)
+			, IsFixed_(Standard_False)
 		{}
 
 		// override functions and operators [4/25/2022 Amir]

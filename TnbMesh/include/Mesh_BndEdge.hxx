@@ -69,6 +69,13 @@ namespace tnbLib
 		{}
 
 
+		// virtual functions and operators [5/12/2022 Amir]
+
+		virtual Standard_Boolean IsGap() const
+		{
+			return Standard_False;
+		}
+
 		//- Static functions and operators
 
 		static void
