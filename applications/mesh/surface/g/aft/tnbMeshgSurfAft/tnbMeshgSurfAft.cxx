@@ -333,6 +333,8 @@ namespace tnbLib
 			bnd->LoadMetricProcessor(metricPrcsr);
 			bnd->LoadPlane(plnRegion);
 
+			theBndInfo->SetMergeTolerance(tol);  // added to adapt the merging tolerance [5/16/2022 Amir]
+
 			bnd->Perform();
 			if (NOT bnd->IsDone())
 			{
@@ -488,6 +490,8 @@ namespace tnbLib
 					auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurface>(theBndInfo);
 					bnd->LoadMetricProcessor(metricPrcsr);
 					bnd->LoadPlane(ip);
+
+					theBndInfo->SetMergeTolerance(tol);  // added to adapt the merging tolerance [5/16/2022 Amir]
 
 					bnd->Perform();
 					if (NOT bnd->IsDone())
