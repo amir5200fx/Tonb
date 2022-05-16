@@ -52,8 +52,20 @@ tnbLib::Pln_CurveTools::Trim
 
 	try
 	{
-		Handle(Geom2d_TrimmedCurve) t = new Geom2d_TrimmedCurve(theCurve, p0, p1);
-		return std::move(t);
+		auto trimmed = Handle(Geom2d_TrimmedCurve)::DownCast(theCurve);
+		if (trimmed)
+		{
+			auto base = trimmed->BasisCurve();
+			Debug_Null_Pointer(base);
+
+			Handle(Geom2d_TrimmedCurve) t = new Geom2d_TrimmedCurve(base, p0, p1);
+			return std::move(t);
+		}
+		else
+		{
+			Handle(Geom2d_TrimmedCurve) t = new Geom2d_TrimmedCurve(theCurve, p0, p1);
+			return std::move(t);
+		}
 	}
 	catch (const Standard_Failure& x)
 	{

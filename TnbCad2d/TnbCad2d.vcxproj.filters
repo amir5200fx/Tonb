@@ -475,6 +475,9 @@
     <Filter Include="TnbLib\Cad2d\Entities\Edge\Ring">
       <UniqueIdentifier>{1f10ceb5-e2b9-479b-8fab-1fb02192f1a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\RepairWire">
+      <UniqueIdentifier>{25b92e75-a0cd-4ec3-b643-5fa5362b9c7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -905,6 +908,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\Entities\Edge\Ring\Pln_Ring.hxx">
       <Filter>TnbLib\Cad2d\Entities\Edge\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\RepairWire\Cad2d_RepairWire.hxx">
+      <Filter>TnbLib\Cad2d\RepairWire</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1352,5 +1358,11 @@
     <ClCompile Include="TnbLib\Cad2d\Entities\Edge\Ring\Pln_RingIO.cxx">
       <Filter>TnbLib\Cad2d\Entities\Edge\Ring</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\RepairWire\Cad2d_RepairWire.cxx">
+      <Filter>TnbLib\Cad2d\RepairWire</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
