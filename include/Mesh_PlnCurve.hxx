@@ -86,8 +86,22 @@ namespace tnbLib
 			, theCurve_(theCurve)
 		{}
 
+		Mesh_PlnCurve
+		(
+			const Standard_Integer theIndex,
+			std::shared_ptr<CurveType>&& theCurve
+		)
+			: Global_Indexed(theIndex)
+			, theCurve_(std::move(theCurve))
+		{}
+
 
 		// virtual functions and operators [4/25/2022 Amir]
+
+		virtual Standard_Boolean IsGap() const
+		{
+			return Standard_False;
+		}
 
 		virtual Standard_Boolean IsSingular() const;
 		virtual void OrientWith(const std::shared_ptr<Mesh_PlnCurve>&);

@@ -5,7 +5,9 @@
 #include <Aft2d_SingularEdgeTemplate.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 
-#include "Aft2d_gSegmentEdge.hxx"
+//#include "Aft2d_gSegmentEdge.hxx"
+
+#include <vector>
 
 namespace tnbLib
 {
@@ -36,7 +38,7 @@ namespace tnbLib
 
 		// constructors [4/25/2022 Amir]
 
-		Aft2d_PoleEdgeTemplate(const Standard_Integer theIndex)
+		explicit Aft2d_PoleEdgeTemplate(const Standard_Integer theIndex)
 			: Aft2d_SingularEdgeTemplate<BndEdgeType>(theIndex)
 		{}
 

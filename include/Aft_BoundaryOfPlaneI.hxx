@@ -1,5 +1,7 @@
 #pragma once
 #include <Cad_SingularCurve.hxx>
+#include <Cad_PlnGapCurve.hxx>
+#include <Aft2d_GapEdgeTemplate.hxx>
 #include <Global_Macros.hxx>
 #include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
@@ -24,6 +26,15 @@ namespace tnbLib
 			if (x->IsSingular())
 			{
 				x->SingularityContraction(*MetricProcessor());
+
+				if (NOT contracted) contracted = Standard_True;
+			}
+			else if (x->IsGap())
+			{
+				auto gapEdge = std::dynamic_pointer_cast<Aft2d_GapEdgeTemplate<bndType>>(x);
+				Debug_Null_Pointer(gapEdge);
+
+				gapEdge->Contraction(*MetricProcessor());
 
 				if (NOT contracted) contracted = Standard_True;
 			}
@@ -227,6 +238,10 @@ namespace tnbLib
 							<< "invalid data has been detected!" << endl
 							<< abort(FatalError);
 					}
+				}
+				else if (x->IsGap())
+				{
+					mesh = Cad_PlnGapCurve<curveType>::template TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
 				}
 				else
 				{

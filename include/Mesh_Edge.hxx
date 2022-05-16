@@ -69,10 +69,16 @@ namespace tnbLib
 			hierarchy = 0
 		};
 
+
+		// default constructor [5/12/2022 Amir]
+
 		Mesh_Edge()
 		{}
 
-		Mesh_Edge(const Standard_Integer theIndex)
+
+		// constructors [5/12/2022 Amir]
+
+		explicit Mesh_Edge(const Standard_Integer theIndex)
 			: Mesh_Entity(theIndex)
 		{}
 
@@ -87,6 +93,8 @@ namespace tnbLib
 			theNodes_[0] = theNode0;
 			theNodes_[1] = theNode1;
 		}
+
+		// public functions and operators [5/12/2022 Amir]
 
 		auto NbNodes() const
 		{
