@@ -295,9 +295,9 @@ namespace tnbLib
 
 		auto d = box.Diameter();
 		auto tol = myTol * d;
-
+		std::cout << "get para plane" << std::endl;
 		auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
-
+		std::cout << "para plane is created!" << std::endl;
 		auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
 		auto metricCalculator = createMetricCalculator();
 
@@ -523,6 +523,8 @@ namespace tnbLib
 				bnd->LoadMetricProcessor(metricPrcsr);
 				bnd->LoadPlane(plnRegion);
 
+				theBndInfo->SetMergeTolerance(tol);  // added to adapt the merging tolerance [5/16/2022 Amir]
+
 				bnd->Perform();
 				if (NOT bnd->IsDone())
 				{
@@ -684,7 +686,11 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 4)
+			/*if (x->Index() NOT_EQUAL 3)
+			{
+				continue;
+			}*/
+			/*if (x->Index() > 24)
 			{
 				continue;
 			}*/
