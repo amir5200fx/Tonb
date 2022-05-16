@@ -4,14 +4,20 @@
 #include <Cad_GeomSurface.hxx>
 #include <GModel_Curve.hxx>
 #include <GModel_ParaCurve.hxx>
+#include <GModel_ParaGapCurve.hxx>
 #include <GModel_Edge.hxx>
 #include <GModel_Wire.hxx>
 #include <GModel_Surface.hxx>
 #include <GModel_ParaWire.hxx>
 #include <GModel_Plane.hxx>
+#include <Cad_gApprxParaPlane.hxx>
+#include <Cad_gApprxParaWire.hxx>
+#include <Cad2d_RepairWire.hxx>
 #include <Geo_Tools.hxx>
 #include <Pln_Tools.hxx>
+#include <Pln_CurveTools.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Geo_ApprxCurve_Info.hxx>
 #include <Entity_Line.hxx>
 #include <Vec2d.hxx>
 #include <Dir2d.hxx>
@@ -27,6 +33,74 @@
 #include <ShapeFix_Wire.hxx>
 #include <BRepTools_WireExplorer.hxx>
 #include <Geom2dAPI_ProjectPointOnCurve.hxx>
+#include <Geom2dAPI_InterCurveCurve.hxx>
+
+#include <exception>
+
+namespace tnbLib
+{
+
+	namespace cadLib
+	{
+
+		namespace gModelTools
+		{
+
+			class zeroIntPoint
+				: public std::exception
+			{
+
+				virtual const char* what() const throw()
+				{
+					return "no intersection has been found.";
+				}
+			} zeroIntPointObj;
+		}
+	}
+}
+
+std::vector<std::shared_ptr<tnbLib::GModel_ParaCurve>> 
+tnbLib::GModel_Tools::MakeCurves
+(
+	const std::vector<Handle(Geom2d_Curve)>& theGeometries
+)
+{
+	std::vector<std::shared_ptr<GModel_ParaCurve>> curves;
+	curves.reserve(theGeometries.size());
+	for (const auto& x : theGeometries)
+	{
+		Debug_Null_Pointer(x);
+		auto curve = std::make_shared<GModel_ParaCurve>(x);
+		curves.push_back(std::move(curve));
+	}
+	return std::move(curves);
+}
+
+std::vector<Handle(Geom2d_Curve)> 
+tnbLib::GModel_Tools::RetrieveGeometries
+(
+	const std::vector<std::shared_ptr<GModel_ParaCurve>>& theWire
+)
+{
+	std::vector<Handle(Geom2d_Curve)> geometries;
+	geometries.reserve(theWire.size());
+	for (const auto& x : theWire)
+	{
+		Debug_Null_Pointer(x);
+		geometries.push_back(x->Geometry());
+	}
+	return std::move(geometries);
+}
+
+std::vector<Handle(Geom2d_Curve)> 
+tnbLib::GModel_Tools::RetrieveGeometries
+(
+	const GModel_ParaWire & theWire
+)
+{
+	auto geometries = RetrieveGeometries(theWire.Curves());
+	return std::move(geometries);
+}
 
 Handle(Geom_Surface)
 tnbLib::GModel_Tools::RetrieveGeometry
@@ -184,13 +258,19 @@ tnbLib::GModel_Tools::GetSurface(const TopoDS_Face & theFace)
 	Debug_Null_Pointer(outterEdges_p);
 
 	auto& outterEdges = *outterEdges_p;
-	const auto outerWire = BRepTools::OuterWire(forwardFace);
+	auto outerWire = BRepTools::OuterWire(forwardFace);
 	if (outerWire.IsNull())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "Null outer wire" << endl
 			<< abort(FatalError);
 	}
+
+	/*ShapeFix_Wire fixAlg(outerWire, theFace, 1.0E-6);
+	fixAlg.FixClosed();
+	fixAlg.FixGap2d(-1, Standard_True);
+	fixAlg.Perform();
+	outerWire = fixAlg.Wire();*/
 
 	Standard_Integer id = 0;
 	for (
@@ -346,6 +426,22 @@ tnbLib::GModel_Tools::CalcBoundingBox
 		iter++;
 	}
 	return std::move(b);
+}
+
+std::shared_ptr<tnbLib::GModel_ParaCurve> 
+tnbLib::GModel_Tools::Trim
+(
+	const std::shared_ptr<GModel_ParaCurve>& theCurve,
+	const Standard_Real theU0,
+	const Standard_Real theU1
+)
+{
+	Debug_Null_Pointer(theCurve);
+	auto geom = Pln_CurveTools::Trim(theCurve->Curve(), theU0, theU1);
+
+	auto curve = std::make_shared<GModel_ParaCurve>
+		(theCurve->Index(), theCurve->Name(), std::move(geom));
+	return std::move(curve);
 }
 
 namespace tnbLib
@@ -878,6 +974,12 @@ namespace tnbLib
 		{
 			Debug_Null_Pointer(theCurve);
 			Geom2dAPI_ProjectPointOnCurve alg(theCoord, theCurve->Geometry());
+
+			if (NOT alg.NbPoints())
+			{
+				throw cadLib::gModelTools::zeroIntPointObj;
+			}
+
 			Pnt2d pt = alg.NearestPoint();
 			auto u = alg.LowerDistanceParameter();
 			if (u < theCurve->FirstParameter())
@@ -983,12 +1085,23 @@ namespace tnbLib
 
 		static auto TrimCornerCurves(const std::shared_ptr<GModel_ParaCurve>& theCurve0, const std::shared_ptr<GModel_ParaCurve>& theCurve1)
 		{
-			const auto coord = CalcCornerPoint(theCurve0, theCurve1);
-
-			auto[c0, trimmed0] = SplitCurve(coord, theCurve0, CurvePoint::end);
-			auto[c1, trimmed1] = SplitCurve(coord, theCurve1, CurvePoint::start);
-			auto t = std::make_pair(std::move(c0), std::move(c1));
+			auto t = std::make_pair(theCurve0, theCurve1);
 			return std::move(t);
+
+			try
+			{
+				const auto coord = CalcCornerPoint(theCurve0, theCurve1);
+
+				auto[c0, trimmed0] = SplitCurve(coord, theCurve0, CurvePoint::end);
+				auto[c1, trimmed1] = SplitCurve(coord, theCurve1, CurvePoint::start);
+				auto t = std::make_pair(std::move(c0), std::move(c1));
+				return std::move(t);
+			}
+			catch (const cadLib::gModelTools::zeroIntPoint&)
+			{
+				auto t = std::make_pair(theCurve0, theCurve1);
+				return std::move(t);
+			}
 		}
 
 		static auto MaxIndex(const std::vector<std::shared_ptr<GModel_ParaCurve>>& theCurves)
@@ -1034,7 +1147,6 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 			const auto maxIndex = MaxIndex(theCurves);
-
 			std::vector<std::shared_ptr<GModel_ParaCurve>> curves(maxIndex + 1);
 			for (const auto& x : theCurves)
 			{
@@ -1190,11 +1302,12 @@ namespace tnbLib
 
 				auto v0 = x->FirstCoord();
 				auto v1 = x->LastCoord();
-
+				std::cout << "dis0 : " << v0.Distance(node0->Coord()) << ", tol: " << theTol << std::endl;
 				if (v0.Distance(node0->Coord()) <= theTol)
 				{
 					node0->SetForward(edge);
 				}
+				std::cout << "dis1 : " << v1.Distance(node1->Coord()) << ", tol: " << theTol << std::endl;
 				if (v1.Distance(node1->Coord()) <= theTol)
 				{
 					node1->SetBackward(edge);
@@ -1202,6 +1315,7 @@ namespace tnbLib
 				links.push_back(std::move(edge));
 				k++;
 			}
+			std::cout << std::endl;
 			return std::move(links);
 		}
 
@@ -1340,7 +1454,6 @@ tnbLib::GModel_Tools::TrimWire
 			<< abort(FatalError);
 	}
 	const auto& curves = theWire->Curves();
-
 	if (curves.size() > 1)
 	{
 		auto trimmed = repairWire::TrimCurves(curves);
@@ -1399,7 +1512,7 @@ tnbLib::GModel_Tools::GetParaPlane
 )
 {
 	Debug_Null_Pointer(theSurface);
-	const auto unRepOuterWire = GetOuterParaWire(theSurface);
+	const auto unRepOuterWire = RepairWire(GetOuterParaWire(theSurface), theTol);
 	if (NOT unRepOuterWire)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -1407,11 +1520,17 @@ tnbLib::GModel_Tools::GetParaPlane
 			<< " - the surface has no outer wire!" << endl
 			<< abort(FatalError);
 	}
-
+	//OFstream myFile0("before_corr.plt");
+	//OFstream myFile1("after_corr.plt");
+	auto approxInfo = std::make_shared<Geo_ApprxCurve_Info>();
+	
 	const auto trimOuterWire = TrimWire(unRepOuterWire);
 	Debug_Null_Pointer(trimOuterWire);
-
-	const auto outerEdges = repairWire::CreateWire(trimOuterWire, theTol);
+	//ExportToPlt(trimOuterWire, approxInfo, myFile0);
+	const auto waterTight = FillGaps(trimOuterWire, theTol);
+	//ExportToPlt(waterTight, approxInfo, myFile1);
+	//std::exit(1);
+	const auto outerEdges = repairWire::CreateWire(waterTight, theTol);
 
 	repairWire::CheckWire(outerEdges);
 
@@ -1420,7 +1539,13 @@ tnbLib::GModel_Tools::GetParaPlane
 
 	auto innerWires = std::make_shared<GModel_Plane::wireList>();
 
-	auto unRepinnerWires = GetInnerParaWires(theSurface);
+	std::vector<std::shared_ptr<GModel_ParaWire>> unRepinnerWires;
+	for (const auto& x : GetInnerParaWires(theSurface))
+	{
+		Debug_Null_Pointer(x);
+		auto inner = RepairWire(x, theTol);
+		unRepinnerWires.push_back(std::move(inner));
+	}
 
 	if (unRepinnerWires.size())
 	{
@@ -1431,7 +1556,9 @@ tnbLib::GModel_Tools::GetParaPlane
 			auto trimInnerWire = TrimWire(x);
 			Debug_Null_Pointer(trimInnerWire);
 
-			auto innerEdges = repairWire::CreateWire(trimInnerWire, theTol);
+			auto waterTight = FillGaps(trimOuterWire, theTol);
+
+			auto innerEdges = repairWire::CreateWire(waterTight, theTol);
 			repairWire::CheckWire(innerEdges);
 
 			auto innerWire = repairWire::CreateWire(innerEdges);
@@ -1460,5 +1587,349 @@ tnbLib::GModel_Tools::GetParaPlane
 	{
 		auto plane = std::make_shared<GModel_Plane>(outerWire);
 		return std::move(plane);
+	}
+}
+
+std::shared_ptr<tnbLib::GModel_ParaWire> 
+tnbLib::GModel_Tools::MakeWire
+(
+	const std::shared_ptr<GModel_ParaCurve>& theCurve
+)
+{
+	auto l = std::make_shared<std::vector<std::shared_ptr<GModel_ParaCurve>>>();
+	l->push_back(theCurve);
+	auto wire = std::make_shared<GModel_ParaWire>(std::move(l));
+	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::GModel_ParaWire> 
+tnbLib::GModel_Tools::MakeWire
+(
+	const std::vector<std::shared_ptr<GModel_ParaCurve>>& theCurves
+)
+{
+	auto l = std::make_shared<std::vector<std::shared_ptr<GModel_ParaCurve>>>(theCurves);
+	auto wire = std::make_shared<GModel_ParaWire>(std::move(l));
+	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::GModel_ParaWire> 
+tnbLib::GModel_Tools::FillGaps
+(
+	const std::shared_ptr<GModel_ParaWire> & theWire,
+	const Standard_Real theTol
+)
+{
+	Debug_Null_Pointer(theWire);
+
+	const auto& curves = theWire->Curves();
+	if (curves.size() IS_EQUAL 1)
+	{
+		const auto& curve = curves.at(0);
+		Debug_Null_Pointer(curve);
+
+		auto P0 = curve->LastCoord();
+		auto P1 = curve->FirstCoord();
+
+		if (P0.Distance(P1) < theTol)
+		{
+			return theWire;
+		}
+		else
+		{
+			auto geom = Pln_CurveTools::MakeSegment(P0, P1);
+			auto c = std::make_shared<GModel_ParaGapCurve>(curve->Index() + 1, std::move(geom));
+
+			std::vector<std::shared_ptr<GModel_ParaCurve>> newCurves;
+			newCurves.reserve(2);
+
+			newCurves.push_back(curve);
+			newCurves.push_back(std::move(c));
+
+			auto wire = MakeWire(newCurves);
+			return std::move(wire);
+		}
+	}
+	else
+	{
+		auto maxId = repairWire::MaxIndex(curves);
+		std::vector<std::shared_ptr<GModel_ParaCurve>> newCurves;
+		{
+			const auto& c0 = LastItem(curves);
+			const auto& c1 = FirstItem(curves);
+
+			auto P0 = c0->LastCoord();
+			auto P1 = c1->FirstCoord();
+
+			if (P0.Distance(P1) >= theTol)
+			{
+				auto geom = Pln_CurveTools::MakeSegment(P0, P1);
+				auto c = std::make_shared<GModel_ParaGapCurve>(++maxId, std::move(geom));
+
+				newCurves.push_back(std::move(c));
+			}
+			newCurves.push_back(c1);
+		}
+
+		for (size_t i = 1; i < curves.size(); i++)
+		{
+			const auto& c0 = curves.at(i - 1);
+			const auto& c1 = curves.at(i);
+
+			Debug_Null_Pointer(c0);
+			Debug_Null_Pointer(c1);
+
+			auto P0 = c0->LastCoord();
+			auto P1 = c1->FirstCoord();
+
+			if (P0.Distance(P1) >= theTol)
+			{
+				auto geom = Pln_CurveTools::MakeSegment(P0, P1);
+				auto c = std::make_shared<GModel_ParaGapCurve>(++maxId, std::move(geom));
+
+				newCurves.push_back(std::move(c));
+			}
+			newCurves.push_back(c1);
+		}
+		auto wire = MakeWire(newCurves);
+		return std::move(wire);
+	}
+}
+
+namespace tnbLib
+{
+
+	namespace repairWire
+	{
+
+		static std::pair
+			<
+			std::shared_ptr<GModel_ParaCurve>,
+			std::shared_ptr<GModel_ParaCurve>
+			> 
+			RepairIntersection
+			(
+				const std::shared_ptr<GModel_ParaCurve>& theC0, 
+				const std::shared_ptr<GModel_ParaCurve>& theC1,
+				const Standard_Real theTol
+			)
+		{
+			const auto& c0 = theC0->Curve();
+			Debug_Null_Pointer(c0);
+			const auto& c1 = theC1->Curve();
+			Debug_Null_Pointer(c1);
+
+			auto alg = Pln_Tools::Intersection(c0, c1, theTol);
+			std::vector<Standard_Real> params0;
+			std::vector<Standard_Real> params1;
+			if (alg->NbPoints())
+			{
+				for (Standard_Integer i = 1; i <= alg->NbPoints(); i++)
+				{
+					auto p0 = alg->Intersector().Point(i).ParamOnFirst();
+					auto p1 = alg->Intersector().Point(i).ParamOnSecond();
+
+					params0.push_back(p0);
+					params1.push_back(p1);
+				}
+			}
+			if (alg->NbSegments())
+			{
+				for (Standard_Integer i = 1; i <= alg->NbSegments(); i++)
+				{
+					auto p0 = alg->Intersector().Segment(i).FirstPoint().ParamOnFirst();
+					auto p1 = alg->Intersector().Segment(i).LastPoint().ParamOnSecond();
+
+					params0.push_back(p0);
+					params1.push_back(p1);
+				}
+			}
+
+			if (params0.empty())
+			{
+				auto paired = std::make_pair(theC0, theC1);
+				return std::move(paired);
+			}
+
+			std::sort(params0.begin(), params0.end());
+			std::sort(params1.begin(), params1.end());
+
+			{
+				auto p0 = FirstItem(params0);
+				if (p0 > theC0->LastParameter()) p0 = theC0->LastParameter();
+
+				std::shared_ptr<GModel_ParaCurve> trimmed0;
+				if (std::abs(p0 - theC0->LastParameter()) <= theTol)
+				{
+					trimmed0 = theC0;
+				}
+				else
+				{
+					trimmed0 = GModel_Tools::Trim(theC0, c0->FirstParameter(), p0);
+				}
+				if (NOT INSIDE(p0, theC0->FirstParameter(), theC0->LastParameter()))
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "something went wrong in intersection alg." << endl
+						<< abort(FatalError);
+				}	
+
+				auto p1 = LastItem(params1);
+				if (p1 < theC1->FirstParameter()) p1 = theC1->FirstParameter();
+
+				std::shared_ptr<GModel_ParaCurve> trimmed1;
+				if (std::abs(p1 - theC1->FirstParameter()) <= theTol)
+				{
+					trimmed1 = theC1;
+				}
+				else
+				{
+					trimmed1 = GModel_Tools::Trim(theC1, p1, c1->LastParameter());
+				}
+				if (NOT INSIDE(p1, theC1->FirstParameter(), theC1->LastParameter()))
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "something went wrong in intersection alg." << endl
+						<< abort(FatalError);
+				}						
+
+				auto paired = std::make_pair(std::move(trimmed0), std::move(trimmed1));
+				return std::move(paired);
+			}
+		}
+	}
+}
+
+std::shared_ptr<tnbLib::GModel_ParaWire> 
+tnbLib::GModel_Tools::RepairWire
+(
+	const std::shared_ptr<GModel_ParaWire>& theWire, 
+	const Standard_Real theTol
+)
+{
+	Debug_Null_Pointer(theWire);
+	auto geometries = RetrieveGeometries(*theWire);
+
+	auto alg = std::make_shared<Cad2d_RepairWire>();
+	Debug_Null_Pointer(alg);
+
+	alg->SetCurves(std::move(geometries));
+	alg->SetTolerance(theTol);
+
+	alg->Perform();
+	Debug_If_Condition_Message(NOT alg->IsDone(), "the appplication is not performed!");
+
+	const auto& gWire = alg->Wire();
+	auto curves = MakeCurves(gWire);
+	for (size_t i = 0; i < theWire->NbCurves(); i++)
+	{
+		Debug_Null_Pointer(theWire->Curves().at(i));
+		auto id = theWire->Curves().at(i)->Index();
+		curves.at(i)->SetIndex(id);
+	}
+	auto wire = MakeWire(curves);
+	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::GModel_ParaWire> 
+tnbLib::GModel_Tools::RemoveIntersections
+(
+	const std::shared_ptr<GModel_ParaWire>& theWire,
+	const Standard_Real theTol
+)
+{
+	const auto& curves = theWire->Curves();
+	if (curves.size() IS_EQUAL 1)
+	{
+		return theWire;
+	}
+	else
+	{
+		std::map<Standard_Integer, std::shared_ptr<GModel_ParaCurve>> reg;
+		Standard_Integer id = 0;
+		for (const auto& x : curves)
+		{
+			Debug_Null_Pointer(x);
+			auto paired = std::make_pair(++id, x);
+			auto insert = reg.insert(std::move(paired));
+			if (NOT insert.second)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "duplicate data!" << endl
+					<< abort(FatalError);
+			}
+		}
+
+		Debug_Null_Pointer(LastItem(curves));
+		Debug_Null_Pointer(FirstItem(curves));
+
+		const auto& c0 = LastItem(curves);
+		const auto& c1 = FirstItem(curves);
+
+		auto[trimmed0, trimmed1] = repairWire::RepairIntersection(c0, c1, theTol);
+
+		reg.at(1) = trimmed1;
+		reg.at(curves.size()) = trimmed0;
+
+		for (size_t i = 1; i < curves.size(); i++)
+		{
+			const auto& c0 = reg.at(i);
+			const auto& c1 = reg.at(i + 1);
+	
+			Debug_Null_Pointer(c0);
+			Debug_Null_Pointer(c1);
+
+			auto[trimmed0, trimmed1] = repairWire::RepairIntersection(c0, c1, theTol);
+
+			reg.at(i) = trimmed0;
+			reg.at(i + 1) = trimmed1;
+		}
+
+		std::vector<std::shared_ptr<GModel_ParaCurve>> trimmedCurves;
+		trimmedCurves.reserve(curves.size());
+		for (const auto& x : reg)
+		{
+			Debug_Null_Pointer(x.second);
+			trimmedCurves.push_back(x.second);
+		}
+		
+		auto wire = MakeWire(trimmedCurves);
+		return std::move(wire);	
+	}
+}
+
+void tnbLib::GModel_Tools::ExportToPlt
+(
+	const std::shared_ptr<GModel_Plane>& thePlane, 
+	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo,
+	OFstream& theFile
+)
+{
+	auto alg = std::make_shared<Cad_gApprxParaPlane>(thePlane, theInfo);
+	alg->Perform();
+	Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed");
+
+	const auto& polys = alg->Polygons();
+	for (const auto& x : polys)
+	{
+		x->ExportToPlt(theFile);
+	}
+}
+
+void tnbLib::GModel_Tools::ExportToPlt
+(
+	const std::shared_ptr<GModel_ParaWire>& theWire,
+	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo,
+	OFstream& theFile
+)
+{
+	auto alg = std::make_shared<Cad_gApprxParaWire>(theWire, theInfo);
+	alg->Perform();
+	Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed");
+
+	const auto& polys = alg->Polygons();
+	for (const auto& x : polys)
+	{
+		x->ExportToPlt(theFile);
 	}
 }

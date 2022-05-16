@@ -481,6 +481,15 @@
     <Filter Include="TnbLib\Cad\Approx\Plane\T">
       <UniqueIdentifier>{082687f9-a24d-42e8-8ce8-72028d113a37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Entities\ParaGapCurve">
+      <UniqueIdentifier>{00cd305a-fb10-48ae-a773-c677132bbb7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Entities\ParaCurve">
+      <UniqueIdentifier>{b8eb2eb1-8d14-4bcf-ba0f-e127835309d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GModel\Entities\ParaGap">
+      <UniqueIdentifier>{038cd0c2-5bdd-472d-9fda-51d6ae336485}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -586,9 +595,6 @@
       <Filter>TnbLib\Cad\GModel\Entities\Entity</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurve.hxx">
-      <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurveI.hxx">
       <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\GModel\Entities\Curve\GModel_Curve.hxx">
@@ -950,6 +956,21 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\Approx\Plane\T\Cad_tApprxParaPlane.hxx">
       <Filter>TnbLib\Cad\Approx\Plane\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\ParaGapCurve\Cad_ParaGapCurve.hxx">
+      <Filter>TnbLib\Cad\Entities\ParaGapCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\ParaCurve\Cad_ParaCurve.hxx">
+      <Filter>TnbLib\Cad\Entities\ParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\ParaCurve\Cad_ParaCurveI.hxx">
+      <Filter>TnbLib\Cad\Entities\ParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaGap\GModel_ParaGapCurve.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaGap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaGap\GModel_ParaGapCurveFwd.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaGap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1408,6 +1429,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Approx\Plane\T\Cad_tApprxParaPlane.cxx">
       <Filter>TnbLib\Cad\Approx\Plane\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\ParaCurve\Cad_ParaCurve.cxx">
+      <Filter>TnbLib\Cad\Entities\ParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Entities\ParaCurve\Cad_ParaCurveIO.cxx">
+      <Filter>TnbLib\Cad\Entities\ParaCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GModel\Entities\ParaGap\GModel_ParaGapCurveIO.cxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaGap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
