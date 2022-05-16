@@ -278,9 +278,9 @@ void tnbLib::Cad2d_RepairWire::Perform()
 
 		auto p = 0.75*curve->FirstParameter() + 0.25*curve->LastParameter();
 		auto[c0, c1] = Subdivide(curve, p);
-
 		auto wire = RepairWire(c0, c1);
-		auto retrieved = RetrieveCurve(wire.at(0), wire.at(1), wire.at(2));
+		
+		auto retrieved = RetrieveCurve(wire.at(0), wire.at(1));
 
 		theWire_.push_back(std::move(retrieved));
 	}
