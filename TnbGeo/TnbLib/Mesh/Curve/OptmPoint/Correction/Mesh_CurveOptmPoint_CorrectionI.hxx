@@ -20,6 +20,9 @@ namespace tnbLib
 		auto Umin = U0();
 		auto Umax = Entity().LastParameter();
 
+		if (Correct < Umin) Correct = Umin;
+		if (Correct > Umax) Correct = Umax;
+
 		forThose(Iter, 1, nbLevels)
 		{
 			auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();

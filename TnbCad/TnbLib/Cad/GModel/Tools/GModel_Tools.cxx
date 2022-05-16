@@ -1540,7 +1540,8 @@ tnbLib::GModel_Tools::GetParaPlane
 	auto innerWires = std::make_shared<GModel_Plane::wireList>();
 
 	std::vector<std::shared_ptr<GModel_ParaWire>> unRepinnerWires;
-	for (const auto& x : GetInnerParaWires(theSurface))
+	auto paraInnerWires = GetInnerParaWires(theSurface);
+	for (const auto& x : paraInnerWires)
 	{
 		Debug_Null_Pointer(x);
 		auto inner = RepairWire(x, theTol);
@@ -1555,9 +1556,9 @@ tnbLib::GModel_Tools::GetParaPlane
 
 			auto trimInnerWire = TrimWire(x);
 			Debug_Null_Pointer(trimInnerWire);
-
-			auto waterTight = FillGaps(trimOuterWire, theTol);
-
+			//ExportToPlt(trimInnerWire, approxInfo, myFile0);
+			auto waterTight = FillGaps(trimInnerWire, theTol);
+			//ExportToPlt(waterTight, approxInfo, myFile1);
 			auto innerEdges = repairWire::CreateWire(waterTight, theTol);
 			repairWire::CheckWire(innerEdges);
 
@@ -1567,7 +1568,7 @@ tnbLib::GModel_Tools::GetParaPlane
 			innerWires->push_back(std::move(innerWire));
 		}
 	}
-
+	//std::exit(1);
 #ifdef _DEBUG
 	repairWire::CheckWire(outerWire, theTol);
 #endif // _DEBUG

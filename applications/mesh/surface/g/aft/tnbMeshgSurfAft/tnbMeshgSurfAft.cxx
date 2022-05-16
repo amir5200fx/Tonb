@@ -503,15 +503,17 @@ namespace tnbLib
 
 					const auto& boundaries = bnd->Boundaries();
 					
-					/*auto upBnds = Global_Tools::UpCast<Aft2d_gSegmentEdge, Aft2d_EdgeSurface>(boundaries);
-					auto nodes = Aft_Tools::RetrieveNodes(upBnds);
-					auto pts = Aft_Tools::RetrieveGeometry(nodes);
-					auto inds = Aft_Tools::RetrieveEdgeConnectivities(upBnds);
-					auto chain = Entity2d_Chain(std::move(pts), std::move(inds));
-					auto mm = Geo_Tools::Triangulation(chain);
+					/*{
+						auto upBnds = Global_Tools::UpCast<Aft2d_gSegmentEdge, Aft2d_EdgeSurface>(boundaries);
+						auto nodes = Aft_Tools::RetrieveNodes(upBnds);
+						auto pts = Aft_Tools::RetrieveGeometry(nodes);
+						auto inds = Aft_Tools::RetrieveEdgeConnectivities(upBnds);
+						auto chain = Entity2d_Chain(std::move(pts), std::move(inds));
+						auto mm = Geo_Tools::Triangulation(chain);
 
-					file::SaveTo(mm, "boundaryMesh" + Entity2d_Triangulation::extension, 1);
-					std::exit(0);*/
+						file::SaveTo(mm, "boundaryMesh" + Entity2d_Triangulation::extension, 1);
+						std::exit(0);
+					}*/
 					Aft_Tools::Connect(boundaries);
 
 					auto elements = mesh(metricPrcsr, theCalculator, Aft_Tools::UpCast(boundaries));
@@ -538,6 +540,18 @@ namespace tnbLib
 				}
 
 				const auto& boundaries = bnd->Boundaries();
+
+				/*{
+					auto upBnds = Global_Tools::UpCast<Aft2d_gSegmentEdge, Aft2d_EdgeSurface>(boundaries);
+					auto nodes = Aft_Tools::RetrieveNodes(upBnds);
+					auto pts = Aft_Tools::RetrieveGeometry(nodes);
+					auto inds = Aft_Tools::RetrieveEdgeConnectivities(upBnds);
+					auto chain = Entity2d_Chain(std::move(pts), std::move(inds));
+					auto mm = Geo_Tools::Triangulation(chain);
+
+					file::SaveTo(mm, "boundaryMesh" + Entity2d_Triangulation::extension, 1);
+					std::exit(0);
+				}*/
 
 				Aft_Tools::Connect(boundaries);
 
@@ -690,7 +704,7 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 3)
+			/*if (x->Index() NOT_EQUAL 1)
 			{
 				continue;
 			}*/
