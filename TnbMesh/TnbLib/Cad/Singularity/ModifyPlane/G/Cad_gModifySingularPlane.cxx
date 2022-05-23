@@ -122,7 +122,14 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::CurveToTypeMap(modifiedHorizons, modifiedWires);
 	auto wireApprox =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::GetPolygons(modifiedWires, ApproxInfo());
-
+	/*{
+		OFstream myFile("modified.plt");
+		for (const auto& x : wireApprox)
+		{
+			x->ExportToPlt(myFile);
+		}
+		std::exit(1);
+	}*/
 	RegisterPolygons(wireApprox);
 
 	auto topology =
@@ -131,6 +138,7 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 	Debug_Null_Pointer(topology);
 
 	topology->Perform();
+
 	Debug_If_Condition_Message(NOT topology->IsDone(), "the application is not performed!");
 	
 	const auto& edgeToCurve = topology->EdgeToCurveMap();
@@ -239,7 +247,6 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 		Debug_Null_Pointer(x);
 		x->SetPlane(Plane()->Plane());
 	}
-
 	ModifiedPlanesRef() = std::move(modifieds);
 
 	Change_IsDone() = Standard_True;

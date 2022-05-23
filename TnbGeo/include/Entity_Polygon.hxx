@@ -127,6 +127,12 @@ namespace tnbLib
 			return Coord(theIndex);
 		}
 
+		const coord& FirstPoint() const;
+		const coord& LastPoint() const;
+
+		coord& FirstPointRef();
+		coord& LastPointRef();
+
 		void Transform
 		(
 			const typename transform_point_type<coord>::type& theTrasf

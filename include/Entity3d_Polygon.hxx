@@ -11,10 +11,10 @@ namespace tnbLib
 	typedef Entity_Polygon<Pnt3d> Entity3d_Polygon;
 
 	template<>
-	const Pnt3d& Entity3d_Polygon::Coord(const Standard_Integer) const;
+	inline const Pnt3d& Entity3d_Polygon::Coord(const Standard_Integer) const;
 
 	template<>
-	Pnt3d& Entity3d_Polygon::Coord(const Standard_Integer);
+	inline Pnt3d& Entity3d_Polygon::Coord(const Standard_Integer);
 
 	template<>
 	TnbGeo_EXPORT void Entity3d_Polygon::ExportToPlt(std::fstream& File) const;

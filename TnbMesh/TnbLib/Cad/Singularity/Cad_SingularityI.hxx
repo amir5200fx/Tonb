@@ -156,3 +156,29 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 }
 #endif // __DEBUG
 
+#include <Cad_ColorApprxMetric.hxx>
+
+template<class SurfType>
+inline tnbLib::Pnt2d 
+tnbLib::Cad_Singularity<SurfType>::GetCorner
+(
+	const Standard_Integer zoneId
+) const
+{
+	Debug_Null_Pointer(Colors());
+	Debug_Null_Pointer(Colors()->Approximation());
+	Debug_Null_Pointer(Colors()->Approximation()->BoundingBox());
+	const Entity2d_Box b = *Colors()->Approximation()->BoundingBox();
+	switch (zoneId)
+	{
+	case 1: return b.Corner(Box2d_PickAlgorithm_SW);
+	case 2: return b.Corner(Box2d_PickAlgorithm_SE);
+	case 3: return b.Corner(Box2d_PickAlgorithm_NE);
+	case 4: return b.Corner(Box2d_PickAlgorithm_NW);
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "invalid zone Id." << endl
+			<< abort(FatalError);
+		return Pnt2d::null;
+	}
+}

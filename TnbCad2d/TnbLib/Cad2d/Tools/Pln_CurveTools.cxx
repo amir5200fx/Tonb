@@ -71,6 +71,8 @@ tnbLib::Pln_CurveTools::Trim
 	{
 		FatalErrorIn(FunctionSIG)
 			<< x.GetMessageString() << endl
+			<< " - U0: " << theP0 << endl
+			<< " - U1: " << theP1 << endl
 			<< abort(FatalError);
 		return nullptr;
 	}

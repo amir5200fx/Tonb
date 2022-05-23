@@ -8,6 +8,7 @@
 #include <GeoMesh2d_DataFwd.hxx>
 #include <Mesh_Module.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Dir2d.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
@@ -31,6 +32,11 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		static TnbMesh_EXPORT const Dir2d T0;
+		static TnbMesh_EXPORT const Dir2d T1;
+		static TnbMesh_EXPORT const Dir2d T2;
+		static TnbMesh_EXPORT const Dir2d T3;
+
 	protected:
 
 		// default constructor [4/17/2022 Amir]
@@ -53,6 +59,21 @@ namespace tnbLib
 			);
 
 		static TnbMesh_EXPORT Pnt2d GetSamplePoint(const Entity2d_Polygon&);
+		
+		static TnbMesh_EXPORT Standard_Boolean 
+			ReversePolygon
+			(
+				const Dir2d& u, 
+				const Standard_Integer zoneId
+			);
+
+		static TnbMesh_EXPORT Standard_Boolean 
+			ReverseCrossZonesPolygon
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1,
+				const Pnt2d& theCentre
+			);
 	};
 
 	template<class SurfType>
@@ -90,6 +111,8 @@ namespace tnbLib
 
 		// private functions and operators [3/28/2022 Amir]
 
+		Pnt2d GetCorner(const Standard_Integer zoneId) const;
+
 		auto& ZonesRef()
 		{
 			return theZones_;
@@ -100,8 +123,24 @@ namespace tnbLib
 			return theNbZones_;
 		}
 
-		std::shared_ptr<singularZone> TypeDetection(const Entity2d_Polygon& thePoly, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
-		std::shared_ptr<singularZone> TypeDetection(const Entity2d_Polygon& thePoly0, const Entity2d_Polygon& thePoly1, const GeoMesh2d_Data& theBMesh, const std::vector<std::shared_ptr<Pln_Curve>>& theSides, const Geom_Surface&) const;
+		std::shared_ptr<singularZone> 
+			TypeDetection
+			(
+				const std::shared_ptr<Entity2d_Polygon>& thePoly,
+				const GeoMesh2d_Data& theBMesh,
+				const std::vector<std::shared_ptr<Pln_Curve>>& theSides,
+				const Geom_Surface&
+			) const;
+
+		std::shared_ptr<singularZone> 
+			TypeDetection
+			(
+				const std::shared_ptr<Entity2d_Polygon>& thePoly0,
+				const std::shared_ptr<Entity2d_Polygon>& thePoly1, 
+				const GeoMesh2d_Data& theBMesh, 
+				const std::vector<std::shared_ptr<Pln_Curve>>& theSides,
+				const Geom_Surface&
+			) const;
 
 	public:
 

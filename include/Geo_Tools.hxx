@@ -424,6 +424,13 @@ namespace tnbLib
 				const Entity2d_Line& line
 			);
 
+		static TnbGeo_EXPORT Pnt2d
+			ProjectToLine_cgal
+			(
+				const Pnt2d& pt,
+				const Entity2d_LineRef& line
+			);
+
 		static TnbGeo_EXPORT Pnt2d 
 			IntersectionTwoLines
 			(

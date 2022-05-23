@@ -50,8 +50,6 @@ tnbLib::Aft2d_gRegionPlaneSurface::MakeOrignPlane
 {
 	Debug_Null_Pointer(thePlnRegion);
 	Debug_Null_Pointer(thePlnRegion->Outer());
-	auto x = thePlnRegion->Outer();
-
 	auto outer =
 		Aft2d_gPlnWireSurface::MakeOrignWire<GModel_ParaWire>
 		(
@@ -61,6 +59,7 @@ tnbLib::Aft2d_gRegionPlaneSurface::MakeOrignPlane
 	std::shared_ptr<std::vector<std::shared_ptr<GModel_ParaWire>>> inners;
 	if (thePlnRegion->HasHole())
 	{
+		inners = std::make_shared<std::vector<std::shared_ptr<GModel_ParaWire>>>();
 		Debug_Null_Pointer(thePlnRegion->Inner());
 		for (const auto& x : *thePlnRegion->Inner())
 		{

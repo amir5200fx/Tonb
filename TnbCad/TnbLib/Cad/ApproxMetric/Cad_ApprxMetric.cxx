@@ -252,6 +252,9 @@ void tnbLib::Cad_ApprxMetric::Perform()
 				std::move(points),
 				std::move(triAlg.Data()->Connectivity())
 				);
+		Debug_Null_Pointer(tri);
+
+		tri->SetBoundingBox(Domain());
 		theTriangulation_ = std::move(tri);
 	}
 

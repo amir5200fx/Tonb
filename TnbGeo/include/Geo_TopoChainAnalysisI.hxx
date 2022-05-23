@@ -64,7 +64,7 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RegisterEnds()
 
 template<class ChainTraits>
 inline std::shared_ptr<typename tnbLib::Geo_TopoChainAnalysis<ChainTraits>::nodeType> 
-tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RetrieveStart()
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RetrieveStart(const Standard_Boolean ringPoint)
 {
 	if (NOT NbEnds())
 	{
@@ -74,7 +74,12 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::RetrieveStart()
 	std::shared_ptr<nodeType> node;
 	for (const auto& x : ends)
 	{
-		if (IsStart(x))
+		/*if (ringPoint AND IsRing(x))
+		{
+			node = x;
+			break;
+		}
+		else */if (/*NOT ringPoint AND */IsStart(x))
 		{
 			node = x;
 			break;
@@ -385,6 +390,7 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::GetNodes() const
 		const auto& l = x.second->Entities();
 		for (const auto& p : l)
 		{
+			if (p->Node0() IS_EQUAL p->Node1())
 			{
 				auto n = std::dynamic_pointer_cast<nodeType>(p->Node0());
 				Debug_Null_Pointer(n);
@@ -395,15 +401,28 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::GetNodes() const
 					// do nothing [4/1/2022 Amir]
 				}
 			}
-
+			else
 			{
-				auto n = std::dynamic_pointer_cast<nodeType>(p->Node1());
-				Debug_Null_Pointer(n);
-				auto paired = std::make_pair(n->Index(), std::move(n));
-				auto insert = compact.insert(std::move(paired));
-				if (NOT insert.second)
 				{
-					// do nothing [4/1/2022 Amir]
+					auto n = std::dynamic_pointer_cast<nodeType>(p->Node0());
+					Debug_Null_Pointer(n);
+					auto paired = std::make_pair(n->Index(), std::move(n));
+					auto insert = compact.insert(std::move(paired));
+					if (NOT insert.second)
+					{
+						// do nothing [4/1/2022 Amir]
+					}
+				}
+
+				{
+					auto n = std::dynamic_pointer_cast<nodeType>(p->Node1());
+					Debug_Null_Pointer(n);
+					auto paired = std::make_pair(n->Index(), std::move(n));
+					auto insert = compact.insert(std::move(paired));
+					if (NOT insert.second)
+					{
+						// do nothing [4/1/2022 Amir]
+					}
 				}
 			}
 		}
@@ -524,7 +543,6 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::SetTypes() const
 	{
 		const auto& x = n.second;
 		Debug_Null_Pointer(x);
-
 		SetType(x);
 	}
 }
@@ -541,8 +559,16 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::CompleteTopology()
 		{
 			Debug_Null_Pointer(e);
 
-			e->Node0()->InsertToEdges(e->Index(), e);
-			e->Node1()->InsertToEdges(e->Index(), e);
+			if (e->Node0() IS_EQUAL e->Node1())
+			{
+				// the segment is a ring [5/22/2022 Amir]
+				e->Node0()->InsertToEdges(e->Index(), e);
+			}
+			else
+			{
+				e->Node0()->InsertToEdges(e->Index(), e);
+				e->Node1()->InsertToEdges(e->Index(), e);
+			}	
 		}
 	}
 }
@@ -575,8 +601,28 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::UpdateNodeTypes
 }
 
 template<class ChainTraits>
+inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::BreakRing()
+{
+	if (NOT base::NbNodes())
+	{
+		return;
+	}
+
+	// Get a sample point [5/22/2022 Amir]
+	auto node = base::Nodes().begin()->second;
+	Debug_Null_Pointer(node);
+
+	node->TypeRef() = Knit_ChainNode_Type::start;
+
+	ImportToEnds(node);
+}
+
+template<class ChainTraits>
 inline Standard_Boolean 
-tnbLib::Geo_TopoChainAnalysis<ChainTraits>::IsStart(const std::shared_ptr<nodeType>& x)
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::IsStart
+(
+	const std::shared_ptr<nodeType>& x
+)
 {
 	auto edges = x->RetrieveEdges();
 	if (edges.empty())
@@ -604,6 +650,35 @@ tnbLib::Geo_TopoChainAnalysis<ChainTraits>::IsStart(const std::shared_ptr<nodeTy
 	{
 		return Standard_False;
 	}
+}
+
+template<class ChainTraits>
+inline Standard_Boolean 
+tnbLib::Geo_TopoChainAnalysis<ChainTraits>::IsRing
+(
+	const std::shared_ptr<nodeType>& x
+)
+{
+	auto edges = x->RetrieveEdges();
+	if (edges.empty())
+	{
+		/*FatalErrorIn(FunctionSIG)
+			<< "the edge list is empty." << endl
+			<< abort(FatalError);*/
+		return Standard_False;
+	}
+
+	for (const auto& wie : edges)
+	{
+		Debug_Null_Pointer(wie.lock());
+		auto ie = std::dynamic_pointer_cast<edgeType>(wie.lock());
+		Debug_Null_Pointer(ie);
+		if (ie->Node0() IS_EQUAL ie->Node1())
+		{
+			return Standard_True;
+		}
+	}
+	return Standard_False;
 }
 
 template<class ChainTraits>

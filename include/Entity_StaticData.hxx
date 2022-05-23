@@ -153,6 +153,16 @@ namespace tnbLib
 
 		void Clear();
 
+		void SetBoundingBox(const std::shared_ptr<box>& theBox)
+		{
+			theBoundingBox_ = theBox;
+		}
+
+		void SetBoundingBox(std::shared_ptr<box>&& theBox)
+		{
+			theBoundingBox_ = std::move(theBox);
+		}
+
 		void ExportToPlt(std::fstream& File) const;
 
 		void ExportToPlt(OFstream& File) const;

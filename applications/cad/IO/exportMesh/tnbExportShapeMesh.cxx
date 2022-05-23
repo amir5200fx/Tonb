@@ -14,7 +14,7 @@ namespace tnbLib
 	typedef std::shared_ptr<Cad_Shape> shape_t;
 
 	static const std::string loadExt = Cad_Shape::extension;
-	static const std::string saveExt = Entity3d_Triangulation::extension;
+	static const std::string saveExt = Entity3d_Triangulation::extension + "list";
 
 	static shape_t myShape;
 	static unsigned short verbose(0);
@@ -76,7 +76,7 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		auto tris = std::make_shared<Entity3d_Triangulation>();
+		std::vector<std::shared_ptr<Entity3d_Triangulation>> tris;
 		for (const auto& x : mesh)
 		{
 			if (x)
@@ -84,7 +84,7 @@ namespace tnbLib
 				auto tri = Cad_Tools::Triangulation(*x);
 				if (tri)
 				{
-					tris->Add(*tri);
+					tris.push_back(std::move(tri));
 				}
 			}
 		}

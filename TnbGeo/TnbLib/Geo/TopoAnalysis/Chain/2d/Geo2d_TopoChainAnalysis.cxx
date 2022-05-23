@@ -1,5 +1,6 @@
 #include <Geo2d_TopoChainAnalysis.hxx>
 #ifdef _DEBUG
+#include <Geo2d_RingGraphEdge.hxx>
 template<>
 std::shared_ptr<tnbLib::Geo2d_TopoChainAnalysis_Node> 
 tnbLib::Geo2d_TopoChainAnalysis::Next
@@ -89,11 +90,20 @@ tnbLib::Geo2d_TopoChainAnalysis::Next
 			<< "unable to track the path!" << endl
 			<< abort(FatalError);
 	}
+
+	const auto isRing = next IS_EQUAL theNode;
 	
 	Debug_Null_Pointer(next);
 	try
 	{
-		next->RemoveFromEdges(edge->Index());
+		if (isRing)
+		{
+			// the edge is ring [5/21/2022 Amir]
+		}
+		else
+		{
+			next->RemoveFromEdges(edge->Index());
+		}
 	}
 	catch (const error& err)
 	{
@@ -102,14 +112,14 @@ tnbLib::Geo2d_TopoChainAnalysis::Next
 			<< abort(FatalError);
 	}
 
-	if (next IS_EQUAL theNode)
+	/*if (next IS_EQUAL theNode)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the chain is not oriented!" << endl
 			<< abort(FatalError);
-	}
+	}*/
 
-	if (edges.size() IS_EQUAL 1)
+	if (edges.size() IS_EQUAL 1 AND NOT isRing)
 	{
 		base::RemoveItem(theNode);
 	}
@@ -160,53 +170,74 @@ tnbLib::Geo2d_TopoChainAnalysis::GetRing
 	fn->TypeRef() = Knit_ChainNode_Type::end;
 
 	auto edges = theNode->RetrieveEdges();
-	if (edges.size() NOT_EQUAL 2)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "the node is not regular!" << endl
-			<< abort(FatalError);
-	}
-
+	if (edges.size() IS_EQUAL 1)
 	{
 		auto edge = std::dynamic_pointer_cast<edgeType>(edges.at(0).lock());
 		Debug_Null_Pointer(edge);
 
-		if (edge->Node0() IS_EQUAL theNode)
-		{
-			edge->SetNode0(sn);
-		}
-		else if (edge->Node1() IS_EQUAL theNode)
-		{
-			edge->SetNode1(sn);
-		}
-		else
+		if (edge->Node0() NOT_EQUAL edge->Node1())
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "contradictory data has been detected!" << endl
+				<< "the node is not regular!" << endl
 				<< abort(FatalError);
 		}
+
+		edge->SetNode0(sn);
+		edge->SetNode1(fn);
+
 		sn->InsertToEdges(edge->Index(), edge);
+		fn->InsertToEdges(edge->Index(), edge);
 	}
-
+	else
 	{
-		auto edge = std::dynamic_pointer_cast<edgeType>(edges.at(1).lock());
-		Debug_Null_Pointer(edge);
-
-		if (edge->Node0() IS_EQUAL theNode)
-		{
-			edge->SetNode0(fn);
-		}
-		else if (edge->Node1() IS_EQUAL theNode)
-		{
-			edge->SetNode1(fn);
-		}
-		else
+		if (edges.size() NOT_EQUAL 2)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "contradictory data has been detected!" << endl
+				<< "the node is not regular!" << endl
 				<< abort(FatalError);
 		}
-		fn->InsertToEdges(edge->Index(), edge);
+
+		{
+			auto edge = std::dynamic_pointer_cast<edgeType>(edges.at(0).lock());
+			Debug_Null_Pointer(edge);
+
+			if (edge->Node0() IS_EQUAL theNode)
+			{
+				edge->SetNode0(sn);
+			}
+			else if (edge->Node1() IS_EQUAL theNode)
+			{
+				edge->SetNode1(sn);
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data has been detected!" << endl
+					<< abort(FatalError);
+			}
+			sn->InsertToEdges(edge->Index(), edge);
+		}
+
+		{
+			auto edge = std::dynamic_pointer_cast<edgeType>(edges.at(1).lock());
+			Debug_Null_Pointer(edge);
+
+			if (edge->Node0() IS_EQUAL theNode)
+			{
+				edge->SetNode0(fn);
+			}
+			else if (edge->Node1() IS_EQUAL theNode)
+			{
+				edge->SetNode1(fn);
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data has been detected!" << endl
+					<< abort(FatalError);
+			}
+			fn->InsertToEdges(edge->Index(), edge);
+		}
 	}
 
 	theNode->ClearEdges();
@@ -234,15 +265,23 @@ void tnbLib::Geo2d_TopoChainAnalysis::SetType
 			auto edge = std::dynamic_pointer_cast<edgeType>(edges.at(0).lock());
 			Debug_Null_Pointer(edge);
 
-			if (edge->Node0() IS_EQUAL x)
+			if (edge->Node0() IS_EQUAL edge->Node1())
 			{
-				// start node [4/1/2022 Amir]
-				x->TypeRef() = Knit_ChainNode_Type::start;
+				// the edge is a ring [5/22/2022 Amir]
+				x->TypeRef() = Knit_ChainNode_Type::regular;
 			}
 			else
 			{
-				x->TypeRef() = Knit_ChainNode_Type::end;
-			}
+				if (edge->Node0() IS_EQUAL x)
+				{
+					// start node [4/1/2022 Amir]
+					x->TypeRef() = Knit_ChainNode_Type::start;
+				}
+				else
+				{
+					x->TypeRef() = Knit_ChainNode_Type::end;
+				}
+			}		
 		}
 		else if (x->NbEdges() > 2)
 		{
@@ -315,7 +354,9 @@ void tnbLib::Geo2d_TopoChainAnalysis::Perform()
 	// create ring chains [4/2/2022 Amir]
 	if (base::NbEdges())
 	{
-		start = FindStart(Knit_ChainNode_Type::regular);	
+		BreakRing();
+		//start = FindStart(Knit_ChainNode_Type::regular);	
+		start = RetrieveStart(Standard_True);
 		while (start)
 		{
 			//start->TypeRef() = Knit_ChainNode_Type::start;
@@ -325,9 +366,23 @@ void tnbLib::Geo2d_TopoChainAnalysis::Perform()
 
 			theRegister_.insert(std::move(ent));
 
-			start = FindStart(Knit_ChainNode_Type::regular);
+			//start = FindStart(Knit_ChainNode_Type::regular);
+			BreakRing();
+
+			start = RetrieveStart(Standard_True);
 		}
 	}
+	for (const auto& x : theRegister_)
+	{
+		const auto& n0 = x.second->First()->Node0();
+		const auto& n1 = x.second->End()->Node1();
+
+		if (n0->Coord().Distance(n1->Coord()) <= gp::Resolution())
+		{
+			x.second->IsRingRef() = Standard_True;
+		}
+	}
+
 	if (base::NbNodes())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -385,8 +440,16 @@ void tnbLib::Geo2d_TopoChainAnalysis::Import(const Entity2d_Chain& theChain)
 
 			base::Insert(e);
 
-			nodes[Index_Of(v0)]->InsertToEdges(e->Index(), e);
-			nodes[Index_Of(v1)]->InsertToEdges(e->Index(), e);
+			if (nodes[Index_Of(v0)] IS_EQUAL nodes[Index_Of(v1)])
+			{
+				nodes[Index_Of(v0)]->InsertToEdges(e->Index(), e);
+			}
+			else
+			{
+				nodes[Index_Of(v0)]->InsertToEdges(e->Index(), e);
+				nodes[Index_Of(v1)]->InsertToEdges(e->Index(), e);
+			}
+	
 		}
 	}
 	SetTypes();

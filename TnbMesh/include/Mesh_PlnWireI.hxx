@@ -99,9 +99,10 @@ namespace tnbLib
 	{
 		if (theWire.size() < 2)
 		{
-			FatalErrorIn(FunctionSIG)
+			return;
+			/*FatalErrorIn(FunctionSIG)
 				<< "invalid type of wire has been detected!" << endl
-				<< abort(FatalError);
+				<< abort(FatalError);*/
 		}
 		/*for (const auto& x : theWire)
 		{
