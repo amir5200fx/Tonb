@@ -20,6 +20,8 @@
 #include <Cad_ColorApprxMetric.hxx>
 #include <Cad_SingularityTools.hxx>
 #include <Geo2d_PolygonGraph.hxx>
+#include <Geo2d_LinTessellatePolygon.hxx>
+#include <Geo2d_InscConxPoly.hxx>
 #include <Geo_BoxTools.hxx>
 #endif // _DEBUG
 #include <GModel_ParaCurve.hxx>

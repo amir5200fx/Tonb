@@ -10,6 +10,8 @@
 
 #include <map>
 
+#include "Geo2d_TopoChainAnalysisTraits.hxx"
+
 namespace tnbLib
 {
 
