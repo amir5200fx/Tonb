@@ -88,6 +88,12 @@ namespace tnbLib
 		return std::move(line);
 	}
 
+	Line_2 get_cgalLine(const Entity2d_LineRef& l)
+	{
+		Line_2 line(get_cgalPoint(l.P()), get_cgalDirection(l.Dir()));
+		return std::move(line);
+	}
+
 	Triangle_2 get_cgalTriange(const Entity2d_Triangle& t)
 	{
 		Triangle_2 tri(get_cgalPoint(t.P0()), get_cgalPoint(t.P1()), get_cgalPoint(t.P2()));
@@ -266,6 +272,19 @@ tnbLib::Geo_Tools::ProjectToLine_cgal
 (
 	const Pnt2d & pt,
 	const Entity2d_Line & line
+)
+{
+	auto l = get_cgalLine(line);
+	auto prj = l.projection(get_cgalPoint(pt));
+	auto p = get_Point(prj);
+	return std::move(p);
+}
+
+tnbLib::Pnt2d 
+tnbLib::Geo_Tools::ProjectToLine_cgal
+(
+	const Pnt2d & pt,
+	const Entity2d_LineRef & line
 )
 {
 	auto l = get_cgalLine(line);

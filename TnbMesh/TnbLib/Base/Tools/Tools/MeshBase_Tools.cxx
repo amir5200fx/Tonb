@@ -188,8 +188,6 @@ tnbLib::MeshBase_Tools::CorrectCoord
 	const Entity2d_Box & theDomain
 )
 {
-	static const auto cte = (1.0 - EPS6);
-
 	const auto& p0 = theDomain.P0();
 	const auto& p1 = theDomain.P1();
 
@@ -201,48 +199,81 @@ tnbLib::MeshBase_Tools::CorrectCoord
 	const auto x0 = theCentre.X();
 	const auto y0 = theCentre.Y();
 
-	const auto du = theCoord - theCentre;
-	const auto dx = du.X();
-	const auto dy = du.Y();
+	const auto xp = theCoord.X();
+	const auto yp = theCoord.Y();
 
-	const auto x = theCoord.X();
-	if (x > xmax)
+	if (xp > xmax)
 	{
-		const auto y = y0 + (dy / dx)*(xmax - x0);
-		const auto du1 = Pnt2d(xmax, y) - theCentre;
+		const auto tx = (xmax - x0) / (xp - x0);
+		if (yp > ymax)
+		{
+			const auto ty = (ymax - y0) / (yp - y0);
+			const auto t = std::min(tx, ty);
 
-		auto newPoint = theCentre + cte * du1;
+			Pnt2d newPoint(x0 + t * (xp - x0), y0 + t * (yp - y0));
+			return std::move(newPoint);
+		}
+		
+		if (yp < ymin)
+		{
+			const auto ty = (ymin - y0) / (yp - y0);
+			const auto t = std::min(tx, ty);
+
+			Pnt2d newPoint(x0 + t * (xp - x0), y0 + t * (yp - y0));
+			return std::move(newPoint);
+		}
+		const auto y = y0 + (yp - y0)*tx;
+
+		Pnt2d newPoint(xmax, y);
 		return std::move(newPoint);
 	}
 
-	if (x < xmin)
+	if (xp < xmin)
 	{
-		const auto y = y0 + (dy / dx)*(xmin - x0);
-		const auto du1 = Pnt2d(xmin, y) - theCentre;
+		const auto tx = (xmin - x0) / (xp - x0);
+		if (yp > ymax)
+		{
+			const auto ty = (ymax - y0) / (yp - y0);
+			const auto t = std::min(tx, ty);
 
-		auto newPoint = theCentre + cte * du1;
+			Pnt2d newPoint(x0 + t * (xp - x0), y0 + t * (yp - y0));
+			return std::move(newPoint);
+		}
+
+		if (yp < ymin)
+		{
+			const auto ty = (ymin - y0) / (yp - y0);
+			const auto t = std::min(tx, ty);
+
+			Pnt2d newPoint(x0 + t * (xp - x0), y0 + t * (yp - y0));
+			return std::move(newPoint);
+		}
+		const auto y = y0 + (yp - y0)*tx;
+
+		Pnt2d newPoint(xmin, y);
+		return std::move(newPoint);
+	}
+	
+	if (yp > ymax)
+	{
+		const auto t = (ymax - y0) / (yp - y0);
+		const auto x = x0 + (xp - x0)*t;
+
+		Pnt2d newPoint(x, ymax);
 		return std::move(newPoint);
 	}
 
-	const auto y = theCoord.Y();
-	if (y > ymax)
+	if (yp < ymin)
 	{
-		const auto x = x0 + (dx / dy)*(ymax - y0);
-		const auto du1 = Pnt2d(x, ymax) - theCentre;
+		const auto t = (ymin - y0) / (yp - y0);
+		const auto x = x0 + (xp - x0)*t;
 
-		auto newPoint = theCentre + cte * du1;
+		Pnt2d newPoint(x, ymin);
 		return std::move(newPoint);
 	}
 
-	if (y < ymin)
-	{
-		const auto x = x0 + (dx / dy)*(ymin - y0);
-		const auto du1 = Pnt2d(x, ymin) - theCentre;
-
-		auto newPoint = theCentre + cte * du1;
-		return std::move(newPoint);
-	}
-
+	Info << " - Coord: " << theCoord << endl;
+	Info << " - Domain: " << theDomain << endl;
 	FatalErrorIn(FunctionSIG)
 		<< "unpredictable condition is occurred!" << endl
 		<< abort(FatalError);

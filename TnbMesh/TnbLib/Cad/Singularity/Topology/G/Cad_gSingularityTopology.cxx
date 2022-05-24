@@ -92,9 +92,17 @@ tnbLib::Cad_gSingularityTopology::GetTopology
 		curves.push_back(x.first);
 	}
 
+	/*{
+		OFstream myFile("chains.plt");
+		for (const auto& x : chains)
+		{
+			x->ExportToPlt(myFile);
+		}
+	}*/
+
 	Merge2d_Chain alg;
 	alg.Import(chains);
-	alg.SetRemoveDegeneracy();
+	//alg.SetRemoveDegeneracy();
 
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the application is not performed!");

@@ -103,15 +103,17 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::SubCurv
 #endif // _DEBUG
 	std::vector<std::shared_ptr<Aft2d_gPlnCurveSurface>> curves;
 	auto curve = theCurve;
-	auto x0 = curve->FirstParameter();
-	auto x1 = curve->LastParameter();
 	for (auto x : thePars)
 	{
+		auto x0 = curve->FirstParameter();
+		auto x1 = curve->LastParameter();
+
 		if (std::abs(x - x0) <= theTol OR std::abs(x - x1) <= theTol)
 		{
 			continue;
 		}
 		auto[c0, c1] = Split(x, curve);
+
 		curves.push_back(std::move(c0));
 		curve = std::move(c1);
 	}
@@ -158,7 +160,6 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::ModifyW
 				{
 					l.sort();
 				}
-
 				auto subCurves = SubCurves(x, l, theTol);
 				for (auto& sub : subCurves)
 				{

@@ -34,6 +34,7 @@
 #include <Cad_SingularityHorizons.hxx>
 #include <Cad_gSingularity.hxx>
 #include <Cad_gModifySingularPlane.hxx>
+#include <Cad_gApprxParaPlane.hxx>
 #include <Cad_Tools.hxx>
 #include <GModel_Tools.hxx>
 #include <GModel_Surface.hxx>
@@ -82,7 +83,7 @@ namespace tnbLib
 	static std::shared_ptr<Cad_ApprxMetricInfo> myMetricApproxInfo;
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
 
-	static double myDegenCrit = 1.0e-6;//Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
+	static double myDegenCrit = 1.0e-7;//Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
 	static auto mySingZoneWeight = Cad_gSingularity::DEFAULT_WEIGHT;
 
 	static std::shared_ptr<Aft2d_gSolutionDataSurface> mySoluData;
@@ -295,9 +296,9 @@ namespace tnbLib
 
 		auto d = box.Diameter();
 		auto tol = myTol * d;
-		std::cout << "get para plane" << std::endl;
+		//std::cout << "get para plane" << std::endl;
 		auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
-		std::cout << "para plane is created!" << std::endl;
+		//std::cout << "para plane is created!" << std::endl;
 		auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
 		auto metricCalculator = createMetricCalculator();
 
@@ -425,7 +426,22 @@ namespace tnbLib
 					<< "the application is not performed!" << endl
 					<< abort(FatalError);
 			}
+			/*{
+				auto approxInfo = std::make_shared<Geo_ApprxCurve_Info>();
+				Cad_gApprxParaPlane approxAlg(pln, approxInfo);
+				approxAlg.Perform();
 
+				for (const auto& x : approxAlg.Polygons())
+				{
+					x->ExportToPlt(myFieldFile);
+				}
+				auto horizons = Cad_SingularityHorizons::RetrieveHorizons(*horizonAlg);
+				for (const auto& x : horizons)
+				{
+					x->ExportToPlt(myFieldFile);
+				}
+			}*/
+			//std::exit(1);
 			std::cout << "nb of horizons: " << horizonAlg->NbHorizons() << std::endl;
 			if (horizonAlg->HasHorizon())
 			{
@@ -468,25 +484,25 @@ namespace tnbLib
 				}
 
 				const auto& modifiedPlns = modifyAlg->ModifiedPlanes();
-
+				//OFstream myFile("plane.plt");
 				for (const auto& ip : modifiedPlns)
 				{
 					
-					{
+					/*{
 						auto orgPln = Aft2d_gRegionPlaneSurface::MakeOrignPlane<GModel_Plane>(ip);
-
+						std::cout << "original" << std::endl;
 						auto appxInfo = std::make_shared<Geo_ApprxCurve_Info>();
 						Cad_gApprxParaPlane appxAlg(orgPln, appxInfo);
 						appxAlg.Perform();
 
 						const auto& polys = appxAlg.Polygons();
+						std::cout << "nb of polys: " << polys.size() << std::endl;
 						
-						OFstream myFile("plane.plt");
 						for (const auto& x : polys)
 						{
 							x->ExportToPlt(myFile);
 						}
-					}
+					}*/
 					auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurface>(theBndInfo);
 					bnd->LoadMetricProcessor(metricPrcsr);
 					bnd->LoadPlane(ip);
@@ -704,7 +720,7 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 1)
+			/*if (x->Index() NOT_EQUAL 4)
 			{
 				continue;
 			}*/
@@ -796,7 +812,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 	FatalConvError.throwExceptions();
 
 	if (argc <= 1)

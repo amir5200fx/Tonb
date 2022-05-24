@@ -307,7 +307,7 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveOutOfBoundaryHorizo
 
 				if (NOT outside)
 				{
-					for (Standard_Integer i = 1; i <= nbWires; i++)
+					for (Standard_Integer i = 1; i < nbWires; i++)
 					{
 						if (InsidePolygon(i, pt))
 						{

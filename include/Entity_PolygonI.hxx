@@ -5,6 +5,34 @@ namespace tnbLib
 {
 
 	template<class Point>
+	inline const typename Entity_Polygon<Point>::coord & Entity_Polygon<Point>::FirstPoint() const
+	{
+		Debug_If_Condition(NOT NbPoints());
+		return GetPoint(0);
+	}
+
+	template<class Point>
+	inline const typename Entity_Polygon<Point>::coord & Entity_Polygon<Point>::LastPoint() const
+	{
+		Debug_If_Condition(NOT NbPoints());
+		return GetPoint(NbPoints() - 1);
+	}
+
+	template<class Point>
+	inline typename Entity_Polygon<Point>::coord & Entity_Polygon<Point>::FirstPointRef()
+	{
+		Debug_If_Condition(NOT NbPoints());
+		return GetPoint(0);
+	}
+
+	template<class Point>
+	inline typename Entity_Polygon<Point>::coord & Entity_Polygon<Point>::LastPointRef()
+	{
+		Debug_If_Condition(NOT NbPoints());
+		return GetPoint(NbPoints() - 1);
+	}
+
+	template<class Point>
 	void Entity_Polygon<Point>::Reverse()
 	{
 		const auto iMax = (Standard_Integer)thePoints_.size() - 1;

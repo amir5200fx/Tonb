@@ -125,7 +125,7 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 			if (l.size() IS_EQUAL 1)
 			{
 				Debug_Null_Pointer(l.front());
-				auto t = TypeDetection(*l.front(), bmesh, sides, *gsurf);
+				auto t = TypeDetection(l.front(), bmesh, sides, *gsurf);
 				Debug_Null_Pointer(t);
 
 				t->SetIndex(x.first);
@@ -137,7 +137,7 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 				Debug_Null_Pointer(pl0);
 				Debug_Null_Pointer(pl1);
 
-				auto t = TypeDetection(*pl0, *pl1, bmesh, sides, *gsurf);
+				auto t = TypeDetection(pl0, pl1, bmesh, sides, *gsurf);
 				Debug_Null_Pointer(t);
 
 				t->SetIndex(x.first);
@@ -156,3 +156,29 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 }
 #endif // __DEBUG
 
+#include <Cad_ColorApprxMetric.hxx>
+
+template<class SurfType>
+inline tnbLib::Pnt2d 
+tnbLib::Cad_Singularity<SurfType>::GetCorner
+(
+	const Standard_Integer zoneId
+) const
+{
+	Debug_Null_Pointer(Colors());
+	Debug_Null_Pointer(Colors()->Approximation());
+	Debug_Null_Pointer(Colors()->Approximation()->BoundingBox());
+	const Entity2d_Box b = *Colors()->Approximation()->BoundingBox();
+	switch (zoneId)
+	{
+	case 1: return b.Corner(Box2d_PickAlgorithm_SW);
+	case 2: return b.Corner(Box2d_PickAlgorithm_SE);
+	case 3: return b.Corner(Box2d_PickAlgorithm_NE);
+	case 4: return b.Corner(Box2d_PickAlgorithm_NW);
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "invalid zone Id." << endl
+			<< abort(FatalError);
+		return Pnt2d::null;
+	}
+}

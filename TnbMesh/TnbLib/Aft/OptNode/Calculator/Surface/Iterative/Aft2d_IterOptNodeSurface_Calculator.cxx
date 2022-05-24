@@ -52,7 +52,7 @@ void tnbLib::Aft2d_IterOptNodeSurface_Calculator::Perform()
 	const auto& v0 = Front()->Node0()->Coord();
 	const auto& v1 = Front()->Node1()->Coord();
 	const auto len = MetricMap()->CalcUnitDistance(v0, v1) / 2.0;
-	//std::cout << "len: " << len << std::endl;
+
 	Aft2d_OptNodeSurface_Analytical alg(Size(), len, m, *Front());
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");

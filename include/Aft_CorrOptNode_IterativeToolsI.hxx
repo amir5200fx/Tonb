@@ -41,9 +41,6 @@ inline Standard_Boolean tnbLib::Aft_CorrOptNode_IterativeTools::Correct
 	{
 		auto d0 = map.CalcUnitDistance(v0, P);
 		auto d1 = map.CalcUnitDistance(v1, P);
-		//std::cout << "iter: " << Iter << std::endl;
-		//std::cout << " v0: " << v0 << ", v1: " << v1 << std::endl;
-		//std::cout << "d0: " << d0 << ", d1: " << d1 << std::endl;
 		Debug_If_Condition(d0 <= gp::Resolution());
 		Debug_If_Condition(d1 <= gp::Resolution());
 
@@ -54,8 +51,7 @@ inline Standard_Boolean tnbLib::Aft_CorrOptNode_IterativeTools::Correct
 		auto dP = Pn - P;
 
 		P += omega * dP;
-		//std::cout << "P: " << P << std::endl;
-		
+
 		if (ABS(1.0 - d0) <= tol AND ABS(1.0 - d1) <= tol)
 		{
 			cond = Standard_False;

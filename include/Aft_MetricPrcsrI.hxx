@@ -20,7 +20,6 @@ namespace tnbLib
 		const auto tol = Info()->Tolerance();
 
 		const auto& domain = this->BoundingBox();
-
 		auto P = theP;
 		if (NOT domain.IsInside(P))
 		{
@@ -29,7 +28,10 @@ namespace tnbLib
 		forThose(Iter, 1, nbIters)
 		{
 			auto d = CalcDistance(theCentre, P) / theRadius;
-
+			if (d <= gp::Resolution())
+			{
+				return theP;
+			}
 			P = theCentre + (1.0 / d)*(P - theCentre);
 			if (NOT domain.IsInside(P))
 			{

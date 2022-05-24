@@ -63,7 +63,7 @@ namespace tnbLib
 		}
 		catch (const ConvError&)
 		{
-			if (theLevel > theMaxLevel)
+			if (theLevel > theMaxLevel*2)
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "Can not Calculate parameter of the curve" << endl

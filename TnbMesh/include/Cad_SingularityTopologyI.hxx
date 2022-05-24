@@ -90,7 +90,7 @@ tnbLib::Cad_SingularityTopology<SurfType>::GetTopology
 
 	Merge2d_Chain alg;
 	alg.Import(chains);
-	alg.SetRemoveDegeneracy();
+	//alg.SetRemoveDegeneracy();
 
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the application is not performed!");

@@ -601,6 +601,27 @@
     <Filter Include="TnbLib\Geo\Maker\Propeller\Blade">
       <UniqueIdentifier>{1924a60d-8c6e-4c4b-bee6-e45a2eb3c880}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Inscribed">
+      <UniqueIdentifier>{7e3a5157-7f81-4e6b-aa01-59a7fcd90cf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Inscribed\ConvexPolygon">
+      <UniqueIdentifier>{28b0b588-e18d-4ea3-97a1-4377f8629ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Tessellate">
+      <UniqueIdentifier>{0cd84516-75fa-44cc-a1c6-625c58fea87b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Tessellate\Polygon">
+      <UniqueIdentifier>{85225f93-33c3-4ca1-9b75-4793e56f9179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Tessellate\Polygon\Linear">
+      <UniqueIdentifier>{e21b448d-be9f-4210-8340-71f665a26064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Tessellate\Polygon\Linear\2d">
+      <UniqueIdentifier>{c3b0fc83-8db8-4443-baf4-9bedce763acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Tessellate\Polygon\Linear\3d">
+      <UniqueIdentifier>{9c787036-126e-47d1-9710-8d1d28819850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1404,6 +1425,30 @@
     <ClInclude Include="TnbLib\Geo\Maker\Propeller\Blade\Geo_PropBladeMaker.hxx">
       <Filter>TnbLib\Geo\Maker\Propeller\Blade</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Inscribed\ConvexPolygon\Geo2d_InscConxPoly.hxx">
+      <Filter>TnbLib\Geo\Inscribed\ConvexPolygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Geo_TessellatePolygon.hxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Linear\Geo_LinTessellatePolygon.hxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Linear\Geo_LinTessellatePolygonI.hxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Linear\2d\Geo2d_LinTessellatePolygon.hxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon\Linear\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Linear\2d\Geo2d_LinTessellatePolygonFwd.hxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon\Linear\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Linear\3d\Geo3d_LinTessellatePolygon.hxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon\Linear\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Linear\3d\Geo3d_LinTessellatePolygonFwd.hxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon\Linear\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1768,6 +1813,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Maker\Propeller\Blade\Geo_PropBladeMaker.cxx">
       <Filter>TnbLib\Geo\Maker\Propeller\Blade</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Inscribed\ConvexPolygon\Geo2d_InscConxPoly.cxx">
+      <Filter>TnbLib\Geo\Inscribed\ConvexPolygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Tessellate\Polygon\Linear\Geo_LinTessellatePolygon.cxx">
+      <Filter>TnbLib\Geo\Tessellate\Polygon\Linear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

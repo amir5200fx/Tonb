@@ -69,7 +69,7 @@ namespace tnbLib
 
 		void RegisterEnds();
 
-		std::shared_ptr<nodeType> RetrieveStart();
+		std::shared_ptr<nodeType> RetrieveStart(const Standard_Boolean ringPoint = Standard_False);
 
 		std::shared_ptr<nodeType> Next(const std::shared_ptr<nodeType>&, std::shared_ptr<edgeType>&);
 		std::shared_ptr<nodeType> FindStart(const Knit_ChainNode_Type) const;
@@ -86,7 +86,10 @@ namespace tnbLib
 		void CompleteTopology();
 		void UpdateNodeTypes(const std::shared_ptr<nodeType>&) const;
 
+		void BreakRing();
+
 		static Standard_Boolean IsStart(const std::shared_ptr<nodeType>&);
+		static Standard_Boolean IsRing(const std::shared_ptr<nodeType>&);
 
 	public:
 
