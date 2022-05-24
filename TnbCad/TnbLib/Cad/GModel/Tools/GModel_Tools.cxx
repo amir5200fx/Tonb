@@ -1302,12 +1302,12 @@ namespace tnbLib
 
 				auto v0 = x->FirstCoord();
 				auto v1 = x->LastCoord();
-				std::cout << "dis0 : " << v0.Distance(node0->Coord()) << ", tol: " << theTol << std::endl;
+
 				if (v0.Distance(node0->Coord()) <= theTol)
 				{
 					node0->SetForward(edge);
 				}
-				std::cout << "dis1 : " << v1.Distance(node1->Coord()) << ", tol: " << theTol << std::endl;
+
 				if (v1.Distance(node1->Coord()) <= theTol)
 				{
 					node1->SetBackward(edge);
