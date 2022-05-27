@@ -1801,6 +1801,9 @@
     <Filter Include="TnbLib\Cad\GapCurve\T\UniMetric">
       <UniqueIdentifier>{83f0114d-020d-456b-9abb-aa0a9224dfb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri">
+      <UniqueIdentifier>{cc58805d-0a5e-43e7-b719-745c61bfaeac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4356,6 +4359,9 @@
     <ClInclude Include="TnbLib\Cad\GapCurve\G\UniMetric\Cad_gPlnGapCurveUniMetricFwd.hxx">
       <Filter>TnbLib\Cad\GapCurve\G\UniMetric</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri\Aft2d_AltrOptNodeSurface_SubTri.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5557,6 +5563,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\GapCurve\G\UniMetric\Cad_gPlnGapCurveUniMetric.cxx">
       <Filter>TnbLib\Cad\GapCurve\G\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri\Aft2d_AltrOptNodeSurface_SubTri.cxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

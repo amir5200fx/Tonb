@@ -18,6 +18,7 @@ namespace tnbLib
 	class Geo_MetricPrcsr;
 
 	class Aft_SizeCorr_IterativeInfo;
+	class Pnt2d;
 
 	class Aft_CorrOptNode_IterativeTools
 	{
@@ -27,10 +28,39 @@ namespace tnbLib
 	public:
 
 		template<class FrontType, class SizeFun, class MetricFun, class InfoType>
-		static Standard_Boolean Correct(const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap, typename point_type_from_sizeMap<SizeFun>::ptType& theP0, const FrontType& theEdge, const InfoType& theInfo);
+		static Standard_Boolean
+			Correct
+			(
+				const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap,
+				typename point_type_from_sizeMap<SizeFun>::ptType& theP0,
+				const FrontType& theEdge,
+				const InfoType& theInfo
+			);
 
 		template<class SizeFun, class MetricFun, class InfoType>
-		static Standard_Boolean Correct(const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap, const typename point_type_from_sizeMap<SizeFun>::ptType& theP0, typename point_type_from_sizeMap<SizeFun>::ptType& theP, const Standard_Real h, const InfoType& theInfo);
+		static Standard_Boolean 
+			Correct
+			(
+				const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap,
+				const typename point_type_from_sizeMap<SizeFun>::ptType& theP0,
+				typename point_type_from_sizeMap<SizeFun>::ptType& theP,
+				const Standard_Real h,
+				const InfoType& theInfo
+			);
+
+		// Returns false if the algorithm is converged [5/26/2022 Amir]
+		template<class SizeFun, class MetricFun, class InfoType>
+		static Standard_Boolean
+			CorrectOptNode
+			(
+				const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap,
+				const Pnt2d& theV0,
+				const Pnt2d& theV1,
+				const Pnt2d& theCentre,
+				Pnt2d& theP0,
+				const Standard_Real h,
+				const InfoType& theInfo
+			);
 	};
 }
 

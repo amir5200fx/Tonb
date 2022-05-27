@@ -14,64 +14,17 @@ inline Standard_Boolean tnbLib::Aft_CorrOptNode_IterativeTools::Correct
 	const InfoType & theInfo
 )
 {
-	auto P = theP0;
-
-	const auto& map = theMap;
-	const auto& info = theInfo;
-
 	const auto& edge = theEdge;
-
-	const auto& domain = map.BoundingBox();
-	if (NOT domain.IsInside(P))
-	{
-		P = MeshBase_Tools::CorrectCoord(edge.Centre(), P, domain);
-	}
-
-	const auto omega = info.UnderRelaxation();
-	const auto tol = info.Tolerance();
-
 	Debug_Null_Pointer(edge.Node0());
 	Debug_Null_Pointer(edge.Node1());
-	const auto& v0 = edge.Node0()->Coord();
-	const auto& v1 = edge.Node1()->Coord();
 
-	Standard_Boolean cond = Standard_True;
-	Standard_Integer Iter = 0;
-	do
-	{
-		auto d0 = map.CalcUnitDistance(v0, P);
-		auto d1 = map.CalcUnitDistance(v1, P);
-		Debug_If_Condition(d0 <= gp::Resolution());
-		Debug_If_Condition(d1 <= gp::Resolution());
-
-		auto Pa = v0 + (P - v0) / d0;
-		auto Pb = v1 + (P - v1) / d1;
-
-		auto Pn = 0.5 * (Pa + Pb);
-		auto dP = Pn - P;
-
-		P += omega * dP;
-
-		if (ABS(1.0 - d0) <= tol AND ABS(1.0 - d1) <= tol)
-		{
-			cond = Standard_False;
-			break;
-		}
-
-		if (NOT domain.IsInside(P))
-		{
-			//std::cout << "corrected!" << std::endl;
-			P = MeshBase_Tools::CorrectCoord(edge.Centre(), P, domain);
-		}
-	} while (++Iter <= info.MaxNbIters());
-	//std::cout << std::endl;
-	if (NOT domain.IsInside(P))
-	{
-		P = MeshBase_Tools::CorrectCoord(edge.Centre(), P, domain);
-	}
-
-	theP0 = std::move(P);
-	return cond;
+	return CorrectOptNode
+	(
+		theMap,
+		edge.Node0()->Coord(),
+		edge.Node1()->Coord(),
+		edge.Centre(), theP0, 1.0, theInfo
+	);
 }
 
 template<class SizeFun, class MetricFun, class InfoType>
@@ -109,7 +62,7 @@ tnbLib::Aft_CorrOptNode_IterativeTools::Correct
 		auto pt = theP0 + (P - theP0) / dis;
 		auto dp = pt - P;
 
-		P += omega * dp;
+		P += /*omega **/ dp;
 
 		if (std::abs(1.0 - dis) <= tol)
 		{
@@ -129,5 +82,74 @@ tnbLib::Aft_CorrOptNode_IterativeTools::Correct
 	}
 
 	theP = std::move(P);
+	return cond;
+}
+
+template<class SizeFun, class MetricFun, class InfoType>
+inline Standard_Boolean
+tnbLib::Aft_CorrOptNode_IterativeTools::CorrectOptNode
+(
+	const Geo_MetricPrcsr<SizeFun, MetricFun>& theMap,
+	const Pnt2d & theV0,
+	const Pnt2d & theV1,
+	const Pnt2d& theCentre,
+	Pnt2d & theP0,
+	const Standard_Real h,
+	const InfoType & theInfo
+)
+{
+	auto P = theP0;
+
+	const auto& map = theMap;
+	const auto& info = theInfo;
+
+	const auto& domain = map.BoundingBox();
+	if (NOT domain.IsInside(P))
+	{
+		P = MeshBase_Tools::CorrectCoord(theCentre, P, domain);
+	}
+
+	const auto omega = info.UnderRelaxation();
+	const auto tol = info.Tolerance();
+
+	Standard_Boolean cond = Standard_True;
+	Standard_Integer Iter = 0;
+
+	Debug_If_Condition(h <= gp::Resolution());
+	const auto invH = 1.0 / h;
+	do
+	{
+		auto d0 = map.CalcUnitDistance(theV0, P)*invH;
+		auto d1 = map.CalcUnitDistance(theV1, P)*invH;
+		Debug_If_Condition(d0 <= gp::Resolution());
+		Debug_If_Condition(d1 <= gp::Resolution());
+
+		auto Pa = theV0 + (P - theV0) / d0;
+		auto Pb = theV1 + (P - theV1) / d1;
+
+		auto Pn = 0.5 * (Pa + Pb);
+
+		auto dP = Pn - P;
+
+		P += omega * dP;
+
+		if (ABS(1.0 - d0) <= tol AND ABS(1.0 - d1) <= tol)
+		{
+			cond = Standard_False;
+			break;
+		}
+
+		if (NOT domain.IsInside(P))
+		{
+			P = MeshBase_Tools::CorrectCoord(theCentre, P, domain);
+		}
+	} while (++Iter <= info.MaxNbIters());
+
+	if (NOT domain.IsInside(P))
+	{
+		P = MeshBase_Tools::CorrectCoord(theCentre, P, domain);
+	}
+
+	theP0 = std::move(P);
 	return cond;
 }

@@ -16,7 +16,7 @@ namespace tnbLib
 		const auto h = ElementSize();
 		const auto& m0 = Metric();
 
-		const auto& invH2 = (Standard_Real)1.0 / (h * h);
+		const auto invH2 = (Standard_Real)1.0 / (h * h);
 		const auto& centre = Front().Centre();
 
 		Debug_Null_Pointer(Front().Node0());
@@ -27,7 +27,8 @@ namespace tnbLib
 
 		Entity2d_Metric1 m(invH2*m0.A(), invH2*m0.B(), invH2*m0.C());
 		const auto D = std::sqrt(m.Determinant());
-		const auto cte = c3 / (D * Entity2d_Metric1::Distance(centre, v1, m));
+		//const auto cte = c3 / (D * Entity2d_Metric1::Distance(centre, v1, m));
+		const auto cte = c3 / (D * Length());
 
 		auto dU = v1 - centre;
 

@@ -33,11 +33,23 @@ namespace tnbLib
 	class Pln_Curve;
 	class GModel_ParaCurve;
 	class TModel_ParaCurve;
+	class Entity2d_Metric1;
 
 	class MeshBase_Tools
 	{
 
 	public:
+
+		static TnbMesh_EXPORT Pnt2d 
+			CalcAnalyCoord
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1, 
+				const Pnt2d& theCentre, 
+				const Entity2d_Metric1& m, 
+				const Standard_Real h,
+				const Standard_Real len
+			);
 
 		static TnbMesh_EXPORT void SetSourcesToMesh
 		(

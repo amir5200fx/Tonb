@@ -13,6 +13,46 @@
 
 #include <Geom2d_Curve.hxx>
 
+#include <armadillo.h>
+
+using namespace arma;
+
+tnbLib::Pnt2d 
+tnbLib::MeshBase_Tools::CalcAnalyCoord
+(
+	const Pnt2d & theP0,
+	const Pnt2d & theP1, 
+	const Pnt2d & theCentre, 
+	const Entity2d_Metric1 & m0, 
+	const Standard_Real h,
+	const Standard_Real len
+)
+{
+	static const Standard_Real c3 = 0.86602540378443864676372317075294;
+	const auto invH2 = (Standard_Real)1.0 / (h * h);
+
+	Entity2d_Metric1 m(invH2*m0.A(), invH2*m0.B(), invH2*m0.C());
+	const auto D = std::sqrt(m.Determinant());
+	const auto cte = c3 / (D * len);
+
+	auto dU = theP1 - theCentre;
+
+	vec2 U;
+	U(0) = dU.X();
+	U(1) = dU.Y();
+
+	mat22 orthM;
+	orthM(0, 0) = -m.B();
+	orthM(0, 1) = -m.C();
+	orthM(1, 0) = m.A();
+	orthM(1, 1) = m.B();
+
+	U = cte * (orthM * U);
+
+	Pnt2d P(theCentre.X() + U(0), theCentre.Y() + U(1));
+	return std::move(P);
+}
+
 void tnbLib::MeshBase_Tools::SetSourcesToMesh
 (
 	const std::vector<std::pair<Pnt2d, Standard_Real>>& theSources, 

@@ -14,6 +14,7 @@
 #include <Aft2d_AltrOptNodeSurface_MetricCorr.hxx>
 #include <Aft2d_AltrOptNodeSurface_NelderMead.hxx>
 #include <Aft2d_AltrOptNodeSurface_PerpenDir.hxx>
+#include <Aft2d_AltrOptNodeSurface_SubTri.hxx>
 #include <Aft2d_EdgeSurface.hxx>
 #include <Aft2d_OptNodeAnIso_nonIterAdaptiveInfo.hxx>
 #include <Aft_Tools.hxx>
@@ -358,7 +359,7 @@ namespace tnbLib
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(sizeFun, metricFun, theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
 
-			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_Standard>(theCalculator))
+			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_Altr>(theCalculator))
 			{
 				optNodeAlg->SetMetricMap(metricPrcsr);
 			}
@@ -375,7 +376,7 @@ namespace tnbLib
 
 			apprxMetricAlg->Perform();
 			auto field = Cad_ApprxMetric::CalcDeterminants(apprxMetricAlg->Triangulation(), metricCalculator, geometry);
-			//OFstream myFieldFile("metric_field.plt");
+			OFstream myFieldFile("metric_field.plt");
 			//geoLib::ExportToPlt(*field, myFieldFile, "det");
 			Standard_Real myMaxDet = 0;
 			if (mySizeFun)
@@ -392,7 +393,7 @@ namespace tnbLib
 			{
 				x /= myMaxDet;
 			}
-			//geoLib::ExportToPlt(*field, myFieldFile, "det1");
+			geoLib::ExportToPlt(*field, myFieldFile, "det1");
 			auto colors = std::make_shared<Cad_ColorApprxMetric>();
 
 			colors->SetCriterion(myDegenCrit);
@@ -669,20 +670,19 @@ namespace tnbLib
 
 		auto iterInfo = std::make_shared<Aft_SizeCorr_IterativeInfo>();
 		iterInfo->SetIgnoreNonConvergency(Standard_True);
-		iterInfo->SetMaxNbIters(30);
-		iterInfo->SetTolerance(1.0E-3);
-		iterInfo->SetUnderRelaxation(0.85);
+		iterInfo->SetMaxNbIters(40);  // default: 30 [5/24/2022 Amir]
+		iterInfo->SetTolerance(1.0E-4);  // default: 1.0E-3 [5/24/2022 Amir]
+		iterInfo->SetUnderRelaxation(0.95);  // default: 0.85 [5/24/2022 Amir]
 
 		auto fracInfo = std::make_shared<Aft_SizeCorr_FractionInfo>();
 
 		auto anIsoOptNodeInfo = std::make_shared<Aft2d_OptNodeAnIso_nonIterAdaptiveInfo>(iterInfo, fracInfo);
 		auto anIsoOptNodeUniMetric = std::make_shared<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(anIsoOptNodeInfo);
 		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_nonIterAdaptive>(anIsoOptNodeInfo);
-		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Standard>(iterInfo);
 
-		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_MetricCorr>();
+		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_MetricCorr>();
 		anIsoOptNode_altrAlg->SetIterInfo(iterInfo);
-		anIsoOptNode_altrAlg->SetMaxLev(5);
+		anIsoOptNode_altrAlg->SetMaxLev(5);*/
 
 		/*auto nelderInfo = std::make_shared<NumAlg_NelderMeadInfo>();
 		nelderInfo->SetMaxNbIterations(50);
@@ -691,16 +691,17 @@ namespace tnbLib
 		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_NelderMead>();
 		anIsoOptNode_altrAlg->SetInfo(nelderInfo);*/
 
-		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_PerpenDir>();
+		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_SubTri>();
 		anIsoOptNode_altrAlg->SetInfo(iterInfo);
-		anIsoOptNode_altrAlg->SetMaxLev(3);*/
+		anIsoOptNode_altrAlg->SetMaxLev(3);
 
-		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Altr>(anIsoOptNode_altrAlg, iterInfo);
+		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Altr>(anIsoOptNode_altrAlg, iterInfo);
+		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Standard>(iterInfo);
 
 		auto metricPrcsrInfo = std::make_shared<Aft_MetricPrcsrAnIso_Info>();
-		metricPrcsrInfo->SetNbIters(5);
-		metricPrcsrInfo->SetNbSamples(3);
-		metricPrcsrInfo->SetTolerance(0.0025);
+		metricPrcsrInfo->SetNbIters(5);  // default: 5 [5/24/2022 Amir]
+		metricPrcsrInfo->SetNbSamples(3);  // default: 3 [5/24/2022 Amir]
+		metricPrcsrInfo->SetTolerance(0.001);  // default: 0.0025 [5/24/2022 Amir]
 		metricPrcsrInfo->OverrideIntegInfo(integInfo);
 		
 		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
@@ -720,10 +721,10 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 4)
+			if (x->Index() NOT_EQUAL 1)
 			{
 				continue;
-			}*/
+			}
 			/*if (x->Index() > 24)
 			{
 				continue;
