@@ -136,6 +136,9 @@ namespace tnbLib
 		static TnbGlobal_EXPORT std::vector<std::array<Standard_Real, 1>> 
 			ConvertToArrayField<Standard_Real, Standard_Real, 1>
 			(const std::vector<Standard_Real>&);
+
+		template<class Key, class T>
+		static std::vector<T> RetrieveValuesToList(const std::map<Key, T>&);
 	};
 }
 
