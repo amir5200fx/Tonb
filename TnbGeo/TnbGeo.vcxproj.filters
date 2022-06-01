@@ -622,6 +622,42 @@
     <Filter Include="TnbLib\Geo\Tessellate\Polygon\Linear\3d">
       <UniqueIdentifier>{9c787036-126e-47d1-9710-8d1d28819850}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Normalized">
+      <UniqueIdentifier>{f2257610-ab71-4a9b-8c76-902713443470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Normalized\Points">
+      <UniqueIdentifier>{4e69e5ec-18d5-4c16-bb8c-44998cdeb1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Normalized\Points\2d">
+      <UniqueIdentifier>{cf48fa2f-bb4a-425e-9511-d3b8600951f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Normalized\Points\3d">
+      <UniqueIdentifier>{ef1e141c-3d8c-4db4-b341-bbb8cc644984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Normalized\Polygon">
+      <UniqueIdentifier>{c2c98fea-e6f4-4bbb-8c08-6965bc339aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Normalized\Polygon\2d">
+      <UniqueIdentifier>{5adfc7cc-3ce5-48fd-883b-7c8d6df24297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\HvCorr">
+      <UniqueIdentifier>{e6fa2e16-ca18-4301-8aa8-59a279b6512f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\HvCorr\Scalar">
+      <UniqueIdentifier>{a55664c5-4918-4595-bb83-c11b72e5ee27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\HvCorr\Scalar\2d">
+      <UniqueIdentifier>{2e53caaf-68ff-42f4-9e91-198ead161fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology">
+      <UniqueIdentifier>{2cc34a0f-7d06-4fa8-a824-d5aba0005068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Graph\Tools">
+      <UniqueIdentifier>{2fcfdbdf-db7b-4dce-9dcd-aa3e589ead57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\HvCorr\Scalar\Info">
+      <UniqueIdentifier>{bcccaad4-80e5-443d-a048-ca778d106acc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1449,6 +1485,36 @@
     <ClInclude Include="TnbLib\Geo\Tessellate\Polygon\Linear\3d\Geo3d_LinTessellatePolygonFwd.hxx">
       <Filter>TnbLib\Geo\Tessellate\Polygon\Linear\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Normalize\Points\Geo_NormalizePts.hxx">
+      <Filter>TnbLib\Geo\Normalized\Points</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Normalize\Points\2d\Geo2d_NormalizePts.hxx">
+      <Filter>TnbLib\Geo\Normalized\Points\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Normalize\Points\2d\Geo2d_NormalizePtsFwd.hxx">
+      <Filter>TnbLib\Geo\Normalized\Points\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Normalize\Polygon\Geo_NormalizePolygon.hxx">
+      <Filter>TnbLib\Geo\Normalized\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Normalize\Polygon\Geo_NormalizePolygonI.hxx">
+      <Filter>TnbLib\Geo\Normalized\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Normalize\Polygon\2d\Geo2d_NormalizePolygon.hxx">
+      <Filter>TnbLib\Geo\Normalized\Polygon\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Normalize\Polygon\2d\Geo2d_NormalizePolygonFwd.hxx">
+      <Filter>TnbLib\Geo\Normalized\Polygon\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\HvCorr\Scalar\2d\Geo2d_ScalarHvCorr.hxx">
+      <Filter>TnbLib\Geo\HvCorr\Scalar\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Graph\Tools\Geo_GraphTools.hxx">
+      <Filter>TnbLib\Geo\Graph\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\HvCorr\Scalar\Info\Geo_ScalarHvCorrInfo.hxx">
+      <Filter>TnbLib\Geo\HvCorr\Scalar\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1819,6 +1885,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Tessellate\Polygon\Linear\Geo_LinTessellatePolygon.cxx">
       <Filter>TnbLib\Geo\Tessellate\Polygon\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Normalize\Points\2d\Geo2d_NormalizePts.cxx">
+      <Filter>TnbLib\Geo\Normalized\Points\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\HvCorr\Scalar\2d\Geo2d_ScalarHvCorr.cxx">
+      <Filter>TnbLib\Geo\HvCorr\Scalar\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Graph\Tools\Geo_GraphTools.cxx">
+      <Filter>TnbLib\Geo\Graph\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\HvCorr\Scalar\Info\Geo_ScalarHvCorrInfo.cxx">
+      <Filter>TnbLib\Geo\HvCorr\Scalar\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -17,16 +17,15 @@ namespace tnbLib
 
 		static TnbGeo_EXPORT const Standard_Integer nbPts;
 
-		static TnbGeo_EXPORT const Pnt2d P0;
-		static TnbGeo_EXPORT const Pnt2d P1;
-		static TnbGeo_EXPORT const Pnt2d P2;
-		static TnbGeo_EXPORT const Pnt2d P3;
-		static TnbGeo_EXPORT const Pnt2d P4;
+		const Pnt2d P0;
+		const Pnt2d P1;
+		const Pnt2d P2;
+		const Pnt2d P3;
+		const Pnt2d P4;
 
 		// default constructor [12/26/2021 Amir]
 
-		Geo2d_SamplePoints_5Pts()
-		{}
+		TnbGeo_EXPORT Geo2d_SamplePoints_5Pts();
 
 
 		// constructors [12/26/2021 Amir]

@@ -6,6 +6,7 @@
 
 #include <Geo_Module.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Pnt2d.hxx>
 
 #include <vector>
 

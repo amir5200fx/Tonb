@@ -322,6 +322,7 @@ void tnbLib::Geo2d_InscConxPoly::Perform()
 		}
 
 		auto& Ids = subFun->IdsRef();
+
 		if (Ids.empty())
 		{
 			std::vector<Standard_Integer> ids;
@@ -334,14 +335,17 @@ void tnbLib::Geo2d_InscConxPoly::Perform()
 		}
 		else
 		{
-			std::sort
-			(
-				Ids.begin(), Ids.end(),
-				([](
-					const std::pair<Standard_Integer, Standard_Integer>& v0,
-					const std::pair<Standard_Integer, Standard_Integer>& v1
-					)->bool {return MEAN((float)v0.first, (float)v0.second) < MEAN((float)v1.first, (float)v1.second); })
-			);
+			if (Ids.size() > 1)
+			{
+				std::sort
+				(
+					Ids.begin(), Ids.end(),
+					([](
+						const std::pair<Standard_Integer, Standard_Integer>& v0,
+						const std::pair<Standard_Integer, Standard_Integer>& v1
+						)->bool {return MEAN((float)v0.first, (float)v0.second) < MEAN((float)v1.first, (float)v1.second); })
+				);
+			}
 
 			auto ids = inscConxPolyLib::SubdivideFunc::RetrieveIds(Ids);
 

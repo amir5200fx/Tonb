@@ -8,6 +8,7 @@
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 
+#include <Geo2d_GraphFwd.hxx>
 #include <Entity_Segment.hxx>
 #include <Entity_Line.hxx>
 #include <Entity_Triangle.hxx>
@@ -635,6 +636,9 @@ namespace tnbLib
 			(
 				const std::shared_ptr<Entity2d_Triangulation>& t
 			);
+
+		static TnbGeo_EXPORT void Reverse(Entity2d_Triangulation&);
+		static TnbGeo_EXPORT void Reverse(Entity3d_Triangulation&);
 	};
 }
 
