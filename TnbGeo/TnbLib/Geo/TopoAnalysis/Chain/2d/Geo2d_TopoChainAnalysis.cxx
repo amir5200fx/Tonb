@@ -329,9 +329,7 @@ template<>
 void tnbLib::Geo2d_TopoChainAnalysis::Perform()
 {
 	RegisterEnds();
-	std::cout << "nb of nodes: " << base::NbNodes() << std::endl;
-	std::cout << "nb of edges: " << base::NbEdges() << std::endl;
-	std::cout << std::endl;
+
 	Standard_Integer k = 0;
 	// create regular chains [4/2/2022 Amir]
 	//auto start = FindStart(Knit_ChainNode_Type::start);
@@ -352,15 +350,14 @@ void tnbLib::Geo2d_TopoChainAnalysis::Perform()
 		//start = FindStart(Knit_ChainNode_Type::start);
 		start = RetrieveStart();
 	}
-	std::cout << "nb of nodes: " << base::NbNodes() << std::endl;
-	std::cout << "nb of edges: " << base::NbEdges() << std::endl;
-	std::cout << std::endl;
+
 	// create ring chains [4/2/2022 Amir]
 	if (base::NbEdges())
 	{
 		BreakRing();
 		//start = FindStart(Knit_ChainNode_Type::regular);	
 		start = RetrieveStart(Standard_True);
+
 		while (start)
 		{
 			//start->TypeRef() = Knit_ChainNode_Type::start;
