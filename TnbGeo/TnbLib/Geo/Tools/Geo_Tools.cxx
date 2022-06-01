@@ -1,5 +1,8 @@
 #include <Geo_Tools.hxx>
 
+#include <Geo2d_Graph.hxx>
+#include <Geo2d_SegmentGraphEdge.hxx>
+#include <Geo2d_GraphNode.hxx>
 #include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
 #include <Entity2d_Triangle.hxx>
@@ -9,6 +12,7 @@
 #include <Entity2d_Chain.hxx>
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
+#include <Entity2d_Triangulation.hxx>
 #include <Global_Tools.hxx>
 
 #ifdef Handle
@@ -720,5 +724,23 @@ void tnbLib::Geo_Tools::MakeTrianglesCCW
 		{
 			std::swap(i0, i2);
 		}
+	}
+}
+
+void tnbLib::Geo_Tools::Reverse(Entity2d_Triangulation & theTri)
+{
+	auto& Ids = theTri.Connectivity();
+	for (auto& x : Ids)
+	{
+		std::swap(x.Value(0), x.Value(1));
+	}
+}
+
+void tnbLib::Geo_Tools::Reverse(Entity3d_Triangulation & theTri)
+{
+	auto& Ids = theTri.Connectivity();
+	for (auto& x : Ids)
+	{
+		std::swap(x.Value(0), x.Value(1));
 	}
 }
