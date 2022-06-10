@@ -26,8 +26,8 @@ namespace tnbLib
 		forThose(Iter, 1, nbLevels)
 		{
 			auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
-
 			auto du = (Correct - Umin) / dis;
+
 			//Correct = Umin + underRelaxation*du;
 			Correct = Umin + du;
 
@@ -36,7 +36,6 @@ namespace tnbLib
 
 			if (ABS(1.0 - dis) < tol) break;
 		}
-
 		// check the corrected value [5/11/2022 Amir]
 		const auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
 		if (std::abs(1.0 - dis) > 0.15)

@@ -60,10 +60,7 @@ namespace tnbLib
 			return Standard_True;
 		}
 
-		void ProjectBoundariesToHorizons(const surfType&) override
-		{
-			NotImplemented;
-		}
+		void ProjectBoundariesToHorizons(const surfType&) override;
 	};
 }
 

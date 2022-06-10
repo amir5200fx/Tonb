@@ -1334,6 +1334,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "singularityModifyPlaneViewe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tnbMeshToolSingularityModifyPlaneViewer", "applications\mesh\tools\singularityModifyPlaneViewer\tnbMeshToolSingularityModifyPlaneViewer.vcxproj", "{336B7DAA-D8F3-4747-831D-AC28B3532354}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TnbMeshPost", "TnbMeshPost\TnbMeshPost.vcxproj", "{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -5229,6 +5231,22 @@ Global
 		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|x64.Build.0 = Release|x64
 		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|x86.ActiveCfg = Release|Win32
 		{336B7DAA-D8F3-4747-831D-AC28B3532354}.Release|x86.Build.0 = Release|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Debug|x64.ActiveCfg = Debug|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Debug|x64.Build.0 = Debug|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Debug|x86.ActiveCfg = Debug|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Debug|x86.Build.0 = Debug|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.DebugNoCopy|Any CPU.ActiveCfg = Release|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.DebugNoCopy|Any CPU.Build.0 = Release|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.DebugNoCopy|x64.ActiveCfg = DebugNoCopy|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.DebugNoCopy|x64.Build.0 = DebugNoCopy|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.DebugNoCopy|x86.ActiveCfg = Debug|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.DebugNoCopy|x86.Build.0 = Debug|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Release|Any CPU.ActiveCfg = Release|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Release|x64.ActiveCfg = Release|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Release|x64.Build.0 = Release|x64
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Release|x86.ActiveCfg = Release|Win32
+		{F6A0CEE5-4EAE-4894-8342-4B86B2A97480}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -37,6 +37,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class Dir3d;
 	class Cad_GeomSurface;
 	class Cad_TModel;
 	class Cad_CurveLength_Info;
@@ -271,6 +272,8 @@ namespace tnbLib
 				const Standard_Real theTolerance
 			);
 
+		static TnbCad_EXPORT Handle(Geom_Plane) MakeGeomPlane(const Pnt3d&, const Dir3d&);
+
 		static TnbCad_EXPORT std::shared_ptr<std::vector<std::shared_ptr<TModel_Shell>>>
 			TrackShells
 			(
@@ -416,11 +419,29 @@ namespace tnbLib
 			);
 
 		static TnbCad_EXPORT Standard_Real 
+			CalcLength
+			(
+				const Handle(Geom2d_Curve)& theCurve, 
+				const Handle(Geom_Surface)&,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+			);
+
+		static Standard_Real CalcCharLengthU(const Handle(Geom_Surface)&, const Standard_Real u, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+		static Standard_Real CalcCharLengthV(const Geom_Surface&, const Standard_Real u, const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo);
+
+		static TnbCad_EXPORT Standard_Real 
 			CalcSegmentLength
 			(
 				const Pnt2d& theP0, 
 				const Pnt2d& theP1,
 				const Geom_Surface&
+			);
+
+		static TnbCad_EXPORT Handle(Geom_BSplineSurface)
+			ReParameterization
+			(
+				const Geom_BSplineSurface& theSurface, 
+				const gp_Trsf2d&
 			);
 
 		static TnbCad_EXPORT void Connect(const std::shared_ptr<TModel_Surface>&);

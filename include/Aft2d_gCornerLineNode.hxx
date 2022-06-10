@@ -4,5 +4,6 @@
 
 #include <Aft2d_LineNodeTemplate.hxx>
 #include <Aft2d_gCornerLineNodeFwd.hxx>
+#include <Aft2d_gCornerNode.hxx>
 
 #endif // !_Aft2d_gCornerLineNode_Header

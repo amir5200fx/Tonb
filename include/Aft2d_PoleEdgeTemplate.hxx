@@ -55,7 +55,7 @@ namespace tnbLib
 
 		Standard_Boolean IsPoleSingular() const override;
 
-		void SingularityContraction(const typename BndEdgeType::metricPrcsr& thePrcsr) override;
+		Standard_Boolean SingularityContraction(const typename BndEdgeType::metricPrcsr& thePrcsr) override;
 
 		//- Static functions and operators
 

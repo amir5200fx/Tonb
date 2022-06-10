@@ -29,6 +29,7 @@ namespace tnbLib
 
 		std::shared_ptr<info> theInfo_;
 
+
 	protected:
 
 		TnbMesh_EXPORT Mesh_Curve_Base();

@@ -98,7 +98,7 @@ tnbLib::Cad_SubdivideHorizon<PlnCurveType>::Merge
 		const auto& horizon = x->Horizon();
 		Debug_Null_Pointer(horizon);
 
-		const auto& params = x->Parameters();
+		//const auto& params = x->Parameters();
 
 		for (const auto& ip : xMap)
 		{
@@ -131,6 +131,28 @@ tnbLib::Cad_SubdivideHorizon<PlnCurveType>::Merge
 				}
 			}
 		}
+
+		/*auto l = std::make_shared<std::list<Standard_Real>>();
+		auto insert = merged.insert(std::make_pair(x->Horizon(), l));
+		if (NOT insert.second)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "duplicate data has been found" << endl
+				<< abort(FatalError);
+		}
+		for (auto p : params)
+		{
+			l->push_back(p);
+		}*/
+	}
+	for (const auto& x : theList)
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& horizon = x->Horizon();
+		Debug_Null_Pointer(horizon);
+
+		const auto& params = x->Parameters();
 
 		auto l = std::make_shared<std::list<Standard_Real>>();
 		auto insert = merged.insert(std::make_pair(x->Horizon(), l));

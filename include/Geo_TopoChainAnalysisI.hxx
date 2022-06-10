@@ -647,12 +647,24 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::BreakRing()
 	}
 
 	// Get a sample point [5/22/2022 Amir]
-	auto node = base::Nodes().begin()->second;
-	Debug_Null_Pointer(node);
+	for (const auto& x : base::Nodes())
+	{
+		Debug_Null_Pointer(x.second);
+		if (IsStart(x.second))
+		{
+			const auto& node = x.second;
+			node->TypeRef() = Knit_ChainNode_Type::start;
 
-	node->TypeRef() = Knit_ChainNode_Type::start;
-
-	ImportToEnds(node);
+			ImportToEnds(node);
+			return;
+		}
+	}
+	if (base::NbNodes())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Unable to find a start point!" << endl
+			<< abort(FatalError);
+	}
 }
 
 template<class ChainTraits>
@@ -763,9 +775,7 @@ template<class ChainTraits>
 inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Perform()
 {
 	RegisterEnds();
-	std::cout << "nb of nodes: " << base::NbNodes() << std::endl;
-	std::cout << "nb of edges: " << base::NbEdges() << std::endl;
-	std::cout << std::endl;
+
 	Standard_Integer k = 0;
 	// create regular chains [4/2/2022 Amir]
 	//auto start = FindStart(Knit_ChainNode_Type::start);
@@ -786,9 +796,7 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::Perform()
 		//start = FindStart(Knit_ChainNode_Type::start);
 		start = RetrieveStart();
 	}
-	std::cout << "nb of nodes: " << base::NbNodes() << std::endl;
-	std::cout << "nb of edges: " << base::NbEdges() << std::endl;
-	std::cout << std::endl;
+
 	// create ring chains [4/2/2022 Amir]
 	if (base::NbEdges())
 	{
@@ -968,8 +976,15 @@ inline void tnbLib::Geo_TopoChainAnalysis<ChainTraits>::DestroyEntity
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
 
-		n0->RemoveFromEdges(x->Index());
-		n1->RemoveFromEdges(x->Index());
+		if (n0 IS_EQUAL n1)
+		{
+			n0->RemoveFromEdges(x->Index());
+		}
+		else
+		{
+			n0->RemoveFromEdges(x->Index());
+			n1->RemoveFromEdges(x->Index());
+		}	
 	}
 	l.clear();
 	theRegister_.erase(iter);

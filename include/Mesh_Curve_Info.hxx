@@ -15,6 +15,7 @@ namespace tnbLib
 	// Forward Declarations
 	class NumAlg_AdaptiveInteg_Info;
 	class NumAlg_NewtonSolver_Info;
+	class NumAlg_BisectionSolver_Info;
 	class Mesh_CurveOptmPoint_Correction_Info;
 
 	class Mesh_Curve_Info
@@ -23,6 +24,7 @@ namespace tnbLib
 		typedef NumAlg_AdaptiveInteg_Info intgInfo;
 		typedef NumAlg_NewtonSolver_Info iterInfo;
 		typedef Mesh_CurveOptmPoint_Correction_Info corrInfo;
+		typedef NumAlg_BisectionSolver_Info bisectInfo;
 
 		/*Private Data*/
 
@@ -37,6 +39,7 @@ namespace tnbLib
 		std::shared_ptr<iterInfo> theNewtonIterInfo_;
 
 		std::shared_ptr<corrInfo> theCorrAlgInfo_;
+		std::shared_ptr<bisectInfo> theBisectInfo_;
 
 
 		//- private functions and operators
@@ -90,6 +93,11 @@ namespace tnbLib
 			return theCorrAlgInfo_;
 		}
 
+		const auto& BisectAlgInfo() const
+		{
+			return theBisectInfo_;
+		}
+
 		void SetIgnoreNonConvergency(const Standard_Boolean theCondition)
 		{
 			IgnoreNonConvergency_ = theCondition;
@@ -113,6 +121,11 @@ namespace tnbLib
 		void OverrideCorrAlgInfo(const std::shared_ptr<corrInfo>& theInfo)
 		{
 			theCorrAlgInfo_ = theInfo;
+		}
+
+		void OverrideBisectAlgInfo(const std::shared_ptr<bisectInfo>& theInfo)
+		{
+			theBisectInfo_ = theInfo;
 		}
 
 		//- Macros

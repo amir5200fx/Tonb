@@ -111,6 +111,8 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 		auto& zones = ZonesRef();
 		zones.reserve(horizonMap.size());
 
+		const auto dim = EstimateDim();
+
 		for (const auto& x : horizonMap)
 		{
 			Debug_Null_Pointer(x.second);
@@ -125,7 +127,7 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 			if (l.size() IS_EQUAL 1)
 			{
 				Debug_Null_Pointer(l.front());
-				auto t = TypeDetection(l.front(), bmesh, sides, *gsurf);
+				auto t = TypeDetection(l.front(), bmesh, sides, *gsurf, dim);
 				Debug_Null_Pointer(t);
 
 				t->SetIndex(x.first);
@@ -137,7 +139,7 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 				Debug_Null_Pointer(pl0);
 				Debug_Null_Pointer(pl1);
 
-				auto t = TypeDetection(pl0, pl1, bmesh, sides, *gsurf);
+				auto t = TypeDetection(pl0, pl1, bmesh, sides, *gsurf, dim);
 				Debug_Null_Pointer(t);
 
 				t->SetIndex(x.first);
@@ -157,6 +159,12 @@ inline void tnbLib::Cad_Singularity<SurfType>::Perform()
 #endif // __DEBUG
 
 #include <Cad_ColorApprxMetric.hxx>
+#include <Entity2d_Triangulation.hxx>
+#include <Entity3d_Box.hxx>
+#include <Geo_BoxTools.hxx>
+
+#include <Standard_Handle.hxx>
+#include <Geom_Surface.hxx>
 
 template<class SurfType>
 inline tnbLib::Pnt2d 
@@ -181,4 +189,27 @@ tnbLib::Cad_Singularity<SurfType>::GetCorner
 			<< abort(FatalError);
 		return Pnt2d::null;
 	}
+}
+
+template<class SurfType>
+inline Standard_Real
+tnbLib::Cad_Singularity<SurfType>::EstimateDim() const
+{
+	Debug_Null_Pointer(Colors());
+	Debug_Null_Pointer(Colors()->Approximation());
+
+	const Entity2d_Triangulation& approx = *Colors()->Approximation();
+	const Handle(Geom_Surface)& g = Colors()->Geometry();
+	Debug_Null_Pointer(g);
+
+	std::vector<Pnt3d> pts;
+	pts.reserve(approx.Points().size());
+	for (const auto& x : approx.Points())
+	{
+		auto pt = g->Value(x.X(), x.Y());
+		pts.push_back(std::move(pt));
+	}
+
+	auto b = Geo_BoxTools::GetBox(pts, 0);
+	return b.Diameter();
 }

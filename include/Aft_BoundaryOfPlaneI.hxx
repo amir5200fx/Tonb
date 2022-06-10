@@ -1,5 +1,7 @@
 #pragma once
 #include <Cad_SingularCurve.hxx>
+#include <Cad_PoleSingularCurve.hxx>
+#include <Cad_LineSingularCurve.hxx>
 #include <Cad_PlnGapCurve.hxx>
 #include <Aft2d_GapEdgeTemplate.hxx>
 #include <Global_Macros.hxx>
@@ -25,9 +27,14 @@ namespace tnbLib
 			Debug_Null_Pointer(x);
 			if (x->IsSingular())
 			{
-				x->SingularityContraction(*MetricProcessor());
-
-				if (NOT contracted) contracted = Standard_True;
+				if (NOT x->SingularityContraction(*MetricProcessor()))
+				{
+					modified.push_back(x);
+				}
+				else
+				{
+					if (NOT contracted) contracted = Standard_True;
+				}
 			}
 			else if (x->IsGap())
 			{
@@ -86,11 +93,13 @@ namespace tnbLib
 
 			const auto& edges = n0->RetrieveBoundaryEdges();
 			auto Iter = edges.begin();
+			Debug_Null_Pointer(Iter->second.lock());
 			auto M = Iter->second.lock()->EffectiveMetric();
 			Iter++;
 
 			while (Iter NOT_EQUAL edges.end())
 			{
+				Debug_Null_Pointer(Iter->second.lock());
 				const auto& Mi = Iter->second.lock()->EffectiveMetric();
 				if (M.Determinant() < Mi.Determinant())
 				{
@@ -226,11 +235,11 @@ namespace tnbLib
 
 					if (singCurve->IsPole())
 					{
-						mesh = curveType::template TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
+						mesh = Cad_PoleSingularCurve<curveType>::template TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
 					}
 					else if (singCurve->IsLine())
 					{
-						NotImplemented;
+						mesh = Cad_LineSingularCurve<curveType>::template TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
 					}
 					else
 					{

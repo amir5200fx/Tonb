@@ -203,3 +203,19 @@ namespace tnbLib
 		return std::move(pairedlist);
 	}
 }
+
+namespace tnbLib
+{
+	template<class Key, class T>
+	std::vector<T>
+		tnbLib::Global_Tools::RetrieveValuesToList(const std::map<Key, T>& theMap)
+	{
+		std::vector<T> values;
+		values.reserve(theMap.size());
+		for (const auto& x : theMap)
+		{
+			values.push_back(x.second);
+		}
+		return std::move(values);
+	}
+}

@@ -109,7 +109,7 @@ namespace tnbLib
 			std::cout << "is singular?" << x->IsSingular() << std::endl;
 		}*/
 
-		const auto[b, id] = RetrieveIndicatorCurve(theWire);
+		auto[b, id] = RetrieveIndicatorCurve(theWire);
 		if (NOT b)
 		{
 			FatalErrorIn(FunctionSIG)
@@ -122,6 +122,15 @@ namespace tnbLib
 		if (ReversePath(theWire.at(i0), theWire.at(i1)))
 		{
 			std::reverse(theWire.begin(), theWire.end());
+			const auto[b1, id1] = RetrieveIndicatorCurve(theWire);
+			if (NOT b1)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no indicator curve has been found!" << endl
+					<< abort(FatalError);
+			}
+			b = b1;
+			id = id1;
 		}
 
 		for (Standard_Integer i = 0; i < n - 1; i++)

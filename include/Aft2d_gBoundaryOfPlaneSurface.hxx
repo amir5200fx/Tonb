@@ -8,6 +8,8 @@
 #ifndef _DEBUG
 #include <Aft2d_gPlnCurveSurface.hxx>
 #include <Cad_gSingularCurve.hxx>
+#include <Cad_gPoleSingularCurve.hxx>
+#include <Cad_gLineSingularCurve.hxx>
 #include <Cad_gPlnGapCurve.hxx>
 #include <Aft2d_gSegmentGapEdge.hxx>
 #endif // !_DEBUG
