@@ -115,12 +115,7 @@ namespace tnbLib
 		TnbCad_EXPORT Entity2d_Metric1 MetricAt
 		(
 			const Pnt2d& theCoord
-		) const;
-
-		TnbCad_EXPORT Pnt3d Value
-		(
-			const Pnt2d& theCoord
-		) const;
+		) const;	
 
 		//- static functions and operators
 

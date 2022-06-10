@@ -31,7 +31,12 @@
 #include <Entity2d_MeshValue.hxx>
 #include <Adt_AvlTree.hxx>
 #include <Geo_Tools.hxx>
+#include <Geo_CurveLenMetricPrcsr.hxx>
+#include <Geo3d_NormalSizeFun.hxx>
+#include <Geo2d_NormalSizeFun.hxx>
 #include <Merge3d_Chain.hxx>
+#include <Mesh_CurveEntity.hxx>
+#include <Mesh_CurveLength.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -1740,6 +1745,19 @@ tnbLib::Cad_Tools::MakeSolid
 	return std::move(solid);
 }
 
+Handle(Geom_Plane)
+tnbLib::Cad_Tools::MakeGeomPlane
+(
+	const Pnt3d & theOrigin,
+	const Dir3d & theNormal
+)
+{
+	gp_Pln pl(theOrigin, theNormal);
+
+	Handle(Geom_Plane) myPlane = new Geom_Plane(pl);
+	return std::move(myPlane);
+}
+
 std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
 tnbLib::Cad_Tools::RetrieveNonSingularEdges
 (
@@ -2209,6 +2227,132 @@ tnbLib::Cad_Tools::CalcLength
 	return d;
 }
 
+namespace tnbLib
+{
+
+	namespace calcLen
+	{
+
+		class MetricFun
+		{
+
+			/*Private Data*/
+
+			const Handle(Geom_Surface)& theSurface_;
+
+		public:
+
+			typedef Entity2d_Metric1 metricType;
+
+			// default constructor [6/5/2022 Amir]
+
+
+			// constructors [6/5/2022 Amir]
+
+			explicit MetricFun(const Handle(Geom_Surface)& theSurface)
+				: theSurface_(theSurface)
+			{}
+
+			// public functions and operators [6/5/2022 Amir]
+
+			Entity2d_Metric1 Value(const Pnt2d& theCoord) const;
+		};
+	}
+}
+
+tnbLib::Entity2d_Metric1 
+tnbLib::calcLen::MetricFun::Value(const Pnt2d & theCoord) const
+{
+	auto m = Cad_Tools::CalcMetric(theCoord, theSurface_);
+	return std::move(m);
+}
+
+Standard_Real 
+tnbLib::Cad_Tools::CalcLength
+(
+	const Handle(Geom2d_Curve)& theCurve,
+	const Handle(Geom_Surface)& theSurface,
+	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+)
+{
+	static const Standard_Integer nbSeg = 50;
+	const auto u0 = theCurve->FirstParameter();
+	const auto u1 = theCurve->LastParameter();
+
+	const auto du = (u1 - u0) / (Standard_Real)nbSeg;
+	std::vector<Pnt2d> pts;
+	pts.reserve(nbSeg + 1);
+	for (size_t i = 0; i <= nbSeg; i++)
+	{
+		auto u = u0 + i * du;
+		auto pt = theCurve->Value(u);
+		pts.push_back(std::move(pt));
+	}
+	Entity2d_Polygon poly(std::move(pts), 0);
+	return CalcLength(poly, *theSurface);
+	/*if (NOT Pln_Tools::IsBounded(theCurve))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the curve is not bounded." << endl
+			<< abort(FatalError);
+	}
+
+	static const auto sizeFun = std::make_shared<Geo2d_NormalSizeFun>();
+	Debug_Null_Pointer(sizeFun);
+	const auto metricFun = std::make_shared<calcLen::MetricFun>(theSurface);
+	Debug_Null_Pointer(metricFun);
+
+	typedef Geo_CurveLenMetricPrcsr<Geo2d_SizeFun, calcLen::MetricFun> metricPrcsrType;
+	typedef Mesh_CurveEntity<Geom2d_Curve, metricPrcsrType> entityType;
+	auto metricPrcsr = std::make_shared<metricPrcsrType>();
+	Debug_Null_Pointer(metricPrcsr);
+
+	metricPrcsr->SetSizeFunction(sizeFun);
+	metricPrcsr->SetMetricFunction(metricFun);
+
+	const auto u0 = theCurve->FirstParameter();
+	const auto u1 = theCurve->LastParameter();
+
+	auto integrand = std::make_shared<entityType>(*theCurve, *metricPrcsr, u0, u1);
+	Debug_Null_Pointer(integrand);
+	std::cout << "cal length..." << std::endl;
+	std::cout << "Len: " << Mesh_CurveLength::Length(*integrand, *theInfo) << std::endl;
+	return Mesh_CurveLength::Length(*integrand, *theInfo);*/
+}
+
+//Standard_Real 
+//tnbLib::Cad_Tools::CalcCharLengthU
+//(
+//	const Handle(Geom_Surface) & theSurface,
+//	const Standard_Real u, 
+//	const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
+//)
+//{
+//	if (NOT IsBounded(theSurface))
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "the surface is not bounded." << endl
+//			<< abort(FatalError);
+//	}
+//	const auto domain = ParametricDomain(*theSurface);
+//	const auto& P0 = domain.P0();
+//	const auto& P1 = domain.P1();
+//
+//	const auto u0 = P0.X();
+//	const auto u1 = P1.X();
+//
+//	if (NOT INSIDE(u, u0, u1))
+//	{
+//		FatalErrorIn(FunctionSIG)
+//			<< "Invalid u-parameter: " << endl
+//			<< " - u: " << u << endl
+//			<< " - umin: " << u0 << ", umax: " << u1 << endl
+//			<< abort(FatalError);
+//	}
+//
+//
+//}
+
 Standard_Real 
 tnbLib::Cad_Tools::CalcSegmentLength
 (
@@ -2220,6 +2364,67 @@ tnbLib::Cad_Tools::CalcSegmentLength
 	const auto p0 = CalcCoord(theP0, theSurf);
 	const auto p1 = CalcCoord(theP1, theSurf);
 	return p0.Distance(p1);
+}
+
+Handle(Geom_BSplineSurface)
+tnbLib::Cad_Tools::ReParameterization
+(
+	const Geom_BSplineSurface& theSurface, 
+	const gp_Trsf2d & theTransf
+)
+{
+	std::vector<Pnt2d> U, V;
+	U.reserve(theSurface.UKnots().Size());
+	V.reserve(theSurface.VKnots().Size());
+
+	for (const auto x : theSurface.UKnots())
+	{
+		U.push_back(Pnt2d(x, 0));
+	}
+
+	for (const auto x : theSurface.VKnots())
+	{
+		V.push_back(Pnt2d(0, x));
+	}
+
+	for (auto& x : U) x.Transform(theTransf);
+	for (auto& x : V) x.Transform(theTransf);
+
+	TColStd_Array1OfReal U1(1, (Standard_Integer)U.size());
+	TColStd_Array1OfReal V1(1, (Standard_Integer)V.size());
+
+	forThose(Index, 1, U1.Size()) U1.SetValue(Index, U[Index_Of(Index)].X());
+	forThose(Index, 1, V1.Size()) V1.SetValue(Index, V[Index_Of(Index)].Y());
+
+	if (theSurface.Weights())
+	{
+		Handle(Geom_BSplineSurface) copy =
+			new Geom_BSplineSurface
+			(
+				theSurface.Poles(),
+				*theSurface.Weights(),
+				U1, V1, theSurface.UMultiplicities(),
+				theSurface.VMultiplicities(),
+				theSurface.UDegree(),
+				theSurface.VDegree(),
+				theSurface.IsUPeriodic(), theSurface.IsVPeriodic());
+
+		return copy;
+	}
+	else
+	{
+		Handle(Geom_BSplineSurface) copy =
+			new Geom_BSplineSurface
+			(
+				theSurface.Poles(),
+				U1, V1, theSurface.UMultiplicities(),
+				theSurface.VMultiplicities(),
+				theSurface.UDegree(),
+				theSurface.VDegree(),
+				theSurface.IsUPeriodic(), theSurface.IsVPeriodic());
+
+		return copy;
+	}
 }
 
 void tnbLib::Cad_Tools::Connect

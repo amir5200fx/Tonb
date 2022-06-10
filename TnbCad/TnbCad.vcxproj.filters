@@ -490,6 +490,24 @@
     <Filter Include="TnbLib\Cad\GModel\Entities\ParaGap">
       <UniqueIdentifier>{038cd0c2-5bdd-472d-9fda-51d6ae336485}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\ApproxSurfMetric\Subdivider\Criterion\MetricDet">
+      <UniqueIdentifier>{3cc76f92-fc74-4d6f-8236-49cdcde8a472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\Metric">
+      <UniqueIdentifier>{06d639f0-1f07-41eb-a351-58f0d9e1a45e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\Metric\G">
+      <UniqueIdentifier>{e06cc04e-8143-4e25-9072-90a2e2ba837b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\Metric\T">
+      <UniqueIdentifier>{b0120276-5111-4d35-99ca-c5d8a4535178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\CharLength">
+      <UniqueIdentifier>{eb2c8eeb-d111-4e87-9543-a00b14a35c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\CharLength\Info">
+      <UniqueIdentifier>{536ae029-e788-4108-a70e-1b07d0e26380}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -972,6 +990,21 @@
     <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaGap\GModel_ParaGapCurveFwd.hxx">
       <Filter>TnbLib\Cad\GModel\Entities\ParaGap</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Repair\Metric\Cad_MetricRepair.hxx">
+      <Filter>TnbLib\Cad\Repair\Metric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Repair\Metric\G\Cad_gMetricRepair.hxx">
+      <Filter>TnbLib\Cad\Repair\Metric\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Repair\Metric\G\Cad_gMetricRepairFwd.hxx">
+      <Filter>TnbLib\Cad\Repair\Metric\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CharLength\Info\Cad_CharLength_Info.hxx">
+      <Filter>TnbLib\Cad\CharLength\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CharLength\Cad_CharLength.hxx">
+      <Filter>TnbLib\Cad\CharLength</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -1438,6 +1471,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\GModel\Entities\ParaGap\GModel_ParaGapCurveIO.cxx">
       <Filter>TnbLib\Cad\GModel\Entities\ParaGap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Repair\Metric\Cad_MetricRepair.cxx">
+      <Filter>TnbLib\Cad\Repair\Metric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Repair\Metric\G\Cad_gMetricRepair.cxx">
+      <Filter>TnbLib\Cad\Repair\Metric\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\CharLength\Info\Cad_CharLength_Info.cxx">
+      <Filter>TnbLib\Cad\CharLength\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\CharLength\Cad_CharLength.cxx">
+      <Filter>TnbLib\Cad\CharLength</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

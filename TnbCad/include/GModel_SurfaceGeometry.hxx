@@ -17,6 +17,8 @@ namespace tnbLib
 
 	// Forward Declarations
 	class Cad_GeomSurface;
+	class Pnt2d;
+	class Pnt3d;
 
 	class GModel_SurfaceGeometry
 	{
@@ -59,6 +61,10 @@ namespace tnbLib
 
 		Handle(Poly_Triangulation) RetrieveTriangulation() const;
 
+		TnbCad_EXPORT Pnt3d Value
+		(
+			const Pnt2d& theCoord
+		) const;
 
 		//- Io functions and operators
 

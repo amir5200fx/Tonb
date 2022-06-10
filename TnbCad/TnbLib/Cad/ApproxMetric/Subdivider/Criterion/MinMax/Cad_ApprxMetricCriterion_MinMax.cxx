@@ -21,39 +21,32 @@ tnbLib::cadLib::ApprxMetricCriterion_MinMax::Subdivide
 	Debug_Null_Pointer(MetricCalculator());
 	auto samples = theSamples->RetrieveSamples();
 
-	const auto d = theDomain.Diameter();
+	Standard_Real minDet = RealLast();
+	Standard_Real maxDet = RealFirst();
 
-	const auto& p0 = theDomain.P0();
-	const auto& p1 = theDomain.P1();
-
-	Standard_Real minDis = RealLast();
-	Standard_Real maxDis = RealFirst();
 	for (const auto& s : samples)
 	{
 		auto[x, y] = s.Components();
 		auto xy = std::make_pair(x, y);
 
 		auto[px, py] = Geo_Tools::Interpolate(theDomain, xy);
+
 		auto m = MetricCalculator()->CalcMetric(px, py, theGeometry);
 		//auto m = Cad_Tools::CalcMetric(px, py, theGeometry);
+		auto det = m.Determinant();
 
-		auto dis = Entity2d_Metric1::DistanceSQ(p0, p1, m);
-
-		if (dis < minDis)
+		if (det < minDet)
 		{
-			minDis = dis;
+			minDet = det;
 		}
 
-		if (dis > maxDis)
+		if (det > maxDet)
 		{
-			maxDis = dis;
+			maxDet = det;
 		}
 	}
-	
-	minDis = std::sqrt(minDis);
-	maxDis = std::sqrt(maxDis);
 
-	if (std::abs(maxDis - minDis) / maxDis < Tolerance())
+	if (std::abs(maxDet - minDet) / maxDet < Tolerance())
 	{
 		return Standard_False;
 	}

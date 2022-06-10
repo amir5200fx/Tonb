@@ -91,6 +91,9 @@ namespace tnbLib
 		//- public functions and operators
 
 
+		TnbCad_EXPORT std::shared_ptr<GModel_ParaCurve> Copy() const;
+		TnbCad_EXPORT std::shared_ptr<GModel_ParaCurve> Copy(const gp_Trsf2d&) const;
+
 		static TnbCad_EXPORT std::pair<std::shared_ptr<GModel_ParaCurve>, std::shared_ptr<GModel_ParaCurve>> 
 			Split
 			(

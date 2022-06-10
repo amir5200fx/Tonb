@@ -10,6 +10,8 @@
 
 #include <vector>
 
+class gp_Trsf2d;
+
 namespace tnbLib
 {
 
@@ -72,6 +74,9 @@ namespace tnbLib
 		TnbCad_EXPORT Standard_Integer NbCurves() const;
 
 		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
+
+		TnbCad_EXPORT std::shared_ptr<GModel_ParaWire> Copy() const;
+		TnbCad_EXPORT std::shared_ptr<GModel_ParaWire> Copy(const gp_Trsf2d&) const;
 
 		const auto& Curves() const
 		{

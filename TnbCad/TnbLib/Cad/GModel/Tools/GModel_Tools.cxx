@@ -22,6 +22,7 @@
 #include <Vec2d.hxx>
 #include <Dir2d.hxx>
 
+#include <Geom_BSplineSurface.hxx>
 #include <Geom_Surface.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Face.hxx>
@@ -1315,7 +1316,6 @@ namespace tnbLib
 				links.push_back(std::move(edge));
 				k++;
 			}
-			std::cout << std::endl;
 			return std::move(links);
 		}
 
@@ -1897,6 +1897,120 @@ tnbLib::GModel_Tools::RemoveIntersections
 		auto wire = MakeWire(trimmedCurves);
 		return std::move(wire);	
 	}
+}
+
+std::shared_ptr<tnbLib::GModel_Edge> 
+tnbLib::GModel_Tools::ReParameterization
+(
+	const GModel_Edge & theEdge,
+	const gp_Trsf2d & t
+)
+{
+	const auto& curve = theEdge.Curve();
+	const auto& paraCurve = theEdge.Par();
+	Debug_Null_Pointer(paraCurve);
+
+	auto cParCurve = paraCurve->Copy(t);
+	auto edge = std::make_shared<GModel_Edge>
+		(theEdge.Index(), theEdge.Name(), cParCurve, curve);
+	return std::move(edge);
+}
+
+std::shared_ptr<tnbLib::GModel_Wire> 
+tnbLib::GModel_Tools::ReParameterization
+(
+	const GModel_Wire & theWire,
+	const gp_Trsf2d & t
+)
+{
+	const auto& oldEdges = theWire.Edges();
+	Debug_Null_Pointer(oldEdges);
+
+	auto edges = std::make_shared<std::vector<std::shared_ptr<GModel_Edge>>>();
+	Debug_Null_Pointer(edges);
+	edges->reserve(oldEdges->size());
+	for (const auto& x : *oldEdges)
+	{
+		Debug_Null_Pointer(x);
+		auto edge = ReParameterization(*x, t);
+
+		edges->push_back(std::move(edge));
+	}
+	auto wire = std::make_shared<GModel_Wire>
+		(theWire.Index(), theWire.Name(), std::move(edges));
+	return std::move(wire);
+}
+
+std::shared_ptr<tnbLib::GModel_Surface> 
+tnbLib::GModel_Tools::ReParameterization
+(
+	const std::shared_ptr<GModel_Surface>& theSurface,
+	const gp_Trsf2d & t
+)
+{
+	auto oldGeom = RetrieveGeometry(*theSurface);
+	Debug_Null_Pointer(oldGeom);
+	auto bspline = Handle(Geom_BSplineSurface)::DownCast(oldGeom);
+	if (NOT bspline)
+	{
+		return theSurface;
+	}
+
+	auto geom = std::make_shared<Cad_GeomSurface>(Cad_Tools::ReParameterization(*bspline, t));
+	geom->SetIndex(theSurface->GeomSurface()->Index());
+	geom->SetName(theSurface->GeomSurface()->Name());
+
+	const auto& oldOuter = theSurface->Outer();
+	Debug_Null_Pointer(oldOuter);
+
+	const auto id = theSurface->Index();
+	const auto name = theSurface->Name();
+
+	auto newOuter = ReParameterization(*oldOuter, t);
+	if (theSurface->HasHole())
+	{
+		const auto& oldInners = theSurface->Inner();
+		auto newInners = std::make_shared<std::vector<std::shared_ptr<GModel_Wire>>>();
+		newInners->reserve(oldInners->size());
+
+		for (const auto& x : *oldInners)
+		{
+			Debug_Null_Pointer(x);
+			auto wire = ReParameterization(*x, t);
+
+			newInners->push_back(std::move(wire));
+		}
+
+		auto surf =
+			std::make_shared<GModel_Surface>
+			(id, name, geom, newOuter, newInners);
+		return std::move(surf);
+	}
+	else
+	{
+		auto surf =
+			std::make_shared<GModel_Surface>
+			(id, name, geom, newOuter, nullptr);
+		return std::move(surf);
+	}
+}
+
+std::shared_ptr<tnbLib::GModel_Surface> 
+tnbLib::GModel_Tools::ReParameterization
+(
+	const std::shared_ptr<GModel_Surface> & theSurface,
+	const Standard_Real theScale
+)
+{
+	Debug_Null_Pointer(theSurface);
+	const auto& b = theSurface->ParaBoundingBox();
+	const auto& P0 = b.P0();
+
+	gp_Trsf2d transf;
+	transf.SetScale(P0, theScale);
+
+	auto s = ReParameterization(theSurface, transf);
+	return std::move(s);
 }
 
 void tnbLib::GModel_Tools::ExportToPlt

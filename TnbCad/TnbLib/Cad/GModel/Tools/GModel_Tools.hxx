@@ -16,6 +16,7 @@ class TopoDS_Edge;
 class TopoDS_Shape;
 class Geom_Surface;
 class Geom2d_Curve;
+class gp_Trsf2d;
 
 namespace tnbLib
 {
@@ -140,6 +141,34 @@ namespace tnbLib
 			(
 				const std::shared_ptr<GModel_ParaWire>&,
 				const Standard_Real theTol
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<GModel_Edge> 
+			ReParameterization
+			(
+				const GModel_Edge&,
+				const gp_Trsf2d&
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<GModel_Wire> 
+			ReParameterization
+			(
+				const GModel_Wire&,
+				const gp_Trsf2d&
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<GModel_Surface> 
+			ReParameterization
+			(
+				const std::shared_ptr<GModel_Surface>&, 
+				const gp_Trsf2d&
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<GModel_Surface> 
+			ReParameterization
+			(
+				const std::shared_ptr<GModel_Surface>&,
+				const Standard_Real theScale
 			);
 
 		static TnbCad_EXPORT void ExportToPlt

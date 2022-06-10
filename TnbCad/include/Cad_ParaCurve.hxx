@@ -8,6 +8,7 @@
 #include <Global_Named.hxx>
 
 class Geom2d_Curve;
+class gp_Trsf2d;
 
 #include <Standard_Handle.hxx>
 
