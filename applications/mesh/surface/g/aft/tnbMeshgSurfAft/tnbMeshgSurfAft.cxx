@@ -859,8 +859,8 @@ namespace tnbLib
 		metricPrcsrInfo->SetTolerance(0.001);  // default: 0.0025 [5/24/2022 Amir]
 		metricPrcsrInfo->OverrideIntegInfo(integInfo);
 		
-		mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetMaxIterations(50);
-		mySoluData->GlobalCurveInfo()->SetIgnoreNonConvergency(Standard_True);
+		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetMaxIterations(50);
+		//mySoluData->GlobalCurveInfo()->SetIgnoreNonConvergency(Standard_True);
 		//mySoluData->GlobalCurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
 		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
 		bndInfo->SetOverrideInfo(Standard_False);
