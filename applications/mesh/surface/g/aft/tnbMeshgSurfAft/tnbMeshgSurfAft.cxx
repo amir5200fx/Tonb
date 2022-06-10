@@ -25,6 +25,8 @@
 #include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_EdgeSurface.hxx>
 #include <Mesh2d_Element.hxx>
+#include <Mesh_Curve_Info.hxx>
+#include <Mesh_CurveOptmPoint_Correction_Info.hxx>
 #include <Cad_gSingularity.hxx>
 #include <Cad_ApprxMetricInfo.hxx>
 #include <Cad_ApprxMetric.hxx>
@@ -37,11 +39,15 @@
 #include <Cad_gModifySingularPlane.hxx>
 #include <Cad_gApprxParaPlane.hxx>
 #include <Cad_Tools.hxx>
+#include <Cad_gMetricRepair.hxx>
+#include <Cad_CharLength.hxx>
+#include <Cad_gCommonSingularity.hxx>
 #include <GModel_Tools.hxx>
 #include <GModel_Surface.hxx>
 #include <GModel_Plane.hxx>
 #include <GModel_ParaCurve.hxx>
 #include <GModel_ParaWire.hxx>
+#include <Geo_Tools.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Cad_GeomSurface.hxx>
 #include <GeoSizeFun2d_Surface.hxx>
@@ -59,6 +65,7 @@
 #include <Cad_GModel.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <NumAlg_NelderMeadInfo.hxx>
+#include <NumAlg_NewtonSolver_Info.hxx>
 
 #include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
@@ -66,6 +73,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <TopoDS_Face.hxx>
+#include <Geom_BSplineSurface.hxx>
 #include <Geom_Surface.hxx>
 #include <Geom_Plane.hxx>
 
@@ -84,7 +93,7 @@ namespace tnbLib
 	static std::shared_ptr<Cad_ApprxMetricInfo> myMetricApproxInfo;
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
 
-	static double myDegenCrit = 1.0e-7;//Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
+	static double myDegenCrit = 1.0e-6;//Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
 	static auto mySingZoneWeight = Cad_gSingularity::DEFAULT_WEIGHT;
 
 	static std::shared_ptr<Aft2d_gSolutionDataSurface> mySoluData;
@@ -189,7 +198,9 @@ namespace tnbLib
 
 	auto createMetricCalculator()
 	{
-
+		/*std::shared_ptr<Cad_MetricCalculator> alg =
+			std::make_shared<cadLib::MetricCalculator_Std>();
+		return std::move(alg);*/
 		if (mySizeFun)
 		{
 			std::shared_ptr<Cad_MetricCalculator> alg =
@@ -290,23 +301,27 @@ namespace tnbLib
 				<< "no geometry has been found!" << endl
 				<< abort(FatalError);
 		}
-		const auto& geometry = theSurface->GeomSurface()->Geometry();
+		auto geometry = theSurface->GeomSurface()->Geometry();
 
 		auto wire = GModel_Tools::GetOuterParaWire(theSurface);
 		auto box = GModel_Tools::CalcBoundingBox(*wire);
 
 		auto d = box.Diameter();
 		auto tol = myTol * d;
+		//auto tol = 1.0E-8 * d;
 		//std::cout << "get para plane" << std::endl;
-		auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
+		
 		//std::cout << "para plane is created!" << std::endl;
-		auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
+		
 		auto metricCalculator = createMetricCalculator();
 
 		std::vector<std::vector<std::shared_ptr<Aft2d_ElementSurface>>> meshes;
 
 		if (GModel_Tools::IsPlane(theSurface))
 		{
+			auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
+			auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
+
 			auto gPlane = Handle(Geom_Plane)::DownCast(geometry);
 			if (NOT gPlane)
 			{
@@ -355,6 +370,123 @@ namespace tnbLib
 		}
 		else
 		{
+
+			{
+				auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
+
+				auto plnRegion = Aft2d_gRegionPlaneSurface::MakePlane(pln);
+
+				auto singAlg = std::make_shared<Cad_gCommonSingularity>();
+				singAlg->SetPlane(plnRegion);
+				singAlg->SetSurface(theSurface);
+				singAlg->SetTolerance(1.0E-6);
+
+				singAlg->Perform();
+
+				plnRegion = singAlg->Modified();
+
+				auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
+
+				auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(geometry, box);
+				auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(sizeFun, metricFun, theInfo);
+				metricPrcsr->SetDimSize(box.Diameter());
+
+				if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_Altr>(theCalculator))
+				{
+					optNodeAlg->SetMetricMap(metricPrcsr);
+				}
+				else
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "invalid optimum point calculator has been detected!" << endl
+						<< abort(FatalError);
+				}
+
+				auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurface>(theBndInfo);
+				bnd->LoadMetricProcessor(metricPrcsr);
+				bnd->LoadPlane(plnRegion);
+
+				theBndInfo->SetMergeTolerance(tol);  // added to adapt the merging tolerance [5/16/2022 Amir]
+
+				bnd->Perform();
+				if (NOT bnd->IsDone())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the application is not performed!" << endl
+						<< abort(FatalError);
+				}
+
+				const auto& boundaries = bnd->Boundaries();
+
+				/*{
+					auto upBnds = Global_Tools::UpCast<Aft2d_gSegmentEdge, Aft2d_EdgeSurface>(boundaries);
+					auto nodes = Aft_Tools::RetrieveNodes(upBnds);
+					auto pts = Aft_Tools::RetrieveGeometry(nodes);
+					auto inds = Aft_Tools::RetrieveEdgeConnectivities(upBnds);
+					auto chain = Entity2d_Chain(std::move(pts), std::move(inds));
+					auto mm = Geo_Tools::Triangulation(chain);
+
+					file::SaveTo(mm, "boundaryMesh" + Entity2d_Triangulation::extension, 1);
+					std::exit(0);
+				}*/
+
+				Aft_Tools::Connect(boundaries);
+
+				auto elements = mesh(metricPrcsr, theCalculator, Aft_Tools::UpCast(boundaries));
+
+				meshes.push_back(std::move(elements));
+				return std::move(meshes);
+			}
+
+			auto surface = theSurface;
+			std::shared_ptr<GModel_Plane> pln;
+
+			gp_Trsf2d trans;
+			trans.SetScale(box.P0(), 1.0);
+
+			Standard_Boolean isTransf = Standard_False;
+
+			auto bspline = Handle(Geom_BSplineSurface)::DownCast(geometry);
+			if (bspline)
+			{
+				auto charLen = std::make_shared<Cad_CharLength>();
+				charLen->SetDomain(std::make_shared<Entity2d_Box>(box));
+				charLen->SetSurface(geometry);
+
+				charLen->Perform();
+				Debug_If_Condition_Message(NOT charLen->IsDone(), "the application is not performed");
+
+				const auto uLen = charLen->LengthU();
+				const auto vLen = charLen->LengthV();
+				//std::cout << "uLen: " << uLen << ", vLen: " << vLen << std::endl;
+				auto scaleRepair = std::make_shared<Cad_gMetricRepair>();
+				scaleRepair->SetCharLenU(uLen);
+				scaleRepair->SetCharLenV(vLen);
+				scaleRepair->SetDomain(std::make_shared<Entity2d_Box>(box));
+				scaleRepair->SetPatch(theSurface);
+
+				scaleRepair->Perform();
+				
+				trans = scaleRepair->Trsf().Inverted();
+				isTransf = Standard_True;
+
+				Debug_If_Condition_Message(NOT scaleRepair->IsDone(), "the application is not performed");
+
+				surface = scaleRepair->Reparameterized();
+
+				geometry = surface->GeomSurface()->Geometry();
+
+				wire = GModel_Tools::GetOuterParaWire(surface);
+				box = GModel_Tools::CalcBoundingBox(*wire);
+
+				pln = GModel_Tools::GetParaPlane(surface, tol);
+			}
+			else
+			{
+				pln = GModel_Tools::GetParaPlane(theSurface, tol);
+			}
+			auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
+
 			auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(geometry, box);
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(sizeFun, metricFun, theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
@@ -376,7 +508,7 @@ namespace tnbLib
 
 			apprxMetricAlg->Perform();
 			auto field = Cad_ApprxMetric::CalcDeterminants(apprxMetricAlg->Triangulation(), metricCalculator, geometry);
-			OFstream myFieldFile("metric_field.plt");
+			//OFstream myFieldFile("metric_field.plt");
 			//geoLib::ExportToPlt(*field, myFieldFile, "det");
 			Standard_Real myMaxDet = 0;
 			if (mySizeFun)
@@ -393,7 +525,8 @@ namespace tnbLib
 			{
 				x /= myMaxDet;
 			}
-			geoLib::ExportToPlt(*field, myFieldFile, "det1");
+			//geoLib::ExportToPlt(*field, myFieldFile, "det1");
+			//std::exit(1);
 			auto colors = std::make_shared<Cad_ColorApprxMetric>();
 
 			colors->SetCriterion(myDegenCrit);
@@ -441,8 +574,8 @@ namespace tnbLib
 				{
 					x->ExportToPlt(myFieldFile);
 				}
-			}*/
-			//std::exit(1);
+			}
+			std::exit(1);*/
 			std::cout << "nb of horizons: " << horizonAlg->NbHorizons() << std::endl;
 			if (horizonAlg->HasHorizon())
 			{
@@ -457,7 +590,8 @@ namespace tnbLib
 				zonesAlg->LoadParaPlane(regionPln);
 
 				zonesAlg->SetWeight(mySingZoneWeight);
-
+				std::cout << "zone alg..." << std::endl;
+				PAUSE;
 				zonesAlg->Perform();
 				if (NOT zonesAlg->IsDone())
 				{
@@ -465,13 +599,13 @@ namespace tnbLib
 						<< "the application is not performed!" << endl
 						<< abort(FatalError);
 				}
-
+				PAUSE;
 				auto modifyAlg = std::make_shared<Cad_gModifySingularPlane>();
 
 				modifyAlg->LoadColors(std::move(colors));
 				modifyAlg->LoadZones(zonesAlg->Zones());
 				modifyAlg->LoadPlane(regionPln);
-				modifyAlg->LoadSurface(theSurface);
+				modifyAlg->LoadSurface(surface);
 				modifyAlg->LoadApproxInfo(myCurveApproxInfo);
 
 				modifyAlg->SetTolerance(myTol);
@@ -498,12 +632,13 @@ namespace tnbLib
 
 						const auto& polys = appxAlg.Polygons();
 						std::cout << "nb of polys: " << polys.size() << std::endl;
-						
+
 						for (const auto& x : polys)
 						{
 							x->ExportToPlt(myFile);
 						}
-					}*/
+					}
+					std::exit(1);*/
 					auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurface>(theBndInfo);
 					bnd->LoadMetricProcessor(metricPrcsr);
 					bnd->LoadPlane(ip);
@@ -534,6 +669,14 @@ namespace tnbLib
 					Aft_Tools::Connect(boundaries);
 
 					auto elements = mesh(metricPrcsr, theCalculator, Aft_Tools::UpCast(boundaries));
+					if (isTransf)
+					{
+						auto nodes = Aft_Tools::RetrieveNodes(elements);
+						for (const auto& nd : nodes)
+						{
+							nd->Coord().Transform(trans);
+						}
+					}
 					meshes.push_back(std::move(elements));
 				}
 				return std::move(meshes);
@@ -573,6 +716,15 @@ namespace tnbLib
 				Aft_Tools::Connect(boundaries);
 
 				auto elements = mesh(metricPrcsr, theCalculator, Aft_Tools::UpCast(boundaries));
+				if (isTransf)
+				{
+					auto nodes = Aft_Tools::RetrieveNodes(elements);
+					for (const auto& nd : nodes)
+					{
+						nd->Coord().Transform(trans);
+					}
+				}
+
 				meshes.push_back(std::move(elements));
 				return std::move(meshes);
 			}
@@ -623,6 +775,7 @@ namespace tnbLib
 	auto createCriterion(const std::shared_ptr<Cad_MetricCalculator>& calc)
 	{
 		auto alg = std::make_shared<cadLib::ApprxMetricCriterion_MinMax>(myMetricApproxTol, calc);
+		alg->SetTolerance(0.2);
 		return std::move(alg);
 	}
 
@@ -649,6 +802,8 @@ namespace tnbLib
 		auto metricCalculator = createMetricCalculator();
 		auto criterion = createCriterion(metricCalculator);
 		auto samples = createSamples();
+
+		myMaxLev = 7;
 
 		myMetricApproxInfo = std::make_shared<Cad_ApprxMetricInfo>();
 		myMetricApproxInfo->SetMinLevel(myMinLev);
@@ -704,6 +859,9 @@ namespace tnbLib
 		metricPrcsrInfo->SetTolerance(0.001);  // default: 0.0025 [5/24/2022 Amir]
 		metricPrcsrInfo->OverrideIntegInfo(integInfo);
 		
+		mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetMaxIterations(50);
+		mySoluData->GlobalCurveInfo()->SetIgnoreNonConvergency(Standard_True);
+		//mySoluData->GlobalCurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
 		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
 		bndInfo->SetOverrideInfo(Standard_False);
 		bndInfo->OverrideGlobalCurve(mySoluData->GlobalCurveInfo());
@@ -721,23 +879,34 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			if (x->Index() NOT_EQUAL 1)
+			/*if (x->Index() NOT_EQUAL 6)
 			{
 				continue;
-			}
+			}*/
 			/*if (x->Index() > 24)
 			{
 				continue;
 			}*/
+
+			const TopoDS_Face& face = x->Face();
+			
 			try
 			{
 				auto plnMesh = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metricPrcsrInfo);
 				if (plnMesh.size() IS_EQUAL 1)
 				{
 					auto tris = Aft_Tools::RetrieveTriangleMesh(plnMesh.at(0));
+					
+
 					file::SaveTo(tris, "planar" + Entity2d_Triangulation::extension, 1);
 					//std::exit(0);
+
 					auto tris3d = retrieveTris3d(x, *tris);
+					if (face.Orientation() IS_EQUAL TopAbs_Orientation::TopAbs_REVERSED)
+					{
+						Geo_Tools::Reverse(*tris3d);
+					}
+
 					std::cout << " - nb. of elements: " << tris3d->NbConnectivity() << std::endl;
 					Global_Tools::Insert(x->Index(), tris3d, mySoluData->TrisRef());
 				}
@@ -747,9 +916,14 @@ namespace tnbLib
 					for (const auto& m : plnMesh)
 					{
 						auto tris = Aft_Tools::RetrieveTriangleMesh(m);
+
 						mesh2d.Add(*tris);
 					}
 					auto tris3d = retrieveTris3d(x, mesh2d);
+					if (face.Orientation() IS_EQUAL TopAbs_Orientation::TopAbs_REVERSED)
+					{
+						Geo_Tools::Reverse(*tris3d);
+					}
 					std::cout << " - nb. of elements: " << tris3d->NbConnectivity() << std::endl;
 					Global_Tools::Insert(x->Index(), tris3d, mySoluData->TrisRef());
 				}

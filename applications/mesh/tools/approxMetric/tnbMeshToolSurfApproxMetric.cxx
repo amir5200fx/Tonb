@@ -61,6 +61,16 @@ namespace tnbLib
 		verbose = i;
 	}
 
+	void setTol(const double x)
+	{
+		myTol = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the tolerance is set to: " << myTol << endl;
+		}
+	}
+
 	void setMinLev(const int n)
 	{
 		myMinLev = n;
@@ -431,6 +441,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](int i)-> void {setUnBalance(i); }), "setUnbalancing");
 		mod->add(chaiscript::fun([](double x)-> void {setRadius(x); }), "setRadius");
 		mod->add(chaiscript::fun([](double x)-> void {setRes(x); }), "setResolution");
+		mod->add(chaiscript::fun([](double x)-> void {setTol(x); }), "setTol");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {setSample(name); }), "setSampleType");
 
 		// operators [4/8/2022 Amir]
@@ -485,6 +496,7 @@ int main(int argc, char *argv[])
 				<< " - setUnbalancing(n);" << endl
 				<< " - setRadius(double);" << endl
 				<< " - setResolution(double);" << endl
+				<< " - setTol(double);" << endl
 				<< " - setSampleType(name);     - name: 4pts, 5pts, 8pts and 9pts" << endl << endl
 
 				<< " # operators: " << endl << endl

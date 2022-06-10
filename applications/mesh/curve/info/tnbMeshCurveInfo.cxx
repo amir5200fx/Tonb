@@ -1,6 +1,7 @@
 #include <Mesh_Curve_Info.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <NumAlg_NewtonSolver_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
 #include <Global_File.hxx>
 #include <OSstream.hxx>
@@ -24,6 +25,7 @@ namespace tnbLib
 	static const auto myIterIntegInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
 	static const auto myNewtonIterInfo = std::make_shared<NumAlg_NewtonSolver_Info>();
 	static const auto myOptPointCorrInfo = std::make_shared<Mesh_CurveOptmPoint_Correction_Info>();
+	static const auto myBisectCorrInfo = std::make_shared<NumAlg_BisectionSolver_Info>();
 
 	class OverallLenIntegInfoRunTime
 	{
@@ -70,6 +72,19 @@ namespace tnbLib
 	public:
 
 		OptPointCorrInfoRunTime()
+		{
+			SetInfo();
+		}
+
+		static void SetInfo();
+	};
+
+	class BisectCorrInfoRunTime
+	{
+
+	public:
+
+		BisectCorrInfoRunTime()
 		{
 			SetInfo();
 		}
@@ -175,10 +190,37 @@ namespace tnbLib
 	}
 }
 
+void tnbLib::BisectCorrInfoRunTime::SetInfo()
+{
+	myBisectCorrInfo->SetMaxIterations(10);
+	myBisectCorrInfo->SetTolerance(1.0E-6);
+	myBisectCorrInfo->SetDelta(1.0E-6);
+}
+
+namespace tnbLib
+{
+
+	void setMaxLevel(const std::shared_ptr<NumAlg_BisectionSolver_Info>& info, int n)
+	{
+		info->SetMaxIterations(n);
+	}
+
+	void setTolerance(const std::shared_ptr<NumAlg_BisectionSolver_Info>& info, double x)
+	{
+		info->SetTolerance(x);
+	}
+
+	void setDelta(const std::shared_ptr<NumAlg_BisectionSolver_Info>& info, double x)
+	{
+		info->SetDelta(x);
+	}
+}
+
 static tnbLib::OverallLenIntegInfoRunTime myOverallLenIntegInfoRunTimeObj;
 static tnbLib::IterIntegInfoRunTime myIterIntegInfoRunTimeObj;
 static tnbLib::NewtonIterInfoRunTime myNewtonIterInfoRunTimeObj;
 static tnbLib::OptPointCorrInfoRunTime myOptPointCorrInfoRunTimeObj;
+static tnbLib::BisectCorrInfoRunTime myBisectCorrInfoRunTimeObj;
 
 namespace tnbLib
 {
@@ -221,6 +263,7 @@ namespace tnbLib
 		myInfo->OverrideNewtonIntgInfo(myIterIntegInfo);
 		myInfo->OverrideNewtonIterInfo(myNewtonIterInfo);
 		myInfo->OverrideOverallLengthIntgInfo(myOverallLenIntegInfo);
+		myInfo->OverrideBisectAlgInfo(myBisectCorrInfo);
 
 		exeTag = true;
 
@@ -263,6 +306,10 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>& info, int n)-> void {setMaxLevel(info, n); }), "setMaxLev");
 		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>& info, double x)-> void {setTolerance(info, x); }), "setTolerance");
 		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>& info, double x)-> void {setUnderRelaxation(info, x); }), "setUnderRelaxation");
+
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_BisectionSolver_Info>& info, int n)-> void {setMaxLevel(info, n); }), "setMaxLev");
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_BisectionSolver_Info>& info, double x)-> void {setTolerance(info, x); }), "setTolerance");
+		mod->add(chaiscript::fun([](const std::shared_ptr<NumAlg_BisectionSolver_Info>& info, double x)-> void {setDelta(info, x); }), "setDelta");
 
 		mod->add(chaiscript::fun([](int n) -> void {myOverallLenMaxLev = n; }), "setOverallLenMaxLevel");
 		mod->add(chaiscript::fun([](double x) -> void {myUR = x; }), "setUnderRelaxation");
@@ -338,6 +385,10 @@ int main(int argc, char *argv[])
 				<< " - [CorrInfo].setMaxLev(n)" << endl
 				<< " - [CorrInfo].setTolerance(double)" << endl
 				<< " - [CorrInfo].setUnderRelaxation(double)" << endl << endl
+
+				<< " - [BisectInfo].setMaxLev(n)" << endl
+				<< " - [BisectInfo].setTolerance(double)" << endl
+				<< " - [BisectInfo].setDelta(double)" << endl << endl
 
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
 
