@@ -28,9 +28,9 @@ tnbLib::Aft2d_AltrOptNodeSurface_SubTri::Iter
 	auto V0 = MEAN(theCentre, theP0);
 	auto V1 = MEAN(theCentre, theP1);
 
-	const auto d0 = 1.0 / (denom*denom);
-	const auto h = (d0 + 0.75)*theH;
-
+	//const auto d0 = 1.0 / (denom*denom);
+	const auto h = std::sqrt(1.0 / (denom*denom) + 0.75)*theH;
+	
 	if (Aft_CorrOptNode_IterativeTools::CorrectOptNode(*MetricMap(), V0, V1, theCentre, CorrectedRef(), h, *IterInfo()))
 	{
 		return Iter(theLev + 1, theCentre, V0, V1, theH);
@@ -54,6 +54,8 @@ void tnbLib::Aft2d_AltrOptNodeSurface_SubTri::Perform()
 
 	const auto& v0 = node0->Coord();
 	const auto& v1 = node1->Coord();
+
+	CorrectedRef() = P0();
 
 	if (Iter(1, centre, v0, v1, 1.0))
 	{

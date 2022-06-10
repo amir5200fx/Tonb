@@ -14,7 +14,9 @@ namespace tnbLib
 		static const Standard_Real c3 = 0.86602540378443864676372317075294;
 
 		const auto h = ElementSize();
-		const auto& m0 = Metric();
+		auto m0 = Metric();
+		if (m0.A() <= 1.0E-6) m0.A() = 1.0E-6;
+		if (m0.C() <= 1.0E-6) m0.C() = 1.0E-6;
 
 		const auto invH2 = (Standard_Real)1.0 / (h * h);
 		const auto& centre = Front().Centre();
