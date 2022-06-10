@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{5bfaae34-f115-4978-ae6e-8fb57b7d4452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post">
+      <UniqueIdentifier>{55ec483d-c9e6-461f-b501-547a3fc31520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing">
+      <UniqueIdentifier>{a45c50c9-7e84-47e1-8d88-bae6503f634d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Surface">
+      <UniqueIdentifier>{faa43545-3ede-44ce-b117-35744f7abc9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Topology">
+      <UniqueIdentifier>{8f0cc237-4c71-4018-8360-b1e7d9ada388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Topology\Surface">
+      <UniqueIdentifier>{2cb03751-d57c-49b9-85bf-8c72dfbac447}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
+      <Filter>TnbLib\Post\Topology\Surface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.cxx">
+      <Filter>TnbLib\Post\Topology\Surface</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
