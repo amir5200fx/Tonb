@@ -296,6 +296,7 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveOutOfBoundaryHorizo
 		if (t IS_EQUAL Cad_ModifySingularPlaneToolsBase::pCurveType::horizon)
 		{
 			const auto pt = GetSample(*x.second, theEdgeToCurve);
+
 			if (hasInner)
 			{
 				Standard_Boolean outside = Standard_False;
@@ -326,7 +327,7 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveOutOfBoundaryHorizo
 			}
 		}
 	}
-
+	PAUSE;
 	if (removeList.empty())
 	{
 		return;

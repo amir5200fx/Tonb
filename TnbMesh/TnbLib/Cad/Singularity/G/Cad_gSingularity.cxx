@@ -27,6 +27,9 @@
 #include <GModel_ParaCurve.hxx>
 #include <Cad_Tools.hxx>
 #include <Pln_Curve.hxx>
+#include <Geo_Tools.hxx>
+#include <Geo_BoxTools.hxx>
+#include <Geo2d_NormalizePolygon.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <Geo2d_LinTessellatePolygon.hxx>
 #include <Geo2d_InscConxPoly.hxx>
@@ -49,7 +52,8 @@ tnbLib::Cad_gSingularity::TypeDetection
 	const std::shared_ptr<Entity2d_Polygon>& thePoly,
 	const GeoMesh2d_Data& theBMesh, 
 	const std::vector<std::shared_ptr<Pln_Curve>>& theSides, 
-	const Geom_Surface& theSurface
+	const Geom_Surface& theSurface,
+	const Standard_Real theDim
 ) const
 {
 	if (NOT this->SizeFun())
@@ -62,25 +66,37 @@ tnbLib::Cad_gSingularity::TypeDetection
 	Debug_Null_Pointer(thePoly);
 	const auto& polyRef = *thePoly;
 
+	//std::cout << "run...." << std::endl;
 	//OFstream myFile("metric.plt");
 	// checking the polygon [3/29/2022 Amir]
 	Entity2d_Polygon::Check(polyRef);
-	/*theBMesh.StaticData()->ExportToPlt(myFile);
-	polyRef.ExportToPlt(myFile);
-	PAUSE;
-	{
-		Geo2d_InscConxPoly convx(thePoly, 1.0E-6);
-		convx.Perform();
+	//{
+	//	theBMesh.StaticData()->ExportToPlt(myFile);
+	//	polyRef.ExportToPlt(myFile);
 
-		Geo2d_LinTessellatePolygon tess(convx.ConvexHull());
-		tess.Tessellate(2);
+	//	auto pp = std::make_shared<Entity2d_Polygon>(polyRef);
+	//	Geo2d_NormalizePolygon aa(pp);
+	//	aa.Perform();
+
+	//	auto bb = Geo_BoxTools::GetBox(pp->Points(), 1.0E-12);
+	//	//PAUSE;
+	//	{
+	//		Geo2d_InscConxPoly convx(aa.Normalized(), 1.0E-6);
+	//		convx.Perform();
+
+	//		auto retrieved = Geo_Tools::DistributeInDomain(convx.ConvexHull()->Points(), bb);
+
+	//		auto retPoly = std::make_shared<Entity2d_Polygon>(std::move(retrieved), 0);
+	//		Geo2d_LinTessellatePolygon tess(retPoly);
+	//		tess.Tessellate(2);
 
 
-		convx.ConvexHull()->ExportToPlt(myFile);
-		tess.Tessellated()->ExportToPlt(myFile);
-	}
+	//		//convx.ConvexHull()->ExportToPlt(myFile);
+	//		tess.Tessellated()->ExportToPlt(myFile);
+	//	}
 
-	std::exit(1);*/
+	//	//std::exit(1);
+	//}
 	const auto& pts = polyRef.Points();
 	const auto& p0 = FirstItem(pts);
 	const auto& p1 = LastItem(pts);
@@ -90,7 +106,7 @@ tnbLib::Cad_gSingularity::TypeDetection
 	if (polyRef.IsClosed())
 	{
 		const auto length = Cad_Tools::CalcLength(polyRef, theSurface);
-		const auto elmSize = this->SizeFun()->Value(pm);
+		const auto elmSize = std::min(this->SizeFun()->Value(pm), theDim);
 
 		const auto b = Entity2d_Box::BoundingBoxOf(pts);
 		auto curves = base::LineHorizonCurves_Loop(b);
@@ -170,11 +186,11 @@ tnbLib::Cad_gSingularity::TypeDetection
 
 		const auto size0 = SizeFun()->Value(p0);
 		const auto size1 = SizeFun()->Value(p1);
-		const auto size = MEAN(size0, size1);
+		const auto size = std::min(size0, size1);
 
 		const auto length = Cad_Tools::CalcLength(polyRef, theSurface);
 
-		if (length <= Weight()*size)
+		if (length <= Weight()*size AND length < 0.025*theDim)
 		{
 			if (s0 IS_EQUAL s1)
 			{
@@ -182,7 +198,15 @@ tnbLib::Cad_gSingularity::TypeDetection
 				{
 					thePoly->Reverse();
 				}
-				auto revPolyAlg = std::make_shared<Geo2d_InscConxPoly>(thePoly, 1.0E-6);
+				auto normAlg = std::make_shared<Geo2d_NormalizePolygon>(thePoly);
+				Debug_Null_Pointer(normAlg);
+
+				normAlg->Perform();
+				Debug_If_Condition_Message(NOT normAlg->IsDone(), "the application is not performed.");
+
+				auto b = Geo_BoxTools::GetBox(thePoly->Points(), 1.0E-12);
+
+				auto revPolyAlg = std::make_shared<Geo2d_InscConxPoly>(normAlg->Normalized(), 1.0E-6);
 				Debug_Null_Pointer(revPolyAlg);
 
 				revPolyAlg->Perform();
@@ -194,10 +218,16 @@ tnbLib::Cad_gSingularity::TypeDetection
 				tessAlg->Tessellate(2);
 				Debug_If_Condition_Message(NOT tessAlg->IsDone(), "the application is not performed");
 
-				auto curve = Cad_SingularityTools::ParametricPoleCurve<Aft2d_gPlnCurveSurface>(*tessAlg->Tessellated());
+				const auto& tessellated = tessAlg->Tessellated();
+				Debug_Null_Pointer(tessellated);
+
+				auto retrieved = Geo_Tools::DistributeInDomain(tessellated->Points(), b);
+				auto retPoly = std::make_shared<Entity2d_Polygon>(std::move(retrieved), 0);
+
+				auto curve = Cad_SingularityTools::ParametricPoleCurve<Aft2d_gPlnCurveSurface>(*retPoly);
 				Debug_Null_Pointer(curve);
 
-				auto Pm = Cad_SingularityTools::FindParametricCoord(*tessAlg->Tessellated(), theSurface, 0.5*length);
+				auto Pm = Cad_SingularityTools::FindParametricCoord(*retPoly, theSurface, 0.5*length);
 				curve->SetMidCoord(std::move(Pm));
 
 				auto singularity = 
@@ -215,8 +245,15 @@ tnbLib::Cad_gSingularity::TypeDetection
 				{
 					thePoly->Reverse();
 				}
+				auto normAlg = std::make_shared<Geo2d_NormalizePolygon>(thePoly);
+				Debug_Null_Pointer(normAlg);
 
-				auto revPolyAlg = std::make_shared<Geo2d_InscConxPoly>(thePoly, 1.0E-6);
+				normAlg->Perform();
+				Debug_If_Condition_Message(NOT normAlg->IsDone(), "the application is not performed.");
+
+				auto b = Geo_BoxTools::GetBox(thePoly->Points(), 1.0E-12);
+
+				auto revPolyAlg = std::make_shared<Geo2d_InscConxPoly>(normAlg->Normalized(), 1.0E-6);
 				Debug_Null_Pointer(revPolyAlg);
 
 				revPolyAlg->Perform();
@@ -228,10 +265,16 @@ tnbLib::Cad_gSingularity::TypeDetection
 				tessAlg->Tessellate(2);
 				Debug_If_Condition_Message(NOT tessAlg->IsDone(), "the application is not performed");
 
-				auto curve = Cad_SingularityTools::ParametricPoleCurve<Aft2d_gPlnCurveSurface>(*tessAlg->Tessellated());
+				const auto& tessellated = tessAlg->Tessellated();
+				Debug_Null_Pointer(tessellated);
+
+				auto retrieved = Geo_Tools::DistributeInDomain(tessellated->Points(), b);
+				auto retPoly = std::make_shared<Entity2d_Polygon>(std::move(retrieved), 0);
+
+				auto curve = Cad_SingularityTools::ParametricPoleCurve<Aft2d_gPlnCurveSurface>(*retPoly);
 				Debug_Null_Pointer(curve);
 
-				auto Pm = Cad_SingularityTools::FindParametricCoord(*tessAlg->Tessellated(), theSurface, 0.5*length);
+				auto Pm = Cad_SingularityTools::FindParametricCoord(*retPoly, theSurface, 0.5*length);
 				curve->SetMidCoord(std::move(Pm));
 
 				auto singularity =
@@ -319,7 +362,8 @@ tnbLib::Cad_gSingularity::TypeDetection
 	const std::shared_ptr<Entity2d_Polygon>& thePoly1,
 	const GeoMesh2d_Data& bMesh,
 	const std::vector<std::shared_ptr<Pln_Curve>>& theSides,
-	const Geom_Surface& theSurface
+	const Geom_Surface& theSurface,
+	const Standard_Real theDim
 ) const
 {
 	if (NOT this->SizeFun())
@@ -407,11 +451,11 @@ tnbLib::Cad_gSingularity::TypeDetection
 
 	const auto size00 = SizeFun()->Value(P00);
 	const auto size01 = SizeFun()->Value(P01);
-	const auto size0 = MEAN(size00, size01);
+	const auto size0 = std::min(size00, size01);
 
 	const auto size10 = SizeFun()->Value(P10);
 	const auto size11 = SizeFun()->Value(P11);
-	const auto size1 = MEAN(size10, size11);
+	const auto size1 = std::min(size10, size11);
 
 	const auto box0 = Entity2d_Box::BoundingBoxOf(pts0);
 	const auto box1 = Entity2d_Box::BoundingBoxOf(pts1);
@@ -492,6 +536,7 @@ void tnbLib::Cad_gSingularity::Perform()
 			horizonMap;
 
 		const auto& edges = Horizons()->Horizons()->Edges();
+
 		for (const auto& x : edges)
 		{
 			Debug_Null_Pointer(x.second);
@@ -502,9 +547,10 @@ void tnbLib::Cad_gSingularity::Perform()
 
 			const auto& horizon = *poly;
 #ifdef _DEBUG
-			Cad_ColorApprxMetric::Check(horizon, colors);
+			//Cad_ColorApprxMetric::Check(horizon, colors);
 #endif // _DEBUG
 			const auto icolor = colors.Value(GetSamplePoint(horizon));
+
 			auto iter = horizonMap.find(icolor);
 			if (iter IS_EQUAL horizonMap.end())
 			{
@@ -527,11 +573,12 @@ void tnbLib::Cad_gSingularity::Perform()
 		auto& zones = ZonesRef();
 		zones.reserve(horizonMap.size());
 
+		const auto dim = EstimateDim();
+
 		for (const auto& x : horizonMap)
 		{
 			Debug_Null_Pointer(x.second);
 			const auto& l = *x.second;
-
 			if (l.empty())
 			{
 				FatalErrorIn(FunctionSIG)
@@ -541,7 +588,7 @@ void tnbLib::Cad_gSingularity::Perform()
 			if (l.size() IS_EQUAL 1)
 			{
 				Debug_Null_Pointer(l.front());
-				auto t = TypeDetection(l.front(), bmesh, sides, *gsurf);
+				auto t = TypeDetection(l.front(), bmesh, sides, *gsurf, dim);
 				Debug_Null_Pointer(t);
 
 				t->SetIndex(x.first);
@@ -553,7 +600,7 @@ void tnbLib::Cad_gSingularity::Perform()
 				Debug_Null_Pointer(pl0);
 				Debug_Null_Pointer(pl1);
 
-				auto t = TypeDetection(pl0, pl1, bmesh, sides, *gsurf);
+				auto t = TypeDetection(pl0, pl1, bmesh, sides, *gsurf, dim);
 				Debug_Null_Pointer(t);
 
 				t->SetIndex(x.first);

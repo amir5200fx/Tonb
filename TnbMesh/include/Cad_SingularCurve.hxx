@@ -111,6 +111,11 @@ namespace tnbLib
 
 		// public functions and operators [12/31/2021 Amir]
 
+		const auto& Paired3d() const
+		{
+			return thePaired3d_;
+		}
+
 		virtual Standard_Boolean IsPole() const
 		{
 			return Standard_False;

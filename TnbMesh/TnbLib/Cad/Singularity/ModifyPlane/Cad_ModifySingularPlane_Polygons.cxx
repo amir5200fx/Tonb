@@ -30,6 +30,7 @@ tnbLib::Cad_ModifySingularPlaneBase::InsidePolygon
 	auto& poly = thePolygons_.at(theIndex)->PointsRef();
 
 	const auto side = Entity2d_PolygonTools::GetSide(pt, &FirstItem(poly), &LastItem(poly));
+
 	if (side IS_EQUAL Entity2d_PolygonSide::unbounded)
 		return Standard_False;
 	else if (side IS_EQUAL Entity2d_PolygonSide::bounded)
@@ -38,6 +39,7 @@ tnbLib::Cad_ModifySingularPlaneBase::InsidePolygon
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "Unpredicted situation has been occurred!" << endl
+			<< " - coord: " << thePt << endl
 			<< abort(FatalError);
 	}
 	return Standard_True;

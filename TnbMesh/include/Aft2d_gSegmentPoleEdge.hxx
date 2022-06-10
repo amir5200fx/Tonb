@@ -10,7 +10,7 @@ namespace tnbLib
 {
 
 	template<>
-	TnbMesh_EXPORT void Aft2d_gSegmentPoleEdge::SingularityContraction
+	TnbMesh_EXPORT Standard_Boolean Aft2d_gSegmentPoleEdge::SingularityContraction
 	(
 		const Geo2d_MetricPrcsrAnIso&
 	);

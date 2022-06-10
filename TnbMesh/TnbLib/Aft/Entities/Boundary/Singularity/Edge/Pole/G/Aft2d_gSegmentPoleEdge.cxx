@@ -8,7 +8,8 @@
 #include <OSstream.hxx>
 
 template<>
-void tnbLib::Aft2d_gSegmentPoleEdge::SingularityContraction
+Standard_Boolean
+tnbLib::Aft2d_gSegmentPoleEdge::SingularityContraction
 (
 	const Geo2d_MetricPrcsrAnIso& thePrcsr
 )
@@ -27,6 +28,7 @@ void tnbLib::Aft2d_gSegmentPoleEdge::SingularityContraction
 			<< "no corner node has been found!" << endl
 			<< abort(FatalError);
 	}
+	return Standard_True;
 }
 
 template<>

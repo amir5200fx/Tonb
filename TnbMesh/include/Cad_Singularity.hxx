@@ -129,7 +129,8 @@ namespace tnbLib
 				const std::shared_ptr<Entity2d_Polygon>& thePoly,
 				const GeoMesh2d_Data& theBMesh,
 				const std::vector<std::shared_ptr<Pln_Curve>>& theSides,
-				const Geom_Surface&
+				const Geom_Surface&,
+				const Standard_Real theDim
 			) const;
 
 		std::shared_ptr<singularZone> 
@@ -139,8 +140,11 @@ namespace tnbLib
 				const std::shared_ptr<Entity2d_Polygon>& thePoly1, 
 				const GeoMesh2d_Data& theBMesh, 
 				const std::vector<std::shared_ptr<Pln_Curve>>& theSides,
-				const Geom_Surface&
+				const Geom_Surface&,
+				const Standard_Real theDim
 			) const;
+
+		Standard_Real EstimateDim() const;
 
 	public:
 

@@ -101,6 +101,7 @@ tnbLib::Cad_gSingularityTopology::GetTopology
 	}*/
 
 	Merge2d_Chain alg;
+	alg.InfoAlg().SetRadius(1.0E-8);
 	alg.Import(chains);
 	//alg.SetRemoveDegeneracy();
 

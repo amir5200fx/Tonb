@@ -21,6 +21,9 @@ tnbLib::GeoMetricFun2d_ExactSurface::Value
 	Standard_Real B = D1U.Dot(D1V);
 	Standard_Real C = D1V.Dot(D1V);
 
+	if (A < 1.0E-6) A = 1.0E-6;
+	if (C < 1.0E-6) C = 1.0E-6;
+
 	Entity2d_Metric1 m(A, B, C);
 	return std::move(m);
 }

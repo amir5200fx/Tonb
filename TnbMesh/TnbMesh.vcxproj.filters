@@ -1804,6 +1804,99 @@
     <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri">
       <UniqueIdentifier>{cc58805d-0a5e-43e7-b719-745c61bfaeac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Merge">
+      <UniqueIdentifier>{20b4e8bb-a38d-4df6-aab7-f640832d3ae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Entity">
+      <UniqueIdentifier>{881450fe-d763-459d-8c4e-2dd3da1b998b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Node">
+      <UniqueIdentifier>{5e79e1c9-6bf9-4db6-92e1-1fc9cccda1b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Link">
+      <UniqueIdentifier>{0b65a023-cf84-42d3-bf68-2438b10d7bf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Link\Ring">
+      <UniqueIdentifier>{8f49af98-ab40-4d0e-bf8f-c1a6c2f88c7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Link\Segment">
+      <UniqueIdentifier>{48896dec-be1f-4229-99bb-b62bae97443a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Node\Adaptor">
+      <UniqueIdentifier>{ded35549-b0c9-49aa-b873-5d4166140e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\SuperNode">
+      <UniqueIdentifier>{70d1fc4e-54db-4488-a2f0-c6c5c2564012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\SuperLink">
+      <UniqueIdentifier>{310e45d8-cf32-433b-b6a9-e45944a03c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Node\Bnd">
+      <UniqueIdentifier>{c094f3ba-6fd8-4deb-ac3e-4c110ef0b15f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Node\Internal">
+      <UniqueIdentifier>{9420ceed-9e7f-49d7-89a3-5800a4c18042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\SuperLink\Segment">
+      <UniqueIdentifier>{c33d9327-e397-4a08-81f6-d1f71d76acda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\SuperLink\Ring">
+      <UniqueIdentifier>{78ed736a-8204-49a4-9133-8c8676f8b6e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Curve">
+      <UniqueIdentifier>{1c6bf807-7607-4154-a72c-49dbe071058d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Wire">
+      <UniqueIdentifier>{362068d4-5657-4f4b-891f-4110b83f1bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Horizon">
+      <UniqueIdentifier>{7f098462-f44a-4938-8f92-2b23d0fbd785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Node\Intersection">
+      <UniqueIdentifier>{a86e57fb-18c8-4cbc-a305-3c81340b1fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Merge\Tools">
+      <UniqueIdentifier>{7db0fff7-14ef-45d3-b4e1-bdfcda40e898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph">
+      <UniqueIdentifier>{1bba27b1-4c52-4ac6-9aaa-e3a96be3d989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G">
+      <UniqueIdentifier>{78272e60-171b-4092-8f8a-0b362648038c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\T">
+      <UniqueIdentifier>{f086ebd2-4a35-4d7e-9bc9-7f3613ab20d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G\Node">
+      <UniqueIdentifier>{16837824-4508-44b2-b321-d1e8d85deb00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G\Node\Intsct">
+      <UniqueIdentifier>{5c0a60f9-6332-4799-9f95-34a73424ad59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G\Node\Traits">
+      <UniqueIdentifier>{a640ecd0-cc85-4522-8799-5b02e63d349b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G\Node\Adaptor">
+      <UniqueIdentifier>{740590f3-66aa-4c08-bbfb-be7142d8e1b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G\Edge">
+      <UniqueIdentifier>{f4ca77c1-3eb9-41a4-9f08-a575a41ed9aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G\Edge\Traits">
+      <UniqueIdentifier>{c68107b4-abf6-44f6-92e4-b60c38845038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Graph\G\Edge\Adaptor">
+      <UniqueIdentifier>{8cfa4dd1-5119-4150-a9bf-b96fcb5df612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\CommonSingularity">
+      <UniqueIdentifier>{4d48efef-32cc-4b99-b250-29dc7a0753ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\CommonSingularity\G">
+      <UniqueIdentifier>{514fea7f-4b34-4734-8fe1-7537efe3b3fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\CommonSingularity\T">
+      <UniqueIdentifier>{776b8ed4-3775-49af-942f-3e72d49ff36c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4362,6 +4455,93 @@
     <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri\Aft2d_AltrOptNodeSurface_SubTri.hxx">
       <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Cad_MergeParaCurves.hxx">
+      <Filter>TnbLib\Cad\Merge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Entity\Cad_MergeParaCurves_Entity.hxx">
+      <Filter>TnbLib\Cad\Merge\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Node\Cad_MergeParaCurves_Node.hxx">
+      <Filter>TnbLib\Cad\Merge\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Link\Cad_MergeParaCurves_Link.hxx">
+      <Filter>TnbLib\Cad\Merge\Link</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Link\Segment\Cad_MergeParaCurves_Segment.hxx">
+      <Filter>TnbLib\Cad\Merge\Link\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Link\Ring\Cad_MergeParaCurves_Ring.hxx">
+      <Filter>TnbLib\Cad\Merge\Link\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Node\Adaptor\Cad_MergeParaCurves_NodeAdaptor.hxx">
+      <Filter>TnbLib\Cad\Merge\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Node\Internal\Cad_MergeParaCurves_InternalNode.hxx">
+      <Filter>TnbLib\Cad\Merge\Node\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Node\Bnd\Cad_MergeParaCurves_BoundaryNode.hxx">
+      <Filter>TnbLib\Cad\Merge\Node\Bnd</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\SuperNode\Cad_MergeParaCurves_SuperNode.hxx">
+      <Filter>TnbLib\Cad\Merge\SuperNode</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\SuperLink\Cad_MergeParaCurves_SuperLink.hxx">
+      <Filter>TnbLib\Cad\Merge\SuperLink</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\SuperLink\Segment\Cad_MergeParaCurves_SuperSegment.hxx">
+      <Filter>TnbLib\Cad\Merge\SuperLink\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\SuperLink\Ring\Cad_MergeParaCurves_SuperRing.hxx">
+      <Filter>TnbLib\Cad\Merge\SuperLink\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Curve\Cad_MergeParaCurves_Curve.hxx">
+      <Filter>TnbLib\Cad\Merge\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Wire\Cad_MergeParaCurves_Wire.hxx">
+      <Filter>TnbLib\Cad\Merge\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Horizon\Cad_MergeParaCurves_Horizon.hxx">
+      <Filter>TnbLib\Cad\Merge\Horizon</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Node\Intersection\Cad_MergeParaCurves_IntsctNode.hxx">
+      <Filter>TnbLib\Cad\Merge\Node\Intersection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Merge\Tools\Cad_MergeParaCurvesTools.hxx">
+      <Filter>TnbLib\Cad\Merge\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Graph\G\Node\Aft2d_gGraphCurveNode.hxx">
+      <Filter>TnbLib\Cad\Graph\G\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Graph\G\Node\Aft2d_gGraphCurveNodeFwd.hxx">
+      <Filter>TnbLib\Cad\Graph\G\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Graph\G\Node\Traits\Aft2d_gGraphCurveNode_Traits.hxx">
+      <Filter>TnbLib\Cad\Graph\G\Node\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Graph\G\Edge\Aft2d_gGraphCurveEdge.hxx">
+      <Filter>TnbLib\Cad\Graph\G\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Graph\G\Edge\Aft2d_gGraphCurveEdgeFwd.hxx">
+      <Filter>TnbLib\Cad\Graph\G\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Graph\G\Edge\Adaptor\Aft2d_gGraphCurveEdge_Adaptor.hxx">
+      <Filter>TnbLib\Cad\Graph\G\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Graph\G\Edge\Traits\Aft2d_gGraphCurveEdge_Traits.hxx">
+      <Filter>TnbLib\Cad\Graph\G\Edge\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CommonSingularity\Cad_CommonSingularity.hxx">
+      <Filter>TnbLib\Cad\CommonSingularity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CommonSingularity\Cad_CommonSingularityI.hxx">
+      <Filter>TnbLib\Cad\CommonSingularity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CommonSingularity\G\Cad_gCommonSingularity.hxx">
+      <Filter>TnbLib\Cad\CommonSingularity\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CommonSingularity\G\Cad_gCommonSingularityFwd.hxx">
+      <Filter>TnbLib\Cad\CommonSingularity\G</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5566,6 +5746,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri\Aft2d_AltrOptNodeSurface_SubTri.cxx">
       <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\G\Aft2d_gSegmentLineEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Merge\Cad_MergeParaCurves.cxx">
+      <Filter>TnbLib\Cad\Merge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Merge\Tools\Cad_MergeParaCurvesTools.cxx">
+      <Filter>TnbLib\Cad\Merge\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\CommonSingularity\Cad_CommonSingularity.cxx">
+      <Filter>TnbLib\Cad\CommonSingularity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\CommonSingularity\G\Cad_gCommonSingularity.cxx">
+      <Filter>TnbLib\Cad\CommonSingularity\G</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

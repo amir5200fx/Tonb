@@ -116,14 +116,12 @@ tnbLib::Cad_SingularityTools::FindParametricCoord
 	Entity2d_Polygon::Check(thePoly);
 #endif // _DEBUG
 	const auto& pts = thePoly.Points();
-
 	Standard_Real d = 0;
 	auto p0 = Cad_Tools::CalcCoord(pts.at(0), theSurface);
 	for (size_t i = 1; i < pts.size(); i++)
 	{
 		auto p1 = Cad_Tools::CalcCoord(pts.at(i), theSurface);
 		d += Distance(p0, p1);
-
 		if (d >= theLength)
 		{
 			return MEAN(pts.at(i - 1), pts.at(i));

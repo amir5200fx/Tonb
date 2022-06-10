@@ -105,6 +105,7 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 	auto wires = RetrieveWires(*Plane());
 	const auto bcurves =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::RetrieveCurves(wires);
+
 	auto subsList =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::CalcParts(Zones(), bcurves);
 	auto subMap = Cad_SubdivideHorizon<Aft2d_gPlnCurveSurface>::Merge(subsList);
@@ -120,16 +121,18 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 
 	auto curveTypes =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::CurveToTypeMap(modifiedHorizons, modifiedWires);
+
 	auto wireApprox =
 		Cad_ModifySingularPlaneTools<Aft2d_gRegionPlaneSurface>::GetPolygons(modifiedWires, ApproxInfo());
-	/*{
+
+	{
 		OFstream myFile("modified.plt");
 		for (const auto& x : wireApprox)
 		{
 			x->ExportToPlt(myFile);
 		}
 		std::exit(1);
-	}*/
+	}
 	RegisterPolygons(wireApprox);
 
 	auto topology =
@@ -165,6 +168,7 @@ void tnbLib::Cad_gModifySingularPlane::Perform()
 	);
 
 	const auto& zones = Zones();
+
 	for (const auto& x : colored)
 	{
 		Debug_Null_Pointer(x.first);

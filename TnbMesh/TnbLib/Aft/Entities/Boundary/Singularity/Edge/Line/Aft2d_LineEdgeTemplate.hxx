@@ -3,7 +3,7 @@
 #define _Aft2d_LineEdgeTemplate_Header
 
 #include <Aft2d_SingularEdgeTemplate.hxx>
-#include <Entity2d_Chain.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 
 #include <vector>
 
@@ -25,6 +25,7 @@ namespace tnbLib
 
 		typedef typename bndEdgeType::edgeType edgeType;
 		typedef typename bndEdgeType::nodeType nodeType;
+		typedef typename BndEdgeType::curveType curveType;
 
 
 		// default constructor [4/25/2022 Amir]
@@ -61,12 +62,15 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		Standard_Boolean SingularityContraction(const typename BndEdgeType::metricPrcsr& thePrcsr) override;
+
 		//- Static functions and operators
 
-		static std::vector<std::shared_ptr<edgeType>>
+		static std::vector<std::shared_ptr<BndEdgeType>>
 			GetTopology
 			(
-				const Entity2d_Chain& theChain
+				const Entity2d_Polygon&,
+				const std::shared_ptr<curveType>& theCurve
 			);
 	};
 }

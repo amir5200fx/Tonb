@@ -125,7 +125,7 @@ namespace tnbLib
 
 		//- public functions and operators
 
-		virtual void SingularityContraction(const MetricPrcsr&);
+		virtual Standard_Boolean SingularityContraction(const MetricPrcsr&);
 	};
 }
 

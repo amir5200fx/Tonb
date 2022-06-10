@@ -108,6 +108,9 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::SubCurv
 		auto x0 = curve->FirstParameter();
 		auto x1 = curve->LastParameter();
 
+		if (x < x0) x = x0;
+		if (x > x1) x = x1;
+
 		if (std::abs(x - x0) <= theTol OR std::abs(x - x1) <= theTol)
 		{
 			continue;
@@ -190,6 +193,7 @@ tnbLib::Cad_ModifySingularPlaneTools<tnbLib::Aft2d_gRegionPlaneSurface>::CalcPar
 	{
 		Debug_Null_Pointer(x);
 		const auto& zone = *x;
+
 		for (Standard_Integer iz = 0; iz < zone.NbHorizons(); iz++)
 		{
 			const auto& horizon = zone.Horizon(iz);

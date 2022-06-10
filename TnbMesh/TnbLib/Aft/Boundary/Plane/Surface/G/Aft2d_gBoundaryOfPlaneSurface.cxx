@@ -28,9 +28,14 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::RemoveDegeneracies()
 		Debug_Null_Pointer(x);
 		if (x->IsSingular())
 		{
-			x->SingularityContraction(*MetricProcessor());
-
-			if (NOT contracted) contracted = Standard_True;
+			if (NOT x->SingularityContraction(*MetricProcessor()))
+			{
+				modified.push_back(x);
+			}
+			else
+			{
+				if (NOT contracted) contracted = Standard_True;
+			}			
 		}
 		else if (x->IsGap())
 		{
@@ -88,13 +93,17 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::UpdateFront()
 		Debug_Null_Pointer(n0);
 
 		const auto& edges = n0->RetrieveBoundaryEdges();
+
 		auto Iter = edges.begin();
+		Debug_Null_Pointer(Iter->second.lock());
 		auto M = Iter->second.lock()->EffectiveMetric();
 		Iter++;
 
 		while (Iter NOT_EQUAL edges.end())
 		{
+			Debug_Null_Pointer(Iter->second.lock());
 			const auto& Mi = Iter->second.lock()->EffectiveMetric();
+
 			if (M.Determinant() < Mi.Determinant())
 			{
 				M = Entity2d_Metric1::UnionSR(M, Mi);
@@ -108,6 +117,7 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::UpdateFront()
 
 		n0->SetMetric(M);
 	}
+
 }
 
 template<>
@@ -234,7 +244,7 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::Perform()
 				}
 				else if (singCurve->IsLine())
 				{
-					NotImplemented;
+					mesh = Cad_gLineSingularCurve::TopoMesh<bndType>(x, MetricProcessor(), currentInfo);
 				}
 				else
 				{

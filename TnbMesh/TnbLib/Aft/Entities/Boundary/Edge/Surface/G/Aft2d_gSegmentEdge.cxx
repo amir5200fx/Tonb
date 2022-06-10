@@ -130,18 +130,18 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 		if (e0.Node1() IS_EQUAL e1.Node0())
 			continue;
 
-		if (Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) > theTol)
-		{
-#ifdef _DEBUG
-			meshLib::ExportInvalidWireAtMergeDangles(theWire);
-#endif // _DEBUG
-
-			FatalErrorIn(FunctionSIG) << endl
-				<< "Invalid Wire" << endl
-				<< " - distance: " << Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) << endl
-				<< " - tol: " << theTol << endl
-				<< abort(FatalError);
-		}
+//		if (Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) > theTol)
+//		{
+//#ifdef _DEBUG
+//			meshLib::ExportInvalidWireAtMergeDangles(theWire);
+//#endif // _DEBUG
+//
+//			FatalErrorIn(FunctionSIG) << endl
+//				<< "Invalid Wire" << endl
+//				<< " - distance: " << Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) << endl
+//				<< " - tol: " << theTol << endl
+//				<< abort(FatalError);
+//		}
 
 		auto bn0 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e0.Node1());
 		auto bn1 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e1.Node0());
@@ -155,6 +155,32 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 
 			e0.SetNode1(node);
 			e1.SetNode0(node);
+		}
+		else if (bn0->IsSingular() AND bn1->IsSingular())
+		{
+			auto snBn0 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_gCornerNode>>(bn0);
+			auto snBn1 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_gCornerNode>>(bn1);
+			Debug_Null_Pointer(snBn0);
+			Debug_Null_Pointer(snBn1);
+
+			if (snBn0->IsPole() OR snBn1->IsPole())
+			{
+				auto node =
+					Aft2d_gCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+				Debug_Null_Pointer(node);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else
+			{
+				auto node =
+					Aft2d_gCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+				Debug_Null_Pointer(node);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
 		}
 		else
 		{
@@ -242,6 +268,32 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 
 		e0.SetNode1(node);
 		e1.SetNode0(node);
+	}
+	else if (bn0->IsSingular() AND bn1->IsSingular())
+	{
+		auto snBn0 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_gCornerNode>>(bn0);
+		auto snBn1 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_gCornerNode>>(bn1);
+		Debug_Null_Pointer(snBn0);
+		Debug_Null_Pointer(snBn1);
+
+		if (snBn0->IsPole() OR snBn1->IsPole())
+		{
+			auto node =
+				Aft2d_gCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+			Debug_Null_Pointer(node);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
+		else
+		{
+			auto node =
+				Aft2d_gCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+			Debug_Null_Pointer(node);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
 	}
 	else
 	{

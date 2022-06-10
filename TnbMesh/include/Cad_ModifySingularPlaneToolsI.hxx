@@ -28,10 +28,15 @@ tnbLib::Cad_ModifySingularPlaneTools<SurfPlnType>::SubCurves
 #endif // _DEBUG
 	std::vector<std::shared_ptr<curveType>> curves;
 	auto curve = theCurve;
-	auto x0 = curve->FirstParameter();
-	auto x1 = curve->LastParameter();
+
 	for (auto x : thePars)
 	{
+		auto x0 = curve->FirstParameter();
+		auto x1 = curve->LastParameter();
+
+		if (x < x0) x = x0;
+		if (x > x1) x = x1;
+
 		if (std::abs(x - x0) <= theTol OR std::abs(x - x1) <= theTol)
 		{
 			continue;

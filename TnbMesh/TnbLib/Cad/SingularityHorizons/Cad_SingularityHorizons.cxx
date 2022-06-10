@@ -335,10 +335,17 @@ void tnbLib::Cad_SingularityHorizons::Perform()
 
 	const auto weight = 1.0 / MaxDet();
 
+	const auto& approx = Approximation();
+	auto b = *approx->BoundingBox();
+	b.Expand(b.Diameter()*1.0E-6);
+	auto expandedPts = Geo_Tools::DistributeInDomain(approx->Points(), b);
+
+	Entity2d_Triangulation exapndedTris(std::move(expandedPts), Approximation()->Connectivity());
+
 	std::vector<std::shared_ptr<Entity2d_Chain>> list;
 	for (Standard_Integer tri = 0; tri < Approximation()->NbConnectivity(); tri++)
 	{
-		auto triangle = Geo_Tools::GetTriangle(tri, *Approximation());
+		auto triangle = Geo_Tools::GetTriangle(tri, exapndedTris);
 
 		auto path = 
 			GetPathFromTriangle
@@ -366,6 +373,7 @@ void tnbLib::Cad_SingularityHorizons::Perform()
 	std::shared_ptr<Entity2d_Chain> merged;
 	{ //- merging the chains
 		Merge_StaticData<Entity2d_Chain> merge;
+		merge.InfoAlg().SetRadius(MergingTolerance());
 		merge.Import(list);
 		merge.SetRemoveDegeneracy();
 
@@ -391,7 +399,6 @@ void tnbLib::Cad_SingularityHorizons::Perform()
 
 		graph = knit->Graph();
 	}
-
 	theHorizons_ = std::move(graph);
 	Change_IsDone() = Standard_True;
 }
@@ -404,15 +411,34 @@ tnbLib::Cad_SingularityHorizons::RetrieveDomain
 {
 	CheckDone(theHorizons);
 	Debug_Null_Pointer(theHorizons.Approximation());
+	auto horizons = RetrieveHorizons(theHorizons);
+	if (horizons.empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no horizon has been detected" << endl
+			<< abort(FatalError);
+	}
+
+	auto iter = horizons.begin();
+	auto b = Entity2d_Box::BoundingBoxOf((*iter)->Points());
+	iter++;
+	while (iter NOT_EQUAL horizons.end())
+	{
+		b = Entity2d_Box::Union(b, Entity2d_Box::BoundingBoxOf((*iter)->Points()));
+		iter++;
+	}
+
 	if (NOT theHorizons.Approximation()->BoundingBox())
 	{
 		const auto& pnts = theHorizons.Approximation()->Points();
 		auto bx = Entity2d_Box::BoundingBoxOf(pnts);
+		bx = Entity2d_Box::Union(bx, b);
 		return std::move(bx);
 	}
 	else
 	{
-		return *theHorizons.Approximation()->BoundingBox();
+		auto bx = Entity2d_Box::Union(*theHorizons.Approximation()->BoundingBox(), b);
+		return std::move(bx);
 	}	
 }
 

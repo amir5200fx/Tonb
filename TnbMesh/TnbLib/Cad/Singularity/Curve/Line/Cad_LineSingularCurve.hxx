@@ -25,6 +25,8 @@ namespace tnbLib
 		typedef typename cad_singular_curve_traits<CurveType>::surfType surfType;
 		typedef typename cad_singular_curve_traits<CurveType>::baseCurveType baseCurveType;
 
+		using typename Cad_SingularCurve<CurveType>::metricMap;
+
 	private:
 
 		/*Private Data*/
@@ -73,17 +75,22 @@ namespace tnbLib
 		}
 
 		Standard_Boolean HasSubcurves() const override;
+
 		void CalcSubcurves() const override
 		{
 			NotImplemented;
 		}
 
+		/*std::shared_ptr<Entity2d_Polygon>
+			Mesh
+			(
+				const std::shared_ptr<metricMap>& theMetricMap,
+				const std::shared_ptr<Mesh_Curve_Info>& theInfo
+			) const override;*/
+
 		// public functions and operators [12/31/2021 Amir]
 
-		Standard_Real ProjectAt(const Pnt3d&, const surfType&) const
-		{
-			NotImplemented;
-		}
+		Standard_Real ProjectAt(const Pnt3d&, const surfType&) const;
 
 		const auto& ProjPars() const
 		{
@@ -110,7 +117,17 @@ namespace tnbLib
 			theParPaired_ = theCurve;
 		}
 
+		// static functions and operators [5/31/2022 Amir]
+
 		static void CheckProjPars(const std::vector<Standard_Real>&);
+
+		template<class EdgeType, class PlnCurve>
+		static std::vector<std::shared_ptr<EdgeType>> TopoMesh
+		(
+			const std::shared_ptr<PlnCurve>& theCurve,
+			const std::shared_ptr<metricMap>& theMetricMap,
+			const std::shared_ptr<Mesh_Curve_Info>& theInfo
+		);
 	};
 }
 

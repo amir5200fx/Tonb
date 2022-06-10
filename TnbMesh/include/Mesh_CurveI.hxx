@@ -2,6 +2,8 @@
 #include <Geo_Tools.hxx>
 #include <Mesh_CurveLength.hxx>
 #include <Mesh_CurveOptmPoint_Correction.hxx>
+#include <Mesh_CurveOptmPoint_BisectCorrection.hxx>
+#include <Mesh_CurveOptmPoint_BisectCorrection_Initial.hxx>
 #include <Mesh_CurveOptmPoint_Newton.hxx>
 namespace tnbLib
 {
@@ -63,12 +65,82 @@ namespace tnbLib
 		}
 		catch (const ConvError&)
 		{
-			if (theLevel > theMaxLevel*2)
+			Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, MetricPrcsrType>
+				initial(theU0, theGuess, theCurve);
+
+			initial.SetLen(theStep);
+			initial.Perform();
+
+			Debug_If_Condition_Message(NOT initial.IsDone(),
+				"the application algorithm has not been performed!");
+
+			const auto[x0, x1] = initial.Bound();
+			if (x0 IS_EQUAL x1)
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "Can not Calculate parameter of the curve" << endl
+					<< " - U0: " << theU0 << endl
+					<< " - Guess: " << theGuess << endl
+					<< " - Corrected: " << corrected << endl
 					<< abort(FatalError);
-				return 0;
+			}
+
+			Mesh_CurveOptmPoint_BisectCorrection<gCurveType, MetricPrcsrType>
+				correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo());
+
+			correction.SetLen(theStep);
+			correction.Perform();
+
+			Debug_If_Condition_Message(NOT correction.IsDone(),
+				"mesh_curveoptpoint_correction algorithm has not been performed!");
+
+			correction.SetLen(theStep);
+			/*FatalErrorIn(FunctionSIG)
+				<< "Can not Calculate parameter of the curve" << endl
+				<< " - U0: " << theU0 << endl
+				<< " - Guess: " << theGuess << endl
+				<< " - Corrected: " << corrected << endl
+				<< abort(FatalError);*/
+			corrected = correction.Corrected();
+
+			goto iterationAlg;
+
+			/*if (theLevel > theMaxLevel)
+			{
+				Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, MetricPrcsrType>
+					initial(theU0, theGuess, theCurve);
+
+				initial.SetLen(theStep);
+				initial.Perform();
+
+				Debug_If_Condition_Message(NOT initial.IsDone(),
+					"the application algorithm has not been performed!");
+
+				const auto[x0, x1] = initial.Bound();
+				std::cout << "x0: " << x0 << ", x1: " << x1 << std::endl;
+				if (x0 IS_EQUAL x1)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "Can not Calculate parameter of the curve" << endl
+						<< " - U0: " << theU0 << endl
+						<< " - Guess: " << theGuess << endl
+						<< " - Corrected: " << corrected << endl
+						<< abort(FatalError);
+				}
+
+				Mesh_CurveOptmPoint_BisectCorrection<gCurveType, MetricPrcsrType>
+					correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo());
+
+				correction.SetLen(theStep);
+				correction.Perform();
+
+				Debug_If_Condition_Message(NOT correction.IsDone(),
+					"mesh_curveoptpoint_correction algorithm has not been performed!");
+
+				correction.SetLen(theStep);
+				corrected = correction.Corrected();
+
+				goto iterationAlg;
 			}
 
 			const auto ds2 = 0.5*theStep;
@@ -86,8 +158,10 @@ namespace tnbLib
 					um, 2.0*um - theU0, ds2,
 					theUmax, theLevel,
 					theMaxLevel, theCurve, theInfo
-				);
+				);*/
 		}
+
+	iterationAlg:
 
 		Mesh_CurveOptmPoint_Newton<gCurveType, MetricPrcsrType>
 			Iteration(theU0, theStep, theCurve);	

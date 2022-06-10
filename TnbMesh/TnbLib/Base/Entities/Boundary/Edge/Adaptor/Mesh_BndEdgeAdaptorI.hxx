@@ -5,7 +5,7 @@ namespace tnbLib
 {
 
 	template<class CurveType, class MetricPrcsr>
-	void Mesh_BndEdgeAdaptor
+	Standard_Boolean Mesh_BndEdgeAdaptor
 		<
 		CurveType, void,
 		void, MetricPrcsr
@@ -17,5 +17,6 @@ namespace tnbLib
 		FatalErrorIn("void SingularityContraction(const MetricPrcsr &)")
 			<< "not supposed to be called!" << endl
 			<< abort(FatalError);
+		return Standard_True;
 	}
 }
