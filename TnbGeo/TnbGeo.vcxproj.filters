@@ -658,6 +658,33 @@
     <Filter Include="TnbLib\Geo\HvCorr\Scalar\Info">
       <UniqueIdentifier>{bcccaad4-80e5-443d-a048-ca778d106acc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Length\MetricPrcsr">
+      <UniqueIdentifier>{6a8ecd37-d85e-4266-9ac0-5a32ac914362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size">
+      <UniqueIdentifier>{9c0c403d-f7bf-4012-ae0b-fb04c6118f1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\2d">
+      <UniqueIdentifier>{a4278375-19a3-44f4-9d88-70b5f8f6b953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\3d">
+      <UniqueIdentifier>{167f8e71-98e7-4528-94b5-51728e83d6fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\Normal">
+      <UniqueIdentifier>{c164e6ab-1a2e-4e7a-9201-a816ce693fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\Normal\2d">
+      <UniqueIdentifier>{d6ab38f3-ef3b-4994-8e32-dbc312e7a902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Function\Size\Normal\3d">
+      <UniqueIdentifier>{b9e1f400-0a27-4f24-9e76-185422ec6bae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection">
+      <UniqueIdentifier>{75370520-af7c-4efb-8ec8-3230f8295346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial">
+      <UniqueIdentifier>{67555a59-8847-4565-83d3-d9e2c8f67a43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1515,6 +1542,60 @@
     <ClInclude Include="TnbLib\Geo\HvCorr\Scalar\Info\Geo_ScalarHvCorrInfo.hxx">
       <Filter>TnbLib\Geo\HvCorr\Scalar\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Length\MetricPrcsr\Geo_CurveLenMetricPrcsr.hxx">
+      <Filter>TnbLib\Geo\Length\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Length\MetricPrcsr\Geo_CurveLenMetricPrcsrI.hxx">
+      <Filter>TnbLib\Geo\Length\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Geo_SizeFun.hxx">
+      <Filter>TnbLib\Geo\Function\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\2d\Geo2d_SizeFunFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Size\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\3d\Geo3d_SizeFunFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Size\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\2d\Geo2d_SizeFun.hxx">
+      <Filter>TnbLib\Geo\Function\Size\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\3d\Geo3d_SizeFun.hxx">
+      <Filter>TnbLib\Geo\Function\Size\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Normal\Geo_NormalSizeFun.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Normal\2d\Geo2d_NormalSizeFun.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Normal\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Normal\2d\Geo2d_NormalSizeFunFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Normal\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Normal\3d\Geo3d_NormalSizeFun.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Normal\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Function\Size\Normal\3d\Geo3d_NormalSizeFunFwd.hxx">
+      <Filter>TnbLib\Geo\Function\Size\Normal\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Mesh_CurveOptmPoint_BisectCorrection.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\Correction\Mesh_CurveOptmPoint_Correction_Base.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Mesh_CurveOptmPoint_BisectCorrectionI.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Mesh_CurveOptmPoint_BisectCorrection_Base.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial\Mesh_CurveOptmPoint_BisectCorrection_Initial.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial\Mesh_CurveOptmPoint_BisectCorrection_InitialI.hxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1897,6 +1978,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\HvCorr\Scalar\Info\Geo_ScalarHvCorrInfo.cxx">
       <Filter>TnbLib\Geo\HvCorr\Scalar\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Length\MetricPrcsr\Geo_CurveLenMetricPrcsr.cxx">
+      <Filter>TnbLib\Geo\Length\MetricPrcsr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Mesh_CurveOptmPoint_BisectCorrection.cxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial\Mesh_CurveOptmPoint_BisectCorrection_Initial.cxx">
+      <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
