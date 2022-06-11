@@ -41,6 +41,7 @@ namespace tnbLib
 		// default constructor [5/7/2022 Amir]
 
 		Aft_AltrOptNode()
+			: IsConverged_(Standard_False)
 		{}
 
 

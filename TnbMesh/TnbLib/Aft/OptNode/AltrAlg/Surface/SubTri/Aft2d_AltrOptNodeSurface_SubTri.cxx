@@ -31,10 +31,12 @@ tnbLib::Aft2d_AltrOptNodeSurface_SubTri::Iter
 	//const auto d0 = 1.0 / (denom*denom);
 	const auto h = std::sqrt(1.0 / (denom*denom) + 0.75)*theH;
 	
-	if (Aft_CorrOptNode_IterativeTools::CorrectOptNode(*MetricMap(), V0, V1, theCentre, CorrectedRef(), h, *IterInfo()))
+	auto p0 = P0();
+	if (Aft_CorrOptNode_IterativeTools::CorrectOptNode(*MetricMap(), V0, V1, theCentre, p0, h, *IterInfo()))
 	{
 		return Iter(theLev + 1, theCentre, V0, V1, theH);
 	}
+	CorrectedRef() = p0;
 	return Standard_True;
 }
 

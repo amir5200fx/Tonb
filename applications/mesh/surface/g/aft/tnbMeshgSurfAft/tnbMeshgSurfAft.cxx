@@ -820,7 +820,7 @@ namespace tnbLib
 
 		auto integInfo = std::make_shared<NumAlg_AdaptiveInteg_Info>();
 		integInfo->SetMaxNbIterations(200);
-		integInfo->SetNbInitIterations(3);
+		integInfo->SetNbInitIterations(4);
 		integInfo->SetTolerance(1.0E-5);
 
 		auto iterInfo = std::make_shared<Aft_SizeCorr_IterativeInfo>();
@@ -841,9 +841,9 @@ namespace tnbLib
 
 		/*auto nelderInfo = std::make_shared<NumAlg_NelderMeadInfo>();
 		nelderInfo->SetMaxNbIterations(50);
-		nelderInfo->SetTolerance(1.0E-3);*/
+		nelderInfo->SetTolerance(1.0E-3);
 
-		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_NelderMead>();
+		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_NelderMead>();
 		anIsoOptNode_altrAlg->SetInfo(nelderInfo);*/
 
 		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_SubTri>();
@@ -861,7 +861,7 @@ namespace tnbLib
 		
 		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetMaxIterations(50);
 		//mySoluData->GlobalCurveInfo()->SetIgnoreNonConvergency(Standard_True);
-		//mySoluData->GlobalCurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
+		mySoluData->GlobalCurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
 		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
 		bndInfo->SetOverrideInfo(Standard_False);
 		bndInfo->OverrideGlobalCurve(mySoluData->GlobalCurveInfo());
@@ -879,10 +879,10 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 6)
+			if (x->Index() NOT_EQUAL 9)
 			{
 				continue;
-			}*/
+			}
 			/*if (x->Index() > 24)
 			{
 				continue;
@@ -987,7 +987,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	//FatalError.throwExceptions();
+	FatalError.throwExceptions();
 	FatalConvError.throwExceptions();
 
 	if (argc <= 1)

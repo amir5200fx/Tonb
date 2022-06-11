@@ -1897,6 +1897,9 @@
     <Filter Include="TnbLib\Cad\CommonSingularity\T">
       <UniqueIdentifier>{776b8ed4-3775-49af-942f-3e72d49ff36c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2">
+      <UniqueIdentifier>{cd2bbd70-3ede-4a09-aa42-29916167298d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4542,6 +4545,9 @@
     <ClInclude Include="TnbLib\Cad\CommonSingularity\G\Cad_gCommonSingularityFwd.hxx">
       <Filter>TnbLib\Cad\CommonSingularity\G</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2\Aft2d_AltrOptNodeSurface_SubTri2.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5761,6 +5767,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\CommonSingularity\G\Cad_gCommonSingularity.cxx">
       <Filter>TnbLib\Cad\CommonSingularity\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2\Aft2d_AltrOptNodeSurface_SubTri2.cxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
