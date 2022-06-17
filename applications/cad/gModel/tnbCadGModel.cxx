@@ -90,6 +90,7 @@ namespace tnbLib
 		}
 
 		myModel = std::make_shared<Cad_GModel>(std::move(surfaces));
+		myModel->SetShape(myShape);
 		myModel->SetName(name);
 
 		if (verbose)
