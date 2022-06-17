@@ -14,6 +14,9 @@ class Geom2d_Curve;
 namespace tnbLib
 {
 
+	// Forward Declarations [6/16/2022 Amir]
+	class NumAlg_AdaptiveInteg_Info;
+
 	class Cad2d_RepairWire
 		: public Global_Done
 	{
@@ -25,6 +28,7 @@ namespace tnbLib
 		std::vector<Handle(Geom2d_Curve)> theCurves_;
 
 		Standard_Real theTol_;
+		std::shared_ptr<NumAlg_AdaptiveInteg_Info> theIntegInfo_;
 
 		// outputs [5/15/2022 Amir]
 
@@ -87,11 +91,13 @@ namespace tnbLib
 	public:
 
 		static TnbCad2d_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbCad2d_EXPORT const std::shared_ptr<NumAlg_AdaptiveInteg_Info> DEFAULT_INTEG_INFO;
 
 		// default constructor [5/15/2022 Amir]
 
 		Cad2d_RepairWire()
 			: theTol_(DEFAULT_TOLERANCE)
+			, theIntegInfo_(DEFAULT_INTEG_INFO)
 		{}
 
 
@@ -103,6 +109,11 @@ namespace tnbLib
 		const auto& Curves() const
 		{
 			return theCurves_;
+		}
+
+		const auto& IntegInfo() const
+		{
+			return theIntegInfo_;
 		}
 
 		auto Tolerance() const
@@ -130,6 +141,11 @@ namespace tnbLib
 		void SetTolerance(const Standard_Real theTol)
 		{
 			theTol_ = theTol;
+		}
+
+		void OverrideIntegInfo(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo)
+		{
+			theIntegInfo_ = theInfo;
 		}
 	};
 }

@@ -2,11 +2,46 @@
 
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2dAPI_InterCurveCurve.hxx>
 #include <Geom2d_TrimmedCurve.hxx>
+
+const std::shared_ptr<tnbLib::NumAlg_AdaptiveInteg_Info> tnbLib::Cad2d_RepairWire::DEFAULT_INTEG_INFO =
+std::make_shared<tnbLib::NumAlg_AdaptiveInteg_Info>();
+
+namespace tnbLib
+{
+
+	class RepairWireIntegInfoRunTime
+	{
+
+		/*Private Data*/
+
+	public:
+
+		// default constructor [6/16/2022 Amir]
+
+		RepairWireIntegInfoRunTime()
+		{
+			SetInfo();
+		}
+
+		static void SetInfo();
+	};
+}
+
+void tnbLib::RepairWireIntegInfoRunTime::SetInfo()
+{
+	const auto& info = Cad2d_RepairWire::DEFAULT_INTEG_INFO;
+	info->SetMaxNbIterations(100);
+	info->SetNbInitIterations(4);
+	info->SetTolerance(1.0E-6);
+}
+
+static const tnbLib::RepairWireIntegInfoRunTime myRepairWireIntegInfoRunTimeObj;
 
 std::vector<Handle(Geom2d_Curve)>
 tnbLib::Cad2d_RepairWire::RepairWire
@@ -183,6 +218,7 @@ tnbLib::Cad2d_RepairWire::RepairIntersection
 )
 {
 	auto alg = Pln_Tools::Intersection(theC0, theC1, theTol);
+
 	std::vector<Standard_Real> params0;
 	std::vector<Standard_Real> params1;
 	if (alg->NbPoints())
@@ -216,8 +252,31 @@ tnbLib::Cad2d_RepairWire::RepairIntersection
 	std::sort(params0.begin(), params0.end());
 	std::sort(params1.begin(), params1.end());
 
+	std::vector<Standard_Real> mParams0;
 	{
-		auto p0 = FirstItem(params0);
+		mParams0.push_back(params0.at(0));
+		for (size_t i = 1; i < params0.size(); i++)
+		{
+			if (std::abs(params0.at(i) - params0.at(i - 1)) > theTol)
+			{
+				mParams0.push_back(params0.at(i));
+			}
+		}
+	}
+	std::vector<Standard_Real> mParams1;
+	{
+		mParams1.push_back(params1.at(0));
+		for (size_t i = 1; i < params1.size(); i++)
+		{
+			if (std::abs(params1.at(i) - params1.at(i - 1)) > theTol)
+			{
+				mParams1.push_back(params1.at(i));
+			}
+		}
+	}
+
+	{
+		auto p0 = FirstItem(mParams0);
 		if (p0 > theC0->LastParameter()) p0 = theC0->LastParameter();
 
 		Handle(Geom2d_Curve) trimmed0;
@@ -236,7 +295,7 @@ tnbLib::Cad2d_RepairWire::RepairIntersection
 				<< abort(FatalError);
 		}
 
-		auto p1 = LastItem(params1);
+		auto p1 = LastItem(mParams1);
 		if (p1 < theC1->FirstParameter()) p1 = theC1->FirstParameter();
 
 		Handle(Geom2d_Curve) trimmed1;
@@ -262,18 +321,30 @@ tnbLib::Cad2d_RepairWire::RepairIntersection
 
 const Standard_Real tnbLib::Cad2d_RepairWire::DEFAULT_TOLERANCE = 1.0E-6;
 
+#include <Pln_Tools.hxx>
+
 void tnbLib::Cad2d_RepairWire::Perform()
 {
-	if (theCurves_.empty())
+	std::vector<Handle(Geom2d_Curve)> curves;
+	for (const auto& x : theCurves_)
+	{
+		Debug_Null_Pointer(x);
+		if (Pln_Tools::Length(*x, IntegInfo()) > Tolerance())
+		{
+			curves.push_back(x);
+		}
+	}
+
+	if (curves.empty())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the curve list is empty." << endl
 			<< abort(FatalError);
 	}
 
-	if (theCurves_.size() IS_EQUAL 1)
+	if (curves.size() IS_EQUAL 1)
 	{
-		auto curve = FirstItem(theCurves_);
+		auto curve = FirstItem(curves);
 		Debug_Null_Pointer(curve);
 
 		auto p = 0.75*curve->FirstParameter() + 0.25*curve->LastParameter();
@@ -284,14 +355,14 @@ void tnbLib::Cad2d_RepairWire::Perform()
 
 		theWire_.push_back(std::move(retrieved));
 	}
-	else if (theCurves_.size() IS_EQUAL 2)
+	else if (curves.size() IS_EQUAL 2)
 	{
-		auto wire = RepairWire(FirstItem(theCurves_), LastItem(theCurves_));
+		auto wire = RepairWire(FirstItem(curves), LastItem(curves));
 		WireRef() = std::move(wire);
 	}
 	else
 	{
-		auto wire = RepairWire(theCurves_);
+		auto wire = RepairWire(curves);
 		WireRef() = std::move(wire);
 	}
 	Change_IsDone() = Standard_True;
