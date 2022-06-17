@@ -160,7 +160,6 @@ inline void tnbLib::NumAlg_NelderMead<Function>::Perform()
 
 	while (NOT fun::IsConverged() AND Iter < AlgInfo()->MaxNbIterations())
 	{
-		std::cout << "iteration: " << Iter << std::endl;
 		NewPoints();
 
 		Improve();
@@ -168,8 +167,6 @@ inline void tnbLib::NumAlg_NelderMead<Function>::Perform()
 		Order();
 
 		Iter++;
-
-		std::cout << std::endl;
 	}
 
 	if (Iter < AlgInfo()->MaxNbIterations())
