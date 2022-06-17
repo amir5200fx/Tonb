@@ -36,6 +36,7 @@ namespace tnbLib
 		Standard_Boolean IsLine() const override;
 
 		void RemoveThis(const typename BndNodeType::metricPrcsr&) override;
+		//void BlowThisUp() override;
 
 		// static functions and operators [4/25/2022 Amir]
 

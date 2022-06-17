@@ -8,6 +8,7 @@
 #include <Aft3d_FacetFwd.hxx>
 #include <Aft_NodeType.hxx>
 #include <Mesh3d_NodeTraits.hxx>
+#include <Geo3d_MetricPrcsrFwd.hxx>
 
 namespace tnbLib
 {
@@ -21,6 +22,7 @@ namespace tnbLib
 		static const Aft_NodeType nType = Aft_NodeType_Iso;
 
 		typedef Pnt3d ptType;
+		typedef Geo3d_MetricPrcsr metricPrcsrType;
 	};
 }
 

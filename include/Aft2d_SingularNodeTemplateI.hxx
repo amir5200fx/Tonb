@@ -19,3 +19,10 @@ tnbLib::Aft2d_SingularNodeTemplate<BndNodeType>::IsSingular() const
 {
 	return Standard_True;
 }
+
+template<class BndNodeType>
+inline Standard_Boolean 
+tnbLib::Aft2d_SingularNodeTemplate<BndNodeType>::IsRegular() const
+{
+	return Standard_False;
+}

@@ -15,6 +15,12 @@ namespace tnbLib
 {
 
 	template<>
+	TnbMesh_EXPORT void Aft2d_CoreBaseSurfaceUniMetric::AddOptimumNodeTo
+	(
+		std::vector<std::shared_ptr<Aft2d_NodeSurface>>&
+	);
+
+	template<>
 	template<>
 	TnbMesh_EXPORT void Aft2d_CoreBaseSurfaceUniMetric::serialize<TNB_iARCH_TYPE>
 		(

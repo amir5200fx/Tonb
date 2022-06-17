@@ -21,6 +21,8 @@ namespace tnbLib
 		typedef Aft2d_SingularNodeTemplate<BndNodeType>
 			base;
 
+		typedef typename BndNodeType::edgeType edgeType;
+
 		// default constructor [4/25/2022 Amir]
 
 		Aft2d_PoleNodeTemplate()
@@ -44,6 +46,7 @@ namespace tnbLib
 		Standard_Boolean IsPole() const override;
 
 		void RemoveThis(const typename BndNodeType::metricPrcsr&) override;
+		std::shared_ptr<edgeType> BlowThisUp() override;
 
 		// public functions and operators [4/25/2022 Amir]
 

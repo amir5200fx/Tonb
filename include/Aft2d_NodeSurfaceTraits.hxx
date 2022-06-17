@@ -7,6 +7,7 @@
 #include <Aft2d_ElementSurfaceFwd.hxx>
 #include <Aft_NodeType.hxx>
 #include <Mesh2d_NodeTraits.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 
 namespace tnbLib
 {
@@ -17,9 +18,10 @@ namespace tnbLib
 		typedef Aft2d_ElementSurface elementType;
 		typedef void facetType;
 
-		static const Aft_NodeType nType = Aft_NodeType_AnIso;
+		static const Aft_NodeType nType = Aft_NodeType_Surface;
 
 		typedef Pnt2d ptType;
+		typedef Geo2d_MetricPrcsrAnIso metricPrcsrType;
 	};
 }
 

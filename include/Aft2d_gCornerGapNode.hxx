@@ -10,7 +10,8 @@ namespace tnbLib
 {
 
 	template<>
-	TnbMesh_EXPORT void Aft2d_gCornerGapNode::BlowThisUp(const Geo2d_MetricPrcsrAnIso&);
+	TnbMesh_EXPORT std::shared_ptr<Aft2d_BndEdgeSurface> 
+		Aft2d_gCornerGapNode::BlowThisUp();
 }
 
 #endif // !_Aft2d_gCornerGapNode_Header

@@ -223,3 +223,34 @@ inline void tnbLib::Aft_Tools::Connect(const std::vector<std::shared_ptr<EdgeTyp
 		n1->InsertToEdges(x->Index(), x);
 	}
 }
+
+#include <Geo_Tools.hxx>
+
+template<class EdgeType>
+inline Standard_Boolean 
+tnbLib::Aft_Tools::IsIntersect
+(
+	const EdgeType & theEdge0,
+	const EdgeType & theEdge1
+)
+{
+	const auto& n0 = theEdge0.Node0();
+	const auto& n1 = theEdge0.Node1();
+	Debug_Null_Pointer(n0);
+	Debug_Null_Pointer(n1);
+
+	const auto& q0 = theEdge1.Node0();
+	const auto& q1 = theEdge1.Node1();
+	Debug_Null_Pointer(q0);
+	Debug_Null_Pointer(q1);
+
+	if (Geo_Tools::IsOneCommonPointTwoSegments(n0->Index(), n1->Index(), q0->Index(), q1->Index()))
+	{
+		return Standard_False;
+	}
+	if (Geo_Tools::HasIntersection_cgal(n0->Coord(), n1->Coord(), q0->Coord(), q1->Coord()))
+	{
+		return Standard_True;
+	}
+	return Standard_False;
+}

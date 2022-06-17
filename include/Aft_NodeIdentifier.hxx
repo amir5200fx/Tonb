@@ -119,6 +119,11 @@ namespace tnbLib
 		Aft_NodeIdentifier()
 		{}
 
+		void SetCoord3D(Pnt3d&& theCoord)
+		{
+			theCoord3D_ = std::move(theCoord);
+		}
+
 		GLOBAL_ACCESS_SINGLE(Pnt3d, Coord3D)
 	};
 }

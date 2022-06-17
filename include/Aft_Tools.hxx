@@ -266,6 +266,14 @@ namespace tnbLib
 		template<class EdgeType>
 		static void Connect(const std::vector<std::shared_ptr<EdgeType>>&);
 
+		template<class EdgeType>
+		static Standard_Boolean 
+			IsIntersect
+			(
+				const EdgeType& theEdge0,
+				const EdgeType& theEdge1
+			);
+
 		//static void ActiveBoundaryEdges(const std::vector<std::shared_ptr<Aft2d_gSegmentEdge>>&);
 
 		//static void ActiveBoundaryEdges(const std::vector<std::shared_ptr<Aft2d_tSegmentEdge>>&);

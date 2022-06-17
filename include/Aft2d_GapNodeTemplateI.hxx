@@ -1,15 +1,25 @@
 #pragma once
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+//template<class BndNodeType>
+//inline void tnbLib::Aft2d_GapNodeTemplate<BndNodeType>::BlowThisUp
+//(
+//	const typename BndNodeType::metricPrcsr &
+//)
+//{
+//	FatalErrorIn(FunctionSIG)
+//		<< "invalid operator has been called!" << endl
+//		<< abort(FatalError);
+//}
+
 template<class BndNodeType>
-inline void tnbLib::Aft2d_GapNodeTemplate<BndNodeType>::BlowThisUp
-(
-	const typename BndNodeType::metricPrcsr &
-)
+inline std::shared_ptr<typename tnbLib::Aft2d_GapNodeTemplate<BndNodeType>::edgeType> 
+tnbLib::Aft2d_GapNodeTemplate<BndNodeType>::BlowThisUp()
 {
 	FatalErrorIn(FunctionSIG)
 		<< "invalid operator has been called!" << endl
 		<< abort(FatalError);
+	return nullptr;
 }
 
 namespace tnbLib

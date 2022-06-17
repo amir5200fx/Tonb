@@ -7,6 +7,7 @@
 #include <Aft2d_ElementAnIsoFwd.hxx>
 #include <Aft_NodeType.hxx>
 #include <Mesh2d_NodeTraits.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 
 namespace tnbLib
 {
@@ -20,6 +21,7 @@ namespace tnbLib
 		static const Aft_NodeType nType = Aft_NodeType_AnIso;
 
 		typedef Pnt2d ptType;
+		typedef Geo2d_MetricPrcsrAnIso metricPrcsrType;
 	};
 }
 

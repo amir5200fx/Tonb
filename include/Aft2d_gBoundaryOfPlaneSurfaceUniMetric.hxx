@@ -18,13 +18,16 @@
 #ifdef _DEBUG
 namespace tnbLib
 {
-	template<>
-	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront();
+	
 }
 #endif // _DEBUG
 
 namespace tnbLib
 {
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront();
+
 	template<>
 	TnbMesh_EXPORT void Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies();
 
