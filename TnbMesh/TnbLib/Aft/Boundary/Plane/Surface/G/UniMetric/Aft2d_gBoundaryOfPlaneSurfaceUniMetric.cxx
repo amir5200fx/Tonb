@@ -63,13 +63,30 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies()
 
 #ifdef _DEBUG
 
+
+
+#endif // _DEBUG
+
+#include <Aft_Tools.hxx>
+#include <Aft2d_MetricPrcsrSurfaceUniMetric.hxx>
+
 template<>
 void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront()
 {
 	Debug_Null_Pointer(MetricProcessor());
-	const auto& sizeMap = *MetricProcessor();
+	auto sizeMapPtr = std::dynamic_pointer_cast<Aft2d_MetricPrcsrSurfaceUniMetric>(MetricProcessor());
+	Debug_Null_Pointer(sizeMapPtr);
+	const auto& sizeMap = *sizeMapPtr;
 
-	const auto& boundaries = ChangeBoundaries();
+	const auto& boundaries = Boundaries();
+	std::vector<std::shared_ptr<Aft2d_NodeSurface>> nodes = 
+		Aft_Tools::RetrieveNodes(Aft2d_gSegmentEdgeUniMetric::UpCast(boundaries));
+	for (const auto& x : nodes)
+	{
+		auto pt = sizeMap.CalcCoord3D(x->Coord());
+		x->SetCoord3D(std::move(pt));
+	}
+
 	for (const auto& x : boundaries)
 	{
 		Debug_Null_Pointer(x);
@@ -110,8 +127,6 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront()
 		n0->SetMetric(M);
 	}
 }
-
-#endif // _DEBUG
 
 template<>
 void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::Perform()

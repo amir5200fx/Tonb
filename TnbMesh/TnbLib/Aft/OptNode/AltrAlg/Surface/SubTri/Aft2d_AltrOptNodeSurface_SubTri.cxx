@@ -1,9 +1,11 @@
 #include <Aft2d_AltrOptNodeSurface_SubTri.hxx>
 
+#include <Aft2d_OptNodeSurface_NelderMeadObj.hxx>
 #include <Aft2d_MetricPrcsrSurface.hxx>
 #include <Aft_CorrOptNode_IterativeTools.hxx>
 #include <Aft_SizeCorr_IterativeInfo.hxx>
 #include <Entity2d_Metric1.hxx>
+#include <NumAlg_NelderMead.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -32,7 +34,7 @@ tnbLib::Aft2d_AltrOptNodeSurface_SubTri::Iter
 	const auto h = std::sqrt(1.0 / (denom*denom) + 0.75)*theH;
 	
 	auto p0 = P0();
-	if (Aft_CorrOptNode_IterativeTools::CorrectOptNode(*MetricMap(), V0, V1, theCentre, p0, h, *IterInfo()))
+	if (Aft_CorrOptNode_IterativeTools::CorrectOptNode(*MetricMap(), V0, V1, theCentre, p0, h, *SizeCorrInfo()))
 	{
 		return Iter(theLev + 1, theCentre, V0, V1, theH);
 	}
@@ -42,7 +44,7 @@ tnbLib::Aft2d_AltrOptNodeSurface_SubTri::Iter
 
 void tnbLib::Aft2d_AltrOptNodeSurface_SubTri::Perform()
 {
-	Debug_Null_Pointer(IterInfo());
+	Debug_Null_Pointer(SizeCorrInfo());
 	Debug_Null_Pointer(Front());
 	Debug_Null_Pointer(MetricMap());
 	Debug_If_Condition(ElmSize() <= gp::Resolution());
@@ -65,7 +67,21 @@ void tnbLib::Aft2d_AltrOptNodeSurface_SubTri::Perform()
 	}
 	else
 	{
-		IsConvergedRef() = Standard_False;
+		NumAlg_NelderMead<Aft2d_OptNodeSurface_NelderMeadObj> alg;
+
+		alg.SetP0(Front()->Node0()->Coord());
+		alg.SetP1(Front()->Node1()->Coord());
+		alg.SetP2(CorrectedRef());
+
+		alg.SetInfo(NelderMeadInfo());
+		alg.SetMetricMap(MetricMap());
+		alg.SetTolerance(NelderMeadInfo()->Tolerance());
+
+		alg.Perform();
+
+		CorrectedRef() = alg.BestVertex();
+
+		IsConvergedRef() = alg.IsConverged();
 	}
 	Change_IsDone() = Standard_True;
 }

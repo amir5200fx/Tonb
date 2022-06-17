@@ -134,6 +134,7 @@ namespace tnbLib
 		Pts[3] = CorrEffRegion(theCentre, Pts[3], theRadius);
 
 		auto box = Entity2d_Box::BoundingBoxOf(Pts);
+		//box.Expand(box.Diameter()*1.0E-6);
 		return std::move(box);
 	}
 }

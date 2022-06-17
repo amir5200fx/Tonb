@@ -5,6 +5,7 @@
 #include <Mesh_TBndNode.hxx>
 #include <Aft2d_TBndNodeAnIsoTraits.hxx>
 #include <Aft2d_SegmentNodeAnIsoFwd.hxx>
+#include <Aft2d_BndNodeAnIso.hxx>
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_SegmentNodeAnIso);
 

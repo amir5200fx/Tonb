@@ -1900,6 +1900,18 @@
     <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2">
       <UniqueIdentifier>{cd2bbd70-3ede-4a09-aa42-29916167298d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\Tools">
+      <UniqueIdentifier>{55372018-c7da-4264-8818-10d9ec1652db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE">
+      <UniqueIdentifier>{af11b439-eec7-42dd-8a21-a71d31e712f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Info">
+      <UniqueIdentifier>{842f4016-cc06-44a1-8af4-b3da0ce1f7d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Identifier">
+      <UniqueIdentifier>{5913e838-5f02-4385-8e59-a19803103000}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4548,6 +4560,21 @@
     <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2\Aft2d_AltrOptNodeSurface_SubTri2.hxx">
       <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\Tools\Aft_OptNode_Tools.hxx">
+      <Filter>TnbLib\Aft\OptNode\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Aft2d_AltrOptNodeSurface_DE.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Info\Aft2d_AltrOptNodeSurface_DE_Info.hxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Identifier\Aft_MetricPrcsrIdentifier.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Entities\Boundary\Node\Mesh_BndNodeI.hxx">
+      <Filter>TnbLib\Base\Entities\Boundary\Node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5770,6 +5797,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2\Aft2d_AltrOptNodeSurface_SubTri2.cxx">
       <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Tools\Aft_OptNode_Tools.cxx">
+      <Filter>TnbLib\Aft\OptNode\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Aft2d_AltrOptNodeSurface_DE.cxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Info\Aft2d_AltrOptNodeSurface_DE_Info.cxx">
+      <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Identifier\Aft_MetricPrcsrIdentifier.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Identifier</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Entities\Boundary\Node\Mesh_BndNode.cxx">
+      <Filter>TnbLib\Base\Entities\Boundary\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Node\Surface\Aft2d_NodeSurface.cxx">
+      <Filter>TnbLib\Aft\Entities\Node\Surface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

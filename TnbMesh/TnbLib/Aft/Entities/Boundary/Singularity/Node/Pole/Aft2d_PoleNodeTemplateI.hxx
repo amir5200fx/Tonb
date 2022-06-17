@@ -19,6 +19,16 @@ inline void tnbLib::Aft2d_PoleNodeTemplate<BndNodeType>::RemoveThis
 		<< abort(FatalError);
 }
 
+template<class BndNodeType>
+inline std::shared_ptr<typename tnbLib::Aft2d_PoleNodeTemplate<BndNodeType>::edgeType>
+tnbLib::Aft2d_PoleNodeTemplate<BndNodeType>::BlowThisUp()
+{
+	FatalErrorIn(FunctionSIG)
+		<< "invalid operator has been called!" << endl
+		<< abort(FatalError);
+	return nullptr;
+}
+
 namespace tnbLib
 {
 	template<class BndNodeType>

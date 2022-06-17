@@ -10,6 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations [5/25/2022 Amir]
 	class Aft_SizeCorr_IterativeInfo;
+	class NumAlg_NelderMeadInfo;
 
 	class Aft2d_AltrOptNodeSurface_SubTri
 		: public Aft2d_AltrOptNodeSurface
@@ -17,7 +18,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Aft_SizeCorr_IterativeInfo> theInfo_;
+		std::shared_ptr<Aft_SizeCorr_IterativeInfo> theSizeCorrInfo_;
+		std::shared_ptr<NumAlg_NelderMeadInfo> theNelderInfo_;
 
 		Standard_Integer theMaxLev_;
 
@@ -45,19 +47,26 @@ namespace tnbLib
 
 		// constructors [5/25/2022 Amir]
 
-		explicit Aft2d_AltrOptNodeSurface_SubTri
+		Aft2d_AltrOptNodeSurface_SubTri
 		(
-			const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& theInfo
+			const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& theSizeCorrInfo,
+			const std::shared_ptr<NumAlg_NelderMeadInfo>& theNelderInfo
 		)
-			: theInfo_(theInfo)
+			: theSizeCorrInfo_(theSizeCorrInfo)
+			, theNelderInfo_(theNelderInfo)
 			, theMaxLev_(DEFAULT_MAX_LEV)
 		{}
 
 		// public functions and operators [5/25/2022 Amir]
 
-		const auto& IterInfo() const
+		const auto& SizeCorrInfo() const
 		{
-			return theInfo_;
+			return theSizeCorrInfo_;
+		}
+
+		const auto& NelderMeadInfo() const
+		{
+			return theNelderInfo_;
 		}
 
 		auto MaxLevel() const
@@ -67,9 +76,14 @@ namespace tnbLib
 
 		TnbMesh_EXPORT void Perform() override;
 
-		void SetInfo(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& theInfo)
+		void SetSizeCorrInfo(const std::shared_ptr<Aft_SizeCorr_IterativeInfo>& theInfo)
 		{
-			theInfo_ = theInfo;
+			theSizeCorrInfo_ = theInfo;
+		}
+
+		void SetNealderMeadInfo(const std::shared_ptr<NumAlg_NelderMeadInfo>& theInfo)
+		{
+			theNelderInfo_ = theInfo;
 		}
 
 		void SetMaxLev(const Standard_Integer theMax)

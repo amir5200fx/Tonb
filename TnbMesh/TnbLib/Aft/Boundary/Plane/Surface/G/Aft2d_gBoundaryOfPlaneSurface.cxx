@@ -68,59 +68,6 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::RemoveDegeneracies()
 }
 
 template<>
-void tnbLib::Aft2d_gBoundaryOfPlaneSurface::UpdateFront()
-{
-	Debug_Null_Pointer(MetricProcessor());
-	const auto& sizeMap = *MetricProcessor();
-
-	const auto& boundaries = ChangeBoundaries();
-	for (const auto& x : boundaries)
-	{
-		Debug_Null_Pointer(x);
-		const auto& n0 = x->Node0();
-		const auto& n1 = x->Node1();
-
-		x->SetEffectiveMetric(sizeMap.CalcEffectiveMetric(n0->Coord(), n1->Coord()));
-		x->SetCentre(sizeMap.CalcCentre(n0->Coord(), n1->Coord()));
-		x->SetCharLength(sizeMap.CalcDistance(n0->Coord(), n1->Coord()));
-	}
-
-	for (const auto& x : boundaries)
-	{
-		Debug_Null_Pointer(x);
-
-		auto n0 = std::dynamic_pointer_cast<typename bndType::bndNodeType>(x->Node0());
-		Debug_Null_Pointer(n0);
-
-		const auto& edges = n0->RetrieveBoundaryEdges();
-
-		auto Iter = edges.begin();
-		Debug_Null_Pointer(Iter->second.lock());
-		auto M = Iter->second.lock()->EffectiveMetric();
-		Iter++;
-
-		while (Iter NOT_EQUAL edges.end())
-		{
-			Debug_Null_Pointer(Iter->second.lock());
-			const auto& Mi = Iter->second.lock()->EffectiveMetric();
-
-			if (M.Determinant() < Mi.Determinant())
-			{
-				M = Entity2d_Metric1::UnionSR(M, Mi);
-			}
-			else
-			{
-				M = Entity2d_Metric1::UnionSR(Mi, M);
-			}
-			Iter++;
-		}
-
-		n0->SetMetric(M);
-	}
-
-}
-
-template<>
 void tnbLib::Aft2d_gBoundaryOfPlaneSurface::Perform()
 {
 	if (verbose)
@@ -473,3 +420,69 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::Perform()
 	}
 }
 #endif // _DEBUG
+
+#include <Aft_Tools.hxx>
+#include <Aft2d_MetricPrcsrSurface.hxx>
+
+template<>
+void tnbLib::Aft2d_gBoundaryOfPlaneSurface::UpdateFront()
+{
+	Debug_Null_Pointer(MetricProcessor());
+	auto sizeMapPtr = std::dynamic_pointer_cast<Aft2d_MetricPrcsrSurface>(MetricProcessor());
+	Debug_Null_Pointer(sizeMapPtr);
+	const auto& sizeMap = *sizeMapPtr;
+
+	const auto& boundaries = Boundaries();
+	std::vector<std::shared_ptr<Aft2d_NodeSurface>> nodes =
+		Aft_Tools::RetrieveNodes(Aft2d_gSegmentEdge::UpCast(boundaries));
+	for (const auto& x : nodes)
+	{
+		auto pt = sizeMap.CalcCoord3D(x->Coord());
+		x->SetCoord3D(std::move(pt));
+	}
+
+	for (const auto& x : boundaries)
+	{
+		Debug_Null_Pointer(x);
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+
+		x->SetEffectiveMetric(sizeMap.CalcEffectiveMetric(n0->Coord(), n1->Coord()));
+		x->SetCentre(sizeMap.CalcCentre(n0->Coord(), n1->Coord()));
+		x->SetCharLength(sizeMap.CalcDistance(n0->Coord(), n1->Coord()));
+	}
+
+	for (const auto& x : boundaries)
+	{
+		Debug_Null_Pointer(x);
+
+		auto n0 = std::dynamic_pointer_cast<typename bndType::bndNodeType>(x->Node0());
+		Debug_Null_Pointer(n0);
+
+		const auto& edges = n0->RetrieveBoundaryEdges();
+
+		auto Iter = edges.begin();
+		Debug_Null_Pointer(Iter->second.lock());
+		auto M = Iter->second.lock()->EffectiveMetric();
+		Iter++;
+
+		while (Iter NOT_EQUAL edges.end())
+		{
+			Debug_Null_Pointer(Iter->second.lock());
+			const auto& Mi = Iter->second.lock()->EffectiveMetric();
+
+			if (M.Determinant() < Mi.Determinant())
+			{
+				M = Entity2d_Metric1::UnionSR(M, Mi);
+			}
+			else
+			{
+				M = Entity2d_Metric1::UnionSR(Mi, M);
+			}
+			Iter++;
+		}
+
+		n0->SetMetric(M);
+	}
+
+}

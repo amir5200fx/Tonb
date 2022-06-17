@@ -12,6 +12,21 @@ void tnbLib::Aft2d_gCornerPoleNode::RemoveThis
 	const Geo2d_MetricPrcsrAnIso& thePrcsr
 )
 {
+	auto edge = BlowThisUp();
+
+	const auto& n0 = edge->Node0();
+	const auto& n1 = edge->Node1();
+	Debug_Null_Pointer(n0);
+	Debug_Null_Pointer(n1);
+
+	edge->SetCharLength(thePrcsr.CalcDistance(n0->Coord(), n1->Coord()));
+	edge->SetCentre(thePrcsr.CalcCentre(n0->Coord(), n1->Coord()));
+}
+
+template<>
+std::shared_ptr<tnbLib::Aft2d_BndEdgeSurface> 
+tnbLib::Aft2d_gCornerPoleNode::BlowThisUp()
+{
 	if (this->NbBoundaryEdges() NOT_EQUAL 2)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -125,7 +140,7 @@ void tnbLib::Aft2d_gCornerPoleNode::RemoveThis
 			<< "contradictory data has been detected!" << endl
 			<< abort(FatalError);
 	}
-	
+
 	auto edge = nonSingEdge;
 	Debug_Null_Pointer(edge);
 
@@ -135,9 +150,8 @@ void tnbLib::Aft2d_gCornerPoleNode::RemoveThis
 	n0->InsertToBoundaryEdges(edge->Index(), edge);
 	n1->InsertToBoundaryEdges(edge->Index(), edge);
 
-	edge->SetCharLength(thePrcsr.CalcDistance(n0->Coord(), n1->Coord()));
-	edge->SetCentre(thePrcsr.CalcCentre(n0->Coord(), n1->Coord()));
-
 	Debug_If_Condition(n0->NbBoundaryEdges() NOT_EQUAL 2);
 	Debug_If_Condition(n1->NbBoundaryEdges() NOT_EQUAL 2);
+
+	return std::move(edge);
 }

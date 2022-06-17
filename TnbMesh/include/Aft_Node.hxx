@@ -87,7 +87,7 @@ namespace tnbLib
 
 		//- public functions and operators
 
-
+		Standard_Real CalcMaxParaAdjLength() const;
 
 		//- Static functions and operators
 

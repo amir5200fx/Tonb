@@ -120,11 +120,12 @@ tnbLib::Aft_CorrOptNode_IterativeTools::CorrectOptNode
 	Standard_Real d0, d1;
 	do
 	{
+		//std::cout << "do..." << std::endl;
 		d0 = map.CalcUnitDistance(theV0, P)*invH;
 		d1 = map.CalcUnitDistance(theV1, P)*invH;
 		Debug_If_Condition(d0 <= gp::Resolution());
 		Debug_If_Condition(d1 <= gp::Resolution());
-
+		//std::cout << "d0: " << d0 << ", d1: " << d1 << std::endl;
 		auto Pa = theV0 + (P - theV0) / d0;
 		auto Pb = theV1 + (P - theV1) / d1;
 

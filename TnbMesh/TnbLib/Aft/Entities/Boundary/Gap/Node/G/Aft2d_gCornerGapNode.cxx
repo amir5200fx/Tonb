@@ -2,12 +2,14 @@
 
 #include <Aft2d_gSegmentEdge.hxx>
 #include <Aft2d_gSegmentNode.hxx>
+#include <Aft2d_BndEdgeSurface.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 template<>
-void tnbLib::Aft2d_gCornerGapNode::BlowThisUp(const Geo2d_MetricPrcsrAnIso& thePrcsr)
+std::shared_ptr<tnbLib::Aft2d_BndEdgeSurface> 
+tnbLib::Aft2d_gCornerGapNode::BlowThisUp()
 {
 	if (this->NbBoundaryEdges() NOT_EQUAL 2)
 	{
@@ -132,9 +134,8 @@ void tnbLib::Aft2d_gCornerGapNode::BlowThisUp(const Geo2d_MetricPrcsrAnIso& theP
 	n0->InsertToBoundaryEdges(edge->Index(), edge);
 	n1->InsertToBoundaryEdges(edge->Index(), edge);
 
-	edge->SetCharLength(thePrcsr.CalcDistance(n0->Coord(), n1->Coord()));
-	edge->SetCentre(thePrcsr.CalcCentre(n0->Coord(), n1->Coord()));
-
 	Debug_If_Condition(n0->NbBoundaryEdges() NOT_EQUAL 2);
 	Debug_If_Condition(n1->NbBoundaryEdges() NOT_EQUAL 2);
+
+	return std::move(edge);
 }

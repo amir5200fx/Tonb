@@ -44,6 +44,7 @@ namespace tnbLib
 
 	public:
 
+		typedef typename BndNodeTraits::edgeType edgeType;
 		typedef typename BndNodeTraits::nodeType nodeType;
 		typedef typename nodeType::ptType Point;
 
@@ -76,6 +77,8 @@ namespace tnbLib
 			: nodeType(theIndex, theCoord)
 		{}
 
+	public:
+
 		// virtual functions and operators [5/13/2022 Amir]
 
 		virtual Standard_Boolean IsGap() const
@@ -83,7 +86,10 @@ namespace tnbLib
 			return Standard_False;
 		}
 
-		//- public functions and operators
+		virtual Standard_Boolean IsRegular() const
+		{
+			return Standard_True;
+		}
 
 		virtual Standard_Boolean IsSegment() const
 		{
@@ -94,7 +100,15 @@ namespace tnbLib
 		{
 			return Standard_False;
 		}
+
+		virtual std::shared_ptr<edgeType> BlowThisUp();
+
+		//- public functions and operators
+
+		
 	};
 }
+
+#include <Mesh_BndNodeI.hxx>
 
 #endif // !_Mesh_BndNode_Header

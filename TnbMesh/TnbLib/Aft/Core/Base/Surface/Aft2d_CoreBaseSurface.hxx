@@ -15,6 +15,19 @@ namespace tnbLib
 {
 
 	template<>
+	TnbMesh_EXPORT void Aft2d_CoreBaseSurface::AddOptimumNodeTo
+	(
+		std::vector<std::shared_ptr<Aft2d_NodeSurface>>&
+	);
+
+	template<>
+	TnbMesh_EXPORT Standard_Boolean 
+		Aft2d_CoreBaseSurface::IsNewPointCandidate
+		(
+			const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>&
+		) const;
+
+	template<>
 	template<>
 	TnbMesh_EXPORT void Aft2d_CoreBaseSurface::serialize<TNB_iARCH_TYPE>
 		(

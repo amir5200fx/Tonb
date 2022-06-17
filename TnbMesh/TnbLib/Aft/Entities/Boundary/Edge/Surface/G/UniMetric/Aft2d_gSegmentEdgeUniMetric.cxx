@@ -5,6 +5,7 @@
 #include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_gCornerNodeUniMetric.hxx>
 #include <Aft2d_gSegmentNodeUniMetric.hxx>
+#include <Aft2d_gCornerGapNodeUniMetric.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -123,6 +124,45 @@ void tnbLib::Aft2d_gSegmentEdgeUniMetric::MergeDangles
 
 			continue;
 		}
+		else if (cn0->IsGap() AND cn1->IsGap())
+		{
+			auto node =
+				Aft2d_gCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+
+			continue;
+		}
+		else
+		{
+			if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNodeUniMetric>(cn0))
+			{
+				auto node =
+					Aft2d_gCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+
+				continue;
+			}
+			else if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNodeUniMetric>(cn1))
+			{
+				auto node =
+					Aft2d_gCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+
+				continue;
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data has been detected!" << endl
+					<< abort(FatalError);
+			}
+		}
 
 		FatalErrorIn(FunctionSIG) << endl
 			<< "Invalid Wire" << endl
@@ -168,6 +208,45 @@ void tnbLib::Aft2d_gSegmentEdgeUniMetric::MergeDangles
 		e1.SetNode0(node);
 
 		return;
+	}
+	else if (cn0->IsGap() AND cn1->IsGap())
+	{
+		auto node =
+			Aft2d_gCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+		e0.SetNode1(node);
+		e1.SetNode0(node);
+
+		return;
+	}
+	else
+	{
+		if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNodeUniMetric>(cn0))
+		{
+			auto node =
+				Aft2d_gCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+
+			return;
+		}
+		else if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNodeUniMetric>(cn1))
+		{
+			auto node =
+				Aft2d_gCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+
+			return;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
 	}
 
 	FatalErrorIn(FunctionSIG) << endl

@@ -24,7 +24,7 @@ void tnbLib::Aft2d_AltrOptNodeSurface_NelderMead::Perform()
 	alg.SetTolerance(AlgInfo()->Tolerance());
 
 	alg.Perform();
-	std::cout << "is converged?  " << alg.IsConverged() << std::endl;
+
 	CorrectedRef() = alg.BestVertex();
 
 	Change_IsDone() = Standard_True;

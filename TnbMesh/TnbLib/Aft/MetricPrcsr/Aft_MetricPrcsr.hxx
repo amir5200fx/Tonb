@@ -2,6 +2,7 @@
 #ifndef _Aft_MetricPrcsr_Header
 #define _Aft_MetricPrcsr_Header
 
+#include <Aft_MetricPrcsrIdentifier.hxx>
 #include <Mesh_Module.hxx>
 #include <Geo_MetricPrcsr.hxx>
 #include <Entity_Box.hxx>
@@ -24,6 +25,7 @@ namespace tnbLib
 	template<class FrontType, class SizeFun, class MetricFun = void>
 	class Aft_MetricPrcsr
 		: public Geo_MetricPrcsr<SizeFun, MetricFun>
+		, public Aft_MetricPrcsrIdentifier<FrontType>
 	{
 
 	public:

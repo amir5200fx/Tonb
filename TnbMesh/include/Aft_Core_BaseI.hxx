@@ -190,21 +190,35 @@ namespace tnbLib
 
 		auto factor = frontInfo::MinDistFactor();
 		Debug_If_Condition(factor <= 0.);
-
+		//factor = 0.3;
 		Debug_Null_Pointer(theMetricMap_);
 		const auto& sizeMap = *theMetricMap_;
-
+		if (this->NbElements() > 1088)
+		{
+			std::cout << this->NbElements() << std::endl;
+			std::cout << "factor: " << factor << std::endl;
+			std::cout << std::endl;
+		}
 		const auto& coord = frontInfo::Coord();
 		for (const auto& x : theEffectives)
 		{
 			Debug_Null_Pointer(x);
 			const auto& edge = *x;
-
+			if (this->NbElements() > 1088)
+			{
+				std::cout << "n0: " << edge.Node0()->Index() << ", n1: " << edge.Node1()->Index() << std::endl;
+			}
 			auto length = factor * edge.CharLength();
-			auto criteria = length * length;
+			auto criteria = length /** length*/;
 
-			auto disSq = sizeMap.CalcSquareDistance(coord, edge);
-			if (disSq < criteria)
+			//auto disSq = sizeMap.CalcSquareDistance(coord, edge);
+			auto dis = sizeMap.CalcDistance(coord, edge);
+			if (this->NbElements() > 1088)
+			{
+				std::cout << " char len: " << edge.CharLength() << ", len: " << length << ", dis: " << dis << std::endl;
+				std::cout << std::endl;
+			}
+			if (dis < criteria)
 			{
 				return Standard_False;
 			}
@@ -318,11 +332,14 @@ namespace tnbLib
 		Debug_Null_Pointer(frontInfo::CurrentFront());
 		const auto& current = *frontInfo::CurrentFront();
 
+		const auto& n0 = current.Node0();
+		const auto& n1 = current.Node1();
+
 		if (frontInfo::AlgCondition() IS_EQUAL Aft_AlgCondition::Generation)
 		{
 			frontInfo::SetSearchRadius
 			(
-				0.95*MAX
+				0.95*std::max
 				(
 					sizeMap.CalcDistance(frontInfo::Coord(), current.Centre()),
 					frontInfo::ElementSize()

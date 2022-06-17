@@ -92,6 +92,8 @@ namespace tnbLib
 			const std::shared_ptr<metricPrcsr>& theBoundaryMap
 		);
 
+		void CheckSelfIntersection();
+
 		//- static functions and operators
 
 		static Entity_Box<Point>

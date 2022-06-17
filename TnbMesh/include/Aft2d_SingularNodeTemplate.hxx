@@ -40,6 +40,7 @@ namespace tnbLib
 		// override functions and operators [4/26/2022 Amir]
 
 		Standard_Boolean IsSingular() const override;
+		Standard_Boolean IsRegular() const override;
 
 		// public functions and operators [4/25/2022 Amir]
 

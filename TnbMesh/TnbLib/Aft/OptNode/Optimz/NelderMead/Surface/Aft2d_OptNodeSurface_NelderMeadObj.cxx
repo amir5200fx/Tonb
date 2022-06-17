@@ -15,11 +15,14 @@ tnbLib::Aft2d_OptNodeSurface_NelderMeadObj::EstimateError
 	const Standard_Real d1
 )
 {
-	auto e0 = ABS(1.0 - d0);
-	auto e1 = ABS(1.0 - d1);
-	std::cout << "e0: " << e0 << ",  e1: " << e1 << std::endl;
-	std::cout << MEAN(e0, e1) << std::endl;
-	return MEAN(e0, e1);
+	const auto del0 = std::abs(1.0 - d0);
+	const auto del1 = std::abs(1.0 - d1);
+
+	static const Standard_Real Pow = 3.0;
+	const auto cost0 = std::pow(1.0 + del0, Pow);
+	const auto cost1 = std::pow(1.0 + del1, Pow);
+
+	return cost0 * cost1;
 }
 
 Standard_Real 
@@ -30,9 +33,9 @@ tnbLib::Aft2d_OptNodeSurface_NelderMeadObj::Value
 {
 	Debug_Null_Pointer(MetricMap());
 	const auto& map = *MetricMap();
-	std::cout << "coord: " << theCoord << std::endl;
-	d0 = map.CalcDistance(theCoord, P0());
-	d1 = map.CalcDistance(theCoord, P1());
+
+	d0 = map.CalcUnitDistance(theCoord, P0());
+	d1 = map.CalcUnitDistance(theCoord, P1());
 
 	return EstimateError(d0, d1);
 }
@@ -56,12 +59,10 @@ void tnbLib::Aft2d_OptNodeSurface_NelderMeadObj::SetV
 	auto x = xi;
 	if (x < x0)
 	{
-		std::cout << "corrected!" << std::endl;
 		x = x0;
 	}
 	if (x > x1)
 	{
-		std::cout << "corrected!" << std::endl;
 		x = x1;
 	}
 	P.SetCoord(Dim, x);

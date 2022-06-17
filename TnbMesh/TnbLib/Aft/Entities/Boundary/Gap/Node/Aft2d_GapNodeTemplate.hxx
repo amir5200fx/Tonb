@@ -42,12 +42,21 @@ namespace tnbLib
 
 	public:
 
+		typedef typename BndNodeType::edgeType edgeType;
+
 		// override functions and operators [5/13/2022 Amir]
 
 		Standard_Boolean IsGap() const override
 		{
 			return Standard_True;
 		}
+
+		Standard_Boolean IsRegular() const override
+		{
+			return Standard_False;
+		}
+
+		std::shared_ptr<edgeType> BlowThisUp() override;
 
 		// public functions and operators [5/13/2022 Amir]
 
@@ -60,9 +69,6 @@ namespace tnbLib
 		{
 			return IsFixed_;
 		}
-
-		void BlowThisUp(const typename BndNodeType::metricPrcsr&);
-
 
 		// static functions and operators [5/13/2022 Amir]
 

@@ -13,7 +13,42 @@ void tnbLib::Aft2d_gSegmentGapEdge::Contraction
 	const Geo2d_MetricPrcsrAnIso& thePrcsr
 )
 {
-	if (auto n = std::dynamic_pointer_cast<Aft2d_gCornerGapNode>(this->Node0()))
+	auto n0 = std::dynamic_pointer_cast<Aft2d_BndNodeSurface>(this->Node0());
+	auto n1 = std::dynamic_pointer_cast<Aft2d_BndNodeSurface>(this->Node1());
+	Debug_Null_Pointer(n0);
+	Debug_Null_Pointer(n1);
+
+	if (n0->IsCorner() AND NOT n0->IsRegular())
+	{
+		auto edge = n0->BlowThisUp();
+		Debug_Null_Pointer(edge);
+
+		const auto& v0 = edge->Node0();
+		const auto& v1 = edge->Node1();
+
+		Debug_Null_Pointer(v0);
+		Debug_Null_Pointer(v1);
+
+		edge->SetCharLength(thePrcsr.CalcDistance(v0->Coord(), v1->Coord()));
+		edge->SetCentre(thePrcsr.CalcCentre(v0->Coord(), v1->Coord()));
+	}
+
+	if (n1->IsCorner() AND NOT n1->IsRegular())
+	{
+		auto edge = n1->BlowThisUp();
+		Debug_Null_Pointer(edge);
+
+		const auto& v0 = edge->Node0();
+		const auto& v1 = edge->Node1();
+
+		Debug_Null_Pointer(v0);
+		Debug_Null_Pointer(v1);
+
+		edge->SetCharLength(thePrcsr.CalcDistance(v0->Coord(), v1->Coord()));
+		edge->SetCentre(thePrcsr.CalcCentre(v0->Coord(), v1->Coord()));
+	}
+
+	/*if (auto n = std::dynamic_pointer_cast<Aft2d_gCornerGapNode>(this->Node0()))
 	{
 		n->BlowThisUp(thePrcsr);
 	}
@@ -26,7 +61,7 @@ void tnbLib::Aft2d_gSegmentGapEdge::Contraction
 		FatalErrorIn(FunctionSIG)
 			<< "no corner node has been found!" << endl
 			<< abort(FatalError);
-	}
+	}*/
 }
 
 template<>

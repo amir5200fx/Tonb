@@ -5,6 +5,8 @@
 #include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_gCornerNode.hxx>
 #include <Aft2d_gSegmentNode.hxx>
+#include <Aft2d_gCornerGapNode.hxx>
+#include <Aft2d_gSegmentGapNode.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -112,6 +114,7 @@ namespace tnbLib
 #endif // _DEBUG
 
 
+
 template<>
 void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 (
@@ -142,16 +145,24 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 //				<< " - tol: " << theTol << endl
 //				<< abort(FatalError);
 //		}
-
+	
 		auto bn0 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e0.Node1());
 		auto bn1 = std::dynamic_pointer_cast<Aft2d_gCornerNode>(e1.Node0());
 		Debug_Null_Pointer(bn0);
 		Debug_Null_Pointer(bn1);
-
-		if (NOT bn0->IsSingular() AND NOT bn1->IsSingular())
+		
+		if (bn0->IsRegular() AND bn1->IsRegular())
 		{
 			auto node =
 				Aft2d_gCornerNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
+		else if (bn0->IsGap() AND bn1->IsGap())
+		{
+			auto node = 
+				Aft2d_gCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
 
 			e0.SetNode1(node);
 			e1.SetNode0(node);
@@ -234,6 +245,22 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 						<< abort(FatalError);
 				}
 			}
+			else if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNode>(bn0))
+			{
+				auto node = 
+					Aft2d_gCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNode>(bn1))
+			{
+				auto node =
+					Aft2d_gCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
 			else
 			{
 				FatalErrorIn(FunctionSIG)
@@ -261,10 +288,18 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 	Debug_Null_Pointer(bn0);
 	Debug_Null_Pointer(bn1);
 
-	if (NOT bn0->IsSingular() AND NOT bn1->IsSingular())
+	if (bn0->IsRegular() AND bn1->IsRegular())
 	{
 		auto node =
 			Aft2d_gCornerNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+		e0.SetNode1(node);
+		e1.SetNode0(node);
+	}
+	else if (bn0->IsGap() AND bn1->IsGap())
+	{
+		auto node =
+			Aft2d_gCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
 
 		e0.SetNode1(node);
 		e1.SetNode0(node);
@@ -346,6 +381,22 @@ void tnbLib::Aft2d_gSegmentEdge::MergeDangles
 					<< "contradictory data has been detected!" << endl
 					<< abort(FatalError);
 			}
+		}
+		else if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNode>(bn0))
+		{
+			auto node =
+				Aft2d_gCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
+		else if (auto gn = std::dynamic_pointer_cast<Aft2d_gCornerGapNode>(bn1))
+		{
+			auto node =
+				Aft2d_gCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
 		}
 		else
 		{

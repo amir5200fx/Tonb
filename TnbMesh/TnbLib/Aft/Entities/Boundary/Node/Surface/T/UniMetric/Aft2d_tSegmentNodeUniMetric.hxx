@@ -5,6 +5,7 @@
 #include <Mesh_TBndNode.hxx>
 #include <Aft2d_tBndNodeSurfaceUniMetricTraits.hxx>
 #include <Aft2d_tSegmentNodeUniMetricFwd.hxx>
+#include <Aft2d_BndNodeSurface.hxx>
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_tSegmentNodeUniMetric);
 

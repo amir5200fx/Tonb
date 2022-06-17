@@ -10,6 +10,9 @@ namespace tnbLib
 {
 
 	template<>
+	TnbMesh_EXPORT std::shared_ptr<Aft2d_BndEdgeSurface> Aft2d_gCornerPoleNode::BlowThisUp();
+
+	template<>
 	TnbMesh_EXPORT void Aft2d_gCornerPoleNode::RemoveThis
 	(
 		const Geo2d_MetricPrcsrAnIso&
