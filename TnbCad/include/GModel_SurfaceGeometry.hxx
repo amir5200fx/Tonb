@@ -54,12 +54,15 @@ namespace tnbLib
 
 	public:
 
+
+		// public functions and operators [6/13/2022 Amir]
+
 		const auto& GeomSurface() const
 		{
 			return theGeometry_;
 		}
 
-		Handle(Poly_Triangulation) RetrieveTriangulation() const;
+		TnbCad_EXPORT Handle(Poly_Triangulation) RetrieveTriangulation() const;
 
 		TnbCad_EXPORT Pnt3d Value
 		(

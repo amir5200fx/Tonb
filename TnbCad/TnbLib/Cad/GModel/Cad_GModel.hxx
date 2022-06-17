@@ -17,6 +17,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class GModel_Surface;
+	class Cad_Shape;
 
 	class Cad_GModel
 		: public Global_Indexed
@@ -26,7 +27,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::vector<std::shared_ptr<GModel_Surface>> theSurfaces_;
-
+		std::shared_ptr<Cad_Shape> theShape_;
 
 		//- private functions and operators
 
@@ -44,7 +45,7 @@ namespace tnbLib
 
 		//- constructors
 
-		Cad_GModel
+		explicit Cad_GModel
 		(
 			const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces
 		)
@@ -53,9 +54,20 @@ namespace tnbLib
 
 		Cad_GModel
 		(
-			std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces
+			const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces,
+			const std::shared_ptr<Cad_Shape>& theShape
+		)
+			: theSurfaces_(theSurfaces)
+			, theShape_(theShape)
+		{}
+
+		Cad_GModel
+		(
+			std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces,
+			std::shared_ptr<Cad_Shape>&& theShape
 		)
 			: theSurfaces_(std::move(theSurfaces))
+			, theShape_(std::move(theShape))
 		{}
 
 		Cad_GModel
@@ -71,13 +83,28 @@ namespace tnbLib
 
 		Cad_GModel
 		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const std::vector<std::shared_ptr<GModel_Surface>>& theSurfaces,
+			const std::shared_ptr<Cad_Shape>& theShape
+		)
+			: Global_Indexed(theIndex)
+			, Global_Named(theName)
+			, theSurfaces_(theSurfaces)
+			, theShape_(theShape)
+		{}
+
+		Cad_GModel
+		(
 			const Standard_Integer theIndex, 
 			const word& theName, 
-			std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces
+			std::vector<std::shared_ptr<GModel_Surface>>&& theSurfaces,
+			std::shared_ptr<Cad_Shape>&& theShape
 		)
 			: Global_Indexed(theIndex)
 			, Global_Named(theName)
 			, theSurfaces_(std::move(theSurfaces))
+			, theShape_(std::move(theShape))
 		{}
 
 
@@ -92,6 +119,23 @@ namespace tnbLib
 		{
 			return theSurfaces_;
 		}
+
+		const auto& Shape() const
+		{
+			return theShape_;
+		}
+
+		void SetShape(const std::shared_ptr<Cad_Shape>& theShape)
+		{
+			theShape_ = theShape;
+		}
+
+		void SetShape(std::shared_ptr<Cad_Shape>&& theShape)
+		{
+			theShape_ = std::move(theShape);
+		}
+
+		TnbCad_EXPORT void SetFaces();
 
 	};
 }

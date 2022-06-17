@@ -1523,8 +1523,9 @@ tnbLib::GModel_Tools::GetParaPlane
 	//OFstream myFile0("before_corr.plt");
 	//OFstream myFile1("after_corr.plt");
 	auto approxInfo = std::make_shared<Geo_ApprxCurve_Info>();
-	
+
 	const auto trimOuterWire = TrimWire(unRepOuterWire);
+
 	Debug_Null_Pointer(trimOuterWire);
 	//ExportToPlt(trimOuterWire, approxInfo, myFile0);
 	const auto waterTight = FillGaps(trimOuterWire, theTol);
