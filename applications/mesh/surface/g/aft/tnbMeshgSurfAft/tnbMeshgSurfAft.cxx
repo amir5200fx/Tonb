@@ -15,6 +15,7 @@
 #include <Aft2d_AltrOptNodeSurface_NelderMead.hxx>
 #include <Aft2d_AltrOptNodeSurface_PerpenDir.hxx>
 #include <Aft2d_AltrOptNodeSurface_SubTri.hxx>
+#include <Aft2d_AltrOptNodeSurface_SubTri2.hxx>
 #include <Aft2d_EdgeSurface.hxx>
 #include <Aft2d_OptNodeAnIso_nonIterAdaptiveInfo.hxx>
 #include <Aft_Tools.hxx>
@@ -66,6 +67,7 @@
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <NumAlg_NelderMeadInfo.hxx>
 #include <NumAlg_NewtonSolver_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 
 #include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
@@ -77,6 +79,7 @@
 #include <Geom_BSplineSurface.hxx>
 #include <Geom_Surface.hxx>
 #include <Geom_Plane.hxx>
+#include <Precision.hxx>
 
 #include <Cad_gApprxParaPlane.hxx>
 
@@ -229,6 +232,7 @@ namespace tnbLib
 		alg->LoadBoundaryEdges(theBoundaries);
 		alg->LoadNodeCalculator(theCalculator);
 
+		alg->SetMinDistFactor(0.4);
 		//Aft2d_gModelSurface::ALLOWED_MAX_LEVEL_GENERATION = 30;
 		{// timer scope [3/12/2022 Amir]
 			Global_Timer timer;
@@ -261,6 +265,7 @@ namespace tnbLib
 		alg->LoadBoundaryEdges(theBoundaries);
 		alg->LoadNodeCalculator(theCalculator);
 
+		alg->SetMinDistFactor(0.4);
 		{// timer scope [3/12/2022 Amir]
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_s);
@@ -332,6 +337,7 @@ namespace tnbLib
 			auto metricFun = std::make_shared<GeoMetricFun2d_Plane>(gPlane, box);
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurfaceUniMetric>(sizeFun, metricFun, theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
+			metricPrcsr->SetGeometry(geometry);
 
 			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(theUniMetricCalculator))
 			{
@@ -372,7 +378,7 @@ namespace tnbLib
 		{
 
 			{
-				auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
+				auto pln = GModel_Tools::GetParaPlane(theSurface, Precision::PConfusion());
 
 				auto plnRegion = Aft2d_gRegionPlaneSurface::MakePlane(pln);
 
@@ -390,6 +396,7 @@ namespace tnbLib
 				auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(geometry, box);
 				auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(sizeFun, metricFun, theInfo);
 				metricPrcsr->SetDimSize(box.Diameter());
+				metricPrcsr->SetGeometry(geometry);
 
 				if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_Altr>(theCalculator))
 				{
@@ -839,15 +846,21 @@ namespace tnbLib
 		anIsoOptNode_altrAlg->SetIterInfo(iterInfo);
 		anIsoOptNode_altrAlg->SetMaxLev(5);*/
 
-		/*auto nelderInfo = std::make_shared<NumAlg_NelderMeadInfo>();
+		auto nelderInfo = std::make_shared<NumAlg_NelderMeadInfo>();
 		nelderInfo->SetMaxNbIterations(50);
 		nelderInfo->SetTolerance(1.0E-3);
 
-		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_NelderMead>();
+		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_NelderMead>();
 		anIsoOptNode_altrAlg->SetInfo(nelderInfo);*/
 
+		auto bisectInfo = std::make_shared<NumAlg_BisectionSolver_Info>();
+		bisectInfo->SetDelta(1.0E-4);
+		bisectInfo->SetTolerance(1.0E-4);
+		bisectInfo->SetMaxIterations(20);
+
 		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_SubTri>();
-		anIsoOptNode_altrAlg->SetInfo(iterInfo);
+		anIsoOptNode_altrAlg->SetSizeCorrInfo(iterInfo);
+		anIsoOptNode_altrAlg->SetNealderMeadInfo(nelderInfo);
 		anIsoOptNode_altrAlg->SetMaxLev(3);
 
 		auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_Altr>(anIsoOptNode_altrAlg, iterInfo);
@@ -870,26 +883,44 @@ namespace tnbLib
 		
 		mySoluData->TrisRef().clear();
 
+		std::vector<std::shared_ptr<GModel_Surface>> triSurfaces;
+		Standard_Integer nbSurfaces = 0;
 		for (const auto& x : model->Surfaces())
 		{
+			//const TopoDS_Face& face = x->Face();
+			//std::cout << face.IsNull() << std::endl;
+			Debug_Null_Pointer(x);
+			/*if (x->Face().IsNull())
+			{
+				continue;
+			}*/
+			
+			if (Cad_Tools::HasTriangulation(x->Face()))
+			{
+				triSurfaces.push_back(x);
+				x->SetIndex(++nbSurfaces);
+			}
+		}
 
+		for (const auto& x : triSurfaces)
+		{
 			Debug_Null_Pointer(x);
 			if (verbose)
 			{
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			if (x->Index() NOT_EQUAL 9)
+			/*if (x->Index() NOT_EQUAL 36)
 			{
 				continue;
-			}
+			}*/
 			/*if (x->Index() > 24)
 			{
 				continue;
 			}*/
 
 			const TopoDS_Face& face = x->Face();
-			
+\
 			try
 			{
 				auto plnMesh = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metricPrcsrInfo);
