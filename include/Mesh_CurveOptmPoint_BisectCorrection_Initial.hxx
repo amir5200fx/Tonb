@@ -43,6 +43,7 @@ namespace tnbLib
 		// results [6/8/2022 Amir]
 
 		std::pair<Standard_Real, Standard_Real> theBound_;
+		Standard_Boolean IsConverged_;
 
 
 		auto& BoundRef()
@@ -70,6 +71,7 @@ namespace tnbLib
 			, theCurve_(theCurve)
 			, theLen_(1.0)
 			, theMaxLevel_(DEFAULT_MAX_LEVEL)
+			, IsConverged_(Standard_False)
 		{}
 
 
@@ -103,6 +105,11 @@ namespace tnbLib
 		const auto& Bound() const
 		{
 			return theBound_;
+		}
+
+		auto IsConverged() const
+		{
+			return IsConverged_;
 		}
 
 		void Perform();

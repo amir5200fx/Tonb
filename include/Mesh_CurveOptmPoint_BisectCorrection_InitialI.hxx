@@ -15,38 +15,53 @@ inline void tnbLib::Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, Met
 	if (Correct < Umin) Correct = Umin;
 	if (Correct > Umax) Correct = Umax;
 
-	Standard_Boolean setX0 = Standard_False;
-	Standard_Boolean setX1 = Standard_False;
 	Standard_Real x0 = 0;
 	Standard_Real x1 = 0;
 
-	forThose(Iter, 1, MaxLevel())
+	Standard_Boolean converged = Standard_False;
+	auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
+	if (dis > 1.0)
 	{
-		auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
-		if (dis < 1.0)
+		x1 = Correct;
+		auto du = x1 - Umin;
+		forThose(Iter, 1, MaxLevel())
 		{
-			setX0 = Standard_True;
-			x0 = Correct;
-		}
-		if (dis > 1.0)
-		{
-			setX1 = Standard_True;
-			x1 = Correct;
-		}
-		auto du = (Correct - Umin) / dis;
-
-		Correct = Umin + du;
-
-		if (Correct < Umin) Correct = Umin;
-		if (Correct > Umax) Correct = Umax;
-
-		if (setX0 AND setX1)
-		{
-			break;
+			du *= 0.5;
+			x0 = Umin + du;
+			auto dis1 = map.CalcUnitDistance(P0, curve.Value(x0)) / Len();
+			if (dis1 < 1.0)
+			{
+				converged = Standard_True;
+				break;
+			}
 		}
 	}
+	else if (dis < 1.0)
+	{
+		x0 = Correct;
+		auto du = x0 - Umin;
+		forThose(Iter, 1, MaxLevel())
+		{
+			du *= 2.0;
+			x1 = Umin + du;
+			if (x1 > Umax) x1 = Umax;
+			auto dis1 = map.CalcUnitDistance(P0, curve.Value(x1)) / Len();
+			if (dis1 > 1.0)
+			{
+				converged = Standard_True;
+				break;
+			}
+		}
+	}
+	else
+	{
+		x0 = x1 = Guess();
+		converged = Standard_True;
+	}
+
 	auto t = std::make_pair(x0, x1);
 	BoundRef() = std::move(t);
+	IsConverged_ = converged;
 
 	Change_IsDone() = Standard_True;
 }

@@ -22,11 +22,7 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies()
 	for (const auto& x : boundaries)
 	{
 		Debug_Null_Pointer(x);
-		if (x->CharLength() > 0)
-		{
-			modified.push_back(x);
-		}
-		else if (x->IsGap())
+		if (x->IsGap())
 		{
 			auto gapEdge = std::dynamic_pointer_cast<Aft2d_gSegmentGapEdgeUniMetric>(x);
 			Debug_Null_Pointer(gapEdge);
@@ -37,9 +33,10 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies()
 		}
 		else
 		{
-			FatalErrorIn(FunctionSIG)
+			modified.push_back(x);
+			/*FatalErrorIn(FunctionSIG)
 				<< "under uniform metric situation, zero characteristic length has been detected." << endl
-				<< abort(FatalError);
+				<< abort(FatalError);*/
 			/*x->SingularityContraction(*MetricProcessor());
 
 			if (NOT contracted) contracted = Standard_True;*/
@@ -106,12 +103,15 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurfaceUniMetric::UpdateFront()
 		Debug_Null_Pointer(n0);
 
 		const auto& edges = n0->RetrieveBoundaryEdges();
+
 		auto Iter = edges.begin();
+		Debug_Null_Pointer(Iter->second.lock());
 		auto M = Iter->second.lock()->EffectiveMetric();
 		Iter++;
 
 		while (Iter NOT_EQUAL edges.end())
 		{
+			Debug_Null_Pointer(Iter->second.lock());
 			const auto& Mi = Iter->second.lock()->EffectiveMetric();
 			if (M.Determinant() < Mi.Determinant())
 			{

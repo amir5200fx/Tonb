@@ -114,7 +114,7 @@ void tnbLib::Aft2d_gSegmentEdgeUniMetric::MergeDangles
 		const auto cn0 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e0.Node1());
 		const auto cn1 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e1.Node0());
 
-		if (cn0 AND cn1)
+		if (cn0->IsRegular() AND cn1->IsRegular())
 		{
 			auto node =
 				Aft2d_gCornerNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
@@ -199,7 +199,7 @@ void tnbLib::Aft2d_gSegmentEdgeUniMetric::MergeDangles
 	const auto cn0 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e0.Node1());
 	const auto cn1 = std::dynamic_pointer_cast<Aft2d_gCornerNodeUniMetric>(e1.Node0());
 
-	if (cn0 AND cn1)
+	if (cn0->IsRegular() AND cn1->IsRegular())
 	{
 		auto node =
 			Aft2d_gCornerNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);

@@ -322,9 +322,14 @@ namespace tnbLib
 
 		std::vector<std::vector<std::shared_ptr<Aft2d_ElementSurface>>> meshes;
 
+		/*std::cout << std::endl;
+		std::cout << " - Is Plane? " << (GModel_Tools::IsPlane(theSurface) ? "YES" : "NO") << std::endl;
+		std::cout << std::endl;*/
+
 		if (GModel_Tools::IsPlane(theSurface))
 		{
-			auto pln = GModel_Tools::GetParaPlane(theSurface, tol);
+			auto pln = GModel_Tools::GetParaPlane(theSurface, Precision::PConfusion());
+			//std::cout << " the plane is created." << std::endl;
 			auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
 
 			auto gPlane = Handle(Geom_Plane)::DownCast(geometry);
@@ -352,13 +357,14 @@ namespace tnbLib
 
 			auto plnRegion = Aft2d_gRegionPlaneSurfaceUniMetric::MakePlane(pln);
 
+			Aft2d_gBoundaryOfPlaneSurfaceUniMetric::verbose = 1;
 			auto bnd = std::make_shared<Aft2d_gBoundaryOfPlaneSurfaceUniMetric>(theBndInfo);
 			bnd->LoadMetricProcessor(metricPrcsr);
 			bnd->LoadPlane(plnRegion);
 
 			theBndInfo->SetMergeTolerance(tol);  // added to adapt the merging tolerance [5/16/2022 Amir]
-
 			bnd->Perform();
+
 			if (NOT bnd->IsDone())
 			{
 				FatalErrorIn(FunctionSIG)
@@ -367,7 +373,17 @@ namespace tnbLib
 			}
 
 			const auto& boundaries = bnd->Boundaries();
+			/*{
+				auto upBnds = Global_Tools::UpCast<Aft2d_gSegmentEdgeUniMetric, Aft2d_EdgeSurface>(boundaries);
+				auto nodes = Aft_Tools::RetrieveNodes(upBnds);
+				auto pts = Aft_Tools::RetrieveGeometry(nodes);
+				auto inds = Aft_Tools::RetrieveEdgeConnectivities(upBnds);
+				auto chain = Entity2d_Chain(std::move(pts), std::move(inds));
+				auto mm = Geo_Tools::Triangulation(chain);
 
+				file::SaveTo(mm, "boundaryMesh" + Entity2d_Triangulation::extension, 1);
+				std::exit(0);
+			}*/
 			Aft_Tools::Connect(boundaries);
 
 			auto elements = mesh(metricPrcsr, theUniMetricCalculator, Aft_Tools::UpCast(boundaries));
@@ -379,7 +395,7 @@ namespace tnbLib
 
 			{
 				auto pln = GModel_Tools::GetParaPlane(theSurface, Precision::PConfusion());
-
+				std::cout << " the plane is created." << std::endl;
 				auto plnRegion = Aft2d_gRegionPlaneSurface::MakePlane(pln);
 
 				auto singAlg = std::make_shared<Cad_gCommonSingularity>();
@@ -910,7 +926,7 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 36)
+			/*if (x->Index() NOT_EQUAL 21)
 			{
 				continue;
 			}*/

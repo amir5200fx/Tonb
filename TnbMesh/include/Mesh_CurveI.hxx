@@ -75,7 +75,7 @@ namespace tnbLib
 				"the application algorithm has not been performed!");
 
 			const auto[x0, x1] = initial.Bound();
-			if (x0 IS_EQUAL x1)
+			if (NOT initial.IsConverged())
 			{
 				FatalErrorIn(FunctionSIG)
 					<< "Can not Calculate parameter of the curve" << endl
@@ -87,10 +87,14 @@ namespace tnbLib
 
 			Mesh_CurveOptmPoint_BisectCorrection<gCurveType, MetricPrcsrType>
 				correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo());
-
+			/*std::cout << "bisection..." << std::endl;
+			std::cout << " - U0: " << theU0 << std::endl;
+			std::cout << " - guess: " << theGuess << std::endl;
+			std::cout << " - x0: " << x0 << std::endl;
+			std::cout << " - x1: " << x1 << std::endl;*/
 			correction.SetLen(theStep);
 			correction.Perform();
-
+			//std::cout << "bisection is performed" << std::endl;
 			Debug_If_Condition_Message(NOT correction.IsDone(),
 				"mesh_curveoptpoint_correction algorithm has not been performed!");
 
@@ -102,7 +106,7 @@ namespace tnbLib
 				<< " - Corrected: " << corrected << endl
 				<< abort(FatalError);*/
 			corrected = correction.Corrected();
-
+			//std::cout << " - corrected: " << corrected << std::endl;
 			goto iterationAlg;
 
 			/*if (theLevel > theMaxLevel)

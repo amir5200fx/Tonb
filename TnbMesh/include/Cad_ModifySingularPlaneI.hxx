@@ -327,7 +327,7 @@ inline void tnbLib::Cad_ModifySingularPlane<SurfType>::RemoveOutOfBoundaryHorizo
 			}
 		}
 	}
-	PAUSE;
+
 	if (removeList.empty())
 	{
 		return;
