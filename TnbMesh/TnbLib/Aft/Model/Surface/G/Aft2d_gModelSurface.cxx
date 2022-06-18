@@ -342,8 +342,9 @@ void tnbLib::Aft2d_gModelSurface::CheckSelfIntersection()
 		RetrieveLocalFrontEntities(items, locals);
 
 		for (const auto& l : locals)
-		{
+		{		
 			Debug_Null_Pointer(l);
+			if (x IS_EQUAL l) continue;
 			if (Aft_Tools::IsIntersect(*x, *l))
 			{
 				FatalErrorIn(FunctionSIG)

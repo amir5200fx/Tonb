@@ -395,7 +395,7 @@ namespace tnbLib
 
 			{
 				auto pln = GModel_Tools::GetParaPlane(theSurface, Precision::PConfusion());
-				std::cout << " the plane is created." << std::endl;
+
 				auto plnRegion = Aft2d_gRegionPlaneSurface::MakePlane(pln);
 
 				auto singAlg = std::make_shared<Cad_gCommonSingularity>();
@@ -888,7 +888,9 @@ namespace tnbLib
 		metricPrcsrInfo->SetTolerance(0.001);  // default: 0.0025 [5/24/2022 Amir]
 		metricPrcsrInfo->OverrideIntegInfo(integInfo);
 		
-		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetMaxIterations(50);
+		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetMaxIterations(150);
+		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetUnderRelaxation(0.85);
+		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetTolerance(0.0005);
 		//mySoluData->GlobalCurveInfo()->SetIgnoreNonConvergency(Standard_True);
 		mySoluData->GlobalCurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
 		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
@@ -926,7 +928,23 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 21)
+			/*if (x->Index() NOT_EQUAL 15)
+			{
+				continue;
+			}*/
+			/*if (x->Index() IS_EQUAL 13)
+			{
+				continue;
+			}
+			if (x->Index() IS_EQUAL 31)
+			{
+				continue;
+			}
+			if (x->Index() IS_EQUAL 32)
+			{
+				continue;
+			}
+			if (x->Index() IS_EQUAL 44)
 			{
 				continue;
 			}*/
@@ -936,6 +954,9 @@ namespace tnbLib
 			}*/
 
 			const TopoDS_Face& face = x->Face();
+
+			/*auto ff = GModel_Tools::GetSurface(face);
+			std::exit(1);*/
 \
 			try
 			{
@@ -1034,7 +1055,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 	FatalConvError.throwExceptions();
 
 	if (argc <= 1)

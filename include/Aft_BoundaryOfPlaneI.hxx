@@ -447,10 +447,12 @@ namespace tnbLib
 
 		bndType::ActiveBoundaryEdges(bndType::UpCast(boundaries));
 
-		if (NOT Checked)
+		/*if (NOT Checked)
 		{
 			RemoveDegeneracies();
-		}
+		}*/
+
+		RemoveDegeneracies();
 
 		if (verbose)
 		{

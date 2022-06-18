@@ -399,10 +399,12 @@ void tnbLib::Aft2d_gBoundaryOfPlaneSurface::Perform()
 
 	bndType::ActiveBoundaryEdges(bndType::UpCast(boundaries));
 
-	if (NOT Checked)
+	/*if (NOT Checked)
 	{
 		RemoveDegeneracies();
-	}
+	}*/
+
+	RemoveDegeneracies();
 
 	if (verbose)
 	{

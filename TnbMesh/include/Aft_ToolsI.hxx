@@ -251,6 +251,7 @@ tnbLib::Aft_Tools::IsIntersect
 	if (Geo_Tools::HasIntersection_cgal(n0->Coord(), n1->Coord(), q0->Coord(), q1->Coord()))
 	{
 		return Standard_True;
+
 	}
 	return Standard_False;
 }

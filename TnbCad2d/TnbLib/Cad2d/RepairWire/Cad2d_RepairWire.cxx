@@ -335,6 +335,13 @@ void tnbLib::Cad2d_RepairWire::Perform()
 		}
 	}
 
+	/*OFstream myFile("curves2d.plt");
+	for (const auto& x : theCurves_)
+	{
+		Pln_CurveTools::ExportToPlt(x, myFile, 20);
+	}
+	std::exit(1);*/
+
 	if (curves.empty())
 	{
 		FatalErrorIn(FunctionSIG)

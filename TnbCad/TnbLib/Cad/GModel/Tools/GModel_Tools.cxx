@@ -208,9 +208,19 @@ tnbLib::GModel_Tools::GetEdge
 		pCurve = Pln_Tools::ConvertToTrimmedCurve(pCurve, u0, u1);
 	}
 
+	if (pCurve->FirstParameter() NOT_EQUAL u0 OR pCurve->LastParameter() NOT_EQUAL u1)
+	{
+		pCurve = Pln_Tools::ConvertToTrimmedCurve(pCurve, u0, u1);
+	}
+
 	if (Curve)
 	{
 		if (NOT Cad_Tools::IsBounded(Curve))
+		{
+			Curve = Cad_Tools::ConvertToTrimmed(Curve, U0, U1);
+		}
+
+		if (Curve->FirstParameter() NOT_EQUAL U0 OR Curve->LastParameter() NOT_EQUAL U1)
 		{
 			Curve = Cad_Tools::ConvertToTrimmed(Curve, U0, U1);
 		}
