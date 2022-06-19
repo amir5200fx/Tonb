@@ -10,6 +10,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [6/19/2022 Amir]
+	class NumAlg_AdaptiveInteg_Info;
+
 	template<class gCurveType, class MetricPrcsrType = void>
 	class Mesh_CurveOptmPoint_BisectCorrection
 		: public Global_Done
@@ -20,6 +23,7 @@ namespace tnbLib
 
 		typedef Mesh_CurveEntity<gCurveType, MetricPrcsrType> entity;
 		typedef NumAlg_BisectionSolver_Info info;
+		typedef NumAlg_AdaptiveInteg_Info integInfo;
 	
 
 	private:
@@ -37,15 +41,19 @@ namespace tnbLib
 			Standard_Real theU0_;
 			Standard_Real theLen_;
 
+			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo_;
+
 			Mesh_CurveOptmPoint_BisectCorrection_Function
 			(
 				const entity& theCurve, 
 				const Standard_Real theU0, 
-				const Standard_Real theLen
+				const Standard_Real theLen,
+				const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 			)
 				: theCurve_(theCurve)
 				, theU0_(theU0)
 				, theLen_(theLen)
+				, theInfo_(theInfo)
 			{}
 
 			Standard_Real Value(const Standard_Real x) const override;
@@ -64,9 +72,15 @@ namespace tnbLib
 			const Standard_Real theGuess0,
 			const Standard_Real theGuess1,
 			const entity& theCurve,
-			const std::shared_ptr<info>& theInfo
+			const std::shared_ptr<info>& theInfo,
+			const std::shared_ptr<integInfo>& theIntegInfo
 		)
-			: Mesh_CurveOptmPoint_BisectCorrection_Base(theU0, theGuess0, theGuess1, theInfo)
+			: Mesh_CurveOptmPoint_BisectCorrection_Base
+			(
+				theU0, theGuess0, 
+				theGuess1,
+				theInfo, theIntegInfo
+			)
 			, theCurve_(theCurve)
 		{}
 

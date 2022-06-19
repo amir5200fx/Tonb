@@ -68,7 +68,7 @@ namespace tnbLib
 			Debug_Null_Pointer(theInfo.CorrInfo());
 
 			Mesh_CurveOptmPoint_Correction<Geom_Curve> 
-				correction(theU0, theGuess, theCurve, *theInfo.CorrInfo());
+				correction(theU0, theGuess, theCurve, *theInfo.CorrInfo(), theInfo.IterIntgInfo());
 			correction.Perform();
 
 			Debug_If_Condition_Message(NOT correction.IsDone(),

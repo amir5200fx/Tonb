@@ -5,6 +5,7 @@
 #include <Global_Done.hxx>
 #include <Mesh_CurveEntity.hxx>
 #include <NumAlg_BisectionSolver_Info.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
 
 #include <memory>
 
@@ -17,6 +18,7 @@ namespace tnbLib
 	public:
 
 		typedef NumAlg_BisectionSolver_Info info;
+		typedef NumAlg_AdaptiveInteg_Info integInfo;
 
 	private:
 
@@ -30,6 +32,7 @@ namespace tnbLib
 		Standard_Real theLen_;
 
 		const std::shared_ptr<info>& theInfo_;
+		const std::shared_ptr<integInfo>& theIntegInfo_;
 
 
 	protected:
@@ -44,12 +47,14 @@ namespace tnbLib
 			const Standard_Real theU0,
 			const Standard_Real theGuess0,
 			const Standard_Real theGuess1,
-			const std::shared_ptr<info>& theInfo
+			const std::shared_ptr<info>& theInfo,
+			const std::shared_ptr<integInfo>& theIntegInfo
 		)
 			: theU0_(theU0)
 			, theGuess0_(theGuess0)
 			, theGuess1_(theGuess1)
 			, theInfo_(theInfo)
+			, theIntegInfo_(theIntegInfo)
 			, theCorrected_(0)
 			, theLen_(1.0)
 		{}
@@ -88,6 +93,11 @@ namespace tnbLib
 		const auto& Info() const
 		{
 			return theInfo_;
+		}
+
+		const auto& IntegInfo() const
+		{
+			return theIntegInfo_;
 		}
 
 		auto Corrected() const

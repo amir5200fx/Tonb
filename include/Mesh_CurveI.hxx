@@ -54,7 +54,7 @@ namespace tnbLib
 		try
 		{
 			Mesh_CurveOptmPoint_Correction<gCurveType, MetricPrcsrType>
-				correction(theU0, theGuess, theCurve, *theInfo.CorrAlgInfo());
+				correction(theU0, theGuess, theCurve, *theInfo.CorrAlgInfo(), theInfo.NewtonIntgInfo());
 
 			correction.SetLen(theStep);
 			correction.Perform();
@@ -66,8 +66,9 @@ namespace tnbLib
 		catch (const ConvError&)
 		{
 			Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, MetricPrcsrType>
-				initial(theU0, theGuess, theCurve);
+				initial(theU0, theGuess, theCurve, theInfo.OverallLengthIntgInfo());
 
+			//initial.SetMaxLevel(25);
 			initial.SetLen(theStep);
 			initial.Perform();
 
@@ -75,6 +76,12 @@ namespace tnbLib
 				"the application algorithm has not been performed!");
 
 			const auto[x0, x1] = initial.Bound();
+			if (x0 IS_EQUAL x1 AND initial.IsConverged())
+			{
+				corrected = x0;
+				goto iterationAlg;
+			}
+
 			if (NOT initial.IsConverged())
 			{
 				FatalErrorIn(FunctionSIG)
@@ -85,7 +92,7 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 			Mesh_CurveOptmPoint_BisectCorrection<gCurveType, MetricPrcsrType>
-				correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo());
+				correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo(), theInfo.OverallLengthIntgInfo());
 			/*std::cout << "bisection..." << std::endl;
 			std::cout << " - U0: " << theU0 << std::endl;
 			std::cout << " - guess: " << theGuess << std::endl;

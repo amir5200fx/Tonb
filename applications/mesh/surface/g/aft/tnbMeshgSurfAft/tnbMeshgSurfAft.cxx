@@ -928,7 +928,7 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 1)
+			/*if (x->Index() NOT_EQUAL 6)
 			{
 				continue;
 			}*/

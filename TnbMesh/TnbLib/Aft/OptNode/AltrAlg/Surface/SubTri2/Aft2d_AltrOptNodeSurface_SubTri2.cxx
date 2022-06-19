@@ -45,86 +45,86 @@ tnbLib::Aft2d_AltrOptNodeSurface_SubTri2::Iter
 	return std::move(t);
 }
 
-void tnbLib::Aft2d_AltrOptNodeSurface_SubTri2::Perform()
-{
-	std::cout << "Altering..." << std::endl;
-	std::cout << std::endl;
-	Debug_Null_Pointer(SizeCorrInfo());
-	Debug_Null_Pointer(BisectInfo());
-	Debug_Null_Pointer(Front());
-	Debug_Null_Pointer(MetricMap());
-	Debug_If_Condition(ElmSize() <= gp::Resolution());
-
-	const auto& centre = Front()->Centre();
-
-	const auto& node0 = Front()->Node0();
-	const auto& node1 = Front()->Node1();
-	Debug_Null_Pointer(node0);
-	Debug_Null_Pointer(node1);
-
-	const auto& v0 = node0->Coord();
-	const auto& v1 = node1->Coord();
-
-	CorrectedRef() = P0();
-	Standard_Real H = 1.0;
-
-	for (auto iter = 1; iter <= MaxLevel(); iter++)
-	{
-		auto denom = std::pow(2.0, (Standard_Real)(iter + 1));
-		auto h = std::sqrt(1.0 / (denom*denom) + 0.75)*H;
-
-		auto t = std::pow(2.0, (Standard_Real)iter);
-		auto V0 = centre + (v0 - centre)*t;
-		auto V1 = centre + (v1 - centre)*t;
-
-		auto[d0, d1, converged] = Iter(centre, V0, V1, h);
-
-		if (std::abs(d0 - d1) / std::max(d0, d1) <= Tolerance())
-		{
-			break;
-		}
-	}
-
-	{
-		static const Standard_Real C = 0.86602540378443864676372317075294;
-		auto[Q0, Q1, cond] = Aft_OptNode_Tools::BisectInitialGuess(*MetricMap(), centre, CorrectedRef(), C, 10);
-		if (NOT cond)
-		{
-			CorrectedRef() = P0();
-			IsConvergedRef() = Standard_False;
-		}
-		else
-		{
-			if (Q0.Distance(Q1) IS_EQUAL 0)
-			{
-				CorrectedRef() = Q0;
-				IsConvergedRef() = Standard_True;
-			}
-			else
-			{
-				std::cout << " bisect correction" << std::endl;
-				auto curve = Pln_CurveTools::MakeSegment(Q0, Q1);
-				Mesh_CurveEntity<Geom2d_Curve, Aft2d_MetricPrcsrSurface> 
-					entity
-					(
-						*curve,
-						*MetricMap(),
-						curve->FirstParameter(),
-						curve->LastParameter()
-					);
-				auto u0 = curve->FirstParameter();
-				Mesh_CurveOptmPoint_BisectCorrection<Geom2d_Curve, Aft2d_MetricPrcsrSurface>
-					correction(u0, u0, curve->LastParameter(), entity, BisectInfo());
-
-				correction.SetLen(C);
-				correction.Perform();
-				std::cout << " bisect correction is done!" << std::endl;
-				std::cout << "hh=" << MetricMap()->CalcUnitDistance(centre, curve->Value(correction.Corrected())) << std::endl;
-				CorrectedRef() = curve->Value(correction.Corrected());
-				IsConvergedRef() = Standard_True;
-			}
-		}
-	}
-	
-	Change_IsDone() = Standard_True;
-}
+//void tnbLib::Aft2d_AltrOptNodeSurface_SubTri2::Perform()
+//{
+//	std::cout << "Altering..." << std::endl;
+//	std::cout << std::endl;
+//	Debug_Null_Pointer(SizeCorrInfo());
+//	Debug_Null_Pointer(BisectInfo());
+//	Debug_Null_Pointer(Front());
+//	Debug_Null_Pointer(MetricMap());
+//	Debug_If_Condition(ElmSize() <= gp::Resolution());
+//
+//	const auto& centre = Front()->Centre();
+//
+//	const auto& node0 = Front()->Node0();
+//	const auto& node1 = Front()->Node1();
+//	Debug_Null_Pointer(node0);
+//	Debug_Null_Pointer(node1);
+//
+//	const auto& v0 = node0->Coord();
+//	const auto& v1 = node1->Coord();
+//
+//	CorrectedRef() = P0();
+//	Standard_Real H = 1.0;
+//
+//	for (auto iter = 1; iter <= MaxLevel(); iter++)
+//	{
+//		auto denom = std::pow(2.0, (Standard_Real)(iter + 1));
+//		auto h = std::sqrt(1.0 / (denom*denom) + 0.75)*H;
+//
+//		auto t = std::pow(2.0, (Standard_Real)iter);
+//		auto V0 = centre + (v0 - centre)*t;
+//		auto V1 = centre + (v1 - centre)*t;
+//
+//		auto[d0, d1, converged] = Iter(centre, V0, V1, h);
+//
+//		if (std::abs(d0 - d1) / std::max(d0, d1) <= Tolerance())
+//		{
+//			break;
+//		}
+//	}
+//
+//	{
+//		static const Standard_Real C = 0.86602540378443864676372317075294;
+//		auto[Q0, Q1, cond] = Aft_OptNode_Tools::BisectInitialGuess(*MetricMap(), centre, CorrectedRef(), C, 10);
+//		if (NOT cond)
+//		{
+//			CorrectedRef() = P0();
+//			IsConvergedRef() = Standard_False;
+//		}
+//		else
+//		{
+//			if (Q0.Distance(Q1) IS_EQUAL 0)
+//			{
+//				CorrectedRef() = Q0;
+//				IsConvergedRef() = Standard_True;
+//			}
+//			else
+//			{
+//				std::cout << " bisect correction" << std::endl;
+//				auto curve = Pln_CurveTools::MakeSegment(Q0, Q1);
+//				Mesh_CurveEntity<Geom2d_Curve, Aft2d_MetricPrcsrSurface> 
+//					entity
+//					(
+//						*curve,
+//						*MetricMap(),
+//						curve->FirstParameter(),
+//						curve->LastParameter()
+//					);
+//				auto u0 = curve->FirstParameter();
+//				Mesh_CurveOptmPoint_BisectCorrection<Geom2d_Curve, Aft2d_MetricPrcsrSurface>
+//					correction(u0, u0, curve->LastParameter(), entity, BisectInfo());
+//
+//				correction.SetLen(C);
+//				correction.Perform();
+//				std::cout << " bisect correction is done!" << std::endl;
+//				std::cout << "hh=" << MetricMap()->CalcUnitDistance(centre, curve->Value(correction.Corrected())) << std::endl;
+//				CorrectedRef() = curve->Value(correction.Corrected());
+//				IsConvergedRef() = Standard_True;
+//			}
+//		}
+//	}
+//	
+//	Change_IsDone() = Standard_True;
+//}

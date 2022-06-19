@@ -6,6 +6,8 @@
 #include <Mesh_CurveEntity.hxx>
 #include <Global_Done.hxx>
 
+#include <memory>
+
 namespace tnbLib
 {
 
@@ -21,6 +23,9 @@ namespace tnbLib
 
 		static TnbGeo_EXPORT const Standard_Integer DEFAULT_MAX_LEVEL;
 	};
+
+	// Forward Declarations [6/19/2022 Amir]
+	class NumAlg_AdaptiveInteg_Info;
 
 	template<class gCurveType, class MetricPrcsrType = void>
 	class Mesh_CurveOptmPoint_BisectCorrection_Initial
@@ -39,6 +44,8 @@ namespace tnbLib
 		const entity& theCurve_;
 
 		Standard_Integer theMaxLevel_;
+
+		std::shared_ptr<NumAlg_AdaptiveInteg_Info> theInfo_;
 
 		// results [6/8/2022 Amir]
 
@@ -64,11 +71,13 @@ namespace tnbLib
 		(
 			const Standard_Real theU0,
 			const Standard_Real theGuess,
-			const entity& theCurve
+			const entity& theCurve,
+			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo
 		)
 			: theU0_(theU0)
 			, theGuess_(theGuess)
 			, theCurve_(theCurve)
+			, theInfo_(theInfo)
 			, theLen_(1.0)
 			, theMaxLevel_(DEFAULT_MAX_LEVEL)
 			, IsConverged_(Standard_False)
@@ -100,6 +109,11 @@ namespace tnbLib
 		const auto& Entity() const
 		{
 			return theCurve_;
+		}
+
+		const auto& IntegInfo() const
+		{
+			return theInfo_;
 		}
 
 		const auto& Bound() const

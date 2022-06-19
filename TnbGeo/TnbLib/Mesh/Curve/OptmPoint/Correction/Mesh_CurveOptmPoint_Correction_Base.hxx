@@ -5,6 +5,9 @@
 #include <Global_Done.hxx>
 #include <Mesh_CurveEntity.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
+#include <NumAlg_AdaptiveInteg_Info.hxx>
+
+#include <memory>
 
 namespace tnbLib
 {
@@ -27,6 +30,7 @@ namespace tnbLib
 		Standard_Real theLen_;
 
 		const info& theInfo_;
+		const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theIntegInfo_;
 
 	protected:
 
@@ -40,11 +44,13 @@ namespace tnbLib
 		(
 			const Standard_Real theU0,
 			const Standard_Real theGuess,
-			const info& theInfo
+			const info& theInfo,
+			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theIntegInfo
 		)
 			: theU0_(theU0)
 			, theGuess_(theGuess)
 			, theInfo_(theInfo)
+			, theIntegInfo_(theIntegInfo)
 			, theCorrected_(0)
 			, theLen_(1.0)
 		{}
@@ -62,6 +68,11 @@ namespace tnbLib
 		const auto& Info() const
 		{
 			return theInfo_;
+		}
+
+		const auto& IntegInfo() const
+		{
+			return theIntegInfo_;
 		}
 
 		auto Corrected() const

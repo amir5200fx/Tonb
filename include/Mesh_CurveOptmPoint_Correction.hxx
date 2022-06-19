@@ -35,9 +35,10 @@ namespace tnbLib
 			const Standard_Real theU0,
 			const Standard_Real theGuess,
 			const entity& theCurve,
-			const info& theInfo
+			const info& theInfo,
+			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theIntegInfo
 		)
-			: Mesh_CurveOptmPoint_Correction_Base(theU0, theGuess, theInfo)
+			: Mesh_CurveOptmPoint_Correction_Base(theU0, theGuess, theInfo, theIntegInfo)
 			, theCurve_(theCurve)
 		{}
 
@@ -77,9 +78,10 @@ namespace tnbLib
 			const Standard_Real theU0,
 			const Standard_Real theGuess,
 			const entity& theCurve,
-			const info& theInfo
+			const info& theInfo,
+			const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theIntegInfo
 		)
-			: Mesh_CurveOptmPoint_Correction_Base(theU0, theGuess, theInfo)
+			: Mesh_CurveOptmPoint_Correction_Base(theU0, theGuess, theInfo, theIntegInfo)
 			, theCurve_(theCurve)
 		{}
 
