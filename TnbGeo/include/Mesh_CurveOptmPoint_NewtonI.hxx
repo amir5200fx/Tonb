@@ -22,7 +22,16 @@ namespace tnbLib
 			>
 			Iterator(fun, der, *theIter);
 
-		Iterator.Perform(theGuess);
+		try
+		{
+			Iterator.Perform(theGuess);
+		}
+		catch (const error&)
+		{
+			FatalConvErrorIn("Standard_Real Mesh_CurveIteration::Iteration()", theIter->NbIterations(), theIter->Tolerance())
+				<< " Something went wrong." << endl
+				<< abort(FatalConvError);
+		}
 
 		Debug_If_Condition_Message(NOT Iterator.IsDone(), "Newton's Algorithm is not performed");
 

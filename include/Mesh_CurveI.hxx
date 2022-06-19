@@ -84,7 +84,6 @@ namespace tnbLib
 					<< " - Corrected: " << corrected << endl
 					<< abort(FatalError);
 			}
-
 			Mesh_CurveOptmPoint_BisectCorrection<gCurveType, MetricPrcsrType>
 				correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo());
 			/*std::cout << "bisection..." << std::endl;
@@ -175,7 +174,6 @@ namespace tnbLib
 				theInfo.NewtonIntgInfo());
 			Debug_If_Condition_Message(NOT Iteration.IsDone(),
 				"mesh_curveoptpoint_newton algorithm has not been performed!");
-
 			return Iteration.Corrected();
 		}
 		catch (const ConvError&)

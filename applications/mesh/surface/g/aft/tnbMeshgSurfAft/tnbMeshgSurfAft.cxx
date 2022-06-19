@@ -928,7 +928,7 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 15)
+			/*if (x->Index() NOT_EQUAL 1)
 			{
 				continue;
 			}*/
@@ -1055,7 +1055,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	//FatalError.throwExceptions();
+	FatalError.throwExceptions();
 	FatalConvError.throwExceptions();
 
 	if (argc <= 1)
