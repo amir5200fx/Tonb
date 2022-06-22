@@ -14,13 +14,16 @@ class Poly_Triangulation;
 
 namespace tnbLib
 {
+	
+	// Forward Declarations [6/21/2022 Amir]
+	class Cad_GeomSurface;
 
 	class TModel_SurfaceGeometry
 	{
 
 		/*Private Data*/
 
-		Handle(Geom_Surface) theGeometry_;
+		std::shared_ptr<Cad_GeomSurface> theGeometry_;
 		Handle(Poly_Triangulation) theMesh_;
 
 		//TopoDS_Face theFace_;
@@ -36,13 +39,12 @@ namespace tnbLib
 
 		TModel_SurfaceGeometry()
 		{
-			theGeometry_.Nullify();
 			theMesh_.Nullify();
 		}
 
 		TModel_SurfaceGeometry
 		(
-			const Handle(Geom_Surface)& theGeometry
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry
 		)
 			: theGeometry_(theGeometry)
 		{
@@ -52,7 +54,7 @@ namespace tnbLib
 
 	public:
 
-		const auto& Geometry() const
+		const auto& GeomSurface() const
 		{
 			return theGeometry_;
 		}

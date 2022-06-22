@@ -1,48 +1,73 @@
 #include <TModel_Surface.hxx>
 
+#include <TModel_Tools.hxx>
 #include <TModel_Edge.hxx>
 #include <TModel_CmpEdge.hxx>
 #include <TModel_Wire.hxx>
 
+tnbLib::Entity2d_Box 
+tnbLib::TModel_Surface::CalcParametricBoundingBox() const
+{
+	auto wire = TModel_Wire::RetrieveParaWire(*theOuter_);
+	auto box = TModel_Tools::CalcBoundingBox(*wire);
+	return std::move(box);
+}
+
 tnbLib::TModel_Surface::TModel_Surface
 (
-	const Handle(Geom_Surface)& theGeometry, 
+	const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 	const outer & theOuter,
 	const inner & theInner
 )
-	: TModel_SurfaceGeometry(theGeometry)
+	: GModel_SurfaceGeometry(theGeometry)
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
+	theParaBoundingBox_ = CalcParametricBoundingBox();
+}
+
+tnbLib::TModel_Surface::TModel_Surface
+(
+	std::shared_ptr<Cad_GeomSurface>&& theGeometry,
+	outer && theOuter, 
+	inner && theInner
+)
+	: GModel_SurfaceGeometry(std::move(theGeometry))
+	, theOuter_(std::move(theOuter))
+	, theInner_(std::move(theInner))
+{
+	theParaBoundingBox_ = CalcParametricBoundingBox();
 }
 
 tnbLib::TModel_Surface::TModel_Surface
 (
 	const Standard_Integer theIndex,
-	const Handle(Geom_Surface)& theGeometry,
+	const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 	const outer & theOuter,
 	const inner & theInner
 )
-	: TModel_SurfaceGeometry(theGeometry)
+	: GModel_SurfaceGeometry(theGeometry)
 	, TModel_Entity(theIndex)
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
+	theParaBoundingBox_ = CalcParametricBoundingBox();
 }
 
 tnbLib::TModel_Surface::TModel_Surface
 (
 	const Standard_Integer theIndex,
 	const word& theName,
-	const Handle(Geom_Surface)& theGeometry,
+	const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 	const outer & theOuter,
 	const inner & theInner
 )
-	: TModel_SurfaceGeometry(theGeometry)
+	: GModel_SurfaceGeometry(theGeometry)
 	, TModel_Entity(theIndex, theName)
 	, theOuter_(theOuter)
 	, theInner_(theInner)
 {
+	theParaBoundingBox_ = CalcParametricBoundingBox();
 }
 
 Standard_Integer 
@@ -83,12 +108,12 @@ tnbLib::TModel_Surface::RetrieveEdges() const
 			<< abort(FatalError);
 	}
 
-	auto size = theOuter_->CmpEdge()->NbEdges();
+	auto size = theOuter_->NbEdges();
 	if (theInner_)
 	{
 		for (const auto& x : *theInner_)
 		{
-			size += x->CmpEdge()->NbEdges();
+			size += x->NbEdges();
 		}
 	}
 
@@ -102,8 +127,8 @@ tnbLib::TModel_Surface::RetrieveEdges() const
 	std::vector<std::shared_ptr<TModel_Edge>> edges;
 	edges.reserve(size);
 
-	Debug_Null_Pointer(theOuter_->CmpEdge());
-	const auto& OuterEdges = theOuter_->CmpEdge()->Edges();
+	Debug_Null_Pointer(theOuter_->Edges());
+	const auto& OuterEdges = *theOuter_->Edges();
 
 	for (const auto& x : OuterEdges)
 	{
@@ -118,8 +143,8 @@ tnbLib::TModel_Surface::RetrieveEdges() const
 	for (const auto& x : *theInner_)
 	{
 		Debug_Null_Pointer(x);
-		Debug_Null_Pointer(x->CmpEdge());
-		for (const auto& edge : x->CmpEdge()->Edges())
+		Debug_Null_Pointer(x->Edges());
+		for (const auto& edge : *x->Edges())
 		{
 			edges.push_back(edge);
 		}

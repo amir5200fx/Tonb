@@ -18,7 +18,7 @@ tnbLib::TModel_Plane::TModel_Plane
 )
 	: theOuter_(theOuter)
 	, theInner_(theInner)
-	, TModel_Entity(theIndex)
+	, Global_Indexed(theIndex)
 {
 }
 
@@ -31,7 +31,8 @@ tnbLib::TModel_Plane::TModel_Plane
 )
 	: theOuter_(theOuter)
 	, theInner_(theInner)
-	, TModel_Entity(theIndex, theName)
+	, Global_Indexed(theIndex)
+	, Global_Named(theName)
 {
 }
 
@@ -40,7 +41,7 @@ tnbLib::TModel_Plane::NbHoles() const
 {
 	if (HasHole())
 	{
-		return (Standard_Integer)Holes()->size();
+		return (Standard_Integer)InnerWires()->size();
 	}
 	return 0;
 }
@@ -60,11 +61,11 @@ void tnbLib::TModel_Plane::RetrieveWiresTo
 ) const
 {
 	theWires.reserve(1 + NbHoles());
-	theWires.push_back(Outer());
+	theWires.push_back(OuterWire());
 
-	if (Holes())
+	if (InnerWires())
 	{
-		for (const auto& x : *Holes())
+		for (const auto& x : *InnerWires())
 		{
 			theWires.push_back(x);
 		}

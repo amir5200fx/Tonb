@@ -2,10 +2,13 @@
 #ifndef _TModel_Plane_Header
 #define _TModel_Plane_Header
 
-#include <TModel_Entity.hxx>
-#include <OFstream.hxx>
+#include <Cad_Module.hxx>
+#include <Global_Indexed.hxx>
+#include <Global_Named.hxx>
 
 #include <vector>
+
+#include <OFstream.hxx>
 
 namespace tnbLib
 {
@@ -16,12 +19,17 @@ namespace tnbLib
 	class Cad_Tools;
 
 	class TModel_Plane
-		: public TModel_Entity
+		: public Global_Indexed
+		, public Global_Named
 	{
+
+	public:
 
 		typedef std::vector<std::shared_ptr<TModel_ParaWire>> wireList;
 		typedef std::shared_ptr<wireList> inner;
 		typedef std::shared_ptr<TModel_ParaWire> outer;
+
+	private:
 
 		friend Cad_Tools;
 
@@ -43,6 +51,7 @@ namespace tnbLib
 		TModel_Plane()
 		{}
 
+	public:
 
 		// constructors [1/5/2022 Amir]
 
@@ -67,8 +76,6 @@ namespace tnbLib
 			const inner& theInner = nullptr
 		);
 
-	public:
-
 
 		//- public functions and operators
 
@@ -84,12 +91,12 @@ namespace tnbLib
 
 		TnbCad_EXPORT Standard_Integer NbHoles() const;
 
-		const auto& Outer() const
+		const auto& OuterWire() const
 		{
 			return theOuter_;
 		}
 
-		const auto& Holes() const
+		const auto& InnerWires() const
 		{
 			return theInner_;
 		}
@@ -104,11 +111,7 @@ namespace tnbLib
 
 		//- Static functions and operators
 
-		static TnbCad_EXPORT std::shared_ptr<TModel_Plane>
-			MakePlane(const TModel_Surface& theSurface);
 	};
 }
-
-BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_Plane);
 
 #endif // !_TModel_Plane_Header
