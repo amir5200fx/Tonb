@@ -41,6 +41,8 @@ namespace tnbLib
 
 	public:
 
+		typedef GModel_ParaCurve paraCurveType;
+
 
 		//- constructors
 

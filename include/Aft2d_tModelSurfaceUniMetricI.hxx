@@ -32,6 +32,9 @@ namespace tnbLib
 	) const;
 
 	template<>
+	void TnbMesh_EXPORT Aft2d_tModelSurfaceUniMetric::CheckSelfIntersection();
+
+	template<>
 	static TnbMesh_EXPORT void Aft2d_tModelSurfaceUniMetric::ActiveFront
 	(
 		const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theFronts

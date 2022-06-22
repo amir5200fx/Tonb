@@ -2,47 +2,27 @@
 #ifndef _TModel_ParaCurve_Header
 #define _TModel_ParaCurve_Header
 
-#include <TModel_Entity.hxx>
-#include <Entity2d_BoxFwd.hxx>
-#include <OFstream.hxx>
-
-#include <Standard_Handle.hxx>
-
-#include <Geom2d_Curve.hxx>
+#include <Cad_ParaCurve.hxx>
 
 namespace tnbLib
 {
 
 	class TModel_ParaCurve
-		: public TModel_Entity
+		: public Cad_ParaCurve
 	{
 
 		/*Private Data*/
 
-		Handle(Geom2d_Curve) theGeometry_;
 
+		// private functions and operators [5/12/2022 Amir]
 
-		//- private functions and operators
+		friend class boost::serialization::access;
 
-		auto& ChangeGeometry()
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
 		{
-			return theGeometry_;
+			ar & boost::serialization::base_object<Cad_ParaCurve>(*this);
 		}
-
-		TnbCad_EXPORT void CheckBoundary
-		(
-			const Standard_Real x,
-			const char* theName
-		) const;
-
-		static TnbCad_EXPORT void CheckBounded
-		(
-			const Handle(Geom2d_Curve)& theCurve,
-			const char* theName
-		);
-
-
-		TNB_SERIALIZATION(TnbCad_EXPORT);
 
 
 	protected:
@@ -57,41 +37,71 @@ namespace tnbLib
 
 		typedef Geom2d_Curve geomType;
 
-		// constructors [1/5/2022 Amir]
+		//- constructors
 
-		TnbCad_EXPORT explicit TModel_ParaCurve
+		explicit TModel_ParaCurve
 		(
 			const Handle(Geom2d_Curve)& theGeometry
-		);
+		)
+			: Cad_ParaCurve(theGeometry)
+		{}
+
+		TModel_ParaCurve
+		(
+			const Standard_Integer theIndex,
+			const Handle(Geom2d_Curve)& theGeometry
+		)
+			: Cad_ParaCurve(theIndex, theGeometry)
+		{}
+
+		TModel_ParaCurve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			const Handle(Geom2d_Curve)& theGeometry
+		)
+			: Cad_ParaCurve(theIndex, theName, theGeometry)
+		{}
+
+		TModel_ParaCurve
+		(
+			Handle(Geom2d_Curve) && theGeometry
+		)
+			: Cad_ParaCurve(std::move(theGeometry))
+		{}
+
+		TModel_ParaCurve
+		(
+			const Standard_Integer theIndex,
+			Handle(Geom2d_Curve) && theGeometry
+		)
+			: Cad_ParaCurve(theIndex, std::move(theGeometry))
+		{}
+
+		TModel_ParaCurve
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Handle(Geom2d_Curve) && theGeometry
+		)
+			: Cad_ParaCurve(theIndex, theName, theGeometry)
+		{}
 
 
-		// public functions and operators [1/5/2022 Amir]
+		//- public functions and operators
 
-		TnbCad_EXPORT Standard_Real FirstParameter() const;
-		TnbCad_EXPORT Standard_Real LastParameter() const;
 
-		TnbCad_EXPORT Pnt2d Value(const Standard_Real x) const;
-		TnbCad_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
+		TnbCad_EXPORT std::shared_ptr<TModel_ParaCurve> Copy() const;
+		TnbCad_EXPORT std::shared_ptr<TModel_ParaCurve> Copy(const gp_Trsf2d&) const;
 
-		Pnt2d FirstCoord() const;
-		Pnt2d LastCoord() const;
-
-		TnbCad_EXPORT Entity2d_Box CalcBoundingBox() const;
-
-		const auto& Geometry() const
-		{
-			return theGeometry_;
-		}
-
-		TnbCad_EXPORT void Reverse();
-
-		//- IO functions and operators
-
-		//void ExportToPlt(OFstream& File) const;
+		static TnbCad_EXPORT std::pair<std::shared_ptr<TModel_ParaCurve>, std::shared_ptr<TModel_ParaCurve>>
+			Split
+			(
+				const Standard_Real thePar,
+				const std::shared_ptr<TModel_ParaCurve>&
+			);
 	};
 }
-
-#include <TModel_ParaCurveI.hxx>
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_ParaCurve);
 

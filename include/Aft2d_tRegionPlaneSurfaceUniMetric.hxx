@@ -5,6 +5,7 @@
 #include <Mesh_Module.hxx>
 #include <Mesh_RegionPlane.hxx>
 #include <Aft2d_tRegionPlaneSurfaceUniMetricFwd.hxx>
+#include <Aft2d_tPlnWireSurfaceUniMetricFwd.hxx>
 
 namespace tnbLib
 {
@@ -24,6 +25,14 @@ namespace tnbLib
 			TNB_oARCH_TYPE& ar,
 			const unsigned int file_version
 			);
+
+	// Forward Declarations [6/22/2022 Amir]
+	class TModel_ParaWire;
+
+	template<>
+	template<>
+	static TnbMesh_EXPORT std::shared_ptr<Aft2d_tPlnWireSurfaceUniMetric>
+		Aft2d_tRegionPlaneSurfaceUniMetric::MakeMeshWire<TModel_ParaWire>(const TModel_ParaWire&);
 }
 
 #endif // !_Aft2d_tRegionPlaneSurfaceUniMetric_Header
