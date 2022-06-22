@@ -4,5 +4,6 @@
 
 #include <Aft2d_LineNodeTemplate.hxx>
 #include <Aft2d_tSegmentLineNodeFwd.hxx>
+#include <Aft2d_tSegmentNode.hxx>
 
 #endif // !_Aft2d_tSegmentLineNode_Header

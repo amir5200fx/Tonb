@@ -21,7 +21,11 @@ namespace tnbLib
 			);
 
 	template<>
-	TnbMesh_EXPORT Entity2d_Box Aft2d_gPlnWireSurfaceUniMetric::CalcBoundingBox(const Aft2d_gPlnCurveSurfaceUniMetric&);
+	TnbMesh_EXPORT Entity2d_Box 
+		Aft2d_gPlnWireSurfaceUniMetric::CalcBoundingBox
+		(
+			const Aft2d_gPlnCurveSurfaceUniMetric&
+		);
 
 	template<>
 	template<>

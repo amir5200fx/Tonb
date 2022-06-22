@@ -5,6 +5,8 @@
 #include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_tCornerNode.hxx>
 #include <Aft2d_tSegmentNode.hxx>
+#include <Aft2d_tCornerGapNode.hxx>
+#include <Aft2d_tSegmentGapNode.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -71,6 +73,9 @@ tnbLib::Aft2d_tSegmentEdge::GetTopology
 	return std::move(edges);
 }
 
+#include <Aft2d_tCornerPoleNode.hxx>
+#include <Aft2d_tCornerLineNode.hxx>
+
 template<>
 void tnbLib::Aft2d_tSegmentEdge::MergeDangles
 (
@@ -89,44 +94,141 @@ void tnbLib::Aft2d_tSegmentEdge::MergeDangles
 		if (e0.Node1() IS_EQUAL e1.Node0())
 			continue;
 
-		if (Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) > theTol)
-		{
-			FatalErrorIn(FunctionSIG) << endl
-				<< "Invalid Wire" << endl
-				<< abort(FatalError);
-		}
+		//		if (Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) > theTol)
+		//		{
+		//#ifdef _DEBUG
+		//			meshLib::ExportInvalidWireAtMergeDangles(theWire);
+		//#endif // _DEBUG
+		//
+		//			FatalErrorIn(FunctionSIG) << endl
+		//				<< "Invalid Wire" << endl
+		//				<< " - distance: " << Distance(e0.Node1()->Coord(), e1.Node0()->Coord()) << endl
+		//				<< " - tol: " << theTol << endl
+		//				<< abort(FatalError);
+		//		}
 
-		/*const auto sn0 = std::dynamic_pointer_cast<Aft2d_SegmentNode>(e0.Node1());
-		const auto sn1 = std::dynamic_pointer_cast<Aft2d_SegmentNode>(e1.Node0());
+		auto bn0 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e0.Node1());
+		auto bn1 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e1.Node0());
+		Debug_Null_Pointer(bn0);
+		Debug_Null_Pointer(bn1);
 
-		if (sn0 AND sn1)
+		if (bn0->IsRegular() AND bn1->IsRegular())
 		{
 			auto node =
-				Aft2d_SegmentNode::MergeNodes(sn0, sn1, Aft2d_SegmentNode::Merge_Alg::New);
+				Aft2d_tCornerNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
 
 			e0.SetNode1(node);
 			e1.SetNode0(node);
-
-			continue;
-		}*/
-
-		const auto cn0 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e0.Node1());
-		const auto cn1 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e1.Node0());
-
-		if (cn0 AND cn1)
+		}
+		else if (bn0->IsGap() AND bn1->IsGap())
 		{
 			auto node =
-				Aft2d_tCornerNode::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+				Aft2d_tCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
 
 			e0.SetNode1(node);
 			e1.SetNode0(node);
-
-			continue;
 		}
+		else if (bn0->IsSingular() AND bn1->IsSingular())
+		{
+			auto snBn0 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn0);
+			auto snBn1 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn1);
+			Debug_Null_Pointer(snBn0);
+			Debug_Null_Pointer(snBn1);
 
-		FatalErrorIn(FunctionSIG) << endl
-			<< "Invalid Wire" << endl
-			<< abort(FatalError);
+			if (snBn0->IsPole() OR snBn1->IsPole())
+			{
+				auto node =
+					Aft2d_tCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+				Debug_Null_Pointer(node);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else
+			{
+				auto node =
+					Aft2d_tCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+				Debug_Null_Pointer(node);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+		}
+		else
+		{
+			if (auto sn = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn0))
+			{
+				if (sn->IsPole())
+				{
+					auto node =
+						Aft2d_tCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+					e0.SetNode1(node);
+					e1.SetNode0(node);
+				}
+				else if (sn->IsLine())
+				{
+					auto node =
+						Aft2d_tCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+					e0.SetNode1(node);
+					e1.SetNode0(node);
+				}
+				else
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "contradictory data has been detected!" << endl
+						<< abort(FatalError);
+				}
+			}
+			else if (auto sn = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn1))
+			{
+				if (sn->IsPole())
+				{
+					auto node =
+						Aft2d_tCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+					e0.SetNode1(node);
+					e1.SetNode0(node);
+				}
+				else if (sn->IsLine())
+				{
+					auto node =
+						Aft2d_tCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+					e0.SetNode1(node);
+					e1.SetNode0(node);
+				}
+				else
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "contradictory data has been detected!" << endl
+						<< abort(FatalError);
+				}
+			}
+			else if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNode>(bn0))
+			{
+				auto node =
+					Aft2d_tCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNode>(bn1))
+			{
+				auto node =
+					Aft2d_tCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data has been detected!" << endl
+					<< abort(FatalError);
+			}
+		}
 	}
 
 	auto& e0 = *theWire[theWire.size() - 1];
@@ -142,35 +244,126 @@ void tnbLib::Aft2d_tSegmentEdge::MergeDangles
 			<< abort(FatalError);
 	}
 
-	/*const auto sn0 = std::dynamic_pointer_cast<Aft2d_SegmentNode>(e0.Node1());
-	const auto sn1 = std::dynamic_pointer_cast<Aft2d_SegmentNode>(e1.Node0());
+	auto bn0 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e0.Node1());
+	auto bn1 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e1.Node0());
+	Debug_Null_Pointer(bn0);
+	Debug_Null_Pointer(bn1);
 
-	if (sn0 AND sn1)
+	if (bn0->IsRegular() AND bn1->IsRegular())
 	{
 		auto node =
-			Aft2d_SegmentNode::MergeNodes(sn0, sn1, Aft2d_SegmentNode::Merge_Alg::New);
+			Aft2d_tCornerNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
 
 		e0.SetNode1(node);
 		e1.SetNode0(node);
-
-		return;
-	}*/
-
-	const auto cn0 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e0.Node1());
-	const auto cn1 = std::dynamic_pointer_cast<Aft2d_tCornerNode>(e1.Node0());
-
-	if (cn0 AND cn1)
-	{
-		auto node =
-			Aft2d_tCornerNode::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
-
-		e0.SetNode1(node);
-		e1.SetNode0(node);
-
-		return;
 	}
+	else if (bn0->IsGap() AND bn1->IsGap())
+	{
+		auto node =
+			Aft2d_tCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
 
-	FatalErrorIn(FunctionSIG) << endl
-		<< "Invalid Wire" << endl
-		<< abort(FatalError);
+		e0.SetNode1(node);
+		e1.SetNode0(node);
+	}
+	else if (bn0->IsSingular() AND bn1->IsSingular())
+	{
+		auto snBn0 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn0);
+		auto snBn1 = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn1);
+		Debug_Null_Pointer(snBn0);
+		Debug_Null_Pointer(snBn1);
+
+		if (snBn0->IsPole() OR snBn1->IsPole())
+		{
+			auto node =
+				Aft2d_tCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+			Debug_Null_Pointer(node);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
+		else
+		{
+			auto node =
+				Aft2d_tCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+			Debug_Null_Pointer(node);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
+	}
+	else
+	{
+		if (auto sn = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn0))
+		{
+			if (sn->IsPole())
+			{
+				auto node =
+					Aft2d_tCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else if (sn->IsLine())
+			{
+				auto node =
+					Aft2d_tCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data has been detected!" << endl
+					<< abort(FatalError);
+			}
+		}
+		else if (auto sn = std::dynamic_pointer_cast<Aft2d_SingularNodeTemplate<Aft2d_tCornerNode>>(bn1))
+		{
+			if (sn->IsPole())
+			{
+				auto node =
+					Aft2d_tCornerPoleNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else if (sn->IsLine())
+			{
+				auto node =
+					Aft2d_tCornerLineNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data has been detected!" << endl
+					<< abort(FatalError);
+			}
+		}
+		else if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNode>(bn0))
+		{
+			auto node =
+				Aft2d_tCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
+		else if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNode>(bn1))
+		{
+			auto node =
+				Aft2d_tCornerGapNode::MergeNodes(bn0, bn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
+	}
 }

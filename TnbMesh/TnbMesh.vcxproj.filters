@@ -1912,6 +1912,9 @@
     <Filter Include="TnbLib\Aft\MetricPrcsr\Identifier">
       <UniqueIdentifier>{5913e838-5f02-4385-8e59-a19803103000}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric">
+      <UniqueIdentifier>{084f0d33-6ae7-413d-906b-18e8ec745358}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -3909,12 +3912,6 @@
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\G\UniMetric\Aft2d_gSegmentEdgeUniMetricFwd.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\G\UniMetric</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\T\Aft2d_tRegionPlaneSurfaceUniMetric.hxx">
-      <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\T\Aft2d_tRegionPlaneSurfaceUniMetricFwd.hxx">
-      <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Aft\Cad\Wire\AnIso\UniMetric\Aft2d_PlnWireUniMetric.hxx">
       <Filter>TnbLib\Aft\Cad\Wire\AnIso\UniMetric</Filter>
     </ClInclude>
@@ -4574,6 +4571,72 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Base\Entities\Boundary\Node\Mesh_BndNodeI.hxx">
       <Filter>TnbLib\Base\Entities\Boundary\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\Surface\Aft2d_tSolutionDataSurface.hxx">
+      <Filter>TnbLib\Aft\SolutionData\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\SolutionData\Surface\Aft2d_tSolutionDataSurfaceFwd.hxx">
+      <Filter>TnbLib\Aft\SolutionData\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\T\Cad_tPlnGapCurveFwd.hxx">
+      <Filter>TnbLib\Cad\GapCurve\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\T\Cad_tPlnGapCurve.hxx">
+      <Filter>TnbLib\Cad\GapCurve\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\Aft2d_tCornerGapNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\Aft2d_tSegmentGapNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\Aft2d_tSegmentGapNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\Aft2d_tCornerGapNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric\Aft2d_tSegmentGapNodeUniMetricFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric\Aft2d_tCornerGapNodeUniMetricFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric\Aft2d_tSegmentGapNodeUniMetric.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric\Aft2d_tCornerGapNodeUniMetric.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\Aft2d_tSegmentGapEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\Aft2d_tSegmentGapEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric\Aft2d_tSegmentGapEdgeUniMetricFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric\Aft2d_tSegmentGapEdgeUniMetric.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\T\UniMetric\Cad_tPlnGapCurveUniMetricFwd.hxx">
+      <Filter>TnbLib\Cad\GapCurve\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\T\UniMetric\Cad_tPlnGapCurveUniMetric.hxx">
+      <Filter>TnbLib\Cad\GapCurve\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CommonSingularity\T\Cad_tCommonSingularityFwd.hxx">
+      <Filter>TnbLib\Cad\CommonSingularity\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\CommonSingularity\T\Cad_tCommonSingularity.hxx">
+      <Filter>TnbLib\Cad\CommonSingularity\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\T\UniMetric\Aft2d_tRegionPlaneSurfaceUniMetric.hxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\T\UniMetric\Aft2d_tRegionPlaneSurfaceUniMetricFwd.hxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -5537,9 +5600,6 @@
     <ClCompile Include="TnbLib\Aft\Entities\Boundary\Edge\Surface\G\UniMetric\Aft2d_gSegmentEdgeUniMetricIO.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Edge\Surface\G\UniMetric</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\T\Aft2d_tRegionPlaneSurfaceUniMetricIO.cxx">
-      <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Aft\Cad\Wire\Surface\G\UniMetric\Aft2d_gPlnWireSurfaceUniMetricIO.cxx">
       <Filter>TnbLib\Aft\Cad\Wire\Surface\G\UniMetric</Filter>
     </ClCompile>
@@ -5815,6 +5875,57 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Node\Surface\Aft2d_NodeSurface.cxx">
       <Filter>TnbLib\Aft\Entities\Node\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Surface\Aft2d_tSolutionDataSurface.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\SolutionData\Surface\Aft2d_tSolutionDataSurfaceIO.cxx">
+      <Filter>TnbLib\Aft\SolutionData\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GapCurve\T\Cad_tPlnGapCurve.cxx">
+      <Filter>TnbLib\Cad\GapCurve\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\Aft2d_tCornerGapNode.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric\Aft2d_tCornerGapNodeUniMetric.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\T\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\Aft2d_tSegmentGapEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric\Aft2d_tSegmentGapEdgeUniMetric.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GapCurve\T\UniMetric\Cad_tPlnGapCurveUniMetric.cxx">
+      <Filter>TnbLib\Cad\GapCurve\T\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T\Aft2d_tCornerPoleNode.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Node\Pole\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\T\Aft2d_tSegmentPoleEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Pole\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T\Aft2d_tSegmentLineEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Singularity\Edge\Line\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\CommonSingularity\T\Cad_tCommonSingularity.cxx">
+      <Filter>TnbLib\Cad\CommonSingularity\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Curve\Pole\T\Cad_tPoleSingularCurve.cxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Pole\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Singularity\Curve\Line\T\Cad_tLineSingularCurve.cxx">
+      <Filter>TnbLib\Cad\Singularity\Curve\Line\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\T\Aft2d_tRegionPlaneSurface.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\T\UniMetric\Aft2d_tRegionPlaneSurfaceUniMetricIO.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\T\UniMetric\Aft2d_tRegionPlaneSurfaceUniMetric.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
