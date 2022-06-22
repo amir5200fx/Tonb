@@ -1094,10 +1094,10 @@ tnbLib::Cad_Tools::GetSurface
 	//const auto forwardFace = theFace;
 	const auto forwardFace = TopoDS::Face(theFace.Oriented(TopAbs_FORWARD));
 
-	auto cmpEdge = std::make_shared<TModel_CmpEdge>();
+	auto cmpEdge = std::make_shared<std::vector<std::shared_ptr<TModel_Edge>>>();
 	Debug_Null_Pointer(cmpEdge);
 
-	auto& outter_edges = cmpEdge->EdgesRef();
+	auto& outter_edges = *cmpEdge;
 
 	const auto Tol = sysLib::tmodel_fix_wire_info->Tolerance();
 	Standard_Integer K = 0;
@@ -1141,7 +1141,7 @@ tnbLib::Cad_Tools::GetSurface
 		outter_edges.push_back(new_edge);
 	}
 
-	auto outerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
+	auto outerWire = std::make_shared<TModel_Wire>(++wireIndex, "", cmpEdge);
 	std::shared_ptr<std::vector<std::shared_ptr<TModel_Wire>>> Qwire;
 	for (
 		TopExp_Explorer aWireExp(forwardFace, TopAbs_WIRE);
@@ -1155,10 +1155,10 @@ tnbLib::Cad_Tools::GetSurface
 		if (wire IS_EQUAL outer_wire) continue;
 		// has inner wire
 
-		auto cmpEdge = std::make_shared<TModel_CmpEdge>();
+		auto cmpEdge = std::make_shared<std::vector<std::shared_ptr<TModel_Edge>>>();
 		Debug_Null_Pointer(cmpEdge);
 
-		auto& Inner_edges = cmpEdge->EdgesRef();
+		auto& Inner_edges = *cmpEdge;
 
 		ShapeFix_Wire SFWF(wire, forwardFace, Tol);
 
@@ -1194,14 +1194,15 @@ tnbLib::Cad_Tools::GetSurface
 				<< abort(FatalError);
 		}
 
-		auto innerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
+		auto innerWire = std::make_shared<TModel_Wire>(++wireIndex, "", cmpEdge);
 
 		if (NOT Qwire) Qwire = std::make_shared<std::vector<std::shared_ptr<TModel_Wire>>>();
 		Qwire->push_back(innerWire);
 	}
 
 	TopLoc_Location Location;
-	auto geometry = BRep_Tool::Surface(forwardFace, Location);
+	auto geometry = 
+		std::make_shared<Cad_GeomSurface>(BRep_Tool::Surface(forwardFace, Location));
 
 	auto face =
 		std::make_shared<TModel_Surface>(geometry, outerWire, Qwire);
@@ -2469,9 +2470,9 @@ void tnbLib::Cad_Tools::Connect
 )
 {
 	Debug_Null_Pointer(theWire);
-	Debug_Null_Pointer(theWire->CmpEdge());
+	Debug_Null_Pointer(theWire->Edges());
 
-	const auto& edges = theWire->CmpEdge()->Edges();
+	const auto& edges = *theWire->Edges();
 	for (const auto& x : edges)
 	{
 		Debug_Null_Pointer(x);

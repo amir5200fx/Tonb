@@ -1,6 +1,9 @@
 #include <Aft2d_tModelSurface.hxx>
 
 #include <Aft2d_EdgeSurface.hxx>
+#include <Aft2d_NodeSurface.hxx>
+#include <Aft_Tools.hxx>
+#include <Geo_BoxTools.hxx>
 
 unsigned short tnbLib::Aft2d_tModelSurface::verbose(0);
 
@@ -27,6 +30,9 @@ void tnbLib::Aft2d_tModelSurface::Import
 
 	// Insert To Front
 	InsertToGeometry(nodes);
+
+	CheckSelfIntersection();
+
 	InsertToPriority(GetBoundaryEntities());
 #else
 #include <Aft2d_Model_Import.jxx>
@@ -309,6 +315,44 @@ void tnbLib::Aft2d_tModelSurface::CompactNumbering
 ) const
 {
 #include <Aft2d_Model_CompactNumbering.jxx>
+}
+
+template<>
+void tnbLib::Aft2d_tModelSurface::CheckSelfIntersection()
+{
+	for (const auto& x : GetBoundaryEntities())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
+
+		auto radius = 1.05*std::max(n0->CalcMaxParaAdjLength(), n1->CalcMaxParaAdjLength());
+		const auto& c = x->Centre();
+
+		auto b = Geo_BoxTools::GetBox(c, radius);
+
+		std::vector<std::shared_ptr<Aft2d_NodeSurface>> items;
+		this->GeometrySearch(b, items);
+
+		std::vector<std::shared_ptr<Aft2d_EdgeSurface>> locals;
+		RetrieveLocalFrontEntities(items, locals);
+
+		for (const auto& l : locals)
+		{
+			Debug_Null_Pointer(l);
+			if (x IS_EQUAL l) continue;
+			if (Aft_Tools::IsIntersect(*x, *l))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " a self intersection of the parametric boundary edges has been detected." << endl
+					<< abort(FatalError);
+			}
+		}
+	}
 }
 
 template<>

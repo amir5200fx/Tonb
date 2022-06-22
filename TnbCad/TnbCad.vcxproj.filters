@@ -109,9 +109,6 @@
     <Filter Include="TnbLib\Cad\Tools">
       <UniqueIdentifier>{e6f3b351-ca8b-41df-a144-16fed4921adf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Cad\TModel\Entities\Surface\Geometry">
-      <UniqueIdentifier>{a80215ce-c172-492a-92fe-5c64ab5601eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Cad\TModel\Entities\CmpEdge">
       <UniqueIdentifier>{a47fa0bc-b333-4ac0-bd94-630f3177b251}</UniqueIdentifier>
     </Filter>
@@ -508,15 +505,21 @@
     <Filter Include="TnbLib\Cad\CharLength\Info">
       <UniqueIdentifier>{536ae029-e788-4108-a70e-1b07d0e26380}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Repair\PlnWire">
+      <UniqueIdentifier>{80ad6bdc-348d-4b54-94cb-d9ac9eac7bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Repair\PlnWire\Traits">
+      <UniqueIdentifier>{972d9edd-2b9b-44d9-984a-8a173e3b20c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\ParaGap">
+      <UniqueIdentifier>{34a932b4-1537-4dad-a48d-42022a442562}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Entity</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaCurve\TModel_ParaCurve.hxx">
-      <Filter>TnbLib\Cad\TModel\Entities\ParaCurve</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaCurve\TModel_ParaCurveI.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\ParaCurve</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Curve\TModel_Curve.hxx">
@@ -578,9 +581,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\IO\Format\STEP\CadIO_STEP.hxx">
       <Filter>TnbLib\Cad\IO\Format\STEP</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Cad\TModel\Entities\Surface\Geometry\TModel_SurfaceGeometry.hxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Surface\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Wire\TModel_Wire.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\Wire</Filter>
@@ -1005,6 +1005,24 @@
     <ClInclude Include="TnbLib\Cad\CharLength\Cad_CharLength.hxx">
       <Filter>TnbLib\Cad\CharLength</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Para\T\Cad_tApprxParaWireFwd.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Approx\Wire\Para\T\Cad_tApprxParaWire.hxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Repair\PlnWire\Cad_RepairPlnWire.hxx">
+      <Filter>TnbLib\Cad\Repair\PlnWire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Repair\PlnWire\Cad_RepairPlnWireI.hxx">
+      <Filter>TnbLib\Cad\Repair\PlnWire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaGap\TModel_ParaGapCurveFwd.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaGap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaGap\TModel_ParaGapCurve.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaGap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -1162,9 +1180,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Curve\TModel_CurveIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Curve</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Cad\TModel\Entities\Surface\Geometry\TModel_SurfaceGeometryIO.cxx">
-      <Filter>TnbLib\Cad\TModel\Entities\Surface\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Surface\TModel_SurfaceIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\Surface</Filter>
@@ -1483,6 +1498,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\CharLength\Cad_CharLength.cxx">
       <Filter>TnbLib\Cad\CharLength</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Approx\Wire\Para\T\Cad_tApprxParaWire.cxx">
+      <Filter>TnbLib\Cad\Approx\Wire\Para\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Repair\PlnWire\Cad_RepairPlnWire.cxx">
+      <Filter>TnbLib\Cad\Repair\PlnWire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaGap\TModel_ParaGapCurveIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaGap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

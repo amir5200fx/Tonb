@@ -9,6 +9,7 @@
 #include <Cad_tEdgeMakerInfo_Absolute.hxx>
 #include <Cad_tSurfaceMakerInfo_Absolute.hxx>
 #include <Cad_tEdgeMaker.hxx>
+#include <Cad_GeomSurface.hxx>
 
 #include <TopoDS.hxx>
 #include <BRepTools.hxx>
@@ -57,10 +58,10 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 {
 	const auto forwardFace = TopoDS::Face(Face().Oriented(TopAbs_FORWARD));
 
-	auto cmpEdge = std::make_shared<TModel_CmpEdge>();
+	auto cmpEdge = std::make_shared<std::vector<std::shared_ptr<TModel_Edge>>>();
 	Debug_Null_Pointer(cmpEdge);
 
-	auto& outter_edges = cmpEdge->EdgesRef();
+	auto& outter_edges = *cmpEdge;
 
 	const auto& surfInfo = Info()->Surface;
 	const auto tol = surfInfo->Tolerance();
@@ -112,7 +113,7 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 		outter_edges.push_back(std::move(new_edge));
 	}
 
-	auto outerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
+	auto outerWire = std::make_shared<TModel_Wire>(++wireIndex, "", cmpEdge);
 	std::shared_ptr<std::vector<std::shared_ptr<TModel_Wire>>> Qwire;
 	for (
 		TopExp_Explorer aWireExp(forwardFace, TopAbs_WIRE);
@@ -126,10 +127,10 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 		if (wire IS_EQUAL outer_wire) continue;
 		// has inner wire
 
-		auto cmpEdge = std::make_shared<TModel_CmpEdge>();
+		auto cmpEdge = std::make_shared<std::vector<std::shared_ptr<TModel_Edge>>>();
 		Debug_Null_Pointer(cmpEdge);
 
-		auto& Inner_edges = cmpEdge->EdgesRef();
+		auto& Inner_edges = *cmpEdge;
 
 		ShapeFix_Wire SFWF(wire, forwardFace, tol);
 
@@ -174,14 +175,15 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 				<< abort(FatalError);
 		}
 
-		auto innerWire = std::make_shared<TModel_Wire>(++wireIndex, cmpEdge);
+		auto innerWire = std::make_shared<TModel_Wire>(++wireIndex, "", cmpEdge);
 
 		if (NOT Qwire) Qwire = std::make_shared<std::vector<std::shared_ptr<TModel_Wire>>>();
 		Qwire->push_back(innerWire);
 	}
 
 	TopLoc_Location Location;
-	auto geometry = BRep_Tool::Surface(forwardFace, Location);
+	auto geometry = 
+		std::make_shared<Cad_GeomSurface>(BRep_Tool::Surface(forwardFace, Location));
 
 	auto face =
 		std::make_shared<TModel_Surface>(geometry, outerWire, Qwire);

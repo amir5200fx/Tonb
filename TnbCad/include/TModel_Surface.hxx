@@ -5,7 +5,7 @@
 #include <Entity2d_Box.hxx>
 #include <Entity3d_Box.hxx>
 #include <TModel_Entity.hxx>
-#include <TModel_SurfaceGeometry.hxx>
+#include <GModel_SurfaceGeometry.hxx>
 #include <TModel_FaceOrientation.hxx>
 
 #include <vector>
@@ -21,7 +21,7 @@ namespace tnbLib
 
 	class TModel_Surface
 		: public TModel_Entity
-		, public TModel_SurfaceGeometry
+		, public GModel_SurfaceGeometry
 	{
 
 		typedef std::shared_ptr<TModel_Wire> outer;
@@ -42,7 +42,7 @@ namespace tnbLib
 
 		TnbCad_EXPORT Entity2d_Box CalcParametricBoundingBox() const;
 
-		TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;
+		//TnbCad_EXPORT Entity3d_Box CalcBoundingBox() const;
 
 
 		TNB_SERIALIZATION(TnbCad_EXPORT);
@@ -63,15 +63,22 @@ namespace tnbLib
 
 		TnbCad_EXPORT TModel_Surface
 		(
-			const Handle(Geom_Surface)& theGeometry, 
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
 
 		TnbCad_EXPORT TModel_Surface
 		(
+			std::shared_ptr<Cad_GeomSurface>&& theGeometry,
+			outer&& theOuter,
+			inner&& theInner
+		);
+
+		TnbCad_EXPORT TModel_Surface
+		(
 			const Standard_Integer theIndex,
-			const Handle(Geom_Surface)& theGeometry,
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);
@@ -80,7 +87,7 @@ namespace tnbLib
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Handle(Geom_Surface)& theGeometry,
+			const std::shared_ptr<Cad_GeomSurface>& theGeometry,
 			const outer& theOuter,
 			const inner& theInner = nullptr
 		);

@@ -13,4 +13,5 @@ base::SetGeometryRegion(box.OffSet(0.01 * box.Diameter()));
 
 // Insert To Front
 base::InsertToGeometry(nodes);
+base::CheckSelfIntersection();
 base::InsertToPriority(GetBoundaryEntities());

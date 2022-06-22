@@ -14,18 +14,20 @@
 #ifdef _DEBUG
 namespace tnbLib
 {
-	template<>
-	void Aft2d_tBoundaryOfPlaneSurfaceUniMetric::UpdateFront();
+	
 }
 #endif // _DEBUG
 
 namespace tnbLib
 {
 	template<>
-	void Aft2d_tBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies();
+	TnbMesh_EXPORT void Aft2d_tBoundaryOfPlaneSurfaceUniMetric::UpdateFront();
 
 	template<>
-	void Aft2d_tBoundaryOfPlaneSurfaceUniMetric::Perform();
+	TnbMesh_EXPORT void Aft2d_tBoundaryOfPlaneSurfaceUniMetric::RemoveDegeneracies();
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_tBoundaryOfPlaneSurfaceUniMetric::Perform();
 }
 
 #endif // !_Aft2d_tBoundaryOfPlaneSurfaceUniMetric_Header

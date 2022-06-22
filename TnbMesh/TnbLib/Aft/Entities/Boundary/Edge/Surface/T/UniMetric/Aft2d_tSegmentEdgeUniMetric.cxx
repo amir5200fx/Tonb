@@ -5,6 +5,7 @@
 #include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_tCornerNodeUniMetric.hxx>
 #include <Aft2d_tSegmentNodeUniMetric.hxx>
+#include <Aft2d_tCornerGapNodeUniMetric.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -113,7 +114,7 @@ void tnbLib::Aft2d_tSegmentEdgeUniMetric::MergeDangles
 		const auto cn0 = std::dynamic_pointer_cast<Aft2d_tCornerNodeUniMetric>(e0.Node1());
 		const auto cn1 = std::dynamic_pointer_cast<Aft2d_tCornerNodeUniMetric>(e1.Node0());
 
-		if (cn0 AND cn1)
+		if (cn0->IsRegular() AND cn1->IsRegular())
 		{
 			auto node =
 				Aft2d_tCornerNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
@@ -122,6 +123,45 @@ void tnbLib::Aft2d_tSegmentEdgeUniMetric::MergeDangles
 			e1.SetNode0(node);
 
 			continue;
+		}
+		else if (cn0->IsGap() AND cn1->IsGap())
+		{
+			auto node =
+				Aft2d_tCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+
+			continue;
+		}
+		else
+		{
+			if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNodeUniMetric>(cn0))
+			{
+				auto node =
+					Aft2d_tCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+
+				continue;
+			}
+			else if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNodeUniMetric>(cn1))
+			{
+				auto node =
+					Aft2d_tCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+				e0.SetNode1(node);
+				e1.SetNode0(node);
+
+				continue;
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "contradictory data has been detected!" << endl
+					<< abort(FatalError);
+			}
 		}
 
 		FatalErrorIn(FunctionSIG) << endl
@@ -159,7 +199,7 @@ void tnbLib::Aft2d_tSegmentEdgeUniMetric::MergeDangles
 	const auto cn0 = std::dynamic_pointer_cast<Aft2d_tCornerNodeUniMetric>(e0.Node1());
 	const auto cn1 = std::dynamic_pointer_cast<Aft2d_tCornerNodeUniMetric>(e1.Node0());
 
-	if (cn0 AND cn1)
+	if (cn0->IsRegular() AND cn1->IsRegular())
 	{
 		auto node =
 			Aft2d_tCornerNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
@@ -168,6 +208,45 @@ void tnbLib::Aft2d_tSegmentEdgeUniMetric::MergeDangles
 		e1.SetNode0(node);
 
 		return;
+	}
+	else if (cn0->IsGap() AND cn1->IsGap())
+	{
+		auto node =
+			Aft2d_tCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+		e0.SetNode1(node);
+		e1.SetNode0(node);
+
+		return;
+	}
+	else
+	{
+		if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNodeUniMetric>(cn0))
+		{
+			auto node =
+				Aft2d_tCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+
+			return;
+		}
+		else if (auto gn = std::dynamic_pointer_cast<Aft2d_tCornerGapNodeUniMetric>(cn1))
+		{
+			auto node =
+				Aft2d_tCornerGapNodeUniMetric::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
+
+			e0.SetNode1(node);
+			e1.SetNode0(node);
+
+			return;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected!" << endl
+				<< abort(FatalError);
+		}
 	}
 
 	FatalErrorIn(FunctionSIG) << endl

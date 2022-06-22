@@ -37,7 +37,11 @@ namespace tnbLib
 			);
 
 	template<>
-	TnbMesh_EXPORT Entity2d_Box Aft2d_gPlnWireSurface::CalcBoundingBox(const Aft2d_gPlnCurveSurface&);
+	TnbMesh_EXPORT Entity2d_Box 
+		Aft2d_gPlnWireSurface::CalcBoundingBox
+		(
+			const Aft2d_gPlnCurveSurface&
+		);
 }
 
 #endif // !_Aft2d_gPlnWireSurface_Header
