@@ -685,6 +685,15 @@
     <Filter Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial">
       <UniqueIdentifier>{67555a59-8847-4565-83d3-d9e2c8f67a43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation\3d">
+      <UniqueIdentifier>{a54b81c8-258c-4d30-bb7e-c8c171b71982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation\3d\cgal">
+      <UniqueIdentifier>{a5385fcb-a2a9-450d-865b-803e324368ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Space\Balanced\3d">
+      <UniqueIdentifier>{59c0c083-824e-4e08-8105-c2d9c2a4b43f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1596,6 +1605,30 @@
     <ClInclude Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial\Mesh_CurveOptmPoint_BisectCorrection_InitialI.hxx">
       <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Triangulation\3d\cgal\Geo3d_DelTri_CGAL.hxx">
+      <Filter>TnbLib\Geo\Triangulation\3d\cgal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_TetrahedralizationFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpaceNode.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpaceOctant.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpaceNode_Leaf.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpaceNode_Internal.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpace.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpaceI.hxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -1987,6 +2020,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial\Mesh_CurveOptmPoint_BisectCorrection_Initial.cxx">
       <Filter>TnbLib\Mesh\Curve\OptmPoint\BisectCorrection\Initial</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Triangulation\3d\cgal\Geo3d_DelTri_CGAL.cxx">
+      <Filter>TnbLib\Geo\Triangulation\3d\cgal</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpace.cxx">
+      <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
