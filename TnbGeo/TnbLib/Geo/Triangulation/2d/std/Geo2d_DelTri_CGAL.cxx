@@ -78,7 +78,7 @@ void tnbLib::cgalLib::Geo2d_DelTri::Perform()
 	Debug_Null_Pointer(theTriangulation_);
 
 	auto& pnts = Triangulation()->Points();
-	auto indices = Triangulation()->Connectivity();
+	auto& indices = Triangulation()->Connectivity();
 
 	pnts.resize(dt.number_of_vertices());
 	DT::Finite_vertices_iterator pIter;
