@@ -24,6 +24,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<TModel_ParaCurve> theParaCurve_;
+		std::shared_ptr<Entity3d_Polygon> theMesh_;
 
 
 		//- private functions and operators
@@ -56,6 +57,21 @@ namespace tnbLib
 		const auto& ParaCurve() const
 		{
 			return theParaCurve_;
+		}
+
+		const auto& Triangulation() const
+		{
+			return theMesh_;
+		}
+
+		void SetTriangulation(const std::shared_ptr<Entity3d_Polygon>& theMesh)
+		{
+			theMesh_ = theMesh;
+		}
+
+		void SetTriangulation(std::shared_ptr<Entity3d_Polygon>&& theMesh)
+		{
+			theMesh_ = std::move(theMesh);
 		}
 
 		/*TnbCad_EXPORT void Discrete

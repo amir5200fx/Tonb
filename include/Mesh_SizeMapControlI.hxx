@@ -1,6 +1,14 @@
 #pragma once
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+template<class GeomType>
+inline const std::shared_ptr<typename tnbLib::Mesh_SizeMapControl<GeomType>::backMeshType>& 
+tnbLib::Mesh_SizeMapControl<GeomType>::BackgroundMesh() const
+{
+	CheckDone((*this));
+	return theBackground_;
+}
+
 namespace tnbLib
 {
 

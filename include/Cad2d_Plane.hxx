@@ -16,6 +16,8 @@
 class gp_Ax22d;
 class gp_Ax2d;
 class gp_Trsf2d;
+class gp_Circ2d;
+class gp_Elips2d;
 
 #include <gp.hxx>
 #include <gp_Ax2.hxx>

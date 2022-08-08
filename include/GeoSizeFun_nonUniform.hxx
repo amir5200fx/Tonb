@@ -34,21 +34,30 @@ namespace tnbLib
 
 		// constructors [7/17/2021 Amir]
 
-		GeoSizeFun_nonUniform
-		(
-			const Standard_Integer theIndex,
-			const word& theName
-		)
-			: Geo_SizeFunction<Point>(theIndex, theName)
+		GeoSizeFun_nonUniform(const Entity_Box<Point>& theBox)
+			: Geo_SizeFunction<Point>(theBox)
+		{}
+
+		GeoSizeFun_nonUniform(Entity_Box<Point>&& theBox)
+			: Geo_SizeFunction<Point>(std::move(theBox))
 		{}
 
 		GeoSizeFun_nonUniform
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
-			const Entity_Box<Point>& theBoundingBox
+			const Entity_Box<Point>& theBox
 		)
-			: Geo_SizeFunction<Point>(theIndex, theName, theBoundingBox)
+			: Geo_SizeFunction<Point>(theIndex, theName, theBox)
+		{}
+
+		GeoSizeFun_nonUniform
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Entity_Box<Point>&& theBoundingBox
+		)
+			: Geo_SizeFunction<Point>(theIndex, theName, std::move(theBoundingBox))
 		{}
 
 	public:

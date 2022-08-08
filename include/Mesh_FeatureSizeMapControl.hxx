@@ -17,6 +17,7 @@ namespace tnbLib
 		typedef Mesh_SizeMapControl<GeomType> base;
 		using base::sizeMapTool;
 		using base::meshRefValuesType;
+		using base::boxType;
 
 	private:
 
@@ -35,11 +36,6 @@ namespace tnbLib
 
 	protected:
 
-
-		
-
-	public:
-
 		//- default constructor
 		Mesh_FeatureSizeMapControl()
 		{}
@@ -49,11 +45,16 @@ namespace tnbLib
 
 		Mesh_FeatureSizeMapControl
 		(
-			const std::shared_ptr<GeomType>& theGeometry,
-			const std::shared_ptr<meshRefValuesType>& theRef
+			const std::shared_ptr<meshRefValuesType>& theRef,
+			const std::shared_ptr<boxType>& theDomain
 		)
-			: base(theGeometry, theRef)
+			: base(theRef, theDomain)
 		{}
+		
+
+	public:
+
+		
 
 
 		//- public functions and operators

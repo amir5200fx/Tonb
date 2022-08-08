@@ -13,6 +13,10 @@ class gp_Ax22d;
 class Bnd_Box2d;
 class Geom2d_Curve;
 class Geom2dAPI_InterCurveCurve;
+class gp_Hypr2d;
+class gp_Parab2d;
+class gp_Circ2d;
+class gp_Elips2d;
 
 #include <vector>
 

@@ -7,6 +7,7 @@
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Entity3d_TetrahedralizationFwd.hxx>
 #include <Geo_Module.hxx>
 #include <Geo_Traits.hxx>
 
@@ -54,7 +55,8 @@ namespace tnbLib
 		std::shared_ptr<Entity3d_Triangulation> Triangulate(const Entity3d_Box&);
 
 		static TnbGeo_EXPORT void GetTriangulation(const std::vector<Entity2d_Box>& theBoxes, Entity2d_Triangulation& theTri);
-		static void GetTriangulation(const std::vector<Entity3d_Box>& theBoxes, Entity3d_Triangulation& theTri);
+		static TnbGeo_EXPORT void GetTriangulation(const std::vector<Entity3d_Box>& theBoxes, Entity3d_Tetrahedralization& theTri);
+		static TnbGeo_EXPORT void GetTriangulation(const std::vector<std::shared_ptr<Entity3d_Box>>& theBoxes, Entity3d_Tetrahedralization& theTri);
 
 		template<class Point>
 		static Triangulation<Point> GetTriangulation(const std::vector<Box<Point>>& theBoxes);

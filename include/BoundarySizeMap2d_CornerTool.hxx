@@ -51,6 +51,7 @@ namespace tnbLib
 		TnbMesh_EXPORT BoundarySizeMap2d_CornerTool
 		(
 			const std::shared_ptr<Mesh2d_ReferenceValues>& theRef,
+			const std::shared_ptr<Entity2d_Box>& theDomain,
 			const std::shared_ptr<Cad2d_Plane>& thePlane
 		);
 

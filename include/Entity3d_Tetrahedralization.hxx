@@ -5,15 +5,13 @@
 #include <Pnt3d.hxx>
 #include <Entity_Connectivity.hxx>
 #include <Entity_StaticData.hxx>
+#include <Entity3d_TetrahedralizationFwd.hxx>
 
 namespace tnbLib
 {
 
-	typedef Entity_StaticData<Pnt3d, connectivity::quadruple>
-		Entity3d_Tetrahedralization;
-
 	template<>
-	void Entity3d_Tetrahedralization::ExportToPlt(OFstream& File) const;
+	TnbGeo_EXPORT void Entity3d_Tetrahedralization::ExportToPlt(OFstream& File) const;
 }
 
 #endif // !_Entity3d_Tetrahedralization_Header

@@ -30,12 +30,15 @@ namespace tnbLib
 				Debug_Null_Pointer(element->SubEntity<elementType::rank - 1>(i));
 				const auto& entity = *element->SubEntity<elementType::rank - 1>(i);
 
-				auto leftElement = entity.LeftElement().lock();
-				if (leftElement == element)
+				auto rightElement = entity.RightElement().lock();
+				Debug_Null_Pointer(rightElement);
+
+				if (rightElement == element)
 				{
-					if (entity.IsRightSide(theCoord))
+					if (entity.IsLeftSide(theCoord))
 					{
-						neighbor = entity.RightElement().lock();
+						auto leftElement = entity.LeftElement().lock();
+						neighbor = leftElement;
 						if (!neighbor)
 						{
 							//- the point is outside the background mesh
@@ -46,17 +49,63 @@ namespace tnbLib
 				}
 				else
 				{
-					if (entity.IsLeftSide(theCoord))
+#ifdef _DEBUG
+					auto leftElement = entity.LeftElement().lock();
+					if (NOT leftElement)
 					{
-						neighbor = leftElement;
-						if (!neighbor)
-						{
-							//- the point is outside the background mesh
-							return nullptr;
-						}
+						FatalErrorIn(FunctionSIG)
+							<< "the facet doesn't belong to the element." << endl
+							<< abort(FatalError);
+					}
+
+					if (leftElement NOT_EQUAL element)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "the facet doesn't belong to the element." << endl
+							<< " - element's id: " << element->Index() << endl
+							<< " - right element: " << rightElement->Index() << endl
+							<< " - left element: " << leftElement->Index() << endl
+							<< abort(FatalError);
+					}
+#endif // _DEBUG
+
+					if (entity.IsRightSide(theCoord))
+					{
+						neighbor = rightElement;
 						break;
 					}
 				}
+
+				//auto leftElement = entity.LeftElement().lock();
+				//if (leftElement == element)
+				//{
+				//	if (entity.IsRightSide(theCoord))
+				//	{
+				//		neighbor = entity.RightElement().lock();
+				//		if (!neighbor)
+				//		{
+				//			FatalErrorIn(FunctionSIG)
+				//				<< "invalid data has been detected." << endl
+				//				<< abort(FatalError);
+				//			//- the point is outside the background mesh
+				//			//return nullptr;
+				//		}
+				//		break;
+				//	}
+				//}
+				//else
+				//{
+				//	if (entity.IsLeftSide(theCoord))
+				//	{
+				//		neighbor = leftElement;
+				//		if (!neighbor)
+				//		{
+				//			//- the point is outside the background mesh
+				//			return nullptr;
+				//		}
+				//		break;
+				//	}
+				//}
 
 
 			}
