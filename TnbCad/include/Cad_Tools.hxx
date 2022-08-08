@@ -9,6 +9,7 @@
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_MetricMeshValueFwd.hxx>
 #include <Entity2d_MeshValueFwd.hxx>
@@ -26,9 +27,13 @@ class Geom_Plane;
 class Geom2d_Curve;
 class Geom_Curve;
 class Poly_Triangulation;
+class Poly_Polygon3D;
+class Poly_PolygonOnTriangulation;
 class Geom_BSplineCurve;
 class Geom_BSplineSurface;
 class Geom2d_TrimmedCurve;
+
+//#include <TopTools_IndexedDataMapOfShapeListOfShape.hxx>
 
 #include <memory>
 #include <vector>
@@ -293,6 +298,13 @@ namespace tnbLib
 			RetrieveNonSingularEdges
 			(
 				const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<Entity3d_Polygon> 
+			RetrievePolygonOnTriangulation
+			(
+				const TopoDS_Edge& theEdge, 
+				const TopoDS_Face& theFace
 			);
 
 		static TnbCad_EXPORT Handle(Poly_Triangulation)

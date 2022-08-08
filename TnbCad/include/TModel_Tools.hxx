@@ -2,6 +2,7 @@
 #ifndef _TModel_Tools_Header
 #define _TModel_Tools_Header
 
+#include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Cad_Module.hxx>
 
@@ -34,6 +35,8 @@ namespace tnbLib
 		/*Private Data*/
 
 	public:
+
+		static TnbCad_EXPORT Entity3d_Box CalcBoundingBox(const Cad_TModel&);
 
 		static TnbCad_EXPORT Standard_Boolean IsPlane(const std::shared_ptr<TModel_Surface>&);
 		static TnbCad_EXPORT Standard_Boolean IsCylinder(const std::shared_ptr<TModel_Surface>&);
