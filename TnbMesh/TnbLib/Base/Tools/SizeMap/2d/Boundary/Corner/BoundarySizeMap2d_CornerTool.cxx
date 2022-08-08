@@ -27,9 +27,10 @@ namespace tnbLib
 tnbLib::BoundarySizeMap2d_CornerTool::BoundarySizeMap2d_CornerTool
 (
 	const std::shared_ptr<Mesh2d_ReferenceValues>& theRef,
+	const std::shared_ptr<Entity2d_Box>& theDomain,
 	const std::shared_ptr<Cad2d_Plane>& thePlane
 )
-	: Mesh2d_BoundarySizeMapTool(thePlane, theRef)
+	: Mesh2d_BoundarySizeMapTool(thePlane, theDomain, theRef)
 	, theUnbalancing_(DEFAULT_UNBALANCING)
 	, theMinSubdivision_(DEFAULT_MIN_SUBDIVISION)
 	, theMaxSubdivision_(DEFAULT_MAX_SUBDIVISION)

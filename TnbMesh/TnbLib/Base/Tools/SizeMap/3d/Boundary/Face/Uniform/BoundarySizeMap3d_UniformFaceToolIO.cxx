@@ -1,0 +1,3 @@
+#include <BoundarySizeMap3d_UniformFaceTool.hxx>
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::BoundarySizeMap3d_UniformFaceTool);

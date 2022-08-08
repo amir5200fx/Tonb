@@ -20,6 +20,7 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh2d_SizeMapTool)
 
 #include <Mesh_ReferenceValues.hxx>
 #include <GeoMesh2d_Background.hxx>
+#include <Entity2d_Box.hxx>
 
 namespace tnbLib
 {
@@ -35,6 +36,7 @@ namespace tnbLib
 		ar & theValues_;
 
 		ar & theReference_;
+		ar & theDomain_;
 		ar & theBackMesh_;
 	}
 
@@ -50,6 +52,7 @@ namespace tnbLib
 		ar & theValues_;
 
 		ar & theReference_;
+		ar & theDomain_;
 		ar & theBackMesh_;
 	}
 }
