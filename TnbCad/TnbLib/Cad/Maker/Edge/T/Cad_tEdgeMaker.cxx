@@ -107,6 +107,10 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 
 			auto curveOnSurface = std::make_shared<TModel_Curve>(Curve);
 			newEdge = std::make_shared<TModel_RingEdge>(vtx, curveOnSurface, curveOnPlane);
+			Debug_Null_Pointer(newEdge);
+
+			auto tri = Cad_Tools::RetrievePolygonOnTriangulation(Shape(), Face());
+			newEdge->SetTriangulation(std::move(tri));
 		}
 		else
 		{
@@ -118,6 +122,10 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 
 			auto curveOnSurface = std::make_shared<TModel_Curve>(Curve);
 			newEdge = std::make_shared<TModel_SegmentEdge>(vtx0, vtx1, curveOnSurface, curveOnPlane);
+			Debug_Null_Pointer(newEdge);
+
+			auto tri = Cad_Tools::RetrievePolygonOnTriangulation(Shape(), Face());
+			newEdge->SetTriangulation(std::move(tri));
 		}
 	}
 	else
