@@ -4,6 +4,11 @@
 #include <Pnt3d.hxx>
 #include <Cad_Tools.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <Geom_Curve.hxx>
 #include <Bnd_Box.hxx>
 #include <BRepBndLib.hxx>

@@ -6,6 +6,11 @@
 #include <Global_Message.hxx>
 #include <Pnt3d.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <STEPControl_Reader.hxx>
 #include <Bnd_Box.hxx>
 #include <BRepBndLib.hxx>

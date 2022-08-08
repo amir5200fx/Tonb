@@ -5,6 +5,11 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <Geom_BoundedSurface.hxx>
 
 const std::string tnbLib::Cad_GeomSurface::extension = ".gsurf";

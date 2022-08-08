@@ -22,6 +22,11 @@
 #include <Vec2d.hxx>
 #include <Dir2d.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+#include <Poly_Triangulation.hxx>
 #include <Geom_BSplineSurface.hxx>
 #include <Geom_Surface.hxx>
 #include <TopoDS.hxx>
@@ -389,13 +394,12 @@ tnbLib::GModel_Tools::GetSurfaces(const TopoDS_Shape & theShape)
 		{
 			auto trans = aLoc.Transformation();
 
-			auto& pts = tri->ChangeNodes();
-			forThose(i, 1, pts.Size())
+			forThose(I, 1, tri->NbNodes())
 			{
-				auto x = pts.Value(i);
+				auto x = tri->Node(I);
 				x.Transform(trans);
 
-				pts.SetValue(i, x);
+				tri->SetNode(I, x);
 			}
 		}
 
