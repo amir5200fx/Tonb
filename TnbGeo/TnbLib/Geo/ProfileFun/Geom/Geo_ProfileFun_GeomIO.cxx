@@ -1,5 +1,10 @@
 #include <Geo_ProfileFun_Geom.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <BinTools_Curve2dSet.hxx>
 #include <GeomTools.hxx>
 #include <istream>
