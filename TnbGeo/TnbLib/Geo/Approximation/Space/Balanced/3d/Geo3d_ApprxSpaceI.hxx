@@ -782,7 +782,7 @@ template<class T>
 inline void tnbLib::Geo3d_ApprxSpace<T>::Init()
 {
 	theRoot_ = CreateLeaf(0, Domain());
-	ForcedSubdivide(theRoot_);
+	ForceSubdivide(theRoot_);
 }
 
 template<class T>
@@ -813,7 +813,7 @@ inline void tnbLib::Geo3d_ApprxSpace<T>::Perform
 			<< "no subdivide function has been detected!" << endl
 			<< abort(FatalError);
 	}
-	for (auto& x : nodes)
+	for (auto& x : theNodes)
 	{
 		Subdivide(x);
 	}
