@@ -279,6 +279,32 @@ void tnbLib::Io::ExportMesh
 	}
 }
 
+void tnbLib::Io::ExportMesh
+(
+	const std::vector<Pnt3d>& thePoints,
+	const std::vector<connectivity::quadruple>& theTets, 
+	OFstream& File
+)
+{
+	if (thePoints.empty()) return;
+	if (theTets.empty()) return;
+
+	WriteVariables("X Y Z", File);
+
+	WriteFeTetrahedralZone((Standard_Integer)thePoints.size(), (Standard_Integer)theTets.size(), File);
+
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(File);
+		File << endl;
+	}
+
+	for (const auto& x : theTets)
+	{
+		File << x.Value(0) << " " << x.Value(1) << " " << x.Value(2) << " " << x.Value(3) << endl;
+	}
+}
+
 void tnbLib::Io::ExportCurve
 (
 	const std::vector<Pnt3d>& Points,
