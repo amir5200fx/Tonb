@@ -2,6 +2,7 @@
 
 #include <Cad_Tools.hxx>
 #include <Cad_RepairPlnWire.hxx>
+#include <Cad_TModel.hxx>
 #include <TModel_ParaCurve.hxx>
 #include <TModel_Surface.hxx>
 #include <TModel_ParaWire.hxx>
@@ -14,10 +15,29 @@
 #include <Cad2d_RepairWire.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
+#include <Entity3d_Box.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <Geom2dAPI_InterCurveCurve.hxx>
+#include <Bnd_Box.hxx>
+
+tnbLib::Entity3d_Box
+tnbLib::TModel_Tools::CalcBoundingBox
+(
+	const Cad_TModel & theModel
+)
+{
+	const auto& shape = theModel.Shape();
+	if (shape.IsNull())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no shape has been found." << endl
+			<< abort(FatalError);
+	}
+	auto b = Cad_Tools::BoundingBox(Cad_Tools::BoundingBox(shape));
+	return std::move(b);
+}
 
 Standard_Boolean 
 tnbLib::TModel_Tools::IsPlane
