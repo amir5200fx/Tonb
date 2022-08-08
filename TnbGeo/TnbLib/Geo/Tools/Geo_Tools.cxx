@@ -15,11 +15,21 @@
 #include <Entity2d_Triangulation.hxx>
 #include <Global_Tools.hxx>
 
+#include <predicates.h>
+
 #ifdef Handle
 #undef Handle
 #endif // Handle
 #include <gp_Pln.hxx>
 #include <gp_Lin2d.hxx>
+
+const Standard_Real tnbLib::Geo_Tools::OnePerSix = 1.0 / 6.0;
+
+Standard_Real
+tnbLib::Geo_Tools::MachineEpsilon()
+{
+	return epsilon;
+}
 
 arma::mat 
 tnbLib::Geo_Tools::CalcRotationMatrix
@@ -145,6 +155,72 @@ tnbLib::Geo_Tools::CalcLength
 		d += p0.Distance(p1);
 	}
 	return d;
+}
+
+Standard_Real 
+tnbLib::Geo_Tools::Oriented_Shewchuk
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & P1,
+	const Pnt3d & P2,
+	const Pnt3d & P3
+)
+{
+	static Standard_Real pa[3];
+	static Standard_Real pb[3];
+	static Standard_Real pc[3];
+	static Standard_Real pd[3];
+
+	pa[0] = P1.X();
+	pa[1] = P1.Y();
+	pa[2] = P1.Z();
+
+	pb[0] = P2.X();
+	pb[1] = P2.Y();
+	pb[2] = P2.Z();
+
+	pc[0] = P3.X();
+	pc[1] = P3.Y();
+	pc[2] = P3.Z();
+
+	pd[0] = theCoord.X();
+	pd[1] = theCoord.Y();
+	pd[2] = theCoord.Z();
+
+	return -orient3d(pa, pb, pc, pd);
+}
+
+Standard_Real 
+tnbLib::Geo_Tools::Oriented_Fast
+(
+	const Pnt3d & theCoord, 
+	const Pnt3d & P1,
+	const Pnt3d & P2,
+	const Pnt3d & P3
+)
+{
+	static Standard_Real pa[3];
+	static Standard_Real pb[3];
+	static Standard_Real pc[3];
+	static Standard_Real pd[3];
+
+	pa[0] = P1.X();
+	pa[1] = P1.Y();
+	pa[2] = P1.Z();
+
+	pb[0] = P2.X();
+	pb[1] = P2.Y();
+	pb[2] = P2.Z();
+
+	pc[0] = P3.X();
+	pc[1] = P3.Y();
+	pc[2] = P3.Z();
+
+	pd[0] = theCoord.X();
+	pd[1] = theCoord.Y();
+	pd[2] = theCoord.Z();
+
+	return -orient3dfast(pa, pb, pc, pd);
 }
 
 Standard_Boolean

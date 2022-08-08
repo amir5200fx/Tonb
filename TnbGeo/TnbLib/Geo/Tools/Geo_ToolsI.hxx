@@ -94,6 +94,18 @@ tnbLib::Geo_Tools::Area_cgal
 	return Oriented_cgal(theP0, theP1, theP2)*(Standard_Real)0.5;
 }
 
+inline Standard_Real 
+tnbLib::Geo_Tools::Volume_cgal
+(
+	const Pnt3d & theP0, 
+	const Pnt3d & theP1, 
+	const Pnt3d & theP2,
+	const Pnt3d & theP3
+)
+{
+	return Oriented_cgal(theP0, theP1, theP2, theP3)*OnePerSix;
+}
+
 inline Standard_Boolean 
 tnbLib::Geo_Tools::IsPointRightEdge_cgal
 (
@@ -118,6 +130,30 @@ tnbLib::Geo_Tools::IsPointRightFacet_cgal
 }
 
 inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPointRightFacet_Shewchuk
+(
+	const Pnt3d & thePoint,
+	const Pnt3d & theP0,
+	const Pnt3d & theP1,
+	const Pnt3d & theP2
+)
+{
+	return Oriented_Shewchuk(thePoint, theP0, theP1, theP2) < 0.0;
+}
+
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPointRightFacet_Fast
+(
+	const Pnt3d & thePoint, 
+	const Pnt3d & theP0,
+	const Pnt3d & theP1,
+	const Pnt3d & theP2
+)
+{
+	return Oriented_Fast(thePoint, theP0, theP1, theP2) < 0.0;
+}
+
+inline Standard_Boolean 
 tnbLib::Geo_Tools::IsPointLeftEdge_cgal
 (
 	const Pnt2d & Point, 
@@ -138,6 +174,30 @@ tnbLib::Geo_Tools::IsPointLeftFacet_cgal
 )
 {
 	return Oriented_cgal(thePoint, theP0, theP1, theP2) > 0.0;
+}
+
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPointLeftFacet_Shewchuk
+(
+	const Pnt3d & thePoint,
+	const Pnt3d & theP0, 
+	const Pnt3d & theP1, 
+	const Pnt3d & theP2
+)
+{
+	return Oriented_Shewchuk(thePoint, theP0, theP1, theP2) > 0.0;
+}
+
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPointLeftFacet_Fast
+(
+	const Pnt3d & thePoint,
+	const Pnt3d & theP0, 
+	const Pnt3d & theP1,
+	const Pnt3d & theP2
+)
+{
+	return Oriented_Fast(thePoint, theP0, theP1, theP2) > 0.0;
 }
 
 inline Standard_Boolean 
@@ -210,6 +270,53 @@ tnbLib::Geo_Tools::IsPairedTwoSegments
 			return Standard_True;
 		else
 			return Standard_False;
+	}
+	return Standard_False;
+}
+
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPairedTwoTriangles
+(
+	const Standard_Integer v1,
+	const Standard_Integer v2,
+	const Standard_Integer v3,
+	const Standard_Integer q1,
+	const Standard_Integer q2,
+	const Standard_Integer q3
+)
+{
+	if (v1 IS_EQUAL q1)
+	{
+		if (v2 IS_EQUAL q2)
+		{
+			if (v3 IS_EQUAL q3) return Standard_True;
+		}
+		else if (v2 IS_EQUAL q3)
+		{
+			if (v3 IS_EQUAL q2) return Standard_True;
+		}
+	}
+	else if (v1 IS_EQUAL q2)
+	{
+		if (v2 IS_EQUAL q1)
+		{
+			if (v3 IS_EQUAL q3) return Standard_True;
+		}
+		else if (v2 IS_EQUAL q3)
+		{
+			if (v3 IS_EQUAL q1) return Standard_True;
+		}
+	}
+	else if (v1 IS_EQUAL q3)
+	{
+		if (v2 IS_EQUAL q1)
+		{
+			if (v3 IS_EQUAL q2) return Standard_True;
+		}
+		else if (v2 IS_EQUAL q2)
+		{
+			if (v3 IS_EQUAL q1) return Standard_True;
+		}
 	}
 	return Standard_False;
 }

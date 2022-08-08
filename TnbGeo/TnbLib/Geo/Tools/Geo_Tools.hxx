@@ -39,6 +39,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbGeo_EXPORT const Standard_Real OnePerSix;
+
 		class IntersectEntity2d
 		{
 
@@ -139,6 +141,8 @@ namespace tnbLib
 				return true;
 			}
 		};
+
+		static TnbGeo_EXPORT Standard_Real MachineEpsilon();
 
 		static TnbGeo_EXPORT arma::mat 
 			CalcRotationMatrix(const Dir3d&, const Dir3d&);
@@ -286,12 +290,39 @@ namespace tnbLib
 				const Pnt3d& theP2
 			);
 
+		static TnbGeo_EXPORT Standard_Real 
+			Oriented_Shewchuk
+			(
+				const Pnt3d& theCoord, 
+				const Pnt3d& P1,
+				const Pnt3d& P2,
+				const Pnt3d& P3
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			Oriented_Fast
+			(
+				const Pnt3d& theCoord,
+				const Pnt3d& P1,
+				const Pnt3d& P2,
+				const Pnt3d& P3
+			);
+
 		static inline Standard_Real
 			Area_cgal
 			(
 				const Pnt2d& theP0,
 				const Pnt2d& theP1,
 				const Pnt2d& theP2
+			);
+
+		static inline Standard_Real 
+			Volume_cgal
+			(
+				const Pnt3d& theP0,
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2,
+				const Pnt3d& theP3
 			);
 
 		static inline Standard_Boolean
@@ -311,6 +342,24 @@ namespace tnbLib
 				const Pnt3d& theP2
 			);
 
+		static inline Standard_Boolean 
+			IsPointRightFacet_Shewchuk
+			(
+				const Pnt3d& thePoint, 
+				const Pnt3d& theP0,
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2
+			);
+
+		static inline Standard_Boolean 
+			IsPointRightFacet_Fast
+			(
+				const Pnt3d& thePoint, 
+				const Pnt3d& theP0,
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2
+			);
+
 		static inline Standard_Boolean
 			IsPointLeftEdge_cgal
 			(
@@ -323,6 +372,24 @@ namespace tnbLib
 			IsPointLeftFacet_cgal
 			(
 				const Pnt3d& thePoint,
+				const Pnt3d& theP0,
+				const Pnt3d& theP1,
+				const Pnt3d& theP2
+			);
+
+		static inline Standard_Boolean 
+			IsPointLeftFacet_Shewchuk
+			(
+				const Pnt3d& thePoint, 
+				const Pnt3d& theP0,
+				const Pnt3d& theP1,
+				const Pnt3d& theP2
+			);
+
+		static inline Standard_Boolean 
+			IsPointLeftFacet_Fast
+			(
+				const Pnt3d& thePoint, 
 				const Pnt3d& theP0,
 				const Pnt3d& theP1,
 				const Pnt3d& theP2
@@ -362,6 +429,17 @@ namespace tnbLib
 				const Standard_Integer v2,
 				const Standard_Integer q1,
 				const Standard_Integer q2
+			);
+
+		static inline Standard_Boolean 
+			IsPairedTwoTriangles
+			(
+				const Standard_Integer v1, 
+				const Standard_Integer v2, 
+				const Standard_Integer v3,
+				const Standard_Integer q1, 
+				const Standard_Integer q2, 
+				const Standard_Integer q3
 			);
 
 		static inline Standard_Boolean

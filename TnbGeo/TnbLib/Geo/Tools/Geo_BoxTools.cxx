@@ -2,8 +2,12 @@
 
 #include <Entity2d_Triangulation.hxx>
 #include <Entity3d_Triangulation.hxx>
+#include <Entity3d_Tetrahedralization.hxx>
 #include <Geo2d_DelTri.hxx>
+#include <Geo3d_DelTri_CGAL.hxx>
+#include <Geo3d_DelTri_Fade3d.hxx>
 #include <Merge2d_Pnt.hxx>
+#include <Merge3d_Pnt.hxx>
 
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 
 tnbLib::Geo_BoxTools::Triangulate(const Entity2d_Box & b)
@@ -66,11 +70,92 @@ void tnbLib::Geo_BoxTools::GetTriangulation
 		mergeAlg.Perform();
 
 		merged = mergeAlg.CompactPoints();
+		pnts.clear();
 	}
 	
 	Geo2d_DelTri triAlg(merged);
 	triAlg.Triangulate();
 
 	theTri.Points() = std::move(merged);
-	theTri.Connectivity() = std::move(triAlg.Data()->Connectivity());
+	auto& c = triAlg.Data()->Connectivity();
+	theTri.Connectivity() = std::move(c);
+}
+
+void tnbLib::Geo_BoxTools::GetTriangulation
+(
+	const std::vector<Entity3d_Box>& theBoxes,
+	Entity3d_Tetrahedralization & theTri
+)
+{
+	std::vector<Pnt3d> pnts;
+	pnts.reserve(8 * theBoxes.size());
+
+	for (const auto& x : theBoxes)
+	{
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Aft_SW));
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Aft_SE));
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Aft_NE));
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Aft_NW));
+
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Fwd_SW));
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Fwd_SE));
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Fwd_NE));
+		pnts.push_back(x.Corner(Box3d_PickAlgorithm_Fwd_NW));
+	}
+
+	std::vector<Pnt3d> merged;
+	{
+		Merge3d_Pnt mergeAlg(Triangulation_Merge_Resolution, Triangulation_Merge_Radius);
+		mergeAlg.SetCoords(pnts);
+		mergeAlg.Perform();
+
+		merged = mergeAlg.CompactPoints();
+		pnts.clear();
+	}
+
+	cgalLib::Geo3d_DelTri triAlg(merged);
+	triAlg.Perform();
+
+	theTri.Points() = std::move(merged);
+
+	auto& c = triAlg.Triangulation()->Connectivity();
+	theTri.Connectivity() = std::move(c);
+}
+
+void tnbLib::Geo_BoxTools::GetTriangulation
+(
+	const std::vector<std::shared_ptr<Entity3d_Box>>& theBoxes,
+	Entity3d_Tetrahedralization & theTri
+)
+{
+	std::vector<Pnt3d> pnts;
+	pnts.reserve(8 * theBoxes.size());
+
+	for (const auto& x : theBoxes)
+	{
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Aft_SW));
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Aft_SE));
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Aft_NE));
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Aft_NW));
+
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Fwd_SW));
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Fwd_SE));
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Fwd_NE));
+		pnts.push_back(x->Corner(Box3d_PickAlgorithm_Fwd_NW));
+	}
+
+	std::vector<Pnt3d> merged;
+	{
+		Merge3d_Pnt mergeAlg(Triangulation_Merge_Resolution, Triangulation_Merge_Radius);
+		mergeAlg.SetCoords(pnts);
+		mergeAlg.Perform();
+
+		merged = mergeAlg.CompactPoints();
+		pnts.clear();
+	}
+
+	fadeLib::Geo3d_DelTri triAlg(merged);
+	triAlg.Perform();
+
+	theTri = *triAlg.Triangulation();
 }

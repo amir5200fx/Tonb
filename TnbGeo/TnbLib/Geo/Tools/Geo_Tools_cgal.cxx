@@ -199,9 +199,13 @@ tnbLib::Geo_Tools::Oriented_cgal
 	const Pnt3d & theP2
 )
 {
-	Vector_3 ad(theP2.X() - theQ.X(), theP2.Y() - theQ.Y(), theP2.Z() - theQ.Z());
+	/*Vector_3 ad(theP2.X() - theQ.X(), theP2.Y() - theQ.Y(), theP2.Z() - theQ.Z());
 	Vector_3 bd(theP2.X() - theP0.X(), theP2.Y() - theP0.Y(), theP2.Z() - theP0.Z());
-	Vector_3 cd(theP2.X() - theP1.X(), theP2.Y() - theP1.Y(), theP2.Z() - theP1.Z());
+	Vector_3 cd(theP2.X() - theP1.X(), theP2.Y() - theP1.Y(), theP2.Z() - theP1.Z());*/
+
+	Vector_3 ad(theQ.X() - theP0.X(), theQ.Y() - theP0.Y(), theQ.Z() - theP0.Z());
+	Vector_3 bd(theQ.X() - theP1.X(), theQ.Y() - theP1.Y(), theQ.Z() - theP1.Z());
+	Vector_3 cd(theQ.X() - theP2.X(), theQ.Y() - theP2.Y(), theQ.Z() - theP2.Z());
 
 	return cgal_object.compute_determinant_3_object()(ad, bd, cd);
 }
