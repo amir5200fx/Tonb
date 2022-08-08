@@ -7,6 +7,7 @@
 #include <Aft2d_tSegmentNode.hxx>
 #include <Aft2d_tCornerGapNode.hxx>
 #include <Aft2d_tSegmentGapNode.hxx>
+#include <Aft2d_ElementSurface.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

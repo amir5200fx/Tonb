@@ -18,7 +18,20 @@ namespace tnbLib
 		const auto& n1 = *Node1();
 		const auto& n2 = *Node2();
 
-		return Geo_Tools::IsPointLeftFacet_cgal(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
+		/*std::cout << "left side? " << std::endl;
+		std::cout << n0.Coord() << std::endl;
+		std::cout << n1.Coord() << std::endl;
+		std::cout << n2.Coord() << std::endl;
+
+		std::cout << std::endl;
+		std::cout << theCoord << std::endl;
+		std::cout << std::endl;
+
+		std::cout << (Geo_Tools::IsPointLeftFacet_Fast(theCoord, n0.Coord(), n1.Coord(), n2.Coord()) ? "YES" : "NO") << std::endl;
+		std::cout << "---------------------" << std::endl;
+		std::cout << std::endl;*/
+
+		return Geo_Tools::IsPointLeftFacet_Fast(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
 	}
 
 	template<>
@@ -32,6 +45,19 @@ namespace tnbLib
 		const auto& n1 = *Node1();
 		const auto& n2 = *Node2();
 
-		return Geo_Tools::IsPointRightFacet_cgal(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
+		/*std::cout << "right side? " << std::endl;
+		std::cout << n0.Coord() << std::endl;
+		std::cout << n1.Coord() << std::endl;
+		std::cout << n2.Coord() << std::endl;
+
+		std::cout << std::endl;
+		std::cout << theCoord << std::endl;
+		std::cout << std::endl;
+
+		std::cout << (Geo_Tools::IsPointRightFacet_Fast(theCoord, n0.Coord(), n1.Coord(), n2.Coord()) ? "YES" : "NO") << std::endl;
+		std::cout << "---------------------" << std::endl;
+		std::cout << std::endl;*/
+
+		return Geo_Tools::IsPointRightFacet_Fast(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
 	}
 }

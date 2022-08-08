@@ -4,6 +4,7 @@
 #include <Aft2d_tSegmentPoleNode.hxx>
 #include <Aft2d_tPlnCurveSurface.hxx>
 #include <Aft2d_EdgeSurface.hxx>
+#include <Aft2d_ElementSurface.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>

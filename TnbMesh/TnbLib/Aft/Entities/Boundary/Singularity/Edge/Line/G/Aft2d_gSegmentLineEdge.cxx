@@ -3,6 +3,7 @@
 #include <Aft2d_gCornerLineNode.hxx>
 #include <Aft2d_gSegmentLineNode.hxx>
 #include <Aft2d_gPlnCurveSurface.hxx>
+#include <Aft2d_ElementSurface.hxx>
 #include <Entity2d_Polygon.hxx>
 
 template<>

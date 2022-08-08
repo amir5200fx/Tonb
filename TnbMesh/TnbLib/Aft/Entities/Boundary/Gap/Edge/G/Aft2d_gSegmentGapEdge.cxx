@@ -3,6 +3,7 @@
 #include <Aft2d_gCornerGapNode.hxx>
 #include <Aft2d_gSegmentGapNode.hxx>
 #include <Aft2d_gPlnCurveSurface.hxx>
+#include <Aft2d_ElementSurface.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>

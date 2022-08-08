@@ -7,6 +7,7 @@
 #include <Mesh_Module.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#include <OFstream.hxx>
 
 #include <memory>
 #include <vector>
@@ -107,6 +108,8 @@ namespace tnbLib
 		(
 			std::vector<std::shared_ptr<nodeType>>& theNodes
 		) const;
+
+		void ExportToPlt(OFstream&) const;
 	};
 }
 

@@ -3,7 +3,7 @@
 #include <Cad_ModifySingularPlaneTools.hxx>
 #include <Cad_SingularityTopology.hxx>
 #include <Cad_ColorApprxMetric.hxx>
-
+#include <Mesh2d_Element.hxx>
 #include <TecPlot.hxx>
 
 #ifdef _DEBUG

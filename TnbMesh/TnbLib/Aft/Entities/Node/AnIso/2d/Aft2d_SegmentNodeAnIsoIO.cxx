@@ -1,6 +1,7 @@
 #include <Aft2d_SegmentNodeAnIso.hxx>
 
 #include <Aft2d_PlnCurveAnIso.hxx>
+#include <Aft2d_ElementAnIso.hxx>
 
 typedef tnbLib::Mesh_BndNodeGeomAdaptor<tnbLib::Aft2d_PlnCurveAnIso, void, tnbLib::Mesh_BndNode_Position_Segment>
 bndNodeGeomAdaptor;

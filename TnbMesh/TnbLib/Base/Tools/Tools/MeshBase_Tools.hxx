@@ -9,6 +9,7 @@
 #include <Mesh2d_EdgeFwd.hxx>
 #include <Mesh2d_NodeFwd.hxx>
 #include <GeoMesh2d_BackgroundFwd.hxx>
+#include <GeoMesh3d_BackgroundFwd.hxx>
 #include <Global_Serialization.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
@@ -50,6 +51,14 @@ namespace tnbLib
 				const Standard_Real h,
 				const Standard_Real len
 			);
+
+		template<class SourceType>
+		static void SetSourcesToMesh3d
+		(
+			const std::vector<std::shared_ptr<SourceType>>& theSources,
+			const Standard_Real theBase, 
+			GeoMesh3d_Background& theMesh
+		);
 
 		static TnbMesh_EXPORT void SetSourcesToMesh
 		(
@@ -180,6 +189,14 @@ namespace tnbLib
 			}
 			ar << entities;
 		}
+
+		static inline Standard_Real 
+			CalcRadius
+			(
+				const Standard_Real growthRate, 
+				const Standard_Real theTarget,
+				const Standard_Real theBase
+			);
 	};
 }
 

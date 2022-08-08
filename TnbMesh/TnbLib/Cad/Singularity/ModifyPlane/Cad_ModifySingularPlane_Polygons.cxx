@@ -1,6 +1,7 @@
 #include <Cad_ModifySingularPlane.hxx>
 
 #include <Cad_ModifySingularPlane_PolygonLib.hxx>
+#include <Mesh2d_Element.hxx>
 #include <Entity2d_PolygonTools.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <TnbError.hxx>

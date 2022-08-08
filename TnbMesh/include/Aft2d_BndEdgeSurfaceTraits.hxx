@@ -2,6 +2,7 @@
 #ifndef _Aft2d_BndEdgeSurfaceTraits_Header
 #define _Aft2d_BndEdgeSurfaceTraits_Header
 
+#include <Aft2d_EdgeSurfaceTraits.hxx>
 #include <Aft2d_EdgeSurfaceFwd.hxx>
 #include <Aft2d_BndNodeSurfaceFwd.hxx>
 

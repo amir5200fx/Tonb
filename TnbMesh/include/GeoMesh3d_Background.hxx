@@ -10,7 +10,7 @@ namespace tnbLib
 {
 
 	template<>
-	void GeoMesh3d_Background::HvCorrection
+	TnbMesh_EXPORT void GeoMesh3d_Background::HvCorrection
 	(
 		const std::vector<std::shared_ptr<Mesh3d_Node>>& nodes,
 		const Standard_Real Factor,
@@ -18,7 +18,7 @@ namespace tnbLib
 	);
 
 	template<>
-	void GeoMesh3d_Background::ExportToPlt(OFstream & File) const;
+	TnbMesh_EXPORT void GeoMesh3d_Background::ExportToPlt(OFstream & File) const;
 }
 
 #endif // !_GeoMesh3d_Background_Header

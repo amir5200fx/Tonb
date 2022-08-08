@@ -2,6 +2,7 @@
 #ifndef _Aft2d_ElementSurfaceFwd_Header
 #define _Aft2d_ElementSurfaceFwd_Header
 
+//#include <Aft2d_ElementSurfaceTraits.hxx>
 #include <Aft_ElementFwd.hxx>
 
 namespace tnbLib

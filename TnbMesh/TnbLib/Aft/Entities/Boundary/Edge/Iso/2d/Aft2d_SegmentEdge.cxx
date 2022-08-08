@@ -5,6 +5,7 @@
 #include <Aft2d_Node.hxx>
 #include <Aft2d_CornerNode.hxx>
 #include <Aft2d_SegmentNode.hxx>
+#include <Aft2d_Element.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

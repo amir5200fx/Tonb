@@ -1,5 +1,8 @@
 #include <GeoMesh3d_Data.hxx>
 
+#include <Mesh3d_Element.hxx>
+#include <Mesh3d_Edge.hxx>
+#include <Mesh3d_Node.hxx>
 #include <Geo_Tools.hxx>
 #include <Entity3d_TetrahedralizationTools.hxx>
 #include <TnbError.hxx>
@@ -13,41 +16,44 @@ namespace tnbLib
 	{
 		const auto& Points = theTriangulation.Points();
 		const auto& Triangles = theTriangulation.Connectivity();
-
-		std::vector<std::shared_ptr<nodeType>> Nodes;
+		//std::cout << "nb of tris: " << Triangles.size() << std::endl;
+		//std::cout << "nb of points: " << Points.size() << std::endl;
+		std::vector<std::shared_ptr<Mesh3d_Node>> Nodes;
 		Nodes.reserve(Points.size());
 
 		// Creating the nodes
 		Standard_Integer k = 0;
 		for (const auto& x : Points)
 		{
-			Nodes.push_back(std::make_shared<nodeType>(++k, x));
+			auto node = std::make_shared<Mesh3d_Node>(++k, x);
+			Nodes.push_back(std::move(node));
 		}
 
-		theElements_.reserve(Triangles.size());
+		std::vector<std::shared_ptr<Mesh3d_Element>> elements;
+		elements.reserve(Triangles.size());
 		// Creating the Elements
 		k = 0;
 		for (const auto& x : Triangles)
 		{
-			auto v0 = x.Value(0) - 1;
-			auto v1 = x.Value(1) - 1;
-			auto v2 = x.Value(2) - 1;
-			auto v3 = x.Value(3) - 1;
+			auto v0 = Index_Of(x.Value(0));
+			auto v1 = Index_Of(x.Value(1));
+			auto v2 = Index_Of(x.Value(2));
+			auto v3 = Index_Of(x.Value(3));
 
 			if (x.IsDegenerated())
 			{
-				FatalErrorIn("void AutLib::GeoMesh2d_Data::Construct()")
+				FatalErrorIn(FunctionSIG)
 					<< "Invalid Triangle" << endl
 					<< abort(FatalError);
 			}
 
-			Debug_Null_Pointer(Nodes[v0]);
-			Debug_Null_Pointer(Nodes[v1]);
-			Debug_Null_Pointer(Nodes[v2]);
-			Debug_Null_Pointer(Nodes[v3]);
+			Debug_Null_Pointer(Nodes.at(v0));
+			Debug_Null_Pointer(Nodes.at(v1));
+			Debug_Null_Pointer(Nodes.at(v2));
+			Debug_Null_Pointer(Nodes.at(v3));
 
-			auto element = std::make_shared<elementType>(++k, Nodes[v0], Nodes[v1], Nodes[v2], Nodes[v3]);
-			theElements_.push_back(element);
+			auto element = std::make_shared<Mesh3d_Element>(++k, Nodes.at(v0), Nodes.at(v1), Nodes.at(v2), Nodes.at(v3));
+			elements.push_back(element);
 
 			element->Node0()->InsertToElements(element->Index(), element);
 			element->Node1()->InsertToElements(element->Index(), element);
@@ -57,7 +63,7 @@ namespace tnbLib
 
 		// Create Edges
 		Standard_Integer nbEdges = 0;
-		for (auto& element : theElements_)
+		for (const auto& element : elements)
 		{
 			forThose(I, 0, 5)
 			{
@@ -70,7 +76,7 @@ namespace tnbLib
 				auto v2 = node2->Index();
 
 				Standard_Boolean Created = Standard_False;
-				std::shared_ptr<edgeType> current_edge;
+				std::shared_ptr<Mesh3d_Edge> current_edge;
 
 				if ((NOT node1->NbEdges()) OR(NOT node2->NbEdges()))
 				{
@@ -81,8 +87,8 @@ namespace tnbLib
 					auto size1 = node1->NbEdges();
 					auto size2 = node2->NbEdges();
 
-					std::shared_ptr<nodeType> current;
-					std::shared_ptr<nodeType> other;
+					std::shared_ptr<Mesh3d_Node> current;
+					std::shared_ptr<Mesh3d_Node> other;
 
 					if (size1 <= size2)
 					{
@@ -96,7 +102,6 @@ namespace tnbLib
 					}
 
 					Standard_Boolean exist = Standard_False;
-
 					for (const auto& x : current->RetrieveEdges())
 					{
 						auto edge = x.second.lock();
@@ -127,18 +132,19 @@ namespace tnbLib
 							<< abort(FatalError);
 					}
 
-					current_edge = std::make_shared<edgeType>(++nbEdges, node1, node2);
+					current_edge = std::make_shared<Mesh3d_Edge>(++nbEdges, node1, node2);
 					current_edge->InsertToElements(element->Index(), element);
 
 					node1->InsertToEdges(current_edge->Index(), current_edge);
 					node2->InsertToEdges(current_edge->Index(), current_edge);
 				}
+				element->SetEdge(I, current_edge);
 			}
 		}
 
 		// Create Facets
 		Standard_Integer nbFacets = 0;
-		for (auto& element : theElements_)
+		for (const auto& element : elements)
 		{
 			forThose(I, 0, 3)
 			{
@@ -192,7 +198,7 @@ namespace tnbLib
 						Debug_Null_Pointer(facet.Node2());
 
 						if (
-							Geo_Tools::IsOneCommonPointTwoTriangles
+							Geo_Tools::IsPairedTwoTriangles
 							(
 								node1->Index(),
 								node2->Index(),
@@ -204,8 +210,8 @@ namespace tnbLib
 						{
 							exist = Standard_True;
 							current_facet = facet_p;
-
-							current_facet->SetRightElement(element);
+							//std::cout << "left element is detected." << std::endl;
+							current_facet->SetLeftElement(element);
 
 							break;
 						}
@@ -227,19 +233,18 @@ namespace tnbLib
 					current_facet = std::make_shared<Mesh3d_Facet>(++nbFacets, node1, node2, node3);
 					Debug_Null_Pointer(current_facet);
 
-					current_facet->SetLeftElement(element);
+					current_facet->SetRightElement(element);
 
 					node1->InsertToFacets(current_facet->Index(), current_facet);
 					node2->InsertToFacets(current_facet->Index(), current_facet);
 					node3->InsertToFacets(current_facet->Index(), current_facet);
 				}
-
 				element->SetFacet(I, current_facet);
 			}
 		}
 
 		// Identifying the Neighbors
-		for (auto& x : theElements_)
+		for (const auto& x : elements)
 		{
 			Debug_Null_Pointer(x);
 			auto& element = *x;
@@ -268,5 +273,97 @@ namespace tnbLib
 			element.SetNeighbor3(face3->LeftElement());
 			if (face3->LeftElement().lock() IS_EQUAL x) element.SetNeighbor3(face3->RightElement());
 		}
+
+#ifdef _DEBUG
+		// check the facets [8/4/2022 Amir]
+		for (const auto& x : elements)
+		{
+			Debug_Null_Pointer(x);
+			auto[f0, f1, f2, f3] = x->Facets();
+			{
+				auto leftElement = f0->LeftElement().lock();
+				/*if (NOT leftElement)
+				{
+					std::cout << " - boundary facet: " << f0->Index() << std::endl;
+				}*/
+				if (leftElement NOT_EQUAL x)
+				{
+					auto rightElement = f0->RightElement().lock();
+					if (rightElement NOT_EQUAL x)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "invalid data structure has been detected." << endl
+							<< " - element: " << x->Index() << endl
+							<< " - left element: " << leftElement->Index() << endl
+							<< " - right element: " << rightElement->Index() << endl
+							<< abort(FatalError);
+					}
+				}
+			}
+			{
+				auto leftElement = f1->LeftElement().lock();
+				/*if (NOT leftElement)
+				{
+					std::cout << " - boundary facet: " << f1->Index() << std::endl;
+				}*/
+				if (leftElement NOT_EQUAL x)
+				{
+					auto rightElement = f1->RightElement().lock();
+					if (rightElement NOT_EQUAL x)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "invalid data structure has been detected." << endl
+							<< " - element: " << x->Index() << endl
+							<< " - left element: " << leftElement->Index() << endl
+							<< " - right element: " << rightElement->Index() << endl
+							<< abort(FatalError);
+					}
+				}
+			}
+			{
+				auto leftElement = f2->LeftElement().lock();
+				/*if (NOT leftElement)
+				{
+					std::cout << " - boundary facet: " << f2->Index() << std::endl;
+				}*/
+				if (leftElement NOT_EQUAL x)
+				{
+					auto rightElement = f2->RightElement().lock();
+					if (rightElement NOT_EQUAL x)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "invalid data structure has been detected." << endl
+							<< " - element: " << x->Index() << endl
+							<< " - left element: " << leftElement->Index() << endl
+							<< " - right element: " << rightElement->Index() << endl
+							<< abort(FatalError);
+					}
+				}
+			}
+			{
+				auto leftElement = f3->LeftElement().lock();
+				/*if (NOT leftElement)
+				{
+					std::cout << " - boundary facet: " << f3->Index() << std::endl;
+				}*/
+				if (leftElement NOT_EQUAL x)
+				{
+					auto rightElement = f3->RightElement().lock();
+					if (rightElement NOT_EQUAL x)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "invalid data structure has been detected." << endl
+							<< " - element: " << x->Index() << endl
+							<< " - left element: " << leftElement->Index() << endl
+							<< " - right element: " << rightElement->Index() << endl
+							<< abort(FatalError);
+					}
+				}
+			}
+		}
+#endif // _DEBUG
+
+
+		theElements_ = std::move(elements);
 	}
 }

@@ -1915,6 +1915,63 @@
     <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\T\UniMetric">
       <UniqueIdentifier>{084f0d33-6ae7-413d-906b-18e8ec745358}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Boundary\3d">
+      <UniqueIdentifier>{d07934e1-9c05-4d29-b978-6275863fcca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\Info">
+      <UniqueIdentifier>{280647b7-b557-4fe8-b225-150e7219fee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary">
+      <UniqueIdentifier>{27c27815-4e21-4a01-817a-ae1b531c8fd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment">
+      <UniqueIdentifier>{b07fba3a-1963-4546-8e58-772f77d4443b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face">
+      <UniqueIdentifier>{e577e424-6c80-44ff-bf9b-8350048ff489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Corner">
+      <UniqueIdentifier>{c6ca1a2d-8696-4c21-8fc5-36e5984972db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\UnionSizeMap\3d">
+      <UniqueIdentifier>{703384e9-787f-4313-8a5a-d0a3c938f89b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Boundary\3d\Uniform">
+      <UniqueIdentifier>{0bcbb860-cdc6-453c-9ba7-f8e218aa690d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform">
+      <UniqueIdentifier>{9acc1e03-98fa-4518-af29-d336b406109c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Adaptive">
+      <UniqueIdentifier>{d868c6c7-2548-4251-bc52-67db629c2e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Info">
+      <UniqueIdentifier>{deec786f-c65f-40fb-af85-ca9d96cb852c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Feature\3d">
+      <UniqueIdentifier>{37376758-8869-4cab-ab90-5954d65e6f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Feature\3d\Uniform">
+      <UniqueIdentifier>{303072bb-1b4a-498d-a4bc-9f5ef5b5ed4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform">
+      <UniqueIdentifier>{a738cbaa-dfd7-48f7-b498-6357f9c3ba43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Adaptive">
+      <UniqueIdentifier>{c9101077-082c-4e57-a4b0-6c9c6fa84eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Region\3d">
+      <UniqueIdentifier>{2084be09-3eb1-4ad1-b256-0fb9024da143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Region\2d">
+      <UniqueIdentifier>{1d635de4-dbb4-4d25-ad78-3ef5d6e6490b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Region\3d\iso">
+      <UniqueIdentifier>{974e6f46-6d9d-41fd-8da6-e94b6e6e8407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Region\3d\Surface">
+      <UniqueIdentifier>{bdc47e02-078e-480f-a6cf-010e6fcdbcee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4638,6 +4695,66 @@
     <ClInclude Include="TnbLib\Aft\Region\Plane\Surface\T\UniMetric\Aft2d_tRegionPlaneSurfaceUniMetricFwd.hxx">
       <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Boundary\3d\Mesh3d_BoundarySizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Boundary\3d\Mesh3d_BoundarySizeMapControlFwd.hxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\3d\Mesh3d_SizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\3d\Mesh3d_SizeMapControlFwd.hxx">
+      <Filter>TnbLib\SizeMapControl\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Mesh3d_SizeMapTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\Info\Mesh_SizeMapTool_Info.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Mesh3d_BoundarySizeMapTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\BoundarySizeMap3d_SegmentTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\BoundarySizeMap3d_FaceTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\UnionSizeMap\3d\Mesh3d_UnionSizeMap.hxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Boundary\3d\Uniform\Mesh3d_UniformBoundarySizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\3d\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\BoundarySizeMap3d_UniformFaceTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Info\Mesh_SizeMapControl_Info.hxx">
+      <Filter>TnbLib\SizeMapControl\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Feature\3d\Mesh3d_FeatureSizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Feature\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Feature\3d\Mesh3d_FeatureSizeMapControlFwd.hxx">
+      <Filter>TnbLib\SizeMapControl\Feature\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Feature\3d\Uniform\Mesh3d_UniformFeatureSizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Feature\3d\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform\BoundarySizeMap3d_UniformSegmentTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Region\traits\Mesh_RegionTraits.hxx">
+      <Filter>TnbLib\Region\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun3d_Background.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun3d_BackgroundFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -5926,6 +6043,75 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Region\Plane\Surface\T\UniMetric\Aft2d_tRegionPlaneSurfaceUniMetric.cxx">
       <Filter>TnbLib\Aft\Region\Plane\Surface\T\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\3d\Mesh3d_SizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Mesh3d_SizeMapTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Mesh3d_SizeMapToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Info\Mesh_SizeMapTool_Info.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Mesh3d_BoundarySizeMapTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\BoundarySizeMap3d_SegmentTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\BoundarySizeMap3d_SegmentToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\BoundarySizeMap3d_FaceTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\3d\Mesh3d_UnionSizeMap.cxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Boundary\3d\Uniform\Mesh3d_UniformBoundarySizeMapControl.cxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\3d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Boundary\3d\Uniform\Mesh3d_UniformBoundarySizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\3d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\BoundarySizeMap3d_UniformFaceTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\3d\Mesh3d_SizeMapControl.cxx">
+      <Filter>TnbLib\SizeMapControl\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Info\Mesh_SizeMapControl_Info.cxx">
+      <Filter>TnbLib\SizeMapControl\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Info\Mesh_SizeMapControl_InfoIO.cxx">
+      <Filter>TnbLib\SizeMapControl\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Feature\3d\Uniform\Mesh3d_UniformFeatureSizeMapControl.cxx">
+      <Filter>TnbLib\SizeMapControl\Feature\3d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Feature\3d\Uniform\Mesh3d_UniformFeatureSizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl\Feature\3d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform\BoundarySizeMap3d_UniformSegmentTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun3d_BackgroundIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform\BoundarySizeMap3d_UniformSegmentToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\BoundarySizeMap3d_UniformFaceToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\Base\Mesh_SizeMapToolBase.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\Iso\3d\GeoMesh3d_BackgroundIO.cxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\Iso\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

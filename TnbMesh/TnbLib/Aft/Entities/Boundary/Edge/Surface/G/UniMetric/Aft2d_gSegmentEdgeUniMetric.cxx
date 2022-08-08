@@ -6,6 +6,7 @@
 #include <Aft2d_gCornerNodeUniMetric.hxx>
 #include <Aft2d_gSegmentNodeUniMetric.hxx>
 #include <Aft2d_gCornerGapNodeUniMetric.hxx>
+#include <Aft2d_ElementSurface.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

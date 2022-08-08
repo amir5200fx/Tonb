@@ -51,6 +51,10 @@ namespace tnbLib
 			: theBoundingBox_(theBox)
 		{}
 
+		Geo_SizeFunction(Entity_Box<Point>&& theBox)
+			: theBoundingBox_(std::move(theBox))
+		{}
+
 		Geo_SizeFunction
 		(
 			const Standard_Integer theIndex,
@@ -60,6 +64,17 @@ namespace tnbLib
 			: Global_Indexed(theIndex)
 			, Global_Named(theName)
 			, theBoundingBox_(theBox)
+		{}
+
+		Geo_SizeFunction
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Entity_Box<Point>&& theBox
+		)
+			: Global_Indexed(theIndex)
+			, Global_Named(theName)
+			, theBoundingBox_(std::move(theBox))
 		{}
 
 	public:

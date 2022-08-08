@@ -48,9 +48,10 @@ namespace tnbLib
 		Mesh2d_BoundarySizeMapTool
 		(
 			const std::shared_ptr<Cad2d_Plane>& thePlane,
+			const std::shared_ptr<Entity2d_Box>& theDomain,
 			const std::shared_ptr<Mesh2d_ReferenceValues>& theRef
 		)
-			: Mesh2d_SizeMapTool(theRef, thePlane)
+			: Mesh2d_SizeMapTool(theRef, theDomain, thePlane)
 		{}
 
 

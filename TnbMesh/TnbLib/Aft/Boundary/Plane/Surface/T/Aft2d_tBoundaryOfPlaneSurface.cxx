@@ -4,6 +4,7 @@
 #include <Aft2d_tPlnCurveSurface.hxx>
 #include <Aft2d_tPlnWireSurface.hxx>
 #include <Aft2d_tSegmentGapEdge.hxx>
+#include <Aft2d_ElementSurface.hxx>
 #include <Cad_tPoleSingularCurve.hxx>
 #include <Cad_tLineSingularCurve.hxx>
 #include <Cad_tPlnGapCurve.hxx>

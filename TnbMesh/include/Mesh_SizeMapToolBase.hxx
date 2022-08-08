@@ -17,8 +17,32 @@ namespace tnbLib
 	template<class Box>
 	class Mesh_ReferenceValues;
 
+	class Mesh_SizeMapToolBaseNonTemplate
+	{
+
+		/*Private Data*/
+
+	protected:
+
+		// default constructor [7/20/2022 Amir]
+
+		Mesh_SizeMapToolBaseNonTemplate()
+		{}
+
+
+		// constructors [7/20/2022 Amir]
+
+	public:
+
+		static TnbMesh_EXPORT unsigned short verbose;
+
+		// public functions and operators [7/20/2022 Amir]
+
+	};
+
 	template<class BackGroundMesh>
 	class Mesh_SizeMapToolBase
+		: public Mesh_SizeMapToolBaseNonTemplate
 	{
 
 	public:
@@ -34,6 +58,7 @@ namespace tnbLib
 
 		Mesh_Values theValues_;
 
+		std::shared_ptr<boxType> theDomain_;
 		std::shared_ptr<meshRefValuesType> theReference_;
 		std::shared_ptr<BackGroundMesh> theBackMesh_;
 
@@ -62,9 +87,11 @@ namespace tnbLib
 
 		Mesh_SizeMapToolBase
 		(
-			const std::shared_ptr<meshRefValuesType>& theRef
+			const std::shared_ptr<meshRefValuesType>& theRef,
+			const std::shared_ptr<boxType>& theDomain
 		)
 			: theReference_(theRef)
+			, theDomain_(theDomain)
 		{}
 
 
@@ -111,6 +138,11 @@ namespace tnbLib
 		const auto& ReferenceValues() const
 		{
 			return theReference_;
+		}
+
+		const auto& Domain() const
+		{
+			return theDomain_;
 		}
 
 		const auto& BackgroundMesh() const

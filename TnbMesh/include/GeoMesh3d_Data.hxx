@@ -3,6 +3,7 @@
 #define _GeoMesh3d_Data_Header
 
 #include <GeoMesh_Data.hxx>
+#include <GeoMesh3d_DataFwd.hxx>
 #include <Entity3d_Tetrahedralization.hxx>
 #include <Mesh3d_Element.hxx>
 #include <Mesh3d_Node.hxx>
@@ -12,8 +13,6 @@
 
 namespace tnbLib
 {
-	typedef GeoMesh_Data<Mesh3d_Element>
-		GeoMesh3d_Data;
 
 	template<>
 	TnbMesh_EXPORT void GeoMesh3d_Data::Construct(const triangulation& theTriangulation);
@@ -33,6 +32,9 @@ namespace tnbLib
 			TNB_oARCH_TYPE& ar,
 			const unsigned int /*file_vertion*/
 			);
+
+	template<>
+	TnbMesh_EXPORT void GeoMesh3d_Data::ExportToPlt(OFstream&) const;
 }
 
 #endif // !_GeoMesh3d_Data_Header

@@ -5,6 +5,7 @@
 #include <Aft2d_NodeAnIso.hxx>
 #include <Aft2d_CornerNodeUniMetric.hxx>
 #include <Aft2d_SegmentNodeUniMetric.hxx>
+#include <Aft2d_ElementAnIso.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 

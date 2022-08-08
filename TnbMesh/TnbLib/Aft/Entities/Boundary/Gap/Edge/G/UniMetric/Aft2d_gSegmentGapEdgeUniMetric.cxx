@@ -3,6 +3,7 @@
 #include <Aft2d_gCornerGapNodeUniMetric.hxx>
 #include <Aft2d_gSegmentGapNodeUniMetric.hxx>
 #include <Aft2d_gPlnCurveSurfaceUniMetric.hxx>
+#include <Aft2d_ElementSurface.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
