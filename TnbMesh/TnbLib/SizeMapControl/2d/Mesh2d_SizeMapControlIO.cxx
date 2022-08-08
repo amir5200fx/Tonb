@@ -10,7 +10,6 @@ namespace tnbLib
 	template<>
 	void Mesh2d_SizeMapControl::serialize<TNB_iARCH_TYPE>(TNB_iARCH_TYPE& ar, const unsigned int /*file_version*/)
 	{
-		ar & theGeometry_;
 		ar & theReference_;
 		ar & theBoundaries_;
 	}
@@ -19,7 +18,6 @@ namespace tnbLib
 	template<>
 	void Mesh2d_SizeMapControl::serialize<TNB_oARCH_TYPE>(TNB_oARCH_TYPE& ar, const unsigned int /*file_version*/)
 	{
-		ar & theGeometry_;
 		ar & theReference_;
 		ar & theBoundaries_;
 	}
