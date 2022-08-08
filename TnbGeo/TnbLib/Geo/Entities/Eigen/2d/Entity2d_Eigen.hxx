@@ -98,7 +98,7 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void CalcGenEigen(const Entity2d_Metric1& A, const Entity2d_Metric1& B);
 
-		TnbGeo_EXPORT void ExportToPlt(fstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(std::fstream& File) const;
 
 		TnbGeo_EXPORT void ExportToPlt(const Pnt2d& Centre, OFstream& File) const;
 
