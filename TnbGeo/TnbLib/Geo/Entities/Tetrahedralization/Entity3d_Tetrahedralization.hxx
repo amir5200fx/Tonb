@@ -11,7 +11,7 @@ namespace tnbLib
 {
 
 	template<>
-	void Entity3d_Tetrahedralization::ExportToPlt(OFstream& File) const;
+	TnbGeo_EXPORT void Entity3d_Tetrahedralization::ExportToPlt(OFstream& File) const;
 }
 
 #endif // !_Entity3d_Tetrahedralization_Header
