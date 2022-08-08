@@ -11,6 +11,11 @@
 #include <Cad_tEdgeMaker.hxx>
 #include <Cad_GeomSurface.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <TopoDS.hxx>
 #include <BRepTools.hxx>
 #include <BRep_Tool.hxx>
@@ -56,6 +61,13 @@ static const tnbLib::Cad_tSurfaceMakerRunTimeSetConfigs mytSurfaceMakerRunTimeSe
 
 void tnbLib::Cad_tSurfaceMaker::Perform()
 {
+	if (NOT Info())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no info. has been loaded." << endl
+			<< abort(FatalError);
+	}
+
 	const auto forwardFace = TopoDS::Face(Face().Oriented(TopAbs_FORWARD));
 
 	auto cmpEdge = std::make_shared<std::vector<std::shared_ptr<TModel_Edge>>>();
@@ -91,7 +103,6 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 	SFWF.Perform();
 
 	auto fixed_outer_wire = SFWF.Wire();
-
 	for (
 		BRepTools_WireExplorer anEdgeExp(fixed_outer_wire);
 		anEdgeExp.More();

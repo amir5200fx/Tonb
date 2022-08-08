@@ -1,5 +1,10 @@
 #include <Cad_ShapeTools.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <TopoDS_Shape.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
 #include <BRepPrimAPI_MakeCylinder.hxx>

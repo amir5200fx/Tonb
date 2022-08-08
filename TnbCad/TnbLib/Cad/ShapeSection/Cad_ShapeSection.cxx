@@ -3,8 +3,9 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#ifdef DebugInfo
 #undef DebugInfo
-#include <BRepAlgo_Section.hxx>
+#endif // DebugInfo
 #include <BRepAlgoAPI_Section.hxx>
 #include <BOPAlgo_Builder.hxx>
 
