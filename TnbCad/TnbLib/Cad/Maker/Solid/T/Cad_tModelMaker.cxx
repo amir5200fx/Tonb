@@ -1268,19 +1268,39 @@ namespace tnbLib
 
 				++nbSegments;
 
+				auto tri = subs.at(0)->Triangulation();
+				if (NOT tri)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the edge is not discretized." << endl
+						<< abort(FatalError);
+				}
 				auto seg = std::make_shared<TModel_ManifoldPaired>
 					(
 						nbSegments,
 						"segment" + std::to_string(nbSegments), 
-						std::move(subs[0]), std::move(subs[1])
+						std::move(subs.at(0)), std::move(subs.at(1))
 						);
 				Debug_Null_Pointer(seg);
+				seg->SetMesh(std::move(tri));
 				segments.push_back(std::move(seg));
 			}
 			else
 			{
 				auto subs = RetriveEdges(x->Edges());
-
+				if (subs.empty())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "no edge has been found." << endl
+						<< abort(FatalError);
+				}
+				auto tri = subs.at(0)->Triangulation();
+				if (NOT tri)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the edge is not discretized." << endl
+						<< abort(FatalError);
+				}
 				++nbSegments;
 
 				auto seg = std::make_shared<TModel_nonManifoldPaired>
@@ -1289,6 +1309,7 @@ namespace tnbLib
 						"segment" + std::to_string(nbSegments)
 						);
 				Debug_Null_Pointer(seg);
+				seg->SetMesh(std::move(tri));
 				seg->EdgesRef() = x->Edges();
 				segments.push_back(std::move(seg));
 			}
