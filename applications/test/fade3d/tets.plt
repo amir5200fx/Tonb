@@ -1,0 +1,16 @@
+ VARIABLES = X Y Z
+ZONE N = 8, E = 6, DATAPACKING= POINT, ZONETYPE= FETETRAHEDRON
+-1.1  -5.1  -0.1
+-1.1  -5.1  1
+-1.1  1  1
+-1.1  1  -0.1
+1  1  -0.1
+1  1  1
+1  -5.1  1
+1  -5.1  -0.1
+2 1 3 5
+8 2 5 1
+7 2 3 5
+7 8 2 5
+6 7 3 5
+4 1 5 3

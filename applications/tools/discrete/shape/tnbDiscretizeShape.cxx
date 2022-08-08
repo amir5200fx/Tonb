@@ -9,6 +9,11 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <Poly_Triangulation.hxx>
 #include <BRepTools.hxx>
 

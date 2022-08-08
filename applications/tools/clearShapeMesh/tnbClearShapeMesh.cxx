@@ -6,6 +6,10 @@
 
 #include <boost/filesystem.hpp>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
 #include <TopoDS_Shape.hxx>
 #include <BRepTools.hxx>
 
