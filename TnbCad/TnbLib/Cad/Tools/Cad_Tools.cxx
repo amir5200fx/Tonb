@@ -40,6 +40,11 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+
 #include <gp_Pln.hxx>
 #include <Geom_Line.hxx>
 #include <Geom_Plane.hxx>
@@ -52,6 +57,7 @@
 #include <Geom_SweptSurface.hxx>
 #include <GeomAPI_ProjectPointOnCurve.hxx>
 #include <GeomAPI_ProjectPointOnSurf.hxx>
+#include <Poly_PolygonOnTriangulation.hxx>
 #include <Bnd_Box.hxx>
 #include <BRep_Tool.hxx>
 #include <BRepLib.hxx>
@@ -59,6 +65,7 @@
 #include <BRepTools.hxx>
 #include <BRepTools_WireExplorer.hxx>
 #include <TopExp_Explorer.hxx>
+#include <TopExp.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Edge.hxx>
@@ -833,19 +840,17 @@ tnbLib::Cad_Tools::Triangulation
 	auto& indices = triangulation->Connectivity();
 
 	pts.reserve(theTriangulation.NbNodes());
-
-	const auto& nodes = theTriangulation.Nodes();
-	forThose(i, 1, nodes.Size())
+	forThose(i, 1, theTriangulation.NbNodes())
 	{
-		pts.push_back(nodes.Value(i));
+		pts.push_back(theTriangulation.Node(i));
 	}
 
 	indices.reserve(theTriangulation.NbTriangles());
 
-	const auto& tris = theTriangulation.Triangles();
-	forThose(i, 1, tris.Size())
+	//const auto& tris = theTriangulation.Triangles();
+	forThose(i, 1, theTriangulation.NbTriangles())
 	{
-		const auto& x = tris.Value(i);
+		const auto& x = theTriangulation.Triangle(i);
 		Standard_Integer i0, i1, i2;
 		x.Get(i0, i1, i2);
 
@@ -878,19 +883,17 @@ tnbLib::Cad_Tools::ParaTriangulation
 	auto& indices = triangulation->Connectivity();
 
 	pts.reserve(theTriangulation.NbNodes());
-
-	const auto& nodes = theTriangulation.UVNodes();
-	forThose(i, 1, nodes.Size())
-	{	
-		pts.push_back(nodes.Value(i));
+	forThose(i, 1, theTriangulation.NbNodes())
+	{
+		pts.push_back(theTriangulation.UVNode(i));
 	}
 
 	indices.reserve(theTriangulation.NbTriangles());
 
-	const auto& tris = theTriangulation.Triangles();
-	forThose(i, 1, tris.Size())
+	//const auto& tris = theTriangulation.Triangles();
+	forThose(i, 1, theTriangulation.NbTriangles())
 	{
-		const auto& x = tris.Value(i);
+		const auto& x = theTriangulation.Triangle(i);
 		Standard_Integer i0, i1, i2;
 		x.Get(i0, i1, i2);
 
@@ -1782,6 +1785,44 @@ tnbLib::Cad_Tools::RetrieveNonSingularEdges
 		}
 	}
 	return std::move(gedges);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Polygon>
+tnbLib::Cad_Tools::RetrievePolygonOnTriangulation
+(
+	const TopoDS_Edge& theEdge,
+	const TopoDS_Face & theFace
+)
+{
+	TopLoc_Location Loc;
+	auto tri = BRep_Tool::Triangulation(theFace, Loc);
+	if (NOT tri)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no triangulation is found on the face." << endl
+			<< " - unable to extract the polygon on the triangulation." << endl
+			<< abort(FatalError);
+	}
+	auto polyOnTri = BRep_Tool::PolygonOnTriangulation(theEdge, tri, Loc);
+	if (NOT polyOnTri)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no polygon on triangulation has been found." << endl
+			<< abort(FatalError);
+	}
+	const auto& nodesId = polyOnTri->Nodes();
+
+	std::vector<Pnt3d> pts;
+	pts.reserve(polyOnTri->NbNodes());
+	for (Standard_Integer i = 1; i <= polyOnTri->NbNodes(); i++)
+	{
+		auto id = nodesId.Value(i);
+		const auto& pt = tri->Node(id);
+		pts.push_back(pt);
+	}
+
+	auto poly = std::make_shared<Entity3d_Polygon>(std::move(pts), 0);
+	return std::move(poly);
 }
 
 Handle(Poly_Triangulation)
