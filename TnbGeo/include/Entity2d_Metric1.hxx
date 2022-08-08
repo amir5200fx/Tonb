@@ -151,9 +151,9 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void Print(Standard_OStream& Ostream = cout) const;
 
-		TnbGeo_EXPORT void ExportToPlt(const Pnt2d& Centre, fstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(const Pnt2d& Centre, std::fstream& File) const;
 
-		TnbGeo_EXPORT void ExportToPlt(fstream& File) const;
+		TnbGeo_EXPORT void ExportToPlt(std::fstream& File) const;
 
 		friend Entity2d_Metric1 operator*(const Entity2d_Metric1& Metric, const Standard_Real Scalar);
 		friend Entity2d_Metric1 operator*(const Standard_Real Scalar, const Entity2d_Metric1& Metric);

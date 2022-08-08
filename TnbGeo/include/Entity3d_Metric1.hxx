@@ -70,9 +70,9 @@ namespace tnbLib
 
 		void Print(Standard_OStream& Ostream = cout) const;
 
-		void ExportToPlt(const Pnt2d& Centre, fstream& File) const;
+		void ExportToPlt(const Pnt2d& Centre, std::fstream& File) const;
 
-		void ExportToPlt(fstream& File) const;
+		void ExportToPlt(std::fstream& File) const;
 
 		friend metric operator*(const metric& Metric, const Standard_Real Scalar);
 		friend metric operator*(const Standard_Real Scalar, const metric& Metric);

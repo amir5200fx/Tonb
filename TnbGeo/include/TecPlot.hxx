@@ -134,6 +134,13 @@ namespace tnbLib
 			OFstream& File
 		);
 
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>& thePoints, 
+			const std::vector<connectivity::quadruple>& theTets,
+			OFstream&
+		);
+
 		TnbGeo_EXPORT void ExportCurve
 		(
 			const std::vector<Pnt3d>& Points,

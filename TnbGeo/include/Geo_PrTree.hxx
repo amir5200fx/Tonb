@@ -128,7 +128,7 @@ namespace tnbLib
 			return theSNeighbors_;
 		}
 
-		leafList& SNeighbors()
+		leafList& SNeighborsRef()
 		{
 			return theSNeighbors_;
 		}
@@ -138,7 +138,7 @@ namespace tnbLib
 			return theENeighbors_;
 		}
 
-		leafList& ENeighbors()
+		leafList& ENeighborsRef()
 		{
 			return theENeighbors_;
 		}
@@ -148,7 +148,7 @@ namespace tnbLib
 			return theNNeighbors_;
 		}
 
-		leafList& NNeighbors()
+		leafList& NNeighborsRef()
 		{
 			return theNNeighbors_;
 		}
@@ -158,7 +158,7 @@ namespace tnbLib
 			return theWNeighbors_;
 		}
 
-		leafList& WNeighbors()
+		leafList& WNeighborsRef()
 		{
 			return theWNeighbors_;
 		}
@@ -168,7 +168,7 @@ namespace tnbLib
 			return theFNeighbors_;
 		}
 
-		leafList& FNeighbors()
+		leafList& FNeighborsRef()
 		{
 			return theFNeighbors_;
 		}
@@ -178,7 +178,7 @@ namespace tnbLib
 			return theBNeighbors_;
 		}
 
-		leafList& BNeighbors()
+		leafList& BNeighborsRef()
 		{
 			return theBNeighbors_;
 		}
@@ -226,7 +226,7 @@ namespace tnbLib
 			return theSNeighbors_;
 		}
 
-		leafList& SNeighbors()
+		leafList& SNeighborsRef()
 		{
 			return theSNeighbors_;
 		}
@@ -236,7 +236,7 @@ namespace tnbLib
 			return theENeighbors_;
 		}
 
-		leafList& ENeighbors()
+		leafList& ENeighborsRef()
 		{
 			return theENeighbors_;
 		}
@@ -246,7 +246,7 @@ namespace tnbLib
 			return theNNeighbors_;
 		}
 
-		leafList& NNeighbors()
+		leafList& NNeighborsRef()
 		{
 			return theNNeighbors_;
 		}
@@ -256,7 +256,7 @@ namespace tnbLib
 			return theWNeighbors_;
 		}
 
-		leafList& WNeighbors()
+		leafList& WNeighborsRef()
 		{
 			return theWNeighbors_;
 		}
@@ -702,7 +702,7 @@ namespace tnbLib
 		, public Geo_PrTreeInfo
 	{
 
-		/*Private Data*/
+	public:
 
 		typedef typename remove_pointer<T>::type Type;
 		typedef typename Type::ptType Point;
@@ -714,6 +714,11 @@ namespace tnbLib
 		typedef Geo_PrTreeLeaf<T, (int)Point::dim, Balanced> leafNode;
 		typedef Geo_PrTreeInternal<Point, (int)Point::dim> internalNode;
 		typedef Entity_Box<Point> boxType;
+
+	private:
+
+		/*Private Data*/
+
 
 		template< bool cond, typename U >
 		using resolvedType = typename std::enable_if< cond, U >::type;
@@ -1149,6 +1154,23 @@ namespace tnbLib
 		template<class U = void>
 		resolvedType
 			<
+			is_two_dimension<(int)Point::dim>::value, U
+			>
+			SwitchToRetrieveLeavesTo
+			(
+				internalNode* Internal,
+				std::vector<leafNode*>& theItems
+			) const
+		{
+			if (Internal->Sw()) RetrieveTo(Internal->Sw(), theItems);
+			if (Internal->Se()) RetrieveTo(Internal->Se(), theItems);
+			if (Internal->Ne()) RetrieveTo(Internal->Ne(), theItems);
+			if (Internal->Nw()) RetrieveTo(Internal->Nw(), theItems);
+		}
+
+		template<class U = void>
+		resolvedType
+			<
 			is_three_dimension<(int)Point::dim>::value, U
 			>
 			SwitchToRetrieveTo
@@ -1190,6 +1212,28 @@ namespace tnbLib
 			if (Internal->FwdNw()) RetrieveTo(Internal->FwdNw(), theItems);
 		}
 
+		template<class U = void>
+		resolvedType
+			<
+			is_three_dimension<(int)Point::dim>::value, U
+			>
+			SwitchToRetrieveLeavesTo
+			(
+				internalNode* Internal,
+				std::vector<leafNode*>& theItems
+			) const
+		{
+			if (Internal->BwdSw()) RetrieveLeavesTo(Internal->BwdSw(), theItems);
+			if (Internal->BwdSe()) RetrieveLeavesTo(Internal->BwdSe(), theItems);
+			if (Internal->BwdNe()) RetrieveLeavesTo(Internal->BwdNe(), theItems);
+			if (Internal->BwdNw()) RetrieveLeavesTo(Internal->BwdNw(), theItems);
+
+			if (Internal->FwdSw()) RetrieveLeavesTo(Internal->FwdSw(), theItems);
+			if (Internal->FwdSe()) RetrieveLeavesTo(Internal->FwdSe(), theItems);
+			if (Internal->FwdNe()) RetrieveLeavesTo(Internal->FwdNe(), theItems);
+			if (Internal->FwdNw()) RetrieveLeavesTo(Internal->FwdNw(), theItems);
+		}
+
 		void RetrieveTo(node* t, std::list<T>& theItems) const
 		{
 			leafNode* leaf = dynamic_cast<leafNode*>(t);
@@ -1223,6 +1267,23 @@ namespace tnbLib
 					dynamic_cast<internalNode*>(t);
 
 				SwitchToRetrieveTo(Internal, theItems);
+			}
+		}
+
+		void RetrieveLeaves(node* t, std::vector<leafNode*>& theLeaves)
+		{
+			leafNode* leaf =
+				dynamic_cast<leafNode*>(t);
+			if (leaf)
+			{
+				theLeaves.push_back(leaf);
+			}
+			else
+			{
+				internalNode* Internal =
+					dynamic_cast<internalNode*>(t);
+
+				SwitchToRetrieveLeavesTo(Internal, theLeaves);
 			}
 		}
 
@@ -1547,6 +1608,14 @@ namespace tnbLib
 			if (Size())
 			{
 				RetrieveTo(theRoot_, theItems);
+			}
+		}
+
+		void RetrieveLeavesTo(std::vector<leafNode*>& theItems) const
+		{
+			if (Size())
+			{
+				RetrieveLeavesTo(theRoot_, theItems);
 			}
 		}
 

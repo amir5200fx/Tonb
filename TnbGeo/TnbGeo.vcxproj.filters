@@ -694,6 +694,18 @@
     <Filter Include="TnbLib\Geo\Approximation\Space\Balanced\3d">
       <UniqueIdentifier>{59c0c083-824e-4e08-8105-c2d9c2a4b43f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Search\PrTree\Balanced">
+      <UniqueIdentifier>{8e0e500c-3fa9-40be-9766-0a4c721c168f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Search\PrTree\Balanced\Oct">
+      <UniqueIdentifier>{b9afe221-cc59-4c5a-bbd7-e036d2724ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Predicates">
+      <UniqueIdentifier>{271d98b7-26db-441a-b65f-a5a7bd1d3ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation\3d\fade3d">
+      <UniqueIdentifier>{678d9fd1-b6c7-4be3-b7bb-ec7d40529e70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1629,6 +1641,39 @@
     <ClInclude Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpaceI.hxx">
       <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTree.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeI.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeBucket.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeBucketI.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeNode.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeLeafHub.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeInternalHub.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeLeaf.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeInternal.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Predicates\predicates.h">
+      <Filter>TnbLib\Geo\Predicates</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Triangulation\3d\fade3d\Geo3d_DelTri_Fade3d.hxx">
+      <Filter>TnbLib\Geo\Triangulation\3d\fade3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2026,6 +2071,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Approximation\Space\Balanced\3d\Geo3d_ApprxSpace.cxx">
       <Filter>TnbLib\Geo\Approximation\Space\Balanced\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTree.cxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Oct</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Predicates\predicates.cxx">
+      <Filter>TnbLib\Geo\Predicates</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Tetrahedralization\Entity3d_TetrahedralizationIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Triangulation\3d\fade3d\Geo3d_DelTri_Fade3d.cxx">
+      <Filter>TnbLib\Geo\Triangulation\3d\fade3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

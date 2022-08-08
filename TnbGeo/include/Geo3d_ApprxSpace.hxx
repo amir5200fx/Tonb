@@ -135,6 +135,8 @@ namespace tnbLib
 
 		void Clear(Geo3d_ApprxSpaceNode*& t);
 
+		void RetrieveTo(Geo3d_ApprxSpaceNode* t, std::vector<Geo3d_ApprxSpaceNode*>& nodes) const;
+		void RetrieveTo(Geo3d_ApprxSpaceNode* t, std::vector<std::shared_ptr<Entity3d_Box>>& boxes) const;
 
 		// static functions [6/24/2022 Amir]
 
@@ -145,6 +147,16 @@ namespace tnbLib
 
 		// default constructor [6/24/2022 Amir]
 
+		Geo3d_ApprxSpace()
+			: theObject_(NULL)
+			, theSubdivider(NULL)
+			, theRoot_(NULL)
+		{}
+
+
+		// constructors [6/25/2022 Amir]
+
+		~Geo3d_ApprxSpace();
 
 		// public functions and operators [6/24/2022 Amir]
 
@@ -152,6 +164,17 @@ namespace tnbLib
 		{
 			return theDomain_;
 		}
+
+		std::vector<Geo3d_ApprxSpaceNode*> RetrieveNodes() const;
+		std::vector<std::shared_ptr<Entity3d_Box>> RetrieveBoxes() const;
+
+		void Init();
+		void Perform();
+		void Perform(std::vector<Geo3d_ApprxSpaceNode*>& theNodes);
+
+		void PostBalance();
+
+		void Clear();
 
 		void SetObject(const T*);
 		void SetSubdivider(Standard_Boolean(*fun)(const Entity3d_Box&, const T*));
@@ -165,6 +188,9 @@ namespace tnbLib
 		{
 			theDomain_ = std::move(theDomain);
 		}
+
+		void RetrieveNodesTo(std::vector<Geo3d_ApprxSpaceNode*>& nodes) const;
+		void RetrieveBoxesTo(std::vector<std::shared_ptr<Entity3d_Box>>& boxes) const;
 
 
 		// static functions and operators [6/24/2022 Amir]

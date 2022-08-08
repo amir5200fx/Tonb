@@ -2,6 +2,22 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 template<class T>
+inline Standard_Boolean 
+tnbLib::Geo3d_ApprxSpace<T>::IsUnbalance
+(
+	const Geo3d_ApprxSpaceNode_Leaf * leaf
+) const
+{
+	if (leaf->SNeighbors().size() > MaxUnbalancing()) return Standard_True;
+	if (leaf->ENeighbors().size() > MaxUnbalancing()) return Standard_True;
+	if (leaf->NNeighbors().size() > MaxUnbalancing()) return Standard_True;
+	if (leaf->WNeighbors().size() > MaxUnbalancing()) return Standard_True;
+	if (leaf->FNeighbors().size() > MaxUnbalancing()) return Standard_True;
+	if (leaf->BNeighbors().size() > MaxUnbalancing()) return Standard_True;
+	return Standard_False;
+}
+
+template<class T>
 inline void tnbLib::Geo3d_ApprxSpace<T>::Subdivide(Geo3d_ApprxSpaceNode *& t) const
 {
 	auto leaf = dynamic_cast<Geo3d_ApprxSpaceNode_Leaf*>(t);
@@ -608,5 +624,283 @@ inline void tnbLib::Geo3d_ApprxSpace<T>::Balance(Geo3d_ApprxSpaceNode *& t)
 		Balance(inner->BwdSeRef());
 		Balance(inner->BwdNeRef());
 		Balance(inner->BwdNwRef());
+	}
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::Clear(Geo3d_ApprxSpaceNode *& t)
+{
+	auto leaf = dynamic_cast<Geo3d_ApprxSpaceNode_Leaf*>(t);
+	if (leaf)
+	{
+		delete leaf;
+		leaf = 0;
+	}
+	else
+	{
+		auto inter = dynamic_cast<Geo3d_ApprxSpaceNode_Internal*>(t);
+		Debug_Null_Pointer(inter);
+
+		if (inter->FwdSw()) Clear(inter->FwdSwRef());
+		if (inter->FwdSe()) Clear(inter->FwdSeRef());
+		if (inter->FwdNe()) Clear(inter->FwdNeRef());
+		if (inter->FwdNw()) Clear(inter->FwdNwRef());
+		
+		if (inter->BwdSw()) Clear(inter->BwdSwRef());
+		if (inter->BwdSe()) Clear(inter->BwdSeRef());
+		if (inter->BwdNe()) Clear(inter->BwdNeRef());
+		if (inter->BwdNw()) Clear(inter->BwdNwRef());
+
+		delete inter;
+		inter = 0;
+	}
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::RetrieveTo
+(
+	Geo3d_ApprxSpaceNode * t,
+	std::vector<Geo3d_ApprxSpaceNode*>& nodes
+) const
+{
+	if (NOT t) return;
+	auto leaf = dynamic_cast<Geo3d_ApprxSpaceNode_Leaf*>(t);
+	if (leaf)
+	{
+		nodes.push_back(t);
+	}
+	else
+	{
+		auto inter = dynamic_cast<Geo3d_ApprxSpaceNode_Internal*>(t);
+		Debug_Null_Pointer(inter);
+
+		RetrieveTo(inter->FwdSw(), nodes);
+		RetrieveTo(inter->FwdSe(), nodes);
+		RetrieveTo(inter->FwdNe(), nodes);
+		RetrieveTo(inter->FwdNw(), nodes);
+
+		RetrieveTo(inter->BwdSw(), nodes);
+		RetrieveTo(inter->BwdSe(), nodes);
+		RetrieveTo(inter->BwdNe(), nodes);
+		RetrieveTo(inter->BwdNw(), nodes);
+	}
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::RetrieveTo
+(
+	Geo3d_ApprxSpaceNode * t,
+	std::vector<std::shared_ptr<Entity3d_Box>>& boxes
+) const
+{
+	if (NOT t) return;
+	auto leaf = dynamic_cast<Geo3d_ApprxSpaceNode_Leaf*>(t);
+	if (leaf)
+	{
+		boxes.push_back(leaf->BoundingBox());
+	}
+	else
+	{
+		auto inter = dynamic_cast<Geo3d_ApprxSpaceNode_Internal*>(t);
+		Debug_Null_Pointer(inter);
+
+		RetrieveTo(inter->FwdSw(), boxes);
+		RetrieveTo(inter->FwdSe(), boxes);
+		RetrieveTo(inter->FwdNe(), boxes);
+		RetrieveTo(inter->FwdNw(), boxes);
+
+		RetrieveTo(inter->BwdSw(), boxes);
+		RetrieveTo(inter->BwdSe(), boxes);
+		RetrieveTo(inter->BwdNe(), boxes);
+		RetrieveTo(inter->BwdNw(), boxes);
+	}
+}
+
+template<class T>
+inline tnbLib::Geo3d_ApprxSpaceNode_Leaf * 
+tnbLib::Geo3d_ApprxSpace<T>::CreateLeaf
+(
+	const Standard_Integer theLev,
+	const Entity3d_Box & b
+)
+{
+	return new Geo3d_ApprxSpaceNode_Leaf(theLev, b);
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::UpdateFather
+(
+	Geo3d_ApprxSpaceNode_Leaf * node,
+	Geo3d_ApprxSpaceNode * inter
+)
+{
+	if (NOT node->Father()) return;
+	auto father = dynamic_cast<Geo3d_ApprxSpaceNode_Internal*>(node->Father());
+	Debug_Null_Pointer(father);
+
+	if (father->FwdSw() IS_EQUAL node) father->FwdSwRef() = inter;
+	else if (father->FwdSe() IS_EQUAL node) father->FwdSeRef() = inter;
+	else if (father->FwdNe() IS_EQUAL node) father->FwdNeRef() = inter;
+	else if (father->FwdNw() IS_EQUAL node) father->FwdNwRef() = inter;
+	else if (father->BwdSw() IS_EQUAL node) father->BwdSwRef() = inter;
+	else if (father->BwdSe() IS_EQUAL node) father->BwdSeRef() = inter;
+	else if (father->BwdNe() IS_EQUAL node) father->BwdNeRef() = inter;
+	else if (father->BwdNw() IS_EQUAL node) father->BwdNwRef() = inter;
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Unexpected error has been detected!" << endl
+			<< abort(FatalError);
+	}
+}
+
+template<class T>
+inline tnbLib::Geo3d_ApprxSpace<T>::~Geo3d_ApprxSpace()
+{
+	Clear(theRoot_);
+}
+
+template<class T>
+inline std::vector<tnbLib::Geo3d_ApprxSpaceNode*> 
+tnbLib::Geo3d_ApprxSpace<T>::RetrieveNodes() const
+{
+	std::vector<Geo3d_ApprxSpaceNode*> nodes;
+	RetrieveNodesTo(nodes);
+	return std::move(nodes);
+}
+
+template<class T>
+inline std::vector<std::shared_ptr<tnbLib::Entity3d_Box>> 
+tnbLib::Geo3d_ApprxSpace<T>::RetrieveBoxes() const
+{
+	std::vector<std::shared_ptr<Entity3d_Box>> boxes;
+	RetrieveBoxesTo(boxes);
+	return std::move(boxes);
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::Init()
+{
+	theRoot_ = CreateLeaf(0, Domain());
+	ForceSubdivide(theRoot_);
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::Perform()
+{
+	if (NOT theSubdivider)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no subdivide function has been detected!" << endl
+			<< abort(FatalError);
+	}
+	auto nodes = RetrieveNodes();
+	for (auto& x : nodes)
+	{
+		Subdivide(x);
+	}
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::Perform
+(
+	std::vector<Geo3d_ApprxSpaceNode*>& theNodes
+)
+{
+	if (NOT theSubdivider)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no subdivide function has been detected!" << endl
+			<< abort(FatalError);
+	}
+	for (auto& x : theNodes)
+	{
+		Subdivide(x);
+	}
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::PostBalance()
+{
+	IsBalancedRef() = Standard_False;
+	while (true)
+	{	
+		Balance(theRoot_);
+		if (NOT IsBalanced()) break;
+	}
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::Clear()
+{
+	Clear(theRoot_);
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::SetObject(const T * obj)
+{
+	theObject_ = obj;
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::SetSubdivider
+(
+	Standard_Boolean(*fun)(const Entity3d_Box &, const T *)
+)
+{
+	theSubdivider = fun;
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::RetrieveNodesTo
+(
+	std::vector<Geo3d_ApprxSpaceNode*>& nodes
+) const
+{
+	RetrieveTo(theRoot_, nodes);
+}
+
+template<class T>
+inline void tnbLib::Geo3d_ApprxSpace<T>::RetrieveBoxesTo
+(
+	std::vector<std::shared_ptr<Entity3d_Box>>& boxes
+) const
+{
+	RetrieveTo(theRoot_, boxes);
+}
+
+template<class T>
+inline tnbLib::Geo3d_ApprxSpaceOctant 
+tnbLib::Geo3d_ApprxSpace<T>::CalcOctant
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & centre
+)
+{
+	if (theCoord.X() <= centre.X())
+	{
+		if (theCoord.Y() <= centre.Y())
+		{
+			if (theCoord.Z() <= centre.Z()) return Geo3d_ApprxSpaceOctant::Bwd_Sw;
+			else return Geo3d_ApprxSpaceOctant::Fwd_Sw;
+		}
+		else
+		{
+			if (theCoord.Z() <= centre.Z()) return Geo3d_ApprxSpaceOctant::Bwd_Nw;
+			else return Geo3d_ApprxSpaceOctant::Fwd_Nw;
+		}
+	}
+	else
+	{
+		if (theCoord.Y() <= centre.Y())
+		{
+			if (theCoord.Z() <= centre.Z()) return Geo3d_ApprxSpaceOctant::Bwd_Se;
+			else return Geo3d_ApprxSpaceOctant::Fwd_Se;
+		}
+		else
+		{
+			if (theCoord.Z() <= centre.Z()) return Geo3d_ApprxSpaceOctant::Bwd_Ne;
+			else return Geo3d_ApprxSpaceOctant::Fwd_Ne;
+		}
 	}
 }
