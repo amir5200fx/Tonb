@@ -50,18 +50,43 @@ namespace tnbLib
 
 		GeoSizeFun_Background
 		(
+			const Entity_Box<Point>& theBox,
 			const std::shared_ptr<BackMeshData>& theBackMesh
 		)
-			: theBackMesh_(theBackMesh)
+			: GeoSizeFun_nonUniform<typename BackMeshData::Point>(theBox)
+			, theBackMesh_(theBackMesh)
+		{}
+
+		GeoSizeFun_Background
+		(
+			Entity_Box<Point>&& theBox,
+			std::shared_ptr<BackMeshData>&& theBackMesh
+		)
+			: GeoSizeFun_nonUniform<typename BackMeshData::Point>(std::move(theBox))
+			, theBackMesh_(std::move(theBackMesh))
 		{}
 
 		GeoSizeFun_Background
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
+			const Entity_Box<Point>& theBox,
 			const std::shared_ptr<BackMeshData>& theBackMesh
-		);
+		)
+			: GeoSizeFun_nonUniform<typename BackMeshData::Point>(theIndex, theName, theBox)
+			, theBackMesh_(theBackMesh)
+		{}
 
+		GeoSizeFun_Background
+		(
+			const Standard_Integer theIndex,
+			const word& theName,
+			Entity_Box<Point>&& theBox,
+			std::shared_ptr<BackMeshData>&& theBackMesh
+		)
+			: GeoSizeFun_nonUniform<typename BackMeshData::Point>(theIndex, theName, std::move(theBox))
+			, theBackMesh_(std::move(theBackMesh))
+		{}
 
 
 		//- public functions and operators

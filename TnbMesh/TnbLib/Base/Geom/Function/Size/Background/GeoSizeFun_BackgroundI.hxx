@@ -5,18 +5,6 @@ namespace tnbLib
 {
 
 	template<class BackMeshData>
-	GeoSizeFun_Background<BackMeshData>::GeoSizeFun_Background
-	(
-		const Standard_Integer theIndex,
-		const word & theName,
-		const std::shared_ptr<BackMeshData>& theBackMesh
-	)
-		: GeoSizeFun_nonUniform<typename BackMeshData::ptType>(theIndex, theName)
-		, theBackMesh_(theBackMesh)
-	{
-	}
-
-	template<class BackMeshData>
 	Standard_Real
 		GeoSizeFun_Background<BackMeshData>::Value
 		(
