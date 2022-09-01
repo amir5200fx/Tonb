@@ -1,10 +1,13 @@
 #include <MeshBase_Tools.hxx>
 
+#include <Mesh3d_Element.hxx>
+#include <Mesh2d_Element.hxx>
 #include <Pln_Curve.hxx>
 #include <TModel_ParaCurve.hxx>
 #include <GModel_ParaCurve.hxx>
 #include <GeoMesh2d_Background.hxx>
 #include <GeoMesh2d_Data.hxx>
+#include <Geo_BoxTools.hxx>
 #include <Entity2d_MeshValue.hxx>
 #include <Entity2d_MetricMeshValue.hxx>
 #include <Entity2d_Metric1.hxx>
@@ -16,6 +19,30 @@
 #include <armadillo.h>
 
 using namespace arma;
+
+std::shared_ptr<tnbLib::Entity2d_Box> 
+tnbLib::MeshBase_Tools::CalcBoundingBox
+(
+	const std::shared_ptr<Mesh2d_Element>& theElement
+)
+{
+	Debug_Null_Pointer(theElement);
+	const auto[p0, p1, p2] = theElement->RetrieveCoords();
+	auto t = Geo_BoxTools::GeoBox(p0, p1, p2);
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Box>
+tnbLib::MeshBase_Tools::CalcBoundingBox
+(
+	const std::shared_ptr<Mesh3d_Element>& theElement
+)
+{
+	Debug_Null_Pointer(theElement);
+	const auto[p0, p1, p2, p3] = theElement->RetrieveCoords();
+	auto t = Geo_BoxTools::GetBox(p0, p1, p2, p3);
+	return std::move(t);
+}
 
 tnbLib::Pnt2d 
 tnbLib::MeshBase_Tools::CalcAnalyCoord

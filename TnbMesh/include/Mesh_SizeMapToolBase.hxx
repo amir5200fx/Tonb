@@ -54,9 +54,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Mesh_Conditions theConditions_;
-
-		Mesh_Values theValues_;
+		std::shared_ptr<Mesh_Conditions> theConditions_;
+		std::shared_ptr<Mesh_Values> theValues_;
 
 		std::shared_ptr<boxType> theDomain_;
 		std::shared_ptr<meshRefValuesType> theReference_;
@@ -74,13 +73,17 @@ namespace tnbLib
 			NotImplemented;
 		}
 
+		void AllocateMemory();
+
 	protected:
 
 
 		//- default constructor
 
 		Mesh_SizeMapToolBase()
-		{}
+		{
+			AllocateMemory();
+		}
 
 
 		//- constructor
@@ -92,7 +95,9 @@ namespace tnbLib
 		)
 			: theReference_(theRef)
 			, theDomain_(theDomain)
-		{}
+		{
+			AllocateMemory();
+		}
 
 
 		virtual ~Mesh_SizeMapToolBase()
@@ -103,12 +108,6 @@ namespace tnbLib
 			return theBackMesh_;
 		}
 
-		void RetrieveValues
-		(
-			Standard_Real& theElementSize,
-			Standard_Real& theMinSize,
-			Standard_Real& theSpanAngle
-		) const;
 
 	public:
 
@@ -120,17 +119,7 @@ namespace tnbLib
 			return theConditions_;
 		}
 
-		auto& MeshConditionsRef()
-		{
-			return theConditions_;
-		}
-
 		const auto& MeshValues() const
-		{
-			return theValues_;
-		}
-
-		auto& MeshValuesRef()
 		{
 			return theValues_;
 		}
@@ -155,7 +144,12 @@ namespace tnbLib
 		Standard_Real GetTargetSurfaceSize() const;
 		Standard_Real GetBoundaryGrowthRate() const;
 
-
+		void RetrieveValues
+		(
+			Standard_Real& theElementSize,
+			Standard_Real& theMinSize,
+			Standard_Real& theSpanAngle
+		) const;
 
 	};
 }

@@ -236,6 +236,8 @@ namespace tnbLib
 
 		connectType RetrieveConnectivity() const;
 
+		std::tuple<Point, Point, Point, Point> RetrieveCoords() const;
+
 		std::tuple
 			<
 			std::shared_ptr<nodeType>, 
@@ -447,6 +449,8 @@ namespace tnbLib
 		Standard_Boolean IsLeftSide(const Point& theCoord) const;
 
 		connectType RetrieveConnectivity() const;
+
+		std::tuple<Point, Point, Point> RetrieveCoords() const;
 
 		std::tuple
 			<
@@ -705,6 +709,8 @@ namespace tnbLib
 		array3 InterpWeights(const Point& theCoord) const;
 
 		connectType RetrieveConnectivity() const;
+
+		std::tuple<Point, Point, Point> RetrieveCoords() const;
 
 		std::tuple
 			<

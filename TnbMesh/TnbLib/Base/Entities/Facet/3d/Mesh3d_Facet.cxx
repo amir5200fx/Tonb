@@ -61,3 +61,19 @@ namespace tnbLib
 		return Geo_Tools::IsPointRightFacet_Fast(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
 	}
 }
+
+template<>
+std::tuple<tnbLib::Pnt3d, tnbLib::Pnt3d, tnbLib::Pnt3d> 
+tnbLib::Mesh3d_Facet::RetrieveCoords() const
+{
+	Debug_Null_Pointer(Node0());
+	Debug_Null_Pointer(Node1());
+	Debug_Null_Pointer(Node2());
+
+	auto p0 = Node0()->Coord();
+	auto p1 = Node1()->Coord();
+	auto p2 = Node2()->Coord();
+
+	auto t = std::make_tuple(std::move(p0), std::move(p1), std::move(p2));
+	return std::move(t);
+}

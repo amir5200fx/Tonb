@@ -7,6 +7,8 @@
 #include <Mesh_VariationRate.hxx>
 #include <Entity2d_BoxFwd.hxx>
 
+#include <memory>
+
 namespace tnbLib
 {
 
@@ -20,15 +22,16 @@ namespace tnbLib
 
 		Standard_Real theBase_;
 
-		Mesh_SurfaceSizeValues theSurfaceSize_;
-
-		Mesh_SurfaceCurvatureValues theSurfaceCurvature_;
+		std::shared_ptr<Mesh_SurfaceSizeValues> theSurfaceSize_;
+		std::shared_ptr<Mesh_SurfaceCurvatureValues> theSurfaceCurvature_;
 
 		Mesh_VariationRateInfo theDefaultGrowthRate_;
 		Mesh_VariationRateInfo theBoundaryGrowthRate_;
 
 
 		//- private functions and operators
+
+		void AllocateMemory();
 
 		friend class boost::serialization::access;
 
@@ -51,6 +54,8 @@ namespace tnbLib
 		{
 			theBoundaryGrowthRate_ = Mesh_VariationRateInfo::moderate;
 			theDefaultGrowthRate_ = Mesh_VariationRateInfo::moderate;
+
+			AllocateMemory();
 		}
 
 		// constructors [12/7/2021 Amir]
@@ -65,6 +70,8 @@ namespace tnbLib
 		{
 			theBoundaryGrowthRate_ = Mesh_VariationRateInfo::moderate;
 			theDefaultGrowthRate_ = Mesh_VariationRateInfo::moderate;
+
+			AllocateMemory();
 		}
 
 		Mesh_ReferenceValues
@@ -77,6 +84,8 @@ namespace tnbLib
 		{
 			theBoundaryGrowthRate_ = Mesh_VariationRateInfo::moderate;
 			theDefaultGrowthRate_ = Mesh_VariationRateInfo::moderate;
+
+			AllocateMemory();
 		}
 
 
@@ -102,17 +111,7 @@ namespace tnbLib
 			return theSurfaceSize_;
 		}
 
-		auto& SurfaceSizeRef()
-		{
-			return theSurfaceSize_;
-		}
-
 		const auto& SurfaceCurvature() const
-		{
-			return theSurfaceCurvature_;
-		}
-
-		auto& SurfaceCurvatureRef()
 		{
 			return theSurfaceCurvature_;
 		}
@@ -154,6 +153,8 @@ namespace tnbLib
 
 	};
 }
+
+#include <Mesh_ReferenceValuesI.hxx>
 
 #include <Mesh2d_ReferenceValues.hxx>
 #include <Mesh3d_ReferenceValues.hxx>

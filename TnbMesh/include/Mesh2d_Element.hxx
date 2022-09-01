@@ -14,6 +14,9 @@ namespace tnbLib
 	template<>
 	TnbMesh_EXPORT Mesh2d_Element::array3 Mesh2d_Element::InterpWeights(const Pnt2d& theCoord) const;
 
+	template<>
+	std::tuple<Pnt2d, Pnt2d, Pnt2d> Mesh2d_Element::RetrieveCoords() const;
+
 
 	template<>
 	template<>

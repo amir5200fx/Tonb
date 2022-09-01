@@ -118,11 +118,11 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 	}
 
 	Standard_Real radius = 0;
-	if (MeshConditions().CustomBoundaryGrowthRate())
+	if (MeshConditions()->CustomBoundaryGrowthRate())
 		radius =
 		MeshBase_Tools::CalcRadius
 		(
-			Mesh_VariationRate::Rate(MeshValues().BoundaryGrowthRate()),
+			Mesh_VariationRate::Rate(MeshValues()->BoundaryGrowthRate()),
 			elemSize,
 			ReferenceValues()->BaseSize()
 		);
@@ -287,7 +287,7 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrIters());
 
-	if (MeshConditions().CustomBoundaryGrowthRate())
+	if (MeshConditions()->CustomBoundaryGrowthRate())
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->BoundaryGrowthRate()));
 	else
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()));

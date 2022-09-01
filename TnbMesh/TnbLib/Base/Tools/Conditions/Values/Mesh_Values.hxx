@@ -6,6 +6,8 @@
 #include <Mesh_SurfaceSizeValues.hxx>
 #include <Mesh_VariationRateInfo.hxx>
 
+#include <memory>
+
 namespace tnbLib
 {
 
@@ -16,9 +18,8 @@ namespace tnbLib
 
 		Mesh_VariationRateInfo theBoundaryGrowthRate_;
 
-		Mesh_SurfaceSizeValues theSurfaceSize_;
-
-		Mesh_SurfaceCurvatureValues theCurvature_;
+		std::shared_ptr<Mesh_SurfaceSizeValues> theSurfaceSize_;
+		std::shared_ptr<Mesh_SurfaceCurvatureValues> theCurvature_;
 
 
 		//- private functions and operators
@@ -47,17 +48,7 @@ namespace tnbLib
 			return theSurfaceSize_;
 		}
 
-		auto& ChangeSurfaceSize()
-		{
-			return theSurfaceSize_;
-		}
-
 		const auto& SurfaceCurvature() const
-		{
-			return theCurvature_;
-		}
-
-		auto& ChangeSurfaceCurvature()
 		{
 			return theCurvature_;
 		}

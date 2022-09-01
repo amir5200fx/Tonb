@@ -12,7 +12,12 @@ namespace tnbLib
 	typedef Mesh_Element<Mesh3d_ElementTraits, Mesh_ElementType_Tetrahedron> Mesh3d_Element;
 
 	template<>
-	TnbMesh_EXPORT Mesh3d_Element::array4 Mesh3d_Element::InterpWeights(const Pnt3d& theCoord) const;
+	TnbMesh_EXPORT Mesh3d_Element::array4 
+		Mesh3d_Element::InterpWeights(const Pnt3d& theCoord) const;
+
+	template<>
+	TnbMesh_EXPORT std::tuple<Pnt3d, Pnt3d, Pnt3d, Pnt3d> 
+		Mesh3d_Element::RetrieveCoords() const;
 
 	template<>
 	template<>

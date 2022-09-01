@@ -5,6 +5,7 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Mesh_Module.hxx>
+#include <Mesh3d_ElementFwd.hxx>
 #include <Mesh2d_ElementFwd.hxx>
 #include <Mesh2d_EdgeFwd.hxx>
 #include <Mesh2d_NodeFwd.hxx>
@@ -13,6 +14,7 @@
 #include <Global_Serialization.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_MetricMeshValueFwd.hxx>
 #include <Entity2d_MeshValueFwd.hxx>
 #include <TnbError.hxx>
@@ -40,6 +42,18 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbMesh_EXPORT std::shared_ptr<Entity2d_Box> 
+			CalcBoundingBox
+			(
+				const std::shared_ptr<Mesh2d_Element>&
+			);
+
+		static TnbMesh_EXPORT std::shared_ptr<Entity3d_Box> 
+			CalcBoundingBox
+			(
+				const std::shared_ptr<Mesh3d_Element>&
+			);
 
 		static TnbMesh_EXPORT Pnt2d 
 			CalcAnalyCoord

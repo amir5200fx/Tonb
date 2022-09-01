@@ -47,3 +47,21 @@ namespace tnbLib
 		return std::move(t);
 	}
 }
+
+template<>
+std::tuple<tnbLib::Pnt3d, tnbLib::Pnt3d, tnbLib::Pnt3d, tnbLib::Pnt3d> 
+tnbLib::Mesh3d_Element::RetrieveCoords() const
+{
+	Debug_Null_Pointer(Node0());
+	Debug_Null_Pointer(Node1());
+	Debug_Null_Pointer(Node2());
+	Debug_Null_Pointer(Node3());
+
+	auto p0 = Node0()->Coord();
+	auto p1 = Node1()->Coord();
+	auto p2 = Node2()->Coord();
+	auto p3 = Node3()->Coord();
+
+	auto t = std::make_tuple(std::move(p0), std::move(p1), std::move(p2), std::move(p3));
+	return std::move(t);
+}

@@ -37,21 +37,36 @@ tnbLib::Mesh_VariationRate::Highrate()
 Standard_Real 
 tnbLib::Mesh_VariationRate::Rate
 (
-	const Mesh_VariationRateInfo Info
+	const Mesh_VariationRateInfo theInfo
 )
 {
-	switch (Info)
+	switch (theInfo)
 	{
 	case Mesh_VariationRateInfo::verySlow:
+	{
+		std::cout << "very slow" << std::endl;
 		return VeryLowrate();
+	}
 	case Mesh_VariationRateInfo::slow:
+	{
+		std::cout << "slow" << std::endl;
 		return Lowrate();
+	}
 	case Mesh_VariationRateInfo::moderate:
+	{
+		std::cout << "moderate" << std::endl;
 		return Moderate();
+	}
 	case Mesh_VariationRateInfo::fast:
+	{
+		std::cout << "fast" << std::endl;
 		return Highrate();
+	}
 	case Mesh_VariationRateInfo::custom:
+	{
+		std::cout << "custom" << std::endl;
 		return customValue;
+	}
 	default:
 		FatalErrorIn(FunctionSIG)
 			<< "Invalid rate of variation has been detected!" << endl

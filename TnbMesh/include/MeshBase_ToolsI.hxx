@@ -19,7 +19,7 @@ inline void tnbLib::MeshBase_Tools::SetSourcesToMesh3d
 	}
 
 	auto& sources = theMesh.Sources();
-	sources.resize(theSources.size(), theBaseSize);
+	//sources.resize(theSources.size(), theBaseSize);
 
 	auto start = mesh.Elements().at(0);
 	for (const auto& x : theSources)
@@ -46,10 +46,10 @@ inline void tnbLib::MeshBase_Tools::SetSourcesToMesh3d
 		auto v2 = sources.at(n2);
 		auto v3 = sources.at(n3);
 
-		/*if (v0 < x->H()) sources.at(n0) = v0;
-		if (v1 < x->H()) sources.at(n1) = v1;
-		if (v2 < x->H()) sources.at(n2) = v2;
-		if (v3 < x->H()) sources.at(n3) = v3;*/
+		if (x->H() < v0) sources.at(n0) = x->H();
+		if (x->H() < v1) sources.at(n1) = x->H();
+		if (x->H() < v2) sources.at(n2) = x->H();
+		if (x->H() < v3) sources.at(n3) = x->H();
 	}
 }
 

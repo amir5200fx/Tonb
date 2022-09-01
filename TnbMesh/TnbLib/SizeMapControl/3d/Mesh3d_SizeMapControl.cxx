@@ -50,7 +50,7 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 			Info << endl
 				<< " one size map has been detected, no unifying algorithm is needed." << endl;
 		}
-		theBackground_ = Maps().at(0)->BackgroundMesh();
+		theBackground_ = Maps().begin()->second->BackgroundMesh();
 	}
 	else
 	{

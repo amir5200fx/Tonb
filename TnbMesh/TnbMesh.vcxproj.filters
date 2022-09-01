@@ -1972,6 +1972,42 @@
     <Filter Include="TnbLib\Region\3d\Surface">
       <UniqueIdentifier>{bdc47e02-078e-480f-a6cf-010e6fcdbcee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\SetSources">
+      <UniqueIdentifier>{653cb12d-23c2-4dbd-96c7-5daa4a9b2dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Iso">
+      <UniqueIdentifier>{d88bcdc7-9c18-47ed-bb7e-ec319a4aa7eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\AnIso">
+      <UniqueIdentifier>{8be41990-499c-4061-b128-1e8f219eb0bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Iso\3d">
+      <UniqueIdentifier>{3eebf187-0d8b-408d-bb4e-1383ac68a159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Iso\2d">
+      <UniqueIdentifier>{c7c55048-48cf-4728-9897-484ab262749d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Iso\3d\Adaptor">
+      <UniqueIdentifier>{7fd8376c-35be-4d1b-beb4-4cfbdf76a7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Iso\3d\Node">
+      <UniqueIdentifier>{d058539b-f4b6-440d-bdd9-018569144110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Node">
+      <UniqueIdentifier>{29577bcd-65b7-458f-87c2-75a66adba33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Radius">
+      <UniqueIdentifier>{db8a3877-7961-4360-8d2d-dcda89141799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\ElementSize">
+      <UniqueIdentifier>{1959d6ca-1a62-4e93-9139-75da16668ff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\Radius\GrowthRate">
+      <UniqueIdentifier>{7927535b-2c7f-4f2a-980e-2b0a883d0d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\SetSources\ElementSize\DistRatio">
+      <UniqueIdentifier>{16f3c498-4a02-4b32-94db-1c4f61f429f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4755,6 +4791,39 @@
     <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun3d_BackgroundFwd.hxx">
       <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Iso\3d\Mesh3d_SetSources.hxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Iso\3d\Adaptor\Mesh3d_SetSourcesAdaptor.hxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Node\Mesh_SetSourcesNode.hxx">
+      <Filter>TnbLib\Base\SetSources\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Iso\3d\Node\Mesh3d_SetSourcesNode.hxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Iso\3d\Node\Mesh3d_SetSourcesNodeFwd.hxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Iso\3d\Mesh3d_SetEdgeSources.hxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Radius\Mesh3d_SetSourcesCalcRadius.hxx">
+      <Filter>TnbLib\Base\SetSources\Radius</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\ElementSize\Mesh3d_SetSourcesElementSize.hxx">
+      <Filter>TnbLib\Base\SetSources\ElementSize</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\Radius\GrowthRate\Mesh3d_SetSourcesCalcRadius_GrowthRate.hxx">
+      <Filter>TnbLib\Base\SetSources\Radius\GrowthRate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\SetSources\ElementSize\DistRatio\Mesh3d_SetSourcesElementSize_DistRatio.hxx">
+      <Filter>TnbLib\Base\SetSources\ElementSize\DistRatio</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\Conditions\Reference\Mesh_ReferenceValuesI.hxx">
+      <Filter>TnbLib\Base\Tools\Conditions\Reference</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6112,6 +6181,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\Iso\3d\GeoMesh3d_BackgroundIO.cxx">
       <Filter>TnbLib\Base\Geom\Mesh\Background\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\SetSources\Iso\3d\Mesh3d_SetSources.cxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\SetSources\Iso\3d\Adaptor\Mesh3d_SetSourcesAdaptor.cxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\SetSources\Iso\3d\Mesh3d_SetEdgeSources.cxx">
+      <Filter>TnbLib\Base\SetSources\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\SetSources\Radius\GrowthRate\Mesh3d_SetSourcesCalcRadius_GrowthRate.cxx">
+      <Filter>TnbLib\Base\SetSources\Radius\GrowthRate</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\SetSources\ElementSize\DistRatio\Mesh3d_SetSourcesElementSize_DistRatio.cxx">
+      <Filter>TnbLib\Base\SetSources\ElementSize\DistRatio</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform\BoundarySizeMap3d_UniformSegmentTool2.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

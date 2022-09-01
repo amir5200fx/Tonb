@@ -195,8 +195,8 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 	}
 
 	Standard_Real radius = 0;
-	if (MeshConditions().CustomBoundaryGrowthRate()) 
-		radius = ::tnbLib::meshLib::CalcRadius(Mesh_VariationRate::Rate(MeshValues().BoundaryGrowthRate()), elemSize, ReferenceValues()->BaseSize());
+	if (MeshConditions()->CustomBoundaryGrowthRate()) 
+		radius = ::tnbLib::meshLib::CalcRadius(Mesh_VariationRate::Rate(MeshValues()->BoundaryGrowthRate()), elemSize, ReferenceValues()->BaseSize());
 	else
 		radius = ::tnbLib::meshLib::CalcRadius(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()), elemSize, ReferenceValues()->BaseSize());
 	if (radius IS_EQUAL 0)
@@ -255,7 +255,7 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 	std::vector<Entity2d_Box> boxes;
 	{
 		meshLib::BalancedQuadTreeObject obj(compactItems);
-		if (MeshConditions().CustomBoundaryGrowthRate()) obj.Tolerance = Mesh_VariationRate::Rate(MeshValues().BoundaryGrowthRate());
+		if (MeshConditions()->CustomBoundaryGrowthRate()) obj.Tolerance = Mesh_VariationRate::Rate(MeshValues()->BoundaryGrowthRate());
 		else obj.Tolerance = Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate());
 
 		if (verbose)
@@ -339,7 +339,7 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(sysLib::gl_background_hv_correction_info->MaxNbIters());
 
-	if (MeshConditions().CustomBoundaryGrowthRate())
+	if (MeshConditions()->CustomBoundaryGrowthRate())
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->BoundaryGrowthRate()));
 	else
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()));

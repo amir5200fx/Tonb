@@ -16,6 +16,9 @@ namespace tnbLib
 
 	template<>
 	TnbMesh_EXPORT Standard_Boolean  Mesh3d_Facet::IsLeftSide(const Pnt3d& theCoord) const;
+
+	template<>
+	TnbMesh_EXPORT std::tuple<Pnt3d, Pnt3d, Pnt3d> Mesh3d_Facet::RetrieveCoords() const;
 }
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::Mesh3d_Facet);

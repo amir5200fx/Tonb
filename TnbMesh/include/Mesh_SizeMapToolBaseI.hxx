@@ -3,6 +3,14 @@
 #include <Mesh_ReferenceValues.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+template<class BackGroundMesh>
+inline void tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::AllocateMemory()
+{
+	theConditions_ = std::make_shared<Mesh_Conditions>();
+	theValues_ = std::make_shared<Mesh_Values>();
+}
+
 template<class BackGroundMesh>
 inline void tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::RetrieveValues
 (
@@ -13,31 +21,31 @@ inline void tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::RetrieveValues
 {
 	const auto& ref = *theReference_;
 
-	if (theConditions_.CustomSurfaceSize())
+	if (theConditions_->CustomSurfaceSize())
 	{
 		// Specify Relative or Absolute sizes
-		if (theValues_.SurfaceSize().RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
+		if (theValues_->SurfaceSize()->RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
 		{
-			theElementSize = theValues_.SurfaceSize().TargetSize();
-			theMinSize = theValues_.SurfaceSize().MinSize();
+			theElementSize = theValues_->SurfaceSize()->TargetSize();
+			theMinSize = theValues_->SurfaceSize()->MinSize();
 		}
 		else
 		{// is Relative to Base
-			theElementSize = theValues_.SurfaceSize().TargetSize()*ref.BaseSize() / 100.0;
-			theMinSize = theValues_.SurfaceSize().MinSize()*ref.BaseSize() / 100.0;
+			theElementSize = theValues_->SurfaceSize()->TargetSize()*ref.BaseSize() / 100.0;
+			theMinSize = theValues_->SurfaceSize()->MinSize()*ref.BaseSize() / 100.0;
 		}
 	}
 	else
 	{
-		if (ref.SurfaceSize().RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
+		if (ref.SurfaceSize()->RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
 		{
-			theElementSize = ref.SurfaceSize().TargetSize();
-			theMinSize = ref.SurfaceSize().MinSize();
+			theElementSize = ref.SurfaceSize()->TargetSize();
+			theMinSize = ref.SurfaceSize()->MinSize();
 		}
 		else
 		{
-			theElementSize = ref.SurfaceSize().TargetSize()*ref.BaseSize() / 100.0;
-			theMinSize = ref.SurfaceSize().MinSize()*ref.BaseSize() / 100.0;
+			theElementSize = ref.SurfaceSize()->TargetSize()*ref.BaseSize() / 100.0;
+			theMinSize = ref.SurfaceSize()->MinSize()*ref.BaseSize() / 100.0;
 		}
 	}
 
@@ -49,22 +57,22 @@ inline void tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::RetrieveValues
 	}
 
 	// Specify Combination of min, target sizes
-	if (theValues_.SurfaceSize().SizeMethod() IS_EQUAL Mesh_SizeMethodInfo::minOnly)
+	if (theValues_->SurfaceSize()->SizeMethod() IS_EQUAL Mesh_SizeMethodInfo::minOnly)
 	{
 		theElementSize = theMinSize;
 	}
 
-	if (theConditions_.CustomSurfaceCurvature() IS_EQUAL Mesh_SurfaceCurvatureInfo::disable)
+	if (theConditions_->CustomSurfaceCurvature() IS_EQUAL Mesh_SurfaceCurvatureInfo::disable)
 	{
 		theSpanAngle = RealLast();
 	}
-	else if (theConditions_.CustomSurfaceCurvature() IS_EQUAL Mesh_SurfaceCurvatureInfo::continum)
+	else if (theConditions_->CustomSurfaceCurvature() IS_EQUAL Mesh_SurfaceCurvatureInfo::continum)
 	{
-		theSpanAngle = ref.SurfaceCurvature().SpanAngle();
+		theSpanAngle = ref.SurfaceCurvature()->SpanAngle();
 	}
 	else
 	{// Specify Surface curvature value 
-		theSpanAngle = theValues_.SurfaceCurvature().SpanAngle();
+		theSpanAngle = theValues_->SurfaceCurvature()->SpanAngle();
 	}
 
 	if (theSpanAngle <= 0.0)
@@ -78,13 +86,13 @@ inline void tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::RetrieveValues
 template<class BackGroundMesh>
 inline Standard_Real tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::RetrieveTargetSize() const
 {
-	if (theValues_.SurfaceSize().RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
+	if (theValues_->SurfaceSize()->RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
 	{
-		return theValues_.SurfaceSize().TargetSize();
+		return theValues_->SurfaceSize()->TargetSize();
 	}
 	else
 	{
-		return theValues_.SurfaceSize().TargetSize()*theReference_->BaseSize() / 100.0;
+		return theValues_->SurfaceSize()->TargetSize()*theReference_->BaseSize() / 100.0;
 	}
 }
 
@@ -97,26 +105,26 @@ inline Standard_Real tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::GetBaseSize()
 template<class BackGroundMesh>
 inline Standard_Real tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::GetTargetSurfaceSize() const
 {
-	if (theConditions_.CustomSurfaceSize())
+	if (theConditions_->CustomSurfaceSize())
 	{
-		if (theValues_.SurfaceSize().RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
+		if (theValues_->SurfaceSize()->RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
 		{
-			return theValues_.SurfaceSize().TargetSize();
+			return theValues_->SurfaceSize()->TargetSize();
 		}
 		else
 		{
-			return theValues_.SurfaceSize().TargetSize()*theReference_->BaseSize() / 100.0;
+			return theValues_->SurfaceSize()->TargetSize()*theReference_->BaseSize() / 100.0;
 		}
 	}
 	else
 	{
-		if (theReference_->SurfaceSize().RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
+		if (theReference_->SurfaceSize()->RelativeAbsolute() IS_EQUAL Mesh_RelativeAbsoluteInfo::absolute)
 		{
-			return theReference_->SurfaceSize().TargetSize();
+			return theReference_->SurfaceSize()->TargetSize();
 		}
 		else
 		{
-			return theReference_->SurfaceSize().TargetSize()*theReference_->BaseSize() / 100.0;
+			return theReference_->SurfaceSize()->TargetSize()*theReference_->BaseSize() / 100.0;
 		}
 	}
 }
@@ -124,9 +132,9 @@ inline Standard_Real tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::GetTargetSurf
 template<class BackGroundMesh>
 inline Standard_Real tnbLib::Mesh_SizeMapToolBase<BackGroundMesh>::GetBoundaryGrowthRate() const
 {
-	if (theConditions_.CustomBoundaryGrowthRate())
+	if (theConditions_->CustomBoundaryGrowthRate())
 	{
-		return Mesh_VariationRate::Rate(theValues_.BoundaryGrowthRate());
+		return Mesh_VariationRate::Rate(theValues_->BoundaryGrowthRate());
 	}
 	else
 	{

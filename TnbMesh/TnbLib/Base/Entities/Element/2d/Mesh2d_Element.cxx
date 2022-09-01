@@ -41,3 +41,15 @@ namespace tnbLib
 		return std::move(t);
 	}
 }
+
+template<>
+std::tuple<tnbLib::Pnt2d, tnbLib::Pnt2d, tnbLib::Pnt2d> 
+tnbLib::Mesh2d_Element::RetrieveCoords() const
+{
+	auto p0 = Node0()->Coord();
+	auto p1 = Node1()->Coord();
+	auto p2 = Node2()->Coord();
+
+	auto t = std::make_tuple(std::move(p0), std::move(p1), std::move(p2));
+	return std::move(t);
+}
