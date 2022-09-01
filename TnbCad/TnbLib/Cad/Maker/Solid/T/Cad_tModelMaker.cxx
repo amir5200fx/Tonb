@@ -667,6 +667,7 @@ void tnbLib::MergeSegments::Node::ImportToVertices
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "duplicate item has been detected!" << endl
+			<< " - index: " << theVtx->Index() << endl
 			<< abort(FatalError);
 	}
 }
@@ -923,8 +924,8 @@ void tnbLib::MergeSegments::CalcMergedEdges()
 				auto n = FindNode(ring->Vtx());
 
 				Debug_Null_Pointer(n);
-
 				auto ringPaired = MergeSegments::MakeNewRing(n, x, PairCriterion());
+
 				if (ringPaired.second)
 				{
 					auto& newEdge = ringPaired.first;
@@ -952,7 +953,6 @@ void tnbLib::MergeSegments::CalcMergedEdges()
 
 				Debug_Null_Pointer(n0);
 				Debug_Null_Pointer(n1);
-
 				auto edgePaired = MergeSegments::MakeNewEdge(n0, n1, x, PairCriterion());
 				if (edgePaired.second)
 				{
@@ -997,7 +997,6 @@ void tnbLib::MergeSegments::Perform()
 
 	CalcIdToNodeMap();
 	CalcMergedEdges();
-
 	Change_IsDone() = Standard_True;
 }
 
@@ -1112,13 +1111,19 @@ tnbLib::MergeSegments::MakeNewRing
 
 		if (e->IsRing())
 		{
-			auto iring = std::dynamic_pointer_cast<TModel_RingEdge>(e);
+			auto iring = std::dynamic_pointer_cast<MergeSegments::RingEdge>(e);
 			Debug_Null_Pointer(iring);
 
-			if (theCriterion->ArePaired(iring->Curve(), ring->Curve()))
+			for (const auto& ie : iring->Edges())
 			{
-				auto t = std::make_pair(std::move(e), Standard_False);
-				return std::move(t);
+				Debug_Null_Pointer(ie.second);
+				auto ir = std::dynamic_pointer_cast<TModel_RingEdge>(ie.second);
+				Debug_Null_Pointer(ir);
+				if (theCriterion->ArePaired(ir->Curve(), ring->Curve()))
+				{
+					auto t = std::make_pair(std::move(e), Standard_False);
+					return std::move(t);
+				}
 			}
 		}
 	}

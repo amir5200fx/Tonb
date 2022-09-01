@@ -4,6 +4,8 @@
 #include <Mesh_CurveOptmPoint_Correction.hxx>
 #include <Mesh_CurveOptmPoint_Newton.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
+#include <Mesh_CurveOptmPoint_BisectCorrection_Initial.hxx>
+#include <Mesh_CurveOptmPoint_BisectCorrection.hxx>
 #include <Cad_CurveSplitter_Info.hxx>
 #include <Cad_CurveLength.hxx>
 #include <Pnt3d.hxx>
@@ -65,15 +67,80 @@ namespace tnbLib
 				const Cad_CurveSplitter_Info& theInfo
 			)
 		{
+			if (theGuess <= theU0)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " invalid initial guess for optimum point has been detected!" << endl
+					<< " - u0: " << theU0 << endl
+					<< " - guess: " << theGuess << endl
+					<< " - step: " << theStep << endl
+					<< " - uMax: " << theUmax << endl
+					<< abort(FatalError);
+			}
 			Debug_Null_Pointer(theInfo.CorrInfo());
 
-			Mesh_CurveOptmPoint_Correction<Geom_Curve> 
+			Standard_Real corrected = theGuess;
+			try
+			{
+				Mesh_CurveOptmPoint_Correction<Geom_Curve>
+					correction(theU0, theGuess, theCurve, *theInfo.CorrInfo(), theInfo.IterIntgInfo());
+
+				correction.SetLen(theStep);
+				correction.Perform();
+
+				Debug_If_Condition_Message(NOT correction.IsDone(),
+					"mesh_curveoptpoint_correction algorithm has not been performed!");
+				corrected = correction.Corrected();
+			}
+			catch (const ConvError&)
+			{
+				Mesh_CurveOptmPoint_BisectCorrection_Initial<Geom_Curve>
+					initial(theU0, theGuess, theCurve, theInfo.OverallLengthIntgInfo());
+
+				//initial.SetMaxLevel(25);
+				initial.SetLen(theStep);
+				initial.Perform();
+
+				Debug_If_Condition_Message(NOT initial.IsDone(),
+					"the application algorithm has not been performed!");
+
+				const auto[x0, x1] = initial.Bound();
+				if (x0 IS_EQUAL x1 AND initial.IsConverged())
+				{
+					corrected = x0;
+					goto iterationAlg;
+				}
+
+				if (NOT initial.IsConverged())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "Can not Calculate parameter of the curve" << endl
+						<< " - U0: " << theU0 << endl
+						<< " - Guess: " << theGuess << endl
+						<< " - Corrected: " << corrected << endl
+						<< abort(FatalError);
+				}
+				Mesh_CurveOptmPoint_BisectCorrection<Geom_Curve>
+					correction(theU0, x0, x1, theCurve, theInfo.BisectInfo(), theInfo.OverallLengthIntgInfo());
+				correction.SetLen(theStep);
+				correction.Perform();
+
+				Debug_If_Condition_Message(NOT correction.IsDone(),
+					"mesh_curveoptpoint_correction algorithm has not been performed!");
+
+				corrected = correction.Corrected();
+				goto iterationAlg;
+			}
+			
+		iterationAlg:
+
+			/*Mesh_CurveOptmPoint_Correction<Geom_Curve> 
 				correction(theU0, theGuess, theCurve, *theInfo.CorrInfo(), theInfo.IterIntgInfo());
 			correction.Perform();
 
 			Debug_If_Condition_Message(NOT correction.IsDone(),
 				"mesh_curveoptpoint_correction algorithm has not been performed!");
-			auto corrected = correction.Corrected();
+			auto corrected = correction.Corrected();*/
 
 			Mesh_CurveOptmPoint_Newton<Geom_Curve>
 				Iteration(theU0, theStep, theCurve);
@@ -104,7 +171,7 @@ namespace tnbLib
 				const auto ds2 = theStep / 2;
 				const auto du = theU0 + (corrected - theU0) / 2;
 
-				auto u0 =
+				auto um =
 					CalcNextParameter
 					(
 						theU0,
@@ -114,8 +181,8 @@ namespace tnbLib
 				return
 					CalcNextParameter
 					(
-						u0, u0 + du, ds2,
-						theUmax, theLevel + 1,
+						um, 2.0*um - theU0, ds2,
+						theUmax, theLevel,
 						theMaxLevel, theCurve, theInfo
 					);
 			}
@@ -181,7 +248,9 @@ void tnbLib::Cad_CurveSplitter::Perform
 		Change_IsDone() = Standard_True;
 		return;
 	}
-
+	Debug_Null_Pointer(Curve());
+	Debug_Null_Pointer(GetInfo());
+	Debug_Null_Pointer(GetInfo()->IterIntgInfo());
 	Mesh_CurveEntity<Geom_Curve> 
 		Integrand(*Curve(), GetInfo()->IterIntgInfo(), 1.0, theU0, theU1);
 

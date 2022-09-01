@@ -3,6 +3,7 @@
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <NumAlg_NewtonSolver_Info.hxx>
+#include <NumAlg_BisectionSolver_Info.hxx>
 
 const Standard_Integer tnbLib::Cad_CurveSplitter_Info::DEFAULT_MAX_LEVEL = 10;
 
@@ -10,6 +11,9 @@ const Standard_Real tnbLib::Cad_CurveSplitter_Info::DEFAULT_UR = 0.9;
 
 const std::shared_ptr<tnbLib::Mesh_CurveOptmPoint_Correction_Info> tnbLib::Cad_CurveSplitter_Info::DEFAULT_CORR_INFO =
 std::make_shared<tnbLib::Mesh_CurveOptmPoint_Correction_Info>();
+
+const std::shared_ptr<tnbLib::NumAlg_BisectionSolver_Info> tnbLib::Cad_CurveSplitter_Info::DEFAULT_BISECT_INFO =
+std::make_shared<tnbLib::NumAlg_BisectionSolver_Info>();
 
 const std::shared_ptr<tnbLib::NumAlg_NewtonSolver_Info> tnbLib::Cad_CurveSplitter_Info::DEFAULT_NEWTON_INFO =
 std::make_shared<tnbLib::NumAlg_NewtonSolver_Info>();
@@ -75,5 +79,13 @@ void tnbLib::CurveSplitterInfoRunTimeSetup::SetInfo()
 		myInfo.SetMaxNbIterations(200);
 		myInfo.SetNbInitIterations(8);
 		myInfo.SetTolerance(1.0E-8);
+	}
+
+	{
+		auto& myInfo = *Cad_CurveSplitter_Info::DEFAULT_BISECT_INFO;
+
+		myInfo.SetMaxIterations(15);
+		myInfo.SetDelta(1.0E-4);
+		myInfo.SetTolerance(1.0E-4);
 	}
 }
