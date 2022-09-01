@@ -565,6 +565,13 @@ namespace tnbLib
 				const Entity2d_Triangle& tri1
 			);
 
+		static TnbGeo_EXPORT Standard_Boolean 
+			IsIntersect_cgal
+			(
+				const Entity3d_SegmentRef& theSeg,
+				const Entity3d_Triangle& theTri
+			);
+
 		static inline Standard_Real 
 			Interpolate
 			(

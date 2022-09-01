@@ -4,7 +4,7 @@
 
 #include <Standard_TypeDef.hxx>
 
-#include <list>
+#include <set>
 
 namespace tnbLib
 {
@@ -15,7 +15,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::list<T> theBucket_;
+		std::set<T> theBucket_;
 
 	public:
 

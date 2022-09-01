@@ -31,12 +31,12 @@ namespace tnbLib
 
 		// constructors [7/5/2022 Amir]
 
-		Geo3d_BalPrTreeLeaf(const std::shared_ptr<Entity3d_Box>& theBox)
+		explicit Geo3d_BalPrTreeLeaf(const std::shared_ptr<Entity3d_Box>& theBox)
 			: theFather_(0)
 			, Geo3d_BalPrTreeNode(theBox)
 		{}
 
-		explicit Geo3d_BalPrTreeLeaf(std::shared_ptr<Entity3d_Box>&& theBox)
+		Geo3d_BalPrTreeLeaf(std::shared_ptr<Entity3d_Box>&& theBox)
 			: theFather_(0)
 			, Geo3d_BalPrTreeNode(std::move(theBox))
 		{}

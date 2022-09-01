@@ -13,41 +13,8 @@ namespace tnbLib
 	namespace geoLib
 	{
 
-		struct Segment
-		{
-			Standard_Real theX0;
-			Standard_Real theX1;
-
-			Segment()
-			{}
-
-			Segment(const Standard_Real x0, const Standard_Real x1)
-				: theX0(x0)
-				, theX1(x1)
-			{}
-
-			Segment Left() const
-			{
-				return Segment(theX0, MEAN(theX0, theX1));
-			}
-
-			Segment Right() const
-			{
-				return Segment(MEAN(theX0, theX1), theX1);
-			}
-
-			Standard_Real Mean() const
-			{
-				return MEAN(theX0, theX1);
-			}
-
-			static Standard_Boolean IsLess(const Segment& theS1, const Segment& theS2)
-			{
-				return theS1.Mean() < theS2.Mean();
-			}
-		};
-
-		typedef std::vector<Segment> segList;
+		typedef Geo_ApprxCurveBase::Segment Segment;
+		typedef typename Geo_ApprxCurveBase::segList segList;
 
 		inline auto CalcRandomX
 		(
@@ -351,6 +318,27 @@ namespace tnbLib
 	}
 
 	template<class CurveType, bool RandSamples>
+	inline void Geo_ApprxCurve<CurveType, RandSamples>::Subdivide
+	(
+		segList & theSegments
+	) const
+	{
+		Debug_Null_Pointer(Info());
+		const auto& theInfo = *Info();
+
+		geoLib::Subdivide<typename remove_pointer<CurveType>::type, RandSamples>
+			(
+				*Curve(),
+				Segment(FirstParameter(), LastParameter()),
+				theInfo.NbSamples(),
+				theInfo.Approx()*theInfo.Approx(),
+				Geo_Tools::DegToRadian(theInfo.Angle()),
+				theInfo.MinSize()* theInfo.MinSize(),
+				0, theInfo.InitNbSubdivision(), theInfo.MaxNbSubdivision(), theSegments
+				);
+	}
+
+	template<class CurveType, bool RandSamples>
 	void Geo_ApprxCurve<CurveType, RandSamples>::Perform()
 	{
 		if (NOT IsLoaded())
@@ -371,16 +359,7 @@ namespace tnbLib
 		const auto& theInfo = *Info();
 
 		geoLib::segList Segments;
-		geoLib::Subdivide<typename remove_pointer<CurveType>::type, RandSamples>
-			(
-				*Curve(),
-				geoLib::Segment(FirstParameter(), LastParameter()),
-				theInfo.NbSamples(),
-				theInfo.Approx()*theInfo.Approx(),
-				Geo_Tools::DegToRadian(theInfo.Angle()),
-				theInfo.MinSize()* theInfo.MinSize(),
-				0, theInfo.InitNbSubdivision(), theInfo.MaxNbSubdivision(), Segments
-				);
+		Subdivide(Segments);
 
 		Geo_ItemSort<geoLib::Segment> sorting(&geoLib::Segment::IsLess);
 		sorting.Perform(Segments);

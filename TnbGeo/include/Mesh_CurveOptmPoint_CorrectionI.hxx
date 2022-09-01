@@ -24,7 +24,7 @@ namespace tnbLib
 			}
 		};
 
-		const auto& map = Entity().SizeMap();
+		//const auto& map = Entity().SizeMap();
 		const auto& curve = Entity().Curve();
 
 		const auto nbLevels = Info().MaxLevel();
@@ -69,37 +69,37 @@ namespace tnbLib
 	}
 
 
-	template<class gCurveType>
-	void Mesh_CurveOptmPoint_Correction<gCurveType, void>::Perform()
-	{
-		auto& integInfo = *IntegInfo();
-		const auto s = 1.0 / Entity().Size();
-		const auto& curve = Entity().Curve();
+	//template<class gCurveType>
+	//void Mesh_CurveOptmPoint_Correction<gCurveType, void>::Perform()
+	//{
+	//	auto& integInfo = *IntegInfo();
+	//	const auto s = 1.0 / Entity().Size();
+	//	const auto& curve = Entity().Curve();
 
-		const auto nbLevels = Info().MaxLevel();
-		const auto tol = Info().Tolerance();
-		const auto underRelaxation = Info().UnderRelaxation();
+	//	const auto nbLevels = Info().MaxLevel();
+	//	const auto tol = Info().Tolerance();
+	//	const auto underRelaxation = Info().UnderRelaxation();
 
-		auto Correct = Guess();
+	//	auto Correct = Guess();
 
-		auto Umin = U0();
-		auto Umax = Entity().LastParameter();
+	//	auto Umin = U0();
+	//	auto Umax = Entity().LastParameter();
 
-		Geo_CurveIntegrand<gCurveType> integrand(curve);
-		forThose(Iter, 1, nbLevels)
-		{
-			auto dis = s * geoLib::CalcCurveLength<gCurveType>::_(integrand, Umin, Correct, integInfo) / Len();
-			auto du = (Correct - Umin) / dis;
-			//Correct = Umin + underRelaxation*du;
-			Correct = Umin + du;
+	//	Geo_CurveIntegrand<gCurveType> integrand(curve);
+	//	forThose(Iter, 1, nbLevels)
+	//	{
+	//		auto dis = s * geoLib::CalcCurveLength<gCurveType>::_(integrand, Umin, Correct, integInfo) / Len();
+	//		auto du = (Correct - Umin) / dis;
+	//		//Correct = Umin + underRelaxation*du;
+	//		Correct = Umin + du;
 
-			if (Correct < Umin) Correct = Umin;
-			if (Correct > Umax) Correct = Umax;
+	//		if (Correct < Umin) Correct = Umin;
+	//		if (Correct > Umax) Correct = Umax;
 
-			if (ABS(1.0 - dis) < tol) break;
-		}
+	//		if (ABS(1.0 - dis) < tol) break;
+	//	}
 
-		ChangeCorrected() = Correct;
-		Change_IsDone() = Standard_True;
-	}
+	//	ChangeCorrected() = Correct;
+	//	Change_IsDone() = Standard_True;
+	//}
 }

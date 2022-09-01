@@ -706,6 +706,33 @@
     <Filter Include="TnbLib\Geo\Triangulation\3d\fade3d">
       <UniqueIdentifier>{678d9fd1-b6c7-4be3-b7bb-ec7d40529e70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct">
+      <UniqueIdentifier>{536297aa-48ae-4d84-a103-73a4d32d60d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic">
+      <UniqueIdentifier>{18ec8a40-df13-41d3-86c4-8f559e604758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\2d">
+      <UniqueIdentifier>{a1664769-eabc-4fcf-9a80-041d878aa0e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\3d">
+      <UniqueIdentifier>{02c55708-e9be-424f-8ed9-4edd63e21d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor">
+      <UniqueIdentifier>{ae150453-4b1a-428f-9806-76de63751daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d">
+      <UniqueIdentifier>{4d1629fd-a6f6-4764-8794-732510d24e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d">
+      <UniqueIdentifier>{68a1206a-8a5f-4b0f-af5c-12c971501442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\Info">
+      <UniqueIdentifier>{fea1572c-d49f-4bf6-ba0d-9996384dc840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\Traits">
+      <UniqueIdentifier>{36d9ec38-1347-4f09-ba72-909adcf12274}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1674,6 +1701,48 @@
     <ClInclude Include="TnbLib\Geo\Triangulation\3d\fade3d\Geo3d_DelTri_Fade3d.hxx">
       <Filter>TnbLib\Geo\Triangulation\3d\fade3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct\Geo3d_AttrbBalPrTree.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\AttrbOct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct\Geo3d_AttrbBalPrTreeLeaf.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\AttrbOct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct\Geo3d_AttrbBalPrTreeLeaf_Adaptor.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\AttrbOct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct\Geo3d_AttrbBalPrTreeLeafHub.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\AttrbOct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct\Geo3d_AttrbBalPrTreeI.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\AttrbOct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\Geo_BasicApprxCurveAdaptor.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d\Geo2d_BasicApprxCurveAdaptor.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d\Geo2d_BasicApprxCurveAdaptorFwd.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d\Geo3d_BasicApprxCurveAdaptor.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d\Geo3d_BasicApprxCurveAdaptorFwd.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\3d\Geo3d_BasicApprxCurve.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\3d\Geo3d_BasicApprxCurveFwd.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Info\Geo_BasicApprxCurve_Info.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Traits\Geo_BasicApprxCurve_Traits.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Traits</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2083,6 +2152,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Triangulation\3d\fade3d\Geo3d_DelTri_Fade3d.cxx">
       <Filter>TnbLib\Geo\Triangulation\3d\fade3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct\Geo3d_AttrbBalPrTree.cxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\AttrbOct</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\3d\Geo3d_BasicApprxCurve.cxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Info\Geo_BasicApprxCurve_Info.cxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d\Geo3d_BasicApprxCurveAdaptor.cxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
