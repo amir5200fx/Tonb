@@ -159,7 +159,7 @@ namespace tnbLib
 
 	auto& getSurfaceSizeValues()
 	{
-		return myRef->SurfaceSizeRef();
+		return *myRef->SurfaceSize();
 	}
 
 	void setMethod(Mesh_SurfaceSizeValues& v, const std::string& name)
@@ -218,7 +218,7 @@ namespace tnbLib
 
 	auto& getCurvatureValues()
 	{
-		return myRef->SurfaceCurvatureRef();
+		return *myRef->SurfaceCurvature();
 	}
 
 	void setCurvatureInfo(Mesh_SurfaceCurvatureValues& v, const std::string& name)

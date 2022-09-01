@@ -191,6 +191,9 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
+	FatalError.throwExceptions();
+	FatalConvError.throwExceptions();
+
 	if (argc <= 1)
 	{
 		Info << " - No command is entered" << endl

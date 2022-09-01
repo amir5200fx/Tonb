@@ -271,29 +271,29 @@ namespace tnbLib
 		theSizeMap->ImportPatch(name);
 	}
 
-	auto& meshConditions(const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& theSizeMap)
+	const auto& meshConditions(const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& theSizeMap)
 	{
-		return theSizeMap->MeshConditionsRef();
+		return theSizeMap->MeshConditions();
 	}
 
-	auto& meshValues(const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& theSizeMap)
+	const auto& meshValues(const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& theSizeMap)
 	{
-		return theSizeMap->MeshValuesRef();
+		return theSizeMap->MeshValues();
 	}
 
-	auto& surfaceSize(Mesh_Values& v)
+	const auto& surfaceSize(const std::shared_ptr<Mesh_Values>& v)
 	{
-		return v.ChangeSurfaceSize();
+		return v->SurfaceSize();
 	}
 
-	void setCustomSurfaceSize(Mesh_Conditions& cond, bool d)
+	void setCustomSurfaceSize(const std::shared_ptr<Mesh_Conditions>& cond, bool d)
 	{
-		cond.SetCustomSurfaceSize(d);
+		cond->SetCustomSurfaceSize(d);
 	}
 
-	void setCustomBoundaryGrowthRate(Mesh_Conditions& cond, bool d)
+	void setCustomBoundaryGrowthRate(const std::shared_ptr<Mesh_Conditions>& cond, bool d)
 	{
-		cond.SetCustomBoundaryGrowthRate(d);
+		cond->SetCustomBoundaryGrowthRate(d);
 	}
 
 	auto switchToCurvatureInfo(const std::string& name)
@@ -321,9 +321,9 @@ namespace tnbLib
 		}
 	}
 
-	void setCustomSurfaceCurvature(Mesh_Conditions& cond, const std::string& d)
+	void setCustomSurfaceCurvature(const std::shared_ptr<Mesh_Conditions>& cond, const std::string& d)
 	{
-		cond.SetCustomSurfaceCurvature(switchToCurvatureInfo(d));
+		cond->SetCustomSurfaceCurvature(switchToCurvatureInfo(d));
 	}
 
 	auto switchToValueType(const std::string& name)
@@ -347,14 +347,14 @@ namespace tnbLib
 		}
 	}
 
-	void setMeshValuesType(Mesh_SurfaceSizeValues& v, const std::string& t)
+	void setMeshValuesType(const std::shared_ptr<Mesh_SurfaceSizeValues>& v, const std::string& t)
 	{
-		v.SetRelativeAbsolute(switchToValueType(t));
+		v->SetRelativeAbsolute(switchToValueType(t));
 	}
 
-	void setTargetSize(Mesh_SurfaceSizeValues& v, double x)
+	void setTargetSize(const std::shared_ptr<Mesh_SurfaceSizeValues>& v, double x)
 	{
-		v.SetTargetSize(x);
+		v->SetTargetSize(x);
 	}
 
 	auto switchToVariationRateType(const std::string& name)
@@ -390,9 +390,9 @@ namespace tnbLib
 		}
 	}
 
-	void setBoundaryVariationRate(Mesh_Values& v, const std::string& name)
+	void setBoundaryVariationRate(const std::shared_ptr<Mesh_Values>& v, const std::string& name)
 	{
-		v.SetBoundaryGrowthRate(switchToVariationRateType(name));
+		v->SetBoundaryGrowthRate(switchToVariationRateType(name));
 	}
 
 	auto retrieveBackgrounds()
@@ -437,6 +437,11 @@ namespace tnbLib
 				myBoundarySizeMaps->Perform();
 			}
 
+			//auto ss = myFeatureSizeMaps->SelectMap("edges");
+			//std::cout << ss->MeshConditions()->CustomBoundaryGrowthRate() << std::endl;
+			//ss->MeshConditions()->SetCustomBoundaryGrowthRate(Standard_True);
+			//ss->MeshValues()->SetBoundaryGrowthRate(Mesh_VariationRateInfo::verySlow);
+
 			if (myFeatureSizeMaps->NbMaps())
 			{
 				myFeatureSizeMaps->Perform();
@@ -480,7 +485,8 @@ namespace tnbLib
 				Info << endl
 					<< " - All the maps are unified in, " << global_time_duration << " ms." << endl;
 			}
-
+			OFstream myFile("background.plt");
+			myBackgound->ExportToPlt(myFile);
 			auto d = *domain;
 			mySizeFun =
 				std::make_shared<GeoSizeFun3d_Background>
@@ -512,9 +518,14 @@ namespace tnbLib
 
 	void addUserTypes(const module_t& mod)
 	{
-		mod->add(chaiscript::user_type<Mesh_Conditions>(), "Mesh_Conditions");
-		mod->add(chaiscript::user_type<Mesh_SurfaceSizeValues>(), "Mesh_SurfaceSizeValues");
-		mod->add(chaiscript::user_type<Mesh_Values>(), "Mesh_Values");
+		mod->add(chaiscript::user_type<Mesh_Conditions>(), "MeshConditions");
+		mod->add(chaiscript::constructor<Mesh_Conditions()>(), "MeshConditions");
+
+		mod->add(chaiscript::user_type<Mesh_SurfaceSizeValues>(), "SurfaceSizeValues");
+		mod->add(chaiscript::constructor<Mesh_SurfaceSizeValues()>(), "SurfaceSizeValues");
+
+		mod->add(chaiscript::user_type<Mesh_Values>(), "MeshValues");
+		mod->add(chaiscript::constructor<Mesh_Values()>(), "MeshValues");
 	}
 
 	void setFunctions(const module_t& mod)
@@ -544,18 +555,19 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::shared_ptr<Cad_TModel>& m)-> auto{return getSegments(m); }), "getSegments");
 		mod->add(chaiscript::fun([](const std::shared_ptr<Cad_TModel>& m)-> auto{return getFaces(m); }), "getFaces");
 		
-		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& sm)-> auto& {return meshConditions(sm); }), "getMeshConditions");
-		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& sm)-> auto& {return meshValues(sm); }), "getMeshValues");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& sm)-> auto {return meshConditions(sm); }), "getMeshConditions");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh3d_BoundarySizeMapTool>& sm)-> auto {return meshValues(sm); }), "getMeshValues");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Values>& v)-> auto {return v->SurfaceSize(); }), "getSurfaceSize");
 
-		mod->add(chaiscript::fun([](Mesh_Conditions& cond, bool d)-> void {setCustomSurfaceSize(cond, d); }), "setCustomSurfaceSize");
-		mod->add(chaiscript::fun([](Mesh_Conditions& cond, bool d)-> void {setCustomBoundaryGrowthRate(cond, d); }), "setCustomBoundaryGrowthRate");
-		mod->add(chaiscript::fun([](Mesh_Conditions& cond, const std::string& name)-> void {setCustomSurfaceCurvature(cond, name); }), "setCustomSurfaceCurvature");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Conditions>& cond, bool d)-> void {setCustomSurfaceSize(cond, d); }), "setCustomSurfaceSize");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Conditions>& cond, bool d)-> void {setCustomBoundaryGrowthRate(cond, d); }), "setCustomBoundaryGrowthRate");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Conditions>& cond, const std::string& name)-> void {setCustomSurfaceCurvature(cond, name); }), "setCustomSurfaceCurvature");
 
-		mod->add(chaiscript::fun([](Mesh_SurfaceSizeValues& v, const std::string& name)-> void {setMeshValuesType(v, name); }), "setType");
-		mod->add(chaiscript::fun([](Mesh_SurfaceSizeValues& v, double x)-> void {setTargetSize(v, x); }), "setTargetSize");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_SurfaceSizeValues>& v, const std::string& name)-> void {setMeshValuesType(v, name); }), "setType");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_SurfaceSizeValues>& v, double x)-> void {setTargetSize(v, x); }), "setTargetSize");
 		
-		mod->add(chaiscript::fun([](Mesh_Values& v, const std::string& name)-> void {setBoundaryVariationRate(v, name); }), "setVariationRate");
-		mod->add(chaiscript::fun([](Mesh_Values& v)-> auto& {return surfaceSize(v); }), "getSurfaceSize");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Values>& v, const std::string& name)-> void {setBoundaryVariationRate(v, name); }), "setVariationRate");
+		mod->add(chaiscript::fun([](const std::shared_ptr<Mesh_Values>& v)-> auto& {return surfaceSize(v); }), "getSurfaceSize");
 
 		// settings [7/31/2022 Amir]
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
@@ -613,16 +625,27 @@ int main(int argc, char *argv[])
 
 				<< " - [manager] getCorners(model);                     - it gives the corner manager." << endl
 				<< " - [manager] getSegments(model);                    - it gives the segment manager." << endl
-				<< " - [manager] getFaces(model);                       - it gives the face manager." << endl
+				<< " - [manager] getFaces(model);                       - it gives the face manager." << endl << endl
 
 				<< " - [model] getModel(int);" << endl
 				<< " - [sizeMap] createBoundarySizeMap(name, model);" << endl
-				<< " - [sizeMap] createFeatureSizeMap(name, model);" << endl
+				<< " - [sizeMap] createFeatureSizeMap(name, model);" << endl << endl
 
-				<< " - importPatch(sizeMap, name);" << endl
+				<< " - importPatch(sizeMap, name);" << endl << endl
 
-				<< " - [meshConds] getMeshConditions(sizeMap);" << endl
-				<< " - [meshValues] getMeshValues(sizeMap)" << endl
+				<< " - [meshConds] (sizeMap).getMeshConditions();" << endl
+				<< " - [meshValues] (sizeMap).getMeshValues();" << endl << endl
+
+				<< " - [surfaceSize] (meshValues).getSurfaceSize();" << endl << endl
+
+				<< " - (meshConds).setCustomBoundaryGrowthRate(bool);   - default value: false" << endl
+				<< " - (meshConds).setCustomSurfaceSize(bool);          - default value: false" << endl
+				<< " - (meshConds).setCustomSurfaceCurvature(bool);     - default value: false" << endl << endl
+
+				<< " - (meshValues).setVariationRate(rate);             - rate: verySlow, slow, moderate, fast." << endl << endl
+				
+				<< " - (surfaceSize).setType(type);                     - type: ralative, absolute." << endl
+				<< " - (surfaceSize).setTargetSize(size)" << endl << endl
 
 				<< " - execute(name)" << endl
 				<< endl;
