@@ -58,6 +58,12 @@ namespace tnbLib
 		return std::move(seg);
 	}
 
+	Segment_3 get_cgalSegment(const Entity3d_SegmentRef& s)
+	{
+		Segment_3 seg(get_cgalPoint(s.P0()), get_cgalPoint(s.P1()));
+		return std::move(seg);
+	}
+
 	Pnt2d get_Point(const Point_2& p)
 	{
 		Pnt2d pt(p.x(), p.y());
@@ -97,6 +103,12 @@ namespace tnbLib
 	Triangle_2 get_cgalTriange(const Entity2d_Triangle& t)
 	{
 		Triangle_2 tri(get_cgalPoint(t.P0()), get_cgalPoint(t.P1()), get_cgalPoint(t.P2()));
+		return std::move(tri);
+	}
+
+	Triangle_3 get_cgalTriange(const Entity3d_Triangle& t)
+	{
+		Triangle_3 tri(get_cgalPoint(t.P0()), get_cgalPoint(t.P1()), get_cgalPoint(t.P2()));
 		return std::move(tri);
 	}
 }
@@ -430,4 +442,18 @@ tnbLib::Geo_Tools::Intersecction_cgal
 	{
 		return std::vector<tnbLib::Pnt2d>();
 	}
+}
+
+Standard_Boolean 
+tnbLib::Geo_Tools::IsIntersect_cgal
+(
+	const Entity3d_SegmentRef & theSeg,
+	const Entity3d_Triangle & theTri
+)
+{
+	auto tri = get_cgalTriange(theTri);
+	auto seg = get_cgalSegment(theSeg);
+
+	const auto result = intersection(seg, tri);
+	return (Standard_Boolean)result;
 }

@@ -2,6 +2,9 @@
 #ifndef _Geo_ApprxCurve_Traits_Header
 #define _Geo_ApprxCurve_Traits_Header
 
+#include <Geo_ApprxCurve_Info.hxx>
+#include <Geo_Traits.hxx>
+
 #include <gp_Pnt2d.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Vec2d.hxx>
@@ -31,6 +34,13 @@ namespace tnbLib
 	{
 		typedef gp_Pnt ptType;
 		typedef gp_Vec vtType;
+	};
+
+
+	template<class CurveType>
+	struct Geo_ApprxCurveInfo_Traits
+	{
+		typedef Geo_ApprxCurve_Info infoType;
 	};
 }
 

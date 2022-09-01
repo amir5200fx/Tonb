@@ -9,6 +9,180 @@
 #include <Merge2d_Pnt.hxx>
 #include <Merge3d_Pnt.hxx>
 
+std::shared_ptr<tnbLib::Entity2d_Box> 
+tnbLib::Geo_BoxTools::GeoBox
+(
+	const Pnt2d & theP0,
+	const Pnt2d & theP1
+)
+{
+	auto x0 = std::min(theP0.X(), theP1.X());
+	auto x1 = std::max(theP0.X(), theP1.X());
+	auto y0 = std::min(theP0.Y(), theP1.Y());
+	auto y1 = std::max(theP0.Y(), theP1.Y());
+
+	Pnt2d p0(x0, y0);
+	Pnt2d p1(x1, y1);
+
+	auto b = std::make_shared<Entity2d_Box>(std::move(p0), std::move(p1));
+	return std::move(b);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Box> 
+tnbLib::Geo_BoxTools::GeoBox
+(
+	const Pnt2d & theP0, 
+	const Pnt2d & theP1,
+	const Pnt2d & theP2
+)
+{
+	const auto[x0, y0] = theP0.Components();
+	const auto[x1, y1] = theP1.Components();
+	const auto[x2, y2] = theP2.Components();
+
+	auto xmin = x0;
+	auto xmax = x0;
+	if (x1 < xmin) xmin = x1;
+	if (x2 < xmin) xmin = x2;
+
+	if (x1 > xmax) xmax = x1;
+	if (x2 > xmax) xmax = x2;
+
+	auto ymin = y0;
+	auto ymax = y0;
+	if (y1 < ymin) ymin = y1;
+	if (y2 < ymin) ymin = y2;
+	
+	if (y1 > ymax) ymax = y1;
+	if (y2 > ymax) ymax = y2;
+
+	Pnt2d p0(xmin, ymin);
+	Pnt2d p1(xmax, ymax);
+
+	auto t = std::make_shared<Entity2d_Box>(std::move(p0), std::move(p1));
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Box> 
+tnbLib::Geo_BoxTools::GetBox
+(
+	const Pnt3d & theP0, 
+	const Pnt3d & theP1
+)
+{
+	const auto[x0, y0, z0] = theP0.Components();
+	const auto[x1, y1, z1] = theP1.Components();
+
+	const auto xmin = std::min(x0, x1);
+	const auto xmax = std::max(x0, x1);
+	
+	const auto ymin = std::min(y0, y1);
+	const auto ymax = std::max(y0, y1);
+
+	const auto zmin = std::min(z0, z1);
+	const auto zmax = std::max(z0, z1);
+
+	Pnt3d p0(xmin, ymin, zmin);
+	Pnt3d p1(xmax, ymax, zmax);
+
+	auto t = std::make_shared<Entity3d_Box>(std::move(p0), std::move(p1));
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Box> 
+tnbLib::Geo_BoxTools::GetBox
+(
+	const Pnt3d & theP0,
+	const Pnt3d & theP1,
+	const Pnt3d & theP2
+)
+{
+	const auto[x0, y0, z0] = theP0.Components();
+	const auto[x1, y1, z1] = theP1.Components();
+	const auto[x2, y2, z2] = theP2.Components();
+
+	auto xmin = x0;
+	auto xmax = x0;
+	if (x1 < xmin) xmin = x1;
+	if (x2 < xmin) xmin = x2;
+
+	if (x1 > xmax) xmax = x1;
+	if (x2 > xmax) xmax = x2;
+
+	auto ymin = y0;
+	auto ymax = y0;
+	if (y1 < ymin) ymin = y1;
+	if (y2 < ymin) ymin = y2;
+
+	if (y1 > ymax) ymax = y1;
+	if (y2 > ymax) ymax = y2;
+
+	auto zmin = z0;
+	auto zmax = z0;
+	if (z1 < zmin) zmin = z1;
+	if (z2 < zmin) zmin = z2;
+
+	if (z1 > zmax) zmax = z1;
+	if (z2 > zmax) zmax = z2;
+
+	Pnt3d p0(xmin, ymin, zmin);
+	Pnt3d p1(xmax, ymax, zmax);
+
+	auto t = std::make_shared<Entity3d_Box>(std::move(p0), std::move(p1));
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Box>
+tnbLib::Geo_BoxTools::GetBox
+(
+	const Pnt3d & theP0,
+	const Pnt3d & theP1, 
+	const Pnt3d & theP2, 
+	const Pnt3d & theP3
+)
+{
+	const auto[x0, y0, z0] = theP0.Components();
+	const auto[x1, y1, z1] = theP1.Components();
+	const auto[x2, y2, z2] = theP2.Components();
+	const auto[x3, y3, z3] = theP3.Components();
+
+	auto xmin = x0;
+	auto xmax = x0;
+	if (x1 < xmin) xmin = x1;
+	if (x2 < xmin) xmin = x2;
+	if (x3 < xmin) xmin = x3;
+
+	if (x1 > xmax) xmax = x1;
+	if (x2 > xmax) xmax = x2;
+	if (x3 > xmax) xmax = x3;
+
+	auto ymin = y0;
+	auto ymax = y0;
+	if (y1 < ymin) ymin = y1;
+	if (y2 < ymin) ymin = y2;
+	if (y3 < ymin) ymin = y3;
+
+	if (y1 > ymax) ymax = y1;
+	if (y2 > ymax) ymax = y2;
+	if (y3 > ymax) ymax = y3;
+
+	auto zmin = z0;
+	auto zmax = z0;
+	if (z1 < zmin) zmin = z1;
+	if (z2 < zmin) zmin = z2;
+	if (z3 < zmin) zmin = z3;
+
+	if (z1 > zmax) zmax = z1;
+	if (z2 > zmax) zmax = z2;
+	if (z3 > zmax) zmax = z3;
+
+	Pnt3d p0(xmin, ymin, zmin);
+	Pnt3d p1(xmax, ymax, zmax);
+
+	auto t = std::make_shared<Entity3d_Box>(std::move(p0), std::move(p1));
+	return std::move(t);
+}
+
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 
 tnbLib::Geo_BoxTools::Triangulate(const Entity2d_Box & b)
 {

@@ -12,7 +12,7 @@ namespace tnbLib
 	template<class Point>
 	class Geo_LinTessellatePolygon;
 
-	typedef Geo_LinTessellatePolygon<Pnt3d> Geo2d_LinTessellatePolygon;
+	typedef Geo_LinTessellatePolygon<Pnt3d> Geo3d_LinTessellatePolygon;
 }
 
 #endif // !_Geo3d_LinTessellatePolygonFwd_Header
