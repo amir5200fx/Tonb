@@ -1,23 +1,22 @@
 #pragma once
-#ifndef _Geo_ApprxCurve_Info_Header
-#define _Geo_ApprxCurve_Info_Header
+#ifndef _Geo_BasicApprxCurve_Info_Header
+#define _Geo_BasicApprxCurve_Info_Header
 
+#include <Geo_Module.hxx>
 #include <Global_AccessMethod.hxx>
 #include <Global_Serialization.hxx>
-#include <Geo_Module.hxx>
 
 #include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {
 
-	class Geo_ApprxCurve_Info
+	class Geo_BasicApprxCurve_Info
 	{
 
 		/*Private Data*/
 
 		Standard_Real theApprox_;
-		Standard_Real theAngle_;
 		Standard_Real theMinSize_;
 
 		Standard_Integer theMaxNbSubdivision_;
@@ -30,10 +29,9 @@ namespace tnbLib
 		friend class boost::serialization::access;
 
 		template<class Archive>
-		void serialize(Archive& ar, const unsigned int file_version)
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
 			ar & theApprox_;
-			ar & theAngle_;
 			ar & theMinSize_;
 			ar & theMaxNbSubdivision_;
 			ar & theInitNbSubdivision_;
@@ -43,25 +41,31 @@ namespace tnbLib
 	public:
 
 		static TnbGeo_EXPORT const Standard_Real DEFAULT_APPROX;
-		static TnbGeo_EXPORT const Standard_Real DEFAULT_ANGLE;
 		static TnbGeo_EXPORT const Standard_Real DEFAULT_MIN_SIZE;
 
 		static TnbGeo_EXPORT const Standard_Integer DEFAULT_MAX_NB_SUBDIVIDE;
 		static TnbGeo_EXPORT const Standard_Integer DEFAULT_INIT_NB_SUBDIVIDE;
 		static TnbGeo_EXPORT const Standard_Integer DEFAULT_NB_SAMPLES;
 
-		Geo_ApprxCurve_Info()
+		// default constructor [8/25/2022 Amir]
+
+		Geo_BasicApprxCurve_Info()
 			: theApprox_(DEFAULT_APPROX)
-			, theAngle_(DEFAULT_ANGLE)
 			, theMaxNbSubdivision_(DEFAULT_MAX_NB_SUBDIVIDE)
 			, theInitNbSubdivision_(DEFAULT_INIT_NB_SUBDIVIDE)
 			, theNbSamples_(DEFAULT_NB_SAMPLES)
 			, theMinSize_(DEFAULT_MIN_SIZE)
 		{}
 
+
+		// constructors [8/25/2022 Amir]
+
+
+		// public functions and operators [8/25/2022 Amir]
+
+
 		//- Macros
 		GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Approx)
-			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, Angle)
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Real, MinSize)
 
 			GLOBAL_ACCESS_PRIM_SINGLE(Standard_Integer, MaxNbSubdivision)
@@ -70,4 +74,4 @@ namespace tnbLib
 	};
 }
 
-#endif // !_Geo_ApprxCurve_Info_Header
+#endif // !_Geo_BasicApprxCurve_Info_Header

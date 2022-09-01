@@ -37,6 +37,7 @@ namespace tnbLib
 
 		Mesh_SurfaceCurvatureValues()
 			: theSpanAngle_(DEFAULT_SPAN_ANGLE)
+			, theInfo_(Mesh_SurfaceCurvatureInfo::continum)
 		{}
 
 

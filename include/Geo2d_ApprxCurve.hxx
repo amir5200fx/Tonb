@@ -6,7 +6,7 @@
 #include <Geo_ApprxCurve.hxx>
 #include <Entity2d_Chain.hxx>
 
-class Geom2d_Curve;
+#include <Geom2d_Curve.hxx>
 
 #include <memory>
 

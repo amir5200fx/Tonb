@@ -186,6 +186,16 @@ namespace tnbLib
 		);
 
 		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple>& theTets,
+			OFstream& File
+		);
+
+		template<class Type, size_t nbVAR>
 		void ExportCellCenteredField
 		(
 			const word& theVarNames,

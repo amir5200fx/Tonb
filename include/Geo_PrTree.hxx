@@ -1575,6 +1575,7 @@ namespace tnbLib
 			(
 				!geom::CoordinateOf, " No coordinate function for Pr-Tree"
 			);
+			NbSubdivide() = 0;
 			Insert(theItem, geom::GeometryBoundingBox(), theRoot_);
 		}
 

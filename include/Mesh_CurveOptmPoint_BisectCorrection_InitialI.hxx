@@ -23,7 +23,7 @@ inline void tnbLib::Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, Met
 	};
 
 
-	const auto& map = Entity().SizeMap();
+	//const auto& map = Entity().SizeMap();
 	const auto& curve = Entity().Curve();
 
 	auto Correct = Guess();

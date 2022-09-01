@@ -7,7 +7,7 @@
 
 #include <Standard_Handle.hxx>
 
-class Geom_Curve;
+#include <Geom_Curve.hxx>
 
 #include <memory>
 

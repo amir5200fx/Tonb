@@ -4,7 +4,7 @@
 
 #include <Geo_TessellatePolygon.hxx>
 
-#include "Entity2d_Polygon.hxx"
+//#include "Entity2d_Polygon.hxx"
 
 namespace tnbLib
 {

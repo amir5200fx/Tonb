@@ -155,6 +155,39 @@ namespace tnbLib
 		}
 
 		template<class Type, size_t nbVAR>
+		void ExportField
+		(
+			const word& theVarNames,
+			const std::vector<std::array<Type, nbVAR>>& var,
+			const std::vector<Pnt3d>& thePoints,
+			const std::vector<connectivity::quadruple>& theTets,
+			OFstream& File
+		)
+		{
+			word Variables = "VARIABLES = X Y Z " + theVarNames;
+			File << Variables << endl;
+
+			WriteFeTetrahedralZone
+			(
+				(Standard_Integer)thePoints.size(),
+				(Standard_Integer)theTets.size(),
+				File
+			);
+
+			WriteFiled
+			(
+				var,
+				thePoints,
+				File
+			);
+
+			for (const auto& x : theTets)
+			{
+				File << x.Value(0) << " " << x.Value(1) << " " << x.Value(2) << " " << x.Value(3) << endl;
+			}
+		}
+
+		template<class Type, size_t nbVAR>
 		void ExportCellCenteredField
 		(
 			const word & theVarNames,

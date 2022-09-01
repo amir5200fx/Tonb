@@ -14,6 +14,7 @@ namespace tnbLib
 	// Forward Declarations [1/17/2022 Amir]
 	class NumAlg_AdaptiveInteg_Info;
 	class NumAlg_NewtonSolver_Info;
+	class NumAlg_BisectionSolver_Info;
 	class Mesh_CurveOptmPoint_Correction_Info;
 
 	class Cad_CurveSplitter_Info
@@ -23,6 +24,7 @@ namespace tnbLib
 
 		std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info> theCorrInfo_;
 		std::shared_ptr<NumAlg_NewtonSolver_Info> theNewtonInfo_;
+		std::shared_ptr<NumAlg_BisectionSolver_Info> theBisectInfo_;
 
 		std::shared_ptr<NumAlg_AdaptiveInteg_Info> theOverallLengthIntgInfo_;
 		std::shared_ptr<NumAlg_AdaptiveInteg_Info> theIterIntgInfo_;
@@ -44,6 +46,7 @@ namespace tnbLib
 		static TnbCad_EXPORT const Standard_Real DEFAULT_UR;
 
 		static TnbCad_EXPORT const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info> DEFAULT_CORR_INFO;
+		static TnbCad_EXPORT const std::shared_ptr<NumAlg_BisectionSolver_Info> DEFAULT_BISECT_INFO;
 
 		static TnbCad_EXPORT const std::shared_ptr<NumAlg_NewtonSolver_Info> DEFAULT_NEWTON_INFO;
 
@@ -54,6 +57,7 @@ namespace tnbLib
 
 		Cad_CurveSplitter_Info()
 			: theCorrInfo_(DEFAULT_CORR_INFO)
+			, theBisectInfo_(DEFAULT_BISECT_INFO)
 			, theNewtonInfo_(DEFAULT_NEWTON_INFO)
 			, theOverallLengthIntgInfo_(DEFAULT_OVERALL_LENGTH_INFO)
 			, theIterIntgInfo_(DEFAULT_ITER_INTEG_INFO)
@@ -70,6 +74,11 @@ namespace tnbLib
 		const auto& CorrInfo() const
 		{
 			return theCorrInfo_;
+		}
+
+		const auto& BisectInfo() const
+		{
+			return theBisectInfo_;
 		}
 
 		const auto& NewtonIterInfo() const
@@ -102,12 +111,22 @@ namespace tnbLib
 			return theIgnorNonConvergency_;
 		}
 
-		void SetOverrideCorrInfo(const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>& theInfo)
+		void OverrideCorrInfo(const std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>& theInfo)
 		{
 			theCorrInfo_ = theInfo;
 		}
 
-		void SetOverrideCorrInfo(std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>&& theInfo)
+		void OverrideBisectInfo(const std::shared_ptr<NumAlg_BisectionSolver_Info>& theInfo)
+		{
+			theBisectInfo_ = theInfo;
+		}
+
+		void OverrideBisectInfo(std::shared_ptr<NumAlg_BisectionSolver_Info>&& theInfo)
+		{
+			theBisectInfo_ = std::move(theInfo);
+		}
+
+		void OverrideCorrInfo(std::shared_ptr<Mesh_CurveOptmPoint_Correction_Info>&& theInfo)
 		{
 			theCorrInfo_ = std::move(theInfo);
 		}

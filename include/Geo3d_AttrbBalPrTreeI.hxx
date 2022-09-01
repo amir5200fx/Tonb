@@ -1,9 +1,9 @@
 #pragma once
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-template<class T>
+template<class T, class Attrb>
 inline Standard_Boolean 
-tnbLib::Geo3d_BalPrTree<T>::IsUnbalanced
+tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::IsUnbalanced
 (
 	const leafNode * leaf
 ) const
@@ -17,8 +17,8 @@ tnbLib::Geo3d_BalPrTree<T>::IsUnbalanced
 	return Standard_False;
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToClear(internalNode *& t)
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToClear(internalNode *& t)
 {
 	if (t->BwdSw()) Clear(t->BwdSwRef());
 	if (t->BwdSe()) Clear(t->BwdSeRef());
@@ -31,8 +31,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToClear(internalNode *& t)
 	if (t->FwdNw()) Clear(t->FwdNwRef());
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::Clear(node *& t)
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Clear(node *& t)
 {
 	leafNode* leaf =
 		dynamic_cast<leafNode*>(t);
@@ -53,10 +53,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Clear(node *& t)
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToInsert
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToInsert
 (
-	const T & theItem,
+	const T & theItem, 
 	const Pnt3d & theCentre, 
 	const std::shared_ptr<boxType>& theBox,
 	internalNode *& t
@@ -96,8 +96,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToInsert
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::Insert
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Insert
 (
 	const T & theItem, 
 	const std::shared_ptr<boxType>& theBox,
@@ -190,7 +190,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 
 			// Remove Old Leaf from Neighbors
 			RemoveLeafFromNeighbors(leaf);
-			
+
 			FillNeighbors(Geo3d_BalPrTreeOctant::Fwd_SW, leaf, interNode, Fwd_SwPtr);
 			FillNeighbors(Geo3d_BalPrTreeOctant::Fwd_SE, leaf, interNode, Fwd_SePtr);
 			FillNeighbors(Geo3d_BalPrTreeOctant::Fwd_NE, leaf, interNode, Fwd_NePtr);
@@ -235,10 +235,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::NullifyPointer
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::NullifyPointer
 (
-	node *& t,
+	node *& t, 
 	internalNode *& Internal
 )
 {
@@ -260,10 +260,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::NullifyPointer
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRemove
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToRemove
 (
-	const T & theItem,
+	const T & theItem, 
 	internalNode *& t
 )
 {
@@ -301,8 +301,12 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRemove
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::Remove(const T & theItem, node *& t)
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Remove
+(
+	const T & theItem,
+	node *& t
+)
 {
 	if (!t)
 	{
@@ -345,8 +349,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Remove(const T & theItem, node *& t)
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::LinkInners(internalNode * t) const
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::LinkInners(internalNode * t) const
 {
 	auto fwd_swPtr = dynamic_cast<leafNode*>(t->FwdSw());
 	auto fwd_sePtr = dynamic_cast<leafNode*>(t->FwdSe());
@@ -368,73 +372,73 @@ inline void tnbLib::Geo3d_BalPrTree<T>::LinkInners(internalNode * t) const
 	Debug_Null_Pointer(bwd_nePtr);
 	Debug_Null_Pointer(bwd_nwPtr);
 
-	fwd_swPtr->ENeighborsRef().push_back(fwd_sePtr);
-	fwd_swPtr->NNeighborsRef().push_back(fwd_nwPtr);
-	fwd_swPtr->BNeighborsRef().push_back(bwd_swPtr);
+	fwd_swPtr->ENeighborsRef().insert(fwd_sePtr);
+	fwd_swPtr->NNeighborsRef().insert(fwd_nwPtr);
+	fwd_swPtr->BNeighborsRef().insert(bwd_swPtr);
 
-	fwd_sePtr->WNeighborsRef().push_back(fwd_swPtr);
-	fwd_sePtr->NNeighborsRef().push_back(fwd_nePtr);
-	fwd_sePtr->BNeighborsRef().push_back(bwd_sePtr);
+	fwd_sePtr->WNeighborsRef().insert(fwd_swPtr);
+	fwd_sePtr->NNeighborsRef().insert(fwd_nePtr);
+	fwd_sePtr->BNeighborsRef().insert(bwd_sePtr);
 
-	fwd_nePtr->WNeighborsRef().push_back(fwd_nwPtr);
-	fwd_nePtr->SNeighborsRef().push_back(fwd_sePtr);
-	fwd_nePtr->BNeighborsRef().push_back(bwd_nePtr);
+	fwd_nePtr->WNeighborsRef().insert(fwd_nwPtr);
+	fwd_nePtr->SNeighborsRef().insert(fwd_sePtr);
+	fwd_nePtr->BNeighborsRef().insert(bwd_nePtr);
 
-	fwd_nwPtr->ENeighborsRef().push_back(fwd_nePtr);
-	fwd_nwPtr->SNeighborsRef().push_back(fwd_swPtr);
-	fwd_nwPtr->BNeighborsRef().push_back(bwd_nwPtr);
+	fwd_nwPtr->ENeighborsRef().insert(fwd_nePtr);
+	fwd_nwPtr->SNeighborsRef().insert(fwd_swPtr);
+	fwd_nwPtr->BNeighborsRef().insert(bwd_nwPtr);
 
-	bwd_swPtr->ENeighborsRef().push_back(bwd_sePtr);
-	bwd_swPtr->NNeighborsRef().push_back(bwd_nwPtr);
-	bwd_swPtr->FNeighborsRef().push_back(fwd_swPtr);
+	bwd_swPtr->ENeighborsRef().insert(bwd_sePtr);
+	bwd_swPtr->NNeighborsRef().insert(bwd_nwPtr);
+	bwd_swPtr->FNeighborsRef().insert(fwd_swPtr);
 
-	bwd_sePtr->WNeighborsRef().push_back(bwd_swPtr);
-	bwd_sePtr->NNeighborsRef().push_back(bwd_nePtr);
-	bwd_sePtr->FNeighborsRef().push_back(fwd_sePtr);
+	bwd_sePtr->WNeighborsRef().insert(bwd_swPtr);
+	bwd_sePtr->NNeighborsRef().insert(bwd_nePtr);
+	bwd_sePtr->FNeighborsRef().insert(fwd_sePtr);
 
-	bwd_nePtr->WNeighborsRef().push_back(bwd_nwPtr);
-	bwd_nePtr->SNeighborsRef().push_back(bwd_sePtr);
-	bwd_nePtr->FNeighborsRef().push_back(fwd_nePtr);
+	bwd_nePtr->WNeighborsRef().insert(bwd_nwPtr);
+	bwd_nePtr->SNeighborsRef().insert(bwd_sePtr);
+	bwd_nePtr->FNeighborsRef().insert(fwd_nePtr);
 
-	bwd_nwPtr->ENeighborsRef().push_back(bwd_nePtr);
-	bwd_nwPtr->SNeighborsRef().push_back(bwd_swPtr);
-	bwd_nwPtr->FNeighborsRef().push_back(fwd_nwPtr);
+	bwd_nwPtr->ENeighborsRef().insert(bwd_nePtr);
+	bwd_nwPtr->SNeighborsRef().insert(bwd_swPtr);
+	bwd_nwPtr->FNeighborsRef().insert(fwd_nwPtr);
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RemoveLeafFromNeighbors(leafNode * old) const
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RemoveLeafFromNeighbors(leafNode * old) const
 {
 	for (const auto& x : old->SNeighbors())
 	{
-		x->NNeighborsRef().remove(old);
+		x->NNeighborsRef().erase(old);
 	}
 	for (const auto& x : old->ENeighbors())
 	{
-		x->WNeighborsRef().remove(old);
+		x->WNeighborsRef().erase(old);
 	}
 	for (const auto& x : old->NNeighbors())
 	{
-		x->SNeighborsRef().remove(old);
+		x->SNeighborsRef().erase(old);
 	}
 	for (const auto& x : old->WNeighbors())
 	{
-		x->ENeighborsRef().remove(old);
+		x->ENeighborsRef().erase(old);
 	}
 	for (const auto& x : old->BNeighbors())
 	{
-		x->FNeighborsRef().remove(old);
+		x->FNeighborsRef().erase(old);
 	}
 	for (const auto& x : old->FNeighbors())
 	{
-		x->BNeighborsRef().remove(old);
+		x->BNeighborsRef().erase(old);
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::FillNeighbors
 (
-	const Geo3d_BalPrTreeOctant o,
-	leafNode * old,
+	const Geo3d_BalPrTreeOctant o, 
+	leafNode * old, 
 	internalNode * father,
 	leafNode * t
 ) const
@@ -649,38 +653,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 
 	for (const auto& x : QSN)
 	{
-		x->NNeighborsRef().push_back(t);
-		t->SNeighborsRef().push_back(x);
+		x->NNeighborsRef().insert(t);
+		t->SNeighborsRef().insert(x);
 	}
 	for (const auto& x : QEN)
 	{
-		x->WNeighborsRef().push_back(t);
-		t->ENeighborsRef().push_back(x);
+		x->WNeighborsRef().insert(t);
+		t->ENeighborsRef().insert(x);
 	}
 	for (const auto& x : QNN)
 	{
-		x->SNeighborsRef().push_back(t);
-		t->NNeighborsRef().push_back(x);
+		x->SNeighborsRef().insert(t);
+		t->NNeighborsRef().insert(x);
 	}
 	for (const auto& x : QWN)
 	{
-		x->ENeighborsRef().push_back(t);
-		t->WNeighborsRef().push_back(x);
+		x->ENeighborsRef().insert(t);
+		t->WNeighborsRef().insert(x);
 	}
 	for (const auto& x : QBN)
 	{
-		x->FNeighborsRef().push_back(t);
-		t->BNeighborsRef().push_back(x);
+		x->FNeighborsRef().insert(t);
+		t->BNeighborsRef().insert(x);
 	}
 	for (const auto& x : QFN)
 	{
-		x->BNeighborsRef().push_back(t);
-		t->FNeighborsRef().push_back(x);
+		x->BNeighborsRef().insert(t);
+		t->FNeighborsRef().insert(x);
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Balance(node *& t)
 {
 	if (NOT t) return;
 	auto leaf = dynamic_cast<leafNode*>(t);
@@ -788,10 +792,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToSearch
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToSearch
 (
-	const Entity3d_Box & theRegion, 
+	const Entity3d_Box & theRegion,
 	internalNode * t,
 	std::list<T>& theItems
 ) const
@@ -845,11 +849,11 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToSearch
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToSearch
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToSearch
 (
 	const Entity3d_Box & theRegion,
-	internalNode * t, 
+	internalNode * t,
 	std::vector<T>& theItems
 ) const
 {
@@ -902,8 +906,65 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToSearch
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::Search
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToSearch
+(
+	const Entity3d_Box & theRegion,
+	internalNode * t,
+	std::vector<leafNode*>& theItems
+) const
+{
+	if (t->BwdSw())
+	{
+		if (theRegion.IsIntersect(*t->BwdSw()->Box()))
+			Search(theRegion, t->BwdSw(), theItems);
+	}
+
+	if (t->BwdSe())
+	{
+		if (theRegion.IsIntersect(*t->BwdSe()->Box()))
+			Search(theRegion, t->BwdSe(), theItems);
+	}
+
+	if (t->BwdNe())
+	{
+		if (theRegion.IsIntersect(*t->BwdNe()->Box()))
+			Search(theRegion, t->BwdNe(), theItems);
+	}
+
+	if (t->BwdNw())
+	{
+		if (theRegion.IsIntersect(*t->BwdNw()->Box()))
+			Search(theRegion, t->BwdNw(), theItems);
+	}
+
+	if (t->FwdSw())
+	{
+		if (theRegion.IsIntersect(*t->FwdSw()->Box()))
+			Search(theRegion, t->FwdSw(), theItems);
+	}
+
+	if (t->FwdSe())
+	{
+		if (theRegion.IsIntersect(*t->FwdSe()->Box()))
+			Search(theRegion, t->FwdSe(), theItems);
+	}
+
+	if (t->FwdNe())
+	{
+		if (theRegion.IsIntersect(*t->FwdNe()->Box()))
+			Search(theRegion, t->FwdNe(), theItems);
+	}
+
+	if (t->FwdNw())
+	{
+		if (theRegion.IsIntersect(*t->FwdNw()->Box()))
+			Search(theRegion, t->FwdNw(), theItems);
+	}
+}
+
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Search
 (
 	const Entity3d_Box & theBox,
 	node * t,
@@ -930,10 +991,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Search
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::Search
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Search
 (
-	const Entity3d_Box & theBox, 
+	const Entity3d_Box & theBox,
 	node * t, 
 	std::vector<T>& theItems
 ) const
@@ -958,10 +1019,35 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Search
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRetrieveLeavesTo
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Search
 (
-	internalNode * Internal, 
+	const Entity3d_Box & theBox,
+	node * t,
+	std::vector<leafNode*>& theItems
+) const
+{
+	leafNode* leaf = dynamic_cast<leafNode*>(t);
+	if (leaf)
+	{
+		if (leaf->Box()->IsIntersect(theBox))
+		{
+			theItems.push_back(leaf);
+		}
+	}
+	else
+	{
+		internalNode* Internal =
+			dynamic_cast<internalNode*>(t);
+
+		SwitchToSearch(theBox, Internal, theItems);
+	}
+}
+
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToRetrieveLeavesTo
+(
+	internalNode * Internal,
 	std::vector<leafNode*>& theItems
 ) const
 {
@@ -976,8 +1062,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRetrieveLeavesTo
 	if (Internal->FwdNw()) RetrieveLeavesTo(Internal->FwdNw(), theItems);
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveLeavesTo
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveLeavesTo
 (
 	node * t,
 	std::vector<leafNode*>& theLeaves
@@ -998,8 +1084,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveLeavesTo
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRetrieveTo
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToRetrieveTo
 (
 	internalNode * Internal,
 	std::list<T>& theItems
@@ -1016,8 +1102,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRetrieveTo
 	if (Internal->FwdNw()) RetrieveTo(Internal->FwdNw(), theItems);
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRetrieveTo
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::SwitchToRetrieveTo
 (
 	internalNode * Internal, 
 	std::vector<T>& theItems
@@ -1034,8 +1120,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToRetrieveTo
 	if (Internal->FwdNw()) RetrieveTo(Internal->FwdNw(), theItems);
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveTo
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveTo
 (
 	node * t,
 	std::list<T>& theItems
@@ -1056,10 +1142,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveTo
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveTo
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveTo
 (
-	node * t,
+	node * t, 
 	std::vector<T>& theItems
 ) const
 {
@@ -1078,10 +1164,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveTo
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::UpdateFather
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::UpdateFather
 (
-	leafNode * t, 
+	leafNode * t,
 	node * inter
 )
 {
@@ -1105,20 +1191,35 @@ inline void tnbLib::Geo3d_BalPrTree<T>::UpdateFather
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::InsertToGeometry(const T & theItem)
+template<class T, class Attrb>
+inline std::vector<typename tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::leafNode*> 
+tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveLeaves
+(
+	const Entity3d_Box & theRegion
+) const
+{
+	std::vector<leafNode*> items;
+	GeometrySearch(theRegion, items);
+	return std::move(items);
+}
+
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::InsertToGeometry
+(
+	const T & theItem
+)
 {
 	Debug_If_Condition_Message
 	(
 		!geom::CoordinateOf, " No coordinate function for Pr-Tree"
 	);
-	this->NbSubdivideRef() = 0;
+	NbSubdivideRef() = 0;
 	auto b = std::make_shared<Entity3d_Box>(geom::GeometryBoundingBox());
 	Insert(theItem, b, theRoot_);
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::InsertToGeometry
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::InsertToGeometry
 (
 	const std::vector<T>& theItems
 )
@@ -1134,8 +1235,11 @@ inline void tnbLib::Geo3d_BalPrTree<T>::InsertToGeometry
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RemoveFromGeometry(const T & theItem)
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RemoveFromGeometry
+(
+	const T & theItem
+)
 {
 	if (Size())
 	{
@@ -1143,10 +1247,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::RemoveFromGeometry(const T & theItem)
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::GeometrySearch
 (
-	const Standard_Real theRadius,
+	const Standard_Real theRadius, 
 	const Pnt3d & theCentre,
 	std::list<T>& theItems
 ) const
@@ -1162,11 +1266,11 @@ inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::GeometrySearch
 (
 	const Standard_Real theRadius, 
-	const Pnt3d & theCentre, 
+	const Pnt3d & theCentre,
 	std::vector<T>& theItems
 ) const
 {
@@ -1181,10 +1285,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::GeometrySearch
 (
-	const Entity3d_Box & theRegion,
+	const Entity3d_Box & theRegion, 
 	std::list<T>& theList
 ) const
 {
@@ -1194,10 +1298,10 @@ inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::GeometrySearch
 (
-	const Entity3d_Box & theRegion,
+	const Entity3d_Box & theRegion, 
 	std::vector<T>& theItems
 ) const
 {
@@ -1207,8 +1311,21 @@ inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::PostBalance()
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::GeometrySearch
+(
+	const Entity3d_Box & theRegion,
+	std::vector<leafNode*>& theItems
+) const
+{
+	if (Size())
+	{
+		Search(theRegion, theRoot_, theItems);
+	}
+}
+
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::PostBalance()
 {
 	IsBalancedRef() = Standard_False;
 	while (true)
@@ -1218,14 +1335,14 @@ inline void tnbLib::Geo3d_BalPrTree<T>::PostBalance()
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::Clear()
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Clear()
 {
 	Clear(theRoot_);
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveLeavesTo
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveLeavesTo
 (
 	std::vector<leafNode*>& theLeaves
 ) const
@@ -1236,8 +1353,24 @@ inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveLeavesTo
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveFromGeometryTo(std::list<T>& theItems) const
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveLeavesTo
+(
+	const Entity3d_Box & theRegion,
+	std::vector<leafNode*>& theItems
+) const
+{
+	if (Size())
+	{
+		GeometrySearch(theRegion, theItems);
+	}
+}
+
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveFromGeometryTo
+(
+	std::list<T>& theItems
+) const
 {
 	if (Size())
 	{
@@ -1245,8 +1378,11 @@ inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveFromGeometryTo(std::list<T>& the
 	}
 }
 
-template<class T>
-inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveFromGeometryTo(std::vector<T>& theItems) const
+template<class T, class Attrb>
+inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::RetrieveFromGeometryTo
+(
+	std::vector<T>& theItems
+) const
 {
 	if (Size())
 	{
