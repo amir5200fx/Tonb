@@ -4,11 +4,14 @@
 #include <Mesh3d_UniformBoundarySizeMapControl.hxx>
 #include <Mesh3d_UniformFeatureSizeMapControl.hxx>
 #include <Mesh3d_UnionSizeMap.hxx>
+#include <MeshBase_Tools.hxx>
 #include <GeoMesh_Background_Info.hxx>
 #include <BoundarySizeMap3d_UniformFaceTool.hxx>
 #include <BoundarySizeMap3d_UniformSegmentTool.hxx>
+#include <BoundarySizeMap3d_UniformFaceTool_Info.hxx>
 #include <GeoSizeFun3d_Background.hxx>
 #include <Cad_TModel.hxx>
+#include <Cad_Tools.hxx>
 #include <TModel_CornerManager.hxx>
 #include <TModel_SegmentManager.hxx>
 #include <TModel_FaceManager.hxx>
@@ -37,7 +40,10 @@ namespace tnbLib
 
 	//static std::string currentPath;
 
-	static std::shared_ptr<GeoMesh_Background_SmoothingHvCorrection_Info> myCorrInfo;
+	static auto myCorrInfo =
+		std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
+	static auto myFaceSizeMapInfo =
+		std::make_shared<BoundarySizeMap3d_UniformFaceTool_Info>();
 
 	void checkFolder(const std::string& name)
 	{
@@ -81,7 +87,9 @@ namespace tnbLib
 
 	auto retrieveBoundingBox()
 	{
-		return myRef->Region();
+		auto reg = std::make_shared<Entity3d_Box>(myRef->Region()->Expanded(myRef->Region()->Diameter()*1.0E-5));
+		return std::move(reg);
+		//return myRef->Region();
 	}
 
 	void loadRefFile()
@@ -124,6 +132,11 @@ namespace tnbLib
 			FatalErrorIn(FunctionSIG)
 				<< "the model list is empty." << endl
 				<< abort(FatalError);
+		}
+
+		for (const auto& x : myModels)
+		{
+			Cad_Tools::Connect(x);
 		}
 
 		//- change back the current path
@@ -255,7 +268,7 @@ namespace tnbLib
 	std::shared_ptr<Mesh3d_BoundarySizeMapTool> createBoundarySizeMap(const std::string& name, const std::shared_ptr<Cad_TModel>& model)
 	{
 		checkLoad();
-		myBoundarySizeMaps->CreateSizeMap(name, model);
+		myBoundarySizeMaps->CreateSizeMap(name, model, myFaceSizeMapInfo);
 		return myBoundarySizeMaps->SelectMap(name);
 	}
 
@@ -428,6 +441,7 @@ namespace tnbLib
 			{
 				BoundarySizeMap3d_UniformFaceTool::verbose = verbose;
 				BoundarySizeMap3d_UniformSegmentTool::verbose = verbose;
+				Mesh3d_UnionSizeMap::verbose = verbose;
 			}
 
 			auto domain = retrieveBoundingBox();
@@ -451,7 +465,7 @@ namespace tnbLib
 			auto backs = retrieveBackgrounds();			
 
 			std::shared_ptr<GeoMesh3d_Background> myBackgound;
-			if (backs.size() > 2)
+			if (backs.size())
 			{
 				Global_Timer unifyTimer;
 				unifyTimer.SetInfo(Global_TimerInfo_ms);
@@ -469,10 +483,10 @@ namespace tnbLib
 
 				myBackgound = alg->UnifiedMap();
 			}
-			else if (backs.size() == 1)
+			/*else if (backs.size() == 1)
 			{
 				myBackgound = backs.at(0);
-			}
+			}*/
 			else
 			{
 				FatalErrorIn(FunctionSIG)
@@ -487,6 +501,30 @@ namespace tnbLib
 			}
 			OFstream myFile("background.plt");
 			myBackgound->ExportToPlt(myFile);
+
+			/*auto facets = MeshBase_Tools::RetrieveFacets(myBackgound->Mesh()->Elements());
+			for (const auto& x : facets)
+			{
+				std::cout << "- face: " << x->Index() << ",  ";
+				if (auto e = x->LeftElement().lock())
+				{
+					std::cout << "left: " << e->Index() << ",  ";
+				}
+				else
+				{
+					std::cout << "left: " << 0 << ",  ";
+				}
+
+				if (auto e = x->RightElement().lock())
+				{
+					std::cout << "right: " << e->Index() << std::endl;
+				}
+				else
+				{
+					std::cout << "right: " << 0 << std::endl;
+				}
+			}*/
+
 			auto d = *domain;
 			mySizeFun =
 				std::make_shared<GeoSizeFun3d_Background>

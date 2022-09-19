@@ -25,6 +25,7 @@
 #include <Aft2d_tSegmentEdge.hxx>
 #include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_EdgeSurface.hxx>
+#include <GeoSizeFun3d_Background.hxx>
 #include <Mesh2d_Element.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
@@ -149,6 +150,42 @@ namespace tnbLib
 				<< "no size map has been found!" << endl
 				<< abort(FatalError);
 		}
+
+		/*auto fun = std::dynamic_pointer_cast<GeoSizeFun3d_Background>(mySizeFun);
+		Debug_Null_Pointer(fun);
+		const auto& back = fun->BackMesh();*/
+
+		/*auto facets = MeshBase_Tools::RetrieveFacets(back->Mesh()->Elements());
+		for (const auto& x : facets)
+		{
+			std::cout << "- face: " << x->Index() << ",  ";
+			if (auto e = x->LeftElement().lock())
+			{
+				std::cout << "left: " << e->Index() << ",  ";
+			}
+			else
+			{
+				std::cout << "left: " << 0 << ",  ";
+			}
+
+			if (auto e = x->RightElement().lock())
+			{
+				std::cout << "right: " << e->Index() << std::endl;
+			}
+			else
+			{
+				std::cout << "right: " << 0 << std::endl;
+			}
+		}
+		PAUSE;*/
+		if (NOT mySoluData->Geometry())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no geometry has been found." << endl
+				<< abort(FatalError);
+		}
+
+		Cad_Tools::Connect(mySoluData->Geometry());
 
 		loadTag = true;
 	}
@@ -345,7 +382,7 @@ namespace tnbLib
 			}
 
 			auto plnRegion = Aft2d_tRegionPlaneSurfaceUniMetric::MakePlane(pln);
-
+			//std::cout << "nb curves: " << plnRegion->Outer()->NbCurves() << std::endl;
 			Aft2d_tBoundaryOfPlaneSurfaceUniMetric::verbose = 1;
 			auto bnd = std::make_shared<Aft2d_tBoundaryOfPlaneSurfaceUniMetric>(theBndInfo);
 			bnd->LoadMetricProcessor(metricPrcsr);
@@ -595,6 +632,13 @@ namespace tnbLib
 			}
 		}
 
+		if (triSurfaces.empty())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no triangulated surface has been found." << endl
+				<< abort(FatalError);
+		}
+
 		for (const auto& x : triSurfaces)
 		{
 			Debug_Null_Pointer(x);
@@ -731,7 +775,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 	FatalConvError.throwExceptions();
 
 	if (argc <= 1)
