@@ -13,6 +13,11 @@
 
 #include <vector>
 
+#ifdef Split
+#undef Split
+#endif // Split
+
+
 namespace tnbLib
 {
 
@@ -163,17 +168,41 @@ namespace tnbLib
 
 	auto selectBlock(const std::shared_ptr<TModel_CornerManager>& manager, const std::string& name)
 	{
-		return manager->SelectBlock(name);
+		auto iter = manager->SelectBlock(name);
+		if (iter IS_EQUAL manager->Blocks().end())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the item is not in the map!" << endl
+				<< " - Name: " << name << endl
+				<< abort(FatalError);
+		}
+		return std::move(iter);
 	}
 
 	auto selectBlock(const std::shared_ptr<TModel_SegmentManager>& manager, const std::string& name)
 	{
-		return manager->SelectBlock(name);
+		auto iter = manager->SelectBlock(name);
+		if (iter IS_EQUAL manager->Blocks().end())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the item is not in the map!" << endl
+				<< " - Name: " << name << endl
+				<< abort(FatalError);
+		}
+		return std::move(iter);
 	}
 
 	auto selectBlock(const std::shared_ptr<TModel_FaceManager>& manager, const std::string& name)
 	{
-		return manager->SelectBlock(name);
+		auto iter = manager->SelectBlock(name);
+		if (iter IS_EQUAL manager->Blocks().end())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the item is not in the map!" << endl
+				<< " - Name: " << name << endl
+				<< abort(FatalError);
+		}
+		return std::move(iter);
 	}
 
 	void combineBlocks(const std::shared_ptr<TModel_FaceManager>& manager, const std::vector<std::string>& blocks, const std::string& name)
@@ -256,17 +285,41 @@ namespace tnbLib
 
 	auto selectEntity(const std::shared_ptr<Cad_BlockEntity<TModel_Vertex>>& block, int key)
 	{
-		return block->SelectEntity(key);
+		auto iter = block->SelectEntity(key);
+		if (iter IS_EQUAL block->Entities().end())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the item is not in the map!" << endl
+				<< " - key: " << key << endl
+				<< abort(FatalError);
+		}
+		return std::move(iter);
 	}
 
 	auto selectEntity(const std::shared_ptr<Cad_BlockEntity<TModel_Paired>>& block, int key)
 	{
-		return block->SelectEntity(key);
+		auto iter = block->SelectEntity(key);
+		if (iter IS_EQUAL block->Entities().end())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the item is not in the map!" << endl
+				<< " - key: " << key << endl
+				<< abort(FatalError);
+		}
+		return std::move(iter);
 	}
 
 	auto selectEntity(const std::shared_ptr<Cad_BlockEntity<TModel_Surface>>& block, int key)
 	{
-		return block->SelectEntity(key);
+		auto iter = block->SelectEntity(key);
+		if (iter IS_EQUAL block->Entities().end())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the item is not in the map!" << endl
+				<< " - key: " << key << endl
+				<< abort(FatalError);
+		}
+		return std::move(iter);
 	}
 
 	void splitBlock(const std::shared_ptr<Cad_BlockEntity<TModel_Surface>>& block, const std::vector<int>& ids, const std::string& name)
@@ -277,7 +330,8 @@ namespace tnbLib
 
 	void splitBlock(const std::map<word, std::shared_ptr<Cad_BlockEntity<TModel_Surface>>>::const_iterator& block, const std::vector<int>& ids, const std::string& name)
 	{
-		splitBlock(block->second, ids, name);
+		auto iter = block->second;
+		splitBlock(iter, ids, name);
 	}
 
 	void splitBlock(const std::shared_ptr<Cad_BlockEntity<TModel_Vertex>>& block, const std::vector<int>& ids, const std::string& name)
@@ -299,7 +353,8 @@ namespace tnbLib
 
 	void splitBlock(const std::map<word, std::shared_ptr<Cad_BlockEntity<TModel_Paired>>>::const_iterator& block, const std::vector<int>& ids, const std::string& name)
 	{
-		splitBlock(block->second, ids, name);
+		auto iter = block->second;
+		splitBlock(iter, ids, name);
 	}
 
 	void renameBlock(const std::map<word, std::shared_ptr<Cad_BlockEntity<TModel_Surface>>>::const_iterator& block, const std::string& name)
