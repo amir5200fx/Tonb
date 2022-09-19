@@ -10,24 +10,183 @@
     <Filter Include="TnbLib\Post\Smoothing">
       <UniqueIdentifier>{a45c50c9-7e84-47e1-8d88-bae6503f634d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Post\Smoothing\Surface">
-      <UniqueIdentifier>{faa43545-3ede-44ce-b117-35744f7abc9b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Post\Topology">
       <UniqueIdentifier>{8f0cc237-4c71-4018-8360-b1e7d9ada388}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\Post\Topology\Surface">
       <UniqueIdentifier>{2cb03751-d57c-49b9-85bf-8c72dfbac447}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\module">
+      <UniqueIdentifier>{5cc90993-0c2b-4e41-bb25-9fa65a29b8a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian">
+      <UniqueIdentifier>{22749300-26ef-45b3-b01e-8ffd6021ecd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\Iso">
+      <UniqueIdentifier>{306b46c6-d9bb-4940-b624-2fa8fc9a810e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\AnIso">
+      <UniqueIdentifier>{22cdbb5c-f11c-4572-9534-ab748fac3401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\AnIso\2d">
+      <UniqueIdentifier>{906bc305-572e-4b58-b838-0b0651d3aa48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun">
+      <UniqueIdentifier>{005a9aa6-5fe7-436e-beb0-b920942105a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Traits">
+      <UniqueIdentifier>{82fb9596-28b0-4048-a857-bb83320d03d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality">
+      <UniqueIdentifier>{9c514a23-422a-4dd0-a049-fd8068b0a7ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\2d">
+      <UniqueIdentifier>{ae6e67e3-d8d5-4197-8fb6-a6552c588d7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\3d">
+      <UniqueIdentifier>{3cd0b439-2e52-49fc-af77-d8b798a14566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\2d\Surface">
+      <UniqueIdentifier>{76bc06e7-e643-48ad-b69e-beee1087466e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\2d\Surface\Vlrms2Ratio">
+      <UniqueIdentifier>{31a74e22-8ab7-4df7-af3a-8268b2436fe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\traits">
+      <UniqueIdentifier>{e6eb456d-1601-4012-ae23-63cf862634c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\traits">
+      <UniqueIdentifier>{a0c91037-c364-49d0-8058-15dc489aa8bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\Surface">
+      <UniqueIdentifier>{c0e33297-c95a-4f90-8721-ecf4312b1a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\Surface\Vlrms2Ratio">
+      <UniqueIdentifier>{85e8fb2c-0b6b-4591-bfbd-ca6c1ded1014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\Info">
+      <UniqueIdentifier>{f3a2e5b7-7017-4d25-bf04-dd4d6e667338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\Surface">
+      <UniqueIdentifier>{64459987-1d0e-494f-8143-3de0fbeaa833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface">
+      <UniqueIdentifier>{6a66452c-ed4d-4ff0-9e03-cd53653d1b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\AdjEdges">
+      <UniqueIdentifier>{6ba76dfb-70d7-4330-9225-6593bc143cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric">
+      <UniqueIdentifier>{1dbf11aa-3bcf-4ba3-90cf-ffa7041928c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\AdjEdges">
+      <UniqueIdentifier>{cd2d626b-66d3-4a93-95be-89859ab7aeb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\Surface\UniMetric">
+      <UniqueIdentifier>{662fa207-98c2-433b-a453-b7d703058e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio">
+      <UniqueIdentifier>{5f7bc8bc-c646-4bc4-9307-7ee08e31411d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
       <Filter>TnbLib\Post\Topology\Surface</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Post\module\MeshPost_Module.hxx">
+      <Filter>TnbLib\Post\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\MeshPost_LaplacianSmoothing_AvgFun.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Traits\MeshPost_LaplacianSmoothing_AvgFunTraits.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\MeshPost_LaplacianSmoothing.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\MeshPost_LaplacianSmoothingI.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\2d\MeshPost2d_QualityMapTemplate.hxx">
+      <Filter>TnbLib\Post\Quality\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\MeshPost_QualityMap.hxx">
+      <Filter>TnbLib\Post\Quality</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\traits\MeshPost_QualityMapTraits.hxx">
+      <Filter>TnbLib\Post\Quality\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\Surface\Vlrms2Ratio\MeshPost2d_QualityMapSurface_Vlrms2Ratio.hxx">
+      <Filter>TnbLib\Post\Quality\Surface\Vlrms2Ratio</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\Surface\MeshPost2d_QualityMapSurface.hxx">
+      <Filter>TnbLib\Post\Quality\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\Surface\MeshPost2d_QualityMapSurfaceFwd.hxx">
+      <Filter>TnbLib\Post\Quality\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Info\MeshPost_LaplacianSmoothing_Info.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\traits\MeshPost_LaplacianSmoothing_Traits.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\MeshPost2d_LaplacianSmoothingSurface.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\MeshPost2d_LaplacianSmoothingSurfaceFwd.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\MeshPost2d_LaplacianSmoothingSurface_AvgFun.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\MeshPost2d_LaplacianSmoothingSurface_AvgFunFwd.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\AdjEdges\MeshPost2d_LaplacianSmoothingSurface_AdjEdges.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\AdjEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AvgFun.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AvgFunFwd.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\AdjEdges\MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AdjEdges.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\AdjEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\Surface\UniMetric\MeshPost2d_QualityMapSurfaceUniMetric.hxx">
+      <Filter>TnbLib\Post\Quality\Surface\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\Surface\UniMetric\MeshPost2d_QualityMapSurfaceUniMetricFwd.hxx">
+      <Filter>TnbLib\Post\Quality\Surface\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio\MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio.hxx">
+      <Filter>TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.cxx">
       <Filter>TnbLib\Post\Topology\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\MeshPost_LaplacianSmoothing.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Quality\Surface\Vlrms2Ratio\MeshPost2d_QualityMapSurface_Vlrms2Ratio.cxx">
+      <Filter>TnbLib\Post\Quality\Surface\Vlrms2Ratio</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Info\MeshPost_LaplacianSmoothing_Info.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\AdjEdges\MeshPost2d_LaplacianSmoothingSurface_AdjEdges.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\AdjEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\AdjEdges\MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AdjEdges.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\AdjEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio\MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio.cxx">
+      <Filter>TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
