@@ -7,10 +7,12 @@
 
 const Standard_Integer tnbLib::Geo2d_SamplePoints_4Pts::nbPts = 4;
 
-const tnbLib::Pnt2d tnbLib::Geo2d_SamplePoints_4Pts::P0(0, 0);
-const tnbLib::Pnt2d tnbLib::Geo2d_SamplePoints_4Pts::P1(1, 0);
-const tnbLib::Pnt2d tnbLib::Geo2d_SamplePoints_4Pts::P2(1, 1);
-const tnbLib::Pnt2d tnbLib::Geo2d_SamplePoints_4Pts::P3(0, 1);
+tnbLib::Geo2d_SamplePoints_4Pts::Geo2d_SamplePoints_4Pts()
+	: P0(Pnt2d(0, 0))
+	, P1(Pnt2d(1, 0))
+	, P2(Pnt2d(1, 1))
+	, P3(Pnt2d(0, 1))
+{}
 
 tnbLib::Pnt2d
 tnbLib::Geo2d_SamplePoints_4Pts::CalcPoint

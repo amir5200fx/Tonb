@@ -385,6 +385,37 @@ tnbLib::Geo_Tools::Interpolate
 	return std::move(paired);
 }
 
+tnbLib::Entity_Triangle<tnbLib::Pnt2d> 
+tnbLib::Geo_Tools::CalcParametricTriangle
+(
+	const Entity_Triangle<const Pnt3d&>& theTri3d
+)
+{
+	Dir3d v1((theTri3d.P1() - theTri3d.P0()).XYZ());
+	Dir3d v2((theTri3d.P2() - theTri3d.P0()).XYZ());
+
+	auto R = arma::inv(CalcRotationMatrix(v1, v2));
+
+	arma::vec3 Q2, Q3;
+	Q2(0) = v1.X();
+	Q2(1) = v1.Y();
+	Q2(2) = v1.Z();
+
+	Q3(0) = v2.X();
+	Q3(1) = v2.Y();
+	Q3(2) = v2.Z();
+
+	Q2 = R * Q2;
+	Q3 = R * Q3;
+
+	Pnt2d p0(0, 0);
+	Pnt2d p1(Q2(0), Q2(1));
+	Pnt2d p2(Q3(0), Q3(1));
+
+	Entity_Triangle<Pnt2d> t(std::move(p0), std::move(p1), std::move(p2));
+	return std::move(t);
+}
+
 std::vector<tnbLib::Pnt2d> 
 tnbLib::Geo_Tools::DistributeInDomain
 (

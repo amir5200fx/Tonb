@@ -598,6 +598,12 @@ namespace tnbLib
 				const Pnt2d& theP1
 			);
 
+		static TnbGeo_EXPORT Entity_Triangle<Pnt2d> 
+			CalcParametricTriangle
+			(
+				const Entity_Triangle<const Pnt3d&>&
+			);
+
 		static TnbGeo_EXPORT std::vector<Pnt2d> 
 			DistributeInDomain
 			(

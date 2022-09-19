@@ -733,6 +733,18 @@
     <Filter Include="TnbLib\Geo\Approximation\Curve\Basic\Traits">
       <UniqueIdentifier>{36d9ec38-1347-4f09-ba72-909adcf12274}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\ElementQuality">
+      <UniqueIdentifier>{5d814ac7-e1e1-4636-8951-6db2fc5dc668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElementQuality\Traingle">
+      <UniqueIdentifier>{840d8fb9-2610-41ba-9006-8d2646ec06b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElementQuality\Traingle\Burkardt">
+      <UniqueIdentifier>{6dbbf190-c157-4e77-9fc4-5003c492bb6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElementQuality\Traingle\Tools">
+      <UniqueIdentifier>{422c177c-b67c-4560-93cb-72ecee81146b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1743,6 +1755,12 @@
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Traits\Geo_BasicApprxCurve_Traits.hxx">
       <Filter>TnbLib\Geo\Approximation\Curve\Basic\Traits</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElementQuality\Triangle\Burkardt\Burkardt.h">
+      <Filter>TnbLib\Geo\ElementQuality\Traingle\Burkardt</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElementQuality\Triangle\Tools\Geo2d_TriangleQualityTools.hxx">
+      <Filter>TnbLib\Geo\ElementQuality\Traingle\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2164,6 +2182,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d\Geo3d_BasicApprxCurveAdaptor.cxx">
       <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElementQuality\Triangle\Burkardt\Burkardt.cpp">
+      <Filter>TnbLib\Geo\ElementQuality\Traingle\Burkardt</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElementQuality\Triangle\Tools\Geo2d_TriangleQualityTools.cxx">
+      <Filter>TnbLib\Geo\ElementQuality\Traingle\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
