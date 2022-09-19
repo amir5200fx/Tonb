@@ -5,6 +5,7 @@
 #include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Cad_Module.hxx>
+#include <OFstream.hxx>
 
 #include <Standard_TypeDef.hxx>
 #include <Standard_Handle.hxx>
@@ -28,6 +29,7 @@ namespace tnbLib
 	class TModel_Surface;
 	class TModel_ParaWire;
 	class TModel_Plane;
+	class Geo_ApprxCurve_Info;
 
 	class TModel_Tools
 	{
@@ -129,6 +131,20 @@ namespace tnbLib
 				const std::shared_ptr<TModel_ParaCurve>& theC1,
 				const Standard_Real theTol
 			);
+
+		static TnbCad_EXPORT void ExportToPlt
+		(
+			const std::shared_ptr<TModel_Plane>&,
+			const std::shared_ptr<Geo_ApprxCurve_Info>&,
+			OFstream&
+		);
+
+		static TnbCad_EXPORT void ExportToPlt
+		(
+			const std::shared_ptr<TModel_ParaWire>&,
+			const std::shared_ptr<Geo_ApprxCurve_Info>&,
+			OFstream&
+		);
 	};
 }
 

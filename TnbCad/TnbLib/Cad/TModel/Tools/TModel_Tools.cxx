@@ -3,6 +3,8 @@
 #include <Cad_Tools.hxx>
 #include <Cad_RepairPlnWire.hxx>
 #include <Cad_TModel.hxx>
+#include <Cad_tApprxParaPlane.hxx>
+#include <Cad_tApprxParaWire.hxx>
 #include <TModel_ParaCurve.hxx>
 #include <TModel_Surface.hxx>
 #include <TModel_ParaWire.hxx>
@@ -13,6 +15,7 @@
 #include <Pln_Tools.hxx>
 #include <Pln_CurveTools.hxx>
 #include <Cad2d_RepairWire.hxx>
+#include <Geo_ApprxCurve_Info.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Entity3d_Box.hxx>
@@ -259,6 +262,7 @@ tnbLib::TModel_Tools::GetParaPlane
 {
 	Debug_Null_Pointer(theSurface);
 	const auto unRepOuterWire = RepairWire(GetOuterParaWire(theSurface), theTol);
+	//std::cout << "unrepaired nb curves: " << unRepOuterWire->NbCurves() << std::endl;
 	if (NOT unRepOuterWire)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -273,9 +277,9 @@ tnbLib::TModel_Tools::GetParaPlane
 	const auto trimOuterWire = TrimWire(unRepOuterWire);
 
 	Debug_Null_Pointer(trimOuterWire);
-	//ExportToPlt(trimOuterWire, approxInfo, myFile0);
+	//ExportToPlt(unRepOuterWire, approxInfo, myFile0);
 	const auto waterTight = FillGaps(trimOuterWire, theTol);
-	//ExportToPlt(waterTight, approxInfo, myFile1);
+	//ExportToPlt(trimOuterWire, approxInfo, myFile1);
 	//std::exit(1);
 	const auto outerEdges = Cad_RepairPlnWire<TModel_ParaWire>::CreateWire(waterTight, theTol);
 
@@ -469,6 +473,7 @@ tnbLib::TModel_Tools::RepairWire
 	{
 		Debug_Null_Pointer(theWire->Curves().at(i));
 		auto id = theWire->Curves().at(i)->Index();
+		//std::cout << "id: " << id << std::endl;
 		curves.at(i)->SetIndex(id);
 	}
 	auto wire = MakeWire(curves);
@@ -631,5 +636,41 @@ tnbLib::TModel_Tools::RepairIntersection
 
 		auto paired = std::make_pair(std::move(trimmed0), std::move(trimmed1));
 		return std::move(paired);
+	}
+}
+
+void tnbLib::TModel_Tools::ExportToPlt
+(
+	const std::shared_ptr<TModel_Plane>& thePlane,
+	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo,
+	OFstream & theFile
+)
+{
+	auto alg = std::make_shared<Cad_tApprxParaPlane>(thePlane, theInfo);
+	alg->Perform();
+	Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed");
+
+	const auto& polys = alg->Polygons();
+	for (const auto& x : polys)
+	{
+		x->ExportToPlt(theFile);
+	}
+}
+
+void tnbLib::TModel_Tools::ExportToPlt
+(
+	const std::shared_ptr<TModel_ParaWire>& theWire,
+	const std::shared_ptr<Geo_ApprxCurve_Info>& theInfo,
+	OFstream & theFile
+)
+{
+	auto alg = std::make_shared<Cad_tApprxParaWire>(theWire, theInfo);
+	alg->Perform();
+	Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed");
+
+	const auto& polys = alg->Polygons();
+	for (const auto& x : polys)
+	{
+		x->ExportToPlt(theFile);
 	}
 }

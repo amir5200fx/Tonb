@@ -79,6 +79,7 @@
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array1OfInteger.hxx>
 #include <TColStd_Array1OfReal.hxx>
+#include <TopTools_IndexedMapOfShape.hxx>
 
 Standard_Boolean 
 tnbLib::Cad_Tools::IsBounded
@@ -2469,6 +2470,25 @@ tnbLib::Cad_Tools::ReParameterization
 	}
 }
 
+std::map<Standard_Integer, TopoDS_Face> 
+tnbLib::Cad_Tools::RetrieveFaceMap
+(
+	const TopoDS_Shape & theShape
+)
+{
+	TopTools_IndexedMapOfShape faces;
+	TopExp::MapShapes(theShape, TopAbs_FACE, faces);
+	std::map<Standard_Integer, TopoDS_Face> myMap;
+	for (int iface = 1; iface <= faces.Extent(); iface++)
+	{
+		const auto& x = faces(iface);
+		auto face = TopoDS::Face(x);
+		auto paired = std::make_pair(iface, face);
+		myMap.insert(std::move(paired));
+	}
+	return std::move(myMap);
+}
+
 void tnbLib::Cad_Tools::Connect
 (
 	const std::shared_ptr<TModel_Surface>& theSurface
@@ -2565,7 +2585,18 @@ void tnbLib::Cad_Tools::Connect
 )
 {
 	Debug_Null_Pointer(theModel);
-	const auto surfaces = theModel->RetrieveFaces();
+	auto surfaces = theModel->RetrieveFaces();
+
+	std::sort
+	(
+		surfaces.begin(), surfaces.end(),
+		[](const std::shared_ptr<TModel_Surface>& s0, const std::shared_ptr<TModel_Surface>& s1) 
+		{
+			Debug_Null_Pointer(s0); 
+			Debug_Null_Pointer(s1);
+			return s0->Index() < s1->Index();
+		}
+	);
 
 	for (const auto& x : surfaces)
 	{
@@ -2606,6 +2637,21 @@ void tnbLib::Cad_Tools::Connect
 	{
 		Debug_Null_Pointer(x);
 		Connect(x);
+	}
+
+	const auto& shape = theModel->Shape();
+	Standard_Integer k = 0;
+	for (
+		TopExp_Explorer aFaceExp(shape.Oriented(TopAbs_FORWARD), TopAbs_FACE);
+		aFaceExp.More();
+		aFaceExp.Next()
+		)
+	{
+		auto raw = TopoDS::Face(aFaceExp.Current());
+		if (NOT raw.IsNull())
+		{
+			surfaces.at(k++)->SetFace(raw);
+		}
 	}
 }
 

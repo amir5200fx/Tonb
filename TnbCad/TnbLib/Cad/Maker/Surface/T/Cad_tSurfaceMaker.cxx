@@ -4,6 +4,7 @@
 #include <TModel_CmpEdge.hxx>
 #include <TModel_Wire.hxx>
 #include <TModel_Surface.hxx>
+#include <TModel_ParaCurve.hxx>
 #include <Cad_tSurfaceMakerInfo.hxx>
 #include <Cad_tEdgeMakerInfo.hxx>
 #include <Cad_tEdgeMakerInfo_Absolute.hxx>
@@ -121,6 +122,8 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 		auto new_edge = edgeMaker->Edge();
 		new_edge->SetIndex(K);
 
+		Debug_Null_Pointer(new_edge->ParaCurve());
+		new_edge->ParaCurve()->SetIndex(K);
 		outter_edges.push_back(std::move(new_edge));
 	}
 
@@ -198,6 +201,8 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 
 	auto face =
 		std::make_shared<TModel_Surface>(geometry, outerWire, Qwire);
+	Debug_Null_Pointer(face);
+	face->SetFace(Face());
 
 	theSurface_ = std::move(face);
 
