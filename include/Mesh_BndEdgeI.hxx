@@ -1,4 +1,10 @@
 #pragma once
+template<class BndEdgeTraits>
+inline Standard_Boolean tnbLib::Mesh_BndEdge<BndEdgeTraits>::IsBoundary() const
+{
+	return Standard_True;
+}
+
 namespace tnbLib
 {
 	template<class BndEdgeTraits>

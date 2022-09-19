@@ -105,7 +105,7 @@ namespace tnbLib
 
 		//- public functions and operators
 
-		
+		Standard_Boolean IsBoundary() const override;
 	};
 }
 

@@ -1,0 +1,12 @@
+setVerbose(1);
+
+loadFile();
+
+printNbSegments();
+printNbFaces();
+
+var segments = getSegments();
+var faces = getFaces();
+
+printBlocks(segments);
+printBlocks(faces);

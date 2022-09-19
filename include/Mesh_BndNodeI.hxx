@@ -10,3 +10,9 @@ tnbLib::Mesh_BndNode<BndNodeTraits>::BlowThisUp()
 		<< abort(FatalError);
 	return nullptr;
 }
+
+template<class BndNodeTraits>
+inline Standard_Boolean tnbLib::Mesh_BndNode<BndNodeTraits>::IsBoundary() const
+{
+	return Standard_True;
+}

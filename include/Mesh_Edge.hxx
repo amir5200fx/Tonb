@@ -96,6 +96,8 @@ namespace tnbLib
 
 		// public functions and operators [5/12/2022 Amir]
 
+		virtual Standard_Boolean IsBoundary() const;
+
 		auto NbNodes() const
 		{
 			return (Standard_Integer)nbNodes;

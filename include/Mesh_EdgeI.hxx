@@ -1,5 +1,11 @@
 #pragma once
 #include <Geo_Tools.hxx>
+template<class EdgeTraits>
+inline Standard_Boolean tnbLib::Mesh_Edge<EdgeTraits>::IsBoundary() const
+{
+	return Standard_False;
+}
+
 namespace tnbLib
 {
 

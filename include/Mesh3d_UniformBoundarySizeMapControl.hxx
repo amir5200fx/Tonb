@@ -10,6 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations [7/18/2022 Amir]
 	class BoundarySizeMap3d_UniformFaceTool;
+	class BoundarySizeMap3d_UniformFaceTool_Info;
 
 	class Mesh3d_UniformBoundarySizeMapControl
 		: public Mesh3d_BoundarySizeMapControl
@@ -56,7 +57,12 @@ namespace tnbLib
 		TnbMesh_EXPORT std::shared_ptr<BoundarySizeMap3d_UniformFaceTool> 
 			SelectMap(const word& theName) const;
 
-		TnbMesh_EXPORT void CreateSizeMap(const word& theName, const std::shared_ptr<Cad_TModel>& theGeometry);
+		TnbMesh_EXPORT void CreateSizeMap
+		(
+			const word& theName, 
+			const std::shared_ptr<Cad_TModel>& theGeometry, 
+			const std::shared_ptr<BoundarySizeMap3d_UniformFaceTool_Info>& theInfo
+		);
 
 	};
 }

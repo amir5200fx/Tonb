@@ -76,6 +76,9 @@ namespace tnbLib
 			, theCoord_(theCoord)
 		{}
 
+
+		// public functions and operators [9/19/2022 Amir]
+
 		const Point& Coord() const
 		{
 			return theCoord_;
@@ -85,6 +88,8 @@ namespace tnbLib
 		{
 			return theCoord_;
 		}
+
+		virtual Standard_Boolean IsBoundary() const;
 
 		void SetCoord(const Point& theCoord)
 		{

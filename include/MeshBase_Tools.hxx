@@ -5,7 +5,10 @@
 #include <Standard_Handle.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Mesh_Module.hxx>
+#include <Mesh3d_FacetFwd.hxx>
 #include <Mesh3d_ElementFwd.hxx>
+#include <Mesh3d_EdgeFwd.hxx>
+#include <Mesh3d_NodeFwd.hxx>
 #include <Mesh2d_ElementFwd.hxx>
 #include <Mesh2d_EdgeFwd.hxx>
 #include <Mesh2d_NodeFwd.hxx>
@@ -42,6 +45,16 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbMesh_EXPORT std::tuple<Standard_Integer, Standard_Integer> Ids(const Mesh2d_Edge&);
+		static TnbMesh_EXPORT std::tuple<Standard_Integer, Standard_Integer, Standard_Integer> Ids(const Mesh2d_Element&); 
+
+		static TnbMesh_EXPORT std::tuple<Standard_Integer, Standard_Integer> Ids(const Mesh3d_Edge&);
+		static TnbMesh_EXPORT std::tuple<Standard_Integer, Standard_Integer, Standard_Integer> Ids(const Mesh3d_Facet&);
+		static TnbMesh_EXPORT std::tuple<Standard_Integer, Standard_Integer, Standard_Integer, Standard_Integer> Ids(const Mesh3d_Element&);
+
+		static std::tuple<connectivity::triple, connectivity::triple, connectivity::triple, connectivity::triple>
+			FaceIds(const Mesh3d_Element&);
 
 		static TnbMesh_EXPORT std::shared_ptr<Entity2d_Box> 
 			CalcBoundingBox
@@ -103,6 +116,8 @@ namespace tnbLib
 				const Entity2d_Box&
 			);
 
+		static TnbMesh_EXPORT std::shared_ptr<Mesh3d_Edge> FindEdge(const Mesh3d_Node&, const Mesh3d_Node&);
+
 		static TnbMesh_EXPORT const Handle(Geom2d_Curve)& Geometry(const std::shared_ptr<Pln_Curve>& theCurve);
 		static TnbMesh_EXPORT const Handle(Geom2d_Curve)& Geometry(const std::shared_ptr<TModel_ParaCurve>& theCurve);
 		static TnbMesh_EXPORT const Handle(Geom2d_Curve)& Geometry(const std::shared_ptr<GModel_ParaCurve>& theCurve);
@@ -118,11 +133,21 @@ namespace tnbLib
 		static TnbMesh_EXPORT Standard_Boolean IsSense(const std::shared_ptr<Mesh2d_Element>&, const std::shared_ptr<Mesh2d_Edge>&);
 		static TnbMesh_EXPORT Standard_Integer NodePos(const std::shared_ptr<Mesh2d_Element>&, const std::shared_ptr<Mesh2d_Node>&);
 
+		static TnbMesh_EXPORT Standard_Boolean IsSense(const std::shared_ptr<Mesh3d_Facet>&, const std::tuple<connectivity::triple, connectivity::triple, connectivity::triple, connectivity::triple>& theElementFaces);
+		static TnbMesh_EXPORT Standard_Boolean IsSense(const std::shared_ptr<Mesh3d_Facet>&, const std::shared_ptr<Mesh3d_Facet>&);
+		static TnbMesh_EXPORT Standard_Boolean IsSense(const std::shared_ptr<Mesh3d_Element>&, const std::shared_ptr<Mesh3d_Facet>&);
+
+		static TnbMesh_EXPORT Standard_Boolean IsCoincident(const Standard_Integer i0, const Standard_Integer i1, const Standard_Integer i2, const Mesh3d_Facet&);
+		static TnbMesh_EXPORT std::shared_ptr<Mesh3d_Facet> IsOnElement(const Standard_Integer i0, const Standard_Integer i1, const Standard_Integer i2, const Mesh3d_Element&);
+
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Node>> MakeNodes(const std::vector<Pnt2d>&);
 
 		// Warning! - no edge has been created by calling this function [1/1/2022 Amir]
 		//          - no connection is made between elements and nodes
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Element>> MakeElements(const Entity2d_Triangulation&);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Facet>> RetrieveFacets(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Edge>> RetrieveEdges(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
 
 		// creating edges for the elements [1/1/2022 Amir]
 		// note: nodes and edges are connected with creating edges
@@ -132,6 +157,22 @@ namespace tnbLib
 		static TnbMesh_EXPORT void ConnectNodesAndEdges(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 		static TnbMesh_EXPORT void ConnectEdgesAndElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 		static TnbMesh_EXPORT void ConnectElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
+
+		static TnbMesh_EXPORT void ConnectNodesAndElements(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+		static TnbMesh_EXPORT void ConnectNodesAndFacets(const std::vector<std::shared_ptr<Mesh3d_Facet>>&);
+		static TnbMesh_EXPORT void ConnectNodesAndFacets(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+		static TnbMesh_EXPORT void ConnectNodesAndEdges(const std::vector<std::shared_ptr<Mesh3d_Edge>>&);
+		static TnbMesh_EXPORT void ConnectNodesAndEdges(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+
+		static TnbMesh_EXPORT void ConnectEdgesAndElements(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+		static TnbMesh_EXPORT void ConnectEdgesAndFacets(const std::vector<std::shared_ptr<Mesh3d_Facet>>& theFacets);
+		static TnbMesh_EXPORT void ConnectEdgesAndFacets(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+
+		static TnbMesh_EXPORT void ConnectFacetsAndElements(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+
+		static TnbMesh_EXPORT void ConnectElements(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+
+		static TnbMesh_EXPORT void ConnectMesh(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Element>> MakeMesh(const Entity2d_Triangulation&);
 
