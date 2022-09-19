@@ -287,7 +287,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrIters());
 
-	std::cout << MeshConditions()->CustomBoundaryGrowthRate() << std::endl;
+	//std::cout << MeshConditions()->CustomBoundaryGrowthRate() << std::endl;
 	if (MeshConditions()->CustomBoundaryGrowthRate())
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(this->MeshValues()->BoundaryGrowthRate()));
 	else

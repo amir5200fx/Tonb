@@ -13,7 +13,7 @@ namespace tnbLib
 
 	typedef Mesh_ElementAdaptor<Mesh3d_Element, Mesh_ElementType_Tetrahedron> Mesh3d_ElementAdaptor;
 	typedef Mesh_ElementAdaptor<Mesh2d_Element, Mesh_ElementType_Triangle2D> Mesh2d_ElementAdaptor;
-	typedef Mesh_ElementAdaptor<Mesh3d_Facet, Mesh_ElementType_Triangle3D> Mesh3d_FacetElementAdaptor;
+	typedef Mesh_ElementAdaptor<Mesh3d_Element, Mesh_ElementType_Triangle3D> Mesh3d_FacetElementAdaptor;
 }
 
 #endif // !_Mesh_ElementAdaptorTypes_Header

@@ -33,6 +33,13 @@ namespace tnbLib
 	template<>
 	static TnbMesh_EXPORT std::shared_ptr<Aft2d_tPlnWireSurfaceUniMetric>
 		Aft2d_tRegionPlaneSurfaceUniMetric::MakeMeshWire<TModel_ParaWire>(const TModel_ParaWire&);
+
+#ifdef _DEBUG
+	template<>
+	static TnbMesh_EXPORT std::shared_ptr<Aft2d_tRegionPlaneSurfaceUniMetric>
+		Aft2d_tRegionPlaneSurfaceUniMetric::MakePlane(const std::shared_ptr<TModel_Plane>&);
+#endif // _DEBUG
+
 }
 
 #endif // !_Aft2d_tRegionPlaneSurfaceUniMetric_Header

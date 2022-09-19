@@ -2008,6 +2008,36 @@
     <Filter Include="TnbLib\Base\SetSources\ElementSize\DistRatio">
       <UniqueIdentifier>{16f3c498-4a02-4b32-94db-1c4f61f429f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch">
+      <UniqueIdentifier>{b327e48f-edcb-4213-ba6e-492def8991d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\FunMode">
+      <UniqueIdentifier>{cfba245a-e9e2-40b8-b7ab-b4199a6edf3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\FunMode\DistOnly">
+      <UniqueIdentifier>{2a86da5c-2060-4853-ad33-3ea773c24e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\Samples">
+      <UniqueIdentifier>{4cd0f9d4-e7b4-452e-ba3d-946f1f3f8c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\Samples\1pts">
+      <UniqueIdentifier>{f23a1414-1a94-4978-ad7a-d7a793a20699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\Samples\3pts">
+      <UniqueIdentifier>{d2c7e7aa-00cf-454f-b993-7e9009bd7fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\Samples\6pts">
+      <UniqueIdentifier>{d1db9b53-9180-4799-932a-27d98de65371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\Info">
+      <UniqueIdentifier>{d389ed72-674e-4d8e-a006-c23720a5b21e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\ApprxPatch\FunMode\hSize">
+      <UniqueIdentifier>{26189f49-40b5-4890-afc9-5d03bfb94ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info">
+      <UniqueIdentifier>{41425f2d-fbd1-49d7-bafa-0232597fc596}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4824,6 +4854,33 @@
     <ClInclude Include="TnbLib\Base\Tools\Conditions\Reference\Mesh_ReferenceValuesI.hxx">
       <Filter>TnbLib\Base\Tools\Conditions\Reference</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\Geo3d_ApprxSurfPatch.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\FunMode\Geo3d_ApprxSurfPatch_FunMode.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\FunMode</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\FunMode\DistOnly\Geo3d_ApprxSurfPatch_DistOnlyFunMode.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\FunMode\DistOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\Samples\Geo3d_ApprxSurfPatch_Samples.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\Samples\1pts\Geo3d_ApprxSurfPatch_1PtsSamples.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples\1pts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\Samples\3pts\Geo3d_ApprxSurfPatch_3PtsSamples.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples\3pts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\Info\Geo3d_ApprxSurfPatch_Info.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\ApprxPatch\FunMode\hSize\Geo3d_ApprxSurfPatch_hSizeFunMode.hxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\FunMode\hSize</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info\BoundarySizeMap3d_UniformFaceTool_Info.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6200,6 +6257,36 @@
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform\BoundarySizeMap3d_UniformSegmentTool2.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Segment\Uniform</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\Geo3d_ApprxSurfPatch.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\FunMode\DistOnly\Geo3d_ApprxSurfPatch_DistOnlyFunMode.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\FunMode\DistOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\Samples\1pts\Geo3d_ApprxSurfPatch_1PtsSamples.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples\1pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\Samples\3pts\Geo3d_ApprxSurfPatch_3PtsSamples.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples\3pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\Samples\Geo3d_ApprxSurfPatch_Samples.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\FunMode\Geo3d_ApprxSurfPatch_FunMode.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\FunMode</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\Info\Geo3d_ApprxSurfPatch_Info.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\ApprxPatch\FunMode\hSize\Geo3d_ApprxSurfPatch_hSizeFunMode.cxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\FunMode\hSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info\BoundarySizeMap3d_UniformFaceTool_Info.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info\BoundarySizeMap3d_UniformFaceTool_InfoIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Aft\Model\Aft2d_Model_Import.jxx">
@@ -6219,6 +6306,12 @@
     </None>
     <None Include="TnbLib\Aft\Model\Aft2d_Model_CheckBoundary.jxx">
       <Filter>TnbLib\Aft\Model</Filter>
+    </None>
+    <None Include="TnbLib\Base\Geom\ApprxPatch\Samples\Geo3d_ApprxSurfPatch_Samples_Interpolate.jxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples</Filter>
+    </None>
+    <None Include="TnbLib\Base\Geom\ApprxPatch\Samples\Geo3d_ApprxSurfPatch_Samples_RetrievePoints.jxx">
+      <Filter>TnbLib\Base\Geom\ApprxPatch\Samples</Filter>
     </None>
   </ItemGroup>
 </Project>

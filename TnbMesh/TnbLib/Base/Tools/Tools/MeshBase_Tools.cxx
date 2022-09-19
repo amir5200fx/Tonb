@@ -1,6 +1,7 @@
 #include <MeshBase_Tools.hxx>
 
 #include <Mesh3d_Element.hxx>
+#include <Mesh3d_Node.hxx>
 #include <Mesh2d_Element.hxx>
 #include <Pln_Curve.hxx>
 #include <TModel_ParaCurve.hxx>
@@ -8,6 +9,7 @@
 #include <GeoMesh2d_Background.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Entity3d_TetrahedralizationTools.hxx>
 #include <Entity2d_MeshValue.hxx>
 #include <Entity2d_MetricMeshValue.hxx>
 #include <Entity2d_Metric1.hxx>
@@ -19,6 +21,162 @@
 #include <armadillo.h>
 
 using namespace arma;
+
+std::tuple<Standard_Integer, Standard_Integer>
+tnbLib::MeshBase_Tools::Ids(const Mesh2d_Edge & theEdge)
+{
+	Debug_Null_Pointer(theEdge.Node0());
+	Debug_Null_Pointer(theEdge.Node1());
+
+	auto t = std::make_tuple(theEdge.Node0()->Index(), theEdge.Node1()->Index());
+	return std::move(t);
+}
+
+std::tuple<Standard_Integer, Standard_Integer, Standard_Integer> 
+tnbLib::MeshBase_Tools::Ids
+(
+	const Mesh2d_Element & theElement
+)
+{
+	Debug_Null_Pointer(theElement.Node0());
+	Debug_Null_Pointer(theElement.Node1());
+	Debug_Null_Pointer(theElement.Node2());
+
+	auto t = 
+		std::make_tuple
+		(
+			theElement.Node0()->Index(), 
+			theElement.Node1()->Index(), 
+			theElement.Node2()->Index()
+		);
+	return std::move(t);
+}
+
+std::tuple<Standard_Integer, Standard_Integer> 
+tnbLib::MeshBase_Tools::Ids(const Mesh3d_Edge & theEdge)
+{
+	Debug_Null_Pointer(theEdge.Node0());
+	Debug_Null_Pointer(theEdge.Node1());
+
+	auto t = std::make_tuple(theEdge.Node0()->Index(), theEdge.Node1()->Index());
+	return std::move(t);
+}
+
+std::tuple<Standard_Integer, Standard_Integer, Standard_Integer> 
+tnbLib::MeshBase_Tools::Ids
+(
+	const Mesh3d_Facet & theElement
+)
+{
+	Debug_Null_Pointer(theElement.Node0());
+	Debug_Null_Pointer(theElement.Node1());
+	Debug_Null_Pointer(theElement.Node2());
+
+	auto t =
+		std::make_tuple
+		(
+			theElement.Node0()->Index(),
+			theElement.Node1()->Index(),
+			theElement.Node2()->Index()
+		);
+	return std::move(t);
+}
+
+std::tuple<Standard_Integer, Standard_Integer, Standard_Integer, Standard_Integer> 
+tnbLib::MeshBase_Tools::Ids(const Mesh3d_Element & theElement)
+{
+	Debug_Null_Pointer(theElement.Node0());
+	Debug_Null_Pointer(theElement.Node1());
+	Debug_Null_Pointer(theElement.Node2());
+	Debug_Null_Pointer(theElement.Node3());
+
+	auto t =
+		std::make_tuple
+		(
+			theElement.Node0()->Index(),
+			theElement.Node1()->Index(),
+			theElement.Node2()->Index(),
+			theElement.Node3()->Index()
+		);
+	return std::move(t);
+}
+
+std::tuple
+<
+	tnbLib::connectivity::triple,
+	tnbLib::connectivity::triple,
+	tnbLib::connectivity::triple, 
+	tnbLib::connectivity::triple
+> 
+tnbLib::MeshBase_Tools::FaceIds
+(
+	const Mesh3d_Element & theElement
+)
+{
+	static auto makeTriple = [](const Standard_Integer i0, const Standard_Integer i1, const Standard_Integer i2)
+	{
+		connectivity::triple t;
+		t.Value(0) = i0;
+		t.Value(1) = i1;
+		t.Value(2) = i2;
+		return std::move(t);
+	};
+
+	connectivity::triple f0;
+	{
+		auto Id = Entity3d_TetrahedralizationTools::FacetIndices(0);
+
+		const auto& node1 = theElement.Node(Index_Of(std::get<0>(Id)));
+		const auto& node2 = theElement.Node(Index_Of(std::get<1>(Id)));
+		const auto& node3 = theElement.Node(Index_Of(std::get<2>(Id)));
+
+		Debug_Null_Pointer(node1);
+		Debug_Null_Pointer(node2);
+		Debug_Null_Pointer(node3);
+		f0 = makeTriple(node1->Index(), node2->Index(), node3->Index());
+	}
+	connectivity::triple f1;
+	{
+		auto Id = Entity3d_TetrahedralizationTools::FacetIndices(1);
+
+		const auto& node1 = theElement.Node(Index_Of(std::get<0>(Id)));
+		const auto& node2 = theElement.Node(Index_Of(std::get<1>(Id)));
+		const auto& node3 = theElement.Node(Index_Of(std::get<2>(Id)));
+
+		Debug_Null_Pointer(node1);
+		Debug_Null_Pointer(node2);
+		Debug_Null_Pointer(node3);
+		f1 = makeTriple(node1->Index(), node2->Index(), node3->Index());
+	}
+	connectivity::triple f2;
+	{
+		auto Id = Entity3d_TetrahedralizationTools::FacetIndices(2);
+
+		const auto& node1 = theElement.Node(Index_Of(std::get<0>(Id)));
+		const auto& node2 = theElement.Node(Index_Of(std::get<1>(Id)));
+		const auto& node3 = theElement.Node(Index_Of(std::get<2>(Id)));
+
+		Debug_Null_Pointer(node1);
+		Debug_Null_Pointer(node2);
+		Debug_Null_Pointer(node3);
+		f2 = makeTriple(node1->Index(), node2->Index(), node3->Index());
+	}
+	connectivity::triple f3;
+	{
+		auto Id = Entity3d_TetrahedralizationTools::FacetIndices(3);
+
+		const auto& node1 = theElement.Node(Index_Of(std::get<0>(Id)));
+		const auto& node2 = theElement.Node(Index_Of(std::get<1>(Id)));
+		const auto& node3 = theElement.Node(Index_Of(std::get<2>(Id)));
+
+		Debug_Null_Pointer(node1);
+		Debug_Null_Pointer(node2);
+		Debug_Null_Pointer(node3);
+		f3 = makeTriple(node1->Index(), node2->Index(), node3->Index());
+	}
+	auto t = std::make_tuple(std::move(f0), std::move(f1), std::move(f2), std::move(f3));
+	return std::move(t);
+}
 
 std::shared_ptr<tnbLib::Entity2d_Box> 
 tnbLib::MeshBase_Tools::CalcBoundingBox
@@ -345,6 +503,32 @@ tnbLib::MeshBase_Tools::CorrectCoord
 		<< "unpredictable condition is occurred!" << endl
 		<< abort(FatalError);
 	return Pnt2d::null;
+}
+
+std::shared_ptr<tnbLib::Mesh3d_Edge> 
+tnbLib::MeshBase_Tools::FindEdge
+(
+	const Mesh3d_Node& theNode0,
+	const Mesh3d_Node& theNode1
+)
+{
+	if (theNode1.NbEdges() < theNode0.NbEdges())
+	{
+		return FindEdge(theNode1, theNode0);
+	}
+	else
+	{
+		const auto& edges = theNode1.RetrieveEdges();
+		for (const auto& x : edges)
+		{
+			auto id = x.first;
+			if (theNode0.IsOnEdges(id))
+			{
+				return x.second.lock();
+			}
+		}
+	}
+	return nullptr;
 }
 
 const Handle(Geom2d_Curve)& 

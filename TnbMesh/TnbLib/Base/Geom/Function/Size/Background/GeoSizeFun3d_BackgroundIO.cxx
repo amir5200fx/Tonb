@@ -1,5 +1,9 @@
 #include <GeoSizeFun3d_Background.hxx>
 
+#include <GeoMesh3d_Background.hxx>
+#include <GeoMesh3d_Data.hxx>
+#include <MeshBase_Tools.hxx>
+
 namespace tnbLib
 {
 
@@ -13,6 +17,17 @@ namespace tnbLib
 	{
 		ar & boost::serialization::base_object<GeoSizeFun3d_nonUniform>(*this);
 		ar & theBackMesh_;
+
+		if (theBackMesh_)
+		{
+			if (const auto& mesh = theBackMesh_->Mesh())
+			{
+				if (mesh->Elements().size())
+				{
+					MeshBase_Tools::ConnectMesh(mesh->Elements());
+				}
+			}
+		}
 	}
 
 	template<>

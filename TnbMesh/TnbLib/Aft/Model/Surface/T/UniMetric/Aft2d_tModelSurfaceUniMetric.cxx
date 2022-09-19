@@ -3,6 +3,7 @@
 #include <Aft2d_EdgeSurface.hxx>
 #include <Aft_Tools.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Entity2d_Triangulation.hxx>
 
 unsigned short tnbLib::Aft2d_tModelSurfaceUniMetric::verbose(0);
 
@@ -345,6 +346,12 @@ void tnbLib::Aft2d_tModelSurfaceUniMetric::CheckSelfIntersection()
 			Debug_Null_Pointer(l);
 			if (Aft_Tools::IsIntersect(*x, *l))
 			{
+#ifdef _DEBUG
+				OFstream myFile("boundaryIntersectionError.plt");
+				auto mesh = Aft_Tools::RetrieveEdgeMesh<Aft2d_EdgeSurface>(GetBoundaryEntities());
+				mesh->ExportToPlt(myFile);
+#endif // _DEBUG
+
 				FatalErrorIn(FunctionSIG)
 					<< " a self intersection of the parametric boundary edges has been detected." << endl
 					<< abort(FatalError);

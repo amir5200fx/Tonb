@@ -1,0 +1,7 @@
+	std::vector<Pnt2d> pts;
+	pts.reserve(NbPoints());
+	for (Standard_Integer i = 0; i < NbPoints(); i++)
+	{
+		pts.push_back((&P0)[i]);
+	}
+	return std::move(pts);

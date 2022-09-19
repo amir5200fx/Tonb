@@ -44,27 +44,27 @@ tnbLib::Mesh_VariationRate::Rate
 	{
 	case Mesh_VariationRateInfo::verySlow:
 	{
-		std::cout << "very slow" << std::endl;
+		//std::cout << "very slow" << std::endl;
 		return VeryLowrate();
 	}
 	case Mesh_VariationRateInfo::slow:
 	{
-		std::cout << "slow" << std::endl;
+		//std::cout << "slow" << std::endl;
 		return Lowrate();
 	}
 	case Mesh_VariationRateInfo::moderate:
 	{
-		std::cout << "moderate" << std::endl;
+		//std::cout << "moderate" << std::endl;
 		return Moderate();
 	}
 	case Mesh_VariationRateInfo::fast:
 	{
-		std::cout << "fast" << std::endl;
+		//std::cout << "fast" << std::endl;
 		return Highrate();
 	}
 	case Mesh_VariationRateInfo::custom:
 	{
-		std::cout << "custom" << std::endl;
+		//std::cout << "custom" << std::endl;
 		return customValue;
 	}
 	default:

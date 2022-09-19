@@ -1,5 +1,6 @@
 #include <GeoMesh3d_Data.hxx>
 
+#include <MeshBase_Tools.hxx>
 #include <Mesh3d_Element.hxx>
 #include <Mesh3d_Edge.hxx>
 #include <Mesh3d_Node.hxx>
@@ -7,6 +8,8 @@
 #include <Entity3d_TetrahedralizationTools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+//#define GeoMesh3d_Data_Construct_Debug
 
 namespace tnbLib
 {
@@ -16,10 +19,18 @@ namespace tnbLib
 	{
 		const auto& Points = theTriangulation.Points();
 		const auto& Triangles = theTriangulation.Connectivity();
-		//std::cout << "nb of tris: " << Triangles.size() << std::endl;
-		//std::cout << "nb of points: " << Points.size() << std::endl;
+
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "nb of tris: " << Triangles.size() << std::endl;
+		std::cout << "nb of points: " << Points.size() << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
+		
 		std::vector<std::shared_ptr<Mesh3d_Node>> Nodes;
 		Nodes.reserve(Points.size());
+
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "create nodes..." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
 
 		// Creating the nodes
 		Standard_Integer k = 0;
@@ -28,9 +39,17 @@ namespace tnbLib
 			auto node = std::make_shared<Mesh3d_Node>(++k, x);
 			Nodes.push_back(std::move(node));
 		}
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "the nodes are created." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
 
 		std::vector<std::shared_ptr<Mesh3d_Element>> elements;
 		elements.reserve(Triangles.size());
+
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "creating the elements..." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
+
 		// Creating the Elements
 		k = 0;
 		for (const auto& x : Triangles)
@@ -60,6 +79,10 @@ namespace tnbLib
 			element->Node2()->InsertToElements(element->Index(), element);
 			element->Node3()->InsertToElements(element->Index(), element);
 		}
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "the elements are created." << std::endl;
+		std::cout << "creating the edges..." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
 
 		// Create Edges
 		Standard_Integer nbEdges = 0;
@@ -141,7 +164,10 @@ namespace tnbLib
 				element->SetEdge(I, current_edge);
 			}
 		}
-
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "the edges are created." << std::endl;
+		std::cout << "creating the facets..." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
 		// Create Facets
 		Standard_Integer nbFacets = 0;
 		for (const auto& element : elements)
@@ -238,10 +264,50 @@ namespace tnbLib
 					node1->InsertToFacets(current_facet->Index(), current_facet);
 					node2->InsertToFacets(current_facet->Index(), current_facet);
 					node3->InsertToFacets(current_facet->Index(), current_facet);
+
+					if (auto edge1 = MeshBase_Tools::FindEdge(*node2, *node3))
+					{
+						current_facet->SetEdge0(edge1);
+						edge1->InsertToFacets(current_facet->Index(), current_facet);
+					}
+					else
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "no edge has been detected." << endl
+							<< abort(FatalError);
+					}
+
+					if (auto edge2 = MeshBase_Tools::FindEdge(*node3, *node1))
+					{
+						current_facet->SetEdge1(edge2);
+						edge2->InsertToFacets(current_facet->Index(), current_facet);
+					}
+					else
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "no edge has been detected." << endl
+							<< abort(FatalError);
+					}
+					
+					if (auto edge3 = MeshBase_Tools::FindEdge(*node1, *node2))
+					{
+						current_facet->SetEdge2(edge3);
+						edge3->InsertToFacets(current_facet->Index(), current_facet);
+					}
+					else
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "no edge has been detected." << endl
+							<< abort(FatalError);
+					}
 				}
 				element->SetFacet(I, current_facet);
 			}
 		}
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "the facets are created." << std::endl;
+		std::cout << "Identifying the neighbors..." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
 
 		// Identifying the Neighbors
 		for (const auto& x : elements)
@@ -273,6 +339,10 @@ namespace tnbLib
 			element.SetNeighbor3(face3->LeftElement());
 			if (face3->LeftElement().lock() IS_EQUAL x) element.SetNeighbor3(face3->RightElement());
 		}
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "the neighbors are created." << std::endl;
+		std::cout << "checking the facets..." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
 
 #ifdef _DEBUG
 		// check the facets [8/4/2022 Amir]
@@ -362,6 +432,9 @@ namespace tnbLib
 			}
 		}
 #endif // _DEBUG
+#ifdef GeoMesh3d_Data_Construct_Debug
+		std::cout << "the facets are checked." << std::endl;
+#endif // GeoMesh3d_Data_Construct_Debug
 
 
 		theElements_ = std::move(elements);

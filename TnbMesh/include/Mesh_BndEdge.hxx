@@ -76,6 +76,8 @@ namespace tnbLib
 			return Standard_False;
 		}
 
+		Standard_Boolean IsBoundary() const override;
+
 		//- Static functions and operators
 
 		static void

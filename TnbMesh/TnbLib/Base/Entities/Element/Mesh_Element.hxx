@@ -412,9 +412,7 @@ namespace tnbLib
 		}
 
 		Standard_Real Oriented(const Point& theCoord) const;
-
 		Standard_Real CalcDistance(const Point& theCoord) const;
-
 		Standard_Real CalcSquareDistance(const Point& theCoord) const;
 
 		template<int Sub>
@@ -445,8 +443,9 @@ namespace tnbLib
 		}
 
 		Standard_Boolean IsRightSide(const Point& theCoord) const;
-
 		Standard_Boolean IsLeftSide(const Point& theCoord) const;
+
+		virtual Standard_Boolean IsBoundary() const;
 
 		connectType RetrieveConnectivity() const;
 

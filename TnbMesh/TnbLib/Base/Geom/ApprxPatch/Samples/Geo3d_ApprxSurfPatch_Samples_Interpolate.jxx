@@ -1,0 +1,6 @@
+	Debug_If_Condition_Message(NOT INSIDE(theIndex, 0, nbPts - 1), "out of range");
+
+	const auto[s, t] = (&P0)[theIndex].Components();
+	const auto[u, v] = Geo_Tools::Interpolate(theRegion, std::make_pair(s, t));
+	Pnt2d pt(u, v);
+	return std::move(pt);

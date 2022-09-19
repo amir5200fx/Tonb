@@ -10,6 +10,8 @@ namespace tnbLib
 	void GeoMesh2d_Data::Construct(const triangulation& theTriangulation)
 	{
 		theElements_ = MeshBase_Tools::MakeMesh(theTriangulation);
+
+		MeshBase_Tools::ConnectEdgesAndElements(theElements_);
 		//const auto& Points = theTriangulation.Points();
 		//const auto& Triangles = theTriangulation.Connectivity();
 

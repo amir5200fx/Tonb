@@ -116,11 +116,13 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 			<< abort(FatalError);
 	}
 
+	//verbose = 1;
+
 	const auto& models = Models();
 	const auto coords = RetrieveCoords(models);
 
-	const auto b = Geo_BoxTools::GetBox(coords, 0);
-	const auto expB = *Domain();
+	//const auto b = Geo_BoxTools::GetBox(coords, 0);
+	auto expB = *Domain();
 
 	auto mergCrit = Tolerance()*expB.Diameter();
 
@@ -137,6 +139,7 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 
 			for (const auto& x : coords)
 			{
+				//std::cout << "x: " << x << std::endl;
 				auto b = Geo_BoxTools::GetBox(x, mergCrit);
 				std::vector<std::shared_ptr<Pnt3d>> items;
 				approxSpace.GeometrySearch(b, items);
@@ -180,7 +183,7 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 
-			approxSpace.PostBalance();
+			//approxSpace.PostBalance();
 		}
 
 		if (verbose)
@@ -223,10 +226,14 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 		Info << endl;
 	}
 
+	auto dMesh = std::make_shared<GeoMesh3d_Data>();
+	Debug_Null_Pointer(dMesh);
+	dMesh->Construct(*myTet);
+
 	const auto bMesh = std::make_shared<GeoMesh3d_Background>();
 	Debug_Null_Pointer(bMesh);
 
-	bMesh->Mesh()->Construct(*myTet);
+	bMesh->LoadData(std::move(dMesh));
 	bMesh->InitiateCurrentElement();
 	bMesh->SetBoundingBox(std::move(expB));
 

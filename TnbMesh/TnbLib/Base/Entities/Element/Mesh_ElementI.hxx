@@ -1,5 +1,11 @@
 #pragma once
 #include <Geo_Tools.hxx>
+template<class ElementTraits>
+inline Standard_Boolean 
+tnbLib::Mesh_Element<ElementTraits, tnbLib::Mesh_ElementType_Triangle3D>::IsBoundary() const
+{
+	return Standard_False;
+}
 
 namespace tnbLib
 {

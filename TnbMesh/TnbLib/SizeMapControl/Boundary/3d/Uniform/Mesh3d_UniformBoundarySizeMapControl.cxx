@@ -22,9 +22,10 @@ tnbLib::Mesh3d_UniformBoundarySizeMapControl::SelectMap(const word & theName) co
 void tnbLib::Mesh3d_UniformBoundarySizeMapControl::CreateSizeMap
 (
 	const word & theName,
-	const std::shared_ptr<Cad_TModel>& theGeometry
+	const std::shared_ptr<Cad_TModel>& theGeometry,
+	const std::shared_ptr<BoundarySizeMap3d_UniformFaceTool_Info>& theInfo
 )
 {
-	auto sizeMapTool = std::make_shared<BoundarySizeMap3d_UniformFaceTool>(References(), Domain(), theGeometry);
+	auto sizeMapTool = std::make_shared<BoundarySizeMap3d_UniformFaceTool>(References(), Domain(), theGeometry, theInfo);
 	this->Import(theName, sizeMapTool);
 }
