@@ -231,6 +231,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\MeshPost_LaplacianSmoothingI.hxx" />
     <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\MeshPost2d_LaplacianSmoothingSurface.hxx" />
     <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\MeshPost2d_LaplacianSmoothingSurfaceFwd.hxx" />
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetric.hxx" />
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetricFwd.hxx" />
     <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\traits\MeshPost_LaplacianSmoothing_Traits.hxx" />
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx" />
   </ItemGroup>
@@ -241,6 +243,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Surface\UniMetric\AdjEdges\MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AdjEdges.cxx" />
     <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Info\MeshPost_LaplacianSmoothing_Info.cxx" />
     <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\MeshPost_LaplacianSmoothing.cxx" />
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Surface\MeshPost2d_LaplacianSmoothingSurface.cxx" />
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetric.cxx" />
     <ClCompile Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.cxx" />
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,10 @@
+#include <MeshPost2d_LaplacianSmoothingSurface.hxx>
+#include <MeshPost2d_LaplacianSmoothingSurfaceUniMetric.hxx>
+#include <MeshPost_LaplacianSmoothing_Info.hxx>
+#include <MeshPost2d_LaplacianSmoothingSurface_AdjEdges.hxx>
+#include <MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AdjEdges.hxx>
+#include <MeshPost2d_QualityMapSurface_Vlrms2Ratio.hxx>
+#include <MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio.hxx>
 #include <Aft2d_tModelSurface.hxx>
 #include <Aft2d_tModelSurfaceUniMetric.hxx>
 #include <Aft2d_tSolutionDataSurface.hxx>
@@ -95,6 +102,7 @@ namespace tnbLib
 	static std::shared_ptr<Geo_ApprxCurve_Info> myCurveApproxInfo = std::make_shared<Geo_ApprxCurve_Info>();
 	static std::shared_ptr<Cad_ApprxMetricInfo> myMetricApproxInfo;
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
+	static std::shared_ptr<MeshPost_LaplacianSmoothing_Info> myLaplacianSmoothInfo = std::make_shared<MeshPost_LaplacianSmoothing_Info>();
 
 	static double myDegenCrit = 1.0e-6;//Cad_SingularityHorizons::DEFAULT_DEGEN_CRITERION;
 
@@ -283,6 +291,25 @@ namespace tnbLib
 		{
 			elements.push_back(x.second);
 		}
+		auto nodesRef = Aft_Tools::RetrieveNodes(elements);
+		auto nodes = std::make_shared<std::vector<std::shared_ptr<Aft2d_NodeSurface>>>(std::move(nodesRef));
+		
+		auto avgFun = std::make_shared<MeshPost2d_LaplacianSmoothingSurface_AdjEdges>();
+		avgFun->SetMetrics(theMetricPrcsr);
+
+		auto qualityFun = std::make_shared<MeshPost2d_QualityMapSurface_Vlrms2Ratio>();
+		qualityFun->SetMetrics(theMetricPrcsr);
+
+		auto smoothingAlg = std::make_shared<MeshPost2d_LaplacianSmoothingSurface>();
+		smoothingAlg->SetAvgFun(avgFun);
+		smoothingAlg->SetQualityFun(qualityFun);
+		smoothingAlg->SetInfo(myLaplacianSmoothInfo);
+		smoothingAlg->SetNodes(nodes);
+
+		smoothingAlg->Perform();
+
+		Aft_Tools::CalcCood3d(nodesRef, *theMetricPrcsr->Geometry());
+
 		return std::move(elements);
 	}
 
@@ -315,6 +342,25 @@ namespace tnbLib
 		{
 			elements.push_back(x.second);
 		}
+		auto nodesRef = Aft_Tools::RetrieveNodes(elements);
+		auto nodes = std::make_shared<std::vector<std::shared_ptr<Aft2d_NodeSurface>>>(std::move(nodesRef));
+
+		auto avgFun = std::make_shared<MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AdjEdges>();
+		avgFun->SetMetrics(theMetricPrcsr);
+
+		auto qualityFun = std::make_shared<MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio>();
+		qualityFun->SetMetrics(theMetricPrcsr);
+
+		auto smoothingAlg = std::make_shared<MeshPost2d_LaplacianSmoothingSurfaceUniMetric>();
+		smoothingAlg->SetAvgFun(avgFun);
+		smoothingAlg->SetQualityFun(qualityFun);
+		smoothingAlg->SetInfo(myLaplacianSmoothInfo);
+		smoothingAlg->SetNodes(nodes);
+
+		smoothingAlg->Perform();
+
+		Aft_Tools::CalcCood3d(nodesRef, *theMetricPrcsr->Geometry());
+
 		return std::move(elements);
 	}
 
@@ -514,8 +560,14 @@ namespace tnbLib
 
 	void execute()
 	{
-		Aft2d_tBoundaryOfPlaneSurface::verbose = 1;
-		Aft2d_tBoundaryOfPlaneSurfaceUniMetric::verbose = 1;
+		if (verbose)
+		{
+			MeshPost2d_LaplacianSmoothingSurface::verbose = verbose;
+			MeshPost2d_LaplacianSmoothingSurfaceUniMetric::verbose = verbose;
+			Aft2d_tBoundaryOfPlaneSurface::verbose = verbose;
+			Aft2d_tBoundaryOfPlaneSurfaceUniMetric::verbose = verbose;
+		}
+		
 		//Aft2d_gModelSurface::verbose = 1;
 
 		if (NOT loadTag)
@@ -532,6 +584,9 @@ namespace tnbLib
 				<< "th model is null!" << endl
 				<< abort(FatalError);
 		}
+
+		myLaplacianSmoothInfo->SetNbLevels(4);
+		myLaplacianSmoothInfo->SetUnderRelaxation(0.85);
 
 		auto metricCalculator = createMetricCalculator();
 		auto criterion = createCriterion(metricCalculator);
@@ -647,10 +702,10 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 6)
+			if (x->Index() IS_EQUAL 1)
 			{
 				continue;
-			}*/
+			}
 			/*if (x->Index() IS_EQUAL 13)
 			{
 				continue;

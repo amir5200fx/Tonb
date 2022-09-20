@@ -26,10 +26,42 @@ namespace tnbLib
 		std::cout << "n2: " << node2.Coord() << std::endl;
 		std::cout << "n3: " << node3.Coord() << std::endl;*/
 
-		const auto v0 = Geo_Tools::Volume_cgal(theCoord, node2.Coord(), node1.Coord(), node3.Coord());
-		const auto v1 = Geo_Tools::Volume_cgal(theCoord, node0.Coord(), node2.Coord(), node3.Coord());
-		const auto v2 = Geo_Tools::Volume_cgal(theCoord, node1.Coord(), node0.Coord(), node3.Coord());
-		const auto v3 = Geo_Tools::Volume_cgal(theCoord, node0.Coord(), node1.Coord(), node2.Coord());
+		auto v0 = Geo_Tools::Volume_cgal(theCoord, node2.Coord(), node1.Coord(), node3.Coord());
+		auto v1 = Geo_Tools::Volume_cgal(theCoord, node0.Coord(), node2.Coord(), node3.Coord());
+		auto v2 = Geo_Tools::Volume_cgal(theCoord, node1.Coord(), node0.Coord(), node3.Coord());
+		auto v3 = Geo_Tools::Volume_cgal(theCoord, node0.Coord(), node1.Coord(), node2.Coord());
+
+		if (v0 < 0)
+		{
+			if (std::abs(v0) <= 1.0E-6)
+			{
+				v0 = std::abs(v0);
+			}
+		}
+
+		if (v1 < 0)
+		{
+			if (std::abs(v1) <= 1.0E-6)
+			{
+				v1 = std::abs(v1);
+			}
+		}
+
+		if (v2 < 0)
+		{
+			if (std::abs(v2) <= 1.0E-6)
+			{
+				v2 = std::abs(v2);
+			}
+		}
+
+		if (v3 < 0)
+		{
+			if (std::abs(v3) <= 1.0E-6)
+			{
+				v3 = std::abs(v3);
+			}
+		}
 		
 #ifdef _DEBUG
 		if (v0 < 0 OR v1 < 0 OR v2 < 0 OR v3 < 0)

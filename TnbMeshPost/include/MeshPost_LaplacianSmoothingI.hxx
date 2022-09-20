@@ -35,6 +35,24 @@ inline void tnbLib::MeshPost_LaplacianSmoothing<MetricMap>::Perform()
 			<< "no info has been loaded." << endl
 			<< abort(FatalError);
 	}
+	if (NOT AvgFun())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no Avg. function has been loaded." << endl
+			<< abort(FatalError);
+	}
+	if (NOT QualityFun())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no quality function has been loaded." << endl
+			<< abort(FatalError);
+	}
+	if (NOT Nodes())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no node array has been loaded." << endl
+			<< abort(FatalError);
+	}
 	if (verbose)
 	{
 		Info << " Laplacian smoothing has been started." << endl;
@@ -45,7 +63,7 @@ inline void tnbLib::MeshPost_LaplacianSmoothing<MetricMap>::Perform()
 	const auto nbLevels = AlgInfo()->NbLevels();
 	const auto ur = AlgInfo()->UnderRelaxation();
 
-	for (size_t iter = 1; iter <= ur; iter++)
+	for (size_t iter = 1; iter <= nbLevels; iter++)
 	{
 		if (verbose)
 		{
@@ -68,6 +86,5 @@ inline void tnbLib::MeshPost_LaplacianSmoothing<MetricMap>::Perform()
 			}
 		}
 	}
-
 	Change_IsDone() = Standard_True;
 }

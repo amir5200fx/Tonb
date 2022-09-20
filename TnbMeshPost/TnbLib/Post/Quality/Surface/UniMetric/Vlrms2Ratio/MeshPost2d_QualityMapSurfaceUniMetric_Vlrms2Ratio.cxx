@@ -42,5 +42,6 @@ tnbLib::MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio::CalcQuality
 
 	Entity_Triangle<const Pnt3d &> t3(p0, p1, p2);
 	auto t2 = Geo_Tools::CalcParametricTriangle(t3);
+
 	return Geo2d_TriangleQualityTools::Vlrms2Ratio(t2.P0(), t2.P1(), t2.P2());
 }

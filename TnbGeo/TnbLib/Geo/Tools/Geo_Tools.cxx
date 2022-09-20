@@ -394,7 +394,7 @@ tnbLib::Geo_Tools::CalcParametricTriangle
 	Dir3d v1((theTri3d.P1() - theTri3d.P0()).XYZ());
 	Dir3d v2((theTri3d.P2() - theTri3d.P0()).XYZ());
 
-	auto R = arma::inv(CalcRotationMatrix(v1, v2));
+	arma::mat33 R = arma::inv(CalcRotationMatrix(v1, v2));
 
 	arma::vec3 Q2, Q3;
 	Q2(0) = v1.X();

@@ -86,7 +86,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbMeshPost\include;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -136,7 +136,7 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)d.pdb" </Comma
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbMeshPost\include;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -170,6 +170,9 @@ del "$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName).ipdb" </Comma
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
       <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\TnbMeshPost\TnbMeshPost.vcxproj">
+      <Project>{f6a0cee5-4eae-4894-8342-4b86b2a97480}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\TnbMesh\TnbMesh.vcxproj">
       <Project>{00cf3b69-2a41-4038-8e73-fde99df1478a}</Project>

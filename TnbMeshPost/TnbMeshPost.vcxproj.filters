@@ -88,6 +88,9 @@
     <Filter Include="TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio">
       <UniqueIdentifier>{5f7bc8bc-c646-4bc4-9307-7ee08e31411d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric">
+      <UniqueIdentifier>{66a9525e-a6fd-42b8-b821-402744681114}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -165,6 +168,12 @@
     <ClInclude Include="TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio\MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio.hxx">
       <Filter>TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetric.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetricFwd.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.cxx">
@@ -187,6 +196,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio\MeshPost2d_QualityMapSurfaceUniMetric_Vlrms2Ratio.cxx">
       <Filter>TnbLib\Post\Quality\Surface\UniMetric\Vlrms2Ratio</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Surface\MeshPost2d_LaplacianSmoothingSurface.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetric.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

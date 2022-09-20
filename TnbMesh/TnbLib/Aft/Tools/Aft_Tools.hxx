@@ -262,6 +262,13 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnIso>>&
 			);
 
+		static TnbMesh_EXPORT void 
+			CalcCood3d
+			(
+				const std::vector<std::shared_ptr<Aft2d_NodeSurface>>& theNodes, 
+				const Geom_Surface&
+			);
+
 		// connect the nodes to the edges [12/19/2021 Amir]
 		template<class EdgeType>
 		static void Connect(const std::vector<std::shared_ptr<EdgeType>>&);

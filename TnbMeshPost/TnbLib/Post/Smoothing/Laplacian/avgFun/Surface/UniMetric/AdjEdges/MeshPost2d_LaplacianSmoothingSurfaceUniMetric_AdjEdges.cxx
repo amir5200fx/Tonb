@@ -34,7 +34,7 @@ tnbLib::MeshPost2d_LaplacianSmoothingSurfaceUniMetric_AdjEdges::CalcAverage
 		auto dis = Metrics()->CalcUnitDistance(theNode->Coord(), neighbor->Coord());
 		Debug_If_Condition_Message(dis <= gp::Resolution(), "zero has been encountered");
 
-		avg += (1.0 / dis)*(theNode->Coord() - neighbor->Coord());
+		avg += neighbor->Coord() + (1.0 / dis)*(theNode->Coord() - neighbor->Coord());
 	}
 	return avg / (Standard_Real)theNode->NbEdges();
 }

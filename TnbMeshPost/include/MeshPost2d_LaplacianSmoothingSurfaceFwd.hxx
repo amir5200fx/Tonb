@@ -11,7 +11,7 @@ namespace tnbLib
 	template<class MetricMap>
 	class MeshPost_LaplacianSmoothing;
 
-	typedef MeshPost_LaplacianSmoothing<Aft2d_ElementSurface>
+	typedef MeshPost_LaplacianSmoothing<Aft2d_MetricPrcsrSurface>
 		MeshPost2d_LaplacianSmoothingSurface;
 }
 

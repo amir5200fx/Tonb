@@ -47,7 +47,7 @@ namespace tnbLib
 
 	public:
 
-		static unsigned short verbose;
+		static TnbMeshPost_EXPORT unsigned short verbose;
 
 		// default constructor [9/17/2022 Amir]
 

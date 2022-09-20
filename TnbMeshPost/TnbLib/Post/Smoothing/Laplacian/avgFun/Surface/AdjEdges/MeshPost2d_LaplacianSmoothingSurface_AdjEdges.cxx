@@ -18,7 +18,6 @@ tnbLib::MeshPost2d_LaplacianSmoothingSurface_AdjEdges::CalcAverage
 	Debug_If_Condition(NOT theNode->NbEdges());
 
 	Pnt2d avg(0, 0);
-
 	for (const auto& x : theNode->RetrieveEdges())
 	{
 		auto e = x.second.lock();
@@ -34,7 +33,7 @@ tnbLib::MeshPost2d_LaplacianSmoothingSurface_AdjEdges::CalcAverage
 		auto dis = Metrics()->CalcUnitDistance(theNode->Coord(), neighbor->Coord());
 		Debug_If_Condition_Message(dis <= gp::Resolution(), "zero has been encountered");
 
-		avg += (1.0 / dis)*(theNode->Coord() - neighbor->Coord());
+		avg += neighbor->Coord() + (1.0 / dis)*(theNode->Coord() - neighbor->Coord());
 	}
 	return avg / (Standard_Real)theNode->NbEdges();
 }

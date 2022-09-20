@@ -16,6 +16,8 @@
 #include <Aft2d_gSegmentEdgeUniMetric.hxx>
 #include <Aft2d_tSegmentEdgeUniMetric.hxx>
 
+#include <Geom_Surface.hxx>
+
 std::vector<std::shared_ptr<tnbLib::Aft2d_Edge>> 
 tnbLib::Aft_Tools::UpCast(const std::vector<std::shared_ptr<Aft2d_SegmentEdge>>& theSegments)
 {
@@ -215,6 +217,21 @@ void tnbLib::Aft_Tools::ActiveBoundaryEdges(const std::vector<std::shared_ptr<Af
 void tnbLib::Aft_Tools::ActiveBoundaryEdges(const std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnIso>>& theEdges)
 {
 	Aft2d_SegmentEdgeAnIso::ActiveBoundaryEdges(UpCast(theEdges));
+}
+
+void tnbLib::Aft_Tools::CalcCood3d
+(
+	const std::vector<std::shared_ptr<Aft2d_NodeSurface>>& theNodes,
+	const Geom_Surface & theSurface
+)
+{
+	for (const auto& n : theNodes)
+	{
+		Debug_Null_Pointer(n);
+		auto[x, y] = n->Coord().Components();
+
+		n->SetCoord3D(theSurface.Value(x, y));
+	}
 }
 
 //void tnbLib::Aft_Tools::Connect(const std::vector<std::shared_ptr<Aft2d_Edge>>& theEdges)
