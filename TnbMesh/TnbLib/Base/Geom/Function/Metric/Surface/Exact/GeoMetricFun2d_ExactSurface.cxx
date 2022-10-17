@@ -4,6 +4,8 @@
 
 #include <Geom_Surface.hxx>
 
+Standard_Real tnbLib::GeoMetricFun2d_ExactSurface::Epsilon = 1.0E-6;
+
 tnbLib::Entity2d_Metric1 
 tnbLib::GeoMetricFun2d_ExactSurface::Value
 (
@@ -21,8 +23,8 @@ tnbLib::GeoMetricFun2d_ExactSurface::Value
 	Standard_Real B = D1U.Dot(D1V);
 	Standard_Real C = D1V.Dot(D1V);
 
-	if (A < 1.0E-6) A = 1.0E-6;
-	if (C < 1.0E-6) C = 1.0E-6;
+	if (A < 1.0E-6) A = Epsilon;
+	if (C < 1.0E-6) C = Epsilon;
 
 	Entity2d_Metric1 m(A, B, C);
 	return std::move(m);
