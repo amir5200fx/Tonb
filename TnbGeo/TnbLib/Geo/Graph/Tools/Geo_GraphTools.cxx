@@ -100,13 +100,15 @@ tnbLib::Geo_GraphTools::GetEdges
 			Debug_Null_Pointer(n1);
 
 			auto[isEdge, edge] = IsEdge(n0, n1);
+
 			if (NOT isEdge)
 			{
-				auto newEdge = std::make_shared<Geo2d_SegmentGraphEdge>(++k, n0, n1);
-				edges.push_back(newEdge);
+				auto newEdge = std::make_shared<Geo2d_SegmentGraphEdge>(++k, n0, n1);			
 
 				n0->InsertToEdges(newEdge->Index(), newEdge);
 				n1->InsertToEdges(newEdge->Index(), newEdge);
+
+				edges.push_back(std::move(newEdge));
 			}
 		}
 
@@ -118,13 +120,15 @@ tnbLib::Geo_GraphTools::GetEdges
 			Debug_Null_Pointer(n1);
 
 			auto[isEdge, edge] = IsEdge(n0, n1);
+
 			if (NOT isEdge)
 			{
-				auto newEdge = std::make_shared<Geo2d_SegmentGraphEdge>(++k, n0, n1);
-				edges.push_back(std::move(newEdge));
+				auto newEdge = std::make_shared<Geo2d_SegmentGraphEdge>(++k, n0, n1);		
 
 				n0->InsertToEdges(newEdge->Index(), newEdge);
 				n1->InsertToEdges(newEdge->Index(), newEdge);
+
+				edges.push_back(std::move(newEdge));
 			}
 		}
 
@@ -136,13 +140,15 @@ tnbLib::Geo_GraphTools::GetEdges
 			Debug_Null_Pointer(n1);
 
 			auto[isEdge, edge] = IsEdge(n0, n1);
+
 			if (NOT isEdge)
 			{
 				auto newEdge = std::make_shared<Geo2d_SegmentGraphEdge>(++k, n0, n1);
-				edges.push_back(std::move(newEdge));
-
+				
 				n0->InsertToEdges(newEdge->Index(), newEdge);
 				n1->InsertToEdges(newEdge->Index(), newEdge);
+
+				edges.push_back(std::move(newEdge));
 			}
 		}
 	}

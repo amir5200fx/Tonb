@@ -30,6 +30,8 @@
 class gp_Pln;
 class gp_Lin2d;
 class gp_Lin;
+class Poly_Triangulation;
+class Poly_Triangle;
 
 namespace tnbLib
 {
@@ -39,7 +41,11 @@ namespace tnbLib
 
 	public:
 
+		static TnbGeo_EXPORT const Standard_Real OnePerTwo;
+		static TnbGeo_EXPORT const Standard_Real OnePerThree;
+		static TnbGeo_EXPORT const Standard_Real OnePerFour;
 		static TnbGeo_EXPORT const Standard_Real OnePerSix;
+
 
 		class IntersectEntity2d
 		{
@@ -165,6 +171,21 @@ namespace tnbLib
 			GetIntersectionSegment
 			(
 				const std::shared_ptr<IntersectEntity2d>&
+			);
+
+		template<class Point>
+		static Point CalcCentre(const Point& theP0, const Point& theP1);
+
+		template<class Point>
+		static Point CalcCentre(const Point& theP0, const Point& theP1, const Point& theP2);
+
+		static TnbGeo_EXPORT Pnt3d
+			CalcCentre
+			(
+				const Pnt3d& theP0,
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2, 
+				const Pnt3d& theP3
 			);
 
 		static TnbGeo_EXPORT Standard_Real 
@@ -609,6 +630,20 @@ namespace tnbLib
 			(
 				const std::vector<Pnt2d>&, 
 				const Entity2d_Box&
+			);
+
+		static TnbGeo_EXPORT connectivity::triple RetrieveIds(const Poly_Triangle&);
+
+		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			RetrieveParaTriangulation
+			(
+				const Poly_Triangulation&
+			);
+
+		static TnbGeo_EXPORT std::shared_ptr<Entity3d_Triangulation> 
+			RetrieveTriangulation
+			(
+				const Poly_Triangulation&
 			);
 
 		static TnbGeo_EXPORT std::shared_ptr<Entity2d_Chain>

@@ -17,12 +17,17 @@
 
 #include <predicates.h>
 
-#ifdef Handle
-#undef Handle
-#endif // Handle
+//#ifdef Handle
+//#undef Handle
+//#endif // Handle
 #include <gp_Pln.hxx>
 #include <gp_Lin2d.hxx>
+#include <Poly_Triangulation.hxx>
+#include <Poly_Triangle.hxx>
 
+const Standard_Real tnbLib::Geo_Tools::OnePerTwo = 1.0 / 2.0;
+const Standard_Real tnbLib::Geo_Tools::OnePerThree = 1.0 / 3.0;
+const Standard_Real tnbLib::Geo_Tools::OnePerFour = 1.0 / 4.0;
 const Standard_Real tnbLib::Geo_Tools::OnePerSix = 1.0 / 6.0;
 
 Standard_Real
@@ -137,6 +142,22 @@ tnbLib::Geo_Tools::GetIntersectionSegment
 	}
 	Entity2d_Segment seg(ent->Segment.P0(), ent->Segment.P1());
 	return std::move(seg);
+}
+
+tnbLib::Pnt3d 
+tnbLib::Geo_Tools::CalcCentre
+(
+	const Pnt3d & theP0,
+	const Pnt3d & theP1, 
+	const Pnt3d & theP2, 
+	const Pnt3d & theP3
+)
+{
+	const auto xm = OnePerFour * (theP0.X() + theP1.X() + theP2.X() + theP3.X());
+	const auto ym = OnePerFour * (theP0.Y() + theP1.Y() + theP2.Y() + theP3.Y());
+	const auto zm = OnePerFour * (theP0.Z() + theP1.Z() + theP2.Z() + theP3.Z());
+	Pnt3d pm(xm, ym, zm);
+	return std::move(pm);
 }
 
 Standard_Real 
@@ -444,6 +465,71 @@ tnbLib::Geo_Tools::DistributeInDomain
 		pts.push_back(std::move(pt));
 	}
 	return std::move(pts);
+}
+
+tnbLib::connectivity::triple 
+tnbLib::Geo_Tools::RetrieveIds
+(
+	const Poly_Triangle & theTriangle
+)
+{
+	connectivity::triple t;
+	t.Value(0) = theTriangle.Value(1);
+	t.Value(1) = theTriangle.Value(2);
+	t.Value(2) = theTriangle.Value(3);
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation>
+tnbLib::Geo_Tools::RetrieveParaTriangulation
+(
+	const Poly_Triangulation & thePoly
+)
+{
+	std::vector<Pnt2d> coords;
+	coords.reserve(thePoly.NbNodes());
+	for (Standard_Integer i = 1; i <= thePoly.NbNodes(); i++)
+	{
+		const auto& node = thePoly.UVNode(i);
+		Pnt2d pt(node);
+		coords.push_back(std::move(pt));
+	}
+	std::vector<connectivity::triple> ids;
+	ids.reserve(thePoly.NbTriangles());
+	for (Standard_Integer i = 1; i <= thePoly.NbTriangles(); i++)
+	{
+		const auto& tri = thePoly.Triangle(i);
+		auto id = RetrieveIds(tri);
+		ids.push_back(std::move(id));
+	}
+	auto t = std::make_shared<Entity2d_Triangulation>(std::move(coords), std::move(ids));
+	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Triangulation> 
+tnbLib::Geo_Tools::RetrieveTriangulation
+(
+	const Poly_Triangulation & thePoly
+)
+{
+	std::vector<Pnt3d> coords;
+	coords.reserve(thePoly.NbNodes());
+	for (Standard_Integer i = 1; i <= thePoly.NbNodes(); i++)
+	{
+		const auto& node = thePoly.Node(i);
+		Pnt3d pt(node);
+		coords.push_back(std::move(pt));
+	}
+	std::vector<connectivity::triple> ids;
+	ids.reserve(thePoly.NbTriangles());
+	for (Standard_Integer i = 1; i <= thePoly.NbTriangles(); i++)
+	{
+		const auto& tri = thePoly.Triangle(i);
+		auto id = RetrieveIds(tri);
+		ids.push_back(std::move(id));
+	}
+	auto t = std::make_shared<Entity3d_Triangulation>(std::move(coords), std::move(ids));
+	return std::move(t);
 }
 
 std::shared_ptr<tnbLib::Entity2d_Chain> 
