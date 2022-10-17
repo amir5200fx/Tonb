@@ -10,6 +10,10 @@
 #include <BoundarySizeMap3d_UniformSegmentTool.hxx>
 #include <BoundarySizeMap3d_UniformFaceTool_Info.hxx>
 #include <GeoSizeFun3d_Background.hxx>
+#include <Geo3d_ApprxSurfPatch_Info.hxx>
+#include <Geo3d_PatchCloud_EdgeSamplesLev1.hxx>
+#include <Geo3d_PatchCloud_TriSamplesLev1.hxx>
+#include <Geo3d_PatchCloud_InternalSamples.hxx>
 #include <Cad_TModel.hxx>
 #include <Cad_Tools.hxx>
 #include <TModel_CornerManager.hxx>
@@ -34,6 +38,10 @@ namespace tnbLib
 
 	static std::shared_ptr<Mesh3d_ReferenceValues> myRef;
 	static std::shared_ptr<Geo3d_SizeFunction> mySizeFun;
+
+	static std::shared_ptr<Geo3d_PatchCloud_EdgeSamples> myEdgeSamples;
+	static std::shared_ptr<Geo3d_PatchCloud_TriSamples> myTrisSamples;
+	static std::shared_ptr<Geo3d_PatchCloud> myCloud;
 
 	static double myTol = 1.0E-6;
 	static unsigned int myMaxUnbalancing = 2;
@@ -268,7 +276,14 @@ namespace tnbLib
 	std::shared_ptr<Mesh3d_BoundarySizeMapTool> createBoundarySizeMap(const std::string& name, const std::shared_ptr<Cad_TModel>& model)
 	{
 		checkLoad();
-		myBoundarySizeMaps->CreateSizeMap(name, model, myFaceSizeMapInfo);
+		if (NOT myCloud)
+		{
+			myEdgeSamples = std::make_shared<Geo3d_PatchCloud_EdgeSamplesLev1>();
+			myTrisSamples = std::make_shared<Geo3d_PatchCloud_TriSamplesLev1>();
+
+			myCloud = std::make_shared<Geo3d_PatchCloud_InternalSamples>(myEdgeSamples, myTrisSamples);
+		}
+		myBoundarySizeMaps->CreateSizeMap(name, model, myCloud, myFaceSizeMapInfo);
 		return myBoundarySizeMaps->SelectMap(name);
 	}
 
@@ -432,6 +447,10 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		const auto& approxInfo = myFaceSizeMapInfo->ApprxSurfInfo();
+		approxInfo->SetMinSubdivide(2);
+		approxInfo->SetMaxSubdivide(4);
+
 		{
 			// main scope [7/20/2022 Amir]
 			Global_Timer myTimer;
@@ -439,7 +458,7 @@ namespace tnbLib
 
 			if (verbose > 1)
 			{
-				BoundarySizeMap3d_UniformFaceTool::verbose = verbose;
+				Mesh_SizeMapToolBaseNonTemplate::verbose = verbose;
 				BoundarySizeMap3d_UniformSegmentTool::verbose = verbose;
 				Mesh3d_UnionSizeMap::verbose = verbose;
 			}
