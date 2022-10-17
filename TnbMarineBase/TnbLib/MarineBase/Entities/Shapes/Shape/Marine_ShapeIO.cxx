@@ -1,5 +1,9 @@
 #include <Marine_Shape.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
 #include <BRepTools.hxx>
 #include <BRep_Builder.hxx>
 

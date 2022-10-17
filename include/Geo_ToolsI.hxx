@@ -27,6 +27,24 @@ tnbLib::Geo_Tools::RadianToDegree
 	return Radian * 180.0 / M_PI;
 }
 
+namespace tnbLib
+{
+
+	template<class Point>
+	inline Point Geo_Tools::CalcCentre(const Point & theP0, const Point & theP1)
+	{
+		auto Pm = MEAN(theP0, theP1);
+		return std::move(Pm);
+	}
+
+	template<class Point>
+	inline Point Geo_Tools::CalcCentre(const Point & theP0, const Point & theP1, const Point & theP2)
+	{
+		auto Pm = OnePerThree * (theP0 + theP1 + theP2);
+		return std::move(Pm);
+	}
+}
+
 inline Standard_Real 
 tnbLib::Geo_Tools::Distance_cgal
 (

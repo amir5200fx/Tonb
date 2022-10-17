@@ -373,6 +373,12 @@
     <Filter Include="TnbLib\Hydrostatic\TankCapacity">
       <UniqueIdentifier>{b77718a2-7389-4d83-88ea-eb84ac005669}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrostatic\SolutionData\Analysis">
+      <UniqueIdentifier>{d7400a73-4664-4ee7-9c67-bf31561c3895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrostatic\SolutionData\Analysis\Displacement">
+      <UniqueIdentifier>{0da7a808-b791-4c2e-97a8-35bf2d6e4fbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrostatic\BonjeanCurves\HydStatic_Bonjean.hxx">
@@ -797,6 +803,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrostatic\TankCapacity\HydStatic_TankCapacity.hxx">
       <Filter>TnbLib\Hydrostatic\TankCapacity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrostatic\SolutionData\Analysis\Displacement\HydStatic_SolutionData_DisplAnalysis.hxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\Analysis\Displacement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1252,6 +1261,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrostatic\TankCapacity\HydStatic_TankCapacity.cxx">
       <Filter>TnbLib\Hydrostatic\TankCapacity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\SolutionData\Analysis\Displacement\HydStatic_SolutionData_DisplAnalysisIO.cxx">
+      <Filter>TnbLib\Hydrostatic\SolutionData\Analysis\Displacement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

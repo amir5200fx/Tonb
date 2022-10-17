@@ -42,10 +42,11 @@ namespace tnbLib
 		(
 			const std::shared_ptr<Mesh3d_ReferenceValues>& theRef,
 			const std::shared_ptr<Entity3d_Box>& theDomain,
+			const std::shared_ptr<Geo3d_PatchCloud>& theCloud,
 			const std::shared_ptr<Cad_TModel>& theModel,
 			const std::shared_ptr<BoundarySizeMap3d_UniformFaceTool_Info>& theInfo
 		)
-			: BoundarySizeMap3d_FaceTool(theRef, theDomain, theModel)
+			: BoundarySizeMap3d_FaceTool(theRef, theDomain, theCloud, theModel)
 			, theInfo_(theInfo)
 		{}
 
