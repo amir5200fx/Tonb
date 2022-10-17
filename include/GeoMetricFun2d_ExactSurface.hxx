@@ -32,6 +32,7 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT Standard_Real Epsilon;
 
 		// constructors [12/24/2021 Amir]
 

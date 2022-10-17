@@ -86,6 +86,13 @@ namespace tnbLib
 		Aft_MetricPrcsr()
 		{}
 
+		// Protected functions and operators [10/17/2022 Amir]
+
+		void OverrideInfo(const std::shared_ptr<info>& theInfo)
+		{
+			theInfo_ = theInfo;
+		}
+
 	public:
 
 

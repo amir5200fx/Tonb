@@ -65,6 +65,13 @@ namespace tnbLib
 			, theDimSize_(RealLast())
 		{}
 
+		// Protected functions and operators [10/17/2022 Amir]
+
+		void OverrideBaseInfo(const std::shared_ptr<info>& theInfo)
+		{
+			theInfo_ = theInfo;
+		}
+
 	public:
 
 
