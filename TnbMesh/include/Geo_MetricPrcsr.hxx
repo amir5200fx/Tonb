@@ -52,6 +52,18 @@ namespace tnbLib
 		Geo_MetricPrcsr()
 		{}
 
+		// Protected functions and operators [10/17/2022 Amir]
+
+		void OverrideSizeFunction(const std::shared_ptr<SizeFun>& theFun)
+		{
+			theSizeFunction_ = theFun;
+		}
+
+		void OverrideMetricFunction(const std::shared_ptr<MetricFun>& theFun)
+		{
+			theMetricFunction_ = theFun;
+		}
+
 	public:
 
 		typedef Geo_MetricPrcsr_Base<MetricFun> base;
@@ -111,6 +123,20 @@ namespace tnbLib
 		const std::shared_ptr<MetricFun>& MetricFunction() const
 		{
 			return theMetricFunction_;
+		}
+
+		virtual Standard_Boolean CanProvideInitCoord() const
+		{
+			return Standard_False;
+		}
+
+		// WARNING! this function is supported only in libs that provide the initial coord. [10/17/2022 Amir]
+		virtual Point InitCoord() const
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is not supposed to be called." << endl
+				<< abort(FatalError);
+			return Point::null;
 		}
 
 		Point CalcCentre
@@ -264,6 +290,20 @@ namespace tnbLib
 		const std::shared_ptr<SizeFun>& SizeFunction() const
 		{
 			return theSizeFunction_;
+		}
+
+		virtual Standard_Boolean CanProvideInitCoord() const
+		{
+			return Standard_False;
+		}
+
+		// WARNING! this function is supported only in libs that provide the initial coord. [10/17/2022 Amir]
+		virtual Point InitCoord() const
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is not supposed to be called." << endl
+				<< abort(FatalError);
+			return Point::null;
 		}
 
 		Point CalcCentre

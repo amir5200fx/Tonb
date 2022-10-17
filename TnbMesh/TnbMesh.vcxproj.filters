@@ -2065,6 +2065,12 @@
     <Filter Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1">
       <UniqueIdentifier>{4f375bf1-dbed-4324-8c82-5856fd0c70b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\RefineElmntSize">
+      <UniqueIdentifier>{f9e4b213-85f0-430d-8617-f07f562ef012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize">
+      <UniqueIdentifier>{3b00fa85-2189-4fb0-b145-ca37d0e0c702}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4935,6 +4941,12 @@
     <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_PatchCloud_InternalSamples.hxx">
       <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Surface\RefineElmntSize\Aft2d_MetricPrcsrSurface_RefineH.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface\RefineElmntSize</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize\Aft2d_MetricPrcsrSurfaceUniMetric_RefineH.hxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6379,6 +6391,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\BoundarySizeMap3d_FaceToolIO.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Surface\RefineElmntSize\Aft2d_MetricPrcsrSurface_RefineH.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface\RefineElmntSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Surface\RefineElmntSize\Aft2d_MetricPrcsrSurface_RefineHIO.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface\RefineElmntSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize\Aft2d_MetricPrcsrSurfaceUniMetric_RefineH.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize\Aft2d_MetricPrcsrSurfaceUniMetric_RefineHIO.cxx">
+      <Filter>TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
