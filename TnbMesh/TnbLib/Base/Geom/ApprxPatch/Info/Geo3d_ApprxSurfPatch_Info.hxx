@@ -37,6 +37,7 @@ namespace tnbLib
 			ar & theMaxUnbalancing_;
 
 			ar & theTolerance_;
+			ar & doBalance_;
 		}
 
 	public:

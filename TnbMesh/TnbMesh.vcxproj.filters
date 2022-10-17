@@ -2038,6 +2038,33 @@
     <Filter Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info">
       <UniqueIdentifier>{41425f2d-fbd1-49d7-bafa-0232597fc596}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud">
+      <UniqueIdentifier>{104b0071-8e40-4e5b-bef8-3ae209e0f7b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\none">
+      <UniqueIdentifier>{9c824304-0359-4b8e-8021-10e69df05555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Samples">
+      <UniqueIdentifier>{4ee9a7b9-be6d-462b-9bcd-f2e59e398b27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples">
+      <UniqueIdentifier>{934d0eb9-d558-447a-94e0-fbb3fcaa6e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples">
+      <UniqueIdentifier>{26df5708-df88-4875-a2b0-db4889a8caea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev0">
+      <UniqueIdentifier>{3ee756d8-289b-4153-a430-d0cb5e272855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev1">
+      <UniqueIdentifier>{5028b565-c0cb-4d62-a1ec-fbb8fc37eb36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev0">
+      <UniqueIdentifier>{b1e3e182-9810-422e-b09e-0b5f51068f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1">
+      <UniqueIdentifier>{4f375bf1-dbed-4324-8c82-5856fd0c70b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4881,6 +4908,33 @@
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info\BoundarySizeMap3d_UniformFaceTool_Info.hxx">
       <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Geo3d_PatchCloud.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\None\Geo3d_PatchCloud_NoneInternal.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\none</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Geo3d_PatchCloud_EdgeSamples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\EdgeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev0\Geo3d_PatchCloud_EdgeSamplesLev0.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev0</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Geo3d_PatchCloud_TriSamples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\TriSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev0\Geo3d_PatchCloud_TriSamplesLev0.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev0</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1\Geo3d_PatchCloud_TriSamplesLev1.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev1\Geo3d_PatchCloud_EdgeSamplesLev1.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_PatchCloud_InternalSamples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6286,6 +6340,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info\BoundarySizeMap3d_UniformFaceTool_InfoIO.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev0\Geo3d_PatchCloud_EdgeSamplesLev0.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev0\Geo3d_PatchCloud_TriSamplesLev0.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1\Geo3d_PatchCloud_TriSamplesLev1.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev1\Geo3d_PatchCloud_EdgeSamplesLev1.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_PatchCloud_InternalSamples.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\None\Geo3d_PatchCloud_NoneInternal.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\none</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev0\Geo3d_PatchCloud_TriSamplesLev0IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1\Geo3d_PatchCloud_TriSamplesLev1IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\TriSamples\Lev1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev0\Geo3d_PatchCloud_EdgeSamplesLev0IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev1\Geo3d_PatchCloud_EdgeSamplesLev1IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples\EdgeSamples\Lev1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_PatchCloud_InternalSamplesIO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\None\Geo3d_PatchCloud_NoneInternalIO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\none</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\BoundarySizeMap3d_FaceToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

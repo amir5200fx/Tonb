@@ -12,6 +12,8 @@ namespace tnbLib
 
 	// Forward Declarations [7/10/2022 Amir]
 
+	class Geo3d_PatchCloud;
+
 	class BoundarySizeMap3d_FaceTool
 		: public Mesh3d_BoundarySizeMapTool
 	{
@@ -19,17 +21,12 @@ namespace tnbLib
 
 		Standard_Integer theMaxNbCorrIters_;
 
+		std::shared_ptr<Geo3d_PatchCloud> theCloud_;
+
 
 		// private functions and operators [7/20/2022 Amir]
 
-		friend class boost::serialization::access;
-
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int file_version)
-		{
-			ar & boost::serialization::base_object<Mesh3d_BoundarySizeMapTool>(*this);
-			ar & theMaxNbCorrIters_;
-		}
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
 
 	protected:
 
@@ -44,10 +41,12 @@ namespace tnbLib
 		(
 			const std::shared_ptr<Mesh3d_ReferenceValues>& theRef,
 			const std::shared_ptr<Entity3d_Box>& theDomain,
+			const std::shared_ptr<Geo3d_PatchCloud>& theCloud,
 			const std::shared_ptr<Cad_TModel>& theModel
 		)
 			: Mesh3d_BoundarySizeMapTool(theModel, theDomain, theRef)
 			, theMaxNbCorrIters_(DEFAULT_MAX_NB_CORR_ITERS)
+			, theCloud_(theCloud)
 		{}
 
 	public:
@@ -63,11 +62,25 @@ namespace tnbLib
 			return theMaxNbCorrIters_;
 		}
 
+		const auto& Cloud() const
+		{
+			return theCloud_;
+		}
+
 		void SetMaxNbCorrIters(const Standard_Integer theIters)
 		{
 			theMaxNbCorrIters_ = theIters;
 		}
 
+		void SetCloud(const std::shared_ptr<Geo3d_PatchCloud>& theCloud)
+		{
+			theCloud_ = theCloud;
+		}
+
+		void SetCloud(std::shared_ptr<Geo3d_PatchCloud>&& theCloud)
+		{
+			theCloud_ = std::move(theCloud);
+		}
 
 		TnbMesh_EXPORT std::vector<std::shared_ptr<TModel_Surface>> RetrieveFaces() const;
 

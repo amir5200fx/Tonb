@@ -11,6 +11,7 @@ namespace tnbLib
 	// Forward Declarations [7/18/2022 Amir]
 	class BoundarySizeMap3d_UniformFaceTool;
 	class BoundarySizeMap3d_UniformFaceTool_Info;
+	class Geo3d_PatchCloud;
 
 	class Mesh3d_UniformBoundarySizeMapControl
 		: public Mesh3d_BoundarySizeMapControl
@@ -61,6 +62,7 @@ namespace tnbLib
 		(
 			const word& theName, 
 			const std::shared_ptr<Cad_TModel>& theGeometry, 
+			const std::shared_ptr<Geo3d_PatchCloud>& theCloud,
 			const std::shared_ptr<BoundarySizeMap3d_UniformFaceTool_Info>& theInfo
 		);
 

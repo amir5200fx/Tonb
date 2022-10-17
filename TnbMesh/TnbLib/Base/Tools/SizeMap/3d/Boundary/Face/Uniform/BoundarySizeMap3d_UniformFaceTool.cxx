@@ -8,6 +8,7 @@
 #include <TModel_Surface.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_GeomSurface.hxx>
+#include <Geo3d_PatchCloud.hxx>
 #include <Geo3d_ApprxSurfPatch.hxx>
 #include <Geo3d_ApprxSurfPatch_Info.hxx>
 #include <Geo3d_ApprxSurfPatch_hSizeFunMode.hxx>
@@ -98,6 +99,13 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 			<< "no info has been loaded." << endl
 			<< abort(FatalError);
 	}
+
+	if (NOT Cloud())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no cloud has been found." << endl
+			<< abort(FatalError);
+	}
 	
 	auto faces = RetrieveFaces();
 	if (faces.empty())
@@ -118,7 +126,7 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 
 	const auto mergCrit = 1.0E-5*expB.Diameter();
 
-	AlgInfo()->ApprxSurfInfo()->SetTolerance(elemSize);
+	//AlgInfo()->ApprxSurfInfo()->SetTolerance(elemSize);
 
 	Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine;
 	engine.SetMaxUnbalancing(AlgInfo()->UnBalancing());
@@ -144,12 +152,20 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 					<< "the face has no geometry!" << endl
 					<< abort(FatalError);
 			}
+
+			const auto& poly = x->RetrieveTriangulation();
+			if (NOT poly)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the surface has no triangulation." << endl
+					<< abort(FatalError);
+			}
 			const auto& geometry = x->GeomSurface();
-			const auto b = std::make_shared<Entity2d_Box>(x->ParaBoundingBox());
+			//const auto b = std::make_shared<Entity2d_Box>(x->ParaBoundingBox());
 
-			auto back = RetrieveBackMesh(x, *b);
+			//auto back = RetrieveBackMesh(x, *b);
 
-			auto approx = 
+			/*auto approx = 
 				std::make_shared<Geo3d_ApprxSurfPatch>
 				(
 					geometry->Geometry(), b, back,
@@ -159,8 +175,12 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 			approx->Perform();
 			Debug_If_Condition_Message(NOT approx->IsDone(), "the application is not performed.");
 
-			auto inners = RetrieveInnerCoords(*approx->Approximated(), *back);
-			for (const auto& p2 : inners)
+			auto inners = RetrieveInnerCoords(*approx->Approximated(), *back);*/
+
+			auto tri = Cad_Tools::ParaTriangulation(*poly);
+			auto samples = Cloud()->CalcCloud(*tri);
+			//for (const auto& p2 : inners)
+			for (const auto& p2 : samples)
 			{
 				auto p = geometry->Value(p2);
 				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);

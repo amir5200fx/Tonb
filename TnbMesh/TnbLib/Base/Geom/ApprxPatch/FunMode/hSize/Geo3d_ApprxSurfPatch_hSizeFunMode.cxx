@@ -4,21 +4,36 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <Geom_Surface.hxx>
+
 Standard_Integer tnbLib::Geo3d_ApprxSurfPatch_hSizeFunMode::DEFAULT_NB_SAMPLES = 3;
 
 namespace tnbLib
 {
 
-	auto CalcDistance(const Pnt2d& theP0, const Pnt2d& theP1, const Geom_Surface& theSurface, const Standard_Integer n)
+	auto CalcDistance
+	(
+		const Pnt2d& theP0, 
+		const Pnt2d& theP1, 
+		const Geom_Surface& theSurface,
+		const Standard_Integer n
+	)
 	{		
 		const auto du = (theP1 - theP0) / (Standard_Real)n;
 		Standard_Real dis = 0;
 		auto p0 = theP0;
-		for (size_t i = 0; i <= n; i++)
+		auto p03d = theSurface.Value(p0.X(), p0.Y());
+		for (size_t i = 1; i <= n - 1; i++)
 		{
 			auto p = theP0 + (Standard_Real)i*du;
-			dis += p0.Distance(p);
+			auto p3d = theSurface.Value(p.X(), p.Y());
+			dis += p03d.Distance(p3d);
 			p0 = p;
+			p03d = p3d;
+		}
+		{// the last iteration [10/8/2022 Amir]
+			auto p3d = theSurface.Value(theP0.X(), theP0.Y());
+			dis += p03d.Distance(p3d);
 		}
 		return dis;
 	}
