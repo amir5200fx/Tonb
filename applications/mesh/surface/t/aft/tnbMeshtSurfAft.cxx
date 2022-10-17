@@ -10,8 +10,8 @@
 #include <Aft2d_tSolutionDataSurface.hxx>
 #include <Aft2d_tPlnCurveSurfaceUniMetric.hxx>
 #include <Aft2d_tPlnCurveSurface.hxx>
-#include <Aft2d_MetricPrcsrSurface.hxx>
-#include <Aft2d_MetricPrcsrSurfaceUniMetric.hxx>
+#include <Aft2d_MetricPrcsrSurface_RefineH.hxx>
+#include <Aft2d_MetricPrcsrSurfaceUniMetric_RefineH.hxx>
 #include <Aft2d_tBoundaryOfPlaneSurfaceUniMetric.hxx>
 #include <Aft2d_tBoundaryOfPlaneSurface.hxx>
 #include <Aft2d_BoundaryOfPlaneAnIso_Info.hxx>
@@ -121,6 +121,9 @@ namespace tnbLib
 
 	static auto mySampleType = Geo2d_SamplePoints::Type::five_points;
 	static auto myMetricApproxTol = Cad_ApprxMetricCriterion::DEFAULT_TOLERANCE;
+
+	static auto myCoeff = 0.3;
+	static auto myDelta = 0.2;
 
 	void setVerbose(unsigned int i)
 	{
@@ -412,9 +415,16 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 			auto metricFun = std::make_shared<GeoMetricFun2d_Plane>(gPlane, box);
-			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurfaceUniMetric>(sizeFun, metricFun, theInfo);
+			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurfaceUniMetric_RefineH>();
+			metricPrcsr->SetCoeff(myCoeff);
+			metricPrcsr->SetDelta(myDelta);
+			metricPrcsr->SetSizeFun(sizeFun);
+			metricPrcsr->SetMetricFun(metricFun);
+			metricPrcsr->SetInfo(theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
 			metricPrcsr->SetGeometry(geometry);
+
+			metricPrcsr->SetNodeCalculator(theUniMetricCalculator);
 
 			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(theUniMetricCalculator))
 			{
@@ -470,9 +480,16 @@ namespace tnbLib
 			auto sizeFun = std::make_shared<GeoSizeFun2d_Surface>(geometry, theSizeFun, box);
 
 			auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(geometry, box);
-			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface>(sizeFun, metricFun, theInfo);
+			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurface_RefineH>();
+			metricPrcsr->SetCoeff(myCoeff);
+			metricPrcsr->SetDelta(myDelta);
+			metricPrcsr->SetSizeFun(sizeFun);
+			metricPrcsr->SetMetricFun(metricFun);
+			metricPrcsr->SetInfo(theInfo);
 			metricPrcsr->SetDimSize(box.Diameter());
 			metricPrcsr->SetGeometry(geometry);
+
+			metricPrcsr->SetNodeCalculator(theCalculator);
 
 			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurface_Altr>(theCalculator))
 			{
