@@ -133,6 +133,8 @@ namespace tnbLib
 			return (Standard_Integer)theBoundaries_.size();
 		}
 
+		Standard_Boolean HasSizeMap(const word& theName);
+
 		const auto& References() const
 		{
 			return theReference_;
@@ -153,6 +155,7 @@ namespace tnbLib
 		void Perform();
 
 		void Import(const word& theName, const std::shared_ptr<sizeMapTool>& theSizeMap);
+		void Remove(const word& theName);
 
 		void LoadReference(const std::shared_ptr<meshRefValuesType>& theRef)
 		{
