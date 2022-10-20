@@ -10,6 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations [7/18/2022 Amir]
 	class BoundarySizeMap3d_UniformSegmentTool;
+	class Geo3d_SegmentCloud;
 
 	class Mesh3d_UniformFeatureSizeMapControl
 		: public Mesh3d_FeatureSizeMapControl
@@ -50,7 +51,12 @@ namespace tnbLib
 		TnbMesh_EXPORT std::shared_ptr<BoundarySizeMap3d_UniformSegmentTool> 
 			SelectMap(const word& theName) const;
 
-		TnbMesh_EXPORT void CreateSizeMap(const word& theName, const std::shared_ptr<Cad_TModel>& theGeometry);
+		TnbMesh_EXPORT void CreateSizeMap
+		(
+			const word& theName, 
+			const std::shared_ptr<Cad_TModel>& theGeometry, 
+			const std::shared_ptr<Geo3d_SegmentCloud>& theCloud
+		);
 	};
 }
 

@@ -46,9 +46,10 @@ namespace tnbLib
 		(
 			const std::shared_ptr<Mesh3d_ReferenceValues>& theRef, 
 			const std::shared_ptr<Entity3d_Box>& theDomain,
+			const std::shared_ptr<Geo3d_SegmentCloud>& theCloud,
 			const std::shared_ptr<Cad_TModel>& theModel
 		)
-			: BoundarySizeMap3d_SegmentTool(theRef, theDomain, theModel)
+			: BoundarySizeMap3d_SegmentTool(theRef, theDomain, theCloud, theModel)
 			, theInfo_(DEFAULT_INFO)
 			, PostBalance_(POST_BALANCE)
 			, theBucketSize_(DEFAULT_BUCKET_SIZE)
