@@ -25,6 +25,8 @@
 #include <Aft2d_AltrOptNodeSurface_SubTri2.hxx>
 #include <Aft2d_EdgeSurface.hxx>
 #include <Aft2d_OptNodeAnIso_nonIterAdaptiveInfo.hxx>
+#include <Aft2d_OptNodeSurfaceUniMetric_IterAdaptive.hxx>
+#include <Aft2d_OptNodeSurfaceUniMetric_Standard.hxx>
 #include <Aft_Tools.hxx>
 #include <Aft_SizeCorr_IterativeInfo.hxx>
 #include <Aft_SizeCorr_FractionInfo.hxx>
@@ -415,6 +417,8 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 			auto metricFun = std::make_shared<GeoMetricFun2d_Plane>(gPlane, box);
+
+			//Aft2d_MetricPrcsrSurfaceUniMetric xx(sizeFun, metricFun, theInfo);
 			auto metricPrcsr = std::make_shared<Aft2d_MetricPrcsrSurfaceUniMetric_RefineH>();
 			metricPrcsr->SetCoeff(myCoeff);
 			metricPrcsr->SetDelta(myDelta);
@@ -426,7 +430,7 @@ namespace tnbLib
 
 			metricPrcsr->SetNodeCalculator(theUniMetricCalculator);
 
-			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(theUniMetricCalculator))
+			if (auto optNodeAlg = std::dynamic_pointer_cast<Aft2d_OptNodeSurfaceUniMetric_Standard>(theUniMetricCalculator))
 			{
 				optNodeAlg->SetMetricMap(metricPrcsr);
 			}
@@ -611,7 +615,7 @@ namespace tnbLib
 
 		myMaxLev = 7;
 
-		myMetricApproxInfo = std::make_shared<Cad_ApprxMetricInfo>();
+		/*myMetricApproxInfo = std::make_shared<Cad_ApprxMetricInfo>();
 		myMetricApproxInfo->SetMinLevel(myMinLev);
 		myMetricApproxInfo->SetMaxLevel(myMaxLev);
 		myMetricApproxInfo->SetUnbalancing(myUnBalance);
@@ -620,7 +624,7 @@ namespace tnbLib
 		myMetricApproxInfo->MergeInfoRef().SetResolution(myRes);
 
 		myMetricApproxInfo->OverrideSamples(samples);
-		myMetricApproxInfo->OverrideCriterion(criterion);
+		myMetricApproxInfo->OverrideCriterion(criterion);*/
 
 		const auto& sizeFun3d = mySoluData->SizeFun();
 
@@ -631,14 +635,16 @@ namespace tnbLib
 
 		auto iterInfo = std::make_shared<Aft_SizeCorr_IterativeInfo>();
 		iterInfo->SetIgnoreNonConvergency(Standard_True);
-		iterInfo->SetMaxNbIters(40);  // default: 30 [5/24/2022 Amir]
-		iterInfo->SetTolerance(1.0E-4);  // default: 1.0E-3 [5/24/2022 Amir]
-		iterInfo->SetUnderRelaxation(0.95);  // default: 0.85 [5/24/2022 Amir]
+		iterInfo->SetMaxNbIters(100);  // default: 30 [5/24/2022 Amir]
+		iterInfo->SetTolerance(1.0E-5);  // default: 1.0E-3 [5/24/2022 Amir]
+		iterInfo->SetUnderRelaxation(0.85);  // default: 0.85 [5/24/2022 Amir]
 
 		auto fracInfo = std::make_shared<Aft_SizeCorr_FractionInfo>();
 
-		auto anIsoOptNodeInfo = std::make_shared<Aft2d_OptNodeAnIso_nonIterAdaptiveInfo>(iterInfo, fracInfo);
-		auto anIsoOptNodeUniMetric = std::make_shared<Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptive>(anIsoOptNodeInfo);
+		//auto anIsoOptNodeInfo = std::make_shared<Aft2d_OptNodeAnIso_nonIterAdaptiveInfo>(iterInfo, fracInfo);
+		//auto anIsoOptNodeUniMetric = std::make_shared<Aft2d_OptNodeSurfaceUniMetric_IterAdaptive>(iterInfo);
+		auto anIsoOptNodeUniMetric = std::make_shared<Aft2d_OptNodeSurfaceUniMetric_Standard>();
+
 		//auto anIsoOptNode = std::make_shared<Aft2d_OptNodeSurface_nonIterAdaptive>(anIsoOptNodeInfo);
 
 		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_MetricCorr>();
@@ -652,10 +658,10 @@ namespace tnbLib
 		/*auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_NelderMead>();
 		anIsoOptNode_altrAlg->SetInfo(nelderInfo);*/
 
-		auto bisectInfo = std::make_shared<NumAlg_BisectionSolver_Info>();
+		/*auto bisectInfo = std::make_shared<NumAlg_BisectionSolver_Info>();
 		bisectInfo->SetDelta(1.0E-4);
 		bisectInfo->SetTolerance(1.0E-4);
-		bisectInfo->SetMaxIterations(20);
+		bisectInfo->SetMaxIterations(20);*/
 
 		auto anIsoOptNode_altrAlg = std::make_shared<Aft2d_AltrOptNodeSurface_SubTri>();
 		anIsoOptNode_altrAlg->SetSizeCorrInfo(iterInfo);
@@ -719,10 +725,14 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			if (x->Index() IS_EQUAL 1)
+			/*if (x->Index() NOT_EQUAL 5)
 			{
 				continue;
-			}
+			}*/
+			/*if (x->Index() IS_EQUAL 1)
+			{
+				continue;
+			}*/
 			/*if (x->Index() IS_EQUAL 13)
 			{
 				continue;

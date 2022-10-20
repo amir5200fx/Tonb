@@ -14,6 +14,8 @@
 #include <Geo3d_PatchCloud_EdgeSamplesLev1.hxx>
 #include <Geo3d_PatchCloud_TriSamplesLev1.hxx>
 #include <Geo3d_PatchCloud_InternalSamples.hxx>
+#include <Geo3d_SegmentCloud_InternalSamples.hxx>
+#include <Geo3d_SegmentCloud_SamplesLev1.hxx>
 #include <Cad_TModel.hxx>
 #include <Cad_Tools.hxx>
 #include <TModel_CornerManager.hxx>
@@ -42,6 +44,9 @@ namespace tnbLib
 	static std::shared_ptr<Geo3d_PatchCloud_EdgeSamples> myEdgeSamples;
 	static std::shared_ptr<Geo3d_PatchCloud_TriSamples> myTrisSamples;
 	static std::shared_ptr<Geo3d_PatchCloud> myCloud;
+
+	static std::shared_ptr<Geo3d_SegmentCloud> mySegmentCloud;
+	static std::shared_ptr<Geo3d_SegmentCloud_SamplesLev1> mySegmentSamples;
 
 	static double myTol = 1.0E-6;
 	static unsigned int myMaxUnbalancing = 2;
@@ -290,7 +295,13 @@ namespace tnbLib
 	std::shared_ptr<Mesh3d_BoundarySizeMapTool> createFeatureSizeMap(const std::string& name, const std::shared_ptr<Cad_TModel>& model)
 	{
 		checkLoad();
-		myFeatureSizeMaps->CreateSizeMap(name, model);
+		if (NOT mySegmentCloud)
+		{
+			mySegmentSamples = std::make_shared<Geo3d_SegmentCloud_SamplesLev1>();
+
+			mySegmentCloud = std::make_shared<Geo3d_SegmentCloud_InternalSamples>(mySegmentSamples);
+		}
+		myFeatureSizeMaps->CreateSizeMap(name, model, mySegmentCloud);
 		return myFeatureSizeMaps->SelectMap(name);
 	}
 
