@@ -106,11 +106,14 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 			auto vtx = std::make_shared<TModel_Vertex>(0, std::move(pm));
 
 			auto curveOnSurface = std::make_shared<TModel_Curve>(Curve);
-			newEdge = std::make_shared<TModel_RingEdge>(vtx, curveOnSurface, curveOnPlane);
-			Debug_Null_Pointer(newEdge);
+			auto edge = std::make_shared<TModel_RingEdge>(vtx, curveOnSurface, curveOnPlane);
+			Debug_Null_Pointer(edge);
 
-			auto tri = Cad_Tools::RetrievePolygonOnTriangulation(Shape(), Face());
-			newEdge->SetTriangulation(std::move(tri));
+			auto [tri, params] = Cad_Tools::RetrievePolygonOnTriangulation(Shape(), Face());
+			edge->SetMesh(std::move(tri));
+			edge->SetParaMesh(std::move(params));
+
+			newEdge = std::move(edge);
 		}
 		else
 		{
@@ -121,11 +124,14 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 			auto vtx1 = std::make_shared<TModel_Vertex>(0, std::move(p1));
 
 			auto curveOnSurface = std::make_shared<TModel_Curve>(Curve);
-			newEdge = std::make_shared<TModel_SegmentEdge>(vtx0, vtx1, curveOnSurface, curveOnPlane);
-			Debug_Null_Pointer(newEdge);
+			auto edge = std::make_shared<TModel_SegmentEdge>(vtx0, vtx1, curveOnSurface, curveOnPlane);
+			Debug_Null_Pointer(edge);
 
-			auto tri = Cad_Tools::RetrievePolygonOnTriangulation(Shape(), Face());
-			newEdge->SetTriangulation(std::move(tri));
+			auto [tri, params] = Cad_Tools::RetrievePolygonOnTriangulation(Shape(), Face());
+			edge->SetMesh(std::move(tri));
+			edge->SetParaMesh(std::move(params));
+
+			newEdge = std::move(edge);
 		}
 	}
 	else

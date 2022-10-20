@@ -1788,7 +1788,7 @@ tnbLib::Cad_Tools::RetrieveNonSingularEdges
 	return std::move(gedges);
 }
 
-std::shared_ptr<tnbLib::Entity3d_Polygon>
+std::pair<std::shared_ptr<tnbLib::Entity3d_Polygon>, std::vector<Standard_Real>>
 tnbLib::Cad_Tools::RetrievePolygonOnTriangulation
 (
 	const TopoDS_Edge& theEdge,
@@ -1813,17 +1813,26 @@ tnbLib::Cad_Tools::RetrievePolygonOnTriangulation
 	}
 	const auto& nodesId = polyOnTri->Nodes();
 
+	std::vector<Standard_Real> params;
 	std::vector<Pnt3d> pts;
 	pts.reserve(polyOnTri->NbNodes());
+	params.reserve(polyOnTri->NbNodes());
+	for (auto x : *polyOnTri->Parameters())
+	{
+		params.push_back(x);
+	}
+
 	for (Standard_Integer i = 1; i <= polyOnTri->NbNodes(); i++)
 	{
 		auto id = nodesId.Value(i);
 		const auto& pt = tri->Node(id);
+
 		pts.push_back(pt);
 	}
 
 	auto poly = std::make_shared<Entity3d_Polygon>(std::move(pts), 0);
-	return std::move(poly);
+	auto t = std::make_pair(std::move(poly), std::move(params));
+	return std::move(t);
 }
 
 Handle(Poly_Triangulation)

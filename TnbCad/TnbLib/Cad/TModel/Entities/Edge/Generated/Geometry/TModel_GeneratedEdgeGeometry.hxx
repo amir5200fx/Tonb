@@ -5,9 +5,11 @@
 #include <Cad_Module.hxx>
 #include <Standard_TypeDef.hxx>
 #include <Entity3d_PolygonFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Global_Serialization.hxx>
 
 #include <memory>
+#include <vector>
 
 namespace tnbLib
 {
@@ -21,7 +23,9 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<TModel_Curve> theCurve_;
+
 		std::shared_ptr<Entity3d_Polygon> theMesh_;
+		std::vector<Standard_Real> theParaMesh_;
 
 		Standard_Boolean theSense_;
 
@@ -74,6 +78,31 @@ namespace tnbLib
 		const auto& Mesh() const
 		{
 			return theMesh_;
+		}
+
+		const auto& ParaMesh() const
+		{
+			return theParaMesh_;
+		}
+
+		void SetMesh(const std::shared_ptr<Entity3d_Polygon>& theMesh)
+		{
+			theMesh_ = theMesh;
+		}
+
+		void SetMesh(std::shared_ptr<Entity3d_Polygon>&& theMesh)
+		{
+			theMesh_ = std::move(theMesh);
+		}
+
+		void SetParaMesh(const std::vector<Standard_Real>& theParaMesh)
+		{
+			theParaMesh_ = theParaMesh;
+		}
+
+		void SetParaMesh(std::vector<Standard_Real>&& theParaMesh)
+		{
+			theParaMesh_ = std::move(theParaMesh);
 		}
 	};
 }

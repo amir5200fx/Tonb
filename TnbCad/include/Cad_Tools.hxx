@@ -300,7 +300,7 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
 			);
 
-		static TnbCad_EXPORT std::shared_ptr<Entity3d_Polygon> 
+		static TnbCad_EXPORT std::pair<std::shared_ptr<Entity3d_Polygon>, std::vector<Standard_Real>>
 			RetrievePolygonOnTriangulation
 			(
 				const TopoDS_Edge& theEdge, 

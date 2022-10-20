@@ -1273,7 +1273,14 @@ namespace tnbLib
 
 				++nbSegments;
 
-				auto tri = subs.at(0)->Triangulation();
+				auto gen = std::dynamic_pointer_cast<TModel_GeneratedEdge>(subs.at(0));
+				if (NOT gen)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the edge is no generated!" << endl
+						<< abort(FatalError);
+				}
+				auto tri = gen->Mesh();
 				if (NOT tri)
 				{
 					FatalErrorIn(FunctionSIG)
@@ -1299,7 +1306,14 @@ namespace tnbLib
 						<< "no edge has been found." << endl
 						<< abort(FatalError);
 				}
-				auto tri = subs.at(0)->Triangulation();
+				auto gen = std::dynamic_pointer_cast<TModel_GeneratedEdge>(subs.at(0));
+				if (NOT gen)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the edge is no generated!" << endl
+						<< abort(FatalError);
+				}
+				auto tri = gen->Mesh();
 				if (NOT tri)
 				{
 					FatalErrorIn(FunctionSIG)
