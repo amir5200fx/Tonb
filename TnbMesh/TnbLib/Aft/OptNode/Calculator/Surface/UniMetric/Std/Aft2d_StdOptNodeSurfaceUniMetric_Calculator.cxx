@@ -42,9 +42,9 @@ void tnbLib::Aft2d_StdOptNodeSurfaceUniMetric_Calculator::Perform()
 
 	const auto& v0 = Front()->Node0()->Coord();
 	const auto& v1 = Front()->Node1()->Coord();
-	const auto len = MetricMap()->CalcUnitDistance(v0, v1);
+	//const auto len = MetricMap()->CalcUnitDistance(v0, v1);
 
-	Aft2d_OptNodeSurface_Analytical alg(Size(), len, m, *Front());
+	Aft2d_OptNodeSurface_Analytical alg(Size(), 1.0, m, *Front());
 	alg.Perform();
 	Debug_If_Condition_Message(NOT alg.IsDone(), "the algorithm is not performed!");
 

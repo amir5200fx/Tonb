@@ -4,6 +4,7 @@
 #include <Aft_SizeCorr_IterativeInfo.hxx>
 #include <Aft2d_CorrOptNodeSurface_Iterative.hxx>
 #include <Aft2d_AltrOptNodeSurface.hxx>
+#include <Aft2d_MetricPrcsrSurface.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -39,6 +40,8 @@ void tnbLib::Aft2d_OptNodeSurface_Altr::Perform()
 	{
 		ChangeCoord() = alg->Coord();
 	}
-
+	std::cout << "element size: " << this->Size() << std::endl;
+	std::cout << "dis= " << this->MetricMap()->CalcDistance(this->Front()->Centre(), Coord()) << std::endl;
+	std::cout << std::endl;
 	Change_IsDone() = Standard_True;
 }

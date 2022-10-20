@@ -25,9 +25,11 @@ tnbLib::Mesh3d_UniformFeatureSizeMapControl::SelectMap
 void tnbLib::Mesh3d_UniformFeatureSizeMapControl::CreateSizeMap
 (
 	const word & theName,
-	const std::shared_ptr<Cad_TModel>& theGeometry
+	const std::shared_ptr<Cad_TModel>& theGeometry,
+	const std::shared_ptr<Geo3d_SegmentCloud>& theCloud
 )
 {
-	auto sizeMapTool = std::make_shared<BoundarySizeMap3d_UniformSegmentTool>(References(), Domain(), theGeometry);
+	auto sizeMapTool = 
+		std::make_shared<BoundarySizeMap3d_UniformSegmentTool>(References(), Domain(), theCloud, theGeometry);
 	this->Import(theName, sizeMapTool);
 }

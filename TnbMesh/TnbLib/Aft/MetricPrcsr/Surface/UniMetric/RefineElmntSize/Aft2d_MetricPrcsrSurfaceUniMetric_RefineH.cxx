@@ -21,11 +21,11 @@ tnbLib::Aft2d_MetricPrcsrSurfaceUniMetric_RefineH::CalcElementSize
 	Debug_If_Condition_Message(NOT NodeCalculator()->IsDone(), "the node calculator is not performed!");
 
 	InitCoordCache = NodeCalculator()->Coord();
-
+	
 	const auto h2 = Aft2d_MetricPrcsrSurfaceUniMetric::CalcElementSize(InitCoordCache);
 
 	if (h2 >= h1)
-	{
+	{	
 		return h2;
 	}
 	else

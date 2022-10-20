@@ -102,6 +102,9 @@ void tnbLib::Aft2d_tModelSurfaceUniMetric::MeshingOneLevel()
 		if (NOT IsBelongToFront())
 			continue;
 
+		/*std::cout << "nb of elements: " << this->NbElements() << std::endl;
+		if (this->NbElements() > 1300) continue;*/
+
 		// Remove the Current from front
 		RemoveCurrentFromFront();
 

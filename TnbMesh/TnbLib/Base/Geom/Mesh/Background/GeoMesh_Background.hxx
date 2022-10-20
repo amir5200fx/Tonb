@@ -41,7 +41,7 @@ namespace tnbLib
 		typedef typename elementType::nodeType::ptType Point;
 
 		typedef Entity_Box<Point> box;
-		typename GeoMesh_Background_Cache<typename MeshData::elementType> base;
+		typedef GeoMesh_Background_Cache<typename MeshData::elementType> base;
 
 		/*Private Data*/
 

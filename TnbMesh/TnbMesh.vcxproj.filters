@@ -2071,6 +2071,21 @@
     <Filter Include="TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize">
       <UniqueIdentifier>{3b00fa85-2189-4fb0-b145-ca37d0e0c702}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Segment">
+      <UniqueIdentifier>{0f5f5a61-725a-42db-a3c9-c550b8b653b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Patch">
+      <UniqueIdentifier>{05816eda-45fc-4483-a313-62ea430dcb0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Segment\Samples">
+      <UniqueIdentifier>{6960a292-4ba2-492e-aadb-8449175e0bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0">
+      <UniqueIdentifier>{72c04b2d-e3f8-4e4b-af28-ef9d76d6d798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1">
+      <UniqueIdentifier>{6eb1e959-b80c-4e0e-bd28-6cc74e71766f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4914,9 +4929,6 @@
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info\BoundarySizeMap3d_UniformFaceTool_Info.hxx">
       <Filter>TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\Info</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Base\Geom\Cloud\Geo3d_PatchCloud.hxx">
-      <Filter>TnbLib\Base\Geom\Cloud</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Base\Geom\Cloud\None\Geo3d_PatchCloud_NoneInternal.hxx">
       <Filter>TnbLib\Base\Geom\Cloud\none</Filter>
     </ClInclude>
@@ -4946,6 +4958,27 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize\Aft2d_MetricPrcsrSurfaceUniMetric_RefineH.hxx">
       <Filter>TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Patch\Geo3d_PatchCloud.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Geo3d_SegmentCloud.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\None\Geo3d_SegmentCloud_NoneInternal.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\none</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SegmentCloud_InternalSamples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Geo3d_SegmentCloud_Samples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0\Geo3d_SegmentCloud_SamplesLev0.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo3d_SegmentCloud_SamplesLev1.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -6403,6 +6436,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize\Aft2d_MetricPrcsrSurfaceUniMetric_RefineHIO.cxx">
       <Filter>TnbLib\Aft\MetricPrcsr\Surface\UniMetric\RefineElmntSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\None\Geo3d_SegmentCloud_NoneInternal.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\none</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\None\Geo3d_SegmentCloud_NoneInternalIO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\none</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SegmentCloud_InternalSamples.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SegmentCloud_InternalSamplesIO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0\Geo3d_SegmentCloud_SamplesLev0.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0\Geo3d_SegmentCloud_SamplesLev0IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo3d_SegmentCloud_SamplesLev1.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo3d_SegmentCloud_SamplesLev1IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
