@@ -10,8 +10,9 @@ tnbLib::Geo3d_PatchCloud_EdgeSamplesLev1::CalcSamples(const Pnt2d & theP0, const
 	auto p0 = Geo_Tools::CalcCentre(theP0, centre);
 	auto p1 = Geo_Tools::CalcCentre(centre, theP1);
 	std::vector<Pnt2d> samples;
-	samples.reserve(2);
+	samples.reserve(3);
 	samples.push_back(std::move(p0));
 	samples.push_back(std::move(p1));
+	samples.push_back(std::move(centre));
 	return std::move(samples);
 }
