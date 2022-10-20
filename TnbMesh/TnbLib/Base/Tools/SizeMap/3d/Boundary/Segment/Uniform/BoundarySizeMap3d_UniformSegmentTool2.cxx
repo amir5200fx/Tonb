@@ -6,6 +6,7 @@
 #include <Mesh_SetSourcesNode.hxx>
 #include <Geo3d_BasicApprxCurve.hxx>
 #include <Geo3d_BasicApprxCurveAdaptor.hxx>
+#include <Geo3d_SegmentCloud.hxx>
 #include <TModel_Paired.hxx>
 #include <TModel_Edge.hxx>
 #include <TModel_GeneratedEdge.hxx>
@@ -99,12 +100,12 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			<< "no domain has been set!" << endl
 			<< abort(FatalError);
 	}
-	if (NOT ApproxInfo())
+	/*if (NOT ApproxInfo())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no approx. info has been found." << endl
 			<< abort(FatalError);
-	}
+	}*/
 
 	auto segments = RetrieveSegments();
 	if (segments.empty())
@@ -131,8 +132,8 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	engine.SetGeometryRegion(expB);
 	engine.BUCKET_SIZE = BucketSize();
 
-	ApproxInfo()->SetApprox(elemSize);
-	ApproxInfo()->SetMinSize(0.9*elemSize);
+	//ApproxInfo()->SetApprox(elemSize);
+	//ApproxInfo()->SetMinSize(0.9*elemSize);
 
 	Standard_Integer nbSources = 0;
 
@@ -148,16 +149,31 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			Debug_Null_Pointer(curve);
 			Debug_Null_Pointer(curve->Geometry());
 
-			auto adaptor = std::make_shared<Geo3d_BasicApprxCurveAdaptor>(curve->Geometry());
+			Debug_If_Condition(x->RetrieveEdges().empty());
+			auto edge = x->RetrieveEdges().at(0);
 
-			Geo3d_BasicApprxCurve approx;
+			auto gen = std::dynamic_pointer_cast<TModel_GeneratedEdge>(edge);
+			if (NOT gen)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the edge is not generated!" << endl
+					<< abort(FatalError);
+			}
+
+			const auto& params = gen->ParaMesh();
+			auto samples = Cloud()->CalcCloud(params);
+
+			//auto adaptor = std::make_shared<Geo3d_BasicApprxCurveAdaptor>(curve->Geometry());
+
+			/*Geo3d_BasicApprxCurve approx;
 			approx.LoadCurve(adaptor, curve->FirstParameter(), curve->LastParameter(), ApproxInfo());
 			approx.Perform();
 			Debug_If_Condition_Message(NOT approx.IsDone(), "the application is not performed.");
 
-			const auto& poly = approx.Chain();
-			for (auto& p : poly->Points())
+			const auto& poly = approx.Chain();*/
+			for (auto pm : samples)
 			{
+				auto p = curve->Value(pm);
 				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);
 
 				std::vector<std::shared_ptr<sourceNode>> items;
