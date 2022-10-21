@@ -322,15 +322,16 @@ void tnbLib::MeshBase_Tools::SetSourcesToMesh
 		auto nodes = current->Nodes();
 		auto nearest = meshLib::RetrieveClosestNode(nodes, x->Coord());
 		auto neighbors = RetrieveAdjacentNodes(nearest);
+
+		auto ho = sources.at(Index_Of(nearest->Index()));
 		for (const auto& ni : neighbors)
 		{
 			Debug_Null_Pointer(ni);
 			auto id = Index_Of(ni->Index());
 
-			auto h = sources.at(id);
 			auto dx = nearest->Coord().Distance(ni->Coord());
-			auto val = std::min(theBase, h + theGrowthRate * dx);
-			if (val < h) sources.at(id) = val;
+			auto val = std::min(theBase, ho + theGrowthRate * dx);
+			if (val < ho) sources.at(id) = val;
 		}
 		{
 			auto id = Index_Of(nearest->Index());

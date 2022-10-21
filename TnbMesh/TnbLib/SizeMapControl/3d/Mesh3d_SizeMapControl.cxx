@@ -63,8 +63,8 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 		}
 		theBackground_ = Maps().begin()->second->BackgroundMesh();
 
-		/*OFstream myFile("sizeMapControl.plt");
-		theBackground_->ExportToPlt(myFile);*/
+		OFstream myFile("sizeMapControl.plt");
+		theBackground_->ExportToPlt(myFile);
 	}
 	else
 	{

@@ -15,6 +15,7 @@
 #include <Geo_BoxTools.hxx>
 #include <GeoMesh3d_Data.hxx>
 #include <GeoMesh3d_Background.hxx>
+#include <Geo3d_DelTri_Fade3d.hxx>
 #include <Entity3d_Tetrahedralization.hxx>
 #include <Entity3d_Box.hxx>
 #include <Global_Timer.hxx>
@@ -84,6 +85,113 @@ namespace tnbLib
 
 	typedef Mesh_SetSourcesNode<Pnt3d, void> sourceNode;
 	typedef Mesh_SetSourcesNode<Pnt3d, Standard_Real> hNode;
+
+	namespace segmentTools
+	{
+
+		void InsertToEngine(Pnt3d&& theCoord, const Standard_Real theTol, Geo3d_BalPrTree<std::shared_ptr<Pnt3d>>& engine)
+		{
+			auto b = Geo_BoxTools::GetBox<Pnt3d>(theCoord, theTol);
+
+			std::vector<std::shared_ptr<Pnt3d>> items;
+			engine.GeometrySearch(b, items);
+			if (items.empty())
+			{
+				auto node = std::make_shared<Pnt3d>(std::move(theCoord));
+				Debug_Null_Pointer(node);
+				engine.InsertToGeometry(node);
+			}
+			else
+			{
+				Standard_Real minDis = RealLast();
+				for (const auto& i : items)
+				{
+					auto dis = i->Distance(theCoord);
+					if (dis < minDis)
+					{
+						minDis = dis;
+					}
+				}
+				if (minDis > theTol)
+				{
+					auto node = std::make_shared<Pnt3d>(std::move(theCoord));
+					Debug_Null_Pointer(node);
+					engine.InsertToGeometry(node);
+				}
+				else
+				{
+					// do nothing [8/25/2022 Amir]
+				}
+			}
+		}
+
+		auto RetrieveNodes(const Geo3d_BalPrTree<std::shared_ptr<sourceNode>>& theEngine, const Entity3d_Box& theDomain, const Standard_Real theTol)
+		{
+			std::vector<Geo3d_BalPrTree<std::shared_ptr<sourceNode>>::leafNode*> leaves;
+			theEngine.RetrieveLeavesTo(leaves);
+
+			std::vector<std::shared_ptr<Entity3d_Box>> boxes;
+			boxes.reserve(leaves.size());
+			for (const auto& x : leaves)
+			{
+				Debug_Null_Pointer(x);
+				const auto& b = x->Box();
+				boxes.push_back(b);
+			}
+
+			Geo3d_BalPrTree<std::shared_ptr<Pnt3d>> engine;
+			engine.SetGeometryCoordFunc([](const std::shared_ptr<Pnt3d>& x)-> const auto& {return *x; });
+			engine.SetGeometryRegion(theDomain);
+			engine.SetMaxUnbalancing(2);
+			engine.BUCKET_SIZE = 4;
+
+			for (const auto& x : boxes)
+			{
+				auto p0 = x->Corner(Box3d_PickAlgorithm_Aft_SW);
+				InsertToEngine(std::move(p0), theTol, engine);
+
+				auto p1 = x->Corner(Box3d_PickAlgorithm_Aft_SE);
+				InsertToEngine(std::move(p1), theTol, engine);
+
+				auto p2 = x->Corner(Box3d_PickAlgorithm_Aft_NE);
+				InsertToEngine(std::move(p2), theTol, engine);
+
+				auto p3 = x->Corner(Box3d_PickAlgorithm_Aft_NW);
+				InsertToEngine(std::move(p3), theTol, engine);
+
+				auto p4 = x->Corner(Box3d_PickAlgorithm_Fwd_SW);
+				InsertToEngine(std::move(p4), theTol, engine);
+
+				auto p5 = x->Corner(Box3d_PickAlgorithm_Fwd_SE);
+				InsertToEngine(std::move(p5), theTol, engine);
+
+				auto p6 = x->Corner(Box3d_PickAlgorithm_Fwd_NE);
+				InsertToEngine(std::move(p6), theTol, engine);
+
+				auto p7 = x->Corner(Box3d_PickAlgorithm_Fwd_NW);
+				InsertToEngine(std::move(p7), theTol, engine);
+			}
+
+			std::vector<std::shared_ptr<sourceNode>> sNodes;
+			theEngine.RetrieveFromGeometryTo(sNodes);
+			for (const auto& x : sNodes)
+			{
+				auto pt = x->Coord();
+				InsertToEngine(std::move(pt), theTol, engine);
+			}
+
+			std::vector<std::shared_ptr<Pnt3d>> items;
+			engine.RetrieveFromGeometryTo(items);
+
+			std::vector<Pnt3d> coords;
+			coords.reserve(items.size());
+			for (const auto& x : items)
+			{
+				coords.push_back(*x);
+			}
+			return std::move(coords);
+		}
+	}
 }
 
 void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
@@ -226,7 +334,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	engine.SetMaxUnbalancing(UnBalancing());
 	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
 	engine.SetGeometryRegion(expB);
-	engine.BUCKET_SIZE = BucketSize();
+	engine.BUCKET_SIZE = 1;
 
 	{ // Approximating space scope [8/25/2022 Amir]
 		Global_Timer timer;
@@ -341,7 +449,12 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
 
-		Geo_BoxTools::GetTriangulation(boxes, *myTet);
+		auto pnts = segmentTools::RetrieveNodes(engine, expB, mergCrit);
+		fadeLib::Geo3d_DelTri delTri(pnts);
+		delTri.Perform();
+
+		myTet = delTri.Triangulation();
+		//Geo_BoxTools::GetTriangulation(boxes, *myTet);
 	}
 	if (verbose)
 	{
