@@ -3,9 +3,13 @@
 #include <Mesh3d_SizeMapTool.hxx>
 #include <Mesh3d_UnionSizeMap.hxx>
 #include <Mesh_SizeMapControl_Info.hxx>
+#include <Geo3d_PatchCloud.hxx>
+#include <GeoMesh3d_Background.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+
+#include <OFstream.hxx>
 
 template<>
 void tnbLib::Mesh3d_SizeMapControl::Perform()
@@ -26,6 +30,13 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no domain has been set!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Cloud())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no cloud has been found." << endl
 			<< abort(FatalError);
 	}
 
@@ -51,6 +62,9 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 				<< " one size map has been detected, no unifying algorithm is needed." << endl;
 		}
 		theBackground_ = Maps().begin()->second->BackgroundMesh();
+
+		/*OFstream myFile("sizeMapControl.plt");
+		theBackground_->ExportToPlt(myFile);*/
 	}
 	else
 	{
@@ -71,6 +85,7 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 		alg->SetTolerance(myInfo->Tolerance());
 		alg->SetDomain(Domain());
 		alg->SetSmoothingInfo(myInfo->HvCorrInfo());
+		alg->SetCloud(Cloud());
 
 		std::set<std::shared_ptr<Cad_TModel>> compact;
 		for (const auto& x : Maps())

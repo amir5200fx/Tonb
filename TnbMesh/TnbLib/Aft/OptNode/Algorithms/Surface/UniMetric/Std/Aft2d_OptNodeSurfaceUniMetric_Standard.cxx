@@ -1,6 +1,8 @@
 #include <Aft2d_OptNodeSurfaceUniMetric_Standard.hxx>
 
 #include <Aft2d_StdOptNodeSurfaceUniMetric_Calculator.hxx>
+#include <Aft2d_MetricPrcsrSurfaceUniMetric.hxx>
+#include <MeshBase_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -17,6 +19,13 @@ void tnbLib::Aft2d_OptNodeSurfaceUniMetric_Standard::Perform()
 	alg->Perform();
 	Debug_If_Condition_Message(NOT alg->IsDone(), "the algorithm is not performed!");
 
-	ChangeCoord() = alg->Coord();
+	if (NOT MetricMap()->BoundingBox().IsInside(alg->Coord()))
+	{
+		ChangeCoord() = MeshBase_Tools::CorrectCoord(Front()->Centre(), alg->Coord(), MetricMap()->BoundingBox());
+	}
+	else
+	{
+		ChangeCoord() = alg->Coord();
+	}
 	Change_IsDone() = Standard_True;
 }

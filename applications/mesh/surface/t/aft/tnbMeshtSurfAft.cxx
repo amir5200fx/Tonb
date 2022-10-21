@@ -450,7 +450,7 @@ namespace tnbLib
 
 			theBndInfo->SetMergeTolerance(tol);  // added to adapt the merging tolerance [5/16/2022 Amir]
 			bnd->Perform();
-
+			
 			if (NOT bnd->IsDone())
 			{
 				FatalErrorIn(FunctionSIG)

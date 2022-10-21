@@ -1,10 +1,13 @@
 #include <Mesh3d_UnionSizeMap.hxx>
 
+#include <Geo3d_PatchCloud.hxx>
 #include <GeoMesh3d_Background.hxx>
 #include <GeoMesh3d_Data.hxx>
 #include <Mesh3d_Node.hxx>
 #include <Cad_TModel.hxx>
+#include <Cad_Tools.hxx>
 #include <TModel_Surface.hxx>
+#include <Cad_GeomSurface.hxx>
 #include <Geo3d_BalPrTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity3d_Tetrahedralization.hxx>
@@ -64,7 +67,8 @@ void tnbLib::Mesh3d_UnionSizeMap::UpdateSources
 std::vector<tnbLib::Pnt3d> 
 tnbLib::Mesh3d_UnionSizeMap::RetrieveCoords
 (
-	const Cad_TModel & theModel
+	const Cad_TModel & theModel,
+	const Geo3d_PatchCloud& theCloud
 )
 {
 	auto faces = theModel.RetrieveFaces();
@@ -72,10 +76,22 @@ tnbLib::Mesh3d_UnionSizeMap::RetrieveCoords
 	for (const auto& x : faces)
 	{
 		Debug_Null_Pointer(x);
-		auto poly = x->RetrieveTriangulation();
-		for (Standard_Integer i = 1; i <= poly->NbNodes(); i++)
+		if (NOT x->GeomSurface())
 		{
-			coords.push_back(poly->Node(i));
+			FatalErrorIn(FunctionSIG)
+				<< "the face has no geometry!" << endl
+				<< abort(FatalError);
+		}
+		const auto& geometry = x->GeomSurface();
+
+		auto poly = x->RetrieveTriangulation();
+		auto tri = Cad_Tools::ParaTriangulation(*poly);
+		auto samples = theCloud.CalcCloud(*tri);
+
+		for (const auto& pm : samples)
+		{
+			auto p = geometry->Value(pm);
+			coords.push_back(std::move(p));
 		}
 	}
 	return std::move(coords);
@@ -84,14 +100,15 @@ tnbLib::Mesh3d_UnionSizeMap::RetrieveCoords
 std::vector<tnbLib::Pnt3d> 
 tnbLib::Mesh3d_UnionSizeMap::RetrieveCoords
 (
-	const std::vector<std::shared_ptr<Cad_TModel>>& theModels
+	const std::vector<std::shared_ptr<Cad_TModel>>& theModels,
+	const Geo3d_PatchCloud& theCloud
 )
 {
 	std::vector<Pnt3d> coords;
 	for (const auto& x : theModels)
 	{
 		Debug_Null_Pointer(x);
-		auto pts = RetrieveCoords(*x);
+		auto pts = RetrieveCoords(*x, theCloud);
 		for (auto& p : pts)
 		{
 			coords.push_back(std::move(p));
@@ -116,10 +133,17 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 			<< abort(FatalError);
 	}
 
+	if (NOT Cloud())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no patch cloud has been found." << endl
+			<< abort(FatalError);
+	}
+
 	//verbose = 1;
 
 	const auto& models = Models();
-	const auto coords = RetrieveCoords(models);
+	const auto coords = RetrieveCoords(models, *Cloud());
 
 	//const auto b = Geo_BoxTools::GetBox(coords, 0);
 	auto expB = *Domain();

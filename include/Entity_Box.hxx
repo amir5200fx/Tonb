@@ -22,6 +22,15 @@ namespace tnbLib
 	class OFstream;
 
 	template<class Point>
+	class Entity_Box;
+
+	template<class Point>
+	std::ostream& operator<<(std::ostream& os, const Entity_Box<Point>&);
+
+	template<class Point>
+	Ostream& operator<<(Ostream& os, const Entity_Box<Point>&);
+
+	template<class Point>
 	class Entity_Box
 	{
 

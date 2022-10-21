@@ -17,6 +17,17 @@ namespace tnbLib
 	template<>
 	TnbMesh_EXPORT void GeoMesh3d_Data::Construct(const triangulation& theTriangulation);
 
+#ifdef _DEBUG
+	template<>
+	TnbMesh_EXPORT std::shared_ptr<Mesh3d_Element>
+		GeoMesh3d_Data::TriangleLocation
+		(
+			const std::shared_ptr<Mesh3d_Element>& theElement,
+			const Pnt3d& theCoord
+		) const;
+#endif // _DEBUG
+
+
 	template<>
 	template<>
 	TnbMesh_EXPORT void GeoMesh3d_Data::serialize<TNB_iARCH_TYPE>

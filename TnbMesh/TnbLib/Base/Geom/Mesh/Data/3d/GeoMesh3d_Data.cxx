@@ -440,3 +440,96 @@ namespace tnbLib
 		theElements_ = std::move(elements);
 	}
 }
+
+#ifdef _DEBUG
+template<>
+std::shared_ptr<tnbLib::Mesh3d_Element>
+tnbLib::GeoMesh3d_Data::TriangleLocation
+(
+	const std::shared_ptr<Mesh3d_Element>& theStart,
+	const Pnt3d& theCoord
+) const
+{
+	if (NOT theStart)
+	{
+		FatalErrorIn("element_ptr TriangleLocation(const element_ptr& theStart, const Pnt2d& theCoord) const")
+			<< "Null element has been encountered!" << endl
+			<< abort(FatalError);
+	}
+
+	auto neighbor = theStart;
+	auto element = theStart;
+
+	int k = 0;
+	while (Standard_True)
+	{
+		for (auto i = 0; i <= 3; i++)
+		{
+			const auto& entity = *element->Facet(i);
+
+			auto rightElement = entity.RightElement().lock();
+			Debug_Null_Pointer(rightElement);
+
+			if (rightElement == element)
+			{
+				if (entity.IsLeftSide(theCoord))
+				{
+					auto leftElement = entity.LeftElement().lock();
+					neighbor = leftElement;
+					if (!neighbor)
+					{
+						//- the point is outside the background mesh
+						return nullptr;
+					}
+					break;
+				}
+			}
+			else
+			{
+				auto leftElement = entity.LeftElement().lock();
+				if (NOT leftElement)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the facet doesn't belong to the element." << endl
+						<< abort(FatalError);
+				}
+
+				if (leftElement NOT_EQUAL element)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "the facet doesn't belong to the element." << endl
+						<< " - element's id: " << element->Index() << endl
+						<< " - right element: " << rightElement->Index() << endl
+						<< " - left element: " << leftElement->Index() << endl
+						<< abort(FatalError);
+				}
+
+				if (entity.IsRightSide(theCoord))
+				{
+					neighbor = rightElement;
+					break;
+				}
+			}
+
+		}
+		
+		if (neighbor == element)
+		{
+			// Found the Triangle
+			return neighbor;
+		}
+
+		++k;
+		if (k >= DEFAULT_MAX_CYCLES)
+		{
+			FatalErrorIn("element_ptr TriangleLocation(const element_ptr& theStart, const Pnt2d& theCoord) const;")
+				<< "It's look like the algorithm traps in an infinite loop" << endl
+				<< " - Unable to find the triangle which encompassed the point" << endl
+				<< abort(FatalError);
+		}
+
+		element = neighbor;
+	}
+	return nullptr;
+}
+#endif // _DEBUG

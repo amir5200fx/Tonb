@@ -18,6 +18,7 @@ namespace tnbLib
 		using base::sizeMapTool;
 		using base::meshRefValuesType;
 		using base::boxType;
+		using base::cloudType;
 
 	private:
 
@@ -46,9 +47,10 @@ namespace tnbLib
 		Mesh_FeatureSizeMapControl
 		(
 			const std::shared_ptr<meshRefValuesType>& theRef,
-			const std::shared_ptr<boxType>& theDomain
+			const std::shared_ptr<boxType>& theDomain,
+			const std::shared_ptr<cloudType>& theCloud
 		)
-			: base(theRef, theDomain)
+			: base(theRef, theDomain, theCloud)
 		{}
 		
 

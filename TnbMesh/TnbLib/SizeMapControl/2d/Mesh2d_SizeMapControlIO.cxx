@@ -12,6 +12,11 @@ namespace tnbLib
 	{
 		ar & theReference_;
 		ar & theBoundaries_;
+
+		//ar & theCloud_;
+		FatalErrorIn(FunctionSIG)
+			<< "active cloud2!" << endl
+			<< abort(FatalError);
 	}
 
 	template<>
@@ -20,5 +25,10 @@ namespace tnbLib
 	{
 		ar & theReference_;
 		ar & theBoundaries_;
+
+		//ar & theCloud_;
+		FatalErrorIn(FunctionSIG)
+			<< "active cloud2!" << endl
+			<< abort(FatalError);
 	}
 }

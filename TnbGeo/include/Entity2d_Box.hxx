@@ -2,11 +2,18 @@
 #ifndef _Entity2d_Box_Header
 #define _Entity2d_Box_Header
 
+#include <Entity2d_BoxFwd.hxx>
 #include <Entity_Box.hxx>
 #include <Pnt2d.hxx>
 
 namespace tnbLib
 {
+
+	template<>
+	TnbGeo_EXPORT std::ostream& operator<<(std::ostream& os, const Entity2d_Box& theBox);
+
+	template<>
+	TnbGeo_EXPORT Ostream& operator<<(Ostream& os, const Entity2d_Box& theBox);
 
 	enum Box2d_SubDivideAlgorithm
 	{
@@ -27,9 +34,6 @@ namespace tnbLib
 		Box2d_PickAlgorithm_NE,
 		Box2d_PickAlgorithm_NW
 	};
-
-	typedef Entity_Box<Pnt2d>
-		Entity2d_Box;
 
 	template<>
 	template<>
@@ -62,11 +66,6 @@ namespace tnbLib
 	template<>
 	TnbGeo_EXPORT void Entity2d_Box::ExportToPlt(OFstream&) const;
 
-	namespace Box
-	{
-
-
-	}
 }
 
 #endif // !_Entity2d_Box_Header

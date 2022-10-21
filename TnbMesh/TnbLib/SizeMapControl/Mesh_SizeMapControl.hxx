@@ -71,6 +71,7 @@ namespace tnbLib
 		typedef typename size_map_type<GeomType>::type sizeMapTool;
 		typedef typename size_map_type<GeomType>::boxType boxType;
 		typedef typename size_map_type<GeomType>::backMeshType backMeshType;
+		typedef typename size_map_type<GeomType>::cloudType cloudType;
 
 		typedef Mesh_ReferenceValues<boxType> meshRefValuesType;
 
@@ -80,6 +81,7 @@ namespace tnbLib
 
 		std::shared_ptr<meshRefValuesType> theReference_;
 		std::shared_ptr<boxType> theDomain_;
+		std::shared_ptr<cloudType> theCloud_;
 
 		std::map<word, std::shared_ptr<sizeMapTool>> theBoundaries_;
 
@@ -110,10 +112,12 @@ namespace tnbLib
 		Mesh_SizeMapControl
 		(
 			const std::shared_ptr<meshRefValuesType>& theRef,
-			const std::shared_ptr<boxType>& theDomain
+			const std::shared_ptr<boxType>& theDomain,
+			const std::shared_ptr<cloudType>& theCloud
 		)
 			: theReference_(theRef)
 			, theDomain_(theDomain)
+			, theCloud_(theCloud)
 		{}
 
 
@@ -143,6 +147,11 @@ namespace tnbLib
 		const auto& Domain() const
 		{
 			return theDomain_;
+		}
+
+		const auto& Cloud() const
+		{
+			return theCloud_;
 		}
 
 		const auto& Maps() const
@@ -175,6 +184,16 @@ namespace tnbLib
 		void SetDomain(std::shared_ptr<boxType>&& theDomain)
 		{
 			theDomain_ = std::move(theDomain);
+		}
+
+		void SetCloud(const std::shared_ptr<cloudType>& theCloud)
+		{
+			theCloud_ = theCloud;
+		}
+
+		void SetCloud(std::shared_ptr<cloudType>&& theCloud)
+		{
+			theCloud_ = std::move(theCloud);
 		}
 	};
 }

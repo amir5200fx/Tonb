@@ -41,6 +41,9 @@ namespace tnbLib
 	class TModel_ParaCurve;
 	class Entity2d_Metric1;
 
+	template<class Point, class Value>
+	class Mesh_SetSourcesNode;
+
 	class MeshBase_Tools
 	{
 
@@ -79,12 +82,20 @@ namespace tnbLib
 				const Standard_Real len
 			);
 
-		template<class SourceType>
+		/*template<class SourceType>
 		static void SetSourcesToMesh3d
 		(
 			const std::vector<std::shared_ptr<SourceType>>& theSources,
-			const Standard_Real theBase, 
+			const Standard_Real theBase,
 			GeoMesh3d_Background& theMesh
+		);*/
+
+		static TnbMesh_EXPORT void SetSourcesToMesh
+		(
+			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt3d, Standard_Real>>>& theSources,
+			const Standard_Real theBase,
+			const Standard_Real theGrowthRate,
+			GeoMesh3d_Background& theMesh	
 		);
 
 		static TnbMesh_EXPORT void SetSourcesToMesh
@@ -148,6 +159,9 @@ namespace tnbLib
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Facet>> RetrieveFacets(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Edge>> RetrieveEdges(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Node>> RetrieveNodes(const std::vector<std::shared_ptr<Mesh3d_Element>>& theElements);
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Node>> RetrieveAdjacentNodes(const std::shared_ptr<Mesh3d_Node>&);
 
 		// creating edges for the elements [1/1/2022 Amir]
 		// note: nodes and edges are connected with creating edges

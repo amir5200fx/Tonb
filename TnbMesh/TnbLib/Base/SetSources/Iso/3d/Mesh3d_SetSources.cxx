@@ -2,6 +2,7 @@
 
 #include <Mesh3d_SetSourcesAdaptor.hxx>
 #include <Mesh3d_SetSourcesNode.hxx>
+#include <Mesh3d_Node.hxx>
 #include <Mesh2d_Element.hxx>
 #include <MeshBase_Tools.hxx>
 #include <GeoMesh3d_Background.hxx>
@@ -34,6 +35,57 @@ namespace tnbLib
 		}
 		return std::move(elements);
 	}
+
+	namespace meshLib
+	{
+
+		namespace setSources
+		{
+
+			class TopNode
+				: public Node
+			{
+
+				/*Private Data*/
+
+				std::set<std::shared_ptr<Mesh3d_Element>> theElements_;
+
+			public:
+
+				// default constructor [10/21/2022 Amir]
+
+				TopNode()
+				{}
+
+				// constructors [10/21/2022 Amir]
+
+				TopNode(const Pnt3d& theCoord)
+					: Node(theCoord)
+				{}
+
+				TopNode(Pnt3d&& theCoord)
+					: Node(std::move(theCoord))
+				{}
+
+				// public functions and operators [10/21/2022 Amir]
+
+				Standard_Integer NbElements() const
+				{
+					return theElements_.size();
+				}
+
+				const auto& Elements() const
+				{
+					return theElements_;
+				}
+
+				void Import(const std::shared_ptr<Mesh3d_Element>& theElement)
+				{
+					theElements_.insert(theElement);
+				}
+			};
+		}
+	}
 }
 
 void tnbLib::Mesh3d_SetSources::Perform()
@@ -57,57 +109,107 @@ void tnbLib::Mesh3d_SetSources::Perform()
 
 	const auto mergCrit = Tolerance()*Mesh()->BoundingBox().Diameter();
 
-	for (const auto& x : meshData->Elements())
-	{
-		Debug_Null_Pointer(x);
+	// create the node map [10/21/2022 Amir]
+	//std::map<Standard_Integer, std::shared_ptr<meshLib::setSources::TopNode>> nodeMap;
+	//for (const auto& x : meshData->Elements())
+	//{
+	//	Debug_Null_Pointer(x);
 
-		auto c = x->Centre();
-		auto b = Geo_BoxTools::GetBox<Pnt3d>(c, mergCrit);
+	//	for (Standard_Integer i = 0; i < 4; i++)
+	//	{
+	//		const auto& node = x->Node(i);
+	//		auto iter = nodeMap.find(node->Index());
+	//		if (iter IS_EQUAL nodeMap.end())
+	//		{
+	//			// the node is not at the map [10/21/2022 Amir]
+	//			auto inode = std::make_shared<meshLib::setSources::TopNode>(node->Coord());
+	//			Debug_Null_Pointer(inode);
 
-		std::vector<std::shared_ptr<meshLib::setSources::Node>> items;
-		engine.GeometrySearch(b, items);
-		if (items.empty())
-		{
-			auto node = std::make_shared<meshLib::setSources::Node>(std::move(c));
-			Debug_Null_Pointer(node);
-			engine.InsertToGeometry(node);
-		}
-		else
-		{
-			Standard_Real minDis = RealLast();
-			for (const auto& i : items)
-			{
-				auto dis = i->Coord().Distance(c);
-				if (dis < minDis)
-				{
-					minDis = dis;
-				}
-			}
-			if (minDis > mergCrit)
-			{
-				auto node = std::make_shared<meshLib::setSources::Node>(std::move(c));
-				Debug_Null_Pointer(node);
-				engine.InsertToGeometry(node);
-			}
-		}
-	}
+	//			inode->Import(x);
+	//			auto paired = std::make_pair(node->Index(), std::move(inode));
+	//			nodeMap.insert(std::move(paired));
+	//		}
+	//		else
+	//		{
+	//			// the node is inside the map [10/21/2022 Amir]
+	//			iter->second->Import(x);
+	//		}
+	//	}
+	//}
+
+
+	//for (const auto& x : meshData->Elements())
+	//{
+	//	Debug_Null_Pointer(x);
+
+	//	for (Standard_Integer i = 0; i < 4; i++)
+	//	{
+	//		const auto& node = x->Node(i);
+	//		auto iter = nodeMap.find(node->Index());
+	//		if (iter IS_EQUAL nodeMap.end())
+	//		{
+	//			// the node is not at the map [10/21/2022 Amir]
+	//			auto inode = std::make_shared<meshLib::setSources::TopNode>(node->Coord());
+	//			Debug_Null_Pointer(inode);
+
+	//			inode->Import(x);
+	//			auto paired = std::make_pair(node->Index(), std::move(inode));
+	//			nodeMap.insert(std::move(paired));
+	//		}
+	//		else
+	//		{
+	//			// the node is inside the map [10/21/2022 Amir]
+	//			iter->second()
+	//		}
+	//	}
+
+	//	auto c = x->Centre();
+	//	auto b = Geo_BoxTools::GetBox<Pnt3d>(c, mergCrit);
+
+	//	std::vector<std::shared_ptr<meshLib::setSources::Node>> items;
+	//	engine.GeometrySearch(b, items);
+	//	if (items.empty())
+	//	{
+	//		auto node = std::make_shared<meshLib::setSources::Node>(std::move(c));
+	//		Debug_Null_Pointer(node);
+	//		engine.InsertToGeometry(node);
+	//	}
+	//	else
+	//	{
+	//		Standard_Real minDis = RealLast();
+	//		for (const auto& i : items)
+	//		{
+	//			auto dis = i->Coord().Distance(c);
+	//			if (dis < minDis)
+	//			{
+	//				minDis = dis;
+	//			}
+	//		}
+	//		if (minDis > mergCrit)
+	//		{
+	//			auto node = std::make_shared<meshLib::setSources::Node>(std::move(c));
+	//			Debug_Null_Pointer(node);
+	//			engine.InsertToGeometry(node);
+	//		}
+	//	}
+	//}
 
 	// Register the elements to the leaves [8/14/2022 Amir]
-	for (const auto& x : meshData->Elements())
-	{
-		Debug_Null_Pointer(x);
+	//for (const auto& x : meshData->Elements())
+	//{
+	//	Debug_Null_Pointer(x);
 
-		auto b = MeshBase_Tools::CalcBoundingBox(x);
-		Debug_Null_Pointer(b);
+	//	auto b = MeshBase_Tools::CalcBoundingBox(x);
+	//	Debug_Null_Pointer(b);
 
-		b->Expand(Tolerance()*b->Diameter());
+	//	b->Expand(Tolerance()*b->Diameter());
 
-		// Searching into the engine [8/14/2022 Amir]
-		auto items = engine.RetrieveLeaves(*b);
-		for (const auto& i : items)
-		{
-			Debug_Null_Pointer(i);
-			i->InsertToTets(x);
-		}
-	}
+	//	// Searching into the engine [8/14/2022 Amir]
+	//	auto items = engine.RetrieveLeaves(*b);
+	//	for (const auto& i : items)
+	//	{
+	//		Debug_Null_Pointer(i);
+	//		i->InsertToTets(x);
+	//	}
+	//}
 }

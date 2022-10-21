@@ -126,11 +126,6 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 
 	const auto mergCrit = 1.0E-5*expB.Diameter();
 
-	Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine;
-	engine.SetMaxUnbalancing(UnBalancing());
-	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
-	engine.SetGeometryRegion(expB);
-	engine.BUCKET_SIZE = BucketSize();
 
 	//ApproxInfo()->SetApprox(elemSize);
 	//ApproxInfo()->SetMinSize(0.9*elemSize);
@@ -141,6 +136,12 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	{ // Approximating space scope [8/25/2022 Amir]
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
+
+		Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine0;
+		engine0.SetMaxUnbalancing(UnBalancing());
+		engine0.SetGeometryCoordFunc(&sourceNode::GetCoord);
+		engine0.SetGeometryRegion(expB);
+		engine0.BUCKET_SIZE = BucketSize();
 
 		for (const auto& x : segments)
 		{
@@ -177,13 +178,13 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);
 
 				std::vector<std::shared_ptr<sourceNode>> items;
-				engine.GeometrySearch(b, items);
+				engine0.GeometrySearch(b, items);
 				if (items.empty())
 				{
 					auto h = std::make_shared<hNode>(p, elemSize);
 					auto node = std::make_shared<sourceNode>(std::move(p));
 					Debug_Null_Pointer(node);
-					engine.InsertToGeometry(node);
+					engine0.InsertToGeometry(node);
 
 					++nbSources;
 					
@@ -205,11 +206,92 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 						auto h = std::make_shared<hNode>(p, elemSize);
 						auto node = std::make_shared<sourceNode>(std::move(p));
 						Debug_Null_Pointer(node);
-						engine.InsertToGeometry(node);
+						engine0.InsertToGeometry(node);
 
 						++nbSources;
 
 						sources.push_back(std::move(h));
+					}
+					else
+					{
+						// do nothing [8/25/2022 Amir]
+					}
+				}
+
+			}
+		}
+	}
+
+	Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine;
+	engine.SetMaxUnbalancing(UnBalancing());
+	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
+	engine.SetGeometryRegion(expB);
+	engine.BUCKET_SIZE = BucketSize();
+
+	{ // Approximating space scope [8/25/2022 Amir]
+		Global_Timer timer;
+		timer.SetInfo(Global_TimerInfo_ms);
+
+		for (const auto& x : segments)
+		{
+			Debug_Null_Pointer(x);
+			auto curve = ::tnbLib::RetrieveEdge(*x);
+			Debug_Null_Pointer(curve);
+			Debug_Null_Pointer(curve->Geometry());
+
+			Debug_If_Condition(x->RetrieveEdges().empty());
+			auto edge = x->RetrieveEdges().at(0);
+
+			auto gen = std::dynamic_pointer_cast<TModel_GeneratedEdge>(edge);
+			if (NOT gen)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the edge is not generated!" << endl
+					<< abort(FatalError);
+			}
+
+			const auto& params = gen->ParaMesh();
+			//auto samples = Cloud()->CalcCloud(params);
+
+			//auto adaptor = std::make_shared<Geo3d_BasicApprxCurveAdaptor>(curve->Geometry());
+
+			/*Geo3d_BasicApprxCurve approx;
+			approx.LoadCurve(adaptor, curve->FirstParameter(), curve->LastParameter(), ApproxInfo());
+			approx.Perform();
+			Debug_If_Condition_Message(NOT approx.IsDone(), "the application is not performed.");
+
+			const auto& poly = approx.Chain();*/
+			for (auto pm : params)
+			{
+				auto p = curve->Value(pm);
+				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);
+
+				std::vector<std::shared_ptr<sourceNode>> items;
+				engine.GeometrySearch(b, items);
+				if (items.empty())
+				{
+					auto h = std::make_shared<hNode>(p, elemSize);
+					auto node = std::make_shared<sourceNode>(std::move(p));
+					Debug_Null_Pointer(node);
+					engine.InsertToGeometry(node);
+				}
+				else
+				{
+					Standard_Real minDis = RealLast();
+					for (const auto& i : items)
+					{
+						auto dis = i->Coord().Distance(p);
+						if (dis < minDis)
+						{
+							minDis = dis;
+						}
+					}
+					if (minDis > mergCrit)
+					{
+						auto h = std::make_shared<hNode>(p, elemSize);
+						auto node = std::make_shared<sourceNode>(std::move(p));
+						Debug_Null_Pointer(node);
+						engine.InsertToGeometry(node);
 					}
 					else
 					{
@@ -296,9 +378,6 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 		Info << endl;
 	}
 
-	MeshBase_Tools::SetSourcesToMesh3d(sources, ReferenceValues()->BaseSize(), *bMesh);
-	sources.clear();
-
 	auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrIters());
@@ -309,12 +388,16 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	else
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()));
 
+	MeshBase_Tools::SetSourcesToMesh(sources, ReferenceValues()->BaseSize(), hvInfo->Factor(), *bMesh);
+	sources.clear();
+
 	if (verbose)
 	{
 		Info << " Applying Hv-correction..." << endl;
 		Info << " - Max. nb. of iterations: " << hvInfo->MaxNbIters() << endl;
 		Info << endl;
 	}
+
 	bMesh->HvCorrection(hvInfo);
 
 	if (verbose)

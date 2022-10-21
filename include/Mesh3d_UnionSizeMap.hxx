@@ -17,6 +17,7 @@ namespace tnbLib
 	// Forward Declarations [7/15/2022 Amir]
 	class Cad_TModel;
 	class GeoMesh_Background_SmoothingHvCorrection_Info;
+	class Geo3d_PatchCloud;
 
 	class Mesh3d_UnionSizeMap
 		: public Global_Done
@@ -34,6 +35,8 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Cad_TModel>> theModels_;
 		std::vector<std::shared_ptr<GeoMesh3d_Background>> theBackgrounds_;
 
+		std::shared_ptr<Geo3d_PatchCloud> theCloud_;
+
 		// results [7/18/2022 Amir]
 
 		std::shared_ptr<GeoMesh3d_Background> theUnifiedMap_;
@@ -44,8 +47,8 @@ namespace tnbLib
 
 		TnbMesh_EXPORT void UpdateSources(const std::shared_ptr<GeoMesh3d_Background>&) const;
 
-		static TnbMesh_EXPORT std::vector<Pnt3d> RetrieveCoords(const Cad_TModel&);
-		static TnbMesh_EXPORT std::vector<Pnt3d> RetrieveCoords(const std::vector<std::shared_ptr<Cad_TModel>>&);
+		static TnbMesh_EXPORT std::vector<Pnt3d> RetrieveCoords(const Cad_TModel&, const Geo3d_PatchCloud&);
+		static TnbMesh_EXPORT std::vector<Pnt3d> RetrieveCoords(const std::vector<std::shared_ptr<Cad_TModel>>&, const Geo3d_PatchCloud&);
 
 	public:
 
@@ -94,6 +97,11 @@ namespace tnbLib
 		const auto& Backgrounds() const
 		{
 			return theBackgrounds_;
+		}
+
+		const auto& Cloud() const
+		{
+			return theCloud_;
 		}
 
 		const auto& UnifiedMap() const
@@ -151,6 +159,16 @@ namespace tnbLib
 		void SetBackgrounds(std::vector<std::shared_ptr<GeoMesh3d_Background>>&& theBacks)
 		{
 			theBackgrounds_ = std::move(theBacks);
+		}
+
+		void SetCloud(const std::shared_ptr<Geo3d_PatchCloud>& theCloud)
+		{
+			theCloud_ = theCloud;
+		}
+
+		void SetCloud(std::shared_ptr<Geo3d_PatchCloud>&& theCloud)
+		{
+			theCloud_ = std::move(theCloud);
 		}
 
 	};

@@ -2189,6 +2189,9 @@
     <ClCompile Include="TnbLib\Geo\ElementQuality\Triangle\Tools\Geo2d_TriangleQualityTools.cxx">
       <Filter>TnbLib\Geo\ElementQuality\Traingle\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Box\3d\Entity3d_BoxIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Box\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">

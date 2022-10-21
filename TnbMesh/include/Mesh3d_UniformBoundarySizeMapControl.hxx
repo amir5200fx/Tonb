@@ -47,9 +47,10 @@ namespace tnbLib
 		Mesh3d_UniformBoundarySizeMapControl
 		(
 			const std::shared_ptr<Mesh3d_ReferenceValues>& theRef,
-			const std::shared_ptr<Entity3d_Box>& theDomain
+			const std::shared_ptr<Entity3d_Box>& theDomain,
+			const std::shared_ptr<Geo3d_PatchCloud>& theCloud
 		)
-			: Mesh3d_BoundarySizeMapControl(theRef, theDomain)
+			: Mesh3d_BoundarySizeMapControl(theRef, theDomain, theCloud)
 		{}
 
 

@@ -1,4 +1,8 @@
 #pragma once
+#ifdef _DEBUG
+#include <Entity_Box.hxx>
+#endif // _DEBUG
+
 namespace tnbLib
 {
 
@@ -13,6 +17,11 @@ namespace tnbLib
 
 		if (NOT Sense)
 		{
+#ifdef _DEBUG
+			Info << " - coordinate: " << theCoord << endl
+				<< " - Bounding box: " << this->BoundingBox() << endl << endl;
+#endif // _DEBUG
+
 			FatalErrorIn("Type InterpolateAt(const Point& theCoord) const")
 				<< "the element is not found!" << endl
 				<< abort(FatalError);

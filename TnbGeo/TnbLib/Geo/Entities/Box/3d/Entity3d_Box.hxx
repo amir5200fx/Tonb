@@ -2,11 +2,18 @@
 #ifndef _Entity3d_Box_Header
 #define _Entity3d_Box_Header
 
+#include <Entity3d_BoxFwd.hxx>
 #include <Entity_Box.hxx>
 #include <Pnt3d.hxx>
 
 namespace tnbLib
 {
+
+	template<>
+	TnbGeo_EXPORT std::ostream& operator<<(std::ostream& os, const Entity3d_Box& theBox);
+
+	template<>
+	TnbGeo_EXPORT Ostream& operator<<(Ostream& os, const Entity3d_Box& theBox);
 
 	enum Box3d_SubDivideAlgorithm
 	{
@@ -37,9 +44,6 @@ namespace tnbLib
 		Box3d_PickAlgorithm_Aft_NE,
 		Box3d_PickAlgorithm_Aft_NW
 	};
-
-	typedef Entity_Box<Pnt3d>
-		Entity3d_Box;
 
 	template<>
 	template<>

@@ -14,8 +14,8 @@ tnbLib::Geo3d_SegmentCloud_SamplesLev1::CalcSamples
 	auto p1 = MEAN(centre, x1);
 	std::vector<Standard_Real> samples;
 	samples.reserve(3);
-	samples.push_back(std::move(p0));
-	samples.push_back(std::move(p1));
-	samples.push_back(std::move(centre));
+	samples.push_back(p0);
+	samples.push_back(p1);
+	samples.push_back(centre);
 	return std::move(samples);
 }

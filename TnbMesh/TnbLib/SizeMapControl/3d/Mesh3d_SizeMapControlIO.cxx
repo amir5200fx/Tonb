@@ -1,5 +1,6 @@
 #include <Mesh3d_SizeMapControl.hxx>
 
+#include <Geo3d_PatchCloud.hxx>
 #include <Cad_TModel.hxx>
 #include <Mesh_ReferenceValues.hxx>
 #include <Mesh3d_SizeMapTool.hxx>
@@ -14,6 +15,7 @@ namespace tnbLib
 		ar & theReference_;
 		ar & theBoundaries_;
 		ar & theDomain_;
+		ar & theCloud_;
 	}
 
 	template<>
@@ -23,5 +25,6 @@ namespace tnbLib
 		ar & theReference_;
 		ar & theBoundaries_;
 		ar & theDomain_;
+		ar & theCloud_;
 	}
 }

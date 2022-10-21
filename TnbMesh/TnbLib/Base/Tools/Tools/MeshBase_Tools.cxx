@@ -1,5 +1,6 @@
 #include <MeshBase_Tools.hxx>
 
+#include <Mesh_SetSourcesNode.hxx>
 #include <Mesh3d_Element.hxx>
 #include <Mesh3d_Node.hxx>
 #include <Mesh2d_Element.hxx>
@@ -236,6 +237,108 @@ tnbLib::MeshBase_Tools::CalcAnalyCoord
 
 	Pnt2d P(theCentre.X() + U(0), theCentre.Y() + U(1));
 	return std::move(P);
+}
+
+namespace tnbLib
+{
+
+	namespace meshLib
+	{
+
+		static std::shared_ptr<Mesh3d_Node> 
+			RetrieveClosestNode
+			(
+				const std::tuple
+				<
+				std::shared_ptr<Mesh3d_Node>, 
+				std::shared_ptr<Mesh3d_Node>, 
+				std::shared_ptr<Mesh3d_Node>,
+				std::shared_ptr<Mesh3d_Node>
+				>& theNodes,
+				const Pnt3d& theCoord
+			)
+		{
+			auto[n0, n1, n2, n3] = theNodes;
+			Standard_Real dis = theCoord.SquareDistance(n0->Coord());
+			auto nearest = std::move(n0);
+			
+			const auto d1 = theCoord.SquareDistance(n1->Coord());
+			if (d1 < dis)
+			{
+				dis = d1;
+				nearest = std::move(n1);
+			}
+			const auto d2 = theCoord.SquareDistance(n2->Coord());
+			if (d2 < dis)
+			{
+				dis = d2;
+				nearest = std::move(n2);
+			}
+			const auto d3 = theCoord.SquareDistance(n3->Coord());
+			if (d3 < dis)
+			{
+				dis = d3;
+				nearest = std::move(n3);
+			}
+			return std::move(nearest);
+		}
+	}
+}
+
+void tnbLib::MeshBase_Tools::SetSourcesToMesh
+(
+	const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt3d, Standard_Real>>>& theSources,
+	const Standard_Real theBase,
+	const Standard_Real theGrowthRate,
+	GeoMesh3d_Background & theMesh
+)
+{
+	const auto& mesh = *theMesh.Mesh();
+	if (mesh.Elements().empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the element list of the background mesh is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	auto meshNodes = RetrieveNodes(mesh.Elements());
+	auto& sources = theMesh.Sources();
+	sources.resize(meshNodes.size(), theBase);
+
+	auto start = mesh.Elements().at(0);
+	for (const auto& x : theSources)
+	{
+		const auto current = mesh.TriangleLocation(start, x->Coord());
+		if (NOT current)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the point is outside of the mesh!" << endl
+				<< " - domain's of the mesh: " << theMesh.BoundingBox() << endl
+				<< " - coordinates of the point: " << x->Coord() << endl
+				<< abort(FatalError);
+		}
+		start = current;
+
+		auto nodes = current->Nodes();
+		auto nearest = meshLib::RetrieveClosestNode(nodes, x->Coord());
+		auto neighbors = RetrieveAdjacentNodes(nearest);
+		for (const auto& ni : neighbors)
+		{
+			Debug_Null_Pointer(ni);
+			auto id = Index_Of(ni->Index());
+
+			auto h = sources.at(id);
+			auto dx = nearest->Coord().Distance(ni->Coord());
+			auto val = std::min(theBase, h + theGrowthRate * dx);
+			if (val < h) sources.at(id) = val;
+		}
+		{
+			auto id = Index_Of(nearest->Index());
+
+			auto h = sources.at(id);
+			if (x->H() < h) sources.at(id) = x->H();
+		}
+	}
 }
 
 void tnbLib::MeshBase_Tools::SetSourcesToMesh
@@ -619,4 +722,58 @@ tnbLib::MeshBase_Tools::LastParameter
 {
 	Debug_Null_Pointer(theCurve);
 	return theCurve->LastParameter();
+}
+
+std::vector<std::shared_ptr<tnbLib::Mesh3d_Node>> 
+tnbLib::MeshBase_Tools::RetrieveNodes
+(
+	const std::vector<std::shared_ptr<Mesh3d_Element>>& theElements
+)
+{
+	auto cmp = [](const std::shared_ptr<Mesh3d_Node>& n0, const std::shared_ptr<Mesh3d_Node>& n1) {return n0->Index() < n1->Index(); };
+	std::set<std::shared_ptr<Mesh3d_Node>, decltype(cmp)> nodeSet(cmp);
+	for (const auto& x : theElements)
+	{
+		Debug_Null_Pointer(x);
+		auto[n0, n1, n2, n3] = x->Nodes();
+		nodeSet.insert(std::move(n0));
+		nodeSet.insert(std::move(n1));
+		nodeSet.insert(std::move(n2));
+		nodeSet.insert(std::move(n3));
+	}
+
+	std::vector<std::shared_ptr<Mesh3d_Node>> nodes;
+	nodes.reserve(nodeSet.size());
+	for (auto& n : nodeSet)
+	{
+		nodes.push_back(std::move(n));
+	}
+	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::Mesh3d_Node>>
+tnbLib::MeshBase_Tools::RetrieveAdjacentNodes
+(
+	const std::shared_ptr<Mesh3d_Node>& theNode
+)
+{
+	Debug_Null_Pointer(theNode);
+	const auto& edges = theNode->RetrieveEdges();
+	std::vector<std::shared_ptr<Mesh3d_Node>> nodes;
+	nodes.reserve(edges.size());
+	for (const auto& x : edges)
+	{
+		auto e = x.second.lock();
+		Debug_Null_Pointer(e);
+		if (e->Node0() NOT_EQUAL theNode)
+		{
+			nodes.push_back(e->Node0());
+			continue;
+		}
+		if (e->Node1() NOT_EQUAL theNode)
+		{
+			nodes.push_back(e->Node1());
+		}
+	}
+	return std::move(nodes);
 }

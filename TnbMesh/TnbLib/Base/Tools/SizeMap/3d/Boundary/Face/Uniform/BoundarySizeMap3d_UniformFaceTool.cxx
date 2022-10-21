@@ -128,11 +128,7 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 
 	//AlgInfo()->ApprxSurfInfo()->SetTolerance(elemSize);
 
-	Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine;
-	engine.SetMaxUnbalancing(AlgInfo()->UnBalancing());
-	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
-	engine.SetGeometryRegion(expB);
-	engine.BUCKET_SIZE = AlgInfo()->BucketSize();
+	
 
 	auto funMode = std::make_shared<Geo3d_ApprxSurfPatch_hSizeFunMode>(AlgInfo()->NbSamples());
 
@@ -140,6 +136,14 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 
 	std::vector<std::shared_ptr<hNode>> sources;
 	{ // Approximating space scope [9/5/2022 Amir]
+
+		Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine0;
+		engine0.SetMaxUnbalancing(AlgInfo()->UnBalancing());
+		engine0.SetGeometryCoordFunc(&sourceNode::GetCoord);
+		engine0.SetGeometryRegion(expB);
+		engine0.BUCKET_SIZE = AlgInfo()->BucketSize();
+		//engine.BUCKET_SIZE = 8;
+
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
 
@@ -179,6 +183,7 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 
 			auto tri = Cad_Tools::ParaTriangulation(*poly);
 			auto samples = Cloud()->CalcCloud(*tri);
+
 			//for (const auto& p2 : inners)
 			for (const auto& p2 : samples)
 			{
@@ -186,13 +191,13 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);
 
 				std::vector<std::shared_ptr<sourceNode>> items;
-				engine.GeometrySearch(b, items);
+				engine0.GeometrySearch(b, items);
 				if (items.empty())
 				{
 					auto h = std::make_shared<hNode>(p, elemSize);
 					auto node = std::make_shared<sourceNode>(std::move(p));
 					Debug_Null_Pointer(node);
-					engine.InsertToGeometry(node);
+					engine0.InsertToGeometry(node);
 
 					++nbSources;
 
@@ -214,7 +219,7 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 						auto h = std::make_shared<hNode>(p, elemSize);
 						auto node = std::make_shared<sourceNode>(std::move(p));
 						Debug_Null_Pointer(node);
-						engine.InsertToGeometry(node);
+						engine0.InsertToGeometry(node);
 
 						++nbSources;
 
@@ -228,6 +233,96 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 			}
 		}
 	}
+
+	Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine;
+	engine.SetMaxUnbalancing(AlgInfo()->UnBalancing());
+	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
+	engine.SetGeometryRegion(expB);
+	engine.BUCKET_SIZE = AlgInfo()->BucketSize();
+
+	{ // Approximating space scope [9/5/2022 Amir]
+		Global_Timer timer;
+		timer.SetInfo(Global_TimerInfo_ms);
+
+		for (const auto& x : faces)
+		{
+			Debug_Null_Pointer(x);
+			if (NOT x->GeomSurface())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the face has no geometry!" << endl
+					<< abort(FatalError);
+			}
+
+			const auto& poly = x->RetrieveTriangulation();
+			if (NOT poly)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the surface has no triangulation." << endl
+					<< abort(FatalError);
+			}
+			const auto& geometry = x->GeomSurface();
+			//const auto b = std::make_shared<Entity2d_Box>(x->ParaBoundingBox());
+
+			//auto back = RetrieveBackMesh(x, *b);
+
+			/*auto approx =
+				std::make_shared<Geo3d_ApprxSurfPatch>
+				(
+					geometry->Geometry(), b, back,
+					funMode, AlgInfo()->ApprxSurfInfo()
+					);
+			Debug_Null_Pointer(approx);
+			approx->Perform();
+			Debug_If_Condition_Message(NOT approx->IsDone(), "the application is not performed.");
+
+			auto inners = RetrieveInnerCoords(*approx->Approximated(), *back);*/
+
+			auto tri = Cad_Tools::ParaTriangulation(*poly);
+			//auto samples = Cloud()->CalcCloud(*tri);
+
+			//for (const auto& p2 : inners)
+			for (const auto& p2 : tri->Points())
+			{
+				auto p = geometry->Value(p2);
+				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);
+
+				std::vector<std::shared_ptr<sourceNode>> items;
+				engine.GeometrySearch(b, items);
+				if (items.empty())
+				{
+					auto h = std::make_shared<hNode>(p, 0);
+					auto node = std::make_shared<sourceNode>(std::move(p));
+					Debug_Null_Pointer(node);
+					engine.InsertToGeometry(node);
+				}
+				else
+				{
+					Standard_Real minDis = RealLast();
+					for (const auto& i : items)
+					{
+						auto dis = i->Coord().Distance(p);
+						if (dis < minDis)
+						{
+							minDis = dis;
+						}
+					}
+					if (minDis > mergCrit)
+					{
+						auto h = std::make_shared<hNode>(p, 0);
+						auto node = std::make_shared<sourceNode>(std::move(p));
+						Debug_Null_Pointer(node);
+						engine.InsertToGeometry(node);
+					}
+					else
+					{
+						// do nothing [8/25/2022 Amir]
+					}
+				}
+			}
+		}
+	}
+
 
 	if (verbose)
 	{
@@ -304,9 +399,6 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 		Info << endl;
 	}
 
-	MeshBase_Tools::SetSourcesToMesh3d(sources, ReferenceValues()->BaseSize(), *bMesh);
-	sources.clear();
-
 	auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrIters());
@@ -316,6 +408,9 @@ void tnbLib::BoundarySizeMap3d_UniformFaceTool::Perform()
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(this->MeshValues()->BoundaryGrowthRate()));
 	else
 		hvInfo->SetFactor(Mesh_VariationRate::Rate(ReferenceValues()->DefaultGrowthRate()));
+
+	MeshBase_Tools::SetSourcesToMesh(sources, ReferenceValues()->BaseSize(), hvInfo->Factor(), *bMesh);
+	sources.clear();
 
 	if (verbose)
 	{
