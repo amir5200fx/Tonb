@@ -1,5 +1,7 @@
 #include <Mesh_Curve.hxx>
 
+Standard_Integer tnbLib::Mesh_Curve_Base::nbLevels_CheckingLength = 2;
+
 tnbLib::Mesh_Curve_Base::Mesh_Curve_Base
 (
 	const Standard_Real theFirst,
