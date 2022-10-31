@@ -7,6 +7,10 @@
 #include <Geo3d_BasicApprxCurve.hxx>
 #include <Geo3d_BasicApprxCurveAdaptor.hxx>
 #include <Geo3d_SegmentCloud.hxx>
+#include <Geo3d_SegmentCloud_InternalSamples.hxx>
+#include <Geo3d_SegmentCloud_SamplesLev0.hxx>
+#include <Geo3d_SegmentCloud_SamplesLev1.hxx>
+#include <Geo3d_SegmentCloud_SamplesLev2.hxx>
 #include <TModel_Paired.hxx>
 #include <TModel_Edge.hxx>
 #include <TModel_GeneratedEdge.hxx>
@@ -125,7 +129,7 @@ namespace tnbLib
 			}
 		}
 
-		auto RetrieveNodes(const Geo3d_BalPrTree<std::shared_ptr<sourceNode>>& theEngine, const Entity3d_Box& theDomain, const Standard_Real theTol)
+		auto RetrieveNodes(const Geo3d_BalPrTree<std::shared_ptr<sourceNode>>& theEngine, const std::vector<Pnt3d>& theCoords, const Entity3d_Box& theDomain, const Standard_Real theTol)
 		{
 			std::vector<Geo3d_BalPrTree<std::shared_ptr<sourceNode>>::leafNode*> leaves;
 			theEngine.RetrieveLeavesTo(leaves);
@@ -148,37 +152,85 @@ namespace tnbLib
 			for (const auto& x : boxes)
 			{
 				auto p0 = x->Corner(Box3d_PickAlgorithm_Aft_SW);
-				InsertToEngine(std::move(p0), theTol, engine);
-
 				auto p1 = x->Corner(Box3d_PickAlgorithm_Aft_SE);
-				InsertToEngine(std::move(p1), theTol, engine);
-
 				auto p2 = x->Corner(Box3d_PickAlgorithm_Aft_NE);
-				InsertToEngine(std::move(p2), theTol, engine);
-
 				auto p3 = x->Corner(Box3d_PickAlgorithm_Aft_NW);
-				InsertToEngine(std::move(p3), theTol, engine);
 
 				auto p4 = x->Corner(Box3d_PickAlgorithm_Fwd_SW);
-				InsertToEngine(std::move(p4), theTol, engine);
-
 				auto p5 = x->Corner(Box3d_PickAlgorithm_Fwd_SE);
-				InsertToEngine(std::move(p5), theTol, engine);
-
 				auto p6 = x->Corner(Box3d_PickAlgorithm_Fwd_NE);
-				InsertToEngine(std::move(p6), theTol, engine);
-
 				auto p7 = x->Corner(Box3d_PickAlgorithm_Fwd_NW);
+
+				auto pc = x->CalcCentre();
+
+				/*auto pm0 = Geo_Tools::CalcCentre(p0, p2);
+				auto pm1 = Geo_Tools::CalcCentre(p4, p6);
+
+				auto pm2 = Geo_Tools::CalcCentre(p0, p7);
+				auto pm3 = Geo_Tools::CalcCentre(p1, p6);
+
+				auto pm4 = Geo_Tools::CalcCentre(p1, p4);
+				auto pm5 = Geo_Tools::CalcCentre(p2, p7);
+
+				auto pe0 = Geo_Tools::CalcCentre(p0, p1);
+				auto pe1 = Geo_Tools::CalcCentre(p1, p2);
+				auto pe2 = Geo_Tools::CalcCentre(p2, p3);
+				auto pe3 = Geo_Tools::CalcCentre(p3, p0);
+
+				auto pe4 = Geo_Tools::CalcCentre(p1, p5);
+				auto pe5 = Geo_Tools::CalcCentre(p2, p6);
+				auto pe6 = Geo_Tools::CalcCentre(p3, p7);
+				auto pe7 = Geo_Tools::CalcCentre(p0, p4);
+
+				auto pe8 = Geo_Tools::CalcCentre(p4, p5);
+				auto pe9 = Geo_Tools::CalcCentre(p5, p6);
+				auto pe10 = Geo_Tools::CalcCentre(p6, p7);
+				auto pe11 = Geo_Tools::CalcCentre(p7, p4);*/
+
+				InsertToEngine(std::move(p0), theTol, engine);	
+				InsertToEngine(std::move(p1), theTol, engine);
+				InsertToEngine(std::move(p2), theTol, engine);		
+				InsertToEngine(std::move(p3), theTol, engine);
+				InsertToEngine(std::move(p4), theTol, engine);
+				InsertToEngine(std::move(p5), theTol, engine);
+				InsertToEngine(std::move(p6), theTol, engine);
 				InsertToEngine(std::move(p7), theTol, engine);
+	
+				InsertToEngine(std::move(pc), theTol, engine);
+
+				/*InsertToEngine(std::move(pm0), theTol, engine);
+				InsertToEngine(std::move(pm1), theTol, engine);
+				InsertToEngine(std::move(pm2), theTol, engine);
+				InsertToEngine(std::move(pm3), theTol, engine);
+				InsertToEngine(std::move(pm4), theTol, engine);
+				InsertToEngine(std::move(pm5), theTol, engine);*/
+
+				/*InsertToEngine(std::move(pe0), theTol, engine);
+				InsertToEngine(std::move(pe1), theTol, engine);
+				InsertToEngine(std::move(pe2), theTol, engine);
+				InsertToEngine(std::move(pe3), theTol, engine);
+				InsertToEngine(std::move(pe4), theTol, engine);
+				InsertToEngine(std::move(pe5), theTol, engine);
+				InsertToEngine(std::move(pe6), theTol, engine);
+				InsertToEngine(std::move(pe7), theTol, engine);
+				InsertToEngine(std::move(pe8), theTol, engine);
+				InsertToEngine(std::move(pe9), theTol, engine);
+				InsertToEngine(std::move(pe10), theTol, engine);
+				InsertToEngine(std::move(pe11), theTol, engine);*/
 			}
 
-			std::vector<std::shared_ptr<sourceNode>> sNodes;
+			for (auto x : theCoords)
+			{
+				InsertToEngine(std::move(x), theTol, engine);
+			}
+
+			/*std::vector<std::shared_ptr<sourceNode>> sNodes;
 			theEngine.RetrieveFromGeometryTo(sNodes);
 			for (const auto& x : sNodes)
 			{
 				auto pt = x->Coord();
 				InsertToEngine(std::move(pt), theTol, engine);
-			}
+			}*/
 
 			std::vector<std::shared_ptr<Pnt3d>> items;
 			engine.RetrieveFromGeometryTo(items);
@@ -238,8 +290,11 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	//ApproxInfo()->SetApprox(elemSize);
 	//ApproxInfo()->SetMinSize(0.9*elemSize);
 
+	auto segCloud0 = std::make_shared<Geo3d_SegmentCloud_InternalSamples>(std::make_shared<Geo3d_SegmentCloud_SamplesLev2>());
+
 	Standard_Integer nbSources = 0;
 
+	std::vector<Pnt3d> srcCoords;
 	std::vector<std::shared_ptr<hNode>> sources;
 	{ // Approximating space scope [8/25/2022 Amir]
 		Global_Timer timer;
@@ -249,7 +304,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 		engine0.SetMaxUnbalancing(UnBalancing());
 		engine0.SetGeometryCoordFunc(&sourceNode::GetCoord);
 		engine0.SetGeometryRegion(expB);
-		engine0.BUCKET_SIZE = BucketSize();
+		engine0.BUCKET_SIZE = 8;
 
 		for (const auto& x : segments)
 		{
@@ -270,7 +325,8 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			}
 
 			const auto& params = gen->ParaMesh();
-			auto samples = Cloud()->CalcCloud(params);
+			//auto samples = Cloud()->CalcCloud(params);
+			auto samples = segCloud0->CalcCloud(params);
 
 			//auto adaptor = std::make_shared<Geo3d_BasicApprxCurveAdaptor>(curve->Geometry());
 
@@ -290,13 +346,14 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 				if (items.empty())
 				{
 					auto h = std::make_shared<hNode>(p, elemSize);
-					auto node = std::make_shared<sourceNode>(std::move(p));
+					auto node = std::make_shared<sourceNode>(p);
 					Debug_Null_Pointer(node);
 					engine0.InsertToGeometry(node);
 
 					++nbSources;
 					
 					sources.push_back(std::move(h));
+					srcCoords.push_back(std::move(p));
 				}
 				else
 				{
@@ -312,13 +369,14 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 					if (minDis > mergCrit)
 					{
 						auto h = std::make_shared<hNode>(p, elemSize);
-						auto node = std::make_shared<sourceNode>(std::move(p));
+						auto node = std::make_shared<sourceNode>(p);
 						Debug_Null_Pointer(node);
 						engine0.InsertToGeometry(node);
 
 						++nbSources;
 
 						sources.push_back(std::move(h));
+						srcCoords.push_back(std::move(p));
 					}
 					else
 					{
@@ -331,10 +389,12 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	}
 
 	Geo3d_BalPrTree<std::shared_ptr<sourceNode>> engine;
-	engine.SetMaxUnbalancing(UnBalancing());
+	engine.SetMaxUnbalancing(4);
 	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
 	engine.SetGeometryRegion(expB);
-	engine.BUCKET_SIZE = 1;
+	engine.BUCKET_SIZE = 2;
+
+	auto segCloud = std::make_shared<Geo3d_SegmentCloud_InternalSamples>(std::make_shared<Geo3d_SegmentCloud_SamplesLev1>());
 
 	{ // Approximating space scope [8/25/2022 Amir]
 		Global_Timer timer;
@@ -360,6 +420,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 
 			const auto& params = gen->ParaMesh();
 			//auto samples = Cloud()->CalcCloud(params);
+			auto samples = segCloud->CalcCloud(params);
 
 			//auto adaptor = std::make_shared<Geo3d_BasicApprxCurveAdaptor>(curve->Geometry());
 
@@ -369,7 +430,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			Debug_If_Condition_Message(NOT approx.IsDone(), "the application is not performed.");
 
 			const auto& poly = approx.Chain();*/
-			for (auto pm : params)
+			for (auto pm : samples)
 			{
 				auto p = curve->Value(pm);
 				auto b = Geo_BoxTools::GetBox<Pnt3d>(p, mergCrit);
@@ -422,7 +483,8 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
 
-		//engine.PostBalance();
+		engine.SetMaxUnbalancing(4);
+		engine.PostBalance();
 	}
 
 	if (verbose)
@@ -431,7 +493,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			<< " - the tree is balanced in: " << global_time_duration << " ms." << endl;
 	}
 
-	std::vector<Geo3d_BalPrTree<std::shared_ptr<sourceNode>>::leafNode*> leaves;
+	/*std::vector<Geo3d_BalPrTree<std::shared_ptr<sourceNode>>::leafNode*> leaves;
 	engine.RetrieveLeavesTo(leaves);
 
 	std::vector<std::shared_ptr<Entity3d_Box>> boxes;
@@ -440,7 +502,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 		Debug_Null_Pointer(x);
 		const auto& b = x->Box();
 		boxes.push_back(b);
-	}
+	}*/
 
 	auto myTet = std::make_shared<Entity3d_Tetrahedralization>();
 	Debug_Null_Pointer(myTet);
@@ -449,7 +511,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
 
-		auto pnts = segmentTools::RetrieveNodes(engine, expB, mergCrit);
+		auto pnts = segmentTools::RetrieveNodes(engine, srcCoords, expB, mergCrit);
 		fadeLib::Geo3d_DelTri delTri(pnts);
 		delTri.Perform();
 
