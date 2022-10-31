@@ -177,7 +177,7 @@ namespace tnbLib
 			Geo3d_BalPrTree<std::shared_ptr<Pnt3d>> engine;
 			engine.SetGeometryCoordFunc([](const std::shared_ptr<Pnt3d>& x)-> const auto& {return *x; });
 			engine.SetGeometryRegion(theDomain);
-			engine.SetMaxUnbalancing(2);
+			engine.SetMaxUnbalancing(4);
 			engine.BUCKET_SIZE = 4;
 
 			for (const auto& x : boxes)
@@ -205,6 +205,9 @@ namespace tnbLib
 
 				auto p7 = x->Corner(Box3d_PickAlgorithm_Fwd_NW);
 				InsertToEngine(std::move(p7), theTol, engine);
+
+				/*auto pm = x->CalcCentre();
+				InsertToEngine(std::move(pm), theTol, engine);*/
 			}
 
 			std::vector<std::shared_ptr<Pnt3d>> sNodes;
@@ -267,6 +270,7 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 	approxSpace.SetMaxUnbalancing(MaxUnbalancing());
 	approxSpace.SetGeometryCoordFunc([](const std::shared_ptr<Pnt3d>& pt)-> const auto&{return *pt; });
 	approxSpace.SetGeometryRegion(expB);
+	approxSpace.BUCKET_SIZE = 4;
 	{
 
 		{
@@ -338,6 +342,20 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 			boxes.push_back(b);
 		}*/
 	}
+
+	/*{
+		Global_Timer timer;
+		timer.SetInfo(Global_TimerInfo_ms);
+
+		approxSpace.SetMaxUnbalancing(4);
+		approxSpace.PostBalance();
+	}
+
+	if (verbose)
+	{
+		Info << endl
+			<< " - the tree is balanced in: " << global_time_duration << " ms." << endl;
+	}*/
 
 	auto myTet = std::make_shared<Entity3d_Tetrahedralization>();
 	Debug_Null_Pointer(myTet);

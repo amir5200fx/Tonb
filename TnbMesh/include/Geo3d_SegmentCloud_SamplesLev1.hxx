@@ -46,6 +46,6 @@ namespace tnbLib
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::Geo3d_SegmentCloud_Samples);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Geo3d_SegmentCloud_SamplesLev1);
 
 #endif // !_Geo3d_SegmentCloud_SamplesLev1_Header

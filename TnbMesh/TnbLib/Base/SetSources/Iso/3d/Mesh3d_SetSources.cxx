@@ -71,7 +71,7 @@ namespace tnbLib
 
 				Standard_Integer NbElements() const
 				{
-					return theElements_.size();
+					return (Standard_Integer)theElements_.size();
 				}
 
 				const auto& Elements() const

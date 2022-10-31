@@ -4980,6 +4980,23 @@
     <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo3d_SegmentCloud_SamplesLev1.hxx">
       <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Mesh2d_CurveAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_Correction.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_CorrectionFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Entity\AnIso\Mesh2d_CurveEntityAnIsoFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Entity\AnIso\UniMetric\Mesh2d_CurveEntityUniMetricFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetricFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_Correction.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_CorrectionFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_Initial.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_InitialFwd.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_Initial.hxx" />
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_InitialFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Samples\Geo3d_SpaceCloud_TetSamples.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Geo3d_SpaceCloud.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamples.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6461,6 +6478,18 @@
     <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo3d_SegmentCloud_SamplesLev1IO.cxx">
       <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Mesh2d_CurveAnIso.cxx" />
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_Correction.cxx" />
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_Correction.cxx" />
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_Initial.cxx" />
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_Initial.cxx" />
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetric.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2IO.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0IO.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamples.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamplesIO.cxx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Aft\Model\Aft2d_Model_Import.jxx">
