@@ -745,6 +745,12 @@
     <Filter Include="TnbLib\Geo\ElementQuality\Traingle\Tools">
       <UniqueIdentifier>{422c177c-b67c-4560-93cb-72ecee81146b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Tetrahedron">
+      <UniqueIdentifier>{c7dfc099-072b-41fc-881e-c114b57071d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Tetrahedron\3d">
+      <UniqueIdentifier>{6f1ddb0e-3a0d-43c3-8c49-29d4d5fc3ee3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1760,6 +1766,15 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Geo\ElementQuality\Triangle\Tools\Geo2d_TriangleQualityTools.hxx">
       <Filter>TnbLib\Geo\ElementQuality\Traingle\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Tetrahedron\Entity_Tetrahedron.hxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedron</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Tetrahedron\3d\Entity3d_TetrahedronFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedron\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Tetrahedron\3d\Entity3d_Tetrahedron.hxx">
+      <Filter>TnbLib\Geo\Entities\Tetrahedron\3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

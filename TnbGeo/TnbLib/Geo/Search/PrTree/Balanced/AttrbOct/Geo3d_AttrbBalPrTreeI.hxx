@@ -691,7 +691,7 @@ inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::Balance(node *& t)
 	if (leaf)
 	{
 		if (NOT IsUnbalanced(leaf)) return;
-		if (NOT IsBalanced()) IsBalancedRef() = Standard_True;
+		if (IsBalancedRef()) IsBalancedRef() = Standard_False;
 
 		Debug_Null_Pointer(leaf->Box());
 		const auto& b = *leaf->Box();
@@ -1327,11 +1327,11 @@ inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::GeometrySearch
 template<class T, class Attrb>
 inline void tnbLib::Geo3d_AttrbBalPrTree<T, Attrb>::PostBalance()
 {
-	IsBalancedRef() = Standard_False;
 	while (true)
 	{
+		IsBalancedRef() = Standard_True;
 		Balance(theRoot_);
-		if (NOT IsBalanced()) break;
+		if (IsBalancedRef()) break;
 	}
 }
 

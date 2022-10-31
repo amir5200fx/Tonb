@@ -35,6 +35,10 @@ namespace tnbLib
 
 		// public functions and operators [7/5/2022 Amir]
 
+
+		~Geo3d_BalPrTreeInternal() override
+		{}
+
 	};
 }
 

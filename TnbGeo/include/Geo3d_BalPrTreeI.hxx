@@ -106,11 +106,43 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 {
 	if (!t)
 	{
-		leafNode* leaf = new leafNode;
+		/*leafNode* leaf = new leafNode;
 		leaf->SetBox(std::move(theBox));
 		leaf->Insert(theItem);
 
-		t = leaf;
+		t = leaf;*/
+
+		//Base::Increment();
+		//return;
+		auto interNode = new internalNode;
+		interNode->SetBox(theBox);
+
+		auto Fwd_SwPtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Fwd_SW)));
+		auto Fwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Fwd_SE)));
+		auto Fwd_NePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Fwd_NE)));
+		auto Fwd_NwPtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Fwd_NW)));
+
+		auto Bwd_SwPtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Aft_SW)));
+		auto Bwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Aft_SE)));
+		auto Bwd_NePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Aft_NE)));
+		auto Bwd_NwPtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Aft_NW)));
+
+		interNode->FwdSwRef() = Fwd_SwPtr;
+		interNode->FwdSeRef() = Fwd_SePtr;
+		interNode->FwdNeRef() = Fwd_NePtr;
+		interNode->FwdNwRef() = Fwd_NwPtr;
+
+		interNode->BwdSwRef() = Bwd_SwPtr;
+		interNode->BwdSeRef() = Bwd_SePtr;
+		interNode->BwdNeRef() = Bwd_NePtr;
+		interNode->BwdNwRef() = Bwd_NwPtr;
+
+		LinkInners(interNode);
+
+		const auto coord = theBox->CalcCentre();
+		SwitchToInsert(theItem, coord, theBox, interNode);
+
+		t = interNode;
 
 		Base::Increment();
 		return;
@@ -142,6 +174,15 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 			const auto& pItems = leaf->Bucket();
 			const auto& b = *leaf->Box();
 
+			/*std::cout << std::endl;
+			std::cout << "fn size: " << leaf->FNeighbors().size() << std::endl;
+			std::cout << "bn size: " << leaf->BNeighbors().size() << std::endl;
+			std::cout << "en size: " << leaf->ENeighbors().size() << std::endl;
+			std::cout << "wn size: " << leaf->WNeighbors().size() << std::endl;
+			std::cout << "sn size: " << leaf->SNeighbors().size() << std::endl;
+			std::cout << "nn size: " << leaf->NNeighbors().size() << std::endl;
+			std::cout << std::endl;
+			PAUSE;*/
 			auto interNode = new internalNode;
 			interNode->SetBox(leaf->Box());
 
@@ -477,20 +518,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (WN.size() <= 1) for (const auto& x : WN) QWN.push_back(x);
 		else
 			for (const auto& x : WN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SW)
+			{
+				if (IsBwdSW(x->Box()->CalcCentre(), c))
+				{
 					QWN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SW)
+					QWN.push_back(x);*/
+			}
 
 		if (SN.size() <= 1) for (const auto& x : SN) QSN.push_back(x);
 		else
 			for (const auto& x : SN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SW)
+			{
+				if (IsBwdSW(x->Box()->CalcCentre(), c))
+				{
 					QSN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SW)
+					QSN.push_back(x);*/
+			}
 
 		if (BN.size() <= 1) for (const auto& x : BN) QBN.push_back(x);
 		else
 			for (const auto& x : BN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SW)
+			{
+				if (IsBwdSW(x->Box()->CalcCentre(), c))
+				{
 					QBN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SW)
+					QBN.push_back(x);*/
+			}
 		break;
 	}
 	case Geo3d_BalPrTreeOctant::Bwd_SE:
@@ -498,20 +557,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (SN.size() <= 1) for (const auto& x : SN) QSN.push_back(x);
 		else
 			for (const auto& x : SN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SE)
+			{
+				if (IsBwdSE(x->Box()->CalcCentre(), c))
+				{
 					QSN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SE)
+					QSN.push_back(x);*/
+			}
 
 		if (EN.size() <= 1) for (const auto& x : EN) QEN.push_back(x);
 		else
 			for (const auto& x : EN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SE)
+			{
+				if (IsBwdSE(x->Box()->CalcCentre(), c))
+				{
 					QEN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SE)
+					QEN.push_back(x);*/
+			}
 
 		if (BN.size() <= 1) for (const auto& x : BN) QBN.push_back(x);
 		else
 			for (const auto& x : BN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SE)
+			{
+				if (IsBwdSE(x->Box()->CalcCentre(), c))
+				{
 					QBN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_SE)
+					QBN.push_back(x);*/
+			}
 		break;
 	}
 	case Geo3d_BalPrTreeOctant::Bwd_NE:
@@ -519,20 +596,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (EN.size() <= 1) for (const auto& x : EN) QEN.push_back(x);
 		else
 			for (const auto& x : EN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NE)
+			{
+				if (IsBwdNE(x->Box()->CalcCentre(), c))
+				{
 					QEN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NE)
+					QEN.push_back(x);*/
+			}
 
 		if (NN.size() <= 1) for (const auto& x : NN) QNN.push_back(x);
 		else
 			for (const auto& x : NN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NE)
+			{
+				if (IsBwdNE(x->Box()->CalcCentre(), c))
+				{
 					QNN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NE)
+					QNN.push_back(x);*/
+			}
 
 		if (BN.size() <= 1) for (const auto& x : BN) QBN.push_back(x);
 		else
 			for (const auto& x : BN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NE)
+			{
+				if (IsBwdNE(x->Box()->CalcCentre(), c))
+				{
 					QBN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NE)
+					QBN.push_back(x);*/
+			}
 		break;
 	}
 	case Geo3d_BalPrTreeOctant::Bwd_NW:
@@ -540,20 +635,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (NN.size() <= 1) for (const auto& x : NN) QNN.push_back(x);
 		else
 			for (const auto& x : NN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NW)
-					QNN.push_back(x);
+			{
+				if (IsBwdNW(x->Box()->CalcCentre(), c))
+				{
+					QBN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NW)
+					QNN.push_back(x);*/
+			}
 
 		if (WN.size() <= 1) for (const auto& x : WN) QWN.push_back(x);
 		else
 			for (const auto& x : WN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NW)
+			{
+				if (IsBwdNW(x->Box()->CalcCentre(), c))
+				{
 					QWN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NW)
+					QWN.push_back(x);*/
+			}
 
 		if (BN.size() <= 1) for (const auto& x : BN) QBN.push_back(x);
 		else
 			for (const auto& x : BN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NW)
+			{
+				if (IsBwdNW(x->Box()->CalcCentre(), c))
+				{
 					QBN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Bwd_NW)
+					QBN.push_back(x);*/
+			}
 		break;
 	}
 	case Geo3d_BalPrTreeOctant::Fwd_SW:
@@ -561,20 +674,39 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (WN.size() <= 1) for (const auto& x : WN) QWN.push_back(x);
 		else
 			for (const auto& x : WN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SW)
+			{
+				if (IsFwdSW(x->Box()->CalcCentre(), c))
+				{
 					QWN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SW)
+					QWN.push_back(x);*/
+			}
 
 		if (SN.size() <= 1) for (const auto& x : SN) QSN.push_back(x);
 		else
 			for (const auto& x : SN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SW)
+			{
+				if (IsFwdSW(x->Box()->CalcCentre(), c))
+				{
 					QSN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SW)
+					QSN.push_back(x);*/
+			}
 
 		if (FN.size() <= 1) for (const auto& x : FN) QFN.push_back(x);
 		else
 			for (const auto& x : FN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SW)
+			{
+				if (IsFwdSW(x->Box()->CalcCentre(), c))
+				{
 					QFN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SW)
+					QFN.push_back(x);*/
+			}
+
 		break;
 	}
 	case Geo3d_BalPrTreeOctant::Fwd_SE:
@@ -582,20 +714,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (SN.size() <= 1) for (const auto& x : SN) QSN.push_back(x);
 		else
 			for (const auto& x : SN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SE)
+			{
+				if (IsFwdSE(x->Box()->CalcCentre(), c))
+				{
 					QSN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SE)
+					QSN.push_back(x);*/
+			}
 
 		if (EN.size() <= 1) for (const auto& x : EN) QEN.push_back(x);
 		else
 			for (const auto& x : EN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SE)
+			{
+				if (IsFwdSE(x->Box()->CalcCentre(), c))
+				{
 					QEN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SE)
+					QEN.push_back(x);*/
+			}
 
 		if (FN.size() <= 1) for (const auto& x : FN) QFN.push_back(x);
 		else
 			for (const auto& x : FN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SE)
+			{
+				if (IsFwdSE(x->Box()->CalcCentre(), c))
+				{
 					QFN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_SE)
+					QFN.push_back(x);*/
+			}
 		break;
 	}
 	case Geo3d_BalPrTreeOctant::Fwd_NE:
@@ -603,20 +753,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (EN.size() <= 1) for (const auto& x : EN) QEN.push_back(x);
 		else
 			for (const auto& x : EN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NE)
+			{
+				if (IsFwdNE(x->Box()->CalcCentre(), c))
+				{
 					QEN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NE)
+					QEN.push_back(x);*/
+			}
 
 		if (NN.size() <= 1) for (const auto& x : NN) QNN.push_back(x);
 		else
 			for (const auto& x : NN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NE)
+			{
+				if (IsFwdNE(x->Box()->CalcCentre(), c))
+				{
 					QNN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NE)
+					QNN.push_back(x);*/
+			}
 
 		if (FN.size() <= 1) for (const auto& x : FN) QFN.push_back(x);
 		else
 			for (const auto& x : FN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NE)
+			{
+				if (IsFwdNE(x->Box()->CalcCentre(), c))
+				{
 					QFN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NE)
+					QFN.push_back(x);*/
+			}
 		break;
 	}
 	case Geo3d_BalPrTreeOctant::Fwd_NW:
@@ -624,20 +792,38 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 		if (NN.size() <= 1) for (const auto& x : NN) QNN.push_back(x);
 		else
 			for (const auto& x : NN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NW)
+			{
+				if (IsFwdNW(x->Box()->CalcCentre(), c))
+				{
 					QNN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NW)
+					QNN.push_back(x);*/
+			}
 
 		if (WN.size() <= 1) for (const auto& x : WN) QWN.push_back(x);
 		else
 			for (const auto& x : WN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NW)
+			{
+				if (IsFwdNW(x->Box()->CalcCentre(), c))
+				{
 					QWN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NW)
+					QWN.push_back(x);*/
+			}
 
 		if (FN.size() <= 1) for (const auto& x : FN) QFN.push_back(x);
 		else
 			for (const auto& x : FN)
-				if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NW)
+			{
+				if (IsFwdNW(x->Box()->CalcCentre(), c))
+				{
 					QFN.push_back(x);
+				}
+				/*if (CalcOctant(x->Box()->CalcCentre(), c) IS_EQUAL Geo3d_BalPrTreeOctant::Fwd_NW)
+					QFN.push_back(x);*/
+			}
 		break;
 	}
 	default:
@@ -646,37 +832,52 @@ inline void tnbLib::Geo3d_BalPrTree<T>::FillNeighbors
 			<< abort(FatalError);
 		break;
 	}
-
+	/*std::cout << std::endl;
+	std::cout << "QSN size: " << QSN.size() << std::endl;
+	std::cout << "QEN size: " << QEN.size() << std::endl;
+	std::cout << "QNN size: " << QNN.size() << std::endl;
+	std::cout << "QWN size: " << QWN.size() << std::endl;
+	std::cout << "QBN size: " << QBN.size() << std::endl;
+	std::cout << "QFN size: " << QFN.size() << std::endl;
+	std::cout << std::endl;
+	PAUSE;*/
 	for (const auto& x : QSN)
 	{
 		x->NNeighborsRef().push_back(t);
 		t->SNeighborsRef().push_back(x);
+		//std::cout << "new neibor size: " << x->NNeighborsRef().size() << std::endl;
 	}
 	for (const auto& x : QEN)
 	{
 		x->WNeighborsRef().push_back(t);
 		t->ENeighborsRef().push_back(x);
+		//std::cout << "new neibor size: " << x->WNeighborsRef().size() << std::endl;
 	}
 	for (const auto& x : QNN)
 	{
 		x->SNeighborsRef().push_back(t);
 		t->NNeighborsRef().push_back(x);
+		//std::cout << "new neibor size: " << x->SNeighborsRef().size() << std::endl;
 	}
 	for (const auto& x : QWN)
 	{
 		x->ENeighborsRef().push_back(t);
 		t->WNeighborsRef().push_back(x);
+		//std::cout << "new neibor size: " << x->ENeighborsRef().size() << std::endl;
 	}
 	for (const auto& x : QBN)
 	{
 		x->FNeighborsRef().push_back(t);
 		t->BNeighborsRef().push_back(x);
+		//std::cout << "new neibor size: " << x->FNeighborsRef().size() << std::endl;
 	}
 	for (const auto& x : QFN)
 	{
 		x->BNeighborsRef().push_back(t);
 		t->FNeighborsRef().push_back(x);
+		//std::cout << "new neibor size: " << x->BNeighborsRef().size() << std::endl;
 	}
+	//PAUSE;
 }
 
 template<class T>
@@ -687,14 +888,14 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
 	if (leaf)
 	{
 		if (NOT IsUnbalanced(leaf)) return;
-		if (NOT IsBalanced()) IsBalancedRef() = Standard_True;
+		if (IsBalancedRef()) IsBalancedRef() = Standard_False;
 
 		Debug_Null_Pointer(leaf->Box());
 		const auto& b = *leaf->Box();
 
 		auto interNode = new internalNode;
 		interNode->SetBox(leaf->Box());
-
+		
 		// Subdivide the Leaf
 		auto Fwd_SwPtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Fwd_SW)));
 		auto Fwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Fwd_SE)));
@@ -751,16 +952,17 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
 		FillNeighbors(Geo3d_BalPrTreeOctant::Bwd_NE, leaf, interNode, Bwd_NePtr);
 		FillNeighbors(Geo3d_BalPrTreeOctant::Bwd_NW, leaf, interNode, Bwd_NwPtr);
 
-		UpdateFather(leaf, interNode);
+		UpdateFather(leaf, (node*)interNode);
 
 		if (t)
 		{
-			delete t;
+			delete leaf;
 			t = 0;
 		}
 
 		t = interNode;
 
+		//std::exit(1);
 		Balance(interNode->FwdSwRef());
 		Balance(interNode->FwdSeRef());
 		Balance(interNode->FwdNeRef());
@@ -1106,6 +1308,21 @@ inline void tnbLib::Geo3d_BalPrTree<T>::UpdateFather
 }
 
 template<class T>
+inline Standard_Boolean tnbLib::Geo3d_BalPrTree<T>::IsBalanced() const
+{
+	std::vector<leafNode*> leaves;
+	RetrieveLeavesTo(leaves);
+	for (const auto& x : leaves)
+	{
+		if (IsUnbalanced(x))
+		{
+			return Standard_False;
+		}
+	}
+	return Standard_True;
+}
+
+template<class T>
 inline void tnbLib::Geo3d_BalPrTree<T>::InsertToGeometry(const T & theItem)
 {
 	Debug_If_Condition_Message
@@ -1210,11 +1427,19 @@ inline void tnbLib::Geo3d_BalPrTree<T>::GeometrySearch
 template<class T>
 inline void tnbLib::Geo3d_BalPrTree<T>::PostBalance()
 {
-	IsBalancedRef() = Standard_False;
+	size_t k = 0;
+	
 	while (true)
 	{
-		Balance(theRoot_);
-		if (NOT IsBalanced()) break;
+		std::vector<leafNode*> leaves;
+		RetrieveLeavesTo(leaves);
+		IsBalancedRef() = Standard_True;
+		for (const auto& x : leaves)
+		{
+			auto y = (node*)x;
+			Balance(y);
+		}	
+		if (IsBalancedRef()) break;
 	}
 }
 

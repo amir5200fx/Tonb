@@ -36,7 +36,7 @@ namespace tnbLib
 		Standard_Integer theNbSubDivide_;
 		Standard_Integer theMaxUnbalacing_;
 
-		Standard_Boolean IsBalanced_;
+		mutable Standard_Boolean IsBalanced_;
 
 	protected:
 
@@ -61,7 +61,7 @@ namespace tnbLib
 			return theNbSubDivide_;
 		}
 
-		auto& IsBalancedRef()
+		auto& IsBalancedRef() const
 		{
 			return IsBalanced_;
 		}
@@ -75,10 +75,10 @@ namespace tnbLib
 			return theMaxUnbalacing_;
 		}
 
-		auto IsBalanced() const
+		/*auto IsBalanced() const
 		{
 			return IsBalanced_;
-		}
+		}*/
 
 		void SetMaxUnbalancing(const Standard_Integer n)
 		{
@@ -91,6 +91,16 @@ namespace tnbLib
 				const Pnt3d& theCoord, 
 				const Pnt3d& theCentre
 			);
+
+		static TnbGeo_EXPORT Standard_Boolean IsBwdSW(const Pnt3d& theCoord, const Pnt3d& theCentre);
+		static TnbGeo_EXPORT Standard_Boolean IsBwdSE(const Pnt3d& theCoord, const Pnt3d& theCentre);
+		static TnbGeo_EXPORT Standard_Boolean IsBwdNE(const Pnt3d& theCoord, const Pnt3d& theCentre);
+		static TnbGeo_EXPORT Standard_Boolean IsBwdNW(const Pnt3d& theCoord, const Pnt3d& theCentre);
+
+		static TnbGeo_EXPORT Standard_Boolean IsFwdSW(const Pnt3d& theCoord, const Pnt3d& theCentre);
+		static TnbGeo_EXPORT Standard_Boolean IsFwdSE(const Pnt3d& theCoord, const Pnt3d& theCentre);
+		static TnbGeo_EXPORT Standard_Boolean IsFwdNE(const Pnt3d& theCoord, const Pnt3d& theCentre);
+		static TnbGeo_EXPORT Standard_Boolean IsFwdNW(const Pnt3d& theCoord, const Pnt3d& theCentre);
 	};
 
 
@@ -204,6 +214,8 @@ namespace tnbLib
 		{
 			return !theRoot_;
 		}
+
+		Standard_Boolean IsBalanced() const;
 
 		void InsertToGeometry(const T& theItem) override;
 		void InsertToGeometry(const std::vector<T>& theItems) override;

@@ -60,3 +60,163 @@ tnbLib::Geo3d_BalPrTreeBase::CalcOctant
 		}
 	}
 }
+
+Standard_Boolean 
+tnbLib::Geo3d_BalPrTreeBase::IsBwdSW
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() <= theCentre.Z())
+	{
+		if (theCoord.Y() <= theCentre.Y())
+		{
+			if (theCoord.X() <= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
+
+Standard_Boolean
+tnbLib::Geo3d_BalPrTreeBase::IsBwdSE
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() <= theCentre.Z())
+	{
+		if (theCoord.Y() <= theCentre.Y())
+		{
+			if (theCoord.X() >= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
+
+Standard_Boolean
+tnbLib::Geo3d_BalPrTreeBase::IsBwdNW
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() <= theCentre.Z())
+	{
+		if (theCoord.Y() >= theCentre.Y())
+		{
+			if (theCoord.X() <= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
+
+Standard_Boolean
+tnbLib::Geo3d_BalPrTreeBase::IsBwdNE
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() <= theCentre.Z())
+	{
+		if (theCoord.Y() >= theCentre.Y())
+		{
+			if (theCoord.X() >= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
+
+Standard_Boolean
+tnbLib::Geo3d_BalPrTreeBase::IsFwdSW
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() >= theCentre.Z())
+	{
+		if (theCoord.Y() <= theCentre.Y())
+		{
+			if (theCoord.X() <= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
+
+Standard_Boolean
+tnbLib::Geo3d_BalPrTreeBase::IsFwdSE
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() >= theCentre.Z())
+	{
+		if (theCoord.Y() <= theCentre.Y())
+		{
+			if (theCoord.X() >= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
+
+Standard_Boolean
+tnbLib::Geo3d_BalPrTreeBase::IsFwdNW
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() >= theCentre.Z())
+	{
+		if (theCoord.Y() >= theCentre.Y())
+		{
+			if (theCoord.X() <= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
+
+Standard_Boolean
+tnbLib::Geo3d_BalPrTreeBase::IsFwdNE
+(
+	const Pnt3d & theCoord,
+	const Pnt3d & theCentre
+)
+{
+	if (theCoord.Z() >= theCentre.Z())
+	{
+		if (theCoord.Y() >= theCentre.Y())
+		{
+			if (theCoord.X() >= theCentre.X())
+			{
+				return Standard_True;
+			}
+		}
+	}
+	return Standard_False;
+}
