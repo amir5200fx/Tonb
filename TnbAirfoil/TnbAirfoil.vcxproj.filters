@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{902547e7-d4dc-4871-bdc9-e17f49a65ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil">
+      <UniqueIdentifier>{08e85426-74e6-4bfe-9144-4065c33c8aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca">
+      <UniqueIdentifier>{77e28e91-a544-4039-a34b-855d791bd448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\Midline">
+      <UniqueIdentifier>{e48d1d83-4df0-4e89-8dbf-e429645a3bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Entity">
+      <UniqueIdentifier>{f3f05681-a3b6-44ea-aac0-b3db4a4dede6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\module">
+      <UniqueIdentifier>{b8b03e04-ebb6-4851-b300-6b86f5fa3299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\Midline\trapezoidal">
+      <UniqueIdentifier>{019dabd0-73a8-4d10-bd27-9600c6ddef4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\Midline\uniform">
+      <UniqueIdentifier>{f9d2f97d-0052-4251-a1ab-99a2e1dc58a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\Thick">
+      <UniqueIdentifier>{4a3d2ca7-a34e-4354-ac05-40d50c90f8fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\Thick\Profile">
+      <UniqueIdentifier>{948a06e3-ef9c-4ae3-9798-d5f19a7a922e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\OffsetProfile">
+      <UniqueIdentifier>{37e651d2-9ce8-492c-9bad-80670561dbaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\OffsetProfile\Steffen">
+      <UniqueIdentifier>{45dd1cfb-d048-449f-aa4f-36d7d4d3b7ec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Airfoil\Entity\Airfoil_Entity.hxx">
+      <Filter>TnbLib\Airfoil\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\module\Airfoil_Module.hxx">
+      <Filter>TnbLib\Airfoil\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\Midline\Airfoil_NacaMidline.hxx">
+      <Filter>TnbLib\Airfoil\Naca\Midline</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\Midline\uniform\Airfoil_uniformNacaMidline.hxx">
+      <Filter>TnbLib\Airfoil\Naca\Midline\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\Midline\trapezoidal\Airfoil_trapzNacaMidline.hxx">
+      <Filter>TnbLib\Airfoil\Naca\Midline\trapezoidal</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\Thick\Airfoil_NacaThickness.hxx">
+      <Filter>TnbLib\Airfoil\Naca\Thick</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_Profile.hxx">
+      <Filter>TnbLib\Airfoil\Naca\Thick\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\OffsetProfile\Airfoil_OffsetProfile.hxx">
+      <Filter>TnbLib\Airfoil\OffsetProfile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\OffsetProfile\Steffen\Airfoil_OffsetProfile_Steffen.hxx">
+      <Filter>TnbLib\Airfoil\OffsetProfile\Steffen</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\Airfoil_Naca.hxx">
+      <Filter>TnbLib\Airfoil\Naca</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Airfoil\Entity\Airfoil_Entity.cxx">
+      <Filter>TnbLib\Airfoil\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\Midline\uniform\Airfoil_uniformNacaMidline.cxx">
+      <Filter>TnbLib\Airfoil\Naca\Midline\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\Midline\uniform\Airfoil_uniformNacaMidlineIO.cxx">
+      <Filter>TnbLib\Airfoil\Naca\Midline\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\Midline\trapezoidal\Airfoil_trapzNacaMidline.cxx">
+      <Filter>TnbLib\Airfoil\Naca\Midline\trapezoidal</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\OffsetProfile\Steffen\Airfoil_OffsetProfile_Steffen.cxx">
+      <Filter>TnbLib\Airfoil\OffsetProfile\Steffen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\OffsetProfile\Steffen\Airfoil_OffsetProfile_SteffenIO.cxx">
+      <Filter>TnbLib\Airfoil\OffsetProfile\Steffen</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_Profile.cxx">
+      <Filter>TnbLib\Airfoil\Naca\Thick\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_ProfileIO.cxx">
+      <Filter>TnbLib\Airfoil\Naca\Thick\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\Airfoil_Naca.cxx">
+      <Filter>TnbLib\Airfoil\Naca</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\Airfoil_NacaIO.cxx">
+      <Filter>TnbLib\Airfoil\Naca</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
