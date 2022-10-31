@@ -44,7 +44,7 @@ namespace tnbLib
 
 		Geo3d_SegmentCloud_InternalSamples
 		(
-			const std::shared_ptr<Geo3d_SegmentCloud_Samples>&& theSamples
+			std::shared_ptr<Geo3d_SegmentCloud_Samples>&& theSamples
 		)
 			: theSamples_(std::move(theSamples))
 		{}

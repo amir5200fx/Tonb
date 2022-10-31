@@ -8,6 +8,9 @@ tnbLib::Geo3d_SegmentCloud_SamplesLev0::CalcSamples
 ) const
 {
 	std::vector<Standard_Real> samples;
+	samples.reserve(3);
+	samples.push_back(x0);
 	samples.push_back(MEAN(x0, x1));
+	samples.push_back(x1);
 	return std::move(samples);
 }
