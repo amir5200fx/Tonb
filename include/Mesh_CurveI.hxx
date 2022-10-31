@@ -300,11 +300,12 @@ namespace tnbLib
 			Integrand(*Geometry(), *MetricMap(), FirstParameter(), LastParameter());
 
 		// Determine the Length of the curve under the current space function
-		auto curveLength =
+		/*auto curveLength =
 			CalcLength
 			(
 				Integrand, Info()->LengthCalcMaxLevel(),
-				*Info()->OverallLengthIntgInfo());
+				*Info()->OverallLengthIntgInfo());*/
+		auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
 
 		// uniform nb. of segment under the current space function
 		auto NbSegments =
@@ -348,9 +349,11 @@ namespace tnbLib
 					<< abort(FatalError);
 			}
 
-			Parameters[Index] = U1;
+			Parameters.at(Index) = U1;
 
-			Guess = U1 + MIN(dt, Info()->UnderRelaxation()*(Parameters[Index] - Parameters[Index - 1]));
+			Guess = U1 + MIN(dt, Info()->UnderRelaxation()*(Parameters.at(Index) - Parameters.at(Index - 1)));
+			if (Guess < FirstParameter()) Guess = FirstParameter();
+			if (Guess > LastParameter()) Guess = LastParameter();
 			Debug_If_Condition(Guess <= U1);
 
 			U0 = U1;
@@ -418,5 +421,74 @@ namespace tnbLib
 	)
 	{
 		return CalcLength(theCurve, 0, theMaxLevel, theInfo);
+	}
+
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	inline Standard_Real tnbLib::Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcLengthWithChecking
+	(
+		const Standard_Integer theLev, 
+		const Standard_Integer theMaxLev, 
+		const Standard_Real theFirst,
+		const Standard_Real theLast
+	) const
+	{
+		if (theLev > theMaxLev)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "cannot calculate the curve length." << endl
+				<< abort(FatalError);
+		}
+		Mesh_CurveEntity<gCurveType, MetricPrcsrType>
+			Integrand(*Geometry(), *MetricMap(), theFirst, theLast);
+		auto totLength =
+			CalcLength
+			(
+				Integrand, Info()->LengthCalcMaxLevel(),
+				*Info()->OverallLengthIntgInfo());
+
+		Standard_Real len0, len1;
+		{
+			Mesh_CurveEntity<gCurveType, MetricPrcsrType>
+				Integrand(*Geometry(), *MetricMap(), theFirst, MEAN(theFirst, theLast));
+			len0 =
+				CalcLength
+				(
+					Integrand, Info()->LengthCalcMaxLevel(),
+					*Info()->OverallLengthIntgInfo());
+		}
+		{
+			Mesh_CurveEntity<gCurveType, MetricPrcsrType>
+				Integrand(*Geometry(), *MetricMap(), MEAN(theFirst, theLast), theLast);
+			len1 =
+				CalcLength
+				(
+					Integrand, Info()->LengthCalcMaxLevel(),
+					*Info()->OverallLengthIntgInfo());
+		}
+		if (std::abs(totLength - (len0 + len1)) <= this->Info()->OverallLengthIntgInfo()->Tolerance()*totLength)
+		{
+			return totLength;
+		}
+		else
+		{
+			return CalcLengthWithChecking(theLev + 1, theMaxLev, theFirst, MEAN(theFirst, theLast))
+				+ CalcLengthWithChecking(theLev + 1, theMaxLev, MEAN(theFirst, theLast), theLast);
+		}
+	}
+
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	inline Standard_Real tnbLib::Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcLengthWithChecking
+	(
+		const Standard_Integer theMaxLev
+	) const
+	{
+		if (nbLevels_CheckingLength < 1)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid nb of levels for checking the length of the curve!" << endl
+				<< " - nb of levels= " << nbLevels_CheckingLength << endl
+				<< abort(FatalError);
+		}
+		return CalcLengthWithChecking(0, nbLevels_CheckingLength, FirstParameter(), LastParameter());
 	}
 }

@@ -100,7 +100,7 @@ namespace tnbLib
 
 	auto retrieveBoundingBox()
 	{
-		auto reg = std::make_shared<Entity3d_Box>(myRef->Region()->Expanded(myRef->Region()->Diameter()*1.0E-5));
+		auto reg = std::make_shared<Entity3d_Box>(myRef->Region()->Expanded(myRef->Region()->Diameter()*0.25));
 		return std::move(reg);
 		//return myRef->Region();
 	}
@@ -529,6 +529,7 @@ namespace tnbLib
 
 				alg->Perform();
 
+				//myBackgound = myFeatureSizeMaps->BackgroundMesh();
 				myBackgound = alg->UnifiedMap();
 			}
 			/*else if (backs.size() == 1)

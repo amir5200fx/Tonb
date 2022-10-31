@@ -53,6 +53,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT Standard_Integer nbLevels_CheckingLength;
+
 		auto FirstParameter() const
 		{
 			return theFirstParameter_;
@@ -183,6 +185,18 @@ namespace tnbLib
 		Standard_Real Perform();
 
 
+		Standard_Real 
+			CalcLengthWithChecking
+			(
+				const Standard_Integer theLev, 
+				const Standard_Integer theMaxLev, 
+				const Standard_Real theFirst,
+				const Standard_Real theLast
+			) const;
+
+		Standard_Real 
+			CalcLengthWithChecking(const Standard_Integer theMaxLev) const;
+
 		//- static functions and operators
 
 		static Standard_Real
@@ -201,6 +215,8 @@ namespace tnbLib
 				const Standard_Integer theMaxLevel,
 				intgInfo& theInfo
 			);
+
+		
 	};
 }
 

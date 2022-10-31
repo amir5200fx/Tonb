@@ -487,29 +487,11 @@
     <Filter Include="TnbLib\MarineBase\Analysis\BasicDim">
       <UniqueIdentifier>{0934b481-237a-4a34-b060-d874783d6907}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\MarineBase\Libs">
-      <UniqueIdentifier>{7edbd7f2-a3a3-4226-b8a1-74bb00512868}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Libs\BodyCmptLib">
-      <UniqueIdentifier>{6d94526f-100c-4c45-9c40-be7be65e9caa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\MarineBase\Tools\tools">
       <UniqueIdentifier>{a8cc40aa-768b-4b11-9b4d-d5b9d69aae13}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\MarineBase\Tools\body">
       <UniqueIdentifier>{2e59221d-1e20-40ae-a76d-a00a26037e38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Libs\CmptLib">
-      <UniqueIdentifier>{3a8b0aec-817a-4c11-ab62-d32dec3edc5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Libs\CmptLib2">
-      <UniqueIdentifier>{5f86bf86-db9f-4545-80ce-41aa595b359b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Libs\DisctLib">
-      <UniqueIdentifier>{a0fce3d8-88e0-40ab-9f82-b01abc1105f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TnbLib\MarineBase\Libs\WaterLib">
-      <UniqueIdentifier>{e8a86604-3e69-4f69-aaba-04a1d4c103a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="TnbLib\MarineBase\Tools\disct">
       <UniqueIdentifier>{d8d0c8ca-830b-4759-bd92-254c2e3839cf}</UniqueIdentifier>
@@ -627,6 +609,24 @@
     </Filter>
     <Filter Include="TnbLib\MarineBase\Entities\Model\Sail\Geomety\Body">
       <UniqueIdentifier>{dc1a7164-927a-4061-b1b4-c2e128622944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Libs">
+      <UniqueIdentifier>{7edbd7f2-a3a3-4226-b8a1-74bb00512868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Libs\BodyCmptLib">
+      <UniqueIdentifier>{6d94526f-100c-4c45-9c40-be7be65e9caa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Libs\CmptLib">
+      <UniqueIdentifier>{3a8b0aec-817a-4c11-ab62-d32dec3edc5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Libs\CmptLib2">
+      <UniqueIdentifier>{5f86bf86-db9f-4545-80ce-41aa595b359b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Libs\DisctLib">
+      <UniqueIdentifier>{a0fce3d8-88e0-40ab-9f82-b01abc1105f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\MarineBase\Libs\WaterLib">
+      <UniqueIdentifier>{e8a86604-3e69-4f69-aaba-04a1d4c103a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

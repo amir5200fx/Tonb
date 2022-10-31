@@ -682,6 +682,16 @@ namespace tnbLib
 		//mySoluData->GlobalCurveInfo()->NewtonIterInfo()->SetTolerance(0.0005);
 		//mySoluData->GlobalCurveInfo()->SetIgnoreNonConvergency(Standard_True);
 		mySoluData->GlobalCurveInfo()->CorrAlgInfo()->SetMaxLevel(30);
+		
+		/*const auto& overallLenInfo = mySoluData->GlobalCurveInfo()->OverallLengthIntgInfo();
+		overallLenInfo->SetTolerance(1.0E-8);
+		overallLenInfo->SetMaxNbIterations(500);
+		overallLenInfo->SetNbInitIterations(10);
+
+		const auto& corrIntegInfo = mySoluData->GlobalCurveInfo()->CorrAlgInfo();
+		corrIntegInfo->SetTolerance(1.0E-6);
+		corrIntegInfo->SetMaxLevel(50);*/
+
 		auto bndInfo = std::make_shared<Aft2d_BoundaryOfPlaneAnIso_Info>();
 		bndInfo->SetOverrideInfo(Standard_False);
 		bndInfo->OverrideGlobalCurve(mySoluData->GlobalCurveInfo());
