@@ -105,6 +105,7 @@ namespace tnbLib
 		//- private functions and operators
 
 		void MakeChain(const std::vector<Standard_Real>& theParameters);
+		void Discretize(const Standard_Real theLength);
 
 		static Standard_Real
 			CalcNextParameter
@@ -196,6 +197,13 @@ namespace tnbLib
 
 		Standard_Real 
 			CalcLengthWithChecking(const Standard_Integer theMaxLev) const;
+
+		Standard_Real 
+			CalcCurveLength
+			(
+				const Standard_Real theU0, 
+				const Standard_Real theU1
+			) const;
 
 		//- static functions and operators
 

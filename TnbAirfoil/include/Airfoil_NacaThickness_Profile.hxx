@@ -39,6 +39,8 @@ namespace tnbLib
 			return theProfile_;
 		}
 
+		TnbAirfoil_EXPORT Standard_Real CalcYt(const Standard_Real xPerc) const override;
+
 		void SetProfile(const std::shared_ptr<Airfoil_OffsetProfile>& theProfile)
 		{
 			theProfile_ = theProfile;

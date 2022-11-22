@@ -2086,6 +2086,48 @@
     <Filter Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1">
       <UniqueIdentifier>{6eb1e959-b80c-4e0e-bd28-6cc74e71766f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2">
+      <UniqueIdentifier>{2d8b68fe-3623-409b-b4f4-85065b12d7b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Approximate">
+      <UniqueIdentifier>{8ebcba05-03db-432e-a406-a98d7e9e0c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Space">
+      <UniqueIdentifier>{67458d9f-da48-42d5-a587-a385ee60e868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Space\Samples">
+      <UniqueIdentifier>{57d4ff6a-b8bb-4f98-8b79-a0c4f400a936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0">
+      <UniqueIdentifier>{f7bf91cc-58cd-4819-8488-1b66488526d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Curve\AnIso\Init">
+      <UniqueIdentifier>{a8f05ea6-30a3-413c-8fbc-68c1e1630ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Curve\AnIso\Correction">
+      <UniqueIdentifier>{7fac376e-c3e0-4870-89dd-92d00b9801e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Curve\AnIso\Init\Bisect">
+      <UniqueIdentifier>{cd4b3605-244f-456b-8229-c0fa4d7970f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init">
+      <UniqueIdentifier>{dc56f444-10c3-4550-9543-55525813326c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction">
+      <UniqueIdentifier>{3e5b7305-d041-4530-a1fb-6c769502e0d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect">
+      <UniqueIdentifier>{a297c9c9-a487-4361-9970-8788d70b0648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Approximate\Info">
+      <UniqueIdentifier>{fd7f9723-09d7-4773-87f9-270bfec80757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Approximate\2d">
+      <UniqueIdentifier>{46da155e-16a9-411c-ab71-6e4ad181f733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Curve\Approximate\3d">
+      <UniqueIdentifier>{e523ed78-1d26-4a35-a76d-fe0502bbba88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -4980,23 +5022,72 @@
     <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo3d_SegmentCloud_SamplesLev1.hxx">
       <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Mesh2d_CurveAnIsoFwd.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_Correction.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_CorrectionFwd.hxx" />
-    <ClInclude Include="TnbLib\Curve\Entity\AnIso\Mesh2d_CurveEntityAnIsoFwd.hxx" />
-    <ClInclude Include="TnbLib\Curve\Entity\AnIso\UniMetric\Mesh2d_CurveEntityUniMetricFwd.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetricFwd.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_Correction.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_CorrectionFwd.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_Initial.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_InitialFwd.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_Initial.hxx" />
-    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_InitialFwd.hxx" />
-    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2.hxx" />
-    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Samples\Geo3d_SpaceCloud_TetSamples.hxx" />
-    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0.hxx" />
-    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Geo3d_SpaceCloud.hxx" />
-    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamples.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Approximate\Mesh_ApproxCurve.hxx">
+      <Filter>TnbLib\Curve\Approximate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Approximate\Mesh_ApproxCurveI.hxx">
+      <Filter>TnbLib\Curve\Approximate</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Space\Samples\Lev0</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Samples\Geo3d_SpaceCloud_TetSamples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Space\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Space\Geo3d_SpaceCloud.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Space</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_Initial.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\Init\Bisect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_InitialFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\Init\Bisect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_CorrectionFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_Correction.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_Initial.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_InitialFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_Correction.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric\Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_CorrectionFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric\Correction</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Approximate\Info\Mesh_ApproxCurveInfo.hxx">
+      <Filter>TnbLib\Curve\Approximate\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Approximate\3d\Mesh3d_ApproxCurve.hxx">
+      <Filter>TnbLib\Curve\Approximate\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Approximate\3d\Mesh3d_ApproxCurveFwd.hxx">
+      <Filter>TnbLib\Curve\Approximate\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\Mesh2d_CurveAnIsoFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Entity\AnIso\Mesh2d_CurveEntityAnIsoFwd.hxx">
+      <Filter>TnbLib\Curve\Entity\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Entity\AnIso\UniMetric\Mesh2d_CurveEntityUniMetricFwd.hxx">
+      <Filter>TnbLib\Curve\Entity\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetricFwd.hxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6478,18 +6569,45 @@
     <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo3d_SegmentCloud_SamplesLev1IO.cxx">
       <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Mesh2d_CurveAnIso.cxx" />
-    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_Correction.cxx" />
-    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_Correction.cxx" />
-    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_Initial.cxx" />
-    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_Initial.cxx" />
-    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetric.cxx" />
-    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2.cxx" />
-    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2IO.cxx" />
-    <ClCompile Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0IO.cxx" />
-    <ClCompile Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0.cxx" />
-    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamples.cxx" />
-    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamplesIO.cxx" />
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo3d_SegmentCloud_SamplesLev2IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamples.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Samples\Geo3d_SpaceCloud_InternalSamplesIO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Approximate\Mesh_ApproxCurve.cxx">
+      <Filter>TnbLib\Curve\Approximate</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Space\Samples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Cloud\Space\Samples\Lev0\Geo3d_SpaceCloud_TetSamplesLev0IO.cxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Space\Samples\Lev0</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Init\Bisect\Mesh2d_CurveOptmPointAnIso_BisectCorrection_Initial.cxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\Init\Bisect</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Correction\Mesh2d_CurveOptmPointAnIso_Correction.cxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\Correction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect\Mesh2d_CurveOptmPointUniMetric_BisectCorrection_Initial.cxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric\Init\Bisect</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Correction\Mesh2d_CurveOptmPointUniMetric_Correction.cxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric\Correction</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\Mesh2d_CurveAnIso.cxx">
+      <Filter>TnbLib\Curve\Curve\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetric.cxx">
+      <Filter>TnbLib\Curve\Curve\AnIso\UniMetric</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Aft\Model\Aft2d_Model_Import.jxx">

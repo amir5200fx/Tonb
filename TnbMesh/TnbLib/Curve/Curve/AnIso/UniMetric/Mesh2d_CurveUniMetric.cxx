@@ -167,76 +167,36 @@ Standard_Real tnbLib::Mesh2d_CurveUniMetric::Perform()
 			<< "No sizeMap has been loaded" << endl
 			<< abort(FatalError);
 	}
-	PAUSE;
-	Mesh2d_CurveEntityUniMetric
-		Integrand(*Geometry(), *MetricMap(), FirstParameter(), LastParameter());
-	
+
 	// Determine the Length of the curve under the current space function
-	auto curveLength =
+	/*auto curveLength =
 		CalcLength
 		(
-			Integrand, this->Info()->LengthCalcMaxLevel(),
-			*this->Info()->OverallLengthIntgInfo());
+			Integrand, Info()->LengthCalcMaxLevel(),
+			*Info()->OverallLengthIntgInfo());*/
+	auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
 
-	// uniform nb. of segment under the current space function
-	auto NbSegments =
-		MAX
-		(
-			Geo_Tools::Round(curveLength*(1.0 + EPS6)),
-			Geo_Tools::Round(curveLength*(1.0 - EPS6)));
-
-	// There must be at least one segment
-	if (NbSegments < 1) NbSegments = 1;
-	Debug_If_Condition(NbSegments < 1);
-
-	const auto Ds = curveLength / (Standard_Real)NbSegments;
-	const auto dt = 1.0 / curveLength;
-	Standard_Real U0, U1, Guess;
-
-	std::vector<Standard_Real> Parameters(NbSegments + 1);
-
-	Parameters.at(0) = FirstParameter();
-	Parameters.at(Parameters.size() - 1) = LastParameter();
-
-	U0 = Parameters.at(0);
-	Guess = U0 + dt;  // Debug: 4/14/2018
-
-	if (Guess < FirstParameter()) Guess = FirstParameter();
-	if (Guess > LastParameter()) Guess = LastParameter();
-
-	forThose(Index, 1, NbSegments - 1)
+	try
 	{
-		U1 = CalcNextParameter
-		(
-			U0, Guess, Ds,
-			LastParameter(), Integrand, *Info());
-
-		Mesh2d_CurveEntityUniMetric
-			Integrand1(*Geometry(), *MetricMap(), U0, U1);
-		
-		if (NOT INSIDE(U1, U0, LastParameter()))
-		{
-			FatalErrorIn("void Mesh_Curve<gCurveType, MetricPrcsrType>::Perform()")
-				<< "Invalid Parameter: " << U1 << endl
-				<< " - First parameter: " << FirstParameter() << endl
-				<< " - Last parameter: " << LastParameter() << endl
-				<< abort(FatalError);
-		}
-
-		Parameters.at(Index) = U1;
-
-		Guess = U1 + MIN(dt, Info()->UnderRelaxation()*(Parameters.at(Index) - Parameters.at(Index - 1)));
-		if (Guess < FirstParameter()) Guess = FirstParameter();
-		if (Guess > LastParameter()) Guess = LastParameter();
-		Debug_If_Condition(Guess <= U1);
-
-		U0 = U1;
+		Discretize(curveLength);
 	}
-
-	MakeChain(Parameters);
-
-	Change_IsDone() = Standard_True;
-
+	catch (const meshLib::LengthCurveError& x)
+	{
+		std::cout << "Length = " << curveLength << std::endl;
+		try
+		{
+			std::cout << " recalculation, Length= " << x.length << std::endl;
+			Discretize(x.length);
+			return x.length;
+		}
+		catch (const meshLib::LengthCurveError&)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Cannot calculate the actual curve length: unexpected results have been came up!" << endl
+				<< abort(FatalError);
+			return 0.;
+		}
+	}
 	return curveLength;
 }
 #endif // MeshCurveAnIso_Debug

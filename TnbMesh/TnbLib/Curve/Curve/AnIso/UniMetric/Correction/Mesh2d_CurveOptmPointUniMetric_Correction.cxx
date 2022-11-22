@@ -33,10 +33,12 @@ void tnbLib::Mesh2d_CurveOptmPointUniMetric_Correction::Perform()
 
 	if (Correct < Umin) Correct = Umin;
 	if (Correct > Umax) Correct = Umax;
-
+	//std::cout << std::endl;
 	Debug_If_Condition(this->Len() <= gp::Resolution());
+	//std::cout << " U0= " << Umin << ", U1= " << Umax << std::endl;
 	forThose(Iter, 1, nbLevels)
 	{
+		//std::cout << "- ITER = " << Iter << ", "<< Correct << std::endl;
 		//auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
 		auto dis = calcLength(this->Entity(), this->U0(), Correct, this->IntegInfo()) / this->Len();
 		auto du = (Correct - Umin) / dis;
@@ -49,6 +51,8 @@ void tnbLib::Mesh2d_CurveOptmPointUniMetric_Correction::Perform()
 
 		if (ABS(1.0 - dis) < tol) break;
 	}
+	//std::cout << "finished!" << std::endl;
+	//std::cout << std::endl;
 	// check the corrected value [5/11/2022 Amir]
 		//const auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
 	auto dis = calcLength(this->Entity(), this->U0(), Correct, this->IntegInfo()) / this->Len();
@@ -58,6 +62,7 @@ void tnbLib::Mesh2d_CurveOptmPointUniMetric_Correction::Perform()
 			<< "the optm. point algorithm has not been converged!" << endl
 			<< abort(FatalConvError);
 	}
+	//std::cout << "correct finished" << std::endl;
 	ChangeCorrected() = Correct;
 	Change_IsDone() = Standard_True;
 }

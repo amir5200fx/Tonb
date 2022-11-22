@@ -31,7 +31,7 @@ namespace tnbLib
 		std::cout << "---------------------" << std::endl;
 		std::cout << std::endl;*/
 
-		return Geo_Tools::IsPointLeftFacet_Shewchuk(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
+		return Geo_Tools::IsPointLeftFacet_Fast(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
 	}
 
 	template<>
@@ -58,7 +58,7 @@ namespace tnbLib
 		std::cout << "---------------------" << std::endl;
 		std::cout << std::endl;*/
 
-		return Geo_Tools::IsPointRightFacet_Shewchuk(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
+		return Geo_Tools::IsPointRightFacet_Fast(theCoord, n0.Coord(), n1.Coord(), n2.Coord());
 	}
 }
 

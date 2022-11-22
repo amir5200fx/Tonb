@@ -145,6 +145,13 @@ tnbLib::Entity2d_Box
 tnbLib::Cad_GeomSurface::ParametricBoundingBox() const
 {
 	Standard_Real u0, u1, v0, v1;
+	if (NOT Handle(Geom_BoundedSurface)::DownCast(theSurface_))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "this functions is not supposed to be called because the surface is not bounded." << endl
+			<< " - function name: " << __FUNCDNAME__ << endl
+			<< abort(FatalError);
+	}
 	theSurface_->Bounds(u0, u1, v0, v1);
 	Entity2d_Box b(Pnt2d(u0, v0), Pnt2d(u1, v1));
 	return std::move(b);

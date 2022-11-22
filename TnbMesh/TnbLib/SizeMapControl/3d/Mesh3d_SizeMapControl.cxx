@@ -44,16 +44,16 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 	{
 		Mesh_SizeMapToolBaseNonTemplate::verbose = verbose;
 	}
-
+	std::cout << "injaaaaaaaaaaa" << std::endl;
 	for (const auto& x : Maps())
 	{
 		Debug_Null_Pointer(x.second);
 		const auto& mapTool = x.second;
-
+		std::cout << "map tool = " << mapTool << std::endl;
 		if(NOT mapTool->IsDone())
 			mapTool->Perform();
 	}
-
+	PAUSE;
 	if (Maps().size() IS_EQUAL 1)
 	{
 		if (verbose)

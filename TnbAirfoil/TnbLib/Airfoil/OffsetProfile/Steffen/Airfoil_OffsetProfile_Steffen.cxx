@@ -29,6 +29,7 @@ void tnbLib::Airfoil_OffsetProfile_Steffen::Perform()
 	{
 		x[i] = qs[i].first;
 		y[i] = qs[i].second;
+		//std::cout << "stefen: " << x[i] << ", " << y[i] << std::endl;
 	}
 
 	gsl_spline_init(spline_steffen_, x, y, qs.size());

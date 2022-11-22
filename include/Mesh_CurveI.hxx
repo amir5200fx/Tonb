@@ -8,6 +8,19 @@
 namespace tnbLib
 {
 
+	namespace meshLib
+	{
+		class LengthCurveError
+		{
+		public:
+			Standard_Real length;
+
+			LengthCurveError(const Standard_Real x)
+				: length(x)
+			{}
+		};
+	}
+
 	template<class gCurveType, class MetricPrcsrType, bool SavePars>
 	void Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::MakeChain
 	(
@@ -53,6 +66,7 @@ namespace tnbLib
 		Standard_Real corrected = theGuess;
 		try
 		{
+			std::cout << "correction..." << std::endl;
 			Mesh_CurveOptmPoint_Correction<gCurveType, MetricPrcsrType>
 				correction(theU0, theGuess, theCurve, *theInfo.CorrAlgInfo(), theInfo.NewtonIntgInfo());
 
@@ -62,9 +76,11 @@ namespace tnbLib
 			Debug_If_Condition_Message(NOT correction.IsDone(),
 				"mesh_curveoptpoint_correction algorithm has not been performed!");
 			corrected = correction.Corrected();
+			std::cout << "correction is finished." << std::endl;
 		}
 		catch (const ConvError&)
 		{
+			std::cout << "initial..." << std::endl;
 			Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, MetricPrcsrType>
 				initial(theU0, theGuess, theCurve, theInfo.OverallLengthIntgInfo());
 
@@ -74,7 +90,7 @@ namespace tnbLib
 
 			Debug_If_Condition_Message(NOT initial.IsDone(),
 				"the application algorithm has not been performed!");
-
+			std::cout << "initial is finished." << std::endl;
 			const auto[x0, x1] = initial.Bound();
 			if (x0 IS_EQUAL x1 AND initial.IsConverged())
 			{
@@ -91,6 +107,7 @@ namespace tnbLib
 					<< " - Corrected: " << corrected << endl
 					<< abort(FatalError);
 			}
+			std::cout << "bisect..." << std::endl;
 			Mesh_CurveOptmPoint_BisectCorrection<gCurveType, MetricPrcsrType>
 				correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo(), theInfo.OverallLengthIntgInfo());
 			/*std::cout << "bisection..." << std::endl;
@@ -104,7 +121,7 @@ namespace tnbLib
 			Debug_If_Condition_Message(NOT correction.IsDone(),
 				"mesh_curveoptpoint_correction algorithm has not been performed!");
 
-			correction.SetLen(theStep);
+			//correction.SetLen(theStep);
 			/*FatalErrorIn(FunctionSIG)
 				<< "Can not Calculate parameter of the curve" << endl
 				<< " - U0: " << theU0 << endl
@@ -112,6 +129,7 @@ namespace tnbLib
 				<< " - Corrected: " << corrected << endl
 				<< abort(FatalError);*/
 			corrected = correction.Corrected();
+			std::cout << "bisect is finished..." << std::endl;
 			//std::cout << " - corrected: " << corrected << std::endl;
 			goto iterationAlg;
 
@@ -172,7 +190,7 @@ namespace tnbLib
 		}
 
 	iterationAlg:
-
+		std::cout << "optimum..." << std::endl;
 		Mesh_CurveOptmPoint_Newton<gCurveType, MetricPrcsrType>
 			Iteration(theU0, theStep, theCurve);	
 		try
@@ -181,10 +199,12 @@ namespace tnbLib
 				theInfo.NewtonIntgInfo());
 			Debug_If_Condition_Message(NOT Iteration.IsDone(),
 				"mesh_curveoptpoint_newton algorithm has not been performed!");
+			std::cout << "optimum is finished." << std::endl;
 			return Iteration.Corrected();
 		}
 		catch (const ConvError&)
 		{
+			std::cout << " subdivide span..." << std::endl;
 			if (theLevel > theMaxLevel)
 			{
 				if (theInfo.IgnoreNonConvergency())
@@ -199,6 +219,7 @@ namespace tnbLib
 			}
 			const auto ds2 = 0.5*theStep;
 			const auto du = theU0 + 0.5*(corrected - theU0);
+			std::cout << " calc um..." << std::endl;
 			auto um =
 				CalcNextParameter
 				(
@@ -206,11 +227,12 @@ namespace tnbLib
 					du, ds2, theUmax,
 					theLevel + 1, theMaxLevel,
 					theCurve, theInfo);
+			std::cout << " calc um till next..." << std::endl;
 			return
 				CalcNextParameter
 				(
 					um, 2.0*um - theU0, ds2,
-					theUmax, theLevel,
+					theUmax, theLevel + 1,
 					theMaxLevel, theCurve, theInfo
 				);
 		}
@@ -273,6 +295,84 @@ namespace tnbLib
 	}
 
 	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	inline void tnbLib::Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::Discretize
+	(
+		const Standard_Real theLength
+	)
+	{
+		Mesh_CurveEntity<gCurveType, MetricPrcsrType>
+			Integrand(*Geometry(), *MetricMap(), FirstParameter(), LastParameter());
+
+		// uniform nb. of segment under the current space function
+		auto NbSegments =
+			MAX
+			(
+				Geo_Tools::Round(theLength*(1.0 + EPS6)),
+				Geo_Tools::Round(theLength*(1.0 - EPS6)));
+
+		// There must be at least one segment
+		if (NbSegments < 1) NbSegments = 1;
+		Debug_If_Condition(NbSegments < 1);
+
+		const auto Ds = theLength / (Standard_Real)NbSegments;
+		const auto dt = 1.0 / theLength;
+		Standard_Real U0, U1, Guess;
+
+		std::vector<Standard_Real> Parameters(NbSegments + 1);
+
+		Parameters.at(0) = FirstParameter();
+		Parameters.at(Parameters.size() - 1) = LastParameter();
+
+		U0 = Parameters.at(0);
+		Guess = U0 + dt;  // Debug: 4/14/2018
+
+		if (Guess < FirstParameter()) Guess = FirstParameter();
+		if (Guess > LastParameter()) Guess = LastParameter();
+		//std::cout << "Length = " << theLength << std::endl;
+		Standard_Real approxLength = 0;
+		forThose(Index, 1, NbSegments - 1)
+		{
+			try
+			{
+				U1 = CalcNextParameter
+				(
+					U0, Guess, Ds,
+					LastParameter(), Integrand, *Info());
+				//std::cout << "- iter: " << U1 << std::endl;
+			}
+			catch (const error&)
+			{
+				auto len = this->CalcCurveLength(U0, LastParameter());
+				approxLength += len;
+				throw meshLib::LengthCurveError(approxLength);
+			}
+
+			approxLength += Ds;
+			if (NOT INSIDE(U1, U0, LastParameter()))
+			{
+				FatalErrorIn("void Mesh_Curve<gCurveType, MetricPrcsrType>::Perform()")
+					<< "Invalid Parameter: " << U1 << endl
+					<< " - First parameter: " << FirstParameter() << endl
+					<< " - Last parameter: " << LastParameter() << endl
+					<< abort(FatalError);
+			}
+
+			Parameters.at(Index) = U1;
+
+			Guess = U1 + MIN(dt, Info()->UnderRelaxation()*(Parameters.at(Index) - Parameters.at(Index - 1)));
+			if (Guess < FirstParameter()) Guess = FirstParameter();
+			if (Guess > LastParameter()) Guess = LastParameter();
+			Debug_If_Condition(Guess <= U1);
+
+			U0 = U1;
+		}
+
+		MakeChain(Parameters);
+
+		Change_IsDone() = Standard_True;
+	}
+
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
 	Standard_Real Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::Perform()
 	{
 		if (NOT Geometry())
@@ -296,9 +396,6 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		Mesh_CurveEntity<gCurveType, MetricPrcsrType>
-			Integrand(*Geometry(), *MetricMap(), FirstParameter(), LastParameter());
-
 		// Determine the Length of the curve under the current space function
 		/*auto curveLength =
 			CalcLength
@@ -307,62 +404,27 @@ namespace tnbLib
 				*Info()->OverallLengthIntgInfo());*/
 		auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
 
-		// uniform nb. of segment under the current space function
-		auto NbSegments =
-			MAX
-			(
-				Geo_Tools::Round(curveLength*(1.0 + EPS6)),
-				Geo_Tools::Round(curveLength*(1.0 - EPS6)));
-
-		// There must be at least one segment
-		if (NbSegments < 1) NbSegments = 1;
-		Debug_If_Condition(NbSegments < 1);
-
-		const auto Ds = curveLength / (Standard_Real)NbSegments;
-		const auto dt = 1.0 / curveLength;
-		Standard_Real U0, U1, Guess;
-
-		std::vector<Standard_Real> Parameters(NbSegments + 1);
-
-		Parameters.at(0) = FirstParameter();
-		Parameters.at(Parameters.size() - 1) = LastParameter();
-
-		U0 = Parameters.at(0);
-		Guess = U0 + dt;  // Debug: 4/14/2018
-
-		if (Guess < FirstParameter()) Guess = FirstParameter();
-		if (Guess > LastParameter()) Guess = LastParameter();
-
-		forThose(Index, 1, NbSegments - 1)
+		try
 		{
-			U1 = CalcNextParameter
-			(
-				U0, Guess, Ds,
-				LastParameter(), Integrand, *Info());
-
-			if (NOT INSIDE(U1, U0, LastParameter()))
-			{
-				FatalErrorIn("void Mesh_Curve<gCurveType, MetricPrcsrType>::Perform()")
-					<< "Invalid Parameter: " << U1 << endl
-					<< " - First parameter: " << FirstParameter() << endl
-					<< " - Last parameter: " << LastParameter() << endl
-					<< abort(FatalError);
-			}
-
-			Parameters.at(Index) = U1;
-
-			Guess = U1 + MIN(dt, Info()->UnderRelaxation()*(Parameters.at(Index) - Parameters.at(Index - 1)));
-			if (Guess < FirstParameter()) Guess = FirstParameter();
-			if (Guess > LastParameter()) Guess = LastParameter();
-			Debug_If_Condition(Guess <= U1);
-
-			U0 = U1;
+			Discretize(curveLength);
 		}
-
-		MakeChain(Parameters);
-
-		Change_IsDone() = Standard_True;
-
+		catch (const meshLib::LengthCurveError& x)
+		{
+			std::cout << "Length = " << curveLength << std::endl;
+			try
+			{
+				std::cout << " recalculation, Length= " << x.length << std::endl;
+				Discretize(x.length);
+				return x.length;
+			}
+			catch (const meshLib::LengthCurveError&)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "Cannot calculate the actual curve length: unexpected results have been came up!" << endl
+					<< abort(FatalError);
+				return 0.;
+			}
+		}
 		return curveLength;
 	}
 
@@ -438,33 +500,10 @@ namespace tnbLib
 				<< "cannot calculate the curve length." << endl
 				<< abort(FatalError);
 		}
-		Mesh_CurveEntity<gCurveType, MetricPrcsrType>
-			Integrand(*Geometry(), *MetricMap(), theFirst, theLast);
-		auto totLength =
-			CalcLength
-			(
-				Integrand, Info()->LengthCalcMaxLevel(),
-				*Info()->OverallLengthIntgInfo());
+		auto totLength = this->CalcCurveLength(theFirst, theLast);
+		auto len0 = this->CalcCurveLength(theFirst, MEAN(theFirst, theLast));
+		auto len1 = this->CalcCurveLength(MEAN(theFirst, theLast), theLast);
 
-		Standard_Real len0, len1;
-		{
-			Mesh_CurveEntity<gCurveType, MetricPrcsrType>
-				Integrand(*Geometry(), *MetricMap(), theFirst, MEAN(theFirst, theLast));
-			len0 =
-				CalcLength
-				(
-					Integrand, Info()->LengthCalcMaxLevel(),
-					*Info()->OverallLengthIntgInfo());
-		}
-		{
-			Mesh_CurveEntity<gCurveType, MetricPrcsrType>
-				Integrand(*Geometry(), *MetricMap(), MEAN(theFirst, theLast), theLast);
-			len1 =
-				CalcLength
-				(
-					Integrand, Info()->LengthCalcMaxLevel(),
-					*Info()->OverallLengthIntgInfo());
-		}
 		if (std::abs(totLength - (len0 + len1)) <= this->Info()->OverallLengthIntgInfo()->Tolerance()*totLength)
 		{
 			return totLength;
@@ -490,5 +529,21 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 		return CalcLengthWithChecking(0, nbLevels_CheckingLength, FirstParameter(), LastParameter());
+	}
+
+	template<class gCurveType, class MetricPrcsrType, bool SavePars>
+	inline Standard_Real 
+		tnbLib::Mesh_Curve<gCurveType, MetricPrcsrType, SavePars>::CalcCurveLength
+		(
+			const Standard_Real theU0,
+			const Standard_Real theU1
+		) const
+	{
+		Mesh_CurveEntity<gCurveType, MetricPrcsrType>
+			Integrand(*Geometry(), *MetricMap(), theU0, theU1);
+		return CalcLength
+		(
+			Integrand, Info()->LengthCalcMaxLevel(),
+			*Info()->OverallLengthIntgInfo());
 	}
 }

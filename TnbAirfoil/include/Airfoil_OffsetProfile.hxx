@@ -53,6 +53,7 @@ namespace tnbLib
 		}
 
 		virtual Standard_Real Value(const Standard_Real x) const = 0;
+		virtual void Perform() = 0;
 
 		std::vector<Standard_Real> RetrieveXc() const;
 

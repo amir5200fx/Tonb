@@ -29,7 +29,7 @@ namespace tnbLib
 		node* theBwdNePtr_;
 		node* theBwdNwPtr_;
 
-	public:
+	protected:
 
 		// default constructor [7/5/2022 Amir]
 
@@ -47,6 +47,7 @@ namespace tnbLib
 
 		// constructors [7/5/2022 Amir]
 
+	public:
 
 		// public functions and operators [7/5/2022 Amir]
 

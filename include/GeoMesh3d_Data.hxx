@@ -17,7 +17,7 @@ namespace tnbLib
 	template<>
 	TnbMesh_EXPORT void GeoMesh3d_Data::Construct(const triangulation& theTriangulation);
 
-#ifdef _DEBUG
+#ifdef TriLoc_Debug
 	template<>
 	TnbMesh_EXPORT std::shared_ptr<Mesh3d_Element>
 		GeoMesh3d_Data::TriangleLocation
@@ -25,7 +25,7 @@ namespace tnbLib
 			const std::shared_ptr<Mesh3d_Element>& theElement,
 			const Pnt3d& theCoord
 		) const;
-#endif // _DEBUG
+#endif // TriLoc_Debug
 
 
 	template<>

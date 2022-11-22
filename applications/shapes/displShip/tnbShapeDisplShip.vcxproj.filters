@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{e383fffd-bc10-4e30-9228-1e0a02e1d7c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib">
+      <UniqueIdentifier>{44bbbf29-18bc-4955-8822-e964b7ad83a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Entity">
+      <UniqueIdentifier>{2acfc5f0-099f-4a3c-a1ec-6ac9d12a480c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Parameter">
+      <UniqueIdentifier>{99f74339-446c-4bcd-aee8-8234cc81d8c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Profile">
+      <UniqueIdentifier>{97180b3b-1243-4d0c-9f57-0e8f58458211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\xParams">
+      <UniqueIdentifier>{d7f45e4f-0f88-4dfc-9762-582ff83318a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\CtrlPts">
+      <UniqueIdentifier>{7bc509bb-a37e-4062-bb66-540b6e4e1c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Global">
+      <UniqueIdentifier>{624259b5-a764-4955-8749-24f9ff6c3b0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\CtrlNet">
+      <UniqueIdentifier>{9e23b24b-cd57-4e42-a02a-432650d15978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\WeightNet">
+      <UniqueIdentifier>{e8184d1b-2d61-4116-874c-3ffa4d2fab0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\displacement">
+      <UniqueIdentifier>{4956d48c-64db-40da-9f24-91ea7fd0d95d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Dimensions">
+      <UniqueIdentifier>{1c00bc93-efe7-4cae-8656-81bbc0f89e36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Parameters">
+      <UniqueIdentifier>{0ca62480-b43c-4ca2-9617-2eb340787a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Parameters\Section">
+      <UniqueIdentifier>{caaefa02-80bf-428e-8883-338daa7daa70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Parameters\Keel">
+      <UniqueIdentifier>{34f62a12-2276-40ab-88e0-e16a77005d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Parameters\Stem">
+      <UniqueIdentifier>{9e07d037-03d5-4515-a2b9-0d17e8f330a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Parameters\Transom">
+      <UniqueIdentifier>{d3ed155f-1a63-4f84-a7f9-6a2462edc383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Parameters\Hull">
+      <UniqueIdentifier>{22a8de39-df9d-4d5b-9449-ee6552a6e359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\Profiles">
+      <UniqueIdentifier>{708943cc-ab4c-4b17-9cc5-17d02e9ad483}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tnbShapeDisplShip.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\displacement\Ship_Displ.cxx">
+      <Filter>src\lib\displacement</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\Entity\Ship_Entity.hxx">
+      <Filter>src\lib\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Parameter\Ship_Parameter.hxx">
+      <Filter>src\lib\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Profile\Ship_Profile.hxx">
+      <Filter>src\lib\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xParams\Ship_xParams.hxx">
+      <Filter>src\lib\xParams</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\CtrlPts\Ship_CtrlPts.hxx">
+      <Filter>src\lib\CtrlPts</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Global\Ship_Global.hxx">
+      <Filter>src\lib\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\displacement\Ship_Displ.hxx">
+      <Filter>src\lib\displacement</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Dimensions\Ship_Dimens.hxx">
+      <Filter>src\lib\Dimensions</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Parameters\Keel\Ship_KeelParams.hxx">
+      <Filter>src\lib\Parameters\Keel</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Parameters\Hull\Ship_HullParams.hxx">
+      <Filter>src\lib\Parameters\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Parameters\Transom\Ship_TransomParams.hxx">
+      <Filter>src\lib\Parameters\Transom</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Parameters\Stem\Ship_StemParams.hxx">
+      <Filter>src\lib\Parameters\Stem</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Parameters\Section\Ship_SectionParams.hxx">
+      <Filter>src\lib\Parameters\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Parameters\Ship_Params.hxx">
+      <Filter>src\lib\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Profiles\Ship_Profiles.hxx">
+      <Filter>src\lib\Profiles</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

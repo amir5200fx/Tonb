@@ -84,10 +84,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbAirfoil_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,10 +135,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbAirfoil_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +155,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Airfoil\Naca\Midline\Airfoil_NacaMidline.hxx" />
     <ClInclude Include="TnbLib\Airfoil\Naca\Midline\trapezoidal\Airfoil_trapzNacaMidline.hxx" />
     <ClInclude Include="TnbLib\Airfoil\Naca\Midline\uniform\Airfoil_uniformNacaMidline.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Naca\ThickOffsets\Airfoil_NacaThickOffsets.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\Airfoil_NacaThickOffsets_Series6.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010\Airfoil_NacaThickOffsets_N65A010.hxx" />
     <ClInclude Include="TnbLib\Airfoil\Naca\Thick\Airfoil_NacaThickness.hxx" />
     <ClInclude Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_Profile.hxx" />
     <ClInclude Include="TnbLib\Airfoil\OffsetProfile\Airfoil_OffsetProfile.hxx" />
@@ -165,6 +170,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Airfoil\Naca\Midline\trapezoidal\Airfoil_trapzNacaMidline.cxx" />
     <ClCompile Include="TnbLib\Airfoil\Naca\Midline\uniform\Airfoil_uniformNacaMidline.cxx" />
     <ClCompile Include="TnbLib\Airfoil\Naca\Midline\uniform\Airfoil_uniformNacaMidlineIO.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010\Airfoil_NacaThickOffsets_N65A010.cxx" />
     <ClCompile Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_Profile.cxx" />
     <ClCompile Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_ProfileIO.cxx" />
     <ClCompile Include="TnbLib\Airfoil\OffsetProfile\Steffen\Airfoil_OffsetProfile_Steffen.cxx" />

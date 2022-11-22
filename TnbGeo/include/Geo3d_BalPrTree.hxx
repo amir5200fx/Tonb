@@ -215,6 +215,11 @@ namespace tnbLib
 			return !theRoot_;
 		}
 
+		auto Root() const
+		{
+			return theRoot_;
+		}
+
 		Standard_Boolean IsBalanced() const;
 
 		void InsertToGeometry(const T& theItem) override;

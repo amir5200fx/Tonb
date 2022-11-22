@@ -751,6 +751,9 @@
     <Filter Include="TnbLib\Geo\Entities\Tetrahedron\3d">
       <UniqueIdentifier>{6f1ddb0e-3a0d-43c3-8c49-29d4d5fc3ee3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Search\PrTree\Balanced\Quad">
+      <UniqueIdentifier>{b5f50735-77d2-45d5-9436-6bc581445fe1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1776,6 +1779,33 @@
     <ClInclude Include="TnbLib\Geo\Entities\Tetrahedron\3d\Entity3d_Tetrahedron.hxx">
       <Filter>TnbLib\Geo\Entities\Tetrahedron\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeNode.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeBucket.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeBucketI.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeInternalHub.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeInternal.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeLeaf.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeLeafHub.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTree.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeI.hxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2206,6 +2236,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\Box\3d\Entity3d_BoxIO.cxx">
       <Filter>TnbLib\Geo\Entities\Box\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTree.cxx">
+      <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -441,7 +441,7 @@ namespace tnbLib
 	}
 }
 
-#ifdef _DEBUG
+#ifdef TriLoc_Debug
 template<>
 std::shared_ptr<tnbLib::Mesh3d_Element>
 tnbLib::GeoMesh3d_Data::TriangleLocation
@@ -520,10 +520,13 @@ tnbLib::GeoMesh3d_Data::TriangleLocation
 		}
 
 		++k;
-		if (k >= DEFAULT_MAX_CYCLES)
+		if (k >= /*DEFAULT_MAX_CYCLES*/1500)
 		{
+
+			std::cout << "coord = " << theCoord << std::endl;
+			
 			FatalErrorIn("element_ptr TriangleLocation(const element_ptr& theStart, const Pnt2d& theCoord) const;")
-				<< "It's look like the algorithm traps in an infinite loop" << endl
+				<< "It's look like the algorithm tramped in an infinite loop" << endl
 				<< " - Unable to find the triangle which encompassed the point" << endl
 				<< abort(FatalError);
 		}
@@ -532,4 +535,4 @@ tnbLib::GeoMesh3d_Data::TriangleLocation
 	}
 	return nullptr;
 }
-#endif // _DEBUG
+#endif // TriLoc_Debug

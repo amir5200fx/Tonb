@@ -20,7 +20,7 @@ namespace tnbLib
 
 		auto neighbor = theStart;
 		auto element = theStart;
-#if _DEBUG
+#if TriLoc_Debug
 		int k = 0;
 #endif
 		while (Standard_True)
@@ -49,7 +49,7 @@ namespace tnbLib
 				}
 				else
 				{
-#ifdef _DEBUG
+#ifdef TriLoc_Debug
 					auto leftElement = entity.LeftElement().lock();
 					if (NOT leftElement)
 					{
@@ -67,7 +67,7 @@ namespace tnbLib
 							<< " - left element: " << leftElement->Index() << endl
 							<< abort(FatalError);
 					}
-#endif // _DEBUG
+#endif // TriLoc_Debug
 
 					if (entity.IsRightSide(theCoord))
 					{
@@ -116,12 +116,12 @@ namespace tnbLib
 				return neighbor;
 			}
 
-#if _DEBUG
+#if TriLoc_Debug
 			++k;
 			if (k >= DEFAULT_MAX_CYCLES)
 			{
 				FatalErrorIn("element_ptr TriangleLocation(const element_ptr& theStart, const Pnt2d& theCoord) const;")
-					<< "It's look like the algorithm traps in an infinite loop" << endl
+					<< "It's look like the algorithm trapped in an infinite loop" << endl
 					<< " - Unable to find the triangle which encompassed the point" << endl
 					<< abort(FatalError);
 			}

@@ -36,7 +36,7 @@ namespace tnbLib
 
 		TnbAirfoil_EXPORT Standard_Real Value(const Standard_Real x) const override;
 
-		TnbAirfoil_EXPORT void Perform();
+		TnbAirfoil_EXPORT void Perform() override;
 
 	};
 }

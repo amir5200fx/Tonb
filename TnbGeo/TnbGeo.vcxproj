@@ -419,6 +419,15 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeLeafHub.hxx" />
     <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeI.hxx" />
     <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTreeNode.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTree.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeBucket.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeBucketI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeI.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeInternal.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeInternalHub.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeLeaf.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeLeafHub.hxx" />
+    <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeNode.hxx" />
     <ClInclude Include="TnbLib\Geo\Search\PrTree\Geo_PrTree.hxx" />
     <ClInclude Include="TnbLib\Geo\Search\PrTree\Geo_PrTreeI.hxx" />
     <ClInclude Include="TnbLib\Geo\Serialization\Geo_Serialization.hxx" />
@@ -594,6 +603,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Scripts\Geo_Scripts.cxx" />
     <ClCompile Include="TnbLib\Geo\Search\PrTree\Balanced\AttrbOct\Geo3d_AttrbBalPrTree.cxx" />
     <ClCompile Include="TnbLib\Geo\Search\PrTree\Balanced\Oct\Geo3d_BalPrTree.cxx" />
+    <ClCompile Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTree.cxx" />
     <ClCompile Include="TnbLib\Geo\Search\PrTree\Geo_PrTree.cxx" />
     <ClCompile Include="TnbLib\Geo\Serialization\Geo_Serialization.cxx" />
     <ClCompile Include="TnbLib\Geo\System\TnbGeo_System.cxx" />

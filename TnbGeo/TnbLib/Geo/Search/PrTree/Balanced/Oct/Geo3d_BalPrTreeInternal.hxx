@@ -36,8 +36,13 @@ namespace tnbLib
 		// public functions and operators [7/5/2022 Amir]
 
 
-		~Geo3d_BalPrTreeInternal() override
-		{}
+		/*~Geo3d_BalPrTreeInternal() override
+		{}*/
+
+		std::string Type() const override
+		{
+			return "internal";
+		}
 
 	};
 }

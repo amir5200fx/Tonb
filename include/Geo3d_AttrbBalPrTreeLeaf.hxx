@@ -44,6 +44,11 @@ namespace tnbLib
 
 		// public functions and operators [8/8/2022 Amir]
 
+		std::string Type() const override
+		{
+			return "attr_leaf";
+		}
+
 		const auto& Father() const
 		{
 			return theFather_;

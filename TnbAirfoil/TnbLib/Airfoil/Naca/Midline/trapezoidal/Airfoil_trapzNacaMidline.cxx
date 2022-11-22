@@ -27,5 +27,5 @@ tnbLib::Airfoil_trapzNacaMidline::CalcY
 		+ 0.25*oneM_xperc_pow2 
 		- 0.25*Am_xperc_pow2;
 	const auto c3 = inv_oneM_A * c2 - xPerc * log(xPerc) + g - h * xPerc;
-	return c1 * c3;
+	return Chord()*c1 * c3;
 }

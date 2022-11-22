@@ -30,13 +30,14 @@ namespace tnbLib
 		leafList theFNeighbors_;
 		leafList theBNeighbors_;
 
-	public:
+	protected:
 
 		// default constructor [7/5/2022 Amir]
 
 		Geo3d_BalPrTreeLeafHub()
 		{}
 
+	public:
 
 		// public functions and operators [7/5/2022 Amir]
 

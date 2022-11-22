@@ -37,6 +37,15 @@
     <Filter Include="TnbLib\Airfoil\OffsetProfile\Steffen">
       <UniqueIdentifier>{45dd1cfb-d048-449f-aa4f-36d7d4d3b7ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\ThickOffsets">
+      <UniqueIdentifier>{90a21a42-c20a-4d5c-90f8-58c92d1fdd3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6">
+      <UniqueIdentifier>{befe0252-2127-4eaf-8fd0-e7f2770c3ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010">
+      <UniqueIdentifier>{0cb83568-6e99-4801-8839-8c125f828050}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Airfoil\Entity\Airfoil_Entity.hxx">
@@ -69,6 +78,15 @@
     <ClInclude Include="TnbLib\Airfoil\Naca\Airfoil_Naca.hxx">
       <Filter>TnbLib\Airfoil\Naca</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\ThickOffsets\Airfoil_NacaThickOffsets.hxx">
+      <Filter>TnbLib\Airfoil\Naca\ThickOffsets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\Airfoil_NacaThickOffsets_Series6.hxx">
+      <Filter>TnbLib\Airfoil\Naca\ThickOffsets\Series6</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010\Airfoil_NacaThickOffsets_N65A010.hxx">
+      <Filter>TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Airfoil\Entity\Airfoil_Entity.cxx">
@@ -100,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Airfoil\Naca\Airfoil_NacaIO.cxx">
       <Filter>TnbLib\Airfoil\Naca</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010\Airfoil_NacaThickOffsets_N65A010.cxx">
+      <Filter>TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

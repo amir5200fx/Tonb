@@ -15,6 +15,7 @@ namespace tnbLib
 
 		Standard_Real theCli_;
 		Standard_Real theA_;
+		Standard_Real theChord_;
 
 
 		// Private functions and operators [10/30/2022 Amir]
@@ -36,6 +37,7 @@ namespace tnbLib
 		Airfoil_trapzNacaMidline()
 			: theCli_(0)
 			, theA_(0)
+			, theChord_(0)
 		{}
 
 		// constructors [10/30/2022 Amir]
@@ -44,6 +46,7 @@ namespace tnbLib
 			: Airfoil_NacaMidline(theIndex, theName)
 			, theCli_(0)
 			, theA_(0)
+			, theChord_(0)
 		{}
 
 
@@ -61,6 +64,11 @@ namespace tnbLib
 			return theA_;
 		}
 
+		auto Chord() const
+		{
+			return theChord_;
+		}
+
 		TnbAirfoil_EXPORT Standard_Real
 			CalcY(const Standard_Real xPerc) const override;
 
@@ -72,6 +80,11 @@ namespace tnbLib
 		void SetA(const Standard_Real theValue)
 		{
 			theA_ = theValue;
+		}
+
+		void SetChord(const Standard_Real theValue)
+		{
+			theChord_ = theValue;
 		}
 	};
 }

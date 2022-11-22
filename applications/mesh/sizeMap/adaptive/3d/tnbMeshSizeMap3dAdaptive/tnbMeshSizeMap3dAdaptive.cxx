@@ -5,6 +5,7 @@
 #include <Mesh3d_UniformFeatureSizeMapControl.hxx>
 #include <Mesh3d_UnionSizeMap.hxx>
 #include <MeshBase_Tools.hxx>
+#include <Discret3d_Surface.hxx>
 #include <GeoMesh_Background_Info.hxx>
 #include <BoundarySizeMap3d_UniformFaceTool.hxx>
 #include <BoundarySizeMap3d_UniformSegmentTool.hxx>
@@ -466,6 +467,8 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		Discret3d_Surface::verbose = 1;
+
 		const auto& approxInfo = myFaceSizeMapInfo->ApprxSurfInfo();
 		approxInfo->SetMinSubdivide(2);
 		approxInfo->SetMaxSubdivide(4);
@@ -483,11 +486,15 @@ namespace tnbLib
 			}
 
 			auto domain = retrieveBoundingBox();
-
+			std::cout << "nb of maps: " << myBoundarySizeMaps->NbMaps() << std::endl;
+			std::cout << myBoundarySizeMaps << std::endl;
 			if (myBoundarySizeMaps->NbMaps())
 			{
 				myBoundarySizeMaps->Perform();
+				PAUSE;
 			}
+			std::cout << "injaaaaa" << std::endl;
+			PAUSE;
 			//std::exit(1);
 			//auto ss = myFeatureSizeMaps->SelectMap("edges");
 			//std::cout << ss->MeshConditions()->CustomBoundaryGrowthRate() << std::endl;
@@ -527,10 +534,11 @@ namespace tnbLib
 
 				alg->SetCloud(myCloud);
 
-				alg->Perform();
+				//alg->Perform();
 
 				//myBackgound = myFeatureSizeMaps->BackgroundMesh();
-				myBackgound = alg->UnifiedMap();
+				myBackgound = myBoundarySizeMaps->BackgroundMesh();
+				//myBackgound = alg->UnifiedMap();
 			}
 			/*else if (backs.size() == 1)
 			{

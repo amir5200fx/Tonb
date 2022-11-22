@@ -17,13 +17,15 @@ namespace tnbLib
 
 		std::set<T> theBucket_;
 
-	public:
+	protected:
 
 		// default constructor [7/5/2022 Amir]
 
 		Geo3d_BalPrTreeBucket()
 		{}
 
+
+	public:
 
 		// public functions and operators [7/5/2022 Amir]
 

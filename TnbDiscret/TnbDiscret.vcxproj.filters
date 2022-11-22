@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{17b2b7a8-4abf-4d85-9694-d9fd767294eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret">
+      <UniqueIdentifier>{257cd938-dfc8-4919-8dd4-c25fbbf8aced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve">
+      <UniqueIdentifier>{ffe9c437-43b4-4117-bea6-850ea2e40dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Surface">
+      <UniqueIdentifier>{28349eb2-2f4f-4a31-9c54-e2f2c57ba800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve\2d">
+      <UniqueIdentifier>{ee6feff7-9c5e-4d1f-814b-4ee48e3c028f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve\2d\Fun">
+      <UniqueIdentifier>{59f78604-f3b2-45bd-a3f8-e605ae086151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve\2d\Fun\Length">
+      <UniqueIdentifier>{2489dc81-0e4d-4631-a3cd-7626a9a34a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform">
+      <UniqueIdentifier>{f544e230-1ae6-4ac8-b2c5-e45b68b28a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve\Samples">
+      <UniqueIdentifier>{c0b847bd-199a-4b20-b927-df0aa22b5cdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve\Samples\Uniform">
+      <UniqueIdentifier>{5eddb330-da6b-4626-9b2d-53f3fc182ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\module">
+      <UniqueIdentifier>{119fa2b4-7bc2-4d9a-868e-3a348e76e3db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Curve\Info">
+      <UniqueIdentifier>{ee1bed81-ac5d-47c5-b0b7-47f4444b1232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Surface\Info">
+      <UniqueIdentifier>{cf8d5dc4-eb9d-4d3a-a709-7e6cdc390e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Surface\Fun">
+      <UniqueIdentifier>{586d1d86-0f12-4d5b-998d-71413fa20713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Surface\Fun\Size">
+      <UniqueIdentifier>{145f2d0d-1330-43cf-a865-5683e323dbcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Surface\Fun\Size\Uniform">
+      <UniqueIdentifier>{0f20e2b0-a6ba-40c0-aea7-8907ad38bf3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Discret\Surface\Fun\Size\Adaptive">
+      <UniqueIdentifier>{1afc9b93-af4c-45df-99ba-0233e495db53}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.hxx">
+      <Filter>TnbLib\Discret\Curve\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Discret2d_Curve_Function.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_Curve_LengthFun.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_Curve_UniLengthFun.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\Samples\Discret_Curve_Samples.hxx">
+      <Filter>TnbLib\Discret\Curve\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\Samples\Uniform\Discret_Curve_UniformSamples.hxx">
+      <Filter>TnbLib\Discret\Curve\Samples\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\module\Discret_Module.hxx">
+      <Filter>TnbLib\Discret\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\Info\Discret_CurveInfo.hxx">
+      <Filter>TnbLib\Discret\Curve\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Surface\Discret3d_Surface.hxx">
+      <Filter>TnbLib\Discret\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Surface\Info\Discret3d_SurfaceInfo.hxx">
+      <Filter>TnbLib\Discret\Surface\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Surface\Fun\Discret3d_Surface_Function.hxx">
+      <Filter>TnbLib\Discret\Surface\Fun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Surface\Fun\Size\Discret3d_Surface_SizeFunction.hxx">
+      <Filter>TnbLib\Discret\Surface\Fun\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Surface\Fun\Size\Uniform\Discret3d_Surface_UniformSizeFun.hxx">
+      <Filter>TnbLib\Discret\Surface\Fun\Size\Uniform</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.cxx">
+      <Filter>TnbLib\Discret\Curve\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_Curve_UniLengthFun.cxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Curve\Info\Discret_CurveInfo.cxx">
+      <Filter>TnbLib\Discret\Curve\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Surface\Info\Discret3d_SurfaceInfo.cxx">
+      <Filter>TnbLib\Discret\Surface\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Surface\Fun\Size\Uniform\Discret3d_Surface_UniformSizeFun.cxx">
+      <Filter>TnbLib\Discret\Surface\Fun\Size\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Surface\Fun\Size\Uniform\Discret3d_Surface_UniformSizeFunIO.cxx">
+      <Filter>TnbLib\Discret\Surface\Fun\Size\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Curve\Samples\Uniform\Discret_Curve_UniformSamples.cxx">
+      <Filter>TnbLib\Discret\Curve\Samples\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Curve\Samples\Uniform\Discret_Curve_UniformSamplesIO.cxx">
+      <Filter>TnbLib\Discret\Curve\Samples\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Surface\Discret3d_Surface.cxx">
+      <Filter>TnbLib\Discret\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Surface\Fun\Size\Discret3d_Surface_SizeFunctionIO.cxx">
+      <Filter>TnbLib\Discret\Surface\Fun\Size</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
