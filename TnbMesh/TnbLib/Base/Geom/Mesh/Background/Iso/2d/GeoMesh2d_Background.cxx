@@ -1,5 +1,20 @@
 #include <GeoMesh2d_Background.hxx>
 
+#include <MeshBase_Tools.hxx>
+#include <GeoMesh2d_Data.hxx>
+
+template<>
+void tnbLib::GeoMesh2d_SingleBackground::ConnectTopology()
+{
+	if (const auto& mesh = this->Mesh())
+	{
+		if (mesh->Elements().size())
+		{
+			MeshBase_Tools::ConnectMesh(mesh->Elements());
+		}
+	}
+}
+
 namespace tnbLib
 {
 
@@ -9,7 +24,7 @@ namespace tnbLib
 	}
 
 	template<>
-	void GeoMesh2d_Background::HvCorrection
+	void GeoMesh2d_SingleBackground::HvCorrection
 	(
 		const std::vector<std::shared_ptr<Mesh2d_Node>>& nodes,
 		const Standard_Real Factor,

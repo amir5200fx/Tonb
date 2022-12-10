@@ -1,6 +1,19 @@
 #include <GeoMesh2d_MetricBackground.hxx>
 
 #include <Mesh2d_Node.hxx>
+#include <MeshBase_Tools.hxx>
+
+template<>
+void tnbLib::GeoMesh2d_MetricBackground::ConnectTopology()
+{
+	if (const auto& mesh = this->Mesh())
+	{
+		if (mesh->Elements().size())
+		{
+			MeshBase_Tools::ConnectMesh(mesh->Elements());
+		}
+	}
+}
 
 namespace tnbLib
 {
