@@ -2,6 +2,7 @@
 
 #include <Mesh3d_SizeMapTool.hxx>
 #include <Mesh3d_UnionSizeMap.hxx>
+#include <Mesh3d_MultiSizeMap.hxx>
 #include <Mesh_SizeMapControl_Info.hxx>
 #include <Geo3d_PatchCloud.hxx>
 #include <GeoMesh3d_Background.hxx>
@@ -33,101 +34,116 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 			<< abort(FatalError);
 	}
 
-	if (NOT Cloud())
+	/*if (NOT Cloud())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no cloud has been found." << endl
 			<< abort(FatalError);
-	}
+	}*/
 
 	if (verbose)
 	{
 		Mesh_SizeMapToolBaseNonTemplate::verbose = verbose;
 	}
-	std::cout << "injaaaaaaaaaaa" << std::endl;
+
 	for (const auto& x : Maps())
 	{
 		Debug_Null_Pointer(x.second);
 		const auto& mapTool = x.second;
-		std::cout << "map tool = " << mapTool << std::endl;
+
 		if(NOT mapTool->IsDone())
 			mapTool->Perform();
 	}
-	PAUSE;
+
 	if (Maps().size() IS_EQUAL 1)
 	{
-		if (verbose)
+		/*if (verbose)
 		{
 			Info << endl
 				<< " one size map has been detected, no unifying algorithm is needed." << endl;
-		}
+		}*/
 		theBackground_ = Maps().begin()->second->BackgroundMesh();
 
-		OFstream myFile("sizeMapControl.plt");
-		theBackground_->ExportToPlt(myFile);
+		/*OFstream myFile("sizeMapControl.plt");
+		theBackground_->ExportToPlt(myFile);*/
 	}
 	else
 	{
-		if (verbose)
-		{
-			Info << endl
-				<< " unifying the maps..." << endl
-				<< " - nb. of the maps: " << Maps().size() << endl;
-		}
-		Global_Timer myTimer;
-		myTimer.SetInfo(Global_TimerInfo_ms);
-
-		auto alg = std::make_shared<Mesh3d_UnionSizeMap>();
-		Debug_Null_Pointer(alg);
-
-		const auto& myInfo = SizeMapInfo();
-		alg->SetMaxUnbalancing(myInfo->MaxUnbalancing());
-		alg->SetTolerance(myInfo->Tolerance());
-		alg->SetDomain(Domain());
-		alg->SetSmoothingInfo(myInfo->HvCorrInfo());
-		alg->SetCloud(Cloud());
-
-		std::set<std::shared_ptr<Cad_TModel>> compact;
+		std::vector<std::shared_ptr<GeoMesh3d_Background>> meshes;
+		meshes.reserve(Maps().size());
 		for (const auto& x : Maps())
 		{
 			Debug_Null_Pointer(x.second);
-			const auto& g = x.second->Model();
-			if (NOT compact.insert(g).second)
-			{
-				// duplicate data has been detected. [7/21/2022 Amir]
-				//- do nothing!
-			}
+			meshes.push_back(x.second->BackgroundMesh());
 		}
 
-		std::vector<std::shared_ptr<Cad_TModel>> models;
-		models.reserve(compact.size());
-		for (auto& x : compact)
-		{
-			models.push_back(std::move(x));
-		}
+		auto multiBackMesh = std::make_shared<Mesh3d_MultiSizeMap>(std::move(meshes));
+		Debug_Null_Pointer(multiBackMesh);
 
-		std::vector<std::shared_ptr<GeoMesh3d_Background>> backs;
-		backs.reserve(Maps().size());
-		for (const auto& x : Maps())
-		{
-			Debug_Null_Pointer(x.second);
-			backs.push_back(x.second->BackgroundMesh());
-		}
+		multiBackMesh->SetBoundingBox(*Domain());
 
-		alg->SetModels(std::move(models));
-		alg->SetBackgrounds(backs);
+		theBackground_ = std::move(multiBackMesh);
 
-		alg->Perform();
-		Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed.");
+		//if (verbose)
+		//{
+		//	Info << endl
+		//		<< " unifying the maps..." << endl
+		//		<< " - nb. of the maps: " << Maps().size() << endl;
+		//}
+		//Global_Timer myTimer;
+		//myTimer.SetInfo(Global_TimerInfo_ms);
 
-		theBackground_ = alg->UnifiedMap();
+		//auto alg = std::make_shared<Mesh3d_UnionSizeMap>();
+		//Debug_Null_Pointer(alg);
+
+		//const auto& myInfo = SizeMapInfo();
+		//alg->SetMaxUnbalancing(myInfo->MaxUnbalancing());
+		//alg->SetTolerance(myInfo->Tolerance());
+		//alg->SetDomain(Domain());
+		//alg->SetSmoothingInfo(myInfo->HvCorrInfo());
+		//alg->SetCloud(Cloud());
+
+		//std::set<std::shared_ptr<Cad_TModel>> compact;
+		//for (const auto& x : Maps())
+		//{
+		//	Debug_Null_Pointer(x.second);
+		//	const auto& g = x.second->Model();
+		//	if (NOT compact.insert(g).second)
+		//	{
+		//		// duplicate data has been detected. [7/21/2022 Amir]
+		//		//- do nothing!
+		//	}
+		//}
+
+		//std::vector<std::shared_ptr<Cad_TModel>> models;
+		//models.reserve(compact.size());
+		//for (auto& x : compact)
+		//{
+		//	models.push_back(std::move(x));
+		//}
+
+		//std::vector<std::shared_ptr<GeoMesh3d_Background>> backs;
+		//backs.reserve(Maps().size());
+		//for (const auto& x : Maps())
+		//{
+		//	Debug_Null_Pointer(x.second);
+		//	backs.push_back(x.second->BackgroundMesh());
+		//}
+
+		//alg->SetModels(std::move(models));
+		//alg->SetBackgrounds(backs);
+
+		//alg->Perform();
+		//Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed.");
+
+		//theBackground_ = alg->UnifiedMap();
 	}
 
-	if (verbose)
+	/*if (verbose)
 	{
 		Info << endl
 			<< " - all of the maps in the size map control have been unified, in " << global_time_duration << " ms." << endl;
-	}
+	}*/
 
 	Change_IsDone() = Standard_True;
 }
