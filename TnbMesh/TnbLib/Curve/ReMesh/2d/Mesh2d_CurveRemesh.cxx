@@ -444,7 +444,7 @@ namespace tnbLib
 		const Entity_Polygon<std::pair<Pnt2d, Standard_Real>>& thePoly,
 		const std::vector<Standard_Real>& theHs, 
 		const Standard_Real baseSize, 
-		GeoMesh2d_Background& theMesh
+		GeoMesh2d_SingleBackground& theMesh
 	)
 	{
 		const auto& mesh = theMesh.Mesh();
@@ -490,7 +490,8 @@ namespace tnbLib
 	(
 		const std::map<Standard_Integer, std::shared_ptr<Entity_Polygon<std::pair<Pnt2d, Standard_Real>>>>& theChains,
 		const std::map<Standard_Integer, std::shared_ptr<std::vector<Standard_Real>>>& theHsMap,
-		const Standard_Real baseSize, GeoMesh2d_Background& theMesh
+		const Standard_Real baseSize, 
+		GeoMesh2d_SingleBackground& theMesh
 	)
 	{
 		for (const auto& x : theChains)
@@ -607,7 +608,7 @@ Standard_Real tnbLib::Mesh2d_CurveRemesh::Discretize
 		Info << " Constructing the background mesh..." << endl;
 		Info << endl;
 	}
-	const auto bMesh = std::make_shared<GeoMesh2d_Background>();
+	const auto bMesh = std::make_shared<GeoMesh2d_SingleBackground>();
 	Debug_Null_Pointer(bMesh);
 
 	bMesh->Mesh()->Construct(triangulation);

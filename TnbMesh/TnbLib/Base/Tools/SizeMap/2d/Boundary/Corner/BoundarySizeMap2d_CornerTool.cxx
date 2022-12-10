@@ -320,7 +320,7 @@ void tnbLib::BoundarySizeMap2d_CornerTool::Perform()
 		Info << " Constructing the background mesh..." << endl;
 		Info << endl;
 	}
-	const auto bMesh = std::make_shared<GeoMesh2d_Background>();
+	const auto bMesh = std::make_shared<GeoMesh2d_SingleBackground>();
 	Debug_Null_Pointer(bMesh);
 
 	bMesh->Mesh()->Construct(triangulation);
