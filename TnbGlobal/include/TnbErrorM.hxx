@@ -2,7 +2,7 @@
 #include <Global_Macros.hxx>
 #define FunctionSIG __FUNCSIG__
 
-#define FULLDEBUG
+//#define FULLDEBUG
 #ifdef FULLDEBUG
 #define Debug(theStatements)  \
     {theStatements}
