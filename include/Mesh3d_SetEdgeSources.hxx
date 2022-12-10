@@ -4,7 +4,7 @@
 
 #include <Mesh_Module.hxx>
 #include <Mesh3d_SetSourcesNodeFwd.hxx>
-#include <GeoMesh3d_BackgroundFwd.hxx>
+#include <GeoMesh3d_SingleBackgroundFwd.hxx>
 #include <Entity3d_ChainFwd.hxx>
 #include <Global_Done.hxx>
 
@@ -22,7 +22,7 @@ namespace tnbLib
 		const std::vector<Standard_Real>& theValues_;
 		std::shared_ptr<Entity3d_Chain> theEdges_;
 
-		std::shared_ptr<GeoMesh3d_Background> theMesh_;
+		std::shared_ptr<GeoMesh3d_SingleBackground> theMesh_;
 
 		Standard_Real theTolerance_;
 
@@ -40,7 +40,7 @@ namespace tnbLib
 		(
 			const std::vector<Standard_Real>& theValues,
 			const std::shared_ptr<Entity3d_Chain>& theEdges,
-			const std::shared_ptr<GeoMesh3d_Background>& theMesh
+			const std::shared_ptr<GeoMesh3d_SingleBackground>& theMesh
 		)
 			: theValues_(theValues)
 			, theEdges_(theEdges)
@@ -52,7 +52,7 @@ namespace tnbLib
 		(
 			const std::vector<Standard_Real>& theValues,
 			const std::shared_ptr<Entity3d_Chain>& theEdges,
-			const std::shared_ptr<GeoMesh3d_Background>& theMesh,
+			const std::shared_ptr<GeoMesh3d_SingleBackground>& theMesh,
 			const Standard_Real theTol
 		)
 			: theValues_(theValues)

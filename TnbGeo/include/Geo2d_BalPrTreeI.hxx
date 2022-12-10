@@ -179,7 +179,7 @@ inline void tnbLib::Geo2d_BalPrTree<T>::Insert
 			FillNeighbors(Geo2d_BalPrTreeQuad::NE, leaf, interNode, NePtr);
 			FillNeighbors(Geo2d_BalPrTreeQuad::NW, leaf, interNode, NwPtr);
 
-			UpdateFather(leaf, interNode);
+			//UpdateFather(leaf, interNode);
 
 			const auto coord = b.CalcCentre();
 			for (const auto& x : pItems)
@@ -550,7 +550,7 @@ inline void tnbLib::Geo2d_BalPrTree<T>::Balance(node *& t)
 		FillNeighbors(Geo2d_BalPrTreeQuad::NE, leaf, interNode, NePtr);
 		FillNeighbors(Geo2d_BalPrTreeQuad::NW, leaf, interNode, NwPtr);
 
-		UpdateFather(leaf, (node*)interNode);
+		//UpdateFather(leaf, (node*)interNode);
 
 		if (t)
 		{
@@ -1033,14 +1033,9 @@ inline void tnbLib::Geo2d_BalPrTree<T>::PostBalance()
 
 	while (true)
 	{
-		std::vector<leafNode*> leaves;
-		RetrieveLeavesTo(leaves);
+		k++;
 		IsBalancedRef() = Standard_True;
-		for (const auto& x : leaves)
-		{
-			auto y = (node*)x;
-			Balance(y);
-		}
+		Balance(theRoot_);
 		if (IsBalancedRef()) break;
 	}
 }
@@ -1075,9 +1070,7 @@ inline void tnbLib::Geo2d_BalPrTree<T>::PostSubdivide
 template<class T>
 inline void tnbLib::Geo2d_BalPrTree<T>::Clear()
 {
-	std::cout << "clearing..." << std::endl;
 	Clear(theRoot_);
-	std::cout << "cleared." << std::endl;
 }
 
 template<class T>

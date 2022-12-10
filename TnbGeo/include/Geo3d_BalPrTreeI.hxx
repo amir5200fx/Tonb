@@ -22,50 +22,50 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToClear(internalNode *& t)
 {
 	if (t->BwdSw())
 	{
-		std::cout << "bwd_sw" << std::endl;
+		//std::cout << "bwd_sw" << std::endl;
 		Clear(t->BwdSwRef());
 		t->BwdSwRef() = 0;
 	}
 	if (t->BwdSe())
 	{
-		std::cout << "bwd_se" << std::endl;
+		//std::cout << "bwd_se" << std::endl;
 		Clear(t->BwdSeRef());
 		t->BwdSeRef() = 0;
 	}
 	if (t->BwdNe())
 	{
-		std::cout << "bwd_ne" << std::endl;
+		//std::cout << "bwd_ne" << std::endl;
 		Clear(t->BwdNeRef());
 		t->BwdNeRef() = 0;
 	}
 	if (t->BwdNw())
 	{
-		std::cout << "bwd_nw" << std::endl;
+		//std::cout << "bwd_nw" << std::endl;
 		Clear(t->BwdNwRef());
 		t->BwdNwRef() = 0;
 	}
 
 	if (t->FwdSw())
 	{
-		std::cout << "fwd_sw" << std::endl;
+		//std::cout << "fwd_sw" << std::endl;
 		Clear(t->FwdSwRef());
 		t->FwdSwRef() = 0;
 	}
 	if (t->FwdSe())
 	{
-		std::cout << "fwd_se" << std::endl;
+		//std::cout << "fwd_se" << std::endl;
 		Clear(t->FwdSeRef());
 		t->FwdSeRef() = 0;
 	}
 	if (t->FwdNe())
 	{
-		std::cout << "fwd_ne" << std::endl;
+		//std::cout << "fwd_ne" << std::endl;
 		Clear(t->FwdNeRef());
 		t->FwdNeRef() = 0;
 	}
 	if (t->FwdNw())
 	{
-		std::cout << "fwd_nw" << std::endl;
+		//std::cout << "fwd_nw" << std::endl;
 		Clear(t->FwdNwRef());
 		t->FwdNwRef() = 0;
 	}
@@ -76,34 +76,138 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Clear(node *& t)
 {
 	leafNode* leaf =
 		dynamic_cast<leafNode*>(t);
-	std::cout << "LEVEL = " << t->Lev() << std::endl;
+	//std::cout << "LEVEL = " << t->Lev() << std::endl;
 	if (leaf)
 	{
-		std::cout << "delete leaf" << std::endl;
+		//std::cout << "delete leaf" << std::endl;
 		delete leaf;
 		t = nullptr;
 	}
 	else
 	{
-		std::cout << "delete inner" << std::endl;
+		//std::cout << "delete inner" << std::endl;
 		
 		internalNode* Internal =
 			dynamic_cast<internalNode*>(t);
-		if (NOT Internal)
+		Debug_Null_Pointer(Internal);
+		/*if (NOT Internal)
 		{
-			std::cout << t << std::endl;
-			std::cout << *t->Box() << std::endl;
-			std::cout << dynamic_cast<leafNode*>(t) << std::endl;
-			std::cout << dynamic_cast<internalNode*>(t) << std::endl;
-			std::cout << "type: " << t->Type() << std::endl;
-			FatalErrorIn(FunctionSIG)
-				<< "no internal" << endl
-				<< abort(FatalError);
-		}
+			t = nullptr;
+			return;
+		}*/
 		SwitchToClear(Internal);
 		delete Internal;
 		t = nullptr;
-		std::cout << t << std::endl;
+		//std::cout << t << std::endl;
+	}
+}
+
+template<class T>
+inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToBalance
+(
+	const T& theItem,
+	const Pnt3d& theCentre, 
+	const std::shared_ptr<boxType>& theBox, 
+	internalNode* t
+)
+{
+	switch (CalcOctant(geom::CoordinateOf(theItem), theCentre))
+	{
+	case Geo3d_BalPrTreeOctant::Bwd_SW:
+	{
+		auto leaf = dynamic_cast<leafNode*>(t->BwdSw());
+		if (leaf)
+		{
+			leaf->Insert(theItem);
+		}
+		//Debug_Null_Pointer(leaf);	
+		//Balance(t->BwdSwRef());
+		break;
+	}
+	case Geo3d_BalPrTreeOctant::Bwd_SE:
+	{
+		if (auto leaf = dynamic_cast<leafNode*>(t->BwdSe()))
+		{
+			leaf->Insert(theItem);
+		}
+		//Debug_Null_Pointer(leaf);
+		
+		//Balance(t->BwdSeRef());
+		break;
+	}
+	case Geo3d_BalPrTreeOctant::Bwd_NE:
+	{
+		if (auto leaf = dynamic_cast<leafNode*>(t->BwdNe()))
+		{
+			leaf->Insert(theItem);
+		}
+		//Debug_Null_Pointer(leaf);
+		
+		//Balance(t->BwdNeRef());
+		break;
+	}
+	case Geo3d_BalPrTreeOctant::Bwd_NW:
+	{
+		if (auto leaf = dynamic_cast<leafNode*>(t->BwdNw()))
+		{
+			leaf->Insert(theItem);
+		}
+		//std::cout << "leaf: " << leaf << std::endl;
+		//std::cout << "internal1: " << dynamic_cast<internalNode*>(t->BwdNw()) << std::endl;
+		//Debug_Null_Pointer(leaf);
+		
+		//Balance(t->BwdNwRef());
+		break;
+	}
+	case Geo3d_BalPrTreeOctant::Fwd_SW:
+	{
+		if (auto leaf = dynamic_cast<leafNode*>(t->FwdSw()))
+		{
+			leaf->Insert(theItem);
+		}
+		//Debug_Null_Pointer(leaf);
+		
+		//Balance(t->FwdSwRef());
+		break;
+	}
+	case Geo3d_BalPrTreeOctant::Fwd_SE:
+	{
+		if (auto leaf = dynamic_cast<leafNode*>(t->FwdSe()))
+		{
+			leaf->Insert(theItem);
+		}
+		//Debug_Null_Pointer(leaf);
+		
+		//Balance(t->FwdSeRef());
+		break;
+	}
+	case Geo3d_BalPrTreeOctant::Fwd_NE:
+	{
+		if (auto leaf = dynamic_cast<leafNode*>(t->FwdNe()))
+		{
+			leaf->Insert(theItem);
+		}
+		//Debug_Null_Pointer(leaf);
+		
+		//Balance(t->FwdNeRef());
+		break;
+	}
+	case Geo3d_BalPrTreeOctant::Fwd_NW:
+	{
+		if (auto leaf = dynamic_cast<leafNode*>(t->FwdNw()))
+		{
+			leaf->Insert(theItem);
+		}
+		//Debug_Null_Pointer(leaf);
+		
+		//Balance(t->FwdNwRef());
+		break;
+	}
+	default:
+		FatalErrorIn(FunctionSIG)
+			<< "unspecified type of octant has been detected!" << endl
+			<< abort(FatalError);
+		break;
 	}
 }
 
@@ -113,7 +217,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::SwitchToInsert
 	const T & theItem,
 	const Pnt3d & theCentre, 
 	const std::shared_ptr<boxType>& theBox,
-	internalNode *& t
+	internalNode * t
 )
 {
 	switch (CalcOctant(geom::CoordinateOf(theItem), theCentre))
@@ -173,6 +277,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 
 		interNode->SetLev(0);
 
+		//theInternals_.insert(interNode);
+
 		auto Fwd_SwPtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Fwd_SW)));
 		auto Fwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Fwd_SE)));
 		auto Fwd_NePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Fwd_NE)));
@@ -182,6 +288,16 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 		auto Bwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Aft_SE)));
 		auto Bwd_NePtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Aft_NE)));
 		auto Bwd_NwPtr = new leafNode(std::make_shared<Entity3d_Box>(theBox->SubDivide(Box3d_SubDivideAlgorithm_Aft_NW)));
+
+		/*theLeaves_.insert(Fwd_SwPtr);
+		theLeaves_.insert(Fwd_SePtr);
+		theLeaves_.insert(Fwd_NePtr);
+		theLeaves_.insert(Fwd_NwPtr);
+
+		theLeaves_.insert(Bwd_SwPtr);
+		theLeaves_.insert(Bwd_SePtr);
+		theLeaves_.insert(Bwd_NePtr);
+		theLeaves_.insert(Bwd_NwPtr);*/
 
 		Fwd_SwPtr->SetLev(1);
 		Fwd_SePtr->SetLev(1);
@@ -254,6 +370,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 
 			interNode->SetLev(t->Lev() + 1);
 
+			//theInternals_.insert(interNode);
 			// Subdivide the Leaf
 			auto Fwd_SwPtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Fwd_SW)));
 			auto Fwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Fwd_SE)));
@@ -264,6 +381,16 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 			auto Bwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Aft_SE)));
 			auto Bwd_NePtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Aft_NE)));
 			auto Bwd_NwPtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Aft_NW)));
+
+			/*theLeaves_.insert(Fwd_SwPtr);
+			theLeaves_.insert(Fwd_SePtr);
+			theLeaves_.insert(Fwd_NePtr);
+			theLeaves_.insert(Fwd_NwPtr);
+
+			theLeaves_.insert(Bwd_SwPtr);
+			theLeaves_.insert(Bwd_SePtr);
+			theLeaves_.insert(Bwd_NePtr);
+			theLeaves_.insert(Bwd_NwPtr);*/
 
 			Fwd_SwPtr->SetLev(t->Lev() + 2);
 			Fwd_SePtr->SetLev(t->Lev() + 2);
@@ -320,7 +447,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 			FillNeighbors(Geo3d_BalPrTreeOctant::Bwd_NE, leaf, interNode, Bwd_NePtr);
 			FillNeighbors(Geo3d_BalPrTreeOctant::Bwd_NW, leaf, interNode, Bwd_NwPtr);
 
-			UpdateFather(leaf, interNode);
+			//UpdateFather(leaf, interNode);
 
 			const auto coord = b.CalcCentre();
 			for (const auto& x : pItems)
@@ -333,6 +460,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Insert
 			if (leaf)
 			{
 				delete leaf;
+				//theDeleted_.insert(leaf);
 				t = nullptr;
 			}
 
@@ -379,6 +507,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::NullifyPointer
 		if (leaf)
 		{
 			delete leaf;
+			//theDeleted_.insert(leaf);
 		}
 		else
 		{
@@ -466,6 +595,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Remove(const T & theItem, node *& t)
 		if (leaf->IsEmpty())
 		{
 			delete leaf;
+			//theDeleted_.insert(leaf);
 			t = nullptr;
 		}
 	}
@@ -984,6 +1114,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
 		if (NOT IsUnbalanced(leaf)) return;
 		if (IsBalancedRef()) IsBalancedRef() = Standard_False;
 
+		const auto& pItems = leaf->Bucket();
+
 		Debug_Null_Pointer(leaf->Box());
 		const auto& b = *leaf->Box();
 
@@ -992,6 +1124,7 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
 
 		interNode->SetLev(t->Lev() + 1);
 		
+		//theInternals_.insert(interNode);
 		// Subdivide the Leaf
 		auto Fwd_SwPtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Fwd_SW)));
 		auto Fwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Fwd_SE)));
@@ -1002,6 +1135,16 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
 		auto Bwd_SePtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Aft_SE)));
 		auto Bwd_NePtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Aft_NE)));
 		auto Bwd_NwPtr = new leafNode(std::make_shared<Entity3d_Box>(b.SubDivide(Box3d_SubDivideAlgorithm_Aft_NW)));
+
+		/*theLeaves_.insert(Fwd_SwPtr);
+		theLeaves_.insert(Fwd_SePtr);
+		theLeaves_.insert(Fwd_NePtr);
+		theLeaves_.insert(Fwd_NwPtr);
+
+		theLeaves_.insert(Bwd_SwPtr);
+		theLeaves_.insert(Bwd_SePtr);
+		theLeaves_.insert(Bwd_NePtr);
+		theLeaves_.insert(Bwd_NwPtr);*/
 
 		Fwd_SwPtr->SetLev(t->Lev() + 2);
 		Fwd_SePtr->SetLev(t->Lev() + 2);
@@ -1058,17 +1201,23 @@ inline void tnbLib::Geo3d_BalPrTree<T>::Balance(node *& t)
 		FillNeighbors(Geo3d_BalPrTreeOctant::Bwd_NE, leaf, interNode, Bwd_NePtr);
 		FillNeighbors(Geo3d_BalPrTreeOctant::Bwd_NW, leaf, interNode, Bwd_NwPtr);
 
-		UpdateFather(leaf, (node*)interNode);
+		//UpdateFather(leaf, interNode);
+
+		const auto coord = b.CalcCentre();
+		for (const auto& x : pItems)
+		{
+			SwitchToBalance(x, coord, leaf->Box(), interNode);
+		}
 
 		if (t)
 		{
 			delete leaf;
+			//theDeleted_.insert(leaf);
 			t = nullptr;
 		}
 
 		t = interNode;
 
-		//std::exit(1);
 		Balance(interNode->FwdSwRef());
 		Balance(interNode->FwdSeRef());
 		Balance(interNode->FwdNeRef());
@@ -1301,7 +1450,8 @@ inline void tnbLib::Geo3d_BalPrTree<T>::RetrieveLeavesTo
 	{
 		internalNode* Internal =
 			dynamic_cast<internalNode*>(t);
-
+		Debug_Null_Pointer(Internal);
+		
 		SwitchToRetrieveLeavesTo(Internal, theLeaves);
 	}
 }
@@ -1393,8 +1543,9 @@ inline void tnbLib::Geo3d_BalPrTree<T>::UpdateFather
 	node * inter
 )
 {
-	if (NOT t->Father()) return;
-	auto father = dynamic_cast<internalNode*>(t->Father());
+	return;
+	//if (NOT t->Father()) return;
+	auto father = t->Father();
 	Debug_Null_Pointer(father);
 
 	if (father->FwdSw() IS_EQUAL t) father->FwdSwRef() = inter;
@@ -1537,24 +1688,25 @@ inline void tnbLib::Geo3d_BalPrTree<T>::PostBalance()
 	
 	while (true)
 	{
-		std::vector<leafNode*> leaves;
-		RetrieveLeavesTo(leaves);
+		k++;
 		IsBalancedRef() = Standard_True;
-		for (const auto& x : leaves)
+		Balance(theRoot_);
+		/*for (const auto& x : leaves)
 		{
 			auto y = (node*)x;
 			Balance(y);
-		}	
+		}*/	
 		if (IsBalancedRef()) break;
 	}
+	//PAUSE;
 }
 
 template<class T>
 inline void tnbLib::Geo3d_BalPrTree<T>::Clear()
 {
-	std::cout << "clearing..." << std::endl;
+	//std::cout << "clearing..." << std::endl;
 	Clear(theRoot_);
-	std::cout << "cleared." << std::endl;
+	//std::cout << "cleared." << std::endl;
 }
 
 template<class T>

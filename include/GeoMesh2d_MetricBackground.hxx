@@ -11,6 +11,9 @@ namespace tnbLib
 {
 
 	template<>
+	void GeoMesh2d_MetricBackground::ConnectTopology();
+
+	template<>
 	void GeoMesh2d_MetricBackground::HvCorrection
 	(
 		const std::vector<std::shared_ptr<Mesh2d_Node>>& nodes,

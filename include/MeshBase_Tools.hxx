@@ -12,8 +12,8 @@
 #include <Mesh2d_ElementFwd.hxx>
 #include <Mesh2d_EdgeFwd.hxx>
 #include <Mesh2d_NodeFwd.hxx>
-#include <GeoMesh2d_BackgroundFwd.hxx>
-#include <GeoMesh3d_BackgroundFwd.hxx>
+#include <GeoMesh2d_SingleBackgroundFwd.hxx>
+#include <GeoMesh3d_SingleBackgroundFwd.hxx>
 #include <Global_Serialization.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
@@ -90,19 +90,27 @@ namespace tnbLib
 			GeoMesh3d_Background& theMesh
 		);*/
 
+		static TnbMesh_EXPORT void SetSourcesToMeshNearestPoint
+		(
+			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt3d, Standard_Real>>>& theSources,
+			const Standard_Real theBase,
+			const Standard_Real theGrowthRate,
+			GeoMesh3d_SingleBackground& theMesh
+		);
+
 		static TnbMesh_EXPORT void SetSourcesToMesh
 		(
 			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt3d, Standard_Real>>>& theSources,
 			const Standard_Real theBase,
 			const Standard_Real theGrowthRate,
-			GeoMesh3d_Background& theMesh	
+			GeoMesh3d_SingleBackground& theMesh	
 		);
 
 		static TnbMesh_EXPORT void SetSourcesToMesh
 		(
 			const std::vector<std::pair<Pnt2d, Standard_Real>>& theSources,
 			const Standard_Real theBaseSize,
-			GeoMesh2d_Background& theMesh
+			GeoMesh2d_SingleBackground& theMesh
 		);
 
 		static TnbMesh_EXPORT std::vector<Standard_Real>
@@ -159,6 +167,7 @@ namespace tnbLib
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Facet>> RetrieveFacets(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Edge>> RetrieveEdges(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Edge>> RetrieveEdges(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Node>> RetrieveNodes(const std::vector<std::shared_ptr<Mesh3d_Element>>& theElements);
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Node>> RetrieveAdjacentNodes(const std::shared_ptr<Mesh3d_Node>&);
@@ -171,6 +180,8 @@ namespace tnbLib
 		static TnbMesh_EXPORT void ConnectNodesAndEdges(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 		static TnbMesh_EXPORT void ConnectEdgesAndElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 		static TnbMesh_EXPORT void ConnectElements(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
+
+		static TnbMesh_EXPORT void ConnectNodesAndEdges(const std::vector<std::shared_ptr<Mesh2d_Edge>>&);
 
 		static TnbMesh_EXPORT void ConnectNodesAndElements(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
 		static TnbMesh_EXPORT void ConnectNodesAndFacets(const std::vector<std::shared_ptr<Mesh3d_Facet>>&);
@@ -187,6 +198,7 @@ namespace tnbLib
 		static TnbMesh_EXPORT void ConnectElements(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
 
 		static TnbMesh_EXPORT void ConnectMesh(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
+		static TnbMesh_EXPORT void ConnectMesh(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Element>> MakeMesh(const Entity2d_Triangulation&);
 

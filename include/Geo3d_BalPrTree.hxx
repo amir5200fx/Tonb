@@ -6,6 +6,8 @@
 #include <Geo3d_BalPrTreeInternal.hxx>
 #include <Geo_SearchTree.hxx>
 
+#include <set>
+
 namespace tnbLib
 {
 
@@ -143,6 +145,11 @@ namespace tnbLib
 
 		/*Private Data*/
 
+		//std::set<node*> theLeaves_;
+		//std::set<node*> theInternals_;
+
+		//std::set<node*> theDeleted_;
+
 		node* theRoot_;
 
 		// private functions and operators [7/5/2022 Amir]
@@ -158,7 +165,8 @@ namespace tnbLib
 		void SwitchToClear(internalNode*& t);
 		void Clear(node*& t);
 
-		void SwitchToInsert(const T& theItem, const Pnt3d& theCentre, const std::shared_ptr<boxType>& theBox, internalNode*& t);
+		void SwitchToBalance(const T& theItem, const Pnt3d& theCentre, const std::shared_ptr<boxType>& theBox, internalNode* t);
+		void SwitchToInsert(const T& theItem, const Pnt3d& theCentre, const std::shared_ptr<boxType>& theBox, internalNode* t);
 		void Insert(const T& theItem, const std::shared_ptr<boxType>& theBox, node*& t);
 
 		void NullifyPointer(node*& t, internalNode*& Internal);

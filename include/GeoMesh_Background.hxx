@@ -16,8 +16,69 @@
 namespace tnbLib
 {
 
+	template<class MeshData, class Type>
+	class GeoMesh_Background
+	{
+
+	public:
+
+		typedef typename MeshData::elementType elementType;
+		typedef typename elementType::nodeType::ptType Point;
+
+	private:
+
+		/*Private Data*/
+
+		Entity_Box<Point> theBoundingBox_;
+
+
+		//- private functions and operators
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int /*file_version*/)
+		{
+			ar& theBoundingBox_;
+		}
+
+	protected:
+
+		// default constructor [12/7/2022 Payvand]
+
+		GeoMesh_Background()
+		{}
+
+		// constructors [12/7/2022 Payvand]
+
+	public:
+
+		// Public functions and operators [12/7/2022 Payvand]
+
+		const auto& BoundingBox() const
+		{
+			return theBoundingBox_;
+		}
+
+		virtual Type InterpolateAt(const Point& theCoord) const = 0;
+		virtual Type InterpolateAt(const Point& theCoord, Standard_Boolean& Sense) const = 0;
+
+		virtual void ConnectTopology() = 0;
+		virtual void ExportToPlt(OFstream& File) const = 0;
+
+		void SetBoundingBox(const Entity_Box<Point>& theBox)
+		{
+			theBoundingBox_ = theBox;
+		}
+
+		void SetBoundingBox(Entity_Box<Point>&& theBox)
+		{
+			theBoundingBox_ = std::move(theBox);
+		}
+	};
+
 	template<class ElementType>
-	struct GeoMesh_Background_Cache
+	struct GeoMesh_SingleBackground_Cache
 	{
 		mutable std::shared_ptr<ElementType> Current;
 
@@ -33,21 +94,19 @@ namespace tnbLib
 	};
 
 	template<class MeshData>
-	class GeoMesh_Background_Base
-		: public GeoMesh_Background_Cache<typename MeshData::elementType>
+	class GeoMesh_SingleBackground_Base
+		: public GeoMesh_SingleBackground_Cache<typename MeshData::elementType>
 	{
 
 		typedef typename MeshData::elementType elementType;
 		typedef typename elementType::nodeType::ptType Point;
 
 		typedef Entity_Box<Point> box;
-		typedef GeoMesh_Background_Cache<typename MeshData::elementType> base;
+		typedef GeoMesh_SingleBackground_Cache<typename MeshData::elementType> base;
 
 		/*Private Data*/
 
 		std::shared_ptr<MeshData> theMesh_;
-
-		Entity_Box<Point> theBoundingBox_;
 
 
 		//- private functions and operators
@@ -57,24 +116,23 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			ar & boost::serialization::base_object<GeoMesh_Background_Cache<typename MeshData::elementType>>(*this);
+			ar & boost::serialization::base_object<GeoMesh_SingleBackground_Cache<typename MeshData::elementType>>(*this);
 			ar & theMesh_;
-			ar & theBoundingBox_;
 		}
 
 	public:
 
-		GeoMesh_Background_Base()
+		GeoMesh_SingleBackground_Base()
 		{}
 
-		GeoMesh_Background_Base
+		GeoMesh_SingleBackground_Base
 		(
 			const std::shared_ptr<MeshData>& theMesh
 		)
 			: theMesh_(theMesh)
 		{}
 
-		GeoMesh_Background_Base
+		GeoMesh_SingleBackground_Base
 		(
 			std::shared_ptr<MeshData>&& theMesh
 		)
@@ -89,11 +147,6 @@ namespace tnbLib
 		const auto& Mesh() const
 		{
 			return theMesh_;
-		}
-
-		const auto& BoundingBox() const
-		{
-			return theBoundingBox_;
 		}
 
 		const std::shared_ptr<elementType>& CurrentElement() const
@@ -115,16 +168,6 @@ namespace tnbLib
 		)
 		{
 			theMesh_ = std::move(theMesh);
-		}
-
-		void SetBoundingBox(const Entity_Box<Point>& theBox)
-		{
-			theBoundingBox_ = theBox;
-		}
-
-		void SetBoundingBox(Entity_Box<Point>&& theBox)
-		{
-			theBoundingBox_ = std::move(theBox);
 		}
 
 		void SetCurrent
@@ -149,8 +192,9 @@ namespace tnbLib
 
 
 	template<class MeshData, class Type>
-	class GeoMesh_Background
-		: public GeoMesh_Background_Base<MeshData>
+	class GeoMesh_SingleBackground
+		: public GeoMesh_SingleBackground_Base<MeshData>
+		, public GeoMesh_Background<MeshData, Type>
 	{
 
 	public:
@@ -159,7 +203,7 @@ namespace tnbLib
 		typedef typename elementType::nodeType::ptType Point;
 		typedef typename elementType::nodeType nodeType;
 
-		typedef GeoMesh_Background_Base<MeshData> base;
+		typedef GeoMesh_SingleBackground_Base<MeshData> base;
 		typedef GeoMesh_Background_SmoothingHvCorrection_Info hvInfo;
 		//typedef GeoMesh_Background_SmoothingLaplacianInfo laplacianInfo;
 
@@ -177,7 +221,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int /*file_version*/)
 		{
-			ar & boost::serialization::base_object<GeoMesh_Background_Base<MeshData>>(*this);
+			ar & boost::serialization::base_object<GeoMesh_SingleBackground_Base<MeshData>>(*this);
+			ar & boost::serialization::base_object<GeoMesh_Background<MeshData, Type>>(*this);
 			ar & theSources_;
 		}
 
@@ -199,10 +244,10 @@ namespace tnbLib
 
 
 
-		GeoMesh_Background()
+		GeoMesh_SingleBackground()
 		{}
 
-		GeoMesh_Background
+		GeoMesh_SingleBackground
 		(
 			const std::shared_ptr<MeshData>& theMesh,
 			const std::vector<Type>& theSources
@@ -211,7 +256,7 @@ namespace tnbLib
 			, theSources_(theSources)
 		{}
 
-		GeoMesh_Background
+		GeoMesh_SingleBackground
 		(
 			std::shared_ptr<MeshData>&& theMesh,
 			std::vector<Type>&& theSources
@@ -220,9 +265,10 @@ namespace tnbLib
 			, theSources_(std::move(theSources))
 		{}
 
-		Type InterpolateAt(const Point& theCoord) const;
+		Type InterpolateAt(const Point& theCoord) const override;
+		Type InterpolateAt(const Point& theCoord, Standard_Boolean& Sense) const override;
 
-		Type InterpolateAt(const Point& theCoord, Standard_Boolean& Sense) const;
+		void ConnectTopology() override;
 
 		auto& Sources() const
 		{
@@ -234,7 +280,7 @@ namespace tnbLib
 
 		// - IO functions and operators
 
-		void ExportToPlt(OFstream & File) const;
+		void ExportToPlt(OFstream & File) const override;
 
 		void ReadBackMeshFrom(IFstream& File);
 
@@ -242,7 +288,7 @@ namespace tnbLib
 		friend Istream& operator>>
 			(
 				Istream& is,
-				GeoMesh_Background& theBack
+				GeoMesh_SingleBackground& theBack
 				);
 	};
 }

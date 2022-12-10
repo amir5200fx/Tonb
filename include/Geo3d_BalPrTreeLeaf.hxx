@@ -9,6 +9,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [11/30/2022 Payvand]
+	class Geo3d_BalPrTreeInternal;
+
 	template<class T>
 	class Geo3d_BalPrTreeLeaf
 		: public Geo3d_BalPrTreeNode
@@ -18,7 +21,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Geo3d_BalPrTreeNode* theFather_;
+		Geo3d_BalPrTreeInternal* theFather_;
 
 	public:
 
@@ -52,7 +55,7 @@ namespace tnbLib
 			return "leaf";
 		}
 
-		const auto& Father() const
+		auto Father() const
 		{
 			return theFather_;
 		}
@@ -62,7 +65,7 @@ namespace tnbLib
 			return theFather_;
 		}
 
-		void SetFather(Geo3d_BalPrTreeNode* theFather)
+		void SetFather(Geo3d_BalPrTreeInternal* theFather)
 		{
 			theFather_ = theFather;
 		}
