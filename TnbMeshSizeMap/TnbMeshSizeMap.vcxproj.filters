@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{1bd86771-5aff-49f8-baf9-90436ce93ded}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh">
+      <UniqueIdentifier>{1dbc92f5-900f-4e2b-8d65-913d7f03a4f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools">
+      <UniqueIdentifier>{7ad05bd1-6c53-4106-872f-2a2b38d1cba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap">
+      <UniqueIdentifier>{d1d7dd9d-80cd-459c-9174-9dab96135e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\2d">
+      <UniqueIdentifier>{96abbf81-d30c-498e-9b00-dd7657d4d1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\2d\Boundary">
+      <UniqueIdentifier>{bb420698-9648-4b23-865d-ab6b9c530357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\2d\Boundary\Corner">
+      <UniqueIdentifier>{53cc717a-25e8-49ee-934b-29049d16c716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\2d\Boundary\Segment">
+      <UniqueIdentifier>{9b372354-8f68-49d0-b5c9-6c738280211e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\3d">
+      <UniqueIdentifier>{623ced5e-ef55-4e6d-a77b-a5c5e7262e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\3d\Boundary">
+      <UniqueIdentifier>{aa7d046e-3746-41ea-89a0-529edd9702b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\3d\Boundary\Corner">
+      <UniqueIdentifier>{0db51545-09c9-4983-bfff-5b9776b7e1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\3d\Boundary\Face">
+      <UniqueIdentifier>{329149a2-6101-4f80-8667-ceeaf376031d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\3d\Boundary\Segment">
+      <UniqueIdentifier>{55d2ebda-3990-449b-b717-be78a79d7766}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\Base">
+      <UniqueIdentifier>{58e26dd7-1b57-4d80-86ad-6be39f74869f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\Traits">
+      <UniqueIdentifier>{7b5dbfb1-1b54-4bfe-93c1-0fc316565077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Tools\SizeMap\Info">
+      <UniqueIdentifier>{ddd3be67-e4ae-4696-bde9-e1067e95d68c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\module">
+      <UniqueIdentifier>{cf9784b8-81c6-401f-8a3e-603d0a1c9750}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Mesh\Tools\SizeMap\Traits\Mesh_SizeMapTool_Traits.hxx">
+      <Filter>TnbLib\Mesh\Tools\SizeMap\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Tools\SizeMap\Info\Mesh_SizeMapTool_Info.hxx">
+      <Filter>TnbLib\Mesh\Tools\SizeMap\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\module\MeshSizeMap_Module.hxx">
+      <Filter>TnbLib\Mesh\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Tools\SizeMap\Base\Mesh_SizeMapToolBase.hxx">
+      <Filter>TnbLib\Mesh\Tools\SizeMap\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Tools\SizeMap\Base\Mesh_SizeMapToolBaseI.hxx">
+      <Filter>TnbLib\Mesh\Tools\SizeMap\Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Mesh\Tools\SizeMap\Info\Mesh_SizeMapTool_Info.cxx">
+      <Filter>TnbLib\Mesh\Tools\SizeMap\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Tools\SizeMap\Base\Mesh_SizeMapToolBase.cxx">
+      <Filter>TnbLib\Mesh\Tools\SizeMap\Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
