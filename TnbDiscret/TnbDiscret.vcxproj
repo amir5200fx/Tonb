@@ -151,7 +151,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   <ItemGroup>
     <ClInclude Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Discret2d_Curve_Function.hxx" />
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_CurveOnSurface_LengthFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_Curve_LengthFun.hxx" />
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_Curve_UniLengthFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\Info\Discret_CurveInfo.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\Samples\Discret_Curve_Samples.hxx" />
@@ -165,6 +167,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.cxx" />
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_Curve_UniLengthFun.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\Info\Discret_CurveInfo.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\Samples\Uniform\Discret_Curve_UniformSamples.cxx" />

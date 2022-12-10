@@ -93,6 +93,12 @@
     <ClInclude Include="TnbLib\Discret\Surface\Fun\Size\Uniform\Discret3d_Surface_UniformSizeFun.hxx">
       <Filter>TnbLib\Discret\Surface\Fun\Size\Uniform</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_CurveOnSurface_LengthFun.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.cxx">
@@ -124,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Discret\Surface\Fun\Size\Discret3d_Surface_SizeFunctionIO.cxx">
       <Filter>TnbLib\Discret\Surface\Fun\Size</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.cxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
