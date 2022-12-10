@@ -56,7 +56,7 @@ namespace tnbLib
 			return theFwdSwPtr_;
 		}
 
-		auto& FwdSwRef()
+		node*& FwdSwRef()
 		{
 			return theFwdSwPtr_;
 		}
@@ -66,7 +66,7 @@ namespace tnbLib
 			return theFwdSePtr_;
 		}
 
-		auto& FwdSeRef()
+		node*& FwdSeRef()
 		{
 			return theFwdSePtr_;
 		}
@@ -76,7 +76,7 @@ namespace tnbLib
 			return theFwdNePtr_;
 		}
 
-		auto& FwdNeRef()
+		node*& FwdNeRef()
 		{
 			return theFwdNePtr_;
 		}
@@ -86,7 +86,7 @@ namespace tnbLib
 			return theFwdNwPtr_;
 		}
 
-		auto& FwdNwRef()
+		node*& FwdNwRef()
 		{
 			return theFwdNwPtr_;
 		}
@@ -96,7 +96,7 @@ namespace tnbLib
 			return theBwdSwPtr_;
 		}
 
-		auto& BwdSwRef()
+		node*& BwdSwRef()
 		{
 			return theBwdSwPtr_;
 		}
@@ -106,7 +106,7 @@ namespace tnbLib
 			return theBwdSePtr_;
 		}
 
-		auto& BwdSeRef()
+		node*& BwdSeRef()
 		{
 			return theBwdSePtr_;
 		}
@@ -116,7 +116,7 @@ namespace tnbLib
 			return theBwdNePtr_;
 		}
 
-		auto& BwdNeRef()
+		node*& BwdNeRef()
 		{
 			return theBwdNePtr_;
 		}
@@ -126,7 +126,7 @@ namespace tnbLib
 			return theBwdNwPtr_;
 		}
 
-		auto& BwdNwRef()
+		node*& BwdNwRef()
 		{
 			return theBwdNwPtr_;
 		}
