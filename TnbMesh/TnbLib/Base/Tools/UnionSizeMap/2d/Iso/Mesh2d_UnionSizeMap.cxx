@@ -110,7 +110,7 @@ void tnbLib::Mesh2d_UnionSizeMap::Perform()
 	// free memory [5/30/2021 Amir]
 	tri.Clear();
 
-	auto backMesh = std::make_shared<GeoMesh2d_Background>();
+	auto backMesh = std::make_shared<GeoMesh2d_SingleBackground>();
 	Debug_Null_Pointer(backMesh);
 
 	backMesh->LoadData(std::move(backMeshData));

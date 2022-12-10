@@ -9,6 +9,7 @@
 #include <TModel_Surface.hxx>
 #include <Cad_GeomSurface.hxx>
 #include <Geo3d_BalPrTree.hxx>
+#include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo3d_DelTri_Fade3d.hxx>
 #include <Entity3d_Tetrahedralization.hxx>
@@ -44,7 +45,7 @@ tnbLib::Mesh3d_UnionSizeMap::ElementSize
 
 void tnbLib::Mesh3d_UnionSizeMap::UpdateSources
 (
-	const std::shared_ptr<GeoMesh3d_Background>& theMesh
+	const std::shared_ptr<GeoMesh3d_SingleBackground>& theMesh
 ) const
 {
 	Debug_Null_Pointer(theMesh);
@@ -86,15 +87,19 @@ tnbLib::Mesh3d_UnionSizeMap::RetrieveCoords
 		const auto& geometry = x->GeomSurface();
 
 		auto poly = x->RetrieveTriangulation();
+		std::cout << "nb points on a poly: " << poly->NbNodes() << std::endl;
 		auto tri = Cad_Tools::ParaTriangulation(*poly);
 		auto samples = theCloud.CalcCloud(*tri);
-
+		std::cout << "nb of samples: " << samples.size() << std::endl;
+		std::cout << std::endl;
 		for (const auto& pm : samples)
 		{
 			auto p = geometry->Value(pm);
 			coords.push_back(std::move(p));
 		}
 	}
+	std::cout << "nb of coords: " << coords.size() << std::endl;
+	PAUSE;
 	return std::move(coords);
 }
 
@@ -124,7 +129,7 @@ namespace tnbLib
 	namespace unionTools
 	{
 
-		void InsertToEngine(Pnt3d&& theCoord, const Standard_Real theTol, Geo3d_BalPrTree<std::shared_ptr<Pnt3d>>& engine)
+		void InsertToEngine(Pnt3d&& theCoord, const Standard_Real theTol, Geo_AdTree<std::shared_ptr<Pnt3d>>& engine)
 		{
 			auto b = Geo_BoxTools::GetBox<Pnt3d>(theCoord, theTol);
 
@@ -174,11 +179,11 @@ namespace tnbLib
 				boxes.push_back(b);
 			}
 
-			Geo3d_BalPrTree<std::shared_ptr<Pnt3d>> engine;
+			Geo_AdTree<std::shared_ptr<Pnt3d>> engine;
 			engine.SetGeometryCoordFunc([](const std::shared_ptr<Pnt3d>& x)-> const auto& {return *x; });
 			engine.SetGeometryRegion(theDomain);
-			engine.SetMaxUnbalancing(4);
-			engine.BUCKET_SIZE = 4;
+			//engine.SetMaxUnbalancing(4);
+			//engine.BUCKET_SIZE = 4;
 
 			for (const auto& x : boxes)
 			{
@@ -259,7 +264,8 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 
 	const auto& models = Models();
 	const auto coords = RetrieveCoords(models, *Cloud());
-
+	std::cout << "NB OF COORDS: " << coords.size() << std::endl;
+	PAUSE;
 	//const auto b = Geo_BoxTools::GetBox(coords, 0);
 	auto expB = *Domain();
 
@@ -270,7 +276,7 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 	approxSpace.SetMaxUnbalancing(MaxUnbalancing());
 	approxSpace.SetGeometryCoordFunc([](const std::shared_ptr<Pnt3d>& pt)-> const auto&{return *pt; });
 	approxSpace.SetGeometryRegion(expB);
-	approxSpace.BUCKET_SIZE = 4;
+	approxSpace.BUCKET_SIZE = 1;
 	{
 
 		{
@@ -357,22 +363,27 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 			<< " - the tree is balanced in: " << global_time_duration << " ms." << endl;
 	}*/
 
-	auto myTet = std::make_shared<Entity3d_Tetrahedralization>();
-	Debug_Null_Pointer(myTet);
+	//auto myTet = std::make_shared<Entity3d_Tetrahedralization>();
+	//Debug_Null_Pointer(myTet);
 
+	std::shared_ptr<Entity3d_Tetrahedralization> myTet;
 	// Triangulation [7/16/2022 Amir]
 	{
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
 
 		auto pnts = unionTools::RetrieveNodes(approxSpace, expB, mergCrit);
+		std::cout << "NB OF PNTS= " << pnts.size() << std::endl;
+		//myTet = EnrichedTetrahedralization(pnts, 1.0E-8);
 		fadeLib::Geo3d_DelTri delTri(pnts);
 		delTri.Perform();
 
 		myTet = delTri.Triangulation();
 		//Geo_BoxTools::GetTriangulation(boxes, *myTet);
 	}
-
+	//OFstream myFile("enrichedMesh.plt");
+	//myTet->ExportToPlt(myFile);
+	//std::exit(1);
 	if (verbose)
 	{
 		Info << endl
@@ -389,7 +400,7 @@ void tnbLib::Mesh3d_UnionSizeMap::Perform()
 	Debug_Null_Pointer(dMesh);
 	dMesh->Construct(*myTet);
 
-	const auto bMesh = std::make_shared<GeoMesh3d_Background>();
+	const auto bMesh = std::make_shared<GeoMesh3d_SingleBackground>();
 	Debug_Null_Pointer(bMesh);
 
 	bMesh->LoadData(std::move(dMesh));

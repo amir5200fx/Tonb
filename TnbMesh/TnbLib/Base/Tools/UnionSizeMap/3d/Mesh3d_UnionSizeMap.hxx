@@ -4,6 +4,8 @@
 
 #include <Mesh_Module.hxx>
 #include <GeoMesh3d_BackgroundFwd.hxx>
+#include <GeoMesh3d_SingleBackgroundFwd.hxx>
+#include <Entity3d_TetrahedralizationFwd.hxx>
 #include <Entity3d_BoxFwd.hxx>
 #include <Pnt3d.hxx>
 #include <Global_Done.hxx>
@@ -45,7 +47,14 @@ namespace tnbLib
 
 		TnbMesh_EXPORT Standard_Real ElementSize(const Pnt3d&) const;
 
-		TnbMesh_EXPORT void UpdateSources(const std::shared_ptr<GeoMesh3d_Background>&) const;
+		TnbMesh_EXPORT std::shared_ptr<Entity3d_Tetrahedralization> 
+			EnrichedTetrahedralization
+			(
+				const std::vector<Pnt3d>&,
+				const Standard_Real theTol
+			) const;
+
+		TnbMesh_EXPORT void UpdateSources(const std::shared_ptr<GeoMesh3d_SingleBackground>&) const;
 
 		static TnbMesh_EXPORT std::vector<Pnt3d> RetrieveCoords(const Cad_TModel&, const Geo3d_PatchCloud&);
 		static TnbMesh_EXPORT std::vector<Pnt3d> RetrieveCoords(const std::vector<std::shared_ptr<Cad_TModel>>&, const Geo3d_PatchCloud&);
