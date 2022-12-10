@@ -135,6 +135,52 @@ namespace tnbLib
 			}
 		}
 
+		void InsertCorners(Geo_AdTree<std::shared_ptr<Pnt3d>>& theEngine)
+		{
+			const auto& b = theEngine.GeometryBoundingBox();
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Aft_SW);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Aft_SE);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Aft_NE);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Aft_NW);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Fwd_SW);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Fwd_SE);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Fwd_NE);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+			{
+				auto pt = b.Corner(Box3d_PickAlgorithm_Fwd_NW);
+				auto node = std::make_shared<Pnt3d>(std::move(pt));
+				theEngine.InsertToGeometry(node);
+			}
+		}
+
 		auto RetrieveNodes(const Geo3d_BalPrTree<std::shared_ptr<sourceNode>>& theEngine, const std::vector<Pnt3d>& theCoords, const Entity3d_Box& theDomain, const Standard_Real theTol)
 		{
 			std::vector<Geo3d_BalPrTree<std::shared_ptr<sourceNode>>::leafNode*> leaves;
@@ -158,6 +204,8 @@ namespace tnbLib
 			Geo_AdTree<std::shared_ptr<Pnt3d>> engine;
 			engine.SetGeometryCoordFunc([](const std::shared_ptr<Pnt3d>& x)-> const auto& {return *x; });
 			engine.SetGeometryRegion(theDomain);
+
+			InsertCorners(engine);
 
 			for (const auto& x : boxes)
 			{
@@ -411,7 +459,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			}
 		}
 	}
-
+	
 	//Io::ExportPoints(srcCoords, myFile1);
 	//std::exit(1);
 	if (verbose)
@@ -426,7 +474,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 
-			engine.SetMaxUnbalancing(4);
+			engine.SetMaxUnbalancing(8);
 			engine.PostBalance();
 		}
 
@@ -471,7 +519,7 @@ void tnbLib::BoundarySizeMap3d_UniformSegmentTool::Perform()
 	meshData->Construct(*myTet);
 
 	//meshData->ExportToPlt(myFile);
-	const auto bMesh = std::make_shared<GeoMesh3d_Background>();
+	const auto bMesh = std::make_shared<GeoMesh3d_SingleBackground>();
 	Debug_Null_Pointer(bMesh);
 
 	bMesh->LoadData(std::move(meshData));
