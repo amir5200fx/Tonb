@@ -45,10 +45,10 @@ namespace tnbLib
 	)
 	{
 		Geo_AdTree<std::shared_ptr<Pnt2d>> engine;
-		engine.SetGeometryRegion(theDomain);
+		engine.SetGeometryRegion(theDomain.Expanded(theTol));
 		engine.SetGeometryCoordFunc([](const std::shared_ptr<Pnt2d>& pt)->const auto&{return *pt; });
 
-		const auto d = theTol * theDomain.Diameter();
+		const auto d = theTol * 2.0;
 		std::vector<std::shared_ptr<Pnt2d>> pts;
 		for (const auto& pl : thePoly)
 		{
@@ -60,6 +60,7 @@ namespace tnbLib
 				if (items.empty())
 				{
 					auto p = std::make_shared<Pnt2d>(x);
+					engine.InsertToGeometry(p);
 					pts.push_back(std::move(p));
 				}
 				else
@@ -73,13 +74,15 @@ namespace tnbLib
 							dmin = idis;
 						}
 					}
-					if (dmin <= d)
+
+					if (dmin <= theTol)
 					{
 						// do nothing [11/16/2022 Amir]
 					}
 					else
 					{
 						auto p = std::make_shared<Pnt2d>(x);
+						engine.InsertToGeometry(p);
 						pts.push_back(std::move(p));
 					}
 				}
@@ -99,33 +102,33 @@ namespace tnbLib
 
 		{
 			const auto& pt = b.P0();
-			if (poly.bounded_side(get_cgalPoint(pt)) IS_EQUAL CGAL::ON_BOUNDED_SIDE)
+			if (poly.bounded_side(get_cgalPoint(pt)) NOT_EQUAL CGAL::ON_BOUNDED_SIDE)
 			{
-				return Standard_True;
+				return Standard_False;
 			}
 		}
 		{
 			const auto& pt = b.P1();
-			if (poly.bounded_side(get_cgalPoint(pt)) IS_EQUAL CGAL::ON_BOUNDED_SIDE)
+			if (poly.bounded_side(get_cgalPoint(pt)) NOT_EQUAL CGAL::ON_BOUNDED_SIDE)
 			{
-				return Standard_True;
+				return Standard_False;
 			}
 		}
 		{
 			const auto pt = b.Corner(Box2d_PickAlgorithm_SE);
-			if (poly.bounded_side(get_cgalPoint(pt)) IS_EQUAL CGAL::ON_BOUNDED_SIDE)
+			if (poly.bounded_side(get_cgalPoint(pt)) NOT_EQUAL CGAL::ON_BOUNDED_SIDE)
 			{
-				return Standard_True;
+				return Standard_False;
 			}
 		}
 		{
 			const auto pt = b.Corner(Box2d_PickAlgorithm_NW);
-			if (poly.bounded_side(get_cgalPoint(pt)) IS_EQUAL CGAL::ON_BOUNDED_SIDE)
+			if (poly.bounded_side(get_cgalPoint(pt)) NOT_EQUAL CGAL::ON_BOUNDED_SIDE)
 			{
-				return Standard_True;
+				return Standard_False;
 			}
 		}
-		return Standard_False;
+		return Standard_True;
 	}
 
 	Standard_Boolean IsCompletelyInside(const Entity2d_Box& b, const Polygon_2& poly)
@@ -167,7 +170,12 @@ namespace tnbLib
 		return Standard_True;
 	}
 
-	Standard_Boolean IsInsideDomain(const Entity2d_Box& b, const std::pair<Polygon_2, std::vector<Polygon_2>>& pl)
+	Standard_Boolean 
+		IsInsideDomain
+		(
+			const Entity2d_Box& b,
+			const std::pair<Polygon_2, std::vector<Polygon_2>>& pl
+		)
 	{
 		const auto&[outer, inners] = pl;
 		if (IsInside(b, outer))
@@ -238,7 +246,10 @@ namespace tnbLib
 	}
 
 	std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*>
-		RetrieveLeaves(const std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*>& theSpaces)
+		RetrieveLeaves
+		(
+			const std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*>& theSpaces
+		)
 	{
 		std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*> nodes;
 		for (auto x : theSpaces)
@@ -252,7 +263,12 @@ namespace tnbLib
 		return std::move(nodes);
 	}
 
-	void RetrieveInners(Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node* t, const std::pair<Polygon_2, std::vector<Polygon_2>>& pl, std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*>& items)
+	void RetrieveInners
+	(
+		Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node* t,
+		const std::pair<Polygon_2, std::vector<Polygon_2>>& pl,
+		std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*>& items
+	)
 	{
 		auto leaf = dynamic_cast<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::leafNode*>(t);
 		if (leaf)
@@ -424,7 +440,7 @@ void tnbLib::Discret3d_Surface::Perform()
 	engine.SetGeometryCoordFunc([](const std::shared_ptr<Pnt2d>& coord)-> const auto&{return *coord; });
 	engine.SetGeometryRegion(domain);
 	engine.BUCKET_SIZE = 1;
-
+	//engine.MAX_INNER_SUBDIVIDE = 40;
 	{// approximation scope [11/15/2022 Amir]
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
@@ -441,7 +457,7 @@ void tnbLib::Discret3d_Surface::Perform()
 		Info << endl
 			<< " - the space is approximated in: " << global_time_duration << " ms." << endl;
 	}
-	std::cout << "post balancing..." << std::endl;
+
 	if (AlgInfo()->PostBalance())
 	{
 		{
@@ -458,9 +474,8 @@ void tnbLib::Discret3d_Surface::Perform()
 				<< " - the tree is balanced in: " << global_time_duration << " ms." << endl;
 		}
 	}
-	std::cout << "convert" << std::endl;
 	auto polys = ConvertPolygon(Outer(), Inners());
-	std::cout << "discard" << std::endl;
+
 	std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*> spaces;
 	{
 		Global_Timer timer;
@@ -474,10 +489,10 @@ void tnbLib::Discret3d_Surface::Perform()
 		Info << endl
 			<< " - the space has been detected in: " << global_time_duration << " ms." << endl;
 	}
-	std::cout << "retrieve nodes" << std::endl;
+
 	// retrieve all leaves [11/15/2022 Amir]
 	auto nodes = RetrieveLeaves(spaces);
-	std::cout << "subdivide" << std::endl;
+
 	{
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
@@ -490,10 +505,10 @@ void tnbLib::Discret3d_Surface::Perform()
 		Info << endl
 			<< " - the space has been approximated in: " << global_time_duration << " ms." << endl;
 	}
-	std::cout << "retrieve leaves" << std::endl;
+
 	auto leaves = RetrieveLeaves(nodes);
 	auto samples2d = RetrieveSamples(leaves, offsetPoints);
 	theCoords_ = std::make_shared<std::vector<Pnt2d>>(std::move(samples2d));
-	PAUSE;
+
 	Change_IsDone() = Standard_True;
 }
