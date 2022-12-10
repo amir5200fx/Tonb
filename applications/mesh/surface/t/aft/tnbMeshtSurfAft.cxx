@@ -811,6 +811,7 @@ namespace tnbLib
 			catch (const error& x)
 			{
 				std::cout << x.message() << std::endl;
+				PAUSE;
 			}
 
 			if (verbose)

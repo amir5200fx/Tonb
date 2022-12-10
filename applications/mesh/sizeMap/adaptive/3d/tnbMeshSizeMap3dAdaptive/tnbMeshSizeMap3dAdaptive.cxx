@@ -4,6 +4,7 @@
 #include <Mesh3d_UniformBoundarySizeMapControl.hxx>
 #include <Mesh3d_UniformFeatureSizeMapControl.hxx>
 #include <Mesh3d_UnionSizeMap.hxx>
+#include <Mesh3d_MultiSizeMap.hxx>
 #include <MeshBase_Tools.hxx>
 #include <Discret3d_Surface.hxx>
 #include <GeoMesh_Background_Info.hxx>
@@ -13,7 +14,9 @@
 #include <GeoSizeFun3d_Background.hxx>
 #include <Geo3d_ApprxSurfPatch_Info.hxx>
 #include <Geo3d_PatchCloud_EdgeSamplesLev1.hxx>
+#include <Geo3d_PatchCloud_EdgeSamplesLev0.hxx>
 #include <Geo3d_PatchCloud_TriSamplesLev1.hxx>
+#include <Geo3d_PatchCloud_TriSamplesLev0.hxx>
 #include <Geo3d_PatchCloud_InternalSamples.hxx>
 #include <Geo3d_SegmentCloud_InternalSamples.hxx>
 #include <Geo3d_SegmentCloud_SamplesLev1.hxx>
@@ -183,8 +186,8 @@ namespace tnbLib
 
 		if (NOT myCloud)
 		{
-			myEdgeSamples = std::make_shared<Geo3d_PatchCloud_EdgeSamplesLev1>();
-			myTrisSamples = std::make_shared<Geo3d_PatchCloud_TriSamplesLev1>();
+			myEdgeSamples = std::make_shared<Geo3d_PatchCloud_EdgeSamplesLev0>();
+			myTrisSamples = std::make_shared<Geo3d_PatchCloud_TriSamplesLev0>();
 
 			myCloud = std::make_shared<Geo3d_PatchCloud_InternalSamples>(myEdgeSamples, myTrisSamples);
 		}
@@ -292,8 +295,8 @@ namespace tnbLib
 		checkLoad();
 		if (NOT myCloud)
 		{
-			myEdgeSamples = std::make_shared<Geo3d_PatchCloud_EdgeSamplesLev1>();
-			myTrisSamples = std::make_shared<Geo3d_PatchCloud_TriSamplesLev1>();
+			myEdgeSamples = std::make_shared<Geo3d_PatchCloud_EdgeSamplesLev0>();
+			myTrisSamples = std::make_shared<Geo3d_PatchCloud_TriSamplesLev0>();
 
 			myCloud = std::make_shared<Geo3d_PatchCloud_InternalSamples>(myEdgeSamples, myTrisSamples);
 		}
@@ -486,15 +489,12 @@ namespace tnbLib
 			}
 
 			auto domain = retrieveBoundingBox();
-			std::cout << "nb of maps: " << myBoundarySizeMaps->NbMaps() << std::endl;
-			std::cout << myBoundarySizeMaps << std::endl;
+
 			if (myBoundarySizeMaps->NbMaps())
 			{
 				myBoundarySizeMaps->Perform();
-				PAUSE;
 			}
-			std::cout << "injaaaaa" << std::endl;
-			PAUSE;
+
 			//std::exit(1);
 			//auto ss = myFeatureSizeMaps->SelectMap("edges");
 			//std::cout << ss->MeshConditions()->CustomBoundaryGrowthRate() << std::endl;
@@ -512,7 +512,9 @@ namespace tnbLib
 			std::shared_ptr<GeoMesh3d_Background> myBackgound;
 			if (backs.size())
 			{
-				Global_Timer unifyTimer;
+				myBackgound = std::make_shared<Mesh3d_MultiSizeMap>(backs);
+				myBackgound->SetBoundingBox(*domain);
+				/*Global_Timer unifyTimer;
 				unifyTimer.SetInfo(Global_TimerInfo_ms);
 
 				if (NOT myCloud)
@@ -534,10 +536,10 @@ namespace tnbLib
 
 				alg->SetCloud(myCloud);
 
-				//alg->Perform();
+				alg->Perform();*/
 
 				//myBackgound = myFeatureSizeMaps->BackgroundMesh();
-				myBackgound = myBoundarySizeMaps->BackgroundMesh();
+				//myBackgound = myBoundarySizeMaps->BackgroundMesh();
 				//myBackgound = alg->UnifiedMap();
 			}
 			/*else if (backs.size() == 1)
@@ -556,8 +558,8 @@ namespace tnbLib
 				Info << endl
 					<< " - All the maps are unified in, " << global_time_duration << " ms." << endl;
 			}
-			OFstream myFile("background.plt");
-			myBackgound->ExportToPlt(myFile);
+			/*OFstream myFile("background.plt");
+			myBackgound->ExportToPlt(myFile);*/
 
 			/*auto facets = MeshBase_Tools::RetrieveFacets(myBackgound->Mesh()->Elements());
 			for (const auto& x : facets)

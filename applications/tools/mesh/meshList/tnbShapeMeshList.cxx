@@ -41,7 +41,7 @@ namespace tnbLib
 		{
 			std::string address = ".\\" + std::to_string(i) + "\\" + name + loadExt;
 			std::fstream file;
-			file.open(address, ios::in);
+			file.open(address, std::ios::in);
 
 			if (file.fail())
 			{
@@ -86,7 +86,7 @@ namespace tnbLib
 			auto name = file::GetSingleFile(boost::filesystem::path(std::to_string(i)), loadExt).string();
 			std::string address = ".\\" + std::to_string(i) + "\\" + name + loadExt;
 			std::fstream file;
-			file.open(address, ios::in);
+			file.open(address, std::ios::in);
 
 			if (file.fail())
 			{
