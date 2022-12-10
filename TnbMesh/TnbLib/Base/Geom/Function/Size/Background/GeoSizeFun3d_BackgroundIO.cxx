@@ -20,6 +20,10 @@ namespace tnbLib
 
 		if (theBackMesh_)
 		{
+			theBackMesh_->ConnectTopology();
+		}
+		/*if (theBackMesh_)
+		{
 			if (const auto& mesh = theBackMesh_->Mesh())
 			{
 				if (mesh->Elements().size())
@@ -27,7 +31,7 @@ namespace tnbLib
 					MeshBase_Tools::ConnectMesh(mesh->Elements());
 				}
 			}
-		}
+		}*/
 	}
 
 	template<>
