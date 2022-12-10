@@ -140,7 +140,7 @@ namespace tnbLib
 	void SetSources
 	(
 		const ElementSet& theElements,
-		const std::shared_ptr<GeoMesh3d_Background>& theBack,
+		const std::shared_ptr<GeoMesh3d_SingleBackground>& theBack,
 		const Standard_Real theH
 	)
 	{
@@ -234,7 +234,7 @@ namespace tnbLib
 		const Pnt3d& theP1, 
 		const Standard_Real theH, 
 		const SearchEngine& theEnginge, 
-		const std::shared_ptr<GeoMesh3d_Background>& theBack
+		const std::shared_ptr<GeoMesh3d_SingleBackground>& theBack
 	)
 	{
 		auto b = Geo_BoxTools::GetBox(theP0, theP1);
@@ -251,7 +251,7 @@ namespace tnbLib
 		const Entity3d_Chain& thePoly,
 		const std::vector<Standard_Real>& theHs, 
 		const SearchEngine& theEngine, 
-		const std::shared_ptr<GeoMesh3d_Background>& theBack
+		const std::shared_ptr<GeoMesh3d_SingleBackground>& theBack
 	)
 	{
 		const auto& points = thePoly.Points();

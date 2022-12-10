@@ -3,7 +3,7 @@
 #define _Mesh3d_SetSources_Header
 
 #include <Mesh3d_SetSourcesNodeFwd.hxx>
-#include <GeoMesh3d_BackgroundFwd.hxx>
+#include <GeoMesh3d_SingleBackgroundFwd.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
@@ -19,7 +19,7 @@ namespace tnbLib
 
 		const std::vector<std::shared_ptr<meshLib::setSources::Node>>& theValues_;
 
-		std::shared_ptr<GeoMesh3d_Background> theMesh_;
+		std::shared_ptr<GeoMesh3d_SingleBackground> theMesh_;
 
 		Standard_Real theTolerance_;
 
@@ -35,7 +35,7 @@ namespace tnbLib
 		Mesh3d_SetSources
 		(
 			const std::vector<std::shared_ptr<meshLib::setSources::Node>>& theValues,
-			const std::shared_ptr<GeoMesh3d_Background>& theMesh
+			const std::shared_ptr<GeoMesh3d_SingleBackground>& theMesh
 		)
 			: theValues_(theValues)
 			, theMesh_(theMesh)
@@ -45,7 +45,7 @@ namespace tnbLib
 		Mesh3d_SetSources
 		(
 			const std::vector<std::shared_ptr<meshLib::setSources::Node>>& theValues,
-			const std::shared_ptr<GeoMesh3d_Background>& theMesh,
+			const std::shared_ptr<GeoMesh3d_SingleBackground>& theMesh,
 			const Standard_Real theTol
 		)
 			: theValues_(theValues)
@@ -73,12 +73,12 @@ namespace tnbLib
 		void Perform();
 
 
-		void SetMesh(const std::shared_ptr<GeoMesh3d_Background>& theMesh)
+		void SetMesh(const std::shared_ptr<GeoMesh3d_SingleBackground>& theMesh)
 		{
 			theMesh_ = theMesh;
 		}
 
-		void SetMesh(std::shared_ptr<GeoMesh3d_Background>&& theMesh)
+		void SetMesh(std::shared_ptr<GeoMesh3d_SingleBackground>&& theMesh)
 		{
 			theMesh_ = std::move(theMesh);
 		}
