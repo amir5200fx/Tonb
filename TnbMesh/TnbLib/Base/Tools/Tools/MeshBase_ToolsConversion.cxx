@@ -512,6 +512,48 @@ tnbLib::MeshBase_Tools::RetrieveEdges
 	return std::move(edges);
 }
 
+std::vector<std::shared_ptr<tnbLib::Mesh2d_Edge>>
+tnbLib::MeshBase_Tools::RetrieveEdges
+(
+	const std::vector<std::shared_ptr<Mesh2d_Element>>& theElements
+)
+{
+	auto cmp = [](const std::shared_ptr<Mesh2d_Edge>& e0, const std::shared_ptr<Mesh2d_Edge>& e1)
+	{
+		Debug_Null_Pointer(e0);
+		Debug_Null_Pointer(e1);
+		return e0->Index() < e1->Index();
+	};
+
+	std::set<std::shared_ptr<Mesh2d_Edge>, decltype(cmp)> mySet(cmp);
+	for (const auto& x : theElements)
+	{
+		Debug_Null_Pointer(x);
+		auto [e0, e1, e2] = x->Edges();
+
+		if (NOT mySet.insert(e0).second)
+		{
+			// duplicate data; do nothing [9/15/2022 Amir]
+		}
+		if (NOT mySet.insert(e1).second)
+		{
+			// duplicate data; do nothing [9/15/2022 Amir]
+		}
+		if (NOT mySet.insert(e2).second)
+		{
+			// duplicate data; do nothing [9/15/2022 Amir]
+		}
+	}
+	std::vector<std::shared_ptr<Mesh2d_Edge>> edges;
+	edges.reserve(mySet.size());
+	for (const auto& x : mySet)
+	{
+		Debug_Null_Pointer(x);
+		edges.push_back(x);
+	}
+	return std::move(edges);
+}
+
 void tnbLib::MeshBase_Tools::MakeEdges
 (
 	const std::vector<std::shared_ptr<Mesh2d_Element>>& theElements
@@ -845,6 +887,31 @@ void tnbLib::MeshBase_Tools::ConnectNodesAndEdges
 
 void tnbLib::MeshBase_Tools::ConnectNodesAndEdges
 (
+	const std::vector<std::shared_ptr<Mesh2d_Edge>>& theEdges
+)
+{
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+
+		auto id = x->Index();
+
+		Debug_Null_Pointer(x->Node0());
+		Debug_Null_Pointer(x->Node1());
+
+		if (NOT x->Node0()->InsertToEdges(id, x))
+		{
+			// duplicate data; do nothing [9/15/2022 Amir]
+		}
+		if (NOT x->Node1()->InsertToEdges(id, x))
+		{
+			// duplicate data; do nothing [9/15/2022 Amir]
+		}
+	}
+}
+
+void tnbLib::MeshBase_Tools::ConnectNodesAndEdges
+(
 	const std::vector<std::shared_ptr<Mesh3d_Element>>& theElements
 )
 {
@@ -1045,6 +1112,21 @@ void tnbLib::MeshBase_Tools::ConnectMesh
 	ConnectEdgesAndFacets(facets);
 
 	ConnectFacetsAndElements(theElements);
+
+	ConnectElements(theElements);
+}
+
+void tnbLib::MeshBase_Tools::ConnectMesh
+(
+	const std::vector<std::shared_ptr<Mesh2d_Element>>& theElements
+)
+{
+	auto edges = RetrieveEdges(theElements);
+
+	ConnectNodesAndElements(theElements);
+	ConnectNodesAndEdges(edges);
+
+	ConnectEdgesAndElements(theElements);
 
 	ConnectElements(theElements);
 }
