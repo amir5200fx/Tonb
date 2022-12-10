@@ -2128,6 +2128,18 @@
     <Filter Include="TnbLib\Curve\Approximate\3d">
       <UniqueIdentifier>{e523ed78-1d26-4a35-a76d-fe0502bbba88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Tools\MultiSizeMap">
+      <UniqueIdentifier>{5661cfcc-385a-4dc1-b6be-9617fac1c4b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\MultiSizeMap\Traits">
+      <UniqueIdentifier>{51f2d546-6311-4f5e-b0dd-21649912bd11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\MultiSizeMap\Iso">
+      <UniqueIdentifier>{7d207400-6b4a-4797-b883-cd63a8c1ccfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d">
+      <UniqueIdentifier>{cdfeee8d-9211-4458-97bf-9abe9e482cbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5088,6 +5100,24 @@
     <ClInclude Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetricFwd.hxx">
       <Filter>TnbLib\Curve\Curve\AnIso\UniMetric</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Mesh_MultiSizeMap.hxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Traits\Mesh_MultiSizeMapTraits.hxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMap.hxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMapFwd.hxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Iso\2d\GeoMesh2d_SingleBackgroundFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Iso\3d\GeoMesh3d_SingleBackgroundFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\Iso\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6607,6 +6637,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Curve\Curve\AnIso\UniMetric\Mesh2d_CurveUniMetric.cxx">
       <Filter>TnbLib\Curve\Curve\AnIso\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\3d\Mesh3d_UnionSizeMapEnriched.cxx">
+      <Filter>TnbLib\Base\Tools\UnionSizeMap\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMap.cxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMapIO.cxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\Iso\2d\GeoMesh2d_BackgroundIO.cxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_MetricBackgroundIO.cxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\AnIso\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

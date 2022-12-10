@@ -5,12 +5,16 @@
 #include <GeoMesh_Background.hxx>
 #include <GeoMesh3d_Data.hxx>
 #include <GeoMesh3d_BackgroundFwd.hxx>
+#include <GeoMesh3d_SingleBackgroundFwd.hxx>
 
 namespace tnbLib
 {
 
 	template<>
-	TnbMesh_EXPORT void GeoMesh3d_Background::HvCorrection
+	TnbMesh_EXPORT void GeoMesh3d_SingleBackground::ConnectTopology();
+
+	template<>
+	TnbMesh_EXPORT void GeoMesh3d_SingleBackground::HvCorrection
 	(
 		const std::vector<std::shared_ptr<Mesh3d_Node>>& nodes,
 		const Standard_Real Factor,
@@ -18,7 +22,10 @@ namespace tnbLib
 	);
 
 	template<>
-	TnbMesh_EXPORT void GeoMesh3d_Background::ExportToPlt(OFstream & File) const;
+	TnbMesh_EXPORT void GeoMesh3d_SingleBackground::ExportToPlt(OFstream & File) const;
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::GeoMesh3d_Background);
+BOOST_CLASS_EXPORT_KEY(tnbLib::GeoMesh3d_SingleBackground);
 
 #endif // !_GeoMesh3d_Background_Header

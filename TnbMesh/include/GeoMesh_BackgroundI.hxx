@@ -7,7 +7,7 @@ namespace tnbLib
 {
 
 	template<class MeshData, class Type>
-	Type GeoMesh_Background<MeshData, Type>::InterpolateAt
+	Type GeoMesh_SingleBackground<MeshData, Type>::InterpolateAt
 	(
 		const Point & theCoord
 	) const
@@ -30,7 +30,7 @@ namespace tnbLib
 	}
 
 	template<class MeshData, class Type>
-	Type GeoMesh_Background<MeshData, Type>::InterpolateAt
+	Type GeoMesh_SingleBackground<MeshData, Type>::InterpolateAt
 	(
 		const Point & theCoord,
 		Standard_Boolean & Sense
@@ -69,7 +69,7 @@ namespace tnbLib
 	}
 
 	template<class MeshData, class Type>
-	void GeoMesh_Background<MeshData, Type>::HvCorrection
+	void GeoMesh_SingleBackground<MeshData, Type>::HvCorrection
 	(
 		const std::shared_ptr<hvInfo>& theInfo
 	)
