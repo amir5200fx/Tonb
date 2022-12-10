@@ -29,5 +29,5 @@ tnbLib::Discret2d_Curve_UniLengthFun::Subdivide
 		const auto& p1 = coords.at(i);
 		len += p0.Distance(p1);
 	}
-	return len < Size();
+	return len > Size();
 }
