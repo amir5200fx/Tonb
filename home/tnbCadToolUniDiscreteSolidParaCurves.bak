@@ -1,0 +1,7 @@
+SetVerbose(1);
+
+loadFile();
+
+execute();
+
+saveTo();

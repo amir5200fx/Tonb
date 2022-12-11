@@ -111,6 +111,15 @@ namespace tnbLib
 				const Standard_Integer nbSeg
 			);
 
+		static TnbCad2d_EXPORT std::shared_ptr<Entity2d_Polygon>
+			UniformDiscrete
+			(
+				const Handle(Geom2d_Curve)&,
+				const Standard_Real u0,
+				const Standard_Real u1,
+				const Standard_Integer nbSeg
+			);
+
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_CmpEdge>
 			MakeCompoundEdge
 			(
