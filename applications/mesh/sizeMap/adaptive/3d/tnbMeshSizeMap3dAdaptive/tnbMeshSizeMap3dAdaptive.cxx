@@ -558,8 +558,8 @@ namespace tnbLib
 				Info << endl
 					<< " - All the maps are unified in, " << global_time_duration << " ms." << endl;
 			}
-			/*OFstream myFile("background.plt");
-			myBackgound->ExportToPlt(myFile);*/
+			OFstream myFile("background.plt");
+			myBackgound->ExportToPlt(myFile);
 
 			/*auto facets = MeshBase_Tools::RetrieveFacets(myBackgound->Mesh()->Elements());
 			for (const auto& x : facets)
