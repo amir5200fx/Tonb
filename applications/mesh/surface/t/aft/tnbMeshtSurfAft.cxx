@@ -34,6 +34,8 @@
 #include <Aft2d_tSegmentEdge.hxx>
 #include <Aft2d_NodeSurface.hxx>
 #include <Aft2d_EdgeSurface.hxx>
+#include <Mesh2d_CurveUniMetric.hxx>
+#include <Mesh2d_CurveAnIso.hxx>
 #include <GeoSizeFun3d_Background.hxx>
 #include <Mesh2d_Element.hxx>
 #include <Mesh_Curve_Info.hxx>
@@ -589,6 +591,9 @@ namespace tnbLib
 			Aft2d_tBoundaryOfPlaneSurfaceUniMetric::verbose = verbose;
 		}
 		
+		Mesh2d_CurveUniMetric::nbLevels_CheckingLength = 8;
+		Mesh2d_CurveAnIso::nbLevels_CheckingLength = 8;
+
 		//Aft2d_gModelSurface::verbose = 1;
 
 		if (NOT loadTag)
@@ -735,7 +740,7 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 11)
+			/*if (x->Index() NOT_EQUAL 7)
 			{
 				continue;
 			}*/
