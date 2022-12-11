@@ -147,13 +147,39 @@ tnbLib::Pln_Tools::UniformDiscrete
 {
 	if (NOT Pln_Tools::IsBounded(theCurve))
 	{
-		FatalErrorIn("void Pln_CurveTools::ExportToPlt(Args...)")
+		FatalErrorIn("void Pln_CurveTools::UniformDiscrete(Args...)")
 			<< "the curve is not bounded!" << endl
 			<< abort(FatalError);
 	}
 	const auto du = (theCurve->LastParameter() - theCurve->FirstParameter()) 
 		/ (Standard_Real)nbSeg;
 	const auto u0 = theCurve->FirstParameter();
+
+	std::vector<Pnt2d> pts;
+	pts.reserve(nbSeg + 1);
+
+	for (auto i = 0; i <= nbSeg; i++)
+	{
+		auto pt = theCurve->Value(u0 + i * du);
+		pts.push_back(std::move(pt));
+	}
+
+	auto poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
+	return std::move(poly);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon>
+tnbLib::Pln_Tools::UniformDiscrete
+(
+	const Handle(Geom2d_Curve)& theCurve,
+	const Standard_Real theU0,
+	const Standard_Real theU1,
+	const Standard_Integer nbSeg
+)
+{
+	const auto du = (theU1 - theU0)
+		/ (Standard_Real)nbSeg;
+	const auto u0 = theU0;
 
 	std::vector<Pnt2d> pts;
 	pts.reserve(nbSeg + 1);
@@ -997,7 +1023,7 @@ tnbLib::Pln_Tools::ConvertToTrimmedCurve
 			<< abort(FatalError);
 	}
 	Handle(Geom2d_Curve) trimmed =
-		new Geom2d_TrimmedCurve(theCurve, theU0, theU1);
+		new Geom2d_TrimmedCurve(theCurve, theU0, theU1, Standard_True, Standard_False);
 	return std::move(trimmed);
 }
 
