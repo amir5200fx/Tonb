@@ -7,6 +7,14 @@
 #include <Cad_CurveSplitter_Info.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_TModel.hxx>
+#include <TModel_Surface.hxx>
+#include <TModel_GeneratedEdge.hxx>
+#include <TModel_Wire.hxx>
+#include <TModel_ParaCurve.hxx>
+#include <Pln_Tools.hxx>
+#include <Geo_Tools.hxx>
+#include <Entity3d_Box.hxx>
+#include <Entity2d_Chain.hxx>
 #include <Global_File.hxx>
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
@@ -23,6 +31,8 @@ namespace tnbLib
 	static unsigned short verbose = 0;
 	static bool loadTag = false;
 	static bool exeTag = false;
+
+	static int nbSegments = 40;
 
 	static std::shared_ptr<Cad_TModel> myModel;
 	static std::shared_ptr<Cad_Shape> myShape;
@@ -89,6 +99,34 @@ namespace tnbLib
 		saveTo(myFileName);
 	}
 
+	auto GetPolygon(const TModel_Wire& wire)
+	{
+		auto chain = std::make_shared<Entity2d_Chain>();
+		auto curves = *TModel_Wire::RetrieveParaCurves(wire);
+		for (const auto& x : curves)
+		{
+			auto pl = Pln_Tools::UniformDiscrete(x->Curve(), x->FirstParameter(), x->LastParameter(), nbSegments);
+			auto iChain = Geo_Tools::RetrieveChain(*pl);
+			chain->Add(*iChain);
+		}
+		return std::move(chain);
+	}
+
+	auto GetPatch(const TModel_Surface& theSurface)
+	{
+		const auto& outer = theSurface.Outer();
+		auto chain = GetPolygon(*outer);
+		if (theSurface.Inner())
+		{
+			for (const auto& x : *theSurface.Inner())
+			{
+				auto iChain = GetPolygon(*x);
+				chain->Add(*iChain);
+			}
+		}
+		return std::move(chain);
+	}
+
 	void execute(const std::string& name)
 	{
 		if (NOT loadTag)
@@ -116,6 +154,20 @@ namespace tnbLib
 
 			myModel = myMaker->Model();
 		}
+
+		/*std::vector<std::shared_ptr<Entity2d_Triangulation>> myTris;
+		for (const auto& x : myModel->RetrieveFaces())
+		{
+			auto chain = GetPatch(*x);
+			auto tri = Geo_Tools::Triangulation(*chain);
+			myTris.push_back(std::move(tri));
+		}
+
+		OFstream myFile("paraCurves.plt");
+		for (const auto& x : myTris)
+		{
+			x->ExportToPlt(myFile);
+		}*/
 
 		if (verbose)
 		{
@@ -191,7 +243,7 @@ using namespace tnbLib;
 
 int main(int argc, char *argv[])
 {
-	FatalError.throwExceptions();
+	//FatalError.throwExceptions();
 	FatalConvError.throwExceptions();
 
 	if (argc <= 1)
