@@ -40,8 +40,5 @@ void tnbLib::Aft2d_OptNodeSurface_Altr::Perform()
 	{
 		ChangeCoord() = alg->Coord();
 	}
-	std::cout << "element size: " << this->Size() << std::endl;
-	std::cout << "dis= " << this->MetricMap()->CalcDistance(this->Front()->Centre(), Coord()) << std::endl;
-	std::cout << std::endl;
 	Change_IsDone() = Standard_True;
 }
