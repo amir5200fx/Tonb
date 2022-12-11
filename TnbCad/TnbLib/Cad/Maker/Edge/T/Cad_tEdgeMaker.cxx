@@ -14,6 +14,7 @@
 #include <BRepLib.hxx>
 #include <Geom2d_Curve.hxx>
 #include <Precision.hxx>
+#include <Geom2dAPI_ProjectPointOnCurve.hxx>
 
 const std::shared_ptr<tnbLib::Cad_tEdgeMakerInfo> tnbLib::Cad_tEdgeMaker::DEFAULT_INFO =
 std::make_shared<tnbLib::Cad_tEdgeMakerInfo_Absolute>(Precision::Confusion());
@@ -74,19 +75,67 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 
 	auto Curve = BRep_Tool::Curve(Shape(), eLoc, U0, U1);
 
-	if (Shape().Orientation() IS_EQUAL TopAbs_REVERSED)
-	{
+	//if (Shape().Orientation() IS_EQUAL TopAbs_REVERSED)
+	//{
+		/*const auto P0 = pCurve->Value(u0);
+		const auto P1 = pCurve->Value(u1);
+
+		pCurve->Reverse();
+
+		{
+			Geom2dAPI_ProjectPointOnCurve alg(P1, pCurve);
+			if (NOT alg.NbPoints())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " Failed to reverse the curve." << endl
+					<< abort(FatalError);
+			}
+			u0 = alg.LowerDistanceParameter();
+		}
+		{
+			Geom2dAPI_ProjectPointOnCurve alg(P0, pCurve);
+			if (NOT alg.NbPoints())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " Failed to reverse the curve." << endl
+					<< abort(FatalError);
+			}
+			u1 = alg.LowerDistanceParameter();
+		}*/
+		/*std::cout << "it's reversed." << std::endl;
+		std::cout << "u0 = " << u0 << std::endl;
+		std::cout << "u1 = " << u1 << std::endl;
+		std::cout << std::endl;
 		auto temp = u1;
 		u1 = pCurve->ReversedParameter(u0);
 		u0 = pCurve->ReversedParameter(temp);
-		pCurve->Reverse();
-	}
+		
+		std::cout << "curve p0: " << pCurve->FirstParameter() << std::endl;
+		std::cout << "curve p1: " << pCurve->LastParameter() << std::endl;
+		std::cout << std::endl;
+		std::cout << "u0 = " << u0 << std::endl;
+		std::cout << "u1 = " << u1 << std::endl;
+		std::cout << "-------------------------------------" << std::endl;*/
+		//u1 = pCurve->ReversedParameter(u1);
+		//u0 = pCurve->ReversedParameter(u0);
+		//pCurve->Reverse();
+	//}
 
 	if (NOT Pln_Tools::IsBounded(pCurve))
 	{
 		pCurve = Pln_Tools::ConvertToTrimmedCurve(pCurve, u0, u1);
 	}
-
+	else
+	{
+		if (std::abs(pCurve->FirstParameter() - u0) > gp::Resolution() OR std::abs(pCurve->LastParameter() - u1) > gp::Resolution())
+		{
+			pCurve = Pln_Tools::ConvertToTrimmedCurve(pCurve, u0, u1);
+		}
+	}
+	if (Shape().Orientation() IS_EQUAL TopAbs_REVERSED)
+	{
+		pCurve->Reverse();
+	}
 	auto curveOnPlane = std::make_shared<TModel_ParaCurve>(pCurve);
 
 	std::shared_ptr<TModel_Edge> newEdge;
