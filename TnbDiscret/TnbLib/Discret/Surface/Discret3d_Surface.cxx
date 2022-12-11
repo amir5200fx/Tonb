@@ -200,12 +200,23 @@ namespace tnbLib
 			Point_2 pt(p.X(), p.Y());
 			return std::move(pt);
 		};
+
 		Polygon_2 p;
 		const auto& pts = thePoly.Points();
 		for (size_t i = 0; i < pts.size() - 1; i++)
 		{
 			p.push_back(get_cgalPoint(pts.at(i)));
 		}
+		if (NOT p.is_simple())
+		{
+			OFstream myFile("PolygonSimpleError.plt");
+			thePoly.ExportToPlt(myFile);
+
+			FatalErrorIn(FunctionSIG)
+				<< "the polygon is not simple." << endl
+				<< abort(FatalError);
+		}
+
 		return std::move(p);
 	}
 
@@ -475,7 +486,6 @@ void tnbLib::Discret3d_Surface::Perform()
 		}
 	}
 	auto polys = ConvertPolygon(Outer(), Inners());
-
 	std::vector<Geo2d_BalPrTree<std::shared_ptr<Pnt2d>>::node*> spaces;
 	{
 		Global_Timer timer;
@@ -489,10 +499,10 @@ void tnbLib::Discret3d_Surface::Perform()
 		Info << endl
 			<< " - the space has been detected in: " << global_time_duration << " ms." << endl;
 	}
-
+	
 	// retrieve all leaves [11/15/2022 Amir]
 	auto nodes = RetrieveLeaves(spaces);
-
+	
 	{
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
@@ -505,10 +515,9 @@ void tnbLib::Discret3d_Surface::Perform()
 		Info << endl
 			<< " - the space has been approximated in: " << global_time_duration << " ms." << endl;
 	}
-
+	
 	auto leaves = RetrieveLeaves(nodes);
 	auto samples2d = RetrieveSamples(leaves, offsetPoints);
 	theCoords_ = std::make_shared<std::vector<Pnt2d>>(std::move(samples2d));
-
 	Change_IsDone() = Standard_True;
 }
