@@ -498,6 +498,7 @@ namespace tnbLib
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "cannot calculate the curve length." << endl
+				<< " - nb. of levels= " << theMaxLev << endl
 				<< abort(FatalError);
 		}
 		auto totLength = this->CalcCurveLength(theFirst, theLast);
