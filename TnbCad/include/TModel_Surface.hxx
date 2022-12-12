@@ -134,6 +134,8 @@ namespace tnbLib
 			const Pnt2d& theCoord
 		) const;
 
+		TnbCad_EXPORT void ExportPlaneCurvesToPlt(OFstream& File) const;
+
 		//- static functions and operators
 
 		static Standard_Boolean
