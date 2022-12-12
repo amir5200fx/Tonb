@@ -1,5 +1,6 @@
 #pragma once
 #include <Cad_PlnGapCurve.hxx>
+#include <Cad_PoleSingularCurve.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 namespace tnbLib
@@ -45,6 +46,11 @@ namespace tnbLib
 			{
 				auto gapCurve = std::make_shared<Cad_PlnGapCurve<plnCurveType>>(xCurve);
 				curves.push_back(std::move(gapCurve));
+			}
+			else if (xCurve->IsDegenerated())
+			{
+				auto curve = std::make_shared<Cad_PoleSingularCurve<plnCurveType>>(xCurve);
+				curves.push_back(std::move(curve));
 			}
 			else
 			{
