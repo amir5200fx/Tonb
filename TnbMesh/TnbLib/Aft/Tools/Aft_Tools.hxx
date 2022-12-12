@@ -163,6 +163,13 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<ElmType>>& theElements
 			);
 
+		template<>
+		static TnbMesh_EXPORT std::vector<connectivity::triple>
+			RetrieveTriangleConnectivities<Aft2d_EdgeSurface>
+			(
+				const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theElements
+			);
+
 		template<class ElmType, class NodeType>
 		static std::vector<connectivity::triple>
 			RetrieveTriangleConnectivities
@@ -176,6 +183,14 @@ namespace tnbLib
 			RetrieveTriangleConnectivities
 			(
 				const std::vector<std::shared_ptr<ElmType>>& theElements,
+				const std::map<Standard_Integer, Standard_Integer>& theIndices
+			);
+
+		template<>
+		static TnbMesh_EXPORT std::vector<connectivity::triple>
+			RetrieveTriangleConnectivities<Aft2d_EdgeSurface>
+			(
+				const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theElements,
 				const std::map<Standard_Integer, Standard_Integer>& theIndices
 			);
 

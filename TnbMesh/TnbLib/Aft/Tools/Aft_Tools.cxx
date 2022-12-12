@@ -166,6 +166,81 @@ tnbLib::Aft_Tools::RetrieveGeometry
 	auto coords = Aft2d_NodeSurface::RetrieveGeometry(theNodes);
 	return std::move(coords);
 }
+template<>
+std::vector<tnbLib::connectivity::triple> 
+tnbLib::Aft_Tools::RetrieveTriangleConnectivities
+(
+	const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theElements
+)
+{
+	std::vector<connectivity::triple> indices;
+	indices.reserve(theElements.size());
+	for (const auto& x : theElements)
+	{
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
+
+		auto i0 = n0->Index();
+		auto i1 = n1->Index();
+
+		connectivity::triple v;
+		v.Value(0) = i0;
+		v.Value(1) = i1;
+		v.Value(2) = i0;
+
+		indices.push_back(std::move(v));
+	}
+	return std::move(indices);
+}
+
+template<>
+std::vector<tnbLib::connectivity::triple>
+tnbLib::Aft_Tools::RetrieveTriangleConnectivities
+(
+	const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theElements,
+	const std::map<Standard_Integer, Standard_Integer>& theIndices
+)
+{
+	std::vector<connectivity::triple> indices;
+	indices.reserve(theElements.size());
+	try
+	{
+		for (const auto& x : theElements)
+		{
+			const auto& n0 = x->Node0();
+			const auto& n1 = x->Node1();
+
+			Debug_Null_Pointer(n0);
+			Debug_Null_Pointer(n1);
+
+			auto i0 = n0->Index();
+			auto i1 = n1->Index();
+
+			connectivity::triple v;
+			v.Value(0) = theIndices.at(i0);
+			v.Value(1) = theIndices.at(i1);
+			v.Value(2) = theIndices.at(i0);
+
+			indices.push_back(std::move(v));
+		}
+	}
+	catch (const std::out_of_range&)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "out of rage error has been detected!" << endl
+			<< abort(FatalError);
+	}
+	catch (const std::exception&)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "unexpected error has been detected!" << endl
+			<< abort(FatalError);
+	}
+	return std::move(indices);
+}
 
 std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdge>> 
 tnbLib::Aft_Tools::RetrieveTopoMesh
