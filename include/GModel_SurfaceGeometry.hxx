@@ -71,8 +71,6 @@ namespace tnbLib
 
 		//- Io functions and operators
 
-		void ExportPlaneCurvesToPlt(OFstream& File) const;
-
 		void ExportToPlt(OFstream& File) const;
 
 		void ExportMetricDetToPlt(OFstream& File) const;
