@@ -4,6 +4,7 @@
 #include <Aft2d_tPlnWireSurface.hxx>
 #include <Aft2d_tPlnCurveSurface.hxx>
 #include <Cad_tPoleSingularCurve.hxx>
+#include <TModel_ParaDegenCurve.hxx>
 #include <Cad_Tools.hxx>
 #include <TModel_Tools.hxx>
 #include <TnbError.hxx>
@@ -75,6 +76,34 @@ namespace tnbLib
 		auto wire = std::make_shared<Aft2d_tPlnWireSurface>(theWire->Index(), theWire->Name(), std::move(curves));
 		return std::move(wire);
 	}
+
+	auto ReplaceDegeneracies
+	(
+		const std::shared_ptr<Aft2d_tPlnWireSurface>& theWire
+	)
+	{
+		std::vector<std::shared_ptr<Aft2d_tPlnCurveSurface>> curves;
+		curves.reserve(theWire->Curves().size());
+		for (const auto& x : theWire->Curves())
+		{
+			Debug_Null_Pointer(x);
+			const auto& curve = x->Curve();
+			Debug_Null_Pointer(curve);
+
+			if (auto degen = std::dynamic_pointer_cast<TModel_ParaDegenCurve>(curve))
+			{
+				auto pm = x->Value(MEAN(x->FirstParameter(), x->LastParameter()));
+				auto c = std::make_shared<Cad_tPoleSingularCurve>(curve, pm);
+				curves.push_back(std::move(c));
+			}
+			else
+			{
+				curves.push_back(x);
+			}
+		}
+		auto wire = std::make_shared<Aft2d_tPlnWireSurface>(theWire->Index(), theWire->Name(), std::move(curves));
+		return std::move(wire);
+	}
 }
 
 template<>
@@ -91,7 +120,7 @@ void tnbLib::Cad_tCommonSingularity::Perform()
 	const auto& name = Plane()->Name();
 
 	const auto& outer = Plane()->Outer();
-	auto newOuter = ReplaceDegeneracies(outer, Surface(), IntegInfo(), Tolerance());
+	auto newOuter = ReplaceDegeneracies(outer/*, Surface(), IntegInfo(), Tolerance()*/);
 
 	if (Plane()->Inner())
 	{
@@ -99,7 +128,7 @@ void tnbLib::Cad_tCommonSingularity::Perform()
 		innerWires.reserve(Plane()->NbHoles());
 		for (const auto& x : *Plane()->Inner())
 		{
-			auto newInner = ReplaceDegeneracies(x, Surface(), IntegInfo(), Tolerance());
+			auto newInner = ReplaceDegeneracies(x/*, Surface(), IntegInfo(), Tolerance()*/);
 			innerWires.push_back(std::move(newInner));
 		}
 
