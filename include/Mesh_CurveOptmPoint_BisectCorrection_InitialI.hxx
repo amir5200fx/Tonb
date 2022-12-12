@@ -43,21 +43,18 @@ inline void tnbLib::Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, Met
 	//auto dis = map.CalcUnitDistance(P0, curve.Value(Correct)) / Len();
 	Debug_If_Condition(Len() <= gp::Resolution());
 	auto dis = calcLength(Entity(), U0(), Correct, IntegInfo()) / Len();
-	std::cout << "dis: " << dis << std::endl;
-	std::cout << "len: " << Len() << std::endl;
+
 	if (dis > 1.0)
 	{
 		x1 = Correct;
 		auto du = x1 - Umin;
-		std::cout << "du : " << du << std::endl;
+
 		forThose(Iter, 1, MaxLevel())
 		{
 			du *= 0.5;
 			x0 = Umin + du;
 			//auto dis1 = map.CalcUnitDistance(P0, curve.Value(x0)) / Len();
 			auto dis1 = calcLength(Entity(), U0(), x0, IntegInfo()) / Len();
-			std::cout << "dis1: " << dis1 << std::endl;
-			std::cout << "integ: " << calcLength(Entity(), U0(), x0, IntegInfo()) << std::endl;
 			if (dis1 < 1.0)
 			{
 				converged = Standard_True;
@@ -70,9 +67,7 @@ inline void tnbLib::Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, Met
 		x0 = Correct;
 
 		auto du = x0 - Umin;
-		std::cout << "du : " << du << std::endl;
-		std::cout << "Umin: " << Umin << std::endl;
-		std::cout << "x: " << Correct << std::endl;
+
 		forThose(Iter, 1, MaxLevel())
 		{
 			du *= 2.0;
@@ -81,7 +76,6 @@ inline void tnbLib::Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, Met
 
 			//auto dis1 = map.CalcUnitDistance(P0, curve.Value(x1)) / Len();
 			auto dis1 = calcLength(Entity(), U0(), x1, IntegInfo()) / Len();
-			std::cout << "dis1: " << dis1 << std::endl;
 			if (dis1 > 1.0)
 			{
 				converged = Standard_True;
@@ -94,7 +88,6 @@ inline void tnbLib::Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, Met
 		x0 = x1 = Guess();
 		converged = Standard_True;
 	}
-	std::cout << std::endl;
 	auto t = std::make_pair(x0, x1);
 	BoundRef() = std::move(t);
 	IsConverged_ = converged;

@@ -91,10 +91,8 @@ namespace tnbLib
 
 		// virtual functions [5/12/2022 Amir]
 
-		virtual Standard_Boolean IsGap() const
-		{
-			return Standard_False;
-		}
+		virtual Standard_Boolean IsGap() const;
+		virtual Standard_Boolean IsDegenerated() const;
 
 		// public functions and operators [5/12/2022 Amir]
 

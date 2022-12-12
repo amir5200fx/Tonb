@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _Cad_ParaGapCurve_Header
-#define _Cad_ParaGapCurve_Header
+#ifndef _Cad_ParaDegenCurve_Header
+#define _Cad_ParaDegenCurve_Header
 
 #include <word.hxx>
 #include <Global_Serialization.hxx>
@@ -13,57 +13,59 @@ class Geom2d_Curve;
 namespace tnbLib
 {
 
+	// Forward Declarations [12/12/2022 Payvand]
+	class Cad_ParaCurve;
+
 	template<class CurveType>
-	class Cad_ParaGapCurve
+	class Cad_ParaDegenCurve
 		: public CurveType
 	{
 
 		/*Private Data*/
 
-
-
-		// private functions and operators [5/12/2022 Amir]
+		// private functions and operators [12/12/2022 Payvand]
 
 		friend class boost::serialization::access;
 
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
-			ar & boost::serialization::base_object<CurveType>(*this);
+			ar& boost::serialization::base_object<CurveType>(*this);
 		}
+
 
 	public:
 
-		// default constructor [5/12/2022 Amir]
+		// default constructor [12/12/2022 Payvand]
 
-		Cad_ParaGapCurve()
+		Cad_ParaDegenCurve()
 		{}
 
 
-		// constructors [5/12/2022 Amir]
+		// constructors [12/12/2022 Payvand]
 
-		explicit Cad_ParaGapCurve(const Handle(Geom2d_Curve)& theGeometry)
+		explicit Cad_ParaDegenCurve(const Handle(Geom2d_Curve)& theGeometry)
 			: CurveType(theGeometry)
 		{}
 
-		Cad_ParaGapCurve(const Standard_Integer theIndex, const Handle(Geom2d_Curve)& theGeoemtry)
+		Cad_ParaDegenCurve(const Standard_Integer theIndex, const Handle(Geom2d_Curve)& theGeoemtry)
 			: CurveType(theIndex, theGeoemtry)
 		{}
 
-		Cad_ParaGapCurve
+		Cad_ParaDegenCurve
 		(
-			const Standard_Integer theIndex, 
-			const word& theName, 
+			const Standard_Integer theIndex,
+			const word& theName,
 			const Handle(Geom2d_Curve)& theGeoemtry
 		)
 			: CurveType(theIndex, theName, theGeoemtry)
 		{}
 
-		Cad_ParaGapCurve(Handle(Geom2d_Curve)&& theGeometry)
+		Cad_ParaDegenCurve(Handle(Geom2d_Curve) && theGeometry)
 			: CurveType(std::move(theGeometry))
 		{}
 
-		Cad_ParaGapCurve
+		Cad_ParaDegenCurve
 		(
 			const Standard_Integer theIndex,
 			Handle(Geom2d_Curve) && theGeometry
@@ -71,7 +73,7 @@ namespace tnbLib
 			: CurveType(theIndex, std::move(theGeometry))
 		{}
 
-		Cad_ParaGapCurve
+		Cad_ParaDegenCurve
 		(
 			const Standard_Integer theIndex,
 			const word& theName,
@@ -81,9 +83,9 @@ namespace tnbLib
 		{}
 
 
-		// override functions and operators [5/12/2022 Amir]
+		// override functions and operators [12/12/2022 Payvand]
 
-		Standard_Boolean IsGap() const override
+		Standard_Boolean IsDegenerated() const override
 		{
 			return Standard_True;
 		}
@@ -92,17 +94,16 @@ namespace tnbLib
 			CreateCurve
 			(
 				const Standard_Integer theIndex,
-				const word& theName,
+				const word& theName, 
 				const Handle(Geom2d_Curve)& theGeometry
 			) const override;
 
-		// public functions and operators [5/12/2022 Amir]
+		// public functions and operators [12/12/2022 Payvand]
 
 
-		
 	};
 }
 
-#include <Cad_ParaGapCurveI.hxx>
+#include <Cad_ParaDegenCurveI.hxx>
 
-#endif // !_Cad_ParaGapCurve_Header
+#endif // !_Cad_ParaDegenCurve_Header
