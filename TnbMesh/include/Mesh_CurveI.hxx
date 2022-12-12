@@ -410,10 +410,8 @@ namespace tnbLib
 		}
 		catch (const meshLib::LengthCurveError& x)
 		{
-			std::cout << "Length = " << curveLength << std::endl;
 			try
 			{
-				std::cout << " recalculation, Length= " << x.length << std::endl;
 				Discretize(x.length);
 				return x.length;
 			}
