@@ -405,6 +405,7 @@ namespace tnbLib
 		auto metricCalculator = createMetricCalculator();
 
 		std::vector<std::vector<std::shared_ptr<Aft2d_ElementSurface>>> meshes;
+		std::vector<std::vector<std::shared_ptr<Aft2d_EdgeSurface>>> bMeshes;
 
 		if (TModel_Tools::IsPlane(theSurface))
 		{
@@ -464,9 +465,13 @@ namespace tnbLib
 
 			Aft_Tools::Connect(boundaries);
 
-			auto elements = mesh(metricPrcsr, theUniMetricCalculator, Aft_Tools::UpCast(boundaries));
+			auto ibMesh = Aft_Tools::UpCast(boundaries);
+			auto elements = mesh(metricPrcsr, theUniMetricCalculator, ibMesh);
 			meshes.push_back(std::move(elements));
-			return std::move(meshes);
+			bMeshes.push_back(std::move(ibMesh));
+
+			auto t = std::make_pair(std::move(meshes), std::move(bMeshes));
+			return std::move(t);
 		}
 		else
 		{
@@ -526,10 +531,14 @@ namespace tnbLib
 
 			Aft_Tools::Connect(boundaries);
 
-			auto elements = mesh(metricPrcsr, theCalculator, Aft_Tools::UpCast(boundaries));
+			auto ibMesh = Aft_Tools::UpCast(boundaries);
+			auto elements = mesh(metricPrcsr, theCalculator, ibMesh);
 
 			meshes.push_back(std::move(elements));
-			return std::move(meshes);
+			bMeshes.push_back(std::move(ibMesh));
+
+			auto t = std::make_pair(std::move(meshes), std::move(bMeshes));
+			return std::move(t);
 		}
 	}
 
@@ -725,6 +734,9 @@ namespace tnbLib
 			}
 		}
 
+		//OFstream myFile("boundaryCurves.plt");
+		//OFstream myFile1("boundaryMesh.plt");
+
 		if (triSurfaces.empty())
 		{
 			FatalErrorIn(FunctionSIG)
@@ -740,10 +752,11 @@ namespace tnbLib
 				Info << endl
 					<< "- meshing surface, " << x->Index() << endl;
 			}
-			/*if (x->Index() NOT_EQUAL 7)
+			/*if (x->Index() NOT_EQUAL 8)
 			{
 				continue;
 			}*/
+			//x->ExportPlaneCurvesToPlt(myFile);
 			/*if (x->Index() IS_EQUAL 1)
 			{
 				continue;
@@ -776,7 +789,13 @@ namespace tnbLib
 
 			try
 			{
-				auto plnMesh = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metricPrcsrInfo);
+				auto [plnMesh, bMesh] = mesh(x, sizeFun3d, anIsoOptNodeUniMetric, anIsoOptNode, bndInfo, metricPrcsrInfo);
+
+				/*for (const auto& ibMesh : bMesh)
+				{
+					auto bTri = Aft_Tools::RetrieveTriangleMesh(ibMesh);
+					bTri->ExportToPlt(myFile1);
+				}*/
 				if (plnMesh.size() IS_EQUAL 1)
 				{
 					auto tris = Aft_Tools::RetrieveTriangleMesh(plnMesh.at(0));
