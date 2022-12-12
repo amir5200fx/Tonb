@@ -88,11 +88,21 @@ namespace tnbLib
 			return Standard_True;
 		}
 
+		std::shared_ptr<CurveType>
+			CreateCurve
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const Handle(Geom2d_Curve)& theGeometry
+			) const override;
+
 		// public functions and operators [5/12/2022 Amir]
 
 
 		
 	};
 }
+
+#include <Cad_ParaGapCurveI.hxx>
 
 #endif // !_Cad_ParaGapCurve_Header

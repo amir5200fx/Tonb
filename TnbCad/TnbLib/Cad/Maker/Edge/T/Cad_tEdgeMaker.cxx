@@ -3,6 +3,7 @@
 #include <TModel_Edges.hxx>
 #include <TModel_Curve.hxx>
 #include <TModel_ParaCurve.hxx>
+#include <TModel_ParaDegenCurve.hxx>
 #include <TModel_Vertex.hxx>
 #include <Pln_Tools.hxx>
 #include <Cad_Tools.hxx>
@@ -136,11 +137,11 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 	{
 		pCurve->Reverse();
 	}
-	auto curveOnPlane = std::make_shared<TModel_ParaCurve>(pCurve);
 
 	std::shared_ptr<TModel_Edge> newEdge;
 	if (Curve)
 	{// the curve is generated [1/7/2022 Amir]
+		auto curveOnPlane = std::make_shared<TModel_ParaCurve>(pCurve);
 		const auto tol = Info()->Tolerance();
 		Curve = Handle(Geom_Curve)::DownCast(Curve->Copy());
 		
@@ -188,7 +189,9 @@ void tnbLib::Cad_tEdgeMaker::Perform()
 		/*auto pt2d = curveOnPlane->Value(MEAN(curveOnPlane->FirstParameter(), curveOnPlane->LastParameter()));
 		auto pm = patch->Value(pt2d.X(), pt2d.Y());
 		auto vtx = std::make_shared<TModel_Vertex>(0, std::move(pm));*/
-
+		std::cout << "yess, it's degenerated." << std::endl;
+		PAUSE;
+		auto curveOnPlane = std::make_shared<TModel_ParaDegenCurve>(pCurve);
 		newEdge = std::make_shared<TModel_SingularEdge>(curveOnPlane);
 	}
 

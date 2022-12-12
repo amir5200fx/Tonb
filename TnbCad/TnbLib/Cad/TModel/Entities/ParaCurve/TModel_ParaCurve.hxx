@@ -90,6 +90,13 @@ namespace tnbLib
 
 		//- public functions and operators
 
+		virtual std::shared_ptr<TModel_ParaCurve> 
+			CreateCurve
+			(
+				const Standard_Integer theIndex,
+				const word& theName,
+				const Handle(Geom2d_Curve)& theGeometry
+			) const;
 
 		TnbCad_EXPORT std::shared_ptr<TModel_ParaCurve> Copy() const;
 		TnbCad_EXPORT std::shared_ptr<TModel_ParaCurve> Copy(const gp_Trsf2d&) const;
@@ -102,6 +109,8 @@ namespace tnbLib
 			);
 	};
 }
+
+#include <TModel_ParaCurveI.hxx>
 
 BOOST_CLASS_EXPORT_KEY(tnbLib::TModel_ParaCurve);
 

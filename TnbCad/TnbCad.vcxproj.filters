@@ -514,6 +514,12 @@
     <Filter Include="TnbLib\Cad\TModel\Entities\ParaGap">
       <UniqueIdentifier>{34a932b4-1537-4dad-a48d-42022a442562}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Entities\ParaDegenCurve">
+      <UniqueIdentifier>{a074c06f-9b3b-4f53-a24a-6a0870ede4de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\TModel\Entities\ParaDegenCurve">
+      <UniqueIdentifier>{7676c044-7d55-4394-a6d0-037f37f09e43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -1023,6 +1029,27 @@
     <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaGap\TModel_ParaGapCurve.hxx">
       <Filter>TnbLib\Cad\TModel\Entities\ParaGap</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Entities\ParaDegenCurve\Cad_ParaDegenCurve.hxx">
+      <Filter>TnbLib\Cad\Entities\ParaDegenCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaDegenCurve\TModel_ParaDegenCurve.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaDegenCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaDegenCurve\TModel_ParaDegenCurveFwd.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaDegenCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaDegenCurve\Cad_ParaDegenCurveI.hxx">
+      <Filter>TnbLib\Cad\Entities\ParaDegenCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaGap\Cad_ParaGapCurveI.hxx">
+      <Filter>TnbLib\Cad\Entities\ParaGapCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\TModel\Entities\ParaCurve\TModel_ParaCurveI.hxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurveI.hxx">
+      <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -1507,6 +1534,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaGap\TModel_ParaGapCurveIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\ParaGap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaDegenCurve\TModel_ParaDegenCurveIO.cxx">
+      <Filter>TnbLib\Cad\TModel\Entities\ParaDegenCurve</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

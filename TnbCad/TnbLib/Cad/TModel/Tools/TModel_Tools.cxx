@@ -468,14 +468,27 @@ tnbLib::TModel_Tools::RepairWire
 	Debug_If_Condition_Message(NOT alg->IsDone(), "the appplication is not performed!");
 
 	const auto& gWire = alg->Wire();
-	auto curves = MakeParaCurves(gWire);
+	const auto& oldCurves = theWire->Curves();
+
+	std::vector<std::shared_ptr<tnbLib::TModel_ParaCurve>> curves;
+	curves.reserve(oldCurves.size());
 	for (size_t i = 0; i < theWire->NbCurves(); i++)
 	{
-		Debug_Null_Pointer(theWire->Curves().at(i));
-		auto id = theWire->Curves().at(i)->Index();
-		//std::cout << "id: " << id << std::endl;
-		curves.at(i)->SetIndex(id);
+		auto id = oldCurves.at(i)->Index();
+		const auto& name = oldCurves.at(i)->Name();
+
+		auto c = oldCurves.at(i)->CreateCurve(id, name, gWire.at(i));
+
+		curves.push_back(std::move(c));
 	}
+	//auto curves = MakeParaCurves(gWire);
+	//for (size_t i = 0; i < theWire->NbCurves(); i++)
+	//{
+	//	Debug_Null_Pointer(theWire->Curves().at(i));
+	//	auto id = theWire->Curves().at(i)->Index();
+	//	//std::cout << "id: " << id << std::endl;
+	//	curves.at(i)->SetIndex(id);
+	//}
 	auto wire = MakeWire(curves);
 	return std::move(wire);
 }

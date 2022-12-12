@@ -180,8 +180,9 @@ tnbLib::Cad_RepairPlnWire<WireType>::SplitFirstPart
 	Handle(Geom2d_Curve) c0, c1;
 	Pln_Tools::SplitCurve(theCurve->Geometry(), u, c0, c1);
 	Debug_Null_Pointer(c1);
-
-	auto c = std::make_shared<paraCurveType>(theCurve->Index(), theCurve->Name(), std::move(c1));
+	std::cout << "is it degenerated(first)? " << theCurve->IsDegenerated() << std::endl;
+	auto c = theCurve->CreateCurve(theCurve->Index(), theCurve->Name(), c1);
+	//auto c = std::make_shared<paraCurveType>(theCurve->Index(), theCurve->Name(), std::move(c1));
 	auto t = std::make_pair(std::move(c), Standard_True);
 	return std::move(t);
 }
@@ -218,8 +219,9 @@ tnbLib::Cad_RepairPlnWire<WireType>::SplitLastPart
 	Handle(Geom2d_Curve) c0, c1;
 	Pln_Tools::SplitCurve(theCurve->Geometry(), u, c0, c1);
 	Debug_Null_Pointer(c0);
-
-	auto c = std::make_shared<paraCurveType>(theCurve->Index(), theCurve->Name(), std::move(c0));
+	std::cout << "is it degenerated(last)? " << theCurve->IsDegenerated() << std::endl;
+	auto c = theCurve->CreateCurve(theCurve->Index(), theCurve->Name(), c0);
+	//auto c = std::make_shared<paraCurveType>(theCurve->Index(), theCurve->Name(), std::move(c0));
 	auto t = std::make_pair(std::move(c), Standard_True);
 	return std::move(t);
 }
