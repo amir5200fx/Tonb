@@ -178,7 +178,7 @@ void tnbLib::Cad_tSurfaceMaker::Perform()
 
 			auto new_edge = edgeMaker->Edge();
 			new_edge->SetIndex(K);
-
+			new_edge->ParaCurve()->SetIndex(K);
 			Inner_edges.push_back(std::move(new_edge));
 		}
 
