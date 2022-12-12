@@ -2,6 +2,7 @@
 
 #include <Aft2d_tPlnWireSurface.hxx>
 #include <Aft2d_tPlnCurveSurface.hxx>
+#include <Cad_tPoleSingularCurve.hxx>
 #include <Cad_tPlnGapCurve.hxx>
 #include <TModel_ParaWire.hxx>
 #include <TModel_Plane.hxx>
@@ -26,6 +27,11 @@ tnbLib::Aft2d_tRegionPlaneSurface::MakeMeshWire<tnbLib::TModel_ParaWire>
 		if (x->IsGap())
 		{
 			auto curve = std::make_shared<Cad_tPlnGapCurve>(x);
+			curves.push_back(std::move(curve));
+		}
+		else if (x->IsDegenerated())
+		{
+			auto curve = std::make_shared<Cad_tPoleSingularCurve>(x);
 			curves.push_back(std::move(curve));
 		}
 		else
