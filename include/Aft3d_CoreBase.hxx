@@ -1,0 +1,34 @@
+#pragma once
+#ifndef _Aft3d_CoreBase_Header
+#define _Aft3d_CoreBase_Header
+
+#include <Aft_Core_Base.hxx>
+#include <Aft3d_FrontInfo.hxx>
+#include <Aft3d_FrontGlobalData.hxx>
+#include <Aft3d_GlobalData.hxx>
+#include <Aft3d_OptNode_CalculatorFwd.hxx>
+#include <Aft3d_CoreBaseFwd.hxx>
+#include <Geo3d_SizeFunction.hxx>
+#include <Mesh_Module.hxx>
+
+namespace tnbLib
+{
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft3d_CoreBase::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft3d_CoreBase::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+}
+
+#endif // !_Aft3d_CoreBase_Header

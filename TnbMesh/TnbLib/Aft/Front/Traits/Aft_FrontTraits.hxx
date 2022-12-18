@@ -12,6 +12,11 @@
 #include <Aft2d_EdgeSurfaceFwd.hxx>
 #include <Aft2d_ElementSurfaceFwd.hxx>
 
+#include <Aft3d_ElementFwd.hxx>
+#include <Aft3d_FacetFwd.hxx>
+#include <Aft3d_EdgeFwd.hxx>
+#include <Aft3d_NodeFwd.hxx>
+
 namespace tnbLib
 {
 
@@ -41,6 +46,16 @@ namespace tnbLib
 		typedef Aft2d_NodeSurface nodeType;
 		typedef Aft2d_EdgeSurface edgeType;
 		typedef Aft2d_ElementSurface elementType;
+	};
+
+
+	template<>
+	struct Aft_FrontTraits<Aft3d_Facet>
+	{
+		typedef Aft3d_Element elementType;
+		typedef Aft3d_Facet facetType;
+		typedef Aft3d_Edge edgeType;
+		typedef Aft3d_Node nodeType;
 	};
 }
 

@@ -1,6 +1,7 @@
 #include <Aft2d_SegmentEdge.hxx>
 
 #include <Aft2d_PlnCurve.hxx>
+#include <Aft2d_Element.hxx>
 
 template<>
 TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh_BndEdgeGeomAdaptorBase<tnbLib::Aft2d_PlnCurve>)

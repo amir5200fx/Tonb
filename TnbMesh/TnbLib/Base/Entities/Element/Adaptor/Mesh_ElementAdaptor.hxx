@@ -40,9 +40,6 @@ namespace tnbLib
 
 
 
-		virtual ~Mesh_ElementAdaptor()
-		{}
-
 		// public functions and operators [12/19/2021 Amir]
 
 		const std::weak_ptr<ElementType>&
@@ -62,6 +59,8 @@ namespace tnbLib
 		{
 			return theNeighbors_[theIndex];
 		}
+
+		void SetNeighbor(const Standard_Integer theIndex, const std::shared_ptr<ElementType>&);
 
 		//- Macros
 
@@ -94,9 +93,6 @@ namespace tnbLib
 
 		// constructors [12/19/2021 Amir]
 
-
-		virtual ~Mesh_ElementAdaptor()
-		{}
 
 
 		// public functions and operators [12/19/2021 Amir]
@@ -151,8 +147,12 @@ namespace tnbLib
 		// constructors [12/19/2021 Amir]
 
 
-		virtual ~Mesh_ElementAdaptor()
-		{}
+		// Public functions and operators [12/16/2022 Payvand]
+
+		Standard_Boolean IsOrphan() const
+		{
+			return theLeftElement_.lock() == nullptr && theRightElement_.lock() == nullptr;
+		}
 
 		//- Macros
 
@@ -160,5 +160,7 @@ namespace tnbLib
 			GLOBAL_ACCESS_SINGLE(std::weak_ptr<ElementType>, RightElement)
 	};
 }
+
+#include <Mesh_ElementAdaptorI.hxx>
 
 #endif // !_Mesh_ElementAdaptor_Header

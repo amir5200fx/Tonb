@@ -10,6 +10,8 @@
 namespace tnbLib
 {
 
+	Mesh_EntityToEntityAdaptor(Edge, BoundaryFacet, FacetType);
+
 	Mesh_EntityToEntityAdaptor(Edge, Facet, FacetType);
 	Mesh_EntityToEntityAdaptor(Edge, Element, ElementType);
 
@@ -44,6 +46,12 @@ namespace tnbLib
 
 
 		//- public functions and operators
+
+		Standard_Boolean IsOrphan() const
+		{
+			return this->NbFacets() == 0 AND 
+				this->NbElements() == 0;
+		}
 
 	};
 

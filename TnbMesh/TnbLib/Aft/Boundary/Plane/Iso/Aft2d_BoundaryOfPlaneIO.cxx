@@ -5,6 +5,7 @@
 #include <Aft2d_RegionPlane.hxx>
 #include <Aft2d_SegmentEdge.hxx>
 #include <Aft2d_ElementSurface.hxx>
+#include <Aft2d_Element.hxx>
 
 TNB_SAVE_IMPLEMENTATION(tnbLib::Aft2d_BoundaryOfPlane)
 {

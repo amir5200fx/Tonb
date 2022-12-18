@@ -15,6 +15,12 @@
 #include <Aft2d_OptNodeUniMetric_CalculatorFwd.hxx>
 #include <GeoMetricFun2d_Uniform.hxx>
 
+#include <Aft3d_FacetFwd.hxx>
+#include <Aft3d_ElementFwd.hxx>
+#include <Aft3d_OptNode_CalculatorFwd.hxx>
+#include <Aft3d_FrontInfoFwd.hxx>
+#include <Aft3d_FrontGlobalDataFwd.hxx>
+
 namespace tnbLib
 {
 
@@ -24,10 +30,24 @@ namespace tnbLib
 	class TModel_Surface;
 	class GModel_Plane;
 	class TModel_Plane;
+	class Cad_TModel;
+	class Cad_GModel;
 	class Aft2d_Model_Cache;
 	class Aft3d_Model_Cache;
 
 	template<class ModelType, class SizeFun, class MetricFun = void> struct aft_model_traits {};
+
+	template<class SizeFun>
+	struct aft_model_traits<Cad_TModel, SizeFun>
+	{
+		typedef Aft3d_Facet frontType;
+		typedef Aft3d_Element elementType;
+		typedef Aft3d_OptNode_Calculator nodeCalculator;
+		typedef Aft3d_FrontInfo frontInfo;
+		typedef Aft3d_FrontGlobalData globalData;
+
+		typedef Aft3d_Model_Cache cacheType;
+	};
 
 	template<class SizeFun>
 	struct aft_model_traits<Cad2d_Plane, SizeFun>

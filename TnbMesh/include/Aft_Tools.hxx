@@ -25,6 +25,7 @@
 #include <Aft2d_tPlnCurveSurfaceFwd.hxx>
 #include <Aft_ElementsFwd.hxx>
 #include <Aft_NodesFwd.hxx>
+#include <Aft3d_FacetFwd.hxx>
 #include <Geo2d_MetricPrcsrFwd.hxx>
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 
@@ -131,6 +132,8 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Aft3d_Element>>& theElements
 			);
 
+		static std::vector<std::shared_ptr<Aft3d_Node>> RetrieveNodes(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
+
 		static TnbMesh_EXPORT std::vector<Pnt2d> 
 			RetrieveGeometry
 			(
@@ -200,6 +203,9 @@ namespace tnbLib
 			(
 				const std::vector<std::shared_ptr<EntityType>>& theEntities
 			);
+
+		static Standard_Integer CalcNbNodes(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
+		static Standard_Integer CalcNbEdges(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
 
 		template<class EntityType>
 		static std::map<Standard_Integer, Standard_Integer> 
