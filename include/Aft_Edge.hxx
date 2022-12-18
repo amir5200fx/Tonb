@@ -3,7 +3,7 @@
 #define _Aft_Edge_Header
 
 #include <Mesh_Edge.hxx>
-#include <Mesh_EdgeAdaptor.hxx>
+#include <Aft_EdgeAdaptor.hxx>
 #include <Aft_EntityIdentifier.hxx>
 
 #include <vector>
@@ -18,6 +18,11 @@ namespace tnbLib
 		<
 		typename EdgeTraits::nodeType, 
 		(bool)EdgeTraits::geomInfo
+		>
+		, public Aft_EdgeAdaptor
+		<
+		typename EdgeTraits::elementType,
+		typename EdgeTraits::facetType
 		>
 	{
 
@@ -36,6 +41,14 @@ namespace tnbLib
 				<
 				Aft_EntityIdentifier<typename EdgeTraits::nodeType, 
 				(bool)EdgeTraits::geomInfo>
+				>(*this);
+			ar& boost::serialization::base_object
+				<
+				Aft_EdgeAdaptor
+				<
+				typename EdgeTraits::elementType,
+				typename EdgeTraits::facetType
+				>
 				>(*this);
 		}
 

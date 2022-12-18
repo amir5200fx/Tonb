@@ -2140,6 +2140,27 @@
     <Filter Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d">
       <UniqueIdentifier>{cdfeee8d-9211-4458-97bf-9abe9e482cbc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Aft\Core\Iso\3d">
+      <UniqueIdentifier>{394265de-27f8-4376-abbe-8be78293fe2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Data\Iso\3d">
+      <UniqueIdentifier>{e33708c7-77ad-4798-96ef-c2375402dc87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Front\Info\3d\Adaptor">
+      <UniqueIdentifier>{fecb0007-0733-45a5-97a6-c1922656b286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Core\Base\Iso\3d">
+      <UniqueIdentifier>{4ab1d956-b4bf-47fb-849f-4ce76d7ad9e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Model\Iso\3d">
+      <UniqueIdentifier>{1b226c32-c1fa-4f05-9b29-e2507897bffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Facet\Adaptor">
+      <UniqueIdentifier>{a9b1b078-4a7d-476a-bd91-800bcd531788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\FrontAdaptor">
+      <UniqueIdentifier>{3b702c13-9f0a-43aa-acdd-4c0872d3d103}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5118,6 +5139,75 @@
     <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Iso\3d\GeoMesh3d_SingleBackgroundFwd.hxx">
       <Filter>TnbLib\Base\Geom\Mesh\Background\Iso\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Iso\3d\Aft3d_CoreTemplate.hxx">
+      <Filter>TnbLib\Aft\Core\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\3d\Aft3d_FrontGlobalData.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\3d\Aft3d_FrontGlobalDataFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Data\Iso\3d\Aft3d_GlobalData.hxx">
+      <Filter>TnbLib\Aft\Data\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Data\Iso\3d\Aft3d_GlobalDataFwd.hxx">
+      <Filter>TnbLib\Aft\Data\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Info\3d\Adaptor\Aft3d_FrontInfoAdaptorTemplate.hxx">
+      <Filter>TnbLib\Aft\Front\Info\3d\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Info\3d\Aft3d_FrontInfoTemplate.hxx">
+      <Filter>TnbLib\Aft\Front\Info\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Info\3d\Aft3d_FrontInfoTemplateI.hxx">
+      <Filter>TnbLib\Aft\Front\Info\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Adaptor\Aft3d_FrontInfoAdaptor.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Adaptor\Aft3d_FrontInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Info\Aft3d_FrontInfo.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Front\Iso\Info\Aft3d_FrontInfoFwd.hxx">
+      <Filter>TnbLib\Aft\Front\Iso\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Edge\Adaptor\Aft_EdgeAdaptor.hxx">
+      <Filter>TnbLib\Aft\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Entities\Element\Adaptor\Mesh_ElementAdaptorI.hxx">
+      <Filter>TnbLib\Base\Entities\Element\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Iso\3d\Aft3d_CoreFwd.hxx">
+      <Filter>TnbLib\Aft\Core\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Iso\3d\Aft3d_Core.hxx">
+      <Filter>TnbLib\Aft\Core\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Base\Iso\3d\Aft3d_CoreBase.hxx">
+      <Filter>TnbLib\Aft\Core\Base\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Core\Base\Iso\3d\Aft3d_CoreBaseFwd.hxx">
+      <Filter>TnbLib\Aft\Core\Base\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Iso\3d\Aft3d_Model.hxx">
+      <Filter>TnbLib\Aft\Model\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Iso\3d\Aft3d_ModelI.hxx">
+      <Filter>TnbLib\Aft\Model\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Model\Iso\3d\Aft3d_ModelFwd.hxx">
+      <Filter>TnbLib\Aft\Model\Iso\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Facet\Adaptor\Aft_FacetAdaptor.hxx">
+      <Filter>TnbLib\Aft\Entities\Facet\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\FrontAdaptor\Mesh_FrontAdaptor.hxx">
+      <Filter>TnbLib\Base\FrontAdaptor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6652,6 +6742,42 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_MetricBackgroundIO.cxx">
       <Filter>TnbLib\Base\Geom\Mesh\Background\AnIso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Front\Iso\3d\Aft3d_FrontGlobalDataIO.cxx">
+      <Filter>TnbLib\Aft\Front\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Data\Iso\3d\Aft3d_GlobalDataIO.cxx">
+      <Filter>TnbLib\Aft\Data\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Front\Info\3d\Aft3d_FrontInfoTemplate.cxx">
+      <Filter>TnbLib\Aft\Front\Info\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Front\Iso\Adaptor\Aft3d_FrontInfoAdaptorIO.cxx">
+      <Filter>TnbLib\Aft\Front\Iso\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Front\Iso\Info\Aft3d_FrontInfo.cxx">
+      <Filter>TnbLib\Aft\Front\Iso\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Entities\Element\Adaptor\Mesh_ElementAdaptor.cxx">
+      <Filter>TnbLib\Base\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\Base\Iso\3d\Aft3d_CoreBase.cxx">
+      <Filter>TnbLib\Aft\Core\Base\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Core\Base\Iso\3d\Aft3d_CoreBaseIO.cxx">
+      <Filter>TnbLib\Aft\Core\Base\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\Iso\3d\Aft3d_Model.cxx">
+      <Filter>TnbLib\Aft\Model\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Model\Iso\3d\Aft3d_ModelIO.cxx">
+      <Filter>TnbLib\Aft\Model\Iso\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Facet\Adaptor\Aft_FacetAdaptorIO.cxx">
+      <Filter>TnbLib\Aft\Entities\Facet\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Facet\Adaptor\Aft_FacetAdaptor.cxx">
+      <Filter>TnbLib\Aft\Entities\Facet\Adaptor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

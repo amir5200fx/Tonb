@@ -9,6 +9,8 @@
 #include <Aft3d_FacetAnIso.hxx>
 #include <Aft3d_Element.hxx>
 #include <Aft3d_ElementAnIso.hxx>
+#include <Aft3d_Edge.hxx>
+#include <Aft3d_EdgeAnIso.hxx>
 #include <MeshBase_Tools.hxx>
 
 template<>
@@ -141,4 +143,16 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh_EdgeAdaptor<tnbLib::Aft3d_FacetAnIso>)
 {
 	//ar & theRight_;
 	//ar & theLeft_;
+}
+
+template<>
+TNB_SAVE_IMPLEMENTATION(tnbLib::Mesh_EdgeToFrontFacetAdaptor<tnbLib::Aft3d_Facet>)
+{
+	// empty body [12/18/2022 Payvand]
+}
+
+template<>
+TNB_LOAD_IMPLEMENTATION(tnbLib::Mesh_EdgeToFrontFacetAdaptor<tnbLib::Aft3d_Facet>)
+{
+	// empty body [12/18/2022 Payvand]
 }

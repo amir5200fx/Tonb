@@ -3,6 +3,7 @@
 #define _Aft2d_FrontInfoAdaptorFwd_Header
 
 #include <Aft_FrontTraits.hxx>
+#include <Aft2d_EdgeFwd.hxx>
 
 namespace tnbLib
 {

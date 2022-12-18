@@ -6,12 +6,15 @@
 #include <Mesh_Entity.hxx>
 #include <Mesh_ElementAdaptor.hxx>
 #include <Mesh_ElementType.hxx>
+#include <Mesh_FrontAdaptor.hxx>
 #include <Mesh_TypeTraits.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <memory>
 #include <array>
+
+#include "Aft3d_Facet.hxx"
 
 namespace tnbLib
 {
@@ -316,6 +319,7 @@ namespace tnbLib
 	class Mesh_Element<ElementTraits, Mesh_ElementType_Triangle3D>
 		: public Mesh_Entity
 		, public Mesh_ElementAdaptor<typename ElementTraits::elementType, Mesh_ElementType_Triangle3D>
+		, public Mesh_FrontAdaptor<ElementTraits>
 	{
 
 	public:

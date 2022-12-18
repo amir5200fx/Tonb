@@ -99,7 +99,7 @@ namespace tnbLib
 		if (!edge.IsOrphan())
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " Try to delete a non-orphan edge!"
+				<< " Trying to delete a non-orphan edge!"
 				<< abort(FatalError);
 		}
 
