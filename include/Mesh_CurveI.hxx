@@ -66,7 +66,7 @@ namespace tnbLib
 		Standard_Real corrected = theGuess;
 		try
 		{
-			std::cout << "correction..." << std::endl;
+			//std::cout << "correction..." << std::endl;
 			Mesh_CurveOptmPoint_Correction<gCurveType, MetricPrcsrType>
 				correction(theU0, theGuess, theCurve, *theInfo.CorrAlgInfo(), theInfo.NewtonIntgInfo());
 
@@ -76,11 +76,11 @@ namespace tnbLib
 			Debug_If_Condition_Message(NOT correction.IsDone(),
 				"mesh_curveoptpoint_correction algorithm has not been performed!");
 			corrected = correction.Corrected();
-			std::cout << "correction is finished." << std::endl;
+			//std::cout << "correction is finished." << std::endl;
 		}
 		catch (const ConvError&)
 		{
-			std::cout << "initial..." << std::endl;
+			//std::cout << "initial..." << std::endl;
 			Mesh_CurveOptmPoint_BisectCorrection_Initial<gCurveType, MetricPrcsrType>
 				initial(theU0, theGuess, theCurve, theInfo.OverallLengthIntgInfo());
 
@@ -90,7 +90,7 @@ namespace tnbLib
 
 			Debug_If_Condition_Message(NOT initial.IsDone(),
 				"the application algorithm has not been performed!");
-			std::cout << "initial is finished." << std::endl;
+			//std::cout << "initial is finished." << std::endl;
 			const auto[x0, x1] = initial.Bound();
 			if (x0 IS_EQUAL x1 AND initial.IsConverged())
 			{
@@ -107,7 +107,7 @@ namespace tnbLib
 					<< " - Corrected: " << corrected << endl
 					<< abort(FatalError);
 			}
-			std::cout << "bisect..." << std::endl;
+			//std::cout << "bisect..." << std::endl;
 			Mesh_CurveOptmPoint_BisectCorrection<gCurveType, MetricPrcsrType>
 				correction(theU0, x0, x1, theCurve, theInfo.BisectAlgInfo(), theInfo.OverallLengthIntgInfo());
 			/*std::cout << "bisection..." << std::endl;
@@ -129,7 +129,7 @@ namespace tnbLib
 				<< " - Corrected: " << corrected << endl
 				<< abort(FatalError);*/
 			corrected = correction.Corrected();
-			std::cout << "bisect is finished..." << std::endl;
+			//std::cout << "bisect is finished..." << std::endl;
 			//std::cout << " - corrected: " << corrected << std::endl;
 			goto iterationAlg;
 
@@ -190,7 +190,7 @@ namespace tnbLib
 		}
 
 	iterationAlg:
-		std::cout << "optimum..." << std::endl;
+		//std::cout << "optimum..." << std::endl;
 		Mesh_CurveOptmPoint_Newton<gCurveType, MetricPrcsrType>
 			Iteration(theU0, theStep, theCurve);	
 		try
@@ -199,12 +199,12 @@ namespace tnbLib
 				theInfo.NewtonIntgInfo());
 			Debug_If_Condition_Message(NOT Iteration.IsDone(),
 				"mesh_curveoptpoint_newton algorithm has not been performed!");
-			std::cout << "optimum is finished." << std::endl;
+			//std::cout << "optimum is finished." << std::endl;
 			return Iteration.Corrected();
 		}
 		catch (const ConvError&)
 		{
-			std::cout << " subdivide span..." << std::endl;
+			//std::cout << " subdivide span..." << std::endl;
 			if (theLevel > theMaxLevel)
 			{
 				if (theInfo.IgnoreNonConvergency())
@@ -219,7 +219,7 @@ namespace tnbLib
 			}
 			const auto ds2 = 0.5*theStep;
 			const auto du = theU0 + 0.5*(corrected - theU0);
-			std::cout << " calc um..." << std::endl;
+			//std::cout << " calc um..." << std::endl;
 			auto um =
 				CalcNextParameter
 				(
@@ -227,7 +227,7 @@ namespace tnbLib
 					du, ds2, theUmax,
 					theLevel + 1, theMaxLevel,
 					theCurve, theInfo);
-			std::cout << " calc um till next..." << std::endl;
+			//std::cout << " calc um till next..." << std::endl;
 			return
 				CalcNextParameter
 				(
@@ -494,21 +494,23 @@ namespace tnbLib
 	{
 		if (theLev > theMaxLev)
 		{
-			FatalErrorIn(FunctionSIG)
+			return this->CalcCurveLength(theFirst, theLast);
+			/*FatalErrorIn(FunctionSIG)
 				<< "cannot calculate the curve length." << endl
 				<< " - nb. of levels= " << theMaxLev << endl
-				<< abort(FatalError);
+				<< abort(FatalError);*/
 		}
 		auto totLength = this->CalcCurveLength(theFirst, theLast);
 		auto len0 = this->CalcCurveLength(theFirst, MEAN(theFirst, theLast));
 		auto len1 = this->CalcCurveLength(MEAN(theFirst, theLast), theLast);
 
-		if (std::abs(totLength - (len0 + len1)) <= this->Info()->OverallLengthIntgInfo()->Tolerance()*totLength)
+		if (std::abs(totLength - (len0 + len1)) <= this->Info()->NewtonIntgInfo()->Tolerance()*totLength)
 		{
 			return totLength;
 		}
 		else
 		{
+			//std::cout << "DL = " << std::abs(totLength - (len0 + len1)) << ", tol = " << this->Info()->NewtonIntgInfo()->Tolerance() * totLength << std::endl;
 			return CalcLengthWithChecking(theLev + 1, theMaxLev, theFirst, MEAN(theFirst, theLast))
 				+ CalcLengthWithChecking(theLev + 1, theMaxLev, MEAN(theFirst, theLast), theLast);
 		}
