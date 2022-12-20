@@ -121,14 +121,15 @@ namespace tnbLib
 		{}
 
 
-		virtual ~Mesh_SizeMapControl()
-		{}
-
 		//- protected functions and operators
 
 		
 
 	public:
+
+
+		virtual ~Mesh_SizeMapControl()
+		{}
 
 		//- public functions and operators
 

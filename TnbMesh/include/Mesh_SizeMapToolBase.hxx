@@ -99,10 +99,6 @@ namespace tnbLib
 			AllocateMemory();
 		}
 
-
-		virtual ~Mesh_SizeMapToolBase()
-		{}
-
 		auto& ChangeBackMesh()
 		{
 			return theBackMesh_;
@@ -111,6 +107,9 @@ namespace tnbLib
 
 	public:
 
+
+		virtual ~Mesh_SizeMapToolBase()
+		{}
 
 		//- public functions and operators
 
@@ -151,6 +150,10 @@ namespace tnbLib
 			Standard_Real& theSpanAngle
 		) const;
 
+		void ClearBackMesh()
+		{
+			theBackMesh_.reset();
+		}
 	};
 }
 

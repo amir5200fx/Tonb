@@ -51,8 +51,8 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 		Debug_Null_Pointer(x.second);
 		const auto& mapTool = x.second;
 
-		if(NOT mapTool->IsDone())
-			mapTool->Perform();
+		//if(NOT mapTool->IsDone())
+		mapTool->Perform();
 	}
 
 	if (Maps().size() IS_EQUAL 1)
@@ -63,7 +63,7 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 				<< " one size map has been detected, no unifying algorithm is needed." << endl;
 		}*/
 		theBackground_ = Maps().begin()->second->BackgroundMesh();
-
+		Maps().begin()->second->ClearBackMesh();
 		/*OFstream myFile("sizeMapControl.plt");
 		theBackground_->ExportToPlt(myFile);*/
 	}
@@ -75,6 +75,7 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 		{
 			Debug_Null_Pointer(x.second);
 			meshes.push_back(x.second->BackgroundMesh());
+			x.second->ClearBackMesh();
 		}
 
 		auto multiBackMesh = std::make_shared<Mesh3d_MultiSizeMap>(std::move(meshes));
@@ -144,6 +145,6 @@ void tnbLib::Mesh3d_SizeMapControl::Perform()
 		Info << endl
 			<< " - all of the maps in the size map control have been unified, in " << global_time_duration << " ms." << endl;
 	}*/
-
+	
 	Change_IsDone() = Standard_True;
 }
