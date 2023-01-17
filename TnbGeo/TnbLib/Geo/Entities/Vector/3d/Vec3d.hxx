@@ -70,4 +70,6 @@ namespace tnbLib
 	};
 }
 
+#include <Vec3dI.hxx>
+
 #endif // !_Vec3d_Header
