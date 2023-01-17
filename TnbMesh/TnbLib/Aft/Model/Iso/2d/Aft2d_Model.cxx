@@ -170,7 +170,7 @@ void tnbLib::Aft2d_Model::FindValidNode
 			continue;
 		}
 
-		// test 1: is it the new point on the left side of iEDG
+		// test 1: is the new point on the left side of iEDG
 		if (Geo_Tools::Oriented_cgal(node.Coord(), vrtx0.Coord(), vrtx1.Coord()) <= 0.0)
 		{
 			continue;
