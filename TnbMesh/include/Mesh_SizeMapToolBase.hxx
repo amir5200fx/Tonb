@@ -109,7 +109,10 @@ namespace tnbLib
 
 
 		virtual ~Mesh_SizeMapToolBase()
-		{}
+		{
+			std::cout << "size map tool destructor" << std::endl;
+			theBackMesh_.reset();
+		}
 
 		//- public functions and operators
 
