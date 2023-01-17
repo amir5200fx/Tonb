@@ -26,6 +26,7 @@
 #include <Aft_ElementsFwd.hxx>
 #include <Aft_NodesFwd.hxx>
 #include <Aft3d_FacetFwd.hxx>
+#include <Aft3d_EdgeFwd.hxx>
 #include <Geo2d_MetricPrcsrFwd.hxx>
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 
@@ -47,6 +48,46 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbMesh_EXPORT const Pnt2d& GetCoord0(const Aft2d_Edge&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord1(const Aft2d_Edge&);
+
+		static TnbMesh_EXPORT const Pnt2d& GetCoord0(const Aft2d_EdgeAnIso&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord1(const Aft2d_EdgeAnIso&);
+
+		static TnbMesh_EXPORT const Pnt2d& GetCoord0(const Aft2d_EdgeSurface&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord1(const Aft2d_EdgeSurface&);
+
+		static TnbMesh_EXPORT const Pnt3d& GetCoord0(const Aft3d_Edge&);
+		static TnbMesh_EXPORT const Pnt3d& GetCoord1(const Aft3d_Edge&);
+
+		static TnbMesh_EXPORT std::tuple<Pnt2d, Pnt2d> GetCoords(const Aft2d_Edge&);
+		static TnbMesh_EXPORT std::tuple<Pnt2d, Pnt2d> GetCoords(const Aft2d_EdgeAnIso&);
+		static TnbMesh_EXPORT std::tuple<Pnt2d, Pnt2d> GetCoords(const Aft2d_EdgeSurface&);
+		static TnbMesh_EXPORT std::tuple<Pnt3d, Pnt3d> GetCoords(const Aft3d_Edge&);
+
+		static TnbMesh_EXPORT const Pnt2d& GetCoord0(const Aft2d_Element&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord1(const Aft2d_Element&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord2(const Aft2d_Element&);
+
+		static TnbMesh_EXPORT const Pnt2d& GetCoord0(const Aft2d_ElementAnIso&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord1(const Aft2d_ElementAnIso&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord2(const Aft2d_ElementAnIso&);
+
+		static TnbMesh_EXPORT const Pnt2d& GetCoord0(const Aft2d_ElementSurface&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord1(const Aft2d_ElementSurface&);
+		static TnbMesh_EXPORT const Pnt2d& GetCoord2(const Aft2d_ElementSurface&);
+
+		static TnbMesh_EXPORT std::tuple<Pnt2d, Pnt2d, Pnt2d> GetCoords(const Aft2d_Element&);
+		static TnbMesh_EXPORT std::tuple<Pnt2d, Pnt2d, Pnt2d> GetCoords(const Aft2d_ElementAnIso&);
+		static TnbMesh_EXPORT std::tuple<Pnt2d, Pnt2d, Pnt2d> GetCoords(const Aft2d_ElementSurface&);
+
+		static TnbMesh_EXPORT const Pnt3d& GetCoord0(const Aft3d_Element&);
+		static TnbMesh_EXPORT const Pnt3d& GetCoord1(const Aft3d_Element&);
+		static TnbMesh_EXPORT const Pnt3d& GetCoord2(const Aft3d_Element&);
+		static TnbMesh_EXPORT const Pnt3d& GetCoord3(const Aft3d_Element&);
+
+		static TnbMesh_EXPORT std::tuple<Pnt3d, Pnt3d, Pnt3d, Pnt3d> GetCoords(const Aft3d_Element&);
 
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_Edge>> 
 			UpCast
@@ -132,7 +173,29 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<Aft3d_Element>>& theElements
 			);
 
-		static std::vector<std::shared_ptr<Aft3d_Node>> RetrieveNodes(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Node>>
+			RetrieveNodes
+			(
+				const std::vector<std::shared_ptr<Aft3d_Facet>>&
+			);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Edge>> 
+			RetrieveEdges
+			(
+				const std::vector<std::shared_ptr<Aft3d_Facet>>&
+			);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Edge>>
+			RetrieveEdges
+			(
+				const std::vector<std::shared_ptr<Aft3d_Element>>& theElements
+			);
+
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Facet>> 
+			RetrieveFacets
+			(
+				const std::vector<std::shared_ptr<Aft3d_Element>>& theElements
+			);
 
 		static TnbMesh_EXPORT std::vector<Pnt2d> 
 			RetrieveGeometry
@@ -205,7 +268,11 @@ namespace tnbLib
 			);
 
 		static Standard_Integer CalcNbNodes(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
-		static Standard_Integer CalcNbEdges(const std::vector<std::shared_ptr<Aft3d_Facet>>&);
+		static TnbMesh_EXPORT Standard_Integer
+			CalcNbEdges
+			(
+				const std::vector<std::shared_ptr<Aft3d_Facet>>&
+			);
 
 		template<class EntityType>
 		static std::map<Standard_Integer, Standard_Integer> 
