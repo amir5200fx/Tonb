@@ -754,6 +754,9 @@
     <Filter Include="TnbLib\Geo\Search\PrTree\Balanced\Quad">
       <UniqueIdentifier>{b5f50735-77d2-45d5-9436-6bc581445fe1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\EberlyLib">
+      <UniqueIdentifier>{fc6e8afe-4887-40aa-ba3c-56b7429d55bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1806,6 +1809,18 @@
     <ClInclude Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTreeI.hxx">
       <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Vector\2d\Vec2dI.hxx">
+      <Filter>TnbLib\Geo\Entities\Vector\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Vector\3d\Vec3dI.hxx">
+      <Filter>TnbLib\Geo\Entities\Vector\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\EberlyLib\EberlyLib.hxx">
+      <Filter>TnbLib\Geo\EberlyLib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\EberlyLib\EberlyLibI.hxx">
+      <Filter>TnbLib\Geo\EberlyLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2239,6 +2254,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Search\PrTree\Balanced\Quad\Geo2d_BalPrTree.cxx">
       <Filter>TnbLib\Geo\Search\PrTree\Balanced\Quad</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\EberlyLib\EberlyLib.cxx">
+      <Filter>TnbLib\Geo\EberlyLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
