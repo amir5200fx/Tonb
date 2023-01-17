@@ -1,5 +1,62 @@
 #pragma once
 #include <Global_Tools.hxx>
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsZero
+(
+	const Standard_Real x,
+	const Standard_Real epsilon
+)
+{
+	return std::abs(x - epsilon) <= (Standard_Real)0.0;
+}
+
+inline Standard_Real 
+tnbLib::Geo_Tools::CalcSquareDistancePointFromTriangle
+(
+	const Pnt3d& thePoint,
+	const Entity_Triangle<const Pnt3d&>& theTriangle
+)
+{
+	return CalcSquareDistancePointFromTriangle
+	(
+		thePoint,
+		theTriangle.P0(), 
+		theTriangle.P1(),
+		theTriangle.P2()
+	);
+}
+
+inline Standard_Real 
+tnbLib::Geo_Tools::CalcSquareDistancePointFromSegment
+(
+	const Pnt2d& thePoint, 
+	const Entity_Segment<const Pnt2d&>& theSeg
+)
+{
+	return CalcSquareDistancePointFromSegment
+	(
+		thePoint, 
+		theSeg.P0(),
+		theSeg.P1()
+	);
+}
+
+inline Standard_Real 
+tnbLib::Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly
+(
+	const Entity_Segment<const Pnt3d&>& theSeg0, 
+	const Entity_Segment<const Pnt3d&>& theSeg1
+)
+{
+	return CalcSquareDistanceSegmentFromSegment_Eberly
+	(
+		theSeg0.P0(),
+		theSeg0.P1(), 
+		theSeg1.P0(),
+		theSeg1.P1()
+	);
+}
+
 inline Standard_Integer 
 tnbLib::Geo_Tools::Round
 (
@@ -122,6 +179,17 @@ tnbLib::Geo_Tools::Volume_cgal
 )
 {
 	return Oriented_cgal(theP0, theP1, theP2, theP3)*OnePerSix;
+}
+
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPointRightEdge
+(
+	const Pnt2d& thePoint,
+	const Pnt2d& theP0,
+	const Pnt2d& theP1
+)
+{
+	return Standard_Boolean();
 }
 
 inline Standard_Boolean 
@@ -260,6 +328,35 @@ tnbLib::Geo_Tools::IsPointInsideTriangleCW_cgal
 		return Standard_False;
 	}
 	else if (IsPointLeftEdge_cgal(Point, P2, P0))
+	{
+		return Standard_False;
+	}
+	return Standard_True;
+}
+
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsPointInsideTetrahedron_cgal
+(
+	const Pnt3d& theCoord, 
+	const Pnt3d& theP0,
+	const Pnt3d& theP1,
+	const Pnt3d& theP2,
+	const Pnt3d& theP3
+)
+{
+	if (IsPointRightFacet_cgal(theCoord, theP0, theP1, theP2))
+	{
+		return Standard_False;
+	}
+	else if (IsPointRightFacet_cgal(theCoord, theP1, theP3, theP2))
+	{
+		return Standard_False;
+	}
+	else if (IsPointRightFacet_cgal(theCoord, theP2, theP3, theP0))
+	{
+		return Standard_False;
+	}
+	else if (IsPointRightFacet_cgal(theCoord, theP0, theP3, theP1))
 	{
 		return Standard_False;
 	}
@@ -423,6 +520,51 @@ tnbLib::Geo_Tools::IsOneCommonPointTwoTriangles
 										return Standard_True;
 									else
 										return Standard_False;
+}
+
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsOneCommonPointSegmentTriangle
+(
+	const Standard_Integer v1,
+	const Standard_Integer v2,
+	const Standard_Integer q1,
+	const Standard_Integer q2, 
+	const Standard_Integer q3
+)
+{
+	if (v1 == q1)
+		return Standard_True;
+	else
+		if (v1 == q2)
+			return Standard_True;
+		else
+			if (v1 == q3)
+				return Standard_True;
+			else
+				if (v2 == q1)
+					return Standard_True;
+				else
+					if (v2 == q2)
+						return Standard_True;
+					else
+						if (v2 == q3)
+							return Standard_True;
+						else
+							return Standard_False;
+}
+
+inline tnbLib::Vec3d 
+tnbLib::Geo_Tools::CalcNormal
+(
+	const Pnt3d& theP0,
+	const Pnt3d& theP1,
+	const Pnt3d& theP2
+)
+{
+	Vec3d V0(theP0, theP1);
+	Vec3d V1(theP0, theP2);
+	auto n = V0.Crossed(V1);
+	return std::move(n);
 }
 
 inline Standard_Real 

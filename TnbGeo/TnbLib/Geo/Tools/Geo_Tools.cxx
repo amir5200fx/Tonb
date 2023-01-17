@@ -1,5 +1,6 @@
 #include <Geo_Tools.hxx>
 
+#include <EberlyLib.hxx>
 #include <Geo2d_Graph.hxx>
 #include <Geo2d_SegmentGraphEdge.hxx>
 #include <Geo2d_GraphNode.hxx>
@@ -73,7 +74,7 @@ namespace tnbLib
 {
 
 	template<class T>
-	auto GetVec(const T& pt)
+	auto GetArmaVec(const T& pt)
 	{
 		arma::vec p(3);
 
@@ -99,8 +100,8 @@ tnbLib::Geo_Tools::ProjectToPlane
 	auto R1 = CalcRotationMatrix(v1, v2);
 	auto R = arma::inv(R1);
 
-	auto p2 = GetVec<Vec3d>(v1);
-	auto p3 = GetVec<Vec3d>(v2);
+	auto p2 = GetArmaVec<Vec3d>(v1);
+	auto p3 = GetArmaVec<Vec3d>(v2);
 
 	p2 = R * p2;
 	p3 = R * p3;
@@ -178,6 +179,107 @@ tnbLib::Geo_Tools::CalcLength
 		d += p0.Distance(p1);
 	}
 	return d;
+}
+
+Standard_Real 
+tnbLib::Geo_Tools::CalcSquareDistancePointFromSegment
+(
+	const Pnt2d& thePoint,
+	const Pnt2d& theP1,
+	const Pnt2d& theP2
+)
+{
+	const auto bot = SquareDistance(theP1, theP2);
+
+	Pnt2d pn;
+	if (IsZero(bot))
+	{
+		pn = theP1;
+	}
+	else
+	{
+		Vec2d v(theP1, theP2);
+		auto t = DotProduct(v, Vec2d(theP1, thePoint)) / bot;
+
+		if (t < 0.0) t = 0.0;
+		if (t > 1.0) t = 1.0;
+
+		pn = theP1 + t * v;
+	}
+	return SquareDistance(thePoint, pn);
+}
+
+Standard_Real 
+tnbLib::Geo_Tools::CalcSquareDistancePointFromTriangle
+(
+	const Pnt3d& thePoint,
+	const Pnt3d& theP1, 
+	const Pnt3d& theP2,
+	const Pnt3d& theP3
+)
+{
+	Vec3d v1(theP2, theP1);
+	Vec3d v2(theP3, theP1);
+
+	auto R = CalcRotationMatrix(v1, v2);
+	R = arma::inv(R);
+
+	auto q1 = GetArmaVec<Vec3d>(v1);
+	auto q2 = GetArmaVec<Vec3d>(v1);
+
+	auto qt = GetArmaVec<Vec3d>(Vec3d(theP1, thePoint));
+
+	q1 = R * q1;
+	q2 = R * q2;
+	qt = R * qt;
+
+	Pnt2d p1(0, 0);
+	Pnt2d p2(q1(0), q1(1));
+	Pnt2d p3(q2(0), q2(1));
+	Pnt2d pt(qt(0), qt(1));
+
+	if (Geo_Tools::IsPointRightEdge(pt, p1, p2))
+	{
+		auto dis2 = Geo_Tools::CalcSquareDistancePointFromSegment(pt, p1, p2);
+		return dis2 + qt(2) * qt(2);
+	}
+	else if (Geo_Tools::IsPointRightEdge(pt, p2, p3))
+	{
+		auto dis2 = Geo_Tools::CalcSquareDistancePointFromSegment(pt, p2, p3);
+		return dis2 + qt(2) * qt(2);
+	}
+	else if (Geo_Tools::IsPointRightEdge(pt, p3, p1))
+	{
+		auto dis2 = Geo_Tools::CalcSquareDistancePointFromSegment(pt, p3, p1);
+		return dis2 + qt(2) * qt(2);
+	}
+	else
+	{
+		return qt(2) * qt(2);
+	}
+}
+
+Standard_Real 
+tnbLib::Geo_Tools::CalcSquareDistanceSegmentFromSegment_Eberly
+(
+	const Pnt3d& theP0, 
+	const Pnt3d& theP1,
+	const Pnt3d& theQ0, 
+	const Pnt3d& theQ1
+)
+{
+	EberlyLib::Segment S1, S2;
+
+	S1.end0 = theP0;
+	S1.end1 = theP1;
+
+	S2.end0 = theQ0;
+	S2.end1 = theQ1;
+
+	EberlyLib::Result r;
+
+	EberlyLib::CSMain(S1, S2, r);
+	return r.sqrDistance;
 }
 
 Standard_Real 

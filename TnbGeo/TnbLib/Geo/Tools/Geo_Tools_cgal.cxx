@@ -9,6 +9,7 @@
 #include <CGAL\Segment_3.h>
 #include <CGAL\Polygon_2.h>
 #include <CGAL\Plane_3.h>
+#include <CGAL\Triangle_3.h>
 #include <CGAL\intersections.h>
 
 
@@ -28,6 +29,7 @@ typedef Kernel::Point_3 Point_3;
 typedef Kernel::Vector_3 Vector_3;
 typedef Kernel::Triangle_3 Triangle_3;
 typedef Kernel::Intersect_2 Intersect_2;
+typedef Kernel::Intersect_3 Intersect_3;
 typedef CGAL::Polygon_2<Kernel> Polygon_2;
 //CGAL_HEADER_ONLY
 
@@ -111,6 +113,21 @@ namespace tnbLib
 		Triangle_3 tri(get_cgalPoint(t.P0()), get_cgalPoint(t.P1()), get_cgalPoint(t.P2()));
 		return std::move(tri);
 	}
+}
+
+Standard_Real 
+tnbLib::Geo_Tools::CalcSquareDistancePointFromTriangle_cgal
+(
+	const Pnt3d& thePoint,
+	const Pnt3d& theP0,
+	const Pnt3d& theP1,
+	const Pnt3d& theP2
+)
+{
+	auto pt = get_cgalPoint(thePoint);
+	Triangle_3 tri(get_cgalPoint(theP0), get_cgalPoint(theP1), get_cgalPoint(theP2));
+
+	return cgal_object.compute_squared_distance_2_object()(pt, tri);
 }
 
 Standard_Real 
@@ -235,6 +252,39 @@ tnbLib::Geo_Tools::HasIntersection_cgal
 	Segment_2 S2(Point_2(theP0.X(), theP0.Y()), Point_2(theP1.X(), theP1.Y()));
 
 	return cgal_object.do_intersect_2_object()(S1, S2);
+}
+
+Standard_Boolean 
+tnbLib::Geo_Tools::IsIntersectionSegmentTriangle_cgal
+(
+	const Pnt3d& theP0,
+	const Pnt3d& theP1,
+	const Pnt3d& theQ0,
+	const Pnt3d& theQ1,
+	const Pnt3d& theQ2
+)
+{
+	Segment_3 seg(get_cgalPoint(theP0), get_cgalPoint(theP1));
+	Triangle_3 tri(get_cgalPoint(theQ0), get_cgalPoint(theQ1), get_cgalPoint(theQ2));
+
+	return cgal_object.do_intersect_3_object()(seg, tri);
+}
+
+Standard_Boolean 
+tnbLib::Geo_Tools::IsIntersectionTwoTriangles_cgal
+(
+	const Pnt3d& theP0, 
+	const Pnt3d& theP1,
+	const Pnt3d& theP2, 
+	const Pnt3d& theQ0, 
+	const Pnt3d& theQ1,
+	const Pnt3d& theQ2
+)
+{
+	Triangle_3 tri0(get_cgalPoint(theP0), get_cgalPoint(theP1), get_cgalPoint(theP2));
+	Triangle_3 tri1(get_cgalPoint(theQ0), get_cgalPoint(theQ1), get_cgalPoint(theQ2));
+
+	return cgal_object.do_intersect_3_object()(tri0, tri1);
 }
 
 Standard_Boolean 
