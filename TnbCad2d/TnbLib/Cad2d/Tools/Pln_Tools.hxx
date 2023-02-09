@@ -398,6 +398,7 @@ namespace tnbLib
 		// It makes a wire from a vertex that belongs to a list of edges that defines a ring. [2/2/2022 Amir]
 		// - Make sure all vertices are manifold.
 		// - Warning! the sense of the edges may be changed.
+		// - Return a null pointer if not found a ring
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Wire>
 			RetrieveWire
 			(
@@ -406,6 +407,7 @@ namespace tnbLib
 
 		// It tracks a composite edge from a vertex of a ring. [2/2/2022 Amir]
 		// - Warning! the sense of the edges may be changed.
+		// - Return null pointer if not found a ring
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_CmpEdge> 
 			RetrieveCompoundEdge
 			(

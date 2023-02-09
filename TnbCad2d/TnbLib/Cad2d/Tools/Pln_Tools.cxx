@@ -1845,23 +1845,45 @@ namespace tnbLib
 			Next
 			(
 				const std::shared_ptr<Pln_Vertex>& theVtx,
-				const std::shared_ptr<Pln_Edge>& thePrior
+				const std::shared_ptr<Pln_Edge>& thePrior,
+				const Standard_Boolean throwExp
 			)
 		{
-			if (theVtx->IsRingPoint())
+			if (throwExp)
 			{
-				FatalErrorIn(FunctionSIG)
-					<< "Invalid Wire: the wire is not manifold" << endl
-					<< " nb. of edges: " << theVtx->NbEdges() << endl
-					<< abort(FatalError);
-			}
+				if (theVtx->IsRingPoint())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "Invalid Wire: the wire is not manifold" << endl
+						<< " nb. of edges: " << theVtx->NbEdges() << endl
+						<< abort(FatalError);
+				}
 
-			if (theVtx->NbEdges() NOT_EQUAL 2)
+				if (theVtx->NbEdges() NOT_EQUAL 2)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "Invalid Wire: the wire is not manifold" << endl
+						<< " nb. of edges: " << theVtx->NbEdges() << endl
+						<< abort(FatalError);
+				}
+			}
+			else
 			{
-				FatalErrorIn(FunctionSIG)
-					<< "Invalid Wire: the wire is not manifold" << endl
-					<< " nb. of edges: " << theVtx->NbEdges() << endl
-					<< abort(FatalError);
+				if (theVtx->IsRingPoint())
+				{
+					std::shared_ptr<Pln_Vertex> vtx;
+					std::shared_ptr<Pln_Edge> edge;
+					auto paired = std::make_pair(std::move(vtx), std::move(edge));
+					return std::move(paired);
+				}
+
+				if (theVtx->NbEdges() NOT_EQUAL 2)
+				{
+					std::shared_ptr<Pln_Vertex> vtx;
+					std::shared_ptr<Pln_Edge> edge;
+					auto paired = std::make_pair(std::move(vtx), std::move(edge));
+					return std::move(paired);
+				}	
 			}
 
 			std::vector<std::weak_ptr<Pln_Edge>> wEdges;
@@ -1910,18 +1932,34 @@ namespace tnbLib
 		static std::vector<std::shared_ptr<Pln_Edge>>
 			TrackWire
 			(
-				const std::shared_ptr<Pln_Vertex>& theVtx
+				const std::shared_ptr<Pln_Vertex>& theVtx,
+				const Standard_Boolean throwExp
 			)
 		{
 			std::vector<std::shared_ptr<Pln_Edge>> edges;
 
-			auto next = Next(theVtx, nullptr);
-			edges.push_back(next.second);
-
-			while (next.first NOT_EQUAL theVtx)
+			auto[vtx, edge] = Next(theVtx, nullptr, throwExp);
+			if (NOT throwExp)
 			{
-				next = Next(next.first, edges[edges.size() - 1]);
-				edges.push_back(next.second);
+				if (NOT vtx)
+				{
+					return std::vector<std::shared_ptr<Pln_Edge>>();
+				}
+			}
+			edges.push_back(std::move(edge));
+
+			while (vtx NOT_EQUAL theVtx)
+			{
+				auto[ivtx, iedge] = Next(vtx, edges.at(edges.size() - 1), throwExp);
+				if (NOT throwExp)
+				{
+					if (NOT vtx)
+					{
+						return std::vector<std::shared_ptr<Pln_Edge>>();
+					}
+				}
+				edges.push_back(std::move(iedge));
+				vtx = ivtx;
 			}
 			return std::move(edges);
 		}
@@ -2115,7 +2153,10 @@ tnbLib::Pln_Tools::RetrieveWire
 )
 {
 	auto cmpEdge = RetrieveCompoundEdge(theVtx);
-	Debug_Null_Pointer(cmpEdge);
+	if (NOT cmpEdge)
+	{
+		return nullptr;
+	}
 
 	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
 	Debug_Null_Pointer(wire);
@@ -2148,13 +2189,21 @@ tnbLib::Pln_Tools::RetrieveCompoundEdge
 		return std::move(cmpEdge);
 	}
 
-	auto cmpEdge = std::make_shared<Pln_CmpEdge>();
-	Debug_Null_Pointer(cmpEdge);
+	auto edges = retrieveWires::TrackWire(theVtx, Standard_False);
+	if (edges.size())
+	{
+		auto cmpEdge = std::make_shared<Pln_CmpEdge>();
+		Debug_Null_Pointer(cmpEdge);
 
-	cmpEdge->ChangeEdges() = retrieveWires::TrackWire(theVtx);
+		cmpEdge->ChangeEdges() = std::move(edges);
 
-	SameSense(cmpEdge);
-	return std::move(cmpEdge);
+		SameSense(cmpEdge);
+		return std::move(cmpEdge);
+	}
+	else
+	{
+		return nullptr;
+	}
 }
 
 void tnbLib::Pln_Tools::SameSense
@@ -2169,46 +2218,64 @@ void tnbLib::Pln_Tools::SameSense
 		return;
 	}
 
-	auto iter = edges.begin();
-	auto edge0 = (*iter);
-
-	iter++;
-
-	while (iter NOT_EQUAL edges.end())
+	if (edges.size() IS_EQUAL 2)
 	{
-		auto edge1 = (*iter);
+		auto edge0 = edges.at(0);
+		auto edge1 = edges.at(1);
 
-		std::shared_ptr<Pln_Vertex> vtx;
-		if (NOT Pln_Edge::IsConnected(edge0, edge1, vtx))
+		if (edge0->LastVtx() IS_EQUAL edge1->FirstVtx())
 		{
-			FatalErrorIn("void tnbLib::Pln_Tools::SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge)")
-				<< "Invalid CmpEdge: the two edges are not connected!" << endl
-				<< abort(FatalError);
+			return;
 		}
-
-		auto indx0 = edge0->GetPoint(vtx);
-		auto indx1 = edge1->GetPoint(vtx);
-
-		if (indx0 NOT_EQUAL Pln_Edge::edgePoint::last)
-		{
-			edge0->Reverse(Standard_True);
-		}
-
-		if (indx1 NOT_EQUAL Pln_Edge::edgePoint::first)
+		else
 		{
 			edge1->Reverse(Standard_True);
+			return;
 		}
-
-		if (edge0->Vertex(Pln_Edge::edgePoint::last) NOT_EQUAL edge1->Vertex(Pln_Edge::edgePoint::first))
-		{
-			FatalErrorIn("void tnbLib::Pln_Tools::SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge)")
-				<< "Invalid CmpEdge: the two edges are not consecutive" << endl
-				<< abort(FatalError);
-		}
+	}
+	else
+	{
+		auto iter = edges.begin();
+		auto edge0 = (*iter);
 
 		iter++;
 
-		edge0 = edge1;
+		while (iter NOT_EQUAL edges.end())
+		{
+			auto edge1 = (*iter);
+
+			std::shared_ptr<Pln_Vertex> vtx;
+			if (NOT Pln_Edge::IsConnected(edge0, edge1, vtx))
+			{
+				FatalErrorIn("void tnbLib::Pln_Tools::SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge)")
+					<< "Invalid CmpEdge: the two edges are not connected!" << endl
+					<< abort(FatalError);
+			}
+
+			auto indx0 = edge0->GetPoint(vtx);
+			auto indx1 = edge1->GetPoint(vtx);
+
+			if (indx0 NOT_EQUAL Pln_Edge::edgePoint::last)
+			{
+				edge0->Reverse(Standard_True);
+			}
+
+			if (indx1 NOT_EQUAL Pln_Edge::edgePoint::first)
+			{
+				edge1->Reverse(Standard_True);
+			}
+
+			if (edge0->Vertex(Pln_Edge::edgePoint::last) NOT_EQUAL edge1->Vertex(Pln_Edge::edgePoint::first))
+			{
+				FatalErrorIn("void tnbLib::Pln_Tools::SameSense(const std::shared_ptr<Pln_CmpEdge>& theEdge)")
+					<< "Invalid CmpEdge: the two edges are not consecutive" << endl
+					<< abort(FatalError);
+			}
+
+			iter++;
+
+			edge0 = edge1;
+		}
 	}
 }
 
