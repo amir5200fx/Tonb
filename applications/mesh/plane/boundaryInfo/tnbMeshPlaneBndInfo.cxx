@@ -23,6 +23,8 @@ namespace tnbLib
 	static bool loadTag = false;
 	static bool exeTag = false;
 
+	static double minTol = 1.0E-6;
+
 	static std::shared_ptr<Aft2d_SolutionDataBase> mySoluData;
 	static std::string myFileName;
 
@@ -33,6 +35,16 @@ namespace tnbLib
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
+	}
+
+	void setMinTol(double x)
+	{
+		minTol = x;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the min. of tolerance is set to: " << minTol << endl;
+		}
 	}
 
 	void loadFile(const std::string& name)
@@ -87,7 +99,7 @@ namespace tnbLib
 		std::vector<std::shared_ptr<Pln_Entity>> vertices;
 		plane->RetrieveCornersTo(vertices);
 
-		auto maxTol = 0.0;
+		auto maxTol = minTol;
 		for (const auto& x : vertices)
 		{
 			auto vtx = std::dynamic_pointer_cast<Pln_Vertex>(x);
@@ -192,6 +204,7 @@ namespace tnbLib
 		// settings [12/12/2021 Amir]
 
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
+		mod->add(chaiscript::fun([](double x)-> void {setMinTol(x); }), "setMinTol");
 
 		// operators [12/12/2021 Amir]
 
@@ -239,6 +252,7 @@ int main(int argc, char *argv[])
 
 				<< " # Settings: " << endl << endl
 
+				<< " - setMinTol(x)" << endl
 				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
 
 				<< " # Operators:" << endl << endl

@@ -1,13 +1,15 @@
 #include <Cad2d_Plane.hxx>
 #include <Pln_Curve.hxx>
 #include <Pln_Wire.hxx>
-#include <Pln_Edge.hxx>
+#include <Pln_Segment.hxx>
+#include <Pln_Ring.hxx>
 #include <Aft2d_PlnCurve.hxx>
 #include <Aft2d_PlnCurveAnIso.hxx>
 #include <Aft2d_PlnWire.hxx>
 #include <Aft2d_PlnWireAnIso.hxx>
 #include <Aft2d_RegionPlane.hxx>
 #include <Aft2d_RegionPlaneAnIso.hxx>
+#include <Aft2d_RegionPlaneUniMetric.hxx>
 #include <Aft2d_SolutionData.hxx>
 #include <Aft2d_SolutionDataAnIso.hxx>
 #include <Aft2d_Element.hxx>

@@ -83,7 +83,6 @@ namespace tnbLib
 					<< "no boundary edge has been detected!" << endl
 					<< abort(FatalError);
 			}
-
 			auto chain = Aft_Tools::RetrieveEdgeMesh(Aft_Tools::UpCast(boundaries));
 			auto mesh = Geo_Tools::Triangulation(*chain);
 

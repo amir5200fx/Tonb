@@ -339,7 +339,14 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create a solution data of the plane mesh." << endl;
+			Info << " This application is aimed to create a solution data of the plane mesh." << endl
+				<< endl
+				<< " # Subdirectories: " << endl
+				<< " - global (metric info)" << endl
+				<< " - curve (info)" << endl
+				<< " - sizeMap" << endl
+				<< " - plane" << endl
+				<< " - nodeCreator" << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
