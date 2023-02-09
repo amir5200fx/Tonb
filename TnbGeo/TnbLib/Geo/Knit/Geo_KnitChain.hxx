@@ -11,6 +11,9 @@
 #include <vector>
 #include <memory>
 
+//#include "Geo3d_GraphNode.hxx"
+//#include "Geo3d_KnitChainTraits.hxx"
+
 namespace tnbLib
 {
 
