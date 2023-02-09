@@ -601,6 +601,15 @@ void tnbLib::Cad2d_IdentRings::Attach
 	}
 }
 
+tnbLib::Cad2d_IdentRings::Cad2d_IdentRings
+( 
+	const std::vector<std::shared_ptr<Pln_Edge>>& theEdges 
+)
+	: theEdges_(theEdges)
+{
+	theCache_ = std::make_shared<Cad2d_IdentRingsCache>();
+}
+
 void tnbLib::Cad2d_IdentRings::Perform()
 {
 
