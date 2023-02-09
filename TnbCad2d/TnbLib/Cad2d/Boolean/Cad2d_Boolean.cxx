@@ -414,10 +414,11 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	Debug_If_Condition_Message(NOT subdivide->IsDone(), "the algorithm is not performed!");
 
+	/*std::cout << "nb of entities: " << intersection->NbEntities() << std::endl;
 	if (NOT intersection->NbEntities())
 	{
 		return std::vector<std::shared_ptr<Cad2d_Plane>>();
-	}
+	}*/
 
 	const auto& sub0 = subdivide->ModifiedPlane0();
 	const auto& sub1 = subdivide->ModifiedPlane1();
