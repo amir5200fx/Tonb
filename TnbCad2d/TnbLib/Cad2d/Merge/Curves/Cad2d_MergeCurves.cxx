@@ -5,6 +5,7 @@
 #include <Pln_Vertex.hxx>
 #include <Pln_Tools.hxx>
 #include <Geo_PrTree.hxx>
+#include <Geo_AdTree.hxx>
 #include <Entity2d_Box.hxx>
 #include <Global_Tools.hxx>
 #include <TnbError.hxx>
@@ -107,7 +108,7 @@ tnbLib::Cad2d_MergeCurves::CreateLinks
 ) const
 {
 	static auto insert_to_engine = [](
-		Geo_PrTree<std::shared_ptr<Node>>& engine,
+		Geo_AdTree<std::shared_ptr<Node>>& engine,
 		const std::shared_ptr<Pln_Vertex>& vtx,
 		const Standard_Real radius, const Standard_Real tol
 		)
@@ -170,7 +171,7 @@ tnbLib::Cad2d_MergeCurves::CreateLinks
 	const auto radius = AlgInfo()->Radius();
 	const auto tol = AlgInfo()->Tolerance();
 
-	Geo_PrTree<std::shared_ptr<Node>> engine;
+	Geo_AdTree<std::shared_ptr<Node>> engine;
 	engine.SetGeometryCoordFunc(&Node::GetCoord);
 	engine.SetGeometryRegion(domain.OffSet(1.0E-3 * domain.Diameter()));
 
@@ -192,6 +193,9 @@ tnbLib::Cad2d_MergeCurves::CreateLinks
 			Debug_Null_Pointer(n);
 
 			auto ring = std::make_shared<RingLink>(++k, std::move(n));
+			Debug_Null_Pointer(ring);
+
+			ring->SetCurve(x);
 			links.push_back(std::move(ring));
 		}
 		else
@@ -207,6 +211,9 @@ tnbLib::Cad2d_MergeCurves::CreateLinks
 			Debug_Null_Pointer(n1);
 
 			auto seg = std::make_shared<SegmentLink>(++k, std::move(n0), std::move(n1));
+			Debug_Null_Pointer(seg);
+
+			seg->SetCurve(x);
 			links.push_back(std::move(seg));
 		}
 	}
@@ -269,6 +276,7 @@ void tnbLib::Cad2d_MergeCurves::Perform()
 			<< "the curve list is empty!" << endl
 			<< abort(FatalError);
 	}
+
 	auto links = CreateLinks(Curves());
 	auto nodes = RetrieveNodes(links);
 
@@ -283,12 +291,15 @@ void tnbLib::Cad2d_MergeCurves::Perform()
 	for (const auto& x : links)
 	{
 		const auto& ed = x->Curve();
+		Debug_Null_Pointer(ed);
 
 		if (auto ring = std::dynamic_pointer_cast<RingLink>(x))
 		{
 			const auto& n = ring->GetNode();
+			Debug_Null_Pointer(n);
 
 			auto v = Global_Tools::Find(vertices, n->Index());
+			Debug_Null_Pointer(v);
 
 			v->InsertToEdges(ed->Index(), ed);
 
@@ -298,9 +309,13 @@ void tnbLib::Cad2d_MergeCurves::Perform()
 		{
 			const auto& n0 = seg->Node0();
 			const auto& n1 = seg->Node1();
+			Debug_Null_Pointer(n0);
+			Debug_Null_Pointer(n1);
 
 			auto v0 = Global_Tools::Find(vertices, n0->Index());
 			auto v1 = Global_Tools::Find(vertices, n1->Index());
+			Debug_Null_Pointer(v0);
+			Debug_Null_Pointer(v1);
 
 			v0->InsertToEdges(ed->Index(), ed);
 			v1->InsertToEdges(ed->Index(), ed);
