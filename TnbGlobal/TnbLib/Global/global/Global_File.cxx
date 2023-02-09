@@ -130,3 +130,20 @@ void tnbLib::file::CheckExtension(const std::string& e)
 			<< abort(FatalError);
 	}
 }
+
+void tnbLib::file::RemoveDirectory(const boost::filesystem::path& thePath)
+{
+	boost::filesystem::directory_iterator end;
+	for (boost::filesystem::directory_iterator it(thePath); it != end; ++it)
+	{
+		if (boost::filesystem::is_directory(*it))
+		{
+			RemoveDirectory(*it);
+		}
+		else
+		{
+			boost::filesystem::remove(*it);
+		}
+	}
+	remove(thePath);
+}

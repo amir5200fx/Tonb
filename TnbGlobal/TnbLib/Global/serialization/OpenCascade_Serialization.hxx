@@ -19,11 +19,44 @@ class Poly_Triangulation;
 class Poly_Triangle;
 class gp_Pnt;
 class gp_Pnt2d;
+class gp_Pln;
 
 namespace boost
 {
 	namespace serialization
 	{
+
+		//template<class Archive>
+		//void save(Archive& /*ar*/, const std::shared_ptr<gp_Pln>&, const unsigned int /*file_version*/)
+		//{
+		//	FatalErrorIn(FunctionSIG)
+		//		<< "this function is supposed to be not calling" << tnbLib::endl
+		//		<< tnbLib::abort(tnbLib::FatalError);
+		//}
+
+		//template<class Archive>
+		//void load(Archive& /*ar*/, std::shared_ptr<gp_Pln>&, const unsigned int /*file_version*/)
+		//{
+		//	FatalErrorIn(FunctionSIG)
+		//		<< "this function is supposed to be not calling" << tnbLib::endl
+		//		<< tnbLib::abort(tnbLib::FatalError);
+		//}
+
+		//template<>
+		//TnbGlobal_EXPORT void save<TNB_oARCH_TYPE>
+		//	(
+		//		TNB_oARCH_TYPE& ar,
+		//		const std::shared_ptr<gp_Pln>& pl,
+		//		const unsigned int file_version
+		//		);
+
+		//template<>
+		//TnbGlobal_EXPORT void load<TNB_iARCH_TYPE>
+		//	(
+		//		TNB_iARCH_TYPE& ar,
+		//		std::shared_ptr<gp_Pln>& pl, 
+		//		const unsigned int file_version
+		//		);
 
 		template<class Archive>
 		void save(Archive & /*ar*/, const Handle(Geom2d_Curve)&, const unsigned int /*version*/)
@@ -161,5 +194,6 @@ BOOST_SERIALIZATION_SPLIT_FREE(Handle(Geom2d_Curve))
 BOOST_SERIALIZATION_SPLIT_FREE(Handle(Geom_Curve))
 BOOST_SERIALIZATION_SPLIT_FREE(Handle(Geom_Surface))
 BOOST_SERIALIZATION_SPLIT_FREE(TopoDS_Shape)
+//BOOST_SERIALIZATION_SPLIT_FREE(gp_Pln)
 
 #endif // !_OpenCascade_Serialization_Header

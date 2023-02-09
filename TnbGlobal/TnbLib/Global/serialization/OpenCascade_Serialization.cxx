@@ -9,12 +9,45 @@
 #include <GeomTools.hxx>
 #include <istream>
 
+#include <gp_Pln.hxx>
 #include <Poly_Triangle.hxx>
 #include <Geom2d_Curve.hxx>
 #include <Geom_Curve.hxx>
 #include <Geom_Surface.hxx>
 #include <TopoDS_Shape.hxx>
 #include <BRepTools.hxx>
+
+//template<>
+//void boost::serialization::save
+//(
+//	TNB_oARCH_TYPE& ar, 
+//	const std::shared_ptr<gp_Pln>& pl,
+//	const unsigned int file_version
+//)
+//{
+//	Standard_Real a, b, c, d;
+//	pl->Coefficients(a, b, c, d);
+//	ar << a;
+//	ar << b;
+//	ar << c;
+//	ar << d;
+//}
+//
+//template<>
+//void boost::serialization::load
+//(
+//	TNB_iARCH_TYPE& ar,
+//	std::shared_ptr<gp_Pln>& pl,
+//	const unsigned int file_version
+//)
+//{
+//	Standard_Real a, b, c, d;
+//	ar >> a;
+//	ar >> b;
+//	ar >> c;
+//	ar >> d;
+//	pl = std::make_shared<gp_Pln>(a, b, c, d);
+//}
 
 template<>
 void boost::serialization::save

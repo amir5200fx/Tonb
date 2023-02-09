@@ -39,6 +39,8 @@ namespace tnbLib
 
 		template<class T>
 		T LoadFile(const std::string& name, const unsigned short verbose);
+
+		TnbGlobal_EXPORT void RemoveDirectory(const boost::filesystem::path&);
 	}
 }
 
