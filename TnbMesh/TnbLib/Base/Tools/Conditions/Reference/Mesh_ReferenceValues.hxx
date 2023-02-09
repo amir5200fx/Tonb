@@ -111,7 +111,17 @@ namespace tnbLib
 			return theSurfaceSize_;
 		}
 
+		auto& SurfaceSizeRef()
+		{
+			return theSurfaceSize_;
+		}
+
 		const auto& SurfaceCurvature() const
+		{
+			return theSurfaceCurvature_;
+		}
+
+		auto& SurfaceCurvatureRef()
 		{
 			return theSurfaceCurvature_;
 		}

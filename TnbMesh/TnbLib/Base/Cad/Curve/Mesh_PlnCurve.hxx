@@ -36,6 +36,7 @@ namespace tnbLib
 		std::shared_ptr<CurveType> theCurve_;
 		std::shared_ptr<Entity_Polygon<Point>> theMesh_;
 
+		Standard_Boolean theSense_;
 
 		//- private functions and operators
 
@@ -58,6 +59,7 @@ namespace tnbLib
 		//- default constructor
 
 		Mesh_PlnCurve()
+			: theSense_(Standard_True)
 		{}
 
 
@@ -68,6 +70,7 @@ namespace tnbLib
 			const std::shared_ptr<CurveType>& theCurve
 		)
 			: theCurve_(theCurve)
+			, theSense_(Standard_True)
 		{}
 
 		explicit Mesh_PlnCurve
@@ -75,6 +78,7 @@ namespace tnbLib
 			std::shared_ptr<CurveType>&& theCurve
 		)
 			: theCurve_(std::move(theCurve))
+			, theSense_(Standard_True)
 		{}
 
 		Mesh_PlnCurve
@@ -84,6 +88,7 @@ namespace tnbLib
 		)
 			: Global_Indexed(theIndex)
 			, theCurve_(theCurve)
+			, theSense_(Standard_True)
 		{}
 
 		Mesh_PlnCurve
@@ -93,6 +98,7 @@ namespace tnbLib
 		)
 			: Global_Indexed(theIndex)
 			, theCurve_(std::move(theCurve))
+			, theSense_(Standard_True)
 		{}
 
 
@@ -113,6 +119,11 @@ namespace tnbLib
 		}
 
 		//- public functions and operators
+
+		auto Sense() const
+		{
+			return theSense_;
+		}
 
 		Handle(geomType) Geometry() const;
 
@@ -172,6 +183,11 @@ namespace tnbLib
 		void SetMesh(std::shared_ptr<Entity_Polygon<Point>>&& theMesh)
 		{
 			theMesh_ = std::move(theMesh);
+		}
+
+		void SetSense(const Standard_Boolean theSense)
+		{
+			theSense_ = theSense;
 		}
 
 		void Reverse();

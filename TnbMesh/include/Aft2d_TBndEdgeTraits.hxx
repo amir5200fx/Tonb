@@ -4,6 +4,7 @@
 
 #include <Aft2d_BndEdgeTraits.hxx>
 #include <Geo2d_SizeFunction.hxx>
+#include <Geo2d_MetricPrcsrFwd.hxx>
 #include <Aft2d_PlnCurveFwd.hxx>
 
 namespace tnbLib
@@ -19,7 +20,7 @@ namespace tnbLib
 
 		typedef Aft2d_PlnCurve curveType;
 		typedef void surfType;
-		typedef void metricPrcsr;
+		typedef Geo2d_MetricPrcsr metricPrcsr;
 	};
 }
 

@@ -21,6 +21,7 @@
 #include <Aft2d_tSegmentEdgeUniMetricFwd.hxx>
 #include <Aft2d_PlnCurveFwd.hxx>
 #include <Aft2d_PlnCurveAnIsoFwd.hxx>
+#include <Aft2d_PlnCurveUniMetricFwd.hxx>
 #include <Aft2d_gPlnCurveSurfaceFwd.hxx>
 #include <Aft2d_tPlnCurveSurfaceFwd.hxx>
 #include <Aft_ElementsFwd.hxx>
@@ -29,6 +30,7 @@
 #include <Aft3d_EdgeFwd.hxx>
 #include <Geo2d_MetricPrcsrFwd.hxx>
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
+#include <Geo2d_MetricPrcsrUniMetricFwd.hxx>
 
 #include <Standard_TypeDef.hxx>
 
@@ -297,6 +299,14 @@ namespace tnbLib
 				const std::shared_ptr<Mesh_Curve_Info>& theInfo
 			);
 
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_SegmentEdgeUniMetric>>
+			RetrieveTopoMesh
+			(
+				const std::shared_ptr<Aft2d_PlnCurveUniMetric>& theCurve,
+				const std::shared_ptr<Geo2d_MetricPrcsrUniMetric>& thePrcsr,
+				const std::shared_ptr<Mesh_Curve_Info>& theInfo
+			);
+
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Aft2d_gSegmentEdge>>
 			RetrieveTopoMesh
 			(
@@ -339,6 +349,13 @@ namespace tnbLib
 			);
 
 		static TnbMesh_EXPORT void
+			MergeDangles
+			(
+				const std::vector<std::shared_ptr<Aft2d_SegmentEdgeUniMetric>>&,
+				const Standard_Real tol
+			);
+
+		static TnbMesh_EXPORT void
 			ActiveBoundaryEdges
 			(
 				const std::vector<std::shared_ptr<Aft2d_SegmentEdge>>&
@@ -348,6 +365,12 @@ namespace tnbLib
 			ActiveBoundaryEdges
 			(
 				const std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnIso>>&
+			);
+
+		static TnbMesh_EXPORT void
+			ActiveBoundaryEdges
+			(
+				const std::vector<std::shared_ptr<Aft2d_SegmentEdgeUniMetric>>&
 			);
 
 		static TnbMesh_EXPORT void 

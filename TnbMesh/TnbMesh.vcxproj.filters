@@ -2161,6 +2161,33 @@
     <Filter Include="TnbLib\Base\FrontAdaptor">
       <UniqueIdentifier>{3b702c13-9f0a-43aa-acdd-4c0872d3d103}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\GapCurve\Iso">
+      <UniqueIdentifier>{5874ab1c-4aa6-4b98-8b84-17de5b863c4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GapCurve\AnIso">
+      <UniqueIdentifier>{801c8fff-c650-48e4-88d0-4e4ce4a5a94f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\GapCurve\AnIso\UniMetric">
+      <UniqueIdentifier>{294fd2bd-d95a-4c04-a225-577a9e20496e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\Iso">
+      <UniqueIdentifier>{555d4dca-339f-484a-9863-04269c9c5f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso">
+      <UniqueIdentifier>{e7a7065d-520c-40c8-a023-ddc229fde5fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric">
+      <UniqueIdentifier>{e656cb71-0e78-4fa9-aa77-e8781fc5e69c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Node\Iso">
+      <UniqueIdentifier>{ca23537d-8c01-48ad-8750-6fb000e5b6f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso">
+      <UniqueIdentifier>{c4a8512f-84e3-4aec-ba6f-fe138d7907bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric">
+      <UniqueIdentifier>{8e389ec2-19e6-4c6c-a83d-9012a0539b6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5208,6 +5235,78 @@
     <ClInclude Include="TnbLib\Base\FrontAdaptor\Mesh_FrontAdaptor.hxx">
       <Filter>TnbLib\Base\FrontAdaptor</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\Iso\Cad2d_PlnGapCurve.hxx">
+      <Filter>TnbLib\Cad\GapCurve\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\Iso\Cad2d_PlnGapCurveFwd.hxx">
+      <Filter>TnbLib\Cad\GapCurve\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\AnIso\Cad2d_PlnGapCurveAnIso.hxx">
+      <Filter>TnbLib\Cad\GapCurve\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\AnIso\Cad2d_PlnGapCurveAnIsoFwd.hxx">
+      <Filter>TnbLib\Cad\GapCurve\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\AnIso\UniMetric\Cad2d_PlnGapCurveUniMetric.hxx">
+      <Filter>TnbLib\Cad\GapCurve\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\GapCurve\AnIso\UniMetric\Cad2d_PlnGapCurveUniMetricFwd.hxx">
+      <Filter>TnbLib\Cad\GapCurve\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\Iso\Aft2d_SegmentGapEdge.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\Iso\Aft2d_SegmentGapEdgeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\Iso\Aft2d_CornerGapNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\Iso\Aft2d_CornerGapNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\Iso\Aft2d_SegmentGapNode.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\Iso\Aft2d_SegmentGapNodeFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\Aft2d_CornerGapNodeAnIso.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\Aft2d_CornerGapNodeAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\Aft2d_SegmentGapNodeAnIso.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\Aft2d_SegmentGapNodeAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric\Aft2d_CornerGapNodeUniMetric.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric\Aft2d_CornerGapNodeUniMetricFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric\Aft2d_SegmentGapNodeUniMetric.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric\Aft2d_SegmentGapNodeUniMetricFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\Aft2d_SegmentGapEdgeAnIso.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\Aft2d_SegmentGapEdgeAnIsoFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric\Aft2d_SegmentGapEdgeUniMetric.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric\Aft2d_SegmentGapEdgeUniMetricFwd.hxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6778,6 +6877,42 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Facet\Adaptor\Aft_FacetAdaptor.cxx">
       <Filter>TnbLib\Aft\Entities\Facet\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\Iso\Aft2d_RegionPlane.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GapCurve\Iso\Cad2d_PlnGapCurve.cxx">
+      <Filter>TnbLib\Cad\GapCurve\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GapCurve\AnIso\Cad2d_PlnGapCurveAnIso.cxx">
+      <Filter>TnbLib\Cad\GapCurve\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\AnIso\Aft2d_RegionPlaneAnIso.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\GapCurve\AnIso\UniMetric\Cad2d_PlnGapCurveUniMetric.cxx">
+      <Filter>TnbLib\Cad\GapCurve\AnIso\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Region\Plane\AnIso\UniMetric\Aft2d_RegionPlaneUniMetric.cxx">
+      <Filter>TnbLib\Aft\Region\Plane\AnIso\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\Iso\Aft2d_SegmentGapEdge.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Node\Iso\Aft2d_CornerGapNode.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\Iso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\Aft2d_CornerGapNodeAnIso.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric\Aft2d_CornerGapNodeUniMetric.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\Aft2d_SegmentGapEdgeAnIso.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric\Aft2d_SegmentGapEdgeUniMetric.cxx">
+      <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,7 @@ namespace tnbLib
 
 		ar & theCurve_;
 		ar & theMesh_;
+		ar& theSense_;
 	}
 
 	template<>
@@ -34,5 +35,6 @@ namespace tnbLib
 
 		ar & theCurve_;
 		ar & theMesh_;
+		ar& theSense_;
 	}
 }
