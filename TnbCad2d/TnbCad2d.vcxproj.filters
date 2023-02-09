@@ -478,6 +478,12 @@
     <Filter Include="TnbLib\Cad2d\RepairWire">
       <UniqueIdentifier>{25b92e75-a0cd-4ec3-b643-5fa5362b9c7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\CmpPlane">
+      <UniqueIdentifier>{3184c65d-631c-4bfa-8f56-a6c496e3ff75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad2d\Entities\GapCurve">
+      <UniqueIdentifier>{afe6f991-1f46-430e-b08a-9550009000a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
@@ -911,6 +917,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Cad2d\RepairWire\Cad2d_RepairWire.hxx">
       <Filter>TnbLib\Cad2d\RepairWire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\GapCurve\Pln_GapCurve.hxx">
+      <Filter>TnbLib\Cad2d\Entities\GapCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad2d\Entities\GapCurve\Pln_GapCurveI.hxx">
+      <Filter>TnbLib\Cad2d\Entities\GapCurve</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1360,6 +1372,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad2d\RepairWire\Cad2d_RepairWire.cxx">
       <Filter>TnbLib\Cad2d\RepairWire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad2d\Entities\GapCurve\Pln_GapCurve.cxx">
+      <Filter>TnbLib\Cad2d\Entities\GapCurve</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

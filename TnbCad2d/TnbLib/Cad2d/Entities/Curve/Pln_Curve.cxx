@@ -118,6 +118,18 @@ tnbLib::Pln_Curve::Pln_Curve
 	plnCurveLib::CheckBounded(Geometry(), "Pln_Curve()");
 }
 
+std::shared_ptr<tnbLib::Pln_Curve>
+tnbLib::Pln_Curve::CreateCurve
+(
+	const Standard_Integer theIndex,
+	const word& theName,
+	const Handle(Geom2d_Curve)& theGeom
+) const
+{
+	auto curve = std::make_shared<Pln_Curve>(theIndex, theName, theGeom);
+	return std::move(curve);
+}
+
 Standard_Boolean 
 tnbLib::Pln_Curve::IsRing
 (
