@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Aft2d_Plane.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Adaptor\Aft2d_EdgeAdaptorIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Aft2d_Edge.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary\Aft2d_BndEdge.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary\Segment\Aft2d_SegmentEdge.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary\Segment\Aft2d_SegmentEdgeIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Interior\Aft2d_IntrEdge.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Interior\Aft2d_IntrEdgeIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Element\Aft2d_Element.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Element\Aft2d_ElementIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Adaptor\Aft2d_NodeAdaptor.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Adaptor\Aft2d_NodeAdaptorIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Aft2d_BndNode.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Corner\Aft2d_CornerNode.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Corner\Aft2d_CornerNodeIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Segment\Aft2d_SegmentNode.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Segment\Aft2d_SegmentNodeIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Inner\Aft2d_IntrNodeIO.cxx" />
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\GeoPrcsr\Uniform\Aft2d_UniSizeGeoPrcsr.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Aft2d_Plane.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Aft2d_PlaneI.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Adaptor\Aft2d_EdgeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Aft2d_Edge.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Aft2d_EdgeI.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary\Aft2d_BndEdge.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary\Segment\Aft2d_SegmentEdge.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Geometry\Aft2d_EdgeGeometry.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Interior\Aft2d_IntrEdge.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Element\Adaptor\Aft2d_ElementAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Element\Aft2d_Element.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Element\Aft2d_ElementI.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Entity\Aft2d_Entity.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Adaptor\Aft2d_NodeAdaptor.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_NodeI.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Aft2d_BndNode.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Corner\Aft2d_CornerNode.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Segment\Aft2d_SegmentNode.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Geometry\Aft2d_NodeGeometry.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Inner\Aft2d_IntrNode.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\GeoPrcsr\Aft2d_GeoPrcsr.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Aft\Plane\GeoPrcsr\Uniform\Aft2d_UniSizeGeoPrcsr.hxx" />
+    <ClInclude Include="TnbLib\Mesh\Entities\Entity\Mesh_Entity.hxx" />
+    <ClInclude Include="TnbLib\Mesh\module\Mesh_Module.hxx" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{829457f0-1702-44ea-b287-f07fb60c6a39}</ProjectGuid>
+    <RootNamespace>TnbMesh</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)d</TargetName>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\DE;$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\DE;$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbLegMesh_EXPORT_DEFINE</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Element\Adaptor;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Element;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Geometry;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary\Segment;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Interior;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Adaptor;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Geometry;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Segment;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Corner;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Inner;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Entity;$(ProjectDir)TnbLib\Mesh\Aft\Plane\GeoPrcsr\Uniform;$(ProjectDir)TnbLib\Mesh\Aft\Plane\GeoPrcsr;$(ProjectDir)TnbLib\Mesh\Aft\Plane;$(ProjectDir)TnbLib\Mesh\Module;$(ProjectDir)TnbLib\Mesh\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)legacy\include"
+if not exist "$(ProjectDir)include" mkdir "$(ProjectDir)include"
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(SolutionDir)legacy\include" /y
+for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)include" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbLegMesh_EXPORT_DEFINE</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Element\Adaptor;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Element;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Adaptor;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Geometry;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary\Segment;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Boundary;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge\Interior;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Edge;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Adaptor;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Geometry;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Segment;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary\Corner;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Boundary;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node\Inner;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Node;$(ProjectDir)TnbLib\Mesh\Aft\Plane\Entities\Entity;$(ProjectDir)TnbLib\Mesh\Aft\Plane\GeoPrcsr\Uniform;$(ProjectDir)TnbLib\Mesh\Aft\Plane\GeoPrcsr;$(ProjectDir)TnbLib\Mesh\Aft\Plane;$(ProjectDir)TnbLib\Mesh\Module;$(ProjectDir)TnbLib\Mesh\Entities\Entity;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
