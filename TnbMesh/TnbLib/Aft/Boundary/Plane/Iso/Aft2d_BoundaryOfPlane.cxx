@@ -8,8 +8,10 @@
 #include <Aft2d_BoundaryOfPlane_Info.hxx>
 #include <Aft2d_RegionPlane.hxx>
 #include <Aft_Tools.hxx>
+#include <Cad2d_PlnGapCurve.hxx>
 #include <Geo2d_MetricPrcsr.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
+#include <Geo2d_MetricPrcsrUniMetric.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -146,7 +148,15 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 			{
 				tnbLib::Info << "   Discretizing..." << endl;
 			}
-			auto mesh = Aft_Tools::RetrieveTopoMesh(x, MetricProcessor(), currentInfo);
+			std::vector<std::shared_ptr<Aft2d_SegmentEdge>> mesh;
+			if (x->IsGap())
+			{
+				mesh = Cad2d_PlnGapCurve::TopoMesh<Aft2d_SegmentEdge>(x, MetricProcessor(), currentInfo);
+			}
+			else
+			{
+				mesh = Aft_Tools::RetrieveTopoMesh(x, MetricProcessor(), currentInfo);
+			}
 
 			if (verbose)
 			{
@@ -196,7 +206,7 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 			boundaries.push_back(std::move(x));
 		}
 
-		for (const auto& x : boundaries)
+		for (const auto& x : Medges)
 		{
 			Debug_Null_Pointer(x);
 			auto& n0 = x->Node0();

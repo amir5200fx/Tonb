@@ -198,7 +198,13 @@ tnbLib::Aft_Tools::GetCoord3(const Aft3d_Element& theElement)
 std::tuple<tnbLib::Pnt3d, tnbLib::Pnt3d, tnbLib::Pnt3d, tnbLib::Pnt3d> 
 tnbLib::Aft_Tools::GetCoords(const Aft3d_Element& theElement)
 {
-	auto t = std::make_tuple(GetCoord0(theElement), GetCoord1(theElement), GetCoord2(theElement), GetCoord3(theElement));
+	auto t = std::make_tuple
+	(
+		GetCoord0(theElement),
+		GetCoord1(theElement), 
+		GetCoord2(theElement),
+		GetCoord3(theElement)
+	);
 	return std::move(t);
 }
 
@@ -684,7 +690,21 @@ tnbLib::Aft_Tools::RetrieveTopoMesh
 	const std::shared_ptr<Mesh_Curve_Info>& theInfo
 )
 {
-	auto segments = Aft2d_PlnCurveAnIso::TopoMesh<Aft2d_SegmentEdgeAnIso>(theCurve, thePrcsr, theInfo);
+	auto segments = Aft2d_PlnCurveAnIso::TopoMesh<Aft2d_SegmentEdgeAnIso>
+		(theCurve, thePrcsr, theInfo);
+	return std::move(segments);
+}
+
+std::vector<std::shared_ptr<tnbLib::Aft2d_SegmentEdgeUniMetric>>
+tnbLib::Aft_Tools::RetrieveTopoMesh
+(
+	const std::shared_ptr<Aft2d_PlnCurveUniMetric>& theCurve,
+	const std::shared_ptr<Geo2d_MetricPrcsrUniMetric>& thePrcsr,
+	const std::shared_ptr<Mesh_Curve_Info>& theInfo
+)
+{
+	auto segments = Aft2d_PlnCurveUniMetric::TopoMesh<Aft2d_SegmentEdgeUniMetric>
+		(theCurve, thePrcsr, theInfo);
 	return std::move(segments);
 }
 
@@ -706,14 +726,37 @@ void tnbLib::Aft_Tools::MergeDangles
 	Aft2d_SegmentEdgeAnIso::MergeDangles(theWire, tol);
 }
 
-void tnbLib::Aft_Tools::ActiveBoundaryEdges(const std::vector<std::shared_ptr<Aft2d_SegmentEdge>>& theEdges)
+void tnbLib::Aft_Tools::MergeDangles
+(
+	const std::vector<std::shared_ptr<Aft2d_SegmentEdgeUniMetric>>& theWire,
+	const Standard_Real tol
+)
+{
+	Aft2d_SegmentEdgeUniMetric::MergeDangles(theWire, tol);
+}
+
+void tnbLib::Aft_Tools::ActiveBoundaryEdges
+(
+	const std::vector<std::shared_ptr<Aft2d_SegmentEdge>>& theEdges
+)
 {
 	Aft2d_SegmentEdge::ActiveBoundaryEdges(UpCast(theEdges));
 }
 
-void tnbLib::Aft_Tools::ActiveBoundaryEdges(const std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnIso>>& theEdges)
+void tnbLib::Aft_Tools::ActiveBoundaryEdges
+(
+	const std::vector<std::shared_ptr<Aft2d_SegmentEdgeAnIso>>& theEdges
+)
 {
 	Aft2d_SegmentEdgeAnIso::ActiveBoundaryEdges(UpCast(theEdges));
+}
+
+void tnbLib::Aft_Tools::ActiveBoundaryEdges
+(
+	const std::vector<std::shared_ptr<Aft2d_SegmentEdgeUniMetric>>& theEdges
+)
+{
+	Aft2d_SegmentEdgeUniMetric::ActiveBoundaryEdges(UpCast(theEdges));
 }
 
 void tnbLib::Aft_Tools::CalcCood3d

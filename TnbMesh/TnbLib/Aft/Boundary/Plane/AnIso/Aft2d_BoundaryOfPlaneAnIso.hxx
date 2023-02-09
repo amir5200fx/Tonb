@@ -11,4 +11,22 @@
 #include <Aft2d_BoundaryOfPlaneAnIso_Info.hxx>
 #include <Aft2d_BoundaryOfPlaneAnIsoFwd.hxx>
 
+#ifdef _DEBUG
+namespace tnbLib
+{
+	template<>
+	TnbMesh_EXPORT void Aft2d_BoundaryOfPlaneAnIso::UpdateFront();
+}
+#endif // _DEBUG
+
+namespace tnbLib
+{
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_BoundaryOfPlaneAnIso::RemoveDegeneracies();
+
+	template<>
+	TnbMesh_EXPORT void Aft2d_BoundaryOfPlaneAnIso::Perform();
+}
+
 #endif // !_Aft2d_BoundaryOfPlaneAnIso_Header

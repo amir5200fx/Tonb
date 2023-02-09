@@ -21,6 +21,11 @@ tnbLib::Aft2d_PlnCurveUniMetric::TopoMesh<tnbLib::Aft2d_SegmentEdgeUniMetric>
 	auto chain = theCurve->Mesh(theMap, theInfo);
 	Debug_Null_Pointer(chain);
 
+	if (NOT theCurve->Sense())
+	{
+		chain->Reverse();
+	}
+
 	const auto& sizeMap = *theMap;
 	auto edges = Aft2d_SegmentEdgeUniMetric::GetTopology(*chain, theCurve);
 
