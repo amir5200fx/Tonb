@@ -9,9 +9,12 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-void tnbLib::SeriesProps_WagenB_Section::Perform()
+void tnbLib::SeriesProps_WagenB_Section::Perform
+(
+	const std::shared_ptr<Geo_xDistb>& theDistb
+)
 {
-	if (NOT DistbFun())
+	if (NOT theDistb)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no distb. fun. has been loaded!" << endl
@@ -25,10 +28,10 @@ void tnbLib::SeriesProps_WagenB_Section::Perform()
 	const auto& v2Table = *seriesProps::gl_wagenB_V2_values;
 
 	std::vector<Pnt2d> faces, backs;
-	faces.reserve(DistbFun()->Size());
-	backs.reserve(DistbFun()->Size());
+	faces.reserve(theDistb->Size());
+	backs.reserve(theDistb->Size());
 
-	for (auto x : DistbFun()->Values())
+	for (auto x : theDistb->Values())
 	{
 		auto v1 = v1Table.Value(Radius(), x);
 		auto v2 = v2Table.Value(Radius(), x);
@@ -41,8 +44,8 @@ void tnbLib::SeriesProps_WagenB_Section::Perform()
 			auto yface = v1 * dt;
 			auto yback = (v1 + v2)*dt + TrailingThick();
 
-			Pnt2d pface(x, yface);
-			Pnt2d pback(x, yback);
+			Pnt2d pface(x * (Chord() - B()), yface);
+			Pnt2d pback(x * (Chord() - B()), yback);
 
 			faces.push_back(std::move(pface));
 			backs.push_back(std::move(pback));
@@ -55,8 +58,8 @@ void tnbLib::SeriesProps_WagenB_Section::Perform()
 			auto yface = v1 * dt;
 			auto yback = (v1 + v2)*dt + LeadingThick();
 
-			Pnt2d pface(x, yface);
-			Pnt2d pback(x, yback);
+			Pnt2d pface(x * B(), yface);
+			Pnt2d pback(x * B(), yback);
 
 			faces.push_back(std::move(pface));
 			backs.push_back(std::move(pback));

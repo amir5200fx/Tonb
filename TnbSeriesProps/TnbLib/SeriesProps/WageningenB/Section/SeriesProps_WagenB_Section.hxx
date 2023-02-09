@@ -27,11 +27,13 @@ namespace tnbLib
 
 		// inputs [4/28/2022 Amir]
 
-		std::shared_ptr<Geo_xDistb> theDistb_;
-
 		Standard_Real theLeadThick_;
 		Standard_Real theTrailThick_;
 		Standard_Real theMaxThick_;
+
+		Standard_Real theChord_;
+		Standard_Real theA_;
+		Standard_Real theB_;
 
 		Standard_Real theRadius_;
 
@@ -62,43 +64,36 @@ namespace tnbLib
 			, theTrailThick_(0)
 			, theMaxThick_(0)
 			, theRadius_(0)
+			, theChord_(0)
+			, theA_(0)
+			, theB_(0)
 		{}
 
 
 		// constructors [4/28/2022 Amir]
 
-		explicit SeriesProps_WagenB_Section
-		(
-			const std::shared_ptr<Geo_xDistb>& theFun
-		)
-			: theDistb_(theFun)
-			, theLeadThick_(0)
-			, theTrailThick_(0)
-			, theMaxThick_(0)
-			, theRadius_(0)
-		{}
-
 		SeriesProps_WagenB_Section
 		(
-			const std::shared_ptr<Geo_xDistb>& theFun,
 			const Standard_Real theLET,
 			const Standard_Real theTET, 
 			const Standard_Real theMaxT,
+			const Standard_Real theChord,
+			const Standard_Real theA,
+			const Standard_Real theB,
 			const Standard_Real rPerR
 		)
-			: theDistb_(theFun)
-			, theLeadThick_(theLET)
+			: theLeadThick_(theLET)
 			, theTrailThick_(theTET)
 			, theMaxThick_(theMaxT)
+			, theChord_(theChord)
+			, theA_(theA)
+			, theB_(theB)
 			, theRadius_(rPerR)
 		{}
 
+
 		// public functions and operators [4/28/2022 Amir]
 
-		const auto& DistbFun() const
-		{
-			return theDistb_;
-		}
 
 		auto LeadingThick() const
 		{
@@ -113,6 +108,21 @@ namespace tnbLib
 		auto MaxThick() const
 		{
 			return theMaxThick_;
+		}
+
+		auto Chord() const
+		{
+			return theChord_;
+		}
+
+		auto A() const
+		{
+			return theA_;
+		}
+
+		auto B() const
+		{
+			return theB_;
 		}
 
 		auto Radius() const
@@ -130,12 +140,7 @@ namespace tnbLib
 			return theBack_;
 		}
 
-		TnbSeriesProps_EXPORT void Perform();
-
-		void SetDistbFun(const std::shared_ptr<Geo_xDistb>& theFun)
-		{
-			theDistb_ = theFun;
-		}
+		TnbSeriesProps_EXPORT void Perform(const std::shared_ptr<Geo_xDistb>& theDistb);
 
 		void SetLeadingThick(const Standard_Real theValue)
 		{
@@ -155,6 +160,21 @@ namespace tnbLib
 		void SetRadius(const Standard_Real rPerR)
 		{
 			theRadius_ = rPerR;
+		}
+
+		void SetChord(const Standard_Real theChord)
+		{
+			theChord_ = theChord;
+		}
+
+		void SetA(const Standard_Real theA)
+		{
+			theA_ = theA;
+		}
+
+		void SetB(const Standard_Real theB)
+		{
+			theB_ = theB;
 		}
 	};
 }

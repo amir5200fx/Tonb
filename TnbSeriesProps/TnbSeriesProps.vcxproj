@@ -113,10 +113,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\TablePlus3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Tools;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function\Linear;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section;$(ProjectDir)TnbLib\SeriesProps\WageningenB;$(ProjectDir)TnbLib\SeriesProps\Entity;$(ProjectDir)TnbLib\SeriesProps\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\TablePlus3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Tools;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function\Linear;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section;$(ProjectDir)TnbLib\SeriesProps\WageningenB;$(ProjectDir)TnbLib\SeriesProps\EdgeThick\ZeroDistb;$(ProjectDir)TnbLib\SeriesProps\EdgeThick;$(ProjectDir)TnbLib\SeriesProps\Entity;$(ProjectDir)TnbLib\SeriesProps\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbSeriesProps_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,10 +130,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\TablePlus3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Tools;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function\Linear;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section;$(ProjectDir)TnbLib\SeriesProps\WageningenB;$(ProjectDir)TnbLib\SeriesProps\Entity;$(ProjectDir)TnbLib\SeriesProps\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\TablePlus3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Tools;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function\Linear;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section;$(ProjectDir)TnbLib\SeriesProps\WageningenB;$(ProjectDir)TnbLib\SeriesProps\EdgeThick\ZeroDistb;$(ProjectDir)TnbLib\SeriesProps\EdgeThick;$(ProjectDir)TnbLib\SeriesProps\Entity;$(ProjectDir)TnbLib\SeriesProps\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbSeriesProps_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -184,10 +186,11 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\TablePlus3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Tools;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function\Linear;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section;$(ProjectDir)TnbLib\SeriesProps\WageningenB;$(ProjectDir)TnbLib\SeriesProps\Entity;$(ProjectDir)TnbLib\SeriesProps\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\TablePlus3Bladed;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade\Dimensions;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Blade;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Tools;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function\Linear;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\Function;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\Interpolate;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV2;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section\TableV1;$(ProjectDir)TnbLib\SeriesProps\WageningenB\Section;$(ProjectDir)TnbLib\SeriesProps\WageningenB;$(ProjectDir)TnbLib\SeriesProps\EdgeThick\ZeroDistb;$(ProjectDir)TnbLib\SeriesProps\EdgeThick;$(ProjectDir)TnbLib\SeriesProps\Entity;$(ProjectDir)TnbLib\SeriesProps\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbSeriesProps_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -197,6 +200,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\SeriesProps\EdgeThick\SeriesProps_EdgeThick.hxx" />
+    <ClInclude Include="TnbLib\SeriesProps\EdgeThick\ZeroDistb\SeriesProps_EdgeThick_ZeroDistb.hxx" />
     <ClInclude Include="TnbLib\SeriesProps\Entity\SeriesProps_Entity.hxx" />
     <ClInclude Include="TnbLib\SeriesProps\module\SeriesProps_Module.hxx" />
     <ClInclude Include="TnbLib\SeriesProps\WageningenB\Blade\Dimensions\SeriesProps_WagenB_Dimensions.hxx" />
@@ -216,6 +221,7 @@
     <ClCompile Include="TnbLib\SeriesProps\Entity\SeriesProps_Entity.cxx" />
     <ClCompile Include="TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed\SeriesProps_WagenB_TableThreeBladed.cxx" />
     <ClCompile Include="TnbLib\SeriesProps\WageningenB\Blade\Dimensions\TablePlus3Bladed\SeriesProps_WagenB_TablePlusThreeBladed.cxx" />
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Blade\SeriesProps_WagenBBlade.cxx" />
     <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\SeriesProps_TabulatedWagenB.cxx" />
     <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\V1\SeriesProps_TabulatedWagenB_V1.cxx" />
     <ClCompile Include="TnbLib\SeriesProps\WageningenB\Section\Interpolate\V2\SeriesProps_TabulatedWagenB_V2.cxx" />

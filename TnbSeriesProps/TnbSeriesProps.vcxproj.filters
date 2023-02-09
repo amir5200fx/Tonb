@@ -52,6 +52,12 @@
     <Filter Include="TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table">
       <UniqueIdentifier>{50e9ec08-84c7-4b7b-abd3-74f90fc5c53e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SeriesProps\EdgeThick">
+      <UniqueIdentifier>{84ba2013-7798-4e89-8fb5-4ac31f3f0770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SeriesProps\EdgeThick\ZeroDistb">
+      <UniqueIdentifier>{112451d7-40bd-4799-a7cb-5f1356e778f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SeriesProps\Entity\SeriesProps_Entity.hxx">
@@ -96,6 +102,12 @@
     <ClInclude Include="TnbLib\SeriesProps\WageningenB\Blade\SeriesProps_WagenBBlade.hxx">
       <Filter>TnbLib\SeriesProps\WageningenB\Blade</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\EdgeThick\SeriesProps_EdgeThick.hxx">
+      <Filter>TnbLib\SeriesProps\EdgeThick</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SeriesProps\EdgeThick\ZeroDistb\SeriesProps_EdgeThick_ZeroDistb.hxx">
+      <Filter>TnbLib\SeriesProps\EdgeThick\ZeroDistb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\SeriesProps\Entity\SeriesProps_Entity.cxx">
@@ -127,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed\SeriesProps_WagenB_TableThreeBladed.cxx">
       <Filter>TnbLib\SeriesProps\WageningenB\Blade\Dimensions\Table3Bladed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SeriesProps\WageningenB\Blade\SeriesProps_WagenBBlade.cxx">
+      <Filter>TnbLib\SeriesProps\WageningenB\Blade</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
