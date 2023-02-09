@@ -100,6 +100,9 @@
     <Filter Include="TnbLib\NumAlg\Optimization\NelderMead\Func">
       <UniqueIdentifier>{9a9af689-4a5b-4afa-beba-23e3d6dcabde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\NumAlg\Optimization\GA">
+      <UniqueIdentifier>{66129e10-3753-418b-a4bd-8f5cb36d3f55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.hxx">
@@ -195,6 +198,12 @@
     <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\NumAlg_NelderMeadI.hxx">
       <Filter>TnbLib\NumAlg\Optimization\NelderMead</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Optimization\GA\NumAlg_GA.hxx">
+      <Filter>TnbLib\NumAlg\Optimization\GA</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Optimization\GA\NumAlg_GAI.hxx">
+      <Filter>TnbLib\NumAlg\Optimization\GA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\NumAlg\Integration\Function\NumAlg_IntegFunc.cxx">
@@ -244,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\NumAlg\Optimization\NelderMead\NumAlg_NelderMead.cxx">
       <Filter>TnbLib\NumAlg\Optimization\NelderMead</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\NumAlg\Optimization\GA\NumAlg_GA.cxx">
+      <Filter>TnbLib\NumAlg\Optimization\GA</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

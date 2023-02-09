@@ -20,6 +20,8 @@ namespace tnbLib
 		static double Randreal() { return rand() / (double(RAND_MAX) + 1); }
 		static double Randreal(double max) { return Randreal()*max; }
 		static double Randreal(double low, double high) { return low + Randreal()*(high - low); }
+
+		static void InitRand() { srand((int)(time(NULL))); }
 	};
 }
 
