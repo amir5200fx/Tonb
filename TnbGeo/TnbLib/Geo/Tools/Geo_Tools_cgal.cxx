@@ -435,6 +435,44 @@ tnbLib::Geo_Tools::Intersection_cgal
 	}
 }
 
+std::shared_ptr<tnbLib::Geo_Tools::IntersectEntity2d>
+tnbLib::Geo_Tools::Intersection_cgal
+(
+	const Entity2d_LineRef& theLine0,
+	const Entity2d_LineRef& theLine1
+)
+{
+	auto line0 = get_cgalLine(theLine0);
+	auto line1 = get_cgalLine(theLine1);
+
+	CGAL::cpp11::result_of<Intersect_2(Line_2, Line_2)>::type
+		result = intersection(line0, line1);
+	if (result)
+	{
+		if (const Line_2* l = boost::get<Line_2>(&*result))
+		{
+			auto dir = get_Dir(l->direction());
+			auto pt = get_Point(l->point());
+
+			Entity2d_Line line(std::move(pt), std::move(dir));
+			auto ent = std::make_shared<LineIntersectEntity2d>(std::move(line));
+			return std::move(ent);
+		}
+		else
+		{
+			const Point_2* p = boost::get<Point_2>(&*result);
+			auto pt = get_Point(*p);
+			auto ent = std::make_shared<PointIntersectEntity2d>(std::move(pt));
+			return std::move(ent);
+		}
+	}
+	else
+	{
+		auto ent = std::make_shared<IntersectEntity2d>();
+		return std::move(ent);
+	}
+}
+
 std::vector<tnbLib::Pnt2d> 
 tnbLib::Geo_Tools::Intersecction_cgal
 (

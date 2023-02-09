@@ -254,3 +254,35 @@ void boost::serialization::load
 	ar >> d;
 	s = gp_Pln(p, d);
 }
+
+template<>
+void boost::serialization::save
+(
+	TNB_oARCH_TYPE& ar,
+	const std::shared_ptr<gp_Pln>& sr,
+	const unsigned int version
+)
+{
+	Standard_Real a, b, c, d;
+	sr->Coefficients(a, b, c, d);
+	ar << a;
+	ar << b;
+	ar << c;
+	ar << d;
+}
+
+template<>
+void boost::serialization::load
+(
+	TNB_iARCH_TYPE& ar,
+	std::shared_ptr<gp_Pln>& s,
+	const unsigned int version
+)
+{
+	Standard_Real a, b, c, d;
+	ar >> a;
+	ar >> b;
+	ar >> c;
+	ar >> d;
+	s = std::make_shared<gp_Pln>(a, b, c, d);
+}

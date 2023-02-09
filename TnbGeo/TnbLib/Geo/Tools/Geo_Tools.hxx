@@ -699,6 +699,13 @@ namespace tnbLib
 				const Entity2d_Line&
 			);
 
+		static TnbGeo_EXPORT std::shared_ptr<IntersectEntity2d> 
+			Intersection_cgal
+			(
+				const Entity2d_LineRef&,
+				const Entity2d_LineRef&
+			);
+
 		static TnbGeo_EXPORT std::vector<Pnt2d> 
 			Intersecction_cgal
 			(

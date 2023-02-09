@@ -503,6 +503,38 @@ namespace boost
 				gp_Pln& s,
 				const unsigned int version
 				);
+
+		template<class Archive>
+		void save(Archive& ar, const std::shared_ptr<gp_Pln>&, const unsigned int)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<class Archive>
+		void load(Archive& ar, std::shared_ptr<gp_Pln>&, const unsigned int)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "this function is supposed to be not calling" << tnbLib::endl
+				<< tnbLib::abort(tnbLib::FatalError);
+		}
+
+		template<>
+		TnbGeo_EXPORT void save<TNB_oARCH_TYPE>
+			(
+				TNB_oARCH_TYPE& ar,
+				const std::shared_ptr<gp_Pln>& s,
+				const unsigned int version
+				);
+
+		template<>
+		TnbGeo_EXPORT void load<TNB_iARCH_TYPE>
+			(
+				TNB_iARCH_TYPE& ar,
+				std::shared_ptr<gp_Pln>& s,
+				const unsigned int version
+				);
 	}
 }
 
@@ -526,5 +558,6 @@ BOOST_SERIALIZATION_SPLIT_FREE(Poly_Array1OfTriangle)
 BOOST_SERIALIZATION_SPLIT_FREE(TColgp_Array1OfPnt2d)
 BOOST_SERIALIZATION_SPLIT_FREE(TColgp_Array1OfPnt)
 BOOST_SERIALIZATION_SPLIT_FREE(gp_Pln)
+BOOST_SERIALIZATION_SPLIT_FREE(std::shared_ptr<gp_Pln>)
 
 #endif // !_Geo_Serialization_Header
