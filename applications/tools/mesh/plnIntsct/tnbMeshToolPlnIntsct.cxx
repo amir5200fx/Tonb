@@ -54,7 +54,7 @@ namespace tnbLib
 		file::SaveTo(myEntities, name + extension, verbose);
 	}
 
-	auto loadPlane()
+	void loadPlane()
 	{
 		checkFolder("plane");
 
@@ -63,17 +63,50 @@ namespace tnbLib
 		// change the current path [2/6/2023 Payvand]
 		boost::filesystem::current_path(currentPath.string() + R"(\plane)");
 
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), ".gpln").string();
+		if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
+			fileName fn(name + ".PATH");
 
-		auto plane = file::LoadFile<std::shared_ptr<gp_Pln>>(name + ".gpln", verbose);
+			std::ifstream myFile;
+			myFile.open(fn);
+
+			std::string address;
+			std::getline(myFile, address);
+
+			// change the current path [2/6/2023 Payvand]
+			boost::filesystem::current_path(address);
+
+			{
+				auto name = file::GetSingleFile(boost::filesystem::current_path(), ".gpln").string();
+
+				myPlane = file::LoadFile<std::shared_ptr<gp_Pln>>(name + ".gpln", verbose);
+				if (NOT myPlane)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "null plane has been detected" << endl
+						<< abort(FatalError);
+				}
+			}
+		}
+		else
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".gpln").string();
+
+			myPlane = file::LoadFile<std::shared_ptr<gp_Pln>>(name + ".gpln", verbose);
+			if (NOT myPlane)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "null plane has been detected" << endl
+					<< abort(FatalError);
+			}
+		}
 
 		//- change back the current path
 		boost::filesystem::current_path(currentPath);
-
-		return std::move(plane);
 	}
 
-	auto loadMesh()
+	void loadMesh()
 	{
 		checkFolder("mesh");
 
@@ -82,26 +115,53 @@ namespace tnbLib
 		// change the current path [2/6/2023 Payvand]
 		boost::filesystem::current_path(currentPath.string() + R"(\mesh)");
 
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
-
-		auto mesh = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
-		if (NOT mesh)
+		if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
 		{
-			FatalErrorIn(FunctionSIG)
-				<< " the mesh file is null!" << endl
-				<< abort(FatalError);
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
+			fileName fn(name + ".PATH");
+
+			std::ifstream myFile;
+			myFile.open(fn);
+
+			std::string address;
+			std::getline(myFile, address);
+
+			// change the current path [2/6/2023 Payvand]
+			boost::filesystem::current_path(address);
+
+			{
+				auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
+
+				myTris = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
+				if (NOT myTris)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< " the mesh file is null!" << endl
+						<< abort(FatalError);
+				}
+			}
+		}
+		else
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
+
+			myTris = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
+			if (NOT myTris)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " the mesh file is null!" << endl
+					<< abort(FatalError);
+			}
 		}
 
 		//- change back the current path
 		boost::filesystem::current_path(currentPath);
-
-		return std::move(mesh);
 	}
 
 	void loadFiles()
 	{
-		myPlane = loadPlane();
-		myTris = loadMesh();
+		loadPlane();
+		loadMesh();
 
 		loadTag = true;
 	}
