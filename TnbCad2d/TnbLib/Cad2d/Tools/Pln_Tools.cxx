@@ -409,6 +409,16 @@ tnbLib::Pln_Tools::MakeWire
 
 		ring->SetIndex(1);
 
+		auto info = std::make_shared<Geo_ApprxCurve_Info>();
+		Debug_Null_Pointer(info);
+
+		auto box = ring->BoundingBox(0);
+
+		info->SetAngle(2.0);
+		info->SetApprox(1.0E-4 * box.Diameter());
+
+		ring->Approx(info);
+
 		auto wire = MakeWire(ring);
 
 		return std::move(wire);
