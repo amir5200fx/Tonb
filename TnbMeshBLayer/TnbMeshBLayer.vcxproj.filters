@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{88704497-df1e-47fa-b61a-534723fd7b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer">
+      <UniqueIdentifier>{f9a26c6d-b826-437f-ad99-f21b62135935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\module">
+      <UniqueIdentifier>{2c3db21b-b657-4552-a0b7-590ea80a6ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d">
+      <UniqueIdentifier>{81436a91-b51d-4ca4-b56e-05b394c0b4b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities">
+      <UniqueIdentifier>{af25fcaa-0566-4cb2-bbc6-36c0061fac68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Node">
+      <UniqueIdentifier>{e7cbb4c9-7b13-4330-8cd8-708c7266d8f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Edge">
+      <UniqueIdentifier>{3abdcba7-077c-45bb-9064-30765e39aff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Entity">
+      <UniqueIdentifier>{c94193db-761e-4466-a50c-8f00bef07cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Node\Adaptor">
+      <UniqueIdentifier>{85b8c968-7404-4c9d-838d-14298905f13d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Node\Boundary">
+      <UniqueIdentifier>{ac3dabfe-4090-4f33-917b-db4785fd66cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Segment">
+      <UniqueIdentifier>{a7c1bdf0-016e-417f-b10c-7f47b2f1e48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Corner">
+      <UniqueIdentifier>{41960ad7-8416-42ec-9d44-a334fb235680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Edge\Boundary">
+      <UniqueIdentifier>{8218423f-35c5-4513-96f6-6fa89a9033a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment">
+      <UniqueIdentifier>{f10f6984-40e3-4190-967f-baf01486d415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Node\Inner">
+      <UniqueIdentifier>{967db1f6-213f-44f7-90b5-dd7eee09e6c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Edge\Inner">
+      <UniqueIdentifier>{f129aeba-1454-4c3a-95b2-c8bba63c9249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\SizeMap">
+      <UniqueIdentifier>{54ae9aec-9c6e-4724-bd28-ddba6433918c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Tools">
+      <UniqueIdentifier>{215499a9-2428-49e0-89f1-0a450bcc77f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\AdvLayer">
+      <UniqueIdentifier>{c3af35b5-a0af-4241-910c-919634a8a3ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\AdvLayer\NodeList">
+      <UniqueIdentifier>{fa6764a0-fe68-4f8b-a0a3-b528861522d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\AdvLayer\NodeSet">
+      <UniqueIdentifier>{52bbba50-dde4-4357-a5a7-17a5ab391e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\AdvLayer\NodeCondition">
+      <UniqueIdentifier>{570f22e3-8f92-4b63-93d2-d9b379b8219f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\AdvLayer\EdgeSet">
+      <UniqueIdentifier>{65ba28f3-31be-4eeb-87f1-d5fd76ac95f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\AdvLayer\ElementSet">
+      <UniqueIdentifier>{1d71d6af-35d3-4d89-9eee-ecd30398b7eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Entities\Element">
+      <UniqueIdentifier>{5e6fdb2a-adf1-467d-8750-0021b6c1a9d5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\BLayer\module\MeshBLayer_Module.hxx">
+      <Filter>TnbLib\BLayer\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Edge\MeshBLayer2d_Edge.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Entity\MeshBLayer2d_Entity.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Adaptor\MeshBLayer2d_NodeAdaptor.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Boundary\MeshBLayer2d_BndNode.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Corner\MeshBLayer2d_CornerNode.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Boundary\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Segment\MeshBLayer2d_SegmentNode.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Boundary\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Edge\Boundary\MeshBLayer2d_BndEdge.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Inner\MeshBLayer2d_InnerNode.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Inner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Edge\Inner\MeshBLayer2d_InnerEdge.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge\Inner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment\MeshBLayer2d_SegmentEdge.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\AdvLayer\MeshBLayer2d_AdvLayer.hxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\AdvLayer\NodeList\MeshBLayer2d_AdvLayer_NodeList.hxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\NodeList</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\AdvLayer\NodeSet\MeshBLayer2d_AdvLayer_NodeSet.hxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\NodeSet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Tools\MeshBLayer2d_Tools.hxx">
+      <Filter>TnbLib\BLayer\2d\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\AdvLayer\NodeCondition\MeshBLayer2d_AdvLayer_NodeCondition.hxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\NodeCondition</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\AdvLayer\EdgeSet\MeshBLayer2d_AdvLayer_EdgeSet.hxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\EdgeSet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\AdvLayer\ElementSet\MeshBLayer2d_AdvLayer_ElementSet.hxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\ElementSet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Entities\Element\MeshBLayer2d_Element.hxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Element</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Edge\MeshBLayer2d_Edge.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Boundary\MeshBLayer2d_BndNode.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Segment\MeshBLayer2d_SegmentNode.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Corner\MeshBLayer2d_CornerNode.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Boundary\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Inner\MeshBLayer2d_InnerNode.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Inner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Edge\Inner\MeshBLayer2d_InnerEdge.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge\Inner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Edge\Boundary\MeshBLayer2d_BndEdge.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment\MeshBLayer2d_SegmentEdge.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Adaptor\MeshBLayer2d_NodeAdaptor.cxx">
+      <Filter>TnbLib\BLayer\2d\Entities\Node\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\AdvLayer\MeshBLayer2d_AdvLayer.cxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\AdvLayer\NodeSet\MeshBLayer2d_AdvLayer_NodeSet.cxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\NodeSet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Tools\MeshBLayer2d_Tools.cxx">
+      <Filter>TnbLib\BLayer\2d\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\AdvLayer\EdgeSet\MeshBLayer2d_AdvLayer_EdgeSet.cxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\EdgeSet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\AdvLayer\ElementSet\MeshBLayer2d_AdvLayer_ElementSet.cxx">
+      <Filter>TnbLib\BLayer\2d\AdvLayer\ElementSet</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
