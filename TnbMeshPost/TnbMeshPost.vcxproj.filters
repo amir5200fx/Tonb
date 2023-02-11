@@ -91,6 +91,15 @@
     <Filter Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric">
       <UniqueIdentifier>{66a9525e-a6fd-42b8-b821-402744681114}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso">
+      <UniqueIdentifier>{b2f03551-78d0-4f64-b96d-b1dbbb9d1c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\AnIso">
+      <UniqueIdentifier>{4b7a4aa9-9217-4aaf-b7fd-b29ae9887e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer">
+      <UniqueIdentifier>{50afec63-7468-4053-aef6-9f952916cbd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -173,6 +182,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetricFwd.hxx">
       <Filter>TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\MeshPost2d_LaplacianSmoothing_AvgFun.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\MeshPost2d_LaplacianSmoothing_AvgFunFwd.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Iso</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
