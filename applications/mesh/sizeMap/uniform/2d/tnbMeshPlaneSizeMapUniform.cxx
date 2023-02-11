@@ -165,7 +165,11 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to create a uniform size map." << endl << endl;
+			Info << " This application is aimed to create a uniform size map." << endl << endl
+
+				<< " # Subdirectories: " << endl
+				<< endl
+				<< " - reference" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

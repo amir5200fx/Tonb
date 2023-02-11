@@ -159,7 +159,7 @@ namespace tnbLib
 
 	auto& getSurfaceSizeValues()
 	{
-		return myRef->SurfaceSizeRef();
+		return *myRef->SurfaceSizeRef();
 	}
 
 	void setMethod(Mesh_SurfaceSizeValues& v, const std::string& name)
@@ -218,7 +218,7 @@ namespace tnbLib
 
 	auto& getCurvatureValues()
 	{
-		return myRef->SurfaceCurvatureRef();
+		return *myRef->SurfaceCurvatureRef();
 	}
 
 	void setCurvatureInfo(Mesh_SurfaceCurvatureValues& v, const std::string& name)
@@ -323,7 +323,10 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to create a reference values for mesh2d algorithm." << endl << endl;
+			Info << " This application is aimed to create a reference values for mesh2d algorithm." << endl << endl
+
+				<< " # Subdirectories: " << endl << endl
+				<< " - region (bounding box)" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
