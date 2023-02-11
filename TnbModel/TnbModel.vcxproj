@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{1d1ded38-777a-4b41-8b45-716010b5600f}</ProjectGuid>
+    <RootNamespace>TnbModel</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)d</TargetName>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\ParProfiles;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Profile;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Fwd;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Mid;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Aft;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Stem;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Transom;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Keel;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Dimensions;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Hull;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\xPars;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1;$(ProjectDir)TnbLib\Model\Vessel\Displ;$(ProjectDir)TnbLib\Model\Vessel\ParProfiles;$(ProjectDir)TnbLib\Model\Vessel\Profile\Keel;$(ProjectDir)TnbLib\Model\Vessel\Profile\Deck;$(ProjectDir)TnbLib\Model\Vessel\Profile\Xs\Keel;$(ProjectDir)TnbLib\Model\Vessel\Profile\Xs\Deck;$(ProjectDir)TnbLib\Model\Vessel\Profile\Xs;$(ProjectDir)TnbLib\Model\Vessel\Profile;$(ProjectDir)TnbLib\Model\Vessel\xPars;$(ProjectDir)TnbLib\Model\Vessel\Sections;$(ProjectDir)TnbLib\Model\Vessel\Section\Corner;$(ProjectDir)TnbLib\Model\Vessel\Section;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section\Fwd;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section\Mid;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section\Aft;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Stem;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Transom;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Keel\Rising;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Keel;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Dimensions;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Hull\ThreeSections;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Hull\TwoSections;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Hull;$(ProjectDir)TnbLib\Model\Vessel\Parameters;$(ProjectDir)TnbLib\Model\Vessel;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Interpolated\Curve;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Interpolated;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Linear;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Uniform;$(ProjectDir)TnbLib\Model\Entities\ParamProfile;$(ProjectDir)TnbLib\Model\Entities\CmpProfile;$(ProjectDir)TnbLib\Model\Entities\WeightNet;$(ProjectDir)TnbLib\Model\Entities\CtrlNet;$(ProjectDir)TnbLib\Model\Entities\Parameter\Unbounded;$(ProjectDir)TnbLib\Model\Entities\Parameter\Bounded;$(ProjectDir)TnbLib\Model\Entities\Parameter;$(ProjectDir)TnbLib\Model\Entities\Entity;$(ProjectDir)TnbLib\Model\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\ParProfiles;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Profile;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Fwd;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Mid;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Aft;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Section;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Stem;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Transom;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Keel;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Dimensions;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters\Hull;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\Parameters;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1\xPars;$(ProjectDir)TnbLib\Model\Vessel\Displ\No1;$(ProjectDir)TnbLib\Model\Vessel\Displ;$(ProjectDir)TnbLib\Model\Vessel\ParProfiles;$(ProjectDir)TnbLib\Model\Vessel\Profile\Keel;$(ProjectDir)TnbLib\Model\Vessel\Profile\Deck;$(ProjectDir)TnbLib\Model\Vessel\Profile\Xs\Keel;$(ProjectDir)TnbLib\Model\Vessel\Profile\Xs\Deck;$(ProjectDir)TnbLib\Model\Vessel\Profile\Xs;$(ProjectDir)TnbLib\Model\Vessel\Profile;$(ProjectDir)TnbLib\Model\Vessel\xPars;$(ProjectDir)TnbLib\Model\Vessel\Sections;$(ProjectDir)TnbLib\Model\Vessel\Section\Corner;$(ProjectDir)TnbLib\Model\Vessel\Section;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section\Fwd;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section\Mid;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section\Aft;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Section;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Stem;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Transom;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Keel\Rising;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Keel;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Dimensions;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Hull\ThreeSections;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Hull\TwoSections;$(ProjectDir)TnbLib\Model\Vessel\Parameters\Hull;$(ProjectDir)TnbLib\Model\Vessel\Parameters;$(ProjectDir)TnbLib\Model\Vessel;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Interpolated\Curve;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Interpolated;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Linear;$(ProjectDir)TnbLib\Model\Entities\ParamProfile\Uniform;$(ProjectDir)TnbLib\Model\Entities\ParamProfile;$(ProjectDir)TnbLib\Model\Entities\CmpProfile;$(ProjectDir)TnbLib\Model\Entities\WeightNet;$(ProjectDir)TnbLib\Model\Entities\CtrlNet;$(ProjectDir)TnbLib\Model\Entities\Parameter\Unbounded;$(ProjectDir)TnbLib\Model\Entities\Parameter\Bounded;$(ProjectDir)TnbLib\Model\Entities\Parameter;$(ProjectDir)TnbLib\Model\Entities\Entity;$(ProjectDir)TnbLib\Model\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Model\Entities\CmpProfile\Model_CmpProfile.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\CtrlNet\Model_CtrlNet.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\Entity\Model_Entity.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\Parameter\Bounded\Model_BndParameter.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\Parameter\Model_Parameter.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\Parameter\Unbounded\Model_UnbndParameter.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Interpolated\Curve\Model_CurveParamProfile.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Interpolated\Model_ParamProfile_Interpolated.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Linear\Model_LinearParamProfile.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Model_ParamProfile.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Uniform\Model_UniformParamProfile.hxx" />
+    <ClInclude Include="TnbLib\Model\Entities\WeightNet\Model_WeightNet.hxx" />
+    <ClInclude Include="TnbLib\Model\module\Model_Module.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\Model_Displ.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Model_DisplNo1.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Dimensions\Model_DisplNo1Pars_Dimensions.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Hull\Model_DisplNo1Pars_Hull.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Keel\Model_DisplNo1Pars_Keel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Model_DisplNo1Pars.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Aft\Model_DisplNo1Pars_AftSection.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Fwd\Model_DisplNo1Pars_FwdSection.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Mid\Model_DisplNo1Pars_MidSection.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Model_DisplNo1Pars_Section.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Stem\Model_DisplNo1Pars_Stem.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Transom\Model_DisplNo1Pars_Transom.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Transom\Model_VesselPars_Transom.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\ParProfiles\Model_DisplNo1ParProfiles.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Profile\Model_DisplNo1Profile.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\xPars\Model_DisplNo1xPars.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Model_Vessel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Dimensions\Model_VesselPars_Dimens.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Keel\Model_VesselPars_Keel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Keel\Rising\Model_VesselPars_RisingKeel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Section\Model_VesselPars_StdSection.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Stem\Model_VesselPars_Stem.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\ParProfiles\Model_VesselParProfiles.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Deck\Model_VesselProfile_Deck.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Keel\Model_VesselProfile_Keel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Model_VesselProfile.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Model_VesselProfiles.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Xs\Deck\Model_VesselProfileXs_Deck.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Xs\Keel\Model_VesselProfileXs_Keel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Xs\Model_VesselProfileXs.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Sections\Model_SectionsVessel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Section\Corner\Model_CorneredSectionVessel.hxx" />
+    <ClInclude Include="TnbLib\Model\Vessel\Section\Model_SectionVessel.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Model\Entities\CmpProfile\Model_CmpProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Entities\Entity\Model_Entity.cxx" />
+    <ClCompile Include="TnbLib\Model\Entities\Parameter\Model_Parameter.cxx" />
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Interpolated\Curve\Model_CurveParamProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Linear\Model_LinearParamProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Model_ParamProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Uniform\Model_UniformParamProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Model_DisplNo1.cxx" />
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Profiles\Model_DisplNo1_DeckProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Profiles\Model_DisplNo1_FlareProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Profiles\Model_DisplNo1_KeelProfile.cxx" />
+    <ClCompile Include="TnbLib\Model\Vessel\Section\Corner\Model_CorneredSectionVessel.cxx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

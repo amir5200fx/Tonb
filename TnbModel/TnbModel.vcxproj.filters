@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="tnbLib">
+      <UniqueIdentifier>{300f0b3f-5d28-4a5e-88ec-c14b4c71d8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model">
+      <UniqueIdentifier>{c7e8c373-4d93-4006-a8f4-bc9d12ede5b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities">
+      <UniqueIdentifier>{cfe5cc84-ff0e-4320-97e2-9608d5556c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\Entity">
+      <UniqueIdentifier>{7e5ce339-8ed3-4a11-947b-4f09dd513260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\CtrlNet">
+      <UniqueIdentifier>{9c9992b0-1010-488b-90eb-2c58ea28c5f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\module">
+      <UniqueIdentifier>{6d97d594-812f-4a86-9136-7f967428fcb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\WeightNet">
+      <UniqueIdentifier>{b5c29274-3485-46f4-a2dc-ac2815880da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\ParamProfile">
+      <UniqueIdentifier>{cebddc58-db4e-4d03-973c-b552d06f2e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\ParamProfile\Uniform">
+      <UniqueIdentifier>{717daf36-f17e-4e1f-8da3-1aa9c69e6ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\ParamProfile\Linear">
+      <UniqueIdentifier>{68e381bf-0cc5-4efd-b0af-62cca8e1d940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\ParamProfile\Interpolated">
+      <UniqueIdentifier>{a6de15d7-4878-4eda-bf7c-d67279a9afab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\ParamProfile\Interpolated\Curve">
+      <UniqueIdentifier>{d17249e3-0256-4ac0-9af5-50daf204caec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\Parameter">
+      <UniqueIdentifier>{2e9a41e4-c98a-40fe-8d40-3ca359bf6631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\Parameter\Bounded">
+      <UniqueIdentifier>{4ec65a27-8e56-41ed-9652-d9f1c8c22748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\Parameter\Unbounded">
+      <UniqueIdentifier>{f0167e50-8271-4ff2-b01c-a168dcd84691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Propeller">
+      <UniqueIdentifier>{546cf4b3-670f-4abd-9d42-879828a7d4fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel">
+      <UniqueIdentifier>{0c4a5467-0df9-48ed-b9d8-ba8b6127ef84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Profile">
+      <UniqueIdentifier>{f3c9e19d-7b85-4f74-91de-a946804d14ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ">
+      <UniqueIdentifier>{299e3c60-619a-4c6a-bf63-f66753517763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1">
+      <UniqueIdentifier>{5b71a4e7-ceb0-43d0-8f42-ee941aed743a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Profile">
+      <UniqueIdentifier>{e2d7dde6-c179-4e20-91c1-a6f50989c026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\xPars">
+      <UniqueIdentifier>{8969347e-423c-4917-8442-bc4dc4e1341f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Sections">
+      <UniqueIdentifier>{8cef6b4f-0fd2-4734-88bc-bffb898546da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Section">
+      <UniqueIdentifier>{66f8701c-ca31-4e9c-9380-7d9baae31eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Section\Corner">
+      <UniqueIdentifier>{f5c25c83-3e53-489a-b37b-72ca477d107c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters">
+      <UniqueIdentifier>{bfe90d4e-d85b-4132-8f15-74dcde6d83c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Dimensions">
+      <UniqueIdentifier>{7add6357-d66c-4524-be25-1d26241462de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Section">
+      <UniqueIdentifier>{94e1d45d-4e62-4b30-ad8c-d7c3308be447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Section\Aft">
+      <UniqueIdentifier>{298ac7f3-27c8-4668-9e68-ab4ddbeb673a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Section\Mid">
+      <UniqueIdentifier>{ddc42270-13cb-407d-804c-259d269abfe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Section\Fwd">
+      <UniqueIdentifier>{de35b72f-131a-4b76-ad24-7419872bbe04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Keel">
+      <UniqueIdentifier>{bcb587e2-ecf5-45b9-9f50-32522341797b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Stem">
+      <UniqueIdentifier>{957e0053-9b03-4cff-a039-975bc7be3bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Transom">
+      <UniqueIdentifier>{b2615506-605f-481e-a739-330dd36e3d4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters">
+      <UniqueIdentifier>{0c74b5bd-fa73-467c-8448-3985f7f0f1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Dimensions">
+      <UniqueIdentifier>{857cf372-6e61-4d19-87fe-aeecfe5ad571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Keel">
+      <UniqueIdentifier>{ddac2320-18e5-490d-84f8-8346c94f9d29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Transom">
+      <UniqueIdentifier>{b15124c2-f2cb-41ac-b912-a30bcd1353cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Stem">
+      <UniqueIdentifier>{80236b82-9fcb-468c-8313-7f39bd6677c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Section">
+      <UniqueIdentifier>{99189db2-5362-4589-a035-00ff7bd3316b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Stem\Full">
+      <UniqueIdentifier>{3413ceb1-fd4e-42ef-ad9d-e659a0060ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Stem\Linear">
+      <UniqueIdentifier>{3a6fc06b-1256-4259-a5a3-24952ff076f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Parameters\Keel\Rising">
+      <UniqueIdentifier>{254060d9-c726-498f-8b2a-c7fbd12cf20b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Parameters\Hull">
+      <UniqueIdentifier>{159ff655-09e2-4804-9d3e-411570318800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\Profiles">
+      <UniqueIdentifier>{5b35b7fe-a836-4550-833b-20d79e92733b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\gProfile">
+      <UniqueIdentifier>{1fdd65bd-5499-48b2-9c21-8baa436bac99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\xPars">
+      <UniqueIdentifier>{09a8acab-895a-40c5-abb6-49a2e9e28c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Entities\CmpProfile">
+      <UniqueIdentifier>{ee3d5e05-9af5-4d5d-b519-7883fbabf4c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\ParProfiles">
+      <UniqueIdentifier>{b0480e7c-b4a2-492d-a4fe-dd3913a8e335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Displ\No1\ParProfiles">
+      <UniqueIdentifier>{1eb45cd2-0ac6-41a1-bf99-8a270505e8d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Profile\Deck">
+      <UniqueIdentifier>{f552247c-c908-42f9-98b3-566f156a067b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Profile\Keel">
+      <UniqueIdentifier>{756fc145-432e-4fbd-9fc0-b9ff8053d592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Profile\Xs">
+      <UniqueIdentifier>{acf96303-e73f-4922-b949-d3627e355ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Profile\Xs\Deck">
+      <UniqueIdentifier>{e9324e88-974a-437b-9a12-0e4beb77267b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tnbLib\Model\Vessel\Profile\Xs\Keel">
+      <UniqueIdentifier>{cdd505c0-1521-46cf-930c-dec0baffc4e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Model\Entities\Entity\Model_Entity.hxx">
+      <Filter>tnbLib\Model\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\CtrlNet\Model_CtrlNet.hxx">
+      <Filter>tnbLib\Model\Entities\CtrlNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\WeightNet\Model_WeightNet.hxx">
+      <Filter>tnbLib\Model\Entities\WeightNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\module\Model_Module.hxx">
+      <Filter>tnbLib\Model\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Model_ParamProfile.hxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Uniform\Model_UniformParamProfile.hxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\Parameter\Model_Parameter.hxx">
+      <Filter>tnbLib\Model\Entities\Parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\Parameter\Bounded\Model_BndParameter.hxx">
+      <Filter>tnbLib\Model\Entities\Parameter\Bounded</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\Parameter\Unbounded\Model_UnbndParameter.hxx">
+      <Filter>tnbLib\Model\Entities\Parameter\Unbounded</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Linear\Model_LinearParamProfile.hxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Interpolated\Model_ParamProfile_Interpolated.hxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile\Interpolated</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\ParamProfile\Interpolated\Curve\Model_CurveParamProfile.hxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile\Interpolated\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Model_Vessel.hxx">
+      <Filter>tnbLib\Model\Vessel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Model_VesselProfile.hxx">
+      <Filter>tnbLib\Model\Vessel\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Profile\Model_DisplNo1Profile.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Sections\Model_SectionsVessel.hxx">
+      <Filter>tnbLib\Model\Vessel\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Section\Model_SectionVessel.hxx">
+      <Filter>tnbLib\Model\Vessel\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Section\Corner\Model_CorneredSectionVessel.hxx">
+      <Filter>tnbLib\Model\Vessel\Section\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\Model_Displ.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Model_DisplNo1.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Dimensions\Model_DisplNo1Pars_Dimensions.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Dimensions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Model_DisplNo1Pars_Section.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Dimensions\Model_VesselPars_Dimens.hxx">
+      <Filter>tnbLib\Model\Vessel\Parameters\Dimensions</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Keel\Model_VesselPars_Keel.hxx">
+      <Filter>tnbLib\Model\Vessel\Parameters\Keel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Keel\Model_DisplNo1Pars_Keel.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Keel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Transom\Model_VesselPars_Transom.hxx">
+      <Filter>tnbLib\Model\Vessel\Parameters\Transom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Aft\Model_DisplNo1Pars_AftSection.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Section\Aft</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Fwd\Model_DisplNo1Pars_FwdSection.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Section\Fwd</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Section\Mid\Model_DisplNo1Pars_MidSection.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Section\Mid</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Keel\Rising\Model_VesselPars_RisingKeel.hxx">
+      <Filter>tnbLib\Model\Vessel\Parameters\Keel\Rising</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Stem\Model_VesselPars_Stem.hxx">
+      <Filter>tnbLib\Model\Vessel\Parameters\Stem</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Stem\Model_DisplNo1Pars_Stem.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Stem</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Transom\Model_DisplNo1Pars_Transom.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Transom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Hull\Model_DisplNo1Pars_Hull.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Parameters\Section\Model_VesselPars_StdSection.hxx">
+      <Filter>tnbLib\Model\Vessel\Parameters\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\Parameters\Model_DisplNo1Pars.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\xPars\Model_DisplNo1xPars.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\xPars</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Entities\CmpProfile\Model_CmpProfile.hxx">
+      <Filter>tnbLib\Model\Entities\CmpProfile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\ParProfiles\Model_VesselParProfiles.hxx">
+      <Filter>tnbLib\Model\Vessel\ParProfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Displ\No1\ParProfiles\Model_DisplNo1ParProfiles.hxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\ParProfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Keel\Model_VesselProfile_Keel.hxx">
+      <Filter>tnbLib\Model\Vessel\Profile\Keel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Deck\Model_VesselProfile_Deck.hxx">
+      <Filter>tnbLib\Model\Vessel\Profile\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Model_VesselProfiles.hxx">
+      <Filter>tnbLib\Model\Vessel\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Xs\Model_VesselProfileXs.hxx">
+      <Filter>tnbLib\Model\Vessel\Profile\Xs</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Xs\Deck\Model_VesselProfileXs_Deck.hxx">
+      <Filter>tnbLib\Model\Vessel\Profile\Xs\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Model\Vessel\Profile\Xs\Keel\Model_VesselProfileXs_Keel.hxx">
+      <Filter>tnbLib\Model\Vessel\Profile\Xs\Keel</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Model\Entities\Entity\Model_Entity.cxx">
+      <Filter>tnbLib\Model\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Entities\Parameter\Model_Parameter.cxx">
+      <Filter>tnbLib\Model\Entities\Parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Uniform\Model_UniformParamProfile.cxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Linear\Model_LinearParamProfile.cxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Interpolated\Curve\Model_CurveParamProfile.cxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile\Interpolated\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Vessel\Section\Corner\Model_CorneredSectionVessel.cxx">
+      <Filter>tnbLib\Model\Vessel\Section\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Profiles\Model_DisplNo1_DeckProfile.cxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Profiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Profiles\Model_DisplNo1_FlareProfile.cxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Profiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Model_DisplNo1.cxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Vessel\Displ\No1\Profiles\Model_DisplNo1_KeelProfile.cxx">
+      <Filter>tnbLib\Model\Vessel\Displ\No1\Profiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Entities\ParamProfile\Model_ParamProfile.cxx">
+      <Filter>tnbLib\Model\Entities\ParamProfile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Model\Entities\CmpProfile\Model_CmpProfile.cxx">
+      <Filter>tnbLib\Model\Entities\CmpProfile</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
