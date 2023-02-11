@@ -22,6 +22,13 @@ namespace tnbLib
 
 		extern TnbGlobal_EXPORT const tnbLib::word homeDir;
 
+		TnbGlobal_EXPORT Standard_Boolean 
+			IsFile
+			(
+				const boost::filesystem::path&,
+				const std::string& extension
+			);
+
 		TnbGlobal_EXPORT std::string GetHomeDir();
 		TnbGlobal_EXPORT std::string GetSystemFile(const std::string& theAppName);
 

@@ -10,6 +10,33 @@
 
 const tnbLib::word tnbLib::file::homeDir = "TnbHome";
 
+Standard_Boolean 
+tnbLib::file::IsFile
+(
+	const boost::filesystem::path& p,
+	const std::string& extension
+)
+{
+	auto files = tnbLib::file::GetAllFileNames(p);
+
+	size_t nbFiles = 0;
+	boost::filesystem::path file;
+	for (const auto& x : files)
+	{
+		if (x.extension().string() IS_EQUAL extension)
+		{
+			file = x;
+			nbFiles++;
+		}
+	}
+
+	if (nbFiles IS_EQUAL 1)
+	{
+		return Standard_True;
+	}
+	return Standard_False;
+}
+
 std::string 
 tnbLib::file::GetHomeDir()
 {
