@@ -129,15 +129,7 @@ namespace tnbLib
 
 
 		virtual ~Mesh_SizeMapControl()
-		{
-			std::cout << "size map control destructor" << std::endl;
-			for (auto& x : theBoundaries_)
-			{
-				std::cout << "trying to delete size map tool" << std::endl;
-				std::cout << "size map tool count: " << x.second.use_count() << std::endl;
-				x.second.reset();
-			}
-		}
+		{}
 
 		//- public functions and operators
 

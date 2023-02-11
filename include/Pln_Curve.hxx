@@ -109,6 +109,16 @@ namespace tnbLib
 			return theGeometry_;
 		}
 
+		virtual inline Standard_Boolean IsGap() const;
+
+		virtual TnbCad2d_EXPORT std::shared_ptr<Pln_Curve>
+			CreateCurve
+			(
+				const Standard_Integer theIndex,
+				const word& theName, 
+				const Handle(Geom2d_Curve)&
+			) const;
+
 		TnbCad2d_EXPORT Standard_Boolean 
 			IsRing
 			(

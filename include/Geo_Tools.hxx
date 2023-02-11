@@ -148,6 +148,13 @@ namespace tnbLib
 			}
 		};
 
+		static inline Standard_Boolean 
+			IsZero
+			(
+				const Standard_Real x, 
+				const Standard_Real epsilon = gp::Resolution()
+			);
+
 		static TnbGeo_EXPORT Standard_Real MachineEpsilon();
 
 		static TnbGeo_EXPORT arma::mat 
@@ -192,6 +199,62 @@ namespace tnbLib
 			CalcLength
 			(
 				const Entity2d_Polygon&
+			);
+
+		static inline Standard_Real 
+			CalcSquareDistancePointFromSegment
+			(
+				const Pnt2d& thePoint, 
+				const Entity_Segment<const Pnt2d&>&
+			);
+
+		static TnbGeo_EXPORT Standard_Real 
+			CalcSquareDistancePointFromSegment
+			(
+				const Pnt2d& thePoint,
+				const Pnt2d& theP0, 
+				const Pnt2d& theP1
+			);
+
+		static TnbGeo_EXPORT Standard_Real
+			CalcSquareDistancePointFromTriangle
+			(
+				const Pnt3d& thePoint,
+				const Pnt3d& theP0,
+				const Pnt3d& theP1,
+				const Pnt3d& theP2
+			);
+
+		static TnbGeo_EXPORT Standard_Real
+			CalcSquareDistancePointFromTriangle_cgal
+			(
+				const Pnt3d& thePoint,
+				const Pnt3d& theP0,
+				const Pnt3d& theP1,
+				const Pnt3d& theP2
+			);
+
+		static inline Standard_Real 
+			CalcSquareDistancePointFromTriangle
+			(
+				const Pnt3d& thePoint,
+				const Entity_Triangle<const Pnt3d&>& theTriangle
+			);
+
+		static TnbGeo_EXPORT Standard_Real
+			CalcSquareDistanceSegmentFromSegment_Eberly
+			(
+				const Pnt3d& theP0,
+				const Pnt3d& theP1,
+				const Pnt3d& theQ0,
+				const Pnt3d& theQ1
+			);
+
+		static inline Standard_Real
+			CalcSquareDistanceSegmentFromSegment_Eberly
+			(
+				const Entity_Segment<const Pnt3d&>& theSeg0,
+				const Entity_Segment<const Pnt3d&>& theSeg1
 			);
 
 		static inline Standard_Integer
@@ -346,6 +409,14 @@ namespace tnbLib
 				const Pnt3d& theP3
 			);
 
+		static inline Standard_Boolean 
+			IsPointRightEdge
+			(
+				const Pnt2d& thePoint,
+				const Pnt2d& theP0,
+				const Pnt2d& theP1
+			);
+
 		static inline Standard_Boolean
 			IsPointRightEdge_cgal
 			(
@@ -434,6 +505,16 @@ namespace tnbLib
 				const Pnt2d& P2
 			);
 
+		static inline Standard_Boolean 
+			IsPointInsideTetrahedron_cgal
+			(
+				const Pnt3d& theCoord,
+				const Pnt3d& theP0,
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2,
+				const Pnt3d& theP3
+			);
+
 		static TnbGeo_EXPORT Standard_Boolean
 			HasIntersection_cgal
 			(
@@ -441,6 +522,27 @@ namespace tnbLib
 				const Pnt2d& theQ1,
 				const Pnt2d& theP0,
 				const Pnt2d& theP1
+			);
+
+		static TnbGeo_EXPORT Standard_Boolean
+			IsIntersectionSegmentTriangle_cgal
+			(
+				const Pnt3d& theP0, 
+				const Pnt3d& theP1, 
+				const Pnt3d& theQ0,
+				const Pnt3d& theQ1,
+				const Pnt3d& theQ2
+			);
+
+		static TnbGeo_EXPORT Standard_Boolean
+			IsIntersectionTwoTriangles_cgal
+			(
+				const Pnt3d& theP0, 
+				const Pnt3d& theP1,
+				const Pnt3d& theP2, 
+				const Pnt3d& theQ0,
+				const Pnt3d& theQ1,
+				const Pnt3d& theQ2
 			);
 
 		static inline Standard_Boolean
@@ -492,6 +594,16 @@ namespace tnbLib
 				const Standard_Integer q3
 			);
 
+		static inline Standard_Boolean 
+			IsOneCommonPointSegmentTriangle
+			(
+				const Standard_Integer v1,
+				const Standard_Integer v2,
+				const Standard_Integer q1,
+				const Standard_Integer q2,
+				const Standard_Integer q3
+			);
+
 		static TnbGeo_EXPORT Standard_Boolean
 			IsCcwOrder
 			(
@@ -508,6 +620,14 @@ namespace tnbLib
 			IsSimple_cgal
 			(
 				const std::vector<Pnt2d>& thePts
+			);
+
+		static inline Vec3d 
+			CalcNormal
+			(
+				const Pnt3d& theP0,
+				const Pnt3d& theP1,
+				const Pnt3d& theP2
 			);
 
 		static TnbGeo_EXPORT Pnt3d
@@ -577,6 +697,13 @@ namespace tnbLib
 			(
 				const Entity2d_Line&,
 				const Entity2d_Line&
+			);
+
+		static TnbGeo_EXPORT std::shared_ptr<IntersectEntity2d> 
+			Intersection_cgal
+			(
+				const Entity2d_LineRef&,
+				const Entity2d_LineRef&
 			);
 
 		static TnbGeo_EXPORT std::vector<Pnt2d> 

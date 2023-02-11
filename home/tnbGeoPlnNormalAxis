@@ -1,0 +1,9 @@
+setVerbose(1);
+
+loadFile();
+
+setLoc(0);
+
+execute();
+
+saveTo("myPlane");

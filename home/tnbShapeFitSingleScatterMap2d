@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadFile();
+
+execute();
+
+saveTo("myScatterMap");

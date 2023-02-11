@@ -1,0 +1,10 @@
+setVerbose(1);
+
+setTolerance(1.0E-5);
+setToRenumber(true);
+
+loadFile();
+
+execute();
+
+saveTo();

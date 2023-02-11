@@ -35,7 +35,7 @@ namespace tnbLib
 		std::map<Standard_Integer, std::shared_ptr<cad2dLib::IdentRings_Node>> theNodesCache_;
 		std::map<Standard_Integer, std::shared_ptr<cad2dLib::IdentRings_Link>> theLinksCache_;
 
-	protected:
+	public:
 
 		// default constructor [1/25/2022 Amir]
 
@@ -45,7 +45,7 @@ namespace tnbLib
 		// constructors [1/25/2022 Amir]
 
 
-		// protected functions and operators [1/25/2022 Amir]
+		// public functions and operators [1/25/2022 Amir]
 
 		const auto& Nodes() const
 		{
@@ -188,12 +188,10 @@ namespace tnbLib
 
 		// default constructor [1/25/2022 Amir]
 
-		Cad2d_IdentRings
+		TnbCad2d_EXPORT Cad2d_IdentRings
 		(
 			const std::vector<std::shared_ptr<Pln_Edge>>& theEdges
-		)
-			: theEdges_(theEdges)
-		{}
+		);
 
 		// constructors [1/25/2022 Amir]
 

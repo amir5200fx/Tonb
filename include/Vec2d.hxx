@@ -85,4 +85,6 @@ namespace tnbLib
 	};
 }
 
+#include <Vec2dI.hxx>
+
 #endif // !_Vec2d_Header

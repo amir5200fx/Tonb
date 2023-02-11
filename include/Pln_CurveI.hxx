@@ -1,4 +1,9 @@
 #pragma once
+inline Standard_Boolean tnbLib::Pln_Curve::IsGap() const
+{
+	return Standard_False;
+}
+
 namespace tnbLib
 {
 

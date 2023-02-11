@@ -1,0 +1,11 @@
+setVerbose(1);
+
+var Origin = createPoint(0, 0, 0);
+var Direction = createDirection(0, 0, 1);
+
+setOrigin(Origin);
+setDirection(Direction);
+
+execute();
+
+saveTo("myAxis");

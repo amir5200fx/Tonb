@@ -22,6 +22,13 @@ namespace tnbLib
 
 		extern TnbGlobal_EXPORT const tnbLib::word homeDir;
 
+		TnbGlobal_EXPORT Standard_Boolean 
+			IsFile
+			(
+				const boost::filesystem::path&,
+				const std::string& extension
+			);
+
 		TnbGlobal_EXPORT std::string GetHomeDir();
 		TnbGlobal_EXPORT std::string GetSystemFile(const std::string& theAppName);
 
@@ -39,6 +46,8 @@ namespace tnbLib
 
 		template<class T>
 		T LoadFile(const std::string& name, const unsigned short verbose);
+
+		TnbGlobal_EXPORT void RemoveDirectory(const boost::filesystem::path&);
 	}
 }
 
