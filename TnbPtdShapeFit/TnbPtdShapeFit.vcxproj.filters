@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{86e770c8-130a-4870-a10b-72237c971407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit">
+      <UniqueIdentifier>{4b23809e-137a-48ec-8ca9-ef44dba482ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\module">
+      <UniqueIdentifier>{70ff18ad-5bbf-46b9-9721-225b8c233a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section">
+      <UniqueIdentifier>{55cc9c3d-c716-4f4c-8260-66c7c6020e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Entities">
+      <UniqueIdentifier>{4949cbff-79b6-4419-927d-f554cd9dd6e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Entities\Entity">
+      <UniqueIdentifier>{64c58886-e084-479a-9e4a-73e77ea42e4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Entities\Par">
+      <UniqueIdentifier>{5123aa78-9323-4e2d-9d83-5d4c73f20184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Circle">
+      <UniqueIdentifier>{1e2f9a81-1664-441e-b10e-e547d6ee5bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Error">
+      <UniqueIdentifier>{d35fb849-e589-4b23-99d0-ffaef9c220e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Error\LS">
+      <UniqueIdentifier>{7114a689-054b-485f-98c8-9bd606bb1c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap">
+      <UniqueIdentifier>{da033a81-91dc-4b1a-94e2-8e69745ed905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\SIngle">
+      <UniqueIdentifier>{730d584b-f0e6-4b35-bbd6-6634c6385f15}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\PtdShapeFit\module\PtdShapeFit_Module.hxx">
+      <Filter>TnbLib\PtdShapeFit\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Entities\Entity\PtdShapeFit_Entity.hxx">
+      <Filter>TnbLib\PtdShapeFit\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Entities\Par\PtdShapeFit_Par.hxx">
+      <Filter>TnbLib\PtdShapeFit\Entities\Par</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\PtdShapeFit_Section.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_Circle.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\PtdShapeFit2d_ScatterMap.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMap.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\SIngle</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\PtdShapeFit\Entities\Entity\PtdShapeFit_Entity.cxx">
+      <Filter>TnbLib\PtdShapeFit\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Entities\Par\PtdShapeFit_Par.cxx">
+      <Filter>TnbLib\PtdShapeFit\Entities\Par</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_Circle.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_CircleError.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_CircleShape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\PtdShapeFit_Section.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_CircleIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\PtdShapeFit2d_ScatterMap.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMap.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\SIngle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMapIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\SIngle</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
