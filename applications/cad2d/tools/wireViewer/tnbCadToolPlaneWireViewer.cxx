@@ -1,3 +1,4 @@
+#include <Pln_Wire.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Curve.hxx>
 #include <Geo_Tools.hxx>
@@ -12,10 +13,10 @@
 namespace tnbLib
 {
 
-	static std::string loadExt = Pln_Edge::extension + "list";
+	static std::string loadExt = Pln_Wire::extension;
 	static std::string saveExt = Entity2d_Triangulation::extension + "list";
 
-	static std::vector<std::shared_ptr<Pln_Edge>> myCurves;
+	static std::shared_ptr<Pln_Wire> myWire;
 	static std::vector<std::shared_ptr<Entity2d_Triangulation>> myTris;
 
 	static bool verbose = false;
@@ -35,10 +36,10 @@ namespace tnbLib
 		file::CheckExtension(name);
 
 		myFileName = name;
-		myCurves = file::LoadFile<std::vector<std::shared_ptr<Pln_Edge>>>(name + loadExt, verbose);
+		myWire = file::LoadFile<std::shared_ptr<Pln_Wire>>(name + loadExt, verbose);
 		loadTag = true;
 
-		for (const auto& x : myCurves)
+		for (const auto& x : myWire->Edges())
 		{
 			if (x)
 			{
@@ -138,7 +139,7 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to retrieve the meshes of a curve list." << endl;
+			Info << " This application is aimed to retrieve the meshes of a wire." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -162,7 +163,7 @@ int main(int argc, char* argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbCadToolPlaneCurveListViewer"));
+				fileName myFileName(file::GetSystemFile("tnbCadToolPlaneWireViewer"));
 
 				chai.eval_file(myFileName);
 			}

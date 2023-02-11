@@ -1,7 +1,10 @@
 #include <Cad2d_CurveLength_UniDiscret.hxx>
 #include <Cad2d_MergeCurves.hxx>
 #include <Cad2d_MergeCurvesInfo.hxx>
+#include <Pln_Segment.hxx>
+#include <Pln_Ring.hxx>
 #include <Pln_Edge.hxx>
+#include <Pln_Vertex.hxx>
 #include <Pln_Tools.hxx>
 #include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
@@ -18,6 +21,7 @@ namespace tnbLib
 	static unsigned short verbose = 0;
 	static bool loadTag = false;
 	static bool exeTag = false;
+	static bool renum = false;
 
 	static double myTol = 1.0E-4;
 
@@ -29,6 +33,16 @@ namespace tnbLib
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
+	}
+
+	void setRenum(bool r)
+	{
+		renum = r;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the renumber flag is set to: " << (renum ? "YES" : "NO") << endl;
+		}
 	}
 
 	void setTolerance(double x)
@@ -101,6 +115,36 @@ namespace tnbLib
 		return std::move(curves);
 	}
 
+	void Renumber(const std::vector<std::shared_ptr<Pln_Edge>>& theEdges)
+	{
+		auto iEdge = 0;
+		auto iVtx = 0;
+		for (const auto& x : theEdges)
+		{
+			x->SetIndex(++iEdge);
+			
+			if (auto seg = std::dynamic_pointer_cast<Pln_Segment>(x))
+			{
+				const auto& n0 = seg->Vtx0();
+				const auto& n1 = seg->Vtx1();
+
+				n0->SetIndex(++iVtx);
+				n1->SetIndex(++iVtx);
+			}
+			else if (auto ring = std::dynamic_pointer_cast<Pln_Ring>(x))
+			{
+				const auto& n = ring->Vtx();
+				n->SetIndex(++iVtx);
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "undefined type of edge has been detected." << endl
+					<< abort(FatalError);
+			}
+		}
+	}
+
 	void execute()
 	{
 		if (NOT loadTag)
@@ -108,6 +152,11 @@ namespace tnbLib
 			FatalErrorIn(FunctionSIG)
 				<< "no file has been loaded." << endl
 				<< abort(FatalError);
+		}
+
+		if (renum)
+		{
+			Renumber(myCurves);
 		}
 
 		const auto b = Pln_Tools::BoundingBox(myCurves);
@@ -154,6 +203,7 @@ namespace tnbLib
 		// settings [2/16/2022 Amir]
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
 		mod->add(chaiscript::fun([](double x)-> void {setTolerance(x); }), "setTolerance");
+		mod->add(chaiscript::fun([](bool r)-> void {setRenum(r); }), "setToRenumber");
 
 		//- operators
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
@@ -200,6 +250,7 @@ int main(int argc, char* argv[])
 
 				<< " # Settings: " << endl << endl
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl
+				<< " - setToRenumber(bool); " << endl
 				<< " - setTolerance(double)" << endl << endl
 
 				<< " # functions: " << endl << endl

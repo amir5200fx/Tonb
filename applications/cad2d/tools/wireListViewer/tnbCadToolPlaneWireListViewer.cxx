@@ -1,3 +1,4 @@
+#include <Pln_Wire.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Curve.hxx>
 #include <Geo_Tools.hxx>
@@ -12,10 +13,10 @@
 namespace tnbLib
 {
 
-	static std::string loadExt = Pln_Edge::extension + "list";
+	static std::string loadExt = Pln_Wire::extension + "list";
 	static std::string saveExt = Entity2d_Triangulation::extension + "list";
 
-	static std::vector<std::shared_ptr<Pln_Edge>> myCurves;
+	static std::vector<std::shared_ptr<Pln_Wire>> myWires;
 	static std::vector<std::shared_ptr<Entity2d_Triangulation>> myTris;
 
 	static bool verbose = false;
@@ -35,17 +36,17 @@ namespace tnbLib
 		file::CheckExtension(name);
 
 		myFileName = name;
-		myCurves = file::LoadFile<std::vector<std::shared_ptr<Pln_Edge>>>(name + loadExt, verbose);
+		myWires = file::LoadFile<std::vector<std::shared_ptr<Pln_Wire>>>(name + loadExt, verbose);
 		loadTag = true;
 
-		for (const auto& x : myCurves)
+		for (const auto& wire : myWires)
 		{
-			if (x)
+			if (wire)
 			{
-				auto poly = x->Mesh();
+				auto poly = wire->Polygon();
 				if (poly)
 				{
-					auto chain = Geo_Tools::RetrieveChain(x->Sense() ? *poly : poly->Reversed());
+					auto chain = Geo_Tools::RetrieveChain(*poly);
 					auto tri = Geo_Tools::Triangulation(*chain);
 					myTris.push_back(std::move(tri));
 				}
@@ -138,7 +139,7 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to retrieve the meshes of a curve list." << endl;
+			Info << " This application is aimed to retrieve the meshes of a wire list." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -162,7 +163,7 @@ int main(int argc, char* argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbCadToolPlaneCurveListViewer"));
+				fileName myFileName(file::GetSystemFile("tnbCadToolPlaneWireListViewer"));
 
 				chai.eval_file(myFileName);
 			}

@@ -3,6 +3,7 @@
 #include <Pln_Edge.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
+#include <IFstream.hxx>
 #include <OSstream.hxx>
 #include <word.hxx>
 
@@ -22,6 +23,21 @@ namespace tnbLib
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
+	}
+
+	auto loadXYs(const std::string& name)
+	{
+		IFstream myfile(name);
+		std::vector<Pnt2d> pnts;
+		while (myfile.peek() NOT_EQUAL EOF)
+		{
+			double x, y;
+			myfile >> x >> y;
+			std::cout << x << ", " << y << std::endl;
+			auto pt = Pnt2d(x, y);
+			pnts.push_back(std::move(pt));
+		}
+		return std::move(pnts);
 	}
 
 	void saveTo(const std::string& name)
@@ -93,6 +109,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
 
 		//- operators
+		mod->add(chaiscript::fun([](const std::string& name)-> auto {return loadXYs(name); }), "loadXYs");
 		mod->add(chaiscript::fun([](const std::vector<Pnt2d>& qs)-> void {makeEdge(qs); }), "make");
 		mod->add(chaiscript::fun([](const std::vector<Pnt2d>& qs, const std::string& name)-> void {makeEdge(qs, name); }), "make");
 		mod->add(chaiscript::fun([](double x, double y)-> auto {return Pnt2d(x, y); }), "createPoint");
@@ -136,6 +153,7 @@ int main(int argc, char* argv[])
 
 				<< " # IO functions: " << endl << endl
 
+				<< " - [PointList] loadXYs(file name)" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl

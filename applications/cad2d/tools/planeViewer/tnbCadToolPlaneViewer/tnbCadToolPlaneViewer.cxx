@@ -1,3 +1,5 @@
+#include <Cad2d_Plane.hxx>
+#include <Pln_Wire.hxx>
 #include <Pln_Edge.hxx>
 #include <Pln_Curve.hxx>
 #include <Geo_Tools.hxx>
@@ -12,10 +14,10 @@
 namespace tnbLib
 {
 
-	static std::string loadExt = Pln_Edge::extension + "list";
+	static std::string loadExt = Cad2d_Plane::extension;
 	static std::string saveExt = Entity2d_Triangulation::extension + "list";
 
-	static std::vector<std::shared_ptr<Pln_Edge>> myCurves;
+	static std::shared_ptr<Cad2d_Plane> myPln;
 	static std::vector<std::shared_ptr<Entity2d_Triangulation>> myTris;
 
 	static bool verbose = false;
@@ -35,19 +37,44 @@ namespace tnbLib
 		file::CheckExtension(name);
 
 		myFileName = name;
-		myCurves = file::LoadFile<std::vector<std::shared_ptr<Pln_Edge>>>(name + loadExt, verbose);
+		myPln = file::LoadFile<std::shared_ptr<Cad2d_Plane>>(name + loadExt, verbose);
 		loadTag = true;
 
-		for (const auto& x : myCurves)
+		const auto& outer = myPln->OuterWire();
+		if (outer)
 		{
-			if (x)
+			for (const auto& x : outer->Edges())
 			{
-				auto poly = x->Mesh();
-				if (poly)
+				if (x)
 				{
-					auto chain = Geo_Tools::RetrieveChain(x->Sense() ? *poly : poly->Reversed());
-					auto tri = Geo_Tools::Triangulation(*chain);
-					myTris.push_back(std::move(tri));
+					auto poly = x->Mesh();
+					if (poly)
+					{
+						auto chain = Geo_Tools::RetrieveChain(x->Sense() ? *poly : poly->Reversed());
+						auto tri = Geo_Tools::Triangulation(*chain);
+						myTris.push_back(std::move(tri));
+					}
+				}
+			}
+		}
+
+		const auto& inners = myPln->InnerWires();
+		if (inners)
+		{
+			for (const auto& inner : *inners)
+			{
+				for (const auto& x : inner->Edges())
+				{
+					if (x)
+					{
+						auto poly = x->Mesh();
+						if (poly)
+						{
+							auto chain = Geo_Tools::RetrieveChain(x->Sense() ? *poly : poly->Reversed());
+							auto tri = Geo_Tools::Triangulation(*chain);
+							myTris.push_back(std::move(tri));
+						}
+					}
 				}
 			}
 		}
@@ -138,7 +165,7 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to retrieve the meshes of a curve list." << endl;
+			Info << " This application is aimed to retrieve the meshes of a plane." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -162,7 +189,7 @@ int main(int argc, char* argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbCadToolPlaneCurveListViewer"));
+				fileName myFileName(file::GetSystemFile("tnbCadToolPlaneViewer"));
 
 				chai.eval_file(myFileName);
 			}
