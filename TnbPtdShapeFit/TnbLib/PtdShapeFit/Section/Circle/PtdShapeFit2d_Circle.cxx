@@ -25,6 +25,27 @@ tnbLib::PtdShapeFit2d_Circle::RetrieveParList() const
 	return std::move(pars);
 }
 
+std::vector<Standard_Real> 
+tnbLib::PtdShapeFit2d_Circle::RetrieveChromosome() const
+{
+	std::vector<Standard_Real> chromosome(NbPars());
+	if (Pars())
+	{
+		const auto& pars = *Pars();
+		chromosome.at(XoId()) = pars.x.at(XoId()).x;
+		chromosome.at(YoId()) = pars.x.at(YoId()).x;
+		chromosome.at(RadiusId()) = pars.x.at(RadiusId()).x;
+		return std::move(chromosome);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no optimized result has been found." << endl
+			<< abort(FatalError);
+		return std::move(chromosome);
+	}
+}
+
 void tnbLib::PtdShapeFit2d_Circle::SetParameters(const std::vector<Standard_Real>& theXs)
 {
 	std::vector<Param> pars(NbPars());

@@ -85,7 +85,9 @@ namespace tnbLib
 		TnbPtdShapeFit_EXPORT std::vector<std::shared_ptr<PtdShapeFit_Par>> 
 			RetrieveParList() const override;
 
-		void SetParameters(const std::vector<Standard_Real>&) override;
+		std::vector<Standard_Real> RetrieveChromosome() const override;
+
+		TnbPtdShapeFit_EXPORT void SetParameters(const std::vector<Standard_Real>&) override;
 
 		const auto& Dir() const
 		{

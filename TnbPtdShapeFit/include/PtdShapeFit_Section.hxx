@@ -103,6 +103,7 @@ namespace tnbLib
 
 		virtual std::shared_ptr<Cad2d_Plane> RetrieveShape(const std::vector<Standard_Real>&) const = 0;
 		virtual std::vector<std::shared_ptr<PtdShapeFit_Par>> RetrieveParList() const = 0;
+		virtual std::vector<Standard_Real> RetrieveChromosome() const = 0;
 
 		virtual void SetParameters(const std::vector<Standard_Real>&) = 0;
 
