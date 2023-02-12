@@ -79,16 +79,19 @@ namespace tnbLib
 
 		// constructors [2/9/2023 Payvand]
 
-	public:
 
-		static TnbPtdShapeFit_EXPORT const std::string extension;
-
-		// Public functions and operators [2/9/2023 Payvand]
+		// Protected functions and operators [2/12/2023 Payvand]
 
 		auto& ParsRef()
 		{
 			return theParameters_;
 		}
+
+	public:
+
+		static TnbPtdShapeFit_EXPORT const std::string extension;
+
+		// Public functions and operators [2/9/2023 Payvand]	
 
 		const auto& Pars() const
 		{
@@ -100,6 +103,8 @@ namespace tnbLib
 
 		virtual std::shared_ptr<Cad2d_Plane> RetrieveShape(const std::vector<Standard_Real>&) const = 0;
 		virtual std::vector<std::shared_ptr<PtdShapeFit_Par>> RetrieveParList() const = 0;
+
+		virtual void SetParameters(const std::vector<Standard_Real>&) = 0;
 
 		static TnbPtdShapeFit_EXPORT Standard_Real 
 			CalcDistance(const Pnt2d&, const Pln_Curve&);

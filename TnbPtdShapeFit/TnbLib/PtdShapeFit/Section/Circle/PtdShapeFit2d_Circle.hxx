@@ -17,18 +17,21 @@ namespace tnbLib
 		struct xoPar
 		{
 			enum {id = 0};
+			static TnbPtdShapeFit_EXPORT const char* name;
 			Standard_Real value;
 		};
 
 		struct yoPar
 		{
 			enum { id = 1 };
+			static TnbPtdShapeFit_EXPORT const char* name;
 			Standard_Real value;
 		};
 
 		struct radiusPar
 		{
 			enum { id = 2 };
+			static TnbPtdShapeFit_EXPORT const char* name;
 			Standard_Real value;
 		};
 
@@ -82,6 +85,8 @@ namespace tnbLib
 		TnbPtdShapeFit_EXPORT std::vector<std::shared_ptr<PtdShapeFit_Par>> 
 			RetrieveParList() const override;
 
+		void SetParameters(const std::vector<Standard_Real>&) override;
+
 		const auto& Dir() const
 		{
 			return theDir_;
@@ -130,6 +135,10 @@ namespace tnbLib
 		static TnbPtdShapeFit_EXPORT Standard_Integer XoId();
 		static TnbPtdShapeFit_EXPORT Standard_Integer YoId();
 		static TnbPtdShapeFit_EXPORT Standard_Integer RadiusId();
+
+		static const char* XoName() { return xoPar::name; }
+		static const char* YoName() { return yoPar::name; }
+		static const char* RadiusName() { return radiusPar::name; }
 
 		static TnbPtdShapeFit_EXPORT Standard_Real GetXo(const std::vector<Standard_Real>&);
 		static TnbPtdShapeFit_EXPORT Standard_Real GetYo(const std::vector<Standard_Real>&);

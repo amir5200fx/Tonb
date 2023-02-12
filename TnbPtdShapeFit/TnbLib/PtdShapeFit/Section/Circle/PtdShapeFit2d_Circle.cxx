@@ -2,6 +2,10 @@
 
 #include <PtdShapeFit_Par.hxx>
 
+const char* tnbLib::PtdShapeFit2d_Circle::xoPar::name = "xo";
+const char* tnbLib::PtdShapeFit2d_Circle::yoPar::name = "yo";
+const char* tnbLib::PtdShapeFit2d_Circle::radiusPar::name = "rad";
+
 const unsigned int tnbLib::PtdShapeFit2d_Circle::nb_parameters(3);
 unsigned short tnbLib::PtdShapeFit2d_Circle::verbose(0);
 
@@ -19,6 +23,25 @@ tnbLib::PtdShapeFit2d_Circle::RetrieveParList() const
 	pars.at(YoId()) = Yo();
 	pars.at(RadiusId()) = Radius();
 	return std::move(pars);
+}
+
+void tnbLib::PtdShapeFit2d_Circle::SetParameters(const std::vector<Standard_Real>& theXs)
+{
+	std::vector<Param> pars(NbPars());
+	{
+		Param x = { GetXo(theXs),XoName() };
+		pars.at(XoId()) = std::move(x);
+	}
+	{
+		Param x = { GetYo(theXs),YoName() };
+		pars.at(YoId()) = std::move(x);
+	}
+	{
+		Param x = { GetRadius(theXs),RadiusName() };
+		pars.at(RadiusId()) = std::move(x);
+	}
+	Parameters xPars = { std::move(pars) };
+	ParsRef() = std::make_shared<Parameters>(std::move(xPars));
 }
 
 Standard_Integer 
