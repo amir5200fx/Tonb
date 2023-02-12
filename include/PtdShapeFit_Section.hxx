@@ -25,9 +25,24 @@ namespace tnbLib
 
 	public:
 
+		struct Param
+		{
+			Standard_Real x;
+			word name;
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int /*file_version*/)
+			{
+				ar& x;
+				ar& name;
+			}
+		};
+
 		struct Parameters
 		{
-			std::vector<Standard_Real> x;
+			std::vector<Param> x;
 
 			friend class boost::serialization::access;
 
