@@ -286,7 +286,7 @@ namespace tnbLib
 
 		file::CheckExtension(name);
 
-		file::SaveTo(mySection, name + PtdShapeFit2d_ScatterMap::extension, verbose);
+		file::SaveTo(mySection, name + PtdShapeFit_Section::extension, verbose);
 	}
 
 	void execute()
@@ -302,6 +302,7 @@ namespace tnbLib
 
 		ga.Perform();
 
+		
 		exeTag = true;
 
 		if (verbose)
@@ -367,6 +368,26 @@ void tnbLib::OptRunTime::Perform()
 	//myGA->elitpop = nbElits == 0 ? 1 : nbElits;
 
 	myGA->run();
+
+	const auto& bestResult = myGA->pop(0)->getParam();
+
+	mySection->SetParameters(bestResult);
+
+	const auto& bestParams = mySection->Pars();
+	if (verbose)
+	{
+		Info << endl;
+		for (const auto& x : bestParams->x)
+		{
+			Info << " - " << x.name << ": " << x.x << endl;
+		}
+	}
+
+	if (verbose)
+	{
+		Info << endl
+			<< " the application is performed, successfully!" << endl;
+	}
 }
 
 #ifdef DebugInfo
