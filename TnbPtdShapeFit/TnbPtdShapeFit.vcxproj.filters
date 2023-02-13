@@ -37,6 +37,18 @@
     <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\SIngle">
       <UniqueIdentifier>{730d584b-f0e6-4b35-bbd6-6634c6385f15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Shape">
+      <UniqueIdentifier>{f25b19cf-07c4-43cd-8e7c-76f5625899b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Shape\Extruded">
+      <UniqueIdentifier>{f453c71a-9ebe-489b-9b65-8e7404914e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Shape\Extruded\Linear">
+      <UniqueIdentifier>{8b08e6e0-274c-470e-a282-08e65da1455e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Tools">
+      <UniqueIdentifier>{3ba2a84c-0256-4f72-aa5e-f3eea501aac5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdShapeFit\module\PtdShapeFit_Module.hxx">
@@ -59,6 +71,18 @@
     </ClInclude>
     <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMap.hxx">
       <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\SIngle</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Shape\Extruded\PtdShapeFit_Extruded.hxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Shape\PtdShapeFit_Shape.hxx">
+      <Filter>TnbLib\PtdShapeFit\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Shape\Extruded\Linear\PtdShapeFit_LinExtruded.hxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded\Linear</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Tools\PtdShapeFit_Tools.hxx">
+      <Filter>TnbLib\PtdShapeFit\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +115,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMapIO.cxx">
       <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\SIngle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\Linear\PtdShapeFit_LinExtruded.cxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\Linear\PtdShapeFit_LinExtrudedIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded\Linear</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\PtdShapeFit_Shape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\PtdShapeFit_Extruded.cxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Tools\PtdShapeFit_Tools.cxx">
+      <Filter>TnbLib\PtdShapeFit\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

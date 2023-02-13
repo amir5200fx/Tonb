@@ -15,6 +15,30 @@ tnbLib::PtdShapeFit2d_Circle::NbPars() const
 	return Standard_Integer(nb_parameters);
 }
 
+std::shared_ptr<tnbLib::PtdShapeFit2d_Circle::Parameters>
+tnbLib::PtdShapeFit2d_Circle::RetrieveParChromosome
+(
+	const std::vector<Standard_Real>& theChromosome
+) const
+{
+	std::vector<Param> pars(theChromosome.size());
+	{
+		Param p{ GetXo(theChromosome),xoPar::name };
+		pars.at(XoId()) = std::move(p);
+	}
+	{
+		Param p{ GetYo(theChromosome),yoPar::name };
+		pars.at(YoId()) = std::move(p);
+	}
+	{
+		Param p{ GetRadius(theChromosome),radiusPar::name };
+		pars.at(RadiusId()) = std::move(p);
+	}
+	Parameters pchromRef = { std::move(pars) };
+	auto pchrom = std::make_shared<Parameters>(std::move(pchromRef));
+	return std::move(pchrom);
+}
+
 std::vector<std::shared_ptr<tnbLib::PtdShapeFit_Par>> 
 tnbLib::PtdShapeFit2d_Circle::RetrieveParList() const
 {
@@ -26,12 +50,12 @@ tnbLib::PtdShapeFit2d_Circle::RetrieveParList() const
 }
 
 std::vector<Standard_Real> 
-tnbLib::PtdShapeFit2d_Circle::RetrieveChromosome() const
+tnbLib::PtdShapeFit2d_Circle::RetrieveChromosome(const std::shared_ptr<Parameters>& thePars) const
 {
-	std::vector<Standard_Real> chromosome(NbPars());
-	if (Pars())
+	std::vector<Standard_Real> chromosome(thePars->x.size());
+	if (thePars)
 	{
-		const auto& pars = *Pars();
+		const auto& pars = *thePars;
 		chromosome.at(XoId()) = pars.x.at(XoId()).x;
 		chromosome.at(YoId()) = pars.x.at(YoId()).x;
 		chromosome.at(RadiusId()) = pars.x.at(RadiusId()).x;
