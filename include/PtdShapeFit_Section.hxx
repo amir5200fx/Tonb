@@ -101,8 +101,10 @@ namespace tnbLib
 		virtual Standard_Integer NbPars() const = 0;
 		virtual Standard_Real CalcError(const std::vector<Standard_Real>&, const std::shared_ptr<PtdShapeFit2d_ScatterMap>&) const = 0;
 
+		virtual std::shared_ptr<Parameters> RetrieveParChromosome(const std::vector<Standard_Real>&) const = 0;
 		virtual std::shared_ptr<Cad2d_Plane> RetrieveShape(const std::vector<Standard_Real>&) const = 0;
 		virtual std::vector<std::shared_ptr<PtdShapeFit_Par>> RetrieveParList() const = 0;
+		virtual std::vector<Standard_Real> RetrieveChromosome(const std::shared_ptr<Parameters>&) const = 0;
 
 		virtual void SetParameters(const std::vector<Standard_Real>&) = 0;
 

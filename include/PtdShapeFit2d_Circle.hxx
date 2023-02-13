@@ -79,13 +79,18 @@ namespace tnbLib
 				const std::shared_ptr<PtdShapeFit2d_ScatterMap>&
 			) const override;
 
+		TnbPtdShapeFit_EXPORT std::shared_ptr<Parameters> 
+			RetrieveParChromosome(const std::vector<Standard_Real>&) const override;
+
 		TnbPtdShapeFit_EXPORT std::shared_ptr<Cad2d_Plane> 
 			RetrieveShape(const std::vector<Standard_Real>&) const override;
 
 		TnbPtdShapeFit_EXPORT std::vector<std::shared_ptr<PtdShapeFit_Par>> 
 			RetrieveParList() const override;
 
-		void SetParameters(const std::vector<Standard_Real>&) override;
+		std::vector<Standard_Real> RetrieveChromosome(const std::shared_ptr<Parameters>&) const override;
+
+		TnbPtdShapeFit_EXPORT void SetParameters(const std::vector<Standard_Real>&) override;
 
 		const auto& Dir() const
 		{
