@@ -22,7 +22,13 @@ namespace tnbLib
 
 		// Private functions and operators [2/12/2023 Payvand]
 
-		
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar& boost::serialization::base_object<PtdShapeFit_Extruded>(*this);
+		}
 
 	public:
 

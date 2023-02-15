@@ -231,6 +231,7 @@ int main(int argc, char* argv[])
 		{
 			Info << endl;
 			Info << " This application is aimed to create a Plane from an axis." << endl;
+			Info << " - subdirectories: axis" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

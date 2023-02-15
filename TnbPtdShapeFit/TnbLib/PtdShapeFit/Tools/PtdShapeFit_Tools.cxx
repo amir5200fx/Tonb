@@ -93,11 +93,13 @@ tnbLib::PtdShapeFit_Tools::RetrievePoles(const Pln_Curve& theCurve)
 		Standard_Real w = 1.0;
 		if (bspline->Weights())
 		{
-			bspline->Weights()->Value(i);
+			w = bspline->Weights()->Value(i);
 		}
+		//std::cout << "pt = " << pt << ", w = " << w << std::endl;
 		auto paired = std::make_pair(std::move(pt), w);
 		coords.push_back(std::move(paired));
 	}
+	//PAUSE;
 	const auto& Knots = bspline->Knots();
 	for (Standard_Integer i = 1; i <= Knots.Size(); i++)
 	{

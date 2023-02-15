@@ -252,6 +252,7 @@ int main(int argc, char* argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
+			Info << endl;
 			Info << " This application is aimed to retrieve the polygons from the entities of the intersection of plane and mesh." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl

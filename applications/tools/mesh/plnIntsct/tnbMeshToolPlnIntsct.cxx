@@ -247,7 +247,9 @@ int main(int argc, char* argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to calculate the intersection between plane and mesh." << endl << endl;
+			Info << endl;
+			Info << " This application is aimed to calculate the intersection between plane and mesh." << endl
+				<< " - subdirectories: mesh, plane" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

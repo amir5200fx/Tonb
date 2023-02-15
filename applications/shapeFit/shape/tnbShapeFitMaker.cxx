@@ -50,7 +50,7 @@ namespace tnbLib
 		}
 
 		file::CheckExtension(name);
-		file::SaveTo(myShape, name + Cad_Shape::extension, verbose);
+		file::SaveTo(myModel, name + Cad_Shape::extension, verbose);
 	}
 
 	void loadSections()
@@ -99,7 +99,7 @@ namespace tnbLib
 				}
 				{
 					auto icurrentPath = boost::filesystem::current_path().string() + R"(\)" + std::to_string(i) + R"(\plane)";
-					auto name = file::GetSingleFile(icurrentPath, PtdShapeFit_Section::extension).string();
+					auto name = file::GetSingleFile(icurrentPath, ".gpln").string();
 					std::string address = ".\\" + std::to_string(i) + "\\plane\\" + name + ".gpln";
 					auto pln = file::LoadFile<std::shared_ptr<gp_Pln>>(address, verbose);
 					if (NOT pln)
@@ -137,7 +137,7 @@ namespace tnbLib
 				}
 				{
 					auto icurrentPath = boost::filesystem::current_path().string() + R"(\)" + std::to_string(i) + R"(\plane)";
-					auto name = file::GetSingleFile(icurrentPath, PtdShapeFit_Section::extension).string();
+					auto name = file::GetSingleFile(icurrentPath, ".gpln").string();
 					std::string address = ".\\" + std::to_string(i) + "\\plane\\" + name + ".gpln";
 					auto pln = file::LoadFile<std::shared_ptr<gp_Pln>>(address, verbose);
 					if (NOT pln)
@@ -154,6 +154,9 @@ namespace tnbLib
 				i++;
 			}
 		}
+
+		//- change back the current path
+		boost::filesystem::current_path(currentPath);
 	}
 
 	void loadAxis()
@@ -329,8 +332,18 @@ namespace tnbLib
 			sections.push_back(x.first);
 			xs.push_back(x.second);
 		}
-
+		//PAUSE;
 		auto pars = myShape->CalcParameters(sections, *myAxis, xs);
+		for (const auto& p : pars)
+		{
+			std::cout << std::endl;
+			std::cout << "Parameters: " << std::endl;
+			for (const auto& x : p->x)
+			{
+				std::cout << " - " << x.name << ": " << x.x << std::endl;
+			}
+		}
+		//PAUSE;
 		auto shape = myShape->CreateShape(pars, sections.at(0), *myAxis, xs);
 
 		myModel = shape;

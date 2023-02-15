@@ -319,6 +319,7 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << " This application is aimed to project a 3d-polygon to a plane." << endl << endl;
+			Info << " - subdirectories: plane, polygon" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

@@ -53,7 +53,7 @@ namespace tnbLib
 
 		file::CheckExtension(name);
 
-		auto pln = mySection->RetrieveShape(mySection->RetrieveChromosome());
+		auto pln = mySection->RetrieveShape(mySection->RetrieveChromosome(mySection->Pars()));
 		if (NOT pln)
 		{
 			FatalErrorIn(FunctionSIG)

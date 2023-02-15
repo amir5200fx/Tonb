@@ -225,7 +225,9 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create a two-dimensional scatter map for shape fitting." << endl;
+			Info << " This application is aimed to create a two-dimensional scatter map for shape fitting." << endl
+				<< " - It loads one polygon as a file or multiple polygons with a path file." << endl
+				<< " - The path file must be provided in a 'polygon' directory." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

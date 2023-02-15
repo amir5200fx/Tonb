@@ -1,6 +1,7 @@
 #include <PtdShapeFit_LinExtruded.hxx>
 
 #include <PtdShapeFit_Section.hxx>
+#include <Geo_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -31,19 +32,44 @@ tnbLib::PtdShapeFit_LinExtruded::CalcParameters
 
 	std::vector<std::shared_ptr<PtdShapeFit_Section::Parameters>> parameters;
 	parameters.reserve(theSections.size());
+
+	std::vector<std::vector<Standard_Real>> approximated;
 	for (size_t m = 0; m < nbPars; m++)
 	{
-		const auto& sect = sections.at(m);
 		const auto& chromosome = chromosomes.at(m);
-
+		/*std::cout << std::endl;
+		for (auto xx : chromosome)
+		{
+			std::cout << xx << ", " << std::endl;
+		}
+		std::cout << std::endl;
+		PAUSE;*/
 		std::vector<std::pair<Standard_Real, Standard_Real>> qs;
-		qs.resize(n);
+		qs.reserve(n);
 		for (size_t i = 0; i < chromosome.size(); i++)
 		{
 			auto q = std::make_pair(xs.at(i), chromosome.at(i));
 			qs.push_back(std::move(q));
 		}
 		auto approx = CalcLS(qs);
+		/*std::cout << std::endl;
+		for (auto xx : approx)
+		{
+			std::cout << "- approx: " << xx << ", " << std::endl;
+		}
+		std::cout << std::endl;
+		PAUSE;*/
+		approximated.push_back(std::move(approx));
+		
+	}
+
+	for (size_t i = 0; i < theSections.size(); i++)
+	{
+		std::vector<Standard_Real> approx;
+		for (size_t m = 0; m < nbPars; m++)
+		{
+			approx.push_back(approximated.at(m).at(i));
+		}
 		auto chrom = sect->RetrieveParChromosome(approx);
 		parameters.push_back(std::move(chrom));
 	}
@@ -56,36 +82,47 @@ tnbLib::PtdShapeFit_LinExtruded::CalcLS
 	const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs
 )
 {
-	Standard_Real sumX = 0;
-	Standard_Real sumY = 0;
-	Standard_Real sumX2 = 0;
-	Standard_Real sumXY = 0;
-	for (const auto& q : theQs)
+	if (theQs.size() IS_EQUAL 2)
 	{
-		auto x = q.first;
-		auto y = q.second;
-
-		auto x2 = x * x;
-		auto xy = x * y;
-
-		sumX += x;
-		sumY += y;
-
-		sumX2 += x2;
-		sumXY += xy;
+		std::vector<Standard_Real> values;
+		values.reserve(theQs.size());
+		values.push_back(theQs.at(0).second);
+		values.push_back(theQs.at(1).second);
+		return std::move(values);
 	}
-
-	const auto n = (Standard_Real)theQs.size();
-	const auto m = (n * sumXY - sumX * sumY) /(n * sumX2 - sumX2);
-	const auto b = (sumY - m * sumX) / n;
-
-	std::vector<Standard_Real> values;
-	values.reserve(theQs.size());
-	for (const auto& q : theQs)
+	else
 	{
-		auto x = q.first;
-		auto y = m * x + b;
-		values.push_back(y);
+		Standard_Real sumX = 0;
+		Standard_Real sumY = 0;
+		Standard_Real sumX2 = 0;
+		Standard_Real sumXY = 0;
+		for (const auto& q : theQs)
+		{
+			auto x = q.first;
+			auto y = q.second;
+
+			auto x2 = x * x;
+			auto xy = x * y;
+
+			sumX += x;
+			sumY += y;
+
+			sumX2 += x2;
+			sumXY += xy;
+		}
+
+		const auto n = (Standard_Real)theQs.size();
+		const auto m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX2);
+		const auto b = (sumY - m * sumX) / n;
+
+		std::vector<Standard_Real> values;
+		values.reserve(theQs.size());
+		for (const auto& q : theQs)
+		{
+			auto x = q.first;
+			auto y = m * x + b;
+			values.push_back(y);
+		}
+		return std::move(values);
 	}
-	return std::move(values);
 }
