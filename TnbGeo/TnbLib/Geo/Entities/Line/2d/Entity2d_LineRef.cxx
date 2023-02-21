@@ -11,7 +11,7 @@
 #undef Handle
 #endif // Handle
 #include <CGAL\Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL\Line_2_Line_2_intersection.h>
+//#include <CGAL\Line_2_Line_2_intersection.h>
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef Kernel::Point_2 Point_2;

@@ -545,3 +545,9 @@ tnbLib::Geo_Tools::IsIntersect_cgal
 	const auto result = intersection(seg, tri);
 	return (Standard_Boolean)result;
 }
+
+std::shared_ptr<tnbLib::Entity2d_Polygon> 
+tnbLib::Geo_Tools::Intersection_cgal(const gp_Pln& thePlane, const Entity3d_Box& theBox)
+{
+	return std::shared_ptr<Entity2d_Polygon>();
+}

@@ -80,6 +80,15 @@ namespace tnbLib
 				const std::vector<Standard_Real>&
 			) const = 0;
 
+		virtual std::shared_ptr<Cad_Shape> 
+			CreateExtrapolated
+			(
+				const std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>>&,
+				const std::shared_ptr<PtdShapeFit_Section>&,
+				const gp_Ax1&,
+				const std::vector<Standard_Real>&
+			) const = 0;
+
 		static TnbPtdShapeFit_EXPORT std::pair
 			<
 			std::vector<std::shared_ptr<PtdShapeFit_Section>>, 

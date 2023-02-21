@@ -30,6 +30,11 @@ namespace tnbLib
 		verbose = i;
 	}
 
+	auto createList()
+	{
+
+	}
+
 	void checkFolder(const std::string& name)
 	{
 		if (NOT boost::filesystem::is_directory(name))
@@ -317,7 +322,7 @@ namespace tnbLib
 		loadTag = true;
 	}
 
-	void execute()
+	void interpolate()
 	{
 		if (NOT loadTag)
 		{
@@ -355,6 +360,51 @@ namespace tnbLib
 				<< " the application is performed, successfully!" << endl;
 		}
 	}
+
+	void extrapolate(std::vector<double> theXs)
+	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no file has been loaded." << endl
+				<< abort(FatalError);
+		}
+		std::vector<std::shared_ptr<PtdShapeFit_Section>> sections;
+		std::vector<Standard_Real> xs;
+		for (const auto& x : mySections)
+		{
+			sections.push_back(x.first);
+			xs.push_back(x.second);
+		}
+		//PAUSE;
+		auto pars = myShape->CalcParameters(sections, *myAxis, xs);
+		for (const auto& p : pars)
+		{
+			std::cout << std::endl;
+			std::cout << "Parameters: " << std::endl;
+			for (const auto& x : p->x)
+			{
+				std::cout << " - " << x.name << ": " << x.x << std::endl;
+			}
+		}
+		//PAUSE;
+		std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>> parsLocs;
+		for (size_t i = 0; i < pars.size(); i++)
+		{
+			auto paired = std::make_pair(pars.at(i), xs.at(i));
+			parsLocs.push_back(std::move(paired));
+		}
+		auto shape = myShape->CreateExtrapolated(parsLocs, sections.at(0), *myAxis, theXs);
+
+		myModel = shape;
+
+		exeTag = true;
+		if (verbose)
+		{
+			Info << endl
+				<< " the application is performed, successfully!" << endl;
+		}
+	}
 }
 
 #ifdef DebugInfo
@@ -370,6 +420,7 @@ namespace tnbLib
 
 	void setFunctions(const module_t& mod)
 	{
+
 		//- io functions
 		mod->add(chaiscript::fun([]()-> void {loadFiles(); }), "loadFiles");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
@@ -379,7 +430,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
 
 		// Operators [2/11/2023 Payvand]
-		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
+		mod->add(chaiscript::fun([]()-> void {interpolate(); }), "interpolate");
+		mod->add(chaiscript::fun([](std::vector<double> xs)-> void {extrapolate(xs); }), "extrapolate");
 	}
 
 	std::string getString(char* argv)
@@ -431,7 +483,8 @@ int main(int argc, char* argv[])
 
 				<< " # operators: " << endl << endl
 
-				<< " - execute()" << endl
+				<< " - interpolate()" << endl
+				<< " - extrapolate(Xs)" << endl
 
 				<< endl;
 			return 0;
@@ -439,6 +492,9 @@ int main(int argc, char* argv[])
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
 			chaiscript::ChaiScript chai;
+
+			chai.add(chaiscript::bootstrap::standard_library::vector_type<std::vector<double>>("std_vector_double"));
+			chai.add(chaiscript::vector_conversion<std::vector<double>>());
 
 			auto mod = std::make_shared<chaiscript::Module>();
 

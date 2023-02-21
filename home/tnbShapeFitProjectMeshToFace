@@ -1,0 +1,7 @@
+setVerbose(1);
+
+loadFiles();
+
+execute();
+
+saveTo("myMergedModel");

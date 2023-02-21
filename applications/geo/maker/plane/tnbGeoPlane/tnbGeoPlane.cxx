@@ -137,9 +137,10 @@ int main(int argc, char* argv[])
 
 				<< " # Operators:" << endl << endl
 				<< " - [Point] createPoint(x, y, z)" << endl
-				<< " - [Direction] createDirection(u, v, w)" << endl
-				<< " - createPlane(Point, Direction)" << endl
-				<< " - createPlane(A, B, C, D)" << endl
+				<< " - [Direction] createDirection(u, v, w)" << endl << endl
+
+				<< " - makePlane(Point, Direction)" << endl
+				<< " - makePlane(A, B, C, D)" << endl
 				<< endl;
 			return 0;
 		}

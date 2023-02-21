@@ -52,7 +52,15 @@ namespace tnbLib
 				const gp_Ax1& theAxis, 
 				const std::vector<Standard_Real>& theXs
 			) const override;
-
+		
+		TnbPtdShapeFit_EXPORT std::shared_ptr<Cad_Shape>
+			CreateExtrapolated
+			(
+				const std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>>&,
+				const std::shared_ptr<PtdShapeFit_Section>&,
+				const gp_Ax1&,
+				const std::vector<Standard_Real>&
+			) const override;
 
 		static TnbPtdShapeFit_EXPORT std::vector<Standard_Real> 
 			CalcLS

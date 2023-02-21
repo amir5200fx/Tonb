@@ -21,10 +21,14 @@ namespace tnbLib
 	class Entity_StaticData
 	{
 
+	public:
+
 		typedef std::vector<Point> pointList;
 		typedef std::vector<ConnectType> connectList;
 		typedef Entity_Box<Point> box;
 		typedef std::shared_ptr<box> box_ptr;
+
+	private:
 
 		/*Private Data*/
 

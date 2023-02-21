@@ -201,6 +201,8 @@ namespace tnbLib
 
 		mod->add(chaiscript::fun([](const Pnt2d& P, const Dir2d& d)-> auto {return makeAxis(P, d); }), "createAxis");
 
+		mod->add(chaiscript::fun([](const gp_Ax2d& ax, double r) -> auto {return createGeoCircle(ax, r); }), "createGeoCircle");
+
 		mod->add(chaiscript::fun([](const gp_Circ2d& c)-> void {makeCircle(c); }), "makeCircle");
 		mod->add(chaiscript::fun([](const gp_Circ2d& c, const std::string& name)-> void {makeCircle(c, name); }), "makeCircle");
 		mod->add(chaiscript::fun([](const gp_Circ2d& c, const Pnt2d& p)-> void {makeCircle(c, p); }), "makeCircle");
@@ -262,6 +264,8 @@ int main(int argc, char *argv[])
 				<< " - [Dir] createDirection(x, y)" << endl << endl
 
 				<< " - [Axis] createAxis(Point, Dir)" << endl << endl
+
+				<< " - [gCir] createGeoCircle(Axis, radius)" << endl << endl
 
 				<< " - makeCircle(gCircle, name [optional])" << endl
 				<< " - makeCircle(gCircle, Point, name [optional])" << endl

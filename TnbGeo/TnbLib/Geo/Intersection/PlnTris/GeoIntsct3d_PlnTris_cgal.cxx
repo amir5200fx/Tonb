@@ -23,6 +23,8 @@
 #include <CGAL\intersections.h>
 #include <CGAL\Polyhedron_3.h>
 
+#include <CGAL\Polygon_mesh_processing\stitch_borders.h>
+
 //typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Simple_cartesian<double> Kernel;
 
@@ -75,7 +77,7 @@ tnbLib::GeoIntsct3d_PlnTris::CalcIntersections
 
 		surfMesh.add_face(ids.at(Index_Of(v0)), ids.at(Index_Of(v1)), ids.at(Index_Of(v2)));
 	}
-	
+	CGAL::Polygon_mesh_processing::stitch_borders(surfMesh);
 	// constructs plane query
 	Standard_Real a, b, c, d;
 	thePlane.Coefficients(a, b, c, d);

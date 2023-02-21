@@ -757,10 +757,12 @@ tnbLib::Cad2d_Plane::MakeCircle
 	const auto g = Pln_CurveTools::MakeCircle(C, theP);
 	Debug_Null_Pointer(g);
 
+	auto trimmed = Pln_CurveTools::Trim(g, g->FirstParameter(), g->LastParameter());
+
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	curves.reserve(1);
 
-	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	auto c1 = std::make_shared<Pln_Curve>(std::move(trimmed));
 	curves.push_back(std::move(c1));
 
 	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
@@ -784,10 +786,12 @@ tnbLib::Cad2d_Plane::MakeCircle
 	const auto g = Pln_CurveTools::MakeCircle(theP0, theP1, theP2);
 	Debug_Null_Pointer(g);
 
+	auto trimmed = Pln_CurveTools::Trim(g, g->FirstParameter(), g->LastParameter());
+
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	curves.reserve(1);
 
-	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	auto c1 = std::make_shared<Pln_Curve>(std::move(trimmed));
 	curves.push_back(std::move(c1));
 
 	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
@@ -810,10 +814,12 @@ tnbLib::Cad2d_Plane::MakeCircle
 	const auto g = Pln_CurveTools::MakeCircle(theC, theRadius);
 	Debug_Null_Pointer(g);
 
+	auto trimmed = Pln_CurveTools::Trim(g, g->FirstParameter(), g->LastParameter());
+
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	curves.reserve(1);
 
-	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	auto c1 = std::make_shared<Pln_Curve>(std::move(trimmed));
 	curves.push_back(std::move(c1));
 
 	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
@@ -836,10 +842,12 @@ tnbLib::Cad2d_Plane::MakeCircle
 	const auto g = Pln_CurveTools::MakeCircle(theC, theP);
 	Debug_Null_Pointer(g);
 
+	auto trimmed = Pln_CurveTools::Trim(g, g->FirstParameter(), g->LastParameter());
+
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	curves.reserve(1);
 
-	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	auto c1 = std::make_shared<Pln_Curve>(std::move(trimmed));
 	curves.push_back(std::move(c1));
 
 	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
@@ -861,10 +869,12 @@ tnbLib::Cad2d_Plane::MakeEllipse
 	const auto g = Pln_CurveTools::MakeEllipse(E);
 	Debug_Null_Pointer(g);
 
+	auto trimmed = Pln_CurveTools::Trim(g, g->FirstParameter(), g->LastParameter());
+
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	curves.reserve(1);
 
-	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	auto c1 = std::make_shared<Pln_Curve>(std::move(trimmed));
 	curves.push_back(std::move(c1));
 
 	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);
@@ -888,10 +898,12 @@ tnbLib::Cad2d_Plane::MakeEllipse
 	const auto g = Pln_CurveTools::MakeEllipse(theS0, theS1, theCenter);
 	Debug_Null_Pointer(g);
 
+	auto trimmed = Pln_CurveTools::Trim(g, g->FirstParameter(), g->LastParameter());
+
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	curves.reserve(1);
 
-	auto c1 = std::make_shared<Pln_Curve>(std::move(g));
+	auto c1 = std::make_shared<Pln_Curve>(std::move(trimmed));
 	curves.push_back(std::move(c1));
 
 	auto wire = Pln_Tools::MakeWire(curves, 1.0E-6);

@@ -1,5 +1,6 @@
 #include <PtdShapeFit2d_Circle.hxx>
 #include <PtdShapeFit_Par.hxx>
+#include <Dir2d.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -8,6 +9,8 @@ namespace tnbLib
 {
 
 	static std::shared_ptr<PtdShapeFit_Section> mySection;
+
+	static Dir2d myDir(1.0, 0.0);
 
 	static double lowerXo = 0;
 	static double upperXo = 0;
@@ -25,6 +28,12 @@ namespace tnbLib
 		Info << endl;
 		Info << " - the verbosity level is set to: " << i << endl;
 		verbose = i;
+	}
+
+	void setDir(double u, double v)
+	{
+		myDir.SetX(u);
+		myDir.SetY(v);
 	}
 
 	void setLowerXo(double x)
@@ -108,6 +117,7 @@ namespace tnbLib
 		auto radius = PtdShapeFit2d_Circle::CreateRadius(lowerRadius, upperRadius);
 
 		auto sect = std::make_shared<PtdShapeFit2d_Circle>();
+		sect->SetDir(myDir);
 		sect->SetXo(std::move(xo));
 		sect->SetYo(std::move(yo));
 		sect->SetRadius(std::move(radius));
@@ -148,6 +158,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](double x)-> void {setUpperYo(x); }), "setUpperYo");
 		mod->add(chaiscript::fun([](double x)-> void {setLowerRadius(x); }), "setLowerRadius");
 		mod->add(chaiscript::fun([](double x)-> void {setUpperRadius(x); }), "setUpperRadius");
+
+		mod->add(chaiscript::fun([](double u, double v) -> void {setDir(u, v); }), "setDir");
 
 		// operators [2/10/2023 Payvand]
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
@@ -195,6 +207,8 @@ int main(int argc, char* argv[])
 				<< " - saveTo(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl
+
+				<< " - setDir(u, v)" << endl
 
 				<< " - setLowerXo(x)" << endl
 				<< " - setUpperXo(x)" << endl

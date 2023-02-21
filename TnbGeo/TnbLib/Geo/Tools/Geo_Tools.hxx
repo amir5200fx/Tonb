@@ -13,6 +13,7 @@
 #include <Entity_Line.hxx>
 #include <Entity_Triangle.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Entity3d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_ChainFwd.hxx>
@@ -167,6 +168,9 @@ namespace tnbLib
 				const Pnt3d& theP1, 
 				const Pnt3d& theP2
 			);
+
+		static std::tuple<Standard_Real, Standard_Real, Standard_Real, Standard_Real>
+			GetPlaneCoeff(const gp_Pln&);
 
 		static TnbGeo_EXPORT Pnt2d
 			GetIntersectionPoint
@@ -720,6 +724,8 @@ namespace tnbLib
 				const Entity3d_Triangle& theTri
 			);
 
+		static std::shared_ptr<Entity2d_Polygon> Intersection_cgal(const gp_Pln&, const Entity3d_Box&);
+
 		static inline Standard_Real 
 			Interpolate
 			(
@@ -851,6 +857,12 @@ namespace tnbLib
 			(
 				const Standard_Integer theIndex,
 				const Entity2d_Triangulation&
+			);
+
+		static TnbGeo_EXPORT std::shared_ptr<Entity3d_Triangulation> 
+			PoissonSurfaceRecon_cgal
+			(
+				const Entity3d_Triangulation&
 			);
 
 		template<class Type>

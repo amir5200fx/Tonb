@@ -49,6 +49,12 @@
     <Filter Include="TnbLib\PtdShapeFit\Tools">
       <UniqueIdentifier>{3ba2a84c-0256-4f72-aa5e-f3eea501aac5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\ProjMeshToFace">
+      <UniqueIdentifier>{ace390c2-7fe9-4f57-8eb3-e375ff6cc228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Slicer">
+      <UniqueIdentifier>{e501cd53-88a7-45de-868b-c1d98d86b4e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdShapeFit\module\PtdShapeFit_Module.hxx">
@@ -83,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="TnbLib\PtdShapeFit\Tools\PtdShapeFit_Tools.hxx">
       <Filter>TnbLib\PtdShapeFit\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\ProjMeshToFace\PtdShapeFit_ProjMeshToFace.hxx">
+      <Filter>TnbLib\PtdShapeFit\ProjMeshToFace</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Slicer\PtdShapeFit_Slicer.hxx">
+      <Filter>TnbLib\PtdShapeFit\Slicer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +142,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\PtdShapeFit\Tools\PtdShapeFit_Tools.cxx">
       <Filter>TnbLib\PtdShapeFit\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\ProjMeshToFace\PtdShapeFit_ProjMeshToFace.cxx">
+      <Filter>TnbLib\PtdShapeFit\ProjMeshToFace</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Slicer\PtdShapeFit_Slicer.cxx">
+      <Filter>TnbLib\PtdShapeFit\Slicer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

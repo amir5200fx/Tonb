@@ -799,6 +799,78 @@
     <Filter Include="TnbLib\Geo\Graph\3d">
       <UniqueIdentifier>{bbd0039c-3fdd-4fb4-8d0e-7fb0217b6998}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Slicer">
+      <UniqueIdentifier>{db1943a5-8338-4331-a6f4-705eaa83fde6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Slicer\PlnTris">
+      <UniqueIdentifier>{e0b68011-61d6-4f19-84bc-cde825bbfb63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d">
+      <UniqueIdentifier>{01544cb1-aaa7-4c5f-a589-8ad678da5d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\3d">
+      <UniqueIdentifier>{c9e76ec8-371c-4c0d-92f7-5aee127cde68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities">
+      <UniqueIdentifier>{3ab2b776-8904-4e65-b4ac-214d7cb02c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Vertex">
+      <UniqueIdentifier>{062923f9-75d2-4256-b891-e623bcaf3571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Edge">
+      <UniqueIdentifier>{a3c409fc-232b-45c8-8778-92388923200b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Element">
+      <UniqueIdentifier>{46a8ef39-a5eb-432c-872c-b81a79586756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Element\Triangle">
+      <UniqueIdentifier>{f3d9860d-6958-469b-a44c-198c1774f144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Point">
+      <UniqueIdentifier>{74e9316b-504d-4500-9c87-f990a818d052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Point\2d">
+      <UniqueIdentifier>{72ccba60-5dd7-47d0-9afe-5e9507a4b420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Point\3d">
+      <UniqueIdentifier>{63b8784a-953b-4077-9e32-f17912e24ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Entity">
+      <UniqueIdentifier>{31cf0161-5a8f-4d69-bf8a-98f163761996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Vertex\Adaptor">
+      <UniqueIdentifier>{37a6a766-c2ae-446e-a8a8-272c0dbcd6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Halfedge">
+      <UniqueIdentifier>{4bc1111f-77b8-42c1-aa4c-a7de16fba003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Patch">
+      <UniqueIdentifier>{88964938-0c20-4284-a3ab-62a0be4b44ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\Tools">
+      <UniqueIdentifier>{79778389-5c24-459f-bfda-d3adf0ef8d08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Halfedge\Adaptor">
+      <UniqueIdentifier>{d2f128ba-b92b-402c-a65a-90ca60d38d56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Edge\Adaptor">
+      <UniqueIdentifier>{16ae1dac-877f-4ea6-9487-a6034750f2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Topology\2d\Entities\Element\Adaptor">
+      <UniqueIdentifier>{ba97ac2e-1d2d-4a14-b9d4-581ae4aa7c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Slicer\2d">
+      <UniqueIdentifier>{2b6b6d02-87a1-4862-a90e-31e5eaa8ad47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Slicer\2d\PolyLine">
+      <UniqueIdentifier>{9c911c76-1235-471c-8bf4-9cb3ee93d05b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Extrude">
+      <UniqueIdentifier>{2ecaa409-f198-4448-82f5-318dd0b0926f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Extrude\PolyLine">
+      <UniqueIdentifier>{6bba5c77-2667-495a-8fe1-f1670e4331ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -1953,6 +2025,57 @@
     <ClInclude Include="TnbLib\Geo\Knit\3d\Geo3d_KnitChain.hxx">
       <Filter>TnbLib\Geo\knit\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Slicer\PlnTris\GeoSlicer3d_PlnTris.hxx">
+      <Filter>TnbLib\Geo\Slicer\PlnTris</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Vertex\GeoTop2d_Vertex.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Point\GeoTop2d_Point.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Point\2d\GeoTop2d_Point2d.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Point\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Point\3d\GeoTop2d_Point3d.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Point\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Entity\GeoTop2d_Entity.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Edge\GeoTop2d_Edge.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Halfedge\GeoTop2d_Halfedge.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Halfedge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Element\GeoTop2d_Element.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Patch\Entity3d_TriangulationPatch.hxx">
+      <Filter>TnbLib\Geo\Entities\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\Tools\GeoTop_Tools.hxx">
+      <Filter>TnbLib\Geo\Topology\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Halfedge\Adaptor\GeoTop2d_HalfedgeAdaptor.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Halfedge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Vertex\Adaptor\GeoTop2d_VertexAdaptor.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Vertex\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Edge\Adaptor\GeoTop2d_EdgeAdaptor.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Topology\2d\Entities\Element\Adaptor\GeoTop2d_ElementAdaptor.hxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Element\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Slicer\2d\PolyLine\GeoSlicer2d_PolyLine.hxx">
+      <Filter>TnbLib\Geo\Slicer\2d\PolyLine</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Extrude\Polyline\GeoExtrude_Polyline.hxx">
+      <Filter>TnbLib\Geo\Extrude\PolyLine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2404,6 +2527,87 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Knit\3d\Geo3d_KnitChain.cxx">
       <Filter>TnbLib\Geo\knit\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Slicer\PlnTris\GeoSlicer3d_PlnTris_cgal.cxx">
+      <Filter>TnbLib\Geo\Slicer\PlnTris</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Slicer\PlnTris\GeoSlicer3d_PlnTris.cxx">
+      <Filter>TnbLib\Geo\Slicer\PlnTris</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Point\2d\GeoTop2d_Point2dIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Point\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Point\3d\GeoTop2d_Point3dIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Point\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Point\2d\GeoTop2d_Point2d.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Point\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Point\3d\GeoTop2d_Point3d.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Point\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Patch\Entity3d_TriangulationPatch.cxx">
+      <Filter>TnbLib\Geo\Entities\Patch</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Edge\GeoTop2d_Edge.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Edge\GeoTop2d_EdgeIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Element\GeoTop2d_ElementIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Element</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Halfedge\GeoTop2d_Halfedge.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Halfedge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Halfedge\GeoTop2d_HalfedgeIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Halfedge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Halfedge\Adaptor\GeoTop2d_HalfedgeAdaptorIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Halfedge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Vertex\Adaptor\GeoTop2d_VertexAdaptor.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Vertex\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Vertex\Adaptor\GeoTop2d_VertexAdaptorIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Vertex\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Vertex\GeoTop2d_VertexIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\Tools\GeoTop_Tools.cxx">
+      <Filter>TnbLib\Geo\Topology\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Edge\Adaptor\GeoTop2d_EdgeAdaptorIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Edge\Adaptor\GeoTop2d_EdgeAdaptor.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Element\Adaptor\GeoTop2d_ElementAdaptor.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Element\Adaptor\GeoTop2d_ElementAdaptorIO.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Element\GeoTop2d_Element.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Element</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Topology\2d\Entities\Vertex\GeoTop2d_Vertex.cxx">
+      <Filter>TnbLib\Geo\Topology\2d\Entities\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Slicer\2d\PolyLine\GeoSlicer2d_PolyLine.cxx">
+      <Filter>TnbLib\Geo\Slicer\2d\PolyLine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Slicer\2d\PolyLine\GeoSlicer2d_PolyLine_cgal.cxx">
+      <Filter>TnbLib\Geo\Slicer\2d\PolyLine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Extrude\Polyline\GeoExtrude_Polyline.cxx">
+      <Filter>TnbLib\Geo\Extrude\PolyLine</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_PoissonSurfaceRecon_cgal.cxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
