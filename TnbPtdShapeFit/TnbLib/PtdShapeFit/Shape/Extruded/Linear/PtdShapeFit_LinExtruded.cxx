@@ -144,7 +144,7 @@ namespace tnbLib
 	}
 }
 
-std::shared_ptr<tnbLib::Cad_Shape> 
+std::pair<std::shared_ptr<tnbLib::Cad_Shape>, std::vector<std::shared_ptr<tnbLib::PtdShapeFit_Section::Parameters>>>
 tnbLib::PtdShapeFit_LinExtruded::CreateExtrapolated
 (
 	const std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>>& theParams,
@@ -169,7 +169,8 @@ tnbLib::PtdShapeFit_LinExtruded::CreateExtrapolated
 		auto pars = theSection->RetrieveParChromosome(chrom);
 		params.push_back(std::move(pars));
 	}
-	return CreateShape(params, theSection, theAxis, theLocs);
+	auto paired = std::make_pair(CreateShape(params, theSection, theAxis, theLocs), std::move(params));
+	return std::move(paired);
 }
 
 std::vector<Standard_Real> 

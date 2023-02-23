@@ -34,6 +34,12 @@ namespace tnbLib
 	{
 		myDir.SetX(u);
 		myDir.SetY(v);
+
+		if (verbose)
+		{
+			Info << endl
+				<< " - the direction is set to: " << u << ", " << v << endl;
+		}
 	}
 
 	void setLowerXo(double x)

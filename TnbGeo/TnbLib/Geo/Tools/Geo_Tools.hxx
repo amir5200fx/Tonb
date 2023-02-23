@@ -904,6 +904,8 @@ namespace tnbLib
 
 		static TnbGeo_EXPORT void Reverse(Entity2d_Triangulation&);
 		static TnbGeo_EXPORT void Reverse(Entity3d_Triangulation&);
+
+		static TnbGeo_EXPORT void ExportAsOBJ_cgal(const Entity3d_Triangulation&, std::ostream&);
 	};
 }
 

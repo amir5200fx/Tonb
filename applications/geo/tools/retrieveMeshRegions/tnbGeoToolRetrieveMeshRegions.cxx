@@ -352,7 +352,7 @@ namespace tnbLib
 		theSet.erase(current);
 		if (current)
 		{
-			elements.push_back(current);
+			//elements.push_back(current);
 			RetrieveNeighbors(theSet, current, elements);		
 		}
 

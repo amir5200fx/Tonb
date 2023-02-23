@@ -1,5 +1,6 @@
 #include <GeoTop2d_VertexAdaptor.hxx>
 
+#include <GeoTop2d_Edge.hxx>
 #include <Global_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -14,6 +15,19 @@ Standard_Integer
 tnbLib::GeoTop2d_VertexAdaptor::NbElements() const
 {
 	return Standard_Integer(theElements_.size());
+}
+
+Standard_Integer 
+tnbLib::GeoTop2d_VertexAdaptor::NbBoundaryEdges() const
+{
+	Standard_Integer n = 0;
+	for (const auto& x : theEdges_)
+	{
+		auto e = x.second.lock();
+		if (e->IsOnBoundary())
+			n++;
+	}
+	return n;
 }
 
 std::weak_ptr<tnbLib::GeoTop2d_Edge> 

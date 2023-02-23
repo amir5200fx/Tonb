@@ -312,9 +312,31 @@ namespace tnbLib
 		}
 
 		auto tri3d = Cad_Tools::Triangulation(*gFace->GeomSurface()->Geometry(), *slicer->Clipped());
+		/*{
+			OFstream myFile("sliced3d.plt");
+			tri3d->ExportToPlt(myFile);
+		}*/
+		{
+			std::ofstream outputMesh;
+			outputMesh.open("cylider.obj");
+			Geo_Tools::ExportAsOBJ_cgal(*tri3d, outputMesh);
+		}
+		{
+			std::ofstream outputMesh;
+			outputMesh.open("plate.obj");
+			Geo_Tools::ExportAsOBJ_cgal(*myMesh, outputMesh);
+		}
+		{
+			auto faces = Cad_Tools::RetrieveFaces(myShape->Shape());
+			auto poly = Cad_Tools::RetrieveTriangulation(faces.at(0));
+			auto tri = Cad_Tools::Triangulation(*poly);
+			std::ofstream outputMesh;
+			outputMesh.open("intact_cylinder.obj");
+			Geo_Tools::ExportAsOBJ_cgal(*tri, outputMesh);
+		}
 		tri3d->Add(*myMesh);
 
-		auto recon = Geo_Tools::PoissonSurfaceRecon_cgal(*tri3d);
+		//auto recon = Geo_Tools::PoissonSurfaceRecon_cgal(*tri3d);
 
 		exeTag = true;
 		if (verbose)
@@ -322,14 +344,14 @@ namespace tnbLib
 			Info << endl
 				<< " - the application is performed, successfully!" << endl;
 		}
-		if (recon)
+		/*if (recon)
 		{
 			myMerged = std::move(recon);
-		}
-		else
-		{
+		}*/
+		//else
+		//{
 			myMerged = std::move(tri3d);
-		}
+		//}
 		
 	}
 }

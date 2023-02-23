@@ -339,13 +339,16 @@ namespace tnbLib
 		}
 		//PAUSE;
 		auto pars = myShape->CalcParameters(sections, *myAxis, xs);
-		for (const auto& p : pars)
+		if (verbose)
 		{
-			std::cout << std::endl;
-			std::cout << "Parameters: " << std::endl;
-			for (const auto& x : p->x)
+			for (const auto& p : pars)
 			{
-				std::cout << " - " << x.name << ": " << x.x << std::endl;
+				std::cout << std::endl;
+				std::cout << "Parameters: " << std::endl;
+				for (const auto& x : p->x)
+				{
+					std::cout << " - " << x.name << ": " << x.x << std::endl;
+				}
 			}
 		}
 		//PAUSE;
@@ -378,13 +381,16 @@ namespace tnbLib
 		}
 		//PAUSE;
 		auto pars = myShape->CalcParameters(sections, *myAxis, xs);
-		for (const auto& p : pars)
+		if (verbose)
 		{
-			std::cout << std::endl;
-			std::cout << "Parameters: " << std::endl;
-			for (const auto& x : p->x)
+			for (const auto& p : pars)
 			{
-				std::cout << " - " << x.name << ": " << x.x << std::endl;
+				std::cout << std::endl;
+				std::cout << "Parameters: " << std::endl;
+				for (const auto& x : p->x)
+				{
+					std::cout << " - " << x.name << ": " << x.x << std::endl;
+				}
 			}
 		}
 		//PAUSE;
@@ -394,9 +400,22 @@ namespace tnbLib
 			auto paired = std::make_pair(pars.at(i), xs.at(i));
 			parsLocs.push_back(std::move(paired));
 		}
-		auto shape = myShape->CreateExtrapolated(parsLocs, sections.at(0), *myAxis, theXs);
+		auto [shape, extraPars] = myShape->CreateExtrapolated(parsLocs, sections.at(0), *myAxis, theXs);
 
 		myModel = shape;
+
+		if (verbose)
+		{
+			for (const auto& p : extraPars)
+			{
+				std::cout << std::endl;
+				std::cout << "extra Parameters: " << std::endl;
+				for (const auto& x : p->x)
+				{
+					std::cout << " - " << x.name << ": " << x.x << std::endl;
+				}
+			}
+		}
 
 		exeTag = true;
 		if (verbose)

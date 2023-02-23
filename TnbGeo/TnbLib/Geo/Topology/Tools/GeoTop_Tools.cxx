@@ -13,6 +13,9 @@
 
 #include <set>
 
+#include <TecPlot.hxx>
+#include <Entity3d_Chain.hxx>
+
 std::vector<std::shared_ptr<tnbLib::GeoTop2d_Vertex>> 
 tnbLib::GeoTop_Tools::MakeVertices
 (
@@ -108,6 +111,21 @@ namespace tnbLib
 		auto fwd = theVtx->ForwardBoundaryEdge();
 		if (NOT fwd)
 		{
+			/*std::cout << "fwd = " << theVtx->ForwardBoundaryEdge() << std::endl;
+			std::cout << "bwd = " << theVtx->BackwardBoundaryEdge() << std::endl;
+			std::cout << "node = " << theVtx->Index() << std::endl;
+			std::cout << "nb of bnd edges= " << theVtx->NbBoundaryEdges() << std::endl;
+			for (const auto& x : theVtx->Edges())
+			{
+				auto edge = x.second.lock();
+				std::cout << " - right elm: " << edge->RightElement() << std::endl;
+				std::cout << " - left elm: " << edge->LeftElement() << std::endl;
+				if (edge->IsOnBoundary())
+				{
+					std::cout << "YESSS" << std::endl;
+					std::cout << "v0: " << edge->First()->Index() << " v1: " << edge->Second()->Index() << std::endl;
+				}
+			}*/
 			FatalErrorIn(FunctionSIG)
 				<< "the node is not boundary!" << endl
 				<< abort(FatalError);
@@ -124,8 +142,10 @@ namespace tnbLib
 		currentNode = NextNode(firstNode);
 		nodes.push_back(firstNode);
 		nodes.push_back(currentNode);
+		//PAUSE;
 		while (currentNode NOT_EQUAL firstNode)
 		{
+			//std::cout << "next..." << std::endl;
 			currentNode = NextNode(currentNode);
 			nodes.push_back(currentNode);
 		}
@@ -186,10 +206,31 @@ tnbLib::GeoTop_Tools::CalcBoundaries
 		{
 			if (e->IsOnBoundary())
 			{
+				//if (e->First()->NbBoundaryEdges() NOT_EQUAL 2) continue;
+				//if (e->Second()->NbBoundaryEdges() NOT_EQUAL 2) continue;
 				edgeSet.insert(e);
 			}
 		}
 	}
+	/*{
+		std::vector<Pnt3d> pnts;
+		for (const auto& x : edgeSet)
+		{
+			const auto& v0 = x->First();
+			const auto& v1 = x->Second();
+
+			auto p0 = std::dynamic_pointer_cast<GeoTop2d_Point3d>(v0->Point())->Coord();
+			auto p1 = std::dynamic_pointer_cast<GeoTop2d_Point3d>(v1->Point())->Coord();
+
+			pnts.push_back(std::move(p0));
+			pnts.push_back(std::move(p1));
+		}
+		auto ids = dualConnectivityList(edgeSet.size());
+
+		OFstream myFile("chain.plt");
+		Entity3d_Chain ch(pnts, ids);
+		ch.ExportToPlt(myFile);
+	}*/
 	std::vector<std::shared_ptr<std::vector<tnbLib::connectivity::dual>>> indices;
 	while (edgeSet.size())
 	{

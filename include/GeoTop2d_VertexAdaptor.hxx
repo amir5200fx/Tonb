@@ -49,6 +49,8 @@ namespace tnbLib
 		TnbGeo_EXPORT Standard_Integer NbEdges() const;
 		TnbGeo_EXPORT Standard_Integer NbElements() const;
 
+		TnbGeo_EXPORT Standard_Integer NbBoundaryEdges() const;
+
 		const auto& Edges() const
 		{
 			return theEdges_;

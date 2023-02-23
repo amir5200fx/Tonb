@@ -677,6 +677,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\Tools\Geo_BoxToolsDefaults.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_PoissonSurfaceRecon_cgal.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools.cxx" />
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_ToolsExportAsOBJ_cgal.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_ToolsIntersections.cxx" />
     <ClCompile Include="TnbLib\Geo\Tools\Geo_Tools_cgal.cxx" />
     <ClCompile Include="TnbLib\Geo\TopoAnalysis\Chain\2d\Geo2d_TopoChainAnalysis.cxx" />

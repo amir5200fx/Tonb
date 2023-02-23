@@ -2609,6 +2609,9 @@
     <ClCompile Include="TnbLib\Geo\Tools\Geo_PoissonSurfaceRecon_cgal.cxx">
       <Filter>TnbLib\Geo\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Tools\Geo_ToolsExportAsOBJ_cgal.cxx">
+      <Filter>TnbLib\Geo\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">
