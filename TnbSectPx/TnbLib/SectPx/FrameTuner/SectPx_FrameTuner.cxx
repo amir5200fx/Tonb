@@ -21,6 +21,7 @@
 #include <SectPx_SegmentController.hxx>
 #include <SectPx_TightController_Deg2.hxx>
 #include <SectPx_WeightController.hxx>
+#include <SectPx_Par.hxx>
 
 const std::string tnbLib::SectPx_FrameTuner::extension = ".spxftuner";
 
@@ -543,6 +544,78 @@ tnbLib::SectPx_FrameTuner::CreateSymmTightnessDeg2
 	return id;
 }
 
+void 
+tnbLib::SectPx_FrameTuner::RemoveSymmTightnessDeg2
+(
+	const Standard_Integer theTightnessIndex
+)
+{
+	const auto& parents = FrameRegistry();
+	Debug_Null_Pointer(parents);
+
+	auto pole_controller =
+		std::dynamic_pointer_cast<sectPxLib::TightController_Deg2>(parents->SelectObj(theTightnessIndex));
+	Debug_Null_Pointer(pole_controller);
+
+	const auto& corner =
+		pole_controller->Corner();
+
+	const auto& bwd =
+		corner->Backward().lock();
+
+	const auto& fwd =
+		corner->Forward().lock();
+
+	if (!bwd || !fwd)
+		return;
+
+	if (!bwd->HasController() || !fwd->HasController())
+		return;
+
+	const auto& seg_bwd_ctrl =
+		pole_controller->LeftController();
+
+	const auto& seg_fwd_ctrl =
+		pole_controller->RightController();
+
+	const auto& bwd_ctrl =
+		std::dynamic_pointer_cast<sectPxLib::OneParCPtsMap_Single>(seg_bwd_ctrl->CPts());
+	Debug_Null_Pointer(bwd_ctrl);
+
+	const auto& fwd_ctrl =
+		std::dynamic_pointer_cast<sectPxLib::OneParCPtsMap_Single>(seg_fwd_ctrl->CPts());
+	Debug_Null_Pointer(fwd_ctrl);
+
+	const auto& par_bwd =
+		bwd_ctrl->Par().lock();
+	Debug_Null_Pointer(par_bwd);
+
+	const auto& par_fwd =
+		fwd_ctrl->Par().lock();
+	Debug_Null_Pointer(par_fwd);
+
+	Standard_Boolean isSymmetry = Standard_True;
+
+	if (par_bwd != par_fwd)
+		isSymmetry = Standard_False;
+
+	bwd_ctrl->RemoveThisFromChild(par_bwd);
+	fwd_ctrl->RemoveThisFromChild(par_fwd);
+
+	parents->Remove(bwd_ctrl);
+	parents->Remove(fwd_ctrl);
+
+	parents->Remove(seg_bwd_ctrl);
+	parents->Remove(seg_fwd_ctrl);
+
+	corner->RemoveController(pole_controller->Index());
+
+	parents->Remove(pole_controller->Index());
+
+	bwd->SetController(nullptr);
+	fwd->SetController(nullptr);
+}
+
 
 Standard_Integer 
 tnbLib::SectPx_FrameTuner::CreateWeight
@@ -584,6 +657,56 @@ tnbLib::SectPx_FrameTuner::CreateWeight
 
 	corner->InsertToControllers(id, weight);
 	return id;
+}
+
+void tnbLib::SectPx_FrameTuner::RemoveWeight
+(
+	const std::shared_ptr<SectPx_Pole>& thePole,
+	const std::shared_ptr<SectPx_Par>& thePar,
+	const Standard_Integer theWeightIndex
+)
+{
+	if (NOT FrameRegistry()->IsContains(thePole))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the pole is not registered!" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT thePole->IsInterior())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the pole is not interior!" << endl
+			<< abort(FatalError);
+	}
+
+	const auto& parents = FrameRegistry();
+	Debug_Null_Pointer(parents);
+
+	auto corner = std::dynamic_pointer_cast<sectPxLib::Pole_Corner>(thePole);
+	if (NOT corner)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the pole is not corner!" << endl
+			<< abort(FatalError);
+	}
+
+	for (auto controller : corner->Controllers())
+	{
+		if (controller.first == theWeightIndex)
+		{
+			auto weight =
+				std::dynamic_pointer_cast<sectPxLib::WeightController>(controller.second.lock());
+
+			Debug_Null_Pointer(weight);
+
+			weight->RemoveThisFromChild(thePar);
+			corner->RemoveController(theWeightIndex);
+			parents->Remove(theWeightIndex);
+
+			break;
+		}
+	}
 }
 
 namespace tnbLib
