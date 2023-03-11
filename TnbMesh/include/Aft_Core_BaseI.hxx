@@ -319,9 +319,6 @@ namespace tnbLib
 		Debug_Null_Pointer(frontInfo::CurrentFront());
 		const auto& current = *frontInfo::CurrentFront();
 
-		const auto& n0 = current.Node0();
-		const auto& n1 = current.Node1();
-
 		if (frontInfo::AlgCondition() IS_EQUAL Aft_AlgCondition::Generation)
 		{
 			frontInfo::SetSearchRadius

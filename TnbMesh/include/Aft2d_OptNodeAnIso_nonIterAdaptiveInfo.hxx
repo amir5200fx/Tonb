@@ -31,6 +31,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const std::string extension;
+
 		static TnbMesh_EXPORT const std::shared_ptr<Aft_SizeCorr_IterativeInfo> DEFAULT_CALCULATOR_INFO;
 		static TnbMesh_EXPORT const std::shared_ptr<Aft_SizeCorr_FractionInfo> DEFAULT_CORRECTOR_INFO;
 

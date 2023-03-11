@@ -15,6 +15,7 @@ namespace tnbLib
 
 	public:
 
+		typedef Aft_OptNode_Calculator<FrontType, SizeFun, MetricFun> base;
 		typedef typename info_type_from_aniso_optNode_alg<Aft_OptNode<FrontType, SizeFun, MetricFun, CorrAlg, AltrAlg>>::infoType infoType;
 
 	private:
@@ -24,6 +25,17 @@ namespace tnbLib
 		std::shared_ptr<infoType> theInfo_;
 
 		std::shared_ptr<AltrAlg> theAlterAlg_;
+
+		// Private functions and operators [3/10/2023 Payvand]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			Info << "It's not supposed to be called this function." << endl;
+			NotImplemented;
+		}
 
 	public:
 

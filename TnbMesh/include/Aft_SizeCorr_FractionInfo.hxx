@@ -33,6 +33,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const std::string extension;
+
 		static TnbMesh_EXPORT const Standard_Real DEFAULT_DELTA;
 		static TnbMesh_EXPORT const Standard_Real DEFAULT_COEFF;
 

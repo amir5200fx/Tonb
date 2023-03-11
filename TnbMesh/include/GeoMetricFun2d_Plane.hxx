@@ -29,6 +29,8 @@ namespace tnbLib
 		TnbMesh_EXPORT void CalcMetric();
 
 
+	protected:
+
 		// default constructor [12/24/2021 Amir]
 
 		GeoMetricFun2d_Plane()

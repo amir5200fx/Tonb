@@ -2188,6 +2188,57 @@
     <Filter Include="TnbLib\Aft\Entities\Boundary\Gap\Node\AnIso\UniMetric">
       <UniqueIdentifier>{8e389ec2-19e6-4c6c-a83d-9012a0539b6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Region\Volume">
+      <UniqueIdentifier>{7d6e80eb-d53a-434f-b35d-c94bb0764a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Region\Volume\Traits">
+      <UniqueIdentifier>{d7f5c08e-0dfd-4c22-818d-e45f726dcde7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Cad\Shell">
+      <UniqueIdentifier>{bdc40186-0c51-4d3b-abfc-0b2d2db89ce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Shell">
+      <UniqueIdentifier>{5bcee63c-2310-4315-8188-004707ec59ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Shell\T">
+      <UniqueIdentifier>{13c2dfeb-dd27-438e-9600-c0d630081a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Shell\T\Iso">
+      <UniqueIdentifier>{bc054df5-d747-4887-9d83-495fdcd08907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Shell\T\AnIso">
+      <UniqueIdentifier>{20e83471-e348-484e-a1f6-71e3a1ab9aa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Cad\Shell\T\AnIso\UniMetric">
+      <UniqueIdentifier>{321f20b2-42ea-49cd-be4d-8ee65324849a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Region\Volume">
+      <UniqueIdentifier>{079b350b-fc47-4f75-9d9e-51dd7b2ed4b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Aft\Region\Volume\T">
+      <UniqueIdentifier>{7646204d-124b-4ebd-aaf9-8477054c6c22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Cad\Surface">
+      <UniqueIdentifier>{f2924f36-aadd-4515-904c-654b7c2fb02a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Cad\Surface\G">
+      <UniqueIdentifier>{390e715f-7a8a-477c-bfe8-3d515f56e60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Cad\Surface\T">
+      <UniqueIdentifier>{3bdd8e5b-ef99-49ed-9dfe-e61f820abf2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Cad\Shell\G">
+      <UniqueIdentifier>{9f2ab608-8cb2-4cac-9d2b-48a154ceb1ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Cad\Shell\T">
+      <UniqueIdentifier>{6ff3e48d-6a65-45f4-b408-59f6db6145cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Region\Volume\G">
+      <UniqueIdentifier>{2550093e-b038-4911-a3ad-22cf155ef6a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Region\Volume\T">
+      <UniqueIdentifier>{626d4ef7-5d3b-4179-a5eb-0371aa883087}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5307,6 +5358,63 @@
     <ClInclude Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric\Aft2d_SegmentGapEdgeUniMetricFwd.hxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Region\Volume\Mesh_RegionVolume.hxx">
+      <Filter>TnbLib\Base\Region\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Region\Volume\Traits\Mesh_RegionVolumeTraits.hxx">
+      <Filter>TnbLib\Base\Region\Volume\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Shell\Mesh_Shell.hxx">
+      <Filter>TnbLib\Base\Cad\Shell</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Region\Volume\Mesh_RegionVolumeI.hxx">
+      <Filter>TnbLib\Base\Region\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Surface\Plane\GeoMetricFun3d_Plane.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Surface\Mesh_Surface.hxx">
+      <Filter>TnbLib\Base\Cad\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Surface\Mesh_SurfaceI.hxx">
+      <Filter>TnbLib\Base\Cad\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Surface\G\Mesh3d_gSurface.hxx">
+      <Filter>TnbLib\Base\Cad\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Surface\G\Mesh3d_gSurfaceFwd.hxx">
+      <Filter>TnbLib\Base\Cad\Surface\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Surface\T\Mesh3d_tSurface.hxx">
+      <Filter>TnbLib\Base\Cad\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Surface\T\Mesh3d_tSurfaceFwd.hxx">
+      <Filter>TnbLib\Base\Cad\Surface\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Shell\G\Mesh3d_gShell.hxx">
+      <Filter>TnbLib\Base\Cad\Shell\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Shell\G\Mesh3d_gShellFwd.hxx">
+      <Filter>TnbLib\Base\Cad\Shell\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Shell\T\Mesh3d_tShell.hxx">
+      <Filter>TnbLib\Base\Cad\Shell\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Cad\Shell\T\Mesh3d_tShellFwd.hxx">
+      <Filter>TnbLib\Base\Cad\Shell\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Region\Volume\G\Mesh3d_gRegionVolume.hxx">
+      <Filter>TnbLib\Base\Region\Volume\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Region\Volume\G\Mesh3d_gRegionVolumeFwd.hxx">
+      <Filter>TnbLib\Base\Region\Volume\G</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Region\Volume\T\Mesh3d_tRegionVolume.hxx">
+      <Filter>TnbLib\Base\Region\Volume\T</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Region\Volume\T\Mesh3d_tRegionVolumeFwd.hxx">
+      <Filter>TnbLib\Base\Region\Volume\T</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -6137,9 +6245,6 @@
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std\Aft2d_OptNodeSurfaceUniMetric_Standard.cxx">
       <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std\Aft2d_OptNodeSurfaceUniMetric_StandardIO.cxx">
-      <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Adaptive\Iterative\Aft2d_OptNodeSurfaceUniMetric_IterAdaptive.cxx">
       <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Adaptive\Iterative</Filter>
     </ClCompile>
@@ -6913,6 +7018,45 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric\Aft2d_SegmentGapEdgeUniMetric.cxx">
       <Filter>TnbLib\Aft\Entities\Boundary\Gap\Edge\AnIso\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Region\Volume\Mesh_RegionVolume.cxx">
+      <Filter>TnbLib\Base\Region\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Plane\GeoMetricFun3d_PlaneIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Surface\Mesh_Surface.cxx">
+      <Filter>TnbLib\Base\Cad\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Shell\G\Mesh3d_gShellIO.cxx">
+      <Filter>TnbLib\Base\Cad\Shell\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Shell\T\Mesh3d_tShellIO.cxx">
+      <Filter>TnbLib\Base\Cad\Shell\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Surface\G\Mesh3d_gSurfaceIO.cxx">
+      <Filter>TnbLib\Base\Cad\Surface\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Cad\Surface\T\Mesh3d_tSurfaceIO.cxx">
+      <Filter>TnbLib\Base\Cad\Surface\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Region\Volume\G\Mesh3d_gRegionVolumeIO.cxx">
+      <Filter>TnbLib\Base\Region\Volume\G</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Region\Volume\T\Mesh3d_tRegionVolumeIO.cxx">
+      <Filter>TnbLib\Base\Region\Volume\T</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std\Aft2d_OptNodeSurfaceUniMetric_StandardIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Iso\2d\IterAdaptive\Aft2d_OptNode_IterAdaptiveIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Iso\2d\IterAdaptive</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Iso\2d\nonIterAdaptive\Aft2d_OptNode_nonIterAdaptiveIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Iso\2d\nonIterAdaptive</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Iso\2d\Uniform\Aft2d_OptNode_UniformIO.cxx">
+      <Filter>TnbLib\Aft\OptNode\Algorithms\Iso\2d\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

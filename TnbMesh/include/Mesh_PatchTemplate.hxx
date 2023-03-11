@@ -48,9 +48,9 @@ namespace tnbLib
 
 	public:
 
-		typedef typename Mesh_PatchTemplate_Traits<SurfType>::parCurveType
+		typedef typename Mesh_PatchTemplate_Traits<SurfType, SizeFun, MetricFun>::parCurveType
 			parCurveType;
-		typedef Mesh_RegionPlane<parCurveType, SizeFun, MetricFun>
+		typedef typename Mesh_PatchTemplate_Traits<SurfType, SizeFun, MetricFun>::plnRegion
 			plnRegion;
 
 
