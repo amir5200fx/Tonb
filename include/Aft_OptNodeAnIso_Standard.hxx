@@ -16,6 +16,7 @@ namespace tnbLib
 
 	public:
 
+		typedef Aft_OptNode_Calculator<FrontType, SizeFun, MetricFun> base;
 		typedef typename info_type_from_aniso_optNode_alg<Aft_OptNode<FrontType, SizeFun, MetricFun>>::infoType infoType;
 
 	private:
@@ -23,6 +24,18 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<infoType> theInfo_;
+
+
+		// Private functions and operators [3/10/2023 Payvand]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			Info << "this function is not supposed to be called." << endl;
+			NotImplemented;
+		}
 
 	protected:
 
@@ -57,6 +70,7 @@ namespace tnbLib
 	};
 
 
+	// NO info. is needed for a uniform metric [3/11/2023 Payvand]
 	template<class FrontType, class SizeFun>
 	class Aft_OptNode<FrontType, SizeFun, GeoMetricFun2d_Uniform>
 		: public Aft_OptNode_Calculator<FrontType, SizeFun, GeoMetricFun2d_Uniform>
@@ -64,7 +78,22 @@ namespace tnbLib
 
 		/*Private Data*/
 
+
+		// Private functions and operators [3/10/2023 Payvand]
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version)
+		{
+			ar& boost::serialization::base_object
+				<Aft_OptNode_Calculator<FrontType, SizeFun, GeoMetricFun2d_Uniform>>(*this);
+		}
+
 	public:
+
+		typedef Aft_OptNode_Calculator<FrontType, SizeFun, GeoMetricFun2d_Uniform>
+			base;
 
 		// default constructor [3/8/2022 Amir]
 

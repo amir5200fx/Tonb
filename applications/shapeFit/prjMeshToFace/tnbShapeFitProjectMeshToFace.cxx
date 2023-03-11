@@ -271,7 +271,14 @@ namespace tnbLib
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "unable to identify the boundary" << endl
+				<< " - size : " << boundaries.size() << endl
 				<< abort(FatalError);
+		}
+
+		if (verbose)
+		{
+			Info << endl
+				<< " - projecting the boundaries to the shape..." << endl;
 		}
 
 		auto projector = std::make_shared<PtdShapeFit_ProjMeshToFace>();
@@ -286,6 +293,11 @@ namespace tnbLib
 		projector->Perform();
 
 		const auto& poly = projector->Projected();
+		if (verbose)
+		{
+			Info << endl
+				<< " - the boundaries have been projected." << endl;
+		}
 
 		auto polyFace = Cad_Tools::RetrieveTriangulation(face);
 		auto paraMesh = Cad_Tools::ParaTriangulation(*polyFace);
