@@ -134,8 +134,9 @@ namespace tnbLib
 				}
 
 				const auto n = (Standard_Real)theParams.size();
-				a.at(m) = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX2);
-				b.at(m) = (sumY - a.at(m) * sumX) / n;
+				const auto delta = n * sumX2 - sumX * sumX;
+				a.at(m) = (n * sumXY - sumX * sumY) / delta;
+				b.at(m) = (sumX2 * sumY - sumXY * sumX) / delta;
 			}
 			
 		}
@@ -197,7 +198,7 @@ tnbLib::PtdShapeFit_LinExtruded::CalcLS
 		{
 			auto x = q.first;
 			auto y = q.second;
-
+			//std::cout << "x = " << x << ", y = " << y << std::endl;
 			auto x2 = x * x;
 			auto xy = x * y;
 
@@ -207,19 +208,24 @@ tnbLib::PtdShapeFit_LinExtruded::CalcLS
 			sumX2 += x2;
 			sumXY += xy;
 		}
-
+		//PAUSE;
 		const auto n = (Standard_Real)theQs.size();
-		const auto m = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX2);
-		const auto b = (sumY - m * sumX) / n;
-
+		const auto delta = n * sumX2 - sumX * sumX;
+		const auto m = (n * sumXY - sumX * sumY) / delta;
+		//const auto b = (sumY - m * sumX) / n;
+		const auto b = (sumX2 * sumY - sumXY * sumX) / delta;
+		//std::cout << "m = " << m << ", b = " << b << std::endl;
+		//PAUSE;
 		std::vector<Standard_Real> values;
 		values.reserve(theQs.size());
 		for (const auto& q : theQs)
 		{
 			auto x = q.first;
 			auto y = m * x + b;
+			//std::cout << "x1 = " << x << ", y1 = " << y << std::endl;
 			values.push_back(y);
 		}
+		//PAUSE;
 		return std::move(values);
 	}
 }
