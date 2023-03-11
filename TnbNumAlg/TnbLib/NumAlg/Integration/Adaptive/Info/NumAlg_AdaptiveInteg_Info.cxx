@@ -1,5 +1,7 @@
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 
+const std::string tnbLib::NumAlg_AdaptiveInteg_Info::extension = ".adaptIntegInfo";
+
 tnbLib::NumAlg_AdaptiveInteg_Info::NumAlg_AdaptiveInteg_Info()
 	: IsConverged_(Standard_False)
 	, theTolerance_(DEFAULT_TOLERANCE)
