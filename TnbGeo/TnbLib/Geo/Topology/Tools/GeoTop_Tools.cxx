@@ -130,8 +130,23 @@ namespace tnbLib
 				<< "the node is not boundary!" << endl
 				<< abort(FatalError);
 		}
-		Debug_If_Condition(fwd->Second() IS_EQUAL theVtx);
-		return fwd->Second();
+		if (fwd->First() IS_EQUAL theVtx)
+		{
+			return fwd->Second();
+		}
+		else if (fwd->Second() IS_EQUAL theVtx)
+		{
+			return fwd->First();
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "unspecified situation has been detected." << endl
+				<< abort(FatalError);
+			return nullptr;
+		}
+		/*Debug_If_Condition(fwd->Second() IS_EQUAL theVtx);
+		return fwd->Second();*/
 	}
 
 	auto TrackPolygon(std::set<std::shared_ptr<GeoTop2d_Edge>, decltype(cmpEdges)>& theEdges)
@@ -145,10 +160,11 @@ namespace tnbLib
 		//PAUSE;
 		while (currentNode NOT_EQUAL firstNode)
 		{
-			//std::cout << "next..." << std::endl;
+			//std::cout << "next... " << currentNode->Index() << std::endl;
 			currentNode = NextNode(currentNode);
 			nodes.push_back(currentNode);
 		}
+		//PAUSE;
 		for (const auto& x : nodes)
 		{
 			auto bwd = x->BackwardBoundaryEdge();
@@ -231,11 +247,23 @@ tnbLib::GeoTop_Tools::CalcBoundaries
 		Entity3d_Chain ch(pnts, ids);
 		ch.ExportToPlt(myFile);
 	}*/
+	for (const auto& x : edgeSet)
+	{
+		if (x->First()->NbBoundaryEdges() NOT_EQUAL 2)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the mesh is not manifold." << endl
+				<< " - index: " << x->First()->Index() << endl
+				<< abort(FatalError);
+		}
+	}
 	std::vector<std::shared_ptr<std::vector<tnbLib::connectivity::dual>>> indices;
+	//std::cout << "size: " << edgeSet.size() << std::endl;
 	while (edgeSet.size())
 	{
 		auto poly = ::tnbLib::TrackPolygon(edgeSet);
 		auto ids = ::tnbLib::GetIndices(poly);
+		//std::cout << "size: " << edgeSet.size() << std::endl;
 		/*for (const auto& x : *ids)
 		{
 			std::cout << x.Value(0) << " , " << x.Value(1) << std::endl;

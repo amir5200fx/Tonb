@@ -3,6 +3,7 @@
 #include <GeoExtrude_Polyline.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo_AdTree.hxx>
+#include <Geo_Tools.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Polygon.hxx>
 
@@ -22,10 +23,12 @@
 #include <CGAL\Polygon_mesh_processing\clip.h>
 //#include <CGAL\Polygon_mesh_processing\split.h>
 #include <CGAL\Polygon_mesh_processing\stitch_borders.h>
+#include <CGAL\Polygon_2.h>
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel   Kernel;
 typedef CGAL::Surface_mesh<Kernel::Point_3>                   SurfMesh;
 
+typedef Kernel::Point_2 Point_2;
 typedef Kernel::Point_3										  Point_3;
 typedef std::vector<Kernel::Point_3>                          Polyline_type;
 typedef std::list<Polyline_type>                              Polylines;
@@ -35,6 +38,7 @@ typedef Kernel::Plane_3 Plane_3;
 typedef CGAL::AABB_halfedge_graph_segment_primitive<SurfMesh>      HGSP;
 typedef CGAL::AABB_traits<Kernel, HGSP>                            AABB_traits;
 typedef CGAL::AABB_tree<AABB_traits>							   AABB_tree;
+typedef CGAL::Polygon_2<Kernel> Polygon_2;
 
 namespace tnbLib
 {
@@ -158,6 +162,12 @@ void tnbLib::GeoSlicer2d_PolyLine::Perform()
 			<< "no polyline has been loaded." << endl
 			<< abort(FatalError);
 	}
+	if (NOT Geo_Tools::IsSimple_cgal(Polyline()->Points()))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the polygon is not simple." << endl
+			<< abort(FatalError);
+	}
 	static auto getPoint = [](const Point_3& thePt)
 	{
 		Pnt3d pt(thePt.x(), thePt.y(), thePt.z());
@@ -166,13 +176,14 @@ void tnbLib::GeoSlicer2d_PolyLine::Perform()
 	auto bbx = Geo_BoxTools::GetBox(Polyline()->Points(), 0);
 	auto d = bbx.Diameter() * 0.1;
 	auto extruder = std::make_shared<GeoExtrude_Polyline>();
+	//auto reversed = std::make_shared<Entity2d_Polygon>(Polyline()->Reversed());
 	extruder->SetPolyline(Polyline());
 	extruder->SetZ0(-d);
 	extruder->SetZ1(+d);
 	extruder->Perform();
 	Debug_If_Condition_Message(NOT extruder->IsDone(), "the application is not performed.");
 
-	auto tris3 = GetTris3d(*Mesh());
+	auto tris3 = GetTris3d(*Mesh());	
 	
 	//{// test [2/19/2023 Payvand]
 	//	OFstream myFile("extruder.plt");
@@ -260,6 +271,7 @@ void tnbLib::GeoSlicer2d_PolyLine::Perform()
 			sliced = std::move(mesh);
 		}
 	}
+	//PAUSE;
 	theClipped_ = std::move(sliced);
 	Change_IsDone() = Standard_True;
 	return;
