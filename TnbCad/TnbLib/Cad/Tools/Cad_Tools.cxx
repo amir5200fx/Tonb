@@ -338,25 +338,15 @@ tnbLib::Cad_Tools::BoundingBox
 	const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
 )
 {
-	NotImplemented;
-	return Entity3d_Box();
+	Bnd_Box B;
+	for (const auto& x : theSurfaces)
+	{
+		Debug_Null_Pointer(x);
+		BRepBndLib::AddOptimal(x->Face(), B, Standard_False, Standard_False);
+	}
+	auto b = BoundingBox(B);
+	return std::move(b);
 }
-
-//tnbLib::Entity3d_Box 
-//tnbLib::Cad_Tools::BoundingBox
-//(
-//	const std::vector<std::shared_ptr<TModel_Surface>>& theSurfaces
-//)
-//{
-//	Bnd_Box B;
-//	for (const auto& x : theSurfaces)
-//	{
-//		Debug_Null_Pointer(x);
-//		BRepBndLib::Add(x->Face(), B);
-//	}
-//	auto b = BoundingBox(B);
-//	return std::move(b);
-//}
 
 Bnd_Box 
 tnbLib::Cad_Tools::BoundingBox

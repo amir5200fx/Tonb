@@ -33,7 +33,6 @@ namespace tnbLib
 		inner theInner_;
 
 		Entity2d_Box theParaBoundingBox_;
-		Entity3d_Box theBoundingBox_;
 
 		TModel_FaceOrientation theOrientation_;
 
@@ -109,11 +108,6 @@ namespace tnbLib
 		const auto& Inner() const
 		{
 			return theInner_;
-		}
-
-		const auto& BoundingBox() const
-		{
-			return theBoundingBox_;
 		}
 
 		const auto& ParaBoundingBox() const

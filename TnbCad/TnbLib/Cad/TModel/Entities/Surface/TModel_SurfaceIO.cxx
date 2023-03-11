@@ -17,7 +17,6 @@ TNB_SAVE_IMPLEMENTATION(tnbLib::TModel_Surface)
 	ar & theInner_;
 
 	ar & theParaBoundingBox_;
-	ar & theBoundingBox_;
 
 	ar & theOrientation_;
 }
@@ -31,7 +30,6 @@ TNB_LOAD_IMPLEMENTATION(tnbLib::TModel_Surface)
 	ar & theInner_;
 
 	ar & theParaBoundingBox_;
-	ar & theBoundingBox_;
 
 	ar & theOrientation_;
 }
