@@ -2,7 +2,7 @@
 #ifndef _MeshPost_LaplacianSmoothing_AvgFunTraits_Header
 #define _MeshPost_LaplacianSmoothing_AvgFunTraits_Header
 
-#include <Aft2d_MetricPrcsrSurfaceUniMetricFwd.hxx>
+#include <Aft2d_MetricPrcsrUniMetricFwd.hxx>
 #include <Aft2d_MetricPrcsrAnIsoFwd.hxx>
 #include <Aft2d_MetricPrcsrFwd.hxx>
 #include <Aft2d_MetricPrcsrSurfaceFwd.hxx>
