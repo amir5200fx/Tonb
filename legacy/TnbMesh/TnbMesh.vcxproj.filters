@@ -79,6 +79,102 @@
     <Filter Include="TnbLib\Mesh\Aft\Plane\GeoPrcsr\Uniform">
       <UniqueIdentifier>{2c7cb39b-8d37-4de7-abb9-156703b7d456}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume">
+      <UniqueIdentifier>{13a9dfa8-7dbb-47e3-9c60-1f9ea32b6b2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities">
+      <UniqueIdentifier>{2aa8795b-44de-40fc-9b8f-20767592ba9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node">
+      <UniqueIdentifier>{0ed3ffb1-69ec-4beb-95a3-ca8eeb7b3cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge">
+      <UniqueIdentifier>{aed35122-a2f4-4620-9216-8dcf99fbd6b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Facet">
+      <UniqueIdentifier>{a703e51f-5ca9-45c6-a507-4bd7992a96f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Element">
+      <UniqueIdentifier>{14f4394f-eb08-4218-8553-5b314d21a020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Entity">
+      <UniqueIdentifier>{3d7696b8-2691-474a-9072-d2ed717f7471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary">
+      <UniqueIdentifier>{8f699578-8b96-40db-bc5e-cfb6d2472639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary">
+      <UniqueIdentifier>{1ca495ab-45b7-485b-aca5-32d7e41e6eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Boundary">
+      <UniqueIdentifier>{f33d61ea-9329-4605-b804-4e27a3893784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Adaptor">
+      <UniqueIdentifier>{a762aede-787d-4232-988d-05075694ca59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Geometry">
+      <UniqueIdentifier>{415b788d-e31b-45ca-ab5a-63882b27c2bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor">
+      <UniqueIdentifier>{643be7ac-4ba8-4af5-aa75-263dbaa4d1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry">
+      <UniqueIdentifier>{6c02eead-a73c-403c-82e6-fa5aecb63964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Adaptor">
+      <UniqueIdentifier>{597e1ed9-4438-4a41-b731-dbdbf6fc4363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Corner">
+      <UniqueIdentifier>{8b525248-2106-4b20-9c66-8ff38e081044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Segment">
+      <UniqueIdentifier>{180c69ff-0daa-4da8-a5ce-ab3a8eae11ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\GeoPrcsr">
+      <UniqueIdentifier>{30985abd-03d3-4121-81d9-3c4620deeeed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Mesh">
+      <UniqueIdentifier>{0b59213b-b16c-4f38-a6d4-789ebef36487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Cmp">
+      <UniqueIdentifier>{a5f18c3a-809c-4f2b-834d-d25bf8e0d924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Interior">
+      <UniqueIdentifier>{5bad9081-a985-4dae-9e46-0e30f7a9d7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Face">
+      <UniqueIdentifier>{a094c12b-58bc-4593-9a52-87f67ffdae80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geometry">
+      <UniqueIdentifier>{36ba6d82-2e93-4994-aea2-18a4cb4bd367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geometry\3d">
+      <UniqueIdentifier>{be1a2dbf-7a7c-4b6e-a039-7ce68869e6c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geometry\3d\Entities">
+      <UniqueIdentifier>{9e977792-154a-40ce-b563-fbb366d07352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geometry\3d\Entities\Entity">
+      <UniqueIdentifier>{a714a8ff-5fb7-48a6-b930-54f621eccc9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geometry\3d\Entities\Surface">
+      <UniqueIdentifier>{e90ea1e2-c397-4e0a-a9c6-49f56acfa80a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geometry\3d\Entities\Curve">
+      <UniqueIdentifier>{0d27c90e-5385-4b26-9a38-4b403c633167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment">
+      <UniqueIdentifier>{e5a44505-ab0a-4579-8f80-4e55e5a6f9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face">
+      <UniqueIdentifier>{f5ad4026-4bb5-4d99-b138-21bfad948eea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Interior">
+      <UniqueIdentifier>{40efcae4-cccf-4b59-8049-61ccc9b63436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor">
+      <UniqueIdentifier>{55d3dc89-cd5d-4f4f-8dae-7bed15d05b16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.cxx">
@@ -140,6 +236,105 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Mesh\Aft\Plane\Aft2d_Plane.cxx">
       <Filter>TnbLib\Mesh\Aft\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Adaptor\Aft3d_NodeAdaptor.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Adaptor\Aft3d_NodeAdaptorIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor\Aft3d_EdgeAdaptor.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Aft3d_Edge.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Aft3d_EdgeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Aft3d_Facet.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Adaptor\Aft3d_FacetAdaptorIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Aft3d_VolumeCore.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Aft3d_BoundaryNode.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Aft3d_Node.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor\Aft3d_EdgeAdaptorIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Corner\Aft3d_CornerNode.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Corner\Aft3d_CornerNodeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Corner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Face\Aft3d_FaceNode.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Face\Aft3d_FaceNodeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Segment\Aft3d_SegmentNode.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Segment\Aft3d_SegmentNodeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Aft3d_BoundaryEdge.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment\Aft3d_SegmentEdge.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment\Aft3d_SegmentEdgeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face\Aft3d_FaceEdge.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face\Aft3d_FaceEdgeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Boundary\Aft3d_BoundaryFacet.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Boundary\Aft3d_BoundaryFacetIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Interior\Aft3d_InteriorNode.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Interior</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Interior\Aft3d_InteriorNodeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Interior</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Interior\Aft3d_InteriorFacetIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet\Interior</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Aft3d_FacetIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor\Aft3d_ElementAdaptor.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor\Aft3d_ElementAdaptorIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_ElementIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Cmp\Aft3d_Comparison.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Cmp</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Aft3d_Volume.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +412,84 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Mesh\Aft\Plane\Aft2d_PlaneI.hxx">
       <Filter>TnbLib\Mesh\Aft\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Entity\Aft3d_Entity.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Aft3d_Node.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Adaptor\Aft3d_NodeAdaptor.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Geometry\Aft3d_NodeGeometry.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Aft3d_Edge.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor\Aft3d_EdgeAdaptor.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry\Aft3d_EdgeGeoemtry.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Aft3d_Facet.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Aft3d_FacetI.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Adaptor\Aft3d_FacetAdaptor.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_Element.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Aft3d_Volume.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\GeoPrcsr\Aft3d_GeoPrcsr.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\GeoPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Aft3d_VolumeI.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Cmp\Aft3d_Comparison.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Cmp</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Interior\Aft3d_InteriorFacet.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet\Interior</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Aft3d_BoundaryNode.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Corner\Aft3d_CornerNode.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Corner</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Face\Aft3d_FaceNode.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Face</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Segment\Aft3d_SegmentNode.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Boundary\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Aft3d_BoundaryEdge.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment\Aft3d_SegmentEdge.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face\Aft3d_FaceEdge.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Boundary\Face</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Boundary\Aft3d_BoundaryFacet.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Node\Interior\Aft3d_InteriorNode.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Node\Interior</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor\Aft3d_ElementAdaptor.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 #pragma once
-#ifndef _Aft2d_NodeGeometry_Header
-#define _Aft2d_NodeGeometry_Header
+#ifndef _Aft3d_NodeGeometry_Header
+#define _Aft3d_NodeGeometry_Header
 
-#include <Pnt2d.hxx>
+#include <Pnt3d.hxx>
 #include <Global_Serialization.hxx>
 
 namespace tnbLib
@@ -11,7 +11,7 @@ namespace tnbLib
 	namespace legLib
 	{
 
-		class Aft2d_NodeGeometry
+		class Aft3d_NodeGeometry
 		{
 
 		public:
@@ -20,7 +20,7 @@ namespace tnbLib
 			{
 
 				/*Private Data*/
-				
+
 				Standard_Real theRadius_ = 0;
 				Standard_Real theMaxL_ = 0;
 
@@ -82,10 +82,10 @@ namespace tnbLib
 					return onCavity_;
 				}
 
-				void SetRadius(const Standard_Real);
-				void SetMaxL(const Standard_Real);
+				void SetRadius(const Standard_Real r) { theRadius_ = r; }
+				void SetMaxL(const Standard_Real maxL) { theMaxL_ = maxL; }
 
-				void SetCavityCond(const Standard_Boolean);
+				void SetCavityCond(const Standard_Boolean theCond) { onCavity_ = theCond; }
 
 			};
 
@@ -93,12 +93,12 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			Pnt2d theCoord_;
+			Pnt3d theCoord_;
 
 			frontSpecs theFrontSpecs_;
 
 
-			// Private functions and operators [2/1/2023 Payvand]
+			// Private functions and operators [2/23/2023 Payvand]
 
 			friend class boost::serialization::access;
 
@@ -111,52 +111,40 @@ namespace tnbLib
 
 		protected:
 
-			// default constructor [2/1/2023 Payvand]
+			// default constructor [2/23/2023 Payvand]
 
-			Aft2d_NodeGeometry()
+			Aft3d_NodeGeometry()
 			{}
 
-			// constructors [2/1/2023 Payvand]
+			// constructors [2/23/2023 Payvand]
 
-			explicit Aft2d_NodeGeometry(const Pnt2d& theCoord)
+			explicit Aft3d_NodeGeometry(const Pnt3d& theCoord)
 				: theCoord_(theCoord)
 			{}
 
-			Aft2d_NodeGeometry(Pnt2d&& theCoord)
+			Aft3d_NodeGeometry(Pnt3d&& theCoord)
 				: theCoord_(std::move(theCoord))
 			{}
 
+
 		public:
 
-			// Public functions and operators [2/1/2023 Payvand]
 
-			const auto& Coord() const
-			{
-				return theCoord_;
-			}
+			// Public functions and operators [2/23/2023 Payvand]
 
-			auto& CoordRef()
-			{
-				return theCoord_;
-			}
+			const auto& Coord() const { return theCoord_; }
+			auto& CoordRef() { return theCoord_; }
 
-			const auto& FrontSpecs() const
-			{
-				return theFrontSpecs_;
-			}
+			const auto& FrontSpecs() const { return theFrontSpecs_; }
+			auto& FrontSpecsRef() { return theFrontSpecs_; }
 
-			auto& FrontSpecsRef()
-			{
-				return theFrontSpecs_;
-			}
+			void SetCoord(const Pnt3d& theCoord) { theCoord_ = theCoord; }
+			void SetCoord(Pnt3d&& theCoord) { theCoord_ = std::move(theCoord); }
 
-			void SetCoord(const Pnt2d&);
-			void SetCoord(Pnt2d&&);
-
-			void SetFrontSpecs(const frontSpecs&);
-			void SetFrontSpecs(frontSpecs&&);
+			void SetFrontSpecs(const frontSpecs& theSpecs) { theFrontSpecs_ = theSpecs; }
+			void SetFrontSpecs(frontSpecs&& theSpecs) { theFrontSpecs_ = std::move(theSpecs); }
 		};
 	}
 }
 
-#endif // !_Aft2d_NodeGeometry_Header
+#endif // !_Aft3d_NodeGeometry_Header
