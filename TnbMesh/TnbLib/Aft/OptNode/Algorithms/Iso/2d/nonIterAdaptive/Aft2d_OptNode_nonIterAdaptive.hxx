@@ -3,6 +3,7 @@
 #define _Aft2d_OptNode_nonIterAdaptive_Header
 
 #include <Aft2d_OptNode_nonIterAdaptiveFwd.hxx>
+#include <Aft2d_OptNode_Calculator.hxx>
 #include <Aft_OptNode.hxx>
 
 namespace tnbLib
@@ -10,6 +11,25 @@ namespace tnbLib
 
 	template<>
 	TnbMesh_EXPORT void Aft2d_OptNode_nonIterAdaptive::Perform();
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft2d_OptNode_nonIterAdaptive::serialize<TNB_iARCH_TYPE>
+		(
+			TNB_iARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
+	template<>
+	template<>
+	TnbMesh_EXPORT void Aft2d_OptNode_nonIterAdaptive::serialize<TNB_oARCH_TYPE>
+		(
+			TNB_oARCH_TYPE& ar,
+			const unsigned int file_version
+			);
+
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_OptNode_nonIterAdaptive);
 
 #endif // !_Aft2d_OptNode_nonIterAdaptive_Header

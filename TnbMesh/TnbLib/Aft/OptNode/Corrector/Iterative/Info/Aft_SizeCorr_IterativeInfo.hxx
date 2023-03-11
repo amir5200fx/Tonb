@@ -39,6 +39,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const std::string extension;
+
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_NB_ITERATIONS;
 
 		static TnbMesh_EXPORT const Standard_Real DEFAULT_TOLERANCE;
