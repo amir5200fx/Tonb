@@ -82,7 +82,6 @@ tnbLib::Mesh_RegionPlane<CurveType, SizeFun, MetricFun>::MakePlane
 	}
 
 	const auto& Outer = *thePlane->OuterWire();
-	const auto& Inners = *thePlane->InnerWires();
 
 	auto outer_wire =
 		MakeMeshWire(Outer);
@@ -91,6 +90,7 @@ tnbLib::Mesh_RegionPlane<CurveType, SizeFun, MetricFun>::MakePlane
 		inner_wires;
 	if (thePlane->InnerWires())
 	{
+		const auto& Inners = *thePlane->InnerWires();
 		inner_wires =
 			std::make_shared<std::vector<std::shared_ptr<plnWireType>>>();
 		inner_wires->reserve(Inners.size());
@@ -100,7 +100,7 @@ tnbLib::Mesh_RegionPlane<CurveType, SizeFun, MetricFun>::MakePlane
 			Debug_Null_Pointer(x);
 
 			auto wire = MakeMeshWire(*x);
-			inner_wires->push_back(wire);
+			inner_wires->push_back(std::move(wire));
 		}
 	}
 
