@@ -431,7 +431,7 @@ int main(int argc, char* argv[])
 		{
 			Info << endl;
 			Info << " This application is aimed to merge a surface mesh." << endl
-				<< " - subdirectories: mesh, shape" << endl;
+				<< " - subdirectories: mesh" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
