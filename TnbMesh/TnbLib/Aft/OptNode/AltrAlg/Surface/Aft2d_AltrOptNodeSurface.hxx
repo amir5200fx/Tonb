@@ -36,12 +36,21 @@ namespace tnbLib
 
 		Standard_Boolean IsConverged_;
 
+
+		// Private functions and operators [3/11/2023 Payvand]
+
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+
 	protected:
+
 
 		// default constructor [5/7/2022 Amir]
 
 		Aft_AltrOptNode()
 			: IsConverged_(Standard_False)
+			, theP0_(Pnt2d::null)
+			, theSize_(0)
+			, theCorrected_(Pnt2d::null)
 		{}
 
 
@@ -87,6 +96,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const std::string extension;
+
 		// public functions and operators [5/7/2022 Amir]
 
 		const auto& Front() const
@@ -124,5 +135,7 @@ namespace tnbLib
 		
 	};
 }
+
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Aft2d_AltrOptNodeSurface);
 
 #endif // !_Aft2d_AltrOptNodeSurface_Header

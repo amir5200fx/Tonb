@@ -21,8 +21,19 @@ tnbLib::PtdShapeFit_Extruded::CreateShape
 	{
 		auto chrom = theSection->RetrieveChromosome(x);
 		auto pl = theSection->RetrieveShape(chrom);
+
 		planes.push_back(std::move(pl));
 	}
-	auto shape = PtdShapeFit_Tools::MakeExtrudedShape(planes, theAxis, theLocs);
-	return std::move(shape);
+	try
+	{
+		auto shape = PtdShapeFit_Tools::MakeExtrudedShape(planes, theAxis, theLocs);
+		return std::move(shape);
+	}
+	catch (const Standard_Failure& x)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< x.GetMessageString() << endl
+			<< abort(FatalError);
+		return nullptr;
+	}
 }

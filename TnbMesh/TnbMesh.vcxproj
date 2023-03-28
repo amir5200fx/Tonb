@@ -1479,6 +1479,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\AnIso\2d\Adaptive\nonIterative\Info\Aft2d_OptNodeAnIso_nonIterAdaptiveInfo.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\AnIso\2d\Adaptive\nonIterative\Info\Aft2d_OptNodeAnIso_nonIterAdaptiveInfoIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\AnIso\2d\Std\Aft2d_OptNodeAnIso_Standard.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\AnIso\2d\Std\Aft2d_OptNodeAnIso_StandardIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\AnIso\2d\UniMetric\Adaptive\Iterative\Aft2d_OptNodeUniMetric_IterAdaptive.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\AnIso\2d\UniMetric\Adaptive\Iterative\Aft2d_OptNodeUniMetric_IterAdaptiveIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\AnIso\2d\UniMetric\Adaptive\nonIterative\Aft2d_OptNodeUniMetric_nonIterAdaptive.cxx" />
@@ -1504,13 +1505,19 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Adaptive\nonIterative\Aft2d_OptNodeSurfaceUniMetric_nonIterAdaptiveIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std\Aft2d_OptNodeSurfaceUniMetric_Standard.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Algorithms\Surface\UniMetric\Std\Aft2d_OptNodeSurfaceUniMetric_StandardIO.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\Aft2d_AltrOptNodeSurface.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\Aft2d_AltrOptNodeSurfaceIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Aft2d_AltrOptNodeSurface_DE.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Aft2d_AltrOptNodeSurface_DEIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\DE\Info\Aft2d_AltrOptNodeSurface_DE_Info.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\MetricCorr\Aft2d_AltrOptNodeSurface_MetricCorr.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\NelderMead\Aft2d_AltrOptNodeSurface_NelderMead.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\NelderMead\Aft2d_AltrOptNodeSurface_NelderMeadIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\PerpenDir\Aft2d_AltrOptNodeSurface_PerpenDir.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\PerpenDir\Aft2d_AltrOptNodeSurface_PerpenDirIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri2\Aft2d_AltrOptNodeSurface_SubTri2.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri\Aft2d_AltrOptNodeSurface_SubTri.cxx" />
+    <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\SubTri\Aft2d_AltrOptNodeSurface_SubTriIO.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Analytical\AnIso\2d\Aft2d_OptNodeAnIso_Analytical.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Analytical\Iso\2d\Aft2d_OptNode_Analytical.cxx" />
     <ClCompile Include="TnbLib\Aft\OptNode\Analytical\Surface\Aft2d_OptNodeSurface_Analytical.cxx" />

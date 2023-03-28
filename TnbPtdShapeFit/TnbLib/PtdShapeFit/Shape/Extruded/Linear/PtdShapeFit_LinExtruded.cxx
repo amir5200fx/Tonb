@@ -170,7 +170,18 @@ tnbLib::PtdShapeFit_LinExtruded::CreateExtrapolated
 		auto pars = theSection->RetrieveParChromosome(chrom);
 		params.push_back(std::move(pars));
 	}
-	auto paired = std::make_pair(CreateShape(params, theSection, theAxis, theLocs), std::move(params));
+	std::shared_ptr<Cad_Shape> shape;
+	try
+	{
+		shape = CreateShape(params, theSection, theAxis, theLocs);
+	}
+	catch (const Standard_Failure& x)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< x.GetMessageString() << endl
+			<< abort(FatalError);
+	}
+	auto paired = std::make_pair(std::move(shape), std::move(params));
 	return std::move(paired);
 }
 

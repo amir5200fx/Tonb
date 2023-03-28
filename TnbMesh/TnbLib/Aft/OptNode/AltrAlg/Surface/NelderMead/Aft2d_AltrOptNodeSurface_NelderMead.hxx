@@ -18,6 +18,10 @@ namespace tnbLib
 
 		std::shared_ptr<NumAlg_NelderMeadInfo> theInfo_;
 
+		// Private functions and operators [3/11/2023 Payvand]
+
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+
 	public:
 
 		// default constructor [5/8/2022 Amir]
@@ -44,5 +48,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_AltrOptNodeSurface_NelderMead);
 
 #endif // !_Aft2d_AltrOptNodeSurface_NelderMead_Header

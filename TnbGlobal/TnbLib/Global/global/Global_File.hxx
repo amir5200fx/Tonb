@@ -29,6 +29,8 @@ namespace tnbLib
 				const std::string& extension
 			);
 
+		TnbGlobal_EXPORT Standard_Boolean IsDirectory(const std::string& name);
+
 		TnbGlobal_EXPORT std::string GetHomeDir();
 		TnbGlobal_EXPORT std::string GetSystemFile(const std::string& theAppName);
 
@@ -45,9 +47,13 @@ namespace tnbLib
 		void SaveListTo(const std::vector<T>&, const std::string& name, const unsigned short verbose);
 
 		template<class T>
-		T LoadFile(const std::string& name, const unsigned short verbose);
+		T LoadFile(const std::string& name, const std::string& extension, const unsigned short verbose);
+
+		template<class T>
+		T LoadSingleFile(const std::string& name, const unsigned short verbose);
 
 		TnbGlobal_EXPORT void RemoveDirectory(const boost::filesystem::path&);
+		TnbGlobal_EXPORT void CheckDirectory(const std::string& name);
 	}
 }
 

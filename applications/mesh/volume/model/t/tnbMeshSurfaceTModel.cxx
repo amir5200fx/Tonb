@@ -1,3 +1,4 @@
+#include <Aft2d_OptNodeSurface_Altr.hxx>
 #include <Aft_SizeCorr_IterativeInfo.hxx>
 #include <Cad_ApprxMetricInfo.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>

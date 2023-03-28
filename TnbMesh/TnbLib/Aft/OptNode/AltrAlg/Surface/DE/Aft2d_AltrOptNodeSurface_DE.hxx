@@ -29,6 +29,8 @@ namespace tnbLib
 
 		TnbMesh_EXPORT double Iter(const std::vector<double>&) const;
 
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+
 	public:
 
 		static TnbMesh_EXPORT const std::shared_ptr<Aft2d_AltrOptNodeSurface_DE_Info> DEFAULT_INFO;
@@ -37,6 +39,8 @@ namespace tnbLib
 
 		Aft2d_AltrOptNodeSurface_DE()
 			: theInfo_(DEFAULT_INFO)
+			, theUV0_(std::make_pair(0,0))
+			, theUV1_(std::make_pair(0,0))
 		{}
 
 
@@ -74,5 +78,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_AltrOptNodeSurface_DE);
 
 #endif // !_Aft2d_AltrOptNodeSurface_DE_Header

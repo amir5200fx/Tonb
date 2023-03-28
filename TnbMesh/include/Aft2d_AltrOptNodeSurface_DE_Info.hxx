@@ -37,6 +37,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const std::string extension;
+
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_GEN_SIZE;
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_POP_SIZE;
 

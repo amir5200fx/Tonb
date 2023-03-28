@@ -35,6 +35,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbNumAlg_EXPORT const std::string extension;
+
 		static TnbNumAlg_EXPORT const Standard_Real DEFAULT_TOLERANCE;
 		static TnbNumAlg_EXPORT const Standard_Integer DEFAULT_MIN_ITERS;
 		static TnbNumAlg_EXPORT const Standard_Integer DEFAULT_MAX_ITERS;

@@ -186,9 +186,6 @@
     <ClInclude Include="TnbLib\NumAlg\Interpl\Steffen\NumAlg_SteffenInterplFunc.hxx">
       <Filter>TnbLib\NumAlg\Interpl\Steffen</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\Info\NumAlg_NelderMeadInfo.hxx">
-      <Filter>TnbLib\NumAlg\Optimization\NelderMead\Info</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\Coeffs\NumAlg_NelderMeadCoeffs.hxx">
       <Filter>TnbLib\NumAlg\Optimization\NelderMead\Coeffs</Filter>
     </ClInclude>
@@ -203,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\NumAlg\Optimization\GA\NumAlg_GAI.hxx">
       <Filter>TnbLib\NumAlg\Optimization\GA</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\NumAlg\Optimization\NelderMead\Info\NumAlg_NelderMeadInfo.hxx">
+      <Filter>TnbLib\NumAlg\Optimization\NelderMead\Info</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

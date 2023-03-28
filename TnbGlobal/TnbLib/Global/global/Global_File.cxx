@@ -37,6 +37,12 @@ tnbLib::file::IsFile
 	return Standard_False;
 }
 
+Standard_Boolean 
+tnbLib::file::IsDirectory(const std::string& name)
+{
+	return boost::filesystem::is_directory(name);
+}
+
 std::string 
 tnbLib::file::GetHomeDir()
 {
@@ -63,18 +69,47 @@ tnbLib::file::GetSystemFile(const std::string & theAppName)
 	}
 	else
 	{
-		auto dir = GetHomeDir();
-		boost::filesystem::path p1(dir + R"(\)" + theAppName);
-		if (boost::filesystem::exists(p1))
+		boost::filesystem::path p(current + R"(\system)");
+		if (boost::filesystem::exists(p))
 		{
-			return p1.string();
+			auto files = GetAllFileNames(current + R"(\system\)");
+			size_t nbFiles = 0;
+			boost::filesystem::path file;
+			for (const auto& x : files)
+			{
+				if (x.extension().string() IS_EQUAL ".config")
+				{
+					file = x;
+					nbFiles++;
+				}
+			}
+			if (nbFiles IS_EQUAL 1)
+			{
+				return ".\\system\\" + file.stem().string() + ".config";
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no system file has been found!" << endl
+					<< " - application: " << theAppName << endl
+					<< abort(FatalError);
+			}
 		}
 		else
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "no system file has been found!" << endl
-				<< " - application: " << theAppName << endl
-				<< abort(FatalError);
+			auto dir = GetHomeDir();
+			boost::filesystem::path p1(dir + R"(\)" + theAppName);
+			if (boost::filesystem::exists(p1))
+			{
+				return p1.string();
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no system file has been found!" << endl
+					<< " - application: " << theAppName << endl
+					<< abort(FatalError);
+			}
 		}
 	}
 	return std::string();
@@ -137,7 +172,6 @@ tnbLib::file::GetSingleFile
 			nbFiles++;
 		}
 	}
-
 	if (nbFiles NOT_EQUAL 1)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -173,4 +207,14 @@ void tnbLib::file::RemoveDirectory(const boost::filesystem::path& thePath)
 		}
 	}
 	remove(thePath);
+}
+
+void tnbLib::file::CheckDirectory(const std::string& name)
+{
+	if (NOT boost::filesystem::is_directory(name))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no {" << name << "} directory has been found!" << endl
+			<< abort(FatalError);
+	}
 }

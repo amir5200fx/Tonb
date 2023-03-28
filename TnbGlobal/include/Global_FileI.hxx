@@ -1,5 +1,8 @@
 #pragma once
 #include <fileName.hxx>
+#include <Global_Null.hxx>
+
+#include <fstream>
 template<class T>
 void tnbLib::file::SaveTo(const T & t, const std::string & name, const unsigned short verbose)
 {
@@ -91,6 +94,60 @@ namespace tnbLib
 			}
 
 			return std::move(myObj);
+		}
+
+		template<class T>
+		T LoadSingleFile(const std::string& name, const std::string& extension, const unsigned short verbose)
+		{
+			CheckDirectory(name);
+
+			const auto currentPath = boost::filesystem::current_path();
+
+			// Change the current path [3/18/2023 Payvand]
+			boost::filesystem::current_path(currentPath.string() + R"(\)" + name);
+			if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
+			{
+				auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
+				fileName fn(name + ".PATH");
+
+				std::ifstream myFile;
+				myFile.open(fn);
+				if (myFile.is_open())
+				{
+					std::string address;
+					std::getline(myFile, address);
+
+					// Change the current path [3/18/2023 Payvand]
+					boost::filesystem::current_path(address);
+
+					auto name = GetSingleFile(boost::filesystem::current_path(), extension).string();
+					auto loaded = file::LoadFile<T>(name + extension, verbose);
+
+					//- change back the current path
+					boost::filesystem::current_path(currentPath);
+					return std::move(loaded);
+				}
+				else
+				{
+					//- change back the current path
+					boost::filesystem::current_path(currentPath);
+
+					FatalErrorIn(FunctionSIG)
+						<< " the file is null." << endl
+						<< abort(FatalError);
+					//return null_object<T>::type;
+					return T();
+				}
+			}
+			else
+			{
+				auto name = GetSingleFile(boost::filesystem::current_path(), extension).string();
+				auto loaded = file::LoadFile<T>(name + extension, verbose);
+
+				//- change back the current path
+				boost::filesystem::current_path(currentPath);
+				return std::move(loaded);
+			}
 		}
 	}
 }

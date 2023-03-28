@@ -31,6 +31,8 @@ namespace tnbLib
 				const Pnt2d& theCentre
 			);
 
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+
 	public:
 
 		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_LEV;
@@ -78,5 +80,7 @@ namespace tnbLib
 		}
 	};
 }
+
+BOOST_CLASS_EXPORT_KEY(tnbLib::Aft2d_AltrOptNodeSurface_PerpenDir);
 
 #endif // !_Aft2d_AltrOptNodeSurface_PerpenDir_Header

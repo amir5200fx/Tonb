@@ -5,6 +5,9 @@
 #include <TnbError.hxx>
 #include <Osstream.hxx>
 
+const std::shared_ptr<tnbLib::Aft2d_AltrOptNodeSurface_DE_Info> tnbLib::Aft2d_AltrOptNodeSurface_DE::DEFAULT_INFO
+= std::make_shared<tnbLib::Aft2d_AltrOptNodeSurface_DE_Info>();
+
 double tnbLib::Aft2d_AltrOptNodeSurface_DE::Iter(const std::vector<double>& xs) const
 {
 	Pnt2d pt(xs.at(0), xs.at(1));
@@ -31,6 +34,13 @@ double tnbLib::Aft2d_AltrOptNodeSurface_DE::Iter(const std::vector<double>& xs) 
 	const auto cost0 = d0 * std::pow(1.0 + del0, Pow);
 	const auto cost1 = d1 * std::pow(1.0 + del1, Pow);
 	return cost0 * cost1;
+}
+
+void tnbLib::Aft2d_AltrOptNodeSurface_DE::Perform()
+{
+	FatalErrorIn(FunctionSIG)
+		<< "this method is not implemented." << endl
+		<< abort(FatalError);
 }
 
 //void tnbLib::Aft2d_AltrOptNodeSurface_DE::Perform()

@@ -91,9 +91,9 @@ namespace tnbLib
 				std::shared_ptr<PtdShapeFit_Section> sect;
 				Standard_Real loc;
 				{ // loading the section [2/13/2023 Payvand]
-					auto icurrentPath = boost::filesystem::current_path().string() + R"(\)" + std::to_string(i);
+					auto icurrentPath = boost::filesystem::current_path().string() + R"(\)" + std::to_string(i) + R"(\optimization)";
 					auto name = file::GetSingleFile(icurrentPath, PtdShapeFit_Section::extension).string();
-					std::string address = ".\\" + std::to_string(i) + "\\" + name + PtdShapeFit_Section::extension;
+					std::string address = ".\\" + std::to_string(i) + "\\optimization\\" + name + PtdShapeFit_Section::extension;
 					sect = file::LoadFile<std::shared_ptr<PtdShapeFit_Section>>(address, verbose);
 					if (NOT sect)
 					{
@@ -129,9 +129,9 @@ namespace tnbLib
 				std::shared_ptr<PtdShapeFit_Section> sect;
 				Standard_Real loc;
 				{ // loading the section [2/13/2023 Payvand]
-					auto icurrentPath = boost::filesystem::current_path().string() + R"(\)" + std::to_string(i);
+					auto icurrentPath = boost::filesystem::current_path().string() + R"(\)" + std::to_string(i) + R"(\optimization)";
 					auto name = file::GetSingleFile(icurrentPath, PtdShapeFit_Section::extension).string();
-					std::string address = ".\\" + std::to_string(i) + "\\" + name + PtdShapeFit_Section::extension;
+					std::string address = ".\\" + std::to_string(i) + "\\optimization\\" + name + PtdShapeFit_Section::extension;
 					sect = file::LoadFile<std::shared_ptr<PtdShapeFit_Section>>(address, verbose);
 					if (NOT sect)
 					{
@@ -379,7 +379,6 @@ namespace tnbLib
 			sections.push_back(x.first);
 			xs.push_back(x.second);
 		}
-		//PAUSE;
 		auto pars = myShape->CalcParameters(sections, *myAxis, xs);
 		if (verbose)
 		{
@@ -393,7 +392,7 @@ namespace tnbLib
 				}
 			}
 		}
-		//PAUSE;
+
 		std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>> parsLocs;
 		for (size_t i = 0; i < pars.size(); i++)
 		{
