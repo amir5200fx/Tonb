@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{4f32863a-7cf1-423a-881c-fc5cee4ccf83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\GMesh">
+      <UniqueIdentifier>{275ba901-9b66-401e-b6b0-6c9951deff99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\GMesh\Lib">
+      <UniqueIdentifier>{e46d5e74-ef07-4c26-b6c7-ae5d3df71b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\GMesh\module">
+      <UniqueIdentifier>{3862b4bf-2dce-453e-ba2e-c5ff36013089}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\GMesh\Lib\GMesh_Lib.hxx">
+      <Filter>TnbLib\GMesh\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\GMesh\module\GMesh_Module.hxx">
+      <Filter>TnbLib\GMesh\module</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\GMesh\Lib\GMesh_Lib.cxx">
+      <Filter>TnbLib\GMesh\Lib</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
