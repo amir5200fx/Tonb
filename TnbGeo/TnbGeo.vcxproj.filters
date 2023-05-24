@@ -871,6 +871,21 @@
     <Filter Include="TnbLib\Geo\Extrude\PolyLine">
       <UniqueIdentifier>{6bba5c77-2667-495a-8fe1-f1670e4331ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilOffsets">
+      <UniqueIdentifier>{1f3bb659-ce42-44e0-8fd2-63c9461b9ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilOffsets\MH102">
+      <UniqueIdentifier>{7b373916-c106-4126-89c7-f507e7ba141f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Ray">
+      <UniqueIdentifier>{f423959c-102c-483e-bf6d-74a939b65339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Ray\2d">
+      <UniqueIdentifier>{7b5153d7-a28a-411d-90d3-105618973b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\AirfoilOffsets\S833">
+      <UniqueIdentifier>{45575908-12e7-4fa8-ac60-af32956acc59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2076,6 +2091,21 @@
     <ClInclude Include="TnbLib\Geo\Extrude\Polyline\GeoExtrude_Polyline.hxx">
       <Filter>TnbLib\Geo\Extrude\PolyLine</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\AirfoilOffsets\MH102\Geo_AirfoilOffsets_MH102.hxx">
+      <Filter>TnbLib\Geo\AirfoilOffsets\MH102</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Ray\Entity_Ray.hxx">
+      <Filter>TnbLib\Geo\Entities\Ray</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Ray\2d\Entity2d_RayFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Ray\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Ray\2d\Entity2d_Ray.hxx">
+      <Filter>TnbLib\Geo\Entities\Ray\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\AirfoilOffsets\S833\Geo_AirfoilOffsets_S833.hxx">
+      <Filter>TnbLib\Geo\AirfoilOffsets\S833</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2611,6 +2641,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Tools\Geo_ToolsExportAsOBJ_cgal.cxx">
       <Filter>TnbLib\Geo\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\AirfoilOffsets\MH102\Geo_AirfoilOffsets_MH102.cxx">
+      <Filter>TnbLib\Geo\AirfoilOffsets\MH102</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\AirfoilOffsets\S833\Geo_AirfoilOffsets_S833.cxx">
+      <Filter>TnbLib\Geo\AirfoilOffsets\S833</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
