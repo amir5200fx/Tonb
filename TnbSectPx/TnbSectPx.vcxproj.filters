@@ -472,6 +472,12 @@
     <Filter Include="TnbLib\SectPx\Entities\Coord\Adaptor">
       <UniqueIdentifier>{c86eb2d5-131f-4faa-b3d4-fcd5dafb9036}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SectPx\IO">
+      <UniqueIdentifier>{1cb3aee4-a8c8-4e4d-81cc-bfa4f6fb5094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\SectPx\IO\Airfoil">
+      <UniqueIdentifier>{0a23a048-6a81-41b4-81c4-6ec4007ba949}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\SectPx\Entities\Entity\SectPx_Entity.hxx">
@@ -1049,6 +1055,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\SectPx\Entities\Coord\Adaptor\SectPx_CoordAdaptor.hxx">
       <Filter>TnbLib\SectPx\Entities\Coord\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SectPx\IO\Airfoil\SectPxIO_Airfoil.hxx">
+      <Filter>TnbLib\SectPx\IO\Airfoil</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1774,6 +1783,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\SectPx\Entities\Coord\Adaptor\SectPx_CoordAdaptorIO.cxx">
       <Filter>TnbLib\SectPx\Entities\Coord\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\IO\Airfoil\SectPxIO_AirfoilIO.cxx">
+      <Filter>TnbLib\SectPx\IO\Airfoil</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SectPx\IO\Airfoil\SectPxIO_Airfoil.cxx">
+      <Filter>TnbLib\SectPx\IO\Airfoil</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

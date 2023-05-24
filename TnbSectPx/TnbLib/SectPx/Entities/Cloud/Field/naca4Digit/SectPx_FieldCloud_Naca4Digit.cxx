@@ -199,7 +199,7 @@ void tnbLib::sectPxLib::naca::UpperEdge::Update() const
 
 	const auto& upper = naca.Upper();
 
-	Debug_Null_Pointer(theProfile_)
+	Debug_Null_Pointer(theProfile_);
 	theProfile_->Coords = std::move(upper);
 }
 
@@ -241,8 +241,8 @@ void tnbLib::sectPxLib::naca::LowerEdge::Update() const
 
 	const auto& lower = naca.Lower();
 
-	Debug_Null_Pointer(theProfile_)
-		theProfile_->Coords = std::move(lower);
+	Debug_Null_Pointer(theProfile_);
+	theProfile_->Coords = std::move(lower);
 }
 
 tnbLib::word 
