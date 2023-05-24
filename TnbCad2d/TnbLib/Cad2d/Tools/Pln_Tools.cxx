@@ -414,8 +414,14 @@ tnbLib::Pln_Tools::MakeWire
 
 		auto box = ring->BoundingBox(0);
 
-		info->SetAngle(2.0);
-		info->SetApprox(1.0E-4 * box.Diameter());
+		info->SetAngle(3.0);
+		info->SetApprox(1.0E-3 * box.Diameter());
+		info->SetMinSize(1.0E-4 * box.Diameter());
+
+		info->SetMaxNbSubdivision(10);
+		info->SetInitNbSubdivision(3);
+
+		info->SetNbSamples(4);
 
 		ring->Approx(info);
 
@@ -511,8 +517,14 @@ tnbLib::Pln_Tools::MakeWire
 	auto info = std::make_shared<Geo_ApprxCurve_Info>();
 	Debug_Null_Pointer(info);
 
-	info->SetAngle(2.0);
-	info->SetApprox(1.0E-4*box.Diameter());
+	info->SetAngle(3.0);
+	info->SetApprox(1.0E-3 * box.Diameter());
+	info->SetMinSize(1.0E-4 * box.Diameter());
+
+	info->SetMaxNbSubdivision(10);
+	info->SetInitNbSubdivision(3);
+
+	info->SetNbSamples(4);
 
 	for (const auto& x : cmpEdge->Edges())
 	{
@@ -582,11 +594,22 @@ tnbLib::Pln_Tools::MakeWire
 	auto info = std::make_shared<Geo_ApprxCurve_Info>();
 	Debug_Null_Pointer(info);
 
-	info->SetNbSamples(3);
+	/*info->SetNbSamples(3);
 	info->SetAngle(2.5);
 	info->SetApprox(1.0E-2);
 	info->SetMinSize(1.0e-3);
-	info->SetInitNbSubdivision(2);
+	info->SetInitNbSubdivision(2);*/
+
+	auto box = BoundingBox(theCurves);
+
+	info->SetAngle(3.0);
+	info->SetApprox(1.0E-3 * box.Diameter());
+	info->SetMinSize(1.0E-4 * box.Diameter());
+
+	info->SetMaxNbSubdivision(10);
+	info->SetInitNbSubdivision(3);
+
+	info->SetNbSamples(4);
 
 	auto wire = MakeWire(theCurves, theSense, info, theMaxTol);
 	return std::move(wire);
@@ -1818,9 +1841,14 @@ namespace tnbLib
 
 				const auto d = x->Curve->BoundingBox(0).Diameter();
 
-				apxInfo->SetAngle(2.0);
-				apxInfo->SetMinSize(1.0E-3*d);
-				apxInfo->SetNbSamples(3);
+				apxInfo->SetAngle(3.0);
+				apxInfo->SetApprox(1.0E-3 * d);
+				apxInfo->SetMinSize(1.0E-4 * d);
+
+				apxInfo->SetMaxNbSubdivision(10);
+				apxInfo->SetInitNbSubdivision(3);
+
+				apxInfo->SetNbSamples(4);
 
 				if (vtx0 IS_EQUAL vtx1)
 				{
