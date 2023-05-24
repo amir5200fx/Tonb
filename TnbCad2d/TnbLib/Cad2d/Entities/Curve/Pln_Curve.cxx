@@ -208,6 +208,16 @@ tnbLib::Pln_Curve::Value_normParam
 	return std::move(value);
 }
 
+std::tuple<tnbLib::Pnt2d, tnbLib::Vec2d> 
+tnbLib::Pln_Curve::D1(const Standard_Real x) const
+{
+	Pnt2d pt;
+	Vec2d t;
+	Geometry()->D1(x, pt, t);
+	auto paired = std::make_tuple(std::move(pt), std::move(t));
+	return std::move(paired);
+}
+
 tnbLib::Entity2d_Box
 tnbLib::Pln_Curve::BoundingBox(const Standard_Real Tol) const
 {
