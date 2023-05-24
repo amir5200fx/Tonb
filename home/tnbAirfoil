@@ -1,0 +1,24 @@
+setVerbose(1);
+
+setChord(1.0);
+setThickness(0.02);
+setMaxPressLoc(0.45);
+setCli(0.5);
+
+var Qs = createThicknessOffsets("A65A010");
+var Qs_interpolated = interpolate("steffen", Qs);
+
+var thickProfile = createThicknessProfile(Qs_interpolated);
+
+var camberProfile = createCamberProfile("uniform");
+
+var distb = createDistb("cosine", 20, 0.0005, 0.9995);
+
+setCamberProfile(camberProfile);
+setThicknessProfile(thickProfile);
+setDistb(distb);
+
+execute();
+
+exportToPlt("myAirfoil");
+

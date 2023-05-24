@@ -2,8 +2,6 @@ setVerbose(1);
 
 loadFile();
 
-setTolerance(1.0E-5);
-
 execute();
 
 saveTo();
