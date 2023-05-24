@@ -89,10 +89,23 @@ tnbLib::file::GetSystemFile(const std::string & theAppName)
 			}
 			else
 			{
-				FatalErrorIn(FunctionSIG)
+				/*FatalErrorIn(FunctionSIG)
 					<< "no system file has been found!" << endl
 					<< " - application: " << theAppName << endl
-					<< abort(FatalError);
+					<< abort(FatalError);*/
+				auto dir = GetHomeDir();
+				boost::filesystem::path p1(dir + R"(\)" + theAppName);
+				if (boost::filesystem::exists(p1))
+				{
+					return p1.string();
+				}
+				else
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "no system file has been found!" << endl
+						<< " - application: " << theAppName << endl
+						<< abort(FatalError);
+				}
 			}
 		}
 		else
