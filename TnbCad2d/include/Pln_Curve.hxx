@@ -6,6 +6,7 @@
 #include <Global_AccessMethod.hxx>
 #include <Pln_Entity.hxx>
 #include <Pnt2d.hxx>
+#include <Vec2d.hxx>
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_Serialization.hxx>
@@ -132,6 +133,7 @@ namespace tnbLib
 
 		TnbCad2d_EXPORT Pnt2d Value(const Standard_Real x) const;
 		TnbCad2d_EXPORT Pnt2d Value_normParam(const Standard_Real x) const;
+		TnbCad2d_EXPORT std::tuple<Pnt2d, Vec2d> D1(const Standard_Real x) const;
 
 		inline Pnt2d FirstCoord() const;
 		inline Pnt2d LastCoord() const;
