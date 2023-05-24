@@ -76,73 +76,74 @@ tnbLib::PtdShapeFit_LinExtruded::CalcParameters
 	return std::move(parameters);
 }
 
-namespace tnbLib
+std::pair<std::vector<Standard_Real>, std::vector<Standard_Real>>
+tnbLib::PtdShapeFit_LinExtruded::CalcLinearProfile
+(
+	const std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>>& theParams,
+	const std::shared_ptr<PtdShapeFit_Section>& theSection
+)
 {
-
-	auto CalcLinearProfile(const std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>>& theParams, const std::shared_ptr<PtdShapeFit_Section>& theSection)
-	{	
-		const auto nbPars = theSection->NbPars();
-		std::vector<Standard_Real> a(nbPars);
-		std::vector<Standard_Real> b(nbPars);
-		if (theParams.size() IS_EQUAL 2)
-		{
-			Standard_Real x0;
-			std::vector<Standard_Real> chrom0;
-			{// #loc0
-				auto [pars, loc] = theParams.at(0);
-				x0 = loc;
-				chrom0 = theSection->RetrieveChromosome(pars);
-			}
-			Standard_Real x1;
-			std::vector<Standard_Real> chrom1;
-			{// #loc1
-				auto [pars, loc] = theParams.at(1);
-				x1 = loc;
-				chrom1 = theSection->RetrieveChromosome(pars);
-			}
-			for (size_t m = 0; m < nbPars; m++)
-			{
-				a.at(m) = (chrom1.at(m) - chrom0.at(m)) / (x1 - x0);
-				b.at(m) = chrom0.at(m) - a.at(m) * x0;
-			}
+	const auto nbPars = theSection->NbPars();
+	std::vector<Standard_Real> a(nbPars);
+	std::vector<Standard_Real> b(nbPars);
+	if (theParams.size() IS_EQUAL 2)
+	{
+		Standard_Real x0;
+		std::vector<Standard_Real> chrom0;
+		{// #loc0
+			auto [pars, loc] = theParams.at(0);
+			x0 = loc;
+			chrom0 = theSection->RetrieveChromosome(pars);
 		}
-		else
-		{
-			for (size_t m = 0; m < nbPars; m++)
-			{
-				Standard_Real sumX = 0;
-				Standard_Real sumY = 0;
-				Standard_Real sumX2 = 0;
-				Standard_Real sumXY = 0;
-
-				for (const auto& p : theParams)
-				{
-					auto [pars, loc] = p;
-					auto chrom = theSection->RetrieveChromosome(pars);
-
-					auto x = loc;
-					auto y = chrom.at(m);
-
-					auto x2 = x * x;
-					auto xy = x * y;
-
-					sumX += x;
-					sumY += y;
-
-					sumX2 += x2;
-					sumXY += xy;
-				}
-
-				const auto n = (Standard_Real)theParams.size();
-				const auto delta = n * sumX2 - sumX * sumX;
-				a.at(m) = (n * sumXY - sumX * sumY) / delta;
-				b.at(m) = (sumX2 * sumY - sumXY * sumX) / delta;
-			}
-			
+		Standard_Real x1;
+		std::vector<Standard_Real> chrom1;
+		{// #loc1
+			auto [pars, loc] = theParams.at(1);
+			x1 = loc;
+			chrom1 = theSection->RetrieveChromosome(pars);
 		}
-		auto t = std::make_pair(std::move(a), std::move(b));
-		return std::move(t);
+		for (size_t m = 0; m < nbPars; m++)
+		{
+			a.at(m) = (chrom1.at(m) - chrom0.at(m)) / (x1 - x0);
+			b.at(m) = chrom0.at(m) - a.at(m) * x0;
+		}
 	}
+	else
+	{
+		for (size_t m = 0; m < nbPars; m++)
+		{
+			Standard_Real sumX = 0;
+			Standard_Real sumY = 0;
+			Standard_Real sumX2 = 0;
+			Standard_Real sumXY = 0;
+
+			for (const auto& p : theParams)
+			{
+				auto [pars, loc] = p;
+				auto chrom = theSection->RetrieveChromosome(pars);
+
+				auto x = loc;
+				auto y = chrom.at(m);
+
+				auto x2 = x * x;
+				auto xy = x * y;
+
+				sumX += x;
+				sumY += y;
+
+				sumX2 += x2;
+				sumXY += xy;
+			}
+
+			const auto n = (Standard_Real)theParams.size();
+			const auto delta = n * sumX2 - sumX * sumX;
+			a.at(m) = (n * sumXY - sumX * sumY) / delta;
+			b.at(m) = (sumX2 * sumY - sumXY * sumX) / delta;
+		}
+
+	}
+	auto t = std::make_pair(std::move(a), std::move(b));
+	return std::move(t);
 }
 
 std::pair<std::shared_ptr<tnbLib::Cad_Shape>, std::vector<std::shared_ptr<tnbLib::PtdShapeFit_Section::Parameters>>>
@@ -171,6 +172,7 @@ tnbLib::PtdShapeFit_LinExtruded::CreateExtrapolated
 		params.push_back(std::move(pars));
 	}
 	std::shared_ptr<Cad_Shape> shape;
+
 	try
 	{
 		shape = CreateShape(params, theSection, theAxis, theLocs);
@@ -191,6 +193,12 @@ tnbLib::PtdShapeFit_LinExtruded::CalcLS
 	const std::vector<std::pair<Standard_Real, Standard_Real>>& theQs
 )
 {
+	if (theQs.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "not enough number of offset points has been detected." << endl
+			<< abort(FatalError);
+	}
 	if (theQs.size() IS_EQUAL 2)
 	{
 		std::vector<Standard_Real> values;
