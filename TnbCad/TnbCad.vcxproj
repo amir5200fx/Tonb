@@ -201,6 +201,7 @@
     <ClInclude Include="TnbLib\Cad\TModel\Manager\TModel_CornerManager.hxx" />
     <ClInclude Include="TnbLib\Cad\TModel\System\TModel_System.hxx" />
     <ClInclude Include="TnbLib\Cad\TModel\Tools\TModel_Tools.hxx" />
+    <ClInclude Include="TnbLib\Cad\Tools\Cad_CurveTools.hxx" />
     <ClInclude Include="TnbLib\Cad\Tools\Cad_PreviewTools.hxx" />
     <ClInclude Include="TnbLib\Cad\Tools\Cad_Tools.hxx" />
   </ItemGroup>
@@ -365,6 +366,7 @@
     <ClCompile Include="TnbLib\Cad\TModel\Manager\Cad_TModelManagerIO.cxx" />
     <ClCompile Include="TnbLib\Cad\TModel\System\TModel_System.cxx" />
     <ClCompile Include="TnbLib\Cad\TModel\Tools\TModel_Tools.cxx" />
+    <ClCompile Include="TnbLib\Cad\Tools\Cad_CurveTools.cxx" />
     <ClCompile Include="TnbLib\Cad\Tools\Cad_PreviewTools.cxx" />
     <ClCompile Include="TnbLib\Cad\Tools\Cad_Tools.cxx" />
   </ItemGroup>

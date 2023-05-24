@@ -1050,6 +1050,9 @@
     <ClInclude Include="TnbLib\Cad\GModel\Entities\ParaCurve\GModel_ParaCurveI.hxx">
       <Filter>TnbLib\Cad\GModel\Entities\ParaCurve</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Tools\Cad_CurveTools.hxx">
+      <Filter>TnbLib\Cad\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -1537,6 +1540,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\ParaDegenCurve\TModel_ParaDegenCurveIO.cxx">
       <Filter>TnbLib\Cad\TModel\Entities\ParaDegenCurve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Tools\Cad_CurveTools.cxx">
+      <Filter>TnbLib\Cad\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
