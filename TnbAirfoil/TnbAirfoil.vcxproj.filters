@@ -46,6 +46,60 @@
     <Filter Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010">
       <UniqueIdentifier>{0cb83568-6e99-4801-8839-8c125f828050}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Airfoil\Px">
+      <UniqueIdentifier>{e3460735-bbd3-4775-a7af-0e38c4390de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Px\Camber">
+      <UniqueIdentifier>{aca51cf8-c1a3-4c29-a6eb-234494641e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Px\Thick">
+      <UniqueIdentifier>{4f01c17d-ed00-4c4a-b79d-f6f5d3e60348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Px\Thick\Px">
+      <UniqueIdentifier>{c91a9354-908d-4fd2-b757-d2142bb9d682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Px\Thick\Px\t1">
+      <UniqueIdentifier>{82096543-2e11-4b1b-8e49-4d4a55306192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Px\Camber\Px">
+      <UniqueIdentifier>{89d4f105-626f-469e-b667-e09c0eab09df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Px\Camber\Px\t1">
+      <UniqueIdentifier>{344b0bcc-34c0-475f-9b44-aa25ea72a16c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Tools">
+      <UniqueIdentifier>{2c3a39bc-5e80-4c2a-b795-aa35b8ae9955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\Px\Thick\Px\t2">
+      <UniqueIdentifier>{4b14a655-3f71-47d8-b6ed-c150d7f4d186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve">
+      <UniqueIdentifier>{a7e2af1c-5894-4938-a48a-3d24fba8c51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Nose">
+      <UniqueIdentifier>{d4627f29-6115-40a8-bf6b-eef6a0fc774c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Nose\t1">
+      <UniqueIdentifier>{ee85c8de-0a46-4121-ba69-dddba05d1b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Nose\t2">
+      <UniqueIdentifier>{c5bdc472-b970-4164-abd1-f05089812411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Leading">
+      <UniqueIdentifier>{e5382bbd-33c1-4480-8ab5-dad2062e0ab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Leading\t1">
+      <UniqueIdentifier>{3f978350-43bd-4228-a29a-381a1caa08f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Global">
+      <UniqueIdentifier>{50e16160-54a2-4f67-961a-9f063287e5c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Global\t1">
+      <UniqueIdentifier>{b81f1b61-b890-4a6c-bc87-8552fc914452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Airfoil\PxCurve\Global\TrailGap">
+      <UniqueIdentifier>{89fbd3fd-b72a-4677-beb8-9037cba1a7c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Airfoil\Entity\Airfoil_Entity.hxx">
@@ -87,6 +141,57 @@
     <ClInclude Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010\Airfoil_NacaThickOffsets_N65A010.hxx">
       <Filter>TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\AirfoilPx_ThickProfile.hxx">
+      <Filter>TnbLib\Airfoil\Px\Thick</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\Px\AirfoilPx_PxThickProfile.hxx">
+      <Filter>TnbLib\Airfoil\Px\Thick\Px</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\Px\t1\AirfoilPx_PxThickProfile_t1.hxx">
+      <Filter>TnbLib\Airfoil\Px\Thick\Px\t1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\Camber\AirfoilPx_CamberProfile.hxx">
+      <Filter>TnbLib\Airfoil\Px\Camber</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\Camber\Px\AirfoilPx_PxCamberProfile.hxx">
+      <Filter>TnbLib\Airfoil\Px\Camber\Px</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\Camber\Px\t1\AirfoilPx_PxCamberProfile_t1.hxx">
+      <Filter>TnbLib\Airfoil\Px\Camber\Px\t1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Tools\Airfoil_Tools.hxx">
+      <Filter>TnbLib\Airfoil\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\AirfoilPx.hxx">
+      <Filter>TnbLib\Airfoil\Px</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\Px\t2\AirfoilPx_PxThickProfile_t2.hxx">
+      <Filter>TnbLib\Airfoil\Px\Thick\Px\t2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\AirfoilPx_Curve.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Nose\AirfoilPx_NoseCurve.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Nose</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Nose\t1\AirfoilPx_NoseCurve_t1.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Nose\t1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Nose\t2\AirfoilPx_NoseCurve_t2.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Nose\t2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Leading\AirfoilPx_LeadingCurve.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Leading</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Leading\t1\AirfoilPx_LeadingCurve_t1.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Leading\t1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Global\AirfoilPx_GlobalCurve.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Global\t1\AirfoilPx_GlobalCurve_t1.hxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Global\t1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Airfoil\Entity\Airfoil_Entity.cxx">
@@ -121,6 +226,51 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010\Airfoil_NacaThickOffsets_N65A010.cxx">
       <Filter>TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t1\AirfoilPx_PxThickProfile_t1.cxx">
+      <Filter>TnbLib\Airfoil\Px\Thick\Px\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t1\AirfoilPx_PxThickProfile_t1IO.cxx">
+      <Filter>TnbLib\Airfoil\Px\Thick\Px\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Px\Camber\Px\t1\AirfoilPx_PxCamberProfile_t1.cxx">
+      <Filter>TnbLib\Airfoil\Px\Camber\Px\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Px\Camber\Px\t1\AirfoilPx_PxCamberProfile_t1IO.cxx">
+      <Filter>TnbLib\Airfoil\Px\Camber\Px\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Tools\Airfoil_Tools.cxx">
+      <Filter>TnbLib\Airfoil\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Px\AirfoilPx.cxx">
+      <Filter>TnbLib\Airfoil\Px</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t2\AirfoilPx_PxThickProfile_t2.cxx">
+      <Filter>TnbLib\Airfoil\Px\Thick\Px\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t2\AirfoilPx_PxThickProfile_t2IO.cxx">
+      <Filter>TnbLib\Airfoil\Px\Thick\Px\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Nose\t1\AirfoilPx_NoseCurve_t1.cxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Nose\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Nose\t2\AirfoilPx_NoseCurve_t2.cxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Nose\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Nose\AirfoilPx_NoseCurve.cxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Nose</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Leading\t1\AirfoilPx_LeadingCurve_t1.cxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Leading\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Leading\AirfoilPx_LeadingCurve.cxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Leading</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Global\t1\AirfoilPx_GlobalCurve_t1.cxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Global\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Global\AirfoilPx_GlobalCurve.cxx">
+      <Filter>TnbLib\Airfoil\PxCurve\Global</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

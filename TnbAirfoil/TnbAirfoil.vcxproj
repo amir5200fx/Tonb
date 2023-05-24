@@ -84,7 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\PxCurve\Leading\t2;$(projectDir)TnbLib\Airfoil\PxCurve\Leading\t1;$(projectDir)TnbLib\Airfoil\PxCurve\Leading;$(projectDir)TnbLib\Airfoil\PxCurve\Nose\t2;$(projectDir)TnbLib\Airfoil\PxCurve\Nose\t1;$(projectDir)TnbLib\Airfoil\PxCurve\Nose;$(projectDir)TnbLib\Airfoil\PxCurve\Global\t1;$(projectDir)TnbLib\Airfoil\PxCurve\Global;$(projectDir)TnbLib\Airfoil\PxCurve;$(projectDir)TnbLib\Airfoil\Tools;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Px\Thick\Px\t2;$(projectDir)TnbLib\Airfoil\Px\Thick\Px\t1;$(projectDir)TnbLib\Airfoil\Px\Thick\Px;$(projectDir)TnbLib\Airfoil\Px\Thick;$(projectDir)TnbLib\Airfoil\Px\Camber\Px\t1;$(projectDir)TnbLib\Airfoil\Px\Camber\Px;$(projectDir)TnbLib\Airfoil\Px\Camber;$(projectDir)TnbLib\Airfoil\Px;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbAirfoil_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -92,7 +92,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKD3DHostTest.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKMessageModel.lib;TKMessageView.lib;TKOffset.lib;TKOpenGl.lib;TKOpenGles.lib;TKOpenGlesTest.lib;TKOpenGlTest.lib;TKPrim.lib;TKQADraw.lib;TKRWMesh.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKD3DHostTest.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKMessageModel.lib;TKMessageView.lib;TKOffset.lib;TKOpenGl.lib;TKOpenGles.lib;TKOpenGlesTest.lib;TKOpenGlTest.lib;TKPrim.lib;TKQADraw.lib;TKRWMesh.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
@@ -135,7 +135,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(projectDir)TnbLib\Airfoil\PxCurve\Leading\t2;$(projectDir)TnbLib\Airfoil\PxCurve\Leading\t1;$(projectDir)TnbLib\Airfoil\PxCurve\Leading;$(projectDir)TnbLib\Airfoil\PxCurve\Nose\t2;$(projectDir)TnbLib\Airfoil\PxCurve\Nose\t1;$(projectDir)TnbLib\Airfoil\PxCurve\Nose;$(projectDir)TnbLib\Airfoil\PxCurve\Global\t1;$(projectDir)TnbLib\Airfoil\PxCurve\Global;$(projectDir)TnbLib\Airfoil\PxCurve;$(projectDir)TnbLib\Airfoil\Tools;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6\N65A010;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets\Series6;$(projectDir)TnbLib\Airfoil\Naca\ThickOffsets;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile\offset;$(projectDir)TnbLib\Airfoil\Naca\Thick\Profile;$(projectDir)TnbLib\Airfoil\Naca\Thick;$(projectDir)TnbLib\Airfoil\Naca\Midline\trapezoidal;$(projectDir)TnbLib\Airfoil\Naca\Midline\uniform;$(projectDir)TnbLib\Airfoil\Naca\Midline;$(projectDir)TnbLib\Airfoil\Naca;$(projectDir)TnbLib\Airfoil\Px\Thick\Px\t2;$(projectDir)TnbLib\Airfoil\Px\Thick\Px\t1;$(projectDir)TnbLib\Airfoil\Px\Thick\Px;$(projectDir)TnbLib\Airfoil\Px\Thick;$(projectDir)TnbLib\Airfoil\Px\Camber\Px\t1;$(projectDir)TnbLib\Airfoil\Px\Camber\Px;$(projectDir)TnbLib\Airfoil\Px\Camber;$(projectDir)TnbLib\Airfoil\Px;$(projectDir)TnbLib\Airfoil\Entity;$(projectDir)TnbLib\Airfoil\OffsetProfile\Steffen;$(projectDir)TnbLib\Airfoil\OffsetProfile;$(projectDir)TnbLib\Airfoil\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbAirfoil_EXPORT_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -145,7 +145,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>zlibstatd.lib;dld.lib;libgmp-10.lib;libmpfr-4.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKD3DHostTest.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKMessageModel.lib;TKMessageView.lib;TKOffset.lib;TKOpenGl.lib;TKOpenGles.lib;TKOpenGlesTest.lib;TKOpenGlTest.lib;TKPrim.lib;TKQADraw.lib;TKRWMesh.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKD3DHostTest.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKMessageModel.lib;TKMessageView.lib;TKOffset.lib;TKOpenGl.lib;TKOpenGles.lib;TKOpenGlesTest.lib;TKOpenGlTest.lib;TKPrim.lib;TKQADraw.lib;TKRWMesh.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -162,6 +162,23 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_Profile.hxx" />
     <ClInclude Include="TnbLib\Airfoil\OffsetProfile\Airfoil_OffsetProfile.hxx" />
     <ClInclude Include="TnbLib\Airfoil\OffsetProfile\Steffen\Airfoil_OffsetProfile_Steffen.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\AirfoilPx_Curve.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Global\AirfoilPx_GlobalCurve.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Global\t1\AirfoilPx_GlobalCurve_t1.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Leading\AirfoilPx_LeadingCurve.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Leading\t1\AirfoilPx_LeadingCurve_t1.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Nose\AirfoilPx_NoseCurve.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Nose\t1\AirfoilPx_NoseCurve_t1.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\PxCurve\Nose\t2\AirfoilPx_NoseCurve_t2.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\AirfoilPx.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\Camber\AirfoilPx_CamberProfile.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\Camber\Px\AirfoilPx_PxCamberProfile.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\Camber\Px\t1\AirfoilPx_PxCamberProfile_t1.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\AirfoilPx_ThickProfile.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\Px\AirfoilPx_PxThickProfile.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\Px\t1\AirfoilPx_PxThickProfile_t1.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Px\Thick\Px\t2\AirfoilPx_PxThickProfile_t2.hxx" />
+    <ClInclude Include="TnbLib\Airfoil\Tools\Airfoil_Tools.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Airfoil\Entity\Airfoil_Entity.cxx" />
@@ -175,6 +192,21 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Airfoil\Naca\Thick\Profile\Airfoil_NacaThickness_ProfileIO.cxx" />
     <ClCompile Include="TnbLib\Airfoil\OffsetProfile\Steffen\Airfoil_OffsetProfile_Steffen.cxx" />
     <ClCompile Include="TnbLib\Airfoil\OffsetProfile\Steffen\Airfoil_OffsetProfile_SteffenIO.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Global\AirfoilPx_GlobalCurve.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Global\t1\AirfoilPx_GlobalCurve_t1.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Leading\AirfoilPx_LeadingCurve.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Leading\t1\AirfoilPx_LeadingCurve_t1.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Nose\AirfoilPx_NoseCurve.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Nose\t1\AirfoilPx_NoseCurve_t1.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\PxCurve\Nose\t2\AirfoilPx_NoseCurve_t2.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Px\AirfoilPx.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Px\Camber\Px\t1\AirfoilPx_PxCamberProfile_t1.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Px\Camber\Px\t1\AirfoilPx_PxCamberProfile_t1IO.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t1\AirfoilPx_PxThickProfile_t1.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t1\AirfoilPx_PxThickProfile_t1IO.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t2\AirfoilPx_PxThickProfile_t2.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Px\Thick\Px\t2\AirfoilPx_PxThickProfile_t2IO.cxx" />
+    <ClCompile Include="TnbLib\Airfoil\Tools\Airfoil_Tools.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">
