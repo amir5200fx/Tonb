@@ -13,6 +13,7 @@ namespace tnbLib
 
 	static std::shared_ptr<Entity3d_Triangulation> myMesh;
 	static const std::string extension = Entity3d_Triangulation::extension;
+	static std::string loadedFileName;
 
 	static std::shared_ptr<Entity3d_Triangulation> myMerged;
 
@@ -61,6 +62,7 @@ namespace tnbLib
 		if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
 		{
 			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
+			loadedFileName = name;
 			fileName fn(name + ".PATH");
 
 			std::ifstream myFile;
@@ -74,7 +76,7 @@ namespace tnbLib
 
 			{
 				auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
-
+				loadedFileName = name;
 				myMesh = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
 				if (NOT myMesh)
 				{
@@ -87,7 +89,7 @@ namespace tnbLib
 		else
 		{
 			auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
-
+			loadedFileName = name;
 			myMesh = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
 			if (NOT myMesh)
 			{
@@ -123,6 +125,7 @@ namespace tnbLib
 		else
 		{
 			auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
+			loadedFileName = name;
 			loadMeshFile(name);
 		}
 
@@ -148,6 +151,11 @@ namespace tnbLib
 		file::CheckExtension(name);
 
 		file::SaveTo(myMerged, name + Entity3d_Triangulation::extension, verbose);
+	}
+
+	void saveTo()
+	{
+		saveTo(loadedFileName);
 	}
 
 	struct Node
@@ -387,6 +395,7 @@ namespace tnbLib
 	{
 		// io functions [12/21/2021 Amir]
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
 
@@ -438,7 +447,7 @@ int main(int argc, char* argv[])
 				<< " # IO functions: " << endl << endl
 
 				<< " - loadFile(name [optional])" << endl
-				<< " - saveTo(name)" << endl << endl
+				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
