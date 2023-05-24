@@ -49,6 +49,7 @@ tnbLib::GeoTop_Tools::MakeElements
 	std::vector<std::shared_ptr<GeoTop2d_Element>> elements;
 	elements.reserve(triangles.size());
 
+	Standard_Integer nbDegens = 0;
 	Standard_Integer k = 0;
 	for (const auto& x : triangles)
 	{
@@ -58,9 +59,14 @@ tnbLib::GeoTop_Tools::MakeElements
 
 		if (x.IsDegenerated())
 		{
-			FatalErrorIn(FunctionSIG)
+			/*FatalErrorIn(FunctionSIG)
 				<< "degenerated triangle has been detected!" << endl
-				<< abort(FatalError);
+				<< " - v0: " << v0 << endl
+				<< " - v1: " << v1 << endl
+				<< " - v2: " << v2 << endl
+				<< abort(FatalError);*/
+			nbDegens++;
+			continue;
 		}
 
 		Debug_Null_Pointer(nodes.at(v0));
@@ -73,6 +79,13 @@ tnbLib::GeoTop_Tools::MakeElements
 			std::make_shared<GeoTop2d_Element>
 			(++k, std::move(nodeList));
 		elements.push_back(std::move(element));
+	}
+	if (nbDegens)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "degenerated triangle has been detected!" << endl
+			<< " - nb of degenerated elements: " << nbDegens << endl
+			<< abort(FatalError);
 	}
 	return std::move(elements);
 }
