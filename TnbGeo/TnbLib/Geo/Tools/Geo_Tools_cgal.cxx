@@ -1,5 +1,6 @@
 #include <Geo_Tools.hxx>
 
+#include <Entity2d_Ray.hxx>
 #include <Entity2d_Triangle.hxx>
 #ifdef Handle
 #undef Handle
@@ -10,6 +11,7 @@
 #include <CGAL\Polygon_2.h>
 #include <CGAL\Plane_3.h>
 #include <CGAL\Triangle_3.h>
+#include <CGAL\Ray_2.h>
 #include <CGAL\intersections.h>
 
 
@@ -23,6 +25,7 @@ typedef Kernel::Line_2 Line_2;
 typedef Kernel::Direction_2 Direction_2;
 typedef Kernel::Triangle_2 Triangle_2;
 typedef Kernel::Plane_3 Plane_3;
+typedef Kernel::Ray_2 Ray_2;
 
 typedef Kernel::Segment_3 Segment_3;
 typedef Kernel::Point_3 Point_3;
@@ -100,6 +103,12 @@ namespace tnbLib
 	{
 		Line_2 line(get_cgalPoint(l.P()), get_cgalDirection(l.Dir()));
 		return std::move(line);
+	}
+
+	Ray_2 get_cgalRay(const Entity2d_Ray& r)
+	{
+		Ray_2 ray(get_cgalPoint(r.Coord()), get_cgalDirection(r.Direction()));
+		return std::move(ray);
 	}
 
 	Triangle_2 get_cgalTriange(const Entity2d_Triangle& t)
@@ -544,6 +553,40 @@ tnbLib::Geo_Tools::IsIntersect_cgal
 
 	const auto result = intersection(seg, tri);
 	return (Standard_Boolean)result;
+}
+
+std::pair<tnbLib::Pnt2d, Standard_Boolean> 
+tnbLib::Geo_Tools::CalcIntersectionPoint_cgal
+(
+	const Entity2d_Ray& theRay1,
+	const Entity2d_Ray& theRay2
+)
+{
+	auto r0 = get_cgalRay(theRay1);
+	auto r1 = get_cgalRay(theRay2);
+
+	CGAL::cpp11::result_of<Intersect_2(Ray_2, Ray_2)>::type
+		result = intersection(r0, r1);
+	if (result)
+	{
+		if (const Point_2* p = boost::get<Point_2>(&*result))
+		{
+			auto pt = get_Point(*p);
+
+			auto paired = std::make_pair(std::move(pt), Standard_True);
+			return std::move(paired);
+		}
+		else
+		{
+			auto paired = std::make_pair(Pnt2d(0, 0), Standard_False);
+			return std::move(paired);
+		}
+	}
+	else
+	{
+		auto paired = std::make_pair(Pnt2d(0, 0), Standard_False);
+		return std::move(paired);
+	}
 }
 
 //std::shared_ptr<tnbLib::Entity2d_Polygon> 

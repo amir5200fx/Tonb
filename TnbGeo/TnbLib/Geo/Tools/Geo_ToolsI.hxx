@@ -596,7 +596,7 @@ inline T tnbLib::Geo_Tools::LinearInterpolate
 (
 	const T & x0,
 	const T & x1, 
-	const T & t
+	const Standard_Real t
 )
 {
 	return x0 + t * (x1 - x0);

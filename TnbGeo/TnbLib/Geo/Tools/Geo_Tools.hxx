@@ -22,6 +22,7 @@
 #include <Entity3d_TriangleFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Entity2d_RayFwd.hxx>
 
 #include <vector>
 #include <memory>
@@ -724,6 +725,13 @@ namespace tnbLib
 				const Entity3d_Triangle& theTri
 			);
 
+		static TnbGeo_EXPORT std::pair<Pnt2d, Standard_Boolean> 
+			CalcIntersectionPoint_cgal
+			(
+				const Entity2d_Ray& theRay1,
+				const Entity2d_Ray& theRay2
+			);
+
 		static std::shared_ptr<Entity2d_Polygon> Intersection_cgal(const gp_Pln&, const Entity3d_Box&);
 
 		static inline Standard_Real 
@@ -742,7 +750,7 @@ namespace tnbLib
 			);
 
 		template<class T>
-		static T LinearInterpolate(const T& x0, const T& x1, const T& t);
+		static T LinearInterpolate(const T& x0, const T& x1, const Standard_Real t);
 
 		static inline Pnt2d 
 			ProjectPtAtSegment
