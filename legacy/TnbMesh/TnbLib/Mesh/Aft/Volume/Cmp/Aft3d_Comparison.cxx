@@ -8,6 +8,13 @@
 #include <OSstream.hxx>
 
 Standard_Integer
+tnbLib::legLib::Index(const std::shared_ptr<Aft3d_Node>& theNode)
+{
+	Debug_Null_Pointer(theNode);
+	return theNode->Index();
+}
+
+Standard_Integer
 tnbLib::legLib::Index(const std::shared_ptr<Aft3d_Element>& theElement)
 {
 	Debug_Null_Pointer(theElement);

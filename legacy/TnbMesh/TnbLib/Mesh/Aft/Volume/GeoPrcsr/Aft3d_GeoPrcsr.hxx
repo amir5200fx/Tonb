@@ -62,6 +62,8 @@ namespace tnbLib
 			virtual Standard_Real CalcSquareDistance(const Pnt3d& theP0, const Pnt3d& theP1) const = 0;
 			virtual Standard_Real CalcDistance(const Pnt3d& theP0, const Pnt3d& theP1) const = 0;
 
+			virtual Standard_Real CalcCentre(const Pnt3d& theP0, const Pnt3d& theP1, const Pnt3d& theP2) const = 0;
+
 			virtual Standard_Real CalcDistanceFromTriangle(const Pnt3d& theCoord, const Pnt3d& theP0, const Pnt3d& theP1, const Pnt3d& theP2) const = 0;
 			virtual Standard_Real CalcSquareDistanceFromTriangle(const Pnt3d& theCoord, const Pnt3d& theP0, const Pnt3d& theP1, const Pnt3d& theP2) const = 0;
 

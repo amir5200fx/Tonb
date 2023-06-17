@@ -78,6 +78,8 @@ namespace tnbLib
 				return theNodes_;
 			}
 
+			TnbLegMesh_EXPORT Standard_Boolean IsOrphan() const;
+
 			TnbLegMesh_EXPORT virtual Standard_Boolean IsInterior() const;
 			TnbLegMesh_EXPORT virtual Standard_Boolean IsBoundary() const;
 

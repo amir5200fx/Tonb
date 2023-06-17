@@ -55,7 +55,7 @@ namespace tnbLib
 
 			// Public functions and operators [2/1/2023 Payvand]
 
-			
+			auto This() const { return this->shared_from_this(); }
 
 		};
 	}

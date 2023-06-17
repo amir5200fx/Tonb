@@ -16,6 +16,17 @@ namespace tnbLib
 
 			/*Private Data*/
 
+
+			// Private functions and operators [5/24/2023 Payvand]
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int file_version)
+			{
+				ar& boost::serialization::base_object<Aft2d_Edge>(*this);
+			}
+
 		public:
 
 			// default constructor [2/1/2023 Payvand]

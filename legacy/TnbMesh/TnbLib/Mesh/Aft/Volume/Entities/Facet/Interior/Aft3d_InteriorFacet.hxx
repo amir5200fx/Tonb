@@ -50,6 +50,14 @@ namespace tnbLib
 				: Aft3d_Facet(theIndex, theNodes)
 			{}
 
+			Aft3d_InteriorFacet
+			(
+				const Standard_Integer theIndex,
+				std::array<std::shared_ptr<Aft3d_Node>, nbNodes>&& theNodes
+			)
+				: Aft3d_Facet(theIndex, std::move(theNodes))
+			{}
+
 
 			// Public functions and operators [2/27/2023 Payvand]
 

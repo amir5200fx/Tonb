@@ -18,6 +18,7 @@ namespace tnbLib
 	{
 
 		// Forward Declarations [2/26/2023 Payvand]
+		class Aft3d_NodeCalculator;
 		class Aft3d_GeoPrcsr;
 		class Aft3d_Element;
 		class Aft3d_Facet;
@@ -62,7 +63,7 @@ namespace tnbLib
 				inline Standard_Boolean IsCurrentEmpty() const;
 				inline Standard_Boolean IsNextEmtpy() const;
 
-				inline Standard_Boolean IsOnCurrentLevel(const std::shared_ptr<Aft3d_Facet>&) const;
+				TnbLegMesh_EXPORT Standard_Boolean IsOnCurrentLevel(const std::shared_ptr<Aft3d_Facet>&) const;
 				inline Standard_Boolean GetFront(std::shared_ptr<Aft3d_Facet>&);
 
 				auto LevelNumber() const { return theLevel_; }
@@ -116,7 +117,7 @@ namespace tnbLib
 
 				/*Private Data*/
 
-				Pnt3d theCoord_;
+				Pnt3d theCoord_ = Pnt3d::null;
 
 				std::shared_ptr<Entity3d_Box> theRegion_;
 
@@ -130,8 +131,6 @@ namespace tnbLib
 				Standard_Boolean appendedNode_;
 
 				Standard_Integer theCandidateSize_ = 0;
-
-				Standard_Integer theNodeCounter_ = 0;
 
 				cycleMode theCycleMode_;
 				nodeMode theNodeMode_;
@@ -171,8 +170,6 @@ namespace tnbLib
 				const auto& Current() const { return theCurrent_; }
 				const auto& Element() const { return theElement_; }
 
-				auto NodeCounter() const { return theNodeCounter_; }
-
 				auto AppendedNode() const { return appendedNode_; }
 				auto& AppendedNode() { return appendedNode_; }
 				auto CycleMode() const { return theCycleMode_; }
@@ -193,6 +190,9 @@ namespace tnbLib
 				const auto& PairedFacets() const { return thePairedFacets_; }
 				const auto& PairedEdges() const { return thePairedEdges_; }
 
+				const auto& CreatedFacets() const { return theCreatedFacets_; }
+				const auto& CreatedEdges() const { return theCreatedEdges_; }
+
 				inline const std::shared_ptr<Aft3d_Facet>& PairedFacet0() const;
 				inline const std::shared_ptr<Aft3d_Facet>& PairedFacet1() const;
 				inline const std::shared_ptr<Aft3d_Facet>& PairedFacet2() const;
@@ -200,6 +200,14 @@ namespace tnbLib
 				inline const std::shared_ptr<Aft3d_Edge>& PairedEdge3() const;
 				inline const std::shared_ptr<Aft3d_Edge>& PairedEdge4() const;
 				inline const std::shared_ptr<Aft3d_Edge>& PairedEdge5() const;
+
+				inline const std::shared_ptr<Aft3d_Facet>& CreatedFacet0() const;
+				inline const std::shared_ptr<Aft3d_Facet>& CreatedFacet1() const;
+				inline const std::shared_ptr<Aft3d_Facet>& CreatedFacet2() const;
+
+				inline const std::shared_ptr<Aft3d_Edge>& CreatedEdge3() const;
+				inline const std::shared_ptr<Aft3d_Edge>& CreatedEdge4() const;
+				inline const std::shared_ptr<Aft3d_Edge>& CreatedEdge5() const;
 
 				inline void SetCoord(const Pnt3d& theCoord);
 				inline void SetCoord(Pnt3d&&);
@@ -214,12 +222,30 @@ namespace tnbLib
 				inline void SetCandidateSize(const Standard_Integer);
 				inline void SetMaxElmLength(const Standard_Real);
 				inline void SetLocRadius(const Standard_Real);
-				void SetSearchRadius(const Standard_Real);
-				void SetElementSize(const Standard_Real);
-				void SetNodeCounter(const Standard_Integer);
+				inline void SetSearchRadius(const Standard_Real);
+				inline void SetElementSize(const Standard_Real);
 
 				inline void SetCycleMode(const cycleMode);
 				inline void SetNodeMode(const nodeMode);
+
+				inline void SetPairedFacet0(const std::shared_ptr<Aft3d_Facet>&);
+				inline void SetPairedFacet1(const std::shared_ptr<Aft3d_Facet>&);
+				inline void SetPairedFacet2(const std::shared_ptr<Aft3d_Facet>&);
+
+				inline void SetPairedEdge3(const std::shared_ptr<Aft3d_Edge>&);
+				inline void SetPairedEdge4(const std::shared_ptr<Aft3d_Edge>&);
+				inline void SetPairedEdge5(const std::shared_ptr<Aft3d_Edge>&);
+
+				inline void SetCreatedFacet0(const std::shared_ptr<Aft3d_Facet>&);
+				inline void SetCreatedFacet1(const std::shared_ptr<Aft3d_Facet>&);
+				inline void SetCreatedFacet2(const std::shared_ptr<Aft3d_Facet>&);
+
+				inline void SetCreatedEdge3(const std::shared_ptr<Aft3d_Edge>&);
+				inline void SetCreatedEdge4(const std::shared_ptr<Aft3d_Edge>&);
+				inline void SetCreatedEdge5(const std::shared_ptr<Aft3d_Edge>&);
+
+				inline void SetElement(const std::shared_ptr<Aft3d_Element>&);
+				inline void SetElement(std::shared_ptr<Aft3d_Element>&&);
 
 				inline void Reset();
 
@@ -230,15 +256,14 @@ namespace tnbLib
 
 				/*Private Data*/
 
-				std::set<std::shared_ptr<Aft3d_Facet>> theUncertainty_;
-				std::set<std::shared_ptr<Aft3d_Facet>> theCertainty_;
+				std::set<std::shared_ptr<Aft3d_Facet>, decltype(cmp_facet)> theUncertainty_;
+				std::set<std::shared_ptr<Aft3d_Facet>, decltype(cmp_facet)> theCertainty_;
 
 			public:
 
 				// default constructor [2/26/2023 Payvand]
 
-				cavityFronts()
-				{}
+				cavityFronts();
 
 				// constructors [2/26/2023 Payvand]
 
@@ -295,13 +320,51 @@ namespace tnbLib
 
 				const auto& Elements() const { return theElements_; }
 
-				Standard_Boolean Insert(const std::shared_ptr<Aft3d_Element>&);
-				Standard_Boolean Insert(std::shared_ptr<Aft3d_Element>&&);
+				inline void Insert(const std::shared_ptr<Aft3d_Element>&);
+				inline void Insert(std::shared_ptr<Aft3d_Element>&&);
 
-				Standard_Boolean Remove(const std::shared_ptr<Aft3d_Element>&);
+				inline void Remove(const std::shared_ptr<Aft3d_Element>&);
 
 				inline void SetNbNodes(const Standard_Integer);
 				inline void Clear();
+
+			};
+
+			class entCounter
+			{
+
+				/*Private Data*/
+
+				Standard_Integer theNbNodes_;
+				Standard_Integer theNbEdges_;
+				Standard_Integer theNbFacets_;
+				Standard_Integer theNbElements_;
+
+			public:
+
+				// default constructor [6/1/2023 Payvand]
+
+				entCounter()
+					: theNbNodes_(0)
+					, theNbEdges_(0)
+					, theNbFacets_(0)
+					, theNbElements_(0)
+				{}
+
+				// constructors [6/1/2023 Payvand]
+
+
+				// Public functions and operators [6/1/2023 Payvand]
+
+				auto NbNodes() const { return theNbNodes_; }
+				auto NbEdges() const { return theNbEdges_; }
+				auto NbFacets() const { return theNbFacets_; }
+				auto NbElements() const { return theNbElements_; }
+
+				auto& NbNodes() { return theNbNodes_; }
+				auto& NbEdges() { return theNbEdges_; }
+				auto& NbFacets() { return theNbFacets_; }
+				auto& NbElements() { return theNbElements_; }
 
 			};
 
@@ -311,6 +374,7 @@ namespace tnbLib
 
 			std::shared_ptr<Aft3d_GeoPrcsr> theMetricMap_;
 			std::shared_ptr<Geo_SearchTree<std::shared_ptr<Aft3d_Node>>> theEngine_;
+			std::shared_ptr<Aft3d_NodeCalculator> theCoordCalculator_;
 
 			Standard_Integer theALLOWED_MAX_LEVEL_;
 
@@ -323,7 +387,7 @@ namespace tnbLib
 			frontHandler FrontHandler;
 			cycleSpecs CycleInfo;
 			cavityFronts Cavities;
-
+			entCounter Counter;
 
 			// Results [2/26/2023 Payvand]
 
@@ -337,48 +401,75 @@ namespace tnbLib
 			void CheckBoundaries();
 
 			inline Standard_Boolean IsNewNode() const;
-			Standard_Boolean GetCurrent();
-			Standard_Boolean IsBelongToFront() const;
-			Standard_Boolean IsNewNodeValid(const std::vector<std::shared_ptr<Aft3d_Facet>>&) const;
-			Standard_Boolean IsNewEdgeValid
+			TnbLegMesh_EXPORT Standard_Boolean GetCurrent();
+			TnbLegMesh_EXPORT Standard_Boolean IsBelongToFront() const;
+			TnbLegMesh_EXPORT Standard_Boolean IsNewNodeValid
+			(const std::vector<std::shared_ptr<Aft3d_Facet>>&) const;
+			TnbLegMesh_EXPORT Standard_Boolean IsNewEdgeValid
 			(
 				const Pnt3d&, const Pnt3d&,
 				const std::vector<std::shared_ptr<Aft3d_Edge>>&
 			) const;
-			Standard_Boolean IsSameLevelSupplied();
-			Standard_Boolean IsNextLevelSupplied();
-			Standard_Boolean IsCavityRemoverSupplied();
+			TnbLegMesh_EXPORT Standard_Boolean IsSameLevelSupplied();
+			TnbLegMesh_EXPORT Standard_Boolean IsNextLevelSupplied();
+			TnbLegMesh_EXPORT Standard_Boolean IsCavityRemoverSupplied();
 
-			Entity3d_Box CalcSearchingRegion() const;
+			//Entity3d_Box CalcSearchingRegion() const;
 
 			auto CycleMode() const { return CycleInfo.CycleMode(); }
 
 			const auto& Current() const { return CycleInfo.Current(); }
 			const auto& ValidNode() const { return CycleInfo.ValidNode(); }
 
-			void RetrieveEarlyNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
-			void RetrieveLocalFrontNodes
+			TnbLegMesh_EXPORT void RetrieveEarlyNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
+			TnbLegMesh_EXPORT void RetrieveLocalFrontNodes
 			(
 				std::vector<std::shared_ptr<Aft3d_Node>>& theLocals,
 				std::vector<std::shared_ptr<Aft3d_Node>>& theSearching
 			);
-			void RetrieveLocalFrontEntities(std::vector<std::shared_ptr<Aft3d_Node>>&, std::vector<std::shared_ptr<Aft3d_Facet>>&) const;
-			void RetrieveEffectiveFronts(const std::vector<std::shared_ptr<Aft3d_Facet>>&, std::vector<std::shared_ptr<Aft3d_Facet>>&) const;
+			TnbLegMesh_EXPORT void RetrieveLocalFrontEntities
+			(
+				const std::vector<std::shared_ptr<Aft3d_Node>>&,
+				std::vector<std::shared_ptr<Aft3d_Facet>>&
+			) const;
 
-			void SortNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
+			TnbLegMesh_EXPORT void RetrieveEffectiveFronts
+			(
+				const std::vector<std::shared_ptr<Aft3d_Facet>>&,
+				std::vector<std::shared_ptr<Aft3d_Facet>>&
+			) const;
 
-			void AddOptimumNodeTo(std::vector<std::shared_ptr<Aft3d_Node>>&);
+			TnbLegMesh_EXPORT void SortNodes(std::vector<std::shared_ptr<Aft3d_Node>>&) const;
 
-			void SetCurrent(const std::shared_ptr<Aft3d_Facet>&);
-			void CalcLocalFrontRadius();
-			void ModifyLocalFront(const Standard_Real theFactor);
+			TnbLegMesh_EXPORT void AddOptimumNodeTo(std::vector<std::shared_ptr<Aft3d_Node>>&);
 
-			void RemoveCurrentFromFront();
-			void CalcElementSize();
-			void CalcOptimumCoord();
-			void SetDepthSearching();
+			//void SetCurrent(const std::shared_ptr<Aft3d_Facet>&);
+			TnbLegMesh_EXPORT void CalcLocalFrontRadius();
+			TnbLegMesh_EXPORT void ModifyLocalFront(const Standard_Real theFactor);
 
-			static std::vector<std::shared_ptr<Aft3d_Node>> 
+			TnbLegMesh_EXPORT void RemoveEntitiesFromGeometry();
+			TnbLegMesh_EXPORT void RemoveCurrentFromFront();
+			TnbLegMesh_EXPORT void CalcElementSize();
+			TnbLegMesh_EXPORT void CalcOptimumCoord();
+			TnbLegMesh_EXPORT void SetSearchingDepth();
+
+			TnbLegMesh_EXPORT void SetPairedEdges();
+			TnbLegMesh_EXPORT void SetPairedFacets();
+			TnbLegMesh_EXPORT void SetPairs();
+
+			TnbLegMesh_EXPORT void CalcGeometries(const std::shared_ptr<Aft3d_Facet>&);
+			TnbLegMesh_EXPORT void CalcGeometries(const std::shared_ptr<Aft3d_Edge>&);
+
+			TnbLegMesh_EXPORT void UpdateEdges();
+			TnbLegMesh_EXPORT void UpdateFacets();
+			TnbLegMesh_EXPORT void UpdatePairs();
+
+			TnbLegMesh_EXPORT void UpdateElement();
+
+			TnbLegMesh_EXPORT void CreateElement();
+			TnbLegMesh_EXPORT void RegisterElement();
+
+			static TnbLegMesh_EXPORT std::vector<std::shared_ptr<Aft3d_Node>>
 				NodesInRadius
 				(
 					const Standard_Real theRadius,
@@ -386,8 +477,23 @@ namespace tnbLib
 					const Aft3d_GeoPrcsr& theMetricMap,
 					const std::vector<std::shared_ptr<Aft3d_Node>>&
 				);
-			static void Update_Pmin_Pmax(const Pnt3d&, Pnt3d& theP0, Pnt3d& theP1);
-			static Standard_Boolean IsIntersect(const Aft3d_Facet& theFacet, const Pnt3d& theP0, const Pnt3d& theP1);
+			static TnbLegMesh_EXPORT void Update_Pmin_Pmax
+			(const Pnt3d&, Pnt3d& theP0, Pnt3d& theP1);
+			static TnbLegMesh_EXPORT Standard_Boolean 
+				IsIntersect
+				(
+					const Pnt3d& Q0,
+					const Pnt3d& Q1, 
+					const Pnt3d& Pmin,
+					const Pnt3d& Pmax
+				);
+			static TnbLegMesh_EXPORT Standard_Boolean 
+				IsIntersect
+				(
+					const Aft3d_Facet& theFacet,
+					const Pnt3d& theP0,
+					const Pnt3d& theP1
+				);
 
 			// default constructor [2/26/2023 Payvand]
 
@@ -399,7 +505,7 @@ namespace tnbLib
 
 		public:
 
-			static unsigned short verbose;
+			static TnbLegMesh_EXPORT unsigned short verbose;
 
 			
 
@@ -410,6 +516,40 @@ namespace tnbLib
 
 			const auto& MetricMap() const { return theMetricMap_; }
 			const auto& Engine() const { return theEngine_; }
+			const auto& CoordCalculator() const { return theCoordCalculator_; }
+
+			void SetCoordCalculator(const std::shared_ptr<Aft3d_NodeCalculator>& theCalculator)
+			{
+				theCoordCalculator_ = theCalculator;
+			}
+
+			static TnbLegMesh_EXPORT void AttachToMeshNodes(const std::shared_ptr<Aft3d_Element>&);
+			static TnbLegMesh_EXPORT void AttachToMeshNodes(const std::shared_ptr<Aft3d_Facet>&);
+			static TnbLegMesh_EXPORT void AttachToMeshNodes(const std::shared_ptr<Aft3d_Edge>&);
+
+			static TnbLegMesh_EXPORT void AttachToMeshEdges(const std::shared_ptr<Aft3d_Facet>&);
+			static TnbLegMesh_EXPORT void AttachToMeshEdges(const std::shared_ptr<Aft3d_Element>&);
+
+			static TnbLegMesh_EXPORT void AttachToMesh(const std::shared_ptr<Aft3d_Facet>& theFacet);
+			static TnbLegMesh_EXPORT void AttachToMesh(const std::shared_ptr<Aft3d_Element>&);
+
+			static TnbLegMesh_EXPORT void AttachToFrontNodes(const std::shared_ptr<Aft3d_Facet>& theFacet);
+			static TnbLegMesh_EXPORT void AttachToFrontNodes(const std::shared_ptr<Aft3d_Edge>& theEdge);
+			static TnbLegMesh_EXPORT void AttachToFrontEdges(const std::shared_ptr<Aft3d_Facet>& theFacet);
+
+			static TnbLegMesh_EXPORT void AttachToFronts(const std::shared_ptr<Aft3d_Facet>& theFront);
+
+			static TnbLegMesh_EXPORT void deAttachFromMesh(const std::shared_ptr<Aft3d_Facet>&);
+			static TnbLegMesh_EXPORT void deAttachFromMesh(const std::shared_ptr<Aft3d_Edge>&);
+
+			static TnbLegMesh_EXPORT void deAttachFromMeshNodes(const std::shared_ptr<Aft3d_Facet>&);
+			static TnbLegMesh_EXPORT void deAttachFromMeshEdges(const std::shared_ptr<Aft3d_Facet>&);
+
+			static TnbLegMesh_EXPORT void deAttachFromFronts(const std::shared_ptr<Aft3d_Facet>&);
+			static TnbLegMesh_EXPORT void deAttachFromFronts(const std::shared_ptr<Aft3d_Edge>&);
+
+			static TnbLegMesh_EXPORT void deAttachFromFrontNodes(const std::shared_ptr<Aft3d_Facet>&);
+			static TnbLegMesh_EXPORT void deAttachFromFrontEdges(const std::shared_ptr<Aft3d_Facet>&);
 			
 		};
 
@@ -446,11 +586,15 @@ namespace tnbLib
 
 			auto& BoundaryRef() { return theBoundary_; }
 
-			Standard_Integer Meshing();
+			TnbLegMesh_EXPORT Standard_Integer Meshing();
 
-			void MeshOneLevel();
-			void FindValidNode(const std::vector<std::shared_ptr<Aft3d_Node>>&, const std::vector<std::shared_ptr<Aft3d_Facet>>&);
-			void Update();
+			TnbLegMesh_EXPORT void MeshOneLevel();
+			TnbLegMesh_EXPORT void FindValidNode
+			(
+				const std::vector<std::shared_ptr<Aft3d_Node>>&,
+				const std::vector<std::shared_ptr<Aft3d_Facet>>&
+			);
+			TnbLegMesh_EXPORT void UpdateFront();
 			void InsertNewFrontsToLevels();
 
 		public:
@@ -468,6 +612,24 @@ namespace tnbLib
 
 			void Perform();
 
+
+			//- static functions and operators
+
+			static TnbLegMesh_EXPORT Standard_Boolean 
+				IsNewFace
+				(
+					const std::shared_ptr<Aft3d_Node>& theNode0,
+					const std::shared_ptr<Aft3d_Node>& theNode1, 
+					const std::shared_ptr<Aft3d_Node>& theNode2
+				);
+			static TnbLegMesh_EXPORT Standard_Boolean 
+				IsNewSegment
+				(
+					const std::shared_ptr<Aft3d_Node>& theNode0,
+					const std::shared_ptr<Aft3d_Node>& theNode1
+				);
+
+			static Standard_Boolean CheckAngle(const Aft3d_Facet& theFront, const Aft3d_Node& theNode, const Standard_Real theAngle);
 		};
 
 	}

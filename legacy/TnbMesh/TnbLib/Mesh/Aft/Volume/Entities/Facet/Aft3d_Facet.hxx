@@ -42,6 +42,7 @@ namespace tnbLib
 			std::array<std::shared_ptr<Aft3d_Node>, nbNodes> theNodes_;
 			std::array<std::shared_ptr<Aft3d_Edge>, nbEdges> theEdges_;
 
+			Standard_Real theCharLength_;
 
 			// Private functions and operators [3/1/2023 Payvand]
 
@@ -53,6 +54,7 @@ namespace tnbLib
 
 			Aft3d_Facet()
 				: isCavity_(Standard_False)
+				, theCharLength_(0)
 			{}
 
 
@@ -61,6 +63,7 @@ namespace tnbLib
 			Aft3d_Facet(const Standard_Integer theIndex)
 				: Aft3d_Entity(theIndex)
 				, isCavity_(Standard_False)
+				, theCharLength_(0)
 			{}
 
 			Aft3d_Facet
@@ -71,6 +74,7 @@ namespace tnbLib
 				: Aft3d_Entity(theIndex)
 				, theNodes_(theNodes)
 				, isCavity_(Standard_False)
+				, theCharLength_(0)
 			{}
 
 			Aft3d_Facet
@@ -81,6 +85,7 @@ namespace tnbLib
 				: Aft3d_Entity(theIndex)
 				, theNodes_(std::move(theNodes))
 				, isCavity_(Standard_False)
+				, theCharLength_(0)
 			{}
 
 
@@ -99,31 +104,34 @@ namespace tnbLib
 			const auto& GetNodes() const { return theNodes_; }
 			const auto& GetEdges() const { return theEdges_; }
 
-			Standard_Boolean IsOnFront() const;
+			auto CharLength() const { return theCharLength_; }
 
-			Standard_Real Oriented(const Pnt3d&) const;
-			Standard_Real CalcDistance(const Pnt3d&) const;
-			Standard_Real CalcSquareDistance(const Pnt3d&) const;
+			TnbLegMesh_EXPORT Standard_Boolean IsOnFront() const;
+			TnbLegMesh_EXPORT Standard_Boolean IsOrphan() const;
 
-			Standard_Real CharLenght() const;
-			Standard_Real SearchRadius() const;
+			TnbLegMesh_EXPORT Standard_Real Oriented(const Pnt3d&) const;
+			TnbLegMesh_EXPORT Standard_Real CalcDistance(const Pnt3d&) const;
+			TnbLegMesh_EXPORT Standard_Real CalcSquareDistance(const Pnt3d&) const;
 
-			Standard_Boolean IsRightSide(const Pnt3d&) const;
-			Standard_Boolean IsLeftSide(const Pnt3d&) const;
+			TnbLegMesh_EXPORT Standard_Real SearchRadius() const;
 
-			virtual Standard_Boolean IsBoundary() const;
-			virtual Standard_Boolean IsInterior() const;
+			TnbLegMesh_EXPORT Standard_Boolean IsRightSide(const Pnt3d&) const;
+			TnbLegMesh_EXPORT Standard_Boolean IsLeftSide(const Pnt3d&) const;
 
-			Pnt3d CalcCentre() const;
+			TnbLegMesh_EXPORT virtual Standard_Boolean IsBoundary() const;
+			TnbLegMesh_EXPORT virtual Standard_Boolean IsInterior() const;
 
-			std::tuple<Pnt3d, Pnt3d, Pnt3d> RetrieveCoords() const;
-			std::tuple<std::shared_ptr<Aft3d_Node>, std::shared_ptr<Aft3d_Node>, std::shared_ptr<Aft3d_Node>> Nodes() const;
-			std::tuple<std::shared_ptr<Aft3d_Edge>, std::shared_ptr<Aft3d_Edge>, std::shared_ptr<Aft3d_Edge>> Edges() const;
+			TnbLegMesh_EXPORT Pnt3d CalcCentre() const;
 
+			TnbLegMesh_EXPORT std::tuple<Pnt3d, Pnt3d, Pnt3d> RetrieveCoords() const;
+			TnbLegMesh_EXPORT std::tuple<std::shared_ptr<Aft3d_Node>, std::shared_ptr<Aft3d_Node>, std::shared_ptr<Aft3d_Node>> Nodes() const;
+			TnbLegMesh_EXPORT std::tuple<std::shared_ptr<Aft3d_Edge>, std::shared_ptr<Aft3d_Edge>, std::shared_ptr<Aft3d_Edge>> Edges() const;
 
-			void SetIsCavity(const Standard_Boolean isIt);
-			void SetAsNotCavity();
-			void SetAsCavity();
+			void SetCharLength(const Standard_Real x) { theCharLength_ = x; }
+
+			inline void SetIsCavity(const Standard_Boolean isIt);
+			inline void SetAsNonCavity();
+			inline void SetAsCavity();
 
 			// Macros [2/23/2023 Payvand]
 

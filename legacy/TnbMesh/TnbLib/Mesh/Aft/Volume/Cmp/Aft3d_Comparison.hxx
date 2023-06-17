@@ -18,12 +18,23 @@ namespace tnbLib
 		class Aft3d_Element;
 		class Aft3d_Facet;
 		class Aft3d_Edge;
+		class Aft3d_Node;
 
+		TnbLegMesh_EXPORT Standard_Integer Index(const std::shared_ptr<Aft3d_Node>&);
 		TnbLegMesh_EXPORT Standard_Integer Index(const std::shared_ptr<Aft3d_Edge>&);
 		TnbLegMesh_EXPORT Standard_Integer Index(const std::shared_ptr<Aft3d_Facet>&);
 		TnbLegMesh_EXPORT Standard_Integer Index(const std::shared_ptr<Aft3d_Element>&);
 
-		auto cmp_edge = []
+		inline auto cmp_node = []
+		(
+			const std::shared_ptr<Aft3d_Node>& theNode0,
+			const std::shared_ptr<Aft3d_Node>& theNode1
+			)
+		{
+			return Index(theNode0) < Index(theNode1);
+		};
+
+		inline auto cmp_edge = []
 		(
 			const std::shared_ptr<Aft3d_Edge>& theEdge0,
 			const std::shared_ptr<Aft3d_Edge>& theEdge1
@@ -32,7 +43,7 @@ namespace tnbLib
 			return Index(theEdge0) < Index(theEdge1);
 		};
 
-		auto cmp_facet = []
+		inline auto cmp_facet = []
 		(
 			const std::shared_ptr<Aft3d_Facet>& theFacet0, 
 			const std::shared_ptr<Aft3d_Facet>& theFacet1
@@ -41,7 +52,7 @@ namespace tnbLib
 			return Index(theFacet0) < Index(theFacet1);
 		};
 
-		auto cmp_element = []
+		inline auto cmp_element = []
 		(
 			const std::shared_ptr<Aft3d_Element>& theElement0,
 			const std::shared_ptr<Aft3d_Element>& theElement1

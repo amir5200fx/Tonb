@@ -100,6 +100,60 @@ tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::PairedFacet2() const
 	return std::get<2>(thePairedFacets_);
 }
 
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Edge>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::PairedEdge3() const
+{
+	return std::get<0>(thePairedEdges_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Edge>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::PairedEdge4() const
+{
+	return std::get<1>(thePairedEdges_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Edge>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::PairedEdge5() const
+{
+	return std::get<2>(thePairedEdges_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Facet>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::CreatedFacet0() const
+{
+	return std::get<0>(theCreatedFacets_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Facet>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::CreatedFacet1() const
+{
+	return std::get<1>(theCreatedFacets_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Facet>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::CreatedFacet2() const
+{
+	return std::get<2>(theCreatedFacets_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Edge>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::CreatedEdge3() const
+{
+	return std::get<0>(theCreatedEdges_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Edge>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::CreatedEdge4() const
+{
+	return std::get<1>(theCreatedEdges_);
+}
+
+inline const std::shared_ptr<tnbLib::legLib::Aft3d_Edge>&
+tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::CreatedEdge5() const
+{
+	return std::get<2>(theCreatedEdges_);
+}
+
 inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCoord(const Pnt3d& theCoord)
 {
 	theCoord_ = theCoord;
@@ -165,12 +219,26 @@ inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCandidateSize(const
 
 inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetMaxElmLength(const Standard_Real theLen)
 {
+	Debug_If_Condition(theLen <= gp::Resolution());
 	theMaxElemLength_ = theLen;
 }
 
 inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetLocRadius(const Standard_Real theRadius)
 {
+	Debug_If_Condition(theRadius <= gp::Resolution());
 	theLocalRadius_ = theRadius;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetSearchRadius(const Standard_Real theRadius)
+{
+	Debug_If_Condition(theRadius <= gp::Resolution());
+	theSearchRadius_ = theRadius;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetElementSize(const Standard_Real theSize)
+{
+	Debug_If_Condition(theSize <= gp::Resolution());
+	theSize_ = theSize;
 }
 
 inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCycleMode(const cycleMode mode)
@@ -181,6 +249,155 @@ inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCycleMode(const cyc
 inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetNodeMode(const nodeMode mode)
 {
 	theNodeMode_ = mode;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetPairedFacet0
+(
+	const std::shared_ptr<Aft3d_Facet>& theFacet
+)
+{
+	std::get<0>(thePairedFacets_) = theFacet;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetPairedFacet1
+(
+	const std::shared_ptr<Aft3d_Facet>& theFacet
+)
+{
+	std::get<1>(thePairedFacets_) = theFacet;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetPairedFacet2
+(
+	const std::shared_ptr<Aft3d_Facet>& theFacet
+)
+{
+	std::get<2>(thePairedFacets_) = theFacet;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetPairedEdge3
+(
+	const std::shared_ptr<Aft3d_Edge>& theEdge
+)
+{
+	std::get<0>(thePairedEdges_) = theEdge;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetPairedEdge4
+(
+	const std::shared_ptr<Aft3d_Edge>& theEdge
+)
+{
+	std::get<1>(thePairedEdges_) = theEdge;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetPairedEdge5
+(
+	const std::shared_ptr<Aft3d_Edge>& theEdge
+)
+{
+	std::get<2>(thePairedEdges_) = theEdge;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCreatedFacet0
+(
+	const std::shared_ptr<Aft3d_Facet>& theFacet
+)
+{
+	std::get<0>(theCreatedFacets_) = theFacet;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCreatedFacet1
+(
+	const std::shared_ptr<Aft3d_Facet>& theFacet
+)
+{
+	std::get<1>(theCreatedFacets_) = theFacet;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCreatedFacet2
+(
+	const std::shared_ptr<Aft3d_Facet>& theFacet
+)
+{
+	std::get<2>(theCreatedFacets_) = theFacet;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCreatedEdge3
+(
+	const std::shared_ptr<Aft3d_Edge>& theEdge
+)
+{
+	std::get<0>(theCreatedEdges_) = theEdge;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCreatedEdge4
+(
+	const std::shared_ptr<Aft3d_Edge>& theEdge
+)
+{
+	std::get<1>(theCreatedEdges_) = theEdge;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetCreatedEdge5
+(
+	const std::shared_ptr<Aft3d_Edge>& theEdge
+)
+{
+	std::get<2>(theCreatedEdges_) = theEdge;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetElement
+(
+	const std::shared_ptr<Aft3d_Element>& theElement
+)
+{
+	theElement_ = theElement;
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::SetElement
+(
+	std::shared_ptr<Aft3d_Element>&& theElement
+)
+{
+	theElement_ = std::move(theElement);
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cycleSpecs::Reset()
+{
+	theCandidateSize_ = 0;
+
+	theSize_ = 0;
+
+	theLocalRadius_ = 0;
+	theSearchRadius_ = 0;
+	theMaxElemLength_ = 0;
+
+	theCoord_ = Pnt3d::null;
+
+	theRegion_ = nullptr;
+
+	theTemp_ = nullptr;
+	theValid_ = nullptr;
+
+	theCurrent_ = nullptr;
+	theElement_ = nullptr;
+
+	thePairedFacets_.at(0) = nullptr;
+	thePairedFacets_.at(1) = nullptr;
+	thePairedFacets_.at(2) = nullptr;
+
+	theCreatedFacets_.at(0) = nullptr;
+	theCreatedFacets_.at(1) = nullptr;
+	theCreatedFacets_.at(2) = nullptr;
+
+	thePairedEdges_.at(0) = nullptr;
+	thePairedEdges_.at(1) = nullptr;
+	thePairedEdges_.at(2) = nullptr;
+
+	theCreatedEdges_.at(0) = nullptr;
+	theCreatedEdges_.at(1) = nullptr;
+	theCreatedEdges_.at(2) = nullptr;
 }
 
 inline Standard_Boolean
@@ -211,6 +428,56 @@ tnbLib::legLib::Aft3d_VolumeCore::cavityFronts::RetrieveCertainties() const
 	return std::move(facets);
 }
 
+inline void tnbLib::legLib::Aft3d_VolumeCore::cavityFronts::InsertToUncertainty
+(const std::shared_ptr<Aft3d_Facet>& theFront)
+{
+	auto [iter, cond] = theUncertainty_.insert(theFront);
+	if (NOT cond)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "duplicate data has been found." << endl
+			<< abort(FatalError);
+	}
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cavityFronts::InsertToCertainty
+(const std::shared_ptr<Aft3d_Facet>& theFront)
+{
+	auto [iter, cond] = theCertainty_.insert(theFront);
+	if (NOT cond)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "duplicate data has been found." << endl
+			<< abort(FatalError);
+	}
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cavityFronts::RemoveFromUncertainty
+(const std::shared_ptr<Aft3d_Facet>& theFront)
+{
+	auto iter = theUncertainty_.find(theFront);
+	if (iter IS_EQUAL theUncertainty_.end())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "couldn't find the front in the set." << endl
+			<< abort(FatalError);
+	}
+	theUncertainty_.erase(iter);
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::cavityFronts::RemoveFromCertainty
+(const std::shared_ptr<Aft3d_Facet>& theFront)
+{
+	auto iter = theCertainty_.find(theFront);
+	if (iter IS_EQUAL theCertainty_.end())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "couldn't find the front in the set." << endl
+			<< abort(FatalError);
+	}
+	theCertainty_.erase(iter);
+}
+
 inline void tnbLib::legLib::Aft3d_VolumeCore::cavityFronts::ClearUncertainty()
 {
 	theUncertainty_.clear();
@@ -226,6 +493,54 @@ tnbLib::legLib::Aft3d_VolumeCore::meshData::NbElements() const
 {
 	Debug_Null_Pointer(theElements_);
 	return Standard_Integer(theElements_->size());
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::meshData::Insert
+(
+	const std::shared_ptr<Aft3d_Element>& theElement
+)
+{
+	Debug_Null_Pointer(theElement);
+	auto& elemnts = *theElements_;
+	auto [iter, cond] = elemnts.insert(theElement);
+	if (NOT cond)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "duplicate data has been found." << endl
+			<< abort(FatalError);
+	}
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::meshData::Insert
+(
+	std::shared_ptr<Aft3d_Element>&& theElement
+)
+{
+	Debug_Null_Pointer(theElement);
+	auto& elemnts = *theElements_;
+	auto [iter, cond] = elemnts.insert(std::move(theElement));
+	if (NOT cond)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "duplicate data has been found." << endl
+			<< abort(FatalError);
+	}
+}
+
+inline void tnbLib::legLib::Aft3d_VolumeCore::meshData::Remove
+(
+	const std::shared_ptr<Aft3d_Element>& theElement
+)
+{
+	Debug_Null_Pointer(theElement);
+	auto& elemnts = *theElements_;
+	auto iter = elemnts.find(theElement);
+	if (iter IS_EQUAL elemnts.end())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the element has not been found in the set." << endl
+			<< abort(FatalError);
+	}
 }
 
 inline void tnbLib::legLib::Aft3d_VolumeCore::meshData::SetNbNodes(const Standard_Integer n)

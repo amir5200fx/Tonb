@@ -4,6 +4,22 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+Standard_Boolean 
+tnbLib::legLib::Aft3d_Facet::IsOnFront() const
+{
+	auto obj = std::dynamic_pointer_cast<Aft3d_Facet>(std::const_pointer_cast<Mesh_Entity>(This()));
+	Debug_Null_Pointer(obj);
+	return Node0()->IsContainsFrontFacet(obj);
+}
+
+Standard_Boolean 
+tnbLib::legLib::Aft3d_Facet::IsOrphan() const
+{
+	auto upper = UpperElement().lock();
+	auto lower = LowerElement().lock();
+	return NOT upper AND NOT lower;
+}
+
 Standard_Boolean
 tnbLib::legLib::Aft3d_Facet::IsBoundary() const
 {

@@ -7,7 +7,7 @@ void tnbLib::legLib::Aft3d_Facet::SetIsCavity(const Standard_Boolean isIt)
 }
 
 inline 
-void tnbLib::legLib::Aft3d_Facet::SetAsNotCavity()
+void tnbLib::legLib::Aft3d_Facet::SetAsNonCavity()
 {
 	SetIsCavity(Standard_False);
 }

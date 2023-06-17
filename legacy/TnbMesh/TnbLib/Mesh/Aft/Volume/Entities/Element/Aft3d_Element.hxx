@@ -39,8 +39,9 @@ namespace tnbLib
 			// Private functions and operators [3/1/2023 Payvand]
 
 			TNB_SERIALIZATION(TnbLegMesh_EXPORT);
+	
 
-		protected:
+		public:
 
 			// default constructor [2/24/2023 Payvand]
 
@@ -49,7 +50,27 @@ namespace tnbLib
 
 			// constructors [2/24/2023 Payvand]
 
-		public:
+			explicit Aft3d_Element(const Standard_Integer theIndex)
+				: Aft3d_Entity(theIndex)
+			{}
+
+			Aft3d_Element
+			(
+				const Standard_Integer theIndex, 
+				const std::array<std::shared_ptr<Aft3d_Node>, nbNodes>& theNodes
+			)
+				: Aft3d_Entity(theIndex)
+				, theNodes_(theNodes)
+			{}
+
+			Aft3d_Element
+			(
+				const Standard_Integer theIndex,
+				std::array<std::shared_ptr<Aft3d_Node>, nbNodes>&& theNodes
+			)
+				: Aft3d_Entity(theIndex)
+				, theNodes_(std::move(theNodes))
+			{}
 
 			// Public functions and operators [2/24/2023 Payvand]
 
@@ -69,9 +90,12 @@ namespace tnbLib
 				return (Standard_Integer)nbFactes;
 			}
 
-			Pnt3d CalcCentre() const;
+			TnbLegMesh_EXPORT Pnt3d CalcCentre() const;
 
-			std::tuple
+			TnbLegMesh_EXPORT Standard_Integer 
+				OppositeVertexIndex(const std::shared_ptr<Aft3d_Facet>&) const;
+
+			TnbLegMesh_EXPORT std::tuple
 				<
 				std::shared_ptr<Aft3d_Node>,
 				std::shared_ptr<Aft3d_Node>,
@@ -80,7 +104,7 @@ namespace tnbLib
 				>
 				Nodes() const;
 
-			std::tuple
+			TnbLegMesh_EXPORT std::tuple
 				<
 				std::shared_ptr<Aft3d_Edge>,
 				std::shared_ptr<Aft3d_Edge>,
@@ -91,7 +115,7 @@ namespace tnbLib
 				>
 				Edges() const;
 
-			std::tuple
+			TnbLegMesh_EXPORT std::tuple
 				<
 				std::shared_ptr<Aft3d_Facet>,
 				std::shared_ptr<Aft3d_Facet>,

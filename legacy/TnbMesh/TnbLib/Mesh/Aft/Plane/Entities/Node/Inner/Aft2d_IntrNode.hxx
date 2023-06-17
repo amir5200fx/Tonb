@@ -47,6 +47,7 @@ namespace tnbLib
 
 			// Public functions and operators [2/1/2023 Payvand]
 
+			TnbLegMesh_EXPORT Standard_Boolean IsInterior() const override;
 
 		};
 	}

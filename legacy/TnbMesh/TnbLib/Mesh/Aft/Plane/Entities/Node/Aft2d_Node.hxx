@@ -57,8 +57,8 @@ namespace tnbLib
 
 			// Public functions and operators [2/1/2023 Payvand]
 
-			virtual Standard_Boolean IsInterior() const;
-			virtual Standard_Boolean IsBoundary() const;
+			virtual TnbLegMesh_EXPORT Standard_Boolean IsInterior() const;
+			virtual TnbLegMesh_EXPORT Standard_Boolean IsBoundary() const;
 		};
 	}
 }

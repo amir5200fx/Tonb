@@ -70,6 +70,12 @@ namespace tnbLib
 			TnbLegMesh_EXPORT void SetNeighbor2(const std::shared_ptr<Aft3d_Element>&);
 			TnbLegMesh_EXPORT void SetNeighbor3(const std::shared_ptr<Aft3d_Element>&);
 
+			TnbLegMesh_EXPORT void SetNeighbor
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<Aft3d_Element>&
+			);
+
 		};
 	}
 }

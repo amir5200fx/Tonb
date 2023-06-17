@@ -70,3 +70,12 @@ void tnbLib::legLib::Aft3d_ElementAdaptor::SetNeighbor3
 {
 	std::get<3>(theNeighbors_) = theElement;
 }
+
+void tnbLib::legLib::Aft3d_ElementAdaptor::SetNeighbor
+(
+	const Standard_Integer theIndex, 
+	const std::shared_ptr<Aft3d_Element>& theElement
+)
+{
+	theNeighbors_.at(theIndex) = theElement;
+}

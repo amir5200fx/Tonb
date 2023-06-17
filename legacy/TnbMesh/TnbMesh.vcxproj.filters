@@ -175,6 +175,21 @@
     <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor">
       <UniqueIdentifier>{55d3dc89-cd5d-4f4f-8dae-7bed15d05b16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\NodeCalculator">
+      <UniqueIdentifier>{91c9d515-2a17-42e9-999f-bd5e909cc307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\NodeCalculator\Adaptive">
+      <UniqueIdentifier>{bb237059-0ec3-40ec-8192-187f62a779fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\NodeCalculator\UniSize">
+      <UniqueIdentifier>{fb1b2945-5835-449c-ac68-3a90e84f8da0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Tools">
+      <UniqueIdentifier>{77900334-546c-44ec-8b18-6e7b8d8bdaa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior">
+      <UniqueIdentifier>{0560957e-6c09-4452-a012-d7c3496642c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.cxx">
@@ -336,6 +351,39 @@
     <ClCompile Include="TnbLib\Mesh\Aft\Volume\Aft3d_Volume.cxx">
       <Filter>TnbLib\Mesh\Aft\Volume</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Element\Adaptor\Aft2d_ElementAdaptorIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Plane\Entities\Element\Adaptor</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Edge\Aft2d_EdgeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Plane\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Inner\Aft2d_IntrNode.cxx">
+      <Filter>TnbLib\Mesh\Aft\Plane\Entities\Node\Inner</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\NodeCalculator\Aft3d_NodeCalculator.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\NodeCalculator</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\NodeCalculator\UniSize\Aft3d_NodeCalculator_UniSize.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\NodeCalculator\UniSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Tools\Aft3d_Tools.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior\Aft3d_InteriorEdge.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior\Aft3d_InteriorEdgeIO.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Facet\Aft3d_FacetGeom.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Facet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_Element.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Aft3d_ElementGeom.cxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Mesh\Aft\Plane\Entities\Node\Aft2d_Node.hxx">
@@ -490,6 +538,21 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor\Aft3d_ElementAdaptor.hxx">
       <Filter>TnbLib\Mesh\Aft\Volume\Entities\Element\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\NodeCalculator\Aft3d_NodeCalculator.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\NodeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\NodeCalculator\UniSize\Aft3d_NodeCalculator_UniSize.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\NodeCalculator\UniSize</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Tools\Aft3d_Tools.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior\Aft3d_InteriorEdge.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Entities\Edge\Interior</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Mesh\Aft\Volume\Tools\Aft3d_ToolsI.hxx">
+      <Filter>TnbLib\Mesh\Aft\Volume\Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
