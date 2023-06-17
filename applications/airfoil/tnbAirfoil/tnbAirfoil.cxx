@@ -295,7 +295,7 @@ namespace tnbLib
 		airfoil->SetThickness(myThickProfile);
 		airfoil->SetXc(myDistb);
 		airfoil->SetApplyTrim(Standard_True);
-		airfoil->SetTrim(0.05);
+		airfoil->SetTrim(0.005);
 
 		airfoil->Perform();
 		if (NOT airfoil->IsDone())

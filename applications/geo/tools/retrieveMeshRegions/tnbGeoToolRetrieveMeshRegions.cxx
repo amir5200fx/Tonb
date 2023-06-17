@@ -70,7 +70,7 @@ namespace tnbLib
 
 			{
 				auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
-
+				myFileName = name;
 				myMesh = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
 				if (NOT myMesh)
 				{
@@ -83,7 +83,7 @@ namespace tnbLib
 		else
 		{
 			auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Triangulation::extension).string();
-
+			myFileName = name;
 			myMesh = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
 			if (NOT myMesh)
 			{
@@ -100,7 +100,7 @@ namespace tnbLib
 	void loadMeshFile(const std::string& name)
 	{
 		file::CheckExtension(name);
-
+		myFileName = name;
 		myMesh = file::LoadFile<std::shared_ptr<Entity3d_Triangulation>>(name + Entity3d_Triangulation::extension, verbose);
 		if (NOT myMesh)
 		{

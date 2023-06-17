@@ -8,7 +8,9 @@
 #include <GeoTop2d_Element.hxx>
 #include <Geo_Tools.hxx>
 #include <GeoSlicer2d_PolyLine.hxx>
+#include <Geo_AdTree.hxx>
 #include <Entity3d_Triangulation.hxx>
+#include <Entity3d_Box.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Chain.hxx>
 #include <Global_File.hxx>
@@ -303,7 +305,95 @@ namespace tnbLib
 		auto paraMesh = Cad_Tools::ParaTriangulation(*polyFace);
 
 		auto paraPoly = retrieveParaPolygon(poly);
+
+		{
+			struct meshNode
+			{
+				Pnt3d coord;
+
+				meshNode(const Pnt3d p)
+					: coord(p)
+				{}
+
+				typedef Pnt3d ptType;
+			};
+
+			std::vector<std::shared_ptr<meshNode>> nodes;
+			auto& Pts = myMesh->Points();
+			for (const auto& x : Pts)
+			{
+				auto p3 = std::make_shared<meshNode>(x);
+				nodes.push_back(std::move(p3));
+			}
+			auto b = Entity3d_Box::BoundingBoxOf(Pts);
+
+			Geo_AdTree<std::shared_ptr<meshNode>> tree;
+			tree.SetGeometryRegion(b.Expanded(b.Diameter() * 1.0E-2));
+			tree.SetGeometryCoordFunc([](const std::shared_ptr<meshNode>& n)-> const auto& {return n->coord; });
+			//tree.InsertToGeometry(nodes);
+
+			for (const auto& bPt : poly)
+			{
+				const auto& bpt2d = bPt->parNode->coord;
+				auto prj_pt = gFace->Value(bpt2d);
+				//std::vector<std::shared_ptr<meshNode>> items;
+				//tree.GeometrySearch(Entity3d_Box::Box(bPt->coord, 1.0E-6), items);
+				//std::cout << "size= " << items.size() << std::endl;
+				//std::shared_ptr<meshNode> found;
+				/*for (const auto& x : nodes)
+				{
+					if (x->coord.Distance(bPt->coord) <= 1.0E-8)
+					{
+						found = x;
+						break;
+					}
+				}*/
+				bool found = false;
+				for (auto& x : myMesh->Points())
+				{
+					if (x.Distance(bPt->coord) <= 1.0E-8)
+					{
+						x = gFace->Value(bpt2d);
+						found = true;
+						break;
+					}
+				}
+				if (NOT found)
+				{
+					std::cout<<"WARNING"<<std::endl;
+					/*FatalErrorIn(FunctionSIG)
+						<< "couldn't project the boundary" << endl
+						<< abort(FatalError);*/
+				}
+				/*if (NOT found)
+				{
+					std::cout << bPt->coord << std::endl;
+					for (const auto& xx : myMesh->Points())
+					{
+						if (xx.Distance(bPt->coord) <= 1.0E-8)
+						{
+							std::cout << "founded" << std::endl;
+						}
+					}
+					FatalErrorIn(FunctionSIG)
+						<< "couldn't project the boundary" << endl
+						<< abort(FatalError);
+				}
+				found->coord = gFace->Value(bpt2d);*/
+			}
+			/*Pts.clear();
+			for (const auto& x : nodes)
+			{
+				Pts.push_back(x->coord);
+			}*/
+		}
 		//paraPoly->Reverse();
+
+		{
+			std::ofstream outputMesh;
+			outputMesh.open("projected_mesh.obj");
+			Geo_Tools::ExportAsOBJ_cgal(*myMesh, outputMesh);
+		}
 
 		{ // parametric plane io [2/19/2023 Payvand]
 			

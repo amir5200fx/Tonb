@@ -5,6 +5,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
 #include <TopoDS_Shape.hxx>
 #include <IGESControl_Reader.hxx>
 #include <Bnd_Box.hxx>

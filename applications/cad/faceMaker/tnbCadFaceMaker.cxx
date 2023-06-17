@@ -5,6 +5,10 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
 #include <TopoDS_Face.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
 

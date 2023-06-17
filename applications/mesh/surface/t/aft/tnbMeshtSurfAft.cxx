@@ -653,7 +653,7 @@ namespace tnbLib
 		iterInfo->SetTolerance(1.0E-5);  // default: 1.0E-3 [5/24/2022 Amir]
 		iterInfo->SetUnderRelaxation(0.85);  // default: 0.85 [5/24/2022 Amir]
 
-		auto fracInfo = std::make_shared<Aft_SizeCorr_FractionInfo>();
+		//auto fracInfo = std::make_shared<Aft_SizeCorr_FractionInfo>();
 
 		//auto anIsoOptNodeInfo = std::make_shared<Aft2d_OptNodeAnIso_nonIterAdaptiveInfo>(iterInfo, fracInfo);
 		//auto anIsoOptNodeUniMetric = std::make_shared<Aft2d_OptNodeSurfaceUniMetric_IterAdaptive>(iterInfo);

@@ -36,26 +36,100 @@ namespace tnbLib
 		}
 	}
 
-	void loadFile(const std::string& name)
+	void checkFolder(const std::string& name)
+	{
+		if (NOT boost::filesystem::is_directory(name))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no {" << name << "} directory has been found!" << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void loadShape()
+	{
+		checkFolder("shape");
+
+		const auto currentPath = boost::filesystem::current_path();
+
+		// change the current path [2/6/2023 Payvand]
+		boost::filesystem::current_path(currentPath.string() + R"(\shape)");
+
+		if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
+			fileName fn(name + ".PATH");
+
+			std::ifstream myFile;
+			myFile.open(fn);
+
+			if (myFile.is_open())
+			{
+				std::string address;
+				std::getline(myFile, address);
+
+				// change the current path [2/6/2023 Payvand]
+				boost::filesystem::current_path(address);
+
+				{
+					auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
+
+					myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + Cad_Shape::extension, verbose);
+					if (NOT myShape)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< " the model is null." << endl
+							<< abort(FatalError);
+					}
+				}
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "the file is not open: " << name + ".PATH" << endl;
+			}
+		}
+		else
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
+
+			myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + Cad_Shape::extension, verbose);
+			if (NOT myShape)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " the model is null." << endl
+					<< abort(FatalError);
+			}
+		}
+		//- change back the current path
+		boost::filesystem::current_path(currentPath);
+	}
+
+	void loadShape(const std::string& name)
 	{
 		file::CheckExtension(name);
-
-		myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + loadExt, verbose);
+		myShape = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + Cad_Shape::extension, verbose);
 		if (NOT myShape)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the shape is null" << endl
+				<< " the shape is null." << endl
 				<< abort(FatalError);
 		}
-
-		loadTag = true;
 	}
 
 	void loadFile()
 	{
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt).string();
-		myFileName = name;
-		loadFile(name);
+		if (boost::filesystem::is_directory("shape"))
+		{
+			loadShape();
+		}
+		else
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad_Shape::extension).string();
+			loadShape(name);
+		}
+
+		loadTag = true;
 	}
 
 	void saveTo(const std::string& name)
@@ -92,7 +166,7 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadShape(name); }), "loadFile");
 		mod->add(chaiscript::fun([]()->void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
@@ -134,6 +208,7 @@ int main(int argc, char *argv[])
 		{
 			Info << endl;
 			Info << " This application is aimed to retrieve a bounding box of a shape." << endl;
+			Info << " - You can locate the model by providing a path in a subdirectory: shape" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

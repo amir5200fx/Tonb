@@ -34,30 +34,82 @@ namespace tnbLib
 		verbose = i;
 	}
 
-	void loadFile()
+	void loadRegion()
 	{
 		checkFolder("region");
 
 		const auto currentPath = boost::filesystem::current_path();
 
+		// change the current path [2/7/2023 Payvand]
 		boost::filesystem::current_path(currentPath.string() + R"(\region)");
 
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Box::extension).string();
-
-		file::CheckExtension(name);
-
-		auto myRegion = file::LoadFile<std::shared_ptr<Entity3d_Box>>(name + Entity3d_Box::extension, verbose);
-		if (NOT myRegion)
+		if (file::IsFile(boost::filesystem::current_path(), ".PATH"))
 		{
-			FatalErrorIn(FunctionSIG)
-				<< " the region file is null!" << endl
-				<< abort(FatalError);
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), ".PATH").string();
+			fileName fn(name + ".PATH");
+
+			std::ifstream myFile;
+			myFile.open(fn);
+
+			std::string address;
+			std::getline(myFile, address);
+
+			// change the current path [2/6/2023 Payvand]
+			boost::filesystem::current_path(address);
+
+			{
+				auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Box::extension).string();
+				auto myRegion = file::LoadFile<std::shared_ptr<Entity3d_Box>>(name + Entity3d_Box::extension, verbose);
+				if (NOT myRegion)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< " the region file is null!" << endl
+						<< abort(FatalError);
+				}
+				myRef->SetRegion(myRegion);
+			}
+		}
+		else
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Box::extension).string();
+			auto myRegion = file::LoadFile<std::shared_ptr<Entity3d_Box>>(name + Entity3d_Box::extension, verbose);
+			if (NOT myRegion)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " the region file is null!" << endl
+					<< abort(FatalError);
+			}
+			myRef->SetRegion(myRegion);
 		}
 
 		//- change back the current path
 		boost::filesystem::current_path(currentPath);
+	}
 
-		myRef->SetRegion(std::move(myRegion));
+	void loadRegion(const std::string& name)
+	{
+		file::CheckExtension(name);
+		auto myRegion = file::LoadFile<std::shared_ptr<Entity3d_Box>>(name + Entity3d_Box::extension, verbose);
+		if (NOT myRegion)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the region file is null." << endl
+				<< abort(FatalError);
+		}
+		myRef->SetRegion(myRegion);
+	}
+
+	void loadFile()
+	{
+		if (boost::filesystem::is_directory("region"))
+		{
+			loadRegion();
+		}
+		else
+		{
+			auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity3d_Box::extension).string();
+			loadRegion(name);
+		}
 
 		loadTag = true;
 	}

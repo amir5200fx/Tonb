@@ -851,7 +851,7 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				std::string address = ".\\system\\tnbPxModelSectionMaker";
+				auto address = file::GetSystemFile("tnbPxModelSectionMaker");
 				fileName myFileName(address);
 
 				chai.eval_file(myFileName);

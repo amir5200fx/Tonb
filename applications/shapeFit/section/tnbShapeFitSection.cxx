@@ -7,6 +7,8 @@
 
 #include <Galgo.hpp>
 
+#include <Standard_Real.hxx>
+
 namespace tnbLib
 {
 
@@ -15,7 +17,7 @@ namespace tnbLib
 	static std::shared_ptr<galgo::GeneticAlgorithm<double>> myGA;
 
 	static double myMutationRate = 0.15;
-	static double myCrossOverRate = 0.4;
+	static double myCrossOverRate = 0.5;
 	static int myNbElites = 1;
 
 	static int myPopSize = 50;
@@ -325,8 +327,21 @@ void tnbLib::OptRunTime::Perform()
 {
 	auto costFun = [this](const std::vector<double>& xs) -> std::vector<double>
 	{
-		auto cost = theSection_->CalcError(xs, theScatters_);
-		return { -cost };
+		try
+		{
+			auto cost = theSection_->CalcError(xs, theScatters_);
+			return { -cost };
+		}
+		catch (const Standard_Failure& x)
+		{
+			Info << x.GetMessageString() << endl;
+			return { RealFirst() };
+		}
+		catch (...)
+		{
+			Info << " Unknown Error has been detected." << endl;
+			return { RealFirst() };
+		}
 	};
 
 	myGA = theGA_;
@@ -334,12 +349,19 @@ void tnbLib::OptRunTime::Perform()
 	/**/
 
 	auto variables = mySection->RetrieveParList();
+
 	int idx = 0;
 	for (const auto& x : variables)
 	{
+		if (NOT x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "variable is null." << endl
+				<< abort(FatalError);
+		}
 		const auto lower = x->LowerVal();
 		const auto upper = x->UpperVal();
-
+		//std::cout << x->Name() << ": " << lower << ", " << upper << std::endl;
 		galgo::Parameter<double> par({ lower,upper });
 
 		myGA->param.emplace_back(new galgo::Parameter<double>(par));
@@ -357,12 +379,13 @@ void tnbLib::OptRunTime::Perform()
 		idx++;
 	}
 
+	//std::exit(1);
 	myGA->Objective = costFun;
 	myGA->genstep = 1;
-	//myGA->mutrate = myMutationRate;
+	myGA->mutrate = myMutationRate;
 	myGA->nbparam = variables.size();
 	myGA->nbbit = variables.size() * 16;
-	//myGA->covrate = myCrossOverRate;
+	myGA->covrate = myCrossOverRate;
 
 	const int nbElits = myNbElites;
 	//myGA->elitpop = nbElits == 0 ? 1 : nbElits;
@@ -437,7 +460,7 @@ using namespace tnbLib;
 int main(int argc, char* argv[])
 {
 	//sysLib::init_gl_marine_integration_info();
-	//FatalError.throwExceptions();
+	FatalError.throwExceptions();
 
 	if (argc <= 1)
 	{
