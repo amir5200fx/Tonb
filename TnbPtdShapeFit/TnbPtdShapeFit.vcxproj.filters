@@ -55,6 +55,87 @@
     <Filter Include="TnbLib\PtdShapeFit\Slicer">
       <UniqueIdentifier>{e501cd53-88a7-45de-868b-c1d98d86b4e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin">
+      <UniqueIdentifier>{a40cfce0-edc1-48c4-8ebe-e409552bec5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil">
+      <UniqueIdentifier>{f64e887e-ef51-438a-a958-81a0fa8dd0dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\t1">
+      <UniqueIdentifier>{08b60021-0835-4941-bac7-336ced45018b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil">
+      <UniqueIdentifier>{5ebea29c-3c71-4fc6-9789-1a4252a8d4d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\TwoSurfaces">
+      <UniqueIdentifier>{1c72279d-590d-49e2-a0b6-d5e45fd0ae1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102">
+      <UniqueIdentifier>{16205bd5-9235-4e61-b33b-6782c1318fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper">
+      <UniqueIdentifier>{06f09016-da5a-483c-880e-94278bfac2f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Lower">
+      <UniqueIdentifier>{9d01f757-d0dd-43f8-9376-2e0ede1898c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both">
+      <UniqueIdentifier>{530931f9-13af-49f9-9d0a-07232e72e5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve">
+      <UniqueIdentifier>{e9a88c32-7c04-4613-a301-d3296d63731b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Upper">
+      <UniqueIdentifier>{af5e403a-1310-409e-9394-7bfa3e034297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Lower">
+      <UniqueIdentifier>{27cf7e58-e69f-4a01-a378-51c917a4178c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Leading">
+      <UniqueIdentifier>{bc09ee05-7997-43c1-a022-8b78385456b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\t2">
+      <UniqueIdentifier>{c1cf72ff-4c56-4ad2-b9f1-1a2c795f4292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\typed">
+      <UniqueIdentifier>{b88db7b5-39de-432a-8f41-72e00c44cc6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets">
+      <UniqueIdentifier>{8e323144-83db-4cff-b96c-78b64be101af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102">
+      <UniqueIdentifier>{8aedd668-d88b-481e-bd04-6028170d1ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833">
+      <UniqueIdentifier>{6f082ba9-21a8-44f3-958a-a26f8e5af2a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve">
+      <UniqueIdentifier>{62419700-4df5-493a-bf9f-4737a4f65d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil">
+      <UniqueIdentifier>{1deec806-ecfb-4b06-baa7-a60b9ef1cd01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose">
+      <UniqueIdentifier>{dae6b7db-d63e-47a5-ad89-4b902679bfe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1">
+      <UniqueIdentifier>{6b585e86-3251-4255-9be6-6bcfac61d1c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2">
+      <UniqueIdentifier>{68ec7e05-43dd-43a7-a70e-43bfda348320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading">
+      <UniqueIdentifier>{2ca4b406-b0fd-4691-ae94-fc3c64b1901d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1">
+      <UniqueIdentifier>{962cebf4-2fba-41a8-b34d-1a59d611dcf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global">
+      <UniqueIdentifier>{fc71e80f-911e-447c-b57d-28ac238da2ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1">
+      <UniqueIdentifier>{8c15068e-63d5-4e12-bf1b-359a0c5790b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\PtdShapeFit\module\PtdShapeFit_Module.hxx">
@@ -95,6 +176,84 @@
     </ClInclude>
     <ClInclude Include="TnbLib\PtdShapeFit\Slicer\PtdShapeFit_Slicer.hxx">
       <Filter>TnbLib\PtdShapeFit\Slicer</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin\PtdShapeFit_TwoSegmentedLinExtruded.hxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\PtdShapeFit2d_Airfoil.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\PtdShapeFit2d_AirfoilScatterMap.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\TwoSurfaces\PtdShapeFit2d_AirfoilScatterMap_TwoSurfaces.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\TwoSurfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\PtdShapeFit2d_AirfoilScatterMap_MH102.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper\PtdShapeFit2d_AirfoilScatterMap_UpperMH102.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Lower\PtdShapeFit2d_LowerAirfoilCurve.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\Curve\Lower</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Leading\PtdShapeFit2d_LeadingAirfoilCurve.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\Curve\Leading</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Upper\PtdShapeFit2d_UpperAirfoilCurve.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\Curve\Upper</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both\PtdShapeFit2d_AirfoilScatterMap_BothMH102Surf.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoil.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\PtdShapeFit2d_TypedAirfoil_Offsets.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102\PtdShapeFit2d_TypedAirfoil_MH102Offsets.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833\PtdShapeFit2d_TypedAirfoil_S833Offsets.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\PtdShapeFit2d_Curve.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\PtdShapeFit2d_AirfoilCurve.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\PtdShapeFit2d_AirfoilNose.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\PtdShapeFit2d_AirfoilPlnCurve.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\PtdShapeFit2d_AirfoilLeading.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\PtdShapeFit2d_AirfoilGlobal.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1.hxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +307,120 @@
     </ClCompile>
     <ClCompile Include="TnbLib\PtdShapeFit\Slicer\PtdShapeFit_Slicer.cxx">
       <Filter>TnbLib\PtdShapeFit\Slicer</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin\PtdShapeFit_TwoSegmentedLinExtruded.cxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin\PtdShapeFit_TwoSegmentedLinExtrudedIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1CalcError.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper\PtdShapeFit2d_AirfoilScatterMap_UpperMH102.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper\PtdShapeFit2d_AirfoilScatterMap_UpperMH102IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1Shape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both\PtdShapeFit2d_AirfoilScatterMap_BothMH102Surf.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both\PtdShapeFit2d_AirfoilScatterMap_BothMH102SurfIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2CalcError.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2Shape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoil.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoilIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoilCalcError.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoilShape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102\PtdShapeFit2d_TypedAirfoil_MH102Offsets.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102\PtdShapeFit2d_TypedAirfoil_MH102OffsetsIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833\PtdShapeFit2d_TypedAirfoil_S833Offsets.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833\PtdShapeFit2d_TypedAirfoil_S833OffsetsIO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1Error.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1Shape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2Error.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2Shape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1Error.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1Shape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1IO.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1Error.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1Shape.cxx">
+      <Filter>TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

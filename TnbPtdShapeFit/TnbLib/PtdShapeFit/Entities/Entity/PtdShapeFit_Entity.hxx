@@ -24,7 +24,8 @@ namespace tnbLib
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
-			// empty body [2/9/2023 Payvand]
+			ar& boost::serialization::base_object<Global_Indexed>(*this);
+			ar& boost::serialization::base_object<Global_Named>(*this);
 		}
 
 	protected:

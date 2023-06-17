@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbPtdShapeFit_EXPORT_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdShapeFit\Slicer;$(ProjectDir)TnbLib\PtdShapeFit\ProjMeshToFace;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded\Linear;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded;$(ProjectDir)TnbLib\PtdShapeFit\Shape;$(ProjectDir)TnbLib\PtdShapeFit\Section\Circle;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error\LS;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Single;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap;$(ProjectDir)TnbLib\PtdShapeFit\Section;$(ProjectDir)TnbLib\PtdShapeFit\Tools;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Par;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Entity;$(ProjectDir)TnbLib\PtdShapeFit\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdShapeFit\Slicer;$(ProjectDir)TnbLib\PtdShapeFit\ProjMeshToFace;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded\Linear;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded;$(ProjectDir)TnbLib\PtdShapeFit\Shape;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t5;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t4;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t3;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t2;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve\Leading;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve\Upper;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve\Lower;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil;$(ProjectDir)TnbLib\PtdShapeFit\Section\Circle;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error\LS;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\TwoSurfaces;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Lower;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Single;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap;$(ProjectDir)TnbLib\PtdShapeFit\Section;$(ProjectDir)TnbLib\PtdShapeFit\Tools;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Par;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Entity;$(ProjectDir)TnbLib\PtdShapeFit\module;$(SolutionDir)TnbAirfoil\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -138,7 +138,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbPtdShapeFit_EXPORT_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdShapeFit\Slicer;$(ProjectDir)TnbLib\PtdShapeFit\ProjMeshToFace;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded\Linear;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded;$(ProjectDir)TnbLib\PtdShapeFit\Shape;$(ProjectDir)TnbLib\PtdShapeFit\Section\Circle;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error\LS;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Single;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap;$(ProjectDir)TnbLib\PtdShapeFit\Section;$(ProjectDir)TnbLib\PtdShapeFit\Tools;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Par;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Entity;$(ProjectDir)TnbLib\PtdShapeFit\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\PtdShapeFit\Slicer;$(ProjectDir)TnbLib\PtdShapeFit\ProjMeshToFace;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded\Linear;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin;$(ProjectDir)TnbLib\PtdShapeFit\Shape\Extruded;$(ProjectDir)TnbLib\PtdShapeFit\Shape;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve\Airfoil;$(ProjectDir)TnbLib\PtdShapeFit\Section\Curve;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\typed;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t5;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t4;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t3;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t2;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\t1;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve\Leading;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve\Upper;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve\Lower;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil\Curve;$(ProjectDir)TnbLib\PtdShapeFit\Section\Airfoil;$(ProjectDir)TnbLib\PtdShapeFit\Section\Circle;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error\LS;$(ProjectDir)TnbLib\PtdShapeFit\Section\Error;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\TwoSurfaces;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Lower;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap\Single;$(ProjectDir)TnbLib\PtdShapeFit\Section\ScatterMap;$(ProjectDir)TnbLib\PtdShapeFit\Section;$(ProjectDir)TnbLib\PtdShapeFit\Tools;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Par;$(ProjectDir)TnbLib\PtdShapeFit\Entities\Entity;$(ProjectDir)TnbLib\PtdShapeFit\module;$(SolutionDir)TnbAirfoil\include;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -156,12 +156,38 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\PtdShapeFit\Entities\Par\PtdShapeFit_Par.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\module\PtdShapeFit_Module.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\ProjMeshToFace\PtdShapeFit_ProjMeshToFace.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Leading\PtdShapeFit2d_LeadingAirfoilCurve.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Lower\PtdShapeFit2d_LowerAirfoilCurve.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\PtdShapeFit2d_AirfoilPlnCurve.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\Curve\Upper\PtdShapeFit2d_UpperAirfoilCurve.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\PtdShapeFit2d_Airfoil.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102\PtdShapeFit2d_TypedAirfoil_MH102Offsets.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\PtdShapeFit2d_TypedAirfoil_Offsets.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833\PtdShapeFit2d_TypedAirfoil_S833Offsets.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoil.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_Circle.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\PtdShapeFit2d_AirfoilGlobal.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\PtdShapeFit2d_AirfoilLeading.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\PtdShapeFit2d_AirfoilNose.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\PtdShapeFit2d_AirfoilCurve.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\Curve\PtdShapeFit2d_Curve.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Section\PtdShapeFit_Section.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both\PtdShapeFit2d_AirfoilScatterMap_BothMH102Surf.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\PtdShapeFit2d_AirfoilScatterMap_MH102.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper\PtdShapeFit2d_AirfoilScatterMap_UpperMH102.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\PtdShapeFit2d_AirfoilScatterMap.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\TwoSurfaces\PtdShapeFit2d_AirfoilScatterMap_TwoSurfaces.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\PtdShapeFit2d_ScatterMap.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMap.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Shape\Extruded\Linear\PtdShapeFit_LinExtruded.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Shape\Extruded\PtdShapeFit_Extruded.hxx" />
+    <ClInclude Include="TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin\PtdShapeFit_TwoSegmentedLinExtruded.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Shape\PtdShapeFit_Shape.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Slicer\PtdShapeFit_Slicer.hxx" />
     <ClInclude Include="TnbLib\PtdShapeFit\Tools\PtdShapeFit_Tools.hxx" />
@@ -170,22 +196,63 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\PtdShapeFit\Entities\Entity\PtdShapeFit_Entity.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Entities\Par\PtdShapeFit_Par.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\ProjMeshToFace\PtdShapeFit_ProjMeshToFace.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1CalcError.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1IO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t1\PtdShapeFit2d_Airfoil_t1Shape.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2CalcError.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2IO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\t2\PtdShapeFit2d_Airfoil_t2Shape.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102\PtdShapeFit2d_TypedAirfoil_MH102Offsets.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\MH102\PtdShapeFit2d_TypedAirfoil_MH102OffsetsIO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833\PtdShapeFit2d_TypedAirfoil_S833Offsets.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\offsets\S833\PtdShapeFit2d_TypedAirfoil_S833OffsetsIO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoil.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoilCalcError.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoilIO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Airfoil\typed\PtdShapeFit2d_TypedAirfoilShape.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_Circle.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_CircleError.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_CircleIO.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\Circle\PtdShapeFit2d_CircleShape.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1Error.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1IO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Global\t1\PtdShapeFit2d_AirfoilGlobal_t1Shape.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1Error.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1IO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Leading\t1\PtdShapeFit2d_AirfoilLeading_t1Shape.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1Error.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1IO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\T1\PtdShapeFit2d_AirfoilNose_t1Shape.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2Error.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2IO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\Curve\Airfoil\Nose\t2\PtdShapeFit2d_AirfoilNose_t2Shape.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\PtdShapeFit_Section.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both\PtdShapeFit2d_AirfoilScatterMap_BothMH102Surf.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Both\PtdShapeFit2d_AirfoilScatterMap_BothMH102SurfIO.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper\PtdShapeFit2d_AirfoilScatterMap_UpperMH102.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Airfoil\MH102\Upper\PtdShapeFit2d_AirfoilScatterMap_UpperMH102IO.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\PtdShapeFit2d_ScatterMap.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMap.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Section\ScatterMap\Single\PtdShapeFit2d_SingleScatterMapIO.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\Linear\PtdShapeFit_LinExtruded.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\Linear\PtdShapeFit_LinExtrudedIO.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\PtdShapeFit_Extruded.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin\PtdShapeFit_TwoSegmentedLinExtruded.cxx" />
+    <ClCompile Include="TnbLib\PtdShapeFit\Shape\Extruded\TwoSegmentedLin\PtdShapeFit_TwoSegmentedLinExtrudedIO.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Shape\PtdShapeFit_Shape.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Slicer\PtdShapeFit_Slicer.cxx" />
     <ClCompile Include="TnbLib\PtdShapeFit\Tools\PtdShapeFit_Tools.cxx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TnbAirfoil\TnbAirfoil.vcxproj">
+      <Project>{8e8c558c-760a-4eb2-bfbd-426c812d0bb1}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">
       <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
     </ProjectReference>

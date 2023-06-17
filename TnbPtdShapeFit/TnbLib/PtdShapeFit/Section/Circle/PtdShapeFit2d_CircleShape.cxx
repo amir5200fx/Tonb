@@ -24,3 +24,12 @@ tnbLib::PtdShapeFit2d_Circle::RetrieveShape
 	auto shape = Cad2d_Plane::MakeCircle(gcircle);
 	return std::move(shape);
 }
+
+std::shared_ptr<tnbLib::Cad2d_Plane> 
+tnbLib::PtdShapeFit2d_Circle::ExportPlane
+(
+	const std::vector<Standard_Real>& xs
+) const
+{
+	return RetrieveShape(xs);
+}

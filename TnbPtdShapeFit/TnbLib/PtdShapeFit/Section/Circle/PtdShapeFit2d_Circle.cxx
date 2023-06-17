@@ -9,6 +9,57 @@ const char* tnbLib::PtdShapeFit2d_Circle::radiusPar::name = "rad";
 const unsigned int tnbLib::PtdShapeFit2d_Circle::nb_parameters(3);
 unsigned short tnbLib::PtdShapeFit2d_Circle::verbose(0);
 
+std::map<Standard_Integer, const char*> tnbLib::PtdShapeFit2d_Circle::ParsMap;
+
+namespace tnbLib
+{
+	class PtdShapeFit2d_CircleRunTime
+	{
+
+		/*Private Data*/
+
+	public:
+
+		// Default constructor [4/11/2023 Payvand]
+
+		PtdShapeFit2d_CircleRunTime()
+		{
+			SetConfig();
+		}
+
+		// Constructors [4/11/2023 Payvand]
+
+		void SetConfig();
+	};
+}
+
+void tnbLib::PtdShapeFit2d_CircleRunTime::SetConfig()
+{
+	{
+		auto paired = std::make_pair(PtdShapeFit2d_Circle::xoPar::id, PtdShapeFit2d_Circle::xoPar::name);
+		PtdShapeFit2d_Circle::ParsMap.insert(std::move(paired));
+	}
+	{
+		auto paired = std::make_pair(PtdShapeFit2d_Circle::yoPar::id, PtdShapeFit2d_Circle::yoPar::name);
+		PtdShapeFit2d_Circle::ParsMap.insert(std::move(paired));
+	}
+	{
+		auto paired = std::make_pair(PtdShapeFit2d_Circle::radiusPar::id, PtdShapeFit2d_Circle::radiusPar::name);
+		PtdShapeFit2d_Circle::ParsMap.insert(std::move(paired));
+	}
+}
+
+tnbLib::PtdShapeFit2d_CircleRunTime myPtdShapeFit2d_CircleRunTimeObj;
+
+const char* 
+tnbLib::PtdShapeFit2d_Circle::ParName
+(
+	const Standard_Integer theIndex
+) const
+{
+	return ParsMap.at(theIndex);
+}
+
 Standard_Integer 
 tnbLib::PtdShapeFit2d_Circle::NbPars() const
 {
@@ -233,4 +284,30 @@ tnbLib::PtdShapeFit2d_Circle::CreateRadius
 	par->SetIndex((int)PtdShapeFit2d_Circle::radiusPar::id + 1);
 	par->SetName("radius");
 	return std::move(par);
+}
+
+std::shared_ptr<tnbLib::PtdShapeFit2d_Circle::Parameters>
+tnbLib::PtdShapeFit2d_Circle::CreateParChromosome
+(
+	const Standard_Real theXo,
+	const Standard_Real theYo,
+	const Standard_Real theRadius
+)
+{
+	std::vector<Param> pars(nb_parameters);
+	{
+		Param p{ theXo,xoPar::name };
+		pars.at(XoId()) = std::move(p);
+	}
+	{
+		Param p{ theYo,yoPar::name };
+		pars.at(YoId()) = std::move(p);
+	}
+	{
+		Param p{ theRadius,radiusPar::name };
+		pars.at(RadiusId()) = std::move(p);
+	}
+	Parameters pchromRef = { std::move(pars) };
+	auto pchrom = std::make_shared<Parameters>(std::move(pchromRef));
+	return std::move(pchrom);
 }

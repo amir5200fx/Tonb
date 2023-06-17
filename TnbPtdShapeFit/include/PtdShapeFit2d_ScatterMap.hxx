@@ -13,6 +13,10 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [4/28/2023 Payvand]
+	class Cad2d_Plane;
+	class Pln_Curve;
+
 	class PtdShapeFit2d_ScatterMap
 	{
 
@@ -53,6 +57,9 @@ namespace tnbLib
 
 		virtual Standard_Integer NbRegions() const = 0;
 		virtual std::shared_ptr<ptList> Region(const Standard_Integer theIndex) const = 0;
+
+		TnbPtdShapeFit_EXPORT virtual std::vector<std::pair<std::shared_ptr<Pln_Curve>, std::shared_ptr<ptList>>>
+			RetrieveCurves(const std::shared_ptr<Cad2d_Plane>&) const;
 
 	};
 }

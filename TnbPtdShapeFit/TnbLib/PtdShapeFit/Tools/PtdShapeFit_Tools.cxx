@@ -75,8 +75,8 @@ tnbLib::PtdShapeFit_Tools::RetrievePoles(const Pln_Curve& theCurve)
 	std::vector<std::pair<Pnt2d, Standard_Real>> coords;
 	std::vector<Standard_Real> knots;
 	std::vector<Standard_Integer> mults;
-	Handle(Geom2d_BSplineCurve) bspline;
-	if (NOT Handle(Geom2d_BSplineCurve)::DownCast(g))
+	Handle(Geom2d_BSplineCurve) bspline = Handle(Geom2d_BSplineCurve)::DownCast(g);
+	if (NOT bspline)
 	{
 		bspline = Geom2dConvert::CurveToBSplineCurve(g);
 		if (NOT bspline)
@@ -86,6 +86,7 @@ tnbLib::PtdShapeFit_Tools::RetrievePoles(const Pln_Curve& theCurve)
 				<< abort(FatalError);
 		}
 	}
+
 	const auto& poles = bspline->Poles();
 	for (Standard_Integer i = 1; i <= poles.Size(); i++)
 	{
@@ -213,6 +214,7 @@ namespace tnbLib
 			planes.reserve(xs.size());
 			for (auto loc : xs)
 			{
+				//std::cout << "loc = " << loc << std::endl;
 				auto pt = Pnt3d(theAx.Location()) + loc * Pnt3d(theAx.Direction().XYZ());
 				Handle(Geom_Plane) pl = new Geom_Plane(pt, theAx.Direction());
 				planes.push_back(std::move(pl));
@@ -271,6 +273,7 @@ tnbLib::PtdShapeFit_Tools::MakeExtrudedSurface
 )
 {
 	auto [poles, knots, vdegree] = ptdShapeTools::RetrievePoles(theSections);
+	std::cout << "degree: " << vdegree << std::endl;
 	auto [poleNet, weightNet] = ptdShapeTools::RetrieveCtrlNet(poles, thePlanes);
 
 	auto degree = 3;
@@ -309,6 +312,7 @@ tnbLib::PtdShapeFit_Tools::MakeExtrudedSurface
 
 #include <TopoDS_Builder.hxx>
 #include <TopoDS_Compound.hxx>
+#include <Dir3d.hxx>
 
 std::shared_ptr<tnbLib::Cad_Shape> 
 tnbLib::PtdShapeFit_Tools::MakeExtrudedShape
@@ -318,6 +322,8 @@ tnbLib::PtdShapeFit_Tools::MakeExtrudedShape
 	const std::vector<Standard_Real>& theLocs
 )
 {
+	//std::cout << "coord= " << theAx.Location() << std::endl;
+	//std::cout << "dir = " << theAx.Direction() << std::endl;
 	auto planes = ::tnbLib::ptdShapeTools::RetrievePlanes(theAx, theLocs);
 
 	std::vector<std::vector<std::shared_ptr<Pln_Curve>>> allCurves;
