@@ -89,4 +89,19 @@
 
 #define M_ONE           -(Standard_Integer)1;
 
+#define RunTimeConfigs(ObjectName)                                  \
+    class ObjectName##RunTime                                       \
+    {                                                               \
+        public:                                                     \
+        ObjectName##RunTime()                                       \
+        {SetConfigs();}                                             \
+                                                                    \
+        static void SetConfigs();                                   \
+    };                                                              \
+                                                                    \
+    static const ObjectName##RunTime ObjectName##RunTimeObject;
+
+#define SetRunTimeConfigs(ObjectName)       \
+    void ObjectName##RunTime::SetConfigs()
+
 #endif // !_Global_Macros_Header

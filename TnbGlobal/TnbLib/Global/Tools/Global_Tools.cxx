@@ -123,3 +123,16 @@ tnbLib::Global_Tools::ConvertToArrayField<Standard_Real, Standard_Real, 1>
 	}
 	return std::move(values);
 }
+
+bool tnbLib::Global_Tools::IsNumber(const std::string& s)
+{
+	if (s.size() IS_EQUAL 0) return false;
+	for (int i = 0; i < s.size(); i++)
+	{
+		if ((s[i] >= '0' AND s[i] <= '9') IS_EQUAL false)
+		{
+			return false;
+		}
+	}
+	return true;
+}

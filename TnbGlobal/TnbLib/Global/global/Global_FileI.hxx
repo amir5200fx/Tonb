@@ -97,7 +97,26 @@ namespace tnbLib
 		}
 
 		template<class T>
-		T LoadSingleFile(const std::string& name, const std::string& extension, const unsigned short verbose)
+		T LoadSingleFile
+		(
+			const std::string& name, 
+			const std::string& extension,
+			const unsigned short verbose
+		)
+		{
+			std::string file_name;
+			auto obj = file::LoadSingleFile<T>(name, extension, verbose, file_name);
+			return std::move(obj);
+		}
+
+		template<class T>
+		T LoadSingleFile
+		(
+			const std::string& name,
+			const std::string& extension,
+			const unsigned short verbose,
+			std::string& file_name
+		)
 		{
 			CheckDirectory(name);
 
@@ -121,6 +140,7 @@ namespace tnbLib
 					boost::filesystem::current_path(address);
 
 					auto name = GetSingleFile(boost::filesystem::current_path(), extension).string();
+					file_name = name;
 					auto loaded = file::LoadFile<T>(name + extension, verbose);
 
 					//- change back the current path
@@ -142,6 +162,7 @@ namespace tnbLib
 			else
 			{
 				auto name = GetSingleFile(boost::filesystem::current_path(), extension).string();
+				file_name = name;
 				auto loaded = file::LoadFile<T>(name + extension, verbose);
 
 				//- change back the current path
