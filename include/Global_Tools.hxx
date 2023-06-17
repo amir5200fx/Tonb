@@ -139,6 +139,8 @@ namespace tnbLib
 
 		template<class Key, class T>
 		static std::vector<T> RetrieveValuesToList(const std::map<Key, T>&);
+
+		static TnbGlobal_EXPORT bool IsNumber(const std::string& s);
 	};
 }
 

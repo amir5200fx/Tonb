@@ -9,6 +9,7 @@
 #include <Entity2d_BoxFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
+#include <Entity3d_SurfTriangulationFwd.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_MetricMeshValueFwd.hxx>
@@ -16,6 +17,7 @@
 #include <Cad_Module.hxx>
 
 class Bnd_Box;
+class TopoDS_Solid;
 class TopoDS_Shape;
 class TopoDS_Face;
 class TopoDS_Edge;
@@ -77,6 +79,8 @@ namespace tnbLib
 
 		static TnbCad_EXPORT Standard_Boolean IsUniMetric(const std::shared_ptr<Cad_GeomSurface>&);
 
+		static TnbCad_EXPORT Standard_Boolean IsValidSolid(const TopoDS_Shape&);
+
 		static TnbCad_EXPORT Standard_Boolean 
 			HasTriangulation
 			(
@@ -121,6 +125,8 @@ namespace tnbLib
 				const Standard_Real u1, 
 				const Standard_Real tol
 			);
+
+		static TnbCad_EXPORT Standard_Boolean IsSolid(const TopoDS_Shape& theShape);
 
 		static TnbCad_EXPORT Entity2d_Box ParametricDomain(const Geom_Surface& theSurf);
 
@@ -176,6 +182,13 @@ namespace tnbLib
 				const Pnt2d& theP1,
 				const Standard_Integer theNx,
 				const Standard_Integer theNy
+			);
+
+		static TnbCad_EXPORT std::shared_ptr<Entity3d_SurfTriangulation>
+			SurfTriangulation
+			(
+				const Geom_Surface& theSurface,
+				const Entity2d_Triangulation&
 			);
 
 		static TnbCad_EXPORT std::shared_ptr<Entity3d_Triangulation>
@@ -293,6 +306,10 @@ namespace tnbLib
 				std::vector<std::shared_ptr<TModel_Shell>>& theInners,
 				std::shared_ptr<TModel_Shell>& theOuters
 			);
+
+		// retrieve the shapes of a compound shape [6/13/2023 Payvand]
+		static TnbCad_EXPORT std::vector<TopoDS_Shape> RetrieveShapes(const TopoDS_Shape& theShape);
+		static TnbCad_EXPORT std::vector<TopoDS_Shape> RetrieveSolids(const TopoDS_Shape& theShape);
 
 		static TnbCad_EXPORT std::vector<std::shared_ptr<TModel_Edge>>
 			RetrieveNonSingularEdges
@@ -449,6 +466,9 @@ namespace tnbLib
 				const Geom_Surface&
 			);
 
+		// Calculate the volume of a solid [6/13/2023 Payvand]
+		static TnbCad_EXPORT Standard_Real CalcVolume(const TopoDS_Shape& theShape);
+
 		static TnbCad_EXPORT Handle(Geom_BSplineSurface)
 			ReParameterization
 			(
@@ -480,6 +500,8 @@ namespace tnbLib
 			const TopoDS_Shape& theShape,
 			const fileName& name
 		);
+
+		static TnbCad_EXPORT void CheckSolid(const TopoDS_Shape&);
 	};
 }
 

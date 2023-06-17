@@ -68,4 +68,6 @@ namespace tnbLib
 	};
 }
 
+#include <Dir3dI.hxx>
+
 #endif // !_Dir3d_Header

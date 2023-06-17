@@ -67,6 +67,13 @@ namespace tnbLib
 			(
 				const std::vector<std::pair<Standard_Real, Standard_Real>>&
 			);
+
+		static TnbPtdShapeFit_EXPORT std::pair<std::vector<Standard_Real>, std::vector<Standard_Real>>
+			CalcLinearProfile
+			(
+				const std::vector<std::pair<std::shared_ptr<PtdShapeFit_Section::Parameters>, Standard_Real>>& theParams, 
+				const std::shared_ptr<PtdShapeFit_Section>& theSection
+			);
 	};
 }
 

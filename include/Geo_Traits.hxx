@@ -17,10 +17,12 @@ namespace tnbLib
 
 	class Pnt2d;
 	class Pnt3d;
+	class Entity3d_SPnt;
 
 	template<class Point> struct transform_point_type {};
 	template<> struct transform_point_type<Pnt2d> { typedef gp_Trsf2d type; };
 	template<> struct transform_point_type<Pnt3d> { typedef gp_Trsf type; };
+	template<> struct transform_point_type<Entity3d_SPnt> { typedef gp_Trsf type; };
 	template<> struct transform_point_type<std::pair<Pnt2d, Standard_Real>> { typedef gp_Trsf2d type; };
 	template<> struct transform_point_type<std::pair<Pnt3d, Standard_Real>> { typedef gp_Trsf type; };
 

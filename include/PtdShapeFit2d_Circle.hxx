@@ -35,6 +35,8 @@ namespace tnbLib
 			Standard_Real value;
 		};
 
+		static TnbPtdShapeFit_EXPORT std::map<Standard_Integer, const char*> ParsMap;
+
 	private:
 
 		/*Private Data*/
@@ -70,6 +72,8 @@ namespace tnbLib
 
 		// public functions and operators [2/9/2023 Payvand]
 
+		TnbPtdShapeFit_EXPORT const char* 
+			ParName(const Standard_Integer theIndex) const override;
 		TnbPtdShapeFit_EXPORT Standard_Integer 
 			NbPars() const override;
 		TnbPtdShapeFit_EXPORT Standard_Real 
@@ -84,6 +88,9 @@ namespace tnbLib
 
 		TnbPtdShapeFit_EXPORT std::shared_ptr<Cad2d_Plane> 
 			RetrieveShape(const std::vector<Standard_Real>&) const override;
+
+		TnbPtdShapeFit_EXPORT std::shared_ptr<Cad2d_Plane>
+			ExportPlane(const std::vector<Standard_Real>&) const override;
 
 		TnbPtdShapeFit_EXPORT std::vector<std::shared_ptr<PtdShapeFit_Par>> 
 			RetrieveParList() const override;
@@ -162,6 +169,14 @@ namespace tnbLib
 		static TnbPtdShapeFit_EXPORT std::shared_ptr<PtdShapeFit_Par> CreateXo(const Standard_Real theLower, const Standard_Real theUpper);
 		static TnbPtdShapeFit_EXPORT std::shared_ptr<PtdShapeFit_Par> CreateYo(const Standard_Real theLower, const Standard_Real theUpper);
 		static TnbPtdShapeFit_EXPORT std::shared_ptr<PtdShapeFit_Par> CreateRadius(const Standard_Real theLower, const Standard_Real theUpper);
+
+		static TnbPtdShapeFit_EXPORT std::shared_ptr<Parameters>
+			CreateParChromosome
+			(
+				const Standard_Real theXo, 
+				const Standard_Real theYo,
+				const Standard_Real theRadius
+			);
 	};
 }
 

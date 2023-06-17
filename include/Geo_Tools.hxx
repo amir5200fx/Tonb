@@ -22,6 +22,8 @@
 #include <Entity3d_TriangleFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Entity3d_SurfTriangulationFwd.hxx>
+#include <Entity2d_RayFwd.hxx>
 
 #include <vector>
 #include <memory>
@@ -154,6 +156,15 @@ namespace tnbLib
 			(
 				const Standard_Real x, 
 				const Standard_Real epsilon = gp::Resolution()
+			);
+
+		static inline Standard_Boolean 
+			IsForward
+			(
+				const Standard_Integer theV0, 
+				const Standard_Integer theV1,
+				const Standard_Integer theQ0, 
+				const Standard_Integer theQ1
 			);
 
 		static TnbGeo_EXPORT Standard_Real MachineEpsilon();
@@ -665,6 +676,15 @@ namespace tnbLib
 				const Standard_Real theAngTol
 			);
 
+		static TnbGeo_EXPORT Pnt3d
+			CalcTetrahedronVertex
+			(
+				const Standard_Real theSize,
+				const Pnt3d& theP0, 
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2
+			);
+
 		static TnbGeo_EXPORT std::pair<Pnt2d, Standard_Boolean> 
 			IntersectTwoLines
 			(
@@ -724,6 +744,13 @@ namespace tnbLib
 				const Entity3d_Triangle& theTri
 			);
 
+		static TnbGeo_EXPORT std::pair<Pnt2d, Standard_Boolean> 
+			CalcIntersectionPoint_cgal
+			(
+				const Entity2d_Ray& theRay1,
+				const Entity2d_Ray& theRay2
+			);
+
 		static std::shared_ptr<Entity2d_Polygon> Intersection_cgal(const gp_Pln&, const Entity3d_Box&);
 
 		static inline Standard_Real 
@@ -742,7 +769,7 @@ namespace tnbLib
 			);
 
 		template<class T>
-		static T LinearInterpolate(const T& x0, const T& x1, const T& t);
+		static T LinearInterpolate(const T& x0, const T& x1, const Standard_Real t);
 
 		static inline Pnt2d 
 			ProjectPtAtSegment
@@ -904,6 +931,7 @@ namespace tnbLib
 
 		static TnbGeo_EXPORT void Reverse(Entity2d_Triangulation&);
 		static TnbGeo_EXPORT void Reverse(Entity3d_Triangulation&);
+		static TnbGeo_EXPORT void Reverse(Entity3d_SurfTriangulation&);
 
 		static TnbGeo_EXPORT void ExportAsOBJ_cgal(const Entity3d_Triangulation&, std::ostream&);
 	};
