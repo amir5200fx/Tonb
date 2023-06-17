@@ -22,6 +22,7 @@
 #include <Entity3d_TriangleFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity3d_TriangulationFwd.hxx>
+#include <Entity3d_SurfTriangulationFwd.hxx>
 #include <Entity2d_RayFwd.hxx>
 
 #include <vector>
@@ -155,6 +156,15 @@ namespace tnbLib
 			(
 				const Standard_Real x, 
 				const Standard_Real epsilon = gp::Resolution()
+			);
+
+		static inline Standard_Boolean 
+			IsForward
+			(
+				const Standard_Integer theV0, 
+				const Standard_Integer theV1,
+				const Standard_Integer theQ0, 
+				const Standard_Integer theQ1
 			);
 
 		static TnbGeo_EXPORT Standard_Real MachineEpsilon();
@@ -666,6 +676,15 @@ namespace tnbLib
 				const Standard_Real theAngTol
 			);
 
+		static TnbGeo_EXPORT Pnt3d
+			CalcTetrahedronVertex
+			(
+				const Standard_Real theSize,
+				const Pnt3d& theP0, 
+				const Pnt3d& theP1, 
+				const Pnt3d& theP2
+			);
+
 		static TnbGeo_EXPORT std::pair<Pnt2d, Standard_Boolean> 
 			IntersectTwoLines
 			(
@@ -912,6 +931,7 @@ namespace tnbLib
 
 		static TnbGeo_EXPORT void Reverse(Entity2d_Triangulation&);
 		static TnbGeo_EXPORT void Reverse(Entity3d_Triangulation&);
+		static TnbGeo_EXPORT void Reverse(Entity3d_SurfTriangulation&);
 
 		static TnbGeo_EXPORT void ExportAsOBJ_cgal(const Entity3d_Triangulation&, std::ostream&);
 	};

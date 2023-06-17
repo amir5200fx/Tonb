@@ -10,6 +10,35 @@ tnbLib::Geo_Tools::IsZero
 	return std::abs(x - epsilon) <= (Standard_Real)0.0;
 }
 
+inline Standard_Boolean 
+tnbLib::Geo_Tools::IsForward
+(
+	const Standard_Integer theV0,
+	const Standard_Integer theV1,
+	const Standard_Integer theQ0,
+	const Standard_Integer theQ1
+)
+{
+	if (theV0 IS_EQUAL theQ0)
+	{
+		if (theV1 IS_EQUAL theQ1)
+		{
+			return Standard_True;
+		}
+	}
+	else if (theV0 IS_EQUAL theQ1)
+	{
+		if (theV1 IS_EQUAL theQ0)
+		{
+			return Standard_False;
+		}
+	}
+	FatalErrorIn(FunctionSIG)
+		<< "the two segments aren't coincident" << endl
+		<< abort(FatalError);
+	return Standard_True;
+}
+
 inline Standard_Real 
 tnbLib::Geo_Tools::CalcSquareDistancePointFromTriangle
 (

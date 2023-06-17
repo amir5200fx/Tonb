@@ -8,10 +8,6 @@
 
 namespace tnbLib
 {
-
-	typedef Entity_StaticData<Pnt3d, connectivity::triple>
-		Entity3d_Triangulation;
-
 	template<>
 	TnbGeo_EXPORT void Entity3d_Triangulation::ExportToPlt(OFstream& File) const;
 }

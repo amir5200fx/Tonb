@@ -14,6 +14,7 @@
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Entity3d_SurfTriangulation.hxx>
 #include <Global_Tools.hxx>
 
 #include <predicates.h>
@@ -422,6 +423,22 @@ tnbLib::Geo_Tools::IntersectionTwoLines
 	const auto alf = nume / denom;
 
 	const auto pt = P0 + alf * Pnt2d(t0.XY());
+	return std::move(pt);
+}
+
+tnbLib::Pnt3d 
+tnbLib::Geo_Tools::CalcTetrahedronVertex
+(
+	const Standard_Real theSize, 
+	const Pnt3d& theP0, 
+	const Pnt3d& theP1,
+	const Pnt3d& theP2
+)
+{
+	auto centre = CalcCentre(theP0, theP1, theP2);
+	auto normal = CalcNormal(theP0, theP1, theP2).Normalized();
+	auto v = theSize * normal;
+	auto pt = centre + normal;
 	return std::move(pt);
 }
 
@@ -1034,6 +1051,15 @@ void tnbLib::Geo_Tools::Reverse(Entity2d_Triangulation & theTri)
 }
 
 void tnbLib::Geo_Tools::Reverse(Entity3d_Triangulation & theTri)
+{
+	auto& Ids = theTri.Connectivity();
+	for (auto& x : Ids)
+	{
+		std::swap(x.Value(0), x.Value(1));
+	}
+}
+
+void tnbLib::Geo_Tools::Reverse(Entity3d_SurfTriangulation& theTri)
 {
 	auto& Ids = theTri.Connectivity();
 	for (auto& x : Ids)

@@ -886,6 +886,9 @@
     <Filter Include="TnbLib\Geo\AirfoilOffsets\S833">
       <UniqueIdentifier>{45575908-12e7-4fa8-ac60-af32956acc59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\SPoint">
+      <UniqueIdentifier>{5230be17-35fd-4c42-82d6-76a606186672}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2106,6 +2109,18 @@
     <ClInclude Include="TnbLib\Geo\AirfoilOffsets\S833\Geo_AirfoilOffsets_S833.hxx">
       <Filter>TnbLib\Geo\AirfoilOffsets\S833</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Direct\3d\Dir3dI.hxx">
+      <Filter>TnbLib\Geo\Entities\Direct\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\SPoint\Entity3d_SPnt.hxx">
+      <Filter>TnbLib\Geo\Entities\SPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulation.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulationFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2647,6 +2662,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\AirfoilOffsets\S833\Geo_AirfoilOffsets_S833.cxx">
       <Filter>TnbLib\Geo\AirfoilOffsets\S833</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulation.cxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulationIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\SPoint\Entity3d_SPnt.cxx">
+      <Filter>TnbLib\Geo\Entities\SPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\SPoint\Entity3d_SPntIO.cxx">
+      <Filter>TnbLib\Geo\Entities\SPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
