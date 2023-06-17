@@ -26,6 +26,7 @@
 #include <Entity3d_Chain.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Entity3d_SurfTriangulation.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_MetricMeshValue.hxx>
 #include <Entity2d_MeshValue.hxx>
@@ -64,6 +65,9 @@
 #include <BRepBndLib.hxx>
 #include <BRepTools.hxx>
 #include <BRepTools_WireExplorer.hxx>
+#include <BRepCheck_Analyzer.hxx>
+#include <BRepGProp.hxx>
+#include <GProp_GProps.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopExp.hxx>
 #include <TopoDS.hxx>
@@ -161,6 +165,12 @@ tnbLib::Cad_Tools::IsUniMetric
 	{
 		return Standard_False;
 	}
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsValidSolid(const TopoDS_Shape& theSolid)
+{
+	return BRepCheck_Analyzer(theSolid, Standard_True).IsValid();
 }
 
 Standard_Boolean 
@@ -287,6 +297,12 @@ tnbLib::Cad_Tools::IsRing
 	auto p1 = theCurve->Value(u1);
 
 	return (Standard_Boolean)(p0.Distance(p1) <= tol);
+}
+
+Standard_Boolean 
+tnbLib::Cad_Tools::IsSolid(const TopoDS_Shape& theShape)
+{
+	return theShape.ShapeType() IS_EQUAL TopAbs_SOLID;
 }
 
 tnbLib::Entity2d_Box 
@@ -761,6 +777,29 @@ tnbLib::Cad_Tools::ParametricTriangulation
 			indices.push_back(std::move(I1));
 		}
 	}
+	return std::move(tri);
+}
+
+std::shared_ptr<tnbLib::Entity3d_SurfTriangulation> 
+tnbLib::Cad_Tools::SurfTriangulation
+(
+	const Geom_Surface& theSurface,
+	const Entity2d_Triangulation& theParametric
+)
+{
+	const auto& pts0 = theParametric.Points();
+
+	auto tri = std::make_shared<Entity3d_SurfTriangulation>();
+	Debug_Null_Pointer(tri);
+
+	auto& pts = tri->Points();
+	pts.reserve(pts.size());
+	for (const auto& x : pts0)
+	{
+		auto pt = theSurface.Value(x.X(), x.Y());
+		pts.push_back({ std::move(pt),x });
+	}
+	tri->Connectivity() = theParametric.Connectivity();
 	return std::move(tri);
 }
 
@@ -1753,6 +1792,34 @@ tnbLib::Cad_Tools::MakeGeomPlane
 	return std::move(myPlane);
 }
 
+std::vector<TopoDS_Shape> 
+tnbLib::Cad_Tools::RetrieveShapes(const TopoDS_Shape& theShape)
+{
+	TopExp_Explorer explorer(theShape, TopAbs_SHAPE);
+	std::vector<TopoDS_Shape> shapes;
+	while (explorer.More())
+	{
+		const auto& sh = explorer.Current();
+		shapes.push_back(sh);
+		explorer.Next();
+	}
+	return std::move(shapes);
+}
+
+std::vector<TopoDS_Shape> 
+tnbLib::Cad_Tools::RetrieveSolids(const TopoDS_Shape& theShape)
+{
+	TopExp_Explorer explorer(theShape, TopAbs_SOLID);
+	std::vector<TopoDS_Shape> shapes;
+	while (explorer.More())
+	{
+		const auto& sh = explorer.Current();
+		shapes.push_back(sh);
+		explorer.Next();
+	}
+	return std::move(shapes);
+}
+
 std::vector<std::shared_ptr<tnbLib::TModel_Edge>> 
 tnbLib::Cad_Tools::RetrieveNonSingularEdges
 (
@@ -2408,6 +2475,15 @@ tnbLib::Cad_Tools::CalcSegmentLength
 	return p0.Distance(p1);
 }
 
+Standard_Real 
+tnbLib::Cad_Tools::CalcVolume(const TopoDS_Shape& theShape)
+{
+	CheckSolid(theShape);
+	GProp_GProps gProps;
+	BRepGProp::VolumeProperties(theShape, gProps);
+	return gProps.Mass();
+}
+
 Handle(Geom_BSplineSurface)
 tnbLib::Cad_Tools::ReParameterization
 (
@@ -2707,6 +2783,16 @@ void tnbLib::Cad_Tools::ExportToSTEP
 	{
 		FatalErrorIn("void ExportToSTEP()")
 			<< "Unable to export the model" << endl
+			<< abort(FatalError);
+	}
+}
+
+void tnbLib::Cad_Tools::CheckSolid(const TopoDS_Shape& theSolid)
+{
+	if (NOT BRepCheck_Analyzer(theSolid, Standard_True).IsValid())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the solid is not valid." << endl
 			<< abort(FatalError);
 	}
 }

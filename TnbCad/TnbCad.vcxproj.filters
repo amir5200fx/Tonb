@@ -520,6 +520,18 @@
     <Filter Include="TnbLib\Cad\TModel\Entities\ParaDegenCurve">
       <UniqueIdentifier>{7676c044-7d55-4394-a6d0-037f37f09e43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad\Solid">
+      <UniqueIdentifier>{fd55bb1b-f8fc-47da-baac-a38ecc8830fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Volume">
+      <UniqueIdentifier>{e514efda-ec33-4a72-9778-4f6fac787fd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Volume\Single">
+      <UniqueIdentifier>{99e3e910-f854-4d23-be28-52b8bb1138c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Cad\Volume\Multi">
+      <UniqueIdentifier>{45166a9d-9103-4bc6-b0d8-08abf99df9a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.hxx">
@@ -1053,6 +1065,18 @@
     <ClInclude Include="TnbLib\Cad\Tools\Cad_CurveTools.hxx">
       <Filter>TnbLib\Cad\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Solid\Cad_Solid.hxx">
+      <Filter>TnbLib\Cad\Solid</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Volume\Cad_Volume.hxx">
+      <Filter>TnbLib\Cad\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Volume\Single\Cad_SingleVolume.hxx">
+      <Filter>TnbLib\Cad\Volume\Single</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Cad\Volume\Multi\Cad_MultiVolume.hxx">
+      <Filter>TnbLib\Cad\Volume\Multi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Cad\TModel\Entities\Entity\TModel_Entity.cxx">
@@ -1543,6 +1567,27 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Cad\Tools\Cad_CurveTools.cxx">
       <Filter>TnbLib\Cad\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Solid\Cad_Solid.cxx">
+      <Filter>TnbLib\Cad\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Solid\Cad_SolidIO.cxx">
+      <Filter>TnbLib\Cad\Solid</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Volume\Cad_VolumeIO.cxx">
+      <Filter>TnbLib\Cad\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Volume\Single\Cad_SingleVolumeIO.cxx">
+      <Filter>TnbLib\Cad\Volume\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Volume\Single\Cad_SingleVolume.cxx">
+      <Filter>TnbLib\Cad\Volume\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Volume\Multi\Cad_MultiVolume.cxx">
+      <Filter>TnbLib\Cad\Volume\Multi</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Cad\Volume\Multi\Cad_MultiVolumeIO.cxx">
+      <Filter>TnbLib\Cad\Volume\Multi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

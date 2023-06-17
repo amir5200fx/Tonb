@@ -1,5 +1,6 @@
 #include <Cad_tModelMaker.hxx>
 
+#include <Cad_Solid.hxx>
 #include <Cad_tEdgeMaker.hxx>
 #include <Cad_tSurfaceMaker.hxx>
 #include <Cad_tSurfaceMakerInfo.hxx>
@@ -64,6 +65,19 @@ void tnbLib::Cad_tModelMakerRunTimeSetConfigs::SetConfigs()
 }
 
 static const tnbLib::Cad_tModelMakerRunTimeSetConfigs mytModelMakerRunTimeSetConfigsObj;
+
+tnbLib::Cad_tModelMaker::MakerInfo::MakerInfo
+(
+	const std::shared_ptr<Cad_tModelMakerInfo>& theModelInfo,
+	const std::shared_ptr<Cad_tEdgeMakerInfo>& theEdgeInfo, 
+	const std::shared_ptr<Cad_tSurfaceMakerInfo>& theSurfaceInfo
+)
+	: modelInfo(theModelInfo)
+	, edgeInfo(theEdgeInfo)
+	, surfInfo(theSurfaceInfo)
+{
+	// empty body [6/13/2023 Payvand]
+}
 
 void tnbLib::Cad_tModelMaker::MakerInfo::Check() const
 {
@@ -1588,6 +1602,122 @@ void tnbLib::Cad_tModelMaker::Perform()
 	LinkEdges(solid->Segments());
 
 	solid->SetShape(Shape());
+
+	theModel_ = std::move(solid);
+
+	Change_IsDone() = Standard_True;
+
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* End of the Creating a TModel ********" << endl;
+		Info << endl;
+	}
+}
+
+void tnbLib::Cad_tModelMaker::MakeSolid()
+{
+	if (verbose)
+	{
+		Info << endl;
+		Info << "******* Creating TModel ********" << endl;
+		Info << endl;
+	}
+
+	if (Shape().IsNull())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the shape is null" << endl
+			<< abort(FatalError);
+	}
+
+	GetInfo()->Check();
+
+	auto surfInfo =
+		std::make_shared<Cad_tSurfaceMaker::MakerInfo>
+		(
+			Cad_tSurfaceMaker::MakerInfo{ GetInfo()->edgeInfo, GetInfo()->surfInfo }
+	);
+	Debug_Null_Pointer(surfInfo);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Retrieving the surfaces..." << endl;
+	}
+
+	const auto surfaces = RetrieveSurfaces(Shape(), surfInfo);
+
+	auto solid = std::make_shared<Cad_Solid>(Shape());
+	Debug_Null_Pointer(solid);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Retrieving the edges..." << endl;
+	}
+	const auto edges = Cad_Tools::RetrieveEdges(surfaces);
+
+	RenumberingEdges(edges);
+	RenumberingNodes(edges);
+
+	LinkEdges(edges);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Merging the segments..." << endl;
+	}
+	auto mergeAlg = std::make_shared<MergeSegments>(edges, GetInfo()->modelInfo, PairCriterion());
+	Debug_Null_Pointer(mergeAlg);
+
+	mergeAlg->Perform();
+	Debug_If_Condition_Message(NOT mergeAlg->IsDone(), "the algorithm is not performed");
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Retrieving the vertices..." << endl;
+	}
+	const auto& mergedEdges = mergeAlg->MergedEdges();
+
+	const auto mergedNodes = MergeSegments::RetrieveNodes(mergedEdges);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Creating the corner manager..." << endl;
+	}
+	auto vertices = CreateVertices(mergedNodes);
+	auto cornerManager = MakeCornerManager(vertices);
+
+	SetCornerManager(std::move(cornerManager), solid);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Creating the segment manager..." << endl;
+	}
+	auto segments = CreateSegments(mergedEdges);
+	auto segmentManagr = MakeSegmentManager(segments);
+
+	SetSegmentManager(std::move(segmentManagr), solid);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Creating the face manager..." << endl;
+	}
+	auto faceManager = MakeFaceManager(surfaces);
+
+	SetFaceManager(std::move(faceManager), solid);
+
+	if (verbose)
+	{
+		Info << endl
+			<< " Linking the segments..." << endl;
+	}
+	LinkEdges(solid->Segments());
 
 	theModel_ = std::move(solid);
 

@@ -32,6 +32,15 @@ namespace tnbLib
 			std::shared_ptr<Cad_tEdgeMakerInfo> edgeInfo;
 			std::shared_ptr<Cad_tSurfaceMakerInfo> surfInfo;
 
+			MakerInfo() {}
+
+			TnbCad_EXPORT MakerInfo
+			(
+				const std::shared_ptr<Cad_tModelMakerInfo>& theModelInfo,
+				const std::shared_ptr<Cad_tEdgeMakerInfo>& theEdgeInfo,
+				const std::shared_ptr<Cad_tSurfaceMakerInfo>& theSurfaceInfo
+			);
+
 			TnbCad_EXPORT void Check() const;
 		};
 
@@ -106,6 +115,7 @@ namespace tnbLib
 		}
 
 		TnbCad_EXPORT void Perform();
+		TnbCad_EXPORT void MakeSolid();
 
 	};
 }
