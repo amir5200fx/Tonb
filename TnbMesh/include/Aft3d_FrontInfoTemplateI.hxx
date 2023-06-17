@@ -524,6 +524,7 @@ inline void tnbLib::Aft3d_FrontInfoTemplate<FrontTraits, FrontAdaptor>::SetPaire
 	const auto v1 = current.Node1()->Index();
 	const auto v2 = current.Node2()->Index();
 
+	Debug_Null_Pointer(frontInfo::ValidNode());
 	const auto& valid = *frontInfo::ValidNode();
 
 	const auto vn = valid.Index();

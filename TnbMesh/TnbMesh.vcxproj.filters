@@ -2239,6 +2239,18 @@
     <Filter Include="TnbLib\Base\Region\Volume\T">
       <UniqueIdentifier>{626d4ef7-5d3b-4179-a5eb-0371aa883087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\IO\3d">
+      <UniqueIdentifier>{242c344d-024c-46c6-b10f-6311251a8578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\IO\3d\Boundary">
+      <UniqueIdentifier>{31e9b0ad-f861-42d2-a8e2-80260407951b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface\Cylinder">
+      <UniqueIdentifier>{03bf8675-73f7-4ffd-82fc-233929b00f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface\Conic">
+      <UniqueIdentifier>{2d0bf81f-2ee4-4a19-a6e9-0c2934085f36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5415,6 +5427,12 @@
     <ClInclude Include="TnbLib\Base\Region\Volume\T\Mesh3d_tRegionVolumeFwd.hxx">
       <Filter>TnbLib\Base\Region\Volume\T</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\IO\3d\Boundary\MeshIO3d_BoundaryMesh.hxx">
+      <Filter>TnbLib\Base\IO\3d\Boundary</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Surface\Cylinder\GeoMetricFun2d_Cylinder.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Cylinder</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7078,6 +7096,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Aft\OptNode\AltrAlg\Surface\Aft2d_AltrOptNodeSurface.cxx">
       <Filter>TnbLib\Aft\OptNode\AltrAlg\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\IO\3d\Boundary\MeshIO3d_BoundaryMesh.cxx">
+      <Filter>TnbLib\Base\IO\3d\Boundary</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Cylinder\GeoMetricFun2d_Cylinder.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Cylinder\GeoMetricFun2d_CylinderIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Cylinder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
