@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{97ef09fb-d9b2-4e26-87f4-620ad7245916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage">
+      <UniqueIdentifier>{fda3d389-4b1a-4d1d-83b5-c99caf8604e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities">
+      <UniqueIdentifier>{f50e9476-e770-4ee1-a008-c561ed36047e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\module">
+      <UniqueIdentifier>{79cf3120-4520-4d28-a659-9a6f1be35e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Entity">
+      <UniqueIdentifier>{1438f2db-55f9-476c-b57d-e3b72785db47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node">
+      <UniqueIdentifier>{a801812a-2501-4337-a6f2-c603458049ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Edge">
+      <UniqueIdentifier>{70a0fb6b-1de4-4911-ba0e-e053679f7276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\2d">
+      <UniqueIdentifier>{734a76a5-ee1a-4ea4-bff4-319cd69dc365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\3d">
+      <UniqueIdentifier>{a6bbe29e-babe-4d37-9543-ec0df65fd889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\RefRoute">
+      <UniqueIdentifier>{34efc3cc-4af5-4a11-a996-eb1e1845ef20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\Destination">
+      <UniqueIdentifier>{8322128e-c6a8-459e-a156-89b75cf31397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\Departure">
+      <UniqueIdentifier>{46dd89b4-34e4-45f9-a4e6-21628d482db6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
+      <Filter>TnbLib\Voyage\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\module\Voyage_Module.hxx">
+      <Filter>TnbLib\Voyage\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Node\Voyage_Node.hxx">
+      <Filter>TnbLib\Voyage\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2d.hxx">
+      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.hxx">
+      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Edge\Voyage_Edge.hxx">
+      <Filter>TnbLib\Voyage\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\RefRoute\Voyage_RefRoute.hxx">
+      <Filter>TnbLib\Voyage\Entities\RefRoute</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
+      <Filter>TnbLib\Voyage\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2d.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2dIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3dIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Edge\Voyage_Edge.cxx">
+      <Filter>TnbLib\Voyage\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Edge\Voyage_EdgeIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Edge</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
