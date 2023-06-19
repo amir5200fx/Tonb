@@ -221,8 +221,8 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
@@ -267,7 +267,7 @@ int main(int argc, char *argv[])
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions:" << endl << endl
-				<< " - loadModel(name [optional])" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl

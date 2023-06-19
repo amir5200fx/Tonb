@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{fa4a2b05-f5bf-407c-b79d-bc2341f164ce}</UniqueIdentifier>
+      <UniqueIdentifier>{6797c02f-1849-4235-83eb-31c3b51977cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bodyViewer.cxx">
+    <ClCompile Include="tnbHydstcBodyViewer.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

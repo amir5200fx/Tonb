@@ -5,6 +5,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+const std::string tnbLib::HydStatic_ModelShape::extension = ".hydmodelshape";
+
 typename tnbLib::HydStatic_ModelShape::tankMap::const_iterator 
 tnbLib::HydStatic_ModelShape::SelectTank
 (

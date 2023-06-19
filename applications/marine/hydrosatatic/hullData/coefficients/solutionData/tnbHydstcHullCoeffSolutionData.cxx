@@ -3,6 +3,7 @@
 #include <HydStatic_Shapes.hxx>
 #include <Marine_Models.hxx>
 #include <Marine_Body_Displacer.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -19,6 +20,10 @@ namespace tnbLib
 
 	void loadModel(const std::string& name)
 	{
+		file::CheckExtension(name);
+
+		myBody=file::LoadFile<std::shared_ptr<HydStatic_ModelShape>>(name + HydStatic_ModelShape)
+
 		fileName fn(name);
 		if (verbose)
 		{
@@ -176,11 +181,12 @@ int main(int argc, char *argv[])
 			chai.add(mod);
 
 
-			std::string address = ".\\system\\tnbHydstcHullSolutionData";
-			fileName myFileName(address);
+			//std::string address = ".\\system\\tnbHydstcHullSolutionData";
+			//fileName myFileName(address);
 
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbHydstcHullModelMaker"));
 				chai.eval_file(myFileName);
 			}
 			catch (const chaiscript::exception::eval_error& x)
