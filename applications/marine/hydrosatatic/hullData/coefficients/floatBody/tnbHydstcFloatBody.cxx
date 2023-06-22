@@ -15,6 +15,7 @@
 #include <StbGMaker_Model.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_CmpEdge.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -26,8 +27,6 @@ namespace tnbLib
 	typedef std::shared_ptr<hydStcLib::SolutionData_Coeffs> soluData_t;
 	typedef std::shared_ptr<Marine_WaterDomain> waterDomain_t;
 
-	static unsigned short verbose(0);
-
 	static soluData_t mySolutionData;
 	static waterDomain_t myWaterDomain;
 
@@ -36,6 +35,9 @@ namespace tnbLib
 
 	static auto minTol = DEFAULT_MIN_TOL;
 	static auto maxTol = DEFAULT_MAX_TOL;
+
+	TNB_STANDARD_LOAD_SAVE_OBJECTS("solution");
+	TNB_STANDARD_LOAD_SAVE_POINTER_OBJECT(mySolutionData, model_directory, mySolutionData);
 
 	void calcWater()
 	{
@@ -145,37 +147,11 @@ namespace tnbLib
 
 	void execute()
 	{
+		TNB_CHECK_LOAD_TAG;
 		if (NOT mySolutionData)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "no solution data has been loaded!" << endl
-				<< abort(FatalError);
-		}
-
-		calcWater();
-		calcFloatBody();
-
-		mySolutionData->SetCurrentSolution(hydStcLib::SolutionData_Coeffs::solutionOrder::floatBody);
-	}
-
-	void loadModel(const std::string& name)
-	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the solution data from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-
-		TNB_iARCH_FILE_TYPE ar(myFile);
-
-		ar >> mySolutionData;
-		if (NOT mySolutionData)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the loaded model is null" << endl
 				<< abort(FatalError);
 		}
 
@@ -186,31 +162,11 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully!" << endl;
-			Info << endl;
-		}
+		calcWater();
+		calcFloatBody();
 
-	}
-
-	void saveTo(const std::string& name)
-	{
-		fileName fn(name);
-		std::ofstream myFile(fn);
-
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << mySolutionData;
-
-		myFile.close();
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the solution data is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
+		mySolutionData->SetCurrentSolution(hydStcLib::SolutionData_Coeffs::solutionOrder::floatBody);
+		TNB_PERFORMED_TAG;
 	}
 }
 
@@ -228,10 +184,12 @@ namespace tnbLib
 	void setGlobals(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadSoluData");
-		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadFile");
 
-		mod->add(chaiscript::fun([](size_t t)->void {verbose = t; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); }), "setVerbose");
 
 		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 	}
@@ -266,7 +224,24 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << " This application is aimed to calculate the float body." << endl << endl;
+
+			Info << " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
+
+				<< " # Operators:" << endl << endl
+
+				<< " - execute()" << endl
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -278,13 +253,12 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-
-			std::string address = ".\\system\\tnbHydstcFloatBody";
-			fileName myFileName(address);
-
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbHydstcFloatBody"));
+
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -299,6 +273,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -306,5 +286,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

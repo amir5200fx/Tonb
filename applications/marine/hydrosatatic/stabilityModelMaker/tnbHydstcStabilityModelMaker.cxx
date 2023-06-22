@@ -221,7 +221,7 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModels");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadFiles");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
@@ -262,11 +262,17 @@ int main(int argc, char* argv[])
 		{
 			Info << endl;
 			Info << " This application is aimed to create a stability model." << endl;
+
+			Info << " - To create s stability model, there must be one displacement hull which is defined " << endl
+				<< "   at 'displacer' subdirectory." << endl
+				<< " - The tank list (if existed) should be defined at 'tanks' subdirectory." << endl
+				<< " - The sail list (if existed) should be defined at 'sails' subdirectory." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
-				<< " # I/O functions: " << endl
-				<< " - loadModels()" << endl
+				<< " # I/O functions: " << endl << endl
+
+				<< " - loadFiles()" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl

@@ -1,8 +1,8 @@
-#include <HydStatic_SolutionData_Coeffs.hxx>
-#include <HydStatic_FormCoeff.hxx>
-#include <HydStatic_FloatBody.hxx>
+#include <Marine_xSectionParam.hxx>
+#include <HydStatic_ModelShape.hxx>
+#include <HydStatic_CmptLib.hxx>
 #include <StbGMaker_Model.hxx>
-#include <Marine_Models.hxx>
+#include <Global_Tools.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -10,53 +10,29 @@
 namespace tnbLib
 {
 
-	typedef std::shared_ptr<hydStcLib::SolutionData_Coeffs> soluData_t;
-	typedef std::shared_ptr<formCoeff::Wetted> wettedCoeff_t;
+	static std::shared_ptr<StbGMaker_Model> myModel;
+	static std::shared_ptr<HydStatic_ModelShape> myShapeModel;
 
-	static soluData_t mySolutionData;
-	static wettedCoeff_t myWettedCoeff;
+	TNB_STANDARD_LOAD_SAVE_OBJECTS("model");
+	TNB_STANDARD_LOAD_SAVE_POINTER_OBJECT(myModel, model_directory, myShapeModel);
 
-	TNB_STANDARD_LOAD_SAVE_OBJECTS("solution");
-	TNB_STANDARD_LOAD_SAVE_POINTER_OBJECT(mySolutionData, model_directory, mySolutionData);
+	void calcDomains()
+	{
+		const auto& tanks = myShapeModel->Tanks();
+		for (const auto& iter : tanks)
+		{
+			const auto& x = iter.second;
+			HydStatic_CmptLib::CalcDomain(x);
+		}
+	}
 
 	void execute()
 	{
 		TNB_CHECK_LOAD_TAG;
-		if (NOT mySolutionData)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no solution data has been loaded!" << endl
-				<< abort(FatalError);
-		}
+		myShapeModel = std::make_shared<HydStatic_ModelShape>();
+		myShapeModel->Import(myModel);
 
-		if (NOT mySolutionData->IsUpdated(hydStcLib::SolutionData_Coeffs::solutionOrder::wettedDim))
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the solution data is not updated" << endl
-				<< abort(FatalError);
-		}
-
-		const auto& formDimAnalys = mySolutionData->WettedAnalysis();
-		if (NOT formDimAnalys)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " no float body has been found!" << endl
-				<< abort(FatalError);
-		}
-
-		const auto& wave = mySolutionData->Wave();
-		if (NOT wave)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no wave has been found!" << endl
-				<< abort(FatalError);
-		}
-
-		myWettedCoeff = std::make_shared<formCoeff::Wetted>(formDimAnalys);
-		myWettedCoeff->Perform();
-
-		mySolutionData->SetCoeffAnalysis(myWettedCoeff);
-		mySolutionData->SetCurrentSolution(hydStcLib::SolutionData_Coeffs::solutionOrder::coeff);
+		calcDomains();
 		TNB_PERFORMED_TAG;
 	}
 }
@@ -69,20 +45,21 @@ namespace tnbLib
 
 namespace tnbLib
 {
-
 	typedef std::shared_ptr<chaiscript::Module> module_t;
 
-	void setGlobals(const module_t& mod)
+	void setFuns(const module_t& mod)
 	{
-		//- io functions
+		// io functions 
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadFile");
 
-		mod->add(chaiscript::fun([](unsigned short t)->void {setVerbose(t); formCoeff::Wetted::verbose = t; }), "setVerbose");
+		// settings 
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setVerbose(i); }), "setVerbose");
 
-		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
+		// operators 
+		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 	}
 
 	std::string getString(char* argv)
@@ -100,9 +77,10 @@ namespace tnbLib
 
 using namespace tnbLib;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	FatalError.throwExceptions();
+	FatalConvError.throwExceptions();
 
 	if (argc <= 1)
 	{
@@ -115,9 +93,14 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to calculate the hydrostatic coefficients of a body." << endl << endl;
+			Info << " This application is aimed to create a hydrostatic model shape." << endl << endl;
 
-			Info << " Function list:" << endl << endl
+			Info << " - You can upload the file form a subdirectory named '" << model_directory << "'." << endl
+				<< " - inputs: *" << std::remove_reference<decltype(*myModel)>::type::extension << endl
+				<< " - outputs: *" << std::remove_reference<decltype(*myShapeModel)>::type::extension << endl << endl;
+
+			Info << endl
+				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
 
@@ -140,13 +123,13 @@ int main(int argc, char *argv[])
 
 			auto mod = std::make_shared<chaiscript::Module>();
 
-			setGlobals(mod);
+			setFuns(mod);
 
 			chai.add(mod);
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbHydstcCoeffAnalys"));
+				fileName myFileName(file::GetSystemFile("tnbHydStcModelShape"));
 
 				chai.eval_file(myFileName);
 				return 0;

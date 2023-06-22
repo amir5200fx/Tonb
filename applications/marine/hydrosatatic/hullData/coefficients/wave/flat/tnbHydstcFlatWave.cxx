@@ -10,6 +10,7 @@
 #include <Marine_WaterLib.hxx>
 #include <Marine_Models.hxx>
 #include <Marine_BodyTools.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -19,31 +20,25 @@ namespace tnbLib
 	typedef std::shared_ptr<Marine_Wave> wave_t;
 	typedef std::shared_ptr<Marine_Domain> domain_t;
 
-	static unsigned short verbose(0);
-
 	static soluData_t mySolutionData;
 	static wave_t myWave;
 
-	void loadModel(const std::string& name)
+	TNB_STANDARD_LOAD_SAVE_OBJECTS("solution");
+
+	void loadFile(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the solution data from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-
-		TNB_iARCH_FILE_TYPE ar(myFile);
-
-		ar >> mySolutionData;
+		file::CheckExtension(name);
+		mySolutionData = 
+			file::LoadFile<soluData_t>
+			(name + hydStcLib::SolutionData_Coeffs::extension, verbose);
 		if (NOT mySolutionData)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the loaded model is null" << endl
+				<< "no object has been loaded." << endl
 				<< abort(FatalError);
 		}
+		loadTag = true;
+		myFileName = name;
 
 		if (NOT mySolutionData->IsUpdated(hydStcLib::SolutionData_Coeffs::solutionOrder::displacerDim))
 		{
@@ -51,14 +46,6 @@ namespace tnbLib
 				<< " the solution data is not updated" << endl
 				<< abort(FatalError);
 		}
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully!" << endl;
-			Info << endl;
-		}
-
 		const auto& myModel = mySolutionData->Hull();
 		if (NOT myModel)
 		{
@@ -88,6 +75,63 @@ namespace tnbLib
 
 		wave->SetPointOnWater(b.CalcCentre());
 		wave->SetVerticalDirection(Dir3d(0, 0, 1));
+	}
+
+	void loadFile()
+	{
+		auto name = 
+			file::GetSingleFile
+			(
+				boost::filesystem::current_path(),
+				hydStcLib::SolutionData_Coeffs::extension
+			).string();
+		loadFile(name);
+	}
+
+	void saveWaveTo(const std::string& name)
+	{
+		if (NOT myWave)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no wave has been created!" << endl
+				<< abort(FatalError);
+		}
+
+		if (NOT myWave->IsDone())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+		file::CheckExtension(name);
+		file::SaveTo
+		(
+			myWave,
+			name + hydStcLib::SolutionData_Coeffs::extension,
+			verbose
+		);	
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "the application is not performed." << endl
+				<< abort(FatalError);
+		}
+		file::CheckExtension(name);
+		file::SaveTo
+		(
+			mySolutionData,
+			name + hydStcLib::SolutionData_Coeffs::extension,
+			verbose
+		);
+	}
+
+	void saveTo()
+	{
+		saveTo(myFileName);
 	}
 
 	void checkWave()
@@ -124,8 +168,9 @@ namespace tnbLib
 		myWave->SetVerticalDirection(d);
 	}
 
-	void createFlatWave()
+	void execute()
 	{
+		TNB_CHECK_LOAD_TAG;
 		checkWave();
 
 		if (verbose)
@@ -143,6 +188,8 @@ namespace tnbLib
 		myWave->Perform();
 		mySolutionData->LoadWave(myWave);
 		mySolutionData->SetCurrentSolution(hydStcLib::SolutionData_Coeffs::solutionOrder::wave);
+
+		TNB_PERFORMED_TAG;
 	}
 
 	auto createPoint(double x, double y, double z)
@@ -162,54 +209,6 @@ namespace tnbLib
 		auto v = Dir3d(x, y, z);
 		return std::move(v);
 	}
-
-	void saveWaveTo(const std::string& name)
-	{
-		fileName fn(name);
-		std::ofstream f(fn);
-		boost::archive::polymorphic_text_oarchive oa(f);
-
-		if (NOT myWave)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no wave has been created!" << endl
-				<< abort(FatalError);
-		}
-
-		if (NOT myWave->IsDone())
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the application is not performed!" << endl
-				<< abort(FatalError);
-		}
-
-		oa << myWave;
-
-		if (verbose)
-		{
-			Info << " the wave is saved in: " << fn << ", successfully!" << endl;
-		}
-	}
-
-	void saveTo(const std::string& name)
-	{
-		fileName fn(name);
-		std::ofstream myFile(fn);
-
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << mySolutionData;
-
-		myFile.close();
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the solution data is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
-	}
-
-
 }
 
 #ifdef DebugInfo
@@ -229,7 +228,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](double x, double y, double z)-> auto{auto t = createDir(x, y, z); return std::move(t); }), "createDirection");
 
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadSoluData");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveWaveTo(name); }), "saveWaveTo");
 
@@ -238,7 +238,7 @@ namespace tnbLib
 
 	void setWaves(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([]()->void {createFlatWave(); }), "execute");
+		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		mod->add(chaiscript::fun([](const Pnt3d& p)->void {setPointOnWater(p); }), "setPointOnWater");
 		mod->add(chaiscript::fun([](const Dir3d& d)->void {setVerticalDir(d); }), "setVerticalDirection");
 		mod->add(chaiscript::fun([](const Vec3d& v)->void {setCurrent(v); }), "setCurrent");
@@ -276,7 +276,34 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << " This application is aimed to define a flat wave on hydrostatic solution data." << endl << endl
+
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveWaveTo(name)" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
+
+				<< " # Operators:" << endl << endl
+
+				<< " - [Point] createPoint(x, y, z)" << endl
+				<< " - [Vector] createVector(u, v, w)" << endl
+				<< " - [Dir] createDirection(u, v, w)" << endl << endl
+
+				<< " - setPointOnWater(Point)" << endl
+				<< " - setVerticalDirection(Dir)" << endl
+				<< " - setCurrent(Vector)" << endl
+				<< " - setWind(Vector)" << endl << endl
+
+				<< " - execute()" << endl
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -289,12 +316,12 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\tnbHydstcFlatWave";
-			fileName myFileName(address);
-
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbHydstcFlatWave"));
+
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -309,6 +336,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -316,5 +349,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

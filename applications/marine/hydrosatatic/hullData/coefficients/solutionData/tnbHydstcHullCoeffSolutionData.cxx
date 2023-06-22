@@ -13,62 +13,11 @@ namespace tnbLib
 	typedef std::shared_ptr<hydStcLib::SolutionData_Coeffs> soluData_t;
 	typedef std::shared_ptr<HydStatic_ModelShape> model_t;
 
-	static unsigned short verbose(0);
-
 	model_t myBody;
 	soluData_t mySolutionData;
 
-	void loadModel(const std::string& name)
-	{
-		file::CheckExtension(name);
-
-		myBody=file::LoadFile<std::shared_ptr<HydStatic_ModelShape>>(name + HydStatic_ModelShape)
-
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the model from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-
-		TNB_iARCH_FILE_TYPE ar(myFile);
-
-		ar >> myBody;
-		if (NOT myBody)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the loaded body is null" << endl
-				<< abort(FatalError);
-		}
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the body is loaded, from: " << name << ", successfully!" << endl;
-			Info << " - body's name: " << myBody->Name() << endl;
-			Info << endl;
-		}
-	}
-
-	void saveTo(const std::string& name)
-	{
-		fileName fn(name);
-		std::ofstream myFile(fn);
-
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << mySolutionData;
-
-		myFile.close();
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the solution data is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
-	}
+	TNB_STANDARD_LOAD_SAVE_OBJECTS("model");
+	TNB_STANDARD_LOAD_SAVE_POINTER_OBJECT(myBody, model_directory, mySolutionData);
 
 	void execute()
 	{
@@ -112,6 +61,7 @@ namespace tnbLib
 			Info << endl;
 		}
 		mySolutionData->SetSymmetric(shape->IsSymmetric());
+		TNB_PERFORMED_TAG;
 	}
 }
 
@@ -128,12 +78,15 @@ namespace tnbLib
 
 	void setFunctions(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 		//- io functions
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadFile");
 
 		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+
+		mod->add(chaiscript::fun([]()->void {execute(); }), "execute");
 	}
 
 	std::string getString(char* argv)
@@ -169,6 +122,28 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << " This application is aimed to provide a solution data for the hydrostatic coefficients of hull" << endl;
+
+			Info << " - You can upload the file form a subdirectory named '" << model_directory << "'." << endl
+				<< " - inputs: *" << std::remove_reference<decltype(*myBody)>::type::extension << endl
+				<< " - outputs: *" << std::remove_reference<decltype(*mySolutionData)>::type::extension << endl << endl;
+			
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
+
+				<< " # Operators:" << endl << endl
+
+				<< " - execute()" << endl
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -188,6 +163,8 @@ int main(int argc, char *argv[])
 			{
 				fileName myFileName(file::GetSystemFile("tnbHydstcHullModelMaker"));
 				chai.eval_file(myFileName);
+
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -202,6 +179,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -209,5 +192,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }
