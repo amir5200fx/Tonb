@@ -1,5 +1,7 @@
 #include <HydStatic_SolutionData_Coeffs.hxx>
 
+const std::string tnbLib::hydStcLib::SolutionData_Coeffs::extension = ".hssoldcoeffs";
+
 Standard_Boolean 
 tnbLib::hydStcLib::SolutionData_Coeffs::IsUpdated
 (
