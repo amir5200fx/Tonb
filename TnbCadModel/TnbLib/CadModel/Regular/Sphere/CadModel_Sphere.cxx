@@ -1,5 +1,8 @@
 #include <CadModel_Sphere.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
 #include <BRepPrimAPI_MakeSphere.hxx>
 
 tnbLib::CadModel_Sphere::CadModel_Sphere

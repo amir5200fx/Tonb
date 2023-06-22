@@ -1,5 +1,8 @@
 #include <CadModel_Cylinder.hxx>
 
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
 #include <BRepPrimAPI_MakeCylinder.hxx>
 
 tnbLib::CadModel_Cylinder::CadModel_Cylinder
