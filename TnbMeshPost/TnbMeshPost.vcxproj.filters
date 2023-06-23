@@ -100,6 +100,9 @@
     <Filter Include="TnbLib\Post\BoundaryLayer">
       <UniqueIdentifier>{50afec63-7468-4053-aef6-9f952916cbd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\2d">
+      <UniqueIdentifier>{f893a33d-e249-48c2-b8de-964f839cfd00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\MeshPost2d_LaplacianSmoothing_AvgFunFwd.hxx">
       <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\2d\MeshPost2d_BoundaryLayer.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
