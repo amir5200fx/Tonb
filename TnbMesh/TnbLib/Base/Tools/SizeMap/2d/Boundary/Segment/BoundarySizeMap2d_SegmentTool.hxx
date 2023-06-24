@@ -3,6 +3,7 @@
 #define _BoundarySizeMap2d_SegmentTool_Header
 
 #include <Mesh2d_BoundarySizeMapTool.hxx>
+#include <Geo2d_SegmentCloudFwd.hxx>
 
 #include <vector>
 
@@ -10,7 +11,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
-	class Pln_Edge;
+
 
 	class BoundarySizeMap2d_SegmentTool
 		: public Mesh2d_BoundarySizeMapTool
@@ -18,10 +19,16 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		Standard_Integer theUnbalancing_;
-		Standard_Integer theMinSubdivision_;
-		Standard_Integer theMaxSubdivision_;
+		Standard_Integer theMaxNbCorrIters_;
 
+		std::shared_ptr<Geo2d_SegmentCloud> theCloud_;
+
+
+		//- private functions and operators
+
+		TNB_SERIALIZATION(TnbMesh_EXPORT);
+		
+	protected:
 
 		//- default constructor
 
@@ -29,60 +36,59 @@ namespace tnbLib
 		{}
 
 
-		//- private functions and operators
+		// constructors [6/23/2023 Payvand]
 
-		friend boost::serialization::access;
-
-		template<class Archive>
-		void serialize(Archive& ar, const unsigned int /*file_version*/)
-		{
-			ar & boost::serialization::base_object<Mesh2d_BoundarySizeMapTool>(*this);
-			ar & theUnbalancing_;
-			ar & theMinSubdivision_;
-			ar & theMaxSubdivision_;
-		}
-
-
-		TnbMesh_EXPORT void CreateSizeMap(const std::vector<std::shared_ptr<Pln_Edge>>&);
+		BoundarySizeMap2d_SegmentTool
+		(
+			const std::shared_ptr<Mesh2d_ReferenceValues>& theRef,
+			const std::shared_ptr<Entity2d_Box>& theDomain,
+			const std::shared_ptr<Geo3d_SegmentCloud>& theCloud,
+			const std::shared_ptr<Cad2d_Plane>& theModel
+		)
+			: Mesh2d_BoundarySizeMapTool(theModel, theDomain, theRef)
+			, theMaxNbCorrIters_(DEFAULT_MAX_NB_CORR_ITERS)
+			, theCloud_(theCloud)
+		{}
 
 	public:
 
-		static TnbMesh_EXPORT unsigned short verbose;
+		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_NB_CORR_ITERS;
 
-		static TnbMesh_EXPORT const Standard_Integer DEFAULT_UNBALANCING;
-		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MIN_SUBDIVISION;
-		static TnbMesh_EXPORT const Standard_Integer DEFAULT_MAX_SUBDIVISION;
-
-		//- constructors
-
-		BoundarySizeMap2d_SegmentTool(const std::shared_ptr<Mesh2d_ReferenceValues>& theRef, const std::shared_ptr<Entity2d_Box>& theDomain, const std::shared_ptr<Cad2d_Plane>& thePlane);
 
 
 		//- public functions and operators
 
-		auto MaxSubdivision() const
+		auto MaxNbCorrIters() const
 		{
-			return theMaxSubdivision_;
+			return theMaxNbCorrIters_;
 		}
 
-		auto MinSubdivision() const
+		const auto& Cloud() const
 		{
-			return theMinSubdivision_;
+			return theCloud_;
 		}
 
-		auto Unbalancing() const
+		void SetMaxNbCorrIters(const Standard_Integer theIters)
 		{
-			return theUnbalancing_;
+			theMaxNbCorrIters_ = theIters;
 		}
 
-		TnbMesh_EXPORT void SetUnbalancing(const Standard_Integer theSize);
-		TnbMesh_EXPORT void SetMinSubdivision(const Standard_Integer nbLevels);
-		TnbMesh_EXPORT void SetMaxSubdivision(const Standard_Integer nbLevels);
+		void SetCloud(const std::shared_ptr<Geo2d_SegmentCloud>& theCloud)
+		{
+			theCloud_ = theCloud;
+		}
 
-		TnbMesh_EXPORT void Perform();
+		void SetCloud(std::shared_ptr<Geo2d_SegmentCloud>&& theCloud)
+		{
+			theCloud_ = std::move(theCloud);
+		}
+
+		TnbMesh_EXPORT std::vector<std::shared_ptr<Pln_Edge>> RetrieveSegments() const;
+
+		TnbMesh_EXPORT void RetrieveSegmentsTo(std::vector<std::shared_ptr<Pln_Edge>>&) const;
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::BoundarySizeMap2d_SegmentTool);
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::BoundarySizeMap2d_SegmentTool);
 
 #endif // !_BoundarySizeMap2d_SegmentTool_Header

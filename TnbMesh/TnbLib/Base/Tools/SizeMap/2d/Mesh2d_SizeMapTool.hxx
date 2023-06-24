@@ -59,6 +59,8 @@ namespace tnbLib
 		{
 			return thePlane_;
 		}
+
+		virtual void Perform() = 0;
 	};
 }
 

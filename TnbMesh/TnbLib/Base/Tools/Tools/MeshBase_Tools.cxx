@@ -511,6 +511,107 @@ void tnbLib::MeshBase_Tools::SetSourcesToMesh
 	}
 }
 
+void tnbLib::MeshBase_Tools::SetSourcesToMesh
+(
+	const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt2d, Standard_Real>>>& theSources,
+	const Standard_Real theBase, 
+	const Standard_Real theGrowthRate, 
+	GeoMesh2d_SingleBackground& theMesh
+)
+{
+	const auto& mesh = *theMesh.Mesh();
+	if (mesh.Elements().empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the element list of the background mesh is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	auto meshNodes = RetrieveNodes(mesh.Elements());
+	auto& sources = theMesh.Sources();
+	sources.resize(meshNodes.size(), theBase);
+
+	auto start = mesh.Elements().at(0);
+	for (const auto& x : theSources)
+	{
+		const auto current = mesh.TriangleLocation(start, x->Coord());
+		if (NOT current)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the point is outside of the mesh!" << endl
+				<< " - domain's of the mesh: " << theMesh.BoundingBox() << endl
+				<< " - coordinates of the point: " << x->Coord() << endl
+				<< abort(FatalError);
+		}
+		start = current;
+
+		auto [n0, n1, n2] = current->Nodes();
+		{
+			auto nearest = n0;
+			auto neighbors = RetrieveAdjacentNodes(nearest);
+
+			auto ho = sources.at(Index_Of(nearest->Index()));
+			for (const auto& ni : neighbors)
+			{
+				Debug_Null_Pointer(ni);
+				auto id = Index_Of(ni->Index());
+
+				auto dx = nearest->Coord().Distance(ni->Coord());
+				auto val = std::min(theBase, ho + theGrowthRate * dx);
+				if (val < ho) sources.at(id) = val;
+			}
+			{
+				auto id = Index_Of(nearest->Index());
+
+				auto h = sources.at(id);
+				if (x->H() < h) sources.at(id) = x->H();
+			}
+		}
+		{
+			auto nearest = n1;
+			auto neighbors = RetrieveAdjacentNodes(nearest);
+
+			auto ho = sources.at(Index_Of(nearest->Index()));
+			for (const auto& ni : neighbors)
+			{
+				Debug_Null_Pointer(ni);
+				auto id = Index_Of(ni->Index());
+
+				auto dx = nearest->Coord().Distance(ni->Coord());
+				auto val = std::min(theBase, ho + theGrowthRate * dx);
+				if (val < ho) sources.at(id) = val;
+			}
+			{
+				auto id = Index_Of(nearest->Index());
+
+				auto h = sources.at(id);
+				if (x->H() < h) sources.at(id) = x->H();
+			}
+		}
+		{
+			auto nearest = n2;
+			auto neighbors = RetrieveAdjacentNodes(nearest);
+
+			auto ho = sources.at(Index_Of(nearest->Index()));
+			for (const auto& ni : neighbors)
+			{
+				Debug_Null_Pointer(ni);
+				auto id = Index_Of(ni->Index());
+
+				auto dx = nearest->Coord().Distance(ni->Coord());
+				auto val = std::min(theBase, ho + theGrowthRate * dx);
+				if (val < ho) sources.at(id) = val;
+			}
+			{
+				auto id = Index_Of(nearest->Index());
+
+				auto h = sources.at(id);
+				if (x->H() < h) sources.at(id) = x->H();
+			}
+		}
+	}
+}
+
 std::vector<Standard_Real>
 tnbLib::MeshBase_Tools::CalcDeterminants
 (
@@ -847,6 +948,34 @@ tnbLib::MeshBase_Tools::LastParameter
 	return theCurve->LastParameter();
 }
 
+std::vector<std::shared_ptr<tnbLib::Mesh2d_Node>>
+tnbLib::MeshBase_Tools::RetrieveNodes
+(
+	const std::vector<std::shared_ptr<Mesh2d_Element>>& theElements
+)
+{
+	auto cmp = [](const std::shared_ptr<Mesh2d_Node>& n0, const std::shared_ptr<Mesh2d_Node>& n1) 
+	{return n0->Index() < n1->Index(); };
+	std::set<std::shared_ptr<Mesh2d_Node>, decltype(cmp)> nodeSet(cmp);
+	for (const auto& x : theElements)
+	{
+		Debug_Null_Pointer(x);
+		auto [n0, n1, n2] = x->Nodes();
+		nodeSet.insert(std::move(n0));
+		nodeSet.insert(std::move(n1));
+		nodeSet.insert(std::move(n2));
+	}
+
+	std::vector<std::shared_ptr<Mesh2d_Node>> nodes;
+	std::copy(nodeSet.begin(), nodeSet.end(), std::back_inserter(nodes));
+	/*nodes.reserve(nodeSet.size());
+	for (auto& n : nodeSet)
+	{
+		nodes.push_back(std::move(n));
+	}*/
+	return std::move(nodes);
+}
+
 std::vector<std::shared_ptr<tnbLib::Mesh3d_Node>> 
 tnbLib::MeshBase_Tools::RetrieveNodes
 (
@@ -866,10 +995,38 @@ tnbLib::MeshBase_Tools::RetrieveNodes
 	}
 
 	std::vector<std::shared_ptr<Mesh3d_Node>> nodes;
-	nodes.reserve(nodeSet.size());
+	std::copy(nodeSet.begin(), nodeSet.end(), std::back_inserter(nodes));
+	/*nodes.reserve(nodeSet.size());
 	for (auto& n : nodeSet)
 	{
 		nodes.push_back(std::move(n));
+	}*/
+	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::Mesh2d_Node>>
+tnbLib::MeshBase_Tools::RetrieveAdjacentNodes
+(
+	const std::shared_ptr<Mesh2d_Node>& theNode
+)
+{
+	Debug_Null_Pointer(theNode);
+	const auto& edges = theNode->RetrieveEdges();
+	std::vector<std::shared_ptr<Mesh2d_Node>> nodes;
+	nodes.reserve(edges.size());
+	for (const auto& x : edges)
+	{
+		auto e = x.second.lock();
+		Debug_Null_Pointer(e);
+		if (e->Node0() NOT_EQUAL theNode)
+		{
+			nodes.push_back(e->Node0());
+			continue;
+		}
+		if (e->Node1() NOT_EQUAL theNode)
+		{
+			nodes.push_back(e->Node1());
+		}
 	}
 	return std::move(nodes);
 }
