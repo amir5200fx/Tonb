@@ -4,7 +4,7 @@
 
 #include <Mesh2d_SizeMapTool.hxx>
 
-#include <list>
+#include <set>
 
 namespace tnbLib
 {
@@ -19,8 +19,7 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::list<word> theCornerPatches_;
-		std::list<word> theSegmentPatches_;
+		std::set<word> thePatches_;
 
 
 		//- private functions and operators
@@ -32,8 +31,7 @@ namespace tnbLib
 		{
 			ar & boost::serialization::base_object<Mesh2d_SizeMapTool>(*this);
 
-			ar & theCornerPatches_;
-			ar & theSegmentPatches_;
+			ar& thePatches_;
 		}
 
 	protected:
@@ -57,34 +55,21 @@ namespace tnbLib
 
 	public:
 
-		auto NbCornerPatches() const
+
+		// Public functions and operators [6/23/2023 Payvand]
+		
+		auto NbPatches() const
 		{
-			return (Standard_Integer)theCornerPatches_.size();
+			return (Standard_Integer)thePatches_.size();
 		}
 
-		auto NbSegmentPatches() const
+		const auto& Patches() const
 		{
-			return (Standard_Integer)theSegmentPatches_.size();
+			return thePatches_;
 		}
 
-		const auto& CornerPatches() const
-		{
-			return theCornerPatches_;
-		}
-
-		const auto& SegmentPatches() const
-		{
-			return theSegmentPatches_;
-		}
-
-		TnbMesh_EXPORT void ImportCornerPatch(const word& patchName);
-		TnbMesh_EXPORT void ImportSegmentPatch(const word& patchName);
-
-		TnbMesh_EXPORT void RetrieveCornersTo(std::vector<std::shared_ptr<Pln_Vertex>>&) const;
-		TnbMesh_EXPORT void RetrieveSegmentsTo(std::vector<std::shared_ptr<Pln_Edge>>&) const;
-
-		TnbMesh_EXPORT std::vector<std::shared_ptr<Pln_Vertex>> RetrieveCorners() const;
-		TnbMesh_EXPORT std::vector<std::shared_ptr<Pln_Edge>> RetrieveSegments() const;
+		TnbMesh_EXPORT void ImportPatch(const word& patchName);
+		TnbMesh_EXPORT void RemovePatch(const word& patchName);
 	};
 }
 

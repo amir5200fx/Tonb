@@ -73,11 +73,15 @@ namespace tnbLib
 			return theUnbalancing_;
 		}
 
+		TnbMesh_EXPORT std::vector<std::shared_ptr<Pln_Vertex>> RetrieveCorners() const;
+
+		TnbMesh_EXPORT void RetrieveCornersTo(std::vector<std::shared_ptr<Pln_Vertex>>&) const;
+
 		TnbMesh_EXPORT void SetUnbalancing(const Standard_Integer theSize);
 		TnbMesh_EXPORT void SetMinSubdivision(const Standard_Integer nbLevels);
 		TnbMesh_EXPORT void SetMaxSubdivision(const Standard_Integer nbLevels);
 
-		TnbMesh_EXPORT void Perform();
+		TnbMesh_EXPORT void Perform() override;
 
 	};
 }

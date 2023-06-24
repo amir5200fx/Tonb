@@ -2,6 +2,7 @@
 #ifndef _Mesh_SizeMapControl_Traits_Header
 #define _Mesh_SizeMapControl_Traits_Header
 
+#include <Geo2d_SegmentCloudFwd.hxx>
 #include <GeoMesh3d_BackgroundFwd.hxx>
 #include <GeoMesh2d_BackgroundFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
@@ -16,7 +17,6 @@ namespace tnbLib
 	class Cad_TModel;
 
 	class Geo3d_PatchCloud;
-	class Geo2d_PatchCloud;
 
 	class Mesh2d_SizeMapTool;
 	class Mesh3d_SizeMapTool;
@@ -28,7 +28,7 @@ namespace tnbLib
 	{ 
 		typedef Mesh2d_SizeMapTool type; 
 		typedef Entity2d_Box boxType;
-		typedef Geo2d_PatchCloud cloudType;
+		typedef typename Geo2d_SegmentCloud cloudType;
 		typedef GeoMesh2d_Background backMeshType;	
 	};
 	template<> 
