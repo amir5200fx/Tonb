@@ -161,6 +161,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\2d\Geo2d_ApprxCurveFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\3d\Geo3d_ApprxCurve.hxx" />
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\3d\Geo3d_ApprxCurveFwd.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\2d\Geo2d_BasicApprxCurve.hxx" />
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\2d\Geo2d_BasicApprxCurveFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\3d\Geo3d_BasicApprxCurve.hxx" />
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\3d\Geo3d_BasicApprxCurveFwd.hxx" />
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d\Geo2d_BasicApprxCurveAdaptor.hxx" />
@@ -552,7 +554,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Geo\AffineTrsf\PtsToUnitSq\Geo_AffineTrsf_PtsToUnitSq.cxx" />
     <ClCompile Include="TnbLib\Geo\AirfoilOffsets\MH102\Geo_AirfoilOffsets_MH102.cxx" />
     <ClCompile Include="TnbLib\Geo\AirfoilOffsets\S833\Geo_AirfoilOffsets_S833.cxx" />
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\2d\Geo2d_BasicApprxCurve.cxx" />
     <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\3d\Geo3d_BasicApprxCurve.cxx" />
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d\Geo2d_BasicApprxCurveAdaptor.cxx" />
     <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\3d\Geo3d_BasicApprxCurveAdaptor.cxx" />
     <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Info\Geo_BasicApprxCurve_Info.cxx" />
     <ClCompile Include="TnbLib\Geo\Approximation\Curve\Geo_ApprxCurve.cxx" />
