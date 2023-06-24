@@ -14,6 +14,8 @@ namespace tnbLib
 	static bool exeTag = false;
 	static bool loadTag = false;
 
+	static const auto current_directory = "reference";
+
 	static std::shared_ptr<Mesh2d_ReferenceValues> myRef;
 	static std::shared_ptr<Geo2d_SizeFunction> mySizeFun;
 
@@ -34,28 +36,50 @@ namespace tnbLib
 		verbose = i;
 	}
 
-	void loadFile()
+	void loadRefFile()
 	{
-		checkFolder("reference");
-
-		const auto currentPath = boost::filesystem::current_path();
-
-		boost::filesystem::current_path(currentPath.string() + R"(\reference)");
-
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Mesh2d_ReferenceValues::extension).string();
-
-		file::CheckExtension(name);
-		myRef = file::LoadFile<std::shared_ptr<Mesh2d_ReferenceValues>>(name + loadExt, verbose);
+		myRef =
+			file::LoadSingleFile<std::shared_ptr<Mesh2d_ReferenceValues>>
+			(current_directory, Mesh2d_ReferenceValues::extension, verbose);
+		loadTag = true;
 		if (NOT myRef)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< "the loaded file is null!" << endl
+				<< "no ref file has been loaded." << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void loadRefFile(const std::string& name)
+	{
+		file::CheckExtension(name);
+		myRef = file::LoadFile<std::shared_ptr<Mesh2d_ReferenceValues>>
+			(name + Mesh2d_ReferenceValues::extension, verbose);
+		if (NOT myRef)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no ref file has been loaded." << endl
 				<< abort(FatalError);
 		}
 		loadTag = true;
+	}
 
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
+	void loadFile()
+	{
+		if (file::IsDirectory(current_directory))
+		{
+			loadRefFile();
+		}
+		else
+		{
+			auto name =
+				file::GetSingleFile
+				(
+					boost::filesystem::current_path(),
+					Mesh2d_ReferenceValues::extension
+				).string();
+			loadRefFile(name);
+		}
 	}
 
 	void saveTo(const std::string& name)
@@ -68,7 +92,6 @@ namespace tnbLib
 		}
 
 		file::CheckExtension(name);
-
 		file::SaveTo(mySizeFun, name + saveExt, verbose);
 	}
 
@@ -93,10 +116,9 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
-		mySizeFun = std::make_shared<GeoSizeFun2d_Uniform>(0, name, myRef->BaseSize(), *myRef->Region());
-
+		mySizeFun = std::make_shared<GeoSizeFun2d_Uniform>
+			(0, name, myRef->BaseSize(), *myRef->Region());
 		exeTag = true;
-
 		if (verbose)
 		{
 			Info << endl
@@ -124,6 +146,7 @@ namespace tnbLib
 	{
 		// io functions [12/9/2021 Amir]
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadRefFile(name); }), "loadFile");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
@@ -175,12 +198,12 @@ int main(int argc, char *argv[])
 
 				<< " # IO functions: " << endl << endl
 
-				<< " - loadFile()" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int); Levels: 0, 1, 2" << endl << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
 
 				<< " # Operators:" << endl << endl
 
