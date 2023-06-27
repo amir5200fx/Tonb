@@ -7,21 +7,18 @@
 
 namespace tnbLib
 {
-
-	static auto loadExt = Cad2d_Plane::extension;
-	static auto saveExt = Cad2d_Plane::extension + "list";
-
 	static std::vector<std::shared_ptr<Cad2d_Plane>> myPlanes;
-	static std::shared_ptr<Cad2d_Plane> myPlane;
 
 	static std::shared_ptr<Cad2d_Plane> myPlane0;
 	static std::shared_ptr<Cad2d_Plane> myPlane1;
 
-	static bool verbose = false;
-	static bool exeTag = false;
-	static bool loadTag = false;
+	TNB_DEFINE_VERBOSE_OBJ;
+	TNB_DEFINE_EXETAG_OBJ;
+	TNB_DEFINE_LOADTAG_OBJ;
+	TNB_DEFINE_GLOBAL_PATH;
 
 	static double myTol = 1.0E-6;
+	static unsigned short myTarget = 0;
 
 	void setVerbose(unsigned int i)
 	{
@@ -40,132 +37,77 @@ namespace tnbLib
 		}
 	}
 
-	void loadPlane0(const std::string& name)
+	void setTarget(unsigned short i)
 	{
-		if (boost::filesystem::exists(name))
+		if (i == 0)
 		{
-			myPlane0 = file::LoadFile<std::shared_ptr<Cad2d_Plane>>(name, verbose);
+			myTarget = i;
+			Info << endl
+				<< " - the target is set to: plane 0" << endl;
+		}
+		else if(i == 1)
+		{
+			myTarget = i;
+			Info << endl
+				<< " - the target is set to: plane 1" << endl;
 		}
 		else
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "no such a file has been found." << endl
-				<< " file: " << name << endl
-				<< abort(FatalError);
+			// do nothing [6/26/2023 Payvand]
 		}
 	}
 
-	void loadPlane1(const std::string& name)
+	void loadPlane0()
 	{
-		if (boost::filesystem::exists(name))
-		{
-			myPlane1 = file::LoadFile<std::shared_ptr<Cad2d_Plane>>(name, verbose);
-		}
-		else
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no such a file has been found." << endl
-				<< " file: " << name << endl
-				<< abort(FatalError);
-		}
+		static const auto current_directory = "0";
+		file::CheckDirectory(current_directory);
+
+		file::SetCurrentPath(global_path.string() + current_directory);
+		myPlane0 = file::LoadSingleFile<std::shared_ptr<Cad2d_Plane>>(current_directory, verbose);
+		TNB_CHECK_LOADED_FILE(myPlane0);
+		file::SetCurrentPath(global_path.string());
+	}
+
+	void loadPlane1()
+	{
+		static const auto current_directory = "1";
+		file::CheckDirectory(current_directory);
+
+		file::SetCurrentPath(global_path.string() + current_directory);
+		myPlane1 = file::LoadSingleFile<std::shared_ptr<Cad2d_Plane>>(current_directory, verbose);
+		TNB_CHECK_LOADED_FILE(myPlane1);
+		file::SetCurrentPath(global_path.string());
 	}
 
 	void loadFiles()
 	{
-		auto currentPath = boost::filesystem::current_path().string();
-		{
-			Global_Timer timer;
-			timer.SetInfo(Global_TimerInfo_ms);
-
-			size_t i = 0;
-			while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
-			{
-				auto name = file::GetSingleFile(currentPath + std::to_string(i), loadExt).string();
-				file::CheckExtension(name);
-
-				myPlane0 = file::LoadFile<std::shared_ptr<Cad2d_Plane>>(name + loadExt, verbose);
-			}
-
-			i = 1;
-			while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
-			{
-				auto name = file::GetSingleFile(currentPath + std::to_string(i), loadExt).string();
-				file::CheckExtension(name);
-
-				myPlane1 = file::LoadFile<std::shared_ptr<Cad2d_Plane>>(name + loadExt, verbose);
-			}
-		}
-
-		if (verbose)
-		{
-			Info << endl
-				<< " - All files have been loaded, successfully!" << endl;
-		}
+		loadPlane0();
+		loadPlane1();
 
 		loadTag = true;
 	}
 
-	void saveTo(const std::string& name)
-	{
-		if (NOT exeTag)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "the application is not performed." << endl
-				<< abort(FatalError);
-		}
-		if (myPlanes.size())
-		{
-			file::SaveTo(myPlanes, name + saveExt, verbose);
-		}
-		if (myPlane)
-		{
-			file::SaveTo(myPlane, name + Cad2d_Plane::extension, verbose);
-		}
-	}
+	TNB_SAVE_MULTI_FILES_FUN("results", Cad2d_Plane::extension, myPlanes);
+
 
 	void execute(const std::string& name)
 	{
-		if (myPlane0 AND myPlane1)
-		{
-			loadTag = true;
-		}
+		TNB_CHECK_LOADED;
 
-		if (NOT loadTag)
+		myPlanes = Cad2d_Boolean::Subtract(myPlane0, myPlane1, myTol);
+		int i = 0;
+		for (const auto& x : myPlanes)
 		{
-			FatalErrorIn(FunctionSIG)
-				<< " no file has been loaded!" << endl
-				<< abort(FatalError);
-		}
-
-		auto plns = Cad2d_Boolean::Subtract(myPlane0, myPlane1, myTol);
-
-		if (plns.empty())
-		{
-			myPlane = myPlane0;
-		}
-		else if (plns.size() IS_EQUAL 1)
-		{
-			myPlane = plns.at(0);
-		}
-		else
-		{
-			myPlanes = plns;
-		}
-
-		if (myPlane)
-		{
-			myPlane->SetName(name);
-		}
-		else
-		{
-			int i = 0;
-			for (const auto& x : myPlanes)
-			{
-				x->SetName(name + std::to_string(++i));
-			}
+			x->SetIndex(++i);
+			x->SetName(name);
 		}
 
 		exeTag = true;
+		if (verbose)
+		{
+			Info << endl
+				<< " - the application is successfully performed!" << endl;
+		}
 	}
 }
 
@@ -184,12 +126,11 @@ namespace tnbLib
 	{
 		// io functions [1/23/2023 Payvand]
 		mod->add(chaiscript::fun([]()-> void {loadFiles(); }), "loadFiles");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadPlane0(name); }), "loadPlane0");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadPlane1(name); }), "loadPlane1");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 
 		// settings [1/23/2023 Payvand]
-		mod->add(chaiscript::fun([](unsigned short c)->void {verbose = c; }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short c)->void {setVerbose(c); }), "setVerbose");
+		mod->add(chaiscript::fun([](unsigned short i)-> void {setTarget(i); }), "setTarget");
 		mod->add(chaiscript::fun([](double tol)-> void {setTol(tol); }), "setTolerance");
 
 		// operators [1/23/2023 Payvand]
@@ -227,21 +168,27 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to apply the subtract boolean to the planes." << endl;
+			Info << " This application is aimed to apply the subtract boolean to the planes." << endl << endl;
+
+			Info << " - INPUTS: two *.pln file format which are saved in '0' and '1' directories." << endl
+				<< " - OUTPUTS: a series of *.pln file formats in 'results' directory." << endl
+				<< " - the 'Target' is set to 0 (plane 0) as a default value. So, if the plane 0" << endl
+				<< "   is the target, don't need to set the 'Target'." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
 				<< " # I/O functions: " << endl << endl
+
 				<< " - loadFiles()" << endl
-				<< " - loadPlane0(file)" << endl
-				<< " - loadPlane1(file)" << endl
 				<< " - saveTo(name)" << endl << endl
 
 				<< " # Operators: " << endl << endl
 				<< " - execute(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl
+
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl
+				<< " - setTarget(unsigned int);     - Target: 0, 1" << endl
 				<< " - setTolerance(double) "
 				<< endl;
 		}

@@ -5,6 +5,7 @@
 #include <TnbError.hxx>
 #include <IFstream.hxx>
 #include <OSstream.hxx>
+#include <token.hxx>
 #include <word.hxx>
 
 namespace tnbLib
@@ -33,9 +34,21 @@ namespace tnbLib
 		{
 			double x, y;
 			myfile >> x >> y;
-			std::cout << x << ", " << y << std::endl;
+			
 			auto pt = Pnt2d(x, y);
 			pnts.push_back(std::move(pt));
+		}
+		if (verbose)
+		{
+			Info << " - The list has successfully been loaded." << endl
+				<< " - No. of points = " << pnts.size() << endl << endl;
+
+			Info << token::BEGIN_LIST << endl;
+			for (const auto& x : pnts)
+			{
+				Info << " - " << x << endl;
+			}
+			Info << token::END_LIST << endl;
 		}
 		return std::move(pnts);
 	}
@@ -147,7 +160,16 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to create a curve by interpolation." << endl;
+			Info << " This application is aimed to create a curve by interpolation." << endl
+				<< " - INPUTS: the list of the coordinates. The extension of the file" << endl
+				<< "   must be provided (or you can provide one without an extension)." << endl;
+
+			Info << endl
+				<< " - Alternatively, you can provide the list of the coordinates by " << endl
+				<< "   creating a list of the points in system file." << endl;
+
+			Info << endl
+				<< " - OUTPUTS: a *.edge2d file format" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
