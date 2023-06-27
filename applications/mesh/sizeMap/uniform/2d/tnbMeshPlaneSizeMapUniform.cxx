@@ -14,7 +14,7 @@ namespace tnbLib
 	static bool exeTag = false;
 	static bool loadTag = false;
 
-	static const auto current_directory = "reference";
+	static const auto sub_directory = "reference";
 
 	static std::shared_ptr<Mesh2d_ReferenceValues> myRef;
 	static std::shared_ptr<Geo2d_SizeFunction> mySizeFun;
@@ -40,7 +40,7 @@ namespace tnbLib
 	{
 		myRef =
 			file::LoadSingleFile<std::shared_ptr<Mesh2d_ReferenceValues>>
-			(current_directory, Mesh2d_ReferenceValues::extension, verbose);
+			(sub_directory, Mesh2d_ReferenceValues::extension, verbose);
 		loadTag = true;
 		if (NOT myRef)
 		{
@@ -66,7 +66,7 @@ namespace tnbLib
 
 	void loadFile()
 	{
-		if (file::IsDirectory(current_directory))
+		if (file::IsDirectory(sub_directory))
 		{
 			loadRefFile();
 		}
