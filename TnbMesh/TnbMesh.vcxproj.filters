@@ -5454,9 +5454,6 @@
     <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Geo2d_SegmentCloud_SamplesFwd.hxx">
       <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Geo2d_SegmentCloud_Samples.hxx">
-      <Filter>TnbLib\Base\Geom\Cloud\Segment</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0\Geo2d_SegmentCloud_SamplesLev0.hxx">
       <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0</Filter>
     </ClInclude>
@@ -5489,6 +5486,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun2d_BackgroundFwd.hxx">
       <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Geo2d_SegmentCloud_Samples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

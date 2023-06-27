@@ -42,7 +42,7 @@ namespace tnbLib
 		(
 			const std::shared_ptr<Mesh2d_ReferenceValues>& theRef,
 			const std::shared_ptr<Entity2d_Box>& theDomain,
-			const std::shared_ptr<Geo3d_SegmentCloud>& theCloud,
+			const std::shared_ptr<Geo2d_SegmentCloud>& theCloud,
 			const std::shared_ptr<Cad2d_Plane>& theModel
 		)
 			: Mesh2d_BoundarySizeMapTool(theModel, theDomain, theRef)
