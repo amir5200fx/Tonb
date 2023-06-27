@@ -128,6 +128,12 @@ tnbLib::file::GetSystemFile(const std::string & theAppName)
 	return std::string();
 }
 
+boost::filesystem::path 
+tnbLib::file::GetCurrentPath()
+{
+	return boost::filesystem::current_path();
+}
+
 std::vector<boost::filesystem::path> 
 tnbLib::file::GetAllFileNames(const boost::filesystem::path& p)
 {
@@ -203,6 +209,11 @@ void tnbLib::file::CheckExtension(const std::string& e)
 			<< "no extension is accepted for a filename" << endl
 			<< abort(FatalError);
 	}
+}
+
+void tnbLib::file::SetCurrentPath(const std::string& thePath)
+{
+	boost::filesystem::current_path(thePath);
 }
 
 void tnbLib::file::RemoveDirectory(const boost::filesystem::path& thePath)
