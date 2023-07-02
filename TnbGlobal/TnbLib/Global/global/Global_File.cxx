@@ -207,6 +207,7 @@ void tnbLib::file::CheckExtension(const std::string& e)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no extension is accepted for a filename" << endl
+			<< " - file name: " << e << endl
 			<< abort(FatalError);
 	}
 }
