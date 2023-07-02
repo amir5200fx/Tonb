@@ -666,12 +666,7 @@ tnbLib::Pln_Tools::MakeEdge
 	auto curve = std::make_shared<Pln_Curve>(theCurve);
 	Debug_Null_Pointer(curve);
 
-	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
-	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
-	Debug_Null_Pointer(v0);
-	Debug_Null_Pointer(v1);
-
-	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
+	auto edge = MakeEdge(curve);
 	return std::move(edge);
 }
 
@@ -684,14 +679,24 @@ tnbLib::Pln_Tools::MakeEdge
 	auto curve = theCurve;
 	Debug_Null_Pointer(curve);
 
-	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
-	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
-	Debug_Null_Pointer(v0);
-	Debug_Null_Pointer(v1);
+	auto p0 = curve->FirstCoord();
+	auto p1 = curve->LastCoord();
+	if (p0.Distance(p1) <= gp::Resolution())
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, MEAN(p0, p1));
+		auto edge = std::make_shared<Pln_Ring>(std::move(v0), std::move(curve));
+		return std::move(edge);
+	}
+	else
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
+		auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
+		Debug_Null_Pointer(v0);
+		Debug_Null_Pointer(v1);
 
-	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
-	return std::move(edge);
-	
+		auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
+		return std::move(edge);
+	}
 }
 
 std::shared_ptr<tnbLib::Pln_Edge> 
@@ -703,13 +708,24 @@ tnbLib::Pln_Tools::MakeEdge
 	auto curve = std::move(theCurve);
 	Debug_Null_Pointer(curve);
 
-	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
-	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
-	Debug_Null_Pointer(v0);
-	Debug_Null_Pointer(v1);
+	auto p0 = curve->FirstCoord();
+	auto p1 = curve->LastCoord();
+	if (p0.Distance(p1) <= gp::Resolution())
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, MEAN(p0, p1));
+		auto edge = std::make_shared<Pln_Ring>(std::move(v0), std::move(curve));
+		return std::move(edge);
+	}
+	else
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
+		auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
+		Debug_Null_Pointer(v0);
+		Debug_Null_Pointer(v1);
 
-	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
-	return std::move(edge);
+		auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
+		return std::move(edge);
+	}
 }
 
 std::shared_ptr<tnbLib::Pln_Wire> 
