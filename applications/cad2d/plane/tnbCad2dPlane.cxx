@@ -45,7 +45,7 @@ namespace tnbLib
 	{
 		TNB_CHECK_EXE_TAG;
 		file::CheckExtension(name);
-		file::SaveTo(myPlane, name + Pln_Edge::extension, verbose);
+		file::SaveTo(myPlane, name + Cad2d_Plane::extension, verbose);
 	}
 
 	void saveTo()
@@ -93,6 +93,7 @@ namespace tnbLib
 		}
 		auto iter = modeler->Planes().begin();
 		myPlane = std::move(iter->second);
+		myPlane->SetName(name);
 		if (verbose)
 		{
 			Info << endl
@@ -163,6 +164,7 @@ int main(int argc, char* argv[])
 
 				<< " # IO functions: " << endl << endl
 
+				<< " - loadFiles()" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl

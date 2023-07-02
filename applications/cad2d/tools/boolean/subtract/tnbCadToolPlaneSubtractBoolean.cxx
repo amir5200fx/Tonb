@@ -62,7 +62,7 @@ namespace tnbLib
 		static const auto current_directory = "0";
 		file::CheckDirectory(current_directory);
 
-		file::SetCurrentPath(global_path.string() + current_directory);
+		//file::SetCurrentPath(global_path.string() + "/" + current_directory);
 		myPlane0 = file::LoadSingleFile<std::shared_ptr<Cad2d_Plane>>(current_directory, verbose);
 		TNB_CHECK_LOADED_FILE(myPlane0);
 		file::SetCurrentPath(global_path.string());
@@ -73,7 +73,7 @@ namespace tnbLib
 		static const auto current_directory = "1";
 		file::CheckDirectory(current_directory);
 
-		file::SetCurrentPath(global_path.string() + current_directory);
+		//file::SetCurrentPath(global_path.string() + "/" + current_directory);
 		myPlane1 = file::LoadSingleFile<std::shared_ptr<Cad2d_Plane>>(current_directory, verbose);
 		TNB_CHECK_LOADED_FILE(myPlane1);
 		file::SetCurrentPath(global_path.string());
