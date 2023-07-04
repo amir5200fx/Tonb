@@ -314,6 +314,12 @@ tnbLib::Cad2d_Boolean::Union
 
 	curves = boolean::RemoveDegeneratedCurves(std::move(curves), minTol + Precision::Confusion());
 
+	Standard_Integer ii = 0;
+	for (const auto& x : curves)
+	{
+		x->SetIndex(++ii);
+	}
+
 	auto wires =
 		Pln_Tools::RetrieveWires
 		(curves,
@@ -396,7 +402,7 @@ tnbLib::Cad2d_Boolean::Subtract
 	auto plane1 = 
 		Cad2d_Plane::MakePlane(thePlane1->OuterWire(), nullptr, thePlane1->System());
 	Debug_Null_Pointer(plane1);
-
+	
 	intersection->LoadPlane0(thePlane0);
 	intersection->LoadPlane1(plane1);
 
@@ -437,7 +443,7 @@ tnbLib::Cad2d_Boolean::Subtract
 
 	auto edges0 = sub0->Segments()->RetrieveEntities();
 	auto edges1 = sub1->Segments()->RetrieveEntities();
-
+	
 	std::vector<std::shared_ptr<Pln_Curve>> curves;
 	Standard_Integer k0 = 0;
 	for (const auto& x : edges0)
@@ -509,6 +515,12 @@ tnbLib::Cad2d_Boolean::Subtract
 		FatalErrorIn("std::shared_ptr<tnbLib::Cad2d_Plane> Cad2d_Boolean::Subtract(Args...)")
 			<< "Contradictory data: there is no curve be created from boolean operator" << endl
 			<< abort(FatalError);
+	}
+
+	Standard_Integer ii = 0;
+	for (const auto& x : curves)
+	{
+		x->SetIndex(++ii);
 	}
 
 	auto wires = 
@@ -732,6 +744,12 @@ tnbLib::Cad2d_Boolean::Intersection
 			<< abort(FatalError);
 	}
 	
+	Standard_Integer ii = 0;
+	for (const auto& x : curves)
+	{
+		x->SetIndex(++ii);
+	}
+
 	auto wires =
 		Pln_Tools::RetrieveWires
 		(
