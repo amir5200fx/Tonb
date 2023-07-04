@@ -28,9 +28,11 @@ namespace tnbLib
 			timer.SetInfo(Global_TimerInfo_ms);
 		}
 		myEdges = file::LoadFiles<std::shared_ptr<Pln_Edge>>(verbose);
+		int k = 0;
 		for (const auto& x : myEdges)
 		{
 			TNB_CHECK_LOADED_FILE(x);
+			x->SetIndex(++k);
 		}
 		if (verbose)
 		{

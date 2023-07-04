@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
-      <UniqueIdentifier>{3f2a3bd8-96d1-4b74-a595-f65613000bfb}</UniqueIdentifier>
+      <UniqueIdentifier>{fb55dd47-c610-41e6-bd0c-1ab5358b75c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tnbMeshToolPlaneExportToOpenFOAM.cxx">
+    <ClCompile Include="tnbMesh2dToOpenFOAM.cxx">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
