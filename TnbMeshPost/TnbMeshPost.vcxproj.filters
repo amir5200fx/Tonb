@@ -235,5 +235,8 @@
     <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Iso\2d\MeshPost2d_LaplacianSmoothing.cxx" />
     <ClCompile Include="TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio\MeshPost2d_QualityMap_Vlrms2Ratio.cxx" />
     <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAM.cxx" />
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAMGraph.cxx" />
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAM_Mesh2d.cxx" />
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAM_IO.cxx" />
   </ItemGroup>
 </Project>

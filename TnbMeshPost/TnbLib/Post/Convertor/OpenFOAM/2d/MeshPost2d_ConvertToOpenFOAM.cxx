@@ -3,258 +3,6 @@
 #include <Entity2d_Triangulation.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-#include <token.hxx>
-
-tnbLib::Ostream&
-tnbLib::operator<<
-(
-	tnbLib::Ostream& os, 
-	const tnbLib::MeshPost2d_ConvertToOpenFOAM::PointList& thePoints
-	)
-{
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMHeader(os);
-	os << "FoamFile" << endl
-		<< token::BEGIN_BLOCK << endl;
-	os.indent();
-	os << "version";
-	os.indent();
-	os << "2.0;" << endl;
-	os.indent();
-	os << "format";
-	os.indent();
-	os << "ascii;" << endl;
-	os.indent();
-	os << "class";
-	os.indent();
-	os << "vectorField;" << endl;
-	os.indent();
-	os << "object";
-	os.indent();
-	os << "points;" << endl;
-	os << token::END_BLOCK << endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-
-	os << endl
-		<< endl
-		<< endl;
-	os << thePoints.Coords().size() << endl
-		<< token::BEGIN_LIST << endl;
-	for (const auto& x : thePoints.Coords())
-	{
-		auto [xi, yi, zi] = x.Components();
-		os 
-			<< token::BEGIN_LIST 
-			<< xi
-			<< token::SPACE 
-			<< yi 
-			<< token::SPACE 
-			<< zi 
-			<< token::END_LIST 
-			<< endl;
-	}
-	os << token::END_LIST << endl;
-	os << endl
-		<< endl
-		<< endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	return os;
-}
-
-tnbLib::Ostream&
-tnbLib::operator<<
-(
-	tnbLib::Ostream& os, 
-	const tnbLib::MeshPost2d_ConvertToOpenFOAM::FaceList& theFaces
-	)
-{
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMHeader(os);
-	os << "FoamFile" << endl
-		<< token::BEGIN_BLOCK << endl;
-	os.indent();
-	os << "version";
-	os.indent();
-	os << "2.0;" << endl;
-	os.indent();
-	os << "format";
-	os.indent();
-	os << "ascii;" << endl;
-	os.indent();
-	os << "class";
-	os.indent();
-	os << "faceList;" << endl;
-	os.indent();
-	os << "object";
-	os.indent();
-	os << "faes;" << endl;
-	os << token::END_BLOCK << endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-
-	os << endl
-		<< endl
-		<< endl;
-	os << theFaces.Faces().size() << endl
-		<< token::BEGIN_LIST << endl;
-	for (const auto& x : theFaces.Faces())
-	{
-		const auto& nodes = x.Nodes();
-		os << nodes.size() << token::BEGIN_LIST << nodes.at(0);
-		for (size_t ii = 1; ii < nodes.size(); ii++)
-		{
-			os << token::SPACE << nodes.at(ii);
-		}
-		os << token::END_LIST << endl;
-	}
-	os << token::END_LIST << endl;
-	os << endl
-		<< endl
-		<< endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	return os;
-}
-
-tnbLib::Ostream&
-tnbLib::operator<<
-(
-	tnbLib::Ostream& os,
-	const tnbLib::MeshPost2d_ConvertToOpenFOAM::CellList& theCells
-	)
-{
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMHeader(os);
-	os << "FoamFile" << endl
-		<< token::BEGIN_BLOCK << endl;
-	os.indent();
-	os << "version";
-	os.indent();
-	os << "2.0;" << endl;
-	os.indent();
-	os << "format";
-	os.indent();
-	os << "ascii;" << endl;
-	os.indent();
-	os << "class";
-	os.indent();
-	os << "cellList;" << endl;
-	os.indent();
-	os << "object";
-	os.indent();
-	os << "cells;" << endl;
-	os << token::END_BLOCK << endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	os << endl
-		<< endl
-		<< endl;
-
-	os << theCells.Cells().size() << endl
-		<< token::BEGIN_LIST << endl;
-	for (const auto& x : theCells.Cells())
-	{
-		const auto& faces = x.Faces();
-		os << faces.size() << token::BEGIN_LIST << faces.at(0);
-		for (size_t ii = 1; ii < faces.size(); ii++)
-		{
-			os << token::SPACE << faces.at(ii);
-		}
-		os << token::END_LIST << endl;
-	}
-	os << token::END_LIST << endl;
-	os << endl
-		<< endl
-		<< endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	return os;
-}
-
-tnbLib::Ostream&
-tnbLib::operator<<
-(
-	tnbLib::Ostream& os,
-	const tnbLib::MeshPost2d_ConvertToOpenFOAM::OwnerList& theOwners
-	)
-{
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMHeader(os);
-	os << "FoamFile" << endl
-		<< token::BEGIN_BLOCK << endl;
-	os.indent();
-	os << "version";
-	os.indent();
-	os << "2.0;" << endl;
-	os.indent();
-	os << "format";
-	os.indent();
-	os << "ascii;" << endl;
-	os.indent();
-	os << "class";
-	os.indent();
-	os << "labelList;" << endl;
-	os.indent();
-	os << "object";
-	os.indent();
-	os << "owner;" << endl;
-	os << token::END_BLOCK << endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	os << endl
-		<< endl
-		<< endl;
-
-	os << theOwners.Owners().size() << endl
-		<< token::BEGIN_LIST << endl;
-	for (auto i : theOwners.Owners())
-	{
-		os << i << endl;
-	}
-	os << token::END_LIST << endl;
-	os << endl
-		<< endl
-		<< endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	return os;
-}
-
-tnbLib::Ostream&
-tnbLib::operator<<
-(
-	tnbLib::Ostream& os, 
-	const tnbLib::MeshPost2d_ConvertToOpenFOAM::NeighborList& theNeighbors
-	)
-{
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMHeader(os);
-	os << "FoamFile" << endl
-		<< token::BEGIN_BLOCK << endl;
-	os.indent();
-	os << "version";
-	os.indent();
-	os << "2.0;" << endl;
-	os.indent();
-	os << "format";
-	os.indent();
-	os << "ascii;" << endl;
-	os.indent();
-	os << "class";
-	os.indent();
-	os << "labelList;" << endl;
-	os.indent();
-	os << "object";
-	os.indent();
-	os << "neighbour;" << endl;
-	os << token::END_BLOCK << endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	os << endl
-		<< endl
-		<< endl;
-
-	os << theNeighbors.Neighbors().size() << endl
-		<< token::BEGIN_LIST << endl;
-	for (auto i : theNeighbors.Neighbors())
-	{
-		os << i << endl;
-	}
-	os << token::END_LIST << endl;
-	os << endl
-		<< endl
-		<< endl;
-	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
-	return os;
-}
 
 std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Node>>
 tnbLib::MeshPost2d_ConvertToOpenFOAM::TriFacet::GetNodes() const
@@ -272,7 +20,10 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::QuadFacet::GetNodes() const
 	return std::move(nodes);
 }
 
-void tnbLib::MeshPost2d_ConvertToOpenFOAM::Vertex::Insert(const std::shared_ptr<Segment>& theSeg)
+void tnbLib::MeshPost2d_ConvertToOpenFOAM::Vertex::Insert
+(
+	const std::shared_ptr<Segment>& theSeg
+)
 {
 	auto insert = theSegments_.insert(theSeg);
 	if (NOT insert.second)
@@ -401,20 +152,25 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcNodes
 	for (const auto& x : thePnts)
 	{
 		Pnt3d pt(x.X(), x.Y(), 0);
-		auto node = std::make_shared<MeshPost2d_ConvertToOpenFOAM::MasterNode>(++k, std::move(pt));
+		auto node = 
+			std::make_shared<MeshPost2d_ConvertToOpenFOAM::MasterNode>
+			(++k, std::move(pt));
 		nodes.push_back(std::move(node));
 	}
 	std::vector<std::shared_ptr<MeshPost2d_ConvertToOpenFOAM::Node>> slaves;
 	for (const auto& x : thePnts)
 	{
 		Pnt3d pt(x.X(), x.Y(), theExtrusion);
-		auto node = std::make_shared<MeshPost2d_ConvertToOpenFOAM::SlaveNode>(++k, std::move(pt));
+		auto node = 
+			std::make_shared<MeshPost2d_ConvertToOpenFOAM::SlaveNode>
+			(++k, std::move(pt));
 		slaves.push_back(std::move(node));
 	}
 	for (size_t i = 0; i < nodes.size(); i++)
 	{
 		std::dynamic_pointer_cast<MeshPost2d_ConvertToOpenFOAM::MasterNode>
-			(nodes.at(i))->SlaveRef() = std::dynamic_pointer_cast<SlaveNode>(slaves.at(i));
+			(nodes.at(i))->SlaveRef() = 
+			std::dynamic_pointer_cast<SlaveNode>(slaves.at(i));
 	}
 	for (auto& x : slaves)
 	{
@@ -452,184 +208,42 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveSegment
 	return std::move(seg);
 }
 
-std::tuple
-<
-	std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Element2d>>,
-	std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Edge2d>>,
-	std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Node2d>>
->
-tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcMesh2d
-(
-	const Entity2d_Triangulation& theTris,
-	const std::vector<std::pair<Standard_Integer, Standard_Integer>>& theBoundaries,
-	const std::vector<std::shared_ptr<Node>>& theNodes,
-	const Standard_Real theExtrusion
-)
+std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Node2d>>
+tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcNodes2d(const std::vector<std::shared_ptr<Node>>& theNodes)
 {
-	auto[vertices, segments] = CalcGragh(theTris, theBoundaries);
-	auto nodes2d = CalcNodes2d(theNodes);
-
-	// calculate 2d edges [6/28/2023 Payvand]
-	std::vector<std::shared_ptr<Edge2d>> edges;
-	edges.resize(segments.size());
-	for (const auto& x : segments)
+	std::vector<std::shared_ptr<Node2d>> nodes;
+	nodes.reserve(theNodes.size());
+	for (const auto& x : theNodes)
 	{
-		const auto& v0 = x->Vertices().at(0);
-		const auto& v1 = x->Vertices().at(1);
-
-		auto id = x->Index();
-		std::array<std::shared_ptr<Node2d>, Edge2d::nbNodes> paired =
-		{ nodes2d.at(Index_Of(v0->Index())), nodes2d.at(Index_Of(v1->Index())) };
-
-		auto edge = std::make_shared<Edge2d>(id, std::move(paired));
-		edges.at(Index_Of(id)) = std::move(edge);
-	}
-	std::vector<std::shared_ptr<Element2d>> tris;
-	tris.reserve(theTris.NbConnectivity());
-	Standard_Integer k = 0;
-	for (const auto& x : theTris.Connectivity())
-	{
-		auto v0 = Index_Of(x.Value(0));
-		auto v1 = Index_Of(x.Value(1));
-		auto v2 = Index_Of(x.Value(2));
-
-		std::shared_ptr<Edge2d> edge0, edge1, edge2;
+		auto master = std::dynamic_pointer_cast<MasterNode>(x);
+		if (master)
 		{
-			auto seg = RetrieveSegment(vertices.at(v0), vertices.at(v1));
-			auto id = seg->Index();
-			edge0 = edges.at(Index_Of(id));
-		}
-		{
-			auto seg = RetrieveSegment(vertices.at(v1), vertices.at(v2));
-			auto id = seg->Index();
-			edge1 = edges.at(Index_Of(id));
-		}
-		{
-			auto seg = RetrieveSegment(vertices.at(v2), vertices.at(v0));
-			auto id = seg->Index();
-			edge2 = edges.at(Index_Of(id));
-		}
-
-		std::array<std::shared_ptr<Edge2d>, Element2d::nbEdges> t = 
-		{ std::move(edge0),std::move(edge1),std::move(edge2) };
-		auto tri = std::make_shared<Element2d>(++k, std::move(t));
-		tris.push_back(std::move(tri));
-	}
-	k = 0;
-	for (const auto& x : theTris.Connectivity())
-	{
-		auto v0 = Index_Of(x.Value(0));
-		auto v1 = Index_Of(x.Value(1));
-		auto v2 = Index_Of(x.Value(2));
-
-		const auto& tri = tris.at(k++);
-
-		std::shared_ptr<Edge2d> edge0, edge1, edge2;
-		{
-			auto seg = RetrieveSegment(vertices.at(v0), vertices.at(v1));
-			auto sense = seg->ChackSense(vertices.at(v0), vertices.at(v1));
-			auto id = seg->Index();
-			edge0 = edges.at(Index_Of(id));
-			Debug_Null_Pointer(edge0);
-			sense ? edge0->SetOwner(tri) : edge0->SetNeighbor(tri);
-			if (NOT sense) edge0->SetSense(Standard_False);
-		}
-		{
-			auto seg = RetrieveSegment(vertices.at(v1), vertices.at(v2));
-			auto sense = seg->ChackSense(vertices.at(v1), vertices.at(v2));
-			auto id = seg->Index();
-			edge1 = edges.at(Index_Of(id));
-			Debug_Null_Pointer(edge1);
-			sense ? edge1->SetOwner(tri) : edge1->SetNeighbor(tri);
-			if (NOT sense) edge1->SetSense(Standard_False);
-		}
-		{
-			auto seg = RetrieveSegment(vertices.at(v2), vertices.at(v0));
-			auto sense = seg->ChackSense(vertices.at(v2), vertices.at(v0));
-			auto id = seg->Index();
-			edge2 = edges.at(Index_Of(id));
-			Debug_Null_Pointer(edge2);
-			sense ? edge2->SetOwner(tri) : edge2->SetNeighbor(tri);
-			if (NOT sense) edge2->SetSense(Standard_False);
+			auto node = std::make_shared<Node2d >(x->Index(), std::move(master));
+			nodes.push_back(std::move(node));
 		}
 	}
-	auto t = std::make_tuple(std::move(tris), std::move(edges), std::move(nodes2d));
-	return std::move(t);
+	return std::move(nodes);
 }
 
-std::pair
-<
-	std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Vertex>>,
-	std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Segment>>
->
-tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcGragh
+std::vector<std::pair<Standard_Integer, Standard_Integer>>
+tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveBoundaries
 (
-	const Entity2d_Triangulation& theTris, 
-	const std::vector<std::pair<Standard_Integer, Standard_Integer>>& theBoundaries
+	const std::map<word, std::pair<Standard_Integer, Standard_Integer>>& theBoundaries
 )
 {
-	std::vector<std::shared_ptr<Vertex>> vertices;
-	Standard_Integer k = 0;
-	for (const auto& x : theTris.Points())
-	{
-		auto v = std::make_shared<Vertex>(++k);
-		vertices.push_back(std::move(v));
-	}
-
-	std::vector<std::shared_ptr<Segment>> segments;
-	k = 0;
+	std::vector<std::pair<Standard_Integer, Standard_Integer>> segments;
 	for (const auto& x : theBoundaries)
 	{
-		const auto& v0 = vertices.at(Index_Of(x.first));
-		const auto& v1 = vertices.at(Index_Of(x.second));
-		
-		std::array<std::shared_ptr<Vertex>, Segment::nbVertices> paired = { v0,v1 };
-		auto seg = std::make_shared<Segment>(++k, std::move(paired));
-		v0->Insert(seg);
-		v1->Insert(seg);
-
-		segments.push_back(std::move(seg));
-	}
-	for (const auto& x : theTris.Connectivity())
-	{
-		auto i0 = Index_Of(x.Value(0));
-		auto i1 = Index_Of(x.Value(1));
-		auto i2 = Index_Of(x.Value(2));
-
-		const auto& v0 = vertices.at(i0);
-		const auto& v1 = vertices.at(i1);
-		const auto& v2 = vertices.at(i2);
-
-		if (Segment::IsValidToCreate(v0, v1))
-		{// segment 0 [6/28/2023 Payvand]
-			std::array<std::shared_ptr<Vertex>, Segment::nbVertices> paired = { v0,v1 };
-			auto seg = std::make_shared<Segment>(++k, std::move(paired));
-			v0->Insert(seg);
-			v1->Insert(seg);
-
-			segments.push_back(std::move(seg));
-		}
-		if (Segment::IsValidToCreate(v1, v2))
-		{// segment 1 [6/28/2023 Payvand]
-			std::array<std::shared_ptr<Vertex>, Segment::nbVertices> paired = { v1,v2 };
-			auto seg = std::make_shared<Segment>(++k, std::move(paired));
-			v1->Insert(seg);
-			v2->Insert(seg);
-
-			segments.push_back(std::move(seg));
-		}
-		if (Segment::IsValidToCreate(v2, v0))
-		{// segment 2 [6/28/2023 Payvand]
-			std::array<std::shared_ptr<Vertex>, Segment::nbVertices> paired = { v2,v0 };
-			auto seg = std::make_shared<Segment>(++k, std::move(paired));
-			v2->Insert(seg);
-			v0->Insert(seg);
-
+		const auto paired = x.second;
+		for (Standard_Integer i = paired.first + 1; i <= paired.second; i++)
+		{
+			auto i0 = i - 1;
+			auto i1 = i;
+			auto seg = std::make_pair(i0, i1);
 			segments.push_back(std::move(seg));
 		}
 	}
-	auto t = std::make_pair(vertices, segments);
-	return std::move(t);
+	return std::move(segments);
 }
 
 std::tuple
@@ -833,7 +447,10 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveOwnerList
 }
 
 tnbLib::MeshPost2d_ConvertToOpenFOAM::NeighborList
-tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveNeighborList(const std::vector<std::shared_ptr<Edge2d>>& theEdges)
+tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveNeighborList
+(
+	const std::vector<std::shared_ptr<Edge2d>>& theEdges
+)
 {
 	std::vector<Standard_Integer> neighbors;
 	neighbors.reserve(theEdges.size());
@@ -842,9 +459,46 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveNeighborList(const std::vector<std
 		auto neighbor = x->Neighbor().lock();
 		if (neighbor)
 		{
-
+			neighbors.push_back(neighbor->Index());
 		}
 	}
+	return std::move(neighbors);
+}
+
+tnbLib::MeshPost2d_ConvertToOpenFOAM::Cell
+tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveCell(const Element2d& theElement)
+{
+	std::array<Standard_Integer, Cell::nbFaces> faces;
+	const auto& edges = theElement.Edges();
+	faces.at(0) = edges.at(0)->Index();
+	faces.at(1) = edges.at(1)->Index();
+	faces.at(2) = edges.at(2)->Index();
+	faces.at(3) = theElement.Back()->Index();
+	faces.at(4) = theElement.Front()->Index();
+	Cell cell(std::move(faces));
+	return std::move(cell);
+}
+
+tnbLib::MeshPost2d_ConvertToOpenFOAM::Face
+tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveFace(const Edge2d& theEdge)
+{
+	std::vector<Standard_Integer> nodes;
+	Debug_Null_Pointer(theEdge.Nodes().at(0));
+	Debug_Null_Pointer(theEdge.Nodes().at(1));
+	Debug_Null_Pointer(theEdge.Nodes().at(0)->Node3d());
+	Debug_Null_Pointer(theEdge.Nodes().at(1)->Node3d());
+	auto n0 = std::dynamic_pointer_cast<MasterNode>(theEdge.Nodes().at(0)->Node3d());
+	auto n1 = std::dynamic_pointer_cast<MasterNode>(theEdge.Nodes().at(1)->Node3d());
+
+	auto n2 = n1->Slave();
+	auto n3 = n0->Slave();
+
+	nodes.push_back(n0->Index());
+	nodes.push_back(n1->Index());
+	nodes.push_back(n2->Index());
+	nodes.push_back(n3->Index());
+	Face face(std::move(nodes));
+	return std::move(face);
 }
 
 void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
@@ -857,7 +511,14 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
 	}
 	auto nodes = CalcNodes(Mesh()->Points(), Extrusion());
 	auto boundaries = RetrieveBoundaries(Boundaries());
-	auto [elements_2d, edges_2d, nodes_2d] = CalcMesh2d(*Mesh(), boundaries, nodes, Extrusion());
+	auto [elements_2d, edges_2d, nodes_2d] = 
+		CalcMesh2d(*Mesh(), boundaries, nodes, Extrusion());
+
+	/*auto [intEdges, bndEdges] = SeperateEdges(edges_2d);
+	const auto nbInteriors = (Standard_Integer)intEdges.size();
+
+	RenumberInteriors(intEdges);
+	RenumberBoundaries(bndEdges, nbInteriors);*/
 
 	CalcFaces(edges_2d);
 	CalcFaces(elements_2d, (Standard_Integer)edges_2d.size());
@@ -875,18 +536,3 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
 	Change_IsDone() = Standard_True;
 }
 
-void tnbLib::MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMHeader(Ostream& os)
-{
-	os << R"(/*--------------------------------*- C++ -*----------------------------------*\)" << endl
-		<< R"(| =========                 |                                                 |)" << endl
-		<< R"(| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |)" << endl
-		<< R"(|  \\    /   O peration     | Version:  5.0                                   |)" << endl
-		<< R"(|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |)" << endl
-		<< R"(|    \\/     M anipulation  |                                                 |)" << endl
-		<< R"(\*---------------------------------------------------------------------------*/)" << endl;
-}
-
-void tnbLib::MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(Ostream& os)
-{
-	os << R"(// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //)" << endl;
-}
