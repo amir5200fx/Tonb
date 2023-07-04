@@ -12,6 +12,7 @@
 #include <Geo2d_MetricPrcsr.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <Geo2d_MetricPrcsrUniMetric.hxx>
+#include <Entity2d_Polygon.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -163,7 +164,10 @@ void tnbLib::Aft2d_BoundaryOfPlane::Perform()
 				tnbLib::Info << "   Discretization is done!" << endl;
 			}
 			auto nodes = Aft_Tools::RetrieveNodes(Aft_Tools::UpCast(mesh));
-			auto box = Geo_BoxTools::GetBox(Aft_Tools::RetrieveGeometry(nodes), 0.0);
+			auto coords = Aft_Tools::RetrieveGeometry(nodes);
+			auto pol = std::make_shared<Entity2d_Polygon>(coords, 0);
+			x->SetMesh(std::move(pol));
+			auto box = Geo_BoxTools::GetBox(coords, 0.0);
 
 			wBoxes.push_back(std::move(box));
 
