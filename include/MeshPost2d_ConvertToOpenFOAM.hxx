@@ -796,7 +796,7 @@ namespace tnbLib
 			auto NbSegments() const { return theSegments_.size(); }
 			const auto& Segments() const { return theSegments_; }
 
-			void TnbMeshPost_EXPORT Insert(const std::shared_ptr<Segment>&);
+			TnbMeshPost_EXPORT void Insert(const std::shared_ptr<Segment>&);
 
 			
 
