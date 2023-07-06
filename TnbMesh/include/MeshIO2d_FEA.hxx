@@ -29,6 +29,8 @@ namespace tnbLib
 
 	public:
 
+		static TnbMesh_EXPORT const std::string extension;
+
 		// default constructor [7/4/2023 Payvand]
 
 		MeshIO2d_FEA()
