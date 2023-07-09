@@ -16,21 +16,21 @@ tnbLib::operator<<
 	os << "FoamFile" << endl
 		<< token::BEGIN_BLOCK << endl;
 	os.indent();
-	os << "version";
+	os << " version";
 	os.indent();
-	os << "2.0;" << endl;
+	os << " 2.0;" << endl;
 	os.indent();
-	os << "format";
+	os << " format";
 	os.indent();
-	os << "ascii;" << endl;
+	os << " ascii;" << endl;
 	os.indent();
-	os << "class";
+	os << " class";
 	os.indent();
-	os << "vectorField;" << endl;
+	os << " vectorField;" << endl;
 	os.indent();
-	os << "object";
+	os << " object";
 	os.indent();
-	os << "points;" << endl;
+	os << " points;" << endl;
 	os << token::END_BLOCK << endl;
 	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
 
@@ -71,21 +71,21 @@ tnbLib::operator<<
 	os << "FoamFile" << endl
 		<< token::BEGIN_BLOCK << endl;
 	os.indent();
-	os << "version";
+	os << " version";
 	os.indent();
-	os << "2.0;" << endl;
+	os << " 2.0;" << endl;
 	os.indent();
-	os << "format";
+	os << " format";
 	os.indent();
-	os << "ascii;" << endl;
+	os << " ascii;" << endl;
 	os.indent();
-	os << "class";
+	os << " class";
 	os.indent();
-	os << "faceList;" << endl;
+	os << " faceList;" << endl;
 	os.indent();
-	os << "object";
+	os << " object";
 	os.indent();
-	os << "faes;" << endl;
+	os << " faces;" << endl;
 	os << token::END_BLOCK << endl;
 	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
 
@@ -123,21 +123,21 @@ tnbLib::operator<<
 	os << "FoamFile" << endl
 		<< token::BEGIN_BLOCK << endl;
 	os.indent();
-	os << "version";
+	os << " version";
 	os.indent();
-	os << "2.0;" << endl;
+	os << " 2.0;" << endl;
 	os.indent();
-	os << "format";
+	os << " format";
 	os.indent();
-	os << "ascii;" << endl;
+	os << " ascii;" << endl;
 	os.indent();
-	os << "class";
+	os << " class";
 	os.indent();
-	os << "cellList;" << endl;
+	os << " cellList;" << endl;
 	os.indent();
-	os << "object";
+	os << " object";
 	os.indent();
-	os << "cells;" << endl;
+	os << " cells;" << endl;
 	os << token::END_BLOCK << endl;
 	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
 	os << endl
@@ -175,21 +175,21 @@ tnbLib::operator<<
 	os << "FoamFile" << endl
 		<< token::BEGIN_BLOCK << endl;
 	os.indent();
-	os << "version";
+	os << " version";
 	os.indent();
-	os << "2.0;" << endl;
+	os << " 2.0;" << endl;
 	os.indent();
-	os << "format";
+	os << " format";
 	os.indent();
-	os << "ascii;" << endl;
+	os << " ascii;" << endl;
 	os.indent();
-	os << "class";
+	os << " class";
 	os.indent();
-	os << "labelList;" << endl;
+	os << " labelList;" << endl;
 	os.indent();
-	os << "object";
+	os << " object";
 	os.indent();
-	os << "owner;" << endl;
+	os << " owner;" << endl;
 	os << token::END_BLOCK << endl;
 	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
 	os << endl
@@ -221,21 +221,21 @@ tnbLib::operator<<
 	os << "FoamFile" << endl
 		<< token::BEGIN_BLOCK << endl;
 	os.indent();
-	os << "version";
+	os << " version";
 	os.indent();
-	os << "2.0;" << endl;
+	os << " 2.0;" << endl;
 	os.indent();
-	os << "format";
+	os << " format";
 	os.indent();
-	os << "ascii;" << endl;
+	os << " ascii;" << endl;
 	os.indent();
-	os << "class";
+	os << " class";
 	os.indent();
-	os << "labelList;" << endl;
+	os << " labelList;" << endl;
 	os.indent();
-	os << "object";
+	os << " object";
 	os.indent();
-	os << "neighbour;" << endl;
+	os << " neighbour;" << endl;
 	os << token::END_BLOCK << endl;
 	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(os);
 	os << endl
@@ -277,13 +277,13 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Export() const
 	OFstream points("points");
 	points << thePoints_;
 
-	OFstream cells("ells");
+	OFstream cells("cells");
 	cells << theCells_;
 
 	OFstream faces("faces");
 	faces << theFaces_;
 
-	OFstream neighbors("neighbours");
+	OFstream neighbors("neighbour");
 	neighbors << theNeighbors_;
 
 	OFstream owner("owner");

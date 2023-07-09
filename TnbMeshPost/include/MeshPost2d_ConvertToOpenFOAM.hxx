@@ -18,6 +18,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [7/6/2023 Payvand]
+	class MeshPost2d_OFTopology;
+
 	class MeshPost2d_ConvertToOpenFOAM
 		: public Global_Done
 	{
@@ -633,14 +636,14 @@ namespace tnbLib
 			std::weak_ptr<Element2d> theOwner_;
 			std::weak_ptr<Element2d> theNeighbor_;
 
-			Standard_Boolean theSense_;
+			//Standard_Boolean theSense_;
 
 		public:
 
 			// default constructor [6/28/2023 Payvand]
 
 			Edge2d()
-				: theSense_(Standard_True)
+				/*: theSense_(Standard_True)*/
 			{}
 
 			// constructors [6/28/2023 Payvand]
@@ -652,7 +655,7 @@ namespace tnbLib
 			)
 				: Global_Indexed(theIndex)
 				, theNodes_(theNodes)
-				, theSense_(Standard_True)
+				/*, theSense_(Standard_True)*/
 			{}
 
 			Edge2d
@@ -662,13 +665,13 @@ namespace tnbLib
 			)
 				: Global_Indexed(theIndex)
 				, theNodes_(std::move(theNodes))
-				, theSense_(Standard_True)
+				/*, theSense_(Standard_True)*/
 			{}
 
 			// Public functions and operators [6/28/2023 Payvand]
 
 			//Standard_Boolean IsOnBoundary() const;
-			auto Sense() const { return theSense_; }
+			//auto Sense() const { return theSense_; }
 
 			const auto& Nodes() const { return theNodes_; }
 			auto& NodesRef() { return theNodes_; }
@@ -681,7 +684,7 @@ namespace tnbLib
 
 			void SetOwner(const std::shared_ptr<Element2d>& theElement) { theOwner_ = theElement; }
 			void SetNeighbor(const std::shared_ptr<Element2d>& theElement) { theNeighbor_ = theElement; }
-			void SetSense(const Standard_Boolean theSense) { theSense_ = theSense; }
+			//void SetSense(const Standard_Boolean theSense) { theSense_ = theSense; }
 		};
 
 		class Element2d
@@ -749,139 +752,12 @@ namespace tnbLib
 
 		};
 
-		class Segment;
-
-		static TnbMeshPost_EXPORT Standard_Boolean
-			Compare
-			(
-				const std::weak_ptr<Segment>&,
-				const std::weak_ptr<Segment>&
-			);
-
-		struct segment_cmp
-		{
-			bool operator()(const std::weak_ptr<Segment>& theS0, const std::weak_ptr<Segment>& theS1) const
-			{
-				return Compare(theS0, theS1);
-			}
-		};
-
-		class Vertex
-			: public Global_Indexed
-		{
-
-		public:
-
-			
-
-		private:
-
-			/*Private Data*/
-
-			std::set<std::weak_ptr<Segment>, segment_cmp> theSegments_;
-
-		public:
-
-			// default constructor [6/28/2023 Payvand]
-
-			Vertex()
-			{}
-
-			// constructors [6/28/2023 Payvand]
-
-			Vertex(const Standard_Integer theIndex)
-				: Global_Indexed(theIndex)
-			{}
-
-			auto NbSegments() const { return theSegments_.size(); }
-			const auto& Segments() const { return theSegments_; }
-
-			TnbMeshPost_EXPORT void Insert(const std::shared_ptr<Segment>&);
-
-			
-
-		};
-
-		class Segment
-			: public Global_Indexed
-		{
-
-		public:
-
-			enum 
-			{
-				nbVertices = 2
-			};
-
-		private:
-
-			/*Private Data*/
-
-			std::array<std::shared_ptr<Vertex>, nbVertices> theVertices_;
-
-		public:
-
-			// default constructor [6/28/2023 Payvand]
-
-			Segment()
-			{}
-
-			// constructors [6/28/2023 Payvand]
-
-			Segment
-			(
-				const Standard_Integer theIndex, 
-				const std::array<std::shared_ptr<Vertex>, nbVertices>& theVertices
-			)
-				: Global_Indexed(theIndex)
-				, theVertices_(theVertices)
-			{}
-
-			Segment
-			(
-				const Standard_Integer theIndex, 
-				std::array<std::shared_ptr<Vertex>, nbVertices>&& theVertices
-			)
-				: Global_Indexed(theIndex)
-				, theVertices_(std::move(theVertices))
-			{}
-
-			// Public functions and operators [6/28/2023 Payvand]
-
-			const auto& Vertices() const { return theVertices_; }
-			auto& VerticesRef() { return theVertices_; }
-
-			TnbMeshPost_EXPORT Standard_Boolean 
-				ChackSense
-				(
-					const std::shared_ptr<Vertex>&,
-					const std::shared_ptr<Vertex>&
-				) const;
-			TnbMeshPost_EXPORT std::shared_ptr<Vertex>
-				Opposite(const std::shared_ptr<Vertex>&) const;
-
-			static TnbMeshPost_EXPORT Standard_Boolean
-				IsValidToCreate
-				(
-					const std::shared_ptr<Vertex>&, 
-					const std::shared_ptr<Vertex>&
-				);
-			static TnbMeshPost_EXPORT Standard_Boolean 
-				Compare
-				(
-					const std::shared_ptr<Segment>&,
-					const std::shared_ptr<Segment>&
-				);
-		};
-
 
 	private:
 
 		/*Private Data*/
 
-		std::shared_ptr<Entity2d_Triangulation> theMesh_;
-
-		std::map<word, std::pair<Standard_Integer, Standard_Integer>> theBoundaries_;
+		std::shared_ptr<MeshPost2d_OFTopology> theMesh_;
 
 		Standard_Real theExtrusion_;
 
@@ -907,13 +783,7 @@ namespace tnbLib
 		static TnbMeshPost_EXPORT std::vector<std::shared_ptr<Node>> 
 			CalcNodes(const std::vector<Pnt2d>&, const Standard_Real theExtrusion);
 
-		static TnbMeshPost_EXPORT std::shared_ptr<Segment>
-			RetrieveSegment
-			(
-				const std::shared_ptr<Vertex>&,
-				const std::shared_ptr<Vertex>&
-			);
-		static TnbMeshPost_EXPORT std::tuple
+		TnbMeshPost_EXPORT std::tuple
 			<
 			std::vector<std::shared_ptr<Element2d>>,
 			std::vector<std::shared_ptr<Edge2d>>, 
@@ -921,21 +791,9 @@ namespace tnbLib
 			>
 			CalcMesh2d
 			(
-				const Entity2d_Triangulation&,
-				const std::vector<std::pair<Standard_Integer, Standard_Integer>>&,
-				const std::vector<std::shared_ptr<Node>>&,
-				const Standard_Real theExtrusion
+				const std::vector<std::shared_ptr<Node>>&
 			);
-		static TnbMeshPost_EXPORT std::pair
-			<
-			std::vector<std::shared_ptr<Vertex>>,
-			std::vector<std::shared_ptr<Segment>>
-			>
-			CalcGragh
-			(
-				const Entity2d_Triangulation&,
-				const std::vector<std::pair<Standard_Integer, Standard_Integer>>&
-			);
+
 		static TnbMeshPost_EXPORT std::vector<std::shared_ptr<Node2d>>
 			CalcNodes2d(const std::vector<std::shared_ptr<Node>>&);
 		static TnbMeshPost_EXPORT std::vector<std::pair<Standard_Integer, Standard_Integer>>
@@ -990,10 +848,11 @@ namespace tnbLib
 		auto Extrusion() const { return theExtrusion_; }
 
 		const auto& Mesh() const { return theMesh_; }
-		const auto& Boundaries() const { return theBoundaries_; }
 
 		TnbMeshPost_EXPORT void Perform();
 		TnbMeshPost_EXPORT void Export() const;
+
+		void SetMesh(const std::shared_ptr<MeshPost2d_OFTopology>& theMesh) { theMesh_ = theMesh; }
 
 		static TnbMeshPost_EXPORT void WriteOpenFOAMHeader(Ostream&);
 		static TnbMeshPost_EXPORT void WriteOpenFOAMSeperator(Ostream&);

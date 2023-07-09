@@ -1,5 +1,7 @@
 #include <MeshPost2d_ConvertToOpenFOAM.hxx>
 
+#include <MeshPost2d_OFTopology.hxx>
+#include <MeshIO2d_FEA.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -18,115 +20,6 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::QuadFacet::GetNodes() const
 	std::vector<std::shared_ptr<Node>> nodes;
 	std::copy(theNodes_.begin(), theNodes_.end(), std::back_inserter(nodes));
 	return std::move(nodes);
-}
-
-void tnbLib::MeshPost2d_ConvertToOpenFOAM::Vertex::Insert
-(
-	const std::shared_ptr<Segment>& theSeg
-)
-{
-	auto insert = theSegments_.insert(theSeg);
-	if (NOT insert.second)
-	{
-		FatalErrorIn(FunctionSIG)
-			<< "duplicate data has been detected." << endl
-			<< " - id: " << theSeg->Index() << endl
-			<< abort(FatalError);
-	}
-}
-
-Standard_Boolean 
-tnbLib::MeshPost2d_ConvertToOpenFOAM::Compare
-(
-	const std::weak_ptr<Segment>& theV0,
-	const std::weak_ptr<Segment>& theV1
-)
-{
-	Debug_Null_Pointer(theV0.lock());
-	Debug_Null_Pointer(theV1.lock());
-	return theV0.lock()->Index() < theV1.lock()->Index();
-}
-
-Standard_Boolean 
-tnbLib::MeshPost2d_ConvertToOpenFOAM::Segment::ChackSense
-(
-	const std::shared_ptr<Vertex>& theV0,
-	const std::shared_ptr<Vertex>& theV1
-) const 
-{
-	if (theVertices_.at(0) IS_EQUAL theV0)
-	{
-		if (theVertices_.at(1) IS_EQUAL theV1)
-		{
-			return Standard_True;
-		}
-	}
-	else
-	{
-		if (theVertices_.at(1) IS_EQUAL theV0)
-		{
-			if (theVertices_.at(0) IS_EQUAL theV1)
-			{
-				return Standard_False;
-			}
-		}
-		
-	}
-	FatalErrorIn(FunctionSIG)
-		<< "contradictory data has been detected." << endl
-		<< abort(FatalError);
-	return Standard_True;
-}
-
-std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Vertex> 
-tnbLib::MeshPost2d_ConvertToOpenFOAM::Segment::Opposite
-(
-	const std::shared_ptr<Vertex>& theVtx
-) const
-{
-	if (theVtx IS_EQUAL theVertices_.at(0)) return theVertices_.at(1);
-	if (theVtx IS_EQUAL theVertices_.at(1)) return theVertices_.at(0);
-	FatalErrorIn(FunctionSIG)
-		<< "the vertex doesn't belong to the segment." << endl
-		<< abort(FatalError);
-	return nullptr;
-}
-
-Standard_Boolean 
-tnbLib::MeshPost2d_ConvertToOpenFOAM::Segment::IsValidToCreate
-(
-	const std::shared_ptr<Vertex>& theV0,
-	const std::shared_ptr<Vertex>& theV1
-)
-{
-	if (theV1->NbSegments() < theV0->NbSegments())
-	{
-		return IsValidToCreate(theV1, theV0);
-	}
-	const auto& segments = theV0->Segments();
-	for (const auto& x : segments)
-	{
-		auto seg = x.lock();
-		Debug_Null_Pointer(seg);
-		auto v1 = seg->Opposite(theV0);
-		if (v1 IS_EQUAL theV1)
-		{
-			return Standard_False;
-		}
-	}
-	return Standard_True;
-}
-
-Standard_Boolean 
-tnbLib::MeshPost2d_ConvertToOpenFOAM::Segment::Compare
-(
-	const std::shared_ptr<Segment>& theS0,
-	const std::shared_ptr<Segment>& theS1
-)
-{
-	Debug_Null_Pointer(theS0);
-	Debug_Null_Pointer(theS1);
-	return theS0->Index() < theS1->Index();
 }
 
 //Standard_Integer 
@@ -179,35 +72,6 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcNodes
 	return std::move(nodes);
 }
 
-std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Segment>
-tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveSegment
-(
-	const std::shared_ptr<Vertex>& theV0,
-	const std::shared_ptr<Vertex>& theV1
-)
-{
-	if (theV1->NbSegments() < theV0->NbSegments())
-	{
-		return RetrieveSegment(theV1, theV0);
-	}
-	const auto& segments = theV0->Segments();
-	for (const auto& x : segments)
-	{
-		auto seg = x.lock();
-		Debug_Null_Pointer(seg);
-		auto v1 = seg->Opposite(theV0);
-		if (v1 IS_EQUAL theV1)
-		{
-			return std::move(seg);
-		}
-	}
-	FatalErrorIn(FunctionSIG) << endl
-		<< "no segment has been found between the two vertices." << endl
-		<< abort(FatalError);
-	std::shared_ptr<Segment> seg;
-	return std::move(seg);
-}
-
 std::vector<std::shared_ptr<tnbLib::MeshPost2d_ConvertToOpenFOAM::Node2d>>
 tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcNodes2d(const std::vector<std::shared_ptr<Node>>& theNodes)
 {
@@ -254,12 +118,21 @@ std::tuple
 >
 tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveNodes(const Element2d& theElement)
 {
+	auto id = theElement.Index();
 	const auto& edges = theElement.Edges();
 	std::vector<std::shared_ptr<Node2d>> nodes;
 	for (const auto& x : edges)
 	{
 		Debug_Null_Pointer(x);
-		x->Sense() ? nodes.push_back(x->Nodes().at(0)) : nodes.push_back(x->Nodes().at(1));
+		if (x->Owner().lock()->Index() IS_EQUAL id)
+		{
+			nodes.push_back(x->Nodes().at(0));
+		}
+		else
+		{
+			nodes.push_back(x->Nodes().at(1));
+		}
+		//x->Sense() ? nodes.push_back(x->Nodes().at(0)) : nodes.push_back(x->Nodes().at(1));
 	}
 	auto t = std::make_tuple(nodes.at(0), nodes.at(1), nodes.at(2));
 	return std::move(t);
@@ -440,7 +313,7 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveOwnerList
 	{
 		auto owner = x->Owner().lock();
 		Debug_Null_Pointer(owner);
-		owners.push_back(owner->Index());
+		owners.push_back(Index_Of(owner->Index()));
 	}
 	OwnerList ownerList(std::move(owners));
 	return std::move(ownerList);
@@ -459,7 +332,7 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveNeighborList
 		auto neighbor = x->Neighbor().lock();
 		if (neighbor)
 		{
-			neighbors.push_back(neighbor->Index());
+			neighbors.push_back(Index_Of(neighbor->Index()));
 		}
 	}
 	return std::move(neighbors);
@@ -470,11 +343,11 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveCell(const Element2d& theElement)
 {
 	std::array<Standard_Integer, Cell::nbFaces> faces;
 	const auto& edges = theElement.Edges();
-	faces.at(0) = edges.at(0)->Index();
-	faces.at(1) = edges.at(1)->Index();
-	faces.at(2) = edges.at(2)->Index();
-	faces.at(3) = theElement.Back()->Index();
-	faces.at(4) = theElement.Front()->Index();
+	faces.at(0) = Index_Of(edges.at(0)->Index());
+	faces.at(1) = Index_Of(edges.at(1)->Index());
+	faces.at(2) = Index_Of(edges.at(2)->Index());
+	faces.at(3) = Index_Of(theElement.Back()->Index());
+	faces.at(4) = Index_Of(theElement.Front()->Index());
 	Cell cell(std::move(faces));
 	return std::move(cell);
 }
@@ -493,10 +366,10 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveFace(const Edge2d& theEdge)
 	auto n2 = n1->Slave();
 	auto n3 = n0->Slave();
 
-	nodes.push_back(n0->Index());
-	nodes.push_back(n1->Index());
-	nodes.push_back(n2->Index());
-	nodes.push_back(n3->Index());
+	nodes.push_back(Index_Of(n0->Index()));
+	nodes.push_back(Index_Of(n1->Index()));
+	nodes.push_back(Index_Of(n2->Index()));
+	nodes.push_back(Index_Of(n3->Index()));
 	Face face(std::move(nodes));
 	return std::move(face);
 }
@@ -509,10 +382,26 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
 			<< "no mesh has been found." << endl
 			<< abort(FatalError);
 	}
-	auto nodes = CalcNodes(Mesh()->Points(), Extrusion());
-	auto boundaries = RetrieveBoundaries(Boundaries());
+	const auto& meshIO = Mesh()->MeshIO();
+	if (NOT meshIO)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no io structure has been found." << endl
+			<< abort(FatalError);
+	}
+	const auto& triangulation = meshIO->Mesh();
+	if (NOT triangulation)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no triangulation has been found." << endl
+			<< abort(FatalError);
+	}
+	theExtrusion_ = 0.1;
+
+	auto nodes = CalcNodes(triangulation->Points(), Extrusion());
+
 	auto [elements_2d, edges_2d, nodes_2d] = 
-		CalcMesh2d(*Mesh(), boundaries, nodes, Extrusion());
+		CalcMesh2d(nodes);
 
 	/*auto [intEdges, bndEdges] = SeperateEdges(edges_2d);
 	const auto nbInteriors = (Standard_Integer)intEdges.size();

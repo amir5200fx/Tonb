@@ -253,6 +253,84 @@ tnbLib::MeshPost2d_OFTopology::RetrieveBoundaries(const MeshIO2d_FEA& theMeshIO)
 	return std::move(boundaries);
 }
 
+std::vector<tnbLib::MeshPost2d_OFTopology::Edge>
+tnbLib::MeshPost2d_OFTopology::RetrieveEdges() const
+{
+	auto boundaries = RetrieveBoundaries();
+	std::vector<Edge> edges;
+	edges.reserve(Interiors().size() + boundaries.size());
+	for (const auto& x : Interiors())
+	{
+		edges.push_back(x);
+	}
+	for (const auto& x : boundaries)
+	{
+		edges.push_back(x);
+	}
+	return std::move(edges);
+}
+
+std::vector<tnbLib::MeshPost2d_OFTopology::Edge> 
+tnbLib::MeshPost2d_OFTopology::RetrieveBoundaries() const
+{
+	std::vector<Edge> edges;
+	for (const auto& x : theBoundaries_)
+	{
+		for (const auto& e : x.second)
+		{
+			edges.push_back(e);
+		}
+	}
+	std::sort(edges.begin(), edges.end(), [](const Edge& e0, const Edge& e1) 
+		{return e0.Index() < e1.Index(); });
+	return std::move(edges);
+}
+
+std::map<Standard_Integer, std::vector<Standard_Integer>> 
+tnbLib::MeshPost2d_OFTopology::RetrieveElementToEdgesMap() const
+{
+	auto boundaries = RetrieveBoundaries();
+	std::map<Standard_Integer, std::vector<Standard_Integer>> elmToEdges;
+	for (const auto& x : theInteriors_)
+	{
+		auto owner = x.Owner();
+		{
+			auto iter = elmToEdges.find(owner);
+			if (iter IS_EQUAL elmToEdges.end())
+			{
+				elmToEdges.insert(std::make_pair(owner, std::vector<Standard_Integer>()));
+			}
+		}
+		elmToEdges.at(owner).push_back(x.Index());
+		auto neighbor = x.Neighbor();
+		if (NOT neighbor)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "contradictory data has been detected." << endl
+				<< abort(FatalError);
+		}
+		{
+			auto iter = elmToEdges.find(neighbor);
+			if (iter IS_EQUAL elmToEdges.end())
+			{
+				elmToEdges.insert(std::make_pair(neighbor, std::vector<Standard_Integer>()));
+			}
+			elmToEdges.at(neighbor).push_back(x.Index());
+		}	
+	}
+	for (const auto& x : boundaries)
+	{
+		auto owner = x.Owner();
+		auto iter = elmToEdges.find(owner);
+		if (iter IS_EQUAL elmToEdges.end())
+		{
+			elmToEdges.insert(std::make_pair(owner, std::vector<Standard_Integer>()));
+		}
+		elmToEdges.at(owner).push_back(x.Index());
+	}
+	return std::move(elmToEdges);
+}
+
 void tnbLib::MeshPost2d_OFTopology::Perform()
 {
 	if (NOT MeshIO())
