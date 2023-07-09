@@ -261,6 +261,11 @@ namespace tnbLib
 		const auto& Interiors() const { return theInteriors_; }
 		const auto& Boundaries() const { return theBoundaries_; }
 
+		TnbMeshPost_EXPORT std::vector<Edge> RetrieveEdges() const;
+		TnbMeshPost_EXPORT std::vector<Edge> RetrieveBoundaries() const;
+		TnbMeshPost_EXPORT std::map<Standard_Integer, std::vector<Standard_Integer>> 
+			RetrieveElementToEdgesMap() const;
+
 		TnbMeshPost_EXPORT void Perform();
 
 		void SetMeshIO(const std::shared_ptr<MeshIO2d_FEA>& theMeshIO) 

@@ -1,3 +1,4 @@
+#include <MeshPost2d_ConvertToOpenFOAM.hxx>
 #include <MeshPost2d_OFTopology.hxx>
 #include <MeshIO2d_FEA.hxx>
 #include <Global_File.hxx>
@@ -58,11 +59,11 @@ namespace tnbLib
 		auto topology = std::make_shared<MeshPost2d_OFTopology>();
 		topology->SetMeshIO(myMeshIO);
 		topology->Perform();
-		for (const auto& x : topology->Interiors())
+		/*for (const auto& x : topology->Interiors())
 		{
 			std::cout << "id: " << x.Index() << ", owner: " << x.Owner() << ", neighbor: " << x.Neighbor() << std::endl;
-		}
-		PAUSE;
+		}*/
+		/*PAUSE;
 		for (const auto& x : topology->Boundaries())
 		{
 			for (const auto& p : x.second)
@@ -70,7 +71,11 @@ namespace tnbLib
 				std::cout << "physic: " << x.first << ", id: " << p.Index() << ", owner: " << p.Owner() << ", neighbor: " << p.Neighbor() << std::endl;
 			}
 			
-		}
+		}*/
+		auto convertor = std::make_shared<MeshPost2d_ConvertToOpenFOAM>();
+		convertor->SetMesh(topology);
+		convertor->Perform();
+		convertor->Export();
 		TNB_PERFORMED_TAG;
 	}
 }
