@@ -2548,6 +2548,36 @@ tnbLib::Pln_Tools::RetrievePlanes
 	return std::move(planes);
 }
 
+std::vector<std::shared_ptr<tnbLib::Pln_Wire>>
+tnbLib::Pln_Tools::RetrieveWires
+(
+	const Cad2d_Plane& thePlane
+)
+{
+	std::vector<std::shared_ptr<Pln_Wire>> wires;
+	wires.reserve(1 + thePlane.InnerWires()->size());
+	Debug_Null_Pointer(thePlane.OuterWire());
+	wires.push_back(thePlane.OuterWire());
+	if (thePlane.InnerWires())
+	{
+		for (const auto& x : *thePlane.InnerWires())
+		{
+			wires.push_back(x);
+		}
+	}
+	return std::move(wires);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon> 
+tnbLib::Pln_Tools::RetrievePolygon
+(
+	const Pln_Wire& theWire
+)
+{
+	auto poly = theWire.Polygon();
+	return std::move(poly);
+}
+
 std::shared_ptr<tnbLib::Pln_Vertex> 
 tnbLib::Pln_Tools::NextNode
 (

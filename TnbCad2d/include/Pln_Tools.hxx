@@ -435,6 +435,12 @@ namespace tnbLib
 				const gp_Ax2& theAx
 			);
 
+		static TnbCad2d_EXPORT std::vector<std::shared_ptr<Pln_Wire>>
+			RetrieveWires(const Cad2d_Plane&);
+
+		static TnbCad2d_EXPORT std::shared_ptr<Entity2d_Polygon> 
+			RetrievePolygon(const Pln_Wire&);
+
 		// the node is on the edge [1/25/2022 Amir]
 		// - the function returns the next node on the edge
 		static TnbCad2d_EXPORT std::shared_ptr<Pln_Vertex> 
