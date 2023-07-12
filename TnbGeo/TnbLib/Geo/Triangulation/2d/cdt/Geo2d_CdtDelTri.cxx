@@ -13,15 +13,6 @@
 #include <CGAL/Triangulation_conformer_2.h>
 #include <CGAL/Polygon_2.h>
 
-struct FaceInfo2
-{
-	FaceInfo2() {}
-	int nesting_level;
-	bool in_domain() {
-		return nesting_level % 2 == 1;
-	}
-};
-
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 
 typedef CGAL::Triangulation_vertex_base_with_info_2<unsigned, K> Vb;
