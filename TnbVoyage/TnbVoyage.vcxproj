@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbVoyage_EXPORT_DEFINE;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Voyage\Entities\RefRoute;$(ProjectDir)TnbLib\Voyage\Entities\Edge;$(ProjectDir)TnbLib\Voyage\Entities\Node\3d;$(ProjectDir)TnbLib\Voyage\Entities\Node\2d;$(ProjectDir)TnbLib\Voyage\Entities\Node;$(ProjectDir)TnbLib\Voyage\Entities\Entity;$(ProjectDir)TnbLib\Voyage\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Voyage\Field\Wave;$(ProjectDir)TnbLib\Voyage\Field\Wind;$(ProjectDir)TnbLib\Voyage\Field\Current;$(ProjectDir)TnbLib\Voyage\Function\Cost\Crack;$(ProjectDir)TnbLib\Voyage\Function\Cost\Fatigue;$(ProjectDir)TnbLib\Voyage\Function\Cost\ETA;$(ProjectDir)TnbLib\Voyage\Function\Cost\MaxShipMotion;$(ProjectDir)TnbLib\Voyage\Function\Cost\FuelConsumption;$(ProjectDir)TnbLib\Voyage\Function\Cost;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Current\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Current;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wave\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wave;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wind\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wind;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Calm\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Calm;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Total;$(ProjectDir)TnbLib\Voyage\Function\Resistance;$(ProjectDir)TnbLib\Voyage\Function;$(ProjectDir)TnbLib\Voyage\Geometry\WaypointsDistb\DevFun;$(ProjectDir)TnbLib\Voyage\Geometry\WaypointsDistb;$(ProjectDir)TnbLib\Voyage\Geometry\MetricFun\Uniform;$(ProjectDir)TnbLib\Voyage\Geometry\MetricFun;$(ProjectDir)TnbLib\Voyage\Geometry\SizeFun\Uniform;$(ProjectDir)TnbLib\Voyage\Geometry\SizeFun;$(ProjectDir)TnbLib\Voyage\Geometry\Path\Straight;$(ProjectDir)TnbLib\Voyage\Geometry\Path\Curve;$(ProjectDir)TnbLib\Voyage\Geometry\Path;$(ProjectDir)TnbLib\Voyage\Geometry\Tools;$(ProjectDir)TnbLib\Voyage\Geometry;$(ProjectDir)TnbLib\Voyage\LongMap;$(ProjectDir)TnbLib\Voyage\Entities\Profile;$(ProjectDir)TnbLib\Voyage\Entities\Wave;$(ProjectDir)TnbLib\Voyage\Entities\Current;$(ProjectDir)TnbLib\Voyage\Entities\Wind;$(ProjectDir)TnbLib\Voyage\Entities\ShipCtrl;$(ProjectDir)TnbLib\Voyage\Entities\WptsGrid;$(ProjectDir)TnbLib\Voyage\Entities\RefRoute;$(ProjectDir)TnbLib\Voyage\Entities\Edge;$(ProjectDir)TnbLib\Voyage\Entities\Node\3d;$(ProjectDir)TnbLib\Voyage\Entities\Node\2d;$(ProjectDir)TnbLib\Voyage\Entities\Node;$(ProjectDir)TnbLib\Voyage\Entities\Entity;$(ProjectDir)TnbLib\Voyage\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -130,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);TnbVoyage_EXPORT_DEFINE;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Voyage\Entities\RefRoute;$(ProjectDir)TnbLib\Voyage\Entities\Edge;$(ProjectDir)TnbLib\Voyage\Entities\Node\3d;$(ProjectDir)TnbLib\Voyage\Entities\Node\2d;$(ProjectDir)TnbLib\Voyage\Entities\Node;$(ProjectDir)TnbLib\Voyage\Entities\Entity;$(ProjectDir)TnbLib\Voyage\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Voyage\Field\Wave;$(ProjectDir)TnbLib\Voyage\Field\Wind;$(ProjectDir)TnbLib\Voyage\Field\Current;$(ProjectDir)TnbLib\Voyage\Function\Cost\Crack;$(ProjectDir)TnbLib\Voyage\Function\Cost\Fatigue;$(ProjectDir)TnbLib\Voyage\Function\Cost\ETA;$(ProjectDir)TnbLib\Voyage\Function\Cost\MaxShipMotion;$(ProjectDir)TnbLib\Voyage\Function\Cost\FuelConsumption;$(ProjectDir)TnbLib\Voyage\Function\Cost;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Current\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Current;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wave\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wave;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wind\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Wind;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Calm\Profiled;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Calm;$(ProjectDir)TnbLib\Voyage\Function\Resistance\Total;$(ProjectDir)TnbLib\Voyage\Function\Resistance;$(ProjectDir)TnbLib\Voyage\Function;$(ProjectDir)TnbLib\Voyage\Geometry\WaypointsDistb\DevFun;$(ProjectDir)TnbLib\Voyage\Geometry\WaypointsDistb;$(ProjectDir)TnbLib\Voyage\Geometry\MetricFun\Uniform;$(ProjectDir)TnbLib\Voyage\Geometry\MetricFun;$(ProjectDir)TnbLib\Voyage\Geometry\SizeFun\Uniform;$(ProjectDir)TnbLib\Voyage\Geometry\SizeFun;$(ProjectDir)TnbLib\Voyage\Geometry\Path\Straight;$(ProjectDir)TnbLib\Voyage\Geometry\Path\Curve;$(ProjectDir)TnbLib\Voyage\Geometry\Path;$(ProjectDir)TnbLib\Voyage\Geometry\Tools;$(ProjectDir)TnbLib\Voyage\Geometry;$(ProjectDir)TnbLib\Voyage\LongMap;$(ProjectDir)TnbLib\Voyage\Entities\Profile;$(ProjectDir)TnbLib\Voyage\Entities\Wave;$(ProjectDir)TnbLib\Voyage\Entities\Current;$(ProjectDir)TnbLib\Voyage\Entities\Wind;$(ProjectDir)TnbLib\Voyage\Entities\ShipCtrl;$(ProjectDir)TnbLib\Voyage\Entities\WptsGrid;$(ProjectDir)TnbLib\Voyage\Entities\RefRoute;$(ProjectDir)TnbLib\Voyage\Entities\Edge;$(ProjectDir)TnbLib\Voyage\Entities\Node\3d;$(ProjectDir)TnbLib\Voyage\Entities\Node\2d;$(ProjectDir)TnbLib\Voyage\Entities\Node;$(ProjectDir)TnbLib\Voyage\Entities\Entity;$(ProjectDir)TnbLib\Voyage\module;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -142,12 +142,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\Voyage\Entities\Current\Voyage_Current.hxx" />
     <ClInclude Include="TnbLib\Voyage\Entities\Edge\Voyage_Edge.hxx" />
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx" />
     <ClInclude Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2d.hxx" />
     <ClInclude Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.hxx" />
     <ClInclude Include="TnbLib\Voyage\Entities\Node\Voyage_Node.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Entities\Profile\Voyage_Profile.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Entities\Profile\Voyage_ProfileI.hxx" />
     <ClInclude Include="TnbLib\Voyage\Entities\RefRoute\Voyage_RefRoute.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Entities\ShipCtrl\Voyage_ShipCtrl.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Entities\Wave\Voyage_Wave.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Entities\Wind\Voyage_Wind.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Entities\WptsGrid\Voyage_WptsGrid.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Field\Current\VoyageField_Current.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Field\Wave\VoyageField_Wave.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Field\Wind\VoyageField_Wind.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Function\Cost\VoyageFun_CostFunction.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\Calm\Profiled\VoyageFun_ProfiledCalmResist.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\Calm\VoyageFun_CalmResist.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\VoyageFun_Resistance.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\Wave\VoyageFun_WaveResist.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\MetricFun\VoyageGeo_MetricFun.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\Path\Curve\VoyageGeo_Curve.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\Path\Straight\VoyageGeo_Straight.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\Path\VoyageGeo_Path.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\SizeFun\Uniform\VoyageGeo_UniSizeFun.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\SizeFun\VoyageGeo_SizeFun.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\Tools\VoyageGeo_Tools.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Geometry\WaypointsDistb\VoyageGeo_WaypointsDistb.hxx" />
+    <ClInclude Include="TnbLib\Voyage\LongMap\Voyage_LongMap.hxx" />
     <ClInclude Include="TnbLib\Voyage\module\Voyage_Module.hxx" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +182,10 @@
     <ClCompile Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2dIO.cxx" />
     <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.cxx" />
     <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3dIO.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Geometry\Path\Curve\VoyageGeo_Curve.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Geometry\Path\Straight\VoyageGeo_Straight.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Geometry\Tools\VoyageGeo_Tools.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Geometry\WaypointsDistb\VoyageGeo_WaypointsDistb.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,13 +5,14 @@
 #include <Voyage_Entity.hxx>
 
 #include <array>
+#include <memory>
 
 namespace tnbLib
 {
 
 	// Forward Declarations [6/17/2023 Payvand]
 	class Voyage_Node;
-
+	class VoyageGeo_Curve;
 
 	class Voyage_Edge
 		: public Voyage_Entity
