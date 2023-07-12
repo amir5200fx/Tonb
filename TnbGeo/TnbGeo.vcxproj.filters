@@ -889,6 +889,15 @@
     <Filter Include="TnbLib\Geo\Entities\SPoint">
       <UniqueIdentifier>{5230be17-35fd-4c42-82d6-76a606186672}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Triangulation\2d\Polygon">
+      <UniqueIdentifier>{b973414d-3b9a-4484-9803-09c3bfc1f73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Lib">
+      <UniqueIdentifier>{221c0aec-2d7f-4fc1-8c61-5e90116c21c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Mesh\Lib\Triangle">
+      <UniqueIdentifier>{79316043-a803-4120-8d33-e97c3ddd4916}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2127,6 +2136,9 @@
     <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\2d\Geo2d_BasicApprxCurveFwd.hxx">
       <Filter>TnbLib\Geo\Approximation\Curve\Basic\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Triangulation\2d\Polygon\Geo2d_PolygonDelTri.hxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\Polygon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2686,6 +2698,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d\Geo2d_BasicApprxCurveAdaptor.cxx">
       <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Triangulation\2d\Polygon\Geo2d_PolygonDelTri_CGAL.cxx">
+      <Filter>TnbLib\Geo\Triangulation\2d\Polygon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
