@@ -104,9 +104,6 @@ namespace tnbLib
 
 		file::CheckExtension(name);
 
-		fileName fn(name + saveExt);
-		std::ofstream myFile(fn);
-
 		auto analyzerIO = std::make_shared<marineLib::io::AnalysisSections>();
 		analyzerIO->LoadModel(mySections);
 
@@ -122,17 +119,7 @@ namespace tnbLib
 			sections.push_back(std::move(section));
 		}
 
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << analyzerIO;
-
-		myFile.close();
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the file is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
+		file::SaveTo(analyzerIO, name + saveExt, verbose);
 	}
 
 	void saveTo()
@@ -246,8 +233,8 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
@@ -292,7 +279,7 @@ int main(int argc, char *argv[])
 			Info << " This application is aimed to analyze the sections." << endl;
 			Info << endl
 				<< " Function list:" << endl
-				<< " - loadModel(name [optional])" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1, 2" << endl

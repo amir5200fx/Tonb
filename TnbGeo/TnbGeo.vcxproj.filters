@@ -2121,6 +2121,12 @@
     <ClInclude Include="TnbLib\Geo\Entities\Triangulation\3d\Entity3d_SurfTriangulationFwd.hxx">
       <Filter>TnbLib\Geo\Entities\Triangulation\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\2d\Geo2d_BasicApprxCurve.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Approximation\Curve\Basic\2d\Geo2d_BasicApprxCurveFwd.hxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2674,6 +2680,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Entities\SPoint\Entity3d_SPntIO.cxx">
       <Filter>TnbLib\Geo\Entities\SPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\2d\Geo2d_BasicApprxCurve.cxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d\Geo2d_BasicApprxCurveAdaptor.cxx">
+      <Filter>TnbLib\Geo\Approximation\Curve\Basic\Adaptor\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,9 @@
 #include <CadModel_Box.hxx>
 
 #include <Pnt3d.hxx>
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
 #include <BRepPrimAPI_MakeBox.hxx>
 
 tnbLib::CadModel_Box::CadModel_Box

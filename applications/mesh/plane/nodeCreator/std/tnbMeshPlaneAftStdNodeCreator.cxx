@@ -30,7 +30,6 @@ namespace tnbLib
 		}
 
 		file::CheckExtension(name);
-
 		file::SaveTo(myNodeCreator, name + extension, verbose);
 	}
 

@@ -1265,6 +1265,9 @@
     <ClCompile Include="TnbLib\Hydrostatic\SolutionData\Analysis\Displacement\HydStatic_SolutionData_DisplAnalysisIO.cxx">
       <Filter>TnbLib\Hydrostatic\SolutionData\Analysis\Displacement</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Hydrostatic\Entities\Shape\HydStatic_Shape.cxx">
+      <Filter>TnbLib\Hydrostatic\Entities\Shape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

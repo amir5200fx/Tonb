@@ -100,6 +100,42 @@
     <Filter Include="TnbLib\Post\BoundaryLayer">
       <UniqueIdentifier>{50afec63-7468-4053-aef6-9f952916cbd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\2d">
+      <UniqueIdentifier>{f893a33d-e249-48c2-b8de-964f839cfd00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Convertor">
+      <UniqueIdentifier>{e47f89b6-6279-42de-97fc-81656f1caa1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Convertor\OpenFOAM">
+      <UniqueIdentifier>{29602629-4c0f-4f4b-b922-0ff008afba5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Convertor\OpenFOAM\2d">
+      <UniqueIdentifier>{373d13a5-7307-4129-a9a8-2741f04bb085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\Iso\2d">
+      <UniqueIdentifier>{5846f86f-2cf6-48cc-8425-539762d995d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d">
+      <UniqueIdentifier>{2a90e8ce-f526-4ecb-a96f-17ee0f297411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d\AdjEdges">
+      <UniqueIdentifier>{1736b483-ff0c-4ace-8d3d-65d0c13fdffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\2d\Iso">
+      <UniqueIdentifier>{b7900b41-4285-4fc1-bb33-060690619378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio">
+      <UniqueIdentifier>{d4bb23cd-29d9-42cd-9f02-a2796fd2f1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Tools">
+      <UniqueIdentifier>{22ac12ab-5afb-42e6-85c1-314bea8933fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Convertor\OpenFOAM\Topology">
+      <UniqueIdentifier>{ee983ee8-b022-4852-96ab-9482522d378a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Convertor\OpenFOAM\Topology\2d">
+      <UniqueIdentifier>{05e4605b-47b4-4fae-8b66-d7127432c14c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -183,11 +219,38 @@
     <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetricFwd.hxx">
       <Filter>TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\MeshPost2d_LaplacianSmoothing_AvgFun.hxx">
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d\MeshPost2d_LaplacianSmoothing_AvgFun.hxx">
       <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Iso</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\MeshPost2d_LaplacianSmoothing_AvgFunFwd.hxx">
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d\MeshPost2d_LaplacianSmoothing_AvgFunFwd.hxx">
       <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\2d\MeshPost2d_BoundaryLayer.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAM.hxx">
+      <Filter>TnbLib\Post\Convertor\OpenFOAM\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Iso\2d\MeshPost2d_LaplacianSmoothing.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\Iso\2d\MeshPost2d_LaplacianSmoothingFwd.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d\AdjEdges\MeshPost2d_LaplacianSmoothing_AdjEdges.hxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d\AdjEdges</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\2d\Iso\MeshPost2d_QualityMap.hxx">
+      <Filter>TnbLib\Post\Quality\2d\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio\MeshPost2d_QualityMap_Vlrms2Ratio.hxx">
+      <Filter>TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Quality\2d\Iso\MeshPost2d_QualityMapFwd.hxx">
+      <Filter>TnbLib\Post\Quality\2d\Iso</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Convertor\OpenFOAM\Topology\2d\MeshPost2d_OFTopology.hxx">
+      <Filter>TnbLib\Post\Convertor\OpenFOAM\Topology\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +280,30 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric\MeshPost2d_LaplacianSmoothingSurfaceUniMetric.cxx">
       <Filter>TnbLib\Post\Smoothing\Laplacian\Surface\UniMetric</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAM.cxx">
+      <Filter>TnbLib\Post\Convertor\OpenFOAM\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAM_IO.cxx">
+      <Filter>TnbLib\Post\Convertor\OpenFOAM\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAM_Mesh2d.cxx">
+      <Filter>TnbLib\Post\Convertor\OpenFOAM\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\2d\MeshPost2d_ConvertToOpenFOAMGraph.cxx">
+      <Filter>TnbLib\Post\Convertor\OpenFOAM\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\Iso\2d\MeshPost2d_LaplacianSmoothing.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d\AdjEdges\MeshPost2d_LaplacianSmoothing_AdjEdges.cxx">
+      <Filter>TnbLib\Post\Smoothing\Laplacian\avgFun\Iso\2d\AdjEdges</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio\MeshPost2d_QualityMap_Vlrms2Ratio.cxx">
+      <Filter>TnbLib\Post\Quality\2d\Iso\Vlrms2Ratio</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\Topology\2d\MeshPost2d_OFTopology.cxx">
+      <Filter>TnbLib\Post\Convertor\OpenFOAM\Topology\2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

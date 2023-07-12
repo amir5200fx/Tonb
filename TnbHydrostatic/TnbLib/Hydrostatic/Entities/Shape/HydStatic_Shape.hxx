@@ -35,7 +35,11 @@ namespace tnbLib
 
 	public:
 
+		static TnbHydStatic_EXPORT const std::string extension;
+
 		//- public functions and operators
+
+
 	};
 }
 

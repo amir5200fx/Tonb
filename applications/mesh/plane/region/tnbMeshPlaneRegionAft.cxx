@@ -1,4 +1,5 @@
 #include <Cad2d_Plane.hxx>
+#include <Cad_EntityManager.hxx>
 #include <Pln_Curve.hxx>
 #include <Pln_Wire.hxx>
 #include <Pln_Segment.hxx>
@@ -13,6 +14,7 @@
 #include <Aft2d_SolutionData.hxx>
 #include <Aft2d_SolutionDataAnIso.hxx>
 #include <Aft2d_Element.hxx>
+#include <Mesh_Physic.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -80,6 +82,96 @@ namespace tnbLib
 		saveTo(myFileName);
 	}
 
+	auto retrieveCurves(const Aft2d_RegionPlane& theRegion)
+	{
+		std::vector<std::shared_ptr<Aft2d_PlnWire>> wires;
+		theRegion.RetrieveWiresTo(wires);
+		std::map<int, std::shared_ptr<Mesh2d_PlnCurve>> curves;
+		for (const auto& w : wires)
+		{
+			for (const auto& x : w->Curves())
+			{
+				auto paired = std::make_pair(x->Index(), x);
+				if (NOT curves.insert(std::move(paired)).second)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "duplicate curve no. has been detected." << endl
+						<< " - id: " << x->Index() << endl
+						<< abort(FatalError);
+				}
+			}
+		}
+		return std::move(curves);
+	}
+
+	auto retrieveCurves(const Aft2d_RegionPlaneAnIso& theRegion)
+	{
+		std::vector<std::shared_ptr<Aft2d_PlnWireAnIso>> wires;
+		theRegion.RetrieveWiresTo(wires);
+		std::map<int, std::shared_ptr<Mesh2d_PlnCurveAnIso>> curves;
+		for (const auto& w : wires)
+		{
+			for (const auto& x : w->Curves())
+			{
+				auto paired = std::make_pair(x->Index(), x);
+				if (NOT curves.insert(std::move(paired)).second)
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "duplicate curve no. has been detected." << endl
+						<< " - id: " << x->Index() << endl
+						<< abort(FatalError);
+				}
+			}
+		}
+		return std::move(curves);
+	}
+
+	void setPhysics(const Cad2d_Plane& plane, const std::shared_ptr<Aft2d_RegionPlane>& theRegion)
+	{
+		auto curvesMap = retrieveCurves(*theRegion);
+		const auto& segments = plane.Segments();
+		for (const auto& x : segments->Blocks())
+		{
+			for (const auto& e : x.second->RetrieveEntities())
+			{
+				const auto& c = e->Curve();
+				auto iter = curvesMap.find(c->Index());
+				if (iter IS_EQUAL curvesMap.end())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "couldn't find the curve in the block." << endl
+						<< " id: " << c->Index() << endl
+						<< abort(FatalError);
+				}
+				auto physic = std::make_shared<Mesh_Physic>(0, x.first);
+				iter->second->SetPhysic(std::move(physic));
+			}
+		}
+	}
+
+	void setPhysics(const Cad2d_Plane& plane, const std::shared_ptr<Aft2d_RegionPlaneAnIso>& theRegion)
+	{
+		auto curvesMap = retrieveCurves(*theRegion);
+		const auto& segments = plane.Segments();
+		for (const auto& x : segments->Blocks())
+		{
+			for (const auto& e : x.second->RetrieveEntities())
+			{
+				const auto& c = e->Curve();
+				auto iter = curvesMap.find(c->Index());
+				if (iter IS_EQUAL curvesMap.end())
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "couldn't find the curve in the block." << endl
+						<< " id: " << c->Index() << endl
+						<< abort(FatalError);
+				}
+				auto physic = std::make_shared<Mesh_Physic>(0, x.first);
+				iter->second->SetPhysic(std::move(physic));
+			}
+		}
+	}
+
 	void execute()
 	{
 		if (NOT loadTag)
@@ -102,6 +194,7 @@ namespace tnbLib
 			Debug_Null_Pointer(soluData);
 
 			auto planeRegion = Aft2d_RegionPlane::MakePlane(soluData->Plane());
+			setPhysics(*soluData->Plane(), planeRegion);
 
 			soluData->SetRegion(std::move(planeRegion));
 		}
@@ -111,6 +204,7 @@ namespace tnbLib
 			Debug_Null_Pointer(soluData);
 
 			auto planeRegion = Aft2d_RegionPlaneAnIso::MakePlane(soluData->Plane());
+			setPhysics(*soluData->Plane(), planeRegion);
 
 			soluData->SetRegion(std::move(planeRegion));
 		}

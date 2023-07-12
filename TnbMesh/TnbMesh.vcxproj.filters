@@ -2251,6 +2251,21 @@
     <Filter Include="TnbLib\Base\Geom\Function\Metric\Surface\Conic">
       <UniqueIdentifier>{2d0bf81f-2ee4-4a19-a6e9-0c2934085f36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Boundary\2d\Uniform">
+      <UniqueIdentifier>{1159eaa2-4139-40ff-b942-eec59c0c548a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform">
+      <UniqueIdentifier>{feaa818d-2e93-4cb5-920c-09be92481085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info">
+      <UniqueIdentifier>{356f83dd-9b15-4939-8f16-2efb3b88bb45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\IO\2d">
+      <UniqueIdentifier>{003b721a-b1d4-4fd9-b5ed-9323387f122e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Physic">
+      <UniqueIdentifier>{04287951-cfc3-43e4-a405-feb010b9a978}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5433,6 +5448,60 @@
     <ClInclude Include="TnbLib\Base\Geom\Function\Metric\Surface\Cylinder\GeoMetricFun2d_Cylinder.hxx">
       <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Cylinder</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\BoundarySizeMap2d_UniformSegmentTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Geo2d_SegmentCloud.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Geo2d_SegmentCloudFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Geo2d_SegmentCloud_SamplesFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0\Geo2d_SegmentCloud_SamplesLev0.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0\Geo2d_SegmentCloud_SamplesLev0Fwd.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev0</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo2d_SegmentCloud_SamplesLev1.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1\Geo2d_SegmentCloud_SamplesLev1Fwd.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev1</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo2d_SegmentCloud_SamplesLev2.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2\Geo2d_SegmentCloud_SamplesLev2Fwd.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples\Lev2</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Approximate\2d\Mesh2d_ApproxCurve.hxx">
+      <Filter>TnbLib\Curve\Approximate\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Curve\Approximate\2d\Mesh2d_ApproxCurveFwd.hxx">
+      <Filter>TnbLib\Curve\Approximate\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Boundary\2d\Uniform\Mesh2d_UniformBoundarySizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\2d\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun2d_Background.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun2d_BackgroundFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Cloud\Segment\Samples\Geo2d_SegmentCloud_Samples.hxx">
+      <Filter>TnbLib\Base\Geom\Cloud\Segment\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\IO\2d\MeshIO2d_FEA.hxx">
+      <Filter>TnbLib\Base\IO\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Physic\Mesh_Physic.hxx">
+      <Filter>TnbLib\Base\Physic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7105,6 +7174,24 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Geom\Function\Metric\Surface\Cylinder\GeoMetricFun2d_CylinderIO.cxx">
       <Filter>TnbLib\Base\Geom\Function\Metric\Surface\Cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\BoundarySizeMap2d_UniformSegmentTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\BoundarySizeMap2d_UniformSegmentToolIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Boundary\2d\Uniform\Mesh2d_UniformBoundarySizeMapControl.cxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\2d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Boundary\2d\Uniform\Mesh2d_UniformBoundarySizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl\Boundary\2d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Geom\Function\Size\Background\GeoSizeFun2d_BackgroundIO.cxx">
+      <Filter>TnbLib\Base\Geom\Function\Size\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\IO\2d\MeshIO2d_FEA.cxx">
+      <Filter>TnbLib\Base\IO\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

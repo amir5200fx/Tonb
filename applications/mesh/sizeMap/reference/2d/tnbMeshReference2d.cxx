@@ -16,6 +16,7 @@ namespace tnbLib
 	static auto myRef = std::make_shared<Mesh2d_ReferenceValues>(myBaseSize, nullptr);
 
 	static const double DEFAULT_MIN_SIZE = 1.0E-6;
+	static const auto sub_directory = "region";
 
 	void checkFolder(const std::string& name)
 	{
@@ -34,34 +35,51 @@ namespace tnbLib
 		verbose = i;
 	}
 
-	void loadFile()
+	void loadRegion(const std::string& name)
 	{
-		checkFolder("region");
-
-		const auto currentPath = boost::filesystem::current_path();
-
-		boost::filesystem::current_path(currentPath.string() + R"(\region)");
-
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Entity2d_Box::extension).string();
-
 		file::CheckExtension(name);
-
-		auto myRegion = file::LoadFile<std::shared_ptr<Entity2d_Box>>(name + Entity2d_Box::extension, verbose);
-		if (NOT myRegion)
+		auto b = 
+			file::LoadFile<std::shared_ptr<Entity2d_Box>>
+			(name + Entity2d_Box::extension, verbose);
+		if (NOT b)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the region file is null!" << endl
+				<< "no object has been loaded." << endl
 				<< abort(FatalError);
 		}
-
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
-
-		myRef->SetRegion(std::move(myRegion));
-
+		myRef->SetRegion(std::move(b));
 		loadTag = true;
 	}
 
+	void loadRegion()
+	{
+		
+		auto b = 
+			file::LoadSingleFile<std::shared_ptr<Entity2d_Box>>
+			(sub_directory, verbose);
+		if (NOT b)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no object has been loaded." << endl
+				<< abort(FatalError);
+		}
+		myRef->SetRegion(std::move(b));
+		loadTag = true;
+	}
+
+	void loadFile()
+	{
+		if (file::IsDirectory(sub_directory))
+		{
+			loadRegion();
+		}
+		else
+		{
+			auto name = 
+				file::GetSingleFile(file::GetCurrentPath(), Entity2d_Box::extension).string();
+			loadRegion(name);
+		}
+	}
 
 	void saveTo(const std::string& name)
 	{

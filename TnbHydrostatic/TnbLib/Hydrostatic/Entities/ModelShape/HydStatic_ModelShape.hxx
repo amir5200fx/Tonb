@@ -58,6 +58,9 @@ namespace tnbLib
 
 	public:
 
+
+		static TnbHydStatic_EXPORT const std::string extension;
+
 		//- default constructor
 
 		HydStatic_ModelShape()

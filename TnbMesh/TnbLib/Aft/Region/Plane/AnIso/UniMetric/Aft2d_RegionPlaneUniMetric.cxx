@@ -31,13 +31,15 @@ tnbLib::Aft2d_RegionPlaneUniMetric::MakeMeshWire<tnbLib::Pln_Wire>
 		if (curve->IsGap())
 		{
 			auto newCurve = std::make_shared<Cad2d_PlnGapCurveUniMetric>(curve);
+			Debug_Null_Pointer(newCurve);
+			newCurve->SetIndex(curve->Index());
 			curves.push_back(std::move(newCurve));
 		}
 		else
 		{
 			auto newCurve = std::make_shared<Aft2d_PlnCurveUniMetric>(curve);
 			Debug_Null_Pointer(newCurve);
-
+			newCurve->SetIndex(curve->Index());
 			newCurve->SetSense(x->Sense());
 
 			curves.push_back(std::move(newCurve));

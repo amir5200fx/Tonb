@@ -500,8 +500,8 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
@@ -552,7 +552,7 @@ int main(int argc, char *argv[])
 			Info << " This application is aimed to retrieve the sections from the shape." << endl;
 			Info << endl
 				<< " Function list:" << endl
-				<< " - loadModel(name [optional])" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " - setClipPerc(double);         - the value of the clip must be between 0 and 0.3" << endl

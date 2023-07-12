@@ -10,6 +10,7 @@
 #include <Marine_WaterLib.hxx>
 #include <Marine_Models.hxx>
 #include <Marine_BodyTools.hxx>
+#include <Global_File.hxx>
 #include <OFstream.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -21,7 +22,7 @@ namespace tnbLib
 	typedef std::shared_ptr<Marine_Domain> domain_t;
 	typedef std::shared_ptr<hydStcLib::SolutionData_Coeffs> soluData_t;
 
-	static unsigned short verbose(0);
+	TNB_STANDARD_LOAD_SAVE_OBJECTS("solution");
 
 	static soluData_t mySolutionData;
 
@@ -69,26 +70,20 @@ namespace tnbLib
 		}
 	}
 
-	void loadModel(const std::string& name)
+	void loadFile(const std::string& name)
 	{
-		fileName fn(name);
-		if (verbose)
-		{
-			Info << endl;
-			Info << " loading the solution data from, " << fn << endl;
-			Info << endl;
-		}
-		std::ifstream myFile(fn);
-
-		TNB_iARCH_FILE_TYPE ar(myFile);
-
-		ar >> mySolutionData;
+		file::CheckExtension(name);
+		mySolutionData =
+			file::LoadFile<soluData_t>
+			(name + hydStcLib::SolutionData_Coeffs::extension, verbose);
 		if (NOT mySolutionData)
 		{
 			FatalErrorIn(FunctionSIG)
-				<< " the loaded model is null" << endl
+				<< "no object has been loaded." << endl
 				<< abort(FatalError);
 		}
+		loadTag = true;
+		myFileName = name;
 
 		if (NOT mySolutionData->IsUpdated(hydStcLib::SolutionData_Coeffs::solutionOrder::wave))
 		{
@@ -96,18 +91,28 @@ namespace tnbLib
 				<< " the solution data is not updated" << endl
 				<< abort(FatalError);
 		}
+	}
 
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the model is loaded, from: " << name << ", successfully!" << endl;
-			Info << endl;
-		}
-
+	void loadFile()
+	{
+		auto name =
+			file::GetSingleFile
+			(
+				boost::filesystem::current_path(),
+				hydStcLib::SolutionData_Coeffs::extension
+			).string();
+		loadFile(name);
 	}
 
 	void saveTo(const std::string& name)
 	{
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "no file has been loaded." << endl
+				<< abort(FatalError);
+		}
+
 		auto tris = std::make_shared<Entity3d_Triangulation>();
 		const auto& wave = mySolutionData->Wave();
 		if (NOT wave)
@@ -192,22 +197,19 @@ namespace tnbLib
 			pts.push_back(x);
 		}
 
-		fileName fn(name);
-		std::ofstream myFile(fn);
-
-		TNB_oARCH_FILE_TYPE ar(myFile);
-		ar << tris;
-
-		myFile.close();
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the mesh is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
+		file::CheckExtension(name);
+		file::SaveTo
+		(
+			tris,
+			name + Entity3d_Triangulation::extension,
+			verbose
+		);
 	}
 
+	void saveTo()
+	{
+		saveTo(myFileName);
+	}
 }
 
 #ifdef DebugInfo
@@ -223,8 +225,11 @@ namespace tnbLib
 
 	void setGlobals(const module_t& mod)
 	{
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadSoluData");
+		//- io functions
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadFile(); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
 
 		mod->add(chaiscript::fun([](size_t t)->void {verbose = t; }), "setVerbose");
 
@@ -262,7 +267,25 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << "this is help" << endl;
+			Info << " This application is aimed to view a wave." << endl << endl
+
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadFile(name [optional])" << endl
+				<< " - saveTo(name [optional])" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setLevel(string); string = 'low', 'medium', 'high', 'custom'" << endl
+				<< " - setCustomLevel(nx, ny); default values: Nx = " << Nx << ", Ny = " << Ny << endl
+				<< " - setVerbose(unsigned int); Levels: 0, 1" << endl << endl
+
+				<< " # Operators:" << endl
+
+				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -274,12 +297,12 @@ int main(int argc, char *argv[])
 
 			chai.add(mod);
 
-			std::string address = ".\\system\\hullDataWaveViewer";
-			fileName myFileName(address);
-
 			try
 			{
+				fileName myFileName(file::GetSystemFile("tnbHydstcWaveViewer"));
+
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -294,6 +317,12 @@ int main(int argc, char *argv[])
 				Info << x.what() << endl;
 			}
 		}
+		else
+		{
+			Info << " - No valid command is entered" << endl
+				<< " - For more information use '--help' command" << endl;
+			FatalError.exit();
+		}
 	}
 	else
 	{
@@ -301,5 +330,5 @@ int main(int argc, char *argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
-
+	return 1;
 }

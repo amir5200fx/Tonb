@@ -148,6 +148,11 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Global\global\Global_Done.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_File.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_FileI.hxx" />
+    <None Include="TnbLib\Global\global\Global_FileM.hxx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugNoCopy|x64'">false</ExcludedFromBuild>
+    </None>
     <ClInclude Include="TnbLib\Global\global\Global_Indexed.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Macros.hxx" />
     <ClInclude Include="TnbLib\Global\global\Global_Message.hxx" />

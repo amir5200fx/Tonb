@@ -1,3 +1,7 @@
+#include <MeshPost2d_LaplacianSmoothing.hxx>
+#include <MeshPost_LaplacianSmoothing_Info.hxx>
+#include <MeshPost2d_LaplacianSmoothing_AdjEdges.hxx>
+#include <MeshPost2d_QualityMap_Vlrms2Ratio.hxx>
 #include <Aft2d_BoundaryOfPlane.hxx>
 #include <Aft2d_BoundaryOfPlaneAnIso.hxx>
 #include <Aft2d_SolutionData.hxx>
@@ -21,6 +25,7 @@ namespace tnbLib
 {
 
 	static const std::string extension = Aft2d_SolutionDataBase::extension;
+	static auto myLaplacianSmoothInfo = std::make_shared<MeshPost_LaplacianSmoothing_Info>();
 
 	static unsigned short verbose = 0;
 	static bool loadTag = false;
@@ -92,6 +97,11 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+		if (verbose)
+		{
+			MeshPost2d_LaplacianSmoothing::verbose = verbose;
+		}
+
 		if (mySoluData->IsIso())
 		{
 			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
@@ -137,8 +147,6 @@ namespace tnbLib
 				mesher->Perform();
 			}
 
-
-
 			const auto& elemMap = mesher->RetrieveElements();
 			std::vector<std::shared_ptr<Aft2d_Element>> elements;
 			elements.reserve(elemMap.size());
@@ -146,6 +154,23 @@ namespace tnbLib
 			{
 				elements.push_back(x.second);
 			}
+
+			auto nodesRef = Aft_Tools::RetrieveNodes(elements);
+			auto nodes = std::make_shared<std::vector<std::shared_ptr<Aft2d_Node>>>(std::move(nodesRef));
+
+			auto avgFun = std::make_shared<MeshPost2d_LaplacianSmoothing_AdjEdges>();
+			avgFun->SetMetrics(soluData->Metric());
+
+			auto qualityFun = std::make_shared<MeshPost2d_QualityMap_Vlrms2Ratio>();
+			qualityFun->SetMetrics(soluData->Metric());
+
+			auto smoothingAlg = std::make_shared<MeshPost2d_LaplacianSmoothing>();
+			smoothingAlg->SetAvgFun(avgFun);
+			smoothingAlg->SetQualityFun(qualityFun);
+			smoothingAlg->SetInfo(myLaplacianSmoothInfo);
+			smoothingAlg->SetNodes(nodes);
+
+			smoothingAlg->Perform();
 
 			soluData->SetElements(std::move(elements));
 
