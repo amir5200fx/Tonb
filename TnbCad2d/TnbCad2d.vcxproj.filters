@@ -484,6 +484,9 @@
     <Filter Include="TnbLib\Cad2d\Entities\GapCurve">
       <UniqueIdentifier>{afe6f991-1f46-430e-b08a-9550009000a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Cad2d\Approximate">
+      <UniqueIdentifier>{db6c9afc-ff13-4071-b48e-2d8be4fe8234}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Cad2d\Entities\Curve\Info\Pln_CurveI.hxx">
