@@ -26,11 +26,11 @@ void tnbLib::Mesh2d_UniformBoundarySizeMapControl::CreateSizeMap
 (
 	const word& theName,
 	const std::shared_ptr<Cad2d_Plane>& theGeometry,
-	const std::shared_ptr<Geo2d_SegmentCloud>& theCloud
+	const std::shared_ptr<BoundarySizeMap2d_UniformSegmentTool_Info>& theInfo
 )
 {
 	auto sizeMapTool =
 		std::make_shared<BoundarySizeMap2d_UniformSegmentTool>
-		(References(), Domain(), theCloud, theGeometry);
+		(References(), Domain(), Cloud(), theGeometry, theInfo);
 	this->Import(theName, sizeMapTool);
 }

@@ -23,10 +23,10 @@ void tnbLib::Mesh3d_UniformBoundarySizeMapControl::CreateSizeMap
 (
 	const word & theName,
 	const std::shared_ptr<Cad_TModel>& theGeometry,
-	const std::shared_ptr<Geo3d_PatchCloud>& theCloud,
 	const std::shared_ptr<BoundarySizeMap3d_UniformFaceTool_Info>& theInfo
 )
 {
-	auto sizeMapTool = std::make_shared<BoundarySizeMap3d_UniformFaceTool>(References(), Domain(), theCloud, theGeometry, theInfo);
+	auto sizeMapTool = std::make_shared<BoundarySizeMap3d_UniformFaceTool>
+		(References(), Domain(), Cloud(), theGeometry, theInfo);
 	this->Import(theName, sizeMapTool);
 }

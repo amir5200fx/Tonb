@@ -10,6 +10,7 @@ namespace tnbLib
 
 	// Forward Declarations [6/23/2023 Payvand]
 	class BoundarySizeMap2d_UniformSegmentTool;
+	class BoundarySizeMap2d_UniformSegmentTool_Info;
 
 	class Mesh2d_UniformBoundarySizeMapControl
 		: public Mesh2d_BoundarySizeMapControl
@@ -58,7 +59,7 @@ namespace tnbLib
 		(
 			const word& theName,
 			const std::shared_ptr<Cad2d_Plane>& theGeometry,
-			const std::shared_ptr<Geo2d_SegmentCloud>& theCloud
+			const std::shared_ptr<BoundarySizeMap2d_UniformSegmentTool_Info>& theInfo
 		);
 
 	};

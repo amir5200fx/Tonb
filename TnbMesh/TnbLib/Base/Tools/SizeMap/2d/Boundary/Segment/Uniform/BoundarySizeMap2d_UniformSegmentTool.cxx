@@ -1,5 +1,6 @@
 #include <BoundarySizeMap2d_UniformSegmentTool.hxx>
 
+#include <BoundarySizeMap2d_UniformSegmentTool_Info.hxx>
 #include <Mesh_SetSourcesNode.hxx>
 #include <Mesh_ApproxCurveInfo.hxx>
 #include <Mesh2d_ApproxCurve.hxx>
@@ -21,45 +22,6 @@
 #include <Global_Timer.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
-
-std::shared_ptr<tnbLib::Geo_BasicApprxCurve_Info> tnbLib::BoundarySizeMap2d_UniformSegmentTool::DEFAULT_INFO =
-std::make_shared<tnbLib::Geo_BasicApprxCurve_Info>();
-
-Standard_Boolean tnbLib::BoundarySizeMap2d_UniformSegmentTool::POST_BALANCE = Standard_True;
-Standard_Integer tnbLib::BoundarySizeMap2d_UniformSegmentTool::DEFAULT_BUCKET_SIZE = 4;
-Standard_Integer tnbLib::BoundarySizeMap2d_UniformSegmentTool::DEFAULT_UNBALANCING = 2;
-
-namespace tnbLib
-{
-
-	class BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSetting
-	{
-
-		/*Private Data*/
-
-	public:
-
-		// default constructor [8/25/2022 Amir]
-
-		BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSetting()
-		{
-			SetInfo();
-		}
-
-		static void SetInfo();
-	};
-}
-
-void tnbLib::BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSetting::SetInfo()
-{
-	const auto& info = BoundarySizeMap2d_UniformSegmentTool::DEFAULT_INFO;
-	info->SetInitNbSubdivision(4);
-	info->SetMaxNbSubdivision(8);
-	info->SetNbSamples(5);
-}
-
-static const tnbLib::BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSetting
-BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSettingObj;
 
 namespace tnbLib
 {
@@ -249,22 +211,22 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 
 	const auto mergCrit = 1.0E-5 * expB.Diameter();
 
-	ApproxInfo()->SetApprox(2.0 * elemSize);
-	ApproxInfo()->SetMinSize(1.9 * elemSize);
-	ApproxInfo()->SetInitNbSubdivision(4);
+	ApproxInfo()->ApproxInfo()->SetApprox(2.0 * elemSize);
+	ApproxInfo()->ApproxInfo()->SetMinSize(1.9 * elemSize);
+	ApproxInfo()->ApproxInfo()->SetInitNbSubdivision(4);
 
 	auto approxInfo = std::make_shared<Mesh_ApproxCurveInfo>();
 	approxInfo->SetMinSize(2.0 * elemSize);
 	approxInfo->SetTargetSize(1.95 * elemSize);
-	approxInfo->SetNbSamples(ApproxInfo()->NbSamples());
+	approxInfo->SetNbSamples(ApproxInfo()->ApproxInfo()->NbSamples());
 	approxInfo->SetMinNbSubdivisions(4);
 	approxInfo->SetMaxNbSubdivisions(10);
 
 	Geo2d_BalPrTree<std::shared_ptr<sourceNode>> engine;
-	engine.SetMaxUnbalancing(UnBalancing());
+	engine.SetMaxUnbalancing(ApproxInfo()->UnBalancing());
 	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
 	engine.SetGeometryRegion(expB);
-	engine.BUCKET_SIZE = 4;
+	engine.BUCKET_SIZE = ApproxInfo()->BucketSize();
 
 	Standard_Integer nbSources = 0;
 
@@ -350,7 +312,7 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool::Perform()
 			<< " - the space is approximated in: " << global_time_duration << " ms." << endl;
 	}
 
-	if (PostBalance())
+	if (ApproxInfo()->PostBalance())
 	{
 		{
 			Global_Timer timer;

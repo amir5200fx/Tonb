@@ -2272,6 +2272,9 @@
     <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Info">
       <UniqueIdentifier>{0fd71b69-68c7-42ea-a05a-16685a450a0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\SizeMapControl\Volumetric\2d\Uniform">
+      <UniqueIdentifier>{fd0c64ce-50b1-425c-9bb4-63f2b578fd34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5514,6 +5517,12 @@
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Info\Mesh2d_VolumeSizeMapTool_Info.hxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\SizeMapControl\Volumetric\2d\Uniform\Mesh2d_UniformVolumetricSizeMapControl.hxx">
+      <Filter>TnbLib\SizeMapControl\Volumetric\2d\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info\BoundarySizeMap2d_UniformSegmentTool_Info.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7210,6 +7219,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Info\Mesh2d_VolumeSizeMapTool_Info.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Volumetric\2d\Uniform\Mesh2d_UniformVolumetricSizeMapControl.cxx">
+      <Filter>TnbLib\SizeMapControl\Volumetric\2d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\Volumetric\2d\Uniform\Mesh2d_UniformVolumetricSizeMapControlIO.cxx">
+      <Filter>TnbLib\SizeMapControl\Volumetric\2d\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info\BoundarySizeMap2d_UniformSegmentTool_InfoIO.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info\BoundarySizeMap2d_UniformSegmentTool_Info.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

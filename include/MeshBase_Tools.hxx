@@ -92,6 +92,14 @@ namespace tnbLib
 
 		static TnbMesh_EXPORT void SetSourcesToMeshNearestPoint
 		(
+			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt2d, Standard_Real>>>& theSources,
+			const Standard_Real theBase,
+			const Standard_Real theGrowthRate,
+			GeoMesh2d_SingleBackground& theMesh
+		);
+
+		static TnbMesh_EXPORT void SetSourcesToMeshNearestPoint
+		(
 			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt3d, Standard_Real>>>& theSources,
 			const Standard_Real theBase,
 			const Standard_Real theGrowthRate,

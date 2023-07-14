@@ -1,0 +1,3 @@
+#include <Mesh2d_UniformVolumetricSizeMapControl.hxx>
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::Mesh2d_UniformVolumetricSizeMapControl);

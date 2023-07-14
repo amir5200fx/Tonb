@@ -17,6 +17,8 @@ namespace tnbLib
 		typedef Mesh_SizeMapControl<GeomType> base;
 		using base::sizeMapTool;
 		using base::meshRefValuesType;
+		using base::boxType;
+		using base::cloudType;
 
 	private:
 
@@ -36,10 +38,6 @@ namespace tnbLib
 	protected:
 
 
-		
-
-	public:
-
 		//- default constructor
 		Mesh_VolumetricSizeMapControl()
 		{}
@@ -49,11 +47,16 @@ namespace tnbLib
 
 		Mesh_VolumetricSizeMapControl
 		(
-			const std::shared_ptr<GeomType>& theGeometry,
-			const std::shared_ptr<meshRefValuesType>& theRef
+			const std::shared_ptr<meshRefValuesType>& theRef,
+			const std::shared_ptr<boxType>& theDomain,
+			const std::shared_ptr<cloudType>& theCloud
 		)
-			: base(theGeometry, theRef)
+			: base(theRef, theDomain, theCloud)
 		{}
+
+	public:
+
+		
 
 
 		//- public functions and operators
