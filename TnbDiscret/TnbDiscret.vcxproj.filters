@@ -52,6 +52,9 @@
     <Filter Include="TnbLib\Discret\Surface\Fun\Size\Adaptive">
       <UniqueIdentifier>{1afc9b93-af4c-45df-99ba-0233e495db53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Discret\Wire">
+      <UniqueIdentifier>{5f8ede7f-5cc3-4984-85b6-78c9e0b01938}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.hxx">
@@ -99,6 +102,21 @@
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.hxx">
       <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Wire\Discret2d_Wire.hxx">
+      <Filter>TnbLib\Discret\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_PlnCurve_UniLengthFun.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_PlnCurve_LengthFun.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Discret2d_PlnCurve_Function.hxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Discret2d_PlnCurve.hxx">
+      <Filter>TnbLib\Discret\Curve\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.cxx">
@@ -133,6 +151,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.cxx">
       <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Wire\Discret2d_Wire.cxx">
+      <Filter>TnbLib\Discret\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_PlnCurve_UniLengthFun.cxx">
+      <Filter>TnbLib\Discret\Curve\2d\Fun\Length\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Discret2d_PlnCurve.cxx">
+      <Filter>TnbLib\Discret\Curve\2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

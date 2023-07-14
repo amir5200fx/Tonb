@@ -86,7 +86,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Adaptive;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Uniform;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size;$(ProjectDir)TnbLib\Discret\Surface\Fun;$(ProjectDir)TnbLib\Discret\Surface\Info;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Outer;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Boundary;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Inner;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Internal;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Bucket;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Object;$(ProjectDir)TnbLib\Discret\Surface\QuadTree;$(ProjectDir)TnbLib\Discret\Surface;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Adaptive;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Uniform;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun;$(ProjectDir)TnbLib\Discret\Curve\2d;$(ProjectDir)TnbLib\Discret\Curve\Samples\Uniform;$(ProjectDir)TnbLib\Discret\Curve\Samples;$(ProjectDir)TnbLib\Discret\Curve\Info;$(ProjectDir)TnbLib\Discret\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Discret\Wire;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Adaptive;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Uniform;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size;$(ProjectDir)TnbLib\Discret\Surface\Fun;$(ProjectDir)TnbLib\Discret\Surface\Info;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Outer;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Boundary;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Inner;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Internal;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Bucket;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Object;$(ProjectDir)TnbLib\Discret\Surface\QuadTree;$(ProjectDir)TnbLib\Discret\Surface;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Adaptive;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Uniform;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun;$(ProjectDir)TnbLib\Discret\Curve\2d;$(ProjectDir)TnbLib\Discret\Curve\Samples\Uniform;$(ProjectDir)TnbLib\Discret\Curve\Samples;$(ProjectDir)TnbLib\Discret\Curve\Info;$(ProjectDir)TnbLib\Discret\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbDiscret_EXPORT_DEFINE;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -116,7 +116,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Adaptive;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Uniform;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size;$(ProjectDir)TnbLib\Discret\Surface\Fun;$(ProjectDir)TnbLib\Discret\Surface\Info;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Outer;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Boundary;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Inner;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Internal;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Bucket;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Object;$(ProjectDir)TnbLib\Discret\Surface\QuadTree;$(ProjectDir)TnbLib\Discret\Surface;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Adaptive;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Uniform;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun;$(ProjectDir)TnbLib\Discret\Curve\2d;$(ProjectDir)TnbLib\Discret\Curve\Samples\Uniform;$(ProjectDir)TnbLib\Discret\Curve\Samples;$(ProjectDir)TnbLib\Discret\Curve\Info;$(ProjectDir)TnbLib\Discret\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Discret\Wire;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Adaptive;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size\Uniform;$(ProjectDir)TnbLib\Discret\Surface\Fun\Size;$(ProjectDir)TnbLib\Discret\Surface\Fun;$(ProjectDir)TnbLib\Discret\Surface\Info;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Outer;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Boundary;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Leaf\Inner;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node\Internal;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Node;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Bucket;$(ProjectDir)TnbLib\Discret\Surface\QuadTree\Object;$(ProjectDir)TnbLib\Discret\Surface\QuadTree;$(ProjectDir)TnbLib\Discret\Surface;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Adaptive;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length\Uniform;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun\Length;$(ProjectDir)TnbLib\Discret\Curve\2d\Fun;$(ProjectDir)TnbLib\Discret\Curve\2d;$(ProjectDir)TnbLib\Discret\Curve\Samples\Uniform;$(ProjectDir)TnbLib\Discret\Curve\Samples;$(ProjectDir)TnbLib\Discret\Curve\Info;$(ProjectDir)TnbLib\Discret\module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>TnbDiscret_EXPORT_DEFINE;CGAL_HEADER_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -150,11 +150,15 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.hxx" />
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Discret2d_PlnCurve.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Discret2d_Curve_Function.hxx" />
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Discret2d_PlnCurve_Function.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_CurveOnSurface_LengthFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_Curve_LengthFun.hxx" />
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Discret2d_PlnCurve_LengthFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_Curve_UniLengthFun.hxx" />
+    <ClInclude Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_PlnCurve_UniLengthFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\Info\Discret_CurveInfo.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\Samples\Discret_Curve_Samples.hxx" />
     <ClInclude Include="TnbLib\Discret\Curve\Samples\Uniform\Discret_Curve_UniformSamples.hxx" />
@@ -164,11 +168,14 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Discret\Surface\Fun\Size\Discret3d_Surface_SizeFunction.hxx" />
     <ClInclude Include="TnbLib\Discret\Surface\Fun\Size\Uniform\Discret3d_Surface_UniformSizeFun.hxx" />
     <ClInclude Include="TnbLib\Discret\Surface\Info\Discret3d_SurfaceInfo.hxx" />
+    <ClInclude Include="TnbLib\Discret\Wire\Discret2d_Wire.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Discret\Curve\2d\Discret2d_Curve.cxx" />
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Discret2d_PlnCurve.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_CurveOnSurface_UniLengthFun.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_Curve_UniLengthFun.cxx" />
+    <ClCompile Include="TnbLib\Discret\Curve\2d\Fun\Length\Uniform\Discret2d_PlnCurve_UniLengthFun.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\Info\Discret_CurveInfo.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\Samples\Uniform\Discret_Curve_UniformSamples.cxx" />
     <ClCompile Include="TnbLib\Discret\Curve\Samples\Uniform\Discret_Curve_UniformSamplesIO.cxx" />
@@ -177,6 +184,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Discret\Surface\Fun\Size\Uniform\Discret3d_Surface_UniformSizeFun.cxx" />
     <ClCompile Include="TnbLib\Discret\Surface\Fun\Size\Uniform\Discret3d_Surface_UniformSizeFunIO.cxx" />
     <ClCompile Include="TnbLib\Discret\Surface\Info\Discret3d_SurfaceInfo.cxx" />
+    <ClCompile Include="TnbLib\Discret\Wire\Discret2d_Wire.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">
