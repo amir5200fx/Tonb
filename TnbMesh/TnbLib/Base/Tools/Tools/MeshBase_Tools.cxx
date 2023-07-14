@@ -282,6 +282,94 @@ namespace tnbLib
 			}
 			return std::move(nearest);
 		}
+
+		static std::shared_ptr<Mesh2d_Node>
+			RetrieveClosestNode
+			(
+				const std::tuple
+				<
+				std::shared_ptr<Mesh2d_Node>,
+				std::shared_ptr<Mesh2d_Node>,
+				std::shared_ptr<Mesh2d_Node>
+				>& theNodes,
+				const Pnt2d& theCoord
+			)
+		{
+			auto [n0, n1, n2] = theNodes;
+			Standard_Real dis = theCoord.SquareDistance(n0->Coord());
+			auto nearest = std::move(n0);
+
+			const auto d1 = theCoord.SquareDistance(n1->Coord());
+			if (d1 < dis)
+			{
+				dis = d1;
+				nearest = std::move(n1);
+			}
+			const auto d2 = theCoord.SquareDistance(n2->Coord());
+			if (d2 < dis)
+			{
+				dis = d2;
+				nearest = std::move(n2);
+			}
+			return std::move(nearest);
+		}
+	}
+}
+
+void tnbLib::MeshBase_Tools::SetSourcesToMeshNearestPoint
+(
+	const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt2d, Standard_Real>>>& theSources,
+	const Standard_Real theBase,
+	const Standard_Real theGrowthRate,
+	GeoMesh2d_SingleBackground& theMesh
+)
+{
+	const auto& mesh = *theMesh.Mesh();
+	if (mesh.Elements().empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the element list of the background mesh is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	auto meshNodes = RetrieveNodes(mesh.Elements());
+	auto& sources = theMesh.Sources();
+	sources.resize(meshNodes.size(), theBase);
+
+	auto start = mesh.Elements().at(0);
+	for (const auto& x : theSources)
+	{
+		const auto current = mesh.TriangleLocation(start, x->Coord());
+		if (NOT current)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the point is outside of the mesh!" << endl
+				<< " - domain's of the mesh: " << theMesh.BoundingBox() << endl
+				<< " - coordinates of the point: " << x->Coord() << endl
+				<< abort(FatalError);
+		}
+		start = current;
+
+		auto nodes = current->Nodes();
+		auto nearest = meshLib::RetrieveClosestNode(nodes, x->Coord());
+		auto neighbors = RetrieveAdjacentNodes(nearest);
+
+		auto ho = sources.at(Index_Of(nearest->Index()));
+		for (const auto& ni : neighbors)
+		{
+			Debug_Null_Pointer(ni);
+			auto id = Index_Of(ni->Index());
+
+			auto dx = nearest->Coord().Distance(ni->Coord());
+			auto val = std::min(theBase, ho + theGrowthRate * dx);
+			if (val < ho) sources.at(id) = val;
+		}
+		{
+			auto id = Index_Of(nearest->Index());
+
+			auto h = sources.at(id);
+			if (x->H() < h) sources.at(id) = x->H();
+		}
 	}
 }
 

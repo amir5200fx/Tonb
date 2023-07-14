@@ -2266,6 +2266,12 @@
     <Filter Include="TnbLib\Base\Physic">
       <UniqueIdentifier>{04287951-cfc3-43e4-a405-feb010b9a978}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Volume">
+      <UniqueIdentifier>{8bcd211d-c945-4b6a-8feb-fb39cf3d4dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Info">
+      <UniqueIdentifier>{0fd71b69-68c7-42ea-a05a-16685a450a0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5502,6 +5508,12 @@
     <ClInclude Include="TnbLib\Base\Physic\Mesh_Physic.hxx">
       <Filter>TnbLib\Base\Physic</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapTool.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Info\Mesh2d_VolumeSizeMapTool_Info.hxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7192,6 +7204,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\IO\2d\MeshIO2d_FEA.cxx">
       <Filter>TnbLib\Base\IO\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapTool.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Info\Mesh2d_VolumeSizeMapTool_Info.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
