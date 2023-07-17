@@ -145,6 +145,9 @@
     <Filter Include="TnbLib\Voyage\Geometry\Tools">
       <UniqueIdentifier>{042f126a-e602-4306-b04e-68fb65d8cfb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Weather">
+      <UniqueIdentifier>{305c8a56-8a45-4044-863b-2951bdbcbf01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -240,6 +243,9 @@
     <ClInclude Include="TnbLib\Voyage\Geometry\Tools\VoyageGeo_Tools.hxx">
       <Filter>TnbLib\Voyage\Geometry\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Weather\Voyage_Weather.hxx">
+      <Filter>TnbLib\Voyage\Entities\Weather</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -274,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Geometry\Tools\VoyageGeo_Tools.cxx">
       <Filter>TnbLib\Voyage\Geometry\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Weather\Voyage_WeatherIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Weather</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

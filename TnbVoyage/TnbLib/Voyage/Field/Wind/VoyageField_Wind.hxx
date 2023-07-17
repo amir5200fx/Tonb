@@ -26,7 +26,7 @@ namespace tnbLib
 
 		// Public functions and operators [7/11/2023 Payvand]
 
-		virtual Voyage_Wind Value(const Pnt2d& theCoord) const = 0;
+		virtual std::shared_ptr<Voyage_Wind> Value(const Pnt2d& theCoord) const = 0;
 
 	};
 

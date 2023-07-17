@@ -24,7 +24,7 @@ namespace tnbLib
 
 	public:
 
-		virtual Voyage_Current Value(const Pnt2d& theCoord) const = 0;
+		virtual std::shared_ptr<Voyage_Current> Value(const Pnt2d& theCoord) const = 0;
 
 	};
 
