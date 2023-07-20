@@ -148,6 +148,20 @@
   <ItemGroup>
     <ClCompile Include="tnbMeshSizeMap2dAdaptive.cxx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\TnbCad2d\TnbCad2d.vcxproj">
+      <Project>{cd25d37b-6e90-452a-8cf4-8421fcb9d8aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\TnbMesh\TnbMesh.vcxproj">
+      <Project>{00cf3b69-2a41-4038-8e73-fde99df1478a}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

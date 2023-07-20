@@ -349,7 +349,6 @@ void tnbLib::MeshBase_Tools::SetSourcesToMeshNearestPoint
 				<< abort(FatalError);
 		}
 		start = current;
-
 		auto nodes = current->Nodes();
 		auto nearest = meshLib::RetrieveClosestNode(nodes, x->Coord());
 		auto neighbors = RetrieveAdjacentNodes(nearest);

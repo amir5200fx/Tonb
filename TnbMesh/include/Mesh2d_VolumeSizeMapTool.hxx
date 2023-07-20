@@ -50,11 +50,15 @@ namespace tnbLib
 		// Public functions and operators [7/12/2023 Payvand]
 
 		const auto& Shapes() const { return theShapes_; }
-
 		const auto& AlgInfo() const { return theInfo_; }
 
-		void Perform() override;
-
+		TnbMesh_EXPORT void Perform() override;
+		TnbMesh_EXPORT void ImportShape
+		(
+			const Standard_Integer theIndex, 
+			const std::shared_ptr<Cad2d_Plane>&
+		);
+		TnbMesh_EXPORT void RemoveShape(const Standard_Integer theIndex);
 	};
 }
 

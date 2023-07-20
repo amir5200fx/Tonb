@@ -17,6 +17,13 @@ namespace tnbLib
 	template<>
 	TnbMesh_EXPORT void GeoMesh2d_Data::Construct(const triangulation& theTriangulation);
 
+	template<>
+	TnbMesh_EXPORT std::shared_ptr<Mesh2d_Element> 
+		GeoMesh2d_Data::TriangleLocation
+		(
+			const std::shared_ptr<Mesh2d_Element>& theStart,
+			const Point& theCoord
+		) const;
 
 	template<>
 	template<>

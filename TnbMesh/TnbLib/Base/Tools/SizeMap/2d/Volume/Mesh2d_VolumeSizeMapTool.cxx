@@ -11,13 +11,16 @@
 #include <Discret_Curve_UniformSamples.hxx>
 #include <Cad2d_Plane.hxx>
 #include <Geo2d_DelTri_CGAL.hxx>
+#include <Geo2d_DelTri.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo2d_BalPrTree.hxx>
 #include <Geo_AdTree.hxx>
 #include <Entity2d_Box.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Global_Tools.hxx>
 #include <Global_Timer.hxx>
+#include <TecPlot.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -140,6 +143,9 @@ namespace tnbLib
 				InsertToEngine(std::move(p3), theTol, engine);
 			}
 
+			std::vector<std::shared_ptr<Pnt2d>> enginePts;
+			engine.RetrieveFromGeometryTo(enginePts);
+
 			for (auto x : theCoords)
 			{
 				InsertToEngine(std::move(x), theTol, engine);
@@ -154,7 +160,10 @@ namespace tnbLib
 			{
 				coords.push_back(*x);
 			}
-			return std::move(coords);
+			/*OFstream myFile("sizeMap.plt");
+			Io::ExportPoints(coords, myFile);*/
+			auto t = std::make_pair(std::move(coords), std::move(enginePts));
+			return std::move(t);
 		}
 	}
 }
@@ -217,6 +226,7 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 
 	std::vector<Pnt2d> srcCoords;
 	std::vector<std::shared_ptr<hNode>> sources;
+	std::vector<std::shared_ptr<Entity2d_Polygon>> polygons;
 	{// Approximation scope [7/13/2023 Payvand]
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
@@ -228,8 +238,6 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 
 			const auto& wire = shape->OuterWire();
 
-			
-			
 			auto alg = std::make_shared<Discret2d_Wire>();
 			alg->SetWire(wire);
 			alg->SetInfo(discretCrvInfo);
@@ -239,6 +247,12 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 			Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed!");
 
 			const auto& poly = alg->Polygon();
+			polygons.push_back(poly);
+			for (const auto& pt : poly->Points())
+			{
+				auto h = std::make_shared<hNode>(pt, elemSize);
+				sources.push_back(std::move(h));
+			}
 			for (const auto& pt : poly->Points())
 			{
 				auto b = Geo_BoxTools::GetBox<Pnt2d>(pt, mergCrit);
@@ -247,14 +261,14 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 				engine.GeometrySearch(b, items);
 				if (items.empty())
 				{
-					auto h = std::make_shared<hNode>(pt, elemSize);
+					//auto h = std::make_shared<hNode>(pt, elemSize);
 					auto node = std::make_shared<sourceNode>(pt);
 					Debug_Null_Pointer(node);
 					engine.InsertToGeometry(node);
 
 					++nbSources;
 
-					sources.push_back(std::move(h));
+					//sources.push_back(std::move(h));
 					srcCoords.push_back(std::move(pt));
 				}
 				else
@@ -270,14 +284,14 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 					}
 					if (minDis > mergCrit)
 					{
-						auto h = std::make_shared<hNode>(pt, elemSize);
+						//auto h = std::make_shared<hNode>(pt, elemSize);
 						auto node = std::make_shared<sourceNode>(pt);
 						Debug_Null_Pointer(node);
 						engine.InsertToGeometry(node);
 
 						++nbSources;
 
-						sources.push_back(std::move(h));
+						//sources.push_back(std::move(h));
 						srcCoords.push_back(std::move(pt));
 					}
 					else
@@ -295,13 +309,13 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 			<< " - the space is approximated in: " << global_time_duration << " ms." << endl;
 	}
 
-	if (AlgInfo()->PostBalance())
+	//if (AlgInfo()->PostBalance())
 	{
 		{
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 			//std::cout << "is balanced? " << engine.IsBalanced() << std::endl;
-			engine.SetMaxUnbalancing(AlgInfo()->Unbalancing());
+			engine.SetMaxUnbalancing(/*AlgInfo()->Unbalancing()*/2);
 			engine.PostBalance();
 			//std::cout << "is balanced? " << engine.IsBalanced() << std::endl;
 		}
@@ -312,19 +326,32 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 				<< " - the tree is balanced in: " << global_time_duration << " ms." << endl;
 		}
 	}
-
+	
 	auto tris = std::make_shared<Entity2d_Triangulation>();
 	Debug_Null_Pointer(tris);
 	{// Triangulation [7/13/2023 Payvand]
 		Global_Timer timer;
 		timer.SetInfo(Global_TimerInfo_ms);
 
-		auto pnts = plnTools::RetrieveNodes(engine, srcCoords, expB, mergCrit);
-		cgalLib::Geo2d_DelTri delTri(pnts);
-		delTri.Perform();
+		auto [pnts, enginePts] = plnTools::RetrieveNodes(engine, srcCoords, expB, mergCrit);
+		for (const auto& pol : polygons)
+		{
+			auto innerPts = RetrieveInsidePoints(enginePts, *pol);
+			for (const auto& pt : innerPts)
+			{
+				auto h = std::make_shared<hNode>(pt, elemSize);
+				sources.push_back(std::move(h));
+			}
+		}
+
+		//cgalLib::Geo2d_DelTri delTri(pnts);
+		Geo2d_DelTri delTri(pnts);
+		//delTri.Perform();
+		delTri.Triangulate();
 		Debug_If_Condition_Message(NOT delTri.IsDone(), "the application is not performed.");
 
-		tris = delTri.Triangulation();
+		//tris = delTri.Triangulation();
+		tris = delTri.Data();
 	}
 
 	if (verbose)
@@ -345,6 +372,8 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	// constructing a background mesh data [8/25/2022 Amir]
 	meshData->Construct(*tris);
 
+	/*OFstream myFile("sizeMap.plt");
+	tris->ExportToPlt(myFile);*/
 	//meshData->ExportToPlt(myFile);
 	const auto bMesh = std::make_shared<GeoMesh2d_SingleBackground>();
 	Debug_Null_Pointer(bMesh);
@@ -388,8 +417,34 @@ void tnbLib::Mesh2d_VolumeSizeMapTool::Perform()
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
-
+	OFstream myFile("sizeMap0.plt");
+	bMesh->ExportToPlt(myFile);
 	ChangeBackMesh() = std::move(bMesh);
 	//std::cout << "finished" << std::endl;
 	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::Mesh2d_VolumeSizeMapTool::ImportShape
+(
+	const Standard_Integer theIndex,
+	const std::shared_ptr<Cad2d_Plane>& theShape
+)
+{
+	Global_Tools::Insert(theIndex, theShape, theShapes_);
+}
+
+void tnbLib::Mesh2d_VolumeSizeMapTool::RemoveShape
+(
+	const Standard_Integer theIndex
+)
+{
+	auto iter = theShapes_.find(theIndex);
+	if (iter IS_EQUAL theShapes_.end())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< " the item is not found." << endl
+			<< " - id: " << theIndex << endl
+			<< abort(FatalError);
+	}
+	theShapes_.erase(iter);
 }

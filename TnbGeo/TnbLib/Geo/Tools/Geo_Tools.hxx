@@ -39,6 +39,9 @@ class Poly_Triangle;
 namespace tnbLib
 {
 
+	// Forward Declarations [7/18/2023 Payvand]
+	class Geo2d_CGALPolygonCache;
+
 	class Geo_Tools
 	{
 
@@ -447,6 +450,13 @@ namespace tnbLib
 				const Pnt3d& theP0,
 				const Pnt3d& theP1,
 				const Pnt3d& theP2
+			);
+
+		static TnbGeo_EXPORT Standard_Boolean 
+			IsPointInsidePolygon
+			(
+				const Pnt2d& theCoord, 
+				const Geo2d_CGALPolygonCache&
 			);
 
 		static inline Standard_Boolean 

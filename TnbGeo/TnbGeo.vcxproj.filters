@@ -898,6 +898,21 @@
     <Filter Include="TnbLib\Mesh\Lib\Triangle">
       <UniqueIdentifier>{79316043-a803-4120-8d33-e97c3ddd4916}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\PointInsidePolygon">
+      <UniqueIdentifier>{2cdc8ecc-ee66-480b-b18d-0a02e27f2cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Cache">
+      <UniqueIdentifier>{feca5bed-85a6-409a-b91a-5b1550815371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Cache\CGAL">
+      <UniqueIdentifier>{f6e1dc2e-b7d4-4ce3-bd3d-e63888d8625d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Cache\CGAL\Polygon">
+      <UniqueIdentifier>{a7c29dd4-5180-4cbd-a4c1-dc9e0be35214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Cache\CGAL\Polygon\2d">
+      <UniqueIdentifier>{83395e71-3291-4d22-8eb5-8f17445462a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2139,6 +2154,9 @@
     <ClInclude Include="TnbLib\Geo\Triangulation\2d\Polygon\Geo2d_PolygonDelTri.hxx">
       <Filter>TnbLib\Geo\Triangulation\2d\Polygon</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Cache\CGAL\Polygon\2d\Geo2d_CGALPolygonCache.hxx">
+      <Filter>TnbLib\Geo\Cache\CGAL\Polygon\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2701,6 +2719,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Triangulation\2d\Polygon\Geo2d_PolygonDelTri_CGAL.cxx">
       <Filter>TnbLib\Geo\Triangulation\2d\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Cache\CGAL\Polygon\2d\Geo2d_CGALPolygonCache.cxx">
+      <Filter>TnbLib\Geo\Cache\CGAL\Polygon\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

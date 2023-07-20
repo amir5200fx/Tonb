@@ -10,7 +10,6 @@ namespace tnbLib
 	void GeoMesh2d_Data::Construct(const triangulation& theTriangulation)
 	{
 		theElements_ = MeshBase_Tools::MakeMesh(theTriangulation);
-
 		MeshBase_Tools::ConnectEdgesAndElements(theElements_);
 		//const auto& Points = theTriangulation.Points();
 		//const auto& Triangles = theTriangulation.Connectivity();
@@ -161,5 +160,132 @@ namespace tnbLib
 		//	element.SetNeighbor2(edge2->LeftElement());
 		//	if (edge2->LeftElement().lock() IS_EQUAL x) element.SetNeighbor2(edge2->RightElement());
 		//}
+	}
+
+	template<>
+	std::shared_ptr<Mesh2d_Element> 
+		GeoMesh2d_Data::TriangleLocation
+		(
+			const std::shared_ptr<Mesh2d_Element>& theStart,
+			const Point& theCoord
+		) const
+	{
+		if (NOT theStart)
+		{
+			FatalErrorIn("element_ptr TriangleLocation(const element_ptr& theStart, const Pnt2d& theCoord) const")
+				<< "Null element has been encountered!" << endl
+				<< abort(FatalError);
+		}
+
+		auto neighbor = theStart;
+		auto element = theStart;
+#if TriLoc_Debug
+		int k = 0;
+#endif
+		while (Standard_True)
+		{
+			for (auto i = 0; i <= elementType::rank; i++)
+			{
+				Debug_Null_Pointer(element->Edge(i));
+				const auto& entity = *element->Edge(i);
+
+				auto rightElement = entity.RightElement().lock();
+				if (rightElement == element)
+				{
+					if (entity.IsLeftSide(theCoord))
+					{
+						auto leftElement = entity.LeftElement().lock();
+						neighbor = leftElement;
+						if (!neighbor)
+						{
+							//- the point is outside the background mesh
+							return nullptr;
+						}
+						break;
+					}
+				}
+				else
+				{
+#ifdef TriLoc_Debug
+					auto leftElement = entity.LeftElement().lock();
+					if (NOT leftElement)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "the edge doesn't belong to the element." << endl
+							<< abort(FatalError);
+					}
+
+					if (leftElement NOT_EQUAL element)
+					{
+						FatalErrorIn(FunctionSIG)
+							<< "the edge doesn't belong to the element." << endl
+							<< " - element's id: " << element->Index() << endl
+							<< " - right element: " << rightElement->Index() << endl
+							<< " - left element: " << leftElement->Index() << endl
+							<< abort(FatalError);
+					}
+#endif // TriLoc_Debug
+
+					if (entity.IsRightSide(theCoord))
+					{
+						neighbor = rightElement;
+						break;
+					}
+				}
+
+				//auto leftElement = entity.LeftElement().lock();
+				//if (leftElement == element)
+				//{
+				//	if (entity.IsRightSide(theCoord))
+				//	{
+				//		neighbor = entity.RightElement().lock();
+				//		if (!neighbor)
+				//		{
+				//			FatalErrorIn(FunctionSIG)
+				//				<< "invalid data has been detected." << endl
+				//				<< abort(FatalError);
+				//			//- the point is outside the background mesh
+				//			//return nullptr;
+				//		}
+				//		break;
+				//	}
+				//}
+				//else
+				//{
+				//	if (entity.IsLeftSide(theCoord))
+				//	{
+				//		neighbor = leftElement;
+				//		if (!neighbor)
+				//		{
+				//			//- the point is outside the background mesh
+				//			return nullptr;
+				//		}
+				//		break;
+				//	}
+				//}
+
+
+			}
+
+			if (neighbor == element)
+			{
+				// Found the Triangle
+				return neighbor;
+			}
+
+#if TriLoc_Debug
+			++k;
+			if (k >= DEFAULT_MAX_CYCLES)
+			{
+				FatalErrorIn("element_ptr TriangleLocation(const element_ptr& theStart, const Pnt2d& theCoord) const;")
+					<< "It's look like the algorithm trapped in an infinite loop" << endl
+					<< " - Unable to find the triangle which encompassed the point" << endl
+					<< abort(FatalError);
+			}
+#endif	
+
+			element = neighbor;
+		}
+		return nullptr;
 	}
 }

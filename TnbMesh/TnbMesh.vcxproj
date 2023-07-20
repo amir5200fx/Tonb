@@ -1057,6 +1057,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceCurvatureValues.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceSizeValues.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\Conditions\Values\Mesh_Values.hxx" />
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMap.hxx" />
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMapFwd.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMap.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMapFwd.hxx" />
     <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Mesh_MultiSizeMap.hxx" />
@@ -1755,6 +1757,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceCurvatureValues.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\Conditions\Surface\Mesh_SurfaceSizeValues.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\Conditions\Values\Mesh_Values.cxx" />
+    <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMap.cxx" />
+    <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMapIO.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMap.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\3d\Mesh3d_MultiSizeMapIO.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Corner\BoundarySizeMap2d_CornerTool.cxx" />
@@ -1770,6 +1774,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Mesh2d_SizeMapToolIO.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Info\Mesh2d_VolumeSizeMapTool_Info.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapTool.cxx" />
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapTool_CGAL.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\BoundarySizeMap3d_FaceTool.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\BoundarySizeMap3d_FaceToolIO.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\3d\Boundary\Face\Uniform\BoundarySizeMap3d_UniformFaceTool.cxx" />
@@ -1856,6 +1861,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Curve\Curve\Mesh_Curve.cxx" />
     <ClCompile Include="TnbLib\Curve\ReMesh\2d\Mesh2d_CurveRemesh.cxx" />
     <ClCompile Include="TnbLib\Region\Mesh_Region.cxx" />
+    <ClCompile Include="TnbLib\SizeMapControl\2d\Mesh2d_SizeMapControl.cxx" />
     <ClCompile Include="TnbLib\SizeMapControl\2d\Mesh2d_SizeMapControlIO.cxx" />
     <ClCompile Include="TnbLib\SizeMapControl\3d\Mesh3d_SizeMapControl.cxx" />
     <ClCompile Include="TnbLib\SizeMapControl\3d\Mesh3d_SizeMapControlIO.cxx" />

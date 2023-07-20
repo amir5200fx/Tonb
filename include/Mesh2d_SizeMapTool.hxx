@@ -69,7 +69,7 @@ namespace tnbLib
 
 	template<>
 	template<>
-	void Mesh_SizeMapToolBase<GeoMesh2d_Background>::serialize<TNB_iARCH_TYPE>
+	TnbMesh_EXPORT void Mesh_SizeMapToolBase<GeoMesh2d_Background>::serialize<TNB_iARCH_TYPE>
 		(
 			TNB_iARCH_TYPE& ar, 
 			const unsigned int /*file_version*/
@@ -77,7 +77,7 @@ namespace tnbLib
 
 	template<>
 	template<>
-	void Mesh_SizeMapToolBase<GeoMesh2d_Background>::serialize<TNB_oARCH_TYPE>
+	TnbMesh_EXPORT void Mesh_SizeMapToolBase<GeoMesh2d_Background>::serialize<TNB_oARCH_TYPE>
 		(
 			TNB_oARCH_TYPE& ar,
 			const unsigned int /*file_version*/

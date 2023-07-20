@@ -2275,6 +2275,9 @@
     <Filter Include="TnbLib\SizeMapControl\Volumetric\2d\Uniform">
       <UniqueIdentifier>{fd0c64ce-50b1-425c-9bb4-63f2b578fd34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d">
+      <UniqueIdentifier>{a0518ebd-778a-45a6-bcad-d5586dea61c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5523,6 +5526,12 @@
     <ClInclude Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info\BoundarySizeMap2d_UniformSegmentTool_Info.hxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMap.hxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMapFwd.hxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7231,6 +7240,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info\BoundarySizeMap2d_UniformSegmentTool_Info.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Boundary\Segment\Uniform\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMap.cxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMapIO.cxx">
+      <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\SizeMapControl\2d\Mesh2d_SizeMapControl.cxx">
+      <Filter>TnbLib\SizeMapControl\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapTool_CGAL.cxx">
+      <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

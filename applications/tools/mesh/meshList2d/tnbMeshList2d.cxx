@@ -32,7 +32,7 @@ namespace tnbLib
 			size_t i = 0;
 			while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
 			{
-				auto name = file::GetSingleFile(currentPath + std::to_string(i), loadExt).string();
+				auto name = file::GetSingleFile(currentPath + R"(\)" + std::to_string(i), loadExt).string();
 				file::CheckExtension(name);
 
 				auto ent = file::LoadFile<std::shared_ptr<Entity2d_Triangulation>>(name + loadExt, verbose);

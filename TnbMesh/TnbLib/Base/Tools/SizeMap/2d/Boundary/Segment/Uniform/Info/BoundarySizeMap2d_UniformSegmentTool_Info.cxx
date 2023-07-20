@@ -31,9 +31,6 @@ void tnbLib::BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSetting::SetInfo()
 	info->SetNbSamples(5);
 }
 
-static const tnbLib::BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSetting
-BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSettingObj;
-
 std::shared_ptr<tnbLib::Geo_BasicApprxCurve_Info>
 tnbLib::BoundarySizeMap2d_UniformSegmentTool_Info::DEFAULT_INFO =
 std::make_shared<tnbLib::Geo_BasicApprxCurve_Info>();
@@ -41,3 +38,6 @@ std::make_shared<tnbLib::Geo_BasicApprxCurve_Info>();
 Standard_Boolean tnbLib::BoundarySizeMap2d_UniformSegmentTool_Info::POST_BALANCE = Standard_True;
 Standard_Integer tnbLib::BoundarySizeMap2d_UniformSegmentTool_Info::DEFAULT_BUCKET_SIZE = 4;
 Standard_Integer tnbLib::BoundarySizeMap2d_UniformSegmentTool_Info::DEFAULT_UNBALANCING = 2;
+
+static const tnbLib::BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSetting
+BoundarySizeMap2d_UniformSegmentTool_RunTimeInfoSettingObj;

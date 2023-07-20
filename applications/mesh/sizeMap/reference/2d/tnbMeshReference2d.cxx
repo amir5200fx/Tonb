@@ -53,7 +53,6 @@ namespace tnbLib
 
 	void loadRegion()
 	{
-		
 		auto b = 
 			file::LoadSingleFile<std::shared_ptr<Entity2d_Box>>
 			(sub_directory, verbose);

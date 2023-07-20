@@ -572,8 +572,8 @@ void tnbLib::MeshBase_Tools::MakeEdges
 
 			std::shared_ptr<Mesh2d_Edge> currentEdge;
 
-			auto v1 = node1->Index();
-			auto v2 = node2->Index();
+			//auto v1 = node1->Index();
+			//auto v2 = node2->Index();
 
 			Standard_Boolean isCreated = Standard_False;
 			if ((NOT node1->NbEdges()) OR(NOT node2->NbEdges()))
@@ -612,6 +612,18 @@ void tnbLib::MeshBase_Tools::MakeEdges
 						currentEdge = edge;
 
 						currentEdge->SetRightElement(e);
+						if (NOT currentEdge->LeftElement().lock())
+						{
+							FatalErrorIn(FunctionSIG)
+								<< "Contradictory Data" << endl
+								<< abort(FatalError);
+						}
+						if (currentEdge->LeftElement().lock() IS_EQUAL e)
+						{
+							FatalErrorIn(FunctionSIG)
+								<< "Contradictory Data" << endl
+								<< abort(FatalError);
+						}
 						break;
 					}
 				}
@@ -639,6 +651,29 @@ void tnbLib::MeshBase_Tools::MakeEdges
 			}
 
 			e->Edge(i) = currentEdge;
+		}
+	}
+
+	for (const auto& x : theElements)
+	{
+		auto [e0, e1, e2] = x->Edges();
+		if (NOT e0->LeftElement().lock())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid mesh" << endl
+				<< abort(FatalError);
+		}
+		if (NOT e1->LeftElement().lock())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid mesh" << endl
+				<< abort(FatalError);
+		}
+		if (NOT e2->LeftElement().lock())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid mesh" << endl
+				<< abort(FatalError);
 		}
 	}
 }
@@ -730,29 +765,29 @@ void tnbLib::MeshBase_Tools::ConnectEdgesAndElements
 
 		if (IsSense(x, e0))
 		{
-			e0->SetRightElement(x);
+			e0->SetLeftElement(x);
 		}
 		else
-		{	
-			e0->SetLeftElement(x);
+		{
+			e0->SetRightElement(x);
 		}
 
 		if (IsSense(x, e1))
 		{
-			e1->SetRightElement(x);
+			e1->SetLeftElement(x);
 		}
 		else
-		{		
-			e1->SetLeftElement(x);
+		{
+			e1->SetRightElement(x);
 		}
 
 		if (IsSense(x, e2))
 		{
-			e2->SetRightElement(x);
+			e2->SetLeftElement(x);
 		}
 		else
-		{		
-			e2->SetLeftElement(x);
+		{
+			e2->SetRightElement(x);
 		}
 	}
 }
@@ -1143,7 +1178,7 @@ tnbLib::MeshBase_Tools::MakeMesh
 
 	MakeEdges(elements);
 
-	ConnectElements(elements);
+	//ConnectElements(elements);
 
 	return std::move(elements);
 }

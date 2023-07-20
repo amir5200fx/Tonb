@@ -1,5 +1,6 @@
 #include <Geo_Tools.hxx>
 
+#include <Geo2d_CGALPolygonCache.hxx>
 #include <Entity2d_Ray.hxx>
 #include <Entity2d_Triangle.hxx>
 #ifdef Handle
@@ -246,6 +247,16 @@ tnbLib::Geo_Tools::Oriented_cgal
 	Vector_3 cd(theQ.X() - theP2.X(), theQ.Y() - theP2.Y(), theQ.Z() - theP2.Z());
 
 	return cgal_object.compute_determinant_3_object()(ad, bd, cd);
+}
+
+Standard_Boolean 
+tnbLib::Geo_Tools::IsPointInsidePolygon
+(
+	const Pnt2d& theCoord, 
+	const Geo2d_CGALPolygonCache& thePolygon
+)
+{
+	return thePolygon.Polygon().oriented_side(get_cgalPoint(theCoord)) IS_EQUAL CGAL::ON_POSITIVE_SIDE;
 }
 
 Standard_Boolean 
