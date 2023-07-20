@@ -40,7 +40,7 @@ namespace tnbLib
 
 		// Private functions and operators [7/20/2023 Payvand]
 
-		static Standard_Boolean CheckIntersection(const Pnt2d& theCoord, const )
+		//static Standard_Boolean CheckIntersection(const Pnt2d& theCoord, const )
 
 	public:
 
