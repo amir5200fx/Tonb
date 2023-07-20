@@ -148,6 +148,15 @@
     <Filter Include="TnbLib\Voyage\Entities\Weather">
       <UniqueIdentifier>{305c8a56-8a45-4044-863b-2951bdbcbf01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\PathGeneration">
+      <UniqueIdentifier>{5b3ab0ec-d0b1-40d5-940a-d8bca0934739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh">
+      <UniqueIdentifier>{a3949e0b-c517-4af3-8bf7-eb22275e6e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Earth">
+      <UniqueIdentifier>{ee4f7b7a-6624-4bec-9e97-2d93682ae183}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -246,6 +255,15 @@
     <ClInclude Include="TnbLib\Voyage\Entities\Weather\Voyage_Weather.hxx">
       <Filter>TnbLib\Voyage\Entities\Weather</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.hxx">
+      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh.hxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Field\Earth\VoyageField_Earth.hxx">
+      <Filter>TnbLib\Voyage\Field\Earth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -283,6 +301,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Entities\Weather\Voyage_WeatherIO.cxx">
       <Filter>TnbLib\Voyage\Entities\Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.cxx">
+      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh.cxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

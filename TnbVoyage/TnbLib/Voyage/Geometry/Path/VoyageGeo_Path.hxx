@@ -38,7 +38,12 @@ namespace tnbLib
 		virtual Pnt2d Start() const = 0;
 		virtual Pnt2d End() const = 0;
 
-		virtual std::vector<Standard_Real> Discrete(const std::shared_ptr<VoyageGeo_SizeFun>&, const std::shared_ptr<VoyageGeo_MetricFun>&) const = 0;
+		virtual std::vector<Standard_Real> 
+			Discrete
+			(
+				const std::shared_ptr<VoyageGeo_SizeFun>&, 
+				const std::shared_ptr<VoyageGeo_MetricFun>&
+			) const = 0;
 
 	};
 
