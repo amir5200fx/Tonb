@@ -407,7 +407,7 @@ tnbLib::Pln_Tools::MakeWire
 		auto ring = std::make_shared<Pln_Ring>(v, c);
 		Debug_Null_Pointer(ring);
 
-		ring->SetIndex(1);
+		ring->SetIndex(c->Index());
 
 		auto info = std::make_shared<Geo_ApprxCurve_Info>();
 		Debug_Null_Pointer(info);
@@ -504,7 +504,8 @@ tnbLib::Pln_Tools::MakeWire
 
 		K++;
 
-		edge->SetIndex(K);
+		//edge->SetIndex(K);
+		edge->SetIndex(x->Index());
 
 		edges.push_back(std::move(edge));
 	}
@@ -665,13 +666,8 @@ tnbLib::Pln_Tools::MakeEdge
 {
 	auto curve = std::make_shared<Pln_Curve>(theCurve);
 	Debug_Null_Pointer(curve);
-
-	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
-	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
-	Debug_Null_Pointer(v0);
-	Debug_Null_Pointer(v1);
-
-	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
+	curve->SetIndex(1);
+	auto edge = MakeEdge(curve);
 	return std::move(edge);
 }
 
@@ -683,15 +679,27 @@ tnbLib::Pln_Tools::MakeEdge
 {
 	auto curve = theCurve;
 	Debug_Null_Pointer(curve);
+	auto id = curve->Index();
+	auto p0 = curve->FirstCoord();
+	auto p1 = curve->LastCoord();
+	if (p0.Distance(p1) <= gp::Resolution())
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, MEAN(p0, p1));
+		auto edge = std::make_shared<Pln_Ring>(std::move(v0), std::move(curve));
+		edge->SetIndex(id);
+		return std::move(edge);
+	}
+	else
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
+		auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
+		Debug_Null_Pointer(v0);
+		Debug_Null_Pointer(v1);
 
-	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
-	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
-	Debug_Null_Pointer(v0);
-	Debug_Null_Pointer(v1);
-
-	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
-	return std::move(edge);
-	
+		auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
+		edge->SetIndex(id);
+		return std::move(edge);
+	}
 }
 
 std::shared_ptr<tnbLib::Pln_Edge> 
@@ -702,14 +710,27 @@ tnbLib::Pln_Tools::MakeEdge
 {
 	auto curve = std::move(theCurve);
 	Debug_Null_Pointer(curve);
+	auto id = curve->Index();
+	auto p0 = curve->FirstCoord();
+	auto p1 = curve->LastCoord();
+	if (p0.Distance(p1) <= gp::Resolution())
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, MEAN(p0, p1));
+		auto edge = std::make_shared<Pln_Ring>(std::move(v0), std::move(curve));
+		edge->SetIndex(id);
+		return std::move(edge);
+	}
+	else
+	{
+		auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
+		auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
+		Debug_Null_Pointer(v0);
+		Debug_Null_Pointer(v1);
 
-	auto v0 = std::make_shared<Pln_Vertex>(0, curve->FirstCoord());
-	auto v1 = std::make_shared<Pln_Vertex>(1, curve->LastCoord());
-	Debug_Null_Pointer(v0);
-	Debug_Null_Pointer(v1);
-
-	auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
-	return std::move(edge);
+		auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
+		edge->SetIndex(id);
+		return std::move(edge);
+	}
 }
 
 std::shared_ptr<tnbLib::Pln_Wire> 
@@ -760,7 +781,7 @@ tnbLib::Pln_Tools::MakeWire
 		auto ring = std::make_shared<Pln_Ring>(v, c, theSense[0]);
 		Debug_Null_Pointer(ring);
 
-		ring->SetIndex(1);
+		ring->SetIndex(c->Index());
 		ring->Approx(theInfo);
 
 		v->InsertToEdges(ring->Index(), ring);
@@ -813,17 +834,20 @@ tnbLib::Pln_Tools::MakeWire
 
 		const auto& v0 = vertices[K];
 		const auto& v1 = vertices[(K + 1) % theCurves.size()];
-
-		auto edge = std::make_shared<Pln_Segment>(v0, v1, x, theSense[K]);
+		
+		auto edge = std::make_shared<Pln_Segment>(v0, v1, x, theSense[K]);	
 		Debug_Null_Pointer(edge);
 
-		edge->SetIndex(++K);
+		edge->SetIndex(x->Index());
+		//edge->SetIndex(++K);
 		edge->Approx(theInfo);
 
 		v0->InsertToEdges(edge->Index(), edge);
 		v1->InsertToEdges(edge->Index(), edge);
 
 		edges.push_back(std::move(edge));
+
+		++K;
 	}
 
 	auto wire = std::make_shared<Pln_Wire>(cmpEdge);
@@ -1405,13 +1429,13 @@ tnbLib::Pln_Tools::RetrieveEdges
 		Debug_Null_Pointer(x);
 		Debug_If_Condition_Message(NOT Pln_Tools::IsBounded(x), "the curve is not bounded!");
 
-		auto curve = std::make_shared<Pln_Curve>(k + 1, std::move(x));
+		auto curve = std::make_shared<Pln_Curve>(++k, std::move(x));
 		Debug_Null_Pointer(curve);
 
 		auto edge = std::make_shared<Pln_Ring>(std::move(ringVertices[i++]), std::move(curve));
 		Debug_Null_Pointer(edge);
 
-		edge->SetIndex(++k);
+		edge->SetIndex(curve->Index());
 		edges.push_back(std::move(edge));
 	}
 
@@ -1420,13 +1444,13 @@ tnbLib::Pln_Tools::RetrieveEdges
 	{
 		Debug_Null_Pointer(x);
 		Debug_If_Condition_Message(NOT Pln_Tools::IsBounded(x), "the curve is not bounded!");
-		auto curve = std::make_shared<Pln_Curve>(k + 1, std::move(x));
+		auto curve = std::make_shared<Pln_Curve>(++k, std::move(x));
 		Debug_Null_Pointer(curve);
 
 		auto edge = std::make_shared<Pln_Segment>(std::move(vertices[2 * i]), std::move(vertices[2 * i + 1]), std::move(curve));
 		Debug_Null_Pointer(edge);
 
-		edge->SetIndex(++k);
+		edge->SetIndex(curve->Index());
 		edges.push_back(std::move(edge));
 
 		++i;
@@ -1500,7 +1524,8 @@ tnbLib::Pln_Tools::RetrieveEdges
 		auto edge = std::make_shared<Pln_Ring>(std::move(ringVertices[i++]), x);
 		Debug_Null_Pointer(edge);
 
-		edge->SetIndex(++k);
+		/*edge->SetIndex(++k);*/
+		edge->SetIndex(x->Index());
 		edges.push_back(std::move(edge));
 	}
 
@@ -1511,12 +1536,12 @@ tnbLib::Pln_Tools::RetrieveEdges
 		auto edge = std::make_shared<Pln_Segment>(std::move(vertices[2 * i]), std::move(vertices[2 * i + 1]), x);
 		Debug_Null_Pointer(edge);
 
-		edge->SetIndex(++k);
+		/*edge->SetIndex(++k);*/
+		edge->SetIndex(x->Index());
 		edges.push_back(std::move(edge));
 
 		++i;
 	}
-
 	return std::move(edges);
 }
 
@@ -2062,13 +2087,16 @@ tnbLib::Pln_Tools::RetrieveMergedEdges
 		curves.push_back(x->Curve());
 	}
 	auto segments = retrieveWires::RetrieveUnMergedEdges(curves);
-	auto unMergedVertices = retrieveWires::RetrieveUnMergedVerticesFromEdges(segments);
+	auto unMergedVertices = 
+		retrieveWires::RetrieveUnMergedVerticesFromEdges(segments);
 
 	retrieveWires::MergeVertices(segments, theTol, theRadius);
 
-	auto mergedVerticesMap = retrieveWires::RetrieveMergedVertices(segments);
+	auto mergedVerticesMap = 
+		retrieveWires::RetrieveMergedVertices(segments);
 
-	auto edges = retrieveWires::RetrieveEdges(segments, mergedVerticesMap, Standard_False);
+	auto edges = 
+		retrieveWires::RetrieveEdges(segments, mergedVerticesMap, Standard_False);
 	k = 0;
 	for (const auto& x : edges)
 	{

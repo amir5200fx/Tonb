@@ -34,6 +34,8 @@ namespace tnbLib
 		TnbGlobal_EXPORT std::string GetHomeDir();
 		TnbGlobal_EXPORT std::string GetSystemFile(const std::string& theAppName);
 
+		TnbGlobal_EXPORT boost::filesystem::path GetCurrentPath();
+
 		TnbGlobal_EXPORT std::vector<boost::filesystem::path> 
 			GetAllFileNames(const boost::filesystem::path&);
 		TnbGlobal_EXPORT std::vector<boost::filesystem::path> 
@@ -42,6 +44,7 @@ namespace tnbLib
 			GetSingleFile(const boost::filesystem::path&, const std::string& extension);
 
 		TnbGlobal_EXPORT void CheckExtension(const std::string&);
+		TnbGlobal_EXPORT void SetCurrentPath(const std::string&);
 
 		template<class T>
 		void SaveTo(const T&, const std::string& name, const unsigned short verbose);
@@ -64,10 +67,28 @@ namespace tnbLib
 		T LoadSingleFile
 		(
 			const std::string& directory_name,
+			const unsigned short verbose
+		);
+
+		template<class T>
+		T LoadSingleFile
+		(
+			const std::string& directory_name,
 			const std::string& extension,
 			const unsigned short verbose,
 			std::string& file_name
 		);
+
+		template<class T>
+		T LoadSingleFile
+		(
+			const std::string& directory_name,
+			const unsigned short verbose,
+			std::string& file_name
+		);
+
+		template<class T>
+		std::vector<T> LoadFiles(const unsigned short verbose);
 
 		TnbGlobal_EXPORT void RemoveDirectory(const boost::filesystem::path&);
 		TnbGlobal_EXPORT void CheckDirectory(const std::string& name);
@@ -75,5 +96,6 @@ namespace tnbLib
 }
 
 #include <Global_FileI.hxx>
+#include <Global_FileM.hxx>
 
 #endif // !_Global_File_Header

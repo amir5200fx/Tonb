@@ -72,6 +72,8 @@ namespace tnbLib
 
 		public:
 
+			static TnbHydStatic_EXPORT const std::string extension;
+
 			//- default constructor
 
 			SolutionData_Coeffs()

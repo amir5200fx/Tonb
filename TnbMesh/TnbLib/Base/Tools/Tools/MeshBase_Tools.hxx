@@ -113,6 +113,14 @@ namespace tnbLib
 			GeoMesh2d_SingleBackground& theMesh
 		);
 
+		static TnbMesh_EXPORT void SetSourcesToMesh
+		(
+			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt2d, Standard_Real>>>& theSources,
+			const Standard_Real theBase,
+			const Standard_Real theGrowthRate,
+			GeoMesh2d_SingleBackground& theMesh
+		);
+
 		static TnbMesh_EXPORT std::vector<Standard_Real>
 			CalcDeterminants
 			(
@@ -169,7 +177,9 @@ namespace tnbLib
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Edge>> RetrieveEdges(const std::vector<std::shared_ptr<Mesh3d_Element>>&);
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Edge>> RetrieveEdges(const std::vector<std::shared_ptr<Mesh2d_Element>>&);
 
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Node>> RetrieveNodes(const std::vector<std::shared_ptr<Mesh2d_Element>>& theElements);
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Node>> RetrieveNodes(const std::vector<std::shared_ptr<Mesh3d_Element>>& theElements);
+		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh2d_Node>> RetrieveAdjacentNodes(const std::shared_ptr<Mesh2d_Node>&);
 		static TnbMesh_EXPORT std::vector<std::shared_ptr<Mesh3d_Node>> RetrieveAdjacentNodes(const std::shared_ptr<Mesh3d_Node>&);
 
 		// creating edges for the elements [1/1/2022 Amir]

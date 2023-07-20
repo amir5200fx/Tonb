@@ -7,6 +7,8 @@
 #include <Merge_StaticData.hxx>
 #include <Pln_Vertex.hxx>
 #include <Cad2d_Plane.hxx>
+#include <Cad2d_Plane_Manager.hxx>
+#include <Cad_EntityManager.hxx>
 #include <GeoMesh2d_Background.hxx>
 #include <MeshBase_Tools.hxx>
 #include <GeoMesh_Background_System.hxx>
@@ -36,6 +38,52 @@ tnbLib::BoundarySizeMap2d_CornerTool::BoundarySizeMap2d_CornerTool
 	, theMaxSubdivision_(DEFAULT_MAX_SUBDIVISION)
 {
 	//- empty body
+}
+
+std::vector<std::shared_ptr<tnbLib::Pln_Vertex>> 
+tnbLib::BoundarySizeMap2d_CornerTool::RetrieveCorners() const
+{
+	std::vector<std::shared_ptr<Pln_Vertex>> items;
+	RetrieveCornersTo(items);
+	return std::move(items);
+}
+
+void tnbLib::BoundarySizeMap2d_CornerTool::RetrieveCornersTo
+(
+	std::vector<std::shared_ptr<Pln_Vertex>>& theItems
+) const
+{
+	if (NOT this->Plane())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no model has been found." << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT this->Plane()->Corners())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no corner manager has been found." << endl
+			<< abort(FatalError);
+	}
+	const auto& manager = *this->Plane()->Corners();
+	for (const auto& x : Patches())
+	{
+		if (NOT manager.HasBlock(x))
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the corner manager doesn't have such a block." << endl
+				<< " - block name: " << x << endl
+				<< abort(FatalError);
+		}
+		auto block = manager.SelectBlock(x);
+		const auto& entities = block->second;
+		for (const auto& e : entities->Entities())
+		{
+			Debug_Null_Pointer(e.second);
+			theItems.push_back(e.second);
+		}
+	}
 }
 
 void tnbLib::BoundarySizeMap2d_CornerTool::SetUnbalancing

@@ -1,4 +1,5 @@
 #pragma once
+#include <Traits.hxx>
 #include <fileName.hxx>
 #include <Global_Null.hxx>
 
@@ -112,6 +113,22 @@ namespace tnbLib
 		template<class T>
 		T LoadSingleFile
 		(
+			const std::string& directory_name, 
+			const unsigned short verbose
+		)
+		{
+			auto obj = 
+				file::LoadSingleFile<T>
+				(
+					directory_name,
+					remove_pointer<T>::type::extension, 
+					verbose);
+			return std::move(obj);
+		}
+
+		template<class T>
+		T LoadSingleFile
+		(
 			const std::string& name,
 			const std::string& extension,
 			const unsigned short verbose,
@@ -169,6 +186,37 @@ namespace tnbLib
 				boost::filesystem::current_path(currentPath);
 				return std::move(loaded);
 			}
+		}
+
+		template<class T>
+		T LoadSingleFile
+		(
+			const std::string& directory_name,
+			const unsigned short verbose,
+			std::string& file_name
+		)
+		{
+			auto obj =
+				file::LoadSingleFile<T>
+				(
+					directory_name,
+					remove_pointer<T>::type::extension,
+					verbose, file_name);
+			return std::move(obj);
+		}
+
+		template<class T>
+		std::vector<T> LoadFiles(const unsigned short verbose)
+		{
+			std::vector<T> objs;
+			size_t i = 0;
+			while (boost::filesystem::is_directory(boost::filesystem::path(std::to_string(i))))
+			{
+				auto obj = LoadSingleFile<T>(std::to_string(i), verbose);
+				objs.push_back(std::move(obj));
+				++i;
+			}
+			return std::move(objs);
 		}
 	}
 }

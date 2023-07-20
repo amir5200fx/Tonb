@@ -98,11 +98,17 @@ namespace tnbLib
 				<< abort(FatalError);
 		}
 
+
 		if (mySoluData->IsIso())
 		{
 			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
 			Debug_Null_Pointer(soluData);
-
+			if (NOT soluData->Region())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no region has been defined." << endl
+					<< abort(FatalError);
+			}
 			if (NOT soluData->BoundaryInfo())
 			{
 				FatalErrorIn(FunctionSIG)
@@ -128,7 +134,12 @@ namespace tnbLib
 		{
 			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionDataAnIso>(mySoluData);
 			Debug_Null_Pointer(soluData);
-
+			if (NOT soluData->Region())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no region has been defined." << endl
+					<< abort(FatalError);
+			}
 			if (NOT soluData->BoundaryInfo())
 			{
 				FatalErrorIn(FunctionSIG)

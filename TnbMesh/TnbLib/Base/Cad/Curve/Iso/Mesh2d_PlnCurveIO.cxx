@@ -1,5 +1,6 @@
 #include <Mesh2d_PlnCurve.hxx>
 
+#include <Mesh_Physic.hxx>
 #include <Pln_Curve.hxx>
 #include <Entity2d_Polygon.hxx>
 
@@ -16,6 +17,7 @@ namespace tnbLib
 		ar & theCurve_;
 		ar & theMesh_;
 		ar& theSense_;
+		ar& thePhysic_;
 	}
 
 	template<>
@@ -28,5 +30,6 @@ namespace tnbLib
 		ar & theCurve_;
 		ar & theMesh_;
 		ar& theSense_;
+		ar& thePhysic_;
 	}
 }

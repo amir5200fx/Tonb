@@ -47,6 +47,8 @@ namespace tnbLib
 
 	static gp_Ax2d myAxis = gp::OY2d();
 
+	static const auto model_directory = "model";
+
 	void setTolerance(double x)
 	{
 		myTol = x;
@@ -78,68 +80,54 @@ namespace tnbLib
 	{
 		file::CheckExtension(name);
 
-		myHull = file::LoadFile<std::shared_ptr<Cad_Shape>>(name + loadExt, verbose);
-
-		if (verbose)
-		{
-			Info << " - shape's name: " << myHull->Name() << endl;
-			Info << endl;
-		}
-
+		myHull = 
+			file::LoadFile<std::shared_ptr<Cad_Shape>>
+			(name + Cad_Shape::extension, verbose);
 		loadTag = true;
+		if (NOT myHull)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no model has been loaded." << endl
+				<< abort(FatalError);
+		}
 	}
 
 	void loadModel()
 	{
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), loadExt);
-		myFileName = name.string();
-		loadModel(myFileName);
+		myHull = 
+			file::LoadSingleFile<std::shared_ptr<Cad_Shape>>
+			(
+				model_directory, 
+				Cad_Shape::extension, 
+				verbose, 
+				myFileName
+				);
+		loadTag = true;
+		if (NOT myHull)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no model has been loaded." << endl
+				<< abort(FatalError);
+		}
 	}
 
-	//void loadModel1(const std::string& name)
-	//{
-	//	fileName fn(name);
-	//	if (verbose)
-	//	{
-	//		Info << endl;
-	//		Info << " loading the model from, " << fn << endl;
-	//		Info << endl;
-	//	}
-	//	std::ifstream myFile(fn);
+	void loadFile()
+	{
+		if (file::IsDirectory(model_directory))
+		{
+			loadModel();
+		}
+		else
+		{
+			auto name =
+				file::GetSingleFile
 
-	//	{//- timer scope
-	//		Global_Timer timer;
-	//		timer.SetInfo(Global_TimerInfo_ms);
-
-	//		TNB_iARCH_FILE_TYPE ar(myFile);
-	//		ar >> myHull;
-	//		std::cout << "1" << std::endl;
-	//		ar >> myBoundingBox;
-	//		std::cout << "2" << std::endl;
-	//		ar >> myBodyType;
-	//		std::cout << "3" << std::endl;
-	//		ar >> myAxis;
-	//		std::cout << "4" << std::endl;
-	//		ar >> myTol;
-	//		std::cout << "5" << std::endl;
-	//	}
-
-	//	if (NOT myHull)
-	//	{
-	//		FatalErrorIn(FunctionSIG)
-	//			<< " the loaded model is null" << endl
-	//			<< abort(FatalError);
-	//	}
-
-	//	if (verbose)
-	//	{
-	//		Info << endl;
-	//		Info << " the model is loaded, from: " << name << ", successfully in " << global_time_duration << " ms." << endl;
-	//		Info << endl;
-	//	}
-
-	//	loadTag = true;
-	//}
+				(boost::filesystem::current_path(),
+					Cad_Shape::extension
+				).string();
+			loadModel(name);
+		}
+	}
 
 	void saveTo(const std::string& name)
 	{
@@ -152,11 +140,6 @@ namespace tnbLib
 
 		file::CheckExtension(name);
 
-		fileName fn(name + saveExt);
-		std::ofstream myFile(fn);
-
-		TNB_oARCH_FILE_TYPE ar(myFile);
-
 		auto myShape = std::make_shared<marineLib::io::HullShape>();
 		myShape->LoadShape(myHull);
 		myShape->SetPreciseBndBox(std::make_shared<Entity3d_Box>(myBoundingBox));
@@ -164,17 +147,7 @@ namespace tnbLib
 		myShape->SetTol(myTol);
 		myShape->SetType(myBodyType);
 
-		std::shared_ptr<marineLib::io::Shape> hshape = myShape;
-		ar << hshape;
-
-		myFile.close();
-
-		if (verbose)
-		{
-			Info << endl;
-			Info << " the body is saved in: " << fn << ", successfully!" << endl;
-			Info << endl;
-		}
+		file::SaveTo(myShape, name + marineLib::io::Shape::extension, verbose);
 	}
 
 	void saveTo()
@@ -233,12 +206,11 @@ namespace tnbLib
 
 	auto retrievePoints(const Poly_Triangulation& p)
 	{
-		const auto& nodes = p.Nodes();
 		std::vector<Pnt3d> pts;
-		pts.reserve(nodes.Size());
-		for (int i = 1; i <= nodes.Size(); i++)
+		pts.reserve(p.NbNodes());
+		for (int i = 1; i <= p.NbNodes(); i++)
 		{
-			auto pt = Pnt3d(nodes.Value(i));
+			auto pt = Pnt3d(p.Node(i));
 			pts.push_back(std::move(pt));
 		}
 		return std::move(pts);
@@ -347,8 +319,8 @@ namespace tnbLib
 	void setFunctions(const module_t& mod)
 	{
 		//- io functions
-		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadModel");
-		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadModel");
+		mod->add(chaiscript::fun([](const std::string& name)->void {loadModel(name); }), "loadFile");
+		mod->add(chaiscript::fun([]()->void {loadModel(); }), "loadFile");
 		//mod->add(chaiscript::fun([](const std::string& name)->void {loadModel1(name); }), "loadModel1");
 		mod->add(chaiscript::fun([](const std::string& name)->void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()->void {saveTo(); }), "saveTo");
@@ -392,11 +364,20 @@ int main(int argc, char *argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << " This application is aimed to read a hydrostatic shape from a shape file." << endl << endl;
+
+			Info << " You can load the file from {" << model_directory << "} directory." << endl
+				<< " - inputs: *.shape" << endl
+				<< " - output: *.hsshape" << endl;
+
+			Info << " - You can use two types of shapes which are 'full' and 'symmetry' to define a hull." << endl
+				<< " - If the shape is full, you should define the axis at the mid-plane of the shape." << endl
+				<< " - If the shape is symmetry, you should define the axis at the symmetry plane not " << endl
+				<< "   the mid-plane of the shape." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
 				<< " # IO functions: " << endl << endl
-				<< " - loadModel(name [optional])" << endl
+				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Settings: " << endl << endl

@@ -16,6 +16,7 @@ namespace tnbLib
 
 	// Forward Declarations [4/15/2022 Amir]
 	class Pnt2d;
+	class Mesh_Physic;
 
 	template<class CurveType, class SizeFun, class MetricFun = void>
 	class Mesh_PlnCurve
@@ -35,6 +36,7 @@ namespace tnbLib
 
 		std::shared_ptr<CurveType> theCurve_;
 		std::shared_ptr<Entity_Polygon<Point>> theMesh_;
+		std::shared_ptr<Mesh_Physic> thePhysic_;
 
 		Standard_Boolean theSense_;
 
@@ -134,6 +136,8 @@ namespace tnbLib
 		Pnt2d FirstCoord() const;
 		Pnt2d LastCoord() const;
 
+		const auto& Physic() const { return thePhysic_; }
+
 		virtual Standard_Real 
 			CalcCharLength
 			(
@@ -157,6 +161,8 @@ namespace tnbLib
 		{
 			return theCurve_;
 		}
+
+		const auto& GetMesh() const { return theMesh_; }
 
 		std::shared_ptr<Entity2d_Polygon> Discrete
 		(
@@ -188,6 +194,16 @@ namespace tnbLib
 		void SetSense(const Standard_Boolean theSense)
 		{
 			theSense_ = theSense;
+		}
+
+		void SetPhysic(const std::shared_ptr<Mesh_Physic>& thePhysic)
+		{
+			thePhysic_ = thePhysic;
+		}
+
+		void SetPhysic(std::shared_ptr<Mesh_Physic>&& thePhysic)
+		{
+			thePhysic_ = std::move(thePhysic);
 		}
 
 		void Reverse();

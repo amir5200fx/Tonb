@@ -16,22 +16,7 @@ namespace tnbLib
 	static unsigned short verbose = 0;
 	static bool exeTag = false;
 
-	void checkFolder(const std::string& name)
-	{
-		if (NOT boost::filesystem::is_directory(name))
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "no {" << name << "} directory has been found!" << endl
-				<< abort(FatalError);
-		}
-	}
-
-	void setVerbose(unsigned int i)
-	{
-		Info << endl;
-		Info << " - the verbosity level is set to: " << i << endl;
-		verbose = i;
-	}
+	TNB_SET_VERBOSE_FUN;
 
 	bool isNumber(const std::string s)
 	{
@@ -58,7 +43,6 @@ namespace tnbLib
 		}
 
 		file::CheckExtension(name);
-
 		file::SaveTo(mySolutionData, name + extension, verbose);
 	}
 
@@ -69,181 +53,141 @@ namespace tnbLib
 
 	auto loadGlobalInfo()
 	{
-		checkFolder("global");
+		static const auto current_directory = "global";
+		file::CheckDirectory(current_directory);
 
-		const auto currentPath = boost::filesystem::current_path();
-
-		// change the current path [12/4/2021 Amir]
-		boost::filesystem::current_path(currentPath.string() + R"(\global)");
-
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Aft_MetricPrcsr_Info::extension).string();
-
-		auto metricInfo = file::LoadFile<std::shared_ptr<Aft_MetricPrcsr_Info>>(name + Aft_MetricPrcsr_Info::extension, verbose);
-		if (NOT metricInfo)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the global metric info file is null!" << endl
-				<< abort(FatalError);
-		}
-
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
-
-		return std::move(metricInfo);
+		auto glInfo =
+			file::LoadSingleFile<std::shared_ptr<Aft_MetricPrcsr_Info>>
+			(current_directory, verbose);
+		TNB_CHECK_LOADED_FILE(glInfo);
+		return std::move(glInfo);
 	}
+
+	//auto loadCurveInfo()
+	//{
+	//	checkFolder("curve");
+
+	//	const auto currentPath = boost::filesystem::current_path();
+
+	//	// change the current path [12/4/2021 Amir]
+	//	boost::filesystem::current_path(currentPath.string() + R"(\curve)");
+
+	//	auto name = file::GetSingleFile(boost::filesystem::current_path(), Mesh_Curve_Info::extension).string();
+
+	//	auto glCurveInfo = file::LoadFile<std::shared_ptr<Mesh_Curve_Info>>(name + Mesh_Curve_Info::extension, verbose);
+	//	if (NOT glCurveInfo)
+	//	{
+	//		FatalErrorIn(FunctionSIG)
+	//			<< " the global curve info file is null" << endl
+	//			<< abort(FatalError);
+	//	}
+
+	//	std::map<int, std::shared_ptr<Mesh_Curve_Info>> curveInfoMap;
+	//	{
+	//		const auto subCurrentPath = boost::filesystem::current_path();
+
+	//		// load subdirectories [12/4/2021 Amir]
+	//		for 
+	//			(
+	//				boost::filesystem::directory_iterator iter(subCurrentPath);
+	//				iter != boost::filesystem::directory_iterator(); 
+	//				iter++
+	//				)
+	//		{
+	//			auto fname = iter->path().string();
+	//			if (isNumber(fname))
+	//			{
+	//				auto curveNb = std::stoi(fname);
+
+	//				// Change the current path [12/2/2021 Amir]
+	//				boost::filesystem::current_path(subCurrentPath.string() + R"(\)" + fname);
+
+	//				try
+	//				{
+	//					auto name = file::GetSingleFile(boost::filesystem::current_path(), Mesh_Curve_Info::extension).string();
+	//					auto curveInfo = file::LoadFile<std::shared_ptr<Mesh_Curve_Info>>(name + Mesh_Curve_Info::extension, verbose);
+	//					if (NOT curveInfo)
+	//					{
+	//						FatalErrorIn(FunctionSIG)
+	//							<< " the info curve file is null!" << endl
+	//							<< abort(FatalError);
+	//					}
+
+	//					auto paired = std::make_pair(curveNb, std::move(curveInfo));
+	//					auto insert = curveInfoMap.insert(std::move(paired));
+	//					if (NOT insert.second)
+	//					{
+	//						FatalErrorIn(FunctionSIG)
+	//							<< "unable to insert the curve info into the map!" << endl
+	//							<< " Duplicate data maybe?!" << endl
+	//							<< abort(FatalError);
+	//					}
+
+	//					if (verbose)
+	//					{
+	//						Info << " - the curve info, " << curveNb << ", has been loaded, successfully!" << endl;
+	//					}
+	//				}
+	//				catch (const error& x)
+	//				{
+	//					Info << " - Couldn't load the curve info: " << endl;
+	//					Info << x.message() << endl;				
+	//				}
+	//			}
+	//		}
+	//	}
+
+	//	//- change back the current path
+	//	boost::filesystem::current_path(currentPath);
+
+	//	auto t = std::make_tuple(std::move(glCurveInfo), std::move(curveInfoMap));
+	//	return std::move(t);
+	//}
 
 	auto loadCurveInfo()
 	{
-		checkFolder("curve");
+		static const auto current_directory = "curve";
+		file::CheckDirectory(current_directory);
 
-		const auto currentPath = boost::filesystem::current_path();
-
-		// change the current path [12/4/2021 Amir]
-		boost::filesystem::current_path(currentPath.string() + R"(\curve)");
-
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Mesh_Curve_Info::extension).string();
-
-		auto glCurveInfo = file::LoadFile<std::shared_ptr<Mesh_Curve_Info>>(name + Mesh_Curve_Info::extension, verbose);
-		if (NOT glCurveInfo)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the global curve info file is null" << endl
-				<< abort(FatalError);
-		}
-
-		std::map<int, std::shared_ptr<Mesh_Curve_Info>> curveInfoMap;
-		{
-			const auto subCurrentPath = boost::filesystem::current_path();
-
-			// load subdirectories [12/4/2021 Amir]
-			for 
-				(
-					boost::filesystem::directory_iterator iter(subCurrentPath);
-					iter != boost::filesystem::directory_iterator(); 
-					iter++
-					)
-			{
-				auto fname = iter->path().string();
-				if (isNumber(fname))
-				{
-					auto curveNb = std::stoi(fname);
-
-					// Change the current path [12/2/2021 Amir]
-					boost::filesystem::current_path(subCurrentPath.string() + R"(\)" + fname);
-
-					try
-					{
-						auto name = file::GetSingleFile(boost::filesystem::current_path(), Mesh_Curve_Info::extension).string();
-						auto curveInfo = file::LoadFile<std::shared_ptr<Mesh_Curve_Info>>(name + Mesh_Curve_Info::extension, verbose);
-						if (NOT curveInfo)
-						{
-							FatalErrorIn(FunctionSIG)
-								<< " the info curve file is null!" << endl
-								<< abort(FatalError);
-						}
-
-						auto paired = std::make_pair(curveNb, std::move(curveInfo));
-						auto insert = curveInfoMap.insert(std::move(paired));
-						if (NOT insert.second)
-						{
-							FatalErrorIn(FunctionSIG)
-								<< "unable to insert the curve info into the map!" << endl
-								<< " Duplicate data maybe?!" << endl
-								<< abort(FatalError);
-						}
-
-						if (verbose)
-						{
-							Info << " - the curve info, " << curveNb << ", has been loaded, successfully!" << endl;
-						}
-					}
-					catch (const error& x)
-					{
-						Info << " - Couldn't load the curve info: " << endl;
-						Info << x.message() << endl;				
-					}
-				}
-			}
-		}
-
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
-
-		auto t = std::make_tuple(std::move(glCurveInfo), std::move(curveInfoMap));
-		return std::move(t);
+		auto curveInfo =
+			file::LoadSingleFile<std::shared_ptr<Mesh_Curve_Info>>
+			(current_directory, verbose);
+		TNB_CHECK_LOADED_FILE(curveInfo);
+		return std::move(curveInfo);
 	}
 
 	auto loadSizeFunction()
 	{
-		checkFolder("sizeMap");
+		static const auto current_directory = "sizeFun";
+		file::CheckDirectory(current_directory);
 
-		const auto currentPath = boost::filesystem::current_path();
-
-		// change the current path [12/4/2021 Amir]
-		boost::filesystem::current_path(currentPath.string() + R"(\sizeMap)");
-
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Geo2d_SizeFunction::extension).string();
-
-		auto sizeFun = file::LoadFile<std::shared_ptr<Geo2d_SizeFunction>>(name + Geo2d_SizeFunction::extension, verbose);
-		if (NOT sizeFun)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the size function file is null" << endl
-				<< abort(FatalError);
-		}
-
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
-
+		auto sizeFun =
+			file::LoadSingleFile<std::shared_ptr<Geo2d_SizeFunction>>
+			(current_directory, verbose);
+		TNB_CHECK_LOADED_FILE(sizeFun);
 		return std::move(sizeFun);
 	}
 
 	auto loadPlane()
 	{
-		checkFolder("plane");
+		static const auto current_directory = "model";
+		file::CheckDirectory(current_directory);
 
-		const auto currentPath = boost::filesystem::current_path();
-
-		// change the current path [12/4/2021 Amir]
-		boost::filesystem::current_path(currentPath.string() + R"(\plane)");
-
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Cad2d_Plane::extension).string();
-
-		auto plane = file::LoadFile<std::shared_ptr<Cad2d_Plane>>(name + Cad2d_Plane::extension, verbose);
-		if (NOT plane)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the plane file is null" << endl
-				<< abort(FatalError);
-		}
-
-		//- change back the current path
-		boost::filesystem::current_path(currentPath);
+		auto plane = 
+			file::LoadSingleFile<std::shared_ptr<Cad2d_Plane>>
+			(current_directory, verbose);
+		TNB_CHECK_LOADED_FILE(plane);
 
 		return std::move(plane);
 	}
 
 	auto loadNodeCreator()
 	{
-		checkFolder("nodeCreator");
+		static const auto current_directory = "nodeCreator";
+		file::CheckDirectory(current_directory);
 
-		const auto currentPath = boost::filesystem::current_path();
-
-		// change the current path [12/21/2021 Amir]
-		boost::filesystem::current_path(currentPath.string() + R"(\nodeCreator)");
-
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), Aft2d_OptNode_Calculator::extension).string();
-
-		auto alg = file::LoadFile<std::shared_ptr<Aft2d_OptNode_Calculator>>(name + Aft2d_OptNode_Calculator::extension, verbose);
-		if (NOT alg)
-		{
-			FatalErrorIn(FunctionSIG)
-				<< " the node creator file is null" << endl
-				<< abort(FatalError);
-		}
-
-		// change back the current path [12/21/2021 Amir]
-		boost::filesystem::current_path(currentPath);
+		auto alg = file::LoadSingleFile<std::shared_ptr<Aft2d_OptNode_Calculator>>(current_directory, verbose);
+		TNB_CHECK_LOADED_FILE(alg);
 
 		return std::move(alg);
 	}
@@ -251,13 +195,10 @@ namespace tnbLib
 	void execute()
 	{
 		auto metricInfo = loadGlobalInfo();
-
-		auto [glCurveInfo, curveInfoMap] = loadCurveInfo();
-
+		//auto [glCurveInfo, curveInfoMap] = loadCurveInfo();
+		auto glCurveInfo = loadCurveInfo();
 		auto sizeFun = loadSizeFunction();
-
 		auto plane = loadPlane();
-
 		auto nodeCreator = loadNodeCreator();
 
 		auto soluData = std::make_shared<Aft2d_SolutionData>();
@@ -265,12 +206,10 @@ namespace tnbLib
 		soluData->LoadGlobalMetricInfo(std::move(metricInfo));
 		soluData->LoadGlobalCurveInfo(std::move(glCurveInfo));
 
-		soluData->LoadCurveInfo(std::move(curveInfoMap));
+		//soluData->LoadCurveInfo(std::move(curveInfoMap));
 
 		soluData->LoadSizeFunction(std::move(sizeFun));
-
 		soluData->LoadPlane(std::move(plane));
-
 		soluData->LoadNodeCalculator(std::move(nodeCreator));
 
 		mySolutionData = std::move(soluData);
@@ -344,8 +283,8 @@ int main(int argc, char *argv[])
 				<< " # Subdirectories: " << endl
 				<< " - global (metric info)" << endl
 				<< " - curve (info)" << endl
-				<< " - sizeMap" << endl
-				<< " - plane" << endl
+				<< " - sizeFun" << endl
+				<< " - model" << endl
 				<< " - nodeCreator" << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl

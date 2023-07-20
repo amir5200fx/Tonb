@@ -196,7 +196,6 @@ void tnbLib::Aft2d_SegmentEdge::MergeDangles
 
 	if (cn0->IsRegular() AND cn1->IsRegular())
 	{
-		std::cout << "is regular" << std::endl;
 		auto node =
 			Aft2d_CornerNode::MergeNodes(cn0, cn1, Mesh_BndMergeAlg::New);
 

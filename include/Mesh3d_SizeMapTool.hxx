@@ -67,4 +67,6 @@ namespace tnbLib
 	};
 }
 
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(tnbLib::Mesh3d_SizeMapTool);
+
 #endif // !_Mesh3d_SizeMapTool_Header

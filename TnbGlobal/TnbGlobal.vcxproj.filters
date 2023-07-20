@@ -189,4 +189,9 @@
       <Filter>TnbLib\Global\Table\Entity</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="TnbLib\Global\global\Global_FileM.hxx">
+      <Filter>TnbLib\Global\global</Filter>
+    </None>
+  </ItemGroup>
 </Project>
