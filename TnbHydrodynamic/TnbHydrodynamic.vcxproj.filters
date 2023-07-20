@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{9b38c4c7-1b1c-4b6d-8713-e7642eb542b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrodynamic">
+      <UniqueIdentifier>{209b87e8-baf2-453e-9062-b0b65a378efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Hydrodynamic\Holtrop">
+      <UniqueIdentifier>{84767456-f7c6-476f-b157-7e156a864523}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop.hxx">
+      <Filter>TnbLib\Hydrodynamic\Holtrop</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop_Veriables.hxx">
+      <Filter>TnbLib\Hydrodynamic\Holtrop</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop.cxx">
+      <Filter>TnbLib\Hydrodynamic\Holtrop</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop_Veriables.cxx">
+      <Filter>TnbLib\Hydrodynamic\Holtrop</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

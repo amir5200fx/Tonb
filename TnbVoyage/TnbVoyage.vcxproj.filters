@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{97ef09fb-d9b2-4e26-87f4-620ad7245916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage">
+      <UniqueIdentifier>{fda3d389-4b1a-4d1d-83b5-c99caf8604e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities">
+      <UniqueIdentifier>{f50e9476-e770-4ee1-a008-c561ed36047e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\module">
+      <UniqueIdentifier>{79cf3120-4520-4d28-a659-9a6f1be35e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Entity">
+      <UniqueIdentifier>{1438f2db-55f9-476c-b57d-e3b72785db47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node">
+      <UniqueIdentifier>{a801812a-2501-4337-a6f2-c603458049ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Edge">
+      <UniqueIdentifier>{70a0fb6b-1de4-4911-ba0e-e053679f7276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\2d">
+      <UniqueIdentifier>{734a76a5-ee1a-4ea4-bff4-319cd69dc365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\3d">
+      <UniqueIdentifier>{a6bbe29e-babe-4d37-9543-ec0df65fd889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\RefRoute">
+      <UniqueIdentifier>{34efc3cc-4af5-4a11-a996-eb1e1845ef20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\Destination">
+      <UniqueIdentifier>{8322128e-c6a8-459e-a156-89b75cf31397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Node\Departure">
+      <UniqueIdentifier>{46dd89b4-34e4-45f9-a4e6-21628d482db6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\LongMap">
+      <UniqueIdentifier>{2d74b44c-f85d-4c2d-99ce-0ce4ab48fd84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry">
+      <UniqueIdentifier>{70988700-296a-420e-a716-07fbe580b1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\SizeFun">
+      <UniqueIdentifier>{2b0ec224-d67e-49a0-8426-b0127eb3252b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\SizeFun\Uniform">
+      <UniqueIdentifier>{7f3df80a-fb6c-47a9-84bb-5d34c2e9b1e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\MetricFun">
+      <UniqueIdentifier>{14ce808d-d934-4426-99cc-461a8ab50211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\WaypointsDistb">
+      <UniqueIdentifier>{f834614d-155a-4c01-9682-9c2f6f11beac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\WptsGrid">
+      <UniqueIdentifier>{e1c3a0b1-33ff-4610-a8af-7295afb2a6d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function">
+      <UniqueIdentifier>{88c7511b-6676-44a5-83f1-947babb992fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance">
+      <UniqueIdentifier>{f40eed25-47ea-43a3-a5b1-dfa9d244a62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance\Calm">
+      <UniqueIdentifier>{8fae924e-ead6-4290-b38b-0eb4e448867c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance\Wave">
+      <UniqueIdentifier>{8b63b94f-c911-47fe-bb24-3b618449b23a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance\Wind">
+      <UniqueIdentifier>{3f4ca07a-3305-4112-841d-af26379035ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\Path">
+      <UniqueIdentifier>{a043b0e0-d26d-4f93-b09e-986eaad2bbdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\Path\Curve">
+      <UniqueIdentifier>{371ced06-f779-4763-a2a3-ed74249646bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\Path\Straight">
+      <UniqueIdentifier>{2606cbcb-971b-41a1-ae7b-5f9be9ad7792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance\Total">
+      <UniqueIdentifier>{77994956-087e-480b-b791-97628add542e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\ShipCtrl">
+      <UniqueIdentifier>{e9674a29-46fb-4a47-bd30-cf910444f709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Wind">
+      <UniqueIdentifier>{fb452533-c9e3-4be1-8426-329b11d4d609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Wave">
+      <UniqueIdentifier>{38fb5267-89d9-4b82-8368-230139b89201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Current">
+      <UniqueIdentifier>{2d525c66-9f8b-42c4-9c0e-bec5e15bd5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field">
+      <UniqueIdentifier>{09cc7cba-7467-454d-bbbd-d783041ce14a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Current">
+      <UniqueIdentifier>{7ced0c74-7d31-4912-9baa-a26741a9bab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Wave">
+      <UniqueIdentifier>{459e0cc9-dbc3-4385-9ba0-a0ec37b6bebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Wind">
+      <UniqueIdentifier>{762945bc-2256-4571-85d2-5849714823e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Profile">
+      <UniqueIdentifier>{8a56bddd-d584-4555-92df-4d01f4ee78cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance\Calm\Profiled">
+      <UniqueIdentifier>{e9cb66db-6b85-4a83-8544-375cb6cb5213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance\Wave\Profiled">
+      <UniqueIdentifier>{ee09113d-51ae-4301-8382-1998ad2b6a78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Resistance\Wind\Profiled">
+      <UniqueIdentifier>{83f4d7a1-e4e9-4800-89a4-a37747645200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Cost">
+      <UniqueIdentifier>{933435c3-8cb1-4149-8b11-f93d2cdb9f50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Cost\FuelConsumption">
+      <UniqueIdentifier>{76a3a2bf-6062-45b7-9914-5f24c3870d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Cost\MaxShipMotion">
+      <UniqueIdentifier>{7a513264-7d62-4d14-aceb-9ff7a2b3e7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Cost\ETA">
+      <UniqueIdentifier>{d8979d7b-73b9-4724-90b3-cc9cd4f0aa8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Cost\Fatigue">
+      <UniqueIdentifier>{1ccd7d5c-a887-4fb7-b43e-62af024bde35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Cost\Crack">
+      <UniqueIdentifier>{c6e5d2f7-c709-4ec8-b0e5-15f0599b149f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\WaypointsDistb\DevFun">
+      <UniqueIdentifier>{6a357f3b-b2b2-4eb0-873f-cf32ea222827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\Tools">
+      <UniqueIdentifier>{042f126a-e602-4306-b04e-68fb65d8cfb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Weather">
+      <UniqueIdentifier>{305c8a56-8a45-4044-863b-2951bdbcbf01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\PathGeneration">
+      <UniqueIdentifier>{5b3ab0ec-d0b1-40d5-940a-d8bca0934739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh">
+      <UniqueIdentifier>{a3949e0b-c517-4af3-8bf7-eb22275e6e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Earth">
+      <UniqueIdentifier>{ee4f7b7a-6624-4bec-9e97-2d93682ae183}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
+      <Filter>TnbLib\Voyage\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\module\Voyage_Module.hxx">
+      <Filter>TnbLib\Voyage\module</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Node\Voyage_Node.hxx">
+      <Filter>TnbLib\Voyage\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2d.hxx">
+      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.hxx">
+      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Edge\Voyage_Edge.hxx">
+      <Filter>TnbLib\Voyage\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\RefRoute\Voyage_RefRoute.hxx">
+      <Filter>TnbLib\Voyage\Entities\RefRoute</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\LongMap\Voyage_LongMap.hxx">
+      <Filter>TnbLib\Voyage\LongMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\SizeFun\VoyageGeo_SizeFun.hxx">
+      <Filter>TnbLib\Voyage\Geometry\SizeFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\SizeFun\Uniform\VoyageGeo_UniSizeFun.hxx">
+      <Filter>TnbLib\Voyage\Geometry\SizeFun\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\MetricFun\VoyageGeo_MetricFun.hxx">
+      <Filter>TnbLib\Voyage\Geometry\MetricFun</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\WaypointsDistb\VoyageGeo_WaypointsDistb.hxx">
+      <Filter>TnbLib\Voyage\Geometry\WaypointsDistb</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\WptsGrid\Voyage_WptsGrid.hxx">
+      <Filter>TnbLib\Voyage\Entities\WptsGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Path\VoyageGeo_Path.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Path\Curve\VoyageGeo_Curve.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Path\Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Path\Straight\VoyageGeo_Straight.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Path\Straight</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\VoyageFun_Resistance.hxx">
+      <Filter>TnbLib\Voyage\Function\Resistance</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\ShipCtrl\Voyage_ShipCtrl.hxx">
+      <Filter>TnbLib\Voyage\Entities\ShipCtrl</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Wind\Voyage_Wind.hxx">
+      <Filter>TnbLib\Voyage\Entities\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Wave\Voyage_Wave.hxx">
+      <Filter>TnbLib\Voyage\Entities\Wave</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Current\Voyage_Current.hxx">
+      <Filter>TnbLib\Voyage\Entities\Current</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Field\Wind\VoyageField_Wind.hxx">
+      <Filter>TnbLib\Voyage\Field\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Field\Wave\VoyageField_Wave.hxx">
+      <Filter>TnbLib\Voyage\Field\Wave</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Field\Current\VoyageField_Current.hxx">
+      <Filter>TnbLib\Voyage\Field\Current</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\Calm\VoyageFun_CalmResist.hxx">
+      <Filter>TnbLib\Voyage\Function\Resistance\Calm</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Profile\Voyage_Profile.hxx">
+      <Filter>TnbLib\Voyage\Entities\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Profile\Voyage_ProfileI.hxx">
+      <Filter>TnbLib\Voyage\Entities\Profile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\Calm\Profiled\VoyageFun_ProfiledCalmResist.hxx">
+      <Filter>TnbLib\Voyage\Function\Resistance\Calm\Profiled</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Function\Resistance\Wave\VoyageFun_WaveResist.hxx">
+      <Filter>TnbLib\Voyage\Function\Resistance\Wave</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Function\Cost\VoyageFun_CostFunction.hxx">
+      <Filter>TnbLib\Voyage\Function\Cost</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Tools\VoyageGeo_Tools.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Weather\Voyage_Weather.hxx">
+      <Filter>TnbLib\Voyage\Entities\Weather</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.hxx">
+      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh.hxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Field\Earth\VoyageField_Earth.hxx">
+      <Filter>TnbLib\Voyage\Field\Earth</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
+      <Filter>TnbLib\Voyage\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2d.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2dIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3dIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Edge\Voyage_Edge.cxx">
+      <Filter>TnbLib\Voyage\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Edge\Voyage_EdgeIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\Path\Curve\VoyageGeo_Curve.cxx">
+      <Filter>TnbLib\Voyage\Geometry\Path\Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\Path\Straight\VoyageGeo_Straight.cxx">
+      <Filter>TnbLib\Voyage\Geometry\Path\Straight</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\WaypointsDistb\VoyageGeo_WaypointsDistb.cxx">
+      <Filter>TnbLib\Voyage\Geometry\WaypointsDistb</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\Tools\VoyageGeo_Tools.cxx">
+      <Filter>TnbLib\Voyage\Geometry\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Weather\Voyage_WeatherIO.cxx">
+      <Filter>TnbLib\Voyage\Entities\Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.cxx">
+      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh.cxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
