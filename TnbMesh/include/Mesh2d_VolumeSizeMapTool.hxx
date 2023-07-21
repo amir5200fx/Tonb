@@ -3,6 +3,7 @@
 #define _Mesh2d_VolumeSizeMapTool_Header
 
 #include <Mesh2d_SizeMapTool.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 
 #include <map>
 
@@ -22,6 +23,16 @@ namespace tnbLib
 			theShapes_;
 
 		std::shared_ptr<Mesh2d_VolumeSizeMapTool_Info> theInfo_;
+
+
+		// Private functions and operators [7/19/2023 Payvand]
+
+		static TnbMesh_EXPORT std::vector<Pnt2d>
+			RetrieveInsidePoints
+			(
+				const std::vector<std::shared_ptr<Pnt2d>>& thePts,
+				const Entity2d_Polygon&
+			);
 
 	protected:
 

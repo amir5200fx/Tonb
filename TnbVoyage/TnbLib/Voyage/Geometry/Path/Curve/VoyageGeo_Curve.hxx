@@ -37,11 +37,18 @@ namespace tnbLib
 
 		const auto& Geometry() const { return theGeometry_; }
 
-		Pnt2d Value(const Standard_Real x) const override;
-		Dir2d CalcNormal(const Standard_Real) const override;
+		TnbVoyage_EXPORT Pnt2d Value(const Standard_Real x) const override;
+		TnbVoyage_EXPORT Dir2d CalcNormal(const Standard_Real) const override;
 
-		Pnt2d Start() const override;
-		Pnt2d End() const override;
+		TnbVoyage_EXPORT Pnt2d Start() const override;
+		TnbVoyage_EXPORT Pnt2d End() const override;
+
+		TnbVoyage_EXPORT std::vector<Standard_Real> 
+			Discrete
+			(
+				const std::shared_ptr<Geo2d_MetricPrcsrAnIso>&, 
+				const std::shared_ptr<Mesh_Curve_Info>& theInfo
+			) const override;
 
 	};
 }

@@ -2,6 +2,8 @@
 #ifndef _VoyageGeo_Path_Header
 #define _VoyageGeo_Path_Header
 
+#include <Voyage_Module.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
 
@@ -11,8 +13,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations [7/11/2023 Payvand]
-	class VoyageGeo_SizeFun;
-	class VoyageGeo_MetricFun;
+	class Mesh_Curve_Info;
 
 	class VoyageGeo_Path
 	{
@@ -41,8 +42,8 @@ namespace tnbLib
 		virtual std::vector<Standard_Real> 
 			Discrete
 			(
-				const std::shared_ptr<VoyageGeo_SizeFun>&, 
-				const std::shared_ptr<VoyageGeo_MetricFun>&
+				const std::shared_ptr<Geo2d_MetricPrcsrAnIso>&,
+				const std::shared_ptr<Mesh_Curve_Info>& theInfo
 			) const = 0;
 
 	};

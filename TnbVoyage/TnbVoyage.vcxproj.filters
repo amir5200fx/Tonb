@@ -157,6 +157,18 @@
     <Filter Include="TnbLib\Voyage\Field\Earth">
       <UniqueIdentifier>{ee4f7b7a-6624-4bec-9e97-2d93682ae183}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\MetricFun\Uniform">
+      <UniqueIdentifier>{1799d059-223f-44d7-9784-ae7348709fa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Dijkstra">
+      <UniqueIdentifier>{23f890d4-4c2b-4887-819f-bef25daf4e3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Entities\Graph">
+      <UniqueIdentifier>{ce7b80c5-024b-4bc8-b1a7-3c68fe0e92a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Tools">
+      <UniqueIdentifier>{831d1caa-767b-4047-a3be-f326066cb02c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -168,12 +180,6 @@
     <ClInclude Include="TnbLib\Voyage\Entities\Node\Voyage_Node.hxx">
       <Filter>TnbLib\Voyage\Entities\Node</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2d.hxx">
-      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.hxx">
-      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Entities\Edge\Voyage_Edge.hxx">
       <Filter>TnbLib\Voyage\Entities\Edge</Filter>
     </ClInclude>
@@ -182,15 +188,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\LongMap\Voyage_LongMap.hxx">
       <Filter>TnbLib\Voyage\LongMap</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Geometry\SizeFun\VoyageGeo_SizeFun.hxx">
-      <Filter>TnbLib\Voyage\Geometry\SizeFun</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Geometry\SizeFun\Uniform\VoyageGeo_UniSizeFun.hxx">
-      <Filter>TnbLib\Voyage\Geometry\SizeFun\Uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Geometry\MetricFun\VoyageGeo_MetricFun.hxx">
-      <Filter>TnbLib\Voyage\Geometry\MetricFun</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Geometry\WaypointsDistb\VoyageGeo_WaypointsDistb.hxx">
       <Filter>TnbLib\Voyage\Geometry\WaypointsDistb</Filter>
@@ -203,9 +200,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Geometry\Path\Curve\VoyageGeo_Curve.hxx">
       <Filter>TnbLib\Voyage\Geometry\Path\Curve</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Geometry\Path\Straight\VoyageGeo_Straight.hxx">
-      <Filter>TnbLib\Voyage\Geometry\Path\Straight</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Function\Resistance\VoyageFun_Resistance.hxx">
       <Filter>TnbLib\Voyage\Function\Resistance</Filter>
@@ -255,31 +249,25 @@
     <ClInclude Include="TnbLib\Voyage\Entities\Weather\Voyage_Weather.hxx">
       <Filter>TnbLib\Voyage\Entities\Weather</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.hxx">
-      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh.hxx">
       <Filter>TnbLib\Voyage\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Field\Earth\VoyageField_Earth.hxx">
       <Filter>TnbLib\Voyage\Field\Earth</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Dijkstra\Voyage_Dijkstra.hxx">
+      <Filter>TnbLib\Voyage\Dijkstra</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Entities\Graph\Voyage_Graph.hxx">
+      <Filter>TnbLib\Voyage\Entities\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Tools\Voyage_Tools.hxx">
+      <Filter>TnbLib\Voyage\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
       <Filter>TnbLib\Voyage\Entities\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2d.cxx">
-      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Entities\Node\2d\Voyage_Node2dIO.cxx">
-      <Filter>TnbLib\Voyage\Entities\Node\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3d.cxx">
-      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Entities\Node\3d\Voyage_Node3dIO.cxx">
-      <Filter>TnbLib\Voyage\Entities\Node\3d</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Entities\Edge\Voyage_Edge.cxx">
       <Filter>TnbLib\Voyage\Entities\Edge</Filter>
@@ -290,9 +278,6 @@
     <ClCompile Include="TnbLib\Voyage\Geometry\Path\Curve\VoyageGeo_Curve.cxx">
       <Filter>TnbLib\Voyage\Geometry\Path\Curve</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Geometry\Path\Straight\VoyageGeo_Straight.cxx">
-      <Filter>TnbLib\Voyage\Geometry\Path\Straight</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Geometry\WaypointsDistb\VoyageGeo_WaypointsDistb.cxx">
       <Filter>TnbLib\Voyage\Geometry\WaypointsDistb</Filter>
     </ClCompile>
@@ -302,11 +287,11 @@
     <ClCompile Include="TnbLib\Voyage\Entities\Weather\Voyage_WeatherIO.cxx">
       <Filter>TnbLib\Voyage\Entities\Weather</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.cxx">
-      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
-    </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh.cxx">
       <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Dijkstra\Voyage_Dijkstra.cxx">
+      <Filter>TnbLib\Voyage\Dijkstra</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

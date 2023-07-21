@@ -368,7 +368,7 @@ namespace tnbLib
 		}
 
 		MakeChain(Parameters);
-
+		theParameters_ = std::move(Parameters);
 		Change_IsDone() = Standard_True;
 	}
 

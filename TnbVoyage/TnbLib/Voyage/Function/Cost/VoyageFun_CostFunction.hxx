@@ -4,10 +4,15 @@
 
 #include <Pnt2d.hxx>
 
+#include <memory>
+
 #include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {
+
+	// Forward Declarations [7/21/2023 Payvand]
+	class Voyage_Edge;
 
 	class VoyageFun_CostFunction
 	{
@@ -28,7 +33,7 @@ namespace tnbLib
 
 		// Public functions and operators [7/11/2023 Payvand]
 
-		virtual Standard_Real Value(const Pnt2d& theCoord) const = 0;
+		virtual Standard_Real Value(const std::shared_ptr<Voyage_Edge>&) const = 0;
 
 	};
 

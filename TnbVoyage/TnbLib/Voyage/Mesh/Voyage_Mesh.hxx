@@ -2,6 +2,8 @@
 #ifndef _Voyage_Mesh_Header
 #define _Voyage_Mesh_Header
 
+#include <Voyage_Module.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_Done.hxx>
 
@@ -17,6 +19,7 @@ namespace tnbLib
 	class VoyageGeo_SizeFun;
 	class VoyageGeo_MetricFun;
 	class VoyageField_Earth;
+	class Mesh_Curve_Info;
 
 	struct Voyage_Mesh_Cache
 	{
@@ -33,14 +36,22 @@ namespace tnbLib
 
 		std::shared_ptr<VoyageGeo_Path> theRef_;
 
-		std::shared_ptr<VoyageGeo_SizeFun> theSizeFun_;
-		std::shared_ptr<VoyageGeo_MetricFun> theMetricFun_;
+		std::shared_ptr<Geo2d_MetricPrcsrAnIso> thePrcsr_;
+		std::shared_ptr<Mesh_Curve_Info> theCurveInfo_;
 
 		std::shared_ptr<VoyageField_Earth> theEarth_;
 
+		Standard_Real theResolution_;
+		Standard_Integer theMaxDeviation_;
+
+
+		// results [7/21/2023 Payvand]
+
+		std::shared_ptr<Voyage_WptsGrid> theGrid_;
+
 		// Private functions and operators [7/20/2023 Payvand]
 
-		//static Standard_Boolean CheckIntersection(const Pnt2d& theCoord, const )
+		TnbVoyage_EXPORT Standard_Boolean IsValid(const Pnt2d& theCoord) const;
 
 	public:
 
@@ -54,14 +65,20 @@ namespace tnbLib
 
 		// Public functions and operators [7/20/2023 Payvand]
 
-		const auto& Path() const { return theRef_; }
+		const auto& RefRoute() const { return theRef_; }
 
-		const auto& SizeFun() const { return theSizeFun_; }
-		const auto& MetricFun() const { return theMetricFun_; }
+		const auto& MetricPrcsr() const { return thePrcsr_; }
+
+		const auto& CurveInfo() const { return theCurveInfo_; }
 
 		const auto& Earth() const { return theEarth_; }
 
-		void Perform();
+		auto Resolution() const { return theResolution_; }
+		auto MaxDeviation() const { return theMaxDeviation_; }
+
+		const auto& Grid() const { return theGrid_; }
+
+		TnbVoyage_EXPORT void Perform();
 
 	};
 

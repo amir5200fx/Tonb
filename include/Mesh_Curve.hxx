@@ -100,6 +100,7 @@ namespace tnbLib
 		std::shared_ptr<MetricPrcsrType> theMetricMap_;
 
 		std::shared_ptr<chain> theChain_;
+		std::vector<Standard_Real> theParameters_;
 
 
 		//- private functions and operators
@@ -169,6 +170,8 @@ namespace tnbLib
 		{
 			return theChain_;
 		}
+
+		const auto& Parameters() const { return theParameters_; }
 
 		void LoadCurve
 		(

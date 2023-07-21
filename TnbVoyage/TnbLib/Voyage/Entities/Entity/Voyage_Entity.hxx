@@ -13,7 +13,6 @@ namespace tnbLib
 
 	class Voyage_Entity
 		: public Global_Indexed
-		, public Global_Named
 	{
 
 		/*Private Data*/
@@ -27,7 +26,6 @@ namespace tnbLib
 		void serialize(Archive& ar, const unsigned int file_version)
 		{
 			ar& boost::serialization::base_object<Global_Indexed>(*this);
-			ar& boost::serialization::base_object<Global_Named>(*this);
 		}
 
 	protected:
@@ -39,9 +37,8 @@ namespace tnbLib
 
 		// constructors [6/17/2023 Payvand]
 
-		Voyage_Entity(const Standard_Integer theIndex, const word& theName)
+		Voyage_Entity(const Standard_Integer theIndex)
 			: Global_Indexed(theIndex)
-			, Global_Named(theName)
 		{}
 
 	public:

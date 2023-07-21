@@ -8,6 +8,9 @@
 namespace tnbLib
 {
 
+	// Forward Declarations [7/21/2023 Payvand]
+	class Voyage_Edge;
+
 	class Voyage_Node
 		: public Voyage_Entity
 	{
@@ -15,6 +18,12 @@ namespace tnbLib
 		/*Private Data*/
 
 		Pnt2d theCoord_;
+
+		Standard_Real theTime_;
+
+
+		std::map<Standard_Integer, std::weak_ptr<Voyage_Edge>>
+			theEdges_;
 
 	protected:
 
@@ -25,8 +34,8 @@ namespace tnbLib
 
 		// constructors [7/9/2023 Payvand]
 
-		Voyage_Node(const Standard_Integer theIndex, const word& theName)
-			: Voyage_Entity(theIndex, theName)
+		Voyage_Node(const Standard_Integer theIndex)
+			: Voyage_Entity(theIndex)
 		{}
 
 	public:
@@ -38,8 +47,18 @@ namespace tnbLib
 			return theCoord_;
 		}
 
+		auto Time() const { return theTime_; }
+
+		const auto& Edges() const { return theEdges_; }
+
 		void SetCoord(const Pnt2d& theCoord) { theCoord_ = theCoord; }
 		void SetCoord(Pnt2d&& theCoord) { theCoord_ = std::move(theCoord); }
+
+		void SetTime(const Standard_Real theTime) { theTime_ = theTime; }
+
+		void ImportEdge(const std::shared_ptr<Voyage_Edge>&);
+		void RemoveEdge(const Standard_Integer theIndex);
+
 
 	};
 
