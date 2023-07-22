@@ -10,6 +10,9 @@
     <Filter Include="TnbLib\Hydrodynamic\Holtrop">
       <UniqueIdentifier>{84767456-f7c6-476f-b157-7e156a864523}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrodynamic\Module">
+      <UniqueIdentifier>{cdf4c22b-a6a9-4650-a9fd-5f8e9e4efcb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop.hxx">
@@ -17,6 +20,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop_Veriables.hxx">
       <Filter>TnbLib\Hydrodynamic\Holtrop</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrodynamic\Module\HydDyna_Module.hxx">
+      <Filter>TnbLib\Hydrodynamic\Module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

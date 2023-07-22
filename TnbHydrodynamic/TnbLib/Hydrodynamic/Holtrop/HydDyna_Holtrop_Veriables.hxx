@@ -2,6 +2,9 @@
 #ifndef _HydDyna_Holtrop_Veriables_Header
 #define _HydDyna_Holtrop_Veriables_Header
 
+#include <HydDyna_Module.hxx>
+#include <Global_Serialization.hxx>
+
 #include <OSstream.hxx>
 
 #include <Standard_TypeDef.hxx>
@@ -35,6 +38,29 @@ namespace tnbLib
 			Standard_Real theAT_;
 			Standard_Real theTF_;
 			Standard_Real theHB_;
+
+
+			// Private functions and operators [7/22/2023 Payvand]
+
+			friend class boost::serialization::access;
+
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int file_version)
+			{
+				ar& theB_;
+				ar& theT_;
+				ar& theL_;
+				ar& theCB_;
+				ar& theCP_;
+				ar& theCWP_;
+				ar& theCM_;
+				ar& theABT_;
+				ar& theLCB_;
+				ar& theDISPV_;
+				ar& theAT_;
+				ar& theTF_;
+				ar& theHB_;
+			}
 
 		public:
 
@@ -166,9 +192,22 @@ namespace tnbLib
 			Standard_Real CA;
 			Standard_Real _1plusK1; // Form factor
 
-			Standard_Real CalcWaveResistance(const Standard_Real theVel, const Standard_Real theGravity, const Standard_Real theDensity, const Standard_Real theL, const Standard_Real theDispv);
+			TnbHydDyna_EXPORT Standard_Real 
+				CalcWaveResistance
+				(
+					const Standard_Real theVel,
+					const Standard_Real theGravity, 
+					const Standard_Real theDensity,
+					const Standard_Real theL,
+					const Standard_Real theDispv
+				);
 
-			void CalcCoefficients(const ShipPrincipals&, const Standard_Real theCSTEM, const Standard_Real theLR);
+			TnbHydDyna_EXPORT void CalcCoefficients
+			(
+				const ShipPrincipals&,
+				const Standard_Real theCSTEM,
+				const Standard_Real theLR
+			);
 		};
 
 		struct Froudes
@@ -176,7 +215,12 @@ namespace tnbLib
 			double Fni;
 			double FnT;
 
-			void CalcVariables(const ShipPrincipals&, const Standard_Real theVel, const Standard_Real theGravity);
+			TnbHydDyna_EXPORT void CalcVariables
+			(
+				const ShipPrincipals&, 
+				const Standard_Real theVel, 
+				const Standard_Real theGravity
+			);
 		};
 
 		enum class AftBodyForm
