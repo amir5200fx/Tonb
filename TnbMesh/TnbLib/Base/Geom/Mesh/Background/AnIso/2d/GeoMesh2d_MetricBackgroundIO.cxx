@@ -4,9 +4,11 @@
 #include <OSstream.hxx>
 
 template<>
-void tnbLib::GeoMesh2d_MetricBackground::ExportToPlt(OFstream& File) const
+void tnbLib::GeoMesh2d_SingleMetricBackground::ExportToPlt(OFstream& File) const
 {
 	FatalErrorIn(FunctionSIG) <<
 		"Not supposed to be called this function." << endl
 		<< abort(FatalError);
 }
+
+BOOST_CLASS_EXPORT_IMPLEMENT(tnbLib::GeoMesh2d_SingleMetricBackground);

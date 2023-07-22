@@ -2,19 +2,16 @@
 #ifndef _GeoMetricFun2d_Background_Header
 #define _GeoMetricFun2d_Background_Header
 
+#include <GeoMetricFun2d_BackgroundFwd.hxx>
 #include <GeoMetricFun_Background.hxx>
 #include <GeoMesh2d_MetricBackground.hxx>
 
 namespace tnbLib
 {
 
-	typedef GeoMetricFun_Background<GeoMesh2d_MetricBackground>
-		GeoMetricFun2d_Background;
-
-
 	template<>
 	template<>
-	void GeoMetricFun2d_Background::serialize<TNB_iARCH_TYPE>
+	TnbMesh_EXPORT void GeoMetricFun2d_Background::serialize<TNB_iARCH_TYPE>
 		(
 			TNB_iARCH_TYPE& ar, 
 			const unsigned int file_version
@@ -22,7 +19,7 @@ namespace tnbLib
 
 	template<>
 	template<>
-	void GeoMetricFun2d_Background::serialize<TNB_oARCH_TYPE>
+	TnbMesh_EXPORT void GeoMetricFun2d_Background::serialize<TNB_oARCH_TYPE>
 		(
 			TNB_oARCH_TYPE& ar, 
 			const unsigned int file_version

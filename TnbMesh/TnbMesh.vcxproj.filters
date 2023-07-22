@@ -5532,6 +5532,12 @@
     <ClInclude Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d\Mesh2d_MultiSizeMapFwd.hxx">
       <Filter>TnbLib\Base\Tools\MultiSizeMap\Iso\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_SingleMetricBackgroundFwd.hxx">
+      <Filter>TnbLib\Base\Geom\Mesh\Background\AnIso\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundFwd.hxx">
+      <Filter>TnbLib\Base\MetricFunction\Background\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7252,6 +7258,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\2d\Volume\Mesh2d_VolumeSizeMapTool_CGAL.cxx">
       <Filter>TnbLib\Base\Tools\SizeMap\2d\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsBackground.cxx">
+      <Filter>TnbLib\Base\Tools\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

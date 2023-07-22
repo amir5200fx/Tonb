@@ -976,6 +976,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\Geom\Function\Size\Uniform\GeoSizeFun_Uniform.hxx" />
     <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_MetricBackground.hxx" />
     <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_MetricBackgroundFwd.hxx" />
+    <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\AnIso\2d\GeoMesh2d_SingleMetricBackgroundFwd.hxx" />
     <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\GeoMesh_Background.hxx" />
     <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\GeoMesh_BackgroundI.hxx" />
     <ClInclude Include="TnbLib\Base\Geom\Mesh\Background\Info\GeoMesh_Background_Info.hxx" />
@@ -1018,6 +1019,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\IO\Mesh_IO.hxx" />
     <ClInclude Include="TnbLib\Base\IO\Mesh_IOI.hxx" />
     <ClInclude Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_Background.hxx" />
+    <ClInclude Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundFwd.hxx" />
     <ClInclude Include="TnbLib\Base\MetricMapController\Mesh_MetricMapController.hxx" />
     <ClInclude Include="TnbLib\Base\MetricMapController\Mesh_MetricMapControllerI.hxx" />
     <ClInclude Include="TnbLib\Base\MetricMapController\Traits\Mesh_MetricMapController_Traits.hxx" />
@@ -1792,6 +1794,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\Base\Mesh_SizeMapToolBase.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\SizeMap\Info\Mesh_SizeMapTool_Info.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_Tools.cxx" />
+    <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsBackground.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsConversion.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\2d\Iso\Mesh2d_UnionSizeMap.cxx" />
     <ClCompile Include="TnbLib\Base\Tools\UnionSizeMap\3d\Mesh3d_UnionSizeMap.cxx" />

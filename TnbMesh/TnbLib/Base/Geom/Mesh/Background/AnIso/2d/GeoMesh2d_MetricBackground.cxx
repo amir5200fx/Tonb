@@ -4,7 +4,7 @@
 #include <MeshBase_Tools.hxx>
 
 template<>
-void tnbLib::GeoMesh2d_MetricBackground::ConnectTopology()
+void tnbLib::GeoMesh2d_SingleMetricBackground::ConnectTopology()
 {
 	if (const auto& mesh = this->Mesh())
 	{
@@ -19,7 +19,7 @@ namespace tnbLib
 {
 
 	template<>
-	void GeoMesh2d_MetricBackground::HvCorrection
+	void GeoMesh2d_SingleMetricBackground::HvCorrection
 	(
 		const std::vector<std::shared_ptr<Mesh2d_Node>>& nodes,
 		const Standard_Real Factor,
