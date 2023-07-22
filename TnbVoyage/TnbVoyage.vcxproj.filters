@@ -169,6 +169,21 @@
     <Filter Include="TnbLib\Voyage\Tools">
       <UniqueIdentifier>{831d1caa-767b-4047-a3be-f326066cb02c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Wind\Background">
+      <UniqueIdentifier>{17941bd6-61c9-4c07-b00b-08656cb6f97a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Wave\Background">
+      <UniqueIdentifier>{bc09c91d-3fd7-47fc-839a-f96bb4e71cdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Field\Current\Background">
+      <UniqueIdentifier>{08a57b5e-8b4d-4eec-abae-46bb59d6dec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\Background">
+      <UniqueIdentifier>{2fe2f590-feba-400f-8b1f-70445ae95903}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\Background\Velocity">
+      <UniqueIdentifier>{7f36209b-9b49-4ddd-bb42-96a5ee4c1f56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -264,6 +279,18 @@
     <ClInclude Include="TnbLib\Voyage\Tools\Voyage_Tools.hxx">
       <Filter>TnbLib\Voyage\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Background\Velocity\VoyageGeo_VelocityBackground.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Background\Velocity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Background\Velocity\VoyageGeo_VelocityBackgroundFwd.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Background\Velocity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Background\Velocity\VoyageGeo_SingleVelocityBackgroundFwd.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Background\Velocity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Field\Current\Background\VoyageField_BackgroundCurrent.hxx">
+      <Filter>TnbLib\Voyage\Field\Current\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -292,6 +319,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Dijkstra\Voyage_Dijkstra.cxx">
       <Filter>TnbLib\Voyage\Dijkstra</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Tools\Voyage_Tools.cxx">
+      <Filter>TnbLib\Voyage\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Node\Voyage_Node.cxx">
+      <Filter>TnbLib\Voyage\Entities\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\Background\Velocity\VoyageGeo_VelocityBackground.cxx">
+      <Filter>TnbLib\Voyage\Geometry\Background\Velocity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\Background\Velocity\VoyageGeo_VelocityBackgroundIO.cxx">
+      <Filter>TnbLib\Voyage\Geometry\Background\Velocity</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Field\Current\Background\VoyageField_BackgroundCurrent.cxx">
+      <Filter>TnbLib\Voyage\Field\Current\Background</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,7 +3,6 @@
 #define _VoyageField_Current_Header
 
 #include <Voyage_Current.hxx>
-#include <Voyage_Module.hxx>
 #include <Pnt2d.hxx>
 
 namespace tnbLib
