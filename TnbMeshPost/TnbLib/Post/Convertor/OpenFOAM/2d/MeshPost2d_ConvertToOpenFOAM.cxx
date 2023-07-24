@@ -147,11 +147,11 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::CreateFace(const std::shared_ptr<Edge
 	auto n0 = std::dynamic_pointer_cast<MasterNode>(theEdge->Nodes().at(0)->Node3d());
 	auto n1 = std::dynamic_pointer_cast<MasterNode>(theEdge->Nodes().at(1)->Node3d());
 
-	auto n2 = n1->Slave();
-	auto n3 = n0->Slave();
+	auto n2 = n0->Slave();
+	auto n3 = n1->Slave();
 
 	std::array<std::shared_ptr<Node>, QuadFacet::nbNodes> nodes = 
-	{ std::move(n0),std::move(n1),std::move(n2),std::move(n3) };
+	{ std::move(n1),std::move(n0),std::move(n2),std::move(n3) };
 	auto f = std::make_shared<QuadFacet>(theEdge->Index(), std::move(nodes));
 	theEdge->ExtrudedRef() = std::move(f);
 }
@@ -228,18 +228,18 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcElements
 {
 	for (const auto& x : theElements)
 	{
+		auto f0 = x->Front();
+		auto f1 = x->Back();
+		Debug_Null_Pointer(f0);
+		Debug_Null_Pointer(f1);
+
 		Debug_Null_Pointer(x);
 		const auto& edges = x->Edges();
-		auto f0 = edges.at(0)->Extruded();
-		Debug_Null_Pointer(f0);
-		auto f1 = edges.at(1)->Extruded();
-		Debug_Null_Pointer(f1);
-		auto f2 = edges.at(2)->Extruded();
+		auto f2 = edges.at(0)->Extruded();
 		Debug_Null_Pointer(f2);
-
-		auto f3 = x->Front();
-		auto f4 = x->Back();
+		auto f3 = edges.at(1)->Extruded();
 		Debug_Null_Pointer(f3);
+		auto f4 = edges.at(2)->Extruded();
 		Debug_Null_Pointer(f4);
 
 		std::array<std::shared_ptr<Facet>, Element::nbFacets>
@@ -287,15 +287,22 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveCellList
 tnbLib::MeshPost2d_ConvertToOpenFOAM::FaceList
 tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveFaceList
 (
-	const std::vector<std::shared_ptr<Edge2d>>& theEdges
+	const std::vector<std::shared_ptr<Edge2d>>& theEdges,
+	const std::vector<std::shared_ptr<Element2d>>& theElements
 )
 {
 	std::vector<Face> faces;
-	faces.reserve(theEdges.size());
+	faces.reserve(theEdges.size() + theElements.size());
 	for (const auto& x : theEdges)
 	{
 		auto f = RetrieveFace(*x);
 		faces.push_back(std::move(f));
+	}
+	for (const auto& x : theElements)
+	{
+		auto [f0, f1] = RetrieveFace(*x);
+		faces.push_back(std::move(f0));
+		faces.push_back(std::move(f1));
 	}
 	FaceList faceList(std::move(faces));
 	return std::move(faceList);
@@ -304,16 +311,22 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveFaceList
 tnbLib::MeshPost2d_ConvertToOpenFOAM::OwnerList
 tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveOwnerList
 (
-	const std::vector<std::shared_ptr<Edge2d>>& theEdges
+	const std::vector<std::shared_ptr<Edge2d>>& theEdges,
+	const std::vector<std::shared_ptr<Element2d>>& theElements
 )
 {
 	std::vector<Standard_Integer> owners;
-	owners.reserve(theEdges.size());
+	owners.reserve(theEdges.size() + theElements.size());
 	for (const auto& x : theEdges)
 	{
 		auto owner = x->Owner().lock();
 		Debug_Null_Pointer(owner);
 		owners.push_back(Index_Of(owner->Index()));
+	}
+	for (const auto& x : theElements)
+	{
+		owners.push_back(Index_Of(x->Index()));
+		owners.push_back(Index_Of(x->Index()));
 	}
 	OwnerList ownerList(std::move(owners));
 	return std::move(ownerList);
@@ -343,11 +356,11 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveCell(const Element2d& theElement)
 {
 	std::array<Standard_Integer, Cell::nbFaces> faces;
 	const auto& edges = theElement.Edges();
-	faces.at(0) = Index_Of(edges.at(0)->Index());
-	faces.at(1) = Index_Of(edges.at(1)->Index());
-	faces.at(2) = Index_Of(edges.at(2)->Index());
-	faces.at(3) = Index_Of(theElement.Back()->Index());
-	faces.at(4) = Index_Of(theElement.Front()->Index());
+	faces.at(0) = Index_Of(theElement.Front()->Index());
+	faces.at(1) = Index_Of(theElement.Back()->Index());
+	faces.at(2) = Index_Of(edges.at(0)->Index());
+	faces.at(3) = Index_Of(edges.at(1)->Index());
+	faces.at(4) = Index_Of(edges.at(2)->Index());
 	Cell cell(std::move(faces));
 	return std::move(cell);
 }
@@ -372,6 +385,31 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveFace(const Edge2d& theEdge)
 	nodes.push_back(Index_Of(n3->Index()));
 	Face face(std::move(nodes));
 	return std::move(face);
+}
+
+std::pair<tnbLib::MeshPost2d_ConvertToOpenFOAM::Face, tnbLib::MeshPost2d_ConvertToOpenFOAM::Face>
+tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveFace(const Element2d& theElement)
+{
+	Face f0;
+	{
+		std::vector<Standard_Integer> faceNodes;
+		auto nodes = theElement.Front()->Nodes();
+		faceNodes.push_back(Index_Of(nodes.at(0)->Index()));
+		faceNodes.push_back(Index_Of(nodes.at(1)->Index()));
+		faceNodes.push_back(Index_Of(nodes.at(2)->Index()));
+		f0.NodesRef() = std::move(faceNodes);
+	}
+	Face f1;
+	{
+		std::vector<Standard_Integer> faceNodes;
+		auto nodes = theElement.Back()->Nodes();
+		faceNodes.push_back(Index_Of(nodes.at(0)->Index()));
+		faceNodes.push_back(Index_Of(nodes.at(1)->Index()));
+		faceNodes.push_back(Index_Of(nodes.at(2)->Index()));
+		f1.NodesRef() = std::move(faceNodes);
+	}
+	auto t = std::make_pair(std::move(f0), std::move(f1));
+	return std::move(t);
 }
 
 void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
@@ -410,16 +448,17 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
 	RenumberBoundaries(bndEdges, nbInteriors);*/
 
 	CalcFaces(edges_2d);
+	std::cout << "nb edges: " << (Standard_Integer)edges_2d.size() << std::endl;
 	CalcFaces(elements_2d, (Standard_Integer)edges_2d.size());
 
 	CalcElements(elements_2d);
 
 	thePoints_ = RetrievePointList(nodes);
 
-	theFaces_ = RetrieveFaceList(edges_2d);
+	theFaces_ = RetrieveFaceList(edges_2d, elements_2d);
 	theCells_ = RetrieveCellList(elements_2d);
 
-	theOwners_ = RetrieveOwnerList(edges_2d);
+	theOwners_ = RetrieveOwnerList(edges_2d, elements_2d);
 	theNeighbors_ = RetrieveNeighborList(edges_2d);
 
 	Change_IsDone() = Standard_True;

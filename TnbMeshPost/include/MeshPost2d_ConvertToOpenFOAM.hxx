@@ -824,13 +824,13 @@ namespace tnbLib
 		static TnbMeshPost_EXPORT PointList RetrievePointList(const std::vector<std::shared_ptr<Node>>&);
 
 		static TnbMeshPost_EXPORT CellList RetrieveCellList(const std::vector<std::shared_ptr<Element2d>>&);
-		static TnbMeshPost_EXPORT FaceList RetrieveFaceList(const std::vector<std::shared_ptr<Edge2d>>&);
-		static TnbMeshPost_EXPORT OwnerList RetrieveOwnerList(const std::vector<std::shared_ptr<Edge2d>>&);
+		static TnbMeshPost_EXPORT FaceList RetrieveFaceList(const std::vector<std::shared_ptr<Edge2d>>&, const std::vector<std::shared_ptr<Element2d>>&);
+		static TnbMeshPost_EXPORT OwnerList RetrieveOwnerList(const std::vector<std::shared_ptr<Edge2d>>&, const std::vector<std::shared_ptr<Element2d>>&);
 		static TnbMeshPost_EXPORT NeighborList RetrieveNeighborList(const std::vector<std::shared_ptr<Edge2d>>&);
 
 		static TnbMeshPost_EXPORT Cell RetrieveCell(const Element2d&);
 		static TnbMeshPost_EXPORT Face RetrieveFace(const Edge2d&);
-
+		static std::pair<Face, Face> RetrieveFace(const Element2d&);
 		
 
 	public:
