@@ -14,6 +14,8 @@
 #include <Mesh2d_NodeFwd.hxx>
 #include <GeoMesh2d_SingleBackgroundFwd.hxx>
 #include <GeoMesh3d_SingleBackgroundFwd.hxx>
+#include <GeoMesh2d_MetricBackgroundFwd.hxx>
+#include <GeoMesh2d_BackgroundFwd.hxx>
 #include <Global_Serialization.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
@@ -295,6 +297,22 @@ namespace tnbLib
 				const Standard_Real growthRate, 
 				const Standard_Real theTarget,
 				const Standard_Real theBase
+			);
+
+		static TnbMesh_EXPORT std::shared_ptr<GeoMesh2d_Background> 
+			MakeBackground
+			(
+				const std::vector<Pnt2d>& theCoords,
+				const std::vector<Standard_Real>& theValues,
+				const Standard_Real theTol
+			);
+
+		static TnbMesh_EXPORT std::shared_ptr<GeoMesh2d_MetricBackground>
+			MakeBackground
+			(
+				const std::vector<Pnt2d>& theCoords,
+				const std::vector<Entity2d_Metric1>& theValues,
+				const Standard_Real theTol
 			);
 	};
 }

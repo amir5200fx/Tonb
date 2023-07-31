@@ -15,6 +15,8 @@
 #include <vector>
 #include <array>
 
+//#include <dictionary.hxx>
+
 namespace tnbLib
 {
 
@@ -766,7 +768,10 @@ namespace tnbLib
 		FaceList theFaces_;
 		OwnerList theOwners_;
 		NeighborList theNeighbors_;
+
+		Standard_Integer theLastFace_;
 		
+		std::map<word, std::vector<std::pair<word, word>>> theBoundaryConditions_;
 
 		// Private functions and operators [6/27/2023 Payvand]
 
@@ -824,13 +829,13 @@ namespace tnbLib
 		static TnbMeshPost_EXPORT PointList RetrievePointList(const std::vector<std::shared_ptr<Node>>&);
 
 		static TnbMeshPost_EXPORT CellList RetrieveCellList(const std::vector<std::shared_ptr<Element2d>>&);
-		static TnbMeshPost_EXPORT FaceList RetrieveFaceList(const std::vector<std::shared_ptr<Edge2d>>&);
-		static TnbMeshPost_EXPORT OwnerList RetrieveOwnerList(const std::vector<std::shared_ptr<Edge2d>>&);
+		static TnbMeshPost_EXPORT FaceList RetrieveFaceList(const std::vector<std::shared_ptr<Edge2d>>&, const std::vector<std::shared_ptr<Element2d>>&);
+		static TnbMeshPost_EXPORT OwnerList RetrieveOwnerList(const std::vector<std::shared_ptr<Edge2d>>&, const std::vector<std::shared_ptr<Element2d>>&);
 		static TnbMeshPost_EXPORT NeighborList RetrieveNeighborList(const std::vector<std::shared_ptr<Edge2d>>&);
 
 		static TnbMeshPost_EXPORT Cell RetrieveCell(const Element2d&);
 		static TnbMeshPost_EXPORT Face RetrieveFace(const Edge2d&);
-
+		static TnbMeshPost_EXPORT std::pair<Face, Face> RetrieveFace(const Element2d&);
 		
 
 	public:
@@ -853,6 +858,11 @@ namespace tnbLib
 		TnbMeshPost_EXPORT void Export() const;
 
 		void SetMesh(const std::shared_ptr<MeshPost2d_OFTopology>& theMesh) { theMesh_ = theMesh; }
+		TnbMeshPost_EXPORT void SetBoundaryCondition
+		(
+			const word& theRegion,
+			const std::vector<std::pair<word, word>>&
+		);
 
 		static TnbMeshPost_EXPORT void WriteOpenFOAMHeader(Ostream&);
 		static TnbMeshPost_EXPORT void WriteOpenFOAMSeperator(Ostream&);

@@ -11,6 +11,9 @@
 namespace tnbLib
 {
 	template<>
+	TnbMesh_EXPORT Standard_Real Mesh2d_CurveAnIso::Perform();
+
+	template<>
 	static TnbMesh_EXPORT Standard_Real
 		Mesh2d_CurveAnIso::CalcNextParameter
 		(
