@@ -61,6 +61,37 @@ std::string
 tnbLib::file::GetSystemFile(const std::string & theAppName)
 {
 	auto current = boost::filesystem::current_path().string();
+	{
+		boost::filesystem::path p(current + R"(\system)");
+		
+		if (IsFile(p, ".PATH"))
+		{
+			auto name = file::GetSingleFile(p, ".PATH").string();
+			fileName fn(p.string() + R"(\)" + name + ".PATH");
+
+			std::ifstream myFile;
+			myFile.open(fn);
+			if (myFile.is_open())
+			{
+				std::string address;
+				std::getline(myFile, address);
+
+				boost::filesystem::path p1(address + R"(\)" + theAppName);
+				if (boost::filesystem::exists(p1))
+				{
+					return p1.string();
+				}
+				else
+				{
+					FatalErrorIn(FunctionSIG)
+						<< "no system file has been found!" << endl
+						<< " - application: " << theAppName << endl
+						<< abort(FatalError);
+				}
+			}
+		}
+	}
+
 	boost::filesystem::path p(current + R"(\system\)" + theAppName);
 
 	if (boost::filesystem::exists(p))
