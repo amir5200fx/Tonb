@@ -18,7 +18,13 @@ namespace tnbLib
 	static const std::string sub_directory = "mesh";
 
 	TNB_SET_VERBOSE_FUN;
+
+	struct BoundaryCondition
+	{
+		std::vector<std::pair<word, word>> list;
+	};
 	
+	static std::map<word, std::shared_ptr<BoundaryCondition>> myBoundaries;
 
 	void loadMesh(const std::string& name)
 	{
@@ -53,6 +59,18 @@ namespace tnbLib
 		}
 	}
 
+	auto createBoundary(const word& name)
+	{
+		auto t = std::make_shared<BoundaryCondition>();
+		myBoundaries.insert({ name, t });
+		return t;
+	}
+
+	void setParameter(const std::shared_ptr<BoundaryCondition>& bnd, const word& par, const word& value)
+	{
+		bnd->list.push_back({ par, value });
+	}
+
 	void execute()
 	{
 		TNB_CHECK_LOAD_TAG;
@@ -74,6 +92,12 @@ namespace tnbLib
 		}*/
 		auto convertor = std::make_shared<MeshPost2d_ConvertToOpenFOAM>();
 		convertor->SetMesh(topology);
+
+		for (const auto& x : myBoundaries)
+		{
+			convertor->SetBoundaryCondition(x.first, x.second->list);
+		}
+
 		convertor->Perform();
 		convertor->Export();
 		TNB_PERFORMED_TAG;
@@ -102,6 +126,8 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](unsigned short c)->void {setVerbose(c); }), "setVerbose");
 
 		// operators [1/23/2023 Payvand]
+		mod->add(chaiscript::fun([](const std::string& name)-> auto { return createBoundary(name); }), "createBoundary");
+		mod->add(chaiscript::fun([](const std::shared_ptr<BoundaryCondition>& bnd, const std::string& par, const std::string& value)-> void {setParameter(bnd, par, value); }), "setPar");
 		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
 	}
 
@@ -148,6 +174,9 @@ int main(int argc, char* argv[])
 				<< " - saveTo(name [optional])" << endl << endl
 
 				<< " # Operators: " << endl << endl
+
+				<< " - [bndCond] createBoundary(name)" << endl
+				<< " - (bndCond).setPar(word, word)" << endl
 				<< " - execute()" << endl << endl
 
 				<< " # Settings: " << endl << endl

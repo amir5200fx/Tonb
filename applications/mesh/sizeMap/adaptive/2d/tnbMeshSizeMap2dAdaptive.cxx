@@ -223,6 +223,9 @@ namespace tnbLib
 			}
 			else
 			{
+				// change the current path [7/18/2023 Payvand]
+				file::SetCurrentPath(global_path.string() + R"(\)" + current_directory);
+
 				myModels = file::LoadFiles<std::shared_ptr<Cad2d_Plane>>(verbose);
 			}
 		}

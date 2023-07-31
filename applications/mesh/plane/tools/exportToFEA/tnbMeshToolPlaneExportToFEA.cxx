@@ -320,6 +320,16 @@ namespace tnbLib
 				}
 			}
 
+			/*for (const auto& x : physicMap)
+			{
+				std::cout << "physic: " << x.first << ", " << "size: " << x.second.size() << std::endl;
+				for (const auto& y : x.second)
+				{
+					std::cout << "-  " << y->NbPoints() << " ";
+				}
+				std::cout << std::endl;
+			}*/
+
 			if (verbose)
 			{
 				Info << " # no. of physics: " << physicMap.size() << endl;

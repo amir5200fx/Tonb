@@ -40,6 +40,7 @@ namespace tnbLib
 		myPln = file::LoadFile<std::shared_ptr<Cad2d_Plane>>(name + loadExt, verbose);
 		loadTag = true;
 
+		std::map<int, std::shared_ptr<Entity2d_Triangulation>> trisMap;
 		const auto& outer = myPln->OuterWire();
 		if (outer)
 		{
@@ -47,12 +48,21 @@ namespace tnbLib
 			{
 				if (x)
 				{
+					auto id = x->Index();
 					auto poly = x->Mesh();
 					if (poly)
 					{
 						auto chain = Geo_Tools::RetrieveChain(x->Sense() ? *poly : poly->Reversed());
 						auto tri = Geo_Tools::Triangulation(*chain);
-						myTris.push_back(std::move(tri));
+						auto iter = trisMap.find(id);
+						if (iter NOT_EQUAL trisMap.end())
+						{
+							FatalErrorIn(FunctionSIG)
+								<< "duplicate data has been detected." << endl
+								<< abort(FatalError);
+						}
+						trisMap.insert({ id, tri });
+						//myTris.push_back(std::move(tri));
 					}
 				}
 			}
@@ -67,16 +77,43 @@ namespace tnbLib
 				{
 					if (x)
 					{
+						auto id = x->Index();
 						auto poly = x->Mesh();
 						if (poly)
 						{
 							auto chain = Geo_Tools::RetrieveChain(x->Sense() ? *poly : poly->Reversed());
 							auto tri = Geo_Tools::Triangulation(*chain);
-							myTris.push_back(std::move(tri));
+							auto iter = trisMap.find(id);
+							if (iter NOT_EQUAL trisMap.end())
+							{
+								FatalErrorIn(FunctionSIG)
+									<< "duplicate data has been detected." << endl
+									<< abort(FatalError);
+							}
+							trisMap.insert({ id, tri });
+							//myTris.push_back(std::move(tri));
 						}
 					}
 				}
 			}
+		}
+		std::vector<std::pair<int, std::shared_ptr<Entity2d_Triangulation>>> trisList;
+		for (const auto& x : trisMap)
+		{
+			trisList.push_back(x);
+		}
+		std::sort
+		(
+			trisList.begin(),
+			trisList.end(),
+			[](
+				const std::pair<int, std::shared_ptr<Entity2d_Triangulation>>& p0,
+				const std::pair<int, std::shared_ptr<Entity2d_Triangulation>>& p1
+				) {return p0.first < p1.first; }
+		);
+		for (const auto& x : trisList)
+		{
+			myTris.push_back(x.second);
 		}
 	}
 
