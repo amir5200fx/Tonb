@@ -5,7 +5,9 @@
 #include <VoyageGeo_SingleVelocityBackgroundFwd.hxx>
 #include <VoyageGeo_VelocityBackgroundFwd.hxx>
 #include <Voyage_Module.hxx>
+#define TnbGeoMesh_Background_EXPORT_DEFINE
 #include <GeoMesh_Background.hxx>
+#undef TnbGeoMesh_Background_EXPORT_DEFINE
 #include <GeoMesh2d_Data.hxx>
 #include <Vec2d.hxx>
 

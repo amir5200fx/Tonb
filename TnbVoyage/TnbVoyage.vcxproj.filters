@@ -184,6 +184,15 @@
     <Filter Include="TnbLib\Voyage\Geometry\Background\Velocity">
       <UniqueIdentifier>{7f36209b-9b49-4ddd-bb42-96a5ee4c1f56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\Earth">
+      <UniqueIdentifier>{5a9a2466-9700-49d6-8b24-1dec404dc69c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Global">
+      <UniqueIdentifier>{c4e65c3a-f812-41a3-87b4-478f0f31df8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Geometry\GreateCircleNav">
+      <UniqueIdentifier>{bdd22244-e2a1-46d7-8b61-6589f35cc2af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -291,6 +300,15 @@
     <ClInclude Include="TnbLib\Voyage\Field\Current\Background\VoyageField_BackgroundCurrent.hxx">
       <Filter>TnbLib\Voyage\Field\Current\Background</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Earth\VoyageGeo_Earth.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Earth</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.hxx">
+      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.hxx">
+      <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -334,6 +352,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Field\Current\Background\VoyageField_BackgroundCurrent.cxx">
       <Filter>TnbLib\Voyage\Field\Current\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\Earth\VoyageGeo_Earth.cxx">
+      <Filter>TnbLib\Voyage\Geometry\Earth</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.cxx">
+      <Filter>TnbLib\Voyage\Geometry\PathGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.cxx">
+      <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

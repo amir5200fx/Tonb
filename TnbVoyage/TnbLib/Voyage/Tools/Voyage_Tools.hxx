@@ -8,6 +8,8 @@
 #include <memory>
 #include <vector>
 
+#include <Standard_TypeDef.hxx>
+
 namespace tnbLib
 {
 
@@ -15,6 +17,7 @@ namespace tnbLib
 
 	class Voyage_Edge;
 	class Voyage_Node;
+	class Cad_GeomSurface;
 	class Pnt2d;
 	class Vec2d;
 
@@ -48,6 +51,14 @@ namespace tnbLib
 				const std::vector<Pnt2d>& theCoords, 
 				const std::vector<Vec2d>& theVecolity, 
 				const Standard_Real theTol
+			);
+
+		static TnbVoyage_EXPORT std::vector<Pnt2d>
+			ShortestStraightPath
+			(
+				const Pnt2d& theStart,
+				const Pnt2d& theEnd, 
+				const std::shared_ptr<Cad_GeomSurface>& theSurface
 			);
 
 	};

@@ -4,13 +4,20 @@
 
 #include <Pnt2d.hxx>
 
+#include <memory>
+
 namespace tnbLib
 {
+
+	// Forward Declarations [7/22/2023 Payvand]
+	class VoyageField_Current;
 
 	class VoyageField_Earth
 	{
 
 		/*Private Data*/
+
+		std::shared_ptr<VoyageField_Current> theCurrentField_;
 
 	public:
 
@@ -24,7 +31,13 @@ namespace tnbLib
 
 		// Public functions and operators [7/20/2023 Payvand]
 
-		Standard_Boolean IsValid(const Pnt2d&) const;
+		const auto& CurrentField() const { return theCurrentField_; }
+
+		Standard_Boolean IsLand(const Pnt2d&) const { return Standard_True; }
+		Standard_Boolean IsWater(const Pnt2d&) const { return Standard_True; }
+
+		void SetCurrentField(const std::shared_ptr<VoyageField_Current>& theField) { theCurrentField_ = theField; }
+		void SetCurrentField(std::shared_ptr<VoyageField_Current>&& theField) { theCurrentField_ = std::move(theField); }
 
 	};
 }

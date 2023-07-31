@@ -4,13 +4,17 @@
 #include <Voyage_Edge.hxx>
 #include <Voyage_Node.hxx>
 #include <GeoMesh2d_Data.hxx>
+#include <Cad_GeomSurface.hxx>
 #include <Geo2d_DelTri.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 #include <set>
+
+#include <Geom_Surface.hxx>
 
 std::vector<std::shared_ptr<tnbLib::Voyage_Node>> 
 tnbLib::Voyage_Tools::RetrieveNodes(const std::vector<std::shared_ptr<Voyage_Edge>>& theEdges)
@@ -118,4 +122,64 @@ tnbLib::Voyage_Tools::MakeBackground
 		x = theVecolity.at(k++);
 	}
 	return std::move(bMesh);
+}
+
+std::vector<tnbLib::Pnt2d> 
+tnbLib::Voyage_Tools::ShortestStraightPath
+(
+	const Pnt2d& theStart, 
+	const Pnt2d& theEnd, 
+	const std::shared_ptr<Cad_GeomSurface>& theSurface
+)
+{
+	auto domain = theSurface->ParametricBoundingBox();
+	const auto period = domain.P1().X() - domain.P0().X();
+	auto minDis = theEnd.Distance(theStart);
+	auto [x0, y0] = theStart.Components();
+	auto [x1, y1] = theEnd.Components();
+	const auto dx0 = x1 - x0;
+	const auto dy0 = y1 - y0;
+
+	Pnt2d pb;
+	Standard_Boolean tag = Standard_False;
+	auto end = theEnd;
+	{
+		auto x1p = x1 + period;
+		auto y1p = y1;
+		Pnt2d pt(x1p, y1p);
+		auto dis = pt.Distance(theStart);
+		if (dis < minDis)
+		{
+			tag = Standard_True;
+			minDis = dis;
+			auto t = (domain.P1().X() - x0) / (x1p - x0);
+			pb = Pnt2d(domain.P1().X(), y0 + t * (y1 - y0));
+		}
+	}
+	{
+		auto x1p = x1 - period;
+		auto y1p = y1;
+		Pnt2d pt(x1p, y1p);
+		auto dis = pt.Distance(theStart);
+		if (dis < minDis)
+		{
+			tag = Standard_True;
+			minDis = dis;
+			auto t = (domain.P0().X() - x0) / (x1p - x0);
+			pb = Pnt2d(domain.P0().X(), y0 + t * (y1 - y0));
+		}
+	}
+	std::vector<Pnt2d> coords;
+	if (tag)
+	{
+		coords.push_back(theStart);
+		coords.push_back(std::move(pb));
+		coords.push_back(theEnd);
+	}
+	else
+	{
+		coords.push_back(theStart);
+		coords.push_back(theEnd);
+	}
+	return std::move(coords);
 }

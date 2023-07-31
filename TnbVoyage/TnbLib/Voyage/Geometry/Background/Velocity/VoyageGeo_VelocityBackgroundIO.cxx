@@ -3,6 +3,8 @@
 #include <GeoMesh2d_Data.hxx>
 #include <TecPlot.hxx>
 
+const std::string tnbLib::VoyageGeo_VelocityBackground::extension = ".velbackmsh2d";
+
 template<>
 void tnbLib::VoyageGeo_SingleVelocityBackground::ExportToPlt(OFstream& File) const
 {
