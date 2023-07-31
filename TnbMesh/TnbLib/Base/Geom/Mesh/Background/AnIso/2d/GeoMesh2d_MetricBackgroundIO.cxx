@@ -3,6 +3,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+const std::string tnbLib::GeoMesh2d_MetricBackground::extension = ".mbckmsh2d";
+
 template<>
 void tnbLib::GeoMesh2d_SingleMetricBackground::ExportToPlt(OFstream& File) const
 {

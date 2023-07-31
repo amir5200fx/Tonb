@@ -402,8 +402,9 @@ namespace tnbLib
 			(
 				Integrand, Info()->LengthCalcMaxLevel(),
 				*Info()->OverallLengthIntgInfo());*/
+		std::cout << "header" << std::endl;
 		auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
-
+		std::cout << curveLength << std::endl;
 		try
 		{
 			Discretize(curveLength);

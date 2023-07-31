@@ -300,7 +300,7 @@ namespace tnbLib
 			);
 
 		static TnbMesh_EXPORT std::shared_ptr<GeoMesh2d_Background> 
-			MakeBakground
+			MakeBackground
 			(
 				const std::vector<Pnt2d>& theCoords,
 				const std::vector<Standard_Real>& theValues,

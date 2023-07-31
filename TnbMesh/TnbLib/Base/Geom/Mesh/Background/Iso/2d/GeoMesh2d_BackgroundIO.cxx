@@ -3,6 +3,8 @@
 #include <GeoMesh2d_Data.hxx>
 #include <TecPlot.hxx>
 
+const std::string tnbLib::GeoMesh2d_Background::extension = ".sbckmsh2d";
+
 template<>
 void tnbLib::GeoMesh2d_SingleBackground::ExportToPlt(OFstream& File) const
 {

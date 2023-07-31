@@ -11,6 +11,16 @@
 #include <memory>
 #include <vector>
 
+#ifdef TnbMesh_EXPORT_DEFINE
+#define TnbGeoMesh_Background_EXPORT __declspec(dllexport)
+#else
+#ifdef TnbGeoMesh_Background_EXPORT_DEFINE
+#define TnbGeoMesh_Background_EXPORT __declspec(dllexport)
+#else
+#define TnbGeoMesh_Background_EXPORT __declspec(dllimport)
+#endif
+#endif
+
 //#include <GeoMesh2d_Data.hxx>
 
 namespace tnbLib
@@ -52,6 +62,8 @@ namespace tnbLib
 		// constructors [12/7/2022 Payvand]
 
 	public:
+
+		static TnbGeoMesh_Background_EXPORT const std::string extension;
 
 		// Public functions and operators [12/7/2022 Payvand]
 

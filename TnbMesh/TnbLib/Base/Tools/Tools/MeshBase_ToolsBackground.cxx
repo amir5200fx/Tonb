@@ -9,7 +9,7 @@
 #include <OSstream.hxx>
 
 std::shared_ptr<tnbLib::GeoMesh2d_Background> 
-tnbLib::MeshBase_Tools::MakeBakground
+tnbLib::MeshBase_Tools::MakeBackground
 (
 	const std::vector<Pnt2d>& theCoords,
 	const std::vector<Standard_Real>& theValues,

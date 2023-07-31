@@ -10,6 +10,63 @@
 
 template<>
 Standard_Real 
+tnbLib::Mesh2d_CurveAnIso::Perform()
+{
+	std::cout << "injaaaaaa" << std::endl;
+	if (NOT Geometry())
+	{
+		FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+			<< "No curve has been loaded" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT MetricMap())
+	{
+		FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+			<< "No sizeMap has been loaded" << endl
+			<< abort(FatalError);
+	}
+
+	if (NOT Info())
+	{
+		FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
+			<< "No sizeMap has been loaded" << endl
+			<< abort(FatalError);
+	}
+
+	// Determine the Length of the curve under the current space function
+	/*auto curveLength =
+		CalcLength
+		(
+			Integrand, Info()->LengthCalcMaxLevel(),
+			*Info()->OverallLengthIntgInfo());*/
+	std::cout << "injaaaaaa" << std::endl;
+	auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
+	std::cout << "curve length = " << curveLength << std::endl;
+	try
+	{
+		Discretize(curveLength);
+	}
+	catch (const meshLib::LengthCurveError& x)
+	{
+		try
+		{
+			Discretize(x.length);
+			return x.length;
+		}
+		catch (const meshLib::LengthCurveError&)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Cannot calculate the actual curve length: unexpected results have been came up!" << endl
+				<< abort(FatalError);
+			return 0.;
+		}
+	}
+	return curveLength;
+}
+
+template<>
+Standard_Real 
 tnbLib::Mesh2d_CurveAnIso::CalcNextParameter
 (
 	const Standard_Real theU0,
