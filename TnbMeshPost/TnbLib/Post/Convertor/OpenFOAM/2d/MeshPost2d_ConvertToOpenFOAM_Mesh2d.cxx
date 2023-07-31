@@ -50,7 +50,11 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::CalcMesh2d
 		auto edge = std::make_shared<Edge2d>(id, std::move(paired));
 		edges.push_back(std::move(edge));
 	}
-	
+	/*for (const auto& x : Mesh()->Boundaries())
+	{
+		std::cout << "region : " << x.first << std::endl;
+	}
+	PAUSE;*/
 	auto elmToEdges = Mesh()->RetrieveElementToEdgesMap();
 	std::vector<std::shared_ptr<Element2d>> tris;
 	tris.reserve(elmToEdges.size());

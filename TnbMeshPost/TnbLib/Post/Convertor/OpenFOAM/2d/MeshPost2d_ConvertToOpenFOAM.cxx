@@ -448,7 +448,7 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
 	RenumberBoundaries(bndEdges, nbInteriors);*/
 
 	CalcFaces(edges_2d);
-	std::cout << "nb edges: " << (Standard_Integer)edges_2d.size() << std::endl;
+	//std::cout << "nb edges: " << (Standard_Integer)edges_2d.size() << std::endl;
 	CalcFaces(elements_2d, (Standard_Integer)edges_2d.size());
 
 	CalcElements(elements_2d);
@@ -460,6 +460,36 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
 
 	theOwners_ = RetrieveOwnerList(edges_2d, elements_2d);
 	theNeighbors_ = RetrieveNeighborList(edges_2d);
+
+	for (const auto& x : Mesh()->Boundaries())
+	{
+		const auto& bnd = x.first;
+		auto iter = theBoundaryConditions_.find(bnd);
+		if (iter IS_EQUAL theBoundaryConditions_.end())
+		{
+			auto paired = std::make_pair(bnd, std::vector<std::pair<word, word>>());
+			theBoundaryConditions_.insert(std::move(paired));
+			//iter = theBoundaryConditions_.find(bnd);
+		}
+		auto& ent = theBoundaryConditions_.at(bnd);
+		const auto& faces = x.second;
+		const auto nFaces = faces.size();
+		Standard_Integer startFace = faces.at(0).Index();
+		for (const auto& edge : faces)
+		{
+			if (edge.Index() < startFace) startFace = edge.Index();
+		}
+		startFace = Index_Of(startFace);
+		{
+			auto paired = std::make_pair("nFaces", std::to_string(nFaces));
+			ent.push_back(std::move(paired));
+		}
+		{
+			auto paired = std::make_pair("startFace", std::to_string(startFace));
+			ent.push_back(std::move(paired));
+		}
+		theLastFace_ = startFace + nFaces;
+	}
 
 	Change_IsDone() = Standard_True;
 }

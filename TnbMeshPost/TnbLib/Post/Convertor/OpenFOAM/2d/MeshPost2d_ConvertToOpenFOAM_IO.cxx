@@ -289,4 +289,68 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Export() const
 	OFstream owner("owner");
 	owner << theOwners_;
 
+	OFstream boundary("boundary");
+	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMHeader(boundary);
+	boundary << "FoamFile" << endl
+		<< token::BEGIN_BLOCK << endl;
+	boundary.indent();
+	boundary << " version";
+	boundary.indent();
+	boundary << " 2.0;" << endl;
+	boundary.indent();
+	boundary << " format";
+	boundary.indent();
+	boundary << " ascii;" << endl;
+	boundary.indent();
+	boundary << " class";
+	boundary.indent();
+	boundary << " polyBoundaryMesh;" << endl;
+	boundary.indent();
+	boundary << " object";
+	boundary.indent();
+	boundary << " boundary;" << endl;
+	boundary << token::END_BLOCK << endl;
+	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(boundary);
+	boundary << endl
+		<< endl
+		<< endl;
+
+	boundary << theBoundaryConditions_.size() << endl
+		<< token::BEGIN_LIST << endl;
+	for (const auto& bnd : theBoundaryConditions_)
+	{
+		boundary << "    " << bnd.first << endl;
+		boundary << token::BEGIN_BLOCK << endl;
+		const auto& d = bnd.second;
+
+		for (const auto& ent : d)
+		{
+			boundary << "        " << ent.first << "     " << ent.second << ";" << endl;
+		}
+		boundary << token::END_BLOCK << endl;
+	}
+	boundary << "    frontAndBack" << endl;
+	boundary << token::BEGIN_BLOCK << endl;
+	boundary << "        type            empty;" << endl;
+	boundary << "        physicalType    empty;" << endl;
+	boundary << "        inGroups        1(empty);" << endl;
+	boundary << "        nFaces          " << theCells_.Cells().size() << ";" << endl;
+	boundary << "        startFace       " << theLastFace_ << ";" << endl;
+	boundary << token::END_BLOCK << endl;
+
+	boundary << token::END_LIST << endl;
+	boundary << endl
+		<< endl
+		<< endl;
+	MeshPost2d_ConvertToOpenFOAM::WriteOpenFOAMSeperator(boundary);
+}
+
+void tnbLib::MeshPost2d_ConvertToOpenFOAM::SetBoundaryCondition
+(
+	const word& theRegion,
+	const std::vector<std::pair<word, word>>& theDictionay
+)
+{
+	auto paired = std::make_pair(theRegion, theDictionay);
+	theBoundaryConditions_.insert(std::move(paired));
 }
