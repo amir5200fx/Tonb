@@ -27,6 +27,7 @@ namespace tnbLib
 		Standard_Real theSigma12_;
 
 		Standard_Real theLanda01_;
+		Standard_Real theLanda0_;
 
 		TnbVoyage_EXPORT void Init();
 

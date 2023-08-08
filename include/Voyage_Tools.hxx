@@ -4,6 +4,7 @@
 
 #include <VoyageGeo_VelocityBackgroundFwd.hxx>
 #include <Voyage_Module.hxx>
+#include <Vec2d.hxx>
 
 #include <memory>
 #include <vector>
@@ -61,6 +62,11 @@ namespace tnbLib
 				const std::shared_ptr<Cad_GeomSurface>& theSurface
 			);
 
+		// The route angle is greater than zero if the route turns to the left and is less than zero if turns to the right [8/5/2023 Payvand]
+		static Standard_Real CalcRouteAngle(const Pnt2d& theP0, const Pnt2d& theP1, const Pnt2d& theP2);
+
+		static Vec2d CalcRightsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
+		static Vec2d CalcLeftsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
 	};
 }
 

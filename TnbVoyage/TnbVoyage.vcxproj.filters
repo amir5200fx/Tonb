@@ -193,6 +193,18 @@
     <Filter Include="TnbLib\Voyage\Geometry\GreateCircleNav">
       <UniqueIdentifier>{bdd22244-e2a1-46d7-8b61-6589f35cc2af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Node">
+      <UniqueIdentifier>{529ed689-4a59-4acb-9d05-06ce4bdb0ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Edge">
+      <UniqueIdentifier>{d5409c77-ee63-4aed-93be-bda6ba96c224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Element">
+      <UniqueIdentifier>{355c45b7-316a-4e67-9665-31442509d174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Node\Boundary">
+      <UniqueIdentifier>{cc871c72-58f2-4a72-afae-e7b2dc0e98b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -309,6 +321,15 @@
     <ClInclude Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.hxx">
       <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh2.hxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Node\VoyageMesh_Node.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Node\Boundary\VoyageMesh_BndNode.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Node\Boundary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -361,6 +382,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.cxx">
       <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh2.cxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Node\VoyageMesh_Node.cxx">
+      <Filter>TnbLib\Voyage\Mesh\Node</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

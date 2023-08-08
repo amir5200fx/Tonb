@@ -7,6 +7,7 @@
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
 
+#include <memory>
 #include <vector>
 
 namespace tnbLib
@@ -14,13 +15,16 @@ namespace tnbLib
 
 	// Forward Declarations [7/11/2023 Payvand]
 	class Mesh_Curve_Info;
+	class Pln_Curve;
 
 	class VoyageGeo_Path
 	{
 
 		/*Private Data*/
 
-	protected:
+		std::vector<std::shared_ptr<Pln_Curve>> theCurves_;
+
+	public:
 
 		// default constructor [7/10/2023 Payvand]
 
@@ -33,7 +37,9 @@ namespace tnbLib
 
 		// Public functions and operators [7/10/2023 Payvand]
 
-		virtual Pnt2d Value(const Standard_Real) const = 0;
+		const auto& Curves() const { return theCurves_; }
+
+		/*virtual Pnt2d Value(const Standard_Real) const = 0;
 		virtual Dir2d CalcNormal(const Standard_Real) const = 0;
 
 		virtual Pnt2d Start() const = 0;
@@ -44,7 +50,7 @@ namespace tnbLib
 			(
 				const std::shared_ptr<Geo2d_MetricPrcsrAnIso>&,
 				const std::shared_ptr<Mesh_Curve_Info>& theInfo
-			) const = 0;
+			) const = 0;*/
 
 	};
 
