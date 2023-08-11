@@ -193,6 +193,45 @@
     <Filter Include="TnbLib\Voyage\Geometry\GreateCircleNav">
       <UniqueIdentifier>{bdd22244-e2a1-46d7-8b61-6589f35cc2af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities">
+      <UniqueIdentifier>{15888ca6-f40c-4398-b33f-8bb5bd13c5a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Node">
+      <UniqueIdentifier>{87e4a851-fccf-45c4-b6b2-82385cdbb8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Edge">
+      <UniqueIdentifier>{d8554527-ab04-4e15-a81b-32664b739398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Element">
+      <UniqueIdentifier>{231e0bad-61ca-46a4-a205-6de263d35e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Entity">
+      <UniqueIdentifier>{d6baf3a5-5543-4d86-ae41-0952d789666c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Node\Offset">
+      <UniqueIdentifier>{49a9d915-6478-469b-93ab-efa15efb4f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Edge\Offset">
+      <UniqueIdentifier>{466c354b-8625-43eb-9d0d-5b5bce8a6528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Node\Ref">
+      <UniqueIdentifier>{7704c338-8613-4064-a7fb-6ae5cee35ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Edge\Ref">
+      <UniqueIdentifier>{c2a03634-7f14-4d1b-9583-93090376d38a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\SIzeMap">
+      <UniqueIdentifier>{6014763d-8c99-477b-983f-ee22a7d91fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator">
+      <UniqueIdentifier>{75345965-f632-467f-8ad8-1220feaecd3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Front">
+      <UniqueIdentifier>{7efcdae0-b257-47f5-8292-525eaecb350e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Core">
+      <UniqueIdentifier>{4d0daafa-96dc-4464-a5b1-2422cabb8407}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -309,6 +348,48 @@
     <ClInclude Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.hxx">
       <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh3.hxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Geometry\Path\VoyageGeo_Path2.hxx">
+      <Filter>TnbLib\Voyage\Geometry\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Entity\VoyageMesh_Entity.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\VoyageMesh_Node.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\Offset\VoyageMesh_OffsetNode.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node\Offset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\VoyageMesh_Edge.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\Ref\VoyageMesh_RefNode.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node\Ref</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\Ref\VoyageMesh_RefEdge.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Edge\Ref</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\Offset\VoyageMesh_OffsetEdge.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Edge\Offset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Element\VoyageMesh_Element.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\SIzeMap\VoyageMesh_SizeMap.hxx">
+      <Filter>TnbLib\Voyage\Mesh\SIzeMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\VoyageMesh_NodeCalculator.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\VoyageMesh_FrontInfo.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Core\VoyageMesh_Core.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -361,6 +442,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.cxx">
       <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh3.cxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
