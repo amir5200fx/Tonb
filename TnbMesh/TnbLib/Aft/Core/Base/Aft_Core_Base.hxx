@@ -13,6 +13,16 @@
 #include <memory>
 #include <vector>
 
+#ifdef TnbMesh_EXPORT_DEFINE
+#define TnbMesh_AFTCORE_SORT_EXPORT __declspec(dllexport)
+#else
+#ifdef TnbMesh_AFTCORE_SORT_EXPORT_DEFINE
+#define TnbMesh_AFTCORE_SORT_EXPORT __declspec(dllexport)
+#else
+#define TnbMesh_AFTCORE_SORT_EXPORT __declspec(dllimport)
+#endif
+#endif
+
 namespace tnbLib
 {
 
@@ -170,7 +180,7 @@ namespace tnbLib
 
 		};
 
-		static TnbMesh_EXPORT mySort Sort;
+		static TnbMesh_AFTCORE_SORT_EXPORT mySort Sort;
 
 		template<class U = void>
 		static resolvedType<is_two_dimension<(int)Point::dim>::value, U> Update_Pmin_Pmax

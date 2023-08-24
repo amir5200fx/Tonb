@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _Aft_Model_Base_Header
 #define _Aft_Model_Base_Header
-
+	
 #include <Entity_Box.hxx>
 #include <Entity_Connectivity.hxx>
 #include <Entity_StaticData.hxx>

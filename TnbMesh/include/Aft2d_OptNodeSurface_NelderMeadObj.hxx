@@ -36,7 +36,8 @@ namespace tnbLib
 
 		Standard_Real theTol_;
 
-		static TnbMesh_EXPORT Standard_Real EstimateError(const Standard_Real d0, const Standard_Real d1);
+		static TnbMesh_EXPORT Standard_Real 
+			EstimateError(const Standard_Real d0, const Standard_Real d1);
 
 	public:
 
@@ -88,7 +89,6 @@ namespace tnbLib
 		}
 
 		TnbMesh_EXPORT Standard_Real Value(const Pnt2d& theCoord) const;
-
 		TnbMesh_EXPORT Standard_Boolean IsConverged() const;
 
 		void SetP0(const Pnt2d& theP0)

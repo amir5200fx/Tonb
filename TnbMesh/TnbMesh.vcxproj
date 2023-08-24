@@ -1016,6 +1016,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Base\Geom\MetricPrcsr\Traits\Geo_MetricPrcsr_Traits.hxx" />
     <ClInclude Include="TnbLib\Base\IO\2d\MeshIO2d_FEA.hxx" />
     <ClInclude Include="TnbLib\Base\IO\3d\Boundary\MeshIO3d_BoundaryMesh.hxx" />
+    <ClInclude Include="TnbLib\Base\IO\3d\MeshIO3d_FEA.hxx" />
+    <ClInclude Include="TnbLib\Base\IO\3d\MeshIO3d_PentaFEA.hxx" />
     <ClInclude Include="TnbLib\Base\IO\Mesh_IO.hxx" />
     <ClInclude Include="TnbLib\Base\IO\Mesh_IOI.hxx" />
     <ClInclude Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_Background.hxx" />
@@ -1739,6 +1741,8 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Base\Geom\MetricPrcsr\System\Geo_MetricPrcsr_System.cxx" />
     <ClCompile Include="TnbLib\Base\IO\2d\MeshIO2d_FEA.cxx" />
     <ClCompile Include="TnbLib\Base\IO\3d\Boundary\MeshIO3d_BoundaryMesh.cxx" />
+    <ClCompile Include="TnbLib\Base\IO\3d\MeshIO3d_FEA.cxx" />
+    <ClCompile Include="TnbLib\Base\IO\3d\MeshIO3d_PentaFEA.cxx" />
     <ClCompile Include="TnbLib\Base\IO\Mesh_IO.cxx" />
     <ClCompile Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundExtension.cxx" />
     <ClCompile Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundIO.cxx" />

@@ -5538,6 +5538,12 @@
     <ClInclude Include="TnbLib\Base\MetricFunction\Background\2d\GeoMetricFun2d_BackgroundFwd.hxx">
       <Filter>TnbLib\Base\MetricFunction\Background\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Base\IO\3d\MeshIO3d_FEA.hxx">
+      <Filter>TnbLib\Base\IO\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Base\IO\3d\MeshIO3d_PentaFEA.hxx">
+      <Filter>TnbLib\Base\IO\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7261,6 +7267,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\Tools\Tools\MeshBase_ToolsBackground.cxx">
       <Filter>TnbLib\Base\Tools\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\IO\3d\MeshIO3d_FEA.cxx">
+      <Filter>TnbLib\Base\IO\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Base\IO\3d\MeshIO3d_PentaFEA.cxx">
+      <Filter>TnbLib\Base\IO\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
