@@ -1,0 +1,6 @@
+setVerbose(1);
+
+loadFile();
+
+printSegmentBlocks();
+printCornerBlocks();

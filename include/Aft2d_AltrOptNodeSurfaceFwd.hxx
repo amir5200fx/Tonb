@@ -10,7 +10,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations [5/7/2022 Amir]
-	template<class FrontType, class SizeFun, class MetricFun = void>
+	template<class FrontType, class SizeFun, class MetricFun>
 	class Aft_AltrOptNode;
 
 	typedef Aft_AltrOptNode<Aft2d_EdgeSurface, Geo2d_SizeFunction, Geo2d_MetricFunction>

@@ -1,9 +1,9 @@
 #pragma once
-#ifndef _Aft2d_OptNodeSurface_NelderMeadObj_Header
-#define _Aft2d_OptNodeSurface_NelderMeadObj_Header
+#ifndef _VoyageMesh_AltrOptNode_NelderMeadObj_Header
+#define _VoyageMesh_AltrOptNode_NelderMeadObj_Header
 
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
-#include <Mesh_Module.hxx>
+#include <Voyage_Module.hxx>
 #include <Pnt2d.hxx>
 #include <Entity2d_Box.hxx>
 
@@ -12,21 +12,18 @@
 namespace tnbLib
 {
 
-	struct Aft2d_OptNodeSurface_NelderMeadObj_Cache
+	struct VoyageMesh_AltrOptNode_NelderMeadObj_Cache
 	{
 
 	protected:
 
 		mutable Standard_Real d0;
 		mutable Standard_Real d1;
-
 	};
 
-	class Aft2d_OptNodeSurface_NelderMeadObj
-		: public Aft2d_OptNodeSurface_NelderMeadObj_Cache
+	class VoyageMesh_AltrOptNode_NelderMeadObj
+		: public VoyageMesh_AltrOptNode_NelderMeadObj_Cache
 	{
-
-		/*Private Data*/
 
 		std::shared_ptr<Geo2d_MetricPrcsrAnIso> theMap_;
 
@@ -36,13 +33,12 @@ namespace tnbLib
 
 		Standard_Real theTol_;
 
-		static TnbMesh_EXPORT Standard_Real 
-			EstimateError(const Standard_Real d0, const Standard_Real d1);
+		static TnbVoyage_EXPORT Standard_Real EstimateError(const Standard_Real d0, const Standard_Real d1);
 
 	public:
 
-		static TnbMesh_EXPORT const Standard_Real DEFAULT_TOLERANCE;
-		static TnbMesh_EXPORT const int nbVariables;
+		static TnbVoyage_EXPORT const Standard_Real DEFAULT_TOLERANCE;
+		static TnbVoyage_EXPORT const int nbVariables;
 
 		enum
 		{
@@ -53,7 +49,7 @@ namespace tnbLib
 
 		// default constructor [5/6/2022 Amir]
 
-		Aft2d_OptNodeSurface_NelderMeadObj()
+		VoyageMesh_AltrOptNode_NelderMeadObj()
 			: theTol_(DEFAULT_TOLERANCE)
 		{}
 
@@ -88,8 +84,8 @@ namespace tnbLib
 			return theTol_;
 		}
 
-		TnbMesh_EXPORT Standard_Real Value(const Pnt2d& theCoord) const;
-		TnbMesh_EXPORT Standard_Boolean IsConverged() const;
+		TnbVoyage_EXPORT Standard_Real Value(const Pnt2d& theCoord) const;
+		TnbVoyage_EXPORT Standard_Boolean IsConverged() const;
 
 		void SetP0(const Pnt2d& theP0)
 		{
@@ -128,8 +124,9 @@ namespace tnbLib
 			return P.Coord(Dim);
 		}
 
-		TnbMesh_EXPORT void SetV(const Standard_Integer Dim, const Standard_Real x, Pnt2d& P);
+		TnbVoyage_EXPORT void SetV(const Standard_Integer Dim, const Standard_Real x, Pnt2d& P);
+
 	};
 }
 
-#endif // !_Aft2d_OptNodeSurface_NelderMeadObj_Header
+#endif // !_VoyageMesh_AltrOptNode_NelderMeadObj_Header

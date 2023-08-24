@@ -7,6 +7,16 @@
 #include <Aft_OptNode_CorrectorType.hxx>
 #include <Mesh_Module.hxx>
 
+#ifdef TnbMesh_EXPORT_DEFINE
+#define TnbMesh_AFTOPTNODECORR_VERBOSE_EXPORT __declspec(dllexport)
+#else
+#ifdef TnbMesh_AFTOPTNODECORR_VERBOSE_DEFINE
+#define TnbMesh_AFTOPTNODECORR_VERBOSE_EXPORT __declspec(dllexport)
+#else
+#define TnbMesh_AFTOPTNODECORR_VERBOSE_EXPORT __declspec(dllimport)
+#endif
+#endif
+
 namespace tnbLib
 {
 
@@ -63,7 +73,7 @@ namespace tnbLib
 
 	public:
 
-		static TnbMesh_EXPORT unsigned short verbose;
+		static TnbMesh_AFTOPTNODECORR_VERBOSE_EXPORT unsigned short verbose;
 
 		// default constructor [3/1/2022 Amir]
 
@@ -172,7 +182,7 @@ namespace tnbLib
 
 	public:
 
-		static TnbMesh_EXPORT unsigned short verbose;
+		static TnbMesh_AFTOPTNODECORR_VERBOSE_EXPORT unsigned short verbose;
 
 		// default constructor [3/7/2022 Amir]
 
@@ -276,7 +286,7 @@ namespace tnbLib
 
 	public:
 
-		static TnbMesh_EXPORT unsigned short verbose;
+		static TnbMesh_AFTOPTNODECORR_VERBOSE_EXPORT unsigned short verbose;
 
 		// default constructor [3/1/2022 Amir]
 
