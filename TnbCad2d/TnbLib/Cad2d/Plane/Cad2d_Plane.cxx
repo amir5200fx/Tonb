@@ -676,18 +676,22 @@ tnbLib::Cad2d_Plane::MakeBox
 	auto c1 = std::make_shared<Pln_Curve>(g1);
 	Debug_Null_Pointer(c1);
 	c1->SetIndex(1);
+	c1->SetName("bottom");
 
 	auto c2 = std::make_shared<Pln_Curve>(g2);
 	Debug_Null_Pointer(c2);
 	c2->SetIndex(2);
+	c2->SetName("right");
 
 	auto c3 = std::make_shared<Pln_Curve>(g3);
 	Debug_Null_Pointer(c3);
 	c3->SetIndex(3);
+	c3->SetName("top");
 
 	auto c4 = std::make_shared<Pln_Curve>(g4);
 	Debug_Null_Pointer(c4);
 	c4->SetIndex(4);
+	c4->SetName("left");
 
 	curves.push_back(std::move(c1));
 	curves.push_back(std::move(c2));

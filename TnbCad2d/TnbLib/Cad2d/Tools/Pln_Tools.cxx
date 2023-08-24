@@ -408,6 +408,7 @@ tnbLib::Pln_Tools::MakeWire
 		Debug_Null_Pointer(ring);
 
 		ring->SetIndex(c->Index());
+		ring->SetName(c->Name());
 
 		auto info = std::make_shared<Geo_ApprxCurve_Info>();
 		Debug_Null_Pointer(info);
@@ -506,6 +507,7 @@ tnbLib::Pln_Tools::MakeWire
 
 		//edge->SetIndex(K);
 		edge->SetIndex(x->Index());
+		edge->SetName(x->Name());
 
 		edges.push_back(std::move(edge));
 	}
@@ -696,8 +698,10 @@ tnbLib::Pln_Tools::MakeEdge
 		Debug_Null_Pointer(v0);
 		Debug_Null_Pointer(v1);
 
+		auto name = curve->Name();
 		auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
 		edge->SetIndex(id);
+		edge->SetName(std::move(name));
 		return std::move(edge);
 	}
 }
@@ -727,8 +731,10 @@ tnbLib::Pln_Tools::MakeEdge
 		Debug_Null_Pointer(v0);
 		Debug_Null_Pointer(v1);
 
+		auto name = curve->Name();
 		auto edge = std::make_shared<Pln_Segment>(std::move(v0), std::move(v1), std::move(curve));
 		edge->SetIndex(id);
+		edge->SetName(std::move(name));
 		return std::move(edge);
 	}
 }
@@ -839,6 +845,7 @@ tnbLib::Pln_Tools::MakeWire
 		Debug_Null_Pointer(edge);
 
 		edge->SetIndex(x->Index());
+		edge->SetName(x->Name());
 		//edge->SetIndex(++K);
 		edge->Approx(theInfo);
 
@@ -1538,6 +1545,7 @@ tnbLib::Pln_Tools::RetrieveEdges
 
 		/*edge->SetIndex(++k);*/
 		edge->SetIndex(x->Index());
+		edge->SetName(x->Name());
 		edges.push_back(std::move(edge));
 
 		++i;
@@ -1897,6 +1905,7 @@ namespace tnbLib
 
 					x->Curve->SetIndex(nbEdges);
 					edge->SetCurve(x->Curve);
+					edge->SetName(x->Curve->Name());
 					if (approx) edge->Approx(apxInfo);
 					edges.push_back(std::move(edge));
 				}	

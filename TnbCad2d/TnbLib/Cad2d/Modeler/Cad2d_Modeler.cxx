@@ -528,8 +528,14 @@ tnbLib::Cad2d_Modeler::AddEdge
 	}
 
 	theEdge->Index() = EdgeCounter().RetrieveIndex();
-	theEdge->Name() = "edge nb. " + theEdge->Index();
-
+	if (theEdge->Name().empty())
+	{
+		theEdge->Name() = "edge nb. " + std::to_string(theEdge->Index());
+	}
+	else
+	{
+		theEdge->Name() = "edge nb. " + std::to_string(theEdge->Index()) + " (" + theEdge->Name() + ")";
+	}
 	if (verbose)
 	{
 		Info << " - edge's name: " << theEdge->Name() << endl;
@@ -592,8 +598,14 @@ tnbLib::Cad2d_Modeler::AddRing
 )
 {
 	theRing->Index() = EdgeCounter().RetrieveIndex();
-	theRing->Name() = "ring nb. " + theRing->Index();
-
+	if (theRing->Name().empty())
+	{
+		theRing->Name() = "ring nb. " + std::to_string(theRing->Index());
+	}
+	else
+	{
+		theRing->Name() = "ring nb. " + std::to_string(theRing->Index()) + " (" + theRing->Name() + ")";
+	}
 	const auto crn = AddVertex(theRing->Vtx(), theRing->Index());
 
 	const auto& v = theRing->Vtx();

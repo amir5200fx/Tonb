@@ -487,8 +487,12 @@ tnbLib::Cad2d_Boolean::Subtract
 			Debug_Null_Pointer(c);
 
 			c->Reverse();
-
+			auto id = x->Curve()->Index();
+			auto name = x->Curve()->Name();
 			auto newPlnCurve = (*x->Curve())(std::move(c));
+			Debug_Null_Pointer(newPlnCurve);
+			newPlnCurve->SetIndex(id);
+			newPlnCurve->SetName(name);
 			curves.push_back(std::move(newPlnCurve));
 
 			++k1;

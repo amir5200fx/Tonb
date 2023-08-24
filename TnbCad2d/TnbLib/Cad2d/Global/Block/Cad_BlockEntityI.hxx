@@ -321,7 +321,7 @@ namespace tnbLib
 		auto iter = theEntities_.begin();
 		while (iter NOT_EQUAL theEntities_.end())
 		{
-			Ostream << iter->first << "  ";
+			Ostream << " id: " << iter->first << ", name: " << iter->second->Name() << std::endl;// "  ";
 			iter++;
 		}
 	}
