@@ -913,6 +913,81 @@
     <Filter Include="TnbLib\Geo\Cache\CGAL\Polygon\2d">
       <UniqueIdentifier>{83395e71-3291-4d22-8eb5-8f17445462a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\Pentahedralization">
+      <UniqueIdentifier>{7b19f1e6-4996-4df1-b528-f64e8ec93eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn">
+      <UniqueIdentifier>{d4bfdb43-6369-4d77-bc47-c4eb1e487e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn\dual">
+      <UniqueIdentifier>{fdf33053-3006-4cf9-ab73-f5c4dd9b9d5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn\triple">
+      <UniqueIdentifier>{3ed64ebd-02c8-49c6-bb2b-8158f1b8a311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn\quadruple">
+      <UniqueIdentifier>{a8871e39-982a-4246-9fcb-d3e3bdd9feda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn\quintuple">
+      <UniqueIdentifier>{4021c589-e52b-4666-9f1d-ce06379e0567}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn\sextuple">
+      <UniqueIdentifier>{1a93bb30-3a13-4afc-a77e-617f2a20e77c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn\septuple">
+      <UniqueIdentifier>{be3359ba-caf4-42d2-b5a8-889bf7ae24d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElmConn\octuple">
+      <UniqueIdentifier>{3e3c9bf7-0f01-4696-8ddf-bd1f7851f16c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\FVMesh">
+      <UniqueIdentifier>{1d264ebb-b62e-4785-9291-67fcbed04225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\FVMesh\2d">
+      <UniqueIdentifier>{2ce8b211-1bc6-4b75-aad4-e8a655a73d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\FVMesh\3d">
+      <UniqueIdentifier>{443b98f9-c0a2-41a2-b0cb-5eb09fa98b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\NurbsPx">
+      <UniqueIdentifier>{f3fbd004-67d4-45c5-84c5-e6a6ffb325dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\NurbsPx\2ndOrder">
+      <UniqueIdentifier>{1f6525c9-1aff-4a44-b7ff-47d7fdd905f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\NurbsPx\2ndOrder\3Pts">
+      <UniqueIdentifier>{e1772fe9-40c3-4c4e-a265-3737f3c748fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Profile">
+      <UniqueIdentifier>{10546693-6c45-4604-a6c7-a4249bf3de76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Profile\Nurbs">
+      <UniqueIdentifier>{19886e84-a6d0-4cd8-864e-e791fb2b5511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom">
+      <UniqueIdentifier>{89a9f301-0e27-41c3-8e81-5efd7d60c26b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom\Edge">
+      <UniqueIdentifier>{5bb9a0e0-f8da-4d33-93c0-7b540014eae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom\Triangle">
+      <UniqueIdentifier>{ccd88502-d60a-482c-8bca-7a86e7613d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom\Brick">
+      <UniqueIdentifier>{a200d893-2085-4e78-b891-f289a8d8f5f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom\Wedge">
+      <UniqueIdentifier>{793b4589-f2b6-4b6c-923b-1cf8603ec5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom\Tetrahedron">
+      <UniqueIdentifier>{a5ae1906-1c31-4dc7-84a8-dd442b0f9dd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom\Pyramid">
+      <UniqueIdentifier>{67046049-bf20-42c7-bdb6-a69142898ce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\ElemGeom\Quadrilateral">
+      <UniqueIdentifier>{a70acb97-21e3-4aa2-b1da-eafcfa991af8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2157,6 +2232,78 @@
     <ClInclude Include="TnbLib\Geo\Cache\CGAL\Polygon\2d\Geo2d_CGALPolygonCache.hxx">
       <Filter>TnbLib\Geo\Cache\CGAL\Polygon\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Pentahedralization\Entity3d_Pentahedralization.hxx">
+      <Filter>TnbLib\Geo\Entities\Pentahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Pentahedralization\Entity3d_PentahedralizationFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\Pentahedralization</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemConn\Geo_ElemConn.hxx">
+      <Filter>TnbLib\Geo\ElmConn</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemConn\dual\Geo_ElemConn_Dual.hxx">
+      <Filter>TnbLib\Geo\ElmConn\dual</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemConn\triple\Geo_ElemConn_Triple.hxx">
+      <Filter>TnbLib\Geo\ElmConn\triple</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemConn\quadruple\Geo_ElemConn_Qaudruple.hxx">
+      <Filter>TnbLib\Geo\ElmConn\quadruple</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemConn\octuple\Geo_ElemConn_Octuple.hxx">
+      <Filter>TnbLib\Geo\ElmConn\octuple</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemConn\quintuple\Geo_ElemConn_Quintuple.hxx">
+      <Filter>TnbLib\Geo\ElmConn\quintuple</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemConn\sextuple\Geo_ElemConn_Sextuple.hxx">
+      <Filter>TnbLib\Geo\ElmConn\sextuple</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\FVMesh\Geo_FVMesh.hxx">
+      <Filter>TnbLib\Geo\FVMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\FVMesh\2d\Geo2d_FVMesh.hxx">
+      <Filter>TnbLib\Geo\FVMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\FVMesh\2d\Geo2d_FVMeshFwd.hxx">
+      <Filter>TnbLib\Geo\FVMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\FVMesh\3d\Geo3d_FVMesh.hxx">
+      <Filter>TnbLib\Geo\FVMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\FVMesh\3d\Geo3d_FVMeshFwd.hxx">
+      <Filter>TnbLib\Geo\FVMesh\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\NurbsPx\Geo2d_NurbsPx.hxx">
+      <Filter>TnbLib\Geo\NurbsPx</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\NurbsPx\2ndOrder\Geo2d_2ndNurbsPx.hxx">
+      <Filter>TnbLib\Geo\NurbsPx\2ndOrder</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\NurbsPx\2ndOrder\3Pts\Geo2d_2ndNurbsPx_3Pts.hxx">
+      <Filter>TnbLib\Geo\NurbsPx\2ndOrder\3Pts</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemGeom\Geo_ElemGeom.hxx">
+      <Filter>TnbLib\Geo\ElemGeom</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemGeom\Edge\Geo_ElemGeom_Edge.hxx">
+      <Filter>TnbLib\Geo\ElemGeom\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemGeom\Brick\Geo_ElemGeom_Brick.hxx">
+      <Filter>TnbLib\Geo\ElemGeom\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemGeom\Pyramid\Geo_ElemGeom_Pyramid.hxx">
+      <Filter>TnbLib\Geo\ElemGeom\Pyramid</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\FVMesh\Geo_FVMeshI.hxx">
+      <Filter>TnbLib\Geo\FVMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemGeom\Quadrilateral\Geo_ElemGeom_Quadrilateral.hxx">
+      <Filter>TnbLib\Geo\ElemGeom\Quadrilateral</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\ElemGeom\Triangle\Geo_ElemGeom_Triangle.hxx">
+      <Filter>TnbLib\Geo\ElemGeom\Triangle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2722,6 +2869,102 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\Cache\CGAL\Polygon\2d\Geo2d_CGALPolygonCache.cxx">
       <Filter>TnbLib\Geo\Cache\CGAL\Polygon\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Pentahedralization\Entity3d_Pentahedralization.cxx">
+      <Filter>TnbLib\Geo\Entities\Pentahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Pentahedralization\Entity3d_PentahedralizationIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Pentahedralization</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\dual\Geo_ElemConn_Dual.cxx">
+      <Filter>TnbLib\Geo\ElmConn\dual</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\triple\Geo_ElemConn_Triple.cxx">
+      <Filter>TnbLib\Geo\ElmConn\triple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\quadruple\Geo_ElemConn_Qaudruple.cxx">
+      <Filter>TnbLib\Geo\ElmConn\quadruple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\quintuple\Geo_ElemConn_Quintuple.cxx">
+      <Filter>TnbLib\Geo\ElmConn\quintuple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\sextuple\Geo_ElemConn_Sextuple.cxx">
+      <Filter>TnbLib\Geo\ElmConn\sextuple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\octuple\Geo_ElemConn_Octuple.cxx">
+      <Filter>TnbLib\Geo\ElmConn\octuple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\dual\Geo_ElemConn_DualIO.cxx">
+      <Filter>TnbLib\Geo\ElmConn\dual</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\octuple\Geo_ElemConn_OctupleIO.cxx">
+      <Filter>TnbLib\Geo\ElmConn\octuple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\sextuple\Geo_ElemConn_SextupleIO.cxx">
+      <Filter>TnbLib\Geo\ElmConn\sextuple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\quintuple\Geo_ElemConn_QuintupleIO.cxx">
+      <Filter>TnbLib\Geo\ElmConn\quintuple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\quadruple\Geo_ElemConn_QaudrupleIO.cxx">
+      <Filter>TnbLib\Geo\ElmConn\quadruple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemConn\triple\Geo_ElemConn_TripleIO.cxx">
+      <Filter>TnbLib\Geo\ElmConn\triple</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\FVMesh\2d\Geo2d_FVMeshIO.cxx">
+      <Filter>TnbLib\Geo\FVMesh\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\FVMesh\3d\Geo3d_FVMeshIO.cxx">
+      <Filter>TnbLib\Geo\FVMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\NurbsPx\Geo2d_NurbsPxIO.cxx">
+      <Filter>TnbLib\Geo\NurbsPx</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Brick\Geo_ElemGeom_Brick.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Brick\Geo_ElemGeom_BrickIO.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Edge\Geo_ElemGeom_Edge.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Edge\Geo_ElemGeom_EdgeIO.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Edge</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Pyramid\Geo_ElemGeom_Pyramid.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Pyramid</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Pyramid\Geo_ElemGeom_PyramidIO.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Pyramid</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Quadrilateral\Geo_ElemGeom_Quadrilateral.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Quadrilateral</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Quadrilateral\Geo_ElemGeom_QuadrilateralIO.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Quadrilateral</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Triangle\Geo_ElemGeom_Triangle.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\ElemGeom\Triangle\Geo_ElemGeom_TriangleIO.cxx">
+      <Filter>TnbLib\Geo\ElemGeom\Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\NurbsPx\2ndOrder\Geo2d_2ndNurbsPx.cxx">
+      <Filter>TnbLib\Geo\NurbsPx\2ndOrder</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\NurbsPx\2ndOrder\3Pts\Geo2d_2ndNurbsPx_3Pts.cxx">
+      <Filter>TnbLib\Geo\NurbsPx\2ndOrder\3Pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\NurbsPx\2ndOrder\3Pts\Geo2d_2ndNurbsPx_3PtsIO.cxx">
+      <Filter>TnbLib\Geo\NurbsPx\2ndOrder\3Pts</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\FVMesh\3d\Geo3d_FVMesh.cxx">
+      <Filter>TnbLib\Geo\FVMesh\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\FVMesh\2d\Geo2d_FVMesh.cxx">
+      <Filter>TnbLib\Geo\FVMesh\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
