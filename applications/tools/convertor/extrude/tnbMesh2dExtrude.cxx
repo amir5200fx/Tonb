@@ -1,6 +1,7 @@
-#include <MeshPost2d_ConvertToOpenFOAM.hxx>
+#include <MeshPost_Extrude.hxx>
 #include <MeshPost2d_OFTopology.hxx>
 #include <MeshIO2d_FEA.hxx>
+#include <Geo3d_FVMesh.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -9,6 +10,7 @@ namespace tnbLib
 {
 
 	static std::shared_ptr<MeshIO2d_FEA> myMeshIO;
+	static std::shared_ptr<Geo3d_FVMesh> myFvMesh;
 
 	TNB_DEFINE_VERBOSE_OBJ;
 	TNB_DEFINE_EXETAG_OBJ;
@@ -19,88 +21,21 @@ namespace tnbLib
 
 	TNB_SET_VERBOSE_FUN;
 
-	struct BoundaryCondition
-	{
-		std::vector<std::pair<word, word>> list;
-	};
-	
-	static std::map<word, std::shared_ptr<BoundaryCondition>> myBoundaries;
+	TNB_STANDARD_LOAD_SAVE_POINTER_OBJECT(myMeshIO, sub_directory, myFvMesh);
 
-	void loadMesh(const std::string& name)
-	{
-		file::CheckExtension(name);
-		myMeshIO = 
-			file::LoadFile<std::shared_ptr<MeshIO2d_FEA>>(name + MeshIO2d_FEA::extension, verbose);
-		TNB_CHECK_LOADED_FILE(myMeshIO);
-		loadTag = true;
-		myFileName = name;
-	}
-
-	void loadMesh()
-	{
-		myMeshIO = 
-			file::LoadSingleFile<std::shared_ptr<MeshIO2d_FEA>>
-			(sub_directory, MeshIO2d_FEA::extension, verbose, myFileName);
-		loadTag = true;
-		TNB_CHECK_LOADED_FILE(myMeshIO);
-	}
-
-	void loadFile()
-	{
-		if (file::IsDirectory(sub_directory))
-		{
-			loadMesh();
-		}
-		else
-		{
-			auto name = 
-				file::GetSingleFile(file::GetCurrentPath(), MeshIO2d_FEA::extension).string();
-			loadMesh(name);
-		}
-	}
-
-	auto createBoundary(const word& name)
-	{
-		auto t = std::make_shared<BoundaryCondition>();
-		myBoundaries.insert({ name, t });
-		return t;
-	}
-
-	void setParameter(const std::shared_ptr<BoundaryCondition>& bnd, const word& par, const word& value)
-	{
-		bnd->list.push_back({ par, value });
-	}
-
-	void execute()
+	void execute(const std::string& theName)
 	{
 		TNB_CHECK_LOAD_TAG;
 		auto topology = std::make_shared<MeshPost2d_OFTopology>();
 		topology->SetMeshIO(myMeshIO);
 		topology->Perform();
-		/*for (const auto& x : topology->Interiors())
-		{
-			std::cout << "id: " << x.Index() << ", owner: " << x.Owner() << ", neighbor: " << x.Neighbor() << std::endl;
-		}*/
-		/*PAUSE;
-		for (const auto& x : topology->Boundaries())
-		{
-			for (const auto& p : x.second)
-			{
-				std::cout << "physic: " << x.first << ", id: " << p.Index() << ", owner: " << p.Owner() << ", neighbor: " << p.Neighbor() << std::endl;
-			}
-			
-		}*/
 
-		auto convertor = std::make_shared<MeshPost2d_ConvertToOpenFOAM>();
-		convertor->SetMesh(topology);
-
-		for (const auto& x : myBoundaries)
-		{
-			convertor->SetBoundaryCondition(x.first, x.second->list);
-		}
-
+		auto convertor = std::make_shared<MeshPost_Extrude>();
+		convertor->SetMesh2d(topology);
+		convertor->SetTitle(theName);
 		convertor->Perform();
-		convertor->Export();
+
+		myFvMesh = convertor->RetrieveIO();
 		TNB_PERFORMED_TAG;
 	}
 }
@@ -120,16 +55,15 @@ namespace tnbLib
 	{
 		// io functions [1/23/2023 Payvand]
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadMesh(name); }), "loadFile");
-		//mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
+		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
 		// settings [1/23/2023 Payvand]
 		mod->add(chaiscript::fun([](unsigned short c)->void {setVerbose(c); }), "setVerbose");
 
 		// operators [1/23/2023 Payvand]
-		mod->add(chaiscript::fun([](const std::string& name)-> auto { return createBoundary(name); }), "createBoundary");
-		mod->add(chaiscript::fun([](const std::shared_ptr<BoundaryCondition>& bnd, const std::string& par, const std::string& value)-> void {setParameter(bnd, par, value); }), "setPar");
-		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {execute(name); }), "execute");
 	}
 
 	std::string getString(char* argv)
@@ -163,7 +97,7 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to convert a two-dimensional mesh to OpenFOAM mesh." << endl << endl;
+			Info << " This application is aimed to extrude a two-dimensional mesh." << endl << endl;
 
 			Info << " - subdirectory: {" << sub_directory << "}" << endl;
 			Info << endl
@@ -176,9 +110,7 @@ int main(int argc, char* argv[])
 
 				<< " # Operators: " << endl << endl
 
-				<< " - [bndCond] createBoundary(name)" << endl
-				<< " - (bndCond).setPar(word, word)" << endl
-				<< " - execute()" << endl << endl
+				<< " - execute(name)" << endl << endl
 
 				<< " # Settings: " << endl << endl
 
@@ -197,7 +129,7 @@ int main(int argc, char* argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbMesh2dToOpenFOAM"));
+				fileName myFileName(file::GetSystemFile("tnbMesh2dExtrude"));
 
 				chai.eval_file(myFileName);
 			}

@@ -74,6 +74,20 @@ namespace tnbLib
 		{
 			Cad2d_Modeler::verbose = 1;
 		}
+		if (verbose)
+		{
+			Info << endl;
+			Info << " - the list of the edges: " << endl;
+			for (const auto& x : myEdges)
+			{
+				Info << " - id: " << x->Index() << ", name: " << x->Name() << endl;
+			}
+			Info << endl;
+		}
+		if (verbose > 1)
+		{
+			Cad2d_Modeler::verbose = 1;
+		}
 		auto modeler = std::make_shared<Cad2d_Modeler>();
 		modeler->Import(myEdges);
 

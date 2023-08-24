@@ -55,22 +55,24 @@ namespace tnbLib
 	{
 		Info << endl
 			<< " - list of the corners:" << endl;
-		auto blocks = manager->Blocks();
+		manager->Print(true, std::cout);
+		/*auto blocks = manager->Blocks();
 		for (const auto& x : blocks)
 		{
 			Info << x.first << endl;
-		}
+		}*/
 	}
 
 	void printBlocks(const std::shared_ptr<Cad_EntityManager<Pln_Edge>>& manager)
 	{
 		Info << endl
 			<< " - list of the segments:" << endl;
-		auto blocks = manager->Blocks();
+		manager->Print(true, std::cout);
+		/*auto blocks = manager->Blocks();
 		for (const auto& x : blocks)
 		{
 			Info << x.first << endl;
-		}
+		}*/
 	}
 
 	auto selectBlock(const std::shared_ptr<Cad_EntityManager<Pln_Vertex>>& manager, const std::string& name)
@@ -325,6 +327,8 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << " This application is aimed to manage the topology of a plane." << endl << endl;
+
+			Info << " You can load the model from a subdirectory path named {model}." << endl << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 

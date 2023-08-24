@@ -15,6 +15,7 @@
 #include <Aft_Tools.hxx>
 #include <Mesh_Physic.hxx>
 #include <MeshIO2d_FEA.hxx>
+#include <Pln_Curve.hxx>
 #include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_Triangulation.hxx>
@@ -300,13 +301,20 @@ namespace tnbLib
 
 			for (const auto& w : wires)
 			{
+				//std::cout << "nb of curves = " << w->NbCurves() << std::endl;
+				//int k = 0;
 				for (const auto& c : w->Curves())
 				{
+					//std::cout << " - k = " << k++ << std::endl;
 					const auto& bmesh = c->GetMesh();
 					if (NOT bmesh)
 					{
 						FatalErrorIn(FunctionSIG)
 							<< "the curve has no mesh." << endl
+							<< " - Name: " << c->Curve()->Name() << endl
+							<< " - id: " << c->Index() << endl
+							//<< " - first = " << c->Curve()->FirstCoord() << endl
+							//<< " - last = " << c->Curve()->LastCoord() << endl
 							<< abort(FatalError);
 					}
 					auto physic = c->Physic()->Name();

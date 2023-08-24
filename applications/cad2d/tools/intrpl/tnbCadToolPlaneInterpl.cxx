@@ -1,6 +1,7 @@
 #include <Pln_CurveTools.hxx>
 #include <Pln_Tools.hxx>
 #include <Pln_Edge.hxx>
+#include <Pln_Curve.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <IFstream.hxx>
@@ -92,6 +93,7 @@ namespace tnbLib
 		myEdge = Pln_Tools::MakeEdge(geom);
 
 		myEdge->SetName(name);
+		myEdge->Curve()->SetName(name);
 	}
 
 	void makeEdge(const std::vector<Pnt2d>& qs)

@@ -196,7 +196,6 @@ int main(int argc, char* argv[])
 
 				<< " # Settings: " << endl << endl
 				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl
-				<< " - setTolerance(double)" << endl << endl
 
 				<< " # functions: " << endl << endl
 
