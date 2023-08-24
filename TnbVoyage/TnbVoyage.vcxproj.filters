@@ -220,9 +220,6 @@
     <Filter Include="TnbLib\Voyage\Mesh\Entities\Edge\Ref">
       <UniqueIdentifier>{c2a03634-7f14-4d1b-9583-93090376d38a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TnbLib\Voyage\Mesh\SIzeMap">
-      <UniqueIdentifier>{6014763d-8c99-477b-983f-ee22a7d91fb2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator">
       <UniqueIdentifier>{75345965-f632-467f-8ad8-1220feaecd3a}</UniqueIdentifier>
     </Filter>
@@ -231,6 +228,87 @@
     </Filter>
     <Filter Include="TnbLib\Voyage\Mesh\Entities\Core">
       <UniqueIdentifier>{4d0daafa-96dc-4464-a5b1-2422cabb8407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Front\Adaptor">
+      <UniqueIdentifier>{3ad27908-a51c-442d-92cc-2cd520b2bd49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Front\Info">
+      <UniqueIdentifier>{0b48c31f-3b8b-4470-b042-5bd6f23e169f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Front\Traits">
+      <UniqueIdentifier>{416928dd-f975-4c04-9469-95a809138ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\MetricPrcsr">
+      <UniqueIdentifier>{14d866ed-edd7-483a-9c4f-603a9bf86f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Core\Base">
+      <UniqueIdentifier>{eb31177a-3e74-4194-b7a5-e77b5941ecf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Data">
+      <UniqueIdentifier>{5aae11bd-6996-4f3f-b2ec-50b6804542aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Node\Traits">
+      <UniqueIdentifier>{e8f73597-98a6-4976-8563-44bfb71804a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Edge\Traits">
+      <UniqueIdentifier>{398f7c54-02e8-4654-9b2f-72549c72f412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Element\Traits">
+      <UniqueIdentifier>{da7bc6ee-4746-4fee-8caf-c6f2e6f02721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Traits">
+      <UniqueIdentifier>{16b8bf88-681e-40cc-8610-f9184ccffc28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\SizeMap">
+      <UniqueIdentifier>{6014763d-8c99-477b-983f-ee22a7d91fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\SizeMap\Info">
+      <UniqueIdentifier>{b265b830-9fb9-4b4c-a937-f98068b3a920}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\SizeMap\BaseSize">
+      <UniqueIdentifier>{1fcdc751-ba10-4020-808f-5aea7d4e8ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\SizeMap\BaseSize\Info">
+      <UniqueIdentifier>{a8e72ea8-7f80-41fc-85ad-a1731c5ad6be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\SizeMap\Correct">
+      <UniqueIdentifier>{6438fbd3-5bd2-4d7c-adc0-fdf5ddd72466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Front\Identifier">
+      <UniqueIdentifier>{5915bb2b-2595-43f0-991b-b22573440fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Corrector">
+      <UniqueIdentifier>{3995838f-a63e-4403-8fa7-c12d9930effa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Analytical">
+      <UniqueIdentifier>{ffe6bab9-701c-40ff-a504-22ee5e1b975c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg">
+      <UniqueIdentifier>{94606e3e-6cb8-4861-b762-d95bb588cf02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms">
+      <UniqueIdentifier>{d4e4c6c0-8df7-4c2c-807b-a197ef39f02f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Adaptive">
+      <UniqueIdentifier>{74a6dd1d-31a2-45f3-8450-0fa172e5e9e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Altr">
+      <UniqueIdentifier>{442aa6a4-6ab5-4904-8e86-69d2c8ed2b0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Std">
+      <UniqueIdentifier>{adf2c806-9b90-4165-8c16-71344eb7954d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator">
+      <UniqueIdentifier>{d5418a69-4880-40c9-bb99-65ea57f6097c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Iterative">
+      <UniqueIdentifier>{f27e4ce5-3f41-4859-8e79-fad80290300a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Std">
+      <UniqueIdentifier>{493fb3b3-a9e8-4be6-9ae2-2b6bc5d61cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead">
+      <UniqueIdentifier>{70423431-b286-467f-8a01-cd8f67b25058}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -360,9 +438,6 @@
     <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\VoyageMesh_Node.hxx">
       <Filter>TnbLib\Voyage\Mesh\Entities\Node</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\Offset\VoyageMesh_OffsetNode.hxx">
-      <Filter>TnbLib\Voyage\Mesh\Entities\Node\Offset</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\VoyageMesh_Edge.hxx">
       <Filter>TnbLib\Voyage\Mesh\Entities\Edge</Filter>
     </ClInclude>
@@ -372,23 +447,152 @@
     <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\Ref\VoyageMesh_RefEdge.hxx">
       <Filter>TnbLib\Voyage\Mesh\Entities\Edge\Ref</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\Offset\VoyageMesh_OffsetEdge.hxx">
-      <Filter>TnbLib\Voyage\Mesh\Entities\Edge\Offset</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Element\VoyageMesh_Element.hxx">
       <Filter>TnbLib\Voyage\Mesh\Entities\Element</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Mesh\SIzeMap\VoyageMesh_SizeMap.hxx">
-      <Filter>TnbLib\Voyage\Mesh\SIzeMap</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\VoyageMesh_NodeCalculator.hxx">
-      <Filter>TnbLib\Voyage\Mesh\NodeCalculator</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\VoyageMesh_FrontInfo.hxx">
-      <Filter>TnbLib\Voyage\Mesh\Entities\Front</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Core\VoyageMesh_Core.hxx">
       <Filter>TnbLib\Voyage\Mesh\Entities\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\Traits\VoyageMesh_FrontTraits.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\Adaptor\VoyageMesh_FrontInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\Adaptor\VoyageMesh_FrontInfoAdaptor.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\MetricPrcsr\VoyageMesh_MetricPrcsr.hxx">
+      <Filter>TnbLib\Voyage\Mesh\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\MetricPrcsr\VoyageMesh_MetricPrcsrFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\VoyageMesh_FrontGlobalDataFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\VoyageMesh_FrontInfo.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\VoyageMesh_FrontGlobalData.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Core\VoyageMesh_CoreTemplate.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Core\VoyageMesh_CoreFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Core\Base\VoyageMesh_CoreBase.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Core\Base\VoyageMesh_CoreBaseFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Data\VoyageMesh_GlobalData.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Data\VoyageMesh_GlobalDataFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\Traits\VoyageMesh_NodeTraits.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\VoyageMesh_NodeBaseFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\VoyageMesh_NodeBase.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\Traits\VoyageMesh_EdgeTraits.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Edge\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\VoyageMesh_EdgeBase.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Edge\VoyageMesh_EdgeBaseFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Element\VoyageMesh_ElementBase.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Element\VoyageMesh_ElementBaseFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Element\Traits\VoyageMesh_ElementTraits.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Element\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Traits\VoyageMesh_Traits.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\VoyageMesh_FrontInfoFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\SizeMap\VoyageMesh_SizeMap.hxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\SizeMap\Info\VoyageMesh_SizeMapInfo.hxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\SizeMap\BaseSize\VoyageMesh_BaseSize.hxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\BaseSize</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\SizeMap\BaseSize\Info\VoyageMesh_BaseSizeInfo.hxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\BaseSize\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\SizeMap\Correct\VoyageMesh_CorrectSizeMap.hxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\Correct</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Front\Identifier\VoyageMesh_EdgeIdentifier.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Front\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Corrector\VoyageMesh_CorrOptNode_Iterative.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Corrector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Corrector\VoyageMesh_CorrOptNode_IterativeFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Corrector</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Analytical\VoyageMesh_OptNode_Analytical.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Analytical\VoyageMesh_OptNode_AnalyticalFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\VoyageMesh_AltrOptNode.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\VoyageMesh_AltrOptNodeFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Std\VoyageMesh_OptNode_Standard.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Std</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Std\VoyageMesh_OptNode_StandardFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Std</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\VoyageMesh_OptNode_Calculator.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\VoyageMesh_OptNode_CalculatorFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Iterative\VoyageMesh_IterOptNode_Calculator.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Iterative</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Std\VoyageMesh_StdOptNode_Calculator.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Std</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Altr\VoyageMesh_OptNode_Altr.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Altr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Altr\VoyageMesh_OptNode_AltrFwd.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Altr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead\VoyageMesh_AltrOptNode_NelderMead.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead\VoyageMesh_AltrOptNode_NelderMeadObj.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -445,6 +649,60 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh3.cxx">
       <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\MetricPrcsr\VoyageMesh_MetricPrcsr.cxx">
+      <Filter>TnbLib\Voyage\Mesh\MetricPrcsr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Entities\Core\Base\VoyageMesh_CoreBase.cxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\SizeMap\VoyageMesh_SizeMap.cxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\SizeMap\BaseSize\VoyageMesh_BaseSize.cxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\BaseSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\SizeMap\BaseSize\Info\VoyageMesh_BaseSizeInfo.cxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\BaseSize\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\SizeMap\BaseSize\VoyageMesh_BaseSize_Profile.cxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\BaseSize</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\SizeMap\Correct\VoyageMesh_CorrectSizeMap.cxx">
+      <Filter>TnbLib\Voyage\Mesh\SizeMap\Correct</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Entities\Core\Base\VoyageMesh_CoreBase_SortItem.cxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\Corrector\VoyageMesh_CorrOptNode_Iterative.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Corrector</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\Corrector\VoyageMesh_CorrOptNode_Iterative_VerboseObj.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Corrector</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\Analytical\VoyageMesh_OptNode_Analytical.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Analytical</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\VoyageMesh_AltrOptNode.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Std\VoyageMesh_OptNode_Standard.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Iterative\VoyageMesh_IterOptNode_Calculator.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Iterative</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Std\VoyageMesh_StdOptNode_Calculator.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Calculator\Std</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Altr\VoyageMesh_OptNode_Altr.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\Algorithms\Altr</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead\VoyageMesh_AltrOptNode_NelderMead.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead\VoyageMesh_AltrOptNode_NelderMeadObj.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
