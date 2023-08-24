@@ -320,6 +320,15 @@ tnbLib::MeshPost2d_ConvertToOpenFOAM::RetrieveOwnerList
 	for (const auto& x : theEdges)
 	{
 		auto owner = x->Owner().lock();
+		auto neighbor = x->Neighbor().lock();
+		if (neighbor AND owner->Index() > neighbor->Index())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "invalid numbering has been detected." << endl
+				<< " - the owner must have a lower index than its neighbor." << endl
+				<< " - owner id: " << owner->Index() << ", neighbor id: " << neighbor->Index() << endl
+				<< abort(FatalError);
+		}
 		Debug_Null_Pointer(owner);
 		owners.push_back(Index_Of(owner->Index()));
 	}
@@ -457,7 +466,23 @@ void tnbLib::MeshPost2d_ConvertToOpenFOAM::Perform()
 
 	theFaces_ = RetrieveFaceList(edges_2d, elements_2d);
 	theCells_ = RetrieveCellList(elements_2d);
-
+	std::vector<int> faces;
+	for (const auto& x : theCells_.Cells())
+	{
+		const auto& f = x.Faces();
+		for (const auto& fi : f)
+		{
+			faces.push_back(fi);
+		}
+	}
+	for (auto x : faces)
+	{
+		std::cout << x << std::endl;
+	}
+	PAUSE;
+	std::cout << "face 6: " << std::endl;
+	auto f6 = theFaces_.Faces().at(6);
+	
 	theOwners_ = RetrieveOwnerList(edges_2d, elements_2d);
 	theNeighbors_ = RetrieveNeighborList(edges_2d);
 

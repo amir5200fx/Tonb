@@ -136,6 +136,15 @@
     <Filter Include="TnbLib\Post\Convertor\OpenFOAM\Topology\2d">
       <UniqueIdentifier>{05e4605b-47b4-4fae-8b66-d7127432c14c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\Convertor\Extrude">
+      <UniqueIdentifier>{231a2c97-f958-4c1a-801c-21ed3f609e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Convertor\Gambit">
+      <UniqueIdentifier>{bc8a7900-b9ac-4824-b891-62cf2344d35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\Convertor\unv">
+      <UniqueIdentifier>{2de127e7-462a-4c66-a03b-73bc870635ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -252,6 +261,15 @@
     <ClInclude Include="TnbLib\Post\Convertor\OpenFOAM\Topology\2d\MeshPost2d_OFTopology.hxx">
       <Filter>TnbLib\Post\Convertor\OpenFOAM\Topology\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Post\Convertor\Extrude\MeshPost_Extrude.hxx">
+      <Filter>TnbLib\Post\Convertor\Extrude</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Convertor\Gambit\MeshPost_Gambit.hxx">
+      <Filter>TnbLib\Post\Convertor\Gambit</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\Convertor\unv\MeshPost_IdeasUNV.hxx">
+      <Filter>TnbLib\Post\Convertor\unv</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.cxx">
@@ -304,6 +322,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Post\Convertor\OpenFOAM\Topology\2d\MeshPost2d_OFTopology.cxx">
       <Filter>TnbLib\Post\Convertor\OpenFOAM\Topology\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\Extrude\MeshPost_Extrude.cxx">
+      <Filter>TnbLib\Post\Convertor\Extrude</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\Gambit\MeshPost_Gambit.cxx">
+      <Filter>TnbLib\Post\Convertor\Gambit</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\Convertor\unv\MeshPost_IdeasUNV.cxx">
+      <Filter>TnbLib\Post\Convertor\unv</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
