@@ -2,29 +2,22 @@
 #ifndef _VoyageMesh_Core_Header
 #define _VoyageMesh_Core_Header
 
-#include <Aft2d_CoreSurface.hxx>
+#include <VoyageMesh_CoreFwd.hxx>
+#include <VoyageMesh_CoreTemplate.hxx>
+#include <VoyageMesh_OptNode_Calculator.hxx>
+#include <VoyageMesh_CoreBase.hxx>
+#include <Geo2d_SizeFunction.hxx>
+#include <Geo2d_MetricFunction.hxx>
 
 namespace tnbLib
 {
 
-	class VoyageMesh_Core
-		: public Aft2d_CoreSurface
-	{
-
-		/* Private Data*/
-
-	public:
-
-		//- default constructor
-
-		VoyageMesh_Core()
-		{}
-
-		//- constructors
-
-		//- Public functions and operators
-
-	};
+	typedef VoyageMesh_CoreTemplate
+		<
+		VoyageMesh_OptNode_Calculator,
+		Geo2d_SizeFunction,
+		Geo2d_MetricFunction
+		> VoyageMesh_Core;
 }
 
 #endif // !_VoyageMesh_Core_Header

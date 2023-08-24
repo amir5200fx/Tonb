@@ -3,6 +3,7 @@
 #define _Voyage_Mesh3_Header
 
 #include <VoyageMesh_Core.hxx>
+#include <Voyage_Module.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
@@ -42,28 +43,15 @@ namespace tnbLib
 
 		//- Private functions and operators
 
-		void MeshOneLevel();
-		void FindValidNode(const std::vector<std::shared_ptr<Aft2d_NodeSurface>>& theCandidates, const std::vector<std::shared_ptr<Aft2d_EdgeSurface>>& theEdges);
-		void Update();
+		TnbVoyage_EXPORT void MeshOneLevel();
+		TnbVoyage_EXPORT void FindValidNode
+		(
+			const std::vector<std::shared_ptr<VoyageMesh_Node>>& theCandidates, 
+			const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
+		);
+		TnbVoyage_EXPORT void Update();
 
-		/*Standard_Boolean GetEntity();
-		Standard_Boolean IsBelongToFront() const;
-
-		void CalcElementSize() const;
-		void CalcOptCoord();
-		void CalcLocalFrontRadius();
-
-		void RetrieveLocalFrontNodes(std::vector<std::shared_ptr<VoyageMesh_Node>>& theLocals, std::vector<std::shared_ptr<VoyageMesh_Node>>& theCandidates) const;
-		void RetrieveLocalFrontEntities(const std::vector<std::shared_ptr<VoyageMesh_Node>>&, std::vector<std::shared_ptr<VoyageMesh_Edge>>&) const;
-		void SortNodes(std::vector<std::shared_ptr<VoyageMesh_Node>>&) const;
-		void AddOptNodeTo(std::vector<std::shared_ptr<VoyageMesh_Node>>&) const;
-
-		Standard_Boolean IsNewPointCandidate(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&) const;
-
-		void FindValidPoint(const std::vector<std::shared_ptr<VoyageMesh_Node>>&, const std::vector<std::shared_ptr<VoyageMesh_Edge>>&);
-		void Update();
-
-		void NextLevel(const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges);*/
+		TnbVoyage_EXPORT void InsertNewFrontsToLevels();
 
 	public:
 
@@ -81,11 +69,16 @@ namespace tnbLib
 		const auto& Port() const { return thePort_; }
 		const auto& Starboard() const { return theStarboard_; }
 
-		void Perform();
+		TnbVoyage_EXPORT void Perform();
 
 		void SetRefPath(const std::shared_ptr<Voyage_Path3>& thePath) { theRefPath_ = thePath; }
 		void SetRefPath(std::shared_ptr<Voyage_Path3>&& thePath) { theRefPath_ = std::move(thePath); }
 
+		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>> 
+			RetrieveNodesFrom
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Edge>>&
+			);
 	};
 }
 

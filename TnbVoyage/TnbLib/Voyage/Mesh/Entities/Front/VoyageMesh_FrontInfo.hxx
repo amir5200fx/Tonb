@@ -2,29 +2,13 @@
 #ifndef _VoyageMesh_FrontInfo_Header
 #define _VoyageMesh_FrontInfo_Header
 
-#include <Aft2d_FrontSurfaceInfo.hxx>
-
-namespace tnbLib
-{
-
-	class VoyageMesh_FrontInfo
-		: public Aft2d_FrontSurfaceInfo
-	{
-
-		/*Private Data*/
-
-	public:
-
-		//- default constructor
-
-		VoyageMesh_FrontInfo()
-		{}
-
-		//- constructors
-
-		//- Public functions and operators
-
-	};
-}
+#include <VoyageMesh_FrontInfoFwd.hxx>
+#include <VoyageMesh_FrontTraits.hxx>
+#include <VoyageMesh_FrontInfoAdaptor.hxx>
+#include <VoyageMesh_MetricPrcsr.hxx>
+#include <VoyageMesh_Element.hxx>
+#include <VoyageMesh_Edge.hxx>
+#include <VoyageMesh_Node.hxx>
+#include <Aft2d_FrontInfoTemplate.hxx>
 
 #endif // !_VoyageMesh_FrontInfo_Header

@@ -1,13 +1,17 @@
 #include <Voyage_Tools.hxx>
 
 #include <VoyageGeo_VelocityBackground.hxx>
+#include <VoyageGeo_Path2.hxx>
 #include <Voyage_Edge.hxx>
 #include <Voyage_Node.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <Cad_GeomSurface.hxx>
+#include <Pln_Edge.hxx>
 #include <Geo2d_DelTri.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_Triangulation.hxx>
+#include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -182,4 +186,110 @@ tnbLib::Voyage_Tools::ShortestStraightPath
 		coords.push_back(theEnd);
 	}
 	return std::move(coords);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Box> 
+tnbLib::Voyage_Tools::CalcBoundingBox
+(
+	const std::vector<std::shared_ptr<Entity2d_Polygon>>& thePolygons, 
+	const Standard_Real theTol
+)
+{
+	if (thePolygons.size())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the polygon list is empty." << endl
+			<< abort(FatalError);
+	}
+	auto b = Geo_BoxTools::GetBox(thePolygons.at(0)->Points(), 0);
+	for (size_t i = 1; i < thePolygons.size(); i++)
+	{
+		b = Geo_BoxTools::Union
+		(
+			b, 
+			Geo_BoxTools::GetBox(thePolygons.at(i)->Points(), 0)
+		);
+	}
+	auto t = std::make_shared<Entity2d_Box>(std::move(b));
+	return std::move(t);
+}
+
+std::vector<std::shared_ptr<tnbLib::Entity2d_Polygon>> 
+tnbLib::Voyage_Tools::RetrievePolygons
+(
+	const VoyageGeo_Path2& thePath
+)
+{
+	const auto& curves = thePath.Curves();
+	std::vector<std::shared_ptr<Entity2d_Polygon>> polygons;
+	polygons.reserve(curves.size());
+	for (const auto& curve : curves)
+	{
+		Debug_Null_Pointer(curve);
+		const auto& mesh = curve->Mesh();
+		if (NOT mesh)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the edge has no mesh." << endl
+				<< abort(FatalError);
+		}
+		polygons.push_back(mesh);
+	}
+	return std::move(polygons);
+}
+
+Standard_Real 
+tnbLib::Voyage_Tools::CalcLength
+(
+	const Entity2d_Polygon& thePolygon, 
+	const Geo2d_MetricPrcsrAnIso& theMetric
+)
+{
+	const auto& points = thePolygon.Points();
+	Standard_Real tot_dist = 0;
+	for (size_t i = 1; i < points.size(); i++)
+	{
+		const auto& p0 = points.at(i - 1);
+		const auto& p1 = points.at(i);
+
+		auto dist = theMetric.CalcDistance(p0, p1);
+		tot_dist += dist;
+	}
+	return tot_dist;
+}
+
+std::vector<Standard_Real> 
+tnbLib::Voyage_Tools::CalcParameters
+(
+	const Entity2d_Polygon& thePolygon,
+	const Geo2d_MetricPrcsrAnIso& theMetric,
+	Standard_Real& theTotLen
+)
+{
+	const auto& pnts = thePolygon.Points();
+	if (pnts.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid polygon has been detected." << endl
+			<< abort(FatalError);
+	}
+	std::vector<Standard_Real> t;
+	t.reserve(thePolygon.NbPoints());
+	t.at(0) = 0;
+	Standard_Real tot_dis = 0.;
+	for (size_t i = 1; i < pnts.size(); i++)
+	{
+		const auto& p0 = pnts.at(i - 1);
+		const auto& p1 = pnts.at(i);
+		auto dis = theMetric.CalcDistance(p0, p1);
+		t.at(i) = dis;
+		tot_dis += dis;
+	}
+	for (auto& x : t)
+	{
+		x /= tot_dis;
+	}
+	t.at(t.size() - 1) = 1.0;
+	theTotLen = tot_dis;
+	return std::move(t);
 }

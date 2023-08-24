@@ -3,6 +3,7 @@
 #define _VoyageGeo_Path2_Header
 
 #include <Voyage_Entity.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 
 #include <Standard_TypeDef.hxx>
 
@@ -42,7 +43,7 @@ namespace tnbLib
 
 		//- Public functions and operators
 
-		Standard_Integer NbCurves() const { return theCurves_.size(); }
+		auto NbCurves() const { return theCurves_.size(); }
 
 		const auto& Curves() const { return theCurves_; }
 

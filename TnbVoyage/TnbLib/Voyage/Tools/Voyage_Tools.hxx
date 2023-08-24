@@ -4,6 +4,9 @@
 
 #include <VoyageGeo_VelocityBackgroundFwd.hxx>
 #include <Voyage_Module.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
+#include <Entity2d_PolygonFwd.hxx>
+#include <Entity2d_BoxFwd.hxx>
 
 #include <memory>
 #include <vector>
@@ -14,7 +17,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations [7/21/2023 Payvand]
-
+	class VoyageGeo_Path2;
 	class Voyage_Edge;
 	class Voyage_Node;
 	class Cad_GeomSurface;
@@ -59,6 +62,34 @@ namespace tnbLib
 				const Pnt2d& theStart,
 				const Pnt2d& theEnd, 
 				const std::shared_ptr<Cad_GeomSurface>& theSurface
+			);
+
+		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Box>
+			CalcBoundingBox
+			(
+				const std::vector<std::shared_ptr<Entity2d_Polygon>>&,
+				const Standard_Real theTol
+			);
+
+		static TnbVoyage_EXPORT std::vector<std::shared_ptr<Entity2d_Polygon>>
+			RetrievePolygons
+			(
+				const VoyageGeo_Path2& thePath
+			);
+
+		static TnbVoyage_EXPORT Standard_Real
+			CalcLength
+			(
+				const Entity2d_Polygon& thePolygon, 
+				const Geo2d_MetricPrcsrAnIso&
+			);
+
+		static TnbVoyage_EXPORT std::vector<Standard_Real>
+			CalcParameters
+			(
+				const Entity2d_Polygon&, 
+				const Geo2d_MetricPrcsrAnIso&, 
+				Standard_Real& theTotLength
 			);
 
 	};
