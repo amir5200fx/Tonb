@@ -2,99 +2,68 @@
 #ifndef _VoyageMesh_Node_Header
 #define _VoyageMesh_Node_Header
 
-#include <VoyageMesh_Entity.hxx>
-#include <VoyageMesh_NodeBase.hxx>
+#include <Pnt2d.hxx>
+#include <Global_Indexed.hxx>
+
+#include <map>
+#include <memory>
 
 namespace tnbLib
 {
 
-	
+	// Forward Declarations [8/7/2023 Payvand]
+
+	class VoyageMesh_Edge;
+	class VoyageMesh_Element;
+
 	class VoyageMesh_Node
-		: public VoyageMesh_NodeBase
+		: public Global_Indexed
 	{
-
-	public:
-
-		//typedef VoyageMesh_Entity<Aft2d_NodeSurface> baseType;
-
-	private:
 
 		/*Private Data*/
 
-		Standard_Integer theRegion_;
+		Pnt2d theCoord_;
+
+
+		std::map<Standard_Integer, std::weak_ptr<VoyageMesh_Edge>> theEdges_;
+		std::map<Standard_Integer, std::weak_ptr<VoyageMesh_Element>> theElements_;
 
 	public:
 
-		//- default constructor
+		// default constructor [8/7/2023 Payvand]
 
 		VoyageMesh_Node()
-			: theRegion_(0)
 		{}
 
-		//- constructors
+		// constructors [8/7/2023 Payvand]
 
 		VoyageMesh_Node(const Standard_Integer theIndex, const Pnt2d& theCoord)
-			: VoyageMesh_NodeBase(theIndex, theCoord)
-			, theRegion_(0)
+			: Global_Indexed(theIndex)
+			, theCoord_(theCoord)
 		{}
 
 		VoyageMesh_Node(const Standard_Integer theIndex, Pnt2d&& theCoord)
-			: VoyageMesh_NodeBase(theIndex, std::move(theCoord))
-			, theRegion_(0)
+			: Global_Indexed(theIndex)
+			, theCoord_(std::move(theCoord))
 		{}
 
-	public:
 
-		//- Public functions and operators
+		// Public functions and operators [8/7/2023 Payvand]
 
-		auto Region() const { return theRegion_; }
+		virtual Standard_Boolean IsBoundary() const { return Standard_False; }
 
-		void SetRegion(const Standard_Integer theValue) { theRegion_ = theValue; }
+		const auto& Coord() const { return theCoord_; }
+
+		const auto& Edges() const { return theEdges_; }
+		const auto& Elements() const { return theElements_; }
+
+		void SetCoord(const Pnt2d& theCoord) { theCoord_ = theCoord; }
+		void SetCoord(Pnt2d&& theCoord) { theCoord_ = std::move(theCoord); }
+
+		void ImportEdge(const Standard_Integer theIndex, const std::shared_ptr<VoyageMesh_Edge>& theEdge);
+		void ImportElement(const Standard_Integer theIndex, const std::shared_ptr<VoyageMesh_Element>& theElement);
+
 	};
-
-	//class VoyageMesh_Node
-	//	: public VoyageMesh_Entity<Aft2d_NodeSurface>
-	//{
-
-	//public:
-
-	//	typedef VoyageMesh_Entity<Aft2d_NodeSurface> baseType;
-
-	//private:
-
-	//	/*Private Data*/
-
-	//	Standard_Integer theRegion_;
-
-	//protected:
-
-	//	//- default constructor
-
-	//	VoyageMesh_Node()
-	//		: theRegion_(0)
-	//	{}
-
-	//	//- constructors
-
-	//	VoyageMesh_Node(const Standard_Integer theIndex, const Pnt2d& theCoord)
-	//		: baseType(theIndex, theCoord)
-	//		, theRegion_(0)
-	//	{}
-
-	//	VoyageMesh_Node(const Standard_Integer theIndex, Pnt2d&& theCoord)
-	//		: baseType(theIndex, std::move(theCoord))
-	//		, theRegion_(0)
-	//	{}
-
-	//public:
-
-	//	//- Public functions and operators
-
-	//	auto Region() const { return theRegion_; }
-
-	//	void SetRegion(const Standard_Integer theValue) { theRegion_ = theValue; }
-	//};
-
 }
 
 #endif // !_VoyageMesh_Node_Header
