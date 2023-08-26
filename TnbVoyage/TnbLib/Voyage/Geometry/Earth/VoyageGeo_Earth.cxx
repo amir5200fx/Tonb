@@ -4,6 +4,7 @@
 #include <Cad_ShapeTools.hxx>
 #include <Cad_Shape.hxx>
 #include <Cad_GeomSurface.hxx>
+#include <GeoMetricFun2d_ExactSurface.hxx>
 #include <Entity2d_Box.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -48,4 +49,13 @@ tnbLib::VoyageGeo_Earth::Periods() const
 	b.Length(dx, dy);
 	auto t = std::make_pair(dx, dy);
 	return std::move(t);
+}
+
+std::shared_ptr<tnbLib::Geo2d_MetricFunction> 
+tnbLib::VoyageGeo_Earth::GetMetrics() const
+{
+	auto geom = Surface();
+	auto b = geom->ParametricBoundingBox();
+	auto metrics = std::make_shared<GeoMetricFun2d_ExactSurface>(geom->Geometry(), std::move(b));
+	return std::move(metrics);
 }

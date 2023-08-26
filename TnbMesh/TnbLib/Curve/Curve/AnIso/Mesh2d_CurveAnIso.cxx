@@ -12,7 +12,6 @@ template<>
 Standard_Real 
 tnbLib::Mesh2d_CurveAnIso::Perform()
 {
-	std::cout << "injaaaaaa" << std::endl;
 	if (NOT Geometry())
 	{
 		FatalErrorIn("void Mesh_Curve<CurveType, SizeMap>::Perform()")
@@ -40,9 +39,8 @@ tnbLib::Mesh2d_CurveAnIso::Perform()
 		(
 			Integrand, Info()->LengthCalcMaxLevel(),
 			*Info()->OverallLengthIntgInfo());*/
-	std::cout << "injaaaaaa" << std::endl;
 	auto curveLength = CalcLengthWithChecking(nbLevels_CheckingLength);
-	std::cout << "curve length = " << curveLength << std::endl;
+
 	try
 	{
 		Discretize(curveLength);

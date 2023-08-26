@@ -90,6 +90,10 @@ int main()
 	// Resolution: 14.8 [7/27/2023 Payvand]
 
 	auto surface = earth->Surface();
+	std::cout << "u0: " << surface->FirstParameterU() << ", u1: " << surface->LastParameterU() << std::endl;
+	std::cout << "v0: " << surface->FirstParameterV() << ", v1: " << surface->LastParameterV() << std::endl;
+	std::cout << surface->Value({ 2.0,1.5708 });
+	return 1;
 	auto domain = surface->ParametricBoundingBox();
 	auto sizeFun = std::make_shared<GeoSizeFun2d_Uniform>(14.8, domain);
 	auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(surface->Geometry(), domain);

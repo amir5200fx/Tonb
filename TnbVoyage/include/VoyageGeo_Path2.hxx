@@ -14,6 +14,7 @@ namespace tnbLib
 {
 
 	//- Forward Declarations
+	class VoyageGeo_Earth;
 	class Pln_Edge;
 
 	class VoyageGeo_Path2
@@ -23,6 +24,7 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::vector<std::shared_ptr<Pln_Edge>> theCurves_;
+		std::shared_ptr<VoyageGeo_Earth> theEarth_;
 
 	public:
 
@@ -33,12 +35,22 @@ namespace tnbLib
 
 		//- constructors
 
-		VoyageGeo_Path2(const std::vector<std::shared_ptr<Pln_Edge>>& theCurves)
+		VoyageGeo_Path2
+		(
+			const std::vector<std::shared_ptr<Pln_Edge>>& theCurves,
+			const std::shared_ptr<VoyageGeo_Earth>& theEarth
+		)
 			: theCurves_(theCurves)
+			, theEarth_(theEarth)
 		{}
 
-		VoyageGeo_Path2(std::vector<std::shared_ptr<Pln_Edge>>&& theCurves)
+		VoyageGeo_Path2
+		(
+			std::vector<std::shared_ptr<Pln_Edge>>&& theCurves,
+			std::shared_ptr<VoyageGeo_Earth>&& theEarth
+		)
 			: theCurves_(std::move(theCurves))
+			, theEarth_(std::move(theEarth))
 		{}
 
 		//- Public functions and operators
@@ -46,9 +58,12 @@ namespace tnbLib
 		auto NbCurves() const { return theCurves_.size(); }
 
 		const auto& Curves() const { return theCurves_; }
+		const auto& Earth() const { return theEarth_; }
 
 		void SetCurves(const std::vector<std::shared_ptr<Pln_Edge>>& theCurves) { theCurves_ = theCurves; }
 		void SetCurves(std::vector<std::shared_ptr<Pln_Edge>>&& theCurves) { theCurves_ = std::move(theCurves); }
+		void SetEarth(const std::shared_ptr<VoyageGeo_Earth>& theEarth) { theEarth_ = theEarth; }
+		void SetEarth(std::shared_ptr<VoyageGeo_Earth>&& theEarth) { theEarth_ = std::move(theEarth); }
 
 	};
 }

@@ -310,6 +310,12 @@
     <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead">
       <UniqueIdentifier>{70423431-b286-467f-8a01-cd8f67b25058}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\PathDisret">
+      <UniqueIdentifier>{ddfdc83a-0e68-4810-bd42-d83af65f68c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\PathDisret\Info">
+      <UniqueIdentifier>{a223927f-9677-4dc7-937f-ee9008939e07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -594,6 +600,12 @@
     <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead\VoyageMesh_AltrOptNode_NelderMeadObj.hxx">
       <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathDiscret\Voyage_PathDiscret.hxx">
+      <Filter>TnbLib\Voyage\PathDisret</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathDiscret\Info\Voyage_PathDiscret_Info.hxx">
+      <Filter>TnbLib\Voyage\PathDisret\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -703,6 +715,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead\VoyageMesh_AltrOptNode_NelderMeadObj.cxx">
       <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\NelderMead</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\PathDiscret\Voyage_PathDiscret.cxx">
+      <Filter>TnbLib\Voyage\PathDisret</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\PathDiscret\Info\Voyage_PathDiscret_Info.cxx">
+      <Filter>TnbLib\Voyage\PathDisret\Info</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
