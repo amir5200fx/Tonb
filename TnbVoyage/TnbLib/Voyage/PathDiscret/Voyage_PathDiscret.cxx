@@ -2,7 +2,7 @@
 
 #include <VoyageGeo_Path2.hxx>
 #include <VoyageGeo_Earth.hxx>
-#include <Voyage_PathDiscret_Info.hxx>
+#include <Voyage_MetricInfo.hxx>
 #include <Mesh2d_CurveAnIso.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Pln_Edge.hxx>
@@ -15,9 +15,6 @@
 #include <OSstream.hxx>
 
 #include <Geom2d_Curve.hxx>
-
-std::shared_ptr<tnbLib::Voyage_PathDiscret_Info> tnbLib::Voyage_PathDiscret::DEFAULT_INFO =
-std::make_shared<tnbLib::Voyage_PathDiscret_Info>();
 
 void tnbLib::Voyage_PathDiscret::Perform()
 {
@@ -61,7 +58,7 @@ void tnbLib::Voyage_PathDiscret::Perform()
 			(
 				geom, 
 				geom->FirstParameter(), geom->LastParameter(), 
-				metricPrcsr, AlgInfo()->MeshInfo()
+				metricPrcsr, AlgInfo()->CurveMeshInfo()
 				);
 		alg->Perform();
 		Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed.");
