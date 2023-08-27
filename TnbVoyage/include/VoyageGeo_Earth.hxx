@@ -44,7 +44,7 @@ namespace tnbLib
 		TnbVoyage_EXPORT std::shared_ptr<Cad_GeomSurface> Surface() const;
 		TnbVoyage_EXPORT std::pair<Standard_Real, Standard_Real> Periods() const;
 
-		std::shared_ptr<Geo2d_MetricFunction> GetMetrics() const;
+		TnbVoyage_EXPORT std::shared_ptr<Geo2d_MetricFunction> GetMetrics() const;
 
 	};
 }

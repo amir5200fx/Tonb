@@ -93,6 +93,9 @@ namespace tnbLib
 				Standard_Real& theTotLength
 			);
 
+		// Convert the standard voyage coordinates to the parametric coordinates [8/27/2023 aamir]
+		static TnbVoyage_EXPORT Pnt2d ConvertToUV(const Pnt2d&);
+
 		// The route angle is greater than zero if the route turns to the left and is less than zero if turns to the right [8/5/2023 Payvand]
 		static Standard_Real CalcRouteAngle(const Pnt2d& theP0, const Pnt2d& theP1, const Pnt2d& theP2);
 

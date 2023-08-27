@@ -3,8 +3,7 @@
 #define _VoyageGeo_PathGeneration_Header
 
 #include <Voyage_Module.hxx>
-#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
-#include <Pnt2d.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Global_Done.hxx>
 
 #include <vector>
@@ -14,6 +13,9 @@ namespace tnbLib
 {
 
 	// Forward Declarations [7/27/2023 Payvand]
+	class Voyage_MetricInfo;
+	class VoyageGeo_Earth;
+	class VoyageGeo_Path2;
 	class Cad_GeomCurve;
 	class Cad_GeomSurface;
 	class Mesh_Curve_Info;
@@ -25,58 +27,56 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::vector<Pnt2d> theCoords_;
-		std::shared_ptr<Cad_GeomSurface> theSurface_;
-		std::shared_ptr<Geo2d_MetricPrcsrAnIso> theMetricPrcsr_;
+		std::shared_ptr<Entity2d_Polygon> theOffsets_;
 
-		std::shared_ptr<Mesh_Curve_Info> theCurveInfo_;
+		std::shared_ptr<VoyageGeo_Earth> theEarth_;
+
+		Standard_Integer theNbSamples_;
 
 		// results [7/27/2023 Payvand]
 
-		std::vector<std::shared_ptr<Cad_GeomCurve>> thePaths_;
+		std::shared_ptr<VoyageGeo_Path2> thePath_;
 
 	public:
 
+		static TnbVoyage_EXPORT Standard_Integer DEFAULT_NB_SAMPLES;
 
 		// default constructor [7/27/2023 Payvand]
 
 		VoyageGeo_PathGeneration()
+			: theNbSamples_(DEFAULT_NB_SAMPLES)
 		{}
 
 		// constructors [7/27/2023 Payvand]
 
 		VoyageGeo_PathGeneration
 		(
-			const std::vector<Pnt2d>& theCoords, 
-			const std::shared_ptr<Cad_GeomSurface>& theSurface, 
-			const std::shared_ptr<Geo2d_MetricPrcsrAnIso>& thePrcsr,
-			const std::shared_ptr<Mesh_Curve_Info>& theInfo
+			const std::shared_ptr<Entity2d_Polygon>& theOffsets, 
+			const std::shared_ptr<VoyageGeo_Earth>& theEarth
 		)
-			: theCoords_(theCoords)
-			, theSurface_(theSurface)
-			, theMetricPrcsr_(thePrcsr)
-			, theCurveInfo_(theInfo)
+			: theOffsets_(theOffsets)
+			, theEarth_(theEarth)
+			, theNbSamples_(DEFAULT_NB_SAMPLES)
 		{}
 
 
 		// Public functions and operators [7/27/2023 Payvand]
 
-		const auto& Coords() const { return theCoords_; }
-		const auto& Surface() const { return theSurface_; }
+		const auto& Offsets() const { return theOffsets_; }
+		const auto& Earth() const { return theEarth_; }
 
-		const auto& CurveInfo() const { return theCurveInfo_; }
-		const auto& MetricPrcsr() const { return theMetricPrcsr_; }
+		const auto& Path() const { return thePath_; }
 
-		const auto& Paths() const { return thePaths_; }
+		auto NbSamples() const { return theNbSamples_; }
 
 		TnbVoyage_EXPORT void Perform();
 
-		void SetCoords(const std::vector<Pnt2d>& theCoords) { theCoords_ = theCoords; }
-		void SetSurface(const std::shared_ptr<Cad_GeomSurface>& theSurface) { theSurface_ = theSurface; }
-		void SetMetricPrsr(const std::shared_ptr<Geo2d_MetricPrcsrAnIso>& thePrcsr) { theMetricPrcsr_ = thePrcsr; }
-
-		void SetCurveInfo(const std::shared_ptr<Mesh_Curve_Info>& theInfo) { theCurveInfo_ = theInfo; }
-
+		void SetOffsets(const std::shared_ptr<Entity2d_Polygon>& theOffsets) { theOffsets_ = theOffsets; }
+		void SetOffsets(std::shared_ptr<Entity2d_Polygon>&& theOffsets) { theOffsets_ = std::move(theOffsets); }
+		void SetEarth(const std::shared_ptr<VoyageGeo_Earth>& theEarth) { theEarth_ = theEarth; }
+	
+		void SetNbSamples(const Standard_Integer theNbSamples) { theNbSamples_ = theNbSamples; }
+		
 		static Standard_Real CalcMinAngularDistance(const Pnt2d& theP0, const Pnt2d& theP1);
 
 	};

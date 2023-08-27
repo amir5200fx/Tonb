@@ -521,14 +521,14 @@ namespace tnbLib
 		const Standard_Integer theMaxLev
 	) const
 	{
-		if (nbLevels_CheckingLength < 1)
+		if (theMaxLev < 1)
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "invalid nb of levels for checking the length of the curve!" << endl
-				<< " - nb of levels= " << nbLevels_CheckingLength << endl
+				<< " - nb of levels= " << theMaxLev << endl
 				<< abort(FatalError);
 		}
-		return CalcLengthWithChecking(0, nbLevels_CheckingLength, FirstParameter(), LastParameter());
+		return CalcLengthWithChecking(0, theMaxLev, FirstParameter(), LastParameter());
 	}
 
 	template<class gCurveType, class MetricPrcsrType, bool SavePars>

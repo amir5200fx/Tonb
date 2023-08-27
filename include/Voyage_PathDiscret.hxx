@@ -12,7 +12,7 @@ namespace tnbLib
 
 	// Forward Declarations [8/26/2023 Payvand]
 	class VoyageGeo_Path2;
-	class Voyage_PathDiscret_Info;
+	class Voyage_MetricInfo;
 
 	class Voyage_PathDiscret
 		: public Global_Done
@@ -21,29 +21,27 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<VoyageGeo_Path2> thePath_;
-		std::shared_ptr<Voyage_PathDiscret_Info> theInfo_;
+		std::shared_ptr<Voyage_MetricInfo> theInfo_;
 
 		Standard_Real theSize_;
 
 	public:
 
-		static TnbVoyage_EXPORT std::shared_ptr<Voyage_PathDiscret_Info> DEFAULT_INFO;
-
 		// default constructor [8/26/2023 Payvand]
 
 		Voyage_PathDiscret()
 			: theSize_(0)
-			, theInfo_(DEFAULT_INFO)
 		{}
 
 		Voyage_PathDiscret
 		(
 			const std::shared_ptr<VoyageGeo_Path2>& thePath, 
+			const std::shared_ptr<Voyage_MetricInfo>& theInfo,
 			const Standard_Real theSize
 		)
 			: thePath_(thePath)
 			, theSize_(theSize)
-			, theInfo_(DEFAULT_INFO)
+			, theInfo_(theInfo_)
 		{}
 
 
@@ -58,8 +56,7 @@ namespace tnbLib
 
 		void SetPath(const std::shared_ptr<VoyageGeo_Path2>& thePath) { thePath_ = thePath; }
 		void SetSize(const Standard_Real theSize) { theSize_ = theSize; }
-		// There is no need to provide an info. but yet you can override it by this method. [8/26/2023 Payvand]
-		void OverrideInfo(const std::shared_ptr<Voyage_PathDiscret_Info>& theInfo) { theInfo_ = theInfo; }
+		void OverrideInfo(const std::shared_ptr<Voyage_MetricInfo>& theInfo) { theInfo_ = theInfo; }
 	};
 }
 

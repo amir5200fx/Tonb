@@ -10,6 +10,7 @@
 #include <Pln_Edge.hxx>
 #include <Geo2d_DelTri.hxx>
 #include <Geo_BoxTools.hxx>
+#include <Geo_Tools.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
@@ -292,4 +293,19 @@ tnbLib::Voyage_Tools::CalcParameters
 	t.at(t.size() - 1) = 1.0;
 	theTotLen = tot_dis;
 	return std::move(t);
+}
+
+tnbLib::Pnt2d 
+tnbLib::Voyage_Tools::ConvertToUV(const Pnt2d& theCoordinate)
+{
+	auto u = Geo_Tools::DegToRadian(theCoordinate.Y() + PI);
+	auto v = Geo_Tools::DegToRadian(theCoordinate.X());
+	if (u < 0.0) u = 0.;
+	if (u > 2 * PI) u = 2.0 * PI;
+	const auto v0 = -0.5 * PI;
+	const auto v1 = 0.5 * PI;
+	if (v < v0) v = v0;
+	if (v > v1)v = v1;
+	Pnt2d uv(u, v);
+	return std::move(uv);
 }
