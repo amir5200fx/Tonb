@@ -1,5 +1,6 @@
 ﻿#include <VoyageGeo_PathGeneration.hxx>
 #include <VoyageGeo_Earth.hxx>
+#include <VoyageGeo_Path2.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMetricFun2d_ExactSurface.hxx>
@@ -100,22 +101,22 @@ int main()
 
 	auto prcsr = std::make_shared<Geo2d_MetricPrcsrAnIso>(sizeFun, metricFun, myPrcsrInfo);
 
-	auto path = std::make_shared<VoyageGeo_PathGeneration>();
-	path->SetCoords({ P02, P01, P00, P0,P1 });
-	path->SetCurveInfo(myMeshInfo);
-	path->SetMetricPrsr(prcsr);
-	path->SetSurface(surface);
+	//auto path = std::make_shared<VoyageGeo_PathGeneration>();
+	//path->SetCoords({ P02, P01, P00, P0,P1 });
+	//path->SetCurveInfo(myMeshInfo);
+	//path->SetMetricPrsr(prcsr);
+	//path->SetSurface(surface);
 
-	path->Perform();
-	
-	auto apprxCurveInfo = std::make_shared<Geo_ApprxCurve_Info>();
-	for (const auto& x : path->Paths())
-	{
-		auto mesh = Cad_PreviewTools::PreviewCurve(x->Geometry(), 100);
-		/*Geo3d_ApprxCurve alg(x->Geometry(), x->FirstParameter(), x->LastParameter(), apprxCurveInfo);
-		alg.Perform();
-		const auto& mesh = alg.Chain();*/
-		mesh->ExportToPlt(myFile);
-	}
+	//path->Perform();
+	//
+	//auto apprxCurveInfo = std::make_shared<Geo_ApprxCurve_Info>();
+	//for (const auto& x : path->Paths())
+	//{
+	//	auto mesh = Cad_PreviewTools::PreviewCurve(x->Geometry(), 100);
+	//	/*Geo3d_ApprxCurve alg(x->Geometry(), x->FirstParameter(), x->LastParameter(), apprxCurveInfo);
+	//	alg.Perform();
+	//	const auto& mesh = alg.Chain();*/
+	//	mesh->ExportToPlt(myFile);
+	//}
 	return 1;
 }

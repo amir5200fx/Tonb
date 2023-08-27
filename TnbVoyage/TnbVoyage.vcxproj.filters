@@ -316,6 +316,24 @@
     <Filter Include="TnbLib\Voyage\PathDisret\Info">
       <UniqueIdentifier>{a223927f-9677-4dc7-937f-ee9008939e07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Distance">
+      <UniqueIdentifier>{0f851782-e482-47b1-bb38-20aa30130e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Distance\Info">
+      <UniqueIdentifier>{2a989037-acd2-4d09-ba41-d47519e6dcb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\MetricInfo">
+      <UniqueIdentifier>{0ccf3770-1c45-48cf-b507-ee5a89550ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Make">
+      <UniqueIdentifier>{e0a0c1bd-deae-4780-8172-5885bf0dd590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Make\Path">
+      <UniqueIdentifier>{dc8c3b2a-6ea0-4451-bf88-b8e2688a4cd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\PathOnEarth">
+      <UniqueIdentifier>{876d9eb4-3971-470b-8772-475d864442eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -603,8 +621,14 @@
     <ClInclude Include="TnbLib\Voyage\PathDiscret\Voyage_PathDiscret.hxx">
       <Filter>TnbLib\Voyage\PathDisret</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\PathDiscret\Info\Voyage_PathDiscret_Info.hxx">
-      <Filter>TnbLib\Voyage\PathDisret\Info</Filter>
+    <ClInclude Include="TnbLib\Voyage\Distance\Voyage_Distance.hxx">
+      <Filter>TnbLib\Voyage\Distance</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\MetricInfo\Voyage_MetricInfo.hxx">
+      <Filter>TnbLib\Voyage\MetricInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathOnEarth\Voyage_PathOnEarth.hxx">
+      <Filter>TnbLib\Voyage\PathOnEarth</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -719,8 +743,14 @@
     <ClCompile Include="TnbLib\Voyage\PathDiscret\Voyage_PathDiscret.cxx">
       <Filter>TnbLib\Voyage\PathDisret</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\PathDiscret\Info\Voyage_PathDiscret_Info.cxx">
-      <Filter>TnbLib\Voyage\PathDisret\Info</Filter>
+    <ClCompile Include="TnbLib\Voyage\Distance\Voyage_Distance.cxx">
+      <Filter>TnbLib\Voyage\Distance</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\MetricInfo\Voyage_MetricInfo.cxx">
+      <Filter>TnbLib\Voyage\MetricInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\PathOnEarth\Voyage_PathOnEarth.cxx">
+      <Filter>TnbLib\Voyage\PathOnEarth</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

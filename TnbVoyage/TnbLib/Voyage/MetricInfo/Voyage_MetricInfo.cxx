@@ -1,4 +1,4 @@
-#include <Voyage_PathDiscret_Info.hxx>
+#include <Voyage_MetricInfo.hxx>
 
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
@@ -6,16 +6,16 @@
 #include <NumAlg_NewtonSolver_Info.hxx>
 #include <NumAlg_BisectionSolver_Info.hxx>
 
-std::shared_ptr<tnbLib::Mesh_Curve_Info> tnbLib::Voyage_PathDiscret_Info::DEFAULT_CURV_INFO =
+std::shared_ptr<tnbLib::Mesh_Curve_Info> tnbLib::Voyage_MetricInfo::DEFAULT_CURV_INFO =
 std::make_shared<tnbLib::Mesh_Curve_Info>();
 
-std::shared_ptr<tnbLib::NumAlg_AdaptiveInteg_Info> tnbLib::Voyage_PathDiscret_Info::DEFAULT_INTEG_INFO =
+std::shared_ptr<tnbLib::NumAlg_AdaptiveInteg_Info> tnbLib::Voyage_MetricInfo::DEFAULT_INTEG_INFO =
 std::make_shared<tnbLib::NumAlg_AdaptiveInteg_Info>();
 
 namespace tnbLib
 {
 
-	class Voyage_PathDiscret_InfoRunTime
+	class Voyage_MetricInfo_RunTime
 	{
 
 		/*Private Data*/
@@ -28,7 +28,7 @@ namespace tnbLib
 
 		// default constructor [8/26/2023 Payvand]
 
-		Voyage_PathDiscret_InfoRunTime()
+		Voyage_MetricInfo_RunTime()
 		{
 			SetConfigs();
 		}
@@ -48,9 +48,9 @@ namespace tnbLib
 	static const auto myBisectCorrInfo = std::make_shared<NumAlg_BisectionSolver_Info>();
 }
 
-static const tnbLib::Voyage_PathDiscret_InfoRunTime myVoyage_PathDiscret_InfoRunTimeObj;
+static const tnbLib::Voyage_MetricInfo_RunTime myVoyage_MetricInfo_InfoRunTimeObj;
 
-void tnbLib::Voyage_PathDiscret_InfoRunTime::SetConfigs()
+void tnbLib::Voyage_MetricInfo_RunTime::SetConfigs()
 {
 	myOverallLenIntegInfo->SetMaxNbIterations(500);
 	myOverallLenIntegInfo->SetNbInitIterations(6);
@@ -75,7 +75,7 @@ void tnbLib::Voyage_PathDiscret_InfoRunTime::SetConfigs()
 	myBisectCorrInfo->SetDelta(1.0E-6);
 
 	{
-		auto myInfo = Voyage_PathDiscret_Info::DEFAULT_CURV_INFO;
+		auto myInfo = Voyage_MetricInfo::DEFAULT_CURV_INFO;
 		myInfo->SetIgnoreNonConvergency(Standard_True);
 
 		myInfo->SetUnderRelaxation(0.85);
@@ -89,7 +89,7 @@ void tnbLib::Voyage_PathDiscret_InfoRunTime::SetConfigs()
 	}
 
 	{
-		auto myInfo = Voyage_PathDiscret_Info::DEFAULT_INTEG_INFO;
+		auto myInfo = Voyage_MetricInfo::DEFAULT_INTEG_INFO;
 		myInfo->SetMaxNbIterations(50);
 		myInfo->SetNbInitIterations(4);
 		myInfo->SetTolerance(1.0E-4);
