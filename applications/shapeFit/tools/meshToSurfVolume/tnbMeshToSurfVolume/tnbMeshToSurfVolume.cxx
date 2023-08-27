@@ -1,0 +1,189 @@
+#include <Cad_GeomSurface.hxx>
+#include <Geo_Tools.hxx>
+#include <Entity3d_SurfTriangulation.hxx>
+#include <Entity3d_Triangle.hxx>
+#include <Pnt3d.hxx>
+#include <Vec3d.hxx>
+#include <Dir3d.hxx>
+#include <TnbError.hxx>
+#include <OSstream.hxx>
+
+#include <GeomAPI_ProjectPointOnSurf.hxx>
+
+namespace tnbLib
+{
+
+	static std::shared_ptr<Cad_GeomSurface> mySurface;
+	static std::shared_ptr<Entity3d_SurfTriangulation> myMesh;
+
+	static double myUpperValue;
+	static double myLowerValue;
+
+	static auto myTol = 1.0E-6;
+
+	enum class PointPosition
+	{
+		upper,
+		lower
+	};
+
+	auto isUpper(PointPosition pos)
+	{
+		return pos == PointPosition::upper;
+	}
+
+	auto isLower(PointPosition pos)
+	{
+		return pos == PointPosition::lower;
+	}
+
+	auto CalcVolume(const std::vector<Pnt3d>& coords)
+	{
+		double tot_vol = 0;
+		tot_vol += std::abs(Geo_Tools::Volume_cgal(coords.at(0), coords.at(1), coords.at(2), coords.at(3)));
+		tot_vol += std::abs(Geo_Tools::Volume_cgal(coords.at(1), coords.at(2), coords.at(3), coords.at(4)));
+		tot_vol += std::abs(Geo_Tools::Volume_cgal(coords.at(2), coords.at(3), coords.at(4), coords.at(5)));
+		return tot_vol;
+	}
+
+	void CalcVolume(const Entity3d_Triangle& tri, const std::shared_ptr<Cad_GeomSurface>& surf)
+	{
+		const auto& p0 = tri.P0();
+		const auto& p1 = tri.P1();
+		const auto& p2 = tri.P2();
+
+		const auto u0 = surf->FirstParameterU();
+		const auto u1 = surf->LastParameterU();
+		const auto v0 = surf->FirstParameterV();
+		const auto v1 = surf->LastParameterV();
+
+		Pnt2d uv0;
+		Pnt3d pj0;
+
+		Pnt2d uv1;
+		Pnt3d pj1;
+
+		Pnt2d uv2;
+		Pnt3d pj2;
+
+		double dis0, dis1, dis2;
+		try
+		{		
+			{
+				GeomAPI_ProjectPointOnSurf projObj;
+				projObj.Init(p0, surf->Geometry(), u0, u1, v0, v1);
+				projObj.Perform(p0);
+
+				projObj.LowerDistanceParameters(uv0.X(), uv0.Y());
+				pj0 = projObj.NearestPoint();
+				dis0 = projObj.LowerDistance();
+			}
+		
+			{
+				GeomAPI_ProjectPointOnSurf projObj;
+				projObj.Init(p1, surf->Geometry(), u0, u1, v0, v1);
+				projObj.Perform(p1);
+
+				projObj.LowerDistanceParameters(uv1.X(), uv1.Y());
+				pj1 = projObj.NearestPoint();
+				dis1 = projObj.LowerDistance();
+			}
+		
+			{
+				GeomAPI_ProjectPointOnSurf projObj;
+				projObj.Init(p2, surf->Geometry(), u0, u1, v0, v1);
+				projObj.Perform(p2);
+
+				projObj.LowerDistanceParameters(uv2.X(), uv2.Y());
+				pj2 = projObj.NearestPoint();
+				dis2 = projObj.LowerDistance();
+			}
+		}
+		catch (const Standard_Failure& x)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " couldn't project the point: " << endl
+				<< x.GetMessageString() << endl
+				<< abort(FatalError);
+		}
+		auto uvm = (uv0 + uv1 + uv2) / 3.0;
+		Vec3d ut, vt;
+		Pnt3d Pm;
+		surf->Geometry()->D1(uvm.X(), uvm.Y(), Pm, ut, vt);
+		Dir3d normal = ut.Crossed(vt).XYZ();
+		PointPosition pos0;
+		if (dis0 > myTol)
+		{
+			Dir3d n0 = (p0 - pj0).XYZ();
+			if (n0.Dot(normal) > 0) pos0 = PointPosition::upper;
+			else pos0 = PointPosition::lower;
+		}
+		PointPosition pos1;
+		if (dis1 > myTol)
+		{
+			Dir3d n1 = (p1 - pj1).XYZ();
+			if (n1.Dot(normal) > 0) pos1 = PointPosition::upper;
+			else pos1 = PointPosition::lower;
+		}
+		PointPosition pos2;
+		if (dis2 > myTol)
+		{
+			Dir3d n2 = (p2 - pj2).XYZ();
+			if (n2.Dot(normal) > 0) pos2 = PointPosition::upper;
+			else pos2 = PointPosition::lower;
+		}
+		std::vector<Pnt3d> coords_3d;
+		coords_3d.push_back(p0);
+		coords_3d.push_back(p1);
+		coords_3d.push_back(p2);
+		coords_3d.push_back(pj0);
+		coords_3d.push_back(pj1);
+		coords_3d.push_back(pj2);
+		std::vector<Pnt2d> pts_2d;
+		pts_2d.push_back(std::move(uv0));
+		pts_2d.push_back(std::move(uv1));
+		pts_2d.push_back(std::move(uv2));
+		if (isUpper(pos0) AND isUpper(pos1) AND isUpper(pos2))
+		{
+			
+			if (Geo_Tools::IsCcwOrder_cgal(pts_2d))
+			{		
+				myUpperValue += CalcVolume(coords_3d);
+			}
+			else
+			{
+				myUpperValue -= CalcVolume(coords_3d);
+			}
+		}
+		if (isLower(pos0) AND isLower(pos1) AND isLower(pos2))
+		{
+			if (Geo_Tools::IsCcwOrder_cgal(pts_2d))
+			{
+				myLowerValue += CalcVolume(coords_3d);
+			}
+			else
+			{
+				myLowerValue -= CalcVolume(coords_3d);
+			}
+		}
+	}
+
+	void execute()
+	{
+		const auto& pts = myMesh->Points();
+		for (const auto& x : myMesh->Connectivity())
+		{
+			auto i0 = x.Value(0);
+			auto i1 = x.Value(1);
+			auto i2 = x.Value(2);
+
+			const auto& p0 = pts.at(Index_Of(i0));
+			const auto& p1 = pts.at(Index_Of(i1));
+			const auto& p2 = pts.at(Index_Of(i2));
+
+			Entity3d_Triangle t(p0.Coord(), p1.Coord(), p2.Coord());
+			CalcVolume(t, mySurface);
+		}
+	}
+
+}
