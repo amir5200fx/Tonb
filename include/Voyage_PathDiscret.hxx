@@ -41,7 +41,7 @@ namespace tnbLib
 		)
 			: thePath_(thePath)
 			, theSize_(theSize)
-			, theInfo_(theInfo_)
+			, theInfo_(theInfo)
 		{}
 
 

@@ -12,6 +12,9 @@ std::make_shared<tnbLib::Mesh_Curve_Info>();
 std::shared_ptr<tnbLib::NumAlg_AdaptiveInteg_Info> tnbLib::Voyage_MetricInfo::DEFAULT_INTEG_INFO =
 std::make_shared<tnbLib::NumAlg_AdaptiveInteg_Info>();
 
+Standard_Integer tnbLib::Voyage_MetricInfo::DEFAULT_NB_SAMPLES(5);
+Standard_Integer tnbLib::Voyage_MetricInfo::DEFAULT_MAX_SUBDIVIDE_LEVELS(10);
+
 namespace tnbLib
 {
 

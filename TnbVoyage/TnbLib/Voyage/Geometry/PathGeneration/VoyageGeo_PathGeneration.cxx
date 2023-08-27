@@ -122,31 +122,32 @@ void tnbLib::VoyageGeo_PathGeneration::Perform()
 			alg.Perform();
 			const auto& poly = alg.Mesh();
 			std::cout << "size = " << poly->NbPoints() << std::endl;*/
-			//std::vector<Pnt2d> pts2d;
-
+			
 			auto waypoints = std::make_shared<VoyageGeo_GreateCircleNav>(p0, p1);
 			
 			Standard_Integer n = NbSamples();
-			const auto du = (waypoints->Sigma2() - waypoints->Sigma1()) / (Standard_Real)(n);
+			//const auto du = (waypoints->Sigma2() - waypoints->Sigma1()) / (Standard_Real)(n);
 			//const auto du = 1.0 / (Standard_Real)(n);
 
-			std::vector<Standard_Real> us;
+			/*std::vector<Standard_Real> us;
 			us.reserve(n + 1);
 			for (size_t k = 0; k <= n; k++)
 			{
 				us.push_back(waypoints->Sigma1() + (Standard_Real)k * du);
 			}
-			auto pts2 = waypoints->CalcWayPoints(us);
-			auto geom_2d = Pln_CurveTools::Interpolation(pts2);
+			
+			auto pts2 = waypoints->CalcWayPoints(us);*/
+			
+			auto du = (p1 - p0) / (Standard_Real)n;
+			std::vector<Pnt2d> pts2d;
+			for (size_t k = 0; k <= n; k++)
+			{
+				auto p2 = p0 + k * du;
+				pts2d.push_back(std::move(p2));
+			}
+			auto geom_2d = Pln_CurveTools::Interpolation(pts2d);
 			auto curve_2d = std::make_shared<Pln_Curve>(i, std::move(geom_2d));
 			curves.push_back(std::move(curve_2d));
-			//auto du = (p1 - p0) / (Standard_Real)n;
-			//for (size_t k = 0; k <= n; k++)
-			//{
-			//	auto p2 = p0 + k * du;
-			//	pts2d.push_back(std::move(p2));
-			//}
-			
 			//std::vector<Pnt3d> coords;
 			//for (const auto& x : /*poly->Points()*/pts2)
 			//{

@@ -2,6 +2,7 @@
 #ifndef _Voyage_Distance_Header
 #define _Voyage_Distance_Header
 
+#include <Voyage_Module.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
@@ -49,9 +50,9 @@ namespace tnbLib
 		const auto& Path() const { return thePath_; }
 		const auto& GetInfo() const { return theInfo_; }
 
-		Standard_Real Value() const;
+		TnbVoyage_EXPORT Standard_Real Value() const;
 
-		void Perform();
+		TnbVoyage_EXPORT void Perform();
 
 		void SetPath(const std::shared_ptr<VoyageGeo_Path2>& thePath) { thePath_ = thePath; }
 		void SetInfo(const std::shared_ptr<Voyage_MetricInfo>& theInfo) { theInfo_ = theInfo; }
