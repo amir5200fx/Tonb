@@ -266,6 +266,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.cxx" />
     <ClCompile Include="TnbLib\Voyage\Geometry\PathGeneration\VoyageGeo_PathGeneration.cxx" />
     <ClCompile Include="TnbLib\Voyage\Geometry\Path\Curve\VoyageGeo_Curve.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Geometry\Path\VoyageGeo_Path2.cxx" />
     <ClCompile Include="TnbLib\Voyage\Geometry\Tools\VoyageGeo_Tools.cxx" />
     <ClCompile Include="TnbLib\Voyage\Geometry\WaypointsDistb\VoyageGeo_WaypointsDistb.cxx" />
     <ClCompile Include="TnbLib\Voyage\Mesh\Entities\Core\Base\VoyageMesh_CoreBase.cxx" />
