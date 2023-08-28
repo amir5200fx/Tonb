@@ -181,7 +181,7 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 	engine.SetMaxUnbalancing(2);
 	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
 	engine.SetGeometryRegion(*d);
-	engine.BUCKET_SIZE = 1;
+	engine.BUCKET_SIZE = 2;
 
 	Standard_Integer nbSources = 0;
 	const Standard_Real mergCrit = 1.0E-4 * d->Diameter();
@@ -242,7 +242,7 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 					else
 					{
 						// Update the size [8/19/2023 aamir]
-						founded->SetH(std::min(founded->H(), elmSize));
+						founded->SetH(std::max(founded->H(), elmSize));
 					}
 				}
 			}
@@ -368,7 +368,7 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 	auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrs());
-	hvInfo->SetFactor(SmoothingFactor());
+	hvInfo->SetFactor(/*SmoothingFactor()*/0.25);
 
 	std::vector<std::shared_ptr<sourceNode>> sources;
 	engine.RetrieveFromGeometryTo(sources);

@@ -42,6 +42,22 @@ void tnbLib::Voyage_Tools::SetSourcesToMesh
 
 		auto [n0, n1, n2] = current->Nodes();
 		{
+			auto id = Index_Of(n0->Index());
+			auto ho = sources.at(id);
+			if (x->H() > ho) sources.at(id) = x->H();
+		}
+		{
+			auto id = Index_Of(n1->Index());
+			auto ho = sources.at(id);
+			if (x->H() > ho) sources.at(id) = x->H();
+		}
+		{
+			auto id = Index_Of(n2->Index());
+			auto ho = sources.at(id);
+			if (x->H() > ho) sources.at(id) = x->H();
+		}
+
+		/*{
 			auto nearest = n0;
 			auto neighbors = MeshBase_Tools::RetrieveAdjacentNodes(nearest);
 
@@ -61,8 +77,8 @@ void tnbLib::Voyage_Tools::SetSourcesToMesh
 				auto h = sources.at(id);
 				if (x->H() > h) sources.at(id) = x->H();
 			}
-		}
-		{
+		}*/
+		/*{
 			auto nearest = n1;
 			auto neighbors = MeshBase_Tools::RetrieveAdjacentNodes(nearest);
 
@@ -82,8 +98,8 @@ void tnbLib::Voyage_Tools::SetSourcesToMesh
 				auto h = sources.at(id);
 				if (x->H() > h) sources.at(id) = x->H();
 			}
-		}
-		{
+		}*/
+		/*{
 			auto nearest = n2;
 			auto neighbors = MeshBase_Tools::RetrieveAdjacentNodes(nearest);
 
@@ -103,6 +119,6 @@ void tnbLib::Voyage_Tools::SetSourcesToMesh
 				auto h = sources.at(id);
 				if (x->H() > h) sources.at(id) = x->H();
 			}
-		}
+		}*/
 	}
 }
