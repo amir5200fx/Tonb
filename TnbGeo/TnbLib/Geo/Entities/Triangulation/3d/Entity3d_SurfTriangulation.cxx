@@ -1,5 +1,7 @@
 #include <Entity3d_SurfTriangulation.hxx>
 
+const std::string tnbLib::Entity3d_Triangulation::extension = ".stri3d";
+
 std::vector<tnbLib::Pnt3d>
 tnbLib::RetrieveCoords(const std::vector<Entity3d_SPnt>& thePs)
 {
