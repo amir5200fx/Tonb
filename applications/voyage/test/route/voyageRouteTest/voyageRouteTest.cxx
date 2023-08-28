@@ -1,6 +1,11 @@
 ﻿#include <VoyageGeo_PathGeneration.hxx>
 #include <VoyageGeo_Earth.hxx>
 #include <VoyageGeo_Path2.hxx>
+#include <Voyage_Tools.hxx>
+#include <Voyage_MetricInfo.hxx>
+#include <Voyage_Distance.hxx>
+#include <Voyage_PathDiscret.hxx>
+#include <Voyage_PathOnEarth.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMetricFun2d_ExactSurface.hxx>
@@ -12,11 +17,13 @@
 #include <Cad_GeomCurve.hxx>
 #include <Cad_GeomSurface.hxx>
 #include <Cad_FastDiscrete.hxx>
+#include <Pln_Edge.hxx>
 #include <FastDiscrete_Params.hxx>
 #include <Geo_Tools.hxx>
 #include <Geo3d_ApprxCurve.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Entity3d_Triangulation.hxx>
+#include <Entity2d_Chain.hxx>
 #include <Entity3d_Box.hxx>
 #include <Entity2d_Box.hxx>
 #include <Pnt2d.hxx>
@@ -75,17 +82,103 @@ int main()
 		tri->ExportToPlt(myFile);
 	}
 
-	Pnt2d P02(Geo_Tools::DegToRadian(25.0), Geo_Tools::DegToRadian(-5.0));
+	auto offsets = std::make_shared<Entity2d_Polygon>();
+	{
+		auto& pts = offsets->Points();
+		//pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 25.6, 55.2 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 26.4, 56.4 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 8.0, 77.0 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 5.8, 80.1 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 6.7, 94.0 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 7.0, 97.0 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
+	}
 
-	Pnt2d P01(Geo_Tools::DegToRadian(49.6), Geo_Tools::DegToRadian(-53.0));
+	auto metricInfo = std::make_shared<Voyage_MetricInfo>();
+	std::shared_ptr<VoyageGeo_Path2> path;
+	{// Generate the path [8/27/2023 Payvand]
+		auto alg = std::make_shared<VoyageGeo_PathGeneration>(offsets, earth);
+		alg->Perform();
+
+		path = alg->Path();
+
+		std::cout << std::endl;
+		std::cout << " The path is successfully generated." << std::endl;
+	}
+
+	Standard_Real dist = 0;
+	{// Calculate the distance [8/27/2023 Payvand]
+		auto alg = std::make_shared<Voyage_Distance>(path, metricInfo);
+		alg->Perform();
+
+		dist = alg->Value();
+
+		std::cout << std::endl;
+		std::cout << " The distance is successfully calculated." << std::endl;
+		std::cout << " - dist: " << dist << std::endl;
+	}
+
+	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
+	Standard_Real hour = 5.0;
+	auto h = dist / (vel * hour);
+	std::cout << std::endl;
+	std::cout << " - Size: " << h << std::endl;
+	std::cout << std::endl;
+	auto voyagePath = std::make_shared<Entity2d_Chain>();
+	{// approximate the path [8/27/2023 Payvand]
+		auto alg = std::make_shared<Voyage_PathDiscret>(path, metricInfo, h);
+		alg->Perform();
+
+		for (const auto& x : alg->Path()->Curves())
+		{
+			auto chain = Geo_Tools::RetrieveChain(*x->Mesh());
+			voyagePath->Add(*chain);
+		}
+
+		std::cout << std::endl;
+		std::cout << " The path is successfully discretized." << std::endl;
+	}
+
 	
-	Pnt2d P00(Geo_Tools::DegToRadian(47.6), Geo_Tools::DegToRadian(-60.0));
+	{
+		auto alg = std::make_shared<Voyage_PathOnEarth>(earth, path);
+		alg->Perform();
+
+		for (const auto& x : alg->Path3D())
+		{
+			x->ExportToPlt(myFile);
+		}
+
+		std::cout << std::endl;
+		std::cout << " The three-dimensional path is successfully discretized." << std::endl;
+	}
+
+	OFstream myVoyagePath("voyage.txt");
+	const auto& pts = voyagePath->Points();
+	for (const auto& x : voyagePath->Connectivity())
+	{
+		auto i0 = x.Value(0);
+		auto i1 = x.Value(1);
+		myVoyagePath
+			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i0))) 
+			<< "  " 
+			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i1))) << endl;
+	}
+
+	//Pnt2d P02(Geo_Tools::DegToRadian(25.0), Geo_Tools::DegToRadian(-5.0));
+
+	//Pnt2d P01(Geo_Tools::DegToRadian(49.6), Geo_Tools::DegToRadian(-53.0));
+	
+	//Pnt2d P00(Geo_Tools::DegToRadian(47.6), Geo_Tools::DegToRadian(-60.0));
 	// coordinates 1: New York City [7/27/2023 Payvand]
 	// Latitude: 40.7128, Longitude: -73.935242 [7/27/2023 Payvand]
-	Pnt2d P0(Geo_Tools::DegToRadian(-33.0), Geo_Tools::DegToRadian(-71.6));
+	//Pnt2d P0(Geo_Tools::DegToRadian(-33.0), Geo_Tools::DegToRadian(-71.6));
 	// coordinates 2: Lisbon City [7/27/2023 Payvand]
 	// Latitude: 38.736946, Longitude: -9.142685 [7/27/2023 Payvand]
-	Pnt2d P1(Geo_Tools::DegToRadian(31.4), Geo_Tools::DegToRadian(121.8));
+	//Pnt2d P1(Geo_Tools::DegToRadian(31.4), Geo_Tools::DegToRadian(121.8));
 	// distance: 5,422.97 km [7/27/2023 Payvand]
 	// avg. velocity: 14.8 kmph [7/27/2023 Payvand]
 	// Resolution: 14.8 [7/27/2023 Payvand]

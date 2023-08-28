@@ -2,6 +2,7 @@
 #ifndef _Voyage_PathOnEarth_Header
 #define _Voyage_PathOnEarth_Header
 
+#include <Voyage_Module.hxx>
 #include <Entity3d_PolygonFwd.hxx>
 #include <Global_Done.hxx>
 
@@ -51,7 +52,7 @@ namespace tnbLib
 
 		const auto& Path3D() const { return thePath3D_; }
 
-		void Perform();
+		TnbVoyage_EXPORT void Perform();
 
 		void SetEarth(const std::shared_ptr<VoyageGeo_Earth>& theEarth) { theEarth_ = theEarth; }
 		void SetPath(const std::shared_ptr<VoyageGeo_Path2>& thePath) { thePath_ = thePath; }

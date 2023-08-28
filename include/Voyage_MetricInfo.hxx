@@ -29,8 +29,8 @@ namespace tnbLib
 
 		static TnbVoyage_EXPORT std::shared_ptr<Mesh_Curve_Info> DEFAULT_CURV_INFO;
 		static TnbVoyage_EXPORT std::shared_ptr<NumAlg_AdaptiveInteg_Info> DEFAULT_INTEG_INFO;
-		static Standard_Integer DEFAULT_NB_SAMPLES;
-		static Standard_Integer DEFAULT_MAX_SUBDIVIDE_LEVELS;
+		static TnbVoyage_EXPORT Standard_Integer DEFAULT_NB_SAMPLES;
+		static TnbVoyage_EXPORT Standard_Integer DEFAULT_MAX_SUBDIVIDE_LEVELS;
 
 		// default constructor [8/26/2023 Payvand]
 

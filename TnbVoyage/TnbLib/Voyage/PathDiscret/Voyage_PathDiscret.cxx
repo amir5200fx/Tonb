@@ -30,6 +30,12 @@ void tnbLib::Voyage_PathDiscret::Perform()
 			<< "no size has been assigned." << endl
 			<< abort(FatalError);
 	}
+	if (NOT AlgInfo())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no info. has been found." << endl
+			<< abort(FatalError);
+	}
 	const auto& path = Path();
 	const auto size = Size();
 
@@ -47,6 +53,7 @@ void tnbLib::Voyage_PathDiscret::Perform()
 	auto sizeFun = 
 		std::make_shared<GeoSizeFun2d_Uniform>
 		(Size(), metrics->BoundingBox());
+
 	auto metricPrcsr = 
 		std::make_shared<Geo2d_MetricPrcsrAnIso>(sizeFun, metrics, metricInfo);
 	for (const auto& x : path->Curves())
