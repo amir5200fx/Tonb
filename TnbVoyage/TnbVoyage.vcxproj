@@ -293,6 +293,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Voyage\PathDiscret\Voyage_PathDiscret.cxx" />
     <ClCompile Include="TnbLib\Voyage\PathOnEarth\Voyage_PathOnEarth.cxx" />
     <ClCompile Include="TnbLib\Voyage\Tools\Voyage_Tools.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Tools\Voyage_Tools_SetSources.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TnbCad2d\TnbCad2d.vcxproj">

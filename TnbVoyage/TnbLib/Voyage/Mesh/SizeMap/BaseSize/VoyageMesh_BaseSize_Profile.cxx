@@ -31,7 +31,7 @@ tnbLib::VoyageMesh_BaseSize::RetrieveH0
 	const std::vector<Standard_Real>& theHs
 ) const
 {
-	if (NOT id) return 0.;
+	if (id <= 0) return 0.;
 	else
 	{
 		return GetInfo()->MaxDeviation() * theHs.at(id - 1);
@@ -45,7 +45,7 @@ tnbLib::VoyageMesh_BaseSize::RetrieveH1
 	const std::vector<Standard_Real>& theHs
 ) const
 {
-	if (id IS_EQUAL theHs.size()) return 0.0;
+	if (id >= theHs.size() - 1) return 0.0;
 	else
 	{
 		return GetInfo()->MaxDeviation() * theHs.at(id);
@@ -95,10 +95,10 @@ tnbLib::VoyageMesh_BaseSize::CalcProfile
 		Standard_Real h2 = theHm;
 
 		Standard_Real x3 = 1.0;
-		Standard_Real h3 = 1.0;
+		Standard_Real h3 = theH1;
 
 		const auto angle = GetInfo()->Angle();
-
+		//std::cout << "angle = " << angle << std::endl;
 		static const Standard_Integer nbPoles = 7;
 		TColgp_Array1OfPnt2d pnts(1, nbPoles);
 		pnts.SetValue(1, { x0,h0 });

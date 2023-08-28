@@ -196,7 +196,7 @@ tnbLib::Voyage_Tools::CalcBoundingBox
 	const Standard_Real theTol
 )
 {
-	if (thePolygons.size())
+	if (NOT thePolygons.size())
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the polygon list is empty." << endl
@@ -275,7 +275,7 @@ tnbLib::Voyage_Tools::CalcParameters
 			<< abort(FatalError);
 	}
 	std::vector<Standard_Real> t;
-	t.reserve(thePolygon.NbPoints());
+	t.resize(thePolygon.NbPoints());
 	t.at(0) = 0;
 	Standard_Real tot_dis = 0.;
 	for (size_t i = 1; i < pnts.size(); i++)
@@ -283,8 +283,8 @@ tnbLib::Voyage_Tools::CalcParameters
 		const auto& p0 = pnts.at(i - 1);
 		const auto& p1 = pnts.at(i);
 		auto dis = theMetric.CalcDistance(p0, p1);
-		t.at(i) = dis;
 		tot_dis += dis;
+		t.at(i) = tot_dis;
 	}
 	for (auto& x : t)
 	{

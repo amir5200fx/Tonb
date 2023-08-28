@@ -4,6 +4,7 @@
 
 #include <VoyageGeo_VelocityBackgroundFwd.hxx>
 #include <Voyage_Module.hxx>
+#include <GeoMesh2d_SingleBackgroundFwd.hxx>
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
@@ -24,6 +25,9 @@ namespace tnbLib
 	class Cad_GeomSurface;
 	class Pnt2d;
 	class Vec2d;
+
+	template<class Point, class Value>
+	class Mesh_SetSourcesNode;
 
 	class Voyage_Tools
 	{
@@ -104,6 +108,14 @@ namespace tnbLib
 
 		static Vec2d CalcRightsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
 		static Vec2d CalcLeftsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
+
+		static TnbVoyage_EXPORT void SetSourcesToMesh
+		(
+			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt2d, Standard_Real>>>& theSources,
+			const Standard_Real theBase, 
+			const Standard_Real theGrowthRate, 
+			GeoMesh2d_SingleBackground& theMesh
+		);
 	};
 }
 

@@ -165,10 +165,10 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 			<< "No path has been loaded." << endl
 			<< abort(FatalError);
 	}
-	if (Hs())
+	if (NOT Hs())
 	{
 		FatalErrorIn(FunctionSIG)
-			<< "No bas size has been loaded." << endl
+			<< "No base size has been loaded." << endl
 			<< abort(FatalError);
 	}
 	const auto& path = Path();
@@ -181,7 +181,7 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 	engine.SetMaxUnbalancing(2);
 	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
 	engine.SetGeometryRegion(*d);
-	engine.BUCKET_SIZE = 4;
+	engine.BUCKET_SIZE = 1;
 
 	Standard_Integer nbSources = 0;
 	const Standard_Real mergCrit = 1.0E-4 * d->Diameter();
@@ -200,6 +200,7 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 			{
 				auto b = Geo_BoxTools::GetBox<Pnt2d>(x, mergCrit);
 				auto elmSize = hsi.at(k++);
+				//std::cout << "elemSize: " << elmSize << std::endl;
 				std::vector<std::shared_ptr<sourceNode>> items;
 				engine.GeometrySearch(b, items);
 				if (items.empty())
@@ -306,7 +307,7 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 
-			engine.SetMaxUnbalancing(8);
+			engine.SetMaxUnbalancing(4);
 			engine.PostBalance();
 		}
 
@@ -371,7 +372,8 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 
 	std::vector<std::shared_ptr<sourceNode>> sources;
 	engine.RetrieveFromGeometryTo(sources);
-	MeshBase_Tools::SetSourcesToMesh(sources, BaseSize(), hvInfo->Factor(), *bMesh);
+
+	Voyage_Tools::SetSourcesToMesh(sources, BaseSize(), hvInfo->Factor(), *bMesh);
 	sources.clear();
 
 	if (verbose)
@@ -381,7 +383,17 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 		Info << endl;
 	}
 
+	for (auto& x : bMesh->Sources())
+	{
+		x = 1.0 / x;
+	}
+
 	bMesh->HvCorrection(hvInfo);
+
+	for (auto& x : bMesh->Sources())
+	{
+		x = 1.0 / x;
+	}
 
 	if (verbose)
 	{

@@ -22,16 +22,16 @@ tnbLib::VoyageMesh_BaseSize::CalcHs
 	const auto h0 = RetrieveH0(id, theLengths);
 	const auto h1 = RetrieveH1(id, theLengths);
 	const auto hm = RetrieveHmax(id, theLengths);
-	
+	//std::cout << "h0 = " << h0 << ", hm = " << hm << ", h1 = " << h1 << std::endl;
 	Standard_Real tot_len;
 	auto pars = Voyage_Tools::CalcParameters(thePolygon, *Metrics(), tot_len);
-
 	auto profile = CalcProfile(h0, h1, hm);
 
 	std::vector<Standard_Real> hs;
 	hs.reserve(pars.size());
 	for (auto t : pars)
 	{
+		//std::cout << "t = " << t << ", value = "<< profile->Value(t) << std::endl;
 		hs.push_back(profile->Value(t));
 	}
 	return std::move(hs);

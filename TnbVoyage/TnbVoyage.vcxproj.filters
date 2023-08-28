@@ -755,5 +755,8 @@
     <ClCompile Include="TnbLib\Voyage\Geometry\Path\VoyageGeo_Path2.cxx">
       <Filter>TnbLib\Voyage\Geometry\Path</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Tools\Voyage_Tools_SetSources.cxx">
+      <Filter>TnbLib\Voyage\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
