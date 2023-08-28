@@ -60,6 +60,9 @@ namespace tnbLib
 		const auto& Curves() const { return theCurves_; }
 		const auto& Earth() const { return theEarth_; }
 
+		TnbVoyage_EXPORT std::vector<std::shared_ptr<Entity2d_Polygon>> 
+			RetrieveOffsets() const;
+
 		void SetCurves(const std::vector<std::shared_ptr<Pln_Edge>>& theCurves) { theCurves_ = theCurves; }
 		void SetCurves(std::vector<std::shared_ptr<Pln_Edge>>&& theCurves) { theCurves_ = std::move(theCurves); }
 		void SetEarth(const std::shared_ptr<VoyageGeo_Earth>& theEarth) { theEarth_ = theEarth; }

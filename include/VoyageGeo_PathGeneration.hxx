@@ -28,7 +28,6 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<Entity2d_Polygon> theOffsets_;
-
 		std::shared_ptr<VoyageGeo_Earth> theEarth_;
 
 		Standard_Integer theNbSamples_;
