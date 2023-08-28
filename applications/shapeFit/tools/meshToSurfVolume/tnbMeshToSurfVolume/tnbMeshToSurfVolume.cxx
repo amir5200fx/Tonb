@@ -1,10 +1,11 @@
 #include <Cad_GeomSurface.hxx>
 #include <Geo_Tools.hxx>
-#include <Entity3d_SurfTriangulation.hxx>
+#include <Entity3d_Triangulation.hxx>
 #include <Entity3d_Triangle.hxx>
 #include <Pnt3d.hxx>
 #include <Vec3d.hxx>
 #include <Dir3d.hxx>
+#include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -14,12 +15,76 @@ namespace tnbLib
 {
 
 	static std::shared_ptr<Cad_GeomSurface> mySurface;
-	static std::shared_ptr<Entity3d_SurfTriangulation> myMesh;
+	static std::shared_ptr<Entity3d_Triangulation> myMesh;
 
-	static double myUpperValue;
-	static double myLowerValue;
+	static double myUpperValue = 0;
+	static double myLowerValue = 0;
 
 	static auto myTol = 1.0E-6;
+
+	static std::string surf_directory = "surface";
+	static std::string mesh_directory = "mesh";
+
+	TNB_DEFINE_VERBOSE_OBJ;
+	TNB_DEFINE_GLOBAL_PATH;
+	TNB_DEFINE_LOADTAG_OBJ;
+	TNB_DEFINE_EXETAG_OBJ;
+
+	TNB_SET_VERBOSE_FUN;
+
+	void loadSurfaceModel()
+	{
+		std::string myFileName;
+		mySurface =
+			file::LoadSingleFile
+			<std::shared_ptr<Cad_GeomSurface>>
+			(surf_directory, Cad_GeomSurface::extension, verbose, myFileName);
+		if (NOT mySurface)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the surface file is null." << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void loadMesh()
+	{
+		std::string myFileName;
+		myMesh = 
+			file::LoadSingleFile
+			<std::shared_ptr<Entity3d_Triangulation>>
+			(mesh_directory, /*Entity3d_Triangulation::extension*/".tri3d", verbose, myFileName);
+		if (NOT myMesh)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " the mesh file is null." << endl
+				<< abort(FatalError);
+		}
+	}
+
+	void loadFiles()
+	{
+		if (file::IsDirectory(surf_directory))
+		{
+			loadSurfaceModel();
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " no {" << surf_directory << "} has been found." << endl
+				<< abort(FatalError);
+		}
+		if (file::IsDirectory(mesh_directory))
+		{
+			loadMesh();
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< " no {" << mesh_directory << "} has been found." << endl
+				<< abort(FatalError);
+		}
+	}
 
 	enum class PointPosition
 	{
@@ -146,7 +211,7 @@ namespace tnbLib
 		if (isUpper(pos0) AND isUpper(pos1) AND isUpper(pos2))
 		{
 			
-			if (Geo_Tools::IsCcwOrder_cgal(pts_2d))
+			if (Geo_Tools::IsCcwOrder(pts_2d))
 			{		
 				myUpperValue += CalcVolume(coords_3d);
 			}
@@ -157,7 +222,7 @@ namespace tnbLib
 		}
 		if (isLower(pos0) AND isLower(pos1) AND isLower(pos2))
 		{
-			if (Geo_Tools::IsCcwOrder_cgal(pts_2d))
+			if (Geo_Tools::IsCcwOrder(pts_2d))
 			{
 				myLowerValue += CalcVolume(coords_3d);
 			}
@@ -171,6 +236,8 @@ namespace tnbLib
 	void execute()
 	{
 		const auto& pts = myMesh->Points();
+		myUpperValue = 0;
+		myLowerValue = 0;
 		for (const auto& x : myMesh->Connectivity())
 		{
 			auto i0 = x.Value(0);
@@ -181,9 +248,128 @@ namespace tnbLib
 			const auto& p1 = pts.at(Index_Of(i1));
 			const auto& p2 = pts.at(Index_Of(i2));
 
-			Entity3d_Triangle t(p0.Coord(), p1.Coord(), p2.Coord());
+			Entity3d_Triangle t(p0, p1, p2);
 			CalcVolume(t, mySurface);
 		}
+
+		std::cout << " - The Lower Volume: " << myLowerValue << std::endl;
+		std::cout << " - The Upper volume: " << myUpperValue << std::endl;
 	}
 
+}
+
+#ifdef DebugInfo
+#undef DebugInfo
+#endif // DebugInfo
+
+#include <chaiscript/chaiscript.hpp>
+
+namespace tnbLib
+{
+
+	typedef std::shared_ptr<chaiscript::Module> module_t;
+
+	void setFunctions(const module_t& mod)
+	{
+		//- io functions
+		mod->add(chaiscript::fun([]()-> void {loadFiles(); }), "loadFiles");
+
+		//- settings
+		mod->add(chaiscript::fun([](unsigned short i)->void {setVerbose(i); }), "setVerbose");
+
+		// operators [8/28/2023 aamir]
+		mod->add(chaiscript::fun([]()-> void {execute(); }), "execute");
+	}
+
+	std::string getString(char* argv)
+	{
+		std::string argument(argv);
+		return std::move(argument);
+	}
+
+	Standard_Boolean IsEqualCommand(char* argv, const std::string& command)
+	{
+		auto argument = getString(argv);
+		return argument IS_EQUAL command;
+	}
+}
+
+using namespace tnbLib;
+
+int main(int argc, char* argv[])
+{
+	//sysLib::init_gl_marine_integration_info();
+	//FatalError.throwExceptions();
+
+	if (argc <= 1)
+	{
+		Info << " - No command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
+
+	if (argc IS_EQUAL 2)
+	{
+		if (IsEqualCommand(argv[1], "--help"))
+		{
+			Info << endl;
+			Info << " This application is aimed to calculate the volume between a mesh and a surface." << endl
+				<< " - Subdirectories: 'surface' and 'mesh'." << endl;
+			Info << endl
+				<< " Function list:" << endl << endl
+
+				<< " # IO functions: " << endl << endl
+
+				<< " - loadFiles()" << endl << endl
+
+				<< " # Settings: " << endl << endl
+
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+
+				<< " # operators: " << endl << endl
+
+				<< " - execute" << endl
+
+				<< endl;
+			return 0;
+		}
+		else if (IsEqualCommand(argv[1], "--run"))
+		{
+			chaiscript::ChaiScript chai;
+
+			auto mod = std::make_shared<chaiscript::Module>();
+
+			setFunctions(mod);
+
+			chai.add(mod);
+
+			//std::string address = ".\\system\\mesh2dToPlt";
+
+			try
+			{
+				fileName myFileName(file::GetSystemFile("tnbMeshToSurfVolume"));
+				chai.eval_file(myFileName);
+				return 0;
+			}
+			catch (const chaiscript::exception::eval_error& x)
+			{
+				Info << x.pretty_print() << endl;
+			}
+			catch (const error& x)
+			{
+				Info << x.message() << endl;
+			}
+			catch (const std::exception& x)
+			{
+				Info << x.what() << endl;
+			}
+		}
+	}
+	else
+	{
+		Info << " - No valid command is entered" << endl
+			<< " - For more information use '--help' command" << endl;
+		FatalError.exit();
+	}
+	return 1;
 }

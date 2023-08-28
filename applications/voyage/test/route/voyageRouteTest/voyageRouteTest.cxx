@@ -6,11 +6,16 @@
 #include <Voyage_Distance.hxx>
 #include <Voyage_PathDiscret.hxx>
 #include <Voyage_PathOnEarth.hxx>
+#include <VoyageMesh_SizeMap.hxx>
+#include <VoyageMesh_BaseSize.hxx>
+#include <VoyageMesh_BaseSizeInfo.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMetricFun2d_ExactSurface.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <Geo_MetricPrcsrAnIso_Info.hxx>
 #include <GeoSizeFun2d_Uniform.hxx>
+#include <GeoMesh2d_Background.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_PreviewTools.hxx>
 #include <Cad_Shape.hxx>
@@ -167,6 +172,51 @@ int main()
 			<< "  " 
 			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i1))) << endl;
 	}
+
+	auto metricsFun = earth->GetMetrics();
+	auto uniSizeMap = std::make_shared<GeoSizeFun2d_Uniform>(1.0, metricsFun->BoundingBox());
+	auto metricPrcsrInfo = std::make_shared<Geo_MetricPrcsrAnIso_Info>(metricInfo->MetricInfo(), metricInfo->NbSamples());
+	auto metrics = std::make_shared<Geo2d_MetricPrcsrAnIso>(uniSizeMap, metricsFun, metricPrcsrInfo);
+	std::shared_ptr<std::vector<std::vector<Standard_Real>>> bHs;
+	{// Create the base size map [8/28/2023 aamir]
+		auto algInfo = std::make_shared<VoyageMesh_BaseSizeInfo>();
+		auto alg = std::make_shared<VoyageMesh_BaseSize>(path->RetrieveOffsets(), metrics, algInfo);
+		alg->Perform();
+		bHs = alg->Hs();
+
+		std::cout << std::endl;
+		std::cout << " The base sizes is successfully computed." << std::endl;
+
+		size_t k = 0;
+		for (const auto& x : *bHs)
+		{
+			std::cout << std::endl;
+			std::cout << " - Profile's id: " << k << std::endl;
+			for (size_t i = 0; i < x.size(); i++)
+			{
+				std::cout << x.at(i) << " ";
+				if (i % 10 == 0) std::cout << std::endl;
+			}
+		}
+	}
+
+	std::shared_ptr<GeoMesh2d_Background> unCorrSizeMap;
+	{// Calculate the uncorrected size map [8/28/2023 aamir]
+		auto alg = std::make_shared<VoyageMesh_SizeMap>();
+		const auto baseSize = 1.0E-3;
+		alg->SetBaseSize(baseSize);
+		alg->SetHs(bHs);
+		alg->SetPath(path);
+
+		alg->Perform();
+		unCorrSizeMap = alg->BackMesh();
+
+		std::cout << std::endl;
+		std::cout << " The uncorrected size map is successfully computed." << std::endl;
+	}
+
+	OFstream mySizeMapFile("sizeMap.plt");
+	unCorrSizeMap->ExportToPlt(mySizeMapFile);
 
 	//Pnt2d P02(Geo_Tools::DegToRadian(25.0), Geo_Tools::DegToRadian(-5.0));
 
