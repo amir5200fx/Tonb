@@ -1,0 +1,11 @@
+setVerbose(1);
+
+var p0 = createPoint(0, 0);
+var p1 = createPoint(1, 0);
+var p2 = createPoint(1, 1);
+var p3 = createPoint(0, 1);
+var p4 = createPoint(0, 0);
+
+execute();
+
+saveTo("myPoly");

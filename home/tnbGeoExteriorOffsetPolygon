@@ -1,0 +1,9 @@
+setVerbose(1);
+
+setMaxOffset(0.1);
+
+loadFile();
+
+execute();
+
+saveTo();

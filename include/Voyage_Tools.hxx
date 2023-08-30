@@ -20,6 +20,7 @@ namespace tnbLib
 
 	// Forward Declarations [7/21/2023 Payvand]
 	class VoyageGeo_Path2;
+	class VoyageGeo_Earth;
 	class Voyage_Edge;
 	class Voyage_Node;
 	class Cad_GeomSurface;
@@ -33,6 +34,9 @@ namespace tnbLib
 	{
 
 	public:
+
+		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Box> 
+			RetrieveDomain(const VoyageGeo_Earth&);
 
 		// the nodes are sorted based on their indices 
 		// So the first node is departure and the last one is destination [7/21/2023 Payvand]
