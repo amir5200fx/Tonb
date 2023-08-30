@@ -25,7 +25,7 @@ namespace tnbLib
 
 	TnbGeo_EXPORT std::ostream & operator<<(std::ostream & os, const Pnt2d & P)
 	{
-		os << P.X() << ",  " << P.Y();
+		os << P.X() << token::COMMA << token::SPACE << P.Y();
 		return os;
 	}
 

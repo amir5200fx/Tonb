@@ -988,6 +988,15 @@
     <Filter Include="TnbLib\Geo\ElemGeom\Quadrilateral">
       <UniqueIdentifier>{a70acb97-21e3-4aa2-b1da-eafcfa991af8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Offset">
+      <UniqueIdentifier>{62b33766-4dc8-44a6-b50f-31a402b69335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Offset\Polygon">
+      <UniqueIdentifier>{e09b673c-7726-43ef-ada9-252be3ad267a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Offset\Polygon\Exterior">
+      <UniqueIdentifier>{35996a5c-23a2-4f4d-bd26-f36298accb83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2304,6 +2313,12 @@
     <ClInclude Include="TnbLib\Geo\ElemGeom\Triangle\Geo_ElemGeom_Triangle.hxx">
       <Filter>TnbLib\Geo\ElemGeom\Triangle</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Ray\2d\Entity2d_RayI.hxx">
+      <Filter>TnbLib\Geo\Entities\Ray\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Offset\Polygon\Exterior\Geo2d_OffsetPolygon_Exterior.hxx">
+      <Filter>TnbLib\Geo\Offset\Polygon\Exterior</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -2965,6 +2980,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\FVMesh\2d\Geo2d_FVMesh.cxx">
       <Filter>TnbLib\Geo\FVMesh\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\Ray\2d\Entity2d_RayIO.cxx">
+      <Filter>TnbLib\Geo\Entities\Ray\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Offset\Polygon\Exterior\Geo2d_OffsetPolygon_Exterior_cgal.cxx">
+      <Filter>TnbLib\Geo\Offset\Polygon\Exterior</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

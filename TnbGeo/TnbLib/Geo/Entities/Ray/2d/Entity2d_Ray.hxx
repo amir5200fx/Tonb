@@ -6,5 +6,6 @@
 #include <Dir2d.hxx>
 #include <Entity2d_RayFwd.hxx>
 #include <Entity_Ray.hxx>
+#include <Entity2d_RayI.hxx>
 
 #endif // !_Entity2d_Ray_Header
