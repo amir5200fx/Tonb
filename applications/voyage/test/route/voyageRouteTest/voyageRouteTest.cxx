@@ -223,10 +223,12 @@ int main()
 
 	std::shared_ptr<GeoMesh2d_Background> corrSizeMap;
 	{// Calculate the size map correction [8/29/2023 aamir]
+		VoyageMesh_CorrectSizeMap::verbose = 1;
 		auto alg = std::make_shared<VoyageMesh_CorrectSizeMap>();
 		alg->SetPath(path);
 		alg->SetDirection(VoyageMesh_CorrectSizeMap::PathDirect::Starboard);
 		alg->SetSizeFunction(unCorrSizeFun);
+		alg->SetInfo(metricInfo);
 
 		alg->Perform();
 		corrSizeMap = alg->BackMesh();
