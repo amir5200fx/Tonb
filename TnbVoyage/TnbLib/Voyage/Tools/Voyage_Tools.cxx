@@ -2,6 +2,7 @@
 
 #include <VoyageGeo_VelocityBackground.hxx>
 #include <VoyageGeo_Path2.hxx>
+#include <VoyageGeo_Earth.hxx>
 #include <Voyage_Edge.hxx>
 #include <Voyage_Node.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
@@ -20,6 +21,18 @@
 #include <set>
 
 #include <Geom_Surface.hxx>
+
+std::shared_ptr<tnbLib::Entity2d_Box> 
+tnbLib::Voyage_Tools::RetrieveDomain
+(
+	const VoyageGeo_Earth& theEarth
+)
+{
+	Debug_Null_Pointer(theEarth.Surface());
+	auto bObj = theEarth.Surface()->ParametricBoundingBox();
+	auto t = std::make_shared<Entity2d_Box>(std::move(bObj));
+	return std::move(t);
+}
 
 std::vector<std::shared_ptr<tnbLib::Voyage_Node>> 
 tnbLib::Voyage_Tools::RetrieveNodes(const std::vector<std::shared_ptr<Voyage_Edge>>& theEdges)

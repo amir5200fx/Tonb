@@ -3,6 +3,7 @@
 #define _VoyageMesh_CorrectSizeMap_Header
 
 #include <Voyage_Module.hxx>
+#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 #include <GeoMesh2d_BackgroundFwd.hxx>
 #include <Geo2d_SizeFunctionFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
@@ -18,6 +19,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations [8/19/2023 aamir]
+	class Voyage_MetricInfo;
 	class VoyageGeo_Path2;
 
 	class VoyageMesh_CorrectSizeMap
@@ -197,6 +199,7 @@ namespace tnbLib
 
 		std::shared_ptr<VoyageGeo_Path2> thePath_;
 		std::shared_ptr<Geo2d_SizeFunction> theSizeFunction_;
+		std::shared_ptr<Voyage_MetricInfo> theInfo_;
 		PathDirect theDirection_;
 
 		Standard_Integer theMaxNbCorrs_;
@@ -221,14 +224,16 @@ namespace tnbLib
 			(
 				const Pnt2d& theP0, 
 				const Pnt2d& theP1, 
-				const Pnt2d& theP2
+				const Pnt2d& theP2,
+				Standard_Real& theAngle
 			);
 
 		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Ray>
 			CalcBisectRay
 			(
 				const Edge& theEdge0, 
-				const Edge& theEdge1
+				const Edge& theEdge1,
+				Standard_Real& theAngle
 			);
 
 		static TnbVoyage_EXPORT std::shared_ptr<AngleBisect>
@@ -242,7 +247,7 @@ namespace tnbLib
 		static TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>>
 			RetrieveNodes(const std::vector<std::shared_ptr<Edge>>&);
 		static TnbVoyage_EXPORT std::pair<Standard_Real, Standard_Boolean>
-			CalcDistance(const Edge& theEdge, const Entity2d_Ray& theRay, const Standard_Boolean reverse_normal = Standard_False);
+			CalcDistance(const Edge& theEdge, const Entity2d_Ray& theRay, const Geo2d_MetricPrcsrAnIso&, const Standard_Boolean reverse_normal = Standard_False);
 		static TnbVoyage_EXPORT std::vector<Pnt2d>
 			RetrieveCoords(const std::vector<std::shared_ptr<Entity2d_Polygon>>&);
 
@@ -267,13 +272,15 @@ namespace tnbLib
 		VoyageMesh_CorrectSizeMap
 		(
 			const std::shared_ptr<VoyageGeo_Path2>& thePath, 
-			const std::shared_ptr<Geo2d_SizeFunction>& theFunction
+			const std::shared_ptr<Geo2d_SizeFunction>& theFunction,
+			const std::shared_ptr<Voyage_MetricInfo>& theInfo
 		)
 			: thePath_(thePath)
 			, theSizeFunction_(theFunction)
 			, theBaseSize_(DEFAULT_BASE_SIZE)
 			, theMaxNbCorrs_(DEFAULT_MAX_NB_CORRS)
 			, theSmoothingFactor_(DEFAULT_SMOOTHING_FACTOR)
+			, theInfo_(theInfo)
 		{}
 
 
@@ -281,6 +288,7 @@ namespace tnbLib
 
 		const auto& Path() const { return thePath_; }
 		const auto& SizeFun() const { return theSizeFunction_; }
+		const auto& GetInfo() const { return theInfo_; }
 
 		const auto& BackMesh() const { return theBackMesh_; }
 		auto Direction() const { return theDirection_; }
@@ -296,6 +304,7 @@ namespace tnbLib
 		void SetSizeFunction(const std::shared_ptr<Geo2d_SizeFunction>& theFunc) { theSizeFunction_ = theFunc; }
 		void SetDirection(const PathDirect theDir) { theDirection_ = theDir; }
 		void SetBaseSize(const Standard_Real theSize) { theBaseSize_ = theSize; }
+		void SetInfo(const std::shared_ptr<Voyage_MetricInfo>& theInfo) { theInfo_ = theInfo; }
 	};
 }
 

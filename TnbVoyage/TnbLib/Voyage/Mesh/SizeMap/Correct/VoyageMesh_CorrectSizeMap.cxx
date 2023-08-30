@@ -1,12 +1,17 @@
 #include <VoyageMesh_CorrectSizeMap.hxx>
 
+#include <Voyage_Tools.hxx>
+#include <Voyage_MetricInfo.hxx>
 #include <VoyageGeo_Path2.hxx>
+#include <VoyageGeo_Earth.hxx>
 #include <MeshBase_Tools.hxx>
 #include <Mesh_SetSourcesNode.hxx>
 #include <GeoMesh2d_Background.hxx>
 #include <GeoMesh2d_Data.hxx>
+#include <Geo2d_MetricPrcsrAnIso.hxx>
+#include <Geo_MetricPrcsrAnIso_Info.hxx>
 #include <Pln_Edge.hxx>
-#include <Geo2d_SizeFunction.hxx>
+#include <GeoSizeFun2d_Uniform.hxx>
 #include <Geo2d_BalPrTree.hxx>
 #include <Geo_AdTree.hxx>
 #include <Geo_BoxTools.hxx>
@@ -128,7 +133,8 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectRay
 (
 	const Pnt2d& theP0, 
 	const Pnt2d& theP1, 
-	const Pnt2d& theP2
+	const Pnt2d& theP2,
+	Standard_Real& theAngle
 )
 {
 	auto dir0 = Dir2d(theP0, theP1);
@@ -136,16 +142,18 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectRay
 	auto n = dir0.Crossed(dir1);
 	Dir2d bisect;
 	if (n <= 0)
-	{
+	{ // the angle is less than 180 deg. [8/30/2023 aamir]
 		auto angle = std::abs(dir0.Angle(dir1));
 		auto alpha = PI - angle;
+		theAngle = alpha;
 		auto rotated_angle = angle + 0.5 * alpha;
 		bisect = dir0.Rotated(-rotated_angle);
 	}
 	else
-	{
+	{// the angle is grater than 180 [8/30/2023 aamir]
 		auto angle = std::abs(dir0.Angle(dir1));
 		auto alpha = PI + angle;
+		theAngle = alpha;
 		auto rotated_angle = angle + 0.5 * alpha;
 		bisect = dir0.Rotated(rotated_angle);
 	}
@@ -158,7 +166,8 @@ std::shared_ptr<tnbLib::Entity2d_Ray>
 tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectRay
 (
 	const Edge& theEdge0, 
-	const Edge& theEdge1
+	const Edge& theEdge1,
+	Standard_Real& theAngle
 )
 {
 	const auto& node0 = theEdge0.Node0();
@@ -168,7 +177,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectRay
 	const auto& p0 = node0->Coord();
 	const auto& p1 = node1->Coord();
 	const auto& p2 = node2->Coord();
-	auto ray = CalcBisectRay(p0, p1, p2);
+	auto ray = CalcBisectRay(p0, p1, p2, theAngle);
 	return std::move(ray);
 }
 
@@ -181,10 +190,11 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcAngle
 {
 	auto edge0 = LastEdge(*thePoly0);
 	auto edge1 = LastEdge(*thePoly1);
-	auto ray = CalcBisectRay(*edge0, *edge1);
-	std::cout << " ray = " << *ray << std::endl;
-	auto angle = std::make_shared<AngleBisect>(ray, thePoly0, thePoly1);
-	return std::move(angle);
+	Standard_Real angle;
+	auto ray = CalcBisectRay(*edge0, *edge1, angle);
+	auto t = std::make_shared<AngleBisect>(ray, thePoly0, thePoly1);
+	t->SetAngle(angle);
+	return std::move(t);
 }
 
 std::shared_ptr<tnbLib::VoyageMesh_CorrectSizeMap::Chain> 
@@ -237,6 +247,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcDistance
 (
 	const Edge& theEdge, 
 	const Entity2d_Ray& theRay,
+	const Geo2d_MetricPrcsrAnIso& theMetrics,
 	const Standard_Boolean reverse_normal
 )
 {
@@ -247,7 +258,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcDistance
 	auto [intPoint, intsect] = Geo_Tools::CalcIntersectionPoint_cgal(theRay, normal_ray);
 	if (intsect)
 	{
-		return { intPoint.Distance(centre),Standard_True };
+		return { theMetrics.CalcDistance(intPoint, centre),Standard_True };
 	}
 	else
 	{
@@ -410,10 +421,17 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			<< "No size function has been loaded." << endl
 			<< abort(FatalError);
 	}
+	if (NOT GetInfo())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no metric info has been loaded." << endl
+			<< abort(FatalError);
+	}
 	const auto& path = Path();
 	const auto& sizeFun = SizeFun();
 
 	auto bisectAngles = CalcBisectAngles();
+	
 	for (const auto& x : bisectAngles)
 	{
 		std::cout << "angle = " << x->Angle() << std::endl;
@@ -421,13 +439,14 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	//auto chain = CalcEdges();
 	auto polygons = RetrievePolygons();
 	auto coords = RetrieveCoords(polygons);
-	auto d = Geo_BoxTools::GetBox(coords, 1.0E-4);
+	//auto d = Geo_BoxTools::GetBox(coords, 1.0E-4);
+	auto d = *Voyage_Tools::RetrieveDomain(*path->Earth());
 
 	Geo2d_BalPrTree<std::shared_ptr<sourceNode>> engine;
 	engine.SetMaxUnbalancing(2);
 	engine.SetGeometryCoordFunc(&sourceNode::GetCoord);
 	engine.SetGeometryRegion(d);
-	engine.BUCKET_SIZE = 4;
+	engine.BUCKET_SIZE = 2;
 
 	const Standard_Real mergCrit = 1.0E-4 * d.Diameter();
 	{// approximation scope [8/19/2023 aamir]
@@ -481,7 +500,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			Global_Timer timer;
 			timer.SetInfo(Global_TimerInfo_ms);
 
-			engine.SetMaxUnbalancing(8);
+			engine.SetMaxUnbalancing(2);
 			engine.PostBalance();
 		}
 
@@ -540,7 +559,24 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrs());
-	hvInfo->SetFactor(SmoothingFactor());
+	hvInfo->SetFactor(/*SmoothingFactor()*/0.25);
+
+	const auto& earth = path->Earth();
+	if (NOT earth)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no earth has been found." << endl
+			<< abort(FatalError);
+	}
+	auto metrics = earth->GetMetrics();
+	Debug_Null_Pointer(metrics);
+	auto uniSizeFun = 
+		std::make_shared<GeoSizeFun2d_Uniform>(1.0, d);
+	auto metricInfo = 
+		std::make_shared<Geo_MetricPrcsrAnIso_Info>
+		(GetInfo()->MetricInfo(), GetInfo()->NbSamples());
+	auto metricProcsr =
+		std::make_shared<Geo2d_MetricPrcsrAnIso>(uniSizeFun, metrics, metricInfo);
 
 	std::vector<std::shared_ptr<hNode>> sources;
 	for (const auto& x : bisectAngles)
@@ -555,7 +591,8 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			{
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
-				auto [dist, insct] = CalcDistance(*edge, *ray, Standard_True);
+				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
+				std::cout << " dist = " << dist << ", insct: " << insct << std::endl;
 				if (insct)
 				{
 					if (dist < baseSize)
@@ -573,7 +610,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			{
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
-				auto [dist, insct] = CalcDistance(*edge, *ray);
+				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr);
 				if (insct)
 				{
 					if (dist < baseSize)
@@ -589,8 +626,8 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			}
 		}
 	}
-
-	MeshBase_Tools::SetSourcesToMesh(sources, BaseSize(), hvInfo->Factor(), *bMesh);
+	std::cout << "size = " << sources.size() << std::endl;;
+	Voyage_Tools::SetSourcesToMesh(sources, BaseSize(), hvInfo->Factor(), *bMesh);
 	sources.clear();
 
 	if (verbose)
@@ -600,10 +637,22 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 		Info << endl;
 	}
 
+	for (auto& x : bMesh->Sources())
+	{
+		x = 1.0 / x;
+	}
+
 	bMesh->HvCorrection(hvInfo);
+
+	for (auto& x : bMesh->Sources())
+	{
+		x = 1.0 / x;
+	}
 
 	if (verbose)
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;
 	}
+	theBackMesh_ = std::move(bMesh);
+	Change_IsDone() = Standard_True;
 }
