@@ -250,9 +250,16 @@ namespace tnbLib
 
 		static TnbVoyage_EXPORT unsigned short verbose;
 
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_BASE_SIZE;
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_SMOOTHING_FACTOR;
+		static TnbVoyage_EXPORT Standard_Integer DEFAULT_MAX_NB_CORRS;
+
 		// default constructor [8/19/2023 aamir]
 
 		VoyageMesh_CorrectSizeMap()
+			: theBaseSize_(DEFAULT_BASE_SIZE)
+			, theMaxNbCorrs_(DEFAULT_MAX_NB_CORRS)
+			, theSmoothingFactor_(DEFAULT_SMOOTHING_FACTOR)
 		{}
 
 		// constructors [8/19/2023 aamir]
@@ -264,6 +271,9 @@ namespace tnbLib
 		)
 			: thePath_(thePath)
 			, theSizeFunction_(theFunction)
+			, theBaseSize_(DEFAULT_BASE_SIZE)
+			, theMaxNbCorrs_(DEFAULT_MAX_NB_CORRS)
+			, theSmoothingFactor_(DEFAULT_SMOOTHING_FACTOR)
 		{}
 
 
@@ -285,6 +295,7 @@ namespace tnbLib
 		void SetPath(const std::shared_ptr<VoyageGeo_Path2>& thePath) { thePath_ = thePath; }
 		void SetSizeFunction(const std::shared_ptr<Geo2d_SizeFunction>& theFunc) { theSizeFunction_ = theFunc; }
 		void SetDirection(const PathDirect theDir) { theDirection_ = theDir; }
+		void SetBaseSize(const Standard_Real theSize) { theBaseSize_ = theSize; }
 	};
 }
 

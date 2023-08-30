@@ -9,12 +9,14 @@
 #include <VoyageMesh_SizeMap.hxx>
 #include <VoyageMesh_BaseSize.hxx>
 #include <VoyageMesh_BaseSizeInfo.hxx>
+#include <VoyageMesh_CorrectSizeMap.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMetricFun2d_ExactSurface.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <Geo_MetricPrcsrAnIso_Info.hxx>
 #include <GeoSizeFun2d_Uniform.hxx>
+#include <GeoSizeFun2d_Background.hxx>
 #include <GeoMesh2d_Background.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_PreviewTools.hxx>
@@ -215,8 +217,27 @@ int main()
 		std::cout << " The uncorrected size map is successfully computed." << std::endl;
 	}
 
+	auto unCorrSizeFun = 
+		std::make_shared<GeoSizeFun2d_Background>
+		(uniSizeMap->BoundingBox(), unCorrSizeMap);
+
+	std::shared_ptr<GeoMesh2d_Background> corrSizeMap;
+	{// Calculate the size map correction [8/29/2023 aamir]
+		auto alg = std::make_shared<VoyageMesh_CorrectSizeMap>();
+		alg->SetPath(path);
+		alg->SetDirection(VoyageMesh_CorrectSizeMap::PathDirect::Starboard);
+		alg->SetSizeFunction(unCorrSizeFun);
+
+		alg->Perform();
+		corrSizeMap = alg->BackMesh();
+
+		std::cout << std::endl;
+		std::cout << " The Size map correction is successfully computed." << std::endl;
+	}
+
 	OFstream mySizeMapFile("sizeMap.plt");
-	unCorrSizeMap->ExportToPlt(mySizeMapFile);
+	//unCorrSizeMap->ExportToPlt(mySizeMapFile);
+	corrSizeMap->ExportToPlt(mySizeMapFile);
 
 	//Pnt2d P02(Geo_Tools::DegToRadian(25.0), Geo_Tools::DegToRadian(-5.0));
 

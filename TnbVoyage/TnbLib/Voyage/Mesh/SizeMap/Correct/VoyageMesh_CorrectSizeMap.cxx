@@ -25,6 +25,11 @@
 
 unsigned short tnbLib::VoyageMesh_CorrectSizeMap::verbose = 0;
 
+Standard_Integer tnbLib::VoyageMesh_CorrectSizeMap::DEFAULT_MAX_NB_CORRS(5);
+
+Standard_Real tnbLib::VoyageMesh_CorrectSizeMap::DEFAULT_BASE_SIZE(10.E-3);
+Standard_Real tnbLib::VoyageMesh_CorrectSizeMap::DEFAULT_SMOOTHING_FACTOR(0.25);
+
 tnbLib::Pnt2d 
 tnbLib::VoyageMesh_CorrectSizeMap::Edge::CalcCentre() const
 {
@@ -177,6 +182,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcAngle
 	auto edge0 = LastEdge(*thePoly0);
 	auto edge1 = LastEdge(*thePoly1);
 	auto ray = CalcBisectRay(*edge0, *edge1);
+	std::cout << " ray = " << *ray << std::endl;
 	auto angle = std::make_shared<AngleBisect>(ray, thePoly0, thePoly1);
 	return std::move(angle);
 }
@@ -408,6 +414,10 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	const auto& sizeFun = SizeFun();
 
 	auto bisectAngles = CalcBisectAngles();
+	for (const auto& x : bisectAngles)
+	{
+		std::cout << "angle = " << x->Angle() << std::endl;
+	}
 	//auto chain = CalcEdges();
 	auto polygons = RetrievePolygons();
 	auto coords = RetrieveCoords(polygons);
