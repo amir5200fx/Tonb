@@ -175,7 +175,8 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 	const auto& hs = *Hs();
 
 	auto polygons = Voyage_Tools::RetrievePolygons(*path);
-	auto d = Voyage_Tools::CalcBoundingBox(polygons, 1.0E-4);
+	//auto d = Voyage_Tools::CalcBoundingBox(polygons, 1.0E-4);
+	auto d = Voyage_Tools::RetrieveDomain(*path->Earth());
 
 	Geo2d_BalPrTree<std::shared_ptr<sourceNode>> engine;
 	engine.SetMaxUnbalancing(2);

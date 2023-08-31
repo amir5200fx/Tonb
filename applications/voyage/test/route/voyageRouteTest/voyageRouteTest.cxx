@@ -238,7 +238,7 @@ int main()
 	}
 
 	OFstream mySizeMapFile("sizeMap.plt");
-	//unCorrSizeMap->ExportToPlt(mySizeMapFile);
+	unCorrSizeMap->ExportToPlt(mySizeMapFile);
 	corrSizeMap->ExportToPlt(mySizeMapFile);
 
 	//Pnt2d P02(Geo_Tools::DegToRadian(25.0), Geo_Tools::DegToRadian(-5.0));
