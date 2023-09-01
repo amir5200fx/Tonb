@@ -190,6 +190,27 @@
     <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Traits">
       <UniqueIdentifier>{67efe976-c889-4dfa-935e-dfe065685478}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Data">
+      <UniqueIdentifier>{f0ef7c14-c008-4895-8945-76069a941c4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Adaptor">
+      <UniqueIdentifier>{1075b958-b387-4313-8a6c-1f372166c4e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Info">
+      <UniqueIdentifier>{630dc80d-8920-4388-b4c6-783569be5b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Traits">
+      <UniqueIdentifier>{bd823467-394f-4dfc-8e78-4ccd7f03135d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base">
+      <UniqueIdentifier>{b267764c-2ac2-4166-806b-16201bffdf7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\NodeCalculator">
+      <UniqueIdentifier>{24db6c12-a429-4b19-a4dc-c28c1bd882de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\NodeCalculator\Calculator">
+      <UniqueIdentifier>{c8f3afa5-ccdb-4574-b04c-40350a189701}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -363,6 +384,57 @@
     <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Traits\MeshPostAF2d_Traits.hxx">
       <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Traits</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Data\MeshPostAF2d_GlobalData.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Data\MeshPostAF2d_GlobalDataFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Traits\MeshPostAF2d_FrontTraits.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Adaptor\MeshPostAF2d_FrontInfoAdaptor.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Adaptor\MeshPostAF2d_FrontInfoAdaptorFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Adaptor</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Info\MeshPostAF2d_FrontInfo.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Info\MeshPostAF2d_FrontInfoFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base\MeshPostAF2d_CoreBase.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base\MeshPostAF2d_CoreBaseFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\NodeCalculator\Calculator\MeshPostAF2d_OptNode_Calculator.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\NodeCalculator\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\NodeCalculator\Calculator\MeshPostAF2d_OptNode_CalculatorFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\NodeCalculator\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\MeshPostAF2d_FrontGlobalData.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\MeshPostAF2d_FrontGlobalDataFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\MeshPostAF2d_Core.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\MeshPostAF2d_CoreTemplate.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\MeshPostAF2d_CoreFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\MeshPost2d_AFBLayerMesh.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.cxx">
@@ -424,6 +496,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Post\Convertor\unv\MeshPost_IdeasUNV.cxx">
       <Filter>TnbLib\Post\Convertor\unv</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base\MeshPostAF2d_CoreBase.cxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base\MeshPostAF2d_CoreBase_SortItems.cxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\MeshPost2d_AFBLayerMesh.cxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
