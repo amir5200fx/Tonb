@@ -23,7 +23,7 @@ namespace tnbLib
 			: theRegion_(0)
 		{}
 
-		// default constructor [8/13/2023 aamir]
+		// constructors [8/13/2023 aamir]
 
 		VoyageMesh_Edge(const Standard_Integer theIndex)
 			: VoyageMesh_EdgeBase(theIndex)

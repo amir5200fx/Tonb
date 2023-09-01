@@ -12,7 +12,7 @@ namespace tnbLib
 {
 
 	template<>
-	VoyageMesh_ElementBase::array3
+	TnbVoyage_EXPORT VoyageMesh_ElementBase::array3
 		VoyageMesh_ElementBase::InterpWeights(const Pnt2d& theCoord) const;
 }
 
