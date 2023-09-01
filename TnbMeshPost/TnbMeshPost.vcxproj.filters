@@ -145,6 +145,51 @@
     <Filter Include="TnbLib\Post\Convertor\unv">
       <UniqueIdentifier>{2de127e7-462a-4c66-a03b-73bc870635ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront">
+      <UniqueIdentifier>{c75273e2-3439-4e38-8bcb-9cd57b93469f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d">
+      <UniqueIdentifier>{9d713ff3-6c26-4371-97f6-aa160965c60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities">
+      <UniqueIdentifier>{70aeb7fd-6b88-459d-a42f-24b5502023fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node">
+      <UniqueIdentifier>{0867898c-3726-4ca6-a95e-d805e9c8a191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge">
+      <UniqueIdentifier>{1521b643-b2e0-41d3-aa0d-54cd44b62312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element">
+      <UniqueIdentifier>{5d64b49e-ddb8-40a3-9b6d-9d5f73f91d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front">
+      <UniqueIdentifier>{860fa519-4a25-4743-93d6-f45b935a4cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Core">
+      <UniqueIdentifier>{38cc7f5a-ac58-4b29-8d57-499e1e6f1a99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node\Traits">
+      <UniqueIdentifier>{704f4303-0703-4893-b0f4-a4eaf54762c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Entity">
+      <UniqueIdentifier>{d9ad0a36-d886-40e5-8931-ac96afaa6a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge\Traits">
+      <UniqueIdentifier>{15a2ebdc-d086-428b-8616-01a2bf16a2fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element\Traits">
+      <UniqueIdentifier>{ca895bc0-9447-49cf-9f5b-60dddfe06794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\MetricPrcsr">
+      <UniqueIdentifier>{74a32a72-0885-4f37-b147-a939aff25a03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Identifier">
+      <UniqueIdentifier>{e54c8867-0853-4d8e-91bb-abc6078c852e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Traits">
+      <UniqueIdentifier>{67efe976-c889-4dfa-935e-dfe065685478}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Post\Topology\Surface\TopoMesh_Surface.hxx">
@@ -269,6 +314,54 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Post\Convertor\unv\MeshPost_IdeasUNV.hxx">
       <Filter>TnbLib\Post\Convertor\unv</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node\Traits\MeshPostAF2d_NodeTraits.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element\Traits\MeshPostAF2d_ElementTraits.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge\Traits\MeshPostAF2d_EdgeTraits.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge\Traits</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\MetricPrcsr\MeshPostAF2d_MetricPrcsr.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\MetricPrcsr\MeshPostAF2d_MetricPrcsrFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\MetricPrcsr</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node\MeshPostAF2d_NodeBase.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node\MeshPostAF2d_NodeBaseFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node\MeshPostAF2d_Node.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge\MeshPostAF2d_EdgeBase.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge\MeshPostAF2d_EdgeBaseFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Identifier\MeshPostAF2d_EdgeIdentifier.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Front\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge\MeshPostAF2d_Edge.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Edge</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element\MeshPostAF2d_ElementBase.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element\MeshPostAF2d_ElementBaseFwd.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element\MeshPostAF2d_Element.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Entities\Element</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Post\BoundaryLayer\AdvFront\2d\Traits\MeshPostAF2d_Traits.hxx">
+      <Filter>TnbLib\Post\BoundaryLayer\AdvFront\2d\Traits</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
