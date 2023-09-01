@@ -13,6 +13,7 @@ namespace tnbLib
 {
 
 	//- Forward Declarations
+	class VoyageMesh_RefEdge;
 	class VoyageMesh_Element;
 	class VoyageMesh_Edge;
 	class VoyageMesh_Node;
@@ -28,7 +29,8 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Voyage_Path3> theRefPath_;
+		//std::shared_ptr<Voyage_Path3> theRefPath_;
+		std::vector<std::shared_ptr<VoyageMesh_RefEdge>> theRefPath_;
 
 		std::vector<std::shared_ptr<VoyageMesh_Edge>> theProtPath_;
 		std::vector<std::shared_ptr<VoyageMesh_Edge>> theStarboardPath_;
@@ -71,8 +73,8 @@ namespace tnbLib
 
 		TnbVoyage_EXPORT void Perform();
 
-		void SetRefPath(const std::shared_ptr<Voyage_Path3>& thePath) { theRefPath_ = thePath; }
-		void SetRefPath(std::shared_ptr<Voyage_Path3>&& thePath) { theRefPath_ = std::move(thePath); }
+		//void SetRefPath(const std::shared_ptr<Voyage_Path3>& thePath) { theRefPath_ = thePath; }
+		//void SetRefPath(std::shared_ptr<Voyage_Path3>&& thePath) { theRefPath_ = std::move(thePath); }
 
 		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>> 
 			RetrieveNodesFrom

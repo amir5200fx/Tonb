@@ -34,6 +34,9 @@ namespace tnbLib
 
 		//- Public functions and operators
 
+		Standard_Boolean IsReference() const override { return Standard_True; }
+		Standard_Boolean IsBoundary() const override { return Standard_True; }
+
 	};
 
 }

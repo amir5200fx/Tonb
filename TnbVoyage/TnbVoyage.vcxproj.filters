@@ -334,6 +334,9 @@
     <Filter Include="TnbLib\Voyage\PathOnEarth">
       <UniqueIdentifier>{876d9eb4-3971-470b-8772-475d864442eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\PathDir">
+      <UniqueIdentifier>{1a7d6802-c7f8-4e04-9a8b-dc8c33ecf96f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -629,6 +632,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\PathOnEarth\Voyage_PathOnEarth.hxx">
       <Filter>TnbLib\Voyage\PathOnEarth</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\PathDir\Voyage_PathDir.hxx">
+      <Filter>TnbLib\Voyage\PathDir</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

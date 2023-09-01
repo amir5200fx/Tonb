@@ -43,6 +43,8 @@ namespace tnbLib
 
 		auto Region() const { return theRegion_; }
 
+		virtual Standard_Boolean IsReference() const { return Standard_False; }
+
 		void SetRegion(const Standard_Integer theRegion) { theRegion_ = theRegion; }
 
 	};
