@@ -23,7 +23,7 @@ namespace tnbLib
 			: theRegion_(0)
 		{}
 
-		// default constructor [8/13/2023 aamir]
+		// constructors [8/13/2023 aamir]
 
 		VoyageMesh_Edge(const Standard_Integer theIndex)
 			: VoyageMesh_EdgeBase(theIndex)
@@ -42,6 +42,8 @@ namespace tnbLib
 		// Public functions and operators [8/13/2023 aamir]
 
 		auto Region() const { return theRegion_; }
+
+		virtual Standard_Boolean IsReference() const { return Standard_False; }
 
 		void SetRegion(const Standard_Integer theRegion) { theRegion_ = theRegion; }
 

@@ -1,165 +1,478 @@
-//#include <Voyage_Mesh.hxx>
-//
-//#include <Voyage_WptsGrid.hxx>
-//#include <VoyageGeo_Path.hxx>
-//#include <VoyageField_Earth.hxx>
-//#include <Entity2d_Polygon.hxx>
-//#include <TnbError.hxx>
-//#include <OSstream.hxx>
-//
-//Standard_Boolean 
-//tnbLib::Voyage_Mesh::IsValid(const Pnt2d& theCoord) const
-//{
-//	return Standard_True;
-//}
-//
-//namespace tnbLib
-//{
-//
-//	namespace voyageLib
-//	{
-//
-//		struct StageCoords
-//		{
-//
-//			std::vector<Pnt2d> leftSide;
-//			std::vector<Pnt2d> rightSide;
-//			Pnt2d stage;
-//		};
-//
-//		static std::vector<Pnt2d> 
-//			CalcCoords
-//			(
-//				const Standard_Integer n,
-//				const Vec2d& theNormal, 
-//				const Pnt2d& theCoord
-//			)
-//		{
-//			std::vector<Pnt2d> coords;
-//			coords.reserve(n);
-//			for (Standard_Integer i = 1; i <= n; i++)
-//			{
-//				auto pt = theCoord + (Standard_Real)i * theNormal;
-//				coords.push_back(std::move(pt));
-//			}
-//			return std::move(coords);
-//		}
-//	}
-//}
-//
-//void tnbLib::Voyage_Mesh::Perform()
-//{
-//	if (NOT RefRoute())
-//	{
-//		FatalErrorIn(FunctionSIG)
-//			<< "no reference route has been found." << endl
-//			<< abort(FatalError);
-//	}
-//	if (NOT MetricPrcsr())
-//	{
-//		FatalErrorIn(FunctionSIG)
-//			<< "no metric function has been found." << endl
-//			<< abort(FatalError);
-//	}
-//	const auto& refPath = RefRoute();
-//	auto us = refPath->Discrete(MetricPrcsr(), CurveInfo());
-//	if (us.size() < 3)
-//	{
-//		FatalErrorIn(FunctionSIG)
-//			<< "invalid size function has been detected." << endl
-//			<< abort(FatalError);
-//	}
-//	const auto n = (Standard_Integer)us.size();
-//	
-//	std::vector<voyageLib::StageCoords> stages_coords;
-//	for (auto u : us)
-//	{
-//		auto stage = refPath->Value(u);
-//		auto left_norm = refPath->CalcNormal(u);
-//		Dir2d right_norm = -left_norm;
-//
-//		auto left_coords = 
-//			voyageLib::CalcCoords
-//			(MaxDeviation(), Resolution() * left_norm, stage);
-//		auto right_coords = 
-//			voyageLib::CalcCoords
-//			(MaxDeviation(), Resolution() * right_norm, stage);
-//
-//		std::vector<Pnt2d> left_valids, right_valids;
-//		for (auto& x : left_coords)
-//		{
-//			if (NOT IsValid(x)) break;
-//			left_valids.push_back(std::move(x));
-//		}
-//		for (auto& x : right_coords)
-//		{
-//			if (NOT IsValid(x)) break;
-//			right_valids.push_back(std::move(x));
-//		}
-//		auto current = 
-//			voyageLib::StageCoords
-//		{ std::move(left_valids),std::move(right_valids),std::move(stage) };
-//		stages_coords.push_back(std::move(current));
-//	}
-//	size_t k = 0;
-//	std::vector<size_t> left_sk, right_sk;
-//	left_sk.reserve(n);
-//	right_sk.reserve(n);
-//	for (size_t i = 0; i < n; i++)
-//	{
-//		left_sk.at(i) = 
-//			std::min(k, stages_coords.at(i).leftSide.size());
-//		k = left_sk.at(i);
-//		++k;
-//	}
-//	k = 0;
-//	for (size_t i = 0; i < n; i++)
-//	{
-//		right_sk.at(i) = 
-//			std::min(k, stages_coords.at(i).rightSide.size());
-//		k = right_sk.at(i);
-//		++k;
-//	}
-//	std::reverse(left_sk.begin(), left_sk.end());
-//	std::reverse(right_sk.begin(), right_sk.end());
-//	k = 0;
-//	for (size_t i = 0; i < n; i++)
-//	{
-//		left_sk.at(i) = std::min(left_sk.at(i), k);
-//		k = left_sk.at(i);
-//		++k;
-//	}
-//	k = 0;
-//	for (size_t i = 0; i < n; i++)
-//	{
-//		right_sk.at(i) = std::min(k, right_sk.at(i));
-//		k = right_sk.at(i);
-//		++k;
-//	}
-//	std::reverse(left_sk.begin(), left_sk.end());
-//	std::reverse(right_sk.begin(), right_sk.end());
-//
-//	auto grid = std::make_shared<Voyage_WptsGrid>();
-//	grid->SetStageSize(n);
-//	for (size_t j = 0; j < n; j++)
-//	{
-//		const auto& stage = stages_coords.at(j);
-//		auto nj = 
-//			stage.leftSide.size() + stage.rightSide.size() + 1;
-//
-//		std::vector<Pnt2d> pts;
-//		pts.reserve(nj);
-//		for (const auto& x : stage.rightSide)
-//		{
-//			pts.push_back(x);
-//		}
-//		pts.push_back(stage.stage);
-//		for (const auto& x : stage.leftSide)
-//		{
-//			pts.push_back(x);
-//		}
-//		grid->StageRef(j) = std::move(pts);
-//	}
-//	theGrid_ = std::move(grid);
-//	Change_IsDone() = Standard_True;
-//}
+#include <Voyage_Mesh.hxx>
+
+#include <VoyageMesh_Element.hxx>
+#include <VoyageMesh_RefNode.hxx>
+#include <Aft_Tools.hxx>
+#include <Entity2d_Box.hxx>
+#include <Geo_AdTree.hxx>
+#include <Geo_Tools.hxx>
+
+void tnbLib::Voyage_Mesh::MeshOneLevel()
+{
+	ModifyLocalFront(DEFAULT_LOCALFRONT_FACTOR);
+
+	while (GetFrontEntity())
+	{
+		std::vector<std::shared_ptr<VoyageMesh_Node>>
+			CandidateNodes,
+			LocalNodes;
+
+		std::vector<std::shared_ptr<VoyageMesh_Edge>>
+			Effectives,
+			Local;
+
+		if (NOT IsBelongToFront())
+			continue;
+
+		// Remove the Current from front
+		RemoveCurrentFromFront();
+
+		// get desired element size from back-ground mesh
+		CalcElementSize();
+
+		// Calculate optimum coordinate of new point
+		CalcOptimumCoord();
+
+		CalcLocalFrontRadius();
+
+		// Set depth of searching radius
+		SetDepthSearching();
+
+		RetrieveLocalFrontNodes(LocalNodes, CandidateNodes);
+
+		//RetrieveLocalFrontEntities(LocalNodes, Local);
+
+		RetrieveEffectiveFronts(Local, Effectives);
+
+		SortNodes(CandidateNodes);
+
+		if (IsNewPointCandidate(Effectives))
+		{
+			AddOptimumNodeTo(CandidateNodes);
+		}
+
+		FindValidNode(CandidateNodes, Effectives);
+
+		Update();
+	}
+}
+
+void tnbLib::Voyage_Mesh::FindValidNode
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theCandidates, 
+	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
+)
+{
+	Debug_Null_Pointer(CurrentFront());
+	const auto& current = *CurrentFront();
+	const auto& newNode = TempoNode();
+
+	const auto cLength = current.CharLength();
+	const auto& sizeMap = *MetricMap();
+
+	Debug_Null_Pointer(current.Node0());
+	Debug_Null_Pointer(current.Node1());
+
+	const auto& vrtx0 = *current.Node0();
+	const auto& vrtx1 = *current.Node1();
+
+	auto v0 = vrtx0.Index();
+	auto v1 = vrtx1.Index();
+
+	auto nodes = RetrieveNodesFrom(theEdges);
+
+	Standard_Integer flag = 0;
+	for (const auto& x : theCandidates)
+	{
+		Debug_Null_Pointer(x);
+		const auto& node = *x;
+
+		const auto nodeIndex = node.Index();
+		if ((nodeIndex IS_EQUAL v0) OR(nodeIndex IS_EQUAL v1))
+		{
+			continue;
+		}
+
+		// test 1: is it the new point on the left side of iEDG
+		if (Geo_Tools::Oriented_cgal(node.Coord(), vrtx0.Coord(), vrtx1.Coord()) <= 0.0)
+		{
+			continue;
+		}
+
+		flag = 0;
+
+		// test 2: intersection test
+		for (const auto& eff_ptr : theEdges)
+		{
+			Debug_Null_Pointer(eff_ptr);
+			const auto& effective = *eff_ptr;
+
+			const auto& n0 = *effective.Node0();
+			const auto& n1 = *effective.Node1();
+
+			if (NOT Geo_Tools::IsOneCommonPointTwoSegments(v0, nodeIndex, n0.Index(), n1.Index()))
+			{
+				if (Geo_Tools::HasIntersection_cgal(vrtx0.Coord(), node.Coord(), n0.Coord(), n1.Coord()))
+				{
+					flag = 1;
+					break;
+				}
+			}
+
+			if (NOT Geo_Tools::IsOneCommonPointTwoSegments(nodeIndex, v1, n0.Index(), n1.Index()))
+			{
+				if (Geo_Tools::HasIntersection_cgal(node.Coord(), vrtx1.Coord(), n0.Coord(), n1.Coord()))
+				{
+					flag = 1;
+					break;
+				}
+			}
+		}
+
+		if (flag) continue;
+
+		for (const auto& eff_node : nodes)
+		{
+			Debug_Null_Pointer(eff_node);
+			const auto eff_index = eff_node->Index();
+
+			if ((eff_index NOT_EQUAL nodeIndex) AND(eff_index NOT_EQUAL v0) AND(eff_index NOT_EQUAL v1))
+			{
+				if (Geo_Tools::IsPointInsideTriangle_cgal(eff_node->Coord(), vrtx0.Coord(), vrtx1.Coord(), node.Coord()))
+				{
+					flag = 2;
+					break;
+				}
+			}
+		}
+
+		if (flag) continue;
+
+		if ((x NOT_EQUAL newNode))
+		{
+			flag = 3;
+			continue;
+		}
+
+		SetValidNode(x);
+		return;
+	}
+	SetValidNode(nullptr);
+}
+
+
+void tnbLib::Voyage_Mesh::Update()
+{
+	if (ValidNode())
+	{
+		UpdateFront();
+		InsertNewFrontsToLevels();
+	}
+	else
+	{
+		RejectCurrent(CurrentFront());
+	}
+}
+
+void tnbLib::Voyage_Mesh::Mesh()
+{
+	if (IsPriorityEmpty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Empty priority list" << endl
+			<< abort(FatalError);
+	}
+	SetLevelNumber(0);
+	SetLevelMaxIndex(NodeCounter());
+
+	AlgCondition() = Aft_AlgCondition::Generation;
+
+	MeshOneLevel();
+}
+
+void tnbLib::Voyage_Mesh::InsertNewFrontsToLevels()
+{
+	const auto& edge0 = CreatedEdge0();
+	if (edge0)
+	{
+		const auto& n0 = edge0->Node0();
+		const auto& n1 = edge0->Node1();
+
+		n0->SetRadius(MAX(n0->Radius(), edge0->CharLength()));
+		n1->SetRadius(MAX(n1->Radius(), edge0->CharLength()));
+
+		if (IsOnLevel(*edge0))
+		{
+			InsertToCurrentFronts(edge0->Index(), edge0);
+		}
+		else
+		{
+			InsertToNextFronts(edge0->Index(), edge0);
+		}
+	}
+
+	const auto& edge1 = CreatedEdge1();
+	if (edge1)
+	{
+		const auto& n0 = edge1->Node0();
+		const auto& n1 = edge1->Node1();
+
+		n0->SetRadius(MAX(n0->Radius(), edge1->CharLength()));
+		n1->SetRadius(MAX(n1->Radius(), edge1->CharLength()));
+
+		if (IsOnLevel(*edge1))
+		{
+			InsertToCurrentFronts(edge1->Index(), edge1);
+		}
+		else
+		{
+			InsertToNextFronts(edge1->Index(), edge1);
+		}
+	}
+}
+
+void tnbLib::Voyage_Mesh::CheckPath
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
+) const
+{
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x->Node0());
+		Debug_Null_Pointer(x->Node1());
+
+		auto n0 = std::dynamic_pointer_cast<VoyageMesh_RefNode>(x->Node0());
+		auto n1 = std::dynamic_pointer_cast<VoyageMesh_RefNode>(x->Node1());
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
+
+		if (n0->IsArrival() OR n0->IsDeparture())
+		{
+			continue;
+		}
+		if (n1->IsArrival() OR n1->IsDeparture())
+		{
+			continue;
+		}
+		if (n0->NbFrontEdges() NOT_EQUAL 2 OR n1->NbFrontEdges() NOT_EQUAL 2)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "The edge is not manifold" << endl
+				<< abort(FatalError);
+		}
+	}
+}
+
+void tnbLib::Voyage_Mesh::CheckSelfIntersection() const
+{
+	for (const auto& x : RefPath())
+	{
+		Debug_Null_Pointer(x);
+
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
+
+		auto radius = 1.05 * std::max(n0->CalcMaxParaAdjLength(), n1->CalcMaxParaAdjLength());
+		const auto& c = x->Centre();
+
+		auto b = Geo_BoxTools::GetBox(c, radius);
+
+		std::vector<std::shared_ptr<VoyageMesh_Node>> items;
+		this->GeometrySearch(b, items);
+
+		std::vector<std::shared_ptr<VoyageMesh_Edge>> locals;
+		RetrieveLocalFrontEntities(items, locals);
+
+		for (const auto& l : locals)
+		{
+			Debug_Null_Pointer(l);
+			if (x IS_EQUAL l) continue;
+			if (Aft_Tools::IsIntersect(*x, *l))
+			{
+				FatalErrorIn(FunctionSIG)
+					<< " a self intersection of the parametric boundary edges has been detected." << endl
+					<< abort(FatalError);
+			}
+		}
+	}
+}
+
+void tnbLib::Voyage_Mesh::ActiveFronts
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
+)
+{
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+
+		n0->InsertToEdges(x->Index(), x);
+		n1->InsertToEdges(x->Index(), x);
+
+		n0->InsertToFrontEdges(x->Index(), x);
+		n1->InsertToFrontEdges(x->Index(), x);
+	}
+}
+
+void tnbLib::Voyage_Mesh::Perform()
+{
+	SetPriorityFunction(&Voyage_Mesh::Length);
+	SetMinDistFactor(DEFAULT_MIN_DISTANCE_FACTOR);
+
+	SetGeometryCoordFunc(&Voyage_Mesh::GetCoord);
+
+	ActiveFronts(RefPath());
+
+	Import(RefPath(), this->MetricMap());
+
+	Mesh();
+
+	Change_IsDone() = Standard_True;
+}
+
+void tnbLib::Voyage_Mesh::LoadRefPath
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
+)
+{
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		if (NOT x->IsReference())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the edge is not reference." << endl
+				<< abort(FatalError);
+		}
+	}
+	theRefPath_ = theEdges;
+}
+
+void tnbLib::Voyage_Mesh::LoadRefPath
+(
+	std::vector<std::shared_ptr<VoyageMesh_Edge>>&& theEdges
+)
+{
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		if (NOT x->IsReference())
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the edge is not reference." << endl
+				<< abort(FatalError);
+		}
+	}
+	theRefPath_ = std::move(theEdges);
+}
+
+void tnbLib::Voyage_Mesh::Import
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& thePath,
+	const std::shared_ptr<VoyageMesh_MetricPrcsr>& theMetrics
+)
+{
+	NodeCounter() = (Standard_Integer)(thePath.size() + 1);
+	ElementCounter() = 0;
+	EdgeCounter() = (Standard_Integer)thePath.size();
+
+	CheckPath(RefPath());
+
+	const auto nodes = RetrieveNodesFrom(RefPath());
+
+	auto d = RetrieveBoundingBox(nodes);
+
+	// Set Searching Region
+	SetGeometryRegion(d.OffSet(0.01 * d.Diameter()));
+
+	// Insert To Front
+	InsertToGeometry(nodes);
+
+	CheckSelfIntersection();
+
+	InsertToPriority(RefPath());
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageMesh_Node>> 
+tnbLib::Voyage_Mesh::RetrieveNodesFrom
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
+)
+{
+	static auto cmp = 
+		[]
+	(
+		const std::shared_ptr<VoyageMesh_Node>& n0,
+		const std::shared_ptr<VoyageMesh_Node>& n1
+		)
+	{
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
+		return n0->Index() < n1->Index();
+	};
+	std::set<std::shared_ptr<VoyageMesh_Node>, decltype(cmp)> compct(cmp);
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x->Node0());
+		Debug_Null_Pointer(x->Node1());
+		{
+			auto insert = compct.insert(x->Node0());
+			if (NOT insert.second)
+			{
+				// do nothing [8/22/2023 aamir]
+			}
+		}
+		{
+			auto insert = compct.insert(x->Node1());
+			if (NOT insert.second)
+			{
+				// do nothing [8/22/2023 aamir]
+			}
+		}
+	}
+	std::vector<std::shared_ptr<VoyageMesh_Node>> nodes;
+	std::copy(compct.begin(), compct.end(), std::back_inserter(nodes));
+	return std::move(nodes);
+}
+
+tnbLib::Entity2d_Box 
+tnbLib::Voyage_Mesh::RetrieveBoundingBox
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes
+)
+{
+	std::vector<Pnt2d> coords;
+	coords.reserve(theNodes.size());
+	for (const auto& x : theNodes)
+	{
+		Debug_Null_Pointer(x);
+		coords.push_back(x->Coord());
+	}
+	auto b = Entity2d_Box::BoundingBoxOf(coords);
+	return std::move(b);
+}
+
+Standard_Real 
+tnbLib::Voyage_Mesh::Length
+(
+	const std::shared_ptr<VoyageMesh_Edge>& theEdge
+)
+{
+	Debug_Null_Pointer(theEdge);
+	return theEdge->CharLength();
+}
+
+const tnbLib::Pnt2d& 
+tnbLib::Voyage_Mesh::GetCoord
+(
+	const std::shared_ptr<VoyageMesh_Node>& theNode
+)
+{
+	Debug_Null_Pointer(theNode);
+	return theNode->Coord();
+}

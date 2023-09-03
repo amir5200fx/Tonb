@@ -69,7 +69,7 @@ void tnbLib::Voyage_Distance::Perform()
 				geom,
 				geom->FirstParameter(), geom->LastParameter(), 
 				metricProcsr, GetInfo()->CurveMeshInfo());
-		auto dist = alg->CalcLengthWithChecking(GetInfo()->MaxSubdivideLevs());
+		auto dist = alg->CalcLengthWithChecking(GetInfo()->MaxSubdivideLev());
 		tot_dist += dist;
 	}
 	theValue_ = tot_dist;

@@ -34,6 +34,9 @@ namespace tnbLib
 
 		//- Public functions and operators
 
+		virtual Standard_Boolean IsDeparture() const { return Standard_False; }
+		virtual Standard_Boolean IsArrival() const { return Standard_False; }
+
 		Standard_Boolean IsReference() const override { return Standard_True; }
 		Standard_Boolean IsBoundary() const override { return Standard_True; }
 

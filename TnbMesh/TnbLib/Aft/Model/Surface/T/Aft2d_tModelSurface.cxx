@@ -21,7 +21,7 @@ void tnbLib::Aft2d_tModelSurface::Import
 
 	CheckBoundary(GetBoundaryEntities());
 
-	const auto& nodes = RetrieveNodesFrom(GetBoundaryEntities());
+	const auto nodes = RetrieveNodesFrom(GetBoundaryEntities());
 
 	auto box = RetrieveBoundingBox(nodes);
 

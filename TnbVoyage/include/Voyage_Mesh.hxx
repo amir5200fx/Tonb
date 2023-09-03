@@ -1,87 +1,101 @@
 #pragma once
-#ifndef _Voyage_Mesh_Header
-#define _Voyage_Mesh_Header
+#ifndef _Voyage_Mesh3_Header
+#define _Voyage_Mesh3_Header
 
+#include <VoyageMesh_Core.hxx>
 #include <Voyage_Module.hxx>
-#include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
-#include <Entity2d_PolygonFwd.hxx>
+#include <Aft2d_MetricPrcsrSurfaceFwd.hxx>
+#include <Aft_Model_Constants.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
+#include <vector>
 
 namespace tnbLib
 {
 
-	// Forward Declarations [7/20/2023 Payvand]
+	//- Forward Declarations
+	class VoyageMesh_RefEdge;
+	class VoyageMesh_Element;
+	class VoyageMesh_Edge;
+	class VoyageMesh_Node;
+	class Voyage_Path3;
 
-	class Voyage_WptsGrid;
-	class VoyageGeo_Path;
-	class VoyageGeo_SizeFun;
-	class VoyageGeo_MetricFun;
-	class VoyageField_Earth;
-	class Mesh_Curve_Info;
-
-	struct Voyage_Mesh_Cache
-	{
-
-		static std::shared_ptr<Entity2d_Polygon> thePrevArea_;
-	};
+	template<class T>
+	class Geo_AdTree;
 
 	class Voyage_Mesh
-		: public Voyage_Mesh_Cache
+		: public VoyageMesh_Core
+		, public Aft_Model_Constants
 		, public Global_Done
 	{
 
 		/*Private Data*/
 
-		std::shared_ptr<VoyageGeo_Path> theRef_;
+		//std::shared_ptr<Voyage_Path3> theRefPath_;
+		std::vector<std::shared_ptr<VoyageMesh_Edge>> theRefPath_;
 
-		std::shared_ptr<Geo2d_MetricPrcsrAnIso> thePrcsr_;
-		std::shared_ptr<Mesh_Curve_Info> theCurveInfo_;
+		//- Results
 
-		std::shared_ptr<VoyageField_Earth> theEarth_;
+		//- Private functions and operators
 
-		Standard_Real theResolution_;
-		Standard_Integer theMaxDeviation_;
+		TnbVoyage_EXPORT void MeshOneLevel();
+		TnbVoyage_EXPORT void FindValidNode
+		(
+			const std::vector<std::shared_ptr<VoyageMesh_Node>>& theCandidates, 
+			const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
+		);
+		TnbVoyage_EXPORT void Update();
+		TnbVoyage_EXPORT void Mesh();
 
+		TnbVoyage_EXPORT void InsertNewFrontsToLevels();
+		TnbVoyage_EXPORT void CheckPath(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&) const;
+		TnbVoyage_EXPORT void CheckSelfIntersection() const;
 
-		// results [7/21/2023 Payvand]
+		TnbVoyage_EXPORT void Import
+		(
+			const std::vector<std::shared_ptr<VoyageMesh_Edge>>& thePath,
+			const std::shared_ptr<VoyageMesh_MetricPrcsr>& theMetrics
+		);
 
-		std::shared_ptr<Voyage_WptsGrid> theGrid_;
-
-		// Private functions and operators [7/20/2023 Payvand]
-
-		TnbVoyage_EXPORT Standard_Boolean IsValid(const Pnt2d& theCoord) const;
+		static TnbVoyage_EXPORT void ActiveFronts
+		(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&);
 
 	public:
 
-		// default constructor [7/20/2023 Payvand]
+		//- default constructor
 
 		Voyage_Mesh()
 		{}
 
-		// constructors [7/20/2023 Payvand]
+		//- constructors
 
+		//- Public functions and operators
 
-		// Public functions and operators [7/20/2023 Payvand]
-
-		const auto& RefRoute() const { return theRef_; }
-
-		const auto& MetricPrcsr() const { return thePrcsr_; }
-
-		const auto& CurveInfo() const { return theCurveInfo_; }
-
-		const auto& Earth() const { return theEarth_; }
-
-		auto Resolution() const { return theResolution_; }
-		auto MaxDeviation() const { return theMaxDeviation_; }
-
-		const auto& Grid() const { return theGrid_; }
+		const auto& RefPath() const { return theRefPath_; }
 
 		TnbVoyage_EXPORT void Perform();
 
-	};
+		//void SetRefPath(const std::shared_ptr<Voyage_Path3>& thePath) { theRefPath_ = thePath; }
+		//void SetRefPath(std::shared_ptr<Voyage_Path3>&& thePath) { theRefPath_ = std::move(thePath); }
 
+		TnbVoyage_EXPORT void LoadRefPath(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&);
+		TnbVoyage_EXPORT void LoadRefPath(std::vector<std::shared_ptr<VoyageMesh_Edge>>&&);
+
+		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>> 
+			RetrieveNodesFrom
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Edge>>&
+			);
+		static TnbVoyage_EXPORT Entity2d_Box
+			RetrieveBoundingBox
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Node>>&
+			);
+
+		static TnbVoyage_EXPORT Standard_Real Length(const std::shared_ptr<VoyageMesh_Edge>&);
+		static TnbVoyage_EXPORT const Pnt2d& GetCoord(const std::shared_ptr<VoyageMesh_Node>&);
+	};
 }
 
-#endif // !_Voyage_Mesh_Header
+#endif // !_Voyage_Mesh3_Header

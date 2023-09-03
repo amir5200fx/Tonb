@@ -2,6 +2,8 @@
 
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
+#include <Aft_SizeCorr_IterativeInfo.hxx>
+#include <NumAlg_NelderMead.hxx>
 #include <NumAlg_AdaptiveInteg_Info.hxx>
 #include <NumAlg_NewtonSolver_Info.hxx>
 #include <NumAlg_BisectionSolver_Info.hxx>
@@ -12,8 +14,18 @@ std::make_shared<tnbLib::Mesh_Curve_Info>();
 std::shared_ptr<tnbLib::NumAlg_AdaptiveInteg_Info> tnbLib::Voyage_MetricInfo::DEFAULT_INTEG_INFO =
 std::make_shared<tnbLib::NumAlg_AdaptiveInteg_Info>();
 
+std::shared_ptr<tnbLib::NumAlg_NelderMeadInfo> tnbLib::Voyage_MetricInfo::DEFAULT_NELDER_MEAD_INFO =
+std::make_shared<tnbLib::NumAlg_NelderMeadInfo>();
+
+std::shared_ptr<tnbLib::Aft_SizeCorr_IterativeInfo> tnbLib::Voyage_MetricInfo::DEFAULT_SIZE_CORR_ITER_INFO =
+std::make_shared<tnbLib::Aft_SizeCorr_IterativeInfo>();
+
 Standard_Integer tnbLib::Voyage_MetricInfo::DEFAULT_NB_SAMPLES(5);
-Standard_Integer tnbLib::Voyage_MetricInfo::DEFAULT_MAX_SUBDIVIDE_LEVELS(10);
+Standard_Integer tnbLib::Voyage_MetricInfo::DEFAULT_MAX_SUBDIVIDE_LEVEL(10);
+Standard_Integer tnbLib::Voyage_MetricInfo::DEFAULT_MAX_SUBTRI_SUBDIVIDE_LEVEL(3);
+
+Standard_Integer tnbLib::Voyage_MetricInfo::DEFAULT_NB_METRICS_ITERS(5);
+Standard_Real tnbLib::Voyage_MetricInfo::DEFAULT_METRIC_TOL(0.001);
 
 namespace tnbLib
 {
@@ -93,8 +105,22 @@ void tnbLib::Voyage_MetricInfo_RunTime::SetConfigs()
 
 	{
 		auto myInfo = Voyage_MetricInfo::DEFAULT_INTEG_INFO;
-		myInfo->SetMaxNbIterations(50);
+		myInfo->SetMaxNbIterations(200);
 		myInfo->SetNbInitIterations(4);
 		myInfo->SetTolerance(1.0E-4);
+	}
+
+	{
+		auto myInfo = Voyage_MetricInfo::DEFAULT_SIZE_CORR_ITER_INFO;
+		myInfo->SetIgnoreNonConvergency(Standard_True);
+		myInfo->SetMaxNbIters(100);
+		myInfo->SetTolerance(1.0E-5);
+		myInfo->SetUnderRelaxation(0.85);
+	}
+
+	{
+		auto myInfo = Voyage_MetricInfo::DEFAULT_NELDER_MEAD_INFO;
+		myInfo->SetMaxNbIterations(50);
+		myInfo->SetTolerance(1.0E-3);
 	}
 }

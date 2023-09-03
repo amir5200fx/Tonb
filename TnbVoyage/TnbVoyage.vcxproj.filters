@@ -337,6 +337,18 @@
     <Filter Include="TnbLib\Voyage\PathDir">
       <UniqueIdentifier>{1a7d6802-c7f8-4e04-9a8b-dc8c33ecf96f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Node\Ref\Departure">
+      <UniqueIdentifier>{66a30423-3100-4cc3-8aa6-28b0b224382d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\Entities\Node\Ref\Arrival">
+      <UniqueIdentifier>{d205a119-c0e5-4cb5-9e74-aeffcc5cdce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints">
+      <UniqueIdentifier>{693509f4-9ce7-4205-83d4-c4ab0db8158f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri">
+      <UniqueIdentifier>{66d71491-09b2-47a3-8bc0-994310ae5fdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -417,9 +429,6 @@
     <ClInclude Include="TnbLib\Voyage\Entities\Weather\Voyage_Weather.hxx">
       <Filter>TnbLib\Voyage\Entities\Weather</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh.hxx">
-      <Filter>TnbLib\Voyage\Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Field\Earth\VoyageField_Earth.hxx">
       <Filter>TnbLib\Voyage\Field\Earth</Filter>
     </ClInclude>
@@ -452,9 +461,6 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.hxx">
       <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
-    </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh3.hxx">
-      <Filter>TnbLib\Voyage\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Geometry\Path\VoyageGeo_Path2.hxx">
       <Filter>TnbLib\Voyage\Geometry\Path</Filter>
@@ -636,6 +642,21 @@
     <ClInclude Include="TnbLib\Voyage\PathDir\Voyage_PathDir.hxx">
       <Filter>TnbLib\Voyage\PathDir</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Voyage_Mesh.hxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\Ref\Arrival\VoyageMesh_ArrivalNode.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node\Ref\Arrival</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\Entities\Node\Ref\Departure\VoyageMesh_DepartureNode.hxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node\Ref\Departure</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Voyage_Waypoints.hxx">
+      <Filter>TnbLib\Voyage\Waypoints</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri\VoyageMesh_AltrOptNode_SubTri.hxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -658,9 +679,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Entities\Weather\Voyage_WeatherIO.cxx">
       <Filter>TnbLib\Voyage\Entities\Weather</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh.cxx">
-      <Filter>TnbLib\Voyage\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Dijkstra\Voyage_Dijkstra.cxx">
       <Filter>TnbLib\Voyage\Dijkstra</Filter>
@@ -688,9 +706,6 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Geometry\GreateCircleNav\VoyageGeo_GreateCircleNav.cxx">
       <Filter>TnbLib\Voyage\Geometry\GreateCircleNav</Filter>
-    </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh3.cxx">
-      <Filter>TnbLib\Voyage\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Mesh\MetricPrcsr\VoyageMesh_MetricPrcsr.cxx">
       <Filter>TnbLib\Voyage\Mesh\MetricPrcsr</Filter>
@@ -763,6 +778,18 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Tools\Voyage_Tools_SetSources.cxx">
       <Filter>TnbLib\Voyage\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Voyage_Mesh.cxx">
+      <Filter>TnbLib\Voyage\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Entities\Node\VoyageMesh_Node.cxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Voyage_Waypoints.cxx">
+      <Filter>TnbLib\Voyage\Waypoints</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri\VoyageMesh_AltrOptNode_SubTri.cxx">
+      <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
