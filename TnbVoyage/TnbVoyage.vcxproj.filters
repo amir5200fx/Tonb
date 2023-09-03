@@ -349,6 +349,9 @@
     <Filter Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri">
       <UniqueIdentifier>{66d71491-09b2-47a3-8bc0-994310ae5fdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\SizeMap">
+      <UniqueIdentifier>{43b47a24-a88d-43a2-9eb7-b029e2f8979b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -657,6 +660,9 @@
     <ClInclude Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri\VoyageMesh_AltrOptNode_SubTri.hxx">
       <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\SizeMap\Voyage_SizeMap.hxx">
+      <Filter>TnbLib\Voyage\SizeMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -790,6 +796,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri\VoyageMesh_AltrOptNode_SubTri.cxx">
       <Filter>TnbLib\Voyage\Mesh\NodeCalculator\AltrAlg\SubTri</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\SizeMap\Voyage_SizeMap.cxx">
+      <Filter>TnbLib\Voyage\SizeMap</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
