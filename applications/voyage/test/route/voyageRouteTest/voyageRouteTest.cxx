@@ -195,6 +195,8 @@ int main()
 	auto wayPoints = std::make_shared<Voyage_Waypoints>();
 	wayPoints->SetPath(path);
 	wayPoints->SetInfo(metricInfo);
+	wayPoints->SetPortSizeFunction(sizeMap->Port());
+	wayPoints->SetStarboardSizeFunction(sizeMap->Startboard());
 	wayPoints->Perform();
 
 	return 1;
