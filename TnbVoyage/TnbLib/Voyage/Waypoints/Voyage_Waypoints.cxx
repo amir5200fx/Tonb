@@ -325,6 +325,9 @@ void tnbLib::Voyage_Waypoints::Perform()
 			<< " - The reference edges are created." << endl;
 	}
 	{// Starboard region [9/2/2023 Payvand]
+
+		optNode->SetMetricMap(starboard_metricPrcsr);
+
 		auto alg = std::make_shared<Voyage_Mesh>();
 		Debug_Null_Pointer(alg);
 		alg->LoadMetricMap(starboard_metricPrcsr);
@@ -343,6 +346,9 @@ void tnbLib::Voyage_Waypoints::Perform()
 		}
 	}
 	{// Port region [9/2/2023 Payvand]
+
+		optNode->SetMetricMap(port_metricPrcsr);
+
 		auto alg = std::make_shared<Voyage_Mesh>();
 		Debug_Null_Pointer(alg);
 		alg->LoadMetricMap(port_metricPrcsr);

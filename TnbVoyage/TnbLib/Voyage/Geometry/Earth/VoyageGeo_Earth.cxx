@@ -14,7 +14,7 @@
 #include <TopoDS.hxx>
 #include <TopoDS_Face.hxx>
 
-const Standard_Real tnbLib::VoyageGeo_Earth::Radius = 6371.0;
+const Standard_Real tnbLib::VoyageGeo_Earth::Radius = 6.3710;
 
 tnbLib::VoyageGeo_Earth::VoyageGeo_Earth()
 {

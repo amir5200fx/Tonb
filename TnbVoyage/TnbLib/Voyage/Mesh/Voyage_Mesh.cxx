@@ -33,7 +33,6 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 		Debug_Null_Pointer(ptr);
 		auto& node = *ptr;
 		const auto& pt = node.Coord();
-		std::cout << "node = " << node.Index() << std::endl;
 		auto fronts = node.RetrieveFrontEdges();
 		Debug_If_Condition(NOT fronts.size());
 
@@ -56,6 +55,8 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 		while (Iter NOT_EQUAL fronts.end())
 		{
 			const auto& Mi = Iter->second.lock()->EffectiveMetric();
+			//Mi.Print(std::cout);
+			//std::cout << std::endl;
 			if (M.Determinant() < Mi.Determinant())
 			{
 				M = Entity2d_Metric1::UnionSR(M, Mi);
@@ -81,6 +82,7 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 		);
 
 		auto detM = M.Determinant();
+
 		//- save worst metric
 		if (node.Metric().Determinant() < detM)
 		{
@@ -130,9 +132,8 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 
 void tnbLib::Voyage_Mesh::MeshOneLevel()
 {
-	PAUSE;
 	ModifyLocalFront(DEFAULT_LOCALFRONT_FACTOR);
-	PAUSE;
+
 	while (GetFrontEntity())
 	{
 		std::vector<std::shared_ptr<VoyageMesh_Node>>
@@ -438,6 +439,50 @@ void tnbLib::Voyage_Mesh::CheckSelfIntersection() const
 	}
 }
 
+void tnbLib::Voyage_Mesh::InitFronts()
+{
+	Debug_Null_Pointer(MetricMap());
+	const auto& sizeMap = *MetricMap();
+	const auto& edges = RefPath();
+	for (const auto& x : edges)
+	{
+		Debug_Null_Pointer(x);
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+
+		x->SetEffectiveMetric(sizeMap.CalcEffectiveMetric(n0->Coord(), n1->Coord()));
+		x->SetCentre(sizeMap.CalcCentre(n0->Coord(), n1->Coord()));
+		x->SetCharLength(sizeMap.CalcDistance(n0->Coord(), n1->Coord()));
+	}
+	auto nodes = RetrieveNodesFrom(edges);
+	for (const auto& x : nodes)
+	{
+		Debug_Null_Pointer(x);
+		const auto& bnds = x->RetrieveFrontEdges();
+		auto Iter = bnds.begin();
+		Debug_Null_Pointer(Iter->second.lock());
+		auto M = Iter->second.lock()->EffectiveMetric();
+		Iter++;
+
+		while (Iter NOT_EQUAL bnds.end())
+		{
+			Debug_Null_Pointer(Iter->second.lock());
+			const auto& Mi = Iter->second.lock()->EffectiveMetric();
+			if (M.Determinant() < Mi.Determinant())
+			{
+				M = Entity2d_Metric1::UnionSR(M, Mi);
+			}
+			else
+			{
+				M = Entity2d_Metric1::UnionSR(Mi, M);
+			}
+			Iter++;
+		}
+
+		x->SetMetric(M);
+	}
+}
+
 void tnbLib::Voyage_Mesh::ActiveFronts
 (
 	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
@@ -469,6 +514,8 @@ void tnbLib::Voyage_Mesh::Perform()
 	ActiveFronts(RefPath());
 
 	Import(RefPath(), this->MetricMap());
+
+	InitFronts();
 	
 	Mesh();
 
