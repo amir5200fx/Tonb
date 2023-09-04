@@ -100,6 +100,16 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectAngles() const
 		auto angle = CalcAngle(ch0, ch1);
 		angles.push_back(std::move(angle));
 	}
+	// reverse back the polygons [9/3/2023 Payvand]
+	if (Direction() IS_EQUAL PathDirect::Port)
+	{
+		std::reverse(polygons.begin(), polygons.end());
+		for (const auto& x : polygons)
+		{
+			Debug_Null_Pointer(x);
+			x->Reverse();
+		}
+	}
 	return std::move(angles);
 }
 

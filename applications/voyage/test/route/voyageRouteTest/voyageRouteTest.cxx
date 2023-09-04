@@ -6,6 +6,8 @@
 #include <Voyage_Distance.hxx>
 #include <Voyage_PathDiscret.hxx>
 #include <Voyage_PathOnEarth.hxx>
+#include <Voyage_SizeMap.hxx>
+#include <Voyage_Waypoints.hxx>
 #include <VoyageMesh_SizeMap.hxx>
 #include <VoyageMesh_BaseSize.hxx>
 #include <VoyageMesh_BaseSizeInfo.hxx>
@@ -154,6 +156,13 @@ int main()
 		auto alg = std::make_shared<Voyage_PathOnEarth>(earth, path);
 		alg->Perform();
 
+		OFstream planeFile("polygons.plt");
+		for (const auto& x : alg->Path()->Curves())
+		{
+			const auto& mesh = x->Mesh();
+			mesh->ExportToPlt(planeFile);
+		}
+
 		for (const auto& x : alg->Path3D())
 		{
 			x->ExportToPlt(myFile);
@@ -174,6 +183,21 @@ int main()
 			<< "  " 
 			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i1))) << endl;
 	}
+
+	// creating the size maps [9/3/2023 Payvand]
+	Voyage_SizeMap::verbose = 1;
+	auto sizeMap = std::make_shared<Voyage_SizeMap>();
+	sizeMap->SetPath(path);
+	sizeMap->SetInfo(metricInfo);
+	sizeMap->Perform();
+
+	Voyage_Waypoints::verbose = 1;
+	auto wayPoints = std::make_shared<Voyage_Waypoints>();
+	wayPoints->SetPath(path);
+	wayPoints->SetInfo(metricInfo);
+	wayPoints->Perform();
+
+	return 1;
 
 	auto metricsFun = earth->GetMetrics();
 	auto uniSizeMap = std::make_shared<GeoSizeFun2d_Uniform>(1.0, metricsFun->BoundingBox());

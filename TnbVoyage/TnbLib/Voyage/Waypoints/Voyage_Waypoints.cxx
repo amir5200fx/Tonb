@@ -1,5 +1,5 @@
 #include <Voyage_Waypoints.hxx>
-
+#define FULLDEBUG
 #include <Voyage_MetricInfo.hxx>
 #include <Voyage_Mesh.hxx>
 #include <Voyage_Tools.hxx>
@@ -69,6 +69,7 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 			{
 				Debug_Null_Pointer(e);
 				e->SetRegion(region_nb);
+				starboard.push_back(std::move(e));
 			}
 		}
 	}
@@ -89,6 +90,7 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 				auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
 				Debug_Null_Pointer(ref);
 				ref->SetSense(Standard_False);
+				port.push_back(std::move(e));
 			}
 		}
 	}
@@ -98,6 +100,14 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 	SetArrival(port);
 	Merge(starboard);
 	Merge(port);
+	Renumber(starboard);
+	Renumber(port);
+	for (const auto& x : starboard)
+	{
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+		std::cout << "i0: " << n0->Index() << ", i1: " << n1->Index() << std::endl;
+	}
 	auto t = std::make_pair(std::move(starboard), std::move(port));
 	return std::move(t);
 }
@@ -114,17 +124,17 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 	Standard_Integer k = 0;
 	for (const auto& x : pnts)
 	{
-		auto node = std::make_shared<VoyageMesh_Node>(++k, x);
+		auto node = std::make_shared<VoyageMesh_RefNode>(++k, x);
 		nodes.push_back(std::move(node));
 	}
 	std::vector<std::shared_ptr<VoyageMesh_Edge>> edges;
 	for (size_t i = 1; i < nodes.size(); i++)
 	{
-		const auto& n0 = nodes.at(i);
-		const auto& n1 = nodes.at(i - 1);
+		const auto& n0 = nodes.at(i - 1);
+		const auto& n1 = nodes.at(i);
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
-		auto edge = std::make_shared<VoyageMesh_Edge>(i, n0, n1);
+		auto edge = std::make_shared<VoyageMesh_RefEdge>(i, n0, n1);
 		edges.push_back(std::move(edge));
 	}
 	return std::move(edges);
@@ -141,10 +151,11 @@ tnbLib::Voyage_Waypoints::Merge
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "Something went wrong." << endl
+			<< " - dist = " << theNode0.Coord().Distance(theNode1.Coord()) << endl
 			<< abort(FatalError);
 	}
 	auto pt = MEAN(theNode0.Coord(), theNode1.Coord());
-	auto node = std::make_shared<VoyageMesh_Node>(0, std::move(pt));
+	auto node = std::make_shared<VoyageMesh_RefNode>(0, std::move(pt));
 	return std::move(node);
 }
 
@@ -191,7 +202,7 @@ void tnbLib::Voyage_Waypoints::SetDeparture
 	auto node = edge->Node0();
 	Debug_Null_Pointer(node);
 	auto departure = std::make_shared<VoyageMesh_DepartureNode>(node->Index(), node->Coord());
-	edge->SetNode0(node);
+	edge->SetNode0(departure);
 }
 
 void tnbLib::Voyage_Waypoints::SetArrival
@@ -203,8 +214,8 @@ void tnbLib::Voyage_Waypoints::SetArrival
 	Debug_Null_Pointer(edge);
 	auto node = edge->Node1();
 	Debug_Null_Pointer(node);
-	auto departure = std::make_shared<VoyageMesh_DepartureNode>(node->Index(), node->Coord());
-	edge->SetNode1(node);
+	auto arrival = std::make_shared<VoyageMesh_ArrivalNode>(node->Index(), node->Coord());
+	edge->SetNode1(arrival);
 }
 
 void tnbLib::Voyage_Waypoints::Renumber
@@ -221,6 +232,12 @@ void tnbLib::Voyage_Waypoints::Renumber
 	}
 	Debug_Null_Pointer(theEdges.at(theEdges.size() - 1)->Node1());
 	theEdges.at(theEdges.size() - 1)->Node1()->SetIndex(++k);
+	k = 0;
+	for (const auto& x : theEdges)
+	{
+		Debug_Null_Pointer(x);
+		x->SetIndex(++k);
+	}
 }
 
 void tnbLib::Voyage_Waypoints::Perform()
@@ -291,7 +308,22 @@ void tnbLib::Voyage_Waypoints::Perform()
 		std::make_shared<VoyageMesh_OptNode_Altr>
 		(optNode_altr_alg, GetInfo()->SizeCorrIterInfo());
 
+	if (verbose)
+	{
+		Info << endl
+			<< " - The node calculator is created." << endl;
+	}
+	if (verbose)
+	{
+		Info << endl
+			<< " # Creating the reference edges..." << endl;
+	}
 	auto [starboard, port] = RetrieveEdges(polygons);
+	if (verbose)
+	{
+		Info << endl
+			<< " - The reference edges are created." << endl;
+	}
 	{// Starboard region [9/2/2023 Payvand]
 		auto alg = std::make_shared<Voyage_Mesh>();
 		Debug_Null_Pointer(alg);

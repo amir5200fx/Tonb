@@ -7,10 +7,132 @@
 #include <Geo_AdTree.hxx>
 #include <Geo_Tools.hxx>
 
+template<>
+void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
+{
+	if (theFactor < (Standard_Real)1.0)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Invalid Factor"
+			<< abort(FatalError);
+	}
+
+	if (frontData::IsGeometryEmpty())
+	{
+		return;
+	}
+
+	Debug_Null_Pointer(base::MetricMap());
+	const auto& sizeMap = *base::MetricMap();
+
+	std::vector<std::shared_ptr<VoyageMesh_Node>> nodes;
+	frontData::RetrieveFromGeometryTo(nodes);
+
+	for (auto& ptr : nodes)
+	{
+		Debug_Null_Pointer(ptr);
+		auto& node = *ptr;
+		const auto& pt = node.Coord();
+		std::cout << "node = " << node.Index() << std::endl;
+		auto fronts = node.RetrieveFrontEdges();
+		Debug_If_Condition(NOT fronts.size());
+
+		//- Retrieve max_length attached to the current node
+		Standard_Real maxLength = (Standard_Real)0.;
+		for (auto& w_entity : fronts)
+		{
+			Debug_Null_Pointer(w_entity.second.lock());
+			auto entity = w_entity.second.lock();
+
+			if (entity->CharLength() > maxLength)
+				maxLength = entity->CharLength();
+		}
+
+		//- Retrieve worst metric attached to the current node
+		auto Iter = fronts.begin();
+		auto M = Iter->second.lock()->EffectiveMetric();
+		Iter++;
+
+		while (Iter NOT_EQUAL fronts.end())
+		{
+			const auto& Mi = Iter->second.lock()->EffectiveMetric();
+			if (M.Determinant() < Mi.Determinant())
+			{
+				M = Entity2d_Metric1::UnionSR(M, Mi);
+			}
+			else
+			{
+				M = Entity2d_Metric1::UnionSR(Mi, M);
+			}
+			Iter++;
+		}
+
+		maxLength *= theFactor;
+		Debug_If_Condition_Message
+		(
+			maxLength <= (Standard_Real)0.,
+			" Invalid MaxLength Value"
+		);
+
+		//- save the max_length
+		node.SetRadius
+		(
+			MAX(node.Radius(), maxLength)
+		);
+
+		auto detM = M.Determinant();
+		//- save worst metric
+		if (node.Metric().Determinant() < detM)
+		{
+			node.SetMetric(Entity2d_Metric1::UnionSR(node.Metric(), M));
+		}
+		else
+		{
+			node.SetMetric(Entity2d_Metric1::UnionSR(M, node.Metric()));
+		}
+
+		//auto h = sizeMap.CalcElementSize(node.Coord());
+
+		std::vector<std::shared_ptr<VoyageMesh_Node>> locals;
+		frontData::GeometrySearch
+		(
+			sizeMap.CalcSearchRegion(MAX(maxLength, sizeMap.CalcElementSize(node.Coord())), M, node.Coord()),
+			locals
+		);
+
+		std::vector<std::shared_ptr<VoyageMesh_Node>> inners;
+		base::NodesInRadius
+		(
+			maxLength,
+			node.Coord(),
+			locals,
+			inners
+		);
+
+		for (auto& innerNode : inners)
+		{
+			innerNode->SetRadius
+			(
+				MAX(innerNode->Radius(), maxLength)
+			);
+
+			if (innerNode->Metric().Determinant() < detM)
+			{
+				innerNode->SetMetric(Entity2d_Metric1::UnionSR(innerNode->Metric(), M));
+			}
+			else
+			{
+				innerNode->SetMetric(Entity2d_Metric1::UnionSR(M, innerNode->Metric()));
+			}
+		}
+	}
+}
+
 void tnbLib::Voyage_Mesh::MeshOneLevel()
 {
+	PAUSE;
 	ModifyLocalFront(DEFAULT_LOCALFRONT_FACTOR);
-
+	PAUSE;
 	while (GetFrontEntity())
 	{
 		std::vector<std::shared_ptr<VoyageMesh_Node>>
@@ -245,21 +367,37 @@ void tnbLib::Voyage_Mesh::CheckPath
 		auto n1 = std::dynamic_pointer_cast<VoyageMesh_RefNode>(x->Node1());
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
-
 		if (n0->IsArrival() OR n0->IsDeparture())
 		{
-			continue;
+			// do nothing [9/3/2023 Payvand]
+		}
+		else
+		{
+			if (n0->NbFrontEdges() NOT_EQUAL 2)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "The edge is not manifold" << endl
+					<< " - n0 size: " << n0->NbFrontEdges() << endl
+					<< " - n1 size: " << n1->NbFrontEdges() << endl
+					<< abort(FatalError);
+			}
 		}
 		if (n1->IsArrival() OR n1->IsDeparture())
 		{
-			continue;
+			// do nothing [9/3/2023 Payvand]
 		}
-		if (n0->NbFrontEdges() NOT_EQUAL 2 OR n1->NbFrontEdges() NOT_EQUAL 2)
+		else
 		{
-			FatalErrorIn(FunctionSIG)
-				<< "The edge is not manifold" << endl
-				<< abort(FatalError);
+			if (n1->NbFrontEdges() NOT_EQUAL 2)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "The edge is not manifold" << endl
+					<< " - n0 size: " << n0->NbFrontEdges() << endl
+					<< " - n1 size: " << n1->NbFrontEdges() << endl
+					<< abort(FatalError);
+			}
 		}
+		
 	}
 }
 
@@ -310,6 +448,8 @@ void tnbLib::Voyage_Mesh::ActiveFronts
 		Debug_Null_Pointer(x);
 		const auto& n0 = x->Node0();
 		const auto& n1 = x->Node1();
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
 
 		n0->InsertToEdges(x->Index(), x);
 		n1->InsertToEdges(x->Index(), x);
@@ -329,7 +469,7 @@ void tnbLib::Voyage_Mesh::Perform()
 	ActiveFronts(RefPath());
 
 	Import(RefPath(), this->MetricMap());
-
+	
 	Mesh();
 
 	Change_IsDone() = Standard_True;

@@ -18,6 +18,9 @@ namespace tnbLib
 		Geo2d_SizeFunction,
 		Geo2d_MetricFunction
 		> VoyageMesh_Core;
+
+	template<>
+	TnbVoyage_EXPORT void VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor);
 }
 
 #endif // !_VoyageMesh_Core_Header

@@ -29,6 +29,7 @@ namespace tnbLib
 		VoyageMesh_FrontInfo, VoyageMesh_FrontGlobalData,
 		Geo2d_MetricFunction> VoyageMesh_Core;
 
+
 }
 
 #endif // !_VoyageMesh_CoreFwd_Header
