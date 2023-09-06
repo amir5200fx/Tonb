@@ -50,6 +50,7 @@ namespace tnbLib
 		auto Region() const { return theRegion_; }
 
 		virtual Standard_Boolean IsReference() const { return Standard_False; }
+		virtual Standard_Boolean IsTip() const { return Standard_True; }
 
 		void SetRegion(const Standard_Integer theValue) { theRegion_ = theValue; }
 	};

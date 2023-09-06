@@ -352,6 +352,9 @@
     <Filter Include="TnbLib\Voyage\SizeMap">
       <UniqueIdentifier>{43b47a24-a88d-43a2-9eb7-b029e2f8979b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\Ref">
+      <UniqueIdentifier>{c8dd670e-d8a9-4440-9d06-8aab2529a541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -663,6 +666,9 @@
     <ClInclude Include="TnbLib\Voyage\SizeMap\Voyage_SizeMap.hxx">
       <Filter>TnbLib\Voyage\SizeMap</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Ref\VoyageWP_Ref.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\Ref</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -799,6 +805,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\SizeMap\Voyage_SizeMap.cxx">
       <Filter>TnbLib\Voyage\SizeMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Ref\VoyageWP_Ref.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Ref</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -77,6 +77,13 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
 			);
 
+		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>>
+			RetrieveTipNodes
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
+			);
+
+		static std::vector<std::shared_ptr<VoyageMesh_Edge>> RetrieveRefEdges(const std::vector<std::shared_ptr<VoyageMesh_Element>>&);
 
 		static TnbVoyage_EXPORT std::shared_ptr<Voyage_Node> 
 			NeighborNode
