@@ -159,6 +159,39 @@ tnbLib::Voyage_Waypoints::Merge
 	return std::move(node);
 }
 
+std::vector<std::shared_ptr<tnbLib::VoyageMesh_Node>> 
+tnbLib::Voyage_Waypoints::RetrieveTipNodes
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements
+)
+{
+	std::vector<std::shared_ptr<VoyageMesh_Node>> nodes;
+	for (const auto& x : theElements)
+	{
+		Debug_Null_Pointer(x);
+		auto [n0, n1, n2] = x->Nodes();
+		Debug_Null_Pointer(n0);
+		if (n0->IsTip())
+		{
+			nodes.push_back(n0);
+			continue;
+		}
+		Debug_Null_Pointer(n1);
+		if (n1->IsTip())
+		{
+			nodes.push_back(n1);
+			continue;
+		}
+		Debug_Null_Pointer(n2);
+		if (n2->IsTip())
+		{
+			nodes.push_back(n2);
+			continue;
+		}
+	}
+	return std::move(nodes);
+}
+
 void tnbLib::Voyage_Waypoints::Merge
 (
 	VoyageMesh_Edge& theEdge0,
@@ -325,6 +358,9 @@ void tnbLib::Voyage_Waypoints::Perform()
 			<< " - The reference edges are created." << endl;
 	}
 	{// Starboard region [9/2/2023 Payvand]
+
+		optNode->SetMetricMap(starboard_metricPrcsr);
+
 		auto alg = std::make_shared<Voyage_Mesh>();
 		Debug_Null_Pointer(alg);
 		alg->LoadMetricMap(starboard_metricPrcsr);
@@ -343,6 +379,9 @@ void tnbLib::Voyage_Waypoints::Perform()
 		}
 	}
 	{// Port region [9/2/2023 Payvand]
+
+		optNode->SetMetricMap(port_metricPrcsr);
+
 		auto alg = std::make_shared<Voyage_Mesh>();
 		Debug_Null_Pointer(alg);
 		alg->LoadMetricMap(port_metricPrcsr);

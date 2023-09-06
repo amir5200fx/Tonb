@@ -1,10 +1,14 @@
 #include <Voyage_Tools.hxx>
 
 #include <VoyageGeo_VelocityBackground.hxx>
+#include <VoyageMesh_Element.hxx>
+#include <VoyageMesh_RefEdge.hxx>
+#include <VoyageMesh_Node.hxx>
 #include <VoyageGeo_Path2.hxx>
 #include <VoyageGeo_Earth.hxx>
 #include <Voyage_Edge.hxx>
 #include <Voyage_Node.hxx>
+#include <Aft_Tools.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMesh2d_Data.hxx>
 #include <Cad_GeomSurface.hxx>
@@ -12,6 +16,7 @@
 #include <Geo2d_DelTri.hxx>
 #include <Geo_BoxTools.hxx>
 #include <Geo_Tools.hxx>
+#include <Entity3d_Triangulation.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
@@ -32,6 +37,50 @@ tnbLib::Voyage_Tools::RetrieveDomain
 	auto bObj = theEarth.Surface()->ParametricBoundingBox();
 	auto t = std::make_shared<Entity2d_Box>(std::move(bObj));
 	return std::move(t);
+}
+
+std::vector<tnbLib::Pnt2d> 
+tnbLib::Voyage_Tools::RetrieveGeometry
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes
+)
+{
+	std::vector<Pnt2d> pnts;
+	pnts.reserve(theNodes.size());
+	for (const auto& x : theNodes)
+	{
+		Debug_Null_Pointer(x);
+		const auto& coord = x->Coord();
+		pnts.push_back(coord);
+	}
+	return std::move(pnts);
+}
+
+std::vector<tnbLib::Pnt3d> 
+tnbLib::Voyage_Tools::RetrieveGeometry3d
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes
+)
+{
+	std::vector<Pnt3d> pnts;
+	pnts.reserve(theNodes.size());
+	for (const auto& x : theNodes)
+	{
+		Debug_Null_Pointer(x);
+		pnts.push_back(x->Coord3D());
+	}
+	return std::move(pnts);
+}
+
+std::vector<tnbLib::connectivity::triple> 
+tnbLib::Voyage_Tools::RetrieveTriangleConnectivities
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes, 
+	const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements
+)
+{
+	auto ids = Aft_Tools::RetrieveTriangleConnectivities(theNodes, theElements);
+	return std::move(ids);
 }
 
 std::vector<std::shared_ptr<tnbLib::Voyage_Node>> 
@@ -55,6 +104,61 @@ tnbLib::Voyage_Tools::RetrieveNodes(const std::vector<std::shared_ptr<Voyage_Edg
 	std::copy(compact.begin(), compact.end(), std::back_inserter(nodes));
 	std::sort(nodes.begin(), nodes.end(), cmp);
 	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageMesh_Node>>
+tnbLib::Voyage_Tools::RetrieveNodes(const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements)
+{
+	static auto cmp = [](const std::shared_ptr<VoyageMesh_Node>& theNode0, const std::shared_ptr<VoyageMesh_Node>& theNode1)
+	{
+		Debug_Null_Pointer(theNode0);
+		Debug_Null_Pointer(theNode1);
+		return theNode0->Index() < theNode1->Index();
+	};
+	std::set<std::shared_ptr<VoyageMesh_Node>, decltype(cmp)> compact(cmp);
+	for (const auto& x : theElements)
+	{
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+		const auto& n2 = x->Node2();
+		compact.insert(n0);
+		compact.insert(n1);
+		compact.insert(n2);
+	}
+	std::vector<std::shared_ptr<VoyageMesh_Node>> nodes;
+	std::copy(compact.begin(), compact.end(), std::back_inserter(nodes));
+	std::sort(nodes.begin(), nodes.end(), cmp);
+	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageMesh_Edge>> 
+tnbLib::Voyage_Tools::RetrieveRefEdges
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements
+)
+{
+	std::vector<std::shared_ptr<VoyageMesh_Edge>> edges;
+	for (const auto& x : theElements)
+	{
+		Debug_Null_Pointer(x);
+		auto [e0, e1, e2] = x->Edges();
+		if (auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e0))
+		{
+			edges.push_back(ref);
+			continue;
+		}
+		if (auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e1))
+		{
+			edges.push_back(ref);
+			continue;
+		}
+		if (auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e2))
+		{
+			edges.push_back(ref);
+			continue;
+		}
+	}
+	return std::move(edges);
 }
 
 std::shared_ptr<tnbLib::Voyage_Node> 
@@ -335,4 +439,62 @@ Standard_Real
 tnbLib::Voyage_Tools::KtsToKmh(const Standard_Real x)
 {
 	return 1.852 * x;
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation> 
+tnbLib::Voyage_Tools::RetrieveTriangulation2d
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements
+)
+{
+	auto nodes = RetrieveNodes(theElements);
+	auto points = RetrieveGeometry(nodes);
+
+	auto indices = RetrieveTriangleConnectivities(nodes, theElements);
+
+	auto tri = 
+		std::make_shared<Entity2d_Triangulation>
+		(std::move(points), std::move(indices));
+	return std::move(tri);
+}
+
+std::shared_ptr<tnbLib::Entity3d_Triangulation> 
+tnbLib::Voyage_Tools::RetrieveTriangulation3d
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements
+)
+{
+	auto nodes = RetrieveNodes(theElements);
+	auto points = RetrieveGeometry3d(nodes);
+
+	auto indices = RetrieveTriangleConnectivities(nodes, theElements);
+
+	auto tri =
+		std::make_shared<Entity3d_Triangulation>
+		(std::move(points), std::move(indices));
+	return std::move(tri);
+}
+
+void tnbLib::Voyage_Tools::CalcCoord3d
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes,
+	const Cad_GeomSurface& theSurface
+)
+{
+	for (const auto& n : theNodes)
+	{
+		Debug_Null_Pointer(n);
+		n->SetCoord3D(theSurface.Value(n->Coord()));
+	}
+}
+
+void tnbLib::Voyage_Tools::CalcCoord3d
+(
+	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes, 
+	const VoyageGeo_Earth& theEarth
+)
+{
+	auto surface = theEarth.Surface();
+	Debug_Null_Pointer(surface);
+	CalcCoord3d(theNodes, *surface);
 }

@@ -6,8 +6,11 @@
 #include <Voyage_Module.hxx>
 #include <GeoMesh2d_SingleBackgroundFwd.hxx>
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
+#include <Entity3d_TriangulationFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Entity2d_BoxFwd.hxx>
+#include <Entity_Connectivity.hxx>
 #include <Vec2d.hxx>
 
 #include <memory>
@@ -19,6 +22,9 @@ namespace tnbLib
 {
 
 	// Forward Declarations [7/21/2023 Payvand]
+	class VoyageMesh_Element;
+	class VoyageMesh_Edge;
+	class VoyageMesh_Node;
 	class VoyageGeo_Path2;
 	class VoyageGeo_Earth;
 	class Voyage_Edge;
@@ -38,10 +44,46 @@ namespace tnbLib
 		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Box> 
 			RetrieveDomain(const VoyageGeo_Earth&);
 
+		static TnbVoyage_EXPORT std::vector<Pnt2d>
+			RetrieveGeometry
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Node>>&
+			);
+
+		static TnbVoyage_EXPORT std::vector<Pnt3d>
+			RetrieveGeometry3d
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Node>>&
+			);
+
+		static TnbVoyage_EXPORT std::vector<connectivity::triple>
+			RetrieveTriangleConnectivities
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Node>>&, 
+				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
+			);
+
 		// the nodes are sorted based on their indices 
 		// So the first node is departure and the last one is destination [7/21/2023 Payvand]
 		static TnbVoyage_EXPORT std::vector<std::shared_ptr<Voyage_Node>> 
-			RetrieveNodes(const std::vector<std::shared_ptr<Voyage_Edge>>&);
+			RetrieveNodes
+			(
+				const std::vector<std::shared_ptr<Voyage_Edge>>&
+			);
+
+		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>>
+			RetrieveNodes
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
+			);
+
+		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>>
+			RetrieveTipNodes
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
+			);
+
+		static std::vector<std::shared_ptr<VoyageMesh_Edge>> RetrieveRefEdges(const std::vector<std::shared_ptr<VoyageMesh_Element>>&);
 
 		static TnbVoyage_EXPORT std::shared_ptr<Voyage_Node> 
 			NeighborNode
@@ -112,6 +154,30 @@ namespace tnbLib
 
 		static Vec2d CalcRightsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
 		static Vec2d CalcLeftsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
+
+		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			RetrieveTriangulation2d
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
+			);
+
+		static TnbVoyage_EXPORT std::shared_ptr<Entity3d_Triangulation>
+			RetrieveTriangulation3d
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
+			);
+
+		static TnbVoyage_EXPORT void CalcCoord3d
+		(
+			const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes, 
+			const Cad_GeomSurface&
+		);
+
+		static TnbVoyage_EXPORT void CalcCoord3d
+		(
+			const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes, 
+			const VoyageGeo_Earth&
+		);
 
 		static TnbVoyage_EXPORT void SetSourcesToMesh
 		(

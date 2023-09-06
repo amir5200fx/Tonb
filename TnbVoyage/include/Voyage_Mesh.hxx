@@ -58,6 +58,8 @@ namespace tnbLib
 			const std::shared_ptr<VoyageMesh_MetricPrcsr>& theMetrics
 		);
 
+		TnbVoyage_EXPORT void InitFronts();
+
 		static TnbVoyage_EXPORT void ActiveFronts
 		(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&);
 

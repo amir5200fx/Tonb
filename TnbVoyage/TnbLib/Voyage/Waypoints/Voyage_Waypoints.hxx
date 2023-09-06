@@ -14,6 +14,8 @@ namespace tnbLib
 {
 
 	// Forward Declarations [9/2/2023 Payvand]
+	class VoyageMesh_Element;
+	class VoyageMesh_Node;
 	class Voyage_WptsGrid;
 	class Voyage_MetricInfo;
 	class VoyageMesh_Edge;
@@ -58,6 +60,12 @@ namespace tnbLib
 
 		static TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Node>
 			Merge(const VoyageMesh_Node&, const VoyageMesh_Node&);
+
+		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>>
+			RetrieveTipNodes
+			(
+				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
+			);
 
 		static TnbVoyage_EXPORT void Merge(VoyageMesh_Edge&, VoyageMesh_Edge&);
 		static TnbVoyage_EXPORT void Merge(const std::vector<std::shared_ptr<VoyageMesh_Edge>>&);

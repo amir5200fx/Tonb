@@ -40,6 +40,8 @@ namespace tnbLib
 		Standard_Boolean IsReference() const override { return Standard_True; }
 		Standard_Boolean IsBoundary() const override { return Standard_True; }
 
+		Standard_Boolean IsTip() const override { return Standard_False; }
+
 	};
 
 }
