@@ -161,6 +161,31 @@ tnbLib::Voyage_Tools::RetrieveRefEdges
 	return std::move(edges);
 }
 
+std::vector<std::shared_ptr<tnbLib::VoyageMesh_Node>>
+tnbLib::Voyage_Tools::RetrieveNodes(const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements)
+{
+	static auto cmp = [](const std::shared_ptr<VoyageMesh_Node>& theNode0, const std::shared_ptr<VoyageMesh_Node>& theNode1)
+	{
+		Debug_Null_Pointer(theNode0);
+		Debug_Null_Pointer(theNode1);
+		return theNode0->Index() < theNode1->Index();
+	};
+	std::set<std::shared_ptr<VoyageMesh_Node>, decltype(cmp)> compact(cmp);
+	for (const auto& x : theElements)
+	{
+		const auto& n0 = x->Node0();
+		const auto& n1 = x->Node1();
+		const auto& n2 = x->Node2();
+		compact.insert(n0);
+		compact.insert(n1);
+		compact.insert(n2);
+	}
+	std::vector<std::shared_ptr<VoyageMesh_Node>> nodes;
+	std::copy(compact.begin(), compact.end(), std::back_inserter(nodes));
+	std::sort(nodes.begin(), nodes.end(), cmp);
+	return std::move(nodes);
+}
+
 std::shared_ptr<tnbLib::Voyage_Node> 
 tnbLib::Voyage_Tools::NeighborNode
 (
