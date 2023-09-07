@@ -355,6 +355,27 @@
     <Filter Include="TnbLib\Voyage\Waypoints\Ref">
       <UniqueIdentifier>{c8dd670e-d8a9-4440-9d06-8aab2529a541}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\OffsetProfile">
+      <UniqueIdentifier>{b5c0a9e9-9766-4896-ab96-eadfde3aa342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\OffsetProfile\Segment">
+      <UniqueIdentifier>{8840edbb-0b53-46c8-a250-12e1c3e7296d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\OffsetProfile\Curve">
+      <UniqueIdentifier>{69418b8c-1d78-4922-bc13-c7c1802ce7e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\Offset">
+      <UniqueIdentifier>{3282851c-bc56-4c45-a9c1-f336ce2dd71d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\PointDistb">
+      <UniqueIdentifier>{e8388152-d66f-41c9-97ef-8924230fe088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\Dist">
+      <UniqueIdentifier>{caeabc43-8b1b-45e7-8712-bcb687b02d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\Net">
+      <UniqueIdentifier>{6bb4e718-9bbd-466d-b9a9-fa591aed68fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -669,6 +690,24 @@
     <ClInclude Include="TnbLib\Voyage\Waypoints\Ref\VoyageWP_Ref.hxx">
       <Filter>TnbLib\Voyage\Waypoints\Ref</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Offset\VoyageWP_Offset.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\Offset</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\OffsetProfile\Voyage_OffsetProfile.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\OffsetProfile</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\OffsetProfile\Segment\Voyage_OffsetProfile_Segment.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\OffsetProfile\Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistb.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\PointDistb</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Dist\VoaygeWP_Dist.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\Dist</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_Net.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\Net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -808,6 +847,21 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Waypoints\Ref\VoyageWP_Ref.cxx">
       <Filter>TnbLib\Voyage\Waypoints\Ref</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Offset\VoyageWP_Offset.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\OffsetProfile\Segment\Voyage_OffsetProfile_Segment.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\OffsetProfile\Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistb.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\PointDistb</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Dist\VoaygeWP_Dist.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Dist</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_Net.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

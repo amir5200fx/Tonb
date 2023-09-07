@@ -147,6 +147,12 @@ namespace tnbLib
 		static TnbVoyage_EXPORT Pnt2d ConvertToUV(const Pnt2d&);
 		static TnbVoyage_EXPORT Pnt2d ConvertToVoyageSystem(const Pnt2d&);
 
+		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			ConvertToVoyageSystem
+			(
+				const Entity2d_Triangulation&
+			);
+
 		static TnbVoyage_EXPORT Standard_Real KtsToKmh(const Standard_Real);
 
 		// The route angle is greater than zero if the route turns to the left and is less than zero if turns to the right [8/5/2023 Payvand]

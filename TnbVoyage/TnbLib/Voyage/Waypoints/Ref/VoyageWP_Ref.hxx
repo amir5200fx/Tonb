@@ -2,7 +2,10 @@
 #ifndef _VoyageWP_Ref_Header
 #define _VoyageWP_Ref_Header
 
+#include <Voyage_Module.hxx>
 #include <Pnt2d.hxx>
+#include <Dir2d.hxx>
+#include <Global_Done.hxx>
 #include <Global_Indexed.hxx>
 
 #include <vector>
@@ -14,22 +17,25 @@ namespace tnbLib
 	// Forward Declarations [9/5/2023 aamir]
 	class VoyageMesh_Element;
 	class VoyageMesh_Edge;
+	class VoyageMesh_Node;
 
 	class VoyageWP_Ref
+		: public Global_Done
 	{
 
 	public:
 
-		struct RefEnt
+		/*struct RefEnt
 		{
 			std::pair
 				<
 				std::shared_ptr<VoyageMesh_Edge>, 
 				std::shared_ptr<VoyageMesh_Edge>
 				> entity;
-		};
+		};*/
 
 		typedef std::vector<std::shared_ptr<VoyageMesh_Element>> ElmList;
+		typedef std::vector<std::shared_ptr<VoyageMesh_Edge>> EdgeList;
 
 		// Forward Declarations [9/5/2023 aamir]
 		class SupEdge;
@@ -71,6 +77,8 @@ namespace tnbLib
 			virtual Standard_Boolean IsDeparture() const { return Standard_False; }
 			virtual Standard_Boolean IsArrival() const { return Standard_False; }
 
+			virtual Dir2d CalcTangent() const = 0;
+
 			const auto& Coord() const { return theCoord_; }
 
 			void SetCoord(const Pnt2d& theCoord) { theCoord_ = theCoord; }
@@ -107,6 +115,10 @@ namespace tnbLib
 			// Public functions and operators [9/5/2023 aamir]
 
 			Standard_Boolean IsInterior() const override { return Standard_True; }
+
+			Dir2d CalcTangent() const override;
+			Pnt2d CalcStarOffset() const;
+			Pnt2d CalcPortOffset() const;
 
 			const auto& Forward() const { return theForward_; }
 			const auto& Backward() const { return theBackward_; }
@@ -174,6 +186,8 @@ namespace tnbLib
 
 			Standard_Boolean IsDeparture() const override { return Standard_True; }
 
+			TnbVoyage_EXPORT Dir2d CalcTangent() const override;
+
 			const auto& Forward() const { return theForward_; }
 
 			void SetForward(const std::weak_ptr<SupEdge>& theEdge) { theForward_ = theEdge; }
@@ -208,6 +222,8 @@ namespace tnbLib
 			// Public functions and operators [9/5/2023 aamir]
 
 			Standard_Boolean IsArrival() const override { return Standard_True; }
+
+			TnbVoyage_EXPORT Dir2d CalcTangent() const override;
 
 			const auto& Backward() const { return theBackward_; }
 
@@ -252,19 +268,27 @@ namespace tnbLib
 			const auto& Node0() const { return theNode0_; }
 			const auto& Node1() const { return theNode1_; }
 
+			const auto& Starboard() const { return theStarboard_; }
+			const auto& Port() const { return thePort_; }
+
+			TnbVoyage_EXPORT Dir2d CalcTangent() const;
+
 			void SetNode0(const std::shared_ptr<SupNode>& theNode) { theNode0_ = theNode; }
 			void SetNode1(const std::shared_ptr<SupNode>& theNode) { theNode1_ = theNode; }
 
-
+			void SetStarboard(const std::shared_ptr<VoyageMesh_Edge>& theEdge) { theStarboard_ = theEdge; }
+			void SetPort(const std::shared_ptr<VoyageMesh_Edge>& theEdge) { thePort_ = theEdge; }
 		};
 
 	private:
 
 		/*Private Data*/
 
-		std::vector<std::shared_ptr<RefEnt>> theEntities_;
+		std::vector<std::shared_ptr<SupEdge>> theEntities_;
 
 	public:
+
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_TOL;
 
 		// default constructor [9/5/2023 aamir]
 
@@ -277,9 +301,21 @@ namespace tnbLib
 
 		const auto& Entities() const { return theEntities_; }
 
+		TnbVoyage_EXPORT std::shared_ptr<SupNode> Departure() const;
+		TnbVoyage_EXPORT std::shared_ptr<SupNode> Arrival() const;
+
 		// Static functions and operators [9/5/2023 aamir]
 
-		void CalcReference(const ElmList& theStarboard, const ElmList& thePort);
+		TnbVoyage_EXPORT void CalcReference(const EdgeList& theStarboard, const EdgeList& thePort);
+
+
+		// Static functions and operators [9/6/2023 aamir]
+
+		static TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Element> RetrieveStarElement(const SupEdge&);
+		static TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Element> RetrievePortElement(const SupEdge&);
+
+		static TnbVoyage_EXPORT Pnt2d FirstCoord(const SupEdge&);
+		static TnbVoyage_EXPORT Pnt2d SecondCoord(const SupEdge&);
 
 	};
 

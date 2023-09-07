@@ -1,5 +1,7 @@
 #include <Voyage_Waypoints.hxx>
 #define FULLDEBUG
+#include <VoyageWP_Ref.hxx>
+#include <VoyageWP_Offset.hxx>
 #include <Voyage_MetricInfo.hxx>
 #include <Voyage_Mesh.hxx>
 #include <Voyage_Tools.hxx>
@@ -275,6 +277,13 @@ void tnbLib::Voyage_Waypoints::Renumber
 
 void tnbLib::Voyage_Waypoints::Perform()
 {
+	typedef std::shared_ptr<VoyageMesh_Element> elm_ptr;
+	static auto cmp = [](const elm_ptr& elm0, const elm_ptr& elm1)
+	{
+		Debug_Null_Pointer(elm0);
+		Debug_Null_Pointer(elm1);
+		return elm0->Index() < elm1->Index();
+	};
 	if (NOT Path())
 	{
 		FatalErrorIn(FunctionSIG) << endl
@@ -377,6 +386,15 @@ void tnbLib::Voyage_Waypoints::Perform()
 			Info << endl
 				<< " - The starboard side is successfully meshed, in " << global_time_duration << " ms." << endl;
 		}
+		const auto& elemMap = alg->RetrieveElements();
+		std::vector<std::shared_ptr<VoyageMesh_Element>> elements;
+		elements.reserve(elemMap.size());
+		for (const auto& x : elemMap)
+		{
+			elements.push_back(x.second);
+		}
+		std::sort(elements.begin(), elements.end(), cmp);
+		theStarMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements);
 	}
 	{// Port region [9/2/2023 Payvand]
 
@@ -398,5 +416,28 @@ void tnbLib::Voyage_Waypoints::Perform()
 			Info << endl
 				<< " - The port side is successfully meshed, in " << global_time_duration << " ms." << endl;
 		}
+		const auto& elemMap = alg->RetrieveElements();
+		std::vector<std::shared_ptr<VoyageMesh_Element>> elements;
+		elements.reserve(elemMap.size());
+		for (const auto& x : elemMap)
+		{
+			elements.push_back(x.second);
+		}
+		std::sort(elements.begin(), elements.end(), cmp);
+		thePortMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements);
 	}
+	//- Create the voyage ref.
+	auto alg_ref = std::make_shared<VoyageWP_Ref>();
+	Debug_Null_Pointer(alg_ref);
+	alg_ref->CalcReference(starboard, port);
+	Debug_If_Condition_Message(NOT alg_ref->IsDone(), "the application is not performed.");
+
+	//- Create the offset points
+	auto alg_offsets = std::make_shared<VoyageWP_Offset>();
+	Debug_Null_Pointer(alg_offsets);
+	alg_offsets->CalcOffsets(*alg_ref);
+	Debug_If_Condition_Message(NOT alg_offsets->IsDone(), "the application is not performed.");
+
+
+	Change_IsDone() = Standard_True;
 }

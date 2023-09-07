@@ -85,13 +85,6 @@ namespace tnbLib
 
 		static std::vector<std::shared_ptr<VoyageMesh_Edge>> RetrieveRefEdges(const std::vector<std::shared_ptr<VoyageMesh_Element>>&);
 
-		static TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageMesh_Node>>
-			RetrieveNodes
-			(
-				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
-			);
-
-
 		static TnbVoyage_EXPORT std::shared_ptr<Voyage_Node> 
 			NeighborNode
 			(
@@ -153,6 +146,12 @@ namespace tnbLib
 		// Convert the standard voyage coordinates to the parametric coordinates [8/27/2023 aamir]
 		static TnbVoyage_EXPORT Pnt2d ConvertToUV(const Pnt2d&);
 		static TnbVoyage_EXPORT Pnt2d ConvertToVoyageSystem(const Pnt2d&);
+
+		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Triangulation> 
+			ConvertToVoyageSystem
+			(
+				const Entity2d_Triangulation&
+			);
 
 		static TnbVoyage_EXPORT Standard_Real KtsToKmh(const Standard_Real);
 

@@ -161,30 +161,30 @@ tnbLib::Voyage_Tools::RetrieveRefEdges
 	return std::move(edges);
 }
 
-std::vector<std::shared_ptr<tnbLib::VoyageMesh_Node>>
-tnbLib::Voyage_Tools::RetrieveNodes(const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements)
-{
-	static auto cmp = [](const std::shared_ptr<VoyageMesh_Node>& theNode0, const std::shared_ptr<VoyageMesh_Node>& theNode1)
-	{
-		Debug_Null_Pointer(theNode0);
-		Debug_Null_Pointer(theNode1);
-		return theNode0->Index() < theNode1->Index();
-	};
-	std::set<std::shared_ptr<VoyageMesh_Node>, decltype(cmp)> compact(cmp);
-	for (const auto& x : theElements)
-	{
-		const auto& n0 = x->Node0();
-		const auto& n1 = x->Node1();
-		const auto& n2 = x->Node2();
-		compact.insert(n0);
-		compact.insert(n1);
-		compact.insert(n2);
-	}
-	std::vector<std::shared_ptr<VoyageMesh_Node>> nodes;
-	std::copy(compact.begin(), compact.end(), std::back_inserter(nodes));
-	std::sort(nodes.begin(), nodes.end(), cmp);
-	return std::move(nodes);
-}
+//std::vector<std::shared_ptr<tnbLib::VoyageMesh_Node>>
+//tnbLib::Voyage_Tools::RetrieveNodes(const std::vector<std::shared_ptr<VoyageMesh_Element>>& theElements)
+//{
+//	static auto cmp = [](const std::shared_ptr<VoyageMesh_Node>& theNode0, const std::shared_ptr<VoyageMesh_Node>& theNode1)
+//	{
+//		Debug_Null_Pointer(theNode0);
+//		Debug_Null_Pointer(theNode1);
+//		return theNode0->Index() < theNode1->Index();
+//	};
+//	std::set<std::shared_ptr<VoyageMesh_Node>, decltype(cmp)> compact(cmp);
+//	for (const auto& x : theElements)
+//	{
+//		const auto& n0 = x->Node0();
+//		const auto& n1 = x->Node1();
+//		const auto& n2 = x->Node2();
+//		compact.insert(n0);
+//		compact.insert(n1);
+//		compact.insert(n2);
+//	}
+//	std::vector<std::shared_ptr<VoyageMesh_Node>> nodes;
+//	std::copy(compact.begin(), compact.end(), std::back_inserter(nodes));
+//	std::sort(nodes.begin(), nodes.end(), cmp);
+//	return std::move(nodes);
+//}
 
 std::shared_ptr<tnbLib::Voyage_Node> 
 tnbLib::Voyage_Tools::NeighborNode
@@ -458,6 +458,26 @@ tnbLib::Voyage_Tools::ConvertToVoyageSystem(const Pnt2d& thePt)
 	auto x = Geo_Tools::RadianToDegree(thePt.Y());
 	auto y = Geo_Tools::RadianToDegree(thePt.X() - PI);
 	return { x,y };
+}
+
+std::shared_ptr<tnbLib::Entity2d_Triangulation> 
+tnbLib::Voyage_Tools::ConvertToVoyageSystem
+(
+	const Entity2d_Triangulation& theTriangulation
+)
+{
+	auto indices = theTriangulation.Connectivity();
+	std::vector<Pnt2d> coords;
+	coords.reserve(theTriangulation.NbPoints());
+	for (const auto& x : theTriangulation.Points())
+	{
+		auto pt = ConvertToVoyageSystem(x);
+		coords.push_back(std::move(pt));
+	}
+	auto tri = 
+		std::make_shared<Entity2d_Triangulation>
+		(std::move(coords), std::move(indices));
+	return std::move(tri);
 }
 
 Standard_Real 

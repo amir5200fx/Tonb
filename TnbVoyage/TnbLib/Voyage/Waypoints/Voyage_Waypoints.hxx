@@ -5,6 +5,7 @@
 #include <Voyage_PathDir.hxx>
 #include <Voyage_Module.hxx>
 #include <Geo2d_SizeFunctionFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_Done.hxx>
 
@@ -18,6 +19,7 @@ namespace tnbLib
 	class VoyageMesh_Node;
 	class Voyage_WptsGrid;
 	class Voyage_MetricInfo;
+	class Voyage_OffsetProfile;
 	class VoyageMesh_Edge;
 	class VoyageMesh_Node;
 	class VoyageGeo_Path2;
@@ -33,12 +35,17 @@ namespace tnbLib
 		std::shared_ptr<Geo2d_SizeFunction> theStarboardSize_;
 		std::shared_ptr<Geo2d_SizeFunction> thePortSize_;
 
+		std::shared_ptr<Voyage_OffsetProfile> theProfile_;
+
 		std::shared_ptr<Voyage_MetricInfo> theInfo_;
 
 
 		// results [9/2/2023 Payvand]
 
 		std::shared_ptr<Voyage_WptsGrid> theGrid_;
+
+		std::shared_ptr<Entity2d_Triangulation> theStarMesh_;
+		std::shared_ptr<Entity2d_Triangulation> thePortMesh_;
 
 		// Private functions and operators [9/2/2023 Payvand]
 
@@ -89,9 +96,13 @@ namespace tnbLib
 		const auto& Path() const { return thePath_; }
 		const auto& StarboardSizeFunction() const { return theStarboardSize_; }
 		const auto& PortSizeFunction() const { return thePortSize_; }
+		const auto& Profile() const { return theProfile_; }
 		const auto& GetInfo() const { return theInfo_; }
 
 		const auto& Grid() const { return theGrid_; }
+
+		const auto& StarMesh() const { return theStarMesh_; }
+		const auto& PortMesh() const { return thePortMesh_; }
 
 		TnbVoyage_EXPORT void Perform();
 
