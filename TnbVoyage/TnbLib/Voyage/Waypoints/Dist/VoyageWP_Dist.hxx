@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _VoaygeWP_Dist_Header
-#define _VoaygeWP_Dist_Header
+#ifndef _VoyageWP_Dist_Header
+#define _VoyageWP_Dist_Header
 
 #include <Entity2d_PolygonFwd.hxx>
 #include <Pnt2d.hxx>
@@ -17,7 +17,7 @@ namespace tnbLib
 	class Mesh_Curve_Info;
 	class Geo_MetricPrcsrAnIso_Info;
 
-	class VoaygeWP_Dist
+	class VoyageWP_Dist
 		: public Global_Done
 	{
 
@@ -41,7 +41,7 @@ namespace tnbLib
 
 		//- default constructor
 
-		VoaygeWP_Dist()
+		VoyageWP_Dist()
 			: theMaxSubLev_(0)
 		{}
 
@@ -78,4 +78,4 @@ namespace tnbLib
 
 }
 
-#endif // !_VoaygeWP_Dist_Header
+#endif // !_VoyageWP_Dist_Header

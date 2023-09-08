@@ -3,6 +3,7 @@
 #define _VoyageWP_Net_Header
 
 #include <Voyage_Module.hxx>
+#include <Entity2d_PolygonFwd.hxx>
 #include <Pnt2d.hxx>
 #include <Global_Indexed.hxx>
 
@@ -260,6 +261,11 @@ namespace tnbLib
 
 		const auto& Nodes() const { return theNodes_; }
 		auto& NodesRef() { return theNodes_; }
+
+		std::vector<std::shared_ptr<Node>> Waypoints(const Standard_Integer theIndex) const;
+		std::vector<std::shared_ptr<Node>> RetrieveWaypoints(const Standard_Integer theIndex, const Standard_Integer fromStar, const Standard_Integer toPort);
+
+		static std::shared_ptr<Entity2d_Polygon> RetrieveCoords(const std::vector<std::shared_ptr<Node>>&);
 
 	};
 

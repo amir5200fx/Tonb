@@ -1,4 +1,4 @@
-#include <VoaygeWP_Dist.hxx>
+#include <VoyageWP_Dist.hxx>
 
 #include <VoyageGeo_Earth.hxx>
 #include <Mesh2d_CurveAnIso.hxx>
@@ -10,7 +10,7 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
-void tnbLib::VoaygeWP_Dist::Perform()
+void tnbLib::VoyageWP_Dist::Perform()
 {
 	if (NOT Earth())
 	{

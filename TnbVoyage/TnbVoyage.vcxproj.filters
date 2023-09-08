@@ -376,6 +376,15 @@
     <Filter Include="TnbLib\Voyage\Waypoints\Net">
       <UniqueIdentifier>{6bb4e718-9bbd-466d-b9a9-fa591aed68fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Waypoints\Connect">
+      <UniqueIdentifier>{abcef9a8-183a-4c81-acd7-51da8bc8a28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Optimize">
+      <UniqueIdentifier>{e52fa31a-a4e8-427c-94d1-2e187b7acfed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Optimize\Resistance">
+      <UniqueIdentifier>{0c762167-ce13-4cbd-8751-672e868877d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -702,11 +711,17 @@
     <ClInclude Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistb.hxx">
       <Filter>TnbLib\Voyage\Waypoints\PointDistb</Filter>
     </ClInclude>
-    <ClInclude Include="TnbLib\Voyage\Waypoints\Dist\VoaygeWP_Dist.hxx">
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Dist\VoyageWP_Dist.hxx">
       <Filter>TnbLib\Voyage\Waypoints\Dist</Filter>
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_Net.hxx">
       <Filter>TnbLib\Voyage\Waypoints\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\Connect</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Optimize\Voyage_Optimize.hxx">
+      <Filter>TnbLib\Voyage\Optimize</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -857,11 +872,14 @@
     <ClCompile Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistb.cxx">
       <Filter>TnbLib\Voyage\Waypoints\PointDistb</Filter>
     </ClCompile>
-    <ClCompile Include="TnbLib\Voyage\Waypoints\Dist\VoaygeWP_Dist.cxx">
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Dist\VoyageWP_Dist.cxx">
       <Filter>TnbLib\Voyage\Waypoints\Dist</Filter>
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_Net.cxx">
       <Filter>TnbLib\Voyage\Waypoints\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Connect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
