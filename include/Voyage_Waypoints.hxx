@@ -5,6 +5,7 @@
 #include <Voyage_PathDir.hxx>
 #include <Voyage_Module.hxx>
 #include <Geo2d_SizeFunctionFwd.hxx>
+#include <Entity2d_TriangulationFwd.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Global_Done.hxx>
 
@@ -39,6 +40,9 @@ namespace tnbLib
 		// results [9/2/2023 Payvand]
 
 		std::shared_ptr<Voyage_WptsGrid> theGrid_;
+
+		std::shared_ptr<Entity2d_Triangulation> theStarMesh_;
+		std::shared_ptr<Entity2d_Triangulation> thePortMesh_;
 
 		// Private functions and operators [9/2/2023 Payvand]
 
@@ -92,6 +96,9 @@ namespace tnbLib
 		const auto& GetInfo() const { return theInfo_; }
 
 		const auto& Grid() const { return theGrid_; }
+
+		const auto& StarMesh() const { return theStarMesh_; }
+		const auto& PortMesh() const { return thePortMesh_; }
 
 		TnbVoyage_EXPORT void Perform();
 

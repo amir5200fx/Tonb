@@ -199,6 +199,12 @@ int main()
 	wayPoints->SetStarboardSizeFunction(sizeMap->Startboard());
 	wayPoints->Perform();
 
+	OFstream triFile("triangle.plt");
+	{// plot the starboard mesh [9/6/2023 aamir]
+		const auto mesh = Voyage_Tools::ConvertToVoyageSystem(*wayPoints->StarMesh());
+		mesh->ExportToPlt(triFile);
+	}
+
 	return 1;
 
 	auto metricsFun = earth->GetMetrics();
