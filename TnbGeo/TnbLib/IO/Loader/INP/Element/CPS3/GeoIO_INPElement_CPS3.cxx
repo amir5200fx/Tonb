@@ -26,7 +26,10 @@ namespace tnbLib
 		string comma;
 
 		is >> id >> comma >> i0 >> comma >> i1 >> comma >> i2;
-
+		{// flush the line [9/6/2023 aamir]
+			std::string line;
+			std::getline(is, line);
+		}
 		elm = GeoIO_INPElement_CPS3(id, { i0,i1,i2 });
 		if (is.fail())
 		{

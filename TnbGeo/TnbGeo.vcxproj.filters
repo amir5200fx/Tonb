@@ -1108,6 +1108,12 @@
     <Filter Include="TnbLib\IO\Loader\INP\Point">
       <UniqueIdentifier>{6368da2f-e8ce-4d60-aa1d-c9acd6090456}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\IO\Writer">
+      <UniqueIdentifier>{879147d8-8f91-4942-a6c7-de7b7170bd8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\IO\Writer\OBJ">
+      <UniqueIdentifier>{2b51d187-f766-4aba-a3a9-153190cf48dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2538,6 +2544,9 @@
     <ClInclude Include="TnbLib\IO\Loader\INP\Point\GeoIO_INPPoint.hxx">
       <Filter>TnbLib\IO\Loader\INP\Point</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\IO\Writer\_OBJ\GeoIO_Writer_OBJ.hxx">
+      <Filter>TnbLib\IO\Writer\OBJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3220,6 +3229,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\IO\Loader\INP\GeoIO_Loader_INP.cxx">
       <Filter>TnbLib\IO\Loader\INP</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\Writer\_OBJ\GeoIO_Writer_OBJ.cxx">
+      <Filter>TnbLib\IO\Writer\OBJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,11 @@ namespace tnbLib
 		Standard_Integer id, i0, i1;
 		string comma;
 		is >> id >> comma >> i0 >> comma >> i1 >> comma;
-
+		std::cout << id << ", " << i0 << ", " << i1 << std::endl;
+		{// flush the line [9/6/2023 aamir]
+			std::string line;
+			std::getline(is, line);
+		}
 		elm = GeoIO_INPElement_B31(id, { i0,i1 });
 		if (is.fail())
 		{

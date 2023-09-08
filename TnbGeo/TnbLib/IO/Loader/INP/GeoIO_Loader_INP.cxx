@@ -4,6 +4,7 @@
 #include <GeoIO_INPElement_CPS3.hxx>
 #include <GeoIO_INPPoint.hxx>
 #include <IStringStream.hxx>
+#include <token.hxx>
 
 void tnbLib::GeoIO_Loader_INP::ReadNodes(std::istream& is)
 {
@@ -33,17 +34,19 @@ void tnbLib::GeoIO_Loader_INP::ReadNodes(std::istream& is)
 std::vector<std::shared_ptr<tnbLib::GeoIO_INPElement>> 
 tnbLib::GeoIO_Loader_INP::ReadElements(std::istream& is, const ElmType t)
 {
-	std::string line;
-	std::streampos lineStartPos = is.tellg();
 	std::vector<std::shared_ptr<GeoIO_INPElement>> elements;
-	while (std::getline(is, line))
+	while (true)
 	{
+		std::streampos lineStartPos = is.tellg();
+		std::string line;
+		std::getline(is, line);
+		std::cout << " line 0 : " << line << " size: " << line.size() << std::endl;
 		if (line.empty() OR line.at(0) == '*')
 		{
 			is.seekg(lineStartPos);
 			break;
 		}
-		lineStartPos = is.tellg();
+		is.seekg(lineStartPos);	
 		switch (t)
 		{
 		case ElmType::B31:
@@ -74,32 +77,46 @@ tnbLib::GeoIO_Loader_INP::ReadElementGroup(std::istream& is)
 	std::string line;
 	std::streampos lineStartPos = is.tellg();
 	std::vector<Standard_Integer> elements;
-	while (std::getline(is, line))
+	while (true)
 	{
+		std::getline(is, line);
 		if (line.empty() OR line.at(0) == '*')
 		{
 			is.seekg(lineStartPos);
 			break;
 		}
 		lineStartPos = is.tellg();
-
-		Standard_Integer id;
+		{// read the integers [9/6/2023 aamir]
+			std::stringstream ss(line);
+			std::string entity;
+			while (std::getline(ss, entity, ','))
+			{			
+				auto num = Trim(entity);
+				if(NOT num.empty())
+				{
+					std::cout << " ent = " << num << std::endl;
+					elements.push_back(std::stoi(num));
+				}
+			}
+		}
+		/*Standard_Integer id;
 		std::string comma;
 		is >> id;
+		std::cout << " id = " << id << std::endl;
 		if (is.fail())
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "Unable to read an integer" << endl
 				<< abort(FatalError);
 		}
-		is >> comma;
+		is >> comma;*/
 		if (is.fail())
 		{
 			FatalErrorIn(FunctionSIG)
 				<< "Unable to read a character" << endl
 				<< abort(FatalError);
 		}
-		elements.push_back(id);
+		//elements.push_back(id);
 	}
 	return std::move(elements);
 }
@@ -198,7 +215,7 @@ tnbLib::GeoIO_Loader_INP::GeoIO_Loader_INP(std::istream& is)
 	is >> *this;
 }
 
-const std::string tnbLib::GeoIO_Loader_INP::extension = "inpLoader";
+const std::string tnbLib::GeoIO_Loader_INP::extension = ".inpLoader";
 
 std::istream& 
 tnbLib::operator>>(std::istream& is, GeoIO_Loader_INP& inp)
@@ -207,7 +224,11 @@ tnbLib::operator>>(std::istream& is, GeoIO_Loader_INP& inp)
 		std::string line;
 		std::getline(is, line);
 		auto entities = GeoIO_Loader_INP::ParseLine(line);
-		if (GeoIO_Loader_INP::Trim(entities.at(0)) NOT_EQUAL "*NODE")
+		for (const auto& x : entities)
+		{
+			std::cout << x << std::endl;
+		}
+		if (GeoIO_Loader_INP::Trim(entities.at(0)) IS_EQUAL "*NODE")
 		{
 			inp.ReadNodes(is);
 		}
@@ -226,12 +247,22 @@ tnbLib::operator>>(std::istream& is, GeoIO_Loader_INP& inp)
 			std::string line;
 			std::getline(is, line);
 			auto entities = GeoIO_Loader_INP::ParseLine(line);
+			for (const auto& x : entities)
+			{
+				std::cout << x << std::endl;
+			}
 			if (entities.size() NOT_EQUAL 3)
 			{
+				if (GeoIO_Loader_INP::Trim(entities.at(0)) IS_EQUAL "*ELSET")
+				{
+					is.seekg(lineStartPos);
+					break;
+				}
 				FatalErrorIn(FunctionSIG)
 					<< "invalid header for the element list has been detected." << endl
 					<< abort(FatalError);
 			}
+			std::cout << "element type = " << GeoIO_Loader_INP::Trim(entities.at(0)) << std::endl;
 			if (GeoIO_Loader_INP::Trim(entities.at(0)) IS_EQUAL "*ELEMENT")
 			{
 				auto elemType = GeoIO_Loader_INP::ParseElementType(entities.at(1));
@@ -274,6 +305,10 @@ tnbLib::operator>>(std::istream& is, GeoIO_Loader_INP& inp)
 			auto entities = GeoIO_Loader_INP::ParseLine(line);
 			if (entities.size() NOT_EQUAL 2)
 			{
+				if (entities.empty())
+				{
+					break;
+				}
 				FatalErrorIn(FunctionSIG)
 					<< "invalid header for the element set has been detected." << endl
 					<< abort(FatalError);
