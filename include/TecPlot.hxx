@@ -38,6 +38,13 @@ namespace tnbLib
 			OFstream& theFile
 		);
 
+		TnbGeo_EXPORT void WriteFeQuadrilateralZone
+		(
+			const Standard_Integer NbNodes,
+			const Standard_Integer NbTriangles,
+			OFstream& theFile
+		);
+
 		TnbGeo_EXPORT void WriteFeTetrahedralZone
 		(
 			const Standard_Integer NbNodes,
@@ -110,6 +117,13 @@ namespace tnbLib
 		(
 			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::triple>& Triangles,
+			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt2d>& thePoints, 
+			const std::vector<connectivity::quadruple>& theElements,
 			OFstream& File
 		);
 

@@ -1,0 +1,10 @@
+setVerbose(1);
+
+setClusterSize(5);
+setRate(1.3);
+
+loadFiles();
+
+execute();
+
+saveTo("bndLayer");

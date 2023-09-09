@@ -7,6 +7,7 @@
 #include <Global_Done.hxx>
 
 #include <memory>
+#include <vector>
 
 namespace tnbLib
 {
@@ -25,7 +26,7 @@ namespace tnbLib
 
 		// results [8/30/2023 aamir]
 
-		std::shared_ptr<Entity2d_Polygon> theOffset_;
+		std::vector<std::shared_ptr<Entity2d_Polygon>> theOffsets_;
 
 	public:
 
@@ -50,7 +51,7 @@ namespace tnbLib
 
 		auto MaxOffset() const { return theMaxOffset_; }
 
-		const auto& Offset() const { return theOffset_; }
+		const auto& Offsets() const { return theOffsets_; }
 
 		TnbGeo_EXPORT void Perform();
 
