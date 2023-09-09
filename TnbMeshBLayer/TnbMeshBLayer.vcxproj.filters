@@ -76,6 +76,12 @@
     <Filter Include="TnbLib\BLayer\2d\Entities\Element">
       <UniqueIdentifier>{5e6fdb2a-adf1-467d-8750-0021b6c1a9d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Offset">
+      <UniqueIdentifier>{777ea512-b1bb-4483-90fe-65c70a7d48d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BLayer\2d\Offset\Discret">
+      <UniqueIdentifier>{d94565da-f3d9-46a1-ae22-9ede42eadd28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\BLayer\module\MeshBLayer_Module.hxx">
@@ -138,6 +144,9 @@
     <ClInclude Include="TnbLib\BLayer\2d\Entities\Element\MeshBLayer2d_Element.hxx">
       <Filter>TnbLib\BLayer\2d\Entities\Element</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.hxx">
+      <Filter>TnbLib\BLayer\2d\Offset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.cxx">
@@ -184,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\BLayer\2d\AdvLayer\ElementSet\MeshBLayer2d_AdvLayer_ElementSet.cxx">
       <Filter>TnbLib\BLayer\2d\AdvLayer\ElementSet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.cxx">
+      <Filter>TnbLib\BLayer\2d\Offset</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

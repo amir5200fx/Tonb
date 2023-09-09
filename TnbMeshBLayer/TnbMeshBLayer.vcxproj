@@ -46,7 +46,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>TnbMeshBLayer_EXPORT_DEFINE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\BLayer\2d\Entities\Element;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Adaptor;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Corner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node;$(ProjectDir)TnbLib\BLayer\2d\Entities\Entity;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeCondition;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\ElementSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\EdgeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeList;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer;$(ProjectDir)TnbLib\BLayer\2d\Tools;$(ProjectDir)TnbLib\BLayer\2d\SizeMap;$(ProjectDir)TnbLib\BLayer\module;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\BLayer\2d\Entities\Element;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Adaptor;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Corner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node;$(ProjectDir)TnbLib\BLayer\2d\Entities\Entity;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeCondition;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\ElementSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\EdgeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeList;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer;$(ProjectDir)TnbLib\BLayer\2d\Offset\Discret\SetNo;$(ProjectDir)TnbLib\BLayer\2d\Offset\Discret\Adaptive;$(ProjectDir)TnbLib\BLayer\2d\Offset\Discret;$(ProjectDir)TnbLib\BLayer\2d\Offset;$(ProjectDir)TnbLib\BLayer\2d\Tools;$(ProjectDir)TnbLib\BLayer\2d\SizeMap;$(ProjectDir)TnbLib\BLayer\module;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -121,6 +121,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBased.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(SolutionDir)include" mkdir "$(SolutionDir)include"
@@ -137,7 +138,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>TnbMeshBLayer_EXPORT_DEFINE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\BLayer\2d\Entities\Element;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Adaptor;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Corner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node;$(ProjectDir)TnbLib\BLayer\2d\Entities\Entity;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeCondition;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\ElementSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\EdgeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeList;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer;$(ProjectDir)TnbLib\BLayer\2d\Tools;$(ProjectDir)TnbLib\BLayer\2d\SizeMap;$(ProjectDir)TnbLib\BLayer\module;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\BLayer\2d\Entities\Element;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Edge;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Adaptor;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Segment;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary\Corner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Boundary;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node\Inner;$(ProjectDir)TnbLib\BLayer\2d\Entities\Node;$(ProjectDir)TnbLib\BLayer\2d\Entities\Entity;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeCondition;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\ElementSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\EdgeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeSet;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer\NodeList;$(ProjectDir)TnbLib\BLayer\2d\AdvLayer;$(ProjectDir)TnbLib\BLayer\2d\Offset\Discret\SetNo;$(ProjectDir)TnbLib\BLayer\2d\Offset\Discret\Adaptive;$(ProjectDir)TnbLib\BLayer\2d\Offset\Discret;$(ProjectDir)TnbLib\BLayer\2d\Offset;$(ProjectDir)TnbLib\BLayer\2d\Tools;$(ProjectDir)TnbLib\BLayer\2d\SizeMap;$(ProjectDir)TnbLib\BLayer\module;$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -147,6 +148,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlibstatd.lib;dld.lib;msmpi.lib;msmpifec.lib;msmpifmc.lib;psapi.lib;TKBin.lib;TKBinL.lib;TKBinTObj.lib;TKBinXCAF.lib;TKBO.lib;TKBool.lib;TKBRep.lib;TKCAF.lib;TKCDF.lib;TKD3DHost.lib;TKDCAF.lib;TKDFBrowser.lib;TKDraw.lib;TKernel.lib;TKFeat.lib;TKFillet.lib;TKG2d.lib;TKG3d.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKHLR.lib;TKIGES.lib;TKIVtk.lib;TKIVtkDraw.lib;TKLCAF.lib;TKMath.lib;TKMesh.lib;TKMeshVS.lib;TKOffset.lib;TKOpenGl.lib;TKPrim.lib;TKQADraw.lib;TKService.lib;TKShapeView.lib;TKShHealing.lib;TKStd.lib;TKStdL.lib;TKSTEP.lib;TKSTEP209.lib;TKSTEPAttr.lib;TKSTEPBase.lib;TKSTL.lib;TKTInspector.lib;TKTInspectorAPI.lib;TKTObj.lib;TKTObjDRAW.lib;TKToolsDraw.lib;TKTopAlgo.lib;TKTopTest.lib;TKTreeModel.lib;TKV3d.lib;TKVCAF.lib;TKView.lib;TKViewerTest.lib;TKVInspector.lib;TKVRML.lib;TKXCAF.lib;TKXDEDRAW.lib;TKXDEIGES.lib;TKXDESTEP.lib;TKXMesh.lib;TKXml.lib;TKXmlL.lib;TKXmlTObj.lib;TKXmlXCAF.lib;TKXSBase.lib;TKXSDRAW.lib;tbb.lib;tbb_debug.lib;tbb_preview.lib;tbb_preview_debug.lib;tbbmalloc.lib;tbbmalloc_debug.lib;tbbmalloc_debug_s.lib;tbbmalloc_proxy.lib;tbbmalloc_proxy_debug.lib;tbbmalloc_s.lib;tbbproxy.lib;tbbproxy_debug.lib;lapack_win64_MT.lib;blas_win64_MT.lib;TnbBase.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -168,6 +170,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Segment\MeshBLayer2d_SegmentNode.hxx" />
     <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\Inner\MeshBLayer2d_InnerNode.hxx" />
     <ClInclude Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.hxx" />
+    <ClInclude Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.hxx" />
     <ClInclude Include="TnbLib\BLayer\2d\Tools\MeshBLayer2d_Tools.hxx" />
     <ClInclude Include="TnbLib\BLayer\module\MeshBLayer_Module.hxx" />
   </ItemGroup>
@@ -186,7 +189,19 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Boundary\Segment\MeshBLayer2d_SegmentNode.cxx" />
     <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\Inner\MeshBLayer2d_InnerNode.cxx" />
     <ClCompile Include="TnbLib\BLayer\2d\Entities\Node\MeshBLayer2d_Node.cxx" />
+    <ClCompile Include="TnbLib\BLayer\2d\Offset\MeshBLayer2d_Offset.cxx" />
     <ClCompile Include="TnbLib\BLayer\2d\Tools\MeshBLayer2d_Tools.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TnbGeo\TnbGeo.vcxproj">
+      <Project>{b6c72f52-d96c-4b03-b599-4f298d29f8f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbGlobal\TnbGlobal.vcxproj">
+      <Project>{b919c408-474a-458b-9b08-459df6598b56}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TnbMesh\TnbMesh.vcxproj">
+      <Project>{00cf3b69-2a41-4038-8e73-fde99df1478a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
