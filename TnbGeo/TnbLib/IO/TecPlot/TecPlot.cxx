@@ -2,6 +2,7 @@
 
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
+#include <token.hxx>
 
 void tnbLib::Io::WriteVariables
 (
@@ -49,6 +50,22 @@ void tnbLib::Io::WriteFeTriangleZone
 		<< ", E = "
 		<< NbTriangles
 		<< ", DATAPACKING= POINT, ZONETYPE= FETRIANGLE";
+	theFile << endl;
+}
+
+void tnbLib::Io::WriteFeQuadrilateralZone
+(
+	const Standard_Integer NbNodes,
+	const Standard_Integer NbTriangles,
+	OFstream& theFile
+)
+{
+	theFile
+		<< " ZONE N = "
+		<< NbNodes
+		<< ", E = "
+		<< NbTriangles
+		<< ", DATAPACKING= POINT, ZONETYPE= FEQUADRILATERAL";
 	theFile << endl;
 }
 
@@ -198,6 +215,41 @@ void tnbLib::Io::ExportMesh
 	for (const auto& x : Triangles)
 	{
 		File << x.Value(0) << "  " << x.Value(1) << "  " << x.Value(2) << endl;
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
+	const std::vector<Pnt2d>& thePoints,
+	const std::vector<connectivity::quadruple>& theElements,
+	OFstream& File
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y", File);
+	WriteFeQuadrilateralZone
+	(
+		(Standard_Integer)thePoints.size(),
+		(Standard_Integer)theElements.size(),
+		File
+	);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(File);
+		File << endl;
+	}
+	for (const auto& x : theElements)
+	{
+		File << x.Value(0)
+			<< token::SPACE
+			<< x.Value(1)
+			<< token::SPACE
+			<< x.Value(2)
+			<< token::SPACE
+			<< x.Value(3)
+			<< endl;
 	}
 }
 

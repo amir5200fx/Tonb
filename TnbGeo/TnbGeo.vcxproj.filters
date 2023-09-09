@@ -1114,6 +1114,18 @@
     <Filter Include="TnbLib\IO\Writer\OBJ">
       <UniqueIdentifier>{2b51d187-f766-4aba-a3a9-153190cf48dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Geo\Entities\QuadMesh">
+      <UniqueIdentifier>{2e80421a-a057-45b3-a676-598942c190c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\Entities\QuadMesh\2d">
+      <UniqueIdentifier>{7c052c75-9c6f-474d-801c-a228d98029e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\UniformNet">
+      <UniqueIdentifier>{0ae83c65-4417-428d-b54a-b291c1e4d66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Geo\UniformNet\2d">
+      <UniqueIdentifier>{c23d27a3-7e8e-4cd0-b91f-a6b38a90c0e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2547,6 +2559,15 @@
     <ClInclude Include="TnbLib\IO\Writer\_OBJ\GeoIO_Writer_OBJ.hxx">
       <Filter>TnbLib\IO\Writer\OBJ</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\QuadMesh\2d\Entity2d_QuadMesh.hxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\QuadMesh\2d\Entity2d_QuadMeshFwd.hxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Geo\UniformNet\2d\Geo2d_UniformNet.hxx">
+      <Filter>TnbLib\Geo\UniformNet\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3232,6 +3253,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\IO\Writer\_OBJ\GeoIO_Writer_OBJ.cxx">
       <Filter>TnbLib\IO\Writer\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\QuadMesh\2d\Entity2d_QuadMesh.cxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Entities\QuadMesh\2d\Entity2d_QuadMeshIO.cxx">
+      <Filter>TnbLib\Geo\Entities\QuadMesh\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Geo\UniformNet\2d\Geo2d_UniformNet.cxx">
+      <Filter>TnbLib\Geo\UniformNet\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

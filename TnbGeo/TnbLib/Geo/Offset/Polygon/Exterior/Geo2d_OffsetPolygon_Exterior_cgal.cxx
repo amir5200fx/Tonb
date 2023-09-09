@@ -10,8 +10,8 @@
 
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Polygon_2.h>
-#include <CGAL/create_straight_skeleton_2.h>
-#include <CGAL/draw_straight_skeleton_2.h>
+#include <CGAL/create_offset_polygons_2.h>
+//#include <CGAL/draw_straight_skeleton_2.h>
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::Point_2                   Point;
@@ -44,19 +44,23 @@ void tnbLib::Geo2d_OffsetPolygon_Exterior::Perform()
 			<< "the polygon is not counter clockwise." << endl
 			<< abort(FatalError);
 	}
-	auto iss = 
-		CGAL::create_exterior_straight_skeleton_2
-		(MaxOffset(), poly);
-	std::vector<Pnt2d> pts;
-	pts.reserve(iss->size_of_vertices());
-	auto iter = iss->vertices_begin();
-	while (iter NOT_EQUAL iss->vertices_end())
+	auto ss = CGAL::create_exterior_straight_skeleton_2(MaxOffset(), poly);
+	auto offset_polygons =
+		CGAL::create_offset_polygons_2<Polygon_2>
+		(MaxOffset(), *ss);
+	for (const auto& x : offset_polygons)
 	{
-		const auto& coord = iter->point();
-		pts.push_back({ coord.x(),coord.y() });
-		iter++;
+		std::vector<Pnt2d> pts;
+		pts.reserve(x->size());
+		for (auto it = x->vertices_begin(); it != x->vertices_end(); it++)
+		{
+			const auto& coord = *it;
+			pts.push_back({ coord.x(),coord.y() });
+		}
+		//const auto& coord = *x->vertices_begin();
+		//pts.push_back({ coord.x(),coord.y() });
+		auto offset_poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
+		theOffsets_.push_back(std::move(offset_poly));
 	}
-	auto offset_poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
-	theOffset_ = std::move(offset_poly);
 	Change_IsDone() = Standard_True;
 }
