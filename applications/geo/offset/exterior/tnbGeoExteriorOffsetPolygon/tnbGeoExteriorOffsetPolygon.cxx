@@ -9,7 +9,7 @@ namespace tnbLib
 {
 
 	static std::shared_ptr<Entity2d_Polygon> myPolygon;
-	static std::shared_ptr<Entity2d_Polygon> myOffsetPolygon;
+	static std::vector<std::shared_ptr<Entity2d_Polygon>> myOffsetPolygons;
 
 	static double myMaxOffset = 0;
 
@@ -31,7 +31,64 @@ namespace tnbLib
 		}
 	}
 
-	TNB_STANDARD_LOAD_SAVE_POINTER_OBJECT(myPolygon, model_directory, myOffsetPolygon);
+	void loadModel(const std::string& name)
+	{
+		file::CheckExtension(name);
+		myPolygon = 
+			file::LoadFile<std::shared_ptr<Entity2d_Polygon>>
+			(name + Entity2d_Polygon::extension, verbose);
+		if (NOT myPolygon)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no object has been loaded." << endl
+				<< abort(FatalError);
+		}
+		loadTag = true;
+		myFileName = name;
+	}
+
+	void loadModel()
+	{
+		myPolygon = 
+			file::LoadSingleFile<std::shared_ptr<Entity2d_Polygon>>
+			(model_directory, Entity2d_Polygon::extension, verbose, myFileName);
+		if (NOT myPolygon)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no object has been loaded." << endl
+				<< abort(FatalError);
+		}
+		loadTag = true;
+	}
+
+	void saveTo(const std::string& name)
+	{
+		if (NOT exeTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the application is not performed!" << endl
+				<< abort(FatalError);
+		}
+		file::CheckExtension(name);
+		file::SaveListTo(myOffsetPolygons, name + Entity2d_Polygon::extension, verbose);
+	}
+
+	void loadFile()
+	{
+		if (file::IsDirectory(model_directory))
+		{
+			loadModel();
+		}
+		else
+		{
+			auto name =
+				file::GetSingleFile
+				(boost::filesystem::current_path(),
+					Entity2d_Polygon::extension
+				).string();
+			loadModel(name);
+		}
+	}
 
 	void execute()
 	{
@@ -48,7 +105,7 @@ namespace tnbLib
 					<< "the application is not performed." << endl
 					<< abort(FatalError);
 			}
-			myOffsetPolygon = alg->Offset();
+			myOffsetPolygons = alg->Offsets();
 		}
 		if (verbose)
 		{
