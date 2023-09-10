@@ -173,6 +173,15 @@ namespace tnbLib
 				const std::vector<std::shared_ptr<VoyageMesh_Element>>&
 			);
 
+		// Calculate the tangent between two segments (P0P1 & P1P2) that have an intersection on the point p1.
+		static TnbVoyage_EXPORT Dir2d
+			CalcTangent
+			(
+				const Pnt2d& theP0,
+				const Pnt2d& theP1,
+				const Pnt2d& theP2
+			);
+
 		static TnbVoyage_EXPORT void CalcCoord3d
 		(
 			const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes, 

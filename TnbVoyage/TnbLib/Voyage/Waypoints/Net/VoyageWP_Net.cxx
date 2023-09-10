@@ -1,5 +1,6 @@
 #include <VoyageWP_Net.hxx>
 
+#include <Entity2d_Polygon.hxx>
 #include <Global_Tools.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -101,4 +102,74 @@ Standard_Integer
 tnbLib::VoyageWP_Net::NbNodes() const
 {
 	return Standard_Integer(theNodes_.size());
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
+tnbLib::VoyageWP_Net::Waypoints
+(
+	const Standard_Integer theIndex
+) const
+{
+	if(NOT INSIDE(theIndex,0,theNodes_.size()-1))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the index exceeded the list" << endl
+			<< abort(FatalError);
+	}
+	const auto ref = theNodes_.at(theIndex);
+	Debug_Null_Pointer(ref);
+	std::vector<std::shared_ptr<Node>> nodes;
+	if (ref->IsDeparture() OR ref->IsArrival())
+	{
+		return std::move(nodes);
+	}
+	auto node = std::dynamic_pointer_cast<InterNode>(ref);
+	Debug_Null_Pointer(node);
+	// gathering the starboard nodes
+	for (const auto& x : node->Starboards())
+	{
+		nodes.emplace_back(x.second);
+	}
+	// gathering the port nodes
+	for (const auto& x:node->Ports())
+	{
+		nodes.emplace_back(x.second);
+	}
+	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
+tnbLib::VoyageWP_Net::RetrieveWaypoints
+(
+	const Standard_Integer theIndex, 
+	const Standard_Integer fromStar,
+	const Standard_Integer toPort
+)
+{
+	auto all_wpts = Waypoints(theIndex);
+	std::vector<std::shared_ptr<Node>> wps;
+	wps.reserve(toPort - fromStar + 1);
+	forThose(id, fromStar, toPort)
+	{
+		wps.emplace_back(all_wpts.at(id));
+	}
+	return std::move(wps);
+}
+
+std::shared_ptr<tnbLib::Entity2d_Polygon>
+tnbLib::VoyageWP_Net::RetrieveCoords
+(
+	const std::vector<std::shared_ptr<Node>>& theNodes
+)
+{
+	std::vector<Pnt2d> coords;
+	for (const auto& x:theNodes)
+	{
+		Debug_Null_Pointer(x);
+		coords.emplace_back(x->Coord());
+	}
+	auto poly = 
+		std::make_shared<Entity2d_Polygon>
+	(std::move(coords), 0);
+	return std::move(poly);
 }

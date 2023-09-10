@@ -26,7 +26,7 @@ tnbLib::VoyageWP_Ref::DepNode::CalcTangent() const
 tnbLib::Dir2d 
 tnbLib::VoyageWP_Ref::ArvNode::CalcTangent() const
 {
-	auto edge = Backward().lock();
+	const auto edge = Backward().lock();
 	if (NOT edge)
 	{
 		FatalErrorIn(FunctionSIG) << endl
@@ -40,10 +40,111 @@ tnbLib::VoyageWP_Ref::ArvNode::CalcTangent() const
 tnbLib::Dir2d 
 tnbLib::VoyageWP_Ref::SupEdge::CalcTangent() const
 {
-	auto p0 = VoyageWP_Ref::FirstCoord(*this);
-	auto p1 = VoyageWP_Ref::SecondCoord(*this);
+	const auto p0 = VoyageWP_Ref::FirstCoord(*this);
+	const auto p1 = VoyageWP_Ref::SecondCoord(*this);
 	Dir2d d(p0, p1);
 	return std::move(d);
+}
+
+tnbLib::Dir2d
+tnbLib::VoyageWP_Ref::InterNode::CalcTangent() const
+{
+	const auto sup_forward_edge = Forward().lock();
+	Debug_Null_Pointer(sup_forward_edge);
+	const auto sup_backward_edge = Backward().lock();
+	Debug_Null_Pointer(sup_backward_edge);
+	const auto& n0 = sup_backward_edge->Node0();
+	const auto& n1 = sup_backward_edge->Node1();
+	Debug_Null_Pointer(n0);
+	Debug_Null_Pointer(n1);
+	const auto& n2 = sup_forward_edge->Node0();
+	const auto& n3 = sup_forward_edge->Node1();
+	Debug_Null_Pointer(n2);
+	Debug_Null_Pointer(n3);
+	if (n2 NOT_EQUAL n1)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Something went wrong: the topology is not correct." << endl
+			<< abort(FatalError);
+	}
+	auto dir = Voyage_Tools::CalcTangent(n0->Coord(), n1->Coord(), n3->Coord());
+	return std::move(dir);
+}
+
+tnbLib::Pnt2d
+tnbLib::VoyageWP_Ref::InterNode::CalcStarOffset() const
+{
+	const auto sup_forward_edge = Forward().lock();
+	Debug_Null_Pointer(sup_forward_edge);
+	const auto sup_backward_edge = Backward().lock();
+	Debug_Null_Pointer(sup_backward_edge);
+	const auto node0 = sup_backward_edge->RetrieveStarTip();
+	Debug_Null_Pointer(node0);
+	const auto node1 = sup_forward_edge->RetrieveStarTip();
+	Debug_Null_Pointer(node1);
+	const auto pm = MEAN(node0->Coord(), node1->Coord());
+	return std::move(pm);
+}
+
+tnbLib::Pnt2d
+tnbLib::VoyageWP_Ref::InterNode::CalcPortOffset() const
+{
+	const auto sup_forward_edge = Forward().lock();
+	Debug_Null_Pointer(sup_forward_edge);
+	const auto sup_backward_edge = Backward().lock();
+	Debug_Null_Pointer(sup_backward_edge);
+	const auto node0 = sup_backward_edge->RetrievePortTip();
+	Debug_Null_Pointer(node0);
+	const auto node1 = sup_forward_edge->RetrievePortTip();
+	Debug_Null_Pointer(node1);
+	const auto pm = MEAN(node0->Coord(), node1->Coord());
+	return std::move(pm);
+}
+
+std::shared_ptr<tnbLib::VoyageMesh_Node>
+tnbLib::VoyageWP_Ref::SupEdge::RetrieveStarTip() const
+{
+	const auto edge = 
+		std::dynamic_pointer_cast<VoyageMesh_RefEdge>(Starboard());
+	Debug_Null_Pointer(edge);
+	auto node = edge->RetrieveTip();
+	return std::move(node);
+}
+
+std::shared_ptr<tnbLib::VoyageMesh_Node>
+tnbLib::VoyageWP_Ref::SupEdge::RetrievePortTip() const
+{
+	const auto edge =
+		std::dynamic_pointer_cast<VoyageMesh_RefEdge>(Port());
+	Debug_Null_Pointer(edge);
+	auto node = edge->RetrieveTip();
+	return std::move(node);
+}
+
+std::shared_ptr<tnbLib::VoyageMesh_Element>
+tnbLib::VoyageWP_Ref::SupEdge::RetrieveStarElement() const
+{
+	const auto element = theStarboard_->LeftElement().lock();
+	if(NOT element)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no element has been found." << endl
+			<< abort(FatalError);
+	}
+	return std::move(element);
+}
+
+std::shared_ptr<tnbLib::VoyageMesh_Element>
+tnbLib::VoyageWP_Ref::SupEdge::RetrievePortElement() const
+{
+	const auto element = thePort_->LeftElement().lock();
+	if (NOT element)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "no element has been found." << endl
+			<< abort(FatalError);
+	}
+	return std::move(element);
 }
 
 Standard_Real tnbLib::VoyageWP_Ref::DEFAULT_TOL = 1.0E-6;

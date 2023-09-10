@@ -20,6 +20,7 @@ namespace tnbLib
 		// default constructor [9/1/2023 aamir]
 
 		VoyageMesh_RefEdge()
+			: theSense_(Standard_True)
 		{}
 
 		// constructors [9/1/2023 aamir]
@@ -46,6 +47,8 @@ namespace tnbLib
 
 		Standard_Boolean IsReference() const override { return Standard_True; }
 		Standard_Boolean IsBoundary() const override { return Standard_True; }
+
+		TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Node> RetrieveTip() const;
 
 		void SetSense(const Standard_Integer theSense) { theSense_ = theSense; }
 

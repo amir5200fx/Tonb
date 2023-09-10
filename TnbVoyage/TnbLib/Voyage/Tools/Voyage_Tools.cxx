@@ -520,6 +520,23 @@ tnbLib::Voyage_Tools::RetrieveTriangulation3d
 	return std::move(tri);
 }
 
+tnbLib::Dir2d
+tnbLib::Voyage_Tools::CalcTangent
+(
+	const Pnt2d& theP0,
+	const Pnt2d& theP1,
+	const Pnt2d& theP2
+)
+{
+	const Dir2d dir0(theP0, theP1);
+	const Dir2d dir1(theP1, theP2);
+	const auto n0 = Vec2d(Dir2d(dir0.Rotated(PI_2)));
+	const auto n1 = Vec2d(Dir2d(dir1.Rotated(PI_2)));
+	const auto normal = MEAN(n0, n1);
+	const auto tang = normal.Rotated(-PI_2);
+	return Dir2d(tang.XY());
+}
+
 void tnbLib::Voyage_Tools::CalcCoord3d
 (
 	const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes,

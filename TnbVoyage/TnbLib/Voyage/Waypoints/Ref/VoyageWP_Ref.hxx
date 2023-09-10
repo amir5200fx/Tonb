@@ -48,8 +48,6 @@ namespace tnbLib
 
 			Pnt2d theCoord_;
 
-			
-
 		protected:
 
 			// default constructor [9/5/2023 aamir]
@@ -73,13 +71,13 @@ namespace tnbLib
 
 			// Public functions and operators [9/5/2023 aamir]
 
-			virtual Standard_Boolean IsInterior() const { return Standard_False; }
-			virtual Standard_Boolean IsDeparture() const { return Standard_False; }
-			virtual Standard_Boolean IsArrival() const { return Standard_False; }
+			[[nodiscard]] virtual Standard_Boolean IsInterior() const { return Standard_False; }
+			[[nodiscard]] virtual Standard_Boolean IsDeparture() const { return Standard_False; }
+			[[nodiscard]] virtual Standard_Boolean IsArrival() const { return Standard_False; }
 
-			virtual Dir2d CalcTangent() const = 0;
+			[[nodiscard]] virtual Dir2d CalcTangent() const = 0;
 
-			const auto& Coord() const { return theCoord_; }
+			[[nodiscard]] const auto& Coord() const { return theCoord_; }
 
 			void SetCoord(const Pnt2d& theCoord) { theCoord_ = theCoord; }
 			void SetCoord(Pnt2d&& theCoord) { theCoord_ = std::move(theCoord); }
@@ -100,7 +98,7 @@ namespace tnbLib
 			// default constructor [9/5/2023 aamir]
 
 			InterNode()
-			{}
+			= default;
 
 			// constructors [9/5/2023 aamir]
 
@@ -114,14 +112,14 @@ namespace tnbLib
 
 			// Public functions and operators [9/5/2023 aamir]
 
-			Standard_Boolean IsInterior() const override { return Standard_True; }
+			[[nodiscard]] Standard_Boolean IsInterior() const override { return Standard_True; }
 
-			Dir2d CalcTangent() const override;
-			Pnt2d CalcStarOffset() const;
-			Pnt2d CalcPortOffset() const;
+			[[nodiscard]] TnbVoyage_EXPORT Dir2d CalcTangent() const override;
+			[[nodiscard]] TnbVoyage_EXPORT Pnt2d CalcStarOffset() const;
+			[[nodiscard]] TnbVoyage_EXPORT Pnt2d CalcPortOffset() const;
 
-			const auto& Forward() const { return theForward_; }
-			const auto& Backward() const { return theBackward_; }
+			[[nodiscard]] const auto& Forward() const { return theForward_; }
+			[[nodiscard]] const auto& Backward() const { return theBackward_; }
 
 			void SetForward(const std::weak_ptr<SupEdge>& theEdge) { theForward_ = theEdge; }
 			void SetBackward(const std::weak_ptr<SupEdge>& theEdge) { theBackward_ = theEdge; }
@@ -170,7 +168,7 @@ namespace tnbLib
 			// default constructor [9/5/2023 aamir]
 
 			DepNode()
-			{}
+			= default;
 
 			// constructors [9/5/2023 aamir]
 
@@ -184,11 +182,11 @@ namespace tnbLib
 
 			// Public functions and operators [9/5/2023 aamir]
 
-			Standard_Boolean IsDeparture() const override { return Standard_True; }
+			[[nodiscard]] Standard_Boolean IsDeparture() const override { return Standard_True; }
 
 			TnbVoyage_EXPORT Dir2d CalcTangent() const override;
 
-			const auto& Forward() const { return theForward_; }
+			[[nodiscard]] const auto& Forward() const { return theForward_; }
 
 			void SetForward(const std::weak_ptr<SupEdge>& theEdge) { theForward_ = theEdge; }
 
@@ -207,7 +205,7 @@ namespace tnbLib
 			// default constructor [9/5/2023 aamir]
 
 			ArvNode()
-			{}
+			= default;
 
 			// constructors [9/5/2023 aamir]
 
@@ -221,11 +219,11 @@ namespace tnbLib
 
 			// Public functions and operators [9/5/2023 aamir]
 
-			Standard_Boolean IsArrival() const override { return Standard_True; }
+			[[nodiscard]] Standard_Boolean IsArrival() const override { return Standard_True; }
 
 			TnbVoyage_EXPORT Dir2d CalcTangent() const override;
 
-			const auto& Backward() const { return theBackward_; }
+			[[nodiscard]] const auto& Backward() const { return theBackward_; }
 
 			void SetBackward(const std::weak_ptr<SupEdge>& theEdge) { theBackward_ = theEdge; }
 
@@ -248,7 +246,7 @@ namespace tnbLib
 			// default constructor [9/5/2023 aamir]
 
 			SupEdge()
-			{}
+			= default;
 
 			// constructors [9/5/2023 aamir]
 
@@ -265,11 +263,16 @@ namespace tnbLib
 
 			// Public functions and operators [9/5/2023 aamir]
 
-			const auto& Node0() const { return theNode0_; }
-			const auto& Node1() const { return theNode1_; }
+			[[nodiscard]] const auto& Node0() const { return theNode0_; }
+			[[nodiscard]] const auto& Node1() const { return theNode1_; }
 
-			const auto& Starboard() const { return theStarboard_; }
-			const auto& Port() const { return thePort_; }
+			[[nodiscard]] const auto& Starboard() const { return theStarboard_; }
+			[[nodiscard]] const auto& Port() const { return thePort_; }
+
+			TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Node> RetrieveStarTip() const;
+			TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Node> RetrievePortTip() const;
+			TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Element> RetrieveStarElement() const;
+			TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_Element> RetrievePortElement() const;
 
 			TnbVoyage_EXPORT Dir2d CalcTangent() const;
 
@@ -293,13 +296,13 @@ namespace tnbLib
 		// default constructor [9/5/2023 aamir]
 
 		VoyageWP_Ref()
-		{}
+		= default;
 
 		// constructors [9/5/2023 aamir]
 
 		// Public functions and operators [9/5/2023 aamir]
 
-		const auto& Entities() const { return theEntities_; }
+		[[nodiscard]] const auto& Entities() const { return theEntities_; }
 
 		TnbVoyage_EXPORT std::shared_ptr<SupNode> Departure() const;
 		TnbVoyage_EXPORT std::shared_ptr<SupNode> Arrival() const;

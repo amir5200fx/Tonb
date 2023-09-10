@@ -881,5 +881,8 @@
     <ClCompile Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect.cxx">
       <Filter>TnbLib\Voyage\Waypoints\Connect</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Mesh\Entities\Edge\Ref\VoyageMesh_RefEdge.cxx">
+      <Filter>TnbLib\Voyage\Mesh\Entities\Edge\Ref</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

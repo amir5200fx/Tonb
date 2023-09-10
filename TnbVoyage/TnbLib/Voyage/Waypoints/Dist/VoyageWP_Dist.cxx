@@ -10,6 +10,192 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+Standard_Integer
+tnbLib::VoyageWP_Dist::NbWPs() const
+{
+	Debug_Null_Pointer(theWaypoints_);
+	return theWaypoints_->NbPoints();
+}
+
+Standard_Integer
+tnbLib::VoyageWP_Dist::MinDistanceId() const
+{
+	if (NOT IsDone())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the application is not performed." << endl
+			<< abort(FatalError);
+	}
+	Standard_Integer id = 0;
+	Standard_Real minDist = RealLast();
+	Standard_Integer i = 0;
+	for (const auto x : theDists_)
+	{
+		if (minDist < x)
+		{
+			minDist = x;
+			id = i;
+		}
+		++id;
+	}
+	return id;
+}
+
+Standard_Real
+tnbLib::VoyageWP_Dist::MinDistance() const
+{
+	return Distance(MinDistanceId());
+}
+
+Standard_Real
+tnbLib::VoyageWP_Dist::Distance
+(
+	const Standard_Integer theIndex
+) const
+{
+	if(NOT IsDone())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the application is not performed." << endl
+			<< abort(FatalError);
+	}
+	if(NOT INSIDE(theIndex, 0,theDists_.size()-1))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid index." << endl
+			<< abort(FatalError);
+	}
+	return theDists_.at(theIndex);
+}
+
+Standard_Real
+tnbLib::VoyageWP_Dist::DistanceWP
+(
+	const Standard_Integer theIndex
+) const
+{
+	if (NOT IsDone())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the application is not performed." << endl
+			<< abort(FatalError);
+	}
+	if (NOT INSIDE(theIndex, 0, theWPdists_.size() - 1))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid index." << endl
+			<< abort(FatalError);
+	}
+	return theWPdists_.at(theIndex);
+}
+
+Standard_Real
+tnbLib::VoyageWP_Dist::DistanceWP
+(
+	const Standard_Integer from,
+	const Standard_Integer to
+) const
+{
+	Standard_Real dist = 0;
+	forThose(id, from + 1, to)
+	{
+		dist += theWPdists_.at(id);
+	}
+	return dist;
+}
+
+Standard_Integer
+tnbLib::VoyageWP_Dist::MaxStarAngle
+(
+	const Standard_Real theAngle
+) const
+{
+	const auto min_dist_id = MinDistanceId();
+	for (Standard_Integer i = 1; i < min_dist_id; i++)
+	{
+		if (StarAngle(min_dist_id, i) <= theAngle)
+		{
+			return i;
+		}
+	}
+	return min_dist_id;
+}
+
+Standard_Integer
+tnbLib::VoyageWP_Dist::MaxPortAngle(const Standard_Real theAngle) const
+{
+	const auto min_dist_id = MinDistanceId();
+	for (Standard_Integer i = 1; i < min_dist_id; i++)
+	{
+		if (PortAngle(min_dist_id, i) <= theAngle)
+		{
+			return i;
+		}
+	}
+	return min_dist_id;
+}
+
+Standard_Real
+tnbLib::VoyageWP_Dist::StarAngle
+(
+	const Standard_Integer theMinDist, 
+	const Standard_Integer theIndex
+) const
+{
+	if (theMinDist < theIndex)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the index should be smaller than the minDist index due to the starboard side." << endl
+			<< " - the min. dist id: " << theMinDist << endl
+			<< " - the index: " << theIndex << endl
+			<< abort(FatalError);
+	}
+	const auto wp_dist = DistanceWP(theIndex, theMinDist);
+	const auto min_dist = Distance(theMinDist);
+	const auto id_dist = Distance(theIndex);
+	const auto cos_theta = 
+		(min_dist * min_dist + id_dist * id_dist - wp_dist * wp_dist) / 
+		(2.0 * min_dist * id_dist);
+	if (NOT INSIDE(cos_theta, -1.0, 1.0))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong." << endl
+			<< abort(FatalError);
+	}
+	return std::acos(cos_theta);
+}
+
+Standard_Real
+tnbLib::VoyageWP_Dist::PortAngle
+(
+	const Standard_Integer theMinDist,
+	const Standard_Integer theIndex
+) const
+{
+	if(theIndex<theMinDist)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the index should be bigger than the minDist index due to the port side." << endl
+			<< " - the min. dist id: " << theMinDist << endl
+			<< " - the index: " << theIndex << endl
+			<< abort(FatalError);
+	}
+	const auto wp_dist = DistanceWP(theIndex, theMinDist);
+	const auto min_dist = Distance(theMinDist);
+	const auto id_dist = Distance(theIndex);
+	const auto cos_theta =
+		(min_dist * min_dist + id_dist * id_dist - wp_dist * wp_dist) /
+		(2.0 * min_dist * id_dist);
+	if (NOT INSIDE(cos_theta, -1.0, 1.0))
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "something went wrong." << endl
+			<< abort(FatalError);
+	}
+	return std::acos(cos_theta);
+}
+
+
 void tnbLib::VoyageWP_Dist::Perform()
 {
 	if (NOT Earth())

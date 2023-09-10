@@ -4,6 +4,20 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+std::pair<tnbLib::Pnt2d, tnbLib::Pnt2d>
+tnbLib::VoyageWP_Offset::InterNode::StarboardProfile() const
+{
+	Debug_Null_Pointer(Starboard());
+	return { Coord(),Starboard()->Coord() };
+}
+
+std::pair<tnbLib::Pnt2d, tnbLib::Pnt2d>
+tnbLib::VoyageWP_Offset::InterNode::PortProfile() const
+{
+	Debug_Null_Pointer(Port());
+	return { Coord(),Port()->Coord() };
+}
+
 void tnbLib::VoyageWP_Offset::CalcOffsets
 (
 	const VoyageWP_Ref& theRef
@@ -61,4 +75,39 @@ void tnbLib::VoyageWP_Offset::CalcOffsets
 	}
 	theRef_ = std::move(nodes);
 	Change_IsDone() = Standard_True;
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Offset::Node>>
+tnbLib::VoyageWP_Offset::RetrieveInteriors() const
+{
+	std::vector<std::shared_ptr<Node>> nodes;
+	for (size_t i = 1; i <= theRef_.size() - 2; i++)
+	{
+		nodes.emplace_back(theRef_.at(i));
+	}
+	return std::move(nodes);
+}
+
+std::shared_ptr<tnbLib::VoyageWP_Offset::Node>
+tnbLib::VoyageWP_Offset::Departure() const
+{
+	if (theRef_.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the path is invalid." << endl
+			<< abort(FatalError);
+	}
+	return theRef_.at(0);
+}
+
+std::shared_ptr<tnbLib::VoyageWP_Offset::Node>
+tnbLib::VoyageWP_Offset::Arrival() const
+{
+	if (theRef_.size() < 2)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the path is invalid." << endl
+			<< abort(FatalError);
+	}
+	return theRef_.at(theRef_.size() - 1);
 }

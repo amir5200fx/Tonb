@@ -19,6 +19,7 @@ namespace tnbLib
 	class VoyageMesh_Node;
 	class Voyage_WptsGrid;
 	class Voyage_MetricInfo;
+	class Voyage_OffsetProfile;
 	class VoyageMesh_Edge;
 	class VoyageMesh_Node;
 	class VoyageGeo_Path2;
@@ -33,6 +34,8 @@ namespace tnbLib
 
 		std::shared_ptr<Geo2d_SizeFunction> theStarboardSize_;
 		std::shared_ptr<Geo2d_SizeFunction> thePortSize_;
+
+		std::shared_ptr<Voyage_OffsetProfile> theProfile_;
 
 		std::shared_ptr<Voyage_MetricInfo> theInfo_;
 
@@ -93,6 +96,7 @@ namespace tnbLib
 		const auto& Path() const { return thePath_; }
 		const auto& StarboardSizeFunction() const { return theStarboardSize_; }
 		const auto& PortSizeFunction() const { return thePortSize_; }
+		const auto& Profile() const { return theProfile_; }
 		const auto& GetInfo() const { return theInfo_; }
 
 		const auto& Grid() const { return theGrid_; }
