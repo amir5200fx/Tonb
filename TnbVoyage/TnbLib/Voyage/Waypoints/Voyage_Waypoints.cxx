@@ -370,7 +370,7 @@ void tnbLib::Voyage_Waypoints::Perform()
 
 		optNode->SetMetricMap(starboard_metricPrcsr);
 
-		auto alg = std::make_shared<Voyage_Mesh>();
+		const auto alg = std::make_shared<Voyage_Mesh>();
 		Debug_Null_Pointer(alg);
 		alg->LoadMetricMap(starboard_metricPrcsr);
 		alg->LoadRefPath(starboard);
@@ -400,7 +400,7 @@ void tnbLib::Voyage_Waypoints::Perform()
 
 		optNode->SetMetricMap(port_metricPrcsr);
 
-		auto alg = std::make_shared<Voyage_Mesh>();
+		const auto alg = std::make_shared<Voyage_Mesh>();
 		Debug_Null_Pointer(alg);
 		alg->LoadMetricMap(port_metricPrcsr);
 		alg->LoadRefPath(port);
@@ -426,6 +426,8 @@ void tnbLib::Voyage_Waypoints::Perform()
 		std::sort(elements.begin(), elements.end(), cmp);
 		thePortMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements);
 	}
+	Change_IsDone() = Standard_True;
+	return;
 	//- Create the voyage ref.
 	auto alg_ref = std::make_shared<VoyageWP_Ref>();
 	Debug_Null_Pointer(alg_ref);

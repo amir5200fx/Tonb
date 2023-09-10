@@ -190,7 +190,7 @@ int main()
 	sizeMap->SetPath(path);
 	sizeMap->SetInfo(metricInfo);
 	sizeMap->Perform();
-
+	//return 1;
 	Voyage_Waypoints::verbose = 1;
 	auto wayPoints = std::make_shared<Voyage_Waypoints>();
 	wayPoints->SetPath(path);

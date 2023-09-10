@@ -376,7 +376,8 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 
 	Voyage_Tools::SetSourcesToMesh(sources, BaseSize(), hvInfo->Factor(), *bMesh);
 	sources.clear();
-
+	//OFstream myFile("sizeMap0.plt");
+	//bMesh->ExportToPlt(myFile);
 	if (verbose)
 	{
 		Info << " Applying Hv-correction..." << endl;
@@ -390,12 +391,11 @@ void tnbLib::VoyageMesh_SizeMap::Perform()
 	}
 
 	bMesh->HvCorrection(hvInfo);
-
 	for (auto& x : bMesh->Sources())
 	{
 		x = 1.0 / x;
 	}
-
+	//bMesh->ExportToPlt(myFile);
 	if (verbose)
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;

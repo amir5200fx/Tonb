@@ -24,8 +24,11 @@ void tnbLib::Voyage_Tools::SetSourcesToMesh
 
 	auto meshNodes = MeshBase_Tools::RetrieveNodes(mesh.Elements());
 	auto& sources = theMesh.Sources();
-	sources.resize(meshNodes.size(), theBase);
-
+	sources.resize(meshNodes.size());
+	for (auto& x : sources)
+	{
+		x = theBase;
+	}
 	auto start = mesh.Elements().at(0);
 	for (const auto& x : theSources)
 	{
@@ -120,5 +123,61 @@ void tnbLib::Voyage_Tools::SetSourcesToMesh
 				if (x->H() > h) sources.at(id) = x->H();
 			}
 		}*/
+	}
+}
+
+void tnbLib::Voyage_Tools::SetInverseSourcesToMesh
+(
+	const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt2d, Standard_Real>>>& theSources,
+	const Standard_Real theBase,
+	const Standard_Real theGrowthRate,
+	GeoMesh2d_SingleBackground& theMesh
+)
+{
+	const auto& mesh = *theMesh.Mesh();
+	if (mesh.Elements().empty())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "the element list of the background mesh is empty!" << endl
+			<< abort(FatalError);
+	}
+
+	auto meshNodes = MeshBase_Tools::RetrieveNodes(mesh.Elements());
+	auto& sources = theMesh.Sources();
+	sources.resize(meshNodes.size());
+	for (auto& x:sources)
+	{
+		x = theBase;
+	}
+	auto start = mesh.Elements().at(0);
+	for (const auto& x : theSources)
+	{
+		const auto current = mesh.TriangleLocation(start, x->Coord());
+		if (NOT current)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the point is outside of the mesh!" << endl
+				<< " - domain's of the mesh: " << theMesh.BoundingBox() << endl
+				<< " - coordinates of the point: " << x->Coord() << endl
+				<< abort(FatalError);
+		}
+		start = current;
+
+		auto [n0, n1, n2] = current->Nodes();
+		{
+			auto id = Index_Of(n0->Index());
+			auto ho = sources.at(id);
+			if (x->H() < ho) sources.at(id) = x->H();
+		}
+		{
+			auto id = Index_Of(n1->Index());
+			auto ho = sources.at(id);
+			if (x->H() < ho) sources.at(id) = x->H();
+		}
+		{
+			auto id = Index_Of(n2->Index());
+			auto ho = sources.at(id);
+			if (x->H() < ho) sources.at(id) = x->H();
+		}
 	}
 }

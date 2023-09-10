@@ -442,10 +442,10 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 
 	auto bisectAngles = CalcBisectAngles();
 	
-	for (const auto& x : bisectAngles)
+	/*for (const auto& x : bisectAngles)
 	{
 		std::cout << "angle = " << x->Angle() << std::endl;
-	}
+	}*/
 	//auto chain = CalcEdges();
 	auto polygons = RetrievePolygons();
 	auto coords = RetrieveCoords(polygons);
@@ -602,7 +602,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
 				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
-				std::cout << " dist = " << dist << ", insct: " << insct << std::endl;
+				//std::cout << " dist = " << dist << ", insct: " << insct << std::endl;
 				if (insct)
 				{
 					if (dist < baseSize)
@@ -636,29 +636,30 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			}
 		}
 	}
-	std::cout << "size = " << sources.size() << std::endl;;
-	Voyage_Tools::SetSourcesToMesh(sources, BaseSize(), hvInfo->Factor(), *bMesh);
+	//std::cout << "base size = " << BaseSize() << std::endl;
+	//std::cout << "size = " << sources.size() << std::endl;;
+	Voyage_Tools::SetInverseSourcesToMesh(sources, BaseSize(), hvInfo->Factor(), *bMesh);
 	sources.clear();
-
+	//OFstream myFile("correct.plt");
+	//bMesh->ExportToPlt(myFile);
+	
 	if (verbose)
 	{
 		Info << " Applying Hv-correction..." << endl;
 		Info << " - Max. nb. of iterations: " << hvInfo->MaxNbIters() << endl;
 		Info << endl;
 	}
-
 	for (auto& x : bMesh->Sources())
 	{
 		x = 1.0 / x;
 	}
-
 	bMesh->HvCorrection(hvInfo);
-
 	for (auto& x : bMesh->Sources())
 	{
 		x = 1.0 / x;
 	}
-
+	//bMesh->ExportToPlt(myFile);
+	//std::exit(1);
 	if (verbose)
 	{
 		Info << " The Hv-Correction is performed, successfully." << endl;
