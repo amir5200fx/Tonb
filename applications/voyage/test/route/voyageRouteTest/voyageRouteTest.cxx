@@ -104,7 +104,12 @@ int main()
 		pts.push_back(Voyage_Tools::ConvertToUV({ 7.0, 97.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
+
+		Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
+		std::exit(1);
 	}
+
+	
 
 	auto metricInfo = std::make_shared<Voyage_MetricInfo>();
 	std::shared_ptr<VoyageGeo_Path2> path;
@@ -200,9 +205,11 @@ int main()
 	wayPoints->Perform();
 
 	OFstream triFile("triangle.plt");
+	OFstream triFile1("triangle.vtk");
 	{// plot the starboard mesh [9/6/2023 aamir]
 		const auto mesh = Voyage_Tools::ConvertToVoyageSystem(*wayPoints->StarMesh());
 		mesh->ExportToPlt(triFile);
+		mesh->ExportToVtk(triFile1);
 	}
 
 	return 1;
