@@ -144,10 +144,11 @@ namespace tnbLib
 
 		void Reverse();
 
-		TnbGeo_EXPORT void Smoothing(const Standard_Real Omega, const Standard_Integer NbIterations);
+		void Smoothing(const Standard_Real Omega, const Standard_Integer NbIterations);
 
-		TnbGeo_EXPORT void ExportToPlt(std::fstream& File) const;
-		TnbGeo_EXPORT void ExportToPlt(OFstream& File) const;
+		void ExportToPlt(std::fstream& File) const;
+		void ExportToPlt(OFstream& File) const;
+		void ExportToVtk(OFstream&) const;
 
 		static void Check(const Entity_Polygon<Point>&);
 	};

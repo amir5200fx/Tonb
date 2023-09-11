@@ -17,8 +17,9 @@ namespace tnbLib
 	inline Pnt2d& Entity2d_Polygon::Coord(const Standard_Integer theIndex);
 
 	template<>
-	TnbGeo_EXPORT void Entity2d_Polygon::ExportToPlt(std::fstream& File) const;
-
+	TnbGeo_EXPORT void Entity2d_Polygon::ExportToPlt(OFstream& File) const;
+	template<>
+	TnbGeo_EXPORT void Entity2d_Polygon::ExportToVtk(OFstream&) const;
 
 
 }
