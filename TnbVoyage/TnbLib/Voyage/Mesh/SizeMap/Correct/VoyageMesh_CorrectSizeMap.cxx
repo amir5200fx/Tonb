@@ -78,7 +78,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectAngles() const
 {
 	std::vector<std::shared_ptr<AngleBisect>> angles;
 	auto polygons = RetrievePolygons();
-	if (Direction() IS_EQUAL PathDirect::Port)
+	if (Direction() IS_EQUAL voyageLib::PathDirect::Port)
 	{
 		std::reverse(polygons.begin(), polygons.end());
 		for (const auto& x : polygons)
@@ -101,7 +101,7 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectAngles() const
 		angles.push_back(std::move(angle));
 	}
 	// reverse back the polygons [9/3/2023 Payvand]
-	if (Direction() IS_EQUAL PathDirect::Port)
+	if (Direction() IS_EQUAL voyageLib::PathDirect::Port)
 	{
 		std::reverse(polygons.begin(), polygons.end());
 		for (const auto& x : polygons)
@@ -147,26 +147,32 @@ tnbLib::VoyageMesh_CorrectSizeMap::CalcBisectRay
 	Standard_Real& theAngle
 )
 {
-	auto dir0 = Dir2d(theP0, theP1);
-	auto dir1 = Dir2d(theP1, theP2);
-	auto n = dir0.Crossed(dir1);
-	Dir2d bisect;
-	if (n <= 0)
-	{ // the angle is less than 180 deg. [8/30/2023 aamir]
-		auto angle = std::abs(dir0.Angle(dir1));
-		auto alpha = PI - angle;
-		theAngle = alpha;
-		auto rotated_angle = angle + 0.5 * alpha;
-		bisect = dir0.Rotated(-rotated_angle);
-	}
-	else
-	{// the angle is grater than 180 [8/30/2023 aamir]
-		auto angle = std::abs(dir0.Angle(dir1));
-		auto alpha = PI + angle;
-		theAngle = alpha;
-		auto rotated_angle = angle + 0.5 * alpha;
-		bisect = dir0.Rotated(rotated_angle);
-	}
+	theAngle = Voyage_Tools::CalcTurningAngle(theP0, theP1, theP2);
+	const auto alpha = 0.5 * theAngle;
+	// if the angle < 180 deg. it means the turning would be toward starboard. [9/11/2023 Payvand]
+	// if the angle > 180 deg. it means the turning would be toward port. [9/11/2023 Payvand]
+	Dir2d bisect(theP1, theP2);
+	bisect.Rotate(-alpha);	
+	//auto dir0 = Dir2d(theP0, theP1);
+	//auto dir1 = Dir2d(theP1, theP2);
+	//auto n = dir0.Crossed(dir1);
+	//Dir2d bisect;
+	//if (n <= 0)
+	//{ // the angle is less than 180 deg. [8/30/2023 aamir]
+	//	auto angle = std::abs(dir0.Angle(dir1));
+	//	auto alpha = PI - angle;
+	//	theAngle = alpha;
+	//	auto rotated_angle = angle + 0.5 * alpha;
+	//	bisect = dir0.Rotated(-rotated_angle);
+	//}
+	//else
+	//{// the angle is grater than 180 [8/30/2023 aamir]
+	//	auto angle = std::abs(dir0.Angle(dir1));
+	//	auto alpha = PI + angle;
+	//	theAngle = alpha;
+	//	auto rotated_angle = angle + 0.5 * alpha;
+	//	bisect = dir0.Rotated(rotated_angle);
+	//}
 	auto centre = theP1;
 	auto ray = std::make_shared<Entity2d_Ray>(std::move(centre), std::move(bisect));
 	return std::move(ray);
@@ -295,8 +301,8 @@ tnbLib::VoyageMesh_CorrectSizeMap::RetrieveCoords
 
 namespace tnbLib
 {
-	typedef Mesh_SetSourcesNode<Pnt2d, void> sourceNode;
-	typedef Mesh_SetSourcesNode<Pnt2d, Standard_Real> hNode;
+	using sourceNode = Mesh_SetSourcesNode<Pnt2d, void>;
+	using hNode = Mesh_SetSourcesNode<Pnt2d, Standard_Real>;
 
 	namespace corrSizeMapTools
 	{
@@ -570,7 +576,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrs());
-	hvInfo->SetFactor(/*SmoothingFactor()*/0.25);
+	hvInfo->SetFactor(/*SmoothingFactor()*/0.85);
 
 	const auto& earth = path->Earth();
 	if (NOT earth)
@@ -603,13 +609,19 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
 				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
-				std::cout << " dist = " << dist << ", insct: " << insct << std::endl;
+				dist *= 0.5;
 				if (insct)
 				{
+					std::cout << "it intersected. (right)" << std::endl;
 					if (dist < baseSize)
 					{
-						auto source = std::make_shared<hNode>(std::move(centre), dist);
-						sources.push_back(std::move(source));
+						std::cout << " right dist = " << dist <<", base size = "<< baseSize << std::endl;
+						auto source0 = std::make_shared<hNode>(std::move(centre), dist);
+						sources.push_back(std::move(source0));
+						auto source1 = std::make_shared<hNode>(edge->Node0()->Coord(), dist);
+						sources.push_back(std::move(source1));
+						auto source2 = std::make_shared<hNode>(edge->Node1()->Coord(), dist);
+						sources.push_back(std::move(source2));
 					}
 				}
 				else
@@ -621,13 +633,20 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 			{
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
-				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr);
+				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
+				dist *= 0.5;
 				if (insct)
 				{
+					std::cout << "it intersected. (left)" << std::endl;
 					if (dist < baseSize)
 					{
-						auto source = std::make_shared<hNode>(std::move(centre), dist);
-						sources.push_back(std::move(source));
+						std::cout << " left dist = " << dist <<", base size = "<< baseSize << std::endl;
+						auto source0 = std::make_shared<hNode>(std::move(centre), dist);
+						sources.push_back(std::move(source0));
+						auto source1 = std::make_shared<hNode>(edge->Node0()->Coord(), dist);
+						sources.push_back(std::move(source1));
+						auto source2 = std::make_shared<hNode>(edge->Node1()->Coord(), dist);
+						sources.push_back(std::move(source2));
 					}
 				}
 				else

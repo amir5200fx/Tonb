@@ -28,6 +28,9 @@ namespace tnbLib
 			const std::vector<std::shared_ptr<VoyageMesh_Node>>& theNodes,
 			std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
 		) const;
+
+	template<>
+	TnbVoyage_EXPORT void VoyageMesh_CoreBase::CalcElementSize();
 }
 
 #endif // !_VoyageMesh_CoreBase_Header

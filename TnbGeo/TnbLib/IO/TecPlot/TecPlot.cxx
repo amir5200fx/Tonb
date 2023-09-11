@@ -412,7 +412,7 @@ void tnbLib::Io::ExportPoints
 	if (Points.empty()) return;
 
 	WriteVariables("X Y Z", File);
-	WriteFeTriangleZone((Standard_Integer)Points.size(), (Standard_Integer)Points.size() - 1, File);
+	WriteFeTriangleZone((Standard_Integer)Points.size(), (Standard_Integer)Points.size(), File);
 
 	for (const auto& x : Points)
 	{
@@ -435,7 +435,7 @@ void tnbLib::Io::ExportPoints
 	if (Points.empty()) return;
 
 	WriteVariables("X Y", File);
-	WriteFeTriangleZone((Standard_Integer)Points.size(), (Standard_Integer)Points.size() - 1, File);
+	WriteFeTriangleZone((Standard_Integer)Points.size(), (Standard_Integer)Points.size(), File);
 
 	for (const auto& x : Points)
 	{

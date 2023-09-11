@@ -153,7 +153,7 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 		// get desired element size from back-ground mesh
 		CalcElementSize();
 		
-		std::cout << "element size: " << this->ElementSize() << std::endl;
+		std::cout <<" elm no. "<< this->NbElements() + 1 << ", element size: " << this->ElementSize() << std::endl;
 		// Calculate optimum coordinate of new point
 		CalcOptimumCoord();
 

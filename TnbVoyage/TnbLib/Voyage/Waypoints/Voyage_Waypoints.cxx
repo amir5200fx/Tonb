@@ -60,7 +60,7 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 )
 {
 	std::vector<std::shared_ptr<VoyageMesh_Edge>> starboard, port;
-	{// the starboard regions [9/3/2023 Payvand]
+	{// the port regions [9/3/2023 Payvand]
 		Standard_Integer region_nb = 0;
 		for (const auto& x : thePolygons)
 		{
@@ -71,11 +71,11 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 			{
 				Debug_Null_Pointer(e);
 				e->SetRegion(region_nb);
-				starboard.push_back(std::move(e));
+				port.push_back(std::move(e));
 			}
 		}
 	}
-	{// the port regions [9/3/2023 Payvand]
+	{// the starboard regions [9/3/2023 Payvand]
 		Standard_Integer region_nb = 0;
 		auto polygons = thePolygons;
 		std::reverse(polygons.begin(), polygons.end());
@@ -92,7 +92,7 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 				auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
 				Debug_Null_Pointer(ref);
 				ref->SetSense(Standard_False);
-				port.push_back(std::move(e));
+				starboard.push_back(std::move(e));
 			}
 		}
 	}
@@ -108,7 +108,7 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 	{
 		const auto& n0 = x->Node0();
 		const auto& n1 = x->Node1();
-		std::cout << "i0: " << n0->Index() << ", i1: " << n1->Index() << std::endl;
+		//std::cout << "i0: " << n0->Index() << ", i1: " << n1->Index() << std::endl;
 	}
 	auto t = std::make_pair(std::move(starboard), std::move(port));
 	return std::move(t);

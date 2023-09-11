@@ -105,8 +105,8 @@ int main()
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
 
-		Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
-		std::exit(1);
+		//Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
+		//std::exit(1);
 	}
 
 	
@@ -207,7 +207,7 @@ int main()
 	OFstream triFile("triangle.plt");
 	OFstream triFile1("triangle.vtk");
 	{// plot the starboard mesh [9/6/2023 aamir]
-		const auto mesh = Voyage_Tools::ConvertToVoyageSystem(*wayPoints->StarMesh());
+		const auto mesh = /*Voyage_Tools::ConvertToVoyageSystem(**/wayPoints->StarMesh()/*)*/;
 		mesh->ExportToPlt(triFile);
 		mesh->ExportToVtk(triFile1);
 	}
@@ -265,7 +265,7 @@ int main()
 		VoyageMesh_CorrectSizeMap::verbose = 1;
 		auto alg = std::make_shared<VoyageMesh_CorrectSizeMap>();
 		alg->SetPath(path);
-		alg->SetDirection(VoyageMesh_CorrectSizeMap::PathDirect::Starboard);
+		alg->SetDirection(voyageLib::PathDirect::Starboard);
 		alg->SetSizeFunction(unCorrSizeFun);
 		alg->SetInfo(metricInfo);
 

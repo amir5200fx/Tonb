@@ -133,7 +133,7 @@ void tnbLib::Voyage_SizeMap::Perform()
 		Debug_Null_Pointer(alg);
 		alg->SetBaseSize(1.0 / baseSize); // I use the inverse value for the base size
 		alg->SetPath(path);
-		alg->SetDirection(VoyageMesh_CorrectSizeMap::PathDirect::Starboard);
+		alg->SetDirection(voyageLib::PathDirect::Starboard);
 		alg->SetSizeFunction(unCorrSizeFun);
 		alg->SetInfo(GetInfo());
 		// Perform the application
@@ -167,7 +167,7 @@ void tnbLib::Voyage_SizeMap::Perform()
 		Debug_Null_Pointer(alg);
 		alg->SetBaseSize(1.0 / baseSize); // I use the inverse value for the base size
 		alg->SetPath(path);
-		alg->SetDirection(VoyageMesh_CorrectSizeMap::PathDirect::Port);
+		alg->SetDirection(voyageLib::PathDirect::Port);
 		alg->SetSizeFunction(unCorrSizeFun);
 		alg->SetInfo(GetInfo());
 		// Perform the application

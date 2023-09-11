@@ -71,3 +71,23 @@ void tnbLib::VoyageMesh_CoreBase::RetrieveLocalFrontEntities<void>
 	}
 	std::copy(compact.begin(), compact.end(), std::back_inserter(theEdges));
 }
+
+template<>
+void tnbLib::VoyageMesh_CoreBase::CalcElementSize()
+{
+	Debug_Null_Pointer(frontInfo::CurrentFront());
+	const auto& n0 = this->CurrentFront()->Node0();
+	const auto& n1 = this->CurrentFront()->Node1();
+	Debug_Null_Pointer(n0);
+	Debug_Null_Pointer(n1);
+	Debug_Null_Pointer(theMetricMap_);
+	std::cout<<"min size : " << std::min(theMetricMap_->CalcElementSize(n0->Coord()) *
+		SIZE_TO_HIGHT_ELEMENT_COEFF, theMetricMap_->CalcElementSize(n1->Coord()) *
+		SIZE_TO_HIGHT_ELEMENT_COEFF) << std::endl;
+	frontInfo::SetElementSize
+	(
+		std::min(theMetricMap_->CalcElementSize(n0->Coord()) *
+			SIZE_TO_HIGHT_ELEMENT_COEFF, theMetricMap_->CalcElementSize(n1->Coord()) *
+			SIZE_TO_HIGHT_ELEMENT_COEFF)
+	);
+}

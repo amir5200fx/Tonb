@@ -2,6 +2,7 @@
 #ifndef _VoyageMesh_CorrectSizeMap_Header
 #define _VoyageMesh_CorrectSizeMap_Header
 
+#include <Voyage_PathDir.hxx>
 #include <Voyage_Module.hxx>
 #include <Geo2d_MetricPrcsrAnIsoFwd.hxx>
 #include <GeoMesh2d_BackgroundFwd.hxx>
@@ -187,12 +188,6 @@ namespace tnbLib
 			void SetNode1(const std::shared_ptr<Node>& theNode) { theNode1_ = theNode; }
 		};
 
-		enum class PathDirect
-		{
-			Starboard = 0,
-			Port
-		};
-
 	private:
 
 		/*Private Data*/
@@ -200,7 +195,7 @@ namespace tnbLib
 		std::shared_ptr<VoyageGeo_Path2> thePath_;
 		std::shared_ptr<Geo2d_SizeFunction> theSizeFunction_;
 		std::shared_ptr<Voyage_MetricInfo> theInfo_;
-		PathDirect theDirection_;
+		voyageLib::PathDirect theDirection_;
 
 		Standard_Integer theMaxNbCorrs_;
 		Standard_Real theSmoothingFactor_;
@@ -247,7 +242,14 @@ namespace tnbLib
 		static TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>>
 			RetrieveNodes(const std::vector<std::shared_ptr<Edge>>&);
 		static TnbVoyage_EXPORT std::pair<Standard_Real, Standard_Boolean>
-			CalcDistance(const Edge& theEdge, const Entity2d_Ray& theRay, const Geo2d_MetricPrcsrAnIso&, const Standard_Boolean reverse_normal = Standard_False);
+			CalcDistance
+			(
+				const Edge& theEdge,
+				const Entity2d_Ray& theRay, 
+				const Geo2d_MetricPrcsrAnIso&, 
+				const Standard_Boolean reverse_normal = Standard_False
+			);
+
 		static TnbVoyage_EXPORT std::vector<Pnt2d>
 			RetrieveCoords(const std::vector<std::shared_ptr<Entity2d_Polygon>>&);
 
@@ -302,7 +304,7 @@ namespace tnbLib
 
 		void SetPath(const std::shared_ptr<VoyageGeo_Path2>& thePath) { thePath_ = thePath; }
 		void SetSizeFunction(const std::shared_ptr<Geo2d_SizeFunction>& theFunc) { theSizeFunction_ = theFunc; }
-		void SetDirection(const PathDirect theDir) { theDirection_ = theDir; }
+		void SetDirection(const voyageLib::PathDirect theDir) { theDirection_ = theDir; }
 		void SetBaseSize(const Standard_Real theSize) { theBaseSize_ = theSize; }
 		void SetInfo(const std::shared_ptr<Voyage_MetricInfo>& theInfo) { theInfo_ = theInfo; }
 	};

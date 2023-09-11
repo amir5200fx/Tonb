@@ -20,6 +20,7 @@
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Polygon.hxx>
 #include <Entity2d_Box.hxx>
+#include <TecPlot.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -579,12 +580,14 @@ tnbLib::Voyage_Tools::CalcTurningAngle
 	const auto p2 = theP2.Transformed(trsf);
 	const auto dx = p2.X() - p1.X();
 	const auto dy = p2.Y() - p1.Y();
-	std::cout << "theta = " << Geo_Tools::RadianToDegree(std::atan(dy / dx)) << std::endl;
-	std::cout << theP0 << std::endl;
-	std::cout << theP1 << std::endl;
-	std::cout << theP2 << std::endl;
-	std::cout << std::endl;
-	std::cout << p1 << std::endl;
-	std::cout << p2 << std::endl;
-	return 0;
+	// if the angle < 0 it means that the turning diretion would be toward starboard. [9/11/2023 Payvand]
+	const auto angle = std::atan(dy / dx);
+	if (angle < 0)
+	{
+		return PI + angle;
+	}
+	else
+	{
+		return PI + angle;
+	}
 }
