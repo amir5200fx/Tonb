@@ -170,6 +170,7 @@ namespace tnbLib
 		void ExportToPlt(std::fstream& File) const;
 
 		void ExportToPlt(OFstream& File) const;
+		void ExportToVtk(OFstream&) const;
 	};
 
 	template<class Point, class ConnectType>

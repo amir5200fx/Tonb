@@ -1126,6 +1126,9 @@
     <Filter Include="TnbLib\Geo\UniformNet\2d">
       <UniqueIdentifier>{c23d27a3-7e8e-4cd0-b91f-a6b38a90c0e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\IO\vtk">
+      <UniqueIdentifier>{684662b8-71a0-4111-856d-dbb72f31d346}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Geo\Point\2d\Pnt2d.hxx">
@@ -2568,6 +2571,9 @@
     <ClInclude Include="TnbLib\Geo\UniformNet\2d\Geo2d_UniformNet.hxx">
       <Filter>TnbLib\Geo\UniformNet\2d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\IO\vtk\GeoIO_VTK.hxx">
+      <Filter>TnbLib\IO\vtk</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">
@@ -3262,6 +3268,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Geo\UniformNet\2d\Geo2d_UniformNet.cxx">
       <Filter>TnbLib\Geo\UniformNet\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\IO\vtk\GeoIO_VTK.cxx">
+      <Filter>TnbLib\IO\vtk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
