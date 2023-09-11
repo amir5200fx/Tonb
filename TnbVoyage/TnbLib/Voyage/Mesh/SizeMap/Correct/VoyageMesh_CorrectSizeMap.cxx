@@ -442,10 +442,11 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 
 	auto bisectAngles = CalcBisectAngles();
 	
-	/*for (const auto& x : bisectAngles)
+	for (const auto& x : bisectAngles)
 	{
-		std::cout << "angle = " << x->Angle() << std::endl;
-	}*/
+		std::cout << "angle = " << Geo_Tools::RadianToDegree(x->Angle()) << std::endl;
+	}
+	PAUSE;
 	//auto chain = CalcEdges();
 	auto polygons = RetrievePolygons();
 	auto coords = RetrieveCoords(polygons);
@@ -602,7 +603,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
 				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
-				//std::cout << " dist = " << dist << ", insct: " << insct << std::endl;
+				std::cout << " dist = " << dist << ", insct: " << insct << std::endl;
 				if (insct)
 				{
 					if (dist < baseSize)

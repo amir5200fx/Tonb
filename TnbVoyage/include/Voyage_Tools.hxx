@@ -157,6 +157,14 @@ namespace tnbLib
 
 		// The route angle is greater than zero if the route turns to the left and is less than zero if turns to the right [8/5/2023 Payvand]
 		static Standard_Real CalcRouteAngle(const Pnt2d& theP0, const Pnt2d& theP1, const Pnt2d& theP2);
+		
+		static TnbVoyage_EXPORT Standard_Real 
+			CalcTurningAngle
+			(
+				const Pnt2d& theP0, 
+				const Pnt2d& theP1, 
+				const Pnt2d& theP2
+			);
 
 		static Vec2d CalcRightsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
 		static Vec2d CalcLeftsideNormal(const Pnt2d& theP0, const Pnt2d& theP1);
@@ -201,6 +209,15 @@ namespace tnbLib
 			const Standard_Real theGrowthRate, 
 			GeoMesh2d_SingleBackground& theMesh
 		);
+
+		static TnbVoyage_EXPORT void SetInverseSourcesToMesh
+		(
+			const std::vector<std::shared_ptr<Mesh_SetSourcesNode<Pnt2d, Standard_Real>>>& theSources,
+			const Standard_Real theBase,
+			const Standard_Real theGrowthRate,
+			GeoMesh2d_SingleBackground& theMesh
+		);
+
 	};
 }
 

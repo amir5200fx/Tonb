@@ -26,6 +26,8 @@
 #include <set>
 
 #include <Geom_Surface.hxx>
+#include <gp_Trsf2d.hxx>
+#include <gp_Ax2d.hxx>
 
 std::shared_ptr<tnbLib::Entity2d_Box> 
 tnbLib::Voyage_Tools::RetrieveDomain
@@ -559,4 +561,30 @@ void tnbLib::Voyage_Tools::CalcCoord3d
 	auto surface = theEarth.Surface();
 	Debug_Null_Pointer(surface);
 	CalcCoord3d(theNodes, *surface);
+}
+
+Standard_Real 
+tnbLib::Voyage_Tools::CalcTurningAngle
+(
+	const Pnt2d& theP0, 
+	const Pnt2d& theP1, 
+	const Pnt2d& theP2
+)
+{
+	const Dir2d dir(theP0, theP1);
+	gp_Trsf2d trsf;
+	trsf.SetTransformation(gp::OX2d(), gp_Ax2d(theP0, dir));
+	const auto p0 = theP0.Transformed(trsf);
+	const auto p1 = theP1.Transformed(trsf);
+	const auto p2 = theP2.Transformed(trsf);
+	const auto dx = p2.X() - p1.X();
+	const auto dy = p2.Y() - p1.Y();
+	std::cout << "theta = " << Geo_Tools::RadianToDegree(std::atan(dy / dx)) << std::endl;
+	std::cout << theP0 << std::endl;
+	std::cout << theP1 << std::endl;
+	std::cout << theP2 << std::endl;
+	std::cout << std::endl;
+	std::cout << p1 << std::endl;
+	std::cout << p2 << std::endl;
+	return 0;
 }
