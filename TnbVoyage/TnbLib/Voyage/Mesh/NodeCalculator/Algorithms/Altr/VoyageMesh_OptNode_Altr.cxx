@@ -5,6 +5,7 @@
 #include <VoyageMesh_AltrOptNode.hxx>
 #include <VoyageMesh_MetricPrcsr.hxx>
 #include <Aft_SizeCorr_IterativeInfo.hxx>
+#include <GeoSizeFun2d_Uniform.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
@@ -12,12 +13,21 @@ template<>
 void tnbLib::VoyageMesh_OptNode_Altr::Perform()
 {
 	Debug_Null_Pointer(this->GetInfo());
-
+	Debug_Null_Pointer(this->Front());
+	Debug_Null_Pointer(this->MetricMap());
+	const auto size = this->MetricMap()->CalcElementSize(this->Front()->Centre());
+	auto uni_sizefun = 
+		std::make_shared<GeoSizeFun2d_Uniform>
+		(size, this->MetricMap()->BoundingBox());
+	// Create a new metric map based on the uniform size function. [9/12/2023 Payvand]
+	auto metric_procsr = 
+		std::make_shared<VoyageMesh_MetricPrcsr>
+		(uni_sizefun, this->MetricMap()->MetricFunction(), this->MetricMap()->Info());
 	auto alg = std::make_shared<VoyageMesh_IterOptNode_Calculator>(this->GetInfo());
 	Debug_Null_Pointer(alg);
 
 	alg->SetFront(this->Front());
-	alg->SetMetricMap(this->MetricMap());
+	alg->SetMetricMap(metric_procsr);
 	alg->SetSize(this->Size());
 
 	alg->Perform();
@@ -26,7 +36,7 @@ void tnbLib::VoyageMesh_OptNode_Altr::Perform()
 	if (NOT alg->IsConverged())
 	{
 		AlterAlg()->SetFront(this->Front());
-		AlterAlg()->SetMetricMap(this->MetricMap());
+		AlterAlg()->SetMetricMap(metric_procsr);
 		AlterAlg()->SetElmSize(this->Size());
 		AlterAlg()->SetP0(alg->Coord());
 
