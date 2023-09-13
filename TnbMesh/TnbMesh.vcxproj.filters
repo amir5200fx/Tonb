@@ -2278,6 +2278,12 @@
     <Filter Include="TnbLib\Base\Tools\MultiSizeMap\Iso\2d">
       <UniqueIdentifier>{a0518ebd-778a-45a6-bcad-d5586dea61c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\BndLayer">
+      <UniqueIdentifier>{c227640c-e8c0-40eb-ae5f-97c6c0a7d721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\BndLayer\Info">
+      <UniqueIdentifier>{c42d46ab-9ff7-41ee-a53e-f58181686e03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Base\Entities\Entity\Mesh_Entity.hxx">
@@ -5544,6 +5550,9 @@
     <ClInclude Include="TnbLib\Base\IO\3d\MeshIO3d_PentaFEA.hxx">
       <Filter>TnbLib\Base\IO\3d</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\BndLayer\Info\Mesh_BndLayer_Info.hxx">
+      <Filter>TnbLib\BndLayer\Info</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Base\Entities\Entity\Mesh_Entity.cxx">
@@ -7273,6 +7282,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Base\IO\3d\MeshIO3d_PentaFEA.cxx">
       <Filter>TnbLib\Base\IO\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\BndLayer\Info\Mesh_BndLayer_Info.cxx">
+      <Filter>TnbLib\BndLayer\Info</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
