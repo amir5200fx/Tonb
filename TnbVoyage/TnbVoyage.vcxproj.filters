@@ -884,5 +884,11 @@
     <ClCompile Include="TnbLib\Voyage\Mesh\Entities\Edge\Ref\VoyageMesh_RefEdge.cxx">
       <Filter>TnbLib\Voyage\Mesh\Entities\Edge\Ref</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Offset\VoyageWP_OffsetIO.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Offset</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistbIO.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\PointDistb</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

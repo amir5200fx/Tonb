@@ -2,6 +2,7 @@
 #ifndef _VoyageWP_PointDistb_Header
 #define _VoyageWP_PointDistb_Header
 
+#include <Voyage_Module.hxx>
 #include <Entity2d_PolygonFwd.hxx>
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
@@ -258,7 +259,7 @@ namespace tnbLib
 
 		const auto& Nodes() const { return theNodes_; }
 
-		void Perform();
+		TnbVoyage_EXPORT void Perform();
 
 		void SetSize(const Standard_Real theSize) { theSize_ = theSize; }
 
@@ -269,6 +270,7 @@ namespace tnbLib
 		void SetCurveInfo(const std::shared_ptr<Mesh_Curve_Info>& theInfo) { theCurveInfo_ = theInfo; }
 		void SetIntegInfo(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo) { theIntegInfo_ = theInfo; }
 
+		void ExportToPlt(OFstream&) const;
 	};
 }
 

@@ -153,10 +153,12 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 		// get desired element size from back-ground mesh
 		CalcElementSize();
 		
-		std::cout <<" elm no. "<< this->NbElements() + 1 << ", element size: " << this->ElementSize() << std::endl;
+		//std::cout <<" elm no. "<< this->NbElements() + 1 << ", element size: " << this->ElementSize() << std::endl;
 		// Calculate optimum coordinate of new point
 		CalcOptimumCoord();
-
+		//std::cout << MetricMap()->CalcDistance(this->Coord(), CurrentFront()->Centre()) << std::endl;
+		//std::cout << MetricMap()->CalcDistance(this->Coord(), CurrentFront()->Node0()->Coord()) << std::endl;
+		//std::cout << MetricMap()->CalcDistance(this->Coord(), CurrentFront()->Node1()->Coord()) << std::endl;
 		CalcLocalFrontRadius();
 
 		// Set depth of searching radius
@@ -185,6 +187,7 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 
 		Update();
 	}
+	//PAUSE;
 }
 
 void tnbLib::Voyage_Mesh::FindValidNode
@@ -273,6 +276,7 @@ void tnbLib::Voyage_Mesh::FindValidNode
 	for (const auto& x : theCandidates)
 	{
 		Debug_Null_Pointer(x);
+		if (x->IsBoundary() OR x->IsReference()) continue;
 		const auto& node = *x;
 
 		const auto nodeIndex = node.Index();
@@ -378,7 +382,22 @@ void tnbLib::Voyage_Mesh::Mesh()
 
 	AlgCondition() = Aft_AlgCondition::Generation;
 
-	MeshOneLevel();
+	Standard_Integer lev = 0;
+	while (NOT base::IsPriorityEmpty())
+	{
+		MeshOneLevel();
+		if (lev > 0)
+		{
+			break;
+		}
+		if (IsSameLevelFueled())
+		{
+			AlgCondition() = Aft_AlgCondition::Repair;
+			lev++;
+			continue;		
+		}
+	}
+	
 }
 
 void tnbLib::Voyage_Mesh::InsertNewFrontsToLevels()

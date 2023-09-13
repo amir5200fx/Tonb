@@ -16,6 +16,11 @@ namespace tnbLib
 {
 
 	template<>
+	TnbVoyage_EXPORT Standard_Boolean VoyageMesh_CoreBase::IsSameLevelFueled();
+	template<>
+	TnbVoyage_EXPORT Standard_Boolean VoyageMesh_CoreBase::IsCavityRemoverFueled();
+
+	template<>
 	TnbVoyage_EXPORT void VoyageMesh_CoreBase::AddOptimumNodeTo
 	(
 		std::vector<std::shared_ptr<VoyageMesh_Node>>&
@@ -31,6 +36,9 @@ namespace tnbLib
 
 	template<>
 	TnbVoyage_EXPORT void VoyageMesh_CoreBase::CalcElementSize();
+
+	template<>
+	TnbVoyage_EXPORT void VoyageMesh_CoreBase::CalcLocalFrontRadius();
 }
 
 #endif // !_VoyageMesh_CoreBase_Header

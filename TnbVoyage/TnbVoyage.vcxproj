@@ -316,7 +316,9 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_Net.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\OffsetProfile\Segment\Voyage_OffsetProfile_Segment.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Offset\VoyageWP_Offset.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Offset\VoyageWP_OffsetIO.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistb.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistbIO.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Ref\VoyageWP_Ref.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Voyage_Waypoints.cxx" />
   </ItemGroup>

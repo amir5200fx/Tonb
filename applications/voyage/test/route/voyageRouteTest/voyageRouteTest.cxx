@@ -202,16 +202,18 @@ int main()
 	wayPoints->SetInfo(metricInfo);
 	wayPoints->SetPortSizeFunction(sizeMap->Port());
 	wayPoints->SetStarboardSizeFunction(sizeMap->Startboard());
+	wayPoints->SetSize(h);
 	wayPoints->Perform();
 
-	OFstream triFile("triangle.plt");
-	OFstream triFile1("triangle0.vtk");
-	OFstream triFile2("triangle1.vtk");
+	OFstream triFile1("triangle.plt");
+	//OFstream triFile2("triangle1.plt");
+	//OFstream triFile1("triangle0.vtk");
+	//OFstream triFile2("triangle1.vtk");
 	{// plot the starboard mesh [9/6/2023 aamir]
 		const auto mesh = /*Voyage_Tools::ConvertToVoyageSystem(**/wayPoints->StarMesh()/*)*/;
-		mesh->ExportToPlt(triFile);
-		mesh->ExportToVtk(triFile1);
-		wayPoints->PortMesh()->ExportToVtk(triFile2);
+		mesh->ExportToPlt(triFile1);
+		//mesh->ExportToVtk(triFile1);
+		wayPoints->PortMesh()->ExportToPlt(triFile1);
 	}
 
 	return 1;

@@ -265,13 +265,18 @@ namespace tnbLib
 
 		//- Public functions and operators
 
+		auto Size() const { return (Standard_Integer)theRef_.size(); }
+
 		const auto& Ref() const { return theRef_; }
 
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveInteriors() const;
+		TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveNodes() const;
 		TnbVoyage_EXPORT std::shared_ptr<Node> Departure() const;
 		TnbVoyage_EXPORT std::shared_ptr<Node> Arrival() const;
 
-		void CalcOffsets(const VoyageWP_Ref&);
+		TnbVoyage_EXPORT void CalcOffsets(const VoyageWP_Ref&);
+
+		TnbVoyage_EXPORT void ExportToPlt(OFstream&) const;
 
 	};
 }

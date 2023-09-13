@@ -182,6 +182,7 @@ namespace tnbLib
 		return Standard_True;
 	}
 
+	// The first one is starboard and the seond is port [9/13/2023 Payvand]
 	std::vector
 		<
 		std::pair
@@ -230,6 +231,8 @@ namespace tnbLib
 		Debug_Null_Pointer(ref0);
 		auto ref1 = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e1);
 		Debug_Null_Pointer(ref1);
+		//std::cout << "sense 0 : " << ref0->Sense() << std::endl;
+		//std::cout << "sense 1 : " << ref1->Sense() << std::endl;
 		auto n0 = ref0->Node0();
 		if (NOT ref0->Sense())
 		{
@@ -310,6 +313,18 @@ namespace tnbLib
 	}
 }
 
+std::shared_ptr<tnbLib::VoyageWP_Ref::SupNode>
+tnbLib::VoyageWP_Ref::GetDeparture() const
+{
+	return FirstItem(theEntities_)->Node0();
+}
+
+std::shared_ptr<tnbLib::VoyageWP_Ref::SupNode>
+tnbLib::VoyageWP_Ref::GetArrival() const
+{
+	return LastItem(theEntities_)->Node1();
+}
+
 std::shared_ptr<tnbLib::VoyageWP_Ref::SupNode> 
 tnbLib::VoyageWP_Ref::Departure() const
 {
@@ -319,7 +334,7 @@ tnbLib::VoyageWP_Ref::Departure() const
 			<< "the applications is not performed." << endl
 			<< abort(FatalError);
 	}
-	return FirstItem(theEntities_)->Node0();
+	return GetDeparture();
 }
 
 std::shared_ptr<tnbLib::VoyageWP_Ref::SupNode> 
@@ -331,7 +346,7 @@ tnbLib::VoyageWP_Ref::Arrival() const
 			<< "the application is not performed." << endl
 			<< abort(FatalError);
 	}
-	return LastItem(theEntities_)->Node1();
+	return GetArrival();
 }
 
 void tnbLib::VoyageWP_Ref::CalcReference
@@ -350,17 +365,56 @@ void tnbLib::VoyageWP_Ref::CalcReference
 	auto nodes = CalcNodes(edges);
 	Standard_Integer nbEdges = 0;
 	std::vector<std::shared_ptr<SupEdge>> super_edges;
-	super_edges.reserve(nodes.size() - 1);
-	for (size_t i = 1; i < nodes.size(); i++)
+	super_edges.reserve(edges.size());
+	for (size_t i = 0; i < edges.size(); i++)
 	{
-		const auto& n0 = nodes.at(i - 1);
-		const auto& n1 = nodes.at(i);
+		const auto& n0 = nodes.at(i);
+		const auto& n1 = nodes.at(i + 1);
+		//std::cout << "n0 = " << n0->Coord() << std::endl;
+		//std::cout << "n1 = " << n1->Coord() << std::endl;
+		//std::cout << std::endl;
 		Debug_Null_Pointer(n0);
 		Debug_Null_Pointer(n1);
 		auto sup_edge = std::make_shared<SupEdge>(++nbEdges, n0, n1);
+		Debug_Null_Pointer(sup_edge);
+		sup_edge->SetStarboard(edges.at(i).first);
+		sup_edge->SetPort(edges.at(i).second);
 		super_edges.push_back(std::move(sup_edge));
 	}
-	theEntities_ = std::move(super_edges);
+	//std::exit(1);
+	theEntities_ = super_edges;
+	{// getting the departure node [9/13/2023 Payvand]
+		auto node = std::dynamic_pointer_cast<DepNode>(GetDeparture());
+		Debug_Null_Pointer(node);
+		auto edge = FirstItem(super_edges);
+		Debug_Null_Pointer(edge);
+		node->SetForward(edge);
+		auto inter_node = std::dynamic_pointer_cast<InterNode>(edge->Node1());
+		Debug_Null_Pointer(inter_node);
+		inter_node->SetBackward(edge);
+	}
+	{
+		// getting the arrival node [9/13/2023 Payvand]
+		auto node = std::dynamic_pointer_cast<ArvNode>(GetArrival());
+		Debug_Null_Pointer(node);
+		auto edge = LastItem(super_edges);
+		Debug_Null_Pointer(edge);
+		node->SetBackward(edge);
+		auto inter_node = std::dynamic_pointer_cast<InterNode>(edge->Node0());
+		Debug_Null_Pointer(inter_node);
+		inter_node->SetForward(edge);
+	}
+	// Setting up the forward and the backward edges for interior nodes [9/13/2023 Payvand]
+	for (size_t i = 1; i < super_edges.size() - 1; i++)
+	{
+		Debug_Null_Pointer(super_edges.at(i));
+		const auto node0 = std::dynamic_pointer_cast<InterNode>(super_edges.at(i)->Node0());
+		const auto node1 = std::dynamic_pointer_cast<InterNode>(super_edges.at(i)->Node1());
+		Debug_Null_Pointer(node0);
+		Debug_Null_Pointer(node1);
+		node0->SetForward(super_edges.at(i));
+		node1->SetBackward(super_edges.at(i));
+	}
 	Change_IsDone() = Standard_True;
 }
 

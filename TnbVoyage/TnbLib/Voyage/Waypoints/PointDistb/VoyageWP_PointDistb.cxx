@@ -138,7 +138,7 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 		auto star_side = std::make_shared<StarSide>();
 		star_side->SetOffsets(star_poly);
 		auto port_side = std::make_shared<PortSide>();
-		port_side->SetOffsets(star_poly);
+		port_side->SetOffsets(port_poly);
 
 		auto ref_node = std::make_shared<InterNode>(++nb_nodes, x->Coord());
 		ref_node->SetStarboard(star_side);

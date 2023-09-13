@@ -289,6 +289,11 @@ namespace tnbLib
 
 		std::vector<std::shared_ptr<SupEdge>> theEntities_;
 
+		// Private functions and operators [9/13/2023 Payvand]
+
+		TnbVoyage_EXPORT std::shared_ptr<SupNode> GetDeparture() const;
+		TnbVoyage_EXPORT std::shared_ptr<SupNode> GetArrival() const;
+
 	public:
 
 		static TnbVoyage_EXPORT Standard_Real DEFAULT_TOL;

@@ -2,6 +2,7 @@
 #ifndef _VoyageWP_Connect_Header
 #define _VoyageWP_Connect_Header
 
+#include <Voyage_Module.hxx>
 #include <Global_Done.hxx>
 
 #include <memory>
@@ -34,7 +35,7 @@ namespace tnbLib
 	public:
 
 		//- the maximum allowable subdivision level
-		static Standard_Integer DEFAULT_SUB_LEV;
+		static TnbVoyage_EXPORT Standard_Integer DEFAULT_SUB_LEV;
 
 		//- default constructor
 
@@ -55,7 +56,7 @@ namespace tnbLib
 		const auto& CurveInfo() const { return theCurveInfo_; }
 		const auto& MetricInfo() const { return theMetricInfo_; }
 
-		void Perform();
+		TnbVoyage_EXPORT void Perform();
 
 		void SetNet(const std::shared_ptr<VoyageWP_Net>& theNet) { theNet_ = theNet; }
 		void SetAngle(const Standard_Real theAngle) { theAngle_ = theAngle; }

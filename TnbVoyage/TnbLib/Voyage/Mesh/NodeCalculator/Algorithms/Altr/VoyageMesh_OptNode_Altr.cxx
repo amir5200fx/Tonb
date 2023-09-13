@@ -33,8 +33,9 @@ void tnbLib::VoyageMesh_OptNode_Altr::Perform()
 	alg->Perform();
 	Debug_If_Condition_Message(NOT alg->IsDone(), "the algorithm is not performed!");
 
-	if (NOT alg->IsConverged())
+	if (/*NOT alg->IsConverged()*/false)
 	{
+		std::cout << "it's not converged..." << std::endl;
 		AlterAlg()->SetFront(this->Front());
 		AlterAlg()->SetMetricMap(metric_procsr);
 		AlterAlg()->SetElmSize(this->Size());

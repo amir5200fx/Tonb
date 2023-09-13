@@ -41,10 +41,13 @@ void tnbLib::VoyageWP_Offset::CalcOffsets
 		node->SetTangent(ref_node->CalcTangent());
 		nodes.push_back(std::move(node));
 	}
+	// the internal nodes [9/13/2023 Payvand]
 	for (size_t i = 1; i < edges.size(); i++)
 	{
 		Debug_Null_Pointer(edges.at(i));
 		const auto& ref_node = edges.at(i)->Node0();
+		//std::cout << "ref node : " << ref_node->Coord() << std::endl;
+		//std::cout << "other node : " << edges.at(i)->Node1()->Coord() << std::endl;
 		Debug_Null_Pointer(ref_node);
 		auto node = std::make_shared<InterNode>(++nb_nodes, ref_node->Coord());
 		Debug_Null_Pointer(node);
@@ -56,8 +59,11 @@ void tnbLib::VoyageWP_Offset::CalcOffsets
 			auto star_offset_node = std::make_shared<OffsetNode>(++nb_nodes, interior_node->CalcStarOffset());
 			Debug_Null_Pointer(star_offset_node);
 			star_offset_node->SetRef(node);
-			node->SetStarboard(std::move(star_offset_node));
-
+			//std::cout << node->Coord() << std::endl;
+			//std::cout << star_offset_node->Coord() << std::endl;
+			//std::cout << std::endl << std::endl;
+			//PAUSE;
+			node->SetStarboard(std::move(star_offset_node));		
 			auto port_offset_node = std::make_shared<OffsetNode>(++nb_nodes, interior_node->CalcPortOffset());
 			Debug_Null_Pointer(port_offset_node);
 			port_offset_node->SetRef(node);
@@ -85,6 +91,23 @@ tnbLib::VoyageWP_Offset::RetrieveInteriors() const
 	{
 		nodes.emplace_back(theRef_.at(i));
 	}
+	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Offset::Node>>
+tnbLib::VoyageWP_Offset::RetrieveNodes() const
+{
+	std::vector<std::shared_ptr<Node>> nodes;
+	nodes.emplace_back(Departure());
+	for (size_t i = 1; i <= theRef_.size() - 2; i++)
+	{
+		auto node = std::dynamic_pointer_cast<InterNode>(theRef_.at(i));
+		Debug_Null_Pointer(node);
+		nodes.emplace_back(node);
+		nodes.emplace_back(node->Starboard());
+		nodes.emplace_back(node->Port());
+	}
+	nodes.emplace_back(Arrival());
 	return std::move(nodes);
 }
 

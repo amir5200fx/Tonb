@@ -570,7 +570,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrs());
-	hvInfo->SetFactor(/*SmoothingFactor()*/0.35);
+	hvInfo->SetFactor(/*SmoothingFactor()*/0.25);
 
 	const auto& earth = path->Earth();
 	if (NOT earth)
@@ -603,7 +603,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
 				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
-				dist *= 0.5;
+				dist *= 0.25;
 				if (insct)
 				{
 					//std::cout << "it intersected. (right)" << std::endl;
@@ -628,7 +628,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 				auto centre = edge->CalcCentre();
 				auto baseSize = sizeFun->Value(centre);
 				auto [dist, insct] = CalcDistance(*edge, *ray, *metricProcsr, Standard_True);
-				dist *= 0.5;
+				dist *= 0.25;
 				if (insct)
 				{
 					//std::cout << "it intersected. (left)" << std::endl;

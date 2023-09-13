@@ -45,7 +45,7 @@ void tnbLib::VoyageMesh_IterOptNode_Calculator::Perform()
 			<< "invalid element size has been detected" << endl
 			<< abort(FatalError);
 	}
-
+	//std::cout << "calculato's size elem: " << Size() << std::endl;
 	auto m = MetricMap()->CalcMetric(Front()->Centre());
 
 	const auto& v0 = Front()->Node0()->Coord();

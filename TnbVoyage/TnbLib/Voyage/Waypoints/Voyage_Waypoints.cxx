@@ -1,5 +1,7 @@
 #include <Voyage_Waypoints.hxx>
 #define FULLDEBUG
+#include <VoyageWP_PointDistb.hxx>
+#include <Voyage_OffsetProfile_Segment.hxx>
 #include <VoyageWP_Ref.hxx>
 #include <VoyageWP_Offset.hxx>
 #include <Voyage_MetricInfo.hxx>
@@ -71,6 +73,9 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 			{
 				Debug_Null_Pointer(e);
 				e->SetRegion(region_nb);
+				auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
+				Debug_Null_Pointer(ref);
+				ref->SetSense(Standard_False);
 				port.push_back(std::move(e));
 			}
 		}
@@ -91,7 +96,7 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 				e->SetRegion(region_nb);
 				auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
 				Debug_Null_Pointer(ref);
-				ref->SetSense(Standard_False);
+				//ref->SetSense(Standard_False);
 				starboard.push_back(std::move(e));
 			}
 		}
@@ -104,12 +109,6 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 	Merge(port);
 	Renumber(starboard);
 	Renumber(port);
-	for (const auto& x : starboard)
-	{
-		const auto& n0 = x->Node0();
-		const auto& n1 = x->Node1();
-		//std::cout << "i0: " << n0->Index() << ", i1: " << n1->Index() << std::endl;
-	}
 	auto t = std::make_pair(std::move(starboard), std::move(port));
 	return std::move(t);
 }
@@ -296,6 +295,12 @@ void tnbLib::Voyage_Waypoints::Perform()
 			<< "No metric info has been found." << endl
 			<< abort(FatalError);
 	}
+	if (NOT Size())
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "No size has been set." << endl
+			<< abort(FatalError);
+	}
 	const auto& path = Path();
 	if (NOT path->Earth())
 	{
@@ -366,6 +371,7 @@ void tnbLib::Voyage_Waypoints::Perform()
 		Info << endl
 			<< " - The reference edges are created." << endl;
 	}
+	std::vector<std::shared_ptr<VoyageMesh_Element>> elements_star;
 	{// Starboard region [9/2/2023 Payvand]
 
 		optNode->SetMetricMap(starboard_metricPrcsr);
@@ -384,18 +390,20 @@ void tnbLib::Voyage_Waypoints::Perform()
 		if (verbose)
 		{
 			Info << endl
-				<< " - The starboard side is successfully meshed, in " << global_time_duration << " ms." << endl;
+				<< " - The starboard side is successfully meshed, in " 
+				<< global_time_duration << " ms." << endl;
 		}
 		const auto& elemMap = alg->RetrieveElements();
-		std::vector<std::shared_ptr<VoyageMesh_Element>> elements;
-		elements.reserve(elemMap.size());
+		
+		elements_star.reserve(elemMap.size());
 		for (const auto& x : elemMap)
 		{
-			elements.push_back(x.second);
+			elements_star.push_back(x.second);
 		}
-		std::sort(elements.begin(), elements.end(), cmp);
-		theStarMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements);
+		std::sort(elements_star.begin(), elements_star.end(), cmp);
+		theStarMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements_star);
 	}
+	std::vector<std::shared_ptr<VoyageMesh_Element>> elements_port;
 	{// Port region [9/2/2023 Payvand]
 
 		optNode->SetMetricMap(port_metricPrcsr);
@@ -414,32 +422,72 @@ void tnbLib::Voyage_Waypoints::Perform()
 		if (verbose)
 		{
 			Info << endl
-				<< " - The port side is successfully meshed, in " << global_time_duration << " ms." << endl;
+				<< " - The port side is successfully meshed, in " 
+				<< global_time_duration << " ms." << endl;
 		}
-		const auto& elemMap = alg->RetrieveElements();
-		std::vector<std::shared_ptr<VoyageMesh_Element>> elements;
-		elements.reserve(elemMap.size());
+		const auto& elemMap = alg->RetrieveElements();	
+		elements_port.reserve(elemMap.size());
 		for (const auto& x : elemMap)
 		{
-			elements.push_back(x.second);
+			elements_port.push_back(x.second);
 		}
-		std::sort(elements.begin(), elements.end(), cmp);
-		thePortMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements);
+		std::sort(elements_port.begin(), elements_port.end(), cmp);
+		thePortMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements_port);
 	}
-	Change_IsDone() = Standard_True;
-	return;
+	//return;
+	//Change_IsDone() = Standard_True;
+	if (verbose)
+	{
+		Info << endl
+			<< " # Creating the reference path..." << endl;
+	}
 	//- Create the voyage ref.
 	auto alg_ref = std::make_shared<VoyageWP_Ref>();
 	Debug_Null_Pointer(alg_ref);
 	alg_ref->CalcReference(starboard, port);
 	Debug_If_Condition_Message(NOT alg_ref->IsDone(), "the application is not performed.");
-
+	if (verbose)
+	{
+		Info << endl
+			<< " - The reference path is successfully created." << endl;
+	}
 	//- Create the offset points
+	if (verbose)
+	{
+		Info << endl
+			<< " # Creating the offset points..." << endl;
+	}
 	auto alg_offsets = std::make_shared<VoyageWP_Offset>();
 	Debug_Null_Pointer(alg_offsets);
 	alg_offsets->CalcOffsets(*alg_ref);
 	Debug_If_Condition_Message(NOT alg_offsets->IsDone(), "the application is not performed.");
-
-
+	if (verbose)
+	{
+		Info << endl
+			<< " - The offset points are successfully created." << endl;
+	}
+	auto profile = std::make_shared<Voyage_OffsetProfile_Segment>();
+	if (verbose)
+	{
+		Info << endl
+			<< " # Creating the waypoints..." << endl;
+	}
+	auto alg_distb = std::make_shared<VoyageWP_PointDistb>();
+	Debug_Null_Pointer(alg_distb);
+	alg_distb->SetEarth(earth);
+	alg_distb->SetCurveInfo(GetInfo()->CurveMeshInfo());
+	alg_distb->SetIntegInfo(GetInfo()->MetricInfo());
+	alg_distb->SetOffsets(alg_offsets);
+	alg_distb->SetProfile(profile);
+	alg_distb->SetSize(Size());
+	alg_distb->Perform();
+	Debug_If_Condition_Message(NOT alg_distb->IsDone(), "the application is not performed.");
+	if (verbose)
+	{
+		Info << endl
+			<< " - The waypoints are successfully created." << endl;
+	}
+	OFstream myFile("offsets.plt");
+	alg_distb->ExportToPlt(myFile);
 	Change_IsDone() = Standard_True;
 }

@@ -39,6 +39,8 @@ namespace tnbLib
 
 		std::shared_ptr<Voyage_MetricInfo> theInfo_;
 
+		Standard_Real theSize_;
+
 
 		// results [9/2/2023 Payvand]
 
@@ -88,6 +90,7 @@ namespace tnbLib
 		// Default constructors [9/2/2023 Payvand]
 
 		Voyage_Waypoints()
+			: theSize_(0)
 		{}
 
 
@@ -98,6 +101,8 @@ namespace tnbLib
 		const auto& PortSizeFunction() const { return thePortSize_; }
 		const auto& Profile() const { return theProfile_; }
 		const auto& GetInfo() const { return theInfo_; }
+
+		auto Size() const { return theSize_; }
 
 		const auto& Grid() const { return theGrid_; }
 
@@ -110,6 +115,8 @@ namespace tnbLib
 		void SetStarboardSizeFunction(const std::shared_ptr<Geo2d_SizeFunction>& theSize) { theStarboardSize_ = theSize; }
 		void SetPortSizeFunction(const std::shared_ptr<Geo2d_SizeFunction>& theSize) { thePortSize_ = theSize; }
 		void SetInfo(const std::shared_ptr<Voyage_MetricInfo>& theInfo) { theInfo_ = theInfo; }
+
+		void SetSize(const Standard_Real theH) { theSize_ = theH; }
 
 	};
 

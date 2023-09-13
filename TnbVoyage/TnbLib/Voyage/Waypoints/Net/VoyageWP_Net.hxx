@@ -257,7 +257,7 @@ namespace tnbLib
 
 		//- Public functions and operators
 
-		[[nodiscard]] Standard_Integer NbNodes() const;
+		[[nodiscard]] TnbVoyage_EXPORT Standard_Integer NbNodes() const;
 
 		const auto& Nodes() const { return theNodes_; }
 		auto& NodesRef() { return theNodes_; }
