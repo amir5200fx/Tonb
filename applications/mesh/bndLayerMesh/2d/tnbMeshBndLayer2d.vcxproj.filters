@@ -9,5 +9,13 @@
     <ClCompile Include="tnbMeshBndLayer2d.cxx">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="tools.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tools.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

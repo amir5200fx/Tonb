@@ -1,12 +1,19 @@
+#include <Aft2d_SolutionData.hxx>
+#include <Aft2d_SolutionDataAnIso.hxx>
+#include <Aft2d_SegmentEdge.hxx>
+#include <Aft2d_PlnCurve.hxx>
 #include <MeshBLayer2d_Offset.hxx>
 #include <Entity2d_QuadMesh.hxx>
 #include <Entity2d_Polygon.hxx>
+#include <Global_Tools.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
 {
+
+	static std::shared_ptr<Aft2d_SolutionDataBase> mySoluData;
 
 	static std::shared_ptr<Entity2d_Polygon> myWall;
 	static std::shared_ptr<Entity2d_Polygon> myOuterLayer;
@@ -68,9 +75,62 @@ namespace tnbLib
 		file::SaveTo(myMesh, name + Entity2d_QuadMesh::extension, verbose);
 	}
 
+	template<class EdgeType>
+	struct EdgeSet
+	{
+		std::vector<std::shared_ptr<EdgeType>> edges;
+	};
+
+	
+	
+	std::vector<std::shared_ptr<EdgeSet<Aft2d_Edge>>> retrieveBndLayarEdges(const Aft2d_SolutionData& theSolu)
+	{
+		std::map<int, std::shared_ptr<EdgeSet<Aft2d_Edge>>> all_edge_sets;
+		for (const auto& x : theSolu.BoundaryEdges())
+		{
+			const auto curve = x->Curve().lock();
+			if (!curve)
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "No curve has been assigned to the edge." << endl
+					<< abort(FatalError);
+			}
+			const auto curve_id = curve->Index();
+			auto iter = all_edge_sets.find(curve_id);
+			if (iter IS_EQUAL all_edge_sets.end())
+			{
+				auto new_set = std::make_shared<EdgeSet<Aft2d_Edge>>();
+				all_edge_sets.insert({ curve_id,std::move(new_set) });
+			}
+			all_edge_sets.at(curve_id)->edges.emplace_back(x);
+		}
+		const auto& bnd_list = theSolu.BndLayerList();
+
+	}
+
 	void execute()
 	{
 		TNB_CHECK_LOADED;
+
+		if (mySoluData->IsIso())
+		{
+			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
+			Debug_Null_Pointer(soluData);
+
+			const auto& boundaries = soluData->BoundaryEdges();
+			if (boundaries.empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no boundary edge has been detected!" << endl
+					<< abort(FatalError);
+			}
+
+		}
+		else
+		{
+			NotImplemented;
+		}
+
 		auto alg = std::make_shared<MeshBLayer2d_Offset>();
 		alg->SetClusterSize(myClusterSize);
 		alg->SetRate(myRate);

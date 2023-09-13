@@ -5,11 +5,13 @@
 #include <Global_Serialization.hxx>
 #include <Mesh_Module.hxx>
 #include <Entity2d_PolygonFwd.hxx>
+#include <Entity2d_QuadMeshFwd.hxx>
 #include <Entity2d_TriangulationFwd.hxx>
 #include <Geo2d_SizeFunctionFwd.hxx>
 
 #include <memory>
 #include <map>
+#include <set>
 
 namespace tnbLib
 {
@@ -17,6 +19,7 @@ namespace tnbLib
 	// Forward Declarations
 	class Cad2d_Plane;
 	class Mesh_Curve_Info;
+	class Mesh_BndLayer_Info;
 
 	class Aft2d_SolutionDataBase
 	{
@@ -32,12 +35,18 @@ namespace tnbLib
 
 		// curves info [12/4/2021 Amir]
 		std::shared_ptr<Mesh_Curve_Info> theGlobalCurveInfo_;
+		std::shared_ptr<Mesh_BndLayer_Info> theGlobalBndLayerInfo_;
 		
 		std::map
 			<
 			Standard_Integer,
 			std::shared_ptr<Mesh_Curve_Info>
 			> theCurveInfo_;
+
+		std::map<Standard_Integer, std::shared_ptr<Mesh_BndLayer_Info>>
+			theBndLayerInfo_;
+
+		std::set<Standard_Integer> theBndLayerList_;
 
 		// size function map [12/4/2021 Amir]
 		std::shared_ptr<Geo2d_SizeFunction> theSizeFun_;
@@ -46,6 +55,7 @@ namespace tnbLib
 
 		std::shared_ptr<Entity2d_Polygon> theBoundaryMesh_;
 		std::shared_ptr<Entity2d_Triangulation> theMesh_;
+		std::vector<std::shared_ptr<Entity2d_QuadMesh>> theBndLayers_;
 
 
 		// Private functions and operators [12/1/2021 Amir]
@@ -95,15 +105,25 @@ namespace tnbLib
 			return theMesh_;
 		}
 
+		const auto& BndLayerMeshes() const { return theBndLayers_; }
+
 		const auto& GlobalCurveInfo() const
 		{
 			return theGlobalCurveInfo_;
 		}
 
+		const auto& GlobalBndLayerInfo() const { return theGlobalBndLayerInfo_; }
+
 		const auto& CurveInfo() const
 		{
 			return theCurveInfo_;
 		}
+
+		const auto& BndLayerInfo() const { return theBndLayerInfo_; }
+		auto& BndLayerInfoRef() { return theBndLayerInfo_; }
+
+		const auto& BndLayerList() const { return theBndLayerList_; }
+		auto& BndLayerListRef() { return theBndLayerList_; }
 
 		auto& CurveInfoRef()
 		{
@@ -135,6 +155,14 @@ namespace tnbLib
 			theMesh_ = std::move(theMesh);
 		}
 
+		void SetBndlayerMeshes(const std::vector<std::shared_ptr<Entity2d_QuadMesh>>& theMeshes) 
+		{ theBndLayers_ = theMeshes; }
+
+		void SetBndlayerMeshes(std::vector<std::shared_ptr<Entity2d_QuadMesh>>&& theMeshes)
+		{
+			theBndLayers_ = std::move(theMeshes);
+		}
+
 		void LoadPlane(const std::shared_ptr<Cad2d_Plane>& thePlane)
 		{
 			thePlane_ = thePlane;
@@ -154,6 +182,9 @@ namespace tnbLib
 		{
 			theGlobalCurveInfo_ = std::move(theInfo);
 		}
+
+		void LoadGlobalBndLayerInfo(const std::shared_ptr<Mesh_BndLayer_Info>& theInfo) 
+		{ theGlobalBndLayerInfo_ = theInfo; }
 
 		void LoadCurveInfo(std::map<int, std::shared_ptr<Mesh_Curve_Info>>&& theInfo)
 		{
