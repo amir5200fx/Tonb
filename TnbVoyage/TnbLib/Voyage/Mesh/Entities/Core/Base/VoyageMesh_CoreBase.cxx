@@ -81,9 +81,9 @@ void tnbLib::VoyageMesh_CoreBase::CalcElementSize()
 	Debug_Null_Pointer(n0);
 	Debug_Null_Pointer(n1);
 	Debug_Null_Pointer(theMetricMap_);
-	std::cout<<"min size : " << std::min(theMetricMap_->CalcElementSize(n0->Coord()) *
+	/*std::cout<<"min size : " << std::min(theMetricMap_->CalcElementSize(n0->Coord()) *
 		SIZE_TO_HIGHT_ELEMENT_COEFF, theMetricMap_->CalcElementSize(n1->Coord()) *
-		SIZE_TO_HIGHT_ELEMENT_COEFF) << std::endl;
+		SIZE_TO_HIGHT_ELEMENT_COEFF) << std::endl;*/
 	frontInfo::SetElementSize
 	(
 		std::min(theMetricMap_->CalcElementSize(n0->Coord()) *

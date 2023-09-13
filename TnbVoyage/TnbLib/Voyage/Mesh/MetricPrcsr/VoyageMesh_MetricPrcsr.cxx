@@ -123,16 +123,16 @@ tnbLib::VoyageMesh_MetricPrcsr::CalcEffectiveFront
 ) const
 {
 	static std::vector<Pnt2d> Pts(4);
-
+	std::cout << "the radius = " << theRadius << std::endl;
 	Pts[0] = theCentre - Pnt2d(0, theRadius);
 	Pts[1] = theCentre + Pnt2d(theRadius, 0);
 	Pts[2] = theCentre + Pnt2d(0, theRadius);
 	Pts[3] = theCentre - Pnt2d(theRadius, 0);
 
-	Pts[0] = CorrEffRegion(theCentre, Pts[0], theRadius);
-	Pts[1] = CorrEffRegion(theCentre, Pts[1], theRadius);
-	Pts[2] = CorrEffRegion(theCentre, Pts[2], theRadius);
-	Pts[3] = CorrEffRegion(theCentre, Pts[3], theRadius);
+	//Pts[0] = CorrEffRegion(theCentre, Pts[0], theRadius);
+	//Pts[1] = CorrEffRegion(theCentre, Pts[1], theRadius);
+	//Pts[2] = CorrEffRegion(theCentre, Pts[2], theRadius);
+	//Pts[3] = CorrEffRegion(theCentre, Pts[3], theRadius);
 
 	auto box = Entity2d_Box::BoundingBoxOf(Pts);
 	//box.Expand(box.Diameter()*1.0E-6);

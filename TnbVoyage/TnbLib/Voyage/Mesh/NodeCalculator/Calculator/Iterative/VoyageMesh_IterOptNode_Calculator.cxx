@@ -50,7 +50,7 @@ void tnbLib::VoyageMesh_IterOptNode_Calculator::Perform()
 
 	const auto& v0 = Front()->Node0()->Coord();
 	const auto& v1 = Front()->Node1()->Coord();
-	const auto len = MetricMap()->CalcUnitDistance(v0, v1) / 2.0;
+	const auto len = /*MetricMap()->CalcUnitDistance(v0, v1) / 2.0*/0.5;
 
 	VoyageMesh_OptNode_Analytical alg(Size(), len, m, *Front());
 	alg.Perform();

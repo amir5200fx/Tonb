@@ -447,12 +447,6 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	const auto& sizeFun = SizeFun();
 
 	auto bisectAngles = CalcBisectAngles();
-	
-	for (const auto& x : bisectAngles)
-	{
-		std::cout << "angle = " << Geo_Tools::RadianToDegree(x->Angle()) << std::endl;
-	}
-	PAUSE;
 	//auto chain = CalcEdges();
 	auto polygons = RetrievePolygons();
 	auto coords = RetrieveCoords(polygons);
@@ -576,7 +570,7 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 	auto hvInfo = std::make_shared<GeoMesh_Background_SmoothingHvCorrection_Info>();
 	Debug_Null_Pointer(hvInfo);
 	hvInfo->SetMaxNbIters(MaxNbCorrs());
-	hvInfo->SetFactor(/*SmoothingFactor()*/0.85);
+	hvInfo->SetFactor(/*SmoothingFactor()*/0.35);
 
 	const auto& earth = path->Earth();
 	if (NOT earth)
@@ -612,10 +606,10 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 				dist *= 0.5;
 				if (insct)
 				{
-					std::cout << "it intersected. (right)" << std::endl;
+					//std::cout << "it intersected. (right)" << std::endl;
 					if (dist < baseSize)
 					{
-						std::cout << " right dist = " << dist <<", base size = "<< baseSize << std::endl;
+						//std::cout << " right dist = " << dist <<", base size = "<< baseSize << std::endl;
 						auto source0 = std::make_shared<hNode>(std::move(centre), dist);
 						sources.push_back(std::move(source0));
 						auto source1 = std::make_shared<hNode>(edge->Node0()->Coord(), dist);
@@ -637,10 +631,10 @@ void tnbLib::VoyageMesh_CorrectSizeMap::Perform()
 				dist *= 0.5;
 				if (insct)
 				{
-					std::cout << "it intersected. (left)" << std::endl;
+					//std::cout << "it intersected. (left)" << std::endl;
 					if (dist < baseSize)
 					{
-						std::cout << " left dist = " << dist <<", base size = "<< baseSize << std::endl;
+						//std::cout << " left dist = " << dist <<", base size = "<< baseSize << std::endl;
 						auto source0 = std::make_shared<hNode>(std::move(centre), dist);
 						sources.push_back(std::move(source0));
 						auto source1 = std::make_shared<hNode>(edge->Node0()->Coord(), dist);

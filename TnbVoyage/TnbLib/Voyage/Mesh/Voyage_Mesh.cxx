@@ -133,7 +133,7 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 void tnbLib::Voyage_Mesh::MeshOneLevel()
 {
 	ModifyLocalFront(DEFAULT_LOCALFRONT_FACTOR);
-
+	frontInfo::SetMinDistFactor(1.E-3);
 	while (GetFrontEntity())
 	{
 		std::vector<std::shared_ptr<VoyageMesh_Node>>
@@ -164,18 +164,24 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 
 		RetrieveLocalFrontNodes(LocalNodes, CandidateNodes);
 
-		//RetrieveLocalFrontEntities(LocalNodes, Local);
+		RetrieveLocalFrontEntities(LocalNodes, Local);
 
-		RetrieveEffectiveFronts(Local, Effectives);
+		//RetrieveEffectiveFronts(Local, Effectives);
 
 		SortNodes(CandidateNodes);
 
-		if (IsNewPointCandidate(Effectives))
+		auto is_valid = IsNewPointCandidate(/*Effectives*/Local);
+		/*std::cout << " is valid = " << (is_valid ? "TRUE" : "FALSE") << std::endl;
+		if (NOT is_valid)
+		{
+			PAUSE;
+		}*/
+		if (is_valid)
 		{
 			AddOptimumNodeTo(CandidateNodes);
 		}
 
-		FindValidNode(CandidateNodes, Effectives);
+		FindValidNode(CandidateNodes, /*Effectives*/Local);
 
 		Update();
 	}
@@ -204,6 +210,64 @@ void tnbLib::Voyage_Mesh::FindValidNode
 	auto v1 = vrtx1.Index();
 
 	auto nodes = RetrieveNodesFrom(theEdges);
+
+	Standard_Boolean is_newNode_Valid = Standard_True;
+	{
+		const auto& node = *newNode;
+		const auto nodeIndex = node.Index();
+		Standard_Integer flag = 0;
+		for (const auto& eff_ptr : theEdges)
+		{
+			Debug_Null_Pointer(eff_ptr);
+			const auto& effective = *eff_ptr;
+
+			const auto& n0 = *effective.Node0();
+			const auto& n1 = *effective.Node1();
+
+			if (NOT Geo_Tools::IsOneCommonPointTwoSegments(v0, nodeIndex, n0.Index(), n1.Index()))
+			{
+				if (Geo_Tools::HasIntersection_cgal(vrtx0.Coord(), node.Coord(), n0.Coord(), n1.Coord()))
+				{
+					flag = 1;
+					break;
+				}
+			}
+
+			if (NOT Geo_Tools::IsOneCommonPointTwoSegments(nodeIndex, v1, n0.Index(), n1.Index()))
+			{
+				if (Geo_Tools::HasIntersection_cgal(node.Coord(), vrtx1.Coord(), n0.Coord(), n1.Coord()))
+				{
+					flag = 1;
+					break;
+				}
+			}
+		}
+		if (flag)
+		{
+			is_newNode_Valid = Standard_False;
+		}
+		else
+		{
+			for (const auto& eff_node : nodes)
+			{
+				Debug_Null_Pointer(eff_node);
+				const auto eff_index = eff_node->Index();
+
+				if ((eff_index NOT_EQUAL nodeIndex) AND(eff_index NOT_EQUAL v0) AND(eff_index NOT_EQUAL v1))
+				{
+					if (Geo_Tools::IsPointInsideTriangle_cgal(eff_node->Coord(), vrtx0.Coord(), vrtx1.Coord(), node.Coord()))
+					{
+						flag = 2;
+						break;
+					}
+				}
+			}
+		}
+		if (flag)
+		{
+			is_newNode_Valid = Standard_False;
+		}
+	}
 
 	Standard_Integer flag = 0;
 	for (const auto& x : theCandidates)
@@ -274,8 +338,11 @@ void tnbLib::Voyage_Mesh::FindValidNode
 
 		if ((x NOT_EQUAL newNode))
 		{
-			flag = 3;
-			continue;
+			if (is_newNode_Valid)
+			{
+				flag = 3;
+				continue;
+			}		
 		}
 
 		SetValidNode(x);
@@ -454,6 +521,7 @@ void tnbLib::Voyage_Mesh::InitFronts()
 		x->SetEffectiveMetric(sizeMap.CalcEffectiveMetric(n0->Coord(), n1->Coord()));
 		x->SetCentre(sizeMap.CalcCentre(n0->Coord(), n1->Coord()));
 		x->SetCharLength(sizeMap.CalcDistance(n0->Coord(), n1->Coord()));
+		//x->SetCharLength(MetricMap()->CalcElementSize(x->Centre()));
 	}
 	auto nodes = RetrieveNodesFrom(edges);
 	for (const auto& x : nodes)
