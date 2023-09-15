@@ -1,5 +1,8 @@
+#include "VoyageWP_PointDistb.hxx"
+
 #include <VoyageWP_PointDistb.hxx>
 
+#include <VoyageWP_Net.hxx>
 #include <Voyage_OffsetProfile.hxx>
 #include <VoyageWP_Offset.hxx>
 #include <VoyageGeo_Earth.hxx>
@@ -28,7 +31,9 @@ namespace tnbLib
 		{
 			coords.push_back(points.at(i));
 		}
-		auto poly = std::make_shared<Entity2d_Polygon>(std::move(coords), 0);
+		auto poly = 
+			std::make_shared<Entity2d_Polygon>
+		(std::move(coords), 0);
 		return std::move(poly);
 	}
 
@@ -101,7 +106,8 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 		Debug_Null_Pointer(x);
 		std::shared_ptr<Entity2d_Polygon> star_poly;
 		{//- the starboard profile
-			auto node = std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
+			auto node = 
+				std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
 			Debug_Null_Pointer(node);
 			auto [p0, p1] = node->StarboardProfile();
 			auto curve = profile->Geometry(p0, p1);
@@ -119,7 +125,8 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 		}
 		std::shared_ptr<Entity2d_Polygon> port_poly;
 		{//- the port profile
-			auto node = std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
+			auto node = 
+				std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
 			Debug_Null_Pointer(node);
 			auto [p0, p1] = node->PortProfile();
 			auto curve = profile->Geometry(p0, p1);
@@ -154,4 +161,59 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 	}
 	theNodes_ = std::move(ref_nodes);
 	Change_IsDone() = Standard_True;
+}
+
+std::shared_ptr<tnbLib::VoyageWP_Net> 
+tnbLib::VoyageWP_PointDistb::RetrieveNet() const
+{
+	const auto net = std::make_shared<VoyageWP_Net>();
+	Debug_Null_Pointer(net);
+	// getting the nodes
+	auto& nodes = net->NodesRef();
+	Standard_Integer nb_nodes = 0;
+	for (const auto& x:theNodes_)
+	{
+		Debug_Null_Pointer(x);
+		if(x->IsDeparture())
+		{
+			auto node = std::make_shared<VoyageWP_Net::DepNode>(++nb_nodes, x->Coord());
+			nodes.emplace_back(std::move(node));
+			continue;
+		}
+		if(x->IsArrival())
+		{
+			auto node = std::make_shared<VoyageWP_Net::ArvNode>(++nb_nodes, x->Coord());
+			nodes.emplace_back(std::move(node));
+			continue;
+		}
+		// the node is interior
+		auto node = std::make_shared<VoyageWP_Net::InterNode>(++nb_nodes, x->Coord());
+		Debug_Null_Pointer(node);
+		nodes.emplace_back(node);
+		// the starboard side nodes
+		const auto interior = std::dynamic_pointer_cast<InterNode>(x);
+		Debug_Null_Pointer(interior);
+		Debug_Null_Pointer(interior->Starboard());
+		const auto& star_side = interior->Starboard();
+		if (star_side->Offsets())
+		{
+			for (const auto& p : star_side->Offsets()->Points())
+			{
+				auto wp = std::make_shared<VoyageWP_Net::WPNode>(++nb_nodes, p);
+				node->InsertToStarboard(wp->Index(), wp);
+			}
+		}
+		Debug_Null_Pointer(interior->Port());
+		// the port side nodes
+		const auto& port_side = interior->Port();
+		if (port_side->Offsets())
+		{
+			for (const auto& p:port_side->Offsets()->Points())
+			{
+				auto wp = std::make_shared<VoyageWP_Net::WPNode>(++nb_nodes, p);
+				node->InsertToPort(wp->Index(), wp);
+			}
+		}
+	}
+	return std::move(net);
 }

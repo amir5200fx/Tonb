@@ -723,6 +723,9 @@
     <ClInclude Include="TnbLib\Voyage\Optimize\Voyage_Optimize.hxx">
       <Filter>TnbLib\Voyage\Optimize</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect2.hxx">
+      <Filter>TnbLib\Voyage\Waypoints\Connect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -889,6 +892,12 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Waypoints\PointDistb\VoyageWP_PointDistbIO.cxx">
       <Filter>TnbLib\Voyage\Waypoints\PointDistb</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_NetIO.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect2.cxx">
+      <Filter>TnbLib\Voyage\Waypoints\Connect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

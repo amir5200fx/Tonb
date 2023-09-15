@@ -10,6 +10,8 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+#include <Geo_Tools.hxx>
+
 Standard_Integer
 tnbLib::VoyageWP_Dist::NbWPs() const
 {
@@ -31,7 +33,8 @@ tnbLib::VoyageWP_Dist::MinDistanceId() const
 	Standard_Integer i = 0;
 	for (const auto x : theDists_)
 	{
-		if (minDist < x)
+		//std::cout << "dist = " << x << ", min dis = "<< minDist<< ", id = "<< id << std::endl;
+		if (x < minDist)
 		{
 			minDist = x;
 			id = i;
@@ -59,7 +62,7 @@ tnbLib::VoyageWP_Dist::Distance
 			<< "the application is not performed." << endl
 			<< abort(FatalError);
 	}
-	if(NOT INSIDE(theIndex, 0,theDists_.size()-1))
+	if (NOT INSIDE(theIndex, 0, theDists_.size() - 1))
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "invalid index." << endl
@@ -97,8 +100,26 @@ tnbLib::VoyageWP_Dist::DistanceWP
 ) const
 {
 	Standard_Real dist = 0;
-	forThose(id, from + 1, to)
+	if (NOT INSIDE(from, 0, theWPdists_.size() - 1))
 	{
+		FatalErrorIn(FunctionSIG)
+			<< "invalid index." << endl
+			<< abort(FatalError);
+	}
+	if (NOT INSIDE(to - 1, 0, theWPdists_.size() - 1))
+	{
+		std::cout << "from : " << from << ", to: " << to << ", size : " << theWPdists_.size() << std::endl;
+		std::cout << " dist size: " << theDists_.size() << ", wp size: " << theWPdists_.size() << std::endl;
+		std::cout << "min id = " << MinDistanceId() << std::endl;
+		FatalErrorIn(FunctionSIG)
+			<< "invalid index." << endl
+			<< " index: " << to - 1 << ", size = " << theWPdists_.size() << endl
+			<< abort(FatalError);
+	}
+	//std::cout << "from : " << from << ", to: " << to << ", size : " << theWPdists_.size() << std::endl;
+	forThose(id, from, to - 1)
+	{
+		//std::cout << "distance id = " << theWPdists_.at(id) << std::endl;
 		dist += theWPdists_.at(id);
 	}
 	return dist;
@@ -111,7 +132,7 @@ tnbLib::VoyageWP_Dist::MaxStarAngle
 ) const
 {
 	const auto min_dist_id = MinDistanceId();
-	for (Standard_Integer i = 1; i < min_dist_id; i++)
+	for (Standard_Integer i = 0; i < min_dist_id; i++)
 	{
 		if (StarAngle(min_dist_id, i) <= theAngle)
 		{
@@ -125,11 +146,16 @@ Standard_Integer
 tnbLib::VoyageWP_Dist::MaxPortAngle(const Standard_Real theAngle) const
 {
 	const auto min_dist_id = MinDistanceId();
-	for (Standard_Integer i = 1; i < min_dist_id; i++)
+	std::cout << std::endl;
+	std::cout << " MIN ID = " << min_dist_id << std::endl;
+	std::cout << std::endl;
+	for (Standard_Integer i = min_dist_id + 1; i < theDists_.size(); i++)
 	{
-		if (PortAngle(min_dist_id, i) <= theAngle)
+		std::cout << " por id test: " << i << std::endl;
+		if (PortAngle(min_dist_id, i) > theAngle)
 		{
-			return i;
+			std::cout << "YESSS" << std::endl;
+			return i - 1;
 		}
 	}
 	return min_dist_id;
@@ -150,9 +176,13 @@ tnbLib::VoyageWP_Dist::StarAngle
 			<< " - the index: " << theIndex << endl
 			<< abort(FatalError);
 	}
+	//std::cout << "the min index = " << theMinDist << ", theIndex = " << theIndex << std::endl;
 	const auto wp_dist = DistanceWP(theIndex, theMinDist);
+	std::cout << "wp_dist: " << wp_dist << std::endl;
 	const auto min_dist = Distance(theMinDist);
+	std::cout << "min dist = " << min_dist << std::endl;
 	const auto id_dist = Distance(theIndex);
+	std::cout << "i distance: " << id_dist << std::endl;
 	const auto cos_theta = 
 		(min_dist * min_dist + id_dist * id_dist - wp_dist * wp_dist) / 
 		(2.0 * min_dist * id_dist);
@@ -160,8 +190,15 @@ tnbLib::VoyageWP_Dist::StarAngle
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "something went wrong." << endl
+			<< " cos_theta = " << cos_theta << endl
 			<< abort(FatalError);
 	}
+	std::cout << std::endl;
+	//std::cout << "star angle = " << cos_theta << std::endl;
+	std::cout <<"star angle = " << Geo_Tools::RadianToDegree(std::acos(cos_theta)) << std::endl;
+	std::cout << std::endl;
+	//return cos_theta;
+	//PAUSE;
 	return std::acos(cos_theta);
 }
 
@@ -172,7 +209,7 @@ tnbLib::VoyageWP_Dist::PortAngle
 	const Standard_Integer theIndex
 ) const
 {
-	if(theIndex<theMinDist)
+	if (theIndex < theMinDist)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the index should be bigger than the minDist index due to the port side." << endl
@@ -180,9 +217,12 @@ tnbLib::VoyageWP_Dist::PortAngle
 			<< " - the index: " << theIndex << endl
 			<< abort(FatalError);
 	}
-	const auto wp_dist = DistanceWP(theIndex, theMinDist);
+	const auto wp_dist = DistanceWP(theMinDist, theIndex);
+	std::cout << "wp_dist: " << wp_dist << std::endl;
 	const auto min_dist = Distance(theMinDist);
+	std::cout << "min dist = " << min_dist << std::endl;
 	const auto id_dist = Distance(theIndex);
+	std::cout << "i distance: " << id_dist << std::endl;
 	const auto cos_theta =
 		(min_dist * min_dist + id_dist * id_dist - wp_dist * wp_dist) /
 		(2.0 * min_dist * id_dist);
@@ -192,9 +232,12 @@ tnbLib::VoyageWP_Dist::PortAngle
 			<< "something went wrong." << endl
 			<< abort(FatalError);
 	}
+	std::cout << std::endl;
+	std::cout << "port angle = " << Geo_Tools::RadianToDegree(std::acos(cos_theta)) << std::endl;
+	std::cout << std::endl;
+	//std::exit(1);
 	return std::acos(cos_theta);
 }
-
 
 void tnbLib::VoyageWP_Dist::Perform()
 {

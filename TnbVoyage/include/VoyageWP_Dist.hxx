@@ -35,8 +35,8 @@ namespace tnbLib
 
 		//- results
 
-		std::vector<Standard_Real> theWPdists_;
-		std::vector<Standard_Real> theDists_;
+		std::vector<Standard_Real> theWPdists_; // the distace between the wps
+		std::vector<Standard_Real> theDists_;   // the ditance between the current node and the wps
 
 	public:
 

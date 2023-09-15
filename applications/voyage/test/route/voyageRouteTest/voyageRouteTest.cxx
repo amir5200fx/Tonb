@@ -1,4 +1,7 @@
-﻿#include <VoyageGeo_PathGeneration.hxx>
+﻿#include <VoyageWP_Connect.hxx>
+#include <VoyageWP_Connect2.hxx>
+#include <VoyageWP_Net.hxx>
+#include <VoyageGeo_PathGeneration.hxx>
 #include <VoyageGeo_Earth.hxx>
 #include <VoyageGeo_Path2.hxx>
 #include <Voyage_Tools.hxx>
@@ -12,6 +15,7 @@
 #include <VoyageMesh_BaseSize.hxx>
 #include <VoyageMesh_BaseSizeInfo.hxx>
 #include <VoyageMesh_CorrectSizeMap.hxx>
+#include <Aft_MetricPrcsrAnIso_Info.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMetricFun2d_ExactSurface.hxx>
@@ -215,6 +219,19 @@ int main()
 		//mesh->ExportToVtk(triFile1);
 		wayPoints->PortMesh()->ExportToPlt(triFile1);
 	}
+
+	const auto grid = wayPoints->Grid();
+	{
+		const auto alg = std::make_shared<VoyageWP_Connect2>();
+		alg->SetSize(2);
+		alg->SetNet(grid);
+		alg->Perform();
+	}
+	std::cout << " - the application is successfully performed." << std::endl;
+
+	OFstream gridFile("grid.plt");
+	
+	grid->ExportToPlt(gridFile);
 
 	return 1;
 

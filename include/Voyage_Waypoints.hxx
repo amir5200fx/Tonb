@@ -15,6 +15,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations [9/2/2023 Payvand]
+	class VoyageWP_Net;
 	class VoyageMesh_Element;
 	class VoyageMesh_Node;
 	class Voyage_WptsGrid;
@@ -44,7 +45,7 @@ namespace tnbLib
 
 		// results [9/2/2023 Payvand]
 
-		std::shared_ptr<Voyage_WptsGrid> theGrid_;
+		std::shared_ptr<VoyageWP_Net> theGrid_;
 
 		std::shared_ptr<Entity2d_Triangulation> theStarMesh_;
 		std::shared_ptr<Entity2d_Triangulation> thePortMesh_;
@@ -96,18 +97,18 @@ namespace tnbLib
 
 		// Public functions and operators [9/2/2023 Payvand]
 
-		const auto& Path() const { return thePath_; }
-		const auto& StarboardSizeFunction() const { return theStarboardSize_; }
-		const auto& PortSizeFunction() const { return thePortSize_; }
-		const auto& Profile() const { return theProfile_; }
-		const auto& GetInfo() const { return theInfo_; }
+		[[nodiscard]] const auto& Path() const { return thePath_; }
+		[[nodiscard]] const auto& StarboardSizeFunction() const { return theStarboardSize_; }
+		[[nodiscard]] const auto& PortSizeFunction() const { return thePortSize_; }
+		[[nodiscard]] const auto& Profile() const { return theProfile_; }
+		[[nodiscard]] const auto& GetInfo() const { return theInfo_; }
 
-		auto Size() const { return theSize_; }
+		[[nodiscard]] auto Size() const { return theSize_; }
 
-		const auto& Grid() const { return theGrid_; }
+		[[nodiscard]] const auto& Grid() const { return theGrid_; }
 
-		const auto& StarMesh() const { return theStarMesh_; }
-		const auto& PortMesh() const { return thePortMesh_; }
+		[[nodiscard]] const auto& StarMesh() const { return theStarMesh_; }
+		[[nodiscard]] const auto& PortMesh() const { return thePortMesh_; }
 
 		TnbVoyage_EXPORT void Perform();
 

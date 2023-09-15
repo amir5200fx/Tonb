@@ -13,6 +13,7 @@ namespace tnbLib
 	// Forward Declarations [8/26/2023 aamir]
 	class Mesh_Curve_Info;
 	class Aft_SizeCorr_IterativeInfo;
+	class Aft_MetricPrcsrAnIso_Info;
 	class NumAlg_AdaptiveInteg_Info;
 	class NumAlg_NelderMeadInfo;
 
@@ -80,6 +81,8 @@ namespace tnbLib
 
 		auto NbMetricIters() const { return theNbMetricIters_; }
 		auto MetricTol() const { return theMetricTol_; }
+
+		TnbVoyage_EXPORT std::shared_ptr<Aft_MetricPrcsrAnIso_Info> CreateMetricInfo() const;
 
 		void SetNbSamples(const Standard_Integer theNbSamples) { theNbSamples_ = theNbSamples; }
 		void SetMaxSubdivideLev(const Standard_Integer theMaxLev) { theMaxSubdivideLev_ = theMaxLev; }

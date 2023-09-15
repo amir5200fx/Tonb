@@ -487,6 +487,8 @@ void tnbLib::Voyage_Waypoints::Perform()
 		Info << endl
 			<< " - The waypoints are successfully created." << endl;
 	}
+	// retrieve the net
+	theGrid_ = alg_distb->RetrieveNet();
 	OFstream myFile("offsets.plt");
 	alg_distb->ExportToPlt(myFile);
 	Change_IsDone() = Standard_True;

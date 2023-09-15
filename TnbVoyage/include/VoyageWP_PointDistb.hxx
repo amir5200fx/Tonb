@@ -18,6 +18,7 @@ namespace tnbLib
 {
 
 	//- Forward Declarations
+	class VoyageWP_Net;
 	class VoyageWP_Offset;
 	class Voyage_OffsetProfile;
 	class VoyageGeo_Earth;
@@ -41,8 +42,7 @@ namespace tnbLib
 
 			//- default constructor
 
-			Side()
-			{}
+			Side() = default;
 
 			//- Constructors
 
@@ -50,7 +50,7 @@ namespace tnbLib
 
 			//- public functions and operators
 
-			const auto& Offsets() const { return theOffsets_; }
+			[[nodiscard]] const auto& Offsets() const { return theOffsets_; }
 
 			void SetOffsets(const std::shared_ptr<Entity2d_Polygon>& theOffsets) 
 			{ theOffsets_ = theOffsets; }
@@ -67,8 +67,7 @@ namespace tnbLib
 
 			//- default constructor
 
-			StarSide()
-			{}
+			StarSide() = default;
 
 			//- Public functions and operators
 
@@ -84,8 +83,7 @@ namespace tnbLib
 
 			//- default constructor
 
-			PortSide()
-			{}
+			PortSide() = default;
 
 			//- Public functions and operators
 
@@ -105,7 +103,7 @@ namespace tnbLib
 			//- default constructor
 
 			RefNode()
-			{}
+				= default;
 
 			//- constructors
 
@@ -123,12 +121,12 @@ namespace tnbLib
 
 			//- Public functions and operators
 
-			const auto& Coord() const { return theCoord_; }
-			const auto& Direction() const { return theDir_; }
+			[[nodiscard]] const auto& Coord() const { return theCoord_; }
+			[[nodiscard]] const auto& Direction() const { return theDir_; }
 
-			virtual Standard_Boolean IsInterior() const { return Standard_False; }
-			virtual Standard_Boolean IsDeparture() const { return Standard_False; }
-			virtual Standard_Boolean IsArrival() const { return Standard_False; }
+			[[nodiscard]] virtual Standard_Boolean IsInterior() const { return Standard_False; }
+			[[nodiscard]] virtual Standard_Boolean IsDeparture() const { return Standard_False; }
+			[[nodiscard]] virtual Standard_Boolean IsArrival() const { return Standard_False; }
 
 			void SetCoord(const Pnt2d& theCoord) { theCoord_ = theCoord; }
 			void SetDirection(const Dir2d& theDir) { theDir_ = theDir; }
@@ -149,7 +147,7 @@ namespace tnbLib
 			//- default constructor
 
 			InterNode()
-			{}
+				= default;
 
 			//- constructors
 
@@ -159,10 +157,10 @@ namespace tnbLib
 
 			//- Public functions and operators
 
-			Standard_Boolean IsInterior() const override { return Standard_True; }
+			[[nodiscard]] Standard_Boolean IsInterior() const override { return Standard_True; }
 
-			const auto& Starboard() const { return theStarboard_; }
-			const auto& Port() const { return thePort_; }
+			[[nodiscard]] const auto& Starboard() const { return theStarboard_; }
+			[[nodiscard]] const auto& Port() const { return thePort_; }
 
 			void SetStarboard(const std::shared_ptr<StarSide>& theSide) { theStarboard_ = theSide; }
 			void SetPort(const std::shared_ptr<PortSide>& theSide) { thePort_ = theSide; }
@@ -180,7 +178,7 @@ namespace tnbLib
 			//- default constructor
 
 			DepNode()
-			{}
+				= default;
 
 			//- constructors
 
@@ -190,7 +188,7 @@ namespace tnbLib
 
 			//- Public functions and operators
 
-			Standard_Boolean IsDeparture() const override { return Standard_True; }
+			[[nodiscard]] Standard_Boolean IsDeparture() const override { return Standard_True; }
 
 		};
 
@@ -205,7 +203,7 @@ namespace tnbLib
 			//- default constructor
 
 			ArvNode()
-			{}
+				= default;
 
 			//- constructors
 
@@ -215,7 +213,7 @@ namespace tnbLib
 
 			//- Public functions and operators
 
-			Standard_Boolean IsArrival() const override { return Standard_True; }
+			[[nodiscard]] Standard_Boolean IsArrival() const override { return Standard_True; }
 
 		};
 
@@ -248,17 +246,19 @@ namespace tnbLib
 
 		//- Public functions and operators
 
-		auto Size() const { return theSize_; }
+		[[nodiscard]] auto Size() const { return theSize_; }
 
-		const auto& Offsets() const { return theOffsets_; }
-		const auto& Profile() const { return theProfile_; }
-		const auto& Earth() const { return theEarth_; }
+		[[nodiscard]] const auto& Offsets() const { return theOffsets_; }
+		[[nodiscard]] const auto& Profile() const { return theProfile_; }
+		[[nodiscard]] const auto& Earth() const { return theEarth_; }
 
-		const auto& CurveInfo() const { return theCurveInfo_; }
-		const auto& IntegInfo() const { return theIntegInfo_; }
+		[[nodiscard]] const auto& CurveInfo() const { return theCurveInfo_; }
+		[[nodiscard]] const auto& IntegInfo() const { return theIntegInfo_; }
 
-		const auto& Nodes() const { return theNodes_; }
+		[[nodiscard]] const auto& Nodes() const { return theNodes_; }
 
+		TnbVoyage_EXPORT std::shared_ptr<VoyageWP_Net> RetrieveNet() const;
+		
 		TnbVoyage_EXPORT void Perform();
 
 		void SetSize(const Standard_Real theSize) { theSize_ = theSize; }
@@ -270,6 +270,7 @@ namespace tnbLib
 		void SetCurveInfo(const std::shared_ptr<Mesh_Curve_Info>& theInfo) { theCurveInfo_ = theInfo; }
 		void SetIntegInfo(const std::shared_ptr<NumAlg_AdaptiveInteg_Info>& theInfo) { theIntegInfo_ = theInfo; }
 
+		TnbVoyage_EXPORT void ExportToPlt(OFstream&) const;
 	};
 }
 

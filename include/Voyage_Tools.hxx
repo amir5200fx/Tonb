@@ -146,6 +146,11 @@ namespace tnbLib
 		// Convert the standard voyage coordinates to the parametric coordinates [8/27/2023 aamir]
 		static TnbVoyage_EXPORT Pnt2d ConvertToUV(const Pnt2d&);
 		static TnbVoyage_EXPORT Pnt2d ConvertToVoyageSystem(const Pnt2d&);
+		static TnbVoyage_EXPORT std::vector<Pnt2d>
+			ConvertToVoyageSystem
+			(
+				const std::vector<Pnt2d>&
+			);
 
 		static TnbVoyage_EXPORT std::shared_ptr<Entity2d_Triangulation> 
 			ConvertToVoyageSystem

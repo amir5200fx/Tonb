@@ -1,5 +1,6 @@
 #include <Voyage_MetricInfo.hxx>
 
+#include <Aft_MetricPrcsrAnIso_Info.hxx>
 #include <Mesh_Curve_Info.hxx>
 #include <Mesh_CurveOptmPoint_Correction_Info.hxx>
 #include <Aft_SizeCorr_IterativeInfo.hxx>
@@ -37,7 +38,7 @@ namespace tnbLib
 
 		// Private functions and operators [8/26/2023 Payvand]
 
-		void SetConfigs();
+		static void SetConfigs();
 
 	public:
 
@@ -61,6 +62,16 @@ namespace tnbLib
 	static const auto myNewtonIterInfo = std::make_shared<NumAlg_NewtonSolver_Info>();
 	static const auto myOptPointCorrInfo = std::make_shared<Mesh_CurveOptmPoint_Correction_Info>();
 	static const auto myBisectCorrInfo = std::make_shared<NumAlg_BisectionSolver_Info>();
+	
+}
+
+std::shared_ptr<tnbLib::Aft_MetricPrcsrAnIso_Info>
+tnbLib::Voyage_MetricInfo::CreateMetricInfo() const
+{
+	auto metric_info =
+		std::make_shared<Aft_MetricPrcsrAnIso_Info>
+	(MetricInfo(), NbSamples(), NbMetricIters(), MetricTol());
+	return std::move(metric_info);
 }
 
 static const tnbLib::Voyage_MetricInfo_RunTime myVoyage_MetricInfo_InfoRunTimeObj;

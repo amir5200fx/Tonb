@@ -48,13 +48,13 @@ namespace tnbLib
 
 		//- Public functions and operators
 
-		const auto& Net() const { return theNet_; }
-		const auto& Earth() const { return theEarth_; }
-		auto Angle() const { return theAngle_; }
-		auto MaxSubLev() const { return theMaxSubLev_; }
+		[[nodiscard]] const auto& Net() const { return theNet_; }
+		[[nodiscard]] const auto& Earth() const { return theEarth_; }
+		[[nodiscard]] auto Angle() const { return theAngle_; }
+		[[nodiscard]] auto MaxSubLev() const { return theMaxSubLev_; }
 
-		const auto& CurveInfo() const { return theCurveInfo_; }
-		const auto& MetricInfo() const { return theMetricInfo_; }
+		[[nodiscard]] const auto& CurveInfo() const { return theCurveInfo_; }
+		[[nodiscard]] const auto& MetricInfo() const { return theMetricInfo_; }
 
 		TnbVoyage_EXPORT void Perform();
 

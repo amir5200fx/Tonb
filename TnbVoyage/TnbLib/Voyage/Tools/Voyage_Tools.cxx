@@ -463,6 +463,21 @@ tnbLib::Voyage_Tools::ConvertToVoyageSystem(const Pnt2d& thePt)
 	return { x,y };
 }
 
+std::vector<tnbLib::Pnt2d>
+tnbLib::Voyage_Tools::ConvertToVoyageSystem
+(
+	const std::vector<Pnt2d>& thePnts
+)
+{
+	std::vector<Pnt2d> coords;
+	coords.reserve(thePnts.size());
+	for (const auto& x:thePnts)
+	{
+		coords.emplace_back(ConvertToVoyageSystem(x));
+	}
+	return std::move(coords);
+}
+
 std::shared_ptr<tnbLib::Entity2d_Triangulation> 
 tnbLib::Voyage_Tools::ConvertToVoyageSystem
 (

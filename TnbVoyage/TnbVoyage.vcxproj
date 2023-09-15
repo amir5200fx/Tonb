@@ -256,6 +256,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Voyage\SizeMap\Voyage_SizeMap.hxx" />
     <ClInclude Include="TnbLib\Voyage\Tools\Voyage_Tools.hxx" />
     <ClInclude Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect2.hxx" />
     <ClInclude Include="TnbLib\Voyage\Waypoints\Dist\VoyageWP_Dist.hxx" />
     <ClInclude Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_Net.hxx" />
     <ClInclude Include="TnbLib\Voyage\Waypoints\OffsetProfile\Segment\Voyage_OffsetProfile_Segment.hxx" />
@@ -312,8 +313,10 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Voyage\Tools\Voyage_Tools.cxx" />
     <ClCompile Include="TnbLib\Voyage\Tools\Voyage_Tools_SetSources.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Connect\VoyageWP_Connect2.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Dist\VoyageWP_Dist.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_Net.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Waypoints\Net\VoyageWP_NetIO.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\OffsetProfile\Segment\Voyage_OffsetProfile_Segment.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Offset\VoyageWP_Offset.cxx" />
     <ClCompile Include="TnbLib\Voyage\Waypoints\Offset\VoyageWP_OffsetIO.cxx" />
