@@ -4,7 +4,7 @@
 #include <Aft2d_Element.hxx>
 #include <Aft2d_ElementAnIso.hxx>
 #include <Aft_Tools.hxx>
-#include <Entity2d_CmpMesh.hxx>
+#include <Entity2d_QuadMesh.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Global_File.hxx>
 #include <OSstream.hxx>
@@ -14,21 +14,17 @@ namespace tnbLib
 {
 
 	static const std::string extension = Aft2d_SolutionDataBase::extension;
-
-	static unsigned short verbose = 0;
-	static bool loadTag = false;
-
 	static std::shared_ptr<Aft2d_SolutionDataBase> mySoluData;
-	static std::string myFileName;
 
-	void setVerbose(unsigned int i)
-	{
-		Info << endl;
-		Info << " - the verbosity level is set to: " << i << endl;
-		verbose = i;
-	}
+	static std::string model_directory = "solution";
+	
+	TNB_DEFINE_FILENAME_OBJ;
+	TNB_DEFINE_VERBOSE_OBJ;
+	TNB_DEFINE_LOADTAG_OBJ;
+	
+	TNB_SET_VERBOSE_FUN;
 
-	void loadFile(const std::string& name)
+	void loadModel(const std::string& name)
 	{
 		file::CheckExtension(name);
 
@@ -39,15 +35,38 @@ namespace tnbLib
 				<< "the data solution file is null!" << endl
 				<< abort(FatalError);
 		}
-
 		loadTag = true;
+	}
+
+	void loadModel()
+	{
+		mySoluData = 
+			file::LoadSingleFile<std::shared_ptr<Aft2d_SolutionDataBase>>
+		(model_directory, extension, verbose, myFileName);
+		loadTag = true;
+		if (NOT loadTag)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "no object has been loaded." << endl
+				<< abort(FatalError);
+		}
 	}
 
 	void loadFile()
 	{
-		auto name = file::GetSingleFile(boost::filesystem::current_path(), extension).string();
-		myFileName = name;
-		loadFile(name);
+		if (file::IsDirectory(model_directory))
+		{
+			loadModel();
+		}
+		else
+		{
+			const auto name =
+				file::GetSingleFile
+				(boost::filesystem::current_path(),
+					extension
+				).string();
+			loadModel(name);
+		}
 	}
 
 	void saveTo(const std::string& name)
@@ -61,85 +80,14 @@ namespace tnbLib
 
 		file::CheckExtension(name);
 
-		if (mySoluData->IsIso())
-		{
-			const auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
-			Debug_Null_Pointer(soluData);
-
-			const auto& elements = soluData->Elements();
-			if (elements.empty())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "no element has been detected!" << endl
-					<< abort(FatalError);
-			}
-
-			if(soluData->BndLayerMeshes().empty())
-			{
-				const auto mesh = Aft_Tools::RetrieveTriangleMesh(elements);
-				file::SaveTo(mesh, name + Entity2d_Triangulation::extension, verbose);
-			}
-			else
-			{
-				const auto mesh = std::make_shared<Entity2d_CmpMesh>();
-				const auto& bnd_meshes = soluData->BndLayerMeshes();
-				for (const auto& bnd : bnd_meshes)
-				{
-					mesh->Add(*bnd);
-				}
-				{
-					const auto tri_mesh = Aft_Tools::RetrieveTriangleMesh(elements);
-					mesh->Add(*tri_mesh);
-				}
-				Entity2d_CmpMesh::Merge(*mesh);
-				file::SaveTo(mesh, name + Entity2d_CmpMesh::extension, verbose);
-			}
-		}
-		else if (mySoluData->IsAnIso())
-		{
-			const auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionDataAnIso>(mySoluData);
-			Debug_Null_Pointer(soluData);
-
-			const auto& elements = soluData->Elements();
-			if (elements.empty())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "no element has been detected!" << endl
-					<< abort(FatalError);
-			}
-			if (soluData->BndLayerMeshes().empty())
-			{
-				const auto mesh = Aft_Tools::RetrieveTriangleMesh(elements);
-				file::SaveTo(mesh, name + Entity2d_Triangulation::extension, verbose);
-			}
-			else
-			{
-				const auto mesh = std::make_shared<Entity2d_CmpMesh>();
-				const auto& bnd_meshes = soluData->BndLayerMeshes();
-				for (const auto& bnd : bnd_meshes)
-				{
-					mesh->Add(*bnd);
-				}
-				{
-					const auto tri_mesh = Aft_Tools::RetrieveTriangleMesh(elements);
-					mesh->Add(*tri_mesh);
-				}
-				Entity2d_CmpMesh::Merge(*mesh);
-				file::SaveTo(mesh, name + Entity2d_CmpMesh::extension, verbose);
-			}
-		}
-		else
-		{
-			FatalErrorIn(FunctionSIG)
-				<< "Unspecified type of data has been detected!" << endl
-				<< abort(FatalError);
-		}
+		file::SaveListTo(mySoluData->BndLayerMeshes(), name + Entity2d_QuadMesh::extension, verbose);
 	}
 
 	void saveTo()
 	{
 		saveTo(myFileName);
 	}
+	
 }
 
 #ifdef DebugInfo
@@ -158,7 +106,7 @@ namespace tnbLib
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadFile");
 
 		// settings 
 
@@ -183,7 +131,7 @@ namespace tnbLib
 
 using namespace tnbLib;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	//FatalError.throwExceptions();
 
@@ -198,7 +146,8 @@ int main(int argc, char *argv[])
 	{
 		if (IsEqualCommand(argv[1], "--help"))
 		{
-			Info << " This application is aimed to retrieve the mesh." << endl << endl;
+			Info << " This application is aimed to retrieve the boundary mesh." << endl << endl;
+			Info << " - subdirectory: " << "{" << model_directory << "}" << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
@@ -227,7 +176,7 @@ int main(int argc, char *argv[])
 
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbMeshToolPlaneViewer"));
+				fileName myFileName(file::GetSystemFile("tnbBndLayerMesh2dViewer"));
 
 				chai.eval_file(myFileName);
 				return 0;

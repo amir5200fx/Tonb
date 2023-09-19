@@ -20,6 +20,7 @@
 #include <Geo_BoxTools.hxx>
 #include <Entity2d_Triangulation.hxx>
 #include <Entity2d_Box.hxx>
+#include <Entity2d_CmpMesh.hxx>
 #include <Global_File.hxx>
 #include <OSstream.hxx>
 #include <TnbError.hxx>
@@ -38,6 +39,7 @@ namespace tnbLib
 
 	static const std::string sub_directory = "soluData";
 	static std::map<word, std::shared_ptr<std::vector<connectivity::dual>>> myPhysics;
+	static std::shared_ptr<Entity2d_CmpMesh> myMesh;
 
 	void setVerbose(unsigned int i)
 	{
@@ -77,36 +79,22 @@ namespace tnbLib
 		}
 		if (mySoluData->IsIso())
 		{
-			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
+			const auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
 			Debug_Null_Pointer(soluData);
-			const auto& elements = soluData->Elements();
-			if (elements.empty())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "no element has been detected!" << endl
-					<< abort(FatalError);
-			}
-			auto mesh = Aft_Tools::RetrieveTriangleMesh(elements);
-			auto fea = std::make_shared<MeshIO2d_FEA>();
-			fea->SetMesh(std::move(mesh));
+			
+			const auto fea = std::make_shared<MeshIO2d_FEA>();
+			fea->SetMesh(myMesh);
 			fea->SetBoundaries(myPhysics);
 
 			file::SaveTo(fea, name + MeshIO2d_FEA::extension, verbose);
 		}
 		else
 		{
-			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionDataAnIso>(mySoluData);
+			const auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionDataAnIso>(mySoluData);
 			Debug_Null_Pointer(soluData);
-			const auto& elements = soluData->Elements();
-			if (elements.empty())
-			{
-				FatalErrorIn(FunctionSIG)
-					<< "no element has been detected!" << endl
-					<< abort(FatalError);
-			}
-			auto mesh = Aft_Tools::RetrieveTriangleMesh(elements);
-			auto fea = std::make_shared<MeshIO2d_FEA>();
-			fea->SetMesh(std::move(mesh));
+			
+			const auto fea = std::make_shared<MeshIO2d_FEA>();
+			fea->SetMesh(myMesh);
 			fea->SetBoundaries(myPhysics);
 
 			file::SaveTo(fea, name + MeshIO2d_FEA::extension, verbose);
@@ -119,99 +107,28 @@ namespace tnbLib
 		saveTo(myFileName);
 	}
 
+	struct Node
+	{
+		typedef Pnt2d ptType;
+		int id;
+		Pnt2d coord;
+	};
+
 	void findPhysics
 	(
-		const std::map<word, std::vector<std::shared_ptr<Entity2d_Polygon>>>& theMap,
-		const std::vector<std::shared_ptr<Aft2d_Node>>& theNodes
+		const std::map<word, std::vector<std::shared_ptr<Entity2d_Polygon>>>& theMap
 	)
 	{
-		auto coords = Aft_Tools::RetrieveGeometry(theNodes);
-		auto b = Geo_BoxTools::GetBox(coords, 0);
-		Geo_AdTree<std::shared_ptr<Aft2d_Node>> engine;
-		engine.SetGeometryRegion(b.Expanded(b.Diameter() * 0.15));
-		engine.SetGeometryCoordFunc(&Aft2d_Node::GetCoord);
-		engine.InsertToGeometry(theNodes);
-
-		for (const auto& x : theMap)
+		auto b = myMesh->CalcBoundingBox();
+		Geo_AdTree<std::shared_ptr<Node>> engine;
+		engine.SetGeometryRegion(b->Expanded(b->Diameter() * 0.15));
+		engine.SetGeometryCoordFunc([](const std::shared_ptr<Node>& x)-> const auto& {return x->coord; });
+		int k = 0;
+		for (const auto& x: myMesh->Coords())
 		{
-			auto physic = x.first;
-			std::vector<connectivity::dual> indices;
-			for (const auto& poly : x.second)
-			{
-				const auto& pnts = poly->Points();
-				for (size_t i = 1; i < pnts.size(); i++)
-				{
-					const auto& p0 = pnts.at(i - 1);
-					const auto& p1 = pnts.at(i);
-
-					int i0, i1;
-					{
-						auto bi = Entity2d_Box::Box(p0, 1.0E-6);
-						std::vector<std::shared_ptr<Aft2d_Node>> items;
-						engine.GeometrySearch(bi, items);
-						std::shared_ptr<Aft2d_Node> node;
-						for (const auto& it : items)
-						{
-							if (p0.Distance(it->Coord()) <= 1.0E-16)
-							{
-								node = it;
-								break;
-							}
-						}
-						if (NOT node)
-						{
-							FatalErrorIn(FunctionSIG)
-								<< "contradictory data between the boundary mesh and the mesh has been detected." << endl
-								<< abort(FatalError);
-						}
-						i0 = node->Index();
-					}
-					{
-						auto bi = Entity2d_Box::Box(p1, 1.0E-6);
-						std::vector<std::shared_ptr<Aft2d_Node>> items;
-						engine.GeometrySearch(bi, items);
-						std::shared_ptr<Aft2d_Node> node;
-						for (const auto& it : items)
-						{
-							if (p1.Distance(it->Coord()) <= 1.0E-16)
-							{
-								node = it;
-								break;
-							}
-						}
-						if (NOT node)
-						{
-							FatalErrorIn(FunctionSIG)
-								<< "contradictory data between the boundary mesh and the mesh has been detected." << endl
-								<< abort(FatalError);
-						}
-						i1 = node->Index();
-					}
-
-					connectivity::dual d;
-					d.Value(0) = i0;
-					d.Value(1) = i1;
-
-					indices.push_back(std::move(d));
-				}
-			}
-			auto paired = std::make_pair(physic, std::make_shared<std::vector<connectivity::dual>>(std::move(indices)));
-			myPhysics.insert(std::move(paired));
+			auto node = std::make_shared<Node>(Node{ ++k,x });
+			engine.InsertToGeometry(node);
 		}
-	}
-
-	void findPhysics
-	(
-		const std::map<word, std::vector<std::shared_ptr<Entity2d_Polygon>>>& theMap, 
-		const std::vector<std::shared_ptr<Aft2d_NodeAnIso>>& theNodes
-	)
-	{
-		auto coords = Aft_Tools::RetrieveGeometry(theNodes);
-		auto b = Geo_BoxTools::GetBox(coords, 0);
-		Geo_AdTree<std::shared_ptr<Aft2d_NodeAnIso>> engine;
-		engine.SetGeometryRegion(b.Expanded(b.Diameter() * 0.15));
-		engine.SetGeometryCoordFunc(&Aft2d_NodeAnIso::GetCoord);
-		engine.InsertToGeometry(theNodes);
 
 		for (const auto& x : theMap)
 		{
@@ -228,12 +145,18 @@ namespace tnbLib
 					int i0, i1;
 					{
 						auto bi = Entity2d_Box::Box(p0, 1.0E-6);
-						std::vector<std::shared_ptr<Aft2d_NodeAnIso>> items;
+						std::vector<std::shared_ptr<Node>> items;
 						engine.GeometrySearch(bi, items);
-						std::shared_ptr<Aft2d_NodeAnIso> node;
+						std::shared_ptr<Node> node;
+						double min_dist = RealLast();
 						for (const auto& it : items)
 						{
-							if (p0.Distance(it->Coord()) <= 1.0E-16)
+							auto dist = p0.Distance(it->coord);
+							if (dist < min_dist)
+							{
+								min_dist = dist;
+							}
+							if (dist <= 1.0E-10)
 							{
 								node = it;
 								break;
@@ -243,18 +166,19 @@ namespace tnbLib
 						{
 							FatalErrorIn(FunctionSIG)
 								<< "contradictory data between the boundary mesh and the mesh has been detected." << endl
+								<< " min distance = " << min_dist << endl
 								<< abort(FatalError);
 						}
-						i0 = node->Index();
+						i0 = node->id;
 					}
 					{
 						auto bi = Entity2d_Box::Box(p1, 1.0E-6);
-						std::vector<std::shared_ptr<Aft2d_NodeAnIso>> items;
+						std::vector<std::shared_ptr<Node>> items;
 						engine.GeometrySearch(bi, items);
-						std::shared_ptr<Aft2d_NodeAnIso> node;
+						std::shared_ptr<Node> node;
 						for (const auto& it : items)
 						{
-							if (p1.Distance(it->Coord()) <= 1.0E-16)
+							if (p1.Distance(it->coord) <= 1.0E-10)
 							{
 								node = it;
 								break;
@@ -266,7 +190,7 @@ namespace tnbLib
 								<< "contradictory data between the boundary mesh and the mesh has been detected." << endl
 								<< abort(FatalError);
 						}
-						i1 = node->Index();
+						i1 = node->id;
 					}
 
 					connectivity::dual d;
@@ -294,6 +218,28 @@ namespace tnbLib
 		{
 			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionData>(mySoluData);
 			Debug_Null_Pointer(soluData);
+			const auto& elements = soluData->Elements();
+			if (elements.empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no element has been detected!" << endl
+					<< abort(FatalError);
+			}
+			auto mesh = std::make_shared<Entity2d_CmpMesh>();
+			if (!soluData->BndLayerMeshes().empty()) // check if there is any boundary layer mesh
+			{
+				const auto& bnd_meshes = soluData->BndLayerMeshes();
+				for (const auto& bnd : bnd_meshes)
+				{
+					mesh->Add(*bnd);
+				}
+			}
+			{
+				const auto tri_mesh = Aft_Tools::RetrieveTriangleMesh(elements);
+				mesh->Add(*tri_mesh);
+			}
+			Entity2d_CmpMesh::Merge(*mesh);
+			myMesh = mesh;
 			
 			const auto& region = soluData->Region();
 			std::vector<std::shared_ptr<Aft2d_PlnWire>> wires;
@@ -357,12 +303,34 @@ namespace tnbLib
 				}
 			}
 
-			findPhysics(physicMap, bnodes);
+			findPhysics(physicMap);
 		}
 		else
 		{
 			auto soluData = std::dynamic_pointer_cast<Aft2d_SolutionDataAnIso>(mySoluData);
 			Debug_Null_Pointer(soluData);
+			const auto& elements = soluData->Elements();
+			if (elements.empty())
+			{
+				FatalErrorIn(FunctionSIG)
+					<< "no element has been detected!" << endl
+					<< abort(FatalError);
+			}
+			auto mesh = std::make_shared<Entity2d_CmpMesh>();
+			if (!soluData->BndLayerMeshes().empty()) // check if there is any boundary layer mesh
+			{
+				const auto& bnd_meshes = soluData->BndLayerMeshes();
+				for (const auto& bnd : bnd_meshes)
+				{
+					mesh->Add(*bnd);
+				}
+			}
+			{
+				const auto tri_mesh = Aft_Tools::RetrieveTriangleMesh(elements);
+				mesh->Add(*tri_mesh);
+			}
+			Entity2d_CmpMesh::Merge(*mesh);
+			myMesh = mesh;
 
 			const auto& region = soluData->Region();
 			std::vector<std::shared_ptr<Aft2d_PlnWireAnIso>> wires;
@@ -409,7 +377,7 @@ namespace tnbLib
 				}
 			}
 
-			findPhysics(physicMap, bnodes);
+			findPhysics(physicMap);
 		}
 
 		exeTag = true;

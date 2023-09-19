@@ -1,42 +1,59 @@
-#include <MeshPost_Extrude.hxx>
-#include <MeshPost2d_OFTopology.hxx>
-#include <MeshIO2d_FEA.hxx>
-#include <Geo3d_FVMesh.hxx>
+#include <Entity2d_CmpMesh.hxx>
+#include <Entity2d_Box.hxx>
 #include <Global_File.hxx>
 #include <TnbError.hxx>
+#include <OFstream.hxx>
 #include <OSstream.hxx>
 
 namespace tnbLib
 {
 
-	static std::shared_ptr<MeshIO2d_FEA> myMeshIO;
-	static std::shared_ptr<Geo3d_FVMesh> myFvMesh;
+	static std::shared_ptr<Entity2d_CmpMesh> myMesh;
 
 	TNB_DEFINE_VERBOSE_OBJ;
-	TNB_DEFINE_EXETAG_OBJ;
-	TNB_DEFINE_LOADTAG_OBJ;
-	TNB_DEFINE_GLOBAL_PATH;
 	TNB_DEFINE_FILENAME_OBJ;
-	static const std::string sub_directory = "mesh";
+	TNB_DEFINE_LOADTAG_OBJ;
 
 	TNB_SET_VERBOSE_FUN;
 
-	TNB_STANDARD_LOAD_SAVE_POINTER_OBJECT(myMeshIO, sub_directory, myFvMesh);
+	void loadFile(const std::string& name)
+	{
+		file::CheckExtension(name);
+		myMesh =
+			file::LoadFile<std::shared_ptr<Entity2d_CmpMesh>>
+			(name + Entity2d_CmpMesh::extension, verbose);
+		if (NOT myMesh)
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "the mesh file is empty." << endl
+				<< abort(FatalError);
+		}
+		loadTag = true;
+	}
 
-	void execute(const std::string& theName)
+	void loadFile()
+	{
+		auto name =
+			file::GetSingleFile
+			(
+				file::GetCurrentPath(),
+				Entity2d_CmpMesh::extension
+			).string();
+		myFileName = name;
+		loadFile(name);
+	}
+
+	void saveTo(const std::string& name)
 	{
 		TNB_CHECK_LOAD_TAG;
-		const auto topology = std::make_shared<MeshPost2d_OFTopology>();
-		topology->SetMeshIO(myMeshIO);
-		topology->Perform();
+		fileName fn(name + ".plt");
+		OFstream myFile(fn);
+		myMesh->ExportToPlt(myFile);
+	}
 
-		const auto convertor = std::make_shared<MeshPost_Extrude>();
-		convertor->SetMesh2d(topology);
-		convertor->SetTitle(theName);
-		convertor->Perform();
-
-		myFvMesh = convertor->RetrieveIO();
-		TNB_PERFORMED_TAG;
+	void saveTo()
+	{
+		saveTo(myFileName);
 	}
 }
 
@@ -51,19 +68,18 @@ namespace tnbLib
 
 	typedef std::shared_ptr<chaiscript::Module> module_t;
 
-	void setGlobals(const module_t& mod)
+	void setFunctions(const module_t& mod)
 	{
-		// io functions [1/23/2023 Payvand]
+		//- io functions
+
+		mod->add(chaiscript::fun([](const std::string& name)-> void {loadFile(name); }), "loadFile");
 		mod->add(chaiscript::fun([]()-> void {loadFile(); }), "loadFile");
-		mod->add(chaiscript::fun([](const std::string& name)-> void {loadModel(name); }), "loadFile");
 		mod->add(chaiscript::fun([](const std::string& name)-> void {saveTo(name); }), "saveTo");
 		mod->add(chaiscript::fun([]()-> void {saveTo(); }), "saveTo");
 
-		// settings [1/23/2023 Payvand]
-		mod->add(chaiscript::fun([](unsigned short c)->void {setVerbose(c); }), "setVerbose");
+		//- settings
 
-		// operators [1/23/2023 Payvand]
-		mod->add(chaiscript::fun([](const std::string& name)-> void {execute(name); }), "execute");
+		mod->add(chaiscript::fun([](unsigned short i)->void {verbose = i; }), "setVerbose");
 	}
 
 	std::string getString(char* argv)
@@ -77,12 +93,14 @@ namespace tnbLib
 		auto argument = getString(argv);
 		return argument IS_EQUAL command;
 	}
+
 }
 
 using namespace tnbLib;
 
 int main(int argc, char* argv[])
 {
+	//sysLib::init_gl_marine_integration_info();
 	//FatalError.throwExceptions();
 
 	if (argc <= 1)
@@ -97,25 +115,23 @@ int main(int argc, char* argv[])
 		if (IsEqualCommand(argv[1], "--help"))
 		{
 			Info << endl;
-			Info << " This application is aimed to extrude a two-dimensional mesh." << endl << endl;
-
-			Info << " - subdirectory: {" << sub_directory << "}" << endl;
+			Info << " This application is aimed to convert a mesh file to the *.plt file format." << endl;
 			Info << endl
 				<< " Function list:" << endl << endl
 
-				<< " # I/O functions: " << endl << endl
+				<< " # IO functions: " << endl << endl
 
 				<< " - loadFile(name [optional])" << endl
 				<< " - saveTo(name [optional])" << endl << endl
 
-				<< " # Operators: " << endl << endl
-
-				<< " - execute(name)" << endl << endl
-
 				<< " # Settings: " << endl << endl
 
-				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl
+				<< " - setVerbose(unsigned int);    - Levels: 0, 1" << endl << endl
+
+				<< " # operators: " << endl
+
 				<< endl;
+			return 0;
 		}
 		else if (IsEqualCommand(argv[1], "--run"))
 		{
@@ -123,15 +139,17 @@ int main(int argc, char* argv[])
 
 			auto mod = std::make_shared<chaiscript::Module>();
 
-			setGlobals(mod);
+			setFunctions(mod);
 
 			chai.add(mod);
 
+			//std::string address = ".\\system\\mesh2dToPlt";
+
 			try
 			{
-				fileName myFileName(file::GetSystemFile("tnbMesh2dExtrude"));
-
+				fileName myFileName(file::GetSystemFile("tnbCmpMesh2dToPlt"));
 				chai.eval_file(myFileName);
+				return 0;
 			}
 			catch (const chaiscript::exception::eval_error& x)
 			{
@@ -153,4 +171,5 @@ int main(int argc, char* argv[])
 			<< " - For more information use '--help' command" << endl;
 		FatalError.exit();
 	}
+	return 1;
 }

@@ -16,6 +16,7 @@
 #include <Aft2d_Model.hxx>
 #include <Aft2d_ModelAnIso.hxx>
 #include <Cad2d_Plane.hxx>
+#include <Entity2d_CmpMesh.hxx>
 #include <Global_File.hxx>
 #include <Global_Timer.hxx>
 #include <OSstream.hxx>
@@ -132,11 +133,10 @@ namespace tnbLib
 			soluData->NodeCalculator()->SetMetricMap(soluData->Metric());
 
 			Aft_Tools::Connect(boundaries);
-
+			//Aft2d_Model::ALLOWED_MAX_LEVEL_GENERATION = 10;
 			auto mesher = std::make_shared<Aft2d_Model>();
 			mesher->LoadMetricMap(soluData->Metric());
 			mesher->LoadBoundaryMetricMap(soluData->Metric());
-
 			mesher->LoadBoundaryEdges(Aft_Tools::UpCast(soluData->BoundaryEdges()));
 			mesher->LoadNodeCalculator(soluData->NodeCalculator());
 
