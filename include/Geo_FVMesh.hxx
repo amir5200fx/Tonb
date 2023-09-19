@@ -7,6 +7,7 @@
 #include <Global_Serialization.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
+#include <OFstream.hxx>
 
 #include <vector>
 #include <memory>
@@ -198,7 +199,7 @@ namespace tnbLib
 
 		auto HasGroup() const { return (Standard_Boolean)theGroups_; }
 
-		Standard_Integer NbGroups() const;
+		inline Standard_Integer NbGroups() const;
 
 		const auto& Coordinates() const { return theCoords_; }
 		const auto& Elements() const { return theElements_; }
@@ -213,6 +214,8 @@ namespace tnbLib
 
 		void SetBoundaries(const std::vector<std::shared_ptr<Boundary>>& theBoundaries) { theBoundaries_ = theBoundaries; }
 		void SetBoundaries(std::vector<std::shared_ptr<Boundary>>&& theBoundaries) { theBoundaries_ = std::move(theBoundaries); }
+
+		void ExportToPlt(OFstream&) const;
 
 	};
 }

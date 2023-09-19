@@ -1,29 +1,26 @@
 #pragma once
-#ifndef _Geo_ElemGeom_Brick_Header
-#define _Geo_ElemGeom_Brick_Header
+#ifndef _Geo_ElemGeom_Hexahedron_Header
+#define _Geo_ElemGeom_Hexahedron_Header
 
 #include <Geo_ElemGeom.hxx>
 
 namespace tnbLib
 {
 
-	class Geo_ElemGeom_Brick
+	class Geo_ElemGeom_Hexahedron
 		: public Geo_ElemGeom
 	{
 
 	public:
 
-		enum 
+		enum
 		{
-			nbNodes = 4
+			nbNodes = 8
 		};
-
-	private:
 
 		/*Private Data*/
 
 		std::array<Standard_Integer, nbNodes> theIndices_;
-
 
 		// Private functions and operators [8/15/2023 aamir]
 
@@ -39,22 +36,20 @@ namespace tnbLib
 
 		// default constructor [8/15/2023 aamir]
 
-		Geo_ElemGeom_Brick()
+		Geo_ElemGeom_Hexahedron()
 		{}
 
 	public:
 
 		static TnbGeo_EXPORT const char* typeName_;
 
-		// default constructor [8/15/2023 aamir]
+		// constructor [8/15/2023 aamir]
 
-		// constructors [8/15/2023 aamir]
-
-		Geo_ElemGeom_Brick(const std::array<Standard_Integer, nbNodes>& theIndices)
+		Geo_ElemGeom_Hexahedron(const std::array<Standard_Integer, nbNodes>& theIndices)
 			: theIndices_(theIndices)
 		{}
 
-		Geo_ElemGeom_Brick(std::array<Standard_Integer, nbNodes>&& theIndices)
+		Geo_ElemGeom_Hexahedron(std::array<Standard_Integer, nbNodes>&& theIndices)
 			: theIndices_(std::move(theIndices))
 		{}
 
@@ -70,6 +65,6 @@ namespace tnbLib
 	};
 }
 
-BOOST_CLASS_EXPORT_KEY(tnbLib::Geo_ElemGeom_Brick);
+BOOST_CLASS_EXPORT_KEY(tnbLib::Geo_ElemGeom_Hexahedron);
 
-#endif // !_Geo_ElemGeom_Brick_Header
+#endif

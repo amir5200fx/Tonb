@@ -41,6 +41,10 @@ namespace tnbLib
 			TNB_oARCH_TYPE& ar, 
 			const unsigned int file_version
 		);
+
+	template <>
+	TnbGeo_EXPORT void Geo2d_FVMesh::ExportToPlt(OFstream&) const;
+
 }
 
 #endif // !_Geo2d_FVMesh_Header

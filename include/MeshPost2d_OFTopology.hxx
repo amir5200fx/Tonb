@@ -3,7 +3,6 @@
 #define _MeshPost2d_OFTopology_Header
 
 #include <MeshPost_Module.hxx>
-#include <Entity2d_TriangulationFwd.hxx>
 #include <Entity_Connectivity.hxx>
 #include <Global_Done.hxx>
 #include <Global_Indexed.hxx>
@@ -17,6 +16,7 @@ namespace tnbLib
 
 	// Forward Declarations [7/6/2023 Payvand]
 	class MeshIO2d_FEA;
+	class Entity2d_CmpMesh;
 
 	class MeshPost2d_OFTopology
 		: public Global_Done
@@ -238,7 +238,7 @@ namespace tnbLib
 			>
 			CalcGragh
 			(
-				const Entity2d_Triangulation&,
+				const Entity2d_CmpMesh&,
 				const std::vector<std::tuple<Standard_Integer, Standard_Integer, word>>&
 			);
 
@@ -250,7 +250,7 @@ namespace tnbLib
 		// default constructor [7/6/2023 Payvand]
 
 		MeshPost2d_OFTopology()
-		{}
+			= default;
 
 		// constructors [7/6/2023 Payvand]
 
