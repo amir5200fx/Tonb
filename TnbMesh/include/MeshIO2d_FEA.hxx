@@ -13,12 +13,15 @@
 namespace tnbLib
 {
 
+	// Forward Delarations
+	class Entity2d_CmpMesh;
+
 	class MeshIO2d_FEA
 	{
 
 		/*Private Data*/
 
-		std::shared_ptr<Entity2d_Triangulation> theMesh_;
+		std::shared_ptr<Entity2d_CmpMesh> theMesh_;
 		
 		std::map<word, std::shared_ptr<std::vector<connectivity::dual>>> theBoundaries_;
 
@@ -33,8 +36,7 @@ namespace tnbLib
 
 		// default constructor [7/4/2023 Payvand]
 
-		MeshIO2d_FEA()
-		{}
+		TnbMesh_EXPORT MeshIO2d_FEA();
 
 		// constructors [7/4/2023 Payvand]
 
@@ -43,8 +45,8 @@ namespace tnbLib
 		const auto& Mesh() const { return theMesh_; }
 		const auto& Boundaries() const { return theBoundaries_; }
 		
-		void SetMesh(const std::shared_ptr<Entity2d_Triangulation>& theMesh) { theMesh_ = theMesh; }
-		void SetMesh(std::shared_ptr<Entity2d_Triangulation>&& theMesh) { theMesh_ = std::move(theMesh); }
+		void SetMesh(const std::shared_ptr<Entity2d_CmpMesh>& theMesh) { theMesh_ = theMesh; }
+		void SetMesh(std::shared_ptr<Entity2d_CmpMesh>&& theMesh) { theMesh_ = std::move(theMesh); }
 
 		void SetBoundaries(const std::map<word, std::shared_ptr<std::vector<connectivity::dual>>>& theBoundaries)
 		{
