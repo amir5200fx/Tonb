@@ -58,6 +58,8 @@ namespace tnbLib
 
 		// Public functions and operators [8/15/2023 aamir]
 
+		TnbGeo_EXPORT dim Dim() const override;
+
 		std::string ElementType() const override { return typeName_; }
 		Standard_Integer Size() const override { return (Standard_Integer)nbNodes; }
 		TnbGeo_EXPORT std::vector<Standard_Integer> IndexList() const override;

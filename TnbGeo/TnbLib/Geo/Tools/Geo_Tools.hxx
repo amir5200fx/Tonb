@@ -418,6 +418,8 @@ namespace tnbLib
 				const Pnt2d& theP2
 			);
 
+		static Standard_Real Area_cgal(const std::vector<Pnt2d>& thePolygon);
+
 		static inline Standard_Real 
 			Volume_cgal
 			(

@@ -14,6 +14,10 @@
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class Entity2d_CmpConnect;
+	class Entity3d_CmpConnect;
+
 	class Geo_ElemGeom
 	{
 
@@ -40,12 +44,25 @@ namespace tnbLib
 		// constructors [8/15/2023 aamir]
 
 	public:
+		enum class dim
+		{
+			one,
+			two,
+			three
+		};
 
 		// Public functions and operators [8/15/2023 aamir]
+
+		virtual dim Dim() const = 0;
 
 		virtual std::string ElementType() const = 0;
 		virtual Standard_Integer Size() const = 0;
 		virtual std::vector<Standard_Integer> IndexList() const = 0;
+
+		// Static functions
+
+		static TnbGeo_EXPORT std::shared_ptr<Entity2d_CmpConnect> Convert2d(const Geo_ElemGeom&);
+		static TnbGeo_EXPORT std::shared_ptr<Entity3d_CmpConnect> Convert3d(const Geo_ElemGeom&);
 
 	};
 }

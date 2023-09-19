@@ -33,9 +33,11 @@ void tnbLib::Geo2d_OffsetPolygon_Exterior::Perform()
 			<< " - value: " << MaxOffset() << endl
 			<< abort(FatalError);
 	}
+	const auto& pnts = Polygon()->Points();
 	Polygon_2 poly;
-	for (const auto& x : Polygon()->Points())
+	for (size_t i = 0; i < pnts.size() - 1; i++)
 	{
+		const auto& x = pnts.at(i);
 		poly.push_back(Point(x.X(), x.Y()));
 	}
 	if (NOT poly.is_counterclockwise_oriented())
@@ -44,22 +46,29 @@ void tnbLib::Geo2d_OffsetPolygon_Exterior::Perform()
 			<< "the polygon is not counter clockwise." << endl
 			<< abort(FatalError);
 	}
-	auto ss = CGAL::create_exterior_straight_skeleton_2(MaxOffset(), poly);
-	auto offset_polygons =
+	const auto ss = CGAL::create_exterior_straight_skeleton_2(MaxOffset(), poly);
+	const auto offset_polygons =
 		CGAL::create_offset_polygons_2<Polygon_2>
 		(MaxOffset(), *ss);
 	for (const auto& x : offset_polygons)
 	{
 		std::vector<Pnt2d> pts;
-		pts.reserve(x->size());
-		for (auto it = x->vertices_begin(); it != x->vertices_end(); it++)
+		pts.reserve(x->size() + 1);
+		for (auto it = x->vertices_begin(); it != x->vertices_end(); ++it)
 		{
 			const auto& coord = *it;
-			pts.push_back({ coord.x(),coord.y() });
+			pts.emplace_back(coord.x(),coord.y());
 		}
+		const auto& coord = *x->vertices_begin();
+		//pts.emplace_back(coord.x(), coord.y());
 		//const auto& coord = *x->vertices_begin();
 		//pts.push_back({ coord.x(),coord.y() });
 		auto offset_poly = std::make_shared<Entity2d_Polygon>(std::move(pts), 0);
+		offset_poly->Reverse();
+		{
+			auto& pts = offset_poly->Points();
+			pts.emplace_back(FirstItem(pts));
+		}
 		theOffsets_.push_back(std::move(offset_poly));
 	}
 	Change_IsDone() = Standard_True;

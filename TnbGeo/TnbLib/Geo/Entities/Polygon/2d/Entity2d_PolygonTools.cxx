@@ -10,14 +10,18 @@ tnbLib::Entity2d_PolygonTools::GetOrientation
 	const Entity2d_Triangle & theTri
 )
 {
-	auto poly = Geo_Tools::GetPolygon(theTri);
+	const auto poly = Geo_Tools::GetPolygon(theTri);
 	return GetOrientation(*poly);
 }
 
 tnbLib::Entity2d_PolygonOrientation 
-tnbLib::Entity2d_PolygonTools::GetOrientation(const Entity_Triangle<const Pnt2d&>& theTri)
+tnbLib::Entity2d_PolygonTools::GetOrientation
+(
+	const Entity_Triangle<const Pnt2d&>& theTri
+)
 {
-	return TnbGeo_EXPORT Entity2d_PolygonOrientation();
+	const auto poly = Geo_Tools::GetPolygon(theTri);
+	return GetOrientation(*poly);
 }
 
 tnbLib::Entity2d_PolygonOrientation

@@ -75,7 +75,7 @@ namespace tnbLib
 		void UpdateIndices
 		(
 			Connectivity& Matrix,
-			Stl_Vector<Standard_Integer> Indices
+			const Stl_Vector<Standard_Integer>& Indices
 		) const
 		{
 			for (int i = 0; i < Connectivity::nbCmpts; i++)

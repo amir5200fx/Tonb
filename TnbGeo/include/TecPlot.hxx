@@ -15,6 +15,8 @@ namespace tnbLib
 
 	class Pnt3d;
 	class Pnt2d;
+	class Entity2d_CmpConnect;
+	class Entity3d_CmpConnect;
 
 	namespace Io
 	{
@@ -115,9 +117,23 @@ namespace tnbLib
 
 		TnbGeo_EXPORT void ExportMesh
 		(
+			const std::vector<Pnt2d>&,
+			const std::vector<std::shared_ptr<Entity2d_CmpConnect>>&,
+			OFstream&
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
 			const std::vector<Pnt2d>& thePoints,
 			const std::vector<connectivity::triple>& Triangles,
 			OFstream& File
+		);
+
+		TnbGeo_EXPORT void ExportMesh
+		(
+			const std::vector<Pnt3d>&,
+			std::vector<std::shared_ptr<Entity3d_CmpConnect>>&,
+			OFstream&
 		);
 
 		TnbGeo_EXPORT void ExportMesh

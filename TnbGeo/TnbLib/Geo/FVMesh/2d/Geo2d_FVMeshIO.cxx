@@ -1,6 +1,8 @@
 #include <Geo2d_FVMesh.hxx>
 
 #include <Geo_ElemGeom.hxx>
+#include <Entity2d_CmpConnect.hxx>
+#include <TecPlot.hxx>
 
 template<>
 template<>
@@ -60,4 +62,18 @@ void tnbLib::Geo2d_FVMesh::serialize<TNB_oARCH_TYPE>
 	ar& theBoundaries_;
 
 	ar& theGroups_;
+}
+
+template <>
+void tnbLib::Geo2d_FVMesh::ExportToPlt(OFstream& theFile) const
+{
+	std::vector<std::shared_ptr<Entity2d_CmpConnect>> tot_ids;
+	tot_ids.reserve(theElements_.size());
+	for (const auto& x:theElements_)
+	{
+		Debug_Null_Pointer(x);
+		auto ids = Geo_ElemGeom::Convert2d(*x);
+		tot_ids.emplace_back(std::move(ids));
+	}
+	Io::ExportMesh(Coordinates(), tot_ids, theFile);
 }

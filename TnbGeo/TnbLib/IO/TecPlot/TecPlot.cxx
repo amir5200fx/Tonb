@@ -1,5 +1,7 @@
 #include <TecPlot.hxx>
 
+#include <Entity3d_CmpConnect.hxx>
+#include <Entity2d_CmpConnect.hxx>
 #include <Pnt2d.hxx>
 #include <Pnt3d.hxx>
 #include <token.hxx>
@@ -194,6 +196,63 @@ void tnbLib::Io::WriteIorderedZone
 
 void tnbLib::Io::ExportMesh
 (
+	const std::vector<Pnt2d>& thePoints,
+	const std::vector<std::shared_ptr<Entity2d_CmpConnect>>& theElements,
+	OFstream& theFile
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y", theFile);
+	WriteFeQuadrilateralZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theFile
+	);
+
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theFile);
+		theFile << endl;
+	}
+	for (const auto& x : theElements)
+	{
+		auto ids = x->Components();
+		if (ids.size() IS_EQUAL 3)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(2)
+				<< endl;
+		}
+		else if (ids.size() IS_EQUAL 4)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< endl;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Unspecified type of element has been detected." << endl
+				<< abort(FatalError);
+		}
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
 	const std::vector<Pnt2d>& Points,
 	const std::vector<connectivity::triple>& Triangles,
 	OFstream & File
@@ -204,7 +263,7 @@ void tnbLib::Io::ExportMesh
 
 	WriteVariables("X Y", File);
 
-	WriteFeTriangleZone((Standard_Integer)Points.size(), (Standard_Integer)Triangles.size(), File);
+	WriteFeTriangleZone(static_cast<Standard_Integer>(Points.size()), static_cast<Standard_Integer>(Triangles.size()), File);
 
 	for (const auto& x : Points)
 	{
@@ -215,6 +274,117 @@ void tnbLib::Io::ExportMesh
 	for (const auto& x : Triangles)
 	{
 		File << x.Value(0) << "  " << x.Value(1) << "  " << x.Value(2) << endl;
+	}
+}
+
+void tnbLib::Io::ExportMesh
+(
+	const std::vector<Pnt3d>& thePoints,
+	std::vector<std::shared_ptr<Entity3d_CmpConnect>>& theElements,
+	OFstream& theFile
+)
+{
+	if (thePoints.empty()) return;
+	if (theElements.empty()) return;
+
+	WriteVariables("X Y Z", theFile);
+	WriteFeBrickZone
+	(
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
+		theFile
+	);
+	for (const auto& x : thePoints)
+	{
+		x.AddToPlt(theFile);
+		theFile << endl;
+	}
+	for (const auto& x : theElements)
+	{
+		auto ids = x->Components();
+		if (ids.size() IS_EQUAL 8)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< token::SPACE
+				<< ids.at(4)
+				<< token::SPACE
+				<< ids.at(5)
+				<< token::SPACE
+				<< ids.at(6)
+				<< token::SPACE
+				<< ids.at(7)
+				<< endl;
+		}
+		else if (ids.size() IS_EQUAL 6)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< token::SPACE
+				<< ids.at(4)
+				<< token::SPACE
+				<< ids.at(5)
+				<< token::SPACE
+				<< ids.at(5)
+				<< endl;
+		}
+		else if (ids.size() IS_EQUAL 5)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< token::SPACE
+				<< ids.at(4)
+				<< token::SPACE
+				<< ids.at(4)
+				<< token::SPACE
+				<< ids.at(4)
+				<< token::SPACE
+				<< ids.at(4)
+				<< endl;
+		}
+		else if (ids.size() IS_EQUAL 4)
+		{
+			theFile << ids.at(0)
+				<< token::SPACE
+				<< ids.at(1)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(2)
+				<< token::SPACE
+				<< ids.at(3)
+				<< token::SPACE
+				<< ids.at(3)
+				<< token::SPACE
+				<< ids.at(3)
+				<< token::SPACE
+				<< ids.at(3)
+				<< endl;
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG)
+				<< "Unspecified type of element has been detected." << endl
+				<< " nb. of points = " << ids.size() << endl
+				<< abort(FatalError);
+		}
 	}
 }
 
@@ -231,8 +401,8 @@ void tnbLib::Io::ExportMesh
 	WriteVariables("X Y", File);
 	WriteFeQuadrilateralZone
 	(
-		(Standard_Integer)thePoints.size(),
-		(Standard_Integer)theElements.size(),
+		static_cast<Standard_Integer>(thePoints.size()),
+		static_cast<Standard_Integer>(theElements.size()),
 		File
 	);
 	for (const auto& x : thePoints)

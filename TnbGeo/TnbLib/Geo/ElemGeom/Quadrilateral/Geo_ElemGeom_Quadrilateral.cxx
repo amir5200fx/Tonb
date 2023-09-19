@@ -2,6 +2,8 @@
 
 const char* tnbLib::Geo_ElemGeom_Quadrilateral::typeName_ = "quadrilateral";
 
+tnbLib::Geo_ElemGeom::dim tnbLib::Geo_ElemGeom_Quadrilateral::Dim() const { return dim::two; }
+
 std::vector<Standard_Integer> 
 tnbLib::Geo_ElemGeom_Quadrilateral::IndexList() const
 {

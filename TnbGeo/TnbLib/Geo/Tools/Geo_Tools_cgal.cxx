@@ -125,6 +125,17 @@ namespace tnbLib
 	}
 }
 
+Standard_Real
+tnbLib::Geo_Tools::Area_cgal(const std::vector<Pnt2d>& thePolygon)
+{
+	Polygon_2 poly;
+	for (const auto& x:thePolygon)
+	{
+		poly.push_back(Point_2(x.X(), x.Y()));
+	}
+	return poly.area();
+}
+
 Standard_Real 
 tnbLib::Geo_Tools::CalcSquareDistancePointFromTriangle_cgal
 (
