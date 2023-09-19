@@ -116,6 +116,8 @@ void tnbLib::MeshBLayer2d_Offset::Perform()
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "the size of the polygons are not the same." << endl
+			<< " - polygon size = " << polygon.NbPoints() << endl
+			<< " - offset size = " << offset.NbPoints() << endl
 			<< abort(FatalError);
 	}
 	const auto pts = RetrievePairs(polygon, offset);
