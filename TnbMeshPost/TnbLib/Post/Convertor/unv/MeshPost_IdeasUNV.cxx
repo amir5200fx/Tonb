@@ -158,16 +158,26 @@ void tnbLib::MeshPost_IdeasUNV::WriteElements(std::fstream& theFile) const
 
 void tnbLib::MeshPost_IdeasUNV::WriteElement(const std::shared_ptr<Geo_ElemGeom>& theElement, std::fstream& theFile) const
 {
-	theFile << std::setw(10) << unv_element_geom_type.at(theElement->ElementType())
-		<< std::setw(10) << 2
-		<< std::setw(10) << 1
-		<< std::setw(10) << 7
-		<< std::setw(10) << theElement->Size() << std::endl;
-	for (auto x : theElement->IndexList())
+	try
 	{
-		theFile << std::setw(10) << x;
+		theFile << std::setw(10) << unv_element_geom_type.at(theElement->ElementType())
+			<< std::setw(10) << 2
+			<< std::setw(10) << 1
+			<< std::setw(10) << 7
+			<< std::setw(10) << theElement->Size() << std::endl;
+		for (auto x : theElement->IndexList())
+		{
+			theFile << std::setw(10) << x;
+		}
+		theFile << std::endl;
 	}
-	theFile << std::endl;
+	catch (...)
+	{
+		FatalErrorIn(FunctionSIG)
+			<< "Unspeified type of element: " << endl
+			<< " - typename: " << theElement->ElementType() << endl
+			<< abort(FatalError);
+	}
 }
 
 void tnbLib::MeshPost_IdeasUNV::Perform(const std::string& theName)

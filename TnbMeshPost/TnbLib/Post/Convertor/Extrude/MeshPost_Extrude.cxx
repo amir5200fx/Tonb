@@ -1,17 +1,28 @@
+#include <Entity2d_CmpConnect.hxx>
 #include <MeshPost_Extrude.hxx>
 
 #include <MeshPost2d_OFTopology.hxx>
 #include <MeshIO3d_PentaFEA.hxx>
 #include <MeshIO2d_FEA.hxx>
 #include <Geo3d_FVMesh.hxx>
+#include <Geo_ElemGeom_Hexahedron.hxx>
 #include <Geo_ElemGeom_Pyramid.hxx>
 #include <Geo_ElemGeom_Quadrilateral.hxx>
 #include <Geo_ElemGeom_Triangle.hxx>
+#include <Entity2d_CmpMesh.hxx>
 #include <Entity3d_Triangulation.hxx>
 #include <Entity2d_Triangulation.hxx>
 
 std::vector<std::shared_ptr<tnbLib::MeshPost_Extrude::Node>>
 tnbLib::MeshPost_Extrude::TriFacet::GetNodes() const
+{
+	std::vector<std::shared_ptr<Node>> nodes;
+	std::copy(theNodes_.begin(), theNodes_.end(), std::back_inserter(nodes));
+	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::MeshPost_Extrude::Node>>
+tnbLib::MeshPost_Extrude::QuadFacet::GetNodes() const
 {
 	std::vector<std::shared_ptr<Node>> nodes;
 	std::copy(theNodes_.begin(), theNodes_.end(), std::back_inserter(nodes));
@@ -33,8 +44,7 @@ tnbLib::MeshPost_Extrude::CalcNodes2d(const std::vector<std::shared_ptr<Node>>& 
 	nodes.reserve(theNodes.size());
 	for (const auto& x : theNodes)
 	{
-		auto master = std::dynamic_pointer_cast<MasterNode>(x);
-		if (master)
+		if (auto master = std::dynamic_pointer_cast<MasterNode>(x))
 		{
 			auto node = std::make_shared<Node2d >(x->Index(), std::move(master));
 			nodes.push_back(std::move(node));
@@ -138,21 +148,39 @@ tnbLib::MeshPost_Extrude::CalcMesh2d
 		std::cout << "region : " << x.first << std::endl;
 	}
 	PAUSE;*/
-	auto tris = Mesh2d()->MeshIO()->Mesh();
+	const auto cmp_mesh = Mesh2d()->MeshIO()->Mesh();
 	Standard_Integer k = 0;
 	std::vector<std::shared_ptr<Element2d>> elements;
-	for (const auto& x : tris->Connectivity())
+	for (const auto& x : cmp_mesh->Indices())
 	{
-		auto v0 = x.Value(0);
-		auto v1 = x.Value(1);
-		auto v2 = x.Value(2);
+		auto ids = x->Components();
+		if (x->IsTriangle())
+		{
+			const auto v0 = ids.at(0);
+			const auto v1 = ids.at(1);
+			const auto v2 = ids.at(2);
 
-		k++;
-		std::array<std::shared_ptr<Node2d>, Element2d::nbNodes> nodes =
-		{ nodes2d.at(Index_Of(v0)), nodes2d.at(Index_Of(v1)), nodes2d.at(Index_Of(v2)) };
+			k++;
+			std::array<std::shared_ptr<Node2d>, TriElement2d::nbNodes> nodes =
+			{ nodes2d.at(Index_Of(v0)), nodes2d.at(Index_Of(v1)), nodes2d.at(Index_Of(v2)) };
 
-		auto elem = std::make_shared<Element2d>(k, std::move(nodes));
-		elements.push_back(std::move(elem));
+			auto elem = std::make_shared<TriElement2d>(k, std::move(nodes));
+			elements.push_back(std::move(elem));
+		}
+		else if (x->IsQuadrilateral())
+		{
+			const auto v0 = ids.at(0);
+			const auto v1 = ids.at(1);
+			const auto v2 = ids.at(2);
+			const auto v3 = ids.at(3);
+
+			k++;
+			std::array<std::shared_ptr<Node2d>, QuadElement2d::nbNodes> nodes =
+			{ nodes2d.at(Index_Of(v0)), nodes2d.at(Index_Of(v1)), nodes2d.at(Index_Of(v2)), nodes2d.at(Index_Of(v3)) };
+
+			auto elem = std::make_shared<QuadElement2d>(k, std::move(nodes));
+			elements.push_back(std::move(elem));
+		}
 	}
 	auto t = std::make_tuple(std::move(elements), std::move(edges), std::move(nodes2d));
 	return std::move(t);
@@ -164,11 +192,21 @@ std::tuple
 	std::shared_ptr<tnbLib::MeshPost_Extrude::Node2d>,
 	std::shared_ptr<tnbLib::MeshPost_Extrude::Node2d>
 > 
-tnbLib::MeshPost_Extrude::RetrieveNodes(const Element2d& theElement)
+tnbLib::MeshPost_Extrude::RetrieveNodes(const TriElement2d& theElement)
 {
 	auto id = theElement.Index();
 	const auto& nodes = theElement.Nodes();
 	auto t = std::make_tuple(nodes.at(0), nodes.at(1), nodes.at(2));
+	return std::move(t);
+}
+
+std::tuple<std::shared_ptr<tnbLib::MeshPost_Extrude::Node2d>, std::shared_ptr<tnbLib::MeshPost_Extrude::Node2d>, std::
+shared_ptr<tnbLib::MeshPost_Extrude::Node2d>, std::shared_ptr<tnbLib::MeshPost_Extrude::Node2d>> tnbLib::
+MeshPost_Extrude::RetrieveNodes(const QuadElement2d& theElement)
+{
+	auto id = theElement.Index();
+	const auto& nodes = theElement.Nodes();
+	auto t = std::make_tuple(nodes.at(0), nodes.at(1), nodes.at(2), nodes.at(3));
 	return std::move(t);
 }
 
@@ -178,35 +216,86 @@ void tnbLib::MeshPost_Extrude::CreateFace
 	const Standard_Integer theIndex
 )
 {
-	auto [n0, n1, n2] = RetrieveNodes(*theElement);
-	Debug_Null_Pointer(n0);
-	Debug_Null_Pointer(n1);
-	Debug_Null_Pointer(n2);
-	auto n0_f0 = n0->Node3d();
-	auto n1_f0 = n1->Node3d();
-	auto n2_f0 = n2->Node3d();
-	Debug_Null_Pointer(n0_f0);
-	Debug_Null_Pointer(n1_f0);
-	Debug_Null_Pointer(n2_f0);
+	if (theElement->IsTriangle())
+	{
+		const auto element = std::dynamic_pointer_cast<TriElement2d>(theElement);
+		Debug_Null_Pointer(element);
+		auto [n0, n1, n2] = RetrieveNodes(*element);
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
+		Debug_Null_Pointer(n2);
+		auto n0_f0 = n0->Node3d();
+		auto n1_f0 = n1->Node3d();
+		auto n2_f0 = n2->Node3d();
+		Debug_Null_Pointer(n0_f0);
+		Debug_Null_Pointer(n1_f0);
+		Debug_Null_Pointer(n2_f0);
 
-	auto n0_f1 = n0_f0->Slave();
-	auto n1_f1 = n1_f0->Slave();
-	auto n2_f1 = n2_f0->Slave();
-	Debug_Null_Pointer(n0_f1);
-	Debug_Null_Pointer(n1_f1);
-	Debug_Null_Pointer(n2_f1);
-	{
-		std::array<std::shared_ptr<Node>, TriFacet::nbNodes> nodes =
-		{ std::move(n0_f0), std::move(n1_f0), std::move(n2_f0) };
-		auto f = std::make_shared<TriFacet>(theIndex + 1, std::move(nodes));
-		theElement->FrontRef() = std::move(f);
+		auto n0_f1 = n0_f0->Slave();
+		auto n1_f1 = n1_f0->Slave();
+		auto n2_f1 = n2_f0->Slave();
+		Debug_Null_Pointer(n0_f1);
+		Debug_Null_Pointer(n1_f1);
+		Debug_Null_Pointer(n2_f1);
+		{
+			std::array<std::shared_ptr<Node>, TriFacet::nbNodes> nodes =
+			{ std::move(n0_f0), std::move(n1_f0), std::move(n2_f0) };
+			auto f = std::make_shared<TriFacet>(theIndex + 1, std::move(nodes));
+			element->FrontRef() = std::move(f);
+		}
+		{
+			std::array<std::shared_ptr<Node>, TriFacet::nbNodes> nodes =
+			{ std::move(n0_f1), std::move(n1_f1), std::move(n2_f1) };
+			auto f = std::make_shared<TriFacet>(theIndex + 2, std::move(nodes));
+			element->BackRef() = std::move(f);
+		}
 	}
+	else if (theElement->IsQuadrilateral())
 	{
-		std::array<std::shared_ptr<Node>, TriFacet::nbNodes> nodes =
-		{ std::move(n0_f1), std::move(n1_f1), std::move(n2_f1) };
-		auto f = std::make_shared<TriFacet>(theIndex + 2, std::move(nodes));
-		theElement->BackRef() = std::move(f);
+		const auto element = std::dynamic_pointer_cast<QuadElement2d>(theElement);
+		Debug_Null_Pointer(element);
+		auto [n0, n1, n2, n3] = RetrieveNodes(*element);
+		Debug_Null_Pointer(n0);
+		Debug_Null_Pointer(n1);
+		Debug_Null_Pointer(n2);
+		Debug_Null_Pointer(n3);
+		auto n0_f0 = n0->Node3d();
+		auto n1_f0 = n1->Node3d();
+		auto n2_f0 = n2->Node3d();
+		auto n3_f0 = n3->Node3d();
+		Debug_Null_Pointer(n0_f0);
+		Debug_Null_Pointer(n1_f0);
+		Debug_Null_Pointer(n2_f0);
+		Debug_Null_Pointer(n3_f0);
+
+		auto n0_f1 = n0_f0->Slave();
+		auto n1_f1 = n1_f0->Slave();
+		auto n2_f1 = n2_f0->Slave();
+		auto n3_f1 = n3_f0->Slave();
+		Debug_Null_Pointer(n0_f1);
+		Debug_Null_Pointer(n1_f1);
+		Debug_Null_Pointer(n2_f1);
+		Debug_Null_Pointer(n3_f1);
+		{
+			std::array<std::shared_ptr<Node>, QuadFacet::nbNodes> nodes =
+			{ std::move(n0_f0), std::move(n1_f0), std::move(n2_f0), std::move(n3_f0) };
+			auto f = std::make_shared<QuadFacet>(theIndex + 1, std::move(nodes));
+			element->FrontRef() = std::move(f);
+		}
+		{
+			std::array<std::shared_ptr<Node>, QuadFacet::nbNodes> nodes =
+			{ std::move(n0_f1), std::move(n1_f1), std::move(n2_f1), std::move(n3_f1) };
+			auto f = std::make_shared<QuadFacet>(theIndex + 2, std::move(nodes));
+			element->BackRef() = std::move(f);
+		}
 	}
+	else
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "Unspecified type of element." << endl
+			<< abort(FatalError);
+	}
+	
 }
 
 void tnbLib::MeshPost_Extrude::CalcFaces
@@ -233,18 +322,45 @@ void tnbLib::MeshPost_Extrude::CalcElements
 	for (const auto& x : theElements)
 	{
 		Debug_Null_Pointer(x);
-
-		auto f0 = x->Front();
-		auto f1 = x->Back();
-		Debug_Null_Pointer(f0);
-		Debug_Null_Pointer(f1);
-		std::array<std::shared_ptr<Node>, Element::nbNodes>
-			nodes = 
-		{ f0->Nodes().at(0), f0->Nodes().at(1), f0->Nodes().at(2),
-			f1->Nodes().at(0), f1->Nodes().at(1), f1->Nodes().at(2) };
-		//std::cout << nodes.at(0)->Index() << ", " << nodes.at(1)->Index() << ", " << nodes.at(2)->Index() << ", " << nodes.at(3)->Index() << ", " << nodes.at(4)->Index() << ", " << nodes.at(5)->Index() << std::endl;
-		auto elm = std::make_shared<Element>(x->Index(), std::move(nodes));
-		x->Element3dRef() = std::move(elm);
+		if (x->IsTriangle())
+		{
+			const auto tri_elm = std::dynamic_pointer_cast<TriElement2d>(x);
+			Debug_Null_Pointer(elm);
+			const auto f0 = tri_elm->Front();
+			const auto f1 = tri_elm->Back();
+			Debug_Null_Pointer(f0);
+			Debug_Null_Pointer(f1);
+			std::array<std::shared_ptr<Node>, PrismElement::nbNodes>
+				nodes =
+			{ f0->Nodes().at(0), f0->Nodes().at(1), f0->Nodes().at(2),
+				f1->Nodes().at(0), f1->Nodes().at(1), f1->Nodes().at(2) };
+			//std::cout << nodes.at(0)->Index() << ", " << nodes.at(1)->Index() << ", " << nodes.at(2)->Index() << ", " << nodes.at(3)->Index() << ", " << nodes.at(4)->Index() << ", " << nodes.at(5)->Index() << std::endl;
+			auto elm = std::make_shared<PrismElement>(x->Index(), std::move(nodes));
+			tri_elm->GetElement3dRef() = std::move(elm);
+		}
+		else if (x->IsQuadrilateral())
+		{
+			const auto q_elm = std::dynamic_pointer_cast<QuadElement2d>(x);
+			Debug_Null_Pointer(elm);
+			const auto f0 = q_elm->Front();
+			const auto f1 = q_elm->Back();
+			Debug_Null_Pointer(f0);
+			Debug_Null_Pointer(f1);
+			std::array<std::shared_ptr<Node>, HexaElement::nbNodes>
+				nodes =
+			{ f0->Nodes().at(0), f0->Nodes().at(1), f0->Nodes().at(2), f0->Nodes().at(3),
+				f1->Nodes().at(0), f1->Nodes().at(1), f1->Nodes().at(2), f1->Nodes().at(3) };
+			//std::cout << nodes.at(0)->Index() << ", " << nodes.at(1)->Index() << ", " << nodes.at(2)->Index() << ", " << nodes.at(3)->Index() << ", " << nodes.at(4)->Index() << ", " << nodes.at(5)->Index() << std::endl;
+			auto elm = std::make_shared<HexaElement>(x->Index(), std::move(nodes));
+			q_elm->GetElement3dRef() = std::move(elm);
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Unspecified type of element." << endl
+				<< abort(FatalError);
+		}
+		
 	}
 }
 
@@ -270,30 +386,61 @@ tnbLib::MeshPost_Extrude::RetrieveCellList
 	const std::vector<std::shared_ptr<Element2d>>& theElements
 )
 {
-	std::vector<Cell> cells;
+	std::vector<std::shared_ptr<Cell>> cells;
 	cells.reserve(theElements.size());
 	for (const auto& x : theElements)
 	{
-		auto c = RetrieveCell(*x);
+		auto c = RetrieveCell(x);
 		cells.push_back(std::move(c));
 	}
 	CellList cellList(std::move(cells));
 	return std::move(cellList);
 }
 
-tnbLib::MeshPost_Extrude::Cell 
-tnbLib::MeshPost_Extrude::RetrieveCell(const Element2d& theElement)
+std::shared_ptr<tnbLib::MeshPost_Extrude::Cell>
+tnbLib::MeshPost_Extrude::RetrieveCell(const std::shared_ptr<Element2d>& theElement)
 {
-	std::array<Standard_Integer, Cell::nbNodes> nodes;
-	const auto& elm = theElement.Element3d();
-	nodes.at(0) = elm->Nodes().at(0)->Index();
-	nodes.at(1) = elm->Nodes().at(1)->Index();
-	nodes.at(2) = elm->Nodes().at(2)->Index();
-	nodes.at(3) = elm->Nodes().at(3)->Index();
-	nodes.at(4) = elm->Nodes().at(4)->Index();
-	nodes.at(5) = elm->Nodes().at(5)->Index();
-	Cell cell(std::move(nodes));
-	return std::move(cell);
+	if (theElement->IsTriangle())
+	{
+		auto elm2d = std::dynamic_pointer_cast<TriElement2d>(theElement);
+		Debug_Null_Pointer(elm2d);
+		std::array<Standard_Integer, PrismCell::nbNodes> nodes;
+		const auto elm = std::dynamic_pointer_cast<PrismElement>(elm2d->GetElement3d());
+		Debug_Null_Pointer(elm);
+		nodes.at(0) = elm->Nodes().at(0)->Index();
+		nodes.at(1) = elm->Nodes().at(1)->Index();
+		nodes.at(2) = elm->Nodes().at(2)->Index();
+		nodes.at(3) = elm->Nodes().at(3)->Index();
+		nodes.at(4) = elm->Nodes().at(4)->Index();
+		nodes.at(5) = elm->Nodes().at(5)->Index();
+		auto cell = std::make_shared<PrismCell>(std::move(nodes));
+		return std::move(cell);
+	}
+	else if (theElement->IsQuadrilateral())
+	{
+		auto elm2d = std::dynamic_pointer_cast<QuadElement2d>(theElement);
+		Debug_Null_Pointer(elm2d);
+		std::array<Standard_Integer, HexaCell::nbNodes> nodes;
+		const auto elm = std::dynamic_pointer_cast<HexaElement>(elm2d->GetElement3d());
+		Debug_Null_Pointer(elm);
+		nodes.at(0) = elm->Nodes().at(0)->Index();
+		nodes.at(1) = elm->Nodes().at(1)->Index();
+		nodes.at(2) = elm->Nodes().at(2)->Index();
+		nodes.at(3) = elm->Nodes().at(3)->Index();
+		nodes.at(4) = elm->Nodes().at(4)->Index();
+		nodes.at(5) = elm->Nodes().at(5)->Index();
+		nodes.at(6) = elm->Nodes().at(6)->Index();
+		nodes.at(7) = elm->Nodes().at(7)->Index();
+		auto cell = std::make_shared<HexaCell>(std::move(nodes));
+		return std::move(cell);
+	}
+	else
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "Unspecified type of element." << endl
+			<< abort(FatalError);
+		return nullptr;
+	}
 }
 
 std::shared_ptr<tnbLib::Geo3d_FVMesh> 
@@ -310,19 +457,51 @@ tnbLib::MeshPost_Extrude::RetrieveIO() const
 	elements.reserve(theCells_.Cells().size());
 	for (const auto& x : theCells_.Cells())
 	{
-		const auto& nodes = x.Nodes();
-		std::vector<Standard_Integer> indices;
-		std::copy(nodes.begin(), nodes.end(), std::back_inserter(indices));
-		auto v0 = indices.at(0);
-		auto v1 = indices.at(1);
-		auto v2 = indices.at(2);
-		auto v3 = indices.at(3);
-		auto v4 = indices.at(4);
-		auto v5 = indices.at(5);
-		std::array<Standard_Integer, Geo_ElemGeom_Pyramid::nbNodes>
-			indices_array = { v0,v1,v2,v3,v4,v5 };
-		auto elm = std::make_shared<Geo_ElemGeom_Pyramid>(std::move(indices_array));
-		elements.push_back(std::move(elm));
+		if (x->IsPrism())
+		{
+			const auto cell = std::dynamic_pointer_cast<PrismCell>(x);
+			Debug_Null_Pointer(cell);
+			const auto& nodes = cell->Nodes();
+			std::vector<Standard_Integer> indices;
+			std::copy(nodes.begin(), nodes.end(), std::back_inserter(indices));
+			const auto v0 = indices.at(0);
+			const auto v1 = indices.at(1);
+			const auto v2 = indices.at(2);
+			const auto v3 = indices.at(3);
+			const auto v4 = indices.at(4);
+			const auto v5 = indices.at(5);
+			std::array<Standard_Integer, Geo_ElemGeom_Pyramid::nbNodes>
+				indices_array = { v0,v1,v2,v3,v4,v5 };
+			auto elm = std::make_shared<Geo_ElemGeom_Pyramid>(std::move(indices_array));
+			elements.push_back(std::move(elm));
+		}
+		else if (x->IsHexa())
+		{
+			const auto cell = std::dynamic_pointer_cast<HexaCell>(x);
+			Debug_Null_Pointer(cell);
+			const auto& nodes = cell->Nodes();
+			std::vector<Standard_Integer> indices;
+			std::copy(nodes.begin(), nodes.end(), std::back_inserter(indices));
+			const auto v0 = indices.at(0);
+			const auto v1 = indices.at(1);
+			const auto v2 = indices.at(2);
+			const auto v3 = indices.at(3);
+			const auto v4 = indices.at(4);
+			const auto v5 = indices.at(5);
+			const auto v6 = indices.at(6);
+			const auto v7 = indices.at(7);
+			std::array<Standard_Integer, Geo_ElemGeom_Hexahedron::nbNodes>
+				indices_array = { v0,v1,v2,v3,v4,v5,v6,v7 };
+			auto elm = std::make_shared<Geo_ElemGeom_Hexahedron>(std::move(indices_array));
+			elements.push_back(std::move(elm));
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Unspecified type of element." << endl
+				<< abort(FatalError);
+		}
+		
 	}
 	std::vector<std::shared_ptr<Geo3d_FVMesh::Boundary>> boundaries;
 	for (const auto& x : theBoundaryConditions_)
@@ -333,9 +512,9 @@ tnbLib::MeshPost_Extrude::RetrieveIO() const
 			const auto& nodes = f.Nodes();
 			if (nodes.size() IS_EQUAL 3)
 			{
-				auto v0 = nodes.at(0);
-				auto v1 = nodes.at(1);
-				auto v2 = nodes.at(2);
+				const auto v0 = nodes.at(0);
+				const auto v1 = nodes.at(1);
+				const auto v2 = nodes.at(2);
 				std::array<Standard_Integer, Geo_ElemGeom_Triangle::nbNodes>
 					indices_array = { v0, v1,v2 };
 				auto elm = std::make_shared<Geo_ElemGeom_Triangle>(std::move(indices_array));
@@ -343,10 +522,10 @@ tnbLib::MeshPost_Extrude::RetrieveIO() const
 			}
 			else if (nodes.size() IS_EQUAL 4)
 			{
-				auto v0 = nodes.at(0);
-				auto v1 = nodes.at(1);
-				auto v2 = nodes.at(2);
-				auto v3 = nodes.at(3);
+				const auto v0 = nodes.at(0);
+				const auto v1 = nodes.at(1);
+				const auto v2 = nodes.at(2);
+				const auto v3 = nodes.at(3);
 				std::array<Standard_Integer, Geo_ElemGeom_Quadrilateral::nbNodes>
 					indices_array = { v0, v1,v2,v3 };
 				auto elm = std::make_shared<Geo_ElemGeom_Quadrilateral>(std::move(indices_array));
@@ -384,8 +563,8 @@ void tnbLib::MeshPost_Extrude::Perform()
 			<< "no io structure has been found." << endl
 			<< abort(FatalError);
 	}
-	const auto& triangulation = meshIO->Mesh();
-	if (NOT triangulation)
+	const auto& mesh = meshIO->Mesh();
+	if (NOT mesh)
 	{
 		FatalErrorIn(FunctionSIG)
 			<< "no triangulation has been found." << endl
@@ -393,7 +572,7 @@ void tnbLib::MeshPost_Extrude::Perform()
 	}
 	theExtrusion_ = 0.1;
 
-	auto nodes = CalcNodes(triangulation->Points(), Extrusion());
+	const auto nodes = CalcNodes(mesh->Coords(), Extrusion());
 
 	auto [elements_2d, edges_2d, nodes_2d] =
 		CalcMesh2d(nodes);
@@ -439,28 +618,74 @@ void tnbLib::MeshPost_Extrude::Perform()
 		}
 	}
 	theBoundaryConditions_.insert({ "frontAndBack", std::vector<Face>() });
-	auto& faces = theBoundaryConditions_.at("frontAndBack");
 	{
+		auto& faces = theBoundaryConditions_.at("frontAndBack");
 		for (const auto& elm : elements_2d)
 		{
-			const auto& front = elm->Front();
-			Debug_Null_Pointer(front);
-			const auto& nodes = front->Nodes();
-			std::vector<Standard_Integer> indices;
-			for (const auto& n : nodes) indices.push_back(n->Index());
-			std::reverse(indices.begin(), indices.end());
-			faces.push_back({ std::move(indices) });
+			if (elm->IsTriangle())
+			{
+				auto tri = std::dynamic_pointer_cast<TriElement2d>(elm);
+				Debug_Null_Pointer(tri);
+				const auto& front = tri->Front();
+				Debug_Null_Pointer(front);
+				const auto& nodes = front->Nodes();
+				std::vector<Standard_Integer> indices;
+				for (const auto& n : nodes) indices.push_back(n->Index());
+				std::reverse(indices.begin(), indices.end());
+				faces.push_back({ std::move(indices) });
+			}
+			else if (elm->IsQuadrilateral())
+			{
+				auto quad = std::dynamic_pointer_cast<QuadElement2d>(elm);
+				Debug_Null_Pointer(quad);
+				const auto& front = quad->Front();
+				Debug_Null_Pointer(front);
+				const auto& nodes = front->Nodes();
+				std::vector<Standard_Integer> indices;
+				for (const auto& n : nodes) indices.push_back(n->Index());
+				std::reverse(indices.begin(), indices.end());
+				faces.push_back({ std::move(indices) });
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG) << endl
+					<< "unspecified type of element has been detected." << endl
+					<< abort(FatalError);
+			}
+			
 		}
 		for (const auto& elm : elements_2d)
 		{
-			const auto& back = elm->Back();
-			Debug_Null_Pointer(back);
-			const auto& nodes = back->Nodes();
-			std::vector<Standard_Integer> indices;
-			for (const auto& n : nodes) indices.push_back(n->Index());
-			faces.push_back({ std::move(indices) });
+			if (elm->IsTriangle())
+			{
+				auto tri = std::dynamic_pointer_cast<TriElement2d>(elm);
+				Debug_Null_Pointer(tri);
+				const auto& back = tri->Back();
+				Debug_Null_Pointer(back);
+				const auto& nodes = back->Nodes();
+				std::vector<Standard_Integer> indices;
+				for (const auto& n : nodes) indices.push_back(n->Index());
+				faces.push_back({ std::move(indices) });
+			}
+			else if (elm->IsQuadrilateral())
+			{
+				auto quad = std::dynamic_pointer_cast<QuadElement2d>(elm);
+				Debug_Null_Pointer(quad);
+				const auto& back = quad->Back();
+				Debug_Null_Pointer(back);
+				const auto& nodes = back->Nodes();
+				std::vector<Standard_Integer> indices;
+				for (const auto& n : nodes) indices.push_back(n->Index());
+				faces.push_back({ std::move(indices) });
+			}
+			else
+			{
+				FatalErrorIn(FunctionSIG) << endl
+					<< "unspecified type of element has been detected." << endl
+					<< abort(FatalError);
+			}
+			
 		}
 	}
-
 	Change_IsDone() = Standard_True;
 }

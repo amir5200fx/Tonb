@@ -1,7 +1,9 @@
 #include <MeshPost2d_OFTopology.hxx>
 
 #include <MeshIO2d_FEA.hxx>
-#include <Entity2d_Triangulation.hxx>
+#include <Entity2d_CmpMesh.hxx>
+#include <Entity2d_CmpConnect_Triangle.hxx>
+#include <Entity2d_CmpConnect_Quad.hxx>
 
 Standard_Boolean 
 tnbLib::MeshPost2d_OFTopology::Compare
@@ -10,8 +12,8 @@ tnbLib::MeshPost2d_OFTopology::Compare
 	const std::weak_ptr<Segment>& theS1
 )
 {
-	auto s0 = theS0.lock();
-	auto s1 = theS1.lock();
+	const auto s0 = theS0.lock();
+	const auto s1 = theS1.lock();
 	return s0->Index() < s1->Index();
 }
 
@@ -20,7 +22,7 @@ void tnbLib::MeshPost2d_OFTopology::Vertex::Insert
 	const std::shared_ptr<Segment>& theSeg
 )
 {
-	auto insert = theSegments_.insert(theSeg);
+	const auto insert = theSegments_.insert(theSeg);
 	if (NOT insert.second)
 	{
 		FatalErrorIn(FunctionSIG)
@@ -82,6 +84,13 @@ tnbLib::MeshPost2d_OFTopology::Segment::IsValidToCreate
 	const std::shared_ptr<Vertex>& theV1
 )
 {
+	if (theV0 IS_EQUAL theV1)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "degenerated segment has been detected." << endl
+			<< " v0 = " << theV0->Index() << " , v1 = " << theV1->Index() << endl
+			<< abort(FatalError);
+	}
 	if (theV1->NbSegments() < theV0->NbSegments())
 	{
 		return IsValidToCreate(theV1, theV0);
@@ -120,14 +129,14 @@ std::tuple
 > 
 tnbLib::MeshPost2d_OFTopology::CalcGragh
 (
-	const Entity2d_Triangulation& theTris,
+	const Entity2d_CmpMesh& theMesh,
 	const std::vector<std::tuple<Standard_Integer, Standard_Integer, word>>& theBoundaries
 )
 {
 	std::map<Standard_Integer, Standard_Integer> renumber;
 	std::vector<std::shared_ptr<Vertex>> vertices;
 	Standard_Integer k = 0;
-	for (const auto& x : theTris.Points())
+	for (const auto& x : theMesh.Coords())
 	{
 		auto v = std::make_shared<Vertex>(++k);
 		vertices.push_back(std::move(v));
@@ -154,70 +163,170 @@ tnbLib::MeshPost2d_OFTopology::CalcGragh
 	}
 	const auto maxBndId = segments.size();
 	Standard_Integer j = 0;
-	for (const auto& x : theTris.Connectivity())
+	for (const auto& x : theMesh.Indices())
 	{
-		auto i0 = Index_Of(x.Value(0));
-		auto i1 = Index_Of(x.Value(1));
-		auto i2 = Index_Of(x.Value(2));
+		if (x->IsTriangle())
+		{
+			auto tri = std::dynamic_pointer_cast<Entity2d_CmpConnect_Triangle>(x);
+			Debug_Null_Pointer(tri);
 
-		const auto& v0 = vertices.at(i0);
-		const auto& v1 = vertices.at(i1);
-		const auto& v2 = vertices.at(i2);
+			auto i0 = Index_Of(tri->Value(0));
+			auto i1 = Index_Of(tri->Value(1));
+			auto i2 = Index_Of(tri->Value(2));
 
-		j++;
+			const auto& v0 = vertices.at(i0);
+			const auto& v1 = vertices.at(i1);
+			const auto& v2 = vertices.at(i2);
 
-		if (auto created = Segment::IsValidToCreate(v0, v1))
-		{// segment 0 [6/28/2023 Payvand]
-			created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			j++;
+
+			if (auto created = Segment::IsValidToCreate(v0, v1))
+			{// segment 0 [6/28/2023 Payvand]
+				created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			}
+			else
+			{
+				std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
+					paired = { v0,v1 };
+				auto seg = std::make_shared<Segment>
+					(++k, std::move(paired));
+				v0->Insert(seg);
+				v1->Insert(seg);
+
+				seg->SetOwner(j);
+				segments.push_back(std::move(seg));
+				renumber.insert(std::make_pair(k, k));
+			}
+
+			if (auto created = Segment::IsValidToCreate(v1, v2))
+			{// segment 1 [6/28/2023 Payvand]
+				created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			}
+			else
+			{
+				std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
+					paired = { v1,v2 };
+				auto seg = std::make_shared<Segment>
+					(++k, std::move(paired));
+				v1->Insert(seg);
+				v2->Insert(seg);
+
+				seg->SetOwner(j);
+				segments.push_back(std::move(seg));
+				renumber.insert(std::make_pair(k, k));
+			}
+			if (auto created = Segment::IsValidToCreate(v2, v0))
+			{// segment 2 [6/28/2023 Payvand]
+				created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			}
+			else
+			{
+				std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
+					paired = { v2,v0 };
+				auto seg = std::make_shared<Segment>
+					(++k, std::move(paired));
+				v2->Insert(seg);
+				v0->Insert(seg);
+
+				seg->SetOwner(j);
+				segments.push_back(std::move(seg));
+				renumber.insert(std::make_pair(k, k));
+			}
+		}
+		else if (x->IsQuadrilateral())
+		{
+			auto quad = std::dynamic_pointer_cast<Entity2d_CmpConnect_Quad>(x);
+			Debug_Null_Pointer(tri);
+
+			auto i0 = Index_Of(quad->Value(0));
+			auto i1 = Index_Of(quad->Value(1));
+			auto i2 = Index_Of(quad->Value(2));
+			auto i3 = Index_Of(quad->Value(3));
+
+			const auto& v0 = vertices.at(i0);
+			const auto& v1 = vertices.at(i1);
+			const auto& v2 = vertices.at(i2);
+			const auto& v3 = vertices.at(i3);
+
+			j++;
+
+			if (auto created = Segment::IsValidToCreate(v0, v1))
+			{// segment 0 [6/28/2023 Payvand]
+				created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			}
+			else
+			{
+				std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
+					paired = { v0,v1 };
+				auto seg = std::make_shared<Segment>
+					(++k, std::move(paired));
+				v0->Insert(seg);
+				v1->Insert(seg);
+
+				seg->SetOwner(j);
+				segments.push_back(std::move(seg));
+				renumber.insert(std::make_pair(k, k));
+			}
+
+			if (auto created = Segment::IsValidToCreate(v1, v2))
+			{// segment 1 [6/28/2023 Payvand]
+				created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			}
+			else
+			{
+				std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
+					paired = { v1,v2 };
+				auto seg = std::make_shared<Segment>
+					(++k, std::move(paired));
+				v1->Insert(seg);
+				v2->Insert(seg);
+
+				seg->SetOwner(j);
+				segments.push_back(std::move(seg));
+				renumber.insert(std::make_pair(k, k));
+			}
+			if (auto created = Segment::IsValidToCreate(v2, v3))
+			{// segment 2 [6/28/2023 Payvand]
+				created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			}
+			else
+			{
+				std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
+					paired = { v2,v3 };
+				auto seg = std::make_shared<Segment>
+					(++k, std::move(paired));
+				v2->Insert(seg);
+				v3->Insert(seg);
+
+				seg->SetOwner(j);
+				segments.push_back(std::move(seg));
+				renumber.insert(std::make_pair(k, k));
+			}
+			if (auto created = Segment::IsValidToCreate(v3, v0))
+			{// segment 3 [6/28/2023 Payvand]
+				created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
+			}
+			else
+			{
+				std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
+					paired = { v3,v0 };
+				auto seg = std::make_shared<Segment>
+					(++k, std::move(paired));
+				v3->Insert(seg);
+				v0->Insert(seg);
+
+				seg->SetOwner(j);
+				segments.push_back(std::move(seg));
+				renumber.insert(std::make_pair(k, k));
+			}
 		}
 		else
 		{
-			std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
-				paired = { v0,v1 };
-			auto seg = std::make_shared<Segment>
-				(++k, std::move(paired));
-			v0->Insert(seg);
-			v1->Insert(seg);
-
-			seg->SetOwner(j);
-			segments.push_back(std::move(seg));
-			renumber.insert(std::make_pair(k, k));	
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Unspecified type of element." << endl
+				<< abort(FatalError);
 		}
-
-		if (auto created = Segment::IsValidToCreate(v1, v2))
-		{// segment 1 [6/28/2023 Payvand]
-			created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
-		}
-		else
-		{
-			std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
-				paired = { v1,v2 };
-			auto seg = std::make_shared<Segment>
-				(++k, std::move(paired));
-			v1->Insert(seg);
-			v2->Insert(seg);
-
-			seg->SetOwner(j);
-			segments.push_back(std::move(seg));
-			renumber.insert(std::make_pair(k, k));		
-		}
-		if (auto created = Segment::IsValidToCreate(v2, v0))
-		{// segment 2 [6/28/2023 Payvand]
-			created->IsBoundary() ? created->SetOwner(j) : created->SetNeighbor(j);
-		}
-		else
-		{
-			std::array<std::shared_ptr<Vertex>, Segment::nbVertices>
-				paired = { v2,v0 };
-			auto seg = std::make_shared<Segment>
-				(++k, std::move(paired));
-			v2->Insert(seg);
-			v0->Insert(seg);
-
-			seg->SetOwner(j);
-			segments.push_back(std::move(seg));
-			renumber.insert(std::make_pair(k, k));	
-		}
+		
 	}
 	const auto nbIntSegments = segments.size() - maxBndId;	
 	for (size_t i = 0; i < maxBndId; i++)
@@ -339,7 +448,7 @@ void tnbLib::MeshPost2d_OFTopology::Perform()
 			<< "no mesh has been loaded." << endl
 			<< abort(FatalError);
 	}
-	auto boundaries = RetrieveBoundaries(*MeshIO());
+	const auto boundaries = RetrieveBoundaries(*MeshIO());
 	if (NOT MeshIO()->Mesh())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -356,8 +465,8 @@ void tnbLib::MeshPost2d_OFTopology::Perform()
 	{
 		if (NOT x->IsBoundary())
 		{
-			auto v0 = x->Vertices().at(0)->Index();
-			auto v1 = x->Vertices().at(1)->Index();
+			const auto v0 = x->Vertices().at(0)->Index();
+			const auto v1 = x->Vertices().at(1)->Index();
 
 			Edge edge(v0, v1);
 			edge.SetIndex(x->Index());

@@ -13,6 +13,9 @@
 
 #include <Standard_TypeDef.hxx>
 
+#include "MeshPost_Extrude.hxx"
+#include "MeshPost_Extrude.hxx"
+
 namespace tnbLib
 {
 
@@ -38,7 +41,7 @@ namespace tnbLib
 			// default constructor [6/27/2023 Payvand]
 
 			PointList()
-			{}
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
@@ -71,7 +74,7 @@ namespace tnbLib
 			// default constructor [6/27/2023 Payvand]
 
 			Face()
-			{}
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
@@ -93,6 +96,21 @@ namespace tnbLib
 		class Cell
 		{
 
+		protected:
+
+			Cell() {}
+
+		public:
+
+			virtual Standard_Boolean IsPrism() const { return Standard_False; }
+			virtual Standard_Boolean IsHexa() const { return Standard_False; }
+			
+		};
+
+		class PrismCell
+			: public Cell
+		{
+
 		public:
 
 			enum
@@ -110,21 +128,67 @@ namespace tnbLib
 
 			// default constructor [6/27/2023 Payvand]
 
-			Cell()
-			{}
+			PrismCell()
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
-			Cell(const std::array<Standard_Integer, nbNodes>& theNodes)
+			PrismCell(const std::array<Standard_Integer, nbNodes>& theNodes)
 				: theNodes_(theNodes)
 			{}
 
-			Cell(std::array<Standard_Integer, nbNodes>&& theNodes)
+			PrismCell(std::array<Standard_Integer, nbNodes>&& theNodes)
 				: theNodes_(std::move(theNodes))
 			{}
 
 
 			// Public functions and operators [6/27/2023 Payvand]
+
+			Standard_Boolean IsPrism() const override { return Standard_True; }
+
+			const auto& Nodes() const { return theNodes_; }
+			auto& NodesRef() { return theNodes_; }
+
+		};
+
+		class HexaCell
+			: public Cell
+		{
+
+		public:
+
+			enum
+			{
+				nbNodes = 8
+			};
+
+		private:
+
+			// Private Data [6/27/2023 Payvand]
+
+			std::array<Standard_Integer, nbNodes> theNodes_;
+
+		public:
+
+			// default constructor [6/27/2023 Payvand]
+
+			HexaCell()
+				= default;
+
+			// constructors [6/27/2023 Payvand]
+
+			HexaCell(const std::array<Standard_Integer, nbNodes>& theNodes)
+				: theNodes_(theNodes)
+			{}
+
+			HexaCell(std::array<Standard_Integer, nbNodes>&& theNodes)
+				: theNodes_(std::move(theNodes))
+			{}
+
+
+			// Public functions and operators [6/27/2023 Payvand]
+
+			Standard_Boolean IsHexa() const override { return Standard_True; }
 
 			const auto& Nodes() const { return theNodes_; }
 			auto& NodesRef() { return theNodes_; }
@@ -136,22 +200,22 @@ namespace tnbLib
 
 			/*Private Data*/
 
-			std::vector<Cell> theCells_;
+			std::vector<std::shared_ptr<Cell>> theCells_;
 
 		public:
 
 			// default constructor [6/27/2023 Payvand]
 
 			CellList()
-			{}
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
-			CellList(const std::vector<Cell>& theCells)
+			CellList(const std::vector<std::shared_ptr<Cell>>& theCells)
 				: theCells_(theCells)
 			{}
 
-			CellList(std::vector<Cell>&& theCells)
+			CellList(std::vector<std::shared_ptr<Cell>>&& theCells)
 				: theCells_(std::move(theCells))
 			{}
 
@@ -166,7 +230,7 @@ namespace tnbLib
 		};
 
 		class Facet;
-		class Element;
+		class Element3d;
 
 		class Node
 			: public Global_Indexed
@@ -199,7 +263,7 @@ namespace tnbLib
 
 			// Public functions and operators [6/27/2023 Payvand]
 
-			virtual ~Node() {}
+			virtual ~Node() = default;
 
 			const auto& Coord() const { return theCoord_; }
 			auto& CoordRef() { return theCoord_; }
@@ -221,7 +285,7 @@ namespace tnbLib
 			// default constructor [6/27/2023 Payvand]
 
 			MasterNode()
-			{}
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
@@ -255,7 +319,7 @@ namespace tnbLib
 			// default constructor [6/27/2023 Payvand]
 
 			SlaveNode()
-			{}
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
@@ -319,7 +383,7 @@ namespace tnbLib
 			// default constructor [6/27/2023 Payvand]
 
 			TriFacet()
-			{}
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
@@ -352,62 +416,82 @@ namespace tnbLib
 
 		};
 
-		//class QuadFacet
-		//	: public Facet
-		//{
+		class QuadFacet
+			: public Facet
+		{
 
-		//public:
+		public:
 
-		//	enum
-		//	{
-		//		nbNodes = 4
-		//	};
+			enum
+			{
+				nbNodes = 4
+			};
 
-		//private:
+		private:
 
-		//	/*Private Data*/
+			/*Private Data*/
 
-		//	std::array<std::shared_ptr<Node>, nbNodes> theNodes_;
+			std::array<std::shared_ptr<Node>, nbNodes> theNodes_;
 
-		//public:
+		public:
 
-		//	// default constructor [6/27/2023 Payvand]
+			// default constructor [6/27/2023 Payvand]
 
-		//	QuadFacet()
-		//	{}
+			QuadFacet()
+			= default;
 
-		//	// constructors [6/27/2023 Payvand]
+			// constructors [6/27/2023 Payvand]
 
-		//	QuadFacet
-		//	(
-		//		const Standard_Integer theIndex,
-		//		const std::array<std::shared_ptr<Node>, nbNodes>& theNodes
-		//	)
-		//		: Facet(theIndex)
-		//		, theNodes_(theNodes)
-		//	{}
+			QuadFacet
+			(
+				const Standard_Integer theIndex,
+				const std::array<std::shared_ptr<Node>, nbNodes>& theNodes
+			)
+				: Facet(theIndex)
+				, theNodes_(theNodes)
+			{}
 
-		//	QuadFacet
-		//	(
-		//		const Standard_Integer theIndex,
-		//		std::array<std::shared_ptr<Node>, nbNodes>&& theNodes
-		//	)
-		//		: Facet(theIndex)
-		//		, theNodes_(std::move(theNodes))
-		//	{}
+			QuadFacet
+			(
+				const Standard_Integer theIndex,
+				std::array<std::shared_ptr<Node>, nbNodes>&& theNodes
+			)
+				: Facet(theIndex)
+				, theNodes_(std::move(theNodes))
+			{}
 
 
-		//	// Public functions and operators [6/27/2023 Payvand]
+			// Public functions and operators [6/27/2023 Payvand]
 
-		//	const auto& Nodes() const { return theNodes_; }
-		//	auto& NodesRef() { return theNodes_; }
+			const auto& Nodes() const { return theNodes_; }
+			auto& NodesRef() { return theNodes_; }
 
-		//	Standard_Integer NbNodes() const override { return (Standard_Integer)nbNodes; }
-		//	TnbMeshPost_EXPORT std::vector<std::shared_ptr<Node>> GetNodes() const override;
-		//};
-		
-		class Element
+			Standard_Integer NbNodes() const override { return (Standard_Integer)nbNodes; }
+			TnbMeshPost_EXPORT std::vector<std::shared_ptr<Node>> GetNodes() const override;
+		};
+
+		class Element3d
 			: public Global_Indexed
+		{
+
+		protected:
+
+			Element3d()
+			{}
+
+			Element3d(const Standard_Integer theIndex)
+				: Global_Indexed(theIndex)
+			{}
+
+		public:
+
+			virtual Standard_Boolean IsPrism() const { return Standard_False; }
+			virtual Standard_Boolean IsHexa() const { return Standard_False; }
+			
+		};
+		
+		class PrismElement
+			: public Element3d
 		{
 
 		public:
@@ -428,30 +512,86 @@ namespace tnbLib
 
 			// default constructor [6/27/2023 Payvand]
 
-			Element()
-			{}
+			PrismElement()
+			= default;
 
 			// constructors [6/27/2023 Payvand]
 
-			Element
+			PrismElement
 			(
 				const Standard_Integer theIndex,
 				const std::array<std::shared_ptr<Node>, nbNodes>& theNodes
 			)
-				: Global_Indexed(theIndex)
+				: Element3d(theIndex)
 				, theNodes_(theNodes)
 			{}
 
-			Element
+			PrismElement
 			(
 				const Standard_Integer theIndex,
 				std::array<std::shared_ptr<Node>, nbNodes>&& theNodes
 			)
-				: Global_Indexed(theIndex)
+				: Element3d(theIndex)
 				, theNodes_(std::move(theNodes))
 			{}
 
 			// Public functions and operators [6/27/2023 Payvand]
+
+			Standard_Boolean IsPrism() const override { return Standard_True; }
+
+			const auto& Nodes() const { return theNodes_; }
+			auto& Nodes() { return theNodes_; }
+
+		};
+
+		class HexaElement
+			: public Element3d
+		{
+
+		public:
+
+			enum
+			{
+				nbNodes = 8
+			};
+
+		private:
+
+			/*Private Data*/
+
+			std::array<std::shared_ptr<Node>, nbNodes> theNodes_;
+
+
+		public:
+
+			// default constructor [6/27/2023 Payvand]
+
+			HexaElement()
+				= default;
+
+			// constructors [6/27/2023 Payvand]
+
+			HexaElement
+			(
+				const Standard_Integer theIndex,
+				const std::array<std::shared_ptr<Node>, nbNodes>& theNodes
+			)
+				: Element3d(theIndex)
+				, theNodes_(theNodes)
+			{}
+
+			HexaElement
+			(
+				const Standard_Integer theIndex,
+				std::array<std::shared_ptr<Node>, nbNodes>&& theNodes
+			)
+				: Element3d(theIndex)
+				, theNodes_(std::move(theNodes))
+			{}
+
+			// Public functions and operators [6/27/2023 Payvand]
+
+			Standard_Boolean IsHexa() const override { return Standard_True; }
 
 			const auto& Nodes() const { return theNodes_; }
 			auto& Nodes() { return theNodes_; }
@@ -471,7 +611,7 @@ namespace tnbLib
 			// default constructor [6/28/2023 Payvand]
 
 			Node2d()
-			{}
+			= default;
 
 			// constructors [6/28/2023 Payvand]
 
@@ -528,7 +668,7 @@ namespace tnbLib
 
 			Edge2d()
 				/*: theSense_(Standard_True)*/
-			{}
+			= default;
 
 			// constructors [6/28/2023 Payvand]
 
@@ -567,6 +707,28 @@ namespace tnbLib
 			: public Global_Indexed
 		{
 
+		protected:
+
+			Element2d()
+			{}
+
+			Element2d(const Standard_Integer theIndex)
+				: Global_Indexed(theIndex)
+			{}
+
+		public:
+
+			// Public functions and operators
+
+			virtual Standard_Boolean IsTriangle() const { return Standard_False; }
+			virtual Standard_Boolean IsQuadrilateral() const { return Standard_False; }
+			
+		};
+
+		class TriElement2d
+			: public Element2d
+		{
+
 		public:
 
 			enum
@@ -583,36 +745,38 @@ namespace tnbLib
 			std::shared_ptr<TriFacet> theBack_;
 			std::shared_ptr<TriFacet> theFront_;
 
-			std::shared_ptr<Element> theElement_;
+			std::shared_ptr<Element3d> theElement_;
 
 		public:
 
 			// default constructor [6/28/2023 Payvand]
 
-			Element2d()
-			{}
+			TriElement2d()
+			= default;
 
 			// constructors [6/28/2023 Payvand]
 
-			Element2d
+			TriElement2d
 			(
 				const Standard_Integer theIndex,
 				const std::array<std::shared_ptr<Node2d>, nbNodes>& theNodes
 			)
-				: Global_Indexed(theIndex)
+				: Element2d(theIndex)
 				, theNodes_(theNodes)
 			{}
 
-			Element2d
+			TriElement2d
 			(
 				const Standard_Integer theIndex,
 				std::array<std::shared_ptr<Node2d>, nbNodes>&& theNodes
 			)
-				: Global_Indexed(theIndex)
+				: Element2d(theIndex)
 				, theNodes_(std::move(theNodes))
 			{}
 
 			// Public functions and operators [6/28/2023 Payvand]
+
+			Standard_Boolean IsTriangle() const override { return Standard_True; }
 
 			const auto& Nodes() const { return theNodes_; }
 			auto& NodesRef() { return theNodes_; }
@@ -623,8 +787,75 @@ namespace tnbLib
 			const auto& Front() const { return theFront_; }
 			auto& FrontRef() { return theFront_; }
 
-			const auto& Element3d() const { return theElement_; }
-			auto& Element3dRef() { return theElement_; }
+			const auto& GetElement3d() const { return theElement_; }
+			auto& GetElement3dRef() { return theElement_; }
+
+		};
+
+		class QuadElement2d
+			: public Element2d
+		{
+
+		public:
+
+			enum
+			{
+				nbNodes = 4
+			};
+
+		private:
+
+			/*Private Data*/
+
+			std::array<std::shared_ptr<Node2d>, nbNodes> theNodes_;
+
+			std::shared_ptr<QuadFacet> theBack_;
+			std::shared_ptr<QuadFacet> theFront_;
+
+			std::shared_ptr<Element3d> theElement_;
+
+		public:
+
+			// default constructor [6/28/2023 Payvand]
+
+			QuadElement2d()
+				= default;
+
+			// constructors [6/28/2023 Payvand]
+
+			QuadElement2d
+			(
+				const Standard_Integer theIndex,
+				const std::array<std::shared_ptr<Node2d>, nbNodes>& theNodes
+			)
+				: Element2d(theIndex)
+				, theNodes_(theNodes)
+			{}
+
+			QuadElement2d
+			(
+				const Standard_Integer theIndex,
+				std::array<std::shared_ptr<Node2d>, nbNodes>&& theNodes
+			)
+				: Element2d(theIndex)
+				, theNodes_(std::move(theNodes))
+			{}
+
+			// Public functions and operators [6/28/2023 Payvand]
+
+			Standard_Boolean IsQuadrilateral() const override { return Standard_True; }
+
+			const auto& Nodes() const { return theNodes_; }
+			auto& NodesRef() { return theNodes_; }
+
+			const auto& Back() const { return theBack_; }
+			auto& BackRef() { return theBack_; }
+
+			const auto& Front() const { return theFront_; }
+			auto& FrontRef() { return theFront_; }
+
+			const auto& GetElement3d() const { return theElement_; }
+			auto& GetElement3dRef() { return theElement_; }
 
 		};
 
@@ -671,7 +902,9 @@ namespace tnbLib
 			std::shared_ptr<Node2d>,
 			std::shared_ptr<Node2d>
 			>
-			RetrieveNodes(const Element2d&);
+			RetrieveNodes(const TriElement2d&);
+		static  std::tuple<std::shared_ptr<Node2d>, std::shared_ptr<Node2d>, std::shared_ptr<Node2d>, std::shared_ptr<Node2d>>
+			RetrieveNodes(const QuadElement2d&);
 		static TnbMeshPost_EXPORT void CreateFace(const std::shared_ptr<Element2d>&, const Standard_Integer theIndex);
 		static TnbMeshPost_EXPORT void CalcFaces(const std::vector<std::shared_ptr<Element2d>>&, const Standard_Integer theNbEdges);
 		static TnbMeshPost_EXPORT void CalcElements(const std::vector<std::shared_ptr<Element2d>>&);
@@ -679,7 +912,7 @@ namespace tnbLib
 		static TnbMeshPost_EXPORT PointList RetrievePointList(const std::vector<std::shared_ptr<Node>>&);
 		static TnbMeshPost_EXPORT CellList RetrieveCellList(const std::vector<std::shared_ptr<Element2d>>&);
 
-		static TnbMeshPost_EXPORT Cell RetrieveCell(const Element2d&);
+		static TnbMeshPost_EXPORT std::shared_ptr<Cell> RetrieveCell(const std::shared_ptr<Element2d>&);
 
 	public:
 
