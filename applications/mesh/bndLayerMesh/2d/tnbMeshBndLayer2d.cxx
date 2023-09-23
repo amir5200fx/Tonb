@@ -230,6 +230,11 @@ namespace tnbLib
 				soluData->SetBndlayerMeshes(meshes);
 				soluData->SetBoundaryEdges(std::move(boundaries));
 			}
+			else
+			{
+				Info << WarningIn(FunctionSIG) << endl
+					<< " No boundary curve has been selected." << endl;
+			}
 		}
 		else
 		{

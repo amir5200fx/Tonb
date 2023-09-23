@@ -239,7 +239,9 @@ namespace tnbLib
 				mesh->Add(*tri_mesh);
 			}
 			Entity2d_CmpMesh::Merge(*mesh);
+			Entity2d_CmpMesh::CheckInverseElements(*mesh);
 			myMesh = mesh;
+			
 			
 			const auto& region = soluData->Region();
 			std::vector<std::shared_ptr<Aft2d_PlnWire>> wires;
@@ -330,6 +332,7 @@ namespace tnbLib
 				mesh->Add(*tri_mesh);
 			}
 			Entity2d_CmpMesh::Merge(*mesh);
+			Entity2d_CmpMesh::CheckInverseElements(*mesh);
 			myMesh = mesh;
 
 			const auto& region = soluData->Region();
