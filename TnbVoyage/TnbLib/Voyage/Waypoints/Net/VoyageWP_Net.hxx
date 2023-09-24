@@ -33,9 +33,7 @@ namespace tnbLib
 			Standard_Boolean theSense_;
 
 			std::map<Standard_Integer, std::shared_ptr<Node>> theNexts_;
-
-			mutable Standard_Real theTime_;
-			mutable Standard_Real theValue_;
+		
 
 		protected:
 
@@ -43,8 +41,6 @@ namespace tnbLib
 
 			Node()
 				: theSense_(Standard_False)
-				, theTime_(0)
-				, theValue_(0)
 			{}
 
 			//- constructors
@@ -53,16 +49,12 @@ namespace tnbLib
 				: Global_Indexed(theIndex)
 				, theCoord_(theCoord)
 				, theSense_(Standard_False)
-				, theTime_(0)
-				, theValue_(0)
 			{}
 
 			Node(const Standard_Integer theIndex, Pnt2d&& theCoord)
 				: Global_Indexed(theIndex)
 				, theCoord_(std::move(theCoord))
 				, theSense_(Standard_False)
-				, theTime_(0)
-				, theValue_(0)
 			{}
 
 		public:
@@ -76,8 +68,6 @@ namespace tnbLib
 
 			TnbVoyage_EXPORT Standard_Integer Size() const;
 			auto Sense() const { return theSense_; }
-			auto& Time() const { return theTime_; }
-			auto& Value() const { return theValue_; }
 
 			[[nodiscard]] const auto& Nexts() const { return theNexts_; }
 
@@ -287,6 +277,9 @@ namespace tnbLib
 
 		[[nodiscard]] const auto& Nodes() const { return theNodes_; }
 		auto& NodesRef() { return theNodes_; }
+
+		std::shared_ptr<Node> Departure() const;
+		std::shared_ptr<Node> Arrival() const;
 
 		[[nodiscard]] TnbVoyage_EXPORT std::shared_ptr<RefNode> GetNode(const Standard_Integer theIndex) const;
 

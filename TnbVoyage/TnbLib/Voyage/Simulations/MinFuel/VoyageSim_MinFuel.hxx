@@ -26,20 +26,31 @@ namespace tnbLib
 
 		Standard_Real theMinVel_;
 		Standard_Real theMaxVel_;
+		Standard_Real theVel_;
 
 		Standard_Integer theNbLevels_;
 		Standard_Integer theNbSamples_;
+
+		Standard_Real theTimeStep_;
+		Standard_Real theTimeRes_;
 
 		// functions
 		std::function<Standard_Real(const std::pair<Pnt2d, Standard_Real>&, const std::pair<Pnt2d, Standard_Real>&, const Standard_Real, const Standard_Integer)> theResistFun_;
 		std::function<Standard_Real(const Pnt2d&, const Pnt2d&)> theDist_;
 
+		// Private funtions and operators
+
+		static std::vector<Standard_Real> DiscreteTime(const std::pair<Standard_Real, Standard_Real>&, const Standard_Real theDt);
+		static Standard_Boolean InsideTimeLine(const Standard_Real theTime, const std::vector<Standard_Real>&);
+
 	public:
+
+		static unsigned short verbose;
 
 		// default constructor
 
 		VoyageSim_MinFuel()
-		{}
+		= default;
 
 		// constructors
 
@@ -49,10 +60,15 @@ namespace tnbLib
 
 		auto MinVel() const { return theMinVel_; }
 		auto MaxVel() const { return theMaxVel_; }
+		auto Vel() const { return theVel_; }
 		auto NbLevels() const { return theNbLevels_; }
 		auto NbSamples() const { return theNbSamples_; }
 
+		auto TimeStep() const { return theTimeStep_; }
+		auto TimeResolution() const { return theTimeRes_; }
+
 		void Perform();
+		
 
 	};
 }

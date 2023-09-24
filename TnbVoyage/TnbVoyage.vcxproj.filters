@@ -391,6 +391,9 @@
     <Filter Include="TnbLib\Voyage\Simulations\MinFuel">
       <UniqueIdentifier>{5b9d4743-b503-4e83-bb67-19986a80e09c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\Graph">
+      <UniqueIdentifier>{017e1d61-b4d0-48e7-8852-74119f179615}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -734,6 +737,9 @@
     </ClInclude>
     <ClInclude Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel.hxx">
       <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\Graph\VoyageSim_Graph.hxx">
+      <Filter>TnbLib\Voyage\Simulations\Graph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
