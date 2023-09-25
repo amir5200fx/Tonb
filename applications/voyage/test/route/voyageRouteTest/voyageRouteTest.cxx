@@ -1,4 +1,6 @@
-﻿#include <VoyageWP_Connect.hxx>
+﻿#include <Aft_MetricPrcsr.hxx>
+#include <VoyageSim_MinFuel.hxx>
+#include <VoyageWP_Connect.hxx>
 #include <VoyageWP_Connect2.hxx>
 #include <VoyageWP_Net.hxx>
 #include <VoyageGeo_PathGeneration.hxx>
@@ -106,8 +108,8 @@ int main()
 		pts.push_back(Voyage_Tools::ConvertToUV({ 5.8, 80.1 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 6.7, 94.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 7.0, 97.0 }));
-		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
-		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
+		//pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
+		//pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
 
 		//Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
 		//std::exit(1);
@@ -227,11 +229,45 @@ int main()
 		alg->SetNet(grid);
 		alg->Perform();
 	}
-	std::cout << " - the application is successfully performed." << std::endl;
+	
 
 	OFstream gridFile("grid.plt");
 	
 	grid->ExportToPlt(gridFile);
+
+	std::cout << std::endl;
+	std::cout << " # Simulating the Fuel consumption..." << std::endl;
+
+	double avg_vel = 18.52; // kmph
+	double min_vel = 0.5 * avg_vel;
+	double max_vel = 1.2 * avg_vel;
+	auto sim = std::make_shared<VoyageSim_MinFuel>();
+
+	sim->SetMinVel(min_vel);
+	sim->SetMaxVel(max_vel);
+	sim->SetVel(avg_vel);
+	sim->SetTimeStep(hour);
+	sim->SetNbSamples(1);
+	sim->SetTimeRes(hour);
+	sim->SetNbLevels(2);
+	sim->SetNet(grid);
+	{
+		auto prcsr = 
+			Voyage_Tools::MakeMetricPrcsr
+		(Voyage_Tools::MakeUniformSizeMap(*earth), *earth, *metricInfo);
+		auto my_dist_fun = [prcsr](const Pnt2d& theP0, const Pnt2d& theP1)
+		{
+			return prcsr->CalcDistance(theP0, theP1);
+		};
+		sim->SetDistFunc(my_dist_fun);
+		sim->Perform();
+	}
+
+	
+	
+
+	std::cout << std::endl;
+	std::cout << " - the application is successfully performed." << std::endl;
 
 	return 1;
 

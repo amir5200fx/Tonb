@@ -1,16 +1,20 @@
 #include <Voyage_Tools.hxx>
 
+#include <VoyageMesh_MetricPrcsr.hxx>
 #include <VoyageGeo_VelocityBackground.hxx>
 #include <VoyageMesh_Element.hxx>
 #include <VoyageMesh_RefEdge.hxx>
 #include <VoyageMesh_Node.hxx>
 #include <VoyageGeo_Path2.hxx>
 #include <VoyageGeo_Earth.hxx>
+#include <Voyage_MetricInfo.hxx>
 #include <Voyage_Edge.hxx>
 #include <Voyage_Node.hxx>
 #include <Aft_Tools.hxx>
+#include <Aft_MetricPrcsrAnIso_Info.hxx>
 #include <Geo2d_MetricPrcsrAnIso.hxx>
 #include <GeoMesh2d_Data.hxx>
+#include <GeoSizeFun2d_Uniform.hxx>
 #include <Cad_GeomSurface.hxx>
 #include <Pln_Edge.hxx>
 #include <Geo2d_DelTri.hxx>
@@ -439,6 +443,42 @@ tnbLib::Voyage_Tools::CalcParameters
 	theTotLen = tot_dis;
 	return std::move(t);
 }
+
+std::shared_ptr<tnbLib::VoyageMesh_MetricPrcsr>
+tnbLib::Voyage_Tools::MakeMetricPrcsr
+(
+	const std::shared_ptr<Geo2d_SizeFunction>& theFun, 
+	const VoyageGeo_Earth& theEarth,
+	const Voyage_MetricInfo& theInfo
+)
+{
+	auto metrics = theEarth.GetMetrics();
+	Debug_Null_Pointer(metrics);
+	auto metricInfo =
+		std::make_shared<Aft_MetricPrcsrAnIso_Info>
+		(
+			theInfo.MetricInfo(),
+			theInfo.NbSamples(),
+			theInfo.NbMetricIters(),
+			theInfo.MetricTol()
+			);
+	auto prcsr = 
+		std::make_shared<VoyageMesh_MetricPrcsr>
+	(theFun, metrics, metricInfo);
+	return std::move(prcsr);
+}
+
+std::shared_ptr<tnbLib::Geo2d_SizeFunction>
+tnbLib::Voyage_Tools::MakeUniformSizeMap
+(
+	const VoyageGeo_Earth& theEarth,
+	const Standard_Real theSize
+)
+{
+	return std::make_shared<GeoSizeFun2d_Uniform>
+	(theSize, theEarth.Surface()->ParametricBoundingBox());
+}
+
 
 tnbLib::Pnt2d 
 tnbLib::Voyage_Tools::ConvertToUV(const Pnt2d& theCoordinate)

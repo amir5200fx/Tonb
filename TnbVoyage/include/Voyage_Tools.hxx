@@ -2,6 +2,7 @@
 #ifndef _Voyage_Tools_Header
 #define _Voyage_Tools_Header
 
+#include <VoyageMesh_MetricPrcsrFwd.hxx>
 #include <VoyageGeo_VelocityBackgroundFwd.hxx>
 #include <Voyage_Module.hxx>
 #include <GeoMesh2d_SingleBackgroundFwd.hxx>
@@ -22,6 +23,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations [7/21/2023 Payvand]
+	class Voyage_MetricInfo;
 	class VoyageMesh_Element;
 	class VoyageMesh_Edge;
 	class VoyageMesh_Node;
@@ -141,6 +143,21 @@ namespace tnbLib
 				const Entity2d_Polygon&, 
 				const Geo2d_MetricPrcsrAnIso&, 
 				Standard_Real& theTotLength
+			);
+
+		static TnbVoyage_EXPORT std::shared_ptr<VoyageMesh_MetricPrcsr>
+			MakeMetricPrcsr
+			(
+				const std::shared_ptr<Geo2d_SizeFunction>& theFun,
+				const VoyageGeo_Earth&,
+				const Voyage_MetricInfo& theInfo
+			);
+
+		static TnbVoyage_EXPORT std::shared_ptr<Geo2d_SizeFunction>
+			MakeUniformSizeMap
+			(
+				const VoyageGeo_Earth&,
+				const Standard_Real theSize = 1.0
 			);
 
 		// Convert the standard voyage coordinates to the parametric coordinates [8/27/2023 aamir]

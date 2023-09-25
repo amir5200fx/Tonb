@@ -30,27 +30,31 @@ namespace tnbLib
 			/*Private Data*/
 
 			Pnt2d theCoord_;
+			Standard_Boolean theSense_;
 
 			std::map<Standard_Integer, std::shared_ptr<Node>> theNexts_;
+		
 
 		protected:
-			~Node() = default;
 
 			//- default constructor
 
 			Node()
-				= default;
+				: theSense_(Standard_False)
+			{}
 
 			//- constructors
 
 			Node(const Standard_Integer theIndex, const Pnt2d& theCoord)
 				: Global_Indexed(theIndex)
 				, theCoord_(theCoord)
+				, theSense_(Standard_False)
 			{}
 
 			Node(const Standard_Integer theIndex, Pnt2d&& theCoord)
 				: Global_Indexed(theIndex)
 				, theCoord_(std::move(theCoord))
+				, theSense_(Standard_False)
 			{}
 
 		public:
@@ -63,11 +67,13 @@ namespace tnbLib
 			[[nodiscard]] virtual Standard_Boolean IsWP() const { return Standard_False; }
 
 			TnbVoyage_EXPORT Standard_Integer Size() const;
+			auto Sense() const { return theSense_; }
 
 			[[nodiscard]] const auto& Nexts() const { return theNexts_; }
 
 			TnbVoyage_EXPORT void InsertNode(const Standard_Integer theIndex, const std::shared_ptr<Node>&);
 			TnbVoyage_EXPORT void RemoveNode(const Standard_Integer theIndex);
+			void SetSense(const Standard_Boolean theSense) { theSense_ = theSense; }
 			void SetCoord(const Pnt2d& theCoord) { theCoord_ = theCoord; }
 			void SetCoord(Pnt2d&& theCoord) { theCoord_ = std::move(theCoord); }
 
@@ -271,6 +277,9 @@ namespace tnbLib
 
 		[[nodiscard]] const auto& Nodes() const { return theNodes_; }
 		auto& NodesRef() { return theNodes_; }
+
+		TnbVoyage_EXPORT std::shared_ptr<Node> Departure() const;
+		TnbVoyage_EXPORT std::shared_ptr<Node> Arrival() const;
 
 		[[nodiscard]] TnbVoyage_EXPORT std::shared_ptr<RefNode> GetNode(const Standard_Integer theIndex) const;
 

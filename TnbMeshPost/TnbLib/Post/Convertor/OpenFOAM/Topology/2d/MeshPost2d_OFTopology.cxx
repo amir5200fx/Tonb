@@ -328,7 +328,7 @@ tnbLib::MeshPost2d_OFTopology::CalcGragh
 		}
 		
 	}
-	const auto nbIntSegments = segments.size() - maxBndId;	
+	const auto nbIntSegments = segments.size() - maxBndId;
 	for (size_t i = 0; i < maxBndId; i++)
 	{
 		auto id = segments.at(i)->Index();

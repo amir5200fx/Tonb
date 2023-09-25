@@ -917,5 +917,8 @@
     <ClCompile Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel.cxx">
       <Filter>TnbLib\Voyage\Simulations\MinFuel</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\Graph\VoyageSim_Graph.cxx">
+      <Filter>TnbLib\Voyage\Simulations\Graph</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

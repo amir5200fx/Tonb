@@ -278,8 +278,8 @@ namespace tnbLib
 		[[nodiscard]] const auto& Nodes() const { return theNodes_; }
 		auto& NodesRef() { return theNodes_; }
 
-		std::shared_ptr<Node> Departure() const;
-		std::shared_ptr<Node> Arrival() const;
+		TnbVoyage_EXPORT std::shared_ptr<Node> Departure() const;
+		TnbVoyage_EXPORT std::shared_ptr<Node> Arrival() const;
 
 		[[nodiscard]] TnbVoyage_EXPORT std::shared_ptr<RefNode> GetNode(const Standard_Integer theIndex) const;
 

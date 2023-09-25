@@ -138,6 +138,17 @@ tnbLib::VoyageWP_Net::NbNodes() const
 	return Standard_Integer(theNodes_.size());
 }
 
+std::shared_ptr<tnbLib::VoyageWP_Net::Node>
+tnbLib::VoyageWP_Net::Departure() const
+{
+	return theNodes_.at(0);
+}
+
+std::shared_ptr<tnbLib::VoyageWP_Net::Node> tnbLib::VoyageWP_Net::Arrival() const
+{
+	return LastItem(theNodes_);
+}
+
 std::shared_ptr<tnbLib::VoyageWP_Net::RefNode>
 tnbLib::VoyageWP_Net::GetNode
 (
