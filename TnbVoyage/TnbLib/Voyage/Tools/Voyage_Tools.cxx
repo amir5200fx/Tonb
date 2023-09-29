@@ -1,5 +1,6 @@
 #include <Voyage_Tools.hxx>
 
+#include <VoyageWP_Net.hxx>
 #include <VoyageMesh_MetricPrcsr.hxx>
 #include <VoyageGeo_VelocityBackground.hxx>
 #include <VoyageMesh_Element.hxx>
@@ -644,5 +645,42 @@ tnbLib::Voyage_Tools::CalcTurningAngle
 	else
 	{
 		return PI + angle;
+	}
+}
+
+void tnbLib::Voyage_Tools::ConvertToVoyageSystem
+(
+	const std::shared_ptr<VoyageWP_Net>& theNet
+)
+{
+	static auto convert_coordinate = [](const std::shared_ptr<VoyageWP_Net::RefNode>& node)
+	{
+		Debug_Null_Pointer(node);
+		if (const auto interior = std::dynamic_pointer_cast<VoyageWP_Net::InterNode>(node))
+		{
+			const auto wps = interior->RetrieveNodes();
+			for (const auto& wp: wps)
+			{
+				Debug_Null_Pointer(wp);
+				auto converted = ConvertToVoyageSystem(wp->Coord());
+				wp->SetCoord(std::move(converted));
+			}
+		}
+		else
+		{
+			node->SetCoord(ConvertToVoyageSystem(node->Coord()));
+		}
+	};
+	if (NOT theNet)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "the net is empty." << endl
+			<< abort(FatalError);
+	}
+	const auto& nodes = theNet->Nodes();
+	for (const auto& x:nodes)
+	{
+		Debug_Null_Pointer(x);
+		convert_coordinate(x);
 	}
 }

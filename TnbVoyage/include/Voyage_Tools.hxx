@@ -25,6 +25,7 @@ namespace tnbLib
 	// Forward Declarations [7/21/2023 Payvand]
 	class Voyage_MetricInfo;
 	class VoyageMesh_Element;
+	class VoyageWP_Net;
 	class VoyageMesh_Edge;
 	class VoyageMesh_Node;
 	class VoyageGeo_Path2;
@@ -239,6 +240,8 @@ namespace tnbLib
 			const Standard_Real theGrowthRate,
 			GeoMesh2d_SingleBackground& theMesh
 		);
+
+		static TnbVoyage_EXPORT void ConvertToVoyageSystem(const std::shared_ptr<VoyageWP_Net>&);
 
 	};
 }
