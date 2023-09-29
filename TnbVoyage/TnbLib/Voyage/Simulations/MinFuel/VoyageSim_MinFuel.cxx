@@ -240,9 +240,9 @@ void tnbLib::VoyageSim_MinFuel::Perform()
 		}
 	}
 	std::cout << "nb edges = " << nb_edges << std::endl;
-	PAUSE;
-	OFstream grid_3d_file("grid3d.plt");
-	graph->ExportToPlt(grid_3d_file);
+	//PAUSE;
+	//OFstream grid_3d_file("grid3d.plt");
+	//graph->ExportToPlt(grid_3d_file);
 	const auto& paths = graph->Edges();
 	if (verbose)
 	{

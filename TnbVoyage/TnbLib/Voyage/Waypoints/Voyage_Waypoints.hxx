@@ -24,10 +24,18 @@ namespace tnbLib
 	class VoyageMesh_Edge;
 	class VoyageMesh_Node;
 	class VoyageGeo_Path2;
+	class Pnt2d;
 
 	class Voyage_Waypoints
 		: public Global_Done
 	{
+
+	public:
+
+		typedef  std::function<Standard_Boolean(const Pnt2d&)>
+			StateFunc;
+
+	private:
 
 		/*Private Data*/
 
@@ -42,6 +50,7 @@ namespace tnbLib
 
 		Standard_Real theSize_;
 
+		StateFunc theStateFun_;
 
 		// results [9/2/2023 Payvand]
 
@@ -118,6 +127,7 @@ namespace tnbLib
 		void SetInfo(const std::shared_ptr<Voyage_MetricInfo>& theInfo) { theInfo_ = theInfo; }
 
 		void SetSize(const Standard_Real theH) { theSize_ = theH; }
+		void SetStateFun(const StateFunc& theFun) { theStateFun_ = theFun; }
 
 	};
 

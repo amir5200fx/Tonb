@@ -14,10 +14,11 @@ void tnbLib::VoyageWP_Connect2::Perform()
 	}
 	const auto& net = Net();
 	const auto& nodes = net->Nodes();
+	//std::cout << "nb nodes = " << nodes.size() << std::endl;
 	for (size_t i = 0; i < nodes.size() - 1; i++)
 	{
 		//std::cout << "i = " << i << std::endl;
-		//if (i > 50) break;
+		//if (i > 10) break;
 		const auto& ref = nodes.at(i);
 		ref->SetSense(Standard_True);
 		//const auto& next = nodes.at(i + 1);
@@ -40,7 +41,7 @@ void tnbLib::VoyageWP_Connect2::Perform()
 					--lev;
 					auto i_min = lev - Size();
 					auto i_max = lev + Size();
-					//std::cout << " i min0 = " << i_min << ", i_max0 = " << i_max << std::endl;
+					//std::cout << " i min = " << i_min << ", i_max = " << i_max << std::endl;
 					i_min = std::max(i_min, -max_starboard);
 					i_max = std::min(i_max, max_port);
 					//std::cout << " i min1 = " << i_min << ", i_max1 = " << i_max << std::endl;
@@ -48,17 +49,23 @@ void tnbLib::VoyageWP_Connect2::Perform()
 					i_max += max_starboard;
 					//std::cout << " i min2 = " << i_min << ", i_max2 = " << i_max << std::endl;
 					//std::cout << std::endl;
+					if (i_max < i_min)
+					{
+						continue;
+					}
 					auto next_nodes = 
 						net->RetrieveWaypoints(i + 1, i_min, i_max);
+					//std::cout << "injaaaaa" << std::endl;
 					for (const auto& next:next_nodes)
 					{
 						Debug_Null_Pointer(next);
 						current->InsertNode(next->Index(), next);
 						next->SetSense(Standard_True);
 					}
-					//PAUSE;
+					
 				}
 			}
+			//PAUSE;
 			{ // the ref node
 				const Standard_Integer lev = 0;
 				auto i_min = lev - Size();
@@ -69,6 +76,10 @@ void tnbLib::VoyageWP_Connect2::Perform()
 				i_max += max_starboard;
 				auto next_nodes =
 					net->RetrieveWaypoints(i + 1, i_min, i_max);
+				if (i_max < i_min)
+				{
+					continue;
+				}
 				for (const auto& next : next_nodes)
 				{
 					Debug_Null_Pointer(next);
@@ -91,6 +102,10 @@ void tnbLib::VoyageWP_Connect2::Perform()
 					i_max = std::min(i_max, max_port);
 					i_min += max_starboard;
 					i_max += max_starboard;
+					if (i_max < i_min)
+					{
+						continue;
+					}
 					auto next_nodes =
 						net->RetrieveWaypoints(i + 1, i_min, i_max);
 					for (const auto& next : next_nodes)
@@ -116,6 +131,10 @@ void tnbLib::VoyageWP_Connect2::Perform()
 				i_max = std::min(i_max, max_port);
 				i_min += max_starboard;
 				i_max += max_starboard;
+				if (i_max < i_min)
+				{
+					continue;
+				}
 				auto next_nodes =
 					net->RetrieveWaypoints(i + 1, i_min, i_max);
 				for (const auto& next : next_nodes)

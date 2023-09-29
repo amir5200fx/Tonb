@@ -8,6 +8,13 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+//#define _PLOT_CURVE
+#ifdef _PLOT_CURVE
+#include <Pln_Curve.hxx>
+#include <Entity2d_Polygon.hxx>
+#include <TecPlot.hxx>
+#endif
+
 #include <TColgp_Array1OfPnt2d.hxx>
 #include <TColStd_Array1OfInteger.hxx>
 #include <Geom2d_BSplineCurve.hxx>
@@ -129,9 +136,15 @@ tnbLib::VoyageMesh_BaseSize::CalcProfile
 		mults.SetValue(2, 2);
 		mults.SetValue(3, 2);
 		mults.SetValue(4, 3);
-
 		try
 		{
+#ifdef _PLOT_CURVE
+			const auto curve = 
+				std::make_shared<Pln_Curve>
+			(new Geom2d_BSplineCurve(pnts, weights, knots, mults, 2));
+			OFstream myFile("Voyage_Mesh_Profile_curve.plt");
+			Io::ExportCurve(Pln_Curve::Discretize(*curve, 40)->Points(), myFile);
+#endif
 			auto profile =
 				std::make_shared<geoLib::ProfileFun_Geom>
 				(

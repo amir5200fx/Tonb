@@ -34,7 +34,7 @@ void tnbLib::VoyageWP_Offset::CalcOffsets
 	std::vector<std::shared_ptr<Node>> nodes;
 	nodes.reserve(edges.size() + 1);
 	{//- the departure node
-		auto ref_node = theRef.Departure();
+		const auto ref_node = theRef.Departure();
 		Debug_Null_Pointer(ref_node);
 		auto node = std::make_shared<DepNode>(++nb_nodes, ref_node->Coord());
 		Debug_Null_Pointer(node);
@@ -53,7 +53,7 @@ void tnbLib::VoyageWP_Offset::CalcOffsets
 		Debug_Null_Pointer(node);
 		node->SetTangent(ref_node->CalcTangent());
 		{//- Create the Offset points
-			auto interior_node = std::dynamic_pointer_cast<VoyageWP_Ref::InterNode>(ref_node);
+			const auto interior_node = std::dynamic_pointer_cast<VoyageWP_Ref::InterNode>(ref_node);
 			Debug_Null_Pointer(interior_node);
 			
 			auto star_offset_node = std::make_shared<OffsetNode>(++nb_nodes, interior_node->CalcStarOffset());
@@ -72,7 +72,7 @@ void tnbLib::VoyageWP_Offset::CalcOffsets
 		nodes.push_back(std::move(node));
 	}
 	{//- the arrival node
-		auto ref_node = theRef.Arrival();
+		const auto ref_node = theRef.Arrival();
 		Debug_Null_Pointer(ref_node);
 		auto node = std::make_shared<ArvNode>(++nb_nodes, ref_node->Coord());
 		Debug_Null_Pointer(node);

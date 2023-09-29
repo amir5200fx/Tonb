@@ -3,6 +3,7 @@
 #include <VoyageWP_PointDistb.hxx>
 #include <Voyage_OffsetProfile_Segment.hxx>
 #include <VoyageWP_Ref.hxx>
+#include <VoyageWP_Net.hxx>
 #include <VoyageWP_Offset.hxx>
 #include <Voyage_MetricInfo.hxx>
 #include <Voyage_Mesh.hxx>
@@ -276,6 +277,12 @@ void tnbLib::Voyage_Waypoints::Renumber
 
 void tnbLib::Voyage_Waypoints::Perform()
 {
+	if (NOT theStateFun_)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " No state functions has been found." << endl
+			<< abort(FatalError);
+	}
 	typedef std::shared_ptr<VoyageMesh_Element> elm_ptr;
 	static auto cmp = [](const elm_ptr& elm0, const elm_ptr& elm1)
 	{
@@ -487,9 +494,42 @@ void tnbLib::Voyage_Waypoints::Perform()
 		Info << endl
 			<< " - The waypoints are successfully created." << endl;
 	}
+	const auto net = alg_distb->RetrieveNet();
+	// remove the dry nodes
+	{
+		auto refs = net->Nodes();
+		for (const auto& x: refs)
+		{
+			if (auto node = std::dynamic_pointer_cast<VoyageWP_Net::InterNode>(x))
+			{
+				{// Checking the port sides
+					auto wps = node->RetrievePortSides();
+					for (const auto& wp: wps)
+					{
+						Debug_Null_Pointer(wp);
+						if (NOT theStateFun_(wp->Coord()))
+						{
+							node->RemoveFromPort(wp->Index());
+						}
+					}
+				}
+				{// Checking the star sides
+					auto wps = node->RetrieveStarSides();
+					for (const auto& wp : wps)
+					{
+						Debug_Null_Pointer(wp);
+						if (NOT theStateFun_(wp->Coord()))
+						{
+							node->RemoveFromStarboard(wp->Index());
+						}
+					}
+				}
+			}
+		}
+	}
 	// retrieve the net
 	theGrid_ = alg_distb->RetrieveNet();
-	OFstream myFile("offsets.plt");
-	alg_distb->ExportToPlt(myFile);
+	//OFstream myFile("offsets.plt");
+	//alg_distb->ExportToPlt(myFile);
 	Change_IsDone() = Standard_True;
 }

@@ -8,7 +8,7 @@
 Standard_Integer 
 tnbLib::VoyageWP_Net::Node::Size() const
 {
-	return Standard_Integer(theNexts_.size());
+	return static_cast<Standard_Integer>(theNexts_.size());
 }
 
 void tnbLib::VoyageWP_Net::Node::InsertNode
@@ -25,7 +25,7 @@ void tnbLib::VoyageWP_Net::Node::RemoveNode
 	const Standard_Integer theIndex
 )
 {
-	auto iter = theNexts_.find(theIndex);
+	const auto iter = theNexts_.find(theIndex);
 	if (iter IS_EQUAL theNexts_.end())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -54,16 +54,40 @@ tnbLib::VoyageWP_Net::InterNode::RetrieveNodes() const
 	return std::move(nodes);
 }
 
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
+tnbLib::VoyageWP_Net::InterNode::RetrievePortSides() const
+{
+	std::vector<std::shared_ptr<Node>> nodes;
+	nodes.reserve(thePorts_.size());
+	for (const auto& [id, x]:thePorts_)
+	{
+		nodes.push_back(x);
+	}
+	return std::move(nodes);
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
+tnbLib::VoyageWP_Net::InterNode::RetrieveStarSides() const
+{
+	std::vector<std::shared_ptr<Node>> nodes;
+	nodes.reserve(theStarboards_.size());
+	for (const auto& [id, x]: theStarboards_)
+	{
+		nodes.push_back(x);
+	}
+	return std::move(nodes);
+}
+
 Standard_Integer 
 tnbLib::VoyageWP_Net::InterNode::StarboardSize() const
 {
-	return Standard_Integer(theStarboards_.size());
+	return static_cast<Standard_Integer>(theStarboards_.size());
 }
 
 Standard_Integer 
 tnbLib::VoyageWP_Net::InterNode::PortSize() const
 {
-	return Standard_Integer(thePorts_.size());
+	return static_cast<Standard_Integer>(thePorts_.size());
 }
 
 void tnbLib::VoyageWP_Net::InterNode::InsertToStarboard
@@ -89,7 +113,7 @@ void tnbLib::VoyageWP_Net::InterNode::RemoveFromStarboard
 	const Standard_Integer theIndex
 )
 {
-	auto iter = theStarboards_.find(theIndex);
+	const auto iter = theStarboards_.find(theIndex);
 	if (iter IS_EQUAL theStarboards_.end())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -105,7 +129,7 @@ void tnbLib::VoyageWP_Net::InterNode::RemoveFromPort
 	const Standard_Integer theIndex
 )
 {
-	auto iter = thePorts_.find(theIndex);
+	const auto iter = thePorts_.find(theIndex);
 	if (iter IS_EQUAL thePorts_.end())
 	{
 		FatalErrorIn(FunctionSIG)
@@ -135,7 +159,7 @@ tnbLib::VoyageWP_Net::ArvNode::RetrieveNodes() const
 Standard_Integer 
 tnbLib::VoyageWP_Net::NbNodes() const
 {
-	return Standard_Integer(theNodes_.size());
+	return static_cast<Standard_Integer>(theNodes_.size());
 }
 
 std::shared_ptr<tnbLib::VoyageWP_Net::Node>
@@ -265,7 +289,7 @@ tnbLib::VoyageWP_Net::Waypoints
 	{
 		return std::move(nodes);
 	}
-	auto node = std::dynamic_pointer_cast<InterNode>(ref);
+	const auto node = std::dynamic_pointer_cast<InterNode>(ref);
 	Debug_Null_Pointer(node);
 	// gathering the starboard nodes
 	for (const auto& x : node->Starboards())

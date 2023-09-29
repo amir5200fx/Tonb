@@ -151,6 +151,8 @@ namespace tnbLib
 
 			[[nodiscard]] Standard_Boolean IsInterior() const override { return Standard_True; }
 			TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveNodes() const override;
+			TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrievePortSides() const;
+			TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveStarSides() const;
 
 			TnbVoyage_EXPORT Standard_Integer StarboardSize() const;
 			TnbVoyage_EXPORT Standard_Integer PortSize() const;
