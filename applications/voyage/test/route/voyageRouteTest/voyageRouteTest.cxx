@@ -104,7 +104,11 @@ int main()
 	auto offsets = std::make_shared<Entity2d_Polygon>();
 	{
 		auto& pts = offsets->Points();
-		pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
+
+		//pts.push_back(Voyage_Tools::ConvertToUV({ 1.0, 1.0 })); // yaghubi example
+		//pts.push_back(Voyage_Tools::ConvertToUV({ 2.0, 2.0 }));
+
+		//pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 25.6, 55.2 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 26.4, 56.4 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 8.0, 77.0 }));
@@ -146,7 +150,7 @@ int main()
 
 	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
 	Standard_Real hour = 10.0;
-	auto h = dist / (vel * hour);
+	auto h = vel * hour;
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
 	std::cout << std::endl;

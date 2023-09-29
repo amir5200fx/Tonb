@@ -92,11 +92,11 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 
 	auto metricPrcsr =
 		std::make_shared<Geo2d_MetricPrcsrAnIso>(sizeFun, metrics, metricInfo);
-	auto nodes = offsets->RetrieveInteriors();
+	const auto nodes = offsets->RetrieveInteriors();
 	Standard_Integer nb_nodes = 0;
 	std::vector<std::shared_ptr<RefNode>> ref_nodes;
 	{//- the departure node
-		auto node = offsets->Departure();
+		const auto node = offsets->Departure();
 		Debug_Null_Pointer(node);
 		auto ref_node = std::make_shared<DepNode>(++nb_nodes, node->Coord());
 		ref_nodes.push_back(std::move(ref_node));
@@ -106,13 +106,13 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 		Debug_Null_Pointer(x);
 		std::shared_ptr<Entity2d_Polygon> star_poly;
 		{//- the starboard profile
-			auto node = 
+			const auto node = 
 				std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
 			Debug_Null_Pointer(node);
 			auto [p0, p1] = node->StarboardProfile();
-			auto curve = profile->Geometry(p0, p1);
+			const auto curve = profile->Geometry(p0, p1);
 			const auto& geom = curve->Geometry();
-			auto alg =
+			const auto alg =
 				std::make_shared<Mesh2d_CurveAnIso>
 				(
 					geom,
@@ -125,13 +125,13 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 		}
 		std::shared_ptr<Entity2d_Polygon> port_poly;
 		{//- the port profile
-			auto node = 
+			const auto node = 
 				std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
 			Debug_Null_Pointer(node);
 			auto [p0, p1] = node->PortProfile();
-			auto curve = profile->Geometry(p0, p1);
+			const auto curve = profile->Geometry(p0, p1);
 			const auto& geom = curve->Geometry();
-			auto alg =
+			const auto alg =
 				std::make_shared<Mesh2d_CurveAnIso>
 				(
 					geom,
@@ -154,7 +154,7 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 		ref_nodes.push_back(std::move(ref_node));
 	}
 	{//- the arrival node
-		auto node = offsets->Arrival();
+		const auto node = offsets->Arrival();
 		Debug_Null_Pointer(node);
 		auto ref_node = std::make_shared<ArvNode>(++nb_nodes, node->Coord());
 		ref_nodes.push_back(std::move(ref_node));

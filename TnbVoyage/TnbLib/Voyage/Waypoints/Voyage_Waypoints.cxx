@@ -497,6 +497,7 @@ void tnbLib::Voyage_Waypoints::Perform()
 	const auto net = alg_distb->RetrieveNet();
 	// remove the dry nodes
 	{
+		Standard_Boolean removed = Standard_False;
 		auto refs = net->Nodes();
 		for (const auto& x: refs)
 		{
@@ -510,6 +511,10 @@ void tnbLib::Voyage_Waypoints::Perform()
 						if (NOT theStateFun_(wp->Coord()))
 						{
 							node->RemoveFromPort(wp->Index());
+							if (NOT removed)
+							{
+								removed = Standard_True;
+							}
 						}
 					}
 				}
@@ -521,7 +526,33 @@ void tnbLib::Voyage_Waypoints::Perform()
 						if (NOT theStateFun_(wp->Coord()))
 						{
 							node->RemoveFromStarboard(wp->Index());
+							if (NOT removed)
+							{
+								removed = Standard_True;
+							}
 						}
+					}
+				}
+			}
+		}
+		// compressing the nodes' numbers
+		if (removed)
+		{
+			Standard_Integer id = 0;
+			for (const auto& x:refs)
+			{
+				x->SetIndex(++id);
+				if (auto interior = std::dynamic_pointer_cast<VoyageWP_Net::InterNode>(x))
+				{
+					const auto& stars = interior->Starboards();
+					for (const auto& [indx, wp]: stars)
+					{
+						wp->SetIndex(++id);
+					}
+					const auto& ports = interior->Ports();
+					for (const auto& [indx, wp]: ports)
+					{
+						wp->SetIndex(++id);
 					}
 				}
 			}
