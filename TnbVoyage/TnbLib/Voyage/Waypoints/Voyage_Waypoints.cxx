@@ -528,7 +528,7 @@ void tnbLib::Voyage_Waypoints::Perform()
 		}
 	}
 	// retrieve the net
-	theGrid_ = alg_distb->RetrieveNet();
+	theGrid_ = std::move(net);
 	//OFstream myFile("offsets.plt");
 	//alg_distb->ExportToPlt(myFile);
 	Change_IsDone() = Standard_True;
