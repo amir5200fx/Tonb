@@ -69,6 +69,10 @@ static auto controlSurfaceDeflection = true;
 
 int main()
 {
+	{// settings
+		//VoyageMesh_BaseSize::verbose = 2;
+	}
+
 	auto earth = std::make_shared<VoyageGeo_Earth>();
 
 	const auto d = earth->Surface()->BoundingBox().Diameter();
@@ -90,17 +94,16 @@ int main()
 
 	const auto surfaces = Cad_Tools::RetrieveTriangulation(earth->Geometry()->Shape());
 
-	OFstream myFile("earth.plt");
+	//OFstream myFile("earth.plt");
 	for (const auto& x : surfaces)
 	{
 		auto tri = Cad_Tools::Triangulation(*x);
-		tri->ExportToPlt(myFile);
+		//tri->ExportToPlt(myFile);
 	}
 
 	auto offsets = std::make_shared<Entity2d_Polygon>();
 	{
 		auto& pts = offsets->Points();
-		//pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 25.6, 55.2 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 26.4, 56.4 }));
@@ -108,8 +111,8 @@ int main()
 		pts.push_back(Voyage_Tools::ConvertToUV({ 5.8, 80.1 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 6.7, 94.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 7.0, 97.0 }));
-		//pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
-		//pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
 
 		//Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
 		//std::exit(1);
@@ -142,7 +145,7 @@ int main()
 	}
 
 	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
-	Standard_Real hour = 5.0;
+	Standard_Real hour = 10.0;
 	auto h = dist / (vel * hour);
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
@@ -167,16 +170,16 @@ int main()
 		auto alg = std::make_shared<Voyage_PathOnEarth>(earth, path);
 		alg->Perform();
 
-		OFstream planeFile("polygons.plt");
+		//OFstream planeFile("polygons.plt");
 		for (const auto& x : alg->Path()->Curves())
 		{
 			const auto& mesh = x->Mesh();
-			mesh->ExportToPlt(planeFile);
+			//mesh->ExportToPlt(planeFile);
 		}
 
 		for (const auto& x : alg->Path3D())
 		{
-			x->ExportToPlt(myFile);
+			//x->ExportToPlt(myFile);
 		}
 
 		std::cout << std::endl;
@@ -209,19 +212,21 @@ int main()
 	wayPoints->SetPortSizeFunction(sizeMap->Port());
 	wayPoints->SetStarboardSizeFunction(sizeMap->Startboard());
 	wayPoints->SetSize(h);
+	// assign the state function (dry & wet function)
+	wayPoints->SetStateFun([](const Pnt2d&) {return true; });
 	wayPoints->Perform();
 
-	OFstream triFile1("triangle.plt");
+	//OFstream triFile1("triangle.plt");
 	//OFstream triFile2("triangle1.plt");
 	//OFstream triFile1("triangle0.vtk");
 	//OFstream triFile2("triangle1.vtk");
 	{// plot the starboard mesh [9/6/2023 aamir]
 		const auto mesh = /*Voyage_Tools::ConvertToVoyageSystem(**/wayPoints->StarMesh()/*)*/;
-		mesh->ExportToPlt(triFile1);
+		//mesh->ExportToPlt(triFile1);
 		//mesh->ExportToVtk(triFile1);
-		wayPoints->PortMesh()->ExportToPlt(triFile1);
+		//wayPoints->PortMesh()->ExportToPlt(triFile1);
 	}
-
+	//PAUSE;
 	const auto grid = wayPoints->Grid();
 	{
 		const auto alg = std::make_shared<VoyageWP_Connect2>();

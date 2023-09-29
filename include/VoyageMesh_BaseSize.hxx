@@ -57,11 +57,12 @@ namespace tnbLib
 	public:
 
 		static TnbVoyage_EXPORT Standard_Real TRANS_POINT_CONST;
+		static TnbVoyage_EXPORT unsigned short verbose;
 
 		// default constructor [8/15/2023 aamir]
 
 		VoyageMesh_BaseSize()
-		{}
+		= default;
 
 		// constructors [8/15/2023 aamir]
 
@@ -78,12 +79,12 @@ namespace tnbLib
 
 		// Public functions and operators [8/15/2023 aamir]
 
-		const auto& GetInfo() const { return theInfo_; }
+		[[nodiscard]] const auto& GetInfo() const { return theInfo_; }
 
-		const auto& Metrics() const { return theMetrics_; }
-		const auto& Path() const { return thePath_; }
+		[[nodiscard]] const auto& Metrics() const { return theMetrics_; }
+		[[nodiscard]] const auto& Path() const { return thePath_; }
 
-		const auto& Hs() const { return theHs_; }
+		[[nodiscard]] const auto& Hs() const { return theHs_; }
 
 		TnbVoyage_EXPORT void Perform();
 
