@@ -96,6 +96,15 @@ tnbLib::geoLib::ProfileFun_Geom::Value
 			<< abort(FatalError);
 	}
 
+	if (const auto lower = Curve()->Value(Curve()->FirstParameter()).Y(); x IS_EQUAL lower)
+	{
+		return lower;
+	}
+	if (const auto upper = Curve()->Value(Curve()->LastParameter()).Y(); x IS_EQUAL upper)
+	{
+		return upper;
+	}
+
 	Geom2dAPI_InterCurveCurve Intersection;
 	Handle(Geom2d_Line) Line =
 		new Geom2d_Line(gp_Pnt2d(x, 0), gp_Vec2d(0, 1));
@@ -115,5 +124,5 @@ tnbLib::geoLib::ProfileFun_Geom::Value
 			<< " More than one intersection point has been found"
 			<< abort(FatalError);
 	}
-	return Intersection.Point(0).Y();
+	return Intersection.Point(1).Y();
 }
