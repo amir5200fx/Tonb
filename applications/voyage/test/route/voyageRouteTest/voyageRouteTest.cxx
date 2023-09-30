@@ -149,7 +149,7 @@ int main()
 	}
 
 	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
-	Standard_Real hour = 10.0;
+	Standard_Real hour = 5.0;
 	auto h = vel * hour;
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
@@ -235,6 +235,7 @@ int main()
 	{
 		const auto alg = std::make_shared<VoyageWP_Connect2>();
 		alg->SetSize(2);
+		alg->SetStateFun([](const Pnt2d&, const Pnt2d&) {return true; });
 		alg->SetNet(grid);
 		alg->Perform();
 	}

@@ -59,8 +59,11 @@ void tnbLib::VoyageWP_Connect2::Perform()
 					for (const auto& next:next_nodes)
 					{
 						Debug_Null_Pointer(next);
-						current->InsertNode(next->Index(), next);
-						next->SetSense(Standard_True);
+						if (theStateFun_(current->Coord(), next->Coord()))
+						{
+							current->InsertNode(next->Index(), next);
+							next->SetSense(Standard_True);
+						}
 					}
 					
 				}
@@ -83,8 +86,19 @@ void tnbLib::VoyageWP_Connect2::Perform()
 				for (const auto& next : next_nodes)
 				{
 					Debug_Null_Pointer(next);
-					ref->InsertNode(next->Index(), next);
-					next->SetSense(Standard_True);
+					if (next->IsReference())
+					{
+						if (theStateFun_(ref->Coord(), next->Coord()))
+						{
+							ref->InsertNode(next->Index(), next);
+							next->SetSense(Standard_True);
+						}
+					}
+					else if (theStateFun_(ref->Coord(), next->Coord()))
+					{
+						ref->InsertNode(next->Index(), next);
+						next->SetSense(Standard_True);
+					}
 				}
 			}
 			{// the port side
@@ -111,8 +125,11 @@ void tnbLib::VoyageWP_Connect2::Perform()
 					for (const auto& next : next_nodes)
 					{
 						Debug_Null_Pointer(next);
-						current->InsertNode(next->Index(), next);
-						next->SetSense(Standard_True);
+						if (theStateFun_(current->Coord(), next->Coord()))
+						{
+							current->InsertNode(next->Index(), next);
+							next->SetSense(Standard_True);
+						}
 					}
 				}
 			}
@@ -140,8 +157,19 @@ void tnbLib::VoyageWP_Connect2::Perform()
 				for (const auto& next : next_nodes)
 				{
 					Debug_Null_Pointer(next);
-					ref->InsertNode(next->Index(), next);
-					next->SetSense(Standard_True);
+					if (next->IsReference())
+					{
+						if (theStateFun_(ref->Coord(), next->Coord()))
+						{
+							ref->InsertNode(next->Index(), next);
+							next->SetSense(Standard_True);
+						}
+					}
+					else if (theStateFun_(ref->Coord(), next->Coord()))
+					{
+						ref->InsertNode(next->Index(), next);
+						next->SetSense(Standard_True);
+					}
 				}
 			}
 		}

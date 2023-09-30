@@ -12,14 +12,22 @@ namespace tnbLib
 
 	// Forward Declarations
 	class VoyageWP_Net;
+	class Pnt2d;
 
 	class VoyageWP_Connect2
 		: public Global_Done
 	{
 
+	public:
+
+		typedef std::function<Standard_Boolean(const Pnt2d&, const Pnt2d&)> StateFunc;
+
+	private:
+
 		/*Private Data*/
 
 		std::shared_ptr<VoyageWP_Net> theNet_;
+		StateFunc theStateFun_;
 
 		Standard_Integer theSize_;
 
@@ -41,6 +49,7 @@ namespace tnbLib
 		TnbVoyage_EXPORT void Perform();
 
 		void SetNet(const std::shared_ptr<VoyageWP_Net>& theNet) { theNet_ = theNet; }
+		void SetStateFun(const StateFunc& theFun) { theStateFun_ = theFun; }
 		void SetSize(const Standard_Integer theSize) { theSize_ = theSize; }
 		
 	};
