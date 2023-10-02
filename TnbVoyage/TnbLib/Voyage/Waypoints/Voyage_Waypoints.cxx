@@ -547,7 +547,7 @@ void tnbLib::Voyage_Waypoints::Perform()
 					const auto& stars = interior->Starboards();
 					for (const auto& [indx, wp]: stars)
 					{
-						wp->SetIndex(id);
+						wp->SetIndex(++id);
 					}
 					const auto& ports = interior->Ports();
 					for (const auto& [indx, wp]: ports)
