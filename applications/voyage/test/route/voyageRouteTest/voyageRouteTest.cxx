@@ -36,6 +36,7 @@
 #include <Pln_Edge.hxx>
 #include <FastDiscrete_Params.hxx>
 #include <Geo_Tools.hxx>
+#include <Geo_BoxTools.hxx>
 #include <Geo3d_ApprxCurve.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Entity3d_Triangulation.hxx>
@@ -220,6 +221,14 @@ int main()
 	// assign the state function (dry & wet function)
 	wayPoints->SetStateFun([](const Pnt2d&) {return true; });
 	wayPoints->Perform();
+	{ // Calculate bounding bxo
+		auto domain = 
+			Geo_BoxTools::Union
+		(
+			Geo_BoxTools::GetBox(wayPoints->StarMesh()->Points(), 1.0e-6), 
+			Geo_BoxTools::GetBox(wayPoints->PortMesh()->Points(), 1.0e-6)
+		);
+	}
 
 	//OFstream triFile1("triangle.plt");
 	//OFstream triFile2("triangle1.plt");
