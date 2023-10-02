@@ -547,13 +547,26 @@ void tnbLib::Voyage_Waypoints::Perform()
 					const auto& stars = interior->Starboards();
 					for (const auto& [indx, wp]: stars)
 					{
-						wp->SetIndex(++id);
+						wp->SetIndex(id);
 					}
 					const auto& ports = interior->Ports();
 					for (const auto& [indx, wp]: ports)
 					{
 						wp->SetIndex(++id);
 					}
+				}
+			}
+			auto nodes = net->RetrieveNodes();
+			// Updating the keys
+			for (const auto& x: nodes)
+			{
+				Debug_Null_Pointer(x);
+				auto nexts = x->RetrieveNexts();
+				x->FlushConnects();
+				for (const auto& next: nexts)
+				{
+					Debug_Null_Pointer(next);
+					x->InsertNode(next->Index(), next);
 				}
 			}
 		}

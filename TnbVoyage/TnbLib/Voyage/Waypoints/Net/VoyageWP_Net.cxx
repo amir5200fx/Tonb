@@ -11,6 +11,18 @@ tnbLib::VoyageWP_Net::Node::Size() const
 	return static_cast<Standard_Integer>(theNexts_.size());
 }
 
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
+tnbLib::VoyageWP_Net::Node::RetrieveNexts() const
+{
+	std::vector<std::shared_ptr<Node>> nodes;
+	nodes.reserve(theNexts_.size());
+	for (const auto& [id, x]:theNexts_)
+	{
+		nodes.emplace_back(x);
+	}
+	return std::move(nodes);
+}
+
 void tnbLib::VoyageWP_Net::Node::InsertNode
 (
 	const Standard_Integer theIndex,

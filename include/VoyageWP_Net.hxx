@@ -70,6 +70,7 @@ namespace tnbLib
 			auto Sense() const { return theSense_; }
 
 			[[nodiscard]] const auto& Nexts() const { return theNexts_; }
+			TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveNexts() const;
 
 			TnbVoyage_EXPORT void InsertNode(const Standard_Integer theIndex, const std::shared_ptr<Node>&);
 			TnbVoyage_EXPORT void RemoveNode(const Standard_Integer theIndex);
