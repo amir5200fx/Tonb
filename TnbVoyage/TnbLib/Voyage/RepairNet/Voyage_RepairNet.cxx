@@ -228,12 +228,16 @@ void tnbLib::Voyage_RepairNet::Perform()
 			Debug_Null_Pointer(current);
 			if (current->ShouldRemove())
 			{
+				std::vector<Standard_Integer> removed_edges;
 				for (const auto& [edge_id, w_edge]: current->Edges())
 				{
 					const auto edge = w_edge.lock();
 					Debug_Null_Pointer(edge);
-					edge->Node0()->RemoveEdge(edge->Index());
-					edge->Node1()->RemoveEdge(edge->Index());
+					removed_edges.emplace_back(edge->Index());
+				}
+				// removing the edges
+				for (auto edge_id: removed_edges)
+				{
 					auto iter = edgesMap.find(edge_id);
 					if (iter IS_EQUAL edgesMap.end())
 					{
@@ -242,6 +246,9 @@ void tnbLib::Voyage_RepairNet::Perform()
 							<< " - index: " << edge_id << endl
 							<< abort(FatalError);
 					}
+					auto edge = edgesMap.at(edge_id);
+					edge->Node0()->RemoveEdge(edge_id);
+					edge->Node1()->RemoveEdge(edge_id);
 					edgesMap.erase(iter);
 				}
 				removed_nodes.emplace_back(current);
