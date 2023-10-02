@@ -157,6 +157,16 @@ void tnbLib::VoyageWP_Net::InterNode::RemoveFromPort
 	thePorts_.erase(iter);
 }
 
+void tnbLib::VoyageWP_Net::InterNode::ClearStarboards()
+{
+	theStarboards_.clear();
+}
+
+void tnbLib::VoyageWP_Net::InterNode::ClearPorts()
+{
+	thePorts_.clear();
+}
+
 std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
 tnbLib::VoyageWP_Net::DepNode::RetrieveNodes() const
 {

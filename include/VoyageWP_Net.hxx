@@ -167,6 +167,8 @@ namespace tnbLib
 
 			TnbVoyage_EXPORT void RemoveFromStarboard(const Standard_Integer theIndex);
 			TnbVoyage_EXPORT void RemoveFromPort(const Standard_Integer theIndex);
+			TnbVoyage_EXPORT void ClearStarboards();
+			TnbVoyage_EXPORT void ClearPorts();
 
 		};
 

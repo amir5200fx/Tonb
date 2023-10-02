@@ -556,17 +556,33 @@ void tnbLib::Voyage_Waypoints::Perform()
 					}
 				}
 			}
-			auto nodes = net->RetrieveNodes();
+			auto nodes = net->Nodes();
 			// Updating the keys
 			for (const auto& x: nodes)
 			{
 				Debug_Null_Pointer(x);
-				auto nexts = x->RetrieveNexts();
-				x->FlushConnects();
-				for (const auto& next: nexts)
+				if (auto ref = std::dynamic_pointer_cast<VoyageWP_Net::InterNode>(x))
 				{
-					Debug_Null_Pointer(next);
-					x->InsertNode(next->Index(), next);
+					{ // renumbers the starboards
+						auto wps = ref->RetrieveStarSides();
+						ref->ClearStarboards();
+						for (const auto& wp_node: wps)
+						{
+							auto wp = std::dynamic_pointer_cast<VoyageWP_Net::WPNode>(wp_node);
+							Debug_Null_Pointer(wp);
+							ref->InsertToStarboard(wp->Index(), wp);
+						}
+					}
+					{ // renumbers the ports
+						auto wps = ref->RetrievePortSides();
+						ref->ClearPorts();
+						for (const auto& wp_node : wps)
+						{
+							auto wp = std::dynamic_pointer_cast<VoyageWP_Net::WPNode>(wp_node);
+							Debug_Null_Pointer(wp);
+							ref->InsertToPort(wp->Index(), wp);
+						}
+					}
 				}
 			}
 		}
