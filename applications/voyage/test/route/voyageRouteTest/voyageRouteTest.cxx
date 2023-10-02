@@ -1,4 +1,5 @@
 ﻿#include <Aft_MetricPrcsr.hxx>
+#include <Voyage_RepairNet.hxx>
 #include <VoyageSim_MinFuel.hxx>
 #include <VoyageWP_Connect.hxx>
 #include <VoyageWP_Connect2.hxx>
@@ -239,7 +240,11 @@ int main()
 		alg->SetNet(grid);
 		alg->Perform();
 	}
-	
+
+	{// repair the grid
+		auto alg = std::make_shared<Voyage_RepairNet>(grid);
+		alg->Perform();
+	}
 
 	OFstream gridFile("grid.plt");
 	

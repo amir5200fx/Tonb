@@ -36,6 +36,11 @@ void tnbLib::VoyageWP_Net::Node::RemoveNode
 	theNexts_.erase(iter);
 }
 
+void tnbLib::VoyageWP_Net::Node::FlushConnects()
+{
+	theNexts_.clear();
+}
+
 std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
 tnbLib::VoyageWP_Net::InterNode::RetrieveNodes() const
 {
@@ -438,6 +443,16 @@ tnbLib::VoyageWP_Net::RetrieveConnectivity() const
 		}
 	}
 	return std::move(ids);
+}
+
+void tnbLib::VoyageWP_Net::FlushConnects() const
+{
+	const auto nodes = RetrieveNodes();
+	for (const auto& x:nodes)
+	{
+		Debug_Null_Pointer(x);
+		x->FlushConnects();
+	}
 }
 
 std::shared_ptr<tnbLib::Entity2d_Polygon>

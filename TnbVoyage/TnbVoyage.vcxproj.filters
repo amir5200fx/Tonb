@@ -394,6 +394,9 @@
     <Filter Include="TnbLib\Voyage\Simulations\Graph">
       <UniqueIdentifier>{017e1d61-b4d0-48e7-8852-74119f179615}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\RepairNet">
+      <UniqueIdentifier>{a63deb1b-0143-4b72-8bd6-da75c01c31b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -741,6 +744,9 @@
     <ClInclude Include="TnbLib\Voyage\Simulations\Graph\VoyageSim_Graph.hxx">
       <Filter>TnbLib\Voyage\Simulations\Graph</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\RepairNet\Voyage_RepairNet.hxx">
+      <Filter>TnbLib\Voyage\RepairNet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -919,6 +925,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Simulations\Graph\VoyageSim_Graph.cxx">
       <Filter>TnbLib\Voyage\Simulations\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\RepairNet\Voyage_RepairNet.cxx">
+      <Filter>TnbLib\Voyage\RepairNet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
