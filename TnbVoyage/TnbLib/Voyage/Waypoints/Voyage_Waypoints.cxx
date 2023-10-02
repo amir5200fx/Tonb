@@ -74,7 +74,8 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 			{
 				Debug_Null_Pointer(e);
 				e->SetRegion(region_nb);
-				auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
+				const auto ref = 
+					std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
 				Debug_Null_Pointer(ref);
 				ref->SetSense(Standard_False);
 				port.push_back(std::move(e));
@@ -95,7 +96,8 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 			{
 				Debug_Null_Pointer(e);
 				e->SetRegion(region_nb);
-				auto ref = std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
+				const auto ref = 
+					std::dynamic_pointer_cast<VoyageMesh_RefEdge>(e);
 				Debug_Null_Pointer(ref);
 				//ref->SetSense(Standard_False);
 				starboard.push_back(std::move(e));
@@ -204,7 +206,7 @@ void tnbLib::Voyage_Waypoints::Merge
 	const auto& n1 = theEdge1.Node0();
 	Debug_Null_Pointer(n0);
 	Debug_Null_Pointer(n1);
-	auto node = Merge(*n0, *n1);
+	const auto node = Merge(*n0, *n1);
 	theEdge0.SetNode1(node);
 	theEdge1.SetNode0(node);
 }
@@ -232,11 +234,11 @@ void tnbLib::Voyage_Waypoints::SetDeparture
 	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
 )
 {
-	auto edge = theEdges.at(0);
+	const auto& edge = theEdges.at(0);
 	Debug_Null_Pointer(edge);
-	auto node = edge->Node0();
+	const auto node = edge->Node0();
 	Debug_Null_Pointer(node);
-	auto departure = std::make_shared<VoyageMesh_DepartureNode>(node->Index(), node->Coord());
+	const auto departure = std::make_shared<VoyageMesh_DepartureNode>(node->Index(), node->Coord());
 	edge->SetNode0(departure);
 }
 
@@ -245,11 +247,11 @@ void tnbLib::Voyage_Waypoints::SetArrival
 	const std::vector<std::shared_ptr<VoyageMesh_Edge>>& theEdges
 )
 {
-	auto edge = theEdges.at(theEdges.size() - 1);
+	const auto& edge = theEdges.at(theEdges.size() - 1);
 	Debug_Null_Pointer(edge);
-	auto node = edge->Node1();
+	const auto node = edge->Node1();
 	Debug_Null_Pointer(node);
-	auto arrival = std::make_shared<VoyageMesh_ArrivalNode>(node->Index(), node->Coord());
+	const auto arrival = std::make_shared<VoyageMesh_ArrivalNode>(node->Index(), node->Coord());
 	edge->SetNode1(arrival);
 }
 
