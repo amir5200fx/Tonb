@@ -166,6 +166,7 @@ namespace tnbLib
 						<< " - index: " << theIndex << endl
 						<< abort(FatalError);
 				}
+				theEdges_.erase(iter);
 			}
 
 			Standard_Boolean Edge::IsReference() const
