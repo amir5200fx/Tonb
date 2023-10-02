@@ -285,10 +285,6 @@ void tnbLib::Voyage_RepairNet::Perform()
 		{
 			if (const auto interior = std::dynamic_pointer_cast<VoyageWP_Net::InterNode>(ref))
 			{
-				for (const auto& [id, x]: interior->Starboards())
-				{
-					
-				}
 				{// checking starboard side
 					const auto wps = interior->RetrieveStarSides();
 					for (const auto& wp: wps)
