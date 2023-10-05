@@ -9,6 +9,17 @@
 
 unsigned short tnbLib::VoyageSim_MinFuel::verbose(0);
 
+Standard_Real tnbLib::VoyageSim_MinFuel::DEFAULT_MIN_VEL(0);
+Standard_Real tnbLib::VoyageSim_MinFuel::DEFAULT_MAX_VEL(0);
+Standard_Real tnbLib::VoyageSim_MinFuel::DEFAULT_VEL(0);
+
+Standard_Integer tnbLib::VoyageSim_MinFuel::DEFAULT_NB_LEVELS(2);
+Standard_Integer tnbLib::VoyageSim_MinFuel::DEFAULT_NB_SAMPLES(3);
+
+Standard_Real tnbLib::VoyageSim_MinFuel::DEFAULT_TIME_STEP(0);
+Standard_Real tnbLib::VoyageSim_MinFuel::DEFAULT_TIME_RES(0);
+Standard_Real tnbLib::VoyageSim_MinFuel::DEFAULT_MAX_DAY(3);
+
 std::vector<Standard_Real>
 tnbLib::VoyageSim_MinFuel::CalcVelocities() const
 {
@@ -61,17 +72,230 @@ tnbLib::VoyageSim_MinFuel::InsideTimeLine
 	return INSIDE(theTime, FirstItem(theTimeline), LastItem(theTimeline));
 }
 
-void tnbLib::VoyageSim_MinFuel::Perform()
+tnbLib::VoyageSim_MinFuel::VoyageSim_MinFuel()
+	: theMinVel_(DEFAULT_MIN_VEL)
+	, theMaxVel_(DEFAULT_MAX_VEL)
+	, theVel_(DEFAULT_VEL)
+
+	, theNbLevels_(DEFAULT_NB_LEVELS)
+	, theNbSamples_(DEFAULT_NB_SAMPLES)
+
+	, theTimeStep_(DEFAULT_TIME_STEP)
+	, theTimeRes_(DEFAULT_TIME_RES)
+	, theMaxDay_(DEFAULT_MAX_DAY)
+
+	, theBaseTime_(0)
+
+	, IsInit_(Standard_False)
+{}
+
+void tnbLib::VoyageSim_MinFuel::Init()
 {
-	const auto velocities = CalcVelocities();
-	auto graph = std::make_shared<VoyageSim_Graph>();
+	if (MinVel() <= 0)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "No min. vel. has been assigned." << endl
+			<< abort(FatalError);
+	}
+	if (MaxVel() <= 0)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "No max. vel. has been assigned." << endl
+			<< abort(FatalError);
+	}
+	if (Vel() <= 0)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "No vel. has been assigned." << endl
+			<< abort(FatalError);
+	}
+	if (TimeStep() <= 0)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "No time step has been assigned." << endl
+			<< abort(FatalError);
+	}
+	if (TimeResolution() <= 0)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "No time resolution has been assigned." << endl
+			<< abort(FatalError);
+	}
+	if (NbLevels() < 2)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "Invalid no. of levels for the velocity of the ship has been detected." << endl
+			<< " - the value must be greater than 2 and the current value is: " << NbLevels() << endl
+			<< abort(FatalError);
+	}
+	// Register the net nodes
+	for (const auto& x: Net()->RetrieveNodes())
+	{
+		if (NOT theNetMap_.insert({ x->Index(), x }).second)
+		{ // checking for any duplication in data points
+			FatalErrorIn(FunctionSIG) << endl
+				<< "duplicate data has been detected." << endl
+				<< abort(FatalError);
+		}
+	}
+	IsInit_ = Standard_True;
+}
+
+void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
+{
+	if (NOT IsInit_)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "the application is not initialized." << endl
+			<< abort(FatalError);
+	}
+	if (MaxVel() <= MinVel())
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "Invalid velocity range has been detected." << endl
+			<< abort(FatalError);
+	}
+	/*
+	 * The first thing to do is to find the starting point and put it into the pos_seed
+	 * We already know the key of the point
+	 */
+	std::shared_ptr<VoyageWP_Net::Node> start_point;
+	{
+		auto iter = theNetMap_.find(theStart);
+		if (iter IS_EQUAL theNetMap_.end())
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< " the item is not in the tree." << endl
+				<< " - index: " << theStart << endl
+				<< abort(FatalError);
+		}
+		start_point = iter->second;
+	}
+	std::shared_ptr<VoyageWP_Net::RefNode> current_state;
+	if (auto ref = 
+		std::dynamic_pointer_cast<VoyageWP_Net::RefNode>(start_point))
+	{
+		current_state = ref;
+	}
+	else
+	{
+		auto wp = 
+			std::dynamic_pointer_cast<VoyageWP_Net::WPNode>(start_point);
+		Debug_Null_Pointer(wp);
+		current_state = wp->Reference().lock();
+	}
+	Debug_Null_Pointer(current_state);
+	theGraph_ = std::make_shared<VoyageSim_Graph>();
+	auto graph = theGraph_;
 	const auto dpt = Net()->Departure();
 	Debug_Null_Pointer(dpt);
 	const auto arv = Net()->Arrival();
 	Debug_Null_Pointer(arv);
-
-	std::map<Standard_Integer, std::vector<Standard_Real>> timelines;
-	std::map<Standard_Integer, std::vector<std::shared_ptr<VoyageSim_Graph::Node>>> nodes_map;
+	// the structure that keep the timelines for each node.
+	auto& timelines = theTimeLines_;
+	auto& nodes_map = theNodesMap_;
+	if (verbose)
+	{
+		Info << endl
+			<< " # Creating the global paths..." << endl;
+	}
+	{// set the timelines for the nodes
+		const auto& refs = Net()->NodesRef();
+		Standard_Integer lev = 0;
+		const auto vel_min = MinVel() / Vel();
+		const auto vel_max = MaxVel() / Vel();
+		Standard_Integer nb_nodes = 0;
+		size_t current_ref_id = 0;
+		// Calculating the expected time arrival for each ref. node
+		for (const auto& x: refs)
+		{
+			x->Time() = static_cast<Standard_Real>(lev) * TimeStep() + BaseTime();
+			if (current_state IS_EQUAL x)
+			{
+				current_ref_id = lev;
+			}
+			++lev;
+		}
+		lev = 0;
+		// traverse all over the reference nodes
+		for (size_t iter = 0; iter < refs.size(); iter++)
+		{
+			if (iter < current_ref_id)
+			{
+				continue; // go to the current state
+			}
+			const auto& x = refs.at(iter);
+			Debug_Null_Pointer(x);
+			if (x->IsDeparture())
+			{ // if the reference node is departure
+				timelines.insert({ dpt->Index(),{BaseTime()} });
+				auto node =
+					std::make_shared<VoyageSim_Graph::DeptNode>
+					(++nb_nodes, dpt->Coord(), BaseTime()); // the start time would be zero
+				Debug_Null_Pointer(node);
+				nodes_map.insert({ dpt->Index(), {node} });
+				++lev;
+				continue; // go for the next node
+			}
+			const auto min_time = static_cast<Standard_Real>(lev) * TimeStep() / vel_max + BaseTime(); // calculating the lower limit of timeline
+			const auto max_time = static_cast<Standard_Real>(lev) * TimeStep() / vel_min + BaseTime(); // calculating the upper limit
+			if (min_time IS_EQUAL max_time AND lev IS_EQUAL 0)
+			{// it's a starting point
+				timelines.insert({ x->Index(),{BaseTime()} });
+				auto node =
+					std::make_shared<VoyageSim_Graph::DeptNode>
+					(++nb_nodes, x->Coord(), BaseTime()); // the start time would be zero
+				Debug_Null_Pointer(node);
+				nodes_map.insert({ x->Index(), {node} });
+				++lev;
+				continue;
+			}
+			auto nodes = x->RetrieveNodes(); // retrieving all the nodes in the current stage
+			if (x->IsArrival())
+			{ // if the reference node is arrival
+				const auto& wp = nodes.at(0); // there's just one node in the list.
+				Debug_Null_Pointer(wp);
+				auto times = DiscreteTime({ min_time, max_time }, TimeResolution()); // discrete the timeline.
+				{// create an empty list for position node
+					nodes_map.insert({ wp->Index(),{} });
+				}
+				for (const auto ti : times)
+				{
+					auto node_i =
+						std::make_shared<VoyageSim_Graph::ArvalNode>
+						(++nb_nodes, wp->Coord(), ti);
+					Debug_Null_Pointer(node_i);
+					nodes_map.at(wp->Index()).push_back(node_i);
+				}
+				timelines.insert({ wp->Index(), std::move(times) });
+				continue; // go for the next node
+			}
+			for (const auto& wp : nodes)
+			{
+				Debug_Null_Pointer(wp);
+				auto times = DiscreteTime({ min_time, max_time }, TimeResolution()); // discrete the timeline.
+				{// create an empty list for position node
+					nodes_map.insert({ wp->Index(),{} });
+				}
+				for (const auto ti : times)
+				{
+					auto node_i =
+						std::make_shared<VoyageSim_Graph::Node>
+						(++nb_nodes, wp->Coord(), ti);
+					Debug_Null_Pointer(node_i);
+					nodes_map.at(wp->Index()).push_back(node_i);
+				}
+				timelines.insert({ wp->Index(), std::move(times) });
+			}
+			++lev;
+		}
+		{// insert an empty timeline for the departure
+			timelines.insert({ dpt->Index(),{} });
+		}
+	}
+	/*
+	 * Calculating the timelines for each waypoint has been completed.
+	 */
 	static auto cmp_pos =
 		[](
 			const std::shared_ptr<VoyageWP_Net::Node>& n0,
@@ -88,90 +312,47 @@ void tnbLib::VoyageSim_MinFuel::Perform()
 	{
 		return n0->Index() < n1->Index();
 	};
-	if (verbose)
-	{
-		Info << endl
-			<< " # Creating the global paths..." << endl;
-	}
-	{// set the timelines for the nodes
-		const auto& refs = Net()->NodesRef();
-		Standard_Integer lev = 0;
-		const auto vel_min = MinVel() / Vel();
-		const auto vel_max = MaxVel() / Vel();
-		Standard_Integer nb_nodes = 0;
-		for (const auto& x:refs)
-		{
-			Debug_Null_Pointer(x);
-			auto ref = std::dynamic_pointer_cast<VoyageWP_Net::RefNode>(x);
-			Debug_Null_Pointer(ref);
-			
-			if (x->IsDeparture())
-			{
-				timelines.insert({ dpt->Index(),{0} });
-				auto node = 
-					std::make_shared<VoyageSim_Graph::DeptNode>
-				(++nb_nodes, dpt->Coord(), 0);
-				Debug_Null_Pointer(node);
-				nodes_map.insert({ dpt->Index(), {node} });
-				continue;
-			}
-			++lev;
-			const auto min_time = static_cast<Standard_Real>(lev) * TimeStep() / vel_max;
-			const auto max_time = static_cast<Standard_Real>(lev) * TimeStep() / vel_min;
-			auto nodes = ref->RetrieveNodes();
-			if (x->IsArrival())
-			{
-				const auto& wp = nodes.at(0);
-				Debug_Null_Pointer(wp);
-				auto times = DiscreteTime({ min_time, max_time }, TimeResolution());
-				{// create an empty list for position node
-					nodes_map.insert({ wp->Index(),{} });
-				}
-				for (const auto ti : times)
-				{
-					auto node_i =
-						std::make_shared<VoyageSim_Graph::ArvalNode>
-						(++nb_nodes, wp->Coord(), ti);
-					Debug_Null_Pointer(node_i);
-					nodes_map.at(wp->Index()).push_back(node_i);
-				}
-				timelines.insert({ wp->Index(), std::move(times) });
-				continue;
-			}
-			for (const auto& wp:nodes)
-			{
-				Debug_Null_Pointer(wp);
-				auto times = DiscreteTime({ min_time, max_time }, TimeResolution());
-				{// create an empty list for position node
-					nodes_map.insert({ wp->Index(),{} });
-				}
-				for (const auto ti: times)
-				{
-					auto node_i =
-						std::make_shared<VoyageSim_Graph::Node>
-						(++nb_nodes, wp->Coord(), ti);
-					Debug_Null_Pointer(node_i);
-					nodes_map.at(wp->Index()).push_back(node_i);
-				}
-				timelines.insert({ wp->Index(), std::move(times) });
-			}
-		}
-	}
-
+	/*
+	 * Calculate the velocity list based on the assigned NO. of levels.
+	 * the value must be greater than 2
+	 */
+	const auto velocities = CalcVelocities();
 	std::set<std::shared_ptr<VoyageWP_Net::Node>, decltype(cmp_pos)> pos_seeds(cmp_pos);
-	pos_seeds.insert(dpt);
-	{// insert an empty timeline for the departure
-		timelines.insert({ dpt->Index(),{} });
-	}
-	auto& edges = graph->EdgesRef();
+	pos_seeds.insert(start_point);
+	auto& edges = graph->EdgesRef(); 
 	Standard_Integer nb_edges = 0;
-	int kk = 0;
+	const auto max_hour = ConvertDayToHours(MaxDay());
+	//int kk = 0;
 	while (!pos_seeds.empty())
 	{
 		//std::cout << " pos size = " << pos_seeds.size() << std::endl;
 		auto current_pos = *pos_seeds.begin();
 		Debug_Null_Pointer(current_pos);
 		pos_seeds.erase(current_pos);  // remove the current node form the list
+		if (current_pos->IsReference())
+		{
+			Debug_Null_Pointer(std::dynamic_pointer_cast<VoyageWP_Net::RefNode>(current_pos));
+			if (std::dynamic_pointer_cast<VoyageWP_Net::RefNode>(current_pos)->Time() > max_hour)
+			{
+				continue; // go for the next node
+			}
+		}
+		else if (current_pos->IsWP())
+		{
+			const auto wp = std::dynamic_pointer_cast<VoyageWP_Net::WPNode>(current_pos);
+			Debug_Null_Pointer(wp);
+			Debug_Null_Pointer(wp->Reference().lock())
+			if (wp->Reference().lock()->Time() > max_hour)
+			{
+				continue; // go for the next node
+			}
+		}
+		else
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Unspecified type of node has been detected." << endl
+				<< abort(FatalError);
+		}
 		const auto& p0 = current_pos->Coord();
 		const auto& next_poses = current_pos->Nexts(); // retrieve the next nodes
 		const auto& current_nodes = nodes_map.at(current_pos->Index());
@@ -230,14 +411,14 @@ void tnbLib::VoyageSim_MinFuel::Perform()
 			}
 			//PAUSE;
 		}
-		++kk;
+		//++kk;
 		//std::cout << std::endl;
 		//PAUSE;
-		if(kk>550)
-		{
-			break;
+		//if(kk>550)
+		//{
+		//	break;
 			//std::exit(1);
-		}
+		//}
 	}
 	std::cout << "nb edges = " << nb_edges << std::endl;
 	//PAUSE;

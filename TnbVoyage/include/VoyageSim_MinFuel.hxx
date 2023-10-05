@@ -72,8 +72,7 @@ namespace tnbLib
 
 		// default constructor
 
-		VoyageSim_MinFuel()
-		= default;
+		VoyageSim_MinFuel();
 
 		// constructors
 

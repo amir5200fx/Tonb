@@ -36,6 +36,12 @@ void tnbLib::VoyageWP_Net::Node::RemoveNode
 	theNexts_.erase(iter);
 }
 
+tnbLib::VoyageWP_Net::RefNode::RefNode()
+	: theTime_(0)
+{
+	// empty body
+}
+
 std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
 tnbLib::VoyageWP_Net::InterNode::RetrieveNodes() const
 {
