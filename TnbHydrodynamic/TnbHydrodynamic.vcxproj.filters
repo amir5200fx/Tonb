@@ -13,6 +13,9 @@
     <Filter Include="TnbLib\Hydrodynamic\Module">
       <UniqueIdentifier>{cdf4c22b-a6a9-4650-a9fd-5f8e9e4efcb6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Hydrodynamic\XFoil">
+      <UniqueIdentifier>{8621a143-e5f2-43ea-af50-2a91ba8360e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop.hxx">
@@ -24,6 +27,12 @@
     <ClInclude Include="TnbLib\Hydrodynamic\Module\HydDyna_Module.hxx">
       <Filter>TnbLib\Hydrodynamic\Module</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Hydrodynamic\XFoil\HydDyna_XFoil.hxx">
+      <Filter>TnbLib\Hydrodynamic\XFoil</Filter>
+    </ClInclude>
+    <ClInclude Include="TnbLib\Hydrodynamic\XFoil\HydDyna_XFoil_Params.hxx">
+      <Filter>TnbLib\Hydrodynamic\XFoil</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop.cxx">
@@ -31,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Hydrodynamic\Holtrop\HydDyna_Holtrop_Veriables.cxx">
       <Filter>TnbLib\Hydrodynamic\Holtrop</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Hydrodynamic\XFoil\HydDyna_XFoil.cxx">
+      <Filter>TnbLib\Hydrodynamic\XFoil</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

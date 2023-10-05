@@ -1,4 +1,5 @@
 ﻿#include <Aft_MetricPrcsr.hxx>
+#include <Voyage_RepairNet.hxx>
 #include <VoyageSim_MinFuel.hxx>
 #include <VoyageWP_Connect.hxx>
 #include <VoyageWP_Connect2.hxx>
@@ -35,6 +36,7 @@
 #include <Pln_Edge.hxx>
 #include <FastDiscrete_Params.hxx>
 #include <Geo_Tools.hxx>
+#include <Geo_BoxTools.hxx>
 #include <Geo3d_ApprxCurve.hxx>
 #include <Geo_ApprxCurve_Info.hxx>
 #include <Entity3d_Triangulation.hxx>
@@ -149,7 +151,7 @@ int main()
 	}
 
 	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
-	Standard_Real hour = 10.0;
+	Standard_Real hour = 5.0;
 	auto h = vel * hour;
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
@@ -219,6 +221,14 @@ int main()
 	// assign the state function (dry & wet function)
 	wayPoints->SetStateFun([](const Pnt2d&) {return true; });
 	wayPoints->Perform();
+	{ // Calculate bounding bxo
+		auto domain = 
+			Geo_BoxTools::Union
+		(
+			Geo_BoxTools::GetBox(wayPoints->StarMesh()->Points(), 1.0e-6), 
+			Geo_BoxTools::GetBox(wayPoints->PortMesh()->Points(), 1.0e-6)
+		);
+	}
 
 	//OFstream triFile1("triangle.plt");
 	//OFstream triFile2("triangle1.plt");
@@ -235,10 +245,15 @@ int main()
 	{
 		const auto alg = std::make_shared<VoyageWP_Connect2>();
 		alg->SetSize(2);
+		alg->SetStateFun([](const Pnt2d&, const Pnt2d&) {return true; });
 		alg->SetNet(grid);
 		alg->Perform();
 	}
-	
+
+	{// repair the grid
+		auto alg = std::make_shared<Voyage_RepairNet>(grid);
+		alg->Perform();
+	}
 
 	OFstream gridFile("grid.plt");
 	

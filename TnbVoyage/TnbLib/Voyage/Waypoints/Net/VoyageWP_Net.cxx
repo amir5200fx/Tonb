@@ -11,6 +11,18 @@ tnbLib::VoyageWP_Net::Node::Size() const
 	return static_cast<Standard_Integer>(theNexts_.size());
 }
 
+std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
+tnbLib::VoyageWP_Net::Node::RetrieveNexts() const
+{
+	std::vector<std::shared_ptr<Node>> nodes;
+	nodes.reserve(theNexts_.size());
+	for (const auto& [id, x]:theNexts_)
+	{
+		nodes.emplace_back(x);
+	}
+	return std::move(nodes);
+}
+
 void tnbLib::VoyageWP_Net::Node::InsertNode
 (
 	const Standard_Integer theIndex,
@@ -40,6 +52,11 @@ tnbLib::VoyageWP_Net::RefNode::RefNode()
 	: theTime_(0)
 {
 	// empty body
+}
+
+void tnbLib::VoyageWP_Net::Node::FlushConnects()
+{
+	theNexts_.clear();
 }
 
 std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
@@ -144,6 +161,16 @@ void tnbLib::VoyageWP_Net::InterNode::RemoveFromPort
 			<< abort(FatalError);
 	}
 	thePorts_.erase(iter);
+}
+
+void tnbLib::VoyageWP_Net::InterNode::ClearStarboards()
+{
+	theStarboards_.clear();
+}
+
+void tnbLib::VoyageWP_Net::InterNode::ClearPorts()
+{
+	thePorts_.clear();
 }
 
 std::vector<std::shared_ptr<tnbLib::VoyageWP_Net::Node>>
@@ -444,6 +471,16 @@ tnbLib::VoyageWP_Net::RetrieveConnectivity() const
 		}
 	}
 	return std::move(ids);
+}
+
+void tnbLib::VoyageWP_Net::FlushConnects() const
+{
+	const auto nodes = RetrieveNodes();
+	for (const auto& x:nodes)
+	{
+		Debug_Null_Pointer(x);
+		x->FlushConnects();
+	}
 }
 
 std::shared_ptr<tnbLib::Entity2d_Polygon>

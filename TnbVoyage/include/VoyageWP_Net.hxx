@@ -70,9 +70,11 @@ namespace tnbLib
 			auto Sense() const { return theSense_; }
 
 			[[nodiscard]] const auto& Nexts() const { return theNexts_; }
+			TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveNexts() const;
 
 			TnbVoyage_EXPORT void InsertNode(const Standard_Integer theIndex, const std::shared_ptr<Node>&);
 			TnbVoyage_EXPORT void RemoveNode(const Standard_Integer theIndex);
+			TnbVoyage_EXPORT void FlushConnects();
 			void SetSense(const Standard_Boolean theSense) { theSense_ = theSense; }
 			void SetCoord(const Pnt2d& theCoord) { theCoord_ = theCoord; }
 			void SetCoord(Pnt2d&& theCoord) { theCoord_ = std::move(theCoord); }
@@ -165,6 +167,8 @@ namespace tnbLib
 
 			TnbVoyage_EXPORT void RemoveFromStarboard(const Standard_Integer theIndex);
 			TnbVoyage_EXPORT void RemoveFromPort(const Standard_Integer theIndex);
+			TnbVoyage_EXPORT void ClearStarboards();
+			TnbVoyage_EXPORT void ClearPorts();
 
 		};
 
@@ -310,6 +314,8 @@ namespace tnbLib
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveNodes() const;
 		TnbVoyage_EXPORT std::vector<Pnt2d> RetrieveCoords() const;
 		TnbVoyage_EXPORT std::vector<connectivity::dual> RetrieveConnectivity() const;
+
+		TnbVoyage_EXPORT void FlushConnects() const;
 
 		TnbVoyage_EXPORT void ExportToPlt(OFstream&) const;
 
