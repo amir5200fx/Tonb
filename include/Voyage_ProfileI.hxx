@@ -1,4 +1,5 @@
 #pragma once
+
 inline Standard_Real 
 tnbLib::Voyage_Profile::Value0() const
 {

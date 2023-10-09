@@ -2,37 +2,48 @@
 #ifndef _Voyage_Profile_Header
 #define _Voyage_Profile_Header
 
+#include <memory>
+#include <Voyage_Module.hxx>
+
 #include <Standard_TypeDef.hxx>
 
 namespace tnbLib
 {
+
+	// Forward Declarations
+	class Geo_InterplFunction;
 
 	class Voyage_Profile
 	{
 
 		/*Private Data*/
 
-	protected:
+		std::shared_ptr<Geo_InterplFunction> theFunc_;
 
-		// default constructor [7/11/2023 Payvand]
-
-		Voyage_Profile()
-		{}
-
-		// constructors [7/11/2023 Payvand]
-
+		Standard_Real theX0_;
+		Standard_Real theX1_;
 
 	public:
 
+		// default constructor [7/11/2023 Payvand]
+		
+
+		// constructors [7/11/2023 Payvand]
+
+		TnbVoyage_EXPORT Voyage_Profile(const std::shared_ptr<Geo_InterplFunction>& theFun);
+		TnbVoyage_EXPORT Voyage_Profile(std::shared_ptr<Geo_InterplFunction>&& theFun);
+
 		// Public functions and operators [7/11/2023 Payvand]
 
-		virtual Standard_Real X0() const = 0;
-		virtual Standard_Real X1() const = 0;
+		const auto& GeoFun() const { return theFunc_; }
+
+		TnbVoyage_EXPORT Standard_Real X0() const;
+		TnbVoyage_EXPORT Standard_Real X1() const;
 
 		inline Standard_Real Value0() const;
 		inline Standard_Real Value1() const;
 
-		virtual Standard_Real Value(const Standard_Real x) const = 0;
+		TnbVoyage_EXPORT Standard_Real Value(const Standard_Real x) const;
 
 	};
 }

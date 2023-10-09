@@ -12,10 +12,24 @@ namespace tnbLib
 {
 
 	// Forward Declarations [7/21/2023 Payvand]
-	class Voyage_Edge;
 
 	class VoyageFun_CostFunction
 	{
+
+	public:
+		
+		struct Time
+		{
+			Standard_Real value;
+		};
+
+		struct State
+		{
+			Pnt2d pos;
+			Time time;
+		};
+
+	private:
 
 		/*Private Data*/
 
@@ -33,7 +47,7 @@ namespace tnbLib
 
 		// Public functions and operators [7/11/2023 Payvand]
 
-		virtual Standard_Real Value(const std::shared_ptr<Voyage_Edge>&) const = 0;
+		virtual Standard_Real Value(const State& theState0, const State& theState1) const = 0;
 
 	};
 

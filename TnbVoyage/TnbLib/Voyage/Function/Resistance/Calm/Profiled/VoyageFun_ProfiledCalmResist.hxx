@@ -3,6 +3,7 @@
 #define _VoyageFun_ProfiledCalmResist_Header
 
 #include <VoyageFun_CalmResist.hxx>
+#include <Voyage_Module.hxx>
 
 #include <memory>
 
@@ -25,6 +26,7 @@ namespace tnbLib
 
 		// default constructor [7/11/2023 Payvand]
 
+		TnbVoyage_EXPORT VoyageFun_ProfiledCalmResist();
 
 		// constructors [7/11/2023 Payvand]
 
@@ -35,6 +37,10 @@ namespace tnbLib
 		VoyageFun_ProfiledCalmResist(std::shared_ptr<Voyage_Profile>&& theProfile)
 			: theProfile_(std::move(theProfile))
 		{}
+
+		// Override the virtual and operator functions
+
+		TnbVoyage_EXPORT Standard_Real Value(const Standard_Real theVel) const override;
 
 		// Public functions and operators [7/11/2023 Payvand]
 

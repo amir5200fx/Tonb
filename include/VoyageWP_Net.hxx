@@ -88,23 +88,29 @@ namespace tnbLib
 			: public Node
 		{
 
-			/*Private Data*/		
+			/*Private Data*/
+
+			mutable Standard_Real theTime_;
+			mutable Standard_Real theDist_;
 
 		protected:
 
 			//- default constructor
 
-			RefNode()
-				= default;
+			TnbVoyage_EXPORT RefNode();
 
 			//- constructors
 
 			RefNode(const Standard_Integer theIndex, const Pnt2d& theCoord)
 				: Node(theIndex, theCoord)
+				, theTime_(0)
+				, theDist_(0)
 			{}
 
 			RefNode(const Standard_Integer theIndex, Pnt2d&& theCoord)
 				: Node(theIndex, std::move(theCoord))
+				, theTime_(0)
+				, theDist_(0)
 			{}
 
 		public:
@@ -112,6 +118,9 @@ namespace tnbLib
 			virtual ~RefNode() = default;
 
 			//- Public functions and operators
+
+			auto& Time() const { return theTime_; }
+			auto& Dist() const { return theDist_; }
 
 			[[nodiscard]] Standard_Boolean IsReference() const override { return Standard_True; }
 
@@ -236,7 +245,9 @@ namespace tnbLib
 			: public Node
 		{
 
-			/*Private Data*/		
+			/*Private Data*/
+
+			std::weak_ptr<InterNode> theRef_;
 
 		public:
 
@@ -257,7 +268,11 @@ namespace tnbLib
 
 			//- Public functions and operators
 
+			const auto& Reference() const { return  theRef_; }
+
 			[[nodiscard]] Standard_Boolean IsWP() const override { return Standard_True; }
+
+			void SetReference(const std::weak_ptr<InterNode>& theNode) { theRef_ = theNode; }
 
 		};
 

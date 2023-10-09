@@ -110,6 +110,7 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 				std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
 			Debug_Null_Pointer(node);
 			auto [p0, p1] = node->StarboardProfile();
+			p1 = (p1 - p0) * 0.9 + p0;
 			const auto curve = profile->Geometry(p0, p1);
 			const auto& geom = curve->Geometry();
 			const auto alg =
@@ -129,6 +130,7 @@ void tnbLib::VoyageWP_PointDistb::Perform()
 				std::dynamic_pointer_cast<VoyageWP_Offset::InterNode>(x);
 			Debug_Null_Pointer(node);
 			auto [p0, p1] = node->PortProfile();
+			p1 = (p1 - p0) * 0.9 + p0;
 			const auto curve = profile->Geometry(p0, p1);
 			const auto& geom = curve->Geometry();
 			const auto alg =
@@ -200,6 +202,7 @@ tnbLib::VoyageWP_PointDistb::RetrieveNet() const
 			for (const auto& p : star_side->Offsets()->Points())
 			{
 				auto wp = std::make_shared<VoyageWP_Net::WPNode>(++nb_nodes, p);
+				wp->SetReference(node);
 				node->InsertToStarboard(wp->Index(), wp);
 			}
 		}
@@ -211,6 +214,7 @@ tnbLib::VoyageWP_PointDistb::RetrieveNet() const
 			for (const auto& p:port_side->Offsets()->Points())
 			{
 				auto wp = std::make_shared<VoyageWP_Net::WPNode>(++nb_nodes, p);
+				wp->SetReference(node);
 				node->InsertToPort(wp->Index(), wp);
 			}
 		}

@@ -85,7 +85,7 @@ namespace tnbLib
 				const std::vector<Standard_Real>&
 			);
 
-		static Standard_Real ConvertDayToHours(const Standard_Real);
+		static Standard_Real ConvertDaysToHours(const Standard_Real);
 
 	public:
 

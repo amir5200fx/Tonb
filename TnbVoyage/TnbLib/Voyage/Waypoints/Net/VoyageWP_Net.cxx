@@ -50,6 +50,7 @@ void tnbLib::VoyageWP_Net::Node::RemoveNode
 
 tnbLib::VoyageWP_Net::RefNode::RefNode()
 	: theTime_(0)
+	, theDist_(0)
 {
 	// empty body
 }

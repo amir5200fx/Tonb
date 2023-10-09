@@ -1,4 +1,7 @@
 ﻿#include <Aft_MetricPrcsr.hxx>
+#include <VoyageFun_CostFunction_Resistane.hxx>
+#include <VoyageFun_ProfiledCalmResist.hxx>
+#include <Voyage_Profile.hxx>
 #include <Voyage_RepairNet.hxx>
 #include <VoyageSim_MinFuel.hxx>
 #include <VoyageWP_Connect.hxx>
@@ -27,6 +30,7 @@
 #include <GeoSizeFun2d_Uniform.hxx>
 #include <GeoSizeFun2d_Background.hxx>
 #include <GeoMesh2d_Background.hxx>
+#include <Geo_SteffenInterplFunction.hxx>
 #include <Cad_Tools.hxx>
 #include <Cad_PreviewTools.hxx>
 #include <Cad_Shape.hxx>
@@ -68,6 +72,34 @@ static auto inRalative = true;
 static auto adaptiveMin = false;
 static auto internalVerticesMode = true;
 static auto controlSurfaceDeflection = true;
+
+auto loadData(const std::string& fileName)
+{
+	std::vector<std::pair<double, double>> qs;
+	std::ifstream file(fileName);
+	if (!file.is_open())
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "Error: Could not open file: " << fileName << endl
+			<< abort(FatalError);
+	}
+	std::string line;
+	while (std::getline(file, line))
+	{
+		std::istringstream iss(line);
+		double x, y;
+		char delimiter;
+		if (!(iss >> x >> delimiter >> y))
+		{
+			FatalErrorIn(FunctionSIG) << endl
+				<< "Invalid line in CSV file: " << fileName << endl
+				<< abort(FatalError);
+		}
+		qs.emplace_back(x, y);
+	}
+	file.close();
+	return std::move(qs);
+}
 
 int main()
 {
@@ -251,8 +283,8 @@ int main()
 	}
 
 	{// repair the grid
-		auto alg = std::make_shared<Voyage_RepairNet>(grid);
-		alg->Perform();
+		//auto alg = std::make_shared<Voyage_RepairNet>(grid);
+		//alg->Perform();
 	}
 
 	OFstream gridFile("grid.plt");
@@ -261,6 +293,63 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << " # Simulating the Fuel consumption..." << std::endl;
+	
+	std::shared_ptr<VoyageFun_ProfiledCalmResist> profile;
+	{// putting the profile values into a list.
+		//auto qs = loadData("HoltropResistance.csv");
+		std::vector<std::pair<double, double>> qs;
+		qs.emplace_back(0, 0);
+		qs.emplace_back(0.625, 2.3);
+		qs.emplace_back(1.25, 8.3);
+		qs.emplace_back(1.875, 17.7);
+		qs.emplace_back(2.5, 30.5);
+		qs.emplace_back(3.125, 46.4);
+		qs.emplace_back(3.75, 65.4);
+		qs.emplace_back(4.375, 87.4);
+		qs.emplace_back(5, 112.5);
+		qs.emplace_back(5.625, 140.5);
+		qs.emplace_back(6.25, 171.4);
+		qs.emplace_back(6.875, 205.3);
+		qs.emplace_back(7.5, 242);
+		qs.emplace_back(8.125, 281.6);
+		qs.emplace_back(8.75, 324);
+		qs.emplace_back(9.375, 369.2);
+		qs.emplace_back(10, 417.2);
+		qs.emplace_back(10.625, 468);
+		qs.emplace_back(11.25, 521.7);
+		qs.emplace_back(11.875, 578.3);
+		qs.emplace_back(12.5, 637.9);
+		qs.emplace_back(13.125, 700.6);
+		qs.emplace_back(13.75, 766.8);
+		qs.emplace_back(14.375, 836.7);
+		qs.emplace_back(15, 910.7);
+		qs.emplace_back(15.625, 989.3);
+		qs.emplace_back(16.25, 1073.2);
+		qs.emplace_back(16.875, 1163.2);
+		qs.emplace_back(17.5, 1259.9);
+		qs.emplace_back(18.125, 1364.6);
+		qs.emplace_back(18.75, 1478.2);
+		qs.emplace_back(19.375, 1601.9);
+		qs.emplace_back(20, 1737.1);
+		qs.emplace_back(20.625, 1885.3);
+		qs.emplace_back(21.25, 2048.3);
+		qs.emplace_back(22.5, 2421.6);
+		qs.emplace_back(23.125, 2632.7);
+		qs.emplace_back(23.75, 2862.4);
+		for (auto&[u,res]:qs)
+		{
+			u *= 1.852;
+		}
+		auto geo_profile = std::make_shared<Geo_SteffenInterplFunction>(std::move(qs));
+		geo_profile->Perform();
+		profile = 
+			std::make_shared<VoyageFun_ProfiledCalmResist>
+		(std::make_shared<Voyage_Profile>(std::move(geo_profile)));
+	}
+	
+	auto cost_fun = 
+		std::make_shared<VoyageFun_CostFunction_Resistane>
+	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile);
 
 	double avg_vel = 18.52; // kmph
 	double min_vel = 0.5 * avg_vel;
@@ -275,6 +364,8 @@ int main()
 	sim->SetTimeRes(hour);
 	sim->SetNbLevels(2);
 	sim->SetNet(grid);
+	sim->SetBaseTime(0);
+	sim->SetMaxDay(7);
 	{
 		auto prcsr = 
 			Voyage_Tools::MakeMetricPrcsr
@@ -284,11 +375,31 @@ int main()
 			return prcsr->CalcDistance(theP0, theP1);
 		};
 		sim->SetDistFunc(my_dist_fun);
-		sim->Perform();
+
+		auto weather_fun = 
+			[cost_fun]
+		(
+			const std::pair<Pnt2d, double>& st0,
+			const std::pair<Pnt2d, double>& st1, 
+			const double dis, const double nbsamples
+			)
+		{
+			cost_fun->SetDistance(dis);
+			cost_fun->SetNbSamples(nbsamples);
+			cost_fun->SetShipVel(dis / (st1.second - st0.second));
+			return
+				cost_fun->Value
+				(
+					{ st0.first,{st0.second} },
+					{ st1.first, {st1.second} }
+			);
+		};
+		sim->SetResistFunc(weather_fun);
+
+		sim->Init();
+		sim->Perform(grid->Departure()->Index());
 	}
 
-	
-	
 
 	std::cout << std::endl;
 	std::cout << " - the application is successfully performed." << std::endl;

@@ -3407,6 +3407,9 @@
     <ClCompile Include="TnbLib\Geo\ElemGeom\Geo_ElemGeom.cxx">
       <Filter>TnbLib\Geo\ElemGeom</Filter>
     </ClCompile>
+    <ClCompile Include="TnbLib\Geo\Function\Interpl\Steffen\Geo_SteffenInterplFunction.cxx">
+      <Filter>TnbLib\Geo\Function\Interpl\Steffen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="TnbLib\Geo\SamplePoints\2d\Geo2d_SamplePoints_Interpolate.jxx">

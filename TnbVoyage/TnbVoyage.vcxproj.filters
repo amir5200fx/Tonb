@@ -397,6 +397,9 @@
     <Filter Include="TnbLib\Voyage\RepairNet">
       <UniqueIdentifier>{a63deb1b-0143-4b72-8bd6-da75c01c31b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Function\Cost\Resistance">
+      <UniqueIdentifier>{aae11ef7-3586-41e7-8740-cab4ad3f0e68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -747,6 +750,9 @@
     <ClInclude Include="TnbLib\Voyage\RepairNet\Voyage_RepairNet.hxx">
       <Filter>TnbLib\Voyage\RepairNet</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Function\Cost\Resistance\VoyageFun_CostFunction_Resistane.hxx">
+      <Filter>TnbLib\Voyage\Function\Cost\Resistance</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -928,6 +934,15 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\RepairNet\Voyage_RepairNet.cxx">
       <Filter>TnbLib\Voyage\RepairNet</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Entities\Profile\Voyage_Profile.cxx">
+      <Filter>TnbLib\Voyage\Entities\Profile</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Function\Resistance\Calm\Profiled\VoyageFun_ProfiledCalmResist.cxx">
+      <Filter>TnbLib\Voyage\Function\Resistance\Calm\Profiled</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Function\Cost\Resistance\VoyageFun_CostFunction_Resistane.cxx">
+      <Filter>TnbLib\Voyage\Function\Cost\Resistance</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

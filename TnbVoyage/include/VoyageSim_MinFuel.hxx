@@ -2,6 +2,8 @@
 #ifndef _VoyageSim_MinFuel_Header
 #define _VoyageSim_MinFuel_Header
 
+#include <VoyageSim_Graph.hxx>
+#include <VoyageWP_Net.hxx>
 #include <Voyage_Module.hxx>
 #include <Pnt2d.hxx>
 #include <Global_Done.hxx>
@@ -14,6 +16,7 @@ namespace tnbLib
 {
 
 	// Forward Declarations
+	class VoyageSim_Graph;
 	class VoyageWP_Net;
 
 	class VoyageSim_MinFuel
@@ -42,11 +45,27 @@ namespace tnbLib
 		Standard_Integer theNbSamples_;
 
 		Standard_Real theTimeStep_;
-		Standard_Real theTimeRes_;
+		Standard_Real theTimeRes_;  // the timeline resolution
+		Standard_Real theMaxDay_;
+		Standard_Real theBaseTime_;
 
 		// functions
 		ResistFunc theResistFun_;
 		DistFunc theDist_;
+
+		// Caches
+		std::shared_ptr<VoyageSim_Graph> theGraph_;
+		std::map
+			<
+			Standard_Integer,
+			std::vector<std::shared_ptr<VoyageSim_Graph::Node>>
+			>
+			theNodesMap_;
+		std::map<Standard_Integer, std::shared_ptr<VoyageWP_Net::Node>>
+			theNetMap_;
+		std::map<Standard_Integer, std::vector<Standard_Real>>
+			theTimeLines_;
+		Standard_Boolean IsInit_;
 
 		// Private funtions and operators
 
@@ -66,13 +85,27 @@ namespace tnbLib
 				const std::vector<Standard_Real>&
 			);
 
+		static Standard_Real ConvertDaysToHours(const Standard_Real);
+
 	public:
 
 		static TnbVoyage_EXPORT unsigned short verbose;
 
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_MIN_VEL;
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_MAX_VEL;
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_VEL;
+
+		static TnbVoyage_EXPORT Standard_Integer DEFAULT_NB_LEVELS;
+		static TnbVoyage_EXPORT Standard_Integer DEFAULT_NB_SAMPLES;
+
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_TIME_STEP;
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_TIME_RES;
+		static TnbVoyage_EXPORT Standard_Real DEFAULT_MAX_DAY;
+
+
 		// default constructor
 
-		VoyageSim_MinFuel();
+		TnbVoyage_EXPORT VoyageSim_MinFuel();
 
 		// constructors
 
@@ -88,18 +121,25 @@ namespace tnbLib
 
 		auto TimeStep() const { return theTimeStep_; }
 		auto TimeResolution() const { return theTimeRes_; }
+		auto MaxDay() const { return theMaxDay_; }
+		auto BaseTime() const { return theBaseTime_; }
 
-		TnbVoyage_EXPORT void Perform();
+		TnbVoyage_EXPORT void Init();
+		TnbVoyage_EXPORT void Perform(const Standard_Integer theStart /*the starting point of the optimization*/);
 
 		void SetMinVel(const Standard_Real theVel) { theMinVel_ = theVel; }
 		void SetMaxVel(const Standard_Real theVel) { theMaxVel_ = theVel; }
 		void SetVel(const Standard_Real theVel) { theVel_ = theVel; }
 
+		// Set the number of levels for a ship to take a velocity (must > 2)
 		void SetNbLevels(const Standard_Integer theSize) { theNbLevels_ = theSize; }
 		void SetNbSamples(const Standard_Integer theSize) { theNbSamples_ = theSize; }
 
 		void SetTimeStep(const Standard_Real theStep) { theTimeStep_ = theStep; }
+		// Set this time to discrete the timeline
 		void SetTimeRes(const Standard_Real theRes) { theTimeRes_ = theRes; }
+		void SetMaxDay(const Standard_Real theDay) { theMaxDay_ = theDay; }
+		void SetBaseTime(const Standard_Real theTime) { theBaseTime_ = theTime; }
 
 		void SetNet(const std::shared_ptr<VoyageWP_Net>& theNet) { theNet_ = theNet; }
 
