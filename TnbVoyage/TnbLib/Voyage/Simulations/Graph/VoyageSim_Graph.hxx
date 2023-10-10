@@ -67,6 +67,7 @@ namespace tnbLib
 
 			virtual Standard_Boolean IsDeparture() const { return Standard_False; }
 			virtual Standard_Boolean IsArrival() const { return Standard_False; }
+			TnbVoyage_EXPORT Standard_Boolean IsDeadend() const;
 
 			const auto& Coord() const { return theCoord_; }
 			auto Time() const { return theTime_; }

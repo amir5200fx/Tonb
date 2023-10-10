@@ -31,6 +31,21 @@ namespace tnbLib
 		typedef std::function<Standard_Real(const Pnt2d&, const Pnt2d&)>
 			DistFunc;
 
+		struct Time
+		{
+			Standard_Real value;
+		};
+
+		struct Velocity
+		{
+			Standard_Real value;
+		};
+
+		struct Location
+		{
+			Pnt2d value;
+		};
+
 	private:
 
 		/*Private Data*/
@@ -65,7 +80,12 @@ namespace tnbLib
 			theNetMap_;
 		std::map<Standard_Integer, std::vector<Standard_Real>>
 			theTimeLines_;
+		std::map<Standard_Integer, std::pair<Standard_Real, std::weak_ptr<VoyageSim_Graph::Node>>>
+			theTable_;
 		Standard_Boolean IsInit_;
+
+		std::map<Standard_Integer, std::shared_ptr<VoyageSim_Graph::Node>>
+			theArrivals_;
 
 		// Private funtions and operators
 
@@ -124,6 +144,17 @@ namespace tnbLib
 		auto MaxDay() const { return theMaxDay_; }
 		auto BaseTime() const { return theBaseTime_; }
 
+		TnbVoyage_EXPORT Standard_Real MinTimeArrival() const;
+		TnbVoyage_EXPORT Standard_Real MaxTimeArrival() const;
+		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> FastestTimeArrivalNode() const;
+		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SlowestTimeArrivalNode() const;
+		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SelectArrivalNode(const Standard_Real theETA) const;
+		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageSim_Graph::Node>> ArrivalNodeList() const;
+
+		const auto& ArrivalNodes() const { return theArrivals_; }
+
+		TnbVoyage_EXPORT std::vector<std::tuple<Location, Time, Velocity>> RetrievePath(const std::shared_ptr<VoyageSim_Graph::Node>&) const;
+
 		TnbVoyage_EXPORT void Init();
 		TnbVoyage_EXPORT void Perform(const Standard_Integer theStart /*the starting point of the optimization*/);
 
@@ -145,6 +176,10 @@ namespace tnbLib
 
 		void SetResistFunc(const ResistFunc& theFun) { theResistFun_ = theFun; }
 		void SetDistFunc(const DistFunc& theFun) { theDist_ = theFun; }
+
+		static TnbVoyage_EXPORT Standard_Real MinTimeArrival(const std::vector<std::shared_ptr<VoyageSim_Graph::Node>>&);
+		static TnbVoyage_EXPORT Standard_Real MaxTimeArrival(const std::vector<std::shared_ptr<VoyageSim_Graph::Node>>&);
+		static TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SelectArrivalNode(const Standard_Real theETA, const std::vector<std::shared_ptr<VoyageSim_Graph::Node>>&);
 
 	};
 }

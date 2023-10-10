@@ -95,6 +95,165 @@ tnbLib::VoyageSim_MinFuel::VoyageSim_MinFuel()
 	, IsInit_(Standard_False)
 {}
 
+Standard_Real tnbLib::VoyageSim_MinFuel::MinTimeArrival() const
+{
+	Standard_Real time = RealLast();
+	for (const auto& [id, x] : ArrivalNodes())
+	{
+		Debug_Null_Pointer(x);
+		if (x->Time() < time)
+		{
+			time = x->Time();
+		}
+	}
+	return time;
+}
+
+Standard_Real tnbLib::VoyageSim_MinFuel::MaxTimeArrival() const
+{
+	Standard_Real time = RealFirst();
+	for (const auto& [id, x] : ArrivalNodes())
+	{
+		Debug_Null_Pointer(x);
+		if (x->Time() > time)
+		{
+			time = x->Time();
+		}
+	}
+	return time;
+}
+
+std::shared_ptr<tnbLib::VoyageSim_Graph::Node>
+tnbLib::VoyageSim_MinFuel::FastestTimeArrivalNode() const
+{
+	std::shared_ptr<VoyageSim_Graph::Node> node;
+	Standard_Real time = RealLast();
+	for (const auto& [id, x] : ArrivalNodes())
+	{
+		Debug_Null_Pointer(x);
+		if (x->Time() < time)
+		{
+			time = x->Time();
+			node = x;
+		}
+	}
+	return std::move(node);
+}
+
+std::shared_ptr<tnbLib::VoyageSim_Graph::Node>
+tnbLib::VoyageSim_MinFuel::SlowestTimeArrivalNode() const
+{
+	std::shared_ptr<VoyageSim_Graph::Node> node;
+	Standard_Real time = RealFirst();
+	for (const auto& [id, x] : ArrivalNodes())
+	{
+		Debug_Null_Pointer(x);
+		if (x->Time() > time)
+		{
+			time = x->Time();
+			node = x;
+		}
+	}
+	return std::move(node);
+}
+
+std::shared_ptr<tnbLib::VoyageSim_Graph::Node> tnbLib::VoyageSim_MinFuel::SelectArrivalNode(
+	const Standard_Real theETA) const
+{
+	const auto arrivals = ArrivalNodeList();
+	auto node = SelectArrivalNode(theETA, arrivals);
+	return std::move(node);
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageSim_Graph::Node>>
+tnbLib::VoyageSim_MinFuel::ArrivalNodeList() const
+{
+	std::vector<std::shared_ptr<VoyageSim_Graph::Node>> nodes;
+	for (const auto& [id, x]: theArrivals_)
+	{
+		nodes.emplace_back(x);
+	}
+	return std::move(nodes);
+}
+
+Standard_Real
+tnbLib::VoyageSim_MinFuel::MinTimeArrival(const std::vector<std::shared_ptr<VoyageSim_Graph::Node>>& theNodes)
+{
+	Standard_Real time = RealLast();
+	for (const auto& x:theNodes)
+	{
+		if (x->Time() < time)
+		{
+			time = x->Time();
+		}
+	}
+	return time;
+}
+
+Standard_Real
+tnbLib::VoyageSim_MinFuel::MaxTimeArrival(const std::vector<std::shared_ptr<VoyageSim_Graph::Node>>& theNodes)
+{
+	Standard_Real time = RealFirst();
+	for (const auto& x : theNodes)
+	{
+		if (x->Time() > time)
+		{
+			time = x->Time();
+		}
+	}
+	return time;
+}
+
+std::shared_ptr<tnbLib::VoyageSim_Graph::Node>
+tnbLib::VoyageSim_MinFuel::SelectArrivalNode
+(
+	const Standard_Real theETA,
+	const std::vector<std::shared_ptr<VoyageSim_Graph::Node>>& theNodes
+)
+{
+	const auto min_time = MinTimeArrival(theNodes);
+	const auto max_time = MaxTimeArrival(theNodes);
+	if (NOT INSIDE(theETA, min_time, max_time))
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "the ETA is not achievable!" << endl
+			<< " - Please make sure you select an ETA inside the range of the predicted arrival times." << endl
+			<< " - min. time of arrival: " << min_time << endl
+			<< " - max. time of arrival: " << max_time << endl
+			<< abort(FatalError);
+	}
+	std::shared_ptr<VoyageSim_Graph::Node> node;
+	Standard_Real dis = RealLast();
+	for (const auto& x: theNodes)
+	{
+		Debug_Null_Pointer(x);
+		if (const auto idis = x->Time() - theETA; std::abs(idis) < dis)
+		{
+			dis = idis;
+			node = x;
+		}
+	}
+	return std::move(node);
+}
+
+std::vector<std::tuple<tnbLib::VoyageSim_MinFuel::Location, tnbLib::VoyageSim_MinFuel::Time, tnbLib::VoyageSim_MinFuel::
+                       Velocity>> tnbLib::VoyageSim_MinFuel::RetrievePath(const std::shared_ptr<VoyageSim_Graph::Node>& theNode) const
+{
+	std::vector<std::tuple<Location, Time, Velocity>> states;
+	auto current = theNode;
+	while (true)
+	{
+		const auto prev = theTable_.at(current->Index()).second.lock();
+		if (NOT prev)
+		{
+			break;
+		}
+		states.push_back({ {current->Coord()},{current->Time()},{theDist_(prev->Coord(), current->Coord()) / (current->Time() - prev->Time())} });
+		current = prev;
+	}
+	return std::move(states);
+}
+
 void tnbLib::VoyageSim_MinFuel::Init()
 {
 	if (MinVel() <= 0)
@@ -357,7 +516,6 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 	auto& edges = graph->EdgesRef(); 
 	Standard_Integer nb_edges = 0;
 	const auto max_hour = ConvertDaysToHours(MaxDay());
-	PAUSE;
 	//std::cout << "max hour = " << max_hour << std::endl;
 	//int kk = 0;
 	while (!pos_seeds.empty())
@@ -511,8 +669,17 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 		unvisited.insert(edge->Node0());
 		unvisited.insert(edge->Node1());
 	}
+	// retrieve the arrival nodes
+	for (const auto& x: unvisited)
+	{
+		Debug_Null_Pointer(x);
+		if (x->IsDeadend())
+		{
+			theArrivals_.insert({ x->Index(), x });
+		}
+	}
 	Debug_Null_Pointer(departure);
-	std::map<Standard_Integer, std::pair<Standard_Real, std::weak_ptr<VoyageSim_Graph::Node>>> table;
+	auto& table = theTable_;
 	for (const auto& x:unvisited)
 	{// initialize the table
 		Debug_Null_Pointer(x);

@@ -365,7 +365,7 @@ int main()
 	sim->SetNbLevels(2);
 	sim->SetNet(grid);
 	sim->SetBaseTime(0);
-	sim->SetMaxDay(7);
+	sim->SetMaxDay(3);
 	{
 		auto prcsr = 
 			Voyage_Tools::MakeMetricPrcsr
@@ -400,6 +400,9 @@ int main()
 		sim->Perform(grid->Departure()->Index());
 	}
 
+	auto best_path = sim->RetrievePath(sim->SelectArrivalNode(MEAN(sim->MinTimeArrival(), sim->MaxTimeArrival())));
+
+	std::cout << " path size = " << best_path.size() << std::endl;
 
 	std::cout << std::endl;
 	std::cout << " - the application is successfully performed." << std::endl;

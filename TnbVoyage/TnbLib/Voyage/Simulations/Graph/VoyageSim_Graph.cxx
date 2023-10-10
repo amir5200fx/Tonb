@@ -5,6 +5,12 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+Standard_Boolean
+tnbLib::VoyageSim_Graph::Node::IsDeadend() const
+{
+	return theNexts_.empty();
+}
+
 void tnbLib::VoyageSim_Graph::Node::SetNext
 (
 	const Standard_Integer theIndex,
