@@ -7,6 +7,189 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+namespace tnbLib
+{
+	namespace voyageLib
+	{
+
+		// Forward Declarations
+		class SuperEdge;
+
+		class SuperNode
+			: public Global_Indexed
+		{
+
+			/* Private Data*/
+
+			std::shared_ptr<VoyageSim_Graph::Node> theNode_;
+
+			std::map<Standard_Integer, std::weak_ptr<SuperEdge>>
+				theEdges_;
+
+		public:
+
+			SuperNode
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<VoyageSim_Graph::Node>& theNode
+			)
+				: Global_Indexed(theIndex)
+				, theNode_(theNode)
+			{}
+
+			// Public functions and operators
+
+			const auto& Node() const { return theNode_; }
+			const auto& Edges() const { return theEdges_; }
+
+			Standard_Boolean IsArrival() const;
+
+			void ImportEdge(const Standard_Integer theIndex, const std::weak_ptr<SuperEdge>&);
+			
+		};
+
+		class SuperEdge
+			: public Global_Indexed
+		{
+
+			/*Private Data*/
+
+			std::shared_ptr<SuperNode> theNode0_;
+			std::shared_ptr<SuperNode> theNode1_;
+
+		public:
+
+			// constructors
+
+			SuperEdge
+			(
+				const Standard_Integer theIndex,
+				const std::shared_ptr<SuperNode>& theNode0, 
+				const std::shared_ptr<SuperNode>& theNode1
+			)
+				: Global_Indexed(theIndex)
+				, theNode0_(theNode0)
+				, theNode1_(theNode1)
+			{}
+
+			// Public functions and operators
+
+			const auto& Node0() const { return theNode0_; }
+			const auto& Node1() const { return theNode1_; }
+			
+		};
+
+		auto RetrieveNodes(const std::vector<std::shared_ptr<VoyageSim_Graph::Edge>>& theEdges)
+		{
+			static auto cmp = [](const std::shared_ptr<VoyageSim_Graph::Node>& node0, const std::shared_ptr<VoyageSim_Graph::Node>& node1)
+			{
+				Debug_Null_Pointer(node0);
+				Debug_Null_Pointer(node1);
+				return node0->Index() < node1->Index();
+			};
+			std::set<std::shared_ptr<VoyageSim_Graph::Node>, decltype(cmp)> compact(cmp);
+			for (const auto& x:theEdges)
+			{
+				Debug_Null_Pointer(x);
+				compact.insert(x->Node0());
+				compact.insert(x->Node1());
+			}
+			std::vector<std::shared_ptr<VoyageSim_Graph::Node>> nodes;
+			std::copy(compact.begin(), compact.end(), std::back_inserter(nodes));
+			return std::move(nodes);
+		}
+		
+		auto MakeSuperEdges(const std::vector<std::shared_ptr<VoyageSim_Graph::Edge>>& theEdges)
+		{
+			std::map<Standard_Integer, std::shared_ptr<SuperNode>> nodes;
+			for (const auto& x: RetrieveNodes(theEdges))
+			{
+				Debug_Null_Pointer(x);
+				nodes.insert({ x->Index(), std::make_shared<SuperNode>(x->Index(), x) });
+			}
+			std::vector<std::shared_ptr<SuperEdge>> edges;
+			for (const auto& x: theEdges)
+			{
+				Debug_Null_Pointer(x);
+				const auto v0 = x->Node0()->Index();
+				const auto v1 = x->Node1()->Index();
+				auto edge = std::make_shared<SuperEdge>(x->Index(), nodes.at(v0), nodes.at(v1));
+				nodes.at(v0)->ImportEdge(edge->Index(), edge);
+				//nodes.at(v1)->ImportEdge(edge->Index(), edge);
+				edges.emplace_back(std::move(edge));
+			}
+			return std::move(edges);
+		}
+
+		auto RetrieveArrivalNodes(const std::vector<std::shared_ptr<SuperEdge>>& theEdges)
+		{
+			static auto cmp = [](const std::shared_ptr<SuperNode>& n0, const std::shared_ptr<SuperNode>& n1)
+			{
+				return n0->Index() < n1->Index();
+			};
+			std::set<std::shared_ptr<SuperNode>, decltype(cmp)> compact(cmp);
+			for (const auto& x: theEdges)
+			{
+				std::cout << x->Node0()->Index() << ", " << x->Node1()->Index() << std::endl;
+				Debug_Null_Pointer(x);
+				Debug_Null_Pointer(x->Node0());
+				Debug_Null_Pointer(x->Node1());
+				compact.insert(x->Node0());
+				compact.insert(x->Node1());
+			}
+			PAUSE;
+			std::vector<std::shared_ptr<SuperNode>> arrivals;
+			for (const auto& node: compact)
+			{
+				Debug_Null_Pointer(node);
+				if (node->IsArrival())
+				{
+					arrivals.emplace_back(std::move(node));
+				}
+			}
+			return std::move(arrivals);
+		}
+
+		auto RetrieveArrivalNodes(const std::vector<std::shared_ptr<VoyageSim_Graph::Edge>>& theEdges)
+		{
+			auto nodes = RetrieveArrivalNodes(MakeSuperEdges(theEdges));
+			return std::move(nodes);
+		}
+
+		auto RetrieveArrivalNodes(const std::map<Standard_Integer, std::shared_ptr<VoyageSim_Graph::Edge>>& theEdges)
+		{
+			std::vector<std::shared_ptr<VoyageSim_Graph::Edge>> edges;
+			edges.reserve(theEdges.size());
+			for (const auto& [id, x] : theEdges)
+			{
+				edges.emplace_back(std::move(x));
+			}
+			auto nodes = RetrieveArrivalNodes(edges);
+			return std::move(nodes);
+		}
+	}
+}
+
+void tnbLib::voyageLib::SuperNode::ImportEdge
+(
+	const Standard_Integer theIndex, 
+	const std::weak_ptr<SuperEdge>& theEdge
+)
+{
+	auto paired = std::make_pair(theIndex, theEdge);
+	if (NOT theEdges_.insert(std::move(paired)).second)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< " duplicate data has been found." << endl
+			<< abort(FatalError);
+	}
+}
+
+Standard_Boolean tnbLib::voyageLib::SuperNode::IsArrival() const
+{
+	return theEdges_.empty();
+}
+
 unsigned short tnbLib::VoyageSim_MinFuel::verbose(0);
 
 Standard_Real tnbLib::VoyageSim_MinFuel::DEFAULT_MIN_VEL(0);
@@ -239,15 +422,32 @@ tnbLib::VoyageSim_MinFuel::SelectArrivalNode
 std::vector<std::tuple<tnbLib::VoyageSim_MinFuel::Location, tnbLib::VoyageSim_MinFuel::Time, tnbLib::VoyageSim_MinFuel::
                        Velocity>> tnbLib::VoyageSim_MinFuel::RetrievePath(const std::shared_ptr<VoyageSim_Graph::Node>& theNode) const
 {
+	std::cout << " injaaaaaa" << std::endl;
+	for (const auto& x: theTable_)
+	{
+		std::cout << " x: " << x.first << std::endl;
+	}
+	Debug_Null_Pointer(theNode);
 	std::vector<std::tuple<Location, Time, Velocity>> states;
 	auto current = theNode;
 	while (true)
 	{
+		{
+			auto iter = theTable_.find(current->Index());
+			if (iter IS_EQUAL theTable_.end())
+			{
+				FatalErrorIn(FunctionSIG) << endl
+					<< " the item isn't in the tree." << endl
+					<< " - index: " << current->Index() << endl
+					<< abort(FatalError);
+			}
+		}
 		const auto prev = theTable_.at(current->Index()).second.lock();
 		if (NOT prev)
 		{
 			break;
 		}
+		std::cout << " prev = " << prev->Index() << std::endl;
 		states.push_back({ {current->Coord()},{current->Time()},{theDist_(prev->Coord(), current->Coord()) / (current->Time() - prev->Time())} });
 		current = prev;
 	}
@@ -669,14 +869,16 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 		unvisited.insert(edge->Node0());
 		unvisited.insert(edge->Node1());
 	}
-	// retrieve the arrival nodes
 	for (const auto& x: unvisited)
 	{
+		std::cout << x->Index() << std::endl;
+	}
+	PAUSE;
+	// retrieve the arrival nodes
+	for (const auto& x: voyageLib::RetrieveArrivalNodes(paths))
+	{
 		Debug_Null_Pointer(x);
-		if (x->IsDeadend())
-		{
-			theArrivals_.insert({ x->Index(), x });
-		}
+		theArrivals_.insert({ x->Index(), x->Node() });
 	}
 	Debug_Null_Pointer(departure);
 	auto& table = theTable_;
