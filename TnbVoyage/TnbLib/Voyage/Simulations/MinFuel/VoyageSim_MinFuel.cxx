@@ -634,8 +634,8 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 	}
 	std::cout << "nb edges = " << nb_edges << std::endl;
 	//PAUSE;
-	OFstream grid_3d_file("grid3d.plt");
-	graph->ExportToPlt(grid_3d_file);
+	//OFstream grid_3d_file("grid3d.plt");
+	//graph->ExportToPlt(grid_3d_file);
 	//std::exit(1);
 	const auto& paths = graph->Edges();
 	if (verbose)
@@ -690,8 +690,8 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 		}
 		table.insert({ x->Index(),{RealLast(),std::shared_ptr<VoyageSim_Graph::Node>()} });
 	}
-	OFstream file("graph.plt");
-	graph->ExportToPlt(file);
+	//OFstream file("graph.plt");
+	//graph->ExportToPlt(file);
 	//std::exit(1);
 	std::map<Standard_Integer, Standard_Integer> compact;
 	Standard_Integer k = 0;
