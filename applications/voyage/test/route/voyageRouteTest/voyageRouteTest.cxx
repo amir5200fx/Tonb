@@ -354,6 +354,7 @@ int main()
 	double avg_vel = 18.52; // kmph
 	double min_vel = 0.5 * avg_vel;
 	double max_vel = 1.2 * avg_vel;
+	VoyageSim_MinFuel::verbose = 1;
 	auto sim = std::make_shared<VoyageSim_MinFuel>();
 
 	sim->SetMinVel(min_vel);
@@ -365,7 +366,7 @@ int main()
 	sim->SetNbLevels(2);
 	sim->SetNet(grid);
 	sim->SetBaseTime(0);
-	sim->SetMaxDay(3);
+	sim->SetMaxDay(7);
 	{
 		auto prcsr = 
 			Voyage_Tools::MakeMetricPrcsr

@@ -818,12 +818,12 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 	// gathering all unvisited nodes
 	for (const auto& [id, edge] : paths)
 	{
-		if (auto iter = nodes_map.find(edge->Node0()->Index()); iter IS_EQUAL nodes_map.end())
-		{
+		if (auto iter = is_dangle.find(edge->Node0()->Index()); iter IS_EQUAL is_dangle.end())
+		{// check if the edge is in timeline
 			continue;
 		}
-		if (auto iter = nodes_map.find(edge->Node1()->Index()); iter IS_EQUAL nodes_map.end())
-		{
+		if (auto iter = is_dangle.find(edge->Node1()->Index()); iter IS_EQUAL is_dangle.end())
+		{// check if the edge is in timeline
 			continue;
 		}
 		Debug_Null_Pointer(edge);
