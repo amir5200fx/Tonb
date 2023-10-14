@@ -21,10 +21,10 @@ tnbLib::VoyageFun_CostFunction_Resistane::CalcAvgVelocity
 	const auto dt2 = 0.5 * du * (t1 - t0);
 	std::vector<Pnt2d> coords;
 	std::vector<Standard_Real> times;
-	for (Standard_Integer i = 0; i < nbsegments; i++)
+	for (Standard_Integer i = 1; i <= nbsegments; i++)
 	{
-		auto p = p0 + i * du - dp2;
-		auto t = t0 + i * du - dt2;
+		auto p = p0 + i * du * (p1 - p0) - dp2;
+		auto t = t0 + i * du * (t1 - t0) - dt2;
 		times.emplace_back(t);
 		coords.emplace_back(std::move(p));
 	}
