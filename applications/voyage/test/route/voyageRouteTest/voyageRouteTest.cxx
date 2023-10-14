@@ -400,123 +400,20 @@ int main()
 		sim->Perform(grid->Departure()->Index());
 	}
 
-	//auto best_path = sim->RetrievePath(sim->SelectArrivalNode(MEAN(sim->MinTimeArrival(), sim->MaxTimeArrival())));
+	auto best_path = sim->RetrievePath(sim->SelectArrivalNode(MEAN(sim->MinTimeArrival(), sim->MaxTimeArrival())));
 
-	//std::cout << " path size = " << best_path.size() << std::endl;
+	std::cout << " path size = " << best_path.size() << std::endl;
+
+	for (const auto& [loc, time, vel] : best_path)
+	{
+		std::cout << " - coord: (" << loc.value << ")"
+			<< ", time: " << time.value
+			<< ", velocity: " << vel.value
+			<< std::endl;
+	}
 
 	std::cout << std::endl;
 	std::cout << " - the application is successfully performed." << std::endl;
 
-	return 1;
-
-	auto metricsFun = earth->GetMetrics();
-	auto uniSizeMap = std::make_shared<GeoSizeFun2d_Uniform>(1.0, metricsFun->BoundingBox());
-	auto metricPrcsrInfo = std::make_shared<Geo_MetricPrcsrAnIso_Info>(metricInfo->MetricInfo(), metricInfo->NbSamples());
-	auto metrics = std::make_shared<Geo2d_MetricPrcsrAnIso>(uniSizeMap, metricsFun, metricPrcsrInfo);
-	std::shared_ptr<std::vector<std::vector<Standard_Real>>> bHs;
-	{// Create the base size map [8/28/2023 aamir]
-		auto algInfo = std::make_shared<VoyageMesh_BaseSizeInfo>();
-		auto alg = std::make_shared<VoyageMesh_BaseSize>(path->RetrieveOffsets(), metrics, algInfo);
-		alg->Perform();
-		bHs = alg->Hs();
-
-		std::cout << std::endl;
-		std::cout << " The base sizes is successfully computed." << std::endl;
-
-		size_t k = 0;
-		for (const auto& x : *bHs)
-		{
-			std::cout << std::endl;
-			std::cout << " - Profile's id: " << k << std::endl;
-			for (size_t i = 0; i < x.size(); i++)
-			{
-				std::cout << x.at(i) << " ";
-				if (i % 10 == 0) std::cout << std::endl;
-			}
-		}
-	}
-
-	std::shared_ptr<GeoMesh2d_Background> unCorrSizeMap;
-	{// Calculate the uncorrected size map [8/28/2023 aamir]
-		auto alg = std::make_shared<VoyageMesh_SizeMap>();
-		const auto baseSize = 1.0E-3;
-		alg->SetBaseSize(baseSize);
-		alg->SetHs(bHs);
-		alg->SetPath(path);
-
-		alg->Perform();
-		unCorrSizeMap = alg->BackMesh();
-
-		std::cout << std::endl;
-		std::cout << " The uncorrected size map is successfully computed." << std::endl;
-	}
-
-	auto unCorrSizeFun = 
-		std::make_shared<GeoSizeFun2d_Background>
-		(uniSizeMap->BoundingBox(), unCorrSizeMap);
-
-	std::shared_ptr<GeoMesh2d_Background> corrSizeMap;
-	{// Calculate the size map correction [8/29/2023 aamir]
-		VoyageMesh_CorrectSizeMap::verbose = 1;
-		auto alg = std::make_shared<VoyageMesh_CorrectSizeMap>();
-		alg->SetPath(path);
-		alg->SetDirection(voyageLib::PathDirect::Starboard);
-		alg->SetSizeFunction(unCorrSizeFun);
-		alg->SetInfo(metricInfo);
-
-		alg->Perform();
-		corrSizeMap = alg->BackMesh();
-
-		std::cout << std::endl;
-		std::cout << " The Size map correction is successfully computed." << std::endl;
-	}
-
-	OFstream mySizeMapFile("sizeMap.plt");
-	unCorrSizeMap->ExportToPlt(mySizeMapFile);
-	corrSizeMap->ExportToPlt(mySizeMapFile);
-
-	//Pnt2d P02(Geo_Tools::DegToRadian(25.0), Geo_Tools::DegToRadian(-5.0));
-
-	//Pnt2d P01(Geo_Tools::DegToRadian(49.6), Geo_Tools::DegToRadian(-53.0));
-	
-	//Pnt2d P00(Geo_Tools::DegToRadian(47.6), Geo_Tools::DegToRadian(-60.0));
-	// coordinates 1: New York City [7/27/2023 Payvand]
-	// Latitude: 40.7128, Longitude: -73.935242 [7/27/2023 Payvand]
-	//Pnt2d P0(Geo_Tools::DegToRadian(-33.0), Geo_Tools::DegToRadian(-71.6));
-	// coordinates 2: Lisbon City [7/27/2023 Payvand]
-	// Latitude: 38.736946, Longitude: -9.142685 [7/27/2023 Payvand]
-	//Pnt2d P1(Geo_Tools::DegToRadian(31.4), Geo_Tools::DegToRadian(121.8));
-	// distance: 5,422.97 km [7/27/2023 Payvand]
-	// avg. velocity: 14.8 kmph [7/27/2023 Payvand]
-	// Resolution: 14.8 [7/27/2023 Payvand]
-
-	//auto surface = earth->Surface();
-	/*std::cout << "u0: " << surface->FirstParameterU() << ", u1: " << surface->LastParameterU() << std::endl;
-	std::cout << "v0: " << surface->FirstParameterV() << ", v1: " << surface->LastParameterV() << std::endl;
-	std::cout << surface->Value({ 2.0,1.5708 });
-	return 1;*/
-	/*auto domain = surface->ParametricBoundingBox();
-	auto sizeFun = std::make_shared<GeoSizeFun2d_Uniform>(14.8, domain);
-	auto metricFun = std::make_shared<GeoMetricFun2d_ExactSurface>(surface->Geometry(), domain);
-
-	auto prcsr = std::make_shared<Geo2d_MetricPrcsrAnIso>(sizeFun, metricFun, myPrcsrInfo);*/
-
-	//auto path = std::make_shared<VoyageGeo_PathGeneration>();
-	//path->SetCoords({ P02, P01, P00, P0,P1 });
-	//path->SetCurveInfo(myMeshInfo);
-	//path->SetMetricPrsr(prcsr);
-	//path->SetSurface(surface);
-
-	//path->Perform();
-	//
-	//auto apprxCurveInfo = std::make_shared<Geo_ApprxCurve_Info>();
-	//for (const auto& x : path->Paths())
-	//{
-	//	auto mesh = Cad_PreviewTools::PreviewCurve(x->Geometry(), 100);
-	//	/*Geo3d_ApprxCurve alg(x->Geometry(), x->FirstParameter(), x->LastParameter(), apprxCurveInfo);
-	//	alg.Perform();
-	//	const auto& mesh = alg.Chain();*/
-	//	mesh->ExportToPlt(myFile);
-	//}
 	return 1;
 }

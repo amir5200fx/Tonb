@@ -130,14 +130,12 @@ namespace tnbLib
 			std::set<std::shared_ptr<SuperNode>, decltype(cmp)> compact(cmp);
 			for (const auto& x: theEdges)
 			{
-				std::cout << x->Node0()->Index() << ", " << x->Node1()->Index() << std::endl;
 				Debug_Null_Pointer(x);
 				Debug_Null_Pointer(x->Node0());
 				Debug_Null_Pointer(x->Node1());
 				compact.insert(x->Node0());
 				compact.insert(x->Node1());
 			}
-			PAUSE;
 			std::vector<std::shared_ptr<SuperNode>> arrivals;
 			for (const auto& node: compact)
 			{
@@ -162,7 +160,7 @@ namespace tnbLib
 			edges.reserve(theEdges.size());
 			for (const auto& [id, x] : theEdges)
 			{
-				edges.emplace_back(std::move(x));
+				edges.emplace_back(x);
 			}
 			auto nodes = RetrieveArrivalNodes(edges);
 			return std::move(nodes);
@@ -419,14 +417,20 @@ tnbLib::VoyageSim_MinFuel::SelectArrivalNode
 	return std::move(node);
 }
 
-std::vector<std::tuple<tnbLib::VoyageSim_MinFuel::Location, tnbLib::VoyageSim_MinFuel::Time, tnbLib::VoyageSim_MinFuel::
-                       Velocity>> tnbLib::VoyageSim_MinFuel::RetrievePath(const std::shared_ptr<VoyageSim_Graph::Node>& theNode) const
+std::vector
+<
+	std::tuple
+	<
+	tnbLib::VoyageSim_MinFuel::Location, 
+	tnbLib::VoyageSim_MinFuel::Time,
+	tnbLib::VoyageSim_MinFuel::Velocity
+	>
+> 
+	tnbLib::VoyageSim_MinFuel::RetrievePath
+	(
+		const std::shared_ptr<VoyageSim_Graph::Node>& theNode
+	) const
 {
-	std::cout << " injaaaaaa" << std::endl;
-	for (const auto& x: theTable_)
-	{
-		std::cout << " x: " << x.first << std::endl;
-	}
 	Debug_Null_Pointer(theNode);
 	std::vector<std::tuple<Location, Time, Velocity>> states;
 	auto current = theNode;
@@ -447,7 +451,6 @@ std::vector<std::tuple<tnbLib::VoyageSim_MinFuel::Location, tnbLib::VoyageSim_Mi
 		{
 			break;
 		}
-		std::cout << " prev = " << prev->Index() << std::endl;
 		states.push_back({ {current->Coord()},{current->Time()},{theDist_(prev->Coord(), current->Coord()) / (current->Time() - prev->Time())} });
 		current = prev;
 	}
@@ -508,7 +511,6 @@ void tnbLib::VoyageSim_MinFuel::Init()
 	for (const auto& x: Net()->Nodes())
 	{
 		x->Time() = static_cast<Standard_Real>(lev) * TimeStep() + BaseTime();
-		//std::cout << "time = " << x->Time() << std::endl;
 		lev++;
 	}
 	const auto& nodes = Net()->Nodes();
@@ -523,7 +525,6 @@ void tnbLib::VoyageSim_MinFuel::Init()
 		const auto& p1 = node1->Coord();
 		nodes.at(i)->Dist() = theDist_(p0, p1) + nodes.at(i - 1)->Dist();
 	}
-	//PAUSE;
 	IsInit_ = Standard_True;
 }
 
@@ -625,8 +626,7 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			}
 			const auto min_time = x->Dist() / vel_max + BaseTime(); // calculating the lower limit of timeline
 			const auto max_time = x->Dist() / vel_min + BaseTime(); // calculating the upper limit
-			//std::cout << "min tie = " << min_time << ", max time = " << max_time << std::endl;
-			//std::cout << "dist = " << x->Dist() << std::endl;
+
 			if (min_time IS_EQUAL max_time AND lev IS_EQUAL 0)
 			{// it's a starting point
 				timelines.insert({ x->Index(),{BaseTime()} });
@@ -685,8 +685,6 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			timelines.insert({ dpt->Index(),{} });
 		}
 	}
-	//std::exit(1);
-	//PAUSE;
 	/*
 	 * Calculating the timelines for each waypoint has been completed.
 	 */
@@ -716,11 +714,8 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 	auto& edges = graph->EdgesRef(); 
 	Standard_Integer nb_edges = 0;
 	const auto max_hour = ConvertDaysToHours(MaxDay());
-	//std::cout << "max hour = " << max_hour << std::endl;
-	//int kk = 0;
 	while (!pos_seeds.empty())
 	{
-		//std::cout << " pos size = " << pos_seeds.size() << std::endl;
 		auto current_pos = *pos_seeds.begin();
 		Debug_Null_Pointer(current_pos);
 		pos_seeds.erase(current_pos);  // remove the current node form the list
@@ -737,10 +732,8 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			const auto wp = std::dynamic_pointer_cast<VoyageWP_Net::WPNode>(current_pos);
 			Debug_Null_Pointer(wp);
 			Debug_Null_Pointer(wp->Reference().lock())
-				//std::cout << "wp time = " << wp->Reference().lock()->Time() << std::endl;
 			if (wp->Reference().lock()->Time() > max_hour)
 			{
-				//std::cout << "wp continue..." << std::endl;
 				continue; // go for the next node
 			}
 		}
@@ -766,42 +759,27 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			next_dist.push_back(dist);
 			pos_seeds.insert(next_pos);
 		}
-		//std::cout << "current nodes size: " << current_nodes.size() << std::endl;
 		for (const auto& current_node:current_nodes)
 		{
 			Debug_Null_Pointer(current_node);
-			//std::cout << "is dangle = " << is_dangle.at(current_node->Index()) << " id = " << current_node->Index() << std::endl;
 			if (is_dangle.at(current_node->Index()))
 			{
 				continue; // go to the next node
 			}
 			const auto time0 = current_node->Time();
-			//std::cout << " id = " << current_node->Index() << std::endl;
-			//std::cout << "current node time = " << time0 << std::endl;
 			Standard_Integer k = 0;
 			for (const auto& [id, next_pos] : next_poses)
 			{
-				//std::cout << "pos = " << id << std::endl;
 				auto dist = next_dist.at(k++);
 				const auto& next_timeline = timelines.at(id);
 				//for (const auto current_vel : velocities) // check if can reach the next node in reasonable time
 				const auto current_vel = LastItem(velocities);
 				{
-					//std::cout << "current vel = " << current_vel << std::endl;
 					const auto next_time = time0 + dist / current_vel;
-					/*std::cout << "next time = " << next_time << std::endl;
-					std::cout << std::endl;
-					for (auto tt : next_timeline)
-						std::cout << tt << ", ";
-					std::cout << std::endl;
-					std::cout << std::endl;*/
-					//std::exit(1);
 					if (/*InsideTimeLine(next_time, next_timeline)*/ next_time<LastItem(next_timeline))
 					{
 						for (const auto& next_node: nodes_map.at(id))
 						{
-							//std::cout << "next node: " << next_node->Index() << std::endl;
-							//std::cout << "next TIME = " << next_node->Time() << ",next time = " << next_time << std::endl;
 							if (next_node->Time() > next_time)
 							{
 								is_dangle.at(next_node->Index()) = Standard_False;
@@ -814,25 +792,16 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 								edges.insert({ edge->Index(), edge });
 							}
 						}
-						//break;
 					}
 				}
-				//std::cout << std::endl;
 			}
-			//PAUSE;
 		}
-		//PAUSE;
-		//std::exit(1);
-		//++kk;
-		//std::cout << std::endl;
-		//PAUSE;
-		//if(kk>550)
-		//{
-		//	break;
-			//std::exit(1);
-		//}
 	}
-	std::cout << "nb edges = " << nb_edges << std::endl;
+	if (verbose)
+	{
+		Info << endl
+			<< " - Nb. of paths have been created: " << nb_edges << endl;
+	}
 	//PAUSE;
 	//OFstream grid_3d_file("grid3d.plt");
 	//graph->ExportToPlt(grid_3d_file);
@@ -843,9 +812,9 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 		Info << " All of the paths have been created. " << endl
 			<< " - nb. of paths: " << paths.size() << endl;
 	}
-	//return;
 	std::set<std::shared_ptr<VoyageSim_Graph::Node>, decltype(cmp)> unvisited(cmp), visited(cmp);
 	std::shared_ptr<VoyageSim_Graph::Node> departure;
+	std::vector<std::shared_ptr<VoyageSim_Graph::Edge>> unvisited_edges;
 	// gathering all unvisited nodes
 	for (const auto& [id, edge] : paths)
 	{
@@ -868,21 +837,17 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 		}
 		unvisited.insert(edge->Node0());
 		unvisited.insert(edge->Node1());
+		unvisited_edges.emplace_back(edge);
 	}
-	for (const auto& x: unvisited)
-	{
-		std::cout << x->Index() << std::endl;
-	}
-	PAUSE;
 	// retrieve the arrival nodes
-	for (const auto& x: voyageLib::RetrieveArrivalNodes(paths))
+	for (const auto& x: voyageLib::RetrieveArrivalNodes(unvisited_edges))
 	{
 		Debug_Null_Pointer(x);
 		theArrivals_.insert({ x->Index(), x->Node() });
 	}
 	Debug_Null_Pointer(departure);
 	auto& table = theTable_;
-	for (const auto& x:unvisited)
+	for (const auto& x : unvisited)
 	{// initialize the table
 		Debug_Null_Pointer(x);
 		if (x IS_EQUAL departure)
@@ -908,10 +873,8 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 		{
 			Debug_Null_Pointer(current);
 			auto current_value = table.at(current->Index()).first;
-			//std::cout << "current = " << current->Index() << std::endl;
-			//std::exit(1);
 			const auto& nexts = current->Nexts();
-			//std::cout << " nexts = " << nexts.size() << std::endl;
+
 			for (const auto& [id, x] : nexts)
 			{
 				auto edge = x.lock();
@@ -953,7 +916,6 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			}
 			unvisited.erase(current);
 			visited.insert(current);
-			//std::cout << "unvisited: " << unvisited.size() << std::endl;
 			if (unvisited.empty())
 			{ // check if there's no unvisited node that has been left
 				break;
@@ -964,8 +926,6 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			for (const auto& x:unvisited)
 			{
 				auto val = table.at(x->Index()).first;
-				//std::cout << "unvisited = " << compact.at(x->Index()) << std::endl;
-				//if (unvisited.size() < 42) std::cout << "val = " << val << std::endl;
 				if ( val < smallest_val)
 				{
 					smallest_val = val;
@@ -973,7 +933,6 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 				}
 			}
 			current = next_lev;
-			//if (unvisited.size() < 42) PAUSE;
 		}
 	}
 	Change_IsDone() = Standard_True;
