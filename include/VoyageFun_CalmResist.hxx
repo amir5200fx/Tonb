@@ -24,8 +24,6 @@ namespace tnbLib
 
 		// Public functions and operators [7/11/2023 Payvand]
 
-		virtual Standard_Real Value(const Standard_Real theVel) const = 0;
-
 	};
 
 }

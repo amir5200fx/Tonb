@@ -26,6 +26,8 @@ namespace tnbLib
 		// Public functions and operators [7/10/2023 Payvand]
 
 		virtual Standard_Real Value(const Standard_Real theVelocity) const = 0;
+		virtual Standard_Real Lower() const = 0;
+		virtual Standard_Real Upper() const = 0;
 
 	};
 }
