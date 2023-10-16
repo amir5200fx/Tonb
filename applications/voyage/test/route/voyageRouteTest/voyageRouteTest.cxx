@@ -366,7 +366,7 @@ int main()
 	sim->SetNbLevels(2);
 	sim->SetNet(grid);
 	sim->SetBaseTime(0);
-	sim->SetMaxDay(7);
+	sim->SetMaxDay(3);
 	{
 		auto prcsr = 
 			Voyage_Tools::MakeMetricPrcsr
