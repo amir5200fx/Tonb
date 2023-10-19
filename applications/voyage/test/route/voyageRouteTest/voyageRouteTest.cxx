@@ -355,7 +355,7 @@ int main()
 	
 	auto cost_fun = 
 		std::make_shared<VoyageFun_CostFunction_Resistane>
-	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile, std::make_pair(min_vel, max_vel), std::make_pair(0,maxDay*24));
+	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile, std::make_pair(min_vel, max_vel), std::make_pair(0,(maxDay+0.5)*24));
 
 	
 	VoyageSim_MinFuel::verbose = 1;

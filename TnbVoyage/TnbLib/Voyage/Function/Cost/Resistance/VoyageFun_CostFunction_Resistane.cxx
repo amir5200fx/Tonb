@@ -78,11 +78,11 @@ tnbLib::VoyageFun_CostFunction_Resistane::Value
 {
 	if (NOT IsValidRange(theState0.time.value, theTimeRange_))
 	{
-		return RealLast();
+		return std::numeric_limits<float>::max();
 	}
 	if (NOT IsValidRange(theState1.time.value, theTimeRange_))
 	{
-		return RealLast();
+		return std::numeric_limits<float>::max();
 	}
 	const auto p0 = Voyage_Tools::ConvertToVoyageSystem(theState0.pos);
 	const auto p1 = Voyage_Tools::ConvertToVoyageSystem(theState1.pos);
@@ -96,7 +96,7 @@ tnbLib::VoyageFun_CostFunction_Resistane::Value
 			const auto tot_vel = std::abs(flow_vel) + ShipVel();
 			if (NOT INSIDE(tot_vel, theResist_->Lower(), theResist_->Upper()))
 			{
-				return RealLast();
+				return std::numeric_limits<float>::max();
 			}
 			return theResist_->Value(std::abs(flow_vel) + ShipVel()) * Distance();
 		}

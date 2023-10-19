@@ -839,10 +839,10 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 		Info << endl
 			<< " - Nb. of paths have been created: " << nb_edges << endl;
 	}
-	PAUSE;
+	/*PAUSE;
 	OFstream grid_3d_file("grid3d.plt");
 	graph->ExportToPlt(grid_3d_file);
-	std::exit(1);
+	std::exit(1);*/
 	const auto& paths = graph->Edges();
 	if (verbose)
 	{
