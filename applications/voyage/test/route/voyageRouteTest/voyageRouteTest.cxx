@@ -346,14 +346,18 @@ int main()
 			std::make_shared<VoyageFun_ProfiledCalmResist>
 		(std::make_shared<Voyage_Profile>(std::move(geo_profile)));
 	}
-	
-	auto cost_fun = 
-		std::make_shared<VoyageFun_CostFunction_Resistane>
-	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile);
 
 	double avg_vel = 18.52; // kmph
 	double min_vel = 0.5 * avg_vel;
 	double max_vel = 1.2 * avg_vel;
+
+	double maxDay = 3;
+	
+	auto cost_fun = 
+		std::make_shared<VoyageFun_CostFunction_Resistane>
+	([](const Pnt2d&, double)->std::pair<double, double> {return { 2.0,0.0 }; }, profile, std::make_pair(min_vel, max_vel), std::make_pair(0,maxDay*24));
+
+	
 	VoyageSim_MinFuel::verbose = 1;
 	auto sim = std::make_shared<VoyageSim_MinFuel>();
 
@@ -366,7 +370,7 @@ int main()
 	sim->SetNbLevels(2);
 	sim->SetNet(grid);
 	sim->SetBaseTime(0);
-	sim->SetMaxDay(3);
+	sim->SetMaxDay(maxDay);
 	{
 		auto prcsr = 
 			Voyage_Tools::MakeMetricPrcsr

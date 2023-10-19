@@ -21,6 +21,8 @@ namespace tnbLib
 			(const Pnt2d&, const Standard_Real)>
 			VelFun;
 
+		typedef std::pair<Standard_Real, Standard_Real> Range;
+
 	private:
 
 		/*Private Data*/
@@ -29,10 +31,15 @@ namespace tnbLib
 		Standard_Real theDist_;
 		Standard_Real theShipVel_;
 
+		std::pair<Standard_Real, Standard_Real> theTimeRange_;
+		std::pair<Standard_Real, Standard_Real> theVelRange_;
+
 		std::shared_ptr<VoyageFun_Resistance> theResist_;
 		VelFun theVelocity_;
 
 		// Private functions
+
+		static Standard_Boolean IsValidRange(const Standard_Real, const Range&);
 
 		TnbVoyage_EXPORT std::pair<Standard_Real, Standard_Real>
 			CalcAvgVelocity(const State& theState0, const State& theState1) const;
@@ -46,7 +53,9 @@ namespace tnbLib
 		TnbVoyage_EXPORT VoyageFun_CostFunction_Resistane
 		(
 			const VelFun& theVelFun, 
-			const std::shared_ptr<VoyageFun_Resistance>& theResistFun
+			const std::shared_ptr<VoyageFun_Resistance>& theResistFun,
+			const Range& theVelRange,
+			const Range& theTimeRange
 		);
 
 		// constructors

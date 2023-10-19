@@ -76,6 +76,14 @@ Standard_Real
 tnbLib::VoyageFun_CostFunction_Resistane::Value
 (const State& theState0, const State& theState1) const
 {
+	if (NOT IsValidRange(theState0.time.value, theTimeRange_))
+	{
+		return RealLast();
+	}
+	if (NOT IsValidRange(theState1.time.value, theTimeRange_))
+	{
+		return RealLast();
+	}
 	const auto p0 = Voyage_Tools::ConvertToVoyageSystem(theState0.pos);
 	const auto p1 = Voyage_Tools::ConvertToVoyageSystem(theState1.pos);
 	try
