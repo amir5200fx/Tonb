@@ -720,8 +720,6 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 			timelines.insert({ dpt->Index(),{} });
 		}
 	}
-	std::cout << "dis = " << end_pos->Dist() << std::endl;
-	PAUSE;
 	/*
 	 * Calculating the timelines for each waypoint has been completed.
 	 */
@@ -782,7 +780,6 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 				<< "Unspecified type of node has been detected." << endl
 				<< abort(FatalError);
 		}
-		std::cout << "current time = " << current_time << std::endl;
 		const auto& p0 = current_pos->Coord();
 		const auto& next_poses = current_pos->Nexts(); // retrieve the next nodes
 		const auto& current_nodes = nodes_map.at(current_pos->Index());
