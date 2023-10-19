@@ -4,6 +4,17 @@
 #include <TnbError.hxx>
 #include <OSstream.hxx>
 
+Standard_Boolean
+tnbLib::VoyageFun_CostFunction_Resistane::IsValidRange
+(
+	const Standard_Real theValue,
+	const Range& theRange
+)
+{
+	const auto [x0, x1] = theRange;
+	return INSIDE(theValue, x0, x1);
+}
+
 std::pair<Standard_Real, Standard_Real>
 tnbLib::VoyageFun_CostFunction_Resistane::CalcAvgVelocity
 (
@@ -48,18 +59,23 @@ tnbLib::VoyageFun_CostFunction_Resistane::ShipDirect(const Pnt2d& theP0, const P
 tnbLib::VoyageFun_CostFunction_Resistane::VoyageFun_CostFunction_Resistane
 (
 	const VelFun& theVelFun, 
-	const std::shared_ptr<VoyageFun_Resistance>& theResistFun
+	const std::shared_ptr<VoyageFun_Resistance>& theResistFun,
+	const Range& theVelRange,
+	const Range& theTimeRange
 )
-	: theVelocity_(theVelFun)
-	, theResist_(theResistFun)
-	, theNbSamples_(3)
+	: theNbSamples_(3)
 	, theDist_(0)
+	, theTimeRange_(theTimeRange)
+	, theVelRange_(theVelRange)
+	, theResist_(theResistFun)
+	, theVelocity_(theVelFun)
 {}
 
 Standard_Real
 tnbLib::VoyageFun_CostFunction_Resistane::Value
 (const State& theState0, const State& theState1) const
 {
+
 	const auto ship_dir = ShipDirect(theState0.pos, theState1.pos).Normalized();
 	auto [u, v] = CalcAvgVelocity(theState0, theState1);
 	const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
