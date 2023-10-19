@@ -95,7 +95,8 @@ namespace tnbLib
 			DiscreteTime
 			(
 				const std::pair<Standard_Real, Standard_Real>&,
-				const Standard_Real theDt
+				const Standard_Real theDt,
+				const Standard_Real theMaxTime
 			);
 
 		static TnbVoyage_EXPORT Standard_Boolean

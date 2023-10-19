@@ -41,6 +41,8 @@ namespace tnbLib
 		// Override the virtual and operator functions
 
 		TnbVoyage_EXPORT Standard_Real Value(const Standard_Real theVel) const override;
+		TnbVoyage_EXPORT Standard_Real Lower() const override;
+		TnbVoyage_EXPORT Standard_Real Upper() const override;
 
 		// Public functions and operators [7/11/2023 Payvand]
 

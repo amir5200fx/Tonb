@@ -1,5 +1,6 @@
 #include <VoyageFun_CostFunction_Resistane.hxx>
 
+#include <Voyage_Tools.hxx>
 #include <VoyageFun_Resistance.hxx>
 #include <TnbError.hxx>
 #include <OSstream.hxx>
@@ -24,18 +25,18 @@ tnbLib::VoyageFun_CostFunction_Resistane::CalcAvgVelocity
 {
 	const auto& p0 = theState0.pos;
 	const auto& p1 = theState1.pos;
-	auto t0 = theState0.time.value;
-	auto t1 = theState1.time.value;
+	const auto t0 = theState0.time.value;
+	const auto t1 = theState1.time.value;
 	const auto nbsegments = NbSamples();
 	const auto du = 1.0 / static_cast<Standard_Real>(nbsegments);
 	const auto dp2 = 0.5 * du * (p1 - p0);
 	const auto dt2 = 0.5 * du * (t1 - t0);
 	std::vector<Pnt2d> coords;
 	std::vector<Standard_Real> times;
-	for (Standard_Integer i = 0; i < nbsegments; i++)
+	for (Standard_Integer i = 1; i <= nbsegments; i++)
 	{
-		auto p = p0 + i * du - dp2;
-		auto t = t0 + i * du - dt2;
+		auto p = p0 + i * du * (p1 - p0) - dp2;
+		auto t = t0 + i * du * (t1 - t0) - dt2;
 		times.emplace_back(t);
 		coords.emplace_back(std::move(p));
 	}
@@ -75,16 +76,29 @@ Standard_Real
 tnbLib::VoyageFun_CostFunction_Resistane::Value
 (const State& theState0, const State& theState1) const
 {
-
-	const auto ship_dir = ShipDirect(theState0.pos, theState1.pos).Normalized();
-	auto [u, v] = CalcAvgVelocity(theState0, theState1);
-	const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
-	if (flow_vel < 0)
+	const auto p0 = Voyage_Tools::ConvertToVoyageSystem(theState0.pos);
+	const auto p1 = Voyage_Tools::ConvertToVoyageSystem(theState1.pos);
+	try
 	{
-		return theResist_->Value(std::abs(flow_vel) + ShipVel());
+		const auto ship_dir = ShipDirect(p0, p1).Normalized();
+		auto [u, v] = CalcAvgVelocity(theState0, theState1);
+		const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
+		if (flow_vel < 0)
+		{// if the ocean flow is against the velocity vector of the ship
+			const auto tot_vel = std::abs(flow_vel) + ShipVel();
+			if (NOT INSIDE(tot_vel, theResist_->Lower(), theResist_->Upper()))
+			{
+				return RealLast();
+			}
+			return theResist_->Value(std::abs(flow_vel) + ShipVel()) * Distance();
+		}
+		return theResist_->Value(ShipVel()) * Distance();
 	}
-	else
+	catch (...)
 	{
-		return theResist_->Value(ShipVel());
+		FatalErrorIn(FunctionSIG) << endl
+			<< "Unable to calculate the work of the ship in the path." << endl
+			<< abort(FatalError);
 	}
+	return 0;
 }

@@ -21,3 +21,17 @@ tnbLib::VoyageFun_ProfiledCalmResist::Value(const Standard_Real theVel) const
 	}
 	return theProfile_->Value(theVel);
 }
+
+Standard_Real 
+tnbLib::VoyageFun_ProfiledCalmResist::Lower() const
+{
+	Debug_Null_Pointer(theProfile_);
+	return theProfile_->X0();
+}
+
+Standard_Real 
+tnbLib::VoyageFun_ProfiledCalmResist::Upper() const
+{
+	Debug_Null_Pointer(theProfile_);
+	return theProfile_->X1();
+}

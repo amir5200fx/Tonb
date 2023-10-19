@@ -32,6 +32,9 @@ namespace tnbLib
 			Pnt2d theCoord_;
 			Standard_Boolean theSense_;
 
+			mutable Standard_Real theMinTime_;
+			mutable Standard_Real theMaxTime_;
+
 			std::map<Standard_Integer, std::shared_ptr<Node>> theNexts_;
 		
 
@@ -41,6 +44,8 @@ namespace tnbLib
 
 			Node()
 				: theSense_(Standard_False)
+				, theMinTime_(0)
+				, theMaxTime_(0)
 			{}
 
 			//- constructors
@@ -49,12 +54,16 @@ namespace tnbLib
 				: Global_Indexed(theIndex)
 				, theCoord_(theCoord)
 				, theSense_(Standard_False)
+				, theMinTime_(0)
+				, theMaxTime_(0)
 			{}
 
 			Node(const Standard_Integer theIndex, Pnt2d&& theCoord)
 				: Global_Indexed(theIndex)
 				, theCoord_(std::move(theCoord))
 				, theSense_(Standard_False)
+				, theMinTime_(0)
+				, theMaxTime_(0)
 			{}
 
 		public:
@@ -62,6 +71,9 @@ namespace tnbLib
 			//- Public functions and operators
 
 			[[nodiscard]] const auto& Coord() const { return theCoord_; }
+
+			auto& MinTime() const { return theMinTime_; }
+			auto& MaxTime() const { return theMaxTime_; }
 
 			[[nodiscard]] virtual Standard_Boolean IsReference() const { return Standard_False; }
 			[[nodiscard]] virtual Standard_Boolean IsWP() const { return Standard_False; }
