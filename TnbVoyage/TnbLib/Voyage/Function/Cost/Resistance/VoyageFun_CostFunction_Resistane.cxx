@@ -106,6 +106,10 @@ tnbLib::VoyageFun_CostFunction_Resistane::Value
 		}
 		return theResist_->Value(ShipVel()) * Distance();
 	}
+	catch (const std::exception& ex)
+	{
+		throw ex;
+	}
 	catch (...)
 	{
 		FatalErrorIn(FunctionSIG) << endl
