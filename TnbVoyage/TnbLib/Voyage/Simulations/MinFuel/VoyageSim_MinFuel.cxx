@@ -458,6 +458,7 @@ std::vector
 		const auto prev = theTable_.at(current->Index()).second.lock();
 		if (NOT prev)
 		{
+			states.push_back({ {current->Coord()},{current->Time()},{0} });
 			break;
 		}
 		states.push_back({ {current->Coord()},{current->Time()},{theDist_(prev->Coord(), current->Coord()) / (current->Time() - prev->Time())} });
