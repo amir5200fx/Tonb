@@ -65,9 +65,18 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 	std::vector<std::shared_ptr<VoyageMesh_Edge>> starboard, port;
 	{// the port regions [9/3/2023 Payvand]
 		Standard_Integer region_nb = 0;
+		std::vector<std::shared_ptr<Entity2d_Polygon>> polygons;
 		for (const auto& x : thePolygons)
 		{
+			auto poly = *x;
+			polygons.emplace_back(std::make_shared<Entity2d_Polygon>(std::move(poly)));
+		}
+		//auto polygons = thePolygons;
+		std::reverse(polygons.begin(), polygons.end());
+		for (const auto& x : polygons)
+		{
 			Debug_Null_Pointer(x);
+			x->Reverse();
 			auto edges = RetrieveEdges(*x);
 			region_nb++;
 			for (const auto& e : edges)
@@ -84,12 +93,10 @@ tnbLib::Voyage_Waypoints::RetrieveEdges
 	}
 	{// the starboard regions [9/3/2023 Payvand]
 		Standard_Integer region_nb = 0;
-		auto polygons = thePolygons;
-		std::reverse(polygons.begin(), polygons.end());
-		for (const auto& x : polygons)
+		
+		for (const auto& x : thePolygons)
 		{
 			Debug_Null_Pointer(x);
-			x->Reverse();
 			auto edges = RetrieveEdges(*x);
 			region_nb++;
 			for (const auto& e : edges)
