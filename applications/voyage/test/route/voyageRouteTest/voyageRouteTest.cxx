@@ -413,7 +413,7 @@ int main()
 
 	std::cout << " path size = " << best_path.size() << std::endl;
 
-	for (const auto& [loc, time, vel] : best_path)
+	for (const auto& [loc, time, vel, power] : best_path)
 	{
 		std::cout << " - coord: (" << loc.value << ")"
 			<< ", time: " << time.value
