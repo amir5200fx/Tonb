@@ -110,6 +110,8 @@ tnbLib::VoyageFun_CostFunction_Resistane::Value
 	{
 		FatalErrorIn(FunctionSIG) << endl
 			<< "Unable to calculate the work of the ship in the path." << endl
+			<< " P0= " << p0 << endl
+			<< " P1= " << p1 << endl
 			<< abort(FatalError);
 	}
 	return 0;
