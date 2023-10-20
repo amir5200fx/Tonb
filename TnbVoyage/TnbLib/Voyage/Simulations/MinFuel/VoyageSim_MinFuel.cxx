@@ -372,6 +372,80 @@ std::shared_ptr<tnbLib::VoyageSim_Graph::Node> tnbLib::VoyageSim_MinFuel::Select
 	return std::move(node);
 }
 
+std::shared_ptr<tnbLib::VoyageSim_Graph::Node> tnbLib::VoyageSim_MinFuel::SelectArrivalNodeMinPower(
+	const Pnt2d& arrival) const
+{
+	const auto nodes = SelectArrivalNodes(arrival);
+
+	double minPower = std::numeric_limits<double>::max();
+	std::shared_ptr<tnbLib::VoyageSim_Graph::Node> resultNode;
+
+	int i = -1;
+	for (const auto& node : nodes)
+	{
+		const auto pathes = RetrievePath(node);
+		if (!pathes.empty() && pathes.size() > 1)
+		{
+			double power = 0.0;
+			for ( auto [l, t, v, p] : pathes)
+				power += p.value;
+
+			if (power < minPower)
+			{
+				minPower = power;
+				resultNode = node;
+			}
+		}
+	}
+
+	return resultNode;
+}
+
+std::shared_ptr<tnbLib::VoyageSim_Graph::Node> tnbLib::VoyageSim_MinFuel::SelectArrivalNodeMinTime(
+	const Pnt2d& arrival) const
+{
+	const auto nodes = SelectArrivalNodes(arrival);
+
+	double minTime = std::numeric_limits<double>::max();
+	std::shared_ptr<tnbLib::VoyageSim_Graph::Node> resultNode;
+
+	int i = -1;
+	for (const auto& node : nodes)
+	{
+		const auto pathes = RetrievePath(node);
+		if (!pathes.empty() && pathes.size() > 1)
+		{
+			double time = 0.0;
+			for (auto [l, t, v, p] : pathes)
+				time += p.value;
+
+			if (time < minTime)
+			{
+				minTime = time;
+				resultNode = node;
+			}
+		}
+	}
+
+	return resultNode;
+}
+
+std::vector<std::shared_ptr<tnbLib::VoyageSim_Graph::Node>> tnbLib::VoyageSim_MinFuel::SelectArrivalNodes(
+	const Pnt2d& arrival) const
+{
+	std::vector<std::shared_ptr<tnbLib::VoyageSim_Graph::Node>> result;
+
+	for (const auto& [id, x] : ArrivalNodes())
+	{
+		if ((x->Coord().X() == arrival.Coord().X()) && (x->Coord().Y() == arrival.Coord().Y()))
+		{
+			result.push_back(x);
+		}
+	}
+
+	return result;
+}
+
 std::vector<std::shared_ptr<tnbLib::VoyageSim_Graph::Node>>
 tnbLib::VoyageSim_MinFuel::ArrivalNodeList() const
 {
@@ -449,7 +523,8 @@ std::vector
 	<
 	tnbLib::VoyageSim_MinFuel::Location, 
 	tnbLib::VoyageSim_MinFuel::Time,
-	tnbLib::VoyageSim_MinFuel::Velocity
+	tnbLib::VoyageSim_MinFuel::Velocity,
+	tnbLib::VoyageSim_MinFuel::Power
 	>
 > 
 	tnbLib::VoyageSim_MinFuel::RetrievePath
@@ -458,7 +533,7 @@ std::vector
 	) const
 {
 	Debug_Null_Pointer(theNode);
-	std::vector<std::tuple<Location, Time, Velocity>> states;
+	std::vector<std::tuple<Location, Time, Velocity, Power>> states;
 	auto current = theNode;
 	while (true)
 	{
@@ -472,13 +547,22 @@ std::vector
 					<< abort(FatalError);
 			}
 		}
-		const auto prev = theTable_.at(current->Index()).second.lock();
+
+		const auto tableData = theTable_.at(current->Index());
+		const auto prev = tableData.second.lock();
 		if (NOT prev)
 		{
-			states.push_back({ {current->Coord()},{current->Time()},{0} });
+			states.push_back({ {current->Coord()},{current->Time()},{0}, {0} });
 			break;
 		}
-		states.push_back({ {current->Coord()},{current->Time()},{theDist_(prev->Coord(), current->Coord()) / (current->Time() - prev->Time())} });
+		const auto cost = tableData.first;
+		const auto deltaT = current->Time() - prev->Time();
+		const auto deltaX = theDist_(prev->Coord(), current->Coord());
+		const auto vel = deltaX / (deltaT);
+		const auto thrust = cost / (deltaX);
+		const auto power = thrust * vel / 3.6;
+
+		states.push_back({ {current->Coord()},{current->Time()},{vel}, {cost} });
 		current = prev;
 	}
 	return std::move(states);
