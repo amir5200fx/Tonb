@@ -287,6 +287,9 @@ int main()
 		alg->Perform();
 	}
 
+	OFstream refPathFile("ref.plt");
+	offsets->ExportToPlt(refPathFile);
+
 	OFstream gridFile("grid.plt");
 	
 	grid->ExportToPlt(gridFile);

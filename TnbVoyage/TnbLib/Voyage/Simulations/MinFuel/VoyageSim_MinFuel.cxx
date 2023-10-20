@@ -924,12 +924,13 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 	}
 	{
 		auto current = departure;
+		Debug_Null_Pointer(current);
+		table.at(current->Index()).first = 0;
 		while (true)
 		{
 			Debug_Null_Pointer(current);
 			auto current_value = table.at(current->Index()).first;
 			const auto& nexts = current->Nexts();
-
 			for (const auto& [id, x] : nexts)
 			{
 				auto edge = x.lock();
@@ -955,17 +956,10 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 							<< " - the id: " << next->Index() << endl
 							<< abort(FatalError);
 					}
-					if (NOT prev_node)
+					auto tot_resist = current_value + resist;
+					if (tot_resist < val)
 					{
-						table.at(next->Index()) = { resist,current };
-					}
-					else
-					{
-						auto tot_resist = current_value + resist;
-						if (tot_resist < val)
-						{
-							table.at(next->Index()) = { tot_resist,current };
-						}
+						table.at(next->Index()) = { tot_resist,current };
 					}
 				}
 			}
