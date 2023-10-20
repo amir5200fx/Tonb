@@ -149,6 +149,7 @@ namespace tnbLib
 		TnbVoyage_EXPORT Standard_Real MaxTimeArrival() const;
 		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> FastestTimeArrivalNode() const;
 		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SlowestTimeArrivalNode() const;
+		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> LowestCostNode() const;
 		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SelectArrivalNode(const Standard_Real theETA) const;
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageSim_Graph::Node>> ArrivalNodeList() const;
 

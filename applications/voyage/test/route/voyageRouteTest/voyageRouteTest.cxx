@@ -405,7 +405,8 @@ int main()
 		sim->Perform(grid->Departure()->Index());
 	}
 
-	auto best_path = sim->RetrievePath(sim->SelectArrivalNode(MEAN(sim->MinTimeArrival(), sim->MaxTimeArrival())));
+	//auto best_path = sim->RetrievePath(sim->SelectArrivalNode(MEAN(sim->MinTimeArrival(), sim->MaxTimeArrival())));
+	auto best_path = sim->RetrievePath(sim->LowestCostNode());
 
 	std::cout << " path size = " << best_path.size() << std::endl;
 

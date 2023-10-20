@@ -347,6 +347,23 @@ tnbLib::VoyageSim_MinFuel::SlowestTimeArrivalNode() const
 	return std::move(node);
 }
 
+std::shared_ptr<tnbLib::VoyageSim_Graph::Node>
+tnbLib::VoyageSim_MinFuel::LowestCostNode() const
+{
+	Standard_Real lowest = RealLast();
+	std::shared_ptr<tnbLib::VoyageSim_Graph::Node> node;
+	for (const auto& [id, x] : ArrivalNodes())
+	{
+		Debug_Null_Pointer(x);
+		if (theTable_.at(x->Index()).first < lowest)
+		{
+			lowest = theTable_.at(x->Index()).first;
+			node = x;
+		}
+	}
+	return std::move(node);
+}
+
 std::shared_ptr<tnbLib::VoyageSim_Graph::Node> tnbLib::VoyageSim_MinFuel::SelectArrivalNode(
 	const Standard_Real theETA) const
 {
