@@ -90,6 +90,10 @@ tnbLib::VoyageFun_CostFunction_Resistane::Value
 	{
 		const auto ship_dir = ShipDirect(p0, p1).Normalized();
 		auto [u, v] = CalcAvgVelocity(theState0, theState1);
+		if (std::sqrt(u*u + v*v) <= 10E-12)
+		{
+			return theResist_->Value(ShipVel()) * Distance();
+		}
 		const auto flow_vel = Vec2d(u, v).Dot(ship_dir);
 		if (flow_vel < 0)
 		{// if the ocean flow is against the velocity vector of the ship
