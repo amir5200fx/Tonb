@@ -40,6 +40,11 @@ namespace tnbLib
 		{
 			Standard_Real value;
 		};
+		
+		struct Power
+		{
+			Standard_Real value;
+		};
 
 		struct Location
 		{
@@ -151,11 +156,14 @@ namespace tnbLib
 		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SlowestTimeArrivalNode() const;
 		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> LowestCostNode() const;
 		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SelectArrivalNode(const Standard_Real theETA) const;
+		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SelectArrivalNodeMinPower(const Pnt2d& arrival) const;
+		TnbVoyage_EXPORT std::shared_ptr<VoyageSim_Graph::Node> SelectArrivalNodeMinTime(const Pnt2d& arrival) const;
+		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageSim_Graph::Node>> SelectArrivalNodes(const Pnt2d& arrival) const;
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageSim_Graph::Node>> ArrivalNodeList() const;
 
 		const auto& ArrivalNodes() const { return theArrivals_; }
 
-		TnbVoyage_EXPORT std::vector<std::tuple<Location, Time, Velocity>> RetrievePath(const std::shared_ptr<VoyageSim_Graph::Node>&) const;
+		TnbVoyage_EXPORT std::vector<std::tuple<Location, Time, Velocity, Power>> RetrievePath(const std::shared_ptr<VoyageSim_Graph::Node>&) const;
 
 		TnbVoyage_EXPORT void Init();
 		TnbVoyage_EXPORT void Perform(const Standard_Integer theStart /*the starting point of the optimization*/);
