@@ -342,22 +342,22 @@ void tnbLib::Voyage_RepairNet::Perform()
 		/* =====================
 		 * Renumbering the nodes
 		 */
-		std::map<Standard_Integer, Standard_Integer> oldId_to_newId;
+		//std::map<Standard_Integer, Standard_Integer> oldId_to_newId;
 		{ // saving the old numbering
-			auto allNodes = Net()->RetrieveNodes();
+			/*auto allNodes = Net()->RetrieveNodes();
 			Standard_Integer nb_nodes = 0;
 			for (const auto& x : allNodes)
 			{
 				oldId_to_newId.insert({ x->Index(), ++nb_nodes });
-			}
+			}*/
 		}
 		{// renumbering
-			/*const auto nodes = Net()->RetrieveNodes();
+			const auto nodes = Net()->RetrieveNodes();
 			Standard_Integer nb_nodes = 0;
 			for (const auto& x : nodes)
 			{
 				x->SetIndex(++nb_nodes);
-			}*/
+			}
 		}
 		/*
 		 * End of renumbering
