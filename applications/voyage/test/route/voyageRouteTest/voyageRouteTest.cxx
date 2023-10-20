@@ -283,8 +283,8 @@ int main()
 	}
 
 	{// repair the grid
-		//auto alg = std::make_shared<Voyage_RepairNet>(grid);
-		//alg->Perform();
+		auto alg = std::make_shared<Voyage_RepairNet>(grid);
+		alg->Perform();
 	}
 
 	OFstream gridFile("grid.plt");

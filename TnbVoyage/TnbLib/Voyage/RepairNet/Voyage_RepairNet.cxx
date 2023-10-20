@@ -41,6 +41,7 @@ namespace tnbLib
 				Standard_Integer NbForwardEdges() const;
 				Standard_Integer NbBackwardEdges() const;
 
+				// There's no way to reach any forward node
 				Standard_Boolean IsDeadend() const;
 				Standard_Boolean IsReference() const;
 
@@ -134,13 +135,11 @@ namespace tnbLib
 
 			Standard_Boolean Node::ShouldRemove() const
 			{
-				if (theWp_->IsReference()) return Standard_False;
-				else
+				if (theWp_->IsReference()) 
+					return Standard_False; // Cannot remove a reference node
+				if (IsDeadend() OR NOT NbBackwardEdges())
 				{
-					if (IsDeadend() OR NOT NbBackwardEdges())
-					{
-						return Standard_True;
-					}
+					return Standard_True;
 				}
 				return Standard_False;
 			}
@@ -188,21 +187,26 @@ void tnbLib::Voyage_RepairNet::Perform()
 			<< abort(FatalError);
 	}
 	const auto origins = Net()->RetrieveNodes();
+	/*
+	 * ========================
+	 * Building up the Topology
+	 */
+	// creating the repair's node map
 	std::map<Standard_Integer, std::shared_ptr<voyageLib::repair::Node>> nodesMap;
 	for (const auto& x: origins)
 	{
 		nodesMap.insert
 		({ x->Index(), std::make_shared<voyageLib::repair::Node>(x->Index(), x) });
 	}
-	// building up the topology
 	std::map<Standard_Integer, std::shared_ptr<voyageLib::repair::Edge>> edgesMap;
 	Standard_Integer nb_edges = 0;
 	for (const auto& x: Net()->Nodes())
-	{
-		auto nodes = x->RetrieveNodes();
+	{ // for each ref. node
+		auto nodes = x->RetrieveNodes(); // retrieve all the nodes in the current state.
 		for (const auto& current: nodes)
 		{
 			Debug_Null_Pointer(current);
+			// retrieve all the forward nodes
 			const auto& nexts = current->Nexts();
 			for (const auto& [next_id, next] : nexts)
 			{
@@ -213,22 +217,33 @@ void tnbLib::Voyage_RepairNet::Perform()
 					++nb_edges, 
 					nodesMap.at(current->Index()),
 					nodesMap.at(next->Index())
-					);
+					); // create an edge
+				// import the edge for the two end point of the edge
 				nodesMap.at(edge->Node0()->Index())->ImportEdge(edge->Index(), edge);
 				nodesMap.at(edge->Node1()->Index())->ImportEdge(edge->Index(), edge);
-				edgesMap.insert({ edge->Index(), std::move(edge) });
+				edgesMap.insert({ edge->Index(), std::move(edge) }); // insert the edge to the edgeMap
 			}
 		}
 	}
+	/*
+	 * End of the Building up the Topology
+	 * ===================================
+	 */
+	/*
+	 * =========================================================
+	 * Start removing the nodes and edges which are unnecessary.
+	 */
 	Standard_Integer nb_cycles = 0;
 	while (true)
 	{
 		std::vector<std::shared_ptr<voyageLib::repair::Node>> removed_nodes;
+		// traverse through all of the nodes in the mesh
 		for (const auto& [current_id, current] : nodesMap)
 		{
 			Debug_Null_Pointer(current);
-			if (current->ShouldRemove())
+			if (current->ShouldRemove()) // checking to remove the node
 			{
+				// retrieve all the edges around the node
 				std::vector<Standard_Integer> removed_edges;
 				for (const auto& [edge_id, w_edge]: current->Edges())
 				{
@@ -247,14 +262,18 @@ void tnbLib::Voyage_RepairNet::Perform()
 							<< " - index: " << edge_id << endl
 							<< abort(FatalError);
 					}
-					auto edge = edgesMap.at(edge_id);
+					auto edge = iter->second;
+					// remove the edge from the its two end nodes
 					edge->Node0()->RemoveEdge(edge_id);
 					edge->Node1()->RemoveEdge(edge_id);
+					// remove the edge from the map
 					edgesMap.erase(iter);
 				}
-				removed_nodes.emplace_back(current);
+				// register the already removed node into the removed_nodes list
+				removed_nodes.emplace_back(current); 
 			}
 		}
+		// remove all the nodes in the removed_nodes list
 		for (const auto& node:removed_nodes)
 		{
 			Debug_Null_Pointer(node);
@@ -270,22 +289,29 @@ void tnbLib::Voyage_RepairNet::Perform()
 		}
 		if (!removed_nodes.empty())
 		{
-			++nb_cycles;
+			++nb_cycles; // counting removing cycles
 		}
 		if (removed_nodes.empty())
 		{
-			break;
+			break; // get out from the cycle!
 		}
 	}
+	/*
+	 * End of the removing the nodes and edges which are unnecessary.
+	 * ==============================================================
+	 */
 	if (nb_cycles)
-	{
-		Net()->FlushConnects(); // remove the connets
-		// remove the non-feasible nodes
+	{ // if there is any node that has been removed from the mesh
+		Net()->FlushConnects(); // remove the connects
+		/*
+		 * =============================
+		 * Remove the non-feasible nodes
+		 */
 		for (const auto& ref: Net()->Nodes())
 		{
 			if (const auto interior = std::dynamic_pointer_cast<VoyageWP_Net::InterNode>(ref))
-			{
-				{// checking starboard side
+			{ // Check if the node is an interior; forbidden to remove a reference node
+				{// checking the starboard side
 					const auto wps = interior->RetrieveStarSides();
 					for (const auto& wp: wps)
 					{
@@ -296,7 +322,7 @@ void tnbLib::Voyage_RepairNet::Perform()
 						}
 					}
 				}
-				{
+				{// checking the port side
 					const auto wps = interior->RetrievePortSides();
 					for (const auto& wp : wps)
 					{
@@ -309,6 +335,38 @@ void tnbLib::Voyage_RepairNet::Perform()
 				}
 			}
 		}
+		/*
+		 * The nodes have been removed
+		 * ============================
+		 */
+		/* =====================
+		 * Renumbering the nodes
+		 */
+		std::map<Standard_Integer, Standard_Integer> oldId_to_newId;
+		{ // saving the old numbering
+			auto allNodes = Net()->RetrieveNodes();
+			Standard_Integer nb_nodes = 0;
+			for (const auto& x : allNodes)
+			{
+				oldId_to_newId.insert({ x->Index(), ++nb_nodes });
+			}
+		}
+		{// renumbering
+			/*const auto nodes = Net()->RetrieveNodes();
+			Standard_Integer nb_nodes = 0;
+			for (const auto& x : nodes)
+			{
+				x->SetIndex(++nb_nodes);
+			}*/
+		}
+		/*
+		 * End of renumbering
+		 * ==================
+		 */
+		/*
+		 * =========================
+		 * Reconnect the nodes again
+		 */
 		for (const auto& [id, x] : edgesMap)
 		{
 			Debug_Null_Pointer(x);
@@ -322,14 +380,10 @@ void tnbLib::Voyage_RepairNet::Perform()
 			Debug_Null_Pointer(wp1);
 			wp0->InsertNode(wp1->Index(), wp1);
 		}
-		{// renumbering
-			const auto nodes = Net()->RetrieveNodes();
-			Standard_Integer nb_nodes = 0;
-			for (const auto& x: nodes)
-			{
-				x->SetIndex(++nb_nodes);
-			}
-		}
+		/*
+		 * End of the reconnection
+		 * =======================
+		 */
 	}
 	Change_IsDone() = Standard_True;
 }
