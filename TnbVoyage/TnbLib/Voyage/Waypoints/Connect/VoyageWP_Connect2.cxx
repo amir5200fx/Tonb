@@ -88,11 +88,8 @@ void tnbLib::VoyageWP_Connect2::Perform()
 					Debug_Null_Pointer(next);
 					if (next->IsReference())
 					{
-						if (theStateFun_(ref->Coord(), next->Coord()))
-						{
-							ref->InsertNode(next->Index(), next);
-							next->SetSense(Standard_True);
-						}
+						ref->InsertNode(next->Index(), next);
+						next->SetSense(Standard_True);
 					}
 					else if (theStateFun_(ref->Coord(), next->Coord()))
 					{
@@ -159,11 +156,8 @@ void tnbLib::VoyageWP_Connect2::Perform()
 					Debug_Null_Pointer(next);
 					if (next->IsReference())
 					{
-						if (theStateFun_(ref->Coord(), next->Coord()))
-						{
-							ref->InsertNode(next->Index(), next);
-							next->SetSense(Standard_True);
-						}
+						ref->InsertNode(next->Index(), next);
+						next->SetSense(Standard_True);
 					}
 					else if (theStateFun_(ref->Coord(), next->Coord()))
 					{
