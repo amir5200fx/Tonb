@@ -293,7 +293,7 @@ int main()
 	OFstream gridFile("grid.plt");
 	
 	grid->ExportToPlt(gridFile);
-
+	//std::exit(1);
 	std::cout << std::endl;
 	std::cout << " # Simulating the Fuel consumption..." << std::endl;
 	
