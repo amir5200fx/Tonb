@@ -142,7 +142,7 @@ void tnbLib::Voyage_Tools::SetInverseSourcesToMesh
 			<< abort(FatalError);
 	}
 
-	auto meshNodes = MeshBase_Tools::RetrieveNodes(mesh.Elements());
+	const auto meshNodes = MeshBase_Tools::RetrieveNodes(mesh.Elements());
 	auto& sources = theMesh.Sources();
 	sources.resize(meshNodes.size());
 	for (auto& x:sources)
@@ -165,18 +165,18 @@ void tnbLib::Voyage_Tools::SetInverseSourcesToMesh
 
 		auto [n0, n1, n2] = current->Nodes();
 		{
-			auto id = Index_Of(n0->Index());
-			auto ho = sources.at(id);
+			const auto id = Index_Of(n0->Index());
+			const auto ho = sources.at(id);
 			if (x->H() < ho) sources.at(id) = x->H();
 		}
 		{
-			auto id = Index_Of(n1->Index());
-			auto ho = sources.at(id);
+			const auto id = Index_Of(n1->Index());
+			const auto ho = sources.at(id);
 			if (x->H() < ho) sources.at(id) = x->H();
 		}
 		{
-			auto id = Index_Of(n2->Index());
-			auto ho = sources.at(id);
+			const auto id = Index_Of(n2->Index());
+			const auto ho = sources.at(id);
 			if (x->H() < ho) sources.at(id) = x->H();
 		}
 	}

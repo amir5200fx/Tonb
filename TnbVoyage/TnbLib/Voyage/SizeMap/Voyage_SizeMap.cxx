@@ -41,6 +41,10 @@ void tnbLib::Voyage_SizeMap::Perform()
 			<< "No earth has been assigned to the path." << endl
 			<< abort(FatalError);
 	}
+	/*
+	 * =============================
+	 * Creating the Metric Processor
+	 */
 	const auto& earth = path->Earth();
 	auto metricsFun = earth->GetMetrics();
 	auto uniSizeMap = 
@@ -52,6 +56,14 @@ void tnbLib::Voyage_SizeMap::Perform()
 	auto metrics = 
 		std::make_shared<Geo2d_MetricPrcsrAnIso>
 		(uniSizeMap, metricsFun, metricPrcsrInfo);
+	/*
+	 * The Metric Processor has been created.
+	 * =====================================
+	 */
+	/*
+	 * ===========================
+	 * Creating the Base Size Map.
+	 */
 	std::shared_ptr<std::vector<std::vector<Standard_Real>>> bHs;
 	{// Create the base size map [8/28/2023 aamir]
 		if (verbose)
@@ -60,7 +72,7 @@ void tnbLib::Voyage_SizeMap::Perform()
 				<< " - Calculating the base sizes..." << endl;
 		}
 		auto algInfo = std::make_shared<VoyageMesh_BaseSizeInfo>();
-		auto alg = 
+		const auto alg = 
 			std::make_shared<VoyageMesh_BaseSize>
 		(path->RetrieveOffsets(), metrics, algInfo);
 		Debug_Null_Pointer(alg);
@@ -76,16 +88,21 @@ void tnbLib::Voyage_SizeMap::Perform()
 	}
 	/*
 	 * The base sizes are computed. Now, creating the main size map:
+	 * =============================================================
+	 */
+	/*
+	 * =====================================
+	 * Creating the Uncorrected Size function
 	 */
 	std::shared_ptr<GeoMesh2d_Background> unCorrSizeMap;
-	const auto baseSize = 1.0E-4; // I defined a really small size for the base.
+	constexpr auto baseSize = 1.0E-4; // I defined a really small size for the base.
 	{// Calculate the uncorrected size map [8/28/2023 aamir]
 		if (verbose)
 		{
 			Info << endl
 				<< " - Creating the base size map..." << endl;
 		}
-		auto alg = std::make_shared<VoyageMesh_SizeMap>();
+		const auto alg = std::make_shared<VoyageMesh_SizeMap>();
 		Debug_Null_Pointer(alg);
 		alg->SetBaseSize(baseSize);
 		alg->SetHs(bHs);
@@ -94,21 +111,23 @@ void tnbLib::Voyage_SizeMap::Perform()
 		alg->Perform();
 		Debug_If_Condition_Message(NOT alg->IsDone(), "the application is not performed.");
 		unCorrSizeMap = alg->BackMesh();
-		/*OFstream myFile("sizeMap.plt");
-		unCorrSizeMap->ExportToPlt(myFile);*/
+		//OFstream myFile("sizeMap.plt");
+		//unCorrSizeMap->ExportToPlt(myFile);
 		if (verbose)
 		{
 			Info << endl;
 			Info << " The base size map is successfully computed." << endl;
 		}
 	}
-	auto unCorrSizeFun =
+	const auto unCorrSizeFun =
 		std::make_shared<GeoSizeFun2d_Background>
 		(uniSizeMap->BoundingBox(), unCorrSizeMap);
 	/*
 	 * The Main size map is created.
+	 * =============================
 	 */
 	/*
+	 * ===========================================================================
 	 * Now, we need two correcting size functions: one for starboard side and
 	 * the other of the port side.
 	 *
@@ -129,7 +148,7 @@ void tnbLib::Voyage_SizeMap::Perform()
 			Info << endl
 				<< " - Creating a correction size map for starboard region." << endl;
 		}
-		auto alg = std::make_shared<VoyageMesh_CorrectSizeMap>();
+		const auto alg = std::make_shared<VoyageMesh_CorrectSizeMap>();
 		Debug_Null_Pointer(alg);
 		alg->SetBaseSize(1.0 / baseSize); // I use the inverse value for the base size
 		alg->SetPath(path);
@@ -152,6 +171,7 @@ void tnbLib::Voyage_SizeMap::Perform()
 	 * The starboard size map correction has been created. Now,
 	 * creating the port size map correction:
 	 */
+	//std::cout << "port size map..." << std::endl;
 	std::shared_ptr<GeoMesh2d_Background> port_corrSizeMap;
 	{// Calculate the size map correction [8/29/2023 aamir]
 		if (verbose > 1)
@@ -182,9 +202,11 @@ void tnbLib::Voyage_SizeMap::Perform()
 			Info << " The Size map correction is successfully computed." << endl;
 		}
 	}
+	//PAUSE;
 	/*
 	 * All of the three size maps are computed.
 	 */
+	//std::cout << "starboard size map..." << std::endl;
 	std::shared_ptr<Mesh2d_MultiSizeMap> multi_starboard, multi_port;
 	{
 		std::vector<std::shared_ptr<GeoMesh2d_Background>> meshes;

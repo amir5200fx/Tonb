@@ -406,11 +406,11 @@ void tnbLib::Voyage_Waypoints::Perform()
 		if (verbose)
 		{
 			Info << endl
-				<< " - The starboard side is successfully meshed, in " 
+				<< " - The starboard side is successfully meshed, in "
 				<< global_time_duration << " ms." << endl;
 		}
 		const auto& elemMap = alg->RetrieveElements();
-		
+
 		elements_star.reserve(elemMap.size());
 		for (const auto& x : elemMap)
 		{
@@ -419,6 +419,12 @@ void tnbLib::Voyage_Waypoints::Perform()
 		std::sort(elements_star.begin(), elements_star.end(), cmp);
 		theStarMesh_ = Voyage_Tools::RetrieveTriangulation2d(elements_star);
 	}
+	//OFstream myFile("starMesh.plt");
+	//theStarMesh_->ExportToPlt(myFile);
+	//std::cout << "exit here: " << FunctionSIG << std::endl;
+	//std::exit(1);
+	
+	
 	std::vector<std::shared_ptr<VoyageMesh_Element>> elements_port;
 	{// Port region [9/2/2023 Payvand]
 
@@ -438,10 +444,10 @@ void tnbLib::Voyage_Waypoints::Perform()
 		if (verbose)
 		{
 			Info << endl
-				<< " - The port side is successfully meshed, in " 
+				<< " - The port side is successfully meshed, in "
 				<< global_time_duration << " ms." << endl;
 		}
-		const auto& elemMap = alg->RetrieveElements();	
+		const auto& elemMap = alg->RetrieveElements();
 		elements_port.reserve(elemMap.size());
 		for (const auto& x : elemMap)
 		{
