@@ -50,7 +50,7 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 		//- Retrieve worst metric attached to the current node
 		auto Iter = fronts.begin();
 		auto M = Iter->second.lock()->EffectiveMetric();
-		Iter++;
+		++Iter;
 
 		while (Iter NOT_EQUAL fronts.end())
 		{
@@ -65,7 +65,7 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 			{
 				M = Entity2d_Metric1::UnionSR(Mi, M);
 			}
-			Iter++;
+			++Iter;
 		}
 
 		maxLength *= theFactor;
@@ -81,7 +81,7 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 			MAX(node.Radius(), maxLength)
 		);
 
-		auto detM = M.Determinant();
+		const auto detM = M.Determinant();
 
 		//- save worst metric
 		if (node.Metric().Determinant() < detM)
@@ -111,7 +111,7 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 			inners
 		);
 
-		for (auto& innerNode : inners)
+		for (const auto& innerNode : inners)
 		{
 			innerNode->SetRadius
 			(
@@ -133,7 +133,8 @@ void tnbLib::VoyageMesh_Core::ModifyLocalFront(const Standard_Real theFactor)
 void tnbLib::Voyage_Mesh::MeshOneLevel()
 {
 	ModifyLocalFront(DEFAULT_LOCALFRONT_FACTOR);
-	frontInfo::SetMinDistFactor(1.E-3);
+	SetMinDistFactor(1.E-3);
+	//std::vector<std::shared_ptr<Entity2d_Triangulation>> tris;
 	while (GetFrontEntity())
 	{
 		std::vector<std::shared_ptr<VoyageMesh_Node>>
@@ -152,13 +153,32 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 
 		// get desired element size from back-ground mesh
 		CalcElementSize();
-		
+
+		//std::cout << std::endl;
 		//std::cout <<" elm no. "<< this->NbElements() + 1 << ", element size: " << this->ElementSize() << std::endl;
+		//std::cout << "v0 = " << CurrentFront()->Node0()->Coord() << std::endl;
+		//std::cout << "v1 = " << CurrentFront()->Node1()->Coord() << std::endl;
+		
+		
 		// Calculate optimum coordinate of new point
 		CalcOptimumCoord();
 		//std::cout << MetricMap()->CalcDistance(this->Coord(), CurrentFront()->Centre()) << std::endl;
 		//std::cout << MetricMap()->CalcDistance(this->Coord(), CurrentFront()->Node0()->Coord()) << std::endl;
 		//std::cout << MetricMap()->CalcDistance(this->Coord(), CurrentFront()->Node1()->Coord()) << std::endl;
+		//std::cout << " coord= " << this->Coord() << std::endl;
+		/*{
+			auto tri = std::make_shared<Entity2d_Triangulation>();
+			tri->Points().emplace_back(CurrentFront()->Node0()->Coord());
+			tri->Points().emplace_back(CurrentFront()->Node1()->Coord());
+			tri->Points().emplace_back(Coord());
+			connectivity::triple t;
+			t.Value(0) = 1;
+			t.Value(1) = 2;
+			t.Value(2) = 3;
+			tri->Connectivity().emplace_back(t);
+			tris.emplace_back(tri);
+		}*/
+		//std::cout << std::endl;
 		CalcLocalFrontRadius();
 
 		// Set depth of searching radius
@@ -187,6 +207,13 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 
 		Update();
 	}
+	/*OFstream myFile("newTris.plt");
+	for (const auto& x:tris)
+	{
+		x->ExportToPlt(myFile);
+	}
+	std::cout << FunctionSIG << std::endl;
+	std::exit(1);*/
 	//PAUSE;
 }
 

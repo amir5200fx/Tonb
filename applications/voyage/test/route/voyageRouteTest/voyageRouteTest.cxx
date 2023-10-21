@@ -247,8 +247,10 @@ int main()
 	auto wayPoints = std::make_shared<Voyage_Waypoints>();
 	wayPoints->SetPath(path);
 	wayPoints->SetInfo(metricInfo);
-	wayPoints->SetPortSizeFunction(sizeMap->Port());
-	wayPoints->SetStarboardSizeFunction(sizeMap->Startboard());
+	// WARNING: For somne reason the size maps of the port and the starboard are reversed!
+	// I will investigate this in future.
+	wayPoints->SetPortSizeFunction(sizeMap->Startboard());
+	wayPoints->SetStarboardSizeFunction(sizeMap->Port());
 	wayPoints->SetSize(h);
 	// assign the state function (dry & wet function)
 	wayPoints->SetStateFun([](const Pnt2d&) {return true; });
@@ -272,6 +274,7 @@ int main()
 		//mesh->ExportToVtk(triFile1);
 		//wayPoints->PortMesh()->ExportToPlt(triFile1);
 	}
+	//std::exit(1);
 	//PAUSE;
 	const auto grid = wayPoints->Grid();
 	{
@@ -293,7 +296,7 @@ int main()
 	OFstream gridFile("grid.plt");
 	
 	grid->ExportToPlt(gridFile);
-
+	std::exit(1);
 	std::cout << std::endl;
 	std::cout << " # Simulating the Fuel consumption..." << std::endl;
 	
