@@ -400,6 +400,12 @@
     <Filter Include="TnbLib\Voyage\Function\Cost\Resistance">
       <UniqueIdentifier>{aae11ef7-3586-41e7-8740-cab4ad3f0e68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\GetTimeline">
+      <UniqueIdentifier>{9b6abb1d-19c7-4d53-8ea3-b943215aa63b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Voyage\Simulations\GetGraphNode">
+      <UniqueIdentifier>{dc972d47-596c-4fe4-b49b-5479cb3b5b91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -753,6 +759,9 @@
     <ClInclude Include="TnbLib\Voyage\Function\Cost\Resistance\VoyageFun_CostFunction_Resistane.hxx">
       <Filter>TnbLib\Voyage\Function\Cost\Resistance</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.hxx">
+      <Filter>TnbLib\Voyage\Simulations\GetTimeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -943,6 +952,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Function\Cost\Resistance\VoyageFun_CostFunction_Resistane.cxx">
       <Filter>TnbLib\Voyage\Function\Cost\Resistance</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.cxx">
+      <Filter>TnbLib\Voyage\Simulations\GetTimeline</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
