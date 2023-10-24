@@ -138,6 +138,7 @@ namespace tnbLib
 		// Public functions and operators
 
 		const auto& Net() const { return theNet_; }
+		const auto& Timelines() const { return theTimeLines_; }
 
 		auto MinVel() const { return theMinVel_; }
 		auto MaxVel() const { return theMaxVel_; }

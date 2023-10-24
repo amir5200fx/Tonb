@@ -25,10 +25,9 @@ namespace tnbLib
 
 		struct Node
 		{
-			typedef Pnt2d ptType;
+			typedef Pnt2d Point;
 			
-			Standard_Integer id;
-			Pnt2d pt;
+			std::shared_ptr<VoyageWP_Net::Node> node;
 		};
 
 	private:
@@ -36,7 +35,8 @@ namespace tnbLib
 		/*Private Data*/
 
 		std::shared_ptr<VoyageSim_MinFuel> theSimulation_;
-		
+
+		//- Cache data
 		std::shared_ptr<Geo_AdTree<std::shared_ptr<Node>>> theEngine_;
 
 	public:
@@ -44,7 +44,7 @@ namespace tnbLib
 		// default constructor
 
 		VoyageSim_GetTimeline()
-		{}
+		= default;
 
 		// constructors
 
@@ -55,9 +55,12 @@ namespace tnbLib
 
 		// Public functions and operators
 
-		
+		const auto& Simulation() const { return theSimulation_; }
 
-		void Perform();
+		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageWP_Net::Node>>
+			Find(const Pnt2d&, const Standard_Real theRadius) const;
+
+		TnbVoyage_EXPORT void Perform();
 		
 		
 	};
