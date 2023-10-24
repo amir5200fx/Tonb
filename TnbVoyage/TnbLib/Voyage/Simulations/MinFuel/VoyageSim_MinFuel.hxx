@@ -92,9 +92,9 @@ namespace tnbLib
 		std::map<Standard_Integer, std::shared_ptr<VoyageSim_Graph::Node>>
 			theArrivals_;
 
-		// Private funtions and operators
+		// Private functions and operators
 
-		std::vector<Standard_Real> CalcVelocities() const;
+		[[nodiscard]] std::vector<Standard_Real> CalcVelocities() const;
 
 		static TnbVoyage_EXPORT std::vector<Standard_Real>
 			DiscreteTime
@@ -137,19 +137,20 @@ namespace tnbLib
 
 		// Public functions and operators
 
-		const auto& Net() const { return theNet_; }
-		const auto& Timelines() const { return theTimeLines_; }
+		[[nodiscard]] const auto& Net() const { return theNet_; }
+		[[nodiscard]] const auto& Timelines() const { return theTimeLines_; }
+		[[nodiscard]] const auto& Graph() const { return theGraph_; }
 
-		auto MinVel() const { return theMinVel_; }
-		auto MaxVel() const { return theMaxVel_; }
-		auto Vel() const { return theVel_; }
-		auto NbLevels() const { return theNbLevels_; }
-		auto NbSamples() const { return theNbSamples_; }
+		[[nodiscard]] auto MinVel() const { return theMinVel_; }
+		[[nodiscard]] auto MaxVel() const { return theMaxVel_; }
+		[[nodiscard]] auto Vel() const { return theVel_; }
+		[[nodiscard]] auto NbLevels() const { return theNbLevels_; }
+		[[nodiscard]] auto NbSamples() const { return theNbSamples_; }
 
-		auto TimeStep() const { return theTimeStep_; }
-		auto TimeResolution() const { return theTimeRes_; }
-		auto MaxDay() const { return theMaxDay_; }
-		auto BaseTime() const { return theBaseTime_; }
+		[[nodiscard]] auto TimeStep() const { return theTimeStep_; }
+		[[nodiscard]] auto TimeResolution() const { return theTimeRes_; }
+		[[nodiscard]] auto MaxDay() const { return theMaxDay_; }
+		[[nodiscard]] auto BaseTime() const { return theBaseTime_; }
 
 		TnbVoyage_EXPORT Standard_Real MinTimeArrival() const;
 		TnbVoyage_EXPORT Standard_Real MaxTimeArrival() const;
@@ -162,7 +163,7 @@ namespace tnbLib
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageSim_Graph::Node>> SelectArrivalNodes(const Pnt2d& arrival) const;
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageSim_Graph::Node>> ArrivalNodeList() const;
 
-		const auto& ArrivalNodes() const { return theArrivals_; }
+		[[nodiscard]] const auto& ArrivalNodes() const { return theArrivals_; }
 
 		TnbVoyage_EXPORT std::vector<std::tuple<Location, Time, Velocity, Power>> RetrievePath(const std::shared_ptr<VoyageSim_Graph::Node>&) const;
 

@@ -14,6 +14,7 @@ namespace tnbLib
 
 	// Forward Declarations
 	class VoyageWP_Net;
+	class Pnt3d;
 
 	class VoyageSim_Graph
 	{
@@ -201,6 +202,16 @@ namespace tnbLib
 			
 		};
 
+		struct Position
+		{
+			Pnt2d value;
+		};
+
+		struct Time
+		{
+			Standard_Real value;
+		};
+
 	private:
 
 		/*Private Data*/
@@ -216,23 +227,28 @@ namespace tnbLib
 		// default constructor
 
 		VoyageSim_Graph()
-		{}
+			= default;
 
 		// constructors
 
-		// Public funtions and operators
+		// Public functions and operators
 
-		const auto& Edges() const { return theEdges_; }
-		const auto& Departure() const { return theDeparture_; }
+		[[nodiscard]] const auto& Edges() const { return theEdges_; }
+		[[nodiscard]] const auto& Departure() const { return theDeparture_; }
 		
 		auto& EdgesRef() { return theEdges_; }
 		auto& DepartureRef() { return theDeparture_; }
 
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>> RetrieveNodes() const;
+		TnbVoyage_EXPORT std::vector<std::pair<Position, Time>> RetrieveTempPositions() const;
 
 		void SetDeparture(const std::shared_ptr<Node>& theNode) { theDeparture_ = theNode; }
 
 	 	TnbVoyage_EXPORT void ExportToPlt(OFstream&) const;
+
+		// Static functions
+
+		static TnbVoyage_EXPORT Pnt3d ConvertToPnt3d(const std::pair<Position, Time>&);
 		
 	};
 }

@@ -241,7 +241,7 @@ namespace tnbLib
 			CalcChain(const Entity2d_Polygon&);
 		static TnbVoyage_EXPORT std::vector<std::shared_ptr<Node>>
 			RetrieveNodes(const std::vector<std::shared_ptr<Edge>>&);
-		static TnbVoyage_EXPORT std::pair<Standard_Real, Standard_Boolean>
+		static TnbVoyage_EXPORT std::tuple<Standard_Real, Pnt2d, Standard_Boolean>
 			CalcDistance
 			(
 				const Edge& theEdge,

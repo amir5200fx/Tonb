@@ -255,6 +255,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClInclude Include="TnbLib\Voyage\PathDiscret\Voyage_PathDiscret.hxx" />
     <ClInclude Include="TnbLib\Voyage\PathOnEarth\Voyage_PathOnEarth.hxx" />
     <ClInclude Include="TnbLib\Voyage\RepairNet\Voyage_RepairNet.hxx" />
+    <ClInclude Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.hxx" />
     <ClInclude Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.hxx" />
     <ClInclude Include="TnbLib\Voyage\Simulations\Graph\VoyageSim_Graph.hxx" />
     <ClInclude Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel.hxx" />
@@ -318,6 +319,7 @@ for /r "$(ProjectDir)tnbLib" %%f in (*.hxx) do @xcopy "%%f" "$(ProjectDir)includ
     <ClCompile Include="TnbLib\Voyage\PathDiscret\Voyage_PathDiscret.cxx" />
     <ClCompile Include="TnbLib\Voyage\PathOnEarth\Voyage_PathOnEarth.cxx" />
     <ClCompile Include="TnbLib\Voyage\RepairNet\Voyage_RepairNet.cxx" />
+    <ClCompile Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.cxx" />
     <ClCompile Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.cxx" />
     <ClCompile Include="TnbLib\Voyage\Simulations\Graph\VoyageSim_Graph.cxx" />
     <ClCompile Include="TnbLib\Voyage\Simulations\MinFuel\VoyageSim_MinFuel.cxx" />

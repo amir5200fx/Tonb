@@ -762,6 +762,9 @@
     <ClInclude Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.hxx">
       <Filter>TnbLib\Voyage\Simulations\GetTimeline</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.hxx">
+      <Filter>TnbLib\Voyage\Simulations\GetGraphNode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -955,6 +958,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Simulations\GetTimeline\VoyageSim_GetTimeline.cxx">
       <Filter>TnbLib\Voyage\Simulations\GetTimeline</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.cxx">
+      <Filter>TnbLib\Voyage\Simulations\GetGraphNode</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
