@@ -15,6 +15,18 @@
     <ClCompile Include="WsaStartup.cxx">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="SockAddr.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpSockAddr.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Server.hxx">
@@ -23,7 +35,7 @@
     <ClInclude Include="Socket.hxx">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="SockAdrr.hxx">
+    <ClInclude Include="SockAddr.hxx">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="SockFamily.hxx">
@@ -38,7 +50,13 @@
     <ClInclude Include="WsaStartup.hxx">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="TcpSocket.hxx">
+    <ClInclude Include="Tools.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpSockAddr.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Ws2.hxx">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

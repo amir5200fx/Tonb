@@ -2,39 +2,42 @@
 #ifndef _Socket_Header
 #define _Socket_Header
 
-#include <WinSock2.h>
+#include "Ws2.hxx"
+
+#include <memory>
 
 namespace tnbLib
 {
 
+	// Forward Declarations
+	class SockAddr;
+
 	class Socket
 	{
 
+	private:
+
 		/*Private Data*/
+
+		std::shared_ptr<SockAddr> theAddr_;
 
 		SOCKET theDescriptor_;
 
-	protected:
-
-		// default constructor
-
-		Socket()
-			: theDescriptor_(INVALID_SOCKET)
-		{}
-
-		// constructors
-
 	public:
+
+		static unsigned short verbose;
+
+		Socket(const std::shared_ptr<SockAddr>&);
 
 		// Public functions and operators
 
 		auto Descriptor() const { return theDescriptor_; }
-		bool IsValid() const;
-		bool IsInvalid() const;
+		const auto& Address() const { return theAddr_; }
 
 		void SetDescriptor(SOCKET theDescriptor) { theDescriptor_ = theDescriptor; }
 
 	};
+
 }
 
 #endif

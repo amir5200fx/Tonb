@@ -142,17 +142,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Server.cxx" />
+    <ClCompile Include="SockAddr.cxx" />
+    <ClCompile Include="Socket.cxx" />
+    <ClCompile Include="TcpSockAddr.cxx" />
     <ClCompile Include="tnbApiCfdServer.cxx" />
+    <ClCompile Include="Tools.cxx" />
     <ClCompile Include="WsaStartup.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Server.hxx" />
-    <ClInclude Include="SockAdrr.hxx" />
+    <ClInclude Include="SockAddr.hxx" />
     <ClInclude Include="Socket.hxx" />
     <ClInclude Include="SockFamily.hxx" />
     <ClInclude Include="SockProtocol.hxx" />
     <ClInclude Include="SockType.hxx" />
-    <ClInclude Include="TcpSocket.hxx" />
+    <ClInclude Include="TcpSockAddr.hxx" />
+    <ClInclude Include="Tools.hxx" />
+    <ClInclude Include="Ws2.hxx" />
     <ClInclude Include="WsaStartup.hxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
