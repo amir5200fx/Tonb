@@ -20,6 +20,27 @@ tnbLib::VoyageSim_GetTimeline::Find(const Pnt2d& theCoord, const Standard_Real t
 	return std::move(items);
 }
 
+std::vector<Standard_Real>
+tnbLib::VoyageSim_GetTimeline::Timeline(const Standard_Integer theIndex) const
+{
+	if (NOT Simulation())
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "No simulation has been found." << endl
+			<< abort(FatalError);
+	}
+	const auto& sim = Simulation();
+	const auto iter = sim->Timelines().find(theIndex);
+	if (iter IS_EQUAL sim->Timelines().end())
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "the item is not in the tree!" << endl
+			<< " - id: " << theIndex << endl
+			<< abort(FatalError);
+	}
+	return iter->second;
+}
+
 void tnbLib::VoyageSim_GetTimeline::Perform()
 {
 	if (NOT Simulation())

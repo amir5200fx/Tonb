@@ -48,17 +48,19 @@ namespace tnbLib
 
 		// constructors
 
-		VoyageSim_GetTimeline(const std::shared_ptr<VoyageSim_MinFuel>& theSim)
+		explicit VoyageSim_GetTimeline(const std::shared_ptr<VoyageSim_MinFuel>& theSim)
 			: theSimulation_(theSim)
 		{}
 
 
 		// Public functions and operators
 
-		const auto& Simulation() const { return theSimulation_; }
+		[[nodiscard]] const auto& Simulation() const { return theSimulation_; }
 
 		TnbVoyage_EXPORT std::vector<std::shared_ptr<VoyageWP_Net::Node>>
 			Find(const Pnt2d&, const Standard_Real theRadius) const;
+		// Returns the timeline of the node with a specific id.
+		TnbVoyage_EXPORT std::vector<Standard_Real> Timeline(const Standard_Integer) const;
 
 		TnbVoyage_EXPORT void Perform();
 		
