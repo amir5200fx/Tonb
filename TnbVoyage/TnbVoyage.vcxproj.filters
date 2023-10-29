@@ -406,6 +406,9 @@
     <Filter Include="TnbLib\Voyage\Simulations\GetGraphNode">
       <UniqueIdentifier>{dc972d47-596c-4fe4-b49b-5479cb3b5b91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TnbLib\Voyage\RefPath">
+      <UniqueIdentifier>{1a00ebeb-5c0e-42b9-b713-3109ff11b127}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.hxx">
@@ -765,6 +768,9 @@
     <ClInclude Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.hxx">
       <Filter>TnbLib\Voyage\Simulations\GetGraphNode</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Voyage\RefPath\Voyage_RefPath.hxx">
+      <Filter>TnbLib\Voyage\RefPath</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Voyage\Entities\Entity\Voyage_Entity.cxx">
@@ -961,6 +967,9 @@
     </ClCompile>
     <ClCompile Include="TnbLib\Voyage\Simulations\GetGraphNode\VoyageSim_GetGraphNode.cxx">
       <Filter>TnbLib\Voyage\Simulations\GetGraphNode</Filter>
+    </ClCompile>
+    <ClCompile Include="TnbLib\Voyage\RefPath\Voyage_RefPath.cxx">
+      <Filter>TnbLib\Voyage\RefPath</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

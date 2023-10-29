@@ -17,6 +17,7 @@
 #include <Voyage_PathOnEarth.hxx>
 #include <Voyage_SizeMap.hxx>
 #include <Voyage_Waypoints.hxx>
+#include <Voyage_RefPath.hxx>
 #include <VoyageMesh_SizeMap.hxx>
 #include <VoyageMesh_BaseSize.hxx>
 #include <VoyageMesh_BaseSizeInfo.hxx>
@@ -137,26 +138,36 @@ int main()
 
 	auto offsets = std::make_shared<Entity2d_Polygon>();
 	{
-		auto& pts = offsets->Points();
+		//auto& pts = offsets->Points();
 
 		//pts.push_back(Voyage_Tools::ConvertToUV({ 1.0, 1.0 })); // yaghubi example
 		//pts.push_back(Voyage_Tools::ConvertToUV({ 2.0, 2.0 }));
 
 		//pts.push_back(Voyage_Tools::ConvertToUV({ 25.25, 55.27 }));
-		pts.push_back(Voyage_Tools::ConvertToUV({ 25.6, 55.2 }));
+		/*pts.push_back(Voyage_Tools::ConvertToUV({ 25.6, 55.2 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 26.4, 56.4 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 8.0, 77.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 5.8, 80.1 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 6.7, 94.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 7.0, 97.0 }));
 		pts.push_back(Voyage_Tools::ConvertToUV({ 1.1, 103.6 }));
-		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));
+		pts.push_back(Voyage_Tools::ConvertToUV({ 1.28009, 103.85095 }));*/
+
+		IFstream ref_path_file("gcr.txt");
+		auto ref_path = std::make_shared<Voyage_RefPath>();
+		ref_path->Load(ref_path_file);
+
+		for (const auto& x: ref_path->Path()->Points())
+		{
+			std::cout << x << std::endl;
+		}
+		offsets = ref_path->Path();
 
 		//Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
 		//std::exit(1);
 	}
 
-	
+	//std::exit(1);
 
 	auto metricInfo = std::make_shared<Voyage_MetricInfo>();
 	std::shared_ptr<VoyageGeo_Path2> path;
@@ -224,7 +235,7 @@ int main()
 		std::cout << " The three-dimensional path is successfully discretized." << std::endl;
 	}
 
-	OFstream myVoyagePath("voyage.txt");
+	/*OFstream myVoyagePath("voyage.txt");
 	const auto& pts = voyagePath->Points();
 	for (const auto& x : voyagePath->Connectivity())
 	{
@@ -234,7 +245,7 @@ int main()
 			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i0))) 
 			<< "  " 
 			<< Voyage_Tools::ConvertToVoyageSystem(pts.at(Index_Of(i1))) << endl;
-	}
+	}*/
 
 	// creating the size maps [9/3/2023 Payvand]
 	Voyage_SizeMap::verbose = 1;
@@ -276,6 +287,7 @@ int main()
 	}
 	//std::exit(1);
 	//PAUSE;
+	
 	const auto grid = wayPoints->Grid();
 	{
 		const auto alg = std::make_shared<VoyageWP_Connect2>();
@@ -289,14 +301,14 @@ int main()
 		auto alg = std::make_shared<Voyage_RepairNet>(grid);
 		alg->Perform();
 	}
-
-	OFstream refPathFile("ref.plt");
-	offsets->ExportToPlt(refPathFile);
-
-	OFstream gridFile("grid.plt");
 	
-	grid->ExportToPlt(gridFile);
-	std::exit(1);
+	//OFstream refPathFile("ref.plt");
+	//offsets->ExportToPlt(refPathFile);
+
+	//OFstream gridFile("grid.plt");
+	
+	//grid->ExportToPlt(gridFile);
+	//std::exit(1);
 	std::cout << std::endl;
 	std::cout << " # Simulating the Fuel consumption..." << std::endl;
 	
@@ -421,6 +433,7 @@ int main()
 		std::cout << " - coord: (" << loc.value << ")"
 			<< ", time: " << time.value
 			<< ", velocity: " << vel.value
+			<< ", power: " << power.value
 			<< std::endl;
 	}
 

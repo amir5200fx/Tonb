@@ -36,7 +36,7 @@ namespace tnbLib
 
 		// override functions and operators [3/7/2022 Amir]
 
-		TnbMesh_EXPORT void Perform() override;
+		TnbVoyage_EXPORT void Perform() override;
 
 		// public functions and operators [3/7/2022 Amir]
 

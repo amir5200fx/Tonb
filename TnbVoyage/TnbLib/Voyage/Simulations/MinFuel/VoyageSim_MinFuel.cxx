@@ -1031,6 +1031,12 @@ void tnbLib::VoyageSim_MinFuel::Perform(const Standard_Integer theStart)
 							{ next->Coord(), next->Time() },
 							edge->Dist(), NbSamples()
 						);
+					if (resist < 0)
+					{
+						FatalErrorIn(FunctionSIG) << endl
+							<< "Invalid value for resistance function has been detected." << endl
+							<< abort(FatalError);
+					}
 					auto [val, prev] = table.at(next->Index());
 					auto prev_node = prev.lock();
 					if (table.find(next->Index()) IS_EQUAL table.end())

@@ -76,10 +76,11 @@ namespace tnbLib
 	TnbGeo_EXPORT Istream & operator>>(Istream & is, Pnt2d & P)
 	{
 		Standard_Real x, y;
-		string comma;
 
 		is.readBegin("Istream & operator>>(Istream & is, Pnt2d & P)");
-		is >> x >> comma >> y;
+		is >> x;
+		token delimiter(is);
+		is >> y;
 		is.readEnd("Istream & operator>>(Istream & is, Pnt2d & P)");
 
 		P.X() = x;

@@ -15,25 +15,28 @@ void tnbLib::VoyageMesh_OptNode_Altr::Perform()
 	Debug_Null_Pointer(this->GetInfo());
 	Debug_Null_Pointer(this->Front());
 	Debug_Null_Pointer(this->MetricMap());
-	const auto size = this->MetricMap()->CalcElementSize(this->Front()->Centre());
+	const auto h0 = this->MetricMap()->CalcElementSize(this->Front()->Centre());
+	const auto l2 = this->Front()->Length3D() / 2;
+	const auto size = std::sqrt(h0 * h0 + l2 * l2);
+
 	auto uni_sizefun = 
 		std::make_shared<GeoSizeFun2d_Uniform>
 		(size, this->MetricMap()->BoundingBox());
 	// Create a new metric map based on the uniform size function. [9/12/2023 Payvand]
-	auto metric_procsr = 
+	const auto metric_procsr = 
 		std::make_shared<VoyageMesh_MetricPrcsr>
 		(uni_sizefun, this->MetricMap()->MetricFunction(), this->MetricMap()->Info());
-	auto alg = std::make_shared<VoyageMesh_IterOptNode_Calculator>(this->GetInfo());
+	const auto alg = std::make_shared<VoyageMesh_IterOptNode_Calculator>(this->GetInfo());
 	Debug_Null_Pointer(alg);
 
 	alg->SetFront(this->Front());
 	alg->SetMetricMap(metric_procsr);
-	alg->SetSize(this->Size());
+	alg->SetSize(size);
 
 	alg->Perform();
 	Debug_If_Condition_Message(NOT alg->IsDone(), "the algorithm is not performed!");
 
-	if (NOT alg->IsConverged())
+	if (/*NOT alg->IsConverged()*/false)
 	{
 		//std::cout << "it's not converged..." << std::endl;
 		AlterAlg()->SetFront(this->Front());
