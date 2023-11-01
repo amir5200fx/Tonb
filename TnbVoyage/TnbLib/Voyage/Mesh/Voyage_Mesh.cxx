@@ -194,10 +194,10 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 
 		auto is_valid = IsNewPointCandidate(/*Effectives*/Local);
 		//std::cout << " is valid = " << (is_valid ? "TRUE" : "FALSE") << std::endl;
-		if (NOT is_valid)
+		/*if (NOT is_valid)
 		{
 			PAUSE;
-		}
+		}*/
 		if (is_valid)
 		{
 			AddOptimumNodeTo(CandidateNodes);
