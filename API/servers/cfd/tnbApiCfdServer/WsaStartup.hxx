@@ -24,6 +24,8 @@ namespace tnbLib
 
 		// constructors
 
+		~WsaStartup();
+
 		// Public functions and operators
 
 		const auto& Data() const { return theData_; }

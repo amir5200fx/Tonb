@@ -1,6 +1,14 @@
 #include "WsaStartup.hxx"
 
-#include <word.hxx>
+#include "ServError.hxx"
+
+#ifdef max
+#undef max
+#endif // max
+
+#ifdef min
+#undef min
+#endif // min
 
 #include <iostream>
 #include <tchar.h>
@@ -17,10 +25,7 @@ tnbLib::WsaStartup::WsaStartup()
 	wsaerr = WSAStartup(wVersionRequested, &wsaData);
 	if (wsaerr != 0)
 	{
-		if (verbose)
-		{
-			std::cout << "The Winsock dll not found!" << std::endl;
-		}
+		throw ServError("The Winsock dll not found!");
 	}
 	else
 	{
@@ -30,4 +35,9 @@ tnbLib::WsaStartup::WsaStartup()
 			std::cout << "The status: " << wsaData.szSystemStatus << std::endl;
 		}
 	}
+}
+
+tnbLib::WsaStartup::~WsaStartup()
+{
+	WSACleanup();
 }

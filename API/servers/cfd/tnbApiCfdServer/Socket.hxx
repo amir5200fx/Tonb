@@ -28,6 +28,7 @@ namespace tnbLib
 		static unsigned short verbose;
 
 		Socket(const std::shared_ptr<SockAddr>&);
+		Socket(SOCKET theSocket);
 
 		// Public functions and operators
 

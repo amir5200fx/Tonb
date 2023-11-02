@@ -4,6 +4,33 @@
     <Filter Include="src">
       <UniqueIdentifier>{b73a6509-8d57-4cfe-84af-aa37beddd629}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Objects">
+      <UniqueIdentifier>{32f12a71-ebb9-4f60-80c7-c3e52612616f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Real">
+      <UniqueIdentifier>{aa5dab7d-cf13-4bac-be02-b68ad10f7e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Int">
+      <UniqueIdentifier>{3326340d-355c-442b-8029-c7c7b0998fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Segment">
+      <UniqueIdentifier>{606a21e8-220c-4f76-8db8-7ad380dbd754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Axis">
+      <UniqueIdentifier>{1f4ab1ef-d85c-41a8-83c4-ec4ae9400b45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Dir">
+      <UniqueIdentifier>{907bac2e-4e58-48d7-9ea7-f6866be41b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Vec">
+      <UniqueIdentifier>{08e5e632-7747-43db-b418-15b5dda33b04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Object">
+      <UniqueIdentifier>{44b18ec5-9229-4b3f-8453-5c42bd0f73b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Exit">
+      <UniqueIdentifier>{dcf8c5fe-5216-4dbd-a104-72af547b5b39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tnbApiCfdServer.cxx">
@@ -26,6 +53,21 @@
     </ClCompile>
     <ClCompile Include="Tools.cxx">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Real\Server_RealObj.cxx">
+      <Filter>src\Objects\Real</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Int\Server_IntObj.cxx">
+      <Filter>src\Objects\Int</Filter>
+    </ClCompile>
+    <ClCompile Include="Init.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Exit\Server_ExitObj.cxx">
+      <Filter>src\Objects\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Object\Server_Object.cxx">
+      <Filter>src\Objects\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +100,24 @@
     </ClInclude>
     <ClInclude Include="Ws2.hxx">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ServError.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Object\Server_Object.hxx">
+      <Filter>src\Objects\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Real\Server_RealObj.hxx">
+      <Filter>src\Objects\Real</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Int\Server_IntObj.hxx">
+      <Filter>src\Objects\Int</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Int\Macros.hxx">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Exit\Server_ExitObj.hxx">
+      <Filter>src\Objects\Exit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

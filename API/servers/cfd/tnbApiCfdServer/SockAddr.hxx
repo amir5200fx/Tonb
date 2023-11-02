@@ -13,12 +13,9 @@ namespace tnbLib
 	class SockAddr
 	{
 
-	public:
-
+		/*Private Data*/
 
 	protected:
-
-		/*Private Data*/
 
 		addrinfo* theAddress_ = NULL;
 
@@ -28,10 +25,16 @@ namespace tnbLib
 
 	public:
 
-		~SockAddr();
-
 		static const std::string THIS_PC;
 		static const int DEFAULT_PORT;
+
+		// default constructor
+
+		
+
+		~SockAddr();
+
+		
 
 		// Public functions and operators
 
