@@ -37,12 +37,14 @@ int main()
 			std::cout << "I accepted the connection..." << std::endl;
 			auto message = tnbLib::Tools::Receive(client);
 
+			//std::cout << "MESSAGE : " << message << std::endl;
+
 			auto [command, value] = tnbLib::Tools::ParseMessage(message);
 
-			std::cout << std::endl;
-			std::cout << "command: " << command.stream << std::endl;
-			std::cout << "value: " << value.stream << std::endl;
-			std::cout << std::endl;
+			//std::cout << std::endl;
+			//std::cout << "command: " << command.stream << std::endl;
+			//std::cout << "value: " << value.stream << std::endl;
+			//std::cout << std::endl;
 
 			server->Construct(command.stream, value.stream);
 			server->SendObj(client);
@@ -61,7 +63,7 @@ int main()
 
 	}
 
-	std::system("pause");
+	//std::system("pause");
 	return 0;
 
 }

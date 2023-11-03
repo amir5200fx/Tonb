@@ -31,6 +31,9 @@
     <Filter Include="src\Objects\Exit">
       <UniqueIdentifier>{dcf8c5fe-5216-4dbd-a104-72af547b5b39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Objects\Point">
+      <UniqueIdentifier>{9e008e95-724a-439d-b17c-5691b394326c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tnbApiCfdServer.cxx">
@@ -68,6 +71,15 @@
     </ClCompile>
     <ClCompile Include="Objects\Object\Server_Object.cxx">
       <Filter>src\Objects\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Point\Server_PntObj.cxx">
+      <Filter>src\Objects\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Axis\Server_AxisObj.cxx">
+      <Filter>src\Objects\Axis</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Dir\Server_DirObj.cxx">
+      <Filter>src\Objects\Dir</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +130,15 @@
     </ClInclude>
     <ClInclude Include="Objects\Exit\Server_ExitObj.hxx">
       <Filter>src\Objects\Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Point\Server_PntObj.hxx">
+      <Filter>src\Objects\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Axis\Server_AxisObj.hxx">
+      <Filter>src\Objects\Axis</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Dir\Server_DirObj.hxx">
+      <Filter>src\Objects\Dir</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

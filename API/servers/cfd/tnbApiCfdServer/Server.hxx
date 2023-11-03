@@ -22,7 +22,9 @@ namespace tnbLib
 			real = 0,
 			integer,
 			vector,
+			dir,
 			axis,
+			point,
 			segment,
 			exit
 		};
@@ -39,7 +41,9 @@ namespace tnbLib
 
 		void CreateReal(const std::string&);
 		void CreateInt(const std::string&);
+		void CreatePnt(const std::string&);
 		void CreateVec(const std::string&);
+		void CreateDir(const std::string&);
 		void CreateAxis(const std::string&);
 		void CraeteSegment(const std::string&);
 

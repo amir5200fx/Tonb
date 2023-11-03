@@ -91,7 +91,7 @@ std::string tnbLib::Tools::Receive(const std::shared_ptr<Socket>& theSocket)
 
 		if (iResult > 0)
 		{
-			std::cout << "Getting the message.." << std::endl;
+			//std::cout << "Getting the message.." << std::endl;
 			message += RetrieveMessage(recvbuf, iResult);
 			if (IsEnded(message))
 			{
@@ -115,7 +115,7 @@ std::string tnbLib::Tools::RetrieveMessage(char* theMessage, int theLen)
 std::pair<tnbLib::Tools::Command, tnbLib::Tools::Value>
 tnbLib::Tools::ParseMessage(const std::string& theMessage)
 {
-	std::cout << "message = " << theMessage << std::endl;
+	//std::cout << "message = " << theMessage << std::endl;
 	nlohmann::json jsonData = nlohmann::json::parse(theMessage);
 	Command command{ jsonData.at(Server::REQUEST) };
 	Value value{ jsonData.at(Server::VALUE) };
