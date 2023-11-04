@@ -181,8 +181,9 @@ int main()
 		std::cout << " The path is successfully generated." << std::endl;
 	}
 
-	Standard_Real dist = 0;
-	{// Calculate the distance [8/27/2023 Payvand]
+	{
+		Standard_Real dist = 0;
+		// Calculate the distance [8/27/2023 Payvand]
 		auto alg = std::make_shared<Voyage_Distance>(path, metricInfo);
 		alg->Perform();
 
@@ -199,8 +200,9 @@ int main()
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
 	std::cout << std::endl;
-	auto voyagePath = std::make_shared<Entity2d_Chain>();
-	{// approximate the path [8/27/2023 Payvand]
+	{
+		auto voyagePath = std::make_shared<Entity2d_Chain>();
+		// approximate the path [8/27/2023 Payvand]
 		auto alg = std::make_shared<Voyage_PathDiscret>(path, metricInfo, h);
 		alg->Perform();
 
@@ -249,9 +251,11 @@ int main()
 
 	// creating the size maps [9/3/2023 Payvand]
 	Voyage_SizeMap::verbose = 1;
+	auto algInfo = std::make_shared<VoyageMesh_BaseSizeInfo>();
 	auto sizeMap = std::make_shared<Voyage_SizeMap>();
 	sizeMap->SetPath(path);
 	sizeMap->SetInfo(metricInfo);
+	sizeMap->SetSizeDistb(algInfo);
 	sizeMap->Perform();
 	//return 1;
 	Voyage_Waypoints::verbose = 1;

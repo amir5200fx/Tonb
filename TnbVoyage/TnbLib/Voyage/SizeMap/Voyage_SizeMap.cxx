@@ -34,6 +34,12 @@ void tnbLib::Voyage_SizeMap::Perform()
 			<< "No info has been found." << endl
 			<< abort(FatalError);
 	}
+	if (NOT theSizeDistb_)
+	{
+		FatalErrorIn(FunctionSIG) << endl
+			<< "No size map distb. control has been found." << endl
+			<< abort(FatalError);
+	}
 	const auto& path = Path();
 	if (NOT path->Earth())
 	{
@@ -71,7 +77,8 @@ void tnbLib::Voyage_SizeMap::Perform()
 			Info << endl
 				<< " - Calculating the base sizes..." << endl;
 		}
-		auto algInfo = std::make_shared<VoyageMesh_BaseSizeInfo>();
+		//auto algInfo = std::make_shared<VoyageMesh_BaseSizeInfo>();
+		auto algInfo = theSizeDistb_;
 		const auto alg = 
 			std::make_shared<VoyageMesh_BaseSize>
 		(path->RetrieveOffsets(), metrics, algInfo);
