@@ -4,6 +4,7 @@
 #include "Objects/Real/Server_RealObj.hxx"
 #include "Objects/Point/Server_PntObj.hxx"
 #include "Objects/Dir/Server_DirObj.hxx"
+#include "Objects/Vec/Server_VecObj.hxx"
 #include "Objects/Axis/Server_AxisObj.hxx"
 #include "Objects/Exit/Server_ExitObj.hxx"
 
@@ -157,3 +158,26 @@ void tnbLib::make_dir_RunTime::Run()
 	Server::Commands.insert({ Server_DirObj::commandName, Server::objects::dir });
 }
 static const tnbLib::make_dir_RunTime make_dir_RunTime_obj;
+
+const std::string tnbLib::Server_VecObj::commandName = "make_vec";
+namespace tnbLib
+{
+	class make_vec_RunTime
+	{
+
+		static void Run();
+
+	public:
+
+		make_vec_RunTime()
+		{
+			Run();
+		}
+	};
+
+}
+void tnbLib::make_vec_RunTime::Run()
+{
+	Server::Commands.insert({ Server_VecObj::commandName, Server::objects::vector });
+}
+static const tnbLib::make_dir_RunTime make_vec_RunTime_obj;

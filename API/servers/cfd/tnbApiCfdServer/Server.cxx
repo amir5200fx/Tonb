@@ -4,6 +4,7 @@
 #include "Objects/Int/Server_IntObj.hxx"
 #include "Objects/Point/Server_PntObj.hxx"
 #include "Objects/Dir/Server_DirObj.hxx"
+#include "Objects/Vec/Server_VecObj.hxx"
 #include "Objects/Axis/Server_AxisObj.hxx"
 #include "Objects/Exit/Server_ExitObj.hxx"
 #include "ServError.hxx"
@@ -31,6 +32,12 @@ void tnbLib::Server::CreateInt(const std::string& theValue)
 void tnbLib::Server::CreatePnt(const std::string& theValue)
 {
 	theObj_ = std::make_shared<Server_PntObj>();
+	theObj_->Construct(theValue);
+}
+
+void tnbLib::Server::CreateVec(const std::string& theValue)
+{
+	theObj_ = std::make_shared<Server_VecObj>();
 	theObj_->Construct(theValue);
 }
 
@@ -73,6 +80,11 @@ void tnbLib::Server::Construct
 	case objects::dir:
 	{
 		CreateDir(theValue);
+		break;
+	}
+	case objects::vector:
+	{
+		CreateVec(theValue);
 		break;
 	}
 	case objects::axis:
