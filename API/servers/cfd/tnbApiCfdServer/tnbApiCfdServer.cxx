@@ -42,8 +42,8 @@ int main()
 			auto [command, value] = tnbLib::Tools::ParseMessage(message);
 
 			//std::cout << std::endl;
-			//std::cout << "command: " << command.stream << std::endl;
-			//std::cout << "value: " << value.stream << std::endl;
+			std::cout << "command: " << command.stream << std::endl;
+			std::cout << "value: " << value.stream << std::endl;
 			//std::cout << std::endl;
 
 			server->Construct(command.stream, value.stream);

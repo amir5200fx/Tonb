@@ -2,12 +2,14 @@
 
 #include "../../Server.hxx"
 
-#include <Vec2d.hxx>
+#include <Dir2d.hxx>
 #include <Global_File.hxx>
 #include <json.hpp>
 
 const std::string tnbLib::Server_DirObj::Params::u = "u";
 const std::string tnbLib::Server_DirObj::Params::v = "v";
+
+#include <Standard_Failure.hxx>
 
 void tnbLib::Server_DirObj::Construct(const std::string& theValue)
 {
@@ -30,12 +32,20 @@ void tnbLib::Server_DirObj::Construct(const std::string& theValue)
 		}
 	}
 	// streaming the value
-	std::stringstream stream;
-	auto value = Vec2d(u, v);
-	TNB_oARCH_FILE_TYPE oa(stream);
-	oa << value;
 	nlohmann::json jData;
-	jData[SENSE] = GetRespType(RespType::good);
-	jData[VALUE] = stream.str();
+	try
+	{
+		std::stringstream stream;
+		auto value = Dir2d(u, v);
+		TNB_oARCH_FILE_TYPE oa(stream);
+		oa << value;
+		jData[SENSE] = GetRespType(RespType::good);
+		jData[VALUE] = stream.str();
+	}
+	catch (Standard_Failure& x)
+	{
+		jData[SENSE] = GetRespType(RespType::bad);
+		jData[VALUE] = x.GetMessageString();
+	}
 	theStream_ << jData;
 }

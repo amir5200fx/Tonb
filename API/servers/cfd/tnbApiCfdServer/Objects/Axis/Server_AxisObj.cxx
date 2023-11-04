@@ -5,8 +5,7 @@
 #include <Pnt2d.hxx>
 #include <Dir2d.hxx>
 #include <Global_File.hxx>
-#include <Global_Serialization.hxx>
-#include <OpenCascade_Serialization.hxx>
+#include <Geo_Serialization.hxx>
 #include <json.hpp>
 
 #include "gp_Ax2d.hxx"
@@ -20,14 +19,14 @@ void tnbLib::Server_AxisObj::Construct(const std::string& theValue)
 	Dir2d dir;
 	{
 		nlohmann::json loader = nlohmann::json::parse(theValue);
-		// loading the value of x:
+		// loading the value of centre:
 		{
 			std::stringstream stream;
 			stream << loader.at(Params::centre).get<std::string>();
 			TNB_iARCH_FILE_TYPE ia(stream);
 			ia >> centre;
 		}
-		// loading the value of y:
+		// loading the value of direction:
 		{
 			std::stringstream stream;
 			stream << loader.at(Params::dir).get<std::string>();

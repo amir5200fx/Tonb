@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TnbMesh\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -150,10 +150,16 @@
     <ClCompile Include="Objects\Axis\Server_AxisObj.cxx" />
     <ClCompile Include="Objects\Dir\Server_DirObj.cxx" />
     <ClCompile Include="Objects\Exit\Server_ExitObj.cxx" />
+    <ClCompile Include="Objects\Infos\AdaptInteg\Server_AdaptIntegInfoObj.cxx" />
+    <ClCompile Include="Objects\Infos\BisectSolver\Server_BisectSolverInfoObj.cxx" />
+    <ClCompile Include="Objects\Infos\CrvOptPnt\Server_CrvOptPntInfoObj.cxx" />
+    <ClCompile Include="Objects\Infos\MeshCrv\Server_MeshCrvInfoObj.cxx" />
+    <ClCompile Include="Objects\Infos\NewtonSolver\Server_NewtonSolverInfoObj.cxx" />
     <ClCompile Include="Objects\Int\Server_IntObj.cxx" />
     <ClCompile Include="Objects\Object\Server_Object.cxx" />
     <ClCompile Include="Objects\Point\Server_PntObj.cxx" />
     <ClCompile Include="Objects\Real\Server_RealObj.cxx" />
+    <ClCompile Include="Objects\Vec\Server_VecObj.cxx" />
     <ClCompile Include="Server.cxx" />
     <ClCompile Include="SockAddr.cxx" />
     <ClCompile Include="Socket.cxx" />
@@ -166,11 +172,17 @@
     <ClInclude Include="Objects\Axis\Server_AxisObj.hxx" />
     <ClInclude Include="Objects\Dir\Server_DirObj.hxx" />
     <ClInclude Include="Objects\Exit\Server_ExitObj.hxx" />
+    <ClInclude Include="Objects\Infos\AdaptInteg\Server_AdaptIntegInfoObj.hxx" />
+    <ClInclude Include="Objects\Infos\BisectSolver\Server_BisectSolverInfoObj.hxx" />
+    <ClInclude Include="Objects\Infos\CrvOptPnt\Server_CrvOptPntInfoObj.hxx" />
+    <ClInclude Include="Objects\Infos\MeshCrv\Server_MeshCrvInfoObj.hxx" />
+    <ClInclude Include="Objects\Infos\NewtonSolver\Server_NewtonSolverInfoObj.hxx" />
     <ClInclude Include="Objects\Int\Macros.hxx" />
     <ClInclude Include="Objects\Int\Server_IntObj.hxx" />
     <ClInclude Include="Objects\Object\Server_Object.hxx" />
     <ClInclude Include="Objects\Point\Server_PntObj.hxx" />
     <ClInclude Include="Objects\Real\Server_RealObj.hxx" />
+    <ClInclude Include="Objects\Vec\Server_VecObj.hxx" />
     <ClInclude Include="Server.hxx" />
     <ClInclude Include="ServError.hxx" />
     <ClInclude Include="SockAddr.hxx" />

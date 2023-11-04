@@ -34,6 +34,42 @@
     <Filter Include="src\Objects\Point">
       <UniqueIdentifier>{9e008e95-724a-439d-b17c-5691b394326c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Objects\Infos">
+      <UniqueIdentifier>{10b2a6da-7f52-481f-b383-49c7153307a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Infos\AdaptInteg">
+      <UniqueIdentifier>{de028343-3fb0-4eb0-84d7-92091493f2b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Infos\NewtonSolver">
+      <UniqueIdentifier>{7c9f68d2-f2a8-45d0-8ff4-3dfc0d6df11d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Infos\BisectSolver">
+      <UniqueIdentifier>{59c483ee-c616-4c25-82eb-f7d5f54b41bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Infos\CrvOptPnt">
+      <UniqueIdentifier>{e88ed377-26fe-40ca-b399-52b2b8343ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\Infos\MeshCurve">
+      <UniqueIdentifier>{2af601d0-8a72-45ea-b17f-c6a4272c8994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\tools">
+      <UniqueIdentifier>{55fff327-49a5-4c02-86be-62dbbf7bb496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\tools\discrete">
+      <UniqueIdentifier>{73dea56f-1f25-42b9-9c2f-88c33b177310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\geom">
+      <UniqueIdentifier>{cd98c195-d21f-4b90-84b4-6a75f6f7ca79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\geom\segment">
+      <UniqueIdentifier>{e54e4b00-47c2-45c6-b27b-589bbf698e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\geom\rectangular">
+      <UniqueIdentifier>{aa967761-4de5-4814-bee0-76a3b5acd0a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects\geom\circle">
+      <UniqueIdentifier>{561e5838-196d-4b36-91f1-4a2090b18a01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tnbApiCfdServer.cxx">
@@ -80,6 +116,24 @@
     </ClCompile>
     <ClCompile Include="Objects\Dir\Server_DirObj.cxx">
       <Filter>src\Objects\Dir</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Vec\Server_VecObj.cxx">
+      <Filter>src\Objects\Vec</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Infos\AdaptInteg\Server_AdaptIntegInfoObj.cxx">
+      <Filter>src\Objects\Infos\AdaptInteg</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Infos\BisectSolver\Server_BisectSolverInfoObj.cxx">
+      <Filter>src\Objects\Infos\BisectSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Infos\NewtonSolver\Server_NewtonSolverInfoObj.cxx">
+      <Filter>src\Objects\Infos\NewtonSolver</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Infos\CrvOptPnt\Server_CrvOptPntInfoObj.cxx">
+      <Filter>src\Objects\Infos\CrvOptPnt</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Infos\MeshCrv\Server_MeshCrvInfoObj.cxx">
+      <Filter>src\Objects\Infos\MeshCurve</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +193,24 @@
     </ClInclude>
     <ClInclude Include="Objects\Dir\Server_DirObj.hxx">
       <Filter>src\Objects\Dir</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Vec\Server_VecObj.hxx">
+      <Filter>src\Objects\Vec</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Infos\AdaptInteg\Server_AdaptIntegInfoObj.hxx">
+      <Filter>src\Objects\Infos\AdaptInteg</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Infos\BisectSolver\Server_BisectSolverInfoObj.hxx">
+      <Filter>src\Objects\Infos\BisectSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Infos\NewtonSolver\Server_NewtonSolverInfoObj.hxx">
+      <Filter>src\Objects\Infos\NewtonSolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Infos\CrvOptPnt\Server_CrvOptPntInfoObj.hxx">
+      <Filter>src\Objects\Infos\CrvOptPnt</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Infos\MeshCrv\Server_MeshCrvInfoObj.hxx">
+      <Filter>src\Objects\Infos\MeshCurve</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
