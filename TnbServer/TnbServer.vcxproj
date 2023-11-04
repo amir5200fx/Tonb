@@ -140,15 +140,24 @@
   <ItemGroup>
     <ClInclude Include="TnbLib\Server\Macros\Server_Macros.hxx" />
     <ClInclude Include="TnbLib\Server\module\Server_Module.hxx" />
-    <ClInclude Include="TnbLib\Server\Objects\Geo\Server_GeoObj_Pnt2d.hxx" />
-    <ClInclude Include="TnbLib\Server\Objects\Geo\Server_GeoObj_Pnt3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TnbLib\Server\Objects\Geo\Server_GeoObj_Pnt2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Dir\Server_GeoObj_Dir3d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Pnt\Server_GeoObj_Pnt3d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Vec\Server_GeoObj_Vec3d.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.cxx" />
