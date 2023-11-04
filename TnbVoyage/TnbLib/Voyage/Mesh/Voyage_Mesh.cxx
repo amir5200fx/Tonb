@@ -134,7 +134,7 @@ void tnbLib::Voyage_Mesh::MeshOneLevel()
 {
 	ModifyLocalFront(DEFAULT_LOCALFRONT_FACTOR);
 	SetMinDistFactor(1.E-3);
-	std::vector<std::shared_ptr<Entity2d_Triangulation>> tris;
+	//std::vector<std::shared_ptr<Entity2d_Triangulation>> tris;
 	while (GetFrontEntity())
 	{
 		std::vector<std::shared_ptr<VoyageMesh_Node>>

@@ -76,4 +76,6 @@ namespace tnbLib
 	};
 }
 
+#include <Dir2dI.hxx>
+
 #endif // !_Dir2d_Header

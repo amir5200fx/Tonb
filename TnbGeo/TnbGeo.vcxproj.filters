@@ -2658,6 +2658,9 @@
     <ClInclude Include="TnbLib\Geo\Entities\CmpConnect\3d\Prism\Entity3d_CmpConnect_Prism.hxx">
       <Filter>TnbLib\Geo\Entities\CmpConnet\3d\Prism</Filter>
     </ClInclude>
+    <ClInclude Include="TnbLib\Geo\Entities\Direct\2d\Dir2dI.hxx">
+      <Filter>TnbLib\Geo\Entities\Direct\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TnbLib\Geo\Point\2d\Pnt2d.cxx">

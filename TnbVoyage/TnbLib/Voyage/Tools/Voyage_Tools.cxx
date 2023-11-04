@@ -615,7 +615,7 @@ void tnbLib::Voyage_Tools::CalcCoord3d
 	const VoyageGeo_Earth& theEarth
 )
 {
-	auto surface = theEarth.Surface();
+	const auto surface = theEarth.Surface();
 	Debug_Null_Pointer(surface);
 	CalcCoord3d(theNodes, *surface);
 }
@@ -628,24 +628,57 @@ tnbLib::Voyage_Tools::CalcTurningAngle
 	const Pnt2d& theP2
 )
 {
-	const Dir2d dir(theP0, theP1);
-	gp_Trsf2d trsf;
-	trsf.SetTransformation(gp::OX2d(), gp_Ax2d(theP0, dir));
-	const auto p0 = theP0.Transformed(trsf);
-	const auto p1 = theP1.Transformed(trsf);
-	const auto p2 = theP2.Transformed(trsf);
-	const auto dx = p2.X() - p1.X();
-	const auto dy = p2.Y() - p1.Y();
-	// if the angle < 0 it means that the turning diretion would be toward starboard. [9/11/2023 Payvand]
-	const auto angle = std::atan(dy / dx);
+	
+	const Vec2d v0(theP0, theP1);
+	const Vec2d v1(theP1, theP2);
+	const auto angle = v0.Angle(v1);
 	if (angle < 0)
-	{
-		return PI + angle;
+	{// turns right
+		return angle + PI;
 	}
 	else
-	{
-		return PI + angle;
+	{// turns left
+		return angle - PI;
 	}
+	//const auto n = v0.Crossed(v1);
+	//if (std::abs(n) <= 1.0E-6)
+	//{
+	//	return 0;
+	//}
+	//const auto angle = v0.Angle(v1);
+	//if (n < 0)
+	//{// turns right
+	//	std::cout << "turning right = " << angle << std::endl;
+	//	return PI - angle;
+	//}
+	//else
+	//{// turns left
+	//	std::cout << "turning left = " << angle << std::endl;
+	//	return PI + angle;
+	//}
+	//const Dir2d dir(theP0, theP1);
+	//gp_Trsf2d trsf;
+	//trsf.SetTransformation(gp::OX2d(), gp_Ax2d(theP0, dir));
+	//const auto p0 = theP0.Transformed(trsf);
+	//const auto p1 = theP1.Transformed(trsf);
+	//const auto p2 = theP2.Transformed(trsf);
+	//std::cout << "#######################" << std::endl;
+	//std::cout << "p0 = " << p0 << std::endl;
+	//std::cout << "p1 = " << p1 << std::endl;
+	//std::cout << "p2 = " << p2 << std::endl;
+	//std::cout << "#######################" << std::endl;
+	//const auto dx = p2.X() - p1.X();
+	//const auto dy = p2.Y() - p1.Y();
+	//// if the angle < 0 it means that the turning diretion would be toward starboard. [9/11/2023 Payvand]
+	//const auto angle = std::atan(dy / dx);
+	//if (angle < 0)
+	//{
+	//	return PI + angle;
+	//}
+	//else
+	//{
+	//	return PI + angle;
+	//}
 }
 
 void tnbLib::Voyage_Tools::ConvertToVoyageSystem
