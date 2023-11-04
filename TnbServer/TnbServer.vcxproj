@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)d</TargetName>
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(GSL_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(OPENCASCADE_INCLUDEDIR);$(BOOST_INCLUDEDIR);$(TBB_INCLUDEDIR);$(GMP_INCLUDEDIR);$(CGAL_INCLUDEDIR);$(GSL_INCLUDEDIR);$(SolutionDir)Common\nlohmann;$(SolutionDir)Common\Armadillo;$(SolutionDir)Common\Foam\include\base;$(SolutionDir)Common\exprtk\include;$(SolutionDir)Common\ChaiScript\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_INCLUDELIB);$(MSMPI_LIB64);$(GMP_INCLUDELIB);$(TBB_INCLUDELIB);$(OPENCASCADE_INCLUDELIB);$(GSL_INCLUDELIB);$(SolutionDir)Common\Armadillo\lib_win64;$(SolutionDir)Common\dlfcn\lib;$(SolutionDir)Common\zLib\lib;$(SolutionDir)Common\pthreads\lib;$(SolutionDir)Common\pcre\lib;$(SolutionDir)Common\Foam\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)TnbLib\Server\Objects\Num;$(ProjectDir)TnbLib\Server\Objects\Mesh;$(ProjectDir)TnbLib\Server\Objects\Cad;$(ProjectDir)TnbLib\Server\Objects\Cad2d;$(ProjectDir)TnbLib\Server\Objects\Geo\Pnt;$(ProjectDir)TnbLib\Server\Objects\Geo\Vec;$(ProjectDir)TnbLib\Server\Objects\Geo\Dir;$(ProjectDir)TnbLib\Server\Objects\Geo\Axis;$(ProjectDir)TnbLib\Server\Objects\Geo;$(ProjectDir)TnbLib\Server\Objects\Global\Exit;$(ProjectDir)TnbLib\Server\Objects\Global\Real;$(ProjectDir)TnbLib\Server\Objects\Global\Int;$(ProjectDir)TnbLib\Server\Objects\Global;$(ProjectDir)TnbLib\Server\Objects\Object;$(ProjectDir)TnbLib\Server\Macros;$(ProjectDir)TnbLib\Server\Module;$(SolutionDir)TnbCad\include;$(SolutionDir)TnbCad2d\include;$(SolutionDir)TnbGeo\include;$(SolutionDir)TnbNumAlg\include;$(SolutionDir)TnbGlobal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,9 +138,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TnbLib\Server\Macros\Server_Macros.hxx" />
+    <ClInclude Include="TnbLib\Server\module\Server_Module.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Server_GeoObj_Pnt2d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Geo\Server_GeoObj_Pnt3d.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.hxx" />
+    <ClInclude Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.hxx" />
     <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TnbLib\Server\Objects\Geo\Server_GeoObj_Pnt2d.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Exit\Server_GlobalObj_Exit.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Int\Server_GlobalObj_Int.cxx" />
+    <ClCompile Include="TnbLib\Server\Objects\Global\Real\Server_GlobalObj_Real.cxx" />
     <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

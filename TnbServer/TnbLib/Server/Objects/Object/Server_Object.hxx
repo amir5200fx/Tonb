@@ -2,6 +2,9 @@
 #ifndef _Server_Object_Header
 #define _Server_Object_Header
 
+#include <Server_Module.hxx>
+#include <Server_Macros.hxx>
+
 #include <string>
 #include <sstream>
 
@@ -43,7 +46,7 @@ namespace tnbLib
 
 		virtual void Construct(const std::string& theValue) = 0;
 
-		static std::string GetRespType(const RespType);
+		static TnbServer_EXPORT std::string GetRespType(const RespType);
 		
 	};
 }
