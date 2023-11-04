@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TnbLib">
+      <UniqueIdentifier>{3d254320-d637-4284-9e2a-b306e5ce7a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server">
+      <UniqueIdentifier>{52c30fa0-e459-44cd-8daf-6de9121ac870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects">
+      <UniqueIdentifier>{0de27150-6980-42f3-95f6-ccb784a26781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Object">
+      <UniqueIdentifier>{198f4455-2342-4133-8029-3c4f2d870dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Global">
+      <UniqueIdentifier>{56cd9c41-9347-424c-94fa-9b6809a540fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Geo">
+      <UniqueIdentifier>{7bc08391-1fdf-424c-8177-928139ecbb29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad2d">
+      <UniqueIdentifier>{d381c0ee-b62b-4ede-997d-49a854310c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Cad">
+      <UniqueIdentifier>{2bd59570-64a7-4481-b8d1-116a0af97248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Num">
+      <UniqueIdentifier>{b1ce8d63-5cbb-46bf-974f-db102a33f3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Objects\Mesh">
+      <UniqueIdentifier>{04c85886-3b8b-4d5b-9b62-ab277ffe70e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TnbLib\Server\Module">
+      <UniqueIdentifier>{1f09648b-b131-4beb-8ce6-138014cbeaa0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TnbLib\Server\Objects\Object\Server_Object.hxx">
+      <Filter>TnbLib\Server\Objects\Object</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TnbLib\Server\Objects\Object\Server_Object.cxx">
+      <Filter>TnbLib\Server\Objects\Object</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
