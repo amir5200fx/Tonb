@@ -7,6 +7,7 @@
 #include <Istream.hxx>
 
 #include <memory>
+#include <vector>
 
 namespace tnbLib
 {
@@ -16,7 +17,9 @@ namespace tnbLib
 
 		/*Private Data*/
 
-		std::shared_ptr<Entity2d_Polygon> thePath_;
+		std::vector<std::shared_ptr<Entity2d_Polygon>> thePath_;
+
+		void LoadSingle(Istream&);
 
 	public:
 

@@ -106,7 +106,7 @@ tnbLib::VoyageMesh_BaseSize::CalcProfile
 
 		const auto angle = GetInfo()->Angle();
 		//std::cout << "angle = " << angle << std::endl;
-		static const Standard_Integer nbPoles = 7;
+		static constexpr Standard_Integer nbPoles = 7;
 		TColgp_Array1OfPnt2d pnts(1, nbPoles);
 		pnts.SetValue(1, { x0,h0 });
 		pnts.SetValue(2, { Geo_Tools::LinearInterpolate(x1,x0,angle),h1 });

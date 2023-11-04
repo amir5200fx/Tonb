@@ -403,7 +403,7 @@ tnbLib::Voyage_Tools::CalcLength
 		const auto& p0 = points.at(i - 1);
 		const auto& p1 = points.at(i);
 
-		auto dist = theMetric.CalcDistance(p0, p1);
+		const auto dist = theMetric.CalcDistance(p0, p1);
 		tot_dist += dist;
 	}
 	return tot_dist;

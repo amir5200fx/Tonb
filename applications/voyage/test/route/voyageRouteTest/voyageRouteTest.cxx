@@ -105,7 +105,7 @@ auto loadData(const std::string& fileName)
 int main()
 {
 	{// settings
-		//VoyageMesh_BaseSize::verbose = 2;
+		VoyageMesh_BaseSize::verbose = 2;
 	}
 
 	auto earth = std::make_shared<VoyageGeo_Earth>();
@@ -136,7 +136,7 @@ int main()
 		//tri->ExportToPlt(myFile);
 	}
 
-	auto offsets = std::make_shared<Entity2d_Polygon>();
+	std::vector<std::shared_ptr<Entity2d_Polygon>> offsets;
 	{
 		//auto& pts = offsets->Points();
 
@@ -157,10 +157,6 @@ int main()
 		auto ref_path = std::make_shared<Voyage_RefPath>();
 		ref_path->Load(ref_path_file);
 
-		for (const auto& x: ref_path->Path()->Points())
-		{
-			std::cout << x << std::endl;
-		}
 		offsets = ref_path->Path();
 
 		//Voyage_Tools::CalcTurningAngle(pts.at(0), pts.at(1), pts.at(2));
@@ -195,7 +191,7 @@ int main()
 	}
 
 	Standard_Real vel = Voyage_Tools::KtsToKmh(10.0); // velocity of the vessel [8/27/2023 Payvand]
-	Standard_Real hour = 6.0;
+	Standard_Real hour = 10.0;
 	auto h = vel * hour;
 	std::cout << std::endl;
 	std::cout << " - Size: " << h << std::endl;
@@ -221,11 +217,11 @@ int main()
 		auto alg = std::make_shared<Voyage_PathOnEarth>(earth, path);
 		alg->Perform();
 
-		//OFstream planeFile("polygons.plt");
+		OFstream planeFile("polygons.plt");
 		for (const auto& x : alg->Path()->Curves())
 		{
 			const auto& mesh = x->Mesh();
-			//mesh->ExportToPlt(planeFile);
+			mesh->ExportToPlt(planeFile);
 		}
 
 		for (const auto& x : alg->Path3D())
@@ -309,9 +305,9 @@ int main()
 	//OFstream refPathFile("ref.plt");
 	//offsets->ExportToPlt(refPathFile);
 
-	//OFstream gridFile("grid.plt");
+	OFstream gridFile("grid.plt");
 	
-	//grid->ExportToPlt(gridFile);
+	grid->ExportToPlt(gridFile);
 	//std::exit(1);
 	std::cout << std::endl;
 	std::cout << " # Simulating the Fuel consumption..." << std::endl;
