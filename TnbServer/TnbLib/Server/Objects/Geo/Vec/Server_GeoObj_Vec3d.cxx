@@ -32,7 +32,7 @@ void tnbLib::Server_GeoObj_Vec3d::Construct(const std::string& theValue)
 			std::stringstream stream;
 			stream << loader.at(Params::w).get<std::string>();
 			TNB_iARCH_FILE_TYPE ia(stream);
-			ia >> v;
+			ia >> w;
 		}
 	}
 	// streaming the value

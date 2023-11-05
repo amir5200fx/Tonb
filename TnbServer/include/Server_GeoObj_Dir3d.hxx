@@ -1,13 +1,13 @@
 #pragma once
-#ifndef _Server_GeoObj_Dir2d_Header
-#define _Server_GeoObj_Dir2d_Header
+#ifndef _Server_GeoObj_Dir3d_Header
+#define _Server_GeoObj_Dir3d_Header
 
 #include <Server_Object.hxx>
 
 namespace tnbLib
 {
 
-	class Server_GeoObj_Dir2d
+	class Server_GeoObj_Dir3d
 		: public Server_Object
 	{
 
@@ -17,18 +17,19 @@ namespace tnbLib
 		{
 			static const std::string u;
 			static const std::string v;
+			static const std::string w;
 		};
 
-		static const std::string command_name;
+		static TnbServer_EXPORT const std::string command_name;
 
 		// default constructor
 
-		Server_GeoObj_Dir2d()
+		Server_GeoObj_Dir3d()
 			= default;
 
 		// Public functions and operators
 
-		void Construct(const std::string&) override;
+		TnbServer_EXPORT void Construct(const std::string&) override;
 
 	};
 }

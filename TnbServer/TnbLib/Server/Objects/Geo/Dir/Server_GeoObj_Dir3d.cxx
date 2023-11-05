@@ -32,16 +32,24 @@ void tnbLib::Server_GeoObj_Dir3d::Construct(const std::string& theValue)
 			std::stringstream stream;
 			stream << loader.at(Params::w).get<std::string>();
 			TNB_iARCH_FILE_TYPE ia(stream);
-			ia >> v;
+			ia >> w;
 		}
 	}
 	// streaming the value
-	std::stringstream stream;
-	auto value = Dir3d(u, v, w);
-	TNB_oARCH_FILE_TYPE oa(stream);
-	oa << value;
 	nlohmann::json jData;
-	jData[SENSE] = GetRespType(RespType::good);
-	jData[VALUE] = stream.str();
+	try
+	{
+		std::stringstream stream;
+		auto value = Dir3d(u, v, w);
+		TNB_oARCH_FILE_TYPE oa(stream);
+		oa << value;
+		jData[SENSE] = GetRespType(RespType::good);
+		jData[VALUE] = stream.str();
+	}
+	catch (Standard_Failure& x)
+	{
+		jData[SENSE] = GetRespType(RespType::bad);
+		jData[VALUE] = x.GetMessageString();
+	}
 	theStream_ << jData;
 }

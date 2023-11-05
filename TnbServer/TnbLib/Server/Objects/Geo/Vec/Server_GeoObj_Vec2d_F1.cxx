@@ -1,13 +1,13 @@
-#include <Server_GeoObj_Dir2d.hxx>
+#include <Server_GeoObj_Vec2d_F1.hxx>
 
-#include <Dir2d.hxx>
+#include <Vec2d.hxx>
 #include <Global_File.hxx>
 #include <json.hpp>
 
-const std::string tnbLib::Server_GeoObj_Dir2d::Params::u = "geo_dir_u_2d";
-const std::string tnbLib::Server_GeoObj_Dir2d::Params::v = "geo_dir_v_2d";
+const std::string tnbLib::Server_GeoObj_Vec2d_F1::Params::u = "geo_vec_u_2d";
+const std::string tnbLib::Server_GeoObj_Vec2d_F1::Params::v = "geo_vec_v_2d";
 
-void tnbLib::Server_GeoObj_Dir2d::Construct(const std::string& theValue)
+void tnbLib::Server_GeoObj_Vec2d_F1::Construct(const std::string& theValue)
 {
 	double u = 0, v = 0;
 	{
@@ -29,7 +29,7 @@ void tnbLib::Server_GeoObj_Dir2d::Construct(const std::string& theValue)
 	}
 	// streaming the value
 	std::stringstream stream;
-	auto value = Dir2d(u, v);
+	auto value = Vec2d(u, v);
 	TNB_oARCH_FILE_TYPE oa(stream);
 	oa << value;
 	nlohmann::json jData;

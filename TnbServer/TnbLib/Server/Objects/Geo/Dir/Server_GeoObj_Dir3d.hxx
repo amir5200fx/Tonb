@@ -20,7 +20,7 @@ namespace tnbLib
 			static const std::string w;
 		};
 
-		static const std::string command_name;
+		static TnbServer_EXPORT const std::string command_name;
 
 		// default constructor
 
@@ -29,7 +29,7 @@ namespace tnbLib
 
 		// Public functions and operators
 
-		void Construct(const std::string&) override;
+		TnbServer_EXPORT void Construct(const std::string&) override;
 
 	};
 }

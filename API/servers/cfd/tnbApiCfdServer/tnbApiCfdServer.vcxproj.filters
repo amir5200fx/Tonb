@@ -70,6 +70,9 @@
     <Filter Include="src\Objects\geom\circle">
       <UniqueIdentifier>{561e5838-196d-4b36-91f1-4a2090b18a01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Objects\NewFilter1">
+      <UniqueIdentifier>{ec09dfb4-ed8c-460f-b7a4-51f8033fc14d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tnbApiCfdServer.cxx">
